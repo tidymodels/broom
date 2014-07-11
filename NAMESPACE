@@ -1,0 +1,8 @@
+S3method(tidy,"NULL")
+S3method(tidy,anova)
+S3method(tidy,aov)
+S3method(tidy,htest)
+S3method(tidy,lm)
+S3method(tidy,nls)
+export(fix_data_frame)
+export(tidy)

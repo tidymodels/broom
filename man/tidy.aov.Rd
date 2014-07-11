@@ -1,0 +1,15 @@
+\name{tidy.aov}
+\alias{tidy.aov}
+\title{tidy an anova object into a data.frame of tests}
+\usage{
+\method{tidy}{aov}(x, ...)
+}
+\arguments{
+  \item{x}{An object of class "anova"}
+
+  \item{...}{extra arguments (not used)}
+}
+\description{
+tidy an anova object into a data.frame of tests
+}
+

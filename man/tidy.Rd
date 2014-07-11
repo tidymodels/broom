@@ -1,0 +1,18 @@
+\name{tidy}
+\alias{tidy}
+\title{Tidy the result of a test into a summary data.frame}
+\usage{
+tidy(x, ...)
+}
+\arguments{
+  \item{x}{An object to be converted into a tidy
+  data.frame}
+
+  \item{...}{extra arguments}
+}
+\description{
+The output of tidy is always a data.frame with disposable
+row names. It is therefore suited for further manipulation
+by packages like dplyr, reshape2, ggplot2 and ggvis
+}
+

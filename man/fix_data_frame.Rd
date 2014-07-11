@@ -1,0 +1,22 @@
+\name{fix_data_frame}
+\alias{fix_data_frame}
+\title{Ensure an object is a data frame, with rownames moved into a column}
+\usage{
+fix_data_frame(x, newnames = NULL, newcol = "term")
+}
+\arguments{
+  \item{x}{a data.frame or matrix}
+
+  \item{newnames}{new column names, not including the
+  rownames}
+
+  \item{newcol}{the name of the new rownames column}
+}
+\value{
+a data.frame, with rownames moved into a column
+}
+\description{
+Ensure an object is a data frame, with rownames moved into
+a column
+}
+

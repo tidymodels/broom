@@ -1,0 +1,15 @@
+\name{tidy.htest}
+\alias{tidy.htest}
+\title{tidy an htest object into a data.frame}
+\usage{
+\method{tidy}{htest}(x, ...)
+}
+\arguments{
+  \item{x}{An object of class "htest"}
+
+  \item{...}{extra arguments (not used)}
+}
+\description{
+tidy an htest object into a data.frame
+}
+
