@@ -5,8 +5,10 @@ Version: 0.1
 Date: 2014-07-11
 Author: David Robinson
 Maintainer: David Robinson <admiral.david@gmail.com>
-Description: More about what it does (maybe more than one line)
+Description: Convert statistical analysis objects from R into tidy format.
 Suggests:
+    knitr,
     dplyr,
     testthat
+VignetteBuilder: knitr
 License: MIT + file LICENSE

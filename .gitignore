@@ -2,4 +2,4 @@
 .Rproj.user
 .Rhistory
 .RData
-vignettes/broom_cache
+vignettes/*cache

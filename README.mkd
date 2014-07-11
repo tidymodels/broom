@@ -1,0 +1,11 @@
+broom: Let's tidy up a bit
+==========================
+
+Turn the output of built-in R functions, such as `lm`, `t.test`, or `anova`, into [tidy data](http://vita.had.co.nz/papers/tidy-data.pdf).
+
+To view the vignette, install the package and run
+
+```
+library(broom)
+vignette("broom")
+```
