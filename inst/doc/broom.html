@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 
-<title>The <code>broom</code> package: let&#39;s tidy up a bit</title>
+<title>broom</title>
 
 <!-- Styles for R syntax highlighter -->
 <style type="text/css">
@@ -60,6 +60,7 @@ body, td {
 body {
   max-width: 800px;
   margin: auto;
+  padding: 1em;
   line-height: 20px;
 }
 
@@ -67,28 +68,28 @@ tt, code, pre {
    font-family: 'DejaVu Sans Mono', 'Droid Sans Mono', 'Lucida Console', Consolas, Monaco, monospace;
 }
 
-h1 { 
-   font-size:2.2em; 
+h1 {
+   font-size:2.2em;
 }
 
-h2 { 
-   font-size:1.8em; 
+h2 {
+   font-size:1.8em;
 }
 
-h3 { 
-   font-size:1.4em; 
+h3 {
+   font-size:1.4em;
 }
 
-h4 { 
-   font-size:1.0em; 
+h4 {
+   font-size:1.0em;
 }
 
-h5 { 
-   font-size:0.9em; 
+h5 {
+   font-size:0.9em;
 }
 
-h6 { 
-   font-size:0.8em; 
+h6 {
+   font-size:0.8em;
 }
 
 a:visited {
@@ -132,54 +133,54 @@ hr {
 }
 
 @media print {
-   * { 
-      background: transparent !important; 
-      color: black !important; 
-      filter:none !important; 
-      -ms-filter: none !important; 
+   * {
+      background: transparent !important;
+      color: black !important;
+      filter:none !important;
+      -ms-filter: none !important;
    }
 
-   body { 
-      font-size:12pt; 
-      max-width:100%; 
-   }
-       
-   a, a:visited { 
-      text-decoration: underline; 
+   body {
+      font-size:12pt;
+      max-width:100%;
    }
 
-   hr { 
+   a, a:visited {
+      text-decoration: underline;
+   }
+
+   hr {
       visibility: hidden;
       page-break-before: always;
    }
 
-   pre, blockquote { 
-      padding-right: 1em; 
-      page-break-inside: avoid; 
+   pre, blockquote {
+      padding-right: 1em;
+      page-break-inside: avoid;
    }
 
-   tr, img { 
-      page-break-inside: avoid; 
+   tr, img {
+      page-break-inside: avoid;
    }
 
-   img { 
-      max-width: 100% !important; 
+   img {
+      max-width: 100% !important;
    }
 
-   @page :left { 
-      margin: 15mm 20mm 15mm 10mm; 
-   }
-     
-   @page :right { 
-      margin: 15mm 10mm 15mm 20mm; 
+   @page :left {
+      margin: 15mm 20mm 15mm 10mm;
    }
 
-   p, h2, h3 { 
-      orphans: 3; widows: 3; 
+   @page :right {
+      margin: 15mm 10mm 15mm 20mm;
    }
 
-   h2, h3 { 
-      page-break-after: avoid; 
+   p, h2, h3 {
+      orphans: 3; widows: 3;
+   }
+
+   h2, h3 {
+      page-break-after: avoid;
    }
 }
 </style>
@@ -194,20 +195,30 @@ hr {
 %\VignetteIndexEntry{Introduction to broom}
 -->
 
-<h1>The <code>broom</code> package: let&#39;s tidy up a bit</h1>
+<h1>broom</h1>
 
-<p>The concept of &ldquo;tidy data&rdquo;, <a href="http://vita.had.co.nz/papers/tidy-data.html">as introduced by Hadley Wickham</a>, is a powerful philosophy for data manipulation and analysis. Wickham&#39;s paper on Tidy Data makes a convincing statement of the problem this package tries to solve (emphasis mine):</p>
+<p>The broom package takes the messy output of built-in functions in R, such as <code>lm</code>, <code>nls</code>, or <code>t.test</code>, and turns them into tidy data frames.</p>
+
+<p>The concept of &ldquo;tidy data&rdquo;, <a href="http://vita.had.co.nz/papers/tidy-data.html">as introduced by Hadley Wickham</a>, offers a powerful framework for data manipulation and analysis. That paper makes a convincing statement of the problem this package tries to solve (emphasis mine):</p>
 
 <blockquote>
 <p><strong>While model inputs usually require tidy inputs, such attention to detail doesn&#39;t carry over to model outputs. Outputs such as predictions and estimated coefficients aren&#39;t always tidy. This makes it more difficult to combine results from multiple models.</strong> For example, in R, the default representation of model coefficients is not tidy because it does not have an explicit variable that records the variable name for each estimate, they are instead recorded as row names. In R, row names must be unique, so combining coefficients from many models (e.g., from bootstrap resamples, or subgroups) requires workarounds to avoid losing important information. <strong>This knocks you out of the flow of analysis and makes it harder to combine the results from multiple models. I&#39;m not currently aware of any packages that resolve this problem.</strong></p>
 </blockquote>
 
-<p><code>broom</code> is an attempt to bridge the gap from untidy outputs of predictions and estimations to the tidy data we want.</p>
+<p>broom is an attempt to bridge the gap from untidy outputs of predictions and estimations to the tidy data we want to work with. It centers around the <code>tidy</code> S3 method, which takes common objects produced by R statistical functions (<code>lm</code>, <code>t.test</code>, <code>nls</code>, etc) and puts them into a data frame. This is particularly designed to work with Hadley&#39;s <a href="https://github.com/hadley/dplyr">dplyr</a> package.</p>
+
+<p>broom should be distinguished from packages like <a href="http://cran.r-project.org/web/packages/reshape2/reshape2.pdf">reshape2</a> and <a href="https://github.com/hadley/tidyr">tidyr</a>, which rearrange and reshape data frames into different forms. Those packages perform critical tasks in tidy data analysis but focus on manipulating data frames in one specific format into another. In contrast, broom is designed to take format that is <em>not</em> in a data frame (sometimes not anywhere close) and convert it to a tidy data frame.</p>
+
+<p>Tidying model outputs is not an exact science, and it&#39;s based on a judgment of the kinds of values a data scientist typically wants out of a tidy analysis (for instance, estimates, test statistics, and p-values). You may lose some of the information in the original object that you wanted, or keep more information than you need. If you think the tidy output for a model should be changed, or if you&#39;re missing a tidying function for an S3 class that you&#39;d like, I strongly encourage you to <a href="http://github.com/dgrtwo/broom/issues">open an issue</a> or a pull request.</p>
 
 <h2>Examples</h2>
 
+<h3>Linear and nonlinear models</h3>
+
 <pre><code class="r">library(broom)
 </code></pre>
+
+<p>Imagine we perform a linear fit on the built-in <code>mtcars</code> dataset.</p>
 
 <pre><code class="r">lmfit = lm(mpg ~ wt, mtcars)
 lmfit
@@ -245,6 +256,10 @@ lmfit
 ## F-statistic: 91.4 on 1 and 30 DF,  p-value: 1.29e-10
 </code></pre>
 
+<p>This summary output is useful enough if you just want to read it. However, converting it to a data frame that contains all the same information, so that you can combine it with other models or do further analysis, is not trivial. You have to do <code>coef(summary(lmfit))</code> to get a matrix of coefficients, the terms are still stored in row names, and the column names are inconsistent with other packages (e.g. <code>Pr(&gt;|t|)</code> compared to <code>p.value</code>).</p>
+
+<p>Instead, you can use the <code>tidy</code> function, from the broom package, on the fit:</p>
+
 <pre><code class="r">tidy(lmfit)
 </code></pre>
 
@@ -252,6 +267,8 @@ lmfit
 ## 1 (Intercept)   37.285   1.8776    19.858 8.242e-19
 ## 2          wt   -5.344   0.5591    -9.559 1.294e-10
 </code></pre>
+
+<p>This gives you a data.frame representation. Note that the row names have been moved into a column called <code>term</code>, and the column names are simple and consistent (and can be accessed using <code>$</code>). <code>tidy</code> applies equally well to the output from <code>glm</code>:</p>
 
 <pre><code class="r">glmfit = glm(am ~ wt, mtcars, family=&quot;binomial&quot;)
 tidy(glmfit)
@@ -262,13 +279,32 @@ tidy(glmfit)
 ## 2          wt   -4.024    1.436    -2.801 0.005088
 </code></pre>
 
+<p>Or other fits, such as nonlinear models (<code>nls</code>):</p>
+
+<pre><code class="r">nlsfit = nls(mpg ~ k / wt + b, mtcars, start=list(k=1, b=0))
+tidy(nlsfit)
+</code></pre>
+
+<pre><code>##   term estimate stderror statistic   p.value
+## 1    k   45.829    4.249    10.786 7.639e-12
+## 2    b    4.386    1.536     2.855 7.737e-03
+</code></pre>
+
+<h3>Hypothesis testing</h3>
+
+<p>The <code>tidy</code> function can also be applied to <code>htest</code> objects, such as those output by popular built-in functions like <code>t.test</code>, <code>cor.test</code>, and <code>wilcox.test</code>. Note that most hypothesis tests like this will generate only a single row (though it&#39;s useful to have them in a consistent data frame so that they can later be combined with others).</p>
+
 <pre><code class="r">tt = t.test(wt ~ am, mtcars)
 tidy(tt)
 </code></pre>
 
-<pre><code>##   estimate1 estimate2 statistic   p.value parameter conf.low conf.high
-## t     3.769     2.411     5.494 6.272e-06     29.23   0.8526     1.863
+<pre><code>##   estimate estimate1 estimate2 statistic   p.value parameter conf.low
+## t    1.358     3.769     2.411     5.494 6.272e-06     29.23   0.8526
+##   conf.high
+## t     1.863
 </code></pre>
+
+<p>Some cases might have fewer columns (for example, no confidence interval):</p>
 
 <pre><code class="r">wt = wilcox.test(wt ~ am, mtcars)
 tidy(wt)
@@ -278,7 +314,26 @@ tidy(wt)
 ## W     230.5 4.347e-05
 </code></pre>
 
-<p><em>TODO</em>: more here</p>
+<p>These <code>tidy</code> methods provide a straightforward and consistent way to convert a single analysis into a data frame. Note that the tool&#39;s real usefulness is not on performing these conversions on a single data.frame, but rather on many data frames that are to be combined. For more, see the <a href="broom_and_dplyr">broom and dplyr vignette</a>.</p>
+
+<h2>Conventions</h2>
+
+<p>In order to maintain consistency, we attempt to follow some conventions regarding the structure of returned data.</p>
+
+<ul>
+<li>The output of the <code>tidy</code> function is <em>always</em> a data frame.</li>
+<li><code>tidy</code> output never has rownames. This ensures that you can combine it with other tidy outputs without fear of losing information (since rownames in R cannot contain duplicates).</li>
+<li>Some column names are kept consistent, so that they can be combined across different models and so that you know what to expect (in contrast to asking &ldquo;is it <code>pval</code> or <code>PValue</code>?&rdquo; every time). These are not all the possible column names, nor will all tidy output contain all or even any of these columns.
+
+<ul>
+<li><code>p.value</code>: This spelling was chosen (over common alternatives such as <code>pvalue</code>, <code>PValue</code>, or <code>pval</code>) to be consistent with functions in R&#39;s built-in <code>stats</code> package</li>
+<li><code>statistic</code> a test statistic, usually the one used to compute the p-value. Combining these across many sub-groups is a reliable way to perform (e.g.) bootstrap hypothesis testing</li>
+<li><code>estimate</code></li>
+<li><code>conf.low</code> the low end of a confidence interval on the <code>estimate</code></li>
+<li><code>conf.high</code> the high end of a confidence interval on the <code>estimate</code></li>
+<li><code>df</code> degrees of freedom</li>
+</ul></li>
+</ul>
 
 </body>
 

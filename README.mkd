@@ -1,11 +1,173 @@
-broom: Let's tidy up a bit
-==========================
+broom
+=====================
 
-Turn the output of built-in R functions, such as `lm`, `t.test`, or `anova`, into [tidy data](http://vita.had.co.nz/papers/tidy-data.pdf).
+The broom package takes the messy output of built-in functions in R, such as `lm`, `nls`, or `t.test`, and turns them into tidy data frames.
 
-To view the vignette, install the package and run
+The concept of "tidy data", [as introduced by Hadley Wickham](http://vita.had.co.nz/papers/tidy-data.html), offers a powerful framework for data manipulation and analysis. That paper makes a convincing statement of the problem this package tries to solve (emphasis mine):
+
+> **While model inputs usually require tidy inputs, such attention to detail doesn't carry over to model outputs. Outputs such as predictions and estimated coefficients aren't always tidy. This makes it more difficult to combine results from multiple models.** For example, in R, the default representation of model coefficients is not tidy because it does not have an explicit variable that records the variable name for each estimate, they are instead recorded as row names. In R, row names must be unique, so combining coefficients from many models (e.g., from bootstrap resamples, or subgroups) requires workarounds to avoid losing important information. **This knocks you out of the flow of analysis and makes it harder to combine the results from multiple models. I'm not currently aware of any packages that resolve this problem.**
+
+broom is an attempt to bridge the gap from untidy outputs of predictions and estimations to the tidy data we want to work with. It centers around the `tidy` S3 method, which takes common objects produced by R statistical functions (`lm`, `t.test`, `nls`, etc) and puts them into a data frame. This is particularly designed to work with Hadley's [dplyr](https://github.com/hadley/dplyr) package.
+
+broom should be distinguished from packages like [reshape2](http://cran.r-project.org/web/packages/reshape2/reshape2.pdf) and [tidyr](https://github.com/hadley/tidyr), which rearrange and reshape data frames into different forms. Those packages perform critical tasks in tidy data analysis but focus on manipulating data frames in one specific format into another. In contrast, broom is designed to take format that is *not* in a data frame (sometimes not anywhere close) and convert it to a tidy data frame.
+
+Tidying model outputs is not an exact science, and it's based on a judgment of the kinds of values a data scientist typically wants out of a tidy analysis (for instance, estimates, test statistics, and p-values). You may lose some of the information in the original object that you wanted, or keep more information than you need. If you think the tidy output for a model should be changed, or if you're missing a tidying function for an S3 class that you'd like, I strongly encourage you to [open an issue](http://github.com/dgrtwo/broom/issues) or a pull request.
+
+Installation and Documentation
+------------
+
+You can install the broom package using [devtools](https://github.com/hadley/devtools)
 
 ```
+library(devtools)
+install_github("broom", "dgrtwo")
+```
+
+For additional documentation, please browse the vignettes:
+
+```
+browseVignettes(package="broom")
+```
+
+Examples
+--------
+
+### Linear and nonlinear models
+
+
+```r
 library(broom)
-vignette("broom")
 ```
+
+Imagine we perform a linear fit on the built-in `mtcars` dataset.
+
+
+```r
+lmfit = lm(mpg ~ wt, mtcars)
+lmfit
+```
+
+```
+## 
+## Call:
+## lm(formula = mpg ~ wt, data = mtcars)
+## 
+## Coefficients:
+## (Intercept)           wt  
+##       37.29        -5.34
+```
+
+```r
+summary(lmfit)
+```
+
+```
+## 
+## Call:
+## lm(formula = mpg ~ wt, data = mtcars)
+## 
+## Residuals:
+##    Min     1Q Median     3Q    Max 
+## -4.543 -2.365 -0.125  1.410  6.873 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(>|t|)    
+## (Intercept)   37.285      1.878   19.86  < 2e-16 ***
+## wt            -5.344      0.559   -9.56  1.3e-10 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 3.05 on 30 degrees of freedom
+## Multiple R-squared:  0.753,	Adjusted R-squared:  0.745 
+## F-statistic: 91.4 on 1 and 30 DF,  p-value: 1.29e-10
+```
+
+This summary output is useful enough if you just want to read it. However, converting it to a data frame that contains all the same information, so that you can combine it with other models or do further analysis, is not trivial. You have to do `coef(summary(lmfit))` to get a matrix of coefficients, the terms are still stored in row names, and the column names are inconsistent with other packages (e.g. `Pr(>|t|)` compared to `p.value`).
+
+Instead, you can use the `tidy` function, from the broom package, on the fit:
+
+
+```r
+tidy(lmfit)
+```
+
+```
+##          term estimate stderror statistic   p.value
+## 1 (Intercept)   37.285   1.8776    19.858 8.242e-19
+## 2          wt   -5.344   0.5591    -9.559 1.294e-10
+```
+
+This gives you a data.frame representation. Note that the row names have been moved into a column called `term`, and the column names are simple and consistent (and can be accessed using `$`). `tidy` applies equally well to the output from `glm`:
+
+
+```r
+glmfit = glm(am ~ wt, mtcars, family="binomial")
+tidy(glmfit)
+```
+
+```
+##          term estimate stderror statistic  p.value
+## 1 (Intercept)   12.040    4.510     2.670 0.007588
+## 2          wt   -4.024    1.436    -2.801 0.005088
+```
+
+Or other fits, such as nonlinear models (`nls`):
+
+
+```r
+nlsfit = nls(mpg ~ k / wt + b, mtcars, start=list(k=1, b=0))
+tidy(nlsfit)
+```
+
+```
+##   term estimate stderror statistic   p.value
+## 1    k   45.829    4.249    10.786 7.639e-12
+## 2    b    4.386    1.536     2.855 7.737e-03
+```
+
+### Hypothesis testing
+
+The `tidy` function can also be applied to `htest` objects, such as those output by popular built-in functions like `t.test`, `cor.test`, and `wilcox.test`. Note that most hypothesis tests like this will generate only a single row (though it's useful to have them in a consistent data frame so that they can later be combined with others).
+
+
+```r
+tt = t.test(wt ~ am, mtcars)
+tidy(tt)
+```
+
+```
+##   estimate estimate1 estimate2 statistic   p.value parameter conf.low
+## t    1.358     3.769     2.411     5.494 6.272e-06     29.23   0.8526
+##   conf.high
+## t     1.863
+```
+
+Some cases might have fewer columns (for example, no confidence interval):
+
+
+```r
+wt = wilcox.test(wt ~ am, mtcars)
+tidy(wt)
+```
+
+```
+##   statistic   p.value
+## W     230.5 4.347e-05
+```
+
+These `tidy` methods provide a straightforward and consistent way to convert a single analysis into a data frame. Note that the tool's real usefulness is not on performing these conversions on a single data.frame, but rather on many data frames that are to be combined. For more, see the [broom and dplyr vignette](broom_and_dplyr).
+
+Conventions
+----------
+
+In order to maintain consistency, we attempt to follow some conventions regarding the structure of returned data.
+
+* The output of the `tidy` function is *always* a data frame.
+* `tidy` output never has rownames. This ensures that you can combine it with other tidy outputs without fear of losing information (since rownames in R cannot contain duplicates).
+* Some column names are kept consistent, so that they can be combined across different models and so that you know what to expect (in contrast to asking "is it `pval` or `PValue`?" every time). These are not all the possible column names, nor will all tidy output contain all or even any of these columns.
+    * `p.value`: This spelling was chosen (over common alternatives such as `pvalue`, `PValue`, or `pval`) to be consistent with functions in R's built-in `stats` package
+    * `statistic` a test statistic, usually the one used to compute the p-value. Combining these across many sub-groups is a reliable way to perform (e.g.) bootstrap hypothesis testing
+    * `estimate`
+    * `conf.low` the low end of a confidence interval on the `estimate`
+    * `conf.high` the high end of a confidence interval on the `estimate`
+    * `df` degrees of freedom

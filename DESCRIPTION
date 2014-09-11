@@ -2,13 +2,14 @@ Package: broom
 Type: Package
 Title: Convert statistical analysis objects from R into tidy format
 Version: 0.1
-Date: 2014-07-11
+Date: 2014-09-11
 Author: David Robinson
 Maintainer: David Robinson <admiral.david@gmail.com>
 Description: Convert statistical analysis objects from R into tidy format.
 Suggests:
     knitr,
     dplyr,
+    ggplot2,
     testthat
 VignetteBuilder: knitr
 License: MIT + file LICENSE

@@ -15,7 +15,7 @@ test_that("can perform regressions with tidying in dplyr", {
                     colnames(regressions)))
 })
 
-test_that("can perform regressions with tidying in dplyr", {
+test_that("can perform correlations with tidying in dplyr", {
     cor.test0 = failwith(NULL, cor.test, quiet=TRUE)
     pcors = batting %>% group_by(yearID) %>% do(tidy(cor.test0(.$SB, .$CS)))
     expect_true(all(c("yearID", "estimate", "statistic", "p.value") %in%

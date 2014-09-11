@@ -1,4 +1,4 @@
-# tidy methods for classes used by the built-in "stats" package
+# tidy methods for S3 classes used by the built-in "stats" package
 
 #' Ensure an object is a data frame, with rownames moved into a column
 #' 
@@ -9,7 +9,7 @@
 #' @return a data.frame, with rownames moved into a column
 #' 
 #' @export
-fix_data_frame = function(x, newnames=NULL, newcol="term") {
+fix_data_frame <- function(x, newnames=NULL, newcol="term") {
     ret <- data.frame(a=rownames(x), x, stringsAsFactors = FALSE)
     colnames(ret)[1] <- newcol
     if (!is.null(newnames)) {
@@ -19,25 +19,24 @@ fix_data_frame = function(x, newnames=NULL, newcol="term") {
     ret
 }
 
-#' Default tidying method
-#' 
-#' By default, tidy uses `as.data.frame` to convert its output. This is 
-#' dangerous, as it may fail with an uninformative error message.
-#' Generally tidy is intended to be used on structured model objects
-#' such as lm or htest for which a specific S3 object exists.
-#' 
-#' @export
-tidy.default <- function(x, ...) {
-    as.data.frame(x)
-}
-
 #' tidy a linear model by returning a data frame version of the coefficients
 #' table
 #' 
 #' @param x An object of class "lm"
 #' @param ... extra arguments (not used)
 #' 
-#' @return a data.frame with four columns:
+#' @return a data.frame with five columns:
+#' 
+#' \itemize{
+#' \item{term}{The term in the linear model being estimated and tested}
+#' \item{estimate}{The estimated coefficient}
+#' \item{stderror}{The standard error from the linear model}
+#' \item{statistic}{t-statistic}
+#' \item{p.value}{two-sided p-value}
+#' }
+#' 
+#' These are the values contained in the coefficients matrix computed by \link{summary.lm}
+#' (though with new column names)
 #' 
 #' @export
 tidy.lm <- function(x, ...) {
@@ -48,8 +47,21 @@ tidy.lm <- function(x, ...) {
 
 #' tidy a nonlinear fit into a data.frame of coefficients
 #' 
+#' Tidies on a nonlinear fit, such as that returned from the \link{nls} function.
+#' 
 #' @param x An object of class "nls"
 #' @param ... extra arguments (not used)
+#' 
+#' \itemize{
+#' \item{term}{The term in the nonlinear model being estimated and tested}
+#' \item{estimate}{The estimated coefficient}
+#' \item{stderror}{The standard error from the linear model}
+#' \item{statistic}{t-statistic}
+#' \item{p.value}{two-sided p-value}
+#' }
+#' 
+#' These are the values contained in the coefficients matrix computed by \link{summary.nls}
+#' (though with new column names)
 #' 
 #' @export
 tidy.nls <- function(x, ...) {
@@ -94,6 +106,11 @@ tidy.htest <- function(x, ...) {
         names(ret$estimate) <- paste0("estimate", seq_along(ret$estimate))
         ret <- c(ret$estimate, ret)
         ret$estimate <- NULL
+
+        # special case: in a t-test, estimate = estimate1 - estimate2
+        if (x$method == "Welch Two Sample t-test") {
+            ret <- c(estimate=ret$estimate1 - ret$estimate2, ret)
+        }
     }
     ret <- ret[!sapply(ret, is.null)]
     if (!is.null(x$conf.int)) {
@@ -105,13 +122,17 @@ tidy.htest <- function(x, ...) {
 
 #' tidy a table object
 #' 
-#' A table contains a contingency table that 
+#' A table, typically created by the \link{table} function, contains a contingency
+#' table of frequencies across multiple vectors.
 #' 
 #' @param x An object of class "table"
 #' @param ... Extra arguments (not used)
 #' 
-#' @value A data.frame with 
-tidy.table = function(x, ...) {
+#' @return A data.frame with a column for each variable that has been counted,
+#' named \code{Var1}, \code{Var2}, etc, then  
+#' 
+#' @export
+tidy.table <- function(x, ...) {
     as.data.frame(x)
 }
 
@@ -122,8 +143,11 @@ tidy.table = function(x, ...) {
 #' @param x An object of class "ftable"
 #' @param ... Extra arguments (not used)
 #' 
-#' @value A data.frame with 
-tidy.ftable = function(x, ...) {
+#' @return A data.frame with a column for each variable that has been counted,
+#' named \code{Var1}, \code{Var2}, etc, then  
+#' 
+#' @export
+tidy.ftable <- function(x, ...) {
     as.data.frame(x)
 }
 
@@ -153,10 +177,10 @@ tidy.kmeans <- function(x, ...) {
 #' columns: points x where the density is estimated, points y
 #' for the estimate
 #' 
-#' @param an object of class "density"
+#' @param x an object of class "density"
 #' @param ... extra arguments (not used)
 #' 
-#' @value a data frame with "x" and "y" columns
+#' @return a data frame with "x" and "y" columns
 #' 
 #' @export
 tidy.density <- function(x, ...) {
@@ -169,13 +193,13 @@ tidy.density <- function(x, ...) {
 #' Given a "spec" object, which shows a spectrum across a range of frequencies,
 #' returns a tidy data frame with two columns: "freq" and "spec"
 #' 
-#' @param an object of class "spec"
+#' @param x an object of class "spec"
 #' @param ... extra arguments (not used)
 #' 
-#' @value a data frame with "freq" and "spec" columns
+#' @return a data frame with "freq" and "spec" columns
 #' 
 #' @export
-tidy.density <- function(x, ...) {
+tidy.spec <- function(x, ...) {
     as.data.frame(x[c("freq", "spec")])
 }
 
@@ -193,11 +217,24 @@ tidy.TukeyHSD <- function(x, ...) {
     fix_data_frame(x[[1]], nn, "comparison")
 }
 
+#' tidy a MANOVA object
+#' 
+#' Constructs a data frame with one row for each of the terms in the model,
+#' containing the information from \link{summary.manova}.
+#' 
+#' @param x object of class "manova"
+#' @param ... additional arguments (not used)
+#' 
+#' @export
+tidy.manova <- function(x, ...) {
+    ret <- fix_data_frame(summary(x)$stats, c("df", "pillai", "statistic", "num.df", "den.df", "p.value"))
+    # remove residuals row (doesn't have useful information)
+    ret <- ret[-nrow(ret), ]
+    ret
+}
+
 # todo?
-# tidy.manova
 # tidy.ts
-# tidy.ftable
 # tidy.acf
 # tidy.infl
 # tidy.stepfun
-
