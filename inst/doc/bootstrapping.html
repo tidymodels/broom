@@ -240,7 +240,7 @@ summary(nlsfit)
 
 <p>While this does provide a p-value and confidence intervals for the parameters, these are based on model assumptions that may not hold in real data. Bootstrapping is a popular method for providing confidence intervals and predictions that are more robust to the nature of the data.</p>
 
-<p>First, we construct 100 bootstrap replications of the data, each of which has been randomly sampled with replacement[<sup>efficiency]:</sup></p>
+<p>First, we construct 100 bootstrap replications of the data, each of which has been randomly sampled with replacement:</p>
 
 <pre><code class="r">library(dplyr)
 set.seed(2014)
@@ -272,7 +272,7 @@ bootnls
 ## ..         ...  ...      ...      ...       ...       ...
 </code></pre>
 
-<p>You can then calculate confidence intervals (using what is called the <a href="http://www.uvm.edu/%7Edhowell/StatPages/Resampling/BootstMeans/bootstrapping_means.html">percentile method</a>[<sup>percentile]):</sup></p>
+<p>You can then calculate confidence intervals (using what is called the <a href="http://www.uvm.edu/%7Edhowell/StatPages/Resampling/BootstMeans/bootstrapping_means.html">percentile method</a>):</p>
 
 <pre><code class="r">alpha = .05
 bootnls %&gt;% group_by(term) %&gt;% summarize(low=quantile(estimate, alpha / 2),
@@ -296,8 +296,9 @@ ggplot(bootnls, aes(estimate)) + geom_histogram(binwidth=2) + facet_wrap(~ term,
 
 <p>With only a few small changes, one could easily perform bootstrapping with other kinds of predictive or hypothesis testing models, since the <code>tidy</code> function works for many stats outputs.</p>
 
-<p>[<sup>efficiency]:</sup> Hadley&#39;s approach <a href="https://github.com/hadley/dplyr/issues/269">here</a> is considerably more efficient in memory than this one, especially when the data or number of replications is large, but as noted in <a href="http://stackoverflow.com/questions/25793383/using-dplyrs-do-to-perform-bootstrap-replications">my StackOverflow query here</a> it doesn&#39;t work for <code>do</code>. If the issue is solved or the functionality added to <code>dplyr</code>, I will certainly update this vignette. The downstream steps using broom remain identical either way.
-[<sup>percentile]:</sup> This is the simplest of many ways to calculate a bootstrap confidence interval, but other methods lend themselves equally well to the tidy approach.</p>
+<h1>Note</h1>
+
+<p>Hadley&#39;s approach to bootstrap replicates <a href="https://github.com/hadley/dplyr/issues/269">here</a> is considerably more efficient in memory than the one I use above, especially when the data or number of replications is large, but as noted in <a href="http://stackoverflow.com/questions/25793383/using-dplyrs-do-to-perform-bootstrap-replications">my StackOverflow query here</a> it doesn&#39;t work for <code>do</code>. If the issue is solved or the functionality added to <code>dplyr</code>, I will certainly update this vignette. The downstream steps using broom remain identical either way.</p>
 
 </body>
 
