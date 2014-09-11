@@ -14,6 +14,7 @@ ggplot(mtcars, aes(wt, mpg)) + geom_point() + geom_line(aes(y=predict(nlsfit)))
 
 ## ------------------------------------------------------------------------
 library(dplyr)
+set.seed(2014)
 bootreps <- data.frame(replication=1:100) %>% group_by(replication) %>%
     do(sample_n(mtcars, nrow(mtcars), replace=TRUE))
 

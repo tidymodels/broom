@@ -9,6 +9,9 @@ library(knitr)
 opts_chunk$set(message=FALSE, warning=FALSE)
 ```
 
+broom and dplyr
+===============
+
 While broom might be useful for summarizing the result of a single analysis in a consistent format, it is really designed for high-throughput applications, where you must combine results from multiple analyses. These could be subgroups of data, analyses using different models, bootstrap replicates, permutations, and so on. In particular, it plays well with the `do` function in `dplyr`.
 
 Let's try this on a simple dataset, the built-in `Orange` data.frame.

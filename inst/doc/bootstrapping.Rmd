@@ -38,6 +38,7 @@ First, we construct 100 bootstrap replications of the data, each of which has be
 
 ```{r}
 library(dplyr)
+set.seed(2014)
 bootreps <- data.frame(replication=1:100) %>% group_by(replication) %>%
     do(sample_n(mtcars, nrow(mtcars), replace=TRUE))
 ```
