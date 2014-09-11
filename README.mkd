@@ -155,7 +155,7 @@ tidy(wt)
 ## W     230.5 4.347e-05
 ```
 
-These `tidy` methods provide a straightforward and consistent way to convert a single analysis into a data frame. Note that the tool's real usefulness is not on performing these conversions on a single data.frame, but rather on many data frames that are to be combined. For more, see the [broom and dplyr vignette](broom_and_dplyr).
+These `tidy` methods provide a straightforward and consistent way to convert a single analysis into a data frame. Note that the tool's real usefulness is not on performing these conversions on a single data.frame, but rather on many data frames that are to be combined. For more, see the "broom and dplyr" vignette.
 
 Conventions
 ----------
