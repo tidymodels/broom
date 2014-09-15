@@ -3,12 +3,18 @@ Type: Package
 Title: Convert statistical analysis objects from R into tidy format
 Version: 0.1
 Date: 2014-09-11
-Author: David Robinson
+Author: David Robinson, Hadley Wickham
 Maintainer: David Robinson <admiral.david@gmail.com>
 Description: Convert statistical analysis objects from R into tidy format.
+Imports:
+    plyr
 Suggests:
     knitr,
     dplyr,
+    sp,
+    maps,
+    maptools,
+    multcomp,
     ggplot2,
     testthat
 VignetteBuilder: knitr

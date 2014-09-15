@@ -2,30 +2,42 @@
 library(knitr)
 opts_chunk$set(warning=FALSE, message=FALSE)
 
-## ----import_broom--------------------------------------------------------
-library(broom)
-
 ## ----lmfit---------------------------------------------------------------
-lmfit = lm(mpg ~ wt, mtcars)
+lmfit <- lm(mpg ~ wt, mtcars)
 lmfit
 summary(lmfit)
 
 ## ------------------------------------------------------------------------
+library(broom)
 tidy(lmfit)
 
-## ----glmfit--------------------------------------------------------------
-glmfit = glm(am ~ wt, mtcars, family="binomial")
-tidy(glmfit)
+## ------------------------------------------------------------------------
+head(augment(lmfit))
 
 ## ------------------------------------------------------------------------
-nlsfit = nls(mpg ~ k / wt + b, mtcars, start=list(k=1, b=0))
+glance(lmfit)
+
+## ----glmfit--------------------------------------------------------------
+glmfit <- glm(am ~ wt, mtcars, family="binomial")
+tidy(glmfit)
+head(augment(glmfit))
+glance(glmfit)
+
+## ------------------------------------------------------------------------
+nlsfit <- nls(mpg ~ k / wt + b, mtcars, start=list(k=1, b=0))
 tidy(nlsfit)
+head(augment(nlsfit, mtcars))
+glance(nlsfit)
 
 ## ----ttest---------------------------------------------------------------
-tt = t.test(wt ~ am, mtcars)
+tt <- t.test(wt ~ am, mtcars)
 tidy(tt)
 
 ## ------------------------------------------------------------------------
-wt = wilcox.test(wt ~ am, mtcars)
+wt <- wilcox.test(wt ~ am, mtcars)
 tidy(wt)
+
+## ------------------------------------------------------------------------
+glance(tt)
+glance(wt)
 

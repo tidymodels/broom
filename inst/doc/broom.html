@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 
-<title>broom</title>
+<title>broom: let&#39;s tidy up a bit</title>
 
 <!-- Styles for R syntax highlighter -->
 <style type="text/css">
@@ -195,32 +195,37 @@ hr {
 %\VignetteIndexEntry{Introduction to broom}
 -->
 
-<h1>broom</h1>
+<h1>broom: let&#39;s tidy up a bit</h1>
 
 <p>The broom package takes the messy output of built-in functions in R, such as <code>lm</code>, <code>nls</code>, or <code>t.test</code>, and turns them into tidy data frames.</p>
 
-<p>The concept of &ldquo;tidy data&rdquo;, <a href="http://vita.had.co.nz/papers/tidy-data.html">as introduced by Hadley Wickham</a>, offers a powerful framework for data manipulation and analysis. That paper makes a convincing statement of the problem this package tries to solve (emphasis mine):</p>
+<p>The concept of &ldquo;tidy data&rdquo;, <a href="http://www.jstatsoft.org/v59/i10">as introduced by Hadley Wickham</a>, offers a powerful framework for data manipulation and analysis. That paper makes a convincing statement of the problem this package tries to solve (emphasis mine):</p>
 
 <blockquote>
 <p><strong>While model inputs usually require tidy inputs, such attention to detail doesn&#39;t carry over to model outputs. Outputs such as predictions and estimated coefficients aren&#39;t always tidy. This makes it more difficult to combine results from multiple models.</strong> For example, in R, the default representation of model coefficients is not tidy because it does not have an explicit variable that records the variable name for each estimate, they are instead recorded as row names. In R, row names must be unique, so combining coefficients from many models (e.g., from bootstrap resamples, or subgroups) requires workarounds to avoid losing important information. <strong>This knocks you out of the flow of analysis and makes it harder to combine the results from multiple models. I&#39;m not currently aware of any packages that resolve this problem.</strong></p>
 </blockquote>
 
-<p>broom is an attempt to bridge the gap from untidy outputs of predictions and estimations to the tidy data we want to work with. It centers around the <code>tidy</code> S3 method, which takes common objects produced by R statistical functions (<code>lm</code>, <code>t.test</code>, <code>nls</code>, etc) and puts them into a data frame. This is particularly designed to work with Hadley&#39;s <a href="https://github.com/hadley/dplyr">dplyr</a> package.</p>
+<p>broom is an attempt to bridge the gap from untidy outputs of predictions and estimations to the tidy data we want to work with. It centers around three S3 methods, each of which take common objects produced by R statistical functions (<code>lm</code>, <code>t.test</code>, <code>nls</code>, etc) and convert them into a data frame. broom is particularly designed to work with Hadley&#39;s <a href="https://github.com/hadley/dplyr">dplyr</a> package (see the <a href="broom_and_dplyr.html">broom+dplyr</a> vignette for more).</p>
 
 <p>broom should be distinguished from packages like <a href="http://cran.r-project.org/web/packages/reshape2/reshape2.pdf">reshape2</a> and <a href="https://github.com/hadley/tidyr">tidyr</a>, which rearrange and reshape data frames into different forms. Those packages perform critical tasks in tidy data analysis but focus on manipulating data frames in one specific format into another. In contrast, broom is designed to take format that is <em>not</em> in a data frame (sometimes not anywhere close) and convert it to a tidy data frame.</p>
 
 <p>Tidying model outputs is not an exact science, and it&#39;s based on a judgment of the kinds of values a data scientist typically wants out of a tidy analysis (for instance, estimates, test statistics, and p-values). You may lose some of the information in the original object that you wanted, or keep more information than you need. If you think the tidy output for a model should be changed, or if you&#39;re missing a tidying function for an S3 class that you&#39;d like, I strongly encourage you to <a href="http://github.com/dgrtwo/broom/issues">open an issue</a> or a pull request.</p>
 
-<h2>Examples</h2>
+<h2>Tidying functions</h2>
 
-<h3>Linear and nonlinear models</h3>
+<p>This package provides three S3 methods that do three distinct kinds of tidying.</p>
 
-<pre><code class="r">library(broom)
-</code></pre>
+<ul>
+<li><code>tidy</code>: constructs a data frame that summarizes the model&#39;s statistical findings. This includes coefficients and p-values for each term in a regression, per-cluster information in clustering applications, or per-test information for <code>multtest</code> functions.</li>
+<li><code>augment</code>: add columns to the original data that was modeled. This includes predictions, residuals, and cluster assignments.</li>
+<li><code>glance</code>: construct a concise <em>one-row</em> summary of the model. This typically contains values such as \(R^2\), adjusted \(R^2\), and residual standard error that are computed once for the entire model.</li>
+</ul>
 
-<p>Imagine we perform a linear fit on the built-in <code>mtcars</code> dataset.</p>
+<p>Note that some classes may have only one or two of these methods defined.</p>
 
-<pre><code class="r">lmfit = lm(mpg ~ wt, mtcars)
+<p>Consider as an illustrative example a linear fit on the built-in <code>mtcars</code> dataset.</p>
+
+<pre><code class="r">lmfit &lt;- lm(mpg ~ wt, mtcars)
 lmfit
 </code></pre>
 
@@ -260,7 +265,8 @@ lmfit
 
 <p>Instead, you can use the <code>tidy</code> function, from the broom package, on the fit:</p>
 
-<pre><code class="r">tidy(lmfit)
+<pre><code class="r">library(broom)
+tidy(lmfit)
 </code></pre>
 
 <pre><code>##          term estimate stderror statistic   p.value
@@ -268,9 +274,49 @@ lmfit
 ## 2          wt   -5.344   0.5591    -9.559 1.294e-10
 </code></pre>
 
-<p>This gives you a data.frame representation. Note that the row names have been moved into a column called <code>term</code>, and the column names are simple and consistent (and can be accessed using <code>$</code>). <code>tidy</code> applies equally well to the output from <code>glm</code>:</p>
+<p>This gives you a data.frame representation. Note that the row names have been moved into a column called <code>term</code>, and the column names are simple and consistent (and can be accessed using <code>$</code>).</p>
 
-<pre><code class="r">glmfit = glm(am ~ wt, mtcars, family=&quot;binomial&quot;)
+<p>Instead of viewing the coefficients, you might be interested in the fitted values and residuals for each of the original points in the regression. For this, use <code>augment</code>, which augments the original data with information from the model:</p>
+
+<pre><code class="r">head(augment(lmfit))
+</code></pre>
+
+<pre><code>##           .rownames  mpg    wt    .hat .sigma   .cooksd .fitted  .resid
+## 1         Mazda RX4 21.0 2.620 0.04327  3.067 0.0132741   23.28 -2.2826
+## 2     Mazda RX4 Wag 21.0 2.875 0.03520  3.093 0.0017240   21.92 -0.9198
+## 3        Datsun 710 22.8 2.320 0.05838  3.072 0.0154394   24.89 -2.0860
+## 4    Hornet 4 Drive 21.4 3.215 0.03125  3.088 0.0030206   20.10  1.2973
+## 5 Hornet Sportabout 18.7 3.440 0.03292  3.098 0.0000760   18.90 -0.2001
+## 6           Valiant 18.1 3.460 0.03324  3.095 0.0009211   18.79 -0.6933
+##   .stdresid
+## 1  -0.76617
+## 2  -0.30743
+## 3  -0.70575
+## 4   0.43275
+## 5  -0.06682
+## 6  -0.23148
+</code></pre>
+
+<p>Note that each of the new columns begins with a <code>.</code> (to avoid overwriting any of the original columns).</p>
+
+<p>Finally, several summary statistics are computed for the entire regression, such as \(R^2\) and the F-statistic. These can be accessed with the <code>glance</code> function:</p>
+
+<pre><code class="r">glance(lmfit)
+</code></pre>
+
+<pre><code>##   r.squared adj.r.squared sigma statistic   p.value
+## 1    0.7528        0.7446 3.046     91.38 1.294e-10
+</code></pre>
+
+<p>This distinction between the <code>tidy</code>, <code>augment</code> and <code>glance</code> functions is explored in a different context in the <a href="kmeans.html">k-means vignette</a>.</p>
+
+<h2>Other Examples</h2>
+
+<h3>Generalized linear and non-linear models</h3>
+
+<p>These functions apply equally well to the output from <code>glm</code>:</p>
+
+<pre><code class="r">glmfit &lt;- glm(am ~ wt, mtcars, family=&quot;binomial&quot;)
 tidy(glmfit)
 </code></pre>
 
@@ -279,9 +325,37 @@ tidy(glmfit)
 ## 2          wt   -4.024    1.436    -2.801 0.005088
 </code></pre>
 
-<p>Or other fits, such as nonlinear models (<code>nls</code>):</p>
+<pre><code class="r">head(augment(glmfit))
+</code></pre>
 
-<pre><code class="r">nlsfit = nls(mpg ~ k / wt + b, mtcars, start=list(k=1, b=0))
+<pre><code>##           .rownames am    wt    .hat .sigma  .cooksd .fitted  .resid
+## 1         Mazda RX4  1 2.620 0.12578 0.8033 0.018406  1.4976  0.6354
+## 2     Mazda RX4 Wag  1 2.875 0.10816 0.7898 0.042435  0.4715  0.9848
+## 3        Datsun 710  1 2.320 0.09628 0.8101 0.003943  2.7048  0.3598
+## 4    Hornet 4 Drive  0 3.215 0.07438 0.7973 0.017707 -0.8967 -0.8272
+## 5 Hornet Sportabout  0 3.440 0.06812 0.8062 0.006470 -1.8021 -0.5526
+## 6           Valiant  0 3.460 0.06744 0.8067 0.005901 -1.8826 -0.5323
+##   .stdresid
+## 1    0.6796
+## 2    1.0428
+## 3    0.3785
+## 4   -0.8598
+## 5   -0.5724
+## 6   -0.5512
+</code></pre>
+
+<pre><code class="r">glance(glmfit)
+</code></pre>
+
+<pre><code>##     aic deviance null.deviance df.residual df.null
+## 1 23.18    19.18         43.23          30      31
+</code></pre>
+
+<p>Note that the statistics computed by <code>glance</code> are different for <code>glm</code> objects than for <code>lm</code> (e.g. deviance rather than \(R^2\)):</p>
+
+<p>These functions also work on other fits, such as nonlinear models (<code>nls</code>):</p>
+
+<pre><code class="r">nlsfit &lt;- nls(mpg ~ k / wt + b, mtcars, start=list(k=1, b=0))
 tidy(nlsfit)
 </code></pre>
 
@@ -290,11 +364,37 @@ tidy(nlsfit)
 ## 2    b    4.386    1.536     2.855 7.737e-03
 </code></pre>
 
+<pre><code class="r">head(augment(nlsfit, mtcars))
+</code></pre>
+
+<pre><code>##           .rownames  mpg cyl disp  hp drat    wt  qsec vs am gear carb
+## 1         Mazda RX4 21.0   6  160 110 3.90 2.620 16.46  0  1    4    4
+## 2     Mazda RX4 Wag 21.0   6  160 110 3.90 2.875 17.02  0  1    4    4
+## 3        Datsun 710 22.8   4  108  93 3.85 2.320 18.61  1  1    4    1
+## 4    Hornet 4 Drive 21.4   6  258 110 3.08 3.215 19.44  1  0    3    1
+## 5 Hornet Sportabout 18.7   8  360 175 3.15 3.440 17.02  0  0    3    2
+## 6           Valiant 18.1   6  225 105 2.76 3.460 20.22  1  0    3    1
+##   .fitted  .resid
+## 1   21.88 -0.8784
+## 2   20.33  0.6731
+## 3   24.14 -1.3403
+## 4   18.64  2.7589
+## 5   17.71  0.9912
+## 6   17.63  0.4682
+</code></pre>
+
+<pre><code class="r">glance(nlsfit)
+</code></pre>
+
+<pre><code>##   sigma isConv    finTol
+## 1 2.774   TRUE 2.877e-08
+</code></pre>
+
 <h3>Hypothesis testing</h3>
 
-<p>The <code>tidy</code> function can also be applied to <code>htest</code> objects, such as those output by popular built-in functions like <code>t.test</code>, <code>cor.test</code>, and <code>wilcox.test</code>. Note that most hypothesis tests like this will generate only a single row (though it&#39;s useful to have them in a consistent data frame so that they can later be combined with others).</p>
+<p>The <code>tidy</code> function can also be applied to <code>htest</code> objects, such as those output by popular built-in functions like <code>t.test</code>, <code>cor.test</code>, and <code>wilcox.test</code>.</p>
 
-<pre><code class="r">tt = t.test(wt ~ am, mtcars)
+<pre><code class="r">tt &lt;- t.test(wt ~ am, mtcars)
 tidy(tt)
 </code></pre>
 
@@ -306,7 +406,7 @@ tidy(tt)
 
 <p>Some cases might have fewer columns (for example, no confidence interval):</p>
 
-<pre><code class="r">wt = wilcox.test(wt ~ am, mtcars)
+<pre><code class="r">wt &lt;- wilcox.test(wt ~ am, mtcars)
 tidy(wt)
 </code></pre>
 
@@ -314,24 +414,90 @@ tidy(wt)
 ## W     230.5 4.347e-05
 </code></pre>
 
-<p>These <code>tidy</code> methods provide a straightforward and consistent way to convert a single analysis into a data frame. Note that the tool&#39;s real usefulness is not on performing these conversions on a single data.frame, but rather on many data frames that are to be combined. For more, see the <a href="broom_and_dplyr.html">broom and dplyr vignette</a>.</p>
+<p>Since the <code>tidy</code> output is already only one row, <code>glance</code> returns the same output:</p>
+
+<pre><code class="r">glance(tt)
+</code></pre>
+
+<pre><code>##   estimate estimate1 estimate2 statistic   p.value parameter conf.low
+## t    1.358     3.769     2.411     5.494 6.272e-06     29.23   0.8526
+##   conf.high
+## t     1.863
+</code></pre>
+
+<pre><code class="r">glance(wt)
+</code></pre>
+
+<pre><code>##   statistic   p.value
+## W     230.5 4.347e-05
+</code></pre>
+
+<p>There is no <code>augment</code> function for <code>htest</code> objects, since there is no meaningful sense in which a hypothesis test produces output about each initial data point.</p>
 
 <h2>Conventions</h2>
 
 <p>In order to maintain consistency, we attempt to follow some conventions regarding the structure of returned data.</p>
 
-<ul>
-<li>The output of the <code>tidy</code> function is <em>always</em> a data frame.</li>
-<li><code>tidy</code> output never has rownames. This ensures that you can combine it with other tidy outputs without fear of losing information (since rownames in R cannot contain duplicates).</li>
-<li>Some column names are kept consistent, so that they can be combined across different models and so that you know what to expect (in contrast to asking &ldquo;is it <code>pval</code> or <code>PValue</code>?&rdquo; every time). These are not all the possible column names, nor will all tidy output contain all or even any of these columns.
+<h3>All functions</h3>
 
 <ul>
-<li><code>p.value</code>: This spelling was chosen (over common alternatives such as <code>pvalue</code>, <code>PValue</code>, or <code>pval</code>) to be consistent with functions in R&#39;s built-in <code>stats</code> package</li>
+<li>The output of the <code>tidy</code>, <code>augment</code> and <code>glance</code> functions is <em>always</em> a data frame.</li>
+<li>The output never has rownames. This ensures that you can combine it with other tidy outputs without fear of losing information (since rownames in R cannot contain duplicates).</li>
+<li>Some column names are kept consistent, so that they can be combined across different models and so that you know what to expect (in contrast to asking &ldquo;is it <code>pval</code> or <code>PValue</code>?&rdquo; every time). The examples below are not all the possible column names, nor will all tidy output contain all or even any of these columns.</li>
+</ul>
+
+<h3>tidy functions</h3>
+
+<ul>
+<li>Each row in a <code>tidy</code> output typically represents some well-defined concept, such as one term in a regression, one test, or one cluster/class. This meaning varies across models but is usually self-evident. The one thing each row cannot represent is a point in the initial data (for that, use the <code>augment</code> method).</li>
+<li>Common column names include:
+
+<ul>
+<li><code>term</code>&ldquo;&rdquo; the term in a regression or model that is being estimated.</li>
+<li><code>p.value</code>: this spelling was chosen (over common alternatives such as <code>pvalue</code>, <code>PValue</code>, or <code>pval</code>) to be consistent with functions in R&#39;s built-in <code>stats</code> package</li>
 <li><code>statistic</code> a test statistic, usually the one used to compute the p-value. Combining these across many sub-groups is a reliable way to perform (e.g.) bootstrap hypothesis testing</li>
 <li><code>estimate</code></li>
 <li><code>conf.low</code> the low end of a confidence interval on the <code>estimate</code></li>
 <li><code>conf.high</code> the high end of a confidence interval on the <code>estimate</code></li>
 <li><code>df</code> degrees of freedom</li>
+</ul></li>
+</ul>
+
+<h3>augment functions</h3>
+
+<ul>
+<li><code>augment(model, data)</code> adds columns to the original data.
+
+<ul>
+<li>If the <code>data</code> argument is missing, <code>augment</code> attempts to reconstruct the data from the model (note that this may not always be possible, and usually won&#39;t contain columns not used in the model).</li>
+</ul></li>
+<li>Each row in an <code>augment</code> output matches the corresponding row in the original data.</li>
+<li>If the original data contained rownames, <code>augment</code> turns them into a column called <code>.rownames</code>.</li>
+<li>Newly added column names begin with <code>.</code> to avoid overwriting columns in the original data.</li>
+<li>Common column names include:
+
+<ul>
+<li><code>.fitted</code>: the predicted values, on the same scale as the data.</li>
+<li><code>.resid</code>: residuals: the actual y values minus the fitted values</li>
+<li><code>.cluster</code>: cluster assignments</li>
+</ul></li>
+</ul>
+
+<h3>glance functions</h3>
+
+<ul>
+<li><code>glance</code> always returns a one-row data frame.
+
+<ul>
+<li>The only exception is that <code>glance(NULL)</code> returns an empty data frame.</li>
+</ul></li>
+<li>We avoid including arguments that were <em>given</em> to the modeling function. For example, a <code>glm</code> glance output does not need to contain a field for <code>family</code>, since that is decided by the user calling <code>glm</code> rather than the modeling function itself.</li>
+<li>Common column names include:
+
+<ul>
+<li><code>r.squared</code> the fraction of variance explained by the model</li>
+<li><code>adj.r.squared</code> \(R^2\) adjusted based on the degrees of freedom</li>
+<li><code>sigma</code> the square root of the estimated variance of the residuals</li>
 </ul></li>
 </ul>
 

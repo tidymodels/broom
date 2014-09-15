@@ -1,23 +1,4 @@
-# tidy methods for S3 classes used by the built-in "stats" package
-
-#' Ensure an object is a data frame, with rownames moved into a column
-#' 
-#' @param x a data.frame or matrix
-#' @param newnames new column names, not including the rownames
-#' @param newcol the name of the new rownames column
-#' 
-#' @return a data.frame, with rownames moved into a column
-#' 
-#' @export
-fix_data_frame <- function(x, newnames=NULL, newcol="term") {
-    ret <- data.frame(a=rownames(x), x, stringsAsFactors = FALSE)
-    colnames(ret)[1] <- newcol
-    if (!is.null(newnames)) {
-        colnames(ret)[-1] <- newnames
-    }
-    rownames(ret) <- NULL
-    ret
-}
+### tidy methods for S3 classes used by the built-in stats package
 
 #' tidy a linear model by returning a data frame version of the coefficients
 #' table
@@ -167,6 +148,7 @@ tidy.kmeans <- function(x, ...) {
     colnames(ret) <- paste0("x", seq_len(ncol(x$centers)))
     ret$size <- x$size
     ret$withinss <- x$withinss
+    ret$cluster <- factor(seq_len(nrow(ret)))
     ret
 }
 
