@@ -1,7 +1,7 @@
 Package: broom
 Type: Package
 Title: Convert statistical analysis objects from R into tidy format
-Version: 0.1
+Version: 0.2
 Date: 2014-09-11
 Author: David Robinson, Hadley Wickham
 Maintainer: David Robinson <admiral.david@gmail.com>

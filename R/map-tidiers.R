@@ -10,6 +10,7 @@
 #' @export
 #' @param x map object
 #' @param ... not used by this method
+#' 
 #' @examples
 #' if (require("maps") && require("ggplot2")) {
 #' ca <- map("county", "ca", plot = FALSE, fill = TRUE)

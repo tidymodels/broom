@@ -3,10 +3,10 @@
 \alias{augment}
 \title{Augment data according to a tidied model}
 \usage{
-augment(model, data, ...)
+augment(x, data, ...)
 }
 \arguments{
-\item{model}{model or other R object to convert to data frame}
+\item{x}{model or other R object to convert to data frame}
 
 \item{data}{original dataset, if needed (when possible this is extracted
 from the model)}
@@ -18,7 +18,7 @@ Given an R statistical model or other non-tidy object, add columns to the
 original dataset such as predictions, residuals and cluster assignments.
 }
 \details{
-This function originated in the ggplot2 package, where it was called
+This generic originated in the ggplot2 package, where it was called
 "fortify."
 }
 \seealso{
