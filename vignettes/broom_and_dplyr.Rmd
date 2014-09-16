@@ -42,13 +42,13 @@ Orange %>% group_by(Tree) %>% summarize(correlation=cor(age, circumference))
 
 (Note that the correlations are much higher than the aggregated one, and furthermore we can now see it is similar across trees).
 
-This contains multiple values we could want in our output. Some are vectors of length 1, such as the p-value and the estimate, and some are longer, such as the confidence interval. broom's `tidy` S3 method, combined with dplyr's `do`, makes it easy to summarize the information about each test:
+Suppose that instead of simply estimating a correlation, we want to perform a hypothesis test with `cor.test`:
 
 ```{r}
 cor.test(Orange$age, Orange$circumference)
 ```
 
-broom's `tidy` S3 method, combined with dplyr's `do`, makes this easy:
+This contains multiple values we could want in our output. Some are vectors of length 1, such as the p-value and the estimate, and some are longer, such as the confidence interval. broom's `tidy` S3 method, combined with dplyr's `do`, makes it easy to summarize the information about each test:
 
 ```{r}
 Orange %>% group_by(Tree) %>% do(tidy(cor.test(.$age, .$circumference)))
