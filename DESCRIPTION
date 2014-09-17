@@ -17,5 +17,6 @@ Suggests:
     multcomp,
     ggplot2,
     testthat
+URL: http://github.com/dgrtwo/broom
 VignetteBuilder: knitr
 License: MIT + file LICENSE
