@@ -16,7 +16,6 @@
 #' 
 #' @param x lm object
 #' @param data Original data, defaults to the extracting it from the model
-#' @param ... extra arguments, not used
 #'
 #' @examples
 #'
@@ -69,6 +68,15 @@ NULL
 
 #' @rdname lm-tidiers
 #' 
+#' @param conf.int whether to include a confidence interval
+#' @param conf.level confidence level of the interval, used only if
+#' \code{conf.int=TRUE}
+#' @param exponentiate whether to exponentiate the coefficient estimates
+#' and confidence intervals (typical for logistic regression)
+#' 
+#' @details If \code{conf.int=TRUE}, the confidence interval is computed with
+#' the \code{\link{confint}} function.
+#' 
 #' @return \code{tidy.lm} returns one row for each coefficient, with five columns:
 #'   \item{term}{The term in the linear model being estimated and tested}
 #'   \item{estimate}{The estimated coefficient}
@@ -76,10 +84,35 @@ NULL
 #'   \item{statistic}{t-statistic}
 #'   \item{p.value}{two-sided p-value}
 #' 
+#' If \code{cont.int=TRUE}, it also includes columns for \code{conf.low} and
+#' \code{conf.high}, computed with \code{\link{confint}}.
+#' 
 #' @export
-tidy.lm <- function(x, ...) {
+tidy.lm <- function(x, conf.int=FALSE, conf.level=.95,
+                    exponentiate=FALSE, ...) {
     nn <- c("estimate", "stderror", "statistic", "p.value")
-    fix_data_frame(coef(summary(x)), nn)
+    ret <- fix_data_frame(coef(summary(x)), nn)
+
+    if (exponentiate) {
+        # save transformation function for use on confidence interval
+        if (is.null(x$family) || x$family$link != "logit") {
+            warning(paste("Exponentiating coefficients, but model did not use",
+                          "a logit link function"))
+        }
+        trans <- exp
+    } else {
+        trans <- identity
+    }
+
+    if (conf.int) {
+        # avoid "Waiting for profiling to be done..." message
+        CI <- suppressMessages(confint(x, level = conf.level))
+        colnames(CI) = c("conf.low", "conf.high")
+        ret <- cbind(ret, trans(unrowname(CI)))
+    }
+    ret$estimate <- trans(ret$estimate)
+
+    ret
 }
 
 
@@ -117,6 +150,8 @@ augment.lm <- function(x, data = x$model, ...) {
 
 
 #' @rdname lm-tidiers
+#' 
+#' @param ... extra arguments, not used
 #' 
 #' @return \code{glance.lm} returns a one-row data.frame with the columns
 #'   \item{r.squared}{The percent of variance explained by the model}

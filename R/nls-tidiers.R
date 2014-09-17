@@ -7,7 +7,6 @@
 #' @param x An object of class "nls"
 #' @param data original data this was fitted on; if not given this will
 #' attempt to be reconstructed from nls (may not be successful)
-#' @param ... extra arguments (not used)
 #' 
 #' @return All tidying methods return a \code{data.frame} without rownames.
 #' The structure depends on the method chosen.
@@ -19,6 +18,10 @@ NULL
 
 
 #' @rdname nls-tidiers
+#' 
+#' @param conf.int whether to include a confidence interval
+#' @param conf.level confidence level of the interval, used only if
+#' \code{conf.int=TRUE}
 #'
 #' @return \code{tidy} returns one row for each coefficient in the model,
 #' with five columns:
@@ -29,9 +32,20 @@ NULL
 #'   \item{p.value}{two-sided p-value}
 #' 
 #' @export
-tidy.nls <- function(x, ...) {
+tidy.nls <- function(x, conf.int=FALSE, conf.level=.95, ...) {
     nn <- c("estimate", "stderror", "statistic", "p.value")
-    fix_data_frame(coef(summary(x)), nn)
+    ret <- fix_data_frame(coef(summary(x)), nn)
+
+    if (conf.int) {
+        # avoid "Waiting for profiling to be done..." message
+        CI <- suppressMessages(confint(x, level = conf.level))
+        if (is.null(dim(CI))) {
+            CI = matrix(CI, nrow=1)
+        }
+        colnames(CI) = c("conf.low", "conf.high")
+        ret <- cbind(ret, unrowname(CI))
+    }
+    ret
 }
 
 
@@ -59,6 +73,8 @@ augment.nls <- function(x, data=NULL, ...) {
 
 
 #' @rdname nls-tidiers
+#' 
+#' @param ... extra arguments (not used)
 #' 
 #' @return \code{glance} returns one row with the columns
 #'   \item{sigma}{The square root of the estimated residual variance}

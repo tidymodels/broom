@@ -45,7 +45,7 @@ tidy.htest <- function(x, ...) {
             ret <- c(estimate=ret$estimate1 - ret$estimate2, ret)
         }
     }
-    ret <- ret[!sapply(ret, is.null)]
+    ret <- compact(ret)
     if (!is.null(x$conf.int)) {
         ret <- c(ret, conf.low=x$conf.int[1], conf.high=x$conf.int[2])
     }

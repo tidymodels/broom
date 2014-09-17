@@ -6,7 +6,7 @@
 \alias{tidy.nls}
 \title{Tidying methods for a nonlinear model}
 \usage{
-\method{tidy}{nls}(x, ...)
+\method{tidy}{nls}(x, conf.int = FALSE, conf.level = 0.95, ...)
 
 \method{augment}{nls}(x, data = NULL, ...)
 
@@ -17,6 +17,11 @@
 
 \item{data}{original data this was fitted on; if not given this will
 attempt to be reconstructed from nls (may not be successful)}
+
+\item{conf.int}{whether to include a confidence interval}
+
+\item{conf.level}{confidence level of the interval, used only if
+\code{conf.int=TRUE}}
 
 \item{...}{extra arguments (not used)}
 }

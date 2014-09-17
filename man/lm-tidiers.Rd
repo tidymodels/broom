@@ -6,7 +6,8 @@
 \alias{tidy.lm}
 \title{Tidying methods for a linear model}
 \usage{
-\method{tidy}{lm}(x, ...)
+\method{tidy}{lm}(x, conf.int = FALSE, conf.level = 0.95,
+  exponentiate = FALSE, ...)
 
 \method{augment}{lm}(x, data = x$model, ...)
 
@@ -16,6 +17,14 @@
 \item{x}{lm object}
 
 \item{data}{Original data, defaults to the extracting it from the model}
+
+\item{conf.int}{whether to include a confidence interval}
+
+\item{conf.level}{confidence level of the interval, used only if
+\code{conf.int=TRUE}}
+
+\item{exponentiate}{whether to exponentiate the coefficient estimates
+and confidence intervals (typical for logistic regression)}
 
 \item{...}{extra arguments, not used}
 }
@@ -29,6 +38,9 @@ The structure depends on the method chosen.
   \item{stderror}{The standard error from the linear model}
   \item{statistic}{t-statistic}
   \item{p.value}{two-sided p-value}
+
+If \code{cont.int=TRUE}, it also includes columns for \code{conf.low} and
+\code{conf.high}, computed with \code{\link{confint}}.
 
 \code{augment.lm} returns one row for each observation,
 with six columns added to the original data:
@@ -55,6 +67,9 @@ residuals, and construct a one-row glance of the model's statistics.
 \details{
 If you have missing values in your model data, you may need to refit
 the model with \code{na.action = na.exclude}.
+
+If \code{conf.int=TRUE}, the confidence interval is computed with
+the \code{\link{confint}} function.
 
 Code and documentation for \code{augment.lm} originated in the
 ggplot2 package, where it was called \code{fortify.lm}
