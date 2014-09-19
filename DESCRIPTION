@@ -7,10 +7,11 @@ Author: David Robinson, Hadley Wickham
 Maintainer: David Robinson <admiral.david@gmail.com>
 Description: Convert statistical analysis objects from R into tidy format.
 Imports:
-    plyr
+    plyr,
+    dplyr,
+    tidyr
 Suggests:
     knitr,
-    dplyr,
     sp,
     maps,
     maptools,

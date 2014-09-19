@@ -33,4 +33,6 @@ unrowname <- function(x) {
 
 
 #' Remove NULL items in a vector or list
+#' 
+#' @param x a vector or list
 compact <- function(x) Filter(Negate(is.null), x)
