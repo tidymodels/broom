@@ -1,10 +1,3 @@
-<!--
-%\VignetteEngine{knitr::knitr}
-%\VignetteIndexEntry{Introduction to broom}
--->
-
-
-
 broom: let's tidy up a bit
 =====================
 
