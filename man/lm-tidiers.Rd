@@ -57,7 +57,13 @@ with six columns added to the original data:
   \item{adj.r.squared}{r.squared adjusted based on the degrees of freedom}
   \item{sigma}{The square root of the estimated residual variance}
   \item{statistic}{F-statistic}
-  \item{p.value}{p-value from the F test, describing whether the full regression is significant}
+  \item{p.value}{p-value from the F test, describing whether the full
+  regression is significant}
+  \item{logLik}{The data's log-likelihood under the model}
+  \item{AIC}{The Akaike Information Criterion}
+  \item{BIC}{The Bayesian Information Criterion}
+  \item{df}{Degrees of freedom used by the coefficients}
+  \item{df.residual}{Residual degrees of freedom}
 }
 \description{
 These methods tidy the coefficients of a linear model into a summary,

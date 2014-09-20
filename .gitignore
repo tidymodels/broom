@@ -3,3 +3,4 @@
 .Rhistory
 .RData
 vignettes/*cache
+inst/doc

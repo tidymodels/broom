@@ -80,9 +80,14 @@ augment.nls <- function(x, data=NULL, ...) {
 #'   \item{sigma}{The square root of the estimated residual variance}
 #'   \item{isConv}{Whether the fit successfully converged}
 #'   \item{finTol}{The achieved convergence tolerance}
+#'   \item{logLik}{The data's log-likelihood under the model}
+#'   \item{AIC}{The Akaike Information Criterion}
+#'   \item{BIC}{The Bayesian Information Criterion}
 #' 
 #' @export
 glance.nls <- function(x, ...) {
     s <- summary(x)
-    unrowname(data.frame(sigma=s$sigma, isConv=s$convInfo$isConv, finTol=s$convInfo$finTol))
+    ret <- unrowname(data.frame(sigma=s$sigma, isConv=s$convInfo$isConv,
+                                finTol=s$convInfo$finTol))
+    finish_glance(ret, x)
 }

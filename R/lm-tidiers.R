@@ -158,15 +158,27 @@ augment.lm <- function(x, data = x$model, ...) {
 #'   \item{adj.r.squared}{r.squared adjusted based on the degrees of freedom}
 #'   \item{sigma}{The square root of the estimated residual variance}
 #'   \item{statistic}{F-statistic}
-#'   \item{p.value}{p-value from the F test, describing whether the full regression is significant}
+#'   \item{p.value}{p-value from the F test, describing whether the full
+#'   regression is significant}
+#'   \item{logLik}{The data's log-likelihood under the model}
+#'   \item{AIC}{The Akaike Information Criterion}
+#'   \item{BIC}{The Bayesian Information Criterion}
+#'   \item{df}{Degrees of freedom used by the coefficients}
+#'   \item{df.residual}{Residual degrees of freedom}
+
 #' 
 #' @export
 glance.lm <- function(x, ...) {
     s <- summary(x)
-    unrowname(with(s, data.frame(r.squared=r.squared,
-                                 adj.r.squared=adj.r.squared,
-                                 sigma=sigma,
-                                 statistic=fstatistic[1],
-                                 p.value=pf(fstatistic[1], fstatistic[2], fstatistic[3],
-                                            lower.tail=FALSE))))
+    ret <- with(s, data.frame(r.squared=r.squared,
+                              adj.r.squared=adj.r.squared,
+                              sigma=sigma,
+                              statistic=fstatistic[1],
+                              p.value=pf(fstatistic[1], fstatistic[2], fstatistic[3],
+                              lower.tail=FALSE)))
+    ret <- finish_glance(unrowname(ret), x)
+    # add df at end
+    ret$df <- s$df[1]
+    ret$df.residual <- s$df[2]
+    ret
 }
