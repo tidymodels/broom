@@ -43,12 +43,14 @@ with two columns added:
   \item{.resid}{Residuals}
 
 \code{glance} returns one row with the columns
-  \item{sigma}{The square root of the estimated residual variance}
-  \item{isConv}{Whether the fit successfully converged}
-  \item{finTol}{The achieved convergence tolerance}
-  \item{logLik}{The data's log-likelihood under the model}
-  \item{AIC}{The Akaike Information Criterion}
-  \item{BIC}{The Bayesian Information Criterion}
+  \item{sigma}{the square root of the estimated residual variance}
+  \item{isConv}{whether the fit successfully converged}
+  \item{finTol}{the achieved convergence tolerance}
+  \item{logLik}{the data's log-likelihood under the model}
+  \item{AIC}{the Akaike Information Criterion}
+  \item{BIC}{the Bayesian Information Criterion}
+  \item{deviance}{deviance}
+  \item{df.residual}{residual degrees of freedom}
 }
 \description{
 These methods tidy the coefficients of a nonlinear model into a summary,

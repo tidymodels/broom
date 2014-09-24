@@ -59,11 +59,12 @@ with six columns added to the original data:
   \item{statistic}{F-statistic}
   \item{p.value}{p-value from the F test, describing whether the full
   regression is significant}
-  \item{logLik}{The data's log-likelihood under the model}
-  \item{AIC}{The Akaike Information Criterion}
-  \item{BIC}{The Bayesian Information Criterion}
   \item{df}{Degrees of freedom used by the coefficients}
-  \item{df.residual}{Residual degrees of freedom}
+  \item{logLik}{the data's log-likelihood under the model}
+  \item{AIC}{the Akaike Information Criterion}
+  \item{BIC}{the Bayesian Information Criterion}
+  \item{deviance}{deviance}
+  \item{df.residual}{residual degrees of freedom}
 }
 \description{
 These methods tidy the coefficients of a linear model into a summary,

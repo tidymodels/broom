@@ -20,16 +20,15 @@
 #' @rdname glm-tidiers
 #' 
 #' @return \code{glance} returns a one-row data.frame with the columns
-#'   \item{deviance}{Minus twice the maximized log-likelihood}
-#'   \item{null.deviance}{The deviance of the null model}
-#'   \item{df.residual}{The residual degrees of freedom}
-#'   \item{df.null}{The residual degrees of freedom for the null model}
-#'   \item{logLik}{The data's log-likelihood under the model}
-#'   \item{AIC}{The Akaike Information Criterion}
-#'   \item{BIC}{The Bayesian Information Criterion}
+#'   \item{null.deviance}{the deviance of the null model}
+#'   \item{df.null}{the residual degrees of freedom for the null model}
+#'   \item{logLik}{the data's log-likelihood under the model}
+#'   \item{AIC}{the Akaike Information Criterion}
+#'   \item{BIC}{the Bayesian Information Criterion}
+#'   \item{deviance}{deviance}
+#'   \item{df.residual}{residual degrees of freedom}
 glance.glm <- function(x, ...) {
     s <- summary(x)
-    ret <- unrowname(as.data.frame(s[c("deviance", "null.deviance",
-                                       "df.residual", "df.null")]))
+    ret <- unrowname(as.data.frame(s[c("null.deviance", "df.null")]))
     finish_glance(ret, x)
 }

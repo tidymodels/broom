@@ -160,12 +160,12 @@ augment.lm <- function(x, data = x$model, ...) {
 #'   \item{statistic}{F-statistic}
 #'   \item{p.value}{p-value from the F test, describing whether the full
 #'   regression is significant}
-#'   \item{logLik}{The data's log-likelihood under the model}
-#'   \item{AIC}{The Akaike Information Criterion}
-#'   \item{BIC}{The Bayesian Information Criterion}
 #'   \item{df}{Degrees of freedom used by the coefficients}
-#'   \item{df.residual}{Residual degrees of freedom}
-
+#'   \item{logLik}{the data's log-likelihood under the model}
+#'   \item{AIC}{the Akaike Information Criterion}
+#'   \item{BIC}{the Bayesian Information Criterion}
+#'   \item{deviance}{deviance}
+#'   \item{df.residual}{residual degrees of freedom}
 #' 
 #' @export
 glance.lm <- function(x, ...) {
@@ -175,10 +175,8 @@ glance.lm <- function(x, ...) {
                               sigma=sigma,
                               statistic=fstatistic[1],
                               p.value=pf(fstatistic[1], fstatistic[2], fstatistic[3],
-                              lower.tail=FALSE)))
+                              lower.tail=FALSE),
+                              df=s$df[1]))
     ret <- finish_glance(unrowname(ret), x)
-    # add df at end
-    ret$df <- s$df[1]
-    ret$df.residual <- s$df[2]
     ret
 }

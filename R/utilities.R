@@ -11,13 +11,16 @@ fix_data_frame <- function(x, newnames=NULL, newcol="term") {
     if (all(rownames(x) == seq_len(nrow(x)))) {
         # don't need to move rownames into a new column
         ret <- data.frame(x, stringsAsFactors = FALSE)
+        if (!is.null(newnames)) {
+            colnames(ret) <- newnames
+        }
     }
     else {
         ret <- data.frame(a=rownames(x), x, stringsAsFactors = FALSE)
         colnames(ret)[1] <- newcol
-    }
-    if (!is.null(newnames)) {
-        colnames(ret)[-1] <- newnames
+        if (!is.null(newnames)) {
+            colnames(ret)[-1] <- newnames
+        }
     }
     unrowname(ret)
 }
@@ -50,11 +53,27 @@ compact <- function(x) Filter(Negate(is.null), x)
 #' @param ret a one-row data frame (a partially complete glance)
 #' @param x the prediction model
 #' 
-#' @return a data frame with additional columns added
+#' @return a data frame with additional columns added. If the original data
+#' contained rownames, these become a column called \code{.rownames}. Other
+#' columns that are added include:
+#'   \item{.fitted}{Predicted values}
+#'   \item{.resid}{Residuals}
+#'   
+#' Also included 
+#' 
+#' @export
 finish_glance <- function(ret, x) {
     ret$logLik <- as.numeric(tryCatch(logLik(x), error=function(e) NULL))
     ret$AIC <- tryCatch(AIC(x), error=function(e) NULL)
     ret$BIC <- tryCatch(BIC(x), error=function(e) NULL)
-
+    
+    # special case for REML objects (better way?)
+    if (class(x) == "lmerMod") {
+        ret$deviance <- tryCatch(deviance(x, REML=FALSE), error=function(e) NULL)
+    } else {
+        ret$deviance <- tryCatch(deviance(x), error=function(e) NULL)
+    }
+    ret$df.residual <- tryCatch(df.residual(x), error=function(e) NULL)
+    
     return(ret)
 }

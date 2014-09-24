@@ -12,7 +12,13 @@ finish_glance(ret, x)
 \item{x}{the prediction model}
 }
 \value{
-a data frame with additional columns added
+a data frame with additional columns added. If the original data
+contained rownames, these become a column called \code{.rownames}. Other
+columns that are added include:
+  \item{.fitted}{Predicted values}
+  \item{.resid}{Residuals}
+
+Also included
 }
 \description{
 A helper function for several functions in the glance generic. Methods
