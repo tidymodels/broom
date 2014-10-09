@@ -1,6 +1,6 @@
 # test tidy, augment, glance methods from lme4-tidiers.R
 
-if (require(lme4)) {
+if (require(lme4, quietly = TRUE)) {
     context("lme4 models")
     
     d <- as.data.frame(ChickWeight)
