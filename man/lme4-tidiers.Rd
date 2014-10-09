@@ -6,7 +6,7 @@
 \alias{tidy.merMod}
 \title{Tidying methods for mixed effects models}
 \usage{
-\method{tidy}{merMod}(x, effect = "random", ...)
+\method{tidy}{merMod}(x, effects = "random", ...)
 
 \method{augment}{merMod}(x, data, ...)
 
@@ -16,7 +16,7 @@
 \item{x}{An object of class \code{merMod}, such as those from \code{lmer},
 \code{glmer}, or \code{nlmer}}
 
-\item{effect}{Either "random" (default) or "fixed"}
+\item{effects}{Either "random" (default) or "fixed"}
 
 \item{...}{extra arguments (not used)}
 
@@ -28,14 +28,14 @@ All tidying methods return a \code{data.frame} without rownames.
 The structure depends on the method chosen.
 
 \code{tidy} returns one row for each estimated effect, either
-random or fixed depending on the \code{effect} parameter. If
-\code{effect="random"}, it contains the columns
+random or fixed depending on the \code{effects} parameter. If
+\code{effects = "random"}, it contains the columns
   \item{group}{the group within which the random effect is being estimated}
   \item{level}{level within group}
   \item{term}{term being estimated}
   \item{estimate}{estimated coefficient}
 
-If \code{effect="fixed"}, \code{tidy} returns the columns
+If \code{effects="fixed"}, \code{tidy} returns the columns
   \item{term}{gixed term being estimated}
   \item{estimate}{estimate of fixed effect}
   \item{stderror}{standard error}
@@ -47,6 +47,7 @@ If \code{effect="fixed"}, \code{tidy} returns the columns
 with columns (each prepended by a .) added. Included are the columns
   \item{.fitted}{predicted values}
   \item{.resid}{residuals}
+  \item{.fixed}{predicted values with no random effects}
 
 Also added are values from the response object within the model (of type
 \code{lmResp}, \code{glmResp}, \code{nlsResp}, etc). These include \code{".mu",
@@ -76,7 +77,7 @@ if (require("lme4")) {
     glmm1 <- glmer(cbind(incidence, size - incidence) ~ period + (1 | herd),
                   data = cbpp, family = binomial)
     tidy(glmm1)
-    tidy(glmm1, effects="fixed")
+    tidy(glmm1, effects = "fixed")
     head(augment(glmm1, cbpp))
     glance(glmm1)
 
@@ -84,7 +85,7 @@ if (require("lme4")) {
     nm1 <- nlmer(circumference ~ SSlogis(age, Asym, xmid, scal) ~ Asym|Tree,
                   Orange, start = startvec)
     tidy(nm1)
-    tidy(nm1, effects="fixed")
+    tidy(nm1, effects = "fixed")
     head(augment(nm1, Orange))
     glance(nm1)
 }

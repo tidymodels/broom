@@ -24,7 +24,7 @@
 #'     glmm1 <- glmer(cbind(incidence, size - incidence) ~ period + (1 | herd),
 #'                   data = cbpp, family = binomial)
 #'     tidy(glmm1)
-#'     tidy(glmm1, effects="fixed")
+#'     tidy(glmm1, effects = "fixed")
 #'     head(augment(glmm1, cbpp))
 #'     glance(glmm1)
 #'     
@@ -32,7 +32,7 @@
 #'     nm1 <- nlmer(circumference ~ SSlogis(age, Asym, xmid, scal) ~ Asym|Tree,
 #'                   Orange, start = startvec)
 #'     tidy(nm1)
-#'     tidy(nm1, effects="fixed")
+#'     tidy(nm1, effects = "fixed")
 #'     head(augment(nm1, Orange))
 #'     glance(nm1)
 #' }
@@ -41,17 +41,17 @@ NULL
 
 #' @rdname lme4-tidiers
 #' 
-#' @param effect Either "random" (default) or "fixed"
+#' @param effects Either "random" (default) or "fixed"
 #' 
 #' @return \code{tidy} returns one row for each estimated effect, either
-#' random or fixed depending on the \code{effect} parameter. If
-#' \code{effect="random"}, it contains the columns
+#' random or fixed depending on the \code{effects} parameter. If
+#' \code{effects = "random"}, it contains the columns
 #'   \item{group}{the group within which the random effect is being estimated}
 #'   \item{level}{level within group}
 #'   \item{term}{term being estimated}
 #'   \item{estimate}{estimated coefficient}
 #' 
-#' If \code{effect="fixed"}, \code{tidy} returns the columns
+#' If \code{effects="fixed"}, \code{tidy} returns the columns
 #'   \item{term}{gixed term being estimated}
 #'   \item{estimate}{estimate of fixed effect}
 #'   \item{stderror}{standard error}
@@ -63,9 +63,9 @@ NULL
 #' @import dplyr
 #' 
 #' @export
-tidy.merMod <- function(x, effect="random", ...) {
-    effect <- match.arg(effect, c("random", "fixed"))
-    if (effect == "fixed") {
+tidy.merMod <- function(x, effects = "random", ...) {
+    effects <- match.arg(effects, c("random", "fixed"))
+    if (effects == "fixed") {
         # return tidied fixed effects rather than random
         ret <- coef(summary(x))
 
@@ -101,6 +101,7 @@ tidy.merMod <- function(x, effect="random", ...) {
 #' with columns (each prepended by a .) added. Included are the columns
 #'   \item{.fitted}{predicted values}
 #'   \item{.resid}{residuals}
+#'   \item{.fixed}{predicted values with no random effects}
 #' 
 #' Also added are values from the response object within the model (of type
 #' \code{lmResp}, \code{glmResp}, \code{nlsResp}, etc). These include \code{".mu",
@@ -110,25 +111,41 @@ tidy.merMod <- function(x, effect="random", ...) {
 augment.merMod <- function(x, data, ...) {
     if (missing(data)) {
         data <- model.frame(x)
+
+        # check that the option was not na.exclude
+        na.act <- attr(data, "na.action")
+        if (!is.null(na.act) && attr(na.act, "class") == "exclude") {
+            warning(paste("If na action is 'na.exclude',",
+                          "should provide original data"))
+        }
     }
     # move rownames if necessary
     data <- fix_data_frame(data, newcol=".rownames")
-    
+
     data$.fitted <- predict(x)
     data$.resid <- resid(x)
-    
+    # add predictions with no random effects (population means)
+    predictions <- predict(x, re.form = NA)
+    # some cases, such as values returned from nlmer, return more than one
+    # prediction per observation. Not clear how those cases would be tidied
+    if (length(predictions) == nrow(data)) {
+        data$.fixed <- predictions
+    }
+
     # columns to extract from resp reference object
     # these include relevant ones that could be present in lmResp, glmResp,
     # or nlsResp objects
+
     respCols <- c("mu", "offset", "sqrtXwt", "sqrtrwt", "weights", "wtres", "gam", "eta")
     cols <- lapply(respCols, function(n) x@resp[[n]])
     names(cols) <- paste0(".", respCols)
-    cols <- compact(cols)  # remove missing fields
+    cols <- as.data.frame(compact(cols))  # remove missing fields
+    cols <- insert_NAs(cols, data)
     if (length(cols) > 0) {
         data <- cbind(data, cols)
     }
 
-    data
+    unrowname(data)
 }
 
 

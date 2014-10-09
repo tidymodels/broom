@@ -41,6 +41,17 @@ unrowname <- function(x) {
 compact <- function(x) Filter(Negate(is.null), x)
 
 
+#' insert a row of NAs into a data frame wherever another data frame has NAs
+#' 
+#' @param x data frame that has one row for each non-NA row in original
+#' @param original data frame with NAs
+insert_NAs <- function(x, original) {
+    indices <- rep(NA, nrow(x))
+    indices[which(complete.cases(original))] = seq_len(nrow(x))
+    x[indices, ]
+}
+
+
 #' Add logLik, AIC, BIC, and other common measurements to a glance of
 #' a prediction
 #' 
@@ -77,3 +88,5 @@ finish_glance <- function(ret, x) {
     
     return(ret)
 }
+
+
