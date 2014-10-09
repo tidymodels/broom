@@ -134,19 +134,25 @@ tidy.lm <- function(x, conf.int=FALSE, conf.level=.95,
 #' @export
 augment.lm <- function(x, data = x$model, ...) {
     # move rownames if necessary
-    data <- fix_data_frame(data, newcol=".rownames")
+    # here we need rownames to match the observations in the case of missing data (!)
+    data$.rownames <- rownames(data) 
     
     infl <- influence(x, do.coef = FALSE)
-    data$.hat <- infl$hat
-    data$.sigma <- infl$sigma
-    data$.cooksd <- cooks.distance(x, infl)
+    infl <- as.data.frame(infl)
+    infl$.rownames <- rownames(infl)
 
-    data$.fitted <- predict(x)
-    data$.resid <- resid(x)
-    data$.stdresid <- rstandard(x, infl)
+    infl <- select(infl, .hat=hat, .sigma=sigma, .rownames)
+    
+    infl$.resid <- resid(x)
+    infl$.fitted <- predict(x)
+    infl$.cooksd <- cooks.distance(x)
+    infl$.stdresid <- rstandard(x)
+    
+    data <- merge(data, infl, by=".rownames", all.x=TRUE)
     
     data
 }
+
 
 
 #' @rdname lm-tidiers
