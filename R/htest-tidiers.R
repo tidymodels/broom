@@ -49,7 +49,7 @@ tidy.htest <- function(x, ...) {
     if (!is.null(x$conf.int)) {
         ret <- c(ret, conf.low=x$conf.int[1], conf.high=x$conf.int[2])
     }
-    as.data.frame(ret)
+    unrowname(as.data.frame(ret))
 }
 
 
