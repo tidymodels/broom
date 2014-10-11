@@ -26,11 +26,26 @@
 #'   
 #' Which columns are included depends on the hypothesis test used.
 #' 
-#' @name htest-tidiers
+#' @examples
+#' 
+#' tt <- t.test(rnorm(10))
+#' tidy(tt)
+#' glance(tt)  # same output for all htests
+#' 
+#' tt <- t.test(mpg ~ am, data = mtcars)
+#' tidy(tt)
+#' 
+#' wt <- wilcox.test(mpg ~ am, data = mtcars)
+#' tidy(wt)
+#' 
+#' ct <- cor.test(mtcars$wt, mtcars$mpg)
+#' tidy(ct)
+#' 
+#' @name htest_tidiers
 NULL
 
 
-#' @rdname htest-tidiers
+#' @rdname htest_tidiers
 #' @export
 tidy.htest <- function(x, ...) {
     ret <- x[c("estimate", "statistic", "p.value", "parameter")]
@@ -53,6 +68,6 @@ tidy.htest <- function(x, ...) {
 }
 
 
-#' @rdname htest-tidiers
+#' @rdname htest_tidiers
 #' @export
 glance.htest <- function(x, ...) tidy(x) 

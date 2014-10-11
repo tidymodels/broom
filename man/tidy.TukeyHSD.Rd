@@ -10,7 +10,23 @@
 
 \item{...}{additional arguments (not used)}
 }
+\value{
+A data.frame with one row per comparison, containing columns
+    \item{comparison}{Levels being compared, separated by -}
+    \item{estimate}{Estimate of difference}
+    \item{conf.low}{Low end of confidence interval of difference}
+    \item{conf.high}{High end of confidence interval of difference}
+    \item{adj.p.value}{P-value adjusted for multiple comparisons}
+}
 \description{
 Returns a data.frame with one row for each pairwise comparison
+}
+\examples{
+fm1 <- aov(breaks ~ wool + tension, data = warpbreaks)
+thsd <- TukeyHSD(fm1, "tension", ordered = TRUE)
+tidy(thsd)
+}
+\seealso{
+\code{\link{TukeyHSD}}
 }
 

@@ -104,4 +104,4 @@ The data from `glance` fits a different but equally important purpose: it lets y
 ggplot(clusterings, aes(k, tot.withinss)) + geom_line()
 ```
 
-This represents the variance within the clusters. It decreases as k increases, but one can notice a bend (or "elbow") right at k=3. This bend indicates that additional clusters beyond the third have little value. (See [here](http://web.stanford.edu/~hastie/Papers/gap.pdf) for a more mathematically rigorous interpretation and implementation of this method). Thus, all three methods of tidying data provided by .
+This represents the variance within the clusters. It decreases as k increases, but one can notice a bend (or "elbow") right at k=3. This bend indicates that additional clusters beyond the third have little value. (See [here](http://web.stanford.edu/~hastie/Papers/gap.pdf) for a more mathematically rigorous interpretation and implementation of this method). Thus, all three methods of tidying data provided by broom are useful for summarizing clustering output.

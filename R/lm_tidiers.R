@@ -4,7 +4,7 @@
 #' augment the original data with information on the fitted values and
 #' residuals, and construct a one-row glance of the model's statistics.
 #'
-#' If you have missing values in your model data, you may need to refit
+#' @details If you have missing values in your model data, you may need to refit
 #' the model with \code{na.action = na.exclude}.
 #'
 #' @return All tidying methods return a \code{data.frame} without rownames.
@@ -12,7 +12,7 @@
 #'
 #' @seealso \code{\link{summary.lm}}
 #'
-#' @name lm-tidiers
+#' @name lm_tidiers
 #' 
 #' @param x lm object
 #' @param data Original data, defaults to the extracting it from the model
@@ -20,8 +20,17 @@
 #' @examples
 #'
 #' library(ggplot2)
+#' library(dplyr)
 #'
-#' mod <- lm(mpg ~ wt, data = mtcars)
+#' mod <- lm(mpg ~ wt + qsec, data = mtcars)
+#' 
+#' tidy(mod)
+#' glance(mod)
+#' 
+#' # coefficient plot
+#' d <- mutate(tidy(mod), low = estimate - stderror, high = estimate + stderror)
+#' # TODO
+#' 
 #' head(augment(mod))
 #' head(augment(mod, mtcars))
 #'
@@ -37,7 +46,7 @@
 #' qplot(mpg, .stdresid, data = augment(mod, mtcars), colour = factor(cyl))
 #'
 #' plot(mod, which = 2)
-#' # qplot(sample =.stdresid, data = mod, stat = "qq") + geom_abline()
+#' qplot(sample =.stdresid, data = mod, stat = "qq") + geom_abline()
 #'
 #' plot(mod, which = 3)
 #' qplot(.fitted, sqrt(abs(.stdresid)), data = mod) + geom_smooth(se = FALSE)
@@ -66,7 +75,7 @@
 NULL
 
 
-#' @rdname lm-tidiers
+#' @rdname lm_tidiers
 #' 
 #' @param conf.int whether to include a confidence interval
 #' @param conf.level confidence level of the interval, used only if
@@ -116,7 +125,7 @@ tidy.lm <- function(x, conf.int=FALSE, conf.level=.95,
 }
 
 
-#' @rdname lm-tidiers
+#' @rdname lm_tidiers
 #' 
 #' @details Code and documentation for \code{augment.lm} originated in the
 #' ggplot2 package, where it was called \code{fortify.lm}
@@ -155,7 +164,7 @@ augment.lm <- function(x, data = x$model, ...) {
 
 
 
-#' @rdname lm-tidiers
+#' @rdname lm_tidiers
 #' 
 #' @param ... extra arguments, not used
 #' 

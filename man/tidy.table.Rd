@@ -10,12 +10,17 @@
 
 \item{...}{Extra arguments (not used)}
 }
-\value{
-A data.frame with a column for each variable that has been counted,
-named \code{Var1}, \code{Var2}, etc, then
-}
 \description{
-A table, typically created by the \link{table} function, contains a contingency
-table of frequencies across multiple vectors.
+A table, typically created by the \link{table} function, contains a
+contingency table of frequencies across multiple vectors. This directly
+calls the \code{\link{as.data.frame.table}} method, which melts it into a
+data frame with one column for each variable and a \code{Freq} column.
+}
+\examples{
+tab <- with(airquality, table(cut(Temp, quantile(Temp)), Month))
+tidy(tab)
+}
+\seealso{
+\code{\link{as.data.frame.table}}
 }
 

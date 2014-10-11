@@ -14,7 +14,7 @@
 #'   \item{series}{Name of the series}
 #'   \item{value}{Value of the observation}
 #' 
-#' @name zoo-tidiers
+#' @name zoo_tidiers
 #' 
 #' @examples
 #' 

@@ -17,12 +17,33 @@
 #'
 #' @seealso \code{\link{kmeans}}
 #'
-#' @name kmeans-tidiers
+#' @examples
+#' 
+#' library(dplyr)
+#' library(ggplot2)
+#' 
+#' set.seed(2014)
+#' centers <- data.frame(cluster=factor(1:3), size=c(100, 150, 50),
+#'                       x1=c(5, 0, -3), x2=c(-1, 1, -2))
+#' points <- centers %>% group_by(cluster) %>%
+#'  do(data.frame(x1=rnorm(.$size[1], .$x1[1]),
+#'                x2=rnorm(.$size[1], .$x2[1])))
+#'
+#' k <- kmeans(points[, 2:3], 3)
+#' tidy(k)
+#' head(augment(k, points))
+#' glance(k)
+#' 
+#' ggplot(augment(k, points), aes(x1, x2)) +
+#'     geom_point(aes(color = .cluster)) +
+#'     geom_text(aes(label = cluster), data = tidy(k), size = 10)
+#'
+#' @name kmeans_tidiers
 #' 
 NULL
 
 
-#' @rdname kmeans-tidiers
+#' @rdname kmeans_tidiers
 #' 
 #' @return \code{tidy} returns one row per cluster, with one column for each
 #' dimension in the data describing the center, followed by
@@ -41,7 +62,7 @@ tidy.kmeans <- function(x, col.names=paste0("x", 1:ncol(x$centers)), ...) {
 }
 
 
-#' @rdname kmeans-tidiers
+#' @rdname kmeans_tidiers
 #' 
 #' @return \code{augment} returns the original data with one extra column:
 #'   \item{.cluster}{The cluster assigned by the k-means algorithm}
@@ -49,14 +70,14 @@ tidy.kmeans <- function(x, col.names=paste0("x", 1:ncol(x$centers)), ...) {
 #' @export
 augment.kmeans <- function(x, data, ...) {
     # move rownames if necessary
-    data <- fix_data_frame(data, newcol=".rownames")
+    data <- fix_data_frame(data, newcol = ".rownames")
     
     # show cluster assignment as a factor (it's not numeric)
-    cbind(as.data.frame(data), .cluster=factor(x$cluster))
+    cbind(as.data.frame(data), .cluster = factor(x$cluster))
 }
 
 
-#' @rdname kmeans-tidiers
+#' @rdname kmeans_tidiers
 #' 
 #' @return \code{glance} returns a one-row data.frame with the columns
 #'   \item{totss}{The total sum of squares}

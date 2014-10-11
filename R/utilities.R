@@ -4,7 +4,8 @@
 #' @param newnames new column names, not including the rownames
 #' @param newcol the name of the new rownames column
 #' 
-#' @return a data.frame, with rownames moved into a column
+#' @return a data.frame, with rownames moved into a column and new column
+#' names assigned
 #' 
 #' @export
 fix_data_frame <- function(x, newnames=NULL, newcol="term") {
@@ -16,7 +17,7 @@ fix_data_frame <- function(x, newnames=NULL, newcol="term") {
         }
     }
     else {
-        ret <- data.frame(a=rownames(x), x, stringsAsFactors = FALSE)
+        ret <- data.frame(a = rownames(x), x, stringsAsFactors = FALSE)
         colnames(ret)[1] <- newcol
         if (!is.null(newnames)) {
             colnames(ret)[-1] <- newnames
@@ -61,30 +62,36 @@ insert_NAs <- function(x, original) {
 #' them to a glance data.frame can be performed. If any of them cannot be
 #' computed, it fails quietly.
 #' 
+#' @details In one special case, deviance for objects of the
+#' \code{lmerMod} class from lme4 is computed with
+#' \code{deviance(x, REML=FALSE)}
+#' 
 #' @param ret a one-row data frame (a partially complete glance)
 #' @param x the prediction model
 #' 
-#' @return a data frame with additional columns added. If the original data
-#' contained rownames, these become a column called \code{.rownames}. Other
-#' columns that are added include:
-#'   \item{.fitted}{Predicted values}
-#'   \item{.resid}{Residuals}
+#' @return a one-row data frame with additional columns added, such as
+#'   \item{logLik}{log likelihoods}
+#'   \item{AIC}{Akaike Information Criterion}
+#'   \item{BIC}{Bayesian Information Criterion}
+#'   \item{deviance}{deviance}
+#'   \item{df.residual}{residual degrees of freedom}
 #'   
-#' Also included 
+#' Each of these are produced by the corresponding generics 
 #' 
 #' @export
 finish_glance <- function(ret, x) {
-    ret$logLik <- as.numeric(tryCatch(logLik(x), error=function(e) NULL))
-    ret$AIC <- tryCatch(AIC(x), error=function(e) NULL)
-    ret$BIC <- tryCatch(BIC(x), error=function(e) NULL)
+    ret$logLik <- as.numeric(tryCatch(logLik(x), error = function(e) NULL))
+    ret$AIC <- tryCatch(AIC(x), error = function(e) NULL)
+    ret$BIC <- tryCatch(BIC(x), error = function(e) NULL)
     
     # special case for REML objects (better way?)
-    if (class(x) == "lmerMod") {
-        ret$deviance <- tryCatch(deviance(x, REML=FALSE), error=function(e) NULL)
+    if ("lmerMod" %in% class(x)) {
+        ret$deviance <- tryCatch(deviance(x, REML=FALSE),
+                                 error = function(e) NULL)
     } else {
-        ret$deviance <- tryCatch(deviance(x), error=function(e) NULL)
+        ret$deviance <- tryCatch(deviance(x), error = function(e) NULL)
     }
-    ret$df.residual <- tryCatch(df.residual(x), error=function(e) NULL)
+    ret$df.residual <- tryCatch(df.residual(x), error = function(e) NULL)
     
     return(ret)
 }

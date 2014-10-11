@@ -10,11 +10,15 @@
 
 \item{...}{Extra arguments (not used)}
 }
-\value{
-A data.frame with a column for each variable that has been counted,
-named \code{Var1}, \code{Var2}, etc, then
-}
 \description{
-A table contains a contingency table that
+An ftable contains a "flat" contingency table. This melts it into a
+data.frame with one column for each variable, then a \code{Freq}
+column. It directly uses the \code{stats:::as.data.frame.ftable} function
+}
+\examples{
+tidy(ftable(Titanic, row.vars = 1:3))
+}
+\seealso{
+\code{\link{ftable}}
 }
 

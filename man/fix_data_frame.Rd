@@ -13,7 +13,8 @@ fix_data_frame(x, newnames = NULL, newcol = "term")
 \item{newcol}{the name of the new rownames column}
 }
 \value{
-a data.frame, with rownames moved into a column
+a data.frame, with rownames moved into a column and new column
+names assigned
 }
 \description{
 Ensure an object is a data frame, with rownames moved into a column

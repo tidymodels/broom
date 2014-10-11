@@ -8,10 +8,25 @@
 \arguments{
 \item{x}{object of class "manova"}
 
-\item{...}{additional arguments (not used)}
+\item{...}{additional arguments passed on to \code{summary.manova},
+such as \code{test}}
+}
+\value{
+A data.frame with the columns
+    \item{term}{Term in design}
+    \item{statistic}{Approximate F statistic}
+    \item{num.df}{Degrees of freedom}
+    \item{p.value}{P-value}
 }
 \description{
 Constructs a data frame with one row for each of the terms in the model,
 containing the information from \link{summary.manova}.
+}
+\examples{
+npk2 <- within(npk, foo <- rnorm(24))
+npk2.aov <- manova(cbind(yield, foo) ~ block + N*P*K, npk2)
+}
+\seealso{
+\code{\link{summary.manova}}
 }
 

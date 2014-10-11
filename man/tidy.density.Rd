@@ -12,10 +12,19 @@
 }
 \value{
 a data frame with "x" and "y" columns
+
+d <- density(faithful$eruptions, bw = "sj")
+head(tidy(d))
+
+library(ggplot2)
+ggplot(tidy(d), aes(x, y)) + geom_line()
 }
 \description{
 Given a "density" object, returns a tidy data frame with two
 columns: points x where the density is estimated, points y
 for the estimate
+}
+\seealso{
+\code{\link{density}}
 }
 

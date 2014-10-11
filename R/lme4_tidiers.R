@@ -9,7 +9,7 @@
 #' @return All tidying methods return a \code{data.frame} without rownames.
 #' The structure depends on the method chosen.
 #' 
-#' @name lme4-tidiers
+#' @name lme4_tidiers
 #' 
 #' @examples
 #' 
@@ -39,7 +39,7 @@
 NULL
 
 
-#' @rdname lme4-tidiers
+#' @rdname lme4_tidiers
 #' 
 #' @param effects Either "random" (default) or "fixed"
 #' 
@@ -92,7 +92,7 @@ tidy.merMod <- function(x, effects = "random", ...) {
 
 
 
-#' @rdname lme4-tidiers
+#' @rdname lme4_tidiers
 #' 
 #' @param data original data this was fitted on; if not given this will
 #' attempt to be reconstructed
@@ -149,7 +149,7 @@ augment.merMod <- function(x, data, ...) {
 }
 
 
-#' @rdname lme4-tidiers
+#' @rdname lme4_tidiers
 #' 
 #' @param ... extra arguments (not used)
 #' 

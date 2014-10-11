@@ -1,5 +1,6 @@
 #' tidying methods for classes from the sp package.
 #'
+#' Tidy classes from the sp package to allow them to be plotted using ggplot2.
 #' To figure out the correct variable name for region, inspect
 #' \code{as.data.frame(x)}.
 #' 
@@ -8,19 +9,21 @@
 #' @param x \code{SpatialPolygonsDataFrame} to convert into a dataframe.
 #' @param region name of variable used to split up regions
 #' @param ... not used by this method
-#' @name tidy.sp
+#' 
+#' @name sp_tidiers
+#' 
 #' @examples
 #' if (require("maptools")) {
-#'  sids <- system.file("shapes/sids.shp", package="maptools")
-#'  nc1 <- readShapePoly(sids,
-#'    proj4string = CRS("+proj=longlat +datum=NAD27"))
-#'  nc1_df <- tidy(nc1)
+#'     sids <- system.file("shapes/sids.shp", package="maptools")
+#'     nc1 <- readShapePoly(sids,
+#'     proj4string = CRS("+proj=longlat +datum=NAD27"))
+#'     nc1_df <- tidy(nc1)
 #' }
 #' 
 #' @importFrom plyr ldply
 NULL
 
-#' @rdname tidy.sp
+#' @rdname sp_tidiers
 #' @export
 #' @method tidy SpatialPolygonsDataFrame
 tidy.SpatialPolygonsDataFrame <- function(x, region = NULL, ...) {
@@ -41,7 +44,7 @@ tidy.SpatialPolygonsDataFrame <- function(x, region = NULL, ...) {
     coords
 }
 
-#' @rdname tidy.sp
+#' @rdname sp_tidiers
 #' @export
 #' @method tidy SpatialPolygons
 tidy.SpatialPolygons <- function(x, ...) {
@@ -49,7 +52,7 @@ tidy.SpatialPolygons <- function(x, ...) {
 }
 
 
-#' @rdname tidy.sp 
+#' @rdname sp_tidiers 
 #' @export
 #' @method tidy Polygons
 tidy.Polygons <- function(x, ...) {
@@ -68,7 +71,7 @@ tidy.Polygons <- function(x, ...) {
     })
 }
 
-#' @rdname tidy.sp
+#' @rdname sp_tidiers
 #' @export
 #' @method tidy Polygon
 tidy.Polygon <- function(x, ...) {
@@ -79,14 +82,14 @@ tidy.Polygon <- function(x, ...) {
     df
 }
 
-#' @rdname tidy.sp
+#' @rdname sp_tidiers
 #' @export
 #' @method tidy SpatialLinesDataFrame
 tidy.SpatialLinesDataFrame <- function(x, ...) {
     ldply(x@lines, tidy)
 }
 
-#' @rdname tidy.sp
+#' @rdname sp_tidiers
 #' @export
 #' @method tidy Lines
 tidy.Lines <- function(x, ...) {
@@ -105,7 +108,7 @@ tidy.Lines <- function(x, ...) {
     })
 }
 
-#' @rdname tidy.sp
+#' @rdname sp_tidiers
 #' @export
 #' @method tidy Line
 tidy.Line <- function(x, ...) {

@@ -1,7 +1,7 @@
 #' Tidying methods for a glm object
 #' 
 #' Tidy a \code{glm} object. The \code{tidy} and \code{augment} methods are handled
-#' by \code{\link{lm-tidiers}}.
+#' by \code{\link{lm_tidiers}}.
 #' 
 #' @param x glm object
 #' @param ... extra arguments, not used
@@ -12,12 +12,17 @@
 #' @seealso \code{\link{tidy.lm}} and \code{\link{augment.lm}}. Also \code{\link{glm}}, which
 #' computes the values reported by the \code{glance} method.
 #'
-#' @name glm-tidiers
+#' @name glm_tidiers
+#' 
+#' @examples
+#' 
+#' g <- glm(am ~ mpg, mtcars, family = "binomial")
+#' glance(g)
 #'
 #' @export
 
 
-#' @rdname glm-tidiers
+#' @rdname glm_tidiers
 #' 
 #' @return \code{glance} returns a one-row data.frame with the columns
 #'   \item{null.deviance}{the deviance of the null model}

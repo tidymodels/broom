@@ -17,4 +17,11 @@ a data frame with "freq" and "spec" columns
 Given a "spec" object, which shows a spectrum across a range of frequencies,
 returns a tidy data frame with two columns: "freq" and "spec"
 }
+\examples{
+spc <- spectrum(lh)
+tidy(spc)
+
+library(ggplot2)
+ggplot(tidy(spc), aes(freq, spec)) + geom_line()
+}
 

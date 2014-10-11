@@ -13,11 +13,22 @@
 #' 
 #' @seealso \code{\link{nls}} and \code{\link{summary.nls}}
 #' 
-#' @name nls-tidiers
+#' @examples
+#' 
+#' n <- nls(mpg ~ k * e ^ wt, data = mtcars, start = list(k = 1, e = 2))
+#' 
+#' tidy(n)
+#' augment(n)
+#' glance(n)
+#' 
+#' library(ggplot2)
+#' ggplot(augment(n), aes(wt, mpg)) + geom_point() + geom_line(aes(y = .fitted))
+#' 
+#' @name nls_tidiers
 NULL
 
 
-#' @rdname nls-tidiers
+#' @rdname nls_tidiers
 #' 
 #' @param conf.int whether to include a confidence interval
 #' @param conf.level confidence level of the interval, used only if
@@ -49,7 +60,7 @@ tidy.nls <- function(x, conf.int=FALSE, conf.level=.95, ...) {
 }
 
 
-#' @rdname nls-tidiers
+#' @rdname nls_tidiers
 #' 
 #' @return \code{augment} returns one row for each original observation,
 #' with two columns added:
@@ -58,21 +69,22 @@ tidy.nls <- function(x, conf.int=FALSE, conf.level=.95, ...) {
 #' 
 #' @export
 augment.nls <- function(x, data=NULL, ...) {
-    # move rownames if necessary
-    data <- fix_data_frame(data, newcol=".rownames")
-    
     if (is.null(data)) {
         pars <- names(x$m$getPars())
         env <- as.list(x$m$getEnv())
         data <- as.data.frame(env[!(names(env) %in% pars)])
     }
+
+    # move rownames if necessary
+    data <- fix_data_frame(data, newcol=".rownames")
+    
     data$.fitted <- predict(x)
     data$.resid <- resid(x)
     data
 }
 
 
-#' @rdname nls-tidiers
+#' @rdname nls_tidiers
 #' 
 #' @param ... extra arguments (not used)
 #' 

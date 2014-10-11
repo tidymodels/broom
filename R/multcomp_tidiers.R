@@ -8,34 +8,34 @@
 #'  \code{summary.glht} or \code{\link[multcomp]{cld}}
 #' @param ... extra arguments (not used)
 #' 
-#' @name tidy-multcomp
+#' @name multcomp_tidiers
 #' @examples
 #' 
 #' if (require("multcomp") && require("ggplot2")) {
-#' amod <- aov(breaks ~ wool + tension, data = warpbreaks)
-#' wht <- glht(amod, linfct = mcp(tension = "Tukey"))
+#'     amod <- aov(breaks ~ wool + tension, data = warpbreaks)
+#'     wht <- glht(amod, linfct = mcp(tension = "Tukey"))
 #'
-#' tidy(wht)
-#' ggplot(wht, aes(lhs, estimate)) + geom_point()
+#'     tidy(wht)
+#'     ggplot(wht, aes(lhs, estimate)) + geom_point()
 #'
-#' CI <- confint(wht)
-#' tidy(CI)
-#' ggplot(CI, aes(lhs, estimate, ymin = lwr, ymax = upr)) +
-#'    geom_pointrange()
+#'     CI <- confint(wht)
+#'     tidy(CI)
+#'     ggplot(CI, aes(lhs, estimate, ymin = lwr, ymax = upr)) +
+#'        geom_pointrange()
 #'
-#' tidy(summary(wht))
-#' ggplot(mapping = aes(lhs, estimate)) +
-#'    geom_linerange(aes(ymin = lwr, ymax = upr), data = CI) +
-#'    geom_point(aes(size = p), data = summary(wht)) +
-#'    scale_size(trans = "reverse")
+#'     tidy(summary(wht))
+#'     ggplot(mapping = aes(lhs, estimate)) +
+#'        geom_linerange(aes(ymin = lwr, ymax = upr), data = CI) +
+#'        geom_point(aes(size = p), data = summary(wht)) +
+#'        scale_size(trans = "reverse")
 #'
-#' cld <- cld(wht)
-#' tidy(cld)
+#'     cld <- cld(wht)
+#'     tidy(cld)
 #' }
 NULL
 
 #' @method tidy glht
-#' @rdname tidy-multcomp
+#' @rdname multcomp_tidiers
 #' @export
 tidy.glht <- function(x, ...) {
     unrowname(data.frame(
@@ -46,7 +46,7 @@ tidy.glht <- function(x, ...) {
         stringsAsFactors = FALSE))
 }
 
-#' @rdname tidy-multcomp
+#' @rdname multcomp_tidiers
 #' @method tidy confint.glht
 #' @export
 tidy.confint.glht <- function(x, ...) {
@@ -62,7 +62,7 @@ tidy.confint.glht <- function(x, ...) {
 }
 
 #' @method tidy summary.glht
-#' @rdname tidy-multcomp
+#' @rdname multcomp_tidiers
 #' @export
 tidy.summary.glht <- function(x, ...) {
     coef <- as.data.frame(
@@ -79,7 +79,7 @@ tidy.summary.glht <- function(x, ...) {
 
 
 #' @method tidy cld
-#' @rdname tidy-multcomp
+#' @rdname multcomp_tidiers
 #' @export
 tidy.cld <- function(x, ...) {
     unrowname(data.frame(

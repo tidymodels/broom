@@ -12,13 +12,14 @@ finish_glance(ret, x)
 \item{x}{the prediction model}
 }
 \value{
-a data frame with additional columns added. If the original data
-contained rownames, these become a column called \code{.rownames}. Other
-columns that are added include:
-  \item{.fitted}{Predicted values}
-  \item{.resid}{Residuals}
+a one-row data frame with additional columns added, such as
+  \item{logLik}{log likelihoods}
+  \item{AIC}{Akaike Information Criterion}
+  \item{BIC}{Bayesian Information Criterion}
+  \item{deviance}{deviance}
+  \item{df.residual}{residual degrees of freedom}
 
-Also included
+Each of these are produced by the corresponding generics
 }
 \description{
 A helper function for several functions in the glance generic. Methods
@@ -26,5 +27,10 @@ such as logLik, AIC, and BIC are defined for many prediction
 objects, such as lm, glm, and nls. This is a helper function that adds
 them to a glance data.frame can be performed. If any of them cannot be
 computed, it fails quietly.
+}
+\details{
+In one special case, deviance for objects of the
+\code{lmerMod} class from lme4 is computed with
+\code{deviance(x, REML=FALSE)}
 }
 

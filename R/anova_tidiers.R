@@ -15,11 +15,19 @@
 #'   \item{statistic}{F statistic}
 #'   \item{p.value}{P-value from F test}
 #' 
-#' @name anova-tidiers
+#' @examples
+#' 
+#' a <- anova(lm(mpg ~ wt + qsec + disp, mtcars))
+#' tidy(a)
+#' 
+#' a <- aov(mpg ~ wt + qsec + disp, mtcars)
+#' tidy(a)
+#' 
+#' @name anova_tidiers
 NULL
 
 
-#' @rdname anova-tidiers
+#' @rdname anova_tidiers
 #' @export
 tidy.anova <- function(x, ...) {
     nn <- c("df", "sumsq", "meansq", "statistic", "p.value")
@@ -27,7 +35,7 @@ tidy.anova <- function(x, ...) {
 }
 
 
-#' @rdname anova-tidiers
+#' @rdname anova_tidiers
 #' @export
 tidy.aov <- function(x, ...) {
     nn <- c("df", "sumsq", "meansq", "statistic", "p.value")
