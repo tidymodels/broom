@@ -15,7 +15,9 @@
 augment <- function(x, data, ...) UseMethod("augment")
 
 #' @export
-augment.data.frame <- function(x, data, ...) x
+augment.data.frame <- function(x, data, ...) {
+    stop(paste("augment's first argument should be a model, not a data.frame"))
+}
 
 #' @export
 augment.NULL <- function(x, data, ...) NULL
