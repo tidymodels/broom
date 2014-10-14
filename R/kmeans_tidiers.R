@@ -29,7 +29,7 @@
 #'  do(data.frame(x1=rnorm(.$size[1], .$x1[1]),
 #'                x2=rnorm(.$size[1], .$x2[1])))
 #'
-#' k <- kmeans(points[, 2:3], 3)
+#' k <- kmeans(points %>% dplyr::select(x1, x2), 3)
 #' tidy(k)
 #' head(augment(k, points))
 #' glance(k)

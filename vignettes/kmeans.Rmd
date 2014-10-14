@@ -32,7 +32,7 @@ ggplot(points, aes(x1, x2, color=cluster)) + geom_point()
 This is an ideal case for k-means clustering. Let's examine what the built-in `kmeans` function returns.
 
 ```{r}
-points.matrix <- as.matrix(points[c("x1", "x2")])
+points.matrix <- cbind(x1 = points$x1, x2 = points$x2)
 kclust <- kmeans(points.matrix, 3)
 kclust
 summary(kclust)
