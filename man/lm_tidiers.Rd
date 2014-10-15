@@ -49,13 +49,13 @@ with seven columns added to the original data:
     corresponding observation is dropped from model}
   \item{.cooksd}{Cooks distance, \code{\link{cooks.distance}}}
   \item{.fitted}{Fitted values of model}
-  \item{.se.fit}{Standard erros of fitted values}
+  \item{.se.fit}{Standard errors of fitted values}
   \item{.resid}{Residuals}
   \item{.stdresid}{Standardised residuals}
 When \code{newdata} is supplied  \code{augment.lm} returns one row for each observation,
 with two columns added to the new data:
   \item{.fitted}{Fitted values of model}
-  \item{.se.fit}{Standard erros of fitted values}
+  \item{.se.fit}{Standard errors of fitted values}
 
 \code{glance.lm} returns a one-row data.frame with the columns
   \item{r.squared}{The percent of variance explained by the model}
