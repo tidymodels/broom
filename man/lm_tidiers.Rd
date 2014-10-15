@@ -9,7 +9,7 @@
 \method{tidy}{lm}(x, conf.int = FALSE, conf.level = 0.95,
   exponentiate = FALSE, ...)
 
-\method{augment}{lm}(x, data = x$model, ...)
+\method{augment}{lm}(x, data = x$model, newdata = NULL, ...)
 
 \method{glance}{lm}(x, ...)
 }
@@ -42,15 +42,20 @@ The structure depends on the method chosen.
 If \code{cont.int=TRUE}, it also includes columns for \code{conf.low} and
 \code{conf.high}, computed with \code{\link{confint}}.
 
-\code{augment.lm} returns one row for each observation,
-with six columns added to the original data:
+When \code{newdata} is not supplied \code{augment.lm} returns one row for each observation,
+with seven columns added to the original data:
   \item{.hat}{Diagonal of the hat matrix}
   \item{.sigma}{Estimate of residual standard deviation when
     corresponding observation is dropped from model}
   \item{.cooksd}{Cooks distance, \code{\link{cooks.distance}}}
   \item{.fitted}{Fitted values of model}
+  \item{.se.fit}{Standard erros of fitted values}
   \item{.resid}{Residuals}
   \item{.stdresid}{Standardised residuals}
+When \code{newdata} is supplied  \code{augment.lm} returns one row for each observation,
+with two columns added to the new data:
+  \item{.fitted}{Fitted values of model}
+  \item{.se.fit}{Standard erros of fitted values}
 
 \code{glance.lm} returns a one-row data.frame with the columns
   \item{r.squared}{The percent of variance explained by the model}
