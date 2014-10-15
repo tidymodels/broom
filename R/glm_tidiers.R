@@ -92,10 +92,10 @@ augment.glm <- function(x, data = x$model, newdata= NULL, ...) {
     data <- merge(data, infl, by=".rownames", all.x=TRUE)    
     return(data)
   } else {
-    prediction <- predict(x, se.fit=TRUE, type = "link")
+    prediction <- predict(x, newdata, se.fit=TRUE, type = "link")
     newdata$.fitted.link <- prediction$fit
     newdata$.se.fit.link <- prediction$se.fit
-    prediction <- predict(x, se.fit=TRUE, type = "response")
+    prediction <- predict(x, newdata, se.fit=TRUE, type = "response")
     newdata$.fitted.response <- prediction$fit
     newdata$.se.fit.response <- prediction$se.fit
     return(newdata)
