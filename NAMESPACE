@@ -3,6 +3,7 @@
 S3method(augment,"NULL")
 S3method(augment,data.frame)
 S3method(augment,default)
+S3method(augment,glm)
 S3method(augment,kmeans)
 S3method(augment,lm)
 S3method(augment,merMod)
