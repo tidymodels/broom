@@ -134,9 +134,6 @@ tidy.lm <- function(x, conf.int=FALSE, conf.level=.95,
 
 #' @rdname lm_tidiers
 #' 
-#' @param ... extra arguments: if \code{newdata} is given, these are passed on
-#' to \code{predict} (for example, \code{type = "response"} for GLMs)
-#' 
 #' @details Code and documentation for \code{augment.lm} originated in the
 #' ggplot2 package, where it was called \code{fortify.lm}
 #' 
@@ -176,6 +173,13 @@ augment.lm <- function(x, data = x$model, newdata= NULL, ...) {
         infl$.fitted <- prediction$fit
         infl$.se.fit <- prediction$se.fit
 
+        # for a glm, add fitted and .se.fit when type = "response"
+        if (inherits(x, "glm")) {
+            prediction_response <- predict(x, se.fit = TRUE, type = "response")
+            infl$.fitted.response <- prediction_response$fit
+            infl$.se.fit.response <- prediction_response$se.fit
+        }
+        
         infl$.cooksd <- cooks.distance(x)
         infl$.stdresid <- rstandard(x)
       
@@ -183,12 +187,19 @@ augment.lm <- function(x, data = x$model, newdata= NULL, ...) {
         return(data)
     } else {
         newdata <- fix_data_frame(newdata, newcol = ".rownames")
-        prediction <- predict(x, newdata, se.fit = TRUE, ...)
+        prediction <- predict(x, newdata, se.fit = TRUE)
         y <- eval(x$call$formula[[2]], envir = newdata)
 
         newdata$.fitted <- prediction$fit
         newdata$.resid <- y - prediction$fit
         newdata$.se.fit <- prediction$se.fit
+
+        if (inherits(x, "glm")) {
+            prediction_response <- predict(x, newdata, se.fit = TRUE, type = "response")
+            newdata$.fitted.response <- prediction_response$fit
+            newdata$.se.fit.response <- prediction_response$se.fit
+        }
+
         return(newdata)
     }
 }
@@ -196,6 +207,8 @@ augment.lm <- function(x, data = x$model, newdata= NULL, ...) {
 
 
 #' @rdname lm_tidiers
+#' 
+#' @param ... extra arguments (not used)
 #' 
 #' @return \code{glance.lm} returns a one-row data.frame with the columns
 #'   \item{r.squared}{The percent of variance explained by the model}

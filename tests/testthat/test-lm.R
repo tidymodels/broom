@@ -43,6 +43,22 @@ test_that("augment works on lm fits with NAs", {
         expect_equal(nrow(au), sum(complete.cases(dNAs)))
     
         au <- augment(fitNAs, dNAs)
-        expect_equal(nrow(au), nrow(dNAs))
+        check_augment(au, dNAs)
     }
+})
+
+glmfit <- glm(am ~ wt, mtcars, family="binomial")
+
+test_that("augment works on glm fits", {
+    au <- augment(glmfit)    
+    check_augment(au, mtcars, exp.names = c(".fitted.response",
+                                            ".se.fit.response"))
+})
+
+test_that("augment works on glm fits with new data", {
+    newdata <- head(mtcars)
+    newdata$wt <- newdata$wt + 1
+
+    au <- augment(glmfit, newdata = newdata)
+    check_augment(au, newdata, exp.names = c(".fitted.response", ".se.fit.response"))
 })
