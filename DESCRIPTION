@@ -21,6 +21,7 @@ Imports:
     tidyr
 Suggests:
     knitr,
+    Lahman,
     MASS,
     sp,
     maps,

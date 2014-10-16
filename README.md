@@ -20,7 +20,7 @@ You can install the broom package using [devtools](https://github.com/hadley/dev
 
 ```
 library(devtools)
-install_github("broom", "dgrtwo")
+install_github("dgrtwo/broom")
 ```
 
 For additional documentation, please browse the vignettes:
