@@ -29,23 +29,6 @@ tidy.NULL <- function(x, ...) {
 }
 
 
-#' tidy on a data frame
-#' 
-#' tidy on a data frame input returns the same object. There is probably
-#' never a reason to do this, unless a function may return a data
-#' frame and may return an untidy output.
-#' 
-#' @param x A data.frame
-#' @param ... extra arguments (not used)
-#' 
-#' @return The same object given to the function
-#' 
-#' @export
-tidy.data.frame <- function(x, ...) {
-    x
-}
-
-
 #' Default tidying method
 #' 
 #' By default, tidy uses \code{as.data.frame} to convert its output. This is 

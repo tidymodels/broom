@@ -9,15 +9,6 @@
 glance <- function(x, ...) UseMethod("glance")
 
 #' @export
-glance.data.frame <- function(x, ...) {
-    if (nrow(x) > 1) {
-        stop(paste("Can't construct a glance of a data frame with more than",
-             "one row"))
-    }
-    x
-}
-
-#' @export
 glance.NULL <- function(x, ...) NULL
 
 #' @export
