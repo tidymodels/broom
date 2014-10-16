@@ -5,6 +5,7 @@ Version: 0.2.7
 Date: 2014-09-11
 Authors@R: as.person(c(
     "David Robinson <admiral.david@gmail.com> [aut, cre]",
+    "Boris Demeshev <boris.demeshev@gmail.com> [ctb]",
     "Hadley Wickham <hadley@rstudio.com> [ctb]"
     ))
 Description: Convert statistical analysis objects from R into tidy format,

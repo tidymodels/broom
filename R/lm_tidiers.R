@@ -16,6 +16,7 @@
 #' 
 #' @param x lm object
 #' @param data Original data, defaults to the extracting it from the model
+#' @param newdata If provided, performs predictions on the new data
 #'
 #' @examples
 #'
@@ -28,11 +29,17 @@
 #' glance(mod)
 #' 
 #' # coefficient plot
-#' d <- mutate(tidy(mod), low = estimate - stderror, high = estimate + stderror)
-#' # TODO
+#' d <- tidy(mod) %>% mutate(low = estimate - stderror,
+#'                           high = estimate + stderror)
+#' ggplot(d, aes(estimate, term, xmin = low, xmax = high, height = 0)) +
+#'      geom_point() + geom_vline() + geom_errorbarh()
 #' 
 #' head(augment(mod))
 #' head(augment(mod, mtcars))
+#' 
+#' # predict on new data
+#' newdata <- mtcars %>% head(6) %>% mutate(wt = wt + 1)
+#' augment(mod, newdata = newdata)
 #'
 #' plot(mod, which = 1)
 #' qplot(.fitted, .resid, data = mod) +
@@ -127,46 +134,68 @@ tidy.lm <- function(x, conf.int=FALSE, conf.level=.95,
 
 #' @rdname lm_tidiers
 #' 
+#' @param ... extra arguments: if \code{newdata} is given, these are passed on
+#' to \code{predict} (for example, \code{type = "response"} for GLMs)
+#' 
 #' @details Code and documentation for \code{augment.lm} originated in the
 #' ggplot2 package, where it was called \code{fortify.lm}
 #' 
-#' @return \code{augment.lm} returns one row for each observation,
-#' with six columns added to the original data:
+#' @return When \code{newdata} is not supplied \code{augment.lm} returns
+#' one row for each observation, with seven columns added to the original
+#' data:
 #'   \item{.hat}{Diagonal of the hat matrix}
 #'   \item{.sigma}{Estimate of residual standard deviation when
 #'     corresponding observation is dropped from model}
 #'   \item{.cooksd}{Cooks distance, \code{\link{cooks.distance}}}
 #'   \item{.fitted}{Fitted values of model}
+#'   \item{.se.fit}{Standard errors of fitted values}
 #'   \item{.resid}{Residuals}
 #'   \item{.stdresid}{Standardised residuals}
-#'
+#' When \code{newdata} is supplied  \code{augment.lm} returns one row for each
+#' observation, with two columns added to the new data:
+#'   \item{.fitted}{Fitted values of model}
+#'   \item{.resid}{Residuals of fitted values on the new data}
+#'   \item{.se.fit}{Standard errors of fitted values}
+#'   
 #' @export
-augment.lm <- function(x, data = x$model, ...) {
+augment.lm <- function(x, data = x$model, newdata= NULL, ...) {
     # move rownames if necessary
     # here we need rownames to match the observations in the case of missing data (!)
-    data$.rownames <- rownames(data) 
-    
-    infl <- influence(x, do.coef = FALSE)
-    infl <- as.data.frame(infl)
-    infl$.rownames <- rownames(infl)
+    if (is.null(newdata)) {
+        data$.rownames <- rownames(data) 
+      
+        infl <- influence(x, do.coef = FALSE)
+        infl <- as.data.frame(infl)
+        infl$.rownames <- rownames(infl)
+      
+        infl <- select(infl, .hat=hat, .sigma=sigma, .rownames)
+      
+        infl$.resid <- resid(x)
+      
+        prediction <- predict(x, se.fit=TRUE)
+        infl$.fitted <- prediction$fit
+        infl$.se.fit <- prediction$se.fit
 
-    infl <- select(infl, .hat=hat, .sigma=sigma, .rownames)
-    
-    infl$.resid <- resid(x)
-    infl$.fitted <- predict(x)
-    infl$.cooksd <- cooks.distance(x)
-    infl$.stdresid <- rstandard(x)
-    
-    data <- merge(data, infl, by=".rownames", all.x=TRUE)
-    
-    data
+        infl$.cooksd <- cooks.distance(x)
+        infl$.stdresid <- rstandard(x)
+      
+        data <- merge(data, infl, by=".rownames", all.x=TRUE)    
+        return(data)
+    } else {
+        newdata <- fix_data_frame(newdata, newcol = ".rownames")
+        prediction <- predict(x, newdata, se.fit = TRUE, ...)
+        y <- eval(x$call$formula[[2]], envir = newdata)
+
+        newdata$.fitted <- prediction$fit
+        newdata$.resid <- y - prediction$fit
+        newdata$.se.fit <- prediction$se.fit
+        return(newdata)
+    }
 }
 
 
 
 #' @rdname lm_tidiers
-#' 
-#' @param ... extra arguments, not used
 #' 
 #' @return \code{glance.lm} returns a one-row data.frame with the columns
 #'   \item{r.squared}{The percent of variance explained by the model}

@@ -8,7 +8,7 @@
 \usage{
 \method{tidy}{nls}(x, conf.int = FALSE, conf.level = 0.95, ...)
 
-\method{augment}{nls}(x, data = NULL, ...)
+\method{augment}{nls}(x, data = NULL, newdata = NULL, ...)
 
 \method{glance}{nls}(x, ...)
 }
@@ -24,6 +24,8 @@
 
 \item{data}{original data this was fitted on; if not given this will
 attempt to be reconstructed from nls (may not be successful)}
+
+\item{newdata}{new data frame to use for predictions}
 }
 \value{
 All tidying methods return a \code{data.frame} without rownames.
@@ -41,6 +43,9 @@ with five columns:
 with two columns added:
   \item{.fitted}{Fitted values of model}
   \item{.resid}{Residuals}
+
+If \code{newdata} is provided, these are computed on based on predictions
+of the new data.
 
 \code{glance} returns one row with the columns
   \item{sigma}{the square root of the estimated residual variance}
@@ -66,6 +71,11 @@ glance(n)
 
 library(ggplot2)
 ggplot(augment(n), aes(wt, mpg)) + geom_point() + geom_line(aes(y = .fitted))
+
+# augment on new data
+newdata <- head(mtcars)
+newdata$wt <- newdata$wt + 1
+augment(n, newdata = newdata)
 }
 \seealso{
 \code{\link{nls}} and \code{\link{summary.nls}}
