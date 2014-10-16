@@ -24,8 +24,7 @@
 \item{exponentiate}{whether to exponentiate the coefficient estimates
 and confidence intervals (typical for logistic regression)}
 
-\item{...}{extra arguments: if \code{newdata} is given, these are passed on
-to \code{predict} (for example, \code{type = "response"} for GLMs)}
+\item{...}{extra arguments (not used)}
 
 \item{data}{Original data, defaults to the extracting it from the model}
 
