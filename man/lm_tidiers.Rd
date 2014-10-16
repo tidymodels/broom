@@ -55,11 +55,18 @@ data:
   \item{.se.fit}{Standard errors of fitted values}
   \item{.resid}{Residuals}
   \item{.stdresid}{Standardised residuals}
+
 When \code{newdata} is supplied  \code{augment.lm} returns one row for each
 observation, with two columns added to the new data:
   \item{.fitted}{Fitted values of model}
   \item{.resid}{Residuals of fitted values on the new data}
   \item{.se.fit}{Standard errors of fitted values}
+
+If the object is a \code{"glm"}, two additional columns are added (whether
+\code{newdata} is provided or not):
+  \item{.fitted.response}{Fitted values transformed to be on the scale of
+  the response}
+  \item{.se.fit.response}{Standard errors of the fit on the response scale}
 
 \code{glance.lm} returns a one-row data.frame with the columns
   \item{r.squared}{The percent of variance explained by the model}
