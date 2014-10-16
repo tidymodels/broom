@@ -24,9 +24,12 @@
 \item{exponentiate}{whether to exponentiate the coefficient estimates
 and confidence intervals (typical for logistic regression)}
 
-\item{...}{extra arguments, not used}
+\item{...}{extra arguments: if \code{newdata} is given, these are passed on
+to \code{predict} (for example, \code{type = "response"} for GLMs)}
 
 \item{data}{Original data, defaults to the extracting it from the model}
+
+\item{newdata}{If provided, performs predictions on the new data}
 }
 \value{
 All tidying methods return a \code{data.frame} without rownames.
@@ -42,8 +45,9 @@ The structure depends on the method chosen.
 If \code{cont.int=TRUE}, it also includes columns for \code{conf.low} and
 \code{conf.high}, computed with \code{\link{confint}}.
 
-When \code{newdata} is not supplied \code{augment.lm} returns one row for each observation,
-with seven columns added to the original data:
+When \code{newdata} is not supplied \code{augment.lm} returns
+one row for each observation, with seven columns added to the original
+data:
   \item{.hat}{Diagonal of the hat matrix}
   \item{.sigma}{Estimate of residual standard deviation when
     corresponding observation is dropped from model}
@@ -52,9 +56,10 @@ with seven columns added to the original data:
   \item{.se.fit}{Standard errors of fitted values}
   \item{.resid}{Residuals}
   \item{.stdresid}{Standardised residuals}
-When \code{newdata} is supplied  \code{augment.lm} returns one row for each observation,
-with two columns added to the new data:
+When \code{newdata} is supplied  \code{augment.lm} returns one row for each
+observation, with two columns added to the new data:
   \item{.fitted}{Fitted values of model}
+  \item{.resid}{Residuals of fitted values on the new data}
   \item{.se.fit}{Standard errors of fitted values}
 
 \code{glance.lm} returns a one-row data.frame with the columns
@@ -96,11 +101,17 @@ tidy(mod)
 glance(mod)
 
 # coefficient plot
-d <- mutate(tidy(mod), low = estimate - stderror, high = estimate + stderror)
-# TODO
+d <- tidy(mod) \%>\% mutate(low = estimate - stderror,
+                          high = estimate + stderror)
+ggplot(d, aes(estimate, term, xmin = low, xmax = high, height = 0)) +
+     geom_point() + geom_vline() + geom_errorbarh()
 
 head(augment(mod))
 head(augment(mod, mtcars))
+
+# predict on new data
+newdata <- mtcars \%>\% head(6) \%>\% mutate(wt = wt + 1)
+augment(mod, newdata = newdata)
 
 plot(mod, which = 1)
 qplot(.fitted, .resid, data = mod) +

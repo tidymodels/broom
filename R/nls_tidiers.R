@@ -24,6 +24,11 @@
 #' library(ggplot2)
 #' ggplot(augment(n), aes(wt, mpg)) + geom_point() + geom_line(aes(y = .fitted))
 #' 
+#' # augment on new data
+#' newdata <- head(mtcars)
+#' newdata$wt <- newdata$wt + 1
+#' augment(n, newdata = newdata)
+#' 
 #' @name nls_tidiers
 NULL
 
@@ -62,13 +67,29 @@ tidy.nls <- function(x, conf.int=FALSE, conf.level=.95, ...) {
 
 #' @rdname nls_tidiers
 #' 
+#' @param newdata new data frame to use for predictions
+#' 
 #' @return \code{augment} returns one row for each original observation,
 #' with two columns added:
 #'   \item{.fitted}{Fitted values of model}
 #'   \item{.resid}{Residuals}
 #' 
+#' If \code{newdata} is provided, these are computed on based on predictions
+#' of the new data.
+#' 
 #' @export
-augment.nls <- function(x, data=NULL, ...) {
+augment.nls <- function(x, data = NULL, newdata = NULL, ...) {
+    if (!is.null(newdata)) {
+        # use predictions on new data
+        newdata <- fix_data_frame(newdata, newcol = ".rownames")
+        y <- eval(x$m$formula()[[2]], envir = newdata)
+        predictions <- predict(x, newdata)
+
+        newdata$.fitted <- predictions
+        newdata$.resid <- y - predictions
+        return(newdata)
+    }
+
     if (is.null(data)) {
         pars <- names(x$m$getPars())
         env <- as.list(x$m$getEnv())
@@ -76,7 +97,7 @@ augment.nls <- function(x, data=NULL, ...) {
     }
 
     # move rownames if necessary
-    data <- fix_data_frame(data, newcol=".rownames")
+    data <- fix_data_frame(data, newcol = ".rownames")
     
     data$.fitted <- predict(x)
     data$.resid <- resid(x)
