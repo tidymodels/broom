@@ -30,7 +30,7 @@ This package provides three S3 methods that do three distinct kinds of tidying.
 
 * `tidy`: constructs a data frame that summarizes the model's statistical findings. This includes coefficients and p-values for each term in a regression, per-cluster information in clustering applications, or per-test information for `multtest` functions.
 * `augment`: add columns to the original data that was modeled. This includes predictions, residuals, and cluster assignments.
-* `glance`: construct a concise *one-row* summary of the model. This typically contains values such as $R^2$, adjusted $R^2$, and residual standard error that are computed once for the entire model.
+* `glance`: construct a concise *one-row* summary of the model. This typically contains values such as R^2, adjusted R^2, and residual standard error that are computed once for the entire model.
 
 Note that some classes may have only one or two of these methods defined.
 
@@ -61,7 +61,7 @@ head(augment(lmfit))
 
 Note that each of the new columns begins with a `.` (to avoid overwriting any of the original columns).
 
-Finally, several summary statistics are computed for the entire regression, such as $R^2$ and the F-statistic. These can be accessed with the `glance` function:
+Finally, several summary statistics are computed for the entire regression, such as R^2 and the F-statistic. These can be accessed with the `glance` function:
 
 ```{r}
 glance(lmfit)
@@ -83,7 +83,7 @@ head(augment(glmfit))
 glance(glmfit)
 ```
 
-Note that the statistics computed by `glance` are different for `glm` objects than for `lm` (e.g. deviance rather than $R^2$):
+Note that the statistics computed by `glance` are different for `glm` objects than for `lm` (e.g. deviance rather than R^2):
 
 These functions also work on other fits, such as nonlinear models (`nls`):
 
@@ -161,5 +161,5 @@ In order to maintain consistency, we attempt to follow some conventions regardin
 * We avoid including arguments that were *given* to the modeling function. For example, a `glm` glance output does not need to contain a field for `family`, since that is decided by the user calling `glm` rather than the modeling function itself.
 * Common column names include:
     * `r.squared` the fraction of variance explained by the model
-    * `adj.r.squared` $R^2$ adjusted based on the degrees of freedom
+    * `adj.r.squared` R^2 adjusted based on the degrees of freedom
     * `sigma` the square root of the estimated variance of the residuals

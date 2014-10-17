@@ -13,6 +13,29 @@ broom should be distinguished from packages like [reshape2](http://cran.r-projec
 
 Tidying model outputs is not an exact science, and it's based on a judgment of the kinds of values a data scientist typically wants out of a tidy analysis (for instance, estimates, test statistics, and p-values). You may lose some of the information in the original object that you wanted, or keep more information than you need. If you think the tidy output for a model should be changed, or if you're missing a tidying function for an S3 class that you'd like, I strongly encourage you to [open an issue](http://github.com/dgrtwo/broom/issues) or a pull request.
 
+### Available Tidiers
+
+Currently broom provides tidying methods for many S3 objects from the built-in stats package, including
+
+* `lm`
+* `glm`
+* `htest`
+* `anova`
+* `nls`
+* `kmeans`
+* `manova`
+* `TukeyHSD`
+
+It also provides methods for S3 objects in popular third-party packages, including
+
+* `lme4`
+* `glmnet`
+* `survival`
+* `zoo`
+* `multcomp`
+* `sp`
+* `maps`
+
 Installation and Documentation
 ------------
 
@@ -36,7 +59,7 @@ This package provides three S3 methods that do three distinct kinds of tidying.
 
 * `tidy`: constructs a data frame that summarizes the model's statistical findings. This includes coefficients and p-values for each term in a regression, per-cluster information in clustering applications, or per-test information for `multtest` functions.
 * `augment`: add columns to the original data that was modeled. This includes predictions, residuals, and cluster assignments.
-* `glance`: construct a concise *one-row* summary of the model. This typically contains values such as $R^2$, adjusted $R^2$, and residual standard error that are computed once for the entire model.
+* `glance`: construct a concise *one-row* summary of the model. This typically contains values such as R^2, adjusted R^2, and residual standard error that are computed once for the entire model.
 
 Note that some classes may have only one or two of these methods defined.
 
@@ -127,7 +150,7 @@ head(augment(lmfit))
 
 Note that each of the new columns begins with a `.` (to avoid overwriting any of the original columns).
 
-Finally, several summary statistics are computed for the entire regression, such as $R^2$ and the F-statistic. These can be accessed with the `glance` function:
+Finally, several summary statistics are computed for the entire regression, such as R^2 and the F-statistic. These can be accessed with the `glance` function:
 
 
 ```r
@@ -190,7 +213,7 @@ glance(glmfit)
 ## 1 23.18    19.18         43.23          30      31
 ```
 
-Note that the statistics computed by `glance` are different for `glm` objects than for `lm` (e.g. deviance rather than $R^2$):
+Note that the statistics computed by `glance` are different for `glm` objects than for `lm` (e.g. deviance rather than R^2):
 
 These functions also work on other fits, such as nonlinear models (`nls`):
 
@@ -309,7 +332,7 @@ In order to maintain consistency, we attempt to follow some conventions regardin
     * `term`"" the term in a regression or model that is being estimated.
     * `p.value`: this spelling was chosen (over common alternatives such as `pvalue`, `PValue`, or `pval`) to be consistent with functions in R's built-in `stats` package
     * `statistic` a test statistic, usually the one used to compute the p-value. Combining these across many sub-groups is a reliable way to perform (e.g.) bootstrap hypothesis testing
-    * `estimate`
+    * `estimate` estimate of an effect size, slope, or other value
     * `conf.low` the low end of a confidence interval on the `estimate`
     * `conf.high` the high end of a confidence interval on the `estimate`
     * `df` degrees of freedom
@@ -333,5 +356,5 @@ In order to maintain consistency, we attempt to follow some conventions regardin
 * We avoid including arguments that were *given* to the modeling function. For example, a `glm` glance output does not need to contain a field for `family`, since that is decided by the user calling `glm` rather than the modeling function itself.
 * Common column names include:
     * `r.squared` the fraction of variance explained by the model
-    * `adj.r.squared` $R^2$ adjusted based on the degrees of freedom
+    * `adj.r.squared` R^2 adjusted based on the degrees of freedom
     * `sigma` the square root of the estimated variance of the residuals

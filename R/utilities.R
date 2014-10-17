@@ -53,6 +53,48 @@ insert_NAs <- function(x, original) {
 }
 
 
+#' add predictions, fitted values, residuals, and other common outputs from
+#' an augment call
+#' 
+#' In the case that a generic is not implemented for the model, fail quietly.
+#' 
+#' @param x a model
+#' @param newdata new data to predict on, optional
+#' @param type Type of prediction and residuals to compute
+#' @param type.predict Type of prediction to compute; by default
+#' same as \code{type}
+#' @param type.residuals Type of residuals to compute; by default
+#' same as \code{type}
+#' @param ... extra arguments (not used)
+#' 
+#' @export
+augment_columns <- function(x, newdata, type, type.predict = type,
+                            type.residuals = type, ...) {
+    if (!missing(type.predict)) {
+        pred <- predict(x, newdata, type = type.predict, se.fit = TRUE, ...)
+    } else {
+        pred <- predict(x, newdata, se.fit = TRUE, ...)        
+    }
+    if (is.list(pred)) {
+        ret <- data.frame(.fitted = pred$fit)
+        ret$.se.fit <- pred$se.fit
+    } else {
+        ret <- data.frame(.fitted = pred)
+    }
+    
+    if (missing(newdata)) {
+        if (!missing(type.residuals)) {
+            ret$.resid <- tryCatch(residuals(x, type = type.residuals),
+                                   error = function(e) NULL)
+        } else {
+            ret$.resid <- tryCatch(residuals(x), error = function(e) NULL)
+        }
+    }
+    fix_data_frame(ret, newcol = ".rownames")
+}
+
+
+
 #' Add logLik, AIC, BIC, and other common measurements to a glance of
 #' a prediction
 #' 
@@ -95,5 +137,3 @@ finish_glance <- function(ret, x) {
     
     return(ret)
 }
-
-

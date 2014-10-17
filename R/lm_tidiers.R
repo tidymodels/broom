@@ -149,11 +149,11 @@ tidy.lm <- function(x, conf.int=FALSE, conf.level=.95,
 #'   \item{.resid}{Residuals}
 #'   \item{.stdresid}{Standardised residuals}
 #' 
-#' When \code{newdata} is supplied  \code{augment.lm} returns one row for each
-#' observation, with two columns added to the new data:
+#' When \code{newdata} is supplied, \code{augment.lm} returns one row for each
+#' observation, with three columns added to the new data:
 #'   \item{.fitted}{Fitted values of model}
-#'   \item{.resid}{Residuals of fitted values on the new data}
 #'   \item{.se.fit}{Standard errors of fitted values}
+#'   \item{.resid}{Residuals of fitted values on the new data}
 #' 
 #' If the object is a \code{"glm"}, two additional columns are added (whether
 #' \code{newdata} is provided or not):
@@ -175,7 +175,6 @@ augment.lm <- function(x, data = x$model, newdata= NULL, ...) {
         infl <- select(infl, .hat=hat, .sigma=sigma, .rownames)
       
         infl$.resid <- resid(x)
-      
         prediction <- predict(x, se.fit=TRUE)
         infl$.fitted <- prediction$fit
         infl$.se.fit <- prediction$se.fit
