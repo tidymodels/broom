@@ -1,4 +1,4 @@
-#' Tidying methods for a models with multiple group fixed effects
+#' Tidying methods for models with multiple group fixed effects
 #' 
 #' These methods tidy the coefficients of a linear model with multiple group fixed effects
 #'
@@ -7,24 +7,23 @@
 #'
 #' @name felm_tidiers
 #' 
-#' @param x lm object
+#' @param x felm object
 #' @param data Original data, defaults to the extracting it from the model
-#'
-
+#' @examples
 #' N=1e2
 #' DT <- data.frame(
 #'   id = sample(5, N, TRUE),
-#'   v1 =  sample(5, N, TRUE),                          # int in range [1,5]
-#'   v2 =  sample(1e6, N, TRUE),                        # int in range [1,1e6]
-#'   v3 =  sample(round(runif(100,max=100),4), N, TRUE), # numeric e.g. 23.5749
-#'   v4 =  sample(round(runif(100,max=100),4), N, TRUE) # numeric e.g. 23.5749
+#'   v1 =  sample(5, N, TRUE),                          
+#'   v2 =  sample(1e6, N, TRUE),                        
+#'   v3 =  sample(round(runif(100,max=100),4), N, TRUE),
+#'   v4 =  sample(round(runif(100,max=100),4), N, TRUE) 
 #' )
 #' 
 #' result_felm <- felm(v2~v3, DT)
 #' tidy(result_felm)
 #' augment(result_felm)
 #' result_felm <- felm(v2~v3|id+v1, DT)
-#' tidy(result_felm)
+#' tidy(result_felm, fe = TRUE)
 #' augment(result_felm)
 #' v1<-DT$v1
 #' v2 <- DT$v2
@@ -33,6 +32,7 @@
 #' result_felm <- felm(v2~v3|id+v1)
 #' tidy(result_felm)
 #' augment(result_felm)
+#' glance(result_felm)
 NULL
 
 
@@ -41,19 +41,20 @@ NULL
 #' @param conf.int whether to include a confidence interval
 #' @param conf.level confidence level of the interval, used only if
 #' \code{conf.int=TRUE}#' 
-#' @details If \code{conf.int=TRUE}, the confidence interval is computed with
-#' the \code{\link{confint}} function.
+#' @param fe whether to include estimates of fixed effects
+#' @param fe.error whether to include standard error of fixed effects
+#' \code{conf.int=TRUE}#' 
+#' @details If \code{conf.int=TRUE}, the confidence interval is computed 
 #' 
-#' @return \code{tidy.lm} returns one row for each coefficient, with five columns:
+#' @return \code{tidy.felm} returns one row for each coefficient. If \code{fe=TRUE}, it also includes rows for for fixed effects estimates. 
+#' There are five columns:
 #'   \item{term}{The term in the linear model being estimated and tested}
 #'   \item{estimate}{The estimated coefficient}
 #'   \item{stderror}{The standard error from the linear model}
 #'   \item{statistic}{t-statistic}
 #'   \item{p.value}{two-sided p-value}
 #' 
-#' If \code{cont.int=TRUE}, it also includes columns for \code{conf.low} and
-#' \code{conf.high}, computed with \code{\link{confint}}.
-#' 
+#' If \code{cont.int=TRUE}, it also includes columns for \code{conf.low} and \code{conf.high}, computed with \code{\link{confint}}.
 #' @export
 tidy.felm <- function(x, conf.int=FALSE, conf.level=.95, fe = FALSE, fe.error = fe, ...) {
     nn <- c("estimate", "stderror", "statistic", "p.value")
@@ -71,7 +72,7 @@ tidy.felm <- function(x, conf.int=FALSE, conf.level=.95, fe = FALSE, fe.error = 
       object <- getfe(x)
       if (fe.error){
         nn <- c("estimate", "stderror", "N", "comp")
-        ret_fe <- getfe(x, se = TRUE, bN = 1000) %>%
+        ret_fe <- getfe(x, se = TRUE, bN = 100) %>%
                   select(effect, se, obs, comp) %>%
                   fix_data_frame(nn) %>%
                   mutate(statistic = estimate/stderror) %>%
@@ -101,9 +102,9 @@ tidy.felm <- function(x, conf.int=FALSE, conf.level=.95, fe = FALSE, fe.error = 
 #' @return  \code{augment.felm} returns  one row for each observation, with multiple columns added to the original data:
 #'   \item{.fitted}{Fitted values of model}
 #'   \item{.resid}{Residuals}
-#'   If fixed effect are present, 
+#'   If fixed effect are present,  
 #'   \item{.comp}{Connected component}
-#'   Columns with prefix \item{.fe_} for fixed effects
+#'   \item{.fe_}{Fixed effects (as many columns as factors)} 
 #' @export
 augment.felm <- function(x, data = NULL, ...) {
     if (is.null(data)){
@@ -178,10 +179,10 @@ glance.felm <- function(x, ...) {
     ret <- with(s, data.frame(r.squared=r2,
                               adj.r.squared=r2adj,
                               sigma = rse,
-                              statistic=fstat[1],   
+                              statistic=fstat,   
                               p.value = pval,                
-                              df=df,
-                              df.residual = rdf, 
+                              df=df[1],
+                              df.residual = rdf
                               ))
     ret
 }
