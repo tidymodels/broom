@@ -2,37 +2,39 @@
 #' 
 #' These methods tidy the coefficients of a linear model with multiple group fixed effects
 #'
-#' @return All tidying methods return a \code{data.frame} without rownames.
-#' The structure depends on the method chosen.
+#' @template boilerplate
 #'
 #' @name felm_tidiers
 #' 
 #' @param x felm object
-#' @param data Original data, defaults to the extracting it from the model
+#' @param data Original data, defaults to extracting it from the model
 #' @examples
-#' N=1e2
-#' DT <- data.frame(
-#'   id = sample(5, N, TRUE),
-#'   v1 =  sample(5, N, TRUE),                          
-#'   v2 =  sample(1e6, N, TRUE),                        
-#'   v3 =  sample(round(runif(100,max=100),4), N, TRUE),
-#'   v4 =  sample(round(runif(100,max=100),4), N, TRUE) 
-#' )
 #' 
-#' result_felm <- felm(v2~v3, DT)
-#' tidy(result_felm)
-#' augment(result_felm)
-#' result_felm <- felm(v2~v3|id+v1, DT)
-#' tidy(result_felm, fe = TRUE)
-#' augment(result_felm)
-#' v1<-DT$v1
-#' v2 <- DT$v2
-#' v3 <- DT$v3
-#' id <- DT$id
-#' result_felm <- felm(v2~v3|id+v1)
-#' tidy(result_felm)
-#' augment(result_felm)
-#' glance(result_felm)
+#' if (require("lfe", quietly = TRUE)) {
+#'     N=1e2
+#'     DT <- data.frame(
+#'       id = sample(5, N, TRUE),
+#'       v1 =  sample(5, N, TRUE),                          
+#'       v2 =  sample(1e6, N, TRUE),                        
+#'       v3 =  sample(round(runif(100,max=100),4), N, TRUE),
+#'       v4 =  sample(round(runif(100,max=100),4), N, TRUE) 
+#'     )
+#'     
+#'     result_felm <- felm(v2~v3, DT)
+#'     tidy(result_felm)
+#'     augment(result_felm)
+#'     result_felm <- felm(v2~v3|id+v1, DT)
+#'     tidy(result_felm, fe = TRUE)
+#'     augment(result_felm)
+#'     v1<-DT$v1
+#'     v2 <- DT$v2
+#'     v3 <- DT$v3
+#'     id <- DT$id
+#'     result_felm <- felm(v2~v3|id+v1)
+#'     tidy(result_felm)
+#'     augment(result_felm)
+#'     glance(result_felm)
+#' }
 NULL
 
 
@@ -40,10 +42,10 @@ NULL
 #' 
 #' @param conf.int whether to include a confidence interval
 #' @param conf.level confidence level of the interval, used only if
-#' \code{conf.int=TRUE}#' 
+#' \code{conf.int=TRUE}
 #' @param fe whether to include estimates of fixed effects
 #' @param fe.error whether to include standard error of fixed effects
-#' \code{conf.int=TRUE}#' 
+#' 
 #' @details If \code{conf.int=TRUE}, the confidence interval is computed 
 #' 
 #' @return \code{tidy.felm} returns one row for each coefficient. If \code{fe=TRUE}, it also includes rows for for fixed effects estimates. 
