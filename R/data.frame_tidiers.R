@@ -73,5 +73,9 @@ augment.data.frame <- function(x, data, ...) {
 #' @rdname data.frame_tidiers
 #' @export
 glance.data.frame <- function(x, ...) {
-    return(data.frame(nrow = nrow(x), ncol = ncol(x)))
+	ret <- data.frame(nrow = nrow(x), ncol = ncol(x))
+	nas <- is.na(x)
+	ret$na_fraction <- sum(nas) / nrow(x) / ncol(x)
+	ret$full_obs <- sum(apply(nas, 1, sum)==0)
+   return(ret)
 }
