@@ -55,16 +55,38 @@ NULL
 #' \code{conf.high}, computed with \code{\link{confint}}.
 #' 
 #' @export
-tidy.felm <- function(x, conf.int=FALSE, conf.level=.95,
-                    exponentiate=FALSE, ...) {
+tidy.felm <- function(x, conf.int=FALSE, conf.level=.95, fe = FALSE, fe.error = fe, ...) {
     nn <- c("estimate", "stderror", "statistic", "p.value")
     ret <- fix_data_frame(coef(summary(x)), nn)
     trans <- identity
+
     if (conf.int) {
         # avoid "Waiting for profiling to be done..." message
         CI <- suppressMessages(confint(x, level = conf.level))
         colnames(CI) = c("conf.low", "conf.high")
         ret <- cbind(ret, trans(unrowname(CI)))
+    }
+
+    if (fe){
+      ret <- mutate(ret, N = NA, comp = NA)
+      object <- getfe(x)
+      print(fe.error)
+      if (fe.error){
+        nn <- c("estimate", "stderror", "N", "comp")
+        ret_fe <- getfe(x) %>%
+                  btrap(x) %>%
+                  select(effect, se, obs, comp) %>%
+                  fix_data_frame(nn) %>%
+                  mutate(statistic = estimate/(stderror/sqrt(N))) %>%
+                  mutate(p.value = 2*pnorm(statistic)-1) 
+      } else{
+        nn <- c("estimate", "N", "comp")
+        ret_fe <- getfe(x) %>%
+                  select(effect, obs, comp) %>%
+                  fix_data_frame(nn)  %>% 
+                  mutate(statistic = NA, p.value = NA) 
+      }
+      ret <- rbind(ret, ret_fe)
     }
     ret$estimate <- trans(ret$estimate)
     ret
@@ -119,8 +141,8 @@ augment.felm <- function(x, data = NULL, ...) {
             }
 
           if (fe==names(x$fe)[1]){
-            ans <- select_(ans, .dots= c("effect", "comp", factor_name))
-            names(ans) <- c(paste0(".fe.",fe), ".comp", factor_name)
+            ans <- select_(ans, .dots= c("effect", "comp", "obs", factor_name))
+            names(ans) <- c(paste0(".fe.",fe), ".comp", ".obs", factor_name)
           }
           else{
             ans <- select_(ans, .dots= c("effect", factor_name))
