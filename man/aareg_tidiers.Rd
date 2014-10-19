@@ -23,7 +23,7 @@ the columns
   \item{term}{name of coefficient}
   \item{estimate}{estimate of the slope}
   \item{statistic}{test statistic for coefficient}
-  \item{stderror}{standard error of statistic}
+  \item{std.error}{standard error of statistic}
   \item{robust.se}{robust version of standard error estimate}
   \item{z}{z score}
   \item{p.value}{p-value}

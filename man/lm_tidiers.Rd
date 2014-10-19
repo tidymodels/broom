@@ -37,7 +37,7 @@ The structure depends on the method chosen.
 \code{tidy.lm} returns one row for each coefficient, with five columns:
   \item{term}{The term in the linear model being estimated and tested}
   \item{estimate}{The estimated coefficient}
-  \item{stderror}{The standard error from the linear model}
+  \item{std.error}{The standard error from the linear model}
   \item{statistic}{t-statistic}
   \item{p.value}{two-sided p-value}
 
@@ -54,7 +54,7 @@ data:
   \item{.fitted}{Fitted values of model}
   \item{.se.fit}{Standard errors of fitted values}
   \item{.resid}{Residuals}
-  \item{.stdresid}{Standardised residuals}
+  \item{.std.resid}{Standardised residuals}
 
 When \code{newdata} is supplied, \code{augment.lm} returns one row for each
 observation, with three columns added to the new data:
@@ -107,8 +107,8 @@ tidy(mod)
 glance(mod)
 
 # coefficient plot
-d <- tidy(mod) \%>\% mutate(low = estimate - stderror,
-                          high = estimate + stderror)
+d <- tidy(mod) \%>\% mutate(low = estimate - std.error,
+                          high = estimate + std.error)
 ggplot(d, aes(estimate, term, xmin = low, xmax = high, height = 0)) +
      geom_point() + geom_vline() + geom_errorbarh()
 
@@ -119,44 +119,48 @@ head(augment(mod, mtcars))
 newdata <- mtcars \%>\% head(6) \%>\% mutate(wt = wt + 1)
 augment(mod, newdata = newdata)
 
+
+au <- augment(mod, data = mtcars)
+
 plot(mod, which = 1)
-qplot(.fitted, .resid, data = mod) +
+qplot(.fitted, .resid, data = au) +
   geom_hline(yintercept = 0) +
   geom_smooth(se = FALSE)
-qplot(.fitted, .stdresid, data = mod) +
+qplot(.fitted, .std.resid, data = au) +
   geom_hline(yintercept = 0) +
   geom_smooth(se = FALSE)
-qplot(.fitted, .stdresid, data = augment(mod, mtcars),
+qplot(.fitted, .std.resid, data = au,
   colour = factor(cyl))
-qplot(mpg, .stdresid, data = augment(mod, mtcars), colour = factor(cyl))
+qplot(mpg, .std.resid, data = au, colour = factor(cyl))
 
 plot(mod, which = 2)
-qplot(sample =.stdresid, data = mod, stat = "qq") + geom_abline()
+qplot(sample =.std.resid, data = au, stat = "qq") +
+    geom_abline()
 
 plot(mod, which = 3)
-qplot(.fitted, sqrt(abs(.stdresid)), data = mod) + geom_smooth(se = FALSE)
+qplot(.fitted, sqrt(abs(.std.resid)), data = au) + geom_smooth(se = FALSE)
 
 plot(mod, which = 4)
-qplot(seq_along(.cooksd), .cooksd, data = mod, geom = "bar",
+qplot(seq_along(.cooksd), .cooksd, data = au, geom = "bar",
  stat="identity")
 
 plot(mod, which = 5)
-qplot(.hat, .stdresid, data = mod) + geom_smooth(se = FALSE)
-ggplot(mod, aes(.hat, .stdresid)) +
+qplot(.hat, .std.resid, data = au) + geom_smooth(se = FALSE)
+ggplot(au, aes(.hat, .std.resid)) +
   geom_vline(size = 2, colour = "white", xintercept = 0) +
   geom_hline(size = 2, colour = "white", yintercept = 0) +
   geom_point() + geom_smooth(se = FALSE)
 
-qplot(.hat, .stdresid, data = mod, size = .cooksd) +
+qplot(.hat, .std.resid, data = au, size = .cooksd) +
   geom_smooth(se = FALSE, size = 0.5)
 
 plot(mod, which = 6)
-ggplot(mod, aes(.hat, .cooksd)) +
+ggplot(au, aes(.hat, .cooksd)) +
   geom_vline(xintercept = 0, colour = NA) +
   geom_abline(slope = seq(0, 3, by = 0.5), colour = "white") +
   geom_smooth(se = FALSE) +
   geom_point()
-qplot(.hat, .cooksd, size = .cooksd / .hat, data = mod) + scale_size_area()
+qplot(.hat, .cooksd, size = .cooksd / .hat, data = au) + scale_size_area()
 }
 \seealso{
 \code{\link{summary.lm}}

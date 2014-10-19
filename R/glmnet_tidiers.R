@@ -163,7 +163,7 @@ glance.glmnet <- function(x, ...) {
 #'   \item{lambda}{penalty parameter lambda}
 #'   \item{estimate}{estimate (median) of mean-squared error or other
 #'   criterion}
-#'   \item{stderror}{standard error of criterion}
+#'   \item{std.error}{standard error of criterion}
 #'   \item{conf.high}{high end of confidence interval on criterion}
 #'   \item{conf.low}{low end of confidence interval on criterion}
 #'   \item{nzero}{number of parameters that are zero at this choice of lambda}
@@ -175,7 +175,7 @@ glance.glmnet <- function(x, ...) {
 tidy.cv.glmnet <- function(x, ...) {
     ret <- as.data.frame(x[c("lambda", "cvm", "cvsd", "cvup", "cvlo",
                              "nzero")])
-    colnames(ret) <- c("lambda", "estimate", "stderror", "conf.high",
+    colnames(ret) <- c("lambda", "estimate", "std.error", "conf.high",
                        "conf.low", "nzero")
     return(ret)
 }

@@ -118,7 +118,7 @@ tidy(lmfit)
 ```
 
 ```
-##          term estimate stderror statistic   p.value
+##          term estimate std.error statistic   p.value
 ## 1 (Intercept)   37.285   1.8776    19.858 8.242e-19
 ## 2          wt   -5.344   0.5591    -9.559 1.294e-10
 ```
@@ -179,7 +179,7 @@ tidy(glmfit)
 ```
 
 ```
-##          term estimate stderror statistic  p.value
+##          term estimate std.error statistic  p.value
 ## 1 (Intercept)   12.040    4.510     2.670 0.007588
 ## 2          wt   -4.024    1.436    -2.801 0.005088
 ```
@@ -225,7 +225,7 @@ tidy(nlsfit)
 ```
 
 ```
-##   term estimate stderror statistic   p.value
+##   term estimate std.error statistic   p.value
 ## 1    k   45.829    4.249    10.786 7.639e-12
 ## 2    b    4.386    1.536     2.855 7.737e-03
 ```
@@ -334,6 +334,7 @@ In order to maintain consistency, we attempt to follow some conventions regardin
     * `p.value`: this spelling was chosen (over common alternatives such as `pvalue`, `PValue`, or `pval`) to be consistent with functions in R's built-in `stats` package
     * `statistic` a test statistic, usually the one used to compute the p-value. Combining these across many sub-groups is a reliable way to perform (e.g.) bootstrap hypothesis testing
     * `estimate` estimate of an effect size, slope, or other value
+    * `std.error` standard error
     * `conf.low` the low end of a confidence interval on the `estimate`
     * `conf.high` the high end of a confidence interval on the `estimate`
     * `df` degrees of freedom

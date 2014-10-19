@@ -67,7 +67,7 @@ tidy.confint.glht <- function(x, ...) {
 tidy.summary.glht <- function(x, ...) {
     coef <- as.data.frame(
         x$test[c("coefficients", "sigma", "tstat", "pvalues")])
-    names(coef) <- c("estimate", "stderror", "statistic", "p.value")
+    names(coef) <- c("estimate", "std.error", "statistic", "p.value")
     
     unrowname(data.frame(
         lhs = rownames(coef),

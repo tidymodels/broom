@@ -35,7 +35,7 @@ on an exponential scale}
 \code{tidy} returns a data.frame with one row for each term,
 with columns
   \item{estimate}{estimate of slope}
-  \item{stderror}{standard error of estimate}
+  \item{std.error}{standard error of estimate}
   \item{statistic}{test statistic}
   \item{p.value}{p-value}
 

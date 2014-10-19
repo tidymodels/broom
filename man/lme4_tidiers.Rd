@@ -38,7 +38,7 @@ random or fixed depending on the \code{effects} parameter. If
 If \code{effects="fixed"}, \code{tidy} returns the columns
   \item{term}{gixed term being estimated}
   \item{estimate}{estimate of fixed effect}
-  \item{stderror}{standard error}
+  \item{std.error}{standard error}
   \item{statistic}{t-statistic}
   \item{p.value}{P-value computed from t-statistic (depending on the model,
   this may or may not be calculated and included)}

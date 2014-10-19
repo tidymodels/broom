@@ -54,7 +54,7 @@ NULL
 #' If \code{effects="fixed"}, \code{tidy} returns the columns
 #'   \item{term}{gixed term being estimated}
 #'   \item{estimate}{estimate of fixed effect}
-#'   \item{stderror}{standard error}
+#'   \item{std.error}{standard error}
 #'   \item{statistic}{t-statistic}
 #'   \item{p.value}{P-value computed from t-statistic (depending on the model,
 #'   this may or may not be calculated and included)}
@@ -70,7 +70,7 @@ tidy.merMod <- function(x, effects = "random", ...) {
         ret <- coef(summary(x))
 
         # p-values may or may not be included
-        nn <- c("estimate", "stderror", "statistic", "p.value")[1:ncol(ret)]
+        nn <- c("estimate", "std.error", "statistic", "p.value")[1:ncol(ret)]
         return(fix_data_frame(ret, newnames = nn, newcol = "term"))
     }
 

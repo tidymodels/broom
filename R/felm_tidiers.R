@@ -52,14 +52,14 @@ NULL
 #' There are five columns:
 #'   \item{term}{The term in the linear model being estimated and tested}
 #'   \item{estimate}{The estimated coefficient}
-#'   \item{stderror}{The standard error from the linear model}
+#'   \item{std.error}{The standard error from the linear model}
 #'   \item{statistic}{t-statistic}
 #'   \item{p.value}{two-sided p-value}
 #' 
 #' If \code{cont.int=TRUE}, it also includes columns for \code{conf.low} and \code{conf.high}, computed with \code{\link{confint}}.
 #' @export
 tidy.felm <- function(x, conf.int=FALSE, conf.level=.95, fe = FALSE, fe.error = fe, ...) {
-    nn <- c("estimate", "stderror", "statistic", "p.value")
+    nn <- c("estimate", "std.error", "statistic", "p.value")
     ret <- fix_data_frame(coef(summary(x)), nn)
 
     if (conf.int) {
@@ -73,11 +73,11 @@ tidy.felm <- function(x, conf.int=FALSE, conf.level=.95, fe = FALSE, fe.error = 
       ret <- mutate(ret, N = NA, comp = NA)
       object <- getfe(x)
       if (fe.error){
-        nn <- c("estimate", "stderror", "N", "comp")
+        nn <- c("estimate", "std.error", "N", "comp")
         ret_fe <- getfe(x, se = TRUE, bN = 100) %>%
                   select(effect, se, obs, comp) %>%
                   fix_data_frame(nn) %>%
-                  mutate(statistic = estimate/stderror) %>%
+                  mutate(statistic = estimate/std.error) %>%
                   mutate(p.value = 2*(1-pt(statistic, df = N))) 
       } else{
         nn <- c("estimate", "N", "comp")
@@ -88,8 +88,8 @@ tidy.felm <- function(x, conf.int=FALSE, conf.level=.95, fe = FALSE, fe.error = 
       }
       if (conf.int){
         ret_fe <- ret_fe %>%
-                  mutate(conf.low=estimate-qnorm(1-(1-conf.level)/2)*stderror,
-                         conf.high=estimate+qnorm(1-(1-conf.level)/2)*stderror
+                  mutate(conf.low=estimate-qnorm(1-(1-conf.level)/2)*std.error,
+                         conf.high=estimate+qnorm(1-(1-conf.level)/2)*std.error
                          )
       }
       ret <- rbind(ret, ret_fe)

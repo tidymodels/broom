@@ -38,14 +38,14 @@
 #'   \item{term}{name of coefficient}
 #'   \item{estimate}{estimate of the slope}
 #'   \item{statistic}{test statistic for coefficient}
-#'   \item{stderror}{standard error of statistic}
+#'   \item{std.error}{standard error of statistic}
 #'   \item{robust.se}{robust version of standard error estimate}
 #'   \item{z}{z score}
 #'   \item{p.value}{p-value}
 #' 
 #' @export
 tidy.aareg <- function(x, ...) {
-    nn <- c("estimate", "statistic", "stderror", "robust.se", "statistic.z",
+    nn <- c("estimate", "statistic", "std.error", "robust.se", "statistic.z",
             "p.value")
     fix_data_frame(summary(x)$table, nn)
 }
@@ -136,7 +136,7 @@ glance.aareg <- function(x, ...) {
 tidy.cch <- function(x, conf.level = .95, ...) {
     s <- summary(x)
     co <- coefficients(s)
-    ret <- fix_data_frame(co, newnames = c("estimate", "stderror", "statistic", "p.value"))
+    ret <- fix_data_frame(co, newnames = c("estimate", "std.error", "statistic", "p.value"))
     
     # add confidence interval
     CI <- unrowname(confint(x, level = conf.level))
@@ -221,7 +221,7 @@ glance.cch <- function(x, ...) {
 #' @return \code{tidy} returns a data.frame with one row for each term,
 #' with columns
 #'   \item{estimate}{estimate of slope}
-#'   \item{stderror}{standard error of estimate}
+#'   \item{std.error}{standard error of estimate}
 #'   \item{statistic}{test statistic}
 #'   \item{p.value}{p-value}
 #' 
@@ -230,7 +230,7 @@ tidy.coxph <- function(x, exponentiate = FALSE, conf.int = .95, ...) {
     s <- summary(x, conf.int = conf.int)
     co <- coef(s)
 
-    nn <- c("estimate", "stderror", "statistic", "p.value")
+    nn <- c("estimate", "std.error", "statistic", "p.value")
     ret <- fix_data_frame(co[, -2], nn)
     
     if (exponentiate) {
@@ -290,7 +290,7 @@ glance.coxph <- function(x, ...) {
                 r.squared = s$rsq[1],
                 r.squared.max = s$rsq[2],
                 concordance = s$concordance[1],
-                stderror.concordance = s$concordance[2])
+                std.error.concordance = s$concordance[2])
     ret <- as.data.frame(compact(ret))
     finish_glance(ret, x)
 }
@@ -368,7 +368,7 @@ glance.coxph <- function(x, ...) {
 #'   \item{n.event}{number of events at time t}
 #'   \item{n.censor}{n.censor}{number of censored events}
 #'   \item{estimate}{estimate of survival}
-#'   \item{stderror}{standard error of estimate}
+#'   \item{std.error}{standard error of estimate}
 #'   \item{conf.high}{upper end of confidence interval}
 #'   \item{conf.low}{lower end of confidence interval}
 #' 
@@ -386,12 +386,12 @@ tidy.survfit <- function(x, ...) {
         lower <- 1 - x$lower
         
         # each of these is a matrix: must be stacked
-        ret <- cbind(ret, estimate = c(surv), stderror = c(x$std.err),
+        ret <- cbind(ret, estimate = c(surv), std.error = c(x$std.err),
                      conf.high = c(upper), conf.low = c(lower))
         # add state names
         ret$state <- rep(x$states, each = nrow(surv))
     } else {
-        ret <- cbind(ret, estimate=x$surv, stderror=x$std.err,
+        ret <- cbind(ret, estimate=x$surv, std.error=x$std.err,
                      conf.high=x$upper, conf.low=x$lower)
     }
     ret
@@ -589,7 +589,7 @@ glance.pyears <- function(x, ...) {
 #' @export
 tidy.survreg <- function(x, conf.level = .95, ...) {
     s <- summary(x)
-    nn <- c("estimate", "stderror", "statistic", "p.value")
+    nn <- c("estimate", "std.error", "statistic", "p.value")
     ret <- fix_data_frame(s$table, newnames = nn)
     ret
     

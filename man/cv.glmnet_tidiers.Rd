@@ -23,7 +23,7 @@ with columns
   \item{lambda}{penalty parameter lambda}
   \item{estimate}{estimate (median) of mean-squared error or other
   criterion}
-  \item{stderror}{standard error of criterion}
+  \item{std.error}{standard error of criterion}
   \item{conf.high}{high end of confidence interval on criterion}
   \item{conf.low}{low end of confidence interval on criterion}
   \item{nzero}{number of parameters that are zero at this choice of lambda}

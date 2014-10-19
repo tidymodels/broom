@@ -35,7 +35,7 @@ The structure depends on the method chosen.
 with five columns:
   \item{term}{The term in the nonlinear model being estimated and tested}
   \item{estimate}{The estimated coefficient}
-  \item{stderror}{The standard error from the linear model}
+  \item{std.error}{The standard error from the linear model}
   \item{statistic}{t-statistic}
   \item{p.value}{two-sided p-value}
 

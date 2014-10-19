@@ -24,7 +24,7 @@ structure depends on the method chosen.
   \item{n.event}{number of events at time t}
   \item{n.censor}{n.censor}{number of censored events}
   \item{estimate}{estimate of survival}
-  \item{stderror}{standard error of estimate}
+  \item{std.error}{standard error of estimate}
   \item{conf.high}{upper end of confidence interval}
   \item{conf.low}{lower end of confidence interval}
 
