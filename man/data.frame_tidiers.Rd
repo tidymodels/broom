@@ -36,6 +36,13 @@ row per original column, containing summary statistics of each:
   \item{skew}{skew}
   \item{kurtosis}{kurtosis}
   \item{se}{standard error}
+
+\code{glance} returns a one-row data.frame with
+  \item{nrow}{number of rows}
+  \item{ncol}{number of columns}
+  \item{complete.obs}{number of rows that have no missing values}
+  \item{na.fraction}{fraction of values across all rows and columns that
+  are missing}
 }
 \description{
 These perform tidy summaries of data.frame objects. \code{tidy} produces

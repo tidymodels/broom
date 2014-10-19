@@ -71,11 +71,18 @@ augment.data.frame <- function(x, data, ...) {
 
 
 #' @rdname data.frame_tidiers
+#' 
+#' @return \code{glance} returns a one-row data.frame with
+#'   \item{nrow}{number of rows}
+#'   \item{ncol}{number of columns}
+#'   \item{complete.obs}{number of rows that have no missing values}
+#'   \item{na.fraction}{fraction of values across all rows and columns that
+#'   are missing}
+#' 
 #' @export
 glance.data.frame <- function(x, ...) {
-	ret <- data.frame(nrow = nrow(x), ncol = ncol(x))
-	nas <- is.na(x)
-	ret$na_fraction <- sum(nas) / nrow(x) / ncol(x)
-	ret$full_obs <- sum(apply(nas, 1, sum)==0)
-   return(ret)
+    ret <- data.frame(nrow = nrow(x), ncol = ncol(x))
+    ret$complete.obs <- sum(complete.cases(x))
+    ret$na.fraction <- mean(is.na(x))
+    return(ret)
 }
