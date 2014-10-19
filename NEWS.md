@@ -1,3 +1,17 @@
+broom 0.3
+---------
+
+* Tidiers have been added for S3 objects from the following packages:
+    * `lme4`
+    * `glmnet`
+    * `survival`
+    * `zoo`
+    * `felm`
+    * `MASS` (`ridgelm` objects)
+* `tidy` and `glance` methods for data.frames have also been added, and `augment.data.frame` produces an error (rather than returning the same data.frame).
+* `stderror` has been changed to `std.error` (affects many functions) to be consistent with broom's naming conventions for columns.
+* A function `bootstrap` has been added based on [this example](https://github.com/hadley/dplyr/issues/269), to perform the common use case of bootstrapping models.
+
 broom 0.2
 ---------
 
