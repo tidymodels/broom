@@ -25,6 +25,7 @@ Currently broom provides tidying methods for many S3 objects from the built-in s
 * `kmeans`
 * `manova`
 * `TukeyHSD`
+* `arima`
 
 It also provides methods for S3 objects in popular third-party packages, including
 

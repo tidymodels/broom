@@ -137,3 +137,30 @@ finish_glance <- function(ret, x) {
     
     return(ret)
 }
+
+
+#' Calculate confidence interval as a tidy data frame
+#' 
+#' Return a confidence interval as a tidy data frame. This directly wraps the
+#' \code{\link{confint}} function, but ensures it folllows broom conventions:
+#' column names of \code{conf.low} and \code{conf.high}, and no row names
+#' 
+#' @param x a model object for which \code{\link{confint}} can be calculated
+#' @param conf.level confidence level
+#' @param ... extra arguments passed on to \code{confint}
+#' 
+#' @return A data frame with two columns: \code{conf.low} and \code{conf.high}.
+#' 
+#' @seealso \link{confint}
+#' 
+#' @export
+confint_tidy <- function(x, conf.level = .95, ...) {
+    # avoid "Waiting for profiling to be done..." message for some models
+    CI <- suppressMessages(confint(x, level = conf.level, ...))
+    if (is.null(dim(CI))) {
+        CI = matrix(CI, nrow=1)
+    }
+    colnames(CI) = c("conf.low", "conf.high")
+    unrowname(as.data.frame(CI))
+}
+

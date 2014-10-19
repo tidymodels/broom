@@ -158,8 +158,25 @@ tidy.manova <- function(x, ...) {
 }
 
 
+#' tidy a ts timeseries object
+#' 
+#' Turn a ts object into a tidy data frame. Right now simply uses
+#' \code{as.data.frame.ts}.
+#' 
+#' @param x a "ts" object
+#' @param ... extra arguments (not used)
+#' 
+#' @return a tidy data frame
+#' 
+#' @seealso \link{as.data.frame.ts}
+#' 
+#' @export
+tidy.ts <- function(x, ...) {
+    as.data.frame(x)
+}
+
+
 # todo?
-# tidy.ts
 # tidy.acf
 # tidy.infl
 # tidy.stepfun
