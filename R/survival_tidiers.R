@@ -419,6 +419,9 @@ glance.survfit <- function(x, ...) {
     if (inherits(x, "survfitms")) {
         stop("Cannot construct a glance of a multi-state survfit object")
     }
+    if (!is.null(x$strata)) {
+        stop("Cannot construct a glance of a multi-strata survfit object")
+    }
     
     s <- summary(x)
     ret <- unrowname(as.data.frame(t(s$table)))
