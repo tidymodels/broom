@@ -394,6 +394,10 @@ tidy.survfit <- function(x, ...) {
         ret <- cbind(ret, estimate=x$surv, std.error=x$std.err,
                      conf.high=x$upper, conf.low=x$lower)
     }
+    # strata are automatically recycled if there are multiple states
+    if (!is.null(x$strata)) {
+        ret$strata <- rep(names(x$strata), x$strata)
+    }
     ret
 }
 
@@ -414,6 +418,9 @@ tidy.survfit <- function(x, ...) {
 glance.survfit <- function(x, ...) {
     if (inherits(x, "survfitms")) {
         stop("Cannot construct a glance of a multi-state survfit object")
+    }
+    if (!is.null(x$strata)) {
+        stop("Cannot construct a glance of a multi-strata survfit object")
     }
     
     s <- summary(x)
