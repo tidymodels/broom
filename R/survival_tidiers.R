@@ -366,7 +366,7 @@ glance.coxph <- function(x, ...) {
 #'   \item{time}{timepoint}
 #'   \item{n.risk}{number of subjects at risk at time t0}
 #'   \item{n.event}{number of events at time t}
-#'   \item{n.censor}{n.censor}{number of censored events}
+#'   \item{n.censor}{number of censored events}
 #'   \item{estimate}{estimate of survival}
 #'   \item{std.error}{standard error of estimate}
 #'   \item{conf.high}{upper end of confidence interval}
@@ -425,7 +425,8 @@ glance.survfit <- function(x, ...) {
     
     s <- summary(x)
     ret <- unrowname(as.data.frame(t(s$table)))
-    plyr::rename(ret, c("0.95LCL" = "conf.lower", "0.95UCL" = "conf.high"))
+    colnames(ret)[6:7] <- c("conf.low", "conf.high")
+    ret
 }
 
 
