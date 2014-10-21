@@ -425,7 +425,8 @@ glance.survfit <- function(x, ...) {
     
     s <- summary(x)
     ret <- unrowname(as.data.frame(t(s$table)))
-    plyr::rename(ret, c("0.95LCL" = "conf.lower", "0.95UCL" = "conf.high"))
+    colnames(ret)[6:7] <- c("conf.low", "conf.high")
+    ret
 }
 
 
