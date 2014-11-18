@@ -366,7 +366,7 @@ glance.coxph <- function(x, ...) {
 #'   \item{time}{timepoint}
 #'   \item{n.risk}{number of subjects at risk at time t0}
 #'   \item{n.event}{number of events at time t}
-#'   \item{n.censor}{n.censor}{number of censored events}
+#'   \item{n.censor}{number of censored events}
 #'   \item{estimate}{estimate of survival}
 #'   \item{std.error}{standard error of estimate}
 #'   \item{conf.high}{upper end of confidence interval}
@@ -394,6 +394,10 @@ tidy.survfit <- function(x, ...) {
         ret <- cbind(ret, estimate=x$surv, std.error=x$std.err,
                      conf.high=x$upper, conf.low=x$lower)
     }
+    # strata are automatically recycled if there are multiple states
+    if (!is.null(x$strata)) {
+        ret$strata <- rep(names(x$strata), x$strata)
+    }
     ret
 }
 
@@ -415,10 +419,14 @@ glance.survfit <- function(x, ...) {
     if (inherits(x, "survfitms")) {
         stop("Cannot construct a glance of a multi-state survfit object")
     }
+    if (!is.null(x$strata)) {
+        stop("Cannot construct a glance of a multi-strata survfit object")
+    }
     
     s <- summary(x)
     ret <- unrowname(as.data.frame(t(s$table)))
-    plyr::rename(ret, c("0.95LCL" = "conf.lower", "0.95UCL" = "conf.high"))
+    colnames(ret)[6:7] <- c("conf.low", "conf.high")
+    ret
 }
 
 
