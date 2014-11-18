@@ -176,6 +176,48 @@ tidy.ts <- function(x, ...) {
 }
 
 
+#' tidy a pairwise hypothesis test
+#' 
+#' Tidy a pairwise.htest object, containing (adjusted) p-values for multiple
+#' pairwise hypothesis tests
+#' 
+#' @param x a "pairwise.htest" object
+#' @param ... extra arguments (not used)
+#' 
+#' @return A data frame with one row per group/group comparison, with columns
+#'   \item{group1}{First group being compared} 
+#'   \item{group2}{Second group being compared}
+#'   \item{p.value}{(Adjusted) p-value of comparison}
+#' 
+#' @details Note that in one-sided tests, the alternative hypothesis of each
+#' test can be stated as "group1 is greater/less than group2"
+#' 
+#' @examples
+#' 
+#' attach(airquality)
+#' Month <- factor(Month, labels = month.abb[5:9])
+#' ptt <- pairwise.t.test(Ozone, Month)
+#' tidy(ptt)
+#' 
+#' attach(iris)
+#' ptt2 <- pairwise.t.test(Petal.Length, Species)
+#' tidy(ptt2)
+#' 
+#' tidy(pairwise.t.test(Petal.Length, Species, alternative = "greater"))
+#' tidy(pairwise.t.test(Petal.Length, Species, alternative = "less"))
+#' 
+#' tidy(pairwise.wilcox.test(Petal.Length, Species))
+#' 
+#' @seealso \link{pairwise.t.test}, \link{pairwise.wilcox.test}
+#' 
+#' @export
+tidy.pairwise.htest <- function(x) {
+    x$p.value %>% fix_data_frame(newcol = "group1") %>%
+        tidyr::gather(group2, p.value, -group1) %>%
+        na.omit()
+}
+
+
 # todo?
 # tidy.acf
 # tidy.infl
