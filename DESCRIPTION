@@ -1,7 +1,7 @@
 Package: broom
 Type: Package
 Title: Convert statistical analysis objects from R into tidy format
-Version: 0.3.3
+Version: 0.3.4
 Date: 2014-09-11
 Authors@R: as.person(c(
     "David Robinson <admiral.david@gmail.com> [aut, cre]",
@@ -9,13 +9,14 @@ Authors@R: as.person(c(
     "Boris Demeshev <boris.demeshev@gmail.com> [ctb]",
     "Hadley Wickham <hadley@rstudio.com> [ctb]"
     ))
+Maintainer: David Robinson <admiral.david@gmail.com>
 Description: Convert statistical analysis objects from R into tidy format,
     so that they can more easily be combined, reshaped and otherwise processed
-    with tools like dplyr and tidyr. The package provides three S3 generics:
-    tidy, which summarizes a model's statistical findings such as coefficients
-    of a regression; augment, which adds columns to the original data such as
-    predictions, residuals and cluster assignments; and glance, which provides
-    a one-row summary of model-level statistics.
+    with tools like dplyr, tidyr and ggplot2. The package provides three S3
+    generics: tidy, which summarizes a model's statistical findings such as
+    coefficients of a regression; augment, which adds columns to the original
+    data such as predictions, residuals and cluster assignments; and glance,
+    which provides a one-row summary of model-level statistics.
 Imports:
     plyr,
     dplyr,
@@ -32,10 +33,10 @@ Suggests:
     maps,
     maptools,
     multcomp,
-    ggplot2,
     testthat,
     lme4,
-    zoo
+    zoo,
+    ggplot2
 URL: http://github.com/dgrtwo/broom
 BugReports: http://github.com/dgrtwo/broom/issues
 VignetteBuilder: knitr

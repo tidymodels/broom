@@ -1,3 +1,25 @@
+broom 0.3.4
+-----------
+
+* The behavior of `augment`, particularly with regard to missing data and the `na.exclude` argument, has through the use of the \code{augment_columns} function been made consistent across the following models:
+    * `lm`
+    * `glm`
+    * `nls`
+    * `merMod` (`lme4`)
+    * `survreg` (`survival`)
+    * `coxph` (`survival`)
+
+    Unit tests in `tests/testthat/test-augment.R` were added to ensure consistency across these models.
+* `tidy`, `augment` and `glance` methods were added for `rowwise_df` objects, and are set up to apply across their rows. This allows for simple patterns such as:
+      
+        regressions <- mtcars %>% group_by(cyl) %>% do(mod = lm(mpg ~ wt, .))
+        regressions %>% tidy(mod)
+        regressions %>% augment(mod)
+    
+    See `?rowwise_df_tidiers` for more.
+* Added `tidy` and `glance` methods for `Arima` objects, and `tidy` for `pairwise.htest` objects.
+* This is the version originally submitted to CRAN.
+
 broom 0.3
 ---------
 
