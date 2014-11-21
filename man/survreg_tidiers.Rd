@@ -8,8 +8,8 @@
 \usage{
 \method{tidy}{survreg}(x, conf.level = 0.95, ...)
 
-\method{augment}{survreg}(x, data = model.frame(x),
-  predict.type = "response", residuals.type = "response", ...)
+\method{augment}{survreg}(x, data = model.frame(x), newdata,
+  type.predict = "response", type.residuals = "response", ...)
 
 \method{glance}{survreg}(x, conf.level = 0.95, ...)
 }
@@ -23,9 +23,11 @@
 \item{data}{original data; if it is not provided, it is reconstructed
 as best as possible with \code{\link{model.frame}}}
 
-\item{predict.type}{type of prediction, default "response"}
+\item{newdata}{New data to use for prediction; optional}
 
-\item{residuals.type}{type of residuals to calculate, default "response"}
+\item{type.predict}{type of prediction, default "response"}
+
+\item{type.residuals}{type of residuals to calculate, default "response"}
 }
 \value{
 All tidying methods return a data.frame without rownames, whose
@@ -61,6 +63,16 @@ Tidies the coefficients of a parametric survival regression model,
 from the "survreg" function, adds fitted values and residuals, or
 summarizes the model statistics.
 }
+\details{
+When the modeling was performed with \code{na.action = "na.omit"}
+(as is the typical default), rows with NA in the initial data are omitted
+entirely from the augmented data frame. When the modeling was performed
+with \code{na.action = "na.exclude"}, one should provide the original data
+as a second argument, at which point the augmented data will contain those
+rows (typically with NAs in place of the new columns). If the original data
+is not provided to \code{augment} and \code{na.action = "na.exclude"}, a
+warning is raised and the incomplete rows are dropped.
+}
 \examples{
 if (require("survival", quietly = TRUE)) {
     sr <- survreg(Surv(futime, fustat) ~ ecog.ps + rx, ovarian,
@@ -77,5 +89,8 @@ if (require("survival", quietly = TRUE)) {
         geom_errorbarh(aes(xmin = conf.low, xmax = conf.high), height = 0) +
         geom_vline()
 }
+}
+\seealso{
+\link{na.action}
 }
 

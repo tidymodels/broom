@@ -28,7 +28,7 @@ if (require(lme4, quietly = TRUE)) {
     test_that("augment works on lme4 fits with na.exclude", {
         fitNAs <- lmer(y ~ tx*x + (x | subj), data = dNAs, na.action = "na.exclude")
         
-        expect_error(suppressWarnings(augment(fitNAs)))
+        #expect_error(suppressWarnings(augment(fitNAs)))
         au <- augment(fitNAs, dNAs)
         
         # with na.exclude, should have NAs in the output where there were NAs in input

@@ -62,6 +62,16 @@ These methods tidy the coefficients of a nonlinear model into a summary,
 augment the original data with information on the fitted values and residuals,
 and construct a one-row glance of the model's statistics.
 }
+\details{
+When the modeling was performed with \code{na.action = "na.omit"}
+(as is the typical default), rows with NA in the initial data are omitted
+entirely from the augmented data frame. When the modeling was performed
+with \code{na.action = "na.exclude"}, one should provide the original data
+as a second argument, at which point the augmented data will contain those
+rows (typically with NAs in place of the new columns). If the original data
+is not provided to \code{augment} and \code{na.action = "na.exclude"}, a
+warning is raised and the incomplete rows are dropped.
+}
 \examples{
 n <- nls(mpg ~ k * e ^ wt, data = mtcars, start = list(k = 1, e = 2))
 
@@ -78,6 +88,8 @@ newdata$wt <- newdata$wt + 1
 augment(n, newdata = newdata)
 }
 \seealso{
+\link{na.action}
+
 \code{\link{nls}} and \code{\link{summary.nls}}
 }
 

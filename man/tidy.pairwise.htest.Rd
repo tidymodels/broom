@@ -3,7 +3,7 @@
 \alias{tidy.pairwise.htest}
 \title{tidy a pairwise hypothesis test}
 \usage{
-\method{tidy}{pairwise.htest}(x)
+\method{tidy}{pairwise.htest}(x, ...)
 }
 \arguments{
 \item{x}{a "pairwise.htest" object}

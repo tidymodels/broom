@@ -11,6 +11,8 @@
 #' @return All tidying methods return a \code{data.frame} without rownames.
 #' The structure depends on the method chosen.
 #' 
+#' @template augment_NAs
+#' 
 #' @seealso \code{\link{nls}} and \code{\link{summary.nls}}
 #' 
 #' @examples
@@ -82,11 +84,7 @@ augment.nls <- function(x, data = NULL, newdata = NULL, ...) {
     if (!is.null(newdata)) {
         # use predictions on new data
         newdata <- fix_data_frame(newdata, newcol = ".rownames")
-        y <- eval(x$m$formula()[[2]], envir = newdata)
-        predictions <- predict(x, newdata)
-
-        newdata$.fitted <- predictions
-        newdata$.resid <- y - predictions
+        newdata$.fitted <- predict(x, newdata = newdata)
         return(newdata)
     }
 
@@ -94,8 +92,17 @@ augment.nls <- function(x, data = NULL, newdata = NULL, ...) {
         pars <- names(x$m$getPars())
         env <- as.list(x$m$getEnv())
         data <- as.data.frame(env[!(names(env) %in% pars)])
+    } else {
+        # preprocess data to fit NAs
+        #if (!is.null(x$na.action) && class(x$na.action) == "omit") {
+        #    data <- data[-x$na.action, ]
+        #    # get rid of rownames
+        #    rownames(data) <- NULL
+        #}
     }
-
+    
+    return(augment_columns(x, data))
+        
     # move rownames if necessary
     data <- fix_data_frame(data, newcol = ".rownames")
     

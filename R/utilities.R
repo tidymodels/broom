@@ -47,34 +47,53 @@ compact <- function(x) Filter(Negate(is.null), x)
 #' @param x data frame that has one row for each non-NA row in original
 #' @param original data frame with NAs
 insert_NAs <- function(x, original) {
-    indices <- rep(NA, nrow(x))
+    indices <- rep(NA, nrow(original))
     indices[which(complete.cases(original))] = seq_len(nrow(x))
     x[indices, ]
 }
 
 
-#' add predictions, fitted values, residuals, and other common outputs from
+#' add fitted values, residuals, and other common outputs to
 #' an augment call
 #' 
-#' In the case that a generic is not implemented for the model, fail quietly.
+#' Add fitted values, residuals, and other common outputs to
+#' the value returned from \code{augment}.
+#' 
+#' In the case that a residuals or influence generic is not implemented for the
+#' model, fail quietly.
 #' 
 #' @param x a model
+#' @param data original data onto which columns should be added
 #' @param newdata new data to predict on, optional
 #' @param type Type of prediction and residuals to compute
 #' @param type.predict Type of prediction to compute; by default
 #' same as \code{type}
 #' @param type.residuals Type of residuals to compute; by default
 #' same as \code{type}
+#' @param se.fit Value to pass to predict's \code{se.fit}, or NULL for
+#' no value
 #' @param ... extra arguments (not used)
 #' 
 #' @export
-augment_columns <- function(x, newdata, type, type.predict = type,
-                            type.residuals = type, ...) {
-    if (!missing(type.predict)) {
-        pred <- predict(x, newdata, type = type.predict, se.fit = TRUE, ...)
-    } else {
-        pred <- predict(x, newdata, se.fit = TRUE, ...)        
+augment_columns <- function(x, data, newdata, type, type.predict = type,
+                            type.residuals = type, se.fit = TRUE, ...) {
+    residuals0 <- failwith(NULL, residuals, TRUE)
+    influence0 <- failwith(NULL, influence, TRUE)
+    cooks.distance0 <- failwith(NULL, cooks.distance, TRUE)
+    rstandard0 <- failwith(NULL, rstandard, TRUE)
+    
+    # call predict with arguments
+    args <- list(x)
+    if (!missing(newdata)) {
+        args$newdata <- newdata
     }
+    if (!missing(type.predict)) {
+        args$type <- type.predict
+    }
+    args$se.fit <- se.fit
+    args <- c(args, list(...))
+    pred <- do.call(predict, args)
+
     if (is.list(pred)) {
         ret <- data.frame(.fitted = pred$fit)
         ret$.se.fit <- pred$se.fit
@@ -82,17 +101,68 @@ augment_columns <- function(x, newdata, type, type.predict = type,
         ret <- data.frame(.fitted = pred)
     }
     
-    if (missing(newdata)) {
-        if (!missing(type.residuals)) {
-            ret$.resid <- tryCatch(residuals(x, type = type.residuals),
-                                   error = function(e) NULL)
-        } else {
-            ret$.resid <- tryCatch(residuals(x), error = function(e) NULL)
-        }
+    na_action <- if (isS4(x)) {
+        attr(model.frame(x), "na.action")
+    } else {
+        na.action(x)
     }
-    fix_data_frame(ret, newcol = ".rownames")
-}
 
+    if (missing(newdata) || is.null(newdata)) {
+        if (!missing(type.residuals)) {
+            ret$.resid <- residuals0(x, type = type.residuals)
+        } else {
+            ret$.resid <- residuals0(x)
+        }
+        
+        infl <- influence0(x, do.coef = FALSE)
+        if (!is.null(infl)) {
+            ret$.hat <- infl$hat
+            ret$.sigma <- infl$sigma
+        }
+        
+        ret$.cooksd <- cooks.distance0(x)
+        ret$.std.resid <- rstandard0(x)
+        
+        original <- data
+        
+        if (class(na_action) == "exclude") {
+            # check if values are missing
+            if (length(residuals(x)) > nrow(data)) {
+                warning("When fitting with na.exclude, rows with NA in ",
+                        "original data will be dropped unless those rows are provided ",
+                        "in 'data' argument")
+            }
+        }
+    } else {
+        original <- newdata
+    }
+        
+    if (is.null(na_action) || nrow(original) == nrow(ret)) {
+        # no NAs were left out; we can simply recombine
+        original <- fix_data_frame(original, newcol = ".rownames")
+        return(unrowname(cbind(original, ret)))
+    } else if (class(na_action) == "omit") {
+        # if the option is "omit", drop those rows from the data
+        original <- fix_data_frame(original, newcol = ".rownames")
+        original <- original[-na_action, ]
+        return(unrowname(cbind(original, ret)))
+    }
+    
+    # add .rownames column to merge the results with the original; resilent to NAs
+    ret$.rownames <- rownames(ret)
+    original$.rownames <- rownames(original)    
+    ret <- merge(original, ret, by = ".rownames")
+    
+    # reorder to line up with original
+    ret <- ret[order(match(ret$.rownames, rownames(original))), ]
+
+    rownames(ret) <- NULL
+    # if rownames are just the original 1...n, they can be removed
+    if (all(ret$.rownames == seq_along(ret$.rownames))) {
+        ret$.rownames <- NULL
+    }
+    ret
+}
 
 
 #' Add logLik, AIC, BIC, and other common measurements to a glance of
@@ -162,5 +232,28 @@ confint_tidy <- function(x, conf.level = .95, ...) {
     }
     colnames(CI) = c("conf.low", "conf.high")
     unrowname(as.data.frame(CI))
+}
+
+
+#' Expand a dataset to include all factorial combinations of one or more
+#' variables
+#'
+#' @param .data a tbl
+#' @param ... arguments
+#' @param stringsAsFactors logical specifying if character vectors are
+#' converted to factors.
+#'
+#' @return A tbl, grouped by the arguments in \code{...}
+#'
+#' @import dplyr
+#'
+#' @export
+inflate <- function(.data, ..., stringsAsFactors = FALSE) {
+    ret <- expand.grid(..., stringsAsFactors = stringsAsFactors)
+    ret <- ret %>% group_by_(.dots = colnames(ret)) %>% do(.data)
+    if (!is.null(groups(.data))) {
+        ret <- ret %>% group_by_(.dots = groups(.data), add = TRUE)
+    }
+    ret
 }
 

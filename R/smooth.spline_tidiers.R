@@ -29,7 +29,7 @@
 #'   \item{.resid}{Residuals}
 #' 
 #' @export
-augment.smooth.spline <- function(x, data=x$data, ...) {
+augment.smooth.spline <- function(x, data = x$data, ...) {
     # move rownames if necessary
     data <- unrowname(as.data.frame(data))
     

@@ -17,6 +17,10 @@
 #' @param x lm object
 #' @param data Original data, defaults to the extracting it from the model
 #' @param newdata If provided, performs predictions on the new data
+#' @param type.predict Type of prediction to compute for a GLM; passed on to
+#'   \code{\link{predict.glm}}
+#' @param type.residuals Type of residuals to compute for a GLM; passed on to
+#'   \code{\link{residuals.glm}}
 #'
 #' @examples
 #'
@@ -40,7 +44,6 @@
 #' # predict on new data
 #' newdata <- mtcars %>% head(6) %>% mutate(wt = wt + 1)
 #' augment(mod, newdata = newdata)
-#'
 #'
 #' au <- augment(mod, data = mtcars)
 #' 
@@ -138,6 +141,8 @@ tidy.lm <- function(x, conf.int=FALSE, conf.level=.95,
 
 #' @rdname lm_tidiers
 #' 
+#' @template augment_NAs
+#' 
 #' @details Code and documentation for \code{augment.lm} originated in the
 #' ggplot2 package, where it was called \code{fortify.lm}
 #' 
@@ -159,61 +164,12 @@ tidy.lm <- function(x, conf.int=FALSE, conf.level=.95,
 #'   \item{.se.fit}{Standard errors of fitted values}
 #'   \item{.resid}{Residuals of fitted values on the new data}
 #' 
-#' If the object is a \code{"glm"}, two additional columns are added (whether
-#' \code{newdata} is provided or not):
-#'   \item{.fitted.response}{Fitted values transformed to be on the scale of
-#'   the response}
-#'   \item{.se.fit.response}{Standard errors of the fit on the response scale}
-#' 
 #' @export
-augment.lm <- function(x, data = x$model, newdata= NULL, ...) {
-    # move rownames if necessary
-    # here we need rownames to match the observations in the case of missing data (!)
-    if (is.null(newdata)) {
-        data$.rownames <- rownames(data) 
-      
-        infl <- influence(x, do.coef = FALSE)
-        infl <- as.data.frame(infl)
-        infl$.rownames <- rownames(infl)
-      
-        infl <- select(infl, .hat=hat, .sigma=sigma, .rownames)
-      
-        infl$.resid <- resid(x)
-        prediction <- predict(x, se.fit=TRUE)
-        infl$.fitted <- prediction$fit
-        infl$.se.fit <- prediction$se.fit
-
-        # for a glm, add fitted and .se.fit when type = "response"
-        if (inherits(x, "glm")) {
-            prediction_response <- predict(x, se.fit = TRUE, type = "response")
-            infl$.fitted.response <- prediction_response$fit
-            infl$.se.fit.response <- prediction_response$se.fit
-        }
-        
-        infl$.cooksd <- cooks.distance(x)
-        infl$.std.resid <- rstandard(x)
-      
-        data <- merge(data, infl, by=".rownames", all.x=TRUE)    
-        return(data)
-    } else {
-        newdata <- fix_data_frame(newdata, newcol = ".rownames")
-        prediction <- predict(x, newdata, se.fit = TRUE)
-        y <- eval(x$call$formula[[2]], envir = newdata)
-
-        newdata$.fitted <- prediction$fit
-        newdata$.resid <- y - prediction$fit
-        newdata$.se.fit <- prediction$se.fit
-
-        if (inherits(x, "glm")) {
-            prediction_response <- predict(x, newdata, se.fit = TRUE, type = "response")
-            newdata$.fitted.response <- prediction_response$fit
-            newdata$.se.fit.response <- prediction_response$se.fit
-        }
-
-        return(newdata)
-    }
+augment.lm <- function(x, data = x$model, newdata,
+                       type.predict, type.residuals, ...) {    
+    augment_columns(x, data, newdata, type.predict = type.predict,
+                           type.residuals = type.residuals)
 }
-
 
 
 #' @rdname lm_tidiers

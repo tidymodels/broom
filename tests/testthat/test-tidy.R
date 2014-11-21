@@ -74,5 +74,3 @@ test_that("tidy.htest works on wilcoxon tests", {
     n = c("p.value", "statistic")
     check_tidy(td, exp.row=1, exp.names=n)
 })
-
-# TODO: other hypothesis tests, such as ks tests

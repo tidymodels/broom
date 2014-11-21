@@ -96,6 +96,9 @@ tidy.merMod <- function(x, effects = "random", ...) {
 #' 
 #' @param data original data this was fitted on; if not given this will
 #' attempt to be reconstructed
+#' @param newdata new data to be used for prediction; optional
+#' 
+#' @template augment_NAs
 #' 
 #' @return \code{augment} returns one row for each original observation,
 #' with columns (each prepended by a .) added. Included are the columns
@@ -108,28 +111,19 @@ tidy.merMod <- function(x, effects = "random", ...) {
 #' ".offset", ".sqrtXwt", ".sqrtrwt", ".eta"}.
 #'
 #' @export
-augment.merMod <- function(x, data, ...) {
-    if (missing(data)) {
-        data <- model.frame(x)
-
-        # check that the option was not na.exclude
-        na.act <- attr(data, "na.action")
-        if (!is.null(na.act) && attr(na.act, "class") == "exclude") {
-            warning(paste("If na action is 'na.exclude',",
-                          "should provide original data"))
-        }
-    }
+augment.merMod <- function(x, data = model.frame(x), newdata, ...) {    
     # move rownames if necessary
-    data <- fix_data_frame(data, newcol=".rownames")
-
-    data$.fitted <- predict(x)
-    data$.resid <- resid(x)
+    if (missing(newdata)) {
+        newdata <- NULL
+    }
+    ret <- augment_columns(x, data, newdata, se.fit = NULL)
+    
     # add predictions with no random effects (population means)
     predictions <- predict(x, re.form = NA)
     # some cases, such as values returned from nlmer, return more than one
     # prediction per observation. Not clear how those cases would be tidied
-    if (length(predictions) == nrow(data)) {
-        data$.fixed <- predictions
+    if (length(predictions) == nrow(ret)) {
+        ret$.fixed <- predictions
     }
 
     # columns to extract from resp reference object
@@ -140,12 +134,13 @@ augment.merMod <- function(x, data, ...) {
     cols <- lapply(respCols, function(n) x@resp[[n]])
     names(cols) <- paste0(".", respCols)
     cols <- as.data.frame(compact(cols))  # remove missing fields
-    cols <- insert_NAs(cols, data)
+    
+    cols <- insert_NAs(cols, ret)
     if (length(cols) > 0) {
-        data <- cbind(data, cols)
+        ret <- cbind(ret, cols)
     }
 
-    unrowname(data)
+    unrowname(ret)
 }
 
 

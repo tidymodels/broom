@@ -8,7 +8,7 @@
 \usage{
 \method{tidy}{merMod}(x, effects = "random", ...)
 
-\method{augment}{merMod}(x, data, ...)
+\method{augment}{merMod}(x, data = model.frame(x), newdata, ...)
 
 \method{glance}{merMod}(x, ...)
 }
@@ -22,6 +22,8 @@
 
 \item{data}{original data this was fitted on; if not given this will
 attempt to be reconstructed}
+
+\item{newdata}{new data to be used for prediction; optional}
 }
 \value{
 All tidying methods return a \code{data.frame} without rownames.
@@ -65,6 +67,16 @@ Also added are values from the response object within the model (of type
 These methods tidy the coefficients of mixed effects models, particularly
 responses of the \code{merMod} class.
 }
+\details{
+When the modeling was performed with \code{na.action = "na.omit"}
+(as is the typical default), rows with NA in the initial data are omitted
+entirely from the augmented data frame. When the modeling was performed
+with \code{na.action = "na.exclude"}, one should provide the original data
+as a second argument, at which point the augmented data will contain those
+rows (typically with NAs in place of the new columns). If the original data
+is not provided to \code{augment} and \code{na.action = "na.exclude"}, a
+warning is raised and the incomplete rows are dropped.
+}
 \examples{
 if (require("lme4")) {
     # example regressions are from lme4 documentation
@@ -89,5 +101,8 @@ if (require("lme4")) {
     head(augment(nm1, Orange))
     glance(nm1)
 }
+}
+\seealso{
+\link{na.action}
 }
 

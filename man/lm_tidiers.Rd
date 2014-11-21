@@ -9,7 +9,8 @@
 \method{tidy}{lm}(x, conf.int = FALSE, conf.level = 0.95,
   exponentiate = FALSE, ...)
 
-\method{augment}{lm}(x, data = x$model, newdata = NULL, ...)
+\method{augment}{lm}(x, data = x$model, newdata, type.predict, type.residuals,
+  ...)
 
 \method{glance}{lm}(x, ...)
 }
@@ -29,6 +30,12 @@ and confidence intervals (typical for logistic regression)}
 \item{data}{Original data, defaults to the extracting it from the model}
 
 \item{newdata}{If provided, performs predictions on the new data}
+
+\item{type.predict}{Type of prediction to compute for a GLM; passed on to
+\code{\link{predict.glm}}}
+
+\item{type.residuals}{Type of residuals to compute for a GLM; passed on to
+  \code{\link{residuals.glm}}}
 }
 \value{
 All tidying methods return a \code{data.frame} without rownames.
@@ -62,12 +69,6 @@ observation, with three columns added to the new data:
   \item{.se.fit}{Standard errors of fitted values}
   \item{.resid}{Residuals of fitted values on the new data}
 
-If the object is a \code{"glm"}, two additional columns are added (whether
-\code{newdata} is provided or not):
-  \item{.fitted.response}{Fitted values transformed to be on the scale of
-  the response}
-  \item{.se.fit.response}{Standard errors of the fit on the response scale}
-
 \code{glance.lm} returns a one-row data.frame with the columns
   \item{r.squared}{The percent of variance explained by the model}
   \item{adj.r.squared}{r.squared adjusted based on the degrees of freedom}
@@ -94,8 +95,14 @@ the model with \code{na.action = na.exclude}.
 If \code{conf.int=TRUE}, the confidence interval is computed with
 the \code{\link{confint}} function.
 
-Code and documentation for \code{augment.lm} originated in the
-ggplot2 package, where it was called \code{fortify.lm}
+When the modeling was performed with \code{na.action = "na.omit"}
+(as is the typical default), rows with NA in the initial data are omitted
+entirely from the augmented data frame. When the modeling was performed
+with \code{na.action = "na.exclude"}, one should provide the original data
+as a second argument, at which point the augmented data will contain those
+rows (typically with NAs in place of the new columns). If the original data
+is not provided to \code{augment} and \code{na.action = "na.exclude"}, a
+warning is raised and the incomplete rows are dropped.
 }
 \examples{
 library(ggplot2)
@@ -118,7 +125,6 @@ head(augment(mod, mtcars))
 # predict on new data
 newdata <- mtcars \%>\% head(6) \%>\% mutate(wt = wt + 1)
 augment(mod, newdata = newdata)
-
 
 au <- augment(mod, data = mtcars)
 
@@ -164,5 +170,7 @@ qplot(.hat, .cooksd, size = .cooksd / .hat, data = au) + scale_size_area()
 }
 \seealso{
 \code{\link{summary.lm}}
+
+\link{na.action}
 }
 

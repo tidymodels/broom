@@ -211,7 +211,7 @@ tidy.ts <- function(x, ...) {
 #' @seealso \link{pairwise.t.test}, \link{pairwise.wilcox.test}
 #' 
 #' @export
-tidy.pairwise.htest <- function(x) {
+tidy.pairwise.htest <- function(x, ...) {
     x$p.value %>% fix_data_frame(newcol = "group1") %>%
         tidyr::gather(group2, p.value, -group1) %>%
         na.omit()

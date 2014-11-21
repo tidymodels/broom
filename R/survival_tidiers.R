@@ -251,6 +251,8 @@ tidy.coxph <- function(x, exponentiate = FALSE, conf.int = .95, ...) {
 
 #' @rdname coxph_tidiers
 #' 
+#' @template augment_NAs
+#' 
 #' @return \code{augment} returns the original data.frame with additional
 #' columns added:
 #'   \item{.fitted}{predicted values}
@@ -262,9 +264,8 @@ augment.coxph <- function(x, data = model.frame(x), newdata,
                           type.predict = "lp", type.residuals = "martingale",
                           ...) {
     ret <- fix_data_frame(data, newcol = ".rownames")
-    addcols <- augment_columns(x, newdata, type.predict = type.predict,
+    augment_columns(x, data, newdata, type.predict = type.predict,
                                type.residuals = type.residuals)
-    cbind(ret, addcols)
 }
 
 
@@ -612,8 +613,11 @@ tidy.survreg <- function(x, conf.level = .95, ...) {
 #' 
 #' @param data original data; if it is not provided, it is reconstructed
 #' as best as possible with \code{\link{model.frame}}
-#' @param predict.type type of prediction, default "response"
-#' @param residuals.type type of residuals to calculate, default "response"
+#' @param newdata New data to use for prediction; optional
+#' @param type.predict type of prediction, default "response"
+#' @param type.residuals type of residuals to calculate, default "response"
+#' 
+#' @template augment_NAs
 #' 
 #' @return \code{augment} returns the original data.frame with the following
 #' additional columns:
@@ -622,11 +626,12 @@ tidy.survreg <- function(x, conf.level = .95, ...) {
 #'   \item{.resid}{Residuals}
 #' 
 #' @export
-augment.survreg <- function(x, data = model.frame(x),
-                            predict.type = "response",
-                            residuals.type = "response", ...) {
-    newcols <- augment_columns(x)
-    cbind(data, newcols)  # TODO: handle NAs
+augment.survreg <- function(x, data = model.frame(x), newdata,
+                            type.predict = "response",
+                            type.residuals = "response", ...) {
+    ret <- fix_data_frame(data, newcol = ".rownames")
+    augment_columns(x, data, newdata, type.predict = type.predict,
+                    type.residuals = type.residuals)
 }
 
 

@@ -331,7 +331,7 @@ In order to maintain consistency, we attempt to follow some conventions regardin
 
 * Each row in a `tidy` output typically represents some well-defined concept, such as one term in a regression, one test, or one cluster/class. This meaning varies across models but is usually self-evident. The one thing each row cannot represent is a point in the initial data (for that, use the `augment` method).
 * Common column names include:
-    * `term`"" the term in a regression or model that is being estimated.
+    * `term`: the term in a regression or model that is being estimated.
     * `p.value`: this spelling was chosen (over common alternatives such as `pvalue`, `PValue`, or `pval`) to be consistent with functions in R's built-in `stats` package
     * `statistic` a test statistic, usually the one used to compute the p-value. Combining these across many sub-groups is a reliable way to perform (e.g.) bootstrap hypothesis testing
     * `estimate` estimate of an effect size, slope, or other value
