@@ -1,7 +1,7 @@
 broom 0.3.4
 -----------
 
-* The behavior of `augment`, particularly with regard to missing data and the `na.exclude` argument, has through the use of the \code{augment_columns} function been made consistent across the following models:
+* The behavior of `augment`, particularly with regard to missing data and the `na.exclude` argument, has through the use of the `augment_columns` function been made consistent across the following models:
     * `lm`
     * `glm`
     * `nls`
@@ -18,7 +18,9 @@ broom 0.3.4
     
     See `?rowwise_df_tidiers` for more.
 * Added `tidy` and `glance` methods for `Arima` objects, and `tidy` for `pairwise.htest` objects.
-* This is the version originally submitted to CRAN.
+* Fixes for CRAN: change package description to title case, removed NOTES, mostly by adding `globals.R` to declare global variables.
+* This is the original version published on CRAN.
+
 
 broom 0.3
 ---------

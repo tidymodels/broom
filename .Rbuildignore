@@ -1,2 +1,5 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
+^NEWS\.md$
+^man-roxygen$
+cran-comments.md

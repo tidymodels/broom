@@ -71,17 +71,17 @@ tidy.felm <- function(x, conf.int=FALSE, conf.level=.95, fe = FALSE, fe.error = 
 
     if (fe){
       ret <- mutate(ret, N = NA, comp = NA)
-      object <- getfe(x)
+      object <- lfe::getfe(x)
       if (fe.error){
         nn <- c("estimate", "std.error", "N", "comp")
-        ret_fe <- getfe(x, se = TRUE, bN = 100) %>%
+        ret_fe <- lfe::getfe(x, se = TRUE, bN = 100) %>%
                   select(effect, se, obs, comp) %>%
                   fix_data_frame(nn) %>%
                   mutate(statistic = estimate/std.error) %>%
                   mutate(p.value = 2*(1-pt(statistic, df = N))) 
       } else{
         nn <- c("estimate", "N", "comp")
-        ret_fe <- getfe(x) %>%
+        ret_fe <- lfe::getfe(x) %>%
                   select(effect, obs, comp) %>%
                   fix_data_frame(nn)  %>% 
                   mutate(statistic = NA, p.value = NA) 
@@ -124,7 +124,7 @@ augment.felm <- function(x, data = NULL, ...) {
     y <- eval(x$call$formula[[2]], envir = data)
     data$.fitted <- x$fitted.values
     data$.resid <- x$residuals
-    object <-  getfe(x)
+    object <-  lfe::getfe(x)
     if (!is.null(object)){
         fe_list <- levels(object$fe)
         object <- object %>% mutate(effect = as.numeric(effect))%>% mutate(fe = as.character(fe))

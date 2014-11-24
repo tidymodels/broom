@@ -4,3 +4,4 @@
 .RData
 vignettes/*cache
 inst/doc
+cran-comments.md

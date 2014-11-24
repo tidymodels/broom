@@ -19,7 +19,7 @@ wrap_rowwise_df_ <- function(func) {
 
 wrap_rowwise_df <- function(func) {
     function(x, data, ...) {
-        n <- tidyr:::col_name(substitute(data), "object")
+        n <- col_name(substitute(data))
         func(x, n, ...)
     }
 }

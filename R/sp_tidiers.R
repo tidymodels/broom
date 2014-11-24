@@ -37,7 +37,7 @@ tidy.SpatialPolygonsDataFrame <- function(x, region = NULL, ...) {
         require("maptools")
 
         # Union together all polygons that make up a region
-        unioned <- unionSpatialPolygons(cp, attr[, region])
+        unioned <- maptools::unionSpatialPolygons(cp, attr[, region])
         coords <- tidy(unioned)
         coords$order <- 1:nrow(coords)
     }
