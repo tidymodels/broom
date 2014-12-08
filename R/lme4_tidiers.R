@@ -1,7 +1,8 @@
 #' Tidying methods for mixed effects models
 #' 
 #' These methods tidy the coefficients of mixed effects models, particularly
-#' responses of the \code{merMod} class.
+#' responses of the \code{merMod} and \code{mer} (from lme4.0 and versions prior
+#' to 1.1-7)
 #' 
 #' @param x An object of class \code{merMod}, such as those from \code{lmer},
 #' \code{glmer}, or \code{nlmer}
@@ -106,7 +107,8 @@ tidy.merMod <- function(x, effects = "random", ...) {
 #'   \item{.resid}{residuals}
 #'   \item{.fixed}{predicted values with no random effects}
 #' 
-#' Also added are values from the response object within the model (of type
+#' Also added for "merMod" objects, but not for "mer" objects,
+#' are values from the response object within the model (of type
 #' \code{lmResp}, \code{glmResp}, \code{nlsResp}, etc). These include \code{".mu",
 #' ".offset", ".sqrtXwt", ".sqrtrwt", ".eta"}.
 #'
@@ -154,10 +156,53 @@ augment.merMod <- function(x, data = model.frame(x), newdata, ...) {
 #'   \item{AIC}{the Akaike Information Criterion}
 #'   \item{BIC}{the Bayesian Information Criterion}
 #'   \item{deviance}{deviance}
-#'   \item{df.residual}{residual degrees of freedom}
 #' 
 #' @export
 glance.merMod <- function(x, ...) {
-    ret <- unrowname(data.frame(sigma=lme4::sigma(x)))
+    ret <- unrowname(data.frame(sigma = lme4::sigma(x)))
+    finish_glance(ret, x)
+}
+
+
+## "mer" methods
+
+
+#' @rdname lme4_tidiers
+#' 
+#' @export
+tidy.mer <- function(x, effects = "random", ...) {
+    # pass directly on to lme4 method
+    effects <- match.arg(effects, c("random", "fixed"))
+    if (effects == "fixed") {
+        # return tidied fixed effects rather than random
+        ret <- coef(lme4.0::summary(x))
+        
+        # p-values may or may not be included
+        nn <- c("estimate", "std.error", "statistic", "p.value")[1:ncol(ret)]
+        return(fix_data_frame(ret, newnames = nn, newcol = "term"))
+    }
+
+    # for random effects, can pass on to lme4 method
+    tidy.merMod(x, effects = "random", ...)
+}
+
+
+#' @rdname lme4_tidiers
+#' 
+#' @export
+augment.mer <- function(x, data = model.frame(x), newdata, ...) {    
+    if (missing(newdata)) {
+        newdata <- NULL
+    }
+    ret <- augment_columns(x, data, newdata, se.fit = NULL)
+    ret
+}
+
+
+#' @rdname lme4_tidiers
+#' 
+#' @export
+glance.mer <- function(x, ...) {
+    ret <- unrowname(data.frame(sigma = lme4.0::sigma(x)))
     finish_glance(ret, x)
 }

@@ -35,6 +35,7 @@ Suggests:
     multcomp,
     testthat,
     lme4,
+    lme4.0,
     zoo,
     ggplot2
 URL: http://github.com/dgrtwo/broom

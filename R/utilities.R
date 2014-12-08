@@ -81,6 +81,7 @@ augment_columns <- function(x, data, newdata, type, type.predict = type,
     influence0 <- failwith(NULL, influence, TRUE)
     cooks.distance0 <- failwith(NULL, cooks.distance, TRUE)
     rstandard0 <- failwith(NULL, rstandard, TRUE)
+    predict0 <- failwith(NULL, predict, TRUE)
     
     # call predict with arguments
     args <- list(x)
@@ -92,7 +93,11 @@ augment_columns <- function(x, data, newdata, type, type.predict = type,
     }
     args$se.fit <- se.fit
     args <- c(args, list(...))
-    pred <- do.call(predict, args)
+    pred <- do.call(predict0, args)
+    if (is.null(pred)) {
+        # try "fitted" instead- some objects don't have "predict" method
+        pred <- do.call(fitted, args)
+    }
 
     if (is.list(pred)) {
         ret <- data.frame(.fitted = pred$fit)
