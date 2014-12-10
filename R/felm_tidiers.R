@@ -122,8 +122,8 @@ augment.felm <- function(x, data = NULL, ...) {
     }    
     data <- fix_data_frame(data, newcol = ".rownames")
     y <- eval(x$call$formula[[2]], envir = data)
-    data$.fitted <- x$fitted.values
-    data$.resid <- x$residuals
+    data$.fitted <- c(x$fitted.values)
+    data$.resid <- c(x$residuals)
     object <-  lfe::getfe(x)
     if (!is.null(object)){
         fe_list <- levels(object$fe)
