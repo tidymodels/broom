@@ -1,6 +1,10 @@
 broom 0.3.4.9000
 -----------
 
+* Added tidiers for `mer` objects from lme4.0 and versions of lme4 prior to 1.1-7.
+* Fixed small bug in `felm` where the `.fitted` and `.resid` columns were matrices rather than vectors.
+* Added tidiers for `rlm` (robust linear model) and `gam` (generalized additive model) objects, including adjustments to "lm" tidiers in order to handle them. See `?rlm_tidiers` and `?gam_tidiers` for more.
+
 broom 0.3.4
 -----------
 

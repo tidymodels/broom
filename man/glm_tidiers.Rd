@@ -26,7 +26,7 @@
 }
 \description{
 Tidy a \code{glm} object. The \code{tidy} and \code{augment} methods are handled
-by \code{\link{lm_tidiers}}.
+by \link{lm_tidiers}.
 }
 \examples{
 g <- glm(am ~ mpg, mtcars, family = "binomial")

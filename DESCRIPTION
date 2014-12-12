@@ -25,6 +25,7 @@ Imports:
 Suggests:
     knitr,
     survival,
+    gam,
     glmnet,
     lfe,
     Lahman,

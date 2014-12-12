@@ -9,8 +9,8 @@
 \method{tidy}{lm}(x, conf.int = FALSE, conf.level = 0.95,
   exponentiate = FALSE, ...)
 
-\method{augment}{lm}(x, data = x$model, newdata, type.predict, type.residuals,
-  ...)
+\method{augment}{lm}(x, data = model.frame(x), newdata, type.predict,
+  type.residuals, ...)
 
 \method{glance}{lm}(x, ...)
 }
@@ -62,6 +62,9 @@ data:
   \item{.se.fit}{Standard errors of fitted values}
   \item{.resid}{Residuals}
   \item{.std.resid}{Standardised residuals}
+
+(Some unusual "lm" objects, such as "rlm" from MASS, may omit
+\code{.cooksd} and \code{.std.resid})
 
 When \code{newdata} is supplied, \code{augment.lm} returns one row for each
 observation, with three columns added to the new data:

@@ -1,7 +1,7 @@
 #' Tidying methods for a glm object
 #' 
 #' Tidy a \code{glm} object. The \code{tidy} and \code{augment} methods are handled
-#' by \code{\link{lm_tidiers}}.
+#' by \link{lm_tidiers}.
 #' 
 #' @param x glm object
 #' @param ... extra arguments, not used

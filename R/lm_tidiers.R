@@ -113,8 +113,9 @@ NULL
 #' @export
 tidy.lm <- function(x, conf.int=FALSE, conf.level=.95,
                     exponentiate=FALSE, ...) {
-    nn <- c("estimate", "std.error", "statistic", "p.value")
-    ret <- fix_data_frame(coef(summary(x)), nn)
+    co <- coef(summary(x))
+    nn <- c("estimate", "std.error", "statistic", "p.value")[1:ncol(co)]
+    ret <- fix_data_frame(co, nn)
 
     if (exponentiate) {
         # save transformation function for use on confidence interval
@@ -158,6 +159,9 @@ tidy.lm <- function(x, conf.int=FALSE, conf.level=.95,
 #'   \item{.resid}{Residuals}
 #'   \item{.std.resid}{Standardised residuals}
 #' 
+#' (Some unusual "lm" objects, such as "rlm" from MASS, may omit
+#' \code{.cooksd} and \code{.std.resid})
+#' 
 #' When \code{newdata} is supplied, \code{augment.lm} returns one row for each
 #' observation, with three columns added to the new data:
 #'   \item{.fitted}{Fitted values of model}
@@ -165,7 +169,7 @@ tidy.lm <- function(x, conf.int=FALSE, conf.level=.95,
 #'   \item{.resid}{Residuals of fitted values on the new data}
 #' 
 #' @export
-augment.lm <- function(x, data = x$model, newdata,
+augment.lm <- function(x, data = model.frame(x), newdata,
                        type.predict, type.residuals, ...) {    
     augment_columns(x, data, newdata, type.predict = type.predict,
                            type.residuals = type.residuals)

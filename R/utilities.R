@@ -77,6 +77,7 @@ insert_NAs <- function(x, original) {
 #' @export
 augment_columns <- function(x, data, newdata, type, type.predict = type,
                             type.residuals = type, se.fit = TRUE, ...) {
+    notNAs <- function(o) if (is.null(o) || all(is.na(o))) { NULL } else {o}
     residuals0 <- failwith(NULL, residuals, TRUE)
     influence0 <- failwith(NULL, influence, TRUE)
     cooks.distance0 <- failwith(NULL, cooks.distance, TRUE)
@@ -125,8 +126,10 @@ augment_columns <- function(x, data, newdata, type, type.predict = type,
             ret$.sigma <- infl$sigma
         }
         
-        ret$.cooksd <- cooks.distance0(x)
-        ret$.std.resid <- rstandard0(x)
+        # if cooksd and rstandard can be computed and aren't all NA
+        # (as they are in rlm), do so
+        ret$.cooksd <- notNAs(cooks.distance0(x))
+        ret$.std.resid <- notNAs(rstandard0(x))
         
         original <- data
         
