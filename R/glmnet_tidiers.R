@@ -177,7 +177,7 @@ tidy.cv.glmnet <- function(x, ...) {
                              "nzero")])
     colnames(ret) <- c("lambda", "estimate", "std.error", "conf.high",
                        "conf.low", "nzero")
-    return(ret)
+    return(unrowname(ret))
 }
 
 

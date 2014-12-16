@@ -31,6 +31,7 @@ It also provides methods for S3 objects in popular third-party packages, includi
 
 * `lme4`
 * `glmnet`
+* `gam`
 * `survival`
 * `lfe`
 * `zoo`

@@ -38,13 +38,13 @@ kclust
 summary(kclust)
 ```
 
-The output is a list of vectors, where each component has a different length. There's one of length `r nrow(points)`: the same as our original dataset. There are a number of elements of length 3: `withinss`, `tot.withinss`, and `betweenss`- and `centers` is a matrix with 3 rows. And then there are the elements of length 1: .
+The output is a list of vectors, where each component has a different length. There's one of length `r nrow(points)`: the same as our original dataset. There are a number of elements of length 3: `withinss`, `tot.withinss`, and `betweenss`- and `centers` is a matrix with 3 rows. And then there are the elements of length 1: `totss`, `tot.withinss`, `betweenss`, and `iter`.
 
 These differing lengths have a deeper meaning when we want to tidy our dataset: they signify that each type of component communicates a *different kind* of information.
 
 * `cluster` (`r nrow(points.matrix)` values) contains information about each *point*
-* `centers`, `withinss` and `size` (`r `) contain information about each *cluster*
-* `totss`, `tot.withinss`, `betweenss`, and `iter` contain information about the *full clustering*
+* `centers`, `withinss` and `size` (3 values) contain information about each *cluster*
+* `totss`, `tot.withinss`, `betweenss`, and `iter` (1 value) contain information about the *full clustering*
 
 Which of these do we want to extract? There is no right answer: each of them may be interesting to an analyst. Because they communicate entirely different information (not to mention there's no straightforward way to combine them), they are extracted by separate functions. `augment` adds the point classifications to the original dataset:
 
