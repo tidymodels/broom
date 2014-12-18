@@ -42,7 +42,11 @@ It also provides methods for S3 objects in popular third-party packages, includi
 Installation and Documentation
 ------------
 
-You can install the broom package using [devtools](https://github.com/hadley/devtools)
+The broom package is available on CRAN:
+
+    install.packages("broom")
+
+You can also install the development version of the broom package using [devtools](https://github.com/hadley/devtools):
 
 ```
 library(devtools)
