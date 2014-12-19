@@ -119,9 +119,10 @@ tidy.lm <- function(x, conf.int=FALSE, conf.level=.95,
 
     if (exponentiate) {
         # save transformation function for use on confidence interval
-        if (is.null(x$family) || x$family$link != "logit") {
+        if (is.null(x$family) ||
+                (x$family$link != "logit" && x$family$link != "log")) {
             warning(paste("Exponentiating coefficients, but model did not use",
-                          "a logit link function"))
+                          "a log or logit link function"))
         }
         trans <- exp
     } else {
