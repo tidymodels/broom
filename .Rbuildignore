@@ -2,4 +2,5 @@
 ^\.Rproj\.user$
 ^NEWS\.md$
 ^man-roxygen$
-cran-comments.md
+^revdep$
+^cran-comments\.md$

@@ -43,3 +43,4 @@ URL: http://github.com/dgrtwo/broom
 BugReports: http://github.com/dgrtwo/broom/issues
 VignetteBuilder: knitr
 License: MIT + file LICENSE
+Additional_repositories: http://lme4.r-forge.r-project.org/repos

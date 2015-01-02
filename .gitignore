@@ -1,7 +1,5 @@
-*.Rproj
 .Rproj.user
 .Rhistory
 .RData
 vignettes/*cache
 inst/doc
-cran-comments.md
