@@ -1,4 +1,4 @@
-broom 0.3.4.9000
+broom 0.3.5
 -----------
 
 * Added tidiers for `mer` objects from lme4.0 and versions of lme4 prior to 1.1-7.
