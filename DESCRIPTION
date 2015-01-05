@@ -36,11 +36,9 @@ Suggests:
     multcomp,
     testthat,
     lme4,
-    lme4.0,
     zoo,
     ggplot2
 URL: http://github.com/dgrtwo/broom
 BugReports: http://github.com/dgrtwo/broom/issues
 VignetteBuilder: knitr
 License: MIT + file LICENSE
-Additional_repositories: http://lme4.r-forge.r-project.org/repos
