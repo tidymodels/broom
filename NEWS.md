@@ -1,3 +1,8 @@
+broom 0.3.5.9000
+-----------
+
+* Fixed bug in `tidy.pairwise.htest`, which now can handle cases where the grouping variable is numeric.
+
 broom 0.3.5
 -----------
 

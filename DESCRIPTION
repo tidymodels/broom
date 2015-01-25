@@ -1,7 +1,7 @@
 Package: broom
 Type: Package
 Title: Convert Statistical Analysis Objects Into Tidy Data Frames
-Version: 0.3.5
+Version: 0.3.5.9000
 Date: 2014-09-11
 Authors@R: as.person(c(
     "David Robinson <admiral.david@gmail.com> [aut, cre]",
