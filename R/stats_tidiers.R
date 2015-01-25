@@ -179,7 +179,7 @@ tidy.ts <- function(x, ...) {
 #' tidy a pairwise hypothesis test
 #' 
 #' Tidy a pairwise.htest object, containing (adjusted) p-values for multiple
-#' pairwise hypothesis tests
+#' pairwise hypothesis tests.
 #' 
 #' @param x a "pairwise.htest" object
 #' @param ... extra arguments (not used)
@@ -190,7 +190,10 @@ tidy.ts <- function(x, ...) {
 #'   \item{p.value}{(Adjusted) p-value of comparison}
 #' 
 #' @details Note that in one-sided tests, the alternative hypothesis of each
-#' test can be stated as "group1 is greater/less than group2"
+#' test can be stated as "group1 is greater/less than group2".
+#' 
+#' Note also that the columns of group1 and group2 will always be a factor,
+#' even if the original input is (e.g.) numeric.
 #' 
 #' @examples
 #' 
@@ -212,9 +215,10 @@ tidy.ts <- function(x, ...) {
 #' 
 #' @export
 tidy.pairwise.htest <- function(x, ...) {
-    x$p.value %>% fix_data_frame(newcol = "group1") %>%
-        tidyr::gather(group2, p.value, -group1) %>%
-        na.omit()
+    data.frame(group1 = rownames(x$p.value)) %>%
+      cbind(as.data.frame(x$p.value)) %>%
+      tidyr::gather(group2, p.value, -group1) %>%
+      na.omit()
 }
 
 
