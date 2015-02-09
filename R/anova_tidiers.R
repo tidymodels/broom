@@ -4,7 +4,7 @@
 #' Only a \code{tidy} method is provided, not an \code{augment} or
 #' \code{glance} method.
 #' 
-#' @param x An object of class "anova" or "aov"
+#' @param x An object of class "anova", "aov", or "aovlist"
 #' @param ... extra arguments (not used)
 #' 
 #' @return A data.frame with columns
@@ -14,6 +14,12 @@
 #'   \item{meansq}{Mean of sum of squares among degrees of freedom}
 #'   \item{statistic}{F statistic}
 #'   \item{p.value}{P-value from F test}
+#'
+#' In the case of an \code{"aovlist"} object, there is also a \code{stratum}
+#' column describing the error stratum
+#' 
+#' @details Note that the "term" column of an ANOVA table can come with
+#' leading or trailing whitespace, which this tidying method trims.
 #' 
 #' @examples
 #' 
@@ -23,21 +29,49 @@
 #' a <- aov(mpg ~ wt + qsec + disp, mtcars)
 #' tidy(a)
 #' 
+#' al <- aov(mpg ~ wt + qsec + Error(disp / am), mtcars)
+#' tidy(al)
+#' 
 #' @name anova_tidiers
 NULL
 
 
 #' @rdname anova_tidiers
+#' 
+#' @import dplyr
+#' 
 #' @export
 tidy.anova <- function(x, ...) {
     nn <- c("df", "sumsq", "meansq", "statistic", "p.value")
-    fix_data_frame(x, nn)
+    fix_data_frame(x, nn) %>%
+        mutate(term = stringr::str_trim(term))
+}
+
+
+#' @rdname anova_tidiers
+#' 
+#' @import dplyr
+#' 
+#' @export
+tidy.aov <- function(x, ...) {
+    nn <- c("df", "sumsq", "meansq", "statistic", "p.value")
+    s <- summary(x)
+    fix_data_frame(s[[1]], nn[seq_len(ncol(s[[1]]))]) %>%
+        mutate(term = stringr::str_trim(term))
 }
 
 
 #' @rdname anova_tidiers
 #' @export
-tidy.aov <- function(x, ...) {
-    nn <- c("df", "sumsq", "meansq", "statistic", "p.value")
-    fix_data_frame(summary(x)[[1]], nn)
+tidy.aovlist <- function(x, ...) {
+    # must filter out Intercept stratum since it has no dimensions
+    if (names(x)[1L] == "(Intercept)") {
+        x <- x[-1L]
+    }
+
+    ret <- plyr::ldply(x[-1], tidy, .id = "stratum")
+    # get rid of leading and training whitespace in term and stratum columns
+    ret <- ret %>% mutate(term = stringr::str_trim(term),
+                          stratum = stringr::str_trim(stratum))
+    ret
 }

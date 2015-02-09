@@ -2,6 +2,7 @@ broom 0.3.5.9000
 -----------
 
 * Fixed bug in `tidy.pairwise.htest`, which now can handle cases where the grouping variable is numeric.
+* Added `tidy.aovlist` method. This added `stringr` package to IMPORTS to trim whitespace from the beginning and end of the `term` and `stratum` columns. This also required adjusting `tidy.aov` so that it could handle strata that are missing p-values.
 
 broom 0.3.5
 -----------

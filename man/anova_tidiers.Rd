@@ -4,14 +4,17 @@
 \alias{anova_tidiers}
 \alias{tidy.anova}
 \alias{tidy.aov}
+\alias{tidy.aovlist}
 \title{Tidying methods for anova and AOV objects}
 \usage{
 \method{tidy}{anova}(x, ...)
 
 \method{tidy}{aov}(x, ...)
+
+\method{tidy}{aovlist}(x, ...)
 }
 \arguments{
-\item{x}{An object of class "anova" or "aov"}
+\item{x}{An object of class "anova", "aov", or "aovlist"}
 
 \item{...}{extra arguments (not used)}
 }
@@ -23,11 +26,18 @@ A data.frame with columns
   \item{meansq}{Mean of sum of squares among degrees of freedom}
   \item{statistic}{F statistic}
   \item{p.value}{P-value from F test}
+
+In the case of an \code{"aovlist"} object, there is also a \code{stratum}
+column describing the error stratum
 }
 \description{
 Tidies the result of an analysis of variance into an ANOVA table.
 Only a \code{tidy} method is provided, not an \code{augment} or
 \code{glance} method.
+}
+\details{
+Note that the "term" column of an ANOVA table can come with
+leading or trailing whitespace, which this tidying method trims.
 }
 \examples{
 a <- anova(lm(mpg ~ wt + qsec + disp, mtcars))
@@ -35,5 +45,8 @@ tidy(a)
 
 a <- aov(mpg ~ wt + qsec + disp, mtcars)
 tidy(a)
+
+al <- aov(mpg ~ wt + qsec + Error(disp / am), mtcars)
+tidy(al)
 }
 

@@ -19,11 +19,14 @@ A data frame with one row per group/group comparison, with columns
 }
 \description{
 Tidy a pairwise.htest object, containing (adjusted) p-values for multiple
-pairwise hypothesis tests
+pairwise hypothesis tests.
 }
 \details{
 Note that in one-sided tests, the alternative hypothesis of each
-test can be stated as "group1 is greater/less than group2"
+test can be stated as "group1 is greater/less than group2".
+
+Note also that the columns of group1 and group2 will always be a factor,
+even if the original input is (e.g.) numeric.
 }
 \examples{
 attach(airquality)

@@ -21,7 +21,8 @@ Imports:
     plyr,
     dplyr,
     tidyr,
-    psych
+    psych,
+    stringr
 Suggests:
     knitr,
     survival,
