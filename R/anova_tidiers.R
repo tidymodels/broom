@@ -69,7 +69,7 @@ tidy.aovlist <- function(x, ...) {
         x <- x[-1L]
     }
 
-    ret <- plyr::ldply(x[-1], tidy, .id = "stratum")
+    ret <- plyr::ldply(x, tidy, .id = "stratum")
     # get rid of leading and training whitespace in term and stratum columns
     ret <- ret %>% mutate(term = stringr::str_trim(term),
                           stratum = stringr::str_trim(stratum))
