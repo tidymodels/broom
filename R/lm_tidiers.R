@@ -197,7 +197,9 @@ augment.lm <- function(x, data = model.frame(x), newdata,
 #' 
 #' @export
 glance.lm <- function(x, ...) {
-    s <- summary(x)
+    # use summary.lm explicity, so that c("aov", "lm") objects can be
+    # summarized and glanced at
+    s <- summary.lm(x)
     ret <- with(s, data.frame(r.squared=r.squared,
                               adj.r.squared=adj.r.squared,
                               sigma=sigma,
