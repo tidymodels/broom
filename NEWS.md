@@ -1,10 +1,11 @@
-broom 0.3.5.9000
+broom 0.3.6
 -----------
 
 * Fixed bug in `tidy.pairwise.htest`, which now can handle cases where the grouping variable is numeric.
 * Added `tidy.aovlist` method. This added `stringr` package to IMPORTS to trim whitespace from the beginning and end of the `term` and `stratum` columns. This also required adjusting `tidy.aov` so that it could handle strata that are missing p-values.
 * Set up `glance.lm` to work with `aov` objects along with `lm` objects.
 * Added `tidy` and `glance` for matrix objects, with `tidy.matrix` converting a matrix to a data frame with rownames included, and `glance.matrix` returning the same result as `glance.data.frame`.
+* Changed DESCRIPTION Authors@R to new format
 
 broom 0.3.5
 -----------

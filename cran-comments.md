@@ -1,11 +1,12 @@
-## Resubmission
-This is a resubmission. In this version I have
+broom 0.3.6
+-----------
 
-* Removed 'require("maptools")' call that led to a NOTE on R-devel
+This is a resubmission:
+
+* Changed Title field to title case ("Into" to "into")
 
 ## Test environments
 * local OS X install, R 3.1.2
-* ubuntu 12.04 (on travis-ci), R 3.1.2
 * win-builder (devel and release)
 
 ## R CMD check results
