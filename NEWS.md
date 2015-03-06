@@ -1,3 +1,8 @@
+broom 0.3.6.9000
+-----------
+
+* Added `tidy.coeftest` for coeftest objects from the lmtest package.
+
 broom 0.3.6
 -----------
 
