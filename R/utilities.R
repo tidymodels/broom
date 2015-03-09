@@ -94,7 +94,10 @@ augment_columns <- function(x, data, newdata, type, type.predict = type,
     }
     args$se.fit <- se.fit
     args <- c(args, list(...))
-    pred <- do.call(predict0, args)
+    
+    # suppress warning: geeglm objects complain about predict being used
+    pred <- suppressWarnings(do.call(predict0, args))
+
     if (is.null(pred)) {
         # try "fitted" instead- some objects don't have "predict" method
         pred <- do.call(fitted, args)
@@ -104,7 +107,7 @@ augment_columns <- function(x, data, newdata, type, type.predict = type,
         ret <- data.frame(.fitted = pred$fit)
         ret$.se.fit <- pred$se.fit
     } else {
-        ret <- data.frame(.fitted = pred)
+        ret <- data.frame(.fitted = as.numeric(pred))
     }
     
     na_action <- if (isS4(x)) {
@@ -184,7 +187,7 @@ augment_columns <- function(x, data, newdata, type, type.predict = type,
 #' 
 #' @details In one special case, deviance for objects of the
 #' \code{lmerMod} class from lme4 is computed with
-#' \code{deviance(x, REML=FALSE)}
+#' \code{deviance(x, REML=FALSE)}.
 #' 
 #' @param ret a one-row data frame (a partially complete glance)
 #' @param x the prediction model
@@ -200,7 +203,8 @@ augment_columns <- function(x, data, newdata, type, type.predict = type,
 #' 
 #' @export
 finish_glance <- function(ret, x) {
-    ret$logLik <- as.numeric(tryCatch(logLik(x), error = function(e) NULL))
+    
+    ret$logLik <- tryCatch(as.numeric(logLik(x)), error = function(e) NULL)
     ret$AIC <- tryCatch(AIC(x), error = function(e) NULL)
     ret$BIC <- tryCatch(BIC(x), error = function(e) NULL)
     
@@ -213,7 +217,7 @@ finish_glance <- function(ret, x) {
     }
     ret$df.residual <- tryCatch(df.residual(x), error = function(e) NULL)
     
-    return(ret)
+    return(unrowname(ret))
 }
 
 
