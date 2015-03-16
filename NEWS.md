@@ -3,6 +3,7 @@ broom 0.3.6.9000
 
 * Added tidiers for "plm" (panel linear model) objects from the plm package.
 * Added `tidy.coeftest` for coeftest objects from the lmtest package.
+* Set up `tidy.lm` to work with "mlm" (multiple linear model) objects (those with multiple response columns).
 
 broom 0.3.6
 -----------

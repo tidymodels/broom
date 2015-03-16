@@ -49,6 +49,11 @@ The structure depends on the method chosen.
   \item{statistic}{t-statistic}
   \item{p.value}{two-sided p-value}
 
+If the linear model is an "mlm" object (multiple linear model), there is an
+additional column:
+  \item{response}{Which response column the coefficients correspond to
+  (typically Y1, Y2, etc)}
+
 If \code{cont.int=TRUE}, it also includes columns for \code{conf.low} and
 \code{conf.high}, computed with \code{\link{confint}}.
 
@@ -98,6 +103,9 @@ the model with \code{na.action = na.exclude}.
 
 If \code{conf.int=TRUE}, the confidence interval is computed with
 the \code{\link{confint}} function.
+
+While \code{tidy} is supported for "mlm" objects, \code{augment} and
+\code{glance} are not.
 
 When the modeling was performed with \code{na.action = "na.omit"}
 (as is the typical default), rows with NA in the initial data are omitted
@@ -171,6 +179,12 @@ ggplot(au, aes(.hat, .cooksd)) +
   geom_smooth(se = FALSE) +
   geom_point()
 qplot(.hat, .cooksd, size = .cooksd / .hat, data = au) + scale_size_area()
+
+# column-wise models
+a <- matrix(rnorm(20), nrow = 10)
+b <- a + rnorm(length(a))
+result <- lm(b ~ a)
+tidy(result)
 }
 \seealso{
 \code{\link{summary.lm}}

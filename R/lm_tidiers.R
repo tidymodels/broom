@@ -86,6 +86,12 @@
 #'   geom_smooth(se = FALSE) +
 #'   geom_point()
 #' qplot(.hat, .cooksd, size = .cooksd / .hat, data = au) + scale_size_area()
+#' 
+#' # column-wise models
+#' a <- matrix(rnorm(20), nrow = 10)
+#' b <- a + rnorm(length(a))
+#' result <- lm(b ~ a)
+#' tidy(result)
 NULL
 
 
@@ -100,12 +106,20 @@ NULL
 #' @details If \code{conf.int=TRUE}, the confidence interval is computed with
 #' the \code{\link{confint}} function.
 #' 
+#' While \code{tidy} is supported for "mlm" objects, \code{augment} and
+#' \code{glance} are not.
+#' 
 #' @return \code{tidy.lm} returns one row for each coefficient, with five columns:
 #'   \item{term}{The term in the linear model being estimated and tested}
 #'   \item{estimate}{The estimated coefficient}
 #'   \item{std.error}{The standard error from the linear model}
 #'   \item{statistic}{t-statistic}
 #'   \item{p.value}{two-sided p-value}
+#' 
+#' If the linear model is an "mlm" object (multiple linear model), there is an
+#' additional column:
+#'   \item{response}{Which response column the coefficients correspond to
+#'   (typically Y1, Y2, etc)}
 #' 
 #' If \code{cont.int=TRUE}, it also includes columns for \code{conf.low} and
 #' \code{conf.high}, computed with \code{\link{confint}}.
@@ -114,8 +128,16 @@ NULL
 tidy.lm <- function(x, conf.int=FALSE, conf.level=.95,
                     exponentiate=FALSE, ...) {
     co <- coef(summary(x))
-    nn <- c("estimate", "std.error", "statistic", "p.value")[1:ncol(co)]
-    ret <- fix_data_frame(co, nn)
+    
+    nn <- c("estimate", "std.error", "statistic", "p.value")
+    if (is(co, "listof")) {
+        # multiple response variables
+        ret <- plyr::ldply(co, fix_data_frame, nn[1:ncol(co[[1]])],
+                           .id = "response")
+        ret$response <- stringr::str_replace(ret$response, "Response ", "")
+    } else {
+        ret <- fix_data_frame(co, nn[1:ncol(co)])
+    }
 
     if (exponentiate) {
         # save transformation function for use on confidence interval
@@ -210,4 +232,16 @@ glance.lm <- function(x, ...) {
                               df=s$df[1]))
     ret <- finish_glance(unrowname(ret), x)
     ret
+}
+
+
+#' @export
+augment.mlm <- function(x, ...) {
+    stop("augment does not support multiple responses")
+}
+
+
+#' @export
+glance.mlm <- function(x, ...) {
+    stop("glance does not support multiple responses")
 }
