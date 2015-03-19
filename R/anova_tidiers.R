@@ -43,8 +43,13 @@ NULL
 #' @export
 tidy.anova <- function(x, ...) {
     nn <- c("df", "sumsq", "meansq", "statistic", "p.value")
-    fix_data_frame(x, nn) %>%
-        mutate(term = stringr::str_trim(term))
+    ret <- fix_data_frame(x, nn[1:ncol(x)])
+
+    if ("term" %in% colnames(ret)) {
+        # if rows had names, strip whitespace in them
+        ret <- ret %>% mutate(term = stringr::str_trim(term))
+    }
+    ret
 }
 
 
@@ -54,10 +59,8 @@ tidy.anova <- function(x, ...) {
 #' 
 #' @export
 tidy.aov <- function(x, ...) {
-    nn <- c("df", "sumsq", "meansq", "statistic", "p.value")
     s <- summary(x)
-    fix_data_frame(s[[1]], nn[seq_len(ncol(s[[1]]))]) %>%
-        mutate(term = stringr::str_trim(term))
+    tidy.anova(s[[1]])
 }
 
 
@@ -70,7 +73,7 @@ tidy.aovlist <- function(x, ...) {
     }
 
     ret <- plyr::ldply(x, tidy, .id = "stratum")
-    # get rid of leading and training whitespace in term and stratum columns
+    # get rid of leading and trailing whitespace in term and stratum columns
     ret <- ret %>% mutate(term = stringr::str_trim(term),
                           stratum = stringr::str_trim(stratum))
     ret
