@@ -54,7 +54,7 @@ additional column:
   \item{response}{Which response column the coefficients correspond to
   (typically Y1, Y2, etc)}
 
-If \code{cont.int=TRUE}, it also includes columns for \code{conf.low} and
+If \code{conf.int=TRUE}, it also includes columns for \code{conf.low} and
 \code{conf.high}, computed with \code{\link{confint}}.
 
 When \code{newdata} is not supplied \code{augment.lm} returns

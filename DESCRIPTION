@@ -40,6 +40,7 @@ Suggests:
     zoo,
     lmtest,
     plm,
+    biglm,
     ggplot2
 URL: http://github.com/dgrtwo/broom
 BugReports: http://github.com/dgrtwo/broom/issues

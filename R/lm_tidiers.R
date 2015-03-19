@@ -121,12 +121,12 @@ NULL
 #'   \item{response}{Which response column the coefficients correspond to
 #'   (typically Y1, Y2, etc)}
 #' 
-#' If \code{cont.int=TRUE}, it also includes columns for \code{conf.low} and
+#' If \code{conf.int=TRUE}, it also includes columns for \code{conf.low} and
 #' \code{conf.high}, computed with \code{\link{confint}}.
 #' 
 #' @export
-tidy.lm <- function(x, conf.int=FALSE, conf.level=.95,
-                    exponentiate=FALSE, ...) {
+tidy.lm <- function(x, conf.int = FALSE, conf.level = .95,
+                    exponentiate = FALSE, ...) {
     co <- coef(summary(x))
     
     nn <- c("estimate", "std.error", "statistic", "p.value")
@@ -139,27 +139,8 @@ tidy.lm <- function(x, conf.int=FALSE, conf.level=.95,
         ret <- fix_data_frame(co, nn[1:ncol(co)])
     }
 
-    if (exponentiate) {
-        # save transformation function for use on confidence interval
-        if (is.null(x$family) ||
-                (x$family$link != "logit" && x$family$link != "log")) {
-            warning(paste("Exponentiating coefficients, but model did not use",
-                          "a log or logit link function"))
-        }
-        trans <- exp
-    } else {
-        trans <- identity
-    }
-
-    if (conf.int) {
-        # avoid "Waiting for profiling to be done..." message
-        CI <- suppressMessages(confint(x, level = conf.level))
-        colnames(CI) = c("conf.low", "conf.high")
-        ret <- cbind(ret, trans(unrowname(CI)))
-    }
-    ret$estimate <- trans(ret$estimate)
-
-    ret
+    process_lm(ret, x, conf.int = conf.int, conf.level = conf.level,
+               exponentiate = exponentiate)
 }
 
 
@@ -244,4 +225,42 @@ augment.mlm <- function(x, ...) {
 #' @export
 glance.mlm <- function(x, ...) {
     stop("glance does not support multiple responses")
+}
+
+
+#' helper function to process a tidied lm object
+#' 
+#' Adds a confidence interval, and possibly exponentiates, a tidied
+#' object. Useful for operations shared between lm and biglm.
+#' 
+#' @param ret data frame with a tidied version of a coefficient matrix
+#' @param x an "lm", "glm", "biglm", or "bigglm" object
+#' @param conf.int whether to include a confidence interval
+#' @param conf.level confidence level of the interval, used only if
+#' \code{conf.int=TRUE}
+#' @param exponentiate whether to exponentiate the coefficient estimates
+#' and confidence intervals (typical for logistic regression)
+process_lm <- function(ret, x, conf.int = FALSE, conf.level = .95,
+                       exponentiate = FALSE) {
+    if (exponentiate) {
+        # save transformation function for use on confidence interval
+        if (is.null(x$family) ||
+            (x$family$link != "logit" && x$family$link != "log")) {
+            warning(paste("Exponentiating coefficients, but model did not use",
+                          "a log or logit link function"))
+        }
+        trans <- exp
+    } else {
+        trans <- identity
+    }
+    
+    if (conf.int) {
+        # avoid "Waiting for profiling to be done..." message
+        CI <- suppressMessages(confint(x, level = conf.level))
+        colnames(CI) = c("conf.low", "conf.high")
+        ret <- cbind(ret, trans(unrowname(CI)))
+    }
+    ret$estimate <- trans(ret$estimate)
+    
+    ret
 }
