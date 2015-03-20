@@ -231,13 +231,13 @@ tidy.coxph <- function(x, exponentiate = FALSE, conf.int = .95, ...) {
     co <- coef(s)
 
     nn <- c("estimate", "std.error", "statistic", "p.value")
-    ret <- fix_data_frame(co[, -2], nn)
+    ret <- fix_data_frame(co[, -2, drop=FALSE], nn)
     
     if (exponentiate) {
         ret$estimate <- exp(ret$estimate)
     }
     if (!is.null(s$conf.int)) {
-        CI <- as.matrix(unrowname(s$conf.int[, 3:4]))
+        CI <- as.matrix(unrowname(s$conf.int[, 3:4, drop=FALSE]))
         colnames(CI) <- c("conf.low", "conf.high")
         if (!exponentiate) {
             CI <- log(CI)
