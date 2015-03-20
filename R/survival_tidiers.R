@@ -231,7 +231,7 @@ tidy.coxph <- function(x, exponentiate = FALSE, conf.int = .95, ...) {
     co <- coef(s)
 
     nn <- c("estimate", "std.error", "statistic", "p.value")
-    ret <- fix_data_frame(co[, -2], nn)
+    ret <- fix_data_frame(co[, -2, drop=FALSE], nn)
     
     if (exponentiate) {
         ret$estimate <- exp(ret$estimate)
