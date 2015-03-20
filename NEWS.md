@@ -5,6 +5,7 @@ broom 0.3.6.9000
 * Added `tidy.coeftest` for coeftest objects from the lmtest package.
 * Set up `tidy.lm` to work with "mlm" (multiple linear model) objects (those with multiple response columns).
 * Added `tidy` and `glance` for "biglm" and "bigglm" objects from the biglm package.
+* Fixed bug in `tidy.coxph` when one-row matrices are returned
 
 broom 0.3.6
 -----------
