@@ -222,6 +222,32 @@ tidy.pairwise.htest <- function(x, ...) {
 }
 
 
+#' tidy a power.htest
+#' 
+#' @param x a power.htest object
+#' @param ... extra arguments, not used
+#' 
+#' @return A data frame with one row per parameter passed in, with
+#' columns \code{n}, \code{delta}, \code{sd}, \code{sig.level}, and
+#' \code{power} (from the \code{power.htest} object).
+#' 
+#' @seealso \link{power.t.test}
+#' 
+#' @examples
+#' 
+#' ptt <- power.t.test(n = 2:30, delta = 1)
+#' tidy(ptt)
+#' 
+#' library(ggplot2)
+#' ggplot(tidy(ptt), aes(n, power)) + geom_line()
+#' 
+#' @export
+tidy.power.htest <- function(x, ...) {
+    cols <- compact(x[c("n", "delta", "sd", "sig.level", "power")])
+    as.data.frame(cols)
+}
+
+
 # todo?
 # tidy.acf
 # tidy.infl
