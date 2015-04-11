@@ -7,6 +7,7 @@ broom 0.3.6.9000
 * Added `tidy` and `glance` for "biglm" and "bigglm" objects from the biglm package.
 * Fixed bug in `tidy.coxph` when one-row matrices are returned 
 * Added `tidy.power.htest`
+* Add `tidy` and `glance` for `summaryDefault` objects
 
 broom 0.3.6
 -----------
