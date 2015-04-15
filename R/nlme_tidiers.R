@@ -103,6 +103,9 @@ tidy.lme <- function(x, effects = "random", ...) {
 #'
 #' @export
 augment.lme <- function(x, data = x$data, newdata, ...) {    
+    if (is.null(data)){
+        stop("augment.lme must be called with an explicit 'data' argument for this (n)lme fit  because of an inconsistency in nlme.")
+    }
     # move rownames if necessary
     if (missing(newdata)) {
         newdata <- NULL

@@ -42,3 +42,41 @@ if (require(nlme, quietly = TRUE)) {
     })
 
 }
+
+
+library(nlme)
+testFit <- function(fit, data = NULL){
+  test_that("Pinheiro/Bates fit works", {
+     tidy(fit, "fixed")
+     tidy(fit)
+     glance(fit)
+     if (is.null(data)) {
+       augment(fit)
+    } else {
+      augment(fit, data)
+    }
+  })
+}
+
+if (require(nlme, quietly = TRUE)) {
+    context("More nlme models")
+    testFit(lme(score ~ Machine, data = Machines, random = ~1|Worker))
+    testFit(lme(score ~ Machine, data = Machines, random = ~1|Worker))
+    testFit(lme(score ~ Machine, data = Machines, random = ~1|Worker/Machine))
+    testFit(lme(pixel ~ day + day^2, data = Pixel, random = list(Dog = ~day, Side = ~1)))
+    testFit(lme(pixel ~ day + day^2 + Side, data = Pixel, 
+                random = list(Dog = ~day, Side = ~1)))
+    
+    testFit(lme(yield ~ ordered(nitro)*Variety, data = Oats, 
+                random = ~1/Block/Variety))
+    # There are cases where no data set is returned in the result 
+    # We can do nothing about this inconsitency but give a useful error message in augment
+    fit  = nlme(conc ~ SSfol(Dose, Time, lKe, lKa, lCl),data=Theoph,
+         random = pdDiag(lKe + lKa + lCl ~ 1))
+    test_that(
+      "Fit without data in returned structure works when data are given", {
+            testFit(fit, Theoph)
+        })
+    # When no data are passed, a meaningful message is issued
+    expect_error(augment(fit), "explicit")
+}
