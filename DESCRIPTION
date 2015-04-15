@@ -37,6 +37,7 @@ Suggests:
     multcomp,
     testthat,
     lme4,
+    nlme,
     zoo,
     lmtest,
     plm,
