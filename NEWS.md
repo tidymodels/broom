@@ -8,6 +8,7 @@ broom 0.3.6.9000
 * Fixed bug in `tidy.coxph` when one-row matrices are returned 
 * Added `tidy.power.htest`
 * Add `tidy` and `glance` for `summaryDefault` objects
+* Added tidiers for "lme" (linear mixed effects models) from the nlme package
 
 broom 0.3.6
 -----------
