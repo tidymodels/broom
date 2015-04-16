@@ -9,6 +9,7 @@ broom 0.3.6.9000
 * Added `tidy.power.htest`
 * Add `tidy` and `glance` for `summaryDefault` objects
 * Added tidiers for "lme" (linear mixed effects models) from the nlme package
+* Add `tidy` and `glance` for `multinom` objects from the nnet package.
 
 broom 0.3.6
 -----------
