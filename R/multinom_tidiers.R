@@ -60,20 +60,19 @@ NULL
 #' \code{glance.multinom} returns a 
 #' 
 #' @export
-
 tidy.multinom <- function(x, 
                           conf.int=FALSE, 
                           conf.level=.95, 
-                          exponentiate=TRUE, ...){
-  
+                          exponentiate=TRUE, ...) {
   col_names <- if (length(x$lev) > 2) colnames(coef(x)) else names(coef(x))
+  s <- summary(x)
   
-  coef <- matrix(coef(summary(x)), 
+  coef <- matrix(coef(s), 
                  byrow=TRUE, 
                  nrow=length(x$lev)-1,
                  dimnames=list(x$lev[-1], 
                                col_names))
-  se <- matrix(summary(x)$standard.errors, 
+  se <- matrix(s$standard.errors, 
                byrow=TRUE, 
                nrow=length(x$lev)-1,
                dimnames=list(x$lev[-1], 
@@ -119,9 +118,7 @@ tidy.multinom <- function(x,
 #'   \item{AIC}{the Akaike Information Criterion}
 #'
 #' @export
-#'    
-
-glance.multinom <- function(x, ...){
+glance.multinom <- function(x, ...) {
   ret <- with(x,
               data.frame(edf=edf, 
                          deviance = deviance,
