@@ -1,49 +1,169 @@
-process_rq <- function(rq_obj,se.type = "rank",conf.int = TRUE, conf.level = 0.95,...){
-    nn <- c("estimate", "std.error", "statistic", "p.value")
-    co <- as.data.frame(rq_obj[["coefficients"]])
-    if (se.type == "rank"){
-        co <- setNames(co,c("estimate","conf.low","conf.high"))
-        conf.int <- FALSE
-    }else{
-        co <- setNames(co,nn)
-    }
-    if (conf.int){
-        a <- (1 - conf.level) / 2
-        cv <- qt(c(a,1-a),df = rq_obj[["rdf"]])
-        co[["conf.low"]] <- co[["estimate"]] + (cv[1] * co[["std.error"]])
-        co[["conf.high"]] <- co[["estimate"]] + (cv[2] * co[["std.error"]])
-    }
-    co[["tau"]] <- rq_obj[["tau"]]
-    fix_data_frame(co,colnames(co))
-}
+#' Tidying methods for quantile regression models
+#' 
+#' These methods tidy the coefficients of a quantile regression
+#' model into a summary, augment the original data with information
+#' on the fitted values and residuals, and construct a glance of
+#' the model's statistics.
+#' 
+#' @return All tidying methods return a \code{data.frame} without rownammes.
+#' The structure depends on the method chosen.
+#' 
+#' @name rq_tidiers
+#' 
+#' @param x model object returned by \code{rq} or \code{nlrq}
+#' @param data Original data, defaults to extracting it from the model
+#'
+NULL
 
+#' @rdname rq_tidiers
+#' 
+#' @param se.type Type of standard errors to calculate; see \code{summar.rq}
+#' @param conf.int boolean; should confidence intervals be calculated, ignored
+#' if \code{se.type = "rank"}
+#' @param conf.level confidence level for intervals
+#' @param alpha confidence level when \code{se.type = "rank"}; defaults to the same
+#' as \code{conf.level} although the specification is inverted
+#' @param \dots other arguments passed on to \code{summary.rq}
+#' 
+#' @details If \code{se.type != "rank"} and \code{conf.int = TRUE} confidence
+#' intervals are calculated by \code{summary.rq}. Otherwise they are standard t
+#' based intervals.
+#' 
+#' @return \code{tidy.rq} returns a data frame with one row for each coefficient.
+#' The columns depend upon the confidence interval method selected.
+#' 
 #' @export
-tidy.rq <- function(x,se.type = "rank",conf.int = TRUE,conf.level = 0.95,...){
-    rq_summary <- suppressWarnings(summary(x,se = se.type,...))
+tidy.rq <- function(x,se.type = "rank",conf.int = TRUE,conf.level = 0.95,alpha = 1 - conf.level, ...){
+    #summary.rq often issues warnings when computing standard errors
+    rq_summary <- suppressWarnings(summary(x,se = se.type, alpha = alpha, ...))
     process_rq(rq_obj = rq_summary,se.type = se.type,conf.int = conf.int,conf.level = conf.level,...)
 }
 
+#' @rdname rq_tidiers
+#' 
+#' @param se.type Type of standard errors to calculate; see \code{summar.rqs}
+#' @param conf.int boolean; should confidence intervals be calculated, ignored
+#' if \code{se.type = "rank"}
+#' @param conf.level confidence level for intervals
+#' @param alpha confidence level when \code{se.type = "rank"}; defaults to the same
+#' as \code{conf.level} although the specification is inverted
+#' @param \dots other arguments passed on to \code{summary.rqs}
+#' 
+#' @details If \code{se.type != "rank"} and \code{conf.int = TRUE} confidence
+#' intervals are calculated by \code{summary.rqs}. Otherwise they are standard t
+#' based intervals.
+#' 
+#' @return \code{tidy.rqs} returns a data frame with one row for each coefficient at
+#' each quantile that was estimated. The columns depend upon the confidence interval 
+#' method selected.
+#' 
 #' @export
-tidy.rqs <- function(x,se.type = "rank",conf.int = TRUE,conf.level = 0.95,...){
-    rq_summary <- suppressWarnings(summary(x,se = se.type,...))
+tidy.rqs <- function(x,se.type = "rank",conf.int = TRUE,conf.level = 0.95,alpha = 1 - conf.level, ...){
+    #summary.rq often issues warnings when computing standard errors
+    rq_summary <- suppressWarnings(summary(x,se = se.type,alpha = alpha, ...))
     plyr::ldply(rq_summary,process_rq,se.type = se.type,conf.int = conf.int,conf.level = conf.level,...)
 }
 
+#' @rdname rq_tidiers
+#'
+#' @param conf.int whether to include a confidence interval
+#' @param conf.level confidence level of the interval, used only if
+#' \code{conf.int=TRUE}
+#' 
+#' @return \code{tidy.nlrq} returns one row for each coefficient in the model,
+#' with five columns:
+#'   \item{term}{The term in the nonlinear model being estimated and tested}
+#'   \item{estimate}{The estimated coefficient}
+#'   \item{std.error}{The standard error from the linear model}
+#'   \item{statistic}{t-statistic}
+#'   \item{p.value}{two-sided p-value}
+#' 
 #' @export
-glance.rq <- function(x,...,k = 0){
+tidy.nlrq <- function(x, conf.int = FALSE, conf.level = 0.95, ...){
+    nn <- c("estimate", "std.error", "statistic", "p.value")
+    ret <- fix_data_frame(coef(summary(x)), nn)
+    
+    if (conf.int){
+        x_summary <- summary(x)
+        a <- (1 - conf.level) / 2
+        cv <- qt(c(a,1-a),df = x_summary[["rdf"]])
+        ret[["conf.low"]] <- ret[["estimate"]] + (cv[1] * ret[["std.error"]])
+        ret[["conf.high"]] <- ret[["estimate"]] + (cv[2] * ret[["std.error"]])
+    }
+    ret
+}
+
+#' @rdname rq_tidiers
+#' 
+#' @param \dots other arguments (currently unused)
+#' 
+#' @return \code{glance.rq} returns one row for each quantile (tau)
+#' with the columns:
+#'  \item{tau}{quantile estimated}
+#'  \item{logLik}{the data's log-likelihood under the model}
+#'  \item{AIC}{the Akaike Information Criterion}
+#'  \item{BIC}{the Bayesian Information Criterion}
+#'  \item{df.residual}{residual degrees of freedom}
+#' @export
+glance.rq <- function(x,...){
+    n <- length(fitted(x))
+    s <- summary(x)
     data.frame(tau = x[["tau"]],
                logLik = logLik(x),
                AIC = AIC(x),
-               BIC = AIC(x,k = k),
-               df = rep(attr(AIC(x),"edf"),length(x[["tau"]])))
+               BIC = AIC(x,k = log(n)),
+               df.residual = rep(s[["rdf"]],times = length(x[["tau"]])))
 }
 
 #' @export
 glance.rqs <- glance.rq
 
+#' @rdname rq_tidiers
+#' 
+#' @param \dots other arguments (currently unused)
+#' 
+#' @return \code{glance.rq} returns one row for each quantile (tau)
+#' with the columns:
+#'  \item{tau}{quantile estimated}
+#'  \item{logLik}{the data's log-likelihood under the model}
+#'  \item{AIC}{the Akaike Information Criterion}
+#'  \item{BIC}{the Bayesian Information Criterion}
+#'  \item{df.residual}{residual degrees of freedom}
+#' @export
+glance.nlrq <- function(x,...){
+    n <- length(x[["m"]]$fitted())
+    s <- summary(x)
+    data.frame(tau = x[["m"]]$tau(),
+               logLik = logLik(x),
+               AIC = AIC(x),
+               BIC = AIC(x,k = log(n)),
+               df.residual = s[["rdf"]])
+}
+
+#' @rdname rq_tidiers
+#' 
+#' @param newdata If provided, new data frame to use for predictions
+#' 
+#' @return \code{augment.rq} returns a row for each original observation
+#' with the following columns added:
+#'  \item{.resid}{Residuals}
+#'  \item{.fitted}{Fitted quantiles of the model}
+#'  \item{.tau}{Quantile estimated}
+#'  
+#'  Depending on the arguments passed on to \code{predict.rq} via \code{\dots}
+#'  a confidence interval is also calculated on the fitted values resulting in
+#'  columns:
+#'      \item{.conf.low}{Lower confidence interval value}
+#'      \item{.conf.high}{Upper confidence interval value}
+#'      
+#'  See \code{predict.rq} for details on additional arguments to specify
+#'  confidence intervals. \code{predict.rq} does not provide confidence intervals
+#'  when \code{newdata} is provided.
+#' 
 #' @export
 augment.rq <- function(x,data = model.frame(x),newdata, ...){
     args <- list(...)
+    force_newdata <- FALSE
     if ("interval" %in% names(args) && args[["interval"]] != "none"){
         force_newdata <- TRUE
     }
@@ -71,6 +191,18 @@ augment.rq <- function(x,data = model.frame(x),newdata, ...){
     }
 }
 
+#' @rdname rq_tidiers
+#' 
+#' @param newdata If provided, new data frame to use for predictions
+#' 
+#' @return \code{augment.rqs} returns a row for each original observation
+#' and each estimated quantile (\code{tau}) with the following columns added:
+#'  \item{.resid}{Residuals}
+#'  \item{.fitted}{Fitted quantiles of the model}
+#'  \item{.tau}{Quantile estimated}
+#'  
+#'  \code{predict.rqs} does not return confidence interval estimates.
+#' 
 #' @export
 augment.rqs <- function(x,data = model.frame(x), newdata, ...){
     n_tau <- length(x[["tau"]])
@@ -92,3 +224,18 @@ augment.rqs <- function(x,data = model.frame(x), newdata, ...){
         return(unrowname(cbind(original,pred)))
     }
 }
+
+#' @rdname rq_tidiers
+#' 
+#' @param newdata If provided, new data frame to use for predictions
+#' 
+#' @details This simply calls \code{augment.nls} on the "nlrq" object.
+#' 
+#' @return \code{augment.rqs} returns a row for each original observation
+#' with the following columns added:
+#'  \item{.resid}{Residuals}
+#'  \item{.fitted}{Fitted quantiles of the model}
+#'  
+#' 
+#' @export
+augment.nlrq <- augment.nls
