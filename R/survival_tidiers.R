@@ -21,7 +21,7 @@
 #' 
 #' @examples
 #' 
-#' if (require("survival", quietly)) {
+#' if (require("survival", quietly = TRUE)) {
 #'     afit <- aareg(Surv(time, status) ~ age + sex + ph.ecog, data=lung,
 #'                   dfbeta=TRUE)
 #'     summary(afit)

@@ -7,9 +7,9 @@ broom 0.3.6.9000
 * Added `tidy` and `glance` for "biglm" and "bigglm" objects from the biglm package.
 * Fixed bug in `tidy.coxph` when one-row matrices are returned 
 * Added `tidy.power.htest`
-* Add `tidy` and `glance` for `summaryDefault` objects
+* Added `tidy` and `glance` for `summaryDefault` objects
 * Added tidiers for "lme" (linear mixed effects models) from the nlme package
-* Add `tidy` and `glance` for `multinom` objects from the nnet package.
+* Added `tidy` and `glance` for `multinom` objects from the nnet package.
 
 broom 0.3.6
 -----------
