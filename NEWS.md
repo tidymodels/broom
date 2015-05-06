@@ -1,4 +1,4 @@
-broom 0.3.6.9000
+broom 0.3.7
 -----------
 
 * Added tidiers for "plm" (panel linear model) objects from the plm package.
