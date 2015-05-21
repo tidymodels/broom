@@ -14,12 +14,12 @@ apply_rowwise_df <- function(x, object, func, ...) {
 }
 
 wrap_rowwise_df_ <- function(func) {
-    function(x, data, ...) apply_rowwise_df(x, data, func, ...)
+    function(x, object, ...) apply_rowwise_df(x, object, func, ...)
 }
 
 wrap_rowwise_df <- function(func) {
-    function(x, data, ...) {
-        n <- col_name(substitute(data))
+    function(x, object, ...) {
+        n <- col_name(substitute(object))
         func(x, n, ...)
     }
 }
