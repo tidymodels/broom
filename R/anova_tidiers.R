@@ -50,7 +50,7 @@ tidy.anova <- function(x, ...) {
     # x is car::Anova
       nn <- c("sumsq", "df", "statistic", "p.value")
     }
-    if (is.na(nn)) {
+    if (identical(nn, NA)) {
        stop("Unrecognized column names in anova object")
     }
     ret <- fix_data_frame(x, nn[1:ncol(x)])
