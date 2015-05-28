@@ -11,25 +11,24 @@
 \title{Tidying methods for rowwise_dfs from dplyr, for tidying each row and
 recombining the results}
 \usage{
-\method{tidy}{rowwise_df}(x, data, ...)
+\method{tidy}{rowwise_df}(x, object, ...)
 
-\method{tidy_}{rowwise_df}(x, data, ...)
+\method{tidy_}{rowwise_df}(x, object, ...)
 
-\method{augment}{rowwise_df}(x, data, ...)
+\method{augment}{rowwise_df}(x, object, ...)
 
-\method{augment_}{rowwise_df}(x, data, ...)
+\method{augment_}{rowwise_df}(x, object, ...)
 
-\method{glance}{rowwise_df}(x, data, ...)
+\method{glance}{rowwise_df}(x, object, ...)
 
-\method{glance_}{rowwise_df}(x, data, ...)
+\method{glance_}{rowwise_df}(x, object, ...)
 }
 \arguments{
 \item{x}{a rowwise_df}
 
-\item{data}{the column name of the column containing the models to
+\item{object}{the column name of the column containing the models to
 be tidied. For tidy, augment, and glance it should be the bare name; for
-_ methods it should be quoted. Note that this argument is named \code{data}
-so as to be consistent with the \code{augment} generic.}
+_ methods it should be quoted.}
 
 \item{...}{additional arguments to pass on to the respective tidying method}
 }
@@ -46,13 +45,16 @@ operation on the specified column. This greatly shortens a common idiom
 of extracting tidy/augment/glance outputs after a do statement.
 }
 \details{
-Note that this functionality is currently implemented for
+Note that this functionality is not currently implemented for
 data.tables, since the result of the do operation is difficult to
 distinguish from a regular data.table.
 }
 \examples{
 library(dplyr)
-regressions <- mtcars \%>\% group_by(cyl) \%>\% do(mod = lm(mpg ~ wt, .))
+regressions <- mtcars \%>\%
+    group_by(cyl) \%>\%
+    do(mod = lm(mpg ~ wt, .))
+
 regressions
 
 regressions \%>\% tidy(mod)
@@ -61,5 +63,15 @@ regressions \%>\% glance(mod)
 
 # we can provide additional arguments to the tidying function
 regressions \%>\% tidy(mod, conf.int = TRUE)
+
+# we can also include the original dataset as a "data" argument
+# to augment:
+regressions <- mtcars \%>\%
+    group_by(cyl) \%>\%
+    do(mod = lm(mpg ~ wt, .), original = (.))
+
+# this allows all the original columns to be included:
+regressions \%>\% augment(mod)  # doesn't include all original
+regressions \%>\% augment(mod, data = original)  # includes all original
 }
 
