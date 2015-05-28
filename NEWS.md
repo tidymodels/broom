@@ -1,3 +1,8 @@
+broom 0.3.7.9000
+-----------
+
+* Added `quick` argument to `tidy.lm`, `tidy.nls`, and `tidy.biglm`, to create a smaller and faster version of the output.
+
 broom 0.3.7
 -----------
 

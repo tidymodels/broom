@@ -7,7 +7,8 @@
 \alias{tidy.nls}
 \title{Tidying methods for a nonlinear model}
 \usage{
-\method{tidy}{nls}(x, conf.int = FALSE, conf.level = 0.95, ...)
+\method{tidy}{nls}(x, conf.int = FALSE, conf.level = 0.95, quick = FALSE,
+  ...)
 
 \method{augment}{nls}(x, data = NULL, newdata = NULL, ...)
 
@@ -20,6 +21,9 @@
 
 \item{conf.level}{confidence level of the interval, used only if
 \code{conf.int=TRUE}}
+
+\item{quick}{whether to compute a smaller and faster version, containing
+only the \code{term} and \code{estimate} columns.}
 
 \item{...}{extra arguments (not used)}
 
