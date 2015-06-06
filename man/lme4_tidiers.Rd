@@ -7,7 +7,8 @@
 \alias{tidy.merMod}
 \title{Tidying methods for mixed effects models}
 \usage{
-\method{tidy}{merMod}(x, effects = "random", ...)
+\method{tidy}{merMod}(x, effects = c("ran_pars", "fixed"),
+  scales = c("vcov", NA), ...)
 
 \method{augment}{merMod}(x, data = model.frame(x), newdata, ...)
 
@@ -39,7 +40,7 @@ random or fixed depending on the \code{effects} parameter. If
   \item{estimate}{estimated coefficient}
 
 If \code{effects="fixed"}, \code{tidy} returns the columns
-  \item{term}{gixed term being estimated}
+  \item{term}{fixed term being estimated}
   \item{estimate}{estimate of fixed effect}
   \item{std.error}{standard error}
   \item{statistic}{t-statistic}

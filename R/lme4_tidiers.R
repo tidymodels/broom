@@ -52,42 +52,54 @@ NULL
 #'   \item{estimate}{estimated coefficient}
 #' 
 #' If \code{effects="fixed"}, \code{tidy} returns the columns
-#'   \item{term}{gixed term being estimated}
+#'   \item{term}{fixed term being estimated}
 #'   \item{estimate}{estimate of fixed effect}
 #'   \item{std.error}{standard error}
 #'   \item{statistic}{t-statistic}
 #'   \item{p.value}{P-value computed from t-statistic (depending on the model,
 #'   this may or may not be calculated and included)}
 #' 
-#' @importFrom plyr ldply
+#' @importFrom plyr ldply rbind.fill
 #' @import dplyr
 #' 
 #' @export
-tidy.merMod <- function(x, effects = "random", ...) {
-    effects <- match.arg(effects, c("random", "fixed"))
-    if (effects == "fixed") {
+tidy.merMod <- function(x, effects = c("ran_pars","fixed"),
+                        scales = c("vcov",NA), ...) {
+    effect_names <- c("ran_pars", "fixed", "ran_modes")
+    if (length(miss <- setdiff(effects,effect_names))>0)
+        stop("unknown effect type",miss)
+    ret_list <- list()
+    if ("fixed" %in% effects) {
         # return tidied fixed effects rather than random
         ret <- coef(summary(x))
 
         # p-values may or may not be included
         nn <- c("estimate", "std.error", "statistic", "p.value")[1:ncol(ret)]
-        return(fix_data_frame(ret, newnames = nn, newcol = "term"))
+        ret_list$fixed <-
+            fix_data_frame(ret, newnames = nn, newcol = "term")
     }
-
-    # fix each group to be a tidy data frame
-    fix <- function(g) {
-        newg <- fix_data_frame(g, newnames = colnames(g), newcol = "level")
-        # fix_data_frame doesn't create a new column if rownames are numeric,
-        # which doesn't suit our purposes
-        newg$level <- rownames(g)
-        newg
+    if ("ran_pars" %in% effects) {
+        ret <- as.data.frame(VarCorr(x))
+        ret_list$fixed <- ret
     }
+    if ("ran_modes" %in% effects) {
+        ## fix each group to be a tidy data frame
+        fix <- function(g) {
+             newg <- fix_data_frame(g, newnames = colnames(g), newcol = "level")
+             # fix_data_frame doesn't create a new column if rownames are numeric,
+             # which doesn't suit our purposes
+             newg$level <- rownames(g)
+             newg
+        }
 
-    # combine them and gather terms
-    ret <- ldply(coef(x), fix) %>%
-        tidyr::gather(term, estimate, -.id, -level)
-    colnames(ret)[1] <- "group"
-    ret
+        # combine them and gather terms
+        ret <- ldply(coef(x), fix) %>%
+            tidyr::gather(term, estimate, -.id, -level)
+        colnames(ret)[1] <- "group"
+        ret
+        ret_list$ran_modes <- ret
+    }
+    rbind.fill(ret)
 }
 
 
