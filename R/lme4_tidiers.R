@@ -64,7 +64,8 @@ NULL
 #' 
 #' @export
 tidy.merMod <- function(x, effects = c("ran_pars","fixed"),
-                        scales = c("vcov",NA), ...) {
+                        scales = c("sdcor",NA),
+                        ran_prefix=NULL, ...) {
     effect_names <- c("ran_pars", "fixed", "ran_modes")
     if (length(miss <- setdiff(effects,effect_names))>0)
         stop("unknown effect type",miss)
@@ -75,12 +76,37 @@ tidy.merMod <- function(x, effects = c("ran_pars","fixed"),
 
         # p-values may or may not be included
         nn <- c("estimate", "std.error", "statistic", "p.value")[1:ncol(ret)]
+
+        if ("ran_pars" %in% effects) {
+            ret <- data.frame(ret,grp="fixed")
+            nn <- c(nn,"grp")
+        }
         ret_list$fixed <-
-            fix_data_frame(ret, newnames = nn, newcol = "term")
+            fix_data_frame(ret, newnames = nn)
     }
     if ("ran_pars" %in% effects) {
+        rscale <- scales[effects=="ran_pars"]
         ret <- as.data.frame(VarCorr(x))
-        ret_list$fixed <- ret
+        ret[] <- lapply(ret, function(x) if (is.factor(x))
+                                 as.character(x) else x)
+        if (is.null(ran_prefix)) {
+            ran_prefix <- switch(rscale,
+                                 vcov=c("var","cov"),
+                                 sdcor=c("sd","cor"))
+        }
+        pfun <- function(x) {
+            v <- na.omit(unlist(x))
+            p <- paste(v,collapse=".")
+            if (!identical(ran_prefix,NA)) {
+                p <- paste(ran_prefix[length(v)],p,sep="_")
+            }
+            return(p)
+        }
+        rownames(ret) <- apply(ret[c("var1","var2")],1,pfun)
+
+        ## replicate lme4:::tnames, more or less
+        ret_list$ran_pars <- fix_data_frame(ret[c("grp",rscale)],
+                                            newnames=c("grp","estimate"))
     }
     if ("ran_modes" %in% effects) {
         ## fix each group to be a tidy data frame
@@ -99,7 +125,7 @@ tidy.merMod <- function(x, effects = c("ran_pars","fixed"),
         ret
         ret_list$ran_modes <- ret
     }
-    rbind.fill(ret)
+    return(rbind.fill(ret_list))
 }
 
 
@@ -170,6 +196,6 @@ augment.merMod <- function(x, data = model.frame(x), newdata, ...) {
 #' 
 #' @export
 glance.merMod <- function(x, ...) {
-    ret <- unrowname(data.frame(sigma = lme4::sigma(x)))
+    ret <- unrowname(data.frame(sigma = sigma(x)))
     finish_glance(ret, x)
 }
