@@ -18,6 +18,8 @@
 #'     lmm1 <- lmer(Reaction ~ Days + (Days | Subject), sleepstudy)
 #'     tidy(lmm1)
 #'     tidy(lmm1, effects = "fixed")
+#'     tidy(lmm1, effects = "fixed", conf.int=TRUE)
+#'     tidy(lmm1, effects = "fixed", conf.int=TRUE, conf.method="profile")
 #'     head(augment(lmm1, sleepstudy))
 #'     glance(lmm1)
 #'     
@@ -65,7 +67,11 @@ NULL
 #' @export
 tidy.merMod <- function(x, effects = c("ran_pars","fixed"),
                         scales = c("sdcor",NA),
-                        ran_prefix=NULL, ...) {
+                        ran_prefix=NULL,
+                        conf.int = TRUE,
+                        conf.level = 0.95,
+                        conf.method = "Wald",
+                        ...) {
     effect_names <- c("ran_pars", "fixed", "ran_modes")
     if (length(miss <- setdiff(effects,effect_names))>0)
         stop("unknown effect type",miss)
@@ -77,6 +83,11 @@ tidy.merMod <- function(x, effects = c("ran_pars","fixed"),
         # p-values may or may not be included
         nn <- c("estimate", "std.error", "statistic", "p.value")[1:ncol(ret)]
 
+        if (conf.int) {
+            cifix <- confint(x,which="beta_",method=conf.method,...)
+            ret <- data.frame(ret,cifix)
+            nn <- c(nn,"conf.low","conf.high")
+        }
         if ("ran_pars" %in% effects) {
             ret <- data.frame(ret,grp="fixed")
             nn <- c(nn,"grp")
@@ -96,6 +107,7 @@ tidy.merMod <- function(x, effects = c("ran_pars","fixed"),
         }
         pfun <- function(x) {
             v <- na.omit(unlist(x))
+            if (length(v)==0) v <- "Observation"
             p <- paste(v,collapse=".")
             if (!identical(ran_prefix,NA)) {
                 p <- paste(ran_prefix[length(v)],p,sep="_")
@@ -103,6 +115,12 @@ tidy.merMod <- function(x, effects = c("ran_pars","fixed"),
             return(p)
         }
         rownames(ret) <- apply(ret[c("var1","var2")],1,pfun)
+
+        if (conf.int) {
+            ciran <- confint(x,which="theta_",method=conf.method,...)
+            ret <- data.frame(ret,ciran)
+            nn <- c(nn,"conf.low","conf.high")
+        }
 
         ## replicate lme4:::tnames, more or less
         ret_list$ran_pars <- fix_data_frame(ret[c("grp",rscale)],
@@ -120,6 +138,7 @@ tidy.merMod <- function(x, effects = c("ran_pars","fixed"),
 
         # combine them and gather terms
         ret <- ldply(coef(x), fix) %>%
+            ## BMB: why not imported??
             tidyr::gather(term, estimate, -.id, -level)
         colnames(ret)[1] <- "group"
         ret
