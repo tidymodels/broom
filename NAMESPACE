@@ -121,3 +121,8 @@ importFrom(plyr,ldply)
 importFrom(plyr,rbind.fill)
 importFrom(psych,describe)
 importFrom(tidyr,gather)
+if(getRversion() >= "3.3.0") {
+    importFrom("stats", sigma)
+} else {
+    importFrom("lme4", sigma)
+}
