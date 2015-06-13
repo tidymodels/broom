@@ -230,7 +230,11 @@ tidy.coxph <- function(x, exponentiate = FALSE, conf.int = .95, ...) {
     s <- summary(x, conf.int = conf.int)
     co <- coef(s)
 
-    nn <- c("estimate", "std.error", "statistic", "p.value")
+    if (s$used.robust)
+        nn <- c("estimate", "std.error", "robust.se", "statistic", "p.value")
+    else
+        nn <- c("estimate", "std.error", "statistic", "p.value")
+
     ret <- fix_data_frame(co[, -2, drop=FALSE], nn)
     
     if (exponentiate) {
