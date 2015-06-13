@@ -292,6 +292,8 @@ glance.coxph <- function(x, ...) {
                 p.value.sc = s$sctest[3],
                 statistic.wald = s$waldtest[1],
                 p.value.wald = s$waldtest[3],
+                statistic.robust = s$robscore[1],
+                p.value.robust = s$robscore[3],
                 r.squared = s$rsq[1],
                 r.squared.max = s$rsq[2],
                 concordance = s$concordance[1],
