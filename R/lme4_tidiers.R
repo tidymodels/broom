@@ -20,6 +20,7 @@
 #'     tidy(lmm1, effects = "fixed")
 #'     tidy(lmm1, effects = "fixed", conf.int=TRUE)
 #'     tidy(lmm1, effects = "fixed", conf.int=TRUE, conf.method="profile")
+#'     tidy(lmm1, effects = "ran_modes", conf.int=TRUE)
 #'     head(augment(lmm1, sleepstudy))
 #'     glance(lmm1)
 #'     
@@ -63,28 +64,30 @@ NULL
 #' 
 #' @importFrom plyr ldply rbind.fill
 #' @import dplyr
+#' @importFrom tidyr gather spread
 #' 
 #' @export
 tidy.merMod <- function(x, effects = c("ran_pars","fixed"),
                         scales = c("sdcor",NA),
                         ran_prefix=NULL,
-                        conf.int = TRUE,
+                        conf.int = FALSE,
                         conf.level = 0.95,
                         conf.method = "Wald",
                         ...) {
     effect_names <- c("ran_pars", "fixed", "ran_modes")
     if (length(miss <- setdiff(effects,effect_names))>0)
-        stop("unknown effect type",miss)
+        stop("unknown effect type ",miss)
+    base_nn <- c("estimate", "std.error", "statistic", "p.value")
     ret_list <- list()
     if ("fixed" %in% effects) {
         # return tidied fixed effects rather than random
         ret <- coef(summary(x))
 
         # p-values may or may not be included
-        nn <- c("estimate", "std.error", "statistic", "p.value")[1:ncol(ret)]
+        nn <- base_nn[1:ncol(ret)]
 
         if (conf.int) {
-            cifix <- confint(x,which="beta_",method=conf.method,...)
+            cifix <- confint(x,parm="beta_",method=conf.method,...)
             ret <- data.frame(ret,cifix)
             nn <- c(nn,"conf.low","conf.high")
         }
@@ -117,7 +120,7 @@ tidy.merMod <- function(x, effects = c("ran_pars","fixed"),
         rownames(ret) <- apply(ret[c("var1","var2")],1,pfun)
 
         if (conf.int) {
-            ciran <- confint(x,which="theta_",method=conf.method,...)
+            ciran <- confint(x,parm="theta_",method=conf.method,...)
             ret <- data.frame(ret,ciran)
             nn <- c(nn,"conf.low","conf.high")
         }
@@ -128,20 +131,48 @@ tidy.merMod <- function(x, effects = c("ran_pars","fixed"),
     }
     if ("ran_modes" %in% effects) {
         ## fix each group to be a tidy data frame
-        fix <- function(g) {
+
+        nn <- c("estimate", "std.error")
+        re <- ranef(x,condVar=TRUE)
+        getSE <- function(x) {
+            v <- attr(x,"postVar")
+            setNames(as.data.frame(sqrt(t(apply(v,3,diag)))),
+                     colnames(x))
+        }
+        fix <- function(g,re,.id) {
              newg <- fix_data_frame(g, newnames = colnames(g), newcol = "level")
              # fix_data_frame doesn't create a new column if rownames are numeric,
              # which doesn't suit our purposes
              newg$level <- rownames(g)
-             newg
+             newg$type <- "est"
+
+             newg.se <- getSE(re)
+             newg.se$level <- rownames(re)
+             newg.se$type <- "se"
+
+             data.frame(rbind(newg,newg.se),.id=.id,
+                        check.names=FALSE)
+                        ## prevent coercion of variable names
         }
 
-        # combine them and gather terms
-        ret <- ldply(coef(x), fix) %>%
-            ## BMB: why not imported??
-            tidyr::gather(term, estimate, -.id, -level)
+        mm <- do.call(rbind,Map(fix,coef(x),re,names(re)))
+        
+        mm %>% gather(term, estimate, -.id, -level, -type) %>%
+            spread(type,estimate) -> ret
+
+        ## FIXME: doesn't include uncertainty of population-level estimate
+
+        if (conf.int) {
+            if (conf.method != "Wald")
+                stop("only Wald CIs available for conditional modes")
+
+            mult <- qnorm((1+conf.level)/2)
+            ret <- transform(ret,
+                             conf.low=est-mult*se,
+                             conf.high=est+mult*se)
+        }
+        
         colnames(ret)[1] <- "group"
-        ret
         ret_list$ran_modes <- ret
     }
     return(rbind.fill(ret_list))
