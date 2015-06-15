@@ -1,8 +1,8 @@
 #' Tidiers for return values from functions that aren't S3 objects
 #' 
 #' This method handles the return values of functions that return lists
-#' rather than S3 objects, such as \code{optim}, and therefore cannot be
-#' handled by S3 dispatch
+#' rather than S3 objects, such as \code{optim} or \code{\link[akima]{interp}},
+#' and therefore cannot be handled by S3 dispatch
 #' 
 #' @param x list object
 #' @param ... extra arguments, passed to the tidying function
@@ -10,7 +10,7 @@
 #' @details Those tiders themselves are implemented as functions of the
 #' form tidy_<function> that are not exported.
 #' 
-#' @seealso \code{\link{optim_tidiers}}
+#' @seealso \code{\link{optim_tidiers}}, \code{\link{xyz_tidiers}}
 #' 
 #' @name list_tidiers
 #' 
@@ -20,6 +20,15 @@ tidy.list <- function(x, ...) {
                    %in% names(x))) {
         # returned from optim
         tidy_optim(x, ...)
+    } else if (all(c("x", "y", "z") %in% names(x)) & is.matrix(x$z)) {
+        if ( length(x$x) != nrow(x$z) ) {
+            stop("The list looks like an x,y,z list but is not. Element x of the list needs to be the same length as the number of rows of element z")
+        }
+        if ( length(x$y) != ncol(x$z) ) {
+            stop("The list looks like an x,y,z list but is not. Element y of the list needs to be the same length as the number of columns of element z")
+        }
+        # xyz list suitable for persp, image, etc.
+        tidy_xyz(x, ...)
     } else {
         stop("No tidying method recognized for this list")
     }

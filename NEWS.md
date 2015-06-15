@@ -1,3 +1,5 @@
+* Added a `tidy` method for x,y,z lists used by `image` and `persp`
+
 broom 0.3.7.9000
 -----------
 
