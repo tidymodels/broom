@@ -24,7 +24,8 @@ Imports:
     dplyr,
     tidyr,
     psych,
-    stringr
+    stringr,
+    reshape2
 Suggests:
     knitr,
     survival,
