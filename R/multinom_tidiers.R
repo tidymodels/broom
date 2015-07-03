@@ -68,12 +68,12 @@ tidy.multinom <- function(x,
   s <- summary(x)
   
   coef <- matrix(coef(s), 
-                 byrow=TRUE, 
+                 byrow=FALSE, 
                  nrow=length(x$lev)-1,
                  dimnames=list(x$lev[-1], 
                                col_names))
   se <- matrix(s$standard.errors, 
-               byrow=TRUE, 
+               byrow=FALSE, 
                nrow=length(x$lev)-1,
                dimnames=list(x$lev[-1], 
                              col_names))
@@ -81,9 +81,10 @@ tidy.multinom <- function(x,
   #* Quick utility to convert each row of coef to a data frame
   multinomRowToDf <- function(r, coef, se, col_names){
     unrowname(data.frame(y.level = rep(r, length(col_names)),
-                                term = colnames(coef),
-                                estimate = coef[r, ],
-                                std.error = se[r, ]))
+                         term = colnames(coef),
+                         estimate = coef[r, ],
+                         std.error = se[r, ],
+                         stringsAsFactors=FALSE))
   }
     
   #* Convert to coefficients data frame
