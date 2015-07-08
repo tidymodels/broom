@@ -13,6 +13,7 @@
 #' and confidence intervals (typical for log distributions)
 #' @param quick whether to compute a smaller and faster version, containing
 #' only the \code{term} and \code{estimate} columns.
+#' @param \dots extra arguments (not used)
 #' 
 #' @details If \code{conf.int=TRUE}, the confidence interval is computed with
 #' the \code{\link{confint.geeglm}} function.
