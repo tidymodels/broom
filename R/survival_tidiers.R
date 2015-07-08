@@ -230,7 +230,11 @@ tidy.coxph <- function(x, exponentiate = FALSE, conf.int = .95, ...) {
     s <- summary(x, conf.int = conf.int)
     co <- coef(s)
 
-    nn <- c("estimate", "std.error", "statistic", "p.value")
+    if (s$used.robust)
+        nn <- c("estimate", "std.error", "robust.se", "statistic", "p.value")
+    else
+        nn <- c("estimate", "std.error", "statistic", "p.value")
+
     ret <- fix_data_frame(co[, -2, drop=FALSE], nn)
     
     if (exponentiate) {
@@ -288,6 +292,8 @@ glance.coxph <- function(x, ...) {
                 p.value.sc = s$sctest[3],
                 statistic.wald = s$waldtest[1],
                 p.value.wald = s$waldtest[3],
+                statistic.robust = s$robscore[1],
+                p.value.robust = s$robscore[3],
                 r.squared = s$rsq[1],
                 r.squared.max = s$rsq[2],
                 concordance = s$concordance[1],

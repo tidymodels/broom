@@ -1,7 +1,7 @@
 Package: broom
 Type: Package
 Title: Convert Statistical Analysis Objects into Tidy Data Frames
-Version: 0.3.7
+Version: 0.3.7.9000
 Date: 2015-05-05
 Authors@R: c(
     person("David", "Robinson", email = "admiral.david@gmail.com", role = c("aut", "cre")),
@@ -9,6 +9,7 @@ Authors@R: c(
     person("Boris", "Demeshev", email = "boris.demeshev@gmail.com", role = "ctb"),
     person("Dieter", "Menne", email = "dieter.menne@menne-biomed.de", role = "ctb"),
     person("Benjamin", "Nutter", email = "nutter@battelle.org", role = "ctb"),
+    person("Luke", "Johnston", email = "luke.johnston@mail.utoronto.ca", role = "ctb"),
     person("Hadley", "Wickham", email = "hadley@rstudio.com", role = "ctb")
     )
 Maintainer: David Robinson <admiral.david@gmail.com>
@@ -24,7 +25,8 @@ Imports:
     dplyr,
     tidyr,
     psych,
-    stringr
+    stringr,
+    reshape2
 Suggests:
     knitr,
     survival,

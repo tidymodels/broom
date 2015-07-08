@@ -69,13 +69,21 @@
 #' 
 #' @export
 tidy.glmnet <- function(x, ...) {
-    beta <- fix_data_frame(as.matrix(coef(x)),
-                           newcol = "term")
-    ret <- beta %>% tidyr::gather(step, estimate, -term) %>%
-        mutate(step = as.numeric(step))
+    beta <- coef(x)
+    
+    if (is(x, "multnet")) {
+        beta_d <- plyr::ldply(beta, function(b) {
+            fix_data_frame(as.matrix(b), newcol = "term")
+        }, .id = "class")
+        ret <- beta_d %>% tidyr::gather(step, estimate, -term, -class)
+    } else {
+        beta_d <- fix_data_frame(as.matrix(beta), newcol = "term")
+        ret <- beta_d %>% tidyr::gather(step, estimate, -term)
+    }
     # add values specific to each step
     ret <- ret %>%
-        mutate(lambda = x$lambda[step],
+        mutate(step = as.numeric(step),
+               lambda = x$lambda[step],
                dev.ratio = x$dev.ratio[step])
     ret
 }
