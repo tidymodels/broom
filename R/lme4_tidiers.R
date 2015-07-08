@@ -10,7 +10,7 @@
 #' The structure depends on the method chosen.
 #' 
 #' @name lme4_tidiers
-#' 
+#'
 #' @examples
 #' 
 #' if (require("lme4")) {
@@ -45,6 +45,11 @@ NULL
 #' @rdname lme4_tidiers
 #' 
 #' @param effects Either "random" (default) or "fixed"
+#' @param conf.int whether to include a confidence interval
+#' @param conf.level confidence level for CI
+#' @param conf.method method for computing confidence intervals (see ...)
+#' @param scales scales on which to report the variables: for random effects, the choices are \sQuote{"sdcor"} (standard deviations and correlations) or \sQuote{"varcov"} (variances and covariances)
+#' @param ran_prefix a length-2 character vector specifying the strings to use as prefixes for self- (variance/standard deviation) and cross- (covariance/correlation) random effects terms
 #' 
 #' @return \code{tidy} returns one row for each estimated effect, either
 #' random or fixed depending on the \code{effects} parameter. If
@@ -65,6 +70,9 @@ NULL
 #' @importFrom plyr ldply rbind.fill
 #' @import dplyr
 #' @importFrom tidyr gather spread
+#' @importFrom nlme VarCorr ranef
+## FIXME: is it OK/sensible to import these from (priority='recommended')
+## nlme rather than (priority=NA) lme4?
 #' 
 #' @export
 tidy.merMod <- function(x, effects = c("ran_pars","fixed"),
@@ -156,7 +164,9 @@ tidy.merMod <- function(x, effects = c("ran_pars","fixed"),
         }
 
         mm <- do.call(rbind,Map(fix,coef(x),re,names(re)))
-        
+
+        ## block false-positive warnings due to NSE
+        type <- spread <- est <- NULL
         mm %>% gather(term, estimate, -.id, -level, -type) %>%
             spread(type,estimate) -> ret
 

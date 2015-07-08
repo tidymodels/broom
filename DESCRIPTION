@@ -26,7 +26,9 @@ Imports:
     tidyr,
     psych,
     stringr,
-    reshape2
+    reshape2,
+    nlme,
+    boot
 Suggests:
     knitr,
     survival,
@@ -41,13 +43,13 @@ Suggests:
     multcomp,
     testthat,
     lme4,
-    nlme,
     zoo,
     lmtest,
     plm,
     biglm,
     ggplot2,
-    nnet
+    nnet,
+    geeglm
 URL: http://github.com/dgrtwo/broom
 BugReports: http://github.com/dgrtwo/broom/issues
 VignetteBuilder: knitr

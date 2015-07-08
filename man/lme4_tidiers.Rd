@@ -8,7 +8,8 @@
 \title{Tidying methods for mixed effects models}
 \usage{
 \method{tidy}{merMod}(x, effects = c("ran_pars", "fixed"),
-  scales = c("vcov", NA), ...)
+  scales = c("sdcor", NA), ran_prefix = NULL, conf.int = FALSE,
+  conf.level = 0.95, conf.method = "Wald", ...)
 
 \method{augment}{merMod}(x, data = model.frame(x), newdata, ...)
 
@@ -19,6 +20,16 @@
 \code{glmer}, or \code{nlmer}}
 
 \item{effects}{Either "random" (default) or "fixed"}
+
+\item{scales}{scales on which to report the variables: for random effects, the choices are \sQuote{"sdcor"} (standard deviations and correlations) or \sQuote{"varcov"} (variances and covariances)}
+
+\item{ran_prefix}{a length-2 character vector specifying the strings to use as prefixes for self- (variance/standard deviation) and cross- (covariance/correlation) random effects terms}
+
+\item{conf.int}{whether to include a confidence interval}
+
+\item{conf.level}{confidence level for CI}
+
+\item{conf.method}{method for computing confidence intervals (see ...)}
 
 \item{...}{extra arguments (not used)}
 
@@ -85,6 +96,9 @@ if (require("lme4")) {
     lmm1 <- lmer(Reaction ~ Days + (Days | Subject), sleepstudy)
     tidy(lmm1)
     tidy(lmm1, effects = "fixed")
+    tidy(lmm1, effects = "fixed", conf.int=TRUE)
+    tidy(lmm1, effects = "fixed", conf.int=TRUE, conf.method="profile")
+    tidy(lmm1, effects = "ran_modes", conf.int=TRUE)
     head(augment(lmm1, sleepstudy))
     glance(lmm1)
 
