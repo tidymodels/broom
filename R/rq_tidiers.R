@@ -17,7 +17,7 @@ NULL
 
 #' @rdname rq_tidiers
 #' 
-#' @param se.type Type of standard errors to calculate; see \code{summar.rq}
+#' @param se.type Type of standard errors to calculate; see \code{summary.rq}
 #' @param conf.int boolean; should confidence intervals be calculated, ignored
 #' if \code{se.type = "rank"}
 #' @param conf.level confidence level for intervals
