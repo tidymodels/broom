@@ -1,4 +1,12 @@
-broom 0.3.6.9000
+* Added a `tidy` method for x,y,z lists used by `image` and `persp`
+
+broom 0.3.7.9000
+-----------
+
+* Added `quick` argument to `tidy.lm`, `tidy.nls`, and `tidy.biglm`, to create a smaller and faster version of the output.
+* Changed `rowwise_df_tidiers` to allow the original data to be saved as a list column, then provided as a column name to `augment`. This required removing `data` from the `augment` S3 signature. Also added `tests-rowwise.R`
+
+broom 0.3.7
 -----------
 
 * Added tidiers for "plm" (panel linear model) objects from the plm package.
@@ -7,8 +15,9 @@ broom 0.3.6.9000
 * Added `tidy` and `glance` for "biglm" and "bigglm" objects from the biglm package.
 * Fixed bug in `tidy.coxph` when one-row matrices are returned 
 * Added `tidy.power.htest`
-* Add `tidy` and `glance` for `summaryDefault` objects
+* Added `tidy` and `glance` for `summaryDefault` objects
 * Added tidiers for "lme" (linear mixed effects models) from the nlme package
+* Added `tidy` and `glance` for `multinom` objects from the nnet package.
 
 broom 0.3.6
 -----------

@@ -42,7 +42,17 @@ NULL
 #' 
 #' @export
 tidy.anova <- function(x, ...) {
-    nn <- c("df", "sumsq", "meansq", "statistic", "p.value")
+    # x is stats::anova
+    nn <- NA
+    if (identical(colnames(x), c("Df", "Sum Sq", "Mean Sq", "F value", "Pr(>F)"))) {
+      nn <- c("df", "sumsq", "meansq", "statistic", "p.value")
+    } else if (identical(colnames(x), c("Sum Sq", "Df", "F value", "Pr(>F)"))) {
+    # x is car::Anova
+      nn <- c("sumsq", "df", "statistic", "p.value")
+    }
+    if (identical(nn, NA)) {
+       stop("Unrecognized column names in anova object")
+    }
     ret <- fix_data_frame(x, nn[1:ncol(x)])
 
     if ("term" %in% colnames(ret)) {

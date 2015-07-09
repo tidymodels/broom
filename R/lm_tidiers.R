@@ -102,6 +102,8 @@ NULL
 #' \code{conf.int=TRUE}
 #' @param exponentiate whether to exponentiate the coefficient estimates
 #' and confidence intervals (typical for logistic regression)
+#' @param quick whether to compute a smaller and faster version, containing
+#' only the \code{term} and \code{estimate} columns.
 #' 
 #' @details If \code{conf.int=TRUE}, the confidence interval is computed with
 #' the \code{\link{confint}} function.
@@ -126,7 +128,12 @@ NULL
 #' 
 #' @export
 tidy.lm <- function(x, conf.int = FALSE, conf.level = .95,
-                    exponentiate = FALSE, ...) {
+                    exponentiate = FALSE, quick = FALSE, ...) {
+    if (quick) {
+        co <- coef(x)
+        ret <- data.frame(term = names(co), estimate = unname(co))
+        return(ret)
+    }
     co <- coef(summary(x))
     
     nn <- c("estimate", "std.error", "statistic", "p.value")
@@ -174,7 +181,7 @@ tidy.lm <- function(x, conf.int = FALSE, conf.level = .95,
 #' 
 #' @export
 augment.lm <- function(x, data = model.frame(x), newdata,
-                       type.predict, type.residuals, ...) {    
+                       type.predict, type.residuals, ...) {   
     augment_columns(x, data, newdata, type.predict = type.predict,
                            type.residuals = type.residuals)
 }

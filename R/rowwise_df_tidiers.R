@@ -4,22 +4,32 @@ tidy_ <- function(x, ...) UseMethod("tidy_")
 augment_ <- function(x, data, ...) UseMethod("augment_")
 glance_ <- function(x, ...) UseMethod("glance_")
 
-apply_rowwise_df <- function(x, object, func, ...) {
+apply_rowwise_df <- function(x, object, func, data, ...) {
     # group by columns that are not lists
     groupers <- colnames(x)[sapply(x, function(e) class(e)[1]) != "list"]
     groupers <- setdiff(groupers, object)
     # suppress "group_by" warning
     x <- suppressWarnings(group_by_(x, .dots = as.list(groupers)))
-    do(x, func(.[[object]][[1]], ...))
+    # let the "data" argument specify column (for augment)
+    if (!missing(data)) {
+        if (as.character(substitute(data)) %in% colnames(x)) {
+            data_column <- col_name(substitute(data))
+            do(x, func(.[[object]][[1]], data = .[[data_column]][[1]], ...))
+        } else {
+            do(x, func(.[[object]][[1]], data = data, ...))
+        }
+    } else {
+        do(x, func(.[[object]][[1]], ...))
+    }
 }
 
 wrap_rowwise_df_ <- function(func) {
-    function(x, data, ...) apply_rowwise_df(x, data, func, ...)
+    function(x, object, ...) apply_rowwise_df(x, object, func, ...)
 }
 
 wrap_rowwise_df <- function(func) {
-    function(x, data, ...) {
-        n <- col_name(substitute(data))
+    function(x, object, ...) {
+        n <- col_name(substitute(object))
         func(x, n, ...)
     }
 }
@@ -36,23 +46,25 @@ wrap_rowwise_df <- function(func) {
 #' of extracting tidy/augment/glance outputs after a do statement.
 #' 
 #' @param x a rowwise_df
-#' @param data the column name of the column containing the models to
+#' @param object the column name of the column containing the models to
 #' be tidied. For tidy, augment, and glance it should be the bare name; for
-#' _ methods it should be quoted. Note that this argument is named \code{data}
-#' so as to be consistent with the \code{augment} generic.
+#' _ methods it should be quoted.
 #' @param ... additional arguments to pass on to the respective tidying method
 #' 
 #' @return A \code{"grouped_df"}, where the non-list columns of the
 #' original are used as grouping columns alongside the tidied outputs.
 #' 
-#' @details Note that this functionality is currently implemented for
+#' @details Note that this functionality is not currently implemented for
 #' data.tables, since the result of the do operation is difficult to
 #' distinguish from a regular data.table.
 #' 
 #' @examples
 #' 
 #' library(dplyr)
-#' regressions <- mtcars %>% group_by(cyl) %>% do(mod = lm(mpg ~ wt, .))
+#' regressions <- mtcars %>%
+#'     group_by(cyl) %>%
+#'     do(mod = lm(mpg ~ wt, .))
+#'  
 #' regressions
 #' 
 #' regressions %>% tidy(mod)
@@ -61,6 +73,16 @@ wrap_rowwise_df <- function(func) {
 #' 
 #' # we can provide additional arguments to the tidying function
 #' regressions %>% tidy(mod, conf.int = TRUE)
+#' 
+#' # we can also include the original dataset as a "data" argument
+#' # to augment:
+#' regressions <- mtcars %>%
+#'     group_by(cyl) %>%
+#'     do(mod = lm(mpg ~ wt, .), original = (.))
+#' 
+#' # this allows all the original columns to be included:
+#' regressions %>% augment(mod)  # doesn't include all original
+#' regressions %>% augment(mod, data = original)  # includes all original
 #' 
 #' @name rowwise_df_tidiers
 NULL

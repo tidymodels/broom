@@ -7,7 +7,7 @@
 \title{Tidiers for biglm and bigglm object}
 \usage{
 \method{tidy}{biglm}(x, conf.int = FALSE, conf.level = 0.95,
-  exponentiate = FALSE, ...)
+  exponentiate = FALSE, quick = FALSE, ...)
 
 \method{glance}{biglm}(x, ...)
 }
@@ -21,6 +21,9 @@
 
 \item{exponentiate}{whether to exponentiate the coefficient estimates
 and confidence intervals (typical for logistic regression)}
+
+\item{quick}{whether to compute a smaller and faster version, containing
+only the \code{term} and \code{estimate} columns.}
 
 \item{...}{extra arguments (not used)}
 }

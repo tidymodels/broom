@@ -11,6 +11,8 @@
 #' \code{conf.int=TRUE}
 #' @param exponentiate whether to exponentiate the coefficient estimates
 #' and confidence intervals (typical for logistic regression)
+#' @param quick whether to compute a smaller and faster version, containing
+#' only the \code{term} and \code{estimate} columns.
 #' @param ... extra arguments (not used)
 #' 
 #' @template boilerplate
@@ -51,7 +53,13 @@
 #' 
 #' @export
 tidy.biglm <- function(x, conf.int = FALSE, conf.level = .95,
-                       exponentiate = FALSE, ...) {
+                       exponentiate = FALSE, quick = FALSE, ...) {
+    if (quick) {
+        co <- coef(x)
+        ret <- data.frame(term = names(co), estimate = unname(co))
+        return(ret)
+    }
+    
     mat <- summary(x)$mat
     nn <- c("estimate", "conf.low", "conf.high", "std.error", "p.value")
     ret <- fix_data_frame(mat, nn)

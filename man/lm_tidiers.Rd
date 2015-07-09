@@ -8,7 +8,7 @@
 \title{Tidying methods for a linear model}
 \usage{
 \method{tidy}{lm}(x, conf.int = FALSE, conf.level = 0.95,
-  exponentiate = FALSE, ...)
+  exponentiate = FALSE, quick = FALSE, ...)
 
 \method{augment}{lm}(x, data = model.frame(x), newdata, type.predict,
   type.residuals, ...)
@@ -25,6 +25,9 @@
 
 \item{exponentiate}{whether to exponentiate the coefficient estimates
 and confidence intervals (typical for logistic regression)}
+
+\item{quick}{whether to compute a smaller and faster version, containing
+only the \code{term} and \code{estimate} columns.}
 
 \item{...}{extra arguments (not used)}
 

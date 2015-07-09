@@ -40,6 +40,8 @@ NULL
 #' @param conf.int whether to include a confidence interval
 #' @param conf.level confidence level of the interval, used only if
 #' \code{conf.int=TRUE}
+#' @param quick whether to compute a smaller and faster version, containing
+#' only the \code{term} and \code{estimate} columns.
 #'
 #' @return \code{tidy} returns one row for each coefficient in the model,
 #' with five columns:
@@ -50,7 +52,14 @@ NULL
 #'   \item{p.value}{two-sided p-value}
 #' 
 #' @export
-tidy.nls <- function(x, conf.int=FALSE, conf.level=.95, ...) {
+tidy.nls <- function(x, conf.int = FALSE, conf.level = .95,
+                     quick = FALSE, ...) {
+    if (quick) {
+        co <- coef(x)
+        ret <- data.frame(term = names(co), estimate = unname(co))
+        return(ret)
+    }
+    
     nn <- c("estimate", "std.error", "statistic", "p.value")
     ret <- fix_data_frame(coef(summary(x)), nn)
 

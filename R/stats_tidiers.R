@@ -243,7 +243,7 @@ tidy.pairwise.htest <- function(x, ...) {
 #' 
 #' @export
 tidy.power.htest <- function(x, ...) {
-    cols <- compact(x[c("n", "delta", "sd", "sig.level", "power")])
+    cols <- compact(x[c("n", "delta", "sd", "sig.level", "power", "p1", "p2")])
     as.data.frame(cols)
 }
 

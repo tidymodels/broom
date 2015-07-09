@@ -4,13 +4,10 @@
 \alias{augment}
 \title{Augment data according to a tidied model}
 \usage{
-augment(x, data, ...)
+augment(x, ...)
 }
 \arguments{
 \item{x}{model or other R object to convert to data frame}
-
-\item{data}{original dataset, if needed (when possible this is extracted
-from the model)}
 
 \item{...}{other arguments passed to methods}
 }
@@ -19,6 +16,11 @@ Given an R statistical model or other non-tidy object, add columns to the
 original dataset such as predictions, residuals and cluster assignments.
 }
 \details{
+Note that by convention the first argument is almost always \code{data},
+which specifies the original data object. This is not part of the S3
+signature, partly because it prevents \link{rowwise_df_tidiers} from
+taking a column name as the first argument.
+
 This generic originated in the ggplot2 package, where it was called
 "fortify."
 }
