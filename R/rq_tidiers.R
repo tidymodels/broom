@@ -211,16 +211,19 @@ augment.rqs <- function(x,data = model.frame(x), newdata, ...){
         pred <- predict(x,stepfun = FALSE,...)
         resid <- residuals(x)
         resid <- setNames(as.data.frame(resid),x[["tau"]])
-        resid <- reshape2::melt(resid,measure.vars = 1:ncol(resid),variable.name = ".tau",value.name = ".resid")
+        #resid <- reshape2::melt(resid,measure.vars = 1:ncol(resid),variable.name = ".tau",value.name = ".resid")
+        resid <- tidyr::gather(data = resid,key = ".tau",value = ".resid")
         original <- cbind(original,resid)
         pred <- setNames(as.data.frame(pred),x[["tau"]])
-        pred <- reshape2::melt(pred,measure.vars = 1:ncol(pred),variable.name = ".tau",value.name = ".fitted")
+        #pred <- reshape2::melt(pred,measure.vars = 1:ncol(pred),variable.name = ".tau",value.name = ".fitted")
+        pred <- tidyr::gather(data = pred,key = ".tau",value = ".fitted")
         return(unrowname(cbind(original,pred[,-1,drop = FALSE])))
     } else{
         original <- newdata[rep(seq_len(nrow(newdata)), n_tau),]
         pred <- predict(x, newdata = newdata, stepfun = FALSE,...)
         pred <- setNames(as.data.frame(pred),x[["tau"]])
-        pred <- reshape2::melt(pred,measure.vars = 1:ncol(pred),variable.name = ".tau",value.name = ".fitted")
+        #pred <- reshape2::melt(pred,measure.vars = 1:ncol(pred),variable.name = ".tau",value.name = ".fitted")
+        pred <- tidyr::gather(data = pred,key = ".tau",value = ".fitted")
         return(unrowname(cbind(original,pred)))
     }
 }
