@@ -37,6 +37,6 @@
 #' augment(lo, newdata = head(mtcars))
 #' 
 #' @export
-augment.loess <- function(x, data = model.frame(x), newdata, ...){
+augment.loess <- function(x, data = stats::model.frame(x), newdata, ...){
     augment_columns(x, data, newdata, se.fit = FALSE, se = TRUE, ...)
 }

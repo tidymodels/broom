@@ -51,7 +51,7 @@ tidy.plm <- function(x, conf.int = FALSE, conf.level = .95,
 #'   \item{.resid}{residuals}
 #' 
 #' @export
-augment.plm <- function(x, data = as.data.frame(model.frame(x)), ...) {
+augment.plm <- function(x, data = as.data.frame(stats::model.frame(x)), ...) {
     augment_columns(x, data, ...)
 }
 

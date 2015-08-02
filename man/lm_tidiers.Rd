@@ -10,7 +10,7 @@
 \method{tidy}{lm}(x, conf.int = FALSE, conf.level = 0.95,
   exponentiate = FALSE, quick = FALSE, ...)
 
-\method{augment}{lm}(x, data = model.frame(x), newdata, type.predict,
+\method{augment}{lm}(x, data = stats::model.frame(x), newdata, type.predict,
   type.residuals, ...)
 
 \method{glance}{lm}(x, ...)

@@ -10,7 +10,7 @@
 \method{tidy}{plm}(x, conf.int = FALSE, conf.level = 0.95,
   exponentiate = FALSE, ...)
 
-\method{augment}{plm}(x, data = as.data.frame(model.frame(x)), ...)
+\method{augment}{plm}(x, data = as.data.frame(stats::model.frame(x)), ...)
 
 \method{glance}{plm}(x, ...)
 }

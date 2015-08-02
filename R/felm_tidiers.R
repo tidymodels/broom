@@ -60,11 +60,11 @@ NULL
 #' @export
 tidy.felm <- function(x, conf.int=FALSE, conf.level=.95, fe = FALSE, fe.error = fe, ...) {
     nn <- c("estimate", "std.error", "statistic", "p.value")
-    ret <- fix_data_frame(coef(summary(x)), nn)
+    ret <- fix_data_frame(stats::coef(summary(x)), nn)
 
     if (conf.int) {
         # avoid "Waiting for profiling to be done..." message
-        CI <- suppressMessages(confint(x, level = conf.level))
+        CI <- suppressMessages(stats::confint(x, level = conf.level))
         colnames(CI) = c("conf.low", "conf.high")
         ret <- cbind(ret, unrowname(CI))
     }
@@ -78,7 +78,7 @@ tidy.felm <- function(x, conf.int=FALSE, conf.level=.95, fe = FALSE, fe.error = 
                   select(effect, se, obs, comp) %>%
                   fix_data_frame(nn) %>%
                   mutate(statistic = estimate/std.error) %>%
-                  mutate(p.value = 2*(1-pt(statistic, df = N))) 
+                  mutate(p.value = 2*(1-stats::pt(statistic, df = N))) 
       } else{
         nn <- c("estimate", "N", "comp")
         ret_fe <- lfe::getfe(x) %>%
@@ -88,8 +88,8 @@ tidy.felm <- function(x, conf.int=FALSE, conf.level=.95, fe = FALSE, fe.error = 
       }
       if (conf.int){
         ret_fe <- ret_fe %>%
-                  mutate(conf.low=estimate-qnorm(1-(1-conf.level)/2)*std.error,
-                         conf.high=estimate+qnorm(1-(1-conf.level)/2)*std.error
+                  mutate(conf.low=estimate-stats::qnorm(1-(1-conf.level)/2)*std.error,
+                         conf.high=estimate+stats::qnorm(1-(1-conf.level)/2)*std.error
                          )
       }
       ret <- rbind(ret, ret_fe)
@@ -135,14 +135,14 @@ augment.felm <- function(x, data = NULL, ...) {
             } else{
                 factor_name <- fe
             }
-           formula1 <- as.formula(paste0("~fe==","\"",fe,"\""))
+           formula1 <- stats::as.formula(paste0("~fe==","\"",fe,"\""))
            ans <- object %>% filter_(formula1)
           if (is.character(data[,factor_name])){
-            ans <-  ans %>% mutate_(.dots = setNames(list(~as.character(idx)), factor_name))
+            ans <-  ans %>% mutate_(.dots = stats::setNames(list(~as.character(idx)), factor_name))
           } else if (is.numeric(data[,factor_name])){
-            ans <- ans %>% mutate_(.dots = setNames(list(~as.numeric(as.character(idx))), factor_name))
+            ans <- ans %>% mutate_(.dots = stats::setNames(list(~as.numeric(as.character(idx))), factor_name))
           } else{
-            ans <- ans %>% mutate_(.dots = setNames(list(~idx), factor_name))
+            ans <- ans %>% mutate_(.dots = stats::setNames(list(~idx), factor_name))
             }
 
           if (fe==names(x$fe)[1]){

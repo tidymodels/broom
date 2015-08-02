@@ -9,7 +9,7 @@
 \usage{
 \method{tidy}{coxph}(x, exponentiate = FALSE, conf.int = 0.95, ...)
 
-\method{augment}{coxph}(x, data = model.frame(x), newdata,
+\method{augment}{coxph}(x, data = stats::model.frame(x), newdata,
   type.predict = "lp", type.residuals = "martingale", ...)
 
 \method{glance}{coxph}(x, ...)

@@ -130,11 +130,11 @@ NULL
 tidy.lm <- function(x, conf.int = FALSE, conf.level = .95,
                     exponentiate = FALSE, quick = FALSE, ...) {
     if (quick) {
-        co <- coef(x)
+        co <- stats::coef(x)
         ret <- data.frame(term = names(co), estimate = unname(co))
         return(ret)
     }
-    co <- coef(summary(x))
+    co <- stats::coef(summary(x))
     
     nn <- c("estimate", "std.error", "statistic", "p.value")
     if (is(co, "listof")) {
@@ -180,7 +180,7 @@ tidy.lm <- function(x, conf.int = FALSE, conf.level = .95,
 #'   \item{.resid}{Residuals of fitted values on the new data}
 #' 
 #' @export
-augment.lm <- function(x, data = model.frame(x), newdata,
+augment.lm <- function(x, data = stats::model.frame(x), newdata,
                        type.predict, type.residuals, ...) {   
     augment_columns(x, data, newdata, type.predict = type.predict,
                            type.residuals = type.residuals)
@@ -209,7 +209,7 @@ augment.lm <- function(x, data = model.frame(x), newdata,
 glance.lm <- function(x, ...) {
     # use summary.lm explicity, so that c("aov", "lm") objects can be
     # summarized and glanced at
-    s <- summary.lm(x)
+    s <- stats::summary.lm(x)
     ret <- with(s, data.frame(r.squared=r.squared,
                               adj.r.squared=adj.r.squared,
                               sigma=sigma,
@@ -263,7 +263,7 @@ process_lm <- function(ret, x, conf.int = FALSE, conf.level = .95,
     
     if (conf.int) {
         # avoid "Waiting for profiling to be done..." message
-        CI <- suppressMessages(confint(x, level = conf.level))
+        CI <- suppressMessages(stats::confint(x, level = conf.level))
         colnames(CI) = c("conf.low", "conf.high")
         ret <- cbind(ret, trans(unrowname(CI)))
     }
