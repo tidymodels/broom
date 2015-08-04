@@ -47,13 +47,13 @@ tidy.boot <- function(x,
                       conf.level = 0.95,
                       conf.method = "perc", ...) {
     nn <- c("estimate", "p.value")
-    obsvals <- x$t0
+    obsvals <- c(x$t0)
     bootvals <- x$t
     npar <- ncol(bootvals)
     ## not sure what to do about returning standard error here;
     ## may be misleading if there is bias in the bootstrap mean
     ret <- cbind(obsvals,
-                 sapply(1:npar,boot.p,bootvals))
+                 vapply(1:npar,boot.p,bootvals,FUN.VALUE=numeric(1)))
     if (conf.int) {
         ci.list <- lapply(1:npar,
                           boot.ci,boot.out=x,
