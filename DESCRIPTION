@@ -48,7 +48,8 @@ Suggests:
     biglm,
     ggplot2,
     nnet,
-    geepack
+    geepack,
+    AUC
 URL: http://github.com/dgrtwo/broom
 BugReports: http://github.com/dgrtwo/broom/issues
 VignetteBuilder: knitr
