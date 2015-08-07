@@ -32,5 +32,5 @@ tidy.map <- function(x, ...) {
     names <- do.call("rbind", lapply(strsplit(x$names, "[:,]"), "[", 1:2))
     df$region <- names[df$group, 1]
     df$subregion <- names[df$group, 2]
-    df[complete.cases(df$lat, df$long), ]
+    df[stats::complete.cases(df$lat, df$long), ]
 }

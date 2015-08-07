@@ -34,8 +34,8 @@ augment.smooth.spline <- function(x, data = x$data, ...) {
     data <- unrowname(as.data.frame(data))
     
     data <- as.data.frame(data)
-    data$.fitted <- fitted(x)
-    data$.resid <- resid(x)
+    data$.fitted <- stats::fitted(x)
+    data$.resid <- stats::resid(x)
     data
 }
 

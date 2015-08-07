@@ -64,11 +64,11 @@
 tidy.geeglm <- function(x, conf.int = FALSE, conf.level = .95,
                     exponentiate = FALSE, quick = FALSE, ...) {
     if (quick) {
-        co <- coef(x)
+        co <- stats::coef(x)
         ret <- data.frame(term = names(co), estimate = unname(co))
         return(ret)
     }
-    co <- coef(summary(x))
+    co <- stats::coef(summary(x))
     
     nn <- c("estimate", "std.error", "statistic", "p.value")
     ret <- fix_data_frame(co, nn[1:ncol(co)])
@@ -106,7 +106,7 @@ process_geeglm <- function(ret, x, conf.int = FALSE, conf.level = .95,
     
     if (conf.int) {
         # avoid "Waiting for profiling to be done..." message
-        CI <- suppressMessages(confint(x, level = conf.level))
+        CI <- suppressMessages(stats::confint(x, level = conf.level))
         colnames(CI) = c("conf.low", "conf.high")
         ret <- cbind(ret, trans(unrowname(CI)))
     }
@@ -129,8 +129,8 @@ process_geeglm <- function(ret, x, conf.int = FALSE, conf.level = .95,
 ##' http://stackoverflow.com/a/21221995/2632184.
 ##' @return Returns the upper and lower confidence intervals
 confint.geeglm <- function(object, parm, level = 0.95, ...) {
-    cc <- coef(summary(object))
-    mult <- qnorm((1+level)/2)
+    cc <- stats::coef(summary(object))
+    mult <- stats::qnorm((1+level)/2)
     citab <- with(as.data.frame(cc),
                   cbind(lwr=Estimate-mult*Std.err,
                         upr=Estimate+mult*Std.err))

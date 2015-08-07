@@ -69,7 +69,7 @@
 #' 
 #' @export
 tidy.glmnet <- function(x, ...) {
-    beta <- coef(x)
+    beta <- stats::coef(x)
     
     if (inherits(x, "multnet")) {
         beta_d <- plyr::ldply(beta, function(b) {

@@ -55,17 +55,17 @@ NULL
 tidy.nls <- function(x, conf.int = FALSE, conf.level = .95,
                      quick = FALSE, ...) {
     if (quick) {
-        co <- coef(x)
+        co <- stats::coef(x)
         ret <- data.frame(term = names(co), estimate = unname(co))
         return(ret)
     }
     
     nn <- c("estimate", "std.error", "statistic", "p.value")
-    ret <- fix_data_frame(coef(summary(x)), nn)
+    ret <- fix_data_frame(stats::coef(summary(x)), nn)
 
     if (conf.int) {
         # avoid "Waiting for profiling to be done..." message
-        CI <- suppressMessages(confint(x, level = conf.level))
+        CI <- suppressMessages(stats::confint(x, level = conf.level))
         if (is.null(dim(CI))) {
             CI = matrix(CI, nrow=1)
         }
@@ -93,7 +93,7 @@ augment.nls <- function(x, data = NULL, newdata = NULL, ...) {
     if (!is.null(newdata)) {
         # use predictions on new data
         newdata <- fix_data_frame(newdata, newcol = ".rownames")
-        newdata$.fitted <- predict(x, newdata = newdata)
+        newdata$.fitted <- stats::predict(x, newdata = newdata)
         return(newdata)
     }
 
@@ -115,8 +115,8 @@ augment.nls <- function(x, data = NULL, newdata = NULL, ...) {
     # move rownames if necessary
     data <- fix_data_frame(data, newcol = ".rownames")
     
-    data$.fitted <- predict(x)
-    data$.resid <- resid(x)
+    data$.fitted <- stats::predict(x)
+    data$.resid <- stats::resid(x)
     data
 }
 

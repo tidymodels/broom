@@ -93,11 +93,11 @@ tidy.multinom <- function(x,
   
   #* Calculate Wald-type Z and p-value
   ret$statistic <- ret$estimate / ret$std.error
-  ret$p.value <- pnorm(abs(ret$statistic), 0, 1, lower.tail=FALSE) * 2
+  ret$p.value <- stats::pnorm(abs(ret$statistic), 0, 1, lower.tail=FALSE) * 2
   
   #* Confidence Interval
   if (conf.int){
-    ci <- apply(confint(x), 2, function(a) unlist(as.data.frame(a)))
+    ci <- apply(stats::confint(x), 2, function(a) unlist(as.data.frame(a)))
     ci <- as.data.frame(ci)
     names(ci) <- c("conf.low", "conf.high")
     ret <- cbind(ret, ci)

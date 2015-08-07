@@ -218,7 +218,7 @@ tidy.pairwise.htest <- function(x, ...) {
     data.frame(group1 = rownames(x$p.value)) %>%
       cbind(as.data.frame(x$p.value)) %>%
       tidyr::gather(group2, p.value, -group1) %>%
-      na.omit()
+      stats::na.omit()
 }
 
 

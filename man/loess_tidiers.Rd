@@ -5,7 +5,7 @@
 \alias{loess_tidiers}
 \title{Augmenting methods for loess models}
 \usage{
-\method{augment}{loess}(x, data = model.frame(x), newdata, ...)
+\method{augment}{loess}(x, data = stats::model.frame(x), newdata, ...)
 }
 \arguments{
 \item{x}{A "loess" object}
