@@ -48,31 +48,6 @@ as \code{conf.level} although the specification is inverted}
 \item{newdata}{If provided, new data frame to use for predictions}
 
 \item{\dots}{other arguments passed on to \code{summary.rq}}
-
-\item{se.type}{Type of standard errors to calculate; see \code{summar.rqs}}
-
-\item{conf.int}{boolean; should confidence intervals be calculated, ignored
-if \code{se.type = "rank"}}
-
-\item{conf.level}{confidence level for intervals}
-
-\item{alpha}{confidence level when \code{se.type = "rank"}; defaults to the same
-as \code{conf.level} although the specification is inverted}
-
-\item{\dots}{other arguments passed on to \code{summary.rqs}}
-
-\item{conf.int}{whether to include a confidence interval}
-
-\item{conf.level}{confidence level of the interval, used only if
-\code{conf.int=TRUE}}
-
-\item{\dots}{other arguments (currently unused)}
-
-\item{\dots}{other arguments (currently unused)}
-
-\item{newdata}{If provided, new data frame to use for predictions}
-
-\item{newdata}{If provided, new data frame to use for predictions}
 }
 \value{
 All tidying methods return a data.frame without rownames, whose
@@ -147,10 +122,6 @@ the model's statistics.
 \details{
 If \code{se.type != "rank"} and \code{conf.int = TRUE} confidence
 intervals are calculated by \code{summary.rq}. Otherwise they are standard t
-based intervals.
-
-If \code{se.type != "rank"} and \code{conf.int = TRUE} confidence
-intervals are calculated by \code{summary.rqs}. Otherwise they are standard t
 based intervals.
 
 This simply calls \code{augment.nls} on the "nlrq" object.

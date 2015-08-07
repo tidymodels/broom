@@ -12,9 +12,9 @@ process_rq(rq_obj, se.type = "rank", conf.int = TRUE, conf.level = 0.95,
 
 \item{se.type}{type of standard errors used in \code{summary.rq} or \code{summary.rqs}}
 
-\item{conf.int}{}
+\item{conf.int}{whether to include a confidence interval}
 
-\item{conf.level}{}
+\item{conf.level}{confidence level for confidence interval}
 
 \item{\dots}{currently unused}
 }
