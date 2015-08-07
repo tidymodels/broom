@@ -75,8 +75,8 @@ as \code{conf.level} although the specification is inverted}
 \item{newdata}{If provided, new data frame to use for predictions}
 }
 \value{
-All tidying methods return a \code{data.frame} without rownammes.
-The structure depends on the method chosen.
+All tidying methods return a data.frame without rownames, whose
+structure depends on the method chosen.
 
 \code{tidy.rq} returns a data frame with one row for each coefficient.
 The columns depend upon the confidence interval method selected.
