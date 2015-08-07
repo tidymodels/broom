@@ -43,29 +43,28 @@ NULL
 #' @export
 tidy.anova <- function(x, ...) {
     # x is stats::anova
-    nn <- NA
-    if (identical(colnames(x), c("Df", "Sum Sq", "Mean Sq", "F value", "Pr(>F)"))) {
-      nn <- c("df", "sumsq", "meansq", "statistic", "p.value")
-    } else if (identical(colnames(x), c("Sum Sq", "Df", "F value", "Pr(>F)"))) {
-    # x is car::Anova
-      nn <- c("sumsq", "df", "statistic", "p.value")
-    # x is a likelihood ratio test (anova of two models)
-    } else if(any(grepl("Model 1", attr(x, "heading")) & grepl("Model 2", attr(x, "heading"))) || is.null(x[["Sum Sq"]])){
-      # x is anova(m1, m2)
-      messy_names <- c("Res.Df", "RSS", "Df", "Sum of Sq", "F", "Pr(>F)",
-                       "loglik", "Chisq", "P(>|Chi|)")
-
-      tidy_names <- c("res.df", "rss", "df", "sumsq", "statistic", "p.value",
-                      "loglik", "statistic", "p.value")
-
-      nn <- tidy_names[match(colnames(x), messy_names)]
+    # there are many possible column names that need to be transformed
+    renamers <- c("Df" = "df",
+                  "Sum Sq" = "sumsq",
+                  "Mean Sq" = "meansq",
+                  "F value" = "statistic",
+                  "Pr(>F)" = "p.value",
+                  "Res.Df" = "res.df",
+                  "RSS" = "rss",
+                  "Sum of Sq" = "sumsq",
+                  "F" = "statistic",
+                  "Chisq" = "statistic",
+                  "P(>|Chi|)" = "p.value")
+    
+    unknown_cols <- setdiff(colnames(x), names(renamers))
+      if (length(unknown_cols) > 0) {
+        warning("The following column names in ANOVA output were not",
+                "recognized or transformed: ",
+                paste(unknown_cols, collapse = ", "))
     }
-    if (identical(nn, NA)) {
-       stop("Unrecognized column names in anova object")
-    }
-    ret <- fix_data_frame(x, nn[1:ncol(x)])
-
-    if ("term" %in% colnames(ret)) {
+    ret <- plyr::rename(fix_data_frame(x), renamers, warn_missing = FALSE)
+        
+    if (!is.null(ret$term)) {
         # if rows had names, strip whitespace in them
         ret <- ret %>% mutate(term = stringr::str_trim(term))
     }
@@ -92,7 +91,11 @@ tidy.aovlist <- function(x, ...) {
         x <- x[-1L]
     }
 
-    ret <- plyr::ldply(x, tidy, .id = "stratum")
+    # ret <- plyr::ldply(x, tidy, .id = "stratum")
+    ret <- lapply(x, function(a) tidy(stats::anova(a)))
+    ret <- lapply(names(ret), 
+                  function(a) dplyr::mutate(ret[[a]], stratum = a))
+    ret <- do.call("rbind", ret)
     # get rid of leading and trailing whitespace in term and stratum columns
     ret <- ret %>% mutate(term = stringr::str_trim(term),
                           stratum = stringr::str_trim(stratum))

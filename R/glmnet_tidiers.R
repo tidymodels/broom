@@ -71,20 +71,24 @@
 tidy.glmnet <- function(x, ...) {
     beta <- stats::coef(x)
     
-    if (is(x, "multnet")) {
+    if (inherits(x, "multnet")) {
         beta_d <- plyr::ldply(beta, function(b) {
             fix_data_frame(as.matrix(b), newcol = "term")
         }, .id = "class")
-        ret <- beta_d %>% tidyr::gather(step, estimate, -term, -class)
+        # Get vector of terms to use in gather_
+        not_term_class <- names(beta_d)[!names(beta_d) %in% c("term", "class")]
+        ret <- beta_d %>% tidyr::gather_("step", "estimate", not_term_class)
     } else {
         beta_d <- fix_data_frame(as.matrix(beta), newcol = "term")
-        ret <- beta_d %>% tidyr::gather(step, estimate, -term)
+        # Get vector of terms to use in gather_
+        not_term <- names(beta_d)[!names(beta_d) %in% "term"]
+        ret <- beta_d %>% tidyr::gather_("step", "estimate", not_term)
     }
     # add values specific to each step
     ret <- ret %>%
-        mutate(step = as.numeric(step),
-               lambda = x$lambda[step],
-               dev.ratio = x$dev.ratio[step])
+        dplyr::mutate_(step = ~as.numeric(step),
+               lambda = ~x$lambda[step],
+               dev.ratio = ~x$dev.ratio[step])
     ret
 }
 
