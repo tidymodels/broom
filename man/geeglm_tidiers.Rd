@@ -21,6 +21,9 @@ and confidence intervals (typical for log distributions)}
 
 \item{quick}{whether to compute a smaller and faster version, containing
 only the \code{term} and \code{estimate} columns.}
+
+\item{...}{Additional arguments to be passed to other methods.  Currently
+not used.}
 }
 \value{
 All tidying methods return a \code{data.frame} without rownames.
