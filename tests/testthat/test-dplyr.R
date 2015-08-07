@@ -1,6 +1,6 @@
 context("dplyr and broom")
 
-library(dplyr)
+suppressPackageStartupMessages(library(dplyr))
 
 # set up the lahman batting table, and filter to make it faster
 batting <- tbl(lahman_df(), "Batting")
