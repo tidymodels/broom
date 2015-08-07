@@ -69,7 +69,7 @@ This produces a summary of each replication, combined into one data.frame:
 bootnls
 ```
 
-You can then calculate confidence intervals (using what is called the [percentile method](http://www.uvm.edu/~dhowell/StatPages/Resampling/BootstMeans/bootstrapping_means.html)):
+You can then calculate confidence intervals (using what is called the [percentile method](https://www.uvm.edu/~dhowell/StatPages/Randomization%20Tests/ResamplingWithR/BootstMeans/bootstrapping_means.html)):
 
 ```{r}
 alpha = .05

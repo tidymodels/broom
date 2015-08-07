@@ -63,7 +63,6 @@ tidy.anova <- function(x, ...) {
                 paste(unknown_cols, collapse = ", "))
     }
     ret <- plyr::rename(fix_data_frame(x), renamers, warn_missing = FALSE)
-    
     if (!is.null(ret$term)) {
         # if rows had names, strip whitespace in them
         ret <- ret %>% mutate(term = stringr::str_trim(term))
@@ -91,7 +90,11 @@ tidy.aovlist <- function(x, ...) {
         x <- x[-1L]
     }
 
-    ret <- plyr::ldply(x, tidy, .id = "stratum")
+    # ret <- plyr::ldply(x, tidy, .id = "stratum")
+    ret <- lapply(x, function(a) tidy(stats::anova(a)))
+    ret <- lapply(names(ret), 
+                  function(a) dplyr::mutate(ret[[a]], stratum = a))
+    ret <- do.call("rbind", ret)
     # get rid of leading and trailing whitespace in term and stratum columns
     ret <- ret %>% mutate(term = stringr::str_trim(term),
                           stratum = stringr::str_trim(stratum))
