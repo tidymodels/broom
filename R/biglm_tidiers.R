@@ -55,7 +55,7 @@
 tidy.biglm <- function(x, conf.int = FALSE, conf.level = .95,
                        exponentiate = FALSE, quick = FALSE, ...) {
     if (quick) {
-        co <- coef(x)
+        co <- stats::coef(x)
         ret <- data.frame(term = names(co), estimate = unname(co))
         return(ret)
     }

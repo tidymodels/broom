@@ -48,7 +48,7 @@ compact <- function(x) Filter(Negate(is.null), x)
 #' @param original data frame with NAs
 insert_NAs <- function(x, original) {
     indices <- rep(NA, nrow(original))
-    indices[which(complete.cases(original))] = seq_len(nrow(x))
+    indices[which(stats::complete.cases(original))] = seq_len(nrow(x))
     x[indices, ]
 }
 
@@ -78,11 +78,11 @@ insert_NAs <- function(x, original) {
 augment_columns <- function(x, data, newdata, type, type.predict = type,
                             type.residuals = type, se.fit = TRUE, ...) {
     notNAs <- function(o) if (is.null(o) || all(is.na(o))) { NULL } else {o}
-    residuals0 <- failwith(NULL, residuals, TRUE)
-    influence0 <- failwith(NULL, influence, TRUE)
-    cooks.distance0 <- failwith(NULL, cooks.distance, TRUE)
-    rstandard0 <- failwith(NULL, rstandard, TRUE)
-    predict0 <- failwith(NULL, predict, TRUE)
+    residuals0 <- failwith(NULL, stats::residuals, TRUE)
+    influence0 <- failwith(NULL, stats::influence, TRUE)
+    cooks.distance0 <- failwith(NULL, stats::cooks.distance, TRUE)
+    rstandard0 <- failwith(NULL, stats::rstandard, TRUE)
+    predict0 <- failwith(NULL, stats::predict, TRUE)
     
     # call predict with arguments
     args <- list(x)
@@ -100,7 +100,7 @@ augment_columns <- function(x, data, newdata, type, type.predict = type,
 
     if (is.null(pred)) {
         # try "fitted" instead- some objects don't have "predict" method
-        pred <- do.call(fitted, args)
+        pred <- do.call(stats::fitted, args)
     }
 
     if (is.list(pred)) {
@@ -111,9 +111,9 @@ augment_columns <- function(x, data, newdata, type, type.predict = type,
     }
     
     na_action <- if (isS4(x)) {
-        attr(model.frame(x), "na.action")
+        attr(stats::model.frame(x), "na.action")
     } else {
-        na.action(x)
+        stats::na.action(x)
     }
 
     if (missing(newdata) || is.null(newdata)) {
@@ -138,7 +138,7 @@ augment_columns <- function(x, data, newdata, type, type.predict = type,
         
         if (class(na_action) == "exclude") {
             # check if values are missing
-            if (length(residuals(x)) > nrow(data)) {
+            if (length(stats::residuals(x)) > nrow(data)) {
                 warning("When fitting with na.exclude, rows with NA in ",
                         "original data will be dropped unless those rows are provided ",
                         "in 'data' argument")
@@ -204,16 +204,16 @@ augment_columns <- function(x, data, newdata, type, type.predict = type,
 #' @export
 finish_glance <- function(ret, x) {
     
-    ret$logLik <- tryCatch(as.numeric(logLik(x)), error = function(e) NULL)
-    ret$AIC <- tryCatch(AIC(x), error = function(e) NULL)
-    ret$BIC <- tryCatch(BIC(x), error = function(e) NULL)
+    ret$logLik <- tryCatch(as.numeric(stats::logLik(x)), error = function(e) NULL)
+    ret$AIC <- tryCatch(stats::AIC(x), error = function(e) NULL)
+    ret$BIC <- tryCatch(stats::BIC(x), error = function(e) NULL)
     
     # special case for REML objects (better way?)
     if ("lmerMod" %in% class(x)) {
-        ret$deviance <- tryCatch(deviance(x, REML=FALSE),
+        ret$deviance <- tryCatch(stats::deviance(x, REML=FALSE),
                                  error = function(e) NULL)
     } else {
-        ret$deviance <- tryCatch(deviance(x), error = function(e) NULL)
+        ret$deviance <- tryCatch(stats::deviance(x), error = function(e) NULL)
     }
     ret$df.residual <- tryCatch(df.residual(x), error = function(e) NULL)
     
@@ -238,7 +238,7 @@ finish_glance <- function(ret, x) {
 #' @export
 confint_tidy <- function(x, conf.level = .95, ...) {
     # avoid "Waiting for profiling to be done..." message for some models
-    CI <- suppressMessages(confint(x, level = conf.level, ...))
+    CI <- suppressMessages(stats::confint(x, level = conf.level, ...))
     if (is.null(dim(CI))) {
         CI = matrix(CI, nrow=1)
     }

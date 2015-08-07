@@ -9,7 +9,7 @@
 \usage{
 \method{tidy}{merMod}(x, effects = "random", ...)
 
-\method{augment}{merMod}(x, data = model.frame(x), newdata, ...)
+\method{augment}{merMod}(x, data = stats::model.frame(x), newdata, ...)
 
 \method{glance}{merMod}(x, ...)
 }

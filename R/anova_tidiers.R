@@ -49,6 +49,16 @@ tidy.anova <- function(x, ...) {
     } else if (identical(colnames(x), c("Sum Sq", "Df", "F value", "Pr(>F)"))) {
     # x is car::Anova
       nn <- c("sumsq", "df", "statistic", "p.value")
+    # x is a likelihood ratio test (anova of two models)
+    } else if(any(grepl("Model 1", attr(x, "heading")) & grepl("Model 2", attr(x, "heading"))) || is.null(x[["Sum Sq"]])){
+      # x is anova(m1, m2)
+      messy_names <- c("Res.Df", "RSS", "Df", "Sum of Sq", "F", "Pr(>F)",
+                       "loglik", "Chisq", "P(>|Chi|)")
+
+      tidy_names <- c("res.df", "rss", "df", "sumsq", "statistic", "p.value",
+                      "loglik", "statistic", "p.value")
+
+      nn <- tidy_names[match(colnames(x), messy_names)]
     }
     if (identical(nn, NA)) {
        stop("Unrecognized column names in anova object")

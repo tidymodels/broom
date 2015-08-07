@@ -67,7 +67,7 @@ tidy.merMod <- function(x, effects = "random", ...) {
     effects <- match.arg(effects, c("random", "fixed"))
     if (effects == "fixed") {
         # return tidied fixed effects rather than random
-        ret <- coef(summary(x))
+        ret <- stats::coef(summary(x))
 
         # p-values may or may not be included
         nn <- c("estimate", "std.error", "statistic", "p.value")[1:ncol(ret)]
@@ -84,7 +84,7 @@ tidy.merMod <- function(x, effects = "random", ...) {
     }
 
     # combine them and gather terms
-    ret <- ldply(coef(x), fix) %>%
+    ret <- ldply(stats::coef(x), fix) %>%
         tidyr::gather(term, estimate, -.id, -level)
     colnames(ret)[1] <- "group"
     ret
@@ -112,7 +112,7 @@ tidy.merMod <- function(x, effects = "random", ...) {
 #' ".offset", ".sqrtXwt", ".sqrtrwt", ".eta"}.
 #'
 #' @export
-augment.merMod <- function(x, data = model.frame(x), newdata, ...) {    
+augment.merMod <- function(x, data = stats::model.frame(x), newdata, ...) {    
     # move rownames if necessary
     if (missing(newdata)) {
         newdata <- NULL
@@ -120,7 +120,7 @@ augment.merMod <- function(x, data = model.frame(x), newdata, ...) {
     ret <- augment_columns(x, data, newdata, se.fit = NULL)
     
     # add predictions with no random effects (population means)
-    predictions <- predict(x, re.form = NA)
+    predictions <- stats::predict(x, re.form = NA)
     # some cases, such as values returned from nlmer, return more than one
     # prediction per observation. Not clear how those cases would be tidied
     if (length(predictions) == nrow(ret)) {
