@@ -137,7 +137,7 @@ tidy.lm <- function(x, conf.int = FALSE, conf.level = .95,
     co <- coef(summary(x))
     
     nn <- c("estimate", "std.error", "statistic", "p.value")
-    if (is(co, "listof")) {
+    if (inherits(co, "listof")) {
         # multiple response variables
         ret <- plyr::ldply(co, fix_data_frame, nn[1:ncol(co[[1]])],
                            .id = "response")
