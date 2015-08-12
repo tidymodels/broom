@@ -89,7 +89,7 @@ tidy.merMod <- function(x, effects = c("ran_pars","fixed"),
     ret_list <- list()
     if ("fixed" %in% effects) {
         # return tidied fixed effects rather than random
-        ret <- coef(summary(x))
+        ret <- stats::coef(summary(x))
 
         # p-values may or may not be included
         nn <- base_nn[1:ncol(ret)]
@@ -210,7 +210,7 @@ tidy.merMod <- function(x, effects = c("ran_pars","fixed"),
 #' ".offset", ".sqrtXwt", ".sqrtrwt", ".eta"}.
 #'
 #' @export
-augment.merMod <- function(x, data = model.frame(x), newdata, ...) {    
+augment.merMod <- function(x, data = stats::model.frame(x), newdata, ...) {    
     # move rownames if necessary
     if (missing(newdata)) {
         newdata <- NULL
@@ -218,7 +218,7 @@ augment.merMod <- function(x, data = model.frame(x), newdata, ...) {
     ret <- augment_columns(x, data, newdata, se.fit = NULL)
     
     # add predictions with no random effects (population means)
-    predictions <- predict(x, re.form = NA)
+    predictions <- stats::predict(x, re.form = NA)
     # some cases, such as values returned from nlmer, return more than one
     # prediction per observation. Not clear how those cases would be tidied
     if (length(predictions) == nrow(ret)) {

@@ -41,7 +41,7 @@ tidy.glht <- function(x, ...) {
     unrowname(data.frame(
         lhs = rownames(x$linfct),
         rhs = x$rhs,
-        estimate = coef(x),
+        estimate = stats::coef(x),
         check.names = FALSE,
         stringsAsFactors = FALSE))
 }

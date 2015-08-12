@@ -41,7 +41,7 @@ NULL
 #' 
 #' @export
 tidy.Arima <- function(x, conf.int=FALSE, conf.level=.95, ...) {
-    coefs <- coef(x)
+    coefs <- stats::coef(x)
     # standard errors are computed as in stats:::print.Arima
     ses <- rep.int(0, length(coefs))
     ses[x$mask] <- sqrt(diag(x$var.coef))

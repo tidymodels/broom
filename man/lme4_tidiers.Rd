@@ -11,7 +11,7 @@
   scales = c("sdcor", NA), ran_prefix = NULL, conf.int = FALSE,
   conf.level = 0.95, conf.method = "Wald", ...)
 
-\method{augment}{merMod}(x, data = model.frame(x), newdata, ...)
+\method{augment}{merMod}(x, data = stats::model.frame(x), newdata, ...)
 
 \method{glance}{merMod}(x, ...)
 }

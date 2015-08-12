@@ -79,7 +79,7 @@ tidy.lme <- function(x, effects = "random", ...) {
     }
 
     # combine them and gather terms
-    ret <-  fix(coef(x))    %>%
+    ret <-  fix(stats::coef(x))    %>%
         tidyr::gather(term, estimate, -.id, -level)
     colnames(ret)[1] <- "group"
     ret
@@ -113,7 +113,7 @@ augment.lme <- function(x, data = x$data, newdata, ...) {
     ret <- augment_columns(x, data, newdata, se.fit = NULL)
     
     # add predictions with no random effects (population means)
-    predictions <- predict(x, level=0)
+    predictions <- stats::predict(x, level=0)
     if (length(predictions) == nrow(ret)) {
         ret$.fixed <- predictions
     }

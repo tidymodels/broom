@@ -82,7 +82,7 @@ augment.data.frame <- function(x, data, ...) {
 #' @export
 glance.data.frame <- function(x, ...) {
     ret <- data.frame(nrow = nrow(x), ncol = ncol(x))
-    ret$complete.obs <- sum(complete.cases(x))
+    ret$complete.obs <- sum(stats::complete.cases(x))
     ret$na.fraction <- mean(is.na(x))
     return(ret)
 }
