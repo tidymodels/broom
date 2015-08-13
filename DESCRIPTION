@@ -10,7 +10,8 @@ Authors@R: c(
     person("Dieter", "Menne", email = "dieter.menne@menne-biomed.de", role = "ctb"),
     person("Benjamin", "Nutter", email = "nutter@battelle.org", role = "ctb"),
     person("Luke", "Johnston", email = "luke.johnston@mail.utoronto.ca", role = "ctb"),
-    person("Hadley", "Wickham", email = "hadley@rstudio.com", role = "ctb")
+    person("Hadley", "Wickham", email = "hadley@rstudio.com", role = "ctb"),
+    person("Francois", "Briatte", email = "f.briatte@gmail.com", role = "ctb")
     )
 Maintainer: David Robinson <admiral.david@gmail.com>
 Description: Convert statistical analysis objects from R into tidy data frames,
@@ -49,7 +50,8 @@ Suggests:
     ggplot2,
     nnet,
     geepack,
-    AUC
+    AUC,
+    ergm
 URL: http://github.com/dgrtwo/broom
 BugReports: http://github.com/dgrtwo/broom/issues
 VignetteBuilder: knitr
