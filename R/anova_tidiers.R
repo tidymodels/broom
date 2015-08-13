@@ -56,13 +56,16 @@ tidy.anova <- function(x, ...) {
                   "Chisq" = "statistic",
                   "P(>|Chi|)" = "p.value")
     
+    names(renamers) <- make.names(names(renamers))
+    
+    x <- fix_data_frame(x)
     unknown_cols <- setdiff(colnames(x), names(renamers))
     if (length(unknown_cols) > 0) {
         warning("The following column names in ANOVA output were not",
                 "recognized or transformed: ",
                 paste(unknown_cols, collapse = ", "))
     }
-    ret <- plyr::rename(fix_data_frame(x), renamers, warn_missing = FALSE)
+    ret <- plyr::rename(x, renamers, warn_missing = FALSE)
     if (!is.null(ret$term)) {
         # if rows had names, strip whitespace in them
         ret <- ret %>% mutate(term = stringr::str_trim(term))
