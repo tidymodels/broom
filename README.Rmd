@@ -35,6 +35,7 @@ It also provides methods for S3 objects in popular third-party packages, includi
 
 * `lme4`
 * `glmnet`
+* `boot`
 * `gam`
 * `survival`
 * `lfe`
@@ -43,7 +44,9 @@ It also provides methods for S3 objects in popular third-party packages, includi
 * `sp`
 * `maps`
 
-```{R, echo=FALSE, message = FALSE}
+A full list of the `tidy`, `augment` and `glance` methods for each class is as follows:
+
+```{R, echo = FALSE, message = FALSE}
 library(broom)
 library(dplyr)
 tidy_methods <- methods("tidy")
@@ -134,7 +137,7 @@ This gives you a data.frame representation. Note that the row names have been mo
 Instead of viewing the coefficients, you might be interested in the fitted values and residuals for each of the original points in the regression. For this, use `augment`, which augments the original data with information from the model:
 
 
-```r
+```{r}
 head(augment(lmfit))
 ```
 
@@ -143,7 +146,7 @@ Note that each of the new columns begins with a `.` (to avoid overwriting any of
 Finally, several summary statistics are computed for the entire regression, such as R^2 and the F-statistic. These can be accessed with the `glance` function:
 
 
-```r
+```{r}
 glance(lmfit)
 ```
 
@@ -157,15 +160,16 @@ Other Examples
 These functions apply equally well to the output from `glm`:
 
 
-```r
+```{r}
 glmfit <- glm(am ~ wt, mtcars, family="binomial")
 tidy(glmfit)
 ```
 
-```r
+```{r}
 head(augment(glmfit))
 ```
-```r
+
+```{r}
 glance(glmfit)
 ```
 
@@ -174,16 +178,16 @@ Note that the statistics computed by `glance` are different for `glm` objects th
 These functions also work on other fits, such as nonlinear models (`nls`):
 
 
-```r
+```{r}
 nlsfit <- nls(mpg ~ k / wt + b, mtcars, start=list(k=1, b=0))
 tidy(nlsfit)
 ```
 
-```r
+```{r}
 head(augment(nlsfit, mtcars))
 ```
 
-```r
+```{r}
 glance(nlsfit)
 ```
 
@@ -192,7 +196,7 @@ glance(nlsfit)
 The `tidy` function can also be applied to `htest` objects, such as those output by popular built-in functions like `t.test`, `cor.test`, and `wilcox.test`.
 
 
-```r
+```{r}
 tt <- t.test(wt ~ am, mtcars)
 tidy(tt)
 ```
@@ -200,7 +204,7 @@ tidy(tt)
 Some cases might have fewer columns (for example, no confidence interval):
 
 
-```r
+```{r warning = FALSE}
 wt <- wilcox.test(wt ~ am, mtcars)
 tidy(wt)
 ```
@@ -208,11 +212,11 @@ tidy(wt)
 Since the `tidy` output is already only one row, `glance` returns the same output:
 
 
-```r
+```{r}
 glance(tt)
 ```
 
-```r
+```{r}
 glance(wt)
 ```
 
