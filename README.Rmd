@@ -185,7 +185,7 @@ It also provides methods for S3 objects in popular third-party packages, includi
 * `sp`
 * `maps`
 
-A full list of the `tidy`, `augment` and `glance` methods for each class is as follows:
+A full list of the `tidy`, `augment` and `glance` methods available for each class is as follows:
 
 ```{R, echo = FALSE, message = FALSE}
 library(broom)
