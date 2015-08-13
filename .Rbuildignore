@@ -4,3 +4,4 @@
 ^man-roxygen$
 ^revdep$
 ^cran-comments\.md$
+^README.Rmd
