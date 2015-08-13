@@ -1,7 +1,3 @@
----
-output: md_document
----
-
 broom: let's tidy up a bit
 =====================
 
