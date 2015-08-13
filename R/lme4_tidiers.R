@@ -10,7 +10,7 @@
 #' The structure depends on the method chosen.
 #' 
 #' @name lme4_tidiers
-#' 
+#'
 #' @examples
 #' 
 #' if (require("lme4")) {
@@ -18,6 +18,9 @@
 #'     lmm1 <- lmer(Reaction ~ Days + (Days | Subject), sleepstudy)
 #'     tidy(lmm1)
 #'     tidy(lmm1, effects = "fixed")
+#'     tidy(lmm1, effects = "fixed", conf.int=TRUE)
+#'     tidy(lmm1, effects = "fixed", conf.int=TRUE, conf.method="profile")
+#'     tidy(lmm1, effects = "ran_modes", conf.int=TRUE)
 #'     head(augment(lmm1, sleepstudy))
 #'     glance(lmm1)
 #'     
@@ -42,6 +45,11 @@ NULL
 #' @rdname lme4_tidiers
 #' 
 #' @param effects Either "random" (default) or "fixed"
+#' @param conf.int whether to include a confidence interval
+#' @param conf.level confidence level for CI
+#' @param conf.method method for computing confidence intervals (see ...)
+#' @param scales scales on which to report the variables: for random effects, the choices are \sQuote{"sdcor"} (standard deviations and correlations) or \sQuote{"varcov"} (variances and covariances)
+#' @param ran_prefix a length-2 character vector specifying the strings to use as prefixes for self- (variance/standard deviation) and cross- (covariance/correlation) random effects terms
 #' 
 #' @return \code{tidy} returns one row for each estimated effect, either
 #' random or fixed depending on the \code{effects} parameter. If
@@ -52,42 +60,132 @@ NULL
 #'   \item{estimate}{estimated coefficient}
 #' 
 #' If \code{effects="fixed"}, \code{tidy} returns the columns
-#'   \item{term}{gixed term being estimated}
+#'   \item{term}{fixed term being estimated}
 #'   \item{estimate}{estimate of fixed effect}
 #'   \item{std.error}{standard error}
 #'   \item{statistic}{t-statistic}
 #'   \item{p.value}{P-value computed from t-statistic (depending on the model,
 #'   this may or may not be calculated and included)}
 #' 
-#' @importFrom plyr ldply
+#' @importFrom plyr ldply rbind.fill
 #' @import dplyr
+#' @importFrom tidyr gather spread
+#' @importFrom nlme VarCorr ranef
+## FIXME: is it OK/sensible to import these from (priority='recommended')
+## nlme rather than (priority=NA) lme4?
 #' 
 #' @export
-tidy.merMod <- function(x, effects = "random", ...) {
-    effects <- match.arg(effects, c("random", "fixed"))
-    if (effects == "fixed") {
+tidy.merMod <- function(x, effects = c("ran_pars","fixed"),
+                        scales = c("sdcor",NA),
+                        ran_prefix=NULL,
+                        conf.int = FALSE,
+                        conf.level = 0.95,
+                        conf.method = "Wald",
+                        ...) {
+    effect_names <- c("ran_pars", "fixed", "ran_modes")
+    if (length(miss <- setdiff(effects,effect_names))>0)
+        stop("unknown effect type ",miss)
+    base_nn <- c("estimate", "std.error", "statistic", "p.value")
+    ret_list <- list()
+    if ("fixed" %in% effects) {
         # return tidied fixed effects rather than random
         ret <- stats::coef(summary(x))
 
         # p-values may or may not be included
-        nn <- c("estimate", "std.error", "statistic", "p.value")[1:ncol(ret)]
-        return(fix_data_frame(ret, newnames = nn, newcol = "term"))
-    }
+        nn <- base_nn[1:ncol(ret)]
 
-    # fix each group to be a tidy data frame
-    fix <- function(g) {
-        newg <- fix_data_frame(g, newnames = colnames(g), newcol = "level")
-        # fix_data_frame doesn't create a new column if rownames are numeric,
-        # which doesn't suit our purposes
-        newg$level <- rownames(g)
-        newg
+        if (conf.int) {
+            cifix <- confint(x,parm="beta_",method=conf.method,...)
+            ret <- data.frame(ret,cifix)
+            nn <- c(nn,"conf.low","conf.high")
+        }
+        if ("ran_pars" %in% effects) {
+            ret <- data.frame(ret,grp="fixed")
+            nn <- c(nn,"grp")
+        }
+        ret_list$fixed <-
+            fix_data_frame(ret, newnames = nn)
     }
+    if ("ran_pars" %in% effects) {
+        rscale <- scales[effects=="ran_pars"]
+        ret <- as.data.frame(VarCorr(x))
+        ret[] <- lapply(ret, function(x) if (is.factor(x))
+                                 as.character(x) else x)
+        if (is.null(ran_prefix)) {
+            ran_prefix <- switch(rscale,
+                                 vcov=c("var","cov"),
+                                 sdcor=c("sd","cor"))
+        }
+        pfun <- function(x) {
+            v <- na.omit(unlist(x))
+            if (length(v)==0) v <- "Observation"
+            p <- paste(v,collapse=".")
+            if (!identical(ran_prefix,NA)) {
+                p <- paste(ran_prefix[length(v)],p,sep="_")
+            }
+            return(p)
+        }
+        rownames(ret) <- apply(ret[c("var1","var2")],1,pfun)
 
-    # combine them and gather terms
-    ret <- ldply(stats::coef(x), fix) %>%
-        tidyr::gather(term, estimate, -.id, -level)
-    colnames(ret)[1] <- "group"
-    ret
+        if (conf.int) {
+            ciran <- confint(x,parm="theta_",method=conf.method,...)
+            ret <- data.frame(ret,ciran)
+            nn <- c(nn,"conf.low","conf.high")
+        }
+
+        ## replicate lme4:::tnames, more or less
+        ret_list$ran_pars <- fix_data_frame(ret[c("grp",rscale)],
+                                            newnames=c("grp","estimate"))
+    }
+    if ("ran_modes" %in% effects) {
+        ## fix each group to be a tidy data frame
+
+        nn <- c("estimate", "std.error")
+        re <- ranef(x,condVar=TRUE)
+        getSE <- function(x) {
+            v <- attr(x,"postVar")
+            setNames(as.data.frame(sqrt(t(apply(v,3,diag)))),
+                     colnames(x))
+        }
+        fix <- function(g,re,.id) {
+             newg <- fix_data_frame(g, newnames = colnames(g), newcol = "level")
+             # fix_data_frame doesn't create a new column if rownames are numeric,
+             # which doesn't suit our purposes
+             newg$level <- rownames(g)
+             newg$type <- "est"
+
+             newg.se <- getSE(re)
+             newg.se$level <- rownames(re)
+             newg.se$type <- "se"
+
+             data.frame(rbind(newg,newg.se),.id=.id,
+                        check.names=FALSE)
+                        ## prevent coercion of variable names
+        }
+
+        mm <- do.call(rbind,Map(fix,coef(x),re,names(re)))
+
+        ## block false-positive warnings due to NSE
+        type <- spread <- est <- NULL
+        mm %>% gather(term, estimate, -.id, -level, -type) %>%
+            spread(type,estimate) -> ret
+
+        ## FIXME: doesn't include uncertainty of population-level estimate
+
+        if (conf.int) {
+            if (conf.method != "Wald")
+                stop("only Wald CIs available for conditional modes")
+
+            mult <- qnorm((1+conf.level)/2)
+            ret <- transform(ret,
+                             conf.low=est-mult*se,
+                             conf.high=est+mult*se)
+        }
+        
+        colnames(ret)[1] <- "group"
+        ret_list$ran_modes <- ret
+    }
+    return(rbind.fill(ret_list))
 }
 
 
@@ -158,6 +256,6 @@ augment.merMod <- function(x, data = stats::model.frame(x), newdata, ...) {
 #' 
 #' @export
 glance.merMod <- function(x, ...) {
-    ret <- unrowname(data.frame(sigma = lme4::sigma(x)))
+    ret <- unrowname(data.frame(sigma = sigma(x)))
     finish_glance(ret, x)
 }

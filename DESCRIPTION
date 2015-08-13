@@ -26,9 +26,11 @@ Imports:
     tidyr,
     psych,
     stringr,
-    reshape2
+    reshape2,
+    nlme
 Suggests:
     knitr,
+    boot,
     survival,
     gam,
     glmnet,
@@ -41,7 +43,6 @@ Suggests:
     multcomp,
     testthat,
     lme4,
-    nlme,
     zoo,
     lmtest,
     plm,
