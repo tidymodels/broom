@@ -10,6 +10,7 @@ Authors@R: c(
     person("Dieter", "Menne", email = "dieter.menne@menne-biomed.de", role = "ctb"),
     person("Benjamin", "Nutter", email = "nutter@battelle.org", role = "ctb"),
     person("Luke", "Johnston", email = "luke.johnston@mail.utoronto.ca", role = "ctb"),
+    person("Ben", "Bolker", email = "bolker@mcmaster.ca", role = "ctb"),
     person("Hadley", "Wickham", email = "hadley@rstudio.com", role = "ctb")
     )
 Maintainer: David Robinson <admiral.david@gmail.com>
