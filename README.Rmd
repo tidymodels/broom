@@ -13,66 +13,6 @@ broom should be distinguished from packages like [reshape2](http://cran.r-projec
 
 Tidying model outputs is not an exact science, and it's based on a judgment of the kinds of values a data scientist typically wants out of a tidy analysis (for instance, estimates, test statistics, and p-values). You may lose some of the information in the original object that you wanted, or keep more information than you need. If you think the tidy output for a model should be changed, or if you're missing a tidying function for an S3 class that you'd like, I strongly encourage you to [open an issue](http://github.com/dgrtwo/broom/issues) or a pull request.
 
-### Available Tidiers
-
-Currently broom provides tidying methods for many S3 objects from the built-in stats package, including
-
-* `lm`
-* `glm`
-* `htest`
-* `anova`
-* `nls`
-* `kmeans`
-* `manova`
-* `TukeyHSD`
-* `arima`
-
-It also provides methods for S3 objects in popular third-party packages, including
-
-* `lme4`
-* `glmnet`
-* `boot`
-* `gam`
-* `survival`
-* `lfe`
-* `zoo`
-* `multcomp`
-* `sp`
-* `maps`
-
-A full list of the `tidy`, `augment` and `glance` methods for each class is as follows:
-
-```{R, echo = FALSE, message = FALSE}
-library(broom)
-library(dplyr)
-tidy_methods <- methods("tidy")
-glance_methods <- methods("glance")
-augment_methods <- methods("augment")
-
-tidy_methods <- data.frame(class = sub("tidy[.]", "", 
-                                       as.vector(tidy_methods)),
-                           tidy = "x",
-                           stringsAsFactors=FALSE)
-glance_methods <- data.frame(class = sub("glance[.]", "", 
-                                         as.vector(glance_methods)),
-                             glance = "x",
-                             stringsAsFactors = FALSE)
-augment_methods <- data.frame(class = sub("augment[.]", "",
-                                          as.vector(augment_methods)),
-                              augment = "x",
-                              stringsAsFactors = FALSE)
-
-TidyMethods <- left_join(tidy_methods, glance_methods) %>%
-    left_join(augment_methods) %>%
-    mutate(tidy = ifelse(is.na(tidy), "", tidy),
-           glance = ifelse(is.na(glance), "", glance),
-           augment = ifelse(is.na(augment), "", augment))
-
-names(TidyMethods) <- c("Class", "`tidy`", "`glance`", "`augment`")
-
-knitr::kable(TidyMethods)
-```
-
 Installation and Documentation
 ------------
 
@@ -217,6 +157,66 @@ glance(wt)
 ```
 
 There is no `augment` function for `htest` objects, since there is no meaningful sense in which a hypothesis test produces output about each initial data point.
+
+### Available Tidiers
+
+Currently broom provides tidying methods for many S3 objects from the built-in stats package, including
+
+* `lm`
+* `glm`
+* `htest`
+* `anova`
+* `nls`
+* `kmeans`
+* `manova`
+* `TukeyHSD`
+* `arima`
+
+It also provides methods for S3 objects in popular third-party packages, including
+
+* `lme4`
+* `glmnet`
+* `boot`
+* `gam`
+* `survival`
+* `lfe`
+* `zoo`
+* `multcomp`
+* `sp`
+* `maps`
+
+A full list of the `tidy`, `augment` and `glance` methods for each class is as follows:
+
+```{R, echo = FALSE, message = FALSE}
+library(broom)
+library(dplyr)
+tidy_methods <- methods("tidy")
+glance_methods <- methods("glance")
+augment_methods <- methods("augment")
+
+tidy_methods <- data.frame(class = sub("tidy[.]", "", 
+                                       as.vector(tidy_methods)),
+                           tidy = "x",
+                           stringsAsFactors=FALSE)
+glance_methods <- data.frame(class = sub("glance[.]", "", 
+                                         as.vector(glance_methods)),
+                             glance = "x",
+                             stringsAsFactors = FALSE)
+augment_methods <- data.frame(class = sub("augment[.]", "",
+                                          as.vector(augment_methods)),
+                              augment = "x",
+                              stringsAsFactors = FALSE)
+
+TidyMethods <- left_join(tidy_methods, glance_methods) %>%
+    left_join(augment_methods) %>%
+    mutate(tidy = ifelse(is.na(tidy), "", tidy),
+           glance = ifelse(is.na(glance), "", glance),
+           augment = ifelse(is.na(augment), "", augment))
+
+names(TidyMethods) <- c("Class", "`tidy`", "`glance`", "`augment`")
+
+knitr::kable(TidyMethods)
+```
 
 Conventions
 ------------

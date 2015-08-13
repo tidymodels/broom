@@ -13,100 +13,6 @@ broom should be distinguished from packages like [reshape2](http://cran.r-projec
 
 Tidying model outputs is not an exact science, and it's based on a judgment of the kinds of values a data scientist typically wants out of a tidy analysis (for instance, estimates, test statistics, and p-values). You may lose some of the information in the original object that you wanted, or keep more information than you need. If you think the tidy output for a model should be changed, or if you're missing a tidying function for an S3 class that you'd like, I strongly encourage you to [open an issue](http://github.com/dgrtwo/broom/issues) or a pull request.
 
-### Available Tidiers
-
-Currently broom provides tidying methods for many S3 objects from the built-in stats package, including
-
-* `lm`
-* `glm`
-* `htest`
-* `anova`
-* `nls`
-* `kmeans`
-* `manova`
-* `TukeyHSD`
-* `arima`
-
-It also provides methods for S3 objects in popular third-party packages, including
-
-* `lme4`
-* `glmnet`
-* `boot`
-* `gam`
-* `survival`
-* `lfe`
-* `zoo`
-* `multcomp`
-* `sp`
-* `maps`
-
-A full list of the `tidy`, `augment` and `glance` methods for each class is as follows:
-
-
-|Class                    |`tidy` |`glance` |`augment` |
-|:------------------------|:------|:--------|:---------|
-|aareg                    |x      |x        |          |
-|anova                    |x      |         |          |
-|aov                      |x      |         |          |
-|aovlist                  |x      |         |          |
-|Arima                    |x      |x        |          |
-|biglm                    |x      |x        |          |
-|cch                      |x      |x        |          |
-|cld                      |x      |         |          |
-|coeftest                 |x      |         |          |
-|confint.glht             |x      |         |          |
-|coxph                    |x      |x        |x         |
-|cv.glmnet                |x      |x        |          |
-|data.frame               |x      |x        |x         |
-|default                  |x      |x        |x         |
-|density                  |x      |         |          |
-|ergm                     |x      |x        |          |
-|felm                     |x      |x        |x         |
-|ftable                   |x      |         |          |
-|gam                      |x      |x        |          |
-|geeglm                   |x      |         |          |
-|glht                     |x      |         |          |
-|glmnet                   |x      |x        |          |
-|htest                    |x      |x        |          |
-|kmeans                   |x      |x        |x         |
-|Line                     |x      |         |          |
-|Lines                    |x      |         |          |
-|list                     |x      |x        |          |
-|lm                       |x      |x        |x         |
-|lme                      |x      |x        |x         |
-|manova                   |x      |         |          |
-|map                      |x      |         |          |
-|matrix                   |x      |x        |          |
-|merMod                   |x      |x        |x         |
-|multinom                 |x      |x        |          |
-|nlrq                     |x      |x        |x         |
-|nls                      |x      |x        |x         |
-|NULL                     |x      |x        |x         |
-|pairwise.htest           |x      |         |          |
-|plm                      |x      |x        |x         |
-|Polygon                  |x      |         |          |
-|Polygons                 |x      |         |          |
-|power.htest              |x      |         |          |
-|pyears                   |x      |x        |          |
-|ridgelm                  |x      |x        |          |
-|roc                      |x      |         |          |
-|rowwise_df               |x      |x        |x         |
-|rq                       |x      |x        |x         |
-|rqs                      |x      |x        |x         |
-|SpatialLinesDataFrame    |x      |         |          |
-|SpatialPolygons          |x      |         |          |
-|SpatialPolygonsDataFrame |x      |         |          |
-|spec                     |x      |         |          |
-|summary.glht             |x      |         |          |
-|summaryDefault           |x      |x        |          |
-|survexp                  |x      |x        |          |
-|survfit                  |x      |x        |          |
-|survreg                  |x      |x        |x         |
-|table                    |x      |         |          |
-|ts                       |x      |         |          |
-|TukeyHSD                 |x      |         |          |
-|zoo                      |x      |         |          |
-
 Installation and Documentation
 ------------
 
@@ -409,6 +315,100 @@ glance(wt)
 ```
 
 There is no `augment` function for `htest` objects, since there is no meaningful sense in which a hypothesis test produces output about each initial data point.
+
+### Available Tidiers
+
+Currently broom provides tidying methods for many S3 objects from the built-in stats package, including
+
+* `lm`
+* `glm`
+* `htest`
+* `anova`
+* `nls`
+* `kmeans`
+* `manova`
+* `TukeyHSD`
+* `arima`
+
+It also provides methods for S3 objects in popular third-party packages, including
+
+* `lme4`
+* `glmnet`
+* `boot`
+* `gam`
+* `survival`
+* `lfe`
+* `zoo`
+* `multcomp`
+* `sp`
+* `maps`
+
+A full list of the `tidy`, `augment` and `glance` methods for each class is as follows:
+
+
+|Class                    |`tidy` |`glance` |`augment` |
+|:------------------------|:------|:--------|:---------|
+|aareg                    |x      |x        |          |
+|anova                    |x      |         |          |
+|aov                      |x      |         |          |
+|aovlist                  |x      |         |          |
+|Arima                    |x      |x        |          |
+|biglm                    |x      |x        |          |
+|cch                      |x      |x        |          |
+|cld                      |x      |         |          |
+|coeftest                 |x      |         |          |
+|confint.glht             |x      |         |          |
+|coxph                    |x      |x        |x         |
+|cv.glmnet                |x      |x        |          |
+|data.frame               |x      |x        |x         |
+|default                  |x      |x        |x         |
+|density                  |x      |         |          |
+|ergm                     |x      |x        |          |
+|felm                     |x      |x        |x         |
+|ftable                   |x      |         |          |
+|gam                      |x      |x        |          |
+|geeglm                   |x      |         |          |
+|glht                     |x      |         |          |
+|glmnet                   |x      |x        |          |
+|htest                    |x      |x        |          |
+|kmeans                   |x      |x        |x         |
+|Line                     |x      |         |          |
+|Lines                    |x      |         |          |
+|list                     |x      |x        |          |
+|lm                       |x      |x        |x         |
+|lme                      |x      |x        |x         |
+|manova                   |x      |         |          |
+|map                      |x      |         |          |
+|matrix                   |x      |x        |          |
+|merMod                   |x      |x        |x         |
+|multinom                 |x      |x        |          |
+|nlrq                     |x      |x        |x         |
+|nls                      |x      |x        |x         |
+|NULL                     |x      |x        |x         |
+|pairwise.htest           |x      |         |          |
+|plm                      |x      |x        |x         |
+|Polygon                  |x      |         |          |
+|Polygons                 |x      |         |          |
+|power.htest              |x      |         |          |
+|pyears                   |x      |x        |          |
+|ridgelm                  |x      |x        |          |
+|roc                      |x      |         |          |
+|rowwise_df               |x      |x        |x         |
+|rq                       |x      |x        |x         |
+|rqs                      |x      |x        |x         |
+|SpatialLinesDataFrame    |x      |         |          |
+|SpatialPolygons          |x      |         |          |
+|SpatialPolygonsDataFrame |x      |         |          |
+|spec                     |x      |         |          |
+|summary.glht             |x      |         |          |
+|summaryDefault           |x      |x        |          |
+|survexp                  |x      |x        |          |
+|survfit                  |x      |x        |          |
+|survreg                  |x      |x        |x         |
+|table                    |x      |         |          |
+|ts                       |x      |         |          |
+|TukeyHSD                 |x      |         |          |
+|zoo                      |x      |         |          |
 
 Conventions
 ------------
