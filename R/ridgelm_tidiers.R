@@ -8,8 +8,7 @@
 #' @param x An object of class "ridgelm"
 #' @param ... extra arguments (not used)
 #'
-#' @return All tidying methods return a \code{data.frame} without rownames.
-#' The structure depends on the method chosen.
+#' @template boilerplate
 #'
 #' @name ridgelm_tidiers
 #'
@@ -44,10 +43,11 @@ NULL
 #'   \item{GCV}{generalized cross validation value for this lambda}
 #'   \item{term}{the term in the ridge regression model being estimated}
 #'   \item{estimate}{estimate of coefficient using this lambda}
+#'   \item{scale}{The amount this term was scaled}
 #' 
 #' @export
 tidy.ridgelm <- function(x, ...) {
-    if (is.numeric(x$x2)) {
+    if (length(x$lambda) == 1) {
         # only one choice of lambda
         ret <- data.frame(lambda = x$lambda, term = names(x$coef),
                           estimate = x$coef,
@@ -56,8 +56,11 @@ tidy.ridgelm <- function(x, ...) {
     }
 
     # otherwise, multiple lambdas/coefs/etc, have to tidy
-    co <- data.frame(t(x$coef), lambda = x$lambda, GCV = x$GCV)
-    cotidy <- tidyr::gather(co, term, estimate, -lambda, -GCV)
+    cotidy <- data.frame(plyr::unrowname(t(x$coef)), lambda = x$lambda,
+                     GCV = unname(x$GCV)) %>%
+        tidyr::gather(term, estimate, -lambda, -GCV) %>%
+        mutate(term = as.character(term)) %>%
+        mutate(scale = x$scales[term])
         
     cotidy
 }

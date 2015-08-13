@@ -16,8 +16,8 @@
 \item{...}{extra arguments (not used)}
 }
 \value{
-All tidying methods return a \code{data.frame} without rownames.
-The structure depends on the method chosen.
+All tidying methods return a data.frame without rownames, whose
+structure depends on the method chosen.
 
 \code{tidy.ridgelm} returns one row for each combination of
 choice of lambda and term in the formula, with columns:
@@ -25,6 +25,7 @@ choice of lambda and term in the formula, with columns:
   \item{GCV}{generalized cross validation value for this lambda}
   \item{term}{the term in the ridge regression model being estimated}
   \item{estimate}{estimate of coefficient using this lambda}
+  \item{scale}{The amount this term was scaled}
 
 \code{glance.ridgelm} returns a one-row data.frame with the columns
   \item{kHKB}{modified HKB estimate of the ridge constant}
