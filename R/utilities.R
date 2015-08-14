@@ -95,8 +95,18 @@ augment_columns <- function(x, data, newdata, type, type.predict = type,
     args$se.fit <- se.fit
     args <- c(args, list(...))
     
-    # suppress warning: geeglm objects complain about predict being used
-    pred <- suppressWarnings(do.call(predict0, args))
+
+
+    if (class(x) == "panelmodel") {
+      # work around for panel models (plm)  
+      # stat::predict() returns wrong fitted values when applied to random or fixed effect panel models [plm(..., model="random"), plm(, ..., model="pooling")]
+      # It works only for pooled OLS models (plm( ..., model="pooling"))
+      pred <- model.frame(x)[, 1] - residuals(x)
+    } else {
+      # suppress warning: geeglm objects complain about predict being used
+      pred <- suppressWarnings(do.call(predict0, args))
+      
+    }
 
     if (is.null(pred)) {
         # try "fitted" instead- some objects don't have "predict" method
