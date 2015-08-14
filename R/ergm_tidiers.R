@@ -74,7 +74,7 @@ tidy.ergm <- function(x, conf.int = FALSE, conf.level = .95,
     if (quick) {
         co <- x$coef
         ret <- data.frame(term = names(co), estimate = unname(co))
-        return(ret)
+        return(process_ergm(ret, conf.int = FALSE, exponentiate = exponentiate))
     }
     co <- ergm::summary.ergm(x, ...)$coefs
     
