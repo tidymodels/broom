@@ -131,18 +131,18 @@ glance.ergm <- function(x, deviance = FALSE, mcmc = FALSE, ...) {
     # log-likelihood
     ret$logLik <- tryCatch(as.numeric(ergm::logLik.ergm(x)), error = function(e) NULL)
     # null and residual deviance
-    s <- s$devtable
-    if (deviance & length(s) > 0) {
-        # dirty, but recomputing the logLik table would require much more effort
-        # that would add a dependency to the network package (for the dyad count)
-        ret$null.deviance <- gsub("(.*):\\s+(.*?)\\s+(.*)", "\\2", s[2])
-        ret$null.deviance <- as.numeric(ret$null.deviance)
-        ret$df.null <- gsub("(.*)\\s+on\\s+(.*?)\\s+(.*)", "\\2", s[2])
-        ret$df.null <- as.numeric(ret$df.null)
-        ret$residual.deviance <- gsub("(.*):\\s+(.*?)\\s+(.*)", "\\2", s[3])
-        ret$residual.deviance <- as.numeric(ret$residual.deviance)
-        ret$df.residual <- gsub("(.*)\\s+on\\s+(.*?)\\s+(.*)", "\\2", s[3])
-        ret$df.residual <- as.numeric(ret$df.residual)
+    if (deviance & !is.null(ret$logLik)) {
+        dyads <- ergm::get.miss.dyads(x$constrained, x$constrained.obs)
+        dyads <- statnet.common::NVL(dyads, network::network.initialize(1))
+        dyads <- network::network.edgecount(dyads)
+        dyads <- network::network.dyadcount(x$network, FALSE) - dyads
+        
+        ret$null.deviance <- ergm::logLikNull(x)
+        ret$null.deviance <- ifelse(is.na(ret$null.deviance), 0, -2 * ret$null.deviance)
+        ret$df.null <- dyads
+        
+        ret$residual.deviance <- -2 * ret$logLik
+        ret$df.residual <- dyads - length(x$coef)
     }
     
     # AIC and BIC

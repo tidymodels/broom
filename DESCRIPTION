@@ -51,7 +51,9 @@ Suggests:
     nnet,
     geepack,
     AUC,
-    ergm
+    ergm,
+    network,
+    statnet.common
 URL: http://github.com/dgrtwo/broom
 BugReports: http://github.com/dgrtwo/broom/issues
 VignetteBuilder: knitr
