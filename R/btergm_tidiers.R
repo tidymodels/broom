@@ -65,9 +65,16 @@ NULL
 #' @export
 tidy.btergm <- function(x, conf.level = .95,
                         exponentiate = FALSE, quick = FALSE, ...) {
+    if (exponentiate) {
+        trans <- exp
+    } else {
+        trans <- identity
+    }
+    
     if (quick) {
         co <- fit@coef
-        ret <- data.frame(term = names(co), estimate = unname(co))
+        ret <- data.frame(term = names(co),
+                          estimate = trans(unname(co)))
         return(ret)
     }
     co <- xergm::confint(x, level = conf.level)
@@ -80,12 +87,6 @@ tidy.btergm <- function(x, conf.level = .95,
         ret$response <- stringr::str_replace(ret$response, "Response ", "")
     } else {
         ret <- fix_data_frame(co, nn[1:ncol(co)])
-    }
-    
-    if (exponentiate) {
-        trans <- exp
-    } else {
-        trans <- identity
     }
     
     ret$conf.low <- trans(ret$conf.low)
