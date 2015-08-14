@@ -11,6 +11,7 @@ Authors@R: c(
     person("Benjamin", "Nutter", email = "nutter@battelle.org", role = "ctb"),
     person("Luke", "Johnston", email = "luke.johnston@mail.utoronto.ca", role = "ctb"),
     person("Ben", "Bolker", email = "bolker@mcmaster.ca", role = "ctb"),
+    person("Francois", "Briatte", email = "f.briatte@gmail.com", role = "ctb"),
     person("Hadley", "Wickham", email = "hadley@rstudio.com", role = "ctb")
     )
 Maintainer: David Robinson <admiral.david@gmail.com>
@@ -51,7 +52,11 @@ Suggests:
     ggplot2,
     nnet,
     geepack,
-    AUC
+    AUC,
+    ergm,
+    network,
+    statnet.common,
+    xergm
 URL: http://github.com/dgrtwo/broom
 BugReports: http://github.com/dgrtwo/broom/issues
 VignetteBuilder: knitr
