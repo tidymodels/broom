@@ -25,8 +25,6 @@
 #'
 #' if (require("ergm")) {
 #'     # Using the same example as the ergm package
-#'     library(ergm)
-#'
 #'     # Load the Florentine marriage network data
 #'     data(florentine)
 #'
