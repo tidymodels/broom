@@ -132,7 +132,7 @@ tidy.lm <- function(x, conf.int = FALSE, conf.level = .95,
     if (quick) {
         co <- stats::coef(x)
         ret <- data.frame(term = names(co), estimate = unname(co))
-        return(ret)
+        return(process_lm(ret, x, conf.int = FALSE, exponentiate = exponentiate))
     }
     co <- stats::coef(summary(x))
     
