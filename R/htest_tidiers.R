@@ -81,10 +81,10 @@ tidy.htest <- function(x, ...) {
         ret <- c(ret, conf.low=x$conf.int[1], conf.high=x$conf.int[2])
     }
     if (!is.null(x$method)) {
-      ret <- c(ret, method = x$method)
+      ret <- c(ret, method = as.character(x$method))
     }
     if (!is.null(x$alternative)) {
-      ret <- c(ret, alternative = x$alternative)
+      ret <- c(ret, alternative = as.character(x$alternative))
     }
     unrowname(as.data.frame(ret))
 }
