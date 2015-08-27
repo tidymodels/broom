@@ -110,3 +110,36 @@ glance.rowwise_df <- wrap_rowwise_df(glance_.rowwise_df)
 #' @rdname rowwise_df_tidiers
 #' @export
 glance_.rowwise_df <- wrap_rowwise_df_(glance)
+
+
+# when dplyr::do is performed on an ungrouped tbl, it results in
+# a one-row tbl_df with list columns. Need a special case for this.
+
+wrap_tbl_df <- function(func, rowwise_func) {
+    function(x, ...) {
+        # use the rowwise function if it is a one-row tbl_df with all list
+        # columns
+        if (nrow(x) == 1 && all(sapply(x, function(col) inherits(col, "list")))) {
+            return(rowwise_func(x, ...))
+        } else {
+            # otherwise, do traditional tidy/augment/glancing
+            # (generally goes to the data.frame method)
+            func(x, ...)
+        }
+    }
+}
+
+
+#' @rdname rowwise_df_tidiers
+#' @export
+tidy.tbl_df <- wrap_tbl_df(tidy, tidy.rowwise_df)
+
+
+#' @rdname rowwise_df_tidiers
+#' @export
+augment.tbl_df <- wrap_tbl_df(augment, augment.rowwise_df)
+
+
+#' @rdname rowwise_df_tidiers
+#' @export
+glance.tbl_df <- wrap_tbl_df(glance, glance.rowwise_df)

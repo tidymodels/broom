@@ -48,3 +48,16 @@ test_that("rowwise augment can use a column as the data", {
     expect_true(!is.null(augmented$disp))
     expect_equal(sort(mtcars$disp), sort(augmented$disp))
 })
+
+test_that("rowwise tidiers work even when an ungrouped data frame was used", {
+    one_row <- mtcars %>% do(model = lm(mpg ~ wt, .))
+    
+    tidied <- one_row %>% tidy(model)
+    expect_equal(nrow(tidied), 2)
+    
+    augmented <- one_row %>% augment(model)
+    expect_equal(nrow(augmented), nrow(mtcars))
+    
+    glanced <- one_row %>% glance(model)
+    expect_equal(nrow(glanced), 1)
+})
