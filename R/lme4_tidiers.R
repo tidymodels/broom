@@ -256,6 +256,6 @@ augment.merMod <- function(x, data = stats::model.frame(x), newdata, ...) {
 #' 
 #' @export
 glance.merMod <- function(x, ...) {
-    ret <- unrowname(data.frame(sigma = sigma(x)))
+    ret <- unrowname(data.frame(sigma = lme4::sigma(x)))
     finish_glance(ret, x)
 }

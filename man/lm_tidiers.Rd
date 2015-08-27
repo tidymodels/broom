@@ -132,7 +132,9 @@ glance(mod)
 d <- tidy(mod) \%>\% mutate(low = estimate - std.error,
                           high = estimate + std.error)
 ggplot(d, aes(estimate, term, xmin = low, xmax = high, height = 0)) +
-     geom_point() + geom_vline() + geom_errorbarh()
+     geom_point() +
+     geom_vline(xintercept = 0) +
+     geom_errorbarh()
 
 head(augment(mod))
 head(augment(mod, mtcars))
@@ -162,8 +164,7 @@ plot(mod, which = 3)
 qplot(.fitted, sqrt(abs(.std.resid)), data = au) + geom_smooth(se = FALSE)
 
 plot(mod, which = 4)
-qplot(seq_along(.cooksd), .cooksd, data = au, geom = "bar",
- stat="identity")
+qplot(seq_along(.cooksd), .cooksd, data = au)
 
 plot(mod, which = 5)
 qplot(.hat, .std.resid, data = au) + geom_smooth(se = FALSE)

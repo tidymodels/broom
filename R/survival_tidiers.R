@@ -107,7 +107,7 @@ glance.aareg <- function(x, ...) {
 #'     library(ggplot2)
 #'     ggplot(tidy(fit.ccP), aes(x = estimate, y = term)) + geom_point() +
 #'         geom_errorbarh(aes(xmin = conf.low, xmax = conf.high), height = 0) +
-#'         geom_vline()
+#'         geom_vline(xintercept = 0)
 #'     
 #'     # compare between methods
 #'     library(dplyr)
@@ -120,7 +120,7 @@ glance.aareg <- function(x, ...) {
 #'     # coefficient plots comparing methods
 #'     ggplot(fits, aes(x = estimate, y = term, color = method)) + geom_point() +
 #'         geom_errorbarh(aes(xmin = conf.low, xmax = conf.high)) +
-#'         geom_vline()
+#'         geom_vline(xintercept = 0)
 #' }
 #' 
 #' @seealso \link{cch}
@@ -591,7 +591,7 @@ glance.pyears <- function(x, ...) {
 #'     library(ggplot2)
 #'     ggplot(td, aes(estimate, term)) + geom_point() +
 #'         geom_errorbarh(aes(xmin = conf.low, xmax = conf.high), height = 0) +
-#'         geom_vline()
+#'         geom_vline(xintercept = 0)
 #' }
 #' 
 #' @name survreg_tidiers

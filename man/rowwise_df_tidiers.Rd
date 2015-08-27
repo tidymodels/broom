@@ -2,11 +2,14 @@
 % Please edit documentation in R/rowwise_df_tidiers.R
 \name{rowwise_df_tidiers}
 \alias{augment.rowwise_df}
+\alias{augment.tbl_df}
 \alias{augment_.rowwise_df}
 \alias{glance.rowwise_df}
+\alias{glance.tbl_df}
 \alias{glance_.rowwise_df}
 \alias{rowwise_df_tidiers}
 \alias{tidy.rowwise_df}
+\alias{tidy.tbl_df}
 \alias{tidy_.rowwise_df}
 \title{Tidying methods for rowwise_dfs from dplyr, for tidying each row and
 recombining the results}
@@ -22,6 +25,12 @@ recombining the results}
 \method{glance}{rowwise_df}(x, object, ...)
 
 \method{glance_}{rowwise_df}(x, object, ...)
+
+\method{tidy}{tbl_df}(x, ...)
+
+\method{augment}{tbl_df}(x, ...)
+
+\method{glance}{tbl_df}(x, ...)
 }
 \arguments{
 \item{x}{a rowwise_df}

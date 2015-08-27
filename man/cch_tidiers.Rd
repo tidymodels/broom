@@ -70,7 +70,7 @@ if (require("survival", quietly = TRUE)) {
     library(ggplot2)
     ggplot(tidy(fit.ccP), aes(x = estimate, y = term)) + geom_point() +
         geom_errorbarh(aes(xmin = conf.low, xmax = conf.high), height = 0) +
-        geom_vline()
+        geom_vline(xintercept = 0)
 
     # compare between methods
     library(dplyr)
@@ -83,7 +83,7 @@ if (require("survival", quietly = TRUE)) {
     # coefficient plots comparing methods
     ggplot(fits, aes(x = estimate, y = term, color = method)) + geom_point() +
         geom_errorbarh(aes(xmin = conf.low, xmax = conf.high)) +
-        geom_vline()
+        geom_vline(xintercept = 0)
 }
 }
 \seealso{
