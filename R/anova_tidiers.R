@@ -59,9 +59,9 @@ tidy.anova <- function(x, ...) {
     names(renamers) <- make.names(names(renamers))
     
     x <- fix_data_frame(x)
-    unknown_cols <- setdiff(colnames(x), names(renamers))
+    unknown_cols <- setdiff(colnames(x), c("term", names(renamers)))
     if (length(unknown_cols) > 0) {
-        warning("The following column names in ANOVA output were not",
+        warning("The following column names in ANOVA output were not ",
                 "recognized or transformed: ",
                 paste(unknown_cols, collapse = ", "))
     }
