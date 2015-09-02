@@ -7,9 +7,9 @@
 \alias{tidy.merMod}
 \title{Tidying methods for mixed effects models}
 \usage{
-\method{tidy}{merMod}(x, effects = c("ran_pars", "fixed"),
-  scales = c("sdcor", NA), ran_prefix = NULL, conf.int = FALSE,
-  conf.level = 0.95, conf.method = "Wald", ...)
+\method{tidy}{merMod}(x, effects = c("ran_pars", "fixed"), scales = NULL,
+  ran_prefix = NULL, conf.int = FALSE, conf.level = 0.95,
+  conf.method = "Wald", ...)
 
 \method{augment}{merMod}(x, data = stats::model.frame(x), newdata, ...)
 
@@ -19,9 +19,10 @@
 \item{x}{An object of class \code{merMod}, such as those from \code{lmer},
 \code{glmer}, or \code{nlmer}}
 
-\item{effects}{Either "random" (default) or "fixed"}
+\item{effects}{A character vector including one or more of "fixed" (fixed-effect parameters), "ran_pars" (variances and covariances or standard deviations and correlations of random effect terms) or "ran_modes" (conditional modes/BLUPs/latent variable estimates)}
 
-\item{scales}{scales on which to report the variables: for random effects, the choices are \sQuote{"sdcor"} (standard deviations and correlations) or \sQuote{"varcov"} (variances and covariances)}
+\item{scales}{scales on which to report the variables: for random effects, the choices are \sQuote{"sdcor"} (standard deviations and correlations: the default if \code{scales} is \code{NULL}) or \sQuote{"varcov"} (variances and covariances). \code{NA} means no transformation, appropriate e.g. for fixed effects; inverse-link transformations (exponentiation
+or logistic) are not yet implemented, but may be in the future.}
 
 \item{ran_prefix}{a length-2 character vector specifying the strings to use as prefixes for self- (variance/standard deviation) and cross- (covariance/correlation) random effects terms}
 
@@ -29,7 +30,7 @@
 
 \item{conf.level}{confidence level for CI}
 
-\item{conf.method}{method for computing confidence intervals (see ...)}
+\item{conf.method}{method for computing confidence intervals (see \code{\link{confint.merMod}})}
 
 \item{...}{extra arguments (not used)}
 
@@ -43,20 +44,15 @@ All tidying methods return a \code{data.frame} without rownames.
 The structure depends on the method chosen.
 
 \code{tidy} returns one row for each estimated effect, either
-random or fixed depending on the \code{effects} parameter. If
-\code{effects = "random"}, it contains the columns
-  \item{group}{the group within which the random effect is being estimated}
-  \item{level}{level within group}
+with groups depending on the \code{effects} parameter.
+It contains the columns
+  \item{group}{the group within which the random effect is being estimated: \code{"fixed"} for fixed effects}
+  \item{level}{level within group (\code{NA} except for modes)}
   \item{term}{term being estimated}
   \item{estimate}{estimated coefficient}
-
-If \code{effects="fixed"}, \code{tidy} returns the columns
-  \item{term}{fixed term being estimated}
-  \item{estimate}{estimate of fixed effect}
   \item{std.error}{standard error}
-  \item{statistic}{t-statistic}
-  \item{p.value}{P-value computed from t-statistic (depending on the model,
-  this may or may not be calculated and included)}
+  \item{statistic}{t- or Z-statistic (\code{NA} for modes)}
+  \item{p.value}{P-value computed from t-statistic (may be missing/NA)}
 
 \code{augment} returns one row for each original observation,
 with columns (each prepended by a .) added. Included are the columns

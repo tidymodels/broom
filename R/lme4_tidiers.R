@@ -44,28 +44,24 @@ NULL
 
 #' @rdname lme4_tidiers
 #' 
-#' @param effects Either "random" (default) or "fixed"
+#' @param effects A character vector including one or more of "fixed" (fixed-effect parameters), "ran_pars" (variances and covariances or standard deviations and correlations of random effect terms) or "ran_modes" (conditional modes/BLUPs/latent variable estimates)
 #' @param conf.int whether to include a confidence interval
 #' @param conf.level confidence level for CI
-#' @param conf.method method for computing confidence intervals (see ...)
-#' @param scales scales on which to report the variables: for random effects, the choices are \sQuote{"sdcor"} (standard deviations and correlations) or \sQuote{"varcov"} (variances and covariances)
+#' @param conf.method method for computing confidence intervals (see \code{\link{confint.merMod}})
+#' @param scales scales on which to report the variables: for random effects, the choices are \sQuote{"sdcor"} (standard deviations and correlations: the default if \code{scales} is \code{NULL}) or \sQuote{"varcov"} (variances and covariances). \code{NA} means no transformation, appropriate e.g. for fixed effects; inverse-link transformations (exponentiation
+#' or logistic) are not yet implemented, but may be in the future.
 #' @param ran_prefix a length-2 character vector specifying the strings to use as prefixes for self- (variance/standard deviation) and cross- (covariance/correlation) random effects terms
 #' 
 #' @return \code{tidy} returns one row for each estimated effect, either
-#' random or fixed depending on the \code{effects} parameter. If
-#' \code{effects = "random"}, it contains the columns
-#'   \item{group}{the group within which the random effect is being estimated}
-#'   \item{level}{level within group}
+#' with groups depending on the \code{effects} parameter.
+#' It contains the columns
+#'   \item{group}{the group within which the random effect is being estimated: \code{"fixed"} for fixed effects}
+#'   \item{level}{level within group (\code{NA} except for modes)}
 #'   \item{term}{term being estimated}
 #'   \item{estimate}{estimated coefficient}
-#' 
-#' If \code{effects="fixed"}, \code{tidy} returns the columns
-#'   \item{term}{fixed term being estimated}
-#'   \item{estimate}{estimate of fixed effect}
 #'   \item{std.error}{standard error}
-#'   \item{statistic}{t-statistic}
-#'   \item{p.value}{P-value computed from t-statistic (depending on the model,
-#'   this may or may not be calculated and included)}
+#'   \item{statistic}{t- or Z-statistic (\code{NA} for modes)}
+#'   \item{p.value}{P-value computed from t-statistic (may be missing/NA)}
 #' 
 #' @importFrom plyr ldply rbind.fill
 #' @import dplyr
@@ -76,13 +72,19 @@ NULL
 #' 
 #' @export
 tidy.merMod <- function(x, effects = c("ran_pars","fixed"),
-                        scales = c("sdcor",NA),
+                        scales = NULL, ## c("sdcor",NA),
                         ran_prefix=NULL,
                         conf.int = FALSE,
                         conf.level = 0.95,
                         conf.method = "Wald",
                         ...) {
     effect_names <- c("ran_pars", "fixed", "ran_modes")
+    if (!is.null(scales)) {
+        if (length(scales) != length(effects)) {
+            stop("if scales are specified, values (or NA) must be provided ",
+                 "for each effect")
+        }
+    }
     if (length(miss <- setdiff(effects,effect_names))>0)
         stop("unknown effect type ",miss)
     base_nn <- c("estimate", "std.error", "statistic", "p.value")
@@ -99,15 +101,19 @@ tidy.merMod <- function(x, effects = c("ran_pars","fixed"),
             ret <- data.frame(ret,cifix)
             nn <- c(nn,"conf.low","conf.high")
         }
-        if ("ran_pars" %in% effects) {
-            ret <- data.frame(ret,grp="fixed")
-            nn <- c(nn,"grp")
+        if ("ran_pars" %in% effects || "ran_modes" %in% effects) {
+            ret <- data.frame(ret,group="fixed")
+            nn <- c(nn,"group")
         }
         ret_list$fixed <-
             fix_data_frame(ret, newnames = nn)
     }
     if ("ran_pars" %in% effects) {
-        rscale <- scales[effects=="ran_pars"]
+        if (is.null(scales)) {
+            rscale <- "sdcor"
+        } else rscale <- scales[effects=="ran_pars"]
+        if (!rscale %in% c("sdcor","vcov"))
+            stop(sprintf("unrecognized ran_pars scale %s",sQuote(rscale)))
         ret <- as.data.frame(VarCorr(x))
         ret[] <- lapply(ret, function(x) if (is.factor(x))
                                  as.character(x) else x)
@@ -125,7 +131,14 @@ tidy.merMod <- function(x, effects = c("ran_pars","fixed"),
             }
             return(p)
         }
-        rownames(ret) <- apply(ret[c("var1","var2")],1,pfun)
+
+        rownames(ret) <- paste(apply(ret[c("var1","var2")],1,pfun),
+                                ret[,"group"],sep=".")
+
+        ## FIXME: this is ugly, but maybe necessary?
+        ## set 'term' column explicitly, disable fix_data_frame
+        ##  rownames -> term conversion
+        ## rownames(ret) <- seq(nrow(ret))
 
         if (conf.int) {
             ciran <- confint(x,parm="theta_",method=conf.method,...)
@@ -133,9 +146,10 @@ tidy.merMod <- function(x, effects = c("ran_pars","fixed"),
             nn <- c(nn,"conf.low","conf.high")
         }
 
+        
         ## replicate lme4:::tnames, more or less
-        ret_list$ran_pars <- fix_data_frame(ret[c("grp",rscale)],
-                                            newnames=c("grp","estimate"))
+        ret_list$ran_pars <- fix_data_frame(ret[c("group",rscale)],
+                                            newnames=c("group","estimate"))
     }
     if ("ran_modes" %in% effects) {
         ## fix each group to be a tidy data frame
@@ -152,11 +166,11 @@ tidy.merMod <- function(x, effects = c("ran_pars","fixed"),
              # fix_data_frame doesn't create a new column if rownames are numeric,
              # which doesn't suit our purposes
              newg$level <- rownames(g)
-             newg$type <- "est"
+             newg$type <- "estimate"
 
              newg.se <- getSE(re)
              newg.se$level <- rownames(re)
-             newg.se$type <- "se"
+             newg.se$type <- "std.error"
 
              data.frame(rbind(newg,newg.se),.id=.id,
                         check.names=FALSE)
@@ -178,11 +192,11 @@ tidy.merMod <- function(x, effects = c("ran_pars","fixed"),
 
             mult <- qnorm((1+conf.level)/2)
             ret <- transform(ret,
-                             conf.low=est-mult*se,
-                             conf.high=est+mult*se)
+                             conf.low=estimate-mult*std.error,
+                             conf.high=estimate+mult*std.error)
         }
-        
-        colnames(ret)[1] <- "group"
+
+        ret <- dplyr::rename(ret,group=.id)
         ret_list$ran_modes <- ret
     }
     return(rbind.fill(ret_list))
@@ -256,6 +270,8 @@ augment.merMod <- function(x, data = stats::model.frame(x), newdata, ...) {
 #' 
 #' @export
 glance.merMod <- function(x, ...) {
-    ret <- unrowname(data.frame(sigma = lme4::sigma(x)))
+    ## FIXME: may need to be fixed via @importFrom/NAMESPACE ?
+    sigma <- if (getRversion()>="3.3.0") stats::sigma else lme4::sigma
+    ret <- unrowname(data.frame(sigma = sigma(x)))
     finish_glance(ret, x)
 }
