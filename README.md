@@ -343,7 +343,7 @@ It also provides methods for S3 objects in popular third-party packages, includi
 * `sp`
 * `maps`
 
-A full list of the `tidy`, `augment` and `glance` methods for each class is as follows:
+A full list of the `tidy`, `augment` and `glance` methods available for each class is as follows:
 
 
 |Class                    |`tidy` |`glance` |`augment` |
@@ -354,6 +354,10 @@ A full list of the `tidy`, `augment` and `glance` methods for each class is as f
 |aovlist                  |x      |         |          |
 |Arima                    |x      |x        |          |
 |biglm                    |x      |x        |          |
+|binDesign                |x      |x        |          |
+|binWidth                 |x      |         |          |
+|boot                     |x      |         |          |
+|btergm                   |x      |         |          |
 |cch                      |x      |x        |          |
 |cld                      |x      |         |          |
 |coeftest                 |x      |         |          |
@@ -371,6 +375,7 @@ A full list of the `tidy`, `augment` and `glance` methods for each class is as f
 |glht                     |x      |         |          |
 |glmnet                   |x      |x        |          |
 |htest                    |x      |x        |          |
+|kappa                    |x      |         |          |
 |kmeans                   |x      |x        |x         |
 |Line                     |x      |         |          |
 |Lines                    |x      |         |          |
@@ -406,6 +411,7 @@ A full list of the `tidy`, `augment` and `glance` methods for each class is as f
 |survfit                  |x      |x        |          |
 |survreg                  |x      |x        |x         |
 |table                    |x      |         |          |
+|tbl_df                   |x      |x        |x         |
 |ts                       |x      |         |          |
 |TukeyHSD                 |x      |         |          |
 |zoo                      |x      |         |          |
