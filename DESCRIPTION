@@ -57,7 +57,8 @@ Suggests:
     network,
     statnet.common,
     xergm,
-    binGroup
+    binGroup,
+    Hmisc
 URL: http://github.com/dgrtwo/broom
 BugReports: http://github.com/dgrtwo/broom/issues
 VignetteBuilder: knitr
