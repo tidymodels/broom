@@ -5,13 +5,10 @@
 \alias{tidy.rcorr}
 \title{Tidying methods for rcorr objects}
 \usage{
-\method{tidy}{rcorr}(x, names = NULL, diagonal = FALSE, ...)
+\method{tidy}{rcorr}(x, diagonal = FALSE, ...)
 }
 \arguments{
 \item{x}{An object of class "rcorr"}
-
-\item{names}{Optionally, the column names of the original
-matrix, to use to fill in these columns.}
 
 \item{diagonal}{Whether to include diagonal elements (where
 \code{estimate} is 1 and \code{p.value} is NA), default FALSE}
@@ -21,10 +18,8 @@ matrix, to use to fill in these columns.}
 \value{
 A data.frame with one row for each pairing
 in the correlation matrix. Columns are:
-  \item{column1}{The first column being described. A number, unless
-  \code{names} is provided, in which case it will be the name}
-  \item{column2}{The second column being described. A number, unless
-  \code{names} is provided, in which case it will be the name}
+  \item{column1}{Name or index of the first column being described}
+  \item{column2}{Name or index of the second column being described}
   \item{estimate}{Estimate of Pearson's r or Spearman's rho}
   \item{n}{Number of observations used to compute the correlation}
   \item{p.value}{P-value of correlation}
@@ -36,11 +31,16 @@ and the number of observations in each pairwise correlation.
 Note that it returns these in "long", or "melted", format,
 with one row for each pair of columns being compared.
 }
+\details{
+Only half the symmetric matrix is shown.
+}
 \examples{
 if (require("Hmisc", quietly = TRUE)) {
-    mat <- replicate(100, rnorm(100))
+    mat <- replicate(52, rnorm(100))
     # add some NAs
     mat[sample(length(mat), 2000)] <- NA
+    # also column names
+    colnames(mat) <- c(LETTERS, letters)
 
     rc <- rcorr(mat)
 
