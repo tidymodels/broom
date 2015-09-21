@@ -1,8 +1,9 @@
 #' Tidiers for return values from functions that aren't S3 objects
 #' 
 #' This method handles the return values of functions that return lists
-#' rather than S3 objects, such as \code{optim} or \code{\link[akima]{interp}},
-#' and therefore cannot be handled by S3 dispatch
+#' rather than S3 objects, such as \code{optim}, \code{svd}, or
+#' \code{\link[akima]{interp}}, and therefore cannot be handled by
+#' S3 dispatch.
 #' 
 #' @param x list object
 #' @param ... extra arguments, passed to the tidying function
@@ -10,7 +11,8 @@
 #' @details Those tiders themselves are implemented as functions of the
 #' form tidy_<function> that are not exported.
 #' 
-#' @seealso \code{\link{optim_tidiers}}, \code{\link{xyz_tidiers}}
+#' @seealso \code{\link{optim_tidiers}}, \code{\link{xyz_tidiers}},
+#' \code{\link{svd_tidiers}}
 #' 
 #' @name list_tidiers
 #' 
@@ -29,6 +31,8 @@ tidy.list <- function(x, ...) {
         }
         # xyz list suitable for persp, image, etc.
         tidy_xyz(x, ...)
+    } else if (all(sort(names(x)) == c("d", "u", "v"))) {
+        tidy_svd(x, ...)
     } else {
         stop("No tidying method recognized for this list")
     }
