@@ -1,3 +1,5 @@
+#' Tidying methods for Stan fits
+##'
 ##' @param x an object of class \sQuote{"stanfit"}
 ##' @param pars (character) specification of which parameters to include
 ##' @param pt.method method for computing point estimate ("mean" or "median")

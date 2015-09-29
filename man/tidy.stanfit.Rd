@@ -2,6 +2,7 @@
 % Please edit documentation in R/rstan_tidiers.R
 \name{tidy.stanfit}
 \alias{tidy.stanfit}
+\title{Tidying methods for Stan fits}
 \usage{
 \method{tidy}{stanfit}(x, pars, pt.method = "mean", conf.int = FALSE,
   conf.level = 0.95, conf.method = "quantile", ...)
@@ -20,5 +21,8 @@
 \item{conf.method}{method for computing confidence intervals ("quantile" or "HPDinterval")}
 
 \item{...}{unused}
+}
+\description{
+Tidying methods for Stan fits
 }
 
