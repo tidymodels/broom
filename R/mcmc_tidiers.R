@@ -1,4 +1,5 @@
-#' Tidying methods for Stan fits
+## FIXME: design question -- how to make tidying methods inherit appropriately?
+#' Tidying methods for MCMC (Stan, JAGS, etc.) fits
 ##'
 ##' @param x an object of class \sQuote{"stanfit"}
 ##' @param pars (character) specification of which parameters to include
@@ -9,18 +10,19 @@
 ##' @param ... unused
 ##' @importFrom coda HPDinterval as.mcmc
 ##' @export
-tidy.stanfit <- function(x,
-                         pars, ## ?? do other 
-                         pt.method = "mean",
-                         conf.int = FALSE,
-                         conf.level = 0.95,
-                         conf.method = "quantile",
-                         ...) {
-    ss <- as.matrix(x)
-    ss <- ss[,!colnames(ss)=="lp__"]  ## drop log-probability info
+tidyMCMC <- function(x,
+                     pars, ## ?? do other 
+                     pt.method = "mean",
+                     conf.int = FALSE,
+                     conf.level = 0.95,
+                     conf.method = "quantile",
+                     droppars="lp__",
+                     ...) {
+    ss <- as.matrix(x)  ## works natively on stanfit, mcmc.list, mcmc objects
+    ss <- ss[,!colnames(ss) %in% droppars]  ## drop log-probability info
     if (!missing(pars)) {
         if (length(badpars <- which(!pars %in% colnames(ss)))>0) {
-            stop("unrecognized parameters: ",pars[w])
+            stop("unrecognized parameters: ",pars[badpars])
         }
         ss <- ss[,pars]
     }
@@ -44,3 +46,21 @@ tidy.stanfit <- function(x,
     return(fix_data_frame(ret))
 }
 
+##' @rdname tidyMCMC
+##' @export
+tidy.rjags <- function(x,
+                       pars, ## ?? do other 
+                       pt.method = "mean",
+                       conf.int = FALSE,
+                       conf.level = 0.95,
+                       conf.method = "quantile",
+                       ...) {
+    tidyMCMC(as.mcmc(x$BUGS),
+             pars,
+             pt.method,conf.int,conf.level,
+             conf.method,droppars="deviance")
+}
+
+##' @rdname tidyMCMC
+##' @export
+tidy.stanfit <- tidyMCMC
