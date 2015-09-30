@@ -33,9 +33,9 @@ NULL
 #' 
 #' @export
 tidy.fitdistr <- function(x, ...) {
-    data.frame(term = names(fit$estimate),
-               estimate = unname(fit$estimate),
-               std.error = unname(fit$sd))
+    data.frame(term = names(x$estimate),
+               estimate = unname(x$estimate),
+               std.error = unname(x$sd))
 }
 
 
