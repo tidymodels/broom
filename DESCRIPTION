@@ -12,7 +12,8 @@ Authors@R: c(
     person("Luke", "Johnston", email = "luke.johnston@mail.utoronto.ca", role = "ctb"),
     person("Ben", "Bolker", email = "bolker@mcmaster.ca", role = "ctb"),
     person("Francois", "Briatte", email = "f.briatte@gmail.com", role = "ctb"),
-    person("Hadley", "Wickham", email = "hadley@rstudio.com", role = "ctb")
+    person("Hadley", "Wickham", email = "hadley@rstudio.com", role = "ctb"),
+    person("Masaaki", "Horikoshi", email = "sinhrks@gmail.com", role = "ctb")
     )
 Maintainer: David Robinson <admiral.david@gmail.com>
 Description: Convert statistical analysis objects from R into tidy data frames,
