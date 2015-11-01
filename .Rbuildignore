@@ -1,6 +1,7 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
 ^NEWS\.md$
+^\.travis\.yml$
 ^man-roxygen$
 ^revdep$
 ^cran-comments\.md$

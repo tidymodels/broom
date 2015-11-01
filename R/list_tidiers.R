@@ -2,7 +2,7 @@
 #' 
 #' This method handles the return values of functions that return lists
 #' rather than S3 objects, such as \code{optim}, \code{svd}, or
-#' \code{\link[akima]{interp}}, and therefore cannot be handled by
+#' \code{"\link[akima]{interp}"}, and therefore cannot be handled by
 #' S3 dispatch.
 #' 
 #' @param x list object

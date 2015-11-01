@@ -1,0 +1,46 @@
+language: r
+warnings_are_errors: true
+sudo: required
+
+r_binary_packages:
+  - plyr
+  - dplyr
+  - tidyr
+  - psych
+  - stringr
+  - reshape2
+  - nlme
+  - knitr
+  - boot
+  - survival
+  - gam
+  - glmnet
+  - lfe
+  - Lahman
+  - MASS
+  - sp
+  - maps
+  - maptools
+  - multcomp
+  - testthat
+  - lme4
+  - zoo
+  - lmtest
+  - plm
+  - biglm
+  - ggplot2
+  - nnet
+  - geepack
+  - ergm
+  - network
+  - statnet.common
+  - Hmisc
+
+r_github_packages:
+  - jimhester/covr
+
+before_install:
+  - echo "options(repos = c(CRAN='http://cran.rstudio.com'))" >> ~/.Rprofile
+
+after_success:
+  - Rscript -e 'library(covr);coveralls()'
