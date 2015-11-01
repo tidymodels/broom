@@ -47,7 +47,7 @@ NULL
 #' @param effects A character vector including one or more of "fixed" (fixed-effect parameters), "ran_pars" (variances and covariances or standard deviations and correlations of random effect terms) or "ran_modes" (conditional modes/BLUPs/latent variable estimates)
 #' @param conf.int whether to include a confidence interval
 #' @param conf.level confidence level for CI
-#' @param conf.method method for computing confidence intervals (see \code{\link{confint.merMod}})
+#' @param conf.method method for computing confidence intervals (see \code{"\link[lme4]{confint.merMod}"})
 #' @param scales scales on which to report the variables: for random effects, the choices are \sQuote{"sdcor"} (standard deviations and correlations: the default if \code{scales} is \code{NULL}) or \sQuote{"varcov"} (variances and covariances). \code{NA} means no transformation, appropriate e.g. for fixed effects; inverse-link transformations (exponentiation
 #' or logistic) are not yet implemented, but may be in the future.
 #' @param ran_prefix a length-2 character vector specifying the strings to use as prefixes for self- (variance/standard deviation) and cross- (covariance/correlation) random effects terms
@@ -115,6 +115,8 @@ tidy.merMod <- function(x, effects = c("ran_pars","fixed"),
         if (!rscale %in% c("sdcor","vcov"))
             stop(sprintf("unrecognized ran_pars scale %s",sQuote(rscale)))
         ret <- as.data.frame(VarCorr(x))
+        # replace 1st col from 'grp' to 'group'
+        colnames(ret) <- replace(colnames(ret), 1, 'group')
         ret[] <- lapply(ret, function(x) if (is.factor(x))
                                  as.character(x) else x)
         if (is.null(ran_prefix)) {
@@ -146,7 +148,6 @@ tidy.merMod <- function(x, effects = c("ran_pars","fixed"),
             nn <- c(nn,"conf.low","conf.high")
         }
 
-        
         ## replicate lme4:::tnames, more or less
         ret_list$ran_pars <- fix_data_frame(ret[c("group",rscale)],
                                             newnames=c("group","estimate"))

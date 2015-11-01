@@ -58,8 +58,6 @@
 #' \code{conf.low} and \code{conf.high}, computed with
 #' \code{\link{confint.geeglm}} (included as part of broom).
 #' 
-#' @export
-#' 
 #' @import dplyr
 #' 
 #' @export
