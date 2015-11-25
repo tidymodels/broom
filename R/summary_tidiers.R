@@ -13,7 +13,7 @@
 #'   \item{mean}{mean of original vector}
 #'   \item{q3}{value at the third quartile}
 #'   \item{maximum}{largest value in original vector}
-#' 
+#'   \item{NAs}{number of NA values (if any)} 
 #' @seealso \code{\link{summary}}
 #' 
 #' @examples
@@ -24,14 +24,20 @@
 #' 
 #' tidy(s)
 #' glance(s)
+#'
+#' v2 <- c(v,NA)
+#' tidy(summary(v2))
 #' 
 #' @name summary_tidiers
 #' 
 #' @export
 tidy.summaryDefault <- function(x, ...) {
     ret <- as.data.frame(t(as.matrix(x)))
-    colnames(ret) <- c("minimum", "q1", "median", "mean", "q3", "maximum")
-    ret
+    cnms <- c("minimum", "q1", "median", "mean", "q3", "maximum")
+    if ("NA's" %in% names(x)) {
+        cnms <- c(cnms,"NA's")
+    }
+    return(setNames(ret,cnms))
 }
 
 
