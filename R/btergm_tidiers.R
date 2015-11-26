@@ -6,11 +6,11 @@
 #'
 #' @return A \code{data.frame} without rownames.
 #'
-#' @seealso \code{\link[xergm]{btergm}}
+#' @seealso \code{\link[btergm]{btergm}}
 #'
 #' @name btergm_tidiers
 #'
-#' @param x a \code{\link[xergm]{btergm}} object
+#' @param x a \code{\link[btergm]{btergm}} object
 #' @examples
 #'
 #' if (require("xergm")) {
@@ -77,7 +77,7 @@ tidy.btergm <- function(x, conf.level = .95,
                           estimate = trans(unname(co)))
         return(ret)
     }
-    co <- xergm::confint(x, level = conf.level)
+    co <- btergm::confint(x, level = conf.level)
     
     nn <- c("estimate", "conf.low", "conf.high")
     if (inherits(co, "listof")) {

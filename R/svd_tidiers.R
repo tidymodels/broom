@@ -35,7 +35,7 @@
 #'
 #' @param x list containing d, u, v components, returned from \code{svd}
 #' @param matrix which of the u, d or v matrix to tidy
-#' @param ...
+#' @param ... Extra arguments (not used)
 #' 
 #' @examples 
 #' 

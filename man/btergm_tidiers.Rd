@@ -9,7 +9,7 @@
   quick = FALSE, ...)
 }
 \arguments{
-\item{x}{a \code{\link[xergm]{btergm}} object}
+\item{x}{a \code{\link[btergm]{btergm}} object}
 
 \item{conf.level}{confidence level of the bootstrapped interval}
 
@@ -71,6 +71,6 @@ if (require("xergm")) {
 }
 }
 \seealso{
-\code{\link[xergm]{btergm}}
+\code{\link[btergm]{btergm}}
 }
 

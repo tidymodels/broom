@@ -4,12 +4,14 @@
 \alias{confint_tidy}
 \title{Calculate confidence interval as a tidy data frame}
 \usage{
-confint_tidy(x, conf.level = 0.95, ...)
+confint_tidy(x, conf.level = 0.95, func = stats::confint, ...)
 }
 \arguments{
 \item{x}{a model object for which \code{\link{confint}} can be calculated}
 
 \item{conf.level}{confidence level}
+
+\item{func}{Function to use for computing confint}
 
 \item{...}{extra arguments passed on to \code{confint}}
 }

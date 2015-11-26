@@ -47,7 +47,7 @@ NULL
 #' @param effects A character vector including one or more of "fixed" (fixed-effect parameters), "ran_pars" (variances and covariances or standard deviations and correlations of random effect terms) or "ran_modes" (conditional modes/BLUPs/latent variable estimates)
 #' @param conf.int whether to include a confidence interval
 #' @param conf.level confidence level for CI
-#' @param conf.method method for computing confidence intervals (see \code{\link{confint.merMod}})
+#' @param conf.method method for computing confidence intervals (see \code{lme4::confint.merMod})
 #' @param scales scales on which to report the variables: for random effects, the choices are \sQuote{"sdcor"} (standard deviations and correlations: the default if \code{scales} is \code{NULL}) or \sQuote{"varcov"} (variances and covariances). \code{NA} means no transformation, appropriate e.g. for fixed effects; inverse-link transformations (exponentiation
 #' or logistic) are not yet implemented, but may be in the future.
 #' @param ran_prefix a length-2 character vector specifying the strings to use as prefixes for self- (variance/standard deviation) and cross- (covariance/correlation) random effects terms
@@ -133,7 +133,7 @@ tidy.merMod <- function(x, effects = c("ran_pars","fixed"),
         }
 
         rownames(ret) <- paste(apply(ret[c("var1","var2")],1,pfun),
-                                ret[,"group"],sep=".")
+                                ret[,"grp"], sep = ".")
 
         ## FIXME: this is ugly, but maybe necessary?
         ## set 'term' column explicitly, disable fix_data_frame
@@ -148,8 +148,8 @@ tidy.merMod <- function(x, effects = c("ran_pars","fixed"),
 
         
         ## replicate lme4:::tnames, more or less
-        ret_list$ran_pars <- fix_data_frame(ret[c("group",rscale)],
-                                            newnames=c("group","estimate"))
+        ret_list$ran_pars <- fix_data_frame(ret[c("grp", rscale)],
+                                            newnames = c("group", "estimate"))
     }
     if ("ran_modes" %in% effects) {
         ## fix each group to be a tidy data frame
@@ -270,8 +270,14 @@ augment.merMod <- function(x, data = stats::model.frame(x), newdata, ...) {
 #' 
 #' @export
 glance.merMod <- function(x, ...) {
-    ## FIXME: may need to be fixed via @importFrom/NAMESPACE ?
-    sigma <- if (getRversion()>="3.3.0") stats::sigma else lme4::sigma
+    # We cannot use stats::sigma or lme4::sigma here, even in an
+    # if statement, since that leads to R CMD CHECK warnings on 3.2
+    # or dev R, respectively
+    sigma <- if (getRversion() >= "3.3.0") {
+        get("sigma", asNamespace("stats"))
+    } else {
+        get("sigma", asNamespace("lme4"))
+    }
     ret <- unrowname(data.frame(sigma = sigma(x)))
     finish_glance(ret, x)
 }

@@ -17,7 +17,8 @@ fix_data_frame <- function(x, newnames=NULL, newcol="term") {
         }
     }
     else {
-        ret <- data.frame(a = rownames(x), x, stringsAsFactors = FALSE)
+        ret <- data.frame(a = rownames(x), plyr::unrowname(x),
+                          stringsAsFactors = FALSE)
         colnames(ret)[1] <- newcol
         if (!is.null(newnames)) {
             colnames(ret)[-1] <- newnames
@@ -229,6 +230,7 @@ finish_glance <- function(ret, x) {
 #' 
 #' @param x a model object for which \code{\link{confint}} can be calculated
 #' @param conf.level confidence level
+#' @param func Function to use for computing confint
 #' @param ... extra arguments passed on to \code{confint}
 #' 
 #' @return A data frame with two columns: \code{conf.low} and \code{conf.high}.
@@ -236,9 +238,9 @@ finish_glance <- function(ret, x) {
 #' @seealso \link{confint}
 #' 
 #' @export
-confint_tidy <- function(x, conf.level = .95, ...) {
+confint_tidy <- function(x, conf.level = .95, func = stats::confint, ...) {
     # avoid "Waiting for profiling to be done..." message for some models
-    CI <- suppressMessages(stats::confint(x, level = conf.level, ...))
+    CI <- suppressMessages(func(x, level = conf.level, ...))
     if (is.null(dim(CI))) {
         CI = matrix(CI, nrow=1)
     }

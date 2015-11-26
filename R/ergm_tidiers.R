@@ -185,7 +185,7 @@ process_ergm <- function(ret, x, conf.int = FALSE, conf.level = .95,
     }
     
     if (conf.int) {
-        z <- qnorm(1 - (1 - conf.level) / 2)
+        z <- stats::qnorm(1 - (1 - conf.level) / 2)
         CI <- cbind(conf.low = ret$estimate - z * ret$std.error,
                     conf.high = ret$estimate + z * ret$std.error)
         ret <- cbind(ret, trans(unrowname(CI)))

@@ -12,7 +12,7 @@ tidy_svd(x, matrix = "u", ...)
 
 \item{matrix}{which of the u, d or v matrix to tidy}
 
-\item{...}{}
+\item{...}{Extra arguments (not used)}
 }
 \value{
 An SVD object contains a decomposition into u, d, and v matrices, such that
