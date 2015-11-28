@@ -24,6 +24,7 @@ a one-row data frame with columns
   \item{mean}{mean of original vector}
   \item{q3}{value at the third quartile}
   \item{maximum}{largest value in original vector}
+  \item{NAs}{number of NA values (if any)}
 }
 \description{
 Tidy a summary of a vector.
@@ -35,6 +36,9 @@ s
 
 tidy(s)
 glance(s)
+
+v2 <- c(v,NA)
+tidy(summary(v2))
 }
 \seealso{
 \code{\link{summary}}

@@ -29,8 +29,7 @@ Imports:
     psych,
     stringr,
     reshape2,
-    nlme,
-    coda
+    nlme
 Suggests:
     knitr,
     boot,
@@ -63,7 +62,8 @@ Suggests:
     Hmisc,
     bbmle,
     gamlss,
-    rstan
+    rstan,
+    coda
 URL: http://github.com/dgrtwo/broom
 BugReports: http://github.com/dgrtwo/broom/issues
 VignetteBuilder: knitr
