@@ -1,3 +1,8 @@
+broom 0.4.0.9000
+-----------
+
+* Changed name of "NA's" column in summaryDefault output to "na"
+
 broom 0.4.0
 -----------
 

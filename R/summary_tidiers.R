@@ -35,7 +35,7 @@ tidy.summaryDefault <- function(x, ...) {
     ret <- as.data.frame(t(as.matrix(x)))
     cnms <- c("minimum", "q1", "median", "mean", "q3", "maximum")
     if ("NA's" %in% names(x)) {
-        cnms <- c(cnms,"NA's")
+        cnms <- c(cnms, "na")
     }
     return(setNames(ret,cnms))
 }
