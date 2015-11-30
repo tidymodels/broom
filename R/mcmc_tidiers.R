@@ -1,5 +1,3 @@
-## FIXME: design question -- how to make tidying methods inherit appropriately?
-
 #' Tidying methods for MCMC (Stan, JAGS, etc.) fits
 #'
 #' @param x an object of class \sQuote{"stanfit"}
@@ -79,16 +77,16 @@ tidyMCMC <- function(x,
     estimate.method <- match.arg(estimate.method, c("mean", "median"))
     m <- switch(estimate.method,
                 mean = colMeans(ss),
-                median = apply(ss, 2, median))
+                median = apply(ss, 2, stats::median))
 
     ret <- data.frame(estimate = m,
-                      std.error = apply(ss, 2, sd))
+                      std.error = apply(ss, 2, stats::sd))
     if (conf.int) {
         levs <- c((1 - conf.level) / 2, (1 + conf.level) / 2)
 
         conf.method <- match.arg(conf.method, c("quantile", "HPDinterval"))
         ci <- switch(conf.method,
-                     quantile = t(apply(ss, 2, quantile, levs)),
+                     quantile = t(apply(ss, 2, stats::quantile, levs)),
                      coda::HPDinterval(coda::as.mcmc(ss), prob = conf.level))
 
         colnames(ci) <- c("conf.low", "conf.high")

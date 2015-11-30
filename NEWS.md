@@ -1,10 +1,13 @@
-* Added a `tidy` method for x,y,z lists used by `image` and `persp`
-
-broom 0.3.7.9000
+broom 0.4.0
 -----------
 
+* Added tidiers for geeglm, nlrq, roc, boot, bgterm, kappa, binWidth, binDesign, rcorr, stanfit, rjags, gamlss, and mle2 objects.
+* Added `tidy` methods for lists, including u, d, v lists from `svd`, and x, y, z lists used by `image` and `persp`
 * Added `quick` argument to `tidy.lm`, `tidy.nls`, and `tidy.biglm`, to create a smaller and faster version of the output.
 * Changed `rowwise_df_tidiers` to allow the original data to be saved as a list column, then provided as a column name to `augment`. This required removing `data` from the `augment` S3 signature. Also added `tests-rowwise.R`
+* Fixed various issues in ANOVA output
+* Fixed various issues in lme4 output
+* Fixed issues in tests caused by dev version of ggplot2
 
 broom 0.3.7
 -----------
