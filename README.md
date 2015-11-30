@@ -369,8 +369,10 @@ A full list of the `tidy`, `augment` and `glance` methods available for each cla
 |density                  |x      |         |          |
 |ergm                     |x      |x        |          |
 |felm                     |x      |x        |x         |
+|fitdistr                 |x      |x        |          |
 |ftable                   |x      |         |          |
 |gam                      |x      |x        |          |
+|gamlss                   |x      |         |          |
 |geeglm                   |x      |         |          |
 |glht                     |x      |         |          |
 |glmnet                   |x      |x        |          |
@@ -386,6 +388,7 @@ A full list of the `tidy`, `augment` and `glance` methods available for each cla
 |map                      |x      |         |          |
 |matrix                   |x      |x        |          |
 |merMod                   |x      |x        |x         |
+|mle2                     |x      |         |          |
 |multinom                 |x      |x        |          |
 |nlrq                     |x      |x        |x         |
 |nls                      |x      |x        |x         |
@@ -396,7 +399,9 @@ A full list of the `tidy`, `augment` and `glance` methods available for each cla
 |Polygons                 |x      |         |          |
 |power.htest              |x      |         |          |
 |pyears                   |x      |x        |          |
+|rcorr                    |x      |         |          |
 |ridgelm                  |x      |x        |          |
+|rjags                    |x      |         |          |
 |roc                      |x      |         |          |
 |rowwise_df               |x      |x        |x         |
 |rq                       |x      |x        |x         |
@@ -405,6 +410,7 @@ A full list of the `tidy`, `augment` and `glance` methods available for each cla
 |SpatialPolygons          |x      |         |          |
 |SpatialPolygonsDataFrame |x      |         |          |
 |spec                     |x      |         |          |
+|stanfit                  |x      |         |          |
 |summary.glht             |x      |         |          |
 |summaryDefault           |x      |x        |          |
 |survexp                  |x      |x        |          |
