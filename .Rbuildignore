@@ -5,3 +5,4 @@
 ^revdep$
 ^cran-comments\.md$
 ^README.Rmd
+^\.travis\.yml$
