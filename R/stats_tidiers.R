@@ -122,9 +122,14 @@ tidy.spec <- function(x, ...) {
 #' @export
 tidy.TukeyHSD <- function(x, ...) {
     nn <- c("estimate", "conf.low", "conf.high", "adj.p.value")
-    fix_data_frame(x[[1]], nn, "comparison")
+    varnames <- names(x)
+    plyr::ldply(varnames, function(varname) {
+        df <- fix_data_frame(x[[varname]], nn, "comparison")
+        df$variable <- varname
+        df <- dplyr::select(df, variable, everything())
+        return(df)
+    })
 }
-
 
 #' tidy a MANOVA object
 #' 
