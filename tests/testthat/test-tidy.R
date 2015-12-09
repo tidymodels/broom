@@ -82,7 +82,7 @@ test_that("tidy.summary works (even with NAs)", {
         structure(list(minimum = 5, q1 = 6, median = 7, mean = 8.333, 
                     q3 = 10, maximum = 14, `NA's` = 3),
           .Names = c("minimum", "q1", "median", "mean", "q3",
-          "maximum", "NA's"), row.names = c(NA, -1L), class = "data.frame"))
+          "maximum", "na"), row.names = c(NA, -1L), class = "data.frame"))
 })
 
 
