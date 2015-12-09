@@ -54,7 +54,8 @@ tidy.anova <- function(x, ...) {
                   "Sum of Sq" = "sumsq",
                   "F" = "statistic",
                   "Chisq" = "statistic",
-                  "P(>|Chi|)" = "p.value")
+                  "P(>|Chi|)" = "p.value",
+                  "Pr..Chisq." = "p.value")
     
     names(renamers) <- make.names(names(renamers))
     
