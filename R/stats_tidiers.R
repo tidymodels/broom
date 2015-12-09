@@ -150,14 +150,20 @@ tidy.TukeyHSD <- function(x, separate.levels = FALSE, ...) {
 #' containing the information from \link{summary.manova}.
 #' 
 #' @param x object of class "manova"
-#' @param ... additional arguments passed on to \code{summary.manova},
-#' such as \code{test}
+#' @param test one of "Pillai" (Pillai's trace), "Wilks" (Wilk's lambda), "Hotelling-Lawley" (Hotelling-Lawley trace) or "Roy" (Roy's greatest root) indicating which test statistic should be used. Defaults to "Pillai"
+#' @param ... additional arguments passed on to \code{summary.manova}
 #' 
 #' @return A data.frame with the columns
 #'     \item{term}{Term in design}
 #'     \item{statistic}{Approximate F statistic}
 #'     \item{num.df}{Degrees of freedom}
 #'     \item{p.value}{P-value}
+#'     
+#' Depending on which test statistic is specified, one of the following columns is also included:
+#'     \item{pillai}{Pillai's trace}
+#'     \item{wilks}{Wilk's lambda}
+#'     \item{hl}{Hotelling-Lawley trace}
+#'     \item{roy}{Roy's greatest root}
 #' 
 #' @examples
 #' 
@@ -167,9 +173,15 @@ tidy.TukeyHSD <- function(x, separate.levels = FALSE, ...) {
 #' @seealso \code{\link{summary.manova}}
 #' 
 #' @export
-tidy.manova <- function(x, ...) {
-    nn <-  c("df", "pillai", "statistic", "num.df", "den.df", "p.value")
-    ret <- fix_data_frame(summary(x, ...)$stats, nn)
+tidy.manova <- function(x, test = "Pillai", ...) {
+    # match test name (default to 'pillai')
+    # partially match the name so we're consistent with the underlying function
+    test.pos <- pmatch(test, c("Pillai", "Wilks",
+        "Hotelling-Lawley", "Roy"))
+    test.name <- c("pillai", "wilks", "hl", "roy")[test.pos]
+    
+    nn <-  c("df", test.name, "statistic", "num.df", "den.df", "p.value")
+    ret <- fix_data_frame(summary(x, test = test, ...)$stats, nn)
     # remove residuals row (doesn't have useful information)
     ret <- ret[-nrow(ret), ]
     ret

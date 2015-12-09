@@ -4,13 +4,14 @@
 \alias{tidy.manova}
 \title{tidy a MANOVA object}
 \usage{
-\method{tidy}{manova}(x, ...)
+\method{tidy}{manova}(x, test = "Pillai", ...)
 }
 \arguments{
 \item{x}{object of class "manova"}
 
-\item{...}{additional arguments passed on to \code{summary.manova},
-such as \code{test}}
+\item{test}{one of "Pillai" (Pillai's trace), "Wilks" (Wilk's lambda), "Hotelling-Lawley" (Hotelling-Lawley trace) or "Roy" (Roy's greatest root) indicating which test statistic should be used. Defaults to "Pillai"}
+
+\item{...}{additional arguments passed on to \code{summary.manova}}
 }
 \value{
 A data.frame with the columns
@@ -18,6 +19,12 @@ A data.frame with the columns
     \item{statistic}{Approximate F statistic}
     \item{num.df}{Degrees of freedom}
     \item{p.value}{P-value}
+
+Depending on which test statistic is specified, one of the following columns is also included:
+    \item{pillai}{Pillai's trace}
+    \item{wilks}{Wilk's lambda}
+    \item{hl}{Hotelling-Lawley trace}
+    \item{roy}{Roy's greatest root}
 }
 \description{
 Constructs a data frame with one row for each of the terms in the model,
