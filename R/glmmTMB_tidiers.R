@@ -24,11 +24,12 @@
 #'     head(augment(lmm1, sleepstudy))
 #'     glance(lmm1)
 #'     
-#'     glmm1 <- glmer(cbind(incidence, size - incidence) ~ period + (1 | herd),
-#'                   data = cbpp, family = binomial)
+#'     glmm1 <- glmmTMB(incidence/size ~ period + (1 | herd),
+#'                   data = cbpp, family = binomial, weights=size)
 #'     tidy(glmm1)
 #'     tidy(glmm1, effects = "fixed")
 #'     head(augment(glmm1, cbpp))
+#'     head(augment(glmm1, cbpp, type.residuals="pearson"))
 #'     glance(glmm1)
 #'     
 #' }
@@ -219,43 +220,16 @@ tidy.glmmTMB <- function(x, effects = c("ran_pars","fixed"),
 #'   \item{.resid}{residuals}
 #'   \item{.fixed}{predicted values with no random effects}
 #' 
-#' Also added for "merMod" objects, but not for "mer" objects,
-#' are values from the response object within the model (of type
-#' \code{lmResp}, \code{glmResp}, \code{nlsResp}, etc). These include \code{".mu",
-#' ".offset", ".sqrtXwt", ".sqrtrwt", ".eta"}.
-#'
 #' @export
-augment.glmmTMB <- function(x, data = stats::model.frame(x), newdata, ...) {    
-    # move rownames if necessary
-    if (missing(newdata)) {
-        newdata <- NULL
-    }
-    ret <- augment_columns(x, data, newdata, se.fit = NULL)
-    
-    # add predictions with no random effects (population means)
-    predictions <- stats::predict(x, re.form = NA)
-    # some cases, such as values returned from nlmer, return more than one
-    # prediction per observation. Not clear how those cases would be tidied
-    if (length(predictions) == nrow(ret)) {
-        ret$.fixed <- predictions
-    }
+augment.glmmTMB <- function(x, data = stats::model.frame(x), newdata,
+                            type.predict, type.residuals, se.fit=TRUE,
+                            ...) {
+    augment_columns(x, data, newdata, type.predict = type.predict, 
+                    type.residuals = type.residuals,
+                    se.fit = se.fit)
 
-    # columns to extract from resp reference object
-    # these include relevant ones that could be present in lmResp, glmResp,
-    # or nlsResp objects
-
-    ## respCols <- c("mu", "offset", "sqrtXwt", "sqrtrwt", "weights", "wtres", "gam", "eta")
-    ## cols <- lapply(respCols, function(n) x@resp[[n]])
-    ## names(cols) <- paste0(".", respCols)
-    ## cols <- as.data.frame(compact(cols))  # remove missing fields
-    
-    ## cols <- insert_NAs(cols, ret)
-    ## if (length(cols) > 0) {
-    ##     ret <- cbind(ret, cols)
-    ## }
-
-    unrowname(ret)
 }
+
 
 #' @rdname glmmTMB_tidiers
 #' 
