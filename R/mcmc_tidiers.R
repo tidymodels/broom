@@ -9,6 +9,7 @@
 #' ("quantile" or "HPDinterval")
 #' @param droppars Parameters not to include in the output (such
 #' as log-probability information)
+#' @param rhat,ess (logical) include Rhat and/or effective sample size estimates?
 #' @param ... unused
 #' 
 #' @name mcmc_tidiers
@@ -64,6 +65,8 @@ tidyMCMC <- function(x,
                      conf.level = 0.95,
                      conf.method = "quantile",
                      droppars = "lp__",
+                     rhat = FALSE,
+                     ess = FALSE,
                      ...) {
     stan <- is(x, "stanfit")
     ss <- if (stan) as.matrix(x, pars = pars) else as.matrix(x)
@@ -92,6 +95,14 @@ tidyMCMC <- function(x,
 
         colnames(ci) <- c("conf.low", "conf.high")
         ret <- data.frame(ret, ci)
+    }
+    
+    if (rhat || ess) {
+        if (!stan) warning("ignoring 'rhat' and 'ess' (only available for stanfit objects)")
+        summ <- rstan::summary(x, pars = pars, probs = NULL)$summary[, c("Rhat", "n_eff")]
+        summ <- summ[!dimnames(summ)[[1L]] %in% droppars, ]
+        if (rhat) ret$rhat <- summ[, "Rhat"]
+        if (ess) ret$ess <- as.integer(round(summ[, "n_eff"]))
     }
     return(fix_data_frame(ret))
 }
