@@ -41,7 +41,7 @@
 #'   load(infile)
 #'   
 #'   tidy(rstan_example)
-#'   tidy(rstan_example, conf.int = TRUE)
+#'   tidy(rstan_example, conf.int = TRUE, pars = "theta")
 #'   
 #'   td_mean <- tidy(rstan_example, conf.int = TRUE)
 #'   td_median <- tidy(rstan_example, conf.int = TRUE, estimate.method = "median")
