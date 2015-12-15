@@ -70,7 +70,7 @@ tidyMCMC <- function(x,
                      ...) {
     stan <- is(x, "stanfit")
     ss <- if (stan) as.matrix(x, pars = pars) else as.matrix(x)
-    ss <- ss[, !colnames(ss) %in% droppars]  ## drop log-probability info
+    ss <- ss[, !colnames(ss) %in% droppars, drop = FALSE]  ## drop log-probability info
     if (!missing(pars) && !stan) {
         if (length(badpars <- which(!pars %in% colnames(ss))) > 0) {
             stop("unrecognized parameters: ", pars[badpars])
