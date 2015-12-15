@@ -99,8 +99,8 @@ tidyMCMC <- function(x,
     
     if (rhat || ess) {
         if (!stan) warning("ignoring 'rhat' and 'ess' (only available for stanfit objects)")
-        summ <- rstan::summary(x, pars = pars, probs = NULL)$summary[, c("Rhat", "n_eff")]
-        summ <- summ[!dimnames(summ)[[1L]] %in% droppars, ]
+        summ <- rstan::summary(x, pars = pars, probs = NULL)$summary[, c("Rhat", "n_eff"), drop = FALSE]
+        summ <- summ[!dimnames(summ)[[1L]] %in% droppars,, drop = FALSE]
         if (rhat) ret$rhat <- summ[, "Rhat"]
         if (ess) ret$ess <- as.integer(round(summ[, "n_eff"]))
     }
