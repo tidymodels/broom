@@ -1,7 +1,7 @@
 #' Tidying methods for MCMC (Stan, JAGS, etc.) fits
 #'
 #' @param x an object of class \sQuote{"stanfit"}
-#' @param pars (character) specification of which parameters to nclude
+#' @param pars (character) specification of which parameters to include
 #' @param estimate.method method for computing point estimate ("mean" or median")
 #' @param conf.int (logical) include confidence interval?
 #' @param conf.level probability level for CI
@@ -65,9 +65,10 @@ tidyMCMC <- function(x,
                      conf.method = "quantile",
                      droppars = "lp__",
                      ...) {
-    ss <- as.matrix(x)  ## works natively on stanfit, mcmc.list, mcmc objects
+    stan <- is(x, "stanfit")
+    ss <- if (stan) as.matrix(x, pars = pars) else as.matrix(x)
     ss <- ss[, !colnames(ss) %in% droppars]  ## drop log-probability info
-    if (!missing(pars)) {
+    if (!missing(pars) && !stan) {
         if (length(badpars <- which(!pars %in% colnames(ss))) > 0) {
             stop("unrecognized parameters: ", pars[badpars])
         }
