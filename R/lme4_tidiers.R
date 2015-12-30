@@ -97,7 +97,9 @@ tidy.merMod <- function(x, effects = c("ran_pars","fixed"),
         nn <- base_nn[1:ncol(ret)]
 
         if (conf.int) {
-            cifix <- confint(x,parm="beta_",method=conf.method,...)
+            cifix <- if (!is(x,"merMod")) {
+                confint(x,...)
+            } else confint(x,parm="beta_",method=conf.method,...)
             ret <- data.frame(ret,cifix)
             nn <- c(nn,"conf.low","conf.high")
         }
@@ -114,7 +116,20 @@ tidy.merMod <- function(x, effects = c("ran_pars","fixed"),
         } else rscale <- scales[effects=="ran_pars"]
         if (!rscale %in% c("sdcor","vcov"))
             stop(sprintf("unrecognized ran_pars scale %s",sQuote(rscale)))
-        ret <- as.data.frame(VarCorr(x))
+        vc <- VarCorr(x)
+        if (class(vc)=="VarCorr") {
+            ## hack: attempt to augment glmmADMB (or other)
+            ##   values so we can use as.data.frame.VarCorr.merMod
+            vc <- lapply(vc,
+                         function(x) {
+                             attr(x,"stddev") <- sqrt(diag(x))
+                             attr(x,"correlation") <- cov2cor(x)
+                             x
+                         })
+            attr(vc,"useScale") <- (x$family=="gaussian")
+            class(vc) <- "VarCorr.merMod"
+        }
+        ret <- as.data.frame(vc)
         ret[] <- lapply(ret, function(x) if (is.factor(x))
                                  as.character(x) else x)
         if (is.null(ran_prefix)) {
@@ -280,4 +295,76 @@ glance.merMod <- function(x, ...) {
     }
     ret <- unrowname(data.frame(sigma = sigma(x)))
     finish_glance(ret, x)
+}
+
+##' Augmentation for random effects (for caterpillar plots etc.)
+##' 
+##' @param x ranef (conditional mode) information from an lme4 fit, using \code{ranef(.,condVar=TRUE)}
+##' @param ci.level level for confidence intervals
+##' @param reorder reorder levels by conditional mode values?
+##' @param order.var numeric or character: which variable to use for ordering levels?
+##' @importFrom reshape2 melt
+##' @importFrom plyr ldply
+##' @examples
+##' if (require("lme4"))
+##' fit <- lmer(Reaction~Days+(Days|Subject),sleepstudy)
+##' rr <- ranef(fit,condVar=TRUE)
+##' aa <- augment(rr)
+##' ## Q-Q plot:
+##' g0 <- ggplot(aa,aes(estimate,qq,xmin=lb,xmax=ub))+
+##'    geom_errorbarh(height=0)+
+##'    geom_point()+facet_wrap(~variable,scale="free_x")
+##' ## regular caterpillar plot:
+##' g1 <- ggplot(aa,aes(estimate,level,xmin=lb,xmax=ub))+
+##'    geom_errorbarh(height=0)+
+##'    geom_vline(xintercept=0,lty=2)+
+##'    geom_point()+facet_wrap(~variable,scale="free_x")
+##' ## emphasize extreme values
+##' aa2 <- ddply(aa,c("grp","level"),
+##'             transform,
+##'             keep=any(estimate/std.error>2))
+##' aa3 <- subset(aa2,keep)
+##' ## Update caterpillar plot with extreme levels highlighted:
+##' ggplot(aa2,aes(estimate,level,xmin=lb,xmax=ub,colour=factor(keep)))+
+##'    geom_errorbarh(height=0)+
+##'    geom_vline(xintercept=0,lty=2)+
+##'    geom_point()+facet_wrap(~variable,scale="free_x")+
+##'    scale_colour_manual(values=c("black","red"),guide=FALSE)
+##' @export 
+augment.ranef.mer <- function(x,
+                                 ci.level=0.9,
+                                 reorder=TRUE,
+                                 order.var=1) {
+    tmpf <- function(z) {
+        if (is.character(order.var) && !order.var %in% names(z)) {
+            order.var <- 1
+            warning("order.var not found, resetting to 1")
+        }
+        ## would use plyr::name_rows, but want levels first
+        zz <- data.frame(level=rownames(z),z,check.names=FALSE)
+        if (reorder) {
+            ## if numeric order var, add 1 to account for level column
+            ov <- if (is.numeric(order.var)) order.var+1 else order.var
+            zz$level <- reorder(zz$level, zz[,order.var+1], FUN=identity)
+        }
+        ## Q-Q values, for each column separately
+        qq <- c(apply(z,2,function(y) {
+                  qnorm(ppoints(nrow(z)))[order(order(y))]
+              }))
+        rownames(zz) <- NULL
+        pv   <- attr(z, "postVar")
+        cols <- 1:(dim(pv)[1])
+        se   <- unlist(lapply(cols, function(i) sqrt(pv[i, i, ])))
+        ## n.b.: depends on explicit column-major ordering of se/melt
+        zzz <- cbind(melt(zz,id.vars="level",value.name="estimate"),
+                     qq=qq,std.error=se)
+        ## reorder columns:
+        subset(zzz,select=c(variable, level, estimate, qq, std.error))
+    }
+    dd <- ldply(x,tmpf,.id="grp")
+    ci.val <- -qnorm((1-ci.level)/2)
+    transform(dd,
+              ## p=2*pnorm(-abs(estimate/std.error)), ## 2-tailed p-val
+              lb=estimate-ci.val*std.error,
+              ub=estimate+ci.val*std.error)
 }
