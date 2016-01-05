@@ -52,16 +52,12 @@ tidy.acf <- function(x, ...) {
 #' @rdname acf_tidiers
 #' 
 #' @export
-tidy.pcf <- function(x, ...) {
-    process_cf(x)
-}
+tidy.pcf <- tidy.acf
 
 #' @rdname acf_tidiers
 #' 
 #' @export
-tidy.ccf <- function(x, ...) {
-    process_cf(x)
-}
+tidy.ccf <- tidy.acf
 
 process_cf <- function(x) {
     ret <- with(x, data.frame(lag = x$lag,
