@@ -66,7 +66,7 @@ copyData <- function(df, sep = "\t"){
          call. = FALSE)
   }
   
-  as.matrix(df) %>% 
+  rbind(names(df), df) %>%
   apply(1, paste0, collapse = sep)%>%
   writeClipboard
 
