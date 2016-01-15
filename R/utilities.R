@@ -8,7 +8,11 @@
 #' names assigned
 #' 
 #' @export
-fix_data_frame <- function(x, newnames=NULL, newcol="term") {
+fix_data_frame <- function(x, newnames = NULL, newcol = "term") {
+    if (!is.null(newnames) && length(newnames) != ncol(x)) {
+        stop("newnames must be NULL or have length equal to number of columns")
+    }
+    
     if (all(rownames(x) == seq_len(nrow(x)))) {
         # don't need to move rownames into a new column
         ret <- data.frame(x, stringsAsFactors = FALSE)
@@ -17,7 +21,8 @@ fix_data_frame <- function(x, newnames=NULL, newcol="term") {
         }
     }
     else {
-        ret <- data.frame(a = rownames(x), plyr::unrowname(x),
+        ret <- data.frame(...new.col... = rownames(x),
+                          unrowname(x),
                           stringsAsFactors = FALSE)
         colnames(ret)[1] <- newcol
         if (!is.null(newnames)) {

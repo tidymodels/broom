@@ -102,27 +102,45 @@ tidy.spec <- function(x, ...) {
 #' Returns a data.frame with one row for each pairwise comparison
 #' 
 #' @param x object of class "TukeyHSD"
+#' @param separate.levels Whether to separate comparison into
+#' \code{level1} and \code{level2} columns
 #' @param ... additional arguments (not used)
 #' 
 #' @return A data.frame with one row per comparison, containing columns
+#'     \item{term}{Term for which levels are being compared}
 #'     \item{comparison}{Levels being compared, separated by -}
 #'     \item{estimate}{Estimate of difference}
 #'     \item{conf.low}{Low end of confidence interval of difference}
 #'     \item{conf.high}{High end of confidence interval of difference}
 #'     \item{adj.p.value}{P-value adjusted for multiple comparisons}
 #' 
+#' If \code{separate.levels = TRUE}, the \code{comparison} column will be
+#' split up into \code{level1} and \code{level2}.
+#' 
 #' @examples
 #' 
 #' fm1 <- aov(breaks ~ wool + tension, data = warpbreaks)
 #' thsd <- TukeyHSD(fm1, "tension", ordered = TRUE)
 #' tidy(thsd)
+#' tidy(thsd, separate.levels = TRUE)
+#' 
+#' # may include comparisons on multiple terms
+#' fm2 <- aov(mpg ~ as.factor(gear) * as.factor(cyl), data = mtcars)
+#' tidy(TukeyHSD(fm2))
 #' 
 #' @seealso \code{\link{TukeyHSD}}
 #' 
 #' @export
-tidy.TukeyHSD <- function(x, ...) {
-    nn <- c("estimate", "conf.low", "conf.high", "adj.p.value")
-    fix_data_frame(x[[1]], nn, "comparison")
+tidy.TukeyHSD <- function(x, separate.levels = FALSE, ...) {
+    ret <- plyr::ldply(x, function(e) {
+        nn <- c("estimate", "conf.low", "conf.high", "adj.p.value")
+        fix_data_frame(e, nn, "comparison")
+    }, .id = "term")
+    
+    if (separate.levels) {
+        ret <- tidyr::separate(ret, comparison, c("level1", "level2"), sep = "-")
+    }
+    ret
 }
 
 
@@ -132,14 +150,20 @@ tidy.TukeyHSD <- function(x, ...) {
 #' containing the information from \link{summary.manova}.
 #' 
 #' @param x object of class "manova"
-#' @param ... additional arguments passed on to \code{summary.manova},
-#' such as \code{test}
+#' @param test one of "Pillai" (Pillai's trace), "Wilks" (Wilk's lambda), "Hotelling-Lawley" (Hotelling-Lawley trace) or "Roy" (Roy's greatest root) indicating which test statistic should be used. Defaults to "Pillai"
+#' @param ... additional arguments passed on to \code{summary.manova}
 #' 
 #' @return A data.frame with the columns
 #'     \item{term}{Term in design}
 #'     \item{statistic}{Approximate F statistic}
 #'     \item{num.df}{Degrees of freedom}
 #'     \item{p.value}{P-value}
+#'     
+#' Depending on which test statistic is specified, one of the following columns is also included:
+#'     \item{pillai}{Pillai's trace}
+#'     \item{wilks}{Wilk's lambda}
+#'     \item{hl}{Hotelling-Lawley trace}
+#'     \item{roy}{Roy's greatest root}
 #' 
 #' @examples
 #' 
@@ -149,9 +173,15 @@ tidy.TukeyHSD <- function(x, ...) {
 #' @seealso \code{\link{summary.manova}}
 #' 
 #' @export
-tidy.manova <- function(x, ...) {
-    nn <-  c("df", "pillai", "statistic", "num.df", "den.df", "p.value")
-    ret <- fix_data_frame(summary(x, ...)$stats, nn)
+tidy.manova <- function(x, test = "Pillai", ...) {
+    # match test name (default to 'pillai')
+    # partially match the name so we're consistent with the underlying function
+    test.pos <- pmatch(test, c("Pillai", "Wilks",
+        "Hotelling-Lawley", "Roy"))
+    test.name <- c("pillai", "wilks", "hl", "roy")[test.pos]
+    
+    nn <-  c("df", test.name, "statistic", "num.df", "den.df", "p.value")
+    ret <- fix_data_frame(summary(x, test = test, ...)$stats, nn)
     # remove residuals row (doesn't have useful information)
     ret <- ret[-nrow(ret), ]
     ret
