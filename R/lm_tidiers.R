@@ -93,6 +93,20 @@
 #' b <- a + rnorm(length(a))
 #' result <- lm(b ~ a)
 #' tidy(result)
+#'
+#' GLMs
+#'
+#' ## example from ?glm
+#' d.AD <- data.frame(treatment=gl(3,3),
+#'                    outcome=gl(3,1,9),
+#'                    counts=c(18,17,15,20,10,20,25,13,12))
+#'  glm.D93 <- glm(counts ~ outcome , d.AD, family = poisson)
+#'  op <- options(digits=3)
+#'  tidy(glm.D93)
+#'  tidy(glm.D93,transform=TRUE,conf.int=TRUE,conf.type="Wald")
+#'  tidy(glm.D93,transform=TRUE,conf.int=TRUE)
+#'  options(op)
+
 NULL
 
 
@@ -101,13 +115,15 @@ NULL
 #' @param conf.int whether to include a confidence interval
 #' @param conf.level confidence level of the interval, used only if
 #' \code{conf.int=TRUE}
-#' @param exponentiate whether to exponentiate the coefficient estimates
-#' and confidence intervals (typical for logistic regression)
+#' @param conf.type method for deriving confidence intervals
+
+#' @param exponentiate (deprecated) see \code{transform}
+#' @param transform whether to back-transform the coefficient estimates and confidence intervals; also scales the standard deviation to make it approximately correct on the original data scale
 #' @param quick whether to compute a smaller and faster version, containing
 #' only the \code{term} and \code{estimate} columns.
 #' 
 #' @details If \code{conf.int=TRUE}, the confidence interval is computed with
-#' the \code{\link{confint}} function.
+#' the \code{\link{confint}} function.  If \code{conf.type=="Wald"}, the confidence interval is computed with \code{stats:::confint.default}, i.e. symmetric confidence intervals based on the standard errors.  (This distinction is only relevant for GLMs.)
 #' 
 #' While \code{tidy} is supported for "mlm" objects, \code{augment} and
 #' \code{glance} are not.
@@ -129,11 +145,17 @@ NULL
 #' 
 #' @export
 tidy.lm <- function(x, conf.int = FALSE, conf.level = .95,
-                    exponentiate = FALSE, quick = FALSE, ...) {
+                    conf.type=c("profile","Wald"),
+                    exponentiate = FALSE, transform=FALSE,
+                    quick = FALSE, ...) {
+    if (!missing(exponentiate)) {
+        warning("the 'exponentiate' argument is deprecated: please use 'transform' instead")
+        transform <- exponentiate
+    }
     if (quick) {
         co <- stats::coef(x)
         ret <- data.frame(term = names(co), estimate = unname(co))
-        return(process_lm(ret, x, conf.int = FALSE, exponentiate = exponentiate))
+        return(process_lm(ret, x, conf.int = FALSE, transform = transform))
     }
     co <- stats::coef(summary(x))
     
@@ -148,7 +170,7 @@ tidy.lm <- function(x, conf.int = FALSE, conf.level = .95,
     }
 
     process_lm(ret, x, conf.int = conf.int, conf.level = conf.level,
-               exponentiate = exponentiate)
+               transform = transform)
 }
 
 
@@ -238,7 +260,7 @@ glance.mlm <- function(x, ...) {
 
 #' helper function to process a tidied lm object
 #' 
-#' Adds a confidence interval, and possibly exponentiates, a tidied
+#' Adds a confidence interval, and possibly back-transforms, a tidied
 #' object. Useful for operations shared between lm and biglm.
 #' 
 #' @param ret data frame with a tidied version of a coefficient matrix
@@ -246,29 +268,36 @@ glance.mlm <- function(x, ...) {
 #' @param conf.int whether to include a confidence interval
 #' @param conf.level confidence level of the interval, used only if
 #' \code{conf.int=TRUE}
-#' @param exponentiate whether to exponentiate the coefficient estimates
+#' @param transform whether to back-transform the coefficient estimates
 #' and confidence intervals (typical for logistic regression)
 process_lm <- function(ret, x, conf.int = FALSE, conf.level = .95,
-                       exponentiate = FALSE) {
-    if (exponentiate) {
-        # save transformation function for use on confidence interval
-        if (is.null(x$family) ||
-            (x$family$link != "logit" && x$family$link != "log")) {
-            warning(paste("Exponentiating coefficients, but model did not use",
-                          "a log or logit link function"))
-        }
-        trans <- exp
-    } else {
-        trans <- identity
-    }
+                       conf.type=c("profile","Wald"),
+                       transform = FALSE) {
+
+    conf.type <- match.arg(conf.type)
     
+    ## save transformation function for use on confidence interval
+    if (is.null(fam <- family(x)) || !transform) {
+        if (transform)
+            warning("transform requested, but original model did not use a non-identity link function")
+        trans <- identity
+        sdtrans <- function(x) 1
+    } else {
+        trans <- fam$linkinv
+        sdtrans <- fam$mu.eta
+    }
+
     if (conf.int) {
         # avoid "Waiting for profiling to be done..." message
-        CI <- suppressMessages(stats::confint(x, level = conf.level))
+        CI <- switch(conf.type,
+                     profile=suppressMessages(stats::confint(x,
+                                               level = conf.level)),
+                     Wald=stats::confint.default(x,level = conf.level))
         colnames(CI) = c("conf.low", "conf.high")
         ret <- cbind(ret, trans(unrowname(CI)))
     }
-    ret$estimate <- trans(ret$estimate)
-    
-    ret
+    ret <- transform(ret,
+                     std.error=sdtrans(estimate)*std.error,
+                     estimate=trans(estimate))
+    return(ret)
 }
