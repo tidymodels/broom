@@ -201,7 +201,9 @@ tidy.glmmTMB <- function(x, effects = c("ran_pars","fixed"),
         ret <- dplyr::rename(ret,grp=.id)
         ret_list$ran_modes <- ret
     }
-    return(rbind.fill(ret_list))
+    ## use ldply to get 'effect' added as a column
+    return(plyr::ldply(ret_list,identity,.id="effect"))
+
 }
 
 

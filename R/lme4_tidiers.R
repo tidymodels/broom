@@ -20,7 +20,7 @@
 #'     tidy(lmm1, effects = "fixed")
 #'     tidy(lmm1, effects = "fixed", conf.int=TRUE)
 #'     tidy(lmm1, effects = "fixed", conf.int=TRUE, conf.method="profile")
-#'     tidy(lmm1, effects = "ran_modes", conf.int=TRUE)
+#'     tidy(lmm1, effects = "ran_vals", conf.int=TRUE)
 #'     head(augment(lmm1, sleepstudy))
 #'     glance(lmm1)
 #'     
@@ -44,12 +44,11 @@ NULL
 
 #' @rdname lme4_tidiers
 #' 
-#' @param effects A character vector including one or more of "fixed" (fixed-effect parameters), "ran_pars" (variances and covariances or standard deviations and correlations of random effect terms) or "ran_modes" (conditional modes/BLUPs/latent variable estimates)
+#' @param effects A character vector including one or more of "fixed" (fixed-effect parameters), "ran_pars" (variances and covariances or standard deviations and correlations of random effect terms) or "ran_vals" (conditional modes/BLUPs/latent variable estimates)
 #' @param conf.int whether to include a confidence interval
 #' @param conf.level confidence level for CI
 #' @param conf.method method for computing confidence intervals (see \code{lme4::confint.merMod})
-#' @param scales scales on which to report the variables: for random effects, the choices are \sQuote{"sdcor"} (standard deviations and correlations: the default if \code{scales} is \code{NULL}) or \sQuote{"vcov"} (variances and covariances). \code{NA} means no transformation, appropriate e.g. for fixed effects; inverse-link transformations (exponentiation
-#' or logistic) are not yet implemented, but may be in the future.
+#' @param scales scales on which to report the variables: for random effects, the choices are \sQuote{"sdcor"} (standard deviations and correlations: the default if \code{scales} is \code{NULL}) or \sQuote{"vcov"} (variances and covariances). \code{NA} means no transformation, appropriate e.g. for fixed effects; inverse-link transformations (exponentiation or logistic) are not yet implemented, but may be in the future.
 #' @param ran_prefix a length-2 character vector specifying the strings to use as prefixes for self- (variance/standard deviation) and cross- (covariance/correlation) random effects terms
 #' 
 #' @return \code{tidy} returns one row for each estimated effect, either
@@ -72,13 +71,13 @@ NULL
 #' 
 #' @export
 tidy.merMod <- function(x, effects = c("ran_pars","fixed"),
-                        scales = NULL, ## c("sdcor",NA),
+                        scales = NULL, ## c("sdcor","vcov",NA),
                         ran_prefix=NULL,
                         conf.int = FALSE,
                         conf.level = 0.95,
                         conf.method = "Wald",
                         ...) {
-    effect_names <- c("ran_pars", "fixed", "ran_modes")
+    effect_names <- c("ran_pars", "fixed", "ran_vals")
     if (!is.null(scales)) {
         if (length(scales) != length(effects)) {
             stop("if scales are specified, values (or NA) must be provided ",
@@ -103,7 +102,7 @@ tidy.merMod <- function(x, effects = c("ran_pars","fixed"),
             ret <- data.frame(ret,cifix)
             nn <- c(nn,"conf.low","conf.high")
         }
-        if ("ran_pars" %in% effects || "ran_modes" %in% effects) {
+        if ("ran_pars" %in% effects || "ran_vals" %in% effects) {
             ret <- data.frame(ret,group="fixed")
             nn <- c(nn,"group")
         }
@@ -160,13 +159,12 @@ tidy.merMod <- function(x, effects = c("ran_pars","fixed"),
             ret <- data.frame(ret,ciran)
             nn <- c(nn,"conf.low","conf.high")
         }
-
         
         ## replicate lme4:::tnames, more or less
         ret_list$ran_pars <- fix_data_frame(ret[c("grp", rscale)],
                                             newnames = c("group", "estimate"))
     }
-    if ("ran_modes" %in% effects) {
+    if ("ran_vals" %in% effects) {
         ## fix each group to be a tidy data frame
 
         nn <- c("estimate", "std.error")
@@ -212,9 +210,10 @@ tidy.merMod <- function(x, effects = c("ran_pars","fixed"),
         }
 
         ret <- dplyr::rename(ret,group=.id)
-        ret_list$ran_modes <- ret
+        ret_list$ran_vals <- ret
     }
-    return(rbind.fill(ret_list))
+    ## use ldply to get 'effect' added as a column
+    return(plyr::ldply(ret_list,identity,.id="effect"))
 }
 
 

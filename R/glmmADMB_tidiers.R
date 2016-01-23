@@ -1,6 +1,6 @@
 #' Tidying methods for glmmADMB models
 #' 
-#' These methods tidy the coefficients of glmmADMB models
+#' These methods tidy the coefficients of \code{glmmADMB} models
 #' 
 #' @param x An object of class \code{glmmadmb}
 #' \code{glmer}, or \code{nlmer}
@@ -8,7 +8,7 @@
 #' @return All tidying methods return a \code{data.frame} without rownames.
 #' The structure depends on the method chosen.
 #' 
-#' @name glmmADMB_tidiers
+#' @name glmmadmb_tidiers
 #'
 #' @examples
 #' 
@@ -32,7 +32,6 @@
 #'     
 #' }
 NULL
-
 
 #' @rdname glmmadmb_tidiers
 #' 
@@ -151,9 +150,10 @@ tidy.glmmadmb <- function(x, effects = c("ran_pars","fixed"),
         ## rownames(ret) <- seq(nrow(ret))
 
         if (conf.int) {
-            ciran <- confint(x,parm="theta_",method=conf.method,...)
-            ret <- data.frame(ret,ciran)
-            nn <- c(nn,"conf.low","conf.high")
+            warning("confint not implemented for glmmADMB ran_pars")
+            ## ciran <- confint(x,parm="theta_",method=conf.method,...)
+            ret <- data.frame(ret,conf.low=NA,conf.high=NA)
+            ## nn <- c(nn,"conf.low","conf.high")
         }
         
         ## replicate lme4:::tnames, more or less
@@ -213,7 +213,7 @@ tidy.glmmadmb <- function(x, effects = c("ran_pars","fixed"),
 
 
 
-#' @rdname lme4_tidiers
+#' @rdname glmmadmb_tidiers
 #' 
 #' @param data original data this was fitted on; if not given this will
 #' attempt to be reconstructed
