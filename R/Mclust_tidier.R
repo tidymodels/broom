@@ -58,7 +58,7 @@ tidy.Mclust <- function(x, ...) {
     ret = data.frame(seq_len(np))
     colnames(ret) = c("component")
     if(x$G < np) ret$component = ret$component-1
-    ret$size = as.integer(table(x$classification))
+    ret$size = sapply(seq(1,np), function(c) { sum(x$classification == c)})
     ret$pro = x$parameters$pro
     if(x$modelName %in% c("E","V","EII","VII")) {
         ret$variance = rep_len(x$parameters$variance$sigmasq, length.out = x$G)
