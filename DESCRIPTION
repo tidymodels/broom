@@ -63,6 +63,7 @@ Suggests:
     bbmle,
     gamlss,
     rstan,
+    rstanarm,
     coda,
     gmm
 URL: http://github.com/dgrtwo/broom
