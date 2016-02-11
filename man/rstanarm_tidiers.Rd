@@ -58,6 +58,8 @@ If \code{intervals=TRUE}, columns for the \code{lower} and
 
 \code{glance} returns one row with the columns
   \item{algorithm}{The algorithm used to fit the model.}
+  \item{pss}{The posterior sample size (except for models fit using 
+  optimization).}
   \item{nobs}{The number of observations used to fit the model.}
   \item{sigma}{The square root of the estimated residual variance.}
   \item{looic}{If \code{looic=TRUE}, the LOO Information Criterion.}
