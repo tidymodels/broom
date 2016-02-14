@@ -1,7 +1,7 @@
 #' Tidying methods for MCMC (Stan, JAGS, etc.) fits
 #'
 #' @param x an object of class \sQuote{"stanfit"}
-#' @param pars (character) specification of which parameters to nclude
+#' @param pars (character) specification of which parameters to include
 #' @param estimate.method method for computing point estimate ("mean" or median")
 #' @param conf.int (logical) include confidence interval?
 #' @param conf.level probability level for CI
