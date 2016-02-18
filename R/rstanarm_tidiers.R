@@ -139,7 +139,7 @@ tidy.stanreg <- function(x,
 #' @param looic Should the LOO Information Criterion be included? See 
 #'   \code{\link[rstanarm]{loo.stanreg}} for details. Note: for models fit to
 #'   very large data this can be a slow computation.
-#' @param ... If \code{looic=TRUE}, optional arguments to
+#' @param ... For \code{glance}, if \code{looic=TRUE}, optional arguments to
 #'   \code{\link[rstanarm]{loo.stanreg}}.
 #' 
 #' @return \code{glance} returns one row with the columns
