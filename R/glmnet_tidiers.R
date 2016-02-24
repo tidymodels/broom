@@ -77,7 +77,7 @@ tidy.glmnet <- function(x, ...) {
         }, .id = "class")
         ret <- beta_d %>% tidyr::gather(step, estimate, -term, -class)
     } else {
-        beta_d <- fix_data_frame(as.matrix(beta), newcol = "term")
+        beta_d <- fix_data_frame(as.matrix(beta), newnames=1:ncol(beta), newcol = "term")
         ret <- beta_d %>% tidyr::gather(step, estimate, -term)
     }
     # add values specific to each step
