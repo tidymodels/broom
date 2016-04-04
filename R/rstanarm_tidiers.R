@@ -104,7 +104,6 @@ tidy.stanreg <- function(x,
     
     if (parameters == "varying") {
         nn <- c("estimate", "std.error")
-        s <- x$stan_summary
         s <- summary(x, pars = "varying")
         ret <- cbind(s[, "50%"], rstanarm::se(x)[rownames(s)])
         
