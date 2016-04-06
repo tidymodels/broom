@@ -131,8 +131,13 @@ augment_columns <- function(x, data, newdata, type, type.predict = type,
         
         infl <- influence0(x, do.coef = FALSE)
         if (!is.null(infl)) {
+            if(is_mgcv(x)){
+                ret$.hat <- infl
+                ret$.sigma <- NA
+            }else{
             ret$.hat <- infl$hat
             ret$.sigma <- infl$sigma
+            }
         }
         
         # if cooksd and rstandard can be computed and aren't all NA
