@@ -25,7 +25,7 @@ details.}
 
 \item{prob}{See \code{\link[rstanarm]{posterior_interval}}.}
 
-\item{...}{If \code{looic=TRUE}, optional arguments to
+\item{...}{For \code{glance}, if \code{looic=TRUE}, optional arguments to
 \code{\link[rstanarm]{loo.stanreg}}.}
 
 \item{looic}{Should the LOO Information Criterion be included? See 
