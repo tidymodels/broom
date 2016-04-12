@@ -388,13 +388,7 @@ tidy.survfit <- function(x, ...) {
     if (inherits(x, "survfitms")) {
         # survfitms shows death probabilities rather than survival
         # (don't know why)
-        if (!is.null(x$prev)) {
-            # versions 2.38-3 and before
-            surv <- 1 - x$prev
-        } else {
-            # versions afterwards
-            surv <- 1 - x$pstate
-        }
+        surv <- 1 - x$prev
         upper <- 1 - x$upper
         lower <- 1 - x$lower
         
