@@ -17,11 +17,11 @@ Authors@R: c(
 Maintainer: David Robinson <admiral.david@gmail.com>
 Description: Convert statistical analysis objects from R into tidy data frames,
     so that they can more easily be combined, reshaped and otherwise processed
-    with tools like 'dplyr', 'tidyr' and 'ggplot2'. The package provides three S3
-    generics: tidy, which summarizes a model's statistical findings such as
+    with tools like 'dplyr', 'tidyr' and 'ggplot2'. The package provides three
+    S3 generics: tidy, which summarizes a model's statistical findings such as
     coefficients of a regression; augment, which adds columns to the original
-    data such as predictions, residuals and cluster assignments; and glance,
-    which provides a one-row summary of model-level statistics.
+    data such as predictions, residuals and cluster assignments; and glance, which
+    provides a one-row summary of model-level statistics.
 Imports:
     plyr,
     dplyr,
@@ -69,3 +69,4 @@ URL: http://github.com/dgrtwo/broom
 BugReports: http://github.com/dgrtwo/broom/issues
 VignetteBuilder: knitr
 License: MIT + file LICENSE
+RoxygenNote: 5.0.1
