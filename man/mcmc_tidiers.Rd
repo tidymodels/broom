@@ -8,18 +8,20 @@
 \title{Tidying methods for MCMC (Stan, JAGS, etc.) fits}
 \usage{
 tidyMCMC(x, pars, estimate.method = "mean", conf.int = FALSE,
-  conf.level = 0.95, conf.method = "quantile", droppars = "lp__", ...)
+  conf.level = 0.95, conf.method = "quantile", droppars = "lp__",
+  rhat = FALSE, ess = FALSE, ...)
 
 \method{tidy}{rjags}(x, pars, estimate.method = "mean", conf.int = FALSE,
   conf.level = 0.95, conf.method = "quantile", ...)
 
 \method{tidy}{stanfit}(x, pars, estimate.method = "mean", conf.int = FALSE,
-  conf.level = 0.95, conf.method = "quantile", droppars = "lp__", ...)
+  conf.level = 0.95, conf.method = "quantile", droppars = "lp__",
+  rhat = FALSE, ess = FALSE, ...)
 }
 \arguments{
 \item{x}{an object of class \sQuote{"stanfit"}}
 
-\item{pars}{(character) specification of which parameters to nclude}
+\item{pars}{(character) specification of which parameters to include}
 
 \item{estimate.method}{method for computing point estimate ("mean" or median")}
 
@@ -32,6 +34,8 @@ tidyMCMC(x, pars, estimate.method = "mean", conf.int = FALSE,
 
 \item{droppars}{Parameters not to include in the output (such
 as log-probability information)}
+
+\item{rhat, ess}{(logical) include Rhat and/or effective sample size estimates?}
 
 \item{...}{unused}
 }
@@ -65,7 +69,7 @@ if (requireNamespace("rstan", quietly = TRUE)) {
   load(infile)
   
   tidy(rstan_example)
-  tidy(rstan_example, conf.int = TRUE)
+  tidy(rstan_example, conf.int = TRUE, pars = "theta")
   
   td_mean <- tidy(rstan_example, conf.int = TRUE)
   td_median <- tidy(rstan_example, conf.int = TRUE, estimate.method = "median")

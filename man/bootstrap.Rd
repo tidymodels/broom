@@ -4,12 +4,15 @@
 \alias{bootstrap}
 \title{Set up bootstrap replicates of a dplyr operation}
 \usage{
-bootstrap(df, m)
+bootstrap(df, m, by_group = FALSE)
 }
 \arguments{
 \item{df}{a data frame}
 
 \item{m}{number of bootstrap replicates to perform}
+
+\item{by_group}{If \code{TRUE}, then bootstrap within each group if \code{df} is
+a grouped tbl.}
 }
 \description{
 Set up bootstrap replicates of a dplyr operation
