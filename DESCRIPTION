@@ -12,6 +12,8 @@ Authors@R: c(
     person("Luke", "Johnston", email = "luke.johnston@mail.utoronto.ca", role = "ctb"),
     person("Ben", "Bolker", email = "bolker@mcmaster.ca", role = "ctb"),
     person("Francois", "Briatte", email = "f.briatte@gmail.com", role = "ctb"),
+    person("Jeffrey", "Arnold", email = "jeffrey.arnold@gmail.com", role = "ctb"),
+    person("Jonah", "Gabry", email = "jsg2201@columbia.edu", role = "ctb"),
     person("Hadley", "Wickham", email = "hadley@rstudio.com", role = "ctb")
     )
 Maintainer: David Robinson <admiral.david@gmail.com>
@@ -22,7 +24,7 @@ Description: Convert statistical analysis objects from R into tidy data frames,
     coefficients of a regression; augment, which adds columns to the original
     data such as predictions, residuals and cluster assignments; and glance, which
     provides a one-row summary of model-level statistics.
-Imports:
+Imports: 
     plyr,
     dplyr,
     tidyr,
@@ -30,7 +32,7 @@ Imports:
     stringr,
     reshape2,
     nlme
-Suggests:
+Suggests: 
     knitr,
     boot,
     survival,
@@ -65,7 +67,10 @@ Suggests:
     rstan,
     rstanarm,
     coda,
-    gmm
+    gmm,
+    Matrix,
+    ks,
+    purrr,
 URL: http://github.com/dgrtwo/broom
 BugReports: http://github.com/dgrtwo/broom/issues
 VignetteBuilder: knitr
