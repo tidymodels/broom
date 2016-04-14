@@ -12,7 +12,7 @@
 #' @template boilerplate
 #' 
 #' @return \code{tidy.gam} returns the tidied output of the
-#' parametric ANOVA, with one row for each term in the formula.
+#' parametric ANOVA for gam package  with one row for each term in the formula.
 #' The columns match those in \link{anova_tidiers}.
 #'
 #' @name gam_tidiers
@@ -31,10 +31,36 @@
 #'
 #' @export
 tidy.gam <- function(x, ...) {
-    # return the output of the parametric ANOVA
-    tidy(summary(x)$parametric.anova)
+    
+    if(is_mgcv(x)){
+        tidy_mcgv(x)
+    }else{
+        tidy_gam(x)
+    }
+
 }
 
+is_mgcv <- function(x) {
+    #figure out if gam is from package gam or mcgv
+    mgcv_names <- c("linear.predictors", "converged", "sig2", "edf", "edf1", 
+                    "hat", "boundary", "sp", "nsdf", "Ve", "Vp", "rV", 
+                    "gcv.ubre", "scale.estimated", "var.summary", 
+                    "cmX", "pred.formula", "pterms", "min.edf", "optimizer")
+    all(mgcv_names %in% names(x))
+    
+}
+
+tidy_gam <- function(x) {
+    # return the output of the parametric ANOVA
+    tidy(summary(x)$parametric.anova) 
+}
+
+tidy_mcgv <- function(x) {
+    sx <- summary(x)$s.table
+    sx <- as.data.frame(sx)
+    class(sx) <- c("anova", "data.frame")
+    tidy(sx)
+}
 
 #' @rdname gam_tidiers
 #' 
@@ -50,7 +76,21 @@ tidy.gam <- function(x, ...) {
 #' 
 #' @export
 glance.gam <- function(x, ...) {
+    if(is_mgcv(x)){
+        glance_mcgv(x)
+    }else{
+        glance_gam(x)
+    }
+}
+
+
+glance_gam <- function(x) {
     s <- summary(x)
     ret <- data.frame(df = s$df[1])
+    finish_glance(ret, x) 
+}
+
+glance_mcgv <- function(x) {
+    ret <- data.frame(df = sum(x$edf))
     finish_glance(ret, x)
 }

@@ -172,7 +172,8 @@ tidy.lm <- function(x, conf.int = FALSE, conf.level = .95,
 #'   \item{.std.resid}{Standardised residuals}
 #' 
 #' (Some unusual "lm" objects, such as "rlm" from MASS, may omit
-#' \code{.cooksd} and \code{.std.resid})
+#' \code{.cooksd} and \code{.std.resid}. "gam" from mgcv omits 
+#' \code{.sigma})
 #' 
 #' When \code{newdata} is supplied, \code{augment.lm} returns one row for each
 #' observation, with three columns added to the new data:
