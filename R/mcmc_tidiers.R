@@ -1,7 +1,6 @@
 #' Tidying methods for MCMC (Stan, JAGS, etc.) fits
 #'
-#' @param x an object of class \sQuote{"stanfit"}
-#' @param pars (character) specification of which parameters to nclude
+#' @param pars (character) specification of which parameters to include
 #' @param estimate.method method for computing point estimate ("mean" or "median")
 #' @param conf.int (logical) include confidence interval?
 #' @param conf.level probability level for CI
@@ -9,6 +8,7 @@
 #' ("quantile" or "HPDinterval")
 #' @param drop.pars Parameters not to include in the output (such
 #' as log-probability information)
+#' @param rhat,ess (logical) include Rhat and/or effective sample size estimates?
 #' @param ... unused
 #' 
 #' @name mcmc_tidiers
@@ -35,7 +35,7 @@
 #'     load(infile)
 #'   }
 #'   tidy(rstan_example)
-#'   tidy(rstan_example, conf.int = TRUE)
+#'   tidy(rstan_example, conf.int = TRUE, pars = "theta")
 #'   
 #'   td_mean <- tidy(rstan_example, conf.int = TRUE)
 #'   td_median <- tidy(rstan_example, conf.int = TRUE, estimate.method = "median")
@@ -63,18 +63,28 @@
 #' @importFrom coda HPDinterval as.mcmc
 #' @export
 tidyMCMC <- function(x,
+                     pars,
                      estimate.method = c("mean","median"),
                      conf.int = FALSE,
                      conf.level = 0.95,
                      conf.method = c("quantile","HPDinterval"),
                      drop.pars = c("lp__","deviance"),
+                     rhat = FALSE,
+                     ess = FALSE,
                      ...) {
-
+    
     estimate.method <- match.arg(estimate.method)
     conf.method <- match.arg(conf.method)
     
-    ss <- as.matrix(x)  ## works natively on stanfit, mcmc.list, mcmc objects
-    ss <- ss[, !colnames(ss) %in% drop.pars, drop=FALSE] 
+    stan <- is(x, "stanfit")
+    ss <- if (stan) as.matrix(x, pars = pars) else as.matrix(x)
+    ss <- ss[, !colnames(ss) %in% droppars, drop = FALSE]  ## drop log-probability info
+    if (!missing(pars) && !stan) {
+        if (length(badpars <- which(!pars %in% colnames(ss))) > 0) {
+            stop("unrecognized parameters: ", pars[badpars])
+        }
+        ss <- ss[, pars]
+    }
     
     m <- switch(estimate.method,
                 mean = colMeans(ss),
@@ -91,6 +101,14 @@ tidyMCMC <- function(x,
 
         colnames(ci) <- c("conf.low", "conf.high")
         ret <- data.frame(ret, ci)
+    }
+    
+    if (rhat || ess) {
+        if (!stan) warning("ignoring 'rhat' and 'ess' (only available for stanfit objects)")
+        summ <- rstan::summary(x, pars = pars, probs = NULL)$summary[, c("Rhat", "n_eff"), drop = FALSE]
+        summ <- summ[!dimnames(summ)[[1L]] %in% droppars,, drop = FALSE]
+        if (rhat) ret$rhat <- summ[, "Rhat"]
+        if (ess) ret$ess <- as.integer(round(summ[, "n_eff"]))
     }
     return(fix_data_frame(ret))
 }

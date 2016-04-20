@@ -1,6 +1,9 @@
 broom: let's tidy up a bit
 =====================
 
+[![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/broom)](http://cran.r-project.org/package=broom)
+[![Travis-CI Build Status](https://travis-ci.org/dgrtwo/broom.svg?branch=master)](https://travis-ci.org/dgrtwo/broom)
+
 The broom package takes the messy output of built-in functions in R, such as `lm`, `nls`, or `t.test`, and turns them into tidy data frames.
 
 The concept of "tidy data", [as introduced by Hadley Wickham](http://www.jstatsoft.org/v59/i10), offers a powerful framework for data manipulation and analysis. That paper makes a convincing statement of the problem this package tries to solve (emphasis mine):
@@ -378,6 +381,7 @@ A full list of the `tidy`, `augment` and `glance` methods available for each cla
 |geeglm                   |x      |         |          |
 |glht                     |x      |         |          |
 |glmnet                   |x      |x        |          |
+|gmm                      |x      |x        |          |
 |htest                    |x      |x        |          |
 |kappa                    |x      |         |          |
 |kmeans                   |x      |x        |x         |

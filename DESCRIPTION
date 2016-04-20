@@ -2,7 +2,7 @@ Package: broom
 Type: Package
 Title: Convert Statistical Analysis Objects into Tidy Data Frames
 Version: 0.4.0
-Date: 2015-11-30
+Date: 2016-04-06
 Authors@R: c(
     person("David", "Robinson", email = "admiral.david@gmail.com", role = c("aut", "cre")),
     person("Matthieu", "Gomez", email = "mattg@princeton.edu", role = "ctb"),
@@ -12,6 +12,9 @@ Authors@R: c(
     person("Luke", "Johnston", email = "luke.johnston@mail.utoronto.ca", role = "ctb"),
     person("Ben", "Bolker", email = "bolker@mcmaster.ca", role = "ctb"),
     person("Francois", "Briatte", email = "f.briatte@gmail.com", role = "ctb"),
+    person("Jeffrey", "Arnold", email = "jeffrey.arnold@gmail.com", role = "ctb"),
+    person("Jonah", "Gabry", email = "jsg2201@columbia.edu", role = "ctb"),
+    person("Luciano", "Selzer", email = "luciano.selzer@gmail.com", role = "ctb"),
     person("Hadley", "Wickham", email = "hadley@rstudio.com", role = "ctb")
     )
 Maintainer: David Robinson <admiral.david@gmail.com>
@@ -30,7 +33,7 @@ Imports:
     stringr,
     reshape2,
     nlme
-Suggests:
+Suggests: 
     knitr,
     boot,
     survival,
@@ -64,8 +67,13 @@ Suggests:
     bbmle,
     gamlss,
     rstan,
+    rstanarm,
     coda,
-    gmm
+    gmm,
+    Matrix,
+    ks,
+    purrr,
+    mgcv
 URL: http://github.com/dgrtwo/broom
 BugReports: http://github.com/dgrtwo/broom/issues
 VignetteBuilder: knitr
