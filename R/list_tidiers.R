@@ -9,10 +9,10 @@
 #' @param ... extra arguments, passed to the tidying function
 #' 
 #' @details Those tiders themselves are implemented as functions of the
-#' form tidy_<function> that are not exported.
+#' form tidy_<function> or glance_<function> that are not exported.
 #' 
-#' @seealso \code{\link{optim_tidiers}}, \code{\link{xyz_tidiers}},
-#' \code{\link{svd_tidiers}}
+#' @seealso \link{optim_tidiers}, \link{xyz_tidiers},
+#' \link{svd_tidiers}, \link{orcutt_tidiers}
 #' 
 #' @name list_tidiers
 #' 
@@ -33,6 +33,8 @@ tidy.list <- function(x, ...) {
         tidy_xyz(x, ...)
     } else if (all(sort(names(x)) == c("d", "u", "v"))) {
         tidy_svd(x, ...)
+    } else if ("Cochrane.Orcutt" %in% names(x)) {
+        tidy_orcutt(x, ...)
     } else {
         stop("No tidying method recognized for this list")
     }
@@ -45,6 +47,8 @@ tidy.list <- function(x, ...) {
 glance.list <- function(x, ...) {
     if (all(c("par", "value", "counts", "convergence", "message") %in% names(x))) {
         glance_optim(x, ...)
+    } else if ("Cochrane.Orcutt" %in% names(x)) {
+        glance_orcutt(x, ...)
     } else {
         stop("No glance method recognized for this list")
     }

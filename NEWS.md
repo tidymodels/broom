@@ -5,6 +5,7 @@ broom 0.4.0.9000
 * Fixed `tidy.TukeyHSD` to include `term` column. Also added `separate.levels` argument, with option to separate `comparison` into `level1` and `level2`
 * Fixed `tidy.manova` to use correct column name for test (previously, always `pillai`)
 * Added `kde_tidiers` to tidy kernel density estimates
+* Added `orcutt_tidiers` to tidy `cochrane.orcutt` objects from the orcutt package, which is dispatched from list tidiers
 
 broom 0.4.0
 -----------
