@@ -33,7 +33,7 @@ Imports:
     stringr,
     reshape2,
     nlme
-Suggests: 
+Suggests:
     knitr,
     boot,
     survival,
@@ -73,6 +73,7 @@ Suggests:
     Matrix,
     ks,
     purrr,
+    orcutt,
     mgcv
 URL: http://github.com/dgrtwo/broom
 BugReports: http://github.com/dgrtwo/broom/issues
