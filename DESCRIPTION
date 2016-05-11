@@ -25,7 +25,7 @@ Description: Convert statistical analysis objects from R into tidy data frames,
     coefficients of a regression; augment, which adds columns to the original
     data such as predictions, residuals and cluster assignments; and glance, which
     provides a one-row summary of model-level statistics.
-Imports: 
+Imports:
     plyr,
     dplyr,
     tidyr,
@@ -33,7 +33,7 @@ Imports:
     stringr,
     reshape2,
     nlme
-Suggests: 
+Suggests:
     knitr,
     boot,
     survival,
@@ -72,6 +72,7 @@ Suggests:
     Matrix,
     ks,
     purrr,
+    orcutt,
     mgcv
 URL: http://github.com/dgrtwo/broom
 BugReports: http://github.com/dgrtwo/broom/issues

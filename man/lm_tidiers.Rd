@@ -3,17 +3,23 @@
 \name{lm_tidiers}
 \alias{augment.lm}
 \alias{glance.lm}
+\alias{glance.summary.lm}
 \alias{lm_tidiers}
 \alias{tidy.lm}
+\alias{tidy.summary.lm}
 \title{Tidying methods for a linear model}
 \usage{
 \method{tidy}{lm}(x, conf.int = FALSE, conf.level = 0.95,
   exponentiate = FALSE, quick = FALSE, ...)
 
+\method{tidy}{summary.lm}(x, ...)
+
 \method{augment}{lm}(x, data = stats::model.frame(x), newdata, type.predict,
   type.residuals, ...)
 
 \method{glance}{lm}(x, ...)
+
+\method{glance}{summary.lm}(x, ...)
 }
 \arguments{
 \item{x}{lm object}
