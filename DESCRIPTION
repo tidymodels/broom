@@ -32,7 +32,8 @@ Imports:
     psych,
     stringr,
     reshape2,
-    nlme
+    nlme,
+    methods
 Suggests:
     knitr,
     boot,
