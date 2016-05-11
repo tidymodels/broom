@@ -73,6 +73,58 @@ tidy.density <- function(x, ...) {
 }
 
 
+#' Tidy a distance matrix
+#' 
+#' Tidy a distance matrix, such as that computed by the \link{dist}
+#' function, into a one-row-per-pair table. If the distance matrix
+#' does not include an upper triangle and/or diagonal, this will
+#' not either.
+#' 
+#' @param x A "dist" object
+#' @param diag Whether to include the diagonal of the distance
+#' matrix. Defaults to whether the distance matrix includes it
+#' @param upper Whether to include the upper right triangle of
+#' the distance matrix. Defaults to whether the distance matrix
+#' includes it
+#' @param ... Extra arguments, not used
+#' 
+#' @return A data frame with one row for each pair of
+#' item distances, with columns:
+#' \describe{
+#'   \item{item1}{First item}
+#'   \item{item2}{Second item}
+#'   \item{distance}{Distance between items}
+#' }
+#' 
+#' @examples
+#' 
+#' iris_dist <- dist(t(iris[, 1:4]))
+#' iris_dist
+#' 
+#' tidy(iris_dist)
+#' tidy(iris_dist, upper = TRUE)
+#' tidy(iris_dist, diag = TRUE)
+#' 
+#' @export
+tidy.dist <- function(x, diag = attr(x, "Diag"),
+                      upper = attr(x, "Upper"), ...) {
+    m <- as.matrix(x)
+    
+    ret <- reshape2::melt(m, varnames = c("item1", "item2"),
+                          value.name = "distance")
+    
+    if (!upper) {
+        ret <- ret[!upper.tri(m), ]
+    }
+    
+    if (!diag) {
+        # filter out the diagonal
+        ret <- filter(ret, item1 != item2)
+    }
+    ret
+}
+
+
 #' tidy a spec objet
 #' 
 #' Given a "spec" object, which shows a spectrum across a range of frequencies,

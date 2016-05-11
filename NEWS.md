@@ -6,6 +6,7 @@ broom 0.4.0.9000
 * Fixed `tidy.manova` to use correct column name for test (previously, always `pillai`)
 * Added `kde_tidiers` to tidy kernel density estimates
 * Added `orcutt_tidiers` to tidy the results of `cochrane.orcutt` orcutt package
+* Added `tidy.dist` to tidy the distance matrix output of `dist` from the stats package
 
 broom 0.4.0
 -----------
