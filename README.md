@@ -3,6 +3,7 @@ broom: let's tidy up a bit
 
 [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/broom)](http://cran.r-project.org/package=broom)
 [![Travis-CI Build Status](https://travis-ci.org/dgrtwo/broom.svg?branch=master)](https://travis-ci.org/dgrtwo/broom)
+[![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/dgrtwo/broom?branch=master&svg=true)](https://ci.appveyor.com/project/dgrtwo/broom)
 
 The broom package takes the messy output of built-in functions in R, such as `lm`, `nls`, or `t.test`, and turns them into tidy data frames.
 
@@ -364,6 +365,7 @@ A full list of the `tidy`, `augment` and `glance` methods available for each cla
 |boot                     |x      |         |          |
 |btergm                   |x      |         |          |
 |cch                      |x      |x        |          |
+|character                |x      |         |          |
 |cld                      |x      |         |          |
 |coeftest                 |x      |         |          |
 |confint.glht             |x      |         |          |
@@ -372,6 +374,9 @@ A full list of the `tidy`, `augment` and `glance` methods available for each cla
 |data.frame               |x      |x        |x         |
 |default                  |x      |x        |x         |
 |density                  |x      |         |          |
+|dgCMatrix                |x      |         |          |
+|dgTMatrix                |x      |         |          |
+|dist                     |x      |         |          |
 |ergm                     |x      |x        |          |
 |felm                     |x      |x        |x         |
 |fitdistr                 |x      |x        |          |
@@ -384,12 +389,15 @@ A full list of the `tidy`, `augment` and `glance` methods available for each cla
 |gmm                      |x      |x        |          |
 |htest                    |x      |x        |          |
 |kappa                    |x      |         |          |
+|kde                      |x      |         |          |
 |kmeans                   |x      |x        |x         |
 |Line                     |x      |         |          |
 |Lines                    |x      |         |          |
 |list                     |x      |x        |          |
 |lm                       |x      |x        |x         |
 |lme                      |x      |x        |x         |
+|lmodel2                  |x      |x        |          |
+|logical                  |x      |         |          |
 |manova                   |x      |         |          |
 |map                      |x      |         |          |
 |matrix                   |x      |x        |          |
@@ -399,6 +407,7 @@ A full list of the `tidy`, `augment` and `glance` methods available for each cla
 |nlrq                     |x      |x        |x         |
 |nls                      |x      |x        |x         |
 |NULL                     |x      |x        |x         |
+|numeric                  |x      |         |          |
 |pairwise.htest           |x      |         |          |
 |plm                      |x      |x        |x         |
 |Polygon                  |x      |         |          |
@@ -412,12 +421,15 @@ A full list of the `tidy`, `augment` and `glance` methods available for each cla
 |rowwise_df               |x      |x        |x         |
 |rq                       |x      |x        |x         |
 |rqs                      |x      |x        |x         |
+|sparseMatrix             |x      |         |          |
 |SpatialLinesDataFrame    |x      |         |          |
 |SpatialPolygons          |x      |         |          |
 |SpatialPolygonsDataFrame |x      |         |          |
 |spec                     |x      |         |          |
 |stanfit                  |x      |         |          |
+|stanreg                  |x      |x        |          |
 |summary.glht             |x      |         |          |
+|summary.lm               |x      |x        |          |
 |summaryDefault           |x      |x        |          |
 |survexp                  |x      |x        |          |
 |survfit                  |x      |x        |          |
