@@ -269,3 +269,7 @@ In order to maintain consistency, we attempt to follow some conventions regardin
     * `r.squared` the fraction of variance explained by the model
     * `adj.r.squared` R^2 adjusted based on the degrees of freedom
     * `sigma` the square root of the estimated variance of the residuals
+
+### Code of Conduct
+
+Please note that this project is released with a [Contributor Code of Conduct](CONDUCT.md). By participating in this project you agree to abide by its terms.
