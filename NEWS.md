@@ -7,6 +7,7 @@ broom 0.4.0.9000
 * Added `kde_tidiers` to tidy kernel density estimates
 * Added `orcutt_tidiers` to tidy the results of `cochrane.orcutt` orcutt package
 * Added `tidy.dist` to tidy the distance matrix output of `dist` from the stats package
+* Added `tidy` and `glance` for `lmodel2` objects from the lmodel2 package
 
 broom 0.4.0
 -----------

@@ -74,7 +74,8 @@ Suggests:
     ks,
     purrr,
     orcutt,
-    mgcv
+    mgcv,
+    lmodel2
 URL: http://github.com/dgrtwo/broom
 BugReports: http://github.com/dgrtwo/broom/issues
 VignetteBuilder: knitr
