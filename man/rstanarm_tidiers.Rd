@@ -70,10 +70,12 @@ These methods tidy the estimates from \code{\link[rstanarm]{stanreg-objects}}
 }
 \examples{
 if (require(rstanarm)) {
- tidy(example_model, intervals = TRUE, prob = 0.5)
- tidy(example_model, parameters = "hierarchical")
- tidy(example_model, parameters = "varying")
- glance(example_model, looic = TRUE, cores = 1)
+ fit <- stan_glmer(mpg ~ wt + (1|cyl) + (1+wt|gear), data = mtcars, 
+                   iter = 500, chains = 2)
+ tidy(fit, intervals = TRUE, prob = 0.5)
+ tidy(fit, parameters = "hierarchical")
+ tidy(fit, parameters = "varying")
+ glance(fit, looic = TRUE, cores = 1)
 }
  
 }
