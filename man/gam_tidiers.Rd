@@ -20,7 +20,7 @@ All tidying methods return a data.frame without rownames, whose
 structure depends on the method chosen.
 
 \code{tidy.gam} returns the tidied output of the
-parametric ANOVA, with one row for each term in the formula.
+parametric ANOVA for gam package  with one row for each term in the formula.
 The columns match those in \link{anova_tidiers}.
 
 \code{glance.gam} returns a one-row data.frame with the columns

@@ -23,10 +23,10 @@ S3 dispatch.
 }
 \details{
 Those tiders themselves are implemented as functions of the
-form tidy_<function> that are not exported.
+form tidy_<function> or glance_<function> that are not exported.
 }
 \seealso{
-\code{\link{optim_tidiers}}, \code{\link{xyz_tidiers}},
-\code{\link{svd_tidiers}}
+\link{optim_tidiers}, \link{xyz_tidiers},
+\link{svd_tidiers}, \link{orcutt_tidiers}
 }
 

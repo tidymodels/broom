@@ -135,8 +135,18 @@ tidy.lm <- function(x, conf.int = FALSE, conf.level = .95,
         ret <- data.frame(term = names(co), estimate = unname(co))
         return(process_lm(ret, x, conf.int = FALSE, exponentiate = exponentiate))
     }
-    co <- stats::coef(summary(x))
+    s <- summary(x)
+    ret <- tidy.summary.lm(s)
     
+    process_lm(ret, x, conf.int = conf.int, conf.level = conf.level,
+         exponentiate = exponentiate)
+}
+
+
+#' @rdname lm_tidiers
+#' @export
+tidy.summary.lm <- function(x, ...) {
+    co <- stats::coef(x)
     nn <- c("estimate", "std.error", "statistic", "p.value")
     if (inherits(co, "listof")) {
         # multiple response variables
@@ -146,9 +156,8 @@ tidy.lm <- function(x, conf.int = FALSE, conf.level = .95,
     } else {
         ret <- fix_data_frame(co, nn[1:ncol(co)])
     }
-
-    process_lm(ret, x, conf.int = conf.int, conf.level = conf.level,
-               exponentiate = exponentiate)
+    
+    ret
 }
 
 
@@ -172,7 +181,8 @@ tidy.lm <- function(x, conf.int = FALSE, conf.level = .95,
 #'   \item{.std.resid}{Standardised residuals}
 #' 
 #' (Some unusual "lm" objects, such as "rlm" from MASS, may omit
-#' \code{.cooksd} and \code{.std.resid})
+#' \code{.cooksd} and \code{.std.resid}. "gam" from mgcv omits 
+#' \code{.sigma})
 #' 
 #' When \code{newdata} is supplied, \code{augment.lm} returns one row for each
 #' observation, with three columns added to the new data:
@@ -211,18 +221,26 @@ glance.lm <- function(x, ...) {
     # use summary.lm explicity, so that c("aov", "lm") objects can be
     # summarized and glanced at
     s <- stats::summary.lm(x)
-    ret <- with(s, data.frame(r.squared=r.squared,
+    ret <- glance.summary.lm(s, ...)
+    ret <- finish_glance(ret, x)
+    ret
+}
+
+
+#' @rdname lm_tidiers
+#' @export
+glance.summary.lm <- function(x, ...) {
+    ret <- with(x, data.frame(r.squared=r.squared,
                               adj.r.squared=adj.r.squared,
                               sigma=sigma,
                               statistic=fstatistic[1],
                               p.value=pf(fstatistic[1], fstatistic[2],
                                          fstatistic[3],
-                              lower.tail=FALSE),
-                              df=s$df[1]))
-    ret <- finish_glance(unrowname(ret), x)
-    ret
+                                         lower.tail=FALSE),
+                              df=df[1]))
+    
+    unrowname(ret)
 }
-
 
 #' @export
 augment.mlm <- function(x, ...) {

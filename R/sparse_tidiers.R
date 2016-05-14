@@ -31,12 +31,12 @@ tidy.dgTMatrix <- function(x, ...) {
 #' @rdname sparse_tidiers
 #' @export
 tidy.dgCMatrix <- function(x, ...) {
-    tidy(as(x, "dgTMatrix"))
+    tidy(methods::as(x, "dgTMatrix"))
 }
 
 
 #' @rdname sparse_tidiers
 #' @export
 tidy.sparseMatrix <- function(x, ...) {
-    tidy(as(x, "dgTMatrix"))
+    tidy(methods::as(x, "dgTMatrix"))
 }

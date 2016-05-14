@@ -68,7 +68,7 @@ tidyMCMC <- function(x,
                      rhat = FALSE,
                      ess = FALSE,
                      ...) {
-    stan <- is(x, "stanfit")
+    stan <- inherits(x, "stanfit")
     ss <- if (stan) as.matrix(x, pars = pars) else as.matrix(x)
     ss <- ss[, !colnames(ss) %in% droppars, drop = FALSE]  ## drop log-probability info
     if (!missing(pars) && !stan) {

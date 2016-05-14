@@ -165,7 +165,7 @@ glance.stanreg <- function(x, looic = FALSE, ...) {
         ret <- data.frame(ret, pss = pss)
     }
     
-    ret <- data.frame(ret, nobs = nobs(x), sigma = sigma(x))
+    ret <- data.frame(ret, nobs = stats::nobs(x), sigma = sigma(x))
     if (looic) {
         if (x$algorithm == "sampling") {
             looic <- rstanarm::loo(x, ...)$looic
