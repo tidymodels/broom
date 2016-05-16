@@ -75,7 +75,8 @@ Suggests:
     purrr,
     orcutt,
     mgcv,
-    lmodel2
+    lmodel2,
+    poLCA
 URL: http://github.com/dgrtwo/broom
 BugReports: http://github.com/dgrtwo/broom/issues
 VignetteBuilder: knitr
