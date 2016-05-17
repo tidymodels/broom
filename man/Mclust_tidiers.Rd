@@ -21,35 +21,38 @@
 \item{data}{Original data (required for \code{augment})}
 }
 \value{
-All tidying methods return a \code{data.frame} without rownames.
-The structure depends on the method chosen.
+All tidying methods return a data.frame without rownames, whose
+structure depends on the method chosen.
 
 \code{tidy} returns one row per component, with 
-  \item{component}{A factor describing the cluster from 1:k or 0:k in presence of a noise term in x}
+  \item{component}{A factor describing the cluster from 1:k
+  (or 0:k in presence of a noise term in x)}
   \item{size}{The size of each component}
-  \item{pro}{The mixing proportion of each component}
-  \item{variance}{In case of one-dimensional and spherical models, the variance for each component, omitted otherwise. NA for noise component}
-  \item{mean}{The mean for each component. In case of two- or more dimensional models, a column with the mean is added for each dimension. NA for noise component}
+  \item{proportion}{The mixing proportion of each component}
+  \item{variance}{In case of one-dimensional and spherical models,
+  the variance for each component, omitted otherwise. NA for noise component}
+  \item{mean}{The mean for each component. In case of two- or more dimensional models,
+  a column with the mean is added for each dimension. NA for noise component}
 
-\code{augment} returns the original data with two extra columns
+\code{augment} returns the original data with two extra columns:
   \item{.class}{The class assigned by the Mclust algorithm}
   \item{.uncertainty}{The uncertainty associated with the classification}
-  followed by one column for each class k giving the probability that observation i in the data belongs to the kth class.
 
 \code{glance} returns a one-row data.frame with the columns
-  \item{modelName}{A character string denoting the model at which the optimal BIC occurs}
+  \item{model}{A character string denoting the model at which the optimal BIC occurs}
   \item{n}{The number of observations in the data}
-  \item{d}{The dimension of the data}
   \item{G}{The optimal number of mixture components}
-  \item{bic}{The optimal BIC value}
-  \item{loglik}{The log-likelihood corresponding to the optimal BIC}
+  \item{BIC}{The optimal BIC value}
+  \item{logLik}{The log-likelihood corresponding to the optimal BIC}
   \item{df}{The number of estimated parameters}
-  \item{hypvol}{The hypervolume parameter for the noise component if required, otherwise set to NULL (see \code{\link{hypvol}}).}
+  \item{hypvol}{The hypervolume parameter for the noise component if required,
+  otherwise set to NA (see \code{\link{hypvol}}).}
 }
 \description{
 These methods summarize the results of Mclust clustering into three
-tidy forms. \code{tidy} describes the size, mixing probability, mean and variabilty of each class,
-\code{augment} adds the class assignments and their probabilities to the original data, and
+tidy forms. \code{tidy} describes the size, mixing probability, mean
+and variabilty of each class, \code{augment} adds the class assignments and
+their probabilities to the original data, and
 \code{glance} summarizes the model parameters of the clustering.
 }
 \examples{

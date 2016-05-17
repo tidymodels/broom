@@ -12,6 +12,7 @@ broom 0.4.0.9000
 * Added tidiers for `poLCA` objects from the poLCA package
 * Added tidiers for sparse matrices from the Matrix package
 * Added tidiers for prcomp objects
+* Added tidiers for `Mclust` objects from the Mclust package
 
 broom 0.4.0
 -----------

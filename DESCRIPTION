@@ -16,6 +16,7 @@ Authors@R: c(
     person("Jonah", "Gabry", email = "jsg2201@columbia.edu", role = "ctb"),
     person("Luciano", "Selzer", email = "luciano.selzer@gmail.com", role = "ctb"),
     person("Gavin", "Simpson", email = "ucfagls@gmail.com", role = "ctb"),
+    person("Jens", "Preussner", email = " jens.preussner@mpi-bn.mpg.de", role = "ctb"),
     person("Hadley", "Wickham", email = "hadley@rstudio.com", role = "ctb")
     )
 Maintainer: David Robinson <admiral.david@gmail.com>
@@ -77,7 +78,8 @@ Suggests:
     orcutt,
     mgcv,
     lmodel2,
-    poLCA
+    poLCA,
+    mclust
 URL: http://github.com/dgrtwo/broom
 BugReports: http://github.com/dgrtwo/broom/issues
 VignetteBuilder: knitr
