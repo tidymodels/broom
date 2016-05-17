@@ -75,7 +75,7 @@
 #'   geom_text(aes(label = .rownames), vjust = 1, hjust = 1)
 #' 
 #' @export
-tidy.prcomp <- function(x, matrix = "u", components, ...) {
+tidy.prcomp <- function(x, matrix = "u", ...) {
     if (length(matrix) > 1) {
         stop("Tidying multiple matrices not supported")
     }
@@ -83,24 +83,23 @@ tidy.prcomp <- function(x, matrix = "u", components, ...) {
     MATRIX <- c("rotation", "x", "variables", "samples", "v", "u", "pcs", "d")
     matrix <- match.arg(matrix, MATRIX)
     
+    ncomp <- NCOL(x$rotation)
     if (matrix %in% c("pcs", "d")) {
         nn <- c("std.dev", "percent", "cumulative")
         ret <- fix_data_frame(t(summary(x)$importance), newnames = nn,
                               newcol = "PC")
     } else if (matrix %in% c("rotation", "variables", "v")) {
         labels <- rownames(x$rotation)
-        variables <- tidyr::gather(as.data.frame(x$rotation[, components,
-                                                            drop = FALSE]))
+        variables <- tidyr::gather(as.data.frame(x$rotation))
         ret <- data.frame(label = rep(labels, times = ncomp),
                                 variables,
                                 stringsAsFactors = FALSE)
         names(ret) <- c("column", "PC", "value")
     } else if (matrix %in% c("x", "samples", "u")) {
         labels <- rownames(x$x)
-        samples <- tidyr::gather(as.data.frame(x$x[, components,
-                                                   drop = FALSE]))
-        retracemem() <- data.frame(label = rep(labels, times = ncomp),
-                              samples)
+        samples <- tidyr::gather(as.data.frame(x$x))
+        ret <- data.frame(label = rep(labels, times = ncomp),
+                          samples)
         names(ret) <- c("row", "PC", "value")
     }
 

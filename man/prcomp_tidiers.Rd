@@ -6,7 +6,7 @@
 \alias{tidy.prcomp}
 \title{Tidying methods for principal components analysis via \code{\link{prcomp}}}
 \usage{
-\method{tidy}{prcomp}(x, matrix = "u", components, ...)
+\method{tidy}{prcomp}(x, matrix = "u", ...)
 
 \method{augment}{prcomp}(x, data = NULL, newdata, ...)
 }
