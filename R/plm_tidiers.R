@@ -52,6 +52,9 @@ tidy.plm <- function(x, conf.int = FALSE, conf.level = .95,
 #' 
 #' @export
 augment.plm <- function(x, data = as.data.frame(stats::model.frame(x)), ...) {
+  # Random effects and fixed effect (within model) have individual intercepts,
+  # thus we cannot take the ususal procedure for augment().
+  # Also, there is currently no predict() method for plm objects.
     augment_columns(x, data, ...)
 }
 
