@@ -11,6 +11,7 @@ broom 0.4.0.9000
 * Added `tidy` and `glance` for `lmodel2` objects from the lmodel2 package
 * Added tidiers for `poLCA` objects from the poLCA package
 * Added tidiers for sparse matrices from the Matrix package
+* Added tidiers for prcomp objects
 
 broom 0.4.0
 -----------

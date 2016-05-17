@@ -15,6 +15,7 @@ Authors@R: c(
     person("Jeffrey", "Arnold", email = "jeffrey.arnold@gmail.com", role = "ctb"),
     person("Jonah", "Gabry", email = "jsg2201@columbia.edu", role = "ctb"),
     person("Luciano", "Selzer", email = "luciano.selzer@gmail.com", role = "ctb"),
+    person("Gavin", "Simpson", email = "ucfagls@gmail.com", role = "ctb"),
     person("Hadley", "Wickham", email = "hadley@rstudio.com", role = "ctb")
     )
 Maintainer: David Robinson <admiral.david@gmail.com>
