@@ -48,11 +48,19 @@ returns
 If \code{matrix} is "v", "variables", or "rotation", the \code{tidy} method
 returns
 \describe{
-   \item{\code{row}}{The sample labels (rownames) of the data set on
+   \item{\code{row}}{The variable labels (colnames) of the data set on
   which PCA was performed}
   \item{\code{PC}}{An integer vector indicating the principal component}
   \item{\code{value}}{The value of the eigenvector (axis score) on the
   indicated principal component}
+}
+
+If \code{matrix} is "d" or "pcs", the \code{tidy} method returns
+\describe{
+  \item{\code{PC}}{An integer vector indicating the principal component}
+  \item{\code{std.dev}}{Standard deviation explained by this PC}
+  \item{\code{percent}}{Percentage of variation explained}
+  \item{\code{cumulative}}{Cumulative percentage of variation explained}
 }
 
 The \code{augment.prcomp} method returns a data frame containing
