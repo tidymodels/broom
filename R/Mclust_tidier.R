@@ -84,7 +84,7 @@ tidy.Mclust <- function(x, ...) {
 #' @export
 augment.Mclust <- function(x, data, ...) {
     # move rownames if necessary
-    #data <- fix_data_frame(data, newcol = ".rownames")
+    data <- fix_data_frame(data, newcol = ".rownames")
     
     # show cluster assignment as a factor (it's not numeric)
     cbind(as.data.frame(data), .class = factor(x$classification),
