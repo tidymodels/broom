@@ -12,7 +12,7 @@
 #'
 #' @template boilerplate
 #'
-#' @seealso \code{\link{Mclust}}
+#' @seealso \code{\link[mclust]{Mclust}}
 #'
 #' @examples
 #' 
@@ -33,17 +33,13 @@
 #' tidy(m)
 #' head(augment(m, points))
 #' glance(m)
-#' 
-#' ggplot(augment(mod, iris[,1:4]), aes(Sepal.Length, Sepal.Width)) +
-#'     geom_point(aes(color = .class)) +
-#'     geom_text(aes(x = mean.x1, y = mean.x2, label = component), data = tidy(m), size = 10)
 #'
-#' @name Mclust_tidiers
+#' @name mclust_tidiers
 #' 
 NULL
 
 
-#' @rdname Mclust_tidiers
+#' @rdname mclust_tidiers
 #' 
 #' @return \code{tidy} returns one row per component, with 
 #'   \item{component}{A factor describing the cluster from 1:k
@@ -75,7 +71,7 @@ tidy.Mclust <- function(x, ...) {
 }
 
 
-#' @rdname Mclust_tidiers
+#' @rdname mclust_tidiers
 #' 
 #' @return \code{augment} returns the original data with two extra columns:
 #'   \item{.class}{The class assigned by the Mclust algorithm}
@@ -92,7 +88,7 @@ augment.Mclust <- function(x, data, ...) {
 }
 
 
-#' @rdname Mclust_tidiers
+#' @rdname mclust_tidiers
 #' 
 #' @return \code{glance} returns a one-row data.frame with the columns
 #'   \item{model}{A character string denoting the model at which the optimal BIC occurs}
@@ -102,7 +98,7 @@ augment.Mclust <- function(x, data, ...) {
 #'   \item{logLik}{The log-likelihood corresponding to the optimal BIC}
 #'   \item{df}{The number of estimated parameters}
 #'   \item{hypvol}{The hypervolume parameter for the noise component if required,
-#'   otherwise set to NA (see \code{\link{hypvol}}).}
+#'   otherwise set to NA}
 #' 
 #' @export
 glance.Mclust <- function(x, ...) {
