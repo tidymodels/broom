@@ -6,3 +6,5 @@
 ^cran-comments\.md$
 ^README.Rmd
 ^\.travis\.yml$
+^appveyor\.yml$
+^CONDUCT\.md$

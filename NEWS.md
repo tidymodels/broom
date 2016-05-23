@@ -1,11 +1,18 @@
 broom 0.4.0.9000
 -----------
 
+* Added AppVeyor and code of conduct
 * Changed name of "NA's" column in summaryDefault output to "na"
 * Fixed `tidy.TukeyHSD` to include `term` column. Also added `separate.levels` argument, with option to separate `comparison` into `level1` and `level2`
 * Fixed `tidy.manova` to use correct column name for test (previously, always `pillai`)
 * Added `kde_tidiers` to tidy kernel density estimates
 * Added `orcutt_tidiers` to tidy the results of `cochrane.orcutt` orcutt package
+* Added `tidy.dist` to tidy the distance matrix output of `dist` from the stats package
+* Added `tidy` and `glance` for `lmodel2` objects from the lmodel2 package
+* Added tidiers for `poLCA` objects from the poLCA package
+* Added tidiers for sparse matrices from the Matrix package
+* Added tidiers for prcomp objects
+* Added tidiers for `Mclust` objects from the Mclust package
 
 broom 0.4.0
 -----------

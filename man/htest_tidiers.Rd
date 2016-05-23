@@ -29,6 +29,8 @@ a one-row data frame with one or more of the following columns:
   two-sample t-test}
   \item{estimate2}{Sometimes two estimates are computed, such as in a
   two-sample t-test}
+  \item{method}{Method used to compute the statistic as a string}
+  \item{alternative}{Alternative hypothesis as a string}
   
 Which columns are included depends on the hypothesis test used.
 }

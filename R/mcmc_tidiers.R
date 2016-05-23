@@ -76,7 +76,8 @@ tidyMCMC <- function(x,
     estimate.method <- match.arg(estimate.method)
     conf.method <- match.arg(conf.method)
     
-    stan <- is(x, "stanfit")
+
+    stan <- inherits(x, "stanfit")
     ss <- if (stan) as.matrix(x, pars = pars) else as.matrix(x)
     ss <- ss[, !colnames(ss) %in% droppars, drop = FALSE]  ## drop log-probability info
     if (!missing(pars) && !stan) {

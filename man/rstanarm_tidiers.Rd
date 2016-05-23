@@ -20,7 +20,7 @@
 details.}
 
 \item{intervals}{If \code{TRUE} columns for the lower and upper bounds of the
-\code{100*prob}% posterior uncertainty intervals are included. See 
+\code{100*prob}\% posterior uncertainty intervals are included. See 
 \code{\link[rstanarm]{posterior_interval}} for details.}
 
 \item{prob}{See \code{\link[rstanarm]{posterior_interval}}.}
@@ -40,8 +40,8 @@ When \code{parameters="non-varying"} (the default), \code{tidy.stanreg} returns
 one row for each coefficient, with three columns:
 \item{term}{The name of the corresponding term in the model.}
 \item{estimate}{A point estimate of the coefficient (posterior median).}
-\item{std.error}{A standard error for the point estimate based on \code{mad}.
-See the \emph{Uncertainty estimates} section in 
+\item{std.error}{A standard error for the point estimate based on
+\code{\link[stats]{mad}}. See the \emph{Uncertainty estimates} section in 
 \code{\link[rstanarm]{print.stanreg}} for more details.}
 
 For models with group-specific parameters (e.g., models fit with 
@@ -70,10 +70,12 @@ These methods tidy the estimates from \code{\link[rstanarm]{stanreg-objects}}
 }
 \examples{
 if (require(rstanarm)) {
- tidy(example_model, intervals = TRUE, prob = 0.5)
- tidy(example_model, parameters = "hierarchical")
- tidy(example_model, parameters = "varying")
- glance(example_model, looic = TRUE, cores = 1)
+ fit <- stan_glmer(mpg ~ wt + (1|cyl) + (1+wt|gear), data = mtcars, 
+                   iter = 500, chains = 2)
+ tidy(fit, intervals = TRUE, prob = 0.5)
+ tidy(fit, parameters = "hierarchical")
+ tidy(fit, parameters = "varying")
+ glance(fit, looic = TRUE, cores = 1)
 }
  
 }

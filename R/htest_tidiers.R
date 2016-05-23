@@ -23,6 +23,8 @@
 #'   two-sample t-test}
 #'   \item{estimate2}{Sometimes two estimates are computed, such as in a
 #'   two-sample t-test}
+#'   \item{method}{Method used to compute the statistic as a string}
+#'   \item{alternative}{Alternative hypothesis as a string}
 #'   
 #' Which columns are included depends on the hypothesis test used.
 #' 
@@ -77,6 +79,12 @@ tidy.htest <- function(x, ...) {
     ret <- compact(ret)
     if (!is.null(x$conf.int)) {
         ret <- c(ret, conf.low=x$conf.int[1], conf.high=x$conf.int[2])
+    }
+    if (!is.null(x$method)) {
+      ret <- c(ret, method = as.character(x$method))
+    }
+    if (!is.null(x$alternative)) {
+      ret <- c(ret, alternative = as.character(x$alternative))
     }
     unrowname(as.data.frame(ret))
 }

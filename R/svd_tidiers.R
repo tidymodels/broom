@@ -67,10 +67,8 @@ tidy_svd <- function(x, matrix = "u", ...) {
     if (matrix == "u") {
         # change into a format with three columns:
         # row, column, loading
-        ret <- as.data.frame(x$u) %>%
-            mutate(row = seq_len(nrow(x$u))) %>%
-            tidyr::gather(PC, loading, -row) %>%
-            mutate(PC = as.numeric(PC))
+        ret <- x$u %>%
+            reshape2::melt(varnames = c("row", "PC"), value.name = "loading")
         ret
     } else if (matrix == "d") {
         # return as a data.frame
@@ -78,10 +76,9 @@ tidy_svd <- function(x, matrix = "u", ...) {
                    d = x$d,
                    percent = x$d ^ 2 / sum(x$d ^ 2))
     } else if (matrix == "v") {
-        ret <- as.data.frame(x$v) %>%
-            mutate(column = seq_len(nrow(x$v))) %>%
-            tidyr::gather(PC, value, -column) %>%
-            mutate(PC = as.numeric(PC))
+        ret <- x$v %>%
+            reshape2::melt(varnames = c("column", "PC"),
+                           value.name = "loading")
         ret
     }
 }

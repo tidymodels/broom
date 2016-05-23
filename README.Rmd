@@ -3,6 +3,7 @@ broom: let's tidy up a bit
 
 [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/broom)](http://cran.r-project.org/package=broom)
 [![Travis-CI Build Status](https://travis-ci.org/dgrtwo/broom.svg?branch=master)](https://travis-ci.org/dgrtwo/broom)
+[![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/dgrtwo/broom?branch=master&svg=true)](https://ci.appveyor.com/project/dgrtwo/broom)
 
 The broom package takes the messy output of built-in functions in R, such as `lm`, `nls`, or `t.test`, and turns them into tidy data frames.
 
@@ -268,3 +269,7 @@ In order to maintain consistency, we attempt to follow some conventions regardin
     * `r.squared` the fraction of variance explained by the model
     * `adj.r.squared` R^2 adjusted based on the degrees of freedom
     * `sigma` the square root of the estimated variance of the residuals
+
+### Code of Conduct
+
+Please note that this project is released with a [Contributor Code of Conduct](CONDUCT.md). By participating in this project you agree to abide by its terms.

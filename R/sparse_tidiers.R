@@ -23,7 +23,8 @@ tidy.dgTMatrix <- function(x, ...) {
         col <- colnames(x)[col]
     }
     
-    ret <- data.frame(row = row, column = col, value = s$x)
+    ret <- data.frame(row = row, column = col, value = s$x,
+                      stringsAsFactors = FALSE)
     ret
 }
 
@@ -31,12 +32,12 @@ tidy.dgTMatrix <- function(x, ...) {
 #' @rdname sparse_tidiers
 #' @export
 tidy.dgCMatrix <- function(x, ...) {
-    tidy(as(x, "dgTMatrix"))
+    tidy(methods::as(x, "dgTMatrix"))
 }
 
 
 #' @rdname sparse_tidiers
 #' @export
 tidy.sparseMatrix <- function(x, ...) {
-    tidy(as(x, "dgTMatrix"))
+    tidy(methods::as(x, "dgTMatrix"))
 }
