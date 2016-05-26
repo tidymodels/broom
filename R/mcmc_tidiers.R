@@ -79,7 +79,7 @@ tidyMCMC <- function(x,
 
     stan <- inherits(x, "stanfit")
     ss <- if (stan) as.matrix(x, pars = pars) else as.matrix(x)
-    ss <- ss[, !colnames(ss) %in% droppars, drop = FALSE]  ## drop log-probability info
+    ss <- ss[, !colnames(ss) %in% drop.pars, drop = FALSE]  ## drop log-probability info
     if (!missing(pars) && !stan) {
         if (length(badpars <- which(!pars %in% colnames(ss))) > 0) {
             stop("unrecognized parameters: ", pars[badpars])
@@ -107,7 +107,7 @@ tidyMCMC <- function(x,
     if (rhat || ess) {
         if (!stan) warning("ignoring 'rhat' and 'ess' (only available for stanfit objects)")
         summ <- rstan::summary(x, pars = pars, probs = NULL)$summary[, c("Rhat", "n_eff"), drop = FALSE]
-        summ <- summ[!dimnames(summ)[[1L]] %in% droppars,, drop = FALSE]
+        summ <- summ[!dimnames(summ)[[1L]] %in% drop.pars,, drop = FALSE]
         if (rhat) ret$rhat <- summ[, "Rhat"]
         if (ess) ret$ess <- as.integer(round(summ[, "n_eff"]))
     }
@@ -126,7 +126,7 @@ tidy.rjags <- function(x,
                        ...) {
     tidyMCMC(as.mcmc(x$BUGS),
              estimate.method, conf.int, conf.level,
-             conf.method, droppars = "deviance")
+             conf.method, drop.pars = "deviance")
 }
 
 ##' @rdname mcmc_tidiers

@@ -80,11 +80,8 @@ S3method(tidy,"NULL")
 S3method(tidy,Arima)
 S3method(tidy,Line)
 S3method(tidy,Lines)
-<<<<<<< HEAD
 S3method(tidy,MCMCglmm)
-=======
 S3method(tidy,Mclust)
->>>>>>> 3b9a04bb62dc54d5dc9579636782111dd814b1f0
 S3method(tidy,Polygon)
 S3method(tidy,Polygons)
 S3method(tidy,SpatialLinesDataFrame)

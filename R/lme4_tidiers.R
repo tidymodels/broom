@@ -20,7 +20,7 @@
 #'     tidy(lmm1, effects = "fixed")
 #'     tidy(lmm1, effects = "fixed", conf.int=TRUE)
 #'     tidy(lmm1, effects = "fixed", conf.int=TRUE, conf.method="profile")
-#'     tidy(lmm1, effects = "ran_vals", conf.int=TRUE)
+#'     tidy(lmm1, effects = "ran_modes", conf.int=TRUE)
 #'     head(augment(lmm1, sleepstudy))
 #'     glance(lmm1)
 #'     
@@ -44,7 +44,7 @@ NULL
 
 #' @rdname lme4_tidiers
 #' 
-#' @param effects A character vector including one or more of "fixed" (fixed-effect parameters), "ran_pars" (variances and covariances or standard deviations and correlations of random effect terms) or "ran_vals" (conditional modes/BLUPs/latent variable estimates)
+#' @param effects A character vector including one or more of "fixed" (fixed-effect parameters); "ran_pars" (variances and covariances or standard deviations and correlations of random effect terms); "ran_modes" (conditional modes/BLUPs/latent variable estimates); or "coefs" (predicted parameter values for each group, as returned by \code{\link{coef.merMod}})
 #' @param conf.int whether to include a confidence interval
 #' @param conf.level confidence level for CI
 #' @param conf.method method for computing confidence intervals (see \code{lme4::confint.merMod})
@@ -61,7 +61,8 @@ NULL
 #'   \item{std.error}{standard error}
 #'   \item{statistic}{t- or Z-statistic (\code{NA} for modes)}
 #'   \item{p.value}{P-value computed from t-statistic (may be missing/NA)}
-#' 
+#'
+#' @details 
 #' @importFrom plyr ldply rbind.fill
 #' @import dplyr
 #' @importFrom tidyr gather spread
@@ -77,7 +78,7 @@ tidy.merMod <- function(x, effects = c("ran_pars","fixed"),
                         conf.level = 0.95,
                         conf.method = "Wald",
                         ...) {
-    effect_names <- c("ran_pars", "fixed", "ran_vals")
+    effect_names <- c("ran_pars", "fixed", "ran_modes", "coefs")
     if (!is.null(scales)) {
         if (length(scales) != length(effects)) {
             stop("if scales are specified, values (or NA) must be provided ",
@@ -102,7 +103,7 @@ tidy.merMod <- function(x, effects = c("ran_pars","fixed"),
             ret <- data.frame(ret,cifix)
             nn <- c(nn,"conf.low","conf.high")
         }
-        if ("ran_pars" %in% effects || "ran_vals" %in% effects) {
+        if ("ran_pars" %in% effects || "ran_modes" %in% effects) {
             ret <- data.frame(ret,group="fixed")
             nn <- c(nn,"group")
         }
@@ -164,7 +165,7 @@ tidy.merMod <- function(x, effects = c("ran_pars","fixed"),
         ret_list$ran_pars <- fix_data_frame(ret[c("grp", rscale)],
                                             newnames = c("group", "estimate"))
     }
-    if ("ran_vals" %in% effects) {
+    if ("ran_modes" %in% effects) {
         ## fix each group to be a tidy data frame
 
         nn <- c("estimate", "std.error")
@@ -210,8 +211,25 @@ tidy.merMod <- function(x, effects = c("ran_pars","fixed"),
         }
 
         ret <- dplyr::rename(ret,group=.id)
-        ret_list$ran_vals <- ret
+        ret_list$ran_modes <- ret
     }
+    ## copied from nlme_tidiers.R ... refactor/DRY!
+    if ("coefs" %in% effects) {
+        fix <- function(g) {
+            newg <- fix_data_frame(g, newnames = colnames(g), newcol = "level")
+            ## fix_data_frame doesn't create a new column if rownames are numeric,
+            ## which doesn't suit our purposes
+            newg$level <- rownames(g)
+            cbind(.id = attr(g,"grpNames"),newg )
+        }
+
+        ## combine them and gather terms
+        ret <-  fix(stats::coef(x))    %>%
+            tidyr::gather(term, estimate, -.id, -level)
+        colnames(ret)[1] <- "group"
+        ret_list$coef <- ret
+    }
+
     ## use ldply to get 'effect' added as a column
     return(plyr::ldply(ret_list,identity,.id="effect"))
 }
