@@ -1,5 +1,4 @@
 context("bootstrapping")
-library("dplyr")
 
 test_that("bootstrap works with by_group and grouped tbl", {
     df <- data_frame(x = c(rep("a", 3), rep("b", 5)),

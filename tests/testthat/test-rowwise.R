@@ -3,8 +3,6 @@
 
 context("rowwise tidiers")
 
-library(dplyr)
-
 mods <- mtcars %>%
     group_by(cyl) %>%
     do(mod = lm(mpg ~ wt + qsec, .))
