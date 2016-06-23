@@ -1,7 +1,7 @@
 broom 0.4.0.9000
 -----------
 
-* Added AppVeyor and code of conduct
+* Added AppVeyor, codecov.io, and code of conduct
 * Changed name of "NA's" column in summaryDefault output to "na"
 * Fixed `tidy.TukeyHSD` to include `term` column. Also added `separate.levels` argument, with option to separate `comparison` into `level1` and `level2`
 * Fixed `tidy.manova` to use correct column name for test (previously, always `pillai`)
@@ -13,6 +13,7 @@ broom 0.4.0.9000
 * Added tidiers for sparse matrices from the Matrix package
 * Added tidiers for prcomp objects
 * Added tidiers for `Mclust` objects from the Mclust package
+* Fixed to be compatible with dplyr 0.5, which is being submitted to CRAN
 
 broom 0.4.0
 -----------
