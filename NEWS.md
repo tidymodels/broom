@@ -11,8 +11,9 @@ broom 0.4.0.9000
 * Added `tidy` and `glance` for `lmodel2` objects from the lmodel2 package
 * Added tidiers for `poLCA` objects from the poLCA package
 * Added tidiers for sparse matrices from the Matrix package
-* Added tidiers for prcomp objects
+* Added tidiers for `prcomp` objects
 * Added tidiers for `Mclust` objects from the Mclust package
+* Added tidiers for `acf` objects
 * Fixed to be compatible with dplyr 0.5, which is being submitted to CRAN
 
 broom 0.4.0
