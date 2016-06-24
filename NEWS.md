@@ -1,4 +1,4 @@
-broom 0.4.0.9000
+broom 0.4.1
 -----------
 
 * Added AppVeyor, codecov.io, and code of conduct
