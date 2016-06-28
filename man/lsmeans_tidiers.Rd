@@ -13,6 +13,9 @@
 \arguments{
 \item{x}{"lsmobj" or "ref.grid" object}
 
+\item{conf.level}{Level of confidence interval, used only for
+\code{lsmobj} objects}
+
 \item{...}{Extra arguments, passed on to
 \link[lsmeans]{summary.ref.grid}}
 }
@@ -59,7 +62,7 @@ if (require("lsmeans", quietly = TRUE)) {
   head(td)
   
   # marginal averages
-  marginal <- lsmeans(oranges.rg1, "day")
+  marginal <- lsmeans(oranges_rg1, "day")
   tidy(marginal)
   
   # contrasts
@@ -73,7 +76,7 @@ if (require("lsmeans", quietly = TRUE)) {
     geom_errorbar(aes(ymin = conf.low, ymax = conf.high))
   
   # by multiple prices
-  by_price <- lsmeans(oranges.lm1, "day", by = "price2",
+  by_price <- lsmeans(oranges_lm1, "day", by = "price2",
                       at = list(price1 = 50, price2 = c(40, 60, 80),
                       day = c("2", "3", "4")) )
   by_price
@@ -82,7 +85,6 @@ if (require("lsmeans", quietly = TRUE)) {
   ggplot(tidy(by_price), aes(price2, estimate, color = day)) +
     geom_line() +
     geom_errorbar(aes(ymin = conf.low, ymax = conf.high))
-  
 }
 
 }
