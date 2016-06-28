@@ -1,3 +1,8 @@
+broom 0.5.0
+-----------
+
+* Added tidiers for `lsmobj` and `ref.grid` objects from the lsmeans package
+
 broom 0.4.1
 -----------
 

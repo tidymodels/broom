@@ -81,7 +81,8 @@ Suggests:
     lmodel2,
     poLCA,
     mclust,
-    covr
+    covr,
+    lsmeans
 URL: http://github.com/dgrtwo/broom
 BugReports: http://github.com/dgrtwo/broom/issues
 VignetteBuilder: knitr
