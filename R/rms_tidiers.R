@@ -1,12 +1,24 @@
 #' @name rms_tidiers
 #' @title Tidiers for rms model objects
 #' 
+#' @description Tidiers for models built by the \code{rms} package, 
+#'   including \code{ols}, \code{cph}, and \code{lrm}.  A \code{glance}
+#'   method is provided for these models.  Additionally, 
+#'   tidiers are made available for \code{anova.rms}, \code{summary.rms},
+#'   and \code{validate} class objects derived from \code{rms} models.
+#' 
 #' @param x A model object that inherits class \code{rms}
 #' @param conf.int Whether to return the confidence intervals in 
 #'   the tidy output
 #' @param conf.level The confidence level for the confidence intervals
 #' @param exponentiate Whether to exponentiate the estimate and
 #'   confidence intervals
+#' @param concord Whether the concordance index should be calculated,
+#'   if possible. For \code{glance.rms}, the concordance is only 
+#'   calculated if Somers' D (\code{Dxy}) is visible in the model's
+#'   \code{stats} element \emph{and} \code{C} is not already calculated.
+#'   For \code{tidy.validate}, the concordance index is calculated 
+#'   only when \code{Dxy} is calculated in \code{validate}.
 #' @param ... Extra arguments, not used
 #' 
 #' @examples
@@ -87,7 +99,7 @@ tidy.cph <- function(x, conf.int = FALSE, conf.level = 0.95,
                       std.error = sqrt(diag(x$var)),
                       stringsAsFactors = FALSE)
     res$statistic <- res$estimate / res$std.error
-    res$p.value <- pnorm(abs(res$statistic), lower.tail = FALSE) * 2
+    res$p.value <- stats::pnorm(abs(res$statistic), lower.tail = FALSE) * 2
     
     if (conf.int){
         ci <- as.data.frame(confint(x, level = conf.level))
@@ -120,7 +132,7 @@ tidy.lrm <- function(x, conf.int = FALSE, conf.level = 0.95,
                       std.error = sqrt(diag(x$var)),
                       stringsAsFactors = FALSE)
     res$statistic <- res$estimate / res$std.error
-    res$p.value <- pnorm(abs(res$statistic), lower.tail = FALSE) * 2
+    res$p.value <- stats::pnorm(abs(res$statistic), lower.tail = FALSE) * 2
     
     if (conf.int){
         ci <- as.data.frame(confint(x, level = conf.level))
@@ -153,7 +165,7 @@ tidy.ols <- function(x, conf.int = TRUE, conf.level = TRUE,
                       std.error = sqrt(diag(x$var)),
                       stringsAsFactors = FALSE)
     res$statistic <- res$estimate / res$std.error
-    res$p.value <- pt(abs(res$statistic), x$stats["n"] - 1, lower.tail = FALSE) * 2
+    res$p.value <- stats::pt(abs(res$statistic), x$stats["n"] - 1, lower.tail = FALSE) * 2
     
     if (conf.int){
         ci <- as.data.frame(confint(x, level = conf.level))
@@ -180,12 +192,11 @@ tidy.ols <- function(x, conf.int = TRUE, conf.level = TRUE,
 tidy.anova.rms <- function(x, ...)
 {
     res <- tidy.anova(x)
-    res$term <- ifelse(res$term == "Nonlinear",
-                       sprintf("%s-%s",
-                               dplyr::lag(res$term),
-                               res$term),
+    res$nonlinear <- grepl("nonlinear", res$term, ignore.case = TRUE)
+    res$term <- ifelse(trimws(res$term) == "Nonlinear",
+                       dplyr::lag(res$term),
                        res$term)
-    res
+    res[, c("term", "nonlinear", names(res)[!names(res) %in% c("term", "nonlinear")])]
 }
 
 #' @rdname rms_tidiers
@@ -194,34 +205,58 @@ tidy.anova.rms <- function(x, ...)
 tidy.summary.rms <- function(x, ...)
 {
     res <- fix_data_frame(x)
-    names(res) <- c("term", "low", "high", "diff", "effect",
+    names(res) <- c("term", "low.val", "high.val", "diff", "effect",
                     "std.error", "conf.low", "conf.high", "type")
     res$term <- trimws(res$term)
-    res$term <- ifelse(res$term %in% c("Odds Ratio", "Hazard Ratio"),
-                       sprintf("%s-%s",
-                               dplyr::lag(res$term),
-                               res$term),
+    res$type <- c("coef", "ratio")[res$type]
+    
+    res$term <- ifelse(res$type == "ratio",
+                       dplyr::lag(res$term),
                        res$term)
+    
+    res <- 
+      suppressWarnings(
+        tidyr::separate(
+            data = res, 
+            col = term, 
+            into = c("term", "high.level", "low.level"),
+            sep = " *[-:] *"
+        )
+      )
     res
 }
 
 #' @rdname rms_tidiers
 #' @export
 
-tidy.validate <- function(x, ...)
+tidy.validate <- function(x, concord = FALSE, ...)
 {
     res <- fix_data_frame(unclass(x)) 
     names(res)[1] <- ".rowname"
-    res
+    
+    if (concord & "Dxy" %in% res$.rowname)
+    {
+      res <- 
+        dplyr::bind_rows(
+          res,
+          data.frame(
+            .rowname = "C",
+            index.orig = (res$index.orig[res$.rowname == "Dxy"] + 1) / 2,
+            index.corrected = (res$index.corrected[res$.rowname == "Dxy"] + 1) / 2
+          )
+        )
+    }
+    
+    as.data.frame(res)
 }
 
 #' @rdname rms_tidiers
 #' @export
 
-glance.rms <- function(x, ...)
+glance.rms <- function(x, concord = FALSE, ...)
 {
     renamers <- c("Brier" = "brier",
-                  "C" = "c.index",
+                  "C" = "concordance",
                   "d.f." = "df",
                   "Dxy" = "somers.d",
                   "Events" = "events",
@@ -240,8 +275,14 @@ glance.rms <- function(x, ...)
                   "Sigma" = "sigma",
                   "Tau-a" = "tau.a")
     
+    if (concord & "Dxy" %in% names(x$stats) & !"C" %in% names(x$stats))
+    {
+        x$stats <- c(x$stats, "C" = (unname(x$stats["Dxy"]) + 1) / 2)
+    }
+    
     res <- as.data.frame(matrix(x$stats, nrow = 1))
     names(res) <- renamers[names(x$stats)]
+    
     res
 }
 
