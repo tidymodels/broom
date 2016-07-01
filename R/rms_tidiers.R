@@ -30,7 +30,7 @@
 #' )
 #' DF$y <- DF$x1 + DF$x2 + rnorm(200)
 #' 
-#' fit <- ols(y ~ rcs(x1,4) + x2 + rcs(x3, 3) + x4, data = DF,
+#' fit <- ols(y ~ rcs(x1,4) + x2 + rcs(x3, 3) * x4, data = DF,
 #'            x = TRUE, y = TRUE)
 #' 
 #' tidy(fit)
@@ -192,11 +192,20 @@ tidy.ols <- function(x, conf.int = TRUE, conf.level = TRUE,
 tidy.anova.rms <- function(x, ...)
 {
     res <- tidy.anova(x)
-    res$nonlinear <- grepl("nonlinear", res$term, ignore.case = TRUE)
-    res$term <- ifelse(trimws(res$term) == "Nonlinear",
-                       dplyr::lag(res$term),
-                       res$term)
-    res[, c("term", "nonlinear", names(res)[!names(res) %in% c("term", "nonlinear")])]
+    
+    regex <- "(All Interactions$|Nonlinear$|Nonlinear.+$|[(]Factor[+]Higher Order Factors[)]$|NONLINEAR$|NONLINEAR [+] INTERACTION$|INTERACTION$)"
+    res$type <- stringr::str_extract(res$term, regex)
+    res$term <- trimws(sub(regex, "", res$term))
+    res$term <- ifelse(res$term == "", NA, res$term)
+    res$term <- zoo::na.locf(res$term)
+    # res$term <- ifelse(duplicated(res$term),
+    #                    paste0(res$term, "'"),
+    #                    res$term)
+    res$interaction <- grepl("interaction", res$type, ignore.case = TRUE)
+    res$nonlinear <- grepl("Nonlinear", res$type, ignore.case = TRUE)
+
+    # res[, c("term", "type", names(res)[!names(res) %in% c("term", "type")])]    
+    res[, c("term", "interaction", "nonlinear", "type", names(res)[!names(res) %in% c("term", "type", "interaction", "nonlinear")])]
 }
 
 #' @rdname rms_tidiers
