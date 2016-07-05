@@ -45,6 +45,27 @@ test_that("tidy.nls works", {
     expect_equal(td$term, c("a", "b", "c"))
 })
 
+test_that("tidy.survreg works", {
+    # prepare data
+    df <- mtcars
+    df$lwr <- floor(mtcars$mpg)
+    df$upr <- ceiling(mtcars$mpg)
+    
+    # weibull fit (has an extra scale parameter)
+    weibull.fit <- survival::survreg(Surv(lwr, upr, type = "interval2") ~ wt, 
+                           data = df, dist = "weibull")
+    td = tidy(weibull.fit)
+    check_tidy(td, exp.row = 3)
+    expect_equal(td$term, c("(Intercept)", "wt", "Log(scale)"))
+    
+    # exponential fit (scale = 1)
+    exp.fit <- survival::survreg(Surv(lwr, upr, type = "interval2") ~ wt, 
+                       data = df, dist = "exponential")
+    td2 = tidy(exp.fit)
+    check_tidy(td2, exp.row = 2)
+    expect_equal(td2$term, c("(Intercept)", "wt"))
+})
+
 
 context("tidying hypothesis tests")
 
