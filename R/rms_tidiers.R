@@ -22,6 +22,8 @@
 #' @param ... Extra arguments, not used
 #' 
 #' @examples
+#' \dontrun{
+#' library(rms)
 #' DF <- data.frame(
 #'   x1 = runif(200),
 #'   x2 = runif(200),
@@ -88,6 +90,7 @@
 #' options(datadist = 'dd')
 #' tidy(summary(fit))
 #' tidy(validate(fit))
+#' }
 #' 
 #' @export
 
@@ -198,13 +201,9 @@ tidy.anova.rms <- function(x, ...)
     res$term <- trimws(sub(regex, "", res$term))
     res$term <- ifelse(res$term == "", NA, res$term)
     res$term <- zoo::na.locf(res$term)
-    # res$term <- ifelse(duplicated(res$term),
-    #                    paste0(res$term, "'"),
-    #                    res$term)
     res$interaction <- grepl("interaction", res$type, ignore.case = TRUE)
     res$nonlinear <- grepl("Nonlinear", res$type, ignore.case = TRUE)
 
-    # res[, c("term", "type", names(res)[!names(res) %in% c("term", "type")])]    
     res[, c("term", "interaction", "nonlinear", "type", names(res)[!names(res) %in% c("term", "type", "interaction", "nonlinear")])]
 }
 

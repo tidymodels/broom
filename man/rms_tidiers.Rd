@@ -48,7 +48,16 @@ calculated if Somers' D (\code{Dxy}) is visible in the model's
 For \code{tidy.validate}, the concordance index is calculated 
 only when \code{Dxy} is calculated in \code{validate}.}
 }
+\description{
+Tidiers for models built by the \code{rms} package, 
+  including \code{ols}, \code{cph}, and \code{lrm}.  A \code{glance}
+  method is provided for these models.  Additionally, 
+  tidiers are made available for \code{anova.rms}, \code{summary.rms},
+  and \code{validate} class objects derived from \code{rms} models.
+}
 \examples{
+\dontrun{
+library(rms)
 DF <- data.frame(
   x1 = runif(200),
   x2 = runif(200),
@@ -57,7 +66,7 @@ DF <- data.frame(
 )
 DF$y <- DF$x1 + DF$x2 + rnorm(200)
 
-fit <- ols(y ~ rcs(x1,4) + x2 + rcs(x3, 3) + x4, data = DF,
+fit <- ols(y ~ rcs(x1,4) + x2 + rcs(x3, 3) * x4, data = DF,
            x = TRUE, y = TRUE)
 
 tidy(fit)
@@ -115,6 +124,7 @@ dd <- datadist(DF)
 options(datadist = 'dd')
 tidy(summary(fit))
 tidy(validate(fit))
+}
 
 }
 

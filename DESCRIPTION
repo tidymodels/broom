@@ -36,7 +36,8 @@ Imports:
     stringr,
     reshape2,
     nlme,
-    methods
+    methods,
+    zoo
 Suggests:
     knitr,
     boot,
@@ -52,7 +53,6 @@ Suggests:
     multcomp,
     testthat,
     lme4,
-    zoo,
     lmtest,
     plm,
     biglm,
