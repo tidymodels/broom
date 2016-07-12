@@ -8,6 +8,7 @@
 #   - survexp
 #   - survfit
 #   - survreg
+#   - survdiff
 
 
 #' Tidiers for aareg objects
@@ -680,4 +681,90 @@ glance.survreg <- function(x, conf.level = .95, ...) {
     ret$p.value <- 1 - stats::pchisq(ret$chi, sum(x$df) - x$idf)
 
     finish_glance(ret, x)
+}
+
+
+
+
+
+
+
+
+#' Tidiers for Tests of Differences between Survival Curves
+#' 
+#' @param x a "survdiff" object
+#' @param strata logical, whether to include strata in the output
+#' @param other arguments passed to/from other methods, currently ignored#' 
+#' 
+#' @template boilerplate
+#' 
+#' @name survdiff_tidiers
+
+
+#' @rdname survdiff_tidiers
+#' 
+#' @return TODO Describe output columns
+#' 
+#' @export
+tidy.survdiff <- function(x, strata=FALSE, ...) {
+    # if one-sample test
+    if( length(x$obs) == 1 ) {
+        return(
+            data.frame(
+                N = x$n,
+                obs = x$obs,
+                exp = x$exp
+            )
+        )
+    }
+    # grouping variables (unless one-sample test)
+    l <- lapply(strsplit(rownames(x$n), ", "), strsplit, "=")
+    row_list <- lapply(l, function(x) 
+        structure( 
+            as.data.frame(lapply(x, "[", 2), stringsAsFactors = FALSE),
+            names = sapply(x, "[", 1) )
+    )
+    gvars <- do.call("rbind", row_list)
+    has_strata <- "strata" %in% names(x)
+    if(strata && has_strata) {
+        .NotYetUsed(strata)
+        d_obs <- cbind(gvars, as.data.frame(x$obs)) %>%
+            tidyr::gather(strata, obs, dplyr::matches("V[0-9]+") ) %>%
+            tidyr::extract(strata, "strata", "([0-9]+)")
+        d_exp <- cbind(gvars, as.data.frame(x$exp)) %>%
+            tidyr::gather(strata, exp, dplyr::matches("V[0-9]+") ) %>%
+            tidyr::extract(strata, "strata", "([0-9]+)")
+        d_n
+        z <- d_obs %>% dplyr::left_join(d_exp)
+    } else {
+        rval <- data.frame(
+            N = as.numeric(x$n),
+            obs = if(has_strata) apply(x$obs, 1, sum) else x$obs,
+            exp = if(has_strata) apply(x$exp, 1, sum) else x$exp
+        )
+    }
+    cbind( gvars, rval )
+}
+
+
+
+
+#' @rdname survdiff_tidiers
+#' 
+#' @return TODO describe output columns
+#' 
+#' @export
+glance.survdiff <- function(x, ...) {
+    e <- x$exp
+    if(is.matrix(e)) {
+        tmp <- apply(e, 1, sum)
+    } else {
+        tmp <- e
+    }
+    rval <- data.frame(
+        chisq = x$chisq,
+        df = (sum(1 * (tmp > 0))) - 1
+    )
+    rval$pvalue <- 1 - pchisq(rval$chisq, rval$df)
+    rval
 }
