@@ -1,8 +1,8 @@
 Package: broom
 Type: Package
 Title: Convert Statistical Analysis Objects into Tidy Data Frames
-Version: 0.4.0
-Date: 2016-04-06
+Version: 0.4.1.9000
+Date: 2016-06-24
 Authors@R: c(
     person("David", "Robinson", email = "admiral.david@gmail.com", role = c("aut", "cre")),
     person("Matthieu", "Gomez", email = "mattg@princeton.edu", role = "ctb"),
@@ -17,6 +17,7 @@ Authors@R: c(
     person("Luciano", "Selzer", email = "luciano.selzer@gmail.com", role = "ctb"),
     person("Gavin", "Simpson", email = "ucfagls@gmail.com", role = "ctb"),
     person("Jens", "Preussner", email = " jens.preussner@mpi-bn.mpg.de", role = "ctb"),
+    person("Jay", "Hesselberth", email = "jay.hesselberth@gmail.com", role = "ctb"),
     person("Hadley", "Wickham", email = "hadley@rstudio.com", role = "ctb")
     )
 Maintainer: David Robinson <admiral.david@gmail.com>
@@ -80,7 +81,9 @@ Suggests:
     mgcv,
     lmodel2,
     poLCA,
-    mclust
+    mclust,
+    covr,
+    lsmeans
 URL: http://github.com/dgrtwo/broom
 BugReports: http://github.com/dgrtwo/broom/issues
 VignetteBuilder: knitr

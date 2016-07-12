@@ -1,7 +1,5 @@
 context("dplyr and broom")
 
-suppressPackageStartupMessages(library(dplyr))
-
 # set up the lahman batting table, and filter to make it faster
 batting <- tbl(lahman_df(), "Batting")
 batting <- batting %>% filter(yearID > 1980)

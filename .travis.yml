@@ -1,5 +1,7 @@
 # Sample .travis.yml for R projects
 
 language: r
-warnings_are_errors: true
-sudo: required
+sudo: false
+cache: packages
+after_success:
+  - Rscript -e 'covr::codecov()'

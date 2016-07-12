@@ -1,8 +1,14 @@
 # test tidy and glance methods from rstanarm_tidiers.R
 
+context("rstanarm tidiers")
+suppressPackageStartupMessages(library(rstanarm))
+
 if (require(rstanarm, quietly = TRUE)) {
-    fit <- stan_glmer(mpg ~ wt + (1|cyl) + (1+wt|gear), data = mtcars,
-                      iter = 500, chains = 2)
+    set.seed(2016)
+    capture.output(
+        fit <- stan_glmer(mpg ~ wt + (1|cyl) + (1+wt|gear), data = mtcars,
+                               iter = 200, chains = 2)
+    )
     
     context("rstanarm models")
     test_that("tidy works on rstanarm fits", {

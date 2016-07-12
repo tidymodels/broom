@@ -35,6 +35,8 @@ displayed by \code{\link{print.survfit}}
   \item{n.max}{n.max}
   \item{n.start}{n.start}
   \item{events}{number of events}
+  \item{rmean}{Restricted mean (see \link[survival]{print.survfit})}
+  \item{rmean.std.error}{Restricted mean standard error}
   \item{median}{median survival}
   \item{conf.low}{lower end of confidence interval on median}
   \item{conf.high}{upper end of confidence interval on median}
@@ -88,8 +90,11 @@ if (require("survival", quietly = TRUE)) {
         geom_ribbon(aes(ymin = low, ymax = high), alpha = .25)
  
     # bootstrap for median survival
-    glances <- lung \%>\% bootstrap(100) \%>\%
+    glances <- lung \%>\%
+        bootstrap(100) \%>\%
         do(glance(survfit(coxph(Surv(time, status) ~ age + sex, .))))
+    
+    glances
     
     qplot(glances$median, binwidth = 15)
     quantile(glances$median, c(.025, .975))
