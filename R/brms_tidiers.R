@@ -89,7 +89,7 @@ tidy.brmsfit <- function(x, parameters = NA,
              call. = FALSE)
     }
     out <- data.frame(term = names(samples), stringsAsFactors = FALSE)
-    if (use_par_type && par_type != "all") {
+    if (use_par_type) {
         if (par_type == "non-varying") {
             out$term <- gsub("^b_", "", out$term)
         } else if (par_type == "varying") {
