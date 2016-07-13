@@ -694,16 +694,31 @@ glance.survreg <- function(x, conf.level = .95, ...) {
 #' 
 #' @param x a "survdiff" object
 #' @param strata logical, whether to include strata in the output
-#' @param other arguments passed to/from other methods, currently ignored#' 
-#' 
+#' @param ... other arguments passed to/from other methods, currently ignored
+#'   
+#' @seealso \code{\link[survival]{survdiff}}
+#'   
 #' @template boilerplate
-#' 
+#'   
 #' @name survdiff_tidiers
+#'   
+#' @examples
+#' if( require("survival") ) {
+#'     s <- survdiff( Surv(time, status) ~ pat.karno + strata(inst), data=lung)
+#'     tidy(s)
+#'     glance(s)
+#' }
+NULL
 
 
 #' @rdname survdiff_tidiers
 #' 
-#' @return TODO Describe output columns
+#' @return 
+#' \code{tidy} on "survdiff" objects returns a data frame with the following columns:
+#' \item{...}{initial column(s) correspond to grouping factors (right-hand side of the formula)}
+#' \item{obs}{weighted observed number of events in each group}
+#' \item{exp}{weighted expected number of events in each group}
+#' \item{N}{number of subjects in each group}
 #' 
 #' @export
 tidy.survdiff <- function(x, strata=FALSE, ...) {
@@ -734,7 +749,6 @@ tidy.survdiff <- function(x, strata=FALSE, ...) {
         d_exp <- cbind(gvars, as.data.frame(x$exp)) %>%
             tidyr::gather(strata, exp, dplyr::matches("V[0-9]+") ) %>%
             tidyr::extract(strata, "strata", "([0-9]+)")
-        d_n
         z <- d_obs %>% dplyr::left_join(d_exp)
     } else {
         rval <- data.frame(
@@ -751,7 +765,12 @@ tidy.survdiff <- function(x, strata=FALSE, ...) {
 
 #' @rdname survdiff_tidiers
 #' 
-#' @return TODO describe output columns
+#' @return 
+#' \code{glance} on "survdiff" objects returns a data frame with the following columns:
+#' \item{statistic}{value of the test statistic}
+#' \item{df}{degrees of freedom}
+#' \item{p.value}{p-value}
+#' 
 #' 
 #' @export
 glance.survdiff <- function(x, ...) {
@@ -762,9 +781,9 @@ glance.survdiff <- function(x, ...) {
         tmp <- e
     }
     rval <- data.frame(
-        chisq = x$chisq,
+        statistic = x$chisq,
         df = (sum(1 * (tmp > 0))) - 1
     )
-    rval$pvalue <- 1 - pchisq(rval$chisq, rval$df)
+    rval$p.value <- 1 - stats::pchisq(rval$statistic, rval$df)
     rval
 }

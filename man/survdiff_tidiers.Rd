@@ -15,17 +15,34 @@
 
 \item{strata}{logical, whether to include strata in the output}
 
-\item{other}{arguments passed to/from other methods, currently ignored#'}
+\item{...}{other arguments passed to/from other methods, currently ignored}
 }
 \value{
 All tidying methods return a data.frame without rownames, whose
 structure depends on the method chosen.
 
-TODO Describe output columns
+\code{tidy} on "survdiff" objects returns a data frame with the following columns:
+\item{...}{initial column(s) correspond to grouping factors (right-hand side of the formula)}
+\item{obs}{weighted observed number of events in each group}
+\item{exp}{weighted expected number of events in each group}
+\item{N}{number of subjects in each group}
 
-TODO describe output columns
+\code{glance} on "survdiff" objects returns a data frame with the following columns:
+\item{statistic}{value of the test statistic}
+\item{df}{degrees of freedom}
+\item{p.value}{p-value}
 }
 \description{
 Tidiers for Tests of Differences between Survival Curves
+}
+\examples{
+if( require("survival") ) {
+    s <- survdiff( Surv(time, status) ~ pat.karno + strata(inst), data=lung)
+    tidy(s)
+    glance(s)
+}
+}
+\seealso{
+\code{\link[survival]{survdiff}}
 }
 
