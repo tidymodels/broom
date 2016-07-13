@@ -56,7 +56,7 @@ if( require("survival", quietly = TRUE)) {
     
     context("Testing glance() for 'survdiff' objects")
     
-    glance_names <- c("chisq", "df", "pvalue")
+    glance_names <- c("statistic", "df", "p.value")
     
     test_that("glance works in 2-group case", {
         gl <- glance(ex1)
