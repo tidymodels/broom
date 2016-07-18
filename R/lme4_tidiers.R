@@ -77,6 +77,7 @@ tidy.merMod <- function(x, effects = c("ran_pars","fixed"),
                         conf.int = FALSE,
                         conf.level = 0.95,
                         conf.method = "Wald",
+                        debug=FALSE,
                         ...) {
     effect_names <- c("ran_pars", "fixed", "ran_modes", "coefs")
     if (!is.null(scales)) {
@@ -91,7 +92,15 @@ tidy.merMod <- function(x, effects = c("ran_pars","fixed"),
     ret_list <- list()
     if ("fixed" %in% effects) {
         # return tidied fixed effects rather than random
-        ret <- stats::coef(summary(x))
+        ss <- summary(x)
+        ret <- stats::coef(ss)
+        if (debug) {
+            cat("output from coef(summary(x)):\n")
+            print(coef(ss))
+        }
+        if (is(x,"merModLmerTest")) {
+            ret <- ret[,!colnames(ret) %in% "df"]
+        }            
 
         # p-values may or may not be included
         nn <- base_nn[1:ncol(ret)]
