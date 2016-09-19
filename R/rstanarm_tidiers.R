@@ -89,6 +89,21 @@ tidy.stanreg <- function(x,
         ret_list$non_varying <-
             fix_data_frame(ret, newnames = nn)
     }
+    if ("auxiliary" %in% parameters) {
+        nn <- c("estimate", "std.error")
+        parnames <- rownames(x$stan_summary)
+        auxpars <- c("sigma", "shape", "overdispersion", "R2", "log-fit_ratio", 
+                     grep("mean_PPD", parnames, value = TRUE))
+        auxpars <- auxpars[which(auxpars %in% parnames)]
+        ret <- summary(x, pars = auxpars)[, c("50%", "sd"), drop = FALSE]
+        if (intervals) {
+            ints <- rstanarm::posterior_interval(x, pars = auxpars, prob = prob)
+            ret <- data.frame(ret, ints)
+            nn <- c(nn,"lower","upper")
+        }
+        ret_list$auxiliary <-
+            fix_data_frame(ret, newnames = nn)
+    }
     if ("hierarchical" %in% parameters) {
         ret <- as.data.frame(rstanarm::VarCorr(x))
         ret[] <- lapply(ret, function(x) if (is.factor(x))

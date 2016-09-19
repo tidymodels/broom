@@ -6,8 +6,8 @@
 \alias{tidy.stanreg}
 \title{Tidying methods for an rstanarm model}
 \usage{
-\method{tidy}{stanreg}(x, parameters = c("non-varying", "varying",
-  "hierarchical"), intervals = FALSE, prob = 0.9, ...)
+\method{tidy}{stanreg}(x, parameters = "non-varying", intervals = FALSE,
+  prob = 0.9, ...)
 
 \method{glance}{stanreg}(x, looic = FALSE, ...)
 }
@@ -15,9 +15,9 @@
 \item{x}{Fitted model object from the \pkg{rstanarm} package. See 
 \code{\link[rstanarm]{stanreg-objects}}.}
 
-\item{parameters}{One of \code{"non-varying"}, \code{"varying"}, or 
-\code{"hierarchical"} (can be abbreviated). See the Value section for 
-details.}
+\item{parameters}{One or more of \code{"non-varying"}, \code{"varying"}, 
+\code{"hierarchical"}, \code{"auxiliary"} (can be abbreviated). See the
+Value section for details.}
 
 \item{intervals}{If \code{TRUE} columns for the lower and upper bounds of the
 \code{100*prob}\% posterior uncertainty intervals are included. See 
