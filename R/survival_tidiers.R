@@ -357,8 +357,11 @@ glance.coxph <- function(x, ...) {
 #'         geom_ribbon(aes(ymin = low, ymax = high), alpha = .25)
 #'  
 #'     # bootstrap for median survival
-#'     glances <- lung %>% bootstrap(100) %>%
+#'     glances <- lung %>%
+#'         bootstrap(100) %>%
 #'         do(glance(survfit(coxph(Surv(time, status) ~ age + sex, .))))
+#'     
+#'     glances
 #'     
 #'     qplot(glances$median, binwidth = 15)
 #'     quantile(glances$median, c(.025, .975))
@@ -417,6 +420,8 @@ tidy.survfit <- function(x, ...) {
 #'   \item{n.max}{n.max}
 #'   \item{n.start}{n.start}
 #'   \item{events}{number of events}
+#'   \item{rmean}{Restricted mean (see \link[survival]{print.survfit})}
+#'   \item{rmean.std.error}{Restricted mean standard error}
 #'   \item{median}{median survival}
 #'   \item{conf.low}{lower end of confidence interval on median}
 #'   \item{conf.high}{upper end of confidence interval on median}
@@ -432,7 +437,13 @@ glance.survfit <- function(x, ...) {
     
     s <- summary(x)
     ret <- unrowname(as.data.frame(t(s$table)))
-    colnames(ret)[6:7] <- c("conf.low", "conf.high")
+    
+    colnames(ret) <- plyr::revalue(colnames(ret),
+                                   c("*rmean" = "rmean",
+                                     "*se(rmean)" = "rmean.std.error"),
+                                   warn_missing = FALSE)
+    
+    colnames(ret)[utils::tail(seq_along(ret), 2)] <- c("conf.low", "conf.high")
     ret
 }
 

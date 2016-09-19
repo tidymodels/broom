@@ -4,6 +4,7 @@ broom: let's tidy up a bit
 [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/broom)](http://cran.r-project.org/package=broom)
 [![Travis-CI Build Status](https://travis-ci.org/dgrtwo/broom.svg?branch=master)](https://travis-ci.org/dgrtwo/broom)
 [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/dgrtwo/broom?branch=master&svg=true)](https://ci.appveyor.com/project/dgrtwo/broom)
+[![Coverage Status](https://img.shields.io/codecov/c/github/dgrtwo/broom/master.svg)](https://codecov.io/github/dgrtwo/broom?branch=master)
 
 The broom package takes the messy output of built-in functions in R, such as `lm`, `nls`, or `t.test`, and turns them into tidy data frames.
 
@@ -277,8 +278,8 @@ tidy(tt)
 ```
 ##   estimate estimate1 estimate2 statistic     p.value parameter  conf.low
 ## 1 1.357895  3.768895     2.411  5.493905 6.27202e-06  29.23352 0.8525632
-##   conf.high
-## 1  1.863226
+##   conf.high                  method alternative
+## 1  1.863226 Welch Two Sample t-test   two.sided
 ```
 
 Some cases might have fewer columns (for example, no confidence interval):
@@ -291,8 +292,10 @@ tidy(wt)
 ```
 
 ```
-##   statistic      p.value
-## 1     230.5 4.347026e-05
+##   statistic      p.value                                            method
+## 1     230.5 4.347026e-05 Wilcoxon rank sum test with continuity correction
+##   alternative
+## 1   two.sided
 ```
 
 Since the `tidy` output is already only one row, `glance` returns the same output:
@@ -306,8 +309,8 @@ glance(tt)
 ```
 ##   estimate estimate1 estimate2 statistic     p.value parameter  conf.low
 ## 1 1.357895  3.768895     2.411  5.493905 6.27202e-06  29.23352 0.8525632
-##   conf.high
-## 1  1.863226
+##   conf.high                  method alternative
+## 1  1.863226 Welch Two Sample t-test   two.sided
 ```
 
 
@@ -316,8 +319,10 @@ glance(wt)
 ```
 
 ```
-##   statistic      p.value
-## 1     230.5 4.347026e-05
+##   statistic      p.value                                            method
+## 1     230.5 4.347026e-05 Wilcoxon rank sum test with continuity correction
+##   alternative
+## 1   two.sided
 ```
 
 There is no `augment` function for `htest` objects, since there is no meaningful sense in which a hypothesis test produces output about each initial data point.
@@ -401,6 +406,7 @@ A full list of the `tidy`, `augment` and `glance` methods available for each cla
 |manova                   |x      |         |          |
 |map                      |x      |         |          |
 |matrix                   |x      |x        |          |
+|Mclust                   |x      |x        |x         |
 |merMod                   |x      |x        |x         |
 |mle2                     |x      |         |          |
 |multinom                 |x      |x        |          |
@@ -410,9 +416,11 @@ A full list of the `tidy`, `augment` and `glance` methods available for each cla
 |numeric                  |x      |         |          |
 |pairwise.htest           |x      |         |          |
 |plm                      |x      |x        |x         |
+|poLCA                    |x      |x        |x         |
 |Polygon                  |x      |         |          |
 |Polygons                 |x      |         |          |
 |power.htest              |x      |         |          |
+|prcomp                   |x      |         |x         |
 |pyears                   |x      |x        |          |
 |rcorr                    |x      |         |          |
 |ridgelm                  |x      |x        |          |
@@ -485,3 +493,7 @@ In order to maintain consistency, we attempt to follow some conventions regardin
     * `r.squared` the fraction of variance explained by the model
     * `adj.r.squared` R^2 adjusted based on the degrees of freedom
     * `sigma` the square root of the estimated variance of the residuals
+
+### Code of Conduct
+
+Please note that this project is released with a [Contributor Code of Conduct](CONDUCT.md). By participating in this project you agree to abide by its terms.

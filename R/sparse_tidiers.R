@@ -23,7 +23,8 @@ tidy.dgTMatrix <- function(x, ...) {
         col <- colnames(x)[col]
     }
     
-    ret <- data.frame(row = row, column = col, value = s$x)
+    ret <- data.frame(row = row, column = col, value = s$x,
+                      stringsAsFactors = FALSE)
     ret
 }
 

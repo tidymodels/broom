@@ -24,8 +24,8 @@ choice of lambda and term in the formula, with columns:
   \item{lambda}{choice of lambda}
   \item{GCV}{generalized cross validation value for this lambda}
   \item{term}{the term in the ridge regression model being estimated}
-  \item{estimate}{estimate of coefficient using this lambda}
-  \item{scale}{The amount this term was scaled}
+  \item{estimate}{estimate of scaled coefficient using this lambda}
+  \item{scale}{Scaling factor of estimated coefficient}
 
 \code{glance.ridgelm} returns a one-row data.frame with the columns
   \item{kHKB}{modified HKB estimate of the ridge constant}
