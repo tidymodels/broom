@@ -27,9 +27,9 @@ NULL
 
 
 #' @rdname rstanarm_tidiers
-#' @param parameters One of \code{"non-varying"}, \code{"varying"}, or 
-#'   \code{"hierarchical"} (can be abbreviated). See the Value section for 
-#'   details.
+#' @param parameters One or more of \code{"non-varying"}, \code{"varying"}, 
+#'   \code{"hierarchical"}, \code{"auxiliary"} (can be abbreviated). See the
+#'   Value section for details.
 #' @param prob See \code{\link[rstanarm]{posterior_interval}}.
 #' @param intervals If \code{TRUE} columns for the lower and upper bounds of the
 #'   \code{100*prob}\% posterior uncertainty intervals are included. See 
@@ -58,18 +58,25 @@ NULL
 #' 
 #' @export
 tidy.stanreg <- function(x, 
-                         parameters = c("non-varying", "varying", "hierarchical"), 
+                         parameters = "non-varying", 
                          intervals = FALSE, 
                          prob = 0.9,
                          ...) {
     
-    parameters <- match.arg(parameters)
-    if (!inherits(x, "lmerMod") && parameters != "non-varying")
-        stop("Only non-varying parameters available for this model.")
+    parameters <-
+        match.arg(
+            parameters,
+            choices = c("non-varying", "varying", "hierarchical", "auxiliary"),
+            several.ok = TRUE
+        )
+    if (any(parameters %in% c("varying", "hierarchical"))) {
+      if (!inherits(x, "lmerMod"))
+        stop("Model does not have 'varying' or 'hierarchical' parameters.")
+    }
     
     nn <- c("estimate", "std.error")
     ret_list <- list()
-    if (parameters == "non-varying") {
+    if ("non-varying" %in% parameters) {
         ret <- cbind(rstanarm::fixef(x), 
                      rstanarm::se(x)[names(rstanarm::fixef(x))])
         
@@ -82,7 +89,7 @@ tidy.stanreg <- function(x,
         ret_list$non_varying <-
             fix_data_frame(ret, newnames = nn)
     }
-    if (parameters == "hierarchical") {
+    if ("hierarchical" %in% parameters) {
         ret <- as.data.frame(rstanarm::VarCorr(x))
         ret[] <- lapply(ret, function(x) if (is.factor(x))
             as.character(x) else x)
@@ -104,7 +111,7 @@ tidy.stanreg <- function(x,
                                                 newnames = c("group", "estimate"))
     }
     
-    if (parameters == "varying") {
+    if ("varying" %in% parameters) {
         nn <- c("estimate", "std.error")
         s <- summary(x, pars = "varying")
         ret <- cbind(s[, "50%"], rstanarm::se(x)[rownames(s)])
