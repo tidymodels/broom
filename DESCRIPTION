@@ -82,7 +82,8 @@ Suggests:
     poLCA,
     mclust,
     covr,
-    lsmeans
+    lsmeans,
+    randomForest
 URL: http://github.com/dgrtwo/broom
 BugReports: http://github.com/dgrtwo/broom/issues
 VignetteBuilder: knitr
