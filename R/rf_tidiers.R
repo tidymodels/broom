@@ -127,24 +127,21 @@ NULL
 #' \code{conf.high}, computed with \code{\link{confint}}.
 #' 
 #' @export
-tidy.lm <- function(x, conf.int = FALSE, conf.level = .95,
-                    exponentiate = FALSE, quick = FALSE, ...) {
-    if (quick) {
-        co <- stats::coef(x)
-        ret <- data.frame(term = names(co), estimate = unname(co))
-        return(process_lm(ret, x, conf.int = FALSE, exponentiate = exponentiate))
-    }
-    s <- summary(x)
-    ret <- tidy.summary.lm(s)
-    
-    process_lm(ret, x, conf.int = conf.int, conf.level = conf.level,
-         exponentiate = exponentiate)
+tidy.randomForest <- function(x, ...) {
+    tidy.randomForest.method <- switch(x[["type"]],
+                                       "classification" = tidy.randomForest.classification,
+                                       "regression" = tidy.randomForest.regression,
+                                       "unsupervised" = tidy.randomForest.unsupervised)
+    tidy.randomForest.method(x, ...)
 }
 
 
 #' @rdname lm_tidiers
 #' @export
-tidy.summary.lm <- function(x, ...) {
+tidy.randomForest.classification <- function(x, ...) {
+    imp_m <- randomForest::importance(x)
+    var_names <- rownames(imp_m)
+    
     co <- stats::coef(x)
     nn <- c("estimate", "std.error", "statistic", "p.value")
     if (inherits(co, "listof")) {
@@ -157,6 +154,14 @@ tidy.summary.lm <- function(x, ...) {
     }
     
     ret
+}
+
+tidy.randomForest.regression <- function(x, ...) {
+    stop("tidy() is not yet implemented for regression randomForest models.")
+}
+
+tidy.randomForest.unsupervised <- function(x, ...) {
+    stop("tidy() is not yet implemented for unsupervised randomForest models.")
 }
 
 
@@ -190,14 +195,15 @@ tidy.summary.lm <- function(x, ...) {
 #'   \item{.resid}{Residuals of fitted values on the new data}
 #' 
 #' @export
-augment.lm <- function(x, data = stats::model.frame(x), newdata,
+augment.randomForest <- function(x, data = stats::model.frame(x), newdata,
                        type.predict, type.residuals, ...) {   
+    stop("augment() is not yet implemented for randomForest models.")
     augment_columns(x, data, newdata, type.predict = type.predict,
                            type.residuals = type.residuals)
 }
 
 
-#' @rdname lm_tidiers
+#' @rdname rf_tidiers
 #' 
 #' @param ... extra arguments (not used)
 #' 
@@ -216,7 +222,8 @@ augment.lm <- function(x, data = stats::model.frame(x), newdata,
 #'   \item{df.residual}{residual degrees of freedom}
 #' 
 #' @export
-glance.lm <- function(x, ...) {
+glance.randomForest <- function(x, ...) {
+    stop("glance() is not yet implemented for randomForest models.")
     # use summary.lm explicity, so that c("aov", "lm") objects can be
     # summarized and glanced at
     s <- stats::summary.lm(x)
@@ -228,7 +235,7 @@ glance.lm <- function(x, ...) {
 
 #' @rdname lm_tidiers
 #' @export
-glance.summary.lm <- function(x, ...) {
+glance.randomForest.function <- function(x, ...) {
     ret <- with(x, data.frame(r.squared=r.squared,
                               adj.r.squared=adj.r.squared,
                               sigma=sigma,
@@ -240,18 +247,6 @@ glance.summary.lm <- function(x, ...) {
     
     unrowname(ret)
 }
-
-#' @export
-augment.mlm <- function(x, ...) {
-    stop("augment does not support multiple responses")
-}
-
-
-#' @export
-glance.mlm <- function(x, ...) {
-    stop("glance does not support multiple responses")
-}
-
 
 #' helper function to process a tidied lm object
 #' 
@@ -265,27 +260,27 @@ glance.mlm <- function(x, ...) {
 #' \code{conf.int=TRUE}
 #' @param exponentiate whether to exponentiate the coefficient estimates
 #' and confidence intervals (typical for logistic regression)
-process_lm <- function(ret, x, conf.int = FALSE, conf.level = .95,
-                       exponentiate = FALSE) {
-    if (exponentiate) {
-        # save transformation function for use on confidence interval
-        if (is.null(x$family) ||
-            (x$family$link != "logit" && x$family$link != "log")) {
-            warning(paste("Exponentiating coefficients, but model did not use",
-                          "a log or logit link function"))
-        }
-        trans <- exp
-    } else {
-        trans <- identity
-    }
-    
-    if (conf.int) {
-        # avoid "Waiting for profiling to be done..." message
-        CI <- suppressMessages(stats::confint(x, level = conf.level))
-        colnames(CI) = c("conf.low", "conf.high")
-        ret <- cbind(ret, trans(unrowname(CI)))
-    }
-    ret$estimate <- trans(ret$estimate)
-    
-    ret
-}
+# process_lm <- function(ret, x, conf.int = FALSE, conf.level = .95,
+#                        exponentiate = FALSE) {
+#     if (exponentiate) {
+#         # save transformation function for use on confidence interval
+#         if (is.null(x$family) ||
+#             (x$family$link != "logit" && x$family$link != "log")) {
+#             warning(paste("Exponentiating coefficients, but model did not use",
+#                           "a log or logit link function"))
+#         }
+#         trans <- exp
+#     } else {
+#         trans <- identity
+#     }
+#     
+#     if (conf.int) {
+#         # avoid "Waiting for profiling to be done..." message
+#         CI <- suppressMessages(stats::confint(x, level = conf.level))
+#         colnames(CI) = c("conf.low", "conf.high")
+#         ret <- cbind(ret, trans(unrowname(CI)))
+#     }
+#     ret$estimate <- trans(ret$estimate)
+#     
+#     ret
+# }
