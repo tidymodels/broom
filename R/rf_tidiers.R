@@ -44,7 +44,7 @@ tidy.randomForest <- tidy.randomForest.formula
 #' @rdname rf_tidiers
 tidy.randomForest.classification <- function(x, ...) {
     imp_m <- as.data.frame(x[["importance"]])
-    imp_m <- tibble::rownames_to_column(imp_m, var = "term")
+    imp_m <- fix_data_frame(imp_m)
     imp_sd <- as.data.frame(x[["importanceSD"]])
     names(imp_sd) <- paste("sd", names(imp_sd), sep = "_")
     
@@ -54,7 +54,7 @@ tidy.randomForest.classification <- function(x, ...) {
 tidy.randomForest.regression <- function(x, ...) {
     imp_m <- as.data.frame(x[["importance"]])
     names(imp_m) <- c("percent_inc_mse", "inc_node_purity")
-    imp_m <- tibble::rownames_to_column(imp_m, var = "term")
+    imp_m <- fix_data_frame(imp_m)
     imp_sd <- x[["importanceSD"]]
     
     imp_m$imp_sd <- imp_sd
