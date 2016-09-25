@@ -82,8 +82,55 @@ tidy.randomForest.unsupervised <- function(x, ...) {
 #' @template augment_NAs
 #'  
 #' @export
-augment.randomForest.formula <- function(x, ...) {   
-    stop("augment() is not yet implemented for randomForest models.")
+augment.randomForest.formula <- function(x, data = NULL, ...) {   
+    
+    if (is.null(data)) {
+        if (is.null(x$call$data)) {
+            list <- lapply(all.vars(x$call$formula), as.name)
+            data <- eval(as.call(list(quote(data.frame),list)), parent.frame())
+        } else{
+            data <- eval(x$call$data,parent.frame())
+        }
+        if (!is.null(x$na.action)) {
+            data <- slice(data,-as.vector(x$na.action))
+        }
+    }
+    
+    augment.randomForest.method <- switch(x[["type"]],
+                                       "classification" = augment.randomForest.classification,
+                                       "regression" = augment.randomForest.regression,
+                                       "unsupervised" = augment.randomForest.unsupervised)
+    augment.randomForest.method(x, data, ...)
+}
+
+#' @export
+augment.randomForest <- augment.randomForest.formula
+
+augment.randomForest.classification <- function(x, data, ...) {
+    oob_times <- x[["oob.times"]]
+    votes <- as.data.frame(x[["votes"]])
+    names(votes) <- paste("votes", names(votes), sep = "_")
+    predicted <- x[["predicted"]]
+    local_imp <- x[["localImportance"]]
+    
+    if (!is.null(local_imp)) {
+        local_imp <- as.data.frame(t(local_imp))
+        names(local_imp) <- paste("li", names(local_imp), sep = "_")
+    }
+    
+    d <- dplyr::bind_cols(votes, local_imp)
+    d$oob_times <- oob_times
+    d$predicted <- predicted
+    names(d) <- paste0(".", names(d))
+    dplyr::bind_cols(data, d)
+}
+
+augment.randomForest.regression <- function(x, ...) {
+    stop("not yet implemented")
+}
+
+augment.randomForest.unsupervised <- function(x, ...) {
+    stop("not yet implemented")
 }
 
 #' @export

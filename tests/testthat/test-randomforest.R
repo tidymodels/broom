@@ -5,7 +5,7 @@ suppressPackageStartupMessages(library(randomForest))
 
 if (require(randomForest, quietly = TRUE)) {
     set.seed(100)
-    crf <- randomForest(Species ~ ., data = iris, importance = TRUE)
+    crf <- randomForest(Species ~ ., data = iris, importance = TRUE, localImp = TRUE, proximity = TRUE)
     crf_cats <- levels(iris[["Species"]])
     crf_base_names <- c(crf_cats, "MeanDecreaseAccuracy")
     crf_vars <- names(iris[, -5])
@@ -46,7 +46,9 @@ if (require(randomForest, quietly = TRUE)) {
     })
     
     test_that("augment works on randomForest models", {
-        expect_error(auc <- augment(crf))
+        auc <- augment(crf)
+        expect_equal(colnames(auc), c(names(iris), paste0(".votes_", crf_cats), paste0(".li_", crf_vars), ".oob_times", ".predicted"))
+        expect_equal(nrow(auc), nrow(iris))
         
         expect_error(aur <- augment(rrf))
         
