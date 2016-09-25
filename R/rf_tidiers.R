@@ -12,122 +12,25 @@
 #'   
 #' @name rf_tidiers
 #'   
-#' @param x rf object
-#' @param data Original data, defaults to the extracting it from the model
-#' @param newdata If provided, performs predictions on the new data
-#' @param type.predict Type of prediction to compute for a GLM; passed on to 
-#'   \code{\link{predict.glm}}
-#' @param type.residuals Type of residuals to compute for a GLM; passed on to 
-#'   \code{\link{residuals.glm}}
+#' @param x randomForest object
 #'   
 #' @examples
-#' 
-#' library(ggplot2)
-#' library(dplyr)
-#' 
-#' set.seed(71)
-#' rf <- randomForest(Species ~ ., data = iris, importance = TRUE, proximity = TRUE)
-#' 
-#' tidy(mod)
-#' glance(mod)
-#' 
-#' # coefficient plot
-#' d <- tidy(mod) %>% mutate(low = estimate - std.error,
-#'                           high = estimate + std.error)
-#' ggplot(d, aes(estimate, term, xmin = low, xmax = high, height = 0)) +
-#'      geom_point() +
-#'      geom_vline(xintercept = 0) +
-#'      geom_errorbarh()
-#' 
-#' head(augment(mod))
-#' head(augment(mod, mtcars))
-#' 
-#' # predict on new data
-#' newdata <- mtcars %>% head(6) %>% mutate(wt = wt + 1)
-#' augment(mod, newdata = newdata)
-#' 
-#' au <- augment(mod, data = mtcars)
-#' 
-#' plot(mod, which = 1)
-#' qplot(.fitted, .resid, data = au) +
-#'   geom_hline(yintercept = 0) +
-#'   geom_smooth(se = FALSE)
-#' qplot(.fitted, .std.resid, data = au) +
-#'   geom_hline(yintercept = 0) +
-#'   geom_smooth(se = FALSE)
-#' qplot(.fitted, .std.resid, data = au,
-#'   colour = factor(cyl))
-#' qplot(mpg, .std.resid, data = au, colour = factor(cyl))
-#' 
-#' plot(mod, which = 2)
-#' qplot(sample =.std.resid, data = au, stat = "qq") +
-#'     geom_abline()
-#' 
-#' plot(mod, which = 3)
-#' qplot(.fitted, sqrt(abs(.std.resid)), data = au) + geom_smooth(se = FALSE)
-#' 
-#' plot(mod, which = 4)
-#' qplot(seq_along(.cooksd), .cooksd, data = au)
-#' 
-#' plot(mod, which = 5)
-#' qplot(.hat, .std.resid, data = au) + geom_smooth(se = FALSE)
-#' ggplot(au, aes(.hat, .std.resid)) +
-#'   geom_vline(size = 2, colour = "white", xintercept = 0) +
-#'   geom_hline(size = 2, colour = "white", yintercept = 0) +
-#'   geom_point() + geom_smooth(se = FALSE)
-#' 
-#' qplot(.hat, .std.resid, data = au, size = .cooksd) +
-#'   geom_smooth(se = FALSE, size = 0.5)
-#' 
-#' plot(mod, which = 6)
-#' ggplot(au, aes(.hat, .cooksd)) +
-#'   geom_vline(xintercept = 0, colour = NA) +
-#'   geom_abline(slope = seq(0, 3, by = 0.5), colour = "white") +
-#'   geom_smooth(se = FALSE) +
-#'   geom_point()
-#' qplot(.hat, .cooksd, size = .cooksd / .hat, data = au) + scale_size_area()
-#' 
-#' # column-wise models
-#' a <- matrix(rnorm(20), nrow = 10)
-#' b <- a + rnorm(length(a))
-#' result <- lm(b ~ a)
-#' tidy(result)
 NULL
 
-
-#' @rdname lm_tidiers
+#' @rdname rf_tidiers
 #' 
-#' @param conf.int whether to include a confidence interval
-#' @param conf.level confidence level of the interval, used only if
-#' \code{conf.int=TRUE}
-#' @param exponentiate whether to exponentiate the coefficient estimates
-#' and confidence intervals (typical for logistic regression)
-#' @param quick whether to compute a smaller and faster version, containing
-#' only the \code{term} and \code{estimate} columns.
-#' 
-#' @details If \code{conf.int=TRUE}, the confidence interval is computed with
-#' the \code{\link{confint}} function.
-#' 
-#' While \code{tidy} is supported for "mlm" objects, \code{augment} and
-#' \code{glance} are not.
-#' 
-#' @return \code{tidy.lm} returns one row for each coefficient, with five columns:
+#' @return Returns one row for each coefficient, with five columns:
 #'   \item{term}{The term in the linear model being estimated and tested}
 #'   \item{estimate}{The estimated coefficient}
 #'   \item{std.error}{The standard error from the linear model}
 #'   \item{statistic}{t-statistic}
 #'   \item{p.value}{two-sided p-value}
 #' 
-#' If the linear model is an "mlm" object (multiple linear model), there is an
-#' additional column:
-#'   \item{response}{Which response column the coefficients correspond to
-#'   (typically Y1, Y2, etc)}
-#' 
-#' If \code{conf.int=TRUE}, it also includes columns for \code{conf.low} and
-#' \code{conf.high}, computed with \code{\link{confint}}.
-#' 
 #' @export
-tidy.randomForest <- function(x, ...) {
+tidy.randomForest.formula <- function(x, ...) {
+    if (is.null(x[["importance"]]))
+        stop("To use tidy() on a randomForest model, build the model with importance = TRUE")
+    
     tidy.randomForest.method <- switch(x[["type"]],
                                        "classification" = tidy.randomForest.classification,
                                        "regression" = tidy.randomForest.regression,
@@ -135,152 +38,100 @@ tidy.randomForest <- function(x, ...) {
     tidy.randomForest.method(x, ...)
 }
 
-
-#' @rdname lm_tidiers
 #' @export
+tidy.randomForest <- tidy.randomForest.formula
+
+#' @rdname rf_tidiers
 tidy.randomForest.classification <- function(x, ...) {
-    imp_m <- randomForest::importance(x)
-    var_names <- rownames(imp_m)
+    imp_m <- as.data.frame(x[["importance"]])
+    imp_m <- tibble::rownames_to_column(imp_m, var = "term")
+    imp_sd <- as.data.frame(x[["importanceSD"]])
+    names(imp_sd) <- paste("sd", names(imp_sd), sep = "_")
     
-    co <- stats::coef(x)
-    nn <- c("estimate", "std.error", "statistic", "p.value")
-    if (inherits(co, "listof")) {
-        # multiple response variables
-        ret <- plyr::ldply(co, fix_data_frame, nn[1:ncol(co[[1]])],
-                           .id = "response")
-        ret$response <- stringr::str_replace(ret$response, "Response ", "")
-    } else {
-        ret <- fix_data_frame(co, nn[1:ncol(co)])
-    }
-    
-    ret
+    dplyr::bind_cols(imp_m, imp_sd)
 }
 
 tidy.randomForest.regression <- function(x, ...) {
-    stop("tidy() is not yet implemented for regression randomForest models.")
+    imp_m <- as.data.frame(x[["importance"]])
+    names(imp_m) <- c("percent_inc_mse", "inc_node_purity")
+    imp_m <- tibble::rownames_to_column(imp_m, var = "term")
+    imp_sd <- x[["importanceSD"]]
+    
+    imp_m$imp_sd <- imp_sd
+    imp_m
+}
+
+# Small helper function to append "group" before the numeric labels that
+# randomForest gives to the unsupervised clusters that it produces.
+rename_groups <- function(n) {
+    ifelse(grepl("^\\d", n), paste0("group_", n), n)
 }
 
 tidy.randomForest.unsupervised <- function(x, ...) {
-    stop("tidy() is not yet implemented for unsupervised randomForest models.")
+    imp_m <- as.data.frame(x[["importance"]])
+    imp_m <- tibble::rownames_to_column(imp_m, var = "term")
+    names(imp_m) <- rename_groups(names(imp_m))
+    imp_sd <- as.data.frame(x[["importanceSD"]])
+    names(imp_sd) <- paste("sd", names(imp_sd), sep = "_")
+    
+    dplyr::bind_cols(imp_m, imp_sd)
 }
-
-
-#' @rdname lm_tidiers
-#' 
-#' @template augment_NAs
-#' 
-#' @details Code and documentation for \code{augment.lm} originated in the
-#' ggplot2 package, where it was called \code{fortify.lm}
-#' 
-#' @return When \code{newdata} is not supplied \code{augment.lm} returns
-#' one row for each observation, with seven columns added to the original
-#' data:
-#'   \item{.hat}{Diagonal of the hat matrix}
-#'   \item{.sigma}{Estimate of residual standard deviation when
-#'     corresponding observation is dropped from model}
-#'   \item{.cooksd}{Cooks distance, \code{\link{cooks.distance}}}
-#'   \item{.fitted}{Fitted values of model}
-#'   \item{.se.fit}{Standard errors of fitted values}
-#'   \item{.resid}{Residuals}
-#'   \item{.std.resid}{Standardised residuals}
-#' 
-#' (Some unusual "lm" objects, such as "rlm" from MASS, may omit
-#' \code{.cooksd} and \code{.std.resid}. "gam" from mgcv omits 
-#' \code{.sigma})
-#' 
-#' When \code{newdata} is supplied, \code{augment.lm} returns one row for each
-#' observation, with three columns added to the new data:
-#'   \item{.fitted}{Fitted values of model}
-#'   \item{.se.fit}{Standard errors of fitted values}
-#'   \item{.resid}{Residuals of fitted values on the new data}
-#' 
-#' @export
-augment.randomForest <- function(x, data = stats::model.frame(x), newdata,
-                       type.predict, type.residuals, ...) {   
-    stop("augment() is not yet implemented for randomForest models.")
-    augment_columns(x, data, newdata, type.predict = type.predict,
-                           type.residuals = type.residuals)
-}
-
 
 #' @rdname rf_tidiers
 #' 
+#' @template augment_NAs
+#'  
+#' @export
+augment.randomForest.formula <- function(x, ...) {   
+    stop("augment() is not yet implemented for randomForest models.")
+}
+
+#' @export
+augment.randomForest <- augment.randomForest.formula
+
+#' @rdname rf_tidiers
+#'   
 #' @param ... extra arguments (not used)
-#' 
-#' @return \code{glance.lm} returns a one-row data.frame with the columns
-#'   \item{r.squared}{The percent of variance explained by the model}
-#'   \item{adj.r.squared}{r.squared adjusted based on the degrees of freedom}
-#'   \item{sigma}{The square root of the estimated residual variance}
-#'   \item{statistic}{F-statistic}
-#'   \item{p.value}{p-value from the F test, describing whether the full
-#'   regression is significant}
-#'   \item{df}{Degrees of freedom used by the coefficients}
-#'   \item{logLik}{the data's log-likelihood under the model}
-#'   \item{AIC}{the Akaike Information Criterion}
-#'   \item{BIC}{the Bayesian Information Criterion}
-#'   \item{deviance}{deviance}
-#'   \item{df.residual}{residual degrees of freedom}
-#' 
+#'   
+#' @return \code{glance.randomForest.formula} returns a one-row data.frame, with
+#'   the number of trees and \code{mtry} for the model. Classification models
+#'   additionally have the mean error rate, while regression models contain the
+#'   mean \code{mse} and \code{rsq} value.
+#'   
 #' @export
-glance.randomForest <- function(x, ...) {
-    stop("glance() is not yet implemented for randomForest models.")
-    # use summary.lm explicity, so that c("aov", "lm") objects can be
-    # summarized and glanced at
-    s <- stats::summary.lm(x)
-    ret <- glance.summary.lm(s, ...)
-    ret <- finish_glance(ret, x)
-    ret
-}
+glance.randomForest.formula <- function(x, ...) {
 
-
-#' @rdname lm_tidiers
-#' @export
-glance.randomForest.function <- function(x, ...) {
-    ret <- with(x, data.frame(r.squared=r.squared,
-                              adj.r.squared=adj.r.squared,
-                              sigma=sigma,
-                              statistic=fstatistic[1],
-                              p.value=pf(fstatistic[1], fstatistic[2],
-                                         fstatistic[3],
-                                         lower.tail=FALSE),
-                              df=df[1]))
+    glance.method <- switch(x[["type"]],
+                            "classification" = glance.randomForest.classification,
+                            "regression" = glance.randomForest.regression,
+                            "unsupervised" = glance.randomForest.unsupervised)
     
-    unrowname(ret)
+    glance.method(x, ...)
 }
 
-#' helper function to process a tidied lm object
-#' 
-#' Adds a confidence interval, and possibly exponentiates, a tidied
-#' object. Useful for operations shared between lm and biglm.
-#' 
-#' @param ret data frame with a tidied version of a coefficient matrix
-#' @param x an "lm", "glm", "biglm", or "bigglm" object
-#' @param conf.int whether to include a confidence interval
-#' @param conf.level confidence level of the interval, used only if
-#' \code{conf.int=TRUE}
-#' @param exponentiate whether to exponentiate the coefficient estimates
-#' and confidence intervals (typical for logistic regression)
-# process_lm <- function(ret, x, conf.int = FALSE, conf.level = .95,
-#                        exponentiate = FALSE) {
-#     if (exponentiate) {
-#         # save transformation function for use on confidence interval
-#         if (is.null(x$family) ||
-#             (x$family$link != "logit" && x$family$link != "log")) {
-#             warning(paste("Exponentiating coefficients, but model did not use",
-#                           "a log or logit link function"))
-#         }
-#         trans <- exp
-#     } else {
-#         trans <- identity
-#     }
-#     
-#     if (conf.int) {
-#         # avoid "Waiting for profiling to be done..." message
-#         CI <- suppressMessages(stats::confint(x, level = conf.level))
-#         colnames(CI) = c("conf.low", "conf.high")
-#         ret <- cbind(ret, trans(unrowname(CI)))
-#     }
-#     ret$estimate <- trans(ret$estimate)
-#     
-#     ret
-# }
+#' @export
+glance.randomForest <- glance.randomForest.formula
+
+#' @rdname rf_tidiers
+glance.randomForest.classification <- function(x, ...) {
+    ntree <- x[["ntree"]]
+    mtry <- x[["mtry"]]
+    err.rate <- mean(x[["err.rate"]])
+    data.frame(ntree = ntree, mtry = mtry, err.rate = err.rate)
+}
+
+#' @rdname rf_tidiers
+glance.randomForest.regression <- function(x, ...) {
+    ntree <- x[["ntree"]]
+    mtry <- x[["mtry"]]
+    mean_mse <- mean(x[["mse"]])
+    mean_rsq <- mean(x[["rsq"]])
+    data.frame(ntree = ntree, mtry = mtry, mean_mse = mean_mse, mean_rsq = mean_rsq)
+}
+
+#' @rdname rf_tidiers
+glance.randomForest.unsupervised <- function(x, ...) {
+    ntree <- x[["ntree"]]
+    mtry <- x[["mtry"]]
+    data.frame(ntree = ntree, mtry = mtry)
+}
