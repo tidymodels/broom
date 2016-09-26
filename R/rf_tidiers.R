@@ -136,9 +136,9 @@ augment.randomForest.classification <- function(x, data, ...) {
     names(full_votes) <- paste("votes", names(full_votes), sep = "_")
     
     local_imp <- x[["localImportance"]]
-    full_imp <- matrix(data = NA_real_, nrow = nrow(local_imp), ncol = n_data)
     
     if (!is.null(local_imp)) {
+        full_imp <- matrix(data = NA_real_, nrow = nrow(local_imp), ncol = n_data)
         full_imp[, which(!na_at)] <- local_imp
         rownames(full_imp) <- rownames(local_imp)
         full_imp <- as.data.frame(t(full_imp))
@@ -165,13 +165,15 @@ augment.randomForest.regression <- function(x, data, ...) {
     predicted[!na_at] <- x[["predicted"]]
     
     local_imp <- x[["localImportance"]]
-    full_imp <- matrix(data = NA_real_, nrow = nrow(local_imp), ncol = n_data)
     
     if (!is.null(local_imp)) {
+        full_imp <- matrix(data = NA_real_, nrow = nrow(local_imp), ncol = n_data)
         full_imp[, which(!na_at)] <- local_imp
         rownames(full_imp) <- rownames(local_imp)
         full_imp <- as.data.frame(t(full_imp))
         names(full_imp) <- paste("li", names(full_imp), sep = "_")
+    } else {
+        warning("casewise importance measures are not available. Run randomForest(..., localImp = TRUE) for more detailed results.")
     }
     
     d <- data.frame(oob_times = oob_times, predicted = predicted)
