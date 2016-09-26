@@ -203,8 +203,29 @@ glance.randomForest <- glance.randomForest.formula
 glance.randomForest.classification <- function(x, ...) {
     ntree <- x[["ntree"]]
     mtry <- x[["mtry"]]
-    err.rate <- mean(x[["err.rate"]])
-    data.frame(ntree = ntree, mtry = mtry, err.rate = err.rate)
+    
+    actual <- x[["y"]]
+    predicted <- x[["predicted"]]
+    
+    per_level <- function(l) {  
+        tp <- sum(actual == l & predicted == l)
+        tn <- sum(actual != l & predicted != l)
+        fp <- sum(actual != l & predicted == l)
+        fn <- sum(actual == l & predicted != l)
+        
+        precision <- tp / (tp + fp)
+        recall <- tp / (tp + fn)
+        accuracy <- (tp + tn) / (tp + tn + fp + fn)
+        f_measure <- 2 * ((precision * recall) / (precision + recall))
+        
+        ml <- list(precision, recall, accuracy, f_measure)
+        names(ml) <- paste(l, c("precision", "recall", "accuracy", "f_measure"), sep = "_")
+        as.data.frame(ml)
+    }
+    
+    measure_list <- dplyr::bind_cols(lapply(levels(actual), per_level))
+    d <- data.frame(ntree = ntree, mtry = mtry)
+    dplyr::bind_cols(d, measure_list)
 }
 
 #' @rdname rf_tidiers
