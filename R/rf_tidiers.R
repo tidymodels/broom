@@ -189,8 +189,6 @@ augment.randomForest <- augment.randomForest.formula
 
 #' @rdname rf_tidiers
 #'   
-#' @param ... extra arguments (not used)
-#'   
 #' @return \code{glance.randomForest.formula} returns a one-row data.frame with
 #'   the following columns:
 #'   \item{ntree}{The number of trees grown.}
