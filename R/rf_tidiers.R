@@ -28,9 +28,6 @@ NULL
 #' 
 #' @export
 tidy.randomForest.formula <- function(x, ...) {
-    if (is.null(x[["importance"]]))
-        stop("To use tidy() on a randomForest model, build the model with importance = TRUE")
-    
     tidy.randomForest.method <- switch(x[["type"]],
                                        "classification" = tidy.randomForest.classification,
                                        "regression" = tidy.randomForest.regression,
@@ -45,10 +42,16 @@ tidy.randomForest <- tidy.randomForest.formula
 tidy.randomForest.classification <- function(x, ...) {
     imp_m <- as.data.frame(x[["importance"]])
     imp_m <- fix_data_frame(imp_m)
-    imp_sd <- as.data.frame(x[["importanceSD"]])
-    names(imp_sd) <- paste("sd", names(imp_sd), sep = "_")
     
-    dplyr::bind_cols(imp_m, imp_sd)
+    if (is.null(x[["importanceSD"]])) {
+        warning("Only MeanDecreaseGini is available from this model. Run randomforest(..., importance = TRUE) for more detailed results")
+        imp_m
+    } else {
+        imp_sd <- as.data.frame(x[["importanceSD"]])
+        names(imp_sd) <- paste("sd", names(imp_sd), sep = "_")
+        
+        dplyr::bind_cols(imp_m, imp_sd)    
+    }
 }
 
 tidy.randomForest.regression <- function(x, ...) {
@@ -82,17 +85,14 @@ tidy.randomForest.unsupervised <- function(x, ...) {
 #' @template augment_NAs
 #'  
 #' @export
-augment.randomForest.formula <- function(x, data = NULL, ...) {   
+augment.randomForest.formula <- function(x, df = NULL, ...) {   
     
-    if (is.null(data)) {
+    if (is.null(df)) {
         if (is.null(x$call$data)) {
             list <- lapply(all.vars(x$call$formula), as.name)
-            data <- eval(as.call(list(quote(data.frame),list)), parent.frame())
-        } else{
-            data <- eval(x$call$data,parent.frame())
-        }
-        if (!is.null(x$na.action)) {
-            data <- slice(data,-as.vector(x$na.action))
+            df <- eval(as.call(list(quote(data.frame),list)), parent.frame())
+        } else {
+            df <- eval(x$call$data,parent.frame())
         }
     }
     
@@ -100,33 +100,77 @@ augment.randomForest.formula <- function(x, data = NULL, ...) {
                                        "classification" = augment.randomForest.classification,
                                        "regression" = augment.randomForest.regression,
                                        "unsupervised" = augment.randomForest.unsupervised)
-    augment.randomForest.method(x, data, ...)
+    augment.randomForest.method(x, df, ...)
 }
 
 #' @export
 augment.randomForest <- augment.randomForest.formula
 
 augment.randomForest.classification <- function(x, data, ...) {
-    oob_times <- x[["oob.times"]]
-    votes <- as.data.frame(x[["votes"]])
-    names(votes) <- paste("votes", names(votes), sep = "_")
-    predicted <- x[["predicted"]]
-    local_imp <- x[["localImportance"]]
     
-    if (!is.null(local_imp)) {
-        local_imp <- as.data.frame(t(local_imp))
-        names(local_imp) <- paste("li", names(local_imp), sep = "_")
+    n_data <- nrow(data)
+    if (is.null(x[["na.action"]])) {
+        na_at <- rep(FALSE, times = n_data)
+    } else {
+        na_at <- seq_len(n_data) %in% as.integer(x[["na.action"]])
     }
     
-    d <- dplyr::bind_cols(votes, local_imp)
+    oob_times <- rep(NA_integer_, times = n_data)
+    oob_times[!na_at] <- x[["oob.times"]]
+    
+    predicted <- rep(NA, times = n_data)
+    predicted[!na_at] <- x[["predicted"]]
+    predicted <- factor(predicted, labels = levels(x[["y"]]))
+    
+    votes <- x[["votes"]]
+    full_votes <- matrix(data = NA, nrow = n_data, ncol = ncol(votes))
+    full_votes[which(!na_at),] <- votes
+    colnames(full_votes) <- colnames(votes)
+    full_votes <- as.data.frame(full_votes)
+    names(full_votes) <- paste("votes", names(full_votes), sep = "_")
+    
+    local_imp <- x[["localImportance"]]
+    full_imp <- matrix(data = NA_real_, nrow = nrow(local_imp), ncol = n_data)
+    
+    if (!is.null(local_imp)) {
+        full_imp[, which(!na_at)] <- local_imp
+        rownames(full_imp) <- rownames(local_imp)
+        full_imp <- as.data.frame(t(full_imp))
+        names(full_imp) <- paste("li", names(full_imp), sep = "_")
+    }
+    
+    d <- dplyr::bind_cols(full_votes, full_imp)
     d$oob_times <- oob_times
     d$predicted <- predicted
     names(d) <- paste0(".", names(d))
     dplyr::bind_cols(data, d)
 }
 
-augment.randomForest.regression <- function(x, ...) {
-    stop("not yet implemented")
+augment.randomForest.regression <- function(x, data, ...) {
+
+    n_data <- nrow(data)
+    na_at <- seq_len(n_data) %in% as.integer(x[["na.action"]])
+    
+    oob_times <- rep(NA_integer_, times = n_data)
+    oob_times[!na_at] <- x[["oob.times"]]
+    
+    predicted <- rep(NA_real_, times = n_data)
+    predicted[!na_at] <- x[["predicted"]]
+    
+    local_imp <- x[["localImportance"]]
+    full_imp <- matrix(data = NA_real_, nrow = nrow(local_imp), ncol = n_data)
+    
+    if (!is.null(local_imp)) {
+        full_imp[, which(!na_at)] <- local_imp
+        rownames(full_imp) <- rownames(local_imp)
+        full_imp <- as.data.frame(t(full_imp))
+        names(full_imp) <- paste("li", names(full_imp), sep = "_")
+    }
+    
+    d <- data.frame(oob_times = oob_times, predicted = predicted)
+    d <- dplyr::bind_cols(d, full_imp)
+    names(d) <- paste0(".", names(d))
+    dplyr::bind_cols(data, d)
 }
 
 augment.randomForest.unsupervised <- function(x, ...) {

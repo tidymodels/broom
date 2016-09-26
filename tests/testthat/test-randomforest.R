@@ -5,24 +5,53 @@ suppressPackageStartupMessages(library(randomForest))
 
 if (require(randomForest, quietly = TRUE)) {
     set.seed(100)
-    crf <- randomForest(Species ~ ., data = iris, importance = TRUE, localImp = TRUE, proximity = TRUE)
-    crf_cats <- levels(iris[["Species"]])
-    crf_base_names <- c(crf_cats, "MeanDecreaseAccuracy")
-    crf_vars <- names(iris[, -5])
-    crf_noimp <- randomForest(Species ~ ., data = iris, importance = TRUE)
     
+    # Salt vector with NAs
+    v_salt_na <- function(x, m) {
+        i <- sample.int(length(x), size = m, replace = FALSE)
+        x[i] <- NA
+        x
+    }
+    
+    df_salt_na <- function(df, frac, col_names) {
+        m <- round(nrow(df) * frac)
+        dplyr::mutate_at(df, .funs = dplyr::funs(v_salt_na(., m)), .cols = col_names)
+    }
+    
+    salted_iris <- df_salt_na(iris, 0.1, c("Sepal.Length", "Sepal.Width", "Petal.Length", "Petal.Width"))
+    
+    # Classification rf
+    crf <- randomForest(Species ~ ., data = salted_iris, localImp = TRUE, na.action = na.omit)
+    crf_fix <- randomForest(Species ~ ., data = salted_iris, localImp = TRUE, na.action = na.roughfix)
+    
+    crf_cats <- levels(salted_iris[["Species"]])
+    crf_base_names <- c(crf_cats, "MeanDecreaseAccuracy")
+    crf_vars <- names(salted_iris[, -5])
+    
+    crf_noimp <- randomForest(Species ~ ., data = salted_iris, importance = FALSE, na.action = na.omit)
+    
+    # Regression rf
     rrf <- randomForest(Ozone ~ ., data = airquality, mtry = 3,
-                        importance = TRUE, na.action = na.omit)
+                        localImp = TRUE, na.action = na.omit)
     rrf_vars <- names(airquality[, -1])
     
     rrf_noimp <- randomForest(Ozone ~ ., data = airquality, mtry = 3,
                         importance = FALSE, na.action = na.omit)
+    
+    # Unsupervised rf
     urf <- randomForest(iris[, -5], importance = TRUE)
     
     test_that("tidy works on randomForest models", {
         tdc <- tidy(crf)
-        expect_equal(colnames(tidy(crf)), c("term", crf_base_names, "MeanDecreaseGini", paste("sd", crf_base_names, sep = "_")))
+        tdc_fix <- tidy(crf_fix)
+        expect_warning(tdc_noimp <- tidy(crf_noimp), "Only MeanDecreaseGini")
+        
+        expect_equal(colnames(tdc), c("term", crf_base_names, "MeanDecreaseGini", paste("sd", crf_base_names, sep = "_")))
         expect_equal(tdc[["term"]], crf_vars)
+        expect_equal(colnames(tdc_fix), c("term", crf_base_names, "MeanDecreaseGini", paste("sd", crf_base_names, sep = "_")))
+        expect_equal(tdc_fix[["term"]], crf_vars)
+        expect_equal(colnames(tdc_noimp), c("term", "MeanDecreaseGini"))
+        expect_equal(tdc_noimp[["term"]], crf_vars)
         
         tdr <- tidy(rrf)
         expect_equal(colnames(tdr), c("term", "percent_inc_mse", "inc_node_purity", "imp_sd"))
@@ -47,12 +76,18 @@ if (require(randomForest, quietly = TRUE)) {
     
     test_that("augment works on randomForest models", {
         auc <- augment(crf)
+        auc_fix <- augment(crf_fix)
+        expect_error(auc_noimp <- augment(crf_noimp))
+        
         expect_equal(colnames(auc), c(names(iris), paste0(".votes_", crf_cats), paste0(".li_", crf_vars), ".oob_times", ".predicted"))
         expect_equal(nrow(auc), nrow(iris))
+        expect_equal(colnames(auc_fix), c(names(iris), paste0(".votes_", crf_cats), paste0(".li_", crf_vars), ".oob_times", ".predicted"))
+        expect_equal(nrow(auc_fix), nrow(iris))
         
-        expect_error(aur <- augment(rrf))
+        aur <- augment(rrf)
+        expect_equal(colnames(aur), c(names(airquality), ".oob_times", ".predicted", paste0(".li_", rrf_vars)))
+        expect_equal(nrow(aur), nrow(airquality))
         
         expect_error(auu <- augment(urf))
-        
     })
 }
