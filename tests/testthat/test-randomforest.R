@@ -25,7 +25,6 @@ if (require(randomForest, quietly = TRUE)) {
     crf_fix <- randomForest(Species ~ ., data = salted_iris, localImp = TRUE, na.action = na.roughfix)
     
     crf_cats <- levels(salted_iris[["Species"]])
-    crf_base_names <- c(crf_cats, "MeanDecreaseAccuracy")
     crf_vars <- names(salted_iris[, -5])
     
     crf_noimp <- randomForest(Species ~ ., data = salted_iris, importance = FALSE, na.action = na.omit)
@@ -46,9 +45,11 @@ if (require(randomForest, quietly = TRUE)) {
         tdc_fix <- tidy(crf_fix)
         expect_warning(tdc_noimp <- tidy(crf_noimp), "Only MeanDecreaseGini")
         
-        expect_equal(colnames(tdc), c("term", crf_base_names, "MeanDecreaseGini", paste("sd", crf_base_names, sep = "_")))
+        tidy_names <- c("term", paste("class", crf_cats, sep = "_"), "MeanDecreaseAccuracy", "MeanDecreaseGini", paste("sd", c(crf_cats, "MeanDecreaseAccuracy"), sep = "_"))
+        
+        expect_equal(colnames(tdc), tidy_names)
         expect_equal(tdc[["term"]], crf_vars)
-        expect_equal(colnames(tdc_fix), c("term", crf_base_names, "MeanDecreaseGini", paste("sd", crf_base_names, sep = "_")))
+        expect_equal(colnames(tdc_fix), tidy_names)
         expect_equal(tdc_fix[["term"]], crf_vars)
         expect_equal(colnames(tdc_noimp), c("term", "MeanDecreaseGini"))
         expect_equal(tdc_noimp[["term"]], crf_vars)
@@ -61,10 +62,19 @@ if (require(randomForest, quietly = TRUE)) {
     })
     
     test_that("glance works on randomForest models", {
-        glc <- glance(crf)
-        expect_equal(colnames(glc), c("ntree", "mtry", "err.rate"))
-        expect_equal(nrow(glc), 1)
+        measure_names <- c("precision", "recall", "accuracy", "f_measure")
+        glance_names <- c("ntree", "mtry", unlist(lapply(crf_cats, function(x) paste(x, measure_names, sep = "_"))))
         
+        glc <- glance(crf)
+        glc_fix <- glance(crf_fix)
+        glc_noimp <- glance(crf_noimp)
+        expect_equal(colnames(glc), glance_names)
+        expect_equal(nrow(glc), 1)
+        expect_equal(colnames(glc_fix), glance_names)
+        expect_equal(nrow(glc_fix), 1)
+        expect_equal(colnames(glc_fix), glance_names)
+        expect_equal(nrow(glc_fix), 1)
+
         glr <- glance(rrf)
         expect_equal(colnames(glr), c("ntree", "mtry", "mean_mse", "mean_rsq"))
         expect_equal(nrow(glr), 1)
@@ -79,9 +89,9 @@ if (require(randomForest, quietly = TRUE)) {
         auc_fix <- augment(crf_fix)
         expect_error(auc_noimp <- augment(crf_noimp))
         
-        expect_equal(colnames(auc), c(names(iris), paste0(".votes_", crf_cats), paste0(".li_", crf_vars), ".oob_times", ".predicted"))
+        expect_equal(colnames(auc), c(names(iris), ".oob_times", ".predicted", paste0(".votes_", crf_cats), paste0(".li_", crf_vars)))
         expect_equal(nrow(auc), nrow(iris))
-        expect_equal(colnames(auc_fix), c(names(iris), paste0(".votes_", crf_cats), paste0(".li_", crf_vars), ".oob_times", ".predicted"))
+        expect_equal(colnames(auc_fix), c(names(iris), ".oob_times", ".predicted", paste0(".votes_", crf_cats), paste0(".li_", crf_vars)))
         expect_equal(nrow(auc_fix), nrow(iris))
         
         aur <- augment(rrf)
