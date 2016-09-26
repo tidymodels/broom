@@ -8,23 +8,20 @@
 #' @return All tidying methods return a \code{data.frame} without rownames. The
 #'   structure depends on the method chosen.
 #'   
-#' @seealso \code{\link{summary.lm}}
-#'   
 #' @name rf_tidiers
 #'   
 #' @param x randomForest object
-#'   
-#' @examples
+#' @param ... Additional arguments (ignored)
 NULL
 
 #' @rdname rf_tidiers
 #' 
-#' @return Returns one row for each coefficient, with five columns:
-#'   \item{term}{The term in the linear model being estimated and tested}
-#'   \item{estimate}{The estimated coefficient}
-#'   \item{std.error}{The standard error from the linear model}
-#'   \item{statistic}{t-statistic}
-#'   \item{p.value}{two-sided p-value}
+#' @return \code{tidy} returns one row for each model term, with the following columns:
+#'   \item{term}{The term in the randomForest model}
+#'   \item{class_*}{One column for each model term; the relative importance of each term per class.}
+#'   \item{MeanDecreaseAccuracy}{A measure of variable importance. See \code{\link[randomForest]{randomForest}} for more information.}
+#'   \item{MeanDecreaseGini}{A measure of variable importance. See \code{\link[randomForest]{randomForest}} for more information.}
+#'   \item{sd_*}{Sandard deviations for the preceding statistics.}
 #' 
 #' @export
 tidy.randomForest.formula <- function(x, ...) {
@@ -45,6 +42,8 @@ tidy.randomForest.classification <- function(x, ...) {
         names(imp_m) <- c(paste("class", head(names(imp_m), -2), sep = "_"), "MeanDecreaseAccuracy", "MeanDecreaseGini")
     imp_m <- fix_data_frame(imp_m)
     
+    # When run with importance = FALSE, randomForest() does not calculate
+    # importanceSD. Issue a warning.
     if (is.null(x[["importanceSD"]])) {
         warning("Only MeanDecreaseGini is available from this model. Run randomforest(..., importance = TRUE) for more detailed results")
         imp_m
@@ -78,11 +77,17 @@ tidy.randomForest.unsupervised <- function(x, ...) {
 
 #' @rdname rf_tidiers
 #' 
-#' @template augment_NAs
-#'  
+#' @return \code{augment} returns the original data with additional columns:
+#'   \item{.oob_times}{The number of trees for which the given case was "out of bag". See \code{\link[randomForest]{randomForest} for more details.}}
+#'   \item{.predicted}{The model prediction.}
+#'   \item{.li_*}{The casewise variable importance for each term. Note: only returned if \code{\link[randomForest]{randomForest}} was run with \code{localImp = TRUE}.}
+#'   In addition, \code{augment} returns additional columns for classification trees:
+#'   \item{.votes_*}{For each case, the voting results, with one column per class.}
+#'   
 #' @export
 augment.randomForest.formula <- function(x, df = NULL, ...) {   
     
+    # Extract data from model
     if (is.null(df)) {
         if (is.null(x$call$data)) {
             list <- lapply(all.vars(x$call$formula), as.name)
@@ -103,6 +108,11 @@ augment.randomForest.formula <- function(x, df = NULL, ...) {
 augment.randomForest <- augment.randomForest.formula
 
 augment.randomForest.classification <- function(x, data, ...) {
+    
+    # When na.omit is used, case-wise model attributes will only be calculated
+    # for complete cases in the original data. All columns returned with
+    # augment() must be expanded to the length of the full data, inserting NA
+    # for all missing values.
     
     n_data <- nrow(data)
     if (is.null(x[["na.action"]])) {
@@ -133,11 +143,12 @@ augment.randomForest.classification <- function(x, data, ...) {
         rownames(full_imp) <- rownames(local_imp)
         full_imp <- as.data.frame(t(full_imp))
         names(full_imp) <- paste("li", names(full_imp), sep = "_")
+    } else {
+        warning("casewise importance measures are not available. Run randomForest(..., localImp = TRUE) for more detailed results.")
     }
     
-    d <- dplyr::bind_cols(full_votes, full_imp)
-    d$oob_times <- oob_times
-    d$predicted <- predicted
+    d <- data.frame(oob_times = oob_times, predicted = predicted)
+    d <- dplyr::bind_cols(d, full_votes, full_imp)
     names(d) <- paste0(".", names(d))
     dplyr::bind_cols(data, d)
 }
@@ -180,10 +191,18 @@ augment.randomForest <- augment.randomForest.formula
 #'   
 #' @param ... extra arguments (not used)
 #'   
-#' @return \code{glance.randomForest.formula} returns a one-row data.frame, with
-#'   the number of trees and \code{mtry} for the model. Classification models
-#'   additionally have the mean error rate, while regression models contain the
-#'   mean \code{mse} and \code{rsq} value.
+#' @return \code{glance.randomForest.formula} returns a one-row data.frame with
+#'   the following columns:
+#'   \item{ntree}{The number of trees grown.}
+#'   \item{mtry}{Number of variables randomly sampled as candidates at each split.}
+#'   For regression trees, the following additional columns are present:
+#'   \item{mse}{The average mean squared error across all trees.}
+#'   \item{rsq}{The average pesudo-R-squared across all trees. See \code{\link[randomForest]{randomForest}} for more information.}
+#'   For classification trees, the following columns are present for each class
+#'   \item{*_precision}{}
+#'   \item{*_recall}{}
+#'   \item{*_accuracy}{}
+#'   \item{*_f_measure}{}
 #'   
 #' @export
 glance.randomForest.formula <- function(x, ...) {
