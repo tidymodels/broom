@@ -41,6 +41,8 @@ tidy.randomForest <- tidy.randomForest.formula
 #' @rdname rf_tidiers
 tidy.randomForest.classification <- function(x, ...) {
     imp_m <- as.data.frame(x[["importance"]])
+    if (ncol(imp_m) > 1)
+        names(imp_m) <- c(paste("class", head(names(imp_m), -2), sep = "_"), "MeanDecreaseAccuracy", "MeanDecreaseGini")
     imp_m <- fix_data_frame(imp_m)
     
     if (is.null(x[["importanceSD"]])) {
