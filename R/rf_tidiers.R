@@ -64,12 +64,6 @@ tidy.randomForest.regression <- function(x, ...) {
     imp_m
 }
 
-# Small helper function to append "group" before the numeric labels that
-# randomForest gives to the unsupervised clusters that it produces.
-rename_groups <- function(n) {
-    ifelse(grepl("^\\d", n), paste0("group_", n), n)
-}
-
 tidy.randomForest.unsupervised <- function(x, ...) {
     imp_m <- as.data.frame(x[["importance"]])
     imp_m <- tibble::rownames_to_column(imp_m, var = "term")
@@ -225,4 +219,10 @@ glance.randomForest.unsupervised <- function(x, ...) {
     ntree <- x[["ntree"]]
     mtry <- x[["mtry"]]
     data.frame(ntree = ntree, mtry = mtry)
+}
+
+# Small helper function to append "group" before the numeric labels that
+# randomForest gives to the unsupervised clusters that it produces.
+rename_groups <- function(n) {
+    ifelse(grepl("^\\d", n), paste0("group_", n), n)
 }
