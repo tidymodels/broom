@@ -11,6 +11,7 @@
 #' @name rf_tidiers
 #'   
 #' @param x randomForest object
+#' @param data Model data for use by \code{\link{augment}}.
 #' @param ... Additional arguments (ignored)
 NULL
 
