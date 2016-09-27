@@ -85,15 +85,15 @@ tidy.randomForest.unsupervised <- function(x, ...) {
 #'   \item{.votes_*}{For each case, the voting results, with one column per class.}
 #'   
 #' @export
-augment.randomForest <- function(x, df = NULL, ...) {   
+augment.randomForest <- function(x, data = NULL, ...) {   
     
     # Extract data from model
-    if (is.null(df)) {
+    if (is.null(data)) {
         if (is.null(x$call$data)) {
             list <- lapply(all.vars(x$call$formula), as.name)
-            df <- eval(as.call(list(quote(data.frame),list)), parent.frame())
+            data <- eval(as.call(list(quote(data.frame),list)), parent.frame())
         } else {
-            df <- eval(x$call$data,parent.frame())
+            data <- eval(x$call$data, parent.frame())
         }
     }
     
@@ -101,7 +101,7 @@ augment.randomForest <- function(x, df = NULL, ...) {
                                        "classification" = augment.randomForest.classification,
                                        "regression" = augment.randomForest.regression,
                                        "unsupervised" = augment.randomForest.unsupervised)
-    augment.randomForest.method(x, df, ...)
+    augment.randomForest.method(x, data, ...)
 }
 
 #' @export
