@@ -137,6 +137,7 @@ augment.randomForest.classification <- function(x, data, ...) {
     names(full_votes) <- paste("votes", names(full_votes), sep = "_")
     
     local_imp <- x[["localImportance"]]
+    full_imp <- NULL
     
     if (!is.null(local_imp)) {
         full_imp <- matrix(data = NA_real_, nrow = nrow(local_imp), ncol = n_data)
@@ -166,6 +167,7 @@ augment.randomForest.regression <- function(x, data, ...) {
     predicted[!na_at] <- x[["predicted"]]
     
     local_imp <- x[["localImportance"]]
+    full_imp <- NULL
     
     if (!is.null(local_imp)) {
         full_imp <- matrix(data = NA_real_, nrow = nrow(local_imp), ncol = n_data)

@@ -87,7 +87,7 @@ if (require(randomForest, quietly = TRUE)) {
     test_that("augment works on randomForest models", {
         auc <- augment(crf)
         auc_fix <- augment(crf_fix)
-        expect_error(auc_noimp <- augment(crf_noimp))
+        expect_warning(auc_noimp <- augment(crf_noimp))
         
         expect_equal(colnames(auc), c(names(iris), ".oob_times", ".fitted", paste0(".votes_", crf_cats), paste0(".li_", crf_vars)))
         expect_equal(nrow(auc), nrow(iris))
