@@ -89,13 +89,13 @@ if (require(randomForest, quietly = TRUE)) {
         auc_fix <- augment(crf_fix)
         expect_error(auc_noimp <- augment(crf_noimp))
         
-        expect_equal(colnames(auc), c(names(iris), ".oob_times", ".predicted", paste0(".votes_", crf_cats), paste0(".li_", crf_vars)))
+        expect_equal(colnames(auc), c(names(iris), ".oob_times", ".fitted", paste0(".votes_", crf_cats), paste0(".li_", crf_vars)))
         expect_equal(nrow(auc), nrow(iris))
-        expect_equal(colnames(auc_fix), c(names(iris), ".oob_times", ".predicted", paste0(".votes_", crf_cats), paste0(".li_", crf_vars)))
+        expect_equal(colnames(auc_fix), c(names(iris), ".oob_times", ".fitted", paste0(".votes_", crf_cats), paste0(".li_", crf_vars)))
         expect_equal(nrow(auc_fix), nrow(iris))
         
         aur <- augment(rrf)
-        expect_equal(colnames(aur), c(names(airquality), ".oob_times", ".predicted", paste0(".li_", rrf_vars)))
+        expect_equal(colnames(aur), c(names(airquality), ".oob_times", ".fitted", paste0(".li_", rrf_vars)))
         expect_equal(nrow(aur), nrow(airquality))
         
         expect_error(auu <- augment(urf))

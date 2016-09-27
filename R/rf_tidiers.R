@@ -80,7 +80,7 @@ tidy.randomForest.unsupervised <- function(x, ...) {
 #' 
 #' @return \code{augment} returns the original data with additional columns:
 #'   \item{.oob_times}{The number of trees for which the given case was "out of bag". See \code{\link[randomForest]{randomForest} for more details.}}
-#'   \item{.predicted}{The model prediction.}
+#'   \item{.fitted}{The fitted value or class.}
 #'   \item{.li_*}{The casewise variable importance for each term. Note: only returned if \code{\link[randomForest]{randomForest}} was run with \code{localImp = TRUE}.}
 #'   In addition, \code{augment} returns additional columns for classification trees:
 #'   \item{.votes_*}{For each case, the voting results, with one column per class.}
@@ -148,7 +148,7 @@ augment.randomForest.classification <- function(x, data, ...) {
         warning("casewise importance measures are not available. Run randomForest(..., localImp = TRUE) for more detailed results.")
     }
     
-    d <- data.frame(oob_times = oob_times, predicted = predicted)
+    d <- data.frame(oob_times = oob_times, fitted = predicted)
     d <- dplyr::bind_cols(d, full_votes, full_imp)
     names(d) <- paste0(".", names(d))
     dplyr::bind_cols(data, d)
@@ -177,7 +177,7 @@ augment.randomForest.regression <- function(x, data, ...) {
         warning("casewise importance measures are not available. Run randomForest(..., localImp = TRUE) for more detailed results.")
     }
     
-    d <- data.frame(oob_times = oob_times, predicted = predicted)
+    d <- data.frame(oob_times = oob_times, fitted = predicted)
     d <- dplyr::bind_cols(d, full_imp)
     names(d) <- paste0(".", names(d))
     dplyr::bind_cols(data, d)
