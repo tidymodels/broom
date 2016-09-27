@@ -58,9 +58,11 @@ tidy.randomForest.classification <- function(x, ...) {
 
 tidy.randomForest.regression <- function(x, ...) {
     imp_m <- as.data.frame(x[["importance"]])
-    names(imp_m) <- c("percent_inc_mse", "inc_node_purity")
     imp_m <- fix_data_frame(imp_m)
     imp_sd <- x[["importanceSD"]]
+    
+    if (is.null(imp_sd))
+        warning("Only IncNodePurity is available from this model. Run randomforest(..., importance = TRUE) for more detailed results")
     
     imp_m$imp_sd <- imp_sd
     imp_m
@@ -70,8 +72,14 @@ tidy.randomForest.unsupervised <- function(x, ...) {
     imp_m <- as.data.frame(x[["importance"]])
     imp_m <- fix_data_frame(imp_m)
     names(imp_m) <- rename_groups(names(imp_m))
-    imp_sd <- as.data.frame(x[["importanceSD"]])
-    names(imp_sd) <- paste("sd", names(imp_sd), sep = "_")
+    imp_sd <- x[["importanceSD"]]
+    
+    if (is.null(imp_sd)) {
+        warning("Only MeanDecreaseGini is available from this model. Run randomforest(..., importance = TRUE) for more detailed results")
+    } else {
+        imp_sd <- as.data.frame(imp_sd)
+        names(imp_sd) <- paste("sd", names(imp_sd), sep = "_")
+    }
     
     dplyr::bind_cols(imp_m, imp_sd)
 }

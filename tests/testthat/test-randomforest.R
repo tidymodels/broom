@@ -13,6 +13,7 @@ if (require(randomForest, quietly = TRUE)) {
         x
     }
     
+    # Add NAs to test dataset so that na.action can be tested
     df_salt_na <- function(df, frac, col_names) {
         m <- round(nrow(df) * frac)
         dplyr::mutate_at(df, .funs = dplyr::funs(v_salt_na(., m)), .cols = col_names)
@@ -39,26 +40,37 @@ if (require(randomForest, quietly = TRUE)) {
     
     # Unsupervised rf
     urf <- randomForest(iris[, -5], importance = TRUE)
+    urf_noimp <- randomForest(iris[, -5], importance = FALSE)
     
     test_that("tidy works on randomForest models", {
         tdc <- tidy(crf)
-        tdc_fix <- tidy(crf_fix)
-        expect_warning(tdc_noimp <- tidy(crf_noimp), "Only MeanDecreaseGini")
-        
         tidy_names <- c("term", paste("class", crf_cats, sep = "_"), "MeanDecreaseAccuracy", "MeanDecreaseGini", paste("sd", c(crf_cats, "MeanDecreaseAccuracy"), sep = "_"))
-        
         expect_equal(colnames(tdc), tidy_names)
         expect_equal(tdc[["term"]], crf_vars)
+        
+        tdc_fix <- tidy(crf_fix)
         expect_equal(colnames(tdc_fix), tidy_names)
         expect_equal(tdc_fix[["term"]], crf_vars)
+        
+        expect_warning(tdc_noimp <- tidy(crf_noimp), "Only MeanDecreaseGini")
         expect_equal(colnames(tdc_noimp), c("term", "MeanDecreaseGini"))
         expect_equal(tdc_noimp[["term"]], crf_vars)
         
         tdr <- tidy(rrf)
-        expect_equal(colnames(tdr), c("term", "percent_inc_mse", "inc_node_purity", "imp_sd"))
+        expect_equal(colnames(tdr), c("term", "X.IncMSE", "IncNodePurity", "imp_sd"))
         expect_equal(tdr[["term"]], rrf_vars)
+        
+        expect_warning(tdr_noimp <- tidy(rrf_noimp))
+        expect_equal(colnames(tdr_noimp), c("term", "IncNodePurity"))
+        expect_equal(tdr_noimp[["term"]], rrf_vars)
        
         udr <- tidy(urf)
+        expect_equal(colnames(udr), c("term", "X1", "X2", "MeanDecreaseAccuracy", "MeanDecreaseGini", "sd_1", "sd_2", "sd_MeanDecreaseAccuracy"))
+        expect_equal(udr[["term"]], crf_vars)
+        
+        expect_warning(udr_noimp <- tidy(urf_noimp))
+        expect_equal(colnames(udr_noimp), c("term", "MeanDecreaseGini"))
+        expect_equal(udr_noimp[["term"]], crf_vars)
     })
     
     test_that("glance works on randomForest models", {
