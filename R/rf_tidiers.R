@@ -24,7 +24,7 @@ NULL
 #'   \item{sd_*}{Sandard deviations for the preceding statistics.}
 #' 
 #' @export
-tidy.randomForest.formula <- function(x, ...) {
+tidy.randomForest <- function(x, ...) {
     tidy.randomForest.method <- switch(x[["type"]],
                                        "classification" = tidy.randomForest.classification,
                                        "regression" = tidy.randomForest.regression,
@@ -33,7 +33,7 @@ tidy.randomForest.formula <- function(x, ...) {
 }
 
 #' @export
-tidy.randomForest <- tidy.randomForest.formula
+tidy.randomForest.formula <- tidy.randomForest
 
 #' @rdname rf_tidiers
 tidy.randomForest.classification <- function(x, ...) {
@@ -85,7 +85,7 @@ tidy.randomForest.unsupervised <- function(x, ...) {
 #'   \item{.votes_*}{For each case, the voting results, with one column per class.}
 #'   
 #' @export
-augment.randomForest.formula <- function(x, df = NULL, ...) {   
+augment.randomForest <- function(x, df = NULL, ...) {   
     
     # Extract data from model
     if (is.null(df)) {
@@ -105,7 +105,7 @@ augment.randomForest.formula <- function(x, df = NULL, ...) {
 }
 
 #' @export
-augment.randomForest <- augment.randomForest.formula
+augment.randomForest.formula <- augment.randomForest
 
 augment.randomForest.classification <- function(x, data, ...) {
     
@@ -205,7 +205,7 @@ augment.randomForest <- augment.randomForest.formula
 #'   \item{*_f_measure}{}
 #'   
 #' @export
-glance.randomForest.formula <- function(x, ...) {
+glance.randomForest <- function(x, ...) {
 
     glance.method <- switch(x[["type"]],
                             "classification" = glance.randomForest.classification,
@@ -216,7 +216,7 @@ glance.randomForest.formula <- function(x, ...) {
 }
 
 #' @export
-glance.randomForest <- glance.randomForest.formula
+glance.randomForest.formula <- glance.randomForest
 
 #' @rdname rf_tidiers
 glance.randomForest.classification <- function(x, ...) {
