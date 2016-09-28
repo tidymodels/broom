@@ -1,3 +1,5 @@
+# Tidy ----
+
 #' Tidying methods for a randomForest model
 #' 
 #' These methods tidy the variable importance of a random forest model summary, 
@@ -83,6 +85,8 @@ tidy.randomForest.unsupervised <- function(x, ...) {
     
     dplyr::bind_cols(imp_m, imp_sd)
 }
+
+# Augment ----
 
 #' @rdname rf_tidiers
 #' 
@@ -200,6 +204,8 @@ augment.randomForest.unsupervised <- function(x, ...) {
 #' @export
 augment.randomForest <- augment.randomForest.formula
 
+# Glance ----
+
 #' @rdname rf_tidiers
 #'   
 #' @return \code{glance.randomForest.formula} returns a one-row data.frame with
@@ -264,6 +270,8 @@ glance.randomForest.regression <- function(x, ...) {
 glance.randomForest.unsupervised <- function(x, ...) {
     stop("glance() is not implemented for unsupervised randomForest models")
 }
+
+# Internal helpers ----
 
 # Small helper function to append "group" before the numeric labels that
 # randomForest gives to the unsupervised clusters that it produces.

@@ -42,6 +42,7 @@ if (require(randomForest, quietly = TRUE)) {
     urf <- randomForest(iris[, -5], importance = TRUE)
     urf_noimp <- randomForest(iris[, -5], importance = FALSE)
     
+    # Tidy ----
     test_that("tidy works on randomForest models", {
         tdc <- tidy(crf)
         tidy_names <- c("term", paste("class", crf_cats, sep = "_"), "MeanDecreaseAccuracy", "MeanDecreaseGini", paste("sd", c(crf_cats, "MeanDecreaseAccuracy"), sep = "_"))
@@ -73,6 +74,7 @@ if (require(randomForest, quietly = TRUE)) {
         expect_equal(udr_noimp[["term"]], crf_vars)
     })
     
+    # Glance ----
     test_that("glance works on randomForest models", {
         measure_names <- c("precision", "recall", "accuracy", "f_measure")
         glance_names <- c(unlist(lapply(crf_cats, function(x) paste(x, measure_names, sep = "_"))))
@@ -94,6 +96,7 @@ if (require(randomForest, quietly = TRUE)) {
         expect_error(glu <- glance(urf))
     })
     
+    # Augment ----
     test_that("augment works on randomForest models", {
         auc <- augment(crf)
         auc_fix <- augment(crf_fix)
