@@ -75,7 +75,7 @@ if (require(randomForest, quietly = TRUE)) {
     
     test_that("glance works on randomForest models", {
         measure_names <- c("precision", "recall", "accuracy", "f_measure")
-        glance_names <- c("ntree", "mtry", unlist(lapply(crf_cats, function(x) paste(x, measure_names, sep = "_"))))
+        glance_names <- c(unlist(lapply(crf_cats, function(x) paste(x, measure_names, sep = "_"))))
         
         glc <- glance(crf)
         glc_fix <- glance(crf_fix)
@@ -88,12 +88,10 @@ if (require(randomForest, quietly = TRUE)) {
         expect_equal(nrow(glc_fix), 1)
 
         glr <- glance(rrf)
-        expect_equal(colnames(glr), c("ntree", "mtry", "mean_mse", "mean_rsq"))
+        expect_equal(colnames(glr), c("mean_mse", "mean_rsq"))
         expect_equal(nrow(glr), 1)
         
-        glu <- glance(urf)
-        expect_equal(colnames(glu), c("ntree", "mtry"))
-        expect_equal(nrow(glu), 1)
+        expect_error(glu <- glance(urf))
     })
     
     test_that("augment works on randomForest models", {

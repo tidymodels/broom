@@ -231,9 +231,6 @@ glance.randomForest.formula <- glance.randomForest
 
 #' @rdname rf_tidiers
 glance.randomForest.classification <- function(x, ...) {
-    ntree <- x[["ntree"]]
-    mtry <- x[["mtry"]]
-    
     actual <- x[["y"]]
     predicted <- x[["predicted"]]
     
@@ -253,25 +250,19 @@ glance.randomForest.classification <- function(x, ...) {
         as.data.frame(ml)
     }
     
-    measure_list <- dplyr::bind_cols(lapply(levels(actual), per_level))
-    d <- data.frame(ntree = ntree, mtry = mtry)
-    dplyr::bind_cols(d, measure_list)
+    dplyr::bind_cols(lapply(levels(actual), per_level))
 }
 
 #' @rdname rf_tidiers
 glance.randomForest.regression <- function(x, ...) {
-    ntree <- x[["ntree"]]
-    mtry <- x[["mtry"]]
     mean_mse <- mean(x[["mse"]])
     mean_rsq <- mean(x[["rsq"]])
-    data.frame(ntree = ntree, mtry = mtry, mean_mse = mean_mse, mean_rsq = mean_rsq)
+    data.frame(mean_mse = mean_mse, mean_rsq = mean_rsq)
 }
 
 #' @rdname rf_tidiers
 glance.randomForest.unsupervised <- function(x, ...) {
-    ntree <- x[["ntree"]]
-    mtry <- x[["mtry"]]
-    data.frame(ntree = ntree, mtry = mtry)
+    stop("glance() is not implemented for unsupervised randomForest models")
 }
 
 # Small helper function to append "group" before the numeric labels that
