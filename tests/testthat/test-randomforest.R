@@ -128,6 +128,11 @@ if (require(randomForest, quietly = TRUE)) {
         # Currently, it's impossible to run randomForest unsuprvised with
         # localImp = TRUE - causes a segfault
         auu <- augment(urf)
+        expect_equal(colnames(auu), c(names(iris), ".oob_times", ".fitted", paste0(".votes_", 1:2)))
+        expect_equal(nrow(auu), nrow(iris))
+        
         auu_noimp <- augment(urf_noimp)
+        expect_equal(colnames(auu_noimp), c(names(iris), ".oob_times", ".fitted", paste0(".votes_", 1:2)))
+        expect_equal(nrow(auu_noimp), nrow(iris))
     })
 }
