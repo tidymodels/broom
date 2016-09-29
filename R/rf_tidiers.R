@@ -13,18 +13,18 @@
 #' @name rf_tidiers
 #'   
 #' @param x randomForest object
-#' @param data Model data for use by \code{\link{augment}}.
+#' @param data Model data for use by \code{\link{augment.randomForest}}.
 #' @param ... Additional arguments (ignored)
 NULL
 
 #' @rdname rf_tidiers
 #' 
-#' @return \code{tidy} returns one row for each model term, with the following columns:
+#' @return \code{tidy.randomForest} returns one row for each model term, with the following columns:
 #'   \item{term}{The term in the randomForest model}
-#'   \item{class_*}{One column for each model term; the relative importance of each term per class.}
-#'   \item{MeanDecreaseAccuracy}{A measure of variable importance. See \code{\link[randomForest]{randomForest}} for more information.}
+#'   \item{class_*}{One column for each model term; the relative importance of each term per class. Only present if the model was created with \code{importance = TRUE}}
+#'   \item{MeanDecreaseAccuracy}{A measure of variable importance. See \code{\link[randomForest]{randomForest}} for more information. Only present if the model was created with `importance = TRUE`}
 #'   \item{MeanDecreaseGini}{A measure of variable importance. See \code{\link[randomForest]{randomForest}} for more information.}
-#'   \item{sd_*}{Sandard deviations for the preceding statistics.}
+#'   \item{sd_*}{Sandard deviations for the preceding statistics. Only present if the model was created with `importance = TRUE`}
 #' 
 #' @export
 tidy.randomForest <- function(x, ...) {
@@ -88,11 +88,11 @@ tidy.randomForest.unsupervised <- function(x, ...) {
 
 #' @rdname rf_tidiers
 #' 
-#' @return \code{augment} returns the original data with additional columns:
+#' @return \code{augment.randomForest} returns the original data with additional columns:
 #'   \item{.oob_times}{The number of trees for which the given case was "out of bag". See \code{\link[randomForest]{randomForest} for more details.}}
 #'   \item{.fitted}{The fitted value or class.}
-#'   \item{.li_*}{The casewise variable importance for each term. Note: only returned if \code{\link[randomForest]{randomForest}} was run with \code{localImp = TRUE}.}
-#'   In addition, \code{augment} returns additional columns for classification trees:
+#'   \item{.li_*}{The casewise variable importance for each term. Only present if the model was created with \code{importance = TRUE}}
+#'   In addition, \code{augment} returns additional columns for classification and usupervised trees:
 #'   \item{.votes_*}{For each case, the voting results, with one column per class.}
 #'   
 #' @export
@@ -232,11 +232,9 @@ augment.randomForest <- augment.randomForest.formula
 # Glance ----
 
 #' @rdname rf_tidiers
-#'   
-#' @return \code{glance.randomForest.formula} returns a one-row data.frame with
+#'
+#' @return \code{glance.randomForest} returns a one-row data.frame with
 #'   the following columns:
-#'   \item{ntree}{The number of trees grown.}
-#'   \item{mtry}{Number of variables randomly sampled as candidates at each split.}
 #'   For regression trees, the following additional columns are present:
 #'   \item{mse}{The average mean squared error across all trees.}
 #'   \item{rsq}{The average pesudo-R-squared across all trees. See \code{\link[randomForest]{randomForest}} for more information.}
