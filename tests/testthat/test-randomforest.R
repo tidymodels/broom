@@ -80,12 +80,14 @@ if (require(randomForest, quietly = TRUE)) {
         glance_names <- c(unlist(lapply(crf_cats, function(x) paste(x, measure_names, sep = "_"))))
         
         glc <- glance(crf)
-        glc_fix <- glance(crf_fix)
-        glc_noimp <- glance(crf_noimp)
         expect_equal(colnames(glc), glance_names)
         expect_equal(nrow(glc), 1)
+        
+        glc_fix <- glance(crf_fix)
         expect_equal(colnames(glc_fix), glance_names)
         expect_equal(nrow(glc_fix), 1)
+        
+        glc_noimp <- glance(crf_noimp)
         expect_equal(colnames(glc_fix), glance_names)
         expect_equal(nrow(glc_fix), 1)
 
@@ -93,24 +95,39 @@ if (require(randomForest, quietly = TRUE)) {
         expect_equal(colnames(glr), c("mean_mse", "mean_rsq"))
         expect_equal(nrow(glr), 1)
         
+        glr_noimp <- glance(rrf_noimp)
+        expect_equal(colnames(glr_noimp), c("mean_mse", "mean_rsq"))
+        expect_equal(nrow(glr_noimp), 1)
+        
         expect_error(glu <- glance(urf))
+        expect_error(glu_noimp <- glance(urf_noimp))
     })
     
     # Augment ----
     test_that("augment works on randomForest models", {
         auc <- augment(crf)
-        auc_fix <- augment(crf_fix)
-        expect_warning(auc_noimp <- augment(crf_noimp))
-        
         expect_equal(colnames(auc), c(names(iris), ".oob_times", ".fitted", paste0(".votes_", crf_cats), paste0(".li_", crf_vars)))
         expect_equal(nrow(auc), nrow(iris))
+        
+        auc_fix <- augment(crf_fix)
         expect_equal(colnames(auc_fix), c(names(iris), ".oob_times", ".fitted", paste0(".votes_", crf_cats), paste0(".li_", crf_vars)))
         expect_equal(nrow(auc_fix), nrow(iris))
+        
+        expect_warning(auc_noimp <- augment(crf_noimp))
+        expect_equal(colnames(auc_noimp), c(names(iris), ".oob_times", ".fitted", paste0(".votes_", crf_cats)))
+        expect_equal(nrow(auc_noimp), nrow(iris))
         
         aur <- augment(rrf)
         expect_equal(colnames(aur), c(names(airquality), ".oob_times", ".fitted", paste0(".li_", rrf_vars)))
         expect_equal(nrow(aur), nrow(airquality))
         
-        expect_error(auu <- augment(urf))
+        expect_warning(aur_noimp <- augment(rrf_noimp))
+        expect_equal(colnames(aur_noimp), c(names(airquality), ".oob_times", ".fitted"))
+        expect_equal(nrow(aur_noimp), nrow(airquality))
+        
+        # Currently, it's impossible to run randomForest unsuprvised with
+        # localImp = TRUE - causes a segfault
+        auu <- augment(urf)
+        auu_noimp <- augment(urf_noimp)
     })
 }

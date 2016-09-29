@@ -103,7 +103,7 @@ augment.randomForest <- function(x, data = NULL, ...) {
     # Extract data from model
     if (is.null(data)) {
         if (is.null(x$call$data)) {
-            list <- lapply(all.vars(x$call$formula), as.name)
+            list <- lapply(all.vars(x$call), as.name)
             data <- eval(as.call(list(quote(data.frame),list)), parent.frame())
         } else {
             data <- eval(x$call$data, parent.frame())
@@ -197,8 +197,37 @@ augment.randomForest.regression <- function(x, data, ...) {
     dplyr::bind_cols(data, d)
 }
 
-augment.randomForest.unsupervised <- function(x, ...) {
-    stop("not yet implemented")
+augment.randomForest.unsupervised <- function(x, data, ...) {
+    
+    # When na.omit is used, case-wise model attributes will only be calculated
+    # for complete cases in the original data. All columns returned with
+    # augment() must be expanded to the length of the full data, inserting NA
+    # for all missing values.
+    
+    n_data <- nrow(data)
+    if (is.null(x[["na.action"]])) {
+        na_at <- rep(FALSE, times = n_data)
+    } else {
+        na_at <- seq_len(n_data) %in% as.integer(x[["na.action"]])
+    }
+    
+    oob_times <- rep(NA_integer_, times = n_data)
+    oob_times[!na_at] <- x[["oob.times"]]
+    
+    
+    votes <- x[["votes"]]
+    full_votes <- matrix(data = NA, nrow = n_data, ncol = ncol(votes))
+    full_votes[which(!na_at),] <- votes
+    colnames(full_votes) <- colnames(votes)
+    full_votes <- as.data.frame(full_votes)
+    names(full_votes) <- paste("votes", names(full_votes), sep = "_")
+    
+    predicted <- ifelse(full_votes[[1]] > full_votes[[2]], "1", "2")
+    
+    d <- data.frame(oob_times = oob_times, fitted = predicted)
+    d <- dplyr::bind_cols(d, full_votes)
+    names(d) <- paste0(".", names(d))
+    dplyr::bind_cols(data, d)
 }
 
 #' @export
