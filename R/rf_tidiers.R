@@ -35,10 +35,8 @@ tidy.randomForest <- function(x, ...) {
     tidy.randomForest.method(x, ...)
 }
 
-#' @export
 tidy.randomForest.formula <- tidy.randomForest
 
-#' @rdname rf_tidiers
 tidy.randomForest.classification <- function(x, ...) {
     imp_m <- as.data.frame(x[["importance"]])
     if (ncol(imp_m) > 1)
@@ -117,7 +115,6 @@ augment.randomForest <- function(x, data = NULL, ...) {
     augment.randomForest.method(x, data, ...)
 }
 
-#' @export
 augment.randomForest.formula <- augment.randomForest
 
 augment.randomForest.classification <- function(x, data, ...) {
@@ -230,7 +227,6 @@ augment.randomForest.unsupervised <- function(x, data, ...) {
     dplyr::bind_cols(data, d)
 }
 
-#' @export
 augment.randomForest <- augment.randomForest.formula
 
 # Glance ----
@@ -261,10 +257,8 @@ glance.randomForest <- function(x, ...) {
     glance.method(x, ...)
 }
 
-#' @export
 glance.randomForest.formula <- glance.randomForest
 
-#' @rdname rf_tidiers
 glance.randomForest.classification <- function(x, ...) {
     actual <- x[["y"]]
     predicted <- x[["predicted"]]
@@ -288,14 +282,12 @@ glance.randomForest.classification <- function(x, ...) {
     dplyr::bind_cols(lapply(levels(actual), per_level))
 }
 
-#' @rdname rf_tidiers
 glance.randomForest.regression <- function(x, ...) {
     mean_mse <- mean(x[["mse"]])
     mean_rsq <- mean(x[["rsq"]])
     data.frame(mean_mse = mean_mse, mean_rsq = mean_rsq)
 }
 
-#' @rdname rf_tidiers
 glance.randomForest.unsupervised <- function(x, ...) {
     stop("glance() is not implemented for unsupervised randomForest models")
 }
