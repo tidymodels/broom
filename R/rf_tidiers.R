@@ -22,9 +22,9 @@ NULL
 #' @return \code{tidy.randomForest} returns one row for each model term, with the following columns:
 #'   \item{term}{The term in the randomForest model}
 #'   \item{class_*}{One column for each model term; the relative importance of each term per class. Only present if the model was created with \code{importance = TRUE}}
-#'   \item{MeanDecreaseAccuracy}{A measure of variable importance. See \code{\link[randomForest]{randomForest}} for more information. Only present if the model was created with `importance = TRUE`}
+#'   \item{MeanDecreaseAccuracy}{A measure of variable importance. See \code{\link[randomForest]{randomForest}} for more information. Only present if the model was created with \code{importance = TRUE}}
 #'   \item{MeanDecreaseGini}{A measure of variable importance. See \code{\link[randomForest]{randomForest}} for more information.}
-#'   \item{sd_*}{Sandard deviations for the preceding statistics. Only present if the model was created with `importance = TRUE`}
+#'   \item{sd_*}{Sandard deviations for the preceding statistics. Only present if the model was created with \code{importance = TRUE}}
 #' 
 #' @export
 tidy.randomForest <- function(x, ...) {
@@ -89,7 +89,7 @@ tidy.randomForest.unsupervised <- function(x, ...) {
 #' @rdname rf_tidiers
 #' 
 #' @return \code{augment.randomForest} returns the original data with additional columns:
-#'   \item{.oob_times}{The number of trees for which the given case was "out of bag". See \code{\link[randomForest]{randomForest} for more details.}}
+#'   \item{.oob_times}{The number of trees for which the given case was "out of bag". See \code{\link[randomForest]{randomForest}} for more details.}
 #'   \item{.fitted}{The fitted value or class.}
 #'   \item{.li_*}{The casewise variable importance for each term. Only present if the model was created with \code{importance = TRUE}}
 #'   In addition, \code{augment} returns additional columns for classification and usupervised trees:
