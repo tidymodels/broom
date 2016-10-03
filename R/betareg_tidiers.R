@@ -57,10 +57,11 @@ tidy.betareg <- function(x, conf.int = FALSE, conf.level = .95, ...) {
 #' @param type.predict Type of predictions to calculate
 #' @param type.residuals Type of residuals to calculate
 #' 
-#' @return augment returns the original data along with new columns describing
+#' @return augment returns the original data, along with new columns describing
 #' each observation:
-#'   \item{.fitted}{Fitted values}
-#'   \item{.resid}{}
+#'   \item{.fitted}{Fitted values of model}
+#'   \item{.resid}{Residuals}
+#'   \item{.cooksd}{Cooks distance, \code{\link{cooks.distance}}}
 #' 
 #' @export
 augment.betareg <- function(x, data = stats::model.frame(x), newdata,

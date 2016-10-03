@@ -42,10 +42,11 @@ the variance). It starts with the column \code{component} containing either
 "mean" or "precision" to describe which is being modeled, then has the same
 columns as tidied linear models or glm's (see \code{\link{lm_tidiers}}).
 
-augment returns the original data along with new columns describing
+augment returns the original data, along with new columns describing
 each observation:
-  \item{.fitted}{Fitted values}
-  \item{.resid}{}
+  \item{.fitted}{Fitted values of model}
+  \item{.resid}{Residuals}
+  \item{.cooksd}{Cooks distance, \code{\link{cooks.distance}}}
 
 \code{glance} returns a one-row data.frame with the columns
   \item{pseudo.r.squared}{the deviance of the null model}
