@@ -1,11 +1,10 @@
-#' Tidying methods for a linear model
+#' Tidying methods for a factor analysis
 #' 
 #' These methods tidy the factor loadings of a factor analysis, conducted via 
 #' \code{\link{factanal}}, into a summary, augment the original data with factor
 #' scores, and construct a one-row glance of the model's statistics.
 #' 
 #' @return All tidying methods return a \code{data.frame} without rownames.
-#' The structure depends on the method chosen.
 #' 
 #' @name factanal_tidiers
 #' 

@@ -5,7 +5,7 @@
 \alias{factanal_tidiers}
 \alias{glance.factanal}
 \alias{tidy.factanal}
-\title{Tidying methods for a linear model}
+\title{Tidying methods for a factor analysis}
 \usage{
 \method{tidy}{factanal}(x, ...)
 
@@ -22,7 +22,6 @@
 }
 \value{
 All tidying methods return a \code{data.frame} without rownames.
-The structure depends on the method chosen.
 
 \code{tidy.factanal} returns one row for each variable used in the 
   analysis and the following columns:
