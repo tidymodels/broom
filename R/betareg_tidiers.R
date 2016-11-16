@@ -39,10 +39,10 @@
 tidy.betareg <- function(x, conf.int = FALSE, conf.level = .95, ...) {
     nn <- c("estimate", "std.error", "statistic", "p.value")
     
-    ret <- plyr::ldply(coef(summary(mod)), fix_data_frame, .id = "component", newnames = nn)
+    ret <- plyr::ldply(coef(summary(x)), fix_data_frame, .id = "component", newnames = nn)
 
     if (conf.int) {
-        conf <- unrowname(confint(mod, level = conf.level))
+        conf <- unrowname(confint(x, level = conf.level))
         colnames(conf) <- c("conf.low", "conf.high")
         ret <- cbind(ret, conf)
     }
