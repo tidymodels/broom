@@ -1,7 +1,8 @@
-broom 0.4.0.9000
+broom 0.4.1.9000
 -----------
 
 * Added tidiers for `lsmobj` and `ref.grid` objects from the lsmeans package
+* Added tidiers for `betareg` objects from the betareg package
 
 broom 0.4.1
 -----------
