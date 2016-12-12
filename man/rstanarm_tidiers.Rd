@@ -25,12 +25,12 @@ Value section for details.}
 
 \item{prob}{See \code{\link[rstanarm]{posterior_interval}}.}
 
-\item{...}{For \code{glance}, if \code{looic=TRUE}, optional arguments to
+\item{...}{For \code{glance}, if \code{looic=TRUE}, optional arguments to 
 \code{\link[rstanarm]{loo.stanreg}}.}
 
-\item{looic}{Should the LOO Information Criterion be included? See 
-\code{\link[rstanarm]{loo.stanreg}} for details. Note: for models fit to
-very large data this can be a slow computation.}
+\item{looic}{Should the LOO Information Criterion (and related info) be
+included? See \code{\link[rstanarm]{loo.stanreg}} for details. Note: for
+models fit to very large datasets this can be a slow computation.}
 }
 \value{
 All tidying methods return a \code{data.frame} without rownames.
@@ -60,8 +60,6 @@ parameter is included if \code{parameters="aux"}, for
 \code{\link[rstanarm]{stan_lm}} the auxiliary parameters include the residual
 SD, R^2, and log(fit_ratio), etc.
 
-
-
 If \code{intervals=TRUE}, columns for the \code{lower} and \code{upper} 
 values of the posterior intervals computed with 
 \code{\link[rstanarm]{posterior_interval}} are also included.
@@ -71,8 +69,16 @@ values of the posterior intervals computed with
   \item{pss}{The posterior sample size (except for models fit using 
   optimization).}
   \item{nobs}{The number of observations used to fit the model.}
-  \item{sigma}{The square root of the estimated residual variance.}
-  \item{looic}{If \code{looic=TRUE}, the LOO Information Criterion.}
+  \item{sigma}{The square root of the estimated residual variance, if
+  applicable. If not applicable (e.g., for binomial GLMs), \code{sigma} will
+  be given the value \code{1} in the returned object.}
+  
+  If \code{looic=TRUE}, then the following additional columns are also
+  included:
+  \item{looic}{The LOO Information Criterion.}
+  \item{elpd_loo}{The expected log predictive density (\code{elpd_loo = -2 *
+  looic}).}
+  \item{p_loo}{The effective number of parameters.}
 }
 \description{
 These methods tidy the estimates from \code{\link[rstanarm]{stanreg-objects}}
@@ -82,9 +88,17 @@ These methods tidy the estimates from \code{\link[rstanarm]{stanreg-objects}}
 if (require(rstanarm)) {
  fit <- stan_glmer(mpg ~ wt + (1|cyl) + (1+wt|gear), data = mtcars, 
                    iter = 500, chains = 2)
+ # non-varying ("population") parameters
  tidy(fit, intervals = TRUE, prob = 0.5)
+ 
+ # hierarchical sd & correlation parameters
  tidy(fit, parameters = "hierarchical")
+ 
+ # group-specific deviations from "population" parameters
  tidy(fit, parameters = "varying")
+ 
+ # glance method
+ glance(fit)
  glance(fit, looic = TRUE, cores = 1)
 }
  

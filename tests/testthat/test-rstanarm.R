@@ -36,6 +36,6 @@ if (require(rstanarm, quietly = TRUE)) {
         g1 <- glance(fit)
         g2 <- glance(fit, looic = TRUE, cores = 1)
         expect_equal(colnames(g1), c("algorithm", "pss", "nobs", "sigma"))
-        expect_equal(colnames(g2), c(colnames(g1), "looic"))
+        expect_equal(colnames(g2), c(colnames(g1), "looic", "elpd_loo", "p_loo"))
     })
 }

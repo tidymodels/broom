@@ -17,9 +17,17 @@
 #' if (require(rstanarm)) {
 #'  fit <- stan_glmer(mpg ~ wt + (1|cyl) + (1+wt|gear), data = mtcars, 
 #'                    iter = 500, chains = 2)
+#'  # non-varying ("population") parameters
 #'  tidy(fit, intervals = TRUE, prob = 0.5)
+#'  
+#'  # hierarchical sd & correlation parameters
 #'  tidy(fit, parameters = "hierarchical")
+#'  
+#'  # group-specific deviations from "population" parameters
 #'  tidy(fit, parameters = "varying")
+#'  
+#'  # glance method
+#'  glance(fit)
 #'  glance(fit, looic = TRUE, cores = 1)
 #' }
 #'  
@@ -60,8 +68,6 @@ NULL
 #' \code{\link[rstanarm]{stan_lm}} the auxiliary parameters include the residual
 #' SD, R^2, and log(fit_ratio), etc.
 #' 
-#' 
-#' 
 #' If \code{intervals=TRUE}, columns for the \code{lower} and \code{upper} 
 #' values of the posterior intervals computed with 
 #' \code{\link[rstanarm]{posterior_interval}} are also included.
@@ -74,11 +80,9 @@ tidy.stanreg <- function(x,
                          ...) {
     
     parameters <-
-        match.arg(
-            parameters,
-            choices = c("non-varying", "varying", "hierarchical", "auxiliary"),
-            several.ok = TRUE
-        )
+        match.arg(parameters, several.ok = TRUE,
+                  choices = c("non-varying", "varying", 
+                              "hierarchical", "auxiliary"))
     if (any(parameters %in% c("varying", "hierarchical"))) {
       if (!inherits(x, "lmerMod"))
         stop("Model does not have 'varying' or 'hierarchical' parameters.")
@@ -181,10 +185,10 @@ tidy.stanreg <- function(x,
 
 #' @rdname rstanarm_tidiers
 #' 
-#' @param looic Should the LOO Information Criterion be included? See 
-#'   \code{\link[rstanarm]{loo.stanreg}} for details. Note: for models fit to
-#'   very large data this can be a slow computation.
-#' @param ... For \code{glance}, if \code{looic=TRUE}, optional arguments to
+#' @param looic Should the LOO Information Criterion (and related info) be
+#'   included? See \code{\link[rstanarm]{loo.stanreg}} for details. Note: for
+#'   models fit to very large datasets this can be a slow computation.
+#' @param ... For \code{glance}, if \code{looic=TRUE}, optional arguments to 
 #'   \code{\link[rstanarm]{loo.stanreg}}.
 #' 
 #' @return \code{glance} returns one row with the columns
@@ -192,8 +196,16 @@ tidy.stanreg <- function(x,
 #'   \item{pss}{The posterior sample size (except for models fit using 
 #'   optimization).}
 #'   \item{nobs}{The number of observations used to fit the model.}
-#'   \item{sigma}{The square root of the estimated residual variance.}
-#'   \item{looic}{If \code{looic=TRUE}, the LOO Information Criterion.}
+#'   \item{sigma}{The square root of the estimated residual variance, if
+#'   applicable. If not applicable (e.g., for binomial GLMs), \code{sigma} will
+#'   be given the value \code{1} in the returned object.}
+#'   
+#'   If \code{looic=TRUE}, then the following additional columns are also
+#'   included:
+#'   \item{looic}{The LOO Information Criterion.}
+#'   \item{elpd_loo}{The expected log predictive density (\code{elpd_loo = -2 *
+#'   looic}).}
+#'   \item{p_loo}{The effective number of parameters.}
 #' 
 #' @export
 glance.stanreg <- function(x, looic = FALSE, ...) {
@@ -214,8 +226,8 @@ glance.stanreg <- function(x, looic = FALSE, ...) {
     ret <- data.frame(ret, nobs = stats::nobs(x), sigma = sigma(x))
     if (looic) {
         if (x$algorithm == "sampling") {
-            looic <- rstanarm::loo(x, ...)$looic
-            ret <- data.frame(ret, looic = looic)
+            loo1 <- rstanarm::loo(x, ...)
+            ret <- data.frame(ret, loo1[c("looic", "elpd_loo", "p_loo")])
         } else {
           message("looic only available for models fit using MCMC")  
         }
