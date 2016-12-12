@@ -45,15 +45,25 @@ one row for each coefficient, with three columns:
 \code{\link[rstanarm]{print.stanreg}} for more details.}
 
 For models with group-specific parameters (e.g., models fit with 
-\code{\link[rstanarm]{stan_glmer}}), setting \code{parameters="varying"}
+\code{\link[rstanarm]{stan_glmer}}), setting \code{parameters="varying"} 
 selects the group-level parameters instead of the non-varying regression 
 coefficients. Addtional columns are added indicating the \code{level} and 
-\code{group}. Specifying \code{parameters="hierarchical"} selects the
-standard deviations and (for certain models) correlations of the group-level
+\code{group}. Specifying \code{parameters="hierarchical"} selects the 
+standard deviations and (for certain models) correlations of the group-level 
 parameters.
 
-If \code{intervals=TRUE}, columns for the \code{lower} and 
-\code{upper} values of the posterior intervals computed with 
+Setting \code{parameters="auxiliary"} will select parameters other than those
+included by the other options. The particular parameters depend on which 
+\pkg{rstanarm} modeling function was used to fit the model. For example, for 
+models fit using \code{\link[rstanarm]{stan_glm.nb}} the overdispersion 
+parameter is included if \code{parameters="aux"}, for 
+\code{\link[rstanarm]{stan_lm}} the auxiliary parameters include the residual
+SD, R^2, and log(fit_ratio), etc.
+
+
+
+If \code{intervals=TRUE}, columns for the \code{lower} and \code{upper} 
+values of the posterior intervals computed with 
 \code{\link[rstanarm]{posterior_interval}} are also included.
 
 \code{glance} returns one row with the columns
