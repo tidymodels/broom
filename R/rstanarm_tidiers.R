@@ -87,17 +87,29 @@ tidy.stanreg <- function(x,
     nn <- c("estimate", "std.error")
     ret_list <- list()
     if ("non-varying" %in% parameters) {
+        nv_pars <- names(rstanarm::fixef(x))
         ret <- cbind(rstanarm::fixef(x), 
-                     rstanarm::se(x)[names(rstanarm::fixef(x))])
+                     rstanarm::se(x)[nv_pars])
+        
+        if (inherits(x, "polr")) {
+            # also include cutpoints
+            cp <- x$zeta
+            se_cp <- apply(as.matrix(x, pars = names(cp)), 2, stats::mad)
+            ret <- rbind(ret, cbind(cp, se_cp))
+            nv_pars <- c(nv_pars, names(cp))
+        }
         
         if (intervals) {
-            cifix <- rstanarm::posterior_interval(x, pars = names(rstanarm::fixef(x)), 
-                                                  prob = prob)
-            ret <- data.frame(ret,cifix)
-            nn <- c(nn,"lower","upper")
+            cifix <- 
+                rstanarm::posterior_interval(
+                  object = x, 
+                  pars = nv_pars, 
+                  prob = prob
+                )
+            ret <- data.frame(ret, cifix)
+            nn <- c(nn, "lower", "upper")
         }
-        ret_list$non_varying <-
-            fix_data_frame(ret, newnames = nn)
+        ret_list$non_varying <- fix_data_frame(ret, newnames = nn)
     }
     if ("auxiliary" %in% parameters) {
         nn <- c("estimate", "std.error")
