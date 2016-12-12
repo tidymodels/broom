@@ -5,7 +5,7 @@ sudo: false
 cache: packages
 
 before_install:
-  - Rscript -e 'update.packages()'
+  - Rscript -e 'update.packages(ask = FALSE)'
 
 after_success:
   - Rscript -e 'covr::codecov()'
