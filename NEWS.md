@@ -3,6 +3,11 @@ broom 0.4.1.9000
 
 * Added tidiers for `lsmobj` and `ref.grid` objects from the lsmeans package
 * Added tidiers for `betareg` objects from the betareg package
+* Added tidiers for `lmRob` and `glmRob` objects from the robust package
+* Added tidiers for `brms` objects from the brms package (thanks to #149 from Paul Buerkner)
+* Changed `tidy.glmnet` to filter out rows where estimate == 0.
+* Updates to `rstanarm` tidiers (thanks to #177 from Jonah Gabry)
+* Fixed issue with survival package 2.40-1 (thanks to #180 from Marcus Walz)
 
 broom 0.4.1
 -----------
