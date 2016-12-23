@@ -377,32 +377,41 @@ glance.coxph <- function(x, ...) {
 #'   \item{n.risk}{number of subjects at risk at time t0}
 #'   \item{n.event}{number of events at time t}
 #'   \item{n.censor}{number of censored events}
-#'   \item{estimate}{estimate of survival}
+#'   \item{estimate}{estimate of survival or cumulative incidence rate when multistate}
 #'   \item{std.error}{standard error of estimate}
 #'   \item{conf.high}{upper end of confidence interval}
 #'   \item{conf.low}{lower end of confidence interval}
-#' 
+#'   \item{state}{state if multistate survfit object inputted}
+#'   \item{strata}{strata if stratified survfit object inputted}
 #' @export
 tidy.survfit <- function(x, ...) {
-    ret <- as.data.frame(compact(unclass(x)[c("time", "n.risk", "n.event",
-                                              "n.censor")]))
-    
-    # give remaining columns names consistent with broom style
+
     if (inherits(x, "survfitms")) {
-        # survfitms shows death probabilities rather than survival
-        # (don't know why)
-        surv <- 1 - x$prev
-        upper <- 1 - x$upper
-        lower <- 1 - x$lower
+
+        # c(x$???) when value is a matrix and needs to be stacked
+        ret <- data.frame(
+            time=x$time,
+            n.risk=c(x$n.risk),
+            n.event=c(x$n.event),
+            n.censor = c(x$n.censor), 
+            estimate = c(x$pstate),
+            std.error = c(x$std.err),
+            conf.high = c(x$upper),
+            conf.low = c(x$lower),
+            state = rep(x$states, each = nrow(x$pstate))
+        )
         
-        # each of these is a matrix: must be stacked
-        ret <- cbind(ret, estimate = c(surv), std.error = c(x$std.err),
-                     conf.high = c(upper), conf.low = c(lower))
-        # add state names
-        ret$state <- rep(x$states, each = nrow(surv))
+        ret <- ret[ret$state != "",]
     } else {
-        ret <- cbind(ret, estimate=x$surv, std.error=x$std.err,
-                     conf.high=x$upper, conf.low=x$lower)
+        ret <- data.frame(
+            time = x$time, 
+            n.risk=x$n.risk,
+            n.event=x$n.event,
+            n.censor = x$n.censor, 
+            estimate=x$surv,
+            std.error=x$std.err,
+            conf.high=x$upper,
+            conf.low=x$lower)
     }
     # strata are automatically recycled if there are multiple states
     if (!is.null(x$strata)) {
@@ -410,7 +419,6 @@ tidy.survfit <- function(x, ...) {
     }
     ret
 }
-
 
 #' @rdname survfit_tidiers
 #' 
