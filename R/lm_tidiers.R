@@ -230,14 +230,22 @@ glance.lm <- function(x, ...) {
 #' @rdname lm_tidiers
 #' @export
 glance.summary.lm <- function(x, ...) {
-    ret <- with(x, data.frame(r.squared=r.squared,
+    ret <- with(x, cbind(data.frame(r.squared=r.squared,
                               adj.r.squared=adj.r.squared,
-                              sigma=sigma,
+                              sigma=sigma),
+                           if (exists("fstatistic")) {
+                           data.frame(
                               statistic=fstatistic[1],
                               p.value=pf(fstatistic[1], fstatistic[2],
                                          fstatistic[3],
-                                         lower.tail=FALSE),
-                              df=df[1]))
+                                         lower.tail=FALSE))}
+                           else {
+                               data.frame(
+                                   statistic=NA_real_,
+                                   p.value=NA_real_)  
+                           },
+                           data.frame(
+                              df=df[1])))
     
     unrowname(ret)
 }
