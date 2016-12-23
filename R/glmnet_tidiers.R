@@ -69,7 +69,7 @@
 #' 
 #' @export
 tidy.glmnet <- function(x, ...) {
-    beta <- stats::coef(x)
+    beta <- glmnet::coef.glmnet(x)
     
     if (inherits(x, "multnet")) {
         beta_d <- plyr::ldply(beta, function(b) {
@@ -84,8 +84,10 @@ tidy.glmnet <- function(x, ...) {
     ret <- ret %>%
         mutate(step = as.numeric(step),
                lambda = x$lambda[step],
-               dev.ratio = x$dev.ratio[step])
-    ret
+               dev.ratio = x$dev.ratio[step]) %>%
+        filter(estimate != 0)
+
+    dplyr::as_data_frame(ret)
 }
 
 
