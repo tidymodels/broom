@@ -83,7 +83,8 @@ Suggests:
     mclust,
     covr,
     lsmeans,
-    betareg
+    betareg,
+    robust
 URL: http://github.com/dgrtwo/broom
 BugReports: http://github.com/dgrtwo/broom/issues
 VignetteBuilder: knitr
