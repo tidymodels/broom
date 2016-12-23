@@ -71,6 +71,7 @@ Suggests:
     gamlss,
     rstan,
     rstanarm,
+    brms,
     coda,
     gmm,
     Matrix,
