@@ -1,20 +1,42 @@
 #' Tidiers for lmRob and glmRob objects
 #' 
-#' Tidying robust regression methods from the robust package. The tidy and augment
-#' methods simply pass it on to the lm tidiers.
+#' Tidying robust regression objects from the robust package. The tidy and augment
+#' methods simply pass it on to the linear model tidiers.
+#' 
+#' @param x An lmRob or glmRob object with a robust regression
+#' @param ... Extra arguments, not used
+#' 
+#' @template boilerplate
+#' 
+#' @return \code{tidy} and \code{augment} return the same results as \code{\link{lm_tidiers}}.
+#' 
+#' On an \code{lmRob} \code{glance} returns a one-row data frame with the following columns:
+#'   \item{r.squared}{R-squared}
+#'   \item{deviance}{Robust deviance}
+#'   \item{sigma}{Residual scale estimate}
+#'   \item{df.residual}{Number of residual degrees of freedom}
+#' 
+#' On an \code{lmRob} \code{glance} returns a one-row data frame with the following columns:
+#'   \item{deviance}{Robust deviance}
+#'   \item{null.deviance}{Deviance under the null model}
+#'   \item{df.residual}{Number of residual degrees of freedom}
 #' 
 #' @examples
 #' 
-#' if (requireNamespace("robust", quietly = TRUE)) {
-#'   data(stack.dat)
-#'   m <- lmRob(Loss ~ ., data = stack.dat)
+#' if (require("robust", quietly = TRUE)) {
+#'   m <- lmRob(mpg ~ wt, data = mtcars)
 #'   
 #'   tidy(m)
 #'   augment(m)
 #'   glance(m)
+#'   
+#'   gm <- glmRob(am ~ wt, data = mtcars, family = "binomial")
+#'   glance(gm)
 #' }
 #' 
 #' @name robust_tidiers
+#' 
+#' @seealso \code{\link{lm_tidiers}}, \code{\link[robust]{lmRob}}, \code{\link[robust]{glmRob}}
 #' 
 #' @export
 tidy.lmRob <- function(x, ...) {
@@ -31,7 +53,12 @@ augment.lmRob <- function(x, ...) {
 #' @export
 glance.lmRob <- function(x, ...) {
     s <- robust::summary.lmRob(x)
-    finish_glance(data.frame(r.squared = x$r.squared, sigma = s$sigma), x)
+    ret <- data.frame(r.squared = x$r.squared, sigma = s$sigma)
+    
+    if (!is.null(ret$dev)) {
+        ret$deviance <- ret$dev
+    }
+    finish_glance(ret, x)
 }
 
 #' @name robust_tidiers
@@ -50,7 +77,8 @@ augment.glmRob <- function(x, ...) {
 #' @rdname robust_tidiers
 #' @export
 glance.glmRob <- function(x, ...) {
-    s <- robust::summary.glmRob(x)
-    finish_glance(data.frame(r.squared = x$r.squared, sigma = s$sigma), x)
+    ret <- data.frame(deviance = x$deviance,
+                      null.deviance = x$null.deviance)
+    finish_glance(ret, x)
 }
 

@@ -22,20 +22,47 @@
 
 \method{glance}{glmRob}(x, ...)
 }
+\arguments{
+\item{x}{An lmRob or glmRob object with a robust regression}
+
+\item{...}{Extra arguments, not used}
+}
+\value{
+All tidying methods return a data.frame without rownames, whose
+structure depends on the method chosen.
+
+\code{tidy} and \code{augment} return the same results as \code{\link{lm_tidiers}}.
+
+On an \code{lmRob} \code{glance} returns a one-row data frame with the following columns:
+  \item{r.squared}{R-squared}
+  \item{deviance}{Robust deviance}
+  \item{sigma}{Residual scale estimate}
+  \item{df.residual}{Number of residual degrees of freedom}
+
+On an \code{lmRob} \code{glance} returns a one-row data frame with the following columns:
+  \item{deviance}{Robust deviance}
+  \item{null.deviance}{Deviance under the null model}
+  \item{df.residual}{Number of residual degrees of freedom}
+}
 \description{
-Tidying robust regression methods from the robust package. The tidy and augment
-methods simply pass it on to the lm tidiers.
+Tidying robust regression objects from the robust package. The tidy and augment
+methods simply pass it on to the linear model tidiers.
 }
 \examples{
 
-if (requireNamespace("robust", quietly = TRUE)) {
-  data(stack.dat)
-  m <- lmRob(Loss ~ ., data = stack.dat)
+if (require("robust", quietly = TRUE)) {
+  m <- lmRob(mpg ~ wt, data = mtcars)
   
   tidy(m)
   augment(m)
   glance(m)
+  
+  gm <- glmRob(am ~ wt, data = mtcars, family = "binomial")
+  glance(gm)
 }
 
+}
+\seealso{
+\code{\link{lm_tidiers}}, \code{\link[robust]{lmRob}}, \code{\link[robust]{glmRob}}
 }
 
