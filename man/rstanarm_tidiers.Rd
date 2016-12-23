@@ -87,7 +87,7 @@ These methods tidy the estimates from \code{\link[rstanarm]{stanreg-objects}}
 \examples{
 if (require(rstanarm)) {
  fit <- stan_glmer(mpg ~ wt + (1|cyl) + (1+wt|gear), data = mtcars, 
-                   iter = 500, chains = 2)
+                   iter = 300, chains = 2)
  # non-varying ("population") parameters
  tidy(fit, intervals = TRUE, prob = 0.5)
  
