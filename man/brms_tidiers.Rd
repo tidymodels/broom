@@ -7,7 +7,7 @@
 \usage{
 \method{tidy}{brmsfit}(x, parameters = NA, par_type = c("all",
   "non-varying", "varying", "hierarchical"), robust = FALSE,
-  intervals = TRUE, prob = 0.9)
+  intervals = TRUE, prob = 0.9, ...)
 }
 \arguments{
 \item{x}{Fitted model object from the \pkg{brms} package. See 
@@ -22,6 +22,9 @@ by the \code{par_type} argument.}
 \code{"varying"}, or \code{"hierarchical"} (can be abbreviated). 
 See the Value section for details.}
 
+\item{robust}{Whether to use median and median absolute deviation rather
+than mean and standard deviation.}
+
 \item{intervals}{If \code{TRUE} columns for the lower and upper bounds of
 posterior uncertainty intervals are included.}
 
@@ -29,6 +32,8 @@ posterior uncertainty intervals are included.}
 such that \code{100 * prob}\% of the parameter's posterior distribution 
 lies within the corresponding interval. 
 Only used if \code{intervals = TRUE}.}
+
+\item{...}{Extra arguments, not used}
 }
 \value{
 All tidying methods return a \code{data.frame} without rownames.

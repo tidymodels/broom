@@ -35,12 +35,15 @@ NULL
 #' @param par_type One of \code{"all"}, \code{"non-varying"}, 
 #'   \code{"varying"}, or \code{"hierarchical"} (can be abbreviated). 
 #'   See the Value section for details.
+#' @param robust Whether to use median and median absolute deviation rather
+#'   than mean and standard deviation.
 #' @param intervals If \code{TRUE} columns for the lower and upper bounds of
 #'   posterior uncertainty intervals are included.
 #' @param prob Defines the range of the posterior uncertainty intervals,
 #'  such that \code{100 * prob}\% of the parameter's posterior distribution 
 #'  lies within the corresponding interval. 
 #'  Only used if \code{intervals = TRUE}.
+#' @param ... Extra arguments, not used
 #' 
 #' @return 
 #' When \code{parameters = NA}, the \code{par_type} argument is used
@@ -69,7 +72,7 @@ NULL
 #' @export
 tidy.brmsfit <- function(x, parameters = NA, 
                          par_type = c("all", "non-varying", "varying", "hierarchical"), 
-                         robust = FALSE, intervals = TRUE, prob = 0.9) {
+                         robust = FALSE, intervals = TRUE, prob = 0.9, ...) {
     use_par_type <- anyNA(parameters) 
     if (use_par_type) {
         par_type <- match.arg(par_type)
@@ -101,17 +104,17 @@ tidy.brmsfit <- function(x, parameters = NA,
         # no renaming if par_type %in% c("all", "hierarchical")
     }
     if (robust) {
-        out$estimate <- apply(samples, 2, median)
-        out$std.error <- apply(samples, 2, mad)
+        out$estimate <- apply(samples, 2, stats::median)
+        out$std.error <- apply(samples, 2, stats::mad)
     } else {
-        out$estimate <- apply(samples, 2, mean)
-        out$std.error <- apply(samples, 2, sd)
+        out$estimate <- apply(samples, 2, base::mean)
+        out$std.error <- apply(samples, 2, stats::sd)
     }
     if (intervals) {
         stopifnot(length(prob) == 1L)
         probs <- c((1 - prob) / 2, 1 - (1 - prob) / 2)
         out[, c("lower", "upper")] <- 
-            t(apply(samples, 2, quantile, probs = probs))
+            t(apply(samples, 2, stats::quantile, probs = probs))
     }
     out
 }

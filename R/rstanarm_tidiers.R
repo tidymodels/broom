@@ -14,21 +14,22 @@
 #' @param x Fitted model object from the \pkg{rstanarm} package. See 
 #'   \code{\link[rstanarm]{stanreg-objects}}.
 #' @examples
-#' if (require(rstanarm)) {
-#'  fit <- stan_glmer(mpg ~ wt + (1|cyl) + (1+wt|gear), data = mtcars, 
-#'                    iter = 300, chains = 2)
-#'  # non-varying ("population") parameters
-#'  tidy(fit, intervals = TRUE, prob = 0.5)
-#'  
-#'  # hierarchical sd & correlation parameters
-#'  tidy(fit, parameters = "hierarchical")
-#'  
-#'  # group-specific deviations from "population" parameters
-#'  tidy(fit, parameters = "varying")
-#'  
-#'  # glance method
-#'  glance(fit)
-#'  glance(fit, looic = TRUE, cores = 1)
+#' 
+#' \dontrun{
+#' fit <- stan_glmer(mpg ~ wt + (1|cyl) + (1+wt|gear), data = mtcars, 
+#'                   iter = 300, chains = 2)
+#' # non-varying ("population") parameters
+#' tidy(fit, intervals = TRUE, prob = 0.5)
+#' 
+#' # hierarchical sd & correlation parameters
+#' tidy(fit, parameters = "hierarchical")
+#' 
+#' # group-specific deviations from "population" parameters
+#' tidy(fit, parameters = "varying")
+#' 
+#' # glance method
+#' glance(fit)
+#' glance(fit, looic = TRUE, cores = 1)
 #' }
 #'  
 NULL
