@@ -1,7 +1,11 @@
 broom: let's tidy up a bit
 =====================
 
-[![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/broom)](http://cran.r-project.org/package=broom)
+```{r echo = FALSE}
+knitr::opts_chunk$set(warning = FALSE, message = FALSE)
+```
+
+[![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/broom)](https://CRAN.R-project.org/package=broom)
 [![Travis-CI Build Status](https://travis-ci.org/dgrtwo/broom.svg?branch=master)](https://travis-ci.org/dgrtwo/broom)
 [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/dgrtwo/broom?branch=master&svg=true)](https://ci.appveyor.com/project/dgrtwo/broom)
 [![Coverage Status](https://img.shields.io/codecov/c/github/dgrtwo/broom/master.svg)](https://codecov.io/github/dgrtwo/broom?branch=master)

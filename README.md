@@ -1,7 +1,9 @@
 broom: let's tidy up a bit
 =====================
 
-[![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/broom)](http://cran.r-project.org/package=broom)
+
+
+[![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/broom)](https://CRAN.R-project.org/package=broom)
 [![Travis-CI Build Status](https://travis-ci.org/dgrtwo/broom.svg?branch=master)](https://travis-ci.org/dgrtwo/broom)
 [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/dgrtwo/broom?branch=master&svg=true)](https://ci.appveyor.com/project/dgrtwo/broom)
 [![Coverage Status](https://img.shields.io/codecov/c/github/dgrtwo/broom/master.svg)](https://codecov.io/github/dgrtwo/broom?branch=master)
@@ -360,14 +362,17 @@ A full list of the `tidy`, `augment` and `glance` methods available for each cla
 |Class                    |`tidy` |`glance` |`augment` |
 |:------------------------|:------|:--------|:---------|
 |aareg                    |x      |x        |          |
+|acf                      |x      |         |          |
 |anova                    |x      |         |          |
 |aov                      |x      |         |          |
 |aovlist                  |x      |         |          |
 |Arima                    |x      |x        |          |
+|betareg                  |x      |x        |x         |
 |biglm                    |x      |x        |          |
 |binDesign                |x      |x        |          |
 |binWidth                 |x      |         |          |
 |boot                     |x      |         |          |
+|brmsfit                  |x      |         |          |
 |btergm                   |x      |         |          |
 |cch                      |x      |x        |          |
 |character                |x      |         |          |
@@ -391,6 +396,7 @@ A full list of the `tidy`, `augment` and `glance` methods available for each cla
 |geeglm                   |x      |         |          |
 |glht                     |x      |         |          |
 |glmnet                   |x      |x        |          |
+|glmRob                   |x      |x        |x         |
 |gmm                      |x      |x        |          |
 |htest                    |x      |x        |          |
 |kappa                    |x      |         |          |
@@ -402,7 +408,9 @@ A full list of the `tidy`, `augment` and `glance` methods available for each cla
 |lm                       |x      |x        |x         |
 |lme                      |x      |x        |x         |
 |lmodel2                  |x      |x        |          |
+|lmRob                    |x      |x        |x         |
 |logical                  |x      |         |          |
+|lsmobj                   |x      |         |          |
 |manova                   |x      |         |          |
 |map                      |x      |         |          |
 |matrix                   |x      |x        |          |
@@ -423,6 +431,7 @@ A full list of the `tidy`, `augment` and `glance` methods available for each cla
 |prcomp                   |x      |         |x         |
 |pyears                   |x      |x        |          |
 |rcorr                    |x      |         |          |
+|ref.grid                 |x      |         |          |
 |ridgelm                  |x      |x        |          |
 |rjags                    |x      |         |          |
 |roc                      |x      |         |          |

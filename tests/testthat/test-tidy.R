@@ -79,10 +79,8 @@ test_that("tidy.summary works (even with NAs)", {
     df <- data.frame(group = c(rep('M', 6), 'F', 'F', 'M', 'M', 'F', 'F'),
                  val = c(6, 5, NA, NA, 6, 13, NA, 8, 10, 7, 14, 6))
     expect_equal(tidy(summary(df$val)),
-        structure(list(minimum = 5, q1 = 6, median = 7, mean = 8.333, 
+        structure(list(minimum = 5, q1 = 6, median = 7, mean = 25 / 3, 
                     q3 = 10, maximum = 14, `NA's` = 3),
           .Names = c("minimum", "q1", "median", "mean", "q3",
           "maximum", "na"), row.names = c(NA, -1L), class = "data.frame"))
 })
-
-
