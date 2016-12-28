@@ -88,7 +88,7 @@ Suggests:
     robust,
     akima
 URL: http://github.com/tidyverse/broom
-BugReports: http://github.com/dgrtwo/tidyverse/issues
+BugReports: http://github.com/tidyverse/broom/issues
 VignetteBuilder: knitr
 License: MIT + file LICENSE
 RoxygenNote: 5.0.1
