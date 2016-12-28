@@ -61,7 +61,14 @@ tidy.anova <- function(x, ...) {
                   "p.value" = "p.value",
                   "Chi.sq" = "statistic",
                   "edf" = "edf",
-                  "Ref.df" = "ref.df")
+                  "Ref.df" = "ref.df",
+                  "Chi-Square" = "statistic",
+                  "d.f." = "df",
+                  "F" = "statistic",
+                  "Factor" = "term",
+                  "MS" = "meansq",
+                  "P" = "p.value",
+                  "Partial SS" = "partial.sumsq")
     
     names(renamers) <- make.names(names(renamers))
     
