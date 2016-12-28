@@ -4,9 +4,9 @@ broom: let's tidy up a bit
 
 
 [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/broom)](https://CRAN.R-project.org/package=broom)
-[![Travis-CI Build Status](https://travis-ci.org/dgrtwo/broom.svg?branch=master)](https://travis-ci.org/dgrtwo/broom)
-[![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/dgrtwo/broom?branch=master&svg=true)](https://ci.appveyor.com/project/dgrtwo/broom)
-[![Coverage Status](https://img.shields.io/codecov/c/github/dgrtwo/broom/master.svg)](https://codecov.io/github/dgrtwo/broom?branch=master)
+[![Travis-CI Build Status](https://travis-ci.org/dgrtwo/broom.svg?branch=master)](https://travis-ci.org/tidyverse/broom)
+[![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/dgrtwo/broom?branch=master&svg=true)](https://ci.appveyor.com/project/tidyverse/broom)
+[![Coverage Status](https://img.shields.io/codecov/c/github/tidyverse/broom/master.svg)](https://codecov.io/github/tidyverse/broom?branch=master)
 
 The broom package takes the messy output of built-in functions in R, such as `lm`, `nls`, or `t.test`, and turns them into tidy data frames.
 
