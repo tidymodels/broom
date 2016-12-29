@@ -30,7 +30,7 @@
 #' }
 #' 
 #' @seealso \link{list_tidiers}
-tidy_orcutt <- function(x, ...) {
+tidy.orcutt <- function(x, ...) {
     tidy(x$Cochrane.Orcutt, ...)
 }
 
@@ -40,7 +40,7 @@ tidy_orcutt <- function(x, ...) {
 #' @return \code{glance} returns the same one-row data frame as
 #' \code{\link{glance.summary.lm}}, along with columns \code{rho}
 #' and \code{number.interaction}.
-glance_orcutt <- function(x, ...) {
+glance.orcutt <- function(x, ...) {
     ret <- glance.summary.lm(x$Cochrane.Orcutt)
     ret$rho <- x$rho
     ret$number.interaction <- x$number.interaction
