@@ -57,7 +57,7 @@ with columns (each prepended by a .) added. Included are the columns
   \item{AIC}{the Akaike Information Criterion}
   \item{BIC}{the Bayesian Information Criterion}
   \item{deviance}{returned as NA. To quote Brian Ripley on R-help:
- McCullagh & Nelder (1989) would be the authorative reference, but the 1982
+ McCullagh & Nelder (1989) would be the authoritative reference, but the 1982
 first edition manages to use 'deviance' in three separate senses on one
 page. }
 }
