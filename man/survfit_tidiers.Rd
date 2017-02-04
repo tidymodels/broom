@@ -24,10 +24,12 @@ structure depends on the method chosen.
   \item{n.risk}{number of subjects at risk at time t0}
   \item{n.event}{number of events at time t}
   \item{n.censor}{number of censored events}
-  \item{estimate}{estimate of survival}
+  \item{estimate}{estimate of survival or cumulative incidence rate when multistate}
   \item{std.error}{standard error of estimate}
   \item{conf.high}{upper end of confidence interval}
   \item{conf.low}{lower end of confidence interval}
+  \item{state}{state if multistate survfit object inputted}
+  \item{strata}{strata if stratified survfit object inputted}
 
 \code{glance} returns one-row data.frame with the columns
 displayed by \code{\link{print.survfit}}

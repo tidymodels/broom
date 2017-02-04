@@ -34,7 +34,7 @@ tidy.list <- function(x, ...) {
     } else if (all(sort(names(x)) == c("d", "u", "v"))) {
         tidy_svd(x, ...)
     } else if ("Cochrane.Orcutt" %in% names(x)) {
-        tidy_orcutt(x, ...)
+        tidy.orcutt(x, ...)
     } else {
         stop("No tidying method recognized for this list")
     }
@@ -48,7 +48,7 @@ glance.list <- function(x, ...) {
     if (all(c("par", "value", "counts", "convergence", "message") %in% names(x))) {
         glance_optim(x, ...)
     } else if ("Cochrane.Orcutt" %in% names(x)) {
-        glance_orcutt(x, ...)
+        glance.orcutt(x, ...)
     } else {
         stop("No glance method recognized for this list")
     }
