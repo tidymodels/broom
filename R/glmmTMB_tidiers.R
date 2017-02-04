@@ -107,7 +107,8 @@ tidy.glmmTMB <- function(x, effects = c("ran_pars","fixed"),
         ret_list$fixed <-
             fix_data_frame(ret, newnames = nn)
     }
-    if ("ran_pars" %in% effects) {
+    if ("ran_pars" %in% effects &&
+        !all(sapply(VarCorr(x),is.null))) {
         if (is.null(scales)) {
             rscale <- "sdcor"
         } else rscale <- scales[effects=="ran_pars"]
@@ -118,7 +119,7 @@ tidy.glmmTMB <- function(x, effects = c("ran_pars","fixed"),
         class(vv) <- "VarCorr.merMod"
         ret <- as.data.frame(vv)
         ret[] <- lapply(ret, function(x) if (is.factor(x))
-                                 as.character(x) else x)
+                                                 as.character(x) else x)
         if (is.null(ran_prefix)) {
             ran_prefix <- switch(rscale,
                                  vcov=c("var","cov"),
@@ -133,9 +134,9 @@ tidy.glmmTMB <- function(x, effects = c("ran_pars","fixed"),
             }
             return(p)
         }
-
+            
         rownames(ret) <- paste(apply(ret[c("var1","var2")],1,pfun),
-                                ret[,"grp"],sep=".")
+                               ret[,"grp"],sep=".")
 
         ## FIXME: this is ugly, but maybe necessary?
         ## set 'term' column explicitly, disable fix_data_frame
@@ -147,7 +148,6 @@ tidy.glmmTMB <- function(x, effects = c("ran_pars","fixed"),
             ret <- data.frame(ret,ciran)
             nn <- c(nn,"conf.low","conf.high")
         }
-
         
         ## replicate lme4:::tnames, more or less
         ret_list$ran_pars <- fix_data_frame(ret[c("grp",rscale)],

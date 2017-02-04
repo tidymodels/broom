@@ -47,12 +47,9 @@ S3method(glance,felm)
 S3method(glance,fitdistr)
 S3method(glance,gam)
 S3method(glance,glm)
-<<<<<<< HEAD
 S3method(glance,glmmTMB)
 S3method(glance,glmmadmb)
-=======
 S3method(glance,glmRob)
->>>>>>> 4152cee2578894e8c26afc5a35af7aeebf842eea
 S3method(glance,glmnet)
 S3method(glance,gmm)
 S3method(glance,htest)
@@ -131,12 +128,9 @@ S3method(tidy,gam)
 S3method(tidy,gamlss)
 S3method(tidy,geeglm)
 S3method(tidy,glht)
-<<<<<<< HEAD
 S3method(tidy,glmmTMB)
 S3method(tidy,glmmadmb)
-=======
 S3method(tidy,glmRob)
->>>>>>> 4152cee2578894e8c26afc5a35af7aeebf842eea
 S3method(tidy,glmnet)
 S3method(tidy,gmm)
 S3method(tidy,htest)
