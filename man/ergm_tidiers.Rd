@@ -2,8 +2,8 @@
 % Please edit documentation in R/ergm_tidiers.R
 \name{ergm_tidiers}
 \alias{ergm_tidiers}
-\alias{glance.ergm}
 \alias{tidy.ergm}
+\alias{glance.ergm}
 \title{Tidying methods for an exponential random graph model}
 \usage{
 \method{tidy}{ergm}(x, conf.int = FALSE, conf.level = 0.95,
@@ -112,4 +112,3 @@ Models for Networks. \emph{Journal of Statistical Software}, 24(3).
 \code{\link[ergm]{control.ergm}}, 
 \code{\link[ergm]{summary.ergm}}
 }
-

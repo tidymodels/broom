@@ -48,4 +48,3 @@ ggplot(tidy(ck), aes(estimate, type)) +
 \seealso{
 \code{\link{cohen.kappa}}
 }
-

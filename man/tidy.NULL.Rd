@@ -18,4 +18,3 @@ An empty data.frame
 tidy on a NULL input returns an empty data frame, which means it can be
 combined with other data frames (treated as "empty")
 }
-
