@@ -18,6 +18,7 @@ Authors@R: c(
     person("Gavin", "Simpson", email = "ucfagls@gmail.com", role = "ctb"),
     person("Jens", "Preussner", email = " jens.preussner@mpi-bn.mpg.de", role = "ctb"),
     person("Jay", "Hesselberth", email = "jay.hesselberth@gmail.com", role = "ctb"),
+    person("Tal", "Galili", email = "tal.galili@gmail.com", role = "ctb"),
     person("Hadley", "Wickham", email = "hadley@rstudio.com", role = "ctb")
     )
 Maintainer: David Robinson <admiral.david@gmail.com>
@@ -86,7 +87,8 @@ Suggests:
     lsmeans,
     betareg,
     robust,
-    akima
+    akima,
+    metafor
 URL: http://github.com/tidyverse/broom
 BugReports: http://github.com/tidyverse/broom/issues
 VignetteBuilder: knitr
