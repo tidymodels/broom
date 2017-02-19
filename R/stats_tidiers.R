@@ -240,21 +240,46 @@ tidy.manova <- function(x, test = "Pillai", ...) {
 }
 
 
-#' tidy a ts timeseries object
+#' Tidy a ts timeseries object
 #' 
-#' Turn a ts object into a tidy data frame. Right now simply uses
-#' \code{as.data.frame.ts}.
+#' Turn a univariate or multivariate \code{\link{ts}} object into a tidy data
+#' frame.
 #' 
-#' @param x a "ts" object
+#' @param x An object of class "ts".
 #' @param ... extra arguments (not used)
 #' 
-#' @return a tidy data frame
-#' 
-#' @seealso \link{as.data.frame.ts}
-#' 
+#' @return \code{tidy} returns a data frame with one row for each observation, with the
+#' following columns:
+#'   \item{index}{Index (i.e. date or time) for the "ts" object.}
+#'   \item{series}{Name of the series (multivariate "ts" objects only).}
+#'   \item{value}{Value of the observation.}
+#'
+#' @examples
+#'
+#' set.seed(678)
+#'
+#' tidy(ts(1:10, frequency = 4, start = c(1959, 2)))
+#'
+#' z <- ts(matrix(rnorm(300), 100, 3), start = c(1961, 1), frequency = 12)
+#' colnames(z) <- c("Aa", "Bb", "Cc")
+#' tidy(z)
+#'
+#' @seealso \link{ts}, \link{zoo_tidiers}
+#'
 #' @export
 tidy.ts <- function(x, ...) {
-    as.data.frame(x)
+    # This generates the "index" column using the same approach as time(x), but
+    # without converting to a ts object.
+    xtsp <- tsp(x)
+    index <- seq(xtsp[1], xtsp[2], by = 1 / xtsp[3])
+    # Turn multi-column time series into tidy data frames.
+    if (is.matrix(x)) {
+        res <- tibble::as_data_frame(as.data.frame(x))
+        res <- tibble::add_column(res, index = index, .before = 1)
+        tidyr::gather(res, series, value, -index)
+    } else {
+        tibble::data_frame(index = index, value = as.vector(x))
+    }
 }
 
 
