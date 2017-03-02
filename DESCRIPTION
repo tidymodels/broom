@@ -86,7 +86,8 @@ Suggests:
     lsmeans,
     betareg,
     robust,
-    akima
+    akima,
+    cluster
 URL: http://github.com/tidyverse/broom
 BugReports: http://github.com/tidyverse/broom/issues
 VignetteBuilder: knitr
