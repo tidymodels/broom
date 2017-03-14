@@ -32,9 +32,9 @@ NULL
 #' The columns depend upon the confidence interval method selected.
 #' 
 #' @export
-tidy.rq <- function(x,se.type = "rank",conf.int = TRUE,conf.level = 0.95,alpha = 1 - conf.level, ...){
+tidy.rq <- function(x,se.type = "rank",conf.int = TRUE,conf.level = 0.9,alpha = 1 - conf.level, ...){
     #summary.rq often issues warnings when computing standard errors
-    rq_summary <- suppressWarnings(summary(x,se = se.type, alpha = alpha, ...))
+    rq_summary <- suppressWarnings(quantreg::summary.rq(x,se = se.type, alpha = alpha, ...))
     process_rq(rq_obj = rq_summary,se.type = se.type,conf.int = conf.int,conf.level = conf.level,...)
 }
 
@@ -45,9 +45,9 @@ tidy.rq <- function(x,se.type = "rank",conf.int = TRUE,conf.level = 0.95,alpha =
 #' method selected.
 #' 
 #' @export
-tidy.rqs <- function(x,se.type = "rank",conf.int = TRUE,conf.level = 0.95,alpha = 1 - conf.level, ...){
+tidy.rqs <- function(x,se.type = "rank",conf.int = TRUE,conf.level = 0.9,alpha = 1 - conf.level, ...){
     #summary.rq often issues warnings when computing standard errors
-    rq_summary <- suppressWarnings(summary(x,se = se.type,alpha = alpha, ...))
+    rq_summary <- suppressWarnings(quantreg::summary.rqs(x,se = se.type,alpha = alpha, ...))
     plyr::ldply(rq_summary,process_rq,se.type = se.type,conf.int = conf.int,conf.level = conf.level,...)
 }
 
@@ -97,7 +97,15 @@ glance.rq <- function(x,...){
 }
 
 #' @export
-glance.rqs <- glance.rq
+glance.rqs <- function(x,...){
+    n <- length(fitted(x))
+    s <- summary(x)
+    data.frame(tau = x[["tau"]],
+               logLik = logLik(x),
+               AIC = AIC(x),
+               BIC = AIC(x,k = log(n)),
+               df.residual = sapply(s,'[[','rdf'))
+}
 
 #' @rdname rq_tidiers
 #' 
