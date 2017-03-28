@@ -122,7 +122,6 @@ Collate:
     'h2o_glm_tidiers.R'
     'tidy.R'
     'h2o_tidiers.R'
-    'h2o_utilities.R'
     'htest_tidiers.R'
     'kde_tidiers.R'
     'kmeans_tidiers.R'

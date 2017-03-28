@@ -1,4 +1,4 @@
-tidy_h2o_glm <- function(x, exponentiate = FALSE) {
+tidy_h2o_glm <- function(x, exponentiate) {
     newnames <- if (x@allparameters$compute_p_values) {
         c("term", "estimate", "std.error", "statistic", "p.value",
           "standardized_coefficients")
@@ -22,10 +22,10 @@ tidy_h2o_glm <- function(x, exponentiate = FALSE) {
 }
 
 augment_h2o_glm <- function(x,
-                            data = h2o.getFrame(x@allparameters$training_frame),
+                            data,
                             newdata, collect, ...) {
     
-    if (!(is.null(newdata) || is.h2o(newdata)))
+    if (!(is.null(newdata) || h2o::is.h2o(newdata)))
         stop("newdata must be a H2OFrame")
     stopifnot(is.logical(collect))
     if (! class(x) %in% c("H2ORegressionModel", "H2OBinomialModel"))
@@ -35,7 +35,7 @@ augment_h2o_glm <- function(x,
     pred <- predict(x, ret)
     if (class(x) == "H2OBinomialModel") {
         ret$.fitted <- data[[x@allparameters$y]] %>%
-            h2o.levels %>%
+            h2o::h2o.levels() %>%
             .[2] %>%
             pred[.]
     } else {

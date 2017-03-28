@@ -55,7 +55,7 @@ setMethod("tidy", "H2ORegressionModel", function(x, exponentiate = FALSE) {
 #'   \item{.se.fit}{Standard errors of fitted values}
 #'   
 #' @export
-setMethod("augment", "H2OBinomialModel", function(x, data = h2o.getFrame(x@allparameters$training_frame),
+setMethod("augment", "H2OBinomialModel", function(x, data = h2o::h2o.getFrame(x@allparameters$training_frame),
                                                   newdata = NULL, collect = TRUE, ...) {
     if (x@algorithm == "glm") {
         augment_h2o_glm(x, data, newdata, collect, ...)
@@ -69,7 +69,7 @@ setMethod("augment", "H2OBinomialModel", function(x, data = h2o.getFrame(x@allpa
 #' @rdname h2o_tidiers
 #' 
 #' @export
-setMethod("augment", "H2ORegressionModel", function(x, data = h2o.getFrame(x@allparameters$training_frame),
+setMethod("augment", "H2ORegressionModel", function(x, data = h2o::h2o.getFrame(x@allparameters$training_frame),
                                                     newdata = NULL, collect = TRUE, ...) {
     if (x@algorithm == "glm") {
         augment_h2o_glm(x, data, newdata, collect, ...)
@@ -99,19 +99,19 @@ setMethod("augment", "H2ORegressionModel", function(x, data = h2o.getFrame(x@all
 #' @export
 setMethod("glance", "H2OModel", function(x, on = "train", ...) {
     stopifnot(on %in% c("train", "valid", "xval"))
-    h2o_extractor_funs <- c(null.deviance = h2o.null_deviance, 
-                            df.null = h2o.null_dof, 
-                            df.residual = h2o.residual_dof,
-                            AIC = h2o.aic, 
-                            deviance = h2o.residual_deviance,
-                            r.squared = h2o.r2,
-                            MSE = h2o.mse,
-                            RMSE = h2o.rmse,
-                            # RMSLE = h2o.rmsle,
-                            AUC = h2o.auc,
-                            # Gini = h2o.giniCoef,
-                            logloss = h2o.logloss
-                            # mean_per_class_error = h2o.mean_per_class_error
+    h2o_extractor_funs <- c(null.deviance = h2o::h2o.null_deviance, 
+                            df.null = h2o::h2o.null_dof, 
+                            df.residual = h2o::h2o.residual_dof,
+                            AIC = h2o::h2o.aic, 
+                            deviance = h2o::h2o.residual_deviance,
+                            r.squared = h2o::h2o.r2,
+                            MSE = h2o::h2o.mse,
+                            RMSE = h2o::h2o.rmse,
+                            # RMSLE = h2o::h2o.rmsle,
+                            AUC = h2o::h2o.auc,
+                            # Gini = h2o::h2o.giniCoef,
+                            logloss = h2o::h2o.logloss
+                            # mean_per_class_error = h2o::h2o.mean_per_class_error
                             )
     
     data_frame(metric = names(h2o_extractor_funs), 
@@ -120,11 +120,10 @@ setMethod("glance", "H2OModel", function(x, on = "train", ...) {
         mutate(value = suppressWarnings(
             c(x, TRUE) %>%
                 setNames(c("object", on)) %>%
-                do.call(h2o_fun, .) %>%
-                ifelse(is.null(.), NA, .))
+                do.call(h2o_fun, .))
         ) %>%
         select(-h2o_fun) %>%
         filter(!is.na(value)) %>%
-        tidyr::spread(metric, value)
+        tidyr::spread_("metric", "value")
 }
 )
