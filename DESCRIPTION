@@ -77,7 +77,6 @@ Suggests:
     gmm,
     Matrix,
     ks,
-    purrr,
     orcutt,
     mgcv,
     lmodel2,

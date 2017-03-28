@@ -15,11 +15,11 @@
 \S4method{tidy}{H2ORegressionModel}(x, exponentiate = FALSE)
 
 \S4method{augment}{H2OBinomialModel}(x,
-  data = h2o.getFrame(x@allparameters$training_frame), newdata = NULL,
+  data = h2o::h2o.getFrame(x@allparameters$training_frame), newdata = NULL,
   collect = TRUE, ...)
 
 \S4method{augment}{H2ORegressionModel}(x,
-  data = h2o.getFrame(x@allparameters$training_frame), newdata = NULL,
+  data = h2o::h2o.getFrame(x@allparameters$training_frame), newdata = NULL,
   collect = TRUE, ...)
 
 \S4method{glance}{H2OModel}(x, on = "train", ...)
