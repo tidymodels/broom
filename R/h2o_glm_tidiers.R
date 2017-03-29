@@ -1,4 +1,4 @@
-tidy_h2o_glm <- function(x, exponentiate) {
+tidy_h2o_glm <- function(x, exponentiate, ...) {
     newnames <- if (x@allparameters$compute_p_values) {
         c("term", "estimate", "std.error", "statistic", "p.value",
           "standardized_coefficients")

@@ -5,6 +5,8 @@
 #' @name h2o_tidiers
 #' 
 #' @param x An H2OModel object
+#' @param ... extra arguments (not used)
+NULL
 
 setClass("H2OModel")
 setClass("H2OBinomialModel")
@@ -21,7 +23,7 @@ setClass("H2ORegressionModel")
 #'   \item{statistic}{Z-score}
 #'   \item{p.value}{p-value}
 #' @export
-setMethod("tidy", "H2OBinomialModel", function(x, exponentiate = FALSE) {
+setMethod("tidy", "H2OBinomialModel", function(x, exponentiate = FALSE, ...) {
     if (x@algorithm == "glm") {
         tidy_h2o_glm(x, exponentiate)
     } else {
@@ -33,7 +35,7 @@ setMethod("tidy", "H2OBinomialModel", function(x, exponentiate = FALSE) {
 #' @rdname h2o_tidiers
 #' 
 #' @export
-setMethod("tidy", "H2ORegressionModel", function(x, exponentiate = FALSE) {
+setMethod("tidy", "H2ORegressionModel", function(x, exponentiate = FALSE, ...) {
     if (x@algorithm == "glm") {
         tidy_h2o_glm(x, exponentiate)
     } else {
