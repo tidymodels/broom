@@ -122,9 +122,9 @@ setMethod("glance", "H2OModel", function(x, on = "train", ...) {
         mutate(value = suppressWarnings(
             c(x, TRUE) %>%
                 setNames(c("object", on)) %>%
-                do.call(h2o_fun, .))
+                do.call("h2o_fun", .))
         ) %>%
-        select(-h2o_fun) %>%
+        select_(~-h2o_fun) %>%
         filter(!is.na(value)) %>%
         tidyr::spread_("metric", "value")
 }
