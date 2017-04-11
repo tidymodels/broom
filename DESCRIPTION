@@ -36,7 +36,8 @@ Imports:
     stringr,
     reshape2,
     nlme,
-    methods
+    methods,
+    purrr
 Suggests:
     knitr,
     boot,
@@ -76,7 +77,6 @@ Suggests:
     gmm,
     Matrix,
     ks,
-    purrr,
     orcutt,
     mgcv,
     lmodel2,
@@ -86,9 +86,81 @@ Suggests:
     lsmeans,
     betareg,
     robust,
-    akima
+    akima,
+    h2o
 URL: http://github.com/tidyverse/broom
 BugReports: http://github.com/tidyverse/broom/issues
 VignetteBuilder: knitr
 License: MIT + file LICENSE
-RoxygenNote: 5.0.1
+RoxygenNote: 6.0.1.9000
+Collate: 
+    'anova_tidiers.R'
+    'arima_tidiers.R'
+    'auc_tidiers.R'
+    'augment.R'
+    'betareg_tidiers.R'
+    'biglm_tidiers.R'
+    'bingroup_tidiers.R'
+    'boot_tidiers.R'
+    'brms_tidiers.R'
+    'broom.R'
+    'btergm_tidiers.R'
+    'data.frame_tidiers.R'
+    'ergm_tidiers.R'
+    'extras.R'
+    'felm_tidiers.R'
+    'fitdistr_tidiers.R'
+    'gam_tidiers.R'
+    'gamlss_tidiers.R'
+    'geeglm_tidiers.R'
+    'glance.R'
+    'glm_tidiers.R'
+    'glmnet_tidiers.R'
+    'globals.R'
+    'gmm_tidiers.R'
+    'h2o_glm_tidiers.R'
+    'tidy.R'
+    'h2o_tidiers.R'
+    'htest_tidiers.R'
+    'kde_tidiers.R'
+    'kmeans_tidiers.R'
+    'list_tidiers.R'
+    'lm_tidiers.R'
+    'lme4_tidiers.R'
+    'lmodel2_tidiers.R'
+    'lmtest_tidiers.R'
+    'loess_tidiers.R'
+    'lsmeans_tidiers.R'
+    'map_tidiers.R'
+    'matrix_tidiers.R'
+    'mclust_tidiers.R'
+    'mcmc_tidiers.R'
+    'mle2_tidiers.R'
+    'multcomp_tidiers.R'
+    'multinom_tidiers.R'
+    'nlme_tidiers.R'
+    'nls_tidiers.R'
+    'optim_tidiers.R'
+    'orcutt_tidiers.R'
+    'plm_tidiers.R'
+    'polca_tidiers.R'
+    'prcomp_tidiers.R'
+    'psych_tidiers.R'
+    'rcorr_tidiers.R'
+    'ridgelm_tidiers.R'
+    'rlm_tidiers.R'
+    'robust_tidiers.R'
+    'rowwise_df_tidiers.R'
+    'rq_tidiers.R'
+    'rstanarm_tidiers.R'
+    'smooth.spline_tidiers.R'
+    'sp_tidiers.R'
+    'sparse_tidiers.R'
+    'stats_tidiers.R'
+    'summary_tidiers.R'
+    'survival_tidiers.R'
+    'svd_tidiers.R'
+    'utilities.R'
+    'vector_tidiers.R'
+    'xyz_tidiers.R'
+    'zoo_tidiers.R'
