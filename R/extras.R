@@ -46,3 +46,39 @@ bootstrap <- function (df, m, by_group = FALSE)  {
     class(df) <- c("grouped_df", "tbl_df", "tbl", "data.frame")
     df
 }
+
+
+#' Copy tidy data to clipboard
+#'
+#' @param df a data.frame, atmoic vector, or matrix
+#' @param sep a character vector of length 1 indicating how the pasted columns
+#' are separated, defaults to a tab character
+#' 
+#' @details This function copies df to the clipboard, for easy pasting into 
+#' word processors and spreadsheets (e.g., MS Excel). 
+#'
+#' @examples
+#' 
+#' library(magrittr)
+#' mtcars %>% 
+#' lm(qsec ~ cyl + wt + hp, data = .) %>%
+#' tidy %>%
+#' copyData
+#' 
+#'
+#' @export
+
+copyData <- function(df, sep = "\t"){
+  label <- deparse(substitute(df))
+  sep   <- as.character(sep)
+  
+  if(!(is.data.frame(df) | is.matrix(df) | is.vector(df))){
+    stop("'", label, "' should be a dataframe, matrix, or atomic vector",
+         call. = FALSE)
+  }
+  
+  rbind(names(df), df) %>%
+  apply(1, paste0, collapse = sep)%>%
+  writeClipboard
+
+}
