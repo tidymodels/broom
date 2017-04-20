@@ -10,7 +10,7 @@
 #' 
 #' @template boilerplate
 #' 
-#' @return \code{tidy.plm} returns a data frame with one row per
+#' @return \code{tidy.ivreg} returns a data frame with one row per
 #' coefficient, of the same form as \code{\link{tidy.lm}}.
 #' 
 #' @seealso \code{\link{lm_tidiers}}
@@ -61,7 +61,7 @@ tidy.ivreg <- function(x, conf.int = FALSE, conf.level = .95,
 }
 
 
-#' @rdname plm_tidiers
+#' @rdname ivreg_tidiers
 #' 
 #' @return \code{augment} returns a data frame with one row for each
 #' initial observation, adding the columns

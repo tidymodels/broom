@@ -3,11 +3,14 @@
 \name{ivreg_tidiers}
 \alias{ivreg_tidiers}
 \alias{tidy.ivreg}
+\alias{augment.ivreg}
 \alias{glance.ivreg}
 \title{Tidiers for ivreg models}
 \usage{
 \method{tidy}{ivreg}(x, conf.int = FALSE, conf.level = 0.95,
   exponentiate = FALSE, ...)
+
+\method{augment}{ivreg}(x, data = as.data.frame(stats::model.frame(x)), ...)
 
 \method{glance}{ivreg}(x, ...)
 }
@@ -30,8 +33,13 @@ and confidence intervals}
 All tidying methods return a data.frame without rownames, whose
 structure depends on the method chosen.
 
-\code{tidy.plm} returns a data frame with one row per
+\code{tidy.ivreg} returns a data frame with one row per
 coefficient, of the same form as \code{\link{tidy.lm}}.
+
+\code{augment} returns a data frame with one row for each
+initial observation, adding the columns
+  \item{.fitted}{predicted (fitted) values}
+  \item{.resid}{residuals}
 
 \code{glance} returns a one-row data frame with columns
   \item{r.squared}{The percent of variance explained by the model}
