@@ -76,6 +76,14 @@ tidy.nlrq <- function(x, conf.int = FALSE, conf.level = 0.95, ...){
     ret
 }
 
+#' @export
+tidy.rqss <- function(x,...){
+    nn <- c("term","edf","lambda","penalty","statistic","p.value")
+    ret <- fix_data_frame(summary(x)[['qsstab']])
+    ret <- setNames(ret,nn)
+    ret
+}
+
 #' @rdname rq_tidiers
 #' 
 #' @return \code{glance.rq} returns one row for each quantile (tau)
@@ -125,6 +133,16 @@ glance.nlrq <- function(x,...){
                AIC = AIC(x),
                BIC = AIC(x,k = log(n)),
                df.residual = s[["rdf"]])
+}
+
+#' @export
+glance.rqss <- function(x,...){
+    s <- summary(x)
+    data.frame(tau = s[["tau"]],
+               fidelity = s[["fidelity"]],
+               edf = s[["edf"]],
+               logLik = logLik(x),
+               AIC = AIC(x,...))
 }
 
 #' @rdname rq_tidiers
@@ -225,6 +243,41 @@ augment.rqs <- function(x,data = model.frame(x), newdata, ...){
 #' 
 #' @export
 augment.nlrq <- augment.nls
+
+#' @rdname rq_tidiers
+#' @export
+augment.rqss <- function(model,data,confint = FALSE,...){
+    if (missing(data)){
+        original <- model[["data"]]
+        original[[".tau"]] <- model[["tau"]]
+        original[[".fitted"]] <- quantreg::fitted.rqss(model)
+        original[[".resid"]] <- quantreg::resid.rqss(model)
+        return(original)
+    } else{
+        original <- data
+        original[[".tau"]] <- model[["tau"]]
+        
+        if (confint){
+            interval <- "confidence"
+        }else{
+            interval <- "none"
+        }
+        
+        preds <- quantreg::predict.rqss(object = model,
+                                        newdata = data,
+                                        interval = interval,...)
+        nn <- c(".fitted","lower","upper")
+        preds <- setNames(as.data.frame(preds),nn[seq_len(ncol(preds))])
+        return(unrowname(cbind(original,preds)))
+    }
+}
+
+#' @export
+rqss_fix <- function(formula,data,...){
+    model <- quantreg::rqss(formula = formula,data = data,...)
+    model[["data"]] <- data
+    model
+}
 
 
 #' Helper function for tidy.rq and tidy.rqs
