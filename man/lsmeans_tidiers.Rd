@@ -88,4 +88,3 @@ if (require("lsmeans", quietly = TRUE)) {
 }
 
 }
-

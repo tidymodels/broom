@@ -37,4 +37,3 @@ if (requireNamespace("gamlss", quietly = TRUE)) {
 \description{
 Tidying methods for "gamlss" objects from the gamlss package.
 }
-

@@ -39,4 +39,3 @@ npk2.aov <- manova(cbind(yield, foo) ~ block + N*P*K, npk2)
 \seealso{
 \code{\link{summary.manova}}
 }
-
