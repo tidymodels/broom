@@ -84,11 +84,11 @@ insert_NAs <- function(x, original) {
 augment_columns <- function(x, data, newdata, type, type.predict = type,
                             type.residuals = type, se.fit = TRUE, ...) {
     notNAs <- function(o) if (is.null(o) || all(is.na(o))) { NULL } else {o}
-    residuals0 <- failwith(NULL, stats::residuals, TRUE)
-    influence0 <- failwith(NULL, stats::influence, TRUE)
-    cooks.distance0 <- failwith(NULL, stats::cooks.distance, TRUE)
-    rstandard0 <- failwith(NULL, stats::rstandard, TRUE)
-    predict0 <- failwith(NULL, stats::predict, TRUE)
+    residuals0 <- purrr::possibly(stats::residuals, NULL)
+    influence0 <- purrr::possibly(stats::influence, NULL)
+    cooks.distance0 <- purrr::possibly(stats::cooks.distance, NULL)
+    rstandard0 <- purrr::possibly(stats::rstandard, NULL)
+    predict0 <- purrr::possibly(stats::predict, NULL)
     
     # call predict with arguments
     args <- list(x)
