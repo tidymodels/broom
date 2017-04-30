@@ -174,7 +174,8 @@ glance.cch <- function(x, ...) {
 #' @param data original data for \code{augment}
 #' @param exponentiate whether to report the estimate and confidence intervals
 #' on an exponential scale
-#' @param conf.int confidence level to be used for CI
+#' @param conf.int whether to include a confidence interval
+#' @param conf.level confidence level of the interval, used only if \code{conf.int=TRUE}
 #' @param newdata new data on which to do predictions
 #' @param type.predict type of predicted value (see \code{\link{predict.coxph}})
 #' @param type.residuals type of residuals (see \code{\link{residuals.coxph}})
@@ -226,8 +227,15 @@ glance.cch <- function(x, ...) {
 #'   \item{p.value}{p-value}
 #' 
 #' @export
-tidy.coxph <- function(x, exponentiate = FALSE, conf.int = .95, ...) {
-    s <- summary(x, conf.int = conf.int)
+tidy.coxph <- function(x, exponentiate = FALSE, conf.int = TRUE, conf.level = .95, ...) {
+    # backward compatibility (in previous version, conf.int was used instead of conf.level)
+    if (is.numeric(conf.int)) {
+        conf.level <- conf.int
+        conf.int <- TRUE
+    }
+    
+    if (conf.int) s <- summary(x, conf.int = conf.level)
+    else s <- summary(x, conf.int = FALSE)
     co <- stats::coef(s)
 
     if (s$used.robust)
