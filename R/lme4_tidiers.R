@@ -62,7 +62,6 @@ NULL
 #'   \item{statistic}{t- or Z-statistic (\code{NA} for modes)}
 #'   \item{p.value}{P-value computed from t-statistic (may be missing/NA)}
 #'
-#' @details 
 #' @importFrom plyr ldply rbind.fill
 #' @import dplyr
 #' @importFrom tidyr gather spread
@@ -245,8 +244,8 @@ tidy.merMod <- function(x, effects = c("ran_pars","fixed"),
     return(plyr::ldply(ret_list,identity,.id="effect"))
 }
 
+#' @export
 tidy.rlmerMod <- broom:::tidy.merMod
-as.data.frame.VarCorr.rlmerMod <- lme4:::as.data.frame.VarCorr.merMod
 
 #' @rdname lme4_tidiers
 #' 
