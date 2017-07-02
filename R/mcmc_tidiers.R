@@ -148,6 +148,7 @@ tidy.MCMCglmm <- function(x,effects="fixed",scales,...) {
     ## override MCMCglmm internal component names
     ## FIXME:: have to work harder to retrieve group/term information
     ##  about random parameters
+    ## individual components are mcmc objects: call tidy on them
     return(plyr::ldply(setNames(x[comp],effects),
                  tidy,...,.id="effect"))
 }

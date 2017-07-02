@@ -126,16 +126,18 @@ tidy.merMod <- function(x, effects = c("ran_pars","fixed"),
         if (!rscale %in% c("sdcor","vcov"))
             stop(sprintf("unrecognized ran_pars scale %s",sQuote(rscale)))
         vc <- VarCorr(x)
-        if (class(vc)=="VarCorr") {
-            ## hack: attempt to augment glmmADMB (or other)
-            ##   values so we can use as.data.frame.VarCorr.merMod
-            vc <- lapply(vc,
-                         function(x) {
-                             attr(x,"stddev") <- sqrt(diag(x))
-                             attr(x,"correlation") <- cov2cor(x)
-                             x
-                         })
-            attr(vc,"useScale") <- (x$family=="gaussian")
+        if (!is(x,"merMod") && grepl("^VarCorr",class(vc)[1])) {
+            if (!is(x,"rlmerMod")) {
+                ## hack: attempt to augment glmmADMB (or other)
+                ##   values so we can use as.data.frame.VarCorr.merMod
+                vc <- lapply(vc,
+                             function(x) {
+                    attr(x,"stddev") <- sqrt(diag(x))
+                    attr(x,"correlation") <- cov2cor(x)
+                    x
+                })
+                attr(vc,"useScale") <- (family(x)$family=="gaussian")
+            }
             class(vc) <- "VarCorr.merMod"
         }
         ret <- as.data.frame(vc)
@@ -243,7 +245,8 @@ tidy.merMod <- function(x, effects = c("ran_pars","fixed"),
     return(plyr::ldply(ret_list,identity,.id="effect"))
 }
 
-
+tidy.rlmerMod <- broom:::tidy.merMod
+as.data.frame.VarCorr.rlmerMod <- lme4:::as.data.frame.VarCorr.merMod
 
 #' @rdname lme4_tidiers
 #' 
