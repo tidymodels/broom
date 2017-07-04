@@ -112,7 +112,7 @@ tidy.merMod <- function(x, effects = c("ran_pars","fixed"),
                     ##  confint.default breaks
                     cc <- class(x)
                     class(x) <- "merMod"
-                    if (method!="Wald") {
+                    if (conf.method!="Wald") {
                         warning("only Wald method implemented for rlmerMod objects")
                     }
                     cifix <- confint(x,method="Wald", ...)
