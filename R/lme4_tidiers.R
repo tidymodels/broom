@@ -41,7 +41,6 @@
 #' }
 NULL
 
-
 #' @rdname lme4_tidiers
 #' 
 #' @param effects A character vector including one or more of "fixed" (fixed-effect parameters); "ran_pars" (variances and covariances or standard deviations and correlations of random effect terms); "ran_modes" (conditional modes/BLUPs/latent variable estimates); or "coefs" (predicted parameter values for each group, as returned by \code{\link{coef.merMod}})
@@ -105,9 +104,23 @@ tidy.merMod <- function(x, effects = c("ran_pars","fixed"),
         nn <- base_nn[1:ncol(ret)]
 
         if (conf.int) {
-            cifix <- if (!is(x,"merMod")) {
-                confint(x,...)
-            } else confint(x,parm="beta_",method=conf.method,...)
+            if (is(x,"merMod")) {
+                cifix <- confint(x,parm="beta_",method=conf.method,...)
+            } else {
+                if (is(x,"rlmerMod")) {
+                    ## hack: rlmerMod has no confint() method,
+                    ##  confint.default breaks
+                    cc <- class(x)
+                    class(x) <- "merMod"
+                    if (method!="Wald") {
+                        warning("only Wald method implemented for rlmerMod objects")
+                    }
+                    cifix <- confint(x,method="Wald", ...)
+                    class(x) <- cc
+                } else {
+                    ci <- confint(x,...)
+                }
+            }
             ret <- data.frame(ret,cifix)
             nn <- c(nn,"conf.low","conf.high")
         }
