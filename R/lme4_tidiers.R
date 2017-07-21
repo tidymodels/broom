@@ -195,8 +195,10 @@ tidy.merMod <- function(x, effects = c("ran_pars","fixed"),
         re <- ranef(x,condVar=TRUE)
         getSE <- function(x) {
             v <- attr(x,"postVar")
-            setNames(as.data.frame(sqrt(t(apply(v,3,diag)))),
-                     colnames(x))
+            re_sd <- sqrt(t(apply(v,3,diag)))
+            ## for single random effect term, need to re-transpose
+            if (nrow(re_sd)==1) re_sd <- t(re_sd)
+            setNames(as.data.frame(re_sd),colnames(x))
         }
         fix <- function(g,re,.id) {
              newg <- fix_data_frame(g, newnames = colnames(g), newcol = "level")
@@ -209,7 +211,7 @@ tidy.merMod <- function(x, effects = c("ran_pars","fixed"),
              newg.se$level <- rownames(re)
              newg.se$type <- "std.error"
 
-             data.frame(rbind(newg,newg.se),.id=.id,
+             data.frame(bind_rows(newg,newg.se),.id=.id,
                         check.names=FALSE)
                         ## prevent coercion of variable names
         }
@@ -222,6 +224,7 @@ tidy.merMod <- function(x, effects = c("ran_pars","fixed"),
             spread(type,estimate) -> ret
 
         ## FIXME: doesn't include uncertainty of population-level estimate
+        ## (this is hard; do we do something ugly & approximate?)
 
         if (conf.int) {
             if (conf.method != "Wald")
