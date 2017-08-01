@@ -139,9 +139,7 @@ augment.lme <- function(x, data = x$data, newdata, ...) {
 #' @export
 glance.lme <- function(x, ...) {
     ret <- unrowname(data.frame(sigma = x$sigma))
-    ret = finish_glance(ret, x)
-    ret$deviance = NA
-#    ret$deviance = -2 * x$logLik # Or better leave this out totally?
+    ret <- finish_glance(ret, x) # Sets deviance to NA
     ret
 }
 
