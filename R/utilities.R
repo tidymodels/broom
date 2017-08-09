@@ -272,24 +272,33 @@ confint_tidy <- function(x, conf.level = .95, func = stats::confint, ...) {
 #' Expand a dataset to include all factorial combinations of one or more
 #' variables
 #'
-#' @param .data a tbl
+#' @param df a tbl
 #' @param ... arguments
 #' @param stringsAsFactors logical specifying if character vectors are
 #' converted to factors.
 #'
-#' @return A tbl, grouped by the arguments in \code{...}
+#' @return A tbl
 #'
 #' @import dplyr
 #'
 #' @export
-inflate <- function(.data, ..., stringsAsFactors = FALSE) {
+inflate <- function(df, ..., stringsAsFactors = FALSE) {
     ret <- expand.grid(..., stringsAsFactors = stringsAsFactors)
-    ret <- ret %>% group_by_(.dots = colnames(ret)) %>% do(.data)
-    if (!is.null(groups(.data))) {
-        ret <- ret %>% group_by_(.dots = groups(.data), add = TRUE)
+    
+    ret <- ret %>%
+        group_by_all() %>%
+        do(data = df) %>%
+        ungroup() %>%
+        unnest(data)
+    
+    if (!is.null(groups(df))) {
+        ret <- ret %>%
+            group_by_all()
     }
+    
     ret
 }
+
 
 
 # utility function from tidyr::col_name
