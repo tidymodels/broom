@@ -280,6 +280,7 @@ confint_tidy <- function(x, conf.level = .95, func = stats::confint, ...) {
 #' @return A tbl
 #'
 #' @import dplyr
+#' @import tidyr
 #'
 #' @export
 inflate <- function(df, ..., stringsAsFactors = FALSE) {
@@ -289,7 +290,7 @@ inflate <- function(df, ..., stringsAsFactors = FALSE) {
         group_by_all() %>%
         do(data = df) %>%
         ungroup() %>%
-        unnest(data)
+        tidyr::unnest(data)
     
     if (!is.null(groups(df))) {
         ret <- ret %>%
