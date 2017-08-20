@@ -36,7 +36,8 @@ Imports:
     stringr,
     reshape2,
     nlme,
-    methods
+    methods,
+    coda
 Suggests:
     knitr,
     boot,
@@ -73,7 +74,6 @@ Suggests:
     rstan,
     rstanarm,
     brms,
-    coda,
     gmm,
     Matrix,
     ks,
