@@ -329,6 +329,12 @@ process_lm <- function(ret, x, conf.int = FALSE, conf.level = .95,
                      profile=suppressMessages(stats::confint(x,
                                                level = conf.level)),
                      Wald=stats::confint.default(x,level = conf.level))
+        if (is.null(dim(CI)) && is.list(CI)) {
+            ## hack: gmm returns confint as a list
+            ok_mat <- which(sapply(CI,
+                                   function(x) is.matrix(x) && ncol(x)==2))
+            CI <- CI[[ok_mat]]
+        }
         colnames(CI) = c("conf.low", "conf.high")
         ret <- cbind(ret, trans(unrowname(CI)))
     }
