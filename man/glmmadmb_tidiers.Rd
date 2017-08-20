@@ -30,7 +30,7 @@ or logistic) are not yet implemented, but may be in the future.}
 
 \item{conf.level}{confidence level for CI}
 
-\item{conf.method}{method for computing confidence intervals (see \code{\link{confint.merMod}})}
+\item{conf.method}{method for computing confidence intervals (see \code{\link[lme4]{confint.merMod}})}
 
 \item{...}{extra arguments (not used)}
 
