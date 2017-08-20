@@ -306,9 +306,14 @@ process_lm <- function(ret, x, conf.int = FALSE, conf.level = .95,
                        transform = FALSE) {
 
     conf.type <- match.arg(conf.type)
-    
+
+    get_family <- function(x) {
+        if (!("family" %in% methods(class=class(x)))) {
+            return(NULL)
+        } else return(stats::family(x))
+    }
     ## save transformation function for use on confidence interval
-    if (is.null(fam <- stats::family(x)) || !transform) {
+    if (is.null(get_family(x)) || !transform) {
         if (transform)
             warning("transform requested, but original model did not use a non-identity link function")
         trans <- identity
