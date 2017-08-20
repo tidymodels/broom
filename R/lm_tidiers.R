@@ -155,7 +155,8 @@ tidy.lm <- function(x, conf.int = FALSE, conf.level = .95,
     if (quick) {
         co <- stats::coef(x)
         ret <- data.frame(term = names(co), estimate = unname(co))
-        return(process_lm(ret, x, conf.int = FALSE, transform = transform))
+        return(process_lm(ret, x, conf.int = FALSE,
+                          transform = transform))
     }
     s <- summary(x)
     ret <- tidy.summary.lm(s)
@@ -301,12 +302,13 @@ glance.mlm <- function(x, ...) {
 #' and confidence intervals (typical for logistic regression)
 process_lm <- function(ret, x, conf.int = FALSE, conf.level = .95,
                        conf.type=c("profile","Wald"),
+                       exponentiate = FALSE,
                        transform = FALSE) {
 
     conf.type <- match.arg(conf.type)
     
     ## save transformation function for use on confidence interval
-    if (is.null(fam <- family(x)) || !transform) {
+    if (is.null(fam <- stats::family(x)) || !transform) {
         if (transform)
             warning("transform requested, but original model did not use a non-identity link function")
         trans <- identity

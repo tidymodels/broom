@@ -75,6 +75,7 @@ confint.rlmerMod <- function(x, parm,
 #' @import dplyr
 #' @importFrom tidyr gather spread
 #' @importFrom nlme VarCorr ranef
+#' @importFrom methods is
 ## FIXME: is it OK/sensible to import these from (priority='recommended')
 ## nlme rather than (priority=NA) lme4?
 #' 
@@ -144,10 +145,10 @@ tidy.merMod <- function(x, effects = c("ran_pars","fixed"),
                 vc <- lapply(vc,
                              function(x) {
                     attr(x,"stddev") <- sqrt(diag(x))
-                    attr(x,"correlation") <- cov2cor(x)
+                    attr(x,"correlation") <- stats::cov2cor(x)
                     x
                 })
-                attr(vc,"useScale") <- (family(x)$family=="gaussian")
+                attr(vc,"useScale") <- (stats::family(x)$family=="gaussian")
             }
             class(vc) <- "VarCorr.merMod"
         }
@@ -370,6 +371,7 @@ glance.merMod <- function(x, ...) {
 ##'    geom_vline(xintercept=0,lty=2)+
 ##'    geom_point()+facet_wrap(~variable,scale="free_x")+
 ##'    scale_colour_manual(values=c("black","red"),guide=FALSE)
+##' @importFrom stats ppoints
 ##' @export 
 augment.ranef.mer <- function(x,
                                  ci.level=0.9,
@@ -389,7 +391,7 @@ augment.ranef.mer <- function(x,
         }
         ## Q-Q values, for each column separately
         qq <- c(apply(z,2,function(y) {
-                  qnorm(ppoints(nrow(z)))[order(order(y))]
+                  qnorm(stats::ppoints(nrow(z)))[order(order(y))]
               }))
         rownames(zz) <- NULL
         pv   <- attr(z, "postVar")
