@@ -52,8 +52,6 @@ Tidying methods for MCMC (Stan, JAGS, etc.) fits
 }
 \examples{
 
-\dontrun{
-
 # Using example from "RStan Getting Started"
 # https://github.com/stan-dev/rstan/wiki/RStan-Getting-Started
 
