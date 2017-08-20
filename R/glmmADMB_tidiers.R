@@ -114,7 +114,7 @@ tidy.glmmadmb <- function(x, effects = c("ran_pars","fixed"),
         vv <- lapply(vv,
                      function(v) {
                          attr(v,"stddev") <- sqrt(diag(v))
-                         attr(v,"correlation") <- cov2cor(v)
+                         attr(v,"correlation") <- stats::cov2cor(v)
                          v
                      })
         if (useSc <- (x$family=="gaussian")) {
