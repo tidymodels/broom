@@ -5,7 +5,7 @@
 \title{helper function to process a tidied lm object}
 \usage{
 process_lm(ret, x, conf.int = FALSE, conf.level = 0.95,
-  exponentiate = FALSE)
+  conf.type = c("profile", "Wald"), transform = FALSE)
 }
 \arguments{
 \item{ret}{data frame with a tidied version of a coefficient matrix}
@@ -17,11 +17,10 @@ process_lm(ret, x, conf.int = FALSE, conf.level = 0.95,
 \item{conf.level}{confidence level of the interval, used only if
 \code{conf.int=TRUE}}
 
-\item{exponentiate}{whether to exponentiate the coefficient estimates
+\item{transform}{whether to back-transform the coefficient estimates
 and confidence intervals (typical for logistic regression)}
 }
 \description{
-Adds a confidence interval, and possibly exponentiates, a tidied
+Adds a confidence interval, and possibly back-transforms, a tidied
 object. Useful for operations shared between lm and biglm.
 }
-

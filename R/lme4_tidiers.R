@@ -325,17 +325,13 @@ augment.merMod <- function(x, data = stats::model.frame(x), newdata, ...) {
 #'   \item{AIC}{the Akaike Information Criterion}
 #'   \item{BIC}{the Bayesian Information Criterion}
 #'   \item{deviance}{deviance}
-#' 
+#'
+#' @rawNamespace if(getRversion()>='3.3.0') importFrom(stats, sigma) else importFrom(lme4,sigma)
 #' @export
 glance.merMod <- function(x, ...) {
     # We cannot use stats::sigma or lme4::sigma here, even in an
     # if statement, since that leads to R CMD CHECK warnings on 3.2
     # or dev R, respectively
-    sigma <- if (getRversion() >= "3.3.0") {
-        get("sigma", asNamespace("stats"))
-    } else {
-        get("sigma", asNamespace("lme4"))
-    }
     ret <- unrowname(data.frame(sigma = sigma(x)))
     finish_glance(ret, x)
 }

@@ -243,11 +243,10 @@ augment.glmmTMB <- function(x, data = stats::model.frame(x), newdata,
 #'   \item{AIC}{the Akaike Information Criterion}
 #'   \item{BIC}{the Bayesian Information Criterion}
 #'   \item{deviance}{deviance}
-#' 
+#'
+#' @rawNamespace if(getRversion()>='3.3.0') importFrom(stats, sigma) else importFrom(lme4,sigma)
 #' @export
 glance.glmmTMB <- function(x, ...) {
-    ## FIXME: may need to be fixed via @importFrom/NAMESPACE ?
-    sigma <- if (getRversion()>="3.3.0") stats::sigma else lme4::sigma
     ret <- unrowname(data.frame(sigma = sigma(x)))
     finish_glance(ret, x)
 }
