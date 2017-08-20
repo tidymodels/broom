@@ -53,7 +53,7 @@ confint.rlmerMod <- function(x, parm,
     
 #' @rdname lme4_tidiers
 #' 
-#' @param effects A character vector including one or more of "fixed" (fixed-effect parameters); "ran_pars" (variances and covariances or standard deviations and correlations of random effect terms); "ran_modes" (conditional modes/BLUPs/latent variable estimates); or "coefs" (predicted parameter values for each group, as returned by \code{\link{coef.merMod}})
+#' @param effects A character vector including one or more of "fixed" (fixed-effect parameters); "ran_pars" (variances and covariances or standard deviations and correlations of random effect terms); "ran_modes" (conditional modes/BLUPs/latent variable estimates); or "coefs" (predicted parameter values for each group, as returned by \code{\link[lme4]{coef.merMod}})
 #' @param conf.int whether to include a confidence interval
 #' @param conf.level confidence level for CI
 #' @param conf.method method for computing confidence intervals (see \code{lme4::confint.merMod})
@@ -352,25 +352,27 @@ glance.merMod <- function(x, ...) {
 ##' rr <- ranef(fit,condVar=TRUE)
 ##' aa <- augment(rr)
 ##' ## Q-Q plot:
-##' g0 <- ggplot(aa,aes(estimate,qq,xmin=lb,xmax=ub))+
-##'    geom_errorbarh(height=0)+
-##'    geom_point()+facet_wrap(~variable,scale="free_x")
-##' ## regular caterpillar plot:
-##' g1 <- ggplot(aa,aes(estimate,level,xmin=lb,xmax=ub))+
-##'    geom_errorbarh(height=0)+
-##'    geom_vline(xintercept=0,lty=2)+
-##'    geom_point()+facet_wrap(~variable,scale="free_x")
-##' ## emphasize extreme values
-##' aa2 <- ddply(aa,c("grp","level"),
+##' if (require(ggplot2)) {
+##'    g0 <- ggplot(aa,aes(estimate,qq,xmin=lb,xmax=ub))+
+##'       geom_errorbarh(height=0)+
+##'       geom_point()+facet_wrap(~variable,scale="free_x")
+##'    ## regular caterpillar plot:
+##'    g1 <- ggplot(aa,aes(estimate,level,xmin=lb,xmax=ub))+
+##'       geom_errorbarh(height=0)+
+##'       geom_vline(xintercept=0,lty=2)+
+##'       geom_point()+facet_wrap(~variable,scale="free_x")
+##'    ## emphasize extreme values
+##'    aa2 <- ddply(aa,c("grp","level"),
 ##'             transform,
 ##'             keep=any(estimate/std.error>2))
-##' aa3 <- subset(aa2,keep)
-##' ## Update caterpillar plot with extreme levels highlighted:
-##' ggplot(aa2,aes(estimate,level,xmin=lb,xmax=ub,colour=factor(keep)))+
-##'    geom_errorbarh(height=0)+
-##'    geom_vline(xintercept=0,lty=2)+
-##'    geom_point()+facet_wrap(~variable,scale="free_x")+
-##'    scale_colour_manual(values=c("black","red"),guide=FALSE)
+##'    aa3 <- subset(aa2,keep)
+##'    ## Update caterpillar plot with extreme levels highlighted:
+##'    ggplot(aa2,aes(estimate,level,xmin=lb,xmax=ub,colour=factor(keep)))+
+##'       geom_errorbarh(height=0)+
+##'       geom_vline(xintercept=0,lty=2)+
+##'       geom_point()+facet_wrap(~variable,scale="free_x")+
+##'       scale_colour_manual(values=c("black","red"),guide=FALSE)
+##' }
 ##' @importFrom stats ppoints
 ##' @export 
 augment.ranef.mer <- function(x,
