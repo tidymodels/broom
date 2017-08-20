@@ -37,8 +37,9 @@ NULL
 
 
 #' @rdname glmmTMB_tidiers
-#' 
+#'
 #' @param effects A character vector including one or more of "fixed" (fixed-effect parameters), "ran_pars" (variances and covariances or standard deviations and correlations of random effect terms) or "ran_modes" (conditional modes/BLUPs/latent variable estimates)
+#' @param cond which component to extract (e.g. \code{cond} for conditional effects (i.e., traditional fixed effects); \code{zi} for zero-inflation model; \code{disp} for dispersion model
 #' @param conf.int whether to include a confidence interval
 #' @param conf.level confidence level for CI
 #' @param conf.method method for computing confidence intervals (see \code{\link[lme4]{confint.merMod}})

@@ -205,7 +205,7 @@ b <- a + rnorm(length(a))
 result <- lm(b ~ a)
 tidy(result)
 
-GLMs
+## GLMs
 
 ## example from ?glm
 d.AD <- data.frame(treatment=gl(3,3),

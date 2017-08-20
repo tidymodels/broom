@@ -94,7 +94,7 @@
 #' result <- lm(b ~ a)
 #' tidy(result)
 #'
-#' GLMs
+#' ## GLMs
 #'
 #' ## example from ?glm
 #' d.AD <- data.frame(treatment=gl(3,3),
@@ -298,6 +298,7 @@ glance.mlm <- function(x, ...) {
 #' @param conf.int whether to include a confidence interval
 #' @param conf.level confidence level of the interval, used only if
 #' \code{conf.int=TRUE}
+#' @param exponentiate whether to exponentiate the coefficient estimates
 #' @param transform whether to back-transform the coefficient estimates
 #' and confidence intervals (typical for logistic regression)
 process_lm <- function(ret, x, conf.int = FALSE, conf.level = .95,
@@ -308,7 +309,7 @@ process_lm <- function(ret, x, conf.int = FALSE, conf.level = .95,
     conf.type <- match.arg(conf.type)
 
     get_family <- function(x) {
-        if (!("family" %in% methods(class=class(x)))) {
+        if (!("family" %in% utils::methods(class=class(x)[length(class(x))]))) {
             return(NULL)
         } else return(stats::family(x))
     }
