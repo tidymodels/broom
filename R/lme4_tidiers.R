@@ -200,7 +200,7 @@ tidy.merMod <- function(x, effects = c("ran_pars","fixed"),
             if (nrow(re_sd)==1) re_sd <- t(re_sd)
             setNames(as.data.frame(re_sd),colnames(x))
         }
-        fix <- function(g,re,.id) {
+        fix_ran_modes <- function(g,re,.id) {
              newg <- fix_data_frame(g, newnames = colnames(g), newcol = "level")
              # fix_data_frame doesn't create a new column if rownames are numeric,
              # which doesn't suit our purposes
@@ -216,7 +216,7 @@ tidy.merMod <- function(x, effects = c("ran_pars","fixed"),
                         ## prevent coercion of variable names
         }
 
-        mm <- do.call(rbind,Map(fix,coef(x),re,names(re)))
+        mm <- do.call(rbind,Map(fix_ran_modes,coef(x),re,names(re)))
 
         ## block false-positive warnings due to NSE
         type <- spread <- est <- NULL
@@ -241,7 +241,7 @@ tidy.merMod <- function(x, effects = c("ran_pars","fixed"),
     }
     ## copied from nlme_tidiers.R ... refactor/DRY!
     if ("coefs" %in% effects) {
-        fix <- function(g) {
+        fix_coefs <- function(g) {
             newg <- fix_data_frame(g, newnames = colnames(g), newcol = "level")
             ## fix_data_frame doesn't create a new column if rownames are numeric,
             ## which doesn't suit our purposes
@@ -250,7 +250,7 @@ tidy.merMod <- function(x, effects = c("ran_pars","fixed"),
         }
 
         ## combine them and gather terms
-        ret <-  fix(stats::coef(x))    %>%
+        ret <-  fix_coefs(stats::coef(x))    %>%
             tidyr::gather(term, estimate, -.id, -level)
         colnames(ret)[1] <- "group"
         ret_list$coef <- ret
