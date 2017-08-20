@@ -161,7 +161,7 @@ tidy.lm <- function(x, conf.int = FALSE, conf.level = .95,
     ret <- tidy.summary.lm(s)
     
     process_lm(ret, x, conf.int = conf.int, conf.level = conf.level,
-         exponentiate = exponentiate)
+               transform = transform)
 }
 
 
