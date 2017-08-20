@@ -342,6 +342,7 @@ glance.merMod <- function(x, ...) {
 ##' @param ci.level level for confidence intervals
 ##' @param reorder reorder levels by conditional mode values?
 ##' @param order.var numeric or character: which variable to use for ordering levels?
+##' @param \dots additional arguments (unused: for generic consistency)
 ##' @importFrom reshape2 melt
 ##' @importFrom plyr ldply
 ##' @examples
@@ -373,7 +374,7 @@ glance.merMod <- function(x, ...) {
 augment.ranef.mer <- function(x,
                                  ci.level=0.9,
                                  reorder=TRUE,
-                                 order.var=1) {
+                                 order.var=1, ...) {
     tmpf <- function(z) {
         if (is.character(order.var) && !order.var %in% names(z)) {
             order.var <- 1

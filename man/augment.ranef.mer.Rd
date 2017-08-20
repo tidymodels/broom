@@ -14,7 +14,10 @@
 
 \item{reorder}{reorder levels by conditional mode values?}
 
-\item{order.var}{numeric or character: which variable to use for ordering levels?}
+\item{order.var}{numeric or character: which variable to use for
+  ordering levels?}
+
+\item{\dots}{additional arguments (unused: for generic consistency)}
 }
 \description{
 Augmentation for random effects (for caterpillar plots etc.)
