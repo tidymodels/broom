@@ -56,7 +56,7 @@
 #' 
 #' if (requireNamespace("MCMCglmm", quietly = TRUE)) {
 #'     data(PlodiaPO,package="MCMCglmm")  
-#'     model1 <- MCMCglmm(PO~1, random=~FSfamily, data=PlodiaPO, verbose=FALSE)
+#'     model1 <- MCMCglmm::MCMCglmm(PO~1, random=~FSfamily, data=PlodiaPO, verbose=FALSE)
 #'     tidy(model1)
 #' }
 #' @importFrom stats median sd
