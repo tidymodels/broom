@@ -5,6 +5,7 @@ broom 0.4.1.9000
 * Added tidiers for `betareg` objects from the betareg package
 * Added tidiers for `lmRob` and `glmRob` objects from the robust package
 * Added tidiers for `brms` objects from the brms package (thanks to #149 from Paul Buerkner)
+* Added tidiers for `ivreg` objects from the AER package
 * Fixed tidiers for orcutt 2.0
 * Changed `tidy.glmnet` to filter out rows where estimate == 0.
 * Updates to `rstanarm` tidiers (thanks to #177 from Jonah Gabry)
