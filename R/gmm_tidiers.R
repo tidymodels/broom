@@ -117,9 +117,16 @@ tidy.gmm <- function(x, conf.int = FALSE, conf.level = .95,
         ret <- fix_data_frame(co, nn[1:ncol(co)])
     }
     
-    ret <- process_lm(ret, x, conf.int = conf.int, conf.level = conf.level,
+    # newer versions of GMM create a 'confint' object, so we can't use process_lm
+    ret <- process_lm(ret, x, conf.int = FALSE, conf.level = conf.level,
                       exponentiate = exponentiate)
-    
+    if (conf.int) {
+        CI <- suppressMessages(stats::confint(x, level = conf.level))
+        if (! is.matrix(CI)) CI <- CI$test 
+        colnames(CI) = c("conf.low", "conf.high")
+        trans <- if (exponentiate) exp else identity
+        ret <- cbind(ret, trans(unrowname(CI)))
+    }
     if (all(grepl("_", ret$term))) {
         # separate the variable and term
         ret <- tidyr::separate(ret, term, c("variable", "term"), sep = "_", extra = "merge")
