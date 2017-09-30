@@ -2,8 +2,8 @@
 % Please edit documentation in R/sparse_tidiers.R
 \name{sparse_tidiers}
 \alias{sparse_tidiers}
-\alias{tidy.dgCMatrix}
 \alias{tidy.dgTMatrix}
+\alias{tidy.dgCMatrix}
 \alias{tidy.sparseMatrix}
 \title{Tidy a sparseMatrix object from the Matrix package}
 \usage{
@@ -24,4 +24,3 @@ a three-column data frame, row, column, and value (with
 zeros missing). If there are row names or column names,
 use those, otherwise use indices
 }
-

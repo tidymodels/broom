@@ -27,4 +27,3 @@ This generic originated in the ggplot2 package, where it was called
 \seealso{
 \code{\link{augment.lm}}
 }
-

@@ -24,4 +24,3 @@ such as lm or htest for which a specific S3 object exists.
 If you know that you want to use \code{as.data.frame} on your untidy
 object, just use it directly.
 }
-

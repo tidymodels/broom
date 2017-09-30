@@ -86,9 +86,10 @@ Suggests:
     lsmeans,
     betareg,
     robust,
-    akima
+    akima,
+    quantreg
 URL: http://github.com/tidyverse/broom
 BugReports: http://github.com/tidyverse/broom/issues
 VignetteBuilder: knitr
 License: MIT + file LICENSE
-RoxygenNote: 5.0.1
+RoxygenNote: 6.0.1

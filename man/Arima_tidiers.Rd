@@ -2,8 +2,8 @@
 % Please edit documentation in R/arima_tidiers.R
 \name{Arima_tidiers}
 \alias{Arima_tidiers}
-\alias{glance.Arima}
 \alias{tidy.Arima}
+\alias{glance.Arima}
 \title{Tidying methods for ARIMA modeling of time series}
 \usage{
 \method{tidy}{Arima}(x, conf.int = FALSE, conf.level = 0.95, ...)
@@ -59,4 +59,3 @@ glance(fit)
 \seealso{
 \link{arima}
 }
-
