@@ -52,4 +52,3 @@ p + geom_hline(yintercept = c(-conf.int, conf.int),
                color='blue', linetype='dashed')
 
 }
-

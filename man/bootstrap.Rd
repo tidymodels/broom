@@ -33,4 +33,3 @@ library(dplyr)
 mtcars \%>\% bootstrap(10) \%>\% do(tidy(lm(mpg ~ wt, .)))
 
 }
-

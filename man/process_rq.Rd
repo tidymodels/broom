@@ -22,4 +22,3 @@ process_rq(rq_obj, se.type = "rank", conf.int = TRUE, conf.level = 0.95,
 See documentation for \code{summary.rq} for complete description
 of the options for \code{se.type}, \code{conf.int}, etc.
 }
-

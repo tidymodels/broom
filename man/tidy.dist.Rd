@@ -44,4 +44,3 @@ tidy(iris_dist, upper = TRUE)
 tidy(iris_dist, diag = TRUE)
 
 }
-

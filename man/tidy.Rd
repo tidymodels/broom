@@ -19,4 +19,3 @@ The output of tidy is always a data.frame with disposable row names. It is
 therefore suited for further manipulation by packages like dplyr, reshape2,
 ggplot2 and ggvis.
 }
-

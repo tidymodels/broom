@@ -2,21 +2,21 @@
 % Please edit documentation in R/mcmc_tidiers.R
 \name{mcmc_tidiers}
 \alias{mcmc_tidiers}
+\alias{tidyMCMC}
 \alias{tidy.rjags}
 \alias{tidy.stanfit}
-\alias{tidyMCMC}
 \title{Tidying methods for MCMC (Stan, JAGS, etc.) fits}
 \usage{
 tidyMCMC(x, pars, estimate.method = "mean", conf.int = FALSE,
   conf.level = 0.95, conf.method = "quantile", droppars = "lp__",
-  rhat = FALSE, ess = FALSE, ...)
+  rhat = FALSE, ess = FALSE, index = FALSE, ...)
 
 \method{tidy}{rjags}(x, pars, estimate.method = "mean", conf.int = FALSE,
   conf.level = 0.95, conf.method = "quantile", ...)
 
 \method{tidy}{stanfit}(x, pars, estimate.method = "mean", conf.int = FALSE,
   conf.level = 0.95, conf.method = "quantile", droppars = "lp__",
-  rhat = FALSE, ess = FALSE, ...)
+  rhat = FALSE, ess = FALSE, index = FALSE, ...)
 }
 \arguments{
 \item{x}{an object of class \sQuote{"stanfit"}}
@@ -37,6 +37,9 @@ as log-probability information)}
 
 \item{rhat, ess}{(logical) include Rhat and/or effective sample size estimates?}
 
+\item{index}{Add index column, remove index from term. For example, 
+\code{term a[13]} becomes \code{term a} and \code{index 13}.}
+
 \item{...}{unused}
 }
 \description{
@@ -49,13 +52,13 @@ Tidying methods for MCMC (Stan, JAGS, etc.) fits
 # Using example from "RStan Getting Started"
 # https://github.com/stan-dev/rstan/wiki/RStan-Getting-Started
 
-model_file <- system.file("extdata", "8schools.stan", package = "broom")
+model_file = system.file("extdata", "8schools.stan", package = "broom")
 
-schools_dat <- list(J = 8, 
-                    y = c(28,  8, -3,  7, -1,  1, 18, 12),
-                    sigma = c(15, 10, 16, 11,  9, 11, 10, 18))
+schools_dat = list(J = 8, 
+                   y = c(28,  8, -3,  7, -1,  1, 18, 12),
+                   sigma = c(15, 10, 16, 11,  9, 11, 10, 18))
 
-if (requireNamespace("rstan", quietly = TRUE)) {
+if (require("rstan", quietly = TRUE)) {
   set.seed(2015)
   rstan_example <- stan(file = model_file, data = schools_dat, 
                         iter = 100, chains = 2)
@@ -63,7 +66,7 @@ if (requireNamespace("rstan", quietly = TRUE)) {
 
 }
 
-if (requireNamespace("rstan", quietly = TRUE)) {
+if (require("rstan", quietly = TRUE)) {
   # the object from the above code was saved as rstan_example.rda
   infile <- system.file("extdata", "rstan_example.rda", package = "broom")
   load(infile)
@@ -86,4 +89,3 @@ if (requireNamespace("rstan", quietly = TRUE)) {
 
 
 }
-

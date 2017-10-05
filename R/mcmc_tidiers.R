@@ -10,7 +10,8 @@
 #' @param droppars Parameters not to include in the output (such
 #' as log-probability information)
 #' @param rhat,ess (logical) include Rhat and/or effective sample size estimates?
-#' @param index Add index column, remove index from term
+#' @param index Add index column, remove index from term. For example, 
+#' \code{term a[13]} becomes \code{term a} and \code{index 13}.
 #' @param ... unused
 #' 
 #' @name mcmc_tidiers

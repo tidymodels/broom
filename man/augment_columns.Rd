@@ -36,4 +36,3 @@ the value returned from \code{augment}.
 In the case that a residuals or influence generic is not implemented for the
 model, fail quietly.
 }
-

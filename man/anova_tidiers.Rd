@@ -51,4 +51,3 @@ al <- aov(mpg ~ wt + qsec + Error(disp / am), mtcars)
 tidy(al)
 
 }
-
