@@ -22,9 +22,12 @@ information about smooth terms (\code{FALSE})?}
 All tidying methods return a data.frame without rownames, whose
 structure depends on the method chosen.
 
-\code{tidy.gam} returns the tidied output of the
-parametric ANOVA for gam package  with one row for each term in the formula.
-The columns match those in \link{anova_tidiers}.
+\code{tidy.gam} called on an object from the gam package,
+or an object from the mgcv package with \code{parametric = FALSE}, returns the 
+tidied output of the parametric ANOVA with one row for each term in the formula.
+The columns match those in \link{anova_tidiers}. 
+\code{tidy.gam} called on a gam object from the mgcv package with 
+\code{parametric = TRUE} returns the fixed coefficients.
 
 \code{glance.gam} returns a one-row data.frame with the columns
   \item{df}{Degrees of freedom used by the coefficients}
