@@ -2,16 +2,19 @@
 % Please edit documentation in R/gam_tidiers.R
 \name{gam_tidiers}
 \alias{gam_tidiers}
-\alias{glance.gam}
 \alias{tidy.gam}
+\alias{glance.gam}
 \title{Tidying methods for a generalized additive model (gam)}
 \usage{
-\method{tidy}{gam}(x, ...)
+\method{tidy}{gam}(x, parametric = FALSE, ...)
 
 \method{glance}{gam}(x, ...)
 }
 \arguments{
 \item{x}{gam object}
+
+\item{parametric}{logical. Return parametric coefficients (\code{TRUE}) or 
+information about smooth terms (\code{FALSE})?}
 
 \item{...}{extra arguments (not used)}
 }
@@ -54,4 +57,3 @@ if (require("gam", quietly = TRUE)) {
 \seealso{
 \link{lm_tidiers}, \link{anova_tidiers}
 }
-
