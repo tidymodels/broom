@@ -21,6 +21,10 @@ if (require(AER, quietly = TRUE)) {
         expect_true(all(c('.resid', '.fitted') %in% names(au)))
         expect_equivalent(au$.resid, residuals(ivr))
         expect_equivalent(au$.fitted, fitted(ivr))
+        old_cigs <- CigarettesSW[CigarettesSW$year == "1985" & CigarettesSW$tax < 40, ]
+        au2 <- augment(ivr, newdata = old_cigs)
+        expect_true('.fitted' %in% names(au2))
+        expect_equivalent(au2$.fitted, predict(ivr, newdata = old_cigs))
     })
     
     test_that("glance works on ivreg fits", {

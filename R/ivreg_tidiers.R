@@ -53,13 +53,15 @@ tidy.ivreg <- function(x, conf.int = FALSE, conf.level = .95,
 #' @rdname ivreg_tidiers
 #' 
 #' @return \code{augment} returns a data frame with one row for each
-#' initial observation, adding the columns
+#' initial observation, adding the columns:
 #'   \item{.fitted}{predicted (fitted) values}
+#' and if \code{newdata} is \code{NULL}:
 #'   \item{.resid}{residuals}
+#'  
 #' 
 #' @export
-augment.ivreg <- function(x, data = as.data.frame(stats::model.frame(x)), ...) {
-    augment_columns(x, data, ...)
+augment.ivreg <- function(x, data = as.data.frame(stats::model.frame(x)), newdata, ...) {
+    augment_columns(x, data, newdata, ...)
 }
 
 

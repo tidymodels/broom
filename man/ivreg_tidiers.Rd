@@ -10,7 +10,8 @@
 \method{tidy}{ivreg}(x, conf.int = FALSE, conf.level = 0.95,
   exponentiate = FALSE, ...)
 
-\method{augment}{ivreg}(x, data = as.data.frame(stats::model.frame(x)), ...)
+\method{augment}{ivreg}(x, data = as.data.frame(stats::model.frame(x)),
+  newdata, ...)
 
 \method{glance}{ivreg}(x, diagnostics = FALSE, ...)
 }
@@ -39,8 +40,9 @@ structure depends on the method chosen.
 coefficient, of the same form as \code{\link{tidy.lm}}.
 
 \code{augment} returns a data frame with one row for each
-initial observation, adding the columns
+initial observation, adding the columns:
   \item{.fitted}{predicted (fitted) values}
+and if \code{newdata} is \code{NULL}:
   \item{.resid}{residuals}
 
 \code{glance} returns a one-row data frame with columns
