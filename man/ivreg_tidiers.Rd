@@ -57,6 +57,7 @@ If \code{diagnostics} is \code{TRUE}, \code{glance} also returns:
   \item{p.value.Sargan}{P value of Sargan test}
   \item{p.value.Wu.Hausman}{P value of Wu-Hausman test}
   \item{p.value.weakinst}{P value of weak instruments test}
+and corresponding columns \code{statistics.Sargan} etc. for the statistics of those tests.
 }
 \description{
 Tidiers for ivreg models
