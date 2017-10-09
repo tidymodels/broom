@@ -66,6 +66,7 @@ augment.ivreg <- function(x, data = as.data.frame(stats::model.frame(x)), ...) {
 #' @rdname ivreg_tidiers
 #' 
 #' @param ... extra arguments, not used
+#' @param diagnostics Logical. Return results of diagnostic tests.
 #' 
 #' @return \code{glance} returns a one-row data frame with columns
 #'   \item{r.squared}{The percent of variance explained by the model}
@@ -75,10 +76,14 @@ augment.ivreg <- function(x, data = as.data.frame(stats::model.frame(x)), ...) {
 #'   \item{df}{Degrees of freedom used by the coefficients}
 #'   \item{sigma}{The square root of the estimated residual variance}
 #'   \item{df.residual}{residual degrees of freedom}
+#' If \code{diagnostics} is \code{TRUE}, \code{glance} also returns:
+#'   \item{p.value.Sargan}{P value of Sargan test}
+#'   \item{p.value.Wu.Hausman}{P value of Wu-Hausman test}
+#'   \item{p.value.weakinst}{P value of weak instruments test}
 #' 
 #' @export
-glance.ivreg <- function(x, ...) {
-    s <- summary(x)
+glance.ivreg <- function(x, diagnostics = FALSE, ...) {
+    s <- summary(x, diagnostics = diagnostics)
     ret <- with(s, data.frame(
         r.squared     = r.squared,
         adj.r.squared = adj.r.squared,
@@ -87,5 +92,15 @@ glance.ivreg <- function(x, ...) {
         p.value       = waldtest[2],
         df            = df[1]
     ))
+    if (diagnostics) {
+        ret <- cbind(ret, with(s, data.frame(
+            statistic.Sargan     = diagnostics["Sargan", "statistic"],
+            p.value.Sargan       = diagnostics["Sargan", "p-value"],
+            statistic.Wu.Hausman = diagnostics["Wu-Hausman", "statistic"],
+            p.value.Wu.Hausman   = diagnostics["Wu-Hausman", "p-value"],
+            statistic.weakinst   = diagnostics["Weak instruments", "statistic"],
+            p.value.weakinst     = diagnostics["Weak instruments", "p-value"]    
+        )))
+    }
     finish_glance(ret, x)
 }
