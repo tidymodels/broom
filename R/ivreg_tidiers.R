@@ -82,6 +82,7 @@ augment.ivreg <- function(x, data = as.data.frame(stats::model.frame(x)), newdat
 #'   \item{p.value.Sargan}{P value of Sargan test}
 #'   \item{p.value.Wu.Hausman}{P value of Wu-Hausman test}
 #'   \item{p.value.weakinst}{P value of weak instruments test}
+#' and corresponding columns \code{statistics.Sargan} etc. for the statistics of those tests.
 #' 
 #' @export
 glance.ivreg <- function(x, diagnostics = FALSE, ...) {
