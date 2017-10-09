@@ -31,7 +31,7 @@
 #'     
 #'     tidy(ivr)
 #'     tidy(ivr, conf.int = TRUE)
-#'     tidy(ivr, conf.int = TRUE, conf.level = .9)
+#'     tidy(ivr, conf.int = TRUE, exponentiate = TRUE)
 #'     
 #'     head(augment(ivr))
 #'     
@@ -46,18 +46,7 @@ tidy.ivreg <- function(x, conf.int = FALSE, conf.level = .95,
     nn <- c("estimate", "std.error", "statistic", "p.value")
     ret <- fix_data_frame(co, nn[1:ncol(co)])
     
-    if (conf.int){
-        ci <- stats::confint(x, level = conf.level)
-        ci <- as.data.frame(ci)
-        names(ci) <- c("conf.low", "conf.high")
-        ret <- cbind(ret, ci)
-    }
-    
-    if (exponentiate){
-        exp.col <- if(conf.int) c("estimate", "conf.low", "conf.high") else "estimate"
-        ret[, exp.col] <- lapply(ret[, exp.col, drop=FALSE], exp)
-    }
-    ret
+   process_lm(ret, x, conf.int = conf.int, conf.level = conf.level, exponentiate = exponentiate)
 }
 
 

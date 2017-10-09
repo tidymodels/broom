@@ -12,7 +12,7 @@
 
 \method{augment}{ivreg}(x, data = as.data.frame(stats::model.frame(x)), ...)
 
-\method{glance}{ivreg}(x, ...)
+\method{glance}{ivreg}(x, diagnostics = FALSE, ...)
 }
 \arguments{
 \item{x}{an "ivreg" object}
@@ -28,6 +28,8 @@ and confidence intervals}
 \item{...}{extra arguments, not used}
 
 \item{data}{original dataset}
+
+\item{diagnostics}{Logical. Return results of diagnostic tests.}
 }
 \value{
 All tidying methods return a data.frame without rownames, whose
@@ -49,6 +51,10 @@ initial observation, adding the columns
   \item{df}{Degrees of freedom used by the coefficients}
   \item{sigma}{The square root of the estimated residual variance}
   \item{df.residual}{residual degrees of freedom}
+If \code{diagnostics} is \code{TRUE}, \code{glance} also returns:
+  \item{p.value.Sargan}{P value of Sargan test}
+  \item{p.value.Wu.Hausman}{P value of Wu-Hausman test}
+  \item{p.value.weakinst}{P value of weak instruments test}
 }
 \description{
 Tidiers for ivreg models
@@ -67,7 +73,7 @@ if (require("AER", quietly = TRUE)) {
     
     tidy(ivr)
     tidy(ivr, conf.int = TRUE)
-    tidy(ivr, conf.int = TRUE, conf.level = .9)
+    tidy(ivr, conf.int = TRUE, exponentiate = TRUE)
     
     head(augment(ivr))
     
