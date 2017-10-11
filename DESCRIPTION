@@ -87,7 +87,8 @@ Suggests:
     betareg,
     robust,
     akima,
-    AER
+    AER,
+    speedglm
 URL: http://github.com/tidyverse/broom
 BugReports: http://github.com/tidyverse/broom/issues
 VignetteBuilder: knitr
