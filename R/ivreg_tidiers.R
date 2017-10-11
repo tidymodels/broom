@@ -52,6 +52,7 @@ tidy.ivreg <- function(x, conf.int = FALSE, conf.level = .95,
 
 #' @rdname ivreg_tidiers
 #' 
+#' @param newdata If provided, performs predictions on the new data
 #' @return \code{augment} returns a data frame with one row for each
 #' initial observation, adding the columns:
 #'   \item{.fitted}{predicted (fitted) values}
