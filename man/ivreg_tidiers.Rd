@@ -30,6 +30,8 @@ and confidence intervals}
 
 \item{data}{original dataset}
 
+\item{newdata}{New data to make predictions from (optional)}
+
 \item{diagnostics}{Logical. Return results of diagnostic tests.}
 }
 \value{
