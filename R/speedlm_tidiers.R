@@ -15,7 +15,7 @@
 #' The columns match those in \link{lm_tidiers}.
 #'
 #' @name speedlm_tidiers
-#' 
+#' @inheritParams lm_tidiers
 #' @seealso \link{lm_tidiers}, \link{biglm_tidiers}
 #' 
 #' @examples
@@ -58,9 +58,11 @@ glance.speedlm <- function(x, ...) {
 }
 
 #' @rdname speedlm_tidiers
+#' @param data data frame to augment
+#' @param newdata new data to use for predictions, optional
 #' @return  \code{augment.speedlm} returns  one row for each observation, with just one column added:
 #'   \item{.fitted}{Fitted values of model}
 #' @export
-augment.speedlm <- function(x, data = stats::model.frame(x), newdata = data) {
+augment.speedlm <- function(x, data = stats::model.frame(x), newdata = data, ...) {
     augment_columns(x, data, newdata)
 }

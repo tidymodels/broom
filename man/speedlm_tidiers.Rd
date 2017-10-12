@@ -12,13 +12,28 @@
 
 \method{glance}{speedlm}(x, ...)
 
-\method{augment}{speedlm}(x, data = stats::model.frame(x),
-  newdata = stats::model.frame(x))
+\method{augment}{speedlm}(x, data = stats::model.frame(x), newdata = data,
+  ...)
 }
 \arguments{
 \item{x}{speedlm object}
 
+\item{conf.int}{whether to include a confidence interval}
+
+\item{conf.level}{confidence level of the interval, used only if
+\code{conf.int=TRUE}}
+
+\item{exponentiate}{whether to exponentiate the coefficient estimates
+and confidence intervals (typical for logistic regression)}
+
+\item{quick}{whether to compute a smaller and faster version, containing
+only the \code{term} and \code{estimate} columns.}
+
 \item{...}{extra arguments (not used)}
+
+\item{data}{data frame to augment}
+
+\item{newdata}{new data to use for predictions, optional}
 }
 \value{
 All tidying methods return a data.frame without rownames, whose
