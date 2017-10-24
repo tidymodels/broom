@@ -136,7 +136,7 @@ augment.randomForest.classification <- function(x, data, ...) {
     
     predicted <- rep(NA, times = n_data)
     predicted[!na_at] <- x[["predicted"]]
-    predicted <- factor(predicted, labels = levels(x[["y"]]))
+    predicted <- factor(predicted, labels = levels(x[["predicted"]]))
     
     votes <- x[["votes"]]
     full_votes <- matrix(data = NA, nrow = n_data, ncol = ncol(votes))
