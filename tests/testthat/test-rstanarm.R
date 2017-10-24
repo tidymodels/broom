@@ -15,7 +15,14 @@ if (require(rstanarm, quietly = TRUE)) {
         td1 <- tidy(fit)
         td2 <- tidy(fit, parameters = "varying")
         td3 <- tidy(fit, parameters = "hierarchical")
+        td4 <- tidy(fit, parameters = "auxiliary")
         expect_equal(colnames(td1), c("term", "estimate", "std.error"))
+    })
+    
+    test_that("tidy with multiple 'parameters' selections works on rstanarm fits", {
+      td1 <- tidy(fit, parameters = c("varying", "auxiliary"))
+      expect_true(all(c("sigma", "mean_PPD") %in% td1$term))
+      expect_equal(colnames(td1), c("term", "estimate", "std.error", "level", "group"))
     })
     
     test_that("intervals works on rstanarm fits", {
@@ -29,6 +36,6 @@ if (require(rstanarm, quietly = TRUE)) {
         g1 <- glance(fit)
         g2 <- glance(fit, looic = TRUE, cores = 1)
         expect_equal(colnames(g1), c("algorithm", "pss", "nobs", "sigma"))
-        expect_equal(colnames(g2), c(colnames(g1), "looic"))
+        expect_equal(colnames(g2), c(colnames(g1), "looic", "elpd_loo", "p_loo"))
     })
 }

@@ -78,11 +78,15 @@ test_that("tidy.htest works on wilcoxon tests", {
 test_that("tidy.summary works (even with NAs)", {
     df <- data.frame(group = c(rep('M', 6), 'F', 'F', 'M', 'M', 'F', 'F'),
                  val = c(6, 5, NA, NA, 6, 13, NA, 8, 10, 7, 14, 6))
-    expect_equal(tidy(summary(df$val)),
-        structure(list(minimum = 5, q1 = 6, median = 7, mean = 8.333, 
-                    q3 = 10, maximum = 14, `NA's` = 3),
-          .Names = c("minimum", "q1", "median", "mean", "q3",
-          "maximum", "na"), row.names = c(NA, -1L), class = "data.frame"))
+    
+    td <- tidy(summary(df$val))
+    expect_is(td, "data.frame")
+    expect_equal(nrow(td), 1)
+    expect_equal(td$minimum, 5)
+    expect_equal(td$q1, 6)
+    expect_equal(td$median, 7)
+    expect_lt(abs(td$mean - 25 / 3), .001)
+    expect_equal(td$q3, 10)
+    expect_equal(td$maximum, 14)
+    expect_equal(td$na, 3)
 })
-
-

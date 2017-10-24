@@ -3,3 +3,4 @@
 .RData
 vignettes/*cache
 inst/doc
+revdep

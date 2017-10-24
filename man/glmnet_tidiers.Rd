@@ -20,8 +20,8 @@ All tidying methods return a data.frame without rownames, whose
 structure depends on the method chosen.
 
 \code{tidy} produces a data.frame with one row per combination of
-coefficient (including the intercept) and value of lambda, with the
-columns:
+coefficient (including the intercept) and value of lambda for which the estimate
+is nonzero, with the columns:
   \item{term}{coefficient name (V1...VN by default, along with
   "(Intercept)")}
   \item{step}{which step of lambda choices was used}
