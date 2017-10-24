@@ -2,28 +2,36 @@
 % Please edit documentation in R/mcmc_tidiers.R
 \name{mcmc_tidiers}
 \alias{mcmc_tidiers}
+\alias{tidyMCMC}
 \alias{tidy.rjags}
 \alias{tidy.stanfit}
-\alias{tidyMCMC}
+\alias{tidy.mcmc}
+\alias{tidy.MCMCglmm}
 \title{Tidying methods for MCMC (Stan, JAGS, etc.) fits}
 \usage{
-tidyMCMC(x, pars, estimate.method = "mean", conf.int = FALSE,
-  conf.level = 0.95, conf.method = "quantile", droppars = "lp__",
-  rhat = FALSE, ess = FALSE, ...)
+tidyMCMC(x, pars, estimate.method = c("mean", "median"), conf.int = FALSE,
+  conf.level = 0.95, conf.method = c("quantile", "HPDinterval"),
+  drop.pars = c("lp__", "deviance"), rhat = FALSE, ess = FALSE, ...)
 
-\method{tidy}{rjags}(x, pars, estimate.method = "mean", conf.int = FALSE,
+\method{tidy}{rjags}(x, estimate.method = "mean", conf.int = FALSE,
   conf.level = 0.95, conf.method = "quantile", ...)
 
-\method{tidy}{stanfit}(x, pars, estimate.method = "mean", conf.int = FALSE,
-  conf.level = 0.95, conf.method = "quantile", droppars = "lp__",
-  rhat = FALSE, ess = FALSE, ...)
+\method{tidy}{stanfit}(x, pars, estimate.method = c("mean", "median"),
+  conf.int = FALSE, conf.level = 0.95, conf.method = c("quantile",
+  "HPDinterval"), drop.pars = c("lp__", "deviance"), rhat = FALSE,
+  ess = FALSE, ...)
+
+\method{tidy}{mcmc}(x, pars, estimate.method = c("mean", "median"),
+  conf.int = FALSE, conf.level = 0.95, conf.method = c("quantile",
+  "HPDinterval"), drop.pars = c("lp__", "deviance"), rhat = FALSE,
+  ess = FALSE, ...)
+
+\method{tidy}{MCMCglmm}(x, effects = "fixed", scales, ...)
 }
 \arguments{
-\item{x}{an object of class \sQuote{"stanfit"}}
-
 \item{pars}{(character) specification of which parameters to include}
 
-\item{estimate.method}{method for computing point estimate ("mean" or median")}
+\item{estimate.method}{method for computing point estimate ("mean" or "median")}
 
 \item{conf.int}{(logical) include confidence interval?}
 
@@ -32,7 +40,7 @@ tidyMCMC(x, pars, estimate.method = "mean", conf.int = FALSE,
 \item{conf.method}{method for computing confidence intervals
 ("quantile" or "HPDinterval")}
 
-\item{droppars}{Parameters not to include in the output (such
+\item{drop.pars}{Parameters not to include in the output (such
 as log-probability information)}
 
 \item{rhat, ess}{(logical) include Rhat and/or effective sample size estimates?}
@@ -44,8 +52,6 @@ Tidying methods for MCMC (Stan, JAGS, etc.) fits
 }
 \examples{
 
-\dontrun{
-
 # Using example from "RStan Getting Started"
 # https://github.com/stan-dev/rstan/wiki/RStan-Getting-Started
 
@@ -56,18 +62,15 @@ schools_dat <- list(J = 8,
                     sigma = c(15, 10, 16, 11,  9, 11, 10, 18))
 
 if (requireNamespace("rstan", quietly = TRUE)) {
-  set.seed(2015)
-  rstan_example <- stan(file = model_file, data = schools_dat, 
-                        iter = 100, chains = 2)
-}
-
-}
-
-if (requireNamespace("rstan", quietly = TRUE)) {
-  # the object from the above code was saved as rstan_example.rda
   infile <- system.file("extdata", "rstan_example.rda", package = "broom")
-  load(infile)
-  
+  if (infile=="") {
+     set.seed(2015)
+     rstan_example <- rstan::stan(file = model_file, data = schools_dat, 
+                        iter = 100, chains = 2)
+  } else {
+  # the object from the above code was saved as rstan_example.rda
+    load(infile)
+  }
   tidy(rstan_example)
   tidy(rstan_example, conf.int = TRUE, pars = "theta")
   
@@ -77,13 +80,20 @@ if (requireNamespace("rstan", quietly = TRUE)) {
   library(dplyr)
   library(ggplot2)
   tds <- rbind(mutate(td_mean, method = "mean"),
-               mutate(td_median, method = "median"))
+               mutate(td_median, method = "median")) \%>\%
+  mutate(type=ifelse(grepl("^theta",term),"theta",
+              ifelse(grepl("^eta",term),"eta",
+                     "other")))
   
   ggplot(tds, aes(estimate, term)) +
-    geom_errorbarh(aes(xmin = conf.low, xmax = conf.high)) +
-    geom_point(aes(color = method))
+    geom_errorbarh(aes(xmin = conf.low, xmax = conf.high),height=0) +
+    geom_point(aes(color = method))+
+    facet_wrap(~type,scale="free",ncol=1)
+} ## stan
+
+if (requireNamespace("MCMCglmm", quietly = TRUE)) {
+    data(PlodiaPO,package="MCMCglmm")  
+    model1 <- MCMCglmm::MCMCglmm(PO~1, random=~FSfamily, data=PlodiaPO, verbose=FALSE)
+    tidy(model1)
 }
-
-
 }
-

@@ -37,7 +37,8 @@ Imports:
     stringr,
     reshape2,
     nlme,
-    methods
+    methods,
+    coda
 Suggests:
     knitr,
     boot,
@@ -50,6 +51,7 @@ Suggests:
     sp,
     maps,
     maptools,
+    MCMCglmm,
     multcomp,
     testthat,
     lme4,
@@ -73,7 +75,6 @@ Suggests:
     rstan,
     rstanarm,
     brms,
-    coda,
     gmm,
     Matrix,
     ks,
@@ -94,4 +95,4 @@ URL: http://github.com/tidyverse/broom
 BugReports: http://github.com/tidyverse/broom/issues
 VignetteBuilder: knitr
 License: MIT + file LICENSE
-RoxygenNote: 5.0.1
+RoxygenNote: 6.0.1.9000

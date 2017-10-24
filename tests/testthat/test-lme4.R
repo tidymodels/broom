@@ -61,4 +61,12 @@ if (require(lme4, quietly = TRUE)) {
     test_that("glance works on lme4 fits", {
         g <- glance(fit)
     })
+
+    test_that("ran_modes works", {
+        fm1 <- lmer(Reaction~Days+(1|Subject),sleepstudy)
+        fm2 <- lmer(Reaction~Days+(Days|Subject),sleepstudy)
+        tidy(fm1,"ran_modes")
+        tidy(fm2,"ran_modes")
+        
+    })
 }

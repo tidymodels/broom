@@ -41,15 +41,23 @@
 #' }
 NULL
 
-
+confint.rlmerMod <- function(x, parm,
+                             method="Wald", ...) {
+    cc <- class(x)
+    class(x) <- "merMod"
+    if (method!="Wald") {
+        warning("only Wald method implemented for rlmerMod objects")
+    }
+    return(confint(x,parm=parm, method="Wald", ...))
+}
+    
 #' @rdname lme4_tidiers
 #' 
-#' @param effects A character vector including one or more of "fixed" (fixed-effect parameters), "ran_pars" (variances and covariances or standard deviations and correlations of random effect terms) or "ran_modes" (conditional modes/BLUPs/latent variable estimates)
+#' @param effects A character vector including one or more of "fixed" (fixed-effect parameters); "ran_pars" (variances and covariances or standard deviations and correlations of random effect terms); "ran_modes" (conditional modes/BLUPs/latent variable estimates); or "coefs" (predicted parameter values for each group, as returned by \code{\link[lme4]{coef.merMod}})
 #' @param conf.int whether to include a confidence interval
 #' @param conf.level confidence level for CI
 #' @param conf.method method for computing confidence intervals (see \code{lme4::confint.merMod})
-#' @param scales scales on which to report the variables: for random effects, the choices are \sQuote{"sdcor"} (standard deviations and correlations: the default if \code{scales} is \code{NULL}) or \sQuote{"vcov"} (variances and covariances). \code{NA} means no transformation, appropriate e.g. for fixed effects; inverse-link transformations (exponentiation
-#' or logistic) are not yet implemented, but may be in the future.
+#' @param scales scales on which to report the variables: for random effects, the choices are \sQuote{"sdcor"} (standard deviations and correlations: the default if \code{scales} is \code{NULL}) or \sQuote{"vcov"} (variances and covariances). \code{NA} means no transformation, appropriate e.g. for fixed effects; inverse-link transformations (exponentiation or logistic) are not yet implemented, but may be in the future.
 #' @param ran_prefix a length-2 character vector specifying the strings to use as prefixes for self- (variance/standard deviation) and cross- (covariance/correlation) random effects terms
 #' 
 #' @return \code{tidy} returns one row for each estimated effect, either
@@ -62,23 +70,25 @@ NULL
 #'   \item{std.error}{standard error}
 #'   \item{statistic}{t- or Z-statistic (\code{NA} for modes)}
 #'   \item{p.value}{P-value computed from t-statistic (may be missing/NA)}
-#' 
+#'
 #' @importFrom plyr ldply rbind.fill
 #' @import dplyr
 #' @importFrom tidyr gather spread
 #' @importFrom nlme VarCorr ranef
+#' @importFrom methods is
 ## FIXME: is it OK/sensible to import these from (priority='recommended')
 ## nlme rather than (priority=NA) lme4?
 #' 
 #' @export
 tidy.merMod <- function(x, effects = c("ran_pars","fixed"),
-                        scales = NULL, ## c("sdcor",NA),
+                        scales = NULL, ## c("sdcor","vcov",NA),
                         ran_prefix=NULL,
                         conf.int = FALSE,
                         conf.level = 0.95,
                         conf.method = "Wald",
+                        debug=FALSE,
                         ...) {
-    effect_names <- c("ran_pars", "fixed", "ran_modes")
+    effect_names <- c("ran_pars", "fixed", "ran_modes", "coefs")
     if (!is.null(scales)) {
         if (length(scales) != length(effects)) {
             stop("if scales are specified, values (or NA) must be provided ",
@@ -91,13 +101,26 @@ tidy.merMod <- function(x, effects = c("ran_pars","fixed"),
     ret_list <- list()
     if ("fixed" %in% effects) {
         # return tidied fixed effects rather than random
-        ret <- stats::coef(summary(x))
+        ss <- summary(x)
+        ret <- stats::coef(ss)
+        if (debug) {
+            cat("output from coef(summary(x)):\n")
+            print(coef(ss))
+        }
+        if (is(x,"merModLmerTest")) {
+            ret <- ret[,!colnames(ret) %in% "df"]
+        }            
 
         # p-values may or may not be included
         nn <- base_nn[1:ncol(ret)]
 
         if (conf.int) {
-            cifix <- confint(x,parm="beta_",method=conf.method,...)
+            if (is(x,"merMod") || is(x,"rlmerMod")) {
+                cifix <- confint(x,parm="beta_",method=conf.method,...)
+            } else {
+                ## ?? for glmmTMB?  check ...
+                cifix <- confint(x,...)
+            }
             ret <- data.frame(ret,cifix)
             nn <- c(nn,"conf.low","conf.high")
         }
@@ -114,7 +137,22 @@ tidy.merMod <- function(x, effects = c("ran_pars","fixed"),
         } else rscale <- scales[effects=="ran_pars"]
         if (!rscale %in% c("sdcor","vcov"))
             stop(sprintf("unrecognized ran_pars scale %s",sQuote(rscale)))
-        ret <- as.data.frame(VarCorr(x))
+        vc <- VarCorr(x)
+        if (!is(x,"merMod") && grepl("^VarCorr",class(vc)[1])) {
+            if (!is(x,"rlmerMod")) {
+                ## hack: attempt to augment glmmADMB (or other)
+                ##   values so we can use as.data.frame.VarCorr.merMod
+                vc <- lapply(vc,
+                             function(x) {
+                    attr(x,"stddev") <- sqrt(diag(x))
+                    attr(x,"correlation") <- stats::cov2cor(x)
+                    x
+                })
+                attr(vc,"useScale") <- (stats::family(x)$family=="gaussian")
+            }
+            class(vc) <- "VarCorr.merMod"
+        }
+        ret <- as.data.frame(vc)
         ret[] <- lapply(ret, function(x) if (is.factor(x))
                                  as.character(x) else x)
         if (is.null(ran_prefix)) {
@@ -145,7 +183,6 @@ tidy.merMod <- function(x, effects = c("ran_pars","fixed"),
             ret <- data.frame(ret,ciran)
             nn <- c(nn,"conf.low","conf.high")
         }
-
         
         ## replicate lme4:::tnames, more or less
         ret_list$ran_pars <- fix_data_frame(ret[c("grp", rscale)],
@@ -158,10 +195,12 @@ tidy.merMod <- function(x, effects = c("ran_pars","fixed"),
         re <- ranef(x,condVar=TRUE)
         getSE <- function(x) {
             v <- attr(x,"postVar")
-            setNames(as.data.frame(sqrt(t(apply(v,3,diag)))),
-                     colnames(x))
+            re_sd <- sqrt(t(apply(v,3,diag)))
+            ## for single random effect term, need to re-transpose
+            if (nrow(re_sd)==1) re_sd <- t(re_sd)
+            setNames(as.data.frame(re_sd),colnames(x))
         }
-        fix <- function(g,re,.id) {
+        fix_ran_modes <- function(g,re,.id) {
              newg <- fix_data_frame(g, newnames = colnames(g), newcol = "level")
              # fix_data_frame doesn't create a new column if rownames are numeric,
              # which doesn't suit our purposes
@@ -172,12 +211,12 @@ tidy.merMod <- function(x, effects = c("ran_pars","fixed"),
              newg.se$level <- rownames(re)
              newg.se$type <- "std.error"
 
-             data.frame(rbind(newg,newg.se),.id=.id,
+             data.frame(bind_rows(newg,newg.se),.id=.id,
                         check.names=FALSE)
                         ## prevent coercion of variable names
         }
 
-        mm <- do.call(rbind,Map(fix,coef(x),re,names(re)))
+        mm <- do.call(rbind,Map(fix_ran_modes,coef(x),re,names(re)))
 
         ## block false-positive warnings due to NSE
         type <- spread <- est <- NULL
@@ -185,6 +224,7 @@ tidy.merMod <- function(x, effects = c("ran_pars","fixed"),
             spread(type,estimate) -> ret
 
         ## FIXME: doesn't include uncertainty of population-level estimate
+        ## (this is hard; do we do something ugly & approximate?)
 
         if (conf.int) {
             if (conf.method != "Wald")
@@ -199,10 +239,29 @@ tidy.merMod <- function(x, effects = c("ran_pars","fixed"),
         ret <- dplyr::rename(ret,group=.id)
         ret_list$ran_modes <- ret
     }
-    return(rbind.fill(ret_list))
+    ## copied from nlme_tidiers.R ... refactor/DRY!
+    if ("coefs" %in% effects) {
+        fix_coefs <- function(g) {
+            newg <- fix_data_frame(g, newnames = colnames(g), newcol = "level")
+            ## fix_data_frame doesn't create a new column if rownames are numeric,
+            ## which doesn't suit our purposes
+            newg$level <- rownames(g)
+            cbind(.id = attr(g,"grpNames"),newg )
+        }
+
+        ## combine them and gather terms
+        ret <-  fix_coefs(stats::coef(x))    %>%
+            tidyr::gather(term, estimate, -.id, -level)
+        colnames(ret)[1] <- "group"
+        ret_list$coef <- ret
+    }
+
+    ## use ldply to get 'effect' added as a column
+    return(plyr::ldply(ret_list,identity,.id="effect"))
 }
 
-
+#' @export
+tidy.rlmerMod <- broom:::tidy.merMod
 
 #' @rdname lme4_tidiers
 #' 
@@ -267,17 +326,90 @@ augment.merMod <- function(x, data = stats::model.frame(x), newdata, ...) {
 #'   \item{AIC}{the Akaike Information Criterion}
 #'   \item{BIC}{the Bayesian Information Criterion}
 #'   \item{deviance}{deviance}
-#' 
+#'
+#' @rawNamespace if(getRversion()>='3.3.0') importFrom(stats, sigma) else importFrom(lme4,sigma)
 #' @export
 glance.merMod <- function(x, ...) {
     # We cannot use stats::sigma or lme4::sigma here, even in an
     # if statement, since that leads to R CMD CHECK warnings on 3.2
     # or dev R, respectively
-    sigma <- if (getRversion() >= "3.3.0") {
-        get("sigma", asNamespace("stats"))
-    } else {
-        get("sigma", asNamespace("lme4"))
-    }
     ret <- unrowname(data.frame(sigma = sigma(x)))
     finish_glance(ret, x)
+}
+
+##' Augmentation for random effects (for caterpillar plots etc.)
+##' 
+##' @param x ranef (conditional mode) information from an lme4 fit, using \code{ranef(.,condVar=TRUE)}
+##' @param ci.level level for confidence intervals
+##' @param reorder reorder levels by conditional mode values?
+##' @param order.var numeric or character: which variable to use for ordering levels?
+##' @param \dots additional arguments (unused: for generic consistency)
+##' @importFrom reshape2 melt
+##' @importFrom plyr ldply
+##' @examples
+##' if (require("lme4")) {
+##'    fit <- lmer(Reaction~Days+(Days|Subject),sleepstudy)
+##'    rr <- ranef(fit,condVar=TRUE)
+##'    aa <- augment(rr)
+##'    ## Q-Q plot:
+##'    if (require(ggplot2) && require(dplyr)) {
+##'       g0 <- ggplot(aa,aes(estimate,qq,xmin=lb,xmax=ub))+
+##'           geom_errorbarh(height=0)+
+##'           geom_point()+facet_wrap(~variable,scale="free_x")
+##'       ## regular caterpillar plot:
+##'       g1 <- ggplot(aa,aes(estimate,level,xmin=lb,xmax=ub))+
+##'          geom_errorbarh(height=0)+
+##'          geom_vline(xintercept=0,lty=2)+
+##'          geom_point()+facet_wrap(~variable,scale="free_x")
+##'       ## emphasize extreme values
+##'       aa2 <- aa  %>% group_by(grp,level) %>%
+##'             mutate(keep=any(estimate/std.error>2))
+##'        ## Update caterpillar plot with extreme levels highlighted
+##'        ##  (highlight all groups with *either* extreme intercept *or*
+##'        ##   extreme slope)
+##'       ggplot(aa2,aes(estimate,level,xmin=lb,xmax=ub,colour=factor(keep)))+
+##'          geom_errorbarh(height=0)+
+##'          geom_vline(xintercept=0,lty=2)+
+##'          geom_point()+facet_wrap(~variable,scale="free_x")+
+##'          scale_colour_manual(values=c("black","red"), guide=FALSE)
+##'    }
+##' }
+##' @importFrom stats ppoints
+##' @export 
+augment.ranef.mer <- function(x,
+                                 ci.level=0.9,
+                                 reorder=TRUE,
+                                 order.var=1, ...) {
+    tmpf <- function(z) {
+        if (is.character(order.var) && !order.var %in% names(z)) {
+            order.var <- 1
+            warning("order.var not found, resetting to 1")
+        }
+        ## would use plyr::name_rows, but want levels first
+        zz <- data.frame(level=rownames(z),z,check.names=FALSE)
+        if (reorder) {
+            ## if numeric order var, add 1 to account for level column
+            ov <- if (is.numeric(order.var)) order.var+1 else order.var
+            zz$level <- reorder(zz$level, zz[,order.var+1], FUN=identity)
+        }
+        ## Q-Q values, for each column separately
+        qq <- c(apply(z,2,function(y) {
+                  qnorm(stats::ppoints(nrow(z)))[order(order(y))]
+              }))
+        rownames(zz) <- NULL
+        pv   <- attr(z, "postVar")
+        cols <- 1:(dim(pv)[1])
+        se   <- unlist(lapply(cols, function(i) sqrt(pv[i, i, ])))
+        ## n.b.: depends on explicit column-major ordering of se/melt
+        zzz <- cbind(melt(zz,id.vars="level",value.name="estimate"),
+                     qq=qq,std.error=se)
+        ## reorder columns:
+        subset(zzz,select=c(variable, level, estimate, qq, std.error))
+    }
+    dd <- ldply(x,tmpf,.id="grp")
+    ci.val <- -qnorm((1-ci.level)/2)
+    transform(dd,
+              ## p=2*pnorm(-abs(estimate/std.error)), ## 2-tailed p-val
+              lb=estimate-ci.val*std.error,
+              ub=estimate+ci.val*std.error)
 }

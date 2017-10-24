@@ -108,10 +108,9 @@ ggplot(au, aes(.fittedPC1, .fittedPC2)) +
   geom_text(aes(label = .rownames), vjust = 1, hjust = 1)
 
 }
-\author{
-Gavin L. Simpson
-}
 \seealso{
 \code{\link{prcomp}}, \link{svd_tidiers}
 }
-
+\author{
+Gavin L. Simpson
+}
