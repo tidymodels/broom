@@ -1,7 +1,8 @@
 #' Tidying methods for kernel based hazard rate estimates
 #'
-#' These methods tidy the output of \code{\link[muhaz]{muhaz}} function, which
-#' provides kernel based non-parametric hazard rate estimators.
+#' These methods tidy the output of \code{muhaz} objects as returned by the
+#' \code{\link[muhaz]{muhaz}} function, which provides kernel based
+#' non-parametric hazard rate estimators.
 #'
 #' The "augment" method is not useful and therefore not
 #' available for \code{muhaz} objects.
@@ -10,8 +11,8 @@
 #'
 #' @template boilerplate
 #'
-#' @return A tibble containing two columns: \code{time} at which the hazard
-#' rate was estimated and \code{estimate}.
+#' @return \code{tidy.muhaz} returns a tibble containing two columns:
+#' \code{time} at which the hazard rate was estimated and \code{estimate}.
 #'
 #' @name muhaz_tidiers
 #'
@@ -20,6 +21,7 @@
 #'   data(ovarian, package="survival")
 #'   x <- muhaz(ovarian$futime, ovarian$fustat)
 #'   tidy(x)
+#'   glance(x)
 #' }
 #'
 #' @export
@@ -44,7 +46,7 @@ tidy.muhaz <- function(x, ...) {
 #' @export
 glance.muhaz <- function(x, ...) {
 
-  df1 <- bind_cols(x$pin[c("nobs", "min.time", "max.time")]) %>%
+  bind_cols(x$pin[c("nobs", "min.time", "max.time")]) %>%
     mutate(
       min.hazard = min(x$haz.est),
       max.hazard = max(x$haz.est))
