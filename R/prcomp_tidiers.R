@@ -97,14 +97,15 @@ tidy.prcomp <- function(x, matrix = "u", ...) {
         ret <- fix_data_frame(t(summary(x)$importance), newnames = nn,
                               newcol = "PC")
     } else if (matrix %in% c("rotation", "variables", "v")) {
-        labels <- rownames(x$rotation)
+        labels <- if (is.null(rownames(x$rotation))) 1:nrow(x$rotation) else
+            rownames(x$rotation)
         variables <- tidyr::gather(as.data.frame(x$rotation))
         ret <- data.frame(label = rep(labels, times = ncomp),
                                 variables,
                                 stringsAsFactors = FALSE)
         names(ret) <- c("column", "PC", "value")
     } else if (matrix %in% c("x", "samples", "u")) {
-        labels <- rownames(x$x)
+        labels <- if (is.null(rownames(x$x))) 1:nrow(x$x) else rownames(x$x)
         samples <- tidyr::gather(as.data.frame(x$x))
         ret <- data.frame(label = rep(labels, times = ncomp),
                           samples)
