@@ -102,6 +102,7 @@ tidy_emmeans <- function(x, ...) {
     ret <- as.data.frame(s)
     repl <- c(lsmean = "estimate",
               emmean = "estimate",
+              pmmean = "estimate",
               prediction = "estimate",
               SE = "std.error",
               lower.CL = "conf.low",
