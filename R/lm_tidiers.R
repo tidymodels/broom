@@ -245,7 +245,7 @@ glance.summary.lm <- function(x, ...) {
                                    p.value=NA_real_)  
                            },
                            data.frame(
-                              df=df[1])))
+                              df=fstatistic["numdf"])))
     
     unrowname(ret)
 }
