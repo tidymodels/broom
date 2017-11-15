@@ -29,6 +29,8 @@ if (require(AER, quietly = TRUE)) {
     
     test_that("glance works on ivreg fits", {
         g <- glance(ivr)
+        check_tidy(g, exp.col = 7)
         g <- glance(ivr, diagnostics = TRUE)
+        check_tidy(g, exp.col = 13)
     })
 }
