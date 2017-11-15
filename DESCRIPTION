@@ -19,8 +19,7 @@ Authors@R: c(
     person("Jens", "Preussner", email = " jens.preussner@mpi-bn.mpg.de", role = "ctb"),
     person("Jay", "Hesselberth", email = "jay.hesselberth@gmail.com", role = "ctb"),
     person("Hadley", "Wickham", email = "hadley@rstudio.com", role = "ctb"),
-    person("Matthew", "Lincoln", email = "matthew.d.lincoln@gmail.com", role = "ctb"),
-    person("Andreas", "Bender", email="bender.at.R@gmail.com", role = c("ctb"), comment=c(ORCID = "0000-0001-5628-8611")) )
+    person("Matthew", "Lincoln", email = "matthew.d.lincoln@gmail.com", role = "ctb"))
 Maintainer: David Robinson <admiral.david@gmail.com>
 Description: Convert statistical analysis objects from R into tidy data frames,
     so that they can more easily be combined, reshaped and otherwise processed
