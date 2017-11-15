@@ -6,8 +6,8 @@ suppressPackageStartupMessages(library(rstanarm))
 if (require(rstanarm, quietly = TRUE)) {
     set.seed(2016)
     capture.output(
-        fit <- stan_glmer(mpg ~ wt + (1|cyl) + (1+wt|gear), data = mtcars,
-                               iter = 200, chains = 2)
+        fit <- stan_glmer(mpg ~ wt + (1|cyl) + (1 + wt|gear), data = mtcars,
+                          iter = 200, chains = 2)
     )
     
     context("rstanarm models")
@@ -34,7 +34,7 @@ if (require(rstanarm, quietly = TRUE)) {
     
     test_that("glance works on rstanarm fits", {
         g1 <- glance(fit)
-        g2 <- glance(fit, looic = TRUE, cores = 1)
+        g2 <- suppressWarnings(glance(fit, looic = TRUE, cores = 1))
         expect_equal(colnames(g1), c("algorithm", "pss", "nobs", "sigma"))
         expect_equal(colnames(g2), c(colnames(g1), "looic", "elpd_loo", "p_loo"))
     })
