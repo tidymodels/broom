@@ -26,16 +26,29 @@ test_that("tidy.glm works", {
     expect_equal(td2$term, c("(Intercept)", "wt", "disp"))
 })
 
-test_that("tidy.anova and tidy.aov work", {
+test_that("tidy.anova, tidy.aov, and tidy.aovlist work", {
     anovafit = anova(lm(mpg ~ wt + disp, mtcars))
     td = tidy(anovafit)
     check_tidy(td, exp.row=3, exp.col=6)
     expect_true("Residuals" %in% td$term)
     
     aovfit = aov(mpg ~ wt + disp, mtcars)
-    td = tidy(anovafit)
+    td = tidy(aovfit)
     check_tidy(td, exp.row=3, exp.col=6)
     expect_true("Residuals" %in% td$term)
+    
+    aovlistfit = aov(mpg ~ wt + disp + Error(drat), mtcars)
+    td = suppressWarnings(tidy(aovlistfit))
+    check_tidy(td, exp.row=3, exp.col=7)
+    expect_true("Residuals" %in% td$term)
+})
+
+test_that("tidy.anova warns unknown column names when comparing two loess", {
+    loessfit <- anova(
+        loess(dist ~ speed, cars),
+        loess(dist ~ speed, cars, control = loess.control(surface = "direct"))
+    )
+    expect_warning(tidy(loessfit))
 })
 
 test_that("tidy.nls works", {
