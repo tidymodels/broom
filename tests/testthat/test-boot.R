@@ -23,3 +23,13 @@ test_that("boot tidiers work", {
     check_tidy(td, exp.row = 2, exp.col = 6)
     check_tidy(tdw, exp.row = 2, exp.col = 7)
 })
+
+test_that("time series bootstrap tidying works", {
+    lynx.fun <- function(tsb) {
+        ar.fit <- ar(tsb, order.max = 25)
+        c(ar.fit$order, mean(tsb), tsb)
+    }
+    lynx.1 <- tsboot(log(lynx), lynx.fun, R = 99, l = 20, orig.t = FALSE)
+    td <- tidy(lynx.1)
+    check_tidy(td, exp.col = 2, exp.names = c("estimate", "std.error"))
+})
