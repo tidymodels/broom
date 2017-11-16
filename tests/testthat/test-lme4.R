@@ -24,6 +24,7 @@ if (require(lme4, quietly = TRUE)) {
         expect_error(tidy(fit, scales = "vcov"),
                      "must be provided for each effect")
     })
+    
     test_that("tidy works with more than one RE grouping variable", {
         dd <- expand.grid(f = factor(1:10),
                           g = factor(1:5),
@@ -40,14 +41,23 @@ if (require(lme4, quietly = TRUE)) {
         gfit <- glmer(y ~ (1 | f) + (1 | g), data = dd, family = poisson)
         expect_equal(as.character(tidy(gfit, effects = "ran_pars")$term),
                      paste("sd_(Intercept)", c("f", "g"), sep = "."))
-   })
-              
+    })
+    
+    test_that("tidy works for different effects and conf ints", {
+        lmm1 <- lmer(Reaction ~ Days + (Days | Subject), sleepstudy)
+        td <- tidy(lmm1, effects = "ran_modes", conf.int = TRUE)
+        check_tidy(td, exp.col = 7)
+        
+        td <- tidy(lmm1, effects = "fixed", conf.int = TRUE)
+        check_tidy(td, exp.col = 6)
+    })
+    
     test_that("augment works on lme4 fits with or without data", {
         au <- augment(fit)
         aud <- augment(fit, d)
         expect_equal(dim(au), dim(aud))
     })
-
+    
     dNAs <- d
     dNAs$y[c(1, 3, 5)] <- NA
     

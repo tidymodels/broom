@@ -52,9 +52,11 @@ test_that("tidy.anova warns unknown column names when comparing two loess", {
 })
 
 test_that("tidy.nls works", {
-    nlsfit = nls(wt ~ a + b * mpg + c / disp, data=mtcars, start=list(a=1, b=2, c=3))
+    nlsfit = nls(wt ~ a + b * mpg + c / disp,
+                 data = mtcars,
+                 start = list(a = 1, b = 2, c = 3))
     td = tidy(nlsfit)
-    check_tidy(td, exp.row=3, exp.col=5)
+    check_tidy(td, exp.row = 3, exp.col = 5)
     expect_equal(td$term, c("a", "b", "c"))
 })
 
