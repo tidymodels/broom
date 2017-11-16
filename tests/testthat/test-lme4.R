@@ -24,18 +24,23 @@ if (require(lme4, quietly = TRUE)) {
         expect_error(tidy(fit, scales = "vcov"),
                      "must be provided for each effect")
     })
-   #  test_that("tidy works with more than one RE grouping variable", {
-   #      dd <- expand.grid(f = factor(1:10),
-   #                        g = factor(1:5),
-   #                        rep = 1:3)
-   #      dd$y <- suppressMessages(simulate(~(1|f)+(1|g),newdata=dd,
-   #                                        newparams=list(beta=1,theta=c(1,1)),
-   #                                        family=poisson, seed=101))[[1]]
-   #      gfit <- glmer(y ~ (1 | f) + (1 | g), data = dd, family = poisson)
-   #      expect_equal(as.character(tidy(gfit, effects = "ran_pars")$term),
-   #                   paste("sd_(Intercept)", c("f", "g"), sep =
-   #                             "."))
-   # })
+    test_that("tidy works with more than one RE grouping variable", {
+        dd <- expand.grid(f = factor(1:10),
+                          g = factor(1:5),
+                          rep = 1:3)
+        dd$y <- suppressMessages(
+            lme4:::simulate.formula(
+                ~ (1 | f) + (1 | g),
+                newdata = dd,
+                newparams = list(beta = 1, theta = c(1, 1)),
+                family = poisson,
+                seed = 101
+            )
+        )[[1]]
+        gfit <- glmer(y ~ (1 | f) + (1 | g), data = dd, family = poisson)
+        expect_equal(as.character(tidy(gfit, effects = "ran_pars")$term),
+                     paste("sd_(Intercept)", c("f", "g"), sep = "."))
+   })
               
     test_that("augment works on lme4 fits with or without data", {
         au <- augment(fit)
