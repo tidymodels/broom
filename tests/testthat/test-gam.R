@@ -10,7 +10,7 @@ test_that("tidy and glance work on gam models", {
     gl <- glance(g)
     
     check_tidy(td, exp.row = 3, exp.col = 6)
-    check_tidy(gl, exp.col = 6)
+    check_tidy(gl, exp.col = 3)
 })
 
 
