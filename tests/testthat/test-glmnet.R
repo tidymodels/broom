@@ -1,0 +1,42 @@
+context("glmnet tidiers")
+
+library(glmnet)
+
+set.seed(2014)
+x <- matrix(rnorm(100 * 20), 100, 20)
+
+test_that("glmnet tidiers work", {
+    y <- rnorm(100)
+    fit1 <- glmnet(x, y)
+    
+    td <- tidy(fit1)
+    check_tidy(td, exp.col = 5)
+    
+    gl <- glance(fit1)
+    check_tidy(gl, exp.col = 2)
+})
+
+test_that("multinomial response glmnet tidier works", {
+    g <- sample(1:4, 100, replace = TRUE)
+    fit2 <- glmnet(x, g, family = "multinomial")
+    
+    td <- tidy(fit2)
+    check_tidy(td, exp.col = 6)
+})
+
+test_that("cv.glmnet tidiers work", {
+    set.seed(2014)
+    nobs <- 100
+    nvar <- 50
+    real <- 5
+    x <- matrix(rnorm(nobs * nvar), nobs, nvar)
+    beta <- c(rnorm(real, 0, 1), rep(0, nvar - real))
+    y <- c(t(beta) %*% t(x)) + rnorm(nvar, sd = 3)
+    cvfit1 <- cv.glmnet(x, y)
+    
+    td <- tidy(cvfit1)
+    check_tidy(td, exp.col = 6)
+    
+    gl <- glance(cvfit1)
+    check_tidy(gl, exp.col = 2)
+})
