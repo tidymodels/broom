@@ -83,8 +83,8 @@ tidy.felm <- function(x, conf.int=FALSE, conf.level=.95, fe = FALSE, fe.error = 
         nn <- c("estimate", "N", "comp")
         ret_fe <- lfe::getfe(x) %>%
                   select(effect, obs, comp) %>%
-                  fix_data_frame(nn)  %>% 
-                  mutate(statistic = NA, p.value = NA) 
+                  fix_data_frame(nn) %>% 
+                  mutate(std.error = NA, statistic = NA, p.value = NA) 
       }
       if (conf.int){
         ret_fe <- ret_fe %>%
@@ -186,5 +186,6 @@ glance.felm <- function(x, ...) {
                               df=df[1],
                               df.residual = rdf
                               ))
+    ret <- finish_glance(ret, x)
     ret
 }
