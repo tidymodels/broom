@@ -272,6 +272,8 @@ confint_tidy <- function(x, conf.level = .95, func = stats::confint, ...) {
 #' Expand a dataset to include all factorial combinations of one or more
 #' variables
 #'
+#' This function is deprecated: use \code{tidyr::crossing} instead
+#'
 #' @param df a tbl
 #' @param ... arguments
 #' @param stringsAsFactors logical specifying if character vectors are
@@ -284,6 +286,8 @@ confint_tidy <- function(x, conf.level = .95, func = stats::confint, ...) {
 #'
 #' @export
 inflate <- function(df, ..., stringsAsFactors = FALSE) {
+    .Deprecated("tidyr::crossing")
+    
     ret <- expand.grid(..., stringsAsFactors = stringsAsFactors)
     
     ret <- ret %>%
