@@ -12,7 +12,7 @@ if(require("survival", quietly = TRUE)) {
     test_that("glance.survreg works", {
         tidy_names <- unlist(strsplit("iter df chi p.value logLik AIC BIC df.residual", " "))
         td <- glance(surv_fit)
-        check_tidy(td, exp.row = 1, exp.col = 8, exp.names = tidy_names)
+        check_tidy(td, exp.row = 1, exp.col = 9, exp.names = tidy_names)
     })
     
     test_that("tidy.coxph works", {

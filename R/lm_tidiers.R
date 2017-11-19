@@ -293,7 +293,7 @@ process_lm <- function(ret, x, conf.int = FALSE, conf.level = .95,
         CI <- suppressMessages(stats::confint(x, level = conf.level))
         # Handle case if regression is rank deficient
         p <- x$rank
-        if (!is.null(p)) {
+        if (!is.null(p) && !is.null(x$qr)) {
             piv <- x$qr$pivot[seq_len(p)]
             CI <- CI[piv, , drop = FALSE]
         }
