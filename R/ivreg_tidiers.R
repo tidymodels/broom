@@ -7,7 +7,6 @@
 #' \code{conf.int=TRUE}
 #' @param exponentiate Whether to exponentiate the coefficient estimates
 #' and confidence intervals
-#' @param newdata For \code{augment}; new data to use for prediction.
 #' 
 #' @template boilerplate
 #' 
