@@ -1,6 +1,8 @@
 broom 0.4.2
 -----------
 
+This is a resubmission now that orcutt 2.0 is on CRAN, which returns a different type of object.
+
 Most important change is fixing behavior with the survival package update. My sincere apologies for taking so long to do so.
 
 ## Changes

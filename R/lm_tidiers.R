@@ -132,7 +132,7 @@ tidy.lm <- function(x, conf.int = FALSE, conf.level = .95,
                     exponentiate = FALSE, quick = FALSE, ...) {
     if (quick) {
         co <- stats::coef(x)
-        ret <- data.frame(term = names(co), estimate = unname(co))
+        ret <- data.frame(term = names(co), estimate = unname(co), stringsAsFactors = FALSE)
         return(process_lm(ret, x, conf.int = FALSE, exponentiate = exponentiate))
     }
     s <- summary(x)
@@ -291,6 +291,12 @@ process_lm <- function(ret, x, conf.int = FALSE, conf.level = .95,
     if (conf.int) {
         # avoid "Waiting for profiling to be done..." message
         CI <- suppressMessages(stats::confint(x, level = conf.level))
+        # Handle case if regression is rank deficient
+        p <- x$rank
+        if (!is.null(p) && !is.null(x$qr)) {
+            piv <- x$qr$pivot[seq_len(p)]
+            CI <- CI[piv, , drop = FALSE]
+        }
         colnames(CI) = c("conf.low", "conf.high")
         ret <- cbind(ret, trans(unrowname(CI)))
     }

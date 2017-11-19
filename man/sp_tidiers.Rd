@@ -2,13 +2,13 @@
 % Please edit documentation in R/sp_tidiers.R
 \name{sp_tidiers}
 \alias{sp_tidiers}
-\alias{tidy.Line}
-\alias{tidy.Lines}
-\alias{tidy.Polygon}
-\alias{tidy.Polygons}
-\alias{tidy.SpatialLinesDataFrame}
-\alias{tidy.SpatialPolygons}
 \alias{tidy.SpatialPolygonsDataFrame}
+\alias{tidy.SpatialPolygons}
+\alias{tidy.Polygons}
+\alias{tidy.Polygon}
+\alias{tidy.SpatialLinesDataFrame}
+\alias{tidy.Lines}
+\alias{tidy.Line}
 \title{tidying methods for classes from the sp package.}
 \usage{
 \method{tidy}{SpatialPolygonsDataFrame}(x, region = NULL, ...)
@@ -49,4 +49,3 @@ if (require("maptools")) {
 }
 
 }
-

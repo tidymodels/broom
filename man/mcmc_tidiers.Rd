@@ -2,9 +2,9 @@
 % Please edit documentation in R/mcmc_tidiers.R
 \name{mcmc_tidiers}
 \alias{mcmc_tidiers}
+\alias{tidyMCMC}
 \alias{tidy.rjags}
 \alias{tidy.stanfit}
-\alias{tidyMCMC}
 \title{Tidying methods for MCMC (Stan, JAGS, etc.) fits}
 \usage{
 tidyMCMC(x, pars, estimate.method = "mean", conf.int = FALSE,
@@ -86,4 +86,3 @@ if (requireNamespace("rstan", quietly = TRUE)) {
 
 
 }
-

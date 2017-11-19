@@ -1,7 +1,9 @@
 context("dplyr and broom")
 
+suppressPackageStartupMessages(library(dplyr))
+
 # set up the lahman batting table, and filter to make it faster
-batting <- tbl(lahman_df(), "Batting")
+batting <- tbl(src_df("Lahman"), "Batting")
 batting <- batting %>% filter(yearID > 1980)
 
 lm0 <- failwith(NULL, lm, quiet = TRUE)
@@ -28,7 +30,7 @@ test_that("tidying methods work with rowwise_df", {
 
 
 test_that("can perform correlations with tidying in dplyr", {
-    cor.test0 <- failwith(NULL, cor.test, quiet=TRUE)
+    cor.test0 <- purrr::possibly(cor.test, NULL)
     pcors <- batting %>% group_by(yearID) %>% do(tidy(cor.test0(.$SB, .$CS)))
     expect_true(all(c("yearID", "estimate", "statistic", "p.value") %in%
                         colnames(pcors)))

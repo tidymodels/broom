@@ -47,4 +47,3 @@ if (require("ks", quietly = TRUE)) {
 }
 
 }
-
