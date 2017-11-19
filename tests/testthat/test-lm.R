@@ -16,6 +16,12 @@ test_that("tidy.lm works", {
     expect_warning(tidy(lmfit2, exponentiate = TRUE))
 })
 
+test_that("tidy.lm with confint = TRUE works even if rank-deficient", {
+    d <- data.frame(y = rnorm(4), x = letters[seq_len(4)])
+    expect_is(tidy(lm(y ~ x, data = d), confint = TRUE),
+              "data.frame")
+})
+
 test_that("tidy.glm works", {
     glmfit <- glm(am ~ wt, mtcars, family = "binomial")
     td <- tidy(glmfit)

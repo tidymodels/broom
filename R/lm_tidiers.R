@@ -291,6 +291,12 @@ process_lm <- function(ret, x, conf.int = FALSE, conf.level = .95,
     if (conf.int) {
         # avoid "Waiting for profiling to be done..." message
         CI <- suppressMessages(stats::confint(x, level = conf.level))
+        # Handle case if regression is rank deficient
+        p <- x$rank
+        if (!is.null(p)) {
+            piv <- x$qr$pivot[seq_len(p)]
+            CI <- CI[piv, , drop = FALSE]
+        }
         colnames(CI) = c("conf.low", "conf.high")
         ret <- cbind(ret, trans(unrowname(CI)))
     }
