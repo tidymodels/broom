@@ -32,6 +32,8 @@ and confidence intervals}
 
 \item{newdata}{For \code{augment}; new data to use for prediction.}
 
+\item{newdata}{New data to make predictions from (optional)}
+
 \item{diagnostics}{Logical. Return results of diagnostic tests.}
 }
 \value{
