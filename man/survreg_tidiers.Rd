@@ -84,7 +84,7 @@ if (require("survival", quietly = TRUE)) {
     td <- tidy(sr)
     augment(sr, ovarian)
     augment(sr)
-    glance(td)
+    glance(sr)
 
     # coefficient plot
     library(ggplot2)

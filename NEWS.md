@@ -1,4 +1,11 @@
-broom 0.4.1.9000
+broom 0.4.3
+-----------
+
+* Changed the deprecated `dplyr::failwith` to `purrr::possibly`
+* Fixed confidence intervals in the gmm tidier (thanks to #242 from David Hugh-Jones)
+* Added tidiers for `ivreg` objects from the AER package (thanks to #245 from David Hugh-Jones)
+
+broom 0.4.2
 -----------
 
 * Added tidiers for `lsmobj` and `ref.grid` objects from the lsmeans package
