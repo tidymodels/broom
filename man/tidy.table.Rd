@@ -26,4 +26,3 @@ tidy(tab)
 \seealso{
 \code{\link{as.data.frame.table}}
 }
-

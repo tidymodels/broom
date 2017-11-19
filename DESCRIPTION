@@ -84,12 +84,15 @@ Suggests:
     mclust,
     covr,
     lsmeans,
+    emmeans,
     betareg,
     robust,
     akima,
     AER,
-    randomForest,
-    muhaz
+    muhaz,
+    speedlm,
+    speedglm,
+    randomForest
 URL: http://github.com/tidyverse/broom
 BugReports: http://github.com/tidyverse/broom/issues
 VignetteBuilder: knitr

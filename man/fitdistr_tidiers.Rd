@@ -2,8 +2,8 @@
 % Please edit documentation in R/fitdistr_tidiers.R
 \name{fitdistr_tidiers}
 \alias{fitdistr_tidiers}
-\alias{glance.fitdistr}
 \alias{tidy.fitdistr}
+\alias{glance.fitdistr}
 \title{Tidying methods for fitdistr objects from the MASS package}
 \usage{
 \method{tidy}{fitdistr}(x, ...)
@@ -46,4 +46,3 @@ fit <- fitdistr(x, dnorm, list(mean = 3, sd = 1))
 tidy(fit)
 glance(fit)
 }
-

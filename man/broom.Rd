@@ -4,6 +4,7 @@
 \name{broom}
 \alias{broom}
 \alias{broom-package}
+\alias{broom-package}
 \title{Convert Statistical Analysis Objects into Tidy Data Frames}
 \description{
 Convert statistical analysis objects from R into tidy data frames,
@@ -14,4 +15,3 @@ coefficients of a regression; augment, which adds columns to the original
 data such as predictions, residuals and cluster assignments; and glance,
 which provides a one-row summary of model-level statistics.
 }
-

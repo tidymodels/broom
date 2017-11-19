@@ -72,8 +72,7 @@ tidy.boot <- function(x,
             op[, 2L] <- sqrt(op[, 2])
         }
         colnames(op) <- c("estimate", "std.error")
-    }
-    else {
+    } else {
         t0 <- boot.out$t0[index]
         if (is.null(boot.out$call$weights)) {
             op <- cbind(t0, apply(t, 2L, mean, na.rm = TRUE) - 
@@ -100,7 +99,7 @@ tidy.boot <- function(x,
         ## boot.ci uses c("norm", "basic", "perc", "stud") for types
         ## stores them with longer names
         ci.pos <- pmatch(conf.method, names(ci.list[[1]]))
-        ci.tab <- sapply(ci.list, function(x) x[[ci.pos]][4:5])
+        ci.tab <- t(sapply(ci.list, function(x) x[[ci.pos]][4:5]))
         
         colnames(ci.tab) <- c("conf.low", "conf.high")
         ret <- cbind(ret, ci.tab)

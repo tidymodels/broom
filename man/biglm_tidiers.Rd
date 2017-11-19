@@ -2,8 +2,8 @@
 % Please edit documentation in R/biglm_tidiers.R
 \name{biglm_tidiers}
 \alias{biglm_tidiers}
-\alias{glance.biglm}
 \alias{tidy.biglm}
+\alias{glance.biglm}
 \title{Tidiers for biglm and bigglm object}
 \usage{
 \method{tidy}{biglm}(x, conf.int = FALSE, conf.level = 0.95,
@@ -74,4 +74,3 @@ if (require("biglm", quietly = TRUE)) {
 }
 
 }
-
