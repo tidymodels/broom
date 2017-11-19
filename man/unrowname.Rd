@@ -12,4 +12,3 @@ unrowname(x)
 \description{
 strip rownames from an object
 }
-

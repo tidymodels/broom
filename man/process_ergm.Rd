@@ -24,4 +24,3 @@ and confidence intervals (typical for logistic regression)}
 Optionally exponentiates the coefficients, and optionally adds
 a confidence interval, to a tidied ergm object.
 }
-

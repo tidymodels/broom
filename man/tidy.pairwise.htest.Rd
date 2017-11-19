@@ -48,4 +48,3 @@ tidy(pairwise.wilcox.test(Petal.Length, Species))
 \seealso{
 \link{pairwise.t.test}, \link{pairwise.wilcox.test}
 }
-

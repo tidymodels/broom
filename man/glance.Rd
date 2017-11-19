@@ -15,4 +15,3 @@ glance(x, ...)
 \description{
 glance methods always return either a one-row data frame, or NULL
 }
-

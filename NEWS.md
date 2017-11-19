@@ -1,4 +1,14 @@
-broom 0.4.1.9000
+broom 0.4.3
+-----------
+
+* Changed the deprecated `dplyr::failwith` to `purrr::possibly`
+* Fixed confidence intervals in the gmm tidier (thanks to #242 from David Hugh-Jones)
+* Fixed a bug in bootstrap tidiers (thanks to #167 from Jeremy Biesanz)
+* Fixed tidy.lm with `quick = TRUE` to return terms as character rather than factor (thanks to #191 from Matteo Sostero)
+* Added tidiers for `ivreg` objects from the AER package (thanks to #245 from David Hugh-Jones)
+* Added tidiers for `survdiff` objects from the survival package (thanks to #147 from Michał Bojanowski)
+
+broom 0.4.2
 -----------
 
 * Added tidiers for `lsmobj` and `ref.grid` objects from the lsmeans package

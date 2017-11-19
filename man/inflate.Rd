@@ -22,4 +22,3 @@ A tbl, grouped by the arguments in \code{...}
 Expand a dataset to include all factorial combinations of one or more
 variables
 }
-

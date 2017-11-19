@@ -12,4 +12,3 @@ compact(x)
 \description{
 Remove NULL items in a vector or list
 }
-

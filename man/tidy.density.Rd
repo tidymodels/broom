@@ -28,4 +28,3 @@ for the estimate
 \seealso{
 \code{\link{density}}
 }
-
