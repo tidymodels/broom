@@ -1,0 +1,9 @@
+urls:
+  reference: http://dplyr.tidyverse.org/reference
+  article: http://dplyr.tidyverse.org/articles
+articles:
+  bootstrapping: bootstrapping.html
+  broom_and_dplyr: broom_and_dplyr.html
+  broom: broom.html
+  kmeans: kmeans.html
+

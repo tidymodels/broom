@@ -1,4 +1,4 @@
-url: http://dplyr.tidyverse.org
+url: http://broom.tidyverse.org
 
 template:
   package: tidytemplate
@@ -8,15 +8,25 @@ home:
   strip_header: true
 
 reference:
-- title: Tidy methods
+
+- title: Tidiers
   contents:
   - starts_with('tidy')
-- title: Glance methods
-  contents:
   - starts_with('glance')
-- title: Augment methods
-  contents:
   - starts_with('augment')
+  
+- title: Miscellaneous
+  contents:
+  - bootstrap
+  - broom
+  - compact
+  - starts_with("confint")
+  - finish_glance
+  - fix_data_frame
+  - inflate
+  - insert_NAs
+  - starts_with("process")
+  - unrowname
   
 navbar:
   type: default
