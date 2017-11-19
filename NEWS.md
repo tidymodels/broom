@@ -2,6 +2,8 @@ broom 0.4.3
 -----------
 
 * Changed the deprecated `dplyr::failwith` to `purrr::possibly`
+* `augment` and `glance` on NULLs now return an empty data frame
+* Deprecated the `inflate()` function in favor of `tidyr::crossing`
 * Fixed confidence intervals in the gmm tidier (thanks to #242 from David Hugh-Jones)
 * Fixed a bug in bootstrap tidiers (thanks to #167 from Jeremy Biesanz)
 * Fixed tidy.lm with `quick = TRUE` to return terms as character rather than factor (thanks to #191 from Matteo Sostero)
