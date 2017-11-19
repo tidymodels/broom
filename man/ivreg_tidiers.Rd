@@ -16,19 +16,21 @@
 \method{glance}{ivreg}(x, diagnostics = FALSE, ...)
 }
 \arguments{
-\item{x}{an "ivreg" object}
+\item{x}{An "ivreg" object}
 
-\item{conf.int}{whether to include a confidence interval}
+\item{conf.int}{Whether to include a confidence interval}
 
-\item{conf.level}{confidence level of the interval, used only if
+\item{conf.level}{Confidence level of the interval, used only if
 \code{conf.int=TRUE}}
 
-\item{exponentiate}{whether to exponentiate the coefficient estimates
+\item{exponentiate}{Whether to exponentiate the coefficient estimates
 and confidence intervals}
 
 \item{...}{extra arguments, not used}
 
-\item{data}{original dataset}
+\item{data}{Original dataset}
+
+\item{newdata}{For \code{augment}; new data to use for prediction.}
 
 \item{diagnostics}{Logical. Return results of diagnostic tests.}
 }

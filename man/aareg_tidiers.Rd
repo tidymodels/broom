@@ -2,8 +2,9 @@
 % Please edit documentation in R/survival_tidiers.R
 \name{aareg_tidiers}
 \alias{aareg_tidiers}
-\alias{glance.aareg}
 \alias{tidy.aareg}
+\alias{aareg_tidiers}
+\alias{glance.aareg}
 \title{Tidiers for aareg objects}
 \usage{
 \method{tidy}{aareg}(x, ...)
@@ -47,4 +48,3 @@ if (require("survival", quietly = TRUE)) {
 }
 
 }
-

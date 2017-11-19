@@ -1,12 +1,13 @@
 #' Tidiers for ivreg models
 #' 
-#' @param x an "ivreg" object 
-#' @param data original dataset
-#' @param conf.int whether to include a confidence interval
-#' @param conf.level confidence level of the interval, used only if
+#' @param x An "ivreg" object 
+#' @param data Original dataset
+#' @param conf.int Whether to include a confidence interval
+#' @param conf.level Confidence level of the interval, used only if
 #' \code{conf.int=TRUE}
-#' @param exponentiate whether to exponentiate the coefficient estimates
+#' @param exponentiate Whether to exponentiate the coefficient estimates
 #' and confidence intervals
+#' @param newdata For \code{augment}; new data to use for prediction.
 #' 
 #' @template boilerplate
 #' 

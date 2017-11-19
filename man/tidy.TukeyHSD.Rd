@@ -44,4 +44,3 @@ tidy(TukeyHSD(fm2))
 \seealso{
 \code{\link{TukeyHSD}}
 }
-

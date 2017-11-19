@@ -74,4 +74,3 @@ if (require("xergm")) {
 \seealso{
 \code{\link[btergm]{btergm}}
 }
-
