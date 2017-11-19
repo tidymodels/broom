@@ -91,7 +91,8 @@ Suggests:
     AER,
     muhaz,
     speedglm,
-    randomForest
+    randomForest,
+    tibble
 URL: http://github.com/tidyverse/broom
 BugReports: http://github.com/tidyverse/broom/issues
 VignetteBuilder: knitr

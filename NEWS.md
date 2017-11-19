@@ -12,6 +12,7 @@ broom 0.4.3
 * Added tidiers for `emmeans` from the emmeans package (thanks to #252 from Matthew Kay)
 * Added tidiers for `speedlm` and `speedglm` from the speedglm package (thanks to #248 from David Hugh-Jones)
 * Added tidiers for `muhaz` objects from the muhaz package (thanks to #251 from Andreas Bender)
+* Added tidiers for `decompose` and `stl` objects from stats (thanks to #165 from Aaron Jacobs)
 
 broom 0.4.2
 -----------
