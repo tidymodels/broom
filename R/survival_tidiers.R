@@ -604,7 +604,7 @@ glance.pyears <- function(x, ...) {
 #'     td <- tidy(sr)
 #'     augment(sr, ovarian)
 #'     augment(sr)
-#'     glance(td)
+#'     glance(sr)
 #' 
 #'     # coefficient plot
 #'     library(ggplot2)
@@ -630,7 +630,7 @@ tidy.survreg <- function(x, conf.level = .95, ...) {
     # add confidence interval
     CI <- stats::confint(x, level = conf.level)
     colnames(CI) <- c("conf.low", "conf.high")
-    CI <- cbind(term = row.names(CI), CI)
+    CI <- fix_data_frame(CI)
     merge(ret, CI, all.x = TRUE, sort = FALSE)
 }
 
