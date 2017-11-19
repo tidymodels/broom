@@ -628,9 +628,10 @@ tidy.survreg <- function(x, conf.level = .95, ...) {
     ret
     
     # add confidence interval
-    CI <- unrowname(stats::confint(x, level = conf.level))
+    CI <- stats::confint(x, level = conf.level)
     colnames(CI) <- c("conf.low", "conf.high")
-    cbind(ret, CI)
+    CI <- cbind(term = row.names(CI), CI)
+    merge(ret, CI, all.x = TRUE, sort = FALSE)
 }
 
 
