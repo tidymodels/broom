@@ -90,7 +90,6 @@ Suggests:
     robust,
     akima,
     AER,
-    speedlm,
     speedglm,
     randomForest
 URL: http://github.com/tidyverse/broom

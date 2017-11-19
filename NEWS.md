@@ -7,6 +7,9 @@ broom 0.4.3
 * Fixed tidy.lm with `quick = TRUE` to return terms as character rather than factor (thanks to #191 from Matteo Sostero)
 * Added tidiers for `ivreg` objects from the AER package (thanks to #245 from David Hugh-Jones)
 * Added tidiers for `survdiff` objects from the survival package (thanks to #147 from Michał Bojanowski)
+* Added tidiers for `emmeans` from the emmeans package (thanks to #252 from Matthew Kay)
+* Added tidiers for `speedlm` and `speedglm` from the speedglm package (thanks to #248 from David Hugh-Jones)
+* Added tidiers for `muhaz` objects from the muhaz package (thanks to #251 from Andreas Bender)
 
 broom 0.4.2
 -----------
