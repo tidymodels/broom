@@ -16,7 +16,7 @@ if (require(randomForest, quietly = TRUE)) {
     # Add NAs to test dataset so that na.action can be tested
     df_salt_na <- function(df, frac, col_names) {
         m <- round(nrow(df) * frac)
-        dplyr::mutate_at(df, .funs = dplyr::funs(v_salt_na(., m)), .cols = col_names)
+        dplyr::mutate_at(df, .funs = dplyr::funs(v_salt_na(., m)), .vars = col_names)
     }
     
     salted_iris <- df_salt_na(iris, 0.1, c("Sepal.Length", "Sepal.Width", "Petal.Length", "Petal.Width"))

@@ -21,4 +21,3 @@ Turn a ts object into a tidy data frame. Right now simply uses
 \seealso{
 \link{as.data.frame.ts}
 }
-

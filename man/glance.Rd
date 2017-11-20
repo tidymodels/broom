@@ -13,6 +13,6 @@ glance(x, ...)
 \item{...}{other arguments passed to methods}
 }
 \description{
-glance methods always return either a one-row data frame, or NULL
+glance methods always return either a one-row data frame (except on NULL, which
+returns an empty data frame)
 }
-

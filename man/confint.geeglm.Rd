@@ -28,4 +28,3 @@ Generate confidence intervals for GEE analyses
 This function was taken from
 http://stackoverflow.com/a/21221995/2632184.
 }
-
