@@ -40,7 +40,7 @@ if (require("survival", quietly = TRUE)) {
 context("NULL and default augment")
 
 test_that("NULL augment returns NULL", {
-    expect_null(augment(NULL))
+    expect_length(augment(NULL), 0)
 })
 
 test_that("default augment throws error for unimplemented methods", {

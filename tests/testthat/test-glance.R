@@ -1,7 +1,7 @@
 context("NULL and default glance")
 
 test_that("NULL glance returns NULL", {
-  expect_null(glance(NULL))
+    expect_length(glance(NULL), 0)
 })
 
 test_that("default glance throws error for unimplemented methods", {
