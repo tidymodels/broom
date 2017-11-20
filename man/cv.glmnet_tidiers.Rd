@@ -2,8 +2,8 @@
 % Please edit documentation in R/glmnet_tidiers.R
 \name{cv.glmnet_tidiers}
 \alias{cv.glmnet_tidiers}
-\alias{glance.cv.glmnet}
 \alias{tidy.cv.glmnet}
+\alias{glance.cv.glmnet}
 \title{Tidiers for glmnet cross-validation objects}
 \usage{
 \method{tidy}{cv.glmnet}(x, ...)
@@ -89,4 +89,3 @@ if (require("glmnet", quietly = TRUE)) {
 }
 
 }
-

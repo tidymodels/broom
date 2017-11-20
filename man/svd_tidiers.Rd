@@ -75,4 +75,3 @@ tidy_u \%>\%
 \seealso{
 \code{\link{svd}}, \code{\link{tidy.list}}
 }
-
