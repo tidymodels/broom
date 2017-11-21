@@ -114,5 +114,5 @@ tidy.Line <- function(x, ...) {
     df <- as.data.frame(x@coords)
     names(df) <- c("long", "lat")
     df$order <- 1:nrow(df)
-    df
+    unrowname(df)
 }
