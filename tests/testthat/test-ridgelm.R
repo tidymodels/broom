@@ -1,7 +1,5 @@
 context("ridgelm tidiers")
 
-library(MASS)
-
 test_that("ridgelm tidiers work for one or multple lambdas", {
     names(longley)[1] <- "y"
     fit1 <- MASS::lm.ridge(y ~ ., longley)
