@@ -20,7 +20,7 @@ test_that("multinomial response glmnet tidier works", {
     g <- sample(1:4, 100, replace = TRUE)
     fit2 <- glmnet(x, g, family = "multinomial")
     
-    td <- tidy(fit2)
+    expect_warning(td <- tidy(fit2))
     check_tidy(td, exp.col = 6)
 })
 
