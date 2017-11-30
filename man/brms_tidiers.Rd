@@ -83,4 +83,3 @@ These methods tidy the estimates from
 \seealso{
 \code{\link[brms]{brms}}, \code{\link[brms]{brmsfit-class}}
 }
-

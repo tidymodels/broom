@@ -2,8 +2,8 @@
 % Please edit documentation in R/bingroup_tidiers.R
 \name{binDesign_tidiers}
 \alias{binDesign_tidiers}
-\alias{glance.binDesign}
 \alias{tidy.binDesign}
+\alias{glance.binDesign}
 \title{Tidy a binDesign object}
 \usage{
 \method{tidy}{binDesign}(x, ...)
@@ -52,4 +52,3 @@ if (require("binGroup", quietly = TRUE)) {
         geom_line()
 }
 }
-

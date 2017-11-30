@@ -26,4 +26,3 @@ column names of \code{conf.low} and \code{conf.high}, and no row names
 \seealso{
 \link{confint}
 }
-
