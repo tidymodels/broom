@@ -229,10 +229,9 @@ finish_glance <- function(ret, x) {
     ret$AIC <- tryCatch(stats::AIC(x), error = function(e) NULL)
     ret$BIC <- tryCatch(stats::BIC(x), error = function(e) NULL)
     
-    # special case for REML objects (better way?)
+    # Return NA as deviance, following comment by Brian Ripley
     if ("lmerMod" %in% class(x)) {
-        ret$deviance <- tryCatch(stats::deviance(x, REML=FALSE),
-                                 error = function(e) NULL)
+        ret$deviance <- NA
     } else {
         ret$deviance <- tryCatch(stats::deviance(x), error = function(e) NULL)
     }
