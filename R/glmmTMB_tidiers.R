@@ -72,7 +72,7 @@ tidy.glmmTMB <- function(x, effects = c("ran_pars","fixed"),
                          ran_prefix=NULL,
                          conf.int = FALSE,
                          conf.level = 0.95,
-                         conf.method = "Wald",
+                         conf.method = "wald",
                         ...) {
     if (length(component)>1 || component!="cond") {
         stop("only works for conditional component")
@@ -96,8 +96,12 @@ tidy.glmmTMB <- function(x, effects = c("ran_pars","fixed"),
         nn <- base_nn[1:ncol(ret)]
 
         if (conf.int) {
-            ## at present confint only does conditional component anyway ...
-            cifix <- confint(x,method=conf.method,...)
+            cifix <- confint(x,method=conf.method,component="cond",...)
+            ## hack: conditional component includes random-effect parameters
+            ## as well, don't want those right now ... need more detailed
+            ## control for components?
+            ## ?? why does confint include Estimate column ???
+            cifix <- cifix[seq(nrow(ret)),1:2]
             ret <- data.frame(ret,cifix)
             nn <- c(nn,"conf.low","conf.high")
         }
@@ -145,7 +149,8 @@ tidy.glmmTMB <- function(x, effects = c("ran_pars","fixed"),
         ## rownames(ret) <- seq(nrow(ret))
 
         if (conf.int) {
-            ciran <- confint(x,parm="theta_",method=conf.method,...)
+            ciran <- confint(x,parm="theta_",method=conf.method,
+                             component="other",...)
             ret <- data.frame(ret,ciran)
             nn <- c(nn,"conf.low","conf.high")
         }
