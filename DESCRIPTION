@@ -18,8 +18,8 @@ Authors@R: c(
     person("Gavin", "Simpson", email = "ucfagls@gmail.com", role = "ctb"),
     person("Jens", "Preussner", email = " jens.preussner@mpi-bn.mpg.de", role = "ctb"),
     person("Jay", "Hesselberth", email = "jay.hesselberth@gmail.com", role = "ctb"),
-    person("Hadley", "Wickham", email = "hadley@rstudio.com", role = "ctb")
-    )
+    person("Hadley", "Wickham", email = "hadley@rstudio.com", role = "ctb"),
+    person("Matthew", "Lincoln", email = "matthew.d.lincoln@gmail.com", role = "ctb"))
 Maintainer: David Robinson <admiral.david@gmail.com>
 Description: Convert statistical analysis objects from R into tidy data frames,
     so that they can more easily be combined, reshaped and otherwise processed
@@ -84,9 +84,14 @@ Suggests:
     mclust,
     covr,
     lsmeans,
+    emmeans,
     betareg,
     robust,
-    akima
+    akima,
+    AER,
+    muhaz,
+    speedglm,
+    tibble
 URL: http://github.com/tidyverse/broom
 BugReports: http://github.com/tidyverse/broom/issues
 VignetteBuilder: knitr
