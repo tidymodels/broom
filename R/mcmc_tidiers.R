@@ -56,6 +56,9 @@
 #'   ggplot(tds, aes(estimate, term)) +
 #'     geom_errorbarh(aes(xmin = conf.low, xmax = conf.high)) +
 #'     geom_point(aes(color = method))
+#'   
+#'   # Show indices as columns
+#'   tidy(rstan_example, conf.int = TRUE, pars = "theta", index = TRUE)
 #' }
 #' 
 #' 
