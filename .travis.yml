@@ -4,6 +4,10 @@ language: r
 sudo: false
 cache: packages
 
+env:
+ global:
+   - RGL_USE_NULL=TRUE
+
 before_install:
   - Rscript -e 'update.packages(ask = FALSE)'
 
