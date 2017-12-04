@@ -1,14 +1,13 @@
 context("gamlss tidiers")
 
-library(gamlss)
-data(abdom)
-mod <- gamlss(
-    y ~ pb(x),
-    sigma.fo =  ~ pb(x),
-    family = BCT,
+data(abdom, package = "gamlss.data")
+mod <- gamlss::gamlss(
+    y ~ gamlss::pb(x),
+    sigma.fo =  ~ gamlss::pb(x),
+    family = gamlss.dist::BCT,
     data = abdom,
     method = mixed(1, 20),
-    control = gamlss.control(trace = FALSE)
+    control = gamlss::gamlss.control(trace = FALSE)
 )
 
 test_that("tidy.gamlss work", {

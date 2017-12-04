@@ -1,7 +1,5 @@
 context("boot tidiers")
 
-library(boot)
-
 test_that("boot tidiers work", {
     clotting <- data.frame(
         u = c(5, 10, 15, 20, 30, 40, 60, 80, 100),
@@ -14,10 +12,10 @@ test_that("boot tidiers work", {
     bootfun <- function(d, i) {
         coef(update(g1, data = d[i, ]))
     }
-    bootres <- boot(clotting, bootfun, R = 100)
+    bootres <- boot::boot(clotting, bootfun, R = 100)
     td <- tidy(bootres, conf.int = TRUE)
     
-    bootresw <- boot(clotting, bootfun, R = 100, weights = rep(1 / 9, 9))
+    bootresw <- boot::boot(clotting, bootfun, R = 100, weights = rep(1 / 9, 9))
     tdw <- tidy(bootresw, conf.int = TRUE)
     
     check_tidy(td, exp.row = 2, exp.col = 6)
@@ -29,7 +27,7 @@ test_that("time series bootstrap tidying works", {
         ar.fit <- ar(tsb, order.max = 25)
         c(ar.fit$order, mean(tsb), tsb)
     }
-    lynx.1 <- tsboot(log(lynx), lynx.fun, R = 99, l = 20, orig.t = FALSE)
+    lynx.1 <- boot::tsboot(log(lynx), lynx.fun, R = 99, l = 20, orig.t = FALSE)
     td <- tidy(lynx.1)
     check_tidy(td, exp.col = 2, exp.names = c("estimate", "std.error"))
 })
