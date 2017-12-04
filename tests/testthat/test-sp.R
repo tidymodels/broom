@@ -1,6 +1,7 @@
 context("sp tidiers")
 
 library(sp)
+library(maptools)
 
 test_that("polygon tidiers work", {
     # tidy.Polygon
