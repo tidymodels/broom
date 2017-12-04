@@ -2,6 +2,7 @@ context("sp tidiers")
 
 library(sp)
 library(maptools)
+suppressWarnings(gpclibPermit())
 
 test_that("polygon tidiers work", {
     # tidy.Polygon
