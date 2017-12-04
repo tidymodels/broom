@@ -109,7 +109,7 @@ tidy.multinom <- function(x,
     ret[, exp.col] <- lapply(ret[, exp.col, drop=FALSE], exp)
   }
   
-  ret 
+  fix_data_frame(ret)
 }
 
 #' @rdname multinom_tidiers
