@@ -4,9 +4,6 @@ language: r
 sudo: false
 cache: packages
 
-r_packages:
-  - gpclib
-
 env:
  global:
    - RGL_USE_NULL=TRUE
