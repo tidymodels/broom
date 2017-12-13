@@ -3,16 +3,25 @@
 \name{svd_tidiers}
 \alias{svd_tidiers}
 \alias{tidy_svd}
-\title{Tidying methods for singular value decomposition}
+\alias{augment_svd}
+\title{Tidying methods for (truncated) singular value decomposition}
 \usage{
 tidy_svd(x, matrix = "u", ...)
+
+augment_svd(x, newdata = NULL, ...)
 }
 \arguments{
-\item{x}{list containing d, u, v components, returned from \code{svd}}
+\item{x}{list containing d, u, v components, returned from \code{svd} or
+\code{irlba}}
 
 \item{matrix}{which of the u, d or v matrix to tidy}
 
 \item{...}{Extra arguments (not used)}
+
+\item{newdata}{New data to project into PCA space. If no new data is provided,
+uses original data. Due to the internal function of \code{svd} and \code{irlba}
+it is impossible to recover the original colnames in this case, so it is
+best to always specify \code{newdata}.}
 }
 \value{
 An SVD object contains a decomposition into u, d, and v matrices, such that
@@ -23,31 +32,38 @@ When \code{matrix = "u"}, each observation represents one pair of row and
 principal component, with variables:
   \item{row}{Number of the row in the original data being described}
   \item{PC}{Principal component}
-  \item{loading}{Loading of this principal component for this row}
+  \item{value}{Loading of this principal component for this row}
 
 When \code{matrix = "d"}, each observation represents one principal component,
 with variables:
-  \item{PC}{Principal component}
-  \item{d}{Value in the \code{d} vector}
-  \item{percent}{Percent of variance explained by this PC, which is
-  proportional to $d^2$}
+  \item{\code{PC}}{An integer vector indicating the principal component}
+  \item{\code{std.dev}}{Standard deviation explained by this PC}
+  \item{\code{percent}}{Percentage of variation explained. This will be
+    inaccurate for irlba objects due to the SVD truncation.}
+  \item{\code{cumulative}}{Cumulative percentage of variation explained}
 
 When \code{matrix = "v"}, each observation represents a pair of a principal
 component and a column of the original matrix, with variables:
   \item{column}{Column of original matrix described}
   \item{PC}{Principal component}
   \item{value}{Value of this PC for this column}
+
+Returns the new data projected into PCA space. The 1st coordinate
+  in PCA space is given by the column \code{.fittedPC1}, and so on.
 }
 \description{
 These methods tidy the U, D, and V matrices returned by the
-\code{\link{svd}} function into a tidy format. Because
-\code{svd} returns a list without a class, this function has to be
-called by \code{\link{tidy.list}} when it recognizes a list as an
-SVD object.
+\code{\link{svd}} or \code{\link[irlba]{irlba}} functions into a tidy format.
+Because \code{svd} and \code{irlba} return lists without classes, this function
+has to be called by \code{\link{tidy.list}} when it recognizes a list as an
+SVD or \code{irlba} object.
+}
+\details{
+Note that SVD is only equivalent to PCA on centered data.
 }
 \examples{
 
-mat <- as.matrix(iris[, 1:4])
+mat <- scale(as.matrix(iris[, 1:4]))
 s <- svd(mat)
 
 tidy_u <- tidy(s, matrix = "u")
@@ -68,10 +84,16 @@ ggplot(tidy_d, aes(PC, percent)) +
 
 tidy_u \%>\%
     mutate(Species = iris$Species[row]) \%>\%
-    ggplot(aes(Species, loading)) +
+    ggplot(aes(Species, value)) +
     geom_boxplot() +
     facet_wrap(~ PC, scale = "free_y")
+
+mat <- scale(as.matrix(USJudgeRatings))
+s <- svd(mat)
+
+augment(s, USJudgeRatings[1:5, ])
+
 }
 \seealso{
-\code{\link{svd}}, \code{\link{tidy.list}}
+\code{\link{svd}}, \code{\link[irlba]{irlba}} \code{\link{tidy.list}}
 }

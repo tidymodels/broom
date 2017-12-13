@@ -4,11 +4,14 @@
 \alias{list_tidiers}
 \alias{tidy.list}
 \alias{glance.list}
+\alias{augment.list}
 \title{Tidiers for return values from functions that aren't S3 objects}
 \usage{
 \method{tidy}{list}(x, ...)
 
 \method{glance}{list}(x, ...)
+
+\method{augment}{list}(x, ...)
 }
 \arguments{
 \item{x}{list object}
