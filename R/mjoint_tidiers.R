@@ -1,12 +1,10 @@
 #' Tidying methods for joint models for time-to-event data and multivariate longitudinal data
 #'
-#' These methods tidy the coefficients of joint models for time-to-event data and multivariate
-#' longitudinal data of the \code{mjoint} class from the \code{joineRML} package.
+#' These methods tidy the coefficients of joint models for time-to-event data and multivariate longitudinal data of the \code{mjoint} class from the \code{joineRML} package.
 #'
 #' @param x An object of class \code{mjoint}.
 #'
-#' @return All tidying methods return a \code{data.frame} without rownames.
-#' The structure depends on the method chosen.
+#' @return All tidying methods return a \code{data.frame} without rownames. The structure depends on the method chosen.
 #'
 #' @name mjoint_tidiers
 #'
@@ -15,7 +13,9 @@
 #' # Fit a joint model with bivariate longitudinal outcomes
 #' library(joineRML)
 #' data(heart.valve)
-#' hvd <- heart.valve[!is.na(heart.valve$log.grad) & !is.na(heart.valve$log.lvmi) & heart.valve$Num <= 50, ]
+#' hvd <- heart.valve[!is.na(heart.valve$log.grad) & 
+#'                    !is.na(heart.valve$log.lvmi) & 
+#'                    heart.valve$Num <= 50, ]
 #' fit <- mjoint(
 #'   formLongFixed = list("grad" = log.grad ~ time + sex + hs,
 #'                        "lvmi" = log.lvmi ~ time + sex),
