@@ -58,6 +58,19 @@ if (requireNamespace("joineRML")) {
     tidy(fit2, component = "longitudinal", bootSE = bSE2)
   })
 
+  test_that("augment works on mjoint models with a single longitudinal process", {
+    augment(fit1)
+  })
+
+  test_that("augment works on mjoint models with more than one longitudinal process", {
+    augment(fit2)
+  })
+
+  test_that("augment returns the same output whether we pass 'data' or not", {
+    expect_equal(object = augment(fit1), expected = augment(fit1, data = hvd))
+    expect_equal(object = augment(fit2), expected = augment(fit2, data = hvd))
+  })
+
   test_that("glance works on mjoint models with a single longitudinal process", {
     glance(fit1)
   })

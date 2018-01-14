@@ -3,10 +3,14 @@
 \name{mjoint_tidiers}
 \alias{mjoint_tidiers}
 \alias{tidy.mjoint}
+\alias{augment.mjoint}
 \alias{glance.mjoint}
 \title{Tidying methods for joint models for time-to-event data and multivariate longitudinal data}
 \usage{
-\method{tidy}{mjoint}(x, component = "survival", bootSE = NULL, ...)
+\method{tidy}{mjoint}(x, component = "survival", bootSE = NULL,
+  ci = FALSE, level = 0.95, ...)
+
+\method{augment}{mjoint}(x, data = x$data, ...)
 
 \method{glance}{mjoint}(x, ...)
 }
@@ -15,9 +19,15 @@
 
 \item{component}{Either \code{survival} (the survival component of the model, default) or \code{longitudinal} (the longitudinal component).}
 
-\item{bootSE}{An object of class \code{bootSE} for the corresponding model. If \code{bootSE = NULL} (the default), the function will attempt to utilize approximate standard error estimates (if available) calculated from the empirical information matrix.}
+\item{bootSE}{An object of class \code{bootSE} for the corresponding model. If \code{bootSE = NULL} (the default), the function will use approximate standard error estimates calculated from the empirical information matrix.}
+
+\item{ci}{Include (\code{1 - level})\% confidence intervals? Defaults to \code{FALSE}.}
+
+\item{level}{The confidence level required.}
 
 \item{...}{extra arguments (not used)}
+
+\item{data}{Original data this was fitted on; this will be extracted from \code{x} if not given.}
 }
 \value{
 All tidying methods return a \code{data.frame} without rownames. The structure depends on the method chosen.
@@ -28,6 +38,15 @@ All tidying methods return a \code{data.frame} without rownames. The structure d
   \item{std.error}{Standard error}
   \item{statistic}{Z-statistic}
   \item{p.value}{P-value computed from Z-statistic}
+  \item{conf.low}{The low end of a confidence interval on \code{estimate}, if required}
+  \item{conf.high}{The high end of a confidence interval on \code{estimate}, if required}
+
+\code{augment} returns one row for each original observation, with columns (each prepended by a .) added. Included are the columns:
+  \item{.fitted_j_0}{population-level fitted values for the j-th longitudinal process}
+  \item{.fitted_j_1}{individuals-level fitted values for the j-th longitudinal process}
+  \item{.resid_j_0}{population-level residuals for the j-th longitudinal process}
+  \item{.resid_j_1}{individual-level residuals for the j-th longitudinal process}
+See \code{\link[joineRML]{fitted.mjoint}} and \code{\link[joineRML]{residuals.mjoint}} for more information on the difference between population-level and individual-level fitted values and residuals.
 
 \code{glance} returns one row with the columns
   \item{sigma2_j}{the square root of the estimated residual variance for the j-th longitudinal process}
@@ -43,24 +62,39 @@ These methods tidy the coefficients of joint models for time-to-event data and m
 # Fit a joint model with bivariate longitudinal outcomes
 library(joineRML)
 data(heart.valve)
-hvd <- heart.valve[!is.na(heart.valve$log.grad) & 
-                   !is.na(heart.valve$log.lvmi) & 
-                   heart.valve$Num <= 50, ]
+hvd <- heart.valve[!is.na(heart.valve$log.grad) &
+                       !is.na(heart.valve$log.lvmi) &
+                       heart.valve$num <= 50, ]
 fit <- mjoint(
-  formLongFixed = list("grad" = log.grad ~ time + sex + hs,
-                       "lvmi" = log.lvmi ~ time + sex),
-  formLongRandom = list("grad" = ~ 1 | num,
-                        "lvmi" = ~ time | num),
-  formSurv = Surv(fuyrs, status) ~ age,
-  data = hvd,
-  inits = list("gamma" = c(0.11, 1.51, 0.80)),
-  timeVar = "time")
+    formLongFixed = list(
+        "grad" = log.grad ~ time + sex + hs,
+        "lvmi" = log.lvmi ~ time + sex
+    ),
+    formLongRandom = list(
+        "grad" = ~ 1 | num,
+        "lvmi" = ~ time | num
+    ),
+    formSurv = Surv(fuyrs, status) ~ age,
+    data = hvd,
+    inits = list("gamma" = c(0.11, 1.51, 0.80)),
+    timeVar = "time"
+)
 
 # Extract the survival fixed effects
 tidy(fit)
 
 # Extract the longitudinal fixed effects
 tidy(fit, component = "longitudinal")
+
+# Extract the survival fixed effects with confidence intervals
+tidy(fit, ci = TRUE)
+
+# Extract the survival fixed effects with confidence intervals based on bootstrapped standard errors
+bSE <- bootSE(fit, nboot = 5)
+tidy(fit, bootSE = bSE, ci = TRUE)
+
+# Augment original data with fitted longitudinal values and residuals
+hvd2 <- augment(fit)
 
 # Extract model statistics
 glimpse(fit)
