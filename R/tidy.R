@@ -31,10 +31,12 @@ tidy.NULL <- function(x, ...) {
 
 #' Default tidying method
 #' 
-#' By default, tidy uses \code{as.data.frame} to convert its output. This is 
-#' dangerous, as it may fail with an uninformative error message.
-#' Generally tidy is intended to be used on structured model objects
-#' such as lm or htest for which a specific S3 object exists.
+#' If \code{\link[texreg]{texreg-package}} is available, then by default
+#' tidy attempts to use the \code{\link[texreg]{extract}} method to find 
+#' coefficients. Failing that, tidy uses \code{as.data.frame} to convert 
+#' its output. This is dangerous, as it may fail with an uninformative 
+#' error message. Generally tidy is intended to be used on structured model 
+#' objects such as lm or htest for which a specific S3 object exists.
 #' 
 #' If you know that you want to use \code{as.data.frame} on your untidy
 #' object, just use it directly.
@@ -46,6 +48,16 @@ tidy.NULL <- function(x, ...) {
 #' 
 #' @export
 tidy.default <- function(x, ...) {
+    args <- list(...)
+    if (requireNamespace('texreg', quietly = TRUE)) {
+        extract_method <- methods::selectMethod("extract", signature = class(x))
+        # we check this to make sure texreg doesn't call broom, leading to an 
+        # infinite regress:
+        if (! extract_method@defined@.Data == "ANY") {
+            texreg_obj <- texreg::extract(x)
+            return(texreg_to_tidy(texreg_obj, ...))   
+        }
+    }
     warning(paste("No method for tidying an S3 object of class",
                   class(x), ", using as.data.frame"))
     as.data.frame(x)

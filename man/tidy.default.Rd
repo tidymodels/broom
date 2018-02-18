@@ -15,10 +15,12 @@
 A data frame, from \code{as.data.frame} applied to the input x.
 }
 \description{
-By default, tidy uses \code{as.data.frame} to convert its output. This is 
-dangerous, as it may fail with an uninformative error message.
-Generally tidy is intended to be used on structured model objects
-such as lm or htest for which a specific S3 object exists.
+If \code{\link[texreg]{texreg-package}} is available, then by default
+tidy attempts to use the \code{\link[texreg]{extract}} method to find 
+coefficients. Failing that, tidy uses \code{as.data.frame} to convert 
+its output. This is dangerous, as it may fail with an uninformative 
+error message. Generally tidy is intended to be used on structured model 
+objects such as lm or htest for which a specific S3 object exists.
 }
 \details{
 If you know that you want to use \code{as.data.frame} on your untidy
