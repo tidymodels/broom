@@ -20,6 +20,14 @@ test_that("fallback to texreg works", {
     check_tidy(res, exp.row = 3)
     expect_equal(res$term, c("(Intercept)", "sin(2 * pi * Time)", "cos(2 * pi * Time)"))
 })
+
+test_that("No infinite regress if texreg has no method either", {
+    skip_without_texreg_and()
+    foo <- 1:5
+    class(foo) <- "unknown_to_broom_and_texreg"
+    as.data.frame.unknown_to_broom_and_texreg <- function (x, ...) data.frame(a = 1:5)
+    expect_warning(tidy(foo), "using as.data.frame")
+})
     
 
     
