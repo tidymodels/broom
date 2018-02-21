@@ -50,10 +50,11 @@ tidy.NULL <- function(x, ...) {
 tidy.default <- function(x, ...) {
     args <- list(...)
     if (requireNamespace('texreg', quietly = TRUE)) {
-        extract_method <- methods::selectMethod("extract", signature = class(x))
+        result <- tryCatch(methods::selectMethod("extract", signature = class(x)),
+            error = identity)
         # we check this to make sure texreg doesn't call broom, leading to an 
         # infinite regress:
-        if (! extract_method@defined@.Data == "ANY") {
+        if (class(result) != "try-error" && ! result@defined@.Data == "ANY") {
             texreg_obj <- texreg::extract(x)
             return(texreg_to_tidy(texreg_obj, ...))   
         }
