@@ -2,15 +2,10 @@
 
 context("texreg fallback")
 
-skip_without_texreg_and <- function (pkg = character(0)) {
-    for (p in c("texreg", pkg)) {
-        if (! requireNamespace(p, quietly = TRUE)) skip(
-            paste("Package", p, "not installed, skipping"))
-    }
-}
     
 test_that("fallback to texreg works", {
-    skip_without_texreg_and("nlme")
+    if (! require("texreg")) skip("texreg not installed, skipping")
+    if (! require("nlme")) skip("nlme not installed, skipping")
     data("Ovary", package = "nlme")
     fm1 <- nlme::gls(follicles ~ sin(2*pi*Time) + cos(2*pi*Time), Ovary,
         correlation = nlme::corAR1(form = ~ 1 | Mare))
@@ -20,7 +15,7 @@ test_that("fallback to texreg works", {
 })
 
 test_that("No infinite regress if texreg has no method either", {
-    skip_without_texreg_and()
+    if (! require("texreg")) skip("texreg not installed, skipping")
     foo <- 1:5
     class(foo) <- "unknown_to_broom_and_texreg"
     # suppressWarnings avoids an earlier warning
