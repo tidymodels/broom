@@ -25,9 +25,6 @@ test_that("No infinite regress if texreg has no method either", {
     skip_without_texreg_and()
     foo <- 1:5
     class(foo) <- "unknown_to_broom_and_texreg"
-    as.data.frame.unknown_to_broom_and_texreg <- function (x, ...) data.frame(a = 1:5)
-    expect_warning(tidy(foo), "using as.data.frame")
+    # suppressWarnings avoids an earlier warning
+    expect_error(suppressWarnings(tidy(foo)), "cannot coerce .* to a data.frame")
 })
-    
-
-    
