@@ -3,9 +3,7 @@
 context("texreg fallback")
 
 skip_without_texreg_and <- function (pkg = character(0)) {
-    if (! requireNamespace("texreg", quietly = TRUE)) skip(
-        "texreg not installed, skipping")
-    for (p in pkg) {
+    for (p in c("texreg", pkg)) {
         if (! requireNamespace(p, quietly = TRUE)) skip(
             paste("Package", p, "not installed, skipping"))
     }
