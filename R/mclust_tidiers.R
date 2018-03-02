@@ -65,7 +65,7 @@ tidy.Mclust <- function(x, ...) {
     if(dim(as.matrix(x$parameters$mean))[2] > 1) {
         mean = t(x$parameters$mean)
     }else{
-        mean = as.matrix(x$parameters$mean)
+        mean = t(as.matrix(x$parameters$mean))
     }
     cbind(ret, mean = rbind(matrix(, np-nrow(mean), ncol(mean)), mean))
 }

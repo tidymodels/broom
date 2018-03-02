@@ -60,5 +60,5 @@ glance.orcutt <- function(x, ...) {
     ret$rho <- x$rho
     ret$number.interaction <- x$number.interaction
     
-    ret
+    unrowname(ret)
 }
