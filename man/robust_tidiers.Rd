@@ -40,7 +40,7 @@ On an \code{lmRob} \code{glance} returns a one-row data frame with the following
   \item{sigma}{Residual scale estimate}
   \item{df.residual}{Number of residual degrees of freedom}
 
-On an \code{lmRob} \code{glance} returns a one-row data frame with the following columns:
+On an \code{glmRob} \code{glance} returns a one-row data frame with the following columns:
   \item{deviance}{Robust deviance}
   \item{null.deviance}{Deviance under the null model}
   \item{df.residual}{Number of residual degrees of freedom}

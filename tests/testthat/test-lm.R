@@ -57,3 +57,9 @@ test_that("tidy.lm works with quick", {
     td2 <- tidy(lmfit2, quick = TRUE)
     check_tidy(td2, exp.row = 3, exp.col = 2)
 })
+
+test_that("augment and glance do not support multiple responses", {
+    mlmfit <- lm(cbind(mpg, am) ~ wt + disp, mtcars)
+    expect_error(augment(mlmfit))
+    expect_error(glance(mlmfit))
+})

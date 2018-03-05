@@ -298,9 +298,10 @@ tidy.ts <- function(x, ...) {
 #' @export
 tidy.pairwise.htest <- function(x, ...) {
     data.frame(group1 = rownames(x$p.value)) %>%
-      cbind(as.data.frame(x$p.value)) %>%
-      tidyr::gather(group2, p.value, -group1) %>%
-      stats::na.omit()
+        cbind(as.data.frame(x$p.value)) %>%
+        tidyr::gather(group2, p.value, -group1) %>%
+        stats::na.omit() %>% 
+        unrowname()
 }
 
 

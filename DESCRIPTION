@@ -46,6 +46,7 @@ Suggests:
     lfe,
     Lahman,
     MASS,
+    rgeos,
     sp,
     maps,
     maptools,

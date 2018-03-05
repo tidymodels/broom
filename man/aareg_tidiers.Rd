@@ -26,7 +26,8 @@ the columns
   \item{estimate}{estimate of the slope}
   \item{statistic}{test statistic for coefficient}
   \item{std.error}{standard error of statistic}
-  \item{robust.se}{robust version of standard error estimate}
+  \item{robust.se}{robust version of standard error estimate (only when
+  \code{x} was called with \code{dfbeta = TRUE})}
   \item{z}{z score}
   \item{p.value}{p-value}
 

@@ -9,11 +9,13 @@ if (suppressPackageStartupMessages(require(nlme, quietly = TRUE))) {
     
     test_that("tidy works on nlme/lme fits", {
         td <- tidy(fit)
+        check_tidy(td, exp.col = 4)
     })
     
     test_that("augment works on lme4 fits with or without data", {
         au <- augment(fit)
-        au <- augment(fit, d)
+        aud <- augment(fit, d)
+        expect_equal(dim(au), dim(aud))
     })
     dNAs <- d
     dNAs$y[c(1, 3, 5)] <- NA
@@ -38,19 +40,23 @@ if (suppressPackageStartupMessages(require(nlme, quietly = TRUE))) {
     })
     
     test_that("glance works on nlme fits", {
-        g <- glance(fit)
+        g <- suppressWarnings(glance(fit))
+        check_tidy(g, exp.col = 5)
     })
     
     
-    testFit <- function(fit, data = NULL){
+    testFit <- function(fit, data = NULL) {
         test_that("Pinheiro/Bates fit works", {
             tidy(fit, "fixed")
             tidy(fit)
-            glance(fit)
+            g <- suppressWarnings(glance(fit))
+            check_tidy(g, exp.col = 5)
             if (is.null(data)) {
-                augment(fit)
+                au <- augment(fit)
+                check_tidiness(au)
             } else {
-                augment(fit, data)
+                au <- augment(fit, data)
+                check_tidiness(au)
             }
         })
     }
@@ -68,10 +74,9 @@ if (suppressPackageStartupMessages(require(nlme, quietly = TRUE))) {
     # We can do nothing about this inconsitency but give a useful error message in augment
     fit  = nlme(conc ~ SSfol(Dose, Time, lKe, lKa, lCl), data = Theoph,
                 random = pdDiag(lKe + lKa + lCl ~ 1))
-    test_that(
-        "Fit without data in returned structure works when data are given", {
-            testFit(fit, Theoph)
-        })
+    # Fit without data in returned structure works when data are given
+    testFit(fit, Theoph)
+     
     # When no data are passed, a meaningful message is issued
     expect_error(augment(fit), "explicit")
 }
