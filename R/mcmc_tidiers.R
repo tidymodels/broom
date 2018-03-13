@@ -10,6 +10,8 @@
 #' @param droppars Parameters not to include in the output (such
 #' as log-probability information)
 #' @param rhat,ess (logical) include Rhat and/or effective sample size estimates?
+#' @param index Add index column, remove index from term. For example, 
+#' \code{term a[13]} becomes \code{term a} and \code{index 13}.
 #' @param ... unused
 #' 
 #' @name mcmc_tidiers
@@ -21,13 +23,13 @@
 #' # Using example from "RStan Getting Started"
 #' # https://github.com/stan-dev/rstan/wiki/RStan-Getting-Started
 #' 
-#' model_file <- system.file("extdata", "8schools.stan", package = "broom")
+#' model_file = system.file("extdata", "8schools.stan", package = "broom")
 #' 
-#' schools_dat <- list(J = 8, 
-#'                     y = c(28,  8, -3,  7, -1,  1, 18, 12),
-#'                     sigma = c(15, 10, 16, 11,  9, 11, 10, 18))
+#' schools_dat = list(J = 8, 
+#'                    y = c(28,  8, -3,  7, -1,  1, 18, 12),
+#'                    sigma = c(15, 10, 16, 11,  9, 11, 10, 18))
 #' 
-#' if (requireNamespace("rstan", quietly = TRUE)) {
+#' if (require("rstan", quietly = TRUE)) {
 #'   set.seed(2015)
 #'   rstan_example <- stan(file = model_file, data = schools_dat, 
 #'                         iter = 100, chains = 2)
@@ -35,7 +37,7 @@
 #' 
 #' }
 #' 
-#' if (requireNamespace("rstan", quietly = TRUE)) {
+#' if (require("rstan", quietly = TRUE)) {
 #'   # the object from the above code was saved as rstan_example.rda
 #'   infile <- system.file("extdata", "rstan_example.rda", package = "broom")
 #'   load(infile)
@@ -54,6 +56,9 @@
 #'   ggplot(tds, aes(estimate, term)) +
 #'     geom_errorbarh(aes(xmin = conf.low, xmax = conf.high)) +
 #'     geom_point(aes(color = method))
+#'   
+#'   # Show indices as columns
+#'   tidy(rstan_example, conf.int = TRUE, pars = "theta", index = TRUE)
 #' }
 #' 
 #' 
@@ -67,6 +72,7 @@ tidyMCMC <- function(x,
                      droppars = "lp__",
                      rhat = FALSE,
                      ess = FALSE,
+                     index = FALSE,
                      ...) {
     stan <- inherits(x, "stanfit")
     ss <- if (stan) as.matrix(x, pars = pars) else as.matrix(x)
@@ -82,9 +88,17 @@ tidyMCMC <- function(x,
     m <- switch(estimate.method,
                 mean = colMeans(ss),
                 median = apply(ss, 2, stats::median))
+    # Extract indexes and remove [] if requested
+    if (index){
+      ret <- data.frame(term0 = sub("\\[\\d+\\]", "", names(m)),
+                        index = as.integer(stringr::str_match(names(m), "\\[(\\d+)\\]")[,2]),
+                        estimate = m,
+                        std.error = apply(ss, 2, stats::sd))
 
-    ret <- data.frame(estimate = m,
-                      std.error = apply(ss, 2, stats::sd))
+    } else {
+      ret <- data.frame(estimate = m,
+                        std.error = apply(ss, 2, stats::sd))
+    }
     if (conf.int) {
         levs <- c((1 - conf.level) / 2, (1 + conf.level) / 2)
 
@@ -104,7 +118,8 @@ tidyMCMC <- function(x,
         if (rhat) ret$rhat <- summ[, "Rhat"]
         if (ess) ret$ess <- as.integer(round(summ[, "n_eff"]))
     }
-    return(fix_data_frame(ret))
+    fix_data_frame(ret)
+
 }
 
 

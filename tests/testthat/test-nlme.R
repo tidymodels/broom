@@ -62,7 +62,7 @@ if (suppressPackageStartupMessages(require(nlme, quietly = TRUE))) {
     }
     
     testFit(lme(score ~ Machine, data = Machines, random = ~1 | Worker))
-    testFit(lme(score ~ Machine, data = Machines, random = ~1 | Worker))
+    testFit(lme(score ~ Machine, data = Machines, random = ~1 | Worker, method = "ML"))
     testFit(lme(score ~ Machine, data = Machines, random = ~1 | Worker / Machine))
     testFit(lme(pixel ~ day + day ^ 2, data = Pixel, random = list(Dog = ~day, Side = ~1)))
     testFit(lme(pixel ~ day + day ^ 2 + Side, data = Pixel, 
