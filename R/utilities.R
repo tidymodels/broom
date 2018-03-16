@@ -319,3 +319,19 @@ col_name <- function (x, default = stop("Please supply column name", call. = FAL
         return(x)
     stop("Invalid column specification", call. = FALSE)
 }
+
+
+# function to convert a texreg object to a broom::tidy data frame
+texreg_to_tidy <- function(trobj, ...) {
+    # typical slots: @coef.names, @coef, @se, @pvalues @ci.low, @ci.up
+    # @gof.names @gof @gof.decimal @model.name
+    args <- list(...)
+    ret <- data.frame(term = trobj@coef.names, estimate = trobj@coef, std.error = trobj@se, 
+        p.value = trobj@pvalues, stringsAsFactors = FALSE)
+    if ("conf.int" %in% names(args)) {
+        ret$conf.low = trobj@ci.low
+        ret$conf.high = trobj@ci.up
+    }
+    
+    unrowname(ret)
+}
