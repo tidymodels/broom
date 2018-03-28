@@ -2,8 +2,9 @@
 % Please edit documentation in R/survival_tidiers.R
 \name{aareg_tidiers}
 \alias{aareg_tidiers}
-\alias{glance.aareg}
 \alias{tidy.aareg}
+\alias{aareg_tidiers}
+\alias{glance.aareg}
 \title{Tidiers for aareg objects}
 \usage{
 \method{tidy}{aareg}(x, ...)
@@ -25,7 +26,8 @@ the columns
   \item{estimate}{estimate of the slope}
   \item{statistic}{test statistic for coefficient}
   \item{std.error}{standard error of statistic}
-  \item{robust.se}{robust version of standard error estimate}
+  \item{robust.se}{robust version of standard error estimate (only when
+  \code{x} was called with \code{dfbeta = TRUE})}
   \item{z}{z score}
   \item{p.value}{p-value}
 
@@ -47,4 +49,3 @@ if (require("survival", quietly = TRUE)) {
 }
 
 }
-

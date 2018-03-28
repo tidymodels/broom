@@ -1,8 +1,8 @@
 Package: broom
 Type: Package
 Title: Convert Statistical Analysis Objects into Tidy Data Frames
-Version: 0.4.1.9000
-Date: 2016-06-24
+Version: 0.4.4
+Date: 2018-03-12
 Authors@R: c(
     person("David", "Robinson", email = "admiral.david@gmail.com", role = c("aut", "cre")),
     person("Matthieu", "Gomez", email = "mattg@princeton.edu", role = "ctb"),
@@ -18,8 +18,8 @@ Authors@R: c(
     person("Gavin", "Simpson", email = "ucfagls@gmail.com", role = "ctb"),
     person("Jens", "Preussner", email = " jens.preussner@mpi-bn.mpg.de", role = "ctb"),
     person("Jay", "Hesselberth", email = "jay.hesselberth@gmail.com", role = "ctb"),
-    person("Hadley", "Wickham", email = "hadley@rstudio.com", role = "ctb")
-    )
+    person("Hadley", "Wickham", email = "hadley@rstudio.com", role = "ctb"),
+    person("Matthew", "Lincoln", email = "matthew.d.lincoln@gmail.com", role = "ctb"))
 Maintainer: David Robinson <admiral.david@gmail.com>
 Description: Convert statistical analysis objects from R into tidy data frames,
     so that they can more easily be combined, reshaped and otherwise processed
@@ -46,6 +46,7 @@ Suggests:
     lfe,
     Lahman,
     MASS,
+    rgeos,
     sp,
     maps,
     maptools,
@@ -71,6 +72,7 @@ Suggests:
     gamlss,
     rstan,
     rstanarm,
+    brms,
     coda,
     gmm,
     Matrix,
@@ -83,9 +85,16 @@ Suggests:
     mclust,
     covr,
     lsmeans,
-    betareg
-URL: http://github.com/dgrtwo/broom
-BugReports: http://github.com/dgrtwo/broom/issues
+    emmeans,
+    betareg,
+    robust,
+    akima,
+    AER,
+    muhaz,
+    speedglm,
+    tibble
+URL: http://github.com/tidyverse/broom
+BugReports: http://github.com/tidyverse/broom/issues
 VignetteBuilder: knitr
 License: MIT + file LICENSE
-RoxygenNote: 5.0.1
+RoxygenNote: 6.0.1

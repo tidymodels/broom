@@ -1,10 +1,12 @@
 broom: let's tidy up a bit
 =====================
 
-[![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/broom)](http://cran.r-project.org/package=broom)
-[![Travis-CI Build Status](https://travis-ci.org/dgrtwo/broom.svg?branch=master)](https://travis-ci.org/dgrtwo/broom)
-[![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/dgrtwo/broom?branch=master&svg=true)](https://ci.appveyor.com/project/dgrtwo/broom)
-[![Coverage Status](https://img.shields.io/codecov/c/github/dgrtwo/broom/master.svg)](https://codecov.io/github/dgrtwo/broom?branch=master)
+
+
+[![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/broom)](https://CRAN.R-project.org/package=broom)
+[![Travis-CI Build Status](https://travis-ci.org/tidyverse/broom.svg?branch=master)](https://travis-ci.org/tidyverse/broom)
+[![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/tidyverse/broom?branch=master&svg=true)](https://ci.appveyor.com/project/tidyverse/broom)
+[![Coverage Status](https://img.shields.io/codecov/c/github/tidyverse/broom/master.svg)](https://codecov.io/github/tidyverse/broom?branch=master)
 
 The broom package takes the messy output of built-in functions in R, such as `lm`, `nls`, or `t.test`, and turns them into tidy data frames.
 
@@ -14,11 +16,9 @@ The concept of "tidy data", [as introduced by Hadley Wickham](http://www.jstatso
 
 broom is an attempt to bridge the gap from untidy outputs of predictions and estimations to the tidy data we want to work with. It centers around three S3 methods, each of which take common objects produced by R statistical functions (`lm`, `t.test`, `nls`, etc) and convert them into a data frame. broom is particularly designed to work with Hadley's [dplyr](https://github.com/hadley/dplyr) package (see the "broom and dplyr" vignette for more).
 
-broom should be distinguished from packages like [reshape2](http://cran.r-project.org/web/packages/reshape2/reshape2.pdf) and [tidyr](https://github.com/hadley/tidyr), which rearrange and reshape data frames into different forms. Those packages perform critical tasks in tidy data analysis but focus on manipulating data frames in one specific format into another. In contrast, broom is designed to take format that is *not* in a data frame (sometimes not anywhere close) and convert it to a tidy data frame.
+broom should be distinguished from packages like [reshape2](https://CRAN.R-project.org/package=reshape2) and [tidyr](https://CRAN.R-project.org/package=tidyr), which rearrange and reshape data frames into different forms. Those packages perform critical tasks in tidy data analysis but focus on manipulating data frames in one specific format into another. In contrast, broom is designed to take format that is *not* in a data frame (sometimes not anywhere close) and convert it to a tidy data frame.
 
-Tidying model outputs is not an exact science, and it's based on a judgment of the kinds of values a data scientist typically wants out of a tidy analysis (for instance, estimates, test statistics, and p-values). You may lose some of the information in the original object that you wanted, or keep more information than you need. If you think the tidy output for a model should be changed, or if you're missing a tidying function for an S3 class that you'd like, I strongly encourage you to [open an issue](http://github.com/dgrtwo/broom/issues) or a pull request.
-
-[![Travis-CI Build Status](https://travis-ci.org/dgrtwo/broom.svg?branch=master)](https://travis-ci.org/dgrtwo/broom)
+Tidying model outputs is not an exact science, and it's based on a judgment of the kinds of values a data scientist typically wants out of a tidy analysis (for instance, estimates, test statistics, and p-values). You may lose some of the information in the original object that you wanted, or keep more information than you need. If you think the tidy output for a model should be changed, or if you're missing a tidying function for an S3 class that you'd like, I strongly encourage you to [open an issue](http://github.com/tidyverse/broom/issues) or a pull request.
 
 Installation and Documentation
 ------------
@@ -31,7 +31,7 @@ You can also install the development version of the broom package using [devtool
 
 ```
 library(devtools)
-install_github("dgrtwo/broom")
+install_github("tidyverse/broom")
 ```
 
 For additional documentation, please browse the vignettes:
@@ -360,14 +360,17 @@ A full list of the `tidy`, `augment` and `glance` methods available for each cla
 |Class                    |`tidy` |`glance` |`augment` |
 |:------------------------|:------|:--------|:---------|
 |aareg                    |x      |x        |          |
+|acf                      |x      |         |          |
 |anova                    |x      |         |          |
 |aov                      |x      |         |          |
 |aovlist                  |x      |         |          |
 |Arima                    |x      |x        |          |
+|betareg                  |x      |x        |x         |
 |biglm                    |x      |x        |          |
 |binDesign                |x      |x        |          |
 |binWidth                 |x      |         |          |
 |boot                     |x      |         |          |
+|brmsfit                  |x      |         |          |
 |btergm                   |x      |         |          |
 |cch                      |x      |x        |          |
 |character                |x      |         |          |
@@ -391,6 +394,7 @@ A full list of the `tidy`, `augment` and `glance` methods available for each cla
 |geeglm                   |x      |         |          |
 |glht                     |x      |         |          |
 |glmnet                   |x      |x        |          |
+|glmRob                   |x      |x        |x         |
 |gmm                      |x      |x        |          |
 |htest                    |x      |x        |          |
 |kappa                    |x      |         |          |
@@ -402,7 +406,9 @@ A full list of the `tidy`, `augment` and `glance` methods available for each cla
 |lm                       |x      |x        |x         |
 |lme                      |x      |x        |x         |
 |lmodel2                  |x      |x        |          |
+|lmRob                    |x      |x        |x         |
 |logical                  |x      |         |          |
+|lsmobj                   |x      |         |          |
 |manova                   |x      |         |          |
 |map                      |x      |         |          |
 |matrix                   |x      |x        |          |
@@ -423,6 +429,7 @@ A full list of the `tidy`, `augment` and `glance` methods available for each cla
 |prcomp                   |x      |         |x         |
 |pyears                   |x      |x        |          |
 |rcorr                    |x      |         |          |
+|ref.grid                 |x      |         |          |
 |ridgelm                  |x      |x        |          |
 |rjags                    |x      |         |          |
 |roc                      |x      |         |          |

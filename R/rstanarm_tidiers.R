@@ -14,22 +14,31 @@
 #' @param x Fitted model object from the \pkg{rstanarm} package. See 
 #'   \code{\link[rstanarm]{stanreg-objects}}.
 #' @examples
-#' if (require(rstanarm)) {
-#'  fit <- stan_glmer(mpg ~ wt + (1|cyl) + (1+wt|gear), data = mtcars, 
-#'                    iter = 500, chains = 2)
-#'  tidy(fit, intervals = TRUE, prob = 0.5)
-#'  tidy(fit, parameters = "hierarchical")
-#'  tidy(fit, parameters = "varying")
-#'  glance(fit, looic = TRUE, cores = 1)
+#' 
+#' \dontrun{
+#' fit <- stan_glmer(mpg ~ wt + (1|cyl) + (1+wt|gear), data = mtcars, 
+#'                   iter = 300, chains = 2)
+#' # non-varying ("population") parameters
+#' tidy(fit, intervals = TRUE, prob = 0.5)
+#' 
+#' # hierarchical sd & correlation parameters
+#' tidy(fit, parameters = "hierarchical")
+#' 
+#' # group-specific deviations from "population" parameters
+#' tidy(fit, parameters = "varying")
+#' 
+#' # glance method
+#' glance(fit)
+#' glance(fit, looic = TRUE, cores = 1)
 #' }
 #'  
 NULL
 
 
 #' @rdname rstanarm_tidiers
-#' @param parameters One of \code{"non-varying"}, \code{"varying"}, or 
-#'   \code{"hierarchical"} (can be abbreviated). See the Value section for 
-#'   details.
+#' @param parameters One or more of \code{"non-varying"}, \code{"varying"}, 
+#'   \code{"hierarchical"}, \code{"auxiliary"} (can be abbreviated). See the
+#'   Value section for details.
 #' @param prob See \code{\link[rstanarm]{posterior_interval}}.
 #' @param intervals If \code{TRUE} columns for the lower and upper bounds of the
 #'   \code{100*prob}\% posterior uncertainty intervals are included. See 
@@ -45,44 +54,84 @@ NULL
 #' \code{\link[rstanarm]{print.stanreg}} for more details.}
 #' 
 #' For models with group-specific parameters (e.g., models fit with 
-#' \code{\link[rstanarm]{stan_glmer}}), setting \code{parameters="varying"}
+#' \code{\link[rstanarm]{stan_glmer}}), setting \code{parameters="varying"} 
 #' selects the group-level parameters instead of the non-varying regression 
 #' coefficients. Addtional columns are added indicating the \code{level} and 
-#' \code{group}. Specifying \code{parameters="hierarchical"} selects the
-#' standard deviations and (for certain models) correlations of the group-level
+#' \code{group}. Specifying \code{parameters="hierarchical"} selects the 
+#' standard deviations and (for certain models) correlations of the group-level 
 #' parameters.
 #' 
-#' If \code{intervals=TRUE}, columns for the \code{lower} and 
-#' \code{upper} values of the posterior intervals computed with 
+#' Setting \code{parameters="auxiliary"} will select parameters other than those
+#' included by the other options. The particular parameters depend on which 
+#' \pkg{rstanarm} modeling function was used to fit the model. For example, for 
+#' models fit using \code{\link[rstanarm]{stan_glm.nb}} the overdispersion 
+#' parameter is included if \code{parameters="aux"}, for 
+#' \code{\link[rstanarm]{stan_lm}} the auxiliary parameters include the residual
+#' SD, R^2, and log(fit_ratio), etc.
+#' 
+#' If \code{intervals=TRUE}, columns for the \code{lower} and \code{upper} 
+#' values of the posterior intervals computed with 
 #' \code{\link[rstanarm]{posterior_interval}} are also included.
 #' 
 #' @export
 tidy.stanreg <- function(x, 
-                         parameters = c("non-varying", "varying", "hierarchical"), 
+                         parameters = "non-varying", 
                          intervals = FALSE, 
                          prob = 0.9,
                          ...) {
     
-    parameters <- match.arg(parameters)
-    if (!inherits(x, "lmerMod") && parameters != "non-varying")
-        stop("Only non-varying parameters available for this model.")
+    parameters <-
+        match.arg(parameters, several.ok = TRUE,
+                  choices = c("non-varying", "varying", 
+                              "hierarchical", "auxiliary"))
+    if (any(parameters %in% c("varying", "hierarchical"))) {
+      if (!inherits(x, "lmerMod"))
+        stop("Model does not have 'varying' or 'hierarchical' parameters.")
+    }
     
     nn <- c("estimate", "std.error")
     ret_list <- list()
-    if (parameters == "non-varying") {
+    if ("non-varying" %in% parameters) {
+        nv_pars <- names(rstanarm::fixef(x))
         ret <- cbind(rstanarm::fixef(x), 
-                     rstanarm::se(x)[names(rstanarm::fixef(x))])
+                     rstanarm::se(x)[nv_pars])
+        
+        if (inherits(x, "polr")) {
+            # also include cutpoints
+            cp <- x$zeta
+            se_cp <- apply(as.matrix(x, pars = names(cp)), 2, stats::mad)
+            ret <- rbind(ret, cbind(cp, se_cp))
+            nv_pars <- c(nv_pars, names(cp))
+        }
         
         if (intervals) {
-            cifix <- rstanarm::posterior_interval(x, pars = names(rstanarm::fixef(x)), 
-                                                  prob = prob)
-            ret <- data.frame(ret,cifix)
+            cifix <- 
+                rstanarm::posterior_interval(
+                  object = x, 
+                  pars = nv_pars, 
+                  prob = prob
+                )
+            ret <- data.frame(ret, cifix)
+            nn <- c(nn, "lower", "upper")
+        }
+        ret_list$non_varying <- fix_data_frame(ret, newnames = nn)
+    }
+    if ("auxiliary" %in% parameters) {
+        nn <- c("estimate", "std.error")
+        parnames <- rownames(x$stan_summary)
+        auxpars <- c("sigma", "shape", "overdispersion", "R2", "log-fit_ratio", 
+                     grep("mean_PPD", parnames, value = TRUE))
+        auxpars <- auxpars[which(auxpars %in% parnames)]
+        ret <- summary(x, pars = auxpars)[, c("50%", "sd"), drop = FALSE]
+        if (intervals) {
+            ints <- rstanarm::posterior_interval(x, pars = auxpars, prob = prob)
+            ret <- data.frame(ret, ints)
             nn <- c(nn,"lower","upper")
         }
-        ret_list$non_varying <-
+        ret_list$auxiliary <-
             fix_data_frame(ret, newnames = nn)
     }
-    if (parameters == "hierarchical") {
+    if ("hierarchical" %in% parameters) {
         ret <- as.data.frame(rstanarm::VarCorr(x))
         ret[] <- lapply(ret, function(x) if (is.factor(x))
             as.character(x) else x)
@@ -104,7 +153,7 @@ tidy.stanreg <- function(x,
                                                 newnames = c("group", "estimate"))
     }
     
-    if (parameters == "varying") {
+    if ("varying" %in% parameters) {
         nn <- c("estimate", "std.error")
         s <- summary(x, pars = "varying")
         ret <- cbind(s[, "50%"], rstanarm::se(x)[rownames(s)])
@@ -137,10 +186,10 @@ tidy.stanreg <- function(x,
 
 #' @rdname rstanarm_tidiers
 #' 
-#' @param looic Should the LOO Information Criterion be included? See 
-#'   \code{\link[rstanarm]{loo.stanreg}} for details. Note: for models fit to
-#'   very large data this can be a slow computation.
-#' @param ... For \code{glance}, if \code{looic=TRUE}, optional arguments to
+#' @param looic Should the LOO Information Criterion (and related info) be
+#'   included? See \code{\link[rstanarm]{loo.stanreg}} for details. Note: for
+#'   models fit to very large datasets this can be a slow computation.
+#' @param ... For \code{glance}, if \code{looic=TRUE}, optional arguments to 
 #'   \code{\link[rstanarm]{loo.stanreg}}.
 #' 
 #' @return \code{glance} returns one row with the columns
@@ -148,8 +197,16 @@ tidy.stanreg <- function(x,
 #'   \item{pss}{The posterior sample size (except for models fit using 
 #'   optimization).}
 #'   \item{nobs}{The number of observations used to fit the model.}
-#'   \item{sigma}{The square root of the estimated residual variance.}
-#'   \item{looic}{If \code{looic=TRUE}, the LOO Information Criterion.}
+#'   \item{sigma}{The square root of the estimated residual variance, if
+#'   applicable. If not applicable (e.g., for binomial GLMs), \code{sigma} will
+#'   be given the value \code{1} in the returned object.}
+#'   
+#'   If \code{looic=TRUE}, then the following additional columns are also
+#'   included:
+#'   \item{looic}{The LOO Information Criterion.}
+#'   \item{elpd_loo}{The expected log predictive density (\code{elpd_loo = -2 *
+#'   looic}).}
+#'   \item{p_loo}{The effective number of parameters.}
 #' 
 #' @export
 glance.stanreg <- function(x, looic = FALSE, ...) {
@@ -170,8 +227,8 @@ glance.stanreg <- function(x, looic = FALSE, ...) {
     ret <- data.frame(ret, nobs = stats::nobs(x), sigma = sigma(x))
     if (looic) {
         if (x$algorithm == "sampling") {
-            looic <- rstanarm::loo(x, ...)$looic
-            ret <- data.frame(ret, looic = looic)
+            loo1 <- rstanarm::loo(x, ...)
+            ret <- data.frame(ret, loo1[c("looic", "elpd_loo", "p_loo")])
         } else {
           message("looic only available for models fit using MCMC")  
         }

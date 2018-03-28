@@ -34,4 +34,3 @@ if (require("lmtest", quietly = TRUE)) {
 }
 
 }
-

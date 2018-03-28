@@ -2,8 +2,8 @@
 % Please edit documentation in R/survival_tidiers.R
 \name{cch_tidiers}
 \alias{cch_tidiers}
-\alias{glance.cch}
 \alias{tidy.cch}
+\alias{glance.cch}
 \title{tidiers for case-cohort data}
 \usage{
 \method{tidy}{cch}(x, conf.level = 0.95, ...)
@@ -91,4 +91,3 @@ if (require("survival", quietly = TRUE)) {
 \seealso{
 \link{cch}
 }
-

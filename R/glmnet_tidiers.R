@@ -54,8 +54,8 @@
 #' @param ... extra arguments (not used)
 #' 
 #' @return \code{tidy} produces a data.frame with one row per combination of
-#' coefficient (including the intercept) and value of lambda, with the
-#' columns:
+#' coefficient (including the intercept) and value of lambda for which the estimate
+#' is nonzero, with the columns:
 #'   \item{term}{coefficient name (V1...VN by default, along with
 #'   "(Intercept)")}
 #'   \item{step}{which step of lambda choices was used}
@@ -69,7 +69,7 @@
 #' 
 #' @export
 tidy.glmnet <- function(x, ...) {
-    beta <- stats::coef(x)
+    beta <- glmnet::coef.glmnet(x)
     
     if (inherits(x, "multnet")) {
         beta_d <- plyr::ldply(beta, function(b) {
@@ -77,15 +77,15 @@ tidy.glmnet <- function(x, ...) {
         }, .id = "class")
         ret <- beta_d %>% tidyr::gather(step, estimate, -term, -class)
     } else {
-        beta_d <- fix_data_frame(as.matrix(beta), newnames=1:ncol(beta), newcol = "term")
-        ret <- beta_d %>% tidyr::gather(step, estimate, -term)
+        beta_d <- fix_data_frame(as.matrix(beta), newnames = 1:ncol(beta), newcol = "term")
+        ret <- tidyr::gather(beta_d, step, estimate, -term)
     }
     # add values specific to each step
-    ret <- ret %>%
+    ret %>%
         mutate(step = as.numeric(step),
                lambda = x$lambda[step],
-               dev.ratio = x$dev.ratio[step])
-    ret
+               dev.ratio = x$dev.ratio[step]) %>%
+        filter(estimate != 0)
 }
 
 

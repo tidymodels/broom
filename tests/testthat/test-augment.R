@@ -36,3 +36,16 @@ if (require("survival", quietly = TRUE)) {
     }
     check_augment_NAs(survreg_func, ovarian, "ecog.ps", "rx")
 }
+
+context("NULL and default augment")
+
+test_that("NULL augment returns NULL", {
+    expect_length(augment(NULL), 0)
+})
+
+test_that("default augment throws error for unimplemented methods", {
+    expect_error(augment(TRUE))
+    expect_error(augment(1))
+    expect_error(augment(1L))
+    expect_error(augment("a"))
+})
