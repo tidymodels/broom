@@ -228,7 +228,12 @@ glance.stanreg <- function(x, looic = FALSE, ...) {
     if (looic) {
         if (x$algorithm == "sampling") {
             loo1 <- rstanarm::loo(x, ...)
-            ret <- data.frame(ret, loo1[c("looic", "elpd_loo", "p_loo")])
+            if (utils::packageVersion("rstanarm") < "2.17.3") {
+                ret <- data.frame(ret, loo1[c("looic", "elpd_loo", "p_loo")])
+            } else {
+                loo_ests <- t(loo1$estimates[c("looic", "elpd_loo", "p_loo"), "Estimate"])
+                ret <- data.frame(ret, loo_ests)
+            }
         } else {
           message("looic only available for models fit using MCMC")  
         }
