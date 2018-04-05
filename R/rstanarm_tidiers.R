@@ -228,7 +228,7 @@ glance.stanreg <- function(x, looic = FALSE, ...) {
     if (looic) {
         if (x$algorithm == "sampling") {
             loo1 <- rstanarm::loo(x, ...)
-            if (utils::packageVersion("rstanarm") < "2.17.3") {
+            if (utils::packageVersion("rstanarm") <= "2.17.3") {
                 ret <- data.frame(ret, loo1[c("looic", "elpd_loo", "p_loo")])
             } else {
                 loo_ests <- t(loo1$estimates[c("looic", "elpd_loo", "p_loo"), "Estimate"])
