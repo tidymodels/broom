@@ -89,6 +89,7 @@ Suggests:
     betareg,
     robust,
     akima,
+    cluster
     AER,
     muhaz,
     speedglm,
