@@ -18,7 +18,7 @@
 augment <- function(x, ...) UseMethod("augment")
 
 #' @export
-augment.NULL <- function(x, ...) NULL
+augment.NULL <- function(x, ...) data.frame()
 
 #' @export
 augment.default <- function(x, ...) {   

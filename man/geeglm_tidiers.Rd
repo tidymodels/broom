@@ -72,4 +72,3 @@ if (require('geepack')) {
 }
 
 }
-

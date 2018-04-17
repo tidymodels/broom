@@ -47,4 +47,3 @@ if (require("binGroup", quietly = TRUE)) {
 }
 
 }
-

@@ -84,11 +84,11 @@ insert_NAs <- function(x, original) {
 augment_columns <- function(x, data, newdata, type, type.predict = type,
                             type.residuals = type, se.fit = TRUE, ...) {
     notNAs <- function(o) if (is.null(o) || all(is.na(o))) { NULL } else {o}
-    residuals0 <- failwith(NULL, stats::residuals, TRUE)
-    influence0 <- failwith(NULL, stats::influence, TRUE)
-    cooks.distance0 <- failwith(NULL, stats::cooks.distance, TRUE)
-    rstandard0 <- failwith(NULL, stats::rstandard, TRUE)
-    predict0 <- failwith(NULL, stats::predict, TRUE)
+    residuals0 <- purrr::possibly(stats::residuals, NULL)
+    influence0 <- purrr::possibly(stats::influence, NULL)
+    cooks.distance0 <- purrr::possibly(stats::cooks.distance, NULL)
+    rstandard0 <- purrr::possibly(stats::rstandard, NULL)
+    predict0 <- purrr::possibly(stats::predict, NULL)
     
     # call predict with arguments
     args <- list(x)
@@ -272,24 +272,38 @@ confint_tidy <- function(x, conf.level = .95, func = stats::confint, ...) {
 #' Expand a dataset to include all factorial combinations of one or more
 #' variables
 #'
-#' @param .data a tbl
+#' This function is deprecated: use \code{tidyr::crossing} instead
+#'
+#' @param df a tbl
 #' @param ... arguments
 #' @param stringsAsFactors logical specifying if character vectors are
 #' converted to factors.
 #'
-#' @return A tbl, grouped by the arguments in \code{...}
+#' @return A tbl
 #'
 #' @import dplyr
+#' @import tidyr
 #'
 #' @export
-inflate <- function(.data, ..., stringsAsFactors = FALSE) {
+inflate <- function(df, ..., stringsAsFactors = FALSE) {
+    .Deprecated("tidyr::crossing")
+    
     ret <- expand.grid(..., stringsAsFactors = stringsAsFactors)
-    ret <- ret %>% group_by_(.dots = colnames(ret)) %>% do(.data)
-    if (!is.null(groups(.data))) {
-        ret <- ret %>% group_by_(.dots = groups(.data), add = TRUE)
+    
+    ret <- ret %>%
+        group_by_all() %>%
+        do(data = df) %>%
+        ungroup() %>%
+        tidyr::unnest(data)
+    
+    if (!is.null(groups(df))) {
+        ret <- ret %>%
+            group_by_all()
     }
+    
     ret
 }
+
 
 
 # utility function from tidyr::col_name

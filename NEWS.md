@@ -1,4 +1,26 @@
-broom 0.4.1.9000
+broom 0.4.4
+-----------
+
+* Fixed gam tidiers to work with "Gam" objects, due to an update in gam 1.15. This fixes failing CRAN tests
+* Improved test coverage (thanks to #267 from Derek Chiu)
+
+broom 0.4.3
+-----------
+
+* Changed the deprecated `dplyr::failwith` to `purrr::possibly`
+* `augment` and `glance` on NULLs now return an empty data frame
+* Deprecated the `inflate()` function in favor of `tidyr::crossing`
+* Fixed confidence intervals in the gmm tidier (thanks to #242 from David Hugh-Jones)
+* Fixed a bug in bootstrap tidiers (thanks to #167 from Jeremy Biesanz)
+* Fixed tidy.lm with `quick = TRUE` to return terms as character rather than factor (thanks to #191 from Matteo Sostero)
+* Added tidiers for `ivreg` objects from the AER package (thanks to #245 from David Hugh-Jones)
+* Added tidiers for `survdiff` objects from the survival package (thanks to #147 from Michał Bojanowski)
+* Added tidiers for `emmeans` from the emmeans package (thanks to #252 from Matthew Kay)
+* Added tidiers for `speedlm` and `speedglm` from the speedglm package (thanks to #248 from David Hugh-Jones)
+* Added tidiers for `muhaz` objects from the muhaz package (thanks to #251 from Andreas Bender)
+* Added tidiers for `decompose` and `stl` objects from stats (thanks to #165 from Aaron Jacobs)
+
+broom 0.4.2
 -----------
 
 * Added tidiers for `lsmobj` and `ref.grid` objects from the lsmeans package
