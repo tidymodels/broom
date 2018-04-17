@@ -92,7 +92,8 @@ Suggests:
     AER,
     muhaz,
     speedglm,
-    tibble
+    tibble,
+    cluster
 URL: http://github.com/tidyverse/broom
 BugReports: http://github.com/tidyverse/broom/issues
 VignetteBuilder: knitr

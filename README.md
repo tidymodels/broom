@@ -421,6 +421,7 @@ A full list of the `tidy`, `augment` and `glance` methods available for each cla
 |NULL                     |x      |x        |x         |
 |numeric                  |x      |         |          |
 |pairwise.htest           |x      |         |          |
+|pam                      |x      |x        |x         |
 |plm                      |x      |x        |x         |
 |poLCA                    |x      |x        |x         |
 |Polygon                  |x      |         |          |
