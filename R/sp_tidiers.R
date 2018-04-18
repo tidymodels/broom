@@ -8,7 +8,7 @@
 #'
 #' @param x \code{SpatialPolygonsDataFrame} to convert into a dataframe.
 #' @param region name of variable used to split up regions
-#' @param ... not used by this method
+#' @param ... List of variables to keep from 'SpatialPolygonsDataFrame' as comma separated list of unquoted expressions (same syntax as \link[dplyr]{select}).
 #' 
 #' @name sp_tidiers
 #' 
@@ -39,6 +39,15 @@ tidy.SpatialPolygonsDataFrame <- function(x, region = NULL, ...) {
         unioned <- maptools::unionSpatialPolygons(cp, attr[, region])
         coords <- tidy(unioned)
         coords$order <- 1:nrow(coords)
+        
+        # correct class of id column
+        if(class(coords[,"id"]) != class(attr[, region]))
+        	coords[,"id"] <- attr[match(coords[,"id"], as.character(attr[, region])), region]
+        
+        # join with data from SpatialPolygonsDataFrame
+        attr <- attr %>% dplyr::rename_(.dots = list(.id = region)) %>% dplyr::select(.id, ...)
+        if(ncol(attr) > 1)
+            coords <- coords %>% dplyr::left_join(attr, by = c("id" = ".id"))
     }
     coords
 }
