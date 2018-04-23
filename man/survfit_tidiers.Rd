@@ -26,8 +26,8 @@ structure depends on the method chosen.
   \item{n.censor}{number of censored events}
   \item{estimate}{estimate of survival or cumulative incidence rate when multistate}
   \item{std.error}{standard error of estimate}
-  \item{conf.high}{upper end of confidence interval}
-  \item{conf.low}{lower end of confidence interval}
+  \item{conf.low}{lower end of confidence interval (if present in \code{x})}
+  \item{conf.high}{upper end of confidence interval (if present in \code{x})}
   \item{state}{state if multistate survfit object inputted}
   \item{strata}{strata if stratified survfit object inputted}
 
@@ -40,8 +40,8 @@ displayed by \code{\link{print.survfit}}
   \item{rmean}{Restricted mean (see \link[survival]{print.survfit})}
   \item{rmean.std.error}{Restricted mean standard error}
   \item{median}{median survival}
-  \item{conf.low}{lower end of confidence interval on median}
-  \item{conf.high}{upper end of confidence interval on median}
+  \item{conf.low}{lower end of confidence interval on median (if present in \code{x})}
+  \item{conf.high}{upper end of confidence interval on median (if present in \code{x})}
 }
 \description{
 Construct tidied data frames showing survival curves over time.

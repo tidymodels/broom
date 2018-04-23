@@ -385,8 +385,8 @@ glance.coxph <- function(x, ...) {
 #'   \item{n.censor}{number of censored events}
 #'   \item{estimate}{estimate of survival or cumulative incidence rate when multistate}
 #'   \item{std.error}{standard error of estimate}
-#'   \item{conf.high}{upper end of confidence interval}
-#'   \item{conf.low}{lower end of confidence interval}
+#'   \item{conf.low}{lower end of confidence interval (if present in \code{x})}
+#'   \item{conf.high}{upper end of confidence interval (if present in \code{x})}
 #'   \item{state}{state if multistate survfit object inputted}
 #'   \item{strata}{strata if stratified survfit object inputted}
 #' @export
@@ -402,10 +402,14 @@ tidy.survfit <- function(x, ...) {
             n.censor = c(x$n.censor), 
             estimate = c(x$pstate),
             std.error = c(x$std.err),
-            conf.high = c(x$upper),
-            conf.low = c(x$lower),
             state = rep(x$states, each = nrow(x$pstate))
         )
+        
+        # add confidence intervals (only) if present
+        if (!is.null(x$lower)) {
+            ret$conf.low <- c(x$lower)
+            ret$conf.high <- c(x$upper)
+        }
         
         ret <- ret[ret$state != "",]
     } else {
@@ -415,10 +419,15 @@ tidy.survfit <- function(x, ...) {
             n.event=x$n.event,
             n.censor = x$n.censor, 
             estimate=x$surv,
-            std.error=x$std.err,
-            conf.high=x$upper,
-            conf.low=x$lower)
+            std.error=x$std.err)
+        
+        # add confidence intervals (only) if present
+        if (!is.null(x$lower)) {
+            ret$conf.low = x$lower
+            ret$conf.high = x$upper
+        }
     }
+  
     # strata are automatically recycled if there are multiple states
     if (!is.null(x$strata)) {
         ret$strata <- rep(names(x$strata), x$strata)
@@ -437,8 +446,8 @@ tidy.survfit <- function(x, ...) {
 #'   \item{rmean}{Restricted mean (see \link[survival]{print.survfit})}
 #'   \item{rmean.std.error}{Restricted mean standard error}
 #'   \item{median}{median survival}
-#'   \item{conf.low}{lower end of confidence interval on median}
-#'   \item{conf.high}{upper end of confidence interval on median}
+#'   \item{conf.low}{lower end of confidence interval on median (if present in \code{x})}
+#'   \item{conf.high}{upper end of confidence interval on median (if present in \code{x})}
 #' 
 #' @export
 glance.survfit <- function(x, ...) {
@@ -457,7 +466,14 @@ glance.survfit <- function(x, ...) {
                                      "*se(rmean)" = "rmean.std.error"),
                                    warn_missing = FALSE)
     
-    colnames(ret)[utils::tail(seq_along(ret), 2)] <- c("conf.low", "conf.high")
+    # if a CI was calculated, the last two elements
+    # contain the CI, but with auto-generated names
+    # (e.g. 0.95LCL and 0.95UCL), so we rename them
+    if (!is.null(x$lower)) {
+        colnames(ret)[utils::tail(seq_along(ret), 2)] <-
+            c("conf.low", "conf.high")
+    }
+    
     ret
 }
 
