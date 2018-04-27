@@ -72,7 +72,7 @@ tidy.btergm <- function(x, conf.level = .95,
     }
     
     if (quick) {
-        co <- fit@coef
+        co <- x@coef
         ret <- data.frame(term = names(co),
                           estimate = trans(unname(co)))
         return(ret)

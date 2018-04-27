@@ -16,7 +16,7 @@
 #'   \item{sigma}{Residual scale estimate}
 #'   \item{df.residual}{Number of residual degrees of freedom}
 #' 
-#' On an \code{lmRob} \code{glance} returns a one-row data frame with the following columns:
+#' On an \code{glmRob} \code{glance} returns a one-row data frame with the following columns:
 #'   \item{deviance}{Robust deviance}
 #'   \item{null.deviance}{Deviance under the null model}
 #'   \item{df.residual}{Number of residual degrees of freedom}
@@ -53,12 +53,11 @@ augment.lmRob <- function(x, ...) {
 #' @export
 glance.lmRob <- function(x, ...) {
     s <- robust::summary.lmRob(x)
-    ret <- data.frame(r.squared = x$r.squared, sigma = s$sigma)
-    
-    if (!is.null(ret$dev)) {
-        ret$deviance <- ret$dev
-    }
-    finish_glance(ret, x)
+    ret <- data.frame(r.squared = x$r.squared,
+                      deviance = x$dev,
+                      sigma = s$sigma,
+                      df.residual = x$df.residual)
+    unrowname(ret)
 }
 
 #' @name robust_tidiers

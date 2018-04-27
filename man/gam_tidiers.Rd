@@ -3,15 +3,21 @@
 \name{gam_tidiers}
 \alias{gam_tidiers}
 \alias{tidy.gam}
+\alias{tidy.Gam}
 \alias{glance.gam}
+\alias{glance.Gam}
 \title{Tidying methods for a generalized additive model (gam)}
 \usage{
 \method{tidy}{gam}(x, parametric = FALSE, ...)
 
+\method{tidy}{Gam}(x, ...)
+
 \method{glance}{gam}(x, ...)
+
+\method{glance}{Gam}(x, ...)
 }
 \arguments{
-\item{x}{gam object}
+\item{x}{gam or Gam object}
 
 \item{parametric}{logical. Return parametric coefficients (\code{TRUE}) or 
 information about smooth terms (\code{FALSE})?}

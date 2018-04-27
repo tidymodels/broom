@@ -7,7 +7,7 @@
 #' 
 #' The "augment" method is handled by \link{lm_tidiers}.
 #'
-#' @param x gam object
+#' @param x gam or Gam object
 #' @param parametric logical. Return parametric coefficients (\code{TRUE}) or 
 #' information about smooth terms (\code{FALSE})?
 #' 
@@ -36,17 +36,16 @@
 #'
 #' @export
 tidy.gam <- function(x, parametric = FALSE, ...) {
-    
     if(is_mgcv(x)){
         tidy_mcgv(x, parametric)
     }else{
-        tidy_gam(x)
+        tidy.Gam(x)
     }
-
 }
 
 is_mgcv <- function(x) {
-    #figure out if gam is from package gam or mcgv
+    # figure out if gam is from package gam or mcgv
+    # As of gam 1.15 this is no longer necessary since gam's class is now named Gam
     mgcv_names <- c("linear.predictors", "converged", "sig2", "edf", "edf1", 
                     "hat", "boundary", "sp", "nsdf", "Ve", "Vp", "rV", 
                     "gcv.ubre", "scale.estimated", "var.summary", 
@@ -55,7 +54,9 @@ is_mgcv <- function(x) {
     
 }
 
-tidy_gam <- function(x) {
+#' @rdname gam_tidiers
+#' @export
+tidy.Gam <- function(x, ...) {
     # return the output of the parametric ANOVA
     tidy(summary(x)$parametric.anova) 
 }
@@ -90,12 +91,14 @@ glance.gam <- function(x, ...) {
     if(is_mgcv(x)){
         glance_mcgv(x)
     }else{
-        glance_gam(x)
+        glance.Gam(x)
     }
 }
 
 
-glance_gam <- function(x) {
+#' @rdname gam_tidiers
+#' @export 
+glance.Gam <- function(x, ...) {
     s <- summary(x)
     ret <- data.frame(df = s$df[1])
     finish_glance(ret, x) 

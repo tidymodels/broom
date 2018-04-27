@@ -3,10 +3,12 @@ if (requireNamespace("gam")) {
     data(kyphosis, package = "gam")
     g <- gam::gam(Kyphosis ~ gam::s(Age,4) + Number, family = binomial, data = kyphosis)
     test_that("tidy works on gam models", {
-        tidy(g)    
+        td <- tidy(g)
+        check_tidy(td, exp.row = 3, exp.col = 6)
     })
     test_that("glance works on gam models", {
-        glance(g)    
+        gl <- glance(g)
+        check_tidiness(gl)
     })
 }
 
@@ -15,11 +17,13 @@ if (requireNamespace("mgcv")) {
     d <- as.data.frame(ChickWeight)
     g <- mgcv::gam(weight ~ s(Time) + factor(Diet), data = d)
     test_that("tidy works on mgcv::gam models", {
-        tidy(g) 
-        tidy(g, parametric = TRUE) 
+        td <- tidy(g)
+        check_tidiness(td)
+        tdp <- tidy(g, parametric = TRUE)
+        check_tidy(tdp, exp.col = 5)
     })
     test_that("glance works on mgcv::gam models", {
-        glance(g)
+        gl <- glance(g)
+        check_tidiness(gl)
     })
 }
-
