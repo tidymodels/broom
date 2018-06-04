@@ -33,18 +33,14 @@ fix_data_frame <- function(x, newnames = NULL, newcol = "term") {
 }
 
 
-#' strip rownames from an object
-#' 
-#' @param x a data frame
+# strip rownames from a data frame
 unrowname <- function(x) {
     rownames(x) <- NULL
     x
 }
 
 
-#' Remove NULL items in a vector or list
-#' 
-#' @param x a vector or list
+# remove NULL items in a vector or list
 compact <- function(x) Filter(Negate(is.null), x)
 
 
