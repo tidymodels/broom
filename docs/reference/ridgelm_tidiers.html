@@ -92,18 +92,22 @@
       
       </header>
 
-      <div class="row">
+<div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Tidying methods for ridgelm objects from the MASS package</h1>
+    <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/ridgelm_tidiers.R'><code>R/ridgelm_tidiers.R</code></a></small>
+    <div class="hidden name"><code>ridgelm_tidiers.Rd</code></div>
     </div>
 
+    <div class="ref-description">
     
     <p>These methods tidies the coefficients of a ridge regression model
 chosen at each value of lambda into a data frame, or constructs
 a one-row glance of the model's choices of lambda (the ridge
 constant)</p>
     
+    </div>
 
     <pre class="usage"><span class='co'># S3 method for ridgelm</span>
 <span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>x</span>, <span class='no'>...</span>)
@@ -111,7 +115,7 @@ constant)</p>
 <span class='co'># S3 method for ridgelm</span>
 <span class='fu'><a href='glance.html'>glance</a></span>(<span class='no'>x</span>, <span class='no'>...</span>)</pre>
     
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
@@ -127,9 +131,8 @@ constant)</p>
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>All tidying methods return a data.frame without rownames, whose
-structure depends on the method chosen.
-
-<code>tidy.ridgelm</code> returns one row for each combination of
+structure depends on the method chosen.</p>
+<p><code>tidy.ridgelm</code> returns one row for each combination of
 choice of lambda and term in the formula, with columns:</p>
 <dt>lambda</dt><dd><p>choice of lambda</p></dd>
   <dt>GCV</dt><dd><p>generalized cross validation value for this lambda</p></dd>
@@ -164,12 +167,12 @@ rather than printed.
 
 <span class='co'># coefficient plot</span>
 <span class='fu'>library</span>(<span class='no'>ggplot2</span>)
-<span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/ggplot'>ggplot</a></span>(<span class='no'>td2</span>, <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/aes'>aes</a></span>(<span class='no'>lambda</span>, <span class='no'>estimate</span>, <span class='kw'>color</span> <span class='kw'>=</span> <span class='no'>term</span>)) + <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/geom_path'>geom_line</a></span>()</div><div class='img'><img src='ridgelm_tidiers-7.png' alt='' width='700' height='432.632880098887' /></div><div class='input'>
+<span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/ggplot'>ggplot</a></span>(<span class='no'>td2</span>, <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/aes'>aes</a></span>(<span class='no'>lambda</span>, <span class='no'>estimate</span>, <span class='kw'>color</span> <span class='kw'>=</span> <span class='no'>term</span>)) + <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/geom_path'>geom_line</a></span>()</div><div class='img'><img src='ridgelm_tidiers-1.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'># GCV plot</span>
-<span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/ggplot'>ggplot</a></span>(<span class='no'>td2</span>, <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/aes'>aes</a></span>(<span class='no'>lambda</span>, <span class='no'>GCV</span>)) + <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/geom_path'>geom_line</a></span>()</div><div class='img'><img src='ridgelm_tidiers-8.png' alt='' width='700' height='432.632880098887' /></div><div class='input'>
+<span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/ggplot'>ggplot</a></span>(<span class='no'>td2</span>, <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/aes'>aes</a></span>(<span class='no'>lambda</span>, <span class='no'>GCV</span>)) + <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/geom_path'>geom_line</a></span>()</div><div class='img'><img src='ridgelm_tidiers-2.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'># add line for the GCV minimizing estimate</span>
 <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/ggplot'>ggplot</a></span>(<span class='no'>td2</span>, <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/aes'>aes</a></span>(<span class='no'>lambda</span>, <span class='no'>GCV</span>)) + <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/geom_path'>geom_line</a></span>() +
-    <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/geom_abline'>geom_vline</a></span>(<span class='kw'>xintercept</span> <span class='kw'>=</span> <span class='no'>g2</span>$<span class='no'>lambdaGCV</span>, <span class='kw'>col</span> <span class='kw'>=</span> <span class='st'>"red"</span>, <span class='kw'>lty</span> <span class='kw'>=</span> <span class='fl'>2</span>)</div><div class='img'><img src='ridgelm_tidiers-9.png' alt='' width='700' height='432.632880098887' /></div></pre>
+    <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/geom_abline'>geom_vline</a></span>(<span class='kw'>xintercept</span> <span class='kw'>=</span> <span class='no'>g2</span>$<span class='no'>lambdaGCV</span>, <span class='kw'>col</span> <span class='kw'>=</span> <span class='st'>"red"</span>, <span class='kw'>lty</span> <span class='kw'>=</span> <span class='fl'>2</span>)</div><div class='img'><img src='ridgelm_tidiers-3.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -191,20 +194,22 @@ rather than printed.
 
 <div class="author">
   <p>Developed by David Robinson.</p>
-  <p>Site built by <a href="http://hadley.github.io/pkgdown/">pkgdown</a>.</p>
+  <p>Site built by <a href="http://pkgdown.r-lib.org">pkgdown</a>.</p>
 </div>
 
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-115082821-1"></script>
 <script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+ window.dataLayer = window.dataLayer || [];
+ function gtag(){dataLayer.push(arguments);}
+ gtag('js', new Date());
 
-  ga('create', 'UA-67989-18', 'auto');
-  ga('send', 'pageview');
+ gtag('config', 'UA-115082821-1');
 </script>
       </footer>
    </div>
 
+  
+
   </body>
 </html>
+

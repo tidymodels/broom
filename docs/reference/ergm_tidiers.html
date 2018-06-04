@@ -92,12 +92,15 @@
       
       </header>
 
-      <div class="row">
+<div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Tidying methods for an exponential random graph model</h1>
+    <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/ergm_tidiers.R'><code>R/ergm_tidiers.R</code></a></small>
+    <div class="hidden name"><code>ergm_tidiers.Rd</code></div>
     </div>
 
+    <div class="ref-description">
     
     <p>These methods tidy the coefficients of an exponential random graph model
 estimated with the <span class="pkg">ergm</span> package into a summary, and construct
@@ -105,6 +108,7 @@ a one-row glance of the model's statistics. The methods should work with
 any model that conforms to the <span class="pkg">ergm</span> class, such as those
 produced from weighted networks by the <span class="pkg">ergm.count</span> package.</p>
     
+    </div>
 
     <pre class="usage"><span class='co'># S3 method for ergm</span>
 <span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>x</span>, <span class='kw'>conf.int</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>conf.level</span> <span class='kw'>=</span> <span class='fl'>0.95</span>,
@@ -113,7 +117,7 @@ produced from weighted networks by the <span class="pkg">ergm.count</span> packa
 <span class='co'># S3 method for ergm</span>
 <span class='fu'><a href='glance.html'>glance</a></span>(<span class='no'>x</span>, <span class='kw'>deviance</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>mcmc</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='no'>...</span>)</pre>
     
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
@@ -158,9 +162,8 @@ estimate the model; defaults to <code>FALSE</code></p></td>
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>All tidying methods return a <code>data.frame</code> without rownames.
-The structure depends on the method chosen.
-
-<code>tidy.ergm</code> returns one row for each coefficient, with five columns:</p>
+The structure depends on the method chosen.</p>
+<p><code>tidy.ergm</code> returns one row for each coefficient, with five columns:</p>
 <dt>term</dt><dd><p>The term in the model being estimated and tested</p></dd>
   <dt>estimate</dt><dd><p>The estimated coefficient</p></dd>
   <dt>std.error</dt><dd><p>The standard error</p></dd>
@@ -204,9 +207,9 @@ Models for Networks. <em>Journal of Statistical Software</em>, 24(3).
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <p><code><a href='http://www.rdocumentation.org/packages/ergm/topics/ergm'>ergm</a></code>, 
+    <div class='dont-index'><p><code><a href='http://www.rdocumentation.org/packages/ergm/topics/ergm'>ergm</a></code>, 
 <code><a href='http://www.rdocumentation.org/packages/ergm/topics/control.ergm'>control.ergm</a></code>, 
-<code><a href='http://www.rdocumentation.org/packages/ergm/topics/summary.ergm'>summary.ergm</a></code></p>
+<code><a href='http://www.rdocumentation.org/packages/ergm/topics/summary.ergm'>summary.ergm</a></code></p></div>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
@@ -262,20 +265,22 @@ Models for Networks. <em>Journal of Statistical Software</em>, 24(3).
 
 <div class="author">
   <p>Developed by David Robinson.</p>
-  <p>Site built by <a href="http://hadley.github.io/pkgdown/">pkgdown</a>.</p>
+  <p>Site built by <a href="http://pkgdown.r-lib.org">pkgdown</a>.</p>
 </div>
 
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-115082821-1"></script>
 <script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+ window.dataLayer = window.dataLayer || [];
+ function gtag(){dataLayer.push(arguments);}
+ gtag('js', new Date());
 
-  ga('create', 'UA-67989-18', 'auto');
-  ga('send', 'pageview');
+ gtag('config', 'UA-115082821-1');
 </script>
       </footer>
    </div>
 
+  
+
   </body>
 </html>
+

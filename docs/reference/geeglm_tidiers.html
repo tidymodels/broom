@@ -92,23 +92,27 @@
       
       </header>
 
-      <div class="row">
+<div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Tidying methods for generalized estimating equations models</h1>
+    <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/geeglm_tidiers.R'><code>R/geeglm_tidiers.R</code></a></small>
+    <div class="hidden name"><code>geeglm_tidiers.Rd</code></div>
     </div>
 
+    <div class="ref-description">
     
     <p>These methods tidy the coefficients of generalized estimating
 equations models of the <code>geeglm</code> class from functions of the
 <code>geepack</code> package.</p>
     
+    </div>
 
     <pre class="usage"><span class='co'># S3 method for geeglm</span>
 <span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>x</span>, <span class='kw'>conf.int</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>conf.level</span> <span class='kw'>=</span> <span class='fl'>0.95</span>,
   <span class='kw'>exponentiate</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>quick</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='no'>...</span>)</pre>
     
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
@@ -144,9 +148,8 @@ not used.</p></td>
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>All tidying methods return a <code>data.frame</code> without rownames.
-The structure depends on the method chosen.
-
-<code>tidy.geeglm</code> returns one row for each coefficient, with five columns:</p>
+The structure depends on the method chosen.</p>
+<p><code>tidy.geeglm</code> returns one row for each coefficient, with five columns:</p>
 <dt>term</dt><dd><p>The term in the linear model being estimated and tested</p></dd>
   <dt>estimate</dt><dd><p>The estimated coefficient</p></dd>
   <dt>std.error</dt><dd><p>The standard error from the GEE model</p></dd>
@@ -182,7 +185,7 @@ missingness in the data beforehand.</p>
     <span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>geefit</span>)
     <span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>geefit</span>, <span class='kw'>quick</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
     <span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>geefit</span>, <span class='kw'>conf.int</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
-}</div><div class='output co'>#&gt;          term    estimate  std.error   statistic   p.value    conf.low
+}</div><div class='output co'>#&gt; <span class='message'>Loading required package: geepack</span></div><div class='output co'>#&gt;          term    estimate  std.error   statistic   p.value    conf.low
 #&gt; 1 (Intercept) 4406.193102 407.454998 116.9412561 0.0000000 3607.595981
 #&gt; 2       Frost    1.686945   2.250175   0.5620426 0.4534384   -2.723317
 #&gt; 3      Murder  -22.664350  31.379406   0.5216715 0.4701295  -84.166856
@@ -214,20 +217,22 @@ missingness in the data beforehand.</p>
 
 <div class="author">
   <p>Developed by David Robinson.</p>
-  <p>Site built by <a href="http://hadley.github.io/pkgdown/">pkgdown</a>.</p>
+  <p>Site built by <a href="http://pkgdown.r-lib.org">pkgdown</a>.</p>
 </div>
 
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-115082821-1"></script>
 <script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+ window.dataLayer = window.dataLayer || [];
+ function gtag(){dataLayer.push(arguments);}
+ gtag('js', new Date());
 
-  ga('create', 'UA-67989-18', 'auto');
-  ga('send', 'pageview');
+ gtag('config', 'UA-115082821-1');
 </script>
       </footer>
    </div>
 
+  
+
   </body>
 </html>
+

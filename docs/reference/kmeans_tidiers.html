@@ -92,12 +92,15 @@
       
       </header>
 
-      <div class="row">
+<div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Tidying methods for kmeans objects</h1>
+    <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/kmeans_tidiers.R'><code>R/kmeans_tidiers.R</code></a></small>
+    <div class="hidden name"><code>kmeans_tidiers.Rd</code></div>
     </div>
 
+    <div class="ref-description">
     
     <p>These methods summarize the results of k-means clustering into three
 tidy forms. <code>tidy</code> describes the center and size of each cluster,
@@ -105,6 +108,7 @@ tidy forms. <code>tidy</code> describes the center and size of each cluster,
 <code>glance</code> summarizes the total within and between sum of squares
 of the clustering.</p>
     
+    </div>
 
     <pre class="usage"><span class='co'># S3 method for kmeans</span>
 <span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>x</span>, <span class='kw'>col.names</span> <span class='kw'>=</span> <span class='fu'>paste0</span>(<span class='st'>"x"</span>, <span class='fl'>1</span>:<span class='fu'>ncol</span>(<span class='no'>x</span>$<span class='no'>centers</span>)), <span class='no'>...</span>)
@@ -115,7 +119,7 @@ of the clustering.</p>
 <span class='co'># S3 method for kmeans</span>
 <span class='fu'><a href='glance.html'>glance</a></span>(<span class='no'>x</span>, <span class='no'>...</span>)</pre>
     
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
@@ -140,9 +144,8 @@ Defaults to <code>x1, x2...</code></p></td>
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>All tidying methods return a <code>data.frame</code> without rownames.
-The structure depends on the method chosen.
-
-<code>tidy</code> returns one row per cluster, with one column for each
+The structure depends on the method chosen.</p>
+<p><code>tidy</code> returns one row per cluster, with one column for each
 dimension in the data describing the center, followed by</p>
 <dt>size</dt><dd><p>The size of each cluster</p></dd>
   <dt>withinss</dt><dd><p>The within-cluster sum of squares</p></dd>
@@ -160,7 +163,7 @@ glance returns a one-row data.frame with the columns
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <p><code>kmeans</code></p>
+    <div class='dont-index'><p><code>kmeans</code></p></div>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
@@ -188,7 +191,7 @@ glance returns a one-row data.frame with the columns
 #&gt; 1 3771.337     541.8043  3229.532    2</div><div class='input'>
 <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/ggplot'>ggplot</a></span>(<span class='fu'><a href='augment.html'>augment</a></span>(<span class='no'>k</span>, <span class='no'>points</span>), <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/aes'>aes</a></span>(<span class='no'>x1</span>, <span class='no'>x2</span>)) +
     <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/geom_point'>geom_point</a></span>(<span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/aes'>aes</a></span>(<span class='kw'>color</span> <span class='kw'>=</span> <span class='no'>.cluster</span>)) +
-    <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/geom_text'>geom_text</a></span>(<span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/aes'>aes</a></span>(<span class='kw'>label</span> <span class='kw'>=</span> <span class='no'>cluster</span>), <span class='kw'>data</span> <span class='kw'>=</span> <span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>k</span>), <span class='kw'>size</span> <span class='kw'>=</span> <span class='fl'>10</span>)</div><div class='img'><img src='kmeans_tidiers-3.png' alt='' width='700' height='432.632880098887' /></div><div class='input'>
+    <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/geom_text'>geom_text</a></span>(<span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/aes'>aes</a></span>(<span class='kw'>label</span> <span class='kw'>=</span> <span class='no'>cluster</span>), <span class='kw'>data</span> <span class='kw'>=</span> <span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>k</span>), <span class='kw'>size</span> <span class='kw'>=</span> <span class='fl'>10</span>)</div><div class='img'><img src='kmeans_tidiers-1.png' alt='' width='700' height='433' /></div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
@@ -213,20 +216,22 @@ glance returns a one-row data.frame with the columns
 
 <div class="author">
   <p>Developed by David Robinson.</p>
-  <p>Site built by <a href="http://hadley.github.io/pkgdown/">pkgdown</a>.</p>
+  <p>Site built by <a href="http://pkgdown.r-lib.org">pkgdown</a>.</p>
 </div>
 
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-115082821-1"></script>
 <script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+ window.dataLayer = window.dataLayer || [];
+ function gtag(){dataLayer.push(arguments);}
+ gtag('js', new Date());
 
-  ga('create', 'UA-67989-18', 'auto');
-  ga('send', 'pageview');
+ gtag('config', 'UA-115082821-1');
 </script>
       </footer>
    </div>
 
+  
+
   </body>
 </html>
+

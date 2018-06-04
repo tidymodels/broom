@@ -92,19 +92,23 @@
       
       </header>
 
-      <div class="row">
+<div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Set up bootstrap replicates of a dplyr operation</h1>
+    <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/extras.R'><code>R/extras.R</code></a></small>
+    <div class="hidden name"><code>bootstrap.Rd</code></div>
     </div>
 
+    <div class="ref-description">
     
     <p>Set up bootstrap replicates of a dplyr operation</p>
     
+    </div>
 
     <pre class="usage"><span class='fu'>bootstrap</span>(<span class='no'>df</span>, <span class='no'>m</span>, <span class='kw'>by_group</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
     
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
@@ -136,28 +140,28 @@ corrections) here:</p>
 <span class='fu'>library</span>(<span class='no'>dplyr</span>)
 <span class='no'>mtcars</span> <span class='kw'>%&gt;%</span> <span class='fu'>bootstrap</span>(<span class='fl'>10</span>) <span class='kw'>%&gt;%</span> <span class='fu'><a href='http://dplyr.tidyverse.org/reference/do.html'>do</a></span>(<span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='fu'>lm</span>(<span class='no'>mpg</span> ~ <span class='no'>wt</span>, <span class='no'>.</span>)))</div><div class='output co'>#&gt; # A tibble: 20 x 6
 #&gt; # Groups:   replicate [10]
-#&gt;    replicate        term  estimate std.error  statistic      p.value
-#&gt;        &lt;int&gt;       &lt;chr&gt;     &lt;dbl&gt;     &lt;dbl&gt;      &lt;dbl&gt;        &lt;dbl&gt;
-#&gt;  1         1 (Intercept) 41.700281 2.2114410  18.856610 3.478988e-18
-#&gt;  2         1          wt -6.798893 0.7215194  -9.423022 1.792366e-10
-#&gt;  3         2 (Intercept) 36.958402 1.2908190  28.631747 2.422786e-23
-#&gt;  4         2          wt -5.357730 0.3972906 -13.485671 2.862107e-14
-#&gt;  5         3 (Intercept) 38.760903 2.1303859  18.194310 9.353916e-18
-#&gt;  6         3          wt -5.723081 0.6405893  -8.934089 5.899270e-10
-#&gt;  7         4 (Intercept) 40.100810 1.5696891  25.546977 6.497769e-22
-#&gt;  8         4          wt -5.906058 0.4806324 -12.288097 3.077442e-13
-#&gt;  9         5 (Intercept) 36.279982 1.8786270  19.311967 1.792643e-18
-#&gt; 10         5          wt -5.204402 0.5439123  -9.568458 1.265221e-10
-#&gt; 11         6 (Intercept) 38.154479 1.8127361  21.048005 1.609613e-19
-#&gt; 12         6          wt -5.766424 0.5326058 -10.826814 6.968723e-12
-#&gt; 13         7 (Intercept) 40.917529 1.6392218  24.961557 1.263719e-21
-#&gt; 14         7          wt -6.307544 0.4895175 -12.885227 9.234637e-14
-#&gt; 15         8 (Intercept) 36.085540 2.1581645  16.720477 9.457877e-17
-#&gt; 16         8          wt -5.174833 0.6533725  -7.920188 7.707518e-09
-#&gt; 17         9 (Intercept) 36.800311 2.2871977  16.089694 2.679828e-16
-#&gt; 18         9          wt -5.479102 0.7104797  -7.711835 1.328372e-08
-#&gt; 19        10 (Intercept) 36.600744 1.6918998  21.632927 7.429870e-20
-#&gt; 20        10          wt -5.024316 0.4731523 -10.618813 1.109688e-11</div><div class='input'>
+#&gt;    replicate term        estimate std.error statistic  p.value
+#&gt;        &lt;int&gt; &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
+#&gt;  1         1 (Intercept)    35.5      1.88      18.9  3.46e-18
+#&gt;  2         1 wt             -5.01     0.544     -9.21 3.04e-10
+#&gt;  3         2 (Intercept)    35.4      1.78      19.9  7.45e-19
+#&gt;  4         2 wt             -4.90     0.492     -9.95 5.18e-11
+#&gt;  5         3 (Intercept)    39.5      2.01      19.6  1.14e-18
+#&gt;  6         3 wt             -5.67     0.574     -9.89 5.90e-11
+#&gt;  7         4 (Intercept)    35.6      1.54      23.2  1.07e-20
+#&gt;  8         4 wt             -4.64     0.463    -10.0  4.33e-11
+#&gt;  9         5 (Intercept)    39.8      1.86      21.4  9.61e-20
+#&gt; 10         5 wt             -6.24     0.598    -10.4  1.64e-11
+#&gt; 11         6 (Intercept)    37.2      1.60      23.2  1.03e-20
+#&gt; 12         6 wt             -5.54     0.480    -11.5  1.49e-12
+#&gt; 13         7 (Intercept)    36.5      2.13      17.2  4.58e-17
+#&gt; 14         7 wt             -5.32     0.653     -8.15 4.27e- 9
+#&gt; 15         8 (Intercept)    39.3      2.30      17.1  5.31e-17
+#&gt; 16         8 wt             -5.95     0.693     -8.58 1.42e- 9
+#&gt; 17         9 (Intercept)    39.1      2.57      15.2  1.15e-15
+#&gt; 18         9 wt             -5.99     0.784     -7.64 1.59e- 8
+#&gt; 19        10 (Intercept)    37.9      1.99      19.1  2.45e-18
+#&gt; 20        10 wt             -5.62     0.626     -8.98 5.28e-10</div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
@@ -180,20 +184,22 @@ corrections) here:</p>
 
 <div class="author">
   <p>Developed by David Robinson.</p>
-  <p>Site built by <a href="http://hadley.github.io/pkgdown/">pkgdown</a>.</p>
+  <p>Site built by <a href="http://pkgdown.r-lib.org">pkgdown</a>.</p>
 </div>
 
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-115082821-1"></script>
 <script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+ window.dataLayer = window.dataLayer || [];
+ function gtag(){dataLayer.push(arguments);}
+ gtag('js', new Date());
 
-  ga('create', 'UA-67989-18', 'auto');
-  ga('send', 'pageview');
+ gtag('config', 'UA-115082821-1');
 </script>
       </footer>
    </div>
 
+  
+
   </body>
 </html>
+

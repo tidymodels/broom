@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Tidying methods for singular value decomposition — svd_tidiers • broom</title>
+<title>Tidying methods for (truncated) singular value decomposition — svd_tidiers • broom</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -92,28 +92,33 @@
       
       </header>
 
-      <div class="row">
+<div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Tidying methods for singular value decomposition</h1>
+    <h1>Tidying methods for (truncated) singular value decomposition</h1>
+    <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/svd_tidiers.R'><code>R/svd_tidiers.R</code></a></small>
+    <div class="hidden name"><code>svd_tidiers.Rd</code></div>
     </div>
 
+    <div class="ref-description">
     
     <p>These methods tidy the U, D, and V matrices returned by the
-<code>svd</code> function into a tidy format. Because
-<code>svd</code> returns a list without a class, this function has to be
-called by <code><a href='list_tidiers.html'>tidy.list</a></code> when it recognizes a list as an
-SVD object.</p>
+<code>svd</code> or <code><a href='http://www.rdocumentation.org/packages/irlba/topics/irlba'>irlba</a></code> functions into a tidy format.
+Because <code>svd</code> and <code>irlba</code> return lists without classes, this function
+has to be called by <code><a href='list_tidiers.html'>tidy.list</a></code> when it recognizes a list as an
+SVD or <code>irlba</code> object.</p>
     
+    </div>
 
     <pre class="usage"><span class='fu'>tidy_svd</span>(<span class='no'>x</span>, <span class='kw'>matrix</span> <span class='kw'>=</span> <span class='st'>"u"</span>, <span class='no'>...</span>)</pre>
     
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>x</th>
-      <td><p>list containing d, u, v components, returned from <code>svd</code></p></td>
+      <td><p>list containing d, u, v components, returned from <code>svd</code> or
+<code>irlba</code></p></td>
     </tr>
     <tr>
       <th>matrix</th>
@@ -134,14 +139,15 @@ a choice of which matrix to tidy.</p>
 principal component, with variables:</p>
 <dt>row</dt><dd><p>Number of the row in the original data being described</p></dd>
   <dt>PC</dt><dd><p>Principal component</p></dd>
-  <dt>loading</dt><dd><p>Loading of this principal component for this row</p></dd>
+  <dt>value</dt><dd><p>Loading of this principal component for this row</p></dd>
 
 When matrix = "d", each observation represents one principal component,
 with variables:
-  <dt>PC</dt><dd><p>Principal component</p></dd>
-  <dt>d</dt><dd><p>Value in the <code>d</code> vector</p></dd>
-  <dt>percent</dt><dd><p>Percent of variance explained by this PC, which is
-  proportional to $d^2$</p></dd>
+  <dt><code>PC</code></dt><dd><p>An integer vector indicating the principal component</p></dd>
+  <dt><code>std.dev</code></dt><dd><p>Standard deviation explained by this PC</p></dd>
+  <dt><code>percent</code></dt><dd><p>Percentage of variation explained. This will be
+    inaccurate for irlba objects due to the SVD truncation.</p></dd>
+  <dt><code>cumulative</code></dt><dd><p>Cumulative percentage of variation explained</p></dd>
 
 When matrix = "v", each observation represents a pair of a principal
 component and a column of the original matrix, with variables:
@@ -150,49 +156,59 @@ component and a column of the original matrix, with variables:
   <dt>value</dt><dd><p>Value of this PC for this column</p></dd>
 
     
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>Note that SVD is only equivalent to PCA on centered data.</p>
+    
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <p><code>svd</code>, <code><a href='list_tidiers.html'>tidy.list</a></code></p>
+    <div class='dont-index'><p><code>svd</code>, <code><a href='http://www.rdocumentation.org/packages/irlba/topics/irlba'>irlba</a></code> <code><a href='list_tidiers.html'>tidy.list</a></code></p></div>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
-<span class='no'>mat</span> <span class='kw'>&lt;-</span> <span class='fu'>as.matrix</span>(<span class='no'>iris</span>[, <span class='fl'>1</span>:<span class='fl'>4</span>])
+<span class='no'>mat</span> <span class='kw'>&lt;-</span> <span class='fu'>scale</span>(<span class='fu'>as.matrix</span>(<span class='no'>iris</span>[, <span class='fl'>1</span>:<span class='fl'>4</span>]))
 <span class='no'>s</span> <span class='kw'>&lt;-</span> <span class='fu'>svd</span>(<span class='no'>mat</span>)
 
 <span class='no'>tidy_u</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>s</span>, <span class='kw'>matrix</span> <span class='kw'>=</span> <span class='st'>"u"</span>)
-<span class='fu'>head</span>(<span class='no'>tidy_u</span>)</div><div class='output co'>#&gt;   row PC     loading
-#&gt; 1   1  1 -0.06161685
-#&gt; 2   2  1 -0.05807094
-#&gt; 3   3  1 -0.05676305
-#&gt; 4   4  1 -0.05665344
-#&gt; 5   5  1 -0.06123020
-#&gt; 6   6  1 -0.06750317</div><div class='input'>
+<span class='fu'>head</span>(<span class='no'>tidy_u</span>)</div><div class='output co'>#&gt; # A tibble: 6 x 3
+#&gt;     row    PC   value
+#&gt;   &lt;int&gt; &lt;int&gt;   &lt;dbl&gt;
+#&gt; 1     1     1 -0.108 
+#&gt; 2     2     1 -0.0995
+#&gt; 3     3     1 -0.113 
+#&gt; 4     4     1 -0.110 
+#&gt; 5     5     1 -0.114 
+#&gt; 6     6     1 -0.0992</div><div class='input'>
 <span class='no'>tidy_d</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>s</span>, <span class='kw'>matrix</span> <span class='kw'>=</span> <span class='st'>"d"</span>)
-<span class='no'>tidy_d</span></div><div class='output co'>#&gt;   PC         d      percent
-#&gt; 1  1 95.959914 0.9653029807
-#&gt; 2  2 17.761034 0.0330689513
-#&gt; 3  3  3.460931 0.0012556535
-#&gt; 4  4  1.884826 0.0003724145</div><div class='input'>
+<span class='no'>tidy_d</span></div><div class='output co'>#&gt; # A tibble: 4 x 4
+#&gt;      PC std.dev percent cumulative
+#&gt;   &lt;int&gt;   &lt;dbl&gt;   &lt;dbl&gt;      &lt;dbl&gt;
+#&gt; 1     1   20.9  0.730        0.730
+#&gt; 2     2   11.7  0.229        0.958
+#&gt; 3     3    4.68 0.0367       0.995
+#&gt; 4     4    1.76 0.00518      1    </div><div class='input'>
 <span class='no'>tidy_v</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>s</span>, <span class='kw'>matrix</span> <span class='kw'>=</span> <span class='st'>"v"</span>)
-<span class='fu'>head</span>(<span class='no'>tidy_v</span>)</div><div class='output co'>#&gt;   column PC    loading
-#&gt; 1      1  1 -0.7511082
-#&gt; 2      2  1 -0.3800862
-#&gt; 3      3  1 -0.5130089
-#&gt; 4      4  1 -0.1679075
-#&gt; 5      1  2  0.2841749
-#&gt; 6      2  2  0.5467445</div><div class='input'>
+<span class='fu'>head</span>(<span class='no'>tidy_v</span>)</div><div class='output co'>#&gt; # A tibble: 6 x 3
+#&gt;   column    PC  value
+#&gt;    &lt;int&gt; &lt;int&gt;  &lt;dbl&gt;
+#&gt; 1      1     1  0.521
+#&gt; 2      2     1 -0.269
+#&gt; 3      3     1  0.580
+#&gt; 4      4     1  0.565
+#&gt; 5      1     2 -0.377
+#&gt; 6      2     2 -0.923</div><div class='input'>
 <span class='fu'>library</span>(<span class='no'>ggplot2</span>)
 <span class='fu'>library</span>(<span class='no'>dplyr</span>)
 
 <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/ggplot'>ggplot</a></span>(<span class='no'>tidy_d</span>, <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/aes'>aes</a></span>(<span class='no'>PC</span>, <span class='no'>percent</span>)) +
     <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/geom_point'>geom_point</a></span>() +
-    <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/labs'>ylab</a></span>(<span class='st'>"% of variance explained"</span>)</div><div class='img'><img src='svd_tidiers-5.png' alt='' width='700' height='432.632880098887' /></div><div class='input'>
+    <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/labs'>ylab</a></span>(<span class='st'>"% of variance explained"</span>)</div><div class='img'><img src='svd_tidiers-1.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='no'>tidy_u</span> <span class='kw'>%&gt;%</span>
     <span class='fu'><a href='http://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span>(<span class='kw'>Species</span> <span class='kw'>=</span> <span class='no'>iris</span>$<span class='no'>Species</span>[<span class='no'>row</span>]) <span class='kw'>%&gt;%</span>
-    <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/ggplot'>ggplot</a></span>(<span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/aes'>aes</a></span>(<span class='no'>Species</span>, <span class='no'>loading</span>)) +
+    <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/ggplot'>ggplot</a></span>(<span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/aes'>aes</a></span>(<span class='no'>Species</span>, <span class='no'>value</span>)) +
     <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/geom_boxplot'>geom_boxplot</a></span>() +
-    <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/facet_wrap'>facet_wrap</a></span>(~ <span class='no'>PC</span>, <span class='kw'>scale</span> <span class='kw'>=</span> <span class='st'>"free_y"</span>)</div><div class='img'><img src='svd_tidiers-6.png' alt='' width='700' height='432.632880098887' /></div></pre>
+    <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/facet_wrap'>facet_wrap</a></span>(~ <span class='no'>PC</span>, <span class='kw'>scale</span> <span class='kw'>=</span> <span class='st'>"free_y"</span>)</div><div class='img'><img src='svd_tidiers-2.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -200,6 +216,8 @@ component and a column of the original matrix, with variables:
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
+
+      <li><a href="#details">Details</a></li>
 
       <li><a href="#see-also">See also</a></li>
       
@@ -216,20 +234,22 @@ component and a column of the original matrix, with variables:
 
 <div class="author">
   <p>Developed by David Robinson.</p>
-  <p>Site built by <a href="http://hadley.github.io/pkgdown/">pkgdown</a>.</p>
+  <p>Site built by <a href="http://pkgdown.r-lib.org">pkgdown</a>.</p>
 </div>
 
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-115082821-1"></script>
 <script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+ window.dataLayer = window.dataLayer || [];
+ function gtag(){dataLayer.push(arguments);}
+ gtag('js', new Date());
 
-  ga('create', 'UA-67989-18', 'auto');
-  ga('send', 'pageview');
+ gtag('config', 'UA-115082821-1');
 </script>
       </footer>
    </div>
 
+  
+
   </body>
 </html>
+

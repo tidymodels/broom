@@ -92,16 +92,20 @@
       
       </header>
 
-      <div class="row">
+<div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Tidiers for Cochrane Orcutt object</h1>
+    <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/orcutt_tidiers.R'><code>R/orcutt_tidiers.R</code></a></small>
+    <div class="hidden name"><code>orcutt_tidiers.Rd</code></div>
     </div>
 
+    <div class="ref-description">
     
     <p>Tidies a Cochrane Orcutt object, which estimates autocorrelation
 and beta coefficients in a linear fit.</p>
     
+    </div>
 
     <pre class="usage"><span class='co'># S3 method for orcutt</span>
 <span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>x</span>, <span class='no'>...</span>)
@@ -109,7 +113,7 @@ and beta coefficients in a linear fit.</p>
 <span class='co'># S3 method for orcutt</span>
 <span class='fu'><a href='glance.html'>glance</a></span>(<span class='no'>x</span>, <span class='no'>...</span>)</pre>
     
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
@@ -125,14 +129,11 @@ and beta coefficients in a linear fit.</p>
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>All tidying methods return a data.frame without rownames, whose
-structure depends on the method chosen.
-
-<code>tidy</code> returns the same information as
-<code><a href='lm_tidiers.html'>tidy.lm</a></code>, though without confidence interval options.
-
-<code>glance</code>
-
-<code>glance</code> returns a one-row data frame with the following columns:</p>
+structure depends on the method chosen.</p>
+<p><code>tidy</code> returns the same information as
+<code><a href='lm_tidiers.html'>tidy.lm</a></code>, though without confidence interval options.</p>
+<p><code>glance</code></p>
+<p><code>glance</code> returns a one-row data frame with the following columns:</p>
 <dt>r.squared</dt><dd><p>R-squared</p></dd>
   <dt>adj.r.squared</dt><dd><p>Adjusted R-squared</p></dd>
   <dt>rho</dt><dd><p>Spearman's rho autocorrelation</p></dd>
@@ -158,10 +159,10 @@ structure depends on the method chosen.
 
   <span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>co</span>)
   <span class='fu'><a href='glance.html'>glance</a></span>(<span class='no'>co</span>)
-}</div><div class='output co'>#&gt;    r.squared adj.r.squared       rho number.interaction dw.original
-#&gt; DW 0.7993079     0.7770088 0.2681905                  7    1.495745
-#&gt;    p.value.original dw.transformed p.value.transformed
-#&gt; DW       0.04063484       2.056964           0.5210259</div><div class='input'>
+}</div><div class='output co'>#&gt; <span class='warning'>Warning: package 'orcutt' was built under R version 3.4.3</span></div><div class='output co'>#&gt;   r.squared adj.r.squared       rho number.interaction dw.original
+#&gt; 1 0.7993079     0.7770088 0.2681905                  7    1.495745
+#&gt;   p.value.original dw.transformed p.value.transformed
+#&gt; 1       0.04063484       2.056964           0.5210259</div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
@@ -184,20 +185,22 @@ structure depends on the method chosen.
 
 <div class="author">
   <p>Developed by David Robinson.</p>
-  <p>Site built by <a href="http://hadley.github.io/pkgdown/">pkgdown</a>.</p>
+  <p>Site built by <a href="http://pkgdown.r-lib.org">pkgdown</a>.</p>
 </div>
 
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-115082821-1"></script>
 <script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+ window.dataLayer = window.dataLayer || [];
+ function gtag(){dataLayer.push(arguments);}
+ gtag('js', new Date());
 
-  ga('create', 'UA-67989-18', 'auto');
-  ga('send', 'pageview');
+ gtag('config', 'UA-115082821-1');
 </script>
       </footer>
    </div>
 
+  
+
   </body>
 </html>
+

@@ -92,18 +92,22 @@
       
       </header>
 
-      <div class="row">
+<div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Tidying methods for a speedlm model</h1>
+    <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/speedlm_tidiers.R'><code>R/speedlm_tidiers.R</code></a></small>
+    <div class="hidden name"><code>speedlm_tidiers.Rd</code></div>
     </div>
 
+    <div class="ref-description">
     
     <p>These methods tidy the coefficients of a "speedlm" object 
 into a summary, augment the original data with information on the
 fitted values and residuals, and construct a one-row glance of the model's
 statistics.</p>
     
+    </div>
 
     <pre class="usage"><span class='co'># S3 method for speedlm</span>
 <span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>x</span>, <span class='kw'>conf.int</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>conf.level</span> <span class='kw'>=</span> <span class='fl'>0.95</span>,
@@ -116,7 +120,7 @@ statistics.</p>
 <span class='fu'><a href='augment.html'>augment</a></span>(<span class='no'>x</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='kw pkg'>stats</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/stats/topics/model.frame'>model.frame</a></span>(<span class='no'>x</span>), <span class='kw'>newdata</span> <span class='kw'>=</span> <span class='no'>data</span>,
   <span class='no'>...</span>)</pre>
     
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
@@ -159,13 +163,11 @@ only the <code>term</code> and <code>estimate</code> columns.</p></td>
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>All tidying methods return a data.frame without rownames, whose
-structure depends on the method chosen.
-
-<code>tidy.speedlm</code> returns the tidied output of the
+structure depends on the method chosen.</p>
+<p><code>tidy.speedlm</code> returns the tidied output of the
 lm with one row for each term in the formula.
-The columns match those in <a href='lm_tidiers.html'>lm_tidiers</a>.
-
-<code>glance.speedlm</code> returns a one-row data.frame with the columns</p>
+The columns match those in <a href='lm_tidiers.html'>lm_tidiers</a>.</p>
+<p><code>glance.speedlm</code> returns a one-row data.frame with the columns</p>
 <dt>r.squared</dt><dd><p>The percent of variance explained by the model</p></dd>
   <dt>adj.r.squared</dt><dd><p>r.squared adjusted based on the degrees of freedom</p></dd>
   <dt>statistic</dt><dd><p>F-statistic</p></dd>
@@ -184,7 +186,7 @@ augment.speedlm returns  one row for each observation, with just one column adde
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <p><a href='lm_tidiers.html'>lm_tidiers</a>, <a href='biglm_tidiers.html'>biglm_tidiers</a></p>
+    <div class='dont-index'><p><a href='lm_tidiers.html'>lm_tidiers</a>, <a href='biglm_tidiers.html'>biglm_tidiers</a></p></div>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
@@ -194,7 +196,10 @@ augment.speedlm returns  one row for each observation, with just one column adde
     <span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>mod</span>)
     <span class='fu'><a href='glance.html'>glance</a></span>(<span class='no'>mod</span>)
     <span class='fu'><a href='augment.html'>augment</a></span>(<span class='no'>mod</span>)
-}</div><div class='output co'>#&gt;              .rownames  mpg    wt  qsec   .fitted
+}</div><div class='output co'>#&gt; <span class='warning'>Warning: package 'speedglm' was built under R version 3.4.3</span></div><div class='output co'>#&gt; <span class='message'></span>
+#&gt; <span class='message'>Attaching package: 'speedglm'</span></div><div class='output co'>#&gt; <span class='message'>The following object is masked from 'package:boot':</span>
+#&gt; <span class='message'></span>
+#&gt; <span class='message'>    control</span></div><div class='output co'>#&gt;              .rownames  mpg    wt  qsec   .fitted
 #&gt; 1            Mazda RX4 21.0 2.620 16.46 21.815109
 #&gt; 2        Mazda RX4 Wag 21.0 2.875 17.02 21.048224
 #&gt; 3           Datsun 710 22.8 2.320 18.61 25.327279
@@ -251,20 +256,22 @@ augment.speedlm returns  one row for each observation, with just one column adde
 
 <div class="author">
   <p>Developed by David Robinson.</p>
-  <p>Site built by <a href="http://hadley.github.io/pkgdown/">pkgdown</a>.</p>
+  <p>Site built by <a href="http://pkgdown.r-lib.org">pkgdown</a>.</p>
 </div>
 
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-115082821-1"></script>
 <script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+ window.dataLayer = window.dataLayer || [];
+ function gtag(){dataLayer.push(arguments);}
+ gtag('js', new Date());
 
-  ga('create', 'UA-67989-18', 'auto');
-  ga('send', 'pageview');
+ gtag('config', 'UA-115082821-1');
 </script>
       </footer>
    </div>
 
+  
+
   </body>
 </html>
+

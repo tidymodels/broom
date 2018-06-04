@@ -92,31 +92,41 @@
       
       </header>
 
-      <div class="row">
+<div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Tidying methods for a generalized additive model (gam)</h1>
+    <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/gam_tidiers.R'><code>R/gam_tidiers.R</code></a></small>
+    <div class="hidden name"><code>gam_tidiers.Rd</code></div>
     </div>
 
+    <div class="ref-description">
     
     <p>These methods tidy the coefficients of a "gam" object (generalized additive
 model) into a summary, augment the original data with information on the
 fitted values and residuals, and construct a one-row glance of the model's
 statistics.</p>
     
+    </div>
 
     <pre class="usage"><span class='co'># S3 method for gam</span>
 <span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>x</span>, <span class='kw'>parametric</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='no'>...</span>)
 
+<span class='co'># S3 method for Gam</span>
+<span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>x</span>, <span class='no'>...</span>)
+
 <span class='co'># S3 method for gam</span>
+<span class='fu'><a href='glance.html'>glance</a></span>(<span class='no'>x</span>, <span class='no'>...</span>)
+
+<span class='co'># S3 method for Gam</span>
 <span class='fu'><a href='glance.html'>glance</a></span>(<span class='no'>x</span>, <span class='no'>...</span>)</pre>
     
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>x</th>
-      <td><p>gam object</p></td>
+      <td><p>gam or Gam object</p></td>
     </tr>
     <tr>
       <th>parametric</th>
@@ -132,16 +142,14 @@ information about smooth terms (<code>FALSE</code>)?</p></td>
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>All tidying methods return a data.frame without rownames, whose
-structure depends on the method chosen.
-
-<code>tidy.gam</code> called on an object from the gam package,
+structure depends on the method chosen.</p>
+<p><code>tidy.gam</code> called on an object from the gam package,
 or an object from the mgcv package with <code>parametric = FALSE</code>, returns the 
 tidied output of the parametric ANOVA with one row for each term in the formula.
 The columns match those in <a href='anova_tidiers.html'>anova_tidiers</a>. 
 <code>tidy.gam</code> called on a gam object from the mgcv package with 
-<code>parametric = TRUE</code> returns the fixed coefficients.
-
-<code>glance.gam</code> returns a one-row data.frame with the columns</p>
+<code>parametric = TRUE</code> returns the fixed coefficients.</p>
+<p><code>glance.gam</code> returns a one-row data.frame with the columns</p>
 <dt>df</dt><dd><p>Degrees of freedom used by the coefficients</p></dd>
   <dt>logLik</dt><dd><p>the data's log-likelihood under the model</p></dd>
   <dt>AIC</dt><dd><p>the Akaike Information Criterion</p></dd>
@@ -156,7 +164,7 @@ The columns match those in <a href='anova_tidiers.html'>anova_tidiers</a>.
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <p><a href='lm_tidiers.html'>lm_tidiers</a>, <a href='anova_tidiers.html'>anova_tidiers</a></p>
+    <div class='dont-index'><p><a href='lm_tidiers.html'>lm_tidiers</a>, <a href='anova_tidiers.html'>anova_tidiers</a></p></div>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
@@ -167,8 +175,8 @@ The columns match those in <a href='anova_tidiers.html'>anova_tidiers</a>.
     <span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>g</span>)
     <span class='fu'><a href='augment.html'>augment</a></span>(<span class='no'>g</span>)
     <span class='fu'><a href='glance.html'>glance</a></span>(<span class='no'>g</span>)
-}</div><div class='output co'>#&gt;         df deviance df.residual
-#&gt; 1 5.999983 63.10725    75.00002</div><div class='input'>
+}</div><div class='output co'>#&gt; <span class='warning'>Warning: package 'gam' was built under R version 3.4.4</span></div><div class='output co'>#&gt; <span class='message'>Loaded gam 1.15</span></div><div class='output co'>#&gt;         df    logLik      AIC      BIC deviance df.residual
+#&gt; 1 5.999983 -34.55361 75.10722 82.29056 63.10725    75.00002</div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
@@ -195,20 +203,22 @@ The columns match those in <a href='anova_tidiers.html'>anova_tidiers</a>.
 
 <div class="author">
   <p>Developed by David Robinson.</p>
-  <p>Site built by <a href="http://hadley.github.io/pkgdown/">pkgdown</a>.</p>
+  <p>Site built by <a href="http://pkgdown.r-lib.org">pkgdown</a>.</p>
 </div>
 
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-115082821-1"></script>
 <script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+ window.dataLayer = window.dataLayer || [];
+ function gtag(){dataLayer.push(arguments);}
+ gtag('js', new Date());
 
-  ga('create', 'UA-67989-18', 'auto');
-  ga('send', 'pageview');
+ gtag('config', 'UA-115082821-1');
 </script>
       </footer>
    </div>
 
+  
+
   </body>
 </html>
+

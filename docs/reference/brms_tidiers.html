@@ -92,24 +92,28 @@
       
       </header>
 
-      <div class="row">
+<div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Tidying methods for a brms model</h1>
+    <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/brms_tidiers.R'><code>R/brms_tidiers.R</code></a></small>
+    <div class="hidden name"><code>brms_tidiers.Rd</code></div>
     </div>
 
+    <div class="ref-description">
     
     <p>These methods tidy the estimates from 
 <code><a href='http://www.rdocumentation.org/packages/brms/topics/brmsfit-class'>brmsfit-objects</a></code>
 (fitted model objects from the <span class="pkg">brms</span> package) into a summary.</p>
     
+    </div>
 
     <pre class="usage"><span class='co'># S3 method for brmsfit</span>
 <span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>x</span>, <span class='kw'>parameters</span> <span class='kw'>=</span> <span class='fl'>NA</span>, <span class='kw'>par_type</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"all"</span>,
   <span class='st'>"non-varying"</span>, <span class='st'>"varying"</span>, <span class='st'>"hierarchical"</span>), <span class='kw'>robust</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
   <span class='kw'>intervals</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>prob</span> <span class='kw'>=</span> <span class='fl'>0.9</span>, <span class='no'>...</span>)</pre>
     
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
@@ -182,7 +186,7 @@ upper bounds of the posterior intervals computed.
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <p><code><a href='http://www.rdocumentation.org/packages/brms/topics/brms-package'>brms</a></code>, <code><a href='http://www.rdocumentation.org/packages/brms/topics/brmsfit-class'>brmsfit-class</a></code></p>
+    <div class='dont-index'><p><code><a href='http://www.rdocumentation.org/packages/brms/topics/brms-package'>brms</a></code>, <code><a href='http://www.rdocumentation.org/packages/brms/topics/brmsfit-class'>brmsfit-class</a></code></p></div>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
@@ -220,20 +224,22 @@ upper bounds of the posterior intervals computed.
 
 <div class="author">
   <p>Developed by David Robinson.</p>
-  <p>Site built by <a href="http://hadley.github.io/pkgdown/">pkgdown</a>.</p>
+  <p>Site built by <a href="http://pkgdown.r-lib.org">pkgdown</a>.</p>
 </div>
 
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-115082821-1"></script>
 <script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+ window.dataLayer = window.dataLayer || [];
+ function gtag(){dataLayer.push(arguments);}
+ gtag('js', new Date());
 
-  ga('create', 'UA-67989-18', 'auto');
-  ga('send', 'pageview');
+ gtag('config', 'UA-115082821-1');
 </script>
       </footer>
    </div>
 
+  
+
   </body>
 </html>
+

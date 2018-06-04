@@ -92,21 +92,25 @@
       
       </header>
 
-      <div class="row">
+<div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Tidying methods for bootstrap computations</h1>
+    <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/boot_tidiers.R'><code>R/boot_tidiers.R</code></a></small>
+    <div class="hidden name"><code>boot_tidiers.Rd</code></div>
     </div>
 
+    <div class="ref-description">
     
     <p>Tidying methods for "boot" objects from the "boot" package.</p>
     
+    </div>
 
     <pre class="usage"><span class='co'># S3 method for boot</span>
 <span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>x</span>, <span class='kw'>conf.int</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>conf.level</span> <span class='kw'>=</span> <span class='fl'>0.95</span>,
   <span class='kw'>conf.method</span> <span class='kw'>=</span> <span class='st'>"perc"</span>, <span class='no'>...</span>)</pre>
     
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
@@ -167,9 +171,12 @@ std.error columns shown.
    <span class='no'>bootres</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/boot/topics/boot'>boot</a></span>(<span class='no'>clotting</span>, <span class='no'>bootfun</span>, <span class='kw'>R</span> <span class='kw'>=</span> <span class='fl'>999</span>)
    <span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>g1</span>, <span class='kw'>conf.int</span><span class='kw'>=</span><span class='fl'>TRUE</span>)
    <span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>bootres</span>, <span class='kw'>conf.int</span><span class='kw'>=</span><span class='fl'>TRUE</span>)
-}</div><div class='output co'>#&gt;          term   statistic         bias   std.error    conf.low   conf.high
-#&gt; 1 (Intercept) -0.02390847 -0.001909864 0.003222686 -0.03284963 -0.02232902
-#&gt; 2      log(u)  0.02359921  0.000575123 0.001034209  0.02273295  0.02649171</div><div class='input'>
+}</div><div class='output co'>#&gt; <span class='message'>Loading required package: boot</span></div><div class='output co'>#&gt; <span class='warning'>Warning: package 'boot' was built under R version 3.4.3</span></div><div class='output co'>#&gt; <span class='message'></span>
+#&gt; <span class='message'>Attaching package: 'boot'</span></div><div class='output co'>#&gt; <span class='message'>The following object is masked from 'package:survival':</span>
+#&gt; <span class='message'></span>
+#&gt; <span class='message'>    aml</span></div><div class='output co'>#&gt;          term   statistic          bias   std.error    conf.low   conf.high
+#&gt; 1 (Intercept) -0.02390847 -0.0019343342 0.003229430 -0.03285854 -0.02232902
+#&gt; 2      log(u)  0.02359921  0.0005811196 0.001034377  0.02273295  0.02649847</div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
@@ -192,20 +199,22 @@ std.error columns shown.
 
 <div class="author">
   <p>Developed by David Robinson.</p>
-  <p>Site built by <a href="http://hadley.github.io/pkgdown/">pkgdown</a>.</p>
+  <p>Site built by <a href="http://pkgdown.r-lib.org">pkgdown</a>.</p>
 </div>
 
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-115082821-1"></script>
 <script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+ window.dataLayer = window.dataLayer || [];
+ function gtag(){dataLayer.push(arguments);}
+ gtag('js', new Date());
 
-  ga('create', 'UA-67989-18', 'auto');
-  ga('send', 'pageview');
+ gtag('config', 'UA-115082821-1');
 </script>
       </footer>
    </div>
 
+  
+
   </body>
 </html>
+

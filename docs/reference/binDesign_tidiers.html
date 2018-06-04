@@ -92,17 +92,21 @@
       
       </header>
 
-      <div class="row">
+<div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Tidy a binDesign object</h1>
+    <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/bingroup_tidiers.R'><code>R/bingroup_tidiers.R</code></a></small>
+    <div class="hidden name"><code>binDesign_tidiers.Rd</code></div>
     </div>
 
+    <div class="ref-description">
     
     <p>Tidy a binDesign object from the "binGroup" package,
 which determines the sample size needed for
 a particular power.</p>
     
+    </div>
 
     <pre class="usage"><span class='co'># S3 method for binDesign</span>
 <span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>x</span>, <span class='no'>...</span>)
@@ -110,7 +114,7 @@ a particular power.</p>
 <span class='co'># S3 method for binDesign</span>
 <span class='fu'><a href='glance.html'>glance</a></span>(<span class='no'>x</span>, <span class='no'>...</span>)</pre>
     
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
@@ -155,7 +159,7 @@ with columns
     <span class='fu'>library</span>(<span class='no'>ggplot2</span>)
     <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/ggplot'>ggplot</a></span>(<span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>des</span>), <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/aes'>aes</a></span>(<span class='no'>n</span>, <span class='no'>power</span>)) +
         <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/geom_path'>geom_line</a></span>()
-}</div><div class='img'><img src='binDesign_tidiers-3.png' alt='' width='700' height='432.632880098887' /></div></pre>
+}</div><div class='output co'>#&gt; <span class='warning'>Warning: package 'binGroup' was built under R version 3.4.4</span></div><div class='img'><img src='binDesign_tidiers-1.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -177,20 +181,22 @@ with columns
 
 <div class="author">
   <p>Developed by David Robinson.</p>
-  <p>Site built by <a href="http://hadley.github.io/pkgdown/">pkgdown</a>.</p>
+  <p>Site built by <a href="http://pkgdown.r-lib.org">pkgdown</a>.</p>
 </div>
 
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-115082821-1"></script>
 <script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+ window.dataLayer = window.dataLayer || [];
+ function gtag(){dataLayer.push(arguments);}
+ gtag('js', new Date());
 
-  ga('create', 'UA-67989-18', 'auto');
-  ga('send', 'pageview');
+ gtag('config', 'UA-115082821-1');
 </script>
       </footer>
    </div>
 
+  
+
   </body>
 </html>
+
