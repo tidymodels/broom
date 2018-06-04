@@ -92,16 +92,20 @@
       
       </header>
 
-      <div class="row">
+<div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Tidy betareg objects from the betareg package</h1>
+    <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/betareg_tidiers.R'><code>R/betareg_tidiers.R</code></a></small>
+    <div class="hidden name"><code>betareg_tidiers.Rd</code></div>
     </div>
 
+    <div class="ref-description">
     
     <p>Tidy beta regression objects into summarized coefficients, add their fitted values
 and residuals, or find their model parameters.</p>
     
+    </div>
 
     <pre class="usage"><span class='co'># S3 method for betareg</span>
 <span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>x</span>, <span class='kw'>conf.int</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>conf.level</span> <span class='kw'>=</span> <span class='fl'>0.95</span>, <span class='no'>...</span>)
@@ -113,7 +117,7 @@ and residuals, or find their model parameters.</p>
 <span class='co'># S3 method for betareg</span>
 <span class='fu'><a href='glance.html'>glance</a></span>(<span class='no'>x</span>, <span class='no'>...</span>)</pre>
     
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
@@ -191,7 +195,7 @@ glance returns a one-row data.frame with the columns
   <span class='fu'>head</span>(<span class='fu'><a href='augment.html'>augment</a></span>(<span class='no'>mod</span>))
 
   <span class='fu'><a href='glance.html'>glance</a></span>(<span class='no'>mod</span>)
-}</div><div class='output co'>#&gt;   pseudo.r.squared   logLik       AIC       BIC df.residual df.null
+}</div><div class='output co'>#&gt; <span class='warning'>Warning: package 'betareg' was built under R version 3.4.3</span></div><div class='output co'>#&gt;   pseudo.r.squared   logLik       AIC       BIC df.residual df.null
 #&gt; 1        0.9617312 84.79756 -145.5951 -128.0063          20      30</div><div class='input'>
 </div></pre>
   </div>
@@ -215,20 +219,22 @@ glance returns a one-row data.frame with the columns
 
 <div class="author">
   <p>Developed by David Robinson.</p>
-  <p>Site built by <a href="http://hadley.github.io/pkgdown/">pkgdown</a>.</p>
+  <p>Site built by <a href="http://pkgdown.r-lib.org">pkgdown</a>.</p>
 </div>
 
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-115082821-1"></script>
 <script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+ window.dataLayer = window.dataLayer || [];
+ function gtag(){dataLayer.push(arguments);}
+ gtag('js', new Date());
 
-  ga('create', 'UA-67989-18', 'auto');
-  ga('send', 'pageview');
+ gtag('config', 'UA-115082821-1');
 </script>
       </footer>
    </div>
 
+  
+
   </body>
 </html>
+

@@ -15,7 +15,7 @@
 <![endif]-->
 </head>
 <body>
-    <div class="container template-vignette">
+    <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
@@ -75,12 +75,11 @@
 
       
       </header><div class="row">
-  <div class="col-md-9">
+  <div class="col-md-9 contents">
     
 
     
     
-<div class="contents">
 <div id="broom-lets-tidy-up-a-bit" class="section level1">
 
 
@@ -213,7 +212,7 @@ lmfit</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">nlsfit &lt;-<span class="st"> </span><span class="kw">nls</span>(mpg <span class="op">~</span><span class="st"> </span>k <span class="op">/</span><span class="st"> </span>wt <span class="op">+</span><span class="st"> </span>b, mtcars, <span class="dt">start=</span><span class="kw">list</span>(<span class="dt">k=</span><span class="dv">1</span>, <span class="dt">b=</span><span class="dv">0</span>))
 <span class="kw"><a href="reference/tidy.html">tidy</a></span>(nlsfit)</code></pre></div>
 <pre><code>##   term  estimate std.error statistic      p.value
-## 1    k 45.829488  4.249155 10.785554 7.639161e-12
+## 1    k 45.829488  4.249155 10.785554 7.639162e-12
 ## 2    b  4.386254  1.536418  2.854858 7.737378e-03</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(<span class="kw"><a href="reference/augment.html">augment</a></span>(nlsfit, mtcars))</code></pre></div>
 <pre><code>##           .rownames  mpg cyl disp  hp drat    wt  qsec vs am gear carb
@@ -231,8 +230,8 @@ lmfit</code></pre></div>
 ## 5 17.70878  0.9912203
 ## 6 17.63177  0.4682291</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="reference/glance.html">glance</a></span>(nlsfit)</code></pre></div>
-<pre><code>##     sigma isConv       finTol    logLik      AIC      BIC deviance
-## 1 2.77405   TRUE 8.564407e-09 -77.02329 160.0466 164.4438 230.8606
+<pre><code>##     sigma isConv      finTol    logLik      AIC      BIC deviance
+## 1 2.77405   TRUE 2.87694e-08 -77.02329 160.0466 164.4438 230.8606
 ##   df.residual
 ## 1          30</code></pre>
 </div>
@@ -460,31 +459,43 @@ lmfit</code></pre></div>
 <td align="left"></td>
 </tr>
 <tr class="odd">
+<td align="left">emmGrid</td>
+<td align="left">x</td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+<tr class="even">
 <td align="left">ergm</td>
 <td align="left">x</td>
 <td align="left">x</td>
 <td align="left"></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">felm</td>
 <td align="left">x</td>
 <td align="left">x</td>
 <td align="left">x</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">fitdistr</td>
 <td align="left">x</td>
 <td align="left">x</td>
 <td align="left"></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">ftable</td>
 <td align="left">x</td>
 <td align="left"></td>
 <td align="left"></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">gam</td>
+<td align="left">x</td>
+<td align="left">x</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">Gam</td>
 <td align="left">x</td>
 <td align="left">x</td>
 <td align="left"></td>
@@ -532,111 +543,123 @@ lmfit</code></pre></div>
 <td align="left"></td>
 </tr>
 <tr class="odd">
+<td align="left">ivreg</td>
+<td align="left">x</td>
+<td align="left">x</td>
+<td align="left">x</td>
+</tr>
+<tr class="even">
 <td align="left">kappa</td>
 <td align="left">x</td>
 <td align="left"></td>
 <td align="left"></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">kde</td>
 <td align="left">x</td>
 <td align="left"></td>
 <td align="left"></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">kmeans</td>
 <td align="left">x</td>
 <td align="left">x</td>
 <td align="left">x</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">Line</td>
 <td align="left">x</td>
 <td align="left"></td>
 <td align="left"></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">Lines</td>
 <td align="left">x</td>
 <td align="left"></td>
 <td align="left"></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">list</td>
 <td align="left">x</td>
 <td align="left">x</td>
 <td align="left"></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">lm</td>
 <td align="left">x</td>
 <td align="left">x</td>
 <td align="left">x</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">lme</td>
 <td align="left">x</td>
 <td align="left">x</td>
 <td align="left">x</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">lmodel2</td>
 <td align="left">x</td>
 <td align="left">x</td>
 <td align="left"></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">lmRob</td>
 <td align="left">x</td>
 <td align="left">x</td>
 <td align="left">x</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">logical</td>
 <td align="left">x</td>
 <td align="left"></td>
 <td align="left"></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">lsmobj</td>
 <td align="left">x</td>
 <td align="left"></td>
 <td align="left"></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">manova</td>
 <td align="left">x</td>
 <td align="left"></td>
 <td align="left"></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">map</td>
 <td align="left">x</td>
 <td align="left"></td>
 <td align="left"></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">matrix</td>
 <td align="left">x</td>
 <td align="left">x</td>
 <td align="left"></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">Mclust</td>
 <td align="left">x</td>
 <td align="left">x</td>
 <td align="left">x</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">merMod</td>
 <td align="left">x</td>
 <td align="left">x</td>
 <td align="left">x</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">mle2</td>
 <td align="left">x</td>
 <td align="left"></td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">muhaz</td>
+<td align="left">x</td>
+<td align="left">x</td>
 <td align="left"></td>
 </tr>
 <tr class="odd">
@@ -802,31 +825,43 @@ lmfit</code></pre></div>
 <td align="left"></td>
 </tr>
 <tr class="even">
+<td align="left">speedlm</td>
+<td align="left">x</td>
+<td align="left">x</td>
+<td align="left">x</td>
+</tr>
+<tr class="odd">
 <td align="left">stanfit</td>
 <td align="left">x</td>
 <td align="left"></td>
 <td align="left"></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">stanreg</td>
 <td align="left">x</td>
 <td align="left">x</td>
 <td align="left"></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">summary.glht</td>
 <td align="left">x</td>
 <td align="left"></td>
 <td align="left"></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">summary.lm</td>
 <td align="left">x</td>
 <td align="left">x</td>
 <td align="left"></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">summaryDefault</td>
+<td align="left">x</td>
+<td align="left">x</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">survdiff</td>
 <td align="left">x</td>
 <td align="left">x</td>
 <td align="left"></td>
@@ -976,31 +1011,41 @@ lmfit</code></pre></div>
 <div id="code-of-conduct" class="section level3">
 <h3 class="hasAnchor">
 <a href="#code-of-conduct" class="anchor"></a>Code of Conduct</h3>
-<p>Please note that this project is released with a <a href="CONDUCT.md">Contributor Code of Conduct</a>. By participating in this project you agree to abide by its terms.</p>
-</div>
+<p>Please note that this project is released with a <a href="CONDUCT.html">Contributor Code of Conduct</a>. By participating in this project you agree to abide by its terms.</p>
 </div>
 </div>
 </div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <h2 class="hasAnchor">
-<a href="#sidebar" class="anchor"></a>Links</h2>
+    <div class="links">
+<h2>Links</h2>
 <ul class="list-unstyled">
-<li>Download from CRAN at <br><a href="https://cran.r-project.org/package=broom">https://​cran.r-project.org/​package=broom</a>
+<li>Download from CRAN at <br><a href="https://cloud.r-project.org/package=broom">https://​cloud.r-project.org/​package=broom</a>
 </li>
 <li>Browse source code at <br><a href="http://github.com/tidyverse/broom">http://​github.com/​tidyverse/​broom</a>
 </li>
 <li>Report a bug at <br><a href="http://github.com/tidyverse/broom/issues">http://​github.com/​tidyverse/​broom/​issues</a>
 </li>
 </ul>
+</div>
+<div class="license">
 <h2>License</h2>
-<p><a href="https://opensource.org/licenses/mit-license.php">MIT</a> + file <a href="LICENSE.html">LICENSE</a></p>
+<ul class="list-unstyled">
+<li>
+<a href="https://opensource.org/licenses/mit-license.php">MIT</a> + file <a href="LICENSE-text.html">LICENSE</a>
+</li>
+</ul>
+</div>
+<div class="developers">
 <h2>Developers</h2>
 <ul class="list-unstyled">
-<li>David Robinson <br><small class="roles"> Author, maintainer </small> </li>
+<li>David Robinson <br><small class="roles"> Author, maintainer </small>  </li>
 <li><a href="authors.html">All authors...</a></li>
 </ul>
+</div>
+
+      <div class="dev-status">
 <h2>Dev status</h2>
 <ul class="list-unstyled">
 <li><a href="https://CRAN.R-project.org/package=broom"><img src="http://www.r-pkg.org/badges/version/broom" alt="CRAN_Status_Badge"></a></li>
@@ -1008,6 +1053,7 @@ lmfit</code></pre></div>
 <li><a href="https://ci.appveyor.com/project/tidyverse/broom"><img src="https://ci.appveyor.com/api/projects/status/github/tidyverse/broom?branch=master&amp;svg=true" alt="AppVeyor Build Status"></a></li>
 <li><a href="https://codecov.io/github/tidyverse/broom?branch=master"><img src="https://img.shields.io/codecov/c/github/tidyverse/broom/master.svg" alt="Coverage Status"></a></li>
 </ul>
+</div>
 </div>
 
 </div>
@@ -1019,19 +1065,19 @@ lmfit</code></pre></div>
 
 <div class="author">
   <p>Developed by David Robinson.</p>
-  <p>Site built by <a href="http://hadley.github.io/pkgdown/">pkgdown</a>.</p>
+  <p>Site built by <a href="http://pkgdown.r-lib.org">pkgdown</a>.</p>
 </div>
 
-<script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-115082821-1"></script><script>
+ window.dataLayer = window.dataLayer || [];
+ function gtag(){dataLayer.push(arguments);}
+ gtag('js', new Date());
 
-  ga('create', 'UA-67989-18', 'auto');
-  ga('send', 'pageview');
+ gtag('config', 'UA-115082821-1');
 </script></footer>
 </div>
+
+  
 
   </body>
 </html>

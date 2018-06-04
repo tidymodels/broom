@@ -15,7 +15,7 @@
 <![endif]-->
 </head>
 <body>
-    <div class="container template-vignette">
+    <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
@@ -75,20 +75,24 @@
 
       
       </header><div class="row">
-  <div class="col-md-9">
+  <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1></h1>
             
-          </div>
+      
+      <small class="dont-index">Source: <a href="http://github.com/tidyverse/broom/blob/master/vignettes/bootstrapping.Rmd"><code>vignettes/bootstrapping.Rmd</code></a></small>
+      <div class="hidden name"><code>bootstrapping.Rmd</code></div>
+
+    </div>
 
     
     
-<div class="contents">
 <!--
 %\VignetteBuilder{knitr::knitr}
 %\VignetteEngine{knitr::knitr}
 %\VignetteIndexEntry{Tidy bootstrapping with dplyr+broom}
 -->
+<pre><code>## Warning: package 'knitr' was built under R version 3.4.3</code></pre>
 <div id="tidy-bootstrapping-with-dplyrbroom" class="section level1">
 <h1 class="hasAnchor">
 <a href="#tidy-bootstrapping-with-dplyrbroom" class="anchor"></a>Tidy bootstrapping with dplyr+broom</h1>
@@ -97,8 +101,8 @@
 <p>Let’s say you want to fit a nonlinear model to the weight/mileage relationship in the <code>mtcars</code> dataset.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(ggplot2)
 <span class="kw">data</span>(mtcars)
-<span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/ggplot">ggplot</a></span>(mtcars, <span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/aes">aes</a></span>(mpg, wt)) <span class="op">+</span><span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/geom_point">geom_point</a></span>()</code></pre></div>
-<p><img src="bootstrapping_files/figure-html/unnamed-chunk-1-1.png" width="672"></p>
+<span class="kw">ggplot</span>(mtcars, <span class="kw">aes</span>(mpg, wt)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>()</code></pre></div>
+<p><img src="bootstrapping_files/figure-html/unnamed-chunk-1-1.png" width="700"></p>
 <p>You might use the method of nonlinear least squares (<code>nls</code> function) to fit a model.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">nlsfit &lt;-<span class="st"> </span><span class="kw">nls</span>(mpg <span class="op">~</span><span class="st"> </span>k <span class="op">/</span><span class="st"> </span>wt <span class="op">+</span><span class="st"> </span>b, mtcars, <span class="dt">start=</span><span class="kw">list</span>(<span class="dt">k=</span><span class="dv">1</span>, <span class="dt">b=</span><span class="dv">0</span>))
 <span class="kw">summary</span>(nlsfit)</code></pre></div>
@@ -115,560 +119,63 @@
 ## Residual standard error: 2.774 on 30 degrees of freedom
 ## 
 ## Number of iterations to convergence: 1 
-## Achieved convergence tolerance: 1.967e-08</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/ggplot">ggplot</a></span>(mtcars, <span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/aes">aes</a></span>(wt, mpg)) <span class="op">+</span><span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/geom_point">geom_point</a></span>() <span class="op">+</span><span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/geom_path">geom_line</a></span>(<span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/aes">aes</a></span>(<span class="dt">y=</span><span class="kw">predict</span>(nlsfit)))</code></pre></div>
-<p><img src="bootstrapping_files/figure-html/unnamed-chunk-2-1.png" width="672"></p>
+## Achieved convergence tolerance: 2.877e-08</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(mtcars, <span class="kw">aes</span>(wt, mpg)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">y=</span><span class="kw">predict</span>(nlsfit)))</code></pre></div>
+<p><img src="bootstrapping_files/figure-html/unnamed-chunk-2-1.png" width="700"></p>
 <p>While this does provide a p-value and confidence intervals for the parameters, these are based on model assumptions that may not hold in real data. Bootstrapping is a popular method for providing confidence intervals and predictions that are more robust to the nature of the data. The function <code>bootstrap</code> in <strong>broom</strong> can be used to sample bootstrap replications. First, we construct 100 bootstrap replications of the data, each of which has been randomly sampled with replacement.</p>
 <p>We use <code>do</code> to perform an <code>nls</code> fit on each replication, using <code>tidy</code> to recombine:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(dplyr)
-<span class="kw">library</span>(broom)
-<span class="kw">set.seed</span>(<span class="dv">2014</span>)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(dplyr)</code></pre></div>
+<pre><code>## Warning: package 'dplyr' was built under R version 3.4.3</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(broom)</code></pre></div>
+<pre><code>## Warning: package 'broom' was built under R version 3.4.4</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">2014</span>)
 bootnls &lt;-<span class="st"> </span>mtcars <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/bootstrap.html">bootstrap</a></span>(<span class="dv">100</span>) <span class="op">%&gt;%</span>
 <span class="st">    </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/do.html">do</a></span>(<span class="kw"><a href="../reference/tidy.html">tidy</a></span>(<span class="kw">nls</span>(mpg <span class="op">~</span><span class="st"> </span>k <span class="op">/</span><span class="st"> </span>wt <span class="op">+</span><span class="st"> </span>b, ., <span class="dt">start=</span><span class="kw">list</span>(<span class="dt">k=</span><span class="dv">1</span>, <span class="dt">b=</span><span class="dv">0</span>))))</code></pre></div>
 <p>This produces a summary of each replication, combined into one data.frame:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">bootnls</code></pre></div>
 <pre><code>## # A tibble: 200 x 6
 ## # Groups:   replicate [100]
-##    replicate  term  estimate std.error statistic      p.value
-##        &lt;int&gt; &lt;chr&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;        &lt;dbl&gt;
-##  1         1     k 46.632502  4.026016 11.582790 1.343891e-12
-##  2         1     b  4.360637  1.538267  2.834773 8.129582e-03
-##  3         2     k 54.182476  4.964976 10.912939 5.756808e-12
-##  4         2     b  1.004868  1.897195  0.529660 6.002459e-01
-##  5         3     k 43.257212  3.564860 12.134338 4.222952e-13
-##  6         3     b  4.833510  1.297909  3.724075 8.101898e-04
-##  7         4     k 48.531351  4.456883 10.889079 6.069157e-12
-##  8         4     b  3.509346  1.688979  2.077791 4.638415e-02
-##  9         5     k 52.605099  5.662691  9.289771 2.472141e-10
-## 10         5     b  3.344380  2.300411  1.453818 1.563791e-01
+##    replicate term  estimate std.error statistic  p.value
+##        &lt;int&gt; &lt;chr&gt;    &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
+##  1         1 k        46.6       4.03    11.6   1.34e-12
+##  2         1 b         4.36      1.54     2.83  8.13e- 3
+##  3         2 k        54.2       4.96    10.9   5.76e-12
+##  4         2 b         1.00      1.90     0.530 6.00e- 1
+##  5         3 k        43.3       3.56    12.1   4.22e-13
+##  6         3 b         4.83      1.30     3.72  8.10e- 4
+##  7         4 k        48.5       4.46    10.9   6.07e-12
+##  8         4 b         3.51      1.69     2.08  4.64e- 2
+##  9         5 k        52.6       5.66     9.29  2.47e-10
+## 10         5 b         3.34      2.30     1.45  1.56e- 1
 ## # ... with 190 more rows</code></pre>
 <p>You can then calculate confidence intervals (using what is called the <a href="https://www.uvm.edu/~dhowell/StatPages/Randomization%20Tests/ResamplingWithR/BootstMeans/bootstrapping_means.html">percentile method</a>):</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">alpha =<span class="st"> </span>.<span class="dv">05</span>
 bootnls <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span>(term) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/summarise.html">summarize</a></span>(<span class="dt">low=</span><span class="kw">quantile</span>(estimate, alpha <span class="op">/</span><span class="st"> </span><span class="dv">2</span>),
                                          <span class="dt">high=</span><span class="kw">quantile</span>(estimate, <span class="dv">1</span> <span class="op">-</span><span class="st"> </span>alpha <span class="op">/</span><span class="st"> </span><span class="dv">2</span>))</code></pre></div>
+<pre><code>## Warning: package 'bindrcpp' was built under R version 3.4.4</code></pre>
 <pre><code>## # A tibble: 2 x 3
-##    term       low      high
-##   &lt;chr&gt;     &lt;dbl&gt;     &lt;dbl&gt;
-## 1     b  0.214338  6.538996
-## 2     k 39.725501 58.699301</code></pre>
+##   term     low  high
+##   &lt;chr&gt;  &lt;dbl&gt; &lt;dbl&gt;
+## 1 b      0.214  6.54
+## 2 k     39.7   58.7</code></pre>
 <p>Or you can use histograms to give you a more detailed idea of the uncertainty in each estimate:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(ggplot2)
-<span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/ggplot">ggplot</a></span>(bootnls, <span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/aes">aes</a></span>(estimate)) <span class="op">+</span><span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/geom_histogram">geom_histogram</a></span>(<span class="dt">binwidth=</span><span class="dv">2</span>) <span class="op">+</span><span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/facet_wrap">facet_wrap</a></span>(<span class="op">~</span><span class="st"> </span>term, <span class="dt">scales=</span><span class="st">"free"</span>)</code></pre></div>
-<p><img src="bootstrapping_files/figure-html/unnamed-chunk-6-1.png" width="672"></p>
+<span class="kw">ggplot</span>(bootnls, <span class="kw">aes</span>(estimate)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_histogram</span>(<span class="dt">binwidth=</span><span class="dv">2</span>) <span class="op">+</span><span class="st"> </span><span class="kw">facet_wrap</span>(<span class="op">~</span><span class="st"> </span>term, <span class="dt">scales=</span><span class="st">"free"</span>)</code></pre></div>
+<p><img src="bootstrapping_files/figure-html/unnamed-chunk-6-1.png" width="700"></p>
 <p>Or you can use <code>augment</code> to visualize the uncertainty in the curve:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">bootnls_aug &lt;-<span class="st"> </span>mtcars <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/bootstrap.html">bootstrap</a></span>(<span class="dv">100</span>) <span class="op">%&gt;%</span>
-<span class="st">    </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/do.html">do</a></span>(<span class="kw"><a href="../reference/augment.html">augment</a></span>(<span class="kw">nls</span>(mpg <span class="op">~</span><span class="st"> </span>k <span class="op">/</span><span class="st"> </span>wt <span class="op">+</span><span class="st"> </span>b, ., <span class="dt">start=</span><span class="kw">list</span>(<span class="dt">k=</span><span class="dv">1</span>, <span class="dt">b=</span><span class="dv">0</span>)), .))</code></pre></div>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<pre><code>## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/ggplot">ggplot</a></span>(bootnls_aug, <span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/aes">aes</a></span>(wt, mpg)) <span class="op">+</span><span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/geom_point">geom_point</a></span>() <span class="op">+</span>
-<span class="st">    </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/geom_path">geom_line</a></span>(<span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/aes">aes</a></span>(<span class="dt">y=</span>.fitted, <span class="dt">group=</span>replicate), <span class="dt">alpha=</span>.<span class="dv">2</span>)</code></pre></div>
-<p><img src="bootstrapping_files/figure-html/unnamed-chunk-7-1.png" width="672"></p>
+<span class="st">    </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/do.html">do</a></span>(<span class="kw"><a href="../reference/augment.html">augment</a></span>(<span class="kw">nls</span>(mpg <span class="op">~</span><span class="st"> </span>k <span class="op">/</span><span class="st"> </span>wt <span class="op">+</span><span class="st"> </span>b, ., <span class="dt">start=</span><span class="kw">list</span>(<span class="dt">k=</span><span class="dv">1</span>, <span class="dt">b=</span><span class="dv">0</span>)), .))
+
+<span class="kw">ggplot</span>(bootnls_aug, <span class="kw">aes</span>(wt, mpg)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>() <span class="op">+</span>
+<span class="st">    </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">y=</span>.fitted, <span class="dt">group=</span>replicate), <span class="dt">alpha=</span>.<span class="dv">2</span>)</code></pre></div>
+<p><img src="bootstrapping_files/figure-html/unnamed-chunk-7-1.png" width="700"></p>
 <p>With only a few small changes, one could easily perform bootstrapping with other kinds of predictive or hypothesis testing models, since the <code>tidy</code> and <code>augment</code> functions works for many statistical outputs. As another example, you could use <code>smooth.spline</code>:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">smoothspline_aug &lt;-<span class="st"> </span>mtcars <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/bootstrap.html">bootstrap</a></span>(<span class="dv">100</span>) <span class="op">%&gt;%</span>
 <span class="st">    </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/do.html">do</a></span>(<span class="kw"><a href="../reference/augment.html">augment</a></span>(<span class="kw">smooth.spline</span>(.<span class="op">$</span>wt, .<span class="op">$</span>mpg, <span class="dt">df=</span><span class="dv">4</span>), .))
 
-<span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/ggplot">ggplot</a></span>(smoothspline_aug, <span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/aes">aes</a></span>(wt, mpg)) <span class="op">+</span><span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/geom_point">geom_point</a></span>() <span class="op">+</span>
-<span class="st">    </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/geom_path">geom_line</a></span>(<span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/aes">aes</a></span>(<span class="dt">y=</span>.fitted, <span class="dt">group=</span>replicate), <span class="dt">alpha=</span>.<span class="dv">2</span>)</code></pre></div>
-<p><img src="bootstrapping_files/figure-html/unnamed-chunk-8-1.png" width="672"></p>
-</div>
+<span class="kw">ggplot</span>(smoothspline_aug, <span class="kw">aes</span>(wt, mpg)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>() <span class="op">+</span>
+<span class="st">    </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">y=</span>.fitted, <span class="dt">group=</span>replicate), <span class="dt">alpha=</span>.<span class="dv">2</span>)</code></pre></div>
+<p><img src="bootstrapping_files/figure-html/unnamed-chunk-8-1.png" width="700"></p>
 </div>
   </div>
 
@@ -691,19 +198,19 @@ bootnls <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">
 
 <div class="author">
   <p>Developed by David Robinson.</p>
-  <p>Site built by <a href="http://hadley.github.io/pkgdown/">pkgdown</a>.</p>
+  <p>Site built by <a href="http://pkgdown.r-lib.org">pkgdown</a>.</p>
 </div>
 
-<script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-115082821-1"></script><script>
+ window.dataLayer = window.dataLayer || [];
+ function gtag(){dataLayer.push(arguments);}
+ gtag('js', new Date());
 
-  ga('create', 'UA-67989-18', 'auto');
-  ga('send', 'pageview');
+ gtag('config', 'UA-115082821-1');
 </script></footer>
 </div>
+
+  
 
   </body>
 </html>

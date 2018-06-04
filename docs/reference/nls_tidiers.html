@@ -92,17 +92,21 @@
       
       </header>
 
-      <div class="row">
+<div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Tidying methods for a nonlinear model</h1>
+    <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/nls_tidiers.R'><code>R/nls_tidiers.R</code></a></small>
+    <div class="hidden name"><code>nls_tidiers.Rd</code></div>
     </div>
 
+    <div class="ref-description">
     
     <p>These methods tidy the coefficients of a nonlinear model into a summary,
 augment the original data with information on the fitted values and residuals,
 and construct a one-row glance of the model's statistics.</p>
     
+    </div>
 
     <pre class="usage"><span class='co'># S3 method for nls</span>
 <span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>x</span>, <span class='kw'>conf.int</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>conf.level</span> <span class='kw'>=</span> <span class='fl'>0.95</span>, <span class='kw'>quick</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
@@ -114,7 +118,7 @@ and construct a one-row glance of the model's statistics.</p>
 <span class='co'># S3 method for nls</span>
 <span class='fu'><a href='glance.html'>glance</a></span>(<span class='no'>x</span>, <span class='no'>...</span>)</pre>
     
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
@@ -153,9 +157,8 @@ attempt to be reconstructed from nls (may not be successful)</p></td>
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>All tidying methods return a <code>data.frame</code> without rownames.
-The structure depends on the method chosen.
-
-<code>tidy</code> returns one row for each coefficient in the model,
+The structure depends on the method chosen.</p>
+<p><code>tidy</code> returns one row for each coefficient in the model,
 with five columns:</p>
 <dt>term</dt><dd><p>The term in the nonlinear model being estimated and tested</p></dd>
   <dt>estimate</dt><dd><p>The estimated coefficient</p></dd>
@@ -195,8 +198,8 @@ warning is raised and the incomplete rows are dropped.</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <p>na.action
-    <code>nls</code> and <code>summary.nls</code></p>
+    <div class='dont-index'><p>na.action</p>
+<p><code>nls</code> and <code>summary.nls</code></p></div>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
@@ -204,8 +207,8 @@ warning is raised and the incomplete rows are dropped.</p>
 <span class='no'>n</span> <span class='kw'>&lt;-</span> <span class='fu'>nls</span>(<span class='no'>mpg</span> ~ <span class='no'>k</span> * <span class='no'>e</span> ^ <span class='no'>wt</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>mtcars</span>, <span class='kw'>start</span> <span class='kw'>=</span> <span class='fu'>list</span>(<span class='kw'>k</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>e</span> <span class='kw'>=</span> <span class='fl'>2</span>))
 
 <span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>n</span>)</div><div class='output co'>#&gt;   term   estimate  std.error statistic      p.value
-#&gt; 1    k 49.6596869 3.78875502  13.10713 5.963165e-14
-#&gt; 2    e  0.7455911 0.01985924  37.54378 8.861928e-27</div><div class='input'><span class='fu'><a href='augment.html'>augment</a></span>(<span class='no'>n</span>)</div><div class='output co'>#&gt;     mpg    wt  .fitted     .resid
+#&gt; 1    k 49.6596868 3.78875502  13.10713 5.963165e-14
+#&gt; 2    e  0.7455911 0.01985924  37.54378 8.861929e-27</div><div class='input'><span class='fu'><a href='augment.html'>augment</a></span>(<span class='no'>n</span>)</div><div class='output co'>#&gt;     mpg    wt  .fitted     .resid
 #&gt; 1  21.0 2.620 23.01208 -2.0120762
 #&gt; 2  21.0 2.875 21.35224 -0.3522419
 #&gt; 3  22.8 2.320 25.13076 -2.3307583
@@ -220,7 +223,7 @@ warning is raised and the incomplete rows are dropped.</p>
 #&gt; 12 16.4 4.070 15.03425  1.3657484
 #&gt; 13 17.3 3.730 16.61237  0.6876307
 #&gt; 14 15.2 3.780 16.37030 -1.1702990
-#&gt; 15 10.4 5.250 10.63243 -0.2324325
+#&gt; 15 10.4 5.250 10.63243 -0.2324326
 #&gt; 16 10.4 5.424 10.10294  0.2970604
 #&gt; 17 14.7 5.345 10.33999  4.3600080
 #&gt; 18 32.4 2.200 26.03188  6.3681214
@@ -238,9 +241,9 @@ warning is raised and the incomplete rows are dropped.</p>
 #&gt; 30 19.7 2.770 22.02069 -2.3206892
 #&gt; 31 15.0 3.570 17.41131 -2.4113107
 #&gt; 32 21.4 2.780 21.95614 -0.5561361</div><div class='input'><span class='fu'><a href='glance.html'>glance</a></span>(<span class='no'>n</span>)</div><div class='output co'>#&gt;      sigma isConv       finTol    logLik     AIC      BIC deviance df.residual
-#&gt; 1 2.667878   TRUE 2.041909e-06 -75.77449 157.549 161.9462 213.5273          30</div><div class='input'>
+#&gt; 1 2.667878   TRUE 2.042926e-06 -75.77449 157.549 161.9462 213.5273          30</div><div class='input'>
 <span class='fu'>library</span>(<span class='no'>ggplot2</span>)
-<span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/ggplot'>ggplot</a></span>(<span class='fu'><a href='augment.html'>augment</a></span>(<span class='no'>n</span>), <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/aes'>aes</a></span>(<span class='no'>wt</span>, <span class='no'>mpg</span>)) + <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/geom_point'>geom_point</a></span>() + <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/geom_path'>geom_line</a></span>(<span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/aes'>aes</a></span>(<span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>.fitted</span>))</div><div class='img'><img src='nls_tidiers-3.png' alt='' width='700' height='432.632880098887' /></div><div class='input'>
+<span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/ggplot'>ggplot</a></span>(<span class='fu'><a href='augment.html'>augment</a></span>(<span class='no'>n</span>), <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/aes'>aes</a></span>(<span class='no'>wt</span>, <span class='no'>mpg</span>)) + <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/geom_point'>geom_point</a></span>() + <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/geom_path'>geom_line</a></span>(<span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/aes'>aes</a></span>(<span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>.fitted</span>))</div><div class='img'><img src='nls_tidiers-1.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'># augment on new data</span>
 <span class='no'>newdata</span> <span class='kw'>&lt;-</span> <span class='fu'>head</span>(<span class='no'>mtcars</span>)
 <span class='no'>newdata</span>$<span class='no'>wt</span> <span class='kw'>&lt;-</span> <span class='no'>newdata</span>$<span class='no'>wt</span> + <span class='fl'>1</span>
@@ -277,20 +280,22 @@ warning is raised and the incomplete rows are dropped.</p>
 
 <div class="author">
   <p>Developed by David Robinson.</p>
-  <p>Site built by <a href="http://hadley.github.io/pkgdown/">pkgdown</a>.</p>
+  <p>Site built by <a href="http://pkgdown.r-lib.org">pkgdown</a>.</p>
 </div>
 
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-115082821-1"></script>
 <script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+ window.dataLayer = window.dataLayer || [];
+ function gtag(){dataLayer.push(arguments);}
+ gtag('js', new Date());
 
-  ga('create', 'UA-67989-18', 'auto');
-  ga('send', 'pageview');
+ gtag('config', 'UA-115082821-1');
 </script>
       </footer>
    </div>
 
+  
+
   </body>
 </html>
+

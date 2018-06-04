@@ -92,15 +92,19 @@
       
       </header>
 
-      <div class="row">
+<div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Tidiers for ivreg models</h1>
+    <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/ivreg_tidiers.R'><code>R/ivreg_tidiers.R</code></a></small>
+    <div class="hidden name"><code>ivreg_tidiers.Rd</code></div>
     </div>
 
+    <div class="ref-description">
     
     <p>Tidiers for ivreg models</p>
     
+    </div>
 
     <pre class="usage"><span class='co'># S3 method for ivreg</span>
 <span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>x</span>, <span class='kw'>conf.int</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>conf.level</span> <span class='kw'>=</span> <span class='fl'>0.95</span>,
@@ -113,7 +117,7 @@
 <span class='co'># S3 method for ivreg</span>
 <span class='fu'><a href='glance.html'>glance</a></span>(<span class='no'>x</span>, <span class='kw'>diagnostics</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='no'>...</span>)</pre>
     
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
@@ -155,12 +159,10 @@ and confidence intervals</p></td>
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>All tidying methods return a data.frame without rownames, whose
-structure depends on the method chosen.
-
-<code>tidy.ivreg</code> returns a data frame with one row per
-coefficient, of the same form as <code><a href='lm_tidiers.html'>tidy.lm</a></code>.
-
-<code>augment</code> returns a data frame with one row for each
+structure depends on the method chosen.</p>
+<p><code>tidy.ivreg</code> returns a data frame with one row per
+coefficient, of the same form as <code><a href='lm_tidiers.html'>tidy.lm</a></code>.</p>
+<p><code>augment</code> returns a data frame with one row for each
 initial observation, adding the columns:</p>
 <dt>.fitted</dt><dd><p>predicted (fitted) values</p></dd>
 and if newdata is NULL:
@@ -182,7 +184,7 @@ If diagnostics is TRUE, glance also returns:
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <p><code><a href='lm_tidiers.html'>lm_tidiers</a></code></p>
+    <div class='dont-index'><p><code><a href='lm_tidiers.html'>lm_tidiers</a></code></p></div>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
@@ -192,7 +194,7 @@ If diagnostics is TRUE, glance also returns:
     <span class='no'>CigarettesSW</span>$<span class='no'>rprice</span> <span class='kw'>&lt;-</span> <span class='fu'>with</span>(<span class='no'>CigarettesSW</span>, <span class='no'>price</span>/<span class='no'>cpi</span>)
     <span class='no'>CigarettesSW</span>$<span class='no'>rincome</span> <span class='kw'>&lt;-</span> <span class='fu'>with</span>(<span class='no'>CigarettesSW</span>, <span class='no'>income</span>/<span class='no'>population</span>/<span class='no'>cpi</span>)
     <span class='no'>CigarettesSW</span>$<span class='no'>tdiff</span> <span class='kw'>&lt;-</span> <span class='fu'>with</span>(<span class='no'>CigarettesSW</span>, (<span class='no'>taxs</span> - <span class='no'>tax</span>)/<span class='no'>cpi</span>)
-    <span class='no'>ivr</span> <span class='kw'>&lt;-</span> <span class='fu'>ivreg</span>(<span class='fu'>log</span>(<span class='no'>packs</span>) ~ <span class='fu'>log</span>(<span class='no'>rprice</span>) + <span class='fu'>log</span>(<span class='no'>rincome</span>) <span class='kw'>|</span> <span class='fu'>log</span>(<span class='no'>rincome</span>) + <span class='no'>tdiff</span> + <span class='fu'>I</span>(<span class='no'>tax</span>/<span class='no'>cpi</span>),
+    <span class='no'>ivr</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/AER/topics/ivreg'>ivreg</a></span>(<span class='fu'>log</span>(<span class='no'>packs</span>) ~ <span class='fu'>log</span>(<span class='no'>rprice</span>) + <span class='fu'>log</span>(<span class='no'>rincome</span>) <span class='kw'>|</span> <span class='fu'>log</span>(<span class='no'>rincome</span>) + <span class='no'>tdiff</span> + <span class='fu'>I</span>(<span class='no'>tax</span>/<span class='no'>cpi</span>),
           <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>CigarettesSW</span>, <span class='kw'>subset</span> <span class='kw'>=</span> <span class='no'>year</span> <span class='kw'>==</span> <span class='st'>"1995"</span>)
 
     <span class='fu'>summary</span>(<span class='no'>ivr</span>)
@@ -204,7 +206,19 @@ If diagnostics is TRUE, glance also returns:
     <span class='fu'>head</span>(<span class='fu'><a href='augment.html'>augment</a></span>(<span class='no'>ivr</span>))
 
     <span class='fu'><a href='glance.html'>glance</a></span>(<span class='no'>ivr</span>)
-}</div><div class='output co'>#&gt; <span class='warning'>Warning: there is no package called ‘AER’</span></div><div class='input'>
+}</div><div class='output co'>#&gt; <span class='warning'>Warning: package 'AER' was built under R version 3.4.3</span></div><div class='output co'>#&gt; <span class='warning'>Warning: package 'car' was built under R version 3.4.4</span></div><div class='output co'>#&gt; <span class='warning'>Warning: package 'carData' was built under R version 3.4.4</span></div><div class='output co'>#&gt; <span class='message'></span>
+#&gt; <span class='message'>Attaching package: 'car'</span></div><div class='output co'>#&gt; <span class='message'>The following object is masked from 'package:boot':</span>
+#&gt; <span class='message'></span>
+#&gt; <span class='message'>    logit</span></div><div class='output co'>#&gt; <span class='message'>The following object is masked from 'package:dplyr':</span>
+#&gt; <span class='message'></span>
+#&gt; <span class='message'>    recode</span></div><div class='output co'>#&gt; <span class='warning'>Warning: package 'lmtest' was built under R version 3.4.4</span></div><div class='output co'>#&gt; <span class='warning'>Warning: package 'zoo' was built under R version 3.4.3</span></div><div class='output co'>#&gt; <span class='message'></span>
+#&gt; <span class='message'>Attaching package: 'zoo'</span></div><div class='output co'>#&gt; <span class='message'>The following objects are masked from 'package:base':</span>
+#&gt; <span class='message'></span>
+#&gt; <span class='message'>    as.Date, as.Date.numeric</span></div><div class='output co'>#&gt; <span class='message'></span>
+#&gt; <span class='message'>Attaching package: 'lmtest'</span></div><div class='output co'>#&gt; <span class='message'>The following object is masked from 'package:lfe':</span>
+#&gt; <span class='message'></span>
+#&gt; <span class='message'>    waldtest</span></div><div class='output co'>#&gt; <span class='warning'>Warning: Exponentiating coefficients, but model did not use a log or logit link function</span></div><div class='output co'>#&gt;   r.squared adj.r.squared    sigma statistic      p.value df df.residual
+#&gt; 1 0.4294224     0.4040634 0.187856  13.28079 2.930789e-05  3          45</div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
@@ -229,20 +243,22 @@ If diagnostics is TRUE, glance also returns:
 
 <div class="author">
   <p>Developed by David Robinson.</p>
-  <p>Site built by <a href="http://hadley.github.io/pkgdown/">pkgdown</a>.</p>
+  <p>Site built by <a href="http://pkgdown.r-lib.org">pkgdown</a>.</p>
 </div>
 
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-115082821-1"></script>
 <script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+ window.dataLayer = window.dataLayer || [];
+ function gtag(){dataLayer.push(arguments);}
+ gtag('js', new Date());
 
-  ga('create', 'UA-67989-18', 'auto');
-  ga('send', 'pageview');
+ gtag('config', 'UA-115082821-1');
 </script>
       </footer>
    </div>
 
+  
+
   </body>
 </html>
+

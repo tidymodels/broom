@@ -31,20 +31,6 @@ test_that("xyz tidiers work", {
     expect_error(tidy(C))
 })
 
-test_that("svd tidiers work", {
-    mat <- as.matrix(iris[, 1:4])
-    s <- svd(mat)
-    
-    td <- tidy(s, matrix = "u")
-    check_tidy(td, exp.row = 600, exp.col = 3)
-    
-    td <- tidy(s, matrix = "d")
-    check_tidy(td, exp.row = 4, exp.col = 3)
-    
-    td <- tidy(s, matrix = "v")
-    check_tidy(td, exp.row = 16, exp.col = 3)
-})
-
 test_that("not all lists can be tidied", {
     expect_error(tidy(list(A = NULL)))
     expect_error(glance(list(A = NULL)))

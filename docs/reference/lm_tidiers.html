@@ -92,17 +92,21 @@
       
       </header>
 
-      <div class="row">
+<div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Tidying methods for a linear model</h1>
+    <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/lm_tidiers.R'><code>R/lm_tidiers.R</code></a></small>
+    <div class="hidden name"><code>lm_tidiers.Rd</code></div>
     </div>
 
+    <div class="ref-description">
     
     <p>These methods tidy the coefficients of a linear model into a summary,
 augment the original data with information on the fitted values and
 residuals, and construct a one-row glance of the model's statistics.</p>
     
+    </div>
 
     <pre class="usage"><span class='co'># S3 method for lm</span>
 <span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>x</span>, <span class='kw'>conf.int</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>conf.level</span> <span class='kw'>=</span> <span class='fl'>0.95</span>,
@@ -121,7 +125,7 @@ residuals, and construct a one-row glance of the model's statistics.</p>
 <span class='co'># S3 method for summary.lm</span>
 <span class='fu'><a href='glance.html'>glance</a></span>(<span class='no'>x</span>, <span class='no'>...</span>)</pre>
     
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
@@ -174,9 +178,8 @@ only the <code>term</code> and <code>estimate</code> columns.</p></td>
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>All tidying methods return a <code>data.frame</code> without rownames.
-The structure depends on the method chosen.
-
-<code>tidy.lm</code> returns one row for each coefficient, with five columns:</p>
+The structure depends on the method chosen.</p>
+<p><code>tidy.lm</code> returns one row for each coefficient, with five columns:</p>
 <dt>term</dt><dd><p>The term in the linear model being estimated and tested</p></dd>
   <dt>estimate</dt><dd><p>The estimated coefficient</p></dd>
   <dt>std.error</dt><dd><p>The standard error from the linear model</p></dd>
@@ -249,8 +252,8 @@ ggplot2 package, where it was called <code>fortify.lm</code></p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <p><code>summary.lm</code>
-    na.action</p>
+    <div class='dont-index'><p><code>summary.lm</code></p>
+<p>na.action</p></div>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
@@ -273,7 +276,7 @@ ggplot2 package, where it was called <code>fortify.lm</code></p>
 <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/ggplot'>ggplot</a></span>(<span class='no'>d</span>, <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/aes'>aes</a></span>(<span class='no'>estimate</span>, <span class='no'>term</span>, <span class='kw'>xmin</span> <span class='kw'>=</span> <span class='no'>low</span>, <span class='kw'>xmax</span> <span class='kw'>=</span> <span class='no'>high</span>, <span class='kw'>height</span> <span class='kw'>=</span> <span class='fl'>0</span>)) +
      <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/geom_point'>geom_point</a></span>() +
      <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/geom_abline'>geom_vline</a></span>(<span class='kw'>xintercept</span> <span class='kw'>=</span> <span class='fl'>0</span>) +
-     <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/geom_errorbarh'>geom_errorbarh</a></span>()</div><div class='img'><img src='lm_tidiers-39.png' alt='' width='700' height='432.632880098887' /></div><div class='input'>
+     <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/geom_errorbarh'>geom_errorbarh</a></span>()</div><div class='img'><img src='lm_tidiers-1.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='fu'>head</span>(<span class='fu'><a href='augment.html'>augment</a></span>(<span class='no'>mod</span>))</div><div class='output co'>#&gt;           .rownames  mpg    wt  qsec  .fitted   .se.fit      .resid       .hat
 #&gt; 1         Mazda RX4 21.0 2.620 16.46 21.81511 0.6832424 -0.81510855 0.06925986
 #&gt; 2     Mazda RX4 Wag 21.0 2.875 17.02 21.04822 0.5468271 -0.04822401 0.04436414
@@ -312,38 +315,38 @@ ggplot2 package, where it was called <code>fortify.lm</code></p>
 #&gt; 6 18.1   6  225 105 2.76 4.460 20.22  1  0    3    1 16.02061 1.0485285</div><div class='input'>
 <span class='no'>au</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='augment.html'>augment</a></span>(<span class='no'>mod</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>mtcars</span>)
 
-<span class='fu'>plot</span>(<span class='no'>mod</span>, <span class='kw'>which</span> <span class='kw'>=</span> <span class='fl'>1</span>)</div><div class='img'><img src='lm_tidiers-40.png' alt='' width='700' height='432.632880098887' /></div><div class='input'><span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/qplot'>qplot</a></span>(<span class='no'>.fitted</span>, <span class='no'>.resid</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>au</span>) +
+<span class='fu'>plot</span>(<span class='no'>mod</span>, <span class='kw'>which</span> <span class='kw'>=</span> <span class='fl'>1</span>)</div><div class='img'><img src='lm_tidiers-2.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/qplot'>qplot</a></span>(<span class='no'>.fitted</span>, <span class='no'>.resid</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>au</span>) +
   <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/geom_abline'>geom_hline</a></span>(<span class='kw'>yintercept</span> <span class='kw'>=</span> <span class='fl'>0</span>) +
-  <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/geom_smooth'>geom_smooth</a></span>(<span class='kw'>se</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</div><div class='output co'>#&gt; <span class='message'>`geom_smooth()` using method = 'loess'</span></div><div class='img'><img src='lm_tidiers-41.png' alt='' width='700' height='432.632880098887' /></div><div class='input'><span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/qplot'>qplot</a></span>(<span class='no'>.fitted</span>, <span class='no'>.std.resid</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>au</span>) +
+  <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/geom_smooth'>geom_smooth</a></span>(<span class='kw'>se</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</div><div class='output co'>#&gt; <span class='message'>`geom_smooth()` using method = 'loess' and formula 'y ~ x'</span></div><div class='img'><img src='lm_tidiers-3.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/qplot'>qplot</a></span>(<span class='no'>.fitted</span>, <span class='no'>.std.resid</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>au</span>) +
   <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/geom_abline'>geom_hline</a></span>(<span class='kw'>yintercept</span> <span class='kw'>=</span> <span class='fl'>0</span>) +
-  <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/geom_smooth'>geom_smooth</a></span>(<span class='kw'>se</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</div><div class='output co'>#&gt; <span class='message'>`geom_smooth()` using method = 'loess'</span></div><div class='img'><img src='lm_tidiers-42.png' alt='' width='700' height='432.632880098887' /></div><div class='input'><span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/qplot'>qplot</a></span>(<span class='no'>.fitted</span>, <span class='no'>.std.resid</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>au</span>,
-  <span class='kw'>colour</span> <span class='kw'>=</span> <span class='fu'>factor</span>(<span class='no'>cyl</span>))</div><div class='img'><img src='lm_tidiers-43.png' alt='' width='700' height='432.632880098887' /></div><div class='input'><span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/qplot'>qplot</a></span>(<span class='no'>mpg</span>, <span class='no'>.std.resid</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>au</span>, <span class='kw'>colour</span> <span class='kw'>=</span> <span class='fu'>factor</span>(<span class='no'>cyl</span>))</div><div class='img'><img src='lm_tidiers-44.png' alt='' width='700' height='432.632880098887' /></div><div class='input'>
-<span class='fu'>plot</span>(<span class='no'>mod</span>, <span class='kw'>which</span> <span class='kw'>=</span> <span class='fl'>2</span>)</div><div class='img'><img src='lm_tidiers-45.png' alt='' width='700' height='432.632880098887' /></div><div class='input'><span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/qplot'>qplot</a></span>(<span class='kw'>sample</span> <span class='kw'>=</span><span class='no'>.std.resid</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>au</span>, <span class='kw'>stat</span> <span class='kw'>=</span> <span class='st'>"qq"</span>) +
-    <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/geom_abline'>geom_abline</a></span>()</div><div class='output co'>#&gt; <span class='warning'>Warning: `stat` is deprecated</span></div><div class='img'><img src='lm_tidiers-46.png' alt='' width='700' height='432.632880098887' /></div><div class='input'>
-<span class='fu'>plot</span>(<span class='no'>mod</span>, <span class='kw'>which</span> <span class='kw'>=</span> <span class='fl'>3</span>)</div><div class='img'><img src='lm_tidiers-47.png' alt='' width='700' height='432.632880098887' /></div><div class='input'><span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/qplot'>qplot</a></span>(<span class='no'>.fitted</span>, <span class='fu'>sqrt</span>(<span class='fu'>abs</span>(<span class='no'>.std.resid</span>)), <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>au</span>) + <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/geom_smooth'>geom_smooth</a></span>(<span class='kw'>se</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</div><div class='output co'>#&gt; <span class='message'>`geom_smooth()` using method = 'loess'</span></div><div class='img'><img src='lm_tidiers-48.png' alt='' width='700' height='432.632880098887' /></div><div class='input'>
-<span class='fu'>plot</span>(<span class='no'>mod</span>, <span class='kw'>which</span> <span class='kw'>=</span> <span class='fl'>4</span>)</div><div class='img'><img src='lm_tidiers-49.png' alt='' width='700' height='432.632880098887' /></div><div class='input'><span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/qplot'>qplot</a></span>(<span class='fu'>seq_along</span>(<span class='no'>.cooksd</span>), <span class='no'>.cooksd</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>au</span>)</div><div class='img'><img src='lm_tidiers-50.png' alt='' width='700' height='432.632880098887' /></div><div class='input'>
-<span class='fu'>plot</span>(<span class='no'>mod</span>, <span class='kw'>which</span> <span class='kw'>=</span> <span class='fl'>5</span>)</div><div class='img'><img src='lm_tidiers-51.png' alt='' width='700' height='432.632880098887' /></div><div class='input'><span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/qplot'>qplot</a></span>(<span class='no'>.hat</span>, <span class='no'>.std.resid</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>au</span>) + <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/geom_smooth'>geom_smooth</a></span>(<span class='kw'>se</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</div><div class='output co'>#&gt; <span class='message'>`geom_smooth()` using method = 'loess'</span></div><div class='img'><img src='lm_tidiers-52.png' alt='' width='700' height='432.632880098887' /></div><div class='input'><span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/ggplot'>ggplot</a></span>(<span class='no'>au</span>, <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/aes'>aes</a></span>(<span class='no'>.hat</span>, <span class='no'>.std.resid</span>)) +
+  <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/geom_smooth'>geom_smooth</a></span>(<span class='kw'>se</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</div><div class='output co'>#&gt; <span class='message'>`geom_smooth()` using method = 'loess' and formula 'y ~ x'</span></div><div class='img'><img src='lm_tidiers-4.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/qplot'>qplot</a></span>(<span class='no'>.fitted</span>, <span class='no'>.std.resid</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>au</span>,
+  <span class='kw'>colour</span> <span class='kw'>=</span> <span class='fu'>factor</span>(<span class='no'>cyl</span>))</div><div class='img'><img src='lm_tidiers-5.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/qplot'>qplot</a></span>(<span class='no'>mpg</span>, <span class='no'>.std.resid</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>au</span>, <span class='kw'>colour</span> <span class='kw'>=</span> <span class='fu'>factor</span>(<span class='no'>cyl</span>))</div><div class='img'><img src='lm_tidiers-6.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='fu'>plot</span>(<span class='no'>mod</span>, <span class='kw'>which</span> <span class='kw'>=</span> <span class='fl'>2</span>)</div><div class='img'><img src='lm_tidiers-7.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/qplot'>qplot</a></span>(<span class='kw'>sample</span> <span class='kw'>=</span><span class='no'>.std.resid</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>au</span>, <span class='kw'>stat</span> <span class='kw'>=</span> <span class='st'>"qq"</span>) +
+    <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/geom_abline'>geom_abline</a></span>()</div><div class='output co'>#&gt; <span class='warning'>Warning: `stat` is deprecated</span></div><div class='img'><img src='lm_tidiers-8.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='fu'>plot</span>(<span class='no'>mod</span>, <span class='kw'>which</span> <span class='kw'>=</span> <span class='fl'>3</span>)</div><div class='img'><img src='lm_tidiers-9.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/qplot'>qplot</a></span>(<span class='no'>.fitted</span>, <span class='fu'>sqrt</span>(<span class='fu'>abs</span>(<span class='no'>.std.resid</span>)), <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>au</span>) + <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/geom_smooth'>geom_smooth</a></span>(<span class='kw'>se</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</div><div class='output co'>#&gt; <span class='message'>`geom_smooth()` using method = 'loess' and formula 'y ~ x'</span></div><div class='img'><img src='lm_tidiers-10.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='fu'>plot</span>(<span class='no'>mod</span>, <span class='kw'>which</span> <span class='kw'>=</span> <span class='fl'>4</span>)</div><div class='img'><img src='lm_tidiers-11.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/qplot'>qplot</a></span>(<span class='fu'>seq_along</span>(<span class='no'>.cooksd</span>), <span class='no'>.cooksd</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>au</span>)</div><div class='img'><img src='lm_tidiers-12.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='fu'>plot</span>(<span class='no'>mod</span>, <span class='kw'>which</span> <span class='kw'>=</span> <span class='fl'>5</span>)</div><div class='img'><img src='lm_tidiers-13.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/qplot'>qplot</a></span>(<span class='no'>.hat</span>, <span class='no'>.std.resid</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>au</span>) + <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/geom_smooth'>geom_smooth</a></span>(<span class='kw'>se</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</div><div class='output co'>#&gt; <span class='message'>`geom_smooth()` using method = 'loess' and formula 'y ~ x'</span></div><div class='img'><img src='lm_tidiers-14.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/ggplot'>ggplot</a></span>(<span class='no'>au</span>, <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/aes'>aes</a></span>(<span class='no'>.hat</span>, <span class='no'>.std.resid</span>)) +
   <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/geom_abline'>geom_vline</a></span>(<span class='kw'>size</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>colour</span> <span class='kw'>=</span> <span class='st'>"white"</span>, <span class='kw'>xintercept</span> <span class='kw'>=</span> <span class='fl'>0</span>) +
   <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/geom_abline'>geom_hline</a></span>(<span class='kw'>size</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>colour</span> <span class='kw'>=</span> <span class='st'>"white"</span>, <span class='kw'>yintercept</span> <span class='kw'>=</span> <span class='fl'>0</span>) +
-  <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/geom_point'>geom_point</a></span>() + <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/geom_smooth'>geom_smooth</a></span>(<span class='kw'>se</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</div><div class='output co'>#&gt; <span class='message'>`geom_smooth()` using method = 'loess'</span></div><div class='img'><img src='lm_tidiers-53.png' alt='' width='700' height='432.632880098887' /></div><div class='input'>
+  <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/geom_point'>geom_point</a></span>() + <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/geom_smooth'>geom_smooth</a></span>(<span class='kw'>se</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</div><div class='output co'>#&gt; <span class='message'>`geom_smooth()` using method = 'loess' and formula 'y ~ x'</span></div><div class='img'><img src='lm_tidiers-15.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/qplot'>qplot</a></span>(<span class='no'>.hat</span>, <span class='no'>.std.resid</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>au</span>, <span class='kw'>size</span> <span class='kw'>=</span> <span class='no'>.cooksd</span>) +
-  <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/geom_smooth'>geom_smooth</a></span>(<span class='kw'>se</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>size</span> <span class='kw'>=</span> <span class='fl'>0.5</span>)</div><div class='output co'>#&gt; <span class='message'>`geom_smooth()` using method = 'loess'</span></div><div class='img'><img src='lm_tidiers-54.png' alt='' width='700' height='432.632880098887' /></div><div class='input'>
-<span class='fu'>plot</span>(<span class='no'>mod</span>, <span class='kw'>which</span> <span class='kw'>=</span> <span class='fl'>6</span>)</div><div class='img'><img src='lm_tidiers-55.png' alt='' width='700' height='432.632880098887' /></div><div class='input'><span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/ggplot'>ggplot</a></span>(<span class='no'>au</span>, <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/aes'>aes</a></span>(<span class='no'>.hat</span>, <span class='no'>.cooksd</span>)) +
+  <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/geom_smooth'>geom_smooth</a></span>(<span class='kw'>se</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>size</span> <span class='kw'>=</span> <span class='fl'>0.5</span>)</div><div class='output co'>#&gt; <span class='message'>`geom_smooth()` using method = 'loess' and formula 'y ~ x'</span></div><div class='img'><img src='lm_tidiers-16.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='fu'>plot</span>(<span class='no'>mod</span>, <span class='kw'>which</span> <span class='kw'>=</span> <span class='fl'>6</span>)</div><div class='img'><img src='lm_tidiers-17.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/ggplot'>ggplot</a></span>(<span class='no'>au</span>, <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/aes'>aes</a></span>(<span class='no'>.hat</span>, <span class='no'>.cooksd</span>)) +
   <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/geom_abline'>geom_vline</a></span>(<span class='kw'>xintercept</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>colour</span> <span class='kw'>=</span> <span class='fl'>NA</span>) +
   <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/geom_abline'>geom_abline</a></span>(<span class='kw'>slope</span> <span class='kw'>=</span> <span class='fu'>seq</span>(<span class='fl'>0</span>, <span class='fl'>3</span>, <span class='kw'>by</span> <span class='kw'>=</span> <span class='fl'>0.5</span>), <span class='kw'>colour</span> <span class='kw'>=</span> <span class='st'>"white"</span>) +
   <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/geom_smooth'>geom_smooth</a></span>(<span class='kw'>se</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>) +
-  <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/geom_point'>geom_point</a></span>()</div><div class='output co'>#&gt; <span class='message'>`geom_smooth()` using method = 'loess'</span></div><div class='img'><img src='lm_tidiers-56.png' alt='' width='700' height='432.632880098887' /></div><div class='input'><span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/qplot'>qplot</a></span>(<span class='no'>.hat</span>, <span class='no'>.cooksd</span>, <span class='kw'>size</span> <span class='kw'>=</span> <span class='no'>.cooksd</span> / <span class='no'>.hat</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>au</span>) + <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/scale_size'>scale_size_area</a></span>()</div><div class='img'><img src='lm_tidiers-57.png' alt='' width='700' height='432.632880098887' /></div><div class='input'>
+  <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/geom_point'>geom_point</a></span>()</div><div class='output co'>#&gt; <span class='message'>`geom_smooth()` using method = 'loess' and formula 'y ~ x'</span></div><div class='img'><img src='lm_tidiers-18.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/qplot'>qplot</a></span>(<span class='no'>.hat</span>, <span class='no'>.cooksd</span>, <span class='kw'>size</span> <span class='kw'>=</span> <span class='no'>.cooksd</span> / <span class='no'>.hat</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>au</span>) + <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/scale_size'>scale_size_area</a></span>()</div><div class='img'><img src='lm_tidiers-19.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'># column-wise models</span>
 <span class='no'>a</span> <span class='kw'>&lt;-</span> <span class='fu'>matrix</span>(<span class='fu'>rnorm</span>(<span class='fl'>20</span>), <span class='kw'>nrow</span> <span class='kw'>=</span> <span class='fl'>10</span>)
 <span class='no'>b</span> <span class='kw'>&lt;-</span> <span class='no'>a</span> + <span class='fu'>rnorm</span>(<span class='fu'>length</span>(<span class='no'>a</span>))
 <span class='no'>result</span> <span class='kw'>&lt;-</span> <span class='fu'>lm</span>(<span class='no'>b</span> ~ <span class='no'>a</span>)
-<span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>result</span>)</div><div class='output co'>#&gt;   response        term   estimate std.error  statistic   p.value
-#&gt; 1       Y1 (Intercept) -0.2143820 0.3583054 -0.5983221 0.5684712
-#&gt; 2       Y1          a1  0.4562884 0.3415262  1.3360273 0.2233379
-#&gt; 3       Y1          a2 -0.5332556 0.3969908 -1.3432444 0.2211076
-#&gt; 4       Y2 (Intercept)  0.5491063 0.4023471  1.3647578 0.2145748
-#&gt; 5       Y2          a1  0.2243959 0.3835055  0.5851178 0.5768351
-#&gt; 6       Y2          a2  0.6712777 0.4457875  1.5058242 0.1758333</div></pre>
+<span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>result</span>)</div><div class='output co'>#&gt;   response        term   estimate std.error  statistic    p.value
+#&gt; 1       Y1 (Intercept)  0.2319346 0.3851758  0.6021526 0.56605822
+#&gt; 2       Y1          a1  1.2113326 0.4704696  2.5747307 0.03675351
+#&gt; 3       Y1          a2 -0.1010004 0.3432436 -0.2942529 0.77709887
+#&gt; 4       Y2 (Intercept)  0.2445486 0.5204455  0.4698833 0.65272483
+#&gt; 5       Y2          a1  0.2932774 0.6356936  0.4613503 0.65854043
+#&gt; 6       Y2          a2  0.9794628 0.4637871  2.1118800 0.07258664</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -369,20 +372,22 @@ ggplot2 package, where it was called <code>fortify.lm</code></p>
 
 <div class="author">
   <p>Developed by David Robinson.</p>
-  <p>Site built by <a href="http://hadley.github.io/pkgdown/">pkgdown</a>.</p>
+  <p>Site built by <a href="http://pkgdown.r-lib.org">pkgdown</a>.</p>
 </div>
 
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-115082821-1"></script>
 <script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+ window.dataLayer = window.dataLayer || [];
+ function gtag(){dataLayer.push(arguments);}
+ gtag('js', new Date());
 
-  ga('create', 'UA-67989-18', 'auto');
-  ga('send', 'pageview');
+ gtag('config', 'UA-115082821-1');
 </script>
       </footer>
    </div>
 
+  
+
   </body>
 </html>
+

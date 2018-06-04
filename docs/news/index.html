@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>All news • broom</title>
+<title>Changelog • broom</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -92,14 +92,21 @@
       
       </header>
 
-      <div class="row">
-
-  <div class="col-md-9">
+<div class="row">
+  <div class="col-md-9 contents">
     <div class="page-header">
-      <h1>Change log <small>All releases</small></h1>
+      <h1>Changelog <small></small></h1>
+      <small>Source: <a href='http://github.com/tidyverse/broom/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
-    <div class="contents">
+    <div id="broom-0-4-4" class="section level2">
+<h2 class="hasAnchor">
+<a href="#broom-0-4-4" class="anchor"></a>broom 0.4.4</h2>
+<ul>
+<li>Fixed gam tidiers to work with “Gam” objects, due to an update in gam 1.15. This fixes failing CRAN tests</li>
+<li>Improved test coverage (thanks to <a href='http://github.com/tidyverse/broom/issues/267'>#267</a> from Derek Chiu)</li>
+</ul>
+</div>
     <div id="broom-0-4-3" class="section level2">
 <h2 class="hasAnchor">
 <a href="#broom-0-4-3" class="anchor"></a>broom 0.4.3</h2>
@@ -118,6 +125,7 @@
 <li>Added tidiers for <code>emmeans</code> from the emmeans package (thanks to <a href='http://github.com/tidyverse/broom/issues/252'>#252</a> from Matthew Kay)</li>
 <li>Added tidiers for <code>speedlm</code> and <code>speedglm</code> from the speedglm package (thanks to <a href='http://github.com/tidyverse/broom/issues/248'>#248</a> from David Hugh-Jones)</li>
 <li>Added tidiers for <code>muhaz</code> objects from the muhaz package (thanks to <a href='http://github.com/tidyverse/broom/issues/251'>#251</a> from Andreas Bender)</li>
+<li>Added tidiers for <code>decompose</code> and <code>stl</code> objects from stats (thanks to <a href='http://github.com/tidyverse/broom/issues/165'>#165</a> from Aaron Jacobs)</li>
 </ul>
 </div>
     <div id="broom-0-4-2" class="section level2">
@@ -268,13 +276,13 @@ See <code><a href="../reference/rowwise_df_tidiers.html">?rowwise_df_tidiers</a>
 <li>Because this integrates substantial amounts of ggplot2 code (with permission), added Hadley Wickham as an author in DESCRIPTION.</li>
 </ul>
 </div>
-    </div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <div id="tocnav">
       <h2>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
+        <li><a href="#broom-0-4-4">0.4.4</a></li>
         <li><a href="#broom-0-4-3">0.4.3</a></li>
         <li><a href="#broom-0-4-2">0.4.2</a></li>
         <li><a href="#broom-0-4-1">0.4.1</a></li>
@@ -298,20 +306,22 @@ See <code><a href="../reference/rowwise_df_tidiers.html">?rowwise_df_tidiers</a>
 
 <div class="author">
   <p>Developed by David Robinson.</p>
-  <p>Site built by <a href="http://hadley.github.io/pkgdown/">pkgdown</a>.</p>
+  <p>Site built by <a href="http://pkgdown.r-lib.org">pkgdown</a>.</p>
 </div>
 
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-115082821-1"></script>
 <script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+ window.dataLayer = window.dataLayer || [];
+ function gtag(){dataLayer.push(arguments);}
+ gtag('js', new Date());
 
-  ga('create', 'UA-67989-18', 'auto');
-  ga('send', 'pageview');
+ gtag('config', 'UA-115082821-1');
 </script>
       </footer>
    </div>
 
+  
+
   </body>
 </html>
+

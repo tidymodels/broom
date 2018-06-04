@@ -15,7 +15,7 @@
 <![endif]-->
 </head>
 <body>
-    <div class="container template-vignette">
+    <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
@@ -75,20 +75,24 @@
 
       
       </header><div class="row">
-  <div class="col-md-9">
+  <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1></h1>
             
-          </div>
+      
+      <small class="dont-index">Source: <a href="http://github.com/tidyverse/broom/blob/master/vignettes/broom_and_dplyr.Rmd"><code>vignettes/broom_and_dplyr.Rmd</code></a></small>
+      <div class="hidden name"><code>broom_and_dplyr.Rmd</code></div>
+
+    </div>
 
     
     
-<div class="contents">
 <!--
 %\VignetteBuilder{knitr::knitr}
 %\VignetteEngine{knitr::knitr}
 %\VignetteIndexEntry{broom and dplyr}
 -->
+<pre><code>## Warning: package 'knitr' was built under R version 3.4.3</code></pre>
 <div id="broom-and-dplyr" class="section level1">
 <h1 class="hasAnchor">
 <a href="#broom-and-dplyr" class="anchor"></a>broom and dplyr</h1>
@@ -113,18 +117,18 @@
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">cor</span>(Orange<span class="op">$</span>age, Orange<span class="op">$</span>circumference)</code></pre></div>
 <pre><code>## [1] 0.9135189</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(ggplot2)
-<span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/ggplot">ggplot</a></span>(Orange, <span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/aes">aes</a></span>(age, circumference, <span class="dt">color =</span> Tree)) <span class="op">+</span><span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/geom_path">geom_line</a></span>()</code></pre></div>
-<p><img src="broom_and_dplyr_files/figure-html/unnamed-chunk-1-1.png" width="672"></p>
+<span class="kw">ggplot</span>(Orange, <span class="kw">aes</span>(age, circumference, <span class="dt">color =</span> Tree)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_line</span>()</code></pre></div>
+<p><img src="broom_and_dplyr_files/figure-html/unnamed-chunk-1-1.png" width="700"></p>
 <p>Suppose you want to test for correlations individually <em>within</em> each tree. You can do this with dplyr’s <code>group_by</code>:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Orange <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span>(Tree) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/summarise.html">summarize</a></span>(<span class="dt">correlation =</span> <span class="kw">cor</span>(age, circumference))</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Orange <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">group_by</span>(Tree) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">summarize</span>(<span class="dt">correlation =</span> <span class="kw">cor</span>(age, circumference))</code></pre></div>
 <pre><code>## # A tibble: 5 x 2
-##    Tree correlation
+##   Tree  correlation
 ##   &lt;ord&gt;       &lt;dbl&gt;
-## 1     3   0.9881766
-## 2     1   0.9854675
-## 3     5   0.9877376
-## 4     2   0.9873624
-## 5     4   0.9844610</code></pre>
+## 1 3           0.988
+## 2 1           0.985
+## 3 5           0.988
+## 4 2           0.987
+## 5 4           0.984</code></pre>
 <p>(Note that the correlations are much higher than the aggregated one, and furthermore we can now see it is similar across trees).</p>
 <p>Suppose that instead of simply estimating a correlation, we want to perform a hypothesis test with <code>cor.test</code>:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">cor.test</span>(Orange<span class="op">$</span>age, Orange<span class="op">$</span>circumference)</code></pre></div>
@@ -140,33 +144,33 @@
 ##       cor 
 ## 0.9135189</code></pre>
 <p>This contains multiple values we could want in our output. Some are vectors of length 1, such as the p-value and the estimate, and some are longer, such as the confidence interval. broom’s <code>tidy</code> S3 method, combined with dplyr’s <code>do</code>, makes it easy to summarize the information about each test:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Orange <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span>(Tree) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/do.html">do</a></span>(<span class="kw"><a href="../reference/tidy.html">tidy</a></span>(<span class="kw">cor.test</span>(.<span class="op">$</span>age, .<span class="op">$</span>circumference)))</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Orange <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">group_by</span>(Tree) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">do</span>(<span class="kw"><a href="../reference/tidy.html">tidy</a></span>(<span class="kw">cor.test</span>(.<span class="op">$</span>age, .<span class="op">$</span>circumference)))</code></pre></div>
 <pre><code>## # A tibble: 5 x 9
 ## # Groups:   Tree [5]
-##    Tree  estimate statistic      p.value parameter  conf.low conf.high
-##   &lt;ord&gt;     &lt;dbl&gt;     &lt;dbl&gt;        &lt;dbl&gt;     &lt;int&gt;     &lt;dbl&gt;     &lt;dbl&gt;
-## 1     3 0.9881766  14.41188 2.901046e-05         5 0.9189858 0.9983260
-## 2     1 0.9854675  12.97258 4.851902e-05         5 0.9012111 0.9979400
-## 3     5 0.9877376  14.14686 3.177093e-05         5 0.9160865 0.9982635
-## 4     2 0.9873624  13.93129 3.425041e-05         5 0.9136142 0.9982101
-## 5     4 0.9844610  12.53575 5.733090e-05         5 0.8946782 0.9977964
-## # ... with 2 more variables: method &lt;fctr&gt;, alternative &lt;fctr&gt;</code></pre>
+##   Tree  estimate statistic  p.value parameter conf.low conf.high method   
+##   &lt;ord&gt;    &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;     &lt;int&gt;    &lt;dbl&gt;     &lt;dbl&gt; &lt;fct&gt;    
+## 1 3        0.988      14.4  2.90e-5         5    0.919     0.998 Pearson'~
+## 2 1        0.985      13.0  4.85e-5         5    0.901     0.998 Pearson'~
+## 3 5        0.988      14.1  3.18e-5         5    0.916     0.998 Pearson'~
+## 4 2        0.987      13.9  3.43e-5         5    0.914     0.998 Pearson'~
+## 5 4        0.984      12.5  5.73e-5         5    0.895     0.998 Pearson'~
+## # ... with 1 more variable: alternative &lt;fct&gt;</code></pre>
 <p>This becomes even more useful when applied to regressions, which give more than one row of output within each model:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Orange <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span>(Tree) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/do.html">do</a></span>(<span class="kw"><a href="../reference/tidy.html">tidy</a></span>(<span class="kw">lm</span>(age <span class="op">~</span><span class="st"> </span>circumference, <span class="dt">data=</span>.)))</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Orange <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">group_by</span>(Tree) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">do</span>(<span class="kw"><a href="../reference/tidy.html">tidy</a></span>(<span class="kw">lm</span>(age <span class="op">~</span><span class="st"> </span>circumference, <span class="dt">data=</span>.)))</code></pre></div>
 <pre><code>## # A tibble: 10 x 6
 ## # Groups:   Tree [5]
-##     Tree          term    estimate  std.error  statistic      p.value
-##    &lt;ord&gt;         &lt;chr&gt;       &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt;        &lt;dbl&gt;
-##  1     3   (Intercept) -209.512321 85.2682904 -2.4570954 5.743323e-02
-##  2     3 circumference   12.038885  0.8353445 14.4118806 2.901046e-05
-##  3     1   (Intercept) -264.673437 98.6205569 -2.6837553 4.362351e-02
-##  4     1 circumference   11.919245  0.9188029 12.9725813 4.851902e-05
-##  5     5   (Intercept)  -54.484097 76.8862788 -0.7086323 5.102144e-01
-##  6     5 circumference    8.787132  0.6211365 14.1468610 3.177093e-05
-##  7     2   (Intercept) -132.439725 83.1314146 -1.5931369 1.720092e-01
-##  8     2 circumference    7.795225  0.5595479 13.9312907 3.425041e-05
-##  9     4   (Intercept)  -76.513671 88.2943757 -0.8665747 4.257969e-01
-## 10     4 circumference    7.169842  0.5719516 12.5357484 5.733090e-05</code></pre>
+##    Tree  term          estimate std.error statistic   p.value
+##    &lt;ord&gt; &lt;chr&gt;            &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;
+##  1 3     (Intercept)    -210.      85.3      -2.46  0.0574   
+##  2 3     circumference    12.0      0.835    14.4   0.0000290
+##  3 1     (Intercept)    -265.      98.6      -2.68  0.0436   
+##  4 1     circumference    11.9      0.919    13.0   0.0000485
+##  5 5     (Intercept)     -54.5     76.9      -0.709 0.510    
+##  6 5     circumference     8.79     0.621    14.1   0.0000318
+##  7 2     (Intercept)    -132.      83.1      -1.59  0.172    
+##  8 2     circumference     7.80     0.560    13.9   0.0000343
+##  9 4     (Intercept)     -76.5     88.3      -0.867 0.426    
+## 10 4     circumference     7.17     0.572    12.5   0.0000573</code></pre>
 <p>You can just as easily perform multiple regressions within each group, as shown here on the <code>mtcars</code> dataset. We group the data into automatic and manual cars (the <code>am</code> column), then perform the regression within each.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data</span>(mtcars)
 <span class="kw">head</span>(mtcars)</code></pre></div>
@@ -177,29 +181,29 @@
 ## Hornet 4 Drive    21.4   6  258 110 3.08 3.215 19.44  1  0    3    1
 ## Hornet Sportabout 18.7   8  360 175 3.15 3.440 17.02  0  0    3    2
 ## Valiant           18.1   6  225 105 2.76 3.460 20.22  1  0    3    1</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mtcars <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span>(am) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/do.html">do</a></span>(<span class="kw"><a href="../reference/tidy.html">tidy</a></span>(<span class="kw">lm</span>(wt <span class="op">~</span><span class="st"> </span>mpg <span class="op">+</span><span class="st"> </span>qsec <span class="op">+</span><span class="st"> </span>gear, .)))</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mtcars <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">group_by</span>(am) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">do</span>(<span class="kw"><a href="../reference/tidy.html">tidy</a></span>(<span class="kw">lm</span>(wt <span class="op">~</span><span class="st"> </span>mpg <span class="op">+</span><span class="st"> </span>qsec <span class="op">+</span><span class="st"> </span>gear, .)))</code></pre></div>
 <pre><code>## # A tibble: 8 x 6
 ## # Groups:   am [2]
-##      am        term    estimate  std.error   statistic      p.value
-##   &lt;dbl&gt;       &lt;chr&gt;       &lt;dbl&gt;      &lt;dbl&gt;       &lt;dbl&gt;        &lt;dbl&gt;
-## 1     0 (Intercept)  4.91754623 1.39665675  3.52094116 0.0030879519
-## 2     0         mpg -0.19188914 0.04428329 -4.33321746 0.0005909953
-## 3     0        qsec  0.09191361 0.09832067  0.93483509 0.3646797728
-## 4     0        gear  0.14653754 0.36819363  0.39799041 0.6962441554
-## 5     1 (Intercept)  4.28307028 3.45859958  1.23838281 0.2469014834
-## 6     1         mpg -0.10098320 0.02943409 -3.43082488 0.0074984578
-## 7     1        qsec  0.03983165 0.15112135  0.26357393 0.7980436972
-## 8     1        gear -0.02288330 0.34878226 -0.06560912 0.9491232955</code></pre>
+##      am term        estimate std.error statistic  p.value
+##   &lt;dbl&gt; &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
+## 1     0 (Intercept)   4.92      1.40      3.52   0.00309 
+## 2     0 mpg          -0.192     0.0443   -4.33   0.000591
+## 3     0 qsec          0.0919    0.0983    0.935  0.365   
+## 4     0 gear          0.147     0.368     0.398  0.696   
+## 5     1 (Intercept)   4.28      3.46      1.24   0.247   
+## 6     1 mpg          -0.101     0.0294   -3.43   0.00750 
+## 7     1 qsec          0.0398    0.151     0.264  0.798   
+## 8     1 gear         -0.0229    0.349    -0.0656 0.949</code></pre>
 <p>What if you want not just the <code>tidy</code> output, but the <code>augment</code> and <code>glance</code> outputs as well, while still performing each regression only once? First, save the modeling result into a column <code>fit</code>.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">regressions &lt;-<span class="st"> </span>mtcars <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span>(cyl) <span class="op">%&gt;%</span>
-<span class="st">    </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/do.html">do</a></span>(<span class="dt">fit =</span> <span class="kw">lm</span>(wt <span class="op">~</span><span class="st"> </span>mpg <span class="op">+</span><span class="st"> </span>qsec <span class="op">+</span><span class="st"> </span>gear, .))
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">regressions &lt;-<span class="st"> </span>mtcars <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">group_by</span>(cyl) <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw">do</span>(<span class="dt">fit =</span> <span class="kw">lm</span>(wt <span class="op">~</span><span class="st"> </span>mpg <span class="op">+</span><span class="st"> </span>qsec <span class="op">+</span><span class="st"> </span>gear, .))
 regressions</code></pre></div>
 <pre><code>## Source: local data frame [3 x 2]
 ## Groups: &lt;by row&gt;
 ## 
 ## # A tibble: 3 x 2
-##     cyl      fit
-## * &lt;dbl&gt;   &lt;list&gt;
+##     cyl fit     
+## * &lt;dbl&gt; &lt;list&gt;  
 ## 1     4 &lt;S3: lm&gt;
 ## 2     6 &lt;S3: lm&gt;
 ## 3     8 &lt;S3: lm&gt;</code></pre>
@@ -207,47 +211,47 @@ regressions</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">regressions <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/tidy.html">tidy</a></span>(fit)</code></pre></div>
 <pre><code>## # A tibble: 12 x 6
 ## # Groups:   cyl [3]
-##      cyl        term     estimate  std.error    statistic     p.value
-##    &lt;dbl&gt;       &lt;chr&gt;        &lt;dbl&gt;      &lt;dbl&gt;        &lt;dbl&gt;       &lt;dbl&gt;
-##  1     4 (Intercept) -0.772662398 2.22788026 -0.346815047 0.738922522
-##  2     4         mpg -0.081831569 0.02381787 -3.435721470 0.010900258
-##  3     4        qsec  0.216651715 0.07590773  2.854145649 0.024542352
-##  4     4        gear  0.267469618 0.24454173  1.093758587 0.310264464
-##  5     6 (Intercept) -7.785808290 3.35484932 -2.320762438 0.103012430
-##  6     6         mpg  0.043283282 0.05196724  0.832895538 0.466010439
-##  7     6        qsec  0.421998315 0.09136817  4.618657640 0.019102466
-##  8     6        gear  0.638320019 0.20524143  3.110093347 0.052877671
-##  9     8 (Intercept)  0.005971578 4.27460511  0.001396989 0.998912840
-## 10     8         mpg -0.176924561 0.05570852 -3.175897889 0.009888094
-## 11     8        qsec  0.369405813 0.19309553  1.913072859 0.084773637
-## 12     8        gear  0.142762416 0.31664127  0.450864838 0.661705480</code></pre>
+##      cyl term        estimate std.error statistic p.value
+##    &lt;dbl&gt; &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;
+##  1     4 (Intercept) -0.773      2.23    -0.347   0.739  
+##  2     4 mpg         -0.0818     0.0238  -3.44    0.0109 
+##  3     4 qsec         0.217      0.0759   2.85    0.0245 
+##  4     4 gear         0.267      0.245    1.09    0.310  
+##  5     6 (Intercept) -7.79       3.35    -2.32    0.103  
+##  6     6 mpg          0.0433     0.0520   0.833   0.466  
+##  7     6 qsec         0.422      0.0914   4.62    0.0191 
+##  8     6 gear         0.638      0.205    3.11    0.0529 
+##  9     8 (Intercept)  0.00597    4.27     0.00140 0.999  
+## 10     8 mpg         -0.177      0.0557  -3.18    0.00989
+## 11     8 qsec         0.369      0.193    1.91    0.0848 
+## 12     8 gear         0.143      0.317    0.451   0.662</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">regressions <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/augment.html">augment</a></span>(fit)</code></pre></div>
 <pre><code>## # A tibble: 32 x 12
 ## # Groups:   cyl [3]
-##      cyl    wt   mpg  qsec  gear  .fitted   .se.fit        .resid
-##    &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;         &lt;dbl&gt;
-##  1     4 2.320  22.8 18.61     4 2.463345 0.1418571 -0.1433447361
-##  2     4 3.190  24.4 20.00     4 2.633560 0.1199552  0.5564398892
-##  3     4 3.150  22.8 22.90     4 3.392781 0.2989223 -0.2427805952
-##  4     4 2.200  32.4 19.47     4 1.864082 0.1738468  0.3359178471
-##  5     4 1.615  30.4 18.52     4 1.821926 0.1475401 -0.2069261605
-##  6     4 1.835  33.9 19.90     4 1.834495 0.2098610  0.0005049623
-##  7     4 2.465  21.5 20.01     3 2.605569 0.2493871 -0.1405685584
-##  8     4 1.935  27.3 18.90     4 2.157932 0.1045713 -0.2229316749
-##  9     4 2.140  26.0 16.70     5 2.055149 0.2176428  0.0848514414
-## 10     4 1.513  30.4 16.90     5 1.738420 0.2009845 -0.2254199999
-## # ... with 22 more rows, and 4 more variables: .hat &lt;dbl&gt;, .sigma &lt;dbl&gt;,
-## #   .cooksd &lt;dbl&gt;, .std.resid &lt;dbl&gt;</code></pre>
+##      cyl    wt   mpg  qsec  gear .fitted .se.fit    .resid  .hat .sigma
+##    &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;     &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;
+##  1     4  2.32  22.8  18.6     4    2.46   0.142 -0.143    0.197  0.339
+##  2     4  3.19  24.4  20       4    2.63   0.120  0.556    0.141  0.243
+##  3     4  3.15  22.8  22.9     4    3.39   0.299 -0.243    0.876  0.199
+##  4     4  2.2   32.4  19.5     4    1.86   0.174  0.336    0.296  0.304
+##  5     4  1.62  30.4  18.5     4    1.82   0.148 -0.207    0.213  0.332
+##  6     4  1.84  33.9  19.9     4    1.83   0.210  0.000505 0.432  0.345
+##  7     4  2.46  21.5  20.0     3    2.61   0.249 -0.141    0.610  0.332
+##  8     4  1.94  27.3  18.9     4    2.16   0.105 -0.223    0.107  0.331
+##  9     4  2.14  26    16.7     5    2.06   0.218  0.0849   0.464  0.342
+## 10     4  1.51  30.4  16.9     5    1.74   0.201 -0.225    0.396  0.324
+## # ... with 22 more rows, and 2 more variables: .cooksd &lt;dbl&gt;,
+## #   .std.resid &lt;dbl&gt;</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">regressions <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/glance.html">glance</a></span>(fit)</code></pre></div>
 <pre><code>## # A tibble: 3 x 12
 ## # Groups:   cyl [3]
-##     cyl r.squared adj.r.squared      sigma statistic     p.value    df
-##   &lt;dbl&gt;     &lt;dbl&gt;         &lt;dbl&gt;      &lt;dbl&gt;     &lt;dbl&gt;       &lt;dbl&gt; &lt;int&gt;
-## 1     4 0.7799131     0.6855901 0.31936726  8.268539 0.010597767     4
-## 2     6 0.9699947     0.9399893 0.08729425 32.327394 0.008743763     4
-## 3     8 0.6521278     0.5477661 0.51068708  6.248728 0.011614605     4
-## # ... with 5 more variables: logLik &lt;dbl&gt;, AIC &lt;dbl&gt;, BIC &lt;dbl&gt;,
-## #   deviance &lt;dbl&gt;, df.residual &lt;int&gt;</code></pre>
+##     cyl r.squared adj.r.squared  sigma statistic p.value    df  logLik
+##   &lt;dbl&gt;     &lt;dbl&gt;         &lt;dbl&gt;  &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt; &lt;int&gt;   &lt;dbl&gt;
+## 1     4     0.780         0.686 0.319       8.27 0.0106      4  -0.567
+## 2     6     0.970         0.940 0.0873     32.3  0.00874     4  10.1  
+## 3     8     0.652         0.548 0.511       6.25 0.0116      4  -8.10 
+## # ... with 4 more variables: AIC &lt;dbl&gt;, BIC &lt;dbl&gt;, deviance &lt;dbl&gt;,
+## #   df.residual &lt;int&gt;</code></pre>
 <p>By combining the estimates and p-values across all groups into the same tidy data frame (instead of, for example, a list of output model objects), a new class of analyses and visualizations becomes straightforward. This includes</p>
 <ul>
 <li>Sorting by p-value or estimate to find the most significant terms across all tests</li>
@@ -255,7 +259,6 @@ regressions</code></pre></div>
 <li>Volcano plots comparing p-values to effect size estimates</li>
 </ul>
 <p>In each of these cases, we can easily filter, facet, or distinguish based on the <code>term</code> column. In short, this makes the tools of tidy data analysis available for the <em>results</em> of data analysis and models, not just the inputs.</p>
-</div>
 </div>
   </div>
 
@@ -278,19 +281,19 @@ regressions</code></pre></div>
 
 <div class="author">
   <p>Developed by David Robinson.</p>
-  <p>Site built by <a href="http://hadley.github.io/pkgdown/">pkgdown</a>.</p>
+  <p>Site built by <a href="http://pkgdown.r-lib.org">pkgdown</a>.</p>
 </div>
 
-<script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-115082821-1"></script><script>
+ window.dataLayer = window.dataLayer || [];
+ function gtag(){dataLayer.push(arguments);}
+ gtag('js', new Date());
 
-  ga('create', 'UA-67989-18', 'auto');
-  ga('send', 'pageview');
+ gtag('config', 'UA-115082821-1');
 </script></footer>
 </div>
+
+  
 
   </body>
 </html>

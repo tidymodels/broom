@@ -92,21 +92,25 @@
       
       </header>
 
-      <div class="row">
+<div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Tidying method for the acf function</h1>
+    <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/stats_tidiers.R'><code>R/stats_tidiers.R</code></a></small>
+    <div class="hidden name"><code>acf_tidiers.Rd</code></div>
     </div>
 
+    <div class="ref-description">
     
     <p>Tidy an "acf" object, which is the output of <code>acf</code> and the
 related <code>pcf</code> and <code>ccf</code> functions.</p>
     
+    </div>
 
     <pre class="usage"><span class='co'># S3 method for acf</span>
 <span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>x</span>, <span class='no'>...</span>)</pre>
     
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
@@ -208,14 +212,14 @@ related <code>pcf</code> and <code>ccf</code> functions.</p>
 <span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/ggplot'>ggplot</a></span>(<span class='no'>result</span>, <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/aes'>aes</a></span>(<span class='kw'>x</span><span class='kw'>=</span><span class='no'>lag</span>, <span class='kw'>y</span><span class='kw'>=</span><span class='no'>acf</span>)) +
          <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/geom_bar'>geom_bar</a></span>(<span class='kw'>stat</span><span class='kw'>=</span><span class='st'>'identity'</span>, <span class='kw'>width</span><span class='kw'>=</span><span class='fl'>0.1</span>) +
          <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/ggtheme'>theme_bw</a></span>()
-<span class='no'>p</span></div><div class='img'><img src='acf_tidiers-5.png' alt='' width='700' height='432.632880098887' /></div><div class='input'>
+<span class='no'>p</span></div><div class='img'><img src='acf_tidiers-1.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'># with confidence intervals </span>
 <span class='no'>conf.level</span> <span class='kw'>&lt;-</span> <span class='fl'>0.95</span>
 <span class='co'># from \code{plot.acf} method</span>
 <span class='no'>len.data</span> <span class='kw'>&lt;-</span> <span class='fu'>length</span>(<span class='no'>lh</span>) <span class='co'># same as acf$n.used</span>
 <span class='no'>conf.int</span> <span class='kw'>&lt;-</span> <span class='fu'>qnorm</span>((<span class='fl'>1</span> + <span class='no'>conf.level</span>) / <span class='fl'>2</span>) / <span class='fu'>sqrt</span>(<span class='no'>len.data</span>)
 <span class='no'>p</span> + <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/geom_abline'>geom_hline</a></span>(<span class='kw'>yintercept</span> <span class='kw'>=</span> <span class='fu'>c</span>(-<span class='no'>conf.int</span>, <span class='no'>conf.int</span>),
-               <span class='kw'>color</span><span class='kw'>=</span><span class='st'>'blue'</span>, <span class='kw'>linetype</span><span class='kw'>=</span><span class='st'>'dashed'</span>)</div><div class='img'><img src='acf_tidiers-6.png' alt='' width='700' height='432.632880098887' /></div><div class='input'>
+               <span class='kw'>color</span><span class='kw'>=</span><span class='st'>'blue'</span>, <span class='kw'>linetype</span><span class='kw'>=</span><span class='st'>'dashed'</span>)</div><div class='img'><img src='acf_tidiers-2.png' alt='' width='700' height='433' /></div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
@@ -238,20 +242,22 @@ related <code>pcf</code> and <code>ccf</code> functions.</p>
 
 <div class="author">
   <p>Developed by David Robinson.</p>
-  <p>Site built by <a href="http://hadley.github.io/pkgdown/">pkgdown</a>.</p>
+  <p>Site built by <a href="http://pkgdown.r-lib.org">pkgdown</a>.</p>
 </div>
 
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-115082821-1"></script>
 <script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+ window.dataLayer = window.dataLayer || [];
+ function gtag(){dataLayer.push(arguments);}
+ gtag('js', new Date());
 
-  ga('create', 'UA-67989-18', 'auto');
-  ga('send', 'pageview');
+ gtag('config', 'UA-115082821-1');
 </script>
       </footer>
    </div>
 
+  
+
   </body>
 </html>
+
