@@ -1,3 +1,8 @@
+broom 0.4.4.9000
+-----------
+
+* Bump version number
+
 broom 0.4.4
 -----------
 

@@ -1,6 +1,6 @@
 #' Tidy a kappa object from a Cohen's kappa calculation
 #' 
-#' Tidy a "kappa" object, from the \code{\link{cohen.kappa}} function
+#' Tidy a "kappa" object, from the \code{\link[psych]{cohen.kappa}} function
 #' in the psych package. This represents the agreement of two raters
 #' when using nominal scores.
 #' 
@@ -16,7 +16,7 @@
 #' @details Note that the alpha of the confidence interval is determined
 #' when the \code{cohen.kappa} function is originally run.
 #' 
-#' @seealso \code{\link{cohen.kappa}}
+#' @seealso \code{\link[psych]{cohen.kappa}}
 #' 
 #' @name kappa_tidiers
 #' 
@@ -35,8 +35,6 @@
 #' ggplot(tidy(ck), aes(estimate, type)) +
 #'     geom_point() +
 #'     geom_errorbarh(aes(xmin = conf.low, xmax = conf.high))
-#' 
-#' @name anova_tidiers
 #' 
 #' @export
 tidy.kappa <- function(x, ...) {
