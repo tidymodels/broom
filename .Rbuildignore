@@ -9,3 +9,4 @@
 ^appveyor\.yml$
 ^CONDUCT\.md$
 ^codecov\.yml$
+^_pkgdown\.yml$
