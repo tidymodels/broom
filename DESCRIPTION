@@ -1,8 +1,8 @@
 Package: broom
 Type: Package
 Title: Convert Statistical Analysis Objects into Tidy Data Frames
-Version: 0.4.4
-Date: 2018-03-12
+Version: 0.4.4.9000
+Date: 2018-06-04
 Authors@R: c(
     person("David", "Robinson", email = "admiral.david@gmail.com", role = c("aut", "cre")),
     person("Matthieu", "Gomez", email = "mattg@princeton.edu", role = "ctb"),
@@ -94,7 +94,8 @@ Suggests:
     muhaz,
     speedglm,
     tibble,
-    irlba
+    irlba,
+    psych
 URL: http://github.com/tidyverse/broom
 BugReports: http://github.com/tidyverse/broom/issues
 VignetteBuilder: knitr

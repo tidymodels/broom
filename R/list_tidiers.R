@@ -52,14 +52,3 @@ glance.list <- function(x, ...) {
         stop("No glance method recognized for this list")
     }
 }
-
-#' @rdname list_tidiers
-#' 
-#' @export
-augment.list <- function(x, ...) {
-    if (all(c("d", "u", "v") %in% names(x))) {
-        augment_svd(x, ...)
-    } else {
-        stop("No augment method recognized for this list")
-    }
-}

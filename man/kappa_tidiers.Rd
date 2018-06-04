@@ -20,7 +20,7 @@ A data.frame with columns
   \item{conf.high}{Upper bound of confidence interval}
 }
 \description{
-Tidy a "kappa" object, from the \code{\link{cohen.kappa}} function
+Tidy a "kappa" object, from the \code{\link[psych]{cohen.kappa}} function
 in the psych package. This represents the agreement of two raters
 when using nominal scores.
 }
@@ -46,5 +46,5 @@ ggplot(tidy(ck), aes(estimate, type)) +
 
 }
 \seealso{
-\code{\link{cohen.kappa}}
+\code{\link[psych]{cohen.kappa}}
 }
