@@ -48,4 +48,8 @@ test_that("default augment throws error for unimplemented methods", {
     expect_error(augment(1))
     expect_error(augment(1L))
     expect_error(augment("a"))
+    
+    x <- 5; class(x) <- c("foo", "bar")
+    expect_error(augment(x), regexp="foo")
+    expect_error(augment(x), regexp="[^bar]")
 })

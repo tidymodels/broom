@@ -14,5 +14,5 @@ glance.NULL <- function(x, ...) data.frame()
 
 #' @export
 glance.default <- function(x, ...) {   
-    stop("glance doesn't know how to deal with data of class ", class(x), call. = FALSE)
+    stop("glance doesn't know how to deal with data of class ", class(x)[1], call. = FALSE)
 }
