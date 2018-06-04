@@ -1,6 +1,5 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
-^NEWS\.md$
 ^man-roxygen$
 ^revdep$
 ^cran-comments\.md$
