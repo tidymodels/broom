@@ -1,3 +1,5 @@
+context("svd tidiers")
+
 mat <- scale(as.matrix(USJudgeRatings))
 s <- svd(mat)
 i <- irlba::irlba(mat)
@@ -24,22 +26,6 @@ test_that("irlba tidiers work", {
     
     td <- tidy(i, matrix = "v")
     check_tidy(td, exp.row = 60, exp.col = 3)
-})
-
-test_that("svd augment works", {
-    au <- augment(s)
-    au2 <- augment(s, mat[1:5, ])
-    
-    check_augment(au, original = mat)
-    check_augment(au2)
-})
-
-test_that("irlba augment works", {
-    au <- augment(i)
-    au2 <- augment(i, mat[1:5, ])
-    
-    check_augment(au, original = mat)
-    check_augment(au2)
 })
 
 test_that("prcomp, svd, irlba tidiers have consistent output", {

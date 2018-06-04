@@ -87,38 +87,3 @@ tidy_svd <- function(x, matrix = "u", ...) {
     as_tibble(ret)
 }
 
-#' @rdname svd_tidiers
-#'
-#' @param newdata New data to project into PCA space. If no new data is provided,
-#' uses original data. Due to the internal function of \code{svd} and \code{irlba}
-#' it is impossible to recover the original colnames in this case, so it is
-#' best to always specify \code{newdata}.
-#'
-#' @return Returns the new data projected into PCA space. The 1st coordinate
-#'   in PCA space is given by the column \code{.fittedPC1}, and so on.
-#'   
-#' @examples 
-#' 
-#' mat <- scale(as.matrix(USJudgeRatings))
-#' s <- svd(mat)
-#' 
-#' augment(s, USJudgeRatings[1:5, ])
-#' 
-#' @export
-augment_svd <- function(x, newdata = NULL, ...) {
-    
-    # reference on projection into pca space
-    # https://stats.stackexchange.com/questions/134282/relationship-between-svd-and-pca-how-to-use-svd-to-perform-pca
-    
-    if (is.null(newdata)) {
-        # original data projected into PCA space
-        out <- x$u %*% diag(x$d)
-    } else {
-        # new data projected into PCA space
-        out <- as.matrix(newdata) %*% x$v
-    }
-    colnames(out) <- paste0(".fittedPC", 1:ncol(out))
-    as_tibble(out)
-}
-
-

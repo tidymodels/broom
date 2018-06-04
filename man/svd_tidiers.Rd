@@ -3,12 +3,9 @@
 \name{svd_tidiers}
 \alias{svd_tidiers}
 \alias{tidy_svd}
-\alias{augment_svd}
 \title{Tidying methods for (truncated) singular value decomposition}
 \usage{
 tidy_svd(x, matrix = "u", ...)
-
-augment_svd(x, newdata = NULL, ...)
 }
 \arguments{
 \item{x}{list containing d, u, v components, returned from \code{svd} or
@@ -17,11 +14,6 @@ augment_svd(x, newdata = NULL, ...)
 \item{matrix}{which of the u, d or v matrix to tidy}
 
 \item{...}{Extra arguments (not used)}
-
-\item{newdata}{New data to project into PCA space. If no new data is provided,
-uses original data. Due to the internal function of \code{svd} and \code{irlba}
-it is impossible to recover the original colnames in this case, so it is
-best to always specify \code{newdata}.}
 }
 \value{
 An SVD object contains a decomposition into u, d, and v matrices, such that
@@ -47,9 +39,6 @@ component and a column of the original matrix, with variables:
   \item{column}{Column of original matrix described}
   \item{PC}{Principal component}
   \item{value}{Value of this PC for this column}
-
-Returns the new data projected into PCA space. The 1st coordinate
-  in PCA space is given by the column \code{.fittedPC1}, and so on.
 }
 \description{
 These methods tidy the U, D, and V matrices returned by the
@@ -87,12 +76,6 @@ tidy_u \%>\%
     ggplot(aes(Species, value)) +
     geom_boxplot() +
     facet_wrap(~ PC, scale = "free_y")
-
-mat <- scale(as.matrix(USJudgeRatings))
-s <- svd(mat)
-
-augment(s, USJudgeRatings[1:5, ])
-
 }
 \seealso{
 \code{\link{svd}}, \code{\link[irlba]{irlba}} \code{\link{tidy.list}}
