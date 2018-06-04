@@ -37,7 +37,7 @@ Imports:
     reshape2,
     nlme,
     methods
-Suggests:
+Suggests: 
     knitr,
     boot,
     survival,
@@ -92,7 +92,8 @@ Suggests:
     AER,
     muhaz,
     speedglm,
-    tibble
+    tibble,
+    irlba
 URL: http://github.com/tidyverse/broom
 BugReports: http://github.com/tidyverse/broom/issues
 VignetteBuilder: knitr

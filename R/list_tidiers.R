@@ -31,7 +31,7 @@ tidy.list <- function(x, ...) {
         }
         # xyz list suitable for persp, image, etc.
         tidy_xyz(x, ...)
-    } else if (all(sort(names(x)) == c("d", "u", "v"))) {
+    } else if (all(c("d", "u", "v") %in% names(x))) {
         tidy_svd(x, ...)
     } else if ("Cochrane.Orcutt" %in% names(x)) {
         tidy.orcutt(x, ...)
@@ -39,7 +39,6 @@ tidy.list <- function(x, ...) {
         stop("No tidying method recognized for this list")
     }
 }
-
 
 #' @rdname list_tidiers
 #' 
@@ -51,5 +50,16 @@ glance.list <- function(x, ...) {
         glance.orcutt(x, ...)
     } else {
         stop("No glance method recognized for this list")
+    }
+}
+
+#' @rdname list_tidiers
+#' 
+#' @export
+augment.list <- function(x, ...) {
+    if (all(c("d", "u", "v") %in% names(x))) {
+        augment_svd(x, ...)
+    } else {
+        stop("No augment method recognized for this list")
     }
 }
