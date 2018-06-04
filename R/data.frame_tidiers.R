@@ -7,12 +7,20 @@
 #' 
 #' @param x A data.frame
 #' @param data data, not used
-#' @param ... extra arguments: for \code{tidy}, these are passed on to
-#' \code{\link{describe}} from \code{psych} package
+#' @param na.rm a logical value indicating whether \code{NA} values should
+#'   be stripped before the computation proceeds.
+#' @param trim the fraction (0 to 0.5) of observations to be trimmed from 
+#'   each end of \code{x} before the mean is computed.  Passed to the 
+#'   \code{trim} argument of \code{\link{mean}}
+#' @param ... Additional arguments for other methods.
 #' 
-#' @details The \code{tidy} method calls the psych method
-#' \code{\link{describe}} directly to produce its per-columns summary
-#' statistics.
+#' @author David Robinson, Benjamin Nutter
+#' 
+#' @source 
+#' Skew and Kurtosis functions are adapted from implementations in the \code{moments} package: \cr
+#' Lukasz Komsta and Frederick Novomestky (2015). moments: Moments, cumulants, skewness,
+#' kurtosis and related tests. R package version 0.14. \cr
+#' https://CRAN.R-project.org/package=moments
 #' 
 #' @examples
 #' 
@@ -48,16 +56,59 @@
 #'   \item{kurtosis}{kurtosis}
 #'   \item{se}{standard error}
 #' 
-#' @importFrom psych describe
-#' 
-#' @seealso \code{\link{describe}}
-#' 
 #' @export
-tidy.data.frame <- function(x, ...) {
-    ret <- psych::describe(x, ...)
-    ret <- fix_data_frame(ret, newcol = "column")
-    # remove vars column, which contains an index (not useful here)
-    ret$vars <- NULL
+tidy.data.frame <- function(x, ..., na.rm = TRUE, trim = 0.1) {
+    ret <- 
+      tibble::data_frame(
+        column = names(x),
+        n = vapply(X = x, 
+                   FUN = function(k) sum(!is.na(k)), 
+                   FUN.VALUE = numeric(1)),
+        mean = vapply(X = x, 
+                      FUN = mean, 
+                      FUN.VALUE = numeric(1), 
+                      na.rm = na.rm),
+        sd = vapply(X = x, 
+                    FUN = stats::sd, 
+                    FUN.VALUE = numeric(1), 
+                    na.rm = na.rm),
+        median = vapply(X = x, 
+                        FUN = stats::median, 
+                        FUN.VALUE = numeric(1), 
+                        na.rm = na.rm),
+        trimmed = vapply(X = x, 
+                         FUN = mean, 
+                         FUN.VALUE = numeric(1), 
+                         na.rm = na.rm, 
+                         trim = trim),
+        mad = vapply(X = x, 
+                     FUN = median_abs_dev, 
+                     FUN.VALUE = numeric(1), 
+                     na.rm = na.rm),
+        min = vapply(X = x, 
+                     FUN = min, 
+                     FUN.VALUE = numeric(1), 
+                     na.rm = na.rm),
+        max = vapply(X = x, 
+                     FUN = max, 
+                     FUN.VALUE = numeric(1), 
+                     na.rm = na.rm),
+        range = vapply(X = x, 
+                       FUN = function(k, na.rm) diff(range(k, na.rm = na.rm)), 
+                       FUN.VALUE = numeric(1), 
+                       na.rm = na.rm),
+        skew = vapply(X = x, 
+                      FUN = skewness, 
+                      FUN.VALUE = numeric(1), 
+                      na.rm = na.rm),
+        kurtosis = vapply(X = x, 
+                          FUN = kurtosis, 
+                          FUN.VALUE = numeric(1), 
+                          na.rm = na.rm)
+      )
+    
+    ret$se <- ret$sd / sqrt(ret$n)
+    
     ret
 }
 
@@ -81,8 +132,29 @@ augment.data.frame <- function(x, data, ...) {
 #' 
 #' @export
 glance.data.frame <- function(x, ...) {
-    ret <- data.frame(nrow = nrow(x), ncol = ncol(x))
-    ret$complete.obs <- sum(stats::complete.cases(x))
-    ret$na.fraction <- mean(is.na(x))
-    return(ret)
+  ret <- tibble::data_frame(nrow = nrow(x), 
+                            ncol = ncol(x))
+  ret$complete.obs <- sum(stats::complete.cases(x))
+  ret$na.fraction <- mean(is.na(x))
+  return(ret)
+}
+
+
+# Basic code inspired by moments::skew
+skewness <- function(x, na.rm = FALSE){
+  n <- sum(!is.na(x))
+  (sum((x - mean(x, na.rm = na.rm)) ^ 3) / n) /
+    (sum((x - mean(x, na.rm = na.rm)) ^ 2) / n) ^ (3/2)
+}
+
+# Basic code inspired by moments::kurtosis
+kurtosis <- function(x, na.rm = FALSE){
+  n <- sum(!is.na(x))
+  n * sum((x - mean(x, na.rm = na.rm))^4) / 
+    (sum((x - mean(x, na.rm = na.rm))^2)^2)
+}
+
+median_abs_dev <- function(x, na.rm = FALSE){
+  stats::median(abs(x - stats::median(x, na.rm = na.rm)), 
+                na.rm = na.rm)
 }
