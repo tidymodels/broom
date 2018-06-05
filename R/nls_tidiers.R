@@ -56,7 +56,8 @@ tidy.nls <- function(x, conf.int = FALSE, conf.level = .95,
                      quick = FALSE, ...) {
     if (quick) {
         co <- stats::coef(x)
-        ret <- data.frame(term = names(co), estimate = unname(co), stringsAsFactors = FALSE)
+        ret <- data.frame(term = names(co), estimate = unname(co),
+                          stringsAsFactors = FALSE)
         return(ret)
     }
     
