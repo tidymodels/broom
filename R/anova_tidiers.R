@@ -60,6 +60,7 @@ tidy.anova <- function(x, ...) {
                   "Pr..Chi." = "p.value",
                   "p.value" = "p.value",
                   "Chi.sq" = "statistic",
+                  "LR.Chisq" = "statistic",
                   "edf" = "edf",
                   "Ref.df" = "ref.df")
     
