@@ -47,6 +47,6 @@ tidy.NULL <- function(x, ...) {
 #' @export
 tidy.default <- function(x, ...) {
     warning(paste("No method for tidying an S3 object of class",
-                  class(x), ", using as.data.frame"))
+                  class(x)[1], ", using as.data.frame"))
     as.data.frame(x)
 }

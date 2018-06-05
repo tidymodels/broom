@@ -1,8 +1,8 @@
 Package: broom
 Type: Package
 Title: Convert Statistical Analysis Objects into Tidy Data Frames
-Version: 0.4.3.9001
-Date: 2018-03-05
+Version: 0.4.4.9000
+Date: 2018-06-04
 Authors@R: c(
     person("David", "Robinson", email = "admiral.david@gmail.com", role = c("aut", "cre")),
     person("Matthieu", "Gomez", email = "mattg@princeton.edu", role = "ctb"),
@@ -19,7 +19,9 @@ Authors@R: c(
     person("Jens", "Preussner", email = " jens.preussner@mpi-bn.mpg.de", role = "ctb"),
     person("Jay", "Hesselberth", email = "jay.hesselberth@gmail.com", role = "ctb"),
     person("Hadley", "Wickham", email = "hadley@rstudio.com", role = "ctb"),
-    person("Matthew", "Lincoln", email = "matthew.d.lincoln@gmail.com", role = "ctb"))
+    person("Matthew", "Lincoln", email = "matthew.d.lincoln@gmail.com", role = "ctb"),
+    person("Lukasz", "Komsta", email = "lukasz.komsta@umlub.pl", role = "ctb"),
+    person("Frederick", "Novometsky", role = "ctb"))
 Maintainer: David Robinson <admiral.david@gmail.com>
 Description: Convert statistical analysis objects from R into tidy data frames,
     so that they can more easily be combined, reshaped and otherwise processed
@@ -32,12 +34,11 @@ Imports:
     plyr,
     dplyr,
     tidyr,
-    psych,
     stringr,
     reshape2,
     nlme,
     methods
-Suggests:
+Suggests: 
     knitr,
     boot,
     survival,
@@ -92,7 +93,9 @@ Suggests:
     AER,
     muhaz,
     speedglm,
-    tibble
+    tibble,
+    irlba,
+    psych
 URL: http://github.com/tidyverse/broom
 BugReports: http://github.com/tidyverse/broom/issues
 VignetteBuilder: knitr

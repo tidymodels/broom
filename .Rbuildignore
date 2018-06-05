@@ -1,6 +1,5 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
-^NEWS\.md$
 ^man-roxygen$
 ^revdep$
 ^cran-comments\.md$
@@ -9,3 +8,4 @@
 ^appveyor\.yml$
 ^CONDUCT\.md$
 ^codecov\.yml$
+^_pkgdown\.yml$

@@ -1,3 +1,14 @@
+broom 0.4.4.9000
+-----------
+
+* Bump version number
+
+broom 0.4.4
+-----------
+
+* Fixed gam tidiers to work with "Gam" objects, due to an update in gam 1.15. This fixes failing CRAN tests
+* Improved test coverage (thanks to #267 from Derek Chiu)
+
 broom 0.4.3
 -----------
 

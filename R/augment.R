@@ -22,5 +22,5 @@ augment.NULL <- function(x, ...) data.frame()
 
 #' @export
 augment.default <- function(x, ...) {   
-    stop("augment doesn't know how to deal with data of class ", class(x), call. = FALSE)
+    stop("augment doesn't know how to deal with data of class ", class(x)[1], call. = FALSE)
 }
