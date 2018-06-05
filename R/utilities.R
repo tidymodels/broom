@@ -226,7 +226,7 @@ finish_glance <- function(ret, x) {
     ret$BIC <- tryCatch(stats::BIC(x), error = function(e) NULL)
     
     # special case for REML objects (better way?)
-    if ("lmerMod" %in% class(x)) {
+    if (inherits(x,"lmerMod")) {
         ret$deviance <- tryCatch(stats::deviance(x, REML=FALSE),
                                  error = function(e) NULL)
     } else {
