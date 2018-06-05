@@ -172,7 +172,7 @@ covariance or the residuals.</p>
     <span class='no'>selccoh</span> <span class='kw'>&lt;-</span> <span class='fu'>with</span>(<span class='no'>nwtco</span>, <span class='no'>rel</span><span class='kw'>==</span><span class='fl'>1</span><span class='kw'>|</span><span class='no'>subcoh</span><span class='kw'>==</span><span class='fl'>1</span>)
     <span class='no'>ccoh.data</span> <span class='kw'>&lt;-</span> <span class='no'>nwtco</span>[<span class='no'>selccoh</span>,]
     <span class='no'>ccoh.data</span>$<span class='no'>subcohort</span> <span class='kw'>&lt;-</span> <span class='no'>subcoh</span>[<span class='no'>selccoh</span>]
-    <span class='co'>## central-lab histology </span>
+    <span class='co'>## central-lab histology</span>
     <span class='no'>ccoh.data</span>$<span class='no'>histol</span> <span class='kw'>&lt;-</span> <span class='fu'>factor</span>(<span class='no'>ccoh.data</span>$<span class='no'>histol</span>,<span class='kw'>labels</span><span class='kw'>=</span><span class='fu'>c</span>(<span class='st'>"FH"</span>,<span class='st'>"UH"</span>))
     <span class='co'>## tumour stage</span>
     <span class='no'>ccoh.data</span>$<span class='no'>stage</span> <span class='kw'>&lt;-</span> <span class='fu'>factor</span>(<span class='no'>ccoh.data</span>$<span class='no'>stage</span>,<span class='kw'>labels</span><span class='kw'>=</span><span class='fu'>c</span>(<span class='st'>"I"</span>,<span class='st'>"II"</span>,<span class='st'>"III"</span> ,<span class='st'>"IV"</span>))

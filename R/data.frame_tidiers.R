@@ -1,5 +1,8 @@
 #' Tidiers for data.frame objects
 #'
+#' Data frame tidiers are deprecated and will be removed from an upcoming
+#' release of broom.
+#'
 #' These perform tidy summaries of data.frame objects. \code{tidy} produces
 #' summary statistics about each column, while \code{glance} simply reports
 #' the number of rows and columns. Note that \code{augment.data.frame} will
@@ -58,6 +61,9 @@
 #'
 #' @export
 tidy.data.frame <- function(x, ..., na.rm = TRUE, trim = 0.1) {
+  .Deprecated(
+    msg = "Data frame tidiers are deprecated and will be removed in an upcoming release of broom."
+  )
   ret <-
     tibble::data_frame(
       column = names(x),
@@ -154,6 +160,9 @@ augment.data.frame <- function(x, data, ...) {
 #'
 #' @export
 glance.data.frame <- function(x, ...) {
+  .Deprecated(
+    msg = "Data frame tidiers are deprecated and will be removed in an upcoming release of broom."
+  )
   ret <- tibble::data_frame(
     nrow = nrow(x),
     ncol = ncol(x)

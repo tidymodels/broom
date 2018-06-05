@@ -3,6 +3,10 @@
 
 #' Set up bootstrap replicates of a dplyr operation
 #'
+#' The \code{bootstrap()} function is deprecated and will be removed from
+#' an upcoming release of broom. For tidy resampling, please use the rsample
+#' package instead.
+#'
 #' @param df a data frame
 #' @param m number of bootstrap replicates to perform
 #' @param by_group If \code{TRUE}, then bootstrap within each group if \code{df} is
@@ -24,6 +28,9 @@
 #'
 #' @export
 bootstrap <- function(df, m, by_group = FALSE) {
+  .Deprecated(
+    msg = "`bootstrap()` is deprecated and will be removed in an upcoming release of broom. See the rsample package instead."
+  )
   n <- nrow(df)
   attr(df, "indices") <-
     if (by_group && !is.null(groups(df))) {
