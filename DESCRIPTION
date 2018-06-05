@@ -95,7 +95,9 @@ Suggests:
     speedglm,
     tibble,
     irlba,
-    psych
+    psych,
+    rmarkdown,
+    rsample
 URL: http://github.com/tidyverse/broom
 BugReports: http://github.com/tidyverse/broom/issues
 VignetteBuilder: knitr
