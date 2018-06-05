@@ -213,6 +213,10 @@ augment_columns <- function(x, data, newdata, type, type.predict = type,
 #'   \item{logLik}{log likelihoods}
 #'   \item{AIC}{Akaike Information Criterion}
 #'   \item{BIC}{Bayesian Information Criterion}
+#'   \item{hosmer}{Hosmer and Lemeshow's pseudo Rsquare statistic}
+#'   \item{Cox}{Cox and Snell's pseudo Rsquare statistic}
+#'   \item{nagel}{Nagelkerke's pseudo Rsquare statistic}
+#'   \item{p.value}{P value}
 #'   \item{deviance}{deviance}
 #'   \item{df.residual}{residual degrees of freedom}
 #'   
@@ -224,6 +228,21 @@ finish_glance <- function(ret, x) {
     ret$logLik <- tryCatch(as.numeric(stats::logLik(x)), error = function(e) NULL)
     ret$AIC <- tryCatch(stats::AIC(x), error = function(e) NULL)
     ret$BIC <- tryCatch(stats::BIC(x), error = function(e) NULL)
+    ret$hosmer <- tryCatch(
+        (x$null.deviance - x$deviance) / x$null.deviance,
+        error = function(e) NULL)
+    ret$cox <- tryCatch(
+        1 - exp((x$deviance - x$null.deviance) / 
+                    length(x$fitted.values)),
+        error = function(e) NULL)
+    ret$nagel <- tryCatch(
+        ret$cox / (1 - exp(-(x$null.deviance / length(x$fitted.values)))),
+        error = function(e) NULL)
+    ret$p.value <- tryCatch(
+        1 - pchisq(
+            (x$null.deviance - x$deviance),
+            (x$df.null - x$df.residual)),
+        error = function(e) NULL)
     
     # special case for REML objects (better way?)
     if (inherits(x,"lmerMod")) {

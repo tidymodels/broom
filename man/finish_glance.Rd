@@ -17,6 +17,10 @@ a one-row data frame with additional columns added, such as
   \item{logLik}{log likelihoods}
   \item{AIC}{Akaike Information Criterion}
   \item{BIC}{Bayesian Information Criterion}
+  \item{hosmer}{Hosmer and Lemeshow's pseudo Rsquare statistic}
+  \item{Cox}{Cox and Snell's pseudo Rsquare statistic}
+  \item{nagel}{Nagelkerke's pseudo Rsquare statistic}
+  \item{p.value}{P value}
   \item{deviance}{deviance}
   \item{df.residual}{residual degrees of freedom}
   
