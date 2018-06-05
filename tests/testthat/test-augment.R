@@ -12,44 +12,45 @@ check_augment_NAs(glm_func, mtcars, "am", "wt")
 
 context("nls augment")
 nls_func <- function(.data, ...) {
-    nls(mpg ~ k * e ^ wt, data = .data, start = list(k = 50, e = 1), ...)
+  nls(mpg ~ k * e^wt, data = .data, start = list(k = 50, e = 1), ...)
 }
 check_augment_NAs(nls_func, mtcars, "mpg", "wt")
 
 if (require("lme4", quietly = TRUE)) {
-    context("lme4 augment")
-    lmer_func <- function(.data, ...) {
-        lmer(Reaction ~ Days + (Days | Subject), .data, ...)
-    }
-    check_augment_NAs(lmer_func, sleepstudy, "Reaction", "Days")
+  context("lme4 augment")
+  lmer_func <- function(.data, ...) {
+    lmer(Reaction ~ Days + (Days | Subject), .data, ...)
+  }
+  check_augment_NAs(lmer_func, sleepstudy, "Reaction", "Days")
 }
 
 if (require("survival", quietly = TRUE)) {
-    context("survival augment")
-    coxph_func <- function(.data, ...) {
-        coxph(Surv(time, status) ~ age + sex, .data, ...)
-    }
-    check_augment_NAs(coxph_func, lung, "age", "sex")
-    
-    survreg_func <- function(.data, ...) {
-        survreg(Surv(futime, fustat) ~ ecog.ps + rx, .data, dist = "exponential", ...)
-    }
-    check_augment_NAs(survreg_func, ovarian, "ecog.ps", "rx")
+  context("survival augment")
+  coxph_func <- function(.data, ...) {
+    coxph(Surv(time, status) ~ age + sex, .data, ...)
+  }
+  check_augment_NAs(coxph_func, lung, "age", "sex")
+
+  survreg_func <- function(.data, ...) {
+    survreg(Surv(futime, fustat) ~ ecog.ps + rx, .data, dist = "exponential", ...)
+  }
+  check_augment_NAs(survreg_func, ovarian, "ecog.ps", "rx")
 }
 
 context("NULL and default augment")
 
 test_that("NULL augment returns NULL", {
-    expect_length(augment(NULL), 0)
+  expect_length(augment(NULL), 0)
 })
 
 test_that("default augment throws error for unimplemented methods", {
-    expect_error(augment(TRUE))
-    expect_error(augment(1))
-    expect_error(augment(1L))
-    expect_error(augment("a"))
-    
-    x <- 5; class(x) <- c("foo", "bar")
-    expect_error(augment(x), regexp="foo")
-    expect_error(augment(x), regexp="[^bar]")
+  expect_error(augment(TRUE))
+  expect_error(augment(1))
+  expect_error(augment(1L))
+  expect_error(augment("a"))
+
+  x <- 5
+  class(x) <- c("foo", "bar")
+  expect_error(augment(x), regexp = "foo")
+  expect_error(augment(x), regexp = "[^bar]")
 })

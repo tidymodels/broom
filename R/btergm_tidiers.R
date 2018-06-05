@@ -1,6 +1,6 @@
 #' Tidying method for a bootstrapped temporal exponential random graph model
 #'
-#' This method tidies the coefficients of a bootstrapped temporal exponential 
+#' This method tidies the coefficients of a bootstrapped temporal exponential
 #' random graph model estimated with the \pkg{xergm}. It simply returns the
 #' coefficients and their confidence intervals.
 #'
@@ -52,10 +52,10 @@ NULL
 #' only the \code{term} and \code{estimate} columns.
 #' @param ... extra arguments (currently not used)
 #'
-#' @details There is no \code{augment} or \code{glance} method 
+#' @details There is no \code{augment} or \code{glance} method
 #' for \pkg{ergm} objects.
 #'
-#' @return \code{tidy.btergm} returns one row for each coefficient, 
+#' @return \code{tidy.btergm} returns one row for each coefficient,
 #' with four columns:
 #'   \item{term}{The term in the model being estimated and tested}
 #'   \item{estimate}{The estimated coefficient}
@@ -65,32 +65,35 @@ NULL
 #' @export
 tidy.btergm <- function(x, conf.level = .95,
                         exponentiate = FALSE, quick = FALSE, ...) {
-    if (exponentiate) {
-        trans <- exp
-    } else {
-        trans <- identity
-    }
-    
-    if (quick) {
-        co <- x@coef
-        ret <- data.frame(term = names(co),
-                          estimate = trans(unname(co)))
-        return(ret)
-    }
-    co <- btergm::confint(x, level = conf.level)
-    
-    nn <- c("estimate", "conf.low", "conf.high")
-    if (inherits(co, "listof")) {
-        # multiple response variables
-        ret <- plyr::ldply(co, fix_data_frame, nn[1:ncol(co[[1]])],
-                           .id = "response")
-        ret$response <- stringr::str_replace(ret$response, "Response ", "")
-    } else {
-        ret <- fix_data_frame(co, nn[1:ncol(co)])
-    }
-    
-    ret$conf.low <- trans(ret$conf.low)
-    ret$conf.high <- trans(ret$conf.high)
-    ret$estimate <- trans(ret$estimate)
-    ret
+  if (exponentiate) {
+    trans <- exp
+  } else {
+    trans <- identity
+  }
+
+  if (quick) {
+    co <- x@coef
+    ret <- data.frame(
+      term = names(co),
+      estimate = trans(unname(co))
+    )
+    return(ret)
+  }
+  co <- btergm::confint(x, level = conf.level)
+
+  nn <- c("estimate", "conf.low", "conf.high")
+  if (inherits(co, "listof")) {
+    # multiple response variables
+    ret <- plyr::ldply(co, fix_data_frame, nn[1:ncol(co[[1]])],
+      .id = "response"
+    )
+    ret$response <- stringr::str_replace(ret$response, "Response ", "")
+  } else {
+    ret <- fix_data_frame(co, nn[1:ncol(co)])
+  }
+
+  ret$conf.low <- trans(ret$conf.low)
+  ret$conf.high <- trans(ret$conf.high)
+  ret$estimate <- trans(ret$estimate)
+  ret
 }

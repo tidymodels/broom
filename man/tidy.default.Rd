@@ -15,7 +15,7 @@
 A data frame, from \code{as.data.frame} applied to the input x.
 }
 \description{
-By default, tidy uses \code{as.data.frame} to convert its output. This is 
+By default, tidy uses \code{as.data.frame} to convert its output. This is
 dangerous, as it may fail with an uninformative error message.
 Generally tidy is intended to be used on structured model objects
 such as lm or htest for which a specific S3 object exists.
