@@ -30,23 +30,23 @@ for example, draw ROC curves in ggplot2.
 if (require("AUC", quietly = TRUE)) {
   data(churn)
   r <- roc(churn$predictions,churn$labels)
-  
+
   td <- tidy(r)
   head(td)
-  
+
   library(ggplot2)
   ggplot(td, aes(fpr, tpr)) +
     geom_line()
-    
+
   # compare the ROC curves for two prediction algorithms
   library(dplyr)
   library(tidyr)
-  
+
   rocs <- churn \%>\%
     tidyr::gather(algorithm, value, -labels) \%>\%
     group_by(algorithm) \%>\%
     do(tidy(roc(.$value, .$labels)))
-  
+
   ggplot(rocs, aes(fpr, tpr, color = algorithm)) +
     geom_line()
 }

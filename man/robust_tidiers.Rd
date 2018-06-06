@@ -53,11 +53,11 @@ methods simply pass it on to the linear model tidiers.
 
 if (require("robust", quietly = TRUE)) {
   m <- lmRob(mpg ~ wt, data = mtcars)
-  
+
   tidy(m)
   augment(m)
   glance(m)
-  
+
   gm <- glmRob(am ~ wt, data = mtcars, family = "binomial")
   glance(gm)
 }

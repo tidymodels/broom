@@ -6,8 +6,14 @@
 \alias{augment.data.frame}
 \alias{glance.data.frame}
 \title{Tidiers for data.frame objects}
+\source{
+Skew and Kurtosis functions are adapted from implementations in the \code{moments} package: \cr
+Lukasz Komsta and Frederick Novomestky (2015). moments: Moments, cumulants, skewness,
+kurtosis and related tests. R package version 0.14. \cr
+https://CRAN.R-project.org/package=moments
+}
 \usage{
-\method{tidy}{data.frame}(x, ...)
+\method{tidy}{data.frame}(x, ..., na.rm = TRUE, trim = 0.1)
 
 \method{augment}{data.frame}(x, data, ...)
 
@@ -16,8 +22,14 @@
 \arguments{
 \item{x}{A data.frame}
 
-\item{...}{extra arguments: for \code{tidy}, these are passed on to
-\code{\link{describe}} from \code{psych} package}
+\item{...}{Additional arguments for other methods.}
+
+\item{na.rm}{a logical value indicating whether \code{NA} values should
+be stripped before the computation proceeds.}
+
+\item{trim}{the fraction (0 to 0.5) of observations to be trimmed from
+each end of \code{x} before the mean is computed.  Passed to the
+\code{trim} argument of \code{\link{mean}}}
 
 \item{data}{data, not used}
 }
@@ -51,11 +63,6 @@ summary statistics about each column, while \code{glance} simply reports
 the number of rows and columns. Note that \code{augment.data.frame} will
 throw an error.
 }
-\details{
-The \code{tidy} method calls the psych method
-\code{\link{describe}} directly to produce its per-columns summary
-statistics.
-}
 \examples{
 
 td <- tidy(mtcars)
@@ -70,6 +77,6 @@ ggplot(td, aes(mean, sd)) + geom_point() +
      scale_x_log10() + scale_y_log10() + geom_abline()
 
 }
-\seealso{
-\code{\link{describe}}
+\author{
+David Robinson, Benjamin Nutter
 }

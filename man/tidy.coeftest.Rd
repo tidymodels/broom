@@ -28,7 +28,7 @@ function in the \code{lmtest} package.
 if (require("lmtest", quietly = TRUE)) {
     data(Mandible)
     fm <- lm(length ~ age, data=Mandible, subset=(age <= 28))
-    
+
     coeftest(fm)
     tidy(coeftest(fm))
 }

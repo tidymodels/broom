@@ -35,9 +35,9 @@ if (require("zoo", quietly = TRUE)) {
     Z.data <- matrix(rnorm(30), ncol = 3)
     colnames(Z.data) <- c("Aa", "Bb", "Cc")
     Z <- zoo(Z.data, Z.index)
-    
+
     tidy(Z)
-    
+
     if (require("ggplot2", quietly = TRUE)) {
         ggplot(tidy(Z), aes(index, value, color = series)) + geom_line()
         ggplot(tidy(Z), aes(index, value)) + geom_line() +
