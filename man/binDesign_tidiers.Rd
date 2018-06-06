@@ -45,7 +45,7 @@ if (require("binGroup", quietly = TRUE)) {
 
     glance(des)
     head(tidy(des))
-    
+
     # the ggplot2 equivalent of plot(des)
     library(ggplot2)
     ggplot(tidy(des), aes(n, power)) +

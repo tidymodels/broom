@@ -1,3 +1,11 @@
+broom 0.4.4.9000
+-----------
+
+* `bootstrap()` and data frame tidiers have been deprecated
+* New vignettes on the available tidying methods, contributing new tidiers
+* Updated old vignettes to use `map/unnest` workflow rather than `rowwise/do`
+* Bump version number
+
 broom 0.4.4
 -----------
 

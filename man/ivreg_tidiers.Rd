@@ -72,15 +72,15 @@ if (require("AER", quietly = TRUE)) {
     CigarettesSW$tdiff <- with(CigarettesSW, (taxs - tax)/cpi)
     ivr <- ivreg(log(packs) ~ log(rprice) + log(rincome) | log(rincome) + tdiff + I(tax/cpi),
           data = CigarettesSW, subset = year == "1995")
-    
+
     summary(ivr)
-    
+
     tidy(ivr)
     tidy(ivr, conf.int = TRUE)
     tidy(ivr, conf.int = TRUE, exponentiate = TRUE)
-    
+
     head(augment(ivr))
-    
+
     glance(ivr)
 }
 

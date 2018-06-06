@@ -23,7 +23,7 @@ to the original data:
    \item{.fitted}{Fitted values of model}
    \item{.se.fit}{Standard errors of the fitted values}
    \item{.resid}{Residuals of the fitted values}
-   
+
 When \code{newdata} is supplied \code{augment.loess} returns
    one row for each observation with one additional column:
    \item{.fitted}{Fitted values of model}
@@ -31,7 +31,7 @@ When \code{newdata} is supplied \code{augment.loess} returns
 }
 \description{
 This method augments the original data with information
-on the fitted values and residuals, and optionally the 
+on the fitted values and residuals, and optionally the
 standard errors.
 }
 \details{
