@@ -14,4 +14,3 @@ insert_NAs(x, original)
 \description{
 insert a row of NAs into a data frame wherever another data frame has NAs
 }
-

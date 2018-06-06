@@ -2,8 +2,8 @@
 % Please edit documentation in R/biglm_tidiers.R
 \name{biglm_tidiers}
 \alias{biglm_tidiers}
-\alias{glance.biglm}
 \alias{tidy.biglm}
+\alias{glance.biglm}
 \title{Tidiers for biglm and bigglm object}
 \usage{
 \method{tidy}{biglm}(x, conf.int = FALSE, conf.level = 0.95,
@@ -59,9 +59,9 @@ if (require("biglm", quietly = TRUE)) {
     tidy(bfit)
     tidy(bfit, conf.int = TRUE)
     tidy(bfit, conf.int = TRUE, conf.level = .9)
-    
+
     glance(bfit)
-    
+
     # bigglm: logistic regression
     bgfit <- bigglm(am ~ mpg, mtcars, family = binomial())
     tidy(bgfit)
@@ -69,9 +69,8 @@ if (require("biglm", quietly = TRUE)) {
     tidy(bgfit, conf.int = TRUE)
     tidy(bgfit, conf.int = TRUE, conf.level = .9)
     tidy(bgfit, conf.int = TRUE, conf.level = .9, exponentiate = TRUE)
-    
+
     glance(bgfit)
 }
 
 }
-

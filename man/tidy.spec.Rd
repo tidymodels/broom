@@ -27,4 +27,3 @@ library(ggplot2)
 ggplot(tidy(spc), aes(freq, spec)) + geom_line()
 
 }
-

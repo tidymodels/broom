@@ -33,4 +33,3 @@ if (require("maps") && require("ggplot2")) {
 }
 
 }
-
