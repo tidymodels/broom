@@ -95,11 +95,14 @@ Suggests:
     rstanarm,
     sp,
     speedglm,
+    tseries,
     statnet.common,
     survival,
     testthat,
     tibble,
     xergm,
     zoo
+URL: http://github.com/tidyverse/broom
+BugReports: http://github.com/tidyverse/broom/issues
 VignetteBuilder: knitr
 RoxygenNote: 6.0.1
