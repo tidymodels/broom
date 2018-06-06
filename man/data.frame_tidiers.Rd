@@ -58,6 +58,10 @@ row per original column, containing summary statistics of each:
   are missing}
 }
 \description{
+Data frame tidiers are deprecated and will be removed from an upcoming
+release of broom.
+}
+\details{
 These perform tidy summaries of data.frame objects. \code{tidy} produces
 summary statistics about each column, while \code{glance} simply reports
 the number of rows and columns. Note that \code{augment.data.frame} will

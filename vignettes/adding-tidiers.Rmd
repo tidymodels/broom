@@ -27,6 +27,15 @@ Thank you for your interest in adding new tidiers to broom! This document is a w
 - `tidy`, `glance` and `augment` methods *must* return tibbles
 - Use the [tidyverse style conventions](http://style.tidyverse.org/)
 
+# Helper functions you should be aware of 
+
+TODO
+
+# Preferred tools
+
+- i.e. use dplyr, tidyr, purrr and tibble to do the heavy lifting
+- not reshape2, plyr, etc, etc
+
 # `tidy` functions
 
 Each row in a `tidy` output provides information about the components of a model, such as one term in a regression, one test, or one cluster/class. This meaning varies across models but is usually self-evident.

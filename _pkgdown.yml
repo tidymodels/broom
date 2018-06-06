@@ -37,6 +37,10 @@ navbar:
     href: reference/index.html
   - text: Articles
     menu:
+    - text: Adding new tidiers
+      href: articles/adding-tidiers.html
+    - text: Available methods
+      href: articles/available-methods.html
     - text: Bootstrapping
       href: articles/bootstrapping.html
     - text: Broom and dplyr
