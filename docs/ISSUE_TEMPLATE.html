@@ -6,22 +6,22 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Tidiers for return values from functions that aren't S3 objects — list_tidiers • broom</title>
+<title>NA • broom</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
 
 <!-- Bootstrap -->
-<link href="../tidyverse.css" rel="stylesheet">
+<link href="tidyverse.css" rel="stylesheet">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
 <!-- Font Awesome icons -->
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 
 <!-- tidyverse -->
-<link href="../pkgdown.css" rel="stylesheet">
-<script src="../jquery.sticky-kit.min.js"></script>
-<script src="../pkgdown.js"></script>
+<link href="pkgdown.css" rel="stylesheet">
+<script src="jquery.sticky-kit.min.js"></script>
+<script src="pkgdown.js"></script>
 
 <!-- mathjax -->
 <script src='https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
@@ -33,7 +33,7 @@
   </head>
 
   <body>
-    <div class="container template-reference-topic">
+    <div class="container template-title-body">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -45,17 +45,17 @@
       </button>
 
       <div class="navbar-brand-container">
-        <a class="navbar-brand" href="../index.html">broom</a>
+        <a class="navbar-brand" href="index.html">broom</a>
         <small class="tidyverse">part of the <a href="http://tidyverse.org">tidyverse</a></small>
       </div>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="../articles/broom.html">Intro</a>
+  <a href="articles/broom.html">Intro</a>
 </li>
 <li>
-  <a href="../reference/index.html">Reference</a>
+  <a href="reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
@@ -65,18 +65,18 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/bootstrapping.html">Bootstrapping</a>
+      <a href="articles/bootstrapping.html">Bootstrapping</a>
     </li>
     <li>
-      <a href="../articles/broom_and_dplyr.html">Broom and dplyr</a>
+      <a href="articles/broom_and_dplyr.html">Broom and dplyr</a>
     </li>
     <li>
-      <a href="../articles/kmeans.html">K-means</a>
+      <a href="articles/kmeans.html">K-means</a>
     </li>
   </ul>
 </li>
 <li>
-  <a href="../news/index.html">News</a>
+  <a href="news/index.html">News</a>
 </li>
         <li>
   <a href="https://github.com/tidyverse/broom">
@@ -93,65 +93,23 @@
       </header>
 
 <div class="row">
-  <div class="col-md-9 contents">
+  <div class="contents col-md-9">
     <div class="page-header">
-    <h1>Tidiers for return values from functions that aren't S3 objects</h1>
-    <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/list_tidiers.R'><code>R/list_tidiers.R</code></a></small>
-    <div class="hidden name"><code>list_tidiers.Rd</code></div>
+      <h1>NA</h1>
     </div>
 
-    <div class="ref-description">
-    
-    <p>This method handles the return values of functions that return lists
-rather than S3 objects, such as <code>optim</code>, <code>svd</code>, or
-<code><a href='http://www.rdocumentation.org/packages/akima/topics/interp'>interp</a></code>, and therefore cannot be handled by
-S3 dispatch.</p>
-    
-    </div>
 
-    <pre class="usage"><span class='co'># S3 method for list</span>
-<span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>x</span>, <span class='no'>...</span>)
+<p>Please briefly describe your problem and what output you expect. If you have a question, please don’t use this form. Instead, ask on <a href="https://stackoverflow.com/" class="uri">https://stackoverflow.com/</a> or <a href="https://community.rstudio.com/" class="uri">https://community.rstudio.com/</a>.</p>
+<p>Please include a minimal reproducible example (AKA a reprex). If you’ve never heard of a <a href="http://reprex.tidyverse.org/">reprex</a> before, start by reading <a href="https://www.tidyverse.org/help/#reprex" class="uri">https://www.tidyverse.org/help/#reprex</a>.</p>
+<hr>
+<p>Brief description of the problem</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># insert reprex here</span></code></pre></div>
 
-<span class='co'># S3 method for list</span>
-<span class='fu'><a href='glance.html'>glance</a></span>(<span class='no'>x</span>, <span class='no'>...</span>)</pre>
-    
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
-    <table class="ref-arguments">
-    <colgroup><col class="name" /><col class="desc" /></colgroup>
-    <tr>
-      <th>x</th>
-      <td><p>list object</p></td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td><p>extra arguments, passed to the tidying function</p></td>
-    </tr>
-    </table>
-    
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
-
-    <p>Those tidiers themselves are implemented as functions of the
-form tidy_&lt;function&gt; or glance_&lt;function&gt; that are not exported.</p>
-    
-    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
-
-    <div class='dont-index'><p><a href='optim_tidiers.html'>optim_tidiers</a>, <a href='xyz_tidiers.html'>xyz_tidiers</a>,
-<a href='svd_tidiers.html'>svd_tidiers</a>, <a href='orcutt_tidiers.html'>orcutt_tidiers</a></p></div>
-    
 
   </div>
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <h2>Contents</h2>
-    <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
-      
-      <li><a href="#details">Details</a></li>
 
-      <li><a href="#see-also">See also</a></li>
-          </ul>
-
-  </div>
 </div>
+
 
       <footer>
       <div class="tidyverse">

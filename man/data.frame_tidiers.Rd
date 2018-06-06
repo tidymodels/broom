@@ -27,8 +27,8 @@ https://CRAN.R-project.org/package=moments
 \item{na.rm}{a logical value indicating whether \code{NA} values should
 be stripped before the computation proceeds.}
 
-\item{trim}{the fraction (0 to 0.5) of observations to be trimmed from 
-each end of \code{x} before the mean is computed.  Passed to the 
+\item{trim}{the fraction (0 to 0.5) of observations to be trimmed from
+each end of \code{x} before the mean is computed.  Passed to the
 \code{trim} argument of \code{\link{mean}}}
 
 \item{data}{data, not used}

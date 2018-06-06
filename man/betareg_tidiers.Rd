@@ -66,14 +66,14 @@ if (require("betareg", quietly = TRUE)) {
   data("GasolineYield", package = "betareg")
 
   mod <- betareg(yield ~ batch + temp, data = GasolineYield)
-  
+
   mod
   tidy(mod)
   tidy(mod, conf.int = TRUE)
   tidy(mod, conf.int = TRUE, conf.level = .99)
-  
+
   head(augment(mod))
-  
+
   glance(mod)
 }
 

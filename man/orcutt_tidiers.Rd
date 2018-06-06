@@ -46,7 +46,7 @@ tidy(reg)
 if (require("orcutt", quietly = TRUE)) {
   co <- cochrane.orcutt(reg)
   co
-  
+
   tidy(co)
   glance(co)
 }

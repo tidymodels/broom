@@ -20,7 +20,7 @@ A data frame with two columns: \code{conf.low} and \code{conf.high}.
 }
 \description{
 Return a confidence interval as a tidy data frame. This directly wraps the
-\code{\link{confint}} function, but ensures it folllows broom conventions:
+\code{\link{confint}} function, but ensures it follows broom conventions:
 column names of \code{conf.low} and \code{conf.high}, and no row names
 }
 \seealso{

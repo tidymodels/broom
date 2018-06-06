@@ -76,7 +76,7 @@ if (require("survival", quietly = TRUE)) {
     expected <- augment(cfit, lung, type.predict = "expected")
 
     glance(cfit)
-    
+
     # also works on clogit models
     resp <- levels(logan$occupation)
     n <- nrow(logan)
@@ -89,7 +89,7 @@ if (require("survival", quietly = TRUE)) {
     cl <- clogit(case ~ tocc + tocc:education + strata(id), logan2)
     tidy(cl)
     glance(cl)
-    
+
     library(ggplot2)
     ggplot(lp, aes(age, .fitted, color = sex)) + geom_point()
     ggplot(risks, aes(age, .fitted, color = sex)) + geom_point()
