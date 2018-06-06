@@ -24,4 +24,3 @@ and confidence intervals (typical for log distributions)}
 Adds a confidence interval, and possibly exponentiates, a tidied
 object.
 }
-

@@ -5,10 +5,10 @@
 \title{Expand a dataset to include all factorial combinations of one or more
 variables}
 \usage{
-inflate(.data, ..., stringsAsFactors = FALSE)
+inflate(df, ..., stringsAsFactors = FALSE)
 }
 \arguments{
-\item{.data}{a tbl}
+\item{df}{a tbl}
 
 \item{...}{arguments}
 
@@ -16,10 +16,8 @@ inflate(.data, ..., stringsAsFactors = FALSE)
 converted to factors.}
 }
 \value{
-A tbl, grouped by the arguments in \code{...}
+A tbl
 }
 \description{
-Expand a dataset to include all factorial combinations of one or more
-variables
+This function is deprecated: use \code{tidyr::crossing} instead
 }
-

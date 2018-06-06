@@ -20,4 +20,3 @@ names assigned
 \description{
 Ensure an object is a data frame, with rownames moved into a column
 }
-
