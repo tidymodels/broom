@@ -50,8 +50,8 @@ tidy.ivreg <- function(x, conf.int = FALSE, conf.level = .95,
 
 
 #' @rdname ivreg_tidiers
-#'
-#' @param newdata New data to make predictions from (optional)
+#' 
+#' @param newdata If provided, performs predictions on the new data
 #' @return \code{augment} returns a data frame with one row for each
 #' initial observation, adding the columns:
 #'   \item{.fitted}{predicted (fitted) values}
@@ -82,7 +82,9 @@ augment.ivreg <- function(x, data = as.data.frame(stats::model.frame(x)), newdat
 #'   \item{p.value.Sargan}{P value of Sargan test}
 #'   \item{p.value.Wu.Hausman}{P value of Wu-Hausman test}
 #'   \item{p.value.weakinst}{P value of weak instruments test}
-#'
+#'     and corresponding columns \code{statistics.Sargan}
+#'     for the statistics of those tests.
+#' 
 #' @export
 glance.ivreg <- function(x, diagnostics = FALSE, ...) {
   s <- summary(x, diagnostics = diagnostics)
