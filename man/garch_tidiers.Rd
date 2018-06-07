@@ -64,26 +64,17 @@ This tidies the result of a coefficient of the GARCH model implemented in
 \examples{
 
 if (require("tseries", quietly = TRUE)) {
-    require(tidyverse)
     data(EuStockMarkets)
     dax <- diff(log(EuStockMarkets))[,"DAX"]
     dax.garch <- garch(dax)
     dax.garch
     tidy(dax.garch)
     glance(dax.garch)
-    augment(dax.garch, dax) \%>\% head()
-    augment(dax.garch, dax) \%>\%
-        ggplot(aes(x = .time, y = data)) +
-        geom_line() +
-        geom_line(aes(y = .fitted*2.32), colour = "red")
-        
+    head(augment(dax.garch, dax))
     smp1 = window(dax, end = c(1997, frequency(dax)))
     smp2 = window(dax, start = c(1998, 1))
     dax.garch <- garch(smp1)
-    augment(dax.garch, newdata = smp2) \%>\%
-        ggplot(aes(x = .time, y = newdata)) +
-        geom_line() +
-        geom_line(aes(y = .fitted*2.32), colour = "red")
+    augment(dax.garch, newdata = smp2)
 }
 
 }
