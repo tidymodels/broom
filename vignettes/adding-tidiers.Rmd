@@ -17,30 +17,25 @@ knitr::opts_chunk$set(
 
 # Adding new tidiers to broom
 
-Thank you for your interest in adding new tidiers to broom! This document is a work in progress describing the conventions that broom follows.
+Thank you for your interest in adding new tidiers to broom! This document is a *work in progress* describing the conventions that broom follows.
 
-<!-- Some comments about tidiers living in external packages -->
-
-# Guidelines
+Some general guidelines:
 
 - Try to reach a minimum 90% test coverage for new tidiers
 - `tidy`, `glance` and `augment` methods *must* return tibbles
 - Use the [tidyverse style conventions](http://style.tidyverse.org/)
+- Feel free to add yourself as a contributor to `DESCRIPTION`
 
-# Helper functions you should be aware of 
+<!-- TODOS: -->
 
-TODO
+<!-- - Helper functions that you should be aware of and use -->
+<!-- - Preferred packages to use: i.e. new tidyverse not old -->
 
-# Preferred tools
+<!-- Comments about tidiers living in external packages -->
 
-- i.e. use dplyr, tidyr, purrr and tibble to do the heavy lifting
-- not reshape2, plyr, etc, etc
-
-# `tidy` functions
+# `tidy`
 
 Each row in a `tidy` output provides information about the components of a model, such as one term in a regression, one test, or one cluster/class. This meaning varies across models but is usually self-evident.
-
-`augment` should be used for information related to individual data points.
 
 ## Column names to use in output
 
@@ -69,7 +64,7 @@ Do not include arguments *given* to the modeling function. For example, a `glm` 
 
 # `augment`
 
-The `augment` method accepts a model object and optionally a data frame and returns a tibble of data with additional observation level information.
+The `augment` method accepts a model object and optionally a data frame and returns a tibble of data with additional observation level information. `augment` should be used for information related to individual data points.
 
 * `augment(model, data)` adds columns to the original data.
     * If the `data` argument is missing, `augment` attempts to reconstruct the data from the model (note that this may not always be possible, and usually won't contain columns not used in the model).
