@@ -32,10 +32,48 @@ if (require("survival", quietly = TRUE)) {
   check_augment_NAs(coxph_func, lung, "age", "sex")
 
   survreg_func <- function(.data, ...) {
-    survreg(Surv(futime, fustat) ~ ecog.ps + rx, .data, dist = "exponential", ...)
+    survreg(
+      Surv(futime, fustat) ~ ecog.ps + rx,
+      .data,
+      dist = "exponential",
+      ...
+    )
   }
   check_augment_NAs(survreg_func, ovarian, "ecog.ps", "rx")
 }
+
+context("htest augment")
+
+test_that("augment.htest works on chi squared tests", {
+  # 2 dimensions table
+  chit <- chisq.test(xtabs(Freq ~ Sex + Class, data = as.data.frame(Titanic)))
+  expect_is(augment(chit), "data.frame")
+  expect_true(all(
+    c(".observed", ".prop", ".expected", ".residuals", ".stdres")
+    %in% names(augment(chit))
+  ))
+  expect_true(all(c(".row.prop", ".col.prop") %in% names(augment(chit))))
+
+  # 1 dimension table
+  chit <- chisq.test(c(A = 20, B = 15, C = 25))
+  expect_is(augment(chit), "data.frame")
+  expect_true(all(
+    c(".observed", ".prop", ".expected", ".residuals", ".stdres")
+    %in% names(augment(chit))
+  ))
+  expect_true(!any(c(".row.prop", ".col.prop") %in% names(augment(chit))))
+})
+
+test_that("augment.htest not defined for other types of htest", {
+  tt <- t.test(rnorm(10))
+  expect_error(augment(tt))
+
+  wt <- wilcox.test(mpg ~ am, data = mtcars, conf.int = TRUE, exact = FALSE)
+  expect_error(augment(wt))
+
+  ct <- cor.test(mtcars$wt, mtcars$mpg)
+  expect_error(augment(ct))
+})
 
 context("NULL and default augment")
 

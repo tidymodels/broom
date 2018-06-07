@@ -5,6 +5,7 @@ broom 0.4.4.9000
 * New vignettes on the available tidying methods, contributing new tidiers
 * Updated old vignettes to use `map/unnest` workflow rather than `rowwise/do`
 * Bump version number
+* Added `augment` method for chi-squared tests
 
 broom 0.4.4
 -----------

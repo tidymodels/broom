@@ -30,8 +30,6 @@ and confidence intervals}
 
 \item{data}{Original dataset}
 
-\item{newdata}{New data to make predictions from (optional)}
-
 \item{newdata}{If provided, performs predictions on the new data}
 
 \item{diagnostics}{Logical. Return results of diagnostic tests.}
@@ -61,7 +59,8 @@ If \code{diagnostics} is \code{TRUE}, \code{glance} also returns:
   \item{p.value.Sargan}{P value of Sargan test}
   \item{p.value.Wu.Hausman}{P value of Wu-Hausman test}
   \item{p.value.weakinst}{P value of weak instruments test}
-and corresponding columns \code{statistics.Sargan} etc. for the statistics of those tests.
+    and corresponding columns \code{statistics.Sargan}
+    for the statistics of those tests.
 }
 \description{
 Tidiers for ivreg models

@@ -108,8 +108,10 @@
 
     <div class="ref-description">
     
-    <p>Tidies hypothesis test objects, such as those from <code>cor.test</code>,
-<code>t.test</code>, and <code>wilcox.test</code>, into a one-row data frame.</p>
+    <p>Tidies hypothesis test objects, such as those from 
+<code><a href='http://www.rdocumentation.org/packages/stats/topics/cor.test'>cor.test</a></code>, <code><a href='http://www.rdocumentation.org/packages/stats/topics/t.test'>t.test</a></code>,
+<code><a href='http://www.rdocumentation.org/packages/stats/topics/wilcox.test'>wilcox.test</a></code>, and <code><a href='http://www.rdocumentation.org/packages/stats/topics/chisq.test'>chisq.test</a></code>,
+into a one-row data frame.</p>
     
     </div>
 
@@ -117,7 +119,10 @@
 <span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>x</span>, <span class='no'>...</span>)
 
 <span class='co'># S3 method for htest</span>
-<span class='fu'><a href='glance.html'>glance</a></span>(<span class='no'>x</span>, <span class='no'>...</span>)</pre>
+<span class='fu'><a href='glance.html'>glance</a></span>(<span class='no'>x</span>, <span class='no'>...</span>)
+
+<span class='co'># S3 method for htest</span>
+<span class='fu'><a href='augment.html'>augment</a></span>(<span class='no'>x</span>, <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -152,12 +157,25 @@ a one-row data frame with one or more of the following columns:</p>
 
 Which columns are included depends on the hypothesis test used.
 
+For chi-squared tests, augment.htest  will returns, for each
+cell of the tested table, the additional columns:
+  <dt>.observed</dt><dd><p>Observed count</p></dd>
+  <dt>.prop</dt><dd><p>Proportion of the total</p></dd>
+  <dt>.row.prop</dt><dd><p>Row proportion (2 dimensions table only)</p></dd>
+  <dt>.col.prop</dt><dd><p>Column proportion (2 dimensions table only)</p></dd>
+  <dt>.expected</dt><dd><p>Expected count under the null hypothesis</p></dd>
+  <dt>.residuals</dt><dd><p>Pearson residual</p></dd>
+  <dt>.stdres</dt><dd><p>Standardized residual</p></dd>
+
+See <a href='http://www.rdocumentation.org/packages/stats/topics/chisq.test'>chisq.test</a> for more details on
+how residuals are computed.
+
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>No <code>augment</code> method is provided for <code>"htest"</code>,
-since there is no sense in which a hypothesis test generates one
-value for each observation.</p>
+    <p><code>augment</code> method is defined only for chi-squared tests,
+since there is no sense, for other tests, in which a hypothesis test
+generates one value for each observation.</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
@@ -175,15 +193,36 @@ value for each observation.</p>
 #&gt; 1 -7.244939  17.14737  24.39231 -3.767123 0.001373638  18.33225 -11.28019
 #&gt;   conf.high                  method alternative
 #&gt; 1 -3.209684 Welch Two Sample t-test   two.sided</div><div class='input'>
-<span class='no'>wt</span> <span class='kw'>&lt;-</span> <span class='fu'>wilcox.test</span>(<span class='no'>mpg</span> ~ <span class='no'>am</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>mtcars</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: cannot compute exact p-value with ties</span></div><div class='input'><span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>wt</span>)</div><div class='output co'>#&gt;   statistic     p.value                                            method
-#&gt; 1        42 0.001871391 Wilcoxon rank sum test with continuity correction
-#&gt;   alternative
-#&gt; 1   two.sided</div><div class='input'>
+<span class='no'>wt</span> <span class='kw'>&lt;-</span> <span class='fu'>wilcox.test</span>(<span class='no'>mpg</span> ~ <span class='no'>am</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>mtcars</span>, <span class='kw'>conf.int</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>exact</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
+<span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>wt</span>)</div><div class='output co'>#&gt;    estimate statistic     p.value  conf.low conf.high
+#&gt; 1 -6.799963        42 0.001871391 -11.69994 -2.900042
+#&gt;                                              method alternative
+#&gt; 1 Wilcoxon rank sum test with continuity correction   two.sided</div><div class='input'>
 <span class='no'>ct</span> <span class='kw'>&lt;-</span> <span class='fu'>cor.test</span>(<span class='no'>mtcars</span>$<span class='no'>wt</span>, <span class='no'>mtcars</span>$<span class='no'>mpg</span>)
 <span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>ct</span>)</div><div class='output co'>#&gt;     estimate statistic      p.value parameter   conf.low  conf.high
 #&gt; 1 -0.8676594 -9.559044 1.293959e-10        30 -0.9338264 -0.7440872
 #&gt;                                 method alternative
 #&gt; 1 Pearson's product-moment correlation   two.sided</div><div class='input'>
+<span class='no'>chit</span> <span class='kw'>&lt;-</span> <span class='fu'>chisq.test</span>(<span class='fu'>xtabs</span>(<span class='no'>Freq</span> ~ <span class='no'>Sex</span> + <span class='no'>Class</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='fu'>as.data.frame</span>(<span class='no'>Titanic</span>)))
+<span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>chit</span>)</div><div class='output co'>#&gt;   statistic      p.value parameter                     method
+#&gt; 1  349.9145 1.556637e-75         3 Pearson's Chi-squared test</div><div class='input'><span class='fu'><a href='augment.html'>augment</a></span>(<span class='no'>chit</span>)</div><div class='output co'>#&gt;      Sex Class .observed      .prop  .row.prop .col.prop .expected .residuals
+#&gt; 1   Male   1st       180 0.08178101 0.10398614 0.5538462 255.59973  -4.728681
+#&gt; 2 Female   1st       145 0.06587915 0.30851064 0.4461538  69.40027   9.074854
+#&gt; 3   Male   2nd       179 0.08132667 0.10340843 0.6280702 224.14130  -3.015179
+#&gt; 4 Female   2nd       106 0.04815993 0.22553191 0.3719298  60.85870   5.786457
+#&gt; 5   Male   3rd       510 0.23171286 0.29462738 0.7223796 555.24125  -1.919967
+#&gt; 6 Female   3rd       196 0.08905043 0.41702128 0.2776204 150.75875   3.684626
+#&gt; 7   Male  Crew       862 0.39164016 0.49797805 0.9740113 696.01772   6.291462
+#&gt; 8 Female  Crew        23 0.01044980 0.04893617 0.0259887 188.98228 -12.074000
+#&gt;      .stdres
+#&gt; 1 -11.083954
+#&gt; 2  11.083954
+#&gt; 3  -6.993369
+#&gt; 4   6.993369
+#&gt; 5  -5.041320
+#&gt; 6   5.041320
+#&gt; 7  17.607380
+#&gt; 8 -17.607380</div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
