@@ -19,7 +19,7 @@ A data.frame with the columns
     \item{statistic}{Approximate F statistic}
     \item{num.df}{Degrees of freedom}
     \item{p.value}{P-value}
-    
+
 Depending on which test statistic is specified, one of the following columns is also included:
     \item{pillai}{Pillai's trace}
     \item{wilks}{Wilk's lambda}

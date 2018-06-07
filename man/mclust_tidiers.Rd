@@ -24,7 +24,7 @@
 All tidying methods return a data.frame without rownames, whose
 structure depends on the method chosen.
 
-\code{tidy} returns one row per component, with 
+\code{tidy} returns one row per component, with
   \item{component}{A factor describing the cluster from 1:k
   (or 0:k in presence of a noise term in x)}
   \item{size}{The size of each component}
@@ -51,7 +51,7 @@ structure depends on the method chosen.
 \description{
 These methods summarize the results of Mclust clustering into three
 tidy forms. \code{tidy} describes the size, mixing probability, mean
-and variabilty of each class, \code{augment} adds the class assignments and
+and variability of each class, \code{augment} adds the class assignments and
 their probabilities to the original data, and
 \code{glance} summarizes the model parameters of the clustering.
 }

@@ -84,11 +84,11 @@ if (require("nlme") & require("lme4")) {
     tidy(lmm1, effects = "fixed")
     head(augment(lmm1, sleepstudy))
     glance(lmm1)
-    
-    
+
+
     startvec <- c(Asym = 200, xmid = 725, scal = 350)
     nm1 <- nlme(circumference ~ SSlogis(age, Asym, xmid, scal),
-                  data = Orange, 
+                  data = Orange,
                   fixed = Asym + xmid + scal ~1,
                   random = Asym ~1,
                   start = startvec)

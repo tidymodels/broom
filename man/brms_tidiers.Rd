@@ -10,16 +10,16 @@
   intervals = TRUE, prob = 0.9, ...)
 }
 \arguments{
-\item{x}{Fitted model object from the \pkg{brms} package. See 
+\item{x}{Fitted model object from the \pkg{brms} package. See
 \code{\link[brms]{brmsfit-class}}.}
 
-\item{parameters}{Names of parameters for which a summary should be 
+\item{parameters}{Names of parameters for which a summary should be
 returned, as given by a character vector or regular expressions.
 If \code{NA} (the default) summarized parameters are specified
 by the \code{par_type} argument.}
 
-\item{par_type}{One of \code{"all"}, \code{"non-varying"}, 
-\code{"varying"}, or \code{"hierarchical"} (can be abbreviated). 
+\item{par_type}{One of \code{"all"}, \code{"non-varying"},
+\code{"varying"}, or \code{"hierarchical"} (can be abbreviated).
 See the Value section for details.}
 
 \item{robust}{Whether to use median and median absolute deviation rather
@@ -29,8 +29,8 @@ than mean and standard deviation.}
 posterior uncertainty intervals are included.}
 
 \item{prob}{Defines the range of the posterior uncertainty intervals,
-such that \code{100 * prob}\% of the parameter's posterior distribution 
-lies within the corresponding interval. 
+such that \code{100 * prob}\% of the parameter's posterior distribution
+lies within the corresponding interval.
 Only used if \code{intervals = TRUE}.}
 
 \item{...}{Extra arguments, not used}
@@ -59,18 +59,18 @@ In this case, two additional columns are added:
 Specifying \code{par_type = "hierarchical"} selects the
 standard deviations and correlations of the group-level parameters.
 
-If \code{intervals = TRUE}, columns for the \code{lower} and 
+If \code{intervals = TRUE}, columns for the \code{lower} and
 \code{upper} bounds of the posterior intervals computed.
 }
 \description{
-These methods tidy the estimates from 
+These methods tidy the estimates from
 \code{\link[brms:brmsfit-class]{brmsfit-objects}}
 (fitted model objects from the \pkg{brms} package) into a summary.
 }
 \examples{
 \dontrun{
  library(brms)
- fit <- brm(mpg ~ wt + (1|cyl) + (1+wt|gear), data = mtcars, 
+ fit <- brm(mpg ~ wt + (1|cyl) + (1+wt|gear), data = mtcars,
             iter = 500, chains = 2)
  tidy(fit)
  tidy(fit, parameters = "^sd_", intervals = FALSE)
@@ -78,7 +78,7 @@ These methods tidy the estimates from
  tidy(fit, par_type = "varying")
  tidy(fit, par_type = "hierarchical", robust = TRUE)
 }
- 
+
 }
 \seealso{
 \code{\link[brms]{brms}}, \code{\link[brms]{brmsfit-class}}

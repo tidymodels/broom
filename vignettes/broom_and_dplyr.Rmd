@@ -1,8 +1,12 @@
-<!--
-%\VignetteBuilder{knitr::knitr}
-%\VignetteEngine{knitr::knitr}
-%\VignetteIndexEntry{broom and dplyr}
--->
+---
+title: "broom and dplyr"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
 
 ```{r opts_chunk, echo=FALSE}
 library(knitr)

@@ -64,7 +64,7 @@ library(dplyr)
 regressions <- mtcars \%>\%
     group_by(cyl) \%>\%
     do(mod = lm(mpg ~ wt, .))
- 
+
 regressions
 
 regressions \%>\% tidy(mod)

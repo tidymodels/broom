@@ -154,7 +154,7 @@
 
     <p>All tidying methods return a data.frame without rownames, whose
 structure depends on the method chosen.</p>
-<p><code>tidy.felm</code> returns one row for each coefficient. If <code>fe=TRUE</code>, it also includes rows for for fixed effects estimates. 
+<p><code>tidy.felm</code> returns one row for each coefficient. If <code>fe=TRUE</code>, it also includes rows for for fixed effects estimates.
 There are five columns:</p>
 <dt>term</dt><dd><p>The term in the linear model being estimated and tested</p></dd>
   <dt>estimate</dt><dd><p>The estimated coefficient</p></dd>
@@ -167,7 +167,7 @@ If cont.int=TRUE, it also includes columns for conf.low and conf.high, computed 
 augment.felm returns  one row for each observation, with multiple columns added to the original data:
   <dt>.fitted</dt><dd><p>Fitted values of model</p></dd>
   <dt>.resid</dt><dd><p>Residuals</p></dd>
-  If fixed effect are present,  
+  If fixed effect are present,
   <dt>.comp</dt><dd><p>Connected component</p></dd>
   <dt>.fe_</dt><dd><p>Fixed effects (as many columns as factors)</p></dd>
 

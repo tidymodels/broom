@@ -42,16 +42,16 @@ if (require("Hmisc", quietly = TRUE)) {
     mat[sample(length(mat), 2000)] <- NA
     # also column names
     colnames(mat) <- c(LETTERS, letters)
-    
+
     rc <- rcorr(mat)
-    
+
     td <- tidy(rc)
     head(td)
-    
+
     library(ggplot2)
     ggplot(td, aes(p.value)) +
         geom_histogram(binwidth = .1)
- 
+
     ggplot(td, aes(estimate, p.value)) +
         geom_point() +
         scale_y_log10()
