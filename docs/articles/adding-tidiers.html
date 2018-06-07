@@ -46,6 +46,12 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
+      <a href="../articles/adding-tidiers.html">Adding new tidiers</a>
+    </li>
+    <li>
+      <a href="../articles/available-methods.html">Available methods</a>
+    </li>
+    <li>
       <a href="../articles/bootstrapping.html">Bootstrapping</a>
     </li>
     <li>
@@ -79,7 +85,7 @@
     <div class="page-header toc-ignore">
       <h1>Adding Tidiers to Broom</h1>
             
-            <h4 class="date">2018-06-05</h4>
+            <h4 class="date">2018-06-07</h4>
       
       <small class="dont-index">Source: <a href="http://github.com/tidyverse/broom/blob/master/vignettes/adding-tidiers.Rmd"><code>vignettes/adding-tidiers.Rmd</code></a></small>
       <div class="hidden name"><code>adding-tidiers.Rmd</code></div>
@@ -91,25 +97,24 @@
 <div id="adding-new-tidiers-to-broom" class="section level1">
 <h1 class="hasAnchor">
 <a href="#adding-new-tidiers-to-broom" class="anchor"></a>Adding new tidiers to broom</h1>
-<p>Thank you for your interest in adding new tidiers to broom! This document is a work in progress describing the conventions that broom follows.</p>
-<!-- Some comments about tidiers living in external packages -->
-</div>
-<div id="guidelines" class="section level1">
-<h1 class="hasAnchor">
-<a href="#guidelines" class="anchor"></a>Guidelines</h1>
+<p>Thank you for your interest in adding new tidiers to broom! This document is a <em>work in progress</em> describing the conventions that broom follows.</p>
+<p>Some general guidelines:</p>
 <ul>
 <li>Try to reach a minimum 90% test coverage for new tidiers</li>
 <li>
 <code>tidy</code>, <code>glance</code> and <code>augment</code> methods <em>must</em> return tibbles</li>
 <li>Use the <a href="http://style.tidyverse.org/">tidyverse style conventions</a>
 </li>
+<li>Feel free to add yourself as a contributor to <code>DESCRIPTION</code>
+</li>
 </ul>
+<!-- TODOS: --><!-- - Helper functions that you should be aware of and use --><!-- - Preferred packages to use: i.e. new tidyverse not old --><!-- Comments about tidiers living in external packages -->
 </div>
-<div id="tidy-functions" class="section level1">
+<div id="tidy" class="section level1">
 <h1 class="hasAnchor">
-<a href="#tidy-functions" class="anchor"></a><code>tidy</code> functions</h1>
+<a href="#tidy" class="anchor"></a><code>tidy</code>
+</h1>
 <p>Each row in a <code>tidy</code> output provides information about the components of a model, such as one term in a regression, one test, or one cluster/class. This meaning varies across models but is usually self-evident.</p>
-<p><code>augment</code> should be used for information related to individual data points.</p>
 <div id="column-names-to-use-in-output" class="section level2">
 <h2 class="hasAnchor">
 <a href="#column-names-to-use-in-output" class="anchor"></a>Column names to use in output</h2>
@@ -158,7 +163,7 @@
 <h1 class="hasAnchor">
 <a href="#augment" class="anchor"></a><code>augment</code>
 </h1>
-<p>The <code>augment</code> method accepts a model object and optionally a data frame and returns a tibble of data with additional observation level information.</p>
+<p>The <code>augment</code> method accepts a model object and optionally a data frame and returns a tibble of data with additional observation level information. <code>augment</code> should be used for information related to individual data points.</p>
 <ul>
 <li>
 <code><a href="../reference/augment.html">augment(model, data)</a></code> adds columns to the original data.
@@ -249,9 +254,8 @@ a &lt;-<span class="st"> </span><span class="kw"><a href="../reference/augment.h
 <a href="#tocnav" class="anchor"></a>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
 <li><a href="#adding-new-tidiers-to-broom">Adding new tidiers to broom</a></li>
-      <li><a href="#guidelines">Guidelines</a></li>
       <li>
-<a href="#tidy-functions"><code>tidy</code> functions</a><ul class="nav nav-pills nav-stacked">
+<a href="#tidy"><code>tidy</code></a><ul class="nav nav-pills nav-stacked">
 <li><a href="#column-names-to-use-in-output">Column names to use in output</a></li>
       </ul>
 </li>
