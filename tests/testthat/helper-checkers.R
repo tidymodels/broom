@@ -1,3 +1,17 @@
+check_glance_method <- function(g) {
+  expect_s3_class(g, "tbl_df")  # check output of glance is a tibble
+  expect_equal(nrow(g), 1, info = "Objects returned from glance must have exactly 1 row")
+}
+
+check_tidy_method <- function(t) {
+  expect_true(TRUE)
+}
+
+check_augment_method <- function(a) {
+  expect_true(TRUE)
+}
+
+
 #' test the basics of tidy/augment/glance output: is a data frame, no row names
 check_tidiness <- function(o) {
   expect_is(o, "data.frame")
