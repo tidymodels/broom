@@ -273,7 +273,7 @@ tidy.manova <- function(x, test = "Pillai", ...) {
 tidy.ts <- function(x, ...) {
     # This generates the "index" column using the same approach as time(x), but
     # without converting to a ts object.
-    xtsp <- tsp(x)
+    xtsp <- stats::tsp(x)
     index <- seq(xtsp[1], xtsp[2], by = 1 / xtsp[3])
     # Turn multi-column time series into tidy data frames.
     if (is.matrix(x)) {
