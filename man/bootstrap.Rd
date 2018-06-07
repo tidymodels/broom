@@ -15,7 +15,9 @@ bootstrap(df, m, by_group = FALSE)
 a grouped tbl.}
 }
 \description{
-Set up bootstrap replicates of a dplyr operation
+The \code{bootstrap()} function is deprecated and will be removed from
+an upcoming release of broom. For tidy resampling, please use the rsample
+package instead.
 }
 \details{
 This code originates from Hadley Wickham (with a few small
@@ -33,4 +35,3 @@ library(dplyr)
 mtcars \%>\% bootstrap(10) \%>\% do(tidy(lm(mpg ~ wt, .)))
 
 }
-

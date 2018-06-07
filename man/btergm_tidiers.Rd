@@ -24,7 +24,7 @@ only the \code{term} and \code{estimate} columns.}
 \value{
 A \code{data.frame} without rownames.
 
-\code{tidy.btergm} returns one row for each coefficient, 
+\code{tidy.btergm} returns one row for each coefficient,
 with four columns:
   \item{term}{The term in the model being estimated and tested}
   \item{estimate}{The estimated coefficient}
@@ -32,12 +32,12 @@ with four columns:
   \item{conf.high}{The lower bound of the confidence interval}
 }
 \description{
-This method tidies the coefficients of a bootstrapped temporal exponential 
+This method tidies the coefficients of a bootstrapped temporal exponential
 random graph model estimated with the \pkg{xergm}. It simply returns the
 coefficients and their confidence intervals.
 }
 \details{
-There is no \code{augment} or \code{glance} method 
+There is no \code{augment} or \code{glance} method
 for \pkg{ergm} objects.
 }
 \examples{
@@ -74,4 +74,3 @@ if (require("xergm")) {
 \seealso{
 \code{\link[btergm]{btergm}}
 }
-

@@ -24,4 +24,3 @@ and confidence intervals (typical for logistic regression)}
 Adds a confidence interval, and possibly exponentiates, a tidied
 object. Useful for operations shared between lm and biglm.
 }
-

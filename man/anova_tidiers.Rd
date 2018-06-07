@@ -38,6 +38,10 @@ Only a \code{tidy} method is provided, not an \code{augment} or
 \details{
 Note that the "term" column of an ANOVA table can come with
 leading or trailing whitespace, which this tidying method trims.
+
+Note that \code{Anova} from \pkg{car} (perhaps counter-intuively) outputs an
+object of class \code{anova} for generalized linear models. These objects are
+also supported.
 }
 \examples{
 
@@ -51,4 +55,3 @@ al <- aov(mpg ~ wt + qsec + Error(disp / am), mtcars)
 tidy(al)
 
 }
-

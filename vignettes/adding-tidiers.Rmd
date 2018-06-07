@@ -1,0 +1,139 @@
+---
+title: "Adding Tidiers to Broom"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+# Adding new tidiers to broom
+
+Thank you for your interest in adding new tidiers to broom! This document is a *work in progress* describing the conventions that broom follows.
+
+Some general guidelines:
+
+- Try to reach a minimum 90% test coverage for new tidiers
+- `tidy`, `glance` and `augment` methods *must* return tibbles
+- Use the [tidyverse style conventions](http://style.tidyverse.org/)
+- Feel free to add yourself as a contributor to `DESCRIPTION`
+
+<!-- TODOS: -->
+
+<!-- - Helper functions that you should be aware of and use -->
+<!-- - Preferred packages to use: i.e. new tidyverse not old -->
+
+<!-- Comments about tidiers living in external packages -->
+
+# `tidy`
+
+Each row in a `tidy` output provides information about the components of a model, such as one term in a regression, one test, or one cluster/class. This meaning varies across models but is usually self-evident.
+
+## Column names to use in output
+
+* `term`: the term in a regression or model that is being estimated.
+* `p.value`: the p-value associated with a test statistic
+* `statistic`: a test statistic, usually the one used to compute the p-value. Combining these across many sub-groups is a reliable way to perform (e.g.) bootstrap hypothesis testing
+* `estimate`: estimate of an effect size, slope, or other value
+* `std.error`: standard error
+* `conf.low`: the low end of a confidence interval on the `estimate`
+* `conf.high`: the high end of a confidence interval on the `estimate`
+* `df`: degrees of freedom
+
+
+# `glance`
+
+The `glance` method accepts a model object and returns a tibble with a single row of model level summaries.
+
+Do not include arguments *given* to the modeling function. For example, a `glm` glance output does not need to contain a field for `family`, since that is decided by the user calling `glm` rather than the modeling function itself.
+
+## Column names to use in output:
+
+* `r.squared` the fraction of variance explained by the model
+* `adj.r.squared` R^2 adjusted based on the degrees of freedom
+* `sigma` the square root of the estimated variance of the residuals
+
+
+# `augment`
+
+The `augment` method accepts a model object and optionally a data frame and returns a tibble of data with additional observation level information. `augment` should be used for information related to individual data points.
+
+* `augment(model, data)` adds columns to the original data.
+    * If the `data` argument is missing, `augment` attempts to reconstruct the data from the model (note that this may not always be possible, and usually won't contain columns not used in the model).
+
+`augment(object)` should return a tibble of summaries for the original observations.
+
+`augment(object, newdata = newdata)` should return a tibble of observation level summaries for a new data frame.
+
+Each row in `augment(object)` should correspond to a single row of the original data, or a single row of `newdata` if `newdata` was passed as an argument.
+
+If the original data contained rownames, `augment` should return them in a column called `.rownames`.
+
+Newly added column names begin with `.` to avoid overwriting columns in the original data.
+
+## Arguments that may be relevant:
+
+- x: object to augment
+- type.residuals
+- type.predict
+- data
+- newdata
+- weights
+
+
+## Column names to use in output
+
+* `.fitted`: the predicted values, on the same scale as the data.
+* `.resid`: residuals: the actual response values minus the fitted values
+* `.cluster`: cluster assignments
+
+
+# Testing new tidiers
+
+## Basic checks
+
+All `tidy` methods should `check_tidy`, all `glance` methods should pass `check_glance` and all `augment` methods should pass `check_augment`. That is, your test should include:
+
+```{r, eval = FALSE}
+t <- tidy(object)
+g <- glance(object)
+a <- augment(object)
+
+check_tidy(t)
+check_glance(g)
+check_augment(a)
+```
+
+## Package dependencies
+
+In order to test your tidiers, you may need to add `your_package` to the **Suggested** section of broom's DESCRIPTION.
+
+Here's a outline that you can use for your test file
+
+```{r}
+# TODO. requireNamespace(package, quietly = TRUE)?
+```
+
+At the moment, pull requests must pass the AppVeyor build to be added to `broom`. It is okay if the Travis CI build times out.
+
+## Catching edge cases
+
+Many modelling function allow users to specify a variety of options. For example, `glm` allows various response types via the `family` argument. Good tests for `glm` tidying methods would test tidiers on `glm` objects fit for all acceptable values of `family`.
+
+# Before submitting your pull request
+
+- Make sure that you have run and passed:
+    - `devtools::spell_check()`
+    - `goodpractice::gp()`
+- Run `pkgdown::build_site()` so that your documentation gets added to the broom
+- R CMD check
+
+An effective pull request should contain a big picture summary of what you've done and a brief example usage in the pull request text.

@@ -36,4 +36,3 @@ tidy(z)
 \seealso{
 \link{ts}, \link{zoo_tidiers}
 }
-

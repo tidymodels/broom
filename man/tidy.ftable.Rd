@@ -24,4 +24,3 @@ tidy(ftable(Titanic, row.vars = 1:3))
 \seealso{
 \code{\link{ftable}}
 }
-
