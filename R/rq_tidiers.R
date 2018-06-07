@@ -99,7 +99,15 @@ glance.rq <- function(x, ...) {
 }
 
 #' @export
-glance.rqs <- glance.rq
+glance.rqs <- function(x,...){
+    n <- length(fitted(x))
+    s <- summary(x)
+    data.frame(tau = x[["tau"]],
+               logLik = logLik(x),
+               AIC = AIC(x),
+               BIC = AIC(x,k = log(n)),
+               df.residual = vapply(s, function(x) x[["rdf"]], integer(1)))
+}
 
 #' @rdname rq_tidiers
 #'
