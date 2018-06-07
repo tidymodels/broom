@@ -20,6 +20,10 @@
 #'
 #' @details Note that the "term" column of an ANOVA table can come with
 #' leading or trailing whitespace, which this tidying method trims.
+#' 
+#' Note that \code{Anova} from \pkg{car} (perhaps counter-intuively) outputs an
+#' object of class \code{anova} for generalized linear models. These objects are
+#' also supported.
 #'
 #' @examples
 #'
@@ -61,6 +65,8 @@ tidy.anova <- function(x, ...) {
     "Pr..Chi." = "p.value",
     "p.value" = "p.value",
     "Chi.sq" = "statistic",
+    "LR.Chisq" = "statistic",
+    "LR Chisq" = "statistic",
     "edf" = "edf",
     "Ref.df" = "ref.df"
   )
