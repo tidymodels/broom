@@ -216,8 +216,7 @@ since the values <code>glance</code> outputs would be calculated for each state.
 
     <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/qplot'>qplot</a></span>(<span class='no'>glances</span>$<span class='no'>median</span>, <span class='kw'>binwidth</span> <span class='kw'>=</span> <span class='fl'>15</span>)
     <span class='fu'>quantile</span>(<span class='no'>glances</span>$<span class='no'>median</span>, <span class='fu'>c</span>(<span class='fl'>.025</span>, <span class='fl'>.975</span>))
-}</div><div class='output co'>#&gt; <span class='warning'>Warning: `bootstrap()` is deprecated and will be removed in an upcoming release of broom. See the rsample package instead.</span></div><div class='output co'>#&gt; <span class='warning'>Warning: `bootstrap()` is deprecated and will be removed in an upcoming release of broom. See the rsample package instead.</span></div><div class='output co'>#&gt;  2.5% 97.5% 
-#&gt; 285.0 357.2 </div><div class='input'>
+}</div><div class='output co'>#&gt; <span class='warning'>Warning: `bootstrap()` is deprecated and will be removed in an upcoming release of broom. See the rsample package instead.</span></div><div class='output co'>#&gt; <span class='error'>Error in summarize(., median = median(estimate), low = quantile(estimate,     0.025), high = quantile(estimate, 0.975)): l'argument "by" est manquant, avec aucune valeur par défaut</span></div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

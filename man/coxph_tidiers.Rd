@@ -7,7 +7,8 @@
 \alias{glance.coxph}
 \title{Tidiers for coxph object}
 \usage{
-\method{tidy}{coxph}(x, exponentiate = FALSE, conf.int = 0.95, ...)
+\method{tidy}{coxph}(x, exponentiate = FALSE, conf.int = TRUE,
+  conf.level = 0.95, ...)
 
 \method{augment}{coxph}(x, data = stats::model.frame(x), newdata,
   type.predict = "lp", type.residuals = "martingale", ...)
@@ -20,7 +21,9 @@
 \item{exponentiate}{whether to report the estimate and confidence intervals
 on an exponential scale}
 
-\item{conf.int}{confidence level to be used for CI}
+\item{conf.int}{whether to include a confidence interval}
+
+\item{conf.level}{confidence level of the interval, used only if \code{conf.int=TRUE}}
 
 \item{...}{Extra arguments, not used}
 
