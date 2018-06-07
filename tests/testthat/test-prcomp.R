@@ -34,3 +34,9 @@ test_that("augment.prcomp works with or without newdata argument", {
   au <- augment(pc, newdata = USArrests)
   check_tidy(au, exp.row = 50, exp.col = 9)
 })
+
+test_that("tidy.prcomp works data without rownames", {
+  test <- as.data.frame(matrix(1:9, ncol = 3) + rnorm(n = 9, sd = 0.25))
+  pca <- prcomp(test)
+  expect_error(tidy(pca, matrix = "u"), NA)
+})

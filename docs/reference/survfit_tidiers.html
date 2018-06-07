@@ -65,6 +65,12 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
+      <a href="../articles/adding-tidiers.html">Adding new tidiers</a>
+    </li>
+    <li>
+      <a href="../articles/available-methods.html">Available methods</a>
+    </li>
+    <li>
       <a href="../articles/bootstrapping.html">Bootstrapping</a>
     </li>
     <li>
@@ -210,7 +216,7 @@ since the values <code>glance</code> outputs would be calculated for each state.
 
     <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/qplot'>qplot</a></span>(<span class='no'>glances</span>$<span class='no'>median</span>, <span class='kw'>binwidth</span> <span class='kw'>=</span> <span class='fl'>15</span>)
     <span class='fu'>quantile</span>(<span class='no'>glances</span>$<span class='no'>median</span>, <span class='fu'>c</span>(<span class='fl'>.025</span>, <span class='fl'>.975</span>))
-}</div><div class='output co'>#&gt;  2.5% 97.5% 
+}</div><div class='output co'>#&gt; <span class='warning'>Warning: `bootstrap()` is deprecated and will be removed in an upcoming release of broom. See the rsample package instead.</span></div><div class='output co'>#&gt; <span class='warning'>Warning: `bootstrap()` is deprecated and will be removed in an upcoming release of broom. See the rsample package instead.</span></div><div class='output co'>#&gt;  2.5% 97.5% 
 #&gt; 285.0 357.2 </div><div class='input'>
 </div></pre>
   </div>
