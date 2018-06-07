@@ -49,7 +49,7 @@ test_that("test.manova works", {
 test_that("tidy.ts works", {
   ts1 <- ts(1:10, frequency = 4, start = c(1959, 2))
   td <- tidy(ts1)
-  check_tidy(td, exp.row = 10, exp.col = 1)
+  check_tidy(td, exp.row = 10, exp.col = 2)
 })
 
 test_that("tidy.pairwise.htest works", {

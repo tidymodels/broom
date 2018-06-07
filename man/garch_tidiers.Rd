@@ -20,7 +20,7 @@
 \item{...}{extra arguments (not used)}
 
 \item{method}{\code{character} which specifies the hypothesis test to be shown in \code{glance}.
-The \code{garch} function reports 2 hypothesis tests: Jarque-Bera to residuals 
+The \code{garch} function reports 2 hypothesis tests: Jarque-Bera to residuals
 and Box-Ljung to squared residuals.}
 
 \item{data}{original data (used with \code{augment})}
