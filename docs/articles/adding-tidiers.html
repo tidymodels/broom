@@ -97,27 +97,73 @@
 <div id="adding-new-tidiers-to-broom" class="section level1">
 <h1 class="hasAnchor">
 <a href="#adding-new-tidiers-to-broom" class="anchor"></a>Adding new tidiers to broom</h1>
-<p>Thank you for your interest in adding new tidiers to broom! This document is a <em>work in progress</em> describing the conventions that broom follows.</p>
-<p>Some general guidelines:</p>
+<p>Thank you for your interest in contributing to broom! This document is a <strong>work in progress</strong> describing the conventions that you should follow when adding tidiers to broom.</p>
+<p>General guidelines:</p>
 <ul>
 <li>Try to reach a minimum 90% test coverage for new tidiers</li>
 <li>
-<code>tidy</code>, <code>glance</code> and <code>augment</code> methods <em>must</em> return tibbles</li>
-<li>Use the <a href="http://style.tidyverse.org/">tidyverse style conventions</a>
-</li>
+<code>tidy</code>, <code>glance</code> and <code>augment</code> methods <strong>must</strong> return tibbles</li>
 <li>Feel free to add yourself as a contributor to <code>DESCRIPTION</code>
 </li>
+<li>Update <code>NEWS.md</code> to reflect the changes you’ve made</li>
+<li>Follow the <a href="http://style.tidyverse.org/">tidyverse style conventions</a>. You can use the <a href="https://github.com/r-lib/styler"><code>styler</code></a> package to reformat your code according to these conventions, and the <a href="https://github.com/jimhester/lintr"><code>lintr</code></a> package to check that your code meets the conventions.</li>
 </ul>
-<!-- TODOS: --><!-- - Helper functions that you should be aware of and use --><!-- - Preferred packages to use: i.e. new tidyverse not old --><!-- Comments about tidiers living in external packages -->
+<!-- TODOS: --><!-- - Helper functions that you should be aware of and use --><!-- - Preferred packages to use: i.e. new tidyverse not old --><!-- Should commits be squashed into a single commit? --><!-- Comments about tidiers living in external packages -->
+</div>
+<div id="testing-new-tidiers" class="section level1">
+<h1 class="hasAnchor">
+<a href="#testing-new-tidiers" class="anchor"></a>Testing new tidiers</h1>
+<div id="basic-checks" class="section level2">
+<h2 class="hasAnchor">
+<a href="#basic-checks" class="anchor"></a>Basic checks</h2>
+<p>All <code>tidy</code> methods should <code>check_tidy</code>, all <code>glance</code> methods should pass <code>check_glance</code> and all <code>augment</code> methods should pass <code>check_augment</code>. That is, your test should include:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">t &lt;-<span class="st"> </span><span class="kw"><a href="../reference/tidy.html">tidy</a></span>(object)
+g &lt;-<span class="st"> </span><span class="kw"><a href="../reference/glance.html">glance</a></span>(object)
+a &lt;-<span class="st"> </span><span class="kw"><a href="../reference/augment.html">augment</a></span>(object)
+
+<span class="kw">check_tidy</span>(t)
+<span class="kw">check_glance</span>(g)
+<span class="kw">check_augment</span>(a)</code></pre></div>
+</div>
+<div id="package-dependencies" class="section level2">
+<h2 class="hasAnchor">
+<a href="#package-dependencies" class="anchor"></a>Package dependencies</h2>
+<p>In order to test your tidiers, you may need to add <code>your_package</code> to the <strong>Suggests</strong> section of broom’s DESCRIPTION.</p>
+<p>Here’s a outline that you can use for your test file</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># </span><span class="al">TODO</span><span class="co">. requireNamespace(package, quietly = TRUE)?</span></code></pre></div>
+<p>At the moment, pull requests must pass the AppVeyor build to be added to <code>broom</code>. It is okay if the Travis CI build times out.</p>
+</div>
+<div id="catching-edge-cases" class="section level2">
+<h2 class="hasAnchor">
+<a href="#catching-edge-cases" class="anchor"></a>Catching edge cases</h2>
+<p>Many modelling function allow users to specify a variety of options. For example, <code>glm</code> allows various response types via the <code>family</code> argument. Good tests for <code>glm</code> tidying methods would test tidiers on <code>glm</code> objects fit for all acceptable values of <code>family</code>.</p>
+</div>
+</div>
+<div id="before-submitting-your-pull-request-pr" class="section level1">
+<h1 class="hasAnchor">
+<a href="#before-submitting-your-pull-request-pr" class="anchor"></a>Before submitting your pull request (PR)</h1>
+<ul>
+<li>Check that your PR contains a big picture summary of what you’ve done and a brief example usage in the PR text</li>
+<li>If you know how, squash your PR into a single commit. If you don’t know how, don’t worry about it. <!-- (TODO: add link on how to do this) -->
+</li>
+<li>Make sure that you have run and passed:
+<ul>
+<li><code><a href="http://www.rdocumentation.org/packages/devtools/topics/spell_check">devtools::spell_check()</a></code></li>
+<li><code><a href="http://www.rdocumentation.org/packages/goodpractice/topics/gp">goodpractice::gp()</a></code></li>
+<li>R CMD Check</li>
+</ul>
+</li>
+<li>Run <code><a href="http://www.rdocumentation.org/packages/devtools/topics/document">devtools::document()</a></code> but <strong>do not</strong> run <code><a href="http://pkgdown.r-lib.org/reference/build_site.html">pkgdown::build_site()</a></code> unless requested to.</li>
+</ul>
+<p>Developers outside the US or UK should run <code>Sys.setlocale("LC_ALL", "English")</code> before <code><a href="http://pkgdown.r-lib.org/reference/build_site.html">pkgdown::build_site()</a></code> <em>if asked to build the site</em>. This is so that messages are in English.</p>
+<p><code>broom</code> doesn’t currently pass all of these. If you are adding new tidiers at the moment, it’s enough for these to throw no warnings for the files you’ve changed.</p>
 </div>
 <div id="tidy" class="section level1">
 <h1 class="hasAnchor">
 <a href="#tidy" class="anchor"></a><code>tidy</code>
 </h1>
 <p>Each row in a <code>tidy</code> output provides information about the components of a model, such as one term in a regression, one test, or one cluster/class. This meaning varies across models but is usually self-evident.</p>
-<div id="column-names-to-use-in-output" class="section level2">
-<h2 class="hasAnchor">
-<a href="#column-names-to-use-in-output" class="anchor"></a>Column names to use in output</h2>
+<p><strong>Column names to use in output</strong></p>
 <ul>
 <li>
 <code>term</code>: the term in a regression or model that is being estimated.</li>
@@ -139,16 +185,13 @@
 <code>df</code>: degrees of freedom</li>
 </ul>
 </div>
-</div>
 <div id="glance" class="section level1">
 <h1 class="hasAnchor">
 <a href="#glance" class="anchor"></a><code>glance</code>
 </h1>
 <p>The <code>glance</code> method accepts a model object and returns a tibble with a single row of model level summaries.</p>
 <p>Do not include arguments <em>given</em> to the modeling function. For example, a <code>glm</code> glance output does not need to contain a field for <code>family</code>, since that is decided by the user calling <code>glm</code> rather than the modeling function itself.</p>
-<div id="column-names-to-use-in-output-1" class="section level2">
-<h2 class="hasAnchor">
-<a href="#column-names-to-use-in-output-1" class="anchor"></a>Column names to use in output:</h2>
+<p><strong>Column names to use in output</strong></p>
 <ul>
 <li>
 <code>r.squared</code> the fraction of variance explained by the model</li>
@@ -157,7 +200,6 @@
 <li>
 <code>sigma</code> the square root of the estimated variance of the residuals</li>
 </ul>
-</div>
 </div>
 <div id="augment" class="section level1">
 <h1 class="hasAnchor">
@@ -177,9 +219,7 @@
 <p>Each row in <code><a href="../reference/augment.html">augment(object)</a></code> should correspond to a single row of the original data, or a single row of <code>newdata</code> if <code>newdata</code> was passed as an argument.</p>
 <p>If the original data contained rownames, <code>augment</code> should return them in a column called <code>.rownames</code>.</p>
 <p>Newly added column names begin with <code>.</code> to avoid overwriting columns in the original data.</p>
-<div id="arguments-that-may-be-relevant" class="section level2">
-<h2 class="hasAnchor">
-<a href="#arguments-that-may-be-relevant" class="anchor"></a>Arguments that may be relevant:</h2>
+<p><strong>Arguments that may be relevant</strong></p>
 <ul>
 <li>x: object to augment</li>
 <li>type.residuals</li>
@@ -188,10 +228,7 @@
 <li>newdata</li>
 <li>weights</li>
 </ul>
-</div>
-<div id="column-names-to-use-in-output-2" class="section level2">
-<h2 class="hasAnchor">
-<a href="#column-names-to-use-in-output-2" class="anchor"></a>Column names to use in output</h2>
+<p><strong>Column names to use in output</strong></p>
 <ul>
 <li>
 <code>.fitted</code>: the predicted values, on the same scale as the data.</li>
@@ -200,51 +237,6 @@
 <li>
 <code>.cluster</code>: cluster assignments</li>
 </ul>
-</div>
-</div>
-<div id="testing-new-tidiers" class="section level1">
-<h1 class="hasAnchor">
-<a href="#testing-new-tidiers" class="anchor"></a>Testing new tidiers</h1>
-<div id="basic-checks" class="section level2">
-<h2 class="hasAnchor">
-<a href="#basic-checks" class="anchor"></a>Basic checks</h2>
-<p>All <code>tidy</code> methods should <code>check_tidy</code>, all <code>glance</code> methods should pass <code>check_glance</code> and all <code>augment</code> methods should pass <code>check_augment</code>. That is, your test should include:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">t &lt;-<span class="st"> </span><span class="kw"><a href="../reference/tidy.html">tidy</a></span>(object)
-g &lt;-<span class="st"> </span><span class="kw"><a href="../reference/glance.html">glance</a></span>(object)
-a &lt;-<span class="st"> </span><span class="kw"><a href="../reference/augment.html">augment</a></span>(object)
-
-<span class="kw">check_tidy</span>(t)
-<span class="kw">check_glance</span>(g)
-<span class="kw">check_augment</span>(a)</code></pre></div>
-</div>
-<div id="package-dependencies" class="section level2">
-<h2 class="hasAnchor">
-<a href="#package-dependencies" class="anchor"></a>Package dependencies</h2>
-<p>In order to test your tidiers, you may need to add <code>your_package</code> to the <strong>Suggested</strong> section of broom’s DESCRIPTION.</p>
-<p>Here’s a outline that you can use for your test file</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># </span><span class="al">TODO</span><span class="co">. requireNamespace(package, quietly = TRUE)?</span></code></pre></div>
-<p>At the moment, pull requests must pass the AppVeyor build to be added to <code>broom</code>. It is okay if the Travis CI build times out.</p>
-</div>
-<div id="catching-edge-cases" class="section level2">
-<h2 class="hasAnchor">
-<a href="#catching-edge-cases" class="anchor"></a>Catching edge cases</h2>
-<p>Many modelling function allow users to specify a variety of options. For example, <code>glm</code> allows various response types via the <code>family</code> argument. Good tests for <code>glm</code> tidying methods would test tidiers on <code>glm</code> objects fit for all acceptable values of <code>family</code>.</p>
-</div>
-</div>
-<div id="before-submitting-your-pull-request" class="section level1">
-<h1 class="hasAnchor">
-<a href="#before-submitting-your-pull-request" class="anchor"></a>Before submitting your pull request</h1>
-<ul>
-<li>Make sure that you have run and passed:
-<ul>
-<li><code><a href="http://www.rdocumentation.org/packages/devtools/topics/spell_check">devtools::spell_check()</a></code></li>
-<li><code><a href="http://www.rdocumentation.org/packages/goodpractice/topics/gp">goodpractice::gp()</a></code></li>
-</ul>
-</li>
-<li>Run <code><a href="http://pkgdown.r-lib.org/reference/build_site.html">pkgdown::build_site()</a></code> so that your documentation gets added to the broom</li>
-<li>R CMD check</li>
-</ul>
-<p>An effective pull request should contain a big picture summary of what you’ve done and a brief example usage in the pull request text.</p>
 </div>
   </div>
 
@@ -255,29 +247,16 @@ a &lt;-<span class="st"> </span><span class="kw"><a href="../reference/augment.h
       <ul class="nav nav-pills nav-stacked">
 <li><a href="#adding-new-tidiers-to-broom">Adding new tidiers to broom</a></li>
       <li>
-<a href="#tidy"><code>tidy</code></a><ul class="nav nav-pills nav-stacked">
-<li><a href="#column-names-to-use-in-output">Column names to use in output</a></li>
-      </ul>
-</li>
-      <li>
-<a href="#glance"><code>glance</code></a><ul class="nav nav-pills nav-stacked">
-<li><a href="#column-names-to-use-in-output-1">Column names to use in output:</a></li>
-      </ul>
-</li>
-      <li>
-<a href="#augment"><code>augment</code></a><ul class="nav nav-pills nav-stacked">
-<li><a href="#arguments-that-may-be-relevant">Arguments that may be relevant:</a></li>
-      <li><a href="#column-names-to-use-in-output-2">Column names to use in output</a></li>
-      </ul>
-</li>
-      <li>
 <a href="#testing-new-tidiers">Testing new tidiers</a><ul class="nav nav-pills nav-stacked">
 <li><a href="#basic-checks">Basic checks</a></li>
       <li><a href="#package-dependencies">Package dependencies</a></li>
       <li><a href="#catching-edge-cases">Catching edge cases</a></li>
       </ul>
 </li>
-      <li><a href="#before-submitting-your-pull-request">Before submitting your pull request</a></li>
+      <li><a href="#before-submitting-your-pull-request-pr">Before submitting your pull request (PR)</a></li>
+      <li><a href="#tidy"><code>tidy</code></a></li>
+      <li><a href="#glance"><code>glance</code></a></li>
+      <li><a href="#augment"><code>augment</code></a></li>
       </ul>
 </div>
       </div>

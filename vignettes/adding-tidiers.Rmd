@@ -17,27 +17,76 @@ knitr::opts_chunk$set(
 
 # Adding new tidiers to broom
 
-Thank you for your interest in adding new tidiers to broom! This document is a *work in progress* describing the conventions that broom follows.
+Thank you for your interest in contributing to broom! This document is a **work in progress** describing the conventions that you should follow when adding tidiers to broom.
 
-Some general guidelines:
+General guidelines:
 
 - Try to reach a minimum 90% test coverage for new tidiers
-- `tidy`, `glance` and `augment` methods *must* return tibbles
-- Use the [tidyverse style conventions](http://style.tidyverse.org/)
+- `tidy`, `glance` and `augment` methods **must** return tibbles
 - Feel free to add yourself as a contributor to `DESCRIPTION`
+- Update `NEWS.md` to reflect the changes you've made
+- Follow the [tidyverse style conventions](http://style.tidyverse.org/). You can use the [`styler`](https://github.com/r-lib/styler) package to reformat your code according to these conventions, and the [`lintr`](https://github.com/jimhester/lintr) package to check that your code meets the conventions.
 
 <!-- TODOS: -->
 
 <!-- - Helper functions that you should be aware of and use -->
 <!-- - Preferred packages to use: i.e. new tidyverse not old -->
-
+<!-- Should commits be squashed into a single commit? -->
 <!-- Comments about tidiers living in external packages -->
+
+# Testing new tidiers
+
+## Basic checks
+
+All `tidy` methods should `check_tidy`, all `glance` methods should pass `check_glance` and all `augment` methods should pass `check_augment`. That is, your test should include:
+
+```{r, eval = FALSE}
+t <- tidy(object)
+g <- glance(object)
+a <- augment(object)
+
+check_tidy(t)
+check_glance(g)
+check_augment(a)
+```
+
+## Package dependencies
+
+In order to test your tidiers, you may need to add `your_package` to the **Suggests** section of broom's DESCRIPTION.
+
+Here's a outline that you can use for your test file
+
+```{r}
+# TODO. requireNamespace(package, quietly = TRUE)?
+```
+
+At the moment, pull requests must pass the AppVeyor build to be added to `broom`. It is okay if the Travis CI build times out.
+
+## Catching edge cases
+
+Many modelling function allow users to specify a variety of options. For example, `glm` allows various response types via the `family` argument. Good tests for `glm` tidying methods would test tidiers on `glm` objects fit for all acceptable values of `family`.
+
+# Before submitting your pull request (PR)
+
+- Check that your PR contains a big picture summary of what you've done and a brief example usage in the PR text
+- If you know how, squash your PR into a single commit. If you don't know how, don't worry about it.
+<!-- (TODO: add link on how to do this) -->
+- Make sure that you have run and passed:
+    - `devtools::spell_check()`
+    - `goodpractice::gp()`
+    - R CMD Check
+- Run `devtools::document()` but **do not** run `pkgdown::build_site()` unless requested to. 
+
+Developers outside the US or UK should run `Sys.setlocale("LC_ALL", "English")` before `pkgdown::build_site()` *if asked to build the site*. This is so that messages are in English.
+    
+`broom` doesn't currently pass all of these. If you are adding new tidiers at the moment, it's enough for these to throw no warnings for the files you've changed.
+
 
 # `tidy`
 
 Each row in a `tidy` output provides information about the components of a model, such as one term in a regression, one test, or one cluster/class. This meaning varies across models but is usually self-evident.
 
-## Column names to use in output
+**Column names to use in output**
 
 * `term`: the term in a regression or model that is being estimated.
 * `p.value`: the p-value associated with a test statistic
@@ -55,7 +104,7 @@ The `glance` method accepts a model object and returns a tibble with a single ro
 
 Do not include arguments *given* to the modeling function. For example, a `glm` glance output does not need to contain a field for `family`, since that is decided by the user calling `glm` rather than the modeling function itself.
 
-## Column names to use in output:
+**Column names to use in output**
 
 * `r.squared` the fraction of variance explained by the model
 * `adj.r.squared` R^2 adjusted based on the degrees of freedom
@@ -79,7 +128,7 @@ If the original data contained rownames, `augment` should return them in a colum
 
 Newly added column names begin with `.` to avoid overwriting columns in the original data.
 
-## Arguments that may be relevant:
+**Arguments that may be relevant**
 
 - x: object to augment
 - type.residuals
@@ -89,51 +138,9 @@ Newly added column names begin with `.` to avoid overwriting columns in the orig
 - weights
 
 
-## Column names to use in output
+**Column names to use in output**
 
 * `.fitted`: the predicted values, on the same scale as the data.
 * `.resid`: residuals: the actual response values minus the fitted values
 * `.cluster`: cluster assignments
 
-
-# Testing new tidiers
-
-## Basic checks
-
-All `tidy` methods should `check_tidy`, all `glance` methods should pass `check_glance` and all `augment` methods should pass `check_augment`. That is, your test should include:
-
-```{r, eval = FALSE}
-t <- tidy(object)
-g <- glance(object)
-a <- augment(object)
-
-check_tidy(t)
-check_glance(g)
-check_augment(a)
-```
-
-## Package dependencies
-
-In order to test your tidiers, you may need to add `your_package` to the **Suggested** section of broom's DESCRIPTION.
-
-Here's a outline that you can use for your test file
-
-```{r}
-# TODO. requireNamespace(package, quietly = TRUE)?
-```
-
-At the moment, pull requests must pass the AppVeyor build to be added to `broom`. It is okay if the Travis CI build times out.
-
-## Catching edge cases
-
-Many modelling function allow users to specify a variety of options. For example, `glm` allows various response types via the `family` argument. Good tests for `glm` tidying methods would test tidiers on `glm` objects fit for all acceptable values of `family`.
-
-# Before submitting your pull request
-
-- Make sure that you have run and passed:
-    - `devtools::spell_check()`
-    - `goodpractice::gp()`
-- Run `pkgdown::build_site()` so that your documentation gets added to the broom
-- R CMD check
-
-An effective pull request should contain a big picture summary of what you've done and a brief example usage in the pull request text.
