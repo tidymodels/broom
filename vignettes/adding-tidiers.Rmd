@@ -27,6 +27,9 @@ General guidelines:
 - Update `NEWS.md` to reflect the changes you've made
 - Follow the [tidyverse style conventions](http://style.tidyverse.org/). You can use the [`styler`](https://github.com/r-lib/styler) package to reformat your code according to these conventions, and the [`lintr`](https://github.com/jimhester/lintr) package to check that your code meets the conventions.
 
+- It's better to have a predictable number of columns and unknown number rows than an unknown number of columns and a predictable number of rows.
+- It's better for users to need to `tidyr::spread`than `tidyr::gather` data after it's been tidied 
+
 <!-- TODOS: -->
 
 <!-- - Helper functions that you should be aware of and use -->
