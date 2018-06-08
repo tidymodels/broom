@@ -158,3 +158,19 @@ test_that("tidy.default throws warning before turning into data.frame", {
   expect_error(expect_warning(tidy(x), regexp = "foo"))
   expect_error(expect_warning(tidy(x), regexp = "[^bar]"))
 })
+
+context("tidying time series")
+
+test_that("tidy.ts works for univariate series", {
+    x <- ts(1:10, frequency = 4, start = c(1959, 2))
+    tx <- tidy(x)
+    check_tidiness(tx)
+    check_tidy(tx, exp.names = c("index", "value"))
+})
+
+test_that("tidy.ts works for multivariate series", {
+    z <- ts(matrix(rnorm(300), 100, 3), start = c(1961, 1), frequency = 12)
+    tz <- tidy(z)
+    check_tidiness(tz)
+    check_tidy(tz, exp.names = c("index", "series", "value"))
+})

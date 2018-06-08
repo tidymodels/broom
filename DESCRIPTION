@@ -22,7 +22,8 @@ Authors@R: c(
     person("Matthew", "Lincoln", email = "matthew.d.lincoln@gmail.com", role = "ctb"),
     person("Lukasz", "Komsta", email = "lukasz.komsta@umlub.pl", role = "ctb"),
     person("Frederick", "Novometsky", role = "ctb"),
-    person("Jason Cory", "Brunson", email = "cornelioid@gmail.com", role = "ctb"))
+    person("Wilson", "Freitas", role = "ctb"),
+    person("Jason Cory", "Brunson", email = "cornelioid@gmail.com", role = "ctb"))  
 Maintainer: David Robinson <admiral.david@gmail.com>
 Description: Convert statistical analysis objects from R into tidy data frames,
     so that they can more easily be combined, reshaped and otherwise processed
@@ -41,6 +42,7 @@ Imports:
     plyr,
     reshape2,
     stringr,
+    tibble,
     tidyr
 Suggests:
     AER,
@@ -84,6 +86,7 @@ Suggests:
     network,
     nnet,
     orcutt,
+    ordinal,
     plm,
     poLCA,
     psych,
@@ -98,9 +101,10 @@ Suggests:
     speedglm,
     statnet.common,
     survival,
+    survey,
     testthat,
-    tibble,
     xergm,
-    zoo
+    zoo,
+    tseries
 VignetteBuilder: knitr
 RoxygenNote: 6.0.1
