@@ -238,8 +238,6 @@ tidy.manova <- function(x, test = "Pillai", ...) {
 
   nn <- c("df", test.name, "statistic", "num.df", "den.df", "p.value")
   ret <- fix_data_frame(summary(x, test = test, ...)$stats, nn)
-  # remove residuals row (doesn't have useful information)
-  ret <- ret[-nrow(ret), ]
   ret
 }
 
