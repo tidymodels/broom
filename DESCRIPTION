@@ -101,6 +101,7 @@ Suggests:
     speedglm,
     statnet.common,
     survival,
+    survey,
     testthat,
     xergm,
     zoo,
