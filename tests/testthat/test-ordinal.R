@@ -1,6 +1,7 @@
 context("tidiers for ordinal models")
 
 test_that("tidiers work for clm objects (ordinal)", {
+  data(wine, package = "ordinal")
   mod <- ordinal::clm(rating ~ temp * contact, data = wine)
   td <- tidy(mod, quick = TRUE)
   check_tidy(td, exp.row = 7, exp.col = 3)
@@ -15,6 +16,7 @@ test_that("tidiers work for clm objects (ordinal)", {
 })
 
 test_that("tidiers work for clmm objects (ordinal)", {
+  data(wine, package = "ordinal")
   mod <- ordinal::clmm(rating ~ temp + contact + (1 | judge), data = wine)
   td <- tidy(mod, quick = TRUE)
   check_tidy(td, exp.row = 6, exp.col = 3)
