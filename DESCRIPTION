@@ -86,6 +86,7 @@ Suggests:
     network,
     nnet,
     orcutt,
+    ordinal,
     plm,
     poLCA,
     psych,

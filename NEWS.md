@@ -6,6 +6,7 @@ broom 0.4.4.9000
 * Updated old vignettes to use `map/unnest` workflow rather than `rowwise/do`
 * Bump version number
 * Added `augment` method for chi-squared tests
+* Added tieders for ordinal models: `clm` and `clmm` (ordinal), `polr` (MASS), `svyolr` (survey)
 
 broom 0.4.4
 -----------
