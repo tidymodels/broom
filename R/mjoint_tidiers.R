@@ -41,14 +41,14 @@
 #' tidy(fit, ci = TRUE)
 #'
 #' # Extract the survival fixed effects with confidence intervals based on bootstrapped standard errors
-#' bSE <- bootSE(fit, nboot = 5)
+#' bSE <- bootSE(fit, nboot = 5, safe.boot = TRUE)
 #' tidy(fit, bootSE = bSE, ci = TRUE)
 #'
 #' # Augment original data with fitted longitudinal values and residuals
 #' hvd2 <- augment(fit)
 #'
 #' # Extract model statistics
-#' glimpse(fit)
+#' glance(fit)
 #' }
 #'
 #' @rdname mjoint_tidiers
@@ -106,6 +106,9 @@ tidy.mjoint <- function(x, component = "survival", bootSE = NULL, ci = FALSE, le
     out$conf.high <- out$estimate + cv * out$std.error
   }
 
+  # turn out into a tibble object
+  out <- tibble::as_tibble(out)
+
   # return tidy object
   return(out)
 }
@@ -153,6 +156,7 @@ augment.mjoint <- function(x, data = x$data, ...) {
 
   # return augmented 'data'
   out <- cbind(data, fit0, fit1, res0, res1)
+  out <- tibble::as_tibble(out)
   return(out)
 }
 
@@ -174,5 +178,6 @@ glance.mjoint <- function(x, ...) {
   out$BIC <- smr$BIC
   out$logLik <- smr$logLik
   rownames(out) <- NULL
+  out <- tibble::as_tibble(out)
   return(out)
 }
