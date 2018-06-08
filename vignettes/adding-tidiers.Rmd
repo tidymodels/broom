@@ -1,5 +1,5 @@
 ---
-title: "Adding Tidiers to Broom"
+title: "Adding tidiers to broom"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
@@ -13,88 +13,47 @@ knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>"
 )
+
+library(broom)
+library(tibble)
 ```
 
 # Adding new tidiers to broom
 
-Thank you for your interest in adding new tidiers to broom! This document is a *work in progress* describing the conventions that broom follows.
+Thank you for your interest in contributing to broom! This document is a **work in progress** describing the conventions that you should follow when adding tidiers to broom.
 
-Some general guidelines:
+General guidelines:
 
-- Try to reach a minimum 90% test coverage for new tidiers
-- `tidy`, `glance` and `augment` methods *must* return tibbles
-- Use the [tidyverse style conventions](http://style.tidyverse.org/)
-- Feel free to add yourself as a contributor to `DESCRIPTION`
+- Try to reach a minimum 90% test coverage for new tidiers.
+- `tidy`, `glance` and `augment` methods **must** return tibbles.
+- Update `NEWS.md` to reflect the changes you've made
+- Follow the [tidyverse style conventions](http://style.tidyverse.org/). You can use the [`styler`](https://github.com/r-lib/styler) package to reformat your code according to these conventions, and the [`lintr`](https://github.com/jimhester/lintr) package to check that your code meets the conventions.
+- Use new tidyverse packages such as `dplyr` and `tidyr` over older packages such as `plyr` and `reshape2`.
+- It's better to have a predictable number of columns and unknown number rows than an unknown number of columns and a predictable number of rows.
+- It's better for users to need to `tidyr::spread`than `tidyr::gather` data after it's been tidied.
+- Feel free to add yourself as a contributor to `DESCRIPTION`.
+- When in doubt, please reach out to the maintainers. We are happy to help with any questions.
 
-<!-- TODOS: -->
+If you are just getting into open source development, `broom` is an excellent place to get started and we are more than happy to help. We recommend you start contributing by improving the documentation, writing issues with reproducible errors, or taking on issues tagged `beginner-friendly`.
 
-<!-- - Helper functions that you should be aware of and use -->
-<!-- - Preferred packages to use: i.e. new tidyverse not old -->
+## Which package does my tidier belong in?
 
-<!-- Comments about tidiers living in external packages -->
+Ideally, tidying methods should live in the packages of their associated modelling functions. That is, if you have some object `my_object` produced by`my_package`, the functions `tidy.my_object`, `glance.my_object` and `augment.my_object` should live in `my_package`, provided there are sensible ways to define these tidiers for `my_object`.
 
-# `tidy`
+We are currently working on an appropriate way to split tidiers into several domain specific tidying packages. For now, if you don't own `my_package`, you should add the tidiers to `broom`. There are some exceptions:
 
-Each row in a `tidy` output provides information about the components of a model, such as one term in a regression, one test, or one cluster/class. This meaning varies across models but is usually self-evident.
+- Mixed model tidiers belong in [`broom.mixed`](https://github.com/bbolker/broom.mixed)
+- Natural language related tidiers belong in [`tidytext`](https://github.com/juliasilge/tidytext)
+- Tree tidiers belong in [`broomstick`](https://github.com/njtierney/broomstick)
+- Tidiers for objects from BioConductor belong in [`biobroom`](https://bioconductor.org/packages/release/bioc/html/biobroom.html)
 
-## Column names to use in output
+We will keep you updated as we work towards a final solution.
 
-* `term`: the term in a regression or model that is being estimated.
-* `p.value`: the p-value associated with a test statistic
-* `statistic`: a test statistic, usually the one used to compute the p-value. Combining these across many sub-groups is a reliable way to perform (e.g.) bootstrap hypothesis testing
-* `estimate`: estimate of an effect size, slope, or other value
-* `std.error`: standard error
-* `conf.low`: the low end of a confidence interval on the `estimate`
-* `conf.high`: the high end of a confidence interval on the `estimate`
-* `df`: degrees of freedom
+<!-- - TODO: Helper functions that you should be aware of and use -->
 
+# Documenting new tidiers
 
-# `glance`
-
-The `glance` method accepts a model object and returns a tibble with a single row of model level summaries.
-
-Do not include arguments *given* to the modeling function. For example, a `glm` glance output does not need to contain a field for `family`, since that is decided by the user calling `glm` rather than the modeling function itself.
-
-## Column names to use in output:
-
-* `r.squared` the fraction of variance explained by the model
-* `adj.r.squared` R^2 adjusted based on the degrees of freedom
-* `sigma` the square root of the estimated variance of the residuals
-
-
-# `augment`
-
-The `augment` method accepts a model object and optionally a data frame and returns a tibble of data with additional observation level information. `augment` should be used for information related to individual data points.
-
-* `augment(model, data)` adds columns to the original data.
-    * If the `data` argument is missing, `augment` attempts to reconstruct the data from the model (note that this may not always be possible, and usually won't contain columns not used in the model).
-
-`augment(object)` should return a tibble of summaries for the original observations.
-
-`augment(object, newdata = newdata)` should return a tibble of observation level summaries for a new data frame.
-
-Each row in `augment(object)` should correspond to a single row of the original data, or a single row of `newdata` if `newdata` was passed as an argument.
-
-If the original data contained rownames, `augment` should return them in a column called `.rownames`.
-
-Newly added column names begin with `.` to avoid overwriting columns in the original data.
-
-## Arguments that may be relevant:
-
-- x: object to augment
-- type.residuals
-- type.predict
-- data
-- newdata
-- weights
-
-
-## Column names to use in output
-
-* `.fitted`: the predicted values, on the same scale as the data.
-* `.resid`: residuals: the actual response values minus the fitted values
-* `.cluster`: cluster assignments
-
+All new tidiers should be fully documented following the [tidyverse code documentation guidelines](http://style.tidyverse.org/code-documentation.html). Documentation should use full sentences with appropriate punctation. Documentation should also contain at least one but potentially several examples of how the tidiers can be used.
 
 # Testing new tidiers
 
@@ -114,13 +73,11 @@ check_augment(a)
 
 ## Package dependencies
 
-In order to test your tidiers, you may need to add `your_package` to the **Suggested** section of broom's DESCRIPTION.
+In order to test your tidiers, you may need to add `your_package` to the **Suggests** section of broom's DESCRIPTION.
 
-Here's a outline that you can use for your test file
+We are currently in the process of developing a new set of tests for tidying methods. Recommendations on how to test your tidiers will appear here soon.
 
-```{r}
-# TODO. requireNamespace(package, quietly = TRUE)?
-```
+<!-- requireNamespace(package, quietly = TRUE)??? -->
 
 At the moment, pull requests must pass the AppVeyor build to be added to `broom`. It is okay if the Travis CI build times out.
 
@@ -130,10 +87,117 @@ Many modelling function allow users to specify a variety of options. For example
 
 # Before submitting your pull request
 
+- Check that your PR contains a big picture summary of what you've done and a brief example usage in the PR text
+- If you know how, squash your PR into a single commit. If you don't know how, don't worry about it.
+<!-- (TODO: add link on how to do this) -->
 - Make sure that you have run and passed:
     - `devtools::spell_check()`
     - `goodpractice::gp()`
-- Run `pkgdown::build_site()` so that your documentation gets added to the broom
-- R CMD check
+    - R CMD Check
+- Run `devtools::document()` but **do not** run `pkgdown::build_site()` unless requested to.
 
-An effective pull request should contain a big picture summary of what you've done and a brief example usage in the pull request text.
+`broom` doesn't currently pass all of these. If you are adding new tidiers at the moment, it's enough for these to throw no warnings for the files you've changed.
+
+If asked to build the site, developers outside the US or UK should run `Sys.setlocale("LC_ALL", "English")` before `pkgdown::build_site()`. This is so that messages are in English.
+
+# Defining tidiers
+
+The big picture:
+
+- `glance` should provide a summary of **model-level** information as a `tibble` with **exactly one row**. This includes goodness of fit measures such as deviance, AIC, BIC, etc. 
+- `augment` should provide a summary of **observation-level** information as a `tibble` with **one row per observation**. This summary should preserve the observations. Additional information might include leverage, cluster assignments or fitted values. 
+- `tidy` should provide a summary of **component-level** information as a `tibble` with **one row for each model component**. Examples of model components include: regression coefficients, cluster centers, etc.
+
+Oftentimes it doesn't make sense to define one or more of these methods for a particular model. In this case, just implement the methods that do make sense.
+
+## `glance`
+
+The `glance(x, ...)` method accepts a model object `x` and returns a tibble with exactly one row containing model level summary information.
+
+The summary should not include the name of the modelling function or any arguments given to the modelling function. For example, `glance(glm_object)` does not contain a `family` column.
+
+In some cases, you may wish to provide model level diagnostics not returned by the original object. If these are easy to compute, feel free to add them. However, `broom` is not an appropriate place to implement complex or time consuming statistical calculations.
+
+`glance` should always return the same columns in the same order for an object `x` of class `my_object`. If a summary metric such as `AIC` is not defined in certain circumstances, use `NA`.
+
+## `augment`
+
+The `augment(x, data = NULL, ...)` method accepts a model object and optionally a data frame `data` and adds columns of observation level information to `data`. `augment` returns a `tibble` with the same number of rows as `data`.
+
+The `data` argument can be any of the following:
+
+- a `data.frame` containing both the original predictors and the original responses
+- a `tibble` containing both the the original predictors and the original responses
+- `NULL` (default), in which case `augment` should try to reconstruct the original data as much as possible from the model object. This may not always be possible, and often it will not be possible to recover columns not used by the model.
+
+Any other inputs should result in an error. It is important that you test both `data.frame` and `tibble` arguments to `data`. We recommend coercing `data.frame`s to `tibble`s and then working directly with `tibble`s in your implementation.
+
+Many `augment` methods will also provide an optional `newdata` argument that should also default to `NULL`. Users should only ever specify one of `data` or `newdata`. Providing both `data` and `newdata` should result in an error. `newdata` should accept both `data.frame`s and `tibble`s and should be tested with both.
+
+Data given to the `data` argument must have both the original predictors and the original response. Data given to the `newdata` argument only needs to have the original predictors. This is important because there may be important information associated with training data that is not associated with test data, for example, leverages (`.hat` below) in the case in linear regression:
+
+```{r}
+model <- lm(speed ~ dist, data = cars)
+as_tibble(augment(model, data = cars))
+as_tibble(augment(model, newdata = cars))
+```
+
+This means that many `augment(model, data = original_data)` should provide `.fitted` and `.resid` columns in most cases, whereas `augment(model, data = test_data)` only needs to a `.fitted` column, even if the response is present in `test_data`. While it would be nice to provide a `.resid` column in this case, determining the response variable from a formula specification is often a brittle process.
+
+If the `data` or `newdata` is specified as a `data.frame` with rownames, `augment` should return them in a column called `.rownames`.
+
+For observations where no fitted values or summaries are available (where there's missing data, for example) return `NA`.
+
+Added column names should begin with `.` to avoid overwriting columns in the original data.
+
+**Other commons arguments**
+
+- `type.residuals`
+- `type.predict`
+- `weights`
+
+## `tidy`
+
+The `tidy(x, ...)` method accepts a model object `x` and returns a tibble with one row per model component. A model component might be a single term in a regression, a single test, or one cluster/class. Exactly what a component is varies across models but is usually self-evident.
+
+Sometimes a model will have different types of components. For example, in mixed models, there is different information associated with fixed effects and random effects, since this information doesn't have the same interpretation, it doesn't make sense to summarize the fixed and random effects in the same table. In cases like this you should add an argument that allows the user to specify which type of information they want. For example, you might implement an interface along the lines of:
+
+```{r eval = FALSE}
+model <- mixed_model(...)
+tidy(model, effects = "fixed")
+tidy(model, effects = "random")
+```
+
+**Common arguments to tidy methods**:
+
+- `conf.int`: logical indicating whether or not to calculate confidence/credible intervals
+- `conf.level`: the confidence level to use for the interval when `conf.int = TRUE`
+- `exponentiate`: logical indicating whether or not model terms should be presented on an exponential scale (typical for logistic regression)
+- `quick`: logical indicating whether to use a faster `tidy` method that returns less information about each component, typically only `term` and `estimate` columns
+
+# Glossary
+
+The following are common column names output from tidiers. You should use them when implementing new tidiers. **More details to come, this is incomplete at the moment.**
+
+- `term`: the term in a regression or model that is being estimated.
+- `p.value`: the p-value associated with a test statistic
+- `statistic`: a test statistic, usually the one used to compute the p-value. Combining these across many sub-groups is a reliable way to perform (e.g.) bootstrap hypothesis testing
+- `estimate`: estimate of an effect size, slope, or other value
+- `std.error`: standard error
+- `conf.low`: the low end of a confidence interval on the `estimate`
+- `conf.high`: the high end of a confidence interval on the `estimate`
+- `df`: degrees of freedom
+- `r.squared` the fraction of variance explained by the model
+- `adj.r.squared` R^2 adjusted based on the degrees of freedom
+- `sigma` the square root of the estimated variance of the residuals
+- `df`
+- `logLik`
+- `AIC`
+- `BIC`
+- `deviance`
+- `df.residual`
+- `.fitted`
+- `.resid`
+- `.cluster`
+
+
