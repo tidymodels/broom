@@ -7,8 +7,13 @@ test_that("glmnet tidiers work", {
   y <- rnorm(100)
   fit1 <- glmnet::glmnet(x, y)
 
-  td <- tidy(fit1)
-  check_tidy(td, exp.col = 5)
+  td1 <- tidy(fit1)
+  check_tidy(td1, exp.col = 5)
+  expect_true(all(td1$estimate != 0))
+
+  td2 <- tidy(fit1, return_zeros = TRUE)
+  check_tidy(td2, exp.col = 5)
+  expect_true(any(td2$estimate == 0))
 
   gl <- glance(fit1)
   check_tidy(gl, exp.col = 2)
