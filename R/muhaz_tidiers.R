@@ -26,10 +26,8 @@
 #'
 #' @export
 tidy.muhaz <- function(x, ...) {
-
   bind_cols(x[c("est.grid", "haz.est")]) %>%
-    rename("time"="est.grid", "estimate"="haz.est")
-
+    rename("time" = "est.grid", "estimate" = "haz.est")
 }
 
 #' @rdname muhaz_tidiers
@@ -45,10 +43,9 @@ tidy.muhaz <- function(x, ...) {
 #'
 #' @export
 glance.muhaz <- function(x, ...) {
-
   bind_cols(x$pin[c("nobs", "min.time", "max.time")]) %>%
     mutate(
       min.hazard = min(x$haz.est),
-      max.hazard = max(x$haz.est))
-
+      max.hazard = max(x$haz.est)
+    )
 }
