@@ -1,6 +1,6 @@
 #' Tidying methods for a durbinWatsonTest object
 #'
-#' Tidies Durbin-Watson Test objects, from the \code{\link[car]} package
+#' Tidies Durbin-Watson Test objects, from the \code{car} package
 #' into a one-row data frame.
 #'
 #' @param x An object of class \code{"durbinWatsonTest"}
