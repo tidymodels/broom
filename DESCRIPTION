@@ -23,7 +23,8 @@ Authors@R: c(
     person("Lukasz", "Komsta", email = "lukasz.komsta@umlub.pl", role = "ctb"),
     person("Frederick", "Novometsky", role = "ctb"),
     person("Wilson", "Freitas", role = "ctb"),
-    person("Jason Cory", "Brunson", email = "cornelioid@gmail.com", role = "ctb"))  
+    person("Jason Cory", "Brunson", email = "cornelioid@gmail.com", role = "ctb"),
+    person("Simon", "Jackson", email = "drsimonjackson@gmail.com", role = "ctb"))  
 Maintainer: David Robinson <admiral.david@gmail.com>
 Description: Convert statistical analysis objects from R into tidy data frames,
     so that they can more easily be combined, reshaped and otherwise processed
