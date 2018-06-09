@@ -6,12 +6,15 @@
 \alias{glance.glmnet}
 \title{Tidiers for LASSO or elasticnet regularized fits}
 \usage{
-\method{tidy}{glmnet}(x, ...)
+\method{tidy}{glmnet}(x, return_zeros = FALSE, ...)
 
 \method{glance}{glmnet}(x, ...)
 }
 \arguments{
 \item{x}{a "glmnet" object}
+
+\item{return_zeros}{should coefficients with value zero be included in
+the results (default \code{FALSE})?}
 
 \item{...}{extra arguments (not used)}
 }

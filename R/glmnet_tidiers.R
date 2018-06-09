@@ -51,6 +51,8 @@
 #' @name glmnet_tidiers
 #'
 #' @param x a "glmnet" object
+#' @param return_zeros should coefficients with value zero be included in
+#'   the results (default \code{FALSE})?
 #' @param ... extra arguments (not used)
 #'
 #' @return \code{tidy} produces a data.frame with one row per combination of
@@ -68,7 +70,7 @@
 #' @importFrom tidyr gather
 #'
 #' @export
-tidy.glmnet <- function(x, ...) {
+tidy.glmnet <- function(x, return_zeros = FALSE, ...) {
   beta <- glmnet::coef.glmnet(x)
 
   if (inherits(x, "multnet")) {
@@ -81,13 +83,14 @@ tidy.glmnet <- function(x, ...) {
     ret <- tidyr::gather(beta_d, step, estimate, -term)
   }
   # add values specific to each step
-  ret %>%
+  ret <- ret %>%
     mutate(
       step = as.numeric(step),
       lambda = x$lambda[step],
       dev.ratio = x$dev.ratio[step]
-    ) %>%
-    filter(estimate != 0)
+    )
+
+  if (return_zeros) ret else filter(ret, estimate != 0)
 }
 
 
