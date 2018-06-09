@@ -78,6 +78,10 @@ tidy.nlrq <- function(x, conf.int = FALSE, conf.level = 0.95, ...) {
 
 #' @rdname rq_tidiers
 #'
+#' @details Only models with a single \code{tau} value may be passed.
+#'   For multiple values, please use a \code{purrr::map} workflow instead,
+#'   e.g. \code{taus %>% map(function(tau_val) rq(y ~ x, tau = tau_val)) %>% map_dfr(glance)}.
+#'
 #' @return \code{glance.rq} returns one row for each quantile (tau)
 #' with the columns:
 #'  \item{tau}{quantile estimated}
@@ -99,7 +103,12 @@ glance.rq <- function(x, ...) {
 }
 
 #' @export
-glance.rqs <- glance.rq
+glance.rqs <- function(x, ...) {
+  stop("`glance` cannot handle objects of class 'rqs',",
+       " i.e. models with more than one tau value. Please",
+       " use a `purr::map`-based workflow with 'rq' models instead.",
+       call. = FALSE)
+}
 
 #' @rdname rq_tidiers
 #'
