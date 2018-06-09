@@ -25,6 +25,10 @@ NULL
 #' @rdname durbinWatsonTest_tidiers
 #' @export
 tidy.durbinWatsonTest <- function(x, ...) {
+<<<<<<< HEAD
+=======
+  #as.data.frame(data_frame(statistic = x$dw, p.value = x$p, method = "Durbin-Watson Test", alternative = x$alternative))
+>>>>>>> e825d142335e1bc9f587ee0ea6ecd5854d809990
   fix_data_frame(
     data_frame(
       statistic = x$dw,
