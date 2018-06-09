@@ -55,6 +55,7 @@ Suggests:
     boot,
     brms,
     btergm,
+    car,
     coda,
     covr,
     emmeans,
