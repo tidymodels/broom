@@ -21,7 +21,8 @@
 \item{data}{Original data}
 }
 \value{
-All tidying methods return a \code{data.frame} without rownames.
+All tidying methods return a \code{\link[tibble]{tibble}} without
+  rownames.
 
 \code{tidy.factanal} returns one row for each variable used in the 
   analysis and the following columns:
@@ -65,34 +66,4 @@ tidy(mod)
 augment(mod)
 augment(mod, mtcars)  # Must include original data if desired
 
-# Factor loading plot
-
-library(dplyr)
-library(tidyr)
-library(ggplot2)
-
-tidy(mod) \%>\% 
-    select(-uniqueness) \%>\% 
-    gather(factor, loading, -variable) \%>\% 
-    mutate(factor = gsub("fl", "", factor),
-           sign = ifelse(sign(loading) == 1, "b", "a"),
-           loading = abs(loading)) \%>\% 
-    group_by(factor) \%>\% 
-    arrange(factor, desc(loading)) \%>\% 
-    mutate(order = 1:n()) \%>\% 
-    ungroup() \%>\% 
-    ggplot(aes(x = factor, y = loading, group = order)) +
-    geom_bar(aes(fill = sign, alpha = loading),
-             stat = "identity", position = "dodge", color = "black",
-             show.legend = FALSE) +
-    geom_text(aes(label = variable, group = order),
-              position = position_dodge(width = 0.9),
-              size = 3.5, angle = 45, hjust = -.4) +
-    scale_fill_brewer(palette = "Set1") +
-    theme_bw() +
-    labs(
-        x = "Factor",
-        y = "Loading",
-        title = "Positive (blue) and negative (red) factor loadings of all variables"
-    )
 }

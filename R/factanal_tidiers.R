@@ -4,7 +4,8 @@
 #' \code{\link{factanal}}, into a summary, augment the original data with factor
 #' scores, and construct a one-row glance of the model's statistics.
 #' 
-#' @return All tidying methods return a \code{data.frame} without rownames.
+#' @return All tidying methods return a \code{\link[tibble]{tibble}} without
+#'   rownames.
 #' 
 #' @name factanal_tidiers
 #' 
@@ -21,36 +22,6 @@
 #' augment(mod)
 #' augment(mod, mtcars)  # Must include original data if desired
 #' 
-#' # Factor loading plot
-#' 
-#' library(dplyr)
-#' library(tidyr)
-#' library(ggplot2)
-#' 
-#' tidy(mod) %>% 
-#'     select(-uniqueness) %>% 
-#'     gather(factor, loading, -variable) %>% 
-#'     mutate(factor = gsub("fl", "", factor),
-#'            sign = ifelse(sign(loading) == 1, "b", "a"),
-#'            loading = abs(loading)) %>% 
-#'     group_by(factor) %>% 
-#'     arrange(factor, desc(loading)) %>% 
-#'     mutate(order = 1:n()) %>% 
-#'     ungroup() %>% 
-#'     ggplot(aes(x = factor, y = loading, group = order)) +
-#'     geom_bar(aes(fill = sign, alpha = loading),
-#'              stat = "identity", position = "dodge", color = "black",
-#'              show.legend = FALSE) +
-#'     geom_text(aes(label = variable, group = order),
-#'               position = position_dodge(width = 0.9),
-#'               size = 3.5, angle = 45, hjust = -.4) +
-#'     scale_fill_brewer(palette = "Set1") +
-#'     theme_bw() +
-#'     labs(
-#'         x = "Factor",
-#'         y = "Loading",
-#'         title = "Positive (blue) and negative (red) factor loadings of all variables"
-#'     )
 NULL
 
 #' @rdname factanal_tidiers
@@ -71,7 +42,9 @@ tidy.factanal <- function(x, ...) {
     # Place relevant values into a tidy data frame
     tidy_df <- data.frame(variable = rownames(loadings),
                           uniqueness = x$uniquenesses,
-                          data.frame(loadings))
+                          data.frame(loadings)) %>% 
+      as_tibble()
+    
     tidy_df$variable <- as.character(tidy_df$variable)
     
     # Remove row names and clean column names
@@ -102,8 +75,7 @@ augment.factanal <- function(x, data, ...) {
     }
     
     # Place relevant values into a tidy data frame
-    tidy_df <- data.frame(.rowname = rownames(scores),
-                          data.frame(scores))
+    tidy_df <- data.frame(.rowname = rownames(scores), data.frame(scores)) %>% as_tibble()
     tidy_df$.rowname <- as.character(tidy_df$.rowname)
     
     # Remove row names and clean column names
@@ -117,9 +89,10 @@ augment.factanal <- function(x, data, ...) {
     
     # Bind to data
     data$.rowname <- rownames(data)
-    tidy_df <- dplyr::left_join(data, tidy_df, by = ".rowname")
-        
-    select(tidy_df, contains(".rowname"), everything(), contains(".fs"))
+    tidy_df <- tidy_df %>% right_join(data, by = ".rowname")
+    
+    tidy_df %>% select(.rowname, everything(),
+                       -matches("\\.fs[0-9]*"), matches("\\.fs[0-9]*"))
 }
 
 #' @rdname factanal_tidiers
@@ -145,7 +118,7 @@ glance.factanal <- function(x, ...) {
     total.variance <- sum(apply(loadings, 2, function(i) sum(i^2) / length(i)))
     
     # Results as single-row data frame
-    data.frame(
+    data_frame(
         n.factors = x$factors,
         total.variance = total.variance,
         statistic = unname(x$STATISTIC),
