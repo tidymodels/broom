@@ -4,7 +4,7 @@ This outlines how to propose a change to broom. For more detailed
 info about contributing to this, and other tidyverse packages, please see the
 [**development contributing guide**](https://rstd.io/tidy-contrib).
 
-If you are adding new tidiers to broom, be sure to read the vignette on adding tidying methods.
+If you are adding new tidiers to broom, be sure to read the [vignette](https://broom.tidyverse.org/articles/adding-tidiers.html) on adding tidying methods.
 
 ### Fixing typos
 
@@ -36,16 +36,11 @@ your PR.
 for documentation.  
 *  We use [testthat](https://cran.r-project.org/package=testthat). Contributions
 with test cases included are easier to accept.
+    * See additional tips for testing in the [vignette](https://broom.tidyverse.org/articles/adding-tidiers.html#testing-new-tidiers) on adding tidying methods
 *  For user-facing changes, add a bullet to the top of `NEWS.md` below the current
 development version header describing the changes made followed by your GitHub
 username, and links to relevant issue(s)/PR(s).
 
-#### Testing
-
-* You can verify that your change passes existing tests with `devtools::test()`
-* Note that testing broom requires a lot of packages. You can install them all with `devtools::install_github("tidyverse/broom", dependencies = TRUE)`
-    * For R < 3.5.0, the number of packages used in the tests exceeds the number R can load. To change this on R 3.4.0 and above, set the environment variable R_MAX_NUM_DLLS to 150. To change this on R < 3.4.0, you would have to recompile R.
-    * For R ≥ 3.5.0, issue has been fixed.
 
 ### Code of Conduct
 
