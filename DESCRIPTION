@@ -57,6 +57,7 @@ Suggests:
     brms,
     btergm,
     car,
+    caret,
     coda,
     covr,
     emmeans,
