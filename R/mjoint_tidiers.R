@@ -115,7 +115,7 @@ tidy.mjoint <- function(x, component = "survival", bootSE = NULL, ci = FALSE, le
 
 #' @rdname mjoint_tidiers
 #'
-#' @param data Original data this was fitted on; this will be extracted from \code{x} if not given.
+#' @param data Original data this was fitted on, in a list (e.g. \code{list(data)}). This will be extracted from \code{x} if not given.
 #'
 #' @return \code{augment} returns one row for each original observation, with columns (each prepended by a .) added. Included are the columns:
 #'   \item{.fitted_j_0}{population-level fitted values for the j-th longitudinal process}
@@ -124,6 +124,8 @@ tidy.mjoint <- function(x, component = "survival", bootSE = NULL, ci = FALSE, le
 #'   \item{.resid_j_1}{individual-level residuals for the j-th longitudinal process}
 #' See \code{\link[joineRML]{fitted.mjoint}} and \code{\link[joineRML]{residuals.mjoint}} for more information on the difference between population-level and individual-level fitted values and residuals.
 #'
+#' @note If fitting a joint model with a single longitudinal process, please make sure you are using a named \code{list} to define the formula for the fixed and random effects of the longitudinal submodel.
+#'
 #' @export
 augment.mjoint <- function(x, data = x$data, ...) {
   # checks on 'data'
@@ -131,7 +133,7 @@ augment.mjoint <- function(x, data = x$data, ...) {
     stop("It was not possible to extract 'data' from 'x'. Please provide 'data' manually.")
   }
 
-  if (class(data) == "list") {
+  if (length(data) > 1) {
     if (!do.call(all.equal, data)) {
       stop("List of 'data' extracted from 'x' does not include equal data frames.")
     }
