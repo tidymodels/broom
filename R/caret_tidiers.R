@@ -10,14 +10,14 @@
 #' to FALSE, result will only show accuracy and kappa.
 #' @param ... extra arguments (not used)
 #'
-#' @return A data.frame with one or more of the following columns
+#' @return A data.frame with one or more of the following columns:
 #'   \item{term}{The name of a statistic from the confusion matrix}
 #'   \item{class}{Which class the term is a measurement of}
 #'   \item{estimate}{The value of the statistic}
-#'   \item{lower}{Lower bound of 95% CI (only applicable to accuracy)}
-#'   \item{upper}{Upper bound of 95% CI (only applicable to accuracy)}
+#'   \item{lower}{Lower bound of 95 percent CI only applicable to accuracy}
+#'   \item{upper}{Upper bound of 95 percent CI only applicable to accuracy}
 #'   \item{p.value}{P-value for accuracy and kappa statistics}
-#'
+#'   
 #' @examples
 #'
 #' # 2 class confusion matrix
@@ -51,19 +51,13 @@ tidy.confusionMatrix <- function(x, show_class = TRUE, ...) {
         mutate(var = str_to_lower(gsub(" ", "_", var)))
 
       terms <- c(nms_cm, by_class$var)
+      class <- c(rep(NA_character_, 2), rep(x$positive, length(terms) - 2))
       estimates <- c(cm$Accuracy, cm$Kappa, by_class$value)
       lower <- c(cm$AccuracyLower, rep(NA, length(terms) - 1))
       upper <- c(cm$AccuracyUpper, rep(NA, length(terms) - 1))
       p.value <- c(
         cm$AccuracyPValue, cm$McnemarPValue,
         rep(NA, length(terms) - 2)
-      )
-      df <- data_frame(
-        term = terms,
-        estimate = estimates,
-        lower = lower,
-        upper = upper,
-        p.value = p.value
       )
     }
     else {
@@ -87,15 +81,15 @@ tidy.confusionMatrix <- function(x, show_class = TRUE, ...) {
         cm$AccuracyPValue, cm$McnemarPValue,
         rep(NA, length(terms) - 2)
       )
-      df <- data_frame(
-        term = terms,
-        class = class,
-        estimate = estimates,
-        lower = lower,
-        upper = upper,
-        p.value = p.value
-      )
     }
+    df <- data_frame(
+      term = terms,
+      class = class,
+      estimate = estimates,
+      lower = lower,
+      upper = upper,
+      p.value = p.value
+    )
   } else {
     # only show alpha and kappa when show_class = FALSE
     terms <- c(nms_cm)

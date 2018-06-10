@@ -17,6 +17,15 @@ to FALSE, result will only show accuracy and kappa.}
 
 \item{...}{extra arguments (not used)}
 }
+\value{
+A data.frame with one or more of the following columns:
+  \item{term}{The name of a statistic from the confusion matrix}
+  \item{class}{Which class the term is a measurement of}
+  \item{estimate}{The value of the statistic}
+  \item{lower}{Lower bound of 95 percent CI only applicable to accuracy}
+  \item{upper}{Upper bound of 95 percent CI only applicable to accuracy}
+  \item{p.value}{P-value for accuracy and kappa statistics}
+}
 \description{
 Tidies the result of confusion matrix from the \code{caret} package.
 Only a \code{tidy} method is provided, not an \code{augment} or
