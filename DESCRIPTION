@@ -61,6 +61,7 @@ Suggests:
     caret,
     coda,
     covr,
+    e1071,
     emmeans,
     ergm,
     gam,
