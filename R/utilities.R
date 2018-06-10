@@ -267,6 +267,12 @@ confint_tidy <- function(x, conf.level = .95, func = stats::confint, ...) {
   if (is.null(dim(CI))) {
     CI <- matrix(CI, nrow = 1)
   }
+  # Handle case if regression is rank deficient
+  p <- x$rank
+  if (!is.null(p) && !is.null(x$qr)) {
+    piv <- x$qr$pivot[seq_len(p)]
+    CI <- CI[piv, , drop = FALSE]
+  }
   colnames(CI) <- c("conf.low", "conf.high")
   unrowname(as.data.frame(CI))
 }
