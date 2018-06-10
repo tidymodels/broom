@@ -33,6 +33,7 @@ Only a \code{tidy} method is provided, not an \code{augment} or
 }
 \examples{
 
+\dontrun{
 # 2 class confusion matrix
 cm2 <- caret::confusionMatrix(factor(rbinom(100,1,.5)),factor(rbinom(100,1,.5)))
 tidy(cm2)
@@ -42,5 +43,6 @@ tidy(cm2, by_class = FALSE) # only shows accuracy and kappa
 cm <- caret::confusionMatrix(factor(rbinom(100,2,.5)),factor(rbinom(100,2,.5)))
 tidy(cm)
 tidy(cm, by_class = FALSE) # only shows accuracy and kappa
+}
 
 }

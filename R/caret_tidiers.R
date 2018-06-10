@@ -19,7 +19,8 @@
 #'   \item{p.value}{P-value for accuracy and kappa statistics}
 #'
 #' @examples
-#'
+#' 
+#' \dontrun{
 #' # 2 class confusion matrix
 #' cm2 <- caret::confusionMatrix(factor(rbinom(100,1,.5)),factor(rbinom(100,1,.5)))
 #' tidy(cm2)
@@ -29,6 +30,7 @@
 #' cm <- caret::confusionMatrix(factor(rbinom(100,2,.5)),factor(rbinom(100,2,.5)))
 #' tidy(cm)
 #' tidy(cm, by_class = FALSE) # only shows accuracy and kappa
+#' }
 #'
 #' @name caret_tidiers
 NULL
@@ -37,7 +39,7 @@ NULL
 #' @export
 tidy.confusionMatrix <- function(x, by_class = TRUE, ...) {
   cm <- as.list(x$overall)
-  nms_cm <- str_to_lower(names(cm)[1:2])
+  nms_cm <- stringr::str_to_lower(names(cm)[1:2])
 
 
   if (by_class) {
@@ -48,7 +50,7 @@ tidy.confusionMatrix <- function(x, by_class = TRUE, ...) {
         as.data.frame() %>%
         rename_at(1, ~ "value") %>%
         rownames_to_column("var") %>%
-        mutate(var = str_to_lower(gsub(" ", "_", var)))
+        mutate(var = stringr::str_to_lower(gsub(" ", "_", var)))
 
       terms <- c(nms_cm, classes$var)
       class <- c(rep(NA_character_, 2), rep(x$positive, length(terms) - 2))
@@ -68,7 +70,7 @@ tidy.confusionMatrix <- function(x, by_class = TRUE, ...) {
         rownames_to_column("class") %>%
         gather(var, value, -class) %>%
         mutate(
-          var = str_to_lower(gsub(" ", "_", var)),
+          var = stringr::str_to_lower(gsub(" ", "_", var)),
           class = gsub("Class: ", "", class)
         )
 
