@@ -6,24 +6,24 @@
 \alias{tidy.confusionMatrix}
 \title{Tidying methods for confusionMatrix objects}
 \usage{
-\method{tidy}{confusionMatrix}(x, show_class = TRUE, ...)
+\method{tidy}{confusionMatrix}(x, by_class = TRUE, ...)
 }
 \arguments{
 \item{x}{An object of class \code{confusionMatrix}}
 
-\item{show_class}{A boolean of whether to show the values for class specific
+\item{by_class}{A logical of whether to show the values for class specific
 quantities from the confusion matrix (specificty, sensitivity, etc.). If set
 to FALSE, result will only show accuracy and kappa.}
 
 \item{...}{extra arguments (not used)}
 }
 \value{
-A data.frame with one or more of the following columns:
+A tibble with one or more of the following columns:
   \item{term}{The name of a statistic from the confusion matrix}
   \item{class}{Which class the term is a measurement of}
   \item{estimate}{The value of the statistic}
-  \item{lower}{Lower bound of 95 percent CI only applicable to accuracy}
-  \item{upper}{Upper bound of 95 percent CI only applicable to accuracy}
+  \item{conf.low}{Low end of 95 percent CI only applicable to accuracy}
+  \item{conf.high}{High end of 95 percent CI only applicable to accuracy}
   \item{p.value}{P-value for accuracy and kappa statistics}
 }
 \description{
@@ -36,11 +36,11 @@ Only a \code{tidy} method is provided, not an \code{augment} or
 # 2 class confusion matrix
 cm2 <- caret::confusionMatrix(factor(rbinom(100,1,.5)),factor(rbinom(100,1,.5)))
 tidy(cm2)
-tidy(cm2, show_class = FALSE) # only shows accuracy and kappa
+tidy(cm2, by_class = FALSE) # only shows accuracy and kappa
 
 # confusion matrix with more than 2 classes
 cm <- caret::confusionMatrix(factor(rbinom(100,2,.5)),factor(rbinom(100,2,.5)))
 tidy(cm)
-tidy(cm, show_class = FALSE) # only shows accuracy and kappa
+tidy(cm, by_class = FALSE) # only shows accuracy and kappa
 
 }
