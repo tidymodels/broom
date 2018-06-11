@@ -15,7 +15,7 @@
 \value{
 \code{data.frame} with columns
  \item{lag}{lag values}
- \item{acf}{calucated correlation}
+ \item{acf}{calculated correlation}
 }
 \description{
 Tidy an "acf" object, which is the output of \code{acf} and the
@@ -38,12 +38,12 @@ tidy(result)
 # lag plot
 library(ggplot2)
 result <- tidy(acf(lh, plot=FALSE))
-p <- ggplot(result, aes(x=lag, y=acf)) + 
+p <- ggplot(result, aes(x=lag, y=acf)) +
          geom_bar(stat='identity', width=0.1) +
          theme_bw()
 p
 
-# with confidence intervals 
+# with confidence intervals
 conf.level <- 0.95
 # from \\code{plot.acf} method
 len.data <- length(lh) # same as acf$n.used
@@ -52,4 +52,3 @@ p + geom_hline(yintercept = c(-conf.int, conf.int),
                color='blue', linetype='dashed')
 
 }
-

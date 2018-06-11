@@ -10,12 +10,12 @@
 #' The structure depends on the method chosen.
 #'
 #' @references Hunter DR, Handcock MS, Butts CT, Goodreau SM, Morris M (2008b).
-#' \pkg{ergm}: A Package to Fit, Simulate and Diagnose Exponential-Family 
-#' Models for Networks. \emph{Journal of Statistical Software}, 24(3). 
+#' \pkg{ergm}: A Package to Fit, Simulate and Diagnose Exponential-Family
+#' Models for Networks. \emph{Journal of Statistical Software}, 24(3).
 #' \url{http://www.jstatsoft.org/v24/i03/}.
-#' 
-#' @seealso \code{\link[ergm]{ergm}}, 
-#' \code{\link[ergm]{control.ergm}}, 
+#'
+#' @seealso \code{\link[ergm]{ergm}},
+#' \code{\link[ergm]{control.ergm}},
 #' \code{\link[ergm]{summary.ergm}}
 #'
 #' @name ergm_tidiers
@@ -71,25 +71,28 @@ NULL
 #' @export
 tidy.ergm <- function(x, conf.int = FALSE, conf.level = .95,
                       exponentiate = FALSE, quick = FALSE, ...) {
-    if (quick) {
-        co <- x$coef
-        ret <- data.frame(term = names(co), estimate = unname(co))
-        return(process_ergm(ret, conf.int = FALSE, exponentiate = exponentiate))
-    }
-    co <- ergm::summary.ergm(x, ...)$coefs
-    
-    nn <- c("estimate", "std.error", "mcmc.error", "p.value")
-    if (inherits(co, "listof")) {
-        # multiple response variables
-        ret <- plyr::ldply(co, fix_data_frame, nn[1:ncol(co[[1]])],
-                           .id = "response")
-        ret$response <- stringr::str_replace(ret$response, "Response ", "")
-    } else {
-        ret <- fix_data_frame(co, nn[1:ncol(co)])
-    }
-    
-    process_ergm(ret, x, conf.int = conf.int, conf.level = conf.level,
-                 exponentiate = exponentiate)
+  if (quick) {
+    co <- x$coef
+    ret <- data.frame(term = names(co), estimate = unname(co))
+    return(process_ergm(ret, conf.int = FALSE, exponentiate = exponentiate))
+  }
+  co <- ergm::summary.ergm(x, ...)$coefs
+
+  nn <- c("estimate", "std.error", "mcmc.error", "p.value")
+  if (inherits(co, "listof")) {
+    # multiple response variables
+    ret <- plyr::ldply(co, fix_data_frame, nn[1:ncol(co[[1]])],
+      .id = "response"
+    )
+    ret$response <- stringr::str_replace(ret$response, "Response ", "")
+  } else {
+    ret <- fix_data_frame(co, nn[1:ncol(co)])
+  }
+
+  process_ergm(ret, x,
+    conf.int = conf.int, conf.level = conf.level,
+    exponentiate = exponentiate
+  )
 }
 
 #' @rdname ergm_tidiers
@@ -122,40 +125,41 @@ tidy.ergm <- function(x, conf.int = FALSE, conf.level = .95,
 #'
 #' @export
 glance.ergm <- function(x, deviance = FALSE, mcmc = FALSE, ...) {
-    # will show appropriate warnings about standard errors, pseudolikelihood etc.
-    s <- ergm::summary.ergm(x, ...)
-    # dyadic (in)dependence and number of MCMLE iterations
-    ret <- data.frame(independence = s$independence, iterations = x$iterations)
-    # log-likelihood
-    ret$logLik <- tryCatch(as.numeric(ergm::logLik.ergm(x)), error = function(e) NULL)
-    # null and residual deviance
-    if (deviance & !is.null(ret$logLik)) {
-        dyads <- ergm::get.miss.dyads(x$constrained, x$constrained.obs)
-        dyads <- statnet.common::NVL(dyads, network::network.initialize(1))
-        dyads <- network::network.edgecount(dyads)
-        dyads <- network::network.dyadcount(x$network, FALSE) - dyads
-        
-        ret$null.deviance <- ergm::logLikNull(x)
-        ret$null.deviance <- ifelse(is.na(ret$null.deviance), 0, -2 * ret$null.deviance)
-        ret$df.null <- dyads
-        
-        ret$residual.deviance <- -2 * ret$logLik
-        ret$df.residual <- dyads - length(x$coef)
-    }
-    
-    # AIC and BIC
-    ret$AIC <- tryCatch(stats::AIC(x), error = function(e) NULL)
-    ret$BIC <- tryCatch(stats::BIC(x), error = function(e) NULL)
-    
-    if (mcmc) {
-        ret <- cbind(ret, data.frame(
-            MCMC.interval = x$control$MCMC.interval,
-            MCMC.burnin = x$control$MCMC.burnin,
-            MCMC.samplesize = x$control$MCMC.samplesize))
-    }
-    
-    ret <- unrowname(ret)
-    ret
+  # will show appropriate warnings about standard errors, pseudolikelihood etc.
+  s <- ergm::summary.ergm(x, ...)
+  # dyadic (in)dependence and number of MCMLE iterations
+  ret <- data.frame(independence = s$independence, iterations = x$iterations)
+  # log-likelihood
+  ret$logLik <- tryCatch(as.numeric(ergm::logLik.ergm(x)), error = function(e) NULL)
+  # null and residual deviance
+  if (deviance & !is.null(ret$logLik)) {
+    dyads <- ergm::get.miss.dyads(x$constrained, x$constrained.obs)
+    dyads <- statnet.common::NVL(dyads, network::network.initialize(1))
+    dyads <- network::network.edgecount(dyads)
+    dyads <- network::network.dyadcount(x$network, FALSE) - dyads
+
+    ret$null.deviance <- ergm::logLikNull(x)
+    ret$null.deviance <- ifelse(is.na(ret$null.deviance), 0, -2 * ret$null.deviance)
+    ret$df.null <- dyads
+
+    ret$residual.deviance <- -2 * ret$logLik
+    ret$df.residual <- dyads - length(x$coef)
+  }
+
+  # AIC and BIC
+  ret$AIC <- tryCatch(stats::AIC(x), error = function(e) NULL)
+  ret$BIC <- tryCatch(stats::BIC(x), error = function(e) NULL)
+
+  if (mcmc) {
+    ret <- cbind(ret, data.frame(
+      MCMC.interval = x$control$MCMC.interval,
+      MCMC.burnin = x$control$MCMC.burnin,
+      MCMC.samplesize = x$control$MCMC.samplesize
+    ))
+  }
+
+  ret <- unrowname(ret)
+  ret
 }
 
 #' helper function to process a tidied ergm object
@@ -172,25 +176,29 @@ glance.ergm <- function(x, deviance = FALSE, mcmc = FALSE, ...) {
 #' and confidence intervals (typical for logistic regression)
 process_ergm <- function(ret, x, conf.int = FALSE, conf.level = .95,
                          exponentiate = FALSE) {
-    if (exponentiate) {
-        # save transformation function for use on confidence interval
-        if (is.null(x$glm) ||
-            (x$glm$family$link != "logit" && x$glm$family$link != "log")) {
-            warning(paste("Exponentiating coefficients, but model did not use",
-                          "a log or logit link function"))
-        }
-        trans <- exp
-    } else {
-        trans <- identity
+  if (exponentiate) {
+    # save transformation function for use on confidence interval
+    if (is.null(x$glm) ||
+      (x$glm$family$link != "logit" && x$glm$family$link != "log")) {
+      warning(paste(
+        "Exponentiating coefficients, but model did not use",
+        "a log or logit link function"
+      ))
     }
-    
-    if (conf.int) {
-        z <- stats::qnorm(1 - (1 - conf.level) / 2)
-        CI <- cbind(conf.low = ret$estimate - z * ret$std.error,
-                    conf.high = ret$estimate + z * ret$std.error)
-        ret <- cbind(ret, trans(unrowname(CI)))
-    }
-    ret$estimate <- trans(ret$estimate)
-    
-    ret
+    trans <- exp
+  } else {
+    trans <- identity
+  }
+
+  if (conf.int) {
+    z <- stats::qnorm(1 - (1 - conf.level) / 2)
+    CI <- cbind(
+      conf.low = ret$estimate - z * ret$std.error,
+      conf.high = ret$estimate + z * ret$std.error
+    )
+    ret <- cbind(ret, trans(unrowname(CI)))
+  }
+  ret$estimate <- trans(ret$estimate)
+
+  ret
 }

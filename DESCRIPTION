@@ -1,8 +1,8 @@
-Package: broom
 Type: Package
+Package: broom
 Title: Convert Statistical Analysis Objects into Tidy Data Frames
-Version: 0.4.2
-Date: 2016-02-13
+Version: 0.4.4.9000
+Date: 2018-06-04
 Authors@R: c(
     person("David", "Robinson", email = "admiral.david@gmail.com", role = c("aut", "cre")),
     person("Matthieu", "Gomez", email = "mattg@princeton.edu", role = "ctb"),
@@ -19,8 +19,14 @@ Authors@R: c(
     person("Jens", "Preussner", email = " jens.preussner@mpi-bn.mpg.de", role = "ctb"),
     person("Jay", "Hesselberth", email = "jay.hesselberth@gmail.com", role = "ctb"),
     person("Hadley", "Wickham", email = "hadley@rstudio.com", role = "ctb"),
-    person("Ben", "Whalley", email = "ben.whalley@plymouth.ac.uk", role = "ctb")
-    )
+    person("Matthew", "Lincoln", email = "matthew.d.lincoln@gmail.com", role = "ctb"),
+    person("Lukasz", "Komsta", email = "lukasz.komsta@umlub.pl", role = "ctb"),
+    person("Frederick", "Novometsky", role = "ctb"),
+    person("Wilson", "Freitas", role = "ctb"),
+    person("Jason Cory", "Brunson", email = "cornelioid@gmail.com", role = "ctb"),
+    person("Simon", "Jackson", email = "drsimonjackson@gmail.com", role = "ctb"),
+    person("Jorge", "Cimentada", email = "cimentadaj@gmail.com", role = "ctb"),
+    person("Ben", "Whalley", email = "ben.whalley@plymouth.ac.uk", role = "ctb"))
 Maintainer: David Robinson <admiral.david@gmail.com>
 Description: Convert statistical analysis objects from R into tidy data frames,
     so that they can more easily be combined, reshaped and otherwise processed
@@ -29,67 +35,81 @@ Description: Convert statistical analysis objects from R into tidy data frames,
     coefficients of a regression; augment, which adds columns to the original
     data such as predictions, residuals and cluster assignments; and glance, which
     provides a one-row summary of model-level statistics.
-Imports:
-    plyr,
-    dplyr,
-    tidyr,
-    psych,
-    stringr,
-    reshape2,
-    nlme,
-    methods
-Suggests:
-    knitr,
-    boot,
-    survival,
-    gam,
-    glmnet,
-    lfe,
-    Lahman,
-    MASS,
-    sp,
-    maps,
-    maptools,
-    multcomp,
-    testthat,
-    lme4,
-    zoo,
-    lmtest,
-    plm,
-    biglm,
-    ggplot2,
-    nnet,
-    geepack,
-    AUC,
-    ergm,
-    network,
-    statnet.common,
-    xergm,
-    btergm,
-    binGroup,
-    Hmisc,
-    bbmle,
-    gamlss,
-    rstan,
-    rstanarm,
-    brms,
-    coda,
-    gmm,
-    Matrix,
-    ks,
-    purrr,
-    orcutt,
-    mgcv,
-    lmodel2,
-    poLCA,
-    mclust,
-    covr,
-    lsmeans,
-    betareg,
-    robust,
-    akima
+License: MIT + file LICENSE
 URL: http://github.com/tidyverse/broom
 BugReports: http://github.com/tidyverse/broom/issues
+Imports:
+    dplyr,
+    methods,
+    nlme,
+    plyr,
+    reshape2,
+    stringr,
+    tibble,
+    tidyr
+Suggests:
+    AER,
+    akima,
+    AUC,
+    bbmle,
+    betareg,
+    biglm,
+    binGroup,
+    boot,
+    brms,
+    btergm,
+    car,
+    coda,
+    covr,
+    emmeans,
+    ergm,
+    gam,
+    gamlss,
+    geepack,
+    ggplot2,
+    glmnet,
+    gmm,
+    Hmisc,
+    irlba,
+    knitr,
+    ks,
+    Lahman,
+    lfe,
+    lme4,
+    lmodel2,
+    lmtest,
+    lsmeans,
+    maps,
+    maptools,
+    MASS,
+    Matrix,
+    mclust,
+    mgcv,
+    muhaz,
+    multcomp,
+    network,
+    nnet,
+    orcutt,
+    ordinal,
+    plm,
+    poLCA,
+    psych,
+    purrr,
+    rgeos,
+    rmarkdown,
+    robust,
+    rsample,
+    rstan,
+    rstanarm,
+    sp,
+    speedglm,
+    statnet.common,
+    survival,
+    survey,
+    testthat,
+    xergm,
+    zoo,
+    tseries,
+    Kendall
 VignetteBuilder: knitr
-License: MIT + file LICENSE
-RoxygenNote: 5.0.1
+RoxygenNote: 6.0.1

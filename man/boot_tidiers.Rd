@@ -48,7 +48,7 @@ if (require("boot")) {
           lot2 = c(69,35,26,21,18,16,13,12,12))
 
    g1 <- glm(lot2 ~ log(u), data = clotting, family = Gamma)
-   
+
    bootfun <- function(d, i) {
       coef(update(g1, data= d[i,]))
    }
@@ -58,4 +58,3 @@ if (require("boot")) {
 }
 
 }
-

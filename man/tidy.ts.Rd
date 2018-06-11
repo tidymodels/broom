@@ -2,23 +2,37 @@
 % Please edit documentation in R/stats_tidiers.R
 \name{tidy.ts}
 \alias{tidy.ts}
-\title{tidy a ts timeseries object}
+\title{Tidy a ts timeseries object}
 \usage{
 \method{tidy}{ts}(x, ...)
 }
 \arguments{
-\item{x}{a "ts" object}
+\item{x}{An object of class "ts".}
 
 \item{...}{extra arguments (not used)}
 }
 \value{
-a tidy data frame
+\code{tidy} returns a data frame with one row for each observation, with the
+following columns:
+  \item{index}{Index (i.e. date or time) for the "ts" object.}
+  \item{series}{Name of the series (multivariate "ts" objects only).}
+  \item{value}{Value of the observation.}
 }
 \description{
-Turn a ts object into a tidy data frame. Right now simply uses
-\code{as.data.frame.ts}.
+Turn a univariate or multivariate \code{\link{ts}} object into a tidy data
+frame.
+}
+\examples{
+
+set.seed(678)
+
+tidy(ts(1:10, frequency = 4, start = c(1959, 2)))
+
+z <- ts(matrix(rnorm(300), 100, 3), start = c(1961, 1), frequency = 12)
+colnames(z) <- c("Aa", "Bb", "Cc")
+tidy(z)
+
 }
 \seealso{
-\link{as.data.frame.ts}
+\link{ts}, \link{zoo_tidiers}
 }
-
