@@ -49,7 +49,7 @@ tidy.confusionMatrix <- function(x, by_class = TRUE, ...) {
         x$byClass %>%
         as.data.frame() %>%
         rename_at(1, ~ "value") %>%
-        rownames_to_column("var") %>%
+        tibble::rownames_to_column("var") %>%
         mutate(var = stringr::str_to_lower(gsub(" ", "_", var)))
 
       terms <- c(nms_cm, classes$var)
@@ -67,7 +67,7 @@ tidy.confusionMatrix <- function(x, by_class = TRUE, ...) {
       classes <-
         x$byClass %>%
         as.data.frame() %>%
-        rownames_to_column("class") %>%
+        tibble::rownames_to_column("class") %>%
         gather(var, value, -class) %>%
         mutate(
           var = stringr::str_to_lower(gsub(" ", "_", var)),
