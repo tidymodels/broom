@@ -115,7 +115,7 @@ tidy_emmeans <- function(x, ...) {
     all(stringr::str_detect(ret$contrast, " - "))) {
     ret <- tidyr::separate_(ret, "contrast",
       c("level1", "level2"),
-      sep = "-"
+      sep = " - "
     )
   }
 
