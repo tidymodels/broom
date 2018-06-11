@@ -60,6 +60,7 @@
 #'   \item{se}{standard error}
 #'
 #' @export
+
 tidy.data.frame <- function(x, ..., na.rm = TRUE, trim = 0.1) {
   .Deprecated(
     msg = "Data frame tidiers are deprecated and will be removed in an upcoming release of broom."
