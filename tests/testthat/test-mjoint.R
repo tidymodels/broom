@@ -1,8 +1,7 @@
-# test tidy, glance methods for mjoint object
+# test tidy, augment, glance methods for mjoint object (joineRML package)
+context("mjoint tidiers (joineRML package)")
 
-if (requireNamespace("joineRML")) {
-  context("mjoint models from joineRML package")
-
+if (require("joineRML", quietly = TRUE)) {
   # Data
   data(heart.valve, package = "joineRML")
   hvd <- heart.valve[!is.na(heart.valve$log.grad) & !is.na(heart.valve$log.lvmi) & heart.valve$num <= 50, ]
@@ -11,7 +10,7 @@ if (requireNamespace("joineRML")) {
   fit1 <- suppressMessages(joineRML::mjoint(
     formLongFixed = list("grad" = log.grad ~ time + sex + hs),
     formLongRandom = list("grad" = ~ 1 | num),
-    formSurv = Surv(fuyrs, status) ~ age,
+    formSurv = survival::Surv(fuyrs, status) ~ age,
     data = hvd,
     inits = list(
       "gamma" = c(0.1, 2.7),
