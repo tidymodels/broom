@@ -23,19 +23,19 @@ structure depends on the method chosen.
 of method (OLS/MA/SMA/RMA) and term (always Intercept/Slope). Its columns
 are:
 \describe{
-  \item{method}{Either OLS/MA/SMA/RMA}
-  \item{term}{Either "Intercept" or "Slope"}
-  \item{estimate}{Estimated coefficient}
-  \item{conf.low}{Lower bound of 95\% confidence interval}
-  \item{conf.high}{Upper bound of 95\% confidence interval}
+\item{method}{Either OLS/MA/SMA/RMA}
+\item{term}{Either "Intercept" or "Slope"}
+\item{estimate}{Estimated coefficient}
+\item{conf.low}{Lower bound of 95\% confidence interval}
+\item{conf.high}{Upper bound of 95\% confidence interval}
 }
 
 \code{glance} returns a one-row data frame with columns
 \describe{
-  \item{r.squared}{OLS R-squared}
-  \item{p.value}{OLS parametric p-value}
-  \item{theta}{Angle between OLS lines \code{lm(y ~ x)} and \code{lm(x ~ y)}}
-  \item{H}{H statistic for computing confidence interval of major axis slope}
+\item{r.squared}{OLS R-squared}
+\item{p.value}{OLS parametric p-value}
+\item{theta}{Angle between OLS lines \code{lm(y ~ x)} and \code{lm(x ~ y)}}
+\item{H}{H statistic for computing confidence interval of major axis slope}
 }
 }
 \description{

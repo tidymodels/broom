@@ -21,39 +21,39 @@
 \value{
 Both \code{tidy} and \code{glance} return the same output,
 a one-row data frame with one or more of the following columns:
-  \item{estimate}{Estimate of the effect size}
-  \item{statistic}{Test statistic used to compute the p-value}
-  \item{p.value}{P-value}
-  \item{parameter}{Parameter field in the htest, typically degrees of
-  freedom}
-  \item{conf.low}{Lower bound on a confidence interval}
-  \item{conf.high}{Upper bound on a confidence interval}
-  \item{estimate1}{Sometimes two estimates are computed, such as in a
-  two-sample t-test}
-  \item{estimate2}{Sometimes two estimates are computed, such as in a
-  two-sample t-test}
-  \item{method}{Method used to compute the statistic as a string}
-  \item{alternative}{Alternative hypothesis as a string}
+\item{estimate}{Estimate of the effect size}
+\item{statistic}{Test statistic used to compute the p-value}
+\item{p.value}{P-value}
+\item{parameter}{Parameter field in the htest, typically degrees of
+freedom}
+\item{conf.low}{Lower bound on a confidence interval}
+\item{conf.high}{Upper bound on a confidence interval}
+\item{estimate1}{Sometimes two estimates are computed, such as in a
+two-sample t-test}
+\item{estimate2}{Sometimes two estimates are computed, such as in a
+two-sample t-test}
+\item{method}{Method used to compute the statistic as a string}
+\item{alternative}{Alternative hypothesis as a string}
 
 Which columns are included depends on the hypothesis test used.
 
 For chi-squared tests, \code{augment.htest}  will returns, for each
 cell of the tested table, the additional columns:
-  \item{.observed}{Observed count}
-  \item{.prop}{Proportion of the total}
-  \item{.row.prop}{Row proportion (2 dimensions table only)}
-  \item{.col.prop}{Column proportion (2 dimensions table only)}
-  \item{.expected}{Expected count under the null hypothesis}
-  \item{.residuals}{Pearson residual}
-  \item{.stdres}{Standardized residual}
+\item{.observed}{Observed count}
+\item{.prop}{Proportion of the total}
+\item{.row.prop}{Row proportion (2 dimensions table only)}
+\item{.col.prop}{Column proportion (2 dimensions table only)}
+\item{.expected}{Expected count under the null hypothesis}
+\item{.residuals}{Pearson residual}
+\item{.stdres}{Standardized residual}
 
-See \code{\link[stats]{chisq.test}} for more details on
+See \code{\link[stats:chisq.test]{stats::chisq.test()}} for more details on
 how residuals are computed.
 }
 \description{
-Tidies hypothesis test objects, such as those from 
-\code{\link[stats]{cor.test}}, \code{\link[stats]{t.test}},
-\code{\link[stats]{wilcox.test}}, and \code{\link[stats]{chisq.test}},
+Tidies hypothesis test objects, such as those from
+\code{\link[stats:cor.test]{stats::cor.test()}}, \code{\link[stats:t.test]{stats::t.test()}},
+\code{\link[stats:wilcox.test]{stats::wilcox.test()}}, and \code{\link[stats:chisq.test]{stats::chisq.test()}},
 into a one-row data frame.
 }
 \details{

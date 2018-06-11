@@ -11,7 +11,7 @@
 }
 \arguments{
 \item{x}{Fitted model object from the \pkg{brms} package. See
-\code{\link[brms]{brmsfit-class}}.}
+\code{\link[brms:brmsfit-class]{brms::brmsfit-class()}}.}
 
 \item{parameters}{Names of parameters for which a summary should be
 returned, as given by a character vector or regular expressions.
@@ -64,7 +64,7 @@ If \code{intervals = TRUE}, columns for the \code{lower} and
 }
 \description{
 These methods tidy the estimates from
-\code{\link[brms:brmsfit-class]{brmsfit-objects}}
+\code{\link[brms:brmsfit]{brms::brmsfit()}}
 (fitted model objects from the \pkg{brms} package) into a summary.
 }
 \examples{
@@ -81,5 +81,5 @@ These methods tidy the estimates from
 
 }
 \seealso{
-\code{\link[brms]{brms}}, \code{\link[brms]{brmsfit-class}}
+\code{\link[brms:brms]{brms::brms()}}, \code{\link[brms:brmsfit]{brms::brmsfit()}}
 }

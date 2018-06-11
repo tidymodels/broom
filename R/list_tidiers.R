@@ -1,8 +1,8 @@
 #' Tidiers for return values from functions that aren't S3 objects
 #'
 #' This method handles the return values of functions that return lists
-#' rather than S3 objects, such as \code{optim}, \code{svd}, or
-#' \code{\link[akima]{interp}}, and therefore cannot be handled by
+#' rather than S3 objects, such as `optim`, `svd`, or
+#' [akima::interp()], and therefore cannot be handled by
 #' S3 dispatch.
 #'
 #' @param x list object

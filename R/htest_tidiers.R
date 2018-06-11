@@ -1,18 +1,18 @@
 #' Tidying methods for an htest object
 #'
 #' Tidies hypothesis test objects, such as those from 
-#' \code{\link[stats]{cor.test}}, \code{\link[stats]{t.test}},
-#' \code{\link[stats]{wilcox.test}}, and \code{\link[stats]{chisq.test}},
+#' [stats::cor.test()], [stats::t.test()],
+#' [stats::wilcox.test()], and [stats::chisq.test()],
 #' into a one-row data frame.
 #'
-#' @details \code{augment} method is defined only for chi-squared tests,
+#' @details `augment` method is defined only for chi-squared tests,
 #' since there is no sense, for other tests, in which a hypothesis test
 #' generates one value for each observation.
 #'
-#' @param x An object of class \code{"htest"}
+#' @param x An object of class `"htest"`
 #' @param ... extra arguments (not used)
 #'
-#' @return Both \code{tidy} and \code{glance} return the same output,
+#' @return Both `tidy` and `glance` return the same output,
 #' a one-row data frame with one or more of the following columns:
 #'   \item{estimate}{Estimate of the effect size}
 #'   \item{statistic}{Test statistic used to compute the p-value}
@@ -30,7 +30,7 @@
 #'
 #' Which columns are included depends on the hypothesis test used.
 #'
-#' For chi-squared tests, \code{augment.htest}  will returns, for each
+#' For chi-squared tests, `augment.htest`  will returns, for each
 #' cell of the tested table, the additional columns:
 #'   \item{.observed}{Observed count}
 #'   \item{.prop}{Proportion of the total}
@@ -40,7 +40,7 @@
 #'   \item{.residuals}{Pearson residual}
 #'   \item{.stdres}{Standardized residual}
 #'
-#' See \code{\link[stats]{chisq.test}} for more details on
+#' See [stats::chisq.test()] for more details on
 #' how residuals are computed.
 #'
 #' @examples

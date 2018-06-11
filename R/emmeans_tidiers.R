@@ -3,15 +3,15 @@
 #' Tidiers for estimated marginal means objects, which report the predicted
 #' means for factors or factor combinations in a linear model. This
 #' covers three classes:
-#' \code{emmGrid}, \code{lsmobj}, and \code{ref.grid}. (The first class is from the \code{emmeans}
+#' `emmGrid`, `lsmobj`, and `ref.grid`. (The first class is from the `emmeans`
 #' package, and is the successor to the latter two classes, which have slightly different
-#' purposes within the \code{lsmeans} package but have similar output).
+#' purposes within the `lsmeans` package but have similar output).
 #'
 #' @param x "emmGrid", lsmobj", or "ref.grid" object
 #' @param conf.level Level of confidence interval, used only for
-#' \code{emmGrid} and \code{lsmobj} objects
+#' `emmGrid` and `lsmobj` objects
 #' @param ... Extra arguments, passed on to
-#' \link[emmeans]{summary.emmGrid} or \link[lsmeans]{summary.ref.grid}
+#' [emmeans::summary.emmGrid()] or [lsmeans::summary.ref.grid()]
 #'
 #' @return A data frame with one observation for each estimated
 #' mean, and one column for each combination of factors, along with
@@ -32,8 +32,8 @@
 #'   \item{p.value}{P-value}
 #'
 #' @details There are a large number of arguments that can be
-#' passed on to \link[emmeans]{summary.emmGrid} or \link[lsmeans]{summary.ref.grid}.
-#' By broom convention, we use \code{conf.level} to pass the \code{level} argument.
+#' passed on to [emmeans::summary.emmGrid()] or [lsmeans::summary.ref.grid()].
+#' By broom convention, we use `conf.level` to pass the `level` argument.
 #'
 #' @examples
 #'

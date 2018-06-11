@@ -25,24 +25,24 @@ tidy <- function(x, ...) UseMethod("tidy")
 #'
 #' @export
 tidy.NULL <- function(x, ...) {
-  data.frame()
+  tibble()
 }
 
 
 #' Default tidying method
 #'
-#' By default, tidy uses \code{as.data.frame} to convert its output. This is
+#' By default, tidy uses `as.data.frame` to convert its output. This is
 #' dangerous, as it may fail with an uninformative error message.
 #' Generally tidy is intended to be used on structured model objects
 #' such as lm or htest for which a specific S3 object exists.
 #'
-#' If you know that you want to use \code{as.data.frame} on your untidy
+#' If you know that you want to use `as.data.frame` on your untidy
 #' object, just use it directly.
 #'
 #' @param x an object to be tidied
 #' @param ... extra arguments (not used)
 #'
-#' @return A data frame, from \code{as.data.frame} applied to the input x.
+#' @return A data frame, from `as.dat.frame` applied to the input x.
 #'
 #' @export
 tidy.default <- function(x, ...) {

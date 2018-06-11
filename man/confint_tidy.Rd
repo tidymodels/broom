@@ -7,7 +7,7 @@
 confint_tidy(x, conf.level = 0.95, func = stats::confint, ...)
 }
 \arguments{
-\item{x}{a model object for which \code{\link{confint}} can be calculated}
+\item{x}{a model object for which \code{\link[=confint]{confint()}} can be calculated}
 
 \item{conf.level}{confidence level}
 
@@ -20,7 +20,7 @@ A data frame with two columns: \code{conf.low} and \code{conf.high}.
 }
 \description{
 Return a confidence interval as a tidy data frame. This directly wraps the
-\code{\link{confint}} function, but ensures it follows broom conventions:
+\code{\link[=confint]{confint()}} function, but ensures it follows broom conventions:
 column names of \code{conf.low} and \code{conf.high}, and no row names
 }
 \seealso{

@@ -3,15 +3,15 @@
 #' Tidies a Cochrane Orcutt object, which estimates autocorrelation
 #' and beta coefficients in a linear fit.
 #'
-#' @param x An "orcutt" object returned by \code{cochrane.orcutt}
-#' @param ... Extra arguments passed on to \code{\link{tidy.lm}}
+#' @param x An "orcutt" object returned by `cochrane.orcutt`
+#' @param ... Extra arguments passed on to [tidy.lm()]
 #'
 #' @template boilerplate
 #'
-#' @return \code{tidy} returns the same information as
-#' \code{\link{tidy.lm}}, though without confidence interval options.
+#' @return `tidy` returns the same information as
+#' [tidy.lm()], though without confidence interval options.
 #'
-#' @return \code{glance}{}
+#' @return `glance`{}
 #'
 #' @name orcutt_tidiers
 #'
@@ -36,7 +36,7 @@ tidy.orcutt <- function(x, ...) {
 
 #' @rdname orcutt_tidiers
 #'
-#' @return \code{glance} returns a one-row data frame with the following columns:
+#' @return `glance` returns a one-row data frame with the following columns:
 #'   \item{r.squared}{R-squared}
 #'   \item{adj.r.squared}{Adjusted R-squared}
 #'   \item{rho}{Spearman's rho autocorrelation}

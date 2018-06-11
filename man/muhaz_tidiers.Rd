@@ -23,15 +23,15 @@ structure depends on the method chosen.
 \code{time} at which the hazard rate was estimated and \code{estimate}.
 
 \code{glance.muhaz} returns a one-row data.frame with the columns
-  \item{nobs}{Number of observations used for estimation}
-  \item{min.time}{The minimum observed event or censoring time}
-  \item{max.time}{The maximum observed event or censoring time}
-  \item{min.harzard}{Minimal estimated hazard}
-  \item{max.hazard}{Maximal estimated hazard}
+\item{nobs}{Number of observations used for estimation}
+\item{min.time}{The minimum observed event or censoring time}
+\item{max.time}{The maximum observed event or censoring time}
+\item{min.harzard}{Minimal estimated hazard}
+\item{max.hazard}{Maximal estimated hazard}
 }
 \description{
 These methods tidy the output of \code{muhaz} objects as returned by the
-\code{\link[muhaz]{muhaz}} function, which provides kernel based
+\code{\link[muhaz:muhaz]{muhaz::muhaz()}} function, which provides kernel based
 non-parametric hazard rate estimators.
 }
 \details{

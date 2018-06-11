@@ -1,17 +1,17 @@
 #' Tidiers for lists returned from optim
 #'
-#' Tidies objects returned by the \code{\link{optim}} function for
+#' Tidies objects returned by the [optim()] function for
 #' general-purpose minimization and maximization.
 #'
-#' @param x list returned from \code{optim}
+#' @param x list returned from `optim`
 #' @param ... extra arguments
 #'
 #' @template boilerplate
 #'
-#' @return \code{tidy} returns a data frame with one row per parameter that
+#' @return `tidy` returns a data frame with one row per parameter that
 #' was estimated, with columns
-#'   \item{parameter}{name of the parameter, or \code{parameter1},
-#'   \code{parameter2}... if the input vector is not named}
+#'   \item{parameter}{name of the parameter, or `parameter1`,
+#'   `parameter2`... if the input vector is not named}
 #'   \item{value}{parameter value that minimizes or maximizes the output}
 #'
 #' @examples
@@ -36,13 +36,13 @@ tidy_optim <- function(x, ...) {
 
 #' @rdname optim_tidiers
 #'
-#' @return \code{glance} returns a one-row data frame with the columns
+#' @return `glance` returns a one-row data frame with the columns
 #'   \item{value}{minimized or maximized output value}
-#'   \item{function.count}{number of calls to \code{fn}}
-#'   \item{gradient.count}{number of calls to \code{gr}}
+#'   \item{function.count}{number of calls to `fn`}
+#'   \item{gradient.count}{number of calls to `gr`}
 #'   \item{convergence}{convergence code representing the error state}
 #'
-#' @seealso \code{\link{optim}}
+#' @seealso [optim()]
 glance_optim <- function(x, ...) {
   unrowname(data.frame(
     value = x$value,

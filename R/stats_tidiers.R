@@ -8,8 +8,8 @@
 #'
 #' A table, typically created by the \link{table} function, contains a
 #' contingency table of frequencies across multiple vectors. This directly
-#' calls the \code{\link{as.data.frame.table}} method, which melts it into a
-#' data frame with one column for each variable and a \code{Freq} column.
+#' calls the [as.data.frame.table()] method, which melts it into a
+#' data frame with one column for each variable and a `Freq` column.
 #'
 #' @param x An object of class "table"
 #' @param ... Extra arguments (not used)
@@ -19,7 +19,7 @@
 #' tab <- with(airquality, table(cut(Temp, quantile(Temp)), Month))
 #' tidy(tab)
 #'
-#' @seealso \code{\link{as.data.frame.table}}
+#' @seealso [as.data.frame.table()]
 #'
 #' @export
 tidy.table <- function(x, ...) {
@@ -30,8 +30,8 @@ tidy.table <- function(x, ...) {
 #' tidy an ftable object
 #'
 #' An ftable contains a "flat" contingency table. This melts it into a
-#' data.frame with one column for each variable, then a \code{Freq}
-#' column. It directly uses the \code{stats:::as.data.frame.ftable} function
+#' data.frame with one column for each variable, then a `Freq`
+#' column. It directly uses the `stats:::as.data.frame.ftable` function
 #'
 #' @param x An object of class "ftable"
 #' @param ... Extra arguments (not used)
@@ -40,7 +40,7 @@ tidy.table <- function(x, ...) {
 #'
 #' tidy(ftable(Titanic, row.vars = 1:3))
 #'
-#' @seealso \code{\link{ftable}}
+#' @seealso [ftable()]
 #'
 #' @export
 tidy.ftable <- function(x, ...) {
@@ -65,7 +65,7 @@ tidy.ftable <- function(x, ...) {
 #' library(ggplot2)
 #' ggplot(tidy(d), aes(x, y)) + geom_line()
 #'
-#' @seealso \code{\link{density}}
+#' @seealso [density()]
 #'
 #' @export
 tidy.density <- function(x, ...) {
@@ -157,7 +157,7 @@ tidy.spec <- function(x, ...) {
 #'
 #' @param x object of class "TukeyHSD"
 #' @param separate.levels Whether to separate comparison into
-#' \code{level1} and \code{level2} columns
+#' `level1` and `level2` columns
 #' @param ... additional arguments (not used)
 #'
 #' @return A data.frame with one row per comparison, containing columns
@@ -168,8 +168,8 @@ tidy.spec <- function(x, ...) {
 #'     \item{conf.high}{High end of confidence interval of difference}
 #'     \item{adj.p.value}{P-value adjusted for multiple comparisons}
 #'
-#' If \code{separate.levels = TRUE}, the \code{comparison} column will be
-#' split up into \code{level1} and \code{level2}.
+#' If `separate.levels = TRUE`, the `comparison` column will be
+#' split up into `level1` and `level2`.
 #'
 #' @examples
 #'
@@ -182,7 +182,7 @@ tidy.spec <- function(x, ...) {
 #' fm2 <- aov(mpg ~ as.factor(gear) * as.factor(cyl), data = mtcars)
 #' tidy(TukeyHSD(fm2))
 #'
-#' @seealso \code{\link{TukeyHSD}}
+#' @seealso [TukeyHSD()]
 #'
 #' @export
 tidy.TukeyHSD <- function(x, separate.levels = FALSE, ...) {
@@ -205,7 +205,7 @@ tidy.TukeyHSD <- function(x, separate.levels = FALSE, ...) {
 #'
 #' @param x object of class "manova"
 #' @param test one of "Pillai" (Pillai's trace), "Wilks" (Wilk's lambda), "Hotelling-Lawley" (Hotelling-Lawley trace) or "Roy" (Roy's greatest root) indicating which test statistic should be used. Defaults to "Pillai"
-#' @param ... additional arguments passed on to \code{summary.manova}
+#' @param ... additional arguments passed on to `summary.manova`
 #'
 #' @return A data.frame with the columns
 #'     \item{term}{Term in design}
@@ -224,7 +224,7 @@ tidy.TukeyHSD <- function(x, separate.levels = FALSE, ...) {
 #' npk2 <- within(npk, foo <- rnorm(24))
 #' npk2.aov <- manova(cbind(yield, foo) ~ block + N*P*K, npk2)
 #'
-#' @seealso \code{\link{summary.manova}}
+#' @seealso [summary.manova()]
 #'
 #' @export
 tidy.manova <- function(x, test = "Pillai", ...) {
@@ -243,13 +243,13 @@ tidy.manova <- function(x, test = "Pillai", ...) {
 
 #' Tidy a ts timeseries object
 #' 
-#' Turn a univariate or multivariate \code{\link{ts}} object into a tidy data
+#' Turn a univariate or multivariate [ts()] object into a tidy data
 #' frame.
 #' 
 #' @param x An object of class "ts".
 #' @param ... extra arguments (not used)
 #' 
-#' @return \code{tidy} returns a data frame with one row for each observation, with the
+#' @return `tidy` returns a data frame with one row for each observation, with the
 #' following columns:
 #'   \item{index}{Index (i.e. date or time) for the "ts" object.}
 #'   \item{series}{Name of the series (multivariate "ts" objects only).}
@@ -337,8 +337,8 @@ tidy.pairwise.htest <- function(x, ...) {
 #' @param ... extra arguments, not used
 #'
 #' @return A data frame with one row per parameter passed in, with
-#' columns \code{n}, \code{delta}, \code{sd}, \code{sig.level}, and
-#' \code{power} (from the \code{power.htest} object).
+#' columns `n`, `delta`, `sd`, `sig.level`, and
+#' `power` (from the `power.htest` object).
 #'
 #' @seealso \link{power.t.test}
 #'
@@ -359,15 +359,15 @@ tidy.power.htest <- function(x, ...) {
 
 #' Tidying method for the acf function
 #'
-#' Tidy an "acf" object, which is the output of \code{acf} and the
-#' related \code{pcf} and \code{ccf} functions.
+#' Tidy an "acf" object, which is the output of `acf` and the
+#' related `pcf` and `ccf` functions.
 #'
 #' @name acf_tidiers
 #'
 #' @param x acf object
 #' @param ... (not used)
 #'
-#' @return \code{data.frame} with columns
+#' @return `data.frame` with columns
 #'  \item{lag}{lag values}
 #'  \item{acf}{calculated correlation}
 #'
@@ -395,7 +395,7 @@ tidy.power.htest <- function(x, ...) {
 #'
 #' # with confidence intervals
 #' conf.level <- 0.95
-#' # from \code{plot.acf} method
+#' # from `plot.acf` method
 #' len.data <- length(lh) # same as acf$n.used
 #' conf.int <- qnorm((1 + conf.level) / 2) / sqrt(len.data)
 #' p + geom_hline(yintercept = c(-conf.int, conf.int),

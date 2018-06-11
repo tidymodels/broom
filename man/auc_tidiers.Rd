@@ -14,10 +14,10 @@
 }
 \value{
 A data frame with three columns:
-  \item{cutoff}{The cutoff of the prediction scores used
-  for classification}
-  \item{tpr}{The resulting true positive rate at that cutoff}
-  \item{fpr}{The resulting false positive rate at that cutoff}
+\item{cutoff}{The cutoff of the prediction scores used
+for classification}
+\item{tpr}{The resulting true positive rate at that cutoff}
+\item{fpr}{The resulting false positive rate at that cutoff}
 
 If the labels had names, those are added as an "instance" column.
 }

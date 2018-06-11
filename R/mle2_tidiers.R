@@ -3,7 +3,7 @@
 #' Tidy mle2 objects from the bbmle package.
 #'
 #' @param x An "mle2" object
-#' @param conf.int Whether to add \code{conf.low} and \code{conf.high} columns
+#' @param conf.int Whether to add `conf.low` and `conf.high` columns
 #' @param conf.level Confidence level to use for interval
 #' @param ... Extra arguments, not used
 #'

@@ -18,13 +18,13 @@
 \value{
 Both \code{tidy} and \code{glance} return the same object:
 a one-row data frame with columns
-  \item{minimum}{smallest value in original vector}
-  \item{q1}{value at the first quartile}
-  \item{median}{median of original vector}
-  \item{mean}{mean of original vector}
-  \item{q3}{value at the third quartile}
-  \item{maximum}{largest value in original vector}
-  \item{NAs}{number of NA values (if any)}
+\item{minimum}{smallest value in original vector}
+\item{q1}{value at the first quartile}
+\item{median}{median of original vector}
+\item{mean}{mean of original vector}
+\item{q3}{value at the third quartile}
+\item{maximum}{largest value in original vector}
+\item{NAs}{number of NA values (if any)}
 }
 \description{
 Tidy a summary of a vector.
@@ -43,5 +43,5 @@ tidy(summary(v2))
 
 }
 \seealso{
-\code{\link{summary}}
+\code{\link[=summary]{summary()}}
 }

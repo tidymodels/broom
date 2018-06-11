@@ -33,23 +33,23 @@ All tidying methods return a \code{data.frame} without rownames.
 The structure depends on the method chosen.
 
 \code{tidy.gmm} returns one row for each coefficient, with six columns:
-  \item{term}{The term in the model being estimated}
-  \item{estimate}{The estimated coefficient}
-  \item{std.error}{The standard error from the linear model}
-  \item{statistic}{t-statistic}
-  \item{p.value}{two-sided p-value}
+\item{term}{The term in the model being estimated}
+\item{estimate}{The estimated coefficient}
+\item{std.error}{The standard error from the linear model}
+\item{statistic}{t-statistic}
+\item{p.value}{two-sided p-value}
 
 If all the the terms have _ in them (e.g. \code{WMK_(Intercept)}),
 they are split into \code{variable} and \code{term}.
 
 If \code{conf.int=TRUE}, it also includes columns for \code{conf.low} and
-\code{conf.high}, computed with \code{\link{confint}}.
+\code{conf.high}, computed with \code{\link[=confint]{confint()}}.
 
 \code{glance.gmm} returns a one-row data.frame with the columns
-  \item{df}{Degrees of freedom}
-  \item{statistic}{Statistic from J-test for E(g)=0}
-  \item{p.value}{P-value from J-test}
-  \item{df.residual}{Residual degrees of freedom, if included in "gmm" object}
+\item{df}{Degrees of freedom}
+\item{statistic}{Statistic from J-test for E(g)=0}
+\item{p.value}{P-value from J-test}
+\item{df.residual}{Residual degrees of freedom, if included in "gmm" object}
 }
 \description{
 These methods tidy the coefficients of "gmm" objects from the gmm package,
@@ -57,7 +57,7 @@ or glance at the model-wide statistics (especially the J-test).
 }
 \details{
 If \code{conf.int=TRUE}, the confidence interval is computed with
-the \code{\link{confint}} function.
+the \code{\link[=confint]{confint()}} function.
 
 Note that though the "gmm" object contains residuals and fitted values,
 there is not yet an \code{augment} method implemented. This is because

@@ -37,7 +37,7 @@ NULL
 
 #' @rdname ridgelm_tidiers
 #'
-#' @return \code{tidy.ridgelm} returns one row for each combination of
+#' @return `tidy.ridgelm` returns one row for each combination of
 #' choice of lambda and term in the formula, with columns:
 #'   \item{lambda}{choice of lambda}
 #'   \item{GCV}{generalized cross validation value for this lambda}
@@ -72,12 +72,12 @@ tidy.ridgelm <- function(x, ...) {
 
 #' @rdname ridgelm_tidiers
 #'
-#' @return \code{glance.ridgelm} returns a one-row data.frame with the columns
+#' @return `glance.ridgelm` returns a one-row data.frame with the columns
 #'   \item{kHKB}{modified HKB estimate of the ridge constant}
 #'   \item{kLW}{modified L-W estimate of the ridge constant}
 #'   \item{lambdaGCV}{choice of lambda that minimizes GCV}
 #'
-#' This is similar to the output of \code{select.ridgelm}, but it is returned
+#' This is similar to the output of `select.ridgelm`, but it is returned
 #' rather than printed.
 #'
 #' @export

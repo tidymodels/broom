@@ -1,6 +1,6 @@
 #' Tidy a kappa object from a Cohen's kappa calculation
 #'
-#' Tidy a "kappa" object, from the \code{\link[psych]{cohen.kappa}} function
+#' Tidy a "kappa" object, from the [psych::cohen.kappa()] function
 #' in the psych package. This represents the agreement of two raters
 #' when using nominal scores.
 #'
@@ -14,9 +14,9 @@
 #'   \item{conf.high}{Upper bound of confidence interval}
 #'
 #' @details Note that the alpha of the confidence interval is determined
-#' when the \code{cohen.kappa} function is originally run.
+#' when the `cohen.kappa` function is originally run.
 #'
-#' @seealso \code{\link[psych]{cohen.kappa}}
+#' @seealso [psych::cohen.kappa()]
 #'
 #' @name kappa_tidiers
 #'

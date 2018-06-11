@@ -26,5 +26,5 @@ columns: points x where the density is estimated, points y
 for the estimate
 }
 \seealso{
-\code{\link{density}}
+\code{\link[=density]{density()}}
 }

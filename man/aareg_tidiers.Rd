@@ -22,19 +22,19 @@ structure depends on the method chosen.
 
 \code{tidy.aareg} returns one row for each coefficient, with
 the columns
-  \item{term}{name of coefficient}
-  \item{estimate}{estimate of the slope}
-  \item{statistic}{test statistic for coefficient}
-  \item{std.error}{standard error of statistic}
-  \item{robust.se}{robust version of standard error estimate (only when
-  \code{x} was called with \code{dfbeta = TRUE})}
-  \item{z}{z score}
-  \item{p.value}{p-value}
+\item{term}{name of coefficient}
+\item{estimate}{estimate of the slope}
+\item{statistic}{test statistic for coefficient}
+\item{std.error}{standard error of statistic}
+\item{robust.se}{robust version of standard error estimate (only when
+\code{x} was called with \code{dfbeta = TRUE})}
+\item{z}{z score}
+\item{p.value}{p-value}
 
 \code{glance} returns a one-row data frame containing
-  \item{statistic}{chi-squared statistic}
-  \item{p.value}{p-value based on chi-squared statistic}
-  \item{df}{degrees of freedom used by coefficients}
+\item{statistic}{chi-squared statistic}
+\item{p.value}{p-value based on chi-squared statistic}
+\item{df}{degrees of freedom used by coefficients}
 }
 \description{
 These tidy the coefficients of Aalen additive regression objects.

@@ -12,8 +12,8 @@
 }
 \arguments{
 \item{x}{An object of class \code{"stl"} or \code{"decomposed.ts"},
-resulting from a call to \code{\link[stats]{decompose}} or
-\code{\link[stats]{stl}}.}
+resulting from a call to \code{\link[stats:decompose]{stats::decompose()}} or
+\code{\link[stats:stl]{stats::stl()}}.}
 
 \item{...}{Extra arguments. Unused.}
 
@@ -24,19 +24,19 @@ The \code{augment} method returns a tidy data frame with the following
 columns:
 
 \describe{
-  \item{\code{.seasonal}}{The seasonal component of the decomposition.}
-  \item{\code{.trend}}{The trend component of the decomposition.}
-  \item{\code{.remainder}}{The remainder, or "random" component of the
-  decomposition.}
-  \item{\code{.weight}}{The final robust weights (\code{stl} only).}
-  \item{\code{.seasadj}}{The seasonally adjusted (or "deseasonalised")
-  series.}
+\item{\code{.seasonal}}{The seasonal component of the decomposition.}
+\item{\code{.trend}}{The trend component of the decomposition.}
+\item{\code{.remainder}}{The remainder, or "random" component of the
+decomposition.}
+\item{\code{.weight}}{The final robust weights (\code{stl} only).}
+\item{\code{.seasadj}}{The seasonally adjusted (or "deseasonalised")
+series.}
 }
 }
 \description{
 These tidiers provide an \code{augment} method for the results of a seasonal
-decomposition with \code{\link[stats]{decompose}} or
-\code{\link[stats]{stl}}.
+decomposition with \code{\link[stats:decompose]{stats::decompose()}} or
+\code{\link[stats:stl]{stats::stl()}}.
 }
 \details{
 The \code{augment} method returns the computed seasonal and trend components,
@@ -92,7 +92,7 @@ ggplot(decomps) +
 
 }
 \seealso{
-\code{\link[stats]{decompose}}, \code{\link[stats]{stl}}
+\code{\link[stats:decompose]{stats::decompose()}}, \code{\link[stats:stl]{stats::stl()}}
 }
 \author{
 Aaron Jacobs

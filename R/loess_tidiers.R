@@ -13,14 +13,14 @@
 #'
 #' @template augment_NAs
 #'
-#' @return When \code{newdata} is not supplied \code{augment.loess}
+#' @return When `newdata` is not supplied `augment.loess`
 #' returns one row for each observation with three columns added
 #' to the original data:
 #'    \item{.fitted}{Fitted values of model}
 #'    \item{.se.fit}{Standard errors of the fitted values}
 #'    \item{.resid}{Residuals of the fitted values}
 #'
-#' When \code{newdata} is supplied \code{augment.loess} returns
+#' When `newdata` is supplied `augment.loess` returns
 #'    one row for each observation with one additional column:
 #'    \item{.fitted}{Fitted values of model}
 #'    \item{.se.fit}{Standard errors of the fitted values}
