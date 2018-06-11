@@ -93,7 +93,7 @@ tidy.felm <- function(x, conf.int=FALSE, conf.level=.95, fe = FALSE, fe.error = 
           conf.high = estimate + stats::qnorm(1 - (1 - conf.level) / 2) * std.error
         )
     }
-    ret <- rbind(ret, ret_fe)
+    ret <- as_tibble(rbind(ret, ret_fe))
   }
   ret
 }
@@ -122,7 +122,7 @@ augment.felm <- function(x, data = NULL, ...) {
     }
   }
   data <- fix_data_frame(data, newcol = ".rownames")
-  y <- eval(x$call$formula[[2]], envir = data)
+  y <- model.response(model.frame(x))
   data$.fitted <- c(x$fitted.values)
   data$.resid <- c(x$residuals)
   object <- lfe::getfe(x)
