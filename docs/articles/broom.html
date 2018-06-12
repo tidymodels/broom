@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title> • broom</title>
+<title>Introduction to broom • broom</title>
 <!-- jquery --><script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script><!-- Bootstrap --><link href="../tidyverse.css" rel="stylesheet">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script><!-- Font Awesome icons --><link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 <!-- tidyverse --><link href="../pkgdown.css" rel="stylesheet">
@@ -46,6 +46,12 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
+      <a href="../articles/adding-tidiers.html">Adding new tidiers</a>
+    </li>
+    <li>
+      <a href="../articles/available-methods.html">Available methods</a>
+    </li>
+    <li>
       <a href="../articles/bootstrapping.html">Bootstrapping</a>
     </li>
     <li>
@@ -77,8 +83,9 @@
       </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
-      <h1></h1>
+      <h1>Introduction to broom</h1>
             
+            <h4 class="date">2018-06-08</h4>
       
       <small class="dont-index">Source: <a href="http://github.com/tidyverse/broom/blob/master/vignettes/broom.Rmd"><code>vignettes/broom.Rmd</code></a></small>
       <div class="hidden name"><code>broom.Rmd</code></div>
@@ -87,10 +94,6 @@
 
     
     
-<!--
-%\VignetteEngine{knitr::knitr}
-%\VignetteIndexEntry{Introduction to broom}
--->
 <pre><code>## Warning: package 'knitr' was built under R version 3.4.3</code></pre>
 <div id="broom-lets-tidy-up-a-bit" class="section level1">
 <h1 class="hasAnchor">
@@ -264,7 +267,30 @@ lmfit</code></pre></div>
 ## 1     230.5 4.347026e-05 Wilcoxon rank sum test with continuity correction
 ##   alternative
 ## 1   two.sided</code></pre>
-<p>There is no <code>augment</code> function for <code>htest</code> objects, since there is no meaningful sense in which a hypothesis test produces output about each initial data point.</p>
+<p><code>augment</code> method is defined only for chi-squared tests, since there is no meaningful sense, for other tests, in which a hypothesis test produces output about each initial data point.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">chit &lt;-<span class="st"> </span><span class="kw">chisq.test</span>(<span class="kw">xtabs</span>(Freq <span class="op">~</span><span class="st"> </span>Sex <span class="op">+</span><span class="st"> </span>Class, <span class="dt">data =</span> <span class="kw">as.data.frame</span>(Titanic)))
+<span class="kw"><a href="../reference/tidy.html">tidy</a></span>(chit)</code></pre></div>
+<pre><code>##   statistic      p.value parameter                     method
+## 1  349.9145 1.556637e-75         3 Pearson's Chi-squared test</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/augment.html">augment</a></span>(chit)</code></pre></div>
+<pre><code>##      Sex Class .observed      .prop  .row.prop .col.prop .expected
+## 1   Male   1st       180 0.08178101 0.10398614 0.5538462 255.59973
+## 2 Female   1st       145 0.06587915 0.30851064 0.4461538  69.40027
+## 3   Male   2nd       179 0.08132667 0.10340843 0.6280702 224.14130
+## 4 Female   2nd       106 0.04815993 0.22553191 0.3719298  60.85870
+## 5   Male   3rd       510 0.23171286 0.29462738 0.7223796 555.24125
+## 6 Female   3rd       196 0.08905043 0.41702128 0.2776204 150.75875
+## 7   Male  Crew       862 0.39164016 0.49797805 0.9740113 696.01772
+## 8 Female  Crew        23 0.01044980 0.04893617 0.0259887 188.98228
+##   .residuals    .stdres
+## 1  -4.728681 -11.083954
+## 2   9.074854  11.083954
+## 3  -3.015179  -6.993369
+## 4   5.786457   6.993369
+## 5  -1.919967  -5.041320
+## 6   3.684626   5.041320
+## 7   6.291462  17.607380
+## 8 -12.074000 -17.607380</code></pre>
 </div>
 </div>
 <div id="conventions" class="section level2">

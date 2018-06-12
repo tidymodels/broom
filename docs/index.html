@@ -46,6 +46,12 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
+      <a href="articles/adding-tidiers.html">Adding new tidiers</a>
+    </li>
+    <li>
+      <a href="articles/available-methods.html">Available methods</a>
+    </li>
+    <li>
       <a href="articles/bootstrapping.html">Bootstrapping</a>
     </li>
     <li>
@@ -80,6 +86,7 @@
 
     
     
+<!-- README.md is generated from README.Rmd. Please edit that file -->
 <div id="broom-lets-tidy-up-a-bit" class="section level1">
 
 
@@ -97,10 +104,10 @@
 <p>The broom package is available on CRAN:</p>
 <pre><code>install.packages("broom")</code></pre>
 <p>You can also install the development version of the broom package using <a href="https://github.com/hadley/devtools">devtools</a>:</p>
-<pre><code>library(devtools)
-install_github("tidyverse/broom")</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(devtools)
+<span class="kw">install_github</span>(<span class="st">"tidyverse/broom"</span>)</code></pre></div>
 <p>For additional documentation, please browse the vignettes:</p>
-<pre><code>browseVignettes(package="broom")</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">browseVignettes</span>(<span class="dt">package =</span> <span class="st">"broom"</span>)</code></pre></div>
 </div>
 <div id="tidying-functions" class="section level2">
 <h2 class="hasAnchor">
@@ -110,71 +117,71 @@ install_github("tidyverse/broom")</code></pre>
 <li>
 <code>tidy</code>: constructs a data frame that summarizes the model’s statistical findings. This includes coefficients and p-values for each term in a regression, per-cluster information in clustering applications, or per-test information for <code>multtest</code> functions.</li>
 <li>
-<code>augment</code>: add columns to the original data that was modeled. This includes predictions, residuals, and cluster assignments.</li>
-<li>
 <code>glance</code>: construct a concise <em>one-row</em> summary of the model. This typically contains values such as R^2, adjusted R^2, and residual standard error that are computed once for the entire model.</li>
+<li>
+<code>augment</code>: add columns to the original data that was modeled. This includes predictions, residuals, and cluster assignments.</li>
 </ul>
 <p>Note that some classes may have only one or two of these methods defined.</p>
 <p>Consider as an illustrative example a linear fit on the built-in <code>mtcars</code> dataset.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">lmfit &lt;-<span class="st"> </span><span class="kw">lm</span>(mpg <span class="op">~</span><span class="st"> </span>wt, mtcars)
-lmfit</code></pre></div>
-<pre><code>## 
-## Call:
-## lm(formula = mpg ~ wt, data = mtcars)
-## 
-## Coefficients:
-## (Intercept)           wt  
-##      37.285       -5.344</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(lmfit)</code></pre></div>
-<pre><code>## 
-## Call:
-## lm(formula = mpg ~ wt, data = mtcars)
-## 
-## Residuals:
-##     Min      1Q  Median      3Q     Max 
-## -4.5432 -2.3647 -0.1252  1.4096  6.8727 
-## 
-## Coefficients:
-##             Estimate Std. Error t value Pr(&gt;|t|)    
-## (Intercept)  37.2851     1.8776  19.858  &lt; 2e-16 ***
-## wt           -5.3445     0.5591  -9.559 1.29e-10 ***
-## ---
-## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-## 
-## Residual standard error: 3.046 on 30 degrees of freedom
-## Multiple R-squared:  0.7528, Adjusted R-squared:  0.7446 
-## F-statistic: 91.38 on 1 and 30 DF,  p-value: 1.294e-10</code></pre>
+lmfit
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Call:</span>
+<span class="co">#&gt; lm(formula = mpg ~ wt, data = mtcars)</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Coefficients:</span>
+<span class="co">#&gt; (Intercept)           wt  </span>
+<span class="co">#&gt;      37.285       -5.344</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(lmfit)
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Call:</span>
+<span class="co">#&gt; lm(formula = mpg ~ wt, data = mtcars)</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Residuals:</span>
+<span class="co">#&gt;     Min      1Q  Median      3Q     Max </span>
+<span class="co">#&gt; -4.5432 -2.3647 -0.1252  1.4096  6.8727 </span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Coefficients:</span>
+<span class="co">#&gt;             Estimate Std. Error t value Pr(&gt;|t|)    </span>
+<span class="co">#&gt; (Intercept)  37.2851     1.8776  19.858  &lt; 2e-16 ***</span>
+<span class="co">#&gt; wt           -5.3445     0.5591  -9.559 1.29e-10 ***</span>
+<span class="co">#&gt; ---</span>
+<span class="co">#&gt; Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Residual standard error: 3.046 on 30 degrees of freedom</span>
+<span class="co">#&gt; Multiple R-squared:  0.7528, Adjusted R-squared:  0.7446 </span>
+<span class="co">#&gt; F-statistic: 91.38 on 1 and 30 DF,  p-value: 1.294e-10</span></code></pre></div>
 <p>This summary output is useful enough if you just want to read it. However, converting it to a data frame that contains all the same information, so that you can combine it with other models or do further analysis, is not trivial. You have to do <code>coef(summary(lmfit))</code> to get a matrix of coefficients, the terms are still stored in row names, and the column names are inconsistent with other packages (e.g. <code>Pr(&gt;|t|)</code> compared to <code>p.value</code>).</p>
 <p>Instead, you can use the <code>tidy</code> function, from the broom package, on the fit:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(broom)
-<span class="kw"><a href="reference/tidy.html">tidy</a></span>(lmfit)</code></pre></div>
-<pre><code>##          term  estimate std.error statistic      p.value
-## 1 (Intercept) 37.285126  1.877627 19.857575 8.241799e-19
-## 2          wt -5.344472  0.559101 -9.559044 1.293959e-10</code></pre>
+<span class="kw"><a href="reference/tidy.html">tidy</a></span>(lmfit)
+<span class="co">#&gt;          term  estimate std.error statistic      p.value</span>
+<span class="co">#&gt; 1 (Intercept) 37.285126  1.877627 19.857575 8.241799e-19</span>
+<span class="co">#&gt; 2          wt -5.344472  0.559101 -9.559044 1.293959e-10</span></code></pre></div>
 <p>This gives you a data.frame representation. Note that the row names have been moved into a column called <code>term</code>, and the column names are simple and consistent (and can be accessed using <code>$</code>).</p>
 <p>Instead of viewing the coefficients, you might be interested in the fitted values and residuals for each of the original points in the regression. For this, use <code>augment</code>, which augments the original data with information from the model:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(<span class="kw"><a href="reference/augment.html">augment</a></span>(lmfit))</code></pre></div>
-<pre><code>##           .rownames  mpg    wt  .fitted   .se.fit     .resid       .hat
-## 1         Mazda RX4 21.0 2.620 23.28261 0.6335798 -2.2826106 0.04326896
-## 2     Mazda RX4 Wag 21.0 2.875 21.91977 0.5714319 -0.9197704 0.03519677
-## 3        Datsun 710 22.8 2.320 24.88595 0.7359177 -2.0859521 0.05837573
-## 4    Hornet 4 Drive 21.4 3.215 20.10265 0.5384424  1.2973499 0.03125017
-## 5 Hornet Sportabout 18.7 3.440 18.90014 0.5526562 -0.2001440 0.03292182
-## 6           Valiant 18.1 3.460 18.79325 0.5552829 -0.6932545 0.03323551
-##     .sigma      .cooksd  .std.resid
-## 1 3.067494 1.327407e-02 -0.76616765
-## 2 3.093068 1.723963e-03 -0.30743051
-## 3 3.072127 1.543937e-02 -0.70575249
-## 4 3.088268 3.020558e-03  0.43275114
-## 5 3.097722 7.599578e-05 -0.06681879
-## 6 3.095184 9.210650e-04 -0.23148309</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(<span class="kw"><a href="reference/augment.html">augment</a></span>(lmfit))
+<span class="co">#&gt;           .rownames  mpg    wt  .fitted   .se.fit     .resid       .hat</span>
+<span class="co">#&gt; 1         Mazda RX4 21.0 2.620 23.28261 0.6335798 -2.2826106 0.04326896</span>
+<span class="co">#&gt; 2     Mazda RX4 Wag 21.0 2.875 21.91977 0.5714319 -0.9197704 0.03519677</span>
+<span class="co">#&gt; 3        Datsun 710 22.8 2.320 24.88595 0.7359177 -2.0859521 0.05837573</span>
+<span class="co">#&gt; 4    Hornet 4 Drive 21.4 3.215 20.10265 0.5384424  1.2973499 0.03125017</span>
+<span class="co">#&gt; 5 Hornet Sportabout 18.7 3.440 18.90014 0.5526562 -0.2001440 0.03292182</span>
+<span class="co">#&gt; 6           Valiant 18.1 3.460 18.79325 0.5552829 -0.6932545 0.03323551</span>
+<span class="co">#&gt;     .sigma      .cooksd  .std.resid</span>
+<span class="co">#&gt; 1 3.067494 1.327407e-02 -0.76616765</span>
+<span class="co">#&gt; 2 3.093068 1.723963e-03 -0.30743051</span>
+<span class="co">#&gt; 3 3.072127 1.543937e-02 -0.70575249</span>
+<span class="co">#&gt; 4 3.088268 3.020558e-03  0.43275114</span>
+<span class="co">#&gt; 5 3.097722 7.599578e-05 -0.06681879</span>
+<span class="co">#&gt; 6 3.095184 9.210650e-04 -0.23148309</span></code></pre></div>
 <p>Note that each of the new columns begins with a <code>.</code> (to avoid overwriting any of the original columns).</p>
 <p>Finally, several summary statistics are computed for the entire regression, such as R^2 and the F-statistic. These can be accessed with the <code>glance</code> function:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="reference/glance.html">glance</a></span>(lmfit)</code></pre></div>
-<pre><code>##   r.squared adj.r.squared    sigma statistic      p.value df    logLik
-## 1 0.7528328     0.7445939 3.045882  91.37533 1.293959e-10  2 -80.01471
-##        AIC      BIC deviance df.residual
-## 1 166.0294 170.4266 278.3219          30</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="reference/glance.html">glance</a></span>(lmfit)
+<span class="co">#&gt;   r.squared adj.r.squared    sigma statistic      p.value df    logLik</span>
+<span class="co">#&gt; 1 0.7528328     0.7445939 3.045882  91.37533 1.293959e-10  2 -80.01471</span>
+<span class="co">#&gt;        AIC      BIC deviance df.residual</span>
+<span class="co">#&gt; 1 166.0294 170.4266 278.3219          30</span></code></pre></div>
 <p>This distinction between the <code>tidy</code>, <code>augment</code> and <code>glance</code> functions is explored in a different context in the k-means vignette.</p>
 </div>
 <div id="other-examples" class="section level2">
@@ -185,85 +192,108 @@ lmfit</code></pre></div>
 <a href="#generalized-linear-and-non-linear-models" class="anchor"></a>Generalized linear and non-linear models</h3>
 <p>These functions apply equally well to the output from <code>glm</code>:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">glmfit &lt;-<span class="st"> </span><span class="kw">glm</span>(am <span class="op">~</span><span class="st"> </span>wt, mtcars, <span class="dt">family=</span><span class="st">"binomial"</span>)
-<span class="kw"><a href="reference/tidy.html">tidy</a></span>(glmfit)</code></pre></div>
-<pre><code>##          term estimate std.error statistic     p.value
-## 1 (Intercept) 12.04037  4.509706  2.669879 0.007587858
-## 2          wt -4.02397  1.436416 -2.801396 0.005088198</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(<span class="kw"><a href="reference/augment.html">augment</a></span>(glmfit))</code></pre></div>
-<pre><code>##           .rownames am    wt    .fitted   .se.fit     .resid       .hat
-## 1         Mazda RX4  1 2.620  1.4975684 0.9175750  0.6353854 0.12577908
-## 2     Mazda RX4 Wag  1 2.875  0.4714561 0.6761141  0.9848344 0.10816226
-## 3        Datsun 710  1 2.320  2.7047594 1.2799233  0.3598458 0.09628500
-## 4    Hornet 4 Drive  0 3.215 -0.8966937 0.6012064 -0.8271767 0.07438175
-## 5 Hornet Sportabout  0 3.440 -1.8020869 0.7486164 -0.5525972 0.06812194
-## 6           Valiant  0 3.460 -1.8825663 0.7669573 -0.5323012 0.06744101
-##      .sigma     .cooksd .std.resid
-## 1 0.8033182 0.018405616  0.6795582
-## 2 0.7897742 0.042434911  1.0428463
-## 3 0.8101256 0.003942789  0.3785304
-## 4 0.7973421 0.017706938 -0.8597702
-## 5 0.8061915 0.006469973 -0.5724389
-## 6 0.8067014 0.005901376 -0.5512128</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="reference/glance.html">glance</a></span>(glmfit)</code></pre></div>
-<pre><code>##   null.deviance df.null    logLik      AIC      BIC deviance df.residual
-## 1      43.22973      31 -9.588042 23.17608 26.10756 19.17608          30</code></pre>
+<span class="kw"><a href="reference/tidy.html">tidy</a></span>(glmfit)
+<span class="co">#&gt;          term estimate std.error statistic     p.value</span>
+<span class="co">#&gt; 1 (Intercept) 12.04037  4.509706  2.669879 0.007587858</span>
+<span class="co">#&gt; 2          wt -4.02397  1.436416 -2.801396 0.005088198</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(<span class="kw"><a href="reference/augment.html">augment</a></span>(glmfit))
+<span class="co">#&gt;           .rownames am    wt    .fitted   .se.fit     .resid       .hat</span>
+<span class="co">#&gt; 1         Mazda RX4  1 2.620  1.4975684 0.9175750  0.6353854 0.12577908</span>
+<span class="co">#&gt; 2     Mazda RX4 Wag  1 2.875  0.4714561 0.6761141  0.9848344 0.10816226</span>
+<span class="co">#&gt; 3        Datsun 710  1 2.320  2.7047594 1.2799233  0.3598458 0.09628500</span>
+<span class="co">#&gt; 4    Hornet 4 Drive  0 3.215 -0.8966937 0.6012064 -0.8271767 0.07438175</span>
+<span class="co">#&gt; 5 Hornet Sportabout  0 3.440 -1.8020869 0.7486164 -0.5525972 0.06812194</span>
+<span class="co">#&gt; 6           Valiant  0 3.460 -1.8825663 0.7669573 -0.5323012 0.06744101</span>
+<span class="co">#&gt;      .sigma     .cooksd .std.resid</span>
+<span class="co">#&gt; 1 0.8033182 0.018405616  0.6795582</span>
+<span class="co">#&gt; 2 0.7897742 0.042434911  1.0428463</span>
+<span class="co">#&gt; 3 0.8101256 0.003942789  0.3785304</span>
+<span class="co">#&gt; 4 0.7973421 0.017706938 -0.8597702</span>
+<span class="co">#&gt; 5 0.8061915 0.006469973 -0.5724389</span>
+<span class="co">#&gt; 6 0.8067014 0.005901376 -0.5512128</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="reference/glance.html">glance</a></span>(glmfit)
+<span class="co">#&gt;   null.deviance df.null    logLik      AIC      BIC deviance df.residual</span>
+<span class="co">#&gt; 1      43.22973      31 -9.588042 23.17608 26.10756 19.17608          30</span></code></pre></div>
 <p>Note that the statistics computed by <code>glance</code> are different for <code>glm</code> objects than for <code>lm</code> (e.g. deviance rather than R^2):</p>
 <p>These functions also work on other fits, such as nonlinear models (<code>nls</code>):</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">nlsfit &lt;-<span class="st"> </span><span class="kw">nls</span>(mpg <span class="op">~</span><span class="st"> </span>k <span class="op">/</span><span class="st"> </span>wt <span class="op">+</span><span class="st"> </span>b, mtcars, <span class="dt">start=</span><span class="kw">list</span>(<span class="dt">k=</span><span class="dv">1</span>, <span class="dt">b=</span><span class="dv">0</span>))
-<span class="kw"><a href="reference/tidy.html">tidy</a></span>(nlsfit)</code></pre></div>
-<pre><code>##   term  estimate std.error statistic      p.value
-## 1    k 45.829488  4.249155 10.785554 7.639162e-12
-## 2    b  4.386254  1.536418  2.854858 7.737378e-03</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(<span class="kw"><a href="reference/augment.html">augment</a></span>(nlsfit, mtcars))</code></pre></div>
-<pre><code>##           .rownames  mpg cyl disp  hp drat    wt  qsec vs am gear carb
-## 1         Mazda RX4 21.0   6  160 110 3.90 2.620 16.46  0  1    4    4
-## 2     Mazda RX4 Wag 21.0   6  160 110 3.90 2.875 17.02  0  1    4    4
-## 3        Datsun 710 22.8   4  108  93 3.85 2.320 18.61  1  1    4    1
-## 4    Hornet 4 Drive 21.4   6  258 110 3.08 3.215 19.44  1  0    3    1
-## 5 Hornet Sportabout 18.7   8  360 175 3.15 3.440 17.02  0  0    3    2
-## 6           Valiant 18.1   6  225 105 2.76 3.460 20.22  1  0    3    1
-##    .fitted     .resid
-## 1 21.87843 -0.8784251
-## 2 20.32695  0.6730544
-## 3 24.14034 -1.3403437
-## 4 18.64115  2.7588507
-## 5 17.70878  0.9912203
-## 6 17.63177  0.4682291</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="reference/glance.html">glance</a></span>(nlsfit)</code></pre></div>
-<pre><code>##     sigma isConv      finTol    logLik      AIC      BIC deviance
-## 1 2.77405   TRUE 2.87694e-08 -77.02329 160.0466 164.4438 230.8606
-##   df.residual
-## 1          30</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">nlsfit &lt;-<span class="st"> </span><span class="kw">nls</span>(mpg <span class="op">~</span><span class="st"> </span>k <span class="op">/</span><span class="st"> </span>wt <span class="op">+</span><span class="st"> </span>b, mtcars, <span class="dt">start =</span> <span class="kw">list</span>(<span class="dt">k =</span> <span class="dv">1</span>, <span class="dt">b =</span> <span class="dv">0</span>))
+<span class="kw"><a href="reference/tidy.html">tidy</a></span>(nlsfit)
+<span class="co">#&gt;   term  estimate std.error statistic      p.value</span>
+<span class="co">#&gt; 1    k 45.829488  4.249155 10.785554 7.639162e-12</span>
+<span class="co">#&gt; 2    b  4.386254  1.536418  2.854858 7.737378e-03</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(<span class="kw"><a href="reference/augment.html">augment</a></span>(nlsfit, mtcars))
+<span class="co">#&gt;           .rownames  mpg cyl disp  hp drat    wt  qsec vs am gear carb</span>
+<span class="co">#&gt; 1         Mazda RX4 21.0   6  160 110 3.90 2.620 16.46  0  1    4    4</span>
+<span class="co">#&gt; 2     Mazda RX4 Wag 21.0   6  160 110 3.90 2.875 17.02  0  1    4    4</span>
+<span class="co">#&gt; 3        Datsun 710 22.8   4  108  93 3.85 2.320 18.61  1  1    4    1</span>
+<span class="co">#&gt; 4    Hornet 4 Drive 21.4   6  258 110 3.08 3.215 19.44  1  0    3    1</span>
+<span class="co">#&gt; 5 Hornet Sportabout 18.7   8  360 175 3.15 3.440 17.02  0  0    3    2</span>
+<span class="co">#&gt; 6           Valiant 18.1   6  225 105 2.76 3.460 20.22  1  0    3    1</span>
+<span class="co">#&gt;    .fitted     .resid</span>
+<span class="co">#&gt; 1 21.87843 -0.8784251</span>
+<span class="co">#&gt; 2 20.32695  0.6730544</span>
+<span class="co">#&gt; 3 24.14034 -1.3403437</span>
+<span class="co">#&gt; 4 18.64115  2.7588507</span>
+<span class="co">#&gt; 5 17.70878  0.9912203</span>
+<span class="co">#&gt; 6 17.63177  0.4682291</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="reference/glance.html">glance</a></span>(nlsfit)
+<span class="co">#&gt;     sigma isConv      finTol    logLik      AIC      BIC deviance</span>
+<span class="co">#&gt; 1 2.77405   TRUE 2.87694e-08 -77.02329 160.0466 164.4438 230.8606</span>
+<span class="co">#&gt;   df.residual</span>
+<span class="co">#&gt; 1          30</span></code></pre></div>
 </div>
 <div id="hypothesis-testing" class="section level3">
 <h3 class="hasAnchor">
 <a href="#hypothesis-testing" class="anchor"></a>Hypothesis testing</h3>
 <p>The <code>tidy</code> function can also be applied to <code>htest</code> objects, such as those output by popular built-in functions like <code>t.test</code>, <code>cor.test</code>, and <code>wilcox.test</code>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">tt &lt;-<span class="st"> </span><span class="kw">t.test</span>(wt <span class="op">~</span><span class="st"> </span>am, mtcars)
-<span class="kw"><a href="reference/tidy.html">tidy</a></span>(tt)</code></pre></div>
-<pre><code>##   estimate estimate1 estimate2 statistic     p.value parameter  conf.low
-## 1 1.357895  3.768895     2.411  5.493905 6.27202e-06  29.23352 0.8525632
-##   conf.high                  method alternative
-## 1  1.863226 Welch Two Sample t-test   two.sided</code></pre>
+<span class="kw"><a href="reference/tidy.html">tidy</a></span>(tt)
+<span class="co">#&gt;   estimate estimate1 estimate2 statistic     p.value parameter  conf.low</span>
+<span class="co">#&gt; 1 1.357895  3.768895     2.411  5.493905 6.27202e-06  29.23352 0.8525632</span>
+<span class="co">#&gt;   conf.high                  method alternative</span>
+<span class="co">#&gt; 1  1.863226 Welch Two Sample t-test   two.sided</span></code></pre></div>
 <p>Some cases might have fewer columns (for example, no confidence interval):</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">wt &lt;-<span class="st"> </span><span class="kw">wilcox.test</span>(wt <span class="op">~</span><span class="st"> </span>am, mtcars)
-<span class="kw"><a href="reference/tidy.html">tidy</a></span>(wt)</code></pre></div>
-<pre><code>##   statistic      p.value                                            method
-## 1     230.5 4.347026e-05 Wilcoxon rank sum test with continuity correction
-##   alternative
-## 1   two.sided</code></pre>
+<span class="kw"><a href="reference/tidy.html">tidy</a></span>(wt)
+<span class="co">#&gt;   statistic      p.value                                            method</span>
+<span class="co">#&gt; 1     230.5 4.347026e-05 Wilcoxon rank sum test with continuity correction</span>
+<span class="co">#&gt;   alternative</span>
+<span class="co">#&gt; 1   two.sided</span></code></pre></div>
 <p>Since the <code>tidy</code> output is already only one row, <code>glance</code> returns the same output:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="reference/glance.html">glance</a></span>(tt)</code></pre></div>
-<pre><code>##   estimate estimate1 estimate2 statistic     p.value parameter  conf.low
-## 1 1.357895  3.768895     2.411  5.493905 6.27202e-06  29.23352 0.8525632
-##   conf.high                  method alternative
-## 1  1.863226 Welch Two Sample t-test   two.sided</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="reference/glance.html">glance</a></span>(wt)</code></pre></div>
-<pre><code>##   statistic      p.value                                            method
-## 1     230.5 4.347026e-05 Wilcoxon rank sum test with continuity correction
-##   alternative
-## 1   two.sided</code></pre>
-<p>There is no <code>augment</code> function for <code>htest</code> objects, since there is no meaningful sense in which a hypothesis test produces output about each initial data point.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="reference/glance.html">glance</a></span>(tt)
+<span class="co">#&gt;   estimate estimate1 estimate2 statistic     p.value parameter  conf.low</span>
+<span class="co">#&gt; 1 1.357895  3.768895     2.411  5.493905 6.27202e-06  29.23352 0.8525632</span>
+<span class="co">#&gt;   conf.high                  method alternative</span>
+<span class="co">#&gt; 1  1.863226 Welch Two Sample t-test   two.sided</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="reference/glance.html">glance</a></span>(wt)
+<span class="co">#&gt;   statistic      p.value                                            method</span>
+<span class="co">#&gt; 1     230.5 4.347026e-05 Wilcoxon rank sum test with continuity correction</span>
+<span class="co">#&gt;   alternative</span>
+<span class="co">#&gt; 1   two.sided</span></code></pre></div>
+<p><code>augment</code> method is defined only for chi-squared tests, since there is no meaningful sense, for other tests, in which a hypothesis test produces output about each initial data point.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">chit &lt;-<span class="st"> </span><span class="kw">chisq.test</span>(<span class="kw">xtabs</span>(Freq <span class="op">~</span><span class="st"> </span>Sex <span class="op">+</span><span class="st"> </span>Class, <span class="dt">data =</span> <span class="kw">as.data.frame</span>(Titanic)))
+<span class="kw"><a href="reference/tidy.html">tidy</a></span>(chit)
+<span class="co">#&gt;   statistic      p.value parameter                     method</span>
+<span class="co">#&gt; 1  349.9145 1.556637e-75         3 Pearson's Chi-squared test</span>
+<span class="kw"><a href="reference/augment.html">augment</a></span>(chit)
+<span class="co">#&gt;      Sex Class .observed      .prop  .row.prop .col.prop .expected</span>
+<span class="co">#&gt; 1   Male   1st       180 0.08178101 0.10398614 0.5538462 255.59973</span>
+<span class="co">#&gt; 2 Female   1st       145 0.06587915 0.30851064 0.4461538  69.40027</span>
+<span class="co">#&gt; 3   Male   2nd       179 0.08132667 0.10340843 0.6280702 224.14130</span>
+<span class="co">#&gt; 4 Female   2nd       106 0.04815993 0.22553191 0.3719298  60.85870</span>
+<span class="co">#&gt; 5   Male   3rd       510 0.23171286 0.29462738 0.7223796 555.24125</span>
+<span class="co">#&gt; 6 Female   3rd       196 0.08905043 0.41702128 0.2776204 150.75875</span>
+<span class="co">#&gt; 7   Male  Crew       862 0.39164016 0.49797805 0.9740113 696.01772</span>
+<span class="co">#&gt; 8 Female  Crew        23 0.01044980 0.04893617 0.0259887 188.98228</span>
+<span class="co">#&gt;   .residuals    .stdres</span>
+<span class="co">#&gt; 1  -4.728681 -11.083954</span>
+<span class="co">#&gt; 2   9.074854  11.083954</span>
+<span class="co">#&gt; 3  -3.015179  -6.993369</span>
+<span class="co">#&gt; 4   5.786457   6.993369</span>
+<span class="co">#&gt; 5  -1.919967  -5.041320</span>
+<span class="co">#&gt; 6   3.684626   5.041320</span>
+<span class="co">#&gt; 7   6.291462  17.607380</span>
+<span class="co">#&gt; 8 -12.074000 -17.607380</span></code></pre></div>
 </div>
 <div id="available-tidiers" class="section level3">
 <h3 class="hasAnchor">
@@ -292,648 +322,19 @@ lmfit</code></pre></div>
 <li><code>multcomp</code></li>
 <li><code>sp</code></li>
 <li><code>maps</code></li>
+<li>etc</li>
 </ul>
-<p>A full list of the <code>tidy</code>, <code>augment</code> and <code>glance</code> methods available for each class is as follows:</p>
-<table class="table">
-<thead><tr class="header">
-<th align="left">Class</th>
-<th align="left"><code>tidy</code></th>
-<th align="left"><code>glance</code></th>
-<th align="left"><code>augment</code></th>
-</tr></thead>
-<tbody>
-<tr class="odd">
-<td align="left">aareg</td>
-<td align="left">x</td>
-<td align="left">x</td>
-<td align="left"></td>
-</tr>
-<tr class="even">
-<td align="left">acf</td>
-<td align="left">x</td>
-<td align="left"></td>
-<td align="left"></td>
-</tr>
-<tr class="odd">
-<td align="left">anova</td>
-<td align="left">x</td>
-<td align="left"></td>
-<td align="left"></td>
-</tr>
-<tr class="even">
-<td align="left">aov</td>
-<td align="left">x</td>
-<td align="left"></td>
-<td align="left"></td>
-</tr>
-<tr class="odd">
-<td align="left">aovlist</td>
-<td align="left">x</td>
-<td align="left"></td>
-<td align="left"></td>
-</tr>
-<tr class="even">
-<td align="left">Arima</td>
-<td align="left">x</td>
-<td align="left">x</td>
-<td align="left"></td>
-</tr>
-<tr class="odd">
-<td align="left">betareg</td>
-<td align="left">x</td>
-<td align="left">x</td>
-<td align="left">x</td>
-</tr>
-<tr class="even">
-<td align="left">biglm</td>
-<td align="left">x</td>
-<td align="left">x</td>
-<td align="left"></td>
-</tr>
-<tr class="odd">
-<td align="left">binDesign</td>
-<td align="left">x</td>
-<td align="left">x</td>
-<td align="left"></td>
-</tr>
-<tr class="even">
-<td align="left">binWidth</td>
-<td align="left">x</td>
-<td align="left"></td>
-<td align="left"></td>
-</tr>
-<tr class="odd">
-<td align="left">boot</td>
-<td align="left">x</td>
-<td align="left"></td>
-<td align="left"></td>
-</tr>
-<tr class="even">
-<td align="left">brmsfit</td>
-<td align="left">x</td>
-<td align="left"></td>
-<td align="left"></td>
-</tr>
-<tr class="odd">
-<td align="left">btergm</td>
-<td align="left">x</td>
-<td align="left"></td>
-<td align="left"></td>
-</tr>
-<tr class="even">
-<td align="left">cch</td>
-<td align="left">x</td>
-<td align="left">x</td>
-<td align="left"></td>
-</tr>
-<tr class="odd">
-<td align="left">character</td>
-<td align="left">x</td>
-<td align="left"></td>
-<td align="left"></td>
-</tr>
-<tr class="even">
-<td align="left">cld</td>
-<td align="left">x</td>
-<td align="left"></td>
-<td align="left"></td>
-</tr>
-<tr class="odd">
-<td align="left">coeftest</td>
-<td align="left">x</td>
-<td align="left"></td>
-<td align="left"></td>
-</tr>
-<tr class="even">
-<td align="left">confint.glht</td>
-<td align="left">x</td>
-<td align="left"></td>
-<td align="left"></td>
-</tr>
-<tr class="odd">
-<td align="left">coxph</td>
-<td align="left">x</td>
-<td align="left">x</td>
-<td align="left">x</td>
-</tr>
-<tr class="even">
-<td align="left">cv.glmnet</td>
-<td align="left">x</td>
-<td align="left">x</td>
-<td align="left"></td>
-</tr>
-<tr class="odd">
-<td align="left">data.frame</td>
-<td align="left">x</td>
-<td align="left">x</td>
-<td align="left">x</td>
-</tr>
-<tr class="even">
-<td align="left">default</td>
-<td align="left">x</td>
-<td align="left">x</td>
-<td align="left">x</td>
-</tr>
-<tr class="odd">
-<td align="left">density</td>
-<td align="left">x</td>
-<td align="left"></td>
-<td align="left"></td>
-</tr>
-<tr class="even">
-<td align="left">dgCMatrix</td>
-<td align="left">x</td>
-<td align="left"></td>
-<td align="left"></td>
-</tr>
-<tr class="odd">
-<td align="left">dgTMatrix</td>
-<td align="left">x</td>
-<td align="left"></td>
-<td align="left"></td>
-</tr>
-<tr class="even">
-<td align="left">dist</td>
-<td align="left">x</td>
-<td align="left"></td>
-<td align="left"></td>
-</tr>
-<tr class="odd">
-<td align="left">emmGrid</td>
-<td align="left">x</td>
-<td align="left"></td>
-<td align="left"></td>
-</tr>
-<tr class="even">
-<td align="left">ergm</td>
-<td align="left">x</td>
-<td align="left">x</td>
-<td align="left"></td>
-</tr>
-<tr class="odd">
-<td align="left">felm</td>
-<td align="left">x</td>
-<td align="left">x</td>
-<td align="left">x</td>
-</tr>
-<tr class="even">
-<td align="left">fitdistr</td>
-<td align="left">x</td>
-<td align="left">x</td>
-<td align="left"></td>
-</tr>
-<tr class="odd">
-<td align="left">ftable</td>
-<td align="left">x</td>
-<td align="left"></td>
-<td align="left"></td>
-</tr>
-<tr class="even">
-<td align="left">gam</td>
-<td align="left">x</td>
-<td align="left">x</td>
-<td align="left"></td>
-</tr>
-<tr class="odd">
-<td align="left">Gam</td>
-<td align="left">x</td>
-<td align="left">x</td>
-<td align="left"></td>
-</tr>
-<tr class="even">
-<td align="left">gamlss</td>
-<td align="left">x</td>
-<td align="left"></td>
-<td align="left"></td>
-</tr>
-<tr class="odd">
-<td align="left">geeglm</td>
-<td align="left">x</td>
-<td align="left"></td>
-<td align="left"></td>
-</tr>
-<tr class="even">
-<td align="left">glht</td>
-<td align="left">x</td>
-<td align="left"></td>
-<td align="left"></td>
-</tr>
-<tr class="odd">
-<td align="left">glmnet</td>
-<td align="left">x</td>
-<td align="left">x</td>
-<td align="left"></td>
-</tr>
-<tr class="even">
-<td align="left">glmRob</td>
-<td align="left">x</td>
-<td align="left">x</td>
-<td align="left">x</td>
-</tr>
-<tr class="odd">
-<td align="left">gmm</td>
-<td align="left">x</td>
-<td align="left">x</td>
-<td align="left"></td>
-</tr>
-<tr class="even">
-<td align="left">htest</td>
-<td align="left">x</td>
-<td align="left">x</td>
-<td align="left"></td>
-</tr>
-<tr class="odd">
-<td align="left">ivreg</td>
-<td align="left">x</td>
-<td align="left">x</td>
-<td align="left">x</td>
-</tr>
-<tr class="even">
-<td align="left">kappa</td>
-<td align="left">x</td>
-<td align="left"></td>
-<td align="left"></td>
-</tr>
-<tr class="odd">
-<td align="left">kde</td>
-<td align="left">x</td>
-<td align="left"></td>
-<td align="left"></td>
-</tr>
-<tr class="even">
-<td align="left">kmeans</td>
-<td align="left">x</td>
-<td align="left">x</td>
-<td align="left">x</td>
-</tr>
-<tr class="odd">
-<td align="left">Line</td>
-<td align="left">x</td>
-<td align="left"></td>
-<td align="left"></td>
-</tr>
-<tr class="even">
-<td align="left">Lines</td>
-<td align="left">x</td>
-<td align="left"></td>
-<td align="left"></td>
-</tr>
-<tr class="odd">
-<td align="left">list</td>
-<td align="left">x</td>
-<td align="left">x</td>
-<td align="left"></td>
-</tr>
-<tr class="even">
-<td align="left">lm</td>
-<td align="left">x</td>
-<td align="left">x</td>
-<td align="left">x</td>
-</tr>
-<tr class="odd">
-<td align="left">lme</td>
-<td align="left">x</td>
-<td align="left">x</td>
-<td align="left">x</td>
-</tr>
-<tr class="even">
-<td align="left">lmodel2</td>
-<td align="left">x</td>
-<td align="left">x</td>
-<td align="left"></td>
-</tr>
-<tr class="odd">
-<td align="left">lmRob</td>
-<td align="left">x</td>
-<td align="left">x</td>
-<td align="left">x</td>
-</tr>
-<tr class="even">
-<td align="left">logical</td>
-<td align="left">x</td>
-<td align="left"></td>
-<td align="left"></td>
-</tr>
-<tr class="odd">
-<td align="left">lsmobj</td>
-<td align="left">x</td>
-<td align="left"></td>
-<td align="left"></td>
-</tr>
-<tr class="even">
-<td align="left">manova</td>
-<td align="left">x</td>
-<td align="left"></td>
-<td align="left"></td>
-</tr>
-<tr class="odd">
-<td align="left">map</td>
-<td align="left">x</td>
-<td align="left"></td>
-<td align="left"></td>
-</tr>
-<tr class="even">
-<td align="left">matrix</td>
-<td align="left">x</td>
-<td align="left">x</td>
-<td align="left"></td>
-</tr>
-<tr class="odd">
-<td align="left">Mclust</td>
-<td align="left">x</td>
-<td align="left">x</td>
-<td align="left">x</td>
-</tr>
-<tr class="even">
-<td align="left">merMod</td>
-<td align="left">x</td>
-<td align="left">x</td>
-<td align="left">x</td>
-</tr>
-<tr class="odd">
-<td align="left">mle2</td>
-<td align="left">x</td>
-<td align="left"></td>
-<td align="left"></td>
-</tr>
-<tr class="even">
-<td align="left">muhaz</td>
-<td align="left">x</td>
-<td align="left">x</td>
-<td align="left"></td>
-</tr>
-<tr class="odd">
-<td align="left">multinom</td>
-<td align="left">x</td>
-<td align="left">x</td>
-<td align="left"></td>
-</tr>
-<tr class="even">
-<td align="left">nlrq</td>
-<td align="left">x</td>
-<td align="left">x</td>
-<td align="left">x</td>
-</tr>
-<tr class="odd">
-<td align="left">nls</td>
-<td align="left">x</td>
-<td align="left">x</td>
-<td align="left">x</td>
-</tr>
-<tr class="even">
-<td align="left">NULL</td>
-<td align="left">x</td>
-<td align="left">x</td>
-<td align="left">x</td>
-</tr>
-<tr class="odd">
-<td align="left">numeric</td>
-<td align="left">x</td>
-<td align="left"></td>
-<td align="left"></td>
-</tr>
-<tr class="even">
-<td align="left">orcutt</td>
-<td align="left">x</td>
-<td align="left">x</td>
-<td align="left"></td>
-</tr>
-<tr class="odd">
-<td align="left">pairwise.htest</td>
-<td align="left">x</td>
-<td align="left"></td>
-<td align="left"></td>
-</tr>
-<tr class="even">
-<td align="left">plm</td>
-<td align="left">x</td>
-<td align="left">x</td>
-<td align="left">x</td>
-</tr>
-<tr class="odd">
-<td align="left">poLCA</td>
-<td align="left">x</td>
-<td align="left">x</td>
-<td align="left">x</td>
-</tr>
-<tr class="even">
-<td align="left">Polygon</td>
-<td align="left">x</td>
-<td align="left"></td>
-<td align="left"></td>
-</tr>
-<tr class="odd">
-<td align="left">Polygons</td>
-<td align="left">x</td>
-<td align="left"></td>
-<td align="left"></td>
-</tr>
-<tr class="even">
-<td align="left">power.htest</td>
-<td align="left">x</td>
-<td align="left"></td>
-<td align="left"></td>
-</tr>
-<tr class="odd">
-<td align="left">prcomp</td>
-<td align="left">x</td>
-<td align="left"></td>
-<td align="left">x</td>
-</tr>
-<tr class="even">
-<td align="left">pyears</td>
-<td align="left">x</td>
-<td align="left">x</td>
-<td align="left"></td>
-</tr>
-<tr class="odd">
-<td align="left">rcorr</td>
-<td align="left">x</td>
-<td align="left"></td>
-<td align="left"></td>
-</tr>
-<tr class="even">
-<td align="left">ref.grid</td>
-<td align="left">x</td>
-<td align="left"></td>
-<td align="left"></td>
-</tr>
-<tr class="odd">
-<td align="left">ridgelm</td>
-<td align="left">x</td>
-<td align="left">x</td>
-<td align="left"></td>
-</tr>
-<tr class="even">
-<td align="left">rjags</td>
-<td align="left">x</td>
-<td align="left"></td>
-<td align="left"></td>
-</tr>
-<tr class="odd">
-<td align="left">roc</td>
-<td align="left">x</td>
-<td align="left"></td>
-<td align="left"></td>
-</tr>
-<tr class="even">
-<td align="left">rowwise_df</td>
-<td align="left">x</td>
-<td align="left">x</td>
-<td align="left">x</td>
-</tr>
-<tr class="odd">
-<td align="left">rq</td>
-<td align="left">x</td>
-<td align="left">x</td>
-<td align="left">x</td>
-</tr>
-<tr class="even">
-<td align="left">rqs</td>
-<td align="left">x</td>
-<td align="left">x</td>
-<td align="left">x</td>
-</tr>
-<tr class="odd">
-<td align="left">sparseMatrix</td>
-<td align="left">x</td>
-<td align="left"></td>
-<td align="left"></td>
-</tr>
-<tr class="even">
-<td align="left">SpatialLinesDataFrame</td>
-<td align="left">x</td>
-<td align="left"></td>
-<td align="left"></td>
-</tr>
-<tr class="odd">
-<td align="left">SpatialPolygons</td>
-<td align="left">x</td>
-<td align="left"></td>
-<td align="left"></td>
-</tr>
-<tr class="even">
-<td align="left">SpatialPolygonsDataFrame</td>
-<td align="left">x</td>
-<td align="left"></td>
-<td align="left"></td>
-</tr>
-<tr class="odd">
-<td align="left">spec</td>
-<td align="left">x</td>
-<td align="left"></td>
-<td align="left"></td>
-</tr>
-<tr class="even">
-<td align="left">speedlm</td>
-<td align="left">x</td>
-<td align="left">x</td>
-<td align="left">x</td>
-</tr>
-<tr class="odd">
-<td align="left">stanfit</td>
-<td align="left">x</td>
-<td align="left"></td>
-<td align="left"></td>
-</tr>
-<tr class="even">
-<td align="left">stanreg</td>
-<td align="left">x</td>
-<td align="left">x</td>
-<td align="left"></td>
-</tr>
-<tr class="odd">
-<td align="left">summary.glht</td>
-<td align="left">x</td>
-<td align="left"></td>
-<td align="left"></td>
-</tr>
-<tr class="even">
-<td align="left">summary.lm</td>
-<td align="left">x</td>
-<td align="left">x</td>
-<td align="left"></td>
-</tr>
-<tr class="odd">
-<td align="left">summaryDefault</td>
-<td align="left">x</td>
-<td align="left">x</td>
-<td align="left"></td>
-</tr>
-<tr class="even">
-<td align="left">survdiff</td>
-<td align="left">x</td>
-<td align="left">x</td>
-<td align="left"></td>
-</tr>
-<tr class="odd">
-<td align="left">survexp</td>
-<td align="left">x</td>
-<td align="left">x</td>
-<td align="left"></td>
-</tr>
-<tr class="even">
-<td align="left">survfit</td>
-<td align="left">x</td>
-<td align="left">x</td>
-<td align="left"></td>
-</tr>
-<tr class="odd">
-<td align="left">survreg</td>
-<td align="left">x</td>
-<td align="left">x</td>
-<td align="left">x</td>
-</tr>
-<tr class="even">
-<td align="left">table</td>
-<td align="left">x</td>
-<td align="left"></td>
-<td align="left"></td>
-</tr>
-<tr class="odd">
-<td align="left">tbl_df</td>
-<td align="left">x</td>
-<td align="left">x</td>
-<td align="left">x</td>
-</tr>
-<tr class="even">
-<td align="left">ts</td>
-<td align="left">x</td>
-<td align="left"></td>
-<td align="left"></td>
-</tr>
-<tr class="odd">
-<td align="left">TukeyHSD</td>
-<td align="left">x</td>
-<td align="left"></td>
-<td align="left"></td>
-</tr>
-<tr class="even">
-<td align="left">zoo</td>
-<td align="left">x</td>
-<td align="left"></td>
-<td align="left"></td>
-</tr>
-</tbody>
-</table>
+<p>A full list of the <code>tidy</code>, <code>augment</code> and <code>glance</code> methods available for each class is available in the Available Methods vignette.</p>
 </div>
 </div>
 <div id="conventions" class="section level2">
 <h2 class="hasAnchor">
 <a href="#conventions" class="anchor"></a>Conventions</h2>
-<p>In order to maintain consistency, we attempt to follow some conventions regarding the structure of returned data.</p>
-<div id="all-functions" class="section level3">
-<h3 class="hasAnchor">
-<a href="#all-functions" class="anchor"></a>All functions</h3>
-<ul>
-<li>The output of the <code>tidy</code>, <code>augment</code> and <code>glance</code> functions is <em>always</em> a data frame.</li>
-<li>The output never has rownames. This ensures that you can combine it with other tidy outputs without fear of losing information (since rownames in R cannot contain duplicates).</li>
-<li>Some column names are kept consistent, so that they can be combined across different models and so that you know what to expect (in contrast to asking “is it <code>pval</code> or <code>PValue</code>?” every time). The examples below are not all the possible column names, nor will all tidy output contain all or even any of these columns.</li>
-</ul>
-</div>
+<p><code>tidy</code>, <code>glance</code> and <code>augment</code> always return a data frame without rownames. In the near future they will return tibbles.</p>
+<p>We attempt to keep column names consistent across models. Some method specific convetions and common columns names are below.</p>
 <div id="tidy-functions" class="section level3">
 <h3 class="hasAnchor">
-<a href="#tidy-functions" class="anchor"></a>tidy functions</h3>
+<a href="#tidy-functions" class="anchor"></a><code>tidy</code> functions</h3>
 <ul>
 <li>Each row in a <code>tidy</code> output typically represents some well-defined concept, such as one term in a regression, one test, or one cluster/class. This meaning varies across models but is usually self-evident. The one thing each row cannot represent is a point in the initial data (for that, use the <code>augment</code> method).</li>
 <li>Common column names include:
@@ -1048,7 +449,7 @@ lmfit</code></pre></div>
       <div class="dev-status">
 <h2>Dev status</h2>
 <ul class="list-unstyled">
-<li><a href="https://CRAN.R-project.org/package=broom"><img src="http://www.r-pkg.org/badges/version/broom" alt="CRAN_Status_Badge"></a></li>
+<li><a href="https://cran.r-project.org/package=broom"><img src="https://www.r-pkg.org/badges/version/broom" alt="CRAN status"></a></li>
 <li><a href="https://travis-ci.org/tidyverse/broom"><img src="https://travis-ci.org/tidyverse/broom.svg?branch=master" alt="Travis-CI Build Status"></a></li>
 <li><a href="https://ci.appveyor.com/project/tidyverse/broom"><img src="https://ci.appveyor.com/api/projects/status/github/tidyverse/broom?branch=master&amp;svg=true" alt="AppVeyor Build Status"></a></li>
 <li><a href="https://codecov.io/github/tidyverse/broom?branch=master"><img src="https://img.shields.io/codecov/c/github/tidyverse/broom/master.svg" alt="Coverage Status"></a></li>

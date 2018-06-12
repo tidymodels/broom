@@ -65,6 +65,12 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
+      <a href="../articles/adding-tidiers.html">Adding new tidiers</a>
+    </li>
+    <li>
+      <a href="../articles/available-methods.html">Available methods</a>
+    </li>
+    <li>
       <a href="../articles/bootstrapping.html">Bootstrapping</a>
     </li>
     <li>
@@ -172,7 +178,7 @@ covariance or the residuals.</p>
     <span class='no'>selccoh</span> <span class='kw'>&lt;-</span> <span class='fu'>with</span>(<span class='no'>nwtco</span>, <span class='no'>rel</span><span class='kw'>==</span><span class='fl'>1</span><span class='kw'>|</span><span class='no'>subcoh</span><span class='kw'>==</span><span class='fl'>1</span>)
     <span class='no'>ccoh.data</span> <span class='kw'>&lt;-</span> <span class='no'>nwtco</span>[<span class='no'>selccoh</span>,]
     <span class='no'>ccoh.data</span>$<span class='no'>subcohort</span> <span class='kw'>&lt;-</span> <span class='no'>subcoh</span>[<span class='no'>selccoh</span>]
-    <span class='co'>## central-lab histology </span>
+    <span class='co'>## central-lab histology</span>
     <span class='no'>ccoh.data</span>$<span class='no'>histol</span> <span class='kw'>&lt;-</span> <span class='fu'>factor</span>(<span class='no'>ccoh.data</span>$<span class='no'>histol</span>,<span class='kw'>labels</span><span class='kw'>=</span><span class='fu'>c</span>(<span class='st'>"FH"</span>,<span class='st'>"UH"</span>))
     <span class='co'>## tumour stage</span>
     <span class='no'>ccoh.data</span>$<span class='no'>stage</span> <span class='kw'>&lt;-</span> <span class='fu'>factor</span>(<span class='no'>ccoh.data</span>$<span class='no'>stage</span>,<span class='kw'>labels</span><span class='kw'>=</span><span class='fu'>c</span>(<span class='st'>"I"</span>,<span class='st'>"II"</span>,<span class='st'>"III"</span> ,<span class='st'>"IV"</span>))
@@ -201,7 +207,7 @@ covariance or the residuals.</p>
     <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/ggplot'>ggplot</a></span>(<span class='no'>fits</span>, <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/aes'>aes</a></span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>estimate</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>term</span>, <span class='kw'>color</span> <span class='kw'>=</span> <span class='no'>method</span>)) + <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/geom_point'>geom_point</a></span>() +
         <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/geom_errorbarh'>geom_errorbarh</a></span>(<span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/aes'>aes</a></span>(<span class='kw'>xmin</span> <span class='kw'>=</span> <span class='no'>conf.low</span>, <span class='kw'>xmax</span> <span class='kw'>=</span> <span class='no'>conf.high</span>)) +
         <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/geom_abline'>geom_vline</a></span>(<span class='kw'>xintercept</span> <span class='kw'>=</span> <span class='fl'>0</span>)
-}</div><div class='output co'>#&gt; <span class='error'>Error in is.data.frame(data): object 'ccoh.data' not found</span></div><div class='input'>
+}</div><div class='output co'>#&gt; <span class='error'>Error in is.data.frame(data): objet 'ccoh.data' introuvable</span></div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

@@ -30,7 +30,7 @@ and confidence intervals}
 
 \item{data}{Original dataset}
 
-\item{newdata}{New data to make predictions from (optional)}
+\item{newdata}{If provided, performs predictions on the new data}
 
 \item{diagnostics}{Logical. Return results of diagnostic tests.}
 }
@@ -59,6 +59,8 @@ If \code{diagnostics} is \code{TRUE}, \code{glance} also returns:
   \item{p.value.Sargan}{P value of Sargan test}
   \item{p.value.Wu.Hausman}{P value of Wu-Hausman test}
   \item{p.value.weakinst}{P value of weak instruments test}
+    and corresponding columns \code{statistics.Sargan}
+    for the statistics of those tests.
 }
 \description{
 Tidiers for ivreg models
@@ -72,15 +74,15 @@ if (require("AER", quietly = TRUE)) {
     CigarettesSW$tdiff <- with(CigarettesSW, (taxs - tax)/cpi)
     ivr <- ivreg(log(packs) ~ log(rprice) + log(rincome) | log(rincome) + tdiff + I(tax/cpi),
           data = CigarettesSW, subset = year == "1995")
-    
+
     summary(ivr)
-    
+
     tidy(ivr)
     tidy(ivr, conf.int = TRUE)
     tidy(ivr, conf.int = TRUE, exponentiate = TRUE)
-    
+
     head(augment(ivr))
-    
+
     glance(ivr)
 }
 

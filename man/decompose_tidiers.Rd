@@ -67,7 +67,7 @@ library(ggplot2)
 
 decomps <- tibble(
     # Turn the ts objects into data frames.
-    series = list(broom::tidy(nottem), broom::tidy(nottem)),
+    series = list(as.data.frame(nottem), as.data.frame(nottem)),
     # Add the models in, one for each row.
     decomp = c("decompose", "stl"),
     model = list(d1, d2)

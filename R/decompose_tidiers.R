@@ -57,7 +57,7 @@
 #'
 #' decomps <- tibble(
 #'     # Turn the ts objects into data frames.
-#'     series = list(broom::tidy(nottem), broom::tidy(nottem)),
+#'     series = list(as.data.frame(nottem), as.data.frame(nottem)),
 #'     # Add the models in, one for each row.
 #'     decomp = c("decompose", "stl"),
 #'     model = list(d1, d2)
@@ -85,17 +85,19 @@ NULL
 #' @rdname decompose_tidiers
 #' @export
 augment.decomposed.ts <- function(x, ...) {
-    ret <- data.frame(seasonal = as.numeric(x$seasonal),
-                      trend = as.numeric(x$trend),
-                      remainder = as.numeric(x$random))
-    # Inspired by forecast::seasadj, this is the "deseasonalised" data:
-    ret$seasadj <- if (x$type == "additive") {
-        as.numeric(x$x) - ret$seasonal
-    } else {
-        as.numeric(x$x) / ret$seasonal
-    }
-    colnames(ret) <- paste0(".", colnames(ret))
-    ret
+  ret <- data.frame(
+    seasonal = as.numeric(x$seasonal),
+    trend = as.numeric(x$trend),
+    remainder = as.numeric(x$random)
+  )
+  # Inspired by forecast::seasadj, this is the "deseasonalised" data:
+  ret$seasadj <- if (x$type == "additive") {
+    as.numeric(x$x) - ret$seasonal
+  } else {
+    as.numeric(x$x) / ret$seasonal
+  }
+  colnames(ret) <- paste0(".", colnames(ret))
+  ret
 }
 
 #' @rdname decompose_tidiers
@@ -104,10 +106,10 @@ augment.decomposed.ts <- function(x, ...) {
 #'
 #' @export
 augment.stl <- function(x, weights = TRUE, ...) {
-    ret <- as.data.frame(x$time.series)
-    ret$weight <- x$weights
-    # Inspired by forecast::seasadj, this is the "deseasonalised" data:
-    ret$seasadj <- ret$trend + ret$remainder
-    colnames(ret) <- paste0(".", colnames(ret))
-    ret
+  ret <- as.data.frame(x$time.series)
+  ret$weight <- x$weights
+  # Inspired by forecast::seasadj, this is the "deseasonalised" data:
+  ret$seasadj <- ret$trend + ret$remainder
+  colnames(ret) <- paste0(".", colnames(ret))
+  ret
 }

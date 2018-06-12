@@ -65,6 +65,12 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
+      <a href="../articles/adding-tidiers.html">Adding new tidiers</a>
+    </li>
+    <li>
+      <a href="../articles/available-methods.html">Available methods</a>
+    </li>
+    <li>
       <a href="../articles/bootstrapping.html">Bootstrapping</a>
     </li>
     <li>
@@ -102,7 +108,7 @@
 
     <div class="ref-description">
     
-    <p>This method tidies the coefficients of a bootstrapped temporal exponential 
+    <p>This method tidies the coefficients of a bootstrapped temporal exponential
 random graph model estimated with the <span class="pkg">xergm</span>. It simply returns the
 coefficients and their confidence intervals.</p>
     
@@ -142,7 +148,7 @@ only the <code>term</code> and <code>estimate</code> columns.</p></td>
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>A <code>data.frame</code> without rownames.</p>
-<p><code>tidy.btergm</code> returns one row for each coefficient, 
+<p><code>tidy.btergm</code> returns one row for each coefficient,
 with four columns:</p>
 <dt>term</dt><dd><p>The term in the model being estimated and tested</p></dd>
   <dt>estimate</dt><dd><p>The estimated coefficient</p></dd>
@@ -152,7 +158,7 @@ with four columns:</p>
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>There is no <code>augment</code> or <code>glance</code> method 
+    <p>There is no <code>augment</code> or <code>glance</code> method
 for <span class="pkg">ergm</span> objects.</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
@@ -189,10 +195,10 @@ for <span class="pkg">ergm</span> objects.</p>
 
     <span class='co'># Show coefficients as odds ratios with a 99% CI</span>
     <span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>btfit</span>, <span class='kw'>exponentiate</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>conf.level</span> <span class='kw'>=</span> <span class='fl'>0.99</span>)
-}</div><div class='output co'>#&gt; <span class='message'>Loading required package: xergm</span></div><div class='output co'>#&gt; <span class='warning'>Warning: package 'xergm' was built under R version 3.4.3</span></div><div class='output co'>#&gt; <span class='message'>Loading required package: xergm.common</span></div><div class='output co'>#&gt; <span class='warning'>Warning: package 'xergm.common' was built under R version 3.4.3</span></div><div class='output co'>#&gt; <span class='message'>Loading required package: ergm</span></div><div class='output co'>#&gt; <span class='warning'>Warning: package 'ergm' was built under R version 3.4.3</span></div><div class='output co'>#&gt; <span class='message'>Loading required package: statnet.common</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Attaching package: 'statnet.common'</span></div><div class='output co'>#&gt; <span class='message'>The following object is masked from 'package:base':</span>
+}</div><div class='output co'>#&gt; <span class='message'>Le chargement a nécessité le package : xergm</span></div><div class='output co'>#&gt; <span class='message'>Le chargement a nécessité le package : xergm.common</span></div><div class='output co'>#&gt; <span class='message'>Le chargement a nécessité le package : ergm</span></div><div class='output co'>#&gt; <span class='message'>Le chargement a nécessité le package : statnet.common</span></div><div class='output co'>#&gt; <span class='message'></span>
+#&gt; <span class='message'>Attachement du package : 'statnet.common'</span></div><div class='output co'>#&gt; <span class='message'>The following object is masked from 'package:base':</span>
 #&gt; <span class='message'></span>
-#&gt; <span class='message'>    order</span></div><div class='output co'>#&gt; <span class='message'>Loading required package: network</span></div><div class='output co'>#&gt; <span class='warning'>Warning: package 'network' was built under R version 3.4.4</span></div><div class='output co'>#&gt; <span class='message'>network: Classes for Relational Data</span>
+#&gt; <span class='message'>    order</span></div><div class='output co'>#&gt; <span class='message'>Le chargement a nécessité le package : network</span></div><div class='output co'>#&gt; <span class='message'>network: Classes for Relational Data</span>
 #&gt; <span class='message'>Version 1.13.0.1 created on 2015-08-31.</span>
 #&gt; <span class='message'>copyright (c) 2005, Carter T. Butts, University of California-Irvine</span>
 #&gt; <span class='message'>                    Mark S. Handcock, University of California -- Los Angeles</span>
@@ -218,20 +224,20 @@ for <span class="pkg">ergm</span> objects.</p>
 #&gt; <span class='message'>constriant which distorted the sampled distribution somewhat. In</span>
 #&gt; <span class='message'>addition, Sampson's Monks datasets had mislabeled vertices. See the</span>
 #&gt; <span class='message'>NEWS and the documentation for more details.</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Attaching package: 'xergm.common'</span></div><div class='output co'>#&gt; <span class='message'>The following object is masked from 'package:ergm':</span>
+#&gt; <span class='message'>Attachement du package : 'xergm.common'</span></div><div class='output co'>#&gt; <span class='message'>The following object is masked from 'package:ergm':</span>
 #&gt; <span class='message'></span>
-#&gt; <span class='message'>    gof</span></div><div class='output co'>#&gt; <span class='message'>Loading required package: btergm</span></div><div class='output co'>#&gt; <span class='warning'>Warning: package 'btergm' was built under R version 3.4.4</span></div><div class='output co'>#&gt; <span class='message'>Package:  btergm</span>
+#&gt; <span class='message'>    gof</span></div><div class='output co'>#&gt; <span class='message'>Le chargement a nécessité le package : btergm</span></div><div class='output co'>#&gt; <span class='message'>Package:  btergm</span>
 #&gt; <span class='message'>Version:  1.9.1</span>
 #&gt; <span class='message'>Date:     2018-02-14</span>
 #&gt; <span class='message'>Authors:  Philip Leifeld (University of Glasgow)</span>
 #&gt; <span class='message'>          Skyler J. Cranmer (The Ohio State University)</span>
-#&gt; <span class='message'>          Bruce A. Desmarais (Pennsylvania State University)</span></div><div class='output co'>#&gt; <span class='message'>Loading required package: tnam</span></div><div class='output co'>#&gt; <span class='warning'>Warning: package 'tnam' was built under R version 3.4.3</span></div><div class='output co'>#&gt; <span class='message'>Package:  tnam</span>
+#&gt; <span class='message'>          Bruce A. Desmarais (Pennsylvania State University)</span></div><div class='output co'>#&gt; <span class='message'>Le chargement a nécessité le package : tnam</span></div><div class='output co'>#&gt; <span class='message'>Package:  tnam</span>
 #&gt; <span class='message'>Version:  1.6.5</span>
 #&gt; <span class='message'>Date:     2017-03-31</span>
 #&gt; <span class='message'>Authors:  Philip Leifeld (University of Glasgow)</span>
-#&gt; <span class='message'>          Skyler J. Cranmer (The Ohio State University)</span></div><div class='output co'>#&gt; <span class='message'>Loading required package: rem</span></div><div class='output co'>#&gt; <span class='warning'>Warning: package 'rem' was built under R version 3.4.3</span></div><div class='output co'>#&gt; <span class='message'>Loading required package: GERGM</span></div><div class='output co'>#&gt; <span class='warning'>Warning: package 'GERGM' was built under R version 3.4.3</span></div><div class='output co'>#&gt; <span class='message'>GERGM: Generalized Exponential Random Graph Models</span>
-#&gt; <span class='message'>Version 0.11.2 created on 2017-03-14.</span>
-#&gt; <span class='message'>copyright (c) 2017, Matthew J. Denny, Penn State University</span>
+#&gt; <span class='message'>          Skyler J. Cranmer (The Ohio State University)</span></div><div class='output co'>#&gt; <span class='message'>Le chargement a nécessité le package : rem</span></div><div class='output co'>#&gt; <span class='message'>Le chargement a nécessité le package : GERGM</span></div><div class='output co'>#&gt; <span class='message'>GERGM: Generalized Exponential Random Graph Models</span>
+#&gt; <span class='message'>Version 0.13.0 created on 2018-05-14.</span>
+#&gt; <span class='message'>copyright (c) 2018, Matthew J. Denny, Penn State University</span>
 #&gt; <span class='message'>                    James D. Wilson, University of San Francisco</span>
 #&gt; <span class='message'>                    Skyler Cranmer, Ohio State University</span>
 #&gt; <span class='message'>                    Bruce A. Desmarais, Penn State University</span>

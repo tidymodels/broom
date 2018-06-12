@@ -65,6 +65,12 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
+      <a href="../articles/adding-tidiers.html">Adding new tidiers</a>
+    </li>
+    <li>
+      <a href="../articles/available-methods.html">Available methods</a>
+    </li>
+    <li>
       <a href="../articles/bootstrapping.html">Bootstrapping</a>
     </li>
     <li>
@@ -130,7 +136,7 @@ statistics.</p>
     </tr>
     <tr>
       <th>parametric</th>
-      <td><p>logical. Return parametric coefficients (<code>TRUE</code>) or 
+      <td><p>logical. Return parametric coefficients (<code>TRUE</code>) or
 information about smooth terms (<code>FALSE</code>)?</p></td>
     </tr>
     <tr>
@@ -144,10 +150,10 @@ information about smooth terms (<code>FALSE</code>)?</p></td>
     <p>All tidying methods return a data.frame without rownames, whose
 structure depends on the method chosen.</p>
 <p><code>tidy.gam</code> called on an object from the gam package,
-or an object from the mgcv package with <code>parametric = FALSE</code>, returns the 
+or an object from the mgcv package with <code>parametric = FALSE</code>, returns the
 tidied output of the parametric ANOVA with one row for each term in the formula.
-The columns match those in <a href='anova_tidiers.html'>anova_tidiers</a>. 
-<code>tidy.gam</code> called on a gam object from the mgcv package with 
+The columns match those in <a href='anova_tidiers.html'>anova_tidiers</a>.
+<code>tidy.gam</code> called on a gam object from the mgcv package with
 <code>parametric = TRUE</code> returns the fixed coefficients.</p>
 <p><code>glance.gam</code> returns a one-row data.frame with the columns</p>
 <dt>df</dt><dd><p>Degrees of freedom used by the coefficients</p></dd>
@@ -175,7 +181,7 @@ The columns match those in <a href='anova_tidiers.html'>anova_tidiers</a>.
     <span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>g</span>)
     <span class='fu'><a href='augment.html'>augment</a></span>(<span class='no'>g</span>)
     <span class='fu'><a href='glance.html'>glance</a></span>(<span class='no'>g</span>)
-}</div><div class='output co'>#&gt; <span class='warning'>Warning: package 'gam' was built under R version 3.4.4</span></div><div class='output co'>#&gt; <span class='message'>Loaded gam 1.15</span></div><div class='output co'>#&gt;         df    logLik      AIC      BIC deviance df.residual
+}</div><div class='output co'>#&gt; <span class='message'>Loaded gam 1.15</span></div><div class='output co'>#&gt;         df    logLik      AIC      BIC deviance df.residual
 #&gt; 1 5.999983 -34.55361 75.10722 82.29056 63.10725    75.00002</div><div class='input'>
 </div></pre>
   </div>

@@ -65,6 +65,12 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
+      <a href="../articles/adding-tidiers.html">Adding new tidiers</a>
+    </li>
+    <li>
+      <a href="../articles/available-methods.html">Available methods</a>
+    </li>
+    <li>
       <a href="../articles/bootstrapping.html">Bootstrapping</a>
     </li>
     <li>
@@ -151,6 +157,10 @@ and confidence intervals</p></td>
       <td><p>New data to make predictions from (optional)</p></td>
     </tr>
     <tr>
+      <th>newdata</th>
+      <td><p>If provided, performs predictions on the new data</p></td>
+    </tr>
+    <tr>
       <th>diagnostics</th>
       <td><p>Logical. Return results of diagnostic tests.</p></td>
     </tr>
@@ -180,6 +190,7 @@ If diagnostics is TRUE, glance also returns:
   <dt>p.value.Sargan</dt><dd><p>P value of Sargan test</p></dd>
   <dt>p.value.Wu.Hausman</dt><dd><p>P value of Wu-Hausman test</p></dd>
   <dt>p.value.weakinst</dt><dd><p>P value of weak instruments test</p></dd>
+and corresponding columns statistics.Sargan etc. for the statistics of those tests.
 
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
@@ -206,16 +217,16 @@ If diagnostics is TRUE, glance also returns:
     <span class='fu'>head</span>(<span class='fu'><a href='augment.html'>augment</a></span>(<span class='no'>ivr</span>))
 
     <span class='fu'><a href='glance.html'>glance</a></span>(<span class='no'>ivr</span>)
-}</div><div class='output co'>#&gt; <span class='warning'>Warning: package 'AER' was built under R version 3.4.3</span></div><div class='output co'>#&gt; <span class='warning'>Warning: package 'car' was built under R version 3.4.4</span></div><div class='output co'>#&gt; <span class='warning'>Warning: package 'carData' was built under R version 3.4.4</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Attaching package: 'car'</span></div><div class='output co'>#&gt; <span class='message'>The following object is masked from 'package:boot':</span>
+}</div><div class='output co'>#&gt; <span class='message'></span>
+#&gt; <span class='message'>Attachement du package : 'car'</span></div><div class='output co'>#&gt; <span class='message'>The following object is masked from 'package:boot':</span>
 #&gt; <span class='message'></span>
 #&gt; <span class='message'>    logit</span></div><div class='output co'>#&gt; <span class='message'>The following object is masked from 'package:dplyr':</span>
 #&gt; <span class='message'></span>
-#&gt; <span class='message'>    recode</span></div><div class='output co'>#&gt; <span class='warning'>Warning: package 'lmtest' was built under R version 3.4.4</span></div><div class='output co'>#&gt; <span class='warning'>Warning: package 'zoo' was built under R version 3.4.3</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Attaching package: 'zoo'</span></div><div class='output co'>#&gt; <span class='message'>The following objects are masked from 'package:base':</span>
+#&gt; <span class='message'>    recode</span></div><div class='output co'>#&gt; <span class='message'></span>
+#&gt; <span class='message'>Attachement du package : 'zoo'</span></div><div class='output co'>#&gt; <span class='message'>The following objects are masked from 'package:base':</span>
 #&gt; <span class='message'></span>
 #&gt; <span class='message'>    as.Date, as.Date.numeric</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Attaching package: 'lmtest'</span></div><div class='output co'>#&gt; <span class='message'>The following object is masked from 'package:lfe':</span>
+#&gt; <span class='message'>Attachement du package : 'lmtest'</span></div><div class='output co'>#&gt; <span class='message'>The following object is masked from 'package:lfe':</span>
 #&gt; <span class='message'></span>
 #&gt; <span class='message'>    waldtest</span></div><div class='output co'>#&gt; <span class='warning'>Warning: Exponentiating coefficients, but model did not use a log or logit link function</span></div><div class='output co'>#&gt;   r.squared adj.r.squared    sigma statistic      p.value df df.residual
 #&gt; 1 0.4294224     0.4040634 0.187856  13.28079 2.930789e-05  3          45</div><div class='input'>

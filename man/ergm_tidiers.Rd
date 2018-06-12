@@ -103,12 +103,12 @@ if (require("ergm")) {
 }
 \references{
 Hunter DR, Handcock MS, Butts CT, Goodreau SM, Morris M (2008b).
-\pkg{ergm}: A Package to Fit, Simulate and Diagnose Exponential-Family 
-Models for Networks. \emph{Journal of Statistical Software}, 24(3). 
+\pkg{ergm}: A Package to Fit, Simulate and Diagnose Exponential-Family
+Models for Networks. \emph{Journal of Statistical Software}, 24(3).
 \url{http://www.jstatsoft.org/v24/i03/}.
 }
 \seealso{
-\code{\link[ergm]{ergm}}, 
-\code{\link[ergm]{control.ergm}}, 
+\code{\link[ergm]{ergm}},
+\code{\link[ergm]{control.ergm}},
 \code{\link[ergm]{summary.ergm}}
 }
