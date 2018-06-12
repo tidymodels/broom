@@ -20,6 +20,7 @@ r_binary_packages:
   - glmnet
 
 before_install:
+  - sudo apt-get -y install libnlopt-dev r-recommended r-api-3
   - Rscript -e 'update.packages(ask = FALSE)'
 
 after_success:
