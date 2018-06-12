@@ -16,7 +16,7 @@ This function turns a map into a data frame.
 }
 \details{
 This code and documentation originated in ggplot2, but was called "fortify."
-In broom, "fortify" became "augment", which is reserved for functions that *add*
+In broom, "fortify" became "augment", which is reserved for functions that \emph{add}
 columns to existing data (based on a model fit, for example) so these functions
 were renamed as "tidy."
 }

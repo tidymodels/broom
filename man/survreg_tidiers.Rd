@@ -23,7 +23,7 @@
 \item{...}{extra arguments (not used)}
 
 \item{data}{original data; if it is not provided, it is reconstructed
-as best as possible with \code{\link{model.frame}}}
+as best as possible with \code{\link[=model.frame]{model.frame()}}}
 
 \item{newdata}{New data to use for prediction; optional}
 
@@ -46,19 +46,19 @@ structure depends on the method chosen.
 
 \code{augment} returns the original data.frame with the following
 additional columns:
-  \item{.fitted}{Fitted values of model}
-  \item{.se.fit}{Standard errors of fitted values}
-  \item{.resid}{Residuals}
+\item{.fitted}{Fitted values of model}
+\item{.se.fit}{Standard errors of fitted values}
+\item{.resid}{Residuals}
 
 \code{glance} returns a one-row data.frame with the columns:
-  \item{iter}{number of iterations}
-  \item{df}{degrees of freedom}
-  \item{statistic}{chi-squared statistic}
-  \item{p.value}{p-value from chi-squared test}
-  \item{logLik}{log likelihood}
-  \item{AIC}{Akaike information criterion}
-  \item{BIC}{Bayesian information criterion}
-  \item{df.residual}{residual degrees of freedom}
+\item{iter}{number of iterations}
+\item{df}{degrees of freedom}
+\item{statistic}{chi-squared statistic}
+\item{p.value}{p-value from chi-squared test}
+\item{logLik}{log likelihood}
+\item{AIC}{Akaike information criterion}
+\item{BIC}{Bayesian information criterion}
+\item{df.residual}{residual degrees of freedom}
 }
 \description{
 Tidies the coefficients of a parametric survival regression model,

@@ -13,26 +13,26 @@
 \arguments{
 \item{x}{An "orcutt" object returned by \code{cochrane.orcutt}}
 
-\item{...}{Extra arguments passed on to \code{\link{tidy.lm}}}
+\item{...}{Extra arguments passed on to \code{\link[=tidy.lm]{tidy.lm()}}}
 }
 \value{
 All tidying methods return a data.frame without rownames, whose
 structure depends on the method chosen.
 
 \code{tidy} returns the same information as
-\code{\link{tidy.lm}}, though without confidence interval options.
+\code{\link[=tidy.lm]{tidy.lm()}}, though without confidence interval options.
 
 \code{glance}{}
 
 \code{glance} returns a one-row data frame with the following columns:
-  \item{r.squared}{R-squared}
-  \item{adj.r.squared}{Adjusted R-squared}
-  \item{rho}{Spearman's rho autocorrelation}
-  \item{number.interaction}{Number of interactions}
-  \item{dw.original}{Durbin-Watson statistic of original fit}
-  \item{p.value.original}{P-value of original Durbin-Watson statistic}
-  \item{dw.transformed}{Durbin-Watson statistic of transformed fit}
-  \item{p.value.transformed}{P-value of autocorrelation after transformation}
+\item{r.squared}{R-squared}
+\item{adj.r.squared}{Adjusted R-squared}
+\item{rho}{Spearman's rho autocorrelation}
+\item{number.interaction}{Number of interactions}
+\item{dw.original}{Durbin-Watson statistic of original fit}
+\item{p.value.original}{P-value of original Durbin-Watson statistic}
+\item{dw.transformed}{Durbin-Watson statistic of transformed fit}
+\item{p.value.transformed}{P-value of autocorrelation after transformation}
 }
 \description{
 Tidies a Cochrane Orcutt object, which estimates autocorrelation
@@ -46,7 +46,7 @@ tidy(reg)
 if (require("orcutt", quietly = TRUE)) {
   co <- cochrane.orcutt(reg)
   co
-  
+
   tidy(co)
   glance(co)
 }

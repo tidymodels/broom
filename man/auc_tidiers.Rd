@@ -14,10 +14,10 @@
 }
 \value{
 A data frame with three columns:
-  \item{cutoff}{The cutoff of the prediction scores used
-  for classification}
-  \item{tpr}{The resulting true positive rate at that cutoff}
-  \item{fpr}{The resulting false positive rate at that cutoff}
+\item{cutoff}{The cutoff of the prediction scores used
+for classification}
+\item{tpr}{The resulting true positive rate at that cutoff}
+\item{fpr}{The resulting false positive rate at that cutoff}
 
 If the labels had names, those are added as an "instance" column.
 }
@@ -30,23 +30,23 @@ for example, draw ROC curves in ggplot2.
 if (require("AUC", quietly = TRUE)) {
   data(churn)
   r <- roc(churn$predictions,churn$labels)
-  
+
   td <- tidy(r)
   head(td)
-  
+
   library(ggplot2)
   ggplot(td, aes(fpr, tpr)) +
     geom_line()
-    
+
   # compare the ROC curves for two prediction algorithms
   library(dplyr)
   library(tidyr)
-  
+
   rocs <- churn \%>\%
     tidyr::gather(algorithm, value, -labels) \%>\%
     group_by(algorithm) \%>\%
     do(tidy(roc(.$value, .$labels)))
-  
+
   ggplot(rocs, aes(fpr, tpr, color = algorithm)) +
     geom_line()
 }

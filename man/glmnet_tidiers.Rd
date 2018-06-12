@@ -6,12 +6,15 @@
 \alias{glance.glmnet}
 \title{Tidiers for LASSO or elasticnet regularized fits}
 \usage{
-\method{tidy}{glmnet}(x, ...)
+\method{tidy}{glmnet}(x, return_zeros = FALSE, ...)
 
 \method{glance}{glmnet}(x, ...)
 }
 \arguments{
 \item{x}{a "glmnet" object}
+
+\item{return_zeros}{should coefficients with value zero be included in
+the results (default \code{FALSE})?}
 
 \item{...}{extra arguments (not used)}
 }
@@ -22,17 +25,17 @@ structure depends on the method chosen.
 \code{tidy} produces a data.frame with one row per combination of
 coefficient (including the intercept) and value of lambda for which the estimate
 is nonzero, with the columns:
-  \item{term}{coefficient name (V1...VN by default, along with
-  "(Intercept)")}
-  \item{step}{which step of lambda choices was used}
-  \item{estimate}{estimate of coefficient}
-  \item{lambda}{value of penalty parameter lambda}
-  \item{dev.ratio}{fraction of null deviance explained at each
-  value of lambda}
+\item{term}{coefficient name (V1...VN by default, along with
+"(Intercept)")}
+\item{step}{which step of lambda choices was used}
+\item{estimate}{estimate of coefficient}
+\item{lambda}{value of penalty parameter lambda}
+\item{dev.ratio}{fraction of null deviance explained at each
+value of lambda}
 
 \code{glance} returns a one-row data.frame with the values
-  \item{nulldev}{null deviance}
-  \item{npasses}{total passes over the data across all lambda values}
+\item{nulldev}{null deviance}
+\item{npasses}{total passes over the data across all lambda values}
 }
 \description{
 Tidying methods for regularized fits produced by \code{glmnet}, summarizing
@@ -56,21 +59,21 @@ if (require("glmnet", quietly = TRUE)) {
     x <- matrix(rnorm(100*20),100,20)
     y <- rnorm(100)
     fit1 <- glmnet(x,y)
-    
+
     head(tidy(fit1))
     glance(fit1)
-    
+
     library(dplyr)
     library(ggplot2)
-    
+
     tidied <- tidy(fit1) \%>\% filter(term != "(Intercept)")
-    
+
     ggplot(tidied, aes(step, estimate, group = term)) + geom_line()
     ggplot(tidied, aes(lambda, estimate, group = term)) +
         geom_line() + scale_x_log10()
- 
+
     ggplot(tidied, aes(lambda, dev.ratio)) + geom_line()
-    
+
     # works for other types of regressions as well, such as logistic
     g2 <- sample(1:2, 100, replace=TRUE)
     fit2 <- glmnet(x, g2, family="binomial")

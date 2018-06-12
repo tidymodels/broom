@@ -33,31 +33,31 @@ The structure depends on the method chosen.
 \code{tidy} returns one row for each estimated effect, either
 random or fixed depending on the \code{effects} parameter. If
 \code{effects = "random"}, it contains the columns
-  \item{group}{the group within which the random effect is being estimated}
-  \item{level}{level within group}
-  \item{term}{term being estimated}
-  \item{estimate}{estimated coefficient}
+\item{group}{the group within which the random effect is being estimated}
+\item{level}{level within group}
+\item{term}{term being estimated}
+\item{estimate}{estimated coefficient}
 
 If \code{effects="fixed"}, \code{tidy} returns the columns
-  \item{term}{fixed term being estimated}
-  \item{estimate}{estimate of fixed effect}
-  \item{std.error}{standard error}
-  \item{statistic}{t-statistic}
-  \item{p.value}{P-value computed from t-statistic}
+\item{term}{fixed term being estimated}
+\item{estimate}{estimate of fixed effect}
+\item{std.error}{standard error}
+\item{statistic}{t-statistic}
+\item{p.value}{P-value computed from t-statistic}
 
 \code{augment} returns one row for each original observation,
 with columns (each prepended by a .) added. Included are the columns
-  \item{.fitted}{predicted values}
-  \item{.resid}{residuals}
-  \item{.fixed}{predicted values with no random effects}
+\item{.fitted}{predicted values}
+\item{.resid}{residuals}
+\item{.fixed}{predicted values with no random effects}
 
 \code{glance} returns one row with the columns
-  \item{sigma}{the square root of the estimated residual variance}
-  \item{logLik}{the data's log-likelihood under the model}
-  \item{AIC}{the Akaike Information Criterion}
-  \item{BIC}{the Bayesian Information Criterion}
-  \item{deviance}{returned as NA. To quote Brian Ripley on R-help:
- McCullagh & Nelder (1989) would be the authoritative reference, but the 1982
+\item{sigma}{the square root of the estimated residual variance}
+\item{logLik}{the data's log-likelihood under the model}
+\item{AIC}{the Akaike Information Criterion}
+\item{BIC}{the Bayesian Information Criterion}
+\item{deviance}{returned as NA. To quote Brian Ripley on R-help:
+McCullagh & Nelder (1989) would be the authoritative reference, but the 1982
 first edition manages to use 'deviance' in three separate senses on one
 page. }
 }
@@ -84,11 +84,11 @@ if (require("nlme") & require("lme4")) {
     tidy(lmm1, effects = "fixed")
     head(augment(lmm1, sleepstudy))
     glance(lmm1)
-    
-    
+
+
     startvec <- c(Asym = 200, xmid = 725, scal = 350)
     nm1 <- nlme(circumference ~ SSlogis(age, Asym, xmid, scal),
-                  data = Orange, 
+                  data = Orange,
                   fixed = Asym + xmid + scal ~1,
                   random = Asym ~1,
                   start = startvec)

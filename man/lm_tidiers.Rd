@@ -42,65 +42,65 @@ only the \code{term} and \code{estimate} columns.}
 \item{newdata}{If provided, performs predictions on the new data}
 
 \item{type.predict}{Type of prediction to compute for a GLM; passed on to
-\code{\link{predict.glm}}}
+\code{\link[=predict.glm]{predict.glm()}}}
 
 \item{type.residuals}{Type of residuals to compute for a GLM; passed on to
-\code{\link{residuals.glm}}}
+\code{\link[=residuals.glm]{residuals.glm()}}}
 }
 \value{
 All tidying methods return a \code{data.frame} without rownames.
 The structure depends on the method chosen.
 
 \code{tidy.lm} returns one row for each coefficient, with five columns:
-  \item{term}{The term in the linear model being estimated and tested}
-  \item{estimate}{The estimated coefficient}
-  \item{std.error}{The standard error from the linear model}
-  \item{statistic}{t-statistic}
-  \item{p.value}{two-sided p-value}
+\item{term}{The term in the linear model being estimated and tested}
+\item{estimate}{The estimated coefficient}
+\item{std.error}{The standard error from the linear model}
+\item{statistic}{t-statistic}
+\item{p.value}{two-sided p-value}
 
 If the linear model is an "mlm" object (multiple linear model), there is an
 additional column:
-  \item{response}{Which response column the coefficients correspond to
-  (typically Y1, Y2, etc)}
+\item{response}{Which response column the coefficients correspond to
+(typically Y1, Y2, etc)}
 
 If \code{conf.int=TRUE}, it also includes columns for \code{conf.low} and
-\code{conf.high}, computed with \code{\link{confint}}.
+\code{conf.high}, computed with \code{\link[=confint]{confint()}}.
 
 When \code{newdata} is not supplied \code{augment.lm} returns
 one row for each observation, with seven columns added to the original
 data:
-  \item{.hat}{Diagonal of the hat matrix}
-  \item{.sigma}{Estimate of residual standard deviation when
-    corresponding observation is dropped from model}
-  \item{.cooksd}{Cooks distance, \code{\link{cooks.distance}}}
-  \item{.fitted}{Fitted values of model}
-  \item{.se.fit}{Standard errors of fitted values}
-  \item{.resid}{Residuals}
-  \item{.std.resid}{Standardised residuals}
+\item{.hat}{Diagonal of the hat matrix}
+\item{.sigma}{Estimate of residual standard deviation when
+corresponding observation is dropped from model}
+\item{.cooksd}{Cooks distance, \code{\link[=cooks.distance]{cooks.distance()}}}
+\item{.fitted}{Fitted values of model}
+\item{.se.fit}{Standard errors of fitted values}
+\item{.resid}{Residuals}
+\item{.std.resid}{Standardised residuals}
 
 (Some unusual "lm" objects, such as "rlm" from MASS, may omit
-\code{.cooksd} and \code{.std.resid}. "gam" from mgcv omits 
+\code{.cooksd} and \code{.std.resid}. "gam" from mgcv omits
 \code{.sigma})
 
 When \code{newdata} is supplied, \code{augment.lm} returns one row for each
 observation, with three columns added to the new data:
-  \item{.fitted}{Fitted values of model}
-  \item{.se.fit}{Standard errors of fitted values}
-  \item{.resid}{Residuals of fitted values on the new data}
+\item{.fitted}{Fitted values of model}
+\item{.se.fit}{Standard errors of fitted values}
+\item{.resid}{Residuals of fitted values on the new data}
 
 \code{glance.lm} returns a one-row data.frame with the columns
-  \item{r.squared}{The percent of variance explained by the model}
-  \item{adj.r.squared}{r.squared adjusted based on the degrees of freedom}
-  \item{sigma}{The square root of the estimated residual variance}
-  \item{statistic}{F-statistic}
-  \item{p.value}{p-value from the F test, describing whether the full
-  regression is significant}
-  \item{df}{Degrees of freedom used by the coefficients}
-  \item{logLik}{the data's log-likelihood under the model}
-  \item{AIC}{the Akaike Information Criterion}
-  \item{BIC}{the Bayesian Information Criterion}
-  \item{deviance}{deviance}
-  \item{df.residual}{residual degrees of freedom}
+\item{r.squared}{The percent of variance explained by the model}
+\item{adj.r.squared}{r.squared adjusted based on the degrees of freedom}
+\item{sigma}{The square root of the estimated residual variance}
+\item{statistic}{F-statistic}
+\item{p.value}{p-value from the F test, describing whether the full
+regression is significant}
+\item{df}{Degrees of freedom used by the coefficients}
+\item{logLik}{the data's log-likelihood under the model}
+\item{AIC}{the Akaike Information Criterion}
+\item{BIC}{the Bayesian Information Criterion}
+\item{deviance}{deviance}
+\item{df.residual}{residual degrees of freedom}
 }
 \description{
 These methods tidy the coefficients of a linear model into a summary,
@@ -112,7 +112,7 @@ If you have missing values in your model data, you may need to refit
 the model with \code{na.action = na.exclude}.
 
 If \code{conf.int=TRUE}, the confidence interval is computed with
-the \code{\link{confint}} function.
+the \code{\link[=confint]{confint()}} function.
 
 While \code{tidy} is supported for "mlm" objects, \code{augment} and
 \code{glance} are not.
@@ -202,7 +202,7 @@ result <- lm(b ~ a)
 tidy(result)
 }
 \seealso{
-\code{\link{summary.lm}}
+\code{\link[=summary.lm]{summary.lm()}}
 
 \link{na.action}
 }

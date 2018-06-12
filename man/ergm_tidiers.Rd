@@ -25,7 +25,7 @@ and confidence intervals}
 \item{quick}{whether to compute a smaller and faster version, containing
 only the \code{term} and \code{estimate} columns.}
 
-\item{...}{extra arguments passed to \code{\link[ergm]{summary.ergm}}}
+\item{...}{extra arguments passed to \code{\link[ergm:summary.ergm]{ergm::summary.ergm()}}}
 
 \item{deviance}{whether to report null and residual deviance for the model,
 along with degrees of freedom; defaults to \code{FALSE}}
@@ -38,34 +38,34 @@ All tidying methods return a \code{data.frame} without rownames.
 The structure depends on the method chosen.
 
 \code{tidy.ergm} returns one row for each coefficient, with five columns:
-  \item{term}{The term in the model being estimated and tested}
-  \item{estimate}{The estimated coefficient}
-  \item{std.error}{The standard error}
-  \item{mcmc.error}{The MCMC error}
-  \item{p.value}{The two-sided p-value}
+\item{term}{The term in the model being estimated and tested}
+\item{estimate}{The estimated coefficient}
+\item{std.error}{The standard error}
+\item{mcmc.error}{The MCMC error}
+\item{p.value}{The two-sided p-value}
 
 If \code{conf.int=TRUE}, it also includes columns for \code{conf.low} and
 \code{conf.high}.
 
 \code{glance.ergm} returns a one-row data.frame with the columns
-  \item{independence}{Whether the model assumed dyadic independence}
-  \item{iterations}{The number of iterations performed before convergence}
-  \item{logLik}{If applicable, the log-likelihood associated with the model}
-  \item{AIC}{The Akaike Information Criterion}
-  \item{BIC}{The Bayesian Information Criterion}
+\item{independence}{Whether the model assumed dyadic independence}
+\item{iterations}{The number of iterations performed before convergence}
+\item{logLik}{If applicable, the log-likelihood associated with the model}
+\item{AIC}{The Akaike Information Criterion}
+\item{BIC}{The Bayesian Information Criterion}
 
 If \code{deviance=TRUE}, and if the model supports it, the
 data frame will also contain the columns
-  \item{null.deviance}{The null deviance of the model}
-  \item{df.null}{The degrees of freedom of the null deviance}
-  \item{residual.deviance}{The residual deviance of the model}
-  \item{df.residual}{The degrees of freedom of the residual deviance}
+\item{null.deviance}{The null deviance of the model}
+\item{df.null}{The degrees of freedom of the null deviance}
+\item{residual.deviance}{The residual deviance of the model}
+\item{df.residual}{The degrees of freedom of the residual deviance}
 
 Last, if \code{mcmc=TRUE}, the data frame will also contain
 the columns
-  \item{MCMC.interval}{The interval used during MCMC estimation}
-  \item{MCMC.burnin}{The burn-in period of the MCMC estimation}
-  \item{MCMC.samplesize}{The sample size used during MCMC estimation}
+\item{MCMC.interval}{The interval used during MCMC estimation}
+\item{MCMC.burnin}{The burn-in period of the MCMC estimation}
+\item{MCMC.samplesize}{The sample size used during MCMC estimation}
 }
 \description{
 These methods tidy the coefficients of an exponential random graph model
@@ -103,12 +103,12 @@ if (require("ergm")) {
 }
 \references{
 Hunter DR, Handcock MS, Butts CT, Goodreau SM, Morris M (2008b).
-\pkg{ergm}: A Package to Fit, Simulate and Diagnose Exponential-Family 
-Models for Networks. \emph{Journal of Statistical Software}, 24(3). 
+\pkg{ergm}: A Package to Fit, Simulate and Diagnose Exponential-Family
+Models for Networks. \emph{Journal of Statistical Software}, 24(3).
 \url{http://www.jstatsoft.org/v24/i03/}.
 }
 \seealso{
-\code{\link[ergm]{ergm}}, 
-\code{\link[ergm]{control.ergm}}, 
-\code{\link[ergm]{summary.ergm}}
+\code{\link[ergm:ergm]{ergm::ergm()}},
+\code{\link[ergm:control.ergm]{ergm::control.ergm()}},
+\code{\link[ergm:summary.ergm]{ergm::summary.ergm()}}
 }

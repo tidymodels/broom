@@ -2,16 +2,16 @@
 #'
 #' Given an R statistical model or other non-tidy object, add columns to the
 #' original dataset such as predictions, residuals and cluster assignments.
-#' 
-#' Note that by convention the first argument is almost always \code{data},
+#'
+#' Note that by convention the first argument is almost always `data`,
 #' which specifies the original data object. This is not part of the S3
 #' signature, partly because it prevents \link{rowwise_df_tidiers} from
 #' taking a column name as the first argument.
-#' 
+#'
 #' @details This generic originated in the ggplot2 package, where it was called
 #' "fortify."
 #'
-#' @seealso \code{\link{augment.lm}}
+#' @seealso [augment.lm()]
 #' @param x model or other R object to convert to data frame
 #' @param ... other arguments passed to methods
 #' @export
@@ -21,6 +21,6 @@ augment <- function(x, ...) UseMethod("augment")
 augment.NULL <- function(x, ...) data.frame()
 
 #' @export
-augment.default <- function(x, ...) {   
-    stop("augment doesn't know how to deal with data of class ", class(x), call. = FALSE)
+augment.default <- function(x, ...) {
+  stop("augment doesn't know how to deal with data of class ", class(x)[1], call. = FALSE)
 }

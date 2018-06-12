@@ -1,7 +1,12 @@
-<!--
-%\VignetteEngine{knitr::knitr}
-%\VignetteIndexEntry{Introduction to broom}
--->
+---
+title: "Introduction to broom"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
 
 ```{r setup, echo=FALSE}
 library(knitr)
@@ -117,7 +122,13 @@ glance(tt)
 glance(wt)
 ```
 
-There is no `augment` function for `htest` objects, since there is no meaningful sense in which a hypothesis test produces output about each initial data point.
+`augment` method is defined only for chi-squared tests,  since there is no meaningful sense, for other tests, in which a hypothesis test produces output about each initial data point.
+
+```{r}
+chit <- chisq.test(xtabs(Freq ~ Sex + Class, data = as.data.frame(Titanic)))
+tidy(chit)
+augment(chit)
+```
 
 Conventions
 ------------

@@ -14,10 +14,10 @@
 }
 \value{
 A one-row data.frame with columns:
-  \item{ci.width}{Expected width of confidence interval}
-  \item{alternative}{Alternative hypothesis}
-  \item{p}{True proportion}
-  \item{n}{Total sample size}
+\item{ci.width}{Expected width of confidence interval}
+\item{alternative}{Alternative hypothesis}
+\item{p}{True proportion}
+\item{n}{Total sample size}
 }
 \description{
 Tidy a binWidth object from the "binGroup" package,
@@ -30,7 +30,7 @@ if (require("binGroup", quietly = TRUE)) {
     bw <- binWidth(100, .1)
     bw
     tidy(bw)
-    
+
     library(dplyr)
     d <- expand.grid(n = seq(100, 800, 100),
                      p = .5,
@@ -38,7 +38,7 @@ if (require("binGroup", quietly = TRUE)) {
                      stringsAsFactors = FALSE) \%>\%
         group_by(n, p, method) \%>\%
         do(tidy(binWidth(.$n, .$p, method = .$method)))
-    
+
     library(ggplot2)
     ggplot(d, aes(n, ci.width, color = method)) +
         geom_line() +

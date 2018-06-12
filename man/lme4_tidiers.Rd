@@ -46,31 +46,30 @@ The structure depends on the method chosen.
 \code{tidy} returns one row for each estimated effect, either
 with groups depending on the \code{effects} parameter.
 It contains the columns
-  \item{group}{the group within which the random effect is being estimated: \code{"fixed"} for fixed effects}
-  \item{level}{level within group (\code{NA} except for modes)}
-  \item{term}{term being estimated}
-  \item{estimate}{estimated coefficient}
-  \item{std.error}{standard error}
-  \item{statistic}{t- or Z-statistic (\code{NA} for modes)}
-  \item{p.value}{P-value computed from t-statistic (may be missing/NA)}
+\item{group}{the group within which the random effect is being estimated: \code{"fixed"} for fixed effects}
+\item{level}{level within group (\code{NA} except for modes)}
+\item{term}{term being estimated}
+\item{estimate}{estimated coefficient}
+\item{std.error}{standard error}
+\item{statistic}{t- or Z-statistic (\code{NA} for modes)}
+\item{p.value}{P-value computed from t-statistic (may be missing/NA)}
 
 \code{augment} returns one row for each original observation,
 with columns (each prepended by a .) added. Included are the columns
-  \item{.fitted}{predicted values}
-  \item{.resid}{residuals}
-  \item{.fixed}{predicted values with no random effects}
+\item{.fitted}{predicted values}
+\item{.resid}{residuals}
+\item{.fixed}{predicted values with no random effects}
 
 Also added for "merMod" objects, but not for "mer" objects,
 are values from the response object within the model (of type
-\code{lmResp}, \code{glmResp}, \code{nlsResp}, etc). These include \code{".mu",
-".offset", ".sqrtXwt", ".sqrtrwt", ".eta"}.
+\code{lmResp}, \code{glmResp}, \code{nlsResp}, etc). These include \code{".mu", ".offset", ".sqrtXwt", ".sqrtrwt", ".eta"}.
 
 \code{glance} returns one row with the columns
-  \item{sigma}{the square root of the estimated residual variance}
-  \item{logLik}{the data's log-likelihood under the model}
-  \item{AIC}{the Akaike Information Criterion}
-  \item{BIC}{the Bayesian Information Criterion}
-  \item{deviance}{deviance}
+\item{sigma}{the square root of the estimated residual variance}
+\item{logLik}{the data's log-likelihood under the model}
+\item{AIC}{the Akaike Information Criterion}
+\item{BIC}{the Bayesian Information Criterion}
+\item{deviance}{deviance}
 }
 \description{
 These methods tidy the coefficients of mixed effects models, particularly
@@ -98,14 +97,14 @@ if (require("lme4")) {
     tidy(lmm1, effects = "ran_modes", conf.int=TRUE)
     head(augment(lmm1, sleepstudy))
     glance(lmm1)
-    
+
     glmm1 <- glmer(cbind(incidence, size - incidence) ~ period + (1 | herd),
                   data = cbpp, family = binomial)
     tidy(glmm1)
     tidy(glmm1, effects = "fixed")
     head(augment(glmm1, cbpp))
     glance(glmm1)
-    
+
     startvec <- c(Asym = 200, xmid = 725, scal = 350)
     nm1 <- nlmer(circumference ~ SSlogis(age, Asym, xmid, scal) ~ Asym|Tree,
                   Orange, start = startvec)

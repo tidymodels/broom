@@ -7,7 +7,8 @@
 \alias{glance.coxph}
 \title{Tidiers for coxph object}
 \usage{
-\method{tidy}{coxph}(x, exponentiate = FALSE, conf.int = 0.95, ...)
+\method{tidy}{coxph}(x, exponentiate = FALSE, conf.int = TRUE,
+  conf.level = 0.95, ...)
 
 \method{augment}{coxph}(x, data = stats::model.frame(x), newdata,
   type.predict = "lp", type.residuals = "martingale", ...)
@@ -20,7 +21,9 @@
 \item{exponentiate}{whether to report the estimate and confidence intervals
 on an exponential scale}
 
-\item{conf.int}{confidence level to be used for CI}
+\item{conf.int}{whether to include a confidence interval}
+
+\item{conf.level}{confidence level of the interval, used only if \code{conf.int=TRUE}}
 
 \item{...}{Extra arguments, not used}
 
@@ -28,23 +31,23 @@ on an exponential scale}
 
 \item{newdata}{new data on which to do predictions}
 
-\item{type.predict}{type of predicted value (see \code{\link{predict.coxph}})}
+\item{type.predict}{type of predicted value (see \code{\link[=predict.coxph]{predict.coxph()}})}
 
-\item{type.residuals}{type of residuals (see \code{\link{residuals.coxph}})}
+\item{type.residuals}{type of residuals (see \code{\link[=residuals.coxph]{residuals.coxph()}})}
 }
 \value{
 \code{tidy} returns a data.frame with one row for each term,
 with columns
-  \item{estimate}{estimate of slope}
-  \item{std.error}{standard error of estimate}
-  \item{statistic}{test statistic}
-  \item{p.value}{p-value}
+\item{estimate}{estimate of slope}
+\item{std.error}{standard error of estimate}
+\item{statistic}{test statistic}
+\item{p.value}{p-value}
 
 \code{augment} returns the original data.frame with additional
 columns added:
-  \item{.fitted}{predicted values}
-  \item{.se.fit}{standard errors }
-  \item{.resid}{residuals (not present if \code{newdata} is provided)}
+\item{.fitted}{predicted values}
+\item{.se.fit}{standard errors }
+\item{.resid}{residuals (not present if \code{newdata} is provided)}
 
 \code{glance} returns a one-row data.frame with statistics
 calculated on the cox regression.
@@ -76,7 +79,7 @@ if (require("survival", quietly = TRUE)) {
     expected <- augment(cfit, lung, type.predict = "expected")
 
     glance(cfit)
-    
+
     # also works on clogit models
     resp <- levels(logan$occupation)
     n <- nrow(logan)
@@ -89,7 +92,7 @@ if (require("survival", quietly = TRUE)) {
     cl <- clogit(case ~ tocc + tocc:education + strata(id), logan2)
     tidy(cl)
     glance(cl)
-    
+
     library(ggplot2)
     ggplot(lp, aes(age, .fitted, color = sex)) + geom_point()
     ggplot(risks, aes(age, .fitted, color = sex)) + geom_point()

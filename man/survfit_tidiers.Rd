@@ -20,28 +20,28 @@ All tidying methods return a data.frame without rownames, whose
 structure depends on the method chosen.
 
 \code{tidy} returns a row for each time point, with columns
-  \item{time}{timepoint}
-  \item{n.risk}{number of subjects at risk at time t0}
-  \item{n.event}{number of events at time t}
-  \item{n.censor}{number of censored events}
-  \item{estimate}{estimate of survival or cumulative incidence rate when multistate}
-  \item{std.error}{standard error of estimate}
-  \item{conf.high}{upper end of confidence interval}
-  \item{conf.low}{lower end of confidence interval}
-  \item{state}{state if multistate survfit object inputted}
-  \item{strata}{strata if stratified survfit object inputted}
+\item{time}{timepoint}
+\item{n.risk}{number of subjects at risk at time t0}
+\item{n.event}{number of events at time t}
+\item{n.censor}{number of censored events}
+\item{estimate}{estimate of survival or cumulative incidence rate when multistate}
+\item{std.error}{standard error of estimate}
+\item{conf.high}{upper end of confidence interval}
+\item{conf.low}{lower end of confidence interval}
+\item{state}{state if multistate survfit object inputted}
+\item{strata}{strata if stratified survfit object inputted}
 
 \code{glance} returns one-row data.frame with the columns
-displayed by \code{\link{print.survfit}}
-  \item{records}{number of observations}
-  \item{n.max}{n.max}
-  \item{n.start}{n.start}
-  \item{events}{number of events}
-  \item{rmean}{Restricted mean (see \link[survival]{print.survfit})}
-  \item{rmean.std.error}{Restricted mean standard error}
-  \item{median}{median survival}
-  \item{conf.low}{lower end of confidence interval on median}
-  \item{conf.high}{upper end of confidence interval on median}
+displayed by \code{\link[=print.survfit]{print.survfit()}}
+\item{records}{number of observations}
+\item{n.max}{n.max}
+\item{n.start}{n.start}
+\item{events}{number of events}
+\item{rmean}{Restricted mean (see \code{\link[survival:print.survfit]{survival::print.survfit()}}}
+\item{rmean.std.error}{Restricted mean standard error}
+\item{median}{median survival}
+\item{conf.low}{lower end of confidence interval on median}
+\item{conf.high}{upper end of confidence interval on median}
 }
 \description{
 Construct tidied data frames showing survival curves over time.
@@ -57,14 +57,14 @@ since the values \code{glance} outputs would be calculated for each state.
 if (require("survival", quietly = TRUE)) {
     cfit <- coxph(Surv(time, status) ~ age + sex, lung)
     sfit <- survfit(cfit)
-    
+
     head(tidy(sfit))
     glance(sfit)
-    
+
     library(ggplot2)
     ggplot(tidy(sfit), aes(time, estimate)) + geom_line() +
         geom_ribbon(aes(ymin=conf.low, ymax=conf.high), alpha=.25)
-    
+
     # multi-state
     fitCI <- survfit(Surv(stop, status * as.numeric(event), type = "mstate") ~ 1,
                   data = mgus1, subset = (start == 0))
@@ -74,30 +74,30 @@ if (require("survival", quietly = TRUE)) {
     ggplot(td_multi, aes(time, estimate, group = state)) +
         geom_line(aes(color = state)) +
         geom_ribbon(aes(ymin = conf.low, ymax = conf.high), alpha = .25)
- 
+
     # perform simple bootstrapping
     library(dplyr)
     bootstraps <- lung \%>\% bootstrap(100) \%>\%
         do(tidy(survfit(coxph(Surv(time, status) ~ age + sex, .))))
-    
+
     ggplot(bootstraps, aes(time, estimate, group = replicate)) +
         geom_line(alpha = .25)
-    
+
     bootstraps_bytime <- bootstraps \%>\% group_by(time) \%>\%
         summarize(median = median(estimate),
                   low = quantile(estimate, .025),
                   high = quantile(estimate, .975))
-    
+
     ggplot(bootstraps_bytime, aes(x = time, y = median)) + geom_line() +
         geom_ribbon(aes(ymin = low, ymax = high), alpha = .25)
- 
+
     # bootstrap for median survival
     glances <- lung \%>\%
         bootstrap(100) \%>\%
         do(glance(survfit(coxph(Surv(time, status) ~ age + sex, .))))
-    
+
     glances
-    
+
     qplot(glances$median, binwidth = 15)
     quantile(glances$median, c(.025, .975))
 }

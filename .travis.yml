@@ -1,13 +1,30 @@
-# Sample .travis.yml for R projects
+# R for travis: see documentation at https://docs.travis-ci.com/user/languages/r
 
 language: r
-sudo: false
+sudo: required
 cache: packages
 
+r_binary_packages:
+  - rstanarm
+  - rstan
+  - dplyr
+  - Matrix
+  - lme4
+  - psych
+  - ergm
+  - survival
+  - brms
+  - mclust
+  - testthat
+  - tidyr
+  - glmnet
+
 before_install:
+  - sudo apt-get -y install libnlopt-dev r-recommended r-api-3
   - Rscript -e 'update.packages(ask = FALSE)'
 
 after_success:
   - Rscript -e 'covr::codecov()'
+
 use_bioc: true
 bioc_required: true

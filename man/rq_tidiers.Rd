@@ -57,61 +57,61 @@ structure depends on the method chosen.
 The columns depend upon the confidence interval method selected.
 
 \code{tidy.rqs} returns a data frame with one row for each coefficient at
-each quantile that was estimated. The columns depend upon the confidence interval 
+each quantile that was estimated. The columns depend upon the confidence interval
 method selected.
 
 \code{tidy.nlrq} returns one row for each coefficient in the model,
 with five columns:
-  \item{term}{The term in the nonlinear model being estimated and tested}
-  \item{estimate}{The estimated coefficient}
-  \item{std.error}{The standard error from the linear model}
-  \item{statistic}{t-statistic}
-  \item{p.value}{two-sided p-value}
+\item{term}{The term in the nonlinear model being estimated and tested}
+\item{estimate}{The estimated coefficient}
+\item{std.error}{The standard error from the linear model}
+\item{statistic}{t-statistic}
+\item{p.value}{two-sided p-value}
 
 \code{glance.rq} returns one row for each quantile (tau)
 with the columns:
- \item{tau}{quantile estimated}
- \item{logLik}{the data's log-likelihood under the model}
- \item{AIC}{the Akaike Information Criterion}
- \item{BIC}{the Bayesian Information Criterion}
- \item{df.residual}{residual degrees of freedom}
+\item{tau}{quantile estimated}
+\item{logLik}{the data's log-likelihood under the model}
+\item{AIC}{the Akaike Information Criterion}
+\item{BIC}{the Bayesian Information Criterion}
+\item{df.residual}{residual degrees of freedom}
 
 \code{glance.rq} returns one row for each quantile (tau)
 with the columns:
- \item{tau}{quantile estimated}
- \item{logLik}{the data's log-likelihood under the model}
- \item{AIC}{the Akaike Information Criterion}
- \item{BIC}{the Bayesian Information Criterion}
- \item{df.residual}{residual degrees of freedom}
+\item{tau}{quantile estimated}
+\item{logLik}{the data's log-likelihood under the model}
+\item{AIC}{the Akaike Information Criterion}
+\item{BIC}{the Bayesian Information Criterion}
+\item{df.residual}{residual degrees of freedom}
 
 \code{augment.rq} returns a row for each original observation
 with the following columns added:
- \item{.resid}{Residuals}
- \item{.fitted}{Fitted quantiles of the model}
- \item{.tau}{Quantile estimated}
- 
- Depending on the arguments passed on to \code{predict.rq} via \code{\dots}
- a confidence interval is also calculated on the fitted values resulting in
- columns:
-     \item{.conf.low}{Lower confidence interval value}
-     \item{.conf.high}{Upper confidence interval value}
-     
- See \code{predict.rq} for details on additional arguments to specify
- confidence intervals. \code{predict.rq} does not provide confidence intervals
- when \code{newdata} is provided.
+\item{.resid}{Residuals}
+\item{.fitted}{Fitted quantiles of the model}
+\item{.tau}{Quantile estimated}
+
+Depending on the arguments passed on to \code{predict.rq} via \code{\dots}
+a confidence interval is also calculated on the fitted values resulting in
+columns:
+\item{.conf.low}{Lower confidence interval value}
+\item{.conf.high}{Upper confidence interval value}
+
+See \code{predict.rq} for details on additional arguments to specify
+confidence intervals. \code{predict.rq} does not provide confidence intervals
+when \code{newdata} is provided.
 
 \code{augment.rqs} returns a row for each original observation
 and each estimated quantile (\code{tau}) with the following columns added:
- \item{.resid}{Residuals}
- \item{.fitted}{Fitted quantiles of the model}
- \item{.tau}{Quantile estimated}
- 
- \code{predict.rqs} does not return confidence interval estimates.
+\item{.resid}{Residuals}
+\item{.fitted}{Fitted quantiles of the model}
+\item{.tau}{Quantile estimated}
+
+\code{predict.rqs} does not return confidence interval estimates.
 
 \code{augment.rqs} returns a row for each original observation
 with the following columns added:
- \item{.resid}{Residuals}
- \item{.fitted}{Fitted quantiles of the model}
+\item{.resid}{Residuals}
+\item{.fitted}{Fitted quantiles of the model}
 }
 \description{
 These methods tidy the coefficients of a quantile regression
@@ -123,6 +123,12 @@ the model's statistics.
 If \code{se.type != "rank"} and \code{conf.int = TRUE} confidence
 intervals are calculated by \code{summary.rq}. Otherwise they are standard t
 based intervals.
+
+Only models with a single \code{tau} value may be passed.
+For multiple values, please use a \code{\link[purrr:map]{purrr::map()}} workflow instead, e.g.\preformatted{taus %>%
+  map(function(tau_val) rq(y ~ x, tau = tau_val)) %>%
+  map_dfr(glance)
+}
 
 This simply calls \code{augment.nls} on the "nlrq" object.
 }

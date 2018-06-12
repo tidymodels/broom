@@ -9,13 +9,13 @@
   conf.method = "perc", ...)
 }
 \arguments{
-\item{x}{\code{\link{boot}} object}
+\item{x}{\code{\link[=boot]{boot()}} object}
 
 \item{conf.int}{whether to include a confidence interval}
 
 \item{conf.level}{confidence level for CI}
 
-\item{conf.method}{method for computing confidence intervals (see \code{\link{boot.ci}})}
+\item{conf.method}{method for computing confidence intervals (see \code{\link[=boot.ci]{boot.ci()}})}
 
 \item{\dots}{extra arguments (not used)}
 }
@@ -23,10 +23,10 @@
 The \code{tidy} method returns a data frame with one row per
 bootstrapped statistic that was calculated, and the
 following columns:
-  \item{term}{Name of the computed statistic, if present}
-  \item{statistic}{The original values of the statistic}
-  \item{bias}{The bias of the original statistic value}
-  \item{std.error}{Standard error of the statistic}
+\item{term}{Name of the computed statistic, if present}
+\item{statistic}{The original values of the statistic}
+\item{bias}{The bias of the original statistic value}
+\item{std.error}{Standard error of the statistic}
 
 If weights were provided to the \code{boot} function, an \code{estimate}
 column is included showing the weighted bootstrap estimate, and the
@@ -48,7 +48,7 @@ if (require("boot")) {
           lot2 = c(69,35,26,21,18,16,13,12,12))
 
    g1 <- glm(lot2 ~ log(u), data = clotting, family = Gamma)
-   
+
    bootfun <- function(d, i) {
       coef(update(g1, data= d[i,]))
    }

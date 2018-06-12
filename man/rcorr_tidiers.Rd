@@ -18,11 +18,11 @@
 \value{
 A data.frame with one row for each pairing
 in the correlation matrix. Columns are:
-  \item{column1}{Name or index of the first column being described}
-  \item{column2}{Name or index of the second column being described}
-  \item{estimate}{Estimate of Pearson's r or Spearman's rho}
-  \item{n}{Number of observations used to compute the correlation}
-  \item{p.value}{P-value of correlation}
+\item{column1}{Name or index of the first column being described}
+\item{column2}{Name or index of the second column being described}
+\item{estimate}{Estimate of Pearson's r or Spearman's rho}
+\item{n}{Number of observations used to compute the correlation}
+\item{p.value}{P-value of correlation}
 }
 \description{
 Tidies a correlation matrix from the \code{rcorr} function in the
@@ -42,16 +42,16 @@ if (require("Hmisc", quietly = TRUE)) {
     mat[sample(length(mat), 2000)] <- NA
     # also column names
     colnames(mat) <- c(LETTERS, letters)
-    
+
     rc <- rcorr(mat)
-    
+
     td <- tidy(rc)
     head(td)
-    
+
     library(ggplot2)
     ggplot(td, aes(p.value)) +
         geom_histogram(binwidth = .1)
- 
+
     ggplot(td, aes(estimate, p.value)) +
         geom_point() +
         scale_y_log10()

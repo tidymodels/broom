@@ -1,3 +1,21 @@
+broom 0.4.4.9000
+-----------
+
+* `bootstrap()` and data frame tidiers have been deprecated
+* New vignettes on the available tidying methods, contributing new tidiers
+* Updated old vignettes to use `map/unnest` workflow rather than `rowwise/do`
+* Bump version number
+* Added `augment` method for chi-squared tests
+* Added tidiers for ordinal models: `clm` and `clmm` (ordinal), `polr` (MASS), `svyolr` (survey)
+* Added tidiers for `Kendall`, `MannKendall` and `SeasonalMannKendall` from the Kendall package (thanks to #285 from Jorge Cimentada)
+* Added support for objects from `glmnetUtils` package
+
+broom 0.4.4
+-----------
+
+* Fixed gam tidiers to work with "Gam" objects, due to an update in gam 1.15. This fixes failing CRAN tests
+* Improved test coverage (thanks to #267 from Derek Chiu)
+
 broom 0.4.3
 -----------
 

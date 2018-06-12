@@ -18,11 +18,11 @@
 \description{
 This method handles the return values of functions that return lists
 rather than S3 objects, such as \code{optim}, \code{svd}, or
-\code{\link[akima]{interp}}, and therefore cannot be handled by
+\code{\link[akima:interp]{akima::interp()}}, and therefore cannot be handled by
 S3 dispatch.
 }
 \details{
-Those tiders themselves are implemented as functions of the
+Those tidiers themselves are implemented as functions of the
 form tidy_<function> or glance_<function> that are not exported.
 }
 \seealso{

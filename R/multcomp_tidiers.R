@@ -3,14 +3,14 @@
 #' These methods originated in ggplot2, as "fortify." In broom,
 #' they were renamed "tidy" because they summarize terms and
 #' tests, rather than adding columns to a dataset.
-#' 
-#' @param x an object of class \code{glht}, \code{confint.glht},
-#'  \code{summary.glht} or \code{\link[multcomp]{cld}}
+#'
+#' @param x an object of class `glht`, `confint.glht`,
+#'  `summary.glht` or [multcomp::cld()]
 #' @param ... extra arguments (not used)
-#' 
+#'
 #' @name multcomp_tidiers
 #' @examples
-#' 
+#'
 #' if (require("multcomp") && require("ggplot2")) {
 #'     amod <- aov(breaks ~ wool + tension, data = warpbreaks)
 #'     wht <- glht(amod, linfct = mcp(tension = "Tukey"))
@@ -38,43 +38,47 @@ NULL
 #' @rdname multcomp_tidiers
 #' @export
 tidy.glht <- function(x, ...) {
-    unrowname(data.frame(
-        lhs = rownames(x$linfct),
-        rhs = x$rhs,
-        estimate = stats::coef(x),
-        check.names = FALSE,
-        stringsAsFactors = FALSE))
+  unrowname(data.frame(
+    lhs = rownames(x$linfct),
+    rhs = x$rhs,
+    estimate = stats::coef(x),
+    check.names = FALSE,
+    stringsAsFactors = FALSE
+  ))
 }
 
 #' @rdname multcomp_tidiers
 #' @method tidy confint.glht
 #' @export
 tidy.confint.glht <- function(x, ...) {
-    coef <- x$confint
-    colnames(coef) <- c("estimate", "conf.low", "conf.high")
+  coef <- x$confint
+  colnames(coef) <- c("estimate", "conf.low", "conf.high")
 
-    unrowname(data.frame(
-        lhs = rownames(coef),
-        rhs = x$rhs,
-        coef,
-        check.names = FALSE,
-        stringsAsFactors = FALSE))
+  unrowname(data.frame(
+    lhs = rownames(coef),
+    rhs = x$rhs,
+    coef,
+    check.names = FALSE,
+    stringsAsFactors = FALSE
+  ))
 }
 
 #' @method tidy summary.glht
 #' @rdname multcomp_tidiers
 #' @export
 tidy.summary.glht <- function(x, ...) {
-    coef <- as.data.frame(
-        x$test[c("coefficients", "sigma", "tstat", "pvalues")])
-    names(coef) <- c("estimate", "std.error", "statistic", "p.value")
-    
-    unrowname(data.frame(
-        lhs = rownames(coef),
-        rhs = x$rhs,
-        coef,
-        check.names = FALSE,
-        stringsAsFactors = FALSE))
+  coef <- as.data.frame(
+    x$test[c("coefficients", "sigma", "tstat", "pvalues")]
+  )
+  names(coef) <- c("estimate", "std.error", "statistic", "p.value")
+
+  unrowname(data.frame(
+    lhs = rownames(coef),
+    rhs = x$rhs,
+    coef,
+    check.names = FALSE,
+    stringsAsFactors = FALSE
+  ))
 }
 
 
@@ -82,9 +86,10 @@ tidy.summary.glht <- function(x, ...) {
 #' @rdname multcomp_tidiers
 #' @export
 tidy.cld <- function(x, ...) {
-    unrowname(data.frame(
-        lhs = names(x$mcletters$Letters),
-        letters = x$mcletters$Letters,
-        check.names = FALSE,
-        stringsAsFactors = FALSE))
+  unrowname(data.frame(
+    lhs = names(x$mcletters$Letters),
+    letters = x$mcletters$Letters,
+    check.names = FALSE,
+    stringsAsFactors = FALSE
+  ))
 }
