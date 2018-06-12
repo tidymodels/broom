@@ -11,7 +11,8 @@ r:
 #  - devel
   
 env:
-  - R_MAX_NUM_DLLS = 250
+  global:
+    - R_MAX_NUM_DLLS=999
 
 sudo: required
 cache: packages
