@@ -12,3 +12,5 @@ after_success:
   - Rscript -e 'covr::codecov()'
 
 bioc_required: true
+
+warnings_are_errors: false
