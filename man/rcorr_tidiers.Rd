@@ -18,11 +18,11 @@
 \value{
 A data.frame with one row for each pairing
 in the correlation matrix. Columns are:
-  \item{column1}{Name or index of the first column being described}
-  \item{column2}{Name or index of the second column being described}
-  \item{estimate}{Estimate of Pearson's r or Spearman's rho}
-  \item{n}{Number of observations used to compute the correlation}
-  \item{p.value}{P-value of correlation}
+\item{column1}{Name or index of the first column being described}
+\item{column2}{Name or index of the second column being described}
+\item{estimate}{Estimate of Pearson's r or Spearman's rho}
+\item{n}{Number of observations used to compute the correlation}
+\item{p.value}{P-value of correlation}
 }
 \description{
 Tidies a correlation matrix from the \code{rcorr} function in the

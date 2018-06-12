@@ -38,9 +38,9 @@ wrap_rowwise_df <- function(func) {
 #' Tidying methods for rowwise_dfs from dplyr, for tidying each row and
 #' recombining the results
 #'
-#' These \code{tidy}, \code{augment} and \code{glance} methods are for
+#' These `tidy`, `augment` and `glance` methods are for
 #' performing tidying on each row of a rowwise data frame created by dplyr's
-#' \code{group_by} and \code{do} operations. They first group a rowwise data
+#' `group_by` and `do` operations. They first group a rowwise data
 #' frame based on all columns that are not lists, then perform the tidying
 #' operation on the specified column. This greatly shortens a common idiom
 #' of extracting tidy/augment/glance outputs after a do statement.
@@ -51,7 +51,7 @@ wrap_rowwise_df <- function(func) {
 #' _ methods it should be quoted.
 #' @param ... additional arguments to pass on to the respective tidying method
 #'
-#' @return A \code{"grouped_df"}, where the non-list columns of the
+#' @return A `"grouped_df"`, where the non-list columns of the
 #' original are used as grouping columns alongside the tidied outputs.
 #'
 #' @details Note that this functionality is not currently implemented for

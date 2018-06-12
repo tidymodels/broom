@@ -36,12 +36,12 @@ The columns match those in \link{anova_tidiers}.
 \code{parametric = TRUE} returns the fixed coefficients.
 
 \code{glance.gam} returns a one-row data.frame with the columns
-  \item{df}{Degrees of freedom used by the coefficients}
-  \item{logLik}{the data's log-likelihood under the model}
-  \item{AIC}{the Akaike Information Criterion}
-  \item{BIC}{the Bayesian Information Criterion}
-  \item{deviance}{deviance}
-  \item{df.residual}{residual degrees of freedom}
+\item{df}{Degrees of freedom used by the coefficients}
+\item{logLik}{the data's log-likelihood under the model}
+\item{AIC}{the Akaike Information Criterion}
+\item{BIC}{the Bayesian Information Criterion}
+\item{deviance}{deviance}
+\item{df.residual}{residual degrees of freedom}
 }
 \description{
 These methods tidy the coefficients of a "gam" object (generalized additive

@@ -5,7 +5,7 @@
 #' @param x summaryDefault object
 #' @param ... extra arguments, not used
 #'
-#' @return Both \code{tidy} and \code{glance} return the same object:
+#' @return Both `tidy` and `glance` return the same object:
 #' a one-row data frame with columns
 #'   \item{minimum}{smallest value in original vector}
 #'   \item{q1}{value at the first quartile}
@@ -14,7 +14,7 @@
 #'   \item{q3}{value at the third quartile}
 #'   \item{maximum}{largest value in original vector}
 #'   \item{NAs}{number of NA values (if any)}
-#' @seealso \code{\link{summary}}
+#' @seealso [summary()]
 #'
 #' @examples
 #'

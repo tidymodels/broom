@@ -6,7 +6,7 @@
 #' @param x A "betareg" object
 #' @param conf.int whether to include a confidence interval
 #' @param conf.level confidence level of the interval, used only if
-#' \code{conf.int=TRUE}
+#' `conf.int=TRUE`
 #'
 #' @name betareg_tidiers
 #'
@@ -14,9 +14,9 @@
 #'
 #' @return tidy returns a data.frame with one row for each term used to predict
 #' the mean, along with at least one term used to predict phi (the inverse of
-#' the variance). It starts with the column \code{component} containing either
+#' the variance). It starts with the column `component` containing either
 #' "mean" or "precision" to describe which is being modeled, then has the same
-#' columns as tidied linear models or glm's (see \code{\link{lm_tidiers}}).
+#' columns as tidied linear models or glm's (see [lm_tidiers()]).
 #'
 #' @examples
 #'
@@ -61,7 +61,7 @@ tidy.betareg <- function(x, conf.int = FALSE, conf.level = .95, ...) {
 #' each observation:
 #'   \item{.fitted}{Fitted values of model}
 #'   \item{.resid}{Residuals}
-#'   \item{.cooksd}{Cooks distance, \code{\link{cooks.distance}}}
+#'   \item{.cooksd}{Cooks distance, [cooks.distance()]}
 #'
 #' @export
 augment.betareg <- function(x, data = stats::model.frame(x), newdata,
@@ -77,7 +77,7 @@ augment.betareg <- function(x, data = stats::model.frame(x), newdata,
 #'
 #' @param ... Extra arguments, not used
 #'
-#' @return \code{glance} returns a one-row data.frame with the columns
+#' @return `glance` returns a one-row data.frame with the columns
 #'   \item{pseudo.r.squared}{the deviance of the null model}
 #'   \item{logLik}{the data's log-likelihood under the model}
 #'   \item{AIC}{the Akaike Information Criterion}

@@ -40,21 +40,21 @@ tidy returns a data.frame with one row for each term used to predict
 the mean, along with at least one term used to predict phi (the inverse of
 the variance). It starts with the column \code{component} containing either
 "mean" or "precision" to describe which is being modeled, then has the same
-columns as tidied linear models or glm's (see \code{\link{lm_tidiers}}).
+columns as tidied linear models or glm's (see \code{\link[=lm_tidiers]{lm_tidiers()}}).
 
 augment returns the original data, along with new columns describing
 each observation:
-  \item{.fitted}{Fitted values of model}
-  \item{.resid}{Residuals}
-  \item{.cooksd}{Cooks distance, \code{\link{cooks.distance}}}
+\item{.fitted}{Fitted values of model}
+\item{.resid}{Residuals}
+\item{.cooksd}{Cooks distance, \code{\link[=cooks.distance]{cooks.distance()}}}
 
 \code{glance} returns a one-row data.frame with the columns
-  \item{pseudo.r.squared}{the deviance of the null model}
-  \item{logLik}{the data's log-likelihood under the model}
-  \item{AIC}{the Akaike Information Criterion}
-  \item{BIC}{the Bayesian Information Criterion}
-  \item{df.residual}{residual degrees of freedom}
-  \item{df.null}{degrees of freedom under the null}
+\item{pseudo.r.squared}{the deviance of the null model}
+\item{logLik}{the data's log-likelihood under the model}
+\item{AIC}{the Akaike Information Criterion}
+\item{BIC}{the Bayesian Information Criterion}
+\item{df.residual}{residual degrees of freedom}
+\item{df.null}{degrees of freedom under the null}
 }
 \description{
 Tidy beta regression objects into summarized coefficients, add their fitted values

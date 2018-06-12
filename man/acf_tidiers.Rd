@@ -14,8 +14,8 @@
 }
 \value{
 \code{data.frame} with columns
- \item{lag}{lag values}
- \item{acf}{calculated correlation}
+\item{lag}{lag values}
+\item{acf}{calculated correlation}
 }
 \description{
 Tidy an "acf" object, which is the output of \code{acf} and the
@@ -45,7 +45,7 @@ p
 
 # with confidence intervals
 conf.level <- 0.95
-# from \\code{plot.acf} method
+# from `plot.acf` method
 len.data <- length(lh) # same as acf$n.used
 conf.int <- qnorm((1 + conf.level) / 2) / sqrt(len.data)
 p + geom_hline(yintercept = c(-conf.int, conf.int),

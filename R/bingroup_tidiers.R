@@ -55,13 +55,13 @@ tidy.binWidth <- function(x, ...) {
 #'
 #' @template boilerplate
 #'
-#' @return The \code{tidy} method returns a data.frame
+#' @return The `tidy` method returns a data.frame
 #' with one row for each iteration that was performed,
 #' with columns
 #'     \item{n}{Number of trials in this iteration}
 #'     \item{power}{The power achieved for this n}
 #'
-#' The \code{glance} method returns a one-row data.frame
+#' The `glance` method returns a one-row data.frame
 #' with columns
 #'     \item{power}{The power achieved by the analysis}
 #'     \item{n}{The sample size used to achieve this power}

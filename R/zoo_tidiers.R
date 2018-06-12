@@ -1,14 +1,14 @@
 #' Tidying methods for a zoo object
 #'
-#' Tidies \code{zoo} (Z's ordered observations) time series objects.
-#' \code{zoo} objects are not tidy by default because they contain one row
+#' Tidies `zoo` (Z's ordered observations) time series objects.
+#' `zoo` objects are not tidy by default because they contain one row
 #' for each index and one series per column, rather than one row per
 #' observation per series.
 #'
-#' @param x An object of class \code{"zoo"}
+#' @param x An object of class `"zoo"`
 #' @param ... extra arguments (not used)
 #'
-#' @return \code{tidy} returns a data frame with one row for each observation
+#' @return `tidy` returns a data frame with one row for each observation
 #' in each series, with the following columns:
 #'   \item{index}{Index (usually date) for the zoo object}
 #'   \item{series}{Name of the series}

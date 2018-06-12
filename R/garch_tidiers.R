@@ -1,17 +1,17 @@
 #' Tidying methods for a GARCH model (tseries package)
 #'
 #' This tidies the result of a coefficient of the GARCH model implemented in
-#' \code{tseries} package.
+#' `tseries` package.
 #'
 #' @param x garch object
-#' @param method \code{character} which specifies the hypothesis test to be shown in \code{glance}.
-#' The \code{garch} function reports 2 hypothesis tests: Jarque-Bera to residuals
+#' @param method `character` which specifies the hypothesis test to be shown in `glance`.
+#' The `garch` function reports 2 hypothesis tests: Jarque-Bera to residuals
 #' and Box-Ljung to squared residuals.
-#' @param data original data (used with \code{augment})
-#' @param newdata new data provided for predition use (used with \code{augment})
+#' @param data original data (used with `augment`)
+#' @param newdata new data provided for predition use (used with `augment`)
 #' @param ... extra arguments (not used)
 #'
-#' @return A \code{data.frame} with one row for each coefficient, with five columns:
+#' @return A `data.frame` with one row for each coefficient, with five columns:
 #'   \item{term}{The term in the linear model being estimated and tested}
 #'   \item{estimate}{The estimated coefficient}
 #'   \item{std.error}{The standard error}
@@ -46,7 +46,7 @@ tidy.garch <- function(x, ...) {
 
 #' @rdname garch_tidiers
 #'
-#' @return A \code{data.frame} with one row, with seven columns:
+#' @return A `data.frame` with one row, with seven columns:
 #'   \item{statistic}{Test statistic used to compute the p-value}
 #'   \item{p.value}{P-value}
 #'   \item{parameter}{Parameter field in the htest, typically degrees of
@@ -76,15 +76,15 @@ glance.summary.garch <- function(x, method, ...) {
 
 #' @rdname garch_tidiers
 #'
-#' @return \code{augment.garch} returns one row for each observation of the
-#' original \code{data}, with three columns added:
+#' @return `augment.garch` returns one row for each observation of the
+#' original `data`, with three columns added:
 #'   \item{.time}{Sampling times of time series}
 #'   \item{.fitted}{Fitted values of model}
 #'   \item{.resid}{Residuals}
-#' The \code{data} must be provided, since the garch object doesn't has the data
+#' The `data` must be provided, since the garch object doesn't has the data
 #' in it.
-#' When \code{newdata} is supplied, \code{augment.garch} returns one row for each
-#' observation of \code{newdata} with the columns added:
+#' When `newdata` is supplied, `augment.garch` returns one row for each
+#' observation of `newdata` with the columns added:
 #'   \item{.time}{Sampling times of time series}
 #'   \item{.fitted}{Fitted values of model}
 #'

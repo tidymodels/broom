@@ -4,7 +4,7 @@
 \alias{prcomp_tidiers}
 \alias{tidy.prcomp}
 \alias{augment.prcomp}
-\title{Tidying methods for principal components analysis via \code{\link{prcomp}}}
+\title{Tidying methods for principal components analysis via \code{\link[=prcomp]{prcomp()}}}
 \usage{
 \method{tidy}{prcomp}(x, matrix = "u", ...)
 
@@ -12,7 +12,7 @@
 }
 \arguments{
 \item{x}{an object of class \code{"prcomp"} resulting from a call to
-\code{\link[stats]{prcomp}}}
+\code{\link[stats:prcomp]{stats::prcomp()}}}
 
 \item{matrix}{character; Indicates which sets of eigenvectors are returned
 in tidy form. "v", "rotation", or "variables" will return information about
@@ -38,29 +38,29 @@ structure depends on the method chosen.
 If \code{matrix} is "u", "samples", or "x", the \code{tidy} method
 returns
 \describe{
-   \item{\code{row}}{The sample labels (rownames) of the data set on
-  which PCA was performed}
-  \item{\code{PC}}{An integer vector indicating the principal component}
-  \item{\code{value}}{The value of the eigenvector (axis score) on the
-  indicated principal component}
+\item{\code{row}}{The sample labels (rownames) of the data set on
+which PCA was performed}
+\item{\code{PC}}{An integer vector indicating the principal component}
+\item{\code{value}}{The value of the eigenvector (axis score) on the
+indicated principal component}
 }
 
 If \code{matrix} is "v", "variables", or "rotation", the \code{tidy} method
 returns
 \describe{
-   \item{\code{row}}{The variable labels (colnames) of the data set on
-  which PCA was performed}
-  \item{\code{PC}}{An integer vector indicating the principal component}
-  \item{\code{value}}{The value of the eigenvector (axis score) on the
-  indicated principal component}
+\item{\code{row}}{The variable labels (colnames) of the data set on
+which PCA was performed}
+\item{\code{PC}}{An integer vector indicating the principal component}
+\item{\code{value}}{The value of the eigenvector (axis score) on the
+indicated principal component}
 }
 
 If \code{matrix} is "d" or "pcs", the \code{tidy} method returns
 \describe{
-  \item{\code{PC}}{An integer vector indicating the principal component}
-  \item{\code{std.dev}}{Standard deviation explained by this PC}
-  \item{\code{percent}}{Percentage of variation explained}
-  \item{\code{cumulative}}{Cumulative percentage of variation explained}
+\item{\code{PC}}{An integer vector indicating the principal component}
+\item{\code{std.dev}}{Standard deviation explained by this PC}
+\item{\code{percent}}{Percentage of variation explained}
+\item{\code{cumulative}}{Cumulative percentage of variation explained}
 }
 
 The \code{augment.prcomp} method returns a data frame containing
@@ -109,7 +109,7 @@ ggplot(au, aes(.fittedPC1, .fittedPC2)) +
 
 }
 \seealso{
-\code{\link{prcomp}}, \link{svd_tidiers}
+\code{\link[=prcomp]{prcomp()}}, \link{svd_tidiers}
 }
 \author{
 Gavin L. Simpson

@@ -21,17 +21,17 @@ structure depends on the method chosen.
 
 \code{tidy} produces a data.frame with one row per choice of lambda,
 with columns
-  \item{lambda}{penalty parameter lambda}
-  \item{estimate}{estimate (median) of mean-squared error or other
-  criterion}
-  \item{std.error}{standard error of criterion}
-  \item{conf.high}{high end of confidence interval on criterion}
-  \item{conf.low}{low end of confidence interval on criterion}
-  \item{nzero}{number of parameters that are zero at this choice of lambda}
+\item{lambda}{penalty parameter lambda}
+\item{estimate}{estimate (median) of mean-squared error or other
+criterion}
+\item{std.error}{standard error of criterion}
+\item{conf.high}{high end of confidence interval on criterion}
+\item{conf.low}{low end of confidence interval on criterion}
+\item{nzero}{number of parameters that are zero at this choice of lambda}
 
 \code{glance} returns a one-row data.frame with the values
-  \item{nulldev}{null deviance}
-  \item{npasses}{total passes over the data across all lambda values}
+\item{nulldev}{null deviance}
+\item{npasses}{total passes over the data across all lambda values}
 }
 \description{
 Tidying methods for cross-validation performed by \code{glmnet.cv},

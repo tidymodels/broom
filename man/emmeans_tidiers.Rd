@@ -20,26 +20,26 @@
 \code{emmGrid} and \code{lsmobj} objects}
 
 \item{...}{Extra arguments, passed on to
-\link[emmeans]{summary.emmGrid} or \link[lsmeans]{summary.ref.grid}}
+\code{\link[emmeans:summary.emmGrid]{emmeans::summary.emmGrid()}} or \code{\link[lsmeans:summary.ref.grid]{lsmeans::summary.ref.grid()}}}
 }
 \value{
 A data frame with one observation for each estimated
 mean, and one column for each combination of factors, along with
 the following variables:
-  \item{estimate}{Estimated least-squares mean}
-  \item{std.error}{Standard error of estimate}
-  \item{df}{Degrees of freedom}
-  \item{conf.low}{Lower bound of confidence interval}
-  \item{conf.high}{Upper bound of confidence interval}
+\item{estimate}{Estimated least-squares mean}
+\item{std.error}{Standard error of estimate}
+\item{df}{Degrees of freedom}
+\item{conf.low}{Lower bound of confidence interval}
+\item{conf.high}{Upper bound of confidence interval}
 
 When the input is a contrast, each row will contain one estimated
 contrast, along with some of the following columns:
-  \item{level1}{One level of the factor being contrasted}
-  \item{level2}{Second level}
-  \item{contrast}{In cases where the contrast is not made up of
-  two levels, describes each}
-  \item{statistic}{T-ratio statistic}
-  \item{p.value}{P-value}
+\item{level1}{One level of the factor being contrasted}
+\item{level2}{Second level}
+\item{contrast}{In cases where the contrast is not made up of
+two levels, describes each}
+\item{statistic}{T-ratio statistic}
+\item{p.value}{P-value}
 }
 \description{
 Tidiers for estimated marginal means objects, which report the predicted
@@ -51,7 +51,7 @@ purposes within the \code{lsmeans} package but have similar output).
 }
 \details{
 There are a large number of arguments that can be
-passed on to \link[emmeans]{summary.emmGrid} or \link[lsmeans]{summary.ref.grid}.
+passed on to \code{\link[emmeans:summary.emmGrid]{emmeans::summary.emmGrid()}} or \code{\link[lsmeans:summary.ref.grid]{lsmeans::summary.ref.grid()}}.
 By broom convention, we use \code{conf.level} to pass the \code{level} argument.
 }
 \examples{

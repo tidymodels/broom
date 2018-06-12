@@ -14,12 +14,12 @@
 \value{
 \code{tidy} returns a data frame with one row for each observation, with the
 following columns:
-  \item{index}{Index (i.e. date or time) for the "ts" object.}
-  \item{series}{Name of the series (multivariate "ts" objects only).}
-  \item{value}{Value of the observation.}
+\item{index}{Index (i.e. date or time) for the "ts" object.}
+\item{series}{Name of the series (multivariate "ts" objects only).}
+\item{value}{Value of the observation.}
 }
 \description{
-Turn a univariate or multivariate \code{\link{ts}} object into a tidy data
+Turn a univariate or multivariate \code{\link[=ts]{ts()}} object into a tidy data
 frame.
 }
 \examples{

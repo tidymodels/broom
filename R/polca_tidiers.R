@@ -2,20 +2,20 @@
 #'
 #' Tidiers for poLCA latent class regression models. Summarize the
 #' probabilities of each outcome for each variable within each class
-#' with \code{tidy}, add predictions to the data with \code{augment},
-#' or find the log-likelihood/AIC/BIC with \code{glance}.
+#' with `tidy`, add predictions to the data with `augment`,
+#' or find the log-likelihood/AIC/BIC with `glance`.
 #'
 #' @param x A poLCA object
-#' @param data For \code{augment}, the original dataset used to fit
+#' @param data For `augment`, the original dataset used to fit
 #' the latent class model. If not given, uses manifest variables in
-#' \code{x$y} and, if applicable, covariates in \code{x$x}
+#' `x$y` and, if applicable, covariates in `x$x`
 #' @param ... Extra arguments, not used
 #'
 #' @name poLCA_tidiers
 #'
 #' @template boilerplate
 #'
-#' @return \code{tidy} returns a data frame with one row per
+#' @return `tidy` returns a data frame with one row per
 #' variable-class-outcome combination, with columns:
 #' \describe{
 #'   \item{variable}{Manifest variable}
@@ -112,7 +112,7 @@ tidy.poLCA <- function(x, ...) {
 
 #' @rdname poLCA_tidiers
 #'
-#' @return \code{augment} returns a data frame with one row
+#' @return `augment` returns a data frame with one row
 #' for each original observation, augmented with the following
 #' columns:
 #' \describe{
@@ -120,14 +120,14 @@ tidy.poLCA <- function(x, ...) {
 #'   \item{.probability}{Posterior probability of predicted class}
 #' }
 #'
-#' If the \code{data} argument is given, those columns are included in the output
+#' If the `data` argument is given, those columns are included in the output
 #' (only rows for which predictions could be made).
-#' Otherwise, the \code{y} element of the poLCA object, which contains the
+#' Otherwise, the `y` element of the poLCA object, which contains the
 #' manifest variables used to fit the model, are used, along with any covariates,
-#' if present, in \code{x}.
+#' if present, in `x`.
 #'
 #' Note that while the probability of all the classes (not just the predicted
-#' modal class) can be found in the \code{posterior} element, these are not
+#' modal class) can be found in the `posterior` element, these are not
 #' included in the augmented output, since it would result in potentially
 #' many additional columns, which augment tends to avoid.
 #'
@@ -162,7 +162,7 @@ augment.poLCA <- function(x, data, ...) {
 
 #' @rdname poLCA_tidiers
 #'
-#' @return \code{glance} returns a one-row data frame with the
+#' @return `glance` returns a one-row data frame with the
 #' following columns:
 #' \describe{
 #'   \item{logLik}{the data's log-likelihood under the model}

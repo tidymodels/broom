@@ -26,19 +26,19 @@ structure depends on the method chosen.
 
 \code{tidy} returns one row for each coefficient in the model,
 with five columns:
-  \item{term}{The term in the nonlinear model being estimated and tested}
-  \item{estimate}{The estimated coefficient}
-  \item{std.error}{The standard error from the linear model}
+\item{term}{The term in the nonlinear model being estimated and tested}
+\item{estimate}{The estimated coefficient}
+\item{std.error}{The standard error from the linear model}
 
 If \code{conf.int = TRUE}, also returns
-  \item{conf.low}{low end of confidence interval}
-  \item{conf.high}{high end of confidence interval}
+\item{conf.low}{low end of confidence interval}
+\item{conf.high}{high end of confidence interval}
 
 \code{glance} returns one row with the columns
-  \item{sigma}{the square root of the estimated residual variance}
-  \item{logLik}{the data's log-likelihood under the model}
-  \item{AIC}{the Akaike Information Criterion}
-  \item{BIC}{the Bayesian Information Criterion}
+\item{sigma}{the square root of the estimated residual variance}
+\item{logLik}{the data's log-likelihood under the model}
+\item{AIC}{the Akaike Information Criterion}
+\item{BIC}{the Bayesian Information Criterion}
 }
 \description{
 These methods tidy the coefficients of ARIMA models of univariate time

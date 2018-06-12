@@ -29,19 +29,19 @@ structure depends on the method chosen.
 \code{tidy} returns a data frame with one row per
 variable-class-outcome combination, with columns:
 \describe{
-  \item{variable}{Manifest variable}
-  \item{class}{Latent class ID, an integer}
-  \item{outcome}{Outcome of manifest variable}
-  \item{estimate}{Estimated class-conditional response probability}
-  \item{std.error}{Standard error of estimated probability}
+\item{variable}{Manifest variable}
+\item{class}{Latent class ID, an integer}
+\item{outcome}{Outcome of manifest variable}
+\item{estimate}{Estimated class-conditional response probability}
+\item{std.error}{Standard error of estimated probability}
 }
 
 \code{augment} returns a data frame with one row
 for each original observation, augmented with the following
 columns:
 \describe{
-  \item{.class}{Predicted class, using modal assignment}
-  \item{.probability}{Posterior probability of predicted class}
+\item{.class}{Predicted class, using modal assignment}
+\item{.probability}{Posterior probability of predicted class}
 }
 
 If the \code{data} argument is given, those columns are included in the output
@@ -58,15 +58,15 @@ many additional columns, which augment tends to avoid.
 \code{glance} returns a one-row data frame with the
 following columns:
 \describe{
-  \item{logLik}{the data's log-likelihood under the model}
-  \item{AIC}{the Akaike Information Criterion}
-  \item{BIC}{the Bayesian Information Criterion}
-  \item{g.squared}{The likelihood ratio/deviance statistic}
-  \item{chi.squared}{The Pearson Chi-Square goodness of fit statistic
-  for multiway tables}
-  \item{df}{Number of parameters estimated, and therefore degrees of
-  freedom used}
-  \item{df.residual}{Number of residual degrees of freedom left}
+\item{logLik}{the data's log-likelihood under the model}
+\item{AIC}{the Akaike Information Criterion}
+\item{BIC}{the Bayesian Information Criterion}
+\item{g.squared}{The likelihood ratio/deviance statistic}
+\item{chi.squared}{The Pearson Chi-Square goodness of fit statistic
+for multiway tables}
+\item{df}{Number of parameters estimated, and therefore degrees of
+freedom used}
+\item{df.residual}{Number of residual degrees of freedom left}
 }
 }
 \description{

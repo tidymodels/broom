@@ -4,10 +4,22 @@ language: r
 sudo: false
 cache: packages
 
+r_binary_packages:
+  - lme4
+  - dplyr
+  - purrr
+  - devtools
+  - git2r
+  - data.table
+  - stringi
+  - matrixStats
+  - StanHeaders
+
 before_install:
   - Rscript -e 'update.packages(ask = FALSE)'
 
 after_success:
   - Rscript -e 'covr::codecov()'
+
 use_bioc: true
 bioc_required: true

@@ -20,12 +20,12 @@
 }
 \value{
 A data.frame with columns
-  \item{term}{Term within the model, or "Residuals"}
-  \item{df}{Degrees of freedom used by this term in the model}
-  \item{sumsq}{Sum of squares explained by this term}
-  \item{meansq}{Mean of sum of squares among degrees of freedom}
-  \item{statistic}{F statistic}
-  \item{p.value}{P-value from F test}
+\item{term}{Term within the model, or "Residuals"}
+\item{df}{Degrees of freedom used by this term in the model}
+\item{sumsq}{Sum of squares explained by this term}
+\item{meansq}{Mean of sum of squares among degrees of freedom}
+\item{statistic}{F statistic}
+\item{p.value}{P-value from F test}
 
 In the case of an \code{"aovlist"} object, there is also a \code{stratum}
 column describing the error stratum

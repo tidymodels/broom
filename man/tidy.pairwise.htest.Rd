@@ -13,9 +13,9 @@
 }
 \value{
 A data frame with one row per group/group comparison, with columns
-  \item{group1}{First group being compared}
-  \item{group2}{Second group being compared}
-  \item{p.value}{(Adjusted) p-value of comparison}
+\item{group1}{First group being compared}
+\item{group2}{Second group being compared}
+\item{p.value}{(Adjusted) p-value of comparison}
 }
 \description{
 Tidy a pairwise.htest object, containing (adjusted) p-values for multiple

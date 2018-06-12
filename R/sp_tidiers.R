@@ -2,11 +2,11 @@
 #'
 #' Tidy classes from the sp package to allow them to be plotted using ggplot2.
 #' To figure out the correct variable name for region, inspect
-#' \code{as.data.frame(x)}.
+#' `as.data.frame(x)`.
 #'
 #' These functions originated in the ggplot2 package as "fortify" functions.
 #'
-#' @param x \code{SpatialPolygonsDataFrame} to convert into a dataframe.
+#' @param x `SpatialPolygonsDataFrame` to convert into a dataframe.
 #' @param region name of variable used to split up regions
 #' @param ... not used by this method
 #'

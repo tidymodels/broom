@@ -34,21 +34,21 @@ All tidying methods return a data.frame without rownames, whose
 structure depends on the method chosen.
 
 \code{tidy.plm} returns a data frame with one row per
-coefficient, of the same form as \code{\link{tidy.lm}}.
+coefficient, of the same form as \code{\link[=tidy.lm]{tidy.lm()}}.
 
 \code{augment} returns a data frame with one row for each
 initial observation, adding the columns
-  \item{.fitted}{predicted (fitted) values}
-  \item{.resid}{residuals}
+\item{.fitted}{predicted (fitted) values}
+\item{.resid}{residuals}
 
 \code{glance} returns a one-row data frame with columns
-  \item{r.squared}{The percent of variance explained by the model}
-  \item{adj.r.squared}{r.squared adjusted based on the degrees of freedom}
-  \item{statistic}{F-statistic}
-  \item{p.value}{p-value from the F test, describing whether the full
-  regression is significant}
-  \item{deviance}{deviance}
-  \item{df.residual}{residual degrees of freedom}
+\item{r.squared}{The percent of variance explained by the model}
+\item{adj.r.squared}{r.squared adjusted based on the degrees of freedom}
+\item{statistic}{F-statistic}
+\item{p.value}{p-value from the F test, describing whether the full
+regression is significant}
+\item{deviance}{deviance}
+\item{df.residual}{residual degrees of freedom}
 }
 \description{
 Tidiers for panel regression linear models
@@ -73,5 +73,5 @@ if (require("plm", quietly = TRUE)) {
 
 }
 \seealso{
-\code{\link{lm_tidiers}}
+\code{\link[=lm_tidiers]{lm_tidiers()}}
 }

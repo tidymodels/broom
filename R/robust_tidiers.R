@@ -8,15 +8,15 @@
 #'
 #' @template boilerplate
 #'
-#' @return \code{tidy} and \code{augment} return the same results as \code{\link{lm_tidiers}}.
+#' @return `tidy` and `augment` return the same results as [lm_tidiers()].
 #'
-#' On an \code{lmRob} \code{glance} returns a one-row data frame with the following columns:
+#' On an `lmRob` `glance` returns a one-row data frame with the following columns:
 #'   \item{r.squared}{R-squared}
 #'   \item{deviance}{Robust deviance}
 #'   \item{sigma}{Residual scale estimate}
 #'   \item{df.residual}{Number of residual degrees of freedom}
 #'
-#' On an \code{glmRob} \code{glance} returns a one-row data frame with the following columns:
+#' On an `glmRob` `glance` returns a one-row data frame with the following columns:
 #'   \item{deviance}{Robust deviance}
 #'   \item{null.deviance}{Deviance under the null model}
 #'   \item{df.residual}{Number of residual degrees of freedom}
@@ -36,7 +36,7 @@
 #'
 #' @name robust_tidiers
 #'
-#' @seealso \code{\link{lm_tidiers}}, \code{\link[robust]{lmRob}}, \code{\link[robust]{glmRob}}
+#' @seealso [lm_tidiers()], [robust::lmRob()], [robust::glmRob()]
 #'
 #' @export
 tidy.lmRob <- function(x, ...) {

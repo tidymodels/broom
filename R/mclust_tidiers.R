@@ -1,18 +1,18 @@
 #' Tidying methods for Mclust objects
 #'
 #' These methods summarize the results of Mclust clustering into three
-#' tidy forms. \code{tidy} describes the size, mixing probability, mean
-#' and variability of each class, \code{augment} adds the class assignments and
+#' tidy forms. `tidy` describes the size, mixing probability, mean
+#' and variability of each class, `augment` adds the class assignments and
 #' their probabilities to the original data, and
-#' \code{glance} summarizes the model parameters of the clustering.
+#' `glance` summarizes the model parameters of the clustering.
 #'
 #' @param x Mclust object
-#' @param data Original data (required for \code{augment})
+#' @param data Original data (required for `augment`)
 #' @param ... extra arguments, not used
 #'
 #' @template boilerplate
 #'
-#' @seealso \code{\link[mclust]{Mclust}}
+#' @seealso [mclust::Mclust()]
 #'
 #' @examples
 #'
@@ -41,7 +41,7 @@ NULL
 
 #' @rdname mclust_tidiers
 #'
-#' @return \code{tidy} returns one row per component, with
+#' @return `tidy` returns one row per component, with
 #'   \item{component}{A factor describing the cluster from 1:k
 #'   (or 0:k in presence of a noise term in x)}
 #'   \item{size}{The size of each component}
@@ -75,7 +75,7 @@ tidy.Mclust <- function(x, ...) {
 
 #' @rdname mclust_tidiers
 #'
-#' @return \code{augment} returns the original data with two extra columns:
+#' @return `augment` returns the original data with two extra columns:
 #'   \item{.class}{The class assigned by the Mclust algorithm}
 #'   \item{.uncertainty}{The uncertainty associated with the classification}
 #'
@@ -94,7 +94,7 @@ augment.Mclust <- function(x, data, ...) {
 
 #' @rdname mclust_tidiers
 #'
-#' @return \code{glance} returns a one-row data.frame with the columns
+#' @return `glance` returns a one-row data.frame with the columns
 #'   \item{model}{A character string denoting the model at which the optimal BIC occurs}
 #'   \item{n}{The number of observations in the data}
 #'   \item{G}{The optimal number of mixture components}

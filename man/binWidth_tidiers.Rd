@@ -14,10 +14,10 @@
 }
 \value{
 A one-row data.frame with columns:
-  \item{ci.width}{Expected width of confidence interval}
-  \item{alternative}{Alternative hypothesis}
-  \item{p}{True proportion}
-  \item{n}{Total sample size}
+\item{ci.width}{Expected width of confidence interval}
+\item{alternative}{Alternative hypothesis}
+\item{p}{True proportion}
+\item{n}{Total sample size}
 }
 \description{
 Tidy a binWidth object from the "binGroup" package,
