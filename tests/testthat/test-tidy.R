@@ -62,6 +62,7 @@ test_that("tidy.nls works", {
 })
 
 test_that("tidy.survreg works", {
+  skip_if_not_installed("survival")
   # prepare data
   df <- mtcars
   df$lwr <- floor(mtcars$mpg)

@@ -1,4 +1,4 @@
-if (requireNamespace("muhaz")) {
+if (requireNamespace("muhaz", quietly = TRUE)) {
   context("Kernel based hazard rate estimates via muhaz")
   data(ovarian, package = "survival")
   mz <- muhaz::muhaz(ovarian$futime, ovarian$fustat)

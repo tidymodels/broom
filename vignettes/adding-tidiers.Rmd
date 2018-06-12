@@ -79,11 +79,13 @@ In general, we prefer informative errors to magical behaviors or untested succes
 
 ## Package dependencies
 
-In order to test your tidiers, you may need to add `your_package` to the **Suggests** section of broom's DESCRIPTION.
+In order to test your tidiers, you may need to add `your_package` to the **Suggests** section of broom's DESCRIPTION. You should then use `skip_if_not_installed("my_package")` at the beginning of any test that uses `my_package`.
 
 We are currently in the process of developing a new set of tests for tidying methods. Recommendations on how to test your tidiers will appear here soon.
 
-<!-- requireNamespace(package, quietly = TRUE)??? -->
+```{r, eval = FALSE}
+# TODO: example tests
+```
 
 At the moment, pull requests must pass the AppVeyor build to be added to `broom`. It is okay if the Travis CI build times out.
 

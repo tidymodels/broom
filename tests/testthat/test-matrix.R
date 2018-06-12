@@ -1,6 +1,7 @@
 context("matrix tidiers")
 
 test_that("matrix tidiers work", {
+  skip("Deprecating soon")
   mat <- as.matrix(mtcars)
 
   td <- tidy(mat)

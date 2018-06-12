@@ -1,6 +1,8 @@
 context("btergm tidiers")
 
 test_that("btergm tidiers work", {
+  skip_if_not_installed("network")
+  skip_if_not_installed("btergm")
   networks <- list()
   for (i in 1:10) {
     mat <- matrix(rbinom(100, 1, .25), nrow = 10, ncol = 10)
@@ -13,11 +15,12 @@ test_that("btergm tidiers work", {
     mat <- matrix(rnorm(100), nrow = 10, ncol = 10)
     covariates[[i]] <- mat
   }
-  btfit <- btergm::btergm(
+  suppressWarnings(btfit <- btergm::btergm(
     networks ~ edges + istar(2) + edgecov(covariates),
     R = 100,
     verbose = FALSE
-  )
+  ))
+  
   td <- tidy(btfit)
   check_tidy(td, exp.row = 3, exp.col = 4)
 

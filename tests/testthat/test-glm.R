@@ -8,6 +8,7 @@ test_that("glance.glm works", {
 
 test_that(
   "tidy.anova from car", {
+    skip_if_not_installed("car")
     model <- glm(am ~ mpg, mtcars, family = "binomial")
     car_output <- car::Anova(model, test.statistic = "LR")
     

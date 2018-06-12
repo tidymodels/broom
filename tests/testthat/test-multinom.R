@@ -1,6 +1,8 @@
 context("multinom tidiers")
 
 test_that("multinom tidiers work", {
+  skip_if_not_installed("nnet")
+  
   fit.gear <- nnet::multinom(gear ~ mpg + factor(am),
     data = mtcars,
     trace = FALSE

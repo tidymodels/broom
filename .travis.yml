@@ -8,19 +8,40 @@ r:
   - oldrel
   - release
   - devel
-
-r_binary_packages:
-  - rstanarm
-  - rstan
-
-after_success:
-  - Rscript -e 'covr::codecov()'
   
 env:
   global:
     - R_MAX_NUM_DLLS=999
 
 sudo: required
-cache: packages
-warnings_are_errors: false
+cache: packages  
 bioc_required: true
+warnings_are_errors: false
+
+r_binary_packages:
+  - rstanarm
+  - rstan
+  - dplyr
+  - lme4
+  - psych
+  - ergm
+  - survival
+  - mclust
+  - tidyr
+  - glmnet
+  - kernsmooth
+  - class
+  - nnet
+  - mgcv
+  - readr
+  - git2r
+  - data.table
+  - RSiena
+  - geometry
+  - ddalpha
+  - kernlab
+  - FNN
+  - maps
+
+after_success:
+  - Rscript -e 'covr::codecov()'
