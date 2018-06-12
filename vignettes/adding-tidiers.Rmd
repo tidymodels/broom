@@ -73,6 +73,10 @@ check_glance(g)
 check_augment(a)
 ```
 
+If any of your tests use random number generation, you should call `set.seed()` in the body of the test.
+
+In general, we prefer informative errors to magical behaviors or untested success.
+
 ## Package dependencies
 
 In order to test your tidiers, you may need to add `your_package` to the **Suggests** section of broom's DESCRIPTION.

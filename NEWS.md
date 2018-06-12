@@ -7,7 +7,8 @@ broom 0.4.4.9000
 * Bump version number
 * Added `augment` method for chi-squared tests
 * Added tidiers for ordinal models: `clm` and `clmm` (ordinal), `polr` (MASS), `svyolr` (survey)
-* Added tidiers for `Kendall`, `MannKendall` and `SeasonalMannKendall` from the Kendall package (thanks to #285 from Jorge Cimentada)s
+* Added tidiers for `Kendall`, `MannKendall` and `SeasonalMannKendall` from the Kendall package (thanks to #285 from Jorge Cimentada)
+* Added support for objects from `glmnetUtils` package
 
 broom 0.4.4
 -----------
