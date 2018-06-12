@@ -11,7 +11,7 @@
 \method{glance}{durbinWatsonTest}(x, ...)
 }
 \arguments{
-\item{x}{An object of class \code{"durbinWatsonTest"}}
+\item{x}{An object of class \code{durbinWatsonTest}}
 
 \item{...}{extra arguments (not used)}
 }
@@ -24,7 +24,7 @@ Both \code{tidy} and \code{glance} return the same output,
   \item{alternative}{Alternative hypothesis as a string}
 }
 \description{
-Tidies Durbin-Watson Test objects, from the \code{\link[car]} package
+Tidies Durbin-Watson Test objects, from the \code{car} package
 into a one-row data frame.
 }
 \examples{

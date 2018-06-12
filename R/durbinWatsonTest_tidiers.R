@@ -3,7 +3,7 @@
 #' Tidies Durbin-Watson Test objects, from the \code{car} package
 #' into a one-row data frame.
 #'
-#' @param x An object of class \code{"durbinWatsonTest"}
+#' @param x An object of class \code{durbinWatsonTest}
 #' @param ... extra arguments (not used)
 #'
 #' @return Both \code{tidy} and \code{glance} return the same output,
@@ -25,7 +25,8 @@ NULL
 #' @rdname durbinWatsonTest_tidiers
 #' @export
 tidy.durbinWatsonTest <- function(x, ...) {
-  fix_data_frame(
+  df <- 
+    fix_data_frame(
     data_frame(
       statistic = x$dw,
       p.value = x$p,
@@ -34,6 +35,8 @@ tidy.durbinWatsonTest <- function(x, ...) {
       alternative = x$alternative
     )
   )
+  
+  as_tibble(df)
 }
 
 #' @rdname durbinWatsonTest_tidiers
