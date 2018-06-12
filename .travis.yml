@@ -1,19 +1,18 @@
-# Sample .travis.yml for R projects
-
 language: r
-sudo: false
+sudo: required
 cache: packages
 
 r_binary_packages:
-  - lme4
+  - rstanarm
+  - rstan
   - dplyr
-  - purrr
-  - devtools
-  - git2r
-  - data.table
-  - stringi
-  - matrixStats
-  - StanHeaders
+  - Matrix
+  - lme4
+  - mgcv
+  - Hmisc
+  - psych
+  - ergm
+  - survival
 
 before_install:
   - Rscript -e 'update.packages(ask = FALSE)'
