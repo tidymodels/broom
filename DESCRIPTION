@@ -76,7 +76,7 @@ Suggests:
     gmm,
     Hmisc,
     irlba,
-    joineRML
+    joineRML,
     Kendall,
     knitr,
     ks,
