@@ -10,13 +10,14 @@ r_binary_packages:
   - dplyr
   - Matrix
   - lme4
-  - mgcv
-  - Hmisc
   - psych
   - ergm
   - survival
-  - nnet
-  - htmltable
+  - brms
+  - mclust
+  - testthat
+  - tidyr
+  - glmnet
 
 before_install:
   - sudo apt-get -y install libnlopt-dev r-recommended r-api-3
