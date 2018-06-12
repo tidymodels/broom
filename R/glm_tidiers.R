@@ -1,16 +1,16 @@
 #' Tidying methods for a glm object
 #'
-#' Tidy a \code{glm} object. The \code{tidy} and \code{augment} methods are handled
+#' Tidy a `glm` object. The `tidy` and `augment` methods are handled
 #' by \link{lm_tidiers}.
 #'
 #' @param x glm object
 #' @param ... extra arguments, not used
 #'
-#' @return \code{tidy} and \code{augment} return the same values as do
-#' \code{\link{tidy.lm}} and \code{\link{augment.lm}}.
+#' @return `tidy` and `augment` return the same values as do
+#' [tidy.lm()] and [augment.lm()].
 #'
-#' @seealso \code{\link{tidy.lm}} and \code{\link{augment.lm}}. Also \code{\link{glm}}, which
-#' computes the values reported by the \code{glance} method.
+#' @seealso [tidy.lm()] and [augment.lm()]. Also [glm()], which
+#' computes the values reported by the `glance` method.
 #'
 #' @name glm_tidiers
 #'
@@ -24,7 +24,7 @@
 
 #' @rdname glm_tidiers
 #'
-#' @return \code{glance} returns a one-row data.frame with the columns
+#' @return `glance` returns a one-row data.frame with the columns
 #'   \item{null.deviance}{the deviance of the null model}
 #'   \item{df.null}{the residual degrees of freedom for the null model}
 #'   \item{logLik}{the data's log-likelihood under the model}

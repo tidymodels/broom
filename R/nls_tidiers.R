@@ -8,12 +8,12 @@
 #' @param data original data this was fitted on; if not given this will
 #' attempt to be reconstructed from nls (may not be successful)
 #'
-#' @return All tidying methods return a \code{data.frame} without rownames.
+#' @return All tidying methods return a `data.frame` without rownames.
 #' The structure depends on the method chosen.
 #'
 #' @template augment_NAs
 #'
-#' @seealso \code{\link{nls}} and \code{\link{summary.nls}}
+#' @seealso [nls()] and [summary.nls()]
 #'
 #' @examples
 #'
@@ -39,11 +39,11 @@ NULL
 #'
 #' @param conf.int whether to include a confidence interval
 #' @param conf.level confidence level of the interval, used only if
-#' \code{conf.int=TRUE}
+#' `conf.int=TRUE`
 #' @param quick whether to compute a smaller and faster version, containing
-#' only the \code{term} and \code{estimate} columns.
+#' only the `term` and `estimate` columns.
 #'
-#' @return \code{tidy} returns one row for each coefficient in the model,
+#' @return `tidy` returns one row for each coefficient in the model,
 #' with five columns:
 #'   \item{term}{The term in the nonlinear model being estimated and tested}
 #'   \item{estimate}{The estimated coefficient}
@@ -83,12 +83,12 @@ tidy.nls <- function(x, conf.int = FALSE, conf.level = .95,
 #'
 #' @param newdata new data frame to use for predictions
 #'
-#' @return \code{augment} returns one row for each original observation,
+#' @return `augment` returns one row for each original observation,
 #' with two columns added:
 #'   \item{.fitted}{Fitted values of model}
 #'   \item{.resid}{Residuals}
 #'
-#' If \code{newdata} is provided, these are computed on based on predictions
+#' If `newdata` is provided, these are computed on based on predictions
 #' of the new data.
 #'
 #' @export
@@ -128,7 +128,7 @@ augment.nls <- function(x, data = NULL, newdata = NULL, ...) {
 #'
 #' @param ... extra arguments (not used)
 #'
-#' @return \code{glance} returns one row with the columns
+#' @return `glance` returns one row with the columns
 #'   \item{sigma}{the square root of the estimated residual variance}
 #'   \item{isConv}{whether the fit successfully converged}
 #'   \item{finTol}{the achieved convergence tolerance}

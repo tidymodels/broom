@@ -29,33 +29,33 @@ be stripped before the computation proceeds.}
 
 \item{trim}{the fraction (0 to 0.5) of observations to be trimmed from
 each end of \code{x} before the mean is computed.  Passed to the
-\code{trim} argument of \code{\link{mean}}}
+\code{trim} argument of \code{\link[=mean]{mean()}}}
 
 \item{data}{data, not used}
 }
 \value{
 \code{tidy.data.frame} produces a data frame with one
 row per original column, containing summary statistics of each:
-  \item{column}{name of original column}
-  \item{n}{Number of valid (non-NA) values}
-  \item{mean}{mean}
-  \item{sd}{standard deviation}
-  \item{median}{median}
-  \item{trimmed}{trimmed mean, with trim defaulting to .1}
-  \item{mad}{median absolute deviation (from the median)}
-  \item{min}{minimum value}
-  \item{max}{maximum value}
-  \item{range}{range}
-  \item{skew}{skew}
-  \item{kurtosis}{kurtosis}
-  \item{se}{standard error}
+\item{column}{name of original column}
+\item{n}{Number of valid (non-NA) values}
+\item{mean}{mean}
+\item{sd}{standard deviation}
+\item{median}{median}
+\item{trimmed}{trimmed mean, with trim defaulting to .1}
+\item{mad}{median absolute deviation (from the median)}
+\item{min}{minimum value}
+\item{max}{maximum value}
+\item{range}{range}
+\item{skew}{skew}
+\item{kurtosis}{kurtosis}
+\item{se}{standard error}
 
 \code{glance} returns a one-row data.frame with
-  \item{nrow}{number of rows}
-  \item{ncol}{number of columns}
-  \item{complete.obs}{number of rows that have no missing values}
-  \item{na.fraction}{fraction of values across all rows and columns that
-  are missing}
+\item{nrow}{number of rows}
+\item{ncol}{number of columns}
+\item{complete.obs}{number of rows that have no missing values}
+\item{na.fraction}{fraction of values across all rows and columns that
+are missing}
 }
 \description{
 Data frame tidiers are deprecated and will be removed from an upcoming

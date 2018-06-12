@@ -1,18 +1,18 @@
 #' Tidying methods for a brms model
 #'
 #' These methods tidy the estimates from
-#' \code{\link[brms:brmsfit-class]{brmsfit-objects}}
+#' [brms::brmsfit()]
 #' (fitted model objects from the \pkg{brms} package) into a summary.
 #'
-#' @return All tidying methods return a \code{data.frame} without rownames.
+#' @return All tidying methods return a `data.frame` without rownames.
 #' The structure depends on the method chosen.
 #'
-#' @seealso \code{\link[brms]{brms}}, \code{\link[brms]{brmsfit-class}}
+#' @seealso [brms::brms()], [brms::brmsfit()]
 #'
 #' @name brms_tidiers
 #'
 #' @param x Fitted model object from the \pkg{brms} package. See
-#'   \code{\link[brms]{brmsfit-class}}.
+#'   [brms::brmsfit-class()].
 #' @examples
 #' \dontrun{
 #'  library(brms)
@@ -30,44 +30,44 @@ NULL
 #' @rdname brms_tidiers
 #' @param parameters Names of parameters for which a summary should be
 #'   returned, as given by a character vector or regular expressions.
-#'   If \code{NA} (the default) summarized parameters are specified
-#'   by the \code{par_type} argument.
-#' @param par_type One of \code{"all"}, \code{"non-varying"},
-#'   \code{"varying"}, or \code{"hierarchical"} (can be abbreviated).
+#'   If `NA` (the default) summarized parameters are specified
+#'   by the `par_type` argument.
+#' @param par_type One of `"all"`, `"non-varying"`,
+#'   `"varying"`, or `"hierarchical"` (can be abbreviated).
 #'   See the Value section for details.
 #' @param robust Whether to use median and median absolute deviation rather
 #'   than mean and standard deviation.
-#' @param intervals If \code{TRUE} columns for the lower and upper bounds of
+#' @param intervals If `TRUE` columns for the lower and upper bounds of
 #'   posterior uncertainty intervals are included.
 #' @param prob Defines the range of the posterior uncertainty intervals,
-#'  such that \code{100 * prob}\% of the parameter's posterior distribution
+#'  such that `100 * prob`\% of the parameter's posterior distribution
 #'  lies within the corresponding interval.
-#'  Only used if \code{intervals = TRUE}.
+#'  Only used if `intervals = TRUE`.
 #' @param ... Extra arguments, not used
 #'
 #' @return
-#' When \code{parameters = NA}, the \code{par_type} argument is used
+#' When `parameters = NA`, the `par_type` argument is used
 #' to determine which parameters to summarize.
 #'
-#' Generally, \code{tidy.brmsfit} returns
+#' Generally, `tidy.brmsfit` returns
 #' one row for each coefficient, with at least three columns:
 #' \item{term}{The name of the model parameter.}
 #' \item{estimate}{A point estimate of the coefficient (mean or median).}
 #' \item{std.error}{A standard error for the point estimate (sd or mad).}
 #'
-#' When \code{par_type = "non-varying"}, only population-level
+#' When `par_type = "non-varying"`, only population-level
 #' effects are returned.
 #'
-#' When \code{par_type = "varying"}, only group-level effects are returned.
+#' When `par_type = "varying"`, only group-level effects are returned.
 #' In this case, two additional columns are added:
 #' \item{group}{The name of the grouping factor.}
 #' \item{level}{The name of the level of the grouping factor.}
 #'
-#' Specifying \code{par_type = "hierarchical"} selects the
+#' Specifying `par_type = "hierarchical"` selects the
 #' standard deviations and correlations of the group-level parameters.
 #'
-#' If \code{intervals = TRUE}, columns for the \code{lower} and
-#' \code{upper} bounds of the posterior intervals computed.
+#' If `intervals = TRUE`, columns for the `lower` and
+#' `upper` bounds of the posterior intervals computed.
 #'
 #' @export
 tidy.brmsfit <- function(x, parameters = NA,

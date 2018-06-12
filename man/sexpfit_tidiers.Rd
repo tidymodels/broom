@@ -20,14 +20,14 @@ All tidying methods return a data.frame without rownames, whose
 structure depends on the method chosen.
 
 \code{tidy} returns a one row for each time point, with columns
-  \item{time}{time point}
-  \item{estimate}{estimated survival}
-  \item{n.risk}{number of individuals at risk}
+\item{time}{time point}
+\item{estimate}{estimated survival}
+\item{n.risk}{number of individuals at risk}
 
 \code{glance} returns a one-row data.frame with the columns:
-  \item{n.max}{maximum number of subjects at risk}
-  \item{n.start}{starting number of subjects at risk}
-  \item{timepoints}{number of timepoints}
+\item{n.max}{maximum number of subjects at risk}
+\item{n.start}{starting number of subjects at risk}
+\item{timepoints}{number of timepoints}
 }
 \description{
 This constructs a summary across time points or overall of an expected survival

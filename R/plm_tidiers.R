@@ -4,16 +4,16 @@
 #' @param data original dataset
 #' @param conf.int whether to include a confidence interval
 #' @param conf.level confidence level of the interval, used only if
-#' \code{conf.int=TRUE}
+#' `conf.int=TRUE`
 #' @param exponentiate whether to exponentiate the coefficient estimates
 #' and confidence intervals
 #'
 #' @template boilerplate
 #'
-#' @return \code{tidy.plm} returns a data frame with one row per
-#' coefficient, of the same form as \code{\link{tidy.lm}}.
+#' @return `tidy.plm` returns a data frame with one row per
+#' coefficient, of the same form as [tidy.lm()].
 #'
-#' @seealso \code{\link{lm_tidiers}}
+#' @seealso [lm_tidiers()]
 #'
 #' @name plm_tidiers
 #'
@@ -47,7 +47,7 @@ tidy.plm <- function(x, conf.int = FALSE, conf.level = .95,
 
 #' @rdname plm_tidiers
 #'
-#' @return \code{augment} returns a data frame with one row for each
+#' @return `augment` returns a data frame with one row for each
 #' initial observation, adding the columns
 #'   \item{.fitted}{predicted (fitted) values}
 #'   \item{.resid}{residuals}
@@ -65,7 +65,7 @@ augment.plm <- function(x, data = as.data.frame(stats::model.frame(x)), ...) {
 #'
 #' @param ... extra arguments, not used
 #'
-#' @return \code{glance} returns a one-row data frame with columns
+#' @return `glance` returns a one-row data frame with columns
 #'   \item{r.squared}{The percent of variance explained by the model}
 #'   \item{adj.r.squared}{r.squared adjusted based on the degrees of freedom}
 #'   \item{statistic}{F-statistic}

@@ -29,33 +29,33 @@ and Box-Ljung to squared residuals.}
 }
 \value{
 A \code{data.frame} with one row for each coefficient, with five columns:
-  \item{term}{The term in the linear model being estimated and tested}
-  \item{estimate}{The estimated coefficient}
-  \item{std.error}{The standard error}
-  \item{statistic}{test statistic}
-  \item{p.value}{p-value}
+\item{term}{The term in the linear model being estimated and tested}
+\item{estimate}{The estimated coefficient}
+\item{std.error}{The standard error}
+\item{statistic}{test statistic}
+\item{p.value}{p-value}
 
 A \code{data.frame} with one row, with seven columns:
-  \item{statistic}{Test statistic used to compute the p-value}
-  \item{p.value}{P-value}
-  \item{parameter}{Parameter field in the htest, typically degrees of
-  freedom}
-  \item{method}{Method used to compute the statistic as a string}
-  \item{logLik}{the data's log-likelihood under the model}
-  \item{AIC}{the Akaike Information Criterion}
-  \item{BIC}{the Bayesian Information Criterion}
+\item{statistic}{Test statistic used to compute the p-value}
+\item{p.value}{P-value}
+\item{parameter}{Parameter field in the htest, typically degrees of
+freedom}
+\item{method}{Method used to compute the statistic as a string}
+\item{logLik}{the data's log-likelihood under the model}
+\item{AIC}{the Akaike Information Criterion}
+\item{BIC}{the Bayesian Information Criterion}
 
 \code{augment.garch} returns one row for each observation of the
 original \code{data}, with three columns added:
-  \item{.time}{Sampling times of time series}
-  \item{.fitted}{Fitted values of model}
-  \item{.resid}{Residuals}
+\item{.time}{Sampling times of time series}
+\item{.fitted}{Fitted values of model}
+\item{.resid}{Residuals}
 The \code{data} must be provided, since the garch object doesn't has the data
 in it.
 When \code{newdata} is supplied, \code{augment.garch} returns one row for each
 observation of \code{newdata} with the columns added:
-  \item{.time}{Sampling times of time series}
-  \item{.fitted}{Fitted values of model}
+\item{.time}{Sampling times of time series}
+\item{.fitted}{Fitted values of model}
 }
 \description{
 This tidies the result of a coefficient of the GARCH model implemented in

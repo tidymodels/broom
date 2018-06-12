@@ -19,16 +19,16 @@
 }
 \value{
 \code{augment} returns the original data with extra columns:
-  \item{.fitted}{Fitted values of model}
-  \item{.resid}{Residuals}
+\item{.fitted}{Fitted values of model}
+\item{.resid}{Residuals}
 
 \code{glance} returns one row with columns
-  \item{spar}{smoothing parameter}
-  \item{lambda}{choice of lambda corresponding to \code{spar}}
-  \item{df}{equivalent degrees of freedom}
-  \item{crit}{minimized criterion}
-  \item{pen.crit}{penalized criterion}
-  \item{cv.crit}{cross-validation score}
+\item{spar}{smoothing parameter}
+\item{lambda}{choice of lambda corresponding to \code{spar}}
+\item{df}{equivalent degrees of freedom}
+\item{crit}{minimized criterion}
+\item{pen.crit}{penalized criterion}
+\item{cv.crit}{cross-validation score}
 }
 \description{
 This combines the original data given to smooth.spline with the

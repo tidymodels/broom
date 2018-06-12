@@ -5,12 +5,12 @@
 #' residuals, and construct a one-row glance of the model's statistics.
 #'
 #' @details If you have missing values in your model data, you may need to refit
-#' the model with \code{na.action = na.exclude}.
+#' the model with `na.action = na.exclude`.
 #'
-#' @return All tidying methods return a \code{data.frame} without rownames.
+#' @return All tidying methods return a `data.frame` without rownames.
 #' The structure depends on the method chosen.
 #'
-#' @seealso \code{\link{summary.lm}}
+#' @seealso [summary.lm()]
 #'
 #' @name lm_tidiers
 #'
@@ -18,9 +18,9 @@
 #' @param data Original data, defaults to the extracting it from the model
 #' @param newdata If provided, performs predictions on the new data
 #' @param type.predict Type of prediction to compute for a GLM; passed on to
-#'   \code{\link{predict.glm}}
+#'   [predict.glm()]
 #' @param type.residuals Type of residuals to compute for a GLM; passed on to
-#'   \code{\link{residuals.glm}}
+#'   [residuals.glm()]
 #'
 #' @examples
 #'
@@ -100,19 +100,19 @@ NULL
 #'
 #' @param conf.int whether to include a confidence interval
 #' @param conf.level confidence level of the interval, used only if
-#' \code{conf.int=TRUE}
+#' `conf.int=TRUE`
 #' @param exponentiate whether to exponentiate the coefficient estimates
 #' and confidence intervals (typical for logistic regression)
 #' @param quick whether to compute a smaller and faster version, containing
-#' only the \code{term} and \code{estimate} columns.
+#' only the `term` and `estimate` columns.
 #'
-#' @details If \code{conf.int=TRUE}, the confidence interval is computed with
-#' the \code{\link{confint}} function.
+#' @details If `conf.int=TRUE`, the confidence interval is computed with
+#' the [confint()] function.
 #'
-#' While \code{tidy} is supported for "mlm" objects, \code{augment} and
-#' \code{glance} are not.
+#' While `tidy` is supported for "mlm" objects, `augment` and
+#' `glance` are not.
 #'
-#' @return \code{tidy.lm} returns one row for each coefficient, with five columns:
+#' @return `tidy.lm` returns one row for each coefficient, with five columns:
 #'   \item{term}{The term in the linear model being estimated and tested}
 #'   \item{estimate}{The estimated coefficient}
 #'   \item{std.error}{The standard error from the linear model}
@@ -124,8 +124,8 @@ NULL
 #'   \item{response}{Which response column the coefficients correspond to
 #'   (typically Y1, Y2, etc)}
 #'
-#' If \code{conf.int=TRUE}, it also includes columns for \code{conf.low} and
-#' \code{conf.high}, computed with \code{\link{confint}}.
+#' If `conf.int=TRUE`, it also includes columns for `conf.low` and
+#' `conf.high`, computed with [confint()].
 #'
 #' @export
 tidy.lm <- function(x, conf.int = FALSE, conf.level = .95,
@@ -168,26 +168,26 @@ tidy.summary.lm <- function(x, ...) {
 #'
 #' @template augment_NAs
 #'
-#' @details Code and documentation for \code{augment.lm} originated in the
-#' ggplot2 package, where it was called \code{fortify.lm}
+#' @details Code and documentation for `augment.lm` originated in the
+#' ggplot2 package, where it was called `fortify.lm`
 #'
-#' @return When \code{newdata} is not supplied \code{augment.lm} returns
+#' @return When `newdata` is not supplied `augment.lm` returns
 #' one row for each observation, with seven columns added to the original
 #' data:
 #'   \item{.hat}{Diagonal of the hat matrix}
 #'   \item{.sigma}{Estimate of residual standard deviation when
 #'     corresponding observation is dropped from model}
-#'   \item{.cooksd}{Cooks distance, \code{\link{cooks.distance}}}
+#'   \item{.cooksd}{Cooks distance, [cooks.distance()]}
 #'   \item{.fitted}{Fitted values of model}
 #'   \item{.se.fit}{Standard errors of fitted values}
 #'   \item{.resid}{Residuals}
 #'   \item{.std.resid}{Standardised residuals}
 #'
 #' (Some unusual "lm" objects, such as "rlm" from MASS, may omit
-#' \code{.cooksd} and \code{.std.resid}. "gam" from mgcv omits
-#' \code{.sigma})
+#' `.cooksd` and `.std.resid`. "gam" from mgcv omits
+#' `.sigma`)
 #'
-#' When \code{newdata} is supplied, \code{augment.lm} returns one row for each
+#' When `newdata` is supplied, `augment.lm` returns one row for each
 #' observation, with three columns added to the new data:
 #'   \item{.fitted}{Fitted values of model}
 #'   \item{.se.fit}{Standard errors of fitted values}
@@ -207,7 +207,7 @@ augment.lm <- function(x, data = stats::model.frame(x), newdata,
 #'
 #' @param ... extra arguments (not used)
 #'
-#' @return \code{glance.lm} returns a one-row data.frame with the columns
+#' @return `glance.lm` returns a one-row data.frame with the columns
 #'   \item{r.squared}{The percent of variance explained by the model}
 #'   \item{adj.r.squared}{r.squared adjusted based on the degrees of freedom}
 #'   \item{sigma}{The square root of the estimated residual variance}
@@ -285,7 +285,7 @@ glance.mlm <- function(x, ...) {
 #' @param x an "lm", "glm", "biglm", or "bigglm" object
 #' @param conf.int whether to include a confidence interval
 #' @param conf.level confidence level of the interval, used only if
-#' \code{conf.int=TRUE}
+#' `conf.int=TRUE`
 #' @param exponentiate whether to exponentiate the coefficient estimates
 #' and confidence intervals (typical for logistic regression)
 process_lm <- function(ret, x, conf.int = FALSE, conf.level = .95,

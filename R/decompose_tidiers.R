@@ -1,35 +1,35 @@
 #' Tidying methods for seasonal decompositions
 #'
-#' These tidiers provide an \code{augment} method for the results of a seasonal
-#' decomposition with \code{\link[stats]{decompose}} or
-#' \code{\link[stats]{stl}}.
+#' These tidiers provide an `augment` method for the results of a seasonal
+#' decomposition with [stats::decompose()] or
+#' [stats::stl()].
 #'
-#' The \code{augment} method returns the computed seasonal and trend components,
+#' The `augment` method returns the computed seasonal and trend components,
 #' as well as the "remainder" term and the seasonally adjusted (or
 #' "deseasonalised") series.
 #'
-#' @param x An object of class \code{"stl"} or \code{"decomposed.ts"},
-#' resulting from a call to \code{\link[stats]{decompose}} or
-#' \code{\link[stats]{stl}}.
+#' @param x An object of class `"stl"` or `"decomposed.ts"`,
+#' resulting from a call to [stats::decompose()] or
+#' [stats::stl()].
 #' @param ... Extra arguments. Unused.
 #'
 #' @name decompose_tidiers
 #' @author Aaron Jacobs
 #'
-#' @seealso \code{\link[stats]{decompose}}, \code{\link[stats]{stl}}
+#' @seealso [stats::decompose()], [stats::stl()]
 #'
 #' @return
 #'
-#' The \code{augment} method returns a tidy data frame with the following
+#' The `augment` method returns a tidy data frame with the following
 #' columns:
 #'
 #' \describe{
-#'   \item{\code{.seasonal}}{The seasonal component of the decomposition.}
-#'   \item{\code{.trend}}{The trend component of the decomposition.}
-#'   \item{\code{.remainder}}{The remainder, or "random" component of the
+#'   \item{`.seasonal`}{The seasonal component of the decomposition.}
+#'   \item{`.trend`}{The trend component of the decomposition.}
+#'   \item{`.remainder`}{The remainder, or "random" component of the
 #'   decomposition.}
-#'   \item{\code{.weight}}{The final robust weights (\code{stl} only).}
-#'   \item{\code{.seasadj}}{The seasonally adjusted (or "deseasonalised")
+#'   \item{`.weight`}{The final robust weights (`stl` only).}
+#'   \item{`.seasadj`}{The seasonally adjusted (or "deseasonalised")
 #'   series.}
 #' }
 #'

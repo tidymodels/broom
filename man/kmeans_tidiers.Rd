@@ -29,18 +29,18 @@ The structure depends on the method chosen.
 
 \code{tidy} returns one row per cluster, with one column for each
 dimension in the data describing the center, followed by
-  \item{size}{The size of each cluster}
-  \item{withinss}{The within-cluster sum of squares}
-  \item{cluster}{A factor describing the cluster from 1:k}
+\item{size}{The size of each cluster}
+\item{withinss}{The within-cluster sum of squares}
+\item{cluster}{A factor describing the cluster from 1:k}
 
 \code{augment} returns the original data with one extra column:
-  \item{.cluster}{The cluster assigned by the k-means algorithm}
+\item{.cluster}{The cluster assigned by the k-means algorithm}
 
 \code{glance} returns a one-row data.frame with the columns
-  \item{totss}{The total sum of squares}
-  \item{tot.withinss}{The total within-cluster sum of squares}
-  \item{betweenss}{The total between-cluster sum of squares}
-  \item{iter}{The numbr of (outer) iterations}
+\item{totss}{The total sum of squares}
+\item{tot.withinss}{The total within-cluster sum of squares}
+\item{betweenss}{The total between-cluster sum of squares}
+\item{iter}{The numbr of (outer) iterations}
 }
 \description{
 These methods summarize the results of k-means clustering into three
@@ -72,5 +72,5 @@ ggplot(augment(k, points), aes(x1, x2)) +
 
 }
 \seealso{
-\code{\link{kmeans}}
+\code{\link[=kmeans]{kmeans()}}
 }

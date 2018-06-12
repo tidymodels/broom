@@ -25,7 +25,7 @@ NULL
 
 #' @rdname fitdistr_tidiers
 #'
-#' @return \code{tidy.fitdistr} returns one row for each parameter that
+#' @return `tidy.fitdistr` returns one row for each parameter that
 #' was estimated, with columns:
 #'   \item{term}{The term that was estimated}
 #'   \item{estimate}{Estimated value}
@@ -43,7 +43,7 @@ tidy.fitdistr <- function(x, ...) {
 
 #' @rdname fitdistr_tidiers
 #'
-#' @return \code{glance.fitdistr} returns a one-row data.frame with the columns
+#' @return `glance.fitdistr` returns a one-row data.frame with the columns
 #'   \item{n}{Number of observations used in estimation}
 #'   \item{logLik}{log-likelihood of estimated data}
 #'   \item{AIC}{Akaike Information Criterion}

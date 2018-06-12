@@ -21,18 +21,18 @@ structure depends on the method chosen.
 
 \code{tidy} returns a data frame with one row per parameter that
 was estimated, with columns
-  \item{parameter}{name of the parameter, or \code{parameter1},
-  \code{parameter2}... if the input vector is not named}
-  \item{value}{parameter value that minimizes or maximizes the output}
+\item{parameter}{name of the parameter, or \code{parameter1},
+\code{parameter2}... if the input vector is not named}
+\item{value}{parameter value that minimizes or maximizes the output}
 
 \code{glance} returns a one-row data frame with the columns
-  \item{value}{minimized or maximized output value}
-  \item{function.count}{number of calls to \code{fn}}
-  \item{gradient.count}{number of calls to \code{gr}}
-  \item{convergence}{convergence code representing the error state}
+\item{value}{minimized or maximized output value}
+\item{function.count}{number of calls to \code{fn}}
+\item{gradient.count}{number of calls to \code{gr}}
+\item{convergence}{convergence code representing the error state}
 }
 \description{
-Tidies objects returned by the \code{\link{optim}} function for
+Tidies objects returned by the \code{\link[=optim]{optim()}} function for
 general-purpose minimization and maximization.
 }
 \examples{
@@ -48,5 +48,5 @@ glance(o)
 
 }
 \seealso{
-\code{\link{optim}}
+\code{\link[=optim]{optim()}}
 }

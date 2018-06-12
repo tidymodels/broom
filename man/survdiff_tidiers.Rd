@@ -43,5 +43,5 @@ if( require("survival") ) {
 }
 }
 \seealso{
-\code{\link[survival]{survdiff}}
+\code{\link[survival:survdiff]{survival::survdiff()}}
 }

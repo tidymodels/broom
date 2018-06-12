@@ -2,13 +2,13 @@
 #'
 #' Tidying methods for "boot" objects from the "boot" package.
 #'
-#' @param x \code{\link{boot}} object
+#' @param x [boot()] object
 #' @param conf.int whether to include a confidence interval
 #' @param conf.level confidence level for CI
-#' @param conf.method method for computing confidence intervals (see \code{\link{boot.ci}})
+#' @param conf.method method for computing confidence intervals (see [boot.ci()])
 #' @param \dots extra arguments (not used)
 #'
-#' @return The \code{tidy} method returns a data frame with one row per
+#' @return The `tidy` method returns a data frame with one row per
 #' bootstrapped statistic that was calculated, and the
 #' following columns:
 #'   \item{term}{Name of the computed statistic, if present}
@@ -16,14 +16,14 @@
 #'   \item{bias}{The bias of the original statistic value}
 #'   \item{std.error}{Standard error of the statistic}
 #'
-#' If weights were provided to the \code{boot} function, an \code{estimate}
+#' If weights were provided to the `boot` function, an `estimate`
 #' column is included showing the weighted bootstrap estimate, and the
 #' standard error is of that estimate.
 #'
 #' If there are no original statistics in the "boot" object, such as with a
-#' call to \code{tsboot} with \code{orig.t = FALSE}, the \code{original}
-#' and \code{statistic} columns are omitted, and only \code{estimate} and
-#' \code{std.error} columns shown.
+#' call to `tsboot` with `orig.t = FALSE`, the `original`
+#' and `statistic` columns are omitted, and only `estimate` and
+#' `std.error` columns shown.
 #'
 #' @name boot_tidiers
 #'

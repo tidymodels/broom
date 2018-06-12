@@ -12,14 +12,14 @@
 #' methods: OLS (ordinary least squares), MA (major axis), SMA (standard major
 #' axis), and RMA (ranged major axis). See the lmodel2 documentation for more.
 #'
-#' Note that there is no \code{augment} method for lmodel2 objects because
-#' lmodel2 does not provide a \code{predict} or {\code{residuals}} method
+#' Note that there is no `augment` method for lmodel2 objects because
+#' lmodel2 does not provide a `predict` or {`residuals`} method
 #' (and since when both observations are random, fitted values and residuals
 #' have a less clear meaning).
 #'
 #' @template boilerplate
 #'
-#' @return \code{tidy} returns a data frame with one row for each combination
+#' @return `tidy` returns a data frame with one row for each combination
 #' of method (OLS/MA/SMA/RMA) and term (always Intercept/Slope). Its columns
 #' are:
 #' \describe{
@@ -72,11 +72,11 @@ tidy.lmodel2 <- function(x, ...) {
 
 #' @rdname lmodel2_tidiers
 #'
-#' @return \code{glance} returns a one-row data frame with columns
+#' @return `glance` returns a one-row data frame with columns
 #' \describe{
 #'   \item{r.squared}{OLS R-squared}
 #'   \item{p.value}{OLS parametric p-value}
-#'   \item{theta}{Angle between OLS lines \code{lm(y ~ x)} and \code{lm(x ~ y)}}
+#'   \item{theta}{Angle between OLS lines `lm(y ~ x)` and `lm(x ~ y)`}
 #'   \item{H}{H statistic for computing confidence interval of major axis slope}
 #' }
 #'

@@ -1,12 +1,12 @@
 #' Tidying methods for an rlm (robust linear model) object
 #'
-#' This method provides a glance of an "rlm" object. The \code{tidy} and
-#' \code{augment} methods are handled by \link{lm_tidiers}.
+#' This method provides a glance of an "rlm" object. The `tidy` and
+#' `augment` methods are handled by \link{lm_tidiers}.
 #'
 #' @param x rlm object
 #' @param ... extra arguments (not used)
 #'
-#' @return \code{glance.rlm} returns a one-row data.frame with the columns
+#' @return `glance.rlm` returns a one-row data.frame with the columns
 #'   \item{sigma}{The square root of the estimated residual variance}
 #'   \item{converged}{whether the IWLS converged}
 #'   \item{logLik}{the data's log-likelihood under the model}

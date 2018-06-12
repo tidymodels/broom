@@ -21,15 +21,15 @@ structure depends on the method chosen.
 
 \code{tidy.fitdistr} returns one row for each parameter that
 was estimated, with columns:
-  \item{term}{The term that was estimated}
-  \item{estimate}{Estimated value}
-  \item{std.error}{Standard error of estimate}
+\item{term}{The term that was estimated}
+\item{estimate}{Estimated value}
+\item{std.error}{Standard error of estimate}
 
 \code{glance.fitdistr} returns a one-row data.frame with the columns
-  \item{n}{Number of observations used in estimation}
-  \item{logLik}{log-likelihood of estimated data}
-  \item{AIC}{Akaike Information Criterion}
-  \item{BIC}{Bayesian Information Criterion}
+\item{n}{Number of observations used in estimation}
+\item{logLik}{log-likelihood of estimated data}
+\item{AIC}{Akaike Information Criterion}
+\item{BIC}{Bayesian Information Criterion}
 }
 \description{
 These methods tidies the parameter estimates resulting
