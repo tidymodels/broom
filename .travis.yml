@@ -18,6 +18,10 @@ r_binary_packages:
   - testthat
   - tidyr
   - glmnet
+  - kernsmooth
+  - class
+  - nnet
+  - mgcv
 
 before_install:
   - sudo apt-get -y install libnlopt-dev r-recommended
