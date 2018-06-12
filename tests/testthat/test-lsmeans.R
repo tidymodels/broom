@@ -5,8 +5,9 @@ oranges_lm1 <- lm(sales1 ~ price1 + price2 + day + store, data = oranges)
 oranges_rg1 <- ref.grid(oranges_lm1)
 marginal <- lsmeans(oranges_rg1, "day")
 # generate dataset with dashes
-marginal_dashes <- data_frame(y=rnorm(100), x=rep(c("Single", "Double-Barrelled"), 50)) %>% 
-  lm(y~x, data=.) %>% lsmeans::lsmeans(., ~x) %>% 
+marginal_dashes <- data_frame(y = rnorm(100),
+                              x = rep(c("Single", "Double-Barrelled"), 50)) %>% 
+  lm(y ~ x, data = .) %>% lsmeans::lsmeans(., ~ x) %>% 
   lsmeans::contrast(., "pairwise")
 
 test_that("lsmobj tidiers work", {
