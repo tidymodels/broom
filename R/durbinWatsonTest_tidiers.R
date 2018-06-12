@@ -3,7 +3,7 @@
 #' Tidies Durbin-Watson Test objects, from the `car` package
 #' into a one-row data frame.
 #'
-#' @param x An object of class `"durbinWatsonTest"`
+#' @param x An object of class `durbinWatsonTest`
 #' @param ... extra arguments (not used)
 #'
 #' @return Both `tidy` and `glance` return the same output,
@@ -25,14 +25,12 @@ NULL
 #' @rdname durbinWatsonTest_tidiers
 #' @export
 tidy.durbinWatsonTest <- function(x, ...) {
-  fix_data_frame(
-    data_frame(
-      statistic = x$dw,
-      p.value = x$p,
-      autocorrelation = x$r,
-      method = "Durbin-Watson Test",
-      alternative = x$alternative
-    )
+  tibble::tibble(
+    statistic = x$dw,
+    p.value = x$p,
+    autocorrelation = x$r,
+    method = "Durbin-Watson Test",
+    alternative = x$alternative
   )
 }
 
