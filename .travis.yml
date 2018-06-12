@@ -34,7 +34,6 @@ r_binary_packages:
   - data.table
   - RSiena
   - geometry
-  - ddalpha
   - kernlab
   - FNN
   - maps
