@@ -18,7 +18,8 @@ env:
   global:
     - R_MAX_NUM_DLLS=999
 
-r_check_args: "--no-vignettes"
+r_build_args: "--no-build-vignettes"
+r_check_args: "--no-build-vignettes --as-cran"
     
 matrix:
   allow_failures:
