@@ -13,7 +13,7 @@
 \item{...}{Additional arguments, not used}
 }
 \value{
-A data frame with three columns:
+A tibble with three columns:
 \item{cutoff}{The cutoff of the prediction scores used
 for classification}
 \item{tpr}{The resulting true positive rate at that cutoff}

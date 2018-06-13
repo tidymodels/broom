@@ -6,7 +6,7 @@
 #' @param x an "roc" object
 #' @param ... Additional arguments, not used
 #'
-#' @return A data frame with three columns:
+#' @return A tibble with three columns:
 #'   \item{cutoff}{The cutoff of the prediction scores used
 #'   for classification}
 #'   \item{tpr}{The resulting true positive rate at that cutoff}
@@ -44,8 +44,11 @@
 #'
 #' @export
 tidy.roc <- function(x, ...) {
-  fix_data_frame(as.data.frame(unclass(x)),
+  df <-
+    fix_data_frame(as.data.frame(unclass(x)),
     newnames = c("cutoff", "fpr", "tpr"),
     newcol = "instance"
   )
+  
+  tibble::as_tibble(df)
 }
