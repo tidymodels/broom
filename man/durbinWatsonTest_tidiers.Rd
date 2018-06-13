@@ -11,12 +11,12 @@
 \method{glance}{durbinWatsonTest}(x, ...)
 }
 \arguments{
-\item{x}{An object of class \code{"durbinWatsonTest"}}
+\item{x}{An object of class `durbinWatsonTest`}
 
 \item{...}{extra arguments (not used)}
 }
 \value{
-Both \code{tidy} and \code{glance} return the same output,
+Both `tidy` and `glance` return the same output,
   \item{statistic}{Test statistic used to compute the p-value}
   \item{p.value}{P-value}
   \item{autocorrelation}{Residual autocorrelations}
@@ -24,7 +24,7 @@ Both \code{tidy} and \code{glance} return the same output,
   \item{alternative}{Alternative hypothesis as a string}
 }
 \description{
-Tidies Durbin-Watson Test objects, from the \code{\link[car]} package
+Tidies Durbin-Watson Test objects, from the `car` package
 into a one-row data frame.
 }
 \examples{

@@ -15,9 +15,9 @@
 \value{
 \code{tidy} returns a data frame with one row for each observation
 in each series, with the following columns:
-  \item{index}{Index (usually date) for the zoo object}
-  \item{series}{Name of the series}
-  \item{value}{Value of the observation}
+\item{index}{Index (usually date) for the zoo object}
+\item{series}{Name of the series}
+\item{value}{Value of the observation}
 }
 \description{
 Tidies \code{zoo} (Z's ordered observations) time series objects.

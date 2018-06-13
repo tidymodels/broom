@@ -1,18 +1,18 @@
 #' Tidying methods for an rstanarm model
 #'
-#' These methods tidy the estimates from \code{\link[rstanarm]{stanreg-objects}}
+#' These methods tidy the estimates from [rstanarm::stanreg-objects()]
 #' (fitted model objects from the \pkg{rstanarm} package) into a summary.
 #'
 #'
-#' @return All tidying methods return a \code{data.frame} without rownames.
+#' @return All tidying methods return a `data.frame` without rownames.
 #' The structure depends on the method chosen.
 #'
-#' @seealso \code{\link[rstanarm]{summary.stanreg}}
+#' @seealso [rstanarm::summary.stanreg()]
 #'
 #' @name rstanarm_tidiers
 #'
 #' @param x Fitted model object from the \pkg{rstanarm} package. See
-#'   \code{\link[rstanarm]{stanreg-objects}}.
+#'   [rstanarm::stanreg-objects()].
 #' @examples
 #'
 #' \dontrun{
@@ -36,42 +36,42 @@ NULL
 
 
 #' @rdname rstanarm_tidiers
-#' @param parameters One or more of \code{"non-varying"}, \code{"varying"},
-#'   \code{"hierarchical"}, \code{"auxiliary"} (can be abbreviated). See the
+#' @param parameters One or more of `"non-varying"`, `"varying"`,
+#'   `"hierarchical"`, `"auxiliary"` (can be abbreviated). See the
 #'   Value section for details.
-#' @param prob See \code{\link[rstanarm]{posterior_interval}}.
-#' @param intervals If \code{TRUE} columns for the lower and upper bounds of the
-#'   \code{100*prob}\% posterior uncertainty intervals are included. See
-#'   \code{\link[rstanarm]{posterior_interval}} for details.
+#' @param prob See [rstanarm::posterior_interval()].
+#' @param intervals If `TRUE` columns for the lower and upper bounds of the
+#'   `100*prob`\% posterior uncertainty intervals are included. See
+#'   [rstanarm::posterior_interval()] for details.
 #'
 #' @return
-#' When \code{parameters="non-varying"} (the default), \code{tidy.stanreg} returns
+#' When `parameters="non-varying"` (the default), `tidy.stanreg` returns
 #' one row for each coefficient, with three columns:
 #' \item{term}{The name of the corresponding term in the model.}
 #' \item{estimate}{A point estimate of the coefficient (posterior median).}
 #' \item{std.error}{A standard error for the point estimate based on
-#' \code{\link[stats]{mad}}. See the \emph{Uncertainty estimates} section in
-#' \code{\link[rstanarm]{print.stanreg}} for more details.}
+#' [stats::mad()]. See the *Uncertainty estimates* section in
+#' [rstanarm::print.stanreg()] for more details.}
 #'
 #' For models with group-specific parameters (e.g., models fit with
-#' \code{\link[rstanarm]{stan_glmer}}), setting \code{parameters="varying"}
+#' [rstanarm::stan_glmer()]), setting `parameters="varying"`
 #' selects the group-level parameters instead of the non-varying regression
-#' coefficients. Additional columns are added indicating the \code{level} and
-#' \code{group}. Specifying \code{parameters="hierarchical"} selects the
+#' coefficients. Additional columns are added indicating the `level` and
+#' `group`. Specifying `parameters="hierarchical"` selects the
 #' standard deviations and (for certain models) correlations of the group-level
 #' parameters.
 #'
-#' Setting \code{parameters="auxiliary"} will select parameters other than those
+#' Setting `parameters="auxiliary"` will select parameters other than those
 #' included by the other options. The particular parameters depend on which
 #' \pkg{rstanarm} modeling function was used to fit the model. For example, for
-#' models fit using \code{\link[rstanarm]{stan_glm.nb}} the overdispersion
-#' parameter is included if \code{parameters="aux"}, for
-#' \code{\link[rstanarm]{stan_lm}} the auxiliary parameters include the residual
+#' models fit using [rstanarm::stan_glm.nb()] the overdispersion
+#' parameter is included if `parameters="aux"`, for
+#' [rstanarm::stan_lm()] the auxiliary parameters include the residual
 #' SD, R^2, and log(fit_ratio), etc.
 #'
-#' If \code{intervals=TRUE}, columns for the \code{lower} and \code{upper}
+#' If `intervals=TRUE`, columns for the `lower` and `upper`
 #' values of the posterior intervals computed with
-#' \code{\link[rstanarm]{posterior_interval}} are also included.
+#' [rstanarm::posterior_interval()] are also included.
 #'
 #' @export
 tidy.stanreg <- function(x,
@@ -203,25 +203,25 @@ tidy.stanreg <- function(x,
 #' @rdname rstanarm_tidiers
 #'
 #' @param looic Should the LOO Information Criterion (and related info) be
-#'   included? See \code{\link[rstanarm]{loo.stanreg}} for details. Note: for
+#'   included? See [rstanarm::loo.stanreg()] for details. Note: for
 #'   models fit to very large datasets this can be a slow computation.
-#' @param ... For \code{glance}, if \code{looic=TRUE}, optional arguments to
-#'   \code{\link[rstanarm]{loo.stanreg}}.
+#' @param ... For `glance`, if `looic=TRUE`, optional arguments to
+#'   [rstanarm::loo.stanreg()].
 #'
-#' @return \code{glance} returns one row with the columns
+#' @return `glance` returns one row with the columns
 #'   \item{algorithm}{The algorithm used to fit the model.}
 #'   \item{pss}{The posterior sample size (except for models fit using
 #'   optimization).}
 #'   \item{nobs}{The number of observations used to fit the model.}
 #'   \item{sigma}{The square root of the estimated residual variance, if
-#'   applicable. If not applicable (e.g., for binomial GLMs), \code{sigma} will
-#'   be given the value \code{1} in the returned object.}
+#'   applicable. If not applicable (e.g., for binomial GLMs), `sigma` will
+#'   be given the value `1` in the returned object.}
 #'
-#'   If \code{looic=TRUE}, then the following additional columns are also
+#'   If `looic=TRUE`, then the following additional columns are also
 #'   included:
 #'   \item{looic}{The LOO Information Criterion.}
-#'   \item{elpd_loo}{The expected log predictive density (\code{elpd_loo = -2 *
-#'   looic}).}
+#'   \item{elpd_loo}{The expected log predictive density (`elpd_loo = -2 *
+#'   looic`).}
 #'   \item{p_loo}{The effective number of parameters.}
 #'
 #' @export

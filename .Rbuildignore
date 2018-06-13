@@ -11,3 +11,4 @@
 ^_pkgdown\.yml$
 ^README\.Rmd$
 ^\.github$
+^docs$

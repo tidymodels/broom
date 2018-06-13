@@ -42,13 +42,13 @@ NULL
 #'
 #' @param conf.int whether to include a confidence interval
 #' @param conf.level confidence level of the interval, used only if
-#' \code{conf.int=TRUE}
+#' `conf.int=TRUE`
 #' @param fe whether to include estimates of fixed effects
 #' @param fe.error whether to include standard error of fixed effects
 #'
-#' @details If \code{conf.int=TRUE}, the confidence interval is computed
+#' @details If `conf.int=TRUE`, the confidence interval is computed
 #'
-#' @return \code{tidy.felm} returns one row for each coefficient. If \code{fe=TRUE}, it also includes rows for for fixed effects estimates.
+#' @return `tidy.felm` returns one row for each coefficient. If `fe=TRUE`, it also includes rows for for fixed effects estimates.
 #' There are five columns:
 #'   \item{term}{The term in the linear model being estimated and tested}
 #'   \item{estimate}{The estimated coefficient}
@@ -56,7 +56,7 @@ NULL
 #'   \item{statistic}{t-statistic}
 #'   \item{p.value}{two-sided p-value}
 #'
-#' If \code{cont.int=TRUE}, it also includes columns for \code{conf.low} and \code{conf.high}, computed with \code{\link{confint}}.
+#' If `cont.int=TRUE`, it also includes columns for `conf.low` and `conf.high`, computed with [confint()].
 #' @export
 tidy.felm <- function(x, conf.int=FALSE, conf.level=.95, fe = FALSE, fe.error = fe, ...) {
   nn <- c("estimate", "std.error", "statistic", "p.value")
@@ -102,7 +102,7 @@ tidy.felm <- function(x, conf.int=FALSE, conf.level=.95, fe = FALSE, fe.error = 
 # 1. does not work if new data
 # 2. does not give SE of the fit
 #' @rdname felm_tidiers
-#' @return  \code{augment.felm} returns  one row for each observation, with multiple columns added to the original data:
+#' @return  `augment.felm` returns  one row for each observation, with multiple columns added to the original data:
 #'   \item{.fitted}{Fitted values of model}
 #'   \item{.resid}{Residuals}
 #'   If fixed effect are present,
@@ -122,7 +122,7 @@ augment.felm <- function(x, data = NULL, ...) {
     }
   }
   data <- fix_data_frame(data, newcol = ".rownames")
-  y <- model.response(model.frame(x))
+  y <- stats::model.response(stats::model.frame(x))
   data$.fitted <- c(x$fitted.values)
   data$.resid <- c(x$residuals)
   object <- lfe::getfe(x)
@@ -167,7 +167,7 @@ augment.felm <- function(x, data = NULL, ...) {
 #'
 #' @param ... extra arguments (not used)
 #'
-#' @return \code{glance.lm} returns a one-row data.frame with the columns
+#' @return `glance.lm` returns a one-row data.frame with the columns
 #'   \item{r.squared}{The percent of variance explained by the model}
 #'   \item{adj.r.squared}{r.squared adjusted based on the degrees of freedom}
 #'   \item{sigma}{The square root of the estimated residual variance}

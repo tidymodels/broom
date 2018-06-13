@@ -1,32 +1,32 @@
 #' Tidying methods for generalized estimating equations models
 #'
 #' These methods tidy the coefficients of generalized estimating
-#' equations models of the \code{geeglm} class from functions of the
-#' \code{geepack} package.
+#' equations models of the `geeglm` class from functions of the
+#' `geepack` package.
 #'
 #'
-#' @param x An object of class \code{geeglm}, such as from \code{geeglm}
+#' @param x An object of class `geeglm`, such as from `geeglm`
 #' @param conf.int whether to include a confidence interval
 #' @param conf.level confidence level of the interval, used only if
-#' \code{conf.int=TRUE}
+#' `conf.int=TRUE`
 #' @param exponentiate whether to exponentiate the coefficient estimates
 #' and confidence intervals (typical for log distributions)
 #' @param quick whether to compute a smaller and faster version, containing
-#' only the \code{term} and \code{estimate} columns.
+#' only the `term` and `estimate` columns.
 #' @param ... Additional arguments to be passed to other methods.  Currently
 #' not used.
 #'
-#' @details If \code{conf.int=TRUE}, the confidence interval is computed with
-#' the \code{\link{confint.geeglm}} function.
+#' @details If `conf.int=TRUE`, the confidence interval is computed with
+#' the [confint.geeglm()] function.
 #'
-#' While \code{tidy} is supported for "geeglm" objects, \code{augment} and
-#' \code{glance} are not.
+#' While `tidy` is supported for "geeglm" objects, `augment` and
+#' `glance` are not.
 #'
 #' If you have missing values in your model data, you may need to
-#' refit the model with \code{na.action = na.exclude} or deal with the
+#' refit the model with `na.action = na.exclude` or deal with the
 #' missingness in the data beforehand.
 #'
-#' @return All tidying methods return a \code{data.frame} without rownames.
+#' @return All tidying methods return a `data.frame` without rownames.
 #' The structure depends on the method chosen.
 #'
 #' @name geeglm_tidiers
@@ -47,16 +47,16 @@
 #' }
 #'
 #' @rdname geeglm_tidiers
-#' @return \code{tidy.geeglm} returns one row for each coefficient, with five columns:
+#' @return `tidy.geeglm` returns one row for each coefficient, with five columns:
 #'   \item{term}{The term in the linear model being estimated and tested}
 #'   \item{estimate}{The estimated coefficient}
 #'   \item{std.error}{The standard error from the GEE model}
 #'   \item{statistic}{Wald statistic}
 #'   \item{p.value}{two-sided p-value}
 #'
-#' If \code{conf.int=TRUE}, it also includes columns for
-#' \code{conf.low} and \code{conf.high}, computed with
-#' \code{\link{confint.geeglm}} (included as part of broom).
+#' If `conf.int=TRUE`, it also includes columns for
+#' `conf.low` and `conf.high`, computed with
+#' [confint.geeglm()] (included as part of broom).
 #'
 #' @export
 #'
@@ -91,7 +91,7 @@ tidy.geeglm <- function(x, conf.int = FALSE, conf.level = .95,
 #' @param x a "geeglm" object
 #' @param conf.int whether to include a confidence interval
 #' @param conf.level confidence level of the interval, used only if
-#' \code{conf.int=TRUE}
+#' `conf.int=TRUE`
 #' @param exponentiate whether to exponentiate the coefficient estimates
 #' and confidence intervals (typical for log distributions)
 process_geeglm <- function(ret, x, conf.int = FALSE, conf.level = .95,
@@ -123,13 +123,13 @@ process_geeglm <- function(ret, x, conf.int = FALSE, conf.level = .95,
 
 ##' Generate confidence intervals for GEE analyses
 ##'
-##' @title Confidence interval for \code{geeglm} objects
+##' @title Confidence interval for `geeglm` objects
 ##' @param object The 'geeglm' object
 ##' @param parm The parameter to calculate the confidence interval
 ##' for.  If not specified, the default is to calculate a confidence
 ##' interval on all parameters (all variables in the model).
 #' @param level confidence level of the interval, used only if
-#' \code{conf.int=TRUE}
+#' `conf.int=TRUE`
 ##' @param ... Additional parameters
 ##' @details This function was taken from
 ##' http://stackoverflow.com/a/21221995/2632184.

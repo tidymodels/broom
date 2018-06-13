@@ -4,13 +4,15 @@
 \alias{tidy.Kendall}
 \title{Tidying methods for Kendall objects}
 \usage{
-\method{tidy}{Kendall}(x)
+\method{tidy}{Kendall}(x, ...)
 }
 \arguments{
 \item{x}{Fitted object from the Kendall package.}
+
+\item{...}{Unused.}
 }
 \value{
-\code{tidy()} returns a \code{\link[tibble]{tibble}} with one row and columns:
+\code{tidy()} returns a \code{\link[tibble:tibble]{tibble::tibble()}} with one row and columns:
 
 \item{statistic}{Kendall's tau statistic.}
 \item{p.value}{two-sided p-value.}
@@ -23,8 +25,6 @@ Tidies the result of an Kendall rank correlation. Works on all functions from th
 Only a \code{tidy()} method is provided, not an \code{augment()} or \code{glance()} method.
 }
 \examples{
-
-\dontrun{
 library(Kendall)
 
 ### For Kendall ####
@@ -44,7 +44,6 @@ t_res <- SeasonalMannKendall(ts(A))
 
 tidy(t_res)
 }
-}
 \seealso{
-\code{\link[Kendall]{Kendall}} for details on the meaning of each column and implementation.
+\code{\link[Kendall:Kendall]{Kendall::Kendall()}} for details on the meaning of each column and implementation.
 }

@@ -3,24 +3,24 @@
 #' Data frame tidiers are deprecated and will be removed from an upcoming
 #' release of broom.
 #'
-#' These perform tidy summaries of data.frame objects. \code{tidy} produces
-#' summary statistics about each column, while \code{glance} simply reports
-#' the number of rows and columns. Note that \code{augment.data.frame} will
+#' These perform tidy summaries of data.frame objects. `tidy` produces
+#' summary statistics about each column, while `glance` simply reports
+#' the number of rows and columns. Note that `augment.data.frame` will
 #' throw an error.
 #'
 #' @param x A data.frame
 #' @param data data, not used
-#' @param na.rm a logical value indicating whether \code{NA} values should
+#' @param na.rm a logical value indicating whether `NA` values should
 #'   be stripped before the computation proceeds.
 #' @param trim the fraction (0 to 0.5) of observations to be trimmed from
-#'   each end of \code{x} before the mean is computed.  Passed to the
-#'   \code{trim} argument of \code{\link{mean}}
+#'   each end of `x` before the mean is computed.  Passed to the
+#'   `trim` argument of [mean()]
 #' @param ... Additional arguments for other methods.
 #'
 #' @author David Robinson, Benjamin Nutter
 #'
 #' @source
-#' Skew and Kurtosis functions are adapted from implementations in the \code{moments} package: \cr
+#' Skew and Kurtosis functions are adapted from implementations in the `moments` package: \cr
 #' Lukasz Komsta and Frederick Novomestky (2015). moments: Moments, cumulants, skewness,
 #' kurtosis and related tests. R package version 0.14. \cr
 #' https://CRAN.R-project.org/package=moments
@@ -43,7 +43,7 @@
 
 #' @rdname data.frame_tidiers
 #'
-#' @return \code{tidy.data.frame} produces a data frame with one
+#' @return `tidy.data.frame` produces a data frame with one
 #' row per original column, containing summary statistics of each:
 #'   \item{column}{name of original column}
 #'   \item{n}{Number of valid (non-NA) values}
@@ -60,6 +60,7 @@
 #'   \item{se}{standard error}
 #'
 #' @export
+
 tidy.data.frame <- function(x, ..., na.rm = TRUE, trim = 0.1) {
   .Deprecated(
     msg = "Data frame tidiers are deprecated and will be removed in an upcoming release of broom."
@@ -151,7 +152,7 @@ augment.data.frame <- function(x, data, ...) {
 
 #' @rdname data.frame_tidiers
 #'
-#' @return \code{glance} returns a one-row data.frame with
+#' @return `glance` returns a one-row data.frame with
 #'   \item{nrow}{number of rows}
 #'   \item{ncol}{number of columns}
 #'   \item{complete.obs}{number of rows that have no missing values}

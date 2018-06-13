@@ -2,15 +2,15 @@
 #'
 #' Tidies lists with components x, y (vector of coordinates) and z (matrix of
 #' values) which are typically used by functions such as
-#' \code{\link[graphics]{persp}} or \code{\link[graphics]{image}} and returned
-#' by interpolation functions such as \code{\link[akima]{interp}}.
+#' [graphics::persp()] or [graphics::image()] and returned
+#' by interpolation functions such as [akima::interp()].
 #'
 #' @param x list with components x, y and z
 #' @param ... extra arguments
 #'
 #' @template boilerplate
 #'
-#' @return \code{tidy} returns a data frame with columns x, y and z and one row
+#' @return `tidy` returns a data frame with columns x, y and z and one row
 #' per value in matrix z.
 #'
 #' @examples

@@ -6,17 +6,17 @@
 #' any model that conforms to the \pkg{ergm} class, such as those
 #' produced from weighted networks by the \pkg{ergm.count} package.
 #'
-#' @return All tidying methods return a \code{data.frame} without rownames.
+#' @return All tidying methods return a `data.frame` without rownames.
 #' The structure depends on the method chosen.
 #'
 #' @references Hunter DR, Handcock MS, Butts CT, Goodreau SM, Morris M (2008b).
 #' \pkg{ergm}: A Package to Fit, Simulate and Diagnose Exponential-Family
-#' Models for Networks. \emph{Journal of Statistical Software}, 24(3).
-#' \url{http://www.jstatsoft.org/v24/i03/}.
+#' Models for Networks. *Journal of Statistical Software*, 24(3).
+#' <http://www.jstatsoft.org/v24/i03/>.
 #'
-#' @seealso \code{\link[ergm]{ergm}},
-#' \code{\link[ergm]{control.ergm}},
-#' \code{\link[ergm]{summary.ergm}}
+#' @seealso [ergm::ergm()],
+#' [ergm::control.ergm()],
+#' [ergm::summary.ergm()]
 #'
 #' @name ergm_tidiers
 #'
@@ -50,23 +50,23 @@ NULL
 #'
 #' @param conf.int whether to include a confidence interval
 #' @param conf.level confidence level of the interval, used only if
-#' \code{conf.int=TRUE}
+#' `conf.int=TRUE`
 #' @param exponentiate whether to exponentiate the coefficient estimates
 #' and confidence intervals
 #' @param quick whether to compute a smaller and faster version, containing
-#' only the \code{term} and \code{estimate} columns.
+#' only the `term` and `estimate` columns.
 #'
-#' @details There is no \code{augment} method for \pkg{ergm} objects.
+#' @details There is no `augment` method for \pkg{ergm} objects.
 #'
-#' @return \code{tidy.ergm} returns one row for each coefficient, with five columns:
+#' @return `tidy.ergm` returns one row for each coefficient, with five columns:
 #'   \item{term}{The term in the model being estimated and tested}
 #'   \item{estimate}{The estimated coefficient}
 #'   \item{std.error}{The standard error}
 #'   \item{mcmc.error}{The MCMC error}
 #'   \item{p.value}{The two-sided p-value}
 #'
-#' If \code{conf.int=TRUE}, it also includes columns for \code{conf.low} and
-#' \code{conf.high}.
+#' If `conf.int=TRUE`, it also includes columns for `conf.low` and
+#' `conf.high`.
 #'
 #' @export
 tidy.ergm <- function(x, conf.int = FALSE, conf.level = .95,
@@ -98,26 +98,26 @@ tidy.ergm <- function(x, conf.int = FALSE, conf.level = .95,
 #' @rdname ergm_tidiers
 #'
 #' @param deviance whether to report null and residual deviance for the model,
-#' along with degrees of freedom; defaults to \code{FALSE}
+#' along with degrees of freedom; defaults to `FALSE`
 #' @param mcmc whether to report MCMC interval, burn-in and sample size used to
-#' estimate the model; defaults to \code{FALSE}
-#' @param ... extra arguments passed to \code{\link[ergm]{summary.ergm}}
+#' estimate the model; defaults to `FALSE`
+#' @param ... extra arguments passed to [ergm::summary.ergm()]
 #'
-#' @return \code{glance.ergm} returns a one-row data.frame with the columns
+#' @return `glance.ergm` returns a one-row data.frame with the columns
 #'   \item{independence}{Whether the model assumed dyadic independence}
 #'   \item{iterations}{The number of iterations performed before convergence}
 #'   \item{logLik}{If applicable, the log-likelihood associated with the model}
 #'   \item{AIC}{The Akaike Information Criterion}
 #'   \item{BIC}{The Bayesian Information Criterion}
 #'
-#' If \code{deviance=TRUE}, and if the model supports it, the
+#' If `deviance=TRUE`, and if the model supports it, the
 #' data frame will also contain the columns
 #'   \item{null.deviance}{The null deviance of the model}
 #'   \item{df.null}{The degrees of freedom of the null deviance}
 #'   \item{residual.deviance}{The residual deviance of the model}
 #'   \item{df.residual}{The degrees of freedom of the residual deviance}
 #'
-#' Last, if \code{mcmc=TRUE}, the data frame will also contain
+#' Last, if `mcmc=TRUE`, the data frame will also contain
 #' the columns
 #'   \item{MCMC.interval}{The interval used during MCMC estimation}
 #'   \item{MCMC.burnin}{The burn-in period of the MCMC estimation}
@@ -171,7 +171,7 @@ glance.ergm <- function(x, deviance = FALSE, mcmc = FALSE, ...) {
 #' @param x an "ergm" object
 #' @param conf.int whether to include a confidence interval
 #' @param conf.level confidence level of the interval, used only if
-#' \code{conf.int=TRUE}
+#' `conf.int=TRUE`
 #' @param exponentiate whether to exponentiate the coefficient estimates
 #' and confidence intervals (typical for logistic regression)
 process_ergm <- function(ret, x, conf.int = FALSE, conf.level = .95,

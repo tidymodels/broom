@@ -32,18 +32,18 @@
 All tidying methods return a data.frame without rownames, whose
 structure depends on the method chosen.
 
-\code{tidy} and \code{augment} return the same results as \code{\link{lm_tidiers}}.
+\code{tidy} and \code{augment} return the same results as \code{\link[=lm_tidiers]{lm_tidiers()}}.
 
 On an \code{lmRob} \code{glance} returns a one-row data frame with the following columns:
-  \item{r.squared}{R-squared}
-  \item{deviance}{Robust deviance}
-  \item{sigma}{Residual scale estimate}
-  \item{df.residual}{Number of residual degrees of freedom}
+\item{r.squared}{R-squared}
+\item{deviance}{Robust deviance}
+\item{sigma}{Residual scale estimate}
+\item{df.residual}{Number of residual degrees of freedom}
 
 On an \code{glmRob} \code{glance} returns a one-row data frame with the following columns:
-  \item{deviance}{Robust deviance}
-  \item{null.deviance}{Deviance under the null model}
-  \item{df.residual}{Number of residual degrees of freedom}
+\item{deviance}{Robust deviance}
+\item{null.deviance}{Deviance under the null model}
+\item{df.residual}{Number of residual degrees of freedom}
 }
 \description{
 Tidying robust regression objects from the robust package. The tidy and augment
@@ -64,5 +64,5 @@ if (require("robust", quietly = TRUE)) {
 
 }
 \seealso{
-\code{\link{lm_tidiers}}, \code{\link[robust]{lmRob}}, \code{\link[robust]{glmRob}}
+\code{\link[=lm_tidiers]{lm_tidiers()}}, \code{\link[robust:lmRob]{robust::lmRob()}}, \code{\link[robust:glmRob]{robust::glmRob()}}
 }
