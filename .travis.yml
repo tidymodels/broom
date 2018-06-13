@@ -29,14 +29,10 @@ matrix:
 r_binary_packages:
   - rstanarm
   - rstan
-  - dplyr
   - lme4
   - psych
-  - ergm
   - survival
   - mclust
-  - tidyr
-  - readr
   - git2r
   - data.table
   - RSiena
@@ -50,6 +46,10 @@ r_packages:
   - bindrcpp
   - purrr
   - ks
+  - ergm
+  - tidyr
+  - dplyr
+  - readr
 
 after_success:
   - Rscript -e 'covr::codecov()'
