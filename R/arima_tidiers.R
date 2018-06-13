@@ -55,7 +55,7 @@ tidy.Arima <- function(x, conf.int=FALSE, conf.level=.95, ...) {
   if (conf.int) {
     ret <- cbind(ret, confint_tidy(x))
   }
-  ret
+  tibble::as_tibble(ret)
 }
 
 
@@ -72,5 +72,5 @@ tidy.Arima <- function(x, conf.int=FALSE, conf.level=.95, ...) {
 #' @export
 glance.Arima <- function(x, ...) {
   ret <- unrowname(data.frame(sigma = sqrt(x$sigma2)))
-  finish_glance(ret, x)
+  tibble::as_tibble(finish_glance(ret, x))
 }
