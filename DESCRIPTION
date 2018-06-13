@@ -108,7 +108,6 @@ Suggests:
     rgeos,
     rmarkdown,
     robust,
-    rsample,
     rstan,
     rstanarm,
     sp,
@@ -120,3 +119,5 @@ Suggests:
     tseries,
     xergm,
     zoo
+Remotes:
+    topepos/rsample
