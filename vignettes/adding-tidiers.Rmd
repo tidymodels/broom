@@ -146,8 +146,8 @@ Data given to the `data` argument must have both the original predictors and the
 
 ```{r}
 model <- lm(speed ~ dist, data = cars)
-as_tibble(augment(model, data = cars))
-as_tibble(augment(model, newdata = cars))
+head(augment(model, data = cars))
+head(augment(model, newdata = cars))
 ```
 
 This means that many `augment(model, data = original_data)` should provide `.fitted` and `.resid` columns in most cases, whereas `augment(model, data = test_data)` only needs to a `.fitted` column, even if the response is present in `test_data`. While it would be nice to provide a `.resid` column in this case, determining the response variable from a formula specification is often a brittle process.
