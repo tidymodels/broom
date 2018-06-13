@@ -36,7 +36,6 @@ r_binary_packages:
   - survival
   - mclust
   - tidyr
-  - glmnet
   - readr
   - git2r
   - data.table
