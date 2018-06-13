@@ -4,27 +4,17 @@ language: r
 sudo: required
 cache: packages
 
+env:
+  global:
+  - MAKEFLAGS="-j 2"
+
 r_binary_packages:
   - rstanarm
   - rstan
-  - dplyr
-  - Matrix
-  - lme4
-  - psych
-  - ergm
-  - survival
-  - brms
-  - mclust
-  - testthat
-  - tidyr
-  - glmnet
-
-before_install:
-  - sudo apt-get -y install libnlopt-dev r-recommended r-api-3
-  - Rscript -e 'update.packages(ask = FALSE)'
 
 after_success:
   - Rscript -e 'covr::codecov()'
 
-use_bioc: true
 bioc_required: true
+
+warnings_are_errors: false
