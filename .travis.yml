@@ -8,15 +8,19 @@ r:
   - oldrel
   - release
   - devel
-  
-env:
-  global:
-    - R_MAX_NUM_DLLS=999
 
 sudo: required
 cache: packages  
 bioc_required: true
 warnings_are_errors: false
+
+env:
+  global:
+    - R_MAX_NUM_DLLS=999
+    
+matrix:
+  allow_failures:
+    - r: 3.1
 
 r_binary_packages:
   - rstanarm
@@ -37,6 +41,9 @@ r_binary_packages:
   - kernlab
   - FNN
   - maps
+  
+r_source_packages:
+  - rlang
 
 after_success:
   - Rscript -e 'covr::codecov()'
