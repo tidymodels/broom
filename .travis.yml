@@ -17,7 +17,7 @@ warnings_are_errors: false
 env:
   global:
     - R_MAX_NUM_DLLS=999
-    - _R_CHECK_FORCE_SUGGESTS_=0
+    - _R_CHECK_FORCE_SUGGESTS_=FALSE
 
 r_build_args: "--no-build-vignettes"
 r_check_args: "--no-build-vignettes --as-cran"
