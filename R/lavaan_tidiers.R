@@ -2,12 +2,10 @@
 #'
 #' These methods tidy the coefficients of lavaan CFA and SEM models.
 #'
-#' @param x An object of class \code{lavaan}, such as those from \code{cfa},
-#' or \code{sem}
-#'
-#' @return All tidying methods return a \code{data.frame} without rownames.
-#' The structure depends on the method chosen.
-#'
+#' @param x An object of class `lavaan`, such as those from [lavaan::cfa()],
+#' or [lavaan::sem()]
+#' @param ... For `tidy`, additional arguments passed to 
+#'   [lavaan::parameterEstimates()]. Ignored for `glance`.`
 #' @name lavaan_tidiers
 #'
 NULL
@@ -15,27 +13,22 @@ NULL
 
 #' @rdname lavaan_tidiers
 #'
-#' @param conf.level confidence level for CI
-#' @param ... Other parameters passed to lavaan::parameterEstimates
+#' @param conf.level Confidence level to use. Default is 0.95.
 #'
-#' @return \code{tidy} returns one row for each estimated parameter
-#' It contains the columns
+#' @return `tidy` returns a tibble with one row for each estimated parameter
+#'   and columns:
 #'   \item{term}{The result of paste(lhs, op, rhs)}
 #'   \item{op}{The operator in the model syntax (e.g. ~~ for covariances, or ~ for regression parameters)}
 #'   \item{estimate}{The parameter estimate (may be standardized)}
 #'   \item{std.error}{}
-#'   \item{statistic}{The z value returned by lavaan::parameterEstimates}
+#'   \item{statistic}{The z value returned by [lavaan::parameterEstimates()]
 #'   \item{p.value}{}
 #'   \item{conf.low}{}
 #'   \item{conf.high}{}
 #'
-#' @import dplyr
-#'
 #' @export
-tidy.lavaan <- function(x,
-                        conf.level = 0.95,
-                        ...) {
-  tidyframe <- parameterEstimates(x,
+tidy.lavaan <- function(x, conf.level = 0.95, ...) {
+  parameterEstimates(x,
     ci = TRUE,
     level = conf.level,
     standardized = TRUE,
@@ -50,41 +43,36 @@ tidy.lavaan <- function(x,
       p.value = pvalue,
       statistic = z,
       conf.low = ci.lower,
-      conf.hi = ci.upper
+      conf.high = ci.upper
     ) %>%
-    select(term, op, everything(), -rowname, -lhs, -rhs)
-  return(tidyframe)
+    select(term, op, everything(), -rowname, -lhs, -rhs) %>% 
+    as_tibble()
 }
 
 
 #' @rdname lavaan_tidiers
-#'
-#' @param long If long=FALSE, return a single row with columns per-fit-statistic.
-#' @param ... extra arguments (not used)
-#'
-#' @return \code{glance} returns the following fit statistics.
-#'
+#' 
+#' @return `glance` returns statistics measuring model fit. TODO: Document.
 #' @export
-glance.lavaan <- function(m, long=T, fit.measures = c("npar", "chisq", "rmsea", "aic", "bic", "cfi", "logl"), ...) {
-  gl <- m %>%
-    fitmeasures(fit.measures = fit.measures) %>%
+glance.lavaan <- function(x, ...) {
+  x %>%
+    fitmeasures(fit.measures = 
+                  c("npar",
+                    "chisq",
+                    "rmsea",
+                    "aic",
+                    "bic",
+                    "cfi",
+                    "logl")) %>%
     as_data_frame() %>%
     rownames_to_column(var = "term") %>%
     rename(estimate = value) %>%
     spread("term", "estimate") %>%
-    select(matches("k^"), matches("chisq^"), matches("rmsea^"), everything())
-
-  if (long == T) {
-    gl <- gl %>%
-      gather(term, estimate)
-  }
-  return(gl)
+    select(
+      matches("k^"),
+      matches("chisq^"),
+      matches("rmsea^"),
+      everything()) %>% 
+    as_tibble()
 }
-
-
-#' @export
-augment.lavaan <- function(...) {
-    warning("Not yet implemented")
-}
-    
 
