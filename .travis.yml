@@ -49,6 +49,7 @@ r_packages:
   - rlang
   - bindrcpp
   - purrr
+  - ks
 
 after_success:
   - Rscript -e 'covr::codecov()'
