@@ -4,6 +4,10 @@ language: r
 sudo: required
 cache: packages
 
+env:
+  global:
+  - MAKEFLAGS="-j 2"
+
 r_binary_packages:
   - rstanarm
   - rstan
