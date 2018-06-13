@@ -1,7 +1,5 @@
 context("felm tidiers")
 
-library(lfe)
-
 N <- 1e2
 DT <- data.frame(
   id = sample(5, N, TRUE),
@@ -12,7 +10,8 @@ DT <- data.frame(
 )
 
 test_that("felm tidiers work", {
-  result_felm <- felm(v2 ~ v3, DT)
+  skip_if_not_installed("lfe")
+  result_felm <- lfe::felm(v2 ~ v3, DT)
 
   td <- tidy(result_felm)
   check_tidy(td, exp.row = 2, exp.col = 5)
@@ -25,8 +24,9 @@ test_that("felm tidiers work", {
 })
 
 test_that("confidence interval and fixed effects estimates work", {
+  skip_if_not_installed("lfe")
   DT$v1[1] <- NA_integer_
-  result_felm <- felm(v2 ~ v3 | id + v1, DT, na.action = na.exclude)
+  result_felm <- lfe::felm(v2 ~ v3 | id + v1, DT, na.action = na.exclude)
   td <- tidy(result_felm, conf.int = TRUE, fe = TRUE)
   check_tidy(td, exp.row = 11, exp.col = 9)
 
@@ -38,8 +38,9 @@ test_that("confidence interval and fixed effects estimates work", {
 })
 
 test_that("augment felm works when formula is passed as a variable ", {
+  skip_if_not_installed("lfe")
   my_formula <- v2 ~ v4
-  result_felm <- felm(my_formula, DT)
+  result_felm <- lfe::felm(my_formula, DT)
   
   td <- tidy(result_felm)
   check_tidy(td, exp.row = 2, exp.col = 5)

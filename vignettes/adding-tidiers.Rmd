@@ -79,11 +79,13 @@ In general, we prefer informative errors to magical behaviors or untested succes
 
 ## Package dependencies
 
-In order to test your tidiers, you may need to add `your_package` to the **Suggests** section of broom's DESCRIPTION.
+In order to test your tidiers, you may need to add `your_package` to the **Suggests** section of broom's DESCRIPTION. You should then use `skip_if_not_installed("my_package")` at the beginning of any test that uses `my_package`.
 
 We are currently in the process of developing a new set of tests for tidying methods. Recommendations on how to test your tidiers will appear here soon.
 
-<!-- requireNamespace(package, quietly = TRUE)??? -->
+```{r, eval = FALSE}
+# TODO: example tests
+```
 
 At the moment, pull requests must pass the AppVeyor build to be added to `broom`. It is okay if the Travis CI build times out.
 
@@ -144,8 +146,8 @@ Data given to the `data` argument must have both the original predictors and the
 
 ```{r}
 model <- lm(speed ~ dist, data = cars)
-as_tibble(augment(model, data = cars))
-as_tibble(augment(model, newdata = cars))
+head(augment(model, data = cars))
+head(augment(model, newdata = cars))
 ```
 
 This means that many `augment(model, data = original_data)` should provide `.fitted` and `.resid` columns in most cases, whereas `augment(model, data = test_data)` only needs to a `.fitted` column, even if the response is present in `test_data`. While it would be nice to provide a `.resid` column in this case, determining the response variable from a formula specification is often a brittle process.

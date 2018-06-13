@@ -3,6 +3,7 @@ context("bingroup tidiers")
 library(binGroup)
 
 test_that("binWidth tidiers work", {
+  skip_if_not_installed("binGroup")
   bw <- binWidth(100, .1)
   td <- tidy(bw)
 
@@ -10,6 +11,7 @@ test_that("binWidth tidiers work", {
 })
 
 test_that("binDesign tidiers work", {
+  skip_if_not_installed("binGroup")
   bd <- binDesign(nmax = 300, delta = 0.06, p.hyp = 0.1, power = .8)
   td <- tidy(bd)
   gl <- glance(bd)

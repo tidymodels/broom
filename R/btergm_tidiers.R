@@ -14,6 +14,7 @@
 #' @examples
 #'
 #' if (require("xergm")) {
+#'     set.seed(1)
 #'     # Using the same simulated example as the xergm package
 #'     # Create 10 random networks with 10 actors
 #'     networks <- list()
@@ -32,8 +33,8 @@
 #'     # Fit a model where the propensity to form ties depends
 #'     # on the edge covariates, controlling for the number of
 #'     # in-stars
-#'     btfit <- btergm(networks ~ edges + istar(2) +
-#'                       edgecov(covariates), R = 100)
+#'     suppressWarnings(btfit <- btergm(networks ~ edges + istar(2) +
+#'                        edgecov(covariates), R = 100))
 #'
 #'     # Show terms, coefficient estimates and errors
 #'     tidy(btfit)

@@ -1,9 +1,7 @@
 context("Package wide tests")
 
-if (requireNamespace("lintr", quietly = TRUE)) {
-  context("lints")
-  skip("Skip linting for now")
-  test_that("Package Style", {
-    lintr::expect_lint_free()
-  })
-}
+test_that("Package Style", {
+  skip("No linting test yet")
+  # skip_if_not_installed("lintr")
+  lintr::expect_lint_free()
+})

@@ -1,7 +1,6 @@
 # test tidy and glance methods from rstanarm_tidiers.R
 
 context("rstanarm tidiers")
-suppressPackageStartupMessages(library(rstanarm))
 
 if (require(rstanarm, quietly = TRUE)) {
   set.seed(2016)

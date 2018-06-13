@@ -2,7 +2,6 @@ Type: Package
 Package: broom
 Title: Convert Statistical Analysis Objects into Tidy Data Frames
 Version: 0.4.4.9000
-Date: 2018-06-04
 Authors@R: c(
     person("David", "Robinson", email = "admiral.david@gmail.com", role = c("aut", "cre")),
     person("Matthieu", "Gomez", email = "mattg@princeton.edu", role = "ctb"),
@@ -39,7 +38,10 @@ Description: Convert statistical analysis objects from R into tidy data frames,
 License: MIT + file LICENSE
 URL: http://github.com/tidyverse/broom
 BugReports: http://github.com/tidyverse/broom/issues
-Imports: 
+Depends: 
+    R (>= 3.1)
+Imports:
+    backports,
     dplyr,
     methods,
     nlme,
@@ -119,5 +121,5 @@ Suggests:
     xergm,
     zoo
 VignetteBuilder: knitr
-RoxygenNote: 6.0.1
 Roxygen: list(markdown = TRUE)
+RoxygenNote: 6.0.1

@@ -1,6 +1,7 @@
 context("bootstrapping")
 
 test_that("bootstrap works with by_group and grouped tbl", {
+  skip("Deprecating soon")
   df <- data_frame(
     x = c(rep("a", 3), rep("b", 5)),
     y = rnorm(length(x))
@@ -15,6 +16,7 @@ test_that("bootstrap works with by_group and grouped tbl", {
 })
 
 test_that("bootstrap does not sample within groups if by_group = FALSE", {
+  skip("Deprecating soon")
   set.seed(12334)
   df <- data_frame(
     x = c(rep("a", 3), rep("b", 5)),
@@ -30,6 +32,7 @@ test_that("bootstrap does not sample within groups if by_group = FALSE", {
 })
 
 test_that("bootstrap does not sample within groups if no groups", {
+  skip("Deprecating soon")
   set.seed(12334)
   df <- data_frame(
     x = c(rep("a", 3), rep("b", 5)),

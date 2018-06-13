@@ -1,6 +1,7 @@
 context("zoo tidiers")
 
 test_that("tidy.zoo works", {
+  skip_if_not_installed("zoo")
   set.seed(1071)
   Z.index <- zoo::as.Date(sample(12450:12500, 10))
   Z.data <- matrix(rnorm(30), ncol = 3)
