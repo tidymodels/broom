@@ -37,10 +37,7 @@ Description: Convert statistical analysis objects from R into tidy data frames,
 License: MIT + file LICENSE
 URL: http://github.com/tidyverse/broom
 BugReports: http://github.com/tidyverse/broom/issues
-VignetteBuilder: knitr
-RoxygenNote: 6.0.1
-Roxygen: list(markdown = TRUE)
-Depends:
+Depends: 
     R (>= 3.1)
 Imports: 
     dplyr,
@@ -108,6 +105,7 @@ Suggests:
     rgeos,
     rmarkdown,
     robust,
+    rsample,
     rstan,
     rstanarm,
     sp,
@@ -119,5 +117,7 @@ Suggests:
     tseries,
     xergm,
     zoo
-Remotes:
-    topepos/rsample
+VignetteBuilder: knitr
+Remotes: topepos/rsample
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 6.0.1
