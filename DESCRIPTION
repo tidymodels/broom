@@ -1,8 +1,8 @@
-Package: broom
 Type: Package
+Package: broom
 Title: Convert Statistical Analysis Objects into Tidy Data Frames
-Version: 0.4.4
-Date: 2018-03-12
+Version: 0.4.4.9000
+Date: 2018-06-04
 Authors@R: c(
     person("David", "Robinson", email = "admiral.david@gmail.com", role = c("aut", "cre")),
     person("Matthieu", "Gomez", email = "mattg@princeton.edu", role = "ctb"),
@@ -21,7 +21,8 @@ Authors@R: c(
     person("Hadley", "Wickham", email = "hadley@rstudio.com", role = "ctb"),
     person("Matthew", "Lincoln", email = "matthew.d.lincoln@gmail.com", role = "ctb"),
     person("Lukasz", "Komsta", email = "lukasz.komsta@umlub.pl", role = "ctb"),
-    person("Frederick", "Novometsky", role = "ctb"))
+    person("Frederick", "Novometsky", role = "ctb"),
+    person("Jason Cory", "Brunson", email = "cornelioid@gmail.com", role = "ctb"))
 Maintainer: David Robinson <admiral.david@gmail.com>
 Description: Convert statistical analysis objects from R into tidy data frames,
     so that they can more easily be combined, reshaped and otherwise processed
@@ -30,28 +31,47 @@ Description: Convert statistical analysis objects from R into tidy data frames,
     coefficients of a regression; augment, which adds columns to the original
     data such as predictions, residuals and cluster assignments; and glance, which
     provides a one-row summary of model-level statistics.
+License: MIT + file LICENSE
+URL: http://github.com/tidyverse/broom
+BugReports: http://github.com/tidyverse/broom/issues
 Imports:
-    plyr,
     dplyr,
-    tidyr,
-    stringr,
-    reshape2,
+    methods,
     nlme,
     methods,
     zoo
 Suggests: 
     knitr,
     boot,
-    survival,
+    brms,
+    btergm,
+    coda,
+    covr,
+    emmeans,
+    ergm,
     gam,
+    gamlss,
+    geepack,
+    ggplot2,
     glmnet,
-    lfe,
+    gmm,
+    Hmisc,
+    irlba,
+    knitr,
+    ks,
     Lahman,
-    MASS,
-    rgeos,
-    sp,
+    lfe,
+    lme4,
+    lmodel2,
+    lmtest,
+    lsmeans,
     maps,
     maptools,
+    MASS,
+    Matrix,
+    mclust,
+    mgcv,
+    muhaz,
     multcomp,
     testthat,
     lme4,
@@ -64,39 +84,25 @@ Suggests:
     AUC,
     ergm,
     network,
-    statnet.common,
-    xergm,
-    btergm,
-    binGroup,
-    Hmisc,
-    bbmle,
-    gamlss,
+    nnet,
+    orcutt,
+    plm,
+    poLCA,
+    psych,
+    purrr,
+    rgeos,
+    rmarkdown,
+    robust,
+    rsample,
     rstan,
     rstanarm,
-    brms,
-    coda,
-    gmm,
-    Matrix,
-    ks,
-    purrr,
-    orcutt,
-    mgcv,
-    lmodel2,
-    poLCA,
-    mclust,
-    covr,
-    lsmeans,
-    emmeans,
-    betareg,
-    robust,
-    akima,
-    AER,
-    muhaz,
+    sp,
     speedglm,
+    statnet.common,
+    survival,
+    testthat,
     tibble,
-    irlba
-URL: http://github.com/tidyverse/broom
-BugReports: http://github.com/tidyverse/broom/issues
+    xergm,
+    zoo
 VignetteBuilder: knitr
-License: MIT + file LICENSE
 RoxygenNote: 6.0.1

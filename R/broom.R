@@ -7,12 +7,12 @@
 #' coefficients of a regression; augment, which adds columns to the original
 #' data such as predictions, residuals and cluster assignments; and glance,
 #' which provides a one-row summary of model-level statistics.
-#' 
+#'
 #' @importFrom stats AIC coef confint fitted logLik model.frame na.omit
 #' @importFrom stats predict qnorm qt residuals setNames var
-#' 
+#'
 #' @importFrom utils head
-#' 
+#'
 #' @docType package
 #' @aliases broom broom-package
 NULL

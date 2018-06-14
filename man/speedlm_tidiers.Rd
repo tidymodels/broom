@@ -60,7 +60,7 @@ The columns match those in \link{lm_tidiers}.
   \item{.fitted}{Fitted values of model}
 }
 \description{
-These methods tidy the coefficients of a "speedlm" object 
+These methods tidy the coefficients of a "speedlm" object
 into a summary, augment the original data with information on the
 fitted values and residuals, and construct a one-row glance of the model's
 statistics.

@@ -19,7 +19,7 @@ a one-row data frame with additional columns added, such as
   \item{BIC}{Bayesian Information Criterion}
   \item{deviance}{deviance}
   \item{df.residual}{residual degrees of freedom}
-  
+
 Each of these are produced by the corresponding generics
 }
 \description{
