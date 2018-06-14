@@ -228,6 +228,7 @@ finish_glance <- function(ret, x) {
     ret$logLik <- tryCatch(as.numeric(stats::logLik(x)), error = function(e) NULL)
     ret$AIC <- tryCatch(stats::AIC(x), error = function(e) NULL)
     ret$BIC <- tryCatch(stats::BIC(x), error = function(e) NULL)
+    ret$nobs <- tryCatch(stats::nobs(x), error = function(e) NULL)
     
     # special case for REML objects (better way?)
     if ("lmerMod" %in% class(x)) {
