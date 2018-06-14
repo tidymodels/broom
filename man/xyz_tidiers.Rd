@@ -22,8 +22,8 @@ per value in matrix z.
 \description{
 Tidies lists with components x, y (vector of coordinates) and z (matrix of
 values) which are typically used by functions such as
-\code{\link[graphics]{persp}} or \code{\link[graphics]{image}} and returned
-by interpolation functions such as \code{\link[akima]{interp}}.
+\code{\link[graphics:persp]{graphics::persp()}} or \code{\link[graphics:image]{graphics::image()}} and returned
+by interpolation functions such as \code{\link[akima:interp]{akima::interp()}}.
 }
 \examples{
 

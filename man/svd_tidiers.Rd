@@ -16,35 +16,38 @@ tidy_svd(x, matrix = "u", ...)
 \item{...}{Extra arguments (not used)}
 }
 \value{
-An SVD object contains a decomposition into u, d, and v matrices, such that
-\code{u \%\*\% diag(d) \%\*\% t(v)} gives the original matrix. This tidier gives
-a choice of which matrix to tidy.
+An SVD object contains a decomposition into u, d, and v matrices,
+such that\preformatted{u %*% diag(d) %*% t(v)
+}
+
+gives the original matrix. This tidier gives a choice of which matrix
+to tidy.
 
 When \code{matrix = "u"}, each observation represents one pair of row and
 principal component, with variables:
-  \item{row}{Number of the row in the original data being described}
-  \item{PC}{Principal component}
-  \item{value}{Loading of this principal component for this row}
+\item{row}{Number of the row in the original data being described}
+\item{PC}{Principal component}
+\item{value}{Loading of this principal component for this row}
 
 When \code{matrix = "d"}, each observation represents one principal component,
 with variables:
-  \item{\code{PC}}{An integer vector indicating the principal component}
-  \item{\code{std.dev}}{Standard deviation explained by this PC}
-  \item{\code{percent}}{Percentage of variation explained. This will be
-    inaccurate for irlba objects due to the SVD truncation.}
-  \item{\code{cumulative}}{Cumulative percentage of variation explained}
+\item{\code{PC}}{An integer vector indicating the principal component}
+\item{\code{std.dev}}{Standard deviation explained by this PC}
+\item{\code{percent}}{Percentage of variation explained. This will be
+inaccurate for irlba objects due to the SVD truncation.}
+\item{\code{cumulative}}{Cumulative percentage of variation explained}
 
 When \code{matrix = "v"}, each observation represents a pair of a principal
 component and a column of the original matrix, with variables:
-  \item{column}{Column of original matrix described}
-  \item{PC}{Principal component}
-  \item{value}{Value of this PC for this column}
+\item{column}{Column of original matrix described}
+\item{PC}{Principal component}
+\item{value}{Value of this PC for this column}
 }
 \description{
 These methods tidy the U, D, and V matrices returned by the
-\code{\link{svd}} or \code{\link[irlba]{irlba}} functions into a tidy format.
+\code{\link[=svd]{svd()}} or \code{\link[irlba:irlba]{irlba::irlba()}} functions into a tidy format.
 Because \code{svd} and \code{irlba} return lists without classes, this function
-has to be called by \code{\link{tidy.list}} when it recognizes a list as an
+has to be called by \code{\link[=tidy.list]{tidy.list()}} when it recognizes a list as an
 SVD or \code{irlba} object.
 }
 \details{
@@ -78,5 +81,5 @@ tidy_u \%>\%
     facet_wrap(~ PC, scale = "free_y")
 }
 \seealso{
-\code{\link{svd}}, \code{\link[irlba]{irlba}} \code{\link{tidy.list}}
+\code{\link[=svd]{svd()}}, \code{\link[irlba:irlba]{irlba::irlba()}} \code{\link[=tidy.list]{tidy.list()}}
 }

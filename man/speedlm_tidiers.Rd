@@ -44,20 +44,20 @@ lm with one row for each term in the formula.
 The columns match those in \link{lm_tidiers}.
 
 \code{glance.speedlm} returns a one-row data.frame with the columns
-  \item{r.squared}{The percent of variance explained by the model}
-  \item{adj.r.squared}{r.squared adjusted based on the degrees of freedom}
-  \item{statistic}{F-statistic}
-  \item{p.value}{p-value from the F test, describing whether the full
-  regression is significant}
-  \item{df}{Degrees of freedom used by the coefficients}
-  \item{logLik}{the data's log-likelihood under the model}
-  \item{AIC}{the Akaike Information Criterion}
-  \item{BIC}{the Bayesian Information Criterion}
-  \item{deviance}{deviance}
-  \item{df.residual}{residual degrees of freedom}
+\item{r.squared}{The percent of variance explained by the model}
+\item{adj.r.squared}{r.squared adjusted based on the degrees of freedom}
+\item{statistic}{F-statistic}
+\item{p.value}{p-value from the F test, describing whether the full
+regression is significant}
+\item{df}{Degrees of freedom used by the coefficients}
+\item{logLik}{the data's log-likelihood under the model}
+\item{AIC}{the Akaike Information Criterion}
+\item{BIC}{the Bayesian Information Criterion}
+\item{deviance}{deviance}
+\item{df.residual}{residual degrees of freedom}
 
 \code{augment.speedlm} returns  one row for each observation, with just one column added:
-  \item{.fitted}{Fitted values of model}
+\item{.fitted}{Fitted values of model}
 }
 \description{
 These methods tidy the coefficients of a "speedlm" object

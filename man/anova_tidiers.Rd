@@ -20,12 +20,12 @@
 }
 \value{
 A data.frame with columns
-  \item{term}{Term within the model, or "Residuals"}
-  \item{df}{Degrees of freedom used by this term in the model}
-  \item{sumsq}{Sum of squares explained by this term}
-  \item{meansq}{Mean of sum of squares among degrees of freedom}
-  \item{statistic}{F statistic}
-  \item{p.value}{P-value from F test}
+\item{term}{Term within the model, or "Residuals"}
+\item{df}{Degrees of freedom used by this term in the model}
+\item{sumsq}{Sum of squares explained by this term}
+\item{meansq}{Mean of sum of squares among degrees of freedom}
+\item{statistic}{F statistic}
+\item{p.value}{P-value from F test}
 
 In the case of an \code{"aovlist"} object, there is also a \code{stratum}
 column describing the error stratum
@@ -38,6 +38,10 @@ Only a \code{tidy} method is provided, not an \code{augment} or
 \details{
 Note that the "term" column of an ANOVA table can come with
 leading or trailing whitespace, which this tidying method trims.
+
+Note that \code{Anova} from \pkg{car} (perhaps counter-intuively) outputs an
+object of class \code{anova} for generalized linear models. These objects are
+also supported.
 }
 \examples{
 

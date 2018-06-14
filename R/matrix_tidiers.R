@@ -1,9 +1,9 @@
 #' Tidiers for matrix objects
 #'
-#' These perform tidying operations on matrix objects. \code{tidy} turns the
+#' These perform tidying operations on matrix objects. `tidy` turns the
 #' matrix into a data.frame while bringing rownames, if they exist, in as
-#' a column called \code{.rownames} (since results of tidying operations never
-#' contain rownames). \code{glance} simply reports the number of rows and
+#' a column called `.rownames` (since results of tidying operations never
+#' contain rownames). `glance` simply reports the number of rows and
 #' columns. Note that no augment method exists for matrices.
 #'
 #' @param x A matrix
@@ -20,9 +20,9 @@
 
 #' @rdname matrix_tidiers
 #'
-#' @return \code{tidy.matrix} returns the original matrix converted into
+#' @return `tidy.matrix` returns the original matrix converted into
 #' a data.frame, except that it incorporates rownames (if they exist)
-#' into a column called \code{.rownames}.
+#' into a column called `.rownames`.
 #'
 #' @export
 tidy.matrix <- function(x, ...) {
@@ -32,7 +32,7 @@ tidy.matrix <- function(x, ...) {
 
 #' @rdname matrix_tidiers
 #'
-#' @return \code{glance} returns a one-row data.frame with
+#' @return `glance` returns a one-row data.frame with
 #'   \item{nrow}{number of rows}
 #'   \item{ncol}{number of columns}
 #'   \item{complete.obs}{number of rows that have no missing values}

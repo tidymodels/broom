@@ -36,28 +36,32 @@ each end of \code{x} before the mean is computed.  Passed to the
 \value{
 \code{tidy.data.frame} produces a data frame with one
 row per original column, containing summary statistics of each:
-  \item{column}{name of original column}
-  \item{n}{Number of valid (non-NA) values}
-  \item{mean}{mean}
-  \item{sd}{standard deviation}
-  \item{median}{median}
-  \item{trimmed}{trimmed mean, with trim defaulting to .1}
-  \item{mad}{median absolute deviation (from the median)}
-  \item{min}{minimum value}
-  \item{max}{maximum value}
-  \item{range}{range}
-  \item{skew}{skew}
-  \item{kurtosis}{kurtosis}
-  \item{se}{standard error}
+\item{column}{name of original column}
+\item{n}{Number of valid (non-NA) values}
+\item{mean}{mean}
+\item{sd}{standard deviation}
+\item{median}{median}
+\item{trimmed}{trimmed mean, with trim defaulting to .1}
+\item{mad}{median absolute deviation (from the median)}
+\item{min}{minimum value}
+\item{max}{maximum value}
+\item{range}{range}
+\item{skew}{skew}
+\item{kurtosis}{kurtosis}
+\item{se}{standard error}
 
 \code{glance} returns a one-row data.frame with
-  \item{nrow}{number of rows}
-  \item{ncol}{number of columns}
-  \item{complete.obs}{number of rows that have no missing values}
-  \item{na.fraction}{fraction of values across all rows and columns that
-  are missing}
+\item{nrow}{number of rows}
+\item{ncol}{number of columns}
+\item{complete.obs}{number of rows that have no missing values}
+\item{na.fraction}{fraction of values across all rows and columns that
+are missing}
 }
 \description{
+Data frame tidiers are deprecated and will be removed from an upcoming
+release of broom.
+}
+\details{
 These perform tidy summaries of data.frame objects. \code{tidy} produces
 summary statistics about each column, while \code{glance} simply reports
 the number of rows and columns. Note that \code{augment.data.frame} will

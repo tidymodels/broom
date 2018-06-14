@@ -4,16 +4,17 @@
 #' random graph model estimated with the \pkg{xergm}. It simply returns the
 #' coefficients and their confidence intervals.
 #'
-#' @return A \code{data.frame} without rownames.
+#' @return A `data.frame` without rownames.
 #'
-#' @seealso \code{\link[btergm]{btergm}}
+#' @seealso [btergm::btergm()]
 #'
 #' @name btergm_tidiers
 #'
-#' @param x a \code{\link[btergm]{btergm}} object
+#' @param x a [btergm::btergm()] object
 #' @examples
 #'
 #' if (require("xergm")) {
+#'     set.seed(1)
 #'     # Using the same simulated example as the xergm package
 #'     # Create 10 random networks with 10 actors
 #'     networks <- list()
@@ -32,8 +33,8 @@
 #'     # Fit a model where the propensity to form ties depends
 #'     # on the edge covariates, controlling for the number of
 #'     # in-stars
-#'     btfit <- btergm(networks ~ edges + istar(2) +
-#'                       edgecov(covariates), R = 100)
+#'     suppressWarnings(btfit <- btergm(networks ~ edges + istar(2) +
+#'                        edgecov(covariates), R = 100))
 #'
 #'     # Show terms, coefficient estimates and errors
 #'     tidy(btfit)
@@ -49,13 +50,13 @@ NULL
 #' @param exponentiate whether to exponentiate the coefficient estimates
 #' and confidence intervals
 #' @param quick whether to compute a smaller and faster version, containing
-#' only the \code{term} and \code{estimate} columns.
+#' only the `term` and `estimate` columns.
 #' @param ... extra arguments (currently not used)
 #'
-#' @details There is no \code{augment} or \code{glance} method
+#' @details There is no `augment` or `glance` method
 #' for \pkg{ergm} objects.
 #'
-#' @return \code{tidy.btergm} returns one row for each coefficient,
+#' @return `tidy.btergm` returns one row for each coefficient,
 #' with four columns:
 #'   \item{term}{The term in the model being estimated and tested}
 #'   \item{estimate}{The estimated coefficient}

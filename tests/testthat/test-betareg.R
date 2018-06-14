@@ -3,6 +3,7 @@ context("betareg tidiers")
 library(betareg)
 
 test_that("betareg tidiers work", {
+  skip_if_not_installed("betareg")
   data(GasolineYield)
   mod <- betareg(yield ~ batch + temp, data = GasolineYield)
 

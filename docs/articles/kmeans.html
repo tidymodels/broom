@@ -46,6 +46,12 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
+      <a href="../articles/adding-tidiers.html">Adding new tidiers</a>
+    </li>
+    <li>
+      <a href="../articles/available-methods.html">Available methods</a>
+    </li>
+    <li>
       <a href="../articles/bootstrapping.html">Bootstrapping</a>
     </li>
     <li>
@@ -79,7 +85,7 @@
     <div class="page-header toc-ignore">
       <h1>kmeans with dplyr and broom</h1>
             
-            <h4 class="date">2018-06-05</h4>
+            <h4 class="date">2018-06-07</h4>
       
       <small class="dont-index">Source: <a href="http://github.com/tidyverse/broom/blob/master/vignettes/kmeans.Rmd"><code>vignettes/kmeans.Rmd</code></a></small>
       <div class="hidden name"><code>kmeans.Rmd</code></div>
@@ -91,7 +97,6 @@
 <div id="tidying-k-means-clustering" class="section level1">
 <h1 class="hasAnchor">
 <a href="#tidying-k-means-clustering" class="anchor"></a>Tidying k-means clustering</h1>
-<pre><code>## Warning: package 'knitr' was built under R version 3.4.3</code></pre>
 <p>K-means clustering serves as a very useful example of tidy data, and especially the distinction between the three tidying functions: <code>tidy</code>, <code>augment</code>, and <code>glance</code>.</p>
 <p>Let’s start by generating some random 2d data with three clusters, within which points are distributed according to a multivariate gaussian:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(dplyr)

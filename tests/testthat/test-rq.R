@@ -3,6 +3,7 @@ context("rq tidiers")
 library(quantreg)
 
 test_that("rq tidiers work", {
+  skip_if_not_installed("quantreg")
   data(stackloss)
   fit <- rq(stack.loss ~ stack.x, .5)
   td <- tidy(fit)
@@ -25,9 +26,16 @@ test_that("rq tidiers work", {
 })
 
 test_that("rqs tidiers work", {
+  skip_if_not_installed("quantreg")
   fit <- rq(Ozone ~ ., data = airquality, tau = 1:19 / 20)
   td <- tidy(fit)
   check_tidy(td, exp.row = 114, exp.col = 5)
+
+  rqs_glance_error <- paste("`glance` cannot handle objects of class 'rqs',",
+                            "i.e. models with more than one tau value. Please",
+                            "use a `purr::map`-based workflow with 'rq' models instead.")
+
+  expect_error(glance(fit), regexp = rqs_glance_error)
 
   au <- augment(fit)
   check_tidy(au, exp.row = 2109, exp.col = 9)
@@ -37,6 +45,7 @@ test_that("rqs tidiers work", {
 })
 
 test_that("nlrq tidiers work", {
+  skip_if_not_installed("quantreg")
   set.seed(1)
   Dat <- NULL
   Dat$x <- rep(1:25, 20)

@@ -10,7 +10,7 @@
 #'
 #' @template boilerplate
 #'
-#' @return \code{tidy.speedlm} returns the tidied output of the
+#' @return `tidy.speedlm` returns the tidied output of the
 #' lm with one row for each term in the formula.
 #' The columns match those in \link{lm_tidiers}.
 #'
@@ -34,7 +34,7 @@ tidy.speedlm <- tidy.lm
 #'
 #' @param ... extra arguments (not used)
 #'
-#' @return \code{glance.speedlm} returns a one-row data.frame with the columns
+#' @return `glance.speedlm` returns a one-row data.frame with the columns
 #'   \item{r.squared}{The percent of variance explained by the model}
 #'   \item{adj.r.squared}{r.squared adjusted based on the degrees of freedom}
 #'   \item{statistic}{F-statistic}
@@ -62,7 +62,7 @@ glance.speedlm <- function(x, ...) {
 #' @rdname speedlm_tidiers
 #' @param data data frame to augment
 #' @param newdata new data to use for predictions, optional
-#' @return  \code{augment.speedlm} returns  one row for each observation, with just one column added:
+#' @return  `augment.speedlm` returns  one row for each observation, with just one column added:
 #'   \item{.fitted}{Fitted values of model}
 #' @export
 augment.speedlm <- function(x, data = stats::model.frame(x), newdata = data, ...) {

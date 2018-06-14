@@ -3,6 +3,7 @@ context("biglm")
 library(biglm)
 
 test_that("biglm tidiers work", {
+  skip_if_not_installed("biglm")
   bfit <- biglm(mpg ~ wt + disp, mtcars)
   td <- tidy(bfit)
   tdq <- tidy(bfit, quick = TRUE)

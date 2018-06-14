@@ -1,13 +1,55 @@
-# Sample .travis.yml for R projects
+# documentation at https://docs.travis-ci.com/user/languages/r
 
 language: r
-sudo: false
-cache: packages
+r:
+  - 3.1
+  - 3.2
+  - 3.3
+  - oldrel
+  - release
+  - devel
 
-before_install:
-  - Rscript -e 'update.packages(ask = FALSE)'
+sudo: required
+cache: packages  
+bioc_required: true
+warnings_are_errors: false
+
+env:
+  global:
+    - R_MAX_NUM_DLLS=999
+    - _R_CHECK_FORCE_SUGGESTS_=FALSE
+
+r_build_args: "--no-build-vignettes"
+r_check_args: "--no-build-vignettes --as-cran"
+    
+matrix:
+  allow_failures:
+    - r: 3.1
+    - r: 3.2
+    - r: 3.3
+
+r_binary_packages:
+  - rstanarm
+  - rstan
+  - lme4
+  - psych
+  - survival
+  - mclust
+  - git2r
+  - data.table
+  - RSiena
+  - geometry
+  - kernlab
+  - FNN
+  - maps
+  
+r_packages:
+  - rlang
+  - bindrcpp
+  - purrr
+  - tidyr
+  - dplyr
+  - readr
 
 after_success:
   - Rscript -e 'covr::codecov()'
-use_bioc: true
-bioc_required: true

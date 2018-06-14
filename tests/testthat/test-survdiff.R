@@ -20,9 +20,6 @@ if (require("survival", quietly = TRUE)) {
   ex4 <- survdiff(Surv(futime, fustat) ~ rx + ecog.ps, data = ovarian)
   rm(expect)
 
-
-
-
   context("Testing tidy() of 'survdiff' objects")
 
   tidy_names <- c("N", "obs", "exp")

@@ -1,8 +1,8 @@
 context("gmm tidiers")
 
-library(gmm)
-
 test_that("gmm tidiers work", {
+  skip_if_not_installed("gmm")
+  library(gmm)
   data(Finance)
   r <- Finance[1:300, 1:10]
   rm <- Finance[1:300, "rm"]

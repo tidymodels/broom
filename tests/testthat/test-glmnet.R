@@ -4,17 +4,24 @@ set.seed(2014)
 x <- matrix(rnorm(100 * 20), 100, 20)
 
 test_that("glmnet tidiers work", {
+  skip_if_not_installed("glmnet")
   y <- rnorm(100)
   fit1 <- glmnet::glmnet(x, y)
 
-  td <- tidy(fit1)
-  check_tidy(td, exp.col = 5)
+  td1 <- tidy(fit1)
+  check_tidy(td1, exp.col = 5)
+  expect_true(all(td1$estimate != 0))
+
+  td2 <- tidy(fit1, return_zeros = TRUE)
+  check_tidy(td2, exp.col = 5)
+  expect_true(any(td2$estimate == 0))
 
   gl <- glance(fit1)
   check_tidy(gl, exp.col = 2)
 })
 
 test_that("multinomial response glmnet tidier works", {
+  skip_if_not_installed("glmnet")
   g <- sample(1:4, 100, replace = TRUE)
   fit2 <- glmnet::glmnet(x, g, family = "multinomial")
 
@@ -23,6 +30,7 @@ test_that("multinomial response glmnet tidier works", {
 })
 
 test_that("cv.glmnet tidiers work", {
+  skip_if_not_installed("glmnet")
   set.seed(2014)
   nobs <- 100
   nvar <- 50
@@ -53,6 +61,7 @@ cv_glm_td <- function() {
 }
 
 test_that("tidy.glmnet works", {
+  skip_if_not_installed("glmnet")
   td <- tidy(glm_td())
   tidy_names <- c("term", "step", "estimate", "lambda", "dev.ratio")
   check_tidy(td, exp.col = 5, exp.names = tidy_names)
@@ -60,18 +69,21 @@ test_that("tidy.glmnet works", {
 })
 
 test_that("glance.glmnet works", {
+  skip_if_not_installed("glmnet")
   td <- glance(glm_td())
   tidy_names <- c("nulldev", "npasses")
   check_tidy(td, exp.row = 1, exp.col = 2, exp.names = tidy_names)
 })
 
 test_that("tidy.cv.glmnet works", {
+  skip_if_not_installed("glmnet")
   td <- tidy(cv_glm_td())
   tidy_names <- unlist(strsplit("lambda estimate std.error conf.high conf.low nzero", split = "[ ]"))
   check_tidy(td, exp.col = 6, exp.names = tidy_names)
 })
 
 test_that("glance.cv.glmnet works", {
+  skip_if_not_installed("glmnet")
   td <- glance(cv_glm_td())
   tidy_names <- c("lambda.min", "lambda.1se")
   check_tidy(td, exp.row = 1, exp.col = 2, exp.names = tidy_names)

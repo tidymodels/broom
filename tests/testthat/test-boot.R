@@ -1,6 +1,7 @@
 context("boot tidiers")
 
 test_that("boot tidiers work", {
+  skip_if_not_installed("boot")
   clotting <- data.frame(
     u = c(5, 10, 15, 20, 30, 40, 60, 80, 100),
     lot1 = c(118, 58, 42, 35, 27, 25, 21, 19, 18),
@@ -23,6 +24,7 @@ test_that("boot tidiers work", {
 })
 
 test_that("time series bootstrap tidying works", {
+  skip_if_not_installed("boot")
   lynx.fun <- function(tsb) {
     ar.fit <- ar(tsb, order.max = 25)
     c(ar.fit$order, mean(tsb), tsb)

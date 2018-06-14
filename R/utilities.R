@@ -61,7 +61,7 @@ insert_NAs <- function(x, original) {
 #' an augment call
 #'
 #' Add fitted values, residuals, and other common outputs to
-#' the value returned from \code{augment}.
+#' the value returned from `augment`.
 #'
 #' In the case that a residuals or influence generic is not implemented for the
 #' model, fail quietly.
@@ -71,10 +71,10 @@ insert_NAs <- function(x, original) {
 #' @param newdata new data to predict on, optional
 #' @param type Type of prediction and residuals to compute
 #' @param type.predict Type of prediction to compute; by default
-#' same as \code{type}
+#' same as `type`
 #' @param type.residuals Type of residuals to compute; by default
-#' same as \code{type}
-#' @param se.fit Value to pass to predict's \code{se.fit}, or NULL for
+#' same as `type`
+#' @param se.fit Value to pass to predict's `se.fit`, or NULL for
 #' no value
 #' @param ... extra arguments (not used)
 #'
@@ -210,8 +210,8 @@ augment_columns <- function(x, data, newdata, type, type.predict = type,
 #' computed, it fails quietly.
 #'
 #' @details In one special case, deviance for objects of the
-#' \code{lmerMod} class from lme4 is computed with
-#' \code{deviance(x, REML=FALSE)}.
+#' `lmerMod` class from lme4 is computed with
+#' `deviance(x, REML=FALSE)`.
 #'
 #' @param ret a one-row data frame (a partially complete glance)
 #' @param x the prediction model
@@ -248,15 +248,15 @@ finish_glance <- function(ret, x) {
 #' Calculate confidence interval as a tidy data frame
 #'
 #' Return a confidence interval as a tidy data frame. This directly wraps the
-#' \code{\link{confint}} function, but ensures it follows broom conventions:
-#' column names of \code{conf.low} and \code{conf.high}, and no row names
+#' [confint()] function, but ensures it follows broom conventions:
+#' column names of `conf.low` and `conf.high`, and no row names
 #'
-#' @param x a model object for which \code{\link{confint}} can be calculated
+#' @param x a model object for which [confint()] can be calculated
 #' @param conf.level confidence level
 #' @param func Function to use for computing confint
-#' @param ... extra arguments passed on to \code{confint}
+#' @param ... extra arguments passed on to `confint`
 #'
-#' @return A data frame with two columns: \code{conf.low} and \code{conf.high}.
+#' @return A data frame with two columns: `conf.low` and `conf.high`.
 #'
 #' @seealso \link{confint}
 #'
@@ -275,7 +275,7 @@ confint_tidy <- function(x, conf.level = .95, func = stats::confint, ...) {
 #' Expand a dataset to include all factorial combinations of one or more
 #' variables
 #'
-#' This function is deprecated: use \code{tidyr::crossing} instead
+#' This function is deprecated: use `tidyr::crossing` instead
 #'
 #' @param df a tbl
 #' @param ... arguments

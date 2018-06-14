@@ -30,8 +30,6 @@ and confidence intervals}
 
 \item{data}{Original dataset}
 
-\item{newdata}{New data to make predictions from (optional)}
-
 \item{newdata}{If provided, performs predictions on the new data}
 
 \item{diagnostics}{Logical. Return results of diagnostic tests.}
@@ -41,27 +39,28 @@ All tidying methods return a data.frame without rownames, whose
 structure depends on the method chosen.
 
 \code{tidy.ivreg} returns a data frame with one row per
-coefficient, of the same form as \code{\link{tidy.lm}}.
+coefficient, of the same form as \code{\link[=tidy.lm]{tidy.lm()}}.
 
 \code{augment} returns a data frame with one row for each
 initial observation, adding the columns:
-  \item{.fitted}{predicted (fitted) values}
+\item{.fitted}{predicted (fitted) values}
 and if \code{newdata} is \code{NULL}:
-  \item{.resid}{residuals}
+\item{.resid}{residuals}
 
 \code{glance} returns a one-row data frame with columns
-  \item{r.squared}{The percent of variance explained by the model}
-  \item{adj.r.squared}{r.squared adjusted based on the degrees of freedom}
-  \item{statistic}{Wald test statistic}
-  \item{p.value}{p-value from the Wald test}
-  \item{df}{Degrees of freedom used by the coefficients}
-  \item{sigma}{The square root of the estimated residual variance}
-  \item{df.residual}{residual degrees of freedom}
+\item{r.squared}{The percent of variance explained by the model}
+\item{adj.r.squared}{r.squared adjusted based on the degrees of freedom}
+\item{statistic}{Wald test statistic}
+\item{p.value}{p-value from the Wald test}
+\item{df}{Degrees of freedom used by the coefficients}
+\item{sigma}{The square root of the estimated residual variance}
+\item{df.residual}{residual degrees of freedom}
 If \code{diagnostics} is \code{TRUE}, \code{glance} also returns:
-  \item{p.value.Sargan}{P value of Sargan test}
-  \item{p.value.Wu.Hausman}{P value of Wu-Hausman test}
-  \item{p.value.weakinst}{P value of weak instruments test}
-and corresponding columns \code{statistics.Sargan} etc. for the statistics of those tests.
+\item{p.value.Sargan}{P value of Sargan test}
+\item{p.value.Wu.Hausman}{P value of Wu-Hausman test}
+\item{p.value.weakinst}{P value of weak instruments test}
+and corresponding columns \code{statistics.Sargan}
+for the statistics of those tests.
 }
 \description{
 Tidiers for ivreg models
@@ -89,5 +88,5 @@ if (require("AER", quietly = TRUE)) {
 
 }
 \seealso{
-\code{\link{lm_tidiers}}
+\code{\link[=lm_tidiers]{lm_tidiers()}}
 }

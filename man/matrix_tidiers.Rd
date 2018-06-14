@@ -21,11 +21,11 @@ a data.frame, except that it incorporates rownames (if they exist)
 into a column called \code{.rownames}.
 
 \code{glance} returns a one-row data.frame with
-  \item{nrow}{number of rows}
-  \item{ncol}{number of columns}
-  \item{complete.obs}{number of rows that have no missing values}
-  \item{na.fraction}{fraction of values across all rows and columns that
-  are missing}
+\item{nrow}{number of rows}
+\item{ncol}{number of columns}
+\item{complete.obs}{number of rows that have no missing values}
+\item{na.fraction}{fraction of values across all rows and columns that
+are missing}
 }
 \description{
 These perform tidying operations on matrix objects. \code{tidy} turns the

@@ -43,13 +43,13 @@ test_that("test.manova works", {
   npk2 <- within(npk, foo <- rnorm(24))
   npk2.aov <- manova(cbind(yield, foo) ~ block + N * P * K, npk2)
   td <- tidy(npk2.aov)
-  check_tidy(td, exp.row = 7, exp.col = 7)
+  check_tidy(td, exp.row = 8, exp.col = 7)
 })
 
 test_that("tidy.ts works", {
   ts1 <- ts(1:10, frequency = 4, start = c(1959, 2))
   td <- tidy(ts1)
-  check_tidy(td, exp.row = 10, exp.col = 1)
+  check_tidy(td, exp.row = 10, exp.col = 2)
 })
 
 test_that("tidy.pairwise.htest works", {

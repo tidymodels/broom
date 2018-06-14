@@ -14,12 +14,12 @@
 }
 \value{
 \code{glance.rlm} returns a one-row data.frame with the columns
-  \item{sigma}{The square root of the estimated residual variance}
-  \item{converged}{whether the IWLS converged}
-  \item{logLik}{the data's log-likelihood under the model}
-  \item{AIC}{the Akaike Information Criterion}
-  \item{BIC}{the Bayesian Information Criterion}
-  \item{deviance}{deviance}
+\item{sigma}{The square root of the estimated residual variance}
+\item{converged}{whether the IWLS converged}
+\item{logLik}{the data's log-likelihood under the model}
+\item{AIC}{the Akaike Information Criterion}
+\item{BIC}{the Bayesian Information Criterion}
+\item{deviance}{deviance}
 }
 \description{
 This method provides a glance of an "rlm" object. The \code{tidy} and

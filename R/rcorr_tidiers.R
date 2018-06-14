@@ -1,6 +1,6 @@
 #' Tidying methods for rcorr objects
 #'
-#' Tidies a correlation matrix from the \code{rcorr} function in the
+#' Tidies a correlation matrix from the `rcorr` function in the
 #' "Hmisc" package, including correlation estimates, p-values,
 #' and the number of observations in each pairwise correlation.
 #' Note that it returns these in "long", or "melted", format,
@@ -8,7 +8,7 @@
 #'
 #' @param x An object of class "rcorr"
 #' @param diagonal Whether to include diagonal elements (where
-#' \code{estimate} is 1 and \code{p.value} is NA), default FALSE
+#' `estimate` is 1 and `p.value` is NA), default FALSE
 #' @param ... extra arguments (not used)
 #'
 #' @return A data.frame with one row for each pairing

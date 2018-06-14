@@ -17,18 +17,18 @@
 }
 \value{
 \code{tidy} returns a data.frame with the columns
-  \item{pyears}{person-years of exposure}
-  \item{n}{number of subjects contributing time}
-  \item{event}{observed number of events}
-  \item{expected}{expected number of events (present only if a
-  \code{ratetable} term is present)}
+\item{pyears}{person-years of exposure}
+\item{n}{number of subjects contributing time}
+\item{event}{observed number of events}
+\item{expected}{expected number of events (present only if a
+\code{ratetable} term is present)}
 
 If the \code{data.frame = TRUE} argument is supplied to \code{pyears},
 this is simply the contents of \code{x$data}.
 
 \code{glance} returns a one-row data frame with
-  \item{total}{total number of person-years tabulated}
-  \item{offtable}{total number of person-years off table}
+\item{total}{total number of person-years tabulated}
+\item{offtable}{total number of person-years off table}
 
 This contains the values printed by \code{summary.pyears}.
 }

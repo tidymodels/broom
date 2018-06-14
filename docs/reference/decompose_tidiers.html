@@ -65,6 +65,12 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
+      <a href="../articles/adding-tidiers.html">Adding new tidiers</a>
+    </li>
+    <li>
+      <a href="../articles/available-methods.html">Available methods</a>
+    </li>
+    <li>
       <a href="../articles/bootstrapping.html">Bootstrapping</a>
     </li>
     <li>
@@ -675,11 +681,12 @@ as well as the "remainder" term and the seasonally adjusted (or
 #&gt; 240 -1.27547980 0.9420313503 47.37878</div><div class='input'>
 <span class='co'># Visually compare seasonal decompositions in tidy data frames.</span>
 
-<span class='fu'>library</span>(<span class='no'>tibble</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: package 'tibble' was built under R version 3.4.3</span></div><div class='input'><span class='fu'>library</span>(<span class='no'>dplyr</span>)
+<span class='fu'>library</span>(<span class='no'>tibble</span>)
+<span class='fu'>library</span>(<span class='no'>dplyr</span>)
 <span class='fu'>library</span>(<span class='no'>tidyr</span>)
 <span class='fu'>library</span>(<span class='no'>ggplot2</span>)
 
-<span class='no'>decomps</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='http://dplyr.tidyverse.org/reference/reexports.html'>tibble</a></span>(
+<span class='no'>decomps</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/tibble/topics/tibble'>tibble</a></span>(
     <span class='co'># Turn the ts objects into data frames.</span>
     <span class='kw'>series</span> <span class='kw'>=</span> <span class='fu'>list</span>(<span class='kw pkg'>broom</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/broom/topics/tidy'>tidy</a></span>(<span class='no'>nottem</span>), <span class='kw pkg'>broom</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/broom/topics/tidy'>tidy</a></span>(<span class='no'>nottem</span>)),
     <span class='co'># Add the models in, one for each row.</span>

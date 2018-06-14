@@ -65,6 +65,12 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
+      <a href="../articles/adding-tidiers.html">Adding new tidiers</a>
+    </li>
+    <li>
+      <a href="../articles/available-methods.html">Available methods</a>
+    </li>
+    <li>
       <a href="../articles/bootstrapping.html">Bootstrapping</a>
     </li>
     <li>
@@ -148,12 +154,15 @@ column describing the error stratum
 
     <p>Note that the "term" column of an ANOVA table can come with
 leading or trailing whitespace, which this tidying method trims.</p>
+<p>Note that <code>Anova</code> from <span class="pkg">car</span> (perhaps counter-intuively) outputs an
+object of class <code>anova</code> for generalized linear models. These objects are
+also supported.</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
 <span class='no'>a</span> <span class='kw'>&lt;-</span> <span class='fu'>anova</span>(<span class='fu'>lm</span>(<span class='no'>mpg</span> ~ <span class='no'>wt</span> + <span class='no'>qsec</span> + <span class='no'>disp</span>, <span class='no'>mtcars</span>))
-<span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>a</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: package 'bindrcpp' was built under R version 3.4.4</span></div><div class='output co'>#&gt;        term df        sumsq       meansq    statistic      p.value
+<span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>a</span>)</div><div class='output co'>#&gt;        term df        sumsq       meansq    statistic      p.value
 #&gt; 1        wt  1 8.477252e+02 8.477252e+02 1.214366e+02 1.081618e-11
 #&gt; 2      qsec  1 8.285831e+01 8.285831e+01 1.186944e+01 1.817334e-03
 #&gt; 3      disp  1 1.023935e-03 1.023935e-03 1.466785e-04 9.904229e-01

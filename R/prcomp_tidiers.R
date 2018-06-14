@@ -1,11 +1,11 @@
-#' Tidying methods for principal components analysis via \code{\link{prcomp}}
+#' Tidying methods for principal components analysis via [prcomp()]
 #'
 #' These tidiers operate on the results of a principal components analysis
-#' computed using \code{prcomp}. The \code{tidy} method returns a data frame
+#' computed using `prcomp`. The `tidy` method returns a data frame
 #' with either the eigenvectors representing each row or each column.
 #'
-#' @param x an object of class \code{"prcomp"} resulting from a call to
-#' \code{\link[stats]{prcomp}}
+#' @param x an object of class `"prcomp"` resulting from a call to
+#' [stats::prcomp()]
 #' @param matrix character; Indicates which sets of eigenvectors are returned
 #' in tidy form. "v", "rotation", or "variables" will return information about
 #' each variable, while "u", "x", or "samples" (default) returns the loadings
@@ -14,36 +14,36 @@
 #'
 #' @name prcomp_tidiers
 #'
-#' @seealso \code{\link{prcomp}}, \link{svd_tidiers}
+#' @seealso [prcomp()], \link{svd_tidiers}
 #'
 #' @template boilerplate
 #'
-#' @return If \code{matrix} is "u", "samples", or "x", the \code{tidy} method
+#' @return If `matrix` is "u", "samples", or "x", the `tidy` method
 #' returns
 #' \describe{
-#'    \item{\code{row}}{The sample labels (rownames) of the data set on
+#'    \item{`row`}{The sample labels (rownames) of the data set on
 #'   which PCA was performed}
-#'   \item{\code{PC}}{An integer vector indicating the principal component}
-#'   \item{\code{value}}{The value of the eigenvector (axis score) on the
+#'   \item{`PC`}{An integer vector indicating the principal component}
+#'   \item{`value`}{The value of the eigenvector (axis score) on the
 #'   indicated principal component}
 #' }
 #'
-#' If \code{matrix} is "v", "variables", or "rotation", the \code{tidy} method
+#' If `matrix` is "v", "variables", or "rotation", the `tidy` method
 #' returns
 #' \describe{
-#'    \item{\code{row}}{The variable labels (colnames) of the data set on
+#'    \item{`row`}{The variable labels (colnames) of the data set on
 #'   which PCA was performed}
-#'   \item{\code{PC}}{An integer vector indicating the principal component}
-#'   \item{\code{value}}{The value of the eigenvector (axis score) on the
+#'   \item{`PC`}{An integer vector indicating the principal component}
+#'   \item{`value`}{The value of the eigenvector (axis score) on the
 #'   indicated principal component}
 #' }
 #'
-#' If \code{matrix} is "d" or "pcs", the \code{tidy} method returns
+#' If `matrix` is "d" or "pcs", the `tidy` method returns
 #' \describe{
-#'   \item{\code{PC}}{An integer vector indicating the principal component}
-#'   \item{\code{std.dev}}{Standard deviation explained by this PC}
-#'   \item{\code{percent}}{Percentage of variation explained}
-#'   \item{\code{cumulative}}{Cumulative percentage of variation explained}
+#'   \item{`PC`}{An integer vector indicating the principal component}
+#'   \item{`std.dev`}{Standard deviation explained by this PC}
+#'   \item{`percent`}{Percentage of variation explained}
+#'   \item{`cumulative`}{Cumulative percentage of variation explained}
 #' }
 #'
 #' @author Gavin L. Simpson
@@ -127,18 +127,18 @@ tidy.prcomp <- function(x, matrix = "u", ...) {
 #' @rdname prcomp_tidiers
 #'
 #' @param data the original data on which principal components analysis
-#' was performed. This cannot be recovered from \code{x}. If \code{newdata}
-#' is supplied, \code{data} is ignored. If both \code{data} and \code{newdata}
+#' was performed. This cannot be recovered from `x`. If `newdata`
+#' is supplied, `data` is ignored. If both `data` and `newdata`
 #' are missing, only the fitted locations on the principal components are
 #' returned.
 #' @param newdata data frame; new observations for which locations on principal
 #' components are sought.
 #' @param ... Extra arguments, not used
 #'
-#' @return The \code{augment.prcomp} method returns a data frame containing
+#' @return The `augment.prcomp` method returns a data frame containing
 #' fitted locations on the principal components for the observed data plus
-#' either the original data or the new data if supplied via \code{data} or
-#' \code{newdata} respectively.
+#' either the original data or the new data if supplied via `data` or
+#' `newdata` respectively.
 #'
 #' @export
 augment.prcomp <- function(x, data = NULL, newdata, ...) {
