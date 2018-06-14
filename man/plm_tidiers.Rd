@@ -59,15 +59,15 @@ if (require("plm", quietly = TRUE)) {
     data("Produc", package = "plm")
     zz <- plm(log(gsp) ~ log(pcap) + log(pc) + log(emp) + unemp,
               data = Produc, index = c("state","year"))
-    
+
     summary(zz)
-    
+
     tidy(zz)
     tidy(zz, conf.int = TRUE)
     tidy(zz, conf.int = TRUE, conf.level = .9)
-    
+
     head(augment(zz))
-    
+
     glance(zz)
 }
 

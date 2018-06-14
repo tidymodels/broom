@@ -55,9 +55,6 @@
     <loc>http://broom.tidyverse.org/reference/cch_tidiers.html</loc>
   </url>
   <url>
-    <loc>http://broom.tidyverse.org/reference/compact.html</loc>
-  </url>
-  <url>
     <loc>http://broom.tidyverse.org/reference/confint.geeglm.html</loc>
   </url>
   <url>
@@ -304,9 +301,6 @@
     <loc>http://broom.tidyverse.org/reference/tidy.TukeyHSD.html</loc>
   </url>
   <url>
-    <loc>http://broom.tidyverse.org/reference/unrowname.html</loc>
-  </url>
-  <url>
     <loc>http://broom.tidyverse.org/reference/vector_tidiers.html</loc>
   </url>
   <url>
@@ -314,6 +308,12 @@
   </url>
   <url>
     <loc>http://broom.tidyverse.org/reference/zoo_tidiers.html</loc>
+  </url>
+  <url>
+    <loc>http://broom.tidyverse.org/articles/adding-tidiers.html</loc>
+  </url>
+  <url>
+    <loc>http://broom.tidyverse.org/articles/available-methods.html</loc>
   </url>
   <url>
     <loc>http://broom.tidyverse.org/articles/bootstrapping.html</loc>

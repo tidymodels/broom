@@ -9,3 +9,5 @@
 ^CONDUCT\.md$
 ^codecov\.yml$
 ^_pkgdown\.yml$
+^README\.Rmd$
+^\.github$

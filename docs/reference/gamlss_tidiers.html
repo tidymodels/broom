@@ -142,7 +142,7 @@ structure depends on the method chosen.</p>
 if (requireNamespace("gamlss", quietly = TRUE)) 
     data(abdom)
     mod&lt;-gamlss(y~pb(x),sigma.fo=~pb(x),family=BCT, data=abdom, method=mixed(1,20))
-    
+
     tidy(mod)
 
 

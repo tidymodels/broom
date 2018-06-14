@@ -30,7 +30,7 @@ A data.frame with one row for each coefficient, containing columns
 if (requireNamespace("gamlss", quietly = TRUE)) {
     data(abdom)
     mod<-gamlss(y~pb(x),sigma.fo=~pb(x),family=BCT, data=abdom, method=mixed(1,20))
-    
+
     tidy(mod)
 }
 }

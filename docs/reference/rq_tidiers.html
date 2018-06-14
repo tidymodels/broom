@@ -181,7 +181,7 @@ structure depends on the method chosen.</p>
 <p><code>tidy.rq</code> returns a data frame with one row for each coefficient.
 The columns depend upon the confidence interval method selected.</p>
 <p><code>tidy.rqs</code> returns a data frame with one row for each coefficient at
-each quantile that was estimated. The columns depend upon the confidence interval 
+each quantile that was estimated. The columns depend upon the confidence interval
 method selected.</p>
 <p><code>tidy.nlrq</code> returns one row for each coefficient in the model,
 with five columns:</p>
@@ -212,13 +212,13 @@ with the following columns added:
  <dt>.resid</dt><dd><p>Residuals</p></dd>
  <dt>.fitted</dt><dd><p>Fitted quantiles of the model</p></dd>
  <dt>.tau</dt><dd><p>Quantile estimated</p></dd>
- 
+
  Depending on the arguments passed on to predict.rq via &#8230;
  a confidence interval is also calculated on the fitted values resulting in
  columns:
      <dt>.conf.low</dt><dd><p>Lower confidence interval value</p></dd>
      <dt>.conf.high</dt><dd><p>Upper confidence interval value</p></dd>
-     
+
  See predict.rq for details on additional arguments to specify
  confidence intervals. predict.rq does not provide confidence intervals
  when newdata is provided.
@@ -228,7 +228,7 @@ and each estimated quantile (tau) with the following columns added:
  <dt>.resid</dt><dd><p>Residuals</p></dd>
  <dt>.fitted</dt><dd><p>Fitted quantiles of the model</p></dd>
  <dt>.tau</dt><dd><p>Quantile estimated</p></dd>
- 
+
  predict.rqs does not return confidence interval estimates.
 
 augment.rqs returns a row for each original observation

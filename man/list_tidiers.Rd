@@ -4,14 +4,11 @@
 \alias{list_tidiers}
 \alias{tidy.list}
 \alias{glance.list}
-\alias{augment.list}
 \title{Tidiers for return values from functions that aren't S3 objects}
 \usage{
 \method{tidy}{list}(x, ...)
 
 \method{glance}{list}(x, ...)
-
-\method{augment}{list}(x, ...)
 }
 \arguments{
 \item{x}{list object}
@@ -25,7 +22,7 @@ rather than S3 objects, such as \code{optim}, \code{svd}, or
 S3 dispatch.
 }
 \details{
-Those tiders themselves are implemented as functions of the
+Those tidiers themselves are implemented as functions of the
 form tidy_<function> or glance_<function> that are not exported.
 }
 \seealso{

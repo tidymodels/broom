@@ -34,7 +34,7 @@
 All tidying methods return a data.frame without rownames, whose
 structure depends on the method chosen.
 
-\code{tidy.felm} returns one row for each coefficient. If \code{fe=TRUE}, it also includes rows for for fixed effects estimates. 
+\code{tidy.felm} returns one row for each coefficient. If \code{fe=TRUE}, it also includes rows for for fixed effects estimates.
 There are five columns:
   \item{term}{The term in the linear model being estimated and tested}
   \item{estimate}{The estimated coefficient}
@@ -47,7 +47,7 @@ If \code{cont.int=TRUE}, it also includes columns for \code{conf.low} and \code{
 \code{augment.felm} returns  one row for each observation, with multiple columns added to the original data:
   \item{.fitted}{Fitted values of model}
   \item{.resid}{Residuals}
-  If fixed effect are present,  
+  If fixed effect are present,
   \item{.comp}{Connected component}
   \item{.fe_}{Fixed effects (as many columns as factors)}
 
@@ -72,12 +72,12 @@ if (require("lfe", quietly = TRUE)) {
     N=1e2
     DT <- data.frame(
       id = sample(5, N, TRUE),
-      v1 =  sample(5, N, TRUE),                          
-      v2 =  sample(1e6, N, TRUE),                        
+      v1 =  sample(5, N, TRUE),
+      v2 =  sample(1e6, N, TRUE),
       v3 =  sample(round(runif(100,max=100),4), N, TRUE),
-      v4 =  sample(round(runif(100,max=100),4), N, TRUE) 
+      v4 =  sample(round(runif(100,max=100),4), N, TRUE)
     )
-    
+
     result_felm <- felm(v2~v3, DT)
     tidy(result_felm)
     augment(result_felm)
