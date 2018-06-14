@@ -1,10 +1,10 @@
 #' Tidiers for objects from the AUC package
 #'
-#' Tidy "roc" objects from the "auc" package. This can be used to,
+#' Tidy objects returned from [AUC::roc()]. This can be used to,
 #' for example, draw ROC curves in ggplot2.
 #'
-#' @param x an "roc" object
-#' @param ... Additional arguments, not used
+#' @param x Object of class `roc`.
+#' @param ... Additional arguments, not used.
 #'
 #' @return A tibble with three columns:
 #'   \item{cutoff}{The cutoff of the prediction scores used
@@ -44,11 +44,5 @@
 #'
 #' @export
 tidy.roc <- function(x, ...) {
-  df <-
-    fix_data_frame(as.data.frame(unclass(x)),
-    newnames = c("cutoff", "fpr", "tpr"),
-    newcol = "instance"
-  )
-  
-  tibble::as_tibble(df)
+  as_tibble(unclass(x))
 }

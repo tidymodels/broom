@@ -8,9 +8,9 @@
 \method{tidy}{roc}(x, ...)
 }
 \arguments{
-\item{x}{an "roc" object}
+\item{x}{Object of class \code{roc}.}
 
-\item{...}{Additional arguments, not used}
+\item{...}{Additional arguments, not used.}
 }
 \value{
 A tibble with three columns:
@@ -22,7 +22,7 @@ for classification}
 If the labels had names, those are added as an "instance" column.
 }
 \description{
-Tidy "roc" objects from the "auc" package. This can be used to,
+Tidy objects returned from \code{\link[AUC:roc]{AUC::roc()}}. This can be used to,
 for example, draw ROC curves in ggplot2.
 }
 \examples{

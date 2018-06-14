@@ -19,12 +19,12 @@ to FALSE, result will only show accuracy and kappa.}
 }
 \value{
 A tibble with one or more of the following columns:
-  \item{term}{The name of a statistic from the confusion matrix}
-  \item{class}{Which class the term is a measurement of}
-  \item{estimate}{The value of the statistic}
-  \item{conf.low}{Low end of 95 percent CI only applicable to accuracy}
-  \item{conf.high}{High end of 95 percent CI only applicable to accuracy}
-  \item{p.value}{P-value for accuracy and kappa statistics}
+\item{term}{The name of a statistic from the confusion matrix}
+\item{class}{Which class the term is a measurement of}
+\item{estimate}{The value of the statistic}
+\item{conf.low}{Low end of 95 percent CI only applicable to accuracy}
+\item{conf.high}{High end of 95 percent CI only applicable to accuracy}
+\item{p.value}{P-value for accuracy and kappa statistics}
 }
 \description{
 Tidies the result of confusion matrix from the \code{caret} package.
