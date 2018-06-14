@@ -227,21 +227,21 @@ augment_columns <- function(x, data, newdata, type, type.predict = type,
 #'
 #' @export
 finish_glance <- function(ret, x) {
-  ret$logLik <- tryCatch(as.numeric(stats::logLik(x)), error = function(e) NULL)
-  ret$AIC <- tryCatch(stats::AIC(x), error = function(e) NULL)
-  ret$BIC <- tryCatch(stats::BIC(x), error = function(e) NULL)
-
-  # special case for REML objects (better way?)
-  if (inherits(x, "lmerMod")) {
-    ret$deviance <- tryCatch(stats::deviance(x, REML = FALSE),
-      error = function(e) NULL
-    )
-  } else {
-    ret$deviance <- tryCatch(stats::deviance(x), error = function(e) NULL)
-  }
-  ret$df.residual <- tryCatch(df.residual(x), error = function(e) NULL)
-
-  return(unrowname(ret))
+    ret$logLik <- tryCatch(as.numeric(stats::logLik(x)), error = function(e) NULL)
+    ret$AIC <- tryCatch(stats::AIC(x), error = function(e) NULL)
+    ret$BIC <- tryCatch(stats::BIC(x), error = function(e) NULL)
+    ret$nobs <- tryCatch(stats::nobs(x), error = function(e) NULL)
+    
+    # special case for REML objects (better way?)
+    if ("lmerMod" %in% class(x)) {
+        ret$deviance <- tryCatch(stats::deviance(x, REML=FALSE),
+                                 error = function(e) NULL)
+    } else {
+        ret$deviance <- tryCatch(stats::deviance(x), error = function(e) NULL)
+    }
+    ret$df.residual <- tryCatch(df.residual(x), error = function(e) NULL)
+    
+    return(unrowname(ret))
 }
 
 
