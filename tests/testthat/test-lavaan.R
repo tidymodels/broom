@@ -39,7 +39,6 @@ test_that("glance.lavaan works", {
   cfafit <- cfa(paste("F =~", paste0("x", 1:9, collapse = "+")), data = HolzingerSwineford1939)
   gl2 <- glance(cfafit)
   check_tidy(gl2, exp.row = 1, exp.col = 7)
-
   # TODO: if CFI is an important measure it should be included by
   # default and documented
   # check fit.measures
