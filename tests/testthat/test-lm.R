@@ -65,3 +65,34 @@ test_that("augment and glance do not support multiple responses", {
   expect_error(augment(mlmfit))
   expect_error(glance(mlmfit))
 })
+
+# regression tests for for tidy_confint NA issues, github issues 166, 241
+
+test_that("tidy with confint drops rows of all NA", {
+  
+  mtcars$cv_chunk <- c(
+    1L, 1L, 2L, 1L, 1L, 3L, 1L, 1L, 3L, 1L, 1L, 2L, 3L, 3L, 3L, 2L,
+    2L, 1L, 1L, 2L, 1L, 3L, 2L, 2L, 1L, 2L, 2L, 1L, 1L, 2L, 2L, 1L
+  )
+  
+  mtcars %>% 
+    filter(cv_chunk == 3) %>% 
+    lm(mpg ~ cyl * qsec + gear - cv_chunk, data = .)
+  
+  mtcars_model_list <- mtcars %>% 
+    split(.$cv_chunk) %>% 
+    map(~lm(mpg ~ cyl * qsec + gear - cv_chunk, data = .))
+  
+  # this used to error, it should no longer
+  expect_error(
+    map(mtcars_model_list, ~broom::tidy(.x, conf.int=TRUE)),
+    NA
+  )
+  
+  # should not contain any NA values
+  expect_error(
+    td <- map(mtcars_model_list, ~broom::confint_tidy(.x))[[3]],
+    NA
+  )
+  expect_false(anyNA(td))
+})
