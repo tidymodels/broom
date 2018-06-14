@@ -70,18 +70,21 @@ test_that("augment and glance do not support multiple responses", {
 
 test_that("tidy with confint drops rows of all NA", {
   
+  skip_if_not_installed("purrr")
+  library(purrr)
+  
   mtcars$cv_chunk <- c(
     1L, 1L, 2L, 1L, 1L, 3L, 1L, 1L, 3L, 1L, 1L, 2L, 3L, 3L, 3L, 2L,
     2L, 1L, 1L, 2L, 1L, 3L, 2L, 2L, 1L, 2L, 2L, 1L, 1L, 2L, 2L, 1L
   )
   
-  mtcars %>% 
-    filter(cv_chunk == 3) %>% 
-    lm(mpg ~ cyl * qsec + gear - cv_chunk, data = .)
+  fit_model <- function(data) {
+    lm(mpg ~ cyl * qsec + gear - cv_chunk, data = data)
+  }
   
   mtcars_model_list <- mtcars %>% 
     split(.$cv_chunk) %>% 
-    map(~lm(mpg ~ cyl * qsec + gear - cv_chunk, data = .))
+    map(fit_model)
   
   # this used to error, it should no longer
   expect_error(
