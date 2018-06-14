@@ -30,15 +30,15 @@ All tidying methods return a \code{data.frame} without rownames.
 The structure depends on the method chosen.
 
 \code{tidy.geeglm} returns one row for each coefficient, with five columns:
-  \item{term}{The term in the linear model being estimated and tested}
-  \item{estimate}{The estimated coefficient}
-  \item{std.error}{The standard error from the GEE model}
-  \item{statistic}{Wald statistic}
-  \item{p.value}{two-sided p-value}
+\item{term}{The term in the linear model being estimated and tested}
+\item{estimate}{The estimated coefficient}
+\item{std.error}{The standard error from the GEE model}
+\item{statistic}{Wald statistic}
+\item{p.value}{two-sided p-value}
 
 If \code{conf.int=TRUE}, it also includes columns for
 \code{conf.low} and \code{conf.high}, computed with
-\code{\link{confint.geeglm}} (included as part of broom).
+\code{\link[=confint.geeglm]{confint.geeglm()}} (included as part of broom).
 }
 \description{
 These methods tidy the coefficients of generalized estimating
@@ -47,7 +47,7 @@ equations models of the \code{geeglm} class from functions of the
 }
 \details{
 If \code{conf.int=TRUE}, the confidence interval is computed with
-the \code{\link{confint.geeglm}} function.
+the \code{\link[=confint.geeglm]{confint.geeglm()}} function.
 
 While \code{tidy} is supported for "geeglm" objects, \code{augment} and
 \code{glance} are not.
@@ -72,4 +72,3 @@ if (require('geepack')) {
 }
 
 }
-

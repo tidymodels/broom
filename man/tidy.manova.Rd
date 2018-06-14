@@ -15,16 +15,16 @@
 }
 \value{
 A data.frame with the columns
-    \item{term}{Term in design}
-    \item{statistic}{Approximate F statistic}
-    \item{num.df}{Degrees of freedom}
-    \item{p.value}{P-value}
-    
+\item{term}{Term in design}
+\item{statistic}{Approximate F statistic}
+\item{num.df}{Degrees of freedom}
+\item{p.value}{P-value}
+
 Depending on which test statistic is specified, one of the following columns is also included:
-    \item{pillai}{Pillai's trace}
-    \item{wilks}{Wilk's lambda}
-    \item{hl}{Hotelling-Lawley trace}
-    \item{roy}{Roy's greatest root}
+\item{pillai}{Pillai's trace}
+\item{wilks}{Wilk's lambda}
+\item{hl}{Hotelling-Lawley trace}
+\item{roy}{Roy's greatest root}
 }
 \description{
 Constructs a data frame with one row for each of the terms in the model,
@@ -37,6 +37,5 @@ npk2.aov <- manova(cbind(yield, foo) ~ block + N*P*K, npk2)
 
 }
 \seealso{
-\code{\link{summary.manova}}
+\code{\link[=summary.manova]{summary.manova()}}
 }
-

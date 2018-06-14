@@ -31,4 +31,3 @@ ggplot(tidy(ptt), aes(n, power)) + geom_line()
 \seealso{
 \link{power.t.test}
 }
-

@@ -8,21 +8,21 @@
 \method{tidy}{roc}(x, ...)
 }
 \arguments{
-\item{x}{an "roc" object}
+\item{x}{Object of class \code{roc}.}
 
-\item{...}{Additional arguments, not used}
+\item{...}{Additional arguments, not used.}
 }
 \value{
-A data frame with three columns:
-  \item{cutoff}{The cutoff of the prediction scores used
-  for classification}
-  \item{tpr}{The resulting true positive rate at that cutoff}
-  \item{fpr}{The resulting false positive rate at that cutoff}
+A tibble with three columns:
+\item{cutoff}{The cutoff of the prediction scores used
+for classification}
+\item{tpr}{The resulting true positive rate at that cutoff}
+\item{fpr}{The resulting false positive rate at that cutoff}
 
 If the labels had names, those are added as an "instance" column.
 }
 \description{
-Tidy "roc" objects from the "auc" package. This can be used to,
+Tidy objects returned from \code{\link[AUC:roc]{AUC::roc()}}. This can be used to,
 for example, draw ROC curves in ggplot2.
 }
 \examples{
@@ -30,26 +30,25 @@ for example, draw ROC curves in ggplot2.
 if (require("AUC", quietly = TRUE)) {
   data(churn)
   r <- roc(churn$predictions,churn$labels)
-  
+
   td <- tidy(r)
   head(td)
-  
+
   library(ggplot2)
   ggplot(td, aes(fpr, tpr)) +
     geom_line()
-    
+
   # compare the ROC curves for two prediction algorithms
   library(dplyr)
   library(tidyr)
-  
+
   rocs <- churn \%>\%
     tidyr::gather(algorithm, value, -labels) \%>\%
     group_by(algorithm) \%>\%
     do(tidy(roc(.$value, .$labels)))
-  
+
   ggplot(rocs, aes(fpr, tpr, color = algorithm)) +
     geom_line()
 }
 
 }
-

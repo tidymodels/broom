@@ -2,10 +2,10 @@
 % Please edit documentation in R/multcomp_tidiers.R
 \name{multcomp_tidiers}
 \alias{multcomp_tidiers}
-\alias{tidy.cld}
-\alias{tidy.confint.glht}
 \alias{tidy.glht}
+\alias{tidy.confint.glht}
 \alias{tidy.summary.glht}
+\alias{tidy.cld}
 \title{tidying methods for objects produced by \pkg{multcomp}}
 \usage{
 \method{tidy}{glht}(x, ...)
@@ -18,7 +18,7 @@
 }
 \arguments{
 \item{x}{an object of class \code{glht}, \code{confint.glht},
-\code{summary.glht} or \code{\link[multcomp]{cld}}}
+\code{summary.glht} or \code{\link[multcomp:cld]{multcomp::cld()}}}
 
 \item{...}{extra arguments (not used)}
 }
@@ -51,4 +51,3 @@ if (require("multcomp") && require("ggplot2")) {
     tidy(cld)
 }
 }
-

@@ -25,6 +25,5 @@ This generic originated in the ggplot2 package, where it was called
 "fortify."
 }
 \seealso{
-\code{\link{augment.lm}}
+\code{\link[=augment.lm]{augment.lm()}}
 }
-

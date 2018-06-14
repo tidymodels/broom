@@ -2,21 +2,18 @@
 % Please edit documentation in R/tidy.R
 \name{tidy}
 \alias{tidy}
-\title{Tidy the result of a test into a summary data.frame}
+\title{Turn a model object into a tidy tibble}
 \usage{
 tidy(x, ...)
 }
 \arguments{
-\item{x}{An object to be converted into a tidy data.frame}
+\item{x}{An object to be converted into a tidy \code{\link[tibble:tibble]{tibble::tibble()}}.}
 
-\item{...}{extra arguments}
+\item{...}{Additional arguments to tidying method.}
 }
 \value{
-a data.frame
+A tibble.
 }
 \description{
-The output of tidy is always a data.frame with disposable row names. It is
-therefore suited for further manipulation by packages like dplyr, reshape2,
-ggplot2 and ggvis.
+TODO: Flesh out this documentation.
 }
-

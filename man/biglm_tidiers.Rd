@@ -2,8 +2,8 @@
 % Please edit documentation in R/biglm_tidiers.R
 \name{biglm_tidiers}
 \alias{biglm_tidiers}
-\alias{glance.biglm}
 \alias{tidy.biglm}
+\alias{glance.biglm}
 \title{Tidiers for biglm and bigglm object}
 \usage{
 \method{tidy}{biglm}(x, conf.int = FALSE, conf.level = 0.95,
@@ -32,24 +32,24 @@ All tidying methods return a data.frame without rownames, whose
 structure depends on the method chosen.
 
 \code{tidy.biglm} returns one row for each coefficient, with columns
-  \item{term}{The term in the linear model being estimated and tested}
-  \item{estimate}{The estimated coefficient}
-  \item{std.error}{The standard error from the linear model}
-  \item{p.value}{two-sided p-value}
+\item{term}{The term in the linear model being estimated and tested}
+\item{estimate}{The estimated coefficient}
+\item{std.error}{The standard error from the linear model}
+\item{p.value}{two-sided p-value}
 
 If \code{conf.int=TRUE}, it also includes columns for \code{conf.low} and
-\code{conf.high}, computed with \code{\link{confint}}.
+\code{conf.high}, computed with \code{\link[=confint]{confint()}}.
 
 \code{glance.biglm} returns a one-row data frame, with columns
-  \item{r.squared}{The percent of variance explained by the model}
-  \item{AIC}{the Akaike Information Criterion}
-  \item{deviance}{deviance}
-  \item{df.residual}{residual degrees of freedom}
+\item{r.squared}{The percent of variance explained by the model}
+\item{AIC}{the Akaike Information Criterion}
+\item{deviance}{deviance}
+\item{df.residual}{residual degrees of freedom}
 }
 \description{
 Tidiers for biglm object from the "biglm" package, which contains a linear model
 object that is limited in memory usage. Generally the behavior is as similar
-to the \code{\link{lm_tidiers}} as is possible. Currently no \code{augment}
+to the \code{\link[=lm_tidiers]{lm_tidiers()}} as is possible. Currently no \code{augment}
 is defined.
 }
 \examples{
@@ -59,9 +59,9 @@ if (require("biglm", quietly = TRUE)) {
     tidy(bfit)
     tidy(bfit, conf.int = TRUE)
     tidy(bfit, conf.int = TRUE, conf.level = .9)
-    
+
     glance(bfit)
-    
+
     # bigglm: logistic regression
     bgfit <- bigglm(am ~ mpg, mtcars, family = binomial())
     tidy(bgfit)
@@ -69,9 +69,8 @@ if (require("biglm", quietly = TRUE)) {
     tidy(bgfit, conf.int = TRUE)
     tidy(bgfit, conf.int = TRUE, conf.level = .9)
     tidy(bgfit, conf.int = TRUE, conf.level = .9, exponentiate = TRUE)
-    
+
     glance(bgfit)
 }
 
 }
-

@@ -19,22 +19,21 @@ All tidying methods return a data.frame without rownames, whose
 structure depends on the method chosen.
 
 A data.frame with one row for each coefficient, containing columns
-  \item{parameter}{Type of coefficient being estimated: \code{mu}, \code{sigma},
-  \code{nu}, or \code{tau}}
-  \item{term}{The term in the model being estimated and tested}
-  \item{estimate}{The estimated coefficient}
-  \item{std.error}{The standard error from the linear model}
-  \item{statistic}{t-statistic}
-  \item{p.value}{two-sided p-value}
+\item{parameter}{Type of coefficient being estimated: \code{mu}, \code{sigma},
+\code{nu}, or \code{tau}}
+\item{term}{The term in the model being estimated and tested}
+\item{estimate}{The estimated coefficient}
+\item{std.error}{The standard error from the linear model}
+\item{statistic}{t-statistic}
+\item{p.value}{two-sided p-value}
 
 if (requireNamespace("gamlss", quietly = TRUE)) {
-    data(abdom)
-    mod<-gamlss(y~pb(x),sigma.fo=~pb(x),family=BCT, data=abdom, method=mixed(1,20))
-    
-    tidy(mod)
+data(abdom)
+mod<-gamlss(y~pb(x),sigma.fo=~pb(x),family=BCT, data=abdom, method=mixed(1,20))\preformatted{tidy(mod)
+}
+
 }
 }
 \description{
 Tidying methods for "gamlss" objects from the gamlss package.
 }
-

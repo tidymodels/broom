@@ -2,8 +2,8 @@
 % Please edit documentation in R/fitdistr_tidiers.R
 \name{fitdistr_tidiers}
 \alias{fitdistr_tidiers}
-\alias{glance.fitdistr}
 \alias{tidy.fitdistr}
+\alias{glance.fitdistr}
 \title{Tidying methods for fitdistr objects from the MASS package}
 \usage{
 \method{tidy}{fitdistr}(x, ...)
@@ -21,15 +21,15 @@ structure depends on the method chosen.
 
 \code{tidy.fitdistr} returns one row for each parameter that
 was estimated, with columns:
-  \item{term}{The term that was estimated}
-  \item{estimate}{Estimated value}
-  \item{std.error}{Standard error of estimate}
+\item{term}{The term that was estimated}
+\item{estimate}{Estimated value}
+\item{std.error}{Standard error of estimate}
 
 \code{glance.fitdistr} returns a one-row data.frame with the columns
-  \item{n}{Number of observations used in estimation}
-  \item{logLik}{log-likelihood of estimated data}
-  \item{AIC}{Akaike Information Criterion}
-  \item{BIC}{Bayesian Information Criterion}
+\item{n}{Number of observations used in estimation}
+\item{logLik}{log-likelihood of estimated data}
+\item{AIC}{Akaike Information Criterion}
+\item{BIC}{Bayesian Information Criterion}
 }
 \description{
 These methods tidies the parameter estimates resulting
@@ -46,4 +46,3 @@ fit <- fitdistr(x, dnorm, list(mean = 3, sd = 1))
 tidy(fit)
 glance(fit)
 }
-

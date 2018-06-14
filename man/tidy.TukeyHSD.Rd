@@ -16,12 +16,12 @@
 }
 \value{
 A data.frame with one row per comparison, containing columns
-    \item{term}{Term for which levels are being compared}
-    \item{comparison}{Levels being compared, separated by -}
-    \item{estimate}{Estimate of difference}
-    \item{conf.low}{Low end of confidence interval of difference}
-    \item{conf.high}{High end of confidence interval of difference}
-    \item{adj.p.value}{P-value adjusted for multiple comparisons}
+\item{term}{Term for which levels are being compared}
+\item{comparison}{Levels being compared, separated by -}
+\item{estimate}{Estimate of difference}
+\item{conf.low}{Low end of confidence interval of difference}
+\item{conf.high}{High end of confidence interval of difference}
+\item{adj.p.value}{P-value adjusted for multiple comparisons}
 
 If \code{separate.levels = TRUE}, the \code{comparison} column will be
 split up into \code{level1} and \code{level2}.
@@ -42,6 +42,5 @@ tidy(TukeyHSD(fm2))
 
 }
 \seealso{
-\code{\link{TukeyHSD}}
+\code{\link[=TukeyHSD]{TukeyHSD()}}
 }
-

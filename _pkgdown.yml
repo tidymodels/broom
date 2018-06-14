@@ -1,0 +1,55 @@
+url: http://broom.tidyverse.org
+
+template:
+  package: tidytemplate
+default_assets: false
+
+home:
+  strip_header: true
+
+reference:
+
+- title: Tidiers
+  contents:
+  - starts_with('tidy')
+  - starts_with('glance')
+  - starts_with('augment')
+  
+- title: Miscellaneous
+  contents:
+  - bootstrap
+  - broom
+  - contains("compact")
+  - starts_with("confint")
+  - finish_glance
+  - fix_data_frame
+  - inflate
+  - insert_NAs
+  - starts_with("process")
+  - contains("unrowname")
+  
+navbar:
+  type: default
+  left:
+  - text: Intro
+    href: articles/broom.html
+  - text: Reference
+    href: reference/index.html
+  - text: Articles
+    menu:
+    - text: Adding new tidiers
+      href: articles/adding-tidiers.html
+    - text: Available methods
+      href: articles/available-methods.html
+    - text: Bootstrapping
+      href: articles/bootstrapping.html
+    - text: Broom and dplyr
+      href: articles/broom_and_dplyr.html
+    - text: K-means
+      href: articles/kmeans.html
+  - text: News
+    href: news/index.html
+  right:
+  - icon: fa-github fa-lg
+    href: https://github.com/tidyverse/broom
+ 

@@ -14,12 +14,12 @@ finish_glance(ret, x)
 }
 \value{
 a one-row data frame with additional columns added, such as
-  \item{logLik}{log likelihoods}
-  \item{AIC}{Akaike Information Criterion}
-  \item{BIC}{Bayesian Information Criterion}
-  \item{deviance}{deviance}
-  \item{df.residual}{residual degrees of freedom}
-  
+\item{logLik}{log likelihoods}
+\item{AIC}{Akaike Information Criterion}
+\item{BIC}{Bayesian Information Criterion}
+\item{deviance}{deviance}
+\item{df.residual}{residual degrees of freedom}
+
 Each of these are produced by the corresponding generics
 }
 \description{
@@ -34,4 +34,3 @@ In one special case, deviance for objects of the
 \code{lmerMod} class from lme4 is computed with
 \code{deviance(x, REML=FALSE)}.
 }
-
