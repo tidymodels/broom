@@ -19,7 +19,7 @@
 \item{...}{extra arguments (not used)}
 }
 \value{
-A data.frame with columns
+A tibble with columns
 \item{term}{Term within the model, or "Residuals"}
 \item{df}{Degrees of freedom used by this term in the model}
 \item{sumsq}{Sum of squares explained by this term}
