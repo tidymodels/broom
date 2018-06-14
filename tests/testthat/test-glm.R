@@ -14,17 +14,13 @@ test_that(
     
     expect_equal(
       object = tidy(car_output),
-      expected = structure(
-        list(
+      expected = 
+        tibble(
           term = "mpg", 
-          statistic = 13.5545656286209, 
-          df = 1, 
-          p.value = 0.000231727053726745
-        ), 
-        class = "data.frame", 
-        .Names = c("term", "statistic", "df", "p.value"),
-        row.names = c(NA, -1L)
-      )
+          statistic = car_output$`LR Chisq`, 
+          df = car_output$Df, 
+          p.value = car_output$`Pr(>Chisq)`
+        )
     )
   }
 )

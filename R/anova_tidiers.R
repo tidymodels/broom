@@ -7,7 +7,7 @@
 #' @param x An object of class "anova", "aov", or "aovlist"
 #' @param ... extra arguments (not used)
 #'
-#' @return A data.frame with columns
+#' @return A tibble with columns
 #'   \item{term}{Term within the model, or "Residuals"}
 #'   \item{df}{Degrees of freedom used by this term in the model}
 #'   \item{sumsq}{Sum of squares explained by this term}
@@ -87,7 +87,7 @@ tidy.anova <- function(x, ...) {
     # if rows had names, strip whitespace in them
     ret <- ret %>% mutate(term = stringr::str_trim(term))
   }
-  ret
+  tibble::as_tibble(ret)
 }
 
 
@@ -122,5 +122,5 @@ tidy.aovlist <- function(x, ...) {
     term = stringr::str_trim(term),
     stratum = stringr::str_trim(stratum)
   )
-  ret
+  tibble::as_tibble(ret)
 }
