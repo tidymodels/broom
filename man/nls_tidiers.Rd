@@ -33,7 +33,7 @@ attempt to be reconstructed from nls (may not be successful)}
 \item{newdata}{new data frame to use for predictions}
 }
 \value{
-All tidying methods return a \code{data.frame} without rownames.
+All tidying methods return a \code{tibble} without rownames.
 The structure depends on the method chosen.
 
 \code{tidy} returns one row for each coefficient in the model,
