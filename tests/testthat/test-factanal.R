@@ -8,7 +8,7 @@ test_that("tidy.factanal works", {
   td <- tidy(fit)
   check_tidy(td, exp.row = ncol(mtcars), exp.col = 2 + n_factors)
   expect_equal(td$variable, colnames(mtcars))
-  
+
   n_factors2 <- 3
   fit2 <- factanal(mtcars, n_factors2)
   td2 <- tidy(fit2)
@@ -29,7 +29,7 @@ test_that("augment.factanal works", {
   td <- augment(fit)
   check_tidy(td, exp.row = nrow(mtcars), exp.col = 1 + n_factors)
   expect_equal(td$.rowname, rownames(mtcars))
-  
+
   fit2 <- factanal(mtcars, n_factors, scores = "Bartlett")
   td2 <- augment(fit2, mtcars)
   check_tidy(td2, exp.row = nrow(mtcars), exp.col = 1 + n_factors + ncol(mtcars))

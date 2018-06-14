@@ -28,11 +28,11 @@ NULL
 #'   \item{conf.high}{}
 #'   \item{std.lv}{Standardized estimates based on the variances of the (continuous) latent variables only}
 #'   \item{std.all}{Standardized estimates based on both the variances of both (continuous) observed and latent variables.}
-#'   \item{std.nox}{Standardized estimates based on both the variances of both (continuous) observed and latent variables, but not the variances of exogenous covariates.}   
+#'   \item{std.nox}{Standardized estimates based on both the variances of both (continuous) observed and latent variables, but not the variances of exogenous covariates.}
 #' @examples
 #'
 #' if (require("lavaan", quietly = TRUE)) {
-#'  
+#'
 #'  cfa.fit <- cfa('F =~ x1 + x2 + x3 + x4 + x5 + x6 + x7 + x8 + x9', data = HolzingerSwineford1939, group = "school")
 #'  tidy.lavaan(cfa.fit) %>% filter(op=="~~" & toupper(term)==term)
 #'
@@ -80,15 +80,15 @@ tidy.lavaan <- function(x, conf.level = 0.95, ...) {
 #'   \item{converged}{Logical - Did the model converge}
 #'   \item{estimator}{Estimator used}
 #'   \item{missing_method}{Method for eliminating missing data}
-#'   
+#'
 #'   For further recommendations on reporting SEM and CFA models see Schreiber, J. B. (2017). Update to core reporting practices in structural equation modeling. Research in Social and Administrative Pharmacy, 13(3), 634–643. https://doi.org/10.1016/j.sapharm.2016.06.006
 
 #' @examples
 #'
 #' if (require("lavaan", quietly = TRUE)) {
-#'  
+#'
 #'  cfa.fit <- cfa('F =~ x1 + x2 + x3 + x4 + x5' , data = HolzingerSwineford1939, group = "school")
-#'  glance.lavaan(cfa.fit) %>% gather() 
+#'  glance.lavaan(cfa.fit) %>% gather()
 
 #' @export
 glance.lavaan <- function(x, ...) {
@@ -129,6 +129,6 @@ glance.lavaan <- function(x, ...) {
       starts_with("n"),
       everything()
     ) %>%
-    rename(rmsea.conf.high = rmsea.ci.upper) %>% 
-    mutate_if(is.numeric, funs(round(., 3))) 
+    rename(rmsea.conf.high = rmsea.ci.upper) %>%
+    mutate_if(is.numeric, funs(round(., 3)))
 }

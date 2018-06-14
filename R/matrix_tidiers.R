@@ -1,5 +1,5 @@
 #' Tidiers for matrix objects
-#' 
+#'
 #' Matrix tidiers are deprecated and will be removed from an upcoming release
 #' of broom.
 #'

@@ -31,9 +31,11 @@ test_that("rqs tidiers work", {
   td <- tidy(fit)
   check_tidy(td, exp.row = 114, exp.col = 5)
 
-  rqs_glance_error <- paste("`glance` cannot handle objects of class 'rqs',",
-                            "i.e. models with more than one tau value. Please",
-                            "use a `purr::map`-based workflow with 'rq' models instead.")
+  rqs_glance_error <- paste(
+    "`glance` cannot handle objects of class 'rqs',",
+    "i.e. models with more than one tau value. Please",
+    "use a `purr::map`-based workflow with 'rq' models instead."
+  )
 
   expect_error(glance(fit), regexp = rqs_glance_error)
 
