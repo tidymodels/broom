@@ -19,6 +19,10 @@ Most likely a named vector}
 \item{...}{Extra arguments (not used)}
 }
 \description{
+Vector tidiers are deprecated and will be removed from an upcoming release
+of broom.
+}
+\details{
 Turn atomic vectors into data frames, where the names of the vector (if they
 exist) are a column and the values of the vector are a column.
 }

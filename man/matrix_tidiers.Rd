@@ -28,6 +28,10 @@ into a column called \code{.rownames}.
 are missing}
 }
 \description{
+Matrix tidiers are deprecated and will be removed from an upcoming release
+of broom.
+}
+\details{
 These perform tidying operations on matrix objects. \code{tidy} turns the
 matrix into a data.frame while bringing rownames, if they exist, in as
 a column called \code{.rownames} (since results of tidying operations never

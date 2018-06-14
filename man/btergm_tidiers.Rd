@@ -43,6 +43,7 @@ for \pkg{ergm} objects.
 \examples{
 
 if (require("xergm")) {
+    set.seed(1)
     # Using the same simulated example as the xergm package
     # Create 10 random networks with 10 actors
     networks <- list()

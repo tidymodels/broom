@@ -5,7 +5,7 @@
 #' @param x An object of class `lavaan`, such as those from [lavaan::cfa()],
 #' or [lavaan::sem()]
 #' @param ... For `tidy`, additional arguments passed to
-#'   [lavaan::parameterEstimates()]. Ignored for `glance`.`
+#'   [lavaan::parameterEstimates()]. Ignored for `glance`.
 #' @name lavaan_tidiers
 #'
 NULL
@@ -15,20 +15,27 @@ NULL
 #'
 #' @param conf.level Confidence level to use. Default is 0.95.
 #'
-#' @return `tidy` returns a tibble with one row for each estimated parameter
-#'   and columns:
+#' @return The `tidy` method returns a tibble with one row for each
+#'   estimated parameter and columns:
+#'  
 #'   \item{term}{The result of paste(lhs, op, rhs)}
-#'   \item{op}{The operator in the model syntax (e.g. ~~ for covariances, or ~ for regression parameters)}
+#'   \item{op}{The operator in the model syntax (e.g. ~~ for covariances, or
+#'     ~ for regression parameters)}
 #'   \item{group}{The group (if specified) in the lavaan model}
 #'   \item{estimate}{The parameter estimate (may be standardized)}
 #'   \item{std.error}{}
-#'   \item{statistic}{The z value returned by [lavaan::parameterEstimates()]
+#'   \item{statistic}{The z value returned by [lavaan::parameterEstimates()]}
 #'   \item{p.value}{}
 #'   \item{conf.low}{}
 #'   \item{conf.high}{}
-#'   \item{std.lv}{Standardized estimates based on the variances of the (continuous) latent variables only}
-#'   \item{std.all}{Standardized estimates based on both the variances of both (continuous) observed and latent variables.}
-#'   \item{std.nox}{Standardized estimates based on both the variances of both (continuous) observed and latent variables, but not the variances of exogenous covariates.}
+#'   \item{std.lv}{Standardized estimates based on the variances of the
+#'     (continuous) latent variables only}
+#'   \item{std.all}{Standardized estimates based on both the variances
+#'     of both (continuous) observed and latent variables.}
+#'   \item{std.nox}{Standardized estimates based on both the variances
+#'     of both (continuous) observed and latent variables, but not the
+#'     variances of exogenous covariates.}
+#'   
 #' @examples
 #'
 #' if (require("lavaan", quietly = TRUE)) {
@@ -36,6 +43,7 @@ NULL
 #'  cfa.fit <- cfa('F =~ x1 + x2 + x3 + x4 + x5 + x6 + x7 + x8 + x9', data = HolzingerSwineford1939, group = "school")
 #'  tidy.lavaan(cfa.fit) %>% filter(op=="~~" & toupper(term)==term)
 #'
+#' }
 #' @export
 tidy.lavaan <- function(x, conf.level = 0.95, ...) {
   parameterEstimates(x,
@@ -62,11 +70,13 @@ tidy.lavaan <- function(x, conf.level = 0.95, ...) {
 
 #' @rdname lavaan_tidiers
 #'
-#' @return `glance` returns a single row dataset giving model fit and related information, including:
+#' @return The `glance` method returns a single row dataset giving model fit
+#'   and related information, including:
+#' 
 #'   \item{chisq}{Model chi squared}
 #'   \item{npar}{Number of parameters in the model}
 #'   \item{rmsea}{Root mean square error of approximation}
-#'   \item{rmsea.conf.high}{95% upper bound on RMSEA}
+#'   \item{rmsea.conf.high}{95\% upper bound on RMSEA}
 #'   \item{srmr}{Standardised root mean residual}
 #'   \item{agfi}{Adjusted goodness of fit}
 #'   \item{cfi}{Comparative fit index}
@@ -89,7 +99,8 @@ tidy.lavaan <- function(x, conf.level = 0.95, ...) {
 #'
 #'  cfa.fit <- cfa('F =~ x1 + x2 + x3 + x4 + x5' , data = HolzingerSwineford1939, group = "school")
 #'  glance.lavaan(cfa.fit) %>% gather()
-
+#'
+#' }
 #' @export
 glance.lavaan <- function(x, ...) {
   x %>%
