@@ -263,12 +263,16 @@ finish_glance <- function(ret, x) {
 #' @export
 confint_tidy <- function(x, conf.level = .95, func = stats::confint, ...) {
   # avoid "Waiting for profiling to be done..." message for some models
-  CI <- suppressMessages(func(x, level = conf.level, ...))
-  if (is.null(dim(CI))) {
-    CI <- matrix(CI, nrow = 1)
+  ci <- suppressMessages(func(x, level = conf.level, ...))
+  if (is.null(dim(ci))) {
+    ci <- matrix(ci, nrow = 1)
   }
-  colnames(CI) <- c("conf.low", "conf.high")
-  unrowname(as.data.frame(CI))
+  # remove rows that are all NA. *not the same* as na.omit which checks
+  # for any NA.
+  all_na <- apply(ci, 1, function(x) all(is.na(x)))
+  ci <- ci[!all_na,, drop = FALSE]
+  colnames(ci) <- c("conf.low", "conf.high")
+  as_tibble(ci)
 }
 
 
