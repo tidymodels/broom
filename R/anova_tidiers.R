@@ -104,9 +104,7 @@ tidy.aov <- function(x, ...) {
 
 #' @rdname anova_tidiers
 #' 
-#' @importFrom plyr ldply
-#' 
-#' @import dplyr
+#' @import purrr
 #' 
 #' @export
 tidy.aovlist <- function(x, ...) {
@@ -115,14 +113,8 @@ tidy.aovlist <- function(x, ...) {
     x <- x[-1L]
   }
 
-  ret <- plyr::ldply(x, tidy, .id = "stratum")
+  ret <- purrr::map_df(x, tidy, .id = "stratum")
   
-  # ret <- lapply(x, function(a) tidy(stats::anova(a)))
-  # ret <- lapply(
-  #   names(ret),
-  #   function(a) dplyr::mutate(ret[[a]], stratum = a)
-  # )
-  # ret <- do.call("rbind", ret)
   # get rid of leading and trailing whitespace in term and stratum columns
   ret <- ret %>% dplyr::mutate(
     term = stringr::str_trim(term),
