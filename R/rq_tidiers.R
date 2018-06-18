@@ -30,13 +30,13 @@ NULL
 #' If `se.type != 'rank'` and `conf.int = TRUE`, confidence intervals 
 #' are standard t based intervals.
 #'
-#' @return `tidy.rq` returns a data frame with one row for each coefficient.
+#' @return `tidy.rq` returns a tibble with one row for each coefficient.
 #' The columns depend upon the confidence interval method selected.
 #'
 #' @export
-tidy.rq <- function(x, se.type = "rank", conf.int = TRUE, conf.level = 0.95, alpha = 1 - conf.level, ...) {
+tidy.rq <- function(x, se.type = "rank", conf.int = TRUE, conf.level = 0.9, alpha = 1 - conf.level, ...) {
   # summary.rq often issues warnings when computing standard errors
-  rq_summary <- suppressWarnings(summary(x, se = se.type, alpha = alpha, ...))
+  rq_summary <- suppressWarnings(quantreg::summary.rq(x, se = se.type, alpha = alpha, ...))
   process_rq(rq_obj = rq_summary, se.type = se.type, conf.int = conf.int, conf.level = conf.level, ...)
 }
 
@@ -47,9 +47,9 @@ tidy.rq <- function(x, se.type = "rank", conf.int = TRUE, conf.level = 0.95, alp
 #' method selected.
 #'
 #' @export
-tidy.rqs <- function(x, se.type = "rank", conf.int = TRUE, conf.level = 0.95, alpha = 1 - conf.level, ...) {
+tidy.rqs <- function(x, se.type = "rank", conf.int = TRUE, conf.level = 0.9, alpha = 1 - conf.level, ...) {
   # summary.rq often issues warnings when computing standard errors
-  rq_summary <- suppressWarnings(summary(x, se = se.type, alpha = alpha, ...))
+  rq_summary <- suppressWarnings(quantreg::summary.rqs(x, se = se.type, alpha = alpha, ...))
   plyr::ldply(rq_summary, process_rq, se.type = se.type, conf.int = conf.int, conf.level = conf.level, ...)
 }
 
@@ -75,7 +75,7 @@ tidy.nlrq <- function(x, conf.int = FALSE, conf.level = 0.95, ...) {
     ret[["conf.low"]] <- ret[["estimate"]] + (cv[1] * ret[["std.error"]])
     ret[["conf.high"]] <- ret[["estimate"]] + (cv[2] * ret[["std.error"]])
   }
-  ret
+  tibble::as_tibble(ret)
 }
 
 #' @rdname rq_tidiers
@@ -100,7 +100,7 @@ glance.rq <- function(x, ...) {
   n <- length(fitted(x))
   s <- summary(x)
 
-  data.frame(
+  tibble::tibble(
     tau = x[["tau"]],
     logLik = logLik(x),
     AIC = AIC(x),
@@ -131,7 +131,7 @@ glance.rqs <- function(x, ...) {
 glance.nlrq <- function(x, ...) {
   n <- length(x[["m"]]$fitted())
   s <- summary(x)
-  data.frame(
+  tibble::tibble(
     tau = x[["m"]]$tau(),
     logLik = logLik(x),
     AIC = AIC(x),
@@ -215,15 +215,16 @@ augment.rqs <- function(x, data = model.frame(x), newdata, ...) {
     pred <- setNames(as.data.frame(pred), x[["tau"]])
     # pred <- reshape2::melt(pred,measure.vars = 1:ncol(pred),variable.name = ".tau",value.name = ".fitted")
     pred <- tidyr::gather(data = pred, key = ".tau", value = ".fitted")
-    return(unrowname(cbind(original, pred[, -1, drop = FALSE])))
+    ret <- unrowname(cbind(original, pred[, -1, drop = FALSE]))
   } else {
     original <- newdata[rep(seq_len(nrow(newdata)), n_tau), ]
     pred <- predict(x, newdata = newdata, stepfun = FALSE, ...)
     pred <- setNames(as.data.frame(pred), x[["tau"]])
     # pred <- reshape2::melt(pred,measure.vars = 1:ncol(pred),variable.name = ".tau",value.name = ".fitted")
     pred <- tidyr::gather(data = pred, key = ".tau", value = ".fitted")
-    return(unrowname(cbind(original, pred)))
+    ret <- unrowname(cbind(original, pred))
   }
+  tibble::as_tibble(ret)
 }
 
 #' @rdname rq_tidiers
@@ -273,5 +274,5 @@ process_rq <- function(rq_obj, se.type = "rank",
     co[["conf.high"]] <- co[["estimate"]] + (cv[2] * co[["std.error"]])
   }
   co[["tau"]] <- rq_obj[["tau"]]
-  fix_data_frame(co, colnames(co))
+  tibble::as_tibble(fix_data_frame(co, colnames(co)))
 }

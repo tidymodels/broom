@@ -8,7 +8,7 @@
 #' @param data original data this was fitted on; if not given this will
 #' attempt to be reconstructed from nls (may not be successful)
 #'
-#' @return All tidying methods return a `data.frame` without rownames.
+#' @return All tidying methods return a `tibble` without rownames.
 #' The structure depends on the method chosen.
 #'
 #' @template augment_NAs
@@ -60,7 +60,7 @@ tidy.nls <- function(x, conf.int = FALSE, conf.level = .95,
       term = names(co), estimate = unname(co),
       stringsAsFactors = FALSE
     )
-    return(ret)
+    return(tibble::as_tibble(ret))
   }
 
   nn <- c("estimate", "std.error", "statistic", "p.value")
@@ -75,7 +75,7 @@ tidy.nls <- function(x, conf.int = FALSE, conf.level = .95,
     colnames(CI) <- c("conf.low", "conf.high")
     ret <- cbind(ret, unrowname(CI))
   }
-  ret
+  tibble::as_tibble(ret)
 }
 
 
@@ -97,7 +97,7 @@ augment.nls <- function(x, data = NULL, newdata = NULL, ...) {
     # use predictions on new data
     newdata <- fix_data_frame(newdata, newcol = ".rownames")
     newdata$.fitted <- stats::predict(x, newdata = newdata)
-    return(newdata)
+    return(tibble::as_tibble(newdata))
   }
 
   if (is.null(data)) {
@@ -113,14 +113,14 @@ augment.nls <- function(x, data = NULL, newdata = NULL, ...) {
     # }
   }
 
-  return(augment_columns(x, data))
+  return(tibble::as_tibble(augment_columns(x, data)))
 
   # move rownames if necessary
   data <- fix_data_frame(data, newcol = ".rownames")
 
   data$.fitted <- stats::predict(x)
   data$.resid <- stats::resid(x)
-  data
+  tibble::as_tibble(data)
 }
 
 
@@ -145,5 +145,5 @@ glance.nls <- function(x, ...) {
     sigma = s$sigma, isConv = s$convInfo$isConv,
     finTol = s$convInfo$finTol
   ))
-  finish_glance(ret, x)
+  tibble::as_tibble(finish_glance(ret, x))
 }
