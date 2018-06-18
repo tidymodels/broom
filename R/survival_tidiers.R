@@ -713,17 +713,11 @@ augment.survreg <- function(x, data = stats::model.frame(x), newdata,
 glance.survreg <- function(x, conf.level = .95, ...) {
   ret <- data.frame(iter = x$iter, df = sum(x$df))
 
-  ret$chi <- 2 * diff(x$loglik)
-  ret$p.value <- 1 - stats::pchisq(ret$chi, sum(x$df) - x$idf)
+  ret$statistic <- 2 * diff(x$loglik)
+  ret$p.value <- 1 - stats::pchisq(ret$statistic, sum(x$df) - x$idf)
 
   finish_glance(ret, x)
 }
-
-
-
-
-
-
 
 
 #' Tidiers for Tests of Differences between Survival Curves

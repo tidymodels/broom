@@ -130,6 +130,7 @@ if (require(survival)) {
     sr <- survreg(Surv(futime, fustat) ~ ecog.ps + rx, ovarian,
       dist = "exponential"
     )
+    
     td <- tidy(sr)
     check_tidy(td, exp.row = 3, exp.col = 7)
     expect_equal(td$term, c("(Intercept)", "ecog.ps", "rx"))
@@ -138,7 +139,7 @@ if (require(survival)) {
     check_tidy(ag, exp.col = 6)
 
     gl <- glance(sr)
-    check_tidy(gl, exp.col = 9)
+    check_tidy(gl, exp.col = 8)
   })
 
   if (require("survival", quietly = TRUE)) {
@@ -153,9 +154,9 @@ if (require(survival)) {
     })
 
     test_that("glance.survreg works", {
-      tidy_names <- unlist(strsplit("iter df chi p.value logLik AIC BIC df.residual", " "))
+      tidy_names <- unlist(strsplit("iter df statistic p.value logLik AIC BIC df.residual", " "))
       td <- glance(surv_fit)
-      check_tidy(td, exp.row = 1, exp.col = 9, exp.names = tidy_names)
+      check_tidy(td, exp.row = 1, exp.col = 8, exp.names = tidy_names)
     })
 
     test_that("tidy.coxph works", {
