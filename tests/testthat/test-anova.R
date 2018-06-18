@@ -1,6 +1,6 @@
 context("anova tidiers")
 
-test_that("tidy.aovlist works"){
+test_that("tidy.aovlist works", {
   aovlistfit <- aov(mpg ~ wt + disp + Error(drat), mtcars)
   td <- tidy(aovlistfit)
   check_tidy(td, exp.row = 4, exp.col = 7)
@@ -11,5 +11,5 @@ test_that("tidy.aovlist works"){
   td2 <- tidy(aovlistfit2)
   check_tidy(td2, exp.row = 7, exp.col = 7)
   expect_true("Residuals" %in% td2$term)
-  expect_true(length(unique(td2$stratum))==5)
-  }
+  expect_true(length(unique(td2$stratum)) == 5)
+})
