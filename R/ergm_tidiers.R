@@ -23,6 +23,7 @@
 #' @param x an \pkg{ergm} object
 #' @examples
 #'
+#' \dontrun{
 #' if (require("ergm")) {
 #'     # Using the same example as the ergm package
 #'     # Load the Florentine marriage network data
@@ -30,7 +31,7 @@
 #'
 #'     # Fit a model where the propensity to form ties between
 #'     # families depends on the absolute difference in wealth
-#'     suppressWarnings(gest <- ergm(flomarriage ~ edges + absdiff("wealth")))
+#'     gest <- ergm(flomarriage ~ edges + absdiff("wealth"))
 #'
 #'     # Show terms, coefficient estimates and errors
 #'     tidy(gest)
@@ -43,6 +44,7 @@
 #'     glance(gest)
 #'     glance(gest, deviance = TRUE)
 #'     glance(gest, mcmc = TRUE)
+#' }
 #' }
 NULL
 

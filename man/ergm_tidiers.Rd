@@ -79,6 +79,7 @@ There is no \code{augment} method for \pkg{ergm} objects.
 }
 \examples{
 
+\dontrun{
 if (require("ergm")) {
     # Using the same example as the ergm package
     # Load the Florentine marriage network data
@@ -86,7 +87,7 @@ if (require("ergm")) {
 
     # Fit a model where the propensity to form ties between
     # families depends on the absolute difference in wealth
-    suppressWarnings(gest <- ergm(flomarriage ~ edges + absdiff("wealth")))
+    gest <- ergm(flomarriage ~ edges + absdiff("wealth"))
 
     # Show terms, coefficient estimates and errors
     tidy(gest)
@@ -99,6 +100,7 @@ if (require("ergm")) {
     glance(gest)
     glance(gest, deviance = TRUE)
     glance(gest, mcmc = TRUE)
+}
 }
 }
 \references{

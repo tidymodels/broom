@@ -10,7 +10,7 @@
 glance <- function(x, ...) UseMethod("glance")
 
 #' @export
-glance.NULL <- function(x, ...) data.frame()
+glance.NULL <- function(x, ...) tibble()
 
 #' @export
 glance.default <- function(x, ...) {
