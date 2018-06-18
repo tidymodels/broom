@@ -12,9 +12,12 @@
 #'
 #' @examples
 #'
+#' \dontrun{
 #' x <- 1:5
 #' names(x) <- letters[1:5]
 #' tidy(x)
+#' }
+#' 
 #' @export
 #' @rdname vector_tidiers
 tidy.numeric <- function(x, ...) {

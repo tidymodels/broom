@@ -14,9 +14,11 @@
 #'
 #' @examples
 #'
+#' \dontrun{
 #' mat <- as.matrix(mtcars)
 #' tidy(mat)
 #' glance(mat)
+#' }
 #'
 #' @name matrix_tidiers
 

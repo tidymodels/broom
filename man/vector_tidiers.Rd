@@ -28,7 +28,10 @@ exist) are a column and the values of the vector are a column.
 }
 \examples{
 
+\dontrun{
 x <- 1:5
 names(x) <- letters[1:5]
 tidy(x)
+}
+
 }

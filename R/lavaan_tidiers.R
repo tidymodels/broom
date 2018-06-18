@@ -3,7 +3,7 @@
 #' These methods tidy the coefficients of lavaan CFA and SEM models.
 #'
 #' @param x An object of class `lavaan`, such as those from [lavaan::cfa()],
-#' or [lavaan::sem()]
+#'   or [lavaan::sem()]
 #' @param ... For `tidy`, additional arguments passed to
 #'   [lavaan::parameterEstimates()]. Ignored for `glance`.
 #' @name lavaan_tidiers
@@ -13,14 +13,15 @@ NULL
 
 #' @rdname lavaan_tidiers
 #'
+#' @param conf.int Logical indicating if a confidence intervals are desired.
 #' @param conf.level Confidence level to use. Default is 0.95.
 #'
 #' @return The `tidy` method returns a tibble with one row for each
 #'   estimated parameter and columns:
 #'  
 #'   \item{term}{The result of paste(lhs, op, rhs)}
-#'   \item{op}{The operator in the model syntax (e.g. ~~ for covariances, or
-#'     ~ for regression parameters)}
+#'   \item{op}{The operator in the model syntax (e.g. `~~` for covariances, or
+#'     `~` for regression parameters)}
 #'   \item{group}{The group (if specified) in the lavaan model}
 #'   \item{estimate}{The parameter estimate (may be standardized)}
 #'   \item{std.error}{}
@@ -36,18 +37,17 @@ NULL
 #'     of both (continuous) observed and latent variables, but not the
 #'     variances of exogenous covariates.}
 #'   
-#' @examples
-#'
-#' if (require("lavaan", quietly = TRUE)) {
-#'
-#'  cfa.fit <- cfa('F =~ x1 + x2 + x3 + x4 + x5 + x6 + x7 + x8 + x9', data = HolzingerSwineford1939, group = "school")
-#'  tidy.lavaan(cfa.fit) %>% filter(op=="~~" & toupper(term)==term)
-#'
-#' }
 #' @export
-tidy.lavaan <- function(x, conf.level = 0.95, ...) {
-  parameterEstimates(x,
-    ci = TRUE,
+#' @examples
+#' 
+#' if (require("lavaan")) {
+#'  cfa.fit <- cfa('F =~ x1 + x2 + x3 + x4 + x5 + x6 + x7 + x8 + x9',
+#'                 data = HolzingerSwineford1939, group = "school")
+#'  tidy(cfa.fit)
+#' }
+tidy.lavaan <- function(x, conf.int = TRUE, conf.level = 0.95, ...) {
+  lavaan::parameterEstimates(x,
+    ci = conf.int,
     level = conf.level,
     standardized = TRUE,
     ...
@@ -63,7 +63,7 @@ tidy.lavaan <- function(x, conf.level = 0.95, ...) {
       conf.low = ci.lower,
       conf.high = ci.upper
     ) %>%
-    select(term, op, everything(), -rowname, -lhs, -rhs, -block) %>%
+    select(term, op, everything(), -rowname, -lhs, -rhs) %>%
     as_tibble()
 }
 
@@ -76,7 +76,7 @@ tidy.lavaan <- function(x, conf.level = 0.95, ...) {
 #'   \item{chisq}{Model chi squared}
 #'   \item{npar}{Number of parameters in the model}
 #'   \item{rmsea}{Root mean square error of approximation}
-#'   \item{rmsea.conf.high}{95\% upper bound on RMSEA}
+#'   \item{rmsea.conf.high}{95 percent upper bound on RMSEA}
 #'   \item{srmr}{Standardised root mean residual}
 #'   \item{agfi}{Adjusted goodness of fit}
 #'   \item{cfi}{Comparative fit index}
@@ -91,20 +91,23 @@ tidy.lavaan <- function(x, conf.level = 0.95, ...) {
 #'   \item{estimator}{Estimator used}
 #'   \item{missing_method}{Method for eliminating missing data}
 #'
-#'   For further recommendations on reporting SEM and CFA models see Schreiber, J. B. (2017). Update to core reporting practices in structural equation modeling. Research in Social and Administrative Pharmacy, 13(3), 634–643. https://doi.org/10.1016/j.sapharm.2016.06.006
-
+#'   For further recommendations on reporting SEM and CFA models see Schreiber, J. B. (2017). Update to core reporting practices in structural equation modeling. Research in Social and Administrative Pharmacy, 13(3), 634-643. https://doi.org/10.1016/j.sapharm.2016.06.006
+#'
+#' @export
 #' @examples
 #'
 #' if (require("lavaan", quietly = TRUE)) {
 #'
-#'  cfa.fit <- cfa('F =~ x1 + x2 + x3 + x4 + x5' , data = HolzingerSwineford1939, group = "school")
-#'  glance.lavaan(cfa.fit) %>% gather()
+#'  cfa.fit <- cfa(
+#'    'F =~ x1 + x2 + x3 + x4 + x5',
+#'    data = HolzingerSwineford1939, group = "school"
+#'  )
+#'  glance(cfa.fit)
 #'
 #' }
-#' @export
 glance.lavaan <- function(x, ...) {
   x %>%
-    fitmeasures(
+    lavaan::fitmeasures(
       fit.measures =
         c(
           "npar",
@@ -120,7 +123,7 @@ glance.lavaan <- function(x, ...) {
         )
     ) %>%
     as_data_frame() %>%
-    rownames_to_column(var = "term") %>%
+    tibble::rownames_to_column(var = "term") %>%
     spread(., term, value) %>%
     bind_cols(data_frame(
       converged = x@Fit@converged,
@@ -131,15 +134,5 @@ glance.lavaan <- function(x, ...) {
       norig = sum(purrr::accumulate(x@Data@norig, sum)),
       nexcluded = norig - nobs
     )) %>%
-    select(
-      chisq,
-      npar,
-      contains("rms"), srmr,
-      agfi, cfi, tli,
-      aic, bic,
-      starts_with("n"),
-      everything()
-    ) %>%
-    rename(rmsea.conf.high = rmsea.ci.upper) %>%
-    mutate_if(is.numeric, funs(round(., 3)))
+    rename(rmsea.conf.high = rmsea.ci.upper)
 }

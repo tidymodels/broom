@@ -9,7 +9,7 @@
   quick = FALSE, ...)
 }
 \arguments{
-\item{x}{a \code{\link[btergm:btergm]{btergm::btergm()}} object}
+\item{x}{A \code{\link[btergm:btergm]{btergm::btergm()}} object.}
 
 \item{conf.level}{confidence level of the bootstrapped interval}
 

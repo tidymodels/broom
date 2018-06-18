@@ -40,8 +40,10 @@ columns. Note that no augment method exists for matrices.
 }
 \examples{
 
+\dontrun{
 mat <- as.matrix(mtcars)
 tidy(mat)
 glance(mat)
+}
 
 }

@@ -6,13 +6,15 @@
 \alias{glance.lavaan}
 \title{Tidying methods for lavaan models}
 \usage{
-\method{tidy}{lavaan}(x, conf.level = 0.95, ...)
+\method{tidy}{lavaan}(x, conf.int = TRUE, conf.level = 0.95, ...)
 
 \method{glance}{lavaan}(x, ...)
 }
 \arguments{
 \item{x}{An object of class \code{lavaan}, such as those from \code{\link[lavaan:cfa]{lavaan::cfa()}},
 or \code{\link[lavaan:sem]{lavaan::sem()}}}
+
+\item{conf.int}{Logical indicating if a confidence intervals are desired.}
 
 \item{conf.level}{Confidence level to use. Default is 0.95.}
 
@@ -24,8 +26,8 @@ The \code{tidy} method returns a tibble with one row for each
 estimated parameter and columns:
 
 \item{term}{The result of paste(lhs, op, rhs)}
-\item{op}{The operator in the model syntax (e.g. ~~ for covariances, or
-~ for regression parameters)}
+\item{op}{The operator in the model syntax (e.g. \code{~~} for covariances, or
+\code{~} for regression parameters)}
 \item{group}{The group (if specified) in the lavaan model}
 \item{estimate}{The parameter estimate (may be standardized)}
 \item{std.error}{}
@@ -47,7 +49,7 @@ and related information, including:
 \item{chisq}{Model chi squared}
 \item{npar}{Number of parameters in the model}
 \item{rmsea}{Root mean square error of approximation}
-\item{rmsea.conf.high}{95\% upper bound on RMSEA}
+\item{rmsea.conf.high}{95 percent upper bound on RMSEA}
 \item{srmr}{Standardised root mean residual}
 \item{agfi}{Adjusted goodness of fit}
 \item{cfi}{Comparative fit index}
@@ -62,24 +64,26 @@ and related information, including:
 \item{estimator}{Estimator used}
 \item{missing_method}{Method for eliminating missing data}
 
-For further recommendations on reporting SEM and CFA models see Schreiber, J. B. (2017). Update to core reporting practices in structural equation modeling. Research in Social and Administrative Pharmacy, 13(3), 634–643. https://doi.org/10.1016/j.sapharm.2016.06.006
+For further recommendations on reporting SEM and CFA models see Schreiber, J. B. (2017). Update to core reporting practices in structural equation modeling. Research in Social and Administrative Pharmacy, 13(3), 634-643. https://doi.org/10.1016/j.sapharm.2016.06.006
 }
 \description{
 These methods tidy the coefficients of lavaan CFA and SEM models.
 }
 \examples{
 
-if (require("lavaan", quietly = TRUE)) {
-
- cfa.fit <- cfa('F =~ x1 + x2 + x3 + x4 + x5 + x6 + x7 + x8 + x9', data = HolzingerSwineford1939, group = "school")
- tidy.lavaan(cfa.fit) \%>\% filter(op=="~~" & toupper(term)==term)
-
+if (require("lavaan")) {
+ cfa.fit <- cfa('F =~ x1 + x2 + x3 + x4 + x5 + x6 + x7 + x8 + x9',
+                data = HolzingerSwineford1939, group = "school")
+ tidy(cfa.fit)
 }
 
 if (require("lavaan", quietly = TRUE)) {
 
- cfa.fit <- cfa('F =~ x1 + x2 + x3 + x4 + x5' , data = HolzingerSwineford1939, group = "school")
- glance.lavaan(cfa.fit) \%>\% gather()
+ cfa.fit <- cfa(
+   'F =~ x1 + x2 + x3 + x4 + x5',
+   data = HolzingerSwineford1939, group = "school"
+ )
+ glance(cfa.fit)
 
 }
 }

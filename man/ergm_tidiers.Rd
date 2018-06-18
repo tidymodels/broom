@@ -86,7 +86,7 @@ if (require("ergm")) {
 
     # Fit a model where the propensity to form ties between
     # families depends on the absolute difference in wealth
-    gest <- ergm(flomarriage ~ edges + absdiff("wealth"))
+    suppressWarnings(gest <- ergm(flomarriage ~ edges + absdiff("wealth")))
 
     # Show terms, coefficient estimates and errors
     tidy(gest)
