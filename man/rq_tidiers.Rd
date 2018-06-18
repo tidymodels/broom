@@ -12,11 +12,11 @@
 \alias{augment.nlrq}
 \title{Tidying methods for quantile regression models}
 \usage{
-\method{tidy}{rq}(x, se.type = "rank", conf.int = TRUE, conf.level = 0.95,
+\method{tidy}{rq}(x, se.type = "rank", conf.int = TRUE, conf.level = 0.9,
   alpha = 1 - conf.level, ...)
 
-\method{tidy}{rqs}(x, se.type = "rank", conf.int = TRUE,
-  conf.level = 0.95, alpha = 1 - conf.level, ...)
+\method{tidy}{rqs}(x, se.type = "rank", conf.int = TRUE, conf.level = 0.9,
+  alpha = 1 - conf.level, ...)
 
 \method{tidy}{nlrq}(x, conf.int = FALSE, conf.level = 0.95, ...)
 
@@ -53,7 +53,7 @@ as \code{conf.level} although the specification is inverted}
 All tidying methods return a data.frame without rownames, whose
 structure depends on the method chosen.
 
-\code{tidy.rq} returns a data frame with one row for each coefficient.
+\code{tidy.rq} returns a tibble with one row for each coefficient.
 The columns depend upon the confidence interval method selected.
 
 \code{tidy.rqs} returns a data frame with one row for each coefficient at
