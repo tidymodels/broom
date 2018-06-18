@@ -710,7 +710,7 @@ augment.survreg <- function(x, data = stats::model.frame(x), newdata,
 #'   \item{df.residual}{residual degrees of freedom}
 #'
 #' @export
-glance.survreg <- function(x, conf.level = .95, ...) {
+glance.survreg <- function(x, ...) {
   ret <- data.frame(iter = x$iter, df = sum(x$df))
 
   ret$statistic <- 2 * diff(x$loglik)
