@@ -54,7 +54,7 @@
 #'   \item{p.value}{P-value computed from t-statistic}
 #'
 #' @importFrom plyr ldply
-#' @import dplyr
+#' @import dplyr 
 #'
 #' @export
 tidy.lme <- function(x, effects = "random", ...) {

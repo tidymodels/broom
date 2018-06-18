@@ -1,6 +1,7 @@
 context("vector tidiers")
 
 test_that("tidying numeric vectors works", {
+  skip("deprecating soon")
   vec <- 1:10
   tidy_vec <- tidy(vec)
   check_tidy(tidy_vec, exp.row = 10, exp.col = 1)
@@ -13,6 +14,7 @@ test_that("tidying numeric vectors works", {
 })
 
 test_that("tidying logical vectors works", {
+  skip("deprecating soon")
   vec <- rep(c(TRUE, FALSE), 5)
   tidy_vec <- tidy(vec)
   check_tidy(tidy_vec, exp.row = 10, exp.col = 1)
@@ -25,6 +27,7 @@ test_that("tidying logical vectors works", {
 })
 
 test_that("tidying character vectors works", {
+  skip("deprecating soon")
   vec <- LETTERS[1:10]
   tidy_vec <- tidy(vec)
   check_tidy(tidy_vec, exp.row = 10, exp.col = 1)

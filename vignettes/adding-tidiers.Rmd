@@ -57,6 +57,8 @@ All new tidiers should be fully documented following the [tidyverse code documen
 
 Documentation make use of [`rmarkdown`](https://cran.r-project.org/web/packages/roxygen2/vignettes/markdown.html).
 
+NOTE: okay to write `tidyverse` code to tidy and wrap it in a function. encouraged, in fact.
+
 # Testing new tidiers
 
 ## Basic checks
@@ -89,6 +91,8 @@ We are currently in the process of developing a new set of tests for tidying met
 
 At the moment, pull requests must pass the AppVeyor build to be added to `broom`. It is okay if the Travis CI build times out.
 
+<!-- TODO: guarding against suggested packages in Examples -->
+
 ## Catching edge cases
 
 Many modelling function allow users to specify a variety of options. For example, `glm` allows various response types via the `family` argument. Good tests for `glm` tidying methods would test tidiers on `glm` objects fit for all acceptable values of `family`.
@@ -96,12 +100,10 @@ Many modelling function allow users to specify a variety of options. For example
 # Before submitting your pull request
 
 - Check that your PR contains a big picture summary of what you've done and a brief example usage in the PR text
-- If you know how, squash your PR into a single commit. If you don't know how, don't worry about it.
-<!-- (TODO: add link on how to do this) -->
 - Make sure that you have run and passed:
+    - `devtools::check()`
     - `devtools::spell_check()`
     - `goodpractice::gp()`
-    - R CMD Check
 - Run `devtools::document()` but **do not** run `pkgdown::build_site()` unless requested to.
 
 `broom` doesn't currently pass all of these. If you are adding new tidiers at the moment, it's enough for these to throw no warnings for the files you've changed.

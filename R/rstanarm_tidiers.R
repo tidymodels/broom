@@ -145,7 +145,7 @@ tidy.stanreg <- function(x,
         as.character(x)
       } else {
         x
-      } )
+      })
     rscale <- "sdcor" # FIXME
     ran_prefix <- c("sd", "cor") # FIXME
     pfun <- function(x) {

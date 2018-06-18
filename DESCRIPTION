@@ -41,12 +41,13 @@ URL: http://github.com/tidyverse/broom
 BugReports: http://github.com/tidyverse/broom/issues
 Depends: 
     R (>= 3.1)
-Imports:
+Imports: 
     backports,
     dplyr,
     methods,
     nlme,
     plyr,
+    purrr,
     reshape2,
     stringr,
     tibble,
@@ -84,6 +85,7 @@ Suggests:
     knitr,
     ks,
     Lahman,
+    lavaan,
     lfe,
     lme4,
     lmodel2,
@@ -104,7 +106,6 @@ Suggests:
     plm,
     poLCA,
     psych,
-    purrr,
     quantreg,
     rgeos,
     rmarkdown,

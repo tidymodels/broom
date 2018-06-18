@@ -242,13 +242,13 @@ tidy.manova <- function(x, test = "Pillai", ...) {
 }
 
 #' Tidy a ts timeseries object
-#' 
+#'
 #' Turn a univariate or multivariate [ts()] object into a tidy data
 #' frame.
-#' 
+#'
 #' @param x An object of class "ts".
 #' @param ... extra arguments (not used)
-#' 
+#'
 #' @return `tidy` returns a data frame with one row for each observation, with the
 #' following columns:
 #'   \item{index}{Index (i.e. date or time) for the "ts" object.}
@@ -269,18 +269,18 @@ tidy.manova <- function(x, test = "Pillai", ...) {
 #'
 #' @export
 tidy.ts <- function(x, ...) {
-    # This generates the "index" column using the same approach as time(x), but
-    # without converting to a ts object.
-    xtsp <- stats::tsp(x)
-    index <- seq(xtsp[1], xtsp[2], by = 1 / xtsp[3])
-    # Turn multi-column time series into tidy data frames.
-    if (is.matrix(x)) {
-        res <- tibble::as_data_frame(as.data.frame(x))
-        res <- tibble::add_column(res, index = index, .before = 1)
-        tidyr::gather(res, series, value, -index)
-    } else {
-        tibble::data_frame(index = index, value = as.vector(x))
-    }
+  # This generates the "index" column using the same approach as time(x), but
+  # without converting to a ts object.
+  xtsp <- stats::tsp(x)
+  index <- seq(xtsp[1], xtsp[2], by = 1 / xtsp[3])
+  # Turn multi-column time series into tidy data frames.
+  if (is.matrix(x)) {
+    res <- tibble::as_data_frame(as.data.frame(x))
+    res <- tibble::add_column(res, index = index, .before = 1)
+    tidyr::gather(res, series, value, -index)
+  } else {
+    tibble::data_frame(index = index, value = as.vector(x))
+  }
 }
 
 
