@@ -87,20 +87,23 @@ tidy.prcomp <- function(x, matrix = "u", ...) {
   if (length(matrix) > 1) {
     stop("Tidying multiple matrices not supported")
   }
-  
+
   MATRIX <- c("rotation", "x", "variables", "samples", "v", "u", "pcs", "d")
   matrix <- match.arg(matrix, MATRIX)
-  
+
   ncomp <- NCOL(x$rotation)
   if (matrix %in% c("pcs", "d")) {
     nn <- c("std.dev", "percent", "cumulative")
     ret <- fix_data_frame(t(summary(x)$importance),
-                          newnames = nn,
-                          newcol = "PC"
+      newnames = nn,
+      newcol = "PC"
     )
   } else if (matrix %in% c("rotation", "variables", "v")) {
-    labels <- if (is.null(rownames(x$rotation))) 1:nrow(x$rotation) else
+    labels <- if (is.null(rownames(x$rotation))) {
+      1:nrow(x$rotation)
+    } else {
       rownames(x$rotation)
+    }
     variables <- tidyr::gather(as.data.frame(x$rotation))
     ret <- data.frame(
       label = rep(labels, times = ncomp),
@@ -117,7 +120,7 @@ tidy.prcomp <- function(x, matrix = "u", ...) {
     )
     names(ret) <- c("row", "PC", "value")
   }
-  
+
   ## change the PC to a numeric
   ret <- mutate(ret, PC = as.numeric(stringr::str_replace(PC, "PC", "")))
   ret

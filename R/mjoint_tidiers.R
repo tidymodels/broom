@@ -1,10 +1,13 @@
-#' Tidying methods for joint models for time-to-event data and multivariate longitudinal data
+#' Tidying methods for mjoint models
 #'
-#' These methods tidy the coefficients of joint models for time-to-event data and multivariate longitudinal data of the \code{mjoint} class from the \code{joineRML} package.
+#' These methods tidy the coefficients of joint models for time-to-event
+#' data and multivariate longitudinal data of the `mjoint` class from the
+#' `joineRML` package.
 #'
-#' @param x An object of class \code{mjoint}.
+#' @param x An object of class `mjoint`.
 #'
-#' @return All tidying methods return a \code{data.frame} without rownames. The structure depends on the method chosen.
+#' @return All tidying methods return a `tibble` without rownames. The
+#'   structure depends on the method chosen.
 #'
 #' @name mjoint_tidiers
 #'
@@ -53,28 +56,36 @@
 #'
 #' @rdname mjoint_tidiers
 #'
-#' @param component Either \code{survival} (the survival component of the model, default) or \code{longitudinal} (the longitudinal component).
+#' @param component Either `survival` (the survival component of the model,
+#'   default) or `longitudinal` (the longitudinal component).
 #'
-#' @param bootSE An object of class \code{bootSE} for the corresponding model. If \code{bootSE = NULL} (the default), the function will use approximate standard error estimates calculated from the empirical information matrix.
+#' @param bootSE An object of class `bootSE` for the corresponding model. If
+#'   `bootSE = NULL` (the default), the function will use approximate standard
+#'    error estimates calculated from the empirical information matrix.
 #'
-#' @param ci Include (\code{1 - level})\% confidence intervals? Defaults to \code{FALSE}.
+#' @param ci Include (`1 - level`)\% confidence intervals? Defaults to `FALSE`.
 #'
 #' @param level The confidence level required.
 #'
-#' @return \code{tidy} returns one row for each estimated fixed effect depending on the \code{component} parameter. It contains the following  columns:
+#' @return `tidy` returns one row for each estimated fixed effect depending on
+#'   the `component` parameter. It contains the following  columns:
 #'   \item{term}{The term being estimated}
 #'   \item{estimate}{Estimated value}
 #'   \item{std.error}{Standard error}
 #'   \item{statistic}{Z-statistic}
 #'   \item{p.value}{P-value computed from Z-statistic}
-#'   \item{conf.low}{The low end of a confidence interval on \code{estimate}, if required}
-#'   \item{conf.high}{The high end of a confidence interval on \code{estimate}, if required}
+#'   \item{conf.low}{The low end of a confidence interval on `estimate`,
+#'      if required}
+#'   \item{conf.high}{The high end of a confidence interval on `estimate`,
+#'      if required}
 #'
 #' @export
-tidy.mjoint <- function(x, component = "survival", bootSE = NULL, ci = FALSE, level = 0.95, ...) {
+tidy.mjoint <- function(x, component = "survival", bootSE = NULL, ci = FALSE,
+                        level = 0.95, ...) {
   component <- match.arg(component, c("survival", "longitudinal"))
   if (!is.null(bootSE)) {
-    if (!inherits(x = bootSE, what = "bootSE")) stop("'bootSE' object not of class 'bootSE'")
+    if (!inherits(x = bootSE, what = "bootSE")) 
+      stop("'bootSE' object not of class 'bootSE'")
   }
 
   # make summary object
@@ -107,35 +118,44 @@ tidy.mjoint <- function(x, component = "survival", bootSE = NULL, ci = FALSE, le
   }
 
   # turn out into a tibble object
-  out <- tibble::as_tibble(out)
-
-  # return tidy object
-  return(out)
+  tibble::as_tibble(out)
 }
 
 #' @rdname mjoint_tidiers
 #'
-#' @param data Original data this was fitted on, in a list (e.g. \code{list(data)}). This will be extracted from \code{x} if not given.
+#' @param data Original data this was fitted on, in a list (e.g. `list(data)`). This will be extracted from `x` if not given.
 #'
-#' @return \code{augment} returns one row for each original observation, with columns (each prepended by a .) added. Included are the columns:
-#'   \item{.fitted_j_0}{population-level fitted values for the j-th longitudinal process}
-#'   \item{.fitted_j_1}{individuals-level fitted values for the j-th longitudinal process}
-#'   \item{.resid_j_0}{population-level residuals for the j-th longitudinal process}
-#'   \item{.resid_j_1}{individual-level residuals for the j-th longitudinal process}
-#' See \code{\link[joineRML]{fitted.mjoint}} and \code{\link[joineRML]{residuals.mjoint}} for more information on the difference between population-level and individual-level fitted values and residuals.
+#' @return `augment` returns one row for each original observation, 
+#' with columns (each prepended by a .) added. Included are the columns:
+#'   \item{.fitted_j_0}{population-level fitted values for the
+#'     j-th longitudinal process}
+#'   \item{.fitted_j_1}{individuals-level fitted values for the j-th
+#'     longitudinal process}
+#'   \item{.resid_j_0}{population-level residuals for the j-th
+#'     longitudinal process}
+#'   \item{.resid_j_1}{individual-level residuals for the j-th
+#'     longitudinal process}
+#' 
+#' See [joineRML::fitted.mjoint()] and [joineRML::residuals.mjoint()] for
+#' more information on the difference between population-level and
+#' individual-level fitted values and residuals.
 #'
-#' @note If fitting a joint model with a single longitudinal process, please make sure you are using a named \code{list} to define the formula for the fixed and random effects of the longitudinal submodel.
+#' @note If fitting a joint model with a single longitudinal process,
+#'   please make sure you are using a named `list` to define the formula
+#'   for the fixed and random effects of the longitudinal submodel.
 #'
 #' @export
 augment.mjoint <- function(x, data = x$data, ...) {
   # checks on 'data'
   if (is.null(data)) {
-    stop("It was not possible to extract 'data' from 'x'. Please provide 'data' manually.")
+    stop("It was not possible to extract 'data' from 'x'",
+         "Please provide 'data' manually.")
   }
 
   if (length(data) > 1) {
     if (!do.call(all.equal, data)) {
-      stop("List of 'data' extracted from 'x' does not include equal data frames.")
+      stop("List of 'data' extracted from 'x' does not",
+           "include equal data frames.")
     }
     data <- data[[1]]
   }
@@ -166,8 +186,9 @@ augment.mjoint <- function(x, data = x$data, ...) {
 #'
 #' @param ... extra arguments (not used)
 #'
-#' @return \code{glance} returns one row with the columns
-#'   \item{sigma2_j}{the square root of the estimated residual variance for the j-th longitudinal process}
+#' @return `glance` returns one row with the columns
+#'   \item{sigma2_j}{the square root of the estimated residual variance for
+#'     the j-th longitudinal process}
 #'   \item{AIC}{the Akaike Information Criterion}
 #'   \item{BIC}{the Bayesian Information Criterion}
 #'   \item{logLik}{the data's log-likelihood under the model}
@@ -180,6 +201,5 @@ glance.mjoint <- function(x, ...) {
   out$BIC <- smr$BIC
   out$logLik <- smr$logLik
   rownames(out) <- NULL
-  out <- tibble::as_tibble(out)
-  return(out)
+  tibble::as_tibble(out)
 }

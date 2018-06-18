@@ -104,7 +104,7 @@ tidy.clm <- function(x, conf.int = FALSE, conf.level = .95,
 }
 
 
-process_clm <- function(ret, x, conf.int = FALSE, conf.level = .95, 
+process_clm <- function(ret, x, conf.int = FALSE, conf.level = .95,
                         exponentiate = FALSE, conf.type = "profile") {
   if (exponentiate) {
     trans <- exp
@@ -162,7 +162,7 @@ tidy.polr <- function(x, conf.int = FALSE, conf.level = .95,
 }
 
 
-process_polr <- function(ret, x, conf.int = FALSE, conf.level = .95, 
+process_polr <- function(ret, x, conf.int = FALSE, conf.level = .95,
                          exponentiate = FALSE) {
   if (exponentiate) {
     trans <- exp

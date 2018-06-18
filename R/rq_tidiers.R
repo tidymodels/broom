@@ -87,7 +87,7 @@ tidy.nlrq <- function(x, conf.int = FALSE, conf.level = 0.95, ...) {
 #'    map(function(tau_val) rq(y ~ x, tau = tau_val)) %>%
 #'    map_dfr(glance)
 #'  ```
-#'   
+#'
 #' @return `glance.rq` returns one row for each quantile (tau)
 #' with the columns:
 #'  \item{tau}{quantile estimated}
@@ -99,7 +99,7 @@ tidy.nlrq <- function(x, conf.int = FALSE, conf.level = 0.95, ...) {
 glance.rq <- function(x, ...) {
   n <- length(fitted(x))
   s <- summary(x)
-  
+
   data.frame(
     tau = x[["tau"]],
     logLik = logLik(x),
@@ -112,9 +112,10 @@ glance.rq <- function(x, ...) {
 #' @export
 glance.rqs <- function(x, ...) {
   stop("`glance` cannot handle objects of class 'rqs',",
-       " i.e. models with more than one tau value. Please",
-       " use a `purr::map`-based workflow with 'rq' models instead.",
-       call. = FALSE)
+    " i.e. models with more than one tau value. Please",
+    " use a `purr::map`-based workflow with 'rq' models instead.",
+    call. = FALSE
+  )
 }
 
 #' @rdname rq_tidiers

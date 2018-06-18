@@ -20,7 +20,7 @@ test_that("btergm tidiers work", {
     R = 100,
     verbose = FALSE
   ))
-  
+
   td <- tidy(btfit)
   check_tidy(td, exp.row = 3, exp.col = 4)
 

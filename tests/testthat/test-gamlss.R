@@ -1,6 +1,6 @@
 context("gamlss tidiers")
 
-has_deps <- c("gamlss", "gamlss.data") %>% 
+has_deps <- c("gamlss", "gamlss.data") %>%
   sapply(function(.x) requireNamespace(.x, quietly = TRUE)) %>%
   all()
 
@@ -14,15 +14,14 @@ if (has_deps) {
     method = mixed(1, 20),
     control = gamlss::gamlss.control(trace = FALSE)
   )
-  
+
   test_that("tidy.gamlss work", {
     td <- tidy(mod)
     check_tidy(td, exp.row = 6, exp.col = 6)
   })
-  
+
   test_that("quick tidy.gamlss works", {
     td <- tidy(mod, quick = TRUE)
     check_tidy(td, exp.row = 2, exp.col = 2)
   })
 }
-

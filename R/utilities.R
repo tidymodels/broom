@@ -270,7 +270,7 @@ confint_tidy <- function(x, conf.level = .95, func = stats::confint, ...) {
   # remove rows that are all NA. *not the same* as na.omit which checks
   # for any NA.
   all_na <- apply(ci, 1, function(x) all(is.na(x)))
-  ci <- ci[!all_na,, drop = FALSE]
+  ci <- ci[!all_na, , drop = FALSE]
   colnames(ci) <- c("conf.low", "conf.high")
   as_tibble(ci)
 }

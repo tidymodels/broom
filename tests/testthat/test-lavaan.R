@@ -3,10 +3,10 @@ context("lavaan tidiers")
 test_that("tidy.lavaan works", {
   skip_if_not_installed("lavaan")
   library(lavaan)
-  
+
   lav_lmfit <- sem("mpg ~ wt", data = mtcars)
   td <- tidy(lav_lmfit)
-  
+
   check_tidy(td, exp.row = 3, exp.col = 11)
   expect_equal(td$term, c("mpg ~ wt", "mpg ~~ mpg", "wt ~~ wt"))
 
@@ -30,18 +30,13 @@ test_that("tidy.lavaan works", {
 test_that("glance.lavaan works", {
   skip_if_not_installed("lavaan")
   library(lavaan)
-  
+
   lav_lmfit <- sem("mpg ~ wt", data = mtcars)
   gl <- glance(lav_lmfit)
-  
-  check_tidy(gl, exp.row = 1, exp.col = 7)
+
+  check_tidy(gl, exp.row = 1, exp.col = 17)
 
   cfafit <- cfa(paste("F =~", paste0("x", 1:9, collapse = "+")), data = HolzingerSwineford1939)
   gl2 <- glance(cfafit)
-  check_tidy(gl2, exp.row = 1, exp.col = 7)
-  # TODO: if CFI is an important measure it should be included by
-  # default and documented
-  # check fit.measures
-  # gl4 <- glance(cfafit, fit.measures = "CFI")
-  # check_tidy(gl4, exp.row = 1, exp.col = 2)
+  check_tidy(gl2, exp.row = 1, exp.col = 17)
 })
