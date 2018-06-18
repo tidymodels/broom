@@ -8,15 +8,13 @@ if (require(Matrix)) {
   mT <- as(m, "dgTMatrix")
   mC <- as(m, "dgCMatrix")
   mS <- as(m, "sparseMatrix")
-  
+
   test_that("tidy.dgTMatrix works", {
     td <- tidy(mT)
     check_tidy(td, exp.row = 9, exp.col = 3)
   })
-  
+
   test_that("tidy.dgCMatrix uses tidy.dgTMatrix", {
     expect_identical(tidy(mC), tidy.dgTMatrix(mC))
   })
 }
-
-

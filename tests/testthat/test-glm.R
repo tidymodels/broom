@@ -11,14 +11,14 @@ test_that(
     skip_if_not_installed("car")
     model <- glm(am ~ mpg, mtcars, family = "binomial")
     car_output <- car::Anova(model, test.statistic = "LR")
-    
+
     expect_equal(
       object = tidy(car_output),
-      expected = 
+      expected =
         tibble(
-          term = "mpg", 
-          statistic = car_output$`LR Chisq`, 
-          df = car_output$Df, 
+          term = "mpg",
+          statistic = car_output$`LR Chisq`,
+          df = car_output$Df,
           p.value = car_output$`Pr(>Chisq)`
         )
     )

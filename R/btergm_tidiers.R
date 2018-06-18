@@ -10,9 +10,9 @@
 #'
 #' @name btergm_tidiers
 #'
-#' @param x a [btergm::btergm()] object
+#' @param x A [btergm::btergm()] object.
 #' @examples
-#'
+#' 
 #' if (require("xergm")) {
 #'     set.seed(1)
 #'     # Using the same simulated example as the xergm package

@@ -5,7 +5,7 @@
 \alias{tidy.mjoint}
 \alias{augment.mjoint}
 \alias{glance.mjoint}
-\title{Tidying methods for joint models for time-to-event data and multivariate longitudinal data}
+\title{Tidying methods for mjoint models}
 \usage{
 \method{tidy}{mjoint}(x, component = "survival", bootSE = NULL,
   ci = FALSE, level = 0.95, ...)
@@ -17,9 +17,12 @@
 \arguments{
 \item{x}{An object of class \code{mjoint}.}
 
-\item{component}{Either \code{survival} (the survival component of the model, default) or \code{longitudinal} (the longitudinal component).}
+\item{component}{Either \code{survival} (the survival component of the model,
+default) or \code{longitudinal} (the longitudinal component).}
 
-\item{bootSE}{An object of class \code{bootSE} for the corresponding model. If \code{bootSE = NULL} (the default), the function will use approximate standard error estimates calculated from the empirical information matrix.}
+\item{bootSE}{An object of class \code{bootSE} for the corresponding model. If
+\code{bootSE = NULL} (the default), the function will use approximate standard
+error estimates calculated from the empirical information matrix.}
 
 \item{ci}{Include (\code{1 - level})\% confidence intervals? Defaults to \code{FALSE}.}
 
@@ -30,35 +33,52 @@
 \item{data}{Original data this was fitted on, in a list (e.g. \code{list(data)}). This will be extracted from \code{x} if not given.}
 }
 \value{
-All tidying methods return a \code{data.frame} without rownames. The structure depends on the method chosen.
+All tidying methods return a \code{tibble} without rownames. The
+structure depends on the method chosen.
 
-\code{tidy} returns one row for each estimated fixed effect depending on the \code{component} parameter. It contains the following  columns:
+\code{tidy} returns one row for each estimated fixed effect depending on
+the \code{component} parameter. It contains the following  columns:
 \item{term}{The term being estimated}
 \item{estimate}{Estimated value}
 \item{std.error}{Standard error}
 \item{statistic}{Z-statistic}
 \item{p.value}{P-value computed from Z-statistic}
-\item{conf.low}{The low end of a confidence interval on \code{estimate}, if required}
-\item{conf.high}{The high end of a confidence interval on \code{estimate}, if required}
+\item{conf.low}{The low end of a confidence interval on \code{estimate},
+if required}
+\item{conf.high}{The high end of a confidence interval on \code{estimate},
+if required}
 
-\code{augment} returns one row for each original observation, with columns (each prepended by a .) added. Included are the columns:
-\item{.fitted_j_0}{population-level fitted values for the j-th longitudinal process}
-\item{.fitted_j_1}{individuals-level fitted values for the j-th longitudinal process}
-\item{.resid_j_0}{population-level residuals for the j-th longitudinal process}
-\item{.resid_j_1}{individual-level residuals for the j-th longitudinal process}
-See \code{\link[joineRML]{fitted.mjoint}} and \code{\link[joineRML]{residuals.mjoint}} for more information on the difference between population-level and individual-level fitted values and residuals.
+\code{augment} returns one row for each original observation,
+with columns (each prepended by a .) added. Included are the columns:
+\item{.fitted_j_0}{population-level fitted values for the
+j-th longitudinal process}
+\item{.fitted_j_1}{individuals-level fitted values for the j-th
+longitudinal process}
+\item{.resid_j_0}{population-level residuals for the j-th
+longitudinal process}
+\item{.resid_j_1}{individual-level residuals for the j-th
+longitudinal process}
+
+See \code{\link[joineRML:fitted.mjoint]{joineRML::fitted.mjoint()}} and \code{\link[joineRML:residuals.mjoint]{joineRML::residuals.mjoint()}} for
+more information on the difference between population-level and
+individual-level fitted values and residuals.
 
 \code{glance} returns one row with the columns
-\item{sigma2_j}{the square root of the estimated residual variance for the j-th longitudinal process}
+\item{sigma2_j}{the square root of the estimated residual variance for
+the j-th longitudinal process}
 \item{AIC}{the Akaike Information Criterion}
 \item{BIC}{the Bayesian Information Criterion}
 \item{logLik}{the data's log-likelihood under the model}
 }
 \description{
-These methods tidy the coefficients of joint models for time-to-event data and multivariate longitudinal data of the \code{mjoint} class from the \code{joineRML} package.
+These methods tidy the coefficients of joint models for time-to-event
+data and multivariate longitudinal data of the \code{mjoint} class from the
+\code{joineRML} package.
 }
 \note{
-If fitting a joint model with a single longitudinal process, please make sure you are using a named \code{list} to define the formula for the fixed and random effects of the longitudinal submodel.
+If fitting a joint model with a single longitudinal process,
+please make sure you are using a named \code{list} to define the formula
+for the fixed and random effects of the longitudinal submodel.
 }
 \examples{
 \dontrun{

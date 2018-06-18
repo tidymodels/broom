@@ -41,10 +41,10 @@ test_that("augment felm works when formula is passed as a variable ", {
   skip_if_not_installed("lfe")
   my_formula <- v2 ~ v4
   result_felm <- lfe::felm(my_formula, DT)
-  
+
   td <- tidy(result_felm)
   check_tidy(td, exp.row = 2, exp.col = 5)
-  
+
   au <- augment(result_felm)
   check_tidy(au, exp.col = 7)
 })

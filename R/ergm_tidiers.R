@@ -23,6 +23,7 @@
 #' @param x an \pkg{ergm} object
 #' @examples
 #'
+#' \dontrun{
 #' if (require("ergm")) {
 #'     # Using the same example as the ergm package
 #'     # Load the Florentine marriage network data
@@ -43,6 +44,7 @@
 #'     glance(gest)
 #'     glance(gest, deviance = TRUE)
 #'     glance(gest, mcmc = TRUE)
+#' }
 #' }
 NULL
 

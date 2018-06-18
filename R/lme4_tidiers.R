@@ -125,7 +125,7 @@ tidy.merMod <- function(x, effects = c("ran_pars", "fixed"),
         as.character(x)
       } else {
         x
-      } )
+      })
     if (is.null(ran_prefix)) {
       ran_prefix <- switch(rscale,
         vcov = c("var", "cov"),

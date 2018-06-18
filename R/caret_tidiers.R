@@ -1,10 +1,10 @@
 #' Tidying methods for confusionMatrix objects
 #'
-#' Tidies the result of confusion matrix from the \code{caret} package.
-#' Only a \code{tidy} method is provided, not an \code{augment} or
-#' \code{glance} method.
+#' Tidies the result of confusion matrix from the caret package.
+#' Only a `tidy` method is provided, not an `augment` or
+#' `glance` method.
 #'
-#' @param x An object of class \code{confusionMatrix}
+#' @param x An object of class `confusionMatrix`
 #' @param by_class A logical of whether to show the values for class specific
 #' quantities from the confusion matrix (specificty, sensitivity, etc.). If set
 #' to FALSE, result will only show accuracy and kappa.
@@ -19,7 +19,7 @@
 #'   \item{p.value}{P-value for accuracy and kappa statistics}
 #'
 #' @examples
-#' 
+#'
 #' \dontrun{
 #' # 2 class confusion matrix
 #' cm2 <- caret::confusionMatrix(factor(rbinom(100,1,.5)),factor(rbinom(100,1,.5)))

@@ -1,6 +1,6 @@
 #' Tidying methods for an htest object
 #'
-#' Tidies hypothesis test objects, such as those from 
+#' Tidies hypothesis test objects, such as those from
 #' [stats::cor.test()], [stats::t.test()],
 #' [stats::wilcox.test()], and [stats::chisq.test()],
 #' into a one-row data frame.

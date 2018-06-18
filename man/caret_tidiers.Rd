@@ -27,7 +27,7 @@ A tibble with one or more of the following columns:
 \item{p.value}{P-value for accuracy and kappa statistics}
 }
 \description{
-Tidies the result of confusion matrix from the \code{caret} package.
+Tidies the result of confusion matrix from the caret package.
 Only a \code{tidy} method is provided, not an \code{augment} or
 \code{glance} method.
 }

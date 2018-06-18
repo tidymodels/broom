@@ -20,7 +20,7 @@
 #'
 #' @details Note that the "term" column of an ANOVA table can come with
 #' leading or trailing whitespace, which this tidying method trims.
-#' 
+#'
 #' Note that `Anova` from \pkg{car} (perhaps counter-intuively) outputs an
 #' object of class `anova` for generalized linear models. These objects are
 #' also supported.

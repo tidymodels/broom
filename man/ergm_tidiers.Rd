@@ -79,6 +79,7 @@ There is no \code{augment} method for \pkg{ergm} objects.
 }
 \examples{
 
+\dontrun{
 if (require("ergm")) {
     # Using the same example as the ergm package
     # Load the Florentine marriage network data
@@ -99,6 +100,7 @@ if (require("ergm")) {
     glance(gest)
     glance(gest, deviance = TRUE)
     glance(gest, mcmc = TRUE)
+}
 }
 }
 \references{
