@@ -1,15 +1,15 @@
 #' Tidying methods for a factor analysis
 #' 
 #' These methods tidy the factor loadings of a factor analysis, conducted via 
-#' \code{\link{factanal}}, into a summary, augment the original data with factor
+#' [factanal()], into a summary, augment the original data with factor
 #' scores, and construct a one-row glance of the model's statistics.
 #' 
-#' @return All tidying methods return a \code{\link[tibble]{tibble}} without
+#' @return All tidying methods return a [tibble::tibble()] without
 #'   rownames.
 #' 
 #' @name factanal_tidiers
 #' 
-#' @param x \code{\link{factanal}} object
+#' @param x [factanal()] object
 #' @param data Original data
 #' @param ... Additional arguments, not used
 #' 
@@ -26,7 +26,7 @@ NULL
 
 #' @rdname factanal_tidiers
 #' 
-#' @return \code{tidy.factanal} returns one row for each variable used in the 
+#' @return `tidy.factanal` returns one row for each variable used in the 
 #'   analysis and the following columns:
 #'   \item{variable}{The variable being estimated in the factor analysis}
 #'   \item{uniqueness}{Proportion of residual, or unexplained variance}
@@ -56,16 +56,17 @@ tidy.factanal <- function(x, ...) {
 
 #' @rdname factanal_tidiers
 #' 
-#' @return When \code{data} is not supplied \code{augment.factanal} returns one 
+#' @return When `data` is not supplied `augment.factanal` returns one 
 #'   row for each observation, with a factor score column added for each factor 
-#'   X, (\code{.fsX}). This is because \code{\link{factanal}}, unlike other 
-#'   stats methods like \code{\link{lm}}, does not retain the original data.
+#'   X, (`.fsX`). This is because [factanal()], unlike other 
+#'   stats methods like [lm()], does not retain the original data.
 #' 
-#' When \code{data} is supplied, \code{augment.factanal} returns one row for
+#' When `data` is supplied, `augment.factanal` returns one row for
 #' each observation, with a factor score column added for each factor X,
-#' (\code{.fsX}).
+#' (`.fsX`).
 #' 
 #' @export
+
 augment.factanal <- function(x, data, ...) {
     scores <- x$scores
     
@@ -97,7 +98,7 @@ augment.factanal <- function(x, data, ...) {
 
 #' @rdname factanal_tidiers
 #' 
-#' @return \code{glance.factanal} returns a one-row data.frame with the columns:
+#' @return `glance.factanal` returns a one-row data.frame with the columns:
 #'   \item{n.factors}{The number of fitted factors}
 #'   \item{total.variance}{Total cumulative proportion of variance accounted for by all factors}
 #'   \item{statistic}{Significance-test statistic}

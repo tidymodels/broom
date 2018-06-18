@@ -1,6 +1,7 @@
 # test tidy, augment, glance methods from nlme-tidiers.R
 
 if (suppressPackageStartupMessages(require(nlme, quietly = TRUE))) {
+  skip("Skipping nlme tidying tests")
   context("nlme models")
 
   d <- as.data.frame(ChickWeight)

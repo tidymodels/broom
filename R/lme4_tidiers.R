@@ -1,12 +1,12 @@
 #' Tidying methods for mixed effects models
 #'
 #' These methods tidy the coefficients of mixed effects models, particularly
-#' responses of the \code{merMod} class
+#' responses of the `merMod` class
 #'
-#' @param x An object of class \code{merMod}, such as those from \code{lmer},
-#' \code{glmer}, or \code{nlmer}
+#' @param x An object of class `merMod`, such as those from `lmer`,
+#' `glmer`, or `nlmer`
 #'
-#' @return All tidying methods return a \code{data.frame} without rownames.
+#' @return All tidying methods return a `data.frame` without rownames.
 #' The structure depends on the method chosen.
 #'
 #' @name lme4_tidiers
@@ -47,20 +47,20 @@ NULL
 #' @param effects A character vector including one or more of "fixed" (fixed-effect parameters), "ran_pars" (variances and covariances or standard deviations and correlations of random effect terms) or "ran_modes" (conditional modes/BLUPs/latent variable estimates)
 #' @param conf.int whether to include a confidence interval
 #' @param conf.level confidence level for CI
-#' @param conf.method method for computing confidence intervals (see \code{lme4::confint.merMod})
-#' @param scales scales on which to report the variables: for random effects, the choices are \sQuote{"sdcor"} (standard deviations and correlations: the default if \code{scales} is \code{NULL}) or \sQuote{"vcov"} (variances and covariances). \code{NA} means no transformation, appropriate e.g. for fixed effects; inverse-link transformations (exponentiation
+#' @param conf.method method for computing confidence intervals (see `lme4::confint.merMod`)
+#' @param scales scales on which to report the variables: for random effects, the choices are \sQuote{"sdcor"} (standard deviations and correlations: the default if `scales` is `NULL`) or \sQuote{"vcov"} (variances and covariances). `NA` means no transformation, appropriate e.g. for fixed effects; inverse-link transformations (exponentiation
 #' or logistic) are not yet implemented, but may be in the future.
 #' @param ran_prefix a length-2 character vector specifying the strings to use as prefixes for self- (variance/standard deviation) and cross- (covariance/correlation) random effects terms
 #'
-#' @return \code{tidy} returns one row for each estimated effect, either
-#' with groups depending on the \code{effects} parameter.
+#' @return `tidy` returns one row for each estimated effect, either
+#' with groups depending on the `effects` parameter.
 #' It contains the columns
-#'   \item{group}{the group within which the random effect is being estimated: \code{"fixed"} for fixed effects}
-#'   \item{level}{level within group (\code{NA} except for modes)}
+#'   \item{group}{the group within which the random effect is being estimated: `"fixed"` for fixed effects}
+#'   \item{level}{level within group (`NA` except for modes)}
 #'   \item{term}{term being estimated}
 #'   \item{estimate}{estimated coefficient}
 #'   \item{std.error}{standard error}
-#'   \item{statistic}{t- or Z-statistic (\code{NA} for modes)}
+#'   \item{statistic}{t- or Z-statistic (`NA` for modes)}
 #'   \item{p.value}{P-value computed from t-statistic (may be missing/NA)}
 #'
 #' @importFrom plyr ldply rbind.fill
@@ -232,7 +232,7 @@ tidy.merMod <- function(x, effects = c("ran_pars", "fixed"),
 #'
 #' @template augment_NAs
 #'
-#' @return \code{augment} returns one row for each original observation,
+#' @return `augment` returns one row for each original observation,
 #' with columns (each prepended by a .) added. Included are the columns
 #'   \item{.fitted}{predicted values}
 #'   \item{.resid}{residuals}
@@ -240,8 +240,8 @@ tidy.merMod <- function(x, effects = c("ran_pars", "fixed"),
 #'
 #' Also added for "merMod" objects, but not for "mer" objects,
 #' are values from the response object within the model (of type
-#' \code{lmResp}, \code{glmResp}, \code{nlsResp}, etc). These include \code{".mu",
-#' ".offset", ".sqrtXwt", ".sqrtrwt", ".eta"}.
+#' `lmResp`, `glmResp`, `nlsResp`, etc). These include `".mu",
+#' ".offset", ".sqrtXwt", ".sqrtrwt", ".eta"`.
 #'
 #' @export
 augment.merMod <- function(x, data = stats::model.frame(x), newdata, ...) {
@@ -281,7 +281,7 @@ augment.merMod <- function(x, data = stats::model.frame(x), newdata, ...) {
 #'
 #' @param ... extra arguments (not used)
 #'
-#' @return \code{glance} returns one row with the columns
+#' @return `glance` returns one row with the columns
 #'   \item{sigma}{the square root of the estimated residual variance}
 #'   \item{logLik}{the data's log-likelihood under the model}
 #'   \item{AIC}{the Akaike Information Criterion}

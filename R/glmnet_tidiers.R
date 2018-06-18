@@ -2,7 +2,7 @@
 
 #' Tidiers for LASSO or elasticnet regularized fits
 #'
-#' Tidying methods for regularized fits produced by \code{glmnet}, summarizing
+#' Tidying methods for regularized fits produced by `glmnet`, summarizing
 #' the estimates across values of the penalty parameter lambda.
 #'
 #' @template boilerplate
@@ -11,7 +11,7 @@
 #' to plot and combine than the default structure, it is also much
 #' more memory-intensive. Do not use for extremely large, sparse matrices.
 #'
-#' No \code{augment} method is yet provided even though the model produces
+#' No `augment` method is yet provided even though the model produces
 #' predictions, because the input data is not tidy (it is a matrix that
 #' may be very wide) and therefore combining predictions with it is not
 #' logical. Furthermore, predictions make sense only with a specific
@@ -52,10 +52,10 @@
 #'
 #' @param x a "glmnet" object
 #' @param return_zeros should coefficients with value zero be included in
-#'   the results (default \code{FALSE})?
+#'   the results (default `FALSE`)?
 #' @param ... extra arguments (not used)
 #'
-#' @return \code{tidy} produces a data.frame with one row per combination of
+#' @return `tidy` produces a data.frame with one row per combination of
 #' coefficient (including the intercept) and value of lambda for which the estimate
 #' is nonzero, with the columns:
 #'   \item{term}{coefficient name (V1...VN by default, along with
@@ -71,7 +71,7 @@
 #'
 #' @export
 tidy.glmnet <- function(x, return_zeros = FALSE, ...) {
-  beta <- glmnet::coef.glmnet(x)
+  beta <- coef(x)
 
   if (inherits(x, "multnet")) {
     beta_d <- plyr::ldply(beta, function(b) {
@@ -96,7 +96,7 @@ tidy.glmnet <- function(x, return_zeros = FALSE, ...) {
 
 #' @rdname glmnet_tidiers
 #'
-#' @return \code{glance} returns a one-row data.frame with the values
+#' @return `glance` returns a one-row data.frame with the values
 #'   \item{nulldev}{null deviance}
 #'   \item{npasses}{total passes over the data across all lambda values}
 #'
@@ -108,11 +108,11 @@ glance.glmnet <- function(x, ...) {
 
 #' Tidiers for glmnet cross-validation objects
 #'
-#' Tidying methods for cross-validation performed by \code{glmnet.cv},
+#' Tidying methods for cross-validation performed by `glmnet.cv`,
 #' summarizing the mean-squared-error across choices of the penalty parameter
 #' lambda.
 #'
-#' @details No \code{augment} method exists for this class.
+#' @details No `augment` method exists for this class.
 #'
 #' @template boilerplate
 #'
@@ -171,7 +171,7 @@ glance.glmnet <- function(x, ...) {
 #' @param x a "cv.glmnet" object
 #' @param ... extra arguments (not used)
 #'
-#' @return \code{tidy} produces a data.frame with one row per choice of lambda,
+#' @return `tidy` produces a data.frame with one row per choice of lambda,
 #' with columns
 #'   \item{lambda}{penalty parameter lambda}
 #'   \item{estimate}{estimate (median) of mean-squared error or other
@@ -200,7 +200,7 @@ tidy.cv.glmnet <- function(x, ...) {
 
 #' @rdname cv.glmnet_tidiers
 #'
-#' @return \code{glance} returns a one-row data.frame with the values
+#' @return `glance` returns a one-row data.frame with the values
 #'   \item{nulldev}{null deviance}
 #'   \item{npasses}{total passes over the data across all lambda values}
 #'

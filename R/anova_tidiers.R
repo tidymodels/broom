@@ -1,13 +1,13 @@
 #' Tidying methods for anova and AOV objects
 #'
 #' Tidies the result of an analysis of variance into an ANOVA table.
-#' Only a \code{tidy} method is provided, not an \code{augment} or
-#' \code{glance} method.
+#' Only a `tidy` method is provided, not an `augment` or
+#' `glance` method.
 #'
 #' @param x An object of class "anova", "aov", or "aovlist"
 #' @param ... extra arguments (not used)
 #'
-#' @return A data.frame with columns
+#' @return A tibble with columns
 #'   \item{term}{Term within the model, or "Residuals"}
 #'   \item{df}{Degrees of freedom used by this term in the model}
 #'   \item{sumsq}{Sum of squares explained by this term}
@@ -15,14 +15,14 @@
 #'   \item{statistic}{F statistic}
 #'   \item{p.value}{P-value from F test}
 #'
-#' In the case of an \code{"aovlist"} object, there is also a \code{stratum}
+#' In the case of an `"aovlist"` object, there is also a `stratum`
 #' column describing the error stratum
 #'
 #' @details Note that the "term" column of an ANOVA table can come with
 #' leading or trailing whitespace, which this tidying method trims.
 #' 
-#' Note that \code{Anova} from \pkg{car} (perhaps counter-intuively) outputs an
-#' object of class \code{anova} for generalized linear models. These objects are
+#' Note that `Anova` from \pkg{car} (perhaps counter-intuively) outputs an
+#' object of class `anova` for generalized linear models. These objects are
 #' also supported.
 #'
 #' @examples
@@ -87,7 +87,7 @@ tidy.anova <- function(x, ...) {
     # if rows had names, strip whitespace in them
     ret <- ret %>% mutate(term = stringr::str_trim(term))
   }
-  ret
+  tibble::as_tibble(ret)
 }
 
 
@@ -120,5 +120,5 @@ tidy.aovlist <- function(x, ...) {
     term = stringr::str_trim(term),
     stratum = stringr::str_trim(stratum)
   )
-  ret
+  tibble::as_tibble(ret)
 }

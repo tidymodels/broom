@@ -32,12 +32,12 @@ structure depends on the method chosen.
 
 \code{glance} returns a one-row data.frame with the following
 columns:
-  \item{score}{score}
-  \item{rscore}{rscore}
-  \item{p.value}{p-value from Wald test}
-  \item{iter}{number of iterations}
-  \item{n}{number of predictions}
-  \item{nevent}{number of events}
+\item{score}{score}
+\item{rscore}{rscore}
+\item{p.value}{p-value from Wald test}
+\item{iter}{number of iterations}
+\item{n}{number of predictions}
+\item{nevent}{number of events}
 }
 \description{
 Tidiers for case-cohort analyses: summarize each estimated coefficient,

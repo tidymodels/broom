@@ -1,12 +1,12 @@
 #' Tidying methods for mixed effects models
 #'
 #' These methods tidy the coefficients of mixed effects models
-#' of the \code{lme} class from functions  of the \code{nlme} package.
+#' of the `lme` class from functions  of the `nlme` package.
 #'
-#' @param x An object of class \code{lme}, such as those from \code{lme}
-#' or \code{nlme}
+#' @param x An object of class `lme`, such as those from `lme`
+#' or `nlme`
 #'
-#' @return All tidying methods return a \code{data.frame} without rownames.
+#' @return All tidying methods return a `data.frame` without rownames.
 #' The structure depends on the method chosen.
 #'
 #' @name nlme_tidiers
@@ -38,15 +38,15 @@
 #'
 #' @param effects Either "random" (default) or "fixed"
 #'
-#' @return \code{tidy} returns one row for each estimated effect, either
-#' random or fixed depending on the \code{effects} parameter. If
-#' \code{effects = "random"}, it contains the columns
+#' @return `tidy` returns one row for each estimated effect, either
+#' random or fixed depending on the `effects` parameter. If
+#' `effects = "random"`, it contains the columns
 #'   \item{group}{the group within which the random effect is being estimated}
 #'   \item{level}{level within group}
 #'   \item{term}{term being estimated}
 #'   \item{estimate}{estimated coefficient}
 #'
-#' If \code{effects="fixed"}, \code{tidy} returns the columns
+#' If `effects="fixed"`, `tidy` returns the columns
 #'   \item{term}{fixed term being estimated}
 #'   \item{estimate}{estimate of fixed effect}
 #'   \item{std.error}{standard error}
@@ -94,7 +94,7 @@ tidy.lme <- function(x, effects = "random", ...) {
 #'
 #' @template augment_NAs
 #'
-#' @return \code{augment} returns one row for each original observation,
+#' @return `augment` returns one row for each original observation,
 #' with columns (each prepended by a .) added. Included are the columns
 #'   \item{.fitted}{predicted values}
 #'   \item{.resid}{residuals}
@@ -126,7 +126,7 @@ augment.lme <- function(x, data = x$data, newdata, ...) {
 #'
 #' @param ... extra arguments (not used)
 #'
-#' @return \code{glance} returns one row with the columns
+#' @return `glance` returns one row with the columns
 #'   \item{sigma}{the square root of the estimated residual variance}
 #'   \item{logLik}{the data's log-likelihood under the model}
 #'   \item{AIC}{the Akaike Information Criterion}

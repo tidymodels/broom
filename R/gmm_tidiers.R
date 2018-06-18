@@ -6,36 +6,36 @@
 #' @param x gmm object
 #' @param conf.int whether to include a confidence interval
 #' @param conf.level confidence level of the interval, used only if
-#' \code{conf.int=TRUE}
+#' `conf.int=TRUE`
 #' @param exponentiate whether to exponentiate the coefficient estimates
 #' and confidence intervals (typical for logistic regression)
 #' @param quick whether to compute a smaller and faster version, containing
-#' only the \code{term} and \code{estimate} columns (and confidence interval
+#' only the `term` and `estimate` columns (and confidence interval
 #' if requested, which may be slower)
 #'
-#' @details If \code{conf.int=TRUE}, the confidence interval is computed with
-#' the \code{\link{confint}} function.
+#' @details If `conf.int=TRUE`, the confidence interval is computed with
+#' the [confint()] function.
 #'
 #' Note that though the "gmm" object contains residuals and fitted values,
-#' there is not yet an \code{augment} method implemented. This is because
+#' there is not yet an `augment` method implemented. This is because
 #' the input to gmm is not tidy (it's a "wide" matrix), so it is not immediately
 #' clear what the augmented results should look like.
 #'
-#' @return All tidying methods return a \code{data.frame} without rownames.
+#' @return All tidying methods return a `data.frame` without rownames.
 #' The structure depends on the method chosen.
 #'
-#' \code{tidy.gmm} returns one row for each coefficient, with six columns:
+#' `tidy.gmm` returns one row for each coefficient, with six columns:
 #'   \item{term}{The term in the model being estimated}
 #'   \item{estimate}{The estimated coefficient}
 #'   \item{std.error}{The standard error from the linear model}
 #'   \item{statistic}{t-statistic}
 #'   \item{p.value}{two-sided p-value}
 #'
-#' If all the the terms have _ in them (e.g. \code{WMK_(Intercept)}),
-#' they are split into \code{variable} and \code{term}.
+#' If all the the terms have _ in them (e.g. `WMK_(Intercept)`),
+#' they are split into `variable` and `term`.
 #'
-#' If \code{conf.int=TRUE}, it also includes columns for \code{conf.low} and
-#' \code{conf.high}, computed with \code{\link{confint}}.
+#' If `conf.int=TRUE`, it also includes columns for `conf.low` and
+#' `conf.high`, computed with [confint()].
 #'
 #' @name gmm_tidiers
 #'
@@ -142,7 +142,7 @@ tidy.gmm <- function(x, conf.int = FALSE, conf.level = .95,
 #'
 #' @param ... extra arguments (not used)
 #'
-#' @return \code{glance.gmm} returns a one-row data.frame with the columns
+#' @return `glance.gmm` returns a one-row data.frame with the columns
 #'   \item{df}{Degrees of freedom}
 #'   \item{statistic}{Statistic from J-test for E(g)=0}
 #'   \item{p.value}{P-value from J-test}

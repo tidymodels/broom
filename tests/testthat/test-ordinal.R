@@ -1,6 +1,7 @@
 context("tidiers for ordinal models")
 
 test_that("tidiers work for clm objects (ordinal)", {
+  skip_if_not_installed("ordinal")
   data(wine, package = "ordinal")
   mod <- ordinal::clm(rating ~ temp * contact, data = wine)
   td <- tidy(mod, quick = TRUE)
@@ -16,6 +17,7 @@ test_that("tidiers work for clm objects (ordinal)", {
 })
 
 test_that("tidiers work for clmm objects (ordinal)", {
+  skip_if_not_installed("ordinal")
   data(wine, package = "ordinal")
   mod <- ordinal::clmm(rating ~ temp + contact + (1 | judge), data = wine)
   td <- tidy(mod, quick = TRUE)
@@ -28,6 +30,7 @@ test_that("tidiers work for clmm objects (ordinal)", {
 })
 
 test_that("tidiers work for polr objects (MASS)", {
+  skip_if_not_installed("MASS")
   data("housing", package = "MASS")
   mod <- MASS::polr(Sat ~ Infl + Type + Cont, weights = Freq, data = housing)
   td <- tidy(mod, quick = TRUE)
@@ -43,6 +46,7 @@ test_that("tidiers work for polr objects (MASS)", {
 })
 
 test_that("tidiers work for svyolr objects (survey)", {
+  skip_if_not_installed("survey")
   data("housing", package = "MASS")
   design <- survey::svydesign(ids = ~ 1, weights = ~ Freq, data = housing)
   mod <- survey::svyolr(Sat ~ Infl + Type + Cont, design = design)

@@ -34,14 +34,14 @@
 
 #' @name aareg_tidiers
 #'
-#' @return \code{tidy.aareg} returns one row for each coefficient, with
+#' @return `tidy.aareg` returns one row for each coefficient, with
 #' the columns
 #'   \item{term}{name of coefficient}
 #'   \item{estimate}{estimate of the slope}
 #'   \item{statistic}{test statistic for coefficient}
 #'   \item{std.error}{standard error of statistic}
 #'   \item{robust.se}{robust version of standard error estimate (only when
-#'   \code{x} was called with \code{dfbeta = TRUE})}
+#'   `x` was called with `dfbeta = TRUE`)}
 #'   \item{z}{z score}
 #'   \item{p.value}{p-value}
 #'
@@ -61,7 +61,7 @@ tidy.aareg <- function(x, ...) {
 
 #' @name aareg_tidiers
 #'
-#' @return \code{glance} returns a one-row data frame containing
+#' @return `glance` returns a one-row data frame containing
 #'   \item{statistic}{chi-squared statistic}
 #'   \item{p.value}{p-value based on chi-squared statistic}
 #'   \item{df}{degrees of freedom used by coefficients}
@@ -88,7 +88,7 @@ glance.aareg <- function(x, ...) {
 #' @param conf.level confidence level for CI
 #' @param ... extra arguments (not used)
 #'
-#' @details It is not clear what an \code{augment} method would look like,
+#' @details It is not clear what an `augment` method would look like,
 #' so none is provided. Nor is there currently any way to extract the
 #' covariance or the residuals.
 #'
@@ -133,7 +133,7 @@ glance.aareg <- function(x, ...) {
 #'         geom_vline(xintercept = 0)
 #' }
 #'
-#' @seealso \link{cch}
+#' @seealso [cch]
 #'
 #' @name cch_tidiers
 
@@ -157,7 +157,7 @@ tidy.cch <- function(x, conf.level = .95, ...) {
 
 #' @rdname cch_tidiers
 #'
-#' @return \code{glance} returns a one-row data.frame with the following
+#' @return `glance` returns a one-row data.frame with the following
 #' columns:
 #'   \item{score}{score}
 #'   \item{rscore}{rscore}
@@ -183,14 +183,14 @@ glance.cch <- function(x, ...) {
 #' construct predictions, or summarize the entire model into a single row.
 #'
 #' @param x "coxph" object
-#' @param data original data for \code{augment}
+#' @param data original data for `augment`
 #' @param exponentiate whether to report the estimate and confidence intervals
 #' on an exponential scale
 #' @param conf.int whether to include a confidence interval
-#' @param conf.level confidence level of the interval, used only if \code{conf.int=TRUE}
+#' @param conf.level confidence level of the interval, used only if `conf.int=TRUE`
 #' @param newdata new data on which to do predictions
-#' @param type.predict type of predicted value (see \code{\link{predict.coxph}})
-#' @param type.residuals type of residuals (see \code{\link{residuals.coxph}})
+#' @param type.predict type of predicted value (see [predict.coxph()])
+#' @param type.residuals type of residuals (see [residuals.coxph()])
 #' @param ... Extra arguments, not used
 #'
 #' @name coxph_tidiers
@@ -231,7 +231,7 @@ glance.cch <- function(x, ...) {
 
 #' @rdname coxph_tidiers
 #'
-#' @return \code{tidy} returns a data.frame with one row for each term,
+#' @return `tidy` returns a data.frame with one row for each term,
 #' with columns
 #'   \item{estimate}{estimate of slope}
 #'   \item{std.error}{standard error of estimate}
@@ -278,11 +278,11 @@ tidy.coxph <- function(x, exponentiate = FALSE, conf.int = TRUE, conf.level = .9
 #'
 #' @template augment_NAs
 #'
-#' @return \code{augment} returns the original data.frame with additional
+#' @return `augment` returns the original data.frame with additional
 #' columns added:
 #'   \item{.fitted}{predicted values}
 #'   \item{.se.fit}{standard errors }
-#'   \item{.resid}{residuals (not present if \code{newdata} is provided)}
+#'   \item{.resid}{residuals (not present if `newdata` is provided)}
 #'
 #' @export
 augment.coxph <- function(x, data = stats::model.frame(x), newdata,
@@ -298,7 +298,7 @@ augment.coxph <- function(x, data = stats::model.frame(x), newdata,
 
 #' @rdname coxph_tidiers
 #'
-#' @return \code{glance} returns a one-row data.frame with statistics
+#' @return `glance` returns a one-row data.frame with statistics
 #' calculated on the cox regression.
 #'
 #' @export
@@ -335,10 +335,10 @@ glance.coxph <- function(x, ...) {
 #' @param x "survfit" object
 #' @param ... extra arguments, not used
 #'
-#' @details \code{glance} does not work on multi-state survival curves,
-#' since the values \code{glance} outputs would be calculated for each state.
-#' \code{tidy} does work for multi-state survival objects, and includes a
-#' \code{state} column to distinguish between them.
+#' @details `glance` does not work on multi-state survival curves,
+#' since the values `glance` outputs would be calculated for each state.
+#' `tidy` does work for multi-state survival objects, and includes a
+#' `state` column to distinguish between them.
 #'
 #' @template boilerplate
 #'
@@ -397,7 +397,7 @@ glance.coxph <- function(x, ...) {
 
 #' @rdname survfit_tidiers
 #'
-#' @return \code{tidy} returns a row for each time point, with columns
+#' @return `tidy` returns a row for each time point, with columns
 #'   \item{time}{timepoint}
 #'   \item{n.risk}{number of subjects at risk at time t0}
 #'   \item{n.event}{number of events at time t}
@@ -447,13 +447,13 @@ tidy.survfit <- function(x, ...) {
 
 #' @rdname survfit_tidiers
 #'
-#' @return \code{glance} returns one-row data.frame with the columns
-#' displayed by \code{\link{print.survfit}}
+#' @return `glance` returns one-row data.frame with the columns
+#' displayed by [print.survfit()]
 #'   \item{records}{number of observations}
 #'   \item{n.max}{n.max}
 #'   \item{n.start}{n.start}
 #'   \item{events}{number of events}
-#'   \item{rmean}{Restricted mean (see \link[survival]{print.survfit})}
+#'   \item{rmean}{Restricted mean (see [survival::print.survfit()]}
 #'   \item{rmean.std.error}{Restricted mean standard error}
 #'   \item{median}{median survival}
 #'   \item{conf.low}{lower end of confidence interval on median}
@@ -510,7 +510,7 @@ glance.survfit <- function(x, ...) {
 
 #' @rdname sexpfit_tidiers
 #'
-#' @return \code{tidy} returns a one row for each time point, with columns
+#' @return `tidy` returns a one row for each time point, with columns
 #'   \item{time}{time point}
 #'   \item{estimate}{estimated survival}
 #'   \item{n.risk}{number of individuals at risk}
@@ -524,7 +524,7 @@ tidy.survexp <- function(x, ...) {
 
 #' @rdname sexpfit_tidiers
 #'
-#' @return \code{glance} returns a one-row data.frame with the columns:
+#' @return `glance` returns a one-row data.frame with the columns:
 #'   \item{n.max}{maximum number of subjects at risk}
 #'   \item{n.start}{starting number of subjects at risk}
 #'   \item{timepoints}{number of timepoints}
@@ -540,9 +540,9 @@ glance.survexp <- function(x, ...) {
 
 #' Tidy person-year summaries
 #'
-#' These tidy the output of \code{pyears}, a calculation of the person-years
+#' These tidy the output of `pyears`, a calculation of the person-years
 #' of follow-up time contributed by a cohort of subject. Since the output of
-#' \code{pyears$data} is already tidy (if the \code{data.frame = TRUE} argument
+#' `pyears$data` is already tidy (if the `data.frame = TRUE` argument
 #' is given), this does only a little work and should rarely be necessary.
 #'
 #' @param x a "pyears" object
@@ -574,15 +574,15 @@ glance.survexp <- function(x, ...) {
 
 #' @rdname pyears_tidiers
 #'
-#' @return \code{tidy} returns a data.frame with the columns
+#' @return `tidy` returns a data.frame with the columns
 #'   \item{pyears}{person-years of exposure}
 #'   \item{n}{number of subjects contributing time}
 #'   \item{event}{observed number of events}
 #'   \item{expected}{expected number of events (present only if a
-#'   \code{ratetable} term is present)}
+#'   `ratetable` term is present)}
 #'
-#' If the \code{data.frame = TRUE} argument is supplied to \code{pyears},
-#' this is simply the contents of \code{x$data}.
+#' If the `data.frame = TRUE` argument is supplied to `pyears`,
+#' this is simply the contents of `x$data`.
 #'
 #' @export
 tidy.pyears <- function(x, ...) {
@@ -597,11 +597,11 @@ tidy.pyears <- function(x, ...) {
 
 #' @rdname pyears_tidiers
 #'
-#' @return \code{glance} returns a one-row data frame with
+#' @return `glance` returns a one-row data frame with
 #'   \item{total}{total number of person-years tabulated}
 #'   \item{offtable}{total number of person-years off table}
 #'
-#' This contains the values printed by \code{summary.pyears}.
+#' This contains the values printed by `summary.pyears`.
 #'
 #' @export
 glance.pyears <- function(x, ...) {
@@ -668,14 +668,14 @@ tidy.survreg <- function(x, conf.level = .95, ...) {
 #' @name survreg_tidiers
 #'
 #' @param data original data; if it is not provided, it is reconstructed
-#' as best as possible with \code{\link{model.frame}}
+#' as best as possible with [model.frame()]
 #' @param newdata New data to use for prediction; optional
 #' @param type.predict type of prediction, default "response"
 #' @param type.residuals type of residuals to calculate, default "response"
 #'
 #' @template augment_NAs
 #'
-#' @return \code{augment} returns the original data.frame with the following
+#' @return `augment` returns the original data.frame with the following
 #' additional columns:
 #'   \item{.fitted}{Fitted values of model}
 #'   \item{.se.fit}{Standard errors of fitted values}
@@ -695,7 +695,7 @@ augment.survreg <- function(x, data = stats::model.frame(x), newdata,
 
 #' @rdname survreg_tidiers
 #'
-#' @return \code{glance} returns a one-row data.frame with the columns:
+#' @return `glance` returns a one-row data.frame with the columns:
 #'   \item{iter}{number of iterations}
 #'   \item{df}{degrees of freedom}
 #'   \item{statistic}{chi-squared statistic}
@@ -728,7 +728,7 @@ glance.survreg <- function(x, conf.level = .95, ...) {
 #' @param strata logical, whether to include strata in the output
 #' @param ... other arguments passed to/from other methods, currently ignored
 #'
-#' @seealso \code{\link[survival]{survdiff}}
+#' @seealso [survival::survdiff()]
 #'
 #' @template boilerplate
 #'
@@ -746,7 +746,7 @@ NULL
 #' @rdname survdiff_tidiers
 #'
 #' @return
-#' \code{tidy} on "survdiff" objects returns a data frame with the following columns:
+#' `tidy` on "survdiff" objects returns a data frame with the following columns:
 #' \item{...}{initial column(s) correspond to grouping factors (right-hand side of the formula)}
 #' \item{obs}{weighted observed number of events in each group}
 #' \item{exp}{weighted expected number of events in each group}
@@ -798,7 +798,7 @@ tidy.survdiff <- function(x, strata=FALSE, ...) {
 #' @rdname survdiff_tidiers
 #'
 #' @return
-#' \code{glance} on "survdiff" objects returns a data frame with the following columns:
+#' `glance` on "survdiff" objects returns a data frame with the following columns:
 #' \item{statistic}{value of the test statistic}
 #' \item{df}{degrees of freedom}
 #' \item{p.value}{p-value}

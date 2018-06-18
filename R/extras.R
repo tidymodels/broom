@@ -3,13 +3,13 @@
 
 #' Set up bootstrap replicates of a dplyr operation
 #'
-#' The \code{bootstrap()} function is deprecated and will be removed from
+#' The `bootstrap()` function is deprecated and will be removed from
 #' an upcoming release of broom. For tidy resampling, please use the rsample
 #' package instead.
 #'
 #' @param df a data frame
 #' @param m number of bootstrap replicates to perform
-#' @param by_group If \code{TRUE}, then bootstrap within each group if \code{df} is
+#' @param by_group If `TRUE`, then bootstrap within each group if `df` is
 #'    a grouped tbl.
 #'
 #' @details This code originates from Hadley Wickham (with a few small

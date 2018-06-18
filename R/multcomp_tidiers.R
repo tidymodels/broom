@@ -4,8 +4,8 @@
 #' they were renamed "tidy" because they summarize terms and
 #' tests, rather than adding columns to a dataset.
 #'
-#' @param x an object of class \code{glht}, \code{confint.glht},
-#'  \code{summary.glht} or \code{\link[multcomp]{cld}}
+#' @param x an object of class `glht`, `confint.glht`,
+#'  `summary.glht` or [multcomp::cld()]
 #' @param ... extra arguments (not used)
 #'
 #' @name multcomp_tidiers

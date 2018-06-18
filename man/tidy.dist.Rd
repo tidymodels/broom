@@ -23,9 +23,9 @@ includes it}
 A data frame with one row for each pair of
 item distances, with columns:
 \describe{
-  \item{item1}{First item}
-  \item{item2}{Second item}
-  \item{distance}{Distance between items}
+\item{item1}{First item}
+\item{item2}{Second item}
+\item{distance}{Distance between items}
 }
 }
 \description{

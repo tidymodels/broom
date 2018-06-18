@@ -1,10 +1,11 @@
 context("dplyr and broom")
 
-suppressPackageStartupMessages(library(dplyr))
+library(dplyr)
 
 # set up the lahman batting table, and filter to make it faster
-batting <- tbl(src_df("Lahman"), "Batting")
-batting <- batting %>% filter(yearID > 1980)
+
+data("Batting", package = "Lahman")
+batting <- Batting %>% filter(yearID > 1980)
 
 lm0 <- purrr::possibly(lm, NULL, quiet = TRUE)
 

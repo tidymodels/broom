@@ -1,9 +1,10 @@
 context("mclust tidiers")
 
-library(mclust)
 dat <- iris[, 1:4]
 
 test_that("mclust tidiers work", {
+  skip_if_not_installed("mclust")
+  library(mclust)
   mod1 <- Mclust(dat, G = 7, modelNames = "EII", verbose = FALSE)
 
   td <- tidy(mod1)
@@ -17,6 +18,8 @@ test_that("mclust tidiers work", {
 })
 
 test_that("G = 1 works", {
+  skip_if_not_installed("mclust")
+  library(mclust)
   mod2 <- Mclust(dat, G = 1, verbose = FALSE)
   td <- tidy(mod2)
   check_tidy(td, exp.row = 1, exp.col = 7)

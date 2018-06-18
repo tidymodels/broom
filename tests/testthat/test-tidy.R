@@ -62,6 +62,7 @@ test_that("tidy.nls works", {
 })
 
 test_that("tidy.survreg works", {
+  skip_if_not_installed("survival")
   # prepare data
   df <- mtcars
   df$lwr <- floor(mtcars$mpg)
@@ -147,16 +148,8 @@ test_that("tidy.NULL returns empty data frame", {
   check_tidy(td, exp.row = 0, exp.col = 0)
 })
 
-test_that("tidy.default throws warning before turning into data.frame", {
-  expect_warning(td <- tidy(raw(1)))
-  check_tidy(td, exp.row = 1, exp.col = 1)
-
-  x <- 5
-  class(x) <- c("foo", "bar")
-  # Since we haven't implemented as.data.frame.foo this throws both a
-  # warning and an error
-  expect_error(expect_warning(tidy(x), regexp = "foo"))
-  expect_error(expect_warning(tidy(x), regexp = "[^bar]"))
+test_that("tidy.default throws error", {
+  expect_error(td <- tidy(raw(1)))
 })
 
 context("tidying time series")

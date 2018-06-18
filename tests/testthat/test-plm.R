@@ -1,10 +1,10 @@
 context("plm tidiers")
 
-library(plm)
-
 test_that("plm tidiers work", {
-  data(Produc)
-  zz <- plm(log(gsp) ~ log(pcap) + log(pc) + log(emp) + unemp,
+  skip_if_not_installed("plm")
+  
+  data(Produc, package = "plm")
+  zz <- plm::plm(log(gsp) ~ log(pcap) + log(pc) + log(emp) + unemp,
     data = Produc, index = c("state", "year")
   )
 

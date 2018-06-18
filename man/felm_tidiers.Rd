@@ -36,29 +36,29 @@ structure depends on the method chosen.
 
 \code{tidy.felm} returns one row for each coefficient. If \code{fe=TRUE}, it also includes rows for for fixed effects estimates.
 There are five columns:
-  \item{term}{The term in the linear model being estimated and tested}
-  \item{estimate}{The estimated coefficient}
-  \item{std.error}{The standard error from the linear model}
-  \item{statistic}{t-statistic}
-  \item{p.value}{two-sided p-value}
+\item{term}{The term in the linear model being estimated and tested}
+\item{estimate}{The estimated coefficient}
+\item{std.error}{The standard error from the linear model}
+\item{statistic}{t-statistic}
+\item{p.value}{two-sided p-value}
 
-If \code{cont.int=TRUE}, it also includes columns for \code{conf.low} and \code{conf.high}, computed with \code{\link{confint}}.
+If \code{cont.int=TRUE}, it also includes columns for \code{conf.low} and \code{conf.high}, computed with \code{\link[=confint]{confint()}}.
 
 \code{augment.felm} returns  one row for each observation, with multiple columns added to the original data:
-  \item{.fitted}{Fitted values of model}
-  \item{.resid}{Residuals}
-  If fixed effect are present,
-  \item{.comp}{Connected component}
-  \item{.fe_}{Fixed effects (as many columns as factors)}
+\item{.fitted}{Fitted values of model}
+\item{.resid}{Residuals}
+If fixed effect are present,
+\item{.comp}{Connected component}
+\item{.fe_}{Fixed effects (as many columns as factors)}
 
 \code{glance.lm} returns a one-row data.frame with the columns
-  \item{r.squared}{The percent of variance explained by the model}
-  \item{adj.r.squared}{r.squared adjusted based on the degrees of freedom}
-  \item{sigma}{The square root of the estimated residual variance}
-  \item{statistic}{F-statistic}
-  \item{p.value}{p-value from the F test}
-  \item{df}{Degrees of freedom used by the coefficients}
-  \item{df.residual}{residual degrees of freedom}
+\item{r.squared}{The percent of variance explained by the model}
+\item{adj.r.squared}{r.squared adjusted based on the degrees of freedom}
+\item{sigma}{The square root of the estimated residual variance}
+\item{statistic}{F-statistic}
+\item{p.value}{p-value from the F test}
+\item{df}{Degrees of freedom used by the coefficients}
+\item{df.residual}{residual degrees of freedom}
 }
 \description{
 These methods tidy the coefficients of a linear model with multiple group fixed effects

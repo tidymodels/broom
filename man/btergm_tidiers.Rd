@@ -9,7 +9,7 @@
   quick = FALSE, ...)
 }
 \arguments{
-\item{x}{a \code{\link[btergm]{btergm}} object}
+\item{x}{a \code{\link[btergm:btergm]{btergm::btergm()}} object}
 
 \item{conf.level}{confidence level of the bootstrapped interval}
 
@@ -26,10 +26,10 @@ A \code{data.frame} without rownames.
 
 \code{tidy.btergm} returns one row for each coefficient,
 with four columns:
-  \item{term}{The term in the model being estimated and tested}
-  \item{estimate}{The estimated coefficient}
-  \item{conf.low}{The lower bound of the confidence interval}
-  \item{conf.high}{The lower bound of the confidence interval}
+\item{term}{The term in the model being estimated and tested}
+\item{estimate}{The estimated coefficient}
+\item{conf.low}{The lower bound of the confidence interval}
+\item{conf.high}{The lower bound of the confidence interval}
 }
 \description{
 This method tidies the coefficients of a bootstrapped temporal exponential
@@ -61,8 +61,8 @@ if (require("xergm")) {
     # Fit a model where the propensity to form ties depends
     # on the edge covariates, controlling for the number of
     # in-stars
-    btfit <- btergm(networks ~ edges + istar(2) +
-                      edgecov(covariates), R = 100)
+    suppressWarnings(btfit <- btergm(networks ~ edges + istar(2) +
+                       edgecov(covariates), R = 100))
 
     # Show terms, coefficient estimates and errors
     tidy(btfit)
@@ -72,5 +72,5 @@ if (require("xergm")) {
 }
 }
 \seealso{
-\code{\link[btergm]{btergm}}
+\code{\link[btergm:btergm]{btergm::btergm()}}
 }

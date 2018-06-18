@@ -1,6 +1,7 @@
 context("ridgelm tidiers")
 
 test_that("ridgelm tidiers work for one or multple lambdas", {
+  skip_if_not_installed("MASS")
   names(longley)[1] <- "y"
   fit1 <- MASS::lm.ridge(y ~ ., longley)
   td <- tidy(fit1)

@@ -11,8 +11,8 @@
 #' @template boilerplate
 #'
 #' @return A data.frame with one row for each coefficient, containing columns
-#'   \item{parameter}{Type of coefficient being estimated: \code{mu}, \code{sigma},
-#'   \code{nu}, or \code{tau}}
+#'   \item{parameter}{Type of coefficient being estimated: `mu`, `sigma`,
+#'   `nu`, or `tau`}
 #'   \item{term}{The term in the model being estimated and tested}
 #'   \item{estimate}{The estimated coefficient}
 #'   \item{std.error}{The standard error from the linear model}

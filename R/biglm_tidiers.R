@@ -2,29 +2,29 @@
 #'
 #' Tidiers for biglm object from the "biglm" package, which contains a linear model
 #' object that is limited in memory usage. Generally the behavior is as similar
-#' to the \code{\link{lm_tidiers}} as is possible. Currently no \code{augment}
+#' to the [lm_tidiers()] as is possible. Currently no `augment`
 #' is defined.
 #'
 #' @param x a "biglm" object
 #' @param conf.int whether to include a confidence interval
 #' @param conf.level confidence level of the interval, used only if
-#' \code{conf.int=TRUE}
+#' `conf.int=TRUE`
 #' @param exponentiate whether to exponentiate the coefficient estimates
 #' and confidence intervals (typical for logistic regression)
 #' @param quick whether to compute a smaller and faster version, containing
-#' only the \code{term} and \code{estimate} columns.
+#' only the `term` and `estimate` columns.
 #' @param ... extra arguments (not used)
 #'
 #' @template boilerplate
 #'
-#' @return \code{tidy.biglm} returns one row for each coefficient, with columns
+#' @return `tidy.biglm` returns one row for each coefficient, with columns
 #'   \item{term}{The term in the linear model being estimated and tested}
 #'   \item{estimate}{The estimated coefficient}
 #'   \item{std.error}{The standard error from the linear model}
 #'   \item{p.value}{two-sided p-value}
 #'
-#' If \code{conf.int=TRUE}, it also includes columns for \code{conf.low} and
-#' \code{conf.high}, computed with \code{\link{confint}}.
+#' If `conf.int=TRUE`, it also includes columns for `conf.low` and
+#' `conf.high`, computed with [confint()].
 #'
 #' @name biglm_tidiers
 #'
@@ -78,7 +78,7 @@ tidy.biglm <- function(x, conf.int = FALSE, conf.level = .95,
 
 #' @rdname biglm_tidiers
 #'
-#' @return \code{glance.biglm} returns a one-row data frame, with columns
+#' @return `glance.biglm` returns a one-row data frame, with columns
 #'   \item{r.squared}{The percent of variance explained by the model}
 #'   \item{AIC}{the Akaike Information Criterion}
 #'   \item{deviance}{deviance}

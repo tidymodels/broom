@@ -96,7 +96,7 @@ Or we can use histograms to get a more detailed idea of the uncertainty in each 
 ```{r}
 ggplot(boot_coefs, aes(estimate)) + 
     geom_histogram(binwidth = 2) + 
-    facet_wrap(facets = vars(term), scales = "free")
+    facet_wrap(~ term, scales = "free")
 ```
 
 Or we can use `augment` to visualize the uncertainty in the curve:

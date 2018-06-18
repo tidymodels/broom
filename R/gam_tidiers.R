@@ -8,17 +8,17 @@
 #' The "augment" method is handled by \link{lm_tidiers}.
 #'
 #' @param x gam or Gam object
-#' @param parametric logical. Return parametric coefficients (\code{TRUE}) or
-#' information about smooth terms (\code{FALSE})?
+#' @param parametric logical. Return parametric coefficients (`TRUE`) or
+#' information about smooth terms (`FALSE`)?
 #'
 #' @template boilerplate
 #'
-#' @return \code{tidy.gam} called on an object from the gam package,
-#' or an object from the mgcv package with \code{parametric = FALSE}, returns the
+#' @return `tidy.gam` called on an object from the gam package,
+#' or an object from the mgcv package with `parametric = FALSE`, returns the
 #' tidied output of the parametric ANOVA with one row for each term in the formula.
 #' The columns match those in \link{anova_tidiers}.
-#' \code{tidy.gam} called on a gam object from the mgcv package with
-#' \code{parametric = TRUE} returns the fixed coefficients.
+#' `tidy.gam` called on a gam object from the mgcv package with
+#' `parametric = TRUE` returns the fixed coefficients.
 #'
 #' @name gam_tidiers
 #'
@@ -79,7 +79,7 @@ tidy_mcgv <- function(x, parametric = FALSE) {
 #'
 #' @param ... extra arguments (not used)
 #'
-#' @return \code{glance.gam} returns a one-row data.frame with the columns
+#' @return `glance.gam` returns a one-row data.frame with the columns
 #'   \item{df}{Degrees of freedom used by the coefficients}
 #'   \item{logLik}{the data's log-likelihood under the model}
 #'   \item{AIC}{the Akaike Information Criterion}
