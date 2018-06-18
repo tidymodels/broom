@@ -120,9 +120,11 @@ on the fitted values and residuals, and construct a glance of
 the model's statistics.
 }
 \details{
-If \code{se.type != "rank"} and \code{conf.int = TRUE} confidence
-intervals are calculated by \code{summary.rq}. Otherwise they are standard t
-based intervals.
+If \code{se.type = "rank"} confidence intervals are calculated by
+\code{summary.rq}. When only a single predictor is included in the model,
+no confidence intervals are calculated and the confidence limits are set to NA.
+If \code{se.type != 'rank'} and \code{conf.int = TRUE}, confidence intervals
+are standard t based intervals.
 
 Only models with a single \code{tau} value may be passed.
 For multiple values, please use a \code{\link[purrr:map]{purrr::map()}} workflow instead, e.g.\preformatted{taus %>%

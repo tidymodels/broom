@@ -24,9 +24,11 @@ NULL
 #' as `conf.level` although the specification is inverted
 #' @param \dots other arguments passed on to `summary.rq`
 #'
-#' @details If `se.type != "rank"` and `conf.int = TRUE` confidence
-#' intervals are calculated by `summary.rq`. Otherwise they are standard t
-#' based intervals.
+#' @details If `se.type = "rank"` confidence intervals are calculated by 
+#' `summary.rq`. When only a single predictor is included in the model, 
+#' no confidence intervals are calculated and the confidence limits are set to NA. 
+#' If `se.type != 'rank'` and `conf.int = TRUE`, confidence intervals 
+#' are standard t based intervals.
 #'
 #' @return `tidy.rq` returns a data frame with one row for each coefficient.
 #' The columns depend upon the confidence interval method selected.
@@ -254,6 +256,11 @@ process_rq <- function(rq_obj, se.type = "rank",
   nn <- c("estimate", "std.error", "statistic", "p.value")
   co <- as.data.frame(rq_obj[["coefficients"]])
   if (se.type == "rank") {
+    # if only a single predictor is included, confidence interval is not calculated
+    # set to NA to preserve dimensions of object
+    if (1 == ncol(co)) {
+      co <- cbind(co, NA, NA)
+    } 
     co <- setNames(co, c("estimate", "conf.low", "conf.high"))
     conf.int <- FALSE
   } else {
