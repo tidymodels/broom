@@ -5,6 +5,8 @@ all_equal_list <- function(x) sum(duplicated.default(x)) == length(x) - 1L
 
 ### GLOSSARY
 
+## argument names: allowable argument names in tidier signatures
+
 glance_argument_glossary <- c(
   "x",
   "..."
@@ -19,14 +21,31 @@ augment_argument_glossary <- c(
   "..."
 )
 
+tidy_argument_glossary <- c(
+  "x",
+  "..."
+)
+
+## output column names: allowable columns names in tidier output
+
 glance_column_glossary <- c(
   "AIC"
 )
 
-# must all begin with .
-augment_column_glossary <- c(
+# only new columns added by augment are checked against this list
+# all names in this list must begin with a dot
+
+augment_column_glossary <- c(  
   ".fitted",
   ".resid"
+)
+
+tidy_column_glossary <- c(
+  "term",
+  "estimate",
+  "p.value",
+  "conf.low",
+  "conf.high"
 )
 
 ### GLANCE HELPERS
@@ -101,7 +120,7 @@ check_augment_output <- function(ao, original_data) {
   )
   
   expect_true(
-    all(colnames(go) %in% glance_column_glossary),
+    all(colnames(go) %in% augment_column_glossary),
     info = "Augmented column names must be in the column glossary."
   )
   
@@ -141,7 +160,8 @@ augment_data_helper <- function(data, add_missing = FALSE) {
 
 check_augment_function <- function(a, model, data = NULL, newdata = NULL) {
   
-  # model frame test
+  # TODO: check default behavior when there is a data argument
+  # but nothing gets passed to it
   
   args <- names(formals(a))
   
@@ -287,8 +307,47 @@ check_augment_function <- function(a, model, data = NULL, newdata = NULL) {
   }
 }
 
-# TODO: some sort of test for the model.frame(x) data situation
 
+### TIDY
+
+
+check_tidy_arguments <- function(t) {
+  args <- names(formals(t))
+  
+  expect_true(
+    all(args %in% tidy_argument_glossary),
+    info = "Tidy arguments must be listed in the argument glossary."
+  )
+  
+  if ("conf.level" %in% args) {
+    expect_true(
+      "conf.int" %in% args,
+      info = "Must have `conf.int` to pair with `conf.level` argument."
+    )
+  }
+}
+
+check_tidy_output <- function(to) {
+  
+  expect_s3_class(to, "tbl_df",
+    info = "Tidy must return a tibble."
+  )
+  
+  expect_false(
+    any(is.nan(go)),
+    info = "Tidy must return a tibble with no NaN values."
+  )
+  
+  # add check for infinite values?
+  
+  expect_true(
+    all(colnames(go) %in% glance_column_glossary),
+    info = "Column names for glance output must be in the column glossary."
+  )
+}
+
+## OLD CODE below this point. can be deleted as soon as new tests
+## are implemented.
 
 #' test the basics of tidy/augment/glance output: is a data frame, no row names
 check_tidiness <- function(o) {
