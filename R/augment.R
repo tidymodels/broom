@@ -22,5 +22,6 @@ augment.NULL <- function(x, ...) tibble()
 
 #' @export
 augment.default <- function(x, ...) {
-  stop("augment doesn't know how to deal with data of class ", class(x)[1], call. = FALSE)
+  stop("augment doesn't know how to deal with data of class ",
+       class(x)[1], call. = FALSE)
 }
