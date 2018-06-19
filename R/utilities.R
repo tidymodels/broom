@@ -275,44 +275,6 @@ confint_tidy <- function(x, conf.level = .95, func = stats::confint, ...) {
   as_tibble(ci)
 }
 
-
-#' Expand a dataset to include all factorial combinations of one or more
-#' variables
-#'
-#' This function is deprecated: use `tidyr::crossing` instead
-#'
-#' @param df a tbl
-#' @param ... arguments
-#' @param stringsAsFactors logical specifying if character vectors are
-#' converted to factors.
-#'
-#' @return A tbl
-#'
-#' @import dplyr
-#' @import tidyr
-#'
-#' @export
-inflate <- function(df, ..., stringsAsFactors = FALSE) {
-  .Deprecated("tidyr::crossing")
-
-  ret <- expand.grid(..., stringsAsFactors = stringsAsFactors)
-
-  ret <- ret %>%
-    group_by_all() %>%
-    do(data = df) %>%
-    ungroup() %>%
-    tidyr::unnest(data)
-
-  if (!is.null(groups(df))) {
-    ret <- ret %>%
-      group_by_all()
-  }
-
-  ret
-}
-
-
-
 # utility function from tidyr::col_name
 col_name <- function(x, default = stop("Please supply column name", call. = FALSE)) {
   if (is.character(x)) {

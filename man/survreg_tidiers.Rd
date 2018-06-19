@@ -13,7 +13,7 @@
 \method{augment}{survreg}(x, data = stats::model.frame(x), newdata,
   type.predict = "response", type.residuals = "response", ...)
 
-\method{glance}{survreg}(x, conf.level = 0.95, ...)
+\method{glance}{survreg}(x, ...)
 }
 \arguments{
 \item{x}{a "survreg" model}

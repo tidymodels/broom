@@ -128,6 +128,8 @@ The summary should not include the name of the modelling function or any argumen
 
 In some cases, you may wish to provide model level diagnostics not returned by the original object. If these are easy to compute, feel free to add them. However, `broom` is not an appropriate place to implement complex or time consuming statistical calculations.
 
+`glance` should not return convergence information about a model. The goal of `glance` is to helper users assess how well their model fits the data they have, not to help them determine if their model estimation procedure was successful.
+
 `glance` should always return the same columns in the same order for an object `x` of class `my_object`. If a summary metric such as `AIC` is not defined in certain circumstances, use `NA`.
 
 ## `augment`
