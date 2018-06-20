@@ -67,8 +67,10 @@ tidy.betareg <- function(x, conf.int = FALSE, conf.level = .95, ...) {
 #'   \item{.cooksd}{Cooks distance, [cooks.distance()]}
 #'
 #' @export
-augment.betareg <- function(x, data = stats::model.frame(x), newdata,
+augment.betareg <- function(x, data = stats::model.frame(x), newdata = NULL,
                             type.predict, type.residuals, ...) {
+  validate_augment_input(x, data, newdata)
+  
   as_tibble(
     augment_columns(
       x, data, newdata,

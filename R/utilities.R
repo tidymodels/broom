@@ -1,3 +1,77 @@
+# utility functions. hopefully using tibbles internally will allow us
+# to get rid of lots of the rowname logic here
+
+validate_augment_input <- function(model, data = NULL, newdata = NULL) {
+  
+  data_passed <- !is.null(data)
+  newdata_passed <- !is.null(newdata)
+  
+  if (data_passed && newdata_passed) {
+    stop(
+      "Must not specify both `data` and `newdata` arguments.",
+      call. = FALSE
+    )
+  }
+  
+  if (!data_passed && !newdata_passed) {
+    possibly_augment <- purrr::possibly(augment, otherwise = NULL)
+    default_data_result <- possibly_augment(model)
+    
+    if (is.null(default_data_result)) {
+      stop(
+        "Must specify either `data` or `newdata` argument (if applicable).",
+        call. = FALSE
+      )
+    }
+  }
+  
+  if (data_passed) {
+    
+    if (!inherits(data, "data.frame")) {
+      stop("`data` argument must be a tibble or dataframe.", call. = FALSE)
+    }
+    
+    # experimental checks that all columns in original data are present
+    # in `data`. only warns on failure.
+    
+    possible_mf <- purrr::possibly(model.frame, otherwise = NULL)
+    mf <- possible_mf(model)
+    
+    if (!is.null(mf)) {
+      
+      if (nrow(data) > nrow(mf)) {
+        warning(
+          "`data` must contain only rows passed to original modelling ",
+          "with no duplicate rows.",
+          call. = FALSE
+        )
+      }
+      
+      orig_cols <- all.vars(terms(mf))
+      
+      if (!all(orig_cols %in% colnames(data))) {
+        warning(
+          "`data` might not contain columns present in original data.",
+          call. = FALSE
+        )
+      }
+    }
+  }
+  
+  # TODO: check for predictor columns only when newdata is passed?
+  # only warn if not found
+  # if yes, be sure to add a test in `check_augment_function`
+  # to do this, need to be able to determine what the response is
+  # 
+  # max says to look into `recipes:::get_rhs_vars` as a way to do this
+  
+  if (newdata_passed) {
+    if (!inherits(newdata, "data.frame")) {
+      stop("`newdata` argument must be a tibble or dataframe.", call. = FALSE)
+    }
+  }
+}
+
 #' Ensure an object is a data frame, with rownames moved into a column
 #'
 #' @param x a data.frame or matrix
@@ -196,7 +270,8 @@ augment_columns <- function(x, data, newdata, type, type.predict = type,
   if (all(ret$.rownames == seq_along(ret$.rownames))) {
     ret$.rownames <- NULL
   }
-  ret
+  
+  as_tibble(ret)
 }
 
 

@@ -160,7 +160,7 @@ tidy.summary.lm <- function(x, ...) {
     ret <- fix_data_frame(co, nn[1:ncol(co)])
   }
 
-  ret
+  as_tibble(ret)
 }
 
 
@@ -228,7 +228,7 @@ glance.lm <- function(x, ...) {
   s <- stats::summary.lm(x)
   ret <- glance.summary.lm(s, ...)
   ret <- finish_glance(ret, x)
-  ret
+  as_tibble(ret)
 }
 
 
@@ -261,7 +261,7 @@ glance.summary.lm <- function(x, ...) {
     )
   ))
 
-  unrowname(ret)
+  as_tibble(ret)
 }
 
 #' @export
@@ -318,5 +318,5 @@ process_lm <- function(ret, x, conf.int = FALSE, conf.level = .95,
   }
   ret$estimate <- trans(ret$estimate)
 
-  ret
+  as_tibble(ret)
 }

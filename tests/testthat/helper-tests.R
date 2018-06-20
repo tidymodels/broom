@@ -1,5 +1,6 @@
 # helper functions for testing
-
+library(tibble)
+library(dplyr)
 # TODO: document these functions with roxygen, and also in adding new tidiers
 
 ### GLOSSARY
@@ -285,7 +286,7 @@ augment_data_helper <- function(data, add_missing) {
   
   tbl <- as_tibble(data)
   
-  no_row_nm <- data
+  no_row_nm <- as.data.frame(data)
   rownames(no_row_nm) <- NULL
   
   row_nm <- data
@@ -314,7 +315,7 @@ check_augment_data_specification <- function(aug, model, add_missing, newdata) {
   au_row_nm <- aug(model, data = dl$row_nm, newdata = new_dl$row_nm)
   
   au_list <- list(au_tbl, au_no_row_nm, au_row_nm)
-  walk2(au_list, passed_data, check_single_augment_output)
+  purrr::walk2(au_list, passed_data, check_single_augment_output)
   
   expect_equal(au_tbl, au_no_row_nm,
     info = "Augmented data must be the same for tibble and data frame input."
@@ -326,7 +327,7 @@ check_augment_data_specification <- function(aug, model, add_missing, newdata) {
   # column out.
   
   expect_equal(
-    df_output,
+    au_no_row_nm,
     dplyr::select(au_row_nm, -.rownames),
     info = paste(
       "Augmented data must be the same for dataframes with and without",
@@ -360,11 +361,9 @@ check_augment_data_specification <- function(aug, model, add_missing, newdata) {
 #' 
 check_augment_function <- function(aug, model, data = NULL, newdata = NULL) {
   
-  # TODO: check default behavior when there is a data argument
-  # but nothing gets passed to it
-  
-  # TODO: throw informative error when data can't be coerced to tibble,
-  #   hint that this is likely because of ugly stuff in model.frame()
+  # TODO: potentially down the road test subsetting
+  #   - test that head(results(data)) == results(head(data))
+  #   - test that head(results(newdata)) = results(head(newdata))
   
   args <- names(formals(aug))
   
@@ -384,9 +383,61 @@ check_augment_function <- function(aug, model, data = NULL, newdata = NULL) {
          "newdata argument.")
   }
   
-  # if data/newdata arguments to augment, must passed data/newdata
-  
   if (data_arg) {
+    
+    # test that augment either just works when data isn't specified,
+    # or that it throws an *informative* error. this test only catches
+    # errors, but will not catch warnings or silently incorrect results.
+    
+    # TODO: documentation / validation helper function: this is the expected
+    # error when `model.frame()` explodes
+    
+    possible_aug <- purrr::possibly(aug, otherwise = NULL)
+    default_data_result <- possible_aug(model)
+    
+    if (is.null(default_data_result)) {
+      expect_error(
+        aug(model),
+        regexp = c(
+          "Must specify either `data` or `newdata` argument (if applicable)."
+        )
+      )
+    }
+    
+    # try to test that user gives `data` argument only what they gave to
+    # the original modelling function and no more. experimental and
+    # somewhat brittle
+    
+    possible_mf <- purrr::possibly(model.frame, otherwise = NULL)
+    mf <- possible_mf(model)
+    
+    if (!is.null(mf)) {
+      
+      # ideally we should like to check that all the columns in the original
+      # data are in data. recovering the original columns names from the
+      # model object isn't guaranteed, so this test should throw a 
+      # warning at most if it fails
+      
+      orig_cols <- all.vars(terms(mf))
+      
+      expect_warning(
+        aug(model, data[, orig_cols[-1]]),  # column of original data missing
+        regexp = "`data` might not contain columns present in original data."
+      )
+      
+      extra_rows <- bind_rows(data, head(data))
+      
+      expect_warning(
+        aug(model, extra_rows),
+        regexp = paste0(
+          "`data` must contain only rows passed to original modelling",
+          "with no duplicate rows."
+        )
+      )
+    }
+    
+    # make sure data in data frame, dataframe with rows, and tibble
+    # all give expected results
     
     check_augment_data_specification(
       aug = aug,
@@ -395,15 +446,21 @@ check_augment_function <- function(aug, model, data = NULL, newdata = NULL) {
       newdata = FALSE
     )
     
-    check_augment_data_specification(
-      aug = aug,
-      model = model,
-      add_missing = TRUE,
-      newdata = FALSE
-    )
+    # we don't check add_missing = TRUE for the data argument because the
+    # user is guaranteeing us that the data they give us is the same
+    # they gave to the modelling function. also, the new row of NAs added
+    # *should* cause things like influence calculates to break
+    
+    # check_augment_data_specification(
+    #   aug = aug,
+    #   model = model,
+    #   add_missing = TRUE,
+    #   newdata = FALSE
+    # )
     
     expect_error(
       aug(model, data = data.frame()),
+      regexp = "`data` argument must not be an empty dataframe.",
       info = c(
         "Augment must throw error when `data` is passed an empty dataframe."
       )
@@ -411,6 +468,7 @@ check_augment_function <- function(aug, model, data = NULL, newdata = NULL) {
     
     expect_error(
       aug(model, data = 1L),
+      regexp = "`data` argument must be a tibble or dataframe.",
       info = "Augment must throw errow when `data` is not a dataframe."
     )
   }
@@ -433,6 +491,7 @@ check_augment_function <- function(aug, model, data = NULL, newdata = NULL) {
     
     expect_error(
       aug(model, newdata = data.frame()),
+      regexp = "`newdata` argument must not be an empty dataframe.",
       info = c(
         "Augment must throw error when `newdata` is passed an empty dataframe."
       )
@@ -440,6 +499,7 @@ check_augment_function <- function(aug, model, data = NULL, newdata = NULL) {
     
     expect_error(
       aug(model, newdata = 1L),
+      regexp = "`newdata` argument must be a tibble or dataframe.",
       info = "Augment must throw errow when `newdata` is not a dataframe."
     )
   }

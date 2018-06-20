@@ -1,0 +1,54 @@
+context("test-utilities.R")
+
+skip_if_not_installed("betareg")
+
+test_that("validate_augment_input", {
+  
+  data(GasolineYield)
+  
+  model <- lm(hp ~ ., mtcars)
+  poly_m <- lm(hp ~ poly(mpg, 2), mtcars)  # augment(poly_m) works
+  
+  # augment(m3) breaks. it's possible that it wouldn't with a better
+  # implementation, in which case we'd want something here
+  # where it's imperative to specify either data or newdata to 
+  # prevent an explosion
+  
+  m3 <- betareg(yield ~ poly(temp, 2), GasolineYield)
+  
+  expect_error(
+    validate_augment_input(model, data = mtcars, newdata = mtcars),
+    regexp = "Must not specify both `data` and `newdata` arguments."
+  )
+  
+  expect_warning(
+    validate_augment_input(poly_m, mtcars[, 1:3]),
+    "`data` might not contain columns present in original data."
+  )
+  
+  extra_rows <- bind_rows(mtcars, head(mtcars))
+  
+  expect_warning(
+    validate_augment_input(model, extra_rows),
+    regexp = paste(
+      "`data` must contain only rows passed to original modelling",
+      "with no duplicate rows."
+    )
+  )
+  
+  expect_error(
+    validate_augment_input(m3),
+    regexp = "Must specify either `data` or `newdata` argument (if applicable)."
+  )
+  
+  expect_error(
+    validate_augment_input(model, 1L),
+    regexp = "`data` argument must be a tibble or dataframe."
+  )
+  
+  expect_error(
+    validate_augment_input(model, newdata = 1L),
+    regexp = "`newdata` argument must be a tibble or dataframe."
+  )
+  
+})
