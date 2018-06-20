@@ -91,16 +91,18 @@ validate_augment_input <- function(model, data = NULL, newdata = NULL) {
 #' A thin wrapper around [tibble::as_tibble()], except checks for
 #' rownames and adds them to a new column `.rownames` if they are
 #' interesting (i.e. more than `1, 2, 3, ...`).
+#' 
+#' Replacement for `fix_data_frame()`.
 #'
 #' @param data A [data.frame()] or [tibble::tibble()].
 #'
 #' @return A `tibble` potentially with a `.rownames` column
-as_aug_tibble <- function(data) {
+as_rw_tibble <- function(data) {
   
   # TODO: write a test for this
   
   row_nm <- rownames(data)
-  has_row_nms <- any(row_nm != seq_along(row_nm))
+  has_row_nms <- any(row_nm != as.character(seq_along(row_nm)))
   
   df <- as_tibble(data)
   
@@ -355,8 +357,8 @@ finish_glance <- function(ret, x) {
     ret$deviance <- tryCatch(stats::deviance(x), error = function(e) NULL)
   }
   ret$df.residual <- tryCatch(df.residual(x), error = function(e) NULL)
-
-  return(unrowname(ret))
+  
+  as_tibble(ret, rownames = NULL)
 }
 
 

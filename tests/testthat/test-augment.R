@@ -1,3 +1,20 @@
+context("augment.NULL, augment.default")
+
+test_that("augment.NULL returns empty tibble", {
+  expect_equal(augment(NULL), tibble())
+})
+
+test_that("augment.defaults errors for unimplemented methods", {
+  expect_error(augment(TRUE))
+  expect_error(augment(1))
+  expect_error(augment(1L))
+  expect_error(augment("a"))
+  
+  x <- 5
+  class(x) <- c("foo", "bar")
+  expect_error(augment(x), regexp = "foo")
+  expect_error(augment(x), regexp = "[^bar]")
+})
 
 
 # NOTE: commenting out old check_augment_NAs in favor of new tests to come
@@ -77,22 +94,4 @@ test_that("augment.htest not defined for other types of htest", {
 
   ct <- cor.test(mtcars$wt, mtcars$mpg)
   expect_error(augment(ct))
-})
-
-context("NULL and default augment")
-
-test_that("NULL augment returns NULL", {
-  expect_length(augment(NULL), 0)
-})
-
-test_that("default augment throws error for unimplemented methods", {
-  expect_error(augment(TRUE))
-  expect_error(augment(1))
-  expect_error(augment(1L))
-  expect_error(augment("a"))
-
-  x <- 5
-  class(x) <- c("foo", "bar")
-  expect_error(augment(x), regexp = "foo")
-  expect_error(augment(x), regexp = "[^bar]")
 })

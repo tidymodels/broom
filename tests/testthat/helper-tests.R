@@ -26,6 +26,8 @@ tidy_argument_glossary <- c(
   "x",
   "conf.int",
   "conf.level",
+  "exponentiate",
+  "quick",
   "..."
 )
 
@@ -41,11 +43,13 @@ glance_columns <- tibble::tribble(
   ~column, ~description, ~used_by,
   "sigma", "", c("Arima"),
   "logLik", "", c("Arima", "betareg"),
-  "AIC", "", c("Arima", "betareg"),
+  "AIC", "", c("Arima", "betareg", "biglm"),
   "BIC", "", c("Arima", "betareg"),
   "pseudo.r.squared", "", c("betareg"),
   "df.residual", "", c("betareg"),
-  "df.null", "", c("betareg")
+  "df.null", "", c("betareg"),
+  "r.squared", "", c("biglm"),
+  "deviance", "", c("biglm")
 )
 
 # only new columns added by augment are checked against this list

@@ -99,7 +99,7 @@ augment.nls <- function(x, data = NULL, newdata = NULL, ...) {
   # TODO: import stats::predict
   if (!is.null(newdata)) {
     out <- newdata %>% 
-      as_aug_tibble() %>% 
+      as_rw_tibble() %>% 
       mutate(.fitted = predict(x, newdata = newdata))
     return(out)
   }
