@@ -27,6 +27,12 @@ tidy_argument_glossary <- c(
   "..."
 )
 
+argument_glossary <- c(
+  glance_argument_glossary,
+  augment_argument_glossary,
+  tidy_argument_glossary
+)
+
 ## output column names: allowable columns names in tidier output
 
 glance_columns <- tribble(
@@ -119,6 +125,10 @@ check_arguments <- function(tidy_method) {
 #'   which set of column name checks are applied.
 #' @param check_values Whether to check if `output` contains `NaN` or `Inf`.
 #'   Defaults to `FALSE`.
+#' @param columns The names of the columns in the output data frame. Defaults
+#'   to the column names of `output`. Useful for `augment` when you only
+#'   want to check the new columns in the data frame, as opposed to all
+#'   columns.
 #'
 #' @examples
 #' 
@@ -128,9 +138,13 @@ check_arguments <- function(tidy_method) {
 #' # but don't do this, use: `check_glance_output(gl)` instead
 #' check_tibble(gl, method = "glance", check_values = TRUE)  
 #' 
-check_tibble <- function(output, method, check_values = FALSE) {
+check_tibble <- function(
+  output,
+  method,
+  check_values = FALSE,
+  columns = colnames(output)) {
   
-  expect_s3_class(gl, "tbl_df")
+  expect_s3_class(output, "tbl_df")
   
   # TODO: implement NaN / Inf checks
   
@@ -139,7 +153,7 @@ check_tibble <- function(output, method, check_values = FALSE) {
     pull(column)
   
   expect_true(
-    all(colnames(gl) %in% acceptable_columns),
+    all(columns %in% acceptable_columns),
     info = paste0(
       "Column names for `", method, "` output must be in the column glossary."
     )
@@ -213,15 +227,15 @@ check_glance_outputs <- function(...) {
 #' 
 check_single_augment_output <- function(au, passed_data) {
   
-  check_tibble(au, method = "augment")
+  orig_cols <- colnames(passed_data)
+  aug_cols <- colnames(au)
+  new_cols <- setdiff(aug_cols, orig_cols)
+  
+  check_tibble(au, method = "augment", columns = new_cols)
   
   expect_equal(nrow(au), nrow(passed_data),
     info = "Augmented data must have same number of rows as original data."
   )
-  
-  orig_cols <- colnames(passed_data)
-  aug_cols <- colnames(au)
-  new_cols <- setdiff(aug_cols, orig_cols)
   
   expect_true(
     all(orig_cols %in% aug_cols),
@@ -272,7 +286,7 @@ augment_data_helper <- function(data, add_missing) {
   tbl <- as_tibble(data)
   
   no_row_nm <- data
-  rownames(no_rownm) <- NULL
+  rownames(no_row_nm) <- NULL
   
   row_nm <- data
   rownames(row_nm) <- paste0("obs", 1:nrow(data))
@@ -280,7 +294,7 @@ augment_data_helper <- function(data, add_missing) {
   list(tbl = tbl, no_row_nm = no_row_nm, row_nm = row_nm)
 }
 
-check_augment_data_specification <- function(add_missing, newdata) {
+check_augment_data_specification <- function(aug, model, add_missing, newdata) {
   
   # aug, data pulled from environment of calling function?
   
@@ -333,6 +347,17 @@ check_augment_data_specification <- function(add_missing, newdata) {
 #' @export
 #'
 #' @examples
+#' 
+#' library(betareg)
+#' fit <- betareg(yield ~ batch + temp, data = GasolineYield)
+#' 
+#' check_augment_function(
+#'   aug = augment.betareg,
+#'   model = fit,
+#'   data = GasolineYield,
+#'   newdata = GasolineYield
+#' )
+#' 
 check_augment_function <- function(aug, model, data = NULL, newdata = NULL) {
   
   # TODO: check default behavior when there is a data argument
@@ -363,8 +388,19 @@ check_augment_function <- function(aug, model, data = NULL, newdata = NULL) {
   
   if (data_arg) {
     
-    check_augment_data_specification(add_missing = FALSE, newdata = FALSE)
-    check_augment_data_specification(add_missing = TRUE, newdata = FALSE)
+    check_augment_data_specification(
+      aug = aug,
+      model = model,
+      add_missing = FALSE,
+      newdata = FALSE
+    )
+    
+    check_augment_data_specification(
+      aug = aug,
+      model = model,
+      add_missing = TRUE,
+      newdata = FALSE
+    )
     
     expect_error(
       aug(model, data = data.frame()),
@@ -381,8 +417,19 @@ check_augment_function <- function(aug, model, data = NULL, newdata = NULL) {
   
   if (newdata_arg) {
     
-    check_augment_data_specification(add_missing = FALSE, newdata = TRUE)
-    check_augment_data_specification(add_missing = TRUE, newdata = TRUE)
+    check_augment_data_specification(
+      aug = aug,
+      model = model,
+      add_missing = FALSE,
+      newdata = TRUE
+    )
+    
+    check_augment_data_specification(
+      aug = aug,
+      model = model,
+      add_missing = TRUE,
+      newdata = TRUE
+    )
     
     expect_error(
       aug(model, newdata = data.frame()),
