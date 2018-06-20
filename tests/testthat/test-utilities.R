@@ -16,9 +16,9 @@ test_that("validate_augment_input", {
   
   m3 <- betareg(yield ~ poly(temp, 2), GasolineYield)
   
-  expect_error(
+  expect_warning(
     validate_augment_input(model, data = mtcars, newdata = mtcars),
-    regexp = "Must not specify both `data` and `newdata` arguments."
+    regexp = "Both `data` and `newdata` have been specified. Ignoring `data`."
   )
   
   expect_warning(
@@ -38,7 +38,15 @@ test_that("validate_augment_input", {
   
   expect_error(
     validate_augment_input(m3),
-    regexp = "Must specify either `data` or `newdata` argument (if applicable)."
+    regexp = "Must specify either `data` or `newdata` argument."
+  )
+  
+  expect_error(
+    validate_augment_input(m3, model.frame(m3)),
+    regexp = paste0(
+      "`data` is malformed: must be coercable to a tibble.\n",
+      "Did you pass `data` the data originally used to fit your model?"
+    )
   )
   
   expect_error(

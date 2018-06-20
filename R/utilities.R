@@ -3,26 +3,24 @@
 
 validate_augment_input <- function(model, data = NULL, newdata = NULL) {
   
+  # careful: may be non-null due to default argument such as
+  # data = stats::model.frame(x)
+  # newdata argument default *should* always `NULL`
   data_passed <- !is.null(data)
   newdata_passed <- !is.null(newdata)
   
   if (data_passed && newdata_passed) {
-    stop(
-      "Must not specify both `data` and `newdata` arguments.",
+    warning(
+      "Both `data` and `newdata` have been specified. Ignoring `data`.",
       call. = FALSE
     )
   }
   
+  # this test means that for `augment(fit)` to work, `augment.my_model`
+  # must have a non-null default value for either `data` or `newdata`.
+  
   if (!data_passed && !newdata_passed) {
-    possibly_augment <- purrr::possibly(augment, otherwise = NULL)
-    default_data_result <- possibly_augment(model)
-    
-    if (is.null(default_data_result)) {
-      stop(
-        "Must specify either `data` or `newdata` argument (if applicable).",
-        call. = FALSE
-      )
-    }
+    stop("Must specify either `data` or `newdata` argument.", call. = FALSE)
   }
   
   if (data_passed) {
@@ -31,6 +29,15 @@ validate_augment_input <- function(model, data = NULL, newdata = NULL) {
       stop("`data` argument must be a tibble or dataframe.", call. = FALSE)
     }
     
+    tryCatch(
+      tibble:::check_tibble(data),
+      error = function(e) {
+        stop(
+          "`data` is malformed: must be coercable to a tibble.\n",
+          "Did you pass `data` the data originally used to fit your model?")
+      }
+    )
+
     # experimental checks that all columns in original data are present
     # in `data`. only warns on failure.
     
