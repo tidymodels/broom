@@ -49,7 +49,11 @@ glance_columns <- tibble::tribble(
   "df.residual", "", c("betareg"),
   "df.null", "", c("betareg"),
   "r.squared", "", c("biglm"),
-  "deviance", "", c("biglm")
+  "deviance", "", c("biglm"),
+  "power", "", c("binDesign"),
+  "power.reached", "", c("binDesign"),
+  "n", "", c("binDesign"),
+  "maxit", "", c("binDesign")
 )
 
 # only new columns added by augment are checked against this list
@@ -75,7 +79,12 @@ tidy_columns <- tibble::tribble(
   "fpr", "", c("roc"),
   "tpr", "", c("roc"),
   "component", "", c("betareg"),
-  "statistic", "", c("betareg")
+  "statistic", "", c("betareg"),
+  "ci.width", "", c("binWidth"),
+  "alternative", "", c("binWidth"),
+  "p", "", c("binWidth"),
+  "n", "", c("binWidth", "binDesign"),
+  "power", "", c("binDesign")
 )
 
 column_glossary <- dplyr::bind_rows(
