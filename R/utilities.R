@@ -3,9 +3,10 @@
 
 validate_augment_input <- function(model, data = NULL, newdata = NULL) {
   
-  # careful: may be non-null due to default argument such as
-  # data = stats::model.frame(x)
+  # careful: `data` may be non-null due to default argument such as
+  # `data = stats::model.frame(x)`
   # newdata argument default *should* always `NULL`
+  
   data_passed <- !is.null(data)
   newdata_passed <- !is.null(newdata)
   

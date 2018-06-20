@@ -295,14 +295,19 @@ augment_data_helper <- function(data, add_missing) {
   list(tbl = tbl, no_row_nm = no_row_nm, row_nm = row_nm)
 }
 
-check_augment_data_specification <- function(aug, model, add_missing, newdata) {
+check_augment_data_specification <- function(
+  aug,
+  model,
+  data,
+  add_missing,
+  test_newdata) {
   
   # aug, data pulled from environment of calling function?
   
   dl <- augment_data_helper(data, add_missing)
   new_dl <- dl
   
-  if (newdata) {
+  if (test_newdata) {
     dl <- list()
     passed_data <- new_dl
   } else {
@@ -385,92 +390,21 @@ check_augment_function <- function(aug, model, data = NULL, newdata = NULL) {
   
   if (data_arg) {
     
-    # test that augment either just works when data isn't specified,
-    # or that it throws an *informative* error. this test only catches
-    # errors, but will not catch warnings or silently incorrect results.
-    
-    # TODO: documentation / validation helper function: this is the expected
-    # error when `model.frame()` explodes
-    
-    possible_aug <- purrr::possibly(aug, otherwise = NULL)
-    default_data_result <- possible_aug(model)
-    
-    if (is.null(default_data_result)) {
-      expect_error(
-        aug(model),
-        regexp = c(
-          "Must specify either `data` or `newdata` argument (if applicable)."
-        )
-      )
-    }
-    
-    # try to test that user gives `data` argument only what they gave to
-    # the original modelling function and no more. experimental and
-    # somewhat brittle
-    
-    possible_mf <- purrr::possibly(model.frame, otherwise = NULL)
-    mf <- possible_mf(model)
-    
-    if (!is.null(mf)) {
-      
-      # ideally we should like to check that all the columns in the original
-      # data are in data. recovering the original columns names from the
-      # model object isn't guaranteed, so this test should throw a 
-      # warning at most if it fails
-      
-      orig_cols <- all.vars(terms(mf))
-      
-      expect_warning(
-        aug(model, data[, orig_cols[-1]]),  # column of original data missing
-        regexp = "`data` might not contain columns present in original data."
-      )
-      
-      extra_rows <- bind_rows(data, head(data))
-      
-      expect_warning(
-        aug(model, extra_rows),
-        regexp = paste0(
-          "`data` must contain only rows passed to original modelling",
-          "with no duplicate rows."
-        )
-      )
-    }
-    
     # make sure data in data frame, dataframe with rows, and tibble
     # all give expected results
     
     check_augment_data_specification(
       aug = aug,
       model = model,
+      data = data,
       add_missing = FALSE,
-      newdata = FALSE
+      test_newdata = FALSE
     )
     
     # we don't check add_missing = TRUE for the data argument because the
     # user is guaranteeing us that the data they give us is the same
     # they gave to the modelling function. also, the new row of NAs added
     # *should* cause things like influence calculates to break
-    
-    # check_augment_data_specification(
-    #   aug = aug,
-    #   model = model,
-    #   add_missing = TRUE,
-    #   newdata = FALSE
-    # )
-    
-    expect_error(
-      aug(model, data = data.frame()),
-      regexp = "`data` argument must not be an empty dataframe.",
-      info = c(
-        "Augment must throw error when `data` is passed an empty dataframe."
-      )
-    )
-    
-    expect_error(
-      aug(model, data = 1L),
-      regexp = "`data` argument must be a tibble or dataframe.",
-      info = "Augment must throw errow when `data` is not a dataframe."
-    )
   }
   
   if (newdata_arg) {
@@ -478,36 +412,17 @@ check_augment_function <- function(aug, model, data = NULL, newdata = NULL) {
     check_augment_data_specification(
       aug = aug,
       model = model,
+      data = data,
       add_missing = FALSE,
-      newdata = TRUE
+      test_newdata = TRUE
     )
     
     check_augment_data_specification(
       aug = aug,
       model = model,
+      data = data,
       add_missing = TRUE,
-      newdata = TRUE
-    )
-    
-    expect_error(
-      aug(model, newdata = data.frame()),
-      regexp = "`newdata` argument must not be an empty dataframe.",
-      info = c(
-        "Augment must throw error when `newdata` is passed an empty dataframe."
-      )
-    )
-    
-    expect_error(
-      aug(model, newdata = 1L),
-      regexp = "`newdata` argument must be a tibble or dataframe.",
-      info = "Augment must throw errow when `newdata` is not a dataframe."
-    )
-  }
-  
-  if (data_arg  && newdata_arg) {
-    expect_error(
-      augment(model, data = data, newdata = newdata),
-      info = "Augment must error when both `data` and `newdata` are specified."
+      test_newdata = TRUE
     )
   }
 }
