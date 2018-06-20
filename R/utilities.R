@@ -21,7 +21,11 @@ validate_augment_input <- function(model, data = NULL, newdata = NULL) {
   # must have a non-null default value for either `data` or `newdata`.
   
   if (!data_passed && !newdata_passed) {
-    stop("Must specify either `data` or `newdata` argument.", call. = FALSE)
+    message(
+      "Neither `data` nor `newdata` has been specified.\n",
+      "Attempting to reconstruct original data.",
+      call. = FALSE
+    )
   }
   
   if (data_passed) {
@@ -47,10 +51,10 @@ validate_augment_input <- function(model, data = NULL, newdata = NULL) {
     
     if (!is.null(mf)) {
       
-      if (nrow(data) > nrow(mf)) {
+      if (nrow(data) != nrow(mf)) {
         warning(
-          "`data` must contain only rows passed to original modelling ",
-          "with no duplicate rows.",
+          "`data` must contain all rows passed to the original modelling ",
+          "function with no extras rows.",
           call. = FALSE
         )
       }
@@ -79,6 +83,35 @@ validate_augment_input <- function(model, data = NULL, newdata = NULL) {
     }
   }
 }
+
+
+
+#' Coerce a data frame to a tibble, preserving rownames
+#' 
+#' A thin wrapper around [tibble::as_tibble()], except checks for
+#' rownames and adds them to a new column `.rownames` if they are
+#' interesting (i.e. more than `1, 2, 3, ...`).
+#'
+#' @param data A [data.frame()] or [tibble::tibble()].
+#'
+#' @return A `tibble` potentially with a `.rownames` column
+as_aug_tibble <- function(data) {
+  
+  # TODO: write a test for this
+  
+  row_nm <- rownames(data)
+  has_row_nms <- any(row_nm != seq_along(row_nm))
+  
+  df <- as_tibble(data)
+  
+  if (has_row_nms) {
+    df <- rownames_to_column(df, var = ".rownames")
+  }
+  
+  df
+}
+
+
 
 #' Ensure an object is a data frame, with rownames moved into a column
 #'
@@ -163,11 +196,10 @@ insert_NAs <- function(x, original) {
 #' @export
 augment_columns <- function(x, data, newdata, type, type.predict = type,
                             type.residuals = type, se.fit = TRUE, ...) {
-  notNAs <- function(o) if (is.null(o) || all(is.na(o))) {
-      NULL
-    } else {
-      o
-    }
+  notNAs <- function(o) {
+    if (is.null(o) || all(is.na(o))) NULL else o
+  }
+  
   residuals0 <- purrr::possibly(stats::residuals, NULL)
   influence0 <- purrr::possibly(stats::influence, NULL)
   cooks.distance0 <- purrr::possibly(stats::cooks.distance, NULL)

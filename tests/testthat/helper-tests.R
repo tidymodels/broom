@@ -1,7 +1,8 @@
-# helper functions for testing
+# tests the tidiers meet as much of the tidier specification as possible
+# all tidiers should pass these
 library(tibble)
 library(dplyr)
-# TODO: document these functions with roxygen, and also in adding new tidiers
+library(purrr)
 
 ### GLOSSARY
 
@@ -36,7 +37,7 @@ argument_glossary <- c(
 
 ## output column names: allowable columns names in tidier output
 
-glance_columns <- tribble(
+glance_columns <- tibble::tribble(
   ~column, ~description, ~used_by,
   "sigma", "", c("Arima"),
   "logLik", "", c("Arima", "betareg"),
@@ -50,7 +51,7 @@ glance_columns <- tribble(
 # only new columns added by augment are checked against this list
 # all names in this list must begin with a dot
 
-augment_columns <- tribble(
+augment_columns <- tibble::tribble(
   ~column, ~description, ~used_by,
   ".fitted", "", c("betareg"),
   ".resid", "", c("betareg"),
@@ -58,7 +59,7 @@ augment_columns <- tribble(
   ".rownames", "", ""
 )
 
-tidy_columns <- tribble(
+tidy_columns <- tibble::tribble(
   ~column, ~description, ~used_by,
   "term", "", c("Arima", "betareg"),
   "estimate", "", c("Arima", "betareg"),
@@ -73,17 +74,34 @@ tidy_columns <- tribble(
   "statistic", "", c("betareg")
 )
 
-column_glossary <- bind_rows(
+column_glossary <- dplyr::bind_rows(
   glance_columns,
   augment_columns,
   tidy_columns,
   .id = "method"
-) %>% 
-  mutate(method = recode(method, 
+)
+
+column_glossary <- dplyr::mutate(
+  column_glossary,
+  method = dplyr::recode(
+    method, 
     "1" = "glance",
     "2" = "augment",
     "3" = "tidy"
-  ))
+  )
+)
+
+#' Check that all elements of a list are equal
+#' 
+#' From SO: https://tinyurl.com/list-elems-equal-r
+#'
+#' @param x A list
+#' 
+#' @return Either `TRUE` or `FALSE`
+#' 
+all_equal_list <- function(x) {
+  sum(duplicated.default(x)) == length(x) - 1L
+}
 
 #' Check that tidying methods use allowed argument names
 #' 
@@ -102,6 +120,13 @@ column_glossary <- bind_rows(
 check_arguments <- function(tidy_method) {
   args <- names(formals(tidy_method))
   func_name <- as.character(substitute(tidy_method))
+  
+  if ("conf.level" %in% args) {
+    expect_true(
+      "conf.int" %in% args,
+      info = "Must have `conf.int` to pair with `conf.level` argument."
+    )
+  }
   
   expect_true(
     all(args %in% argument_glossary),
@@ -150,8 +175,8 @@ check_tibble <- function(
   # TODO: implement NaN / Inf checks
   
   acceptable_columns <- column_glossary %>% 
-    filter(method == !!method) %>% 
-    pull(column)
+    dplyr::filter(method == !!method) %>% 
+    dplyr::pull(column)
   
   expect_true(
     all(columns %in% acceptable_columns),
@@ -196,18 +221,13 @@ check_glance_outputs <- function(...) {
   }
   
   glances <- list(...)
-  walk(glances, check_single_glance_output)
-  
-  # check that all elements of a list are equal
-  # from SO: https://tinyurl.com/list-elems-equal-r
-  all_equal_list <- function(x) sum(duplicated.default(x)) == length(x) - 1L
+  purrr::walk(glances, check_single_glance_output)
   
   expect_true(
-    all_equal_list(map(glances, colnames)),
+    all_equal_list(purrr::map(glances, colnames)),
     info = "Glance column names and order must agree across all ouputs."
   ) 
 }
-
 
 #' Check the output of an augment method
 #' 
@@ -244,13 +264,16 @@ check_single_augment_output <- function(au, passed_data) {
   )
   
   if (.row_names_info(passed_data) > 0) {
-    expect_true(
-      ".rownames" %in% aug_cols,
-      info = paste(
-        "A `.rownames` column must be present in augmented data when input",
-        "data is a data.frame with rownames"
+    row_nm <- rownames(passed_data)
+    if (all(row_nm != seq_along(row_nm))) {
+      expect_true(
+        ".rownames" %in% aug_cols,
+        info = paste(
+          "A `.rownames` column must be present in augmented data when input\n",
+          "data is a data.frame with rownames other than 1, 2, 3, ..."
+        )
       )
-    )
+    }
   }
 }
 
@@ -268,9 +291,9 @@ check_single_augment_output <- function(au, passed_data) {
 #'   has missing data. Defaults to `FALSE`.
 #'
 #' @return A list with three copes of `data`:
-#' - **tbl**: the data in a [tibble::tibble()].
-#' - **no_row_nm**: the data in a [data.frame()] without row names.
-#' - **has_row_nm**: the data in a `data.frame`, with row names.
+#' - **tibble**: the data in a [tibble::tibble()].
+#' - **no_row**: the data in a [data.frame()] without row names.
+#' - **row_nm**: the data in a `data.frame`, with row names.
 #'
 #' @seealso [.row_names_info()], [rownames()], [tibble::rownames_to_column()]
 #' @examples
@@ -284,17 +307,29 @@ augment_data_helper <- function(data, add_missing) {
     data[nrow(data) + 1, ] <- rep(NA, ncol(data))
   }
   
-  tbl <- as_tibble(data)
+  tibble <- tibble::as_tibble(data)
   
-  no_row_nm <- as.data.frame(data)
-  rownames(no_row_nm) <- NULL
+  no_row <- as.data.frame(data)
+  rownames(no_row) <- NULL
   
   row_nm <- data
   rownames(row_nm) <- paste0("obs", 1:nrow(data))
   
-  list(tbl = tbl, no_row_nm = no_row_nm, row_nm = row_nm)
+  list(tibble = tibble, no_row = no_row, row_nm = row_nm)
 }
 
+#' Title
+#'
+#' @param aug 
+#' @param model 
+#' @param data 
+#' @param add_missing 
+#' @param test_newdata 
+#'
+#' @return
+#' @export
+#'
+#' @examples
 check_augment_data_specification <- function(
   aug,
   model,
@@ -315,30 +350,67 @@ check_augment_data_specification <- function(
     passed_data <- dl
   }
   
-  au_tbl <- aug(model, data = dl$tbl, newdata = new_dl$tbl)
-  au_no_row_nm <- aug(model, data = dl$no_row_nm, newdata = new_dl$no_row_nm)
+  au_tibble <- aug(model, data = dl$tibble, newdata = new_dl$tibble)
+  au_no_row <- aug(model, data = dl$no_row, newdata = new_dl$no_row)
   au_row_nm <- aug(model, data = dl$row_nm, newdata = new_dl$row_nm)
   
-  au_list <- list(au_tbl, au_no_row_nm, au_row_nm)
+  au_list <- list(au_tibble, au_no_row, au_row_nm)
   purrr::walk2(au_list, passed_data, check_single_augment_output)
   
-  expect_equal(au_tbl, au_no_row_nm,
+  expect_equal(au_tibble, au_no_row,
     info = "Augmented data must be the same for tibble and data frame input."
   )
   
-  # au_row_nm should have a `.rownames` column not present in `au_tbl` or
-  # `au_no_row_nm`. presence is checked in `check_single_augment_output`,
+  # au_row_nm should have a `.rownames` column not present in `au_tibble` or
+  # `au_no_row`. presence is checked in `check_single_augment_output`,
   # here we just that that the results are the same after stripping this
   # column out.
   
   expect_equal(
-    au_no_row_nm,
+    au_no_row,
     dplyr::select(au_row_nm, -.rownames),
     info = paste(
       "Augmented data must be the same for dataframes with and without",
       "rownames."
     )
   )
+  
+  # au_row_nm should have a `.rownames` column not present in `au_tibble` or
+  # `au_no_row`. presence is checked in `check_single_augment_output`,
+  # here we just that that the results are the same after stripping this
+  # column out.
+  
+  expect_equal(
+    au_no_row,
+    dplyr::select(au_row_nm, -.rownames),
+    info = paste(
+      "Augmented data must be the same for dataframes with and without",
+      "rownames."
+    )
+  )
+  
+  # next up: tests that subsets of the newdata behave appropriately
+  # i.e. we should have that results(head(newdata)) == head(results(newdata))
+  
+  if (test_newdata) {
+    
+    head_dl <- purrr::map(dl, head)
+    head_new_dl <- purrr::map(new_dl, head)
+    
+    hd_tibble <- aug(model, data = head_dl$tibble, newdata = head_new_dl$tibble)
+    hd_no_row <- aug(model, data = head_dl$no_row, newdata = head_new_dl$no_row)
+    hd_row_nm <- aug(model, data = head_dl$row_nm, newdata = head_new_dl$row_nm)
+    
+    hd_list <- list(hd_tibble, hd_no_row, hd_row_nm)
+    
+    expect_equal(
+      hd_list, purrr::map(au_list, head),
+      info = paste0(
+        "Subsetting data before vs after augmentation must not effect results.",
+        "\ni.e. we must have results(head(newdata)) == head(results(newdata))"
+      )
+    )
+  }
 }
 
 
@@ -365,10 +437,6 @@ check_augment_data_specification <- function(
 #' )
 #' 
 check_augment_function <- function(aug, model, data = NULL, newdata = NULL) {
-  
-  # TODO: potentially down the road test subsetting
-  #   - test that head(results(data)) == results(head(data))
-  #   - test that head(results(newdata)) = results(head(newdata))
   
   args <- names(formals(aug))
   
@@ -428,32 +496,17 @@ check_augment_function <- function(aug, model, data = NULL, newdata = NULL) {
 }
 
 
-### TIDY
-
-
-check_tidy_arguments <- function(t) {
-  
-  check_arguments(t)
-  
-  if ("conf.level" %in% args) {
-    expect_true(
-      "conf.int" %in% args,
-      info = "Must have `conf.int` to pair with `conf.level` argument."
-    )
-  }
-}
-
 check_tidy_output <- function(td) {
   check_tibble(td, method = "tidy")
 }
 
-check_dims <- function(tbl, expected_rows = NULL, expected_cols = NULL) {
+check_dims <- function(tibble, expected_rows = NULL, expected_cols = NULL) {
   
   if (!is.null(expected_rows)) {
-    expect_equal(nrow(tbl), expected_rows)
+    expect_equal(nrow(tibble), expected_rows)
   }
   
   if (!is.null(expected_cols)) {
-    expect_equal(ncol(tbl), expected_cols)
+    expect_equal(ncol(tibble), expected_cols)
   }
 }

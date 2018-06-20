@@ -1,6 +1,7 @@
 # test tidy and glance methods from rstanarm_tidiers.R
 
 context("rstanarm tidiers")
+skip_if_not_installed("rstanarm")
 
 if (require(rstanarm, quietly = TRUE)) {
   set.seed(2016)

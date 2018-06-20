@@ -1,8 +1,10 @@
 context("btergm tidiers")
 
+skip_if_not_installed("network")
+skip_if_not_installed("btergm")
+
 test_that("btergm tidiers work", {
-  skip_if_not_installed("network")
-  skip_if_not_installed("btergm")
+  
   networks <- list()
   for (i in 1:10) {
     mat <- matrix(rbinom(100, 1, .25), nrow = 10, ncol = 10)

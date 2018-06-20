@@ -1,6 +1,7 @@
 context("test-utilities.R")
 
 skip_if_not_installed("betareg")
+library(betareg)
 
 test_that("validate_augment_input", {
   
@@ -31,14 +32,17 @@ test_that("validate_augment_input", {
   expect_warning(
     validate_augment_input(model, extra_rows),
     regexp = paste(
-      "`data` must contain only rows passed to original modelling",
-      "with no duplicate rows."
+      "`data` must contain all rows passed to the original modelling", 
+      "function with no extras rows."
     )
   )
   
-  expect_error(
+  expect_message(
     validate_augment_input(m3),
-    regexp = "Must specify either `data` or `newdata` argument."
+    regexp = paste0(
+      "Neither `data` nor `newdata` has been specified.\n",
+      "Attempting to reconstruct original data."
+    )
   )
   
   expect_error(

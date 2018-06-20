@@ -11,7 +11,7 @@
 \method{glance}{Arima}(x, ...)
 }
 \arguments{
-\item{x}{An object of class "Arima"}
+\item{x}{An object of class \code{Arima} created by \code{\link[stats:arima]{stats::arima()}}.}
 
 \item{conf.int}{whether to include a confidence interval}
 
@@ -57,5 +57,5 @@ glance(fit)
 
 }
 \seealso{
-\link{arima}
+\code{\link[stats:arima]{stats::arima()}}
 }

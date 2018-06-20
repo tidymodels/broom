@@ -40,4 +40,11 @@ test_that("augment.betareg", {
     data = GasolineYield,
     newdata = GasolineYield
   )
+  
+  check_augment_function(
+    augment.betareg,
+    fit2,
+    data = GasolineYield,
+    newdata = GasolineYield
+  )
 })

@@ -93,34 +93,25 @@ tidy.nls <- function(x, conf.int = FALSE, conf.level = .95,
 #'
 #' @export
 augment.nls <- function(x, data = NULL, newdata = NULL, ...) {
+  
+  validate_augment_input(x, data, newdata)
+  
+  # TODO: import stats::predict
   if (!is.null(newdata)) {
-    # use predictions on new data
-    newdata <- fix_data_frame(newdata, newcol = ".rownames")
-    newdata$.fitted <- stats::predict(x, newdata = newdata)
-    return(tibble::as_tibble(newdata))
+    out <- newdata %>% 
+      as_aug_tibble() %>% 
+      mutate(.fitted = predict(x, newdata = newdata))
+    return(out)
   }
-
+  
+  # recover data if necessary
   if (is.null(data)) {
     pars <- names(x$m$getPars())
     env <- as.list(x$m$getEnv())
-    data <- as.data.frame(env[!(names(env) %in% pars)])
-  } else {
-    # preprocess data to fit NAs
-    # if (!is.null(x$na.action) && class(x$na.action) == "omit") {
-    #    data <- data[-x$na.action, ]
-    #    # get rid of rownames
-    #    rownames(data) <- NULL
-    # }
+    data <- as_tibble(env[!(names(env) %in% pars)])
   }
-
-  return(tibble::as_tibble(augment_columns(x, data)))
-
-  # move rownames if necessary
-  data <- fix_data_frame(data, newcol = ".rownames")
-
-  data$.fitted <- stats::predict(x)
-  data$.resid <- stats::resid(x)
-  tibble::as_tibble(data)
+  
+  augment_columns(x, data)
 }
 
 
