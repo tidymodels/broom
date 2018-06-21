@@ -39,7 +39,7 @@ test_that("tidy.anova, tidy.aov, and tidy.aovlist work", {
 
   aovlistfit <- aov(mpg ~ wt + disp + Error(drat), mtcars)
   td <- suppressWarnings(tidy(aovlistfit))
-  check_tidy(td, exp.row = 3, exp.col = 7)
+  check_tidy(td, exp.row = 4, exp.col = 7)
   expect_true("Residuals" %in% td$term)
 })
 
