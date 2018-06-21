@@ -74,12 +74,16 @@ augment.factanal <- function(x, data, ...) {
 
   # Check scores were computed
   if (is.null(scores)) {
-    stop("Factor scores were not computed. Change the `scores` argument in factanal().")
+    stop(
+      "Cannot augment factanal objects fit with `scores = 'none'`.",
+      call. = FALSE
+      )
   }
 
   # Place relevant values into a tidy data frame
-  tidy_df <- data.frame(.rowname = rownames(scores), data.frame(scores)) %>% as_tibble()
-  tidy_df$.rowname <- as.character(tidy_df$.rowname)
+  tidy_df <- data.frame(.rownames = rownames(scores), data.frame(scores)) %>%
+    as_tibble()
+  tidy_df$.rownames <- as.character(tidy_df$.rownames)
 
   # Remove row names and clean column names
   rownames(tidy_df) <- NULL
@@ -91,11 +95,11 @@ augment.factanal <- function(x, data, ...) {
   }
 
   # Bind to data
-  data$.rowname <- rownames(data)
-  tidy_df <- tidy_df %>% right_join(data, by = ".rowname")
+  data$.rownames <- rownames(data)
+  tidy_df <- tidy_df %>% right_join(data, by = ".rownames")
 
   tidy_df %>% select(
-    .rowname, everything(),
+    .rownames, everything(),
     -matches("\\.fs[0-9]*"), matches("\\.fs[0-9]*")
   )
 }

@@ -1,43 +1,60 @@
-# test tidy, augment, glance from factanal objects
-
 context("factanal tidiers")
 
-test_that("tidy.factanal works", {
-  n_factors <- 3
-  fit <- factanal(mtcars, n_factors)
-  td <- tidy(fit)
-  check_tidy(td, exp.row = ncol(mtcars), exp.col = 2 + n_factors)
-  expect_equal(td$variable, colnames(mtcars))
+n_factors <- 3
+n_factors2 <- 3
 
-  n_factors2 <- 3
-  fit2 <- factanal(mtcars, n_factors2)
+fit <- factanal(mtcars, n_factors)
+fit2 <- factanal(mtcars, n_factors2)
+
+test_that("factanal tidier arguments", {
+  check_arguments(tidy.factanal)
+  check_arguments(glance.factanal)
+  check_arguments(augment.factanal)
+})
+
+test_that("tidy.factanal", {
+  td <- tidy(fit)
   td2 <- tidy(fit2)
+  
+  check_tidy_output(td)
+  check_tidy_output(td2)
+  check_dims(td, ncol(mtcars), 2 + n_factors)
+  
+  expect_equal(td$variable, colnames(mtcars))
   expect_equal(ncol(td2), 2 + n_factors2)
 })
 
 test_that("glance.factanal works", {
-  n_factors <- 3
-  fit <- factanal(mtcars, n_factors)
-  td <- glance(fit)
-  check_tidy(td, exp.row = 1, exp.col = 8)
-  expect_equal(td$n.factors, n_factors)
+  gl <- glance(fit)
+  gl2 <- glance(fit2)
+  
+  check_glance_outputs(gl, gl2)
+  check_dims(gl, 1, 8)
+  
+  expect_equal(gl$n.factors, n_factors)
 })
 
 test_that("augment.factanal works", {
-  n_factors <- 3
-  fit <- factanal(mtcars, n_factors, scores = "regression")
-  td <- augment(fit)
-  check_tidy(td, exp.row = nrow(mtcars), exp.col = 1 + n_factors)
-  expect_equal(td$.rowname, rownames(mtcars))
-
-  fit2 <- factanal(mtcars, n_factors, scores = "Bartlett")
-  td2 <- augment(fit2, mtcars)
-  check_tidy(td2, exp.row = nrow(mtcars), exp.col = 1 + n_factors + ncol(mtcars))
-})
-
-test_that("augment.factanal does not support none scores", {
-  n_factors <- 3
-  fit <- factanal(mtcars, n_factors, scores = "none")
-  expect_error(augment(fit))
-  expect_error(augment(fit, mtcars))
+  
+  fit_reg <- factanal(mtcars, n_factors, scores = "regression")
+  fit_bart <- factanal(mtcars, n_factors, scores = "Bartlett")
+  
+  check_augment_function(
+    aug = augment.factanal,
+    model = fit_reg,
+    data = mtcars
+  )
+  
+  check_augment_function(
+    aug = augment.factanal,
+    model = fit_bart,
+    data = mtcars
+  )
+  
+  # errors for `scores = "none"`
+  fit_none <- factanal(mtcars, n_factors, scores = "none")
+  expect_error(
+    augment(fit_none),
+    regexp = "Cannot augment factanal objects fit with `scores = 'none'`."
+  )
 })

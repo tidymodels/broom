@@ -1,7 +1,10 @@
-context("Package wide tests")
+context("package style and goodpractice")
 
-test_that("Package Style", {
-  skip("No linting test yet")
-  # skip_if_not_installed("lintr")
+skip_if_not_installed("lintr")
+
+test_that("passes lintr check", {
+  skip("Don't lint yet")
   lintr::expect_lint_free()
 })
+
+# automate goodpractice tests?

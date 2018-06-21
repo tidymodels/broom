@@ -1,11 +1,17 @@
 context("car tidiers")
 
-test_that("tidy.durbinWatsonTest works", {
-  skip_if_not_installed("car")
+skip_if_not_installed("car")
+
+test_that("tidy.durbinWatsonTest", {
+  
+  check_arguments(tidy.durbinWatsonTest)
 
   dw <- car::durbinWatsonTest(lm(mpg ~ wt, data = mtcars))
   td <- tidy(dw)
-  check_tidy(td, exp.col = 5, exp.row = 1)
-
-  expect_identical(td, glance(dw))
+  gl <- glance(dw)
+  
+  check_tidy_output(td)
+  check_glance_outputs(gl)
+  
+  check_dims(td, 1, 5)
 })

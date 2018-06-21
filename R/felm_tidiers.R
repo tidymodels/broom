@@ -93,9 +93,9 @@ tidy.felm <- function(x, conf.int=FALSE, conf.level=.95, fe = FALSE, fe.error = 
           conf.high = estimate + stats::qnorm(1 - (1 - conf.level) / 2) * std.error
         )
     }
-    ret <- as_tibble(rbind(ret, ret_fe))
+    ret <- rbind(ret, ret_fe)
   }
-  ret
+  as_tibble(ret)
 }
 
 # Things it does not do (no simple way to get it)
@@ -157,7 +157,7 @@ augment.felm <- function(x, data = NULL, ...) {
       data <- left_join(data, ans, factor_name)
     }
   }
-  return(data)
+  as_tibble(data)
 }
 
 
@@ -178,16 +178,16 @@ augment.felm <- function(x, data = NULL, ...) {
 #'
 #' @export
 glance.felm <- function(x, ...) {
-  s <- summary(x)
-  ret <- with(s, data.frame(
-    r.squared = r2,
-    adj.r.squared = r2adj,
-    sigma = rse,
-    statistic = fstat,
-    p.value = pval,
-    df = df[1],
-    df.residual = rdf
+  ret <- with(
+    summary(x),
+    tibble(
+      r.squared = r2,
+      adj.r.squared = r2adj,
+      sigma = rse,
+      statistic = fstat,
+      p.value = pval,
+      df = df[1],
+      df.residual = rdf
   ))
-  ret <- finish_glance(ret, x)
-  ret
+  finish_glance(ret, x)
 }

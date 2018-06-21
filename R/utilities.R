@@ -148,7 +148,7 @@ fix_data_frame <- function(x, newnames = NULL, newcol = "term") {
       colnames(ret)[-1] <- newnames
     }
   }
-  unrowname(ret)
+  as_tibble(ret)
 }
 
 

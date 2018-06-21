@@ -1,50 +1,67 @@
 context("felm tidiers")
 
-N <- 1e2
-DT <- data.frame(
-  id = sample(5, N, TRUE),
-  v1 = sample(5, N, TRUE),
-  v2 = sample(1e6, N, TRUE),
-  v3 = sample(round(runif(100, max = 100), 4), N, TRUE),
-  v4 = sample(round(runif(100, max = 100), 4), N, TRUE)
+skip_if_not_installed("lfe")
+
+set.seed(27)
+n <- 100
+df <- data.frame(
+  id = sample(5, n, TRUE),
+  v1 = sample(5, n, TRUE),
+  v2 = sample(1e6, n, TRUE),
+  v3 = sample(round(runif(100, max = 100), 4), n, TRUE),
+  v4 = sample(round(runif(100, max = 100), 4), n, TRUE)
 )
 
-test_that("felm tidiers work", {
-  skip_if_not_installed("lfe")
-  result_felm <- lfe::felm(v2 ~ v3, DT)
+fit <- lfe::felm(v2 ~ v3, df)
+fit2 <- lfe::felm(v2 ~ v3 | id + v1, df, na.action = na.exclude)
 
-  td <- tidy(result_felm)
-  check_tidy(td, exp.row = 2, exp.col = 5)
+form <- v2 ~ v4
+fit_form <- lfe::felm(form, df)  # part of a regression test
 
-  au <- augment(result_felm)
-  check_tidy(au, exp.col = 7)
-
-  gl <- glance(result_felm)
-  check_tidy(gl, exp.col = 7)
+test_that("felm tidier arguments", {
+  check_arguments(tidy.felm)
+  check_arguments(glance.felm)
+  check_arguments(augment.felm)
 })
 
-test_that("confidence interval and fixed effects estimates work", {
-  skip_if_not_installed("lfe")
-  DT$v1[1] <- NA_integer_
-  result_felm <- lfe::felm(v2 ~ v3 | id + v1, DT, na.action = na.exclude)
-  td <- tidy(result_felm, conf.int = TRUE, fe = TRUE)
-  check_tidy(td, exp.row = 11, exp.col = 9)
-
-  td <- tidy(result_felm, conf.int = TRUE, fe = TRUE, fe.error = FALSE)
-  check_tidy(td, exp.row = 11, exp.col = 9)
-
-  au <- augment(result_felm)
-  check_tidy(au, exp.col = 11)
+test_that("tidy.felm", {
+  td <- tidy(fit)
+  td2 <- tidy(fit2, conf.int = TRUE, fe = TRUE, fe.error = FALSE)
+  td3 <- tidy(fit2, conf.int = TRUE, fe = TRUE)
+  td4 <- tidy(fit_form)
+  
+  check_tidy_output(td)
+  check_tidy_output(td2)
+  check_tidy_output(td3)
+  check_tidy_output(td4)
+  
+  check_dims(td, 2, 5)
 })
 
-test_that("augment felm works when formula is passed as a variable ", {
-  skip_if_not_installed("lfe")
-  my_formula <- v2 ~ v4
-  result_felm <- lfe::felm(my_formula, DT)
+test_that("glance.felm", {
+  gl <- glance(fit)
+  gl2 <- glance(fit2)
+  
+  check_glance_outputs(gl, gl2)
+  check_dims(gl, expected_cols = 7)
+})
 
-  td <- tidy(result_felm)
-  check_tidy(td, exp.row = 2, exp.col = 5)
-
-  au <- augment(result_felm)
-  check_tidy(au, exp.col = 7)
+test_that("augment.felm", {
+  check_augment_function(
+    aug = augment.felm,
+    model = fit,
+    data = df
+  )
+  
+  check_augment_function(
+    aug = augment.felm,
+    model = fit2,
+    data = df
+  )
+  
+  check_augment_function(
+    aug = augment.felm,
+    model = fit_form,
+    data = df
+  )
 })
