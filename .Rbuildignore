@@ -12,3 +12,4 @@
 ^README\.Rmd$
 ^\.github$
 ^docs$
+^data-raw$

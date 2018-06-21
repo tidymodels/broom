@@ -1,109 +1,3 @@
-# tests the tidiers meet as much of the tidier specification as possible
-# all tidiers should pass these
-library(tibble)
-library(dplyr)
-library(purrr)
-
-### GLOSSARY
-
-## argument names: allowable argument names in tidier signatures
-
-glance_argument_glossary <- c(
-  "x",
-  "..."
-)
-augment_argument_glossary <- c(
-  "x",
-  "data",
-  "newdata",
-  "type.predict",
-  "type.residuals",
-  "weights",
-  "..."
-)
-
-tidy_argument_glossary <- c(
-  "x",
-  "conf.int",
-  "conf.level",
-  "exponentiate",
-  "quick",
-  "..."
-)
-
-argument_glossary <- c(
-  glance_argument_glossary,
-  augment_argument_glossary,
-  tidy_argument_glossary
-)
-
-## output column names: allowable columns names in tidier output
-
-glance_columns <- tibble::tribble(
-  ~column, ~description, ~used_by,
-  "sigma", "", c("Arima"),
-  "logLik", "", c("Arima", "betareg"),
-  "AIC", "", c("Arima", "betareg", "biglm"),
-  "BIC", "", c("Arima", "betareg"),
-  "pseudo.r.squared", "", c("betareg"),
-  "df.residual", "", c("betareg"),
-  "df.null", "", c("betareg"),
-  "r.squared", "", c("biglm"),
-  "deviance", "", c("biglm"),
-  "power", "", c("binDesign"),
-  "power.reached", "", c("binDesign"),
-  "n", "", c("binDesign"),
-  "maxit", "", c("binDesign")
-)
-
-# only new columns added by augment are checked against this list
-# all names in this list must begin with a dot
-
-augment_columns <- tibble::tribble(
-  ~column, ~description, ~used_by,
-  ".fitted", "", c("betareg"),
-  ".resid", "", c("betareg"),
-  ".cooksd", "", c("betareg", ""),
-  ".rownames", "", ""
-)
-
-tidy_columns <- tibble::tribble(
-  ~column, ~description, ~used_by,
-  "term", "", c("Arima", "betareg"),
-  "estimate", "", c("Arima", "betareg"),
-  "std.error", "", c("Arima", "betareg"),
-  "p.value", "", c("betareg"),
-  "conf.low", "", c("Arima", "betareg"),
-  "conf.high", "", c("Arima", "betareg"),
-  "cutoffs", "", c("roc"),
-  "fpr", "", c("roc"),
-  "tpr", "", c("roc"),
-  "component", "", c("betareg"),
-  "statistic", "", c("betareg"),
-  "ci.width", "", c("binWidth"),
-  "alternative", "", c("binWidth"),
-  "p", "", c("binWidth"),
-  "n", "", c("binWidth", "binDesign"),
-  "power", "", c("binDesign")
-)
-
-column_glossary <- dplyr::bind_rows(
-  glance_columns,
-  augment_columns,
-  tidy_columns,
-  .id = "method"
-)
-
-column_glossary <- dplyr::mutate(
-  column_glossary,
-  method = dplyr::recode(
-    method, 
-    "1" = "glance",
-    "2" = "augment",
-    "3" = "tidy"
-  )
-)
-
 #' Check that all elements of a list are equal
 #' 
 #' From SO: https://tinyurl.com/list-elems-equal-r
@@ -134,15 +28,19 @@ check_arguments <- function(tidy_method) {
   args <- names(formals(tidy_method))
   func_name <- as.character(substitute(tidy_method))
   
+  prefix <- gsub("\\..*","", func_name)
+  data("argument_glossary", package = "broom")
+  allowed_args <- dplyr::filter(argument_glossary, method == !!prefix)$argument
+  
   if ("conf.level" %in% args) {
     expect_true(
       "conf.int" %in% args,
-      info = "Must have `conf.int` to pair with `conf.level` argument."
+      info = "Tidiers with `conf.level` argument must have `conf.int` argument."
     )
   }
   
   expect_true(
-    all(args %in% argument_glossary),
+    all(args %in% allowed_args),
     info = paste0(
       "Arguments to `", func_name, "` must be listed in the argument glossary."
     )

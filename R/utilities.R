@@ -107,7 +107,7 @@ as_rw_tibble <- function(data) {
   df <- as_tibble(data)
   
   if (has_row_nms) {
-    df <- rownames_to_column(df, var = ".rownames")
+    df <- tibble::rownames_to_column(df, var = ".rownames")
   }
   
   df
