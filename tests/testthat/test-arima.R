@@ -1,5 +1,6 @@
 context("Arima tidiers")
 
+
 fit1 <- arima(lh, order = c(1, 0, 0))
 
 fit2 <- arima(
@@ -27,8 +28,6 @@ test_that("tidy.Arima", {
 
 test_that("glance.Arima", {
   gl1 <- glance(fit1)
-  
-  skip("Known bug, need to fix")
   gl2 <- glance(fit2)
   
   check_glance_outputs(gl1, gl2)

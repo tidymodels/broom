@@ -72,5 +72,11 @@ tidy.Arima <- function(x, conf.int=FALSE, conf.level=.95, ...) {
 #' @export
 glance.Arima <- function(x, ...) {
   ret <- unrowname(data.frame(sigma = sqrt(x$sigma2)))
-  tibble::as_tibble(finish_glance(ret, x))
+  ret$logLik <- tryCatch(as.numeric(stats::logLik(x)), error = function(e) NULL)
+  # special case for class Arima when method = "CSS"
+  if (!is.na(ret$logLik)) {
+    ret$AIC <- tryCatch(stats::AIC(x), error = function(e) NULL)
+    ret$BIC <- tryCatch(stats::BIC(x), error = function(e) NULL)
+  }
+  return(tibble::as_tibble(ret))
 }

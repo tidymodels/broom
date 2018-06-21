@@ -90,9 +90,18 @@ If any of your tests use random number generation, you should call `set.seed()` 
 
 In general, we prefer informative errors to magical behaviors or untested success.
 
+## More complete checks
+
+* You can verify that your change passes existing tests with `devtools::test()`
+    * For R < 3.5.0, the number of packages used in the tests exceeds the number R can load. To change this on R 3.4.0 and above, set the environment variable R_MAX_NUM_DLLS to 150. To change this on R < 3.4.0, you would have to recompile R.
+    * For R ≥ 3.5.0, issue has been fixed.
+
+
 ## Package dependencies
 
-In order to test your tidiers, you may need to add `your_package` to the **Suggests** section of broom's DESCRIPTION. You should then use `skip_if_not_installed("my_package")` at the beginning of any test that uses `my_package`.
+* In order to test your tidiers, you may need to add `your_package` to the **Suggests** section of broom's DESCRIPTION.
+* You should then use `skip_if_not_installed("my_package")` at the beginning of any test that uses `my_package`.
+* Note that testing broom requires a lot of packages. You can install them all with `devtools::install_github("tidyverse/broom", dependencies = TRUE)`
 
 We are currently in the process of developing a new set of tests for tidying methods. Recommendations on how to test your tidiers will appear here soon.
 
@@ -129,8 +138,8 @@ If asked to build the site, developers outside the US or UK should run `Sys.setl
 
 The big picture:
 
-- `glance` should provide a summary of **model-level** information as a `tibble` with **exactly one row**. This includes goodness of fit measures such as deviance, AIC, BIC, etc. 
-- `augment` should provide a summary of **observation-level** information as a `tibble` with **one row per observation**. This summary should preserve the observations. Additional information might include leverage, cluster assignments or fitted values. 
+- `glance` should provide a summary of **model-level** information as a `tibble` with **exactly one row**. This includes goodness of fit measures such as deviance, AIC, BIC, etc.
+- `augment` should provide a summary of **observation-level** information as a `tibble` with **one row per observation**. This summary should preserve the observations. Additional information might include leverage, cluster assignments or fitted values.
 - `tidy` should provide a summary of **component-level** information as a `tibble` with **one row for each model component**. Examples of model components include: regression coefficients, cluster centers, etc.
 
 Oftentimes it doesn't make sense to define one or more of these methods for a particular model. In this case, just implement the methods that do make sense.
@@ -218,5 +227,3 @@ explain the glossary and put it into a vignette
 - `conf.level`: the confidence level to use for the interval when `conf.int = TRUE`
 - `exponentiate`: logical indicating whether or not model terms should be presented on an exponential scale (typical for logistic regression)
 - `quick`: logical indicating whether to use a faster `tidy` method that returns less information about each component, typically only `term` and `estimate` columns
-
-

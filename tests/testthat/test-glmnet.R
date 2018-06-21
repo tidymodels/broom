@@ -25,8 +25,15 @@ test_that("multinomial response glmnet tidier works", {
   g <- sample(1:4, 100, replace = TRUE)
   fit2 <- glmnet::glmnet(x, g, family = "multinomial")
 
-  expect_warning(td <- tidy(fit2))
-  check_tidy(td, exp.col = 6)
+  td1 <- tidy(fit2)
+  check_tidy(td1, exp.col = 6)
+  expect_true(is.numeric(td1$step) && !any(is.na(td1$step)))
+  expect_true(all(td1$estimate != 0))
+
+  td2 <- tidy(fit2, return_zeros = TRUE)
+  check_tidy(td2, exp.col = 6)
+  expect_true(is.numeric(td2$step) && !any(is.na(td2$step)))
+  expect_true(any(td2$estimate == 0))
 })
 
 test_that("cv.glmnet tidiers work", {

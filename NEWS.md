@@ -9,6 +9,7 @@ broom 0.4.4.9000
 * Added tidiers for ordinal models: `clm` and `clmm` (ordinal), `polr` (MASS), `svyolr` (survey)
 * Added tidiers for `Kendall`, `MannKendall` and `SeasonalMannKendall` from the Kendall package (thanks to #285 from Jorge Cimentada)
 * Added support for objects from `glmnetUtils` package
+* Added glance support for `Arima` objects when created with `method = "CSS"`
 
 broom 0.4.4
 -----------
