@@ -75,7 +75,7 @@ tidy.glmnet <- function(x, return_zeros = FALSE, ...) {
 
   if (inherits(x, "multnet")) {
     beta_d <- plyr::ldply(beta, function(b) {
-      fix_data_frame(as.matrix(b), newcol = "term")
+      fix_data_frame(as.matrix(b), newnames = 1:ncol(b), newcol = "term")
     }, .id = "class")
     ret <- beta_d %>% tidyr::gather(step, estimate, -term, -class)
   } else {
