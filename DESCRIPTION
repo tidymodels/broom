@@ -23,6 +23,7 @@ Authors@R: c(
     person("Lukasz", "Komsta", email = "lukasz.komsta@umlub.pl", role = "ctb"),
     person("Frederick", "Novometsky", role = "ctb"),
     person("Wilson", "Freitas", role = "ctb"),
+    person("Michelle", "Evans", role = "ctb"),
     person("Jason Cory", "Brunson", email = "cornelioid@gmail.com", role = "ctb"),
     person("Simon", "Jackson", email = "drsimonjackson@gmail.com", role = "ctb"),
     person("Ben", "Whalley", email = "ben.whalley@plymouth.ac.uk", role = "ctb"),

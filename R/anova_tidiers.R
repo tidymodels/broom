@@ -103,6 +103,9 @@ tidy.aov <- function(x, ...) {
 
 
 #' @rdname anova_tidiers
+#' 
+#' @import purrr
+#' 
 #' @export
 tidy.aovlist <- function(x, ...) {
   # must filter out Intercept stratum since it has no dimensions
@@ -110,15 +113,10 @@ tidy.aovlist <- function(x, ...) {
     x <- x[-1L]
   }
 
-  # ret <- plyr::ldply(x, tidy, .id = "stratum")
-  ret <- lapply(x, function(a) tidy(stats::anova(a)))
-  ret <- lapply(
-    names(ret),
-    function(a) dplyr::mutate(ret[[a]], stratum = a)
-  )
-  ret <- do.call("rbind", ret)
+  ret <- purrr::map_df(x, tidy, .id = "stratum")
+  
   # get rid of leading and trailing whitespace in term and stratum columns
-  ret <- ret %>% mutate(
+  ret <- ret %>% dplyr::mutate(
     term = stringr::str_trim(term),
     stratum = stringr::str_trim(stratum)
   )
