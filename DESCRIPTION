@@ -27,7 +27,8 @@ Authors@R: c(
     person("Simon", "Jackson", email = "drsimonjackson@gmail.com", role = "ctb"),
     person("Ben", "Whalley", email = "ben.whalley@plymouth.ac.uk", role = "ctb"),
     person("Michael", "Kuehn", email = "mkuehn10@gmail.com", role = "ctb"),
-    person("Jorge", "Cimentada", email = "cimentadaj@gmail.com", role = "ctb"))
+    person("Jorge", "Cimentada", email = "cimentadaj@gmail.com", role = "ctb"),
+    person("Karl", "Dunkle Werner", role = "ctb"))
 Maintainer: David Robinson <admiral.david@gmail.com>
 Description: Convert statistical analysis objects from R into tidy data frames,
     so that they can more easily be combined, reshaped and otherwise processed
@@ -39,9 +40,9 @@ Description: Convert statistical analysis objects from R into tidy data frames,
 License: MIT + file LICENSE
 URL: http://github.com/tidyverse/broom
 BugReports: http://github.com/tidyverse/broom/issues
-Depends: 
+Depends:
     R (>= 3.1)
-Imports: 
+Imports:
     backports,
     dplyr,
     methods,
@@ -52,7 +53,7 @@ Imports:
     stringr,
     tibble,
     tidyr
-Suggests: 
+Suggests:
     AER,
     akima,
     AUC,
