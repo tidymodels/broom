@@ -109,5 +109,5 @@ tidy.boot <- function(x,
     colnames(ci.tab) <- c("conf.low", "conf.high")
     ret <- cbind(ret, ci.tab)
   }
-  return(ret)
+  as_tibble(ret)
 }

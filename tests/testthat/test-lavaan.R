@@ -1,42 +1,52 @@
 context("lavaan tidiers")
 
-test_that("tidy.lavaan works", {
-  skip_if_not_installed("lavaan")
-  library(lavaan)
+skip_if_not_installed("lavaan")
+library(lavaan)
 
-  lav_lmfit <- sem("mpg ~ wt", data = mtcars)
-  td <- tidy(lav_lmfit)
+fit <- sem("mpg ~ wt", data = mtcars)
+form <- paste("F =~", paste0("x", 1:9, collapse = " + "))
+fit2 <- cfa(form, data = HolzingerSwineford1939)
 
-  check_tidy(td, exp.row = 3, exp.col = 11)
+test_that("lavaan tidier arguments", {
+  check_arguments(tidy.lavaan)
+  check_arguments(glance.lavaan)
+})
+
+test_that("tidy.lavaan", {
+  
+
+  
+  td <- tidy(fit)
+  td2 <- tidy(fit2)
+  tdc <- tidy(fit2, conf.level = .999)
+  tdr <- tidy(fit2, rsquare = TRUE)
+  
+  check_tidy_output(td)
+  check_tidy_output(td2)
+  check_tidy_output(tdc)
+  check_tidy_output(tdr)
+  
+  check_dims(td, 3, 11)
+  check_dims(td2, 19, 11)
+  
   expect_equal(td$term, c("mpg ~ wt", "mpg ~~ mpg", "wt ~~ wt"))
+  
+  op_counts <- dplyr::count(td2, op)$n
+  expect_equal(op_counts, 10:9)
 
-  cfafit <- cfa(paste("F =~", paste0("x", 1:9, collapse = "+")), data = HolzingerSwineford1939)
-  td2 <- tidy(cfafit)
-  check_tidy(td2, exp.row = 19, exp.col = 11)
-  check_tidy(td2 %>% filter(op == "=~"), exp.row = 9)
-  check_tidy(td2 %>% filter(op == "~~"), exp.row = 10)
+  # check conf level
+  expect_true(all(td2$conf.high <= tdc$conf.high))
 
-  # check conf.level
-  td3 <- tidy(cfafit, conf.level = .999)
-  expect_true(all(td2$conf.high <= td3$conf.high))
-
-  # check passing lavaan params with ...
-  td4 <- tidy(cfafit, rsquare = TRUE)
-  check_tidy(td4 %>% filter(op == "r2"), exp.row = 9)
+  # passing arguments via ...
+  check_dims(filter(tdr, op == "r2"), expected_rows = 9)
 })
 
 
 
-test_that("glance.lavaan works", {
-  skip_if_not_installed("lavaan")
-  library(lavaan)
-
-  lav_lmfit <- sem("mpg ~ wt", data = mtcars)
-  gl <- glance(lav_lmfit)
-
-  check_tidy(gl, exp.row = 1, exp.col = 17)
-
-  cfafit <- cfa(paste("F =~", paste0("x", 1:9, collapse = "+")), data = HolzingerSwineford1939)
-  gl2 <- glance(cfafit)
-  check_tidy(gl2, exp.row = 1, exp.col = 17)
+test_that("glance.lavaan", {
+  gl <- glance(fit)
+  check_glance_outputs(gl)
+  
+  gl2 <- glance(fit2)
+  check_glance_outputs(gl2)
 })

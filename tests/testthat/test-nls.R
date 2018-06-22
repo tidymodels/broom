@@ -1,29 +1,50 @@
 context("nls tidiers")
 
-test_that("nls tidiers work", {
-  nlsfit <- nls(wt ~ a + b * mpg + c / disp,
-    data = mtcars,
-    start = list(a = 1, b = 2, c = 3)
-  )
-  td <- tidy(nlsfit, conf.int = TRUE)
-  check_tidy(td, exp.row = 3, exp.col = 7)
-  expect_equal(td$term, c("a", "b", "c"))
+fit <- nls(
+  wt ~ a + b * mpg + c / disp,
+  data = mtcars,
+  start = list(a = 1, b = 2, c = 3)
+)
 
-  tdq <- tidy(nlsfit, conf.int = TRUE, quick = TRUE)
-  check_tidy(tdq, exp.row = 3, exp.col = 2)
+fit2 <- nls(wt ~ b * mpg, data = mtcars, start = list(b = 2))
 
-  au <- augment(nlsfit)
-  check_tidy(au, exp.col = 5)
-
-  au_full <- augment(nlsfit, newdata = mtcars)
-  check_tidy(au_full, exp.col = ncol(mtcars) + 2)
-
-  gl <- glance(nlsfit)
-  check_tidy(gl, exp.col = 8)
+test_that("nls tidier arguments", {
+  check_arguments(tidy.nls)
+  check_arguments(glance.nls)
+  check_arguments(augment.nls)
 })
 
-test_that("tidying single covariate works", {
-  nlsfit2 <- nls(wt ~ b * mpg, data = mtcars, start = list(b = 2))
-  td2 <- tidy(nlsfit2, conf.int = TRUE)
-  check_tidy(td2, exp.row = 1, exp.col = 7)
+test_that("tidy.nls", {
+  
+  td <- tidy(fit, conf.int = TRUE)
+  tdq <- tidy(fit, conf.int = TRUE, quick = TRUE)
+  
+  check_tidy_output(td)
+  check_tidy_output(tdq)
+  check_dims(td, 3, 7)
+  
+  expect_equal(td$term, c("a", "b", "c"))
+})
+
+test_that("glance.nls", {
+  gl <- glance(fit)
+  check_glance_outputs(gl)
+  check_dims(gl, expected_cols = 8)
+})
+
+test_that("nls tidiers work", {
+  
+  check_augment_function(
+    aug = augment.nls,
+    model = fit,
+    data = mtcars,
+    newdata = mtcars
+  )
+  
+  check_augment_function(
+    aug = augment.nls,
+    model = fit2,
+    data = mtcars,
+    newdata = mtcars
+  )
 })

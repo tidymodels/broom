@@ -18,25 +18,22 @@
 #'
 #' @export
 tidy.list <- function(x, ...) {
-  if (all(c("par", "value", "counts", "convergence", "message")
-  %in% names(x))) {
-    # returned from optim
+  
+  optim_elems <- c("par", "value", "counts", "convergence", "message")
+  xyz_elems <- c("x", "y", "z")
+  svd_elems <- c("d", "u", "v")
+  orcutt_elems <- "Cochrane.Orcutt"
+  
+  if (all(optim_elems %in% names(x))) {
     tidy_optim(x, ...)
-  } else if (all(c("x", "y", "z") %in% names(x)) & is.matrix(x$z)) {
-    if (length(x$x) != nrow(x$z)) {
-      stop("The list looks like an x,y,z list but is not. Element x of the list needs to be the same length as the number of rows of element z")
-    }
-    if (length(x$y) != ncol(x$z)) {
-      stop("The list looks like an x,y,z list but is not. Element y of the list needs to be the same length as the number of columns of element z")
-    }
-    # xyz list suitable for persp, image, etc.
+  } else if (all(xyz_elems %in% names(x))) {
     tidy_xyz(x, ...)
-  } else if (all(c("d", "u", "v") %in% names(x))) {
+  } else if (all(svd_elems %in% names(x))) {
     tidy_svd(x, ...)
-  } else if ("Cochrane.Orcutt" %in% names(x)) {
+  } else if (all(orcutt_elems %in% names(x))) {
     tidy.orcutt(x, ...)
   } else {
-    stop("No tidying method recognized for this list")
+    stop("No tidy method recognized for this list.", call. = FALSE)
   }
 }
 
@@ -44,11 +41,15 @@ tidy.list <- function(x, ...) {
 #'
 #' @export
 glance.list <- function(x, ...) {
-  if (all(c("par", "value", "counts", "convergence", "message") %in% names(x))) {
+  
+  optim_elems <- c("par", "value", "counts", "convergence", "message")
+  orcutt_elms <- "Cochrane.Orcutt"
+  
+  if (all(optim_elems %in% names(x))) {
     glance_optim(x, ...)
-  } else if ("Cochrane.Orcutt" %in% names(x)) {
+  } else if (orcutt_elms %in% names(x)) {
     glance.orcutt(x, ...)
   } else {
-    stop("No glance method recognized for this list")
+    stop("No glance method recognized for this list.", call. = FALSE)
   }
 }

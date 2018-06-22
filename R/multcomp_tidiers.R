@@ -38,47 +38,40 @@ NULL
 #' @rdname multcomp_tidiers
 #' @export
 tidy.glht <- function(x, ...) {
-  unrowname(data.frame(
+  tibble(
     lhs = rownames(x$linfct),
     rhs = x$rhs,
-    estimate = stats::coef(x),
-    check.names = FALSE,
-    stringsAsFactors = FALSE
-  ))
+    estimate = stats::coef(x)
+  )
 }
 
 #' @rdname multcomp_tidiers
 #' @method tidy confint.glht
 #' @export
 tidy.confint.glht <- function(x, ...) {
-  coef <- x$confint
+  coef <- as_tibble(x$confint)
   colnames(coef) <- c("estimate", "conf.low", "conf.high")
 
-  unrowname(data.frame(
-    lhs = rownames(coef),
-    rhs = x$rhs,
+  mutate(
     coef,
-    check.names = FALSE,
-    stringsAsFactors = FALSE
-  ))
+    lhs = rownames(coef),
+    rhs = x$rhs
+  )
 }
 
 #' @method tidy summary.glht
 #' @rdname multcomp_tidiers
 #' @export
 tidy.summary.glht <- function(x, ...) {
-  coef <- as.data.frame(
+  coef <- as_tibble(
     x$test[c("coefficients", "sigma", "tstat", "pvalues")]
   )
   names(coef) <- c("estimate", "std.error", "statistic", "p.value")
 
-  unrowname(data.frame(
+  mutate(coef, 
     lhs = rownames(coef),
-    rhs = x$rhs,
-    coef,
-    check.names = FALSE,
-    stringsAsFactors = FALSE
-  ))
+    rhs = x$rhs
+  )
 }
 
 
@@ -86,10 +79,8 @@ tidy.summary.glht <- function(x, ...) {
 #' @rdname multcomp_tidiers
 #' @export
 tidy.cld <- function(x, ...) {
-  unrowname(data.frame(
+  tibble(
     lhs = names(x$mcletters$Letters),
-    letters = x$mcletters$Letters,
-    check.names = FALSE,
-    stringsAsFactors = FALSE
-  ))
+    letters = x$mcletters$Letters
+  )
 }

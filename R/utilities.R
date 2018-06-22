@@ -291,12 +291,12 @@ augment_columns <- function(x, data, newdata, type, type.predict = type,
   if (is.null(na_action) || nrow(original) == nrow(ret)) {
     # no NAs were left out; we can simply recombine
     original <- fix_data_frame(original, newcol = ".rownames")
-    return(unrowname(cbind(original, ret)))
+    return(as_tibble(cbind(original, ret)))
   } else if (class(na_action) == "omit") {
     # if the option is "omit", drop those rows from the data
     original <- fix_data_frame(original, newcol = ".rownames")
     original <- original[-na_action, ]
-    return(unrowname(cbind(original, ret)))
+    return(as_tibble(cbind(original, ret)))
   }
 
   # add .rownames column to merge the results with the original; resilent to NAs

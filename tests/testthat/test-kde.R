@@ -1,10 +1,14 @@
-context("kde tidier works")
+context("ks tidiers")
 
-test_that("tidy.kde works", {
-  skip_if_not_installed("ks")
-  set.seed(1)
-  dat <- replicate(2, rnorm(100))
-  k <- ks::kde(dat)
-  td <- tidy(k)
-  check_tidy(td, exp.col = 3)
+skip_if_not_installed("ks")
+
+test_that("tidy.kde", {
+  
+  check_arguments(tidy.kde)
+
+  fit <- ks::kde(mtcars[, 1:3])
+  td <- tidy(fit)
+  
+  check_tidy_output(td)
+  check_dims(td, expected_cols = 4)
 })

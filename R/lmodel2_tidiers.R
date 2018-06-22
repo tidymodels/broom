@@ -66,7 +66,8 @@ tidy.lmodel2 <- function(x, ...) {
     select(method = Method, term, conf.low, conf.high)
 
   ret %>%
-    inner_join(confints, by = c("method", "term"))
+    inner_join(confints, by = c("method", "term")) %>% 
+    as_tibble()
 }
 
 
@@ -82,7 +83,7 @@ tidy.lmodel2 <- function(x, ...) {
 #'
 #' @export
 glance.lmodel2 <- function(x, ...) {
-  data.frame(
+  tibble(
     r.squared = x$rsquare,
     theta = x$theta,
     p.value = x$P.param,

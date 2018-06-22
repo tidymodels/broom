@@ -1,20 +1,41 @@
 context("kmeans tidiers")
 
-test_that("kmeans tidiers work", {
-  set.seed(2)
-  x <- rbind(
-    matrix(rnorm(100, sd = 0.3), ncol = 2),
-    matrix(rnorm(100, mean = 1, sd = 0.3), ncol = 2)
+set.seed(2)
+x <- rbind(
+  matrix(rnorm(100, sd = 0.3), ncol = 2),
+  matrix(rnorm(100, mean = 1, sd = 0.3), ncol = 2)
+)
+
+fit <- kmeans(x, 2)
+
+test_that("kmeans tidier arguments", {
+  check_arguments(tidy.kmeans)
+  check_arguments(glance.kmeans)
+  check_arguments(augment.kmeans)
+})
+
+test_that("tidy.kmeans", {
+  td <- tidy(fit)
+  check_tidy_output(td)
+})
+
+test_that("tidy.kmeans", {
+  gl <- glance(fit)
+  check_glance_outputs(gl)
+})
+
+test_that("augment.kmeans", {
+  
+  # data argument cannot be empty
+  expect_error(
+    augment(fit),
+    regexp = "argument \"data\" is missing, with no default"
   )
-
-  cl <- kmeans(x, 2)
-  td <- tidy(cl)
-  check_tidy(td, exp.row = 2, exp.col = 5)
-
-  expect_error(augment(cl)) # data argument cannot be empty
-  au <- augment(cl, x)
-  check_tidy(au, exp.row = 100, exp.col = 3)
-
-  gl <- glance(cl)
-  check_tidy(gl, exp.col = 4)
+  
+  check_augment_function(
+    aug = augment.kmeans,
+    model = fit,
+    data = x,
+    newdata = x
+  )
 })

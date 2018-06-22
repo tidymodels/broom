@@ -48,7 +48,7 @@ tidy.orcutt <- function(x, ...) {
 #'
 #' @export
 glance.orcutt <- function(x, ...) {
-  ret <- data.frame(
+  tibble(
     r.squared = x$r.squared,
     adj.r.squared = x$adj.r.squared,
     rho = x$rho,
@@ -58,9 +58,4 @@ glance.orcutt <- function(x, ...) {
     dw.transformed = x$DW[3],
     p.value.transformed = x$DW[4]
   )
-
-  ret$rho <- x$rho
-  ret$number.interaction <- x$number.interaction
-
-  unrowname(ret)
 }

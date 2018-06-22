@@ -30,7 +30,7 @@ tidy_optim <- function(x, ...) {
   if (is.null(names(x$par))) {
     names(x$par) <- paste0("parameter", seq_along(x$par))
   }
-  data.frame(parameter = names(x$par), value = unname(x$par))
+  tibble(parameter = names(x$par), value = unname(x$par))
 }
 
 
@@ -44,10 +44,10 @@ tidy_optim <- function(x, ...) {
 #'
 #' @seealso [optim()]
 glance_optim <- function(x, ...) {
-  unrowname(data.frame(
+  tibble(
     value = x$value,
     function.count = x$counts["function"],
     gradient.count = x$counts["gradient"],
     convergence = x$convergence
-  ))
+  )
 }

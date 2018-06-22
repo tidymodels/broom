@@ -3,6 +3,7 @@
 \name{lm_tidiers}
 \alias{lm_tidiers}
 \alias{tidy.lm}
+\alias{tidy.glm}
 \alias{tidy.summary.lm}
 \alias{augment.lm}
 \alias{glance.lm}
@@ -11,6 +12,8 @@
 \usage{
 \method{tidy}{lm}(x, conf.int = FALSE, conf.level = 0.95,
   exponentiate = FALSE, quick = FALSE, ...)
+
+\method{tidy}{glm}(x, ...)
 
 \method{tidy}{summary.lm}(x, ...)
 

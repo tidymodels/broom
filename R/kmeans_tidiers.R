@@ -53,12 +53,12 @@ NULL
 #'
 #' @export
 tidy.kmeans <- function(x, col.names=paste0("x", 1:ncol(x$centers)), ...) {
-  ret <- data.frame(x$centers)
+  ret <- as.data.frame(x$centers)
   colnames(ret) <- col.names
   ret$size <- x$size
   ret$withinss <- x$withinss
   ret$cluster <- factor(seq_len(nrow(ret)))
-  ret
+  as_tibble(ret)
 }
 
 
@@ -69,11 +69,8 @@ tidy.kmeans <- function(x, col.names=paste0("x", 1:ncol(x$centers)), ...) {
 #'
 #' @export
 augment.kmeans <- function(x, data, ...) {
-  # move rownames if necessary
-  data <- fix_data_frame(data, newcol = ".rownames")
-
-  # show cluster assignment as a factor (it's not numeric)
-  cbind(as.data.frame(data), .cluster = factor(x$cluster))
+  fix_data_frame(data, newcol = ".rownames") %>% 
+    mutate(.cluster = factor(x$cluster))
 }
 
 
@@ -87,6 +84,5 @@ augment.kmeans <- function(x, data, ...) {
 #'
 #' @export
 glance.kmeans <- function(x, ...) {
-  ret <- as.data.frame(x[c("totss", "tot.withinss", "betweenss", "iter")])
-  ret
+  as_tibble(x[c("totss", "tot.withinss", "betweenss", "iter")])
 }

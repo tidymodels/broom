@@ -41,6 +41,13 @@ test_that("glance.ivreg", {
 
 test_that("augment.ivreg", {
   
+  check_augment_function(
+    aug = augment.ivreg,
+    model = fit,
+    data = df,
+    newdata = df
+  )
+  
   # TODO: figure out how on earth to test augment methods
   
   au <- augment(fit)
