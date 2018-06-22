@@ -98,3 +98,11 @@ test_that("tidy with confint drops rows of all NA", {
   )
   expect_false(anyNA(td))
 })
+
+
+test_that("glance.glm works", {
+  g <- glm(am ~ mpg, mtcars, family = "binomial")
+  gl <- glance(g)
+  check_tidy(gl, exp.col = 7)
+})
+

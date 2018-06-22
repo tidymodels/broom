@@ -1,26 +1,46 @@
+context("tseries tidiers")
 
-if (require(tseries, quietly = TRUE)) {
-  context("tseries::garch models")
+skip_if_not_installed("tseries")
+library(tseries)
 
-  data(EuStockMarkets)
-  dax <- diff(log(EuStockMarkets))[, "DAX"]
-  dax.garch <- garch(dax, control = garch.control(trace = FALSE))
+dax <- diff(log(EuStockMarkets))[, "DAX"]
+fit <- garch(dax, control = garch.control(trace = FALSE))
 
-  test_that("it should tidy tseries::garch fits", {
-    td <- tidy(dax.garch)
-    check_tidy(td, exp.row = 3)
-  })
+test_that("tseries tidier arguments", {
+  check_arguments(tidy.garch)
+  check_arguments(glance.garch)
+  check_arguments(augment.garch)
+})
 
-  test_that("it should glance tseries::garch fits", {
-    gl <- glance(dax.garch)
-    check_tidy(gl, exp.row = 1, exp.col = 7)
-  })
+test_that("tidy.garch", {
+  td <- tidy(fit)
+  check_tidy_output(td)
+  check_dims(td, 3)
+})
 
-  test_that("it should augment tseries::garch fits", {
-    expect_error(augment(dax.garch)) # data argument cannot be empty
-    au <- augment(dax.garch, dax)
-    check_tidy(au, exp.col = 4)
-    au <- augment(dax.garch, newdata = dax)
-    check_tidy(au, exp.col = 3)
-  })
-}
+test_that("glance.garch", {
+  gl <- glance(fit)
+  check_glance_outputs(gl)
+  check_dims(gl, 1, 7)
+})
+
+test_that("it should augment tseries::garch fits", {
+  
+  skip("Think if augmenting garch models makes sense")
+  
+  # data specified as a ts object, this could be messy
+  
+  check_augment_function(
+    aug = augment.garch,
+    model = fit,
+    data = dax,
+    newdata = dax
+  )
+  
+  expect_error(
+    augment(fit),
+    "TODO: Something about data argument cannot be empty"
+  )
+
+})
+

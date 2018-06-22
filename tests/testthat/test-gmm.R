@@ -1,28 +1,37 @@
 context("gmm tidiers")
 
-test_that("gmm tidiers work", {
-  skip_if_not_installed("gmm")
-  library(gmm)
-  data(Finance)
-  r <- Finance[1:300, 1:10]
-  rm <- Finance[1:300, "rm"]
-  rf <- Finance[1:300, "rf"]
+skip_if_not_installed("gmm")
+library(gmm)
 
-  z <- as.matrix(r - rf)
-  t <- nrow(z)
-  zm <- rm - rf
-  h <- matrix(zm, t, 1)
-  res <- gmm(z ~ zm, x = h)
+data(Finance)
 
-  td <- tidy(res)
-  check_tidy(td, exp.col = 6)
+r <- Finance[1:300, 1:10]
+rm <- Finance[1:300, "rm"]
+rf <- Finance[1:300, "rf"]
 
-  td <- tidy(res, conf.int = TRUE)
-  check_tidy(td, exp.col = 8)
+z <- as.matrix(r - rf)
+t <- nrow(z)
+zm <- rm - rf
+h <- matrix(zm, t, 1)
 
-  td <- tidy(res, quick = TRUE)
-  check_tidy(td, exp.col = 3)
+fit <- gmm(z ~ zm, x = h)
 
-  gl <- glance(res)
-  check_tidy(gl, exp.col = 4)
+test_that("gmm tidier arguments", {
+  check_arguments(tidy.gmm)
+  check_arguments(glance.gmm)
+})
+
+test_that("tidy.gmm", {
+  td <- tidy(fit)
+  td2 <- tidy(fit, conf.int = TRUE)
+  tdq <- tidy(fit, quick = TRUE)
+  
+  check_tidy_output(td)
+  check_tidy_output(td2)
+  check_tidy_output(tdq)
+})
+
+test_that("glance.gmm", {
+  gl <- glance(fit)
+  check_glance_outputs(gl)
 })

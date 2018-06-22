@@ -1,27 +1,33 @@
 context("geeglm")
 
-if (require(geepack)) {
-  library(geepack)
-  data(state)
-  ds <- data.frame(state.region, state.x77)
-  geefit <- geeglm(Income ~ Frost + Murder,
-    id = state.region,
-    data = ds, family = gaussian,
-    corstr = "exchangeable"
+skip_if_not_installed("geepack")
+library(geepack)
+
+df <- data.frame(state.region, state.x77)
+
+fit <- geeglm(
+  Income ~ Frost + Murder,
+  id = state.region,
+  data = df,
+  family = gaussian,
+  corstr = "exchangeable"
+)
+
+test_that("tidy.geeglm", {
+  check_arguments(tidy.geeglm)
+  
+  td <- tidy(fit, conf.int = TRUE)
+  tdq <- tidy(fit, quick = TRUE)
+  
+  expect_warning(
+    td2 <- tidy(fit, conf.int = FALSE, exponentiate = TRUE),
+    regexp = paste(
+      "Exponentiating coefficients, but model did not use a log",
+      "or logit link function"
+    )
   )
-
-  test_that("tidy.geeglm works with conf.int", {
-    td <- tidy(geefit, conf.int = TRUE)
-    check_tidy(td, exp.row = 3, exp.col = 7)
-  })
-
-  test_that("tidy.geeglm throws warning when exponentiating non log/logit link", {
-    expect_warning(td <- tidy(geefit, conf.int = FALSE, exponentiate = TRUE))
-    check_tidy(td, exp.row = 3, exp.col = 5)
-  })
-
-  test_that("tidy.geeglm quick works", {
-    td <- tidy(geefit, quick = TRUE)
-    check_tidy(td, exp.row = 3, exp.col = 2)
-  })
-}
+  
+  check_tidy_output(td)
+  check_tidy_output(tdq)
+  check_tidy_output(td2)
+})

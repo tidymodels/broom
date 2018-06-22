@@ -74,7 +74,7 @@ tidy.glmnet <- function(x, return_zeros = FALSE, ...) {
   beta <- coef(x)
 
   if (inherits(x, "multnet")) {
-    beta_d <- plyr::ldply(beta, function(b) {
+    beta_d <- purrr::map_df(beta, function(b) {
       fix_data_frame(as.matrix(b), newnames = 1:ncol(b), newcol = "term")
     }, .id = "class")
     ret <- beta_d %>% tidyr::gather(step, estimate, -term, -class)
@@ -90,7 +90,11 @@ tidy.glmnet <- function(x, return_zeros = FALSE, ...) {
       dev.ratio = x$dev.ratio[step]
     )
 
-  if (return_zeros) ret else filter(ret, estimate != 0)
+  if (!return_zeros) {
+    ret <- filter(ret, estimate != 0)
+  }
+  
+  as_tibble(ret)
 }
 
 
@@ -102,7 +106,7 @@ tidy.glmnet <- function(x, return_zeros = FALSE, ...) {
 #'
 #' @export
 glance.glmnet <- function(x, ...) {
-  data.frame(nulldev = x$nulldev, npasses = x$npasses)
+  tibble(nulldev = x$nulldev, npasses = x$npasses)
 }
 
 
@@ -186,15 +190,17 @@ glance.glmnet <- function(x, ...) {
 #'
 #' @export
 tidy.cv.glmnet <- function(x, ...) {
-  ret <- as.data.frame(x[c(
-    "lambda", "cvm", "cvsd", "cvup", "cvlo",
-    "nzero"
-  )])
-  colnames(ret) <- c(
-    "lambda", "estimate", "std.error", "conf.high",
-    "conf.low", "nzero"
+  with(
+    x,
+    tibble(
+      lambda = lambda,
+      estimate = cvm,
+      std.error = cvsd,
+      conf.low = cvlo,
+      conf.high = cvup,
+      nzero = nzero
+    )
   )
-  return(unrowname(ret))
 }
 
 
@@ -206,5 +212,5 @@ tidy.cv.glmnet <- function(x, ...) {
 #'
 #' @export
 glance.cv.glmnet <- function(x, ...) {
-  data.frame(lambda.min = x$lambda.min, lambda.1se = x$lambda.1se)
+  tibble(lambda.min = x$lambda.min, lambda.1se = x$lambda.1se)
 }

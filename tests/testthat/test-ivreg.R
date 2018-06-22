@@ -1,37 +1,52 @@
-# test tidy, augment, glance methods from lme4-tidiers.R
+context("AER::ivreg tidiers")
 
-if (require(AER, quietly = TRUE)) {
-  context("AER::ivreg models")
+skip_if_not_installed("AER")
+library(AER)
+library(dplyr)
 
-  data("CigarettesSW", package = "AER")
-  CigarettesSW$rprice <- with(CigarettesSW, price / cpi)
-  CigarettesSW$rincome <- with(CigarettesSW, income / population / cpi)
-  CigarettesSW$tdiff <- with(CigarettesSW, (taxs - tax) / cpi)
-  ivr <- ivreg(log(packs) ~ log(rprice) + log(rincome) | log(rincome) + tdiff + I(tax / cpi),
-    data = CigarettesSW, subset = year == "1995"
+data("CigarettesSW")
+df <- CigarettesSW %>% 
+  mutate(
+    rprice = price / cpi,
+    rincome = income / population / cpi,
+    tdiff = (taxs - tax) / cpi
   )
 
-  test_that("tidy works on AER::ivreg fits", {
-    td <- tidy(ivr)
-    td2 <- tidy(ivr, conf.int = TRUE)
-    expect_warning(tidy(ivr, exponentiate = TRUE)) # warning as we didn't use a link function, maybe this is bad?
-  })
+fit <- ivreg(
+  log(packs) ~ log(rprice) + log(rincome) | log(rincome) + tdiff + I(tax / cpi),
+  data = df, subset = year == "1995"
+)
 
-  test_that("augment works on ivreg fits", {
-    au <- augment(ivr)
-    expect_true(all(c(".resid", ".fitted") %in% names(au)))
-    expect_equivalent(au$.resid, residuals(ivr))
-    expect_equivalent(au$.fitted, fitted(ivr))
-    old_cigs <- CigarettesSW[CigarettesSW$year == "1985" & CigarettesSW$tax < 40, ]
-    au2 <- augment(ivr, newdata = old_cigs)
-    expect_true(".fitted" %in% names(au2))
-    expect_equivalent(au2$.fitted, predict(ivr, newdata = old_cigs))
-  })
+test_that("ivreg tidier arguments", {
+  check_arguments(tidy.ivreg)
+  check_arguments(glance.ivreg)
+  check_arguments(augment.ivreg)
+})
 
-  test_that("glance works on ivreg fits", {
-    g <- glance(ivr)
-    check_tidy(g, exp.col = 7)
-    g <- glance(ivr, diagnostics = TRUE)
-    check_tidy(g, exp.col = 13)
-  })
-}
+test_that("tidy.ivreg", {
+  td <- tidy(fit)
+  td2 <- tidy(fit, conf.int = TRUE)
+  
+  check_tidy_output(td)
+  check_tidy_output(td2)
+})
+
+test_that("glance.ivreg", {
+  gl <- glance(fit)
+  gl2 <- glance(fit, diagnostics = TRUE)
+  
+  check_glance_outputs(gl)  # separately because diagnostics = TRUE adds cols
+  check_glance_outputs(gl2)
+})
+
+test_that("augment.ivreg", {
+  
+  # TODO: figure out how on earth to test augment methods
+  
+  au <- augment(fit)
+  expect_true(all(c(".resid", ".fitted") %in% names(au)))
+  
+  au2 <- augment(fit, newdata = filter(df, year == "1985"))
+  expect_true(".fitted" %in% names(au2))
+})
+

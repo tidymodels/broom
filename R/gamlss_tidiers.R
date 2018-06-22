@@ -30,7 +30,7 @@
 tidy.gamlss <- function(x, quick = FALSE, ...) {
   if (quick) {
     co <- stats::coef(x)
-    return(data.frame(term = names(co), estimate = unname(co)))
+    return(tibble(term = names(co), estimate = unname(co)))
   }
 
   # need gamlss for summary to work
@@ -48,5 +48,5 @@ tidy.gamlss <- function(x, quick = FALSE, ...) {
   # add parameter types. This assumes each coefficient table starts
   # with "(Intercept)": unclear if this is guaranteed
   parameters <- x$parameters[cumsum(ret$term == "(Intercept)")]
-  cbind(parameter = parameters, ret)
+  bind_cols(parameter = parameters, ret)
 }

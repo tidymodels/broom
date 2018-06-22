@@ -67,7 +67,7 @@ tidy.geeglm <- function(x, conf.int = FALSE, conf.level = .95,
                         exponentiate = FALSE, quick = FALSE, ...) {
   if (quick) {
     co <- stats::coef(x)
-    ret <- data.frame(term = names(co), estimate = unname(co))
+    ret <- tibble(term = names(co), estimate = unname(co))
     return(ret)
   }
   co <- stats::coef(summary(x))
@@ -118,7 +118,7 @@ process_geeglm <- function(ret, x, conf.int = FALSE, conf.level = .95,
   }
   ret$estimate <- trans(ret$estimate)
 
-  ret
+  as_tibble(ret)
 }
 
 ##' Generate confidence intervals for GEE analyses
