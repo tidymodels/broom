@@ -1,10 +1,19 @@
-context("psych")
+context("psych tidiers")
+
+skip_if_not_installed("psych")
 
 test_that("tidy.kappa works", {
-  skip_if_not_installed("psych")
-  rater1 <- 1:9
-  rater2 <- c(1, 3, 1, 6, 1, 5, 5, 6, 7)
-  suppressWarnings(ck <- psych::cohen.kappa(cbind(rater1, rater2)))
-  td <- tidy(ck)
-  check_tidy(td, exp.row = 2, exp.col = 4)
+  
+  check_arguments(tidy.kappa)
+  
+  df <- tibble(
+    rater1 = 1:9,
+    rater2 = c(1, 3, 1, 6, 1, 5, 5, 6, 7)
+  )
+  
+  suppressWarnings(fit <- psych::cohen.kappa(df))
+  
+  td <- tidy(fit)
+  check_tidy_output(td)
+  check_dims(td, 2, 4)
 })

@@ -1,4 +1,4 @@
-context("multcomp tidiers")
+context("multcomp")
 
 skip_if_not_installed("multcomp")
 library(multcomp)

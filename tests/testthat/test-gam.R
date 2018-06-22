@@ -1,4 +1,4 @@
-context("gam package tidiers")
+context("gam")
 
 skip_if_not_installed("gam")
 

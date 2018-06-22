@@ -1,4 +1,4 @@
-context("Kendall tidiers")
+context("kendall")
 
 skip_if_not_installed("Kendall")
 library(Kendall)

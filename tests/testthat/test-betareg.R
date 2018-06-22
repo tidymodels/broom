@@ -1,4 +1,4 @@
-context("betareg tidiers")
+context("betareg")
 
 skip_if_not_installed("betareg")
 

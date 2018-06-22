@@ -1,4 +1,4 @@
-context("lavaan tidiers")
+context("lavaan")
 
 skip_if_not_installed("lavaan")
 library(lavaan)

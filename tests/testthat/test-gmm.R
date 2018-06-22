@@ -1,4 +1,4 @@
-context("gmm tidiers")
+context("gmm")
 
 skip_if_not_installed("gmm")
 library(gmm)

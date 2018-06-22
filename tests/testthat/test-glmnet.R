@@ -1,4 +1,4 @@
-context("glmnet tidiers")
+context("glmnet")
 
 skip_if_not_installed("glmnet")
 library(glmnet)

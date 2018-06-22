@@ -37,14 +37,9 @@ tidy.summaryDefault <- function(x, ...) {
   if ("NA's" %in% names(x)) {
     cnms <- c(cnms, "na")
   }
-  return(setNames(ret, cnms))
+  as_tibble(setNames(ret, cnms))
 }
-
-
 
 #' @rdname summary_tidiers
-#'
 #' @export
-glance.summaryDefault <- function(x, ...) {
-  tidy.summaryDefault(x, ...)
-}
+glance.summaryDefault <- tidy.summaryDefault

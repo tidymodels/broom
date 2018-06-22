@@ -1,4 +1,4 @@
-context("test-utilities.R")
+context("utilities")
 
 skip_if_not_installed("betareg")
 library(betareg)

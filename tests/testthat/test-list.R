@@ -1,4 +1,4 @@
-context("list tidiers")
+context("list")
 
 test_that("optim tidiers works", {
   func <- function(x) {

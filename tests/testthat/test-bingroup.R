@@ -1,4 +1,4 @@
-context("bingroup tidiers")
+context("bingroup")
 
 skip_if_not_installed("binGroup")
 library(binGroup)

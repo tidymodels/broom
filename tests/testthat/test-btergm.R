@@ -1,4 +1,4 @@
-context("btergm tidiers")
+context("btergm")
 
 skip_if_not_installed("network")
 skip_if_not_installed("btergm")

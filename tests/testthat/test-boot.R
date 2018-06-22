@@ -1,4 +1,4 @@
-context("boot tidiers")
+context("boot")
 
 skip_if_not_installed("boot")
 library(boot)

@@ -3,9 +3,17 @@
 \name{rlm_tidiers}
 \alias{rlm_tidiers}
 \alias{glance.rlm}
+\alias{tidy.rlm}
+\alias{augment.rlm}
 \title{Tidying methods for an rlm (robust linear model) object}
 \usage{
 \method{glance}{rlm}(x, ...)
+
+\method{tidy}{rlm}(x, conf.int = FALSE, conf.level = 0.95,
+  exponentiate = FALSE, quick = FALSE, ...)
+
+\method{augment}{rlm}(x, data = stats::model.frame(x), newdata, type.predict,
+  type.residuals, ...)
 }
 \arguments{
 \item{x}{rlm object}

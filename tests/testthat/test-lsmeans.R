@@ -1,4 +1,4 @@
-context("lsmeans tidiers")
+context("lsmeans")
 
 skip_if_not_installed("lsmeans")
 library(lsmeans)

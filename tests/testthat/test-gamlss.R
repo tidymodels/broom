@@ -1,4 +1,4 @@
-context("gamlss tidiers")
+context("gamlss")
 
 skip_if_not_installed("gamlss")
 skip_if_not_installed("gamlss.data")

@@ -1,4 +1,4 @@
-context("caret tidiers")
+context("caret")
 
 skip_if_not_installed("caret")
 

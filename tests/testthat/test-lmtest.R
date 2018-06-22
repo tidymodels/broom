@@ -1,4 +1,4 @@
-context("lmtest tidiers")
+context("lmtest")
 
 skip_if_not_installed("lmtest")
 library(lmtest)

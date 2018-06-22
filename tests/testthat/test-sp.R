@@ -1,4 +1,4 @@
-context("sp tidiers")
+context("sp")
 
 
 if (require("sp") && require("rgeos") && require("maptools")) {

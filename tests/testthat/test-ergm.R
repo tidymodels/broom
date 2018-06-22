@@ -1,4 +1,4 @@
-context("ergm tidiers")
+context("ergm")
 
 skip_if_not_installed("ergm")
 library(ergm)

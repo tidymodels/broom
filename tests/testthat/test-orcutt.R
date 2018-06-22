@@ -1,4 +1,4 @@
-context("orcutt tidiers")
+context("orcutt")
 
 # TODO: why is there a list tidy and an S3 tidier for this??
 skip_if_not_installed("orcutt")

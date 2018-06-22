@@ -1,4 +1,4 @@
-context("car tidiers")
+context("car")
 
 skip_if_not_installed("car")
 
@@ -16,22 +16,17 @@ test_that("tidy.durbinWatsonTest", {
   check_dims(td, 1, 5)
 })
 
-
-test_that(
-  "tidy.anova from car", {
-    skip_if_not_installed("car")
-    model <- glm(am ~ mpg, mtcars, family = "binomial")
-    car_output <- car::Anova(model, test.statistic = "LR")
-    
-    expect_equal(
-      object = tidy(car_output),
-      expected =
-        tibble(
-          term = "mpg",
-          statistic = car_output$`LR Chisq`,
-          df = car_output$Df,
-          p.value = car_output$`Pr(>Chisq)`
-        )
-    )
-  }
-)
+test_that("tidy car::Anova", {
+  
+  fit <- glm(am ~ mpg, mtcars, family = "binomial")
+  car_anova <- car::Anova(fit, test.statistic = "LR")
+  
+  expected <- tibble(
+    term = "mpg",
+    statistic = car_anova$`LR Chisq`,
+    df = car_anova$Df,
+    p.value = car_anova$`Pr(>Chisq)`
+  )
+  
+  expect_equal(tidy(car_anova), expected)
+})

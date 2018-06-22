@@ -30,8 +30,20 @@
 #' @export
 glance.rlm <- function(x, ...) {
   s <- summary(x)
-  ret <- data.frame(sigma = s$sigma, converged = x$converged)
+  ret <- tibble(sigma = s$sigma, converged = x$converged)
   ret <- finish_glance(ret, x)
   # remove df.residual, which is always set to NA in rlm objects
   dplyr::select(ret, -df.residual)
 }
+
+# TODO: document that linking should be explicit to make it easier to find
+# documentation
+
+#' @rdname rlm_tidiers
+#' @export
+tidy.rlm <- tidy.lm
+
+
+#' @rdname rlm_tidiers
+#' @export
+augment.rlm <- augment.lm
