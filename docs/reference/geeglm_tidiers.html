@@ -157,20 +157,20 @@ not used.</p></td>
 The structure depends on the method chosen.</p>
 <p><code>tidy.geeglm</code> returns one row for each coefficient, with five columns:</p>
 <dt>term</dt><dd><p>The term in the linear model being estimated and tested</p></dd>
-  <dt>estimate</dt><dd><p>The estimated coefficient</p></dd>
-  <dt>std.error</dt><dd><p>The standard error from the GEE model</p></dd>
-  <dt>statistic</dt><dd><p>Wald statistic</p></dd>
-  <dt>p.value</dt><dd><p>two-sided p-value</p></dd>
+<dt>estimate</dt><dd><p>The estimated coefficient</p></dd>
+<dt>std.error</dt><dd><p>The standard error from the GEE model</p></dd>
+<dt>statistic</dt><dd><p>Wald statistic</p></dd>
+<dt>p.value</dt><dd><p>two-sided p-value</p></dd>
 
 If conf.int=TRUE, it also includes columns for
 conf.low and conf.high, computed with
-<a href='confint.geeglm.html'>confint.geeglm</a> (included as part of broom).
+<a href='confint.geeglm.html'>confint.geeglm()</a> (included as part of broom).
 
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>If <code>conf.int=TRUE</code>, the confidence interval is computed with
-the <code><a href='confint.geeglm.html'>confint.geeglm</a></code> function.</p>
+the <code><a href='confint.geeglm.html'>confint.geeglm()</a></code> function.</p>
 <p>While <code>tidy</code> is supported for "geeglm" objects, <code>augment</code> and
 <code>glance</code> are not.</p>
 <p>If you have missing values in your model data, you may need to
@@ -191,14 +191,12 @@ missingness in the data beforehand.</p>
     <span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>geefit</span>)
     <span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>geefit</span>, <span class='kw'>quick</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
     <span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>geefit</span>, <span class='kw'>conf.int</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
-}</div><div class='output co'>#&gt; <span class='message'>Le chargement a nécessité le package : geepack</span></div><div class='output co'>#&gt;          term    estimate  std.error   statistic   p.value    conf.low
-#&gt; 1 (Intercept) 4406.193102 407.454998 116.9412561 0.0000000 3607.595981
-#&gt; 2       Frost    1.686945   2.250175   0.5620426 0.4534384   -2.723317
-#&gt; 3      Murder  -22.664350  31.379406   0.5216715 0.4701295  -84.166856
-#&gt;     conf.high
-#&gt; 1 5204.790222
-#&gt; 2    6.097207
-#&gt; 3   38.838155</div><div class='input'>
+}</div><div class='output co'>#&gt; <span class='message'>Loading required package: geepack</span></div><div class='output co'>#&gt; # A tibble: 3 x 7
+#&gt;   term        estimate std.error statistic p.value conf.low conf.high
+#&gt;   &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;
+#&gt; 1 (Intercept)  4406.      407.     117.      0.     3608.     5205.  
+#&gt; 2 Frost           1.69      2.25     0.562   0.453    -2.72      6.10
+#&gt; 3 Murder        -22.7      31.4      0.522   0.470   -84.2      38.8 </div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

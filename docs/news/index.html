@@ -109,13 +109,19 @@
 <h2 class="hasAnchor">
 <a href="#broom-0-4-4-9000" class="anchor"></a>broom 0.4.4.9000</h2>
 <ul>
+<li>Deprecated tidiers for vector and matrices</li>
 <li>
 <code><a href="../reference/bootstrap.html">bootstrap()</a></code> and data frame tidiers have been deprecated</li>
+<li>Tidiers now return tibbles</li>
 <li>New vignettes on the available tidying methods, contributing new tidiers</li>
 <li>Updated old vignettes to use <code>map/unnest</code> workflow rather than <code>rowwise/do</code>
 </li>
-<li>Bump version number</li>
 <li>Added <code>augment</code> method for chi-squared tests</li>
+<li>Added tidiers for ordinal models: <code>clm</code> and <code>clmm</code> (ordinal), <code>polr</code> (MASS), <code>svyolr</code> (survey)</li>
+<li>Added tidiers for <code>Kendall</code>, <code>MannKendall</code> and <code>SeasonalMannKendall</code> from the Kendall package (thanks to <a href='http://github.com/tidyverse/broom/issues/285'>#285</a> from Jorge Cimentada)</li>
+<li>Added support for objects from <code>glmnetUtils</code> package</li>
+<li>Added glance support for <code>Arima</code> objects when created with <code>method = "CSS"</code>
+</li>
 </ul>
 </div>
     <div id="broom-0-4-4" class="section level2">
@@ -134,7 +140,7 @@
 </li>
 <li>
 <code>augment</code> and <code>glance</code> on NULLs now return an empty data frame</li>
-<li>Deprecated the <code><a href="../reference/inflate.html">inflate()</a></code> function in favor of <code><a href="http://www.rdocumentation.org/packages/tidyr/topics/expand">tidyr::crossing</a></code>
+<li>Deprecated the <code>inflate()</code> function in favor of <code><a href="http://www.rdocumentation.org/packages/tidyr/topics/expand">tidyr::crossing</a></code>
 </li>
 <li>Fixed confidence intervals in the gmm tidier (thanks to <a href='http://github.com/tidyverse/broom/issues/242'>#242</a> from David Hugh-Jones)</li>
 <li>Fixed a bug in bootstrap tidiers (thanks to <a href='http://github.com/tidyverse/broom/issues/167'>#167</a> from Jeremy Biesanz)</li>

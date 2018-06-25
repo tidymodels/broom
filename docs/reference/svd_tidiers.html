@@ -109,9 +109,9 @@
     <div class="ref-description">
     
     <p>These methods tidy the U, D, and V matrices returned by the
-<code>svd</code> or <code><a href='http://www.rdocumentation.org/packages/irlba/topics/irlba'>irlba</a></code> functions into a tidy format.
+<code>svd()</code> or <code><a href='http://www.rdocumentation.org/packages/irlba/topics/irlba'>irlba::irlba()</a></code> functions into a tidy format.
 Because <code>svd</code> and <code>irlba</code> return lists without classes, this function
-has to be called by <code><a href='list_tidiers.html'>tidy.list</a></code> when it recognizes a list as an
+has to be called by <code><a href='list_tidiers.html'>tidy.list()</a></code> when it recognizes a list as an
 SVD or <code>irlba</code> object.</p>
     
     </div>
@@ -138,28 +138,31 @@ SVD or <code>irlba</code> object.</p>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>An SVD object contains a decomposition into u, d, and v matrices, such that
-<code>u %\*% diag(d) %\*% t(v)</code> gives the original matrix. This tidier gives
-a choice of which matrix to tidy.</p>
+    <p>An SVD object contains a decomposition into u, d, and v matrices,
+such that</p><pre>u <!-- %*% diag(d) %*% t(v) -->
+</pre>
+
+<p>gives the original matrix. This tidier gives a choice of which matrix
+to tidy.</p>
 <p>When <code>matrix = "u"</code>, each observation represents one pair of row and
 principal component, with variables:</p>
 <dt>row</dt><dd><p>Number of the row in the original data being described</p></dd>
-  <dt>PC</dt><dd><p>Principal component</p></dd>
-  <dt>value</dt><dd><p>Loading of this principal component for this row</p></dd>
+<dt>PC</dt><dd><p>Principal component</p></dd>
+<dt>value</dt><dd><p>Loading of this principal component for this row</p></dd>
 
 When matrix = "d", each observation represents one principal component,
 with variables:
-  <dt><code>PC</code></dt><dd><p>An integer vector indicating the principal component</p></dd>
-  <dt><code>std.dev</code></dt><dd><p>Standard deviation explained by this PC</p></dd>
-  <dt><code>percent</code></dt><dd><p>Percentage of variation explained. This will be
-    inaccurate for irlba objects due to the SVD truncation.</p></dd>
-  <dt><code>cumulative</code></dt><dd><p>Cumulative percentage of variation explained</p></dd>
+<dt><code>PC</code></dt><dd><p>An integer vector indicating the principal component</p></dd>
+<dt><code>std.dev</code></dt><dd><p>Standard deviation explained by this PC</p></dd>
+<dt><code>percent</code></dt><dd><p>Percentage of variation explained. This will be
+inaccurate for irlba objects due to the SVD truncation.</p></dd>
+<dt><code>cumulative</code></dt><dd><p>Cumulative percentage of variation explained</p></dd>
 
 When matrix = "v", each observation represents a pair of a principal
 component and a column of the original matrix, with variables:
-  <dt>column</dt><dd><p>Column of original matrix described</p></dd>
-  <dt>PC</dt><dd><p>Principal component</p></dd>
-  <dt>value</dt><dd><p>Value of this PC for this column</p></dd>
+<dt>column</dt><dd><p>Column of original matrix described</p></dd>
+<dt>PC</dt><dd><p>Principal component</p></dd>
+<dt>value</dt><dd><p>Value of this PC for this column</p></dd>
 
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
@@ -168,7 +171,7 @@ component and a column of the original matrix, with variables:
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code>svd</code>, <code><a href='http://www.rdocumentation.org/packages/irlba/topics/irlba'>irlba</a></code> <code><a href='list_tidiers.html'>tidy.list</a></code></p></div>
+    <div class='dont-index'><p><code>svd()</code>, <code><a href='http://www.rdocumentation.org/packages/irlba/topics/irlba'>irlba::irlba()</a></code> <code><a href='list_tidiers.html'>tidy.list()</a></code></p></div>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
@@ -193,7 +196,7 @@ component and a column of the original matrix, with variables:
 #&gt; 1     1   20.9  0.730        0.730
 #&gt; 2     2   11.7  0.229        0.958
 #&gt; 3     3    4.68 0.0367       0.995
-#&gt; 4     4    1.76 0.00518      1    </div><div class='input'>
+#&gt; 4     4    1.76 0.00518      1.00 </div><div class='input'>
 <span class='no'>tidy_v</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>s</span>, <span class='kw'>matrix</span> <span class='kw'>=</span> <span class='st'>"v"</span>)
 <span class='fu'>head</span>(<span class='no'>tidy_v</span>)</div><div class='output co'>#&gt; # A tibble: 6 x 3
 #&gt;   column    PC  value

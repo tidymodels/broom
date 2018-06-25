@@ -30,7 +30,6 @@
 #'     data(kyphosis)
 #'     g <- gam(Kyphosis ~ s(Age,4) + Number, family = binomial, data = kyphosis)
 #'     tidy(g)
-#'     augment(g)
 #'     glance(g)
 #' }
 #'

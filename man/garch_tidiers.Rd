@@ -19,10 +19,6 @@
 \item{method}{\code{character} which specifies the hypothesis test to be shown in \code{glance}.
 The \code{garch} function reports 2 hypothesis tests: Jarque-Bera to residuals
 and Box-Ljung to squared residuals.}
-
-\item{data}{original data (used with \code{augment})}
-
-\item{newdata}{new data provided for predition use (used with \code{augment})}
 }
 \value{
 A \code{data.frame} with one row for each coefficient, with five columns:

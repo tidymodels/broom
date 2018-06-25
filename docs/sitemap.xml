@@ -13,7 +13,13 @@
     <loc>http://broom.tidyverse.org/reference/anova_tidiers.html</loc>
   </url>
   <url>
+    <loc>http://broom.tidyverse.org/reference/argument_glossary.html</loc>
+  </url>
+  <url>
     <loc>http://broom.tidyverse.org/reference/Arima_tidiers.html</loc>
+  </url>
+  <url>
+    <loc>http://broom.tidyverse.org/reference/as_rw_tibble.html</loc>
   </url>
   <url>
     <loc>http://broom.tidyverse.org/reference/auc_tidiers.html</loc>
@@ -52,7 +58,13 @@
     <loc>http://broom.tidyverse.org/reference/btergm_tidiers.html</loc>
   </url>
   <url>
+    <loc>http://broom.tidyverse.org/reference/caret_tidiers.html</loc>
+  </url>
+  <url>
     <loc>http://broom.tidyverse.org/reference/cch_tidiers.html</loc>
+  </url>
+  <url>
+    <loc>http://broom.tidyverse.org/reference/column_glossary.html</loc>
   </url>
   <url>
     <loc>http://broom.tidyverse.org/reference/confint.geeglm.html</loc>
@@ -73,10 +85,16 @@
     <loc>http://broom.tidyverse.org/reference/decompose_tidiers.html</loc>
   </url>
   <url>
+    <loc>http://broom.tidyverse.org/reference/durbinWatsonTest_tidiers.html</loc>
+  </url>
+  <url>
     <loc>http://broom.tidyverse.org/reference/emmeans_tidiers.html</loc>
   </url>
   <url>
     <loc>http://broom.tidyverse.org/reference/ergm_tidiers.html</loc>
+  </url>
+  <url>
+    <loc>http://broom.tidyverse.org/reference/factanal_tidiers.html</loc>
   </url>
   <url>
     <loc>http://broom.tidyverse.org/reference/felm_tidiers.html</loc>
@@ -97,6 +115,9 @@
     <loc>http://broom.tidyverse.org/reference/gam_tidiers.html</loc>
   </url>
   <url>
+    <loc>http://broom.tidyverse.org/reference/garch_tidiers.html</loc>
+  </url>
+  <url>
     <loc>http://broom.tidyverse.org/reference/geeglm_tidiers.html</loc>
   </url>
   <url>
@@ -115,9 +136,6 @@
     <loc>http://broom.tidyverse.org/reference/htest_tidiers.html</loc>
   </url>
   <url>
-    <loc>http://broom.tidyverse.org/reference/inflate.html</loc>
-  </url>
-  <url>
     <loc>http://broom.tidyverse.org/reference/insert_NAs.html</loc>
   </url>
   <url>
@@ -131,6 +149,9 @@
   </url>
   <url>
     <loc>http://broom.tidyverse.org/reference/kmeans_tidiers.html</loc>
+  </url>
+  <url>
+    <loc>http://broom.tidyverse.org/reference/lavaan_tidiers.html</loc>
   </url>
   <url>
     <loc>http://broom.tidyverse.org/reference/list_tidiers.html</loc>
@@ -157,6 +178,9 @@
     <loc>http://broom.tidyverse.org/reference/mcmc_tidiers.html</loc>
   </url>
   <url>
+    <loc>http://broom.tidyverse.org/reference/mjoint_tidiers.html</loc>
+  </url>
+  <url>
     <loc>http://broom.tidyverse.org/reference/mle2_tidiers.html</loc>
   </url>
   <url>
@@ -179,6 +203,9 @@
   </url>
   <url>
     <loc>http://broom.tidyverse.org/reference/orcutt_tidiers.html</loc>
+  </url>
+  <url>
+    <loc>http://broom.tidyverse.org/reference/ordinal_tidiers.html</loc>
   </url>
   <url>
     <loc>http://broom.tidyverse.org/reference/plm_tidiers.html</loc>
@@ -259,9 +286,6 @@
     <loc>http://broom.tidyverse.org/reference/tidy.coeftest.html</loc>
   </url>
   <url>
-    <loc>http://broom.tidyverse.org/reference/tidy.default.html</loc>
-  </url>
-  <url>
     <loc>http://broom.tidyverse.org/reference/tidy.density.html</loc>
   </url>
   <url>
@@ -269,6 +293,9 @@
   </url>
   <url>
     <loc>http://broom.tidyverse.org/reference/tidy.ftable.html</loc>
+  </url>
+  <url>
+    <loc>http://broom.tidyverse.org/reference/tidy.Kendall.html</loc>
   </url>
   <url>
     <loc>http://broom.tidyverse.org/reference/tidy.manova.html</loc>
@@ -323,6 +350,9 @@
   </url>
   <url>
     <loc>http://broom.tidyverse.org/articles/broom_and_dplyr.html</loc>
+  </url>
+  <url>
+    <loc>http://broom.tidyverse.org/articles/glossary.html</loc>
   </url>
   <url>
     <loc>http://broom.tidyverse.org/articles/kmeans.html</loc>

@@ -138,17 +138,17 @@ is given), this does only a little work and should rarely be necessary.</p>
 
     <p><code>tidy</code> returns a data.frame with the columns</p>
 <dt>pyears</dt><dd><p>person-years of exposure</p></dd>
-  <dt>n</dt><dd><p>number of subjects contributing time</p></dd>
-  <dt>event</dt><dd><p>observed number of events</p></dd>
-  <dt>expected</dt><dd><p>expected number of events (present only if a
-  <code>ratetable</code> term is present)</p></dd>
+<dt>n</dt><dd><p>number of subjects contributing time</p></dd>
+<dt>event</dt><dd><p>observed number of events</p></dd>
+<dt>expected</dt><dd><p>expected number of events (present only if a
+<code>ratetable</code> term is present)</p></dd>
 
 If the data.frame = TRUE argument is supplied to pyears,
 this is simply the contents of x$data.
 
 glance returns a one-row data frame with
-  <dt>total</dt><dd><p>total number of person-years tabulated</p></dd>
-  <dt>offtable</dt><dd><p>total number of person-years off table</p></dd>
+<dt>total</dt><dd><p>total number of person-years tabulated</p></dd>
+<dt>offtable</dt><dd><p>total number of person-years off table</p></dd>
 
 This contains the values printed by summary.pyears.
 

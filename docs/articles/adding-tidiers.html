@@ -85,7 +85,7 @@
     <div class="page-header toc-ignore">
       <h1>Adding tidiers to broom</h1>
             
-            <h4 class="date">2018-06-08</h4>
+            <h4 class="date">2018-06-25</h4>
       
       <small class="dont-index">Source: <a href="http://github.com/tidyverse/broom/blob/master/vignettes/adding-tidiers.Rmd"><code>vignettes/adding-tidiers.Rmd</code></a></small>
       <div class="hidden name"><code>adding-tidiers.Rmd</code></div>
@@ -128,6 +128,16 @@
 </li>
 </ul>
 <p>We will keep you updated as we work towards a final solution.</p>
+</div>
+</div>
+<div id="implementing-new-tiders" class="section level1">
+<h1 class="hasAnchor">
+<a href="#implementing-new-tiders" class="anchor"></a>Implementing new tiders</h1>
+<p>NOTE: okay to write <code>tidyverse</code> code to tidy and wrap it in a function. encouraged, in fact.</p>
+<div id="helper-functions-you-should-know-about" class="section level2">
+<h2 class="hasAnchor">
+<a href="#helper-functions-you-should-know-about" class="anchor"></a>Helper functions you should know about</h2>
+<p><code>finish_glance</code> <code>augment_columns</code> <code>validate_augment_input</code> <code>fix_data_frame</code></p>
 <!-- - TODO: Helper functions that you should be aware of and use -->
 </div>
 </div>
@@ -135,6 +145,8 @@
 <h1 class="hasAnchor">
 <a href="#documenting-new-tidiers" class="anchor"></a>Documenting new tidiers</h1>
 <p>All new tidiers should be fully documented following the <a href="http://style.tidyverse.org/code-documentation.html">tidyverse code documentation guidelines</a>. Documentation should use full sentences with appropriate punctation. Documentation should also contain at least one but potentially several examples of how the tidiers can be used.</p>
+<p>Documentation make use of <a href="https://cran.r-project.org/web/packages/roxygen2/vignettes/markdown.html"><code>rmarkdown</code></a>.</p>
+<p>They’re be a major overhaul of documentation later this summer, at which point this portion of the vignette will also get some major updates.</p>
 </div>
 <div id="testing-new-tidiers" class="section level1">
 <h1 class="hasAnchor">
@@ -143,26 +155,48 @@
 <h2 class="hasAnchor">
 <a href="#basic-checks" class="anchor"></a>Basic checks</h2>
 <p>All <code>tidy</code> methods should <code>check_tidy</code>, all <code>glance</code> methods should pass <code>check_glance</code> and all <code>augment</code> methods should pass <code>check_augment</code>. That is, your test should include:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">t &lt;-<span class="st"> </span><span class="kw"><a href="../reference/tidy.html">tidy</a></span>(object)
-g &lt;-<span class="st"> </span><span class="kw"><a href="../reference/glance.html">glance</a></span>(object)
-a &lt;-<span class="st"> </span><span class="kw"><a href="../reference/augment.html">augment</a></span>(object)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">td &lt;-<span class="st"> </span><span class="kw"><a href="../reference/tidy.html">tidy</a></span>(object)
+gl &lt;-<span class="st"> </span><span class="kw"><a href="../reference/glance.html">glance</a></span>(object)
+au &lt;-<span class="st"> </span><span class="kw"><a href="../reference/augment.html">augment</a></span>(object)
 
-<span class="kw">check_tidy</span>(t)
-<span class="kw">check_glance</span>(g)
-<span class="kw">check_augment</span>(a)</code></pre></div>
+<span class="kw">check_tidy</span>(td)
+<span class="kw">check_glance</span>(gl)
+<span class="kw">check_augment</span>(au)</code></pre></div>
+<p>If any of your tests use random number generation, you should call <code>set.seed()</code> in the body of the test.</p>
+<p>In general, we prefer informative errors to magical behaviors or untested success.</p>
+</div>
+<div id="more-complete-checks" class="section level2">
+<h2 class="hasAnchor">
+<a href="#more-complete-checks" class="anchor"></a>More complete checks</h2>
+<ul>
+<li>You can verify that your change passes existing tests with <code><a href="http://www.rdocumentation.org/packages/devtools/topics/test">devtools::test()</a></code>
+<ul>
+<li>For R &lt; 3.5.0, the number of packages used in the tests exceeds the number R can load. To change this on R 3.4.0 and above, set the environment variable R_MAX_NUM_DLLS to 150. To change this on R &lt; 3.4.0, you would have to recompile R.</li>
+<li>For R ≥ 3.5.0, issue has been fixed.</li>
+</ul>
+</li>
+</ul>
 </div>
 <div id="package-dependencies" class="section level2">
 <h2 class="hasAnchor">
 <a href="#package-dependencies" class="anchor"></a>Package dependencies</h2>
-<p>In order to test your tidiers, you may need to add <code>your_package</code> to the <strong>Suggests</strong> section of broom’s DESCRIPTION.</p>
+<ul>
+<li>In order to test your tidiers, you may need to add <code>your_package</code> to the <strong>Suggests</strong> section of broom’s DESCRIPTION.</li>
+<li>You should then use <code>skip_if_not_installed("my_package")</code> at the beginning of any test that uses <code>my_package</code>.</li>
+<li>Note that testing broom requires a lot of packages. You can install them all with <code><a href="http://www.rdocumentation.org/packages/devtools/topics/install_github">devtools::install_github("tidyverse/broom", dependencies = TRUE)</a></code>
+</li>
+</ul>
 <p>We are currently in the process of developing a new set of tests for tidying methods. Recommendations on how to test your tidiers will appear here soon.</p>
-<!-- requireNamespace(package, quietly = TRUE)??? -->
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># </span><span class="al">TODO</span><span class="co">: example tests</span></code></pre></div>
 <p>At the moment, pull requests must pass the AppVeyor build to be added to <code>broom</code>. It is okay if the Travis CI build times out.</p>
+<!-- TODO: guarding against suggested packages in Examples -->
 </div>
 <div id="catching-edge-cases" class="section level2">
 <h2 class="hasAnchor">
 <a href="#catching-edge-cases" class="anchor"></a>Catching edge cases</h2>
-<p>Many modelling function allow users to specify a variety of options. For example, <code>glm</code> allows various response types via the <code>family</code> argument. Good tests for <code>glm</code> tidying methods would test tidiers on <code>glm</code> objects fit for all acceptable values of <code>family</code>.</p>
+<p>You should test new tidiers on a representative set of <code>my_object</code> objects. At a minimum, you should have a test for each distinct type of fit that appears in the examples for a particular model (if we working with <code><a href="http://www.rdocumentation.org/packages/stats/topics/arima">stats::arima</a></code> models, the tidiers should work for seasonal and non-seasonal models).</p>
+<p>It’s important to test your tidiers for fits estimated with different algorithms (i.e. <code><a href="http://www.rdocumentation.org/packages/stats/topics/arima">stats::arima</a></code> tidier should be tested for <code>method = "CSS-ML",</code>method = “ML” and <code>method = "ML"</code>). As another example, good tests for <code>glm</code> tidying methods would test tidiers on <code>glm</code> objects fit for all acceptable values of <code>family</code>.</p>
+<p>In short: be sure that you’ve tested your tidiers on models fit with all the major modelling options (both statistical options, and estimation options).</p>
 </div>
 </div>
 <div id="before-submitting-your-pull-request" class="section level1">
@@ -170,13 +204,11 @@ a &lt;-<span class="st"> </span><span class="kw"><a href="../reference/augment.h
 <a href="#before-submitting-your-pull-request" class="anchor"></a>Before submitting your pull request</h1>
 <ul>
 <li>Check that your PR contains a big picture summary of what you’ve done and a brief example usage in the PR text</li>
-<li>If you know how, squash your PR into a single commit. If you don’t know how, don’t worry about it. <!-- (TODO: add link on how to do this) -->
-</li>
 <li>Make sure that you have run and passed:
 <ul>
+<li><code><a href="http://www.rdocumentation.org/packages/devtools/topics/check">devtools::check()</a></code></li>
 <li><code><a href="http://www.rdocumentation.org/packages/devtools/topics/spell_check">devtools::spell_check()</a></code></li>
 <li><code><a href="http://www.rdocumentation.org/packages/goodpractice/topics/gp">goodpractice::gp()</a></code></li>
-<li>R CMD Check</li>
 </ul>
 </li>
 <li>Run <code><a href="http://www.rdocumentation.org/packages/devtools/topics/document">devtools::document()</a></code> but <strong>do not</strong> run <code><a href="http://pkgdown.r-lib.org/reference/build_site.html">pkgdown::build_site()</a></code> unless requested to.</li>
@@ -202,14 +234,19 @@ a &lt;-<span class="st"> </span><span class="kw"><a href="../reference/augment.h
 <a href="#glance" class="anchor"></a><code>glance</code>
 </h2>
 <p>The <code><a href="../reference/glance.html">glance(x, ...)</a></code> method accepts a model object <code>x</code> and returns a tibble with exactly one row containing model level summary information.</p>
-<p>The summary should not include the name of the modelling function or any arguments given to the modelling function. For example, <code><a href="../reference/glance.html">glance(glm_object)</a></code> does not contain a <code>family</code> column.</p>
-<p>In some cases, you may wish to provide model level diagnostics not returned by the original object. If these are easy to compute, feel free to add them. However, <code>broom</code> is not an appropriate place to implement complex or time consuming statistical calculations.</p>
-<p><code>glance</code> should always return the same columns in the same order for an object <code>x</code> of class <code>my_object</code>. If a summary metric such as <code>AIC</code> is not defined in certain circumstances, use <code>NA</code>.</p>
+<ul>
+<li><p><code>glance</code> should return statistical summaries measures only. Mostly this means that <code>glance</code> should not return convergence information about a model. This is because we would like to encourage a modelling workflow with distinct steps for convergence and statistical diagnostics. <code>broom</code> at this time is focused on the statistical diagnostics only.</p></li>
+<li><p>Output should not include the name of the modelling function or any arguments given to the modelling function. For example, <code><a href="../reference/glance.html">glance(glm_object)</a></code> does not contain a <code>family</code> column.</p></li>
+<li><p>In some cases, you may wish to provide model level diagnostics not returned by the original object. If these are easy to compute, feel free to add them. However, <code>broom</code> is not an appropriate place to implement complex or time consuming statistical calculations.</p></li>
+<li><p><code>glance</code> should always return the same columns in the same order for an object <code>x</code> of class <code>my_object</code>. If a summary metric such as <code>AIC</code> is not defined in certain circumstances, use <code>NA</code>.</p></li>
+</ul>
 </div>
 <div id="augment" class="section level2">
 <h2 class="hasAnchor">
 <a href="#augment" class="anchor"></a><code>augment</code>
 </h2>
+<p>UPDATES to make: - <code>data</code> argument should be exactly the original data if possible. no subset, no missing columns. - warnings when <code>data</code> is not quite right - TODO: as check_tibble test for <code>newdata</code> - default argument for <code>newdata</code> must be <code>NULL</code>. test this. if have a <code>newdata</code> argument should have a <code>data</code> argument. test for this. - ignore <code>data</code> if <code>newdata</code> specified with a warning - <code>data</code> must have a default argument so that <code><a href="../reference/augment.html">augment(fit)</a></code> just works, and then this should give an error if the user actually must specify <code>data</code>. - note about <code>data = model.frame(x)</code> being a good default - augment needs to work when <code>newdata</code> has missing values - UPCOMING: try to add a <code>.resid</code> column for <code>newdata</code>, but need a good way to get the name of the response column first</p>
+<p>difficult to tell when <code>data</code> has been passed of when just have a default like <code><a href="http://www.rdocumentation.org/packages/stats/topics/model.frame">stats::model.frame(x)</a></code></p>
 <p>The <code><a href="../reference/augment.html">augment(x, data = NULL, ...)</a></code> method accepts a model object and optionally a data frame <code>data</code> and adds columns of observation level information to <code>data</code>. <code>augment</code> returns a <code>tibble</code> with the same number of rows as <code>data</code>.</p>
 <p>The <code>data</code> argument can be any of the following:</p>
 <ul>
@@ -222,36 +259,26 @@ a &lt;-<span class="st"> </span><span class="kw"><a href="../reference/augment.h
 <p>Many <code>augment</code> methods will also provide an optional <code>newdata</code> argument that should also default to <code>NULL</code>. Users should only ever specify one of <code>data</code> or <code>newdata</code>. Providing both <code>data</code> and <code>newdata</code> should result in an error. <code>newdata</code> should accept both <code>data.frame</code>s and <code>tibble</code>s and should be tested with both.</p>
 <p>Data given to the <code>data</code> argument must have both the original predictors and the original response. Data given to the <code>newdata</code> argument only needs to have the original predictors. This is important because there may be important information associated with training data that is not associated with test data, for example, leverages (<code>.hat</code> below) in the case in linear regression:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">model &lt;-<span class="st"> </span><span class="kw">lm</span>(speed <span class="op">~</span><span class="st"> </span>dist, <span class="dt">data =</span> cars)
-<span class="kw">as_tibble</span>(<span class="kw"><a href="../reference/augment.html">augment</a></span>(model, <span class="dt">data =</span> cars))
-<span class="co">#&gt; # A tibble: 50 x 9</span>
-<span class="co">#&gt;    speed  dist .fitted .se.fit  .resid   .hat .sigma   .cooksd .std.resid</span>
-<span class="co">#&gt;    &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;     &lt;dbl&gt;      &lt;dbl&gt;</span>
-<span class="co">#&gt;  1     4     2    8.62   0.844 -4.62   0.0716   3.11 0.0888       -1.52  </span>
-<span class="co">#&gt;  2     4    10    9.94   0.729 -5.94   0.0534   3.06 0.106        -1.93  </span>
-<span class="co">#&gt;  3     7     4    8.95   0.815 -1.95   0.0667   3.18 0.0146       -0.638 </span>
-<span class="co">#&gt;  4     7    22   11.9    0.578 -4.93   0.0335   3.10 0.0437       -1.59  </span>
-<span class="co">#&gt;  5     8    16   10.9    0.650 -2.93   0.0424   3.16 0.0200       -0.950 </span>
-<span class="co">#&gt;  6     9    10    9.94   0.729 -0.940  0.0534   3.19 0.00264      -0.306 </span>
-<span class="co">#&gt;  7    10    18   11.3    0.625 -1.26   0.0392   3.18 0.00340      -0.409 </span>
-<span class="co">#&gt;  8    10    26   12.6    0.536 -2.59   0.0289   3.17 0.0103       -0.832 </span>
-<span class="co">#&gt;  9    10    34   13.9    0.473 -3.91   0.0225   3.14 0.0181       -1.25  </span>
-<span class="co">#&gt; 10    11    17   11.1    0.637 -0.0986 0.0407   3.19 0.0000216    -0.0319</span>
-<span class="co">#&gt; # ... with 40 more rows</span>
-<span class="kw">as_tibble</span>(<span class="kw"><a href="../reference/augment.html">augment</a></span>(model, <span class="dt">newdata =</span> cars))
-<span class="co">#&gt; # A tibble: 50 x 4</span>
-<span class="co">#&gt;    speed  dist .fitted .se.fit</span>
-<span class="co">#&gt;    &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;</span>
-<span class="co">#&gt;  1     4     2    8.62   0.844</span>
-<span class="co">#&gt;  2     4    10    9.94   0.729</span>
-<span class="co">#&gt;  3     7     4    8.95   0.815</span>
-<span class="co">#&gt;  4     7    22   11.9    0.578</span>
-<span class="co">#&gt;  5     8    16   10.9    0.650</span>
-<span class="co">#&gt;  6     9    10    9.94   0.729</span>
-<span class="co">#&gt;  7    10    18   11.3    0.625</span>
-<span class="co">#&gt;  8    10    26   12.6    0.536</span>
-<span class="co">#&gt;  9    10    34   13.9    0.473</span>
-<span class="co">#&gt; 10    11    17   11.1    0.637</span>
-<span class="co">#&gt; # ... with 40 more rows</span></code></pre></div>
+<span class="kw">head</span>(<span class="kw"><a href="../reference/augment.html">augment</a></span>(model, <span class="dt">data =</span> cars))
+<span class="co">#&gt; # A tibble: 6 x 9</span>
+<span class="co">#&gt;   speed  dist .fitted .se.fit .resid   .hat .sigma .cooksd .std.resid</span>
+<span class="co">#&gt;   &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;      &lt;dbl&gt;</span>
+<span class="co">#&gt; 1    4.    2.    8.62   0.844 -4.62  0.0716   3.11 0.0888      -1.52 </span>
+<span class="co">#&gt; 2    4.   10.    9.94   0.729 -5.94  0.0534   3.06 0.106       -1.93 </span>
+<span class="co">#&gt; 3    7.    4.    8.95   0.815 -1.95  0.0667   3.18 0.0146      -0.638</span>
+<span class="co">#&gt; 4    7.   22.   11.9    0.578 -4.93  0.0335   3.10 0.0437      -1.59 </span>
+<span class="co">#&gt; 5    8.   16.   10.9    0.650 -2.93  0.0424   3.16 0.0200      -0.950</span>
+<span class="co">#&gt; 6    9.   10.    9.94   0.729 -0.940 0.0534   3.19 0.00264     -0.306</span>
+<span class="kw">head</span>(<span class="kw"><a href="../reference/augment.html">augment</a></span>(model, <span class="dt">newdata =</span> cars))
+<span class="co">#&gt; # A tibble: 6 x 4</span>
+<span class="co">#&gt;   speed  dist .fitted .se.fit</span>
+<span class="co">#&gt;   &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;</span>
+<span class="co">#&gt; 1    4.    2.    8.62   0.844</span>
+<span class="co">#&gt; 2    4.   10.    9.94   0.729</span>
+<span class="co">#&gt; 3    7.    4.    8.95   0.815</span>
+<span class="co">#&gt; 4    7.   22.   11.9    0.578</span>
+<span class="co">#&gt; 5    8.   16.   10.9    0.650</span>
+<span class="co">#&gt; 6    9.   10.    9.94   0.729</span></code></pre></div>
 <p>This means that many <code><a href="../reference/augment.html">augment(model, data = original_data)</a></code> should provide <code>.fitted</code> and <code>.resid</code> columns in most cases, whereas <code><a href="../reference/augment.html">augment(model, data = test_data)</a></code> only needs to a <code>.fitted</code> column, even if the response is present in <code>test_data</code>. While it would be nice to provide a <code>.resid</code> column in this case, determining the response variable from a formula specification is often a brittle process.</p>
 <p>If the <code>data</code> or <code>newdata</code> is specified as a <code>data.frame</code> with rownames, <code>augment</code> should return them in a column called <code>.rownames</code>.</p>
 <p>For observations where no fitted values or summaries are available (where there’s missing data, for example) return <code>NA</code>.</p>
@@ -275,7 +302,11 @@ a &lt;-<span class="st"> </span><span class="kw"><a href="../reference/augment.h
 <p><strong>Common arguments to tidy methods</strong>:</p>
 <ul>
 <li>
-<code>conf.int</code>: logical indicating whether or not to calculate confidence/credible intervals</li>
+<code>conf.int</code>: logical indicating whether or not to calculate confidence/credible intervals. should default to <code>FALSE</code>
+</li>
+</ul>
+<p>TODO: set all default conf.int to <code>FALSE</code> (why: can be slow) explain the glossary and put it into a vignette</p>
+<ul>
 <li>
 <code>conf.level</code>: the confidence level to use for the interval when <code>conf.int = TRUE</code>
 </li>
@@ -285,46 +316,6 @@ a &lt;-<span class="st"> </span><span class="kw"><a href="../reference/augment.h
 <code>quick</code>: logical indicating whether to use a faster <code>tidy</code> method that returns less information about each component, typically only <code>term</code> and <code>estimate</code> columns</li>
 </ul>
 </div>
-</div>
-<div id="glossary" class="section level1">
-<h1 class="hasAnchor">
-<a href="#glossary" class="anchor"></a>Glossary</h1>
-<p>The following are common column names output from tidiers. You should use them when implementing new tidiers. <strong>More details to come, this is incomplete at the moment.</strong></p>
-<ul>
-<li>
-<code>term</code>: the term in a regression or model that is being estimated.</li>
-<li>
-<code>p.value</code>: the p-value associated with a test statistic</li>
-<li>
-<code>statistic</code>: a test statistic, usually the one used to compute the p-value. Combining these across many sub-groups is a reliable way to perform (e.g.) bootstrap hypothesis testing</li>
-<li>
-<code>estimate</code>: estimate of an effect size, slope, or other value</li>
-<li>
-<code>std.error</code>: standard error</li>
-<li>
-<code>conf.low</code>: the low end of a confidence interval on the <code>estimate</code>
-</li>
-<li>
-<code>conf.high</code>: the high end of a confidence interval on the <code>estimate</code>
-</li>
-<li>
-<code>df</code>: degrees of freedom</li>
-<li>
-<code>r.squared</code> the fraction of variance explained by the model</li>
-<li>
-<code>adj.r.squared</code> R^2 adjusted based on the degrees of freedom</li>
-<li>
-<code>sigma</code> the square root of the estimated variance of the residuals</li>
-<li><code>df</code></li>
-<li><code>logLik</code></li>
-<li><code>AIC</code></li>
-<li><code>BIC</code></li>
-<li><code>deviance</code></li>
-<li><code>df.residual</code></li>
-<li><code>.fitted</code></li>
-<li><code>.resid</code></li>
-<li><code>.cluster</code></li>
-</ul>
 </div>
   </div>
 
@@ -338,10 +329,16 @@ a &lt;-<span class="st"> </span><span class="kw"><a href="../reference/augment.h
 <li><a href="#which-package-does-my-tidier-belong-in">Which package does my tidier belong in?</a></li>
       </ul>
 </li>
+      <li>
+<a href="#implementing-new-tiders">Implementing new tiders</a><ul class="nav nav-pills nav-stacked">
+<li><a href="#helper-functions-you-should-know-about">Helper functions you should know about</a></li>
+      </ul>
+</li>
       <li><a href="#documenting-new-tidiers">Documenting new tidiers</a></li>
       <li>
 <a href="#testing-new-tidiers">Testing new tidiers</a><ul class="nav nav-pills nav-stacked">
 <li><a href="#basic-checks">Basic checks</a></li>
+      <li><a href="#more-complete-checks">More complete checks</a></li>
       <li><a href="#package-dependencies">Package dependencies</a></li>
       <li><a href="#catching-edge-cases">Catching edge cases</a></li>
       </ul>
@@ -354,7 +351,6 @@ a &lt;-<span class="st"> </span><span class="kw"><a href="../reference/augment.h
       <li><a href="#tidy"><code>tidy</code></a></li>
       </ul>
 </li>
-      <li><a href="#glossary">Glossary</a></li>
       </ul>
 </div>
       </div>

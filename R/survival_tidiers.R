@@ -292,8 +292,8 @@ tidy.coxph <- function(x, exponentiate = FALSE, conf.int = TRUE, conf.level = .9
 augment.coxph <- function(x, data = stats::model.frame(x), newdata,
                           type.predict = "lp", type.residuals = "martingale",
                           ...) {
-  data <- as.data.frame(data) # hack since tibbles are strict
-  ret <- fix_data_frame(data, newcol = ".rownames")
+  # punt on rownames and tibble out until tills support Surv objects
+  # TODO: come back to this. don't forget rownames.
   augment_columns(x, data, newdata,
     type.predict = type.predict,
     type.residuals = type.residuals
@@ -690,7 +690,8 @@ tidy.survreg <- function(x, conf.level = .95, ...) {
 augment.survreg <- function(x, data = stats::model.frame(x), newdata,
                             type.predict = "response",
                             type.residuals = "response", ...) {
-  # TODO: return tibble once matrix columns are supported
+  # punt on tibbles until they play well with Surv objects
+  # TODO: come back to this
   augment_columns(x, data, newdata,
     type.predict = type.predict,
     type.residuals = type.residuals

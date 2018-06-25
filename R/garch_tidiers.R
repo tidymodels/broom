@@ -7,8 +7,6 @@
 #' @param method `character` which specifies the hypothesis test to be shown in `glance`.
 #' The `garch` function reports 2 hypothesis tests: Jarque-Bera to residuals
 #' and Box-Ljung to squared residuals.
-#' @param data original data (used with `augment`)
-#' @param newdata new data provided for predition use (used with `augment`)
 #' @param ... extra arguments (not used)
 #'
 #' @return A `data.frame` with one row for each coefficient, with five columns:
@@ -27,11 +25,9 @@
 #'     dax.garch
 #'     tidy(dax.garch)
 #'     glance(dax.garch)
-#'     head(augment(dax.garch, dax))
 #'     smp1 = window(dax, end = c(1997, frequency(dax)))
 #'     smp2 = window(dax, start = c(1998, 1))
 #'     dax.garch <- garch(smp1)
-#'     augment(dax.garch, newdata = smp2)
 #' }
 #'
 #' @name garch_tidiers

@@ -1,10 +1,11 @@
 broom 0.4.4.9000
 -----------
 
+* Deprecated tidiers for vector and matrices
 * `bootstrap()` and data frame tidiers have been deprecated
+* Tidiers now return tibbles
 * New vignettes on the available tidying methods, contributing new tidiers
 * Updated old vignettes to use `map/unnest` workflow rather than `rowwise/do`
-* Bump version number
 * Added `augment` method for chi-squared tests
 * Added tidiers for ordinal models: `clm` and `clmm` (ordinal), `polr` (MASS), `svyolr` (survey)
 * Added tidiers for `Kendall`, `MannKendall` and `SeasonalMannKendall` from the Kendall package (thanks to #285 from Jorge Cimentada)

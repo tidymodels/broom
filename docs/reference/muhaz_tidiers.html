@@ -109,7 +109,7 @@
     <div class="ref-description">
     
     <p>These methods tidy the output of <code>muhaz</code> objects as returned by the
-<code><a href='http://www.rdocumentation.org/packages/muhaz/topics/muhaz'>muhaz</a></code> function, which provides kernel based
+<code><a href='http://www.rdocumentation.org/packages/muhaz/topics/muhaz'>muhaz::muhaz()</a></code> function, which provides kernel based
 non-parametric hazard rate estimators.</p>
     
     </div>
@@ -141,10 +141,10 @@ structure depends on the method chosen.</p>
 <code>time</code> at which the hazard rate was estimated and <code>estimate</code>.</p>
 <p><code>glance.muhaz</code> returns a one-row data.frame with the columns</p>
 <dt>nobs</dt><dd><p>Number of observations used for estimation</p></dd>
-  <dt>min.time</dt><dd><p>The minimum observed event or censoring time</p></dd>
-  <dt>max.time</dt><dd><p>The maximum observed event or censoring time</p></dd>
-  <dt>min.harzard</dt><dd><p>Minimal estimated hazard</p></dd>
-  <dt>max.hazard</dt><dd><p>Maximal estimated hazard</p></dd>
+<dt>min.time</dt><dd><p>The minimum observed event or censoring time</p></dd>
+<dt>max.time</dt><dd><p>The maximum observed event or censoring time</p></dd>
+<dt>min.harzard</dt><dd><p>Minimal estimated hazard</p></dd>
+<dt>max.hazard</dt><dd><p>Maximal estimated hazard</p></dd>
 
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
@@ -162,7 +162,7 @@ available for <code>muhaz</code> objects.</p>
 }</div><div class='output co'>#&gt; # A tibble: 1 x 5
 #&gt;    nobs min.time max.time min.hazard max.hazard
 #&gt;   &lt;int&gt;    &lt;dbl&gt;    &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt;
-#&gt; 1    26        0      744   0.000212    0.00111</div><div class='input'>
+#&gt; 1    26       0.     744.   0.000212    0.00111</div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

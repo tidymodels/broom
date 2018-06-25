@@ -180,30 +180,29 @@ The structure depends on the method chosen.</p>
 with groups depending on the <code>effects</code> parameter.
 It contains the columns</p>
 <dt>group</dt><dd><p>the group within which the random effect is being estimated: <code>"fixed"</code> for fixed effects</p></dd>
-  <dt>level</dt><dd><p>level within group (<code>NA</code> except for modes)</p></dd>
-  <dt>term</dt><dd><p>term being estimated</p></dd>
-  <dt>estimate</dt><dd><p>estimated coefficient</p></dd>
-  <dt>std.error</dt><dd><p>standard error</p></dd>
-  <dt>statistic</dt><dd><p>t- or Z-statistic (<code>NA</code> for modes)</p></dd>
-  <dt>p.value</dt><dd><p>P-value computed from t-statistic (may be missing/NA)</p></dd>
+<dt>level</dt><dd><p>level within group (<code>NA</code> except for modes)</p></dd>
+<dt>term</dt><dd><p>term being estimated</p></dd>
+<dt>estimate</dt><dd><p>estimated coefficient</p></dd>
+<dt>std.error</dt><dd><p>standard error</p></dd>
+<dt>statistic</dt><dd><p>t- or Z-statistic (<code>NA</code> for modes)</p></dd>
+<dt>p.value</dt><dd><p>P-value computed from t-statistic (may be missing/NA)</p></dd>
 
 augment returns one row for each original observation,
 with columns (each prepended by a .) added. Included are the columns
-  <dt>.fitted</dt><dd><p>predicted values</p></dd>
-  <dt>.resid</dt><dd><p>residuals</p></dd>
-  <dt>.fixed</dt><dd><p>predicted values with no random effects</p></dd>
+<dt>.fitted</dt><dd><p>predicted values</p></dd>
+<dt>.resid</dt><dd><p>residuals</p></dd>
+<dt>.fixed</dt><dd><p>predicted values with no random effects</p></dd>
 
 Also added for "merMod" objects, but not for "mer" objects,
 are values from the response object within the model (of type
-lmResp, glmResp, nlsResp, etc). These include ".mu",
-".offset", ".sqrtXwt", ".sqrtrwt", ".eta".
+lmResp, glmResp, nlsResp, etc). These include ".mu", ".offset", ".sqrtXwt", ".sqrtrwt", ".eta".
 
 glance returns one row with the columns
-  <dt>sigma</dt><dd><p>the square root of the estimated residual variance</p></dd>
-  <dt>logLik</dt><dd><p>the data's log-likelihood under the model</p></dd>
-  <dt>AIC</dt><dd><p>the Akaike Information Criterion</p></dd>
-  <dt>BIC</dt><dd><p>the Bayesian Information Criterion</p></dd>
-  <dt>deviance</dt><dd><p>deviance</p></dd>
+<dt>sigma</dt><dd><p>the square root of the estimated residual variance</p></dd>
+<dt>logLik</dt><dd><p>the data's log-likelihood under the model</p></dd>
+<dt>AIC</dt><dd><p>the Akaike Information Criterion</p></dd>
+<dt>BIC</dt><dd><p>the Bayesian Information Criterion</p></dd>
+<dt>deviance</dt><dd><p>deviance</p></dd>
 
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
@@ -249,15 +248,17 @@ warning is raised and the incomplete rows are dropped.</p>
     <span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>nm1</span>, <span class='kw'>effects</span> <span class='kw'>=</span> <span class='st'>"fixed"</span>)
     <span class='fu'>head</span>(<span class='fu'><a href='augment.html'>augment</a></span>(<span class='no'>nm1</span>, <span class='no'>Orange</span>))
     <span class='fu'><a href='glance.html'>glance</a></span>(<span class='no'>nm1</span>)
-}</div><div class='output co'>#&gt; <span class='message'>Le chargement a nécessité le package : lme4</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Attachement du package : 'lme4'</span></div><div class='output co'>#&gt; <span class='message'>The following object is masked from 'package:gmm':</span>
+}</div><div class='output co'>#&gt; <span class='message'>Loading required package: lme4</span></div><div class='output co'>#&gt; <span class='message'></span>
+#&gt; <span class='message'>Attaching package: 'lme4'</span></div><div class='output co'>#&gt; <span class='message'>The following object is masked from 'package:gmm':</span>
 #&gt; <span class='message'></span>
 #&gt; <span class='message'>    checkConv</span></div><div class='output co'>#&gt; <span class='message'>Computing profile confidence intervals ...</span></div><div class='output co'>#&gt; <span class='warning'>Warning: variance-covariance matrix computed from finite-difference Hessian is</span>
 #&gt; <span class='warning'>not positive definite or contains NA values: falling back to var-cov estimated from RX</span></div><div class='output co'>#&gt; <span class='warning'>Warning: variance-covariance matrix computed from finite-difference Hessian is</span>
 #&gt; <span class='warning'>not positive definite or contains NA values: falling back to var-cov estimated from RX</span></div><div class='output co'>#&gt; <span class='warning'>Warning: variance-covariance matrix computed from finite-difference Hessian is</span>
 #&gt; <span class='warning'>not positive definite or contains NA values: falling back to var-cov estimated from RX</span></div><div class='output co'>#&gt; <span class='warning'>Warning: variance-covariance matrix computed from finite-difference Hessian is</span>
-#&gt; <span class='warning'>not positive definite or contains NA values: falling back to var-cov estimated from RX</span></div><div class='output co'>#&gt; <span class='warning'>Warning: le nombre d'objets à remplacer n'est pas multiple de la taille du remplacement</span></div><div class='output co'>#&gt;      sigma    logLik      AIC      BIC deviance df.residual
-#&gt; 1 7.843009 -131.5719 273.1438 280.9205 263.1438          30</div></pre>
+#&gt; <span class='warning'>not positive definite or contains NA values: falling back to var-cov estimated from RX</span></div><div class='output co'>#&gt; <span class='warning'>Warning: number of items to replace is not a multiple of replacement length</span></div><div class='output co'>#&gt; # A tibble: 1 x 6
+#&gt;   sigma logLik   AIC   BIC deviance df.residual
+#&gt;   &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;       &lt;int&gt;
+#&gt; 1  7.84  -132.  273.  281.     263.          30</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

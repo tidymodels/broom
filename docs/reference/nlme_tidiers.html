@@ -157,30 +157,30 @@ The structure depends on the method chosen.</p>
 random or fixed depending on the <code>effects</code> parameter. If
 <code>effects = "random"</code>, it contains the columns</p>
 <dt>group</dt><dd><p>the group within which the random effect is being estimated</p></dd>
-  <dt>level</dt><dd><p>level within group</p></dd>
-  <dt>term</dt><dd><p>term being estimated</p></dd>
-  <dt>estimate</dt><dd><p>estimated coefficient</p></dd>
+<dt>level</dt><dd><p>level within group</p></dd>
+<dt>term</dt><dd><p>term being estimated</p></dd>
+<dt>estimate</dt><dd><p>estimated coefficient</p></dd>
 
 If effects="fixed", tidy returns the columns
-  <dt>term</dt><dd><p>fixed term being estimated</p></dd>
-  <dt>estimate</dt><dd><p>estimate of fixed effect</p></dd>
-  <dt>std.error</dt><dd><p>standard error</p></dd>
-  <dt>statistic</dt><dd><p>t-statistic</p></dd>
-  <dt>p.value</dt><dd><p>P-value computed from t-statistic</p></dd>
+<dt>term</dt><dd><p>fixed term being estimated</p></dd>
+<dt>estimate</dt><dd><p>estimate of fixed effect</p></dd>
+<dt>std.error</dt><dd><p>standard error</p></dd>
+<dt>statistic</dt><dd><p>t-statistic</p></dd>
+<dt>p.value</dt><dd><p>P-value computed from t-statistic</p></dd>
 
 augment returns one row for each original observation,
 with columns (each prepended by a .) added. Included are the columns
-  <dt>.fitted</dt><dd><p>predicted values</p></dd>
-  <dt>.resid</dt><dd><p>residuals</p></dd>
-  <dt>.fixed</dt><dd><p>predicted values with no random effects</p></dd>
+<dt>.fitted</dt><dd><p>predicted values</p></dd>
+<dt>.resid</dt><dd><p>residuals</p></dd>
+<dt>.fixed</dt><dd><p>predicted values with no random effects</p></dd>
 
 glance returns one row with the columns
-  <dt>sigma</dt><dd><p>the square root of the estimated residual variance</p></dd>
-  <dt>logLik</dt><dd><p>the data's log-likelihood under the model</p></dd>
-  <dt>AIC</dt><dd><p>the Akaike Information Criterion</p></dd>
-  <dt>BIC</dt><dd><p>the Bayesian Information Criterion</p></dd>
-  <dt>deviance</dt><dd><p>returned as NA. To quote Brian Ripley on R-help:
- McCullagh &amp; Nelder (1989) would be the authoritative reference, but the 1982
+<dt>sigma</dt><dd><p>the square root of the estimated residual variance</p></dd>
+<dt>logLik</dt><dd><p>the data's log-likelihood under the model</p></dd>
+<dt>AIC</dt><dd><p>the Akaike Information Criterion</p></dd>
+<dt>BIC</dt><dd><p>the Bayesian Information Criterion</p></dd>
+<dt>deviance</dt><dd><p>returned as NA. To quote Brian Ripley on R-help:
+McCullagh &amp; Nelder (1989) would be the authoritative reference, but the 1982
 first edition manages to use 'deviance' in three separate senses on one
 page.</p></dd>
 
@@ -222,13 +222,17 @@ warning is raised and the incomplete rows are dropped.</p>
     <span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>nm1</span>, <span class='kw'>effects</span> <span class='kw'>=</span> <span class='st'>"fixed"</span>)
     <span class='fu'>head</span>(<span class='fu'><a href='augment.html'>augment</a></span>(<span class='no'>nm1</span>, <span class='no'>Orange</span>))
     <span class='fu'><a href='glance.html'>glance</a></span>(<span class='no'>nm1</span>)
-}</div><div class='output co'>#&gt; <span class='message'>Le chargement a nécessité le package : nlme</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Attachement du package : 'nlme'</span></div><div class='output co'>#&gt; <span class='message'>The following object is masked from 'package:lme4':</span>
+}</div><div class='output co'>#&gt; <span class='message'>Loading required package: nlme</span></div><div class='output co'>#&gt; <span class='message'></span>
+#&gt; <span class='message'>Attaching package: 'nlme'</span></div><div class='output co'>#&gt; <span class='message'>The following object is masked from 'package:lme4':</span>
 #&gt; <span class='message'></span>
 #&gt; <span class='message'>    lmList</span></div><div class='output co'>#&gt; <span class='message'>The following object is masked from 'package:dplyr':</span>
 #&gt; <span class='message'></span>
-#&gt; <span class='message'>    collapse</span></div><div class='output co'>#&gt; <span class='warning'>Warning: deviance undefined for REML fit</span></div><div class='output co'>#&gt;      sigma    logLik      AIC      BIC deviance
-#&gt; 1 7.846255 -131.5846 273.1691 280.9458       NA</div><div class='input'>
+#&gt; <span class='message'>    collapse</span></div><div class='output co'>#&gt; <span class='message'>The following object is masked from 'package:broom':</span>
+#&gt; <span class='message'></span>
+#&gt; <span class='message'>    collapse</span></div><div class='output co'>#&gt; <span class='warning'>Warning: deviance undefined for REML fit</span></div><div class='output co'>#&gt; # A tibble: 1 x 5
+#&gt;   sigma logLik   AIC   BIC deviance
+#&gt;   &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;lgl&gt;   
+#&gt; 1  7.85  -132.  273.  281. NA      </div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
