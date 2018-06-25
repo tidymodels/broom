@@ -1,6 +1,7 @@
 context("survival-cch")
 
 skip_if_not_installed("survival")
+library(survival)
 
 test_that("cch tidiers work", {
   subcoh <- nwtco$in.subcohort

@@ -1,6 +1,7 @@
 context("survival-survexp")
 
 skip_if_not_installed("survival")
+library(survival)
 
 test_that("survexp tidiers work", {
   sexpfit <- suppressWarnings(

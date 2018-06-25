@@ -1,6 +1,7 @@
 context("survival-survfit")
 
 skip_if_not_installed("survival")
+library(survival)
 
 test_that("survfit tidiers work", {
   cfit <- coxph(Surv(time, status) ~ age + strata(sex), lung)

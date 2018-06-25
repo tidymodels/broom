@@ -1,7 +1,7 @@
 broom 0.4.4.9000
 -----------
 
-* Deprecated tidiers for vector and matrices
+* Deprecated tidiers for vector and matrices in favor of `tibble::as_tibble` and `tibble::enframe`
 * `bootstrap()` and data frame tidiers have been deprecated
 * Tidiers now return tibbles
 * New vignettes on the available tidying methods, contributing new tidiers

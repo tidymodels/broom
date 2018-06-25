@@ -1,6 +1,7 @@
 context("survival-pyears")
 
 skip_if_not_installed("survival")
+library(survival)
 
 test_that("pyears tidiers work", {
   temp.yr <- tcut(mgus$dxyr, 55:92, labels = as.character(55:91))

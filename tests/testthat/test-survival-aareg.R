@@ -1,6 +1,7 @@
 context("survival-aareg")
 
 skip_if_not_installed("survival")
+library(survival)
 
 test_that("aareg tidiers work regardless of dfbeta", {
   afit1 <- aareg(Surv(time, status) ~ age + sex + ph.ecog,
