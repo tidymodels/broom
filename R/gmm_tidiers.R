@@ -109,7 +109,7 @@ tidy.gmm <- function(x, conf.int = FALSE, conf.level = .95,
                      exponentiate = FALSE, quick = FALSE, ...) {
   if (quick) {
     co <- stats::coef(x)
-    ret <- data.frame(term = names(co), estimate = unname(co))
+    ret <- tibble(term = names(co), estimate = unname(co))
   } else {
     co <- stats::coef(summary(x))
 
@@ -134,7 +134,7 @@ tidy.gmm <- function(x, conf.int = FALSE, conf.level = .95,
     ret <- tidyr::separate(ret, term, c("variable", "term"), sep = "_", extra = "merge")
   }
 
-  ret
+  as_tibble(ret)
 }
 
 

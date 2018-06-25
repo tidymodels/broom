@@ -43,7 +43,7 @@ test_that("rqs tidiers work", {
   rqs_glance_error <- paste(
     "`glance` cannot handle objects of class 'rqs',",
     "i.e. models with more than one tau value. Please",
-    "use a `purrr::map`-based workflow with 'rq' models instead."
+    "use a purrr `map`-based workflow with 'rq' models instead."
   )
   
   expect_error(glance(fit), regexp = rqs_glance_error)

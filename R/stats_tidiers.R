@@ -23,7 +23,7 @@
 #'
 #' @export
 tidy.table <- function(x, ...) {
-  as.data.frame(x)
+  as_tibble(x)
 }
 
 

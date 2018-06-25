@@ -113,7 +113,7 @@ glance.rq <- function(x, ...) {
 glance.rqs <- function(x, ...) {
   stop("`glance` cannot handle objects of class 'rqs',",
     " i.e. models with more than one tau value. Please",
-    " use a `purr::map`-based workflow with 'rq' models instead.",
+    " use a purrr `map`-based workflow with 'rq' models instead.",
     call. = FALSE
   )
 }

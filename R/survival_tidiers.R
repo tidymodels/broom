@@ -292,6 +292,7 @@ tidy.coxph <- function(x, exponentiate = FALSE, conf.int = TRUE, conf.level = .9
 augment.coxph <- function(x, data = stats::model.frame(x), newdata,
                           type.predict = "lp", type.residuals = "martingale",
                           ...) {
+  data <- as.data.frame(data) # hack since tibbles are strict
   ret <- fix_data_frame(data, newcol = ".rownames")
   augment_columns(x, data, newdata,
     type.predict = type.predict,

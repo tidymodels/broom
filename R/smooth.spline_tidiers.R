@@ -50,6 +50,6 @@ augment.smooth.spline <- function(x, data = x$data, ...) {
 #' @export
 glance.smooth.spline <- function(x, ...) {
   as_tibble(
-    x[c("df", "lambda", "cv.crit", "pen.crit", "crit", "spar", "lambda")]
+    x[c("df", "lambda", "cv.crit", "pen.crit", "crit", "spar")]
   )
 }

@@ -128,7 +128,9 @@ augment.felm <- function(x, data = NULL, ...) {
   object <- lfe::getfe(x)
   if (!is.null(object)) {
     fe_list <- levels(object$fe)
-    object <- object %>% mutate(effect = as.numeric(effect)) %>% mutate(fe = as.character(fe))
+    object <- object %>% 
+      mutate(effect = as.numeric(effect)) %>%
+      mutate(fe = as.character(fe))
     length <- length(object)
     for (fe in names(x$fe)) {
       if ("xnam" %in% names(attributes(x$fe[[fe]]))) {
@@ -154,14 +156,14 @@ augment.felm <- function(x, data = NULL, ...) {
         ans <- select_(ans, .dots = c("effect", factor_name))
         names(ans) <- c(paste0(".fe.", fe), factor_name)
       }
+      
+      # hack to deal with join errors
+      data <- mutate_at(data, vars(id), as.factor)
       data <- left_join(data, ans, factor_name)
     }
   }
   as_tibble(data)
 }
-
-
-
 
 #' @rdname felm_tidiers
 #'

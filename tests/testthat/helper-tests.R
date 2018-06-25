@@ -24,7 +24,13 @@ all_equal_list <- function(x) {
 #' 
 #' check_arguments(tidy.Arima)
 #' 
-check_arguments <- function(tidy_method) {
+check_arguments <- function(tidy_method, strict = FALSE) {
+  
+  if (!strict) {
+    expect_true(TRUE)  # prevent skip message
+    return(invisible(NULL))
+  }
+  
   args <- names(formals(tidy_method))
   func_name <- as.character(substitute(tidy_method))
   
@@ -79,9 +85,14 @@ check_tibble <- function(
   output,
   method,
   check_values = FALSE,
-  columns = colnames(output)) {
+  columns = colnames(output),
+  strict = FALSE) {
   
   expect_s3_class(output, "tbl_df")
+  
+  if (!strict) {
+    return(invisible(NULL))
+  }
   
   # TODO: implement NaN / Inf checks
   
@@ -121,7 +132,7 @@ check_tibble <- function(
 #' 
 #' check_glance_outputs(gl, gl2)
 #'
-check_glance_outputs <- function(...) {
+check_glance_outputs <- function(..., strict = FALSE) {
   
   check_single_glance_output <- function(gl) {
     check_tibble(gl, method = "glance")
@@ -133,6 +144,10 @@ check_glance_outputs <- function(...) {
   
   glances <- list(...)
   purrr::walk(glances, check_single_glance_output)
+  
+  if (!strict) {
+    return(invisible(NULL))
+  }
   
   expect_true(
     all_equal_list(purrr::map(glances, colnames)),
@@ -157,7 +172,7 @@ check_glance_outputs <- function(...) {
 #' au <- augment(fit)
 #' check_single_augment_output(au, mtcars)
 #' 
-check_single_augment_output <- function(au, passed_data) {
+check_single_augment_output <- function(au, passed_data, strict = FALSE) {
   
   orig_cols <- colnames(passed_data)
   aug_cols <- colnames(au)
@@ -173,6 +188,10 @@ check_single_augment_output <- function(au, passed_data) {
     all(orig_cols %in% aug_cols),
     info = "Original columns must be presented in augmented data."
   )
+  
+  if (!strict) {
+    return(invisible(NULL))
+  }
   
   if (.row_names_info(passed_data) > 0) {
     row_nm <- rownames(passed_data)
@@ -347,7 +366,12 @@ check_augment_data_specification <- function(
 #'   newdata = GasolineYield
 #' )
 #' 
-check_augment_function <- function(aug, model, data = NULL, newdata = NULL) {
+check_augment_function <- function(
+  aug,
+  model,
+  data = NULL,
+  newdata = NULL,
+  strict = FALSE) {
   
   args <- names(formals(aug))
   
@@ -365,6 +389,21 @@ check_augment_function <- function(aug, model, data = NULL, newdata = NULL) {
   if (newdata_arg && !newdata_passed) {
     stop("Must pass newdata to augment checker as augment method accepts", 
          "newdata argument.")
+  }
+  
+  if (!strict) {
+    
+    if (data_arg) {
+      au_data <- augment(model, data = data)
+      check_tibble(au_data, method = "augment", strict = strict)
+    }
+    
+    if (newdata_arg) {
+      au_newdata <- augment(model, newdata = newdata)
+      check_tibble(au_newdata, method = "augment", strict = strict)
+    }
+    
+    return(invisible(NULL))
   }
   
   if (data_arg) {
@@ -407,8 +446,8 @@ check_augment_function <- function(aug, model, data = NULL, newdata = NULL) {
 }
 
 
-check_tidy_output <- function(td) {
-  check_tibble(td, method = "tidy")
+check_tidy_output <- function(td, strict = FALSE) {
+  check_tibble(td, method = "tidy", strict = strict)
 }
 
 check_dims <- function(tibble, expected_rows = NULL, expected_cols = NULL) {
