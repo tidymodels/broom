@@ -3,7 +3,7 @@
 .RData
 vignettes/*cache
 inst/doc
-revdep
 /.vs
 /broom.rxproj
 /broom.sln
+.DS_Store
