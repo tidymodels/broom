@@ -14,8 +14,6 @@ test_that("lavaan tidier arguments", {
 
 test_that("tidy.lavaan", {
   
-
-  
   td <- tidy(fit)
   td2 <- tidy(fit2)
   tdc <- tidy(fit2, conf.level = .999)

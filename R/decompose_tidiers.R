@@ -85,7 +85,7 @@ NULL
 #' @rdname decompose_tidiers
 #' @export
 augment.decomposed.ts <- function(x, ...) {
-  ret <- data.frame(
+  ret <- tibble(
     seasonal = as.numeric(x$seasonal),
     trend = as.numeric(x$trend),
     remainder = as.numeric(x$random)
@@ -97,7 +97,7 @@ augment.decomposed.ts <- function(x, ...) {
     as.numeric(x$x) / ret$seasonal
   }
   colnames(ret) <- paste0(".", colnames(ret))
-  ret
+  as_tibble(ret)
 }
 
 #' @rdname decompose_tidiers
@@ -106,7 +106,7 @@ augment.decomposed.ts <- function(x, ...) {
 #'
 #' @export
 augment.stl <- function(x, weights = TRUE, ...) {
-  ret <- as.data.frame(x$time.series)
+  ret <- as_tibble(x$time.series)
   ret$weight <- x$weights
   # Inspired by forecast::seasadj, this is the "deseasonalised" data:
   ret$seasadj <- ret$trend + ret$remainder

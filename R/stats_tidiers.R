@@ -186,7 +186,7 @@ tidy.spec <- function(x, ...) {
 #'
 #' @export
 tidy.TukeyHSD <- function(x, separate.levels = FALSE, ...) {
-  ret <- plyr::ldply(x, function(e) {
+  ret <- purrr::map_df(x, function(e) {
     nn <- c("estimate", "conf.low", "conf.high", "adj.p.value")
     fix_data_frame(e, nn, "comparison")
   }, .id = "term")
@@ -194,7 +194,7 @@ tidy.TukeyHSD <- function(x, separate.levels = FALSE, ...) {
   if (separate.levels) {
     ret <- tidyr::separate(ret, comparison, c("level1", "level2"), sep = "-")
   }
-  ret
+  as_tibble(ret)
 }
 
 

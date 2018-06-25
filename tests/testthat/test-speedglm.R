@@ -1,34 +1,42 @@
 context("speedglm")
 
-# test tidy, augment, glance from speedlm objects
+skip_if_not_installed("speedglm")
+library(speedglm)
 
-if (require("speedglm", quietly = TRUE)) {
-  context("speedlm tidiers")
+fit <- speedlm(mpg ~ wt, mtcars)
+fit2 <- lm(mpg ~ wt + disp, mtcars)
 
-  test_that("tidy works on speedlm", {
-    speedlmfit <- speedlm(mpg ~ wt, mtcars)
-    td <- tidy(speedlmfit)
-    check_tidy(td, exp.row = 2)
-    expect_equal(td$term, c("(Intercept)", "wt"))
+test_that("speedglm tidiers arguments", {
+  check_arguments(tidy.speedlm)
+  check_arguments(glance.speedlm)
+  check_arguments(augment.speedlm)
+})
 
-    speedlmfit2 <- lm(mpg ~ wt + disp, mtcars)
-    td2 <- tidy(speedlmfit2)
-    check_tidy(td2, exp.row = 3)
-    expect_equal(td2$term, c("(Intercept)", "wt", "disp"))
-  })
+test_that("tidy.speedlm", {
+  
+  td <- tidy(fit)
+  td2 <- tidy(fit2)
+  
+  check_tidy_output(td)
+  check_tidy_output(td2)
+  
+  check_dims(td, 2)
+  check_dims(td2, 3)
+  
+  expect_equal(td$term, c("(Intercept)", "wt"))
+  expect_equal(td2$term, c("(Intercept)", "wt", "disp"))
+})
 
-  test_that("glance works on speedlm", {
-    speedlmfit <- speedlm(mpg ~ wt, mtcars)
-    glance <- glance(speedlmfit)
-    expect_equal(nrow(glance), 1)
-  })
+test_that("glance.speedlm", {
+  gl <- glance(fit)
+  check_glance_outputs(gl)
+})
 
-  test_that("augment works on speedlm", {
-    speedlmfit <- speedlm(mpg ~ wt, mtcars)
-    # we don't do check_augment_NAs because speedlm doesn't accept a na.action argument
-    au <- augment(speedlmfit)
-    check_augment(au, mtcars)
-    au2 <- augment(speedlmfit, mtcars)
-    check_augment(au2, mtcars, same = colnames(mtcars))
-  })
-}
+test_that("augment works on speedlm", {
+  check_augment_function(
+    aug = augment.speedlm,
+    model = fit, 
+    data = mtcars,
+    newdata = mtcars
+  )
+})

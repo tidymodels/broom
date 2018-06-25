@@ -1,28 +1,37 @@
 context("stats-anova")
 
-test_that("tidy.anova, tidy.aov, and tidy.aovlist work", {
-  anovafit <- anova(lm(mpg ~ wt + disp, mtcars))
-  td <- tidy(anovafit)
-  check_tidy(td, exp.row = 3, exp.col = 6)
-  expect_true("Residuals" %in% td$term)
+test_that("tidy.aov", {
+  check_arguments(tidy.aov)
   
   aovfit <- aov(mpg ~ wt + disp, mtcars)
   td <- tidy(aovfit)
-  check_tidy(td, exp.row = 3, exp.col = 6)
-  expect_true("Residuals" %in% td$term)
   
-  aovlistfit <- aov(mpg ~ wt + disp + Error(drat), mtcars)
-  td <- suppressWarnings(tidy(aovlistfit))
-  check_tidy(td, exp.row = 4, exp.col = 7)
+  check_tidy_output(td)
+  check_dims(td, 3, 6)
+  
   expect_true("Residuals" %in% td$term)
 })
 
-test_that("tidy.anova warns unknown column names when comparing two loess", {
-  loessfit <- anova(
+test_that("tidy.anova", {
+  check_arguments(tidy.anova)
+  
+  anovafit <- anova(lm(mpg ~ wt + disp, mtcars))
+  td <- tidy(anovafit)
+  
+  check_tidy_output(td)
+  check_dims(td, 3, 6)
+             
+  expect_true("Residuals" %in% td$term)
+  
+  loess_anova <- anova(
     loess(dist ~ speed, cars),
     loess(dist ~ speed, cars, control = loess.control(surface = "direct"))
   )
-  expect_warning(tidy(loessfit))
+  
+  expect_warning(
+    tidy(loess_anova),
+    "compare loess anova warning"
+  )
 })
 
 
@@ -48,20 +57,30 @@ test_that("tidy.aovlist", {
 
 
 test_that("test.manova works", {
-  npk2 <- within(npk, foo <- rnorm(24))
-  npk2.aov <- manova(cbind(yield, foo) ~ block + N * P * K, npk2)
-  td <- tidy(npk2.aov)
-  check_tidy(td, exp.row = 8, exp.col = 7)
+  check_arguments(test.manova)
+  
+  df <- within(npk, foo <- rnorm(24))
+  fit <- manova(cbind(yield, foo) ~ block + N * P * K, df)
+  
+  td <- tidy(fit)
+  
+  check_tidy_output(td)
+  check_dims(td, 8, 7)
 })
 
-
-
 test_that("tidy.TukeyHSD works", {
-  fm1 <- aov(breaks ~ wool + tension, data = warpbreaks)
-  thsd <- TukeyHSD(fm1, "tension", ordered = TRUE)
+  check_arguments(tidy.TukeyHSD)
+  
+  aovfit <- aov(breaks ~ wool + tension, data = warpbreaks)
+  thsd <- TukeyHSD(aovfit, "tension", ordered = TRUE)
+  
   td <- tidy(thsd)
-  check_tidy(td, exp.row = 3, exp.col = 6)
-  td <- tidy(thsd, separate.levels = TRUE)
-  check_tidy(td, exp.row = 3, exp.col = 7)
+  td2 <- tidy(thsd, separate.levels = TRUE)
+  
+  check_tidy_output(td)
+  check_tidy_output(td2)
+  
+  check_dims(td, 3, 6)
+  check_dims(td2, 3, 7)
 })
 

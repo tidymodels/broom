@@ -51,11 +51,9 @@ if (require("tseries", quietly = TRUE)) {
     dax.garch
     tidy(dax.garch)
     glance(dax.garch)
-    head(augment(dax.garch, dax))
     smp1 = window(dax, end = c(1997, frequency(dax)))
     smp2 = window(dax, start = c(1998, 1))
     dax.garch <- garch(smp1)
-    augment(dax.garch, newdata = smp2)
 }
 
 }
