@@ -7,6 +7,8 @@
 \alias{augment.lm}
 \alias{glance.lm}
 \alias{glance.summary.lm}
+\alias{tidy.glm}
+\alias{augment.glm}
 \title{Tidying methods for a linear model}
 \usage{
 \method{tidy}{lm}(x, conf.int = FALSE, conf.level = 0.95,
@@ -20,6 +22,10 @@
 \method{glance}{lm}(x, ...)
 
 \method{glance}{summary.lm}(x, ...)
+
+\method{tidy}{glm}(x, ...)
+
+\method{augment}{glm}(x, ...)
 }
 \arguments{
 \item{x}{lm object}

@@ -56,22 +56,22 @@ tidy.biglm <- function(x, conf.int = FALSE, conf.level = .95,
                        exponentiate = FALSE, quick = FALSE, ...) {
   if (quick) {
     co <- stats::coef(x)
-    ret <- data.frame(term = names(co), estimate = unname(co))
+    ret <- tibble::enframe(co, name = "term", value = "estimate")
     return(ret)
   }
-
+  
   mat <- summary(x)$mat
   nn <- c("estimate", "conf.low", "conf.high", "std.error", "p.value")
   ret <- fix_data_frame(mat, nn)
-
+  
   # remove the 95% confidence interval and replace:
   # it isn't exactly 95% (uses 2 rather than 1.96), and doesn't allow
   # specification of confidence level in any case
   ret <- ret %>% dplyr::select(-conf.low, -conf.high)
-
+  
   process_lm(ret, x,
-    conf.int = conf.int, conf.level = conf.level,
-    exponentiate = exponentiate
+             conf.int = conf.int, conf.level = conf.level,
+             exponentiate = exponentiate
   )
 }
 
@@ -86,9 +86,5 @@ tidy.biglm <- function(x, conf.int = FALSE, conf.level = .95,
 #'
 #' @export
 glance.biglm <- function(x, ...) {
-  s <- summary(x)
-  ret <- data.frame(r.squared = s$rsq)
-  ret <- finish_glance(ret, x)
-  ret$df.residual <- x$df.resid # add afterwards
-  ret
+  finish_glance(tibble(r.squared = summary(x)$rsq, df.residual = x$df.resid), x)
 }

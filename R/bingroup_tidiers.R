@@ -39,7 +39,7 @@
 #'
 #' @export
 tidy.binWidth <- function(x, ...) {
-  ret <- as.data.frame(unclass(x))
+  ret <- as_tibble(unclass(x))
   dplyr::rename(ret, ci.width = expCIWidth)
 }
 
@@ -86,7 +86,7 @@ tidy.binWidth <- function(x, ...) {
 #'
 #' @export
 tidy.binDesign <- function(x, ...) {
-  ret <- data.frame(n = x$nit, power = x$powerit)
+  ret <- tibble(n = x$nit, power = x$powerit)
   # only up to the number of iterations performed
   head(ret, x$maxit)
 }
@@ -95,7 +95,7 @@ tidy.binDesign <- function(x, ...) {
 #' @rdname binDesign_tidiers
 #' @export
 glance.binDesign <- function(x, ...) {
-  with(unclass(x), data.frame(
+  with(unclass(x), tibble(
     power = powerout,
     n = nout,
     power.reached,

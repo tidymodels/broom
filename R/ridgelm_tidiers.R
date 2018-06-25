@@ -49,16 +49,18 @@ NULL
 tidy.ridgelm <- function(x, ...) {
   if (length(x$lambda) == 1) {
     # only one choice of lambda
-    ret <- data.frame(
-      lambda = x$lambda, term = names(x$coef),
+    ret <- tibble(
+      lambda = x$lambda,
+      term = names(x$coef),
       estimate = x$coef,
-      scale = x$scales, xm = x$xm
+      scale = x$scales,
+      xm = x$xm
     )
-    return(unrowname(ret))
+    return(ret)
   }
 
   # otherwise, multiple lambdas/coefs/etc, have to tidy
-  cotidy <- data.frame(plyr::unrowname(t(x$coef)),
+  cotidy <- data.frame(unrowname(t(x$coef)),
     lambda = x$lambda,
     GCV = unname(x$GCV)
   ) %>%
@@ -66,7 +68,7 @@ tidy.ridgelm <- function(x, ...) {
     mutate(term = as.character(term)) %>%
     mutate(scale = x$scales[term])
 
-  cotidy
+  as_tibble(cotidy)
 }
 
 
@@ -82,9 +84,9 @@ tidy.ridgelm <- function(x, ...) {
 #'
 #' @export
 glance.ridgelm <- function(x, ...) {
-  ret <- data.frame(
-    kHKB = x$kHKB, kLW = x$kLW,
+  tibble(
+    kHKB = x$kHKB, 
+    kLW = x$kLW,
     lambdaGCV = x$lambda[which.min(x$GCV)]
   )
-  ret
 }

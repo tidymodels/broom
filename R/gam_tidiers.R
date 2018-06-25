@@ -30,7 +30,6 @@
 #'     data(kyphosis)
 #'     g <- gam(Kyphosis ~ s(Age,4) + Number, family = binomial, data = kyphosis)
 #'     tidy(g)
-#'     augment(g)
 #'     glance(g)
 #' }
 #'
@@ -66,7 +65,7 @@ tidy_mcgv <- function(x, parametric = FALSE) {
   if (parametric) {
     px <- summary(x)$p.table
     px <- as.data.frame(px)
-    fix_data_frame(px, c("estimate", "std.error", "statistic", "p.value"))
+    ret <- fix_data_frame(px, c("estimate", "std.error", "statistic", "p.value"))
   } else {
     sx <- summary(x)$s.table
     sx <- as.data.frame(sx)
@@ -101,11 +100,11 @@ glance.gam <- function(x, ...) {
 #' @export
 glance.Gam <- function(x, ...) {
   s <- summary(x)
-  ret <- data.frame(df = s$df[1])
+  ret <- tibble(df = s$df[1])
   finish_glance(ret, x)
 }
 
 glance_mcgv <- function(x) {
-  ret <- data.frame(df = sum(x$edf))
+  ret <- tibble(df = sum(x$edf))
   finish_glance(ret, x)
 }

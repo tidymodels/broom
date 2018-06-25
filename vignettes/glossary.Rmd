@@ -1,0 +1,31 @@
+---
+title: "Glossary of output columns and tidier arguments"
+author: "Alex Hayes"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+
+library(broom)
+```
+
+TODO: description of how the glossaries work
+
+```{r}
+knitr::kable(argument_glossary)
+```
+
+```{r}
+knitr::kable(column_glossary)
+```
+
+

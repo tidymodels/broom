@@ -5,7 +5,7 @@
 \alias{tidy.anova}
 \alias{tidy.aov}
 \alias{tidy.aovlist}
-\title{Tidying methods for anova and AOV objects}
+\title{Tidying methods for ANOVA and AOV objects}
 \usage{
 \method{tidy}{anova}(x, ...)
 
@@ -14,12 +14,12 @@
 \method{tidy}{aovlist}(x, ...)
 }
 \arguments{
-\item{x}{An object of class "anova", "aov", or "aovlist"}
+\item{x}{An object of class \code{anova}, \code{aov}, or \code{aovlist}.}
 
-\item{...}{extra arguments (not used)}
+\item{...}{Additional arguments (not used).}
 }
 \value{
-A tibble with columns
+A `tibble`` with columns
 \item{term}{Term within the model, or "Residuals"}
 \item{df}{Degrees of freedom used by this term in the model}
 \item{sumsq}{Sum of squares explained by this term}
@@ -27,7 +27,7 @@ A tibble with columns
 \item{statistic}{F statistic}
 \item{p.value}{P-value from F test}
 
-In the case of an \code{"aovlist"} object, there is also a \code{stratum}
+In the case of an \code{aovlist} object, there is also a \code{stratum}
 column describing the error stratum
 }
 \description{

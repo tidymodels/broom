@@ -85,7 +85,7 @@
     <div class="page-header toc-ignore">
       <h1>Introduction to broom</h1>
             
-            <h4 class="date">2018-06-08</h4>
+            <h4 class="date">2018-06-25</h4>
       
       <small class="dont-index">Source: <a href="http://github.com/tidyverse/broom/blob/master/vignettes/broom.Rmd"><code>vignettes/broom.Rmd</code></a></small>
       <div class="hidden name"><code>broom.Rmd</code></div>
@@ -94,7 +94,6 @@
 
     
     
-<pre><code>## Warning: package 'knitr' was built under R version 3.4.3</code></pre>
 <div id="broom-lets-tidy-up-a-bit" class="section level1">
 <h1 class="hasAnchor">
 <a href="#broom-lets-tidy-up-a-bit" class="anchor"></a>broom: let’s tidy up a bit</h1>
@@ -152,33 +151,32 @@ lmfit</code></pre></div>
 <p>Instead, you can use the <code>tidy</code> function, from the broom package, on the fit:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(broom)
 <span class="kw"><a href="../reference/tidy.html">tidy</a></span>(lmfit)</code></pre></div>
-<pre><code>##          term  estimate std.error statistic      p.value
-## 1 (Intercept) 37.285126  1.877627 19.857575 8.241799e-19
-## 2          wt -5.344472  0.559101 -9.559044 1.293959e-10</code></pre>
+<pre><code>## # A tibble: 2 x 5
+##   term        estimate std.error statistic  p.value
+##   &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
+## 1 (Intercept)    37.3      1.88      19.9  8.24e-19
+## 2 wt             -5.34     0.559     -9.56 1.29e-10</code></pre>
 <p>This gives you a data.frame representation. Note that the row names have been moved into a column called <code>term</code>, and the column names are simple and consistent (and can be accessed using <code>$</code>).</p>
 <p>Instead of viewing the coefficients, you might be interested in the fitted values and residuals for each of the original points in the regression. For this, use <code>augment</code>, which augments the original data with information from the model:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(<span class="kw"><a href="../reference/augment.html">augment</a></span>(lmfit))</code></pre></div>
-<pre><code>##           .rownames  mpg    wt  .fitted   .se.fit     .resid       .hat
-## 1         Mazda RX4 21.0 2.620 23.28261 0.6335798 -2.2826106 0.04326896
-## 2     Mazda RX4 Wag 21.0 2.875 21.91977 0.5714319 -0.9197704 0.03519677
-## 3        Datsun 710 22.8 2.320 24.88595 0.7359177 -2.0859521 0.05837573
-## 4    Hornet 4 Drive 21.4 3.215 20.10265 0.5384424  1.2973499 0.03125017
-## 5 Hornet Sportabout 18.7 3.440 18.90014 0.5526562 -0.2001440 0.03292182
-## 6           Valiant 18.1 3.460 18.79325 0.5552829 -0.6932545 0.03323551
-##     .sigma      .cooksd  .std.resid
-## 1 3.067494 1.327407e-02 -0.76616765
-## 2 3.093068 1.723963e-03 -0.30743051
-## 3 3.072127 1.543937e-02 -0.70575249
-## 4 3.088268 3.020558e-03  0.43275114
-## 5 3.097722 7.599578e-05 -0.06681879
-## 6 3.095184 9.210650e-04 -0.23148309</code></pre>
+<pre><code>## # A tibble: 6 x 10
+##   .rownames        mpg    wt .fitted .se.fit .resid   .hat .sigma  .cooksd
+##   &lt;chr&gt;          &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;    &lt;dbl&gt;
+## 1 Mazda RX4       21.0  2.62    23.3   0.634 -2.28  0.0433   3.07  1.33e-2
+## 2 Mazda RX4 Wag   21.0  2.88    21.9   0.571 -0.920 0.0352   3.09  1.72e-3
+## 3 Datsun 710      22.8  2.32    24.9   0.736 -2.09  0.0584   3.07  1.54e-2
+## 4 Hornet 4 Drive  21.4  3.22    20.1   0.538  1.30  0.0313   3.09  3.02e-3
+## 5 Hornet Sporta~  18.7  3.44    18.9   0.553 -0.200 0.0329   3.10  7.60e-5
+## 6 Valiant         18.1  3.46    18.8   0.555 -0.693 0.0332   3.10  9.21e-4
+## # ... with 1 more variable: .std.resid &lt;dbl&gt;</code></pre>
 <p>Note that each of the new columns begins with a <code>.</code> (to avoid overwriting any of the original columns).</p>
 <p>Finally, several summary statistics are computed for the entire regression, such as R^2 and the F-statistic. These can be accessed with the <code>glance</code> function:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/glance.html">glance</a></span>(lmfit)</code></pre></div>
-<pre><code>##   r.squared adj.r.squared    sigma statistic      p.value df    logLik
-## 1 0.7528328     0.7445939 3.045882  91.37533 1.293959e-10  2 -80.01471
-##        AIC      BIC deviance df.residual
-## 1 166.0294 170.4266 278.3219          30</code></pre>
+<pre><code>## # A tibble: 1 x 11
+##   r.squared adj.r.squared sigma statistic  p.value    df logLik   AIC
+## *     &lt;dbl&gt;         &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt; &lt;int&gt;  &lt;dbl&gt; &lt;dbl&gt;
+## 1     0.753         0.745  3.05      91.4 1.29e-10     2  -80.0  166.
+## # ... with 3 more variables: BIC &lt;dbl&gt;, deviance &lt;dbl&gt;, df.residual &lt;int&gt;</code></pre>
 <p>This distinction between the <code>tidy</code>, <code>augment</code> and <code>glance</code> functions is explored in a different context in the <a href="kmeans.html">k-means vignette</a>.</p>
 </div>
 <div id="other-examples" class="section level2">
@@ -190,54 +188,52 @@ lmfit</code></pre></div>
 <p>These functions apply equally well to the output from <code>glm</code>:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">glmfit &lt;-<span class="st"> </span><span class="kw">glm</span>(am <span class="op">~</span><span class="st"> </span>wt, mtcars, <span class="dt">family=</span><span class="st">"binomial"</span>)
 <span class="kw"><a href="../reference/tidy.html">tidy</a></span>(glmfit)</code></pre></div>
-<pre><code>##          term estimate std.error statistic     p.value
-## 1 (Intercept) 12.04037  4.509706  2.669879 0.007587858
-## 2          wt -4.02397  1.436416 -2.801396 0.005088198</code></pre>
+<pre><code>## # A tibble: 2 x 5
+##   term        estimate std.error statistic p.value
+##   &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;
+## 1 (Intercept)    12.0       4.51      2.67 0.00759
+## 2 wt             -4.02      1.44     -2.80 0.00509</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(<span class="kw"><a href="../reference/augment.html">augment</a></span>(glmfit))</code></pre></div>
-<pre><code>##           .rownames am    wt    .fitted   .se.fit     .resid       .hat
-## 1         Mazda RX4  1 2.620  1.4975684 0.9175750  0.6353854 0.12577908
-## 2     Mazda RX4 Wag  1 2.875  0.4714561 0.6761141  0.9848344 0.10816226
-## 3        Datsun 710  1 2.320  2.7047594 1.2799233  0.3598458 0.09628500
-## 4    Hornet 4 Drive  0 3.215 -0.8966937 0.6012064 -0.8271767 0.07438175
-## 5 Hornet Sportabout  0 3.440 -1.8020869 0.7486164 -0.5525972 0.06812194
-## 6           Valiant  0 3.460 -1.8825663 0.7669573 -0.5323012 0.06744101
-##      .sigma     .cooksd .std.resid
-## 1 0.8033182 0.018405616  0.6795582
-## 2 0.7897742 0.042434911  1.0428463
-## 3 0.8101256 0.003942789  0.3785304
-## 4 0.7973421 0.017706938 -0.8597702
-## 5 0.8061915 0.006469973 -0.5724389
-## 6 0.8067014 0.005901376 -0.5512128</code></pre>
+<pre><code>## # A tibble: 6 x 10
+##   .rownames          am    wt .fitted .se.fit .resid   .hat .sigma .cooksd
+##   &lt;chr&gt;           &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;
+## 1 Mazda RX4          1.  2.62   1.50    0.918  0.635 0.126   0.803 0.0184 
+## 2 Mazda RX4 Wag      1.  2.88   0.471   0.676  0.985 0.108   0.790 0.0424 
+## 3 Datsun 710         1.  2.32   2.70    1.28   0.360 0.0963  0.810 0.00394
+## 4 Hornet 4 Drive     0.  3.22  -0.897   0.601 -0.827 0.0744  0.797 0.0177 
+## 5 Hornet Sportab~    0.  3.44  -1.80    0.749 -0.553 0.0681  0.806 0.00647
+## 6 Valiant            0.  3.46  -1.88    0.767 -0.532 0.0674  0.807 0.00590
+## # ... with 1 more variable: .std.resid &lt;dbl&gt;</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/glance.html">glance</a></span>(glmfit)</code></pre></div>
-<pre><code>##   null.deviance df.null    logLik      AIC      BIC deviance df.residual
-## 1      43.22973      31 -9.588042 23.17608 26.10756 19.17608          30</code></pre>
+<pre><code>## # A tibble: 1 x 7
+##   null.deviance df.null logLik   AIC   BIC deviance df.residual
+##           &lt;dbl&gt;   &lt;int&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;       &lt;int&gt;
+## 1          43.2      31  -9.59  23.2  26.1     19.2          30</code></pre>
 <p>Note that the statistics computed by <code>glance</code> are different for <code>glm</code> objects than for <code>lm</code> (e.g. deviance rather than R^2):</p>
 <p>These functions also work on other fits, such as nonlinear models (<code>nls</code>):</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">nlsfit &lt;-<span class="st"> </span><span class="kw">nls</span>(mpg <span class="op">~</span><span class="st"> </span>k <span class="op">/</span><span class="st"> </span>wt <span class="op">+</span><span class="st"> </span>b, mtcars, <span class="dt">start=</span><span class="kw">list</span>(<span class="dt">k=</span><span class="dv">1</span>, <span class="dt">b=</span><span class="dv">0</span>))
 <span class="kw"><a href="../reference/tidy.html">tidy</a></span>(nlsfit)</code></pre></div>
-<pre><code>##   term  estimate std.error statistic      p.value
-## 1    k 45.829488  4.249155 10.785554 7.639162e-12
-## 2    b  4.386254  1.536418  2.854858 7.737378e-03</code></pre>
+<pre><code>## # A tibble: 2 x 5
+##   term  estimate std.error statistic  p.value
+##   &lt;chr&gt;    &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
+## 1 k        45.8       4.25     10.8  7.64e-12
+## 2 b         4.39      1.54      2.85 7.74e- 3</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(<span class="kw"><a href="../reference/augment.html">augment</a></span>(nlsfit, mtcars))</code></pre></div>
-<pre><code>##           .rownames  mpg cyl disp  hp drat    wt  qsec vs am gear carb
-## 1         Mazda RX4 21.0   6  160 110 3.90 2.620 16.46  0  1    4    4
-## 2     Mazda RX4 Wag 21.0   6  160 110 3.90 2.875 17.02  0  1    4    4
-## 3        Datsun 710 22.8   4  108  93 3.85 2.320 18.61  1  1    4    1
-## 4    Hornet 4 Drive 21.4   6  258 110 3.08 3.215 19.44  1  0    3    1
-## 5 Hornet Sportabout 18.7   8  360 175 3.15 3.440 17.02  0  0    3    2
-## 6           Valiant 18.1   6  225 105 2.76 3.460 20.22  1  0    3    1
-##    .fitted     .resid
-## 1 21.87843 -0.8784251
-## 2 20.32695  0.6730544
-## 3 24.14034 -1.3403437
-## 4 18.64115  2.7588507
-## 5 17.70878  0.9912203
-## 6 17.63177  0.4682291</code></pre>
+<pre><code>## # A tibble: 6 x 14
+##   .rownames      mpg   cyl  disp    hp  drat    wt  qsec    vs    am  gear
+##   &lt;chr&gt;        &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+## 1 Mazda RX4     21.0    6.  160.  110.  3.90  2.62  16.5    0.    1.    4.
+## 2 Mazda RX4 W~  21.0    6.  160.  110.  3.90  2.88  17.0    0.    1.    4.
+## 3 Datsun 710    22.8    4.  108.   93.  3.85  2.32  18.6    1.    1.    4.
+## 4 Hornet 4 Dr~  21.4    6.  258.  110.  3.08  3.22  19.4    1.    0.    3.
+## 5 Hornet Spor~  18.7    8.  360.  175.  3.15  3.44  17.0    0.    0.    3.
+## 6 Valiant       18.1    6.  225.  105.  2.76  3.46  20.2    1.    0.    3.
+## # ... with 3 more variables: carb &lt;dbl&gt;, .fitted &lt;dbl&gt;, .resid &lt;dbl&gt;</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/glance.html">glance</a></span>(nlsfit)</code></pre></div>
-<pre><code>##     sigma isConv      finTol    logLik      AIC      BIC deviance
-## 1 2.77405   TRUE 2.87694e-08 -77.02329 160.0466 164.4438 230.8606
-##   df.residual
-## 1          30</code></pre>
+<pre><code>## # A tibble: 1 x 8
+##   sigma isConv       finTol logLik   AIC   BIC deviance df.residual
+##   &lt;dbl&gt; &lt;lgl&gt;         &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;       &lt;int&gt;
+## 1  2.77 TRUE   0.0000000288  -77.0  160.  164.     231.          30</code></pre>
 </div>
 <div id="hypothesis-testing" class="section level3">
 <h3 class="hasAnchor">

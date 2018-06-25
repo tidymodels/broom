@@ -122,8 +122,8 @@ augment.htest <- function(x, ...) {
     return(augment_chisq_test(x, ...))
   } else {
     stop(
-      "augment doesn't know how to deal with class htest with method '",
-      x$method, "'"
+      "Augment is only defined for chi squared hypothesis tests.",
+      call. = FALSE
     )
   }
 }
@@ -151,5 +151,5 @@ augment_chisq_test <- function(x, ...) {
   ret <- cbind(ret, .expected = as.data.frame(as.table(x$expected))[[d + 1]])
   ret <- cbind(ret, .residuals = as.data.frame(as.table(x$residuals))[[d + 1]])
   ret <- cbind(ret, .stdres = as.data.frame(as.table(x$stdres))[[d + 1]])
-  ret
+  as_tibble(ret)
 }

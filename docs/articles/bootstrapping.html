@@ -85,7 +85,7 @@
     <div class="page-header toc-ignore">
       <h1>Tidy bootstrapping</h1>
             
-            <h4 class="date">2018-06-07</h4>
+            <h4 class="date">2018-06-25</h4>
       
       <small class="dont-index">Source: <a href="http://github.com/tidyverse/broom/blob/master/vignettes/bootstrapping.Rmd"><code>vignettes/bootstrapping.Rmd</code></a></small>
       <div class="hidden name"><code>bootstrapping.Rmd</code></div>
@@ -195,7 +195,7 @@ boot_coefs <span class="op">%&gt;%</span><span class="st"> </span>
 <p>Or we can use histograms to get a more detailed idea of the uncertainty in each estimate:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(boot_coefs, <span class="kw">aes</span>(estimate)) <span class="op">+</span><span class="st"> </span>
 <span class="st">    </span><span class="kw">geom_histogram</span>(<span class="dt">binwidth =</span> <span class="dv">2</span>) <span class="op">+</span><span class="st"> </span>
-<span class="st">    </span><span class="kw">facet_wrap</span>(<span class="dt">facets =</span> <span class="kw">vars</span>(term), <span class="dt">scales =</span> <span class="st">"free"</span>)</code></pre></div>
+<span class="st">    </span><span class="kw">facet_wrap</span>(<span class="op">~</span><span class="st"> </span>term, <span class="dt">scales =</span> <span class="st">"free"</span>)</code></pre></div>
 <p><img src="bootstrapping_files/figure-html/unnamed-chunk-7-1.png" width="700"></p>
 <p>Or we can use <code>augment</code> to visualize the uncertainty in the curve:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">boot_aug &lt;-<span class="st"> </span>boot_models <span class="op">%&gt;%</span><span class="st"> </span>
@@ -213,7 +213,7 @@ boot_aug
 <span class="co">#&gt;  5 Bootstrap001  24.4  3.19    19.0  5.43 </span>
 <span class="co">#&gt;  6 Bootstrap001  17.3  3.73    17.1  0.243</span>
 <span class="co">#&gt;  7 Bootstrap001  22.8  2.32    23.9 -1.12 </span>
-<span class="co">#&gt;  8 Bootstrap001  21    2.62    21.8 -0.841</span>
+<span class="co">#&gt;  8 Bootstrap001  21.0  2.62    21.8 -0.841</span>
 <span class="co">#&gt;  9 Bootstrap001  18.7  3.44    18.0  0.691</span>
 <span class="co">#&gt; 10 Bootstrap001  14.3  3.57    17.6 -3.26 </span>
 <span class="co">#&gt; # ... with 3,190 more rows</span></code></pre></div>

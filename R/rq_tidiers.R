@@ -50,7 +50,7 @@ tidy.rq <- function(x, se.type = "rank", conf.int = TRUE, conf.level = 0.9, alph
 tidy.rqs <- function(x, se.type = "rank", conf.int = TRUE, conf.level = 0.9, alpha = 1 - conf.level, ...) {
   # summary.rq often issues warnings when computing standard errors
   rq_summary <- suppressWarnings(quantreg::summary.rqs(x, se = se.type, alpha = alpha, ...))
-  plyr::ldply(rq_summary, process_rq, se.type = se.type, conf.int = conf.int, conf.level = conf.level, ...)
+  purrr::map_df(rq_summary, process_rq, se.type = se.type, conf.int = conf.int, conf.level = conf.level, ...)
 }
 
 #' @rdname rq_tidiers
@@ -113,7 +113,7 @@ glance.rq <- function(x, ...) {
 glance.rqs <- function(x, ...) {
   stop("`glance` cannot handle objects of class 'rqs',",
     " i.e. models with more than one tau value. Please",
-    " use a `purr::map`-based workflow with 'rq' models instead.",
+    " use a purrr `map`-based workflow with 'rq' models instead.",
     call. = FALSE
   )
 }
@@ -183,11 +183,11 @@ augment.rq <- function(x, data = model.frame(x), newdata, ...) {
   if (NCOL(pred) == 1) {
     original[[".fitted"]] <- pred
     original[[".tau"]] <- x[["tau"]]
-    return(unrowname(original))
+    return(as_tibble(original))
   } else {
     colnames(pred) <- c(".fitted", ".conf.low", ".conf.low")
     original[[".tau"]] <- x[["tau"]]
-    return(unrowname(cbind(original, pred)))
+    return(as_tibble(cbind(original, pred)))
   }
 }
 

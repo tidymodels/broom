@@ -85,7 +85,7 @@
     <div class="page-header toc-ignore">
       <h1>kmeans with dplyr and broom</h1>
             
-            <h4 class="date">2018-06-07</h4>
+            <h4 class="date">2018-06-25</h4>
       
       <small class="dont-index">Source: <a href="http://github.com/tidyverse/broom/blob/master/vignettes/kmeans.Rmd"><code>vignettes/kmeans.Rmd</code></a></small>
       <div class="hidden name"><code>kmeans.Rmd</code></div>
@@ -169,23 +169,29 @@ kclust</code></pre></div>
 <p>Which of these do we want to extract? There is no right answer: each of them may be interesting to an analyst. Because they communicate entirely different information (not to mention there’s no straightforward way to combine them), they are extracted by separate functions. <code>augment</code> adds the point classifications to the original dataset:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(broom)
 <span class="kw">head</span>(<span class="kw"><a href="../reference/augment.html">augment</a></span>(kclust, points.matrix))</code></pre></div>
-<pre><code>##         x1         x2 .cluster
-## 1 4.434320  0.5416470        1
-## 2 5.321046 -0.9412882        1
-## 3 5.125271 -1.5802282        1
-## 4 6.353225 -1.6040549        1
-## 5 3.712270 -3.4079344        1
-## 6 5.322555 -0.7716317        1</code></pre>
+<pre><code>## # A tibble: 6 x 3
+##      x1     x2 .cluster
+##   &lt;dbl&gt;  &lt;dbl&gt; &lt;fct&gt;   
+## 1  4.43  0.542 1       
+## 2  5.32 -0.941 1       
+## 3  5.13 -1.58  1       
+## 4  6.35 -1.60  1       
+## 5  3.71 -3.41  1       
+## 6  5.32 -0.772 1</code></pre>
 <p>The <code>tidy</code> function summarizes on a per-cluster level:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/tidy.html">tidy</a></span>(kclust)</code></pre></div>
-<pre><code>##           x1         x2 size  withinss cluster
-## 1  5.1791917 -0.9865170   99 204.96483       1
-## 2  0.1583797  0.9797098  151 257.20360       2
-## 3 -3.0653196 -2.0887225   50  78.64255       3</code></pre>
+<pre><code>## # A tibble: 3 x 5
+##       x1     x2  size withinss cluster
+## *  &lt;dbl&gt;  &lt;dbl&gt; &lt;int&gt;    &lt;dbl&gt; &lt;fct&gt;  
+## 1  5.18  -0.987    99    205.  1      
+## 2  0.158  0.980   151    257.  2      
+## 3 -3.07  -2.09     50     78.6 3</code></pre>
 <p>And as it always does, the <code>glance</code> function extracts a single-row summary:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/glance.html">glance</a></span>(kclust)</code></pre></div>
-<pre><code>##     totss tot.withinss betweenss iter
-## 1 3629.67      540.811  3088.859    2</code></pre>
+<pre><code>## # A tibble: 1 x 4
+##   totss tot.withinss betweenss  iter
+##   &lt;dbl&gt;        &lt;dbl&gt;     &lt;dbl&gt; &lt;int&gt;
+## 1 3630.         541.     3089.     2</code></pre>
 <div id="broom-and-dplyr-for-exploratory-clustering" class="section level2">
 <h2 class="hasAnchor">
 <a href="#broom-and-dplyr-for-exploratory-clustering" class="anchor"></a>broom and dplyr for exploratory clustering</h2>

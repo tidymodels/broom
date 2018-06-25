@@ -1,36 +1,44 @@
-context("lsmeans tidiers")
+context("lsmeans")
 
-if (require(lsmeans)) {
-  suppressPackageStartupMessages(library(lsmeans))
-  oranges_lm1 <- lm(sales1 ~ price1 + price2 + day + store, data = oranges)
-  oranges_rg1 <- ref.grid(oranges_lm1)
-  marginal <- lsmeans(oranges_rg1, "day")
-  # generate dataset with dashes
-  marginal_dashes <- data_frame(
-    y = rnorm(100),
-    x = rep(c("Single", "Double-Barrelled"), 50)
-  ) %>%
-    lm(y ~ x, data = .) %>%
-    lsmeans::lsmeans(., ~ x) %>%
-    lsmeans::contrast(., "pairwise")
+skip_if_not_installed("lsmeans")
+library(lsmeans)
 
-  test_that("lsmobj tidiers work", {
-    td <- tidy(marginal)
-    check_tidy(td, exp.row = 6, exp.col = 6)
-  })
+fit <- lm(sales1 ~ price1 + price2 + day + store, data = oranges)
+rg <- ref.grid(fit)
 
-  test_that("ref.grid tidiers work", {
-    td <- tidy(oranges_rg1)
-    check_tidy(td, exp.row = 36, exp.col = 7)
-  })
+marginal <- lsmeans(rg, "day")
 
-  test_that("pairwise contrasts work", {
-    td <- tidy(contrast(marginal, method = "pairwise"))
-    check_tidy(td, exp.row = 15, exp.col = 7)
-  })
+# generate dataset with dashes
+marginal_dashes <- tibble(
+  y = rnorm(100),
+  x = rep(c("Single", "Double-Barrelled"), 50)
+) %>%
+  lm(y ~ x, data = .) %>%
+  lsmeans::lsmeans(., ~ x) %>%
+  lsmeans::contrast(., "pairwise")
 
-  test_that("pairwise contrasts with dash names work", {
-    td <- tidy(marginal_dashes)
-    check_tidy(td, exp.row = 1, exp.col = 7)
-  })
-}
+test_that("lsmeans tidier arguments", {
+  check_arguments(tidy.lsmobj)
+  check_arguments(tidy.ref.grid)
+  check_arguments(tidy.emmGrid)  # TODO: test this more
+})
+
+test_that("tidy.lsmobj", {
+  tdm <- tidy(marginal)
+  tdmd <- tidy(marginal_dashes)
+  tdc <- tidy(contrast(marginal, method = "pairwise"))
+  
+  check_tidy_output(tdm)
+  check_tidy_output(tdmd)
+  check_tidy_output(tdc)
+  
+  check_dims(tdm, 6, 6)
+  check_dims(tdmd, 1, 7)
+  check_dims(tdc, 15, 7)
+})
+
+test_that("ref.grid tidiers work", {
+  td <- tidy(rg)
+  check_tidy_output(td)
+  check_dims(td, 36, 7)
+})

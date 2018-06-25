@@ -74,7 +74,7 @@ tidy.btergm <- function(x, conf.level = .95,
 
   if (quick) {
     co <- x@coef
-    ret <- data.frame(
+    ret <- tibble(
       term = names(co),
       estimate = trans(unname(co))
     )
@@ -85,7 +85,7 @@ tidy.btergm <- function(x, conf.level = .95,
   nn <- c("estimate", "conf.low", "conf.high")
   if (inherits(co, "listof")) {
     # multiple response variables
-    ret <- plyr::ldply(co, fix_data_frame, nn[1:ncol(co[[1]])],
+    ret <- purrr::map_df(co, fix_data_frame, nn[1:ncol(co[[1]])],
       .id = "response"
     )
     ret$response <- stringr::str_replace(ret$response, "Response ", "")
@@ -96,5 +96,5 @@ tidy.btergm <- function(x, conf.level = .95,
   ret$conf.low <- trans(ret$conf.low)
   ret$conf.high <- trans(ret$conf.high)
   ret$estimate <- trans(ret$estimate)
-  ret
+  as_tibble(ret)
 }

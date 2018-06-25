@@ -1,13 +1,13 @@
-#' Tidying methods for anova and AOV objects
+#' Tidying methods for ANOVA and AOV objects
 #'
 #' Tidies the result of an analysis of variance into an ANOVA table.
 #' Only a `tidy` method is provided, not an `augment` or
 #' `glance` method.
 #'
-#' @param x An object of class "anova", "aov", or "aovlist"
-#' @param ... extra arguments (not used)
+#' @param x An object of class `anova`, `aov`, or `aovlist`.
+#' @param ... Additional arguments (not used).
 #'
-#' @return A tibble with columns
+#' @return A `tibble`` with columns
 #'   \item{term}{Term within the model, or "Residuals"}
 #'   \item{df}{Degrees of freedom used by this term in the model}
 #'   \item{sumsq}{Sum of squares explained by this term}
@@ -15,7 +15,7 @@
 #'   \item{statistic}{F statistic}
 #'   \item{p.value}{P-value from F test}
 #'
-#' In the case of an `"aovlist"` object, there is also a `stratum`
+#' In the case of an `aovlist` object, there is also a `stratum`
 #' column describing the error stratum
 #'
 #' @details Note that the "term" column of an ANOVA table can come with

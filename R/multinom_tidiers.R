@@ -117,7 +117,7 @@ tidy.multinom <- function(x,
     ret[, exp.col] <- lapply(ret[, exp.col, drop = FALSE], exp)
   }
 
-  unrowname(ret)
+  as_tibble(ret)
 }
 
 #' @rdname multinom_tidiers
@@ -128,13 +128,12 @@ tidy.multinom <- function(x,
 #'
 #' @export
 glance.multinom <- function(x, ...) {
-  ret <- with(
+  with(
     x,
-    data.frame(
+    tibble(
       edf = edf,
       deviance = deviance,
       AIC = AIC
     )
   )
-  ret
 }

@@ -1,3 +1,121 @@
+# utility functions. hopefully using tibbles internally will allow us
+# to get rid of lots of the rowname logic here
+
+validate_augment_input <- function(model, data = NULL, newdata = NULL) {
+  
+  # careful: `data` may be non-null due to default argument such as
+  # `data = stats::model.frame(x)`
+  # newdata argument default *should* always `NULL`
+  
+  data_passed <- !is.null(data)
+  newdata_passed <- !is.null(newdata)
+  
+  # TODO: the following is bad if someone maps over models to augment
+  
+  # if (data_passed && newdata_passed) {
+  #   warning(
+  #     "Both `data` and `newdata` have been specified. Ignoring `data`.",
+  #     call. = FALSE
+  #   )
+  # }
+  
+  # this test means that for `augment(fit)` to work, `augment.my_model`
+  # must have a non-null default value for either `data` or `newdata`.
+  
+  # if (!data_passed && !newdata_passed) {
+  #   message(
+  #     "Neither `data` nor `newdata` has been specified.\n",
+  #     "Attempting to reconstruct original data."
+  #   )
+  # }
+  
+  if (data_passed) {
+    
+    if (!inherits(data, "data.frame")) {
+      stop("`data` argument must be a tibble or dataframe.", call. = FALSE)
+    }
+    
+    tryCatch(
+      as_tibble(data),
+      error = function(e) {
+        stop(
+          "`data` is malformed: must be coercable to a tibble.\n",
+          "Did you pass `data` the data originally used to fit your model?")
+      }
+    )
+
+    # experimental checks that all columns in original data are present
+    # in `data`. only warns on failure.
+    
+    possible_mf <- purrr::possibly(model.frame, otherwise = NULL)
+    mf <- possible_mf(model)
+    
+    if (!is.null(mf)) {
+      
+      if (nrow(data) != nrow(mf)) {
+        warning(
+          "`data` must contain all rows passed to the original modelling ",
+          "function with no extras rows.",
+          call. = FALSE
+        )
+      }
+      
+      orig_cols <- all.vars(stats::terms(mf))
+      
+      if (!all(orig_cols %in% colnames(data))) {
+        warning(
+          "`data` might not contain columns present in original data.",
+          call. = FALSE
+        )
+      }
+    }
+  }
+  
+  # TODO: check for predictor columns only when newdata is passed?
+  # only warn if not found
+  # if yes, be sure to add a test in `check_augment_function`
+  # to do this, need to be able to determine what the response is
+  # 
+  # max says to look into `recipes:::get_rhs_vars` as a way to do this
+  
+  if (newdata_passed) {
+    if (!inherits(newdata, "data.frame")) {
+      stop("`newdata` argument must be a tibble or dataframe.", call. = FALSE)
+    }
+  }
+}
+
+
+
+#' Coerce a data frame to a tibble, preserving rownames
+#' 
+#' A thin wrapper around [tibble::as_tibble()], except checks for
+#' rownames and adds them to a new column `.rownames` if they are
+#' interesting (i.e. more than `1, 2, 3, ...`).
+#' 
+#' Replacement for `fix_data_frame()`.
+#'
+#' @param data A [data.frame()] or [tibble::tibble()].
+#'
+#' @return A `tibble` potentially with a `.rownames` column
+as_rw_tibble <- function(data) {
+  
+  # TODO: write a test for this
+  
+  row_nm <- rownames(data)
+  has_row_nms <- any(row_nm != as.character(seq_along(row_nm)))
+  
+  df <- as_tibble(data)
+  
+  if (has_row_nms) {
+    df <- tibble::rownames_to_column(df, var = ".rownames")
+  }
+  
+  df
+}
+
+
+
 #' Ensure an object is a data frame, with rownames moved into a column
 #'
 #' @param x a data.frame or matrix
@@ -31,7 +149,7 @@ fix_data_frame <- function(x, newnames = NULL, newcol = "term") {
       colnames(ret)[-1] <- newnames
     }
   }
-  unrowname(ret)
+  as_tibble(ret)
 }
 
 
@@ -81,11 +199,10 @@ insert_NAs <- function(x, original) {
 #' @export
 augment_columns <- function(x, data, newdata, type, type.predict = type,
                             type.residuals = type, se.fit = TRUE, ...) {
-  notNAs <- function(o) if (is.null(o) || all(is.na(o))) {
-      NULL
-    } else {
-      o
-    }
+  notNAs <- function(o) {
+    if (is.null(o) || all(is.na(o))) NULL else o
+  }
+  
   residuals0 <- purrr::possibly(stats::residuals, NULL)
   influence0 <- purrr::possibly(stats::influence, NULL)
   cooks.distance0 <- purrr::possibly(stats::cooks.distance, NULL)
@@ -175,12 +292,12 @@ augment_columns <- function(x, data, newdata, type, type.predict = type,
   if (is.null(na_action) || nrow(original) == nrow(ret)) {
     # no NAs were left out; we can simply recombine
     original <- fix_data_frame(original, newcol = ".rownames")
-    return(unrowname(cbind(original, ret)))
+    return(as_tibble(cbind(original, ret)))
   } else if (class(na_action) == "omit") {
     # if the option is "omit", drop those rows from the data
     original <- fix_data_frame(original, newcol = ".rownames")
     original <- original[-na_action, ]
-    return(unrowname(cbind(original, ret)))
+    return(as_tibble(cbind(original, ret)))
   }
 
   # add .rownames column to merge the results with the original; resilent to NAs
@@ -196,7 +313,8 @@ augment_columns <- function(x, data, newdata, type, type.predict = type,
   if (all(ret$.rownames == seq_along(ret$.rownames))) {
     ret$.rownames <- NULL
   }
-  ret
+  
+  as_tibble(ret)
 }
 
 
@@ -240,8 +358,8 @@ finish_glance <- function(ret, x) {
     ret$deviance <- tryCatch(stats::deviance(x), error = function(e) NULL)
   }
   ret$df.residual <- tryCatch(df.residual(x), error = function(e) NULL)
-
-  return(unrowname(ret))
+  
+  as_tibble(ret, rownames = NULL)
 }
 
 
@@ -274,44 +392,6 @@ confint_tidy <- function(x, conf.level = .95, func = stats::confint, ...) {
   colnames(ci) <- c("conf.low", "conf.high")
   as_tibble(ci)
 }
-
-
-#' Expand a dataset to include all factorial combinations of one or more
-#' variables
-#'
-#' This function is deprecated: use `tidyr::crossing` instead
-#'
-#' @param df a tbl
-#' @param ... arguments
-#' @param stringsAsFactors logical specifying if character vectors are
-#' converted to factors.
-#'
-#' @return A tbl
-#'
-#' @import dplyr
-#' @import tidyr
-#'
-#' @export
-inflate <- function(df, ..., stringsAsFactors = FALSE) {
-  .Deprecated("tidyr::crossing")
-
-  ret <- expand.grid(..., stringsAsFactors = stringsAsFactors)
-
-  ret <- ret %>%
-    group_by_all() %>%
-    do(data = df) %>%
-    ungroup() %>%
-    tidyr::unnest(data)
-
-  if (!is.null(groups(df))) {
-    ret <- ret %>%
-      group_by_all()
-  }
-
-  ret
-}
-
-
 
 # utility function from tidyr::col_name
 col_name <- function(x, default = stop("Please supply column name", call. = FALSE)) {

@@ -292,7 +292,8 @@ tidy.coxph <- function(x, exponentiate = FALSE, conf.int = TRUE, conf.level = .9
 augment.coxph <- function(x, data = stats::model.frame(x), newdata,
                           type.predict = "lp", type.residuals = "martingale",
                           ...) {
-  ret <- fix_data_frame(data, newcol = ".rownames")
+  # punt on rownames and tibble out until tills support Surv objects
+  # TODO: come back to this. don't forget rownames.
   augment_columns(x, data, newdata,
     type.predict = type.predict,
     type.residuals = type.residuals
@@ -689,12 +690,15 @@ tidy.survreg <- function(x, conf.level = .95, ...) {
 augment.survreg <- function(x, data = stats::model.frame(x), newdata,
                             type.predict = "response",
                             type.residuals = "response", ...) {
-  ret <- fix_data_frame(data, newcol = ".rownames")
+  # punt on tibbles until they play well with Surv objects
+  # TODO: come back to this
   augment_columns(x, data, newdata,
     type.predict = type.predict,
     type.residuals = type.residuals
   )
 }
+
+
 
 
 #' @rdname survreg_tidiers
@@ -710,20 +714,14 @@ augment.survreg <- function(x, data = stats::model.frame(x), newdata,
 #'   \item{df.residual}{residual degrees of freedom}
 #'
 #' @export
-glance.survreg <- function(x, conf.level = .95, ...) {
+glance.survreg <- function(x, ...) {
   ret <- data.frame(iter = x$iter, df = sum(x$df))
 
-  ret$chi <- 2 * diff(x$loglik)
-  ret$p.value <- 1 - stats::pchisq(ret$chi, sum(x$df) - x$idf)
+  ret$statistic <- 2 * diff(x$loglik)
+  ret$p.value <- 1 - stats::pchisq(ret$statistic, sum(x$df) - x$idf)
 
   finish_glance(ret, x)
 }
-
-
-
-
-
-
 
 
 #' Tidiers for Tests of Differences between Survival Curves

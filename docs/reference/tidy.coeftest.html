@@ -133,10 +133,10 @@ function in the <code>lmtest</code> package.</p>
 
     <p>A <code>data.frame</code> with one row for each coefficient, with five columns:</p>
 <dt>term</dt><dd><p>The term in the linear model being estimated and tested</p></dd>
-  <dt>estimate</dt><dd><p>The estimated coefficient</p></dd>
-  <dt>std.error</dt><dd><p>The standard error</p></dd>
-  <dt>statistic</dt><dd><p>test statistic</p></dd>
-  <dt>p.value</dt><dd><p>p-value</p></dd>
+<dt>estimate</dt><dd><p>The estimated coefficient</p></dd>
+<dt>std.error</dt><dd><p>The standard error</p></dd>
+<dt>statistic</dt><dd><p>test statistic</p></dd>
+<dt>p.value</dt><dd><p>p-value</p></dd>
 
     
 
@@ -148,9 +148,11 @@ function in the <code>lmtest</code> package.</p>
 
     <span class='fu'><a href='http://www.rdocumentation.org/packages/lmtest/topics/coeftest'>coeftest</a></span>(<span class='no'>fm</span>)
     <span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='fu'><a href='http://www.rdocumentation.org/packages/lmtest/topics/coeftest'>coeftest</a></span>(<span class='no'>fm</span>))
-}</div><div class='output co'>#&gt;          term  estimate  std.error statistic      p.value
-#&gt; 1 (Intercept) -11.95337 0.97622654 -12.24446 1.387684e-24
-#&gt; 2         age   1.77273 0.04770447  37.16067 2.150995e-79</div><div class='input'>
+}</div><div class='output co'>#&gt; # A tibble: 2 x 5
+#&gt;   term        estimate std.error statistic  p.value
+#&gt;   &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
+#&gt; 1 (Intercept)   -12.0     0.976      -12.2 1.39e-24
+#&gt; 2 age             1.77    0.0477      37.2 2.15e-79</div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

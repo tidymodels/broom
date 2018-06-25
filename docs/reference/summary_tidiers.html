@@ -136,17 +136,17 @@
     <p>Both <code>tidy</code> and <code>glance</code> return the same object:
 a one-row data frame with columns</p>
 <dt>minimum</dt><dd><p>smallest value in original vector</p></dd>
-  <dt>q1</dt><dd><p>value at the first quartile</p></dd>
-  <dt>median</dt><dd><p>median of original vector</p></dd>
-  <dt>mean</dt><dd><p>mean of original vector</p></dd>
-  <dt>q3</dt><dd><p>value at the third quartile</p></dd>
-  <dt>maximum</dt><dd><p>largest value in original vector</p></dd>
-  <dt>NAs</dt><dd><p>number of NA values (if any)</p></dd>
+<dt>q1</dt><dd><p>value at the first quartile</p></dd>
+<dt>median</dt><dd><p>median of original vector</p></dd>
+<dt>mean</dt><dd><p>mean of original vector</p></dd>
+<dt>q3</dt><dd><p>value at the third quartile</p></dd>
+<dt>maximum</dt><dd><p>largest value in original vector</p></dd>
+<dt>NAs</dt><dd><p>number of NA values (if any)</p></dd>
 
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code>summary</code></p></div>
+    <div class='dont-index'><p><code>summary()</code></p></div>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
@@ -155,12 +155,18 @@ a one-row data frame with columns</p>
 <span class='no'>s</span> <span class='kw'>&lt;-</span> <span class='fu'>summary</span>(<span class='no'>v</span>)
 <span class='no'>s</span></div><div class='output co'>#&gt;     Min.  1st Qu.   Median     Mean  3rd Qu.     Max. 
 #&gt; -2.92884 -0.63107  0.07610  0.02891  0.68241  3.21552 </div><div class='input'>
-<span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>s</span>)</div><div class='output co'>#&gt;     minimum         q1     median       mean        q3  maximum
-#&gt; 1 -2.928841 -0.6310692 0.07609673 0.02891086 0.6824117 3.215519</div><div class='input'><span class='fu'><a href='glance.html'>glance</a></span>(<span class='no'>s</span>)</div><div class='output co'>#&gt;     minimum         q1     median       mean        q3  maximum
-#&gt; 1 -2.928841 -0.6310692 0.07609673 0.02891086 0.6824117 3.215519</div><div class='input'>
+<span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>s</span>)</div><div class='output co'>#&gt; # A tibble: 1 x 6
+#&gt;   minimum     q1 median   mean    q3 maximum
+#&gt;     &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;
+#&gt; 1   -2.93 -0.631 0.0761 0.0289 0.682    3.22</div><div class='input'><span class='fu'><a href='glance.html'>glance</a></span>(<span class='no'>s</span>)</div><div class='output co'>#&gt; # A tibble: 1 x 6
+#&gt;   minimum     q1 median   mean    q3 maximum
+#&gt;     &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;
+#&gt; 1   -2.93 -0.631 0.0761 0.0289 0.682    3.22</div><div class='input'>
 <span class='no'>v2</span> <span class='kw'>&lt;-</span> <span class='fu'>c</span>(<span class='no'>v</span>,<span class='fl'>NA</span>)
-<span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='fu'>summary</span>(<span class='no'>v2</span>))</div><div class='output co'>#&gt;     minimum         q1     median       mean        q3  maximum na
-#&gt; 1 -2.928841 -0.6310692 0.07609673 0.02891086 0.6824117 3.215519  1</div><div class='input'>
+<span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='fu'>summary</span>(<span class='no'>v2</span>))</div><div class='output co'>#&gt; # A tibble: 1 x 7
+#&gt;   minimum     q1 median   mean    q3 maximum    na
+#&gt;     &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;
+#&gt; 1   -2.93 -0.631 0.0761 0.0289 0.682    3.22    1.</div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

@@ -158,25 +158,25 @@ and confidence intervals</p></td>
     <p>All tidying methods return a data.frame without rownames, whose
 structure depends on the method chosen.</p>
 <p><code>tidy.plm</code> returns a data frame with one row per
-coefficient, of the same form as <code><a href='lm_tidiers.html'>tidy.lm</a></code>.</p>
+coefficient, of the same form as <code><a href='lm_tidiers.html'>tidy.lm()</a></code>.</p>
 <p><code>augment</code> returns a data frame with one row for each
 initial observation, adding the columns</p>
 <dt>.fitted</dt><dd><p>predicted (fitted) values</p></dd>
-  <dt>.resid</dt><dd><p>residuals</p></dd>
+<dt>.resid</dt><dd><p>residuals</p></dd>
 
 glance returns a one-row data frame with columns
-  <dt>r.squared</dt><dd><p>The percent of variance explained by the model</p></dd>
-  <dt>adj.r.squared</dt><dd><p>r.squared adjusted based on the degrees of freedom</p></dd>
-  <dt>statistic</dt><dd><p>F-statistic</p></dd>
-  <dt>p.value</dt><dd><p>p-value from the F test, describing whether the full
-  regression is significant</p></dd>
-  <dt>deviance</dt><dd><p>deviance</p></dd>
-  <dt>df.residual</dt><dd><p>residual degrees of freedom</p></dd>
+<dt>r.squared</dt><dd><p>The percent of variance explained by the model</p></dd>
+<dt>adj.r.squared</dt><dd><p>r.squared adjusted based on the degrees of freedom</p></dd>
+<dt>statistic</dt><dd><p>F-statistic</p></dd>
+<dt>p.value</dt><dd><p>p-value from the F test, describing whether the full
+regression is significant</p></dd>
+<dt>deviance</dt><dd><p>deviance</p></dd>
+<dt>df.residual</dt><dd><p>residual degrees of freedom</p></dd>
 
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='lm_tidiers.html'>lm_tidiers</a></code></p></div>
+    <div class='dont-index'><p><code><a href='lm_tidiers.html'>lm_tidiers()</a></code></p></div>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
@@ -196,12 +196,18 @@ glance returns a one-row data frame with columns
 
     <span class='fu'><a href='glance.html'>glance</a></span>(<span class='no'>zz</span>)
 }</div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Attachement du package : 'plm'</span></div><div class='output co'>#&gt; <span class='message'>The following object is masked from 'package:lfe':</span>
+#&gt; <span class='message'>Attaching package: 'plm'</span></div><div class='output co'>#&gt; <span class='message'>The following object is masked from 'package:ordinal':</span>
+#&gt; <span class='message'></span>
+#&gt; <span class='message'>    ranef</span></div><div class='output co'>#&gt; <span class='message'>The following object is masked from 'package:lfe':</span>
 #&gt; <span class='message'></span>
 #&gt; <span class='message'>    sargan</span></div><div class='output co'>#&gt; <span class='message'>The following objects are masked from 'package:dplyr':</span>
 #&gt; <span class='message'></span>
-#&gt; <span class='message'>    between, lag, lead</span></div><div class='output co'>#&gt;   r.squared adj.r.squared statistic p.value deviance df.residual
-#&gt; 1 0.9413356     0.9374195  3064.808       0 1.111189         764</div><div class='input'>
+#&gt; <span class='message'>    between, lag, lead</span></div><div class='output co'>#&gt; <span class='message'>The following objects are masked from 'package:broom':</span>
+#&gt; <span class='message'></span>
+#&gt; <span class='message'>    between, lag, lead</span></div><div class='output co'>#&gt; # A tibble: 1 x 6
+#&gt;   r.squared adj.r.squared statistic p.value deviance df.residual
+#&gt;       &lt;dbl&gt;         &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;       &lt;int&gt;
+#&gt; 1     0.941         0.937     3065.      0.     1.11         764</div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

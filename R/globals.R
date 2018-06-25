@@ -6,7 +6,7 @@ globalVariables(c(
   "step", "fit", "type", "expCIWidth", "column1", "column2",
   "PC", "loading", "column", "comparison", "item1", "item2",
   "Method", "Intercept", "Slope", "method", "key", "Var1",
-  "Var2", "variable", "data", "std.dev", "percent", ".rowname",
+  "Var2", "variable", "data", "std.dev", "percent", ".rownames",
   "ci.lower", "ci.upper", "est", "lhs", "nobs", "norig", "op",
   "pvalue", "rhs",   "rmsea.ci.upper", "rowname", "z"))
 

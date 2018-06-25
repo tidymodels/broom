@@ -93,9 +93,9 @@ tidy.felm <- function(x, conf.int=FALSE, conf.level=.95, fe = FALSE, fe.error = 
           conf.high = estimate + stats::qnorm(1 - (1 - conf.level) / 2) * std.error
         )
     }
-    ret <- as_tibble(rbind(ret, ret_fe))
+    ret <- rbind(ret, ret_fe)
   }
-  ret
+  as_tibble(ret)
 }
 
 # Things it does not do (no simple way to get it)
@@ -105,63 +105,23 @@ tidy.felm <- function(x, conf.int=FALSE, conf.level=.95, fe = FALSE, fe.error = 
 #' @return  `augment.felm` returns  one row for each observation, with multiple columns added to the original data:
 #'   \item{.fitted}{Fitted values of model}
 #'   \item{.resid}{Residuals}
-#'   If fixed effect are present,
-#'   \item{.comp}{Connected component}
-#'   \item{.fe_}{Fixed effects (as many columns as factors)}
 #' @export
 augment.felm <- function(x, data = NULL, ...) {
+  
+  # TODO: consider adding connencted component and fixed effect summaries
+  # back in. need to think about if this makes sense. removing at the 
+  # moment because of errors and time crunch for CRAN.
+  
+  mf <- model.frame(x)
+  
   if (is.null(data)) {
-    if (is.null(x$call$data)) {
-      list <- lapply(all.vars(x$call$formula), as.name)
-      data <- eval(as.call(list(quote(data.frame), list)), parent.frame())
-    } else {
-      data <- eval(x$call$data, parent.frame())
-    }
-    if (!is.null(x$na.action)) {
-      data <- slice(data, -as.vector(x$na.action))
-    }
+    data <- as_tibble(mf)  # will fail for poly terms
+  } else {
+    data <- fix_data_frame(data, newcol = ".rownames")
   }
-  data <- fix_data_frame(data, newcol = ".rownames")
-  y <- stats::model.response(stats::model.frame(x))
-  data$.fitted <- c(x$fitted.values)
-  data$.resid <- c(x$residuals)
-  object <- lfe::getfe(x)
-  if (!is.null(object)) {
-    fe_list <- levels(object$fe)
-    object <- object %>% mutate(effect = as.numeric(effect)) %>% mutate(fe = as.character(fe))
-    length <- length(object)
-    for (fe in names(x$fe)) {
-      if ("xnam" %in% names(attributes(x$fe[[fe]]))) {
-        factor_name <- attributes(x$fe[[fe]])$fnam
-      } else {
-        factor_name <- fe
-      }
-      formula1 <- stats::as.formula(paste0("~fe==", "\"", fe, "\""))
-      ans <- object %>% filter_(formula1)
-      if (is.character(data[, factor_name])) {
-        ans <- ans %>% mutate_(.dots = stats::setNames(list(~ as.character(idx)), factor_name))
-      } else if (is.numeric(data[, factor_name])) {
-        ans <- ans %>% mutate_(.dots = stats::setNames(list(~ as.numeric(as.character(idx))), factor_name))
-      } else {
-        ans <- ans %>% mutate_(.dots = stats::setNames(list(~ idx), factor_name))
-      }
-
-      if (fe == names(x$fe)[1]) {
-        ans <- select_(ans, .dots = c("effect", "comp", "obs", factor_name))
-        names(ans) <- c(paste0(".fe.", fe), ".comp", ".obs", factor_name)
-      }
-      else {
-        ans <- select_(ans, .dots = c("effect", factor_name))
-        names(ans) <- c(paste0(".fe.", fe), factor_name)
-      }
-      data <- left_join(data, ans, factor_name)
-    }
-  }
-  return(data)
+  
+  mutate(data, .fitted = x$fitted.values, .resid = x$residuals)
 }
-
-
-
 
 #' @rdname felm_tidiers
 #'
@@ -178,16 +138,16 @@ augment.felm <- function(x, data = NULL, ...) {
 #'
 #' @export
 glance.felm <- function(x, ...) {
-  s <- summary(x)
-  ret <- with(s, data.frame(
-    r.squared = r2,
-    adj.r.squared = r2adj,
-    sigma = rse,
-    statistic = fstat,
-    p.value = pval,
-    df = df[1],
-    df.residual = rdf
+  ret <- with(
+    summary(x),
+    tibble(
+      r.squared = r2,
+      adj.r.squared = r2adj,
+      sigma = rse,
+      statistic = fstat,
+      p.value = pval,
+      df = df[1],
+      df.residual = rdf
   ))
-  ret <- finish_glance(ret, x)
-  ret
+  finish_glance(ret, x)
 }

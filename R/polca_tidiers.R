@@ -87,7 +87,7 @@
 #'
 #' @export
 tidy.poLCA <- function(x, ...) {
-  probs <- plyr::ldply(x$probs, reshape2::melt, .id = "variable") %>%
+  probs <- purrr::map_df(x$probs, reshape2::melt, .id = "variable") %>%
     transmute(variable,
       class = stringr::str_match(Var1, "class (.*):")[, 2],
       outcome = Var2,
@@ -103,10 +103,10 @@ tidy.poLCA <- function(x, ...) {
   probs <- probs %>%
     mutate(class = utils::type.convert(class))
 
-  probs_se <- plyr::ldply(x$probs.se, reshape2::melt, .id = "variable")
+  probs_se <- purrr::map_df(x$probs.se, reshape2::melt, .id = "variable")
   probs$std.error <- probs_se$value
 
-  probs
+  as_tibble(probs)
 }
 
 
@@ -134,10 +134,9 @@ tidy.poLCA <- function(x, ...) {
 #' @export
 augment.poLCA <- function(x, data, ...) {
   indices <- cbind(seq_len(nrow(x$posterior)), x$predclass)
-  ret <- data.frame(
+  ret <- tibble(
     .class = x$predclass,
-    .probability = x$posterior[indices],
-    stringsAsFactors = FALSE
+    .probability = x$posterior[indices]
   )
 
   if (missing(data)) {
@@ -154,9 +153,7 @@ augment.poLCA <- function(x, data, ...) {
     }
   }
 
-  ret <- cbind(data, ret)
-
-  unrowname(ret)
+  as_tibble(cbind(data, ret))
 }
 
 
@@ -178,11 +175,16 @@ augment.poLCA <- function(x, data, ...) {
 #'
 #' @export
 glance.poLCA <- function(x, ...) {
-  data.frame(
-    logLik = x$llik, AIC = x$aic, BIC = x$bic,
-    g.squared = x$Gsq,
-    chi.squared = x$Chisq,
-    df = x$npar,
-    df.residual = x$resid.df
+  with(
+    x,
+    tibble(
+      logLik = llik,
+      AIC = aic,
+      BIC = bic,
+      g.squared = Gsq,
+      chi.squared = Chisq,
+      df = npar,
+      df.residual = resid.df
+    )
   )
 }

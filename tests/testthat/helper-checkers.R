@@ -1,3 +1,6 @@
+## this contains old tests. it can be deleted as soon as the tests have
+## been updated to use the checkers defined in basic-tests.R
+
 #' test the basics of tidy/augment/glance output: is a data frame, no row names
 check_tidiness <- function(o) {
   expect_is(o, "data.frame")

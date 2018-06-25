@@ -160,7 +160,7 @@ tidy.summary.lm <- function(x, ...) {
     ret <- fix_data_frame(co, nn[1:ncol(co)])
   }
 
-  ret
+  as_tibble(ret)
 }
 
 
@@ -228,7 +228,7 @@ glance.lm <- function(x, ...) {
   s <- stats::summary.lm(x)
   ret <- glance.summary.lm(s, ...)
   ret <- finish_glance(ret, x)
-  ret
+  as_tibble(ret)
 }
 
 
@@ -261,18 +261,24 @@ glance.summary.lm <- function(x, ...) {
     )
   ))
 
-  unrowname(ret)
+  as_tibble(ret)
 }
 
 #' @export
 augment.mlm <- function(x, ...) {
-  stop("augment does not support multiple responses")
+  stop(
+    "Augment does not support linear models with multiple responses.",
+    call. = FALSE
+  )
 }
 
 
 #' @export
 glance.mlm <- function(x, ...) {
-  stop("glance does not support multiple responses")
+  stop(
+    "Glance does not support linear models with multiple responses.",
+    call. = FALSE
+  )
 }
 
 
@@ -296,7 +302,7 @@ process_lm <- function(ret, x, conf.int = FALSE, conf.level = .95,
       (x$family$link != "logit" && x$family$link != "log")) {
       warning(paste(
         "Exponentiating coefficients, but model did not use",
-        "a log or logit link function"
+        "a log or logit link function."
       ))
     }
     trans <- exp
@@ -318,5 +324,21 @@ process_lm <- function(ret, x, conf.int = FALSE, conf.level = .95,
   }
   ret$estimate <- trans(ret$estimate)
 
-  ret
+  as_tibble(ret)
 }
+
+
+
+#' @rdname lm_tidiers
+#' @export
+tidy.glm <- function(x, ...) {
+  NextMethod()
+}
+
+#' @rdname lm_tidiers
+#' @export
+augment.glm <- function(x, ...) {
+  NextMethod()
+}
+
+

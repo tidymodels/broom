@@ -4,7 +4,7 @@
 #' for example, draw ROC curves in ggplot2.
 #'
 #' @param x Object of class `roc`.
-#' @param ... Additional arguments, not used.
+#' @param ... Additional arguments (not used).
 #'
 #' @return A tibble with three columns:
 #'   \item{cutoff}{The cutoff of the prediction scores used

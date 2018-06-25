@@ -3,7 +3,7 @@
 #' These methods tidy the coefficients of ARIMA models of univariate time
 #' series.
 #'
-#' @param x An object of class "Arima"
+#' @param x An object of class `Arima` created by [stats::arima()].
 #'
 #' @details `augment` is not currently implemented, as it is not clear
 #' whether ARIMA predictions can or should be merged with the original
@@ -11,7 +11,7 @@
 #'
 #' @template boilerplate
 #'
-#' @seealso \link{arima}
+#' @seealso [stats::arima()]
 #'
 #' @examples
 #'

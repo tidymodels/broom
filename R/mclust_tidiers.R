@@ -69,7 +69,8 @@ tidy.Mclust <- function(x, ...) {
   } else {
     mean <- t(as.matrix(x$parameters$mean))
   }
-  cbind(ret, mean = rbind(matrix(, np - nrow(mean), ncol(mean)), mean))
+  ret <- cbind(ret, mean = rbind(matrix(, np - nrow(mean), ncol(mean)), mean))
+  as_tibble(ret)
 }
 
 
@@ -81,14 +82,11 @@ tidy.Mclust <- function(x, ...) {
 #'
 #' @export
 augment.Mclust <- function(x, data, ...) {
-  # move rownames if necessary
-  data <- fix_data_frame(data, newcol = ".rownames")
-
-  # show cluster assignment as a factor (it's not numeric)
-  cbind(as.data.frame(data),
-    .class = factor(x$classification),
-    .uncertainty = x$uncertainty
-  )
+  fix_data_frame(data, newcol = ".rownames") %>% 
+    mutate(
+      .class = factor(x$classification),
+      .uncertainty = x$uncertainty
+    )
 }
 
 
@@ -106,10 +104,16 @@ augment.Mclust <- function(x, data, ...) {
 #'
 #' @export
 glance.Mclust <- function(x, ...) {
-  ret <- with(x, data.frame(
-    model = modelName, n, G,
-    BIC = bic, logLik = loglik,
-    df, hypvol
-  ))
-  ret
+  with(
+    x,
+    tibble(
+      model = modelName,
+      n,
+      G,
+      BIC = bic, 
+      logLik = loglik,
+      df,
+      hypvol
+    )
+  )
 }

@@ -22,11 +22,25 @@
 #' @name xyz_tidiers
 #' @importFrom reshape2 melt
 tidy_xyz <- function(x, ...) {
+  
+  if (!is.matrix(x$z)) {
+    stop("To tidy an xyz list, `z` must be a matrix.", call. = FALSE)
+  }
+  
+  if (length(x$x) != nrow(x$z) || length(x$y) != ncol(x$z)) {
+    stop(
+      "To tidy an xyz list, the length of element `x` must equal the number ",
+      "the number of rows of element `z`, and the length of element `y` must ",
+      "equal the number of columns of element `z`.",
+      call. = FALSE
+    )
+  }
+  
   # convert to data.frame
   d <- melt(x$z)
   names(d) <- c("x", "y", "z")
   # get coordinates
   d$x <- x$x[d$x]
   d$y <- x$y[d$y]
-  return(d)
+  as_tibble(d)
 }

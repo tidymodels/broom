@@ -40,45 +40,44 @@
 #'
 #' @export
 tidy.lmRob <- function(x, ...) {
-  tidy.lm(x)
+  tidy.lm(x, ...)
 }
 
 #' @rdname robust_tidiers
 #' @export
 augment.lmRob <- function(x, ...) {
-  augment.lm(x)
+  augment.lm(x, ...)
 }
 
 #' @rdname robust_tidiers
 #' @export
 glance.lmRob <- function(x, ...) {
   s <- robust::summary.lmRob(x)
-  ret <- data.frame(
+  tibble(
     r.squared = x$r.squared,
     deviance = x$dev,
     sigma = s$sigma,
     df.residual = x$df.residual
   )
-  unrowname(ret)
 }
 
 #' @name robust_tidiers
 #'
 #' @export
 tidy.glmRob <- function(x, ...) {
-  tidy.lm(x)
+  tidy.lm(x, ...)
 }
 
 #' @rdname robust_tidiers
 #' @export
 augment.glmRob <- function(x, ...) {
-  augment.lm(x)
+  augment.lm(x, ...)
 }
 
 #' @rdname robust_tidiers
 #' @export
 glance.glmRob <- function(x, ...) {
-  ret <- data.frame(
+  ret <- tibble(
     deviance = x$deviance,
     null.deviance = x$null.deviance
   )

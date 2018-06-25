@@ -47,9 +47,6 @@ If \code{cont.int=TRUE}, it also includes columns for \code{conf.low} and \code{
 \code{augment.felm} returns  one row for each observation, with multiple columns added to the original data:
 \item{.fitted}{Fitted values of model}
 \item{.resid}{Residuals}
-If fixed effect are present,
-\item{.comp}{Connected component}
-\item{.fe_}{Fixed effects (as many columns as factors)}
 
 \code{glance.lm} returns a one-row data.frame with the columns
 \item{r.squared}{The percent of variance explained by the model}

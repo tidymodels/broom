@@ -30,10 +30,7 @@
 #'
 #' @export
 augment.smooth.spline <- function(x, data = x$data, ...) {
-  # move rownames if necessary
-  data <- unrowname(as.data.frame(data))
-
-  data <- as.data.frame(data)
+  data <- as_tibble(data)
   data$.fitted <- stats::fitted(x)
   data$.resid <- stats::resid(x)
   data
@@ -52,7 +49,7 @@ augment.smooth.spline <- function(x, data = x$data, ...) {
 #'
 #' @export
 glance.smooth.spline <- function(x, ...) {
-  unrowname(as.data.frame(
-    x[c("df", "lambda", "cv.crit", "pen.crit", "crit", "spar", "lambda")]
-  ))
+  as_tibble(
+    x[c("df", "lambda", "cv.crit", "pen.crit", "crit", "spar")]
+  )
 }

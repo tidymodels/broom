@@ -159,28 +159,28 @@ if requested, which may be slower)</p></td>
 The structure depends on the method chosen.</p>
 <p><code>tidy.gmm</code> returns one row for each coefficient, with six columns:</p>
 <dt>term</dt><dd><p>The term in the model being estimated</p></dd>
-  <dt>estimate</dt><dd><p>The estimated coefficient</p></dd>
-  <dt>std.error</dt><dd><p>The standard error from the linear model</p></dd>
-  <dt>statistic</dt><dd><p>t-statistic</p></dd>
-  <dt>p.value</dt><dd><p>two-sided p-value</p></dd>
+<dt>estimate</dt><dd><p>The estimated coefficient</p></dd>
+<dt>std.error</dt><dd><p>The standard error from the linear model</p></dd>
+<dt>statistic</dt><dd><p>t-statistic</p></dd>
+<dt>p.value</dt><dd><p>two-sided p-value</p></dd>
 
 If all the the terms have _ in them (e.g. WMK_(Intercept)),
 they are split into variable and term.
 
 If conf.int=TRUE, it also includes columns for conf.low and
-conf.high, computed with confint.
+conf.high, computed with confint().
 
 glance.gmm returns a one-row data.frame with the columns
-  <dt>df</dt><dd><p>Degrees of freedom</p></dd>
-  <dt>statistic</dt><dd><p>Statistic from J-test for E(g)=0</p></dd>
-  <dt>p.value</dt><dd><p>P-value from J-test</p></dd>
-  <dt>df.residual</dt><dd><p>Residual degrees of freedom, if included in "gmm" object</p></dd>
+<dt>df</dt><dd><p>Degrees of freedom</p></dd>
+<dt>statistic</dt><dd><p>Statistic from J-test for E(g)=0</p></dd>
+<dt>p.value</dt><dd><p>P-value from J-test</p></dd>
+<dt>df.residual</dt><dd><p>Residual degrees of freedom, if included in "gmm" object</p></dd>
 
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>If <code>conf.int=TRUE</code>, the confidence interval is computed with
-the <code>confint</code> function.</p>
+the <code>confint()</code> function.</p>
 <p>Note that though the "gmm" object contains residuals and fitted values,
 there is not yet an <code>augment</code> method implemented. This is because
 the input to gmm is not tidy (it's a "wide" matrix), so it is not immediately

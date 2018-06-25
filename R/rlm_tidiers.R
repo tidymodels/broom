@@ -1,7 +1,7 @@
 #' Tidying methods for an rlm (robust linear model) object
 #'
 #' This method provides a glance of an "rlm" object. The `tidy` and
-#' `augment` methods are handled by \link{lm_tidiers}.
+#' `augment` methods are handled by [lm_tidiers].
 #'
 #' @param x rlm object
 #' @param ... extra arguments (not used)
@@ -25,13 +25,29 @@
 #' augment(r)
 #' glance(r)
 #'
-#' @seealso \link{lm_tidiers}
+#' @seealso [lm_tidiers]
 #'
 #' @export
 glance.rlm <- function(x, ...) {
   s <- summary(x)
-  ret <- data.frame(sigma = s$sigma, converged = x$converged)
+  ret <- tibble(sigma = s$sigma, converged = x$converged)
   ret <- finish_glance(ret, x)
   # remove df.residual, which is always set to NA in rlm objects
   dplyr::select(ret, -df.residual)
+}
+
+# TODO: document that linking should be explicit to make it easier to find
+# documentation
+
+#' @rdname rlm_tidiers
+#' @export
+tidy.rlm <- function(x, ...) {
+  tidy.lm(x, ...)
+}
+
+
+#' @rdname rlm_tidiers
+#' @export
+augment.rlm <- function(x, ...) {
+  augment.lm(x, ...)
 }

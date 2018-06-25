@@ -32,5 +32,5 @@ tidy.mle2 <- function(x, conf.int = FALSE, conf.level = .95, ...) {
     CI <- confint_tidy(x, conf.level = conf.level, func = bbmle::confint)
     ret <- cbind(ret, CI)
   }
-  ret
+  as_tibble(ret)
 }

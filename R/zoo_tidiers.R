@@ -43,5 +43,5 @@
 tidy.zoo <- function(x, ...) {
   ret <- data.frame(as.matrix(x), index = zoo::index(x))
   ret <- tidyr::gather(ret, series, value, -index)
-  ret
+  as_tibble(ret)
 }

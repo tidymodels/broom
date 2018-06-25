@@ -4,15 +4,12 @@
 \alias{garch_tidiers}
 \alias{tidy.garch}
 \alias{glance.garch}
-\alias{augment.garch}
 \title{Tidying methods for a GARCH model (tseries package)}
 \usage{
 \method{tidy}{garch}(x, ...)
 
 \method{glance}{garch}(x, method = c("box-ljung-test", "jarque-bera-test"),
   ...)
-
-\method{augment}{garch}(x, data = NULL, newdata = NULL, ...)
 }
 \arguments{
 \item{x}{garch object}
@@ -22,10 +19,6 @@
 \item{method}{\code{character} which specifies the hypothesis test to be shown in \code{glance}.
 The \code{garch} function reports 2 hypothesis tests: Jarque-Bera to residuals
 and Box-Ljung to squared residuals.}
-
-\item{data}{original data (used with \code{augment})}
-
-\item{newdata}{new data provided for predition use (used with \code{augment})}
 }
 \value{
 A \code{data.frame} with one row for each coefficient, with five columns:
@@ -44,18 +37,6 @@ freedom}
 \item{logLik}{the data's log-likelihood under the model}
 \item{AIC}{the Akaike Information Criterion}
 \item{BIC}{the Bayesian Information Criterion}
-
-\code{augment.garch} returns one row for each observation of the
-original \code{data}, with three columns added:
-\item{.time}{Sampling times of time series}
-\item{.fitted}{Fitted values of model}
-\item{.resid}{Residuals}
-The \code{data} must be provided, since the garch object doesn't has the data
-in it.
-When \code{newdata} is supplied, \code{augment.garch} returns one row for each
-observation of \code{newdata} with the columns added:
-\item{.time}{Sampling times of time series}
-\item{.fitted}{Fitted values of model}
 }
 \description{
 This tidies the result of a coefficient of the GARCH model implemented in
@@ -70,11 +51,9 @@ if (require("tseries", quietly = TRUE)) {
     dax.garch
     tidy(dax.garch)
     glance(dax.garch)
-    head(augment(dax.garch, dax))
     smp1 = window(dax, end = c(1997, frequency(dax)))
     smp2 = window(dax, start = c(1998, 1))
     dax.garch <- garch(smp1)
-    augment(dax.garch, newdata = smp2)
 }
 
 }

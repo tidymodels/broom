@@ -75,7 +75,7 @@ tidy.ergm <- function(x, conf.int = FALSE, conf.level = .95,
                       exponentiate = FALSE, quick = FALSE, ...) {
   if (quick) {
     co <- x$coef
-    ret <- data.frame(term = names(co), estimate = unname(co))
+    ret <- tibble(term = names(co), estimate = unname(co))
     return(process_ergm(ret, conf.int = FALSE, exponentiate = exponentiate))
   }
   co <- ergm::summary.ergm(x, ...)$coefs
@@ -83,7 +83,7 @@ tidy.ergm <- function(x, conf.int = FALSE, conf.level = .95,
   nn <- c("estimate", "std.error", "mcmc.error", "p.value")
   if (inherits(co, "listof")) {
     # multiple response variables
-    ret <- plyr::ldply(co, fix_data_frame, nn[1:ncol(co[[1]])],
+    ret <- purrr::map_df(co, fix_data_frame, nn[1:ncol(co[[1]])],
       .id = "response"
     )
     ret$response <- stringr::str_replace(ret$response, "Response ", "")
@@ -130,7 +130,7 @@ glance.ergm <- function(x, deviance = FALSE, mcmc = FALSE, ...) {
   # will show appropriate warnings about standard errors, pseudolikelihood etc.
   s <- ergm::summary.ergm(x, ...)
   # dyadic (in)dependence and number of MCMLE iterations
-  ret <- data.frame(independence = s$independence, iterations = x$iterations)
+  ret <- tibble(independence = s$independence, iterations = x$iterations)
   # log-likelihood
   ret$logLik <- tryCatch(as.numeric(ergm::logLik.ergm(x)), error = function(e) NULL)
   # null and residual deviance
@@ -159,9 +159,8 @@ glance.ergm <- function(x, deviance = FALSE, mcmc = FALSE, ...) {
       MCMC.samplesize = x$control$MCMC.samplesize
     ))
   }
-
-  ret <- unrowname(ret)
-  ret
+  
+  as_tibble(ret)
 }
 
 #' helper function to process a tidied ergm object
@@ -202,5 +201,5 @@ process_ergm <- function(ret, x, conf.int = FALSE, conf.level = .95,
   }
   ret$estimate <- trans(ret$estimate)
 
-  ret
+  as_tibble(ret)
 }

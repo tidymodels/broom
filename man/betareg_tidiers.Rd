@@ -9,7 +9,7 @@
 \usage{
 \method{tidy}{betareg}(x, conf.int = FALSE, conf.level = 0.95, ...)
 
-\method{augment}{betareg}(x, data = stats::model.frame(x), newdata,
+\method{augment}{betareg}(x, data = stats::model.frame(x), newdata = NULL,
   type.predict, type.residuals, ...)
 
 \method{glance}{betareg}(x, ...)

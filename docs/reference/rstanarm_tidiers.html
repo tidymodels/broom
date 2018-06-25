@@ -108,7 +108,7 @@
 
     <div class="ref-description">
     
-    <p>These methods tidy the estimates from <code><a href='http://www.rdocumentation.org/packages/rstanarm/topics/stanreg-objects'>stanreg-objects</a></code>
+    <p>These methods tidy the estimates from <code><a href='http://www.rdocumentation.org/packages/rstanarm/topics/stanreg-objects'>rstanarm::stanreg-objects()</a></code>
 (fitted model objects from the <span class="pkg">rstanarm</span> package) into a summary.</p>
     
     </div>
@@ -126,7 +126,7 @@
     <tr>
       <th>x</th>
       <td><p>Fitted model object from the <span class="pkg">rstanarm</span> package. See
-<code><a href='http://www.rdocumentation.org/packages/rstanarm/topics/stanreg-objects'>stanreg-objects</a></code>.</p></td>
+<code><a href='http://www.rdocumentation.org/packages/rstanarm/topics/stanreg-objects'>rstanarm::stanreg-objects()</a></code>.</p></td>
     </tr>
     <tr>
       <th>parameters</th>
@@ -138,21 +138,21 @@ Value section for details.</p></td>
       <th>intervals</th>
       <td><p>If <code>TRUE</code> columns for the lower and upper bounds of the
 <code>100*prob</code>% posterior uncertainty intervals are included. See
-<code><a href='http://www.rdocumentation.org/packages/rstanarm/topics/posterior_interval.stanreg'>posterior_interval</a></code> for details.</p></td>
+<code><a href='http://www.rdocumentation.org/packages/rstanarm/topics/posterior_interval.stanreg'>rstanarm::posterior_interval()</a></code> for details.</p></td>
     </tr>
     <tr>
       <th>prob</th>
-      <td><p>See <code><a href='http://www.rdocumentation.org/packages/rstanarm/topics/posterior_interval.stanreg'>posterior_interval</a></code>.</p></td>
+      <td><p>See <code><a href='http://www.rdocumentation.org/packages/rstanarm/topics/posterior_interval.stanreg'>rstanarm::posterior_interval()</a></code>.</p></td>
     </tr>
     <tr>
       <th>...</th>
       <td><p>For <code>glance</code>, if <code>looic=TRUE</code>, optional arguments to
-<code><a href='http://www.rdocumentation.org/packages/rstanarm/topics/loo.stanreg'>loo.stanreg</a></code>.</p></td>
+<code><a href='http://www.rdocumentation.org/packages/rstanarm/topics/loo.stanreg'>rstanarm::loo.stanreg()</a></code>.</p></td>
     </tr>
     <tr>
       <th>looic</th>
       <td><p>Should the LOO Information Criterion (and related info) be
-included? See <code><a href='http://www.rdocumentation.org/packages/rstanarm/topics/loo.stanreg'>loo.stanreg</a></code> for details. Note: for
+included? See <code><a href='http://www.rdocumentation.org/packages/rstanarm/topics/loo.stanreg'>rstanarm::loo.stanreg()</a></code> for details. Note: for
 models fit to very large datasets this can be a slow computation.</p></td>
     </tr>
     </table>
@@ -166,11 +166,11 @@ one row for each coefficient, with three columns:</p>
 <dt>term</dt><dd><p>The name of the corresponding term in the model.</p></dd>
 <dt>estimate</dt><dd><p>A point estimate of the coefficient (posterior median).</p></dd>
 <dt>std.error</dt><dd><p>A standard error for the point estimate based on
-<code><a href='http://www.rdocumentation.org/packages/stats/topics/mad'>mad</a></code>. See the <em>Uncertainty estimates</em> section in
-<code><a href='http://www.rdocumentation.org/packages/rstanarm/topics/print.stanreg'>print.stanreg</a></code> for more details.</p></dd>
+<code><a href='http://www.rdocumentation.org/packages/stats/topics/mad'>stats::mad()</a></code>. See the <em>Uncertainty estimates</em> section in
+<code><a href='http://www.rdocumentation.org/packages/rstanarm/topics/print.stanreg'>rstanarm::print.stanreg()</a></code> for more details.</p></dd>
 
 For models with group-specific parameters (e.g., models fit with
-<a href='http://www.rdocumentation.org/packages/rstanarm/topics/stan_glmer'>stan_glmer</a>), setting parameters="varying"
+<a href='http://www.rdocumentation.org/packages/rstanarm/topics/stan_glmer'>rstanarm::stan_glmer()</a>), setting parameters="varying"
 selects the group-level parameters instead of the non-varying regression
 coefficients. Additional columns are added indicating the level and
 group. Specifying parameters="hierarchical" selects the
@@ -180,35 +180,34 @@ parameters.
 Setting parameters="auxiliary" will select parameters other than those
 included by the other options. The particular parameters depend on which
 rstanarm modeling function was used to fit the model. For example, for
-models fit using <a href='http://www.rdocumentation.org/packages/rstanarm/topics/stan_glm'>stan_glm.nb</a> the overdispersion
+models fit using <a href='http://www.rdocumentation.org/packages/rstanarm/topics/stan_glm'>rstanarm::stan_glm.nb()</a> the overdispersion
 parameter is included if parameters="aux", for
-<a href='http://www.rdocumentation.org/packages/rstanarm/topics/stan_lm'>stan_lm</a> the auxiliary parameters include the residual
+<a href='http://www.rdocumentation.org/packages/rstanarm/topics/stan_lm'>rstanarm::stan_lm()</a> the auxiliary parameters include the residual
 SD, R^2, and log(fit_ratio), etc.
 
 If intervals=TRUE, columns for the lower and upper
 values of the posterior intervals computed with
-<a href='http://www.rdocumentation.org/packages/rstanarm/topics/posterior_interval.stanreg'>posterior_interval</a> are also included.
+<a href='http://www.rdocumentation.org/packages/rstanarm/topics/posterior_interval.stanreg'>rstanarm::posterior_interval()</a> are also included.
 
 glance returns one row with the columns
-  <dt>algorithm</dt><dd><p>The algorithm used to fit the model.</p></dd>
-  <dt>pss</dt><dd><p>The posterior sample size (except for models fit using
-  optimization).</p></dd>
-  <dt>nobs</dt><dd><p>The number of observations used to fit the model.</p></dd>
-  <dt>sigma</dt><dd><p>The square root of the estimated residual variance, if
-  applicable. If not applicable (e.g., for binomial GLMs), <code>sigma</code> will
-  be given the value <code>1</code> in the returned object.</p></dd>
+<dt>algorithm</dt><dd><p>The algorithm used to fit the model.</p></dd>
+<dt>pss</dt><dd><p>The posterior sample size (except for models fit using
+optimization).</p></dd>
+<dt>nobs</dt><dd><p>The number of observations used to fit the model.</p></dd>
+<dt>sigma</dt><dd><p>The square root of the estimated residual variance, if
+applicable. If not applicable (e.g., for binomial GLMs), <code>sigma</code> will
+be given the value <code>1</code> in the returned object.</p></dd>
 
-  If looic=TRUE, then the following additional columns are also
-  included:
-  <dt>looic</dt><dd><p>The LOO Information Criterion.</p></dd>
-  <dt>elpd_loo</dt><dd><p>The expected log predictive density (<code>elpd_loo = -2 *
-  looic</code>).</p></dd>
-  <dt>p_loo</dt><dd><p>The effective number of parameters.</p></dd>
+If looic=TRUE, then the following additional columns are also
+included:
+<dt>looic</dt><dd><p>The LOO Information Criterion.</p></dd>
+<dt>elpd_loo</dt><dd><p>The expected log predictive density (<code>elpd_loo = -2 * looic</code>).</p></dd>
+<dt>p_loo</dt><dd><p>The effective number of parameters.</p></dd>
 
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='http://www.rdocumentation.org/packages/rstanarm/topics/summary.stanreg'>summary.stanreg</a></code></p></div>
+    <div class='dont-index'><p><code><a href='http://www.rdocumentation.org/packages/rstanarm/topics/summary.stanreg'>rstanarm::summary.stanreg()</a></code></p></div>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>

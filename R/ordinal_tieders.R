@@ -127,7 +127,7 @@ process_clm <- function(ret, x, conf.int = FALSE, conf.level = .95,
   ret[ret$term %in% names(x$alpha), "coefficient_type"] <- "alpha"
   ret[ret$term %in% names(x$beta), "coefficient_type"] <- "beta"
   ret[ret$term %in% names(x$zeta), "coefficient_type"] <- "zeta"
-  ret
+  as_tibble(ret)
 }
 
 #' @rdname ordinal_tidiers
@@ -182,7 +182,7 @@ process_polr <- function(ret, x, conf.int = FALSE, conf.level = .95,
   ret$coefficient_type <- ""
   ret[ret$term %in% names(x$coefficients), "coefficient_type"] <- "coefficient"
   ret[ret$term %in% names(x$zeta), "coefficient_type"] <- "zeta"
-  ret
+  as_tibble(ret)
 }
 
 #' @rdname ordinal_tidiers
@@ -195,7 +195,7 @@ tidy.svyolr <- tidy.polr
 glance.clm <- function(x, ...) {
   ret <- with(
     x,
-    data.frame(
+    tibble(
       edf = edf
     )
   )

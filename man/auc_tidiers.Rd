@@ -10,7 +10,7 @@
 \arguments{
 \item{x}{Object of class \code{roc}.}
 
-\item{...}{Additional arguments, not used.}
+\item{...}{Additional arguments (not used).}
 }
 \value{
 A tibble with three columns:

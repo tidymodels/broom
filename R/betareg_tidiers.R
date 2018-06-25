@@ -37,16 +37,19 @@
 #'
 #' @export
 tidy.betareg <- function(x, conf.int = FALSE, conf.level = .95, ...) {
-  nn <- c("estimate", "std.error", "statistic", "p.value")
-
-  ret <- plyr::ldply(coef(summary(x)), fix_data_frame, .id = "component", newnames = nn)
+  ret <- purrr::map_df(
+    coef(summary(x)),
+    fix_data_frame,
+    newnames = c("estimate", "std.error", "statistic", "p.value"),
+    .id = "component")
 
   if (conf.int) {
     conf <- unrowname(confint(x, level = conf.level))
     colnames(conf) <- c("conf.low", "conf.high")
     ret <- cbind(ret, conf)
   }
-  ret
+  
+  as_tibble(ret)
 }
 
 
@@ -64,11 +67,16 @@ tidy.betareg <- function(x, conf.int = FALSE, conf.level = .95, ...) {
 #'   \item{.cooksd}{Cooks distance, [cooks.distance()]}
 #'
 #' @export
-augment.betareg <- function(x, data = stats::model.frame(x), newdata,
+augment.betareg <- function(x, data = stats::model.frame(x), newdata = NULL,
                             type.predict, type.residuals, ...) {
-  augment_columns(x, data, newdata,
-    type.predict = type.predict,
-    type.residuals = type.residuals
+  validate_augment_input(x, data, newdata)
+  
+  as_tibble(
+    augment_columns(
+      x, data, newdata,
+      type.predict = type.predict,
+      type.residuals = type.residuals
+    )
   )
 }
 
@@ -91,5 +99,5 @@ glance.betareg <- function(x, ...) {
   ret <- unrowname(as.data.frame(s[c("pseudo.r.squared")]))
   ret <- finish_glance(ret, x)
   ret$df.null <- s$df.null
-  ret
+  as_tibble(ret)
 }
