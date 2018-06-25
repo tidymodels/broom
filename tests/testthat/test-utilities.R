@@ -1,5 +1,7 @@
 context("utilities")
 
+skip("specification not yet complete")
+
 skip_if_not_installed("betareg")
 library(betareg)
 

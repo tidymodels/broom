@@ -23,24 +23,3 @@ test_that("glance.garch", {
   check_glance_outputs(gl)
   check_dims(gl, 1, 7)
 })
-
-test_that("it should augment tseries::garch fits", {
-  
-  skip("Think if augmenting garch models makes sense")
-  
-  # data specified as a ts object, this could be messy
-  
-  check_augment_function(
-    aug = augment.garch,
-    model = fit,
-    data = dax,
-    newdata = dax
-  )
-  
-  expect_error(
-    augment(fit),
-    "TODO: Something about data argument cannot be empty"
-  )
-
-})
-

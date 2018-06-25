@@ -32,7 +32,7 @@ test_that("tidy.lavaan", {
   expect_equal(td$term, c("mpg ~ wt", "mpg ~~ mpg", "wt ~~ wt"))
   
   op_counts <- dplyr::count(td2, op)$n
-  expect_equal(op_counts, 10:9)
+  expect_true((all(9:10 %in% op_counts)))
 
   # check conf level
   expect_true(all(td2$conf.high <= tdc$conf.high))

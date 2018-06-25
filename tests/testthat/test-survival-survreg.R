@@ -1,6 +1,7 @@
 context("survival-survreg")
 
 skip_if_not_installed("survival")
+library(survival)
 
 test_that("survreg tidiers work", {
   sr <- survreg(Surv(futime, fustat) ~ ecog.ps + rx, ovarian,
@@ -13,8 +14,6 @@ test_that("survreg tidiers work", {
   
   gl <- glance(sr)
   check_tidy(gl, exp.col = 9)
-  
-  skip("known error, temporarily ignore")
   
   ag <- augment(sr)
   check_tidy(ag, exp.col = 6)

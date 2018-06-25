@@ -30,7 +30,7 @@
 #'
 #' @export
 augment.smooth.spline <- function(x, data = x$data, ...) {
-  data <- fix_data_frame(data)
+  data <- as_tibble(data)
   data$.fitted <- stats::fitted(x)
   data$.resid <- stats::resid(x)
   data

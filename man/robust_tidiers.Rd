@@ -11,9 +11,11 @@
 \alias{glance.glmRob}
 \title{Tidiers for lmRob and glmRob objects}
 \usage{
-\method{tidy}{lmRob}(x, ...)
+\method{tidy}{lmRob}(x, conf.int = FALSE, conf.level = 0.95,
+  exponentiate = FALSE, quick = FALSE, ...)
 
-\method{augment}{lmRob}(x, ...)
+\method{augment}{lmRob}(x, data = stats::model.frame(x), newdata,
+  type.predict, type.residuals, ...)
 
 \method{glance}{lmRob}(x, ...)
 

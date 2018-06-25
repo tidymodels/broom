@@ -20,8 +20,6 @@ test_that("coxph tidiers work", {
   gl_rob <- glance(cfit_rob)
   check_tidy(gl_rob, exp.col = 17)
   
-  skip("known error, temporarily ignore")
-  
   ag <- augment(cfit)
   check_tidy(ag, exp.col = 6)
 })

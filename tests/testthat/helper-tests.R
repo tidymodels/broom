@@ -403,7 +403,7 @@ check_augment_function <- function(
       check_tibble(au_newdata, method = "augment", strict = strict)
     }
     
-    return(invisible(NULL))
+    return(invisible())
   }
   
   if (data_arg) {

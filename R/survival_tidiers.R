@@ -690,12 +690,14 @@ tidy.survreg <- function(x, conf.level = .95, ...) {
 augment.survreg <- function(x, data = stats::model.frame(x), newdata,
                             type.predict = "response",
                             type.residuals = "response", ...) {
-  ret <- fix_data_frame(data, newcol = ".rownames")
+  # TODO: return tibble once matrix columns are supported
   augment_columns(x, data, newdata,
     type.predict = type.predict,
     type.residuals = type.residuals
   )
 }
+
+
 
 
 #' @rdname survreg_tidiers

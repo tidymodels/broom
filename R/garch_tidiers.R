@@ -73,37 +73,3 @@ glance.summary.garch <- function(x, method, ...) {
   }
   as_tibble(unrowname(ret))
 }
-
-#' @rdname garch_tidiers
-#'
-#' @return `augment.garch` returns one row for each observation of the
-#' original `data`, with three columns added:
-#'   \item{.time}{Sampling times of time series}
-#'   \item{.fitted}{Fitted values of model}
-#'   \item{.resid}{Residuals}
-#' The `data` must be provided, since the garch object doesn't has the data
-#' in it.
-#' When `newdata` is supplied, `augment.garch` returns one row for each
-#' observation of `newdata` with the columns added:
-#'   \item{.time}{Sampling times of time series}
-#'   \item{.fitted}{Fitted values of model}
-#'
-#' @export
-augment.garch <- function(x, data = NULL, newdata = NULL, ...) {
-  if (!is.null(data) & stats::is.ts(data)) {
-    .data <- as.matrix(data)
-    .data <- cbind(.data, .resid = as.numeric(stats::residuals(x)))
-    .data <- fix_data_frame(.data, newnames = c("data", ".resid"))
-    .data$.time <- as.numeric(stats::time(data))
-    .data$.fitted <- as.numeric(stats::fitted(x)[, 1])
-  }
-  if (!is.null(newdata) & stats::is.ts(newdata)) {
-    .data <- as.matrix(newdata)
-    .data <- fix_data_frame(.data, newnames = "newdata")
-    .data$.time <- as.numeric(stats::time(newdata))
-    .data$.fitted <- as.numeric(stats::predict(x, newdata)[, 1])
-  }
-  .c <- colnames(.data)
-  .i <- which(.c == ".time")
-  as_tibble(.data[, c(.c[.i], .c[-.i])])
-}

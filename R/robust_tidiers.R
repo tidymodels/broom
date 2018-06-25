@@ -39,11 +39,15 @@
 #' @seealso [lm_tidiers()], [robust::lmRob()], [robust::glmRob()]
 #'
 #' @export
-tidy.lmRob <- tidy.lm
+tidy.lmRob <- function(x, ...) {
+  tidy.lm(x, ...)
+}
 
 #' @rdname robust_tidiers
 #' @export
-augment.lmRob <- augment.lm
+augment.lmRob <- function(x, ...) {
+  augment.lm(x, ...)
+}
 
 #' @rdname robust_tidiers
 #' @export
@@ -60,11 +64,15 @@ glance.lmRob <- function(x, ...) {
 #' @name robust_tidiers
 #'
 #' @export
-tidy.glmRob <- tidy.lm
+tidy.glmRob <- function(x, ...) {
+  tidy.lm(x, ...)
+}
 
 #' @rdname robust_tidiers
 #' @export
-augment.glmRob <- augment.lm
+augment.glmRob <- function(x, ...) {
+  augment.lm(x, ...)
+}
 
 #' @rdname robust_tidiers
 #' @export

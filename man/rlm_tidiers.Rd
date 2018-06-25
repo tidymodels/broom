@@ -9,11 +9,9 @@
 \usage{
 \method{glance}{rlm}(x, ...)
 
-\method{tidy}{rlm}(x, conf.int = FALSE, conf.level = 0.95,
-  exponentiate = FALSE, quick = FALSE, ...)
+\method{tidy}{rlm}(x, ...)
 
-\method{augment}{rlm}(x, data = stats::model.frame(x), newdata, type.predict,
-  type.residuals, ...)
+\method{augment}{rlm}(x, ...)
 }
 \arguments{
 \item{x}{rlm object}
