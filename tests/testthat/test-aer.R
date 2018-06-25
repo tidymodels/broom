@@ -48,12 +48,7 @@ test_that("augment.ivreg", {
     newdata = df
   )
   
-  # TODO: figure out how on earth to test augment methods
-  
   au <- augment(fit)
   expect_true(all(c(".resid", ".fitted") %in% names(au)))
-  
-  au2 <- augment(fit, newdata = filter(df, year == "1985"))
-  expect_true(".fitted" %in% names(au2))
 })
 
