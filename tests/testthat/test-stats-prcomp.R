@@ -2,42 +2,54 @@ context("stats-prcomp")
 
 pc <- prcomp(USArrests, scale = TRUE)
 
-test_that("tidy.prcomp can return different sets of eigenvectors", {
+test_that("prcomp tidier arguments", {
+  check_arguments(tidy.prcomp)
+  check_arugments(augment.prcomp)
+})
+
+
+test_that("tidy.prcomp", {
   td <- tidy(pc, matrix = "d")
-  check_tidy(td, exp.row = 4, exp.col = 4)
+  
+  check_tidy_output(td)
+  check_dims(td, 4, 4)
   expect_identical(tidy(pc, matrix = "pcs"), td)
   
-  td <- tidy(pc, matrix = "v")
-  check_tidy(td, exp.row = 16, exp.col = 3)
-  expect_identical(tidy(pc, matrix = "rotation"), tidy(pc, matrix = "variables"))
-  expect_identical(tidy(pc, matrix = "rotation"), td)
-  expect_identical(tidy(pc, matrix = "variables"), td)
+  td2 <- tidy(pc, matrix = "v")
   
-  td <- tidy(pc, matrix = "u")
-  check_tidy(td, exp.row = 200, exp.col = 3)
+  check_tidy_output(td2)
+  check_dims(td2, 16, 3)
+  
+  expect_identical(
+    tidy(pc, matrix = "rotation"),
+    tidy(pc, matrix = "variables")
+  )
+  expect_identical(tidy(pc, matrix = "rotation"), td2)
+  expect_identical(tidy(pc, matrix = "variables"), td2)
+  
+  td3 <- tidy(pc, matrix = "u")
+  
+  check_tidy_output(td3)
+  check_dims(td3, 200, 3)
   expect_identical(tidy(pc, matrix = "x"), tidy(pc, matrix = "samples"))
-  expect_identical(tidy(pc, matrix = "x"), td)
-  expect_identical(tidy(pc, matrix = "samples"), td)
-})
-
-test_that("tidy.prcomp can only return one type of matrix", {
-  expect_error(tidy(pc, matrix = c("d", "u")))
-})
-
-test_that("augment.prcomp works with or without newdata argument", {
-  au <- augment(pc)
-  check_tidy(au, exp.row = 50, exp.col = 5)
+  expect_identical(tidy(pc, matrix = "x"), td3)
+  expect_identical(tidy(pc, matrix = "samples"), td3)
   
-  au <- augment(pc, data = USArrests)
-  check_tidy(au, exp.row = 50, exp.col = 9)
+  expect_error(
+    tidy(pc, matrix = c("d", "u")),
+    regexp = "my informative error"
+  )
   
-  au <- augment(pc, newdata = USArrests)
-  check_tidy(au, exp.row = 50, exp.col = 9)
-})
-
-test_that("tidy.prcomp works data without rownames", {
-  test <- as.data.frame(matrix(1:9, ncol = 3) + rnorm(n = 9, sd = 0.25))
-  pca <- prcomp(test)
+  no_row_nm <- as.data.frame(matrix(1:9, ncol = 3) + rnorm(n = 9, sd = 0.25))
+  pca <- prcomp(no_row_nm)
   expect_error(tidy(pca, matrix = "u"), NA)
 })
 
+test_that("augment.prcomp", {
+  check_augment_function(
+    aug = augment.prcomp,
+    model = pc,
+    data = USArrests,
+    newdata = USArrests
+  )
+})
