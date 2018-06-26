@@ -4,8 +4,12 @@ skip_if_not_installed("quantreg")
 library(quantreg)
 
 data(stackloss)
-fit <- rq(stack.loss ~ stack.x, .5)
-fit2 <- rq(stack.loss ~ 1, .5)
+
+df <- as_tibble(stack.x) %>% 
+  mutate(stack.loss = stack.loss)
+
+fit <- rq(stack.loss ~ ., data = df, tau = .5)
+fit2 <- rq(stack.loss ~ 1, data = df, tau = .5)
 
 test_that("quantreg::rq tidier arguments", {
   check_arguments(tidy.rq)
@@ -38,9 +42,7 @@ test_that("augment.rq", {
   
   au <- augment(fit, interval = "confidence")
   check_tibble(au, method = "augment")
-  check_dims(au, 21, 7)
-  
-  df <- as_tibble(stack.x)
+  check_dims(au, 21, 9)
   
   check_augment_function(
     aug = augment.rq,

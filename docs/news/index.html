@@ -109,10 +109,13 @@
 <h2 class="hasAnchor">
 <a href="#broom-0-4-4-9000" class="anchor"></a>broom 0.4.4.9000</h2>
 <ul>
-<li>Deprecated tidiers for vector and matrices</li>
+<li>Deprecated tidiers for vector and matrices in favor of <code><a href="http://www.rdocumentation.org/packages/tibble/topics/as_tibble">tibble::as_tibble</a></code> and <code><a href="http://www.rdocumentation.org/packages/tibble/topics/enframe">tibble::enframe</a></code>
+</li>
 <li>
 <code><a href="../reference/bootstrap.html">bootstrap()</a></code> and data frame tidiers have been deprecated</li>
 <li>Tidiers now return tibbles</li>
+<li>
+<code>augment.coxph</code> and <code>augment.survreg</code> now require that the user specifies either <code>data</code> or <code>newdata</code> arguments.</li>
 <li>New vignettes on the available tidying methods, contributing new tidiers</li>
 <li>Updated old vignettes to use <code>map/unnest</code> workflow rather than <code>rowwise/do</code>
 </li>

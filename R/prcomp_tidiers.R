@@ -85,7 +85,7 @@
 #' @export
 tidy.prcomp <- function(x, matrix = "u", ...) {
   if (length(matrix) > 1) {
-    stop("Tidying multiple matrices not supported")
+    stop("Must select a single matrix to tidy.", call. = FALSE)
   }
 
   MATRIX <- c("rotation", "x", "variables", "samples", "v", "u", "pcs", "d")
@@ -123,7 +123,7 @@ tidy.prcomp <- function(x, matrix = "u", ...) {
 
   ## change the PC to a numeric
   ret <- mutate(ret, PC = as.numeric(stringr::str_replace(PC, "PC", "")))
-  ret
+  as_tibble(ret)
 }
 
 
@@ -159,6 +159,5 @@ augment.prcomp <- function(x, data = NULL, newdata, ...) {
       data.frame(.rownames = rownames(x$x), pred)
     }
   }
-  ret <- unrowname(ret)
-  ret
+  as_tibble(ret)
 }

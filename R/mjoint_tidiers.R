@@ -179,8 +179,7 @@ augment.mjoint <- function(x, data = x$data, ...) {
 
   # return augmented 'data'
   out <- cbind(data, fit0, fit1, res0, res1)
-  out <- tibble::as_tibble(out)
-  return(out)
+  tibble::as_tibble(out)
 }
 
 #' @rdname mjoint_tidiers
@@ -197,10 +196,9 @@ augment.mjoint <- function(x, data = x$data, ...) {
 #' @export
 glance.mjoint <- function(x, ...) {
   smr <- summary(x)
-  out <- data.frame(t(smr$sigma))
+  out <- as_tibble(t(smr$sigma))
   out$AIC <- smr$AIC
   out$BIC <- smr$BIC
   out$logLik <- smr$logLik
-  rownames(out) <- NULL
-  tibble::as_tibble(out)
+  out
 }

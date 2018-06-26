@@ -4,6 +4,7 @@ broom 0.4.4.9000
 * Deprecated tidiers for vector and matrices in favor of `tibble::as_tibble` and `tibble::enframe`
 * `bootstrap()` and data frame tidiers have been deprecated
 * Tidiers now return tibbles
+* `augment.coxph` and `augment.survreg` now require that the user specifies either `data` or `newdata` arguments.
 * New vignettes on the available tidying methods, contributing new tidiers
 * Updated old vignettes to use `map/unnest` workflow rather than `rowwise/do`
 * Added `augment` method for chi-squared tests
