@@ -152,7 +152,7 @@ tidy.cch <- function(x, conf.level = .95, ...) {
   # add confidence interval
   ci <- unrowname(stats::confint(x, level = conf.level))
   colnames(ci) <- c("conf.low", "conf.high")
-  as_tibble(ci)
+  as_tibble(cbind(ret, ci))
 }
 
 
@@ -421,7 +421,7 @@ tidy.survfit <- function(x, ...) {
   if (inherits(x, "survfitms")) {
 
     # c(x$???) when value is a matrix and needs to be stacked
-    ret <- tibble(
+    ret <- data.frame(
       time = x$time,
       n.risk = c(x$n.risk),
       n.event = c(x$n.event),
@@ -435,7 +435,7 @@ tidy.survfit <- function(x, ...) {
 
     ret <- ret[ret$state != "", ]
   } else {
-    ret <- tibble(
+    ret <- data.frame(
       time = x$time,
       n.risk = x$n.risk,
       n.event = x$n.event,
@@ -599,7 +599,7 @@ tidy.pyears <- function(x, ...) {
   } else {
     ret <- x$data
   }
-  as_tibble(ret)
+  as_tibble(as.data.frame(ret)) # hacky to allow vector recycling
 }
 
 
@@ -641,7 +641,6 @@ glance.pyears <- function(x, ...) {
 #'
 #'     td <- tidy(sr)
 #'     augment(sr, ovarian)
-#'     augment(sr)
 #'     glance(sr)
 #'
 #'     # coefficient plot

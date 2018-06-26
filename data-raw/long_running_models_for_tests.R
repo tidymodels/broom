@@ -2,14 +2,16 @@
 # fit each time tests are run, we fit them once here and save the results
 # to `R/sysdata.rda`.
 #
-# to access objects create in this file: TODO
-# to add new objects to `R/sysdata.rda`: TODO
+# if you add an object `my_object` to `usethis::use_data` call at the end
+# of this file, you can directly reference `my_object` in your code
+#
 
 library(joineRML)
 library(survival)
+library(dplyr)
 
 hvd <- heart.valve %>% 
-  dplyr::filter(!is.na(log.grad), !is.na(log.lvmi), num <= 50)
+  filter(!is.na(log.grad), !is.na(log.lvmi), num <= 50)
 
 mjoint_fit <- mjoint(
   formLongFixed = list("grad" = log.grad ~ time + sex + hs),

@@ -24,7 +24,7 @@
 
 \method{glance}{nlrq}(x, ...)
 
-\method{augment}{rq}(x, data = model.frame(x), newdata, ...)
+\method{augment}{rq}(x, data = model.frame(x), newdata = NULL, ...)
 
 \method{augment}{rqs}(x, data = model.frame(x), newdata, ...)
 
