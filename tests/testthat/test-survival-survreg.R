@@ -3,18 +3,34 @@ context("survival-survreg")
 skip_if_not_installed("survival")
 library(survival)
 
-test_that("survreg tidiers work", {
-  sr <- survreg(Surv(futime, fustat) ~ ecog.ps + rx, ovarian,
-                dist = "exponential"
-  )
-  
+sr <- survreg(Surv(futime, fustat) ~ ecog.ps + rx, ovarian,
+              dist = "exponential"
+)
+
+test_that("survreg tidier arguments", {
+  check_arguments(tidy.survreg)
+  check_arguments(glance.survreg)
+  check_arguments(augment.survreg)
+})
+
+
+test_that("tidy.survreg", {
   td <- tidy(sr)
-  check_tidy(td, exp.row = 3, exp.col = 7)
+  check_tidy_output(td)
+  check_dims(td, 3, 7)
   expect_equal(td$term, c("(Intercept)", "ecog.ps", "rx"))
-  
+})
+
+test_that("glance.survreg", {
   gl <- glance(sr)
-  check_tidy(gl, exp.col = 9)
-  
-  ag <- augment(sr)
-  check_tidy(ag, exp.col = 6)
+  check_glance_outputs(gl)
+})
+
+test_that("augment.survreg", {
+  check_augment_function(
+    aug = augment.survreg,
+    model = sr,
+    data = ovarian,
+    newdata = ovarian
+  )
 })

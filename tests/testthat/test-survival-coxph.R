@@ -3,25 +3,44 @@ context("survival-coxph")
 skip_if_not_installed("survival")
 library(survival)
 
-test_that("coxph tidiers work", {
-  cfit <- coxph(Surv(time, status) ~ age + sex, lung)
-  td <- tidy(cfit)
-  check_tidy(td, exp.row = 2, exp.col = 7)
-  td_exp <- tidy(cfit, exponentiate = TRUE)
-  check_tidy(td_exp, exp.row = 2, exp.col = 7)
+fit <- coxph(Surv(time, status) ~ age + sex, lung)
+fit2 <- coxph(Surv(time, status) ~ age + sex, lung, robust = TRUE)
+
+test_that("coxph tidier arguments", {
+  check_arguments(tidy.coxph)
+  check_arguments(glance.coxph)
+  check_arguments(augment.coxph)
+})
+
+test_that("tidy.coxph", {
+  td <- tidy(fit)
+  td2 <- tidy(fit, exponentiate = TRUE)
+  td3 <- tidy(fit2)
   
-  cfit_rob <- coxph(Surv(time, status) ~ age + sex, lung, robust = TRUE)
-  td_rob <- tidy(cfit_rob)
-  check_tidy(td_rob, exp.row = 2, exp.col = 8)
+  check_tidy_output(td)
+  check_tidy_output(td2)
+  check_tidy_output(td3)
+})
+
+test_that("glance.coxph", {
+  gl <- glance(fit)
+  gl2 <- glance(fit2)
   
-  gl <- glance(cfit)
-  check_tidy(gl, exp.col = 15)
+  check_glance_outputs(gl, gl2)
+})
+
+test_that("augment.coxph", {
+  check_augment_function(
+    aug = augment.coxph,
+    model = fit,
+    data = lung,
+    newdata = lung
+  )
   
-  gl_rob <- glance(cfit_rob)
-  check_tidy(gl_rob, exp.col = 17)
-  
-  skip("augment")
-  
-  ag <- augment(cfit)
-  check_tidy(ag, exp.col = 6)
+  check_augment_function(
+    aug = augment.coxph,
+    model = fit2,
+    data = lung,
+    newdata = lung
+  )
 })

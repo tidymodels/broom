@@ -3,22 +3,32 @@ context("survival-survfit")
 skip_if_not_installed("survival")
 library(survival)
 
-test_that("survfit tidiers work", {
-  cfit <- coxph(Surv(time, status) ~ age + strata(sex), lung)
-  sfit <- survfit(cfit)
-  td <- tidy(sfit)
-  check_tidy(td, exp.col = 9)
-  
-  fitCI <- survfit(Surv(stop, status * as.numeric(event), type = "mstate") ~ 1,
-                   data = mgus1, subset = (start == 0)
-  )
-  td_multi <- tidy(fitCI)
-  check_tidy(td_multi, exp.col = 9)
-  
-  expect_error(glance(sfit))
-  expect_error(glance(fitCI))
-  
-  sfit <- survfit(coxph(Surv(time, status) ~ age + sex, lung))
-  gl <- glance(sfit)
-  check_tidy(gl, exp.col = 9)
+cfit <- coxph(Surv(time, status) ~ age + strata(sex), lung)
+sfit <- survfit(cfit)
+
+fit2 <- survfit(
+  Surv(stop, status * as.numeric(event), type = "mstate") ~ 1,
+  data = mgus1,
+  subset = (start == 0)
+)
+
+test_that("survfit tidier arguments", {
+  check_arguments(tidy.survfit)
+  check_arguments(glance.survfit)
 })
+
+test_that("tidy.survfit", {
+  td <- tidy(sfit)
+  td2 <- tidy(fit2)
+  
+  check_tidy_output(td)
+  check_tidy_output(td2)
+})
+
+test_that("glance.survfit", {
+  gl <- glance(sfit)
+  gl2 <- glance(fit2)
+  
+  check_glance_outputs(gl, gl2)
+})
+
