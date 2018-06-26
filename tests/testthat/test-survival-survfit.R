@@ -26,9 +26,17 @@ test_that("tidy.survfit", {
 })
 
 test_that("glance.survfit", {
-  gl <- glance(sfit)
-  gl2 <- glance(fit2)
   
-  check_glance_outputs(gl, gl2)
+  expect_error(
+    glance(sfit),
+    regexp = "Cannot construct a glance of a multi-strata survfit object."
+  )
+  
+  expect_error(
+    glance(fit2),
+    regexp = "Cannot construct a glance of a multi-state survfit object."
+  )
+  
+  # TODO: another test here?
 })
 

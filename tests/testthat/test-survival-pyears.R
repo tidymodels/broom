@@ -31,7 +31,7 @@ test_that("tidy.pyears", {
   check_tidy_output(td2)
 })
 
-test_that("pyears.survdiff", {
+test_that("glance.pyears", {
   gl <- glance(fit)
   gl2 <- glance(fit2)
   

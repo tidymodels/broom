@@ -30,6 +30,12 @@ test_that("glance.coxph", {
 })
 
 test_that("augment.coxph", {
+  
+  expect_error(
+    augment(fit),
+    regexp = "Must specify either `data` or `newdata` argument."
+  )
+  
   check_augment_function(
     aug = augment.coxph,
     model = fit,

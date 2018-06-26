@@ -4,7 +4,7 @@ pc <- prcomp(USArrests, scale = TRUE)
 
 test_that("prcomp tidier arguments", {
   check_arguments(tidy.prcomp)
-  check_arugments(augment.prcomp)
+  check_arguments(augment.prcomp)
 })
 
 
@@ -37,7 +37,7 @@ test_that("tidy.prcomp", {
   
   expect_error(
     tidy(pc, matrix = c("d", "u")),
-    regexp = "my informative error"
+    regexp = "Must select a single matrix to tidy."
   )
   
   no_row_nm <- as.data.frame(matrix(1:9, ncol = 3) + rnorm(n = 9, sd = 0.25))

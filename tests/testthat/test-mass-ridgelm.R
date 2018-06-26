@@ -6,20 +6,6 @@ names(longley)[1] <- "y"
 fit2 <- MASS::lm.ridge(y ~ ., longley)
 fit3 <- MASS::lm.ridge(y ~ ., longley, lambda = seq(0.001, .05, .001))
 
-test_that("ridgelm tidiers work for one or multple lambdas", {
-  
-  td <- tidy(fit2)
-  check_tidy(td, exp.row = 6, exp.col = 5)
-  
-  gl <- glance(fit2)
-  check_tidy(gl, exp.col = 3)
-  
-  
-  td2 <- tidy(fit3)
-  check_tidy(td2, exp.row = 300, exp.col = 5)
-})
-
-
 test_that("MASS::lm.ridge tidier arguments", {
   check_arguments(tidy.ridgelm)
   check_arguments(glance.ridgelm)

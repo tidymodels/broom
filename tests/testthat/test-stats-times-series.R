@@ -5,7 +5,8 @@ test_that("tidy.acf works", {
   
   result <- acf(lh, plot = FALSE)
   td <- tidy(result)
-  check_tidy(td, exp.row = 17, exp.col = 2)
+  check_tidy_output(td)
+  check_dims(td, 17, 2)
 })
 
 

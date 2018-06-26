@@ -59,20 +59,20 @@ test_that("tidy.htest/wilcox.test", {
 test_that("tidy.pairwise.htest", {
   pht <- with(iris, pairwise.t.test(Petal.Length, Species))
   td <- tidy(pht)
-  gl <- glance(pht)
+  # gl <- glance(pht)
   
   check_arguments(tidy.pairwise.htest)
   check_tidy_output(td)
-  check_glance_outputs(gl)
+  # check_glance_outputs(gl). doesn't exist yet
 })
 
 test_that("tidy.power.htest", {
   ptt <- power.t.test(n = 2:30, delta = 1)
   td <- tidy(ptt)
-  gl <- glance(ptt)
+  # gl <- glance(ptt)
   
   check_arguments(tidy.power.htest)
   check_tidy_output(td)
-  check_glance_outputs(gl)
+  # check_glance_outputs(gl). doesn't exist yet.
 })
 
