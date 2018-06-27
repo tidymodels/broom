@@ -1,4 +1,4 @@
-context("psych tidiers")
+context("psych")
 
 skip_if_not_installed("psych")
 

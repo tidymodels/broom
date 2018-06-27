@@ -1,4 +1,4 @@
-context("nls tidiers")
+context("stats-nls")
 
 fit <- nls(
   wt ~ a + b * mpg + c / disp,

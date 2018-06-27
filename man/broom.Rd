@@ -7,7 +7,7 @@
 \alias{broom-package}
 \title{Convert Statistical Analysis Objects into Tidy Data Frames}
 \description{
-Convert statistical analysis objects from R into tidy data frames,
+Convert statistical analysis objects from R into tidy tibbles,
 so that they can more easily be combined, reshaped and otherwise processed
 with tools like dplyr, tidyr and ggplot2. The package provides three S3
 generics: tidy, which summarizes a model's statistical findings such as
