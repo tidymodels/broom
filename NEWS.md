@@ -1,26 +1,92 @@
-broom 0.4.4.9000
------------
+# broom 0.4.4.9000
+To be released at 0.5.0
 
-* Deprecated tidiers for vector and matrices in favor of `tibble::as_tibble` and `tibble::enframe`
-* `bootstrap()` and data frame tidiers have been deprecated
-* Tidiers now return tibbles
-* `augment.coxph` and `augment.survreg` now require that the user specifies either `data` or `newdata` arguments.
-* New vignettes on the available tidying methods, contributing new tidiers
-* Updated old vignettes to use `map/unnest` workflow rather than `rowwise/do`
-* Added `augment` method for chi-squared tests
-* Added tidiers for ordinal models: `clm` and `clmm` (ordinal), `polr` (MASS), `svyolr` (survey)
-* Added tidiers for `Kendall`, `MannKendall` and `SeasonalMannKendall` from the Kendall package (thanks to #285 from Jorge Cimentada)
-* Added support for objects from `glmnetUtils` package
-* Added glance support for `Arima` objects when created with `method = "CSS"`
+`broom` now returns `tibbles`. This release also includes several new tidiers, new vignettes and a large number of bugfixes. We've also begun to more rigorously define tidier specifications: we've laid part of the groundwork for stricter and more consistent tidying, but the new tidier specifications are not yet complete. These will appear in the next release.
 
-broom 0.4.4
------------
+Additionally, users should note that we are in the process of migrating tidying methods for mixed models and Bayesian models to `broom.mixed`. `broom.mixed` is not on CRAN yet, but all mixed model and Bayesian tidiers will be deprecated once `broom.mixed` is on CRAN. No further development of mixed model tidiers will take place in `broom`.
+
+## Breaking changes
+
+Almost all tidiers should now return `tibble`s rather than `data.frame`s. Deprecated tidying methods, Bayesian and mixed model tidiers still return `data.frame`s.
+
+Users are mostly to experience issues when using `augment` in situations where tibbles are stricter than data frames. For example, specifying model covariates as a matrix object will now error:
+
+```r
+library(broom)
+library(quantreg)
+
+fit <- rq(stack.loss ~ stack.x, tau = .5)
+broom::augment(fit)
+#> Error: Column `stack.x` must be a 1d atomic vector or a list
+```
+
+This is because the default `data` argument `data = model.frame(fit)` cannot be coerced to `tibble`.
+
+Another consequence of this is that `augment.survreg` and `augment.coxph` from the `survival` package now require that the user explicitly passes data to either the `data` or `newdata` arguments.
+
+These restrictions will be relaxed in an upcoming release of `broom` pending support for matrix-columns in tibbles.
+
+## New vignettes
+
+This version of `broom` includes several new vignettes:
+
+- `vignette("available-methods", package = "broom")` contains a table detailing which tidying methods are available
+- `vignette("adding-tidiers", package = "broom")` is an *in-progress* guide for contributors on how to add new tidiers to broom
+- `vignette("glossary", package = "broom")` contains tables describing acceptable argument names and column names for the *in-progress* new specification.
+
+Several old vignettes have also been updated:
+
+- `vignette("bootstrapping", package = "broom")` now relies on the `rsample` package and a `tidyr::nest`-`purrr::map`-`tidyr::unnest` workflow. This is now the recommended workflow for working with multiple models, as opposed to the old `dplyr::rowwise`-`dplyr::do` based workflow.
+
+## Deprecations
+
+- Matrix and vector tidiers have been deprecated in  favor of `tibble::as_tibble` and `tibble::enframe`
+- Dataframe tidiers and rowwise dataframe tidiers have been deprecated
+- `bootstrap()` has been deprecated in favor of the [`rsample`](https://tidymodels.github.io/rsample/)
+- `inflate` has been removed from `broom`
+
+## Other changes
+
+- Advice to help beginners make PRs (#397 by @karldw)
+- `glance` support for `arima` objects fit with `method = "CSS"` (#396 by @josue-rodriguez)
+- A bug fix to re-enable tidying `glmnet` objects with `family = multinomial` (#395 by @erleholgersen)
+- A bug fix to allow tidying `quantreg` intercept only models (#378 by @erleholgersen)
+- A bug fix for `aovlist` objects (#377 by @mvevans89)
+- Support for `glmnetUtils` objects (#352 by @Hong-Revo)
+- A bug fix to allow `tidy_emmeans` to handle column names with dashes (#351 by @bmannakee)
+- `augment.felm` no longer returns `.fe_` and `.comp` columns
+- Support saved formulas in `augment.felm` (#347 by @ShreyasSingh)
+- `confint_tidy` now drops rows of all `NA` (#345 by @atyre2)
+- A new tidier for `caret::confusionMatrix` objects (#344 by @mkuehn10)
+- Tidiers for `Kendall::Kendall` objects (#343 by @cimentadaj)
+- A new tidying method for `car::durbinWatsonTest` objects (#341 by @mkuehn10)
+- `glance` throws an informative error for `quantreg:rq` models fit with multiple `tau` values (#338 by @bfgray3)
+- `tidy.glmnet` gains the ability to retain zero-valued coefficients with a `return_zeros` argument that defaults to `FALSE` (#337 by @bfgray3)
+- `tidy.manova` now retains a `Residuals` row (#334 by @jarvisc1)
+- Tidiers for `ordinal::clm`, `ordinal::clmm`, `survey::svyolr` and `MASS::polr` ordinal model objects (#332 by @larmarange)
+- Support for `anova` objects from `car::Anova` (#325 by @mariusbarth)
+- Tidiers for `tseries::garch` models (#323 by @wilsonfreitas)
+- Removed dependency on `psych` package (#313 by @nutterb)
+- Improved error messages (#303 by @michaelweylandt)
+- Compatibility with new `rstanarm` and `loo` packages (#298 by @jgabry)
+- Support for tidying lists return by `irlba::irlba`
+- A truly huge increase in unit tests (#267 by @dchiu911)
+- Bug fix for `tidy.prcomp` when missing labels (#265 by @corybrunson)
+- Added a `pkgdown` site at https://broom.tidyverse.org/ (#260 by @jayhesselberth)
+- Added tidiers for `AER::ivreg` models (#247 by @hughjonesd)
+- Added tidiers for the `lavaan` package (#233 by @puterleat)
+- Added `conf.int` argument to `tidy.coxph` (#220 by @larmarange)
+- Added `augment` method for chi-squared tests (#138 by @larmarange)
+- Many small improvements throughout
+
+## Contributors
+
+# broom 0.4.4
 
 * Fixed gam tidiers to work with "Gam" objects, due to an update in gam 1.15. This fixes failing CRAN tests
 * Improved test coverage (thanks to #267 from Derek Chiu)
 
-broom 0.4.3
------------
+# broom 0.4.3
 
 * Changed the deprecated `dplyr::failwith` to `purrr::possibly`
 * `augment` and `glance` on NULLs now return an empty data frame
@@ -35,8 +101,7 @@ broom 0.4.3
 * Added tidiers for `muhaz` objects from the muhaz package (thanks to #251 from Andreas Bender)
 * Added tidiers for `decompose` and `stl` objects from stats (thanks to #165 from Aaron Jacobs)
 
-broom 0.4.2
------------
+# broom 0.4.2
 
 * Added tidiers for `lsmobj` and `ref.grid` objects from the lsmeans package
 * Added tidiers for `betareg` objects from the betareg package
@@ -47,8 +112,7 @@ broom 0.4.2
 * Updates to `rstanarm` tidiers (thanks to #177 from Jonah Gabry)
 * Fixed issue with survival package 2.40-1 (thanks to #180 from Marcus Walz)
 
-broom 0.4.1
------------
+# broom 0.4.1
 
 * Added AppVeyor, codecov.io, and code of conduct
 * Changed name of "NA's" column in summaryDefault output to "na"
@@ -65,8 +129,7 @@ broom 0.4.1
 * Added tidiers for `acf` objects
 * Fixed to be compatible with dplyr 0.5, which is being submitted to CRAN
 
-broom 0.4.0
------------
+# broom 0.4.0
 
 * Added tidiers for geeglm, nlrq, roc, boot, bgterm, kappa, binWidth, binDesign, rcorr, stanfit, rjags, gamlss, and mle2 objects.
 * Added `tidy` methods for lists, including u, d, v lists from `svd`, and x, y, z lists used by `image` and `persp`
@@ -76,8 +139,7 @@ broom 0.4.0
 * Fixed various issues in lme4 output
 * Fixed issues in tests caused by dev version of ggplot2
 
-broom 0.3.7
------------
+# broom 0.3.7
 
 * Added tidiers for "plm" (panel linear model) objects from the plm package.
 * Added `tidy.coeftest` for coeftest objects from the lmtest package.
@@ -89,8 +151,7 @@ broom 0.3.7
 * Added tidiers for "lme" (linear mixed effects models) from the nlme package
 * Added `tidy` and `glance` for `multinom` objects from the nnet package.
 
-broom 0.3.6
------------
+# broom 0.3.6
 
 * Fixed bug in `tidy.pairwise.htest`, which now can handle cases where the grouping variable is numeric.
 * Added `tidy.aovlist` method. This added `stringr` package to IMPORTS to trim whitespace from the beginning and end of the `term` and `stratum` columns. This also required adjusting `tidy.aov` so that it could handle strata that are missing p-values.
@@ -98,15 +159,13 @@ broom 0.3.6
 * Added `tidy` and `glance` for matrix objects, with `tidy.matrix` converting a matrix to a data frame with rownames included, and `glance.matrix` returning the same result as `glance.data.frame`.
 * Changed DESCRIPTION Authors@R to new format
 
-broom 0.3.5
------------
+# broom 0.3.5
 
 * Fixed small bug in `felm` where the `.fitted` and `.resid` columns were matrices rather than vectors.
 * Added tidiers for `rlm` (robust linear model) and `gam` (generalized additive model) objects, including adjustments to "lm" tidiers in order to handle them. See `?rlm_tidiers` and `?gam_tidiers` for more.
 * Removed rownames from `tidy.cv.glmnet` output
 
-broom 0.3.4
------------
+# broom 0.3.4
 
 * The behavior of `augment`, particularly with regard to missing data and the `na.exclude` argument, has through the use of the `augment_columns` function been made consistent across the following models:
     * `lm`
@@ -129,8 +188,7 @@ broom 0.3.4
 * This is the original version published on CRAN.
 
 
-broom 0.3
----------
+# broom 0.3
 
 * Tidiers have been added for S3 objects from the following packages:
     * `lme4`
@@ -143,8 +201,7 @@ broom 0.3
 * `stderror` has been changed to `std.error` (affects many functions) to be consistent with broom's naming conventions for columns.
 * A function `bootstrap` has been added based on [this example](https://github.com/hadley/dplyr/issues/269), to perform the common use case of bootstrapping models.
 
-broom 0.2
----------
+# broom 0.2
 
 * Added "augment" S3 generic and various implementations. "augment" does something different from tidy: it adds columns to the original dataset, including predictions, residuals, or cluster assignments. This was originally described as "fortify" in ggplot2.
 * Added "glance" S3 generic and various implementations. "glance" produces a *one-row* data frame summary, which is necessary for tidy outputs with values like R^2 or F-statistics.

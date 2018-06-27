@@ -105,39 +105,123 @@
       <small>Source: <a href='http://github.com/tidyverse/broom/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
-    <div id="broom-0-4-4-9000" class="section level2">
+    <div id="broom-0-4-4-9000" class="section level1">
+<h1 class="page-header">
+<a href="#broom-0-4-4-9000" class="anchor"></a>broom 0.4.4.9000<small> Unreleased </small>
+</h1>
+<p>To be released at 0.5.0</p>
+<p><code>broom</code> now returns <code>tibbles</code>. This release also includes several new tidiers, new vignettes and a large number of bugfixes. We’ve also begun to more rigorously define tidier specifications: we’ve laid part of the groundwork for stricter and more consistent tidying, but the new tidier specifications are not yet complete. These will appear in the next release.</p>
+<p>Additionally, users should note that we are in the process of migrating tidying methods for mixed models and Bayesian models to <code>broom.mixed</code>. <code>broom.mixed</code> is not on CRAN yet, but all mixed model and Bayesian tidiers will be deprecated once <code>broom.mixed</code> is on CRAN. No further development of mixed model tidiers will take place in <code>broom</code>.</p>
+<div id="breaking-changes" class="section level2">
 <h2 class="hasAnchor">
-<a href="#broom-0-4-4-9000" class="anchor"></a>broom 0.4.4.9000</h2>
+<a href="#breaking-changes" class="anchor"></a>Breaking changes</h2>
+<p>Almost all tidiers should now return <code>tibble</code>s rather than <code>data.frame</code>s. Deprecated tidying methods, Bayesian and mixed model tidiers still return <code>data.frame</code>s.</p>
+<p>Users are mostly to experience issues when using <code>augment</code> in situations where tibbles are stricter than data frames. For example, specifying model covariates as a matrix object will now error:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(broom)
+<span class="kw">library</span>(quantreg)
+
+fit &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/quantreg/topics/rq">rq</a></span>(stack.loss <span class="op">~</span><span class="st"> </span>stack.x, <span class="dt">tau =</span> .<span class="dv">5</span>)
+broom<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/broom/topics/augment">augment</a></span>(fit)
+<span class="co">#&gt; Error: Column `stack.x` must be a 1d atomic vector or a list</span></code></pre></div>
+<p>This is because the default <code>data</code> argument <code>data = model.frame(fit)</code> cannot be coerced to <code>tibble</code>.</p>
+<p>Another consequence of this is that <code>augment.survreg</code> and <code>augment.coxph</code> from the <code>survival</code> package now require that the user explicitly passes data to either the <code>data</code> or <code>newdata</code> arguments.</p>
+<p>These restrictions will be relaxed in an upcoming release of <code>broom</code> pending support for matrix-columns in tibbles.</p>
+</div>
+<div id="new-vignettes" class="section level2">
+<h2 class="hasAnchor">
+<a href="#new-vignettes" class="anchor"></a>New vignettes</h2>
+<p>This version of <code>broom</code> includes several new vignettes:</p>
 <ul>
-<li>Deprecated tidiers for vector and matrices in favor of <code><a href="http://www.rdocumentation.org/packages/tibble/topics/as_tibble">tibble::as_tibble</a></code> and <code><a href="http://www.rdocumentation.org/packages/tibble/topics/enframe">tibble::enframe</a></code>
+<li>
+<code><a href="../articles/available-methods.html">vignette("available-methods", package = "broom")</a></code> contains a table detailing which tidying methods are available</li>
+<li>
+<code><a href="../articles/adding-tidiers.html">vignette("adding-tidiers", package = "broom")</a></code> is an <em>in-progress</em> guide for contributors on how to add new tidiers to broom</li>
+<li>
+<code><a href="../articles/glossary.html">vignette("glossary", package = "broom")</a></code> contains tables describing acceptable argument names and column names for the <em>in-progress</em> new specification.</li>
+</ul>
+<p>Several old vignettes have also been updated:</p>
+<ul>
+<li>
+<code><a href="../articles/bootstrapping.html">vignette("bootstrapping", package = "broom")</a></code> now relies on the <code>rsample</code> package and a <code><a href="http://www.rdocumentation.org/packages/tidyr/topics/nest">tidyr::nest</a></code>-<code><a href="http://www.rdocumentation.org/packages/purrr/topics/map">purrr::map</a></code>-<code><a href="http://www.rdocumentation.org/packages/tidyr/topics/unnest">tidyr::unnest</a></code> workflow. This is now the recommended workflow for working with multiple models, as opposed to the old <code><a href="http://dplyr.tidyverse.org/reference/rowwise.html">dplyr::rowwise</a></code>-<code><a href="http://dplyr.tidyverse.org/reference/do.html">dplyr::do</a></code> based workflow.</li>
+</ul>
+</div>
+<div id="deprecations" class="section level2">
+<h2 class="hasAnchor">
+<a href="#deprecations" class="anchor"></a>Deprecations</h2>
+<ul>
+<li>Matrix and vector tidiers have been deprecated in favor of <code><a href="http://www.rdocumentation.org/packages/tibble/topics/as_tibble">tibble::as_tibble</a></code> and <code><a href="http://www.rdocumentation.org/packages/tibble/topics/enframe">tibble::enframe</a></code>
+</li>
+<li>Dataframe tidiers and rowwise dataframe tidiers have been deprecated</li>
+<li>
+<code><a href="../reference/bootstrap.html">bootstrap()</a></code> has been deprecated in favor of the <a href="https://tidymodels.github.io/rsample/"><code>rsample</code></a>
 </li>
 <li>
-<code><a href="../reference/bootstrap.html">bootstrap()</a></code> and data frame tidiers have been deprecated</li>
-<li>Tidiers now return tibbles</li>
-<li>
-<code>augment.coxph</code> and <code>augment.survreg</code> now require that the user specifies either <code>data</code> or <code>newdata</code> arguments.</li>
-<li>New vignettes on the available tidying methods, contributing new tidiers</li>
-<li>Updated old vignettes to use <code>map/unnest</code> workflow rather than <code>rowwise/do</code>
-</li>
-<li>Added <code>augment</code> method for chi-squared tests</li>
-<li>Added tidiers for ordinal models: <code>clm</code> and <code>clmm</code> (ordinal), <code>polr</code> (MASS), <code>svyolr</code> (survey)</li>
-<li>Added tidiers for <code>Kendall</code>, <code>MannKendall</code> and <code>SeasonalMannKendall</code> from the Kendall package (thanks to <a href='http://github.com/tidyverse/broom/issues/285'>#285</a> from Jorge Cimentada)</li>
-<li>Added support for objects from <code>glmnetUtils</code> package</li>
-<li>Added glance support for <code>Arima</code> objects when created with <code>method = "CSS"</code>
+<code>inflate</code> has been removed from <code>broom</code>
 </li>
 </ul>
 </div>
-    <div id="broom-0-4-4" class="section level2">
+<div id="other-changes" class="section level2">
 <h2 class="hasAnchor">
-<a href="#broom-0-4-4" class="anchor"></a>broom 0.4.4</h2>
+<a href="#other-changes" class="anchor"></a>Other changes</h2>
+<ul>
+<li>Advice to help beginners make PRs (<a href='http://github.com/tidyverse/broom/issues/397'>#397</a> by <a href='http://github.com/karldw'>@karldw</a>)</li>
+<li>
+<code>glance</code> support for <code>arima</code> objects fit with <code>method = "CSS"</code> (<a href='http://github.com/tidyverse/broom/issues/396'>#396</a> by <a href='http://github.com/josue'>@josue</a>-rodriguez)</li>
+<li>A bug fix to re-enable tidying <code>glmnet</code> objects with <code>family = multinomial</code> (<a href='http://github.com/tidyverse/broom/issues/395'>#395</a> by <a href='http://github.com/erleholgersen'>@erleholgersen</a>)</li>
+<li>A bug fix to allow tidying <code>quantreg</code> intercept only models (<a href='http://github.com/tidyverse/broom/issues/378'>#378</a> by <a href='http://github.com/erleholgersen'>@erleholgersen</a>)</li>
+<li>A bug fix for <code>aovlist</code> objects (<a href='http://github.com/tidyverse/broom/issues/377'>#377</a> by <a href='http://github.com/mvevans89'>@mvevans89</a>)</li>
+<li>Support for <code>glmnetUtils</code> objects (<a href='http://github.com/tidyverse/broom/issues/352'>#352</a> by <a href='http://github.com/Hong'>@Hong</a>-Revo)</li>
+<li>A bug fix to allow <code>tidy_emmeans</code> to handle column names with dashes (<a href='http://github.com/tidyverse/broom/issues/351'>#351</a> by <a href='http://github.com/bmannakee'>@bmannakee</a>)</li>
+<li>
+<code>augment.felm</code> no longer returns <code>.fe_</code> and <code>.comp</code> columns</li>
+<li>Support saved formulas in <code>augment.felm</code> (<a href='http://github.com/tidyverse/broom/issues/347'>#347</a> by <a href='http://github.com/ShreyasSingh'>@ShreyasSingh</a>)</li>
+<li>
+<code>confint_tidy</code> now drops rows of all <code>NA</code> (<a href='http://github.com/tidyverse/broom/issues/345'>#345</a> by <a href='http://github.com/atyre2'>@atyre2</a>)</li>
+<li>A new tidier for <code><a href="http://www.rdocumentation.org/packages/caret/topics/confusionMatrix">caret::confusionMatrix</a></code> objects (<a href='http://github.com/tidyverse/broom/issues/344'>#344</a> by <a href='http://github.com/mkuehn10'>@mkuehn10</a>)</li>
+<li>Tidiers for <code><a href="http://www.rdocumentation.org/packages/Kendall/topics/Kendall">Kendall::Kendall</a></code> objects (<a href='http://github.com/tidyverse/broom/issues/343'>#343</a> by <a href='http://github.com/cimentadaj'>@cimentadaj</a>)</li>
+<li>A new tidying method for <code><a href="http://www.rdocumentation.org/packages/car/topics/durbinWatsonTest">car::durbinWatsonTest</a></code> objects (<a href='http://github.com/tidyverse/broom/issues/341'>#341</a> by <a href='http://github.com/mkuehn10'>@mkuehn10</a>)</li>
+<li>
+<code>glance</code> throws an informative error for <code>quantreg:rq</code> models fit with multiple <code>tau</code> values (<a href='http://github.com/tidyverse/broom/issues/338'>#338</a> by <a href='http://github.com/bfgray3'>@bfgray3</a>)</li>
+<li>
+<code>tidy.glmnet</code> gains the ability to retain zero-valued coefficients with a <code>return_zeros</code> argument that defaults to <code>FALSE</code> (<a href='http://github.com/tidyverse/broom/issues/337'>#337</a> by <a href='http://github.com/bfgray3'>@bfgray3</a>)</li>
+<li>
+<code>tidy.manova</code> now retains a <code>Residuals</code> row (<a href='http://github.com/tidyverse/broom/issues/334'>#334</a> by <a href='http://github.com/jarvisc1'>@jarvisc1</a>)</li>
+<li>Tidiers for <code><a href="http://www.rdocumentation.org/packages/ordinal/topics/clm">ordinal::clm</a></code>, <code><a href="http://www.rdocumentation.org/packages/ordinal/topics/clmm">ordinal::clmm</a></code>, <code><a href="http://www.rdocumentation.org/packages/survey/topics/svyolr">survey::svyolr</a></code> and <code><a href="http://www.rdocumentation.org/packages/MASS/topics/polr">MASS::polr</a></code> ordinal model objects (<a href='http://github.com/tidyverse/broom/issues/332'>#332</a> by <a href='http://github.com/larmarange'>@larmarange</a>)</li>
+<li>Support for <code>anova</code> objects from <code><a href="http://www.rdocumentation.org/packages/car/topics/Anova">car::Anova</a></code> (<a href='http://github.com/tidyverse/broom/issues/325'>#325</a> by <a href='http://github.com/mariusbarth'>@mariusbarth</a>)</li>
+<li>Tidiers for <code><a href="http://www.rdocumentation.org/packages/tseries/topics/garch">tseries::garch</a></code> models (<a href='http://github.com/tidyverse/broom/issues/323'>#323</a> by <a href='http://github.com/wilsonfreitas'>@wilsonfreitas</a>)</li>
+<li>Removed dependency on <code>psych</code> package (<a href='http://github.com/tidyverse/broom/issues/313'>#313</a> by <a href='http://github.com/nutterb'>@nutterb</a>)</li>
+<li>Improved error messages (<a href='http://github.com/tidyverse/broom/issues/303'>#303</a> by <a href='http://github.com/michaelweylandt'>@michaelweylandt</a>)</li>
+<li>Compatibility with new <code>rstanarm</code> and <code>loo</code> packages (<a href='http://github.com/tidyverse/broom/issues/298'>#298</a> by <a href='http://github.com/jgabry'>@jgabry</a>)</li>
+<li>Support for tidying lists return by <code><a href="http://www.rdocumentation.org/packages/irlba/topics/irlba">irlba::irlba</a></code>
+</li>
+<li>A truly huge increase in unit tests (<a href='http://github.com/tidyverse/broom/issues/267'>#267</a> by <a href='http://github.com/dchiu911'>@dchiu911</a>)</li>
+<li>Bug fix for <code>tidy.prcomp</code> when missing labels (<a href='http://github.com/tidyverse/broom/issues/265'>#265</a> by <a href='http://github.com/corybrunson'>@corybrunson</a>)</li>
+<li>Added a <code>pkgdown</code> site at <a href="https://broom.tidyverse.org/" class="uri">https://broom.tidyverse.org/</a> (<a href='http://github.com/tidyverse/broom/issues/260'>#260</a> by <a href='http://github.com/jayhesselberth'>@jayhesselberth</a>)</li>
+<li>Added tidiers for <code><a href="http://www.rdocumentation.org/packages/AER/topics/ivreg">AER::ivreg</a></code> models (<a href='http://github.com/tidyverse/broom/issues/247'>#247</a> by <a href='http://github.com/hughjonesd'>@hughjonesd</a>)</li>
+<li>Added tidiers for the <code>lavaan</code> package (<a href='http://github.com/tidyverse/broom/issues/233'>#233</a> by <a href='http://github.com/puterleat'>@puterleat</a>)</li>
+<li>Added <code>conf.int</code> argument to <code>tidy.coxph</code> (<a href='http://github.com/tidyverse/broom/issues/220'>#220</a> by <a href='http://github.com/larmarange'>@larmarange</a>)</li>
+<li>Added <code>augment</code> method for chi-squared tests (<a href='http://github.com/tidyverse/broom/issues/138'>#138</a> by <a href='http://github.com/larmarange'>@larmarange</a>)</li>
+<li>Many small improvements throughout</li>
+</ul>
+</div>
+<div id="contributors" class="section level2">
+<h2 class="hasAnchor">
+<a href="#contributors" class="anchor"></a>Contributors</h2>
+</div>
+</div>
+    <div id="broom-0-4-4" class="section level1">
+<h1 class="page-header">
+<a href="#broom-0-4-4" class="anchor"></a>broom 0.4.4<small> 2018-03-29 </small>
+</h1>
 <ul>
 <li>Fixed gam tidiers to work with “Gam” objects, due to an update in gam 1.15. This fixes failing CRAN tests</li>
 <li>Improved test coverage (thanks to <a href='http://github.com/tidyverse/broom/issues/267'>#267</a> from Derek Chiu)</li>
 </ul>
 </div>
-    <div id="broom-0-4-3" class="section level2">
-<h2 class="hasAnchor">
-<a href="#broom-0-4-3" class="anchor"></a>broom 0.4.3</h2>
+    <div id="broom-0-4-3" class="section level1">
+<h1 class="page-header">
+<a href="#broom-0-4-3" class="anchor"></a>broom 0.4.3<small> 2017-11-20 </small>
+</h1>
 <ul>
 <li>Changed the deprecated <code><a href="http://dplyr.tidyverse.org/reference/failwith.html">dplyr::failwith</a></code> to <code><a href="http://www.rdocumentation.org/packages/purrr/topics/safely">purrr::possibly</a></code>
 </li>
@@ -156,9 +240,10 @@
 <li>Added tidiers for <code>decompose</code> and <code>stl</code> objects from stats (thanks to <a href='http://github.com/tidyverse/broom/issues/165'>#165</a> from Aaron Jacobs)</li>
 </ul>
 </div>
-    <div id="broom-0-4-2" class="section level2">
-<h2 class="hasAnchor">
-<a href="#broom-0-4-2" class="anchor"></a>broom 0.4.2</h2>
+    <div id="broom-0-4-2" class="section level1">
+<h1 class="page-header">
+<a href="#broom-0-4-2" class="anchor"></a>broom 0.4.2<small> 2017-02-13 </small>
+</h1>
 <ul>
 <li>Added tidiers for <code>lsmobj</code> and <code>ref.grid</code> objects from the lsmeans package</li>
 <li>Added tidiers for <code>betareg</code> objects from the betareg package</li>
@@ -170,9 +255,10 @@
 <li>Fixed issue with survival package 2.40-1 (thanks to <a href='http://github.com/tidyverse/broom/issues/180'>#180</a> from Marcus Walz)</li>
 </ul>
 </div>
-    <div id="broom-0-4-1" class="section level2">
-<h2 class="hasAnchor">
-<a href="#broom-0-4-1" class="anchor"></a>broom 0.4.1</h2>
+    <div id="broom-0-4-1" class="section level1">
+<h1 class="page-header">
+<a href="#broom-0-4-1" class="anchor"></a>broom 0.4.1<small> 2016-06-24 </small>
+</h1>
 <ul>
 <li>Added AppVeyor, codecov.io, and code of conduct</li>
 <li>Changed name of “NA’s” column in summaryDefault output to “na”</li>
@@ -191,9 +277,10 @@
 <li>Fixed to be compatible with dplyr 0.5, which is being submitted to CRAN</li>
 </ul>
 </div>
-    <div id="broom-0-4-0" class="section level2">
-<h2 class="hasAnchor">
-<a href="#broom-0-4-0" class="anchor"></a>broom 0.4.0</h2>
+    <div id="broom-0-4-0" class="section level1">
+<h1 class="page-header">
+<a href="#broom-0-4-0" class="anchor"></a>broom 0.4.0<small> 2015-11-30 </small>
+</h1>
 <ul>
 <li>Added tidiers for geeglm, nlrq, roc, boot, bgterm, kappa, binWidth, binDesign, rcorr, stanfit, rjags, gamlss, and mle2 objects.</li>
 <li>Added <code>tidy</code> methods for lists, including u, d, v lists from <code>svd</code>, and x, y, z lists used by <code>image</code> and <code>persp</code>
@@ -206,9 +293,10 @@
 <li>Fixed issues in tests caused by dev version of ggplot2</li>
 </ul>
 </div>
-    <div id="broom-0-3-7" class="section level2">
-<h2 class="hasAnchor">
-<a href="#broom-0-3-7" class="anchor"></a>broom 0.3.7</h2>
+    <div id="broom-0-3-7" class="section level1">
+<h1 class="page-header">
+<a href="#broom-0-3-7" class="anchor"></a>broom 0.3.7<small> 2015-05-06 </small>
+</h1>
 <ul>
 <li>Added tidiers for “plm” (panel linear model) objects from the plm package.</li>
 <li>Added <code>tidy.coeftest</code> for coeftest objects from the lmtest package.</li>
@@ -222,9 +310,10 @@
 <li>Added <code>tidy</code> and <code>glance</code> for <code>multinom</code> objects from the nnet package.</li>
 </ul>
 </div>
-    <div id="broom-0-3-6" class="section level2">
-<h2 class="hasAnchor">
-<a href="#broom-0-3-6" class="anchor"></a>broom 0.3.6</h2>
+    <div id="broom-0-3-6" class="section level1">
+<h1 class="page-header">
+<a href="#broom-0-3-6" class="anchor"></a>broom 0.3.6<small> 2015-02-18 </small>
+</h1>
 <ul>
 <li>Fixed bug in <code>tidy.pairwise.htest</code>, which now can handle cases where the grouping variable is numeric.</li>
 <li>Added <code>tidy.aovlist</code> method. This added <code>stringr</code> package to IMPORTS to trim whitespace from the beginning and end of the <code>term</code> and <code>stratum</code> columns. This also required adjusting <code>tidy.aov</code> so that it could handle strata that are missing p-values.</li>
@@ -233,18 +322,20 @@
 <li>Changed DESCRIPTION <a href="mailto:Authors<a href='http://github.com/R'>@R</a>">Authors<a href='http://github.com/R'>@R</a></a> to new format</li>
 </ul>
 </div>
-    <div id="broom-0-3-5" class="section level2">
-<h2 class="hasAnchor">
-<a href="#broom-0-3-5" class="anchor"></a>broom 0.3.5</h2>
+    <div id="broom-0-3-5" class="section level1">
+<h1 class="page-header">
+<a href="#broom-0-3-5" class="anchor"></a>broom 0.3.5<small> 2015-01-05 </small>
+</h1>
 <ul>
 <li>Fixed small bug in <code>felm</code> where the <code>.fitted</code> and <code>.resid</code> columns were matrices rather than vectors.</li>
 <li>Added tidiers for <code>rlm</code> (robust linear model) and <code>gam</code> (generalized additive model) objects, including adjustments to “lm” tidiers in order to handle them. See <code><a href="../reference/rlm_tidiers.html">?rlm_tidiers</a></code> and <code><a href="../reference/gam_tidiers.html">?gam_tidiers</a></code> for more.</li>
 <li>Removed rownames from <code>tidy.cv.glmnet</code> output</li>
 </ul>
 </div>
-    <div id="broom-0-3-4" class="section level2">
-<h2 class="hasAnchor">
-<a href="#broom-0-3-4" class="anchor"></a>broom 0.3.4</h2>
+    <div id="broom-0-3-4" class="section level1">
+<h1 class="page-header">
+<a href="#broom-0-3-4" class="anchor"></a>broom 0.3.4<small> 2014-11-23 </small>
+</h1>
 <ul>
 <li>The behavior of <code>augment</code>, particularly with regard to missing data and the <code>na.exclude</code> argument, has through the use of the <code>augment_columns</code> function been made consistent across the following models:
 <ul>
@@ -270,9 +361,10 @@ See <code><a href="../reference/rowwise_df_tidiers.html">?rowwise_df_tidiers</a>
 <li><p>This is the original version published on CRAN.</p></li>
 </ul>
 </div>
-    <div id="broom-0-3" class="section level2">
-<h2 class="hasAnchor">
-<a href="#broom-0-3" class="anchor"></a>broom 0.3</h2>
+    <div id="broom-0-3" class="section level1">
+<h1 class="page-header">
+<a href="#broom-0-3" class="anchor"></a>broom 0.3<small> Unreleased </small>
+</h1>
 <ul>
 <li>Tidiers have been added for S3 objects from the following packages:
 <ul>
@@ -292,9 +384,10 @@ See <code><a href="../reference/rowwise_df_tidiers.html">?rowwise_df_tidiers</a>
 <li>A function <code>bootstrap</code> has been added based on <a href="https://github.com/hadley/dplyr/issues/269">this example</a>, to perform the common use case of bootstrapping models.</li>
 </ul>
 </div>
-    <div id="broom-0-2" class="section level2">
-<h2 class="hasAnchor">
-<a href="#broom-0-2" class="anchor"></a>broom 0.2</h2>
+    <div id="broom-0-2" class="section level1">
+<h1 class="page-header">
+<a href="#broom-0-2" class="anchor"></a>broom 0.2<small> Unreleased </small>
+</h1>
 <ul>
 <li>Added “augment” S3 generic and various implementations. “augment” does something different from tidy: it adds columns to the original dataset, including predictions, residuals, or cluster assignments. This was originally described as “fortify” in ggplot2.</li>
 <li>Added “glance” S3 generic and various implementations. “glance” produces a <em>one-row</em> data frame summary, which is necessary for tidy outputs with values like R^2 or F-statistics.</li>
