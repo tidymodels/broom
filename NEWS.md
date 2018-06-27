@@ -1,7 +1,7 @@
 # broom 0.4.4.9000
-To be released at 0.5.0
+To be released as 0.5.0
 
-`broom` now returns `tibbles`. This release also includes several new tidiers, new vignettes and a large number of bugfixes. We've also begun to more rigorously define tidier specifications: we've laid part of the groundwork for stricter and more consistent tidying, but the new tidier specifications are not yet complete. These will appear in the next release.
+Tidiers now returns `tibbles`. This release also includes several new tidiers, new vignettes and a large number of bugfixes. We've also begun to more rigorously define tidier specifications: we've laid part of the groundwork for stricter and more consistent tidying, but the new tidier specifications are not yet complete. These will appear in the next release.
 
 Additionally, users should note that we are in the process of migrating tidying methods for mixed models and Bayesian models to `broom.mixed`. `broom.mixed` is not on CRAN yet, but all mixed model and Bayesian tidiers will be deprecated once `broom.mixed` is on CRAN. No further development of mixed model tidiers will take place in `broom`.
 

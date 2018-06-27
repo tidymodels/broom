@@ -132,14 +132,14 @@ tidy.poLCA <- function(x, ...) {
 #' many additional columns, which augment tends to avoid.
 #'
 #' @export
-augment.poLCA <- function(x, data, ...) {
+augment.poLCA <- function(x, data = NULL, ...) {
   indices <- cbind(seq_len(nrow(x$posterior)), x$predclass)
   ret <- tibble(
     .class = x$predclass,
     .probability = x$posterior[indices]
   )
 
-  if (missing(data)) {
+  if (is.null(data)) {
     data <- x$y
     if (!is.null(x$x)) {
       data <- cbind(data, x$x)
@@ -148,7 +148,7 @@ augment.poLCA <- function(x, data, ...) {
     if (nrow(data) != nrow(ret)) {
       # rows may have been removed for NAs.
       # For those rows, the new columns get NAs
-      rownames(ret) <- rownames(x$y)
+      ret$.rownames <- rownames(x$y)
       ret <- ret[rownames(data), ]
     }
   }

@@ -9,7 +9,7 @@
 \usage{
 \method{tidy}{poLCA}(x, ...)
 
-\method{augment}{poLCA}(x, data, ...)
+\method{augment}{poLCA}(x, data = NULL, ...)
 
 \method{glance}{poLCA}(x, ...)
 }
