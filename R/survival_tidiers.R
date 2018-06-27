@@ -69,11 +69,12 @@ tidy.aareg <- function(x, ...) {
 #' @export
 glance.aareg <- function(x, ...) {
   s <- summary(x)
-  chi <- s$chisq
+  chi <- as.numeric(s$chisq)
   df <- length(s$test.statistic) - 1
 
-  data.frame(
-    statistic = chi, p.value = 1 - stats::pchisq(chi, df),
+  tibble(
+    statistic = chi,
+    p.value = as.numeric(1 - stats::pchisq(chi, df)),
     df = df
   )
 }
@@ -149,9 +150,9 @@ tidy.cch <- function(x, conf.level = .95, ...) {
   ret <- fix_data_frame(co, newnames = c("estimate", "std.error", "statistic", "p.value"))
 
   # add confidence interval
-  CI <- unrowname(stats::confint(x, level = conf.level))
-  colnames(CI) <- c("conf.low", "conf.high")
-  cbind(ret, CI)
+  ci <- unrowname(stats::confint(x, level = conf.level))
+  colnames(ci) <- c("conf.low", "conf.high")
+  as_tibble(cbind(ret, ci))
 }
 
 
@@ -172,8 +173,8 @@ glance.cch <- function(x, ...) {
     "score", "rscore", "wald.test", "iter",
     "n", "nevent"
   )])
-  ret <- as.data.frame(ret)
-  plyr::rename(ret, c("wald.test" = "p.value"))
+  ret <- as_tibble(ret)
+  rename(ret, p.value = wald.test)
 }
 
 
@@ -274,7 +275,7 @@ tidy.coxph <- function(x, exponentiate = FALSE, conf.int = TRUE, conf.level = .9
     ret <- cbind(ret, CI)
   }
 
-  ret
+  as_tibble(ret)
 }
 
 
@@ -289,11 +290,13 @@ tidy.coxph <- function(x, exponentiate = FALSE, conf.int = TRUE, conf.level = .9
 #'   \item{.resid}{residuals (not present if `newdata` is provided)}
 #'
 #' @export
-augment.coxph <- function(x, data = stats::model.frame(x), newdata,
+augment.coxph <- function(x, data = NULL, newdata = NULL,
                           type.predict = "lp", type.residuals = "martingale",
                           ...) {
-  # punt on rownames and tibble out until tills support Surv objects
-  # TODO: come back to this. don't forget rownames.
+  if (is.null(data) && is.null(newdata)) {
+    stop("Must specify either `data` or `newdata` argument.", call. = FALSE)
+  }
+  
   augment_columns(x, data, newdata,
     type.predict = type.predict,
     type.residuals = type.residuals
@@ -447,7 +450,7 @@ tidy.survfit <- function(x, ...) {
   if (!is.null(x$strata)) {
     ret$strata <- rep(names(x$strata), x$strata)
   }
-  ret
+  as_tibble(ret)
 }
 
 #' @rdname survfit_tidiers
@@ -467,10 +470,10 @@ tidy.survfit <- function(x, ...) {
 #' @export
 glance.survfit <- function(x, ...) {
   if (inherits(x, "survfitms")) {
-    stop("Cannot construct a glance of a multi-state survfit object")
+    stop("Cannot construct a glance of a multi-state survfit object.")
   }
   if (!is.null(x$strata)) {
-    stop("Cannot construct a glance of a multi-strata survfit object")
+    stop("Cannot construct a glance of a multi-strata survfit object.")
   }
 
   s <- summary(x)
@@ -522,8 +525,8 @@ glance.survfit <- function(x, ...) {
 #'
 #' @export
 tidy.survexp <- function(x, ...) {
-  ret <- as.data.frame(summary(x)[c("time", "surv", "n.risk")])
-  plyr::rename(ret, c(surv = "estimate"))
+  ret <- as_tibble(summary(x)[c("time", "surv", "n.risk")])
+  rename(ret, estimate = surv)
 }
 
 
@@ -536,7 +539,7 @@ tidy.survexp <- function(x, ...) {
 #'
 #' @export
 glance.survexp <- function(x, ...) {
-  data.frame(
+  tibble(
     n.max = max(x$n.risk), n.start = x$n.risk[1],
     timepoints = length(x$n.risk)
   )
@@ -593,10 +596,10 @@ glance.survexp <- function(x, ...) {
 tidy.pyears <- function(x, ...) {
   if (is.null(x$data)) {
     ret <- compact(unclass(x)[c("pyears", "n", "event", "expected")])
-    as.data.frame(ret)
   } else {
-    x$data
+    ret <- x$data
   }
+  as_tibble(as.data.frame(ret)) # hacky to allow vector recycling
 }
 
 
@@ -611,9 +614,9 @@ tidy.pyears <- function(x, ...) {
 #' @export
 glance.pyears <- function(x, ...) {
   if (is.null(x$data)) {
-    data.frame(total = sum(x$pyears), offtable = x$offtable)
+    tibble(total = sum(x$pyears), offtable = x$offtable)
   } else {
-    data.frame(total = sum(x$data$pyears), offtable = x$offtable)
+    tibble(total = sum(x$data$pyears), offtable = x$offtable)
   }
 }
 
@@ -638,7 +641,6 @@ glance.pyears <- function(x, ...) {
 #'
 #'     td <- tidy(sr)
 #'     augment(sr, ovarian)
-#'     augment(sr)
 #'     glance(sr)
 #'
 #'     # coefficient plot
@@ -663,10 +665,10 @@ tidy.survreg <- function(x, conf.level = .95, ...) {
   ret
 
   # add confidence interval
-  CI <- stats::confint(x, level = conf.level)
-  colnames(CI) <- c("conf.low", "conf.high")
-  CI <- fix_data_frame(CI)
-  merge(ret, CI, all.x = TRUE, sort = FALSE)
+  ci <- stats::confint(x, level = conf.level)
+  colnames(ci) <- c("conf.low", "conf.high")
+  ci <- fix_data_frame(ci)
+  as_tibble(merge(ret, ci, all.x = TRUE, sort = FALSE))
 }
 
 
@@ -687,11 +689,13 @@ tidy.survreg <- function(x, conf.level = .95, ...) {
 #'   \item{.resid}{Residuals}
 #'
 #' @export
-augment.survreg <- function(x, data = stats::model.frame(x), newdata,
+augment.survreg <- function(x, data = NULL, newdata = NULL,
                             type.predict = "response",
                             type.residuals = "response", ...) {
-  # punt on tibbles until they play well with Surv objects
-  # TODO: come back to this
+  if (is.null(data) && is.null(newdata)) {
+    stop("Must specify either `data` or `newdata` argument.", call. = FALSE)
+  }
+  
   augment_columns(x, data, newdata,
     type.predict = type.predict,
     type.residuals = type.residuals
@@ -759,7 +763,7 @@ tidy.survdiff <- function(x, strata=FALSE, ...) {
   # if one-sample test
   if (length(x$obs) == 1) {
     return(
-      data.frame(
+      tibble(
         N = x$n,
         obs = x$obs,
         exp = x$exp
@@ -791,7 +795,7 @@ tidy.survdiff <- function(x, strata=FALSE, ...) {
       exp = if (has_strata) apply(x$exp, 1, sum) else x$exp
     )
   }
-  cbind(gvars, rval)
+  as_tibble(bind_cols(gvars, rval))
 }
 
 
@@ -814,7 +818,7 @@ glance.survdiff <- function(x, ...) {
   } else {
     tmp <- e
   }
-  rval <- data.frame(
+  rval <- tibble(
     statistic = x$chisq,
     df = (sum(1 * (tmp > 0))) - 1
   )

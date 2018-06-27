@@ -161,13 +161,13 @@ glance.nlrq <- function(x, ...) {
 #'  when `newdata` is provided.
 #'
 #' @export
-augment.rq <- function(x, data = model.frame(x), newdata, ...) {
+augment.rq <- function(x, data = model.frame(x), newdata = NULL, ...) {
   args <- list(...)
   force_newdata <- FALSE
   if ("interval" %in% names(args) && args[["interval"]] != "none") {
     force_newdata <- TRUE
   }
-  if (missing(newdata) || is.null(newdata)) {
+  if (is.null(newdata)) {
     original <- data
     original[[".resid"]] <- residuals(x)
     if (force_newdata) {
@@ -185,7 +185,7 @@ augment.rq <- function(x, data = model.frame(x), newdata, ...) {
     original[[".tau"]] <- x[["tau"]]
     return(as_tibble(original))
   } else {
-    colnames(pred) <- c(".fitted", ".conf.low", ".conf.low")
+    colnames(pred) <- c(".fitted", ".conf.low", ".conf.high")
     original[[".tau"]] <- x[["tau"]]
     return(as_tibble(cbind(original, pred)))
   }

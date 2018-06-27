@@ -28,10 +28,8 @@ test_that("tidy.anova", {
     loess(dist ~ speed, cars, control = loess.control(surface = "direct"))
   )
   
-  expect_warning(
-    tidy(loess_anova),
-    "compare loess anova warning"
-  )
+  # TODO: can we throw a more informative error here
+  expect_warning(tidy(loess_anova))
 })
 
 

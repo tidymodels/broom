@@ -40,14 +40,14 @@ tidy.SpatialPolygonsDataFrame <- function(x, region = NULL, ...) {
     coords <- tidy(unioned)
     coords$order <- 1:nrow(coords)
   }
-  coords
+  as_tibble(coords)
 }
 
 #' @rdname sp_tidiers
 #' @export
 #' @method tidy SpatialPolygons
 tidy.SpatialPolygons <- function(x, ...) {
-  ldply(x@polygons, tidy)
+  map_df(x@polygons, tidy)
 }
 
 
@@ -56,7 +56,7 @@ tidy.SpatialPolygons <- function(x, ...) {
 #' @method tidy Polygons
 tidy.Polygons <- function(x, ...) {
   subpolys <- x@Polygons
-  pieces <- ldply(seq_along(subpolys), function(i) {
+  pieces <- map_df(seq_along(subpolys), function(i) {
     df <- tidy(subpolys[[x@plotOrder[i]]])
     df$piece <- i
     df
@@ -74,7 +74,7 @@ tidy.Polygons <- function(x, ...) {
 #' @export
 #' @method tidy Polygon
 tidy.Polygon <- function(x, ...) {
-  df <- as.data.frame(x@coords)
+  df <- as_tibble(x@coords)
   names(df) <- c("long", "lat")
   df$order <- 1:nrow(df)
   df$hole <- x@hole
@@ -85,7 +85,7 @@ tidy.Polygon <- function(x, ...) {
 #' @export
 #' @method tidy SpatialLinesDataFrame
 tidy.SpatialLinesDataFrame <- function(x, ...) {
-  ldply(x@lines, tidy)
+  map_df(x@lines, tidy)
 }
 
 #' @rdname sp_tidiers
@@ -93,7 +93,7 @@ tidy.SpatialLinesDataFrame <- function(x, ...) {
 #' @method tidy Lines
 tidy.Lines <- function(x, ...) {
   lines <- x@Lines
-  pieces <- ldply(seq_along(lines), function(i) {
+  pieces <- map_df(seq_along(lines), function(i) {
     df <- tidy(lines[[i]])
     df$piece <- i
     df
@@ -111,7 +111,7 @@ tidy.Lines <- function(x, ...) {
 #' @export
 #' @method tidy Line
 tidy.Line <- function(x, ...) {
-  df <- as.data.frame(x@coords)
+  df <- as_tibble(x@coords)
   names(df) <- c("long", "lat")
   df$order <- 1:nrow(df)
   unrowname(df)

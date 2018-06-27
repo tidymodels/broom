@@ -1,14 +1,17 @@
 context("survival-survdiff")
 
-if (require("survival", quietly = TRUE)) {
+skip_if_not_installed("survival")
+library(survival)
 
-  # Examples from survival::survdiff help page
-  ex1 <- survdiff(Surv(futime, fustat) ~ rx, data = ovarian)
-  ex2 <- survdiff(Surv(time, status) ~ pat.karno + strata(inst), data = lung)
-  # More factors and strata
-  ex2a <- survdiff(Surv(time, status) ~ pat.karno + ph.ecog +
-    strata(inst) + strata(sex), data = lung)
-  expect <- survexp(futime ~ ratetable(
+fit <- survdiff(Surv(futime, fustat) ~ rx, data = ovarian)
+fit2 <- survdiff(Surv(time, status) ~ pat.karno + strata(inst), data = lung)
+fit3 <- survdiff(
+  Surv(time, status) ~ pat.karno + ph.ecog + strata(inst) + strata(sex),
+  data = lung
+)
+
+expect <- survexp(
+  futime ~ ratetable(
     age = (accept.dt - birth.dt),
     sex = 1,
     year = accept.dt,
@@ -16,71 +19,38 @@ if (require("survival", quietly = TRUE)) {
   ),
   jasa,
   cohort = FALSE, ratetable = survexp.usr
-  )
-  ex3 <- survdiff(Surv(jasa$futime, jasa$fustat) ~ offset(expect))
-  ex4 <- survdiff(Surv(futime, fustat) ~ rx + ecog.ps, data = ovarian)
-  rm(expect)
+)
 
-  context("Testing tidy() of 'survdiff' objects")
+fit4 <- survdiff(Surv(jasa$futime, jasa$fustat) ~ offset(expect))
+fit5 <- survdiff(Surv(futime, fustat) ~ rx + ecog.ps, data = ovarian)
+rm(expect)
 
-  tidy_names <- c("N", "obs", "exp")
+test_that("survdiff tidier arguments", {
+  check_arguments(tidy.survdiff)
+  check_arguments(glance.survdiff)
+})
 
-  test_that("tidy works in 2-group case", {
-    td <- tidy(ex1)
-    check_tidy(td, exp.names = tidy_names)
-  })
+test_that("tidy.survdiff", {
+  td <- tidy(fit)
+  td2 <- tidy(fit2)
+  td3 <- tidy(fit3)
+  td4 <- tidy(fit4)
+  td5 <- tidy(fit5)
+  
+  check_tidy_output(td)
+  check_tidy_output(td2)
+  check_tidy_output(td3)
+  check_tidy_output(td4)
+  check_tidy_output(td5)
+})
 
-  test_that("tidy works in 7-group stratified case", {
-    td <- tidy(ex2)
-    check_tidy(td, exp.names = tidy_names)
-  })
+test_that("glance.survdiff", {
+  gl <- glance(fit)
+  gl2 <- glance(fit2)
+  gl3 <- glance(fit3)
+  gl4 <- glance(fit4)
+  gl5 <- glance(fit5)
+  
+  check_glance_outputs(gl, gl2, gl3, gl4, gl5)
+})
 
-  test_that("tidy works for ex2a", {
-    td <- tidy(ex2a)
-    check_tidy(td, exp.names = tidy_names)
-  })
-
-
-  test_that("tidy works for ex3", {
-    td <- tidy(ex3)
-    check_tidy(td, exp.names = tidy_names)
-  })
-
-  test_that("tidy works for ex4", {
-    td <- tidy(ex4)
-    check_tidy(td, exp.names = tidy_names)
-  })
-
-
-
-
-  context("Testing glance() for 'survdiff' objects")
-
-  glance_names <- c("statistic", "df", "p.value")
-
-  test_that("glance works in 2-group case", {
-    gl <- glance(ex1)
-    check_tidy(gl, exp.names = glance_names)
-  })
-
-  test_that("glance works in 7-group stratified case", {
-    gl <- glance(ex2)
-    check_tidy(gl, exp.names = glance_names)
-  })
-
-  test_that("glance works for ex2a", {
-    gl <- glance(ex2a)
-    check_tidy(gl, exp.names = glance_names)
-  })
-
-
-  test_that("glance works in ex3", {
-    gl <- glance(ex3)
-    check_tidy(gl, exp.names = glance_names)
-  })
-
-  test_that("glance works in ex4", {
-    gl <- glance(ex4)
-    check_tidy(gl, exp.names = glance_names)
-  })
-}

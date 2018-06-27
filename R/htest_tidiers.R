@@ -107,7 +107,7 @@ tidy.htest <- function(x, ...) {
   if (!is.null(x$alternative)) {
     ret <- c(ret, alternative = as.character(x$alternative))
   }
-  unrowname(as.data.frame(ret))
+  as_tibble(ret)
 }
 
 

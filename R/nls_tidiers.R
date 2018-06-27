@@ -98,10 +98,9 @@ augment.nls <- function(x, data = NULL, newdata = NULL, ...) {
   
   # TODO: import stats::predict
   if (!is.null(newdata)) {
-    out <- newdata %>% 
-      as_rw_tibble() %>% 
-      mutate(.fitted = predict(x, newdata = newdata))
-    return(out)
+    ret <- as_rw_tibble(newdata)
+    ret$.fitted <- predict(x, newdata = newdata)
+    return(ret)
   }
   
   # recover data if necessary

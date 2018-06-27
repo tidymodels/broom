@@ -1,20 +1,31 @@
 context("survival-survexp")
 
 skip_if_not_installed("survival")
+library(survival)
 
-test_that("survexp tidiers work", {
-  sexpfit <- suppressWarnings(
-    survexp(futime ~ 1,
-            rmap = list(
-              sex = "male", year = accept.dt,
-              age = accept.dt - birth.dt
-            ),
-            method = "conditional", data = jasa
-    )
+fit <- suppressWarnings(
+  survexp(
+    futime ~ 1,
+    rmap = list(
+      sex = "male", year = accept.dt,
+      age = accept.dt - birth.dt
+    ),
+    method = "conditional", data = jasa
   )
-  td <- tidy(sexpfit)
-  check_tidy(td, exp.col = 3)
-  
-  gl <- glance(sexpfit)
-  check_tidy(gl, exp.col = 3)
+)
+
+test_that("survfit tidier arguments", {
+  check_arguments(tidy.survexp)
+  check_arguments(glance.survexp)
 })
+
+test_that("tidy.survexp", {
+  td <- tidy(fit)
+  check_tidy_output(td)
+})
+
+test_that("glance.survexp", {
+  gl <- glance(fit)
+  check_glance_outputs(gl)
+})
+

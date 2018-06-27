@@ -10,7 +10,7 @@
 \usage{
 \method{tidy}{survreg}(x, conf.level = 0.95, ...)
 
-\method{augment}{survreg}(x, data = stats::model.frame(x), newdata,
+\method{augment}{survreg}(x, data = NULL, newdata = NULL,
   type.predict = "response", type.residuals = "response", ...)
 
 \method{glance}{survreg}(x, ...)
@@ -83,7 +83,6 @@ if (require("survival", quietly = TRUE)) {
 
     td <- tidy(sr)
     augment(sr, ovarian)
-    augment(sr)
     glance(sr)
 
     # coefficient plot

@@ -44,7 +44,7 @@ tidy.table <- function(x, ...) {
 #'
 #' @export
 tidy.ftable <- function(x, ...) {
-  as.data.frame(x)
+  as_tibble(x)
 }
 
 
@@ -69,7 +69,7 @@ tidy.ftable <- function(x, ...) {
 #'
 #' @export
 tidy.density <- function(x, ...) {
-  as.data.frame(x[c("x", "y")])
+  as_tibble(x[c("x", "y")])
 }
 
 
@@ -123,7 +123,7 @@ tidy.dist <- function(x, diag = attr(x, "Diag"),
     # filter out the diagonal
     ret <- filter(ret, item1 != item2)
   }
-  ret
+  as_tibble(ret)
 }
 
 
@@ -147,7 +147,7 @@ tidy.dist <- function(x, diag = attr(x, "Diag"),
 #'
 #' @export
 tidy.spec <- function(x, ...) {
-  as.data.frame(x[c("freq", "spec")])
+  as_tibble(x[c("freq", "spec")])
 }
 
 
@@ -237,8 +237,7 @@ tidy.manova <- function(x, test = "Pillai", ...) {
   test.name <- c("pillai", "wilks", "hl", "roy")[test.pos]
 
   nn <- c("df", test.name, "statistic", "num.df", "den.df", "p.value")
-  ret <- fix_data_frame(summary(x, test = test, ...)$stats, nn)
-  ret
+  fix_data_frame(summary(x, test = test, ...)$stats, nn)
 }
 
 #' Tidy a ts timeseries object
@@ -279,7 +278,7 @@ tidy.ts <- function(x, ...) {
     res <- tibble::add_column(res, index = index, .before = 1)
     tidyr::gather(res, series, value, -index)
   } else {
-    tibble::data_frame(index = index, value = as.vector(x))
+    tibble(index = index, value = as.vector(x))
   }
 }
 
@@ -323,13 +322,12 @@ tidy.ts <- function(x, ...) {
 #'
 #' @export
 tidy.pairwise.htest <- function(x, ...) {
-  data.frame(group1 = rownames(x$p.value)) %>%
-    cbind(as.data.frame(x$p.value)) %>%
+  tibble(group1 = rownames(x$p.value)) %>%
+    cbind(x$p.value) %>%
     tidyr::gather(group2, p.value, -group1) %>%
-    stats::na.omit() %>%
-    unrowname()
+    stats::na.omit() %>% 
+    as_tibble()
 }
-
 
 #' tidy a power.htest
 #'
@@ -353,7 +351,7 @@ tidy.pairwise.htest <- function(x, ...) {
 #' @export
 tidy.power.htest <- function(x, ...) {
   cols <- compact(x[c("n", "delta", "sd", "sig.level", "power", "p1", "p2")])
-  as.data.frame(cols)
+  as_tibble(cols)
 }
 
 
@@ -403,11 +401,5 @@ tidy.power.htest <- function(x, ...) {
 #'
 #' @export
 tidy.acf <- function(x, ...) {
-  ret <- data.frame(lag = x$lag, acf = x$acf)
-  return(ret)
+  tibble(lag = as.numeric(x$lag), acf = as.numeric(x$acf))
 }
-
-
-# todo?
-# tidy.infl
-# tidy.stepfun

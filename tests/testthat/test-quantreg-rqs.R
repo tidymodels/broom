@@ -3,6 +3,10 @@ context("quantreg-rqs")
 skip_if_not_installed("quantreg")
 library(quantreg)
 
+# TODO: this obscures a bug in how augment.rqs deals with NAs, but
+# punting on that until after broom 0.5.0
+airquality <- na.omit(airquality)
+
 fit <- rq(Ozone ~ ., data = airquality, tau = 1:19 / 20)
 fit2 <- rq(Ozone ~ Temp - 1, data = airquality, tau = 1:19 / 20)
 

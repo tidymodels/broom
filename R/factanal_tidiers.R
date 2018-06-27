@@ -50,7 +50,6 @@ tidy.factanal <- function(x, ...) {
   tidy_df$variable <- as.character(tidy_df$variable)
 
   # Remove row names and clean column names
-  rownames(tidy_df) <- NULL
   colnames(tidy_df) <- gsub("Factor", "fl", colnames(tidy_df))
 
   tidy_df
@@ -83,10 +82,7 @@ augment.factanal <- function(x, data, ...) {
   # Place relevant values into a tidy data frame
   tidy_df <- data.frame(.rownames = rownames(scores), data.frame(scores)) %>%
     as_tibble()
-  tidy_df$.rownames <- as.character(tidy_df$.rownames)
 
-  # Remove row names and clean column names
-  rownames(tidy_df) <- NULL
   colnames(tidy_df) <- gsub("Factor", ".fs", colnames(tidy_df))
 
   # Check if original data provided

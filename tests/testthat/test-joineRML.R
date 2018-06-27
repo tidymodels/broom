@@ -1,115 +1,87 @@
-context("joineRML")
+context("joinerml")
 
-skip("Slow running, deal with later")
+# TODO: think about the tidy interface when bootstrapping standard errors
+# should tidy work on two objects are once?
 
 skip_if_not_installed("joineRML")
-
 library(joineRML)
-data(heart.valve, package = "joineRML")
-hvd <- heart.valve[!is.na(heart.valve$log.grad) & !is.na(heart.valve$log.lvmi) & heart.valve$num <= 50, ]
 
-# Model fits
-fit1 <- suppressMessages(joineRML::mjoint(
-  formLongFixed = list("grad" = log.grad ~ time + sex + hs),
-  formLongRandom = list("grad" = ~ 1 | num),
-  formSurv = survival::Surv(fuyrs, status) ~ age,
-  data = hvd,
-  inits = list(
-    "gamma" = c(0.1, 2.7),
-    "beta" = c(2.5, 0.0, 0.1, 0.2)
-  ),
-  timeVar = "time"
-))
-fit2 <- suppressMessages(joineRML::mjoint(
-  formLongFixed = list(
-    "grad" = log.grad ~ time + sex + hs,
-    "lvmi" = log.lvmi ~ time + sex
-  ),
-  formLongRandom = list(
-    "grad" = ~ 1 | num,
-    "lvmi" = ~ time | num
-  ),
-  formSurv = Surv(fuyrs, status) ~ age,
-  data = hvd,
-  inits = list(
-    "gamma" = c(0.11, 1.51, 0.80),
-    "beta" = c(2.52, 0.01, 0.03, 0.08, 4.99, 0.03, -0.20)
-  ),
-  timeVar = "time"
-))
+# NOTE: the models used in these tests are created in 
+# `tests/fit_and_save_long_running_models.R`, and then are saved to
+# `R/sysdata.rda`
 
-# Bootstrapped SEs
-bSE1 <- suppressMessages(joineRML::bootSE(fit1, nboot = 5, safe.boot = TRUE, progress = FALSE))
-bSE2 <- suppressMessages(joineRML::bootSE(fit2, nboot = 5, safe.boot = TRUE, progress = FALSE))
+hvd <- heart.valve %>% 
+  dplyr::filter(!is.na(log.grad), !is.na(log.lvmi), num <= 50)
 
-test_that("tidy works on mjoint models with a single longitudinal process", {
-  td <- tidy(fit1)
-  check_tidy(td, exp.row = 2)
-  td <- tidy(fit1, component = "survival")
-  check_tidy(td, exp.row = 2)
-  td <- tidy(fit1, component = "longitudinal")
-  check_tidy(td, exp.row = 4)
-  td <- tidy(fit1, component = "survival", bootSE = bSE1)
-  check_tidy(td, exp.row = 2)
-  td <- tidy(fit1, component = "longitudinal", bootSE = bSE1)
-  check_tidy(td, exp.row = 4)
+test_that("mjoint tidier arguments", {
+  check_arguments(tidy.mjoint)
+  check_arguments(glance.mjoint)
+  check_arguments(augment.mjoint)
+})
+
+test_that("tidy.mjoint", {
+  td <- tidy(mjoint_fit)
+  tds <- tidy(mjoint_fit, component = "survival")
+  tdl <- tidy(mjoint_fit, component = "longitudinal")
   
-  td <- tidy(fit1, component = "survival")
-  expect_equal(td$term, c("age", "gamma_1"))
-  td <- tidy(fit1, component = "longitudinal")
-  expect_equal(td$term, c("(Intercept)_1", "time_1", "sex_1", "hsStentless valve_1"))
-})
-
-test_that("tidy works on mjoint models with more than one longitudinal process", {
-  td <- tidy(fit2)
-  check_tidy(td, exp.row = 3)
-  td <- tidy(fit2, component = "survival")
-  check_tidy(td, exp.row = 3)
-  td <- tidy(fit2, component = "longitudinal")
-  check_tidy(td, exp.row = 7)
-  td <- tidy(fit2, component = "survival", bootSE = bSE2)
-  check_tidy(td, exp.row = 3)
-  td <- tidy(fit2, component = "longitudinal", bootSE = bSE2)
-  check_tidy(td, exp.row = 7)
+  tdsbs <- tidy(
+    mjoint_fit,
+    component = "survival",
+    bootSE = mjoint_fit_bs_se
+  )
   
-  td <- tidy(fit2, component = "survival")
-  expect_equal(td$term, c("age", "gamma_1", "gamma_2"))
-  td <- tidy(fit2, component = "longitudinal")
-  expect_equal(td$term, c("(Intercept)_1", "time_1", "sex_1", "hsStentless valve_1", "(Intercept)_2", "time_2", "sex_2"))
+  tdlbs <- tidy(
+    mjoint_fit,
+    component = "longitudinal",
+    bootSE = mjoint_fit_bs_se
+  )
+  
+  check_tidy_output(td)
+  check_tidy_output(tds)
+  check_tidy_output(tdl)
+  check_tidy_output(tdsbs)
+  check_tidy_output(tdlbs)
+  
+  td2 <- tidy(mjoint_fit2)
+  td2s <- tidy(mjoint_fit2, component = "survival")
+  td2l <- tidy(mjoint_fit2, component = "longitudinal")
+  
+  td2sbs <- tidy(
+    mjoint_fit2,
+    component = "survival",
+    bootSE = mjoint_fit2_bs_se
+  )
+  
+  td2lbs <- tidy(
+    mjoint_fit2, 
+    component = "longitudinal",
+    bootSE = mjoint_fit2_bs_se
+  )
+  
+  check_tidy_output(td2)
+  check_tidy_output(td2s)
+  check_tidy_output(td2l)
+  check_tidy_output(td2sbs)
+  check_tidy_output(td2lbs)
 })
 
-test_that("augment works on mjoint models with a single longitudinal process", {
-  augdf <- augment(fit1)
-  expect_equal(nrow(augdf), nrow(hvd))
-  expect_equal(ncol(augdf), ncol(hvd) + 4)
-  expect_equal(names(augdf), c(names(hvd), ".fitted_grad_0", ".fitted_grad_1", ".resid_grad_0", ".resid_grad_1"))
+
+test_that("glance.mjoint", {
+  gl <- glance(mjoint_fit)
+  gl2 <- glance(mjoint_fit2)
+  
+  check_glance_outputs(gl)
+  check_glance_outputs(gl2)
 })
 
-test_that("augment works on mjoint models with more than one longitudinal process", {
-  augdf <- augment(fit2)
-  expect_equal(nrow(augdf), nrow(hvd))
-  expect_equal(ncol(augdf), ncol(hvd) + 8)
-  expect_equal(names(augdf), c(names(hvd), ".fitted_grad_0", ".fitted_lvmi_0", ".fitted_grad_1", ".fitted_lvmi_1", ".resid_grad_0", ".resid_lvmi_0", ".resid_grad_1", ".resid_lvmi_1"))
-})
 
-test_that("augment returns the same output whether we pass 'data' or not", {
-  expect_equal(object = names(augment(fit1)), expected = names(augment(fit1, data = list(hvd))))
-  expect_equal(object = dim(augment(fit1)), expected = dim(augment(fit1, data = list(hvd))))
-  expect_equal(object = names(augment(fit2)), expected = names(augment(fit2, data = list(hvd))))
-  expect_equal(object = dim(augment(fit2)), expected = dim(augment(fit2, data = list(hvd))))
+test_that("augment.mjoint", {
+  
+  # TODO: check for consistent 0 and 1 indexing in output colum names
+  
+  au <- augment(mjoint_fit)
+  au2 <- augment(mjoint_fit2)
+  
+  check_tibble(au, method = "augment")
+  check_tibble(au, method = "augment")
 })
-
-test_that("glance works on mjoint models with a single longitudinal process", {
-  glnc <- glance(fit1)
-  check_tidy(glnc, exp.row = 1)
-  check_tidy(glnc, exp.col = 4)
-  check_tidy(glnc, exp.names = c("sigma2_1", "AIC", "BIC", "logLik"))
-})
-
-test_that("glance works on mjoint models with more than one longitudinal process", {
-  glnc <- glance(fit2)
-  check_tidy(glnc, exp.row = 1)
-  check_tidy(glnc, exp.col = 5)
-  check_tidy(glnc, exp.names = c("sigma2_1", "sigma2_2", "AIC", "BIC", "logLik"))
-})
-

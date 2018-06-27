@@ -7,3 +7,4 @@ inst/doc
 /broom.rxproj
 /broom.sln
 .DS_Store
+.httr-oauth

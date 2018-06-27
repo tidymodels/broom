@@ -18,7 +18,7 @@ test_that("polygon tidiers work", {
   Sr4 <- Polygon(cbind(c(5, 6, 6, 5, 5), c(4, 4, 3, 3, 4)), hole = TRUE)
   
   td <- tidy(Sr1)
-  check_tidy(td, exp.row = 5, exp.col = 4)
+  check_tidy_output(td)
   
   # tidy.Polygons
   Srs1 <- Polygons(list(Sr1), "s1")
@@ -26,13 +26,15 @@ test_that("polygon tidiers work", {
   Srs3 <- Polygons(list(Sr3, Sr4), "s3/4")
   
   td <- tidy(Srs1)
-  check_tidy(td, exp.row = 5, exp.col = 7)
+  check_tidy_output(td)
+  check_dims(td, 5, 7)
   
   # tidy.SpatialPolygons
   SpP <- SpatialPolygons(list(Srs1, Srs2, Srs3), 1:3)
   
   td <- tidy(SpP)
-  check_tidy(td, exp.row = 19, exp.col = 7)
+  check_tidy_output(td)
+  check_dims(td, 19, 7)
   
   # tidy.SpatialPolygonsDataFrame
   grd <- GridTopology(c(1, 1), c(1, 1), c(10, 10))
@@ -47,10 +49,12 @@ test_that("polygon tidiers work", {
   )
   
   td <- tidy(SpPDF)
-  check_tidy(td, exp.row = 500, exp.col = 7)
+  check_tidy_output(td)
+  check_dims(td, 500, 7)
   
   td <- tidy(SpPDF, region = "x")
-  check_tidy(td, exp.row = 230, exp.col = 7)
+  check_tidy_output(td)
+  check_dims(td, 230, 7)
 })
 
 test_that("line tidiers work", {
@@ -67,14 +71,16 @@ test_that("line tidiers work", {
   Sl2 <- Line(l2)
   
   td <- tidy(Sl1)
-  check_tidy(td, exp.row = 3, exp.col = 3)
+  check_tidy_output(td)
+  check_dims(td, 3, 3)
   
   # tidy.Lines
   S1 <- Lines(list(Sl1, Sl1a), ID = "a")
   S2 <- Lines(list(Sl2), ID = "b")
   
   td <- tidy(S1)
-  check_tidy(td, exp.row = 6, exp.col = 6)
+  check_tidy_output(td)
+  check_dims(td, 6, 6)
   
   # tidy.SpatialLinesDataFrame
   Sl <- SpatialLines(list(S1, S2))
@@ -84,6 +90,7 @@ test_that("line tidiers work", {
   )
   
   td <- tidy(SlDF)
-  check_tidy(td, exp.row = 9, exp.col = 6)
+  check_tidy_output(td)
+  check_dims(td, 9, 6)
 })
 

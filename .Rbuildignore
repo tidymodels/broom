@@ -13,3 +13,4 @@
 ^\.github$
 ^docs$
 ^data-raw$
+^\.httr-oauth$
