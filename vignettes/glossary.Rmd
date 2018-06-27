@@ -12,20 +12,26 @@ vignette: >
 ```{r setup, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
+  echo = FALSE,
   comment = "#>"
 )
 
 library(broom)
 ```
 
-TODO: description of how the glossaries work
+This vignette displays two datasets built into `broom`: `argument_glossary` and `column_glossary`. These datasets are **incomplete works in progress**.
+
+- `argument_glossary`: describes acceptable names for arguments to tidying methods
+- `column_glossary`: describes acceptable names of columns in output from tidying methods
+
+## Argument glossary
 
 ```{r}
 knitr::kable(argument_glossary)
 ```
 
+## Column glossary
+
 ```{r}
 knitr::kable(column_glossary)
 ```
-
-
