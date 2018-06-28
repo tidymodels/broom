@@ -24,7 +24,7 @@ all_equal_list <- function(x) {
 #' 
 #' check_arguments(tidy.Arima)
 #' 
-check_arguments <- function(tidy_method, strict = TRUE) {
+check_arguments <- function(tidy_method, strict = FALSE) {
   
   if (!strict) {
     expect_true(TRUE)  # prevent skip message
