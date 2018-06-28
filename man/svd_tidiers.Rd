@@ -85,7 +85,5 @@ tidy_u \%>\%
     facet_wrap(~ PC, scale = "free_y")
 }
 \seealso{
-\code{\link[=svd]{svd()}}, \code{\link[irlba:irlba]{irlba::irlba()}} \code{\link[=tidy.list]{tidy.list()}}
-
 \code{\link[=svd]{svd()}}, \code{\link[irlba:irlba]{irlba::irlba()}}, \code{\link[=tidy.list]{tidy.list()}}, \code{\link[=tidy_irlba]{tidy_irlba()}}
 }

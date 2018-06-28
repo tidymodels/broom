@@ -23,8 +23,8 @@ test_that("tidy.ts", {
 })
 
 
-test_that("tidy.specworks", {
-  check_arguments(tidy.specworks)
+test_that("tidy.spec", {
+  check_arguments(tidy.spec)
   
   spc <- spectrum(lh, plot = FALSE)
   td <- tidy(spc)

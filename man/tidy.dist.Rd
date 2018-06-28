@@ -4,13 +4,13 @@
 \alias{tidy.dist}
 \title{Tidy a distance matrix}
 \usage{
-\method{tidy}{dist}(x, diag = attr(x, "Diag"), upper = attr(x, "Upper"),
+\method{tidy}{dist}(x, diagonal = attr(x, "Diag"), upper = attr(x, "Upper"),
   ...)
 }
 \arguments{
 \item{x}{A "dist" object}
 
-\item{diag}{Whether to include the diagonal of the distance
+\item{diagonal}{Whether to include the diagonal of the distance
 matrix. Defaults to whether the distance matrix includes it}
 
 \item{upper}{Whether to include the upper right triangle of
@@ -41,6 +41,6 @@ iris_dist
 
 tidy(iris_dist)
 tidy(iris_dist, upper = TRUE)
-tidy(iris_dist, diag = TRUE)
+tidy(iris_dist, diagonal = TRUE)
 
 }

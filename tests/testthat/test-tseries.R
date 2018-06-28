@@ -17,9 +17,3 @@ test_that("tidy.garch", {
   check_tidy_output(td)
   check_dims(td, 3)
 })
-
-test_that("glance.garch", {
-  gl <- glance(fit)
-  check_glance_outputs(gl)
-  check_dims(gl, 1, 7)
-})

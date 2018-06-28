@@ -24,7 +24,7 @@ all_equal_list <- function(x) {
 #' 
 #' check_arguments(tidy.Arima)
 #' 
-check_arguments <- function(tidy_method, strict = FALSE) {
+check_arguments <- function(tidy_method, strict = TRUE) {
   
   if (!strict) {
     expect_true(TRUE)  # prevent skip message
@@ -34,8 +34,8 @@ check_arguments <- function(tidy_method, strict = FALSE) {
   args <- names(formals(tidy_method))
   func_name <- as.character(substitute(tidy_method))
   
-  prefix <- gsub("\\..*","", func_name)
-  data("argument_glossary", package = "broom")
+  # functions might be: tidy.irlba *or* tidy_irlba for list tidiers
+  prefix <- gsub("[\\.|_].*","", func_name)
   allowed_args <- dplyr::filter(argument_glossary, method == !!prefix)$argument
   
   if ("conf.level" %in% args) {

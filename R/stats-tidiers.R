@@ -52,7 +52,7 @@ tidy.density <- function(x, ...) {
 #' not either.
 #'
 #' @param x A "dist" object
-#' @param diag Whether to include the diagonal of the distance
+#' @param diagonal Whether to include the diagonal of the distance
 #' matrix. Defaults to whether the distance matrix includes it
 #' @param upper Whether to include the upper right triangle of
 #' the distance matrix. Defaults to whether the distance matrix
@@ -74,10 +74,10 @@ tidy.density <- function(x, ...) {
 #'
 #' tidy(iris_dist)
 #' tidy(iris_dist, upper = TRUE)
-#' tidy(iris_dist, diag = TRUE)
+#' tidy(iris_dist, diagonal = TRUE)
 #'
 #' @export
-tidy.dist <- function(x, diag = attr(x, "Diag"),
+tidy.dist <- function(x, diagonal = attr(x, "Diag"),
                       upper = attr(x, "Upper"), ...) {
   m <- as.matrix(x)
 
@@ -90,7 +90,7 @@ tidy.dist <- function(x, diag = attr(x, "Diag"),
     ret <- ret[!upper.tri(m), ]
   }
 
-  if (!diag) {
+  if (!diagonal) {
     # filter out the diagonal
     ret <- filter(ret, item1 != item2)
   }

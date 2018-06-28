@@ -7,8 +7,8 @@
 \alias{glance.mjoint}
 \title{Tidying methods for mjoint models}
 \usage{
-\method{tidy}{mjoint}(x, component = "survival", bootSE = NULL,
-  ci = FALSE, level = 0.95, ...)
+\method{tidy}{mjoint}(x, component = "survival", conf.int = FALSE,
+  conf.level = 0.95, boot_se = NULL, ...)
 
 \method{augment}{mjoint}(x, data = x$data, ...)
 
@@ -20,13 +20,13 @@
 \item{component}{Either \code{survival} (the survival component of the model,
 default) or \code{longitudinal} (the longitudinal component).}
 
-\item{bootSE}{An object of class \code{bootSE} for the corresponding model. If
-\code{bootSE = NULL} (the default), the function will use approximate standard
+\item{conf.int}{Include (\code{1 - level})\% confidence intervals? Defaults to \code{FALSE}.}
+
+\item{conf.level}{The confidence level required.}
+
+\item{boot_se}{An object of class \code{boot_se} for the corresponding model. If
+\code{boot_se = NULL} (the default), the function will use approximate standard
 error estimates calculated from the empirical information matrix.}
-
-\item{ci}{Include (\code{1 - level})\% confidence intervals? Defaults to \code{FALSE}.}
-
-\item{level}{The confidence level required.}
 
 \item{...}{extra arguments (not used)}
 
@@ -114,8 +114,8 @@ tidy(fit, ci = TRUE)
 
 # Extract the survival fixed effects with confidence intervals based
 # on bootstrapped standard errors
-bSE <- bootSE(fit, nboot = 5, safe.boot = TRUE)
-tidy(fit, bootSE = bSE, ci = TRUE)
+bSE <- boot_se(fit, nboot = 5, safe.boot = TRUE)
+tidy(fit, boot_se = bSE, ci = TRUE)
 
 # Augment original data with fitted longitudinal values and residuals
 hvd2 <- augment(fit)

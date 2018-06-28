@@ -8,7 +8,7 @@
 \title{Tidying methods for models with multiple group fixed effects}
 \usage{
 \method{tidy}{felm}(x, conf.int = FALSE, conf.level = 0.95, fe = FALSE,
-  fe.error = fe, ...)
+  ...)
 
 \method{augment}{felm}(x, data = NULL, ...)
 
@@ -23,8 +23,6 @@
 \code{conf.int=TRUE}}
 
 \item{fe}{whether to include estimates of fixed effects}
-
-\item{fe.error}{whether to include standard error of fixed effects}
 
 \item{...}{extra arguments (not used)}
 

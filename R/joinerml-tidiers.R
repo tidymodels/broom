@@ -45,8 +45,8 @@
 #'
 #' # Extract the survival fixed effects with confidence intervals based
 #' # on bootstrapped standard errors
-#' bSE <- bootSE(fit, nboot = 5, safe.boot = TRUE)
-#' tidy(fit, bootSE = bSE, ci = TRUE)
+#' bSE <- boot_se(fit, nboot = 5, safe.boot = TRUE)
+#' tidy(fit, boot_se = bSE, ci = TRUE)
 #'
 #' # Augment original data with fitted longitudinal values and residuals
 #' hvd2 <- augment(fit)
@@ -60,13 +60,13 @@
 #' @param component Either `survival` (the survival component of the model,
 #'   default) or `longitudinal` (the longitudinal component).
 #'
-#' @param bootSE An object of class `bootSE` for the corresponding model. If
-#'   `bootSE = NULL` (the default), the function will use approximate standard
+#' @param boot_se An object of class `boot_se` for the corresponding model. If
+#'   `boot_se = NULL` (the default), the function will use approximate standard
 #'    error estimates calculated from the empirical information matrix.
 #'
-#' @param ci Include (`1 - level`)\% confidence intervals? Defaults to `FALSE`.
+#' @param conf.int Include (`1 - level`)\% confidence intervals? Defaults to `FALSE`.
 #'
-#' @param level The confidence level required.
+#' @param conf.level The confidence level required.
 #'
 #' @return `tidy` returns one row for each estimated fixed effect depending on
 #'   the `component` parameter. It contains the following  columns:
@@ -81,19 +81,19 @@
 #'      if required}
 #'
 #' @export
-tidy.mjoint <- function(x, component = "survival", bootSE = NULL, ci = FALSE,
-                        level = 0.95, ...) {
+tidy.mjoint <- function(x, component = "survival", conf.int = FALSE,
+                        conf.level = 0.95,  boot_se = NULL,...) {
   component <- match.arg(component, c("survival", "longitudinal"))
-  if (!is.null(bootSE)) {
-    if (!inherits(x = bootSE, what = "bootSE")) 
-      stop("'bootSE' object not of class 'bootSE'")
+  if (!is.null(boot_se)) {
+    if (!inherits(x = boot_se, what = "boot_se")) 
+      stop("'boot_se' object not of class 'boot_se'")
   }
 
   # make summary object
-  if (is.null(bootSE)) {
+  if (is.null(boot_se)) {
     smr <- summary(x)
   } else {
-    smr <- summary(x, bootSE = bootSE)
+    smr <- summary(x, bootSE = boot_se)
   }
 
   # extract appropriate component
@@ -112,8 +112,8 @@ tidy.mjoint <- function(x, component = "survival", bootSE = NULL, ci = FALSE,
   out <- out[, c(5, 1:4)]
 
   # make confidence intervals (if required)
-  if (ci) {
-    cv <- qnorm(1 - (1 - level) / 2)
+  if (conf.int) {
+    cv <- qnorm(1 - (1 - conf.level) / 2)
     out$conf.low <- out$estimate - cv * out$std.error
     out$conf.high <- out$estimate + cv * out$std.error
   }

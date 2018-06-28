@@ -5,7 +5,7 @@
 #' method selected.
 #'
 #' @export
-tidy.rqs <- function(x, se.type = "rank", conf.int = TRUE, conf.level = 0.9, alpha = 1 - conf.level, ...) {
+tidy.rqs <- function(x, se.type = "rank", conf.int = TRUE, conf.level = 0.95, alpha = 1 - conf.level, ...) {
   # summary.rq often issues warnings when computing standard errors
   rq_summary <- suppressWarnings(quantreg::summary.rqs(x, se = se.type, alpha = alpha, ...))
   purrr::map_df(rq_summary, process_rq, se.type = se.type, conf.int = conf.int, conf.level = conf.level, ...)

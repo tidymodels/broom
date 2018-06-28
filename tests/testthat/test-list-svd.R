@@ -5,6 +5,9 @@ s <- svd(mat)
 p <- prcomp(mat)
 
 test_that("tidy_svd", {
+  
+  check_arguments(tidy_svd)
+  
   tdu <- tidy(s, matrix = "u")
   tdd <- tidy(s, matrix = "d")
   tdv <- tidy(s, matrix = "v")

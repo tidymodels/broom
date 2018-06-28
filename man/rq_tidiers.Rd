@@ -19,15 +19,15 @@
 
 \method{augment}{nlrq}(x, ...)
 
-\method{tidy}{rq}(x, se.type = "rank", conf.int = TRUE, conf.level = 0.9,
+\method{tidy}{rq}(x, se.type = "rank", conf.int = TRUE, conf.level = 0.95,
   alpha = 1 - conf.level, ...)
 
 \method{glance}{rq}(x, ...)
 
 \method{augment}{rq}(x, data = model.frame(x), newdata = NULL, ...)
 
-\method{tidy}{rqs}(x, se.type = "rank", conf.int = TRUE, conf.level = 0.9,
-  alpha = 1 - conf.level, ...)
+\method{tidy}{rqs}(x, se.type = "rank", conf.int = TRUE,
+  conf.level = 0.95, alpha = 1 - conf.level, ...)
 
 \method{augment}{rqs}(x, data = model.frame(x), newdata, ...)
 }

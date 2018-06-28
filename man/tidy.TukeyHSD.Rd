@@ -4,13 +4,10 @@
 \alias{tidy.TukeyHSD}
 \title{tidy a TukeyHSD object}
 \usage{
-\method{tidy}{TukeyHSD}(x, separate.levels = FALSE, ...)
+\method{tidy}{TukeyHSD}(x, ...)
 }
 \arguments{
 \item{x}{object of class "TukeyHSD"}
-
-\item{separate.levels}{Whether to separate comparison into
-\code{level1} and \code{level2} columns}
 
 \item{...}{additional arguments (not used)}
 }

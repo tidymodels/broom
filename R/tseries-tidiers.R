@@ -4,9 +4,9 @@
 #' `tseries` package.
 #'
 #' @param x garch object
-#' @param method `character` which specifies the hypothesis test to be shown in `glance`.
-#' The `garch` function reports 2 hypothesis tests: Jarque-Bera to residuals
-#' and Box-Ljung to squared residuals.
+#' @param test Character specification of which hypothesis test to use. The
+#'   `garch` function reports 2 hypothesis tests: Jarque-Bera to residuals
+#'    #' and Box-Ljung to squared residuals.
 #' @param ... extra arguments (not used)
 #'
 #' @return A `data.frame` with one row for each coefficient, with five columns:
@@ -53,16 +53,16 @@ tidy.garch <- function(x, ...) {
 #'   \item{BIC}{the Bayesian Information Criterion}
 #'
 #' @export
-glance.garch <- function(x, method = c("box-ljung-test", "jarque-bera-test"), ...) {
-  method <- match.arg(method)
+glance.garch <- function(x, test = c("box-ljung-test", "jarque-bera-test"), ...) {
+  test <- match.arg(test)
   s <- summary(x)
-  ret <- glance.summary.garch(s, method, ...)
+  ret <- glance.summary.garch(s, test, ...)
   ret <- finish_glance(ret, x)
   as_tibble(ret)
 }
 
-glance.summary.garch <- function(x, method, ...) {
-  ret <- if (method == "box-ljung-test") {
+glance.summary.garch <- function(x, test, ...) {
+  ret <- if (test == "box-ljung-test") {
     glance.htest(x$l.b.test)
   } else {
     glance.htest(x$j.b.test)

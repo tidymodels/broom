@@ -8,6 +8,9 @@ p <- prcomp(mat)
 i <- irlba::irlba(mat)
 
 test_that("tidy_irlba", {
+  
+  check_arguments(tidy_irlba)
+  
   tdu <- tidy(i, matrix = "u")
   check_tidy_output(tdu)
   check_dims(tdu, 215, 3)

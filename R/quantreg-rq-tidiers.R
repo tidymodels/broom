@@ -34,7 +34,7 @@ NULL
 #' The columns depend upon the confidence interval method selected.
 #'
 #' @export
-tidy.rq <- function(x, se.type = "rank", conf.int = TRUE, conf.level = 0.9, alpha = 1 - conf.level, ...) {
+tidy.rq <- function(x, se.type = "rank", conf.int = TRUE, conf.level = 0.95, alpha = 1 - conf.level, ...) {
   # summary.rq often issues warnings when computing standard errors
   rq_summary <- suppressWarnings(quantreg::summary.rq(x, se = se.type, alpha = alpha, ...))
   process_rq(rq_obj = rq_summary, se.type = se.type, conf.int = conf.int, conf.level = conf.level, ...)

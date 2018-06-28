@@ -64,7 +64,7 @@ NULL
 #'   \item{conf.high}{The lower bound of the confidence interval}
 #'
 #' @export
-tidy.btergm <- function(x, conf.level = .95,
+tidy.btergm <- function(x, conf.int = FALSE, conf.level = .95,
                         exponentiate = FALSE, quick = FALSE, ...) {
   if (exponentiate) {
     trans <- exp
@@ -80,6 +80,7 @@ tidy.btergm <- function(x, conf.level = .95,
     )
     return(ret)
   }
+  
   co <- btergm::confint(x, level = conf.level)
 
   nn <- c("estimate", "conf.low", "conf.high")

@@ -172,8 +172,6 @@ tidy.manova <- function(x, test = "Pillai", ...) {
 #' Returns a data.frame with one row for each pairwise comparison
 #'
 #' @param x object of class "TukeyHSD"
-#' @param separate.levels Whether to separate comparison into
-#' `level1` and `level2` columns
 #' @param ... additional arguments (not used)
 #'
 #' @return A data.frame with one row per comparison, containing columns
@@ -201,14 +199,10 @@ tidy.manova <- function(x, test = "Pillai", ...) {
 #' @seealso [TukeyHSD()]
 #'
 #' @export
-tidy.TukeyHSD <- function(x, separate.levels = FALSE, ...) {
+tidy.TukeyHSD <- function(x, ...) {
   ret <- purrr::map_df(x, function(e) {
     nn <- c("estimate", "conf.low", "conf.high", "adj.p.value")
     fix_data_frame(e, nn, "comparison")
   }, .id = "term")
-  
-  if (separate.levels) {
-    ret <- tidyr::separate(ret, comparison, c("level1", "level2"), sep = "-")
-  }
   as_tibble(ret)
 }

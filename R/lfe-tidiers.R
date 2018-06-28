@@ -44,7 +44,6 @@ NULL
 #' @param conf.level confidence level of the interval, used only if
 #' `conf.int=TRUE`
 #' @param fe whether to include estimates of fixed effects
-#' @param fe.error whether to include standard error of fixed effects
 #'
 #' @details If `conf.int=TRUE`, the confidence interval is computed
 #'
@@ -58,7 +57,7 @@ NULL
 #'
 #' If `cont.int=TRUE`, it also includes columns for `conf.low` and `conf.high`, computed with [confint()].
 #' @export
-tidy.felm <- function(x, conf.int=FALSE, conf.level=.95, fe = FALSE, fe.error = fe, ...) {
+tidy.felm <- function(x, conf.int = FALSE, conf.level = .95, fe = FALSE, ...) {
   nn <- c("estimate", "std.error", "statistic", "p.value")
   ret <- fix_data_frame(stats::coef(summary(x)), nn)
 
@@ -72,20 +71,15 @@ tidy.felm <- function(x, conf.int=FALSE, conf.level=.95, fe = FALSE, fe.error = 
   if (fe) {
     ret <- mutate(ret, N = NA, comp = NA)
     object <- lfe::getfe(x)
-    if (fe.error) {
-      nn <- c("estimate", "std.error", "N", "comp")
-      ret_fe <- lfe::getfe(x, se = TRUE, bN = 100) %>%
-        select(effect, se, obs, comp) %>%
-        fix_data_frame(nn) %>%
-        mutate(statistic = estimate / std.error) %>%
-        mutate(p.value = 2 * (1 - stats::pt(statistic, df = N)))
-    } else {
-      nn <- c("estimate", "N", "comp")
-      ret_fe <- lfe::getfe(x) %>%
-        select(effect, obs, comp) %>%
-        fix_data_frame(nn) %>%
-        mutate(std.error = NA, statistic = NA, p.value = NA)
-    }
+    
+    
+    nn <- c("estimate", "std.error", "N", "comp")
+    ret_fe <- lfe::getfe(x, se = TRUE, bN = 100) %>%
+      select(effect, se, obs, comp) %>%
+      fix_data_frame(nn) %>%
+      mutate(statistic = estimate / std.error) %>%
+      mutate(p.value = 2 * (1 - stats::pt(statistic, df = N)))
+    
     if (conf.int) {
       ret_fe <- ret_fe %>%
         mutate(

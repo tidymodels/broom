@@ -47,6 +47,9 @@ Several old vignettes have also been updated:
 
 ## Other changes
 
+- The `separate.levels` argument has been removed from `tidy.TukeyHSD`. To obtain the effect of `separate.levels = TRUE`, users may `tidyr::separate` after tidying. This is consistent with the `multcomp` tidier behavior.
+- The `fe.error` argument was removed from `tidy.felm`. When fixed effects are tidier, their standard errors are now always included.
+- The `diag` argument in `tidy.dist` has been renamed `diagonal`
 - Advice to help beginners make PRs (#397 by @karldw)
 - `glance` support for `arima` objects fit with `method = "CSS"` (#396 by @josue-rodriguez)
 - A bug fix to re-enable tidying `glmnet` objects with `family = multinomial` (#395 by @erleholgersen)

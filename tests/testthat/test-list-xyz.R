@@ -1,6 +1,9 @@
 context("list-xyz")
 
-test_that("xyz tidiers work", {
+test_that("tidy_xyz", {
+  
+  check_arguments(tidy_xyz)
+  
   a <- list(
     x = 1:5,
     y = 1:3,

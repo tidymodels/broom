@@ -8,17 +8,16 @@
 \usage{
 \method{tidy}{garch}(x, ...)
 
-\method{glance}{garch}(x, method = c("box-ljung-test", "jarque-bera-test"),
-  ...)
+\method{glance}{garch}(x, test = c("box-ljung-test", "jarque-bera-test"), ...)
 }
 \arguments{
 \item{x}{garch object}
 
 \item{...}{extra arguments (not used)}
 
-\item{method}{\code{character} which specifies the hypothesis test to be shown in \code{glance}.
-The \code{garch} function reports 2 hypothesis tests: Jarque-Bera to residuals
-and Box-Ljung to squared residuals.}
+\item{test}{Character specification of which hypothesis test to use. The
+\code{garch} function reports 2 hypothesis tests: Jarque-Bera to residuals
+#' and Box-Ljung to squared residuals.}
 }
 \value{
 A \code{data.frame} with one row for each coefficient, with five columns:
