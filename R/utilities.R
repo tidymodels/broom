@@ -1,6 +1,3 @@
-# utility functions. hopefully using tibbles internally will allow us
-# to get rid of lots of the rowname logic here
-
 validate_augment_input <- function(model, data = NULL, newdata = NULL) {
   
   # careful: `data` may be non-null due to default argument such as

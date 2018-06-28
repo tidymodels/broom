@@ -24,14 +24,15 @@ Thank you for your interest in contributing to broom! This document is a **work 
 
 General guidelines:
 
-- Try to reach a minimum 90% test coverage for new tidiers.
+- Try to reach a minimum 90% test coverage for new tidiers. To check your test coverage we recommend using `covr::report()`.
 - `tidy`, `glance` and `augment` methods **must** return tibbles.
 - Update `NEWS.md` to reflect the changes you've made
 - Follow the [tidyverse style conventions](http://style.tidyverse.org/). You can use the [`styler`](https://github.com/r-lib/styler) package to reformat your code according to these conventions, and the [`lintr`](https://github.com/jimhester/lintr) package to check that your code meets the conventions.
 - Use new tidyverse packages such as `dplyr` and `tidyr` over older packages such as `plyr` and `reshape2`.
 - It's better to have a predictable number of columns and unknown number rows than an unknown number of columns and a predictable number of rows.
 - It's better for users to need to `tidyr::spread`than `tidyr::gather` data after it's been tidied.
-- Feel free to add yourself as a contributor to `DESCRIPTION`.
+- Add yourself as a contributor to `DESCRIPTION`.
+- Pull requests must pass the AppVeyor and Travis CI builds to be merged.
 - When in doubt, please reach out to the maintainers. We are happy to help with any questions.
 
 If you are just getting into open source development, `broom` is an excellent place to get started and we are more than happy to help. We recommend you start contributing by improving the documentation, writing issues with reproducible errors, or taking on issues tagged `beginner-friendly`.
@@ -53,14 +54,16 @@ We will keep you updated as we work towards a final solution.
 
 NOTE: okay to write `tidyverse` code to tidy and wrap it in a function. encouraged, in fact.
 
-## Helper functions you should know about
+We encourage you to develop new tidiers using your favorite tidyverse tools. Pipes are welcome, as is any code that you might write for tidyverse-style interactive data manipulation.
 
-`finish_glance`
-`augment_columns`
-`validate_augment_input`
-`fix_data_frame`
+If you are implementing a new tidier, we recommend taking a look at the internals of the tidying methods for `betareg` and `rq` objects and using those as a starting point.
 
-<!-- - TODO: Helper functions that you should be aware of and use -->
+You should also be aware of the following helper functions:
+
+- `finish_glance()`
+- `augment_columns()`
+- `fix_data_frame()`
+- `validate_augment_input()`
 
 # Documenting new tidiers
 
@@ -68,23 +71,23 @@ All new tidiers should be fully documented following the [tidyverse code documen
 
 Documentation make use of [`rmarkdown`](https://cran.r-project.org/web/packages/roxygen2/vignettes/markdown.html).
 
-They're be a major overhaul of documentation later this summer, at which point this portion of the vignette will also get some major updates.
+There'll be a major overhaul of documentation later this summer, at which point this portion of the vignette will also get some major updates.
 
 # Testing new tidiers
 
 ## Basic checks
 
-All `tidy` methods should `check_tidy`, all `glance` methods should pass `check_glance` and all `augment` methods should pass `check_augment`. That is, your test should include:
+Your tests should include:
 
 ```{r, eval = FALSE}
 td <- tidy(object)
 gl <- glance(object)
-au <- augment(object)
 
-check_tidy(td)
-check_glance(gl)
-check_augment(au)
+check_tidy_output(td)
+check_glance_outputs(gl)
 ```
+
+The tests for `augment` are rapidly evolving at the moment, and we'll follow up with more details on them soon.
 
 If any of your tests use random number generation, you should call `set.seed()` in the body of the test.
 
@@ -92,32 +95,21 @@ In general, we prefer informative errors to magical behaviors or untested succes
 
 ## More complete checks
 
-* You can verify that your change passes existing tests with `devtools::test()`
-    * For R < 3.5.0, the number of packages used in the tests exceeds the number R can load. To change this on R 3.4.0 and above, set the environment variable R_MAX_NUM_DLLS to 150. To change this on R < 3.4.0, you would have to recompile R.
-    * For R ≥ 3.5.0, issue has been fixed.
-
+- You can verify that your changes pass existing tests with `devtools::test()`
+    - For R < 3.5.0, the number of packages used in the tests exceeds the number R can load. To change this on R 3.4.0 and above, set the environment variable R_MAX_NUM_DLLS to 150.
+    - For R ≥ 3.5.0, issue has been fixed.
 
 ## Package dependencies
 
 * In order to test your tidiers, you may need to add `your_package` to the **Suggests** section of broom's DESCRIPTION.
 * You should then use `skip_if_not_installed("my_package")` at the beginning of any test that uses `my_package`.
-* Note that testing broom requires a lot of packages. You can install them all with `devtools::install_github("tidyverse/broom", dependencies = TRUE)`
-
-We are currently in the process of developing a new set of tests for tidying methods. Recommendations on how to test your tidiers will appear here soon.
-
-```{r, eval = FALSE}
-# TODO: example tests
-```
-
-At the moment, pull requests must pass the AppVeyor build to be added to `broom`. It is okay if the Travis CI build times out.
-
-<!-- TODO: guarding against suggested packages in Examples -->
+* Note that testing broom requires a lot of packages. You can install them all with `devtools::install_github("tidyverse/broom", dependencies = TRUE)`.
 
 ## Catching edge cases
 
 You should test new tidiers on a representative set of `my_object` objects. At a minimum, you should have a test for each distinct type of fit that appears in the examples for a particular model (if we working with `stats::arima` models, the tidiers should work for seasonal and non-seasonal models).
 
-It's important to test your tidiers for fits estimated with different algorithms (i.e. `stats::arima` tidier should be tested for `method = "CSS-ML", `method = "ML" and `method = "ML"`). As another example, good tests for `glm` tidying methods would test tidiers on `glm` objects fit for all acceptable values of `family`.
+It's important to test your tidiers for fits estimated with different algorithms (i.e. `stats::arima` tidier should be tested for `method = "CSS-ML"`, `method = "ML"` and `method = "ML"`). As another example, good tests for `glm` tidying methods would test tidiers on `glm` objects fit for all acceptable values of `family`.
 
 In short: be sure that you've tested your tidiers on models fit with all the major modelling options (both statistical options, and estimation options).
 
@@ -128,11 +120,8 @@ In short: be sure that you've tested your tidiers on models fit with all the maj
     - `devtools::check()`
     - `devtools::spell_check()`
     - `goodpractice::gp()`
-- Run `devtools::document()` but **do not** run `pkgdown::build_site()` unless requested to.
 
 `broom` doesn't currently pass all of these. If you are adding new tidiers at the moment, it's enough for these to throw no warnings for the files you've changed.
-
-If asked to build the site, developers outside the US or UK should run `Sys.setlocale("LC_ALL", "English")` before `pkgdown::build_site()`. This is so that messages are in English.
 
 # Defining tidiers
 
@@ -148,28 +137,13 @@ Oftentimes it doesn't make sense to define one or more of these methods for a pa
 
 The `glance(x, ...)` method accepts a model object `x` and returns a tibble with exactly one row containing model level summary information.
 
-- `glance` should return statistical summaries measures only. Mostly this means that `glance` should not return convergence information about a model. This is because we would like to encourage a modelling workflow with distinct steps for convergence and statistical diagnostics. `broom` at this time is focused on the statistical diagnostics only.
-
 - Output should not include the name of the modelling function or any arguments given to the modelling function. For example, `glance(glm_object)` does not contain a `family` column.
 
-- In some cases, you may wish to provide model level diagnostics not returned by the original object. If these are easy to compute, feel free to add them. However, `broom` is not an appropriate place to implement complex or time consuming statistical calculations.
+- In some cases, you may wish to provide model level diagnostics not returned by the original object. If these are easy to compute, feel free to add them. However, `broom` is not an appropriate place to implement complex or time consuming calculations.
 
 - `glance` should always return the same columns in the same order for an object `x` of class `my_object`. If a summary metric such as `AIC` is not defined in certain circumstances, use `NA`.
 
 ## `augment`
-
-UPDATES to make:
-- `data` argument should be exactly the original data if possible. no subset, no missing columns.
-- warnings when `data` is not quite right
-- TODO: as check_tibble test for `newdata`
-- default argument for `newdata` must be `NULL`. test this. if have a `newdata` argument should have a `data` argument. test for this.
-- ignore `data` if `newdata` specified with a warning
-- `data` must have a default argument so that `augment(fit)` just works, and then this should give an error if the user actually must specify `data`.
-- note about `data = model.frame(x)` being a good default
-- augment needs to work when `newdata` has missing values
-- UPCOMING: try to add a `.resid` column for `newdata`, but need a good way to get the name of the response column first
-
-difficult to tell when `data` has been passed of when just have a default like `stats::model.frame(x)`
 
 The `augment(x, data = NULL, ...)` method accepts a model object and optionally a data frame `data` and adds columns of observation level information to `data`. `augment` returns a `tibble` with the same number of rows as `data`.
 
@@ -177,9 +151,9 @@ The `data` argument can be any of the following:
 
 - a `data.frame` containing both the original predictors and the original responses
 - a `tibble` containing both the the original predictors and the original responses
-- `NULL` (default), in which case `augment` should try to reconstruct the original data as much as possible from the model object. This may not always be possible, and often it will not be possible to recover columns not used by the model.
+- if not `data` argument is specified, `augment` should try to reconstruct the original data as much as possible from the model object. This may not always be possible, and often it will not be possible to recover columns not used by the model.
 
-Any other inputs should result in an error. It is important that you test both `data.frame` and `tibble` arguments to `data`. We recommend coercing `data.frame`s to `tibble`s and then working directly with `tibble`s in your implementation.
+Any other inputs should result in an error. This will eventually be checked by the `validate_augment_input()` function. 
 
 Many `augment` methods will also provide an optional `newdata` argument that should also default to `NULL`. Users should only ever specify one of `data` or `newdata`. Providing both `data` and `newdata` should result in an error. `newdata` should accept both `data.frame`s and `tibble`s and should be tested with both.
 
@@ -191,19 +165,13 @@ head(augment(model, data = cars))
 head(augment(model, newdata = cars))
 ```
 
-This means that many `augment(model, data = original_data)` should provide `.fitted` and `.resid` columns in most cases, whereas `augment(model, data = test_data)` only needs to a `.fitted` column, even if the response is present in `test_data`. While it would be nice to provide a `.resid` column in this case, determining the response variable from a formula specification is often a brittle process.
+This means that many `augment(model, data = original_data)` should provide `.fitted` and `.resid` columns in most cases, whereas `augment(model, data = test_data)` only needs to a `.fitted` column, even if the response is present in `test_data`.
 
 If the `data` or `newdata` is specified as a `data.frame` with rownames, `augment` should return them in a column called `.rownames`.
 
 For observations where no fitted values or summaries are available (where there's missing data, for example) return `NA`.
 
 Added column names should begin with `.` to avoid overwriting columns in the original data.
-
-**Other commons arguments**
-
-- `type.residuals`
-- `type.predict`
-- `weights`
 
 ## `tidy`
 
@@ -220,10 +188,6 @@ tidy(model, effects = "random")
 **Common arguments to tidy methods**:
 
 - `conf.int`: logical indicating whether or not to calculate confidence/credible intervals. should default to `FALSE`
-
-TODO: set all default conf.int to `FALSE` (why: can be slow)
-explain the glossary and put it into a vignette
-
 - `conf.level`: the confidence level to use for the interval when `conf.int = TRUE`
 - `exponentiate`: logical indicating whether or not model terms should be presented on an exponential scale (typical for logistic regression)
 - `quick`: logical indicating whether to use a faster `tidy` method that returns less information about each component, typically only `term` and `estimate` columns
