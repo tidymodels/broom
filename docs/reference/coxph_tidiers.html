@@ -102,7 +102,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Tidiers for coxph object</h1>
-    <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/survival_tidiers.R'><code>R/survival_tidiers.R</code></a></small>
+    <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/survival-coxph-tidiers.R'><code>R/survival-coxph-tidiers.R</code></a></small>
     <div class="hidden name"><code>coxph_tidiers.Rd</code></div>
     </div>
 
@@ -118,7 +118,7 @@ construct predictions, or summarize the entire model into a single row.</p>
   <span class='kw'>conf.level</span> <span class='kw'>=</span> <span class='fl'>0.95</span>, <span class='no'>...</span>)
 
 <span class='co'># S3 method for coxph</span>
-<span class='fu'><a href='augment.html'>augment</a></span>(<span class='no'>x</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='kw pkg'>stats</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/stats/topics/model.frame'>model.frame</a></span>(<span class='no'>x</span>), <span class='no'>newdata</span>,
+<span class='fu'><a href='augment.html'>augment</a></span>(<span class='no'>x</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>newdata</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>type.predict</span> <span class='kw'>=</span> <span class='st'>"lp"</span>, <span class='kw'>type.residuals</span> <span class='kw'>=</span> <span class='st'>"martingale"</span>, <span class='no'>...</span>)
 
 <span class='co'># S3 method for coxph</span>

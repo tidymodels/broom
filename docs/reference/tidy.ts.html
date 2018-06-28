@@ -102,7 +102,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Tidy a ts timeseries object</h1>
-    <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/stats_tidiers.R'><code>R/stats_tidiers.R</code></a></small>
+    <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/stats-time-series-tidiers.R'><code>R/stats-time-series-tidiers.R</code></a></small>
     <div class="hidden name"><code>tidy.ts.Rd</code></div>
     </div>
 
@@ -153,11 +153,11 @@ following columns:</p>
 #&gt;  1 1959.     1
 #&gt;  2 1960.     2
 #&gt;  3 1960.     3
-#&gt;  4 1960.     4
+#&gt;  4 1960      4
 #&gt;  5 1960.     5
 #&gt;  6 1960.     6
 #&gt;  7 1961.     7
-#&gt;  8 1961.     8
+#&gt;  8 1961      8
 #&gt;  9 1961.     9
 #&gt; 10 1962.    10</div><div class='input'>
 <span class='no'>z</span> <span class='kw'>&lt;-</span> <span class='fu'>ts</span>(<span class='fu'>matrix</span>(<span class='fu'>rnorm</span>(<span class='fl'>300</span>), <span class='fl'>100</span>, <span class='fl'>3</span>), <span class='kw'>start</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='fl'>1961</span>, <span class='fl'>1</span>), <span class='kw'>frequency</span> <span class='kw'>=</span> <span class='fl'>12</span>)
@@ -165,7 +165,7 @@ following columns:</p>
 <span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>z</span>)</div><div class='output co'>#&gt; # A tibble: 300 x 3
 #&gt;    index series  value
 #&gt;    &lt;dbl&gt; &lt;chr&gt;   &lt;dbl&gt;
-#&gt;  1 1961. Aa     -0.773
+#&gt;  1 1961  Aa     -0.773
 #&gt;  2 1961. Aa      0.933
 #&gt;  3 1961. Aa      0.466
 #&gt;  4 1961. Aa     -1.08 

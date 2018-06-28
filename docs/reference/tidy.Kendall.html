@@ -102,7 +102,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Tidying methods for Kendall objects</h1>
-    <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/kendall_tidiers.R'><code>R/kendall_tidiers.R</code></a></small>
+    <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/kendall-tidiers.R'><code>R/kendall-tidiers.R</code></a></small>
     <div class="hidden name"><code>tidy.Kendall.Rd</code></div>
     </div>
 
@@ -155,21 +155,21 @@ Only a <code><a href='tidy.html'>tidy()</a></code> method is provided, not an <c
 <span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>f_res</span>)</div><div class='output co'>#&gt; # A tibble: 1 x 5
 #&gt;   statistic p.value kendall_score denominator var_kendall_score
 #&gt;       &lt;dbl&gt;   &lt;dbl&gt;         &lt;dbl&gt;       &lt;dbl&gt;             &lt;dbl&gt;
-#&gt; 1     0.408  0.0754           34.        83.4              345.</div><div class='input'>
+#&gt; 1     0.408  0.0754            34        83.4              345.</div><div class='input'>
 <span class='co'>### For MannKendall ####</span>
 <span class='no'>s_res</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/Kendall/topics/MannKendall'>MannKendall</a></span>(<span class='no'>B</span>)
 
 <span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>s_res</span>)</div><div class='output co'>#&gt; # A tibble: 1 x 5
 #&gt;   statistic p.value kendall_score denominator var_kendall_score
 #&gt;       &lt;dbl&gt;   &lt;dbl&gt;         &lt;dbl&gt;       &lt;dbl&gt;             &lt;dbl&gt;
-#&gt; 1     0.354   0.102           32.        90.3              360.</div><div class='input'>
+#&gt; 1     0.354   0.102            32        90.3               360</div><div class='input'>
 <span class='co'>### For SeasonalMannKendall ####</span>
 <span class='no'>t_res</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/Kendall/topics/SeasonalMannKendall'>SeasonalMannKendall</a></span>(<span class='fu'>ts</span>(<span class='no'>A</span>))
 
 <span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>t_res</span>)</div><div class='output co'>#&gt; # A tibble: 1 x 5
 #&gt;   statistic     p.value kendall_score denominator var_kendall_score
 #&gt;       &lt;dbl&gt;       &lt;dbl&gt;         &lt;dbl&gt;       &lt;dbl&gt;             &lt;dbl&gt;
-#&gt; 1     0.924 0.000000935          116.        126.              559.</div></pre>
+#&gt; 1     0.924 0.000000935           116        126.              559.</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

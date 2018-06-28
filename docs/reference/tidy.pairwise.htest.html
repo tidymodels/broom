@@ -102,7 +102,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>tidy a pairwise hypothesis test</h1>
-    <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/stats_tidiers.R'><code>R/stats_tidiers.R</code></a></small>
+    <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/stats-htest-tidiers.R'><code>R/stats-htest-tidiers.R</code></a></small>
     <div class="hidden name"><code>tidy.pairwise.htest.Rd</code></div>
     </div>
 
@@ -154,34 +154,44 @@ even if the original input is (e.g.) numeric.</p>
 <span class='fu'>attach</span>(<span class='no'>airquality</span>)
 <span class='no'>Month</span> <span class='kw'>&lt;-</span> <span class='fu'>factor</span>(<span class='no'>Month</span>, <span class='kw'>labels</span> <span class='kw'>=</span> <span class='no'>month.abb</span>[<span class='fl'>5</span>:<span class='fl'>9</span>])
 <span class='no'>ptt</span> <span class='kw'>&lt;-</span> <span class='fu'>pairwise.t.test</span>(<span class='no'>Ozone</span>, <span class='no'>Month</span>)
-<span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>ptt</span>)</div><div class='output co'>#&gt;    group1 group2      p.value
-#&gt; 1     Jun    May 1.0000000000
-#&gt; 2     Jul    May 0.0002638036
-#&gt; 3     Aug    May 0.0001949061
-#&gt; 4     Sep    May 1.0000000000
-#&gt; 5     Jul    Jun 0.0511274135
-#&gt; 6     Aug    Jun 0.0498733313
-#&gt; 7     Sep    Jun 1.0000000000
-#&gt; 8     Aug    Jul 1.0000000000
-#&gt; 9     Sep    Jul 0.0048787981
-#&gt; 10    Sep    Aug 0.0038781084</div><div class='input'>
+<span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>ptt</span>)</div><div class='output co'>#&gt; # A tibble: 10 x 3
+#&gt;    group1 group2  p.value
+#&gt;  * &lt;chr&gt;  &lt;chr&gt;     &lt;dbl&gt;
+#&gt;  1 Jun    May    1       
+#&gt;  2 Jul    May    0.000264
+#&gt;  3 Aug    May    0.000195
+#&gt;  4 Sep    May    1       
+#&gt;  5 Jul    Jun    0.0511  
+#&gt;  6 Aug    Jun    0.0499  
+#&gt;  7 Sep    Jun    1       
+#&gt;  8 Aug    Jul    1       
+#&gt;  9 Sep    Jul    0.00488 
+#&gt; 10 Sep    Aug    0.00388 </div><div class='input'>
 <span class='fu'>attach</span>(<span class='no'>iris</span>)
 <span class='no'>ptt2</span> <span class='kw'>&lt;-</span> <span class='fu'>pairwise.t.test</span>(<span class='no'>Petal.Length</span>, <span class='no'>Species</span>)
-<span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>ptt2</span>)</div><div class='output co'>#&gt;       group1     group2      p.value
-#&gt; 1 versicolor     setosa 1.050917e-68
-#&gt; 2  virginica     setosa 1.231842e-90
-#&gt; 3  virginica versicolor 1.810597e-31</div><div class='input'>
-<span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='fu'>pairwise.t.test</span>(<span class='no'>Petal.Length</span>, <span class='no'>Species</span>, <span class='kw'>alternative</span> <span class='kw'>=</span> <span class='st'>"greater"</span>))</div><div class='output co'>#&gt;       group1     group2      p.value
-#&gt; 1 versicolor     setosa 5.254587e-69
-#&gt; 2  virginica     setosa 6.159208e-91
-#&gt; 3  virginica versicolor 9.052986e-32</div><div class='input'><span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='fu'>pairwise.t.test</span>(<span class='no'>Petal.Length</span>, <span class='no'>Species</span>, <span class='kw'>alternative</span> <span class='kw'>=</span> <span class='st'>"less"</span>))</div><div class='output co'>#&gt;       group1     group2 p.value
-#&gt; 1 versicolor     setosa       1
-#&gt; 2  virginica     setosa       1
-#&gt; 3  virginica versicolor       1</div><div class='input'>
-<span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='fu'>pairwise.wilcox.test</span>(<span class='no'>Petal.Length</span>, <span class='no'>Species</span>))</div><div class='output co'>#&gt;       group1     group2      p.value
-#&gt; 1 versicolor     setosa 1.695303e-17
-#&gt; 2  virginica     setosa 1.695303e-17
-#&gt; 3  virginica versicolor 9.133545e-17</div><div class='input'>
+<span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>ptt2</span>)</div><div class='output co'>#&gt; # A tibble: 3 x 3
+#&gt;   group1     group2      p.value
+#&gt; * &lt;chr&gt;      &lt;chr&gt;         &lt;dbl&gt;
+#&gt; 1 versicolor setosa     1.05e-68
+#&gt; 2 virginica  setosa     1.23e-90
+#&gt; 3 virginica  versicolor 1.81e-31</div><div class='input'>
+<span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='fu'>pairwise.t.test</span>(<span class='no'>Petal.Length</span>, <span class='no'>Species</span>, <span class='kw'>alternative</span> <span class='kw'>=</span> <span class='st'>"greater"</span>))</div><div class='output co'>#&gt; # A tibble: 3 x 3
+#&gt;   group1     group2      p.value
+#&gt; * &lt;chr&gt;      &lt;chr&gt;         &lt;dbl&gt;
+#&gt; 1 versicolor setosa     5.25e-69
+#&gt; 2 virginica  setosa     6.16e-91
+#&gt; 3 virginica  versicolor 9.05e-32</div><div class='input'><span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='fu'>pairwise.t.test</span>(<span class='no'>Petal.Length</span>, <span class='no'>Species</span>, <span class='kw'>alternative</span> <span class='kw'>=</span> <span class='st'>"less"</span>))</div><div class='output co'>#&gt; # A tibble: 3 x 3
+#&gt;   group1     group2     p.value
+#&gt; * &lt;chr&gt;      &lt;chr&gt;        &lt;dbl&gt;
+#&gt; 1 versicolor setosa           1
+#&gt; 2 virginica  setosa           1
+#&gt; 3 virginica  versicolor       1</div><div class='input'>
+<span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='fu'>pairwise.wilcox.test</span>(<span class='no'>Petal.Length</span>, <span class='no'>Species</span>))</div><div class='output co'>#&gt; # A tibble: 3 x 3
+#&gt;   group1     group2      p.value
+#&gt; * &lt;chr&gt;      &lt;chr&gt;         &lt;dbl&gt;
+#&gt; 1 versicolor setosa     1.70e-17
+#&gt; 2 virginica  setosa     1.70e-17
+#&gt; 3 virginica  versicolor 9.13e-17</div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

@@ -102,7 +102,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Tidying methods for a nonlinear model</h1>
-    <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/nls_tidiers.R'><code>R/nls_tidiers.R</code></a></small>
+    <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/stats-nls-tidiers.R'><code>R/stats-nls-tidiers.R</code></a></small>
     <div class="hidden name"><code>nls_tidiers.Rd</code></div>
     </div>
 
@@ -219,8 +219,8 @@ warning is raised and the incomplete rows are dropped.</p>
 #&gt; 2 e        0.746    0.0199      37.5 8.86e-27</div><div class='input'><span class='fu'><a href='augment.html'>augment</a></span>(<span class='no'>n</span>)</div><div class='output co'>#&gt; # A tibble: 32 x 4
 #&gt;      mpg    wt .fitted .resid
 #&gt;    &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;
-#&gt;  1  21.0  2.62    23.0 -2.01 
-#&gt;  2  21.0  2.88    21.4 -0.352
+#&gt;  1  21    2.62    23.0 -2.01 
+#&gt;  2  21    2.88    21.4 -0.352
 #&gt;  3  22.8  2.32    25.1 -2.33 
 #&gt;  4  21.4  3.22    19.3  2.08 
 #&gt;  5  18.7  3.44    18.1  0.611
@@ -241,12 +241,12 @@ warning is raised and the incomplete rows are dropped.</p>
 <span class='fu'><a href='augment.html'>augment</a></span>(<span class='no'>n</span>, <span class='kw'>newdata</span> <span class='kw'>=</span> <span class='no'>newdata</span>)</div><div class='output co'>#&gt; # A tibble: 6 x 13
 #&gt;   .rownames     mpg   cyl  disp    hp  drat    wt  qsec    vs    am  gear  carb
 #&gt;   &lt;chr&gt;       &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
-#&gt; 1 Mazda RX4    21.0    6.  160.  110.  3.90  3.62  16.5    0.    1.    4.    4.
-#&gt; 2 Mazda RX4 ~  21.0    6.  160.  110.  3.90  3.88  17.0    0.    1.    4.    4.
-#&gt; 3 Datsun 710   22.8    4.  108.   93.  3.85  3.32  18.6    1.    1.    4.    1.
-#&gt; 4 Hornet 4 D~  21.4    6.  258.  110.  3.08  4.22  19.4    1.    0.    3.    1.
-#&gt; 5 Hornet Spo~  18.7    8.  360.  175.  3.15  4.44  17.0    0.    0.    3.    2.
-#&gt; 6 Valiant      18.1    6.  225.  105.  2.76  4.46  20.2    1.    0.    3.    1.
+#&gt; 1 Mazda RX4    21       6   160   110  3.9   3.62  16.5     0     1     4     4
+#&gt; 2 Mazda RX4 ~  21       6   160   110  3.9   3.88  17.0     0     1     4     4
+#&gt; 3 Datsun 710   22.8     4   108    93  3.85  3.32  18.6     1     1     4     1
+#&gt; 4 Hornet 4 D~  21.4     6   258   110  3.08  4.22  19.4     1     0     3     1
+#&gt; 5 Hornet Spo~  18.7     8   360   175  3.15  4.44  17.0     0     0     3     2
+#&gt; 6 Valiant      18.1     6   225   105  2.76  4.46  20.2     1     0     3     1
 #&gt; # ... with 1 more variable: .fitted &lt;dbl&gt;</div><div class='input'>
 </div></pre>
   </div>

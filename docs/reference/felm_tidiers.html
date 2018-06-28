@@ -102,7 +102,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Tidying methods for models with multiple group fixed effects</h1>
-    <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/felm_tidiers.R'><code>R/felm_tidiers.R</code></a></small>
+    <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/lfe-tidiers.R'><code>R/lfe-tidiers.R</code></a></small>
     <div class="hidden name"><code>felm_tidiers.Rd</code></div>
     </div>
 
@@ -173,9 +173,6 @@ If cont.int=TRUE, it also includes columns for conf.low and conf.high, computed 
 augment.felm returns  one row for each observation, with multiple columns added to the original data:
 <dt>.fitted</dt><dd><p>Fitted values of model</p></dd>
 <dt>.resid</dt><dd><p>Residuals</p></dd>
-If fixed effect are present,
-<dt>.comp</dt><dd><p>Connected component</p></dd>
-<dt>.fe_</dt><dd><p>Fixed effects (as many columns as factors)</p></dd>
 
 glance.lm returns a one-row data.frame with the columns
 <dt>r.squared</dt><dd><p>The percent of variance explained by the model</p></dd>
@@ -218,10 +215,8 @@ glance.lm returns a one-row data.frame with the columns
     <span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>result_felm</span>)
     <span class='fu'><a href='augment.html'>augment</a></span>(<span class='no'>result_felm</span>)
     <span class='fu'><a href='glance.html'>glance</a></span>(<span class='no'>result_felm</span>)
-}</div><div class='output co'>#&gt; # A tibble: 1 x 7
-#&gt;   r.squared adj.r.squared   sigma statistic p.value    df df.residual
-#&gt;       &lt;dbl&gt;         &lt;dbl&gt;   &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt; &lt;int&gt;       &lt;int&gt;
-#&gt; 1     0.102        0.0118 292107.      1.13   0.350    90          90</div></pre>
+}</div><div class='output co'>#&gt; <span class='message'>Error: package or namespace load failed for 'lfe' in loadNamespace(i, c(lib.loc, .libPaths()), versionCheck = vI[[i]]):</span>
+#&gt; <span class='message'> there is no package called 'zoo'</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

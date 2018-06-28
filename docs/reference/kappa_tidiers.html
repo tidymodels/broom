@@ -102,7 +102,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Tidy a kappa object from a Cohen's kappa calculation</h1>
-    <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/psych_tidiers.R'><code>R/psych_tidiers.R</code></a></small>
+    <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/psych-tidiers.R'><code>R/psych-tidiers.R</code></a></small>
     <div class="hidden name"><code>kappa_tidiers.Rd</code></div>
     </div>
 
@@ -158,9 +158,7 @@ when the <code>cohen.kappa</code> function is originally run.</p>
 #&gt; <span class='message'></span>
 #&gt; <span class='message'>    logit</span></div><div class='output co'>#&gt; <span class='message'>The following objects are masked from 'package:ggplot2':</span>
 #&gt; <span class='message'></span>
-#&gt; <span class='message'>    %+%, alpha</span></div><div class='output co'>#&gt; <span class='message'>The following object is masked from 'package:testthat':</span>
-#&gt; <span class='message'></span>
-#&gt; <span class='message'>    describe</span></div><div class='input'>
+#&gt; <span class='message'>    %+%, alpha</span></div><div class='input'>
 <span class='no'>rater1</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>9</span>
 <span class='no'>rater2</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='fl'>1</span>, <span class='fl'>3</span>, <span class='fl'>1</span>, <span class='fl'>6</span>, <span class='fl'>1</span>, <span class='fl'>5</span>, <span class='fl'>5</span>, <span class='fl'>6</span>, <span class='fl'>7</span>)
 <span class='no'>ck</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/psych/topics/kappa'>cohen.kappa</a></span>(<span class='fu'>cbind</span>(<span class='no'>rater1</span>, <span class='no'>rater2</span>))
@@ -168,7 +166,7 @@ when the <code>cohen.kappa</code> function is originally run.</p>
 <span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>ck</span>)</div><div class='output co'>#&gt; # A tibble: 2 x 4
 #&gt;   type       estimate conf.low conf.high
 #&gt;   &lt;chr&gt;         &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;
-#&gt; 1 unweighted    0.      -0.185     0.185
+#&gt; 1 unweighted    0       -0.185     0.185
 #&gt; 2 weighted      0.678    0.430     0.926</div><div class='input'>
 <span class='co'># graph the confidence intervals</span>
 <span class='fu'>library</span>(<span class='no'>ggplot2</span>)

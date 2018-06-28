@@ -102,7 +102,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>tidy a power.htest</h1>
-    <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/stats_tidiers.R'><code>R/stats_tidiers.R</code></a></small>
+    <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/stats-htest-tidiers.R'><code>R/stats-htest-tidiers.R</code></a></small>
     <div class="hidden name"><code>tidy.power.htest.Rd</code></div>
     </div>
 
@@ -142,36 +142,20 @@ columns <code>n</code>, <code>delta</code>, <code>sd</code>, <code>sig.level</co
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
 <span class='no'>ptt</span> <span class='kw'>&lt;-</span> <span class='fu'>power.t.test</span>(<span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>2</span>:<span class='fl'>30</span>, <span class='kw'>delta</span> <span class='kw'>=</span> <span class='fl'>1</span>)
-<span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>ptt</span>)</div><div class='output co'>#&gt;     n delta sd sig.level      power
-#&gt; 1   2     1  1      0.05 0.09131778
-#&gt; 2   3     1  1      0.05 0.15723610
-#&gt; 3   4     1  1      0.05 0.22246334
-#&gt; 4   5     1  1      0.05 0.28592760
-#&gt; 5   6     1  1      0.05 0.34715648
-#&gt; 6   7     1  1      0.05 0.40569712
-#&gt; 7   8     1  1      0.05 0.46117590
-#&gt; 8   9     1  1      0.05 0.51332563
-#&gt; 9  10     1  1      0.05 0.56198462
-#&gt; 10 11     1  1      0.05 0.60708444
-#&gt; 11 12     1  1      0.05 0.64863435
-#&gt; 12 13     1  1      0.05 0.68670551
-#&gt; 13 14     1  1      0.05 0.72141656
-#&gt; 14 15     1  1      0.05 0.75292102
-#&gt; 15 16     1  1      0.05 0.78139651
-#&gt; 16 17     1  1      0.05 0.80703589
-#&gt; 17 18     1  1      0.05 0.83004003
-#&gt; 18 19     1  1      0.05 0.85061204
-#&gt; 19 20     1  1      0.05 0.86895280
-#&gt; 20 21     1  1      0.05 0.88525761
-#&gt; 21 22     1  1      0.05 0.89971365
-#&gt; 22 23     1  1      0.05 0.91249830
-#&gt; 23 24     1  1      0.05 0.92377799
-#&gt; 24 25     1  1      0.05 0.93370763
-#&gt; 25 26     1  1      0.05 0.94243026
-#&gt; 26 27     1  1      0.05 0.95007724
-#&gt; 27 28     1  1      0.05 0.95676841
-#&gt; 28 29     1  1      0.05 0.96261263
-#&gt; 29 30     1  1      0.05 0.96770825</div><div class='input'>
+<span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>ptt</span>)</div><div class='output co'>#&gt; # A tibble: 29 x 5
+#&gt;        n delta    sd sig.level  power
+#&gt;    &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;  &lt;dbl&gt;
+#&gt;  1     2     1     1      0.05 0.0913
+#&gt;  2     3     1     1      0.05 0.157 
+#&gt;  3     4     1     1      0.05 0.222 
+#&gt;  4     5     1     1      0.05 0.286 
+#&gt;  5     6     1     1      0.05 0.347 
+#&gt;  6     7     1     1      0.05 0.406 
+#&gt;  7     8     1     1      0.05 0.461 
+#&gt;  8     9     1     1      0.05 0.513 
+#&gt;  9    10     1     1      0.05 0.562 
+#&gt; 10    11     1     1      0.05 0.607 
+#&gt; # ... with 19 more rows</div><div class='input'>
 <span class='fu'>library</span>(<span class='no'>ggplot2</span>)
 <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/ggplot'>ggplot</a></span>(<span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>ptt</span>), <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/aes'>aes</a></span>(<span class='no'>n</span>, <span class='no'>power</span>)) + <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/geom_path'>geom_line</a></span>()</div><div class='img'><img src='tidy.power.htest-1.png' alt='' width='700' height='433' /></div><div class='input'>
 </div></pre>

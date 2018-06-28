@@ -263,22 +263,22 @@ au &lt;-<span class="st"> </span><span class="kw"><a href="../reference/augment.
 <span class="co">#&gt; # A tibble: 6 x 9</span>
 <span class="co">#&gt;   speed  dist .fitted .se.fit .resid   .hat .sigma .cooksd .std.resid</span>
 <span class="co">#&gt;   &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;      &lt;dbl&gt;</span>
-<span class="co">#&gt; 1    4.    2.    8.62   0.844 -4.62  0.0716   3.11 0.0888      -1.52 </span>
-<span class="co">#&gt; 2    4.   10.    9.94   0.729 -5.94  0.0534   3.06 0.106       -1.93 </span>
-<span class="co">#&gt; 3    7.    4.    8.95   0.815 -1.95  0.0667   3.18 0.0146      -0.638</span>
-<span class="co">#&gt; 4    7.   22.   11.9    0.578 -4.93  0.0335   3.10 0.0437      -1.59 </span>
-<span class="co">#&gt; 5    8.   16.   10.9    0.650 -2.93  0.0424   3.16 0.0200      -0.950</span>
-<span class="co">#&gt; 6    9.   10.    9.94   0.729 -0.940 0.0534   3.19 0.00264     -0.306</span>
+<span class="co">#&gt; 1     4     2    8.62   0.844 -4.62  0.0716   3.11 0.0888      -1.52 </span>
+<span class="co">#&gt; 2     4    10    9.94   0.729 -5.94  0.0534   3.06 0.106       -1.93 </span>
+<span class="co">#&gt; 3     7     4    8.95   0.815 -1.95  0.0667   3.18 0.0146      -0.638</span>
+<span class="co">#&gt; 4     7    22   11.9    0.578 -4.93  0.0335   3.10 0.0437      -1.59 </span>
+<span class="co">#&gt; 5     8    16   10.9    0.650 -2.93  0.0424   3.16 0.0200      -0.950</span>
+<span class="co">#&gt; 6     9    10    9.94   0.729 -0.940 0.0534   3.19 0.00264     -0.306</span>
 <span class="kw">head</span>(<span class="kw"><a href="../reference/augment.html">augment</a></span>(model, <span class="dt">newdata =</span> cars))
 <span class="co">#&gt; # A tibble: 6 x 4</span>
 <span class="co">#&gt;   speed  dist .fitted .se.fit</span>
 <span class="co">#&gt;   &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;</span>
-<span class="co">#&gt; 1    4.    2.    8.62   0.844</span>
-<span class="co">#&gt; 2    4.   10.    9.94   0.729</span>
-<span class="co">#&gt; 3    7.    4.    8.95   0.815</span>
-<span class="co">#&gt; 4    7.   22.   11.9    0.578</span>
-<span class="co">#&gt; 5    8.   16.   10.9    0.650</span>
-<span class="co">#&gt; 6    9.   10.    9.94   0.729</span></code></pre></div>
+<span class="co">#&gt; 1     4     2    8.62   0.844</span>
+<span class="co">#&gt; 2     4    10    9.94   0.729</span>
+<span class="co">#&gt; 3     7     4    8.95   0.815</span>
+<span class="co">#&gt; 4     7    22   11.9    0.578</span>
+<span class="co">#&gt; 5     8    16   10.9    0.650</span>
+<span class="co">#&gt; 6     9    10    9.94   0.729</span></code></pre></div>
 <p>This means that many <code><a href="../reference/augment.html">augment(model, data = original_data)</a></code> should provide <code>.fitted</code> and <code>.resid</code> columns in most cases, whereas <code><a href="../reference/augment.html">augment(model, data = test_data)</a></code> only needs to a <code>.fitted</code> column, even if the response is present in <code>test_data</code>. While it would be nice to provide a <code>.resid</code> column in this case, determining the response variable from a formula specification is often a brittle process.</p>
 <p>If the <code>data</code> or <code>newdata</code> is specified as a <code>data.frame</code> with rownames, <code>augment</code> should return them in a column called <code>.rownames</code>.</p>
 <p>For observations where no fitted values or summaries are available (where there’s missing data, for example) return <code>NA</code>.</p>

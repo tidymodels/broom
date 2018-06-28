@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Tidying methods for (truncated) singular value decomposition — svd_tidiers • broom</title>
+<title>Tidy an irlba list — svd_tidiers • broom</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -101,38 +101,39 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Tidying methods for (truncated) singular value decomposition</h1>
-    <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/svd_tidiers.R'><code>R/svd_tidiers.R</code></a></small>
+    <h1>Tidy an irlba list</h1>
+    <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/list-irlba.R'><code>R/list-irlba.R</code></a>, <a href='http://github.com/tidyverse/broom/blob/master/R/list-svd-tidiers.R'><code>R/list-svd-tidiers.R</code></a></small>
     <div class="hidden name"><code>svd_tidiers.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>These methods tidy the U, D, and V matrices returned by the
-<code>svd()</code> or <code><a href='http://www.rdocumentation.org/packages/irlba/topics/irlba'>irlba::irlba()</a></code> functions into a tidy format.
-Because <code>svd</code> and <code>irlba</code> return lists without classes, this function
-has to be called by <code><a href='list_tidiers.html'>tidy.list()</a></code> when it recognizes a list as an
-SVD or <code>irlba</code> object.</p>
+    <p>A very thin wrapper around <code>tidy_svd()</code>.</p>
+<p>These methods tidy the U, D, and V matrices returned by the
+<code>svd()</code> functions into a tidy format. Because <code>svd</code> returns
+lists without classes, this function has to be called by
+<code><a href='list_tidiers.html'>tidy.list()</a></code> when it recognizes a list as an SVD.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>tidy_svd</span>(<span class='no'>x</span>, <span class='kw'>matrix</span> <span class='kw'>=</span> <span class='st'>"u"</span>, <span class='no'>...</span>)</pre>
+    <pre class="usage"><span class='fu'>tidy_irlba</span>(<span class='no'>x</span>, <span class='no'>...</span>)
+
+<span class='fu'>tidy_svd</span>(<span class='no'>x</span>, <span class='kw'>matrix</span> <span class='kw'>=</span> <span class='st'>"u"</span>, <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>x</th>
-      <td><p>list containing d, u, v components, returned from <code>svd</code> or
-<code>irlba</code></p></td>
-    </tr>
-    <tr>
-      <th>matrix</th>
-      <td><p>which of the u, d or v matrix to tidy</p></td>
+      <td><p>list containing d, u, v components, returned from <code>svd</code></p></td>
     </tr>
     <tr>
       <th>...</th>
       <td><p>Extra arguments (not used)</p></td>
+    </tr>
+    <tr>
+      <th>matrix</th>
+      <td><p>which of the u, d or v matrix to tidy</p></td>
     </tr>
     </table>
     
@@ -171,7 +172,8 @@ component and a column of the original matrix, with variables:
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code>svd()</code>, <code><a href='http://www.rdocumentation.org/packages/irlba/topics/irlba'>irlba::irlba()</a></code> <code><a href='list_tidiers.html'>tidy.list()</a></code></p></div>
+    <div class='dont-index'><p><code>svd()</code>, <code><a href='http://www.rdocumentation.org/packages/irlba/topics/irlba'>irlba::irlba()</a></code> <code><a href='list_tidiers.html'>tidy.list()</a></code></p>
+<p><code>svd()</code>, <code><a href='http://www.rdocumentation.org/packages/irlba/topics/irlba'>irlba::irlba()</a></code>, <code><a href='list_tidiers.html'>tidy.list()</a></code>, <code>tidy_irlba()</code></p></div>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
@@ -196,7 +198,7 @@ component and a column of the original matrix, with variables:
 #&gt; 1     1   20.9  0.730        0.730
 #&gt; 2     2   11.7  0.229        0.958
 #&gt; 3     3    4.68 0.0367       0.995
-#&gt; 4     4    1.76 0.00518      1.00 </div><div class='input'>
+#&gt; 4     4    1.76 0.00518      1    </div><div class='input'>
 <span class='no'>tidy_v</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>s</span>, <span class='kw'>matrix</span> <span class='kw'>=</span> <span class='st'>"v"</span>)
 <span class='fu'>head</span>(<span class='no'>tidy_v</span>)</div><div class='output co'>#&gt; # A tibble: 6 x 3
 #&gt;   column    PC  value

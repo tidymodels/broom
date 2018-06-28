@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Tidying methods for coeftest objects — tidy.coeftest • broom</title>
+<title>Tidiers for NULL inputs — null_tidiers • broom</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -101,54 +101,47 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Tidying methods for coeftest objects</h1>
-    <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/lmtest-tidiers.R'><code>R/lmtest-tidiers.R</code></a></small>
-    <div class="hidden name"><code>tidy.coeftest.Rd</code></div>
+    <h1>Tidiers for NULL inputs</h1>
+    <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/null-and-default-tidiers.R'><code>R/null-and-default-tidiers.R</code></a></small>
+    <div class="hidden name"><code>null_tidiers.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>This tidies the result of a coefficient test, from the <code>coeftest</code>
-function in the <code>lmtest</code> package.</p>
+    <p><code><a href='tidy.html'>tidy(NULL)</a></code>, <code><a href='glance.html'>glance(NULL)</a></code> and <code><a href='augment.html'>augment(NULL)</a></code> all return an empty
+<code><a href='http://www.rdocumentation.org/packages/tibble/topics/tibble'>tibble::tibble()</a></code>. This empty tibble can be treated a tibble with zero
+rows, making it convenient to combine with other tibbles using
+functions like <code><a href='http://www.rdocumentation.org/packages/purrr/topics/map'>purrr::map_df()</a></code> on lists of potentially <code>NULL</code> objects.</p>
     
     </div>
 
-    <pre class="usage"><span class='co'># S3 method for coeftest</span>
-<span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>x</span>, <span class='no'>...</span>)</pre>
+    <pre class="usage"><span class='co'># S3 method for NULL</span>
+<span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>x</span>, <span class='no'>...</span>)
+
+<span class='co'># S3 method for NULL</span>
+<span class='fu'><a href='glance.html'>glance</a></span>(<span class='no'>x</span>, <span class='no'>...</span>)
+
+<span class='co'># S3 method for NULL</span>
+<span class='fu'><a href='augment.html'>augment</a></span>(<span class='no'>x</span>, <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>x</th>
-      <td><p>coeftest object</p></td>
+      <td><p>The value <code>NULL</code>.</p></td>
     </tr>
     <tr>
       <th>...</th>
-      <td><p>extra arguments (not used)</p></td>
+      <td><p>Additional arguments (not used).</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A <code>data.frame</code> with one row for each coefficient, with five columns:</p>
-<dt>term</dt><dd><p>The term in the linear model being estimated and tested</p></dd>
-<dt>estimate</dt><dd><p>The estimated coefficient</p></dd>
-<dt>std.error</dt><dd><p>The standard error</p></dd>
-<dt>statistic</dt><dd><p>test statistic</p></dd>
-<dt>p.value</dt><dd><p>p-value</p></dd>
-
+    <p>An empty tibble.</p>
     
 
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'>
-<span class='kw'>if</span> (<span class='fu'>require</span>(<span class='st'>"lmtest"</span>, <span class='kw'>quietly</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)) {
-    <span class='fu'>data</span>(<span class='no'>Mandible</span>)
-    <span class='no'>fm</span> <span class='kw'>&lt;-</span> <span class='fu'>lm</span>(<span class='no'>length</span> ~ <span class='no'>age</span>, <span class='kw'>data</span><span class='kw'>=</span><span class='no'>Mandible</span>, <span class='kw'>subset</span><span class='kw'>=</span>(<span class='no'>age</span> <span class='kw'>&lt;=</span> <span class='fl'>28</span>))
-
-    <span class='fu'><a href='http://www.rdocumentation.org/packages/lmtest/topics/coeftest'>coeftest</a></span>(<span class='no'>fm</span>)
-    <span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='fu'><a href='http://www.rdocumentation.org/packages/lmtest/topics/coeftest'>coeftest</a></span>(<span class='no'>fm</span>))
-}</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -156,9 +149,7 @@ function in the <code>lmtest</code> package.</p>
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
-      
-      <li><a href="#examples">Examples</a></li>
-    </ul>
+          </ul>
 
   </div>
 </div>

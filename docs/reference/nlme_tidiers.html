@@ -102,14 +102,15 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Tidying methods for mixed effects models</h1>
-    <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/nlme_tidiers.R'><code>R/nlme_tidiers.R</code></a></small>
+    <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/nlme-tidiers.R'><code>R/nlme-tidiers.R</code></a></small>
     <div class="hidden name"><code>nlme_tidiers.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>These methods tidy the coefficients of mixed effects models
-of the <code>lme</code> class from functions  of the <code>nlme</code> package.</p>
+    <p><code>nlme</code> tidiers will soon be deprecated in <code>broom</code> and there is no ongoing
+development of these functions at this time. <code>nlme</code> tidiers are being
+developed in the <code>broom.mixed</code> package, which is not yet on CRAN.</p>
     
     </div>
 
@@ -187,7 +188,9 @@ page.</p></dd>
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>When the modeling was performed with <code>na.action = "na.omit"</code>
+    <p>These methods tidy the coefficients of mixed effects models
+of the <code>lme</code> class from functions  of the <code>nlme</code> package.</p>
+<p>When the modeling was performed with <code>na.action = "na.omit"</code>
 (as is the typical default), rows with NA in the initial data are omitted
 entirely from the augmented data frame. When the modeling was performed
 with <code>na.action = "na.exclude"</code>, one should provide the original data
@@ -226,8 +229,6 @@ warning is raised and the incomplete rows are dropped.</p>
 #&gt; <span class='message'>Attaching package: 'nlme'</span></div><div class='output co'>#&gt; <span class='message'>The following object is masked from 'package:lme4':</span>
 #&gt; <span class='message'></span>
 #&gt; <span class='message'>    lmList</span></div><div class='output co'>#&gt; <span class='message'>The following object is masked from 'package:dplyr':</span>
-#&gt; <span class='message'></span>
-#&gt; <span class='message'>    collapse</span></div><div class='output co'>#&gt; <span class='message'>The following object is masked from 'package:broom':</span>
 #&gt; <span class='message'></span>
 #&gt; <span class='message'>    collapse</span></div><div class='output co'>#&gt; <span class='warning'>Warning: deviance undefined for REML fit</span></div><div class='output co'>#&gt; # A tibble: 1 x 5
 #&gt;   sigma logLik   AIC   BIC deviance

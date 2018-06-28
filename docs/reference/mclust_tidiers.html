@@ -102,7 +102,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Tidying methods for Mclust objects</h1>
-    <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/mclust_tidiers.R'><code>R/mclust_tidiers.R</code></a></small>
+    <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/mclust-tidiers.R'><code>R/mclust-tidiers.R</code></a></small>
     <div class="hidden name"><code>mclust_tidiers.Rd</code></div>
     </div>
 
@@ -180,13 +180,11 @@ otherwise set to NA</p></dd>
     <pre class="examples"><div class='input'>
 <span class='fu'>library</span>(<span class='no'>dplyr</span>)
 <span class='fu'>library</span>(<span class='no'>ggplot2</span>)
-<span class='fu'>library</span>(<span class='no'>mclust</span>)</div><div class='output co'>#&gt; <span class='message'>Package 'mclust' version 5.4</span>
+<span class='fu'>library</span>(<span class='no'>mclust</span>)</div><div class='output co'>#&gt; <span class='message'>Package 'mclust' version 5.4.1</span>
 #&gt; <span class='message'>Type 'citation("mclust")' for citing this R package in publications.</span></div><div class='output co'>#&gt; <span class='message'></span>
 #&gt; <span class='message'>Attaching package: 'mclust'</span></div><div class='output co'>#&gt; <span class='message'>The following object is masked from 'package:psych':</span>
 #&gt; <span class='message'></span>
-#&gt; <span class='message'>    sim</span></div><div class='output co'>#&gt; <span class='message'>The following object is masked from 'package:broom':</span>
-#&gt; <span class='message'></span>
-#&gt; <span class='message'>    map</span></div><div class='input'>
+#&gt; <span class='message'>    sim</span></div><div class='input'>
 <span class='fu'>set.seed</span>(<span class='fl'>2016</span>)
 <span class='no'>centers</span> <span class='kw'>&lt;-</span> <span class='fu'>data.frame</span>(<span class='kw'>cluster</span><span class='kw'>=</span><span class='fu'>factor</span>(<span class='fl'>1</span>:<span class='fl'>3</span>), <span class='kw'>size</span><span class='kw'>=</span><span class='fu'>c</span>(<span class='fl'>100</span>, <span class='fl'>150</span>, <span class='fl'>50</span>),
                       <span class='kw'>x1</span><span class='kw'>=</span><span class='fu'>c</span>(<span class='fl'>5</span>, <span class='fl'>0</span>, -<span class='fl'>3</span>), <span class='kw'>x2</span><span class='kw'>=</span><span class='fu'>c</span>(-<span class='fl'>1</span>, <span class='fl'>1</span>, -<span class='fl'>2</span>))
@@ -213,7 +211,7 @@ otherwise set to NA</p></dd>
 #&gt; 6 1        4.72 -0.0123 1          2.17e- 5</div><div class='input'><span class='fu'><a href='glance.html'>glance</a></span>(<span class='no'>m</span>)</div><div class='output co'>#&gt; # A tibble: 1 x 7
 #&gt;   model     n     G    BIC logLik    df hypvol
 #&gt;   &lt;chr&gt; &lt;int&gt; &lt;int&gt;  &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;
-#&gt; 1 EII     300     3 -2324. -1136.    9.     NA</div><div class='input'>
+#&gt; 1 EII     300     3 -2324. -1136.     9     NA</div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

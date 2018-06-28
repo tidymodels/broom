@@ -102,7 +102,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Tidiers for lmRob and glmRob objects</h1>
-    <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/robust_tidiers.R'><code>R/robust_tidiers.R</code></a></small>
+    <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/robust-tidiers.R'><code>R/robust-tidiers.R</code></a></small>
     <div class="hidden name"><code>robust_tidiers.Rd</code></div>
     </div>
 
@@ -114,12 +114,10 @@ methods simply pass it on to the linear model tidiers.</p>
     </div>
 
     <pre class="usage"><span class='co'># S3 method for lmRob</span>
-<span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>x</span>, <span class='kw'>conf.int</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>conf.level</span> <span class='kw'>=</span> <span class='fl'>0.95</span>,
-  <span class='kw'>exponentiate</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>quick</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='no'>...</span>)
+<span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>x</span>, <span class='no'>...</span>)
 
 <span class='co'># S3 method for lmRob</span>
-<span class='fu'><a href='augment.html'>augment</a></span>(<span class='no'>x</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='kw pkg'>stats</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/stats/topics/model.frame'>model.frame</a></span>(<span class='no'>x</span>), <span class='no'>newdata</span>,
-  <span class='no'>type.predict</span>, <span class='no'>type.residuals</span>, <span class='no'>...</span>)
+<span class='fu'><a href='augment.html'>augment</a></span>(<span class='no'>x</span>, <span class='no'>...</span>)
 
 <span class='co'># S3 method for lmRob</span>
 <span class='fu'><a href='glance.html'>glance</a></span>(<span class='no'>x</span>, <span class='no'>...</span>)
@@ -179,10 +177,8 @@ On an glmRob glance returns a one-row data frame with the following columns:
 
   <span class='no'>gm</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/robust/topics/glmRob'>glmRob</a></span>(<span class='no'>am</span> ~ <span class='no'>wt</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>mtcars</span>, <span class='kw'>family</span> <span class='kw'>=</span> <span class='st'>"binomial"</span>)
   <span class='fu'><a href='glance.html'>glance</a></span>(<span class='no'>gm</span>)
-}</div><div class='output co'>#&gt; # A tibble: 1 x 3
-#&gt;   deviance null.deviance df.residual
-#&gt;      &lt;dbl&gt;         &lt;dbl&gt;       &lt;int&gt;
-#&gt; 1     19.2          44.4          30</div><div class='input'>
+}</div><div class='output co'>#&gt; <span class='message'>Error: package or namespace load failed for 'robust' in loadNamespace(j &lt;- i[[1L]], c(lib.loc, .libPaths()), versionCheck = vI[[j]]):</span>
+#&gt; <span class='message'> there is no package called 'robustbase'</span></div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

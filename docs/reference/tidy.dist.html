@@ -102,7 +102,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Tidy a distance matrix</h1>
-    <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/stats_tidiers.R'><code>R/stats_tidiers.R</code></a></small>
+    <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/stats-tidiers.R'><code>R/stats-tidiers.R</code></a></small>
     <div class="hidden name"><code>tidy.dist.Rd</code></div>
     </div>
 
@@ -161,35 +161,41 @@ item distances, with columns:</p><dl class='dl-horizontal'>
 #&gt; Sepal.Width      36.15785                         
 #&gt; Petal.Length     28.96619    25.77809             
 #&gt; Petal.Width      57.18304    25.86407     33.86473</div><div class='input'>
-<span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>iris_dist</span>)</div><div class='output co'>#&gt;          item1        item2 distance
-#&gt; 1  Sepal.Width Sepal.Length 36.15785
-#&gt; 2 Petal.Length Sepal.Length 28.96619
-#&gt; 3  Petal.Width Sepal.Length 57.18304
-#&gt; 4 Petal.Length  Sepal.Width 25.77809
-#&gt; 5  Petal.Width  Sepal.Width 25.86407
-#&gt; 6  Petal.Width Petal.Length 33.86473</div><div class='input'><span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>iris_dist</span>, <span class='kw'>upper</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt;           item1        item2 distance
-#&gt; 1   Sepal.Width Sepal.Length 36.15785
-#&gt; 2  Petal.Length Sepal.Length 28.96619
-#&gt; 3   Petal.Width Sepal.Length 57.18304
-#&gt; 4  Sepal.Length  Sepal.Width 36.15785
-#&gt; 5  Petal.Length  Sepal.Width 25.77809
-#&gt; 6   Petal.Width  Sepal.Width 25.86407
-#&gt; 7  Sepal.Length Petal.Length 28.96619
-#&gt; 8   Sepal.Width Petal.Length 25.77809
-#&gt; 9   Petal.Width Petal.Length 33.86473
-#&gt; 10 Sepal.Length  Petal.Width 57.18304
-#&gt; 11  Sepal.Width  Petal.Width 25.86407
-#&gt; 12 Petal.Length  Petal.Width 33.86473</div><div class='input'><span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>iris_dist</span>, <span class='kw'>diag</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt;           item1        item2 distance
-#&gt; 1  Sepal.Length Sepal.Length  0.00000
-#&gt; 2   Sepal.Width Sepal.Length 36.15785
-#&gt; 3  Petal.Length Sepal.Length 28.96619
-#&gt; 4   Petal.Width Sepal.Length 57.18304
-#&gt; 6   Sepal.Width  Sepal.Width  0.00000
-#&gt; 7  Petal.Length  Sepal.Width 25.77809
-#&gt; 8   Petal.Width  Sepal.Width 25.86407
-#&gt; 11 Petal.Length Petal.Length  0.00000
-#&gt; 12  Petal.Width Petal.Length 33.86473
-#&gt; 16  Petal.Width  Petal.Width  0.00000</div><div class='input'>
+<span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>iris_dist</span>)</div><div class='output co'>#&gt; # A tibble: 6 x 3
+#&gt;   item1        item2        distance
+#&gt;   &lt;fct&gt;        &lt;fct&gt;           &lt;dbl&gt;
+#&gt; 1 Sepal.Width  Sepal.Length     36.2
+#&gt; 2 Petal.Length Sepal.Length     29.0
+#&gt; 3 Petal.Width  Sepal.Length     57.2
+#&gt; 4 Petal.Length Sepal.Width      25.8
+#&gt; 5 Petal.Width  Sepal.Width      25.9
+#&gt; 6 Petal.Width  Petal.Length     33.9</div><div class='input'><span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>iris_dist</span>, <span class='kw'>upper</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; # A tibble: 12 x 3
+#&gt;    item1        item2        distance
+#&gt;    &lt;fct&gt;        &lt;fct&gt;           &lt;dbl&gt;
+#&gt;  1 Sepal.Width  Sepal.Length     36.2
+#&gt;  2 Petal.Length Sepal.Length     29.0
+#&gt;  3 Petal.Width  Sepal.Length     57.2
+#&gt;  4 Sepal.Length Sepal.Width      36.2
+#&gt;  5 Petal.Length Sepal.Width      25.8
+#&gt;  6 Petal.Width  Sepal.Width      25.9
+#&gt;  7 Sepal.Length Petal.Length     29.0
+#&gt;  8 Sepal.Width  Petal.Length     25.8
+#&gt;  9 Petal.Width  Petal.Length     33.9
+#&gt; 10 Sepal.Length Petal.Width      57.2
+#&gt; 11 Sepal.Width  Petal.Width      25.9
+#&gt; 12 Petal.Length Petal.Width      33.9</div><div class='input'><span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>iris_dist</span>, <span class='kw'>diag</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; # A tibble: 10 x 3
+#&gt;    item1        item2        distance
+#&gt;  * &lt;fct&gt;        &lt;fct&gt;           &lt;dbl&gt;
+#&gt;  1 Sepal.Length Sepal.Length      0  
+#&gt;  2 Sepal.Width  Sepal.Length     36.2
+#&gt;  3 Petal.Length Sepal.Length     29.0
+#&gt;  4 Petal.Width  Sepal.Length     57.2
+#&gt;  5 Sepal.Width  Sepal.Width       0  
+#&gt;  6 Petal.Length Sepal.Width      25.8
+#&gt;  7 Petal.Width  Sepal.Width      25.9
+#&gt;  8 Petal.Length Petal.Length      0  
+#&gt;  9 Petal.Width  Petal.Length     33.9
+#&gt; 10 Petal.Width  Petal.Width       0  </div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

@@ -102,7 +102,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Tidying methods for kmeans objects</h1>
-    <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/kmeans_tidiers.R'><code>R/kmeans_tidiers.R</code></a></small>
+    <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/stats-kmeans-tidiers.R'><code>R/stats-kmeans-tidiers.R</code></a></small>
     <div class="hidden name"><code>kmeans_tidiers.Rd</code></div>
     </div>
 
@@ -187,9 +187,9 @@ glance returns a one-row data.frame with the columns
 <span class='no'>k</span> <span class='kw'>&lt;-</span> <span class='fu'>kmeans</span>(<span class='no'>points</span> <span class='kw'>%&gt;%</span> <span class='kw pkg'>dplyr</span><span class='kw ns'>::</span><span class='fu'><a href='http://dplyr.tidyverse.org/reference/select.html'>select</a></span>(<span class='no'>x1</span>, <span class='no'>x2</span>), <span class='fl'>3</span>)</div><div class='output co'>#&gt; <span class='message'>Adding missing grouping variables: `cluster`</span></div><div class='input'><span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>k</span>)</div><div class='output co'>#&gt; # A tibble: 3 x 6
 #&gt;      x1     x2     x3  size withinss cluster
 #&gt; * &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt; &lt;int&gt;    &lt;dbl&gt; &lt;fct&gt;  
-#&gt; 1  1.00  5.18  -0.987    99    205.  1      
+#&gt; 1  1     5.18  -0.987    99    205.  1      
 #&gt; 2  1.99  0.158  0.980   151    258.  2      
-#&gt; 3  3.00 -3.07  -2.09     50     78.6 3      </div><div class='input'><span class='fu'>head</span>(<span class='fu'><a href='augment.html'>augment</a></span>(<span class='no'>k</span>, <span class='no'>points</span>))</div><div class='output co'>#&gt; # A tibble: 6 x 4
+#&gt; 3  3    -3.07  -2.09     50     78.6 3      </div><div class='input'><span class='fu'>head</span>(<span class='fu'><a href='augment.html'>augment</a></span>(<span class='no'>k</span>, <span class='no'>points</span>))</div><div class='output co'>#&gt; # A tibble: 6 x 4
 #&gt;   cluster    x1     x2 .cluster
 #&gt;   &lt;fct&gt;   &lt;dbl&gt;  &lt;dbl&gt; &lt;fct&gt;   
 #&gt; 1 1        4.43  0.542 1       

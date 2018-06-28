@@ -102,7 +102,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Tidying methods for ANOVA and AOV objects</h1>
-    <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/anova_tidiers.R'><code>R/anova_tidiers.R</code></a></small>
+    <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/stats-anova-tidiers.R'><code>R/stats-anova-tidiers.R</code></a></small>
     <div class="hidden name"><code>anova_tidiers.Rd</code></div>
     </div>
 
@@ -173,19 +173,19 @@ also supported.</p>
 <span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>a</span>)</div><div class='output co'>#&gt; # A tibble: 4 x 6
 #&gt;   term         df     sumsq    meansq  statistic   p.value
 #&gt;   &lt;chr&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;      &lt;dbl&gt;     &lt;dbl&gt;
-#&gt; 1 wt           1. 848.      848.      121.        1.08e-11
-#&gt; 2 qsec         1.  82.9      82.9      11.9       1.82e- 3
-#&gt; 3 disp         1.   0.00102   0.00102   0.000147  9.90e- 1
-#&gt; 4 Residuals   28. 195.        6.98     NA        NA       </div><div class='input'>
+#&gt; 1 wt            1 848.      848.      121.        1.08e-11
+#&gt; 2 qsec          1  82.9      82.9      11.9       1.82e- 3
+#&gt; 3 disp          1   0.00102   0.00102   0.000147  9.90e- 1
+#&gt; 4 Residuals    28 195.        6.98     NA        NA       </div><div class='input'>
 <span class='no'>al</span> <span class='kw'>&lt;-</span> <span class='fu'>aov</span>(<span class='no'>mpg</span> ~ <span class='no'>wt</span> + <span class='no'>qsec</span> + <span class='fu'>Error</span>(<span class='no'>disp</span> / <span class='no'>am</span>), <span class='no'>mtcars</span>)
 <span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>al</span>)</div><div class='output co'>#&gt; # A tibble: 5 x 7
 #&gt;   stratum term         df   sumsq  meansq statistic  p.value
 #&gt;   &lt;chr&gt;   &lt;chr&gt;     &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
-#&gt; 1 disp    wt           1. 809.    809.        NA    NA      
-#&gt; 2 disp:am wt           1.   0.389   0.389     NA    NA      
-#&gt; 3 Within  wt           1.  87.2    87.2       12.0   0.00176
-#&gt; 4 Within  qsec         1.  34.2    34.2        4.72  0.0387 
-#&gt; 5 Within  Residuals   27. 195.      7.24      NA    NA      </div><div class='input'>
+#&gt; 1 disp    wt            1 809.    809.        NA    NA      
+#&gt; 2 disp:am wt            1   0.389   0.389     NA    NA      
+#&gt; 3 Within  wt            1  87.2    87.2       12.0   0.00176
+#&gt; 4 Within  qsec          1  34.2    34.2        4.72  0.0387 
+#&gt; 5 Within  Residuals    27 195.      7.24      NA    NA      </div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
