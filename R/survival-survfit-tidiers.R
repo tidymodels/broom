@@ -36,31 +36,6 @@
 #'         geom_line(aes(color = state)) +
 #'         geom_ribbon(aes(ymin = conf.low, ymax = conf.high), alpha = .25)
 #'
-#'     # perform simple bootstrapping
-#'     library(dplyr)
-#'     bootstraps <- lung %>% bootstrap(100) %>%
-#'         do(tidy(survfit(coxph(Surv(time, status) ~ age + sex, .))))
-#'
-#'     ggplot(bootstraps, aes(time, estimate, group = replicate)) +
-#'         geom_line(alpha = .25)
-#'
-#'     bootstraps_bytime <- bootstraps %>% group_by(time) %>%
-#'         summarize(median = median(estimate),
-#'                   low = quantile(estimate, .025),
-#'                   high = quantile(estimate, .975))
-#'
-#'     ggplot(bootstraps_bytime, aes(x = time, y = median)) + geom_line() +
-#'         geom_ribbon(aes(ymin = low, ymax = high), alpha = .25)
-#'
-#'     # bootstrap for median survival
-#'     glances <- lung %>%
-#'         bootstrap(100) %>%
-#'         do(glance(survfit(coxph(Surv(time, status) ~ age + sex, .))))
-#'
-#'     glances
-#'
-#'     qplot(glances$median, binwidth = 15)
-#'     quantile(glances$median, c(.025, .975))
 #' }
 #'
 #' @name survfit_tidiers

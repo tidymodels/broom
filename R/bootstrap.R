@@ -20,8 +20,10 @@
 #'
 #' @examples
 #'
+#' \dontrun{
 #' library(dplyr)
 #' mtcars %>% bootstrap(10) %>% do(tidy(lm(mpg ~ wt, .)))
+#' }
 #'
 #' @export
 bootstrap <- function(df, m, by_group = FALSE) {

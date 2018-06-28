@@ -90,3 +90,27 @@ tidy.ts <- function(x, ...) {
 tidy.acf <- function(x, ...) {
   tibble(lag = as.numeric(x$lag), acf = as.numeric(x$acf))
 }
+
+
+#' tidy a spec objet
+#'
+#' Given a "spec" object, which shows a spectrum across a range of frequencies,
+#' returns a tidy data frame with two columns: "freq" and "spec"
+#'
+#' @param x an object of class "spec"
+#' @param ... extra arguments (not used)
+#'
+#' @return a data frame with "freq" and "spec" columns
+#'
+#' @examples
+#'
+#' spc <- spectrum(lh)
+#' tidy(spc)
+#'
+#' library(ggplot2)
+#' ggplot(tidy(spc), aes(freq, spec)) + geom_line()
+#'
+#' @export
+tidy.spec <- function(x, ...) {
+  as_tibble(x[c("freq", "spec")])
+}

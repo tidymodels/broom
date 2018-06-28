@@ -26,7 +26,8 @@
 #' https://CRAN.R-project.org/package=moments
 #'
 #' @examples
-#'
+#' 
+#' \dontrun{
 #' td <- tidy(mtcars)
 #' td
 #'
@@ -37,6 +38,7 @@
 #' ggplot(td, aes(mean, sd)) + geom_point() +
 #'      geom_text(aes(label = column), hjust = 1, vjust = 1) +
 #'      scale_x_log10() + scale_y_log10() + geom_abline()
+#' }
 #'
 #' @name data.frame_tidiers
 

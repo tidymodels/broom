@@ -31,7 +31,9 @@ https://github.com/dgrtwo/broom/blob/master/vignettes/bootstrapping.Rmd
 }
 \examples{
 
+\dontrun{
 library(dplyr)
 mtcars \%>\% bootstrap(10) \%>\% do(tidy(lm(mpg ~ wt, .)))
+}
 
 }
