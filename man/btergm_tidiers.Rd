@@ -5,8 +5,8 @@
 \alias{tidy.btergm}
 \title{Tidying method for a bootstrapped temporal exponential random graph model}
 \usage{
-\method{tidy}{btergm}(x, conf.int = FALSE, conf.level = 0.95,
-  exponentiate = FALSE, quick = FALSE, ...)
+\method{tidy}{btergm}(x, conf.level = 0.95, exponentiate = FALSE,
+  quick = FALSE, ...)
 }
 \arguments{
 \item{x}{A \code{\link[btergm:btergm]{btergm::btergm()}} object.}
