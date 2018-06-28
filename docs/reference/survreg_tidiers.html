@@ -102,7 +102,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Tidiers for a parametric regression survival model</h1>
-    <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/survival_tidiers.R'><code>R/survival_tidiers.R</code></a></small>
+    <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/survival-survreg-tidiers.R'><code>R/survival-survreg-tidiers.R</code></a></small>
     <div class="hidden name"><code>survreg_tidiers.Rd</code></div>
     </div>
 
@@ -118,7 +118,7 @@ summarizes the model statistics.</p>
 <span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>x</span>, <span class='kw'>conf.level</span> <span class='kw'>=</span> <span class='fl'>0.95</span>, <span class='no'>...</span>)
 
 <span class='co'># S3 method for survreg</span>
-<span class='fu'><a href='augment.html'>augment</a></span>(<span class='no'>x</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='kw pkg'>stats</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/stats/topics/model.frame'>model.frame</a></span>(<span class='no'>x</span>), <span class='no'>newdata</span>,
+<span class='fu'><a href='augment.html'>augment</a></span>(<span class='no'>x</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>newdata</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>type.predict</span> <span class='kw'>=</span> <span class='st'>"response"</span>, <span class='kw'>type.residuals</span> <span class='kw'>=</span> <span class='st'>"response"</span>, <span class='no'>...</span>)
 
 <span class='co'># S3 method for survreg</span>
@@ -212,7 +212,6 @@ warning is raised and the incomplete rows are dropped.</p>
 
     <span class='no'>td</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>sr</span>)
     <span class='fu'><a href='augment.html'>augment</a></span>(<span class='no'>sr</span>, <span class='no'>ovarian</span>)
-    <span class='fu'><a href='augment.html'>augment</a></span>(<span class='no'>sr</span>)
     <span class='fu'><a href='glance.html'>glance</a></span>(<span class='no'>sr</span>)
 
     <span class='co'># coefficient plot</span>
@@ -220,7 +219,7 @@ warning is raised and the incomplete rows are dropped.</p>
     <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/ggplot'>ggplot</a></span>(<span class='no'>td</span>, <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/aes'>aes</a></span>(<span class='no'>estimate</span>, <span class='no'>term</span>)) + <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/geom_point'>geom_point</a></span>() +
         <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/geom_errorbarh'>geom_errorbarh</a></span>(<span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/aes'>aes</a></span>(<span class='kw'>xmin</span> <span class='kw'>=</span> <span class='no'>conf.low</span>, <span class='kw'>xmax</span> <span class='kw'>=</span> <span class='no'>conf.high</span>), <span class='kw'>height</span> <span class='kw'>=</span> <span class='fl'>0</span>) +
         <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/geom_abline'>geom_vline</a></span>(<span class='kw'>xintercept</span> <span class='kw'>=</span> <span class='fl'>0</span>)
-}</div><div class='output co'>#&gt; <span class='error'>Error: Column `Surv.futime..fustat.` must be a 1d atomic vector or a list</span></div><div class='input'>
+}</div><div class='img'><img src='survreg_tidiers-1.png' alt='' width='700' height='433' /></div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

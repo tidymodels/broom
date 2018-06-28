@@ -102,7 +102,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Tidying methods for a linear model</h1>
-    <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/lm_tidiers.R'><code>R/lm_tidiers.R</code></a></small>
+    <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/stats-lm-tidiers.R'><code>R/stats-lm-tidiers.R</code></a></small>
     <div class="hidden name"><code>lm_tidiers.Rd</code></div>
     </div>
 
@@ -129,13 +129,7 @@ residuals, and construct a one-row glance of the model's statistics.</p>
 <span class='fu'><a href='glance.html'>glance</a></span>(<span class='no'>x</span>, <span class='no'>...</span>)
 
 <span class='co'># S3 method for summary.lm</span>
-<span class='fu'><a href='glance.html'>glance</a></span>(<span class='no'>x</span>, <span class='no'>...</span>)
-
-<span class='co'># S3 method for glm</span>
-<span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>x</span>, <span class='no'>...</span>)
-
-<span class='co'># S3 method for glm</span>
-<span class='fu'><a href='augment.html'>augment</a></span>(<span class='no'>x</span>, <span class='no'>...</span>)</pre>
+<span class='fu'><a href='glance.html'>glance</a></span>(<span class='no'>x</span>, <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -295,8 +289,8 @@ ggplot2 package, where it was called <code>fortify.lm</code></p>
 <span class='fu'>head</span>(<span class='fu'><a href='augment.html'>augment</a></span>(<span class='no'>mod</span>))</div><div class='output co'>#&gt; # A tibble: 6 x 11
 #&gt;   .rownames      mpg    wt  qsec .fitted .se.fit  .resid   .hat .sigma  .cooksd
 #&gt;   &lt;chr&gt;        &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;    &lt;dbl&gt;
-#&gt; 1 Mazda RX4     21.0  2.62  16.5    21.8   0.683 -0.815  0.0693   2.64  2.63e-3
-#&gt; 2 Mazda RX4 W~  21.0  2.88  17.0    21.0   0.547 -0.0482 0.0444   2.64  5.59e-6
+#&gt; 1 Mazda RX4     21    2.62  16.5    21.8   0.683 -0.815  0.0693   2.64  2.63e-3
+#&gt; 2 Mazda RX4 W~  21    2.88  17.0    21.0   0.547 -0.0482 0.0444   2.64  5.59e-6
 #&gt; 3 Datsun 710    22.8  2.32  18.6    25.3   0.640 -2.53   0.0607   2.60  2.17e-2
 #&gt; 4 Hornet 4 Dr~  21.4  3.22  19.4    21.6   0.623 -0.181  0.0576   2.64  1.05e-4
 #&gt; 5 Hornet Spor~  18.7  3.44  17.0    18.2   0.512  0.504  0.0389   2.64  5.29e-4
@@ -304,12 +298,12 @@ ggplot2 package, where it was called <code>fortify.lm</code></p>
 #&gt; # ... with 1 more variable: .std.resid &lt;dbl&gt;</div><div class='input'><span class='fu'>head</span>(<span class='fu'><a href='augment.html'>augment</a></span>(<span class='no'>mod</span>, <span class='no'>mtcars</span>))</div><div class='output co'>#&gt; # A tibble: 6 x 19
 #&gt;   .rownames     mpg   cyl  disp    hp  drat    wt  qsec    vs    am  gear  carb
 #&gt;   &lt;chr&gt;       &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
-#&gt; 1 Mazda RX4    21.0    6.  160.  110.  3.90  2.62  16.5    0.    1.    4.    4.
-#&gt; 2 Mazda RX4 ~  21.0    6.  160.  110.  3.90  2.88  17.0    0.    1.    4.    4.
-#&gt; 3 Datsun 710   22.8    4.  108.   93.  3.85  2.32  18.6    1.    1.    4.    1.
-#&gt; 4 Hornet 4 D~  21.4    6.  258.  110.  3.08  3.22  19.4    1.    0.    3.    1.
-#&gt; 5 Hornet Spo~  18.7    8.  360.  175.  3.15  3.44  17.0    0.    0.    3.    2.
-#&gt; 6 Valiant      18.1    6.  225.  105.  2.76  3.46  20.2    1.    0.    3.    1.
+#&gt; 1 Mazda RX4    21       6   160   110  3.9   2.62  16.5     0     1     4     4
+#&gt; 2 Mazda RX4 ~  21       6   160   110  3.9   2.88  17.0     0     1     4     4
+#&gt; 3 Datsun 710   22.8     4   108    93  3.85  2.32  18.6     1     1     4     1
+#&gt; 4 Hornet 4 D~  21.4     6   258   110  3.08  3.22  19.4     1     0     3     1
+#&gt; 5 Hornet Spo~  18.7     8   360   175  3.15  3.44  17.0     0     0     3     2
+#&gt; 6 Valiant      18.1     6   225   105  2.76  3.46  20.2     1     0     3     1
 #&gt; # ... with 7 more variables: .fitted &lt;dbl&gt;, .se.fit &lt;dbl&gt;, .resid &lt;dbl&gt;,
 #&gt; #   .hat &lt;dbl&gt;, .sigma &lt;dbl&gt;, .cooksd &lt;dbl&gt;, .std.resid &lt;dbl&gt;</div><div class='input'>
 <span class='co'># predict on new data</span>
@@ -317,12 +311,12 @@ ggplot2 package, where it was called <code>fortify.lm</code></p>
 <span class='fu'><a href='augment.html'>augment</a></span>(<span class='no'>mod</span>, <span class='kw'>newdata</span> <span class='kw'>=</span> <span class='no'>newdata</span>)</div><div class='output co'>#&gt; # A tibble: 6 x 13
 #&gt;     mpg   cyl  disp    hp  drat    wt  qsec    vs    am  gear  carb .fitted
 #&gt; * &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;
-#&gt; 1  21.0    6.  160.  110.  3.90  3.62  16.5    0.    1.    4.    4.    16.8
-#&gt; 2  21.0    6.  160.  110.  3.90  3.88  17.0    0.    1.    4.    4.    16.0
-#&gt; 3  22.8    4.  108.   93.  3.85  3.32  18.6    1.    1.    4.    1.    20.3
-#&gt; 4  21.4    6.  258.  110.  3.08  4.22  19.4    1.    0.    3.    1.    16.5
-#&gt; 5  18.7    8.  360.  175.  3.15  4.44  17.0    0.    0.    3.    2.    13.1
-#&gt; 6  18.1    6.  225.  105.  2.76  4.46  20.2    1.    0.    3.    1.    16.0
+#&gt; 1  21       6   160   110  3.9   3.62  16.5     0     1     4     4    16.8
+#&gt; 2  21       6   160   110  3.9   3.88  17.0     0     1     4     4    16.0
+#&gt; 3  22.8     4   108    93  3.85  3.32  18.6     1     1     4     1    20.3
+#&gt; 4  21.4     6   258   110  3.08  4.22  19.4     1     0     3     1    16.5
+#&gt; 5  18.7     8   360   175  3.15  4.44  17.0     0     0     3     2    13.1
+#&gt; 6  18.1     6   225   105  2.76  4.46  20.2     1     0     3     1    16.0
 #&gt; # ... with 1 more variable: .se.fit &lt;dbl&gt;</div><div class='input'>
 <span class='no'>au</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='augment.html'>augment</a></span>(<span class='no'>mod</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>mtcars</span>)
 

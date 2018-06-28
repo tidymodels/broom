@@ -102,7 +102,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Tidiers for data.frame objects</h1>
-    <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/data.frame_tidiers.R'><code>R/data.frame_tidiers.R</code></a></small>
+    <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/base-data.frame-tidiers.R'><code>R/base-data.frame-tidiers.R</code></a></small>
     <div class="hidden name"><code>data.frame_tidiers.Rd</code></div>
     </div>
 
@@ -115,9 +115,6 @@ release of broom.</p>
 
     <pre class="usage"><span class='co'># S3 method for data.frame</span>
 <span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>x</span>, <span class='no'>...</span>, <span class='kw'>na.rm</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>trim</span> <span class='kw'>=</span> <span class='fl'>0.1</span>)
-
-<span class='co'># S3 method for data.frame</span>
-<span class='fu'><a href='augment.html'>augment</a></span>(<span class='no'>x</span>, <span class='no'>data</span>, <span class='no'>...</span>)
 
 <span class='co'># S3 method for data.frame</span>
 <span class='fu'><a href='glance.html'>glance</a></span>(<span class='no'>x</span>, <span class='no'>...</span>)</pre>
@@ -193,30 +190,18 @@ throw an error.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
-<span class='no'>td</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>mtcars</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: Data frame tidiers are deprecated and will be removed in an upcoming release of broom.</span></div><div class='input'><span class='no'>td</span></div><div class='output co'>#&gt; # A tibble: 11 x 13
-#&gt;    column     n    mean      sd median trimmed    mad   min    max  range
-#&gt;    &lt;chr&gt;  &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;
-#&gt;  1 mpg      32.  20.1     6.03   19.2   19.7    3.65  10.4   33.9   23.5 
-#&gt;  2 cyl      32.   6.19    1.79    6.00   6.23   2.00   4.00   8.00   4.00
-#&gt;  3 disp     32. 231.    124.    196.   223.    94.8   71.1  472.   401.  
-#&gt;  4 hp       32. 147.     68.6   123.   141.    52.0   52.0  335.   283.  
-#&gt;  5 drat     32.   3.60    0.535   3.70   3.58   0.475  2.76   4.93   2.17
-#&gt;  6 wt       32.   3.22    0.978   3.32   3.15   0.517  1.51   5.42   3.91
-#&gt;  7 qsec     32.  17.8     1.79   17.7   17.8    0.955 14.5   22.9    8.40
-#&gt;  8 vs       32.   0.438   0.504   0.     0.423  0.     0.     1.00   1.00
-#&gt;  9 am       32.   0.406   0.499   0.     0.385  0.     0.     1.00   1.00
-#&gt; 10 gear     32.   3.69    0.738   4.00   3.62   1.00   3.00   5.00   2.00
-#&gt; 11 carb     32.   2.81    1.62    2.00   2.65   1.00   1.00   8.00   7.00
-#&gt; # ... with 3 more variables: skew &lt;dbl&gt;, kurtosis &lt;dbl&gt;, se &lt;dbl&gt;</div><div class='input'>
-<span class='fu'><a href='glance.html'>glance</a></span>(<span class='no'>mtcars</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: Data frame tidiers are deprecated and will be removed in an upcoming release of broom.</span></div><div class='output co'>#&gt; # A tibble: 1 x 4
-#&gt;    nrow  ncol complete.obs na.fraction
-#&gt;   &lt;int&gt; &lt;int&gt;        &lt;int&gt;       &lt;dbl&gt;
-#&gt; 1    32    11           32          0.</div><div class='input'>
+</div><span class='co'># NOT RUN {</span>
+<span class='no'>td</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>mtcars</span>)
+<span class='no'>td</span>
+
+<span class='fu'><a href='glance.html'>glance</a></span>(<span class='no'>mtcars</span>)
+
 <span class='fu'>library</span>(<span class='no'>ggplot2</span>)
 <span class='co'># compare mean and standard deviation</span>
 <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/ggplot'>ggplot</a></span>(<span class='no'>td</span>, <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/aes'>aes</a></span>(<span class='no'>mean</span>, <span class='no'>sd</span>)) + <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/geom_point'>geom_point</a></span>() +
      <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/geom_text'>geom_text</a></span>(<span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/aes'>aes</a></span>(<span class='kw'>label</span> <span class='kw'>=</span> <span class='no'>column</span>), <span class='kw'>hjust</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>vjust</span> <span class='kw'>=</span> <span class='fl'>1</span>) +
-     <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/scale_continuous'>scale_x_log10</a></span>() + <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/scale_continuous'>scale_y_log10</a></span>() + <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/geom_abline'>geom_abline</a></span>()</div><div class='img'><img src='data.frame_tidiers-1.png' alt='' width='700' height='433' /></div><div class='input'>
+     <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/scale_continuous'>scale_x_log10</a></span>() + <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/scale_continuous'>scale_y_log10</a></span>() + <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/geom_abline'>geom_abline</a></span>()
+<span class='co'># }</span><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

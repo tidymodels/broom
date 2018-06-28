@@ -5,7 +5,7 @@ library(lmtest)
 
 ct <- lm(length ~ age, data = Mandible, subset = (age <= 28))
 
-test_that("tidy.coeftest works", {
+test_that("tidy.coeftest", {
   
   check_arguments(tidy.coeftest)
   

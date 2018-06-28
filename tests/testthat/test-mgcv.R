@@ -1,4 +1,4 @@
-context("mgcv tidiers")
+context("mgcv")
 
 skip_if_not_installed("mgcv")
 

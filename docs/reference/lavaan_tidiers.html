@@ -102,7 +102,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Tidying methods for lavaan models</h1>
-    <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/lavaan_tidiers.R'><code>R/lavaan_tidiers.R</code></a></small>
+    <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/lavaan-tidiers.R'><code>R/lavaan-tidiers.R</code></a></small>
     <div class="hidden name"><code>lavaan_tidiers.Rd</code></div>
     </div>
 
@@ -202,7 +202,7 @@ For further recommendations on reporting SEM and CFA models see Schreiber, J. B.
 #&gt; <span class='message'>    cor2cov</span></div><div class='output co'>#&gt; # A tibble: 58 x 13
 #&gt;    term     op    block group estimate std.error statistic  p.value conf.low
 #&gt;    &lt;chr&gt;    &lt;chr&gt; &lt;int&gt; &lt;int&gt;    &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
-#&gt;  1 F =~ x1  =~        1     1    1.00      0.        NA    NA         1.00  
+#&gt;  1 F =~ x1  =~        1     1    1         0         NA    NA         1     
 #&gt;  2 F =~ x2  =~        1     1    0.333     0.190      1.76  7.89e-2  -0.0385
 #&gt;  3 F =~ x3  =~        1     1    0.400     0.182      2.20  2.80e-2   0.0432
 #&gt;  4 F =~ x4  =~        1     1    1.66      0.280      5.92  3.28e-9   1.11  
@@ -225,7 +225,7 @@ For further recommendations on reporting SEM and CFA models see Schreiber, J. B.
 }</div><div class='output co'>#&gt; # A tibble: 1 x 17
 #&gt;    agfi   aic   bic   cfi chisq  npar rmsea rmsea.conf.high  srmr   tli
 #&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;           &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
-#&gt; 1 0.971 4473. 4584. 0.766  99.3   30. 0.244           0.288 0.115 0.533
+#&gt; 1 0.971 4473. 4584. 0.766  99.3    30 0.244           0.288 0.115 0.533
 #&gt; # ... with 7 more variables: converged &lt;lgl&gt;, estimator &lt;chr&gt;, ngroups &lt;int&gt;,
 #&gt; #   missing_method &lt;chr&gt;, nobs &lt;int&gt;, norig &lt;int&gt;, nexcluded &lt;int&gt;</div></pre>
   </div>

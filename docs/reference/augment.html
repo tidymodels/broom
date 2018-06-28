@@ -102,7 +102,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Augment data according to a tidied model</h1>
-    <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/augment.R'><code>R/augment.R</code></a></small>
+    <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/broom.R'><code>R/broom.R</code></a></small>
     <div class="hidden name"><code>augment.Rd</code></div>
     </div>
 
@@ -120,13 +120,18 @@ original dataset such as predictions, residuals and cluster assignments.</p>
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>x</th>
-      <td><p>model or other R object to convert to data frame</p></td>
+      <td><p>Model object or other R object with information to append to
+observations.</p></td>
     </tr>
     <tr>
       <th>...</th>
-      <td><p>other arguments passed to methods</p></td>
+      <td><p>Addition arguments to augment method.</p></td>
     </tr>
     </table>
+    
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>A <code><a href='http://www.rdocumentation.org/packages/tibble/topics/tibble'>tibble::tibble()</a></code> with information about data points.</p>
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
@@ -135,7 +140,7 @@ which specifies the original data object. This is not part of the S3
 signature, partly because it prevents <a href='rowwise_df_tidiers.html'>rowwise_df_tidiers</a> from
 taking a column name as the first argument.</p>
 <p>This generic originated in the ggplot2 package, where it was called
-"fortify."</p>
+<code>fortify</code>.</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
@@ -148,6 +153,8 @@ taking a column name as the first argument.</p>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
       
+      <li><a href="#value">Value</a></li>
+
       <li><a href="#details">Details</a></li>
 
       <li><a href="#see-also">See also</a></li>

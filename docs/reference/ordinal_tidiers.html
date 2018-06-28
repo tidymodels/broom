@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Tidying methods for ordinal logistic regression models — ordinal_tidiers • broom</title>
+<title>Tidying methods for ordinal logistic regression models — tidy.polr • broom</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -102,7 +102,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Tidying methods for ordinal logistic regression models</h1>
-    <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/ordinal_tieders.R'><code>R/ordinal_tieders.R</code></a></small>
+    <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/mass-polr-tidiers.R'><code>R/mass-polr-tidiers.R</code></a>, <a href='http://github.com/tidyverse/broom/blob/master/R/ordinal-tidiers.R'><code>R/ordinal-tidiers.R</code></a>, <a href='http://github.com/tidyverse/broom/blob/master/R/survey-tidiers.R'><code>R/survey-tidiers.R</code></a></small>
     <div class="hidden name"><code>ordinal_tidiers.Rd</code></div>
     </div>
 
@@ -115,7 +115,18 @@ packge, or <code><a href='http://www.rdocumentation.org/packages/survey/topics/s
     
     </div>
 
-    <pre class="usage"><span class='co'># S3 method for clm</span>
+    <pre class="usage"><span class='co'># S3 method for polr</span>
+<span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>x</span>, <span class='kw'>conf.int</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>conf.level</span> <span class='kw'>=</span> <span class='fl'>0.95</span>,
+  <span class='kw'>exponentiate</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>quick</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='no'>...</span>)
+
+<span class='co'># S3 method for polr</span>
+<span class='fu'><a href='glance.html'>glance</a></span>(<span class='no'>x</span>, <span class='no'>...</span>)
+
+<span class='co'># S3 method for polr</span>
+<span class='fu'><a href='augment.html'>augment</a></span>(<span class='no'>x</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='kw pkg'>stats</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/stats/topics/model.frame'>model.frame</a></span>(<span class='no'>x</span>), <span class='no'>newdata</span>,
+  <span class='kw'>type.predict</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"probs"</span>, <span class='st'>"class"</span>), <span class='no'>...</span>)
+
+<span class='co'># S3 method for clm</span>
 <span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>x</span>, <span class='kw'>conf.int</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>conf.level</span> <span class='kw'>=</span> <span class='fl'>0.95</span>,
   <span class='kw'>exponentiate</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>quick</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>conf.type</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"profile"</span>, <span class='st'>"Wald"</span>),
   <span class='no'>...</span>)
@@ -124,34 +135,23 @@ packge, or <code><a href='http://www.rdocumentation.org/packages/survey/topics/s
 <span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>x</span>, <span class='kw'>conf.int</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>conf.level</span> <span class='kw'>=</span> <span class='fl'>0.95</span>,
   <span class='kw'>exponentiate</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>quick</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>conf.type</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"profile"</span>, <span class='st'>"Wald"</span>),
   <span class='no'>...</span>)
-
-<span class='co'># S3 method for polr</span>
-<span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>x</span>, <span class='kw'>conf.int</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>conf.level</span> <span class='kw'>=</span> <span class='fl'>0.95</span>,
-  <span class='kw'>exponentiate</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>quick</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='no'>...</span>)
-
-<span class='co'># S3 method for svyolr</span>
-<span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>x</span>, <span class='kw'>conf.int</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>conf.level</span> <span class='kw'>=</span> <span class='fl'>0.95</span>,
-  <span class='kw'>exponentiate</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>quick</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='no'>...</span>)
 
 <span class='co'># S3 method for clm</span>
 <span class='fu'><a href='glance.html'>glance</a></span>(<span class='no'>x</span>, <span class='no'>...</span>)
 
 <span class='co'># S3 method for clmm</span>
-<span class='fu'><a href='glance.html'>glance</a></span>(<span class='no'>x</span>, <span class='no'>...</span>)
-
-<span class='co'># S3 method for polr</span>
-<span class='fu'><a href='glance.html'>glance</a></span>(<span class='no'>x</span>, <span class='no'>...</span>)
-
-<span class='co'># S3 method for svyolr</span>
 <span class='fu'><a href='glance.html'>glance</a></span>(<span class='no'>x</span>, <span class='no'>...</span>)
 
 <span class='co'># S3 method for clm</span>
 <span class='fu'><a href='augment.html'>augment</a></span>(<span class='no'>x</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='kw pkg'>stats</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/stats/topics/model.frame'>model.frame</a></span>(<span class='no'>x</span>), <span class='no'>newdata</span>,
   <span class='kw'>type.predict</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"prob"</span>, <span class='st'>"class"</span>), <span class='no'>...</span>)
 
-<span class='co'># S3 method for polr</span>
-<span class='fu'><a href='augment.html'>augment</a></span>(<span class='no'>x</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='kw pkg'>stats</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/stats/topics/model.frame'>model.frame</a></span>(<span class='no'>x</span>), <span class='no'>newdata</span>,
-  <span class='kw'>type.predict</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"probs"</span>, <span class='st'>"class"</span>), <span class='no'>...</span>)</pre>
+<span class='co'># S3 method for svyolr</span>
+<span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>x</span>, <span class='kw'>conf.int</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>conf.level</span> <span class='kw'>=</span> <span class='fl'>0.95</span>,
+  <span class='kw'>exponentiate</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>quick</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='no'>...</span>)
+
+<span class='co'># S3 method for svyolr</span>
+<span class='fu'><a href='glance.html'>glance</a></span>(<span class='no'>x</span>, <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -180,11 +180,6 @@ and confidence intervals (typical for ordinal logistic regression)</p></td>
 the term, estimate and coefficient_type columns</p></td>
     </tr>
     <tr>
-      <th>conf.type</th>
-      <td><p>the type of confidence interval
-(see <code><a href='http://www.rdocumentation.org/packages/ordinal/topics/confint.clm'>ordinal::confint.clm()</a></code>)</p></td>
-    </tr>
-    <tr>
       <th>...</th>
       <td><p>extra arguments</p></td>
     </tr>
@@ -200,6 +195,11 @@ the term, estimate and coefficient_type columns</p></td>
       <th>type.predict</th>
       <td><p>type of prediction to compute for a CLM; passed on to
 <code><a href='http://www.rdocumentation.org/packages/ordinal/topics/predict'>ordinal::predict.clm()</a></code> or <code>predict.polr</code></p></td>
+    </tr>
+    <tr>
+      <th>conf.type</th>
+      <td><p>the type of confidence interval
+(see <code><a href='http://www.rdocumentation.org/packages/ordinal/topics/confint.clm'>ordinal::confint.clm()</a></code>)</p></td>
     </tr>
     </table>
     
@@ -265,12 +265,10 @@ The structure depends on the method chosen.
 #&gt; <span class='message'></span>
 #&gt; <span class='message'>    income</span></div><div class='output co'>#&gt; <span class='message'>The following object is masked from 'package:dplyr':</span>
 #&gt; <span class='message'></span>
-#&gt; <span class='message'>    slice</span></div><div class='output co'>#&gt; <span class='message'>The following objects are masked from 'package:broom':</span>
-#&gt; <span class='message'></span>
-#&gt; <span class='message'>    ranef, slice, VarCorr</span></div><div class='output co'>#&gt; # A tibble: 1 x 4
+#&gt; <span class='message'>    slice</span></div><div class='output co'>#&gt; # A tibble: 1 x 4
 #&gt;     edf logLik   AIC   BIC
 #&gt;   &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
-#&gt; 1    7.  -81.6  177.  193.</div><div class='input'><span class='kw'>if</span> (<span class='fu'>require</span>(<span class='no'>MASS</span>)) {
+#&gt; 1     7  -81.6  177.  193.</div><div class='input'><span class='kw'>if</span> (<span class='fu'>require</span>(<span class='no'>MASS</span>)) {
   <span class='no'>polr_mod</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/MASS/topics/polr'>polr</a></span>(<span class='no'>Sat</span> ~ <span class='no'>Infl</span> + <span class='no'>Type</span> + <span class='no'>Cont</span>, <span class='kw'>weights</span> <span class='kw'>=</span> <span class='no'>Freq</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>housing</span>)
   <span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>polr_mod</span>, <span class='kw'>exponentiate</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>conf.int</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
   <span class='fu'><a href='glance.html'>glance</a></span>(<span class='no'>polr_mod</span>)
@@ -278,12 +276,12 @@ The structure depends on the method chosen.
 }</div><div class='output co'>#&gt; # A tibble: 6 x 6
 #&gt;   Sat    Infl   Type  Cont  X.weights. .fitted
 #&gt;   &lt;ord&gt;  &lt;fct&gt;  &lt;fct&gt; &lt;fct&gt;      &lt;int&gt;   &lt;dbl&gt;
-#&gt; 1 Low    Low    Tower Low           21      1.
-#&gt; 2 Medium Low    Tower Low           21      1.
-#&gt; 3 High   Low    Tower Low           28      1.
-#&gt; 4 Low    Medium Tower Low           34      3.
-#&gt; 5 Medium Medium Tower Low           22      3.
-#&gt; 6 High   Medium Tower Low           36      3.</div></pre>
+#&gt; 1 Low    Low    Tower Low           21       1
+#&gt; 2 Medium Low    Tower Low           21       1
+#&gt; 3 High   Low    Tower Low           28       1
+#&gt; 4 Low    Medium Tower Low           34       3
+#&gt; 5 Medium Medium Tower Low           22       3
+#&gt; 6 High   Medium Tower Low           36       3</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

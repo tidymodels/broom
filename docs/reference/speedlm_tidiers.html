@@ -102,7 +102,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Tidying methods for a speedlm model</h1>
-    <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/speedlm_tidiers.R'><code>R/speedlm_tidiers.R</code></a></small>
+    <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/speedglm-tidiers.R'><code>R/speedglm-tidiers.R</code></a></small>
     <div class="hidden name"><code>speedlm_tidiers.Rd</code></div>
     </div>
 
@@ -116,8 +116,7 @@ statistics.</p>
     </div>
 
     <pre class="usage"><span class='co'># S3 method for speedlm</span>
-<span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>x</span>, <span class='kw'>conf.int</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>conf.level</span> <span class='kw'>=</span> <span class='fl'>0.95</span>,
-  <span class='kw'>exponentiate</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>quick</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='no'>...</span>)
+<span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>x</span>, <span class='no'>...</span>)
 
 <span class='co'># S3 method for speedlm</span>
 <span class='fu'><a href='glance.html'>glance</a></span>(<span class='no'>x</span>, <span class='no'>...</span>)
@@ -132,25 +131,6 @@ statistics.</p>
     <tr>
       <th>x</th>
       <td><p>speedlm object</p></td>
-    </tr>
-    <tr>
-      <th>conf.int</th>
-      <td><p>whether to include a confidence interval</p></td>
-    </tr>
-    <tr>
-      <th>conf.level</th>
-      <td><p>confidence level of the interval, used only if
-<code>conf.int=TRUE</code></p></td>
-    </tr>
-    <tr>
-      <th>exponentiate</th>
-      <td><p>whether to exponentiate the coefficient estimates
-and confidence intervals (typical for logistic regression)</p></td>
-    </tr>
-    <tr>
-      <th>quick</th>
-      <td><p>whether to compute a smaller and faster version, containing
-only the <code>term</code> and <code>estimate</code> columns.</p></td>
     </tr>
     <tr>
       <th>...</th>
@@ -208,14 +188,14 @@ augment.speedlm returns  one row for each observation, with just one column adde
 #&gt; <span class='message'>    control</span></div><div class='output co'>#&gt; # A tibble: 32 x 5
 #&gt;    .rownames           mpg    wt  qsec .fitted
 #&gt;    &lt;chr&gt;             &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;
-#&gt;  1 Mazda RX4          21.0  2.62  16.5    21.8
-#&gt;  2 Mazda RX4 Wag      21.0  2.88  17.0    21.0
+#&gt;  1 Mazda RX4          21    2.62  16.5    21.8
+#&gt;  2 Mazda RX4 Wag      21    2.88  17.0    21.0
 #&gt;  3 Datsun 710         22.8  2.32  18.6    25.3
 #&gt;  4 Hornet 4 Drive     21.4  3.22  19.4    21.6
 #&gt;  5 Hornet Sportabout  18.7  3.44  17.0    18.2
 #&gt;  6 Valiant            18.1  3.46  20.2    21.1
 #&gt;  7 Duster 360         14.3  3.57  15.8    16.4
-#&gt;  8 Merc 240D          24.4  3.19  20.0    22.2
+#&gt;  8 Merc 240D          24.4  3.19  20      22.2
 #&gt;  9 Merc 230           22.8  3.15  22.9    25.1
 #&gt; 10 Merc 280           19.2  3.44  18.3    19.4
 #&gt; # ... with 22 more rows</div><div class='input'>

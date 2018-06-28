@@ -1,7 +1,7 @@
 # broom 0.4.4.9000
-To be released at 0.5.0
+To be released as 0.5.0
 
-`broom` now returns `tibbles`. This release also includes several new tidiers, new vignettes and a large number of bugfixes. We've also begun to more rigorously define tidier specifications: we've laid part of the groundwork for stricter and more consistent tidying, but the new tidier specifications are not yet complete. These will appear in the next release.
+Tidiers now returns `tibbles`. This release also includes several new tidiers, new vignettes and a large number of bugfixes. We've also begun to more rigorously define tidier specifications: we've laid part of the groundwork for stricter and more consistent tidying, but the new tidier specifications are not yet complete. These will appear in the next release.
 
 Additionally, users should note that we are in the process of migrating tidying methods for mixed models and Bayesian models to `broom.mixed`. `broom.mixed` is not on CRAN yet, but all mixed model and Bayesian tidiers will be deprecated once `broom.mixed` is on CRAN. No further development of mixed model tidiers will take place in `broom`.
 
@@ -47,6 +47,9 @@ Several old vignettes have also been updated:
 
 ## Other changes
 
+- The `separate.levels` argument has been removed from `tidy.TukeyHSD`. To obtain the effect of `separate.levels = TRUE`, users may `tidyr::separate` after tidying. This is consistent with the `multcomp` tidier behavior.
+- The `fe.error` argument was removed from `tidy.felm`. When fixed effects are tidier, their standard errors are now always included.
+- The `diag` argument in `tidy.dist` has been renamed `diagonal`
 - Advice to help beginners make PRs (#397 by @karldw)
 - `glance` support for `arima` objects fit with `method = "CSS"` (#396 by @josue-rodriguez)
 - A bug fix to re-enable tidying `glmnet` objects with `family = multinomial` (#395 by @erleholgersen)

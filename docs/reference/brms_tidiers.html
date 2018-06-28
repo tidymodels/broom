@@ -102,15 +102,15 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Tidying methods for a brms model</h1>
-    <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/brms_tidiers.R'><code>R/brms_tidiers.R</code></a></small>
+    <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/brms-tidiers.R'><code>R/brms-tidiers.R</code></a></small>
     <div class="hidden name"><code>brms_tidiers.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>These methods tidy the estimates from
-<code><a href='http://www.rdocumentation.org/packages/brms/topics/brmsfit-class'>brms::brmsfit()</a></code>
-(fitted model objects from the <span class="pkg">brms</span> package) into a summary.</p>
+    <p><code>brms</code> tidiers will soon be deprecated in <code>broom</code> and there is no ongoing
+development of these functions at this time. <code>brms</code> tidiers are being
+developed in the <code>broom.mixed</code> package, which is not yet on CRAN.</p>
     
     </div>
 
@@ -190,6 +190,12 @@ If intervals = TRUE, columns for the lower and
 upper bounds of the posterior intervals computed.
 
     
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>These methods tidy the estimates from
+<code><a href='http://www.rdocumentation.org/packages/brms/topics/brmsfit-class'>brms::brmsfit()</a></code>
+(fitted model objects from the <span class="pkg">brms</span> package) into a summary.</p>
+    
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p><code><a href='http://www.rdocumentation.org/packages/brms/topics/brms-package'>brms::brms()</a></code>, <code><a href='http://www.rdocumentation.org/packages/brms/topics/brmsfit-class'>brms::brmsfit()</a></code></p></div>
@@ -214,6 +220,8 @@ upper bounds of the posterior intervals computed.
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
+
+      <li><a href="#details">Details</a></li>
 
       <li><a href="#see-also">See also</a></li>
       

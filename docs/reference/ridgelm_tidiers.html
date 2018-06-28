@@ -102,7 +102,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Tidying methods for ridgelm objects from the MASS package</h1>
-    <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/ridgelm_tidiers.R'><code>R/ridgelm_tidiers.R</code></a></small>
+    <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/mass-ridgelm-tidiers.R'><code>R/mass-ridgelm-tidiers.R</code></a></small>
     <div class="hidden name"><code>ridgelm_tidiers.Rd</code></div>
     </div>
 
@@ -163,12 +163,12 @@ rather than printed.
 <span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>fit1</span>)</div><div class='output co'>#&gt; # A tibble: 6 x 5
 #&gt;   lambda term         estimate scale     xm
 #&gt;    &lt;dbl&gt; &lt;chr&gt;           &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;
-#&gt; 1     0. GNP            25.4   96.2   388. 
-#&gt; 2     0. Unemployed      3.30  90.5   319. 
-#&gt; 3     0. Armed.Forces    0.752 67.4   261. 
-#&gt; 4     0. Population    -11.7    6.74  117. 
-#&gt; 5     0. Year           -6.54   4.61 1954. 
-#&gt; 6     0. Employed        0.786  3.40   65.3</div><div class='input'>
+#&gt; 1      0 GNP            25.4   96.2   388. 
+#&gt; 2      0 Unemployed      3.30  90.5   319. 
+#&gt; 3      0 Armed.Forces    0.752 67.4   261. 
+#&gt; 4      0 Population    -11.7    6.74  117. 
+#&gt; 5      0 Year           -6.54   4.61 1954. 
+#&gt; 6      0 Employed        0.786  3.40   65.3</div><div class='input'>
 <span class='no'>fit2</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>MASS</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/MASS/topics/lm.ridge'>lm.ridge</a></span>(<span class='no'>y</span> ~ <span class='no'>.</span>, <span class='no'>longley</span>, <span class='kw'>lambda</span> <span class='kw'>=</span> <span class='fu'>seq</span>(<span class='fl'>0.001</span>, <span class='fl'>.05</span>, <span class='fl'>.001</span>))
 <span class='no'>td2</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>fit2</span>)
 <span class='no'>g2</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='glance.html'>glance</a></span>(<span class='no'>fit2</span>)

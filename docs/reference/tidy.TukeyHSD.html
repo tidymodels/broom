@@ -102,7 +102,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>tidy a TukeyHSD object</h1>
-    <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/stats_tidiers.R'><code>R/stats_tidiers.R</code></a></small>
+    <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/stats-anova-tidiers.R'><code>R/stats-anova-tidiers.R</code></a></small>
     <div class="hidden name"><code>tidy.TukeyHSD.Rd</code></div>
     </div>
 
@@ -156,101 +156,33 @@ split up into level1 and level2.
     <pre class="examples"><div class='input'>
 <span class='no'>fm1</span> <span class='kw'>&lt;-</span> <span class='fu'>aov</span>(<span class='no'>breaks</span> ~ <span class='no'>wool</span> + <span class='no'>tension</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>warpbreaks</span>)
 <span class='no'>thsd</span> <span class='kw'>&lt;-</span> <span class='fu'>TukeyHSD</span>(<span class='no'>fm1</span>, <span class='st'>"tension"</span>, <span class='kw'>ordered</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
-<span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>thsd</span>)</div><div class='output co'>#&gt;      term comparison  estimate   conf.low conf.high adj.p.value
-#&gt; 1 tension        M-H  4.722222 -4.6311985  14.07564 0.447421021
-#&gt; 2 tension        L-H 14.722222  5.3688015  24.07564 0.001121788
-#&gt; 3 tension        L-M 10.000000  0.6465793  19.35342 0.033626219</div><div class='input'><span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>thsd</span>, <span class='kw'>separate.levels</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt;      term level1 level2  estimate   conf.low conf.high adj.p.value
-#&gt; 1 tension      M      H  4.722222 -4.6311985  14.07564 0.447421021
-#&gt; 2 tension      L      H 14.722222  5.3688015  24.07564 0.001121788
-#&gt; 3 tension      L      M 10.000000  0.6465793  19.35342 0.033626219</div><div class='input'>
+<span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>thsd</span>)</div><div class='output co'>#&gt; # A tibble: 3 x 6
+#&gt;   term    comparison estimate conf.low conf.high adj.p.value
+#&gt;   &lt;chr&gt;   &lt;chr&gt;         &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;       &lt;dbl&gt;
+#&gt; 1 tension M-H            4.72   -4.63       14.1     0.447  
+#&gt; 2 tension L-H           14.7     5.37       24.1     0.00112
+#&gt; 3 tension L-M           10.      0.647      19.4     0.0336 </div><div class='input'><span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>thsd</span>, <span class='kw'>separate.levels</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; # A tibble: 3 x 7
+#&gt;   term    level1 level2 estimate conf.low conf.high adj.p.value
+#&gt;   &lt;chr&gt;   &lt;chr&gt;  &lt;chr&gt;     &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;       &lt;dbl&gt;
+#&gt; 1 tension M      H          4.72   -4.63       14.1     0.447  
+#&gt; 2 tension L      H         14.7     5.37       24.1     0.00112
+#&gt; 3 tension L      M         10.      0.647      19.4     0.0336 </div><div class='input'>
 <span class='co'># may include comparisons on multiple terms</span>
 <span class='no'>fm2</span> <span class='kw'>&lt;-</span> <span class='fu'>aov</span>(<span class='no'>mpg</span> ~ <span class='fu'>as.factor</span>(<span class='no'>gear</span>) * <span class='fu'>as.factor</span>(<span class='no'>cyl</span>), <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>mtcars</span>)
-<span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='fu'>TukeyHSD</span>(<span class='no'>fm2</span>))</div><div class='output co'>#&gt;                              term comparison      estimate    conf.low
-#&gt; 1                 as.factor(gear)        4-3  8.426667e+00   5.1878865
-#&gt; 2                 as.factor(gear)        5-3  5.273333e+00   0.9549598
-#&gt; 3                 as.factor(gear)        5-4 -3.153333e+00  -7.6046109
-#&gt; 4                  as.factor(cyl)        6-4 -5.402078e+00  -9.4452920
-#&gt; 5                  as.factor(cyl)        8-4 -5.229697e+00  -8.5990420
-#&gt; 6                  as.factor(cyl)        8-6  1.723810e-01  -3.6987018
-#&gt; 7  as.factor(gear):as.factor(cyl)    4:4-3:4  5.425000e+00  -6.6473872
-#&gt; 8  as.factor(gear):as.factor(cyl)    5:4-3:4  6.700000e+00  -7.2399920
-#&gt; 9  as.factor(gear):as.factor(cyl)    3:6-3:4 -1.750000e+00 -15.6899920
-#&gt; 10 as.factor(gear):as.factor(cyl)    4:6-3:4 -1.750000e+00 -14.4754135
-#&gt; 11 as.factor(gear):as.factor(cyl)    5:6-3:4 -1.800000e+00 -17.8965163
-#&gt; 12 as.factor(gear):as.factor(cyl)    3:8-3:4 -6.450000e+00 -18.2967152
-#&gt; 13 as.factor(gear):as.factor(cyl)    4:8-3:4            NA          NA
-#&gt; 14 as.factor(gear):as.factor(cyl)    5:8-3:4 -6.100000e+00 -20.0399920
-#&gt; 15 as.factor(gear):as.factor(cyl)    5:4-4:4  1.275000e+00  -7.7232262
-#&gt; 16 as.factor(gear):as.factor(cyl)    3:6-4:4 -7.175000e+00 -16.1732262
-#&gt; 17 as.factor(gear):as.factor(cyl)    4:6-4:4 -7.175000e+00 -14.1449960
-#&gt; 18 as.factor(gear):as.factor(cyl)    5:6-4:4 -7.225000e+00 -19.2973872
-#&gt; 19 as.factor(gear):as.factor(cyl)    3:8-4:4 -1.187500e+01 -17.0701283
-#&gt; 20 as.factor(gear):as.factor(cyl)    4:8-4:4            NA          NA
-#&gt; 21 as.factor(gear):as.factor(cyl)    5:8-4:4 -1.152500e+01 -20.5232262
-#&gt; 22 as.factor(gear):as.factor(cyl)    3:6-5:4 -8.450000e+00 -19.8319558
-#&gt; 23 as.factor(gear):as.factor(cyl)    4:6-5:4 -8.450000e+00 -18.3070629
-#&gt; 24 as.factor(gear):as.factor(cyl)    5:6-5:4 -8.500000e+00 -22.4399920
-#&gt; 25 as.factor(gear):as.factor(cyl)    3:8-5:4 -1.315000e+01 -21.8431124
-#&gt; 26 as.factor(gear):as.factor(cyl)    4:8-5:4            NA          NA
-#&gt; 27 as.factor(gear):as.factor(cyl)    5:8-5:4 -1.280000e+01 -24.1819558
-#&gt; 28 as.factor(gear):as.factor(cyl)    4:6-3:6 -1.065814e-14  -9.8570629
-#&gt; 29 as.factor(gear):as.factor(cyl)    5:6-3:6 -5.000000e-02 -13.9899920
-#&gt; 30 as.factor(gear):as.factor(cyl)    3:8-3:6 -4.700000e+00 -13.3931124
-#&gt; 31 as.factor(gear):as.factor(cyl)    4:8-3:6            NA          NA
-#&gt; 32 as.factor(gear):as.factor(cyl)    5:8-3:6 -4.350000e+00 -15.7319558
-#&gt; 33 as.factor(gear):as.factor(cyl)    5:6-4:6 -5.000000e-02 -12.7754135
-#&gt; 34 as.factor(gear):as.factor(cyl)    3:8-4:6 -4.700000e+00 -11.2713753
-#&gt; 35 as.factor(gear):as.factor(cyl)    4:8-4:6            NA          NA
-#&gt; 36 as.factor(gear):as.factor(cyl)    5:8-4:6 -4.350000e+00 -14.2070629
-#&gt; 37 as.factor(gear):as.factor(cyl)    3:8-5:6 -4.650000e+00 -16.4967152
-#&gt; 38 as.factor(gear):as.factor(cyl)    4:8-5:6            NA          NA
-#&gt; 39 as.factor(gear):as.factor(cyl)    5:8-5:6 -4.300000e+00 -18.2399920
-#&gt; 40 as.factor(gear):as.factor(cyl)    4:8-3:8            NA          NA
-#&gt; 41 as.factor(gear):as.factor(cyl)    5:8-3:8  3.500000e-01  -8.3431124
-#&gt; 42 as.factor(gear):as.factor(cyl)    5:8-4:8            NA          NA
-#&gt;    conf.high  adj.p.value
-#&gt; 1  11.665447 2.966181e-06
-#&gt; 2   9.591707 1.469263e-02
-#&gt; 3   1.297944 2.012687e-01
-#&gt; 4  -1.358864 7.478921e-03
-#&gt; 5  -1.860352 2.006750e-03
-#&gt; 6   4.043464 9.932072e-01
-#&gt; 7  17.497387 8.319910e-01
-#&gt; 8  20.639992 7.778059e-01
-#&gt; 9  12.189992 9.999560e-01
-#&gt; 10 10.975413 9.999122e-01
-#&gt; 11 14.296516 9.999819e-01
-#&gt; 12  5.396715 6.507761e-01
-#&gt; 13        NA           NA
-#&gt; 14  7.839992 8.505445e-01
-#&gt; 15 10.273226 9.998900e-01
-#&gt; 16  1.823226 1.962607e-01
-#&gt; 17 -0.205004 4.021966e-02
-#&gt; 18  4.847387 5.363530e-01
-#&gt; 19 -6.679872 1.682876e-06
-#&gt; 20        NA           NA
-#&gt; 21 -2.526774 5.574508e-03
-#&gt; 22  2.931956 2.698785e-01
-#&gt; 23  1.407063 1.347959e-01
-#&gt; 24  5.439992 5.126836e-01
-#&gt; 25 -4.456888 8.236125e-04
-#&gt; 26        NA           NA
-#&gt; 27 -1.418044 1.943049e-02
-#&gt; 28  9.857063 1.000000e+00
-#&gt; 29 13.889992 1.000000e+00
-#&gt; 30  3.993112 6.587277e-01
-#&gt; 31        NA           NA
-#&gt; 32  7.031956 9.220157e-01
-#&gt; 33 12.675413 1.000000e+00
-#&gt; 34  1.871375 3.126067e-01
-#&gt; 35        NA           NA
-#&gt; 36  5.507063 8.448091e-01
-#&gt; 37  7.196715 9.107420e-01
-#&gt; 38        NA           NA
-#&gt; 39  9.639992 9.763412e-01
-#&gt; 40        NA           NA
-#&gt; 41  9.043112 1.000000e+00
-#&gt; 42        NA           NA</div><div class='input'>
+<span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='fu'>TukeyHSD</span>(<span class='no'>fm2</span>))</div><div class='output co'>#&gt; # A tibble: 42 x 6
+#&gt;    term                      comparison estimate conf.low conf.high adj.p.value
+#&gt;    &lt;chr&gt;                     &lt;chr&gt;         &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;       &lt;dbl&gt;
+#&gt;  1 as.factor(gear)           4-3           8.43     5.19      11.7   0.00000297
+#&gt;  2 as.factor(gear)           5-3           5.27     0.955      9.59  0.0147    
+#&gt;  3 as.factor(gear)           5-4          -3.15    -7.60       1.30  0.201     
+#&gt;  4 as.factor(cyl)            6-4          -5.40    -9.45      -1.36  0.00748   
+#&gt;  5 as.factor(cyl)            8-4          -5.23    -8.60      -1.86  0.00201   
+#&gt;  6 as.factor(cyl)            8-6           0.172   -3.70       4.04  0.993     
+#&gt;  7 as.factor(gear):as.facto~ 4:4-3:4       5.42    -6.65      17.5   0.832     
+#&gt;  8 as.factor(gear):as.facto~ 5:4-3:4       6.70    -7.24      20.6   0.778     
+#&gt;  9 as.factor(gear):as.facto~ 3:6-3:4      -1.75   -15.7       12.2   1.000     
+#&gt; 10 as.factor(gear):as.facto~ 4:6-3:4      -1.75   -14.5       11.0   1.000     
+#&gt; # ... with 32 more rows</div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

@@ -199,6 +199,9 @@
     <loc>http://broom.tidyverse.org/reference/nls_tidiers.html</loc>
   </url>
   <url>
+    <loc>http://broom.tidyverse.org/reference/null_tidiers.html</loc>
+  </url>
+  <url>
     <loc>http://broom.tidyverse.org/reference/optim_tidiers.html</loc>
   </url>
   <url>
@@ -302,9 +305,6 @@
   </url>
   <url>
     <loc>http://broom.tidyverse.org/reference/tidy.map.html</loc>
-  </url>
-  <url>
-    <loc>http://broom.tidyverse.org/reference/tidy.NULL.html</loc>
   </url>
   <url>
     <loc>http://broom.tidyverse.org/reference/tidy.pairwise.htest.html</loc>

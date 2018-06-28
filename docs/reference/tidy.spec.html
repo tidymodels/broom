@@ -102,7 +102,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>tidy a spec objet</h1>
-    <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/stats_tidiers.R'><code>R/stats_tidiers.R</code></a></small>
+    <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/stats-time-series-tidiers.R'><code>R/stats-time-series-tidiers.R</code></a></small>
     <div class="hidden name"><code>tidy.spec.Rd</code></div>
     </div>
 
@@ -136,31 +136,20 @@ returns a tidy data frame with two columns: "freq" and "spec"</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
-<span class='no'>spc</span> <span class='kw'>&lt;-</span> <span class='fu'>spectrum</span>(<span class='no'>lh</span>)</div><div class='img'><img src='tidy.spec-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>spc</span>)</div><div class='output co'>#&gt;          freq        spec
-#&gt; 1  0.02083333 0.091189851
-#&gt; 2  0.04166667 0.331409714
-#&gt; 3  0.06250000 0.836163368
-#&gt; 4  0.08333333 1.167519168
-#&gt; 5  0.10416667 0.350326115
-#&gt; 6  0.12500000 1.510068104
-#&gt; 7  0.14583333 0.327650442
-#&gt; 8  0.16666667 0.617605221
-#&gt; 9  0.18750000 0.319521754
-#&gt; 10 0.20833333 0.067483763
-#&gt; 11 0.22916667 0.267266157
-#&gt; 12 0.25000000 0.193002844
-#&gt; 13 0.27083333 0.038723050
-#&gt; 14 0.29166667 0.072054409
-#&gt; 15 0.31250000 0.062259382
-#&gt; 16 0.33333333 0.142116969
-#&gt; 17 0.35416667 0.029340861
-#&gt; 18 0.37500000 0.051686890
-#&gt; 19 0.39583333 0.087081234
-#&gt; 20 0.41666667 0.008120985
-#&gt; 21 0.43750000 0.019349272
-#&gt; 22 0.45833333 0.100881666
-#&gt; 23 0.47916667 0.172578174
-#&gt; 24 0.50000000 0.043702012</div><div class='input'>
+<span class='no'>spc</span> <span class='kw'>&lt;-</span> <span class='fu'>spectrum</span>(<span class='no'>lh</span>)</div><div class='img'><img src='tidy.spec-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>spc</span>)</div><div class='output co'>#&gt; # A tibble: 24 x 2
+#&gt;      freq   spec
+#&gt;     &lt;dbl&gt;  &lt;dbl&gt;
+#&gt;  1 0.0208 0.0912
+#&gt;  2 0.0417 0.331 
+#&gt;  3 0.0625 0.836 
+#&gt;  4 0.0833 1.17  
+#&gt;  5 0.104  0.350 
+#&gt;  6 0.125  1.51  
+#&gt;  7 0.146  0.328 
+#&gt;  8 0.167  0.618 
+#&gt;  9 0.188  0.320 
+#&gt; 10 0.208  0.0675
+#&gt; # ... with 14 more rows</div><div class='input'>
 <span class='fu'>library</span>(<span class='no'>ggplot2</span>)
 <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/ggplot'>ggplot</a></span>(<span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>spc</span>), <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/aes'>aes</a></span>(<span class='no'>freq</span>, <span class='no'>spec</span>)) + <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/geom_path'>geom_line</a></span>()</div><div class='img'><img src='tidy.spec-2.png' alt='' width='700' height='433' /></div><div class='input'>
 </div></pre>

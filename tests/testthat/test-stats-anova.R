@@ -54,8 +54,8 @@ test_that("tidy.aovlist", {
 })
 
 
-test_that("test.manova works", {
-  check_arguments(test.manova)
+test_that("tidy.manova", {
+  check_arguments(tidy.manova)
   
   df <- within(npk, foo <- rnorm(24))
   fit <- manova(cbind(yield, foo) ~ block + N * P * K, df)
@@ -66,19 +66,15 @@ test_that("test.manova works", {
   check_dims(td, 8, 7)
 })
 
-test_that("tidy.TukeyHSD works", {
+test_that("tidy.TukeyHSD", {
   check_arguments(tidy.TukeyHSD)
   
   aovfit <- aov(breaks ~ wool + tension, data = warpbreaks)
   thsd <- TukeyHSD(aovfit, "tension", ordered = TRUE)
   
   td <- tidy(thsd)
-  td2 <- tidy(thsd, separate.levels = TRUE)
   
   check_tidy_output(td)
-  check_tidy_output(td2)
-  
   check_dims(td, 3, 6)
-  check_dims(td2, 3, 7)
 })
 

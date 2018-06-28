@@ -102,14 +102,15 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Tidying methods for mixed effects models</h1>
-    <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/lme4_tidiers.R'><code>R/lme4_tidiers.R</code></a></small>
+    <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/lme4-tidiers.R'><code>R/lme4-tidiers.R</code></a></small>
     <div class="hidden name"><code>lme4_tidiers.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>These methods tidy the coefficients of mixed effects models, particularly
-responses of the <code>merMod</code> class</p>
+    <p><code>lme4</code> tidiers will soon be deprecated in <code>broom</code> and there is no ongoing
+development of these functions at this time. <code>lme4</code> tidiers are being
+developed in the <code>broom.mixed</code> package, which is not yet on CRAN.</p>
     
     </div>
 
@@ -207,7 +208,9 @@ glance returns one row with the columns
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>When the modeling was performed with <code>na.action = "na.omit"</code>
+    <p>These methods tidy the coefficients of mixed effects models, particularly
+responses of the <code>merMod</code> class</p>
+<p>When the modeling was performed with <code>na.action = "na.omit"</code>
 (as is the typical default), rows with NA in the initial data are omitted
 entirely from the augmented data frame. When the modeling was performed
 with <code>na.action = "na.exclude"</code>, one should provide the original data
@@ -248,10 +251,7 @@ warning is raised and the incomplete rows are dropped.</p>
     <span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>nm1</span>, <span class='kw'>effects</span> <span class='kw'>=</span> <span class='st'>"fixed"</span>)
     <span class='fu'>head</span>(<span class='fu'><a href='augment.html'>augment</a></span>(<span class='no'>nm1</span>, <span class='no'>Orange</span>))
     <span class='fu'><a href='glance.html'>glance</a></span>(<span class='no'>nm1</span>)
-}</div><div class='output co'>#&gt; <span class='message'>Loading required package: lme4</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Attaching package: 'lme4'</span></div><div class='output co'>#&gt; <span class='message'>The following object is masked from 'package:gmm':</span>
-#&gt; <span class='message'></span>
-#&gt; <span class='message'>    checkConv</span></div><div class='output co'>#&gt; <span class='message'>Computing profile confidence intervals ...</span></div><div class='output co'>#&gt; <span class='warning'>Warning: variance-covariance matrix computed from finite-difference Hessian is</span>
+}</div><div class='output co'>#&gt; <span class='message'>Loading required package: lme4</span></div><div class='output co'>#&gt; <span class='message'>Computing profile confidence intervals ...</span></div><div class='output co'>#&gt; <span class='warning'>Warning: variance-covariance matrix computed from finite-difference Hessian is</span>
 #&gt; <span class='warning'>not positive definite or contains NA values: falling back to var-cov estimated from RX</span></div><div class='output co'>#&gt; <span class='warning'>Warning: variance-covariance matrix computed from finite-difference Hessian is</span>
 #&gt; <span class='warning'>not positive definite or contains NA values: falling back to var-cov estimated from RX</span></div><div class='output co'>#&gt; <span class='warning'>Warning: variance-covariance matrix computed from finite-difference Hessian is</span>
 #&gt; <span class='warning'>not positive definite or contains NA values: falling back to var-cov estimated from RX</span></div><div class='output co'>#&gt; <span class='warning'>Warning: variance-covariance matrix computed from finite-difference Hessian is</span>

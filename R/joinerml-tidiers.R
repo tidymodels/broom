@@ -1,0 +1,204 @@
+#' Tidying methods for mjoint models
+#'
+#' These methods tidy the coefficients of joint models for time-to-event
+#' data and multivariate longitudinal data of the `mjoint` class from the
+#' `joineRML` package.
+#'
+#' @param x An object of class `mjoint`.
+#'
+#' @return All tidying methods return a `tibble` without rownames. The
+#'   structure depends on the method chosen.
+#'
+#' @name mjoint_tidiers
+#'
+#' @examples
+#' \dontrun{
+#' # Fit a joint model with bivariate longitudinal outcomes
+#' library(joineRML)
+#' data(heart.valve)
+#' hvd <- heart.valve[!is.na(heart.valve$log.grad) &
+#'                        !is.na(heart.valve$log.lvmi) &
+#'                        heart.valve$num <= 50, ]
+#' fit <- mjoint(
+#'     formLongFixed = list(
+#'         "grad" = log.grad ~ time + sex + hs,
+#'         "lvmi" = log.lvmi ~ time + sex
+#'     ),
+#'     formLongRandom = list(
+#'         "grad" = ~ 1 | num,
+#'         "lvmi" = ~ time | num
+#'     ),
+#'     formSurv = Surv(fuyrs, status) ~ age,
+#'     data = hvd,
+#'     inits = list("gamma" = c(0.11, 1.51, 0.80)),
+#'     timeVar = "time"
+#' )
+#'
+#' # Extract the survival fixed effects
+#' tidy(fit)
+#'
+#' # Extract the longitudinal fixed effects
+#' tidy(fit, component = "longitudinal")
+#'
+#' # Extract the survival fixed effects with confidence intervals
+#' tidy(fit, ci = TRUE)
+#'
+#' # Extract the survival fixed effects with confidence intervals based
+#' # on bootstrapped standard errors
+#' bSE <- boot_se(fit, nboot = 5, safe.boot = TRUE)
+#' tidy(fit, boot_se = bSE, ci = TRUE)
+#'
+#' # Augment original data with fitted longitudinal values and residuals
+#' hvd2 <- augment(fit)
+#'
+#' # Extract model statistics
+#' glance(fit)
+#' }
+#'
+#' @rdname mjoint_tidiers
+#'
+#' @param component Either `survival` (the survival component of the model,
+#'   default) or `longitudinal` (the longitudinal component).
+#'
+#' @param boot_se An object of class `boot_se` for the corresponding model. If
+#'   `boot_se = NULL` (the default), the function will use approximate standard
+#'    error estimates calculated from the empirical information matrix.
+#'
+#' @param conf.int Include (`1 - level`)\% confidence intervals? Defaults to `FALSE`.
+#'
+#' @param conf.level The confidence level required.
+#'
+#' @return `tidy` returns one row for each estimated fixed effect depending on
+#'   the `component` parameter. It contains the following  columns:
+#'   \item{term}{The term being estimated}
+#'   \item{estimate}{Estimated value}
+#'   \item{std.error}{Standard error}
+#'   \item{statistic}{Z-statistic}
+#'   \item{p.value}{P-value computed from Z-statistic}
+#'   \item{conf.low}{The low end of a confidence interval on `estimate`,
+#'      if required}
+#'   \item{conf.high}{The high end of a confidence interval on `estimate`,
+#'      if required}
+#'
+#' @export
+tidy.mjoint <- function(x, component = "survival", conf.int = FALSE,
+                        conf.level = 0.95,  boot_se = NULL,...) {
+  component <- match.arg(component, c("survival", "longitudinal"))
+  if (!is.null(boot_se)) {
+    if (!inherits(x = boot_se, what = "boot_se")) 
+      stop("'boot_se' object not of class 'boot_se'")
+  }
+
+  # make summary object
+  if (is.null(boot_se)) {
+    smr <- summary(x)
+  } else {
+    smr <- summary(x, bootSE = boot_se)
+  }
+
+  # extract appropriate component
+  if (component == "survival") {
+    out <- data.frame(smr$coefs.surv)
+  } else {
+    out <- data.frame(smr$coefs.long)
+  }
+
+  # fix names
+  names(out) <- c("estimate", "std.error", "statistic", "p.value")
+
+  # turn rownames into a 'term' column
+  out$term <- rownames(out)
+  rownames(out) <- NULL
+  out <- out[, c(5, 1:4)]
+
+  # make confidence intervals (if required)
+  if (conf.int) {
+    cv <- qnorm(1 - (1 - conf.level) / 2)
+    out$conf.low <- out$estimate - cv * out$std.error
+    out$conf.high <- out$estimate + cv * out$std.error
+  }
+
+  # turn out into a tibble object
+  tibble::as_tibble(out)
+}
+
+#' @rdname mjoint_tidiers
+#'
+#' @param data Original data this was fitted on, in a list (e.g. `list(data)`). This will be extracted from `x` if not given.
+#'
+#' @return `augment` returns one row for each original observation, 
+#' with columns (each prepended by a .) added. Included are the columns:
+#'   \item{.fitted_j_0}{population-level fitted values for the
+#'     j-th longitudinal process}
+#'   \item{.fitted_j_1}{individuals-level fitted values for the j-th
+#'     longitudinal process}
+#'   \item{.resid_j_0}{population-level residuals for the j-th
+#'     longitudinal process}
+#'   \item{.resid_j_1}{individual-level residuals for the j-th
+#'     longitudinal process}
+#' 
+#' See [joineRML::fitted.mjoint()] and [joineRML::residuals.mjoint()] for
+#' more information on the difference between population-level and
+#' individual-level fitted values and residuals.
+#'
+#' @note If fitting a joint model with a single longitudinal process,
+#'   please make sure you are using a named `list` to define the formula
+#'   for the fixed and random effects of the longitudinal submodel.
+#'
+#' @export
+augment.mjoint <- function(x, data = x$data, ...) {
+  # checks on 'data'
+  if (is.null(data)) {
+    stop("It was not possible to extract 'data' from 'x'",
+         "Please provide 'data' manually.")
+  }
+
+  if (length(data) > 1) {
+    if (!do.call(all.equal, data)) {
+      stop("List of 'data' extracted from 'x' does not",
+           "include equal data frames.")
+    }
+    data <- data[[1]]
+  }
+
+  # longitudinal fitted values
+  fit0 <- fitted(x, level = 0)
+  names(fit0) <- paste0(".fitted_", names(fit0), "_0")
+  fit0 <- do.call(cbind.data.frame, fit0)
+  fit1 <- fitted(x, level = 1)
+  names(fit1) <- paste0(".fitted_", names(fit1), "_1")
+  fit1 <- do.call(cbind.data.frame, fit1)
+
+  # longitudinal residuals
+  res0 <- residuals(x, level = 0)
+  names(res0) <- paste0(".resid_", names(res0), "_0")
+  res0 <- do.call(cbind.data.frame, res0)
+  res1 <- residuals(x, level = 1)
+  names(res1) <- paste0(".resid_", names(res1), "_1")
+  res1 <- do.call(cbind.data.frame, res1)
+
+  # return augmented 'data'
+  out <- cbind(data, fit0, fit1, res0, res1)
+  tibble::as_tibble(out)
+}
+
+#' @rdname mjoint_tidiers
+#'
+#' @param ... extra arguments (not used)
+#'
+#' @return `glance` returns one row with the columns
+#'   \item{sigma2_j}{the square root of the estimated residual variance for
+#'     the j-th longitudinal process}
+#'   \item{AIC}{the Akaike Information Criterion}
+#'   \item{BIC}{the Bayesian Information Criterion}
+#'   \item{logLik}{the data's log-likelihood under the model}
+#'
+#' @export
+glance.mjoint <- function(x, ...) {
+  smr <- summary(x)
+  out <- as_tibble(t(smr$sigma))
+  out$AIC <- smr$AIC
+  out$BIC <- smr$BIC
+  out$logLik <- smr$logLik
+  out
+}

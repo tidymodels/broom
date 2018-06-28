@@ -109,8 +109,8 @@
 <h1 class="page-header">
 <a href="#broom-0-4-4-9000" class="anchor"></a>broom 0.4.4.9000<small> Unreleased </small>
 </h1>
-<p>To be released at 0.5.0</p>
-<p><code>broom</code> now returns <code>tibbles</code>. This release also includes several new tidiers, new vignettes and a large number of bugfixes. We’ve also begun to more rigorously define tidier specifications: we’ve laid part of the groundwork for stricter and more consistent tidying, but the new tidier specifications are not yet complete. These will appear in the next release.</p>
+<p>To be released as 0.5.0</p>
+<p>Tidiers now returns <code>tibbles</code>. This release also includes several new tidiers, new vignettes and a large number of bugfixes. We’ve also begun to more rigorously define tidier specifications: we’ve laid part of the groundwork for stricter and more consistent tidying, but the new tidier specifications are not yet complete. These will appear in the next release.</p>
 <p>Additionally, users should note that we are in the process of migrating tidying methods for mixed models and Bayesian models to <code>broom.mixed</code>. <code>broom.mixed</code> is not on CRAN yet, but all mixed model and Bayesian tidiers will be deprecated once <code>broom.mixed</code> is on CRAN. No further development of mixed model tidiers will take place in <code>broom</code>.</p>
 <div id="breaking-changes" class="section level2">
 <h2 class="hasAnchor">
@@ -164,6 +164,10 @@ broom<span class="op">::</span><span class="kw"><a href="http://www.rdocumentati
 <h2 class="hasAnchor">
 <a href="#other-changes" class="anchor"></a>Other changes</h2>
 <ul>
+<li>The <code>separate.levels</code> argument has been removed from <code>tidy.TukeyHSD</code>. To obtain the effect of <code>separate.levels = TRUE</code>, users may <code><a href="http://www.rdocumentation.org/packages/tidyr/topics/separate">tidyr::separate</a></code> after tidying. This is consistent with the <code>multcomp</code> tidier behavior.</li>
+<li>The <code>fe.error</code> argument was removed from <code>tidy.felm</code>. When fixed effects are tidier, their standard errors are now always included.</li>
+<li>The <code>diag</code> argument in <code>tidy.dist</code> has been renamed <code>diagonal</code>
+</li>
 <li>Advice to help beginners make PRs (<a href='http://github.com/tidyverse/broom/issues/397'>#397</a> by <a href='http://github.com/karldw'>@karldw</a>)</li>
 <li>
 <code>glance</code> support for <code>arima</code> objects fit with <code>method = "CSS"</code> (<a href='http://github.com/tidyverse/broom/issues/396'>#396</a> by <a href='http://github.com/josue'>@josue</a>-rodriguez)</li>

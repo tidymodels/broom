@@ -1,4 +1,4 @@
-context("lm tidiers")
+context("stats-lm")
 
 test_that("lm tidier arguments", {
   check_arguments(tidy.lm)

@@ -9,7 +9,6 @@ fit <- garch(dax, control = garch.control(trace = FALSE))
 test_that("tseries tidier arguments", {
   check_arguments(tidy.garch)
   check_arguments(glance.garch)
-  check_arguments(augment.garch)
 })
 
 test_that("tidy.garch", {

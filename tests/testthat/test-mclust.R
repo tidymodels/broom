@@ -1,4 +1,4 @@
-context("mclust tidiers")
+context("mclust")
 
 skip_if_not_installed("mclust")
 library(mclust)

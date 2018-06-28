@@ -1,4 +1,4 @@
-context("glm tidiers")
+context("stats-glm")
 
 test_that("glm tidier arguments", {
   

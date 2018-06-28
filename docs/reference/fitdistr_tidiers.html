@@ -102,7 +102,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Tidying methods for fitdistr objects from the MASS package</h1>
-    <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/fitdistr_tidiers.R'><code>R/fitdistr_tidiers.R</code></a></small>
+    <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/mass-fitdistr-tidiers.R'><code>R/mass-fitdistr-tidiers.R</code></a></small>
     <div class="hidden name"><code>fitdistr_tidiers.Rd</code></div>
     </div>
 
@@ -157,8 +157,6 @@ glance.fitdistr returns a one-row data.frame with the columns
 
 <span class='fu'>library</span>(<span class='no'>MASS</span>)</div><div class='output co'>#&gt; <span class='message'></span>
 #&gt; <span class='message'>Attaching package: 'MASS'</span></div><div class='output co'>#&gt; <span class='message'>The following object is masked from 'package:dplyr':</span>
-#&gt; <span class='message'></span>
-#&gt; <span class='message'>    select</span></div><div class='output co'>#&gt; <span class='message'>The following object is masked from 'package:broom':</span>
 #&gt; <span class='message'></span>
 #&gt; <span class='message'>    select</span></div><div class='input'><span class='no'>fit</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/MASS/topics/fitdistr'>fitdistr</a></span>(<span class='no'>x</span>, <span class='no'>dnorm</span>, <span class='fu'>list</span>(<span class='kw'>mean</span> <span class='kw'>=</span> <span class='fl'>3</span>, <span class='kw'>sd</span> <span class='kw'>=</span> <span class='fl'>1</span>))</div><div class='output co'>#&gt; <span class='warning'>Warning: NaNs produced</span></div><div class='output co'>#&gt; <span class='warning'>Warning: NaNs produced</span></div><div class='output co'>#&gt; <span class='warning'>Warning: NaNs produced</span></div><div class='output co'>#&gt; <span class='warning'>Warning: NaNs produced</span></div><div class='output co'>#&gt; <span class='warning'>Warning: NaNs produced</span></div><div class='output co'>#&gt; <span class='warning'>Warning: NaNs produced</span></div><div class='output co'>#&gt; <span class='warning'>Warning: NaNs produced</span></div><div class='output co'>#&gt; <span class='warning'>Warning: NaNs produced</span></div><div class='output co'>#&gt; <span class='warning'>Warning: NaNs produced</span></div><div class='input'>
 <span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>fit</span>)</div><div class='output co'>#&gt; # A tibble: 2 x 3
