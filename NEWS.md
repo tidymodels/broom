@@ -1,4 +1,4 @@
-# broom 0.4.4.9000
+# broom 0.4.5.9000
 To be released as 0.5.0
 
 Tidiers now returns `tibbles`. This release also includes several new tidiers, new vignettes and a large number of bugfixes. We've also begun to more rigorously define tidier specifications: we've laid part of the groundwork for stricter and more consistent tidying, but the new tidier specifications are not yet complete. These will appear in the next release.
@@ -9,7 +9,7 @@ Additionally, users should note that we are in the process of migrating tidying 
 
 Almost all tidiers should now return `tibble`s rather than `data.frame`s. Deprecated tidying methods, Bayesian and mixed model tidiers still return `data.frame`s.
 
-Users are mostly to experience issues when using `augment` in situations where tibbles are stricter than data frames. For example, specifying model covariates as a matrix object will now error:
+**Users** are mostly to experience issues when using `augment` in situations where tibbles are stricter than data frames. For example, specifying model covariates as a matrix object will now error:
 
 ```r
 library(broom)
@@ -25,6 +25,13 @@ This is because the default `data` argument `data = model.frame(fit)` cannot be 
 Another consequence of this is that `augment.survreg` and `augment.coxph` from the `survival` package now require that the user explicitly passes data to either the `data` or `newdata` arguments.
 
 These restrictions will be relaxed in an upcoming release of `broom` pending support for matrix-columns in tibbles.
+
+**Developers** are likely to experience issues:
+
+- subsetting tibbles with `[`, which returns a tibble rather than a vector.
+- setting rownames on tibbles, which is deprecated.
+- using matrix and vector tidiers, now deprecated.
+- handling the additional tibble classes `tbl_df` and `tbl` beyond the `data.frame` class
 
 ## New vignettes
 
