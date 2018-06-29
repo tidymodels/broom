@@ -105,9 +105,9 @@
       <small>Source: <a href='http://github.com/tidyverse/broom/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
-    <div id="broom-0-4-4-9000" class="section level1">
+    <div id="broom-0-4-5-9000" class="section level1">
 <h1 class="page-header">
-<a href="#broom-0-4-4-9000" class="anchor"></a>broom 0.4.4.9000<small> Unreleased </small>
+<a href="#broom-0-4-5-9000" class="anchor"></a>broom 0.4.5.9000<small> Unreleased </small>
 </h1>
 <p>To be released as 0.5.0</p>
 <p>Tidiers now returns <code>tibbles</code>. This release also includes several new tidiers, new vignettes and a large number of bugfixes. We’ve also begun to more rigorously define tidier specifications: we’ve laid part of the groundwork for stricter and more consistent tidying, but the new tidier specifications are not yet complete. These will appear in the next release.</p>
@@ -116,7 +116,7 @@
 <h2 class="hasAnchor">
 <a href="#breaking-changes" class="anchor"></a>Breaking changes</h2>
 <p>Almost all tidiers should now return <code>tibble</code>s rather than <code>data.frame</code>s. Deprecated tidying methods, Bayesian and mixed model tidiers still return <code>data.frame</code>s.</p>
-<p>Users are mostly to experience issues when using <code>augment</code> in situations where tibbles are stricter than data frames. For example, specifying model covariates as a matrix object will now error:</p>
+<p><strong>Users</strong> are mostly to experience issues when using <code>augment</code> in situations where tibbles are stricter than data frames. For example, specifying model covariates as a matrix object will now error:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(broom)
 <span class="kw">library</span>(quantreg)
 
@@ -126,6 +126,13 @@ broom<span class="op">::</span><span class="kw"><a href="http://www.rdocumentati
 <p>This is because the default <code>data</code> argument <code>data = model.frame(fit)</code> cannot be coerced to <code>tibble</code>.</p>
 <p>Another consequence of this is that <code>augment.survreg</code> and <code>augment.coxph</code> from the <code>survival</code> package now require that the user explicitly passes data to either the <code>data</code> or <code>newdata</code> arguments.</p>
 <p>These restrictions will be relaxed in an upcoming release of <code>broom</code> pending support for matrix-columns in tibbles.</p>
+<p><strong>Developers</strong> are likely to experience issues:</p>
+<ul>
+<li>ubsetting tibbles with <code>[</code>, which returns a tibble rather than a vector.</li>
+<li>setting rownames on tibbles, which is deprecated.</li>
+<li>using matrix and vector tidiers, now deprecated.</li>
+<li>handling the additional tibble classes <code>tbl_df</code> and <code>tbl</code> beyond the <code>data.frame</code> class</li>
+</ul>
 </div>
 <div id="new-vignettes" class="section level2">
 <h2 class="hasAnchor">
@@ -407,7 +414,7 @@ See <code><a href="../reference/rowwise_df_tidiers.html">?rowwise_df_tidiers</a>
     <div id="tocnav">
       <h2>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
-        <li><a href="#broom-0-4-4-9000">0.4.4.9000</a></li>
+        <li><a href="#broom-0-4-5-9000">0.4.5.9000</a></li>
         <li><a href="#broom-0-4-4">0.4.4</a></li>
         <li><a href="#broom-0-4-3">0.4.3</a></li>
         <li><a href="#broom-0-4-2">0.4.2</a></li>
