@@ -35,7 +35,7 @@ NULL
 #' @export
 tidy.glht <- function(x, ...) {
   tibble(
-    lhs = rownames(x$linfct),
+    lhs = as.factor(rownames(x$linfct)),
     rhs = x$rhs,
     estimate = stats::coef(x)
   )
@@ -50,7 +50,7 @@ tidy.confint.glht <- function(x, ...) {
 
   mutate(
     coef,
-    lhs = rownames(coef),
+    lhs = as.factor(rownames(coef)),
     rhs = x$rhs
   )
 }
@@ -65,18 +65,15 @@ tidy.summary.glht <- function(x, ...) {
   names(coef) <- c("estimate", "std.error", "statistic", "p.value")
 
   mutate(coef, 
-    lhs = rownames(coef),
+    lhs = as.factor(rownames(coef)),
     rhs = x$rhs
   )
 }
-
 
 #' @method tidy cld
 #' @rdname multcomp_tidiers
 #' @export
 tidy.cld <- function(x, ...) {
-  tibble(
-    lhs = names(x$mcletters$Letters),
-    letters = x$mcletters$Letters
-  )
+  vec <- x$mcletters$Letters
+  tibble(lhs = as.factor(names(vec)), letters = as.factor(vec))
 }
