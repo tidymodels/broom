@@ -35,7 +35,7 @@ NULL
 #' @export
 tidy.glht <- function(x, ...) {
   tibble(
-    lhs = as.factor(rownames(x$linfct)),
+    lhs = rownames(x$linfct),
     rhs = x$rhs,
     estimate = stats::coef(x)
   )
@@ -45,35 +45,41 @@ tidy.glht <- function(x, ...) {
 #' @method tidy confint.glht
 #' @export
 tidy.confint.glht <- function(x, ...) {
+  
+  lhs_rhs <- tibble(
+    lhs = rownames(x$linfct),
+    rhs = x$rhs
+  )
+  
   coef <- as_tibble(x$confint)
   colnames(coef) <- c("estimate", "conf.low", "conf.high")
 
-  mutate(
-    coef,
-    lhs = as.factor(rownames(coef)),
-    rhs = x$rhs
-  )
+  bind_cols(lhs_rhs, coef)
 }
 
 #' @method tidy summary.glht
 #' @rdname multcomp_tidiers
 #' @export
 tidy.summary.glht <- function(x, ...) {
+  
+  lhs_rhs <- tibble(
+    lhs = rownames(x$linfct),
+    rhs = x$rhs
+  )
+  
   coef <- as_tibble(
     x$test[c("coefficients", "sigma", "tstat", "pvalues")]
   )
   names(coef) <- c("estimate", "std.error", "statistic", "p.value")
 
-  mutate(coef, 
-    lhs = as.factor(rownames(coef)),
-    rhs = x$rhs
-  )
+  bind_cols(lhs_rhs, coef)
 }
+
 
 #' @method tidy cld
 #' @rdname multcomp_tidiers
 #' @export
 tidy.cld <- function(x, ...) {
   vec <- x$mcletters$Letters
-  tibble(lhs = as.factor(names(vec)), letters = as.factor(vec))
+  tibble(lhs = names(vec), letters = vec)
 }
