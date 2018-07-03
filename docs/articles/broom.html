@@ -85,7 +85,7 @@
     <div class="page-header toc-ignore">
       <h1>Introduction to broom</h1>
             
-            <h4 class="date">2018-06-25</h4>
+            <h4 class="date">2018-07-03</h4>
       
       <small class="dont-index">Source: <a href="http://github.com/tidyverse/broom/blob/master/vignettes/broom.Rmd"><code>vignettes/broom.Rmd</code></a></small>
       <div class="hidden name"><code>broom.Rmd</code></div>
@@ -162,8 +162,8 @@ lmfit</code></pre></div>
 <pre><code>## # A tibble: 6 x 10
 ##   .rownames        mpg    wt .fitted .se.fit .resid   .hat .sigma  .cooksd
 ##   &lt;chr&gt;          &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;    &lt;dbl&gt;
-## 1 Mazda RX4       21.0  2.62    23.3   0.634 -2.28  0.0433   3.07  1.33e-2
-## 2 Mazda RX4 Wag   21.0  2.88    21.9   0.571 -0.920 0.0352   3.09  1.72e-3
+## 1 Mazda RX4       21    2.62    23.3   0.634 -2.28  0.0433   3.07  1.33e-2
+## 2 Mazda RX4 Wag   21    2.88    21.9   0.571 -0.920 0.0352   3.09  1.72e-3
 ## 3 Datsun 710      22.8  2.32    24.9   0.736 -2.09  0.0584   3.07  1.54e-2
 ## 4 Hornet 4 Drive  21.4  3.22    20.1   0.538  1.30  0.0313   3.09  3.02e-3
 ## 5 Hornet Sporta~  18.7  3.44    18.9   0.553 -0.200 0.0329   3.10  7.60e-5
@@ -197,12 +197,12 @@ lmfit</code></pre></div>
 <pre><code>## # A tibble: 6 x 10
 ##   .rownames          am    wt .fitted .se.fit .resid   .hat .sigma .cooksd
 ##   &lt;chr&gt;           &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;
-## 1 Mazda RX4          1.  2.62   1.50    0.918  0.635 0.126   0.803 0.0184 
-## 2 Mazda RX4 Wag      1.  2.88   0.471   0.676  0.985 0.108   0.790 0.0424 
-## 3 Datsun 710         1.  2.32   2.70    1.28   0.360 0.0963  0.810 0.00394
-## 4 Hornet 4 Drive     0.  3.22  -0.897   0.601 -0.827 0.0744  0.797 0.0177 
-## 5 Hornet Sportab~    0.  3.44  -1.80    0.749 -0.553 0.0681  0.806 0.00647
-## 6 Valiant            0.  3.46  -1.88    0.767 -0.532 0.0674  0.807 0.00590
+## 1 Mazda RX4           1  2.62   1.50    0.918  0.635 0.126   0.803 0.0184 
+## 2 Mazda RX4 Wag       1  2.88   0.471   0.676  0.985 0.108   0.790 0.0424 
+## 3 Datsun 710          1  2.32   2.70    1.28   0.360 0.0963  0.810 0.00394
+## 4 Hornet 4 Drive      0  3.22  -0.897   0.601 -0.827 0.0744  0.797 0.0177 
+## 5 Hornet Sportab~     0  3.44  -1.80    0.749 -0.553 0.0681  0.806 0.00647
+## 6 Valiant             0  3.46  -1.88    0.767 -0.532 0.0674  0.807 0.00590
 ## # ... with 1 more variable: .std.resid &lt;dbl&gt;</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/glance.html">glance</a></span>(glmfit)</code></pre></div>
 <pre><code>## # A tibble: 1 x 7
@@ -222,12 +222,12 @@ lmfit</code></pre></div>
 <pre><code>## # A tibble: 6 x 14
 ##   .rownames      mpg   cyl  disp    hp  drat    wt  qsec    vs    am  gear
 ##   &lt;chr&gt;        &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
-## 1 Mazda RX4     21.0    6.  160.  110.  3.90  2.62  16.5    0.    1.    4.
-## 2 Mazda RX4 W~  21.0    6.  160.  110.  3.90  2.88  17.0    0.    1.    4.
-## 3 Datsun 710    22.8    4.  108.   93.  3.85  2.32  18.6    1.    1.    4.
-## 4 Hornet 4 Dr~  21.4    6.  258.  110.  3.08  3.22  19.4    1.    0.    3.
-## 5 Hornet Spor~  18.7    8.  360.  175.  3.15  3.44  17.0    0.    0.    3.
-## 6 Valiant       18.1    6.  225.  105.  2.76  3.46  20.2    1.    0.    3.
+## 1 Mazda RX4     21       6   160   110  3.9   2.62  16.5     0     1     4
+## 2 Mazda RX4 W~  21       6   160   110  3.9   2.88  17.0     0     1     4
+## 3 Datsun 710    22.8     4   108    93  3.85  2.32  18.6     1     1     4
+## 4 Hornet 4 Dr~  21.4     6   258   110  3.08  3.22  19.4     1     0     3
+## 5 Hornet Spor~  18.7     8   360   175  3.15  3.44  17.0     0     0     3
+## 6 Valiant       18.1     6   225   105  2.76  3.46  20.2     1     0     3
 ## # ... with 3 more variables: carb &lt;dbl&gt;, .fitted &lt;dbl&gt;, .resid &lt;dbl&gt;</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/glance.html">glance</a></span>(nlsfit)</code></pre></div>
 <pre><code>## # A tibble: 1 x 8
@@ -241,52 +241,52 @@ lmfit</code></pre></div>
 <p>The <code>tidy</code> function can also be applied to <code>htest</code> objects, such as those output by popular built-in functions like <code>t.test</code>, <code>cor.test</code>, and <code>wilcox.test</code>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">tt &lt;-<span class="st"> </span><span class="kw">t.test</span>(wt <span class="op">~</span><span class="st"> </span>am, mtcars)
 <span class="kw"><a href="../reference/tidy.html">tidy</a></span>(tt)</code></pre></div>
-<pre><code>##   estimate estimate1 estimate2 statistic     p.value parameter  conf.low
-## 1 1.357895  3.768895     2.411  5.493905 6.27202e-06  29.23352 0.8525632
-##   conf.high                  method alternative
-## 1  1.863226 Welch Two Sample t-test   two.sided</code></pre>
+<pre><code>## # A tibble: 1 x 10
+##   estimate estimate1 estimate2 statistic    p.value parameter conf.low
+##      &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;      &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
+## 1     1.36      3.77      2.41      5.49 0.00000627      29.2    0.853
+## # ... with 3 more variables: conf.high &lt;dbl&gt;, method &lt;chr&gt;,
+## #   alternative &lt;chr&gt;</code></pre>
 <p>Some cases might have fewer columns (for example, no confidence interval):</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">wt &lt;-<span class="st"> </span><span class="kw">wilcox.test</span>(wt <span class="op">~</span><span class="st"> </span>am, mtcars)
 <span class="kw"><a href="../reference/tidy.html">tidy</a></span>(wt)</code></pre></div>
-<pre><code>##   statistic      p.value                                            method
-## 1     230.5 4.347026e-05 Wilcoxon rank sum test with continuity correction
-##   alternative
-## 1   two.sided</code></pre>
+<pre><code>## # A tibble: 1 x 4
+##   statistic   p.value method                                   alternative
+##       &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;                                    &lt;chr&gt;      
+## 1      230. 0.0000435 Wilcoxon rank sum test with continuity ~ two.sided</code></pre>
 <p>Since the <code>tidy</code> output is already only one row, <code>glance</code> returns the same output:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/glance.html">glance</a></span>(tt)</code></pre></div>
-<pre><code>##   estimate estimate1 estimate2 statistic     p.value parameter  conf.low
-## 1 1.357895  3.768895     2.411  5.493905 6.27202e-06  29.23352 0.8525632
-##   conf.high                  method alternative
-## 1  1.863226 Welch Two Sample t-test   two.sided</code></pre>
+<pre><code>## # A tibble: 1 x 10
+##   estimate estimate1 estimate2 statistic    p.value parameter conf.low
+##      &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;      &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
+## 1     1.36      3.77      2.41      5.49 0.00000627      29.2    0.853
+## # ... with 3 more variables: conf.high &lt;dbl&gt;, method &lt;chr&gt;,
+## #   alternative &lt;chr&gt;</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/glance.html">glance</a></span>(wt)</code></pre></div>
-<pre><code>##   statistic      p.value                                            method
-## 1     230.5 4.347026e-05 Wilcoxon rank sum test with continuity correction
-##   alternative
-## 1   two.sided</code></pre>
+<pre><code>## # A tibble: 1 x 4
+##   statistic   p.value method                                   alternative
+##       &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;                                    &lt;chr&gt;      
+## 1      230. 0.0000435 Wilcoxon rank sum test with continuity ~ two.sided</code></pre>
 <p><code>augment</code> method is defined only for chi-squared tests, since there is no meaningful sense, for other tests, in which a hypothesis test produces output about each initial data point.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">chit &lt;-<span class="st"> </span><span class="kw">chisq.test</span>(<span class="kw">xtabs</span>(Freq <span class="op">~</span><span class="st"> </span>Sex <span class="op">+</span><span class="st"> </span>Class, <span class="dt">data =</span> <span class="kw">as.data.frame</span>(Titanic)))
 <span class="kw"><a href="../reference/tidy.html">tidy</a></span>(chit)</code></pre></div>
-<pre><code>##   statistic      p.value parameter                     method
-## 1  349.9145 1.556637e-75         3 Pearson's Chi-squared test</code></pre>
+<pre><code>## # A tibble: 1 x 4
+##   statistic  p.value parameter method                    
+##       &lt;dbl&gt;    &lt;dbl&gt;     &lt;int&gt; &lt;chr&gt;                     
+## 1      350. 1.56e-75         3 Pearson's Chi-squared test</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/augment.html">augment</a></span>(chit)</code></pre></div>
-<pre><code>##      Sex Class .observed      .prop  .row.prop .col.prop .expected
-## 1   Male   1st       180 0.08178101 0.10398614 0.5538462 255.59973
-## 2 Female   1st       145 0.06587915 0.30851064 0.4461538  69.40027
-## 3   Male   2nd       179 0.08132667 0.10340843 0.6280702 224.14130
-## 4 Female   2nd       106 0.04815993 0.22553191 0.3719298  60.85870
-## 5   Male   3rd       510 0.23171286 0.29462738 0.7223796 555.24125
-## 6 Female   3rd       196 0.08905043 0.41702128 0.2776204 150.75875
-## 7   Male  Crew       862 0.39164016 0.49797805 0.9740113 696.01772
-## 8 Female  Crew        23 0.01044980 0.04893617 0.0259887 188.98228
-##   .residuals    .stdres
-## 1  -4.728681 -11.083954
-## 2   9.074854  11.083954
-## 3  -3.015179  -6.993369
-## 4   5.786457   6.993369
-## 5  -1.919967  -5.041320
-## 6   3.684626   5.041320
-## 7   6.291462  17.607380
-## 8 -12.074000 -17.607380</code></pre>
+<pre><code>## # A tibble: 8 x 9
+##   Sex    Class .observed  .prop .row.prop .col.prop .expected .residuals
+##   &lt;fct&gt;  &lt;fct&gt;     &lt;dbl&gt;  &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;      &lt;dbl&gt;
+## 1 Male   1st         180 0.0818    0.104     0.554      256.       -4.73
+## 2 Female 1st         145 0.0659    0.309     0.446       69.4       9.07
+## 3 Male   2nd         179 0.0813    0.103     0.628      224.       -3.02
+## 4 Female 2nd         106 0.0482    0.226     0.372       60.9       5.79
+## 5 Male   3rd         510 0.232     0.295     0.722      555.       -1.92
+## 6 Female 3rd         196 0.0891    0.417     0.278      151.        3.68
+## 7 Male   Crew        862 0.392     0.498     0.974      696.        6.29
+## 8 Female Crew         23 0.0104    0.0489    0.0260     189.      -12.1 
+## # ... with 1 more variable: .stdres &lt;dbl&gt;</code></pre>
 </div>
 </div>
 <div id="conventions" class="section level2">
