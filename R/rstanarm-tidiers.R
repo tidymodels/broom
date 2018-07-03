@@ -1,4 +1,7 @@
 #' Tidying methods for an rstanarm model
+#' 
+#' `rstanarm` tidiers will soon be deprecated in `broom` and there is no
+#' ongoing development of these functions at this time.
 #'
 #' These methods tidy the estimates from [rstanarm::stanreg-objects()]
 #' (fitted model objects from the \pkg{rstanarm} package) into a summary.
