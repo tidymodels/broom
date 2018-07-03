@@ -32,20 +32,23 @@ if (require("AUC", quietly = TRUE)) {
   r <- roc(churn$predictions,churn$labels)
 
   td <- tidy(r)
-  head(td)
+  td
 
   library(ggplot2)
+  
   ggplot(td, aes(fpr, tpr)) +
     geom_line()
 
   # compare the ROC curves for two prediction algorithms
+  
   library(dplyr)
   library(tidyr)
 
   rocs <- churn \%>\%
-    tidyr::gather(algorithm, value, -labels) \%>\%
-    group_by(algorithm) \%>\%
-    do(tidy(roc(.$value, .$labels)))
+    gather(algorithm, value, -labels) \%>\%
+    nest(-algorithm) \%>\% 
+    mutate(tidy_roc = purrr::map(data, ~tidy(roc(.x$value, .x$labels)))) \%>\% 
+    unnest(tidy_roc)
 
   ggplot(rocs, aes(fpr, tpr, color = algorithm)) +
     geom_line()

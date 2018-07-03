@@ -98,34 +98,25 @@ NULL
 
 #' @rdname lm_tidiers
 #'
-#' @param conf.int whether to include a confidence interval
-#' @param conf.level confidence level of the interval, used only if
-#' `conf.int=TRUE`
-#' @param exponentiate whether to exponentiate the coefficient estimates
-#' and confidence intervals (typical for logistic regression)
-#' @param quick whether to compute a smaller and faster version, containing
-#' only the `term` and `estimate` columns.
+#' @template param_confint 
+#' @template param_quick
+#' @template param_exponentiate
 #'
 #' @details If `conf.int=TRUE`, the confidence interval is computed with
 #' the [confint()] function.
 #'
 #' While `tidy` is supported for "mlm" objects, `augment` and
 #' `glance` are not.
-#'
-#' @return `tidy.lm` returns one row for each coefficient, with five columns:
-#'   \item{term}{The term in the linear model being estimated and tested}
-#'   \item{estimate}{The estimated coefficient}
-#'   \item{std.error}{The standard error from the linear model}
-#'   \item{statistic}{t-statistic}
-#'   \item{p.value}{two-sided p-value}
-#'
-#' If the linear model is an "mlm" object (multiple linear model), there is an
+#' 
+#' @template return_tidy_regression
+#' 
+#' @return
+#' 
+#' If the linear model is an `mlm` object (multiple linear model), there is an
 #' additional column:
 #'   \item{response}{Which response column the coefficients correspond to
 #'   (typically Y1, Y2, etc)}
 #'
-#' If `conf.int=TRUE`, it also includes columns for `conf.low` and
-#' `conf.high`, computed with [confint()].
 #'
 #' @export
 tidy.lm <- function(x, conf.int = FALSE, conf.level = .95,
