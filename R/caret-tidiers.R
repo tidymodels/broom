@@ -1,16 +1,14 @@
-#' Tidying methods for confusionMatrix objects
+#' @templateVar class confusionMatrix
+#' @template title_desc_tidy
 #'
-#' Tidies the result of confusion matrix from the caret package.
-#' Only a `tidy` method is provided, not an `augment` or
-#' `glance` method.
-#'
-#' @param x An object of class `confusionMatrix`
-#' @param by_class A logical of whether to show the values for class specific
-#' quantities from the confusion matrix (specificty, sensitivity, etc.). If set
-#' to FALSE, result will only show accuracy and kappa.
-#' @param ... extra arguments (not used)
-#'
-#' @return A tibble with one or more of the following columns:
+#' @param x An object of class `confusionMatrix` created by a call to
+#'   [caret::confusionMatrix()].
+#' @param by_class Logical indicating whether or not to show performance 
+#'   measures broken down by class. Defaults to `TRUE`. When `by_class = FALSE`
+#'   only returns a tibble with accuracy and kappa statistics.
+#' @template param_unused_dots
+#' 
+#' @return A [tibble::tibble] with one or more of the following columns:
 #'   \item{term}{The name of a statistic from the confusion matrix}
 #'   \item{class}{Which class the term is a measurement of}
 #'   \item{estimate}{The value of the statistic}
@@ -20,23 +18,38 @@
 #'
 #' @examples
 #'
-#' \dontrun{
-#' # 2 class confusion matrix
-#' cm2 <- caret::confusionMatrix(factor(rbinom(100,1,.5)),factor(rbinom(100,1,.5)))
-#' tidy(cm2)
-#' tidy(cm2, by_class = FALSE) # only shows accuracy and kappa
-#'
-#' # confusion matrix with more than 2 classes
-#' cm <- caret::confusionMatrix(factor(rbinom(100,2,.5)),factor(rbinom(100,2,.5)))
-#' tidy(cm)
-#' tidy(cm, by_class = FALSE) # only shows accuracy and kappa
+#' if (requireNamespace("caret", quietly = TRUE)) {
+#' 
+#'   set.seed(27)
+#'   
+#'   two_class_sample1 <- as.factor(sample(letters[1:2], 100, TRUE))
+#'   two_class_sample2 <- as.factor(sample(letters[1:2], 100, TRUE))
+#'   
+#'   two_class_cm <- caret::confusionMatrix(
+#'     two_class_sample1,
+#'     two_class_sample2
+#'   )
+#'   
+#'   tidy(two_class_cm)
+#'   tidy(two_class_cm, by_class = FALSE)
+#'   
+#'   # multiclass example
+#'   
+#'   six_class_sample1 <- as.factor(sample(letters[1:6], 100, TRUE))
+#'   six_class_sample2 <- as.factor(sample(letters[1:6], 100, TRUE))
+#'   
+#'   six_class_cm <- caret::confusionMatrix(
+#'     six_class_sample1,
+#'     six_class_sample2
+#'   )
+#'   
+#'   tidy(six_class_cm)
+#'   tidy(six_class_cm, by_class = FALSE)
 #' }
-#'
-#' @name caret_tidiers
-NULL
-
-#' @name caret_tidiers
+#' 
+#' @aliases caret_tidiers confusionMatrix_tidiers
 #' @export
+#' @seealso [tidy()], [caret::confusionMatrix()]
 tidy.confusionMatrix <- function(x, by_class = TRUE, ...) {
   cm <- as.list(x$overall)
   nms_cm <- stringr::str_to_lower(names(cm)[1:2])

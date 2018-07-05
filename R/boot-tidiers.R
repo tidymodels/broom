@@ -1,20 +1,18 @@
-#' Tidying methods for bootstrap computations
+#' @templateVar class boot
+#' @template title_desc_tidy
 #'
-#' Tidying methods for "boot" objects from the "boot" package.
+#' @param x A [boot::boot()] object.
+#' @template param_confint
+#' @param conf.method Passed to the `type` argument of [boot::boot.ci()]. 
+#'   Defaults to `"perc"`.
+#' @template param_unused_dots
 #'
-#' @param x [boot()] object
-#' @param conf.int whether to include a confidence interval
-#' @param conf.level confidence level for CI
-#' @param conf.method method for computing confidence intervals (see [boot.ci()])
-#' @param \dots extra arguments (not used)
-#'
-#' @return The `tidy` method returns a data frame with one row per
-#' bootstrapped statistic that was calculated, and the
-#' following columns:
-#'   \item{term}{Name of the computed statistic, if present}
-#'   \item{statistic}{The original values of the statistic}
-#'   \item{bias}{The bias of the original statistic value}
-#'   \item{std.error}{Standard error of the statistic}
+#' @return A [tibble::tibble] with one row per bootstrapped statistic and
+#'   columns:
+#'   \item{term}{Name of the computed statistic, if present.}
+#'   \item{statistic}{Original value of the statistic.}
+#'   \item{bias}{Bias of the statistic.}
+#'   \item{std.error}{Standard error of the statistic.}
 #'
 #' If weights were provided to the `boot` function, an `estimate`
 #' column is included showing the weighted bootstrap estimate, and the
@@ -23,9 +21,7 @@
 #' If there are no original statistics in the "boot" object, such as with a
 #' call to `tsboot` with `orig.t = FALSE`, the `original`
 #' and `statistic` columns are omitted, and only `estimate` and
-#' `std.error` columns shown.
-#'
-#' @name boot_tidiers
+#' `std.error` columns shown. 
 #'
 #' @examples
 #' if (require("boot")) {
@@ -45,12 +41,18 @@
 #' }
 #'
 #' @export
+#' @aliases boot_tidiers
+#' @seealso [tidy()], [boot::boot()], [boot::tsboot()], [boot::boot.ci()],
+#'   [rsample::bootstraps()]
 tidy.boot <- function(x,
                       ## is there a convention for the default value of
                       ## conf.int?
                       conf.int = FALSE,
                       conf.level = 0.95,
                       conf.method = "perc", ...) {
+  
+  # TODO: arg.match on conf.method
+  
   # calculate the bias and standard error
   # this is an adapted version of the code in print.boot, where the bias
   # and standard error are calculated

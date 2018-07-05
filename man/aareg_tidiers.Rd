@@ -3,7 +3,6 @@
 \name{aareg_tidiers}
 \alias{aareg_tidiers}
 \alias{tidy.aareg}
-\alias{aareg_tidiers}
 \alias{glance.aareg}
 \title{Tidiers for aareg objects}
 \usage{

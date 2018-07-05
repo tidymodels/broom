@@ -8,7 +8,8 @@
 \usage{
 \method{tidy}{garch}(x, ...)
 
-\method{glance}{garch}(x, test = c("box-ljung-test", "jarque-bera-test"), ...)
+\method{glance}{garch}(x, test = c("box-ljung-test", "jarque-bera-test"),
+  ...)
 }
 \arguments{
 \item{x}{garch object}

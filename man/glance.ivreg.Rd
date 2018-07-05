@@ -45,8 +45,9 @@ If \code{diagnostics = TRUE}, will also return the following columns:
 Description of what a \code{glance} method does goes here.
 }
 \seealso{
-\code{\link[=glance]{glance()}}
+\code{\link[=glance]{glance()}}, \code{\link[AER:ivreg]{AER::ivreg()}}
 
 Other ivreg tidiers: \code{\link{augment.ivreg}},
   \code{\link{tidy.ivreg}}
 }
+\concept{ivreg tidiers}

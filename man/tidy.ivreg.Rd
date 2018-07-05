@@ -41,18 +41,16 @@ term. Included only if \code{conf.int = TRUE}.}
 }
 \description{
 Description of what a \code{tidy} method does goes here.
-
-Tidy beta regression objects into summarized coefficients, add their fitted values and residuals, or find their model parameters.
 }
 \examples{
 
 if (require("AER", quietly = TRUE)) {
     data("CigarettesSW", package = "AER")
-    CigarettesSW$rprice <- with(CigarettesSW, price/cpi)
-    CigarettesSW$rincome <- with(CigarettesSW, income/population/cpi)
-    CigarettesSW$tdiff <- with(CigarettesSW, (taxs - tax)/cpi)
-    ivr <- ivreg(log(packs) ~ log(rprice) + log(rincome) | log(rincome) + tdiff + I(tax/cpi),
-          data = CigarettesSW, subset = year == "1995")
+    ivr <- ivreg(
+      log(packs) ~ income | population,
+      data = CigarettesSW,
+      subset = year == "1995"
+    )
 
     summary(ivr)
 
@@ -67,8 +65,9 @@ if (require("AER", quietly = TRUE)) {
 
 }
 \seealso{
-\code{\link[=tidy]{tidy()}}
+\code{\link[=tidy]{tidy()}}, \code{\link[AER:ivreg]{AER::ivreg()}}
 
 Other ivreg tidiers: \code{\link{augment.ivreg}},
   \code{\link{glance.ivreg}}
 }
+\concept{ivreg tidiers}

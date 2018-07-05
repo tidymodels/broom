@@ -14,8 +14,8 @@
 
 \method{tidy}{summary.lm}(x, ...)
 
-\method{augment}{lm}(x, data = stats::model.frame(x), newdata, type.predict,
-  type.residuals, ...)
+\method{augment}{lm}(x, data = stats::model.frame(x), newdata,
+  type.predict, type.residuals, ...)
 
 \method{glance}{lm}(x, ...)
 

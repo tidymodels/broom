@@ -1,18 +1,16 @@
-#' Tidiers for objects from the AUC package
+#' @templateVar class roc
+#' @template title_desc_tidy
 #'
-#' Tidy objects returned from [AUC::roc()]. This can be used to,
-#' for example, draw ROC curves in ggplot2.
+#' @param x An `roc` object returned from a call to [AUC::roc()].
+#' @template param_unused_dots
 #'
-#' @param x Object of class `roc`.
-#' @param ... Additional arguments (not used).
-#'
-#' @return A tibble with three columns:
-#'   \item{cutoff}{The cutoff of the prediction scores used
-#'   for classification}
-#'   \item{tpr}{The resulting true positive rate at that cutoff}
-#'   \item{fpr}{The resulting false positive rate at that cutoff}
-#'
-#' If the labels had names, those are added as an "instance" column.
+#' @return A [tibble::tibble()] with three columns:
+#'   \item{cutoff}{The cutoff used for classification. Observations with
+#'     predicted probabilities above this value were assigned class 1, and
+#'     observations with predicted probabilities below this value were
+#'     assigned class 0.}
+#'   \item{tpr}{The true positive rate at the given cutoff.}
+#'   \item{fpr}{The false positive rate at the given cutoff.}
 #'
 #' @examples
 #'
@@ -43,9 +41,9 @@
 #'     geom_line()
 #' }
 #'
-#' @name auc_tidiers
-#'
 #' @export
+#' @aliases auc_tidiers roc_tidiers
+#' @seealso [tidy()], [AUC::roc()]
 tidy.roc <- function(x, ...) {
   as_tibble(unclass(x))
 }

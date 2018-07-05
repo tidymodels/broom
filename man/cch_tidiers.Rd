@@ -22,13 +22,13 @@ All tidying methods return a data.frame without rownames, whose
 structure depends on the method chosen.
 
 \code{tidy} returns a data.frame with one row for each term
-  \item{term}{name of term}
-  \item{estimate}{estimate of coefficient}
-  \item{std.error}{standard error}
-  \item{statistic}{Z statistic}
-  \item{p.value}{p-value}
-  \item{conf.low}{low end of confidence interval}
-  \item{conf.high}{high end of confidence interval}
+\item{term}{name of term}
+\item{estimate}{estimate of coefficient}
+\item{std.error}{standard error}
+\item{statistic}{Z statistic}
+\item{p.value}{p-value}
+\item{conf.low}{low end of confidence interval}
+\item{conf.high}{high end of confidence interval}
 
 \code{glance} returns a one-row data.frame with the following
 columns:

@@ -7,8 +7,8 @@
 \alias{glance.felm}
 \title{Tidying methods for models with multiple group fixed effects}
 \usage{
-\method{tidy}{felm}(x, conf.int = FALSE, conf.level = 0.95, fe = FALSE,
-  ...)
+\method{tidy}{felm}(x, conf.int = FALSE, conf.level = 0.95,
+  fe = FALSE, ...)
 
 \method{augment}{felm}(x, data = NULL, ...)
 

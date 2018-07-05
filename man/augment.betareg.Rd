@@ -4,8 +4,8 @@
 \alias{augment.betareg}
 \title{Augment data with information from a(n) betareg object}
 \usage{
-\method{augment}{betareg}(x, data = stats::model.frame(x), newdata = NULL,
-  type.predict, type.residuals, ...)
+\method{augment}{betareg}(x, data = stats::model.frame(x),
+  newdata = NULL, type.predict, type.residuals, ...)
 }
 \arguments{
 \item{data}{A \code{\link[=data.frame]{data.frame()}} or \code{\link[tibble:tibble]{tibble::tibble()}} containing the original
@@ -40,5 +40,5 @@ each observation:
 Description of what a \code{augment} method does goes here.
 }
 \seealso{
-\code{\link[=augment]{augment()}}
+\code{\link[=augment]{augment()}}, \code{\link[betareg:betareg]{betareg::betareg()}}
 }

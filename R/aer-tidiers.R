@@ -12,11 +12,11 @@
 #'
 #' if (require("AER", quietly = TRUE)) {
 #'     data("CigarettesSW", package = "AER")
-#'     CigarettesSW$rprice <- with(CigarettesSW, price/cpi)
-#'     CigarettesSW$rincome <- with(CigarettesSW, income/population/cpi)
-#'     CigarettesSW$tdiff <- with(CigarettesSW, (taxs - tax)/cpi)
-#'     ivr <- ivreg(log(packs) ~ log(rprice) + log(rincome) | log(rincome) + tdiff + I(tax/cpi),
-#'           data = CigarettesSW, subset = year == "1995")
+#'     ivr <- ivreg(
+#'       log(packs) ~ income | population,
+#'       data = CigarettesSW,
+#'       subset = year == "1995"
+#'     )
 #'
 #'     summary(ivr)
 #'
@@ -30,7 +30,7 @@
 #' }
 #' 
 #' @export
-#' @seealso [tidy()]
+#' @seealso [tidy()], [AER::ivreg()]
 #' @family ivreg tidiers
 #' @aliases ivreg_tidiers aer_tidiers
 tidy.ivreg <- function(x,
@@ -63,7 +63,7 @@ tidy.ivreg <- function(x,
 #' @template return_augment_columns
 #'
 #' @export
-#' @seealso [augment()]
+#' @seealso [augment()], [AER::ivreg()]
 #' @family ivreg tidiers
 augment.ivreg <- function(x, data = model.frame(x), newdata, ...) {
   augment_columns(x, data, newdata)
@@ -96,7 +96,7 @@ augment.ivreg <- function(x, data = model.frame(x), newdata, ...) {
 #'   \item{p.value.weakinst}{P-value for weak instruments test}
 #'
 #' @export
-#' @seealso [glance()]
+#' @seealso [glance()], [AER::ivreg()]
 #' @family ivreg tidiers
 glance.ivreg <- function(x, diagnostics = FALSE, ...) {
   

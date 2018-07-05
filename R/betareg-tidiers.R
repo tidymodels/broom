@@ -33,8 +33,9 @@
 #' }
 #'
 #' @export
-#' @seealso [tidy()]
+#' @seealso [tidy()], [betareg::betareg()]
 #' @family betareg tidiers
+#' @aliases betareg_tidiers
 tidy.betareg <- function(x, conf.int = FALSE, conf.level = .95, ...) {
   ret <- purrr::map_df(
     coef(summary(x)),
@@ -66,7 +67,7 @@ tidy.betareg <- function(x, conf.int = FALSE, conf.level = .95, ...) {
 #'   \item{.resid}{Residuals}
 #'   \item{.cooksd}{Cooks distance, [cooks.distance()]}
 #'
-#' @seealso [augment()]
+#' @seealso [augment()], [betareg::betareg()]
 #' @export
 augment.betareg <- function(x, data = stats::model.frame(x), newdata = NULL,
                             type.predict, type.residuals, ...) {
@@ -81,6 +82,9 @@ augment.betareg <- function(x, data = stats::model.frame(x), newdata = NULL,
 }
 
 
+#' @templateVar class betareg
+#' @template title_desc_glance
+#' 
 #' @return `glance` returns a one-row tibble with columns:
 #'   \item{pseudo.r.squared}{the deviance of the null model}
 #'   \item{logLik}{the data's log-likelihood under the model}
@@ -89,7 +93,7 @@ augment.betareg <- function(x, data = stats::model.frame(x), newdata = NULL,
 #'   \item{df.residual}{residual degrees of freedom}
 #'   \item{df.null}{degrees of freedom under the null}
 #'
-#' @seealso [glance()]
+#' @seealso [glance()], [betareg::betareg()]
 #' @export
 glance.betareg <- function(x, ...) {
   s <- summary(x)

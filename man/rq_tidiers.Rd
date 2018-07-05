@@ -19,8 +19,8 @@
 
 \method{augment}{nlrq}(x, ...)
 
-\method{tidy}{rq}(x, se.type = "rank", conf.int = TRUE, conf.level = 0.95,
-  alpha = 1 - conf.level, ...)
+\method{tidy}{rq}(x, se.type = "rank", conf.int = TRUE,
+  conf.level = 0.95, alpha = 1 - conf.level, ...)
 
 \method{glance}{rq}(x, ...)
 
@@ -130,8 +130,8 @@ If \code{se.type != 'rank'} and \code{conf.int = TRUE}, confidence intervals
 are standard t based intervals.
 
 Only models with a single \code{tau} value may be passed.
-For multiple values, please use a \code{\link[purrr:map]{purrr::map()}} workflow instead, e.g.\preformatted{taus %>%
-  map(function(tau_val) rq(y ~ x, tau = tau_val)) %>%
+For multiple values, please use a \code{\link[purrr:map]{purrr::map()}} workflow instead, e.g.\preformatted{taus \%>\%
+  map(function(tau_val) rq(y ~ x, tau = tau_val)) \%>\%
   map_dfr(glance)
 }
 }

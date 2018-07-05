@@ -43,8 +43,9 @@ data has been passed to \code{augment} via the \code{data} argument.}
 Description of what a \code{augment} method does goes here.
 }
 \seealso{
-\code{\link[=augment]{augment()}}
+\code{\link[=augment]{augment()}}, \code{\link[AER:ivreg]{AER::ivreg()}}
 
 Other ivreg tidiers: \code{\link{glance.ivreg}},
   \code{\link{tidy.ivreg}}
 }
+\concept{ivreg tidiers}

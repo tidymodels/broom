@@ -24,10 +24,6 @@ This code originates from Hadley Wickham (with a few small
 corrections) here:
 
 https://github.com/hadley/dplyr/issues/269
-
-Some examples can be found at
-
-https://github.com/dgrtwo/broom/blob/master/vignettes/bootstrapping.Rmd
 }
 \examples{
 

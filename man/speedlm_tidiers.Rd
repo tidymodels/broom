@@ -11,8 +11,8 @@
 
 \method{glance}{speedlm}(x, ...)
 
-\method{augment}{speedlm}(x, data = stats::model.frame(x), newdata = data,
-  ...)
+\method{augment}{speedlm}(x, data = stats::model.frame(x),
+  newdata = data, ...)
 }
 \arguments{
 \item{x}{speedlm object}
