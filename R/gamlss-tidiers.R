@@ -1,29 +1,35 @@
-#' Tidying methods for gamlss objects
+#' @templateVar class gamlss
+#' @template title_desc_tidy
 #'
-#' Tidying methods for "gamlss" objects from the gamlss package.
-#'
-#' @param x A "gamlss" object
-#' @param quick Whether to perform a fast version, and return only the coefficients
-#' @param ... Extra arguments (not used)
-#'
-#' @name gamlss_tidiers
-#'
-#' @template boilerplate
-#'
-#' @return A data.frame with one row for each coefficient, containing columns
+#' @param x A `gamlss` object returned from [gamlss::gamlss()].
+#' @template param_quick
+#' @template param_unused_dots
+#' 
+#' @return A [tibble::tibble] with one row for each coefficient, containing columns
 #'   \item{parameter}{Type of coefficient being estimated: `mu`, `sigma`,
-#'   `nu`, or `tau`}
-#'   \item{term}{The term in the model being estimated and tested}
-#'   \item{estimate}{The estimated coefficient}
-#'   \item{std.error}{The standard error from the linear model}
-#'   \item{statistic}{t-statistic}
-#'   \item{p.value}{two-sided p-value}
+#'   `nu`, or `tau`.}
+#'   \item{term}{Name of term in the model.}
+#'   \item{estimate}{Estimate coefficient of given term.}
+#'   \item{std.error}{Standard error of given term.}
+#'   \item{statistic}{T-statistic used to test hypothesis that coefficien
+#'     equals zero.}
+#'   \item{p.value}{Two sided p-value based on null hypothesis of coefficient
+#'     equaling zero.}
 #'
+#' @examples
+#' 
 #' if (requireNamespace("gamlss", quietly = TRUE)) {
-#'     data(abdom)
-#'     mod<-gamlss(y~pb(x),sigma.fo=~pb(x),family=BCT, data=abdom, method=mixed(1,20))
+#'   library(gamlss)
+#'   
+#'   g <- gamlss(
+#'     y ~ pb(x),
+#'     sigma.fo = ~ pb(x),
+#'     family = BCT,
+#'     data = abdom,
+#'     method = mixed(1, 20)
+#'   )
 #'
-#'     tidy(mod)
+#'   tidy(g)
 #' }
 #'
 #' @export

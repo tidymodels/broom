@@ -10,8 +10,9 @@
 #' @param x "emmGrid", lsmobj", or "ref.grid" object
 #' @param conf.level Level of confidence interval, used only for
 #' `emmGrid` and `lsmobj` objects
-#' @param ... Extra arguments, passed on to
-#' [emmeans::summary.emmGrid()] or [lsmeans::summary.ref.grid()]
+#' @param ... Additional arguments passed to [emmeans::summary.emmGrid()] or
+#'   [lsmeans::summary.ref.grid()]. **Cautionary note**: mispecified arguments
+#'   may be silently ignored!
 #'
 #' @return A data frame with one observation for each estimated
 #' mean, and one column for each combination of factors, along with
@@ -92,11 +93,6 @@ tidy.emmGrid <- function(x, ...) {
   tidy_emmeans(x, ...)
 }
 
-
-#' Tidy one of several object from the emmeans or lsmeans packages, which have
-#' a similar structure
-#'
-#' @noRd
 tidy_emmeans <- function(x, ...) {
   s <- summary(x, ...)
   ret <- as.data.frame(s)

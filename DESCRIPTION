@@ -73,7 +73,7 @@ Suggests:
     e1071,
     emmeans,
     ergm,
-    gam,
+    gam (>= 1.15),
     gamlss,
     gamlss.data,
     gamlss.dist,

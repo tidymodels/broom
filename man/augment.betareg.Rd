@@ -8,6 +8,8 @@
   newdata = NULL, type.predict, type.residuals, ...)
 }
 \arguments{
+\item{x}{A \code{betareg} object produced by a call to \code{\link[betareg:betareg]{betareg::betareg()}}.}
+
 \item{data}{A \code{\link[=data.frame]{data.frame()}} or \code{\link[tibble:tibble]{tibble::tibble()}} containing the original
 data that was used to produce the object \code{x}. Defaults to
 \code{stats::model.frame(x)} so that \code{augment(my_fit)} returns the augmented
@@ -28,6 +30,16 @@ sure to use arg.match here.}
 \item{type.residuals}{Character indicating type of residuals to use. TODO:
 Figure out what the options are, how they are different, and make
 sure to use arg.match here.}
+
+\item{...}{Additional arguments. Not used. Needed to match generic
+signature only. \strong{Cautionary note:} Misspelled arguments will be
+absorbed in \code{...}, where they will be ignored. If the misspelled
+argument has a default value, the default value will be used.
+For example, if you pass \code{conf.lvel = 0.9}, all computation will
+proceed using \code{conf.level = 0.95}. Additionally, if you pass
+\code{newdata = my_tibble} to an \code{\link[=augment]{augment()}} method that does not
+accept a \code{newdata} argument, it will use the default value for
+the \code{data} argument.}
 }
 \value{
 augment returns the original data, along with new columns describing

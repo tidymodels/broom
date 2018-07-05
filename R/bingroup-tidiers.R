@@ -106,7 +106,6 @@ tidy.binDesign <- function(x, ...) {
 #'
 #' @export
 #' @family bingroup tidiers
-#' @aliases bindesign_tidiers
 #' @seealso [glance()], [binGroup::binDesign()]
 glance.binDesign <- function(x, ...) {
   with(unclass(x), tibble(

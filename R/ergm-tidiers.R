@@ -1,26 +1,28 @@
-#' Tidying methods for an exponential random graph model
+#' @templateVar class ergm
+#' @template title_desc_tidy
 #'
-#' These methods tidy the coefficients of an exponential random graph model
-#' estimated with the \pkg{ergm} package into a summary, and construct
-#' a one-row glance of the model's statistics. The methods should work with
-#' any model that conforms to the \pkg{ergm} class, such as those
-#' produced from weighted networks by the \pkg{ergm.count} package.
+#' @description The methods should work with any model that conforms to 
+#' the \pkg{ergm} class, such as those produced from weighted networks by the 
+#' \pkg{ergm.count} package.
 #'
-#' @return All tidying methods return a `data.frame` without rownames.
-#' The structure depends on the method chosen.
+#' @param x An `ergm` object returned from a call to [ergm::ergm()].
+#' @template param_confint
+#' @template param_exponentiate
+#' @template param_quick
+#' @param ... Additional arguments to pass to [ergm::summary.ergm()].
+#'   **Cautionary note**: Mispecified arguments may be silently ignored.
+#' 
+#' @return A [tibble::tibble] with one row for each coefficient in the
+#'   exponential random graph model, with columns:
+#'   \item{term}{The term in the model being estimated and tested}
+#'   \item{estimate}{The estimated coefficient}
+#'   \item{std.error}{The standard error}
+#'   \item{mcmc.error}{The MCMC error}
+#'   \item{p.value}{The two-sided p-value}
 #'
-#' @references Hunter DR, Handcock MS, Butts CT, Goodreau SM, Morris M (2008b).
-#' \pkg{ergm}: A Package to Fit, Simulate and Diagnose Exponential-Family
-#' Models for Networks. *Journal of Statistical Software*, 24(3).
-#' <http://www.jstatsoft.org/v24/i03/>.
+#' If `conf.int = TRUE`, it also includes columns for `conf.low` and
+#' `conf.high`.
 #'
-#' @seealso [ergm::ergm()],
-#' [ergm::control.ergm()],
-#' [ergm::summary.ergm()]
-#'
-#' @name ergm_tidiers
-#'
-#' @param x an \pkg{ergm} object
 #' @examples
 #'
 #' \dontrun{
@@ -46,31 +48,17 @@
 #'     glance(gest, mcmc = TRUE)
 #' }
 #' }
-NULL
-
-#' @rdname ergm_tidiers
+#' 
+#' @references Hunter DR, Handcock MS, Butts CT, Goodreau SM, Morris M (2008b).
+#' \pkg{ergm}: A Package to Fit, Simulate and Diagnose Exponential-Family
+#' Models for Networks. *Journal of Statistical Software*, 24(3).
+#' <http://www.jstatsoft.org/v24/i03/>. 
 #'
-#' @param conf.int whether to include a confidence interval
-#' @param conf.level confidence level of the interval, used only if
-#' `conf.int=TRUE`
-#' @param exponentiate whether to exponentiate the coefficient estimates
-#' and confidence intervals
-#' @param quick whether to compute a smaller and faster version, containing
-#' only the `term` and `estimate` columns.
-#'
-#' @details There is no `augment` method for \pkg{ergm} objects.
-#'
-#' @return `tidy.ergm` returns one row for each coefficient, with five columns:
-#'   \item{term}{The term in the model being estimated and tested}
-#'   \item{estimate}{The estimated coefficient}
-#'   \item{std.error}{The standard error}
-#'   \item{mcmc.error}{The MCMC error}
-#'   \item{p.value}{The two-sided p-value}
-#'
-#' If `conf.int=TRUE`, it also includes columns for `conf.low` and
-#' `conf.high`.
-#'
-#' @export
+#' @export 
+#' @aliases ergm_tidiers
+#' @seealso [tidy()], [ergm::ergm()], [ergm::control.ergm()], 
+#'   [ergm::summary.ergm()]
+#' @family ergm tidiers
 tidy.ergm <- function(x, conf.int = FALSE, conf.level = .95,
                       exponentiate = FALSE, quick = FALSE, ...) {
   if (quick) {
@@ -97,13 +85,15 @@ tidy.ergm <- function(x, conf.int = FALSE, conf.level = .95,
   )
 }
 
-#' @rdname ergm_tidiers
+#' @templateVar class ergm
+#' @template title_desc_glance
 #'
-#' @param deviance whether to report null and residual deviance for the model,
-#' along with degrees of freedom; defaults to `FALSE`
-#' @param mcmc whether to report MCMC interval, burn-in and sample size used to
-#' estimate the model; defaults to `FALSE`
-#' @param ... extra arguments passed to [ergm::summary.ergm()]
+#' @inheritParams tidy.ergm
+#' @param deviance Logical indicating whether or not to report null and
+#'   residual deviance for the model, as well as degrees of freedom. Defaults
+#'   to `FALSE`.
+#' @param mcmc Logical indicating whether or not to report MCMC interval, 
+#'   burn-in and sample size used to estimate the model. Defaults to `FALSE`.
 #'
 #' @return `glance.ergm` returns a one-row data.frame with the columns
 #'   \item{independence}{Whether the model assumed dyadic independence}
@@ -112,20 +102,22 @@ tidy.ergm <- function(x, conf.int = FALSE, conf.level = .95,
 #'   \item{AIC}{The Akaike Information Criterion}
 #'   \item{BIC}{The Bayesian Information Criterion}
 #'
-#' If `deviance=TRUE`, and if the model supports it, the
+#' If `deviance = TRUE`, and if the model supports it, the
 #' data frame will also contain the columns
 #'   \item{null.deviance}{The null deviance of the model}
 #'   \item{df.null}{The degrees of freedom of the null deviance}
 #'   \item{residual.deviance}{The residual deviance of the model}
 #'   \item{df.residual}{The degrees of freedom of the residual deviance}
 #'
-#' Last, if `mcmc=TRUE`, the data frame will also contain
+#' Last, if `mcmc = TRUE`, the data frame will also contain
 #' the columns
 #'   \item{MCMC.interval}{The interval used during MCMC estimation}
 #'   \item{MCMC.burnin}{The burn-in period of the MCMC estimation}
 #'   \item{MCMC.samplesize}{The sample size used during MCMC estimation}
 #'
 #' @export
+#' @seealso [glance()], [ergm::ergm()], [ergm::summary.ergm()]
+#' @family ergm tidiers
 glance.ergm <- function(x, deviance = FALSE, mcmc = FALSE, ...) {
   # will show appropriate warnings about standard errors, pseudolikelihood etc.
   s <- ergm::summary.ergm(x, ...)
@@ -148,7 +140,6 @@ glance.ergm <- function(x, deviance = FALSE, mcmc = FALSE, ...) {
     ret$df.residual <- dyads - length(x$coef)
   }
 
-  # AIC and BIC
   ret$AIC <- tryCatch(stats::AIC(x), error = function(e) NULL)
   ret$BIC <- tryCatch(stats::BIC(x), error = function(e) NULL)
 
@@ -163,18 +154,7 @@ glance.ergm <- function(x, deviance = FALSE, mcmc = FALSE, ...) {
   as_tibble(ret)
 }
 
-#' helper function to process a tidied ergm object
-#'
-#' Optionally exponentiates the coefficients, and optionally adds
-#' a confidence interval, to a tidied ergm object.
-#'
-#' @param ret data frame with a tidied version of a coefficient matrix
-#' @param x an "ergm" object
-#' @param conf.int whether to include a confidence interval
-#' @param conf.level confidence level of the interval, used only if
-#' `conf.int=TRUE`
-#' @param exponentiate whether to exponentiate the coefficient estimates
-#' and confidence intervals (typical for logistic regression)
+# helper function
 process_ergm <- function(ret, x, conf.int = FALSE, conf.level = .95,
                          exponentiate = FALSE) {
   if (exponentiate) {

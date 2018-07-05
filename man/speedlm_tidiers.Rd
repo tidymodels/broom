@@ -29,7 +29,7 @@ structure depends on the method chosen.
 
 \code{tidy.speedlm} returns the tidied output of the
 lm with one row for each term in the formula.
-The columns match those in \link{lm_tidiers}.
+The columns match those in \code{\link[=tidy.lm]{tidy.lm()}}.
 
 \code{glance.speedlm} returns a one-row data.frame with the columns
 \item{r.squared}{The percent of variance explained by the model}
@@ -64,5 +64,5 @@ if (require("speedglm", quietly = TRUE)) {
 
 }
 \seealso{
-\link{lm_tidiers}, \link{biglm_tidiers}
+\code{\link[=tidy.lm]{tidy.lm()}}, \code{\link[=tidy.biglm]{tidy.biglm()}}
 }

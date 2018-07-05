@@ -12,11 +12,11 @@
 #'
 #' @return `tidy.speedlm` returns the tidied output of the
 #' lm with one row for each term in the formula.
-#' The columns match those in \link{lm_tidiers}.
+#' The columns match those in [tidy.lm()].
 #'
 #' @name speedlm_tidiers
 #' @inheritParams lm_tidiers
-#' @seealso \link{lm_tidiers}, \link{biglm_tidiers}
+#' @seealso [tidy.lm()], [tidy.biglm()]
 #'
 #' @examples
 #'

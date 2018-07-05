@@ -256,7 +256,7 @@ augment_columns <- function(x, data, newdata, type, type.predict = type,
 
     infl <- influence0(x, do.coef = FALSE)
     if (!is.null(infl)) {
-      if (is_mgcv(x)) {
+      if (inherits(x, "gam")) {
         ret$.hat <- infl
         ret$.sigma <- NA
       } else {

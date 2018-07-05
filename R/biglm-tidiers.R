@@ -61,6 +61,9 @@ tidy.biglm <- function(x, conf.int = FALSE, conf.level = .95,
 #' @templateVar class biglm
 #' @template title_desc_glance
 #' 
+#' @inheritParams tidy.biglm
+#' @template param_unused_dots
+#' 
 #' @return `glance.biglm` returns a one-row data frame, with columns
 #'   \item{r.squared}{The percent of variance explained by the model}
 #'   \item{AIC}{the Akaike Information Criterion}

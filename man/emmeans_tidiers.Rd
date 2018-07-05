@@ -19,8 +19,9 @@
 \item{conf.level}{Level of confidence interval, used only for
 \code{emmGrid} and \code{lsmobj} objects}
 
-\item{...}{Extra arguments, passed on to
-\code{\link[emmeans:summary.emmGrid]{emmeans::summary.emmGrid()}} or \code{\link[lsmeans:summary.ref.grid]{lsmeans::summary.ref.grid()}}}
+\item{...}{Additional arguments passed to \code{\link[emmeans:summary.emmGrid]{emmeans::summary.emmGrid()}} or
+\code{\link[lsmeans:summary.ref.grid]{lsmeans::summary.ref.grid()}}. \strong{Cautionary note}: mispecified arguments
+may be silently ignored!}
 }
 \value{
 A data frame with one observation for each estimated

@@ -6,6 +6,7 @@
 #' @param x An `ivreg` object created by a call to [AER::ivreg()].
 #' @template param_confint
 #' @template param_exponentiate
+#' @template param_unused_dots
 #' 
 #' @template return_tidy_regression
 #' @examples

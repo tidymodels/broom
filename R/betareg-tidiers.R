@@ -56,10 +56,12 @@ tidy.betareg <- function(x, conf.int = FALSE, conf.level = .95, ...) {
 #' @templateVar class betareg
 #' @template title_desc_augment
 #'
+#' @inheritParams tidy.betareg
 #' @template param_data
 #' @template param_newdata
 #' @template param_type_predict
 #' @template param_type_residuals
+#' @template param_unused_dots
 #'
 #' @return augment returns the original data, along with new columns describing
 #' each observation:
@@ -84,6 +86,9 @@ augment.betareg <- function(x, data = stats::model.frame(x), newdata = NULL,
 
 #' @templateVar class betareg
 #' @template title_desc_glance
+#' 
+#' @inheritParams tidy.betareg
+#' @template param_unused_dots
 #' 
 #' @return `glance` returns a one-row tibble with columns:
 #'   \item{pseudo.r.squared}{the deviance of the null model}

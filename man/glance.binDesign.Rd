@@ -2,7 +2,6 @@
 % Please edit documentation in R/bingroup-tidiers.R
 \name{glance.binDesign}
 \alias{glance.binDesign}
-\alias{bindesign_tidiers}
 \title{Glance at a(n) binDesign object}
 \usage{
 \method{glance}{binDesign}(x, ...)
