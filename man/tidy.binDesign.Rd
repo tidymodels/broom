@@ -35,7 +35,7 @@ if (require("binGroup", quietly = TRUE)) {
                      p.hyp = 0.1, power = .8)
 
     glance(des)
-    head(tidy(des))
+    tidy(des)
 
     # the ggplot2 equivalent of plot(des)
     library(ggplot2)

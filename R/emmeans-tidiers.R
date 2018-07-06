@@ -45,7 +45,7 @@
 #'   # reference grid; see vignette("basics", package = "emmeans")
 #'   oranges_rg1 <- ref_grid(oranges_lm1)
 #'   td <- tidy(oranges_rg1)
-#'   head(td)
+#'   td
 #'
 #'   # marginal averages
 #'   marginal <- emmeans(oranges_rg1, "day")

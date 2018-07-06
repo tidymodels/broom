@@ -40,6 +40,7 @@ Description of what a \code{tidy} method does goes here.
 
 if (requireNamespace("glmnet", quietly = TRUE)) {
 
+    library(glmnet)
     set.seed(27)
 
     nobs <- 100
@@ -52,7 +53,7 @@ if (requireNamespace("glmnet", quietly = TRUE)) {
 
     cvfit1 <- cv.glmnet(x,y)
 
-    head(tidy(cvfit1))
+    tidy(cvfit1)
     glance(cvfit1)
 
     library(ggplot2)

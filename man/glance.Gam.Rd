@@ -8,6 +8,16 @@
 }
 \arguments{
 \item{x}{A \code{gam} object returned from a call to \code{\link[mgcv:gam]{mgcv::gam()}}.}
+
+\item{...}{Additional arguments. Not used. Needed to match generic
+signature only. \strong{Cautionary note:} Misspelled arguments will be
+absorbed in \code{...}, where they will be ignored. If the misspelled
+argument has a default value, the default value will be used.
+For example, if you pass \code{conf.lvel = 0.9}, all computation will
+proceed using \code{conf.level = 0.95}. Additionally, if you pass
+\code{newdata = my_tibble} to an \code{\link[=augment]{augment()}} method that does not
+accept a \code{newdata} argument, it will use the default value for
+the \code{data} argument.}
 }
 \value{
 A one-row \link[tibble:tibble]{tibble::tibble} with columns:

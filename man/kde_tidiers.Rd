@@ -31,7 +31,7 @@ if (require("ks", quietly = TRUE)) {
   k <- kde(dat)
 
   td <- tidy(k)
-  head(td)
+  td
 
   library(ggplot2)
   ggplot(td, aes(x1, x2, fill = estimate)) +
@@ -43,7 +43,7 @@ if (require("ks", quietly = TRUE)) {
   k3 <- kde(dat3)
 
   td3 <- tidy(k3)
-  head(td3)
+  td3
 }
 
 }

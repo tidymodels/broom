@@ -27,13 +27,16 @@
 #'   
 #' @examples
 #'
-#' if (require("glmnet", quietly = TRUE)) {
+#' if (requireNamespace("glmnet", quietly = TRUE)) {
+#' 
+#'     library(glmnet)
+#'     
 #'     set.seed(2014)
 #'     x <- matrix(rnorm(100*20),100,20)
 #'     y <- rnorm(100)
 #'     fit1 <- glmnet(x,y)
 #'
-#'     head(tidy(fit1))
+#'     tidy(fit1)
 #'     glance(fit1)
 #'
 #'     library(dplyr)
@@ -50,7 +53,7 @@
 #'     # works for other types of regressions as well, such as logistic
 #'     g2 <- sample(1:2, 100, replace=TRUE)
 #'     fit2 <- glmnet(x, g2, family="binomial")
-#'     head(tidy(fit2))
+#'     tidy(fit2)
 #' }
 #'
 #' @export

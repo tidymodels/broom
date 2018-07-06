@@ -87,7 +87,7 @@ This gives you a data.frame representation. Note that the row names have been mo
 Instead of viewing the coefficients, you might be interested in the fitted values and residuals for each of the original points in the regression. For this, use `augment`, which augments the original data with information from the model:
 
 ```{r}
-head(augment(lmfit))
+augment(lmfit)
 ```
 
 Note that each of the new columns begins with a `.` (to avoid overwriting any of the original columns).
@@ -113,7 +113,7 @@ tidy(glmfit)
 ```
 
 ```{r}
-head(augment(glmfit))
+augment(glmfit)
 ```
 
 ```{r}
@@ -130,7 +130,7 @@ tidy(nlsfit)
 ```
 
 ```{r}
-head(augment(nlsfit, mtcars))
+augment(nlsfit, mtcars)
 ```
 
 ```{r}

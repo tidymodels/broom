@@ -19,7 +19,7 @@
 #'     cfit <- coxph(Surv(time, status) ~ age + sex, lung)
 #'     sfit <- survfit(cfit)
 #'
-#'     head(tidy(sfit))
+#'     tidy(sfit)
 #'     glance(sfit)
 #'
 #'     library(ggplot2)
@@ -30,8 +30,8 @@
 #'     fitCI <- survfit(Surv(stop, status * as.numeric(event), type = "mstate") ~ 1,
 #'                   data = mgus1, subset = (start == 0))
 #'     td_multi <- tidy(fitCI)
-#'     head(td_multi)
-#'     tail(td_multi)
+#'     td_multi
+#'     
 #'     ggplot(td_multi, aes(time, estimate, group = state)) +
 #'         geom_line(aes(color = state)) +
 #'         geom_ribbon(aes(ymin = conf.low, ymax = conf.high), alpha = .25)

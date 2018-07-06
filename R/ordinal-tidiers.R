@@ -62,7 +62,7 @@
 #'   tidy(clm_mod, conf.int = TRUE)
 #'   tidy(clm_mod, conf.int = TRUE, conf.type = "Wald", exponentiate = TRUE)
 #'   glance(clm_mod)
-#'   head(augment(clm_mod))
+#'   augment(clm_mod)
 #'
 #'   clm_mod2 <- clm(rating ~ temp, nominal = ~ contact, data = wine)
 #'   tidy(clm_mod2)
@@ -75,7 +75,7 @@
 #'   polr_mod <- polr(Sat ~ Infl + Type + Cont, weights = Freq, data = housing)
 #'   tidy(polr_mod, exponentiate = TRUE, conf.int = TRUE)
 #'   glance(polr_mod)
-#'   head(augment(polr_mod, type.predict = "class"))
+#'   augment(polr_mod, type.predict = "class")
 #' }
 NULL
 

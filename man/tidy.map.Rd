@@ -23,11 +23,11 @@ were renamed as "tidy."
 \examples{
 if (require("maps") && require("ggplot2")) {
     ca <- map("county", "ca", plot = FALSE, fill = TRUE)
-    head(tidy(ca))
+    tidy(ca)
     qplot(long, lat, data = ca, geom = "polygon", group = group)
 
     tx <- map("county", "texas", plot = FALSE, fill = TRUE)
-    head(tidy(tx))
+    tidy(tx)
     qplot(long, lat, data = tx, geom = "polygon", group = group,
           colour = I("white"))
 }

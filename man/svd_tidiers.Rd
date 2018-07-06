@@ -62,13 +62,13 @@ mat <- scale(as.matrix(iris[, 1:4]))
 s <- svd(mat)
 
 tidy_u <- tidy(s, matrix = "u")
-head(tidy_u)
+tidy_u
 
 tidy_d <- tidy(s, matrix = "d")
 tidy_d
 
 tidy_v <- tidy(s, matrix = "v")
-head(tidy_v)
+tidy_v
 
 library(ggplot2)
 library(dplyr)

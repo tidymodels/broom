@@ -27,7 +27,7 @@
 #'   tidy(mod, conf.int = TRUE)
 #'   tidy(mod, conf.int = TRUE, conf.level = .99)
 #'
-#'   head(augment(mod))
+#'   augment(mod)
 #'
 #'   glance(mod)
 #' }

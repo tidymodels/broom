@@ -25,7 +25,7 @@
 #'     tidy(ivr, conf.int = TRUE)
 #'     tidy(ivr, conf.int = TRUE, exponentiate = TRUE)
 #'
-#'     head(augment(ivr))
+#'     augment(ivr)
 #'
 #'     glance(ivr)
 #' }

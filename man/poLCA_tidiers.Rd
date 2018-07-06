@@ -87,7 +87,7 @@ if (require("poLCA", quietly = TRUE)) {
 
   M1
   tidy(M1)
-  head(augment(M1))
+  augment(M1)
   glance(M1)
 
   library(ggplot2)
@@ -114,7 +114,7 @@ if (require("poLCA", quietly = TRUE)) {
   nes2a <- poLCA(f2a, election, nclass = 3, nrep = 5, verbose = FALSE)
 
   td <- tidy(nes2a)
-  head(td)
+  td
 
   # show
 
@@ -124,14 +124,14 @@ if (require("poLCA", quietly = TRUE)) {
     theme(axis.text.x = element_text(angle = 90, hjust = 1))
 
   au <- augment(nes2a)
-  head(au)
+  au
   au \%>\%
     count(.class)
 
   # if the original data is provided, it leads to NAs in new columns
   # for rows that weren't predicted
   au2 <- augment(nes2a, data = election)
-  head(au2)
+  au2
   dim(au2)
 }
 

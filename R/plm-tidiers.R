@@ -30,7 +30,7 @@
 #'     tidy(zz, conf.int = TRUE)
 #'     tidy(zz, conf.int = TRUE, conf.level = .9)
 #'
-#'     head(augment(zz))
+#'     augment(zz)
 #'
 #'     glance(zz)
 #' }

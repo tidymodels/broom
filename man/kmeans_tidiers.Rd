@@ -63,7 +63,7 @@ points <- centers \%>\% group_by(cluster) \%>\%
 
 k <- kmeans(points \%>\% dplyr::select(x1, x2), 3)
 tidy(k)
-head(augment(k, points))
+augment(k, points)
 glance(k)
 
 ggplot(augment(k, points), aes(x1, x2)) +

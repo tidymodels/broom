@@ -78,10 +78,10 @@ with either the eigenvectors representing each row or each column.
 pc <- prcomp(USArrests, scale = TRUE)
 
 # information about rotation
-head(tidy(pc))
+tidy(pc)
 
 # information about samples (states)
-head(tidy(pc, "samples"))
+tidy(pc, "samples")
 
 # information about PCs
 tidy(pc, "pcs")
@@ -101,7 +101,7 @@ pc \%>\%
   ggtitle("Principal components of arrest data")
 
 au <- augment(pc, data = USArrests)
-head(au)
+au
 
 ggplot(au, aes(.fittedPC1, .fittedPC2)) +
   geom_point() +

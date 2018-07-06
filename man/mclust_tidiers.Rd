@@ -72,7 +72,7 @@ points <- centers \%>\% group_by(cluster) \%>\%
 m = Mclust(points \%>\% dplyr::select(x1, x2))
 
 tidy(m)
-head(augment(m, points))
+augment(m, points)
 glance(m)
 
 }

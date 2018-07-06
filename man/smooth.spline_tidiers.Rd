@@ -40,8 +40,8 @@ No \code{tidy} method is provided for smooth.spline objects.
 \examples{
 
 spl <- smooth.spline(mtcars$wt, mtcars$mpg, df = 4)
-head(augment(spl, mtcars))
-head(augment(spl))  # calls original columns x and y
+augment(spl, mtcars)
+augment(spl)  # calls original columns x and y
 
 library(ggplot2)
 ggplot(augment(spl, mtcars), aes(wt, mpg)) +

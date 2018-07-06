@@ -15,7 +15,7 @@
 a data frame with "x" and "y" columns
 
 d <- density(faithful$eruptions, bw = "sj")
-head(tidy(d))
+tidy(d)
 
 library(ggplot2)
 ggplot(tidy(d), aes(x, y)) + geom_line()

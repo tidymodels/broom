@@ -21,6 +21,7 @@
 #'
 #' if (requireNamespace("glmnet", quietly = TRUE)) {
 #' 
+#'     library(glmnet)
 #'     set.seed(27)
 #'
 #'     nobs <- 100
@@ -33,7 +34,7 @@
 #'
 #'     cvfit1 <- cv.glmnet(x,y)
 #'
-#'     head(tidy(cvfit1))
+#'     tidy(cvfit1)
 #'     glance(cvfit1)
 #'
 #'     library(ggplot2)

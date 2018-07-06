@@ -161,8 +161,8 @@ Data given to the `data` argument must have both the original predictors and the
 
 ```{r}
 model <- lm(speed ~ dist, data = cars)
-head(augment(model, data = cars))
-head(augment(model, newdata = cars))
+augment(model, data = cars)
+augment(model, newdata = cars)
 ```
 
 This means that many `augment(model, data = original_data)` should provide `.fitted` and `.resid` columns in most cases, whereas `augment(model, data = test_data)` only needs to a `.fitted` column, even if the response is present in `test_data`.

@@ -156,8 +156,8 @@ ggplot(d, aes(estimate, term, xmin = low, xmax = high, height = 0)) +
      geom_vline(xintercept = 0) +
      geom_errorbarh()
 
-head(augment(mod))
-head(augment(mod, mtcars))
+augment(mod)
+augment(mod, mtcars)
 
 # predict on new data
 newdata <- mtcars \%>\% head(6) \%>\% mutate(wt = wt + 1)
