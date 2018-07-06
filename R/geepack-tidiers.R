@@ -8,7 +8,7 @@
 #' @template param_unused_dots
 #'
 #' @details If `conf.int = TRUE`, the confidence interval is computed with
-#' the [confint.geeglm()] function.
+#' the an internal `confint.geeglm()` function.
 #'
 #' If you have missing values in your model data, you may need to
 #' refit the model with `na.action = na.exclude` or deal with the

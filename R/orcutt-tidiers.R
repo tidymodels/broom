@@ -1,19 +1,10 @@
-#' Tidiers for Cochrane Orcutt object
+#' @templateVar class orcutt
+#' @template title_desc_tidy_lm_wrapper
+#' 
+#' @param x An `orcutt` object returned from [orcutt::cochrane.orcutt()].
 #'
-#' Tidies a Cochrane Orcutt object, which estimates autocorrelation
-#' and beta coefficients in a linear fit.
-#'
-#' @param x An "orcutt" object returned by `cochrane.orcutt`
-#' @param ... Extra arguments passed on to [tidy.lm()]
-#'
-#' @template boilerplate
-#'
-#' @return `tidy` returns the same information as
-#' [tidy.lm()], though without confidence interval options.
-#'
-#' @return `glance`{}
-#'
-#' @name orcutt_tidiers
+#' @return `tidy` returns the same information as [tidy.lm()], 
+#' though without confidence interval options.
 #'
 #' @examples
 #'
@@ -27,16 +18,25 @@
 #'   tidy(co)
 #'   glance(co)
 #' }
-#'
+#' 
+#' @aliases orcutt_tidiers
 #' @export
+#' @family orcutt tidiers
+#' @seealso [orcutt::cochrane.orcutt()]
 tidy.orcutt <- function(x, ...) {
+  warning("deal with tidy.orcutt conf.int nonsense")
   tidy.lm(x, ...)
 }
 
 
-#' @rdname orcutt_tidiers
+#' @templateVar class orcutt
+#' @template title_desc_glance
+#' 
+#' @param x An `orcutt` object returned from [orcutt::cochrane.orcutt()].
+#' @template param_unused_dots
 #'
-#' @return `glance` returns a one-row data frame with the following columns:
+#' @return A one-row [tibble::tibble] with columns:
+#' 
 #'   \item{r.squared}{R-squared}
 #'   \item{adj.r.squared}{Adjusted R-squared}
 #'   \item{rho}{Spearman's rho autocorrelation}
@@ -47,6 +47,8 @@ tidy.orcutt <- function(x, ...) {
 #'   \item{p.value.transformed}{P-value of autocorrelation after transformation}
 #'
 #' @export
+#' @family orcutt tidiers
+#' @seealso [glance()], [orcutt::cochrane.orcutt()]
 glance.orcutt <- function(x, ...) {
   tibble(
     r.squared = x$r.squared,

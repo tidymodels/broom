@@ -1,16 +1,16 @@
-#' Tidying methods for ridgelm objects from the MASS package
-#'
-#' These methods tidies the coefficients of a ridge regression model
-#' chosen at each value of lambda into a data frame, or constructs
-#' a one-row glance of the model's choices of lambda (the ridge
-#' constant)
-#'
-#' @param x An object of class "ridgelm"
-#' @param ... extra arguments (not used)
-#'
-#' @template boilerplate
-#'
-#' @name ridgelm_tidiers
+#' @templateVar class ridgelm
+#' @template title_desc_tidy
+#' 
+#' @param x A `ridgelm` object returned from [MASS::lm.ridge()].
+#' @template param_unused_dots
+#' 
+#' @return A [tibble::tibble] with one row for each combination of lambda and
+#'   a term in the formula, with columns:
+#'   \item{lambda}{choice of lambda}
+#'   \item{GCV}{generalized cross validation value for this lambda}
+#'   \item{term}{the term in the ridge regression model being estimated}
+#'   \item{estimate}{estimate of scaled coefficient using this lambda}
+#'   \item{scale}{Scaling factor of estimated coefficient}
 #'
 #' @examples
 #'
@@ -24,28 +24,22 @@
 #'
 #' # coefficient plot
 #' library(ggplot2)
-#' ggplot(td2, aes(lambda, estimate, color = term)) + geom_line()
+#' ggplot(td2, aes(lambda, estimate, color = term)) +
+#'   geom_line()
 #'
 #' # GCV plot
-#' ggplot(td2, aes(lambda, GCV)) + geom_line()
+#' ggplot(td2, aes(lambda, GCV)) +
+#'   geom_line()
 #'
 #' # add line for the GCV minimizing estimate
-#' ggplot(td2, aes(lambda, GCV)) + geom_line() +
-#'     geom_vline(xintercept = g2$lambdaGCV, col = "red", lty = 2)
-NULL
-
-
-#' @rdname ridgelm_tidiers
-#'
-#' @return `tidy.ridgelm` returns one row for each combination of
-#' choice of lambda and term in the formula, with columns:
-#'   \item{lambda}{choice of lambda}
-#'   \item{GCV}{generalized cross validation value for this lambda}
-#'   \item{term}{the term in the ridge regression model being estimated}
-#'   \item{estimate}{estimate of scaled coefficient using this lambda}
-#'   \item{scale}{Scaling factor of estimated coefficient}
+#' ggplot(td2, aes(lambda, GCV)) + 
+#'   geom_line() +
+#'   geom_vline(xintercept = g2$lambdaGCV, col = "red", lty = 2)
 #'
 #' @export
+#' @aliases ridgelm_tidiers
+#' @family ridgelm tidiers
+#' @seealso [tidy()], [MASS::lm.ridge()]
 tidy.ridgelm <- function(x, ...) {
   if (length(x$lambda) == 1) {
     # only one choice of lambda
@@ -72,17 +66,22 @@ tidy.ridgelm <- function(x, ...) {
 }
 
 
-#' @rdname ridgelm_tidiers
+#' @templateVar class ridgelm
+#' @template title_desc_glance
+#' 
+#' @inheritParams tidy.ridgelm
 #'
-#' @return `glance.ridgelm` returns a one-row data.frame with the columns
+#' @return A one-row [tibble::tibble] with columns:
 #'   \item{kHKB}{modified HKB estimate of the ridge constant}
 #'   \item{kLW}{modified L-W estimate of the ridge constant}
 #'   \item{lambdaGCV}{choice of lambda that minimizes GCV}
 #'
-#' This is similar to the output of `select.ridgelm`, but it is returned
-#' rather than printed.
+#' @details This is similar to the output of `select.ridgelm`, but it is
+#'   returned rather than printed.
 #'
 #' @export
+#' @family ridgelm tidiers
+#' @seealso [glance()], [MASS::select.ridgelm()], [MASS::lm.ridge()]
 glance.ridgelm <- function(x, ...) {
   tibble(
     kHKB = x$kHKB, 

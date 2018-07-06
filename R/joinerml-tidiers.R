@@ -10,6 +10,7 @@
 #'   specified, calcalutes confidence intervals via the bootstrap. Defaults to
 #'   `NULL`, in which case standard errors are calculated from the 
 #'   empirical information matrix.
+#' @template param_unused_dots
 #'
 #' @template return_tidy_regression
 #'
@@ -63,7 +64,7 @@
 #' @seealso [tidy()], [joineRML::mjoint()], [joineRML::bootSE()]
 #' 
 tidy.mjoint <- function(x, component = "survival", conf.int = FALSE,
-                        conf.level = 0.95,  boot_se = NULL,...) {
+                        conf.level = 0.95,  boot_se = NULL, ...) {
   component <- match.arg(component, c("survival", "longitudinal"))
   if (!is.null(boot_se)) {
     if (!inherits(x = boot_se, what = "boot_se")) 

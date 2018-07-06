@@ -1,23 +1,15 @@
-#' Tidying methods for lavaan models
+#' @templateVar class lavaan
+#' @template title_desc_tidy
+#' 
+#' @param x A `lavaan` object, such as those return from [lavaan::cfa()],
+#'   and [lavaan::sem()].
+#' 
+#' @template param_confint
+#' @param ... Additional arguments passed to [lavaan::parameterEstimates()].
+#'   **Cautionary note**: Misspecified arguments may be silently ignored.
 #'
-#' These methods tidy the coefficients of lavaan CFA and SEM models.
-#'
-#' @param x An object of class `lavaan`, such as those from [lavaan::cfa()],
-#'   or [lavaan::sem()]
-#' @param ... For `tidy`, additional arguments passed to
-#'   [lavaan::parameterEstimates()]. Ignored for `glance`.
-#' @name lavaan_tidiers
-#'
-NULL
-
-
-#' @rdname lavaan_tidiers
-#'
-#' @param conf.int Logical indicating if a confidence intervals are desired.
-#' @param conf.level Confidence level to use. Default is 0.95.
-#'
-#' @return The `tidy` method returns a tibble with one row for each
-#'   estimated parameter and columns:
+#' @return A [tibble::tibble] with one row for each estimated parameter and
+#'   columns:
 #'  
 #'   \item{term}{The result of paste(lhs, op, rhs)}
 #'   \item{op}{The operator in the model syntax (e.g. `~~` for covariances, or
@@ -37,14 +29,22 @@ NULL
 #'     of both (continuous) observed and latent variables, but not the
 #'     variances of exogenous covariates.}
 #'   
-#' @export
 #' @examples
 #' 
 #' if (require("lavaan")) {
+#' 
+#'  library(lavaan)
+#'  
 #'  cfa.fit <- cfa('F =~ x1 + x2 + x3 + x4 + x5 + x6 + x7 + x8 + x9',
 #'                 data = HolzingerSwineford1939, group = "school")
 #'  tidy(cfa.fit)
 #' }
+#' 
+#' @export
+#' @aliases lavaan_tidiers sem_tidiers cfa_tidiers
+#' @family lavaan tidiers
+#' @seealso [tidy()], [lavaan::cfa()], [lavaan::sem()], 
+#'   [lavaan::parameterEstimates()]
 tidy.lavaan <- function(x, conf.int = TRUE, conf.level = 0.95, ...) {
   lavaan::parameterEstimates(x,
     ci = conf.int,
@@ -68,10 +68,13 @@ tidy.lavaan <- function(x, conf.int = TRUE, conf.level = 0.95, ...) {
 }
 
 
-#' @rdname lavaan_tidiers
-#'
-#' @return The `glance` method returns a single row dataset giving model fit
-#'   and related information, including:
+#' @templateVar class lavaan
+#' @template title_desc_glance
+#' 
+#' @inheritParams tidy.lavaan
+#' @template param_unused_dots
+#' 
+#' @return A one-row [tibble::tibble] with columns:
 #' 
 #'   \item{chisq}{Model chi squared}
 #'   \item{npar}{Number of parameters in the model}
@@ -91,12 +94,13 @@ tidy.lavaan <- function(x, conf.int = TRUE, conf.level = 0.95, ...) {
 #'   \item{estimator}{Estimator used}
 #'   \item{missing_method}{Method for eliminating missing data}
 #'
-#'   For further recommendations on reporting SEM and CFA models see Schreiber, J. B. (2017). Update to core reporting practices in structural equation modeling. Research in Social and Administrative Pharmacy, 13(3), 634-643. https://doi.org/10.1016/j.sapharm.2016.06.006
-#'
-#' @export
+#' For further recommendations on reporting SEM and CFA models see Schreiber, J. B. (2017). Update to core reporting practices in structural equation modeling. Research in Social and Administrative Pharmacy, 13(3), 634-643. https://doi.org/10.1016/j.sapharm.2016.06.006
+#'   
 #' @examples
 #'
 #' if (require("lavaan", quietly = TRUE)) {
+#' 
+#'  library(lavaan)
 #'
 #'  cfa.fit <- cfa(
 #'    'F =~ x1 + x2 + x3 + x4 + x5',
@@ -105,6 +109,12 @@ tidy.lavaan <- function(x, conf.int = TRUE, conf.level = 0.95, ...) {
 #'  glance(cfa.fit)
 #'
 #' }
+#'
+#' @export
+#' @family lavaan tidiers
+#' @seealso [glance()], [lavaan::cfa()], [lavaan::sem()],
+#'   [lavaan::fitmeasures()]
+#' 
 glance.lavaan <- function(x, ...) {
   x %>%
     lavaan::fitmeasures(

@@ -1,16 +1,22 @@
-#' Tidying methods for models with multiple group fixed effects
+#' @templateVar class felm
+#' @template title_desc_tidy
 #'
-#' These methods tidy the coefficients of a linear model with multiple group fixed effects
+#' @param x A `felm` object returned from [lfe::felm()].
+#' @template param_confint
+#' @param fe Logical indicating whether or not to include estimates of
+#'   fixed effects. Defaults to `FALSE`.
+#' @template param_unused_dots
 #'
-#' @template boilerplate
+#' @template return_tidy_regression
 #'
-#' @name felm_tidiers
-#'
-#' @param x felm object
-#' @param data Original data, defaults to extracting it from the model
+#' @return If `fe = TRUE`, also includes rows for for fixed effects estimates.
+#'   
 #' @examples
 #'
 #' if (require("lfe", quietly = TRUE)) {
+#' 
+#'     library(lfe)
+#'     
 #'     N=1e2
 #'     DT <- data.frame(
 #'       id = sample(5, N, TRUE),
@@ -35,28 +41,11 @@
 #'     augment(result_felm)
 #'     glance(result_felm)
 #' }
-NULL
-
-
-#' @rdname felm_tidiers
 #'
-#' @param conf.int whether to include a confidence interval
-#' @param conf.level confidence level of the interval, used only if
-#' `conf.int=TRUE`
-#' @param fe whether to include estimates of fixed effects
-#'
-#' @details If `conf.int=TRUE`, the confidence interval is computed
-#'
-#' @return `tidy.felm` returns one row for each coefficient. If `fe=TRUE`, it also includes rows for for fixed effects estimates.
-#' There are five columns:
-#'   \item{term}{The term in the linear model being estimated and tested}
-#'   \item{estimate}{The estimated coefficient}
-#'   \item{std.error}{The standard error from the linear model}
-#'   \item{statistic}{t-statistic}
-#'   \item{p.value}{two-sided p-value}
-#'
-#' If `cont.int=TRUE`, it also includes columns for `conf.low` and `conf.high`, computed with [confint()].
 #' @export
+#' @aliases felm_tidiers lfe_tidiers
+#' @family felm tidiers
+#' @seealso [tidy()], [lfe::felm()]
 tidy.felm <- function(x, conf.int = FALSE, conf.level = .95, fe = FALSE, ...) {
   nn <- c("estimate", "std.error", "statistic", "p.value")
   ret <- fix_data_frame(stats::coef(summary(x)), nn)
@@ -72,7 +61,6 @@ tidy.felm <- function(x, conf.int = FALSE, conf.level = .95, fe = FALSE, ...) {
     ret <- mutate(ret, N = NA, comp = NA)
     object <- lfe::getfe(x)
     
-    
     nn <- c("estimate", "std.error", "N", "comp")
     ret_fe <- lfe::getfe(x, se = TRUE, bN = 100) %>%
       select(effect, se, obs, comp) %>%
@@ -81,10 +69,14 @@ tidy.felm <- function(x, conf.int = FALSE, conf.level = .95, fe = FALSE, ...) {
       mutate(p.value = 2 * (1 - stats::pt(statistic, df = N)))
     
     if (conf.int) {
+      
+      crit_val_low <- stats::qnorm(1 - (1 - conf.level) / 2)
+      crit_val_high <- stats::qnorm(1 - (1 - conf.level) / 2)
+      
       ret_fe <- ret_fe %>%
         mutate(
-          conf.low = estimate - stats::qnorm(1 - (1 - conf.level) / 2) * std.error,
-          conf.high = estimate + stats::qnorm(1 - (1 - conf.level) / 2) * std.error
+          conf.low = estimate - crit_val_low * std.error,
+          conf.high = estimate +  crit_val_high * std.error
         )
     }
     ret <- rbind(ret, ret_fe)
@@ -92,14 +84,17 @@ tidy.felm <- function(x, conf.int = FALSE, conf.level = .95, fe = FALSE, ...) {
   as_tibble(ret)
 }
 
-# Things it does not do (no simple way to get it)
-# 1. does not work if new data
-# 2. does not give SE of the fit
-#' @rdname felm_tidiers
-#' @return  `augment.felm` returns  one row for each observation, with multiple columns added to the original data:
-#'   \item{.fitted}{Fitted values of model}
-#'   \item{.resid}{Residuals}
+#' @templateVar class felm
+#' @template title_desc_augment
+#' 
+#' @inheritParams tidy.felm
+#' @template param_data 
+#' 
+#' @template return_augment_columns
+#' 
 #' @export
+#' @family felm tidiers
+#' @seealso [augment()], [lfe::felm()]
 augment.felm <- function(x, data = NULL, ...) {
   
   # TODO: consider adding connencted component and fixed effect summaries
@@ -117,11 +112,13 @@ augment.felm <- function(x, data = NULL, ...) {
   mutate(data, .fitted = x$fitted.values, .resid = x$residuals)
 }
 
-#' @rdname felm_tidiers
+#' @templateVar class felm
+#' @template title_desc_glance
+#' 
+#' @inheritParams tidy.felm
 #'
-#' @param ... extra arguments (not used)
-#'
-#' @return `glance.lm` returns a one-row data.frame with the columns
+#' @return A one-row [tibble::tibble] with columns:
+#' 
 #'   \item{r.squared}{The percent of variance explained by the model}
 #'   \item{adj.r.squared}{r.squared adjusted based on the degrees of freedom}
 #'   \item{sigma}{The square root of the estimated residual variance}

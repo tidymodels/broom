@@ -2,17 +2,28 @@
 % Please edit documentation in R/kendall-tidiers.R
 \name{tidy.Kendall}
 \alias{tidy.Kendall}
-\title{Tidying methods for Kendall objects}
+\alias{Kendall_tidiers}
+\alias{kendall_tidiers}
+\title{Tidy a(n) Kendall object}
 \usage{
 \method{tidy}{Kendall}(x, ...)
 }
 \arguments{
-\item{x}{Fitted object from the Kendall package.}
+\item{x}{A \code{Kendall} object returned from a call to \code{\link[Kendall:Kendall]{Kendall::Kendall()}},
+\code{\link[Kendall:MannKendall]{Kendall::MannKendall()}}, or \code{\link[Kendall:SeasonalMannKendall]{Kendall::SeasonalMannKendall()}}.}
 
-\item{...}{Unused.}
+\item{...}{Additional arguments. Not used. Needed to match generic
+signature only. \strong{Cautionary note:} Misspelled arguments will be
+absorbed in \code{...}, where they will be ignored. If the misspelled
+argument has a default value, the default value will be used.
+For example, if you pass \code{conf.lvel = 0.9}, all computation will
+proceed using \code{conf.level = 0.95}. Additionally, if you pass
+\code{newdata = my_tibble} to an \code{\link[=augment]{augment()}} method that does not
+accept a \code{newdata} argument, it will use the default value for
+the \code{data} argument.}
 }
 \value{
-\code{tidy()} returns a \code{\link[tibble:tibble]{tibble::tibble()}} with one row and columns:
+A \link[tibble:tibble]{tibble::tibble} with one row and columns:
 
 \item{statistic}{Kendall's tau statistic.}
 \item{p.value}{two-sided p-value.}
@@ -21,29 +32,25 @@
 \item{var_kendall_score}{Variance of the kendall_score.}
 }
 \description{
-Tidies the result of an Kendall rank correlation. Works on all functions from the Kendall package.
-Only a \code{tidy()} method is provided, not an \code{augment()} or \code{glance()} method.
+Description of what a \code{tidy} method does goes here.
 }
 \examples{
 library(Kendall)
 
-### For Kendall ####
 A <- c(2.5,2.5,2.5,2.5,5,6.5,6.5,10,10,10,10,10,14,14,14,16,17)
 B <- c(1,1,1,1,2,1,1,2,1,1,1,1,1,1,2,2,2)
-f_res <- Kendall(A,B)
 
+f_res <- Kendall(A, B)
 tidy(f_res)
 
-### For MannKendall ####
 s_res <- MannKendall(B)
-
 tidy(s_res)
 
-### For SeasonalMannKendall ####
 t_res <- SeasonalMannKendall(ts(A))
-
 tidy(t_res)
+
 }
 \seealso{
-\code{\link[Kendall:Kendall]{Kendall::Kendall()}} for details on the meaning of each column and implementation.
+\code{\link[=tidy]{tidy()}}, \code{\link[Kendall:Kendall]{Kendall::Kendall()}}, \code{\link[Kendall:MannKendall]{Kendall::MannKendall()}},
+\code{\link[Kendall:SeasonalMannKendall]{Kendall::SeasonalMannKendall()}}
 }
