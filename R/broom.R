@@ -11,6 +11,8 @@
 #' @importFrom stats AIC BIC coef confint fitted logLik model.frame 
 #' @importFrom stats predict qnorm qt residuals setNames var na.omit
 #' @importFrom stats model.response
+#' 
+#' @importFrom purrr map_df
 #'
 #' @importFrom utils head
 #'

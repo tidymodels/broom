@@ -106,3 +106,4 @@ glance(fit)
 
 Other mjoint tidiers: \code{\link{glance.mjoint}}
 }
+\concept{mjoint tidiers}

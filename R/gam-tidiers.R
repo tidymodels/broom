@@ -12,14 +12,12 @@
 #'
 #' @examples
 #'
-#' if (requireNamespace("gam", quietly = TRUE)) {
-#'   data(kyphosis)
-#'   g <- gam::gam(Kyphosis ~ s(Age, 4), family = binomial, data = kyphosis)
+#' data(kyphosis)
+#' g <- gam::gam(Kyphosis ~ s(Age, 4), family = binomial, data = kyphosis)
 #'   
-#'   tidy(g)
-#'   glance(g)
-#' }
-#'
+#' tidy(g)
+#' glance(g)
+#' 
 #' @export
 #' @family Gam tidiers
 #' @aliases Gam_tidiers

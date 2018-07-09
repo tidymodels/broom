@@ -1,47 +1,38 @@
-#' Tidying methods for a speedlm model
+#' @templateVar class speedlm
+#' @template title_desc_tidy_lm_wrapper
 #'
-#' These methods tidy the coefficients of a "speedlm" object
-#' into a summary, augment the original data with information on the
-#' fitted values and residuals, and construct a one-row glance of the model's
-#' statistics.
-#'
-#'
-#' @param x speedlm object
-#'
-#' @template boilerplate
-#'
-#' @return `tidy.speedlm` returns the tidied output of the
-#' lm with one row for each term in the formula.
-#' The columns match those in [tidy.lm()].
-#'
-#' @name speedlm_tidiers
-#' @inheritParams lm_tidiers
-#' @seealso [tidy.lm()], [tidy.biglm()]
+#' @param x A `speedlm` object returned from [speedglm::speedlm()].
 #'
 #' @examples
 #'
-#' if (require("speedglm", quietly = TRUE)) {
-#'     mod <- speedglm::speedlm(mpg ~ wt + qsec, data = mtcars)
-#'     tidy(mod)
-#'     glance(mod)
-#'     augment(mod)
-#' }
+#' mod <- speedglm::speedlm(mpg ~ wt + qsec, data = mtcars)
+#' 
+#' tidy(mod)
+#' glance(mod)
+#' augment(mod)
 #'
+#' @aliases speedlm_tidiers speedglm_tidiers
 #' @export
+#' @family speedlm tidiers
+#' @seealso [speedglm::speedlm()]
 tidy.speedlm <- function(x, ...) {
   tidy.lm(x, ...)
 }
 
-#' @rdname speedlm_tidiers
+
+#' @templateVar class speedlm
+#' @template title_desc_glance
 #'
-#' @param ... extra arguments (not used)
-#'
-#' @return `glance.speedlm` returns a one-row data.frame with the columns
+#' @param x A `speedlm` object returned from [speedglm::speedlm()].
+#' @template param_unused_dots
+#' 
+#' @return A one-row [tibble::tibble] with columns:
+#' 
 #'   \item{r.squared}{The percent of variance explained by the model}
 #'   \item{adj.r.squared}{r.squared adjusted based on the degrees of freedom}
 #'   \item{statistic}{F-statistic}
 #'   \item{p.value}{p-value from the F test, describing whether the full
-#'   regression is significant}
+#'     regression is significant}
 #'   \item{df}{Degrees of freedom used by the coefficients}
 #'   \item{logLik}{the data's log-likelihood under the model}
 #'   \item{AIC}{the Akaike Information Criterion}
@@ -50,23 +41,36 @@ tidy.speedlm <- function(x, ...) {
 #'   \item{df.residual}{residual degrees of freedom}
 #'
 #' @export
+#' @family speedlm tidiers
+#' @seealso [speedglm::speedlm()]
 glance.speedlm <- function(x, ...) {
   s <- summary(x)
-  ret <- data.frame(
-    r.squared = s$r.squared, adj.r.squared = s$adj.r.squared, statistic = s$fstatistic[1],
-    p.value = s$f.pvalue, df = x$nvar
+  ret <- tibble(
+    r.squared = s$r.squared,
+    adj.r.squared = s$adj.r.squared,
+    statistic = s$fstatistic[1],
+    p.value = s$f.pvalue,
+    df = x$nvar
   )
   ret <- finish_glance(ret, x)
-  ret$deviance <- x$RSS # overwritten by finish_glance
+  ret$deviance <- x$RSS  # overwritten by finish_glance
   ret
 }
 
-#' @rdname speedlm_tidiers
-#' @param data data frame to augment
-#' @param newdata new data to use for predictions, optional
-#' @return  `augment.speedlm` returns  one row for each observation, with just one column added:
-#'   \item{.fitted}{Fitted values of model}
+#' @templateVar class speedlm
+#' @template title_desc_augment
+#'
+#' @param x A `speedlm` object returned from [speedglm::speedlm()].
+#' @template param_data
+#' @template param_newdata
+#' @template param_unused_dots
+#' 
+#' @return A [tibble::tibble] containing the original data and one additional
+#'   column `.fitted`.
+#'
 #' @export
-augment.speedlm <- function(x, data = stats::model.frame(x), newdata = data, ...) {
+#' @family speedlm tidiers
+#' @seealso [speedglm::speedlm()]
+augment.speedlm <- function(x, data = model.frame(x), newdata = data, ...) {
   augment_columns(x, data, newdata)
 }

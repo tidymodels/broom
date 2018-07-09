@@ -34,3 +34,4 @@ Description of what a \code{glance} method does goes here.
 
 Other gmm tidiers: \code{\link{tidy.gmm}}
 }
+\concept{gmm tidiers}

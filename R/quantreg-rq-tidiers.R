@@ -1,47 +1,57 @@
-#' Tidying methods for quantile regression models
-#'
-#' These methods tidy the coefficients of a quantile regression
-#' model into a summary, augment the original data with information
-#' on the fitted values and residuals, and construct a glance of
-#' the model's statistics.
-#'
-#' @template boilerplate
-#'
-#' @name rq_tidiers
-#'
-#' @param x model object returned by `rq` or `nlrq`
-#' @param data Original data, defaults to extracting it from the model
-#'
-NULL
-
-#' @rdname rq_tidiers
-#'
-#' @param se.type Type of standard errors to calculate; see `summary.rq`
-#' @param conf.int boolean; should confidence intervals be calculated, ignored
-#' if `se.type = "rank"`
-#' @param conf.level confidence level for intervals
-#' @param alpha confidence level when `se.type = "rank"`; defaults to the same
-#' as `conf.level` although the specification is inverted
-#' @param \dots other arguments passed on to `summary.rq`
+#' @templateVar class rq
+#' @template title_desc_tidy
+#' 
+#' @param x An `rq` object returned from [quantreg::rq()].
+#' @param se.type Character specifying the method to use to calculate
+#'   standard errors. Passed to [quantreg::summary.rq()] `se` argument.
+#'   Defaults to `"rank"`.
+#' @template param_confint
+#' @inheritDotParams quantreg::summary.rq
 #'
 #' @details If `se.type = "rank"` confidence intervals are calculated by 
-#' `summary.rq`. When only a single predictor is included in the model, 
-#' no confidence intervals are calculated and the confidence limits are set to NA. 
-#' If `se.type != 'rank'` and `conf.int = TRUE`, confidence intervals 
-#' are standard t based intervals.
+#'   `summary.rq`. When only a single predictor is included in the model, 
+#'   no confidence intervals are calculated and the confidence limits are
+#'   set to NA. 
+#' 
+#' @template return_tidy_regression
 #'
-#' @return `tidy.rq` returns a tibble with one row for each coefficient.
-#' The columns depend upon the confidence interval method selected.
-#'
+#' @aliases rq_tidiers quantreg_tidiers
 #' @export
-tidy.rq <- function(x, se.type = "rank", conf.int = TRUE, conf.level = 0.95, alpha = 1 - conf.level, ...) {
-  # summary.rq often issues warnings when computing standard errors
-  rq_summary <- suppressWarnings(quantreg::summary.rq(x, se = se.type, alpha = alpha, ...))
-  process_rq(rq_obj = rq_summary, se.type = se.type, conf.int = conf.int, conf.level = conf.level, ...)
+#' @seealso [tidy()], [quantreg::rq()]
+#' @family quantreg tidiers
+tidy.rq <- function(x, se.type = "rank",
+                    conf.int = TRUE, conf.level = 0.95, ...) {
+  
+  # specification for confidence level inverted for summary.rq
+  alpha <- 1 - conf.level
+  
+  # summary.rq often issues warnings when computing standard error
+  rq_summary <- suppressWarnings(
+    quantreg::summary.rq(x, se = se.type, alpha = alpha, ...)
+  )
+  
+  process_rq(
+    rq_obj = rq_summary,
+    se.type = se.type,
+    conf.int = conf.int,
+    conf.level = conf.level
+  )
 }
 
-#' @rdname rq_tidiers
+#' @templateVar class rq
+#' @template title_desc_glance
+#' 
+#' @param x An `rq` object returned from [quantreg::rq()].
+#' @template param_unused_dots
 #'
+#' @return A one-row [tibble::tibble] with columns:
+#' 
+#'  \item{tau}{quantile estimated}
+#'  \item{logLik}{the data's log-likelihood under the model}
+#'  \item{AIC}{the Akaike Information Criterion}
+#'  \item{BIC}{the Bayesian Information Criterion}
+#'  \item{df.residual}{residual degrees of freedom}
+#' 
 #' @details Only models with a single `tau` value may be passed.
 #'  For multiple values, please use a [purrr::map()] workflow instead, e.g.
 #'  ```
@@ -50,14 +60,9 @@ tidy.rq <- function(x, se.type = "rank", conf.int = TRUE, conf.level = 0.95, alp
 #'    map_dfr(glance)
 #'  ```
 #'
-#' @return `glance.rq` returns one row for each quantile (tau)
-#' with the columns:
-#'  \item{tau}{quantile estimated}
-#'  \item{logLik}{the data's log-likelihood under the model}
-#'  \item{AIC}{the Akaike Information Criterion}
-#'  \item{BIC}{the Bayesian Information Criterion}
-#'  \item{df.residual}{residual degrees of freedom}
 #' @export
+#' @seealso [glance()], [quantreg::rq()]
+#' @family quantreg tidiers
 glance.rq <- function(x, ...) {
   n <- length(fitted(x))
   s <- summary(x)
@@ -71,27 +76,32 @@ glance.rq <- function(x, ...) {
   )
 }
 
-#' @rdname rq_tidiers
+#' @templateVar class rq
+#' @template title_desc_augment
 #'
-#' @param newdata If provided, new data frame to use for predictions
+#' @param x An `rq` object returned from [quantreg::rq()].
+#' @template param_data
+#' @template param_newdata
+#' @inheritDotParams quantreg::predict.rq
+#' 
+#' @return A [tibble::tibble] with one row per obseration and columns:
+#' 
+#'   \item{.resid}{Residuals}
+#'   \item{.fitted}{Fitted quantiles of the model}
+#'   \item{.tau}{Quantile estimated}
 #'
-#' @return `augment.rq` returns a row for each original observation
-#' with the following columns added:
-#'  \item{.resid}{Residuals}
-#'  \item{.fitted}{Fitted quantiles of the model}
-#'  \item{.tau}{Quantile estimated}
+#'   Depending on the arguments passed on to `predict.rq` via `...`,
+#'   a confidence interval is also calculated on the fitted values resulting in
+#'   columns:
+#'     \item{.conf.low}{Lower confidence interval value}
+#'     \item{.conf.high}{Upper confidence interval value}
 #'
-#'  Depending on the arguments passed on to `predict.rq` via `\dots`
-#'  a confidence interval is also calculated on the fitted values resulting in
-#'  columns:
-#'      \item{.conf.low}{Lower confidence interval value}
-#'      \item{.conf.high}{Upper confidence interval value}
-#'
-#'  See `predict.rq` for details on additional arguments to specify
-#'  confidence intervals. `predict.rq` does not provide confidence intervals
-#'  when `newdata` is provided.
+#'   `predict.rq` does not provide confidence intervals when `newdata`
+#'    is provided.
 #'
 #' @export
+#' @seealso [augment], [quantreg::rq()], [quantreg::predict.rq()]
+#' @family quantreg tidiers
 augment.rq <- function(x, data = model.frame(x), newdata = NULL, ...) {
   args <- list(...)
   force_newdata <- FALSE
@@ -122,23 +132,13 @@ augment.rq <- function(x, data = model.frame(x), newdata = NULL, ...) {
   }
 }
 
-#' Helper function for tidy.rq and tidy.rqs
-#'
-#' See documentation for `summary.rq` for complete description
-#' of the options for `se.type`, `conf.int`, etc.
-#'
-#' @param rq_obj an object returned by `summary.rq` or `summary.rqs`
-#' @param se.type type of standard errors used in `summary.rq` or `summary.rqs`
-#' @param conf.int whether to include a confidence interval
-#' @param conf.level confidence level for confidence interval
-#' @param \dots currently unused
 process_rq <- function(rq_obj, se.type = "rank",
                        conf.int = TRUE,
-                       conf.level = 0.95, ...) {
+                       conf.level = 0.95) {
   nn <- c("estimate", "std.error", "statistic", "p.value")
   co <- as.data.frame(rq_obj[["coefficients"]])
   if (se.type == "rank") {
-    # if only a single predictor is included, confidence interval is not calculated
+    # if only a single predictor is included, confidence interval not calculated
     # set to NA to preserve dimensions of object
     if (1 == ncol(co)) {
       co <- cbind(co, NA, NA)

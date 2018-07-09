@@ -42,3 +42,4 @@ Description of what a \code{augment} method does goes here.
 
 Other mclust tidiers: \code{\link{tidy.Mclust}}
 }
+\concept{mclust tidiers}

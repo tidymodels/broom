@@ -1,41 +1,36 @@
-#' Tidiers for panel regression linear models
-#'
-#' @param x a "plm" object representing a panel object
-#' @param data original dataset
-#' @param conf.int whether to include a confidence interval
-#' @param conf.level confidence level of the interval, used only if
-#' `conf.int=TRUE`
-#' @param exponentiate whether to exponentiate the coefficient estimates
-#' and confidence intervals
-#'
-#' @template boilerplate
-#'
-#' @return `tidy.plm` returns a data frame with one row per
-#' coefficient, of the same form as [tidy.lm()].
-#'
-#' @seealso [lm_tidiers()]
-#'
-#' @name plm_tidiers
+#' @templateVar class plm
+#' @template title_desc_tidy
+#' 
+#' @param x A `plm` objected returned by [plm::plm()].
+#' @template param_confint
+#' @template param_exponentiate
+#' @template param_unused_dots
+#' 
+#' @template return_tidy_regression
 #'
 #' @examples
 #'
-#' if (require("plm", quietly = TRUE)) {
-#'     data("Produc", package = "plm")
-#'     zz <- plm(log(gsp) ~ log(pcap) + log(pc) + log(emp) + unemp,
-#'               data = Produc, index = c("state","year"))
+#' library(plm)
+#' 
+#' data("Produc", package = "plm")
+#' zz <- plm(log(gsp) ~ log(pcap) + log(pc) + log(emp) + unemp,
+#'           data = Produc, index = c("state","year"))
 #'
-#'     summary(zz)
+#' summary(zz)
 #'
-#'     tidy(zz)
-#'     tidy(zz, conf.int = TRUE)
-#'     tidy(zz, conf.int = TRUE, conf.level = .9)
+#' tidy(zz)
+#' tidy(zz, conf.int = TRUE)
+#' tidy(zz, conf.int = TRUE, conf.level = .9)
 #'
-#'     augment(zz)
+#' augment(zz)
 #'
-#'     glance(zz)
+#' glance(zz)
 #' }
 #'
+#' @aliases plm_tidiers
 #' @export
+#' @seealso [tidy()], [plm::plm()], [tidy.lm()]
+#' @family plm tidiers
 tidy.plm <- function(x, conf.int = FALSE, conf.level = .95,
                      exponentiate = FALSE, ...) {
   tidy.lm(x,
@@ -45,15 +40,18 @@ tidy.plm <- function(x, conf.int = FALSE, conf.level = .95,
 }
 
 
-#' @rdname plm_tidiers
-#'
-#' @return `augment` returns a data frame with one row for each
-#' initial observation, adding the columns
-#'   \item{.fitted}{predicted (fitted) values}
-#'   \item{.resid}{residuals}
+#' @templateVar class plm
+#' @template title_desc_augment
+#' 
+#' @inheritParams tidy.plm
+#' @template param_data
+#' 
+#' @template return_augment_columns
 #'
 #' @export
-augment.plm <- function(x, data = as.data.frame(stats::model.frame(x)), ...) {
+#' @seealso [augment()], [plm::plm()]
+#' @family plm tidiers
+augment.plm <- function(x, data = model.frame(x), ...) {
   # Random effects and fixed effect (within model) have individual intercepts,
   # thus we cannot take the ususal procedure for augment().
   # Also, there is currently no predict() method for plm objects.
@@ -61,11 +59,13 @@ augment.plm <- function(x, data = as.data.frame(stats::model.frame(x)), ...) {
 }
 
 
-#' @rdname plm_tidiers
+#' @templateVar class plm
+#' @template title_desc_glance
+#' 
+#' @inheritParams tidy.plm
 #'
-#' @param ... extra arguments, not used
-#'
-#' @return `glance` returns a one-row data frame with columns
+#' @return A one-row [tibble::tibble] with columns:
+#' 
 #'   \item{r.squared}{The percent of variance explained by the model}
 #'   \item{adj.r.squared}{r.squared adjusted based on the degrees of freedom}
 #'   \item{statistic}{F-statistic}
@@ -75,6 +75,8 @@ augment.plm <- function(x, data = as.data.frame(stats::model.frame(x)), ...) {
 #'   \item{df.residual}{residual degrees of freedom}
 #'
 #' @export
+#' @seealso [glance()], [plm::plm()]
+#' @family plm tidiers
 glance.plm <- function(x, ...) {
   s <- summary(x)
   ret <- with(s, data.frame(

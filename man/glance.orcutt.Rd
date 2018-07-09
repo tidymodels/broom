@@ -39,3 +39,4 @@ Description of what a \code{glance} method does goes here.
 
 Other orcutt tidiers: \code{\link{tidy.orcutt}}
 }
+\concept{orcutt tidiers}

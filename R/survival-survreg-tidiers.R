@@ -1,41 +1,39 @@
-
-#' Tidiers for a parametric regression survival model
+#' @templateVar class survreg
+#' @template title_desc_tidy
 #'
-#' Tidies the coefficients of a parametric survival regression model,
-#' from the "survreg" function, adds fitted values and residuals, or
-#' summarizes the model statistics.
-#'
-#' @param x a "survreg" model
+#' @param x An `survreg` object returned from [survival::survreg()].
 #' @param conf.level confidence level for CI
-#' @param ... extra arguments (not used)
-#'
-#' @template boilerplate
+#' @template param_unused_dots
+#' 
+#' @template return_tidy_regression
 #'
 #' @examples
 #'
-#' if (require("survival", quietly = TRUE)) {
-#'     sr <- survreg(Surv(futime, fustat) ~ ecog.ps + rx, ovarian,
-#'            dist="exponential")
+#' library(survival)
+#' 
+#' sr <- survreg(
+#'   Surv(futime, fustat) ~ ecog.ps + rx,
+#'   ovarian,
+#'   dist = "exponential"
+#' )
 #'
-#'     td <- tidy(sr)
-#'     augment(sr, ovarian)
-#'     glance(sr)
+#' td <- tidy(sr)
+#' augment(sr, ovarian)
+#' glance(sr)
 #'
-#'     # coefficient plot
-#'     library(ggplot2)
-#'     ggplot(td, aes(estimate, term)) + geom_point() +
-#'         geom_errorbarh(aes(xmin = conf.low, xmax = conf.high), height = 0) +
-#'         geom_vline(xintercept = 0)
-#' }
+#' # coefficient plot
+#' library(ggplot2)
+#' ggplot(td, aes(estimate, term)) + 
+#'   geom_point() +
+#'   geom_errorbarh(aes(xmin = conf.low, xmax = conf.high), height = 0) +
+#'   geom_vline(xintercept = 0)
 #'
-#' @name survreg_tidiers
-
-
-#' @rdname survreg_tidiers
-#'
-#' @template coefficients
-#'
+#' @aliases survreg_tidiers
 #' @export
+#' @seealso [tidy()], [survival::survreg()]
+#' @family survreg tidiers
+#' @family survival tidiers
+#' 
 tidy.survreg <- function(x, conf.level = .95, ...) {
   s <- summary(x)
   nn <- c("estimate", "std.error", "statistic", "p.value")
@@ -50,23 +48,28 @@ tidy.survreg <- function(x, conf.level = .95, ...) {
 }
 
 
-#' @name survreg_tidiers
-#'
-#' @param data original data; if it is not provided, it is reconstructed
-#' as best as possible with [model.frame()]
-#' @param newdata New data to use for prediction; optional
-#' @param type.predict type of prediction, default "response"
-#' @param type.residuals type of residuals to calculate, default "response"
+#' @templateVar class survreg
+#' @template title_desc_augment
+#' 
+#' @param x An `survreg` object returned from [survival::survreg()].
+#' @template param_data
+#' @template param_newdata
+#' @template param_type_residuals
+#' @template param_type_predict
+#' @template param_unused_dots
 #'
 #' @template augment_NAs
 #'
-#' @return `augment` returns the original data.frame with the following
-#' additional columns:
+#' @return A [tibble::tibble] with the passed data and additional columns:
+#' 
 #'   \item{.fitted}{Fitted values of model}
 #'   \item{.se.fit}{Standard errors of fitted values}
 #'   \item{.resid}{Residuals}
 #'
 #' @export
+#' @seealso [augment()], [survival::survreg()]
+#' @family survreg tidiers
+#' @family survival tidiers
 augment.survreg <- function(x, data = NULL, newdata = NULL,
                             type.predict = "response",
                             type.residuals = "response", ...) {
@@ -81,11 +84,13 @@ augment.survreg <- function(x, data = NULL, newdata = NULL,
 }
 
 
-
-
-#' @rdname survreg_tidiers
-#'
-#' @return `glance` returns a one-row data.frame with the columns:
+#' @templateVar class survreg
+#' @template title_desc_glance
+#' 
+#' @inheritParams tidy.survreg
+#' 
+#' @return A one-row [tibble::tibble] with columns:
+#' 
 #'   \item{iter}{number of iterations}
 #'   \item{df}{degrees of freedom}
 #'   \item{statistic}{chi-squared statistic}
@@ -96,11 +101,12 @@ augment.survreg <- function(x, data = NULL, newdata = NULL,
 #'   \item{df.residual}{residual degrees of freedom}
 #'
 #' @export
+#' @seealso [glance()], [survival::survreg()]
+#' @family survreg tidiers
+#' @family survival tidiers
 glance.survreg <- function(x, ...) {
-  ret <- data.frame(iter = x$iter, df = sum(x$df))
-  
+  ret <- tibble(iter = x$iter, df = sum(x$df))
   ret$statistic <- 2 * diff(x$loglik)
   ret$p.value <- 1 - stats::pchisq(ret$statistic, sum(x$df) - x$idf)
-  
   finish_glance(ret, x)
 }

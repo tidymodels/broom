@@ -1,19 +1,13 @@
-#' Tidying methods for an htest object
+#' @templateVar class htest
+#' @template title_desc_tidy_glance
 #'
-#' Tidies hypothesis test objects, such as those from
-#' [stats::cor.test()], [stats::t.test()],
-#' [stats::wilcox.test()], and [stats::chisq.test()],
-#' into a one-row data frame.
-#'
-#' @details `augment` method is defined only for chi-squared tests,
-#' since there is no sense, for other tests, in which a hypothesis test
-#' generates one value for each observation.
-#'
-#' @param x An object of class `"htest"`
-#' @param ... extra arguments (not used)
-#'
-#' @return Both `tidy` and `glance` return the same output,
-#' a one-row data frame with one or more of the following columns:
+#' @param x An `htest` objected, such as those created by [stats::cor.test()],
+#'   [stats::t.test()], [stats::wilcox.test()], [stats::chisq.test()], etc.
+#' @template param_unused_dots
+#' 
+#' @return A one-row [tibble::tibble] with one or more of the following
+#'   columns, depending on which hypothesis test was used.
+#'   
 #'   \item{estimate}{Estimate of the effect size}
 #'   \item{statistic}{Test statistic used to compute the p-value}
 #'   \item{p.value}{P-value}
@@ -27,21 +21,6 @@
 #'   two-sample t-test}
 #'   \item{method}{Method used to compute the statistic as a string}
 #'   \item{alternative}{Alternative hypothesis as a string}
-#'
-#' Which columns are included depends on the hypothesis test used.
-#'
-#' For chi-squared tests, `augment.htest`  will returns, for each
-#' cell of the tested table, the additional columns:
-#'   \item{.observed}{Observed count}
-#'   \item{.prop}{Proportion of the total}
-#'   \item{.row.prop}{Row proportion (2 dimensions table only)}
-#'   \item{.col.prop}{Column proportion (2 dimensions table only)}
-#'   \item{.expected}{Expected count under the null hypothesis}
-#'   \item{.residuals}{Pearson residual}
-#'   \item{.stdres}{Standardized residual}
-#'
-#' See [stats::chisq.test()] for more details on
-#' how residuals are computed.
 #'
 #' @examples
 #'
@@ -63,11 +42,10 @@
 #' augment(chit)
 #'
 #' @name htest_tidiers
-NULL
-
-
-#' @rdname htest_tidiers
 #' @export
+#' @family htest tidiers
+#' @seealso [tidy()], [stats::cor.test()], [stats::t.test()],
+#'   [stats::wilcox.test()], [stats::chisq.test()]
 tidy.htest <- function(x, ...) {
   ret <- x[c("estimate", "statistic", "p.value", "parameter")]
 
@@ -115,17 +93,37 @@ tidy.htest <- function(x, ...) {
 #' @export
 glance.htest <- function(x, ...) tidy(x)
 
-#' @rdname htest_tidiers
+#' @templateVar class htest
+#' @template title_desc_augment
+#' 
+#' @inheritParams tidy.htest
+#' 
+#' @return Errors unless `x` is a chi-squared test. If `x` is a chi-squared
+#'   test, for each cell of the tested table returns columns:
+#'   
+#'   \item{.observed}{Observed count}
+#'   \item{.prop}{Proportion of the total}
+#'   \item{.row.prop}{Row proportion (2 dimensions table only)}
+#'   \item{.col.prop}{Column proportion (2 dimensions table only)}
+#'   \item{.expected}{Expected count under the null hypothesis}
+#'   \item{.residuals}{Pearson residual}
+#'   \item{.stdres}{Standardized residual}
+#'
+#' @details See [stats::chisq.test()] for more details on
+#' how residuals are computed.
+#'
 #' @export
+#' @seealso [augment()], [stats::chisq.test()]
+#' @family htest tidiers
 augment.htest <- function(x, ...) {
   if (all(c("observed", "expected", "residuals", "stdres") %in% names(x))) {
     return(augment_chisq_test(x, ...))
-  } else {
-    stop(
-      "Augment is only defined for chi squared hypothesis tests.",
-      call. = FALSE
-    )
-  }
+  } 
+  
+  stop(
+    "Augment is only defined for chi squared hypothesis tests.",
+    call. = FALSE
+  )
 }
 
 augment_chisq_test <- function(x, ...) {
@@ -156,15 +154,16 @@ augment_chisq_test <- function(x, ...) {
 
 
 
-#' tidy a pairwise hypothesis test
+#' @templateVar class pairwise.htest
+#' @template title_desc_tidy
 #'
-#' Tidy a pairwise.htest object, containing (adjusted) p-values for multiple
-#' pairwise hypothesis tests.
+#' @param x A `pairwise.htest` object such as those returned from
+#'   [stats::pairwise.t.test()] or [stats::pairwise.wilcox.test()].
+#' @template param_unused_dots
 #'
-#' @param x a "pairwise.htest" object
-#' @param ... extra arguments (not used)
-#'
-#' @return A data frame with one row per group/group comparison, with columns
+#' @return A [tibble::tibble] with one row per group/group comparison and
+#'   columns:
+#'   
 #'   \item{group1}{First group being compared}
 #'   \item{group2}{Second group being compared}
 #'   \item{p.value}{(Adjusted) p-value of comparison}
@@ -191,9 +190,11 @@ augment_chisq_test <- function(x, ...) {
 #'
 #' tidy(pairwise.wilcox.test(Petal.Length, Species))
 #'
-#' @seealso \link{pairwise.t.test}, \link{pairwise.wilcox.test}
-#'
 #' @export
+#' @seealso [stats::pairwise.t.test()], [stats::pairwise.wilcox.test()],
+#'   [tidy()]
+#' @family htest tidiers
+#' 
 tidy.pairwise.htest <- function(x, ...) {
   tibble(group1 = rownames(x$p.value)) %>%
     cbind(x$p.value) %>%
@@ -202,26 +203,29 @@ tidy.pairwise.htest <- function(x, ...) {
     as_tibble()
 }
 
-#' tidy a power.htest
+#' @templateVar class power.htest
+#' @template title_desc_tidy
 #'
-#' @param x a power.htest object
-#' @param ... extra arguments, not used
+#' @param x A `power.htest` object such as those returned from
+#'   [stats::power.t.test()].
+#' @template param_unused_dots
 #'
 #' @return A data frame with one row per parameter passed in, with
-#' columns `n`, `delta`, `sd`, `sig.level`, and
-#' `power` (from the `power.htest` object).
-#'
-#' @seealso \link{power.t.test}
-#'
+#' columns `n`, `delta`, `sd`, `sig.level`, and `power`.
+#' 
 #' @examples
 #'
 #' ptt <- power.t.test(n = 2:30, delta = 1)
 #' tidy(ptt)
 #'
 #' library(ggplot2)
-#' ggplot(tidy(ptt), aes(n, power)) + geom_line()
+#' 
+#' ggplot(tidy(ptt), aes(n, power)) +
+#'   geom_line()
 #'
 #' @export
+#' @family htest tidiers
+#' @seealso [stats::power.t.test()]
 tidy.power.htest <- function(x, ...) {
   cols <- compact(x[c("n", "delta", "sd", "sig.level", "power", "p1", "p2")])
   as_tibble(cols)

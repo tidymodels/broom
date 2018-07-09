@@ -9,7 +9,7 @@
 \alias{tidy.SpatialLinesDataFrame}
 \alias{tidy.Lines}
 \alias{tidy.Line}
-\title{tidying methods for classes from the sp package.}
+\title{Tidy a(n) SpatialPolygonsDataFrame object}
 \usage{
 \method{tidy}{SpatialPolygonsDataFrame}(x, region = NULL, ...)
 
@@ -26,26 +26,18 @@
 \method{tidy}{Line}(x, ...)
 }
 \arguments{
-\item{x}{\code{SpatialPolygonsDataFrame} to convert into a dataframe.}
+\item{x}{A \code{SpatialPolygonsDataFrame}, \code{SpatialPolygons}, \code{Polygons},
+\code{Polygon}, \code{SpatialLinesDataFrame}, \code{Lines} or \code{Line} object.}
 
 \item{region}{name of variable used to split up regions}
 
 \item{...}{not used by this method}
 }
 \description{
-Tidy classes from the sp package to allow them to be plotted using ggplot2.
-To figure out the correct variable name for region, inspect
-\code{as.data.frame(x)}.
-}
-\details{
-These functions originated in the ggplot2 package as "fortify" functions.
-}
-\examples{
-if (require("maptools")) {
-    sids <- system.file("shapes/sids.shp", package="maptools")
-    nc1 <- readShapePoly(sids,
-    proj4string = CRS("+proj=longlat +datum=NAD27"))
-    nc1_df <- tidy(nc1)
-}
+Description of what a \code{tidy} method does goes here.
 
+Note that the \pkg{sf} package now defines tidy spatial objects
+and is the recommend approach to spatial data. \code{sp} tidiers are likely
+to be deprecated in the near future in favor of \code{\link[sf:st_as_sf]{sf::st_as_sf()}}.
+Development of \code{sp} tidiers has halted in \code{broom}.
 }

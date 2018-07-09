@@ -51,3 +51,4 @@ if (require("binGroup", quietly = TRUE)) {
 Other bingroup tidiers: \code{\link{tidy.binDesign}},
   \code{\link{tidy.binWidth}}
 }
+\concept{bingroup tidiers}

@@ -35,3 +35,4 @@ Description of what a \code{glance} method does goes here.
 
 Other biglm tidiers: \code{\link{tidy.biglm}}
 }
+\concept{biglm tidiers}

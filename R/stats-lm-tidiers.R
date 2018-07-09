@@ -1,27 +1,23 @@
-#' Tidying methods for a linear model
-#'
-#' These methods tidy the coefficients of a linear model into a summary,
-#' augment the original data with information on the fitted values and
-#' residuals, and construct a one-row glance of the model's statistics.
-#'
+#' @templateVar class lm
+#' @template title_desc_tidy
+#' 
+#' @param x An `lm` object created by [stats::lm()].
+#' @template param_confint 
+#' @template param_quick
+#' @template param_exponentiate
+#' @template param_unused_dots
+#' 
+#' @template return_tidy_regression
+#' 
+#' @return If the linear model is an `mlm` object (multiple linear model),
+#'   there is an additional column:
+#' 
+#'   \item{response}{Which response column the coefficients correspond to
+#'   (typically Y1, Y2, etc)}
+#' 
 #' @details If you have missing values in your model data, you may need to refit
 #' the model with `na.action = na.exclude`.
-#'
-#' @return All tidying methods return a `data.frame` without rownames.
-#' The structure depends on the method chosen.
-#'
-#' @seealso [summary.lm()]
-#'
-#' @name lm_tidiers
-#'
-#' @param x lm object
-#' @param data Original data, defaults to the extracting it from the model
-#' @param newdata If provided, performs predictions on the new data
-#' @param type.predict Type of prediction to compute for a GLM; passed on to
-#'   [predict.glm()]
-#' @param type.residuals Type of residuals to compute for a GLM; passed on to
-#'   [residuals.glm()]
-#'
+#' 
 #' @examples
 #'
 #' library(ggplot2)
@@ -33,8 +29,12 @@
 #' glance(mod)
 #'
 #' # coefficient plot
-#' d <- tidy(mod) %>% mutate(low = estimate - std.error,
-#'                           high = estimate + std.error)
+#' d <- tidy(mod) %>% 
+#'   mutate(
+#'     low = estimate - std.error,
+#'     high = estimate + std.error
+#'   )
+#'   
 #' ggplot(d, aes(estimate, term, xmin = low, xmax = high, height = 0)) +
 #'      geom_point() +
 #'      geom_vline(xintercept = 0) +
@@ -49,36 +49,10 @@
 #'
 #' au <- augment(mod, data = mtcars)
 #'
-#' plot(mod, which = 1)
-#' qplot(.fitted, .resid, data = au) +
-#'   geom_hline(yintercept = 0) +
-#'   geom_smooth(se = FALSE)
-#' qplot(.fitted, .std.resid, data = au) +
-#'   geom_hline(yintercept = 0) +
-#'   geom_smooth(se = FALSE)
-#' qplot(.fitted, .std.resid, data = au,
-#'   colour = factor(cyl))
-#' qplot(mpg, .std.resid, data = au, colour = factor(cyl))
-#'
-#' plot(mod, which = 2)
-#' qplot(sample =.std.resid, data = au, stat = "qq") +
-#'     geom_abline()
-#'
-#' plot(mod, which = 3)
-#' qplot(.fitted, sqrt(abs(.std.resid)), data = au) + geom_smooth(se = FALSE)
-#'
-#' plot(mod, which = 4)
-#' qplot(seq_along(.cooksd), .cooksd, data = au)
-#'
-#' plot(mod, which = 5)
-#' qplot(.hat, .std.resid, data = au) + geom_smooth(se = FALSE)
 #' ggplot(au, aes(.hat, .std.resid)) +
 #'   geom_vline(size = 2, colour = "white", xintercept = 0) +
 #'   geom_hline(size = 2, colour = "white", yintercept = 0) +
 #'   geom_point() + geom_smooth(se = FALSE)
-#'
-#' qplot(.hat, .std.resid, data = au, size = .cooksd) +
-#'   geom_smooth(se = FALSE, size = 0.5)
 #'
 #' plot(mod, which = 6)
 #' ggplot(au, aes(.hat, .cooksd)) +
@@ -86,44 +60,23 @@
 #'   geom_abline(slope = seq(0, 3, by = 0.5), colour = "white") +
 #'   geom_smooth(se = FALSE) +
 #'   geom_point()
-#' qplot(.hat, .cooksd, size = .cooksd / .hat, data = au) + scale_size_area()
-#'
+#' 
 #' # column-wise models
 #' a <- matrix(rnorm(20), nrow = 10)
 #' b <- a + rnorm(length(a))
 #' result <- lm(b ~ a)
 #' tidy(result)
-NULL
-
-
-#' @rdname lm_tidiers
 #'
-#' @template param_confint 
-#' @template param_quick
-#' @template param_exponentiate
-#'
-#' @details If `conf.int=TRUE`, the confidence interval is computed with
-#' the [confint()] function.
-#'
-#' While `tidy` is supported for "mlm" objects, `augment` and
-#' `glance` are not.
-#' 
-#' @template return_tidy_regression
-#' 
-#' @return
-#' 
-#' If the linear model is an `mlm` object (multiple linear model), there is an
-#' additional column:
-#'   \item{response}{Which response column the coefficients correspond to
-#'   (typically Y1, Y2, etc)}
-#'
-#'
+#' @name  lm_tidiers
 #' @export
+#' @seealso [tidy()], [stats::summary.lm()]
+#' @family lm tiders
 tidy.lm <- function(x, conf.int = FALSE, conf.level = .95,
                     exponentiate = FALSE, quick = FALSE, ...) {
   if (quick) {
     co <- stats::coef(x)
-    ret <- data.frame(term = names(co), estimate = unname(co), stringsAsFactors = FALSE)
+    ret <- data.frame(term = names(co), estimate = unname(co),
+                      stringsAsFactors = FALSE)
     return(process_lm(ret, x, conf.int = FALSE, exponentiate = exponentiate))
   }
   s <- summary(x)
@@ -143,7 +96,7 @@ tidy.summary.lm <- function(x, ...) {
   nn <- c("estimate", "std.error", "statistic", "p.value")
   if (inherits(co, "listof")) {
     # multiple response variables
-    ret <- plyr::ldply(co, fix_data_frame, nn[1:ncol(co[[1]])],
+    ret <- map_df(co, fix_data_frame, nn[1:ncol(co[[1]])],
       .id = "response"
     )
     ret$response <- stringr::str_replace(ret$response, "Response ", "")
@@ -154,17 +107,24 @@ tidy.summary.lm <- function(x, ...) {
   as_tibble(ret)
 }
 
-
-#' @rdname lm_tidiers
-#'
+#' @templateVar class lm
+#' @template title_desc_augment
+#' 
 #' @template augment_NAs
-#'
-#' @details Code and documentation for `augment.lm` originated in the
-#' ggplot2 package, where it was called `fortify.lm`
+#' 
+#' @inheritParams tidy.lm()
+#' @template param_data
+#' @template param_newdata
+#' 
+#' @param type.predict Type of prediction to compute for a GLM; passed on to
+#'   [predict.glm()]
+#' @param type.residuals Type of residuals to compute for a GLM; passed on to
+#'   [residuals.glm()]
 #'
 #' @return When `newdata` is not supplied `augment.lm` returns
 #' one row for each observation, with seven columns added to the original
 #' data:
+#' 
 #'   \item{.hat}{Diagonal of the hat matrix}
 #'   \item{.sigma}{Estimate of residual standard deviation when
 #'     corresponding observation is dropped from model}
@@ -180,11 +140,14 @@ tidy.summary.lm <- function(x, ...) {
 #'
 #' When `newdata` is supplied, `augment.lm` returns one row for each
 #' observation, with three columns added to the new data:
+#' 
 #'   \item{.fitted}{Fitted values of model}
 #'   \item{.se.fit}{Standard errors of fitted values}
 #'   \item{.resid}{Residuals of fitted values on the new data}
 #'
 #' @export
+#' @seealso [augment()], [stats::predict.lm()]
+#' @family lm tiders
 augment.lm <- function(x, data = stats::model.frame(x), newdata,
                        type.predict, type.residuals, ...) {
   augment_columns(x, data, newdata,
@@ -194,11 +157,13 @@ augment.lm <- function(x, data = stats::model.frame(x), newdata,
 }
 
 
-#' @rdname lm_tidiers
+#' @templateVar class lm
+#' @template title_desc_glance
 #'
-#' @param ... extra arguments (not used)
+#' @inheritParams tidy.lm()
 #'
-#' @return `glance.lm` returns a one-row data.frame with the columns
+#' @return A one-row [tibble::tibble] with columns:
+#' 
 #'   \item{r.squared}{The percent of variance explained by the model}
 #'   \item{adj.r.squared}{r.squared adjusted based on the degrees of freedom}
 #'   \item{sigma}{The square root of the estimated residual variance}
@@ -212,7 +177,10 @@ augment.lm <- function(x, data = stats::model.frame(x), newdata,
 #'   \item{deviance}{deviance}
 #'   \item{df.residual}{residual degrees of freedom}
 #'
+#' @name glance_lm
 #' @export
+#' @seealso [glance()]
+#' @family lm tiders
 glance.lm <- function(x, ...) {
   # use summary.lm explicity, so that c("aov", "lm") objects can be
   # summarized and glanced at
@@ -223,7 +191,7 @@ glance.lm <- function(x, ...) {
 }
 
 
-#' @rdname lm_tidiers
+#' @rdname glance_lm
 #' @export
 glance.summary.lm <- function(x, ...) {
   ret <- with(x, cbind(
@@ -272,19 +240,8 @@ glance.mlm <- function(x, ...) {
   )
 }
 
+# TODO: the various process_* functions need to be consolidated
 
-#' helper function to process a tidied lm object
-#'
-#' Adds a confidence interval, and possibly exponentiates, a tidied
-#' object. Useful for operations shared between lm and biglm.
-#'
-#' @param ret data frame with a tidied version of a coefficient matrix
-#' @param x an "lm", "glm", "biglm", or "bigglm" object
-#' @param conf.int whether to include a confidence interval
-#' @param conf.level confidence level of the interval, used only if
-#' `conf.int=TRUE`
-#' @param exponentiate whether to exponentiate the coefficient estimates
-#' and confidence intervals (typical for logistic regression)
 process_lm <- function(ret, x, conf.int = FALSE, conf.level = .95,
                        exponentiate = FALSE) {
   if (exponentiate) {

@@ -4,25 +4,15 @@
 \alias{lm_tidiers}
 \alias{tidy.lm}
 \alias{tidy.summary.lm}
-\alias{augment.lm}
-\alias{glance.lm}
-\alias{glance.summary.lm}
-\title{Tidying methods for a linear model}
+\title{Tidy a(n) lm object}
 \usage{
 \method{tidy}{lm}(x, conf.int = FALSE, conf.level = 0.95,
   exponentiate = FALSE, quick = FALSE, ...)
 
 \method{tidy}{summary.lm}(x, ...)
-
-\method{augment}{lm}(x, data = stats::model.frame(x), newdata, type.predict,
-  type.residuals, ...)
-
-\method{glance}{lm}(x, ...)
-
-\method{glance}{summary.lm}(x, ...)
 }
 \arguments{
-\item{x}{lm object}
+\item{x}{An \code{lm} object created by \code{\link[stats:lm]{stats::lm()}}.}
 
 \item{conf.int}{Logical indicating whether or not to include a confidence
 interval in the tidied output. Defaults to \code{FALSE}.}
@@ -40,22 +30,17 @@ to \code{FALSE}.}
 columns should be returned. Often useful to avoid time consuming
 covariance calculations. Defaults to \code{FALSE}.}
 
-\item{...}{extra arguments (not used)}
-
-\item{data}{Original data, defaults to the extracting it from the model}
-
-\item{newdata}{If provided, performs predictions on the new data}
-
-\item{type.predict}{Type of prediction to compute for a GLM; passed on to
-\code{\link[=predict.glm]{predict.glm()}}}
-
-\item{type.residuals}{Type of residuals to compute for a GLM; passed on to
-\code{\link[=residuals.glm]{residuals.glm()}}}
+\item{...}{Additional arguments. Not used. Needed to match generic
+signature only. \strong{Cautionary note:} Misspelled arguments will be
+absorbed in \code{...}, where they will be ignored. If the misspelled
+argument has a default value, the default value will be used.
+For example, if you pass \code{conf.lvel = 0.9}, all computation will
+proceed using \code{conf.level = 0.95}. Additionally, if you pass
+\code{newdata = my_tibble} to an \code{\link[=augment]{augment()}} method that does not
+accept a \code{newdata} argument, it will use the default value for
+the \code{data} argument.}
 }
 \value{
-All tidying methods return a \code{data.frame} without rownames.
-The structure depends on the method chosen.
-
 A \code{\link[tibble:tibble]{tibble::tibble()}} with one row for each term in the
 regression. The tibble has columns:
 \item{term}{The name of the regression term.}
@@ -70,73 +55,18 @@ term. Included only if \code{conf.int = TRUE}.}
 \item{conf.high}{The high end of a confidence interval for the regression
 term. Included only if \code{conf.int = TRUE}.}
 
-If the linear model is an \code{mlm} object (multiple linear model), there is an
-additional column:
+If the linear model is an \code{mlm} object (multiple linear model),
+there is an additional column:
+
 \item{response}{Which response column the coefficients correspond to
 (typically Y1, Y2, etc)}
-
-When \code{newdata} is not supplied \code{augment.lm} returns
-one row for each observation, with seven columns added to the original
-data:
-\item{.hat}{Diagonal of the hat matrix}
-\item{.sigma}{Estimate of residual standard deviation when
-corresponding observation is dropped from model}
-\item{.cooksd}{Cooks distance, \code{\link[=cooks.distance]{cooks.distance()}}}
-\item{.fitted}{Fitted values of model}
-\item{.se.fit}{Standard errors of fitted values}
-\item{.resid}{Residuals}
-\item{.std.resid}{Standardised residuals}
-
-(Some unusual "lm" objects, such as "rlm" from MASS, may omit
-\code{.cooksd} and \code{.std.resid}. "gam" from mgcv omits
-\code{.sigma})
-
-When \code{newdata} is supplied, \code{augment.lm} returns one row for each
-observation, with three columns added to the new data:
-\item{.fitted}{Fitted values of model}
-\item{.se.fit}{Standard errors of fitted values}
-\item{.resid}{Residuals of fitted values on the new data}
-
-\code{glance.lm} returns a one-row data.frame with the columns
-\item{r.squared}{The percent of variance explained by the model}
-\item{adj.r.squared}{r.squared adjusted based on the degrees of freedom}
-\item{sigma}{The square root of the estimated residual variance}
-\item{statistic}{F-statistic}
-\item{p.value}{p-value from the F test, describing whether the full
-regression is significant}
-\item{df}{Degrees of freedom used by the coefficients}
-\item{logLik}{the data's log-likelihood under the model}
-\item{AIC}{the Akaike Information Criterion}
-\item{BIC}{the Bayesian Information Criterion}
-\item{deviance}{deviance}
-\item{df.residual}{residual degrees of freedom}
 }
 \description{
-These methods tidy the coefficients of a linear model into a summary,
-augment the original data with information on the fitted values and
-residuals, and construct a one-row glance of the model's statistics.
+Description of what a \code{tidy} method does goes here.
 }
 \details{
 If you have missing values in your model data, you may need to refit
 the model with \code{na.action = na.exclude}.
-
-If \code{conf.int=TRUE}, the confidence interval is computed with
-the \code{\link[=confint]{confint()}} function.
-
-While \code{tidy} is supported for "mlm" objects, \code{augment} and
-\code{glance} are not.
-
-When the modeling was performed with \code{na.action = "na.omit"}
-(as is the typical default), rows with NA in the initial data are omitted
-entirely from the augmented data frame. When the modeling was performed
-with \code{na.action = "na.exclude"}, one should provide the original data
-as a second argument, at which point the augmented data will contain those
-rows (typically with NAs in place of the new columns). If the original data
-is not provided to \code{augment} and \code{na.action = "na.exclude"}, a
-warning is raised and the incomplete rows are dropped.
-
-Code and documentation for \code{augment.lm} originated in the
-ggplot2 package, where it was called \code{fortify.lm}
 }
 \examples{
 
@@ -149,8 +79,12 @@ tidy(mod)
 glance(mod)
 
 # coefficient plot
-d <- tidy(mod) \%>\% mutate(low = estimate - std.error,
-                          high = estimate + std.error)
+d <- tidy(mod) \%>\% 
+  mutate(
+    low = estimate - std.error,
+    high = estimate + std.error
+  )
+  
 ggplot(d, aes(estimate, term, xmin = low, xmax = high, height = 0)) +
      geom_point() +
      geom_vline(xintercept = 0) +
@@ -165,36 +99,10 @@ augment(mod, newdata = newdata)
 
 au <- augment(mod, data = mtcars)
 
-plot(mod, which = 1)
-qplot(.fitted, .resid, data = au) +
-  geom_hline(yintercept = 0) +
-  geom_smooth(se = FALSE)
-qplot(.fitted, .std.resid, data = au) +
-  geom_hline(yintercept = 0) +
-  geom_smooth(se = FALSE)
-qplot(.fitted, .std.resid, data = au,
-  colour = factor(cyl))
-qplot(mpg, .std.resid, data = au, colour = factor(cyl))
-
-plot(mod, which = 2)
-qplot(sample =.std.resid, data = au, stat = "qq") +
-    geom_abline()
-
-plot(mod, which = 3)
-qplot(.fitted, sqrt(abs(.std.resid)), data = au) + geom_smooth(se = FALSE)
-
-plot(mod, which = 4)
-qplot(seq_along(.cooksd), .cooksd, data = au)
-
-plot(mod, which = 5)
-qplot(.hat, .std.resid, data = au) + geom_smooth(se = FALSE)
 ggplot(au, aes(.hat, .std.resid)) +
   geom_vline(size = 2, colour = "white", xintercept = 0) +
   geom_hline(size = 2, colour = "white", yintercept = 0) +
   geom_point() + geom_smooth(se = FALSE)
-
-qplot(.hat, .std.resid, data = au, size = .cooksd) +
-  geom_smooth(se = FALSE, size = 0.5)
 
 plot(mod, which = 6)
 ggplot(au, aes(.hat, .cooksd)) +
@@ -202,16 +110,18 @@ ggplot(au, aes(.hat, .cooksd)) +
   geom_abline(slope = seq(0, 3, by = 0.5), colour = "white") +
   geom_smooth(se = FALSE) +
   geom_point()
-qplot(.hat, .cooksd, size = .cooksd / .hat, data = au) + scale_size_area()
 
 # column-wise models
 a <- matrix(rnorm(20), nrow = 10)
 b <- a + rnorm(length(a))
 result <- lm(b ~ a)
 tidy(result)
+
 }
 \seealso{
-\code{\link[=summary.lm]{summary.lm()}}
+\code{\link[=tidy]{tidy()}}, \code{\link[stats:summary.lm]{stats::summary.lm()}}
 
-\link{na.action}
+Other lm tiders: \code{\link{augment.lm}},
+  \code{\link{glance_lm}}
 }
+\concept{lm tiders}

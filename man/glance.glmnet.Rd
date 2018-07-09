@@ -33,3 +33,4 @@ Description of what a \code{glance} method does goes here.
 Other glmnet tidiers: \code{\link{glance.cv.glmnet}},
   \code{\link{tidy.cv.glmnet}}, \code{\link{tidy.glmnet}}
 }
+\concept{glmnet tidiers}

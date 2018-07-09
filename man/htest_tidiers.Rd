@@ -4,23 +4,30 @@
 \alias{htest_tidiers}
 \alias{tidy.htest}
 \alias{glance.htest}
-\alias{augment.htest}
-\title{Tidying methods for an htest object}
+\title{Tidy/glance a(n) htest object}
 \usage{
 \method{tidy}{htest}(x, ...)
 
 \method{glance}{htest}(x, ...)
-
-\method{augment}{htest}(x, ...)
 }
 \arguments{
-\item{x}{An object of class \code{"htest"}}
+\item{x}{An \code{htest} objected, such as those created by \code{\link[stats:cor.test]{stats::cor.test()}},
+\code{\link[stats:t.test]{stats::t.test()}}, \code{\link[stats:wilcox.test]{stats::wilcox.test()}}, \code{\link[stats:chisq.test]{stats::chisq.test()}}, etc.}
 
-\item{...}{extra arguments (not used)}
+\item{...}{Additional arguments. Not used. Needed to match generic
+signature only. \strong{Cautionary note:} Misspelled arguments will be
+absorbed in \code{...}, where they will be ignored. If the misspelled
+argument has a default value, the default value will be used.
+For example, if you pass \code{conf.lvel = 0.9}, all computation will
+proceed using \code{conf.level = 0.95}. Additionally, if you pass
+\code{newdata = my_tibble} to an \code{\link[=augment]{augment()}} method that does not
+accept a \code{newdata} argument, it will use the default value for
+the \code{data} argument.}
 }
 \value{
-Both \code{tidy} and \code{glance} return the same output,
-a one-row data frame with one or more of the following columns:
+A one-row \link[tibble:tibble]{tibble::tibble} with one or more of the following
+columns, depending on which hypothesis test was used.
+
 \item{estimate}{Estimate of the effect size}
 \item{statistic}{Test statistic used to compute the p-value}
 \item{p.value}{P-value}
@@ -34,32 +41,10 @@ two-sample t-test}
 two-sample t-test}
 \item{method}{Method used to compute the statistic as a string}
 \item{alternative}{Alternative hypothesis as a string}
-
-Which columns are included depends on the hypothesis test used.
-
-For chi-squared tests, \code{augment.htest}  will returns, for each
-cell of the tested table, the additional columns:
-\item{.observed}{Observed count}
-\item{.prop}{Proportion of the total}
-\item{.row.prop}{Row proportion (2 dimensions table only)}
-\item{.col.prop}{Column proportion (2 dimensions table only)}
-\item{.expected}{Expected count under the null hypothesis}
-\item{.residuals}{Pearson residual}
-\item{.stdres}{Standardized residual}
-
-See \code{\link[stats:chisq.test]{stats::chisq.test()}} for more details on
-how residuals are computed.
 }
 \description{
-Tidies hypothesis test objects, such as those from
-\code{\link[stats:cor.test]{stats::cor.test()}}, \code{\link[stats:t.test]{stats::t.test()}},
-\code{\link[stats:wilcox.test]{stats::wilcox.test()}}, and \code{\link[stats:chisq.test]{stats::chisq.test()}},
-into a one-row data frame.
-}
-\details{
-\code{augment} method is defined only for chi-squared tests,
-since there is no sense, for other tests, in which a hypothesis test
-generates one value for each observation.
+TODO: this desc for objects whose \code{tidy} and \code{glance} methods
+are indentical
 }
 \examples{
 
@@ -81,3 +66,12 @@ tidy(chit)
 augment(chit)
 
 }
+\seealso{
+\code{\link[=tidy]{tidy()}}, \code{\link[stats:cor.test]{stats::cor.test()}}, \code{\link[stats:t.test]{stats::t.test()}},
+\code{\link[stats:wilcox.test]{stats::wilcox.test()}}, \code{\link[stats:chisq.test]{stats::chisq.test()}}
+
+Other htest tidiers: \code{\link{augment.htest}},
+  \code{\link{tidy.pairwise.htest}},
+  \code{\link{tidy.power.htest}}
+}
+\concept{htest tidiers}

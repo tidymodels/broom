@@ -19,7 +19,7 @@ tidy_svd(x, matrix = "u", ...)
 }
 \value{
 An SVD object contains a decomposition into u, d, and v matrices,
-such that\preformatted{u %*% diag(d) %*% t(v)
+such that\preformatted{u \%*\% diag(d) \%*\% t(v)
 }
 
 gives the original matrix. This tidier gives a choice of which matrix

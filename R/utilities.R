@@ -95,6 +95,7 @@ validate_augment_input <- function(model, data = NULL, newdata = NULL) {
 #' @param data A [data.frame()] or [tibble::tibble()].
 #'
 #' @return A `tibble` potentially with a `.rownames` column
+#' @noRd
 as_rw_tibble <- function(data) {
   
   # TODO: write a test for this

@@ -2,22 +2,30 @@
 % Please edit documentation in R/stats-htest-tidiers.R
 \name{tidy.power.htest}
 \alias{tidy.power.htest}
-\title{tidy a power.htest}
+\title{Tidy a(n) power.htest object}
 \usage{
 \method{tidy}{power.htest}(x, ...)
 }
 \arguments{
-\item{x}{a power.htest object}
+\item{x}{A \code{power.htest} object such as those returned from
+\code{\link[stats:power.t.test]{stats::power.t.test()}}.}
 
-\item{...}{extra arguments, not used}
+\item{...}{Additional arguments. Not used. Needed to match generic
+signature only. \strong{Cautionary note:} Misspelled arguments will be
+absorbed in \code{...}, where they will be ignored. If the misspelled
+argument has a default value, the default value will be used.
+For example, if you pass \code{conf.lvel = 0.9}, all computation will
+proceed using \code{conf.level = 0.95}. Additionally, if you pass
+\code{newdata = my_tibble} to an \code{\link[=augment]{augment()}} method that does not
+accept a \code{newdata} argument, it will use the default value for
+the \code{data} argument.}
 }
 \value{
 A data frame with one row per parameter passed in, with
-columns \code{n}, \code{delta}, \code{sd}, \code{sig.level}, and
-\code{power} (from the \code{power.htest} object).
+columns \code{n}, \code{delta}, \code{sd}, \code{sig.level}, and \code{power}.
 }
 \description{
-tidy a power.htest
+Description of what a \code{tidy} method does goes here.
 }
 \examples{
 
@@ -25,9 +33,16 @@ ptt <- power.t.test(n = 2:30, delta = 1)
 tidy(ptt)
 
 library(ggplot2)
-ggplot(tidy(ptt), aes(n, power)) + geom_line()
+
+ggplot(tidy(ptt), aes(n, power)) +
+  geom_line()
 
 }
 \seealso{
-\link{power.t.test}
+\code{\link[stats:power.t.test]{stats::power.t.test()}}
+
+Other htest tidiers: \code{\link{augment.htest}},
+  \code{\link{htest_tidiers}},
+  \code{\link{tidy.pairwise.htest}}
 }
+\concept{htest tidiers}

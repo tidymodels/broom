@@ -1,17 +1,16 @@
-#' Tidying methods for a factor analysis
+#' @templateVar class factanal
+#' @template title_desc_tidy
 #'
-#' These methods tidy the factor loadings of a factor analysis, conducted via
-#' [factanal()], into a summary, augment the original data with factor
-#' scores, and construct a one-row glance of the model's statistics.
-#'
-#' @return All tidying methods return a [tibble::tibble()] without
-#'   rownames.
-#'
-#' @name factanal_tidiers
-#'
-#' @param x [factanal()] object
-#' @param data Original data
-#' @param ... Additional arguments, not used
+#' @param x A `factanal` object created by [stats::factanal()].
+#' @template param_unused_dots
+#' 
+#' @return A [tibble::tibble] with one row for each variable used in the 
+#'   analysis and columns:
+#'   
+#'   \item{variable}{The variable being estimated in the factor analysis}
+#'   \item{uniqueness}{Proportion of residual, or unexplained variance}
+#'   \item{flX}{Factor loading of term on factor X. There will be as many
+#'     columns of this format as there were factors fitted.}
 #'
 #' @examples
 #'
@@ -20,26 +19,18 @@
 #' glance(mod)
 #' tidy(mod)
 #' augment(mod)
-#' augment(mod, mtcars)  # Must include original data if desired
+#' augment(mod, mtcars)
 #'
-NULL
-
-#' @rdname factanal_tidiers
-#'
-#' @return `tidy.factanal` returns one row for each variable used in the
-#'   analysis and the following columns:
-#'   \item{variable}{The variable being estimated in the factor analysis}
-#'   \item{uniqueness}{Proportion of residual, or unexplained variance}
-#'   \item{flX}{Factor loading of term on factor X. There will be as many columns
-#'   of this format as there were factors fitted.}
-#'
+#' @aliases factanal_tidiers
 #' @export
+#' @seealso [tidy()], [stats::factanal()]
+#' @family factanal tidiers
+#' 
 tidy.factanal <- function(x, ...) {
-  # Convert to format that we can work with
-  loadings <- stats::loadings(x)
-  class(loadings) <- "matrix"
+  
+  loadings <- as.matrix(stats::loadings(x))  # TODO: use as.matrix here?
+  # class(loadings) <- "matrix"
 
-  # Place relevant values into a tidy data frame
   tidy_df <- data.frame(
     variable = rownames(loadings),
     uniqueness = x$uniquenesses,
@@ -55,7 +46,11 @@ tidy.factanal <- function(x, ...) {
   tidy_df
 }
 
-#' @rdname factanal_tidiers
+#' @templateVar class factanal
+#' @template title_desc_augment
+#' 
+#' @inheritParams tidy.factanal
+#' @template param_data
 #'
 #' @return When `data` is not supplied `augment.factanal` returns one
 #'   row for each observation, with a factor score column added for each factor
@@ -67,7 +62,8 @@ tidy.factanal <- function(x, ...) {
 #' (`.fsX`).
 #'
 #' @export
-
+#' @seealso [augment()], [stats::factanal()]
+#' @family factanal tidiers
 augment.factanal <- function(x, data, ...) {
   scores <- x$scores
 
@@ -100,21 +96,29 @@ augment.factanal <- function(x, data, ...) {
   )
 }
 
-#' @rdname factanal_tidiers
+#' @templateVar class factanal
+#' @template title_desc_glance
+#' 
+#' @inheritParams tidy.factanal
 #'
-#' @return `glance.factanal` returns a one-row data.frame with the columns:
+#' @return A one-row [tibble::tibble] with columns:
+#' 
 #'   \item{n.factors}{The number of fitted factors}
-#'   \item{total.variance}{Total cumulative proportion of variance accounted for by all factors}
+#'   \item{total.variance}{Total cumulative proportion of variance accounted
+#'     for by all factors}
 #'   \item{statistic}{Significance-test statistic}
 #'   \item{p.value}{p-value from the significance test, describing whether the
-#'   covariance matrix estimated from the factors is significantly different
-#'   from the observed covariance matrix}
+#'     covariance matrix estimated from the factors is significantly different
+#'     from the observed covariance matrix}
 #'   \item{df}{Degrees of freedom used by the factor analysis}
 #'   \item{n}{Sample size used in the analysis}
 #'   \item{method}{The estimation method; always Maximum Likelihood, "mle"}
 #'   \item{converged}{Whether the factor analysis converged}
 #'
 #' @export
+#' 
+#' @seealso [glance()], [stats::factanal()]
+#' @family factanal tidiers
 glance.factanal <- function(x, ...) {
 
   # Compute total variance accounted for by all factors

@@ -49,7 +49,6 @@ Imports:
     dplyr,
     methods,
     nlme,
-    plyr,
     purrr,
     reshape2,
     stringr,

@@ -30,3 +30,4 @@ Description of what a \code{tidy} method does goes here.
 Other multcomp tidiers: \code{\link{tidy.cld}},
   \code{\link{tidy.confint.glht}}, \code{\link{tidy.glht}}
 }
+\concept{multcomp tidiers}

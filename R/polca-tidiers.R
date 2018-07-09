@@ -1,29 +1,18 @@
-#' Tidiers for poLCA objects
+#' @templateVar class poLCA
+#' @template title_desc_tidy
+#' 
+#' @param x A `poLCA` object returned from [poLCA::poLCA()].
+#' @template param_unused_dots
 #'
-#' Tidiers for poLCA latent class regression models. Summarize the
-#' probabilities of each outcome for each variable within each class
-#' with `tidy`, add predictions to the data with `augment`,
-#' or find the log-likelihood/AIC/BIC with `glance`.
-#'
-#' @param x A poLCA object
-#' @param data For `augment`, the original dataset used to fit
-#' the latent class model. If not given, uses manifest variables in
-#' `x$y` and, if applicable, covariates in `x$x`
-#' @param ... Extra arguments, not used
-#'
-#' @name poLCA_tidiers
-#'
-#' @template boilerplate
-#'
-#' @return `tidy` returns a data frame with one row per
-#' variable-class-outcome combination, with columns:
-#' \describe{
+#' @return A [tibble::tibble] with one row per variable-class-outcome
+#'   combination, with columns:
+#' 
 #'   \item{variable}{Manifest variable}
 #'   \item{class}{Latent class ID, an integer}
 #'   \item{outcome}{Outcome of manifest variable}
 #'   \item{estimate}{Estimated class-conditional response probability}
 #'   \item{std.error}{Standard error of estimated probability}
-#' }
+#' 
 #'
 #' @examples
 #'
@@ -85,7 +74,11 @@
 #'   dim(au2)
 #' }
 #'
+#' @aliases poLCA_tidiers
 #' @export
+#' @seealso [tidy()], [poLCA::poLCA()]
+#' @family poLCA tidiers 
+#'
 tidy.poLCA <- function(x, ...) {
   probs <- purrr::map_df(x$probs, reshape2::melt, .id = "variable") %>%
     transmute(variable,
@@ -109,16 +102,19 @@ tidy.poLCA <- function(x, ...) {
   as_tibble(probs)
 }
 
-
-#' @rdname poLCA_tidiers
+#' @templateVar class poLCA
+#' @template title_desc_augment
+#' 
+#' @inheritParams tidy.poLCA
+#' @param data The original dataset used to fit the latent class model, as
+#'   a tibble or data. If not given, uses manifest variables in
+#' `x$y` and, if applicable, covariates in `x$x`
 #'
-#' @return `augment` returns a data frame with one row
-#' for each original observation, augmented with the following
-#' columns:
-#' \describe{
+#' @return A [tibble::tibble] with one row for each original observation,
+#'   with additional columns:
+#'   
 #'   \item{.class}{Predicted class, using modal assignment}
 #'   \item{.probability}{Posterior probability of predicted class}
-#' }
 #'
 #' If the `data` argument is given, those columns are included in the output
 #' (only rows for which predictions could be made).
@@ -128,10 +124,11 @@ tidy.poLCA <- function(x, ...) {
 #'
 #' Note that while the probability of all the classes (not just the predicted
 #' modal class) can be found in the `posterior` element, these are not
-#' included in the augmented output, since it would result in potentially
-#' many additional columns, which augment tends to avoid.
+#' included in the augmented output.
 #'
 #' @export
+#' @seealso [augment()], [poLCA::poLCA()]
+#' @family poLCA tidiers
 augment.poLCA <- function(x, data = NULL, ...) {
   indices <- cbind(seq_len(nrow(x$posterior)), x$predclass)
   ret <- tibble(
@@ -156,24 +153,26 @@ augment.poLCA <- function(x, data = NULL, ...) {
   as_tibble(cbind(data, ret))
 }
 
-
-#' @rdname poLCA_tidiers
+#' @templateVar class poLCA
+#' @template title_desc_augment
+#' 
+#' @inheritParams tidy.poLCA
 #'
-#' @return `glance` returns a one-row data frame with the
-#' following columns:
-#' \describe{
+#' @return A one-row [tibble::tibble] with columns:
+#' 
 #'   \item{logLik}{the data's log-likelihood under the model}
 #'   \item{AIC}{the Akaike Information Criterion}
 #'   \item{BIC}{the Bayesian Information Criterion}
 #'   \item{g.squared}{The likelihood ratio/deviance statistic}
 #'   \item{chi.squared}{The Pearson Chi-Square goodness of fit statistic
-#'   for multiway tables}
+#'     for multiway tables}
 #'   \item{df}{Number of parameters estimated, and therefore degrees of
-#'   freedom used}
+#'     freedom used}
 #'   \item{df.residual}{Number of residual degrees of freedom left}
-#' }
 #'
 #' @export
+#' @seealso [glance()], [poLCA::poLCA()]
+#' @family poLCA tidiers
 glance.poLCA <- function(x, ...) {
   with(
     x,

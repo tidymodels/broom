@@ -1,37 +1,19 @@
-#' Tidying methods for seasonal decompositions
+#' @templateVar class decomposed.ts
+#' @template title_desc_augment
 #'
-#' These tidiers provide an `augment` method for the results of a seasonal
-#' decomposition with [stats::decompose()] or
-#' [stats::stl()].
+#' @param x A `decomposed.ts` object returned from [stats::decompose()].
+#' @template param_unused_dots
+#' 
+#' @return A [tibble::tibble] with one row for each observation in the 
+#'   original times series:
 #'
-#' The `augment` method returns the computed seasonal and trend components,
-#' as well as the "remainder" term and the seasonally adjusted (or
-#' "deseasonalised") series.
-#'
-#' @param x An object of class `"stl"` or `"decomposed.ts"`,
-#' resulting from a call to [stats::decompose()] or
-#' [stats::stl()].
-#' @param ... Extra arguments. Unused.
-#'
-#' @name decompose_tidiers
-#' @author Aaron Jacobs
-#'
-#' @seealso [stats::decompose()], [stats::stl()]
-#'
-#' @return
-#'
-#' The `augment` method returns a tidy data frame with the following
-#' columns:
-#'
-#' \describe{
 #'   \item{`.seasonal`}{The seasonal component of the decomposition.}
 #'   \item{`.trend`}{The trend component of the decomposition.}
 #'   \item{`.remainder`}{The remainder, or "random" component of the
-#'   decomposition.}
+#'     decomposition.}
 #'   \item{`.weight`}{The final robust weights (`stl` only).}
 #'   \item{`.seasadj`}{The seasonally adjusted (or "deseasonalised")
-#'   series.}
-#' }
+#'     series.}
 #'
 #' @examples
 #'
@@ -80,10 +62,10 @@
 #'     geom_line(aes(x = index, y = adjusted, colour = decomp,
 #'                   group = decomp))
 #'
-NULL
-
-#' @rdname decompose_tidiers
+#' @aliases decompose_tidiers
 #' @export
+#' @family decompose tidiers
+#' @seealso [augment()], [stats::decompose()]
 augment.decomposed.ts <- function(x, ...) {
   ret <- tibble(
     seasonal = as.numeric(x$seasonal),
@@ -100,11 +82,28 @@ augment.decomposed.ts <- function(x, ...) {
   as_tibble(ret)
 }
 
-#' @rdname decompose_tidiers
+#' @templateVar class stl
+#' @template title_desc_augment
 #'
-#' @param weights Whether to include the robust weights in the output.
+#' @param x An `stl` object returned from [stats::stl()].
+#' @param weights Logical indicating whether or not to include the robust
+#'   weights in the output.
+#' @template param_unused_dots
+#' 
+#' @return A [tibble::tibble] with one row for each observation in the 
+#'   original times series:
+#'
+#'   \item{`.seasonal`}{The seasonal component of the decomposition.}
+#'   \item{`.trend`}{The trend component of the decomposition.}
+#'   \item{`.remainder`}{The remainder, or "random" component of the
+#'     decomposition.}
+#'   \item{`.weight`}{The final robust weights, if requested.}
+#'   \item{`.seasadj`}{The seasonally adjusted (or "deseasonalised")
+#'     series.}
 #'
 #' @export
+#' @family decompose tidiers
+#' @seealso [augment()], [stats::stl()]
 augment.stl <- function(x, weights = TRUE, ...) {
   ret <- as_tibble(x$time.series)
   ret$weight <- x$weights

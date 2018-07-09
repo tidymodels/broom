@@ -53,3 +53,4 @@ glance(r)
 Other rlm tidiers: \code{\link{augment.rlm}},
   \code{\link{tidy.rlm}}
 }
+\concept{rlm tidiers}

@@ -67,8 +67,6 @@ NULL
 #'   \item{statistic}{t- or Z-statistic (`NA` for modes)}
 #'   \item{p.value}{P-value computed from t-statistic (may be missing/NA)}
 #'
-#' @importFrom plyr ldply rbind.fill
-#' @import dplyr
 #' @importFrom tidyr gather spread
 #' @importFrom nlme VarCorr ranef
 ## FIXME: is it OK/sensible to import these from (priority='recommended')
@@ -223,7 +221,7 @@ tidy.merMod <- function(x, effects = c("ran_pars", "fixed"),
     ret <- dplyr::rename(ret, group = .id)
     ret_list$ran_modes <- ret
   }
-  return(rbind.fill(ret_list))
+  bind_rows(ret_list)
 }
 
 

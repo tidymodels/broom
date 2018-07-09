@@ -35,3 +35,4 @@ Description of what a \code{glance} method does goes here.
 
 Other mjoint tidiers: \code{\link{tidy.mjoint}}
 }
+\concept{mjoint tidiers}

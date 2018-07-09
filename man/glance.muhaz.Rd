@@ -36,3 +36,4 @@ Description of what a \code{glance} method does goes here.
 
 Other muhaz tidiers: \code{\link{tidy.muhaz}}
 }
+\concept{muhaz tidiers}

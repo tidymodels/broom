@@ -2,40 +2,58 @@
 % Please edit documentation in R/stats-anova-tidiers.R
 \name{tidy.manova}
 \alias{tidy.manova}
-\title{tidy a MANOVA object}
+\title{Tidy a(n) manova object}
 \usage{
 \method{tidy}{manova}(x, test = "Pillai", ...)
 }
 \arguments{
-\item{x}{object of class "manova"}
+\item{x}{A \code{manova} object return from \code{\link[stats:manova]{stats::manova()}}.}
 
-\item{test}{one of "Pillai" (Pillai's trace), "Wilks" (Wilk's lambda), "Hotelling-Lawley" (Hotelling-Lawley trace) or "Roy" (Roy's greatest root) indicating which test statistic should be used. Defaults to "Pillai"}
+\item{test}{One of "Pillai" (Pillai's trace), "Wilks" (Wilk's lambda),
+"Hotelling-Lawley" (Hotelling-Lawley trace) or "Roy" (Roy's greatest root)
+indicating which test statistic should be used. Defaults to "Pillai".}
 
-\item{...}{additional arguments passed on to \code{summary.manova}}
+\item{...}{Arguments passed on to \code{stats::summary.manova}
+\describe{
+  \item{object}{An object of class \code{"manova"} or an \code{aov}
+    object with multiple responses.}
+  \item{test}{The name of the test statistic to be used.  Partial
+    matching is used so the name can be abbreviated.}
+  \item{intercept}{logical.  If \code{TRUE}, the intercept term is
+    included in the table.}
+  \item{tol}{tolerance to be used in deciding if the residuals are
+    rank-deficient: see \code{\link{qr}}.}
+}}
 }
 \value{
-A data.frame with the columns
-\item{term}{Term in design}
+A \link[tibble:tibble]{tibble::tibble} with columns:\preformatted{\item{term}{Term in design}
 \item{statistic}{Approximate F statistic}
 \item{num.df}{Degrees of freedom}
 \item{p.value}{P-value}
+}
 
-Depending on which test statistic is specified, one of the following columns is also included:
-\item{pillai}{Pillai's trace}
+Depending on which test statistic is specified, one of the following
+columns is also included:\preformatted{\item{pillai}{Pillai's trace}
 \item{wilks}{Wilk's lambda}
 \item{hl}{Hotelling-Lawley trace}
 \item{roy}{Roy's greatest root}
 }
+}
 \description{
-Constructs a data frame with one row for each of the terms in the model,
-containing the information from \link{summary.manova}.
+Description of what a \code{tidy} method does goes here.
 }
 \examples{
 
 npk2 <- within(npk, foo <- rnorm(24))
-npk2.aov <- manova(cbind(yield, foo) ~ block + N*P*K, npk2)
+m <- manova(cbind(yield, foo) ~ block + N * P * K, npk2)
+tidy(m) 
 
 }
 \seealso{
-\code{\link[=summary.manova]{summary.manova()}}
+\code{\link[=tidy]{tidy()}}, \code{\link[stats:summary.manova]{stats::summary.manova()}}
+
+Other anova tidiers: \code{\link{tidy.TukeyHSD}},
+  \code{\link{tidy.anova}}, \code{\link{tidy.aovlist}},
+  \code{\link{tidy.aov}}
 }
+\concept{anova tidiers}

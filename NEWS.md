@@ -54,6 +54,7 @@ Several old vignettes have also been updated:
 
 ## Other changes
 
+- The `alpha` argument has been removed from `quantreg` tidy methods
 - The `separate.levels` argument has been removed from `tidy.TukeyHSD`. To obtain the effect of `separate.levels = TRUE`, users may `tidyr::separate` after tidying. This is consistent with the `multcomp` tidier behavior.
 - The `fe.error` argument was removed from `tidy.felm`. When fixed effects are tidier, their standard errors are now always included.
 - The `diag` argument in `tidy.dist` has been renamed `diagonal`

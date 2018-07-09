@@ -7,9 +7,9 @@
 \alias{glance.merMod}
 \title{Tidying methods for mixed effects models}
 \usage{
-\method{tidy}{merMod}(x, effects = c("ran_pars", "fixed"), scales = NULL,
-  ran_prefix = NULL, conf.int = FALSE, conf.level = 0.95,
-  conf.method = "Wald", ...)
+\method{tidy}{merMod}(x, effects = c("ran_pars", "fixed"),
+  scales = NULL, ran_prefix = NULL, conf.int = FALSE,
+  conf.level = 0.95, conf.method = "Wald", ...)
 
 \method{augment}{merMod}(x, data = stats::model.frame(x), newdata, ...)
 

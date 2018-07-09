@@ -11,9 +11,17 @@
 
 \item{...}{Arguments passed on to \code{augment.lm}
 \describe{
-  \item{x}{lm object}
-  \item{data}{Original data, defaults to the extracting it from the model}
-  \item{newdata}{If provided, performs predictions on the new data}
+  \item{data}{A \code{\link[=data.frame]{data.frame()}} or \code{\link[tibble:tibble]{tibble::tibble()}} containing the original
+data that was used to produce the object \code{x}. Defaults to
+\code{stats::model.frame(x)} so that \code{augment(my_fit)} returns the augmented
+original data. \strong{Do not} pass new data to the \code{data} argument.
+Augment will report information such as influence and cooks distance for
+data passed to the \code{data} argument. These measures are only defined for
+the original training data.}
+  \item{newdata}{A \code{\link[=data.frame]{data.frame()}} or \code{\link[tibble:tibble]{tibble::tibble()}} containing all
+the original predictors usednto create \code{x}. Defaults to \code{NULL}, indicating
+that nothing has been passed to \code{newdata}. If \code{newdata} is specified,
+the \code{data} argument will be ignored.}
   \item{type.predict}{Type of prediction to compute for a GLM; passed on to
 \code{\link[=predict.glm]{predict.glm()}}}
   \item{type.residuals}{Type of residuals to compute for a GLM; passed on to
@@ -39,3 +47,4 @@ For tidiers for models from the \pkg{robust} package see
 Other rlm tidiers: \code{\link{glance.rlm}},
   \code{\link{tidy.rlm}}
 }
+\concept{rlm tidiers}

@@ -34,6 +34,8 @@ check_arguments <- function(tidy_method, strict = FALSE) {
   args <- names(formals(tidy_method))
   func_name <- as.character(substitute(tidy_method))
   
+  stop("Informative message on mistakes to update argument_glossary")
+  
   # functions might be: tidy.irlba *or* tidy_irlba for list tidiers
   prefix <- gsub("[\\.|_].*","", func_name)
   allowed_args <- dplyr::filter(argument_glossary, method == !!prefix)$argument
