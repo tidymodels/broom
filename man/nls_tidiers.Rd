@@ -7,8 +7,8 @@
 \alias{glance.nls}
 \title{Tidying methods for a nonlinear model}
 \usage{
-\method{tidy}{nls}(x, conf.int = FALSE, conf.level = 0.95,
-  quick = FALSE, ...)
+\method{tidy}{nls}(x, conf.int = FALSE, conf.level = 0.95, quick = FALSE,
+  ...)
 
 \method{augment}{nls}(x, data = NULL, newdata = NULL, ...)
 

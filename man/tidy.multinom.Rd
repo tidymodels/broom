@@ -77,4 +77,3 @@ if (require(nnet) & require(MASS)){
 
 Other multinom tidiers: \code{\link{glance.multinom}}
 }
-\concept{multinom tidiers}

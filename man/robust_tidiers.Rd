@@ -5,6 +5,7 @@
 \alias{tidy.lmRob}
 \alias{augment.lmRob}
 \alias{glance.lmRob}
+\alias{robust_tidiers}
 \alias{tidy.glmRob}
 \alias{augment.glmRob}
 \alias{glance.glmRob}

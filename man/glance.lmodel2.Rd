@@ -34,4 +34,3 @@ Description of what a \code{glance} method does goes here.
 
 Other lmodel2 tidiers: \code{\link{tidy.lmodel2}}
 }
-\concept{lmodel2 tidiers}

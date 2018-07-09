@@ -51,6 +51,8 @@ term. Included only if \code{conf.int = TRUE}.}
 }
 \description{
 Description of what a \code{tidy} method does goes here.
+
+Tidy beta regression objects into summarized coefficients, add their fitted values and residuals, or find their model parameters.
 }
 \examples{
 
@@ -80,4 +82,3 @@ if (require("AER", quietly = TRUE)) {
 Other ivreg tidiers: \code{\link{augment.ivreg}},
   \code{\link{glance.ivreg}}
 }
-\concept{ivreg tidiers}

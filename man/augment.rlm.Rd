@@ -39,4 +39,3 @@ For tidiers for models from the \pkg{robust} package see
 Other rlm tidiers: \code{\link{glance.rlm}},
   \code{\link{tidy.rlm}}
 }
-\concept{rlm tidiers}

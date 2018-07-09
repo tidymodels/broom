@@ -66,4 +66,3 @@ if (require("lmodel2", quietly = TRUE)) {
 
 Other lmodel2 tidiers: \code{\link{glance.lmodel2}}
 }
-\concept{lmodel2 tidiers}

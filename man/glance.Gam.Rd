@@ -40,4 +40,3 @@ To glance \code{Gam} objects created by calls to \code{\link[gam:gam]{gam::gam()
 
 Other mgcv tidiers: \code{\link{tidy.gam}}
 }
-\concept{mgcv tidiers}

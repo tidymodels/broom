@@ -55,7 +55,7 @@ Description of what a \code{tidy} method does goes here.
 }
 \details{
 If \code{conf.int = TRUE}, the confidence interval is computed with
-the \code{\link[=confint.geeglm]{confint.geeglm()}} function.
+the an internal \code{confint.geeglm()} function.
 
 If you have missing values in your model data, you may need to
 refit the model with \code{na.action = na.exclude} or deal with the

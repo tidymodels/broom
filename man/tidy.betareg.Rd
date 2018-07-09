@@ -50,6 +50,8 @@ At least one term will have been used to model \code{phi}.
 }
 \description{
 Description of what a \code{tidy} method does goes here.
+
+Tidy beta regression objects into summarized coefficients, add their fitted values and residuals, or find their model parameters.
 }
 \examples{
 
@@ -72,4 +74,3 @@ if (require("betareg", quietly = TRUE)) {
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[betareg:betareg]{betareg::betareg()}}
 }
-\concept{betareg tidiers}

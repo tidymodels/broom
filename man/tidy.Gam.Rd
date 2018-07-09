@@ -48,4 +48,3 @@ if (requireNamespace("mgcv", quietly = TRUE)) {
 
 Other mgcv tidiers: \code{\link{glance.gam}}
 }
-\concept{mgcv tidiers}

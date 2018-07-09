@@ -129,4 +129,3 @@ if (requireNamespace("gmm", quietly = TRUE)) {
 
 Other gmm tidiers: \code{\link{glance.gmm}}
 }
-\concept{gmm tidiers}

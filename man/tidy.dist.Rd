@@ -4,8 +4,8 @@
 \alias{tidy.dist}
 \title{Tidy a distance matrix}
 \usage{
-\method{tidy}{dist}(x, diagonal = attr(x, "Diag"), upper = attr(x,
-  "Upper"), ...)
+\method{tidy}{dist}(x, diagonal = attr(x, "Diag"), upper = attr(x, "Upper"),
+  ...)
 }
 \arguments{
 \item{x}{A "dist" object}

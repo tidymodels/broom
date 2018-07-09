@@ -48,4 +48,3 @@ Description of what a \code{glance} method does goes here.
 
 Other ergm tidiers: \code{\link{tidy.ergm}}
 }
-\concept{ergm tidiers}

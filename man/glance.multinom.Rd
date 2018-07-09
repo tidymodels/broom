@@ -34,4 +34,3 @@ Description of what a \code{glance} method does goes here.
 
 Other multinom tidiers: \code{\link{tidy.multinom}}
 }
-\concept{multinom tidiers}

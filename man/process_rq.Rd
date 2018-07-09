@@ -4,8 +4,8 @@
 \alias{process_rq}
 \title{Helper function for tidy.rq and tidy.rqs}
 \usage{
-process_rq(rq_obj, se.type = "rank", conf.int = TRUE,
-  conf.level = 0.95, ...)
+process_rq(rq_obj, se.type = "rank", conf.int = TRUE, conf.level = 0.95,
+  ...)
 }
 \arguments{
 \item{rq_obj}{an object returned by \code{summary.rq} or \code{summary.rqs}}

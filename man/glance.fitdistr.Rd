@@ -34,4 +34,3 @@ Description of what a \code{glance} method does goes here.
 
 Other fitdistr tidiers: \code{\link{tidy.fitdistr}}
 }
-\concept{fitdistr tidiers}

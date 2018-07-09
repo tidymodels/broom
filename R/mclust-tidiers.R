@@ -19,6 +19,7 @@
 #' @examples
 #'
 #' library(dplyr) 
+#' library(mclust)
 #' set.seed(27)
 #' 
 #' centers <- tibble::tibble(

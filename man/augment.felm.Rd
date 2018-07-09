@@ -42,4 +42,3 @@ Description of what a \code{augment} method does goes here.
 
 Other felm tidiers: \code{\link{tidy.felm}}
 }
-\concept{felm tidiers}
