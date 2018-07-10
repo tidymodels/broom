@@ -2,19 +2,30 @@
 % Please edit documentation in R/stats-tidiers.R
 \name{tidy.ftable}
 \alias{tidy.ftable}
-\title{tidy an ftable object}
+\title{Tidy a(n) ftable object}
 \usage{
 \method{tidy}{ftable}(x, ...)
 }
 \arguments{
-\item{x}{An object of class "ftable"}
+\item{x}{An \code{ftable} object returned from \code{\link[stats:ftable]{stats::ftable()}}.}
 
-\item{...}{Extra arguments (not used)}
+\item{...}{Additional arguments. Not used. Needed to match generic
+signature only. \strong{Cautionary note:} Misspelled arguments will be
+absorbed in \code{...}, where they will be ignored. If the misspelled
+argument has a default value, the default value will be used.
+For example, if you pass \code{conf.lvel = 0.9}, all computation will
+proceed using \code{conf.level = 0.95}. Additionally, if you pass
+\code{newdata = my_tibble} to an \code{\link[=augment]{augment()}} method that does not
+accept a \code{newdata} argument, it will use the default value for
+the \code{data} argument.}
+}
+\value{
+An ftable contains a "flat" contingency table. This melts it into a
+\link[tibble:tibble]{tibble::tibble} with one column for each variable, then a \code{Freq}
+column.
 }
 \description{
-An ftable contains a "flat" contingency table. This melts it into a
-data.frame with one column for each variable, then a \code{Freq}
-column. It directly uses the \code{stats:::as.data.frame.ftable} function
+Description of what a \code{tidy} method does goes here.
 }
 \examples{
 
@@ -22,5 +33,9 @@ tidy(ftable(Titanic, row.vars = 1:3))
 
 }
 \seealso{
-\code{\link[=ftable]{ftable()}}
+\code{\link[=tidy]{tidy()}}, \code{\link[stats:ftable]{stats::ftable()}}
+
+Other stats tidiers: \code{\link{tidy.density}},
+  \code{\link{tidy.dist}}
 }
+\concept{stats tidiers}

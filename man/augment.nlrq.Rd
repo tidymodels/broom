@@ -11,10 +11,18 @@
 
 \item{...}{Arguments passed on to \code{augment.nls}
 \describe{
-  \item{x}{An object of class "nls"}
-  \item{data}{original data this was fitted on; if not given this will
-attempt to be reconstructed from nls (may not be successful)}
-  \item{newdata}{new data frame to use for predictions}
+  \item{data}{A \code{\link[=data.frame]{data.frame()}} or \code{\link[tibble:tibble]{tibble::tibble()}} containing the original
+data that was used to produce the object \code{x}. Defaults to
+\code{stats::model.frame(x)} so that \code{augment(my_fit)} returns the augmented
+original data. \strong{Do not} pass new data to the \code{data} argument.
+Augment will report information such as influence and cooks distance for
+data passed to the \code{data} argument. These measures are only defined for
+the original training data.}
+  \item{newdata}{A \code{\link[=data.frame]{data.frame()}} or \code{\link[tibble:tibble]{tibble::tibble()}} containing all
+the original predictors usednto create \code{x}. Defaults to \code{NULL}, indicating
+that nothing has been passed to \code{newdata}. If \code{newdata} is specified,
+the \code{data} argument will be ignored.}
+  \item{x}{An \code{nls} object returned from \code{\link[stats:nls]{stats::nls()}}.}
 }}
 }
 \value{

@@ -22,10 +22,11 @@ the original training data.}
 the original predictors usednto create \code{x}. Defaults to \code{NULL}, indicating
 that nothing has been passed to \code{newdata}. If \code{newdata} is specified,
 the \code{data} argument will be ignored.}
-  \item{type.predict}{Type of prediction to compute for a GLM; passed on to
-\code{\link[=predict.glm]{predict.glm()}}}
-  \item{type.residuals}{Type of residuals to compute for a GLM; passed on to
-\code{\link[=residuals.glm]{residuals.glm()}}}
+  \item{type.predict}{Type of predictions to use when \code{x} is a \code{glm} object.
+Passed to \code{\link[stats:predict.glm]{stats::predict.glm()}}.}
+  \item{type.residuals}{Type of residuals to use when \code{x} is a \code{glm} object.
+Passed to \code{\link[stats:residuals.glm]{stats::residuals.glm()}}.}
+  \item{x}{An \code{lm} object created by \code{\link[stats:lm]{stats::lm()}}.}
 }}
 }
 \value{

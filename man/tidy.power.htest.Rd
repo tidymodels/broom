@@ -42,7 +42,7 @@ ggplot(tidy(ptt), aes(n, power)) +
 \code{\link[stats:power.t.test]{stats::power.t.test()}}
 
 Other htest tidiers: \code{\link{augment.htest}},
-  \code{\link{htest_tidiers}},
+  \code{\link{tidy.htest}},
   \code{\link{tidy.pairwise.htest}}
 }
 \concept{htest tidiers}

@@ -67,10 +67,10 @@
 #' result <- lm(b ~ a)
 #' tidy(result)
 #'
-#' @name  lm_tidiers
+#' @aliases lm_tidiers
 #' @export
 #' @seealso [tidy()], [stats::summary.lm()]
-#' @family lm tiders
+#' @family lm tidiers
 tidy.lm <- function(x, conf.int = FALSE, conf.level = .95,
                     exponentiate = FALSE, quick = FALSE, ...) {
   if (quick) {
@@ -89,7 +89,7 @@ tidy.lm <- function(x, conf.int = FALSE, conf.level = .95,
 }
 
 
-#' @rdname lm_tidiers
+#' @rdname tidy.lm
 #' @export
 tidy.summary.lm <- function(x, ...) {
   co <- stats::coef(x)
@@ -112,18 +112,17 @@ tidy.summary.lm <- function(x, ...) {
 #' 
 #' @template augment_NAs
 #' 
-#' @inheritParams tidy.lm()
+#' @inheritParams tidy.lm
 #' @template param_data
 #' @template param_newdata
-#' 
-#' @param type.predict Type of prediction to compute for a GLM; passed on to
-#'   [predict.glm()]
-#' @param type.residuals Type of residuals to compute for a GLM; passed on to
-#'   [residuals.glm()]
+#' @param type.predict Type of predictions to use when `x` is a `glm` object. 
+#'   Passed to [stats::predict.glm()].
+#' @param type.residuals Type of residuals to use when `x` is a `glm` object. 
+#'   Passed to [stats::residuals.glm()].
 #'
 #' @return When `newdata` is not supplied `augment.lm` returns
-#' one row for each observation, with seven columns added to the original
-#' data:
+#'   one row for each observation, with seven columns added to the original
+#'   data:
 #' 
 #'   \item{.hat}{Diagonal of the hat matrix}
 #'   \item{.sigma}{Estimate of residual standard deviation when
@@ -134,12 +133,11 @@ tidy.summary.lm <- function(x, ...) {
 #'   \item{.resid}{Residuals}
 #'   \item{.std.resid}{Standardised residuals}
 #'
-#' (Some unusual "lm" objects, such as "rlm" from MASS, may omit
-#' `.cooksd` and `.std.resid`. "gam" from mgcv omits
-#' `.sigma`)
+#'   Some unusual `lm` objects, such as `rlm` from MASS, may omit `.cooksd`
+#'   and `.std.resid`. `gam` from mgcv omits `.sigma`.
 #'
-#' When `newdata` is supplied, `augment.lm` returns one row for each
-#' observation, with three columns added to the new data:
+#'   When `newdata` is supplied, returns one row for each observation, with
+#'   three columns added to the new data:
 #' 
 #'   \item{.fitted}{Fitted values of model}
 #'   \item{.se.fit}{Standard errors of fitted values}
@@ -147,7 +145,7 @@ tidy.summary.lm <- function(x, ...) {
 #'
 #' @export
 #' @seealso [augment()], [stats::predict.lm()]
-#' @family lm tiders
+#' @family lm tidiers
 augment.lm <- function(x, data = stats::model.frame(x), newdata,
                        type.predict, type.residuals, ...) {
   augment_columns(x, data, newdata,
@@ -160,7 +158,7 @@ augment.lm <- function(x, data = stats::model.frame(x), newdata,
 #' @templateVar class lm
 #' @template title_desc_glance
 #'
-#' @inheritParams tidy.lm()
+#' @inheritParams tidy.lm
 #'
 #' @return A one-row [tibble::tibble] with columns:
 #' 
@@ -177,10 +175,9 @@ augment.lm <- function(x, data = stats::model.frame(x), newdata,
 #'   \item{deviance}{deviance}
 #'   \item{df.residual}{residual degrees of freedom}
 #'
-#' @name glance_lm
 #' @export
 #' @seealso [glance()]
-#' @family lm tiders
+#' @family lm tidiers
 glance.lm <- function(x, ...) {
   # use summary.lm explicity, so that c("aov", "lm") objects can be
   # summarized and glanced at
@@ -191,7 +188,7 @@ glance.lm <- function(x, ...) {
 }
 
 
-#' @rdname glance_lm
+#' @rdname glance.lm
 #' @export
 glance.summary.lm <- function(x, ...) {
   ret <- with(x, cbind(

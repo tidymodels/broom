@@ -2,25 +2,32 @@
 % Please edit documentation in R/stats-time-series-tidiers.R
 \name{tidy.ts}
 \alias{tidy.ts}
-\title{Tidy a ts timeseries object}
+\title{Tidy a(n) ts object}
 \usage{
 \method{tidy}{ts}(x, ...)
 }
 \arguments{
-\item{x}{An object of class "ts".}
+\item{x}{A univariate or multivariate \code{ts} times series object.}
 
-\item{...}{extra arguments (not used)}
+\item{...}{Additional arguments. Not used. Needed to match generic
+signature only. \strong{Cautionary note:} Misspelled arguments will be
+absorbed in \code{...}, where they will be ignored. If the misspelled
+argument has a default value, the default value will be used.
+For example, if you pass \code{conf.lvel = 0.9}, all computation will
+proceed using \code{conf.level = 0.95}. Additionally, if you pass
+\code{newdata = my_tibble} to an \code{\link[=augment]{augment()}} method that does not
+accept a \code{newdata} argument, it will use the default value for
+the \code{data} argument.}
 }
 \value{
-\code{tidy} returns a data frame with one row for each observation, with the
-following columns:
+A \link[tibble:tibble]{tibble::tibble} with one row for each observation and columns:
+
 \item{index}{Index (i.e. date or time) for the "ts" object.}
 \item{series}{Name of the series (multivariate "ts" objects only).}
 \item{value}{Value of the observation.}
 }
 \description{
-Turn a univariate or multivariate \code{\link[=ts]{ts()}} object into a tidy data
-frame.
+Description of what a \code{tidy} method does goes here.
 }
 \examples{
 
@@ -34,5 +41,9 @@ tidy(z)
 
 }
 \seealso{
-\link{ts}, \link{zoo_tidiers}
+\code{\link[=tidy]{tidy()}}, \code{\link[stats:ts]{stats::ts()}}
+
+Other time series tidiers: \code{\link{tidy.acf}},
+  \code{\link{tidy.spec}}, \code{\link{tidy.zoo}}
 }
+\concept{time series tidiers}

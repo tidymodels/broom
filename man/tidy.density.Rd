@@ -2,29 +2,34 @@
 % Please edit documentation in R/stats-tidiers.R
 \name{tidy.density}
 \alias{tidy.density}
-\title{tidy a density objet}
+\title{Tidy a(n) density object}
 \usage{
 \method{tidy}{density}(x, ...)
 }
 \arguments{
-\item{x}{an object of class "density"}
+\item{x}{A \code{density} object returned from \code{\link[stats:density]{stats::density()}}.}
 
-\item{...}{extra arguments (not used)}
+\item{...}{Additional arguments. Not used. Needed to match generic
+signature only. \strong{Cautionary note:} Misspelled arguments will be
+absorbed in \code{...}, where they will be ignored. If the misspelled
+argument has a default value, the default value will be used.
+For example, if you pass \code{conf.lvel = 0.9}, all computation will
+proceed using \code{conf.level = 0.95}. Additionally, if you pass
+\code{newdata = my_tibble} to an \code{\link[=augment]{augment()}} method that does not
+accept a \code{newdata} argument, it will use the default value for
+the \code{data} argument.}
 }
 \value{
-a data frame with "x" and "y" columns
-
-d <- density(faithful$eruptions, bw = "sj")
-tidy(d)
-
-library(ggplot2)
-ggplot(tidy(d), aes(x, y)) + geom_line()
+A \link[tibble:tibble]{tibble::tibble} with two columns: points \code{x} where the density
+is estimated, and estimated density \code{y}.
 }
 \description{
-Given a "density" object, returns a tidy data frame with two
-columns: points x where the density is estimated, points y
-for the estimate
+Description of what a \code{tidy} method does goes here.
 }
 \seealso{
-\code{\link[=density]{density()}}
+\code{\link[=tidy]{tidy()}}, \code{\link[stats:density]{stats::density()}}
+
+Other stats tidiers: \code{\link{tidy.dist}},
+  \code{\link{tidy.ftable}}
 }
+\concept{stats tidiers}

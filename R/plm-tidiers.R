@@ -23,9 +23,7 @@
 #' tidy(zz, conf.int = TRUE, conf.level = .9)
 #'
 #' augment(zz)
-#'
 #' glance(zz)
-#' }
 #'
 #' @aliases plm_tidiers
 #' @export

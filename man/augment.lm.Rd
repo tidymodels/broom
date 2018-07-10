@@ -8,6 +8,8 @@
   type.predict, type.residuals, ...)
 }
 \arguments{
+\item{x}{An \code{lm} object created by \code{\link[stats:lm]{stats::lm()}}.}
+
 \item{data}{A \code{\link[=data.frame]{data.frame()}} or \code{\link[tibble:tibble]{tibble::tibble()}} containing the original
 data that was used to produce the object \code{x}. Defaults to
 \code{stats::model.frame(x)} so that \code{augment(my_fit)} returns the augmented
@@ -21,11 +23,21 @@ the original predictors usednto create \code{x}. Defaults to \code{NULL}, indica
 that nothing has been passed to \code{newdata}. If \code{newdata} is specified,
 the \code{data} argument will be ignored.}
 
-\item{type.predict}{Type of prediction to compute for a GLM; passed on to
-\code{\link[=predict.glm]{predict.glm()}}}
+\item{type.predict}{Type of predictions to use when \code{x} is a \code{glm} object.
+Passed to \code{\link[stats:predict.glm]{stats::predict.glm()}}.}
 
-\item{type.residuals}{Type of residuals to compute for a GLM; passed on to
-\code{\link[=residuals.glm]{residuals.glm()}}}
+\item{type.residuals}{Type of residuals to use when \code{x} is a \code{glm} object.
+Passed to \code{\link[stats:residuals.glm]{stats::residuals.glm()}}.}
+
+\item{...}{Additional arguments. Not used. Needed to match generic
+signature only. \strong{Cautionary note:} Misspelled arguments will be
+absorbed in \code{...}, where they will be ignored. If the misspelled
+argument has a default value, the default value will be used.
+For example, if you pass \code{conf.lvel = 0.9}, all computation will
+proceed using \code{conf.level = 0.95}. Additionally, if you pass
+\code{newdata = my_tibble} to an \code{\link[=augment]{augment()}} method that does not
+accept a \code{newdata} argument, it will use the default value for
+the \code{data} argument.}
 }
 \value{
 When \code{newdata} is not supplied \code{augment.lm} returns
@@ -41,12 +53,11 @@ corresponding observation is dropped from model}
 \item{.resid}{Residuals}
 \item{.std.resid}{Standardised residuals}
 
-(Some unusual "lm" objects, such as "rlm" from MASS, may omit
-\code{.cooksd} and \code{.std.resid}. "gam" from mgcv omits
-\code{.sigma})
+Some unusual \code{lm} objects, such as \code{rlm} from MASS, may omit \code{.cooksd}
+and \code{.std.resid}. \code{gam} from mgcv omits \code{.sigma}.
 
-When \code{newdata} is supplied, \code{augment.lm} returns one row for each
-observation, with three columns added to the new data:
+When \code{newdata} is supplied, returns one row for each observation, with
+three columns added to the new data:
 
 \item{.fitted}{Fitted values of model}
 \item{.se.fit}{Standard errors of fitted values}
@@ -70,7 +81,8 @@ warning is raised and the incomplete rows are dropped.
 
 \code{\link[=augment]{augment()}}, \code{\link[stats:predict.lm]{stats::predict.lm()}}
 
-Other lm tiders: \code{\link{glance_lm}},
-  \code{\link{lm_tidiers}}
+Other lm tidiers: \code{\link{augment.glm}},
+  \code{\link{glance.glm}}, \code{\link{glance.lm}},
+  \code{\link{tidy.glm}}, \code{\link{tidy.lm}}
 }
-\concept{lm tiders}
+\concept{lm tidiers}

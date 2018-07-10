@@ -6,6 +6,20 @@
 \usage{
 \method{augment}{htest}(x, ...)
 }
+\arguments{
+\item{x}{An \code{htest} objected, such as those created by \code{\link[stats:cor.test]{stats::cor.test()}},
+\code{\link[stats:t.test]{stats::t.test()}}, \code{\link[stats:wilcox.test]{stats::wilcox.test()}}, \code{\link[stats:chisq.test]{stats::chisq.test()}}, etc.}
+
+\item{...}{Additional arguments. Not used. Needed to match generic
+signature only. \strong{Cautionary note:} Misspelled arguments will be
+absorbed in \code{...}, where they will be ignored. If the misspelled
+argument has a default value, the default value will be used.
+For example, if you pass \code{conf.lvel = 0.9}, all computation will
+proceed using \code{conf.level = 0.95}. Additionally, if you pass
+\code{newdata = my_tibble} to an \code{\link[=augment]{augment()}} method that does not
+accept a \code{newdata} argument, it will use the default value for
+the \code{data} argument.}
+}
 \value{
 Errors unless \code{x} is a chi-squared test. If \code{x} is a chi-squared
 test, for each cell of the tested table returns columns:
@@ -28,7 +42,7 @@ how residuals are computed.
 \seealso{
 \code{\link[=augment]{augment()}}, \code{\link[stats:chisq.test]{stats::chisq.test()}}
 
-Other htest tidiers: \code{\link{htest_tidiers}},
+Other htest tidiers: \code{\link{tidy.htest}},
   \code{\link{tidy.pairwise.htest}},
   \code{\link{tidy.power.htest}}
 }

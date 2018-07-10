@@ -41,7 +41,7 @@
 #' tidy(chit)
 #' augment(chit)
 #'
-#' @name htest_tidiers
+#' @aliases htest_tidiers
 #' @export
 #' @family htest tidiers
 #' @seealso [tidy()], [stats::cor.test()], [stats::t.test()],
@@ -89,7 +89,7 @@ tidy.htest <- function(x, ...) {
 }
 
 
-#' @rdname htest_tidiers
+#' @rdname tidy.htest
 #' @export
 glance.htest <- function(x, ...) tidy(x)
 

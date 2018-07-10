@@ -1,14 +1,10 @@
-#' tidying methods for smooth.spline objects
+#' @templateVar class smooth.spline
+#' @template title_desc_tidy
 #'
-#' This combines the original data given to smooth.spline with the
-#' fit and residuals
-#'
-#' @details No `tidy` method is provided for smooth.spline objects.
-#'
-#' @param x a smooth.spline object
-#' @param data defaults to data used to fit model
-#' @param ... not used in this method
-#'
+#' @param x A `smooth.spline` object returned from [stats::smooth.spline()].
+#' @template param_data
+#' @template param_unused_dots
+#' 
 #' @examples
 #'
 #' spl <- smooth.spline(mtcars$wt, mtcars$mpg, df = 4)
@@ -19,16 +15,13 @@
 #' ggplot(augment(spl, mtcars), aes(wt, mpg)) +
 #'     geom_point() + geom_line(aes(y = .fitted))
 #'
-#' @name smooth.spline_tidiers
-
-
-#' @rdname smooth.spline_tidiers
-#'
-#' @return `augment` returns the original data with extra columns:
-#'   \item{.fitted}{Fitted values of model}
-#'   \item{.resid}{Residuals}
-#'
+#' @template return_augment_columns
+#' 
+#' @aliases smooth.spline_tidiers
 #' @export
+#' @family smoothing spline tidiers
+#' @seealso [augment()], [stats::smooth.spline()], 
+#'   [stats::predict.smooth.spline()]
 augment.smooth.spline <- function(x, data = x$data, ...) {
   data <- as_tibble(data)
   data$.fitted <- stats::fitted(x)
@@ -37,9 +30,13 @@ augment.smooth.spline <- function(x, data = x$data, ...) {
 }
 
 
-#' @rdname smooth.spline_tidiers
+#' @templateVar class smooth.spine
+#' @template title_desc_tidy
+#' 
+#' @inheritParams augment.smooth.spline
 #'
-#' @return `glance` returns one row with columns
+#' @return A one-row [tibble::tibble] with columns:
+#' 
 #'   \item{spar}{smoothing parameter}
 #'   \item{lambda}{choice of lambda corresponding to `spar`}
 #'   \item{df}{equivalent degrees of freedom}
@@ -48,6 +45,9 @@ augment.smooth.spline <- function(x, data = x$data, ...) {
 #'   \item{cv.crit}{cross-validation score}
 #'
 #' @export
+#' @family smoothing spline tidiers
+#' @seealso [augment()], [stats::smooth.spline()]
+#' 
 glance.smooth.spline <- function(x, ...) {
   as_tibble(
     x[c("df", "lambda", "cv.crit", "pen.crit", "crit", "spar")]

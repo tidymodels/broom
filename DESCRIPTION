@@ -103,7 +103,7 @@ Suggests:
     multcomp,
     network,
     nnet,
-    orcutt,
+    orcutt (>= 2.2),
     ordinal,
     plm,
     poLCA,

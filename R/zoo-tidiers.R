@@ -39,6 +39,8 @@
 #' 
 #' @aliases zoo_tidiers
 #' @export
+#' @seealso [tidy()], [zoo::zoo()]
+#' @family time series tidiers
 tidy.zoo <- function(x, ...) {
   ret <- data.frame(as.matrix(x), index = zoo::index(x))
   ret <- tidyr::gather(ret, series, value, -index)
