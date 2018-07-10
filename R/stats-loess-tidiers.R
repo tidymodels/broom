@@ -35,7 +35,7 @@
 #'
 #' @aliases loess_tidiers
 #' @export
-#' @seealso [augment()], [stats::loess()], [stats:::predict.loess()]
+#' @seealso [augment()], [stats::loess()], [stats::predict.loess()]
 augment.loess <- function(x, data = stats::model.frame(x), newdata, ...) {
   augment_columns(x, data, newdata, se.fit = FALSE, se = TRUE, ...)
 }

@@ -18,14 +18,6 @@ proceed using \code{conf.level = 0.95}. Additionally, if you pass
 \code{newdata = my_tibble} to an \code{\link[=augment]{augment()}} method that does not
 accept a \code{newdata} argument, it will use the default value for
 the \code{data} argument.}
-
-\item{data}{A \code{\link[=data.frame]{data.frame()}} or \code{\link[tibble:tibble]{tibble::tibble()}} containing the original
-data that was used to produce the object \code{x}. Defaults to
-\code{stats::model.frame(x)} so that \code{augment(my_fit)} returns the augmented
-original data. \strong{Do not} pass new data to the \code{data} argument.
-Augment will report information such as influence and cooks distance for
-data passed to the \code{data} argument. These measures are only defined for
-the original training data.}
 }
 \value{
 A one-row \link[tibble:tibble]{tibble::tibble} with columns:

@@ -32,7 +32,7 @@ test_that("polygon tidiers work", {
   # tidy.SpatialPolygons
   SpP <- SpatialPolygons(list(Srs1, Srs2, Srs3), 1:3)
   
-  td <- tidy(SpP)
+  td <- suppressWarnings(tidy(SpP))
   check_tidy_output(td)
   check_dims(td, 19, 7)
   
@@ -48,7 +48,7 @@ test_that("polygon tidiers work", {
     data = data.frame(x = x, y = y, z = z, row.names = row.names(polys))
   )
   
-  td <- tidy(SpPDF)
+  td <- suppressWarnings(tidy(SpPDF))
   check_tidy_output(td)
   check_dims(td, 500, 7)
   

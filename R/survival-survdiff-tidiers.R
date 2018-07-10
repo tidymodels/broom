@@ -7,8 +7,8 @@
 #' 
 #' @return A [tibble::tibble] with one row for each time point and columns:
 #' 
-#'   \item{Initial columns corresponding to grouping factors (right hand side
-#'     of the formula)}
+#'   \item{...}{The initial columns correspond to the grouping factors
+#'     on the right hand side of the model formula.}
 #'   \item{obs}{weighted observed number of events in each group}
 #'   \item{exp}{weighted expected number of events in each group}
 #'   \item{N}{number of subjects in each group}

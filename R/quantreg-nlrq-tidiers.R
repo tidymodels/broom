@@ -22,7 +22,7 @@ tidy.nlrq <- function(x, conf.int = FALSE, conf.level = 0.95, ...) {
     ret[["conf.low"]] <- ret[["estimate"]] + (cv[1] * ret[["std.error"]])
     ret[["conf.high"]] <- ret[["estimate"]] + (cv[2] * ret[["std.error"]])
   }
-  tibble::as_tibble(ret)
+  as_tibble(ret)
 }
 
 #' @templateVar class nlrq
@@ -47,7 +47,7 @@ glance.nlrq <- function(x, ...) {
   
   n <- length(x[["m"]]$fitted())
   s <- summary(x)
-  tibble::tibble(
+  tibble(
     tau = x[["m"]]$tau(),
     logLik = logLik(x),
     AIC = AIC(x),

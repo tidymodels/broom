@@ -28,8 +28,9 @@
 #' 
 tidy.factanal <- function(x, ...) {
   
-  loadings <- as.matrix(stats::loadings(x))  # TODO: use as.matrix here?
-  # class(loadings) <- "matrix"
+  # as.matrix() causes this to break. unsure if this is a hack or appropriate
+  loadings <- stats::loadings(x)
+  class(loadings) <- "matrix"
 
   tidy_df <- data.frame(
     variable = rownames(loadings),
@@ -88,12 +89,14 @@ augment.factanal <- function(x, data, ...) {
 
   # Bind to data
   data$.rownames <- rownames(data)
-  tidy_df <- tidy_df %>% right_join(data, by = ".rownames")
+  tidy_df <- tidy_df %>% 
+    dplyr::right_join(data, by = ".rownames")
 
-  tidy_df %>% select(
-    .rownames, everything(),
-    -matches("\\.fs[0-9]*"), matches("\\.fs[0-9]*")
-  )
+  tidy_df %>% 
+    dplyr::select(
+      .rownames, everything(),
+      -matches("\\.fs[0-9]*"), matches("\\.fs[0-9]*")
+    )
 }
 
 #' @templateVar class factanal
@@ -127,7 +130,7 @@ glance.factanal <- function(x, ...) {
   total.variance <- sum(apply(loadings, 2, function(i) sum(i^2) / length(i)))
 
   # Results as single-row data frame
-  data_frame(
+  tibble(
     n.factors = x$factors,
     total.variance = total.variance,
     statistic = unname(x$STATISTIC),

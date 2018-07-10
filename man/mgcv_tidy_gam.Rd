@@ -30,21 +30,20 @@ Description of what a \code{tidy} method does goes here.
 }
 \details{
 To tidy \code{Gam} objects created by calls to \code{\link[gam:gam]{gam::gam()}},
-see \code{\link[=tidy.Gam]{tidy.Gam()}}.
+see \link{gam_tidy_Gam}.
 }
 \examples{
 
-if (requireNamespace("mgcv", quietly = TRUE)) {
-  g <- mgcv::gam(mpg ~ s(hp) + am + qsec, data = mtcars)
+g <- mgcv::gam(mpg ~ s(hp) + am + qsec, data = mtcars)
   
-  tidy(g)
-  tidy(g, parametric = TRUE)
-  glance(g)
-}
+tidy(g)
+tidy(g, parametric = TRUE)
+glance(g)
+
 
 }
 \seealso{
-\code{\link[=tidy]{tidy()}}, \code{\link[mgcv:gam]{mgcv::gam()}}, \code{\link[=tidy.Gam]{tidy.Gam()}}
+\code{\link[=tidy]{tidy()}}, \code{\link[mgcv:gam]{mgcv::gam()}}, \link{gam_tidy_Gam}
 
 Other mgcv tidiers: \code{\link{glance.gam}}
 }

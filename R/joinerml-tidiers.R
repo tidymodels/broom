@@ -96,7 +96,7 @@ tidy.mjoint <- function(x, component = "survival", conf.int = FALSE,
   }
 
   # turn out into a tibble object
-  tibble::as_tibble(out)
+  as_tibble(out)
 }
 
 #' @templateVar class mjoint

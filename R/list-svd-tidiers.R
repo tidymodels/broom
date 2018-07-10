@@ -2,7 +2,7 @@
 #' @template title_desc_tidy_list
 #'
 #' @inherit tidy.prcomp return details params
-#' @param x A list with components `u`, `d`, `v` returned by [stats::svd()].
+#' @param x A list with components `u`, `d`, `v` returned by [svd()].
 #'
 #' @examples
 #'
@@ -32,7 +32,7 @@
 #'     facet_wrap(~ PC, scale = "free_y")
 #' 
 #' 
-#' @seealso [stats::svd()]
+#' @seealso [svd()]
 #' @aliases svd_tidiers
 #' @family svd tidiers
 #' @family list tidiers

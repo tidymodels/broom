@@ -52,7 +52,7 @@ tidy.lavaan <- function(x, conf.int = TRUE, conf.level = 0.95, ...) {
     standardized = TRUE,
     ...
   ) %>%
-    as_data_frame() %>%
+    as_tibble() %>%
     tibble::rownames_to_column() %>%
     mutate(term = paste(lhs, op, rhs)) %>%
     rename(
@@ -132,17 +132,19 @@ glance.lavaan <- function(x, ...) {
           "cfi"
         )
     ) %>%
-    as_data_frame() %>%
+    as_tibble() %>%
     tibble::rownames_to_column(var = "term") %>%
     spread(., term, value) %>%
-    bind_cols(data_frame(
-      converged = x@Fit@converged,
-      estimator = x@Options$estimator,
-      ngroups = x@Data@ngroups,
-      missing_method = x@Data@missing,
-      nobs = sum(purrr::accumulate(x@Data@nobs, sum)),
-      norig = sum(purrr::accumulate(x@Data@norig, sum)),
-      nexcluded = norig - nobs
-    )) %>%
+    bind_cols(
+      tibble(
+        converged = x@Fit@converged,
+        estimator = x@Options$estimator,
+        ngroups = x@Data@ngroups,
+        missing_method = x@Data@missing,
+        nobs = sum(purrr::accumulate(x@Data@nobs, sum)),
+        norig = sum(purrr::accumulate(x@Data@norig, sum)),
+        nexcluded = norig - nobs
+      )
+    ) %>%
     rename(rmsea.conf.high = rmsea.ci.upper)
 }

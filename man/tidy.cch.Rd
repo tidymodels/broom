@@ -67,20 +67,6 @@ ggplot(tidy(fit.ccP), aes(x = estimate, y = term)) +
   geom_errorbarh(aes(xmin = conf.low, xmax = conf.high), height = 0) +
   geom_vline(xintercept = 0)
 
-# compare between methods
-library(dplyr)
-fits <- data_frame(method = c("Prentice", "SelfPrentice", "LinYing")) \%>\%
-  group_by(method) \%>\%
-  do(tidy(cch(Surv(edrel, rel) ~ stage + histol + age, data = ccoh.data,
-    subcoh = ~subcohort, id= ~seqno, cohort.size = 4028,
-    method = .$method)))
-
-# coefficient plots comparing methods
-ggplot(fits, aes(x = estimate, y = term, color = method)) +
-  geom_point() +
-  geom_errorbarh(aes(xmin = conf.low, xmax = conf.high)) +
-  geom_vline(xintercept = 0)
-
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[survival:cch]{survival::cch()}}

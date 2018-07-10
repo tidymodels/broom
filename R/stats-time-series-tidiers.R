@@ -31,7 +31,7 @@ tidy.ts <- function(x, ...) {
   index <- seq(xtsp[1], xtsp[2], by = 1 / xtsp[3])
   # Turn multi-column time series into tidy data frames.
   if (is.matrix(x)) {
-    res <- tibble::as_data_frame(as.data.frame(x))
+    res <- as_tibble(as.data.frame(x))
     res <- tibble::add_column(res, index = index, .before = 1)
     tidyr::gather(res, series, value, -index)
   } else {
@@ -42,7 +42,7 @@ tidy.ts <- function(x, ...) {
 #' @templateVar class acf
 #' @template title_desc_tidy
 #'
-#' @param x An `acf` object created by [stats::acf()], [stats::pcf()] or 
+#' @param x An `acf` object created by [stats::acf()], [stats::pacf()] or 
 #'   [stats::ccf()].
 #' @template param_unused_dots
 #' 
@@ -58,7 +58,7 @@ tidy.ts <- function(x, ...) {
 #' tidy(pacf(lh, plot = FALSE))
 #'
 #' @export
-#' @seealso [tidy()], [stats::acf()], [stats::pcf()], [stats::ccf()]
+#' @seealso [tidy()], [stats::acf()], [stats::pacf()], [stats::ccf()]
 #' @family time series tidiers
 tidy.acf <- function(x, ...) {
   tibble(lag = as.numeric(x$lag), acf = as.numeric(x$acf))

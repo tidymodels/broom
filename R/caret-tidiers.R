@@ -97,7 +97,7 @@ tidy.confusionMatrix <- function(x, by_class = TRUE, ...) {
         rep(NA, length(terms) - 2)
       )
     }
-    df <- data_frame(
+    df <- tibble(
       term = terms,
       class = class,
       estimate = estimates,
@@ -113,7 +113,7 @@ tidy.confusionMatrix <- function(x, by_class = TRUE, ...) {
     conf.high <- c(cm$AccuracyUpper, NA)
     p.value <- c(cm$AccuracyPValue, cm$McnemarPValue)
 
-    df <- data_frame(
+    df <- tibble(
       term = terms,
       estimate = estimates,
       conf.low = conf.low,

@@ -41,6 +41,6 @@ tidy.Kendall <- function(x, ...) {
     "denominator",
     "var_kendall_score"
   )
-  ret <- tibble::as_tibble(unclass(x))
-  purrr::set_names(ret, col_names)
+  ret <- as_tibble(unclass(x))
+  set_names(ret, col_names)
 }

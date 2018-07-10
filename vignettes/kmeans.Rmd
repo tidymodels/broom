@@ -46,7 +46,7 @@ ggplot(labelled_points, aes(x1, x2, color = cluster)) +
   geom_point()
 ```
 
-This is an ideal case for k-means clustering. We'll use the built-in `kmeans` function, which accepts a matrix of a dataframe with all numeric columns as it's primary argument.
+This is an ideal case for k-means clustering. We'll use the built-in `kmeans` function, which accepts a dataframe with all numeric columns as it's primary argument.
 
 ```{r}
 points <- labelled_points %>% 

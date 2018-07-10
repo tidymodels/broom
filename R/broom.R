@@ -12,7 +12,10 @@
 #' @importFrom stats predict qnorm qt residuals setNames var na.omit
 #' @importFrom stats model.response
 #' 
-#' @importFrom purrr map_df
+#' @importFrom purrr map_df set_names
+#' @importFrom tibble tibble as_tibble
+#' 
+#' @import dplyr
 #'
 #' @importFrom utils head
 #'

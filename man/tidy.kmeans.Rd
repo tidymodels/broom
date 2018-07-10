@@ -5,8 +5,7 @@
 \alias{kmeans_tidiers}
 \title{Tidy a(n) kmeans object}
 \usage{
-\method{tidy}{kmeans}(x, col.names = paste0("x", seq_along(x$centers)),
-  ...)
+\method{tidy}{kmeans}(x, col.names = paste0("x", 1:ncol(x$centers)), ...)
 }
 \arguments{
 \item{x}{A \code{kmeans} object created by \code{\link[stats:kmeans]{stats::kmeans()}}.}

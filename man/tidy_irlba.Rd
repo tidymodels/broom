@@ -13,7 +13,7 @@ tidy_irlba(x, ...)
 
 \item{...}{Arguments passed on to \code{tidy_svd}
 \describe{
-  \item{x}{A list with components \code{u}, \code{d}, \code{v} returned by \code{\link[stats:svd]{stats::svd()}}.}
+  \item{x}{A list with components \code{u}, \code{d}, \code{v} returned by \code{\link[=svd]{svd()}}.}
   \item{matrix}{Character specifying which component of the PCA should be
 tidied.
 \itemize{

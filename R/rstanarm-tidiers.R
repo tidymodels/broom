@@ -199,7 +199,7 @@ tidy.stanreg <- function(x,
     ret_list$varying <- fix_data_frame(vv, newnames = nn)
   }
 
-  return(rbind.fill(ret_list))
+  return(bind_rows(ret_list))
 }
 
 

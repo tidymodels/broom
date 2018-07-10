@@ -23,66 +23,7 @@ interval in the tidied output. Defaults to \code{FALSE}.}
 if \code{conf.int = TRUE}. Must be strictly greater than 0 and less than 1.
 Defaults to 0.95, which corresponds to a 95 percent confidence interval.}
 
-\item{...}{Arguments passed on to \code{quantreg::summary.rq}
-\describe{
-  \item{object}{
-    This is an object of class \code{"rq"} or \code{"rqs"} produced by 
-    a call to \code{rq()}, depending on whether one or more taus are
-    specified.
-  }
-  \item{se}{
-    specifies the method used to compute standard standard errors.  There
-    are currently six available methods:  
-    \enumerate{
-      \item \code{"rank"} which produces confidence intervals for the
-      estimated parameters by inverting a rank test as described in
-      Koenker (1994).  This method involves solving a parametric linear
-      programming problem, and for large sample sizes can be extremely
-      slow, so by default it is only used when the sample size is less
-      than 1000, see below.  The default option assumes that the errors are
-      iid, while the option iid = FALSE implements a proposal of Koenker
-      Machado (1999).  See the documentation for \code{rq.fit.br} for additional arguments.
-      \item \code{"iid"} which presumes that the errors are iid and computes
-      an estimate of the asymptotic covariance matrix as in KB(1978).
-      
-      \item \code{"nid"} which presumes local (in \code{tau})
-      linearity (in \code{x}) of the
-      the conditional quantile functions and computes a Huber
-      sandwich estimate using a local estimate of the sparsity.
-      
-      \item \code{"ker"} which uses a kernel estimate of the sandwich
-      as proposed by Powell(1990).
-
-      \item \code{"boot"} which implements one of several possible bootstrapping
-      alternatives for estimating standard errors including a variate of the wild
-      bootstrap for clustered response.  See \code{\link{boot.rq}} for
-      further details.  
-
-      \item \code{"BLB"} which implements the bag of little bootstraps method
-      proposed in Kleiner, et al (2014).  The sample size of the little bootstraps
-      is controlled by the parameter \code{gamma}, see below.  At present only
-      \code{bsmethod = "xy"} is sanction, and even that is experimental.  This
-      option is intended for applications with very large n where other flavors
-      of the bootstrap can be slow.
-    }
-    If \code{se = NULL} (the default)  and \code{covariance = FALSE}, and
-    the sample size is less than 1001, then the "rank" method is used, 
-    otherwise the "nid" method is used.
-  }
-  \item{covariance}{
-    logical flag to indicate whether the full covariance matrix of the 
-    estimated parameters should be returned. 
-  }
-  \item{hs}{
-    Use Hall Sheather bandwidth for sparsity estimation
-    If false revert to Bofinger bandwidth.
-   }
-  \item{U}{Resampling indices or gradient evaluations used for bootstrap,
-       see \code{\link{boot.rq}}.}
-  \item{gamma}{parameter controlling the effective sample size of the'bag
-       of little bootstrap samples that will be \code{b = n^gamma} where
-       \code{n} is the sample size of the original model.}
-}}
+\item{...}{Additional arguments passed to \code{\link[quantreg:summary.rq]{quantreg::summary.rq()}}.}
 }
 \value{
 A \code{\link[tibble:tibble]{tibble::tibble()}} with one row for each term in the

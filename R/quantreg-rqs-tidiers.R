@@ -6,7 +6,7 @@
 #'   standard errors. Passed to [quantreg::summary.rq()] `se` argument.
 #'   Defaults to `"rank"`.
 #' @template param_confint
-#' @inheritDotParams quantreg::summary.rq
+#' @param ... Additional arguments passed to [quantreg::summary.rqs()]
 #' 
 #' @template return_tidy_regression
 #' 
@@ -93,6 +93,6 @@ augment.rqs <- function(x, data = model.frame(x), newdata, ...) {
     pred <- tidyr::gather(data = pred, key = ".tau", value = ".fitted")
     ret <- unrowname(cbind(original, pred))
   }
-  tibble::as_tibble(ret)
+  as_tibble(ret)
 }
 

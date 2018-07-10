@@ -8,7 +8,7 @@
 tidy_svd(x, matrix = "u", ...)
 }
 \arguments{
-\item{x}{A list with components \code{u}, \code{d}, \code{v} returned by \code{\link[stats:svd]{stats::svd()}}.}
+\item{x}{A list with components \code{u}, \code{d}, \code{v} returned by \code{\link[=svd]{svd()}}.}
 
 \item{matrix}{Character specifying which component of the PCA should be
 tidied.
@@ -102,7 +102,7 @@ tidy_u \%>\%
 
 }
 \seealso{
-\code{\link[stats:svd]{stats::svd()}}
+\code{\link[=svd]{svd()}}
 
 Other svd tidiers: \code{\link{augment.prcomp}},
   \code{\link{tidy.prcomp}}, \code{\link{tidy_irlba}}

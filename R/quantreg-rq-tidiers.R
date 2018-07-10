@@ -6,7 +6,7 @@
 #'   standard errors. Passed to [quantreg::summary.rq()] `se` argument.
 #'   Defaults to `"rank"`.
 #' @template param_confint
-#' @inheritDotParams quantreg::summary.rq
+#' @param ... Additional arguments passed to [quantreg::summary.rq()].
 #'
 #' @details If `se.type = "rank"` confidence intervals are calculated by 
 #'   `summary.rq`. When only a single predictor is included in the model, 
@@ -67,7 +67,7 @@ glance.rq <- function(x, ...) {
   n <- length(fitted(x))
   s <- summary(x)
   
-  tibble::tibble(
+  tibble(
     tau = x[["tau"]],
     logLik = logLik(x),
     AIC = AIC(x),
@@ -155,5 +155,5 @@ process_rq <- function(rq_obj, se.type = "rank",
     co[["conf.high"]] <- co[["estimate"]] + (cv[2] * co[["std.error"]])
   }
   co[["tau"]] <- rq_obj[["tau"]]
-  tibble::as_tibble(fix_data_frame(co, colnames(co)))
+  as_tibble(fix_data_frame(co, colnames(co)))
 }

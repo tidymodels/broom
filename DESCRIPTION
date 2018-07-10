@@ -123,7 +123,8 @@ Suggests:
     testthat,
     tseries,
     xergm,
-    zoo
+    zoo,
+    plyr
 VignetteBuilder: knitr
 LazyData: true
 Roxygen: list(markdown = TRUE)

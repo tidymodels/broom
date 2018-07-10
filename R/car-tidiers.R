@@ -23,7 +23,7 @@
 #' @export
 #' @seealso [tidy()], [glance()], [car::durbinWatsonTest()]
 tidy.durbinWatsonTest <- function(x, ...) {
-  tibble::tibble(
+  tibble(
     statistic = x$dw,
     p.value = x$p,
     autocorrelation = x$r,

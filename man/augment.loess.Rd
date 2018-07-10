@@ -77,5 +77,5 @@ augment(lo, newdata = head(mtcars))
 \seealso{
 \link{na.action}
 
-\code{\link[=augment]{augment()}}, \code{\link[stats:loess]{stats::loess()}}, \code{\link[stats:::predict.loess]{stats::::predict.loess()}}
+\code{\link[=augment]{augment()}}, \code{\link[stats:loess]{stats::loess()}}, \code{\link[stats:predict.loess]{stats::predict.loess()}}
 }

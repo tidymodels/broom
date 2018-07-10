@@ -37,7 +37,7 @@
 #'
 #'   set.seed(2016)
 #'   # compare multiple
-#'   mods <- data_frame(nclass = 1:3) %>%
+#'   mods <- tibble(nclass = 1:3) %>%
 #'     group_by(nclass) %>%
 #'     do(mod = poLCA(f, values, nclass = .$nclass, verbose = FALSE))
 #'

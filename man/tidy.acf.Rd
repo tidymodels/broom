@@ -7,7 +7,7 @@
 \method{tidy}{acf}(x, ...)
 }
 \arguments{
-\item{x}{An \code{acf} object created by \code{\link[stats:acf]{stats::acf()}}, \code{\link[stats:pcf]{stats::pcf()}} or
+\item{x}{An \code{acf} object created by \code{\link[stats:acf]{stats::acf()}}, \code{\link[stats:pacf]{stats::pacf()}} or
 \code{\link[stats:ccf]{stats::ccf()}}.}
 
 \item{...}{Additional arguments. Not used. Needed to match generic
@@ -37,7 +37,7 @@ tidy(pacf(lh, plot = FALSE))
 
 }
 \seealso{
-\code{\link[=tidy]{tidy()}}, \code{\link[stats:acf]{stats::acf()}}, \code{\link[stats:pcf]{stats::pcf()}}, \code{\link[stats:ccf]{stats::ccf()}}
+\code{\link[=tidy]{tidy()}}, \code{\link[stats:acf]{stats::acf()}}, \code{\link[stats:pacf]{stats::pacf()}}, \code{\link[stats:ccf]{stats::ccf()}}
 
 Other time series tidiers: \code{\link{tidy.spec}},
   \code{\link{tidy.ts}}, \code{\link{tidy.zoo}}

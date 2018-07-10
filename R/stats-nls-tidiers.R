@@ -37,7 +37,7 @@ tidy.nls <- function(x, conf.int = FALSE, conf.level = .95,
       term = names(co), estimate = unname(co),
       stringsAsFactors = FALSE
     )
-    return(tibble::as_tibble(ret))
+    return(as_tibble(ret))
   }
 
   nn <- c("estimate", "std.error", "statistic", "p.value")
@@ -52,7 +52,7 @@ tidy.nls <- function(x, conf.int = FALSE, conf.level = .95,
     colnames(CI) <- c("conf.low", "conf.high")
     ret <- cbind(ret, unrowname(CI))
   }
-  tibble::as_tibble(ret)
+  as_tibble(ret)
 }
 
 #' @templateVar class nls
@@ -113,5 +113,5 @@ glance.nls <- function(x, ...) {
     sigma = s$sigma, isConv = s$convInfo$isConv,
     finTol = s$convInfo$finTol
   ))
-  tibble::as_tibble(finish_glance(ret, x))
+  as_tibble(finish_glance(ret, x))
 }

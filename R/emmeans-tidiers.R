@@ -116,5 +116,5 @@ tidy_emmeans <- function(x, ...) {
   }
 
   colnames(ret) <- plyr::revalue(colnames(ret), repl, warn_missing = FALSE)
-  tibble::as_tibble(ret)
+  as_tibble(ret)
 }
