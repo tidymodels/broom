@@ -8,7 +8,7 @@
 #'   a [tibble::tibble] with one row for each term in the model.
 #'   
 #' @details Tidy `gam` objects created by calls to [mgcv::gam()] with
-#'   `tidy.gam`, documented as [mgcv_tidy_gam].
+#'   [tidy.gam()].
 #'
 #' @examples
 #'
@@ -18,11 +18,10 @@
 #' tidy(g)
 #' glance(g)
 #' 
-#' @rdname gam_tidy_Gam
 #' @export
 #' @family gam tidiers
-#' @aliases Gam_tidiers tidy.Gam
-#' @seealso [tidy()], [gam::gam()], [tidy.anova()]
+#' @aliases Gam_tidiers
+#' @seealso [tidy()], [gam::gam()], [tidy.anova()], [tidy.gam()]
 tidy.Gam <- function(x, ...) {
   tidy(summary(x)$parametric.anova)
 }
@@ -35,11 +34,9 @@ tidy.Gam <- function(x, ...) {
 #' @template return_finish_glance
 #' 
 #' @details Glance at `gam` objects created by calls to [mgcv::gam()] with
-#'   `glance.gam`, documented as [mgcv_glance_gam].
+#'   [glance.gam()].
 #' 
 #' @family gam tidiers
-#' @rdname gam_glance_Gam
-#' @aliases glance.Gam
 #' @export
 #' @seealso [glance()], [gam::gam()]
 glance.Gam <- function(x, ...) {

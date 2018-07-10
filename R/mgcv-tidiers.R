@@ -8,7 +8,7 @@
 #' @template param_unused_dots
 #'
 #' @details To tidy `Gam` objects created by calls to [gam::gam()],
-#'   see [gam_tidy_Gam].
+#'   see [tidy.Gam()].
 #'
 #' @examples
 #'
@@ -23,7 +23,7 @@
 #' @export
 #' @aliases mgcv_tidiers gam_tidiers tidy.gam
 #' @family mgcv tidiers
-#' @seealso [tidy()], [mgcv::gam()], [gam_tidy_Gam]
+#' @seealso [tidy()], [mgcv::gam()], [tidy.Gam()]
 tidy.gam <- function(x, parametric = FALSE, ...) {
   if (parametric) {
     px <- summary(x)$p.table
@@ -45,13 +45,12 @@ tidy.gam <- function(x, parametric = FALSE, ...) {
 #' @template return_finish_glance
 #' 
 #' @details To glance `Gam` objects created by calls to [gam::gam()], see
-#'   [gam_glance_Gam].
+#'   [glance.Gam()].
 #' 
-#' @aliases glance.gam
 #' @rdname mgcv_glance_gam
 #' @export
 #' @family mgcv tidiers
-#' @seealso [glance()], [mgcv::gam()], [gam_glance_Gam]
+#' @seealso [glance()], [mgcv::gam()], [glance.Gam()]
 glance.gam <- function(x, ...) {
   ret <- tibble(df = sum(x$edf))
   finish_glance(ret, x)

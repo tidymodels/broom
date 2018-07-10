@@ -33,10 +33,10 @@ Description of what a \code{glance} method does goes here.
 }
 \details{
 To glance \code{Gam} objects created by calls to \code{\link[gam:gam]{gam::gam()}}, see
-\link{gam_glance_Gam}.
+\code{\link[=glance.Gam]{glance.Gam()}}.
 }
 \seealso{
-\code{\link[=glance]{glance()}}, \code{\link[mgcv:gam]{mgcv::gam()}}, \link{gam_glance_Gam}
+\code{\link[=glance]{glance()}}, \code{\link[mgcv:gam]{mgcv::gam()}}, \code{\link[=glance.Gam]{glance.Gam()}}
 
 Other mgcv tidiers: \code{\link{tidy.gam}}
 }

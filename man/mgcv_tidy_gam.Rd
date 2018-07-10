@@ -30,7 +30,7 @@ Description of what a \code{tidy} method does goes here.
 }
 \details{
 To tidy \code{Gam} objects created by calls to \code{\link[gam:gam]{gam::gam()}},
-see \link{gam_tidy_Gam}.
+see \code{\link[=tidy.Gam]{tidy.Gam()}}.
 }
 \examples{
 
@@ -43,7 +43,7 @@ glance(g)
 
 }
 \seealso{
-\code{\link[=tidy]{tidy()}}, \code{\link[mgcv:gam]{mgcv::gam()}}, \link{gam_tidy_Gam}
+\code{\link[=tidy]{tidy()}}, \code{\link[mgcv:gam]{mgcv::gam()}}, \code{\link[=tidy.Gam]{tidy.Gam()}}
 
 Other mgcv tidiers: \code{\link{glance.gam}}
 }
