@@ -69,16 +69,8 @@ tidy.ergm <- function(x, conf.int = FALSE, conf.level = .95,
   co <- ergm::summary.ergm(x, ...)$coefs
 
   nn <- c("estimate", "std.error", "mcmc.error", "p.value")
-  if (inherits(co, "listof")) {
-    # multiple response variables
-    ret <- purrr::map_df(co, fix_data_frame, nn[1:ncol(co[[1]])],
-      .id = "response"
-    )
-    ret$response <- stringr::str_replace(ret$response, "Response ", "")
-  } else {
-    ret <- fix_data_frame(co, nn[1:ncol(co)])
-  }
-
+  ret <- fix_data_frame(co, nn[1:ncol(co)])
+  
   process_ergm(ret, x,
     conf.int = conf.int, conf.level = conf.level,
     exponentiate = exponentiate

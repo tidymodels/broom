@@ -6,42 +6,35 @@
 #' @template param_unused_dots
 #' 
 #' @return A [tibble::tibble] with one row for each coefficient, containing columns
-#'   \item{parameter}{Type of coefficient being estimated: `mu`, `sigma`,
-#'   `nu`, or `tau`.}
-#'   \item{term}{Name of term in the model.}
-#'   \item{estimate}{Estimate coefficient of given term.}
-#'   \item{std.error}{Standard error of given term.}
-#'   \item{statistic}{T-statistic used to test hypothesis that coefficien
-#'     equals zero.}
-#'   \item{p.value}{Two sided p-value based on null hypothesis of coefficient
-#'     equaling zero.}
+#' \item{parameter}{Type of coefficient being estimated: `mu`, `sigma`,
+#' `nu`, or `tau`.}
+#' \item{term}{Name of term in the model.}
+#' \item{estimate}{Estimate coefficient of given term.}
+#' \item{std.error}{Standard error of given term.}
+#' \item{statistic}{T-statistic used to test hypothesis that coefficien
+#'   equals zero.}
+#' \item{p.value}{Two sided p-value based on null hypothesis of coefficient
+#'   equaling zero.}
 #'
 #' @examples
 #' 
-#' if (requireNamespace("gamlss", quietly = TRUE)) {
-#'   library(gamlss)
-#'   
-#'   g <- gamlss(
-#'     y ~ pb(x),
-#'     sigma.fo = ~ pb(x),
-#'     family = BCT,
-#'     data = abdom,
-#'     method = mixed(1, 20)
-#'   )
+#' library(gamlss)
+#' 
+#' g <- gamlss(
+#'   y ~ pb(x),
+#'   sigma.fo = ~ pb(x),
+#'   family = BCT,
+#'   data = abdom,
+#'   method = mixed(1, 20)
+#' )
 #'
-#'   tidy(g)
-#' }
+#' tidy(g)
 #'
 #' @export
 tidy.gamlss <- function(x, quick = FALSE, ...) {
   if (quick) {
     co <- stats::coef(x)
     return(tibble(term = names(co), estimate = unname(co)))
-  }
-
-  # need gamlss for summary to work
-  if (!requireNamespace("gamlss", quietly = TRUE)) {
-    stop("gamlss package not installed, cannot tidy gamlss")
   }
 
   # use capture.output to prevent summary from being printed to screen

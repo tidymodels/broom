@@ -3,7 +3,8 @@ context("lmtest")
 skip_if_not_installed("lmtest")
 library(lmtest)
 
-ct <- lm(length ~ age, data = Mandible, subset = (age <= 28))
+fit <- lm(length ~ age, data = Mandible, subset = (age <= 28))
+ct <- lmtest::coeftest(fit)
 
 test_that("tidy.coeftest", {
   

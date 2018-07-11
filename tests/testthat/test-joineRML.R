@@ -7,7 +7,7 @@ skip_if_not_installed("joineRML")
 library(joineRML)
 
 # NOTE: the models used in these tests are created in 
-# `tests/fit_and_save_long_running_models.R`, and then are saved to
+# `data-raw/fit_and_save_long_running_models.R`, and then are saved to
 # `R/sysdata.rda`
 
 hvd <- heart.valve %>% 
@@ -27,13 +27,13 @@ test_that("tidy.mjoint", {
   tdsbs <- tidy(
     mjoint_fit,
     component = "survival",
-    bootSE = mjoint_fit_bs_se
+    boot_se = mjoint_fit_bs_se
   )
   
   tdlbs <- tidy(
     mjoint_fit,
     component = "longitudinal",
-    bootSE = mjoint_fit_bs_se
+    boot_se = mjoint_fit_bs_se
   )
   
   check_tidy_output(td)
@@ -49,13 +49,15 @@ test_that("tidy.mjoint", {
   td2sbs <- tidy(
     mjoint_fit2,
     component = "survival",
-    bootSE = mjoint_fit2_bs_se
+    boot_se = mjoint_fit2_bs_se,
+    conf.int = TRUE
   )
   
   td2lbs <- tidy(
     mjoint_fit2, 
     component = "longitudinal",
-    bootSE = mjoint_fit2_bs_se
+    boot_se = mjoint_fit2_bs_se,
+    conf.int = TRUE
   )
   
   check_tidy_output(td2)
@@ -63,6 +65,12 @@ test_that("tidy.mjoint", {
   check_tidy_output(td2l)
   check_tidy_output(td2sbs)
   check_tidy_output(td2lbs)
+  
+  expect_error(
+    tidy(mjoint_fit, boot_se = "cat"),
+    regexp = "`boot_se` argument must be a `bootSE` object."
+  )
+  
 })
 
 
@@ -81,6 +89,11 @@ test_that("augment.mjoint", {
   
   au <- augment(mjoint_fit)
   au2 <- augment(mjoint_fit2)
+  
+  expect_error(
+    augment(mjoint_fit, data = NULL),
+    regexp = "`data` argument is NULL. Try specifying `data` manually."
+  )
   
   check_tibble(au, method = "augment")
   check_tibble(au, method = "augment")

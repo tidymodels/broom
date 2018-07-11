@@ -77,16 +77,8 @@ tidy.btergm <- function(x, conf.level = .95,
   co <- btergm::confint(x, level = conf.level)
 
   nn <- c("estimate", "conf.low", "conf.high")
-  if (inherits(co, "listof")) {
-    # multiple response variables
-    ret <- purrr::map_df(co, fix_data_frame, nn[1:ncol(co[[1]])],
-      .id = "response"
-    )
-    ret$response <- stringr::str_replace(ret$response, "Response ", "")
-  } else {
-    ret <- fix_data_frame(co, nn[1:ncol(co)])
-  }
-
+  ret <- fix_data_frame(co, nn[1:ncol(co)])
+  
   ret$conf.low <- trans(ret$conf.low)
   ret$conf.high <- trans(ret$conf.high)
   ret$estimate <- trans(ret$estimate)

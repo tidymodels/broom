@@ -6,6 +6,9 @@ library(survival)
 cfit <- coxph(Surv(time, status) ~ age + strata(sex), lung)
 sfit <- survfit(cfit)
 
+cfit2 <- coxph(Surv(time, status) ~ age, lung)
+sfit2 <- survfit(cfit2)
+
 fit2 <- survfit(
   Surv(stop, status * as.numeric(event), type = "mstate") ~ 1,
   data = mgus1,
@@ -37,6 +40,7 @@ test_that("glance.survfit", {
     regexp = "Cannot construct a glance of a multi-state survfit object."
   )
   
-  # TODO: another test here?
+  gl <- glance(sfit2)
+  check_glance_outputs(gl)
 })
 

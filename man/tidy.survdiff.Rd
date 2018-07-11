@@ -5,12 +5,10 @@
 \alias{survdiff_tidiers}
 \title{Tidy a(n) survdiff object}
 \usage{
-\method{tidy}{survdiff}(x, strata = FALSE, ...)
+\method{tidy}{survdiff}(x, ...)
 }
 \arguments{
 \item{x}{An \code{survdiff} object returned from \code{\link[survival:survdiff]{survival::survdiff()}}.}
-
-\item{strata}{logical, whether to include strata in the output}
 
 \item{...}{Additional arguments. Not used. Needed to match generic
 signature only. \strong{Cautionary note:} Misspelled arguments will be
