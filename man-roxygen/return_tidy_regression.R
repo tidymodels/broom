@@ -1,5 +1,6 @@
 #' @return A [tibble::tibble()] with one row for each term in the 
 #'   regression. The tibble has columns:
+#'   
 #'   \item{term}{The name of the regression term.}
 #'   \item{estimate}{The estimated value of the regression term.}
 #'   \item{std.error}{The standard error of the regression term.}
@@ -11,4 +12,5 @@
 #'     term. Included only if `conf.int = TRUE`.}
 #'   \item{conf.high}{The high end of a confidence interval for the regression
 #'     term. Included only if `conf.int = TRUE`.}
+#' 
 #' @md

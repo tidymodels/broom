@@ -3,7 +3,7 @@
 \name{tidy_xyz}
 \alias{tidy_xyz}
 \alias{xyz_tidiers}
-\title{Tidying methods for singular value decomposition lists}
+\title{Tidy a(n) xyz object masquerading as list}
 \usage{
 tidy_xyz(x, ...)
 }
@@ -26,10 +26,17 @@ the \code{data} argument.}
 A \link[tibble:tibble]{tibble::tibble} with vector columns \code{x}, \code{y} and \code{z}.
 }
 \description{
-These methods tidy the U, D, and V matrices returned by the
-\code{\link[=svd]{svd()}} functions into a tidy format. Because \code{svd} returns
-lists without classes, this function has to be called by
-\code{\link[=tidy.list]{tidy.list()}} when it recognizes a list as an SVD.
+Broom tidies a number of lists that are effectively S3
+objects without a class attribute. For example, \code{\link[stats:optim]{stats::optim()}},
+\code{\link[=svd]{svd()}} and \code{\link[akima:interp]{akima::interp()}} produce consistent output, but because
+they do not have a class attribute, they cannot be handled by S3 dispatch.
+
+These functions look at the elements of a list and determine if there is
+an appropriate tidying method to apply to the list. Those tidiers are
+themselves are implemented as functions of the form \code{tidy_<function>}
+or \code{glance_<function>} and are not exported (but they are documented!).
+
+If no appropriate tidying method is found, throws an error.
 
 xyz lists (lists where \code{x} and \code{y} are vector of coordinates
 and \code{z} is a matrix of values) are typically used by functions such as

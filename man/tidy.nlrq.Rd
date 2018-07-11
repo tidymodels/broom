@@ -30,6 +30,7 @@ the \code{data} argument.}
 \value{
 A \code{\link[tibble:tibble]{tibble::tibble()}} with one row for each term in the
 regression. The tibble has columns:
+
 \item{term}{The name of the regression term.}
 \item{estimate}{The estimated value of the regression term.}
 \item{std.error}{The standard error of the regression term.}
@@ -43,7 +44,12 @@ term. Included only if \code{conf.int = TRUE}.}
 term. Included only if \code{conf.int = TRUE}.}
 }
 \description{
-Description of what a \code{tidy} method does goes here.
+Tidy summarizes information about the components of a model.
+A model component might be a single term in a regression, a single
+hypothesis, a cluster, or a class. Exactly what tidy considers to be a
+model component varies cross models but is usually self-evident.
+If a model has several distinct types of components, you will need to
+specify which components to return.
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[quantreg:nlrq]{quantreg::nlrq()}}

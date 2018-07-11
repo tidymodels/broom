@@ -62,7 +62,12 @@ If \code{matrix} is \code{"d"} or \code{"pcs"}, the columns are:
 \item{\code{cumulative}}{Cumulative percentage of variation explained}
 }
 \description{
-Description of what a \code{tidy} method does goes here.
+Tidy summarizes information about the components of a model.
+A model component might be a single term in a regression, a single
+hypothesis, a cluster, or a class. Exactly what tidy considers to be a
+model component varies cross models but is usually self-evident.
+If a model has several distinct types of components, you will need to
+specify which components to return.
 }
 \details{
 See https://stats.stackexchange.com/questions/134282/relationship-between-svd-and-pca-how-to-use-svd-to-perform-pca

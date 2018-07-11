@@ -10,8 +10,6 @@
 #'   \item{estimate}{estimated survival}
 #'   \item{n.risk}{number of individuals at risk}
 #'
-#' @template boilerplate
-#'
 #' @examples
 #'
 #' library(survival)

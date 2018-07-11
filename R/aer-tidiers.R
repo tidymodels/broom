@@ -1,8 +1,6 @@
 #' @templateVar class ivreg
 #' @template title_desc_tidy
 #' 
-#' @template desc_regression
-#' 
 #' @param x An `ivreg` object created by a call to [AER::ivreg()].
 #' @template param_confint
 #' @template param_exponentiate
@@ -10,25 +8,25 @@
 #' 
 #' @template return_tidy_regression
 #' @examples
+#' 
+#' library(AER)
 #'
-#' if (require("AER", quietly = TRUE)) {
-#'     data("CigarettesSW", package = "AER")
-#'     ivr <- ivreg(
-#'       log(packs) ~ income | population,
-#'       data = CigarettesSW,
-#'       subset = year == "1995"
-#'     )
+#' data("CigarettesSW", package = "AER")
+#' ivr <- ivreg(
+#'   log(packs) ~ income | population,
+#'   data = CigarettesSW,
+#'   subset = year == "1995"
+#' )
 #'
-#'     summary(ivr)
+#' summary(ivr)
 #'
-#'     tidy(ivr)
-#'     tidy(ivr, conf.int = TRUE)
-#'     tidy(ivr, conf.int = TRUE, exponentiate = TRUE)
+#' tidy(ivr)
+#' tidy(ivr, conf.int = TRUE)
+#' tidy(ivr, conf.int = TRUE, exponentiate = TRUE)
 #'
-#'     augment(ivr)
+#' augment(ivr)
 #'
-#'     glance(ivr)
-#' }
+#' glance(ivr)
 #' 
 #' @export
 #' @seealso [tidy()], [AER::ivreg()]
@@ -56,7 +54,7 @@ tidy.ivreg <- function(x,
 #' @templateVar class ivreg
 #' @template title_desc_augment
 #' 
-#' @inheritParams tidy.ivreg
+#' @inherit tidy.ivreg params examples
 #' @template param_data
 #' @template param_newdata
 #' @template param_unused_dots
@@ -73,7 +71,7 @@ augment.ivreg <- function(x, data = model.frame(x), newdata, ...) {
 #' @templateVar class ivreg
 #' @template title_desc_glance
 #' 
-#' @inheritParams tidy.ivreg
+#' @inherit tidy.ivreg params examples
 #' @param diagnostics Logical indicating whether to include statistics and
 #'   p-values for Sargan, Wu-Hausman and weak instrument tests. Defaults to
 #'   `FALSE`.

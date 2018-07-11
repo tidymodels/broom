@@ -1,5 +1,7 @@
 #' @title Tidy/glance a(n) <%= class %> object
 #' 
-#' @description TODO: this desc for objects whose `tidy` and `glance` methods
-#'   are indentical
+#' @description For models that have only a single component, the [tidy()] and
+#'   [glance()] methods are identical. Please see the documentation for both
+#'   of those methods.   
+#' 
 #' @md

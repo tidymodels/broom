@@ -19,7 +19,7 @@ data passed to the \code{data} argument. These measures are only defined for
 the original training data.}
 
 \item{newdata}{A \code{\link[=data.frame]{data.frame()}} or \code{\link[tibble:tibble]{tibble::tibble()}} containing all
-the original predictors usednto create \code{x}. Defaults to \code{NULL}, indicating
+the original predictors used to create \code{x}. Defaults to \code{NULL}, indicating
 that nothing has been passed to \code{newdata}. If \code{newdata} is specified,
 the \code{data} argument will be ignored.}
 
@@ -38,7 +38,43 @@ A \link[tibble:tibble]{tibble::tibble} containing the original data and one addi
 column \code{.fitted}.
 }
 \description{
-Description of what a \code{augment} method does goes here.
+Augment accepts a model object and a dataset and adds
+information about each observation in the dataset. Most commonly, this
+includes predicted values in the \code{.fitted} column, residuals in the
+\code{.resid} column, and standard errors for the fitted values in a \code{.se.fit}
+column. New columns always begin with a \code{.} prefix to avoid overwriting
+columns in the original dataset.
+
+Users may pass data to augment via either the \code{data} argument or the
+\code{newdata} argument. If the user passes data to the \code{data} argument,
+it \strong{must} be exactly the data that was used to fit the model
+object. Pass datasets to \code{newdata} to augment data that was not used
+during model fitting. This still requires that all columns used to fit
+the model are present.
+
+Augment will often behavior different depending on whether \code{data} or
+\code{newdata} is specified. This is because there is often information
+associated with training observations (such as influences or related)
+measures that is not meaningfully defined for new observations.
+
+For convenience, many augment methods provide default \code{data} arguments,
+so that \code{augment(fit)} will return the augmented training data. In these
+cases augment tries to reconstruct the original data based on the model
+object, with some varying degrees of success.
+
+The augmented dataset is always returned as a \link[tibble:tibble]{tibble::tibble} with the
+\strong{same number of rows} as the passed dataset. This means that the
+passed data must be coercible to a tibble. At this time, tibbles do not
+support matrix-columns. This means you should not specify a matrix
+of covariates in a model formula during the original model fitting
+process, and that \code{\link[splines:ns]{splines::ns()}}, \code{\link[splines:poly]{splines::poly()}} and
+\code{\link[survival:Surv]{survival::Surv()}} objects are not supported in input data. If you
+encounter errors, try explicitly passing a tibble, or fitting the original
+model on data in a tibble.
+
+We are in the process of defining behaviors for models fit with various
+\link{na.action} arguments, but make no guarantees about behavior when data is
+missing at this time.
 }
 \seealso{
 \code{\link[speedglm:speedlm]{speedglm::speedlm()}}

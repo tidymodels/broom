@@ -11,7 +11,7 @@
 
 \item{quick}{Logical indiciating if the only the \code{term} and \code{estimate}
 columns should be returned. Often useful to avoid time consuming
-covariance calculations. Defaults to \code{FALSE}.}
+covariance and standard error calculations. Defaults to \code{FALSE}.}
 
 \item{...}{Additional arguments. Not used. Needed to match generic
 signature only. \strong{Cautionary note:} Misspelled arguments will be
@@ -36,7 +36,12 @@ equals zero.}
 equaling zero.}
 }
 \description{
-Description of what a \code{tidy} method does goes here.
+Tidy summarizes information about the components of a model.
+A model component might be a single term in a regression, a single
+hypothesis, a cluster, or a class. Exactly what tidy considers to be a
+model component varies cross models but is usually self-evident.
+If a model has several distinct types of components, you will need to
+specify which components to return.
 }
 \examples{
 

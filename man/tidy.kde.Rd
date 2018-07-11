@@ -28,7 +28,12 @@ estimated grid. The result contains one column (named \code{x1},
 containing the estimated density.
 }
 \description{
-Description of what a \code{tidy} method does goes here.
+Tidy summarizes information about the components of a model.
+A model component might be a single term in a regression, a single
+hypothesis, a cluster, or a class. Exactly what tidy considers to be a
+model component varies cross models but is usually self-evident.
+If a model has several distinct types of components, you will need to
+specify which components to return.
 }
 \examples{
 

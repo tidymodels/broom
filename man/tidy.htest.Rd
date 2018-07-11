@@ -43,8 +43,9 @@ two-sample t-test}
 \item{alternative}{Alternative hypothesis as a string}
 }
 \description{
-TODO: this desc for objects whose \code{tidy} and \code{glance} methods
-are indentical
+For models that have only a single component, the \code{\link[=tidy]{tidy()}} and
+\code{\link[=glance]{glance()}} methods are identical. Please see the documentation for both
+of those methods.
 }
 \examples{
 

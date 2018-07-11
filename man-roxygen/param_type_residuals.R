@@ -1,4 +1,5 @@
-#' @param type.residuals Character indicating type of residuals to use. TODO:
-#'   Figure out what the options are, how they are different, and make
-#'   sure to use arg.match here.
+#' @param type.residuals Character indicating type of residuals to use. Passed
+#'   to the `type` argument of [stats::residuals()] generic. Allowed arguments
+#'   vary with model class, so be sure to read the `residuals.my_class`
+#'   documentation.
 #' @md

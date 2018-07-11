@@ -3,7 +3,7 @@
 \name{glance_optim}
 \alias{glance_optim}
 \alias{glance.optim}
-\title{Tidying methods for singular value decomposition lists}
+\title{Tidy a(n) optim object masquerading as list}
 \usage{
 glance_optim(x, ...)
 }
@@ -29,10 +29,17 @@ A one-row \link[tibble:tibble]{tibble::tibble} with columns:
 \item{convergence}{convergence code representing the error state}
 }
 \description{
-These methods tidy the U, D, and V matrices returned by the
-\code{\link[=svd]{svd()}} functions into a tidy format. Because \code{svd} returns
-lists without classes, this function has to be called by
-\code{\link[=tidy.list]{tidy.list()}} when it recognizes a list as an SVD.
+Broom tidies a number of lists that are effectively S3
+objects without a class attribute. For example, \code{\link[stats:optim]{stats::optim()}},
+\code{\link[=svd]{svd()}} and \code{\link[akima:interp]{akima::interp()}} produce consistent output, but because
+they do not have a class attribute, they cannot be handled by S3 dispatch.
+
+These functions look at the elements of a list and determine if there is
+an appropriate tidying method to apply to the list. Those tidiers are
+themselves are implemented as functions of the form \code{tidy_<function>}
+or \code{glance_<function>} and are not exported (but they are documented!).
+
+If no appropriate tidying method is found, throws an error.
 }
 \seealso{
 \code{\link[=glance]{glance()}}, \code{\link[=optim]{optim()}}

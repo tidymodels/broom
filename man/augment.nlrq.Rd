@@ -19,7 +19,7 @@ Augment will report information such as influence and cooks distance for
 data passed to the \code{data} argument. These measures are only defined for
 the original training data.}
   \item{newdata}{A \code{\link[=data.frame]{data.frame()}} or \code{\link[tibble:tibble]{tibble::tibble()}} containing all
-the original predictors usednto create \code{x}. Defaults to \code{NULL}, indicating
+the original predictors used to create \code{x}. Defaults to \code{NULL}, indicating
 that nothing has been passed to \code{newdata}. If \code{newdata} is specified,
 the \code{data} argument will be ignored.}
   \item{x}{An \code{nls} object returned from \code{\link[stats:nls]{stats::nls()}}.}
@@ -27,13 +27,19 @@ the \code{data} argument will be ignored.}
 }
 \value{
 A \code{\link[tibble:tibble]{tibble::tibble()}} containing the data passed to \code{augment},
-along with additional columns:
+and \strong{additional} columns:
+
 \item{.fitted}{The predicted response for that observation.}
 \item{.resid}{The residual for a particular point. Present only when
 data has been passed to \code{augment} via the \code{data} argument.}
 }
 \description{
-Description of what a \code{tidy} method does goes here.
+Tidy summarizes information about the components of a model.
+A model component might be a single term in a regression, a single
+hypothesis, a cluster, or a class. Exactly what tidy considers to be a
+model component varies cross models but is usually self-evident.
+If a model has several distinct types of components, you will need to
+specify which components to return.
 }
 \seealso{
 \code{\link[=augment]{augment()}}, \code{\link[quantreg:nlrq]{quantreg::nlrq()}}

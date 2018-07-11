@@ -29,7 +29,37 @@ the \code{data} argument.}
 \item{df.null}{degrees of freedom under the null}
 }
 \description{
-Description of what a \code{glance} method does goes here.
+Glance accepts a model object and returns a \code{\link[tibble:tibble]{tibble::tibble()}}
+with exactly one row of model summaries. The summaries are typically
+goodness of fit measures, p-values for hypothesis tests on residuals,
+or model convergence information.
+
+Glance never returns information from the original call to the modelling
+function. This includes the name of the modelling function or any
+arguments passed to the modelling function.
+
+Glance does not calculate summary measures. Rather, it farms out these
+computations to appropriate methods and gathers the results together.
+Sometimes a goodness of fit measure will be undefined. In these cases
+the measure will be reported as \code{NA}.
+}
+\examples{
+
+library(betareg)
+
+data("GasolineYield", package = "betareg")
+
+mod <- betareg(yield ~ batch + temp, data = GasolineYield)
+
+mod
+tidy(mod)
+tidy(mod, conf.int = TRUE)
+tidy(mod, conf.int = TRUE, conf.level = .99)
+
+augment(mod)
+
+glance(mod)
+
 }
 \seealso{
 \code{\link[=glance]{glance()}}, \code{\link[betareg:betareg]{betareg::betareg()}}

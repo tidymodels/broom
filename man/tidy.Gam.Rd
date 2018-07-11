@@ -25,7 +25,12 @@ The tidied output of the parametric ANOVA for the GAM model as
 a \link[tibble:tibble]{tibble::tibble} with one row for each term in the model.
 }
 \description{
-Description of what a \code{tidy} method does goes here.
+Tidy summarizes information about the components of a model.
+A model component might be a single term in a regression, a single
+hypothesis, a cluster, or a class. Exactly what tidy considers to be a
+model component varies cross models but is usually self-evident.
+If a model has several distinct types of components, you will need to
+specify which components to return.
 }
 \details{
 Tidy \code{gam} objects created by calls to \code{\link[mgcv:gam]{mgcv::gam()}} with

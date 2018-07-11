@@ -27,7 +27,7 @@ an appropriate tidying method to apply to the list. Those tidiers are
 themselves are implemented as functions of the form \code{tidy_<function>}
 or \code{glance_<function>} and are not exported (but they are documented!).
 
-If no appropriate tidying method is found, throughs an error.
+If no appropriate tidying method is found, throws an error.
 }
 \seealso{
 Other list tidiers: \code{\link{glance_optim}},

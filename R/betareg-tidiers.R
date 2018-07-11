@@ -1,8 +1,6 @@
 #' @templateVar class betareg
 #' @template title_desc_tidy
 #' 
-#' @template desc_regression
-#'
 #' @param x A `betareg` object produced by a call to [betareg::betareg()].
 #' @template param_confint
 #' @template param_unused_dots
@@ -10,27 +8,27 @@
 #' @template return_tidy_regression
 #'
 #' @return In additional the standard columns, the returned tibble has an
-#'   additional column `component`. `component` indicates whether a particular
-#'   term was used to model either the `"mean"` or `"precision"`. Here the
-#'   precision is the inverse of the variance, often referred to as `phi`.
-#'   At least one term will have been used to model `phi`.
+#' additional column `component`. `component` indicates whether a particular
+#' term was used to model either the `"mean"` or `"precision"`. Here the
+#' precision is the inverse of the variance, often referred to as `phi`.
+#' At least one term will have been used to model `phi`.
 #'
 #' @examples
 #'
-#' if (require("betareg", quietly = TRUE)) {
-#'   data("GasolineYield", package = "betareg")
+#' library(betareg)
+#' 
+#' data("GasolineYield", package = "betareg")
 #'
-#'   mod <- betareg(yield ~ batch + temp, data = GasolineYield)
+#' mod <- betareg(yield ~ batch + temp, data = GasolineYield)
 #'
-#'   mod
-#'   tidy(mod)
-#'   tidy(mod, conf.int = TRUE)
-#'   tidy(mod, conf.int = TRUE, conf.level = .99)
+#' mod
+#' tidy(mod)
+#' tidy(mod, conf.int = TRUE)
+#' tidy(mod, conf.int = TRUE, conf.level = .99)
 #'
-#'   augment(mod)
+#' augment(mod)
 #'
-#'   glance(mod)
-#' }
+#' glance(mod)
 #'
 #' @export
 #' @seealso [tidy()], [betareg::betareg()]
@@ -65,9 +63,9 @@ tidy.betareg <- function(x, conf.int = FALSE, conf.level = .95, ...) {
 #'
 #' @return augment returns the original data, along with new columns describing
 #' each observation:
-#'   \item{.fitted}{Fitted values of model}
-#'   \item{.resid}{Residuals}
-#'   \item{.cooksd}{Cooks distance, [cooks.distance()]}
+#' \item{.fitted}{Fitted values of model}
+#' \item{.resid}{Residuals}
+#' \item{.cooksd}{Cooks distance, [cooks.distance()]}
 #'
 #' @seealso [augment()], [betareg::betareg()]
 #' @export
@@ -87,16 +85,16 @@ augment.betareg <- function(x, data = stats::model.frame(x), newdata = NULL,
 #' @templateVar class betareg
 #' @template title_desc_glance
 #' 
-#' @inheritParams tidy.betareg
+#' @inherit tidy.betareg params examples
 #' @template param_unused_dots
 #' 
 #' @return `glance` returns a one-row tibble with columns:
-#'   \item{pseudo.r.squared}{the deviance of the null model}
-#'   \item{logLik}{the data's log-likelihood under the model}
-#'   \item{AIC}{the Akaike Information Criterion}
-#'   \item{BIC}{the Bayesian Information Criterion}
-#'   \item{df.residual}{residual degrees of freedom}
-#'   \item{df.null}{degrees of freedom under the null}
+#' \item{pseudo.r.squared}{the deviance of the null model}
+#' \item{logLik}{the data's log-likelihood under the model}
+#' \item{AIC}{the Akaike Information Criterion}
+#' \item{BIC}{the Bayesian Information Criterion}
+#' \item{df.residual}{residual degrees of freedom}
+#' \item{df.null}{degrees of freedom under the null}
 #'
 #' @seealso [glance()], [betareg::betareg()]
 #' @export

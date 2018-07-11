@@ -1,11 +1,9 @@
-#' @title Tidy a(n) <%= class %> object
+#' @title Augment a(n) <%= class %> object
 #' 
-#' @description Description of what a `augment` method does goes here. Wraps
-#'   [augment.lm()]. Details on this. Document params other than `x`.
+#' @description This augment method wraps [augment.lm()].
 #'   
 #' @inheritDotParams augment.lm
-#'   
-#' @return Something goes here
+#' @inherit augment.lm return
 #' 
 #' @seealso [augment()], [augment.lm()]
 #' 

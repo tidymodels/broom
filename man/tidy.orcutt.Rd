@@ -20,7 +20,7 @@ if \code{conf.int = TRUE}. Must be strictly greater than 0 and less than 1.
 Defaults to 0.95, which corresponds to a 95 percent confidence interval.}
   \item{quick}{Logical indiciating if the only the \code{term} and \code{estimate}
 columns should be returned. Often useful to avoid time consuming
-covariance calculations. Defaults to \code{FALSE}.}
+covariance and standard error calculations. Defaults to \code{FALSE}.}
   \item{exponentiate}{Logical indicating whether or not to exponentiate the
 the coefficient estimates. This is typical for logistic and multinomial
 regressions, but a bad idea if there is no log or logit link. Defaults
@@ -28,14 +28,11 @@ to \code{FALSE}.}
 }}
 }
 \value{
-Something goes here
-
 \code{tidy} returns the same information as \code{\link[=tidy.lm]{tidy.lm()}},
 though without confidence interval options.
 }
 \description{
-Description of what a \code{tidy} method does goes here. Wraps
-\code{\link[=tidy.lm]{tidy.lm()}}. Details on this.  Document params other than \code{x}.
+This method wraps \code{\link[=tidy.lm]{tidy.lm()}}.
 }
 \examples{
 

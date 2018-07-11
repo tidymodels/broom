@@ -30,6 +30,7 @@ the \code{data} argument.}
 \value{
 A \code{\link[tibble:tibble]{tibble::tibble()}} with one row for each term in the
 regression. The tibble has columns:
+
 \item{term}{The name of the regression term.}
 \item{estimate}{The estimated value of the regression term.}
 \item{std.error}{The standard error of the regression term.}
@@ -49,24 +50,29 @@ precision is the inverse of the variance, often referred to as \code{phi}.
 At least one term will have been used to model \code{phi}.
 }
 \description{
-Description of what a \code{tidy} method does goes here.
+Tidy summarizes information about the components of a model.
+A model component might be a single term in a regression, a single
+hypothesis, a cluster, or a class. Exactly what tidy considers to be a
+model component varies cross models but is usually self-evident.
+If a model has several distinct types of components, you will need to
+specify which components to return.
 }
 \examples{
 
-if (require("betareg", quietly = TRUE)) {
-  data("GasolineYield", package = "betareg")
+library(betareg)
 
-  mod <- betareg(yield ~ batch + temp, data = GasolineYield)
+data("GasolineYield", package = "betareg")
 
-  mod
-  tidy(mod)
-  tidy(mod, conf.int = TRUE)
-  tidy(mod, conf.int = TRUE, conf.level = .99)
+mod <- betareg(yield ~ batch + temp, data = GasolineYield)
 
-  augment(mod)
+mod
+tidy(mod)
+tidy(mod, conf.int = TRUE)
+tidy(mod, conf.int = TRUE, conf.level = .99)
 
-  glance(mod)
-}
+augment(mod)
+
+glance(mod)
 
 }
 \seealso{

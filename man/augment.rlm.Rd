@@ -2,7 +2,7 @@
 % Please edit documentation in R/mass-rlm-tidiers.R
 \name{augment.rlm}
 \alias{augment.rlm}
-\title{Tidy a(n) rlm object}
+\title{Augment a(n) rlm object}
 \usage{
 \method{augment}{rlm}(x, ...)
 }
@@ -19,7 +19,7 @@ Augment will report information such as influence and cooks distance for
 data passed to the \code{data} argument. These measures are only defined for
 the original training data.}
   \item{newdata}{A \code{\link[=data.frame]{data.frame()}} or \code{\link[tibble:tibble]{tibble::tibble()}} containing all
-the original predictors usednto create \code{x}. Defaults to \code{NULL}, indicating
+the original predictors used to create \code{x}. Defaults to \code{NULL}, indicating
 that nothing has been passed to \code{newdata}. If \code{newdata} is specified,
 the \code{data} argument will be ignored.}
   \item{type.predict}{Type of predictions to use when \code{x} is a \code{glm} object.
@@ -30,11 +30,31 @@ Passed to \code{\link[stats:residuals.glm]{stats::residuals.glm()}}.}
 }}
 }
 \value{
-Something goes here
+When \code{newdata} is not supplied \code{augment.lm} returns
+one row for each observation, with seven columns added to the original
+data:
+
+\item{.hat}{Diagonal of the hat matrix}
+\item{.sigma}{Estimate of residual standard deviation when
+corresponding observation is dropped from model}
+\item{.cooksd}{Cooks distance, \code{\link[=cooks.distance]{cooks.distance()}}}
+\item{.fitted}{Fitted values of model}
+\item{.se.fit}{Standard errors of fitted values}
+\item{.resid}{Residuals}
+\item{.std.resid}{Standardised residuals}
+
+Some unusual \code{lm} objects, such as \code{rlm} from MASS, may omit \code{.cooksd}
+and \code{.std.resid}. \code{gam} from mgcv omits \code{.sigma}.
+
+When \code{newdata} is supplied, returns one row for each observation, with
+three columns added to the new data:
+
+\item{.fitted}{Fitted values of model}
+\item{.se.fit}{Standard errors of fitted values}
+\item{.resid}{Residuals of fitted values on the new data}
 }
 \description{
-Description of what a \code{augment} method does goes here. Wraps
-\code{\link[=augment.lm]{augment.lm()}}. Details on this. Document params other than \code{x}.
+This augment method wraps \code{\link[=augment.lm]{augment.lm()}}.
 }
 \details{
 For tidiers for models from the \pkg{robust} package see

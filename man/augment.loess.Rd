@@ -19,7 +19,7 @@ data passed to the \code{data} argument. These measures are only defined for
 the original training data.}
 
 \item{newdata}{A \code{\link[=data.frame]{data.frame()}} or \code{\link[tibble:tibble]{tibble::tibble()}} containing all
-the original predictors usednto create \code{x}. Defaults to \code{NULL}, indicating
+the original predictors used to create \code{x}. Defaults to \code{NULL}, indicating
 that nothing has been passed to \code{newdata}. If \code{newdata} is specified,
 the \code{data} argument will be ignored.}
 
@@ -50,7 +50,12 @@ one row for each observation with one additional column:
 \item{.se.fit}{Standard errors of the fitted values}
 }
 \description{
-Description of what a \code{tidy} method does goes here.
+Tidy summarizes information about the components of a model.
+A model component might be a single term in a regression, a single
+hypothesis, a cluster, or a class. Exactly what tidy considers to be a
+model component varies cross models but is usually self-evident.
+If a model has several distinct types of components, you will need to
+specify which components to return.
 }
 \details{
 When the modeling was performed with \code{na.action = "na.omit"}
@@ -59,7 +64,7 @@ entirely from the augmented data frame. When the modeling was performed
 with \code{na.action = "na.exclude"}, one should provide the original data
 as a second argument, at which point the augmented data will contain those
 rows (typically with NAs in place of the new columns). If the original data
-is not provided to \code{augment} and \code{na.action = "na.exclude"}, a
+is not provided to \code{\link[=augment]{augment()}} and \code{na.action = "na.exclude"}, a
 warning is raised and the incomplete rows are dropped.
 }
 \examples{
