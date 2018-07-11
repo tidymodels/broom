@@ -2,7 +2,6 @@
 #' @template title_desc_tidy
 #'
 #' @param x An `survdiff` object returned from [survival::survdiff()].
-#' @param strata logical, whether to include strata in the output
 #' @template param_unused_dots
 #' 
 #' @return A [tibble::tibble] with one row for each time point and columns:
@@ -30,7 +29,7 @@
 #' @seealso [tidy()], [survival::survdiff()]
 #' @family survdiff tidiers
 #' @family survival tidiers
-tidy.survdiff <- function(x, strata=FALSE, ...) {
+tidy.survdiff <- function(x, ...) {
   # if one-sample test
   if (length(x$obs) == 1) {
     return(
@@ -50,22 +49,11 @@ tidy.survdiff <- function(x, strata=FALSE, ...) {
     ))
   gvars <- do.call("rbind", row_list)
   has_strata <- "strata" %in% names(x)
-  if (strata && has_strata) {
-    .NotYetUsed(strata)
-    d_obs <- cbind(gvars, as.data.frame(x$obs)) %>%
-      tidyr::gather(strata, obs, dplyr::matches("V[0-9]+")) %>%
-      tidyr::extract(strata, "strata", "([0-9]+)")
-    d_exp <- cbind(gvars, as.data.frame(x$exp)) %>%
-      tidyr::gather(strata, exp, dplyr::matches("V[0-9]+")) %>%
-      tidyr::extract(strata, "strata", "([0-9]+)")
-    z <- d_obs %>% dplyr::left_join(d_exp)
-  } else {
-    rval <- data.frame(
-      N = as.numeric(x$n),
-      obs = if (has_strata) apply(x$obs, 1, sum) else x$obs,
-      exp = if (has_strata) apply(x$exp, 1, sum) else x$exp
-    )
-  }
+  rval <- data.frame(
+    N = as.numeric(x$n),
+    obs = if (has_strata) apply(x$obs, 1, sum) else x$obs,
+    exp = if (has_strata) apply(x$exp, 1, sum) else x$exp
+  )
   as_tibble(bind_cols(gvars, rval))
 }
 
