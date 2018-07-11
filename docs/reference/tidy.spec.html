@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>tidy a spec objet — tidy.spec • broom</title>
+<title>Tidy a(n) spec object — tidy.spec • broom</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -101,15 +101,19 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>tidy a spec objet</h1>
+    <h1>Tidy a(n) spec object</h1>
     <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/stats-time-series-tidiers.R'><code>R/stats-time-series-tidiers.R</code></a></small>
     <div class="hidden name"><code>tidy.spec.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Given a "spec" object, which shows a spectrum across a range of frequencies,
-returns a tidy data frame with two columns: "freq" and "spec"</p>
+    <p>Tidy summarizes information about the components of a model.
+A model component might be a single term in a regression, a single
+hypothesis, a cluster, or a class. Exactly what tidy considers to be a
+model component varies cross models but is usually self-evident.
+If a model has several distinct types of components, you will need to
+specify which components to return.</p>
     
     </div>
 
@@ -121,17 +125,31 @@ returns a tidy data frame with two columns: "freq" and "spec"</p>
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>x</th>
-      <td><p>an object of class "spec"</p></td>
+      <td><p>A <code>spec</code> object created by <code><a href='http://www.rdocumentation.org/packages/stats/topics/spectrum'>stats::spectrum()</a></code>.</p></td>
     </tr>
     <tr>
       <th>...</th>
-      <td><p>extra arguments (not used)</p></td>
+      <td><p>Additional arguments. Not used. Needed to match generic
+signature only. <strong>Cautionary note:</strong> Misspelled arguments will be
+absorbed in <code>...</code>, where they will be ignored. If the misspelled
+argument has a default value, the default value will be used.
+For example, if you pass <code>conf.lvel = 0.9</code>, all computation will
+proceed using <code>conf.level = 0.95</code>. Additionally, if you pass
+<code>newdata = my_tibble</code> to an <code><a href='augment.html'>augment()</a></code> method that does not
+accept a <code>newdata</code> argument, it will use the default value for
+the <code>data</code> argument.</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>a data frame with "freq" and "spec" columns</p>
+    <p>A <a href='http://www.rdocumentation.org/packages/tibble/topics/tibble'>tibble::tibble</a> with two columns: <code>freq</code> and <code>spec</code>.</p>
+    
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p><code><a href='tidy.html'>tidy()</a></code>, <code><a href='http://www.rdocumentation.org/packages/stats/topics/spectrum'>stats::spectrum()</a></code></p>
+<p>Other time series tidiers: <code><a href='tidy.acf.html'>tidy.acf</a></code>,
+  <code><a href='tidy.ts.html'>tidy.ts</a></code>, <code><a href='tidy.zoo.html'>tidy.zoo</a></code></p></div>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
@@ -151,7 +169,8 @@ returns a tidy data frame with two columns: "freq" and "spec"</p>
 #&gt; 10 0.208  0.0675
 #&gt; # ... with 14 more rows</div><div class='input'>
 <span class='fu'>library</span>(<span class='no'>ggplot2</span>)
-<span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/ggplot'>ggplot</a></span>(<span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>spc</span>), <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/aes'>aes</a></span>(<span class='no'>freq</span>, <span class='no'>spec</span>)) + <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/geom_path'>geom_line</a></span>()</div><div class='img'><img src='tidy.spec-2.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/ggplot'>ggplot</a></span>(<span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>spc</span>), <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/aes'>aes</a></span>(<span class='no'>freq</span>, <span class='no'>spec</span>)) +
+  <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/geom_path'>geom_line</a></span>()</div><div class='img'><img src='tidy.spec-2.png' alt='' width='700' height='433' /></div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
@@ -160,6 +179,8 @@ returns a tidy data frame with two columns: "freq" and "spec"</p>
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
+
+      <li><a href="#see-also">See also</a></li>
       
       <li><a href="#examples">Examples</a></li>
     </ul>

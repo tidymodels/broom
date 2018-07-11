@@ -94,7 +94,7 @@ The augmented dataset is always returned as a \link[tibble:tibble]{tibble::tibbl
 passed data must be coercible to a tibble. At this time, tibbles do not
 support matrix-columns. This means you should not specify a matrix
 of covariates in a model formula during the original model fitting
-process, and that \code{\link[splines:ns]{splines::ns()}}, \code{\link[splines:poly]{splines::poly()}} and
+process, and that \code{\link[splines:ns]{splines::ns()}}, \code{\link[stats:poly]{stats::poly()}} and
 \code{\link[survival:Surv]{survival::Surv()}} objects are not supported in input data. If you
 encounter errors, try explicitly passing a tibble, or fitting the original
 model on data in a tibble.

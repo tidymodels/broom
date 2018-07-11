@@ -115,9 +115,9 @@ developed in the <code>broom.mixed</code> package, which is not yet on CRAN.</p>
     </div>
 
     <pre class="usage"><span class='co'># S3 method for merMod</span>
-<span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>x</span>, <span class='kw'>effects</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"ran_pars"</span>, <span class='st'>"fixed"</span>), <span class='kw'>scales</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>ran_prefix</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>conf.int</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>conf.level</span> <span class='kw'>=</span> <span class='fl'>0.95</span>,
-  <span class='kw'>conf.method</span> <span class='kw'>=</span> <span class='st'>"Wald"</span>, <span class='no'>...</span>)
+<span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>x</span>, <span class='kw'>effects</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"ran_pars"</span>, <span class='st'>"fixed"</span>),
+  <span class='kw'>scales</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>ran_prefix</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>conf.int</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>conf.level</span> <span class='kw'>=</span> <span class='fl'>0.95</span>, <span class='kw'>conf.method</span> <span class='kw'>=</span> <span class='st'>"Wald"</span>, <span class='no'>...</span>)
 
 <span class='co'># S3 method for merMod</span>
 <span class='fu'><a href='augment.html'>augment</a></span>(<span class='no'>x</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='kw pkg'>stats</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/stats/topics/model.frame'>model.frame</a></span>(<span class='no'>x</span>), <span class='no'>newdata</span>, <span class='no'>...</span>)
@@ -216,7 +216,7 @@ entirely from the augmented data frame. When the modeling was performed
 with <code>na.action = "na.exclude"</code>, one should provide the original data
 as a second argument, at which point the augmented data will contain those
 rows (typically with NAs in place of the new columns). If the original data
-is not provided to <code>augment</code> and <code>na.action = "na.exclude"</code>, a
+is not provided to <code><a href='augment.html'>augment()</a></code> and <code>na.action = "na.exclude"</code>, a
 warning is raised and the incomplete rows are dropped.</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
@@ -251,9 +251,12 @@ warning is raised and the incomplete rows are dropped.</p>
     <span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>nm1</span>, <span class='kw'>effects</span> <span class='kw'>=</span> <span class='st'>"fixed"</span>)
     <span class='fu'>head</span>(<span class='fu'><a href='augment.html'>augment</a></span>(<span class='no'>nm1</span>, <span class='no'>Orange</span>))
     <span class='fu'><a href='glance.html'>glance</a></span>(<span class='no'>nm1</span>)
-}</div><div class='output co'>#&gt; <span class='message'>Loading required package: lme4</span></div><div class='output co'>#&gt; <span class='message'>Computing profile confidence intervals ...</span></div><div class='output co'>#&gt; <span class='warning'>Warning: variance-covariance matrix computed from finite-difference Hessian is</span>
+}</div><div class='output co'>#&gt; <span class='message'>Loading required package: lme4</span></div><div class='output co'>#&gt; <span class='message'>Loading required package: Matrix</span></div><div class='output co'>#&gt; <span class='message'></span>
+#&gt; <span class='message'>Attaching package: 'Matrix'</span></div><div class='output co'>#&gt; <span class='message'>The following object is masked from 'package:tidyr':</span>
+#&gt; <span class='message'></span>
+#&gt; <span class='message'>    expand</span></div><div class='output co'>#&gt; <span class='warning'>Warning: binding factor and character vector, coercing into character vector</span></div><div class='output co'>#&gt; <span class='warning'>Warning: binding character and factor vector, coercing into character vector</span></div><div class='output co'>#&gt; <span class='message'>Computing profile confidence intervals ...</span></div><div class='output co'>#&gt; <span class='warning'>Warning: binding factor and character vector, coercing into character vector</span></div><div class='output co'>#&gt; <span class='warning'>Warning: binding character and factor vector, coercing into character vector</span></div><div class='output co'>#&gt; <span class='warning'>Warning: variance-covariance matrix computed from finite-difference Hessian is</span>
 #&gt; <span class='warning'>not positive definite or contains NA values: falling back to var-cov estimated from RX</span></div><div class='output co'>#&gt; <span class='warning'>Warning: variance-covariance matrix computed from finite-difference Hessian is</span>
-#&gt; <span class='warning'>not positive definite or contains NA values: falling back to var-cov estimated from RX</span></div><div class='output co'>#&gt; <span class='warning'>Warning: variance-covariance matrix computed from finite-difference Hessian is</span>
+#&gt; <span class='warning'>not positive definite or contains NA values: falling back to var-cov estimated from RX</span></div><div class='output co'>#&gt; <span class='warning'>Warning: binding factor and character vector, coercing into character vector</span></div><div class='output co'>#&gt; <span class='warning'>Warning: binding character and factor vector, coercing into character vector</span></div><div class='output co'>#&gt; <span class='warning'>Warning: variance-covariance matrix computed from finite-difference Hessian is</span>
 #&gt; <span class='warning'>not positive definite or contains NA values: falling back to var-cov estimated from RX</span></div><div class='output co'>#&gt; <span class='warning'>Warning: variance-covariance matrix computed from finite-difference Hessian is</span>
 #&gt; <span class='warning'>not positive definite or contains NA values: falling back to var-cov estimated from RX</span></div><div class='output co'>#&gt; <span class='warning'>Warning: number of items to replace is not a multiple of replacement length</span></div><div class='output co'>#&gt; # A tibble: 1 x 6
 #&gt;   sigma logLik   AIC   BIC deviance df.residual

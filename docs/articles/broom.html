@@ -85,7 +85,7 @@
     <div class="page-header toc-ignore">
       <h1>Introduction to broom</h1>
             
-            <h4 class="date">2018-07-03</h4>
+            <h4 class="date">2018-07-11</h4>
       
       <small class="dont-index">Source: <a href="http://github.com/tidyverse/broom/blob/master/vignettes/broom.Rmd"><code>vignettes/broom.Rmd</code></a></small>
       <div class="hidden name"><code>broom.Rmd</code></div>
@@ -158,17 +158,21 @@ lmfit</code></pre></div>
 ## 2 wt             -5.34     0.559     -9.56 1.29e-10</code></pre>
 <p>This gives you a data.frame representation. Note that the row names have been moved into a column called <code>term</code>, and the column names are simple and consistent (and can be accessed using <code>$</code>).</p>
 <p>Instead of viewing the coefficients, you might be interested in the fitted values and residuals for each of the original points in the regression. For this, use <code>augment</code>, which augments the original data with information from the model:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(<span class="kw"><a href="../reference/augment.html">augment</a></span>(lmfit))</code></pre></div>
-<pre><code>## # A tibble: 6 x 10
-##   .rownames        mpg    wt .fitted .se.fit .resid   .hat .sigma  .cooksd
-##   &lt;chr&gt;          &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;    &lt;dbl&gt;
-## 1 Mazda RX4       21    2.62    23.3   0.634 -2.28  0.0433   3.07  1.33e-2
-## 2 Mazda RX4 Wag   21    2.88    21.9   0.571 -0.920 0.0352   3.09  1.72e-3
-## 3 Datsun 710      22.8  2.32    24.9   0.736 -2.09  0.0584   3.07  1.54e-2
-## 4 Hornet 4 Drive  21.4  3.22    20.1   0.538  1.30  0.0313   3.09  3.02e-3
-## 5 Hornet Sporta~  18.7  3.44    18.9   0.553 -0.200 0.0329   3.10  7.60e-5
-## 6 Valiant         18.1  3.46    18.8   0.555 -0.693 0.0332   3.10  9.21e-4
-## # ... with 1 more variable: .std.resid &lt;dbl&gt;</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/augment.html">augment</a></span>(lmfit)</code></pre></div>
+<pre><code>## # A tibble: 32 x 10
+##    .rownames       mpg    wt .fitted .se.fit .resid   .hat .sigma  .cooksd
+##  * &lt;chr&gt;         &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;    &lt;dbl&gt;
+##  1 Mazda RX4      21    2.62    23.3   0.634 -2.28  0.0433   3.07  1.33e-2
+##  2 Mazda RX4 Wag  21    2.88    21.9   0.571 -0.920 0.0352   3.09  1.72e-3
+##  3 Datsun 710     22.8  2.32    24.9   0.736 -2.09  0.0584   3.07  1.54e-2
+##  4 Hornet 4 Dri~  21.4  3.22    20.1   0.538  1.30  0.0313   3.09  3.02e-3
+##  5 Hornet Sport~  18.7  3.44    18.9   0.553 -0.200 0.0329   3.10  7.60e-5
+##  6 Valiant        18.1  3.46    18.8   0.555 -0.693 0.0332   3.10  9.21e-4
+##  7 Duster 360     14.3  3.57    18.2   0.573 -3.91  0.0354   3.01  3.13e-2
+##  8 Merc 240D      24.4  3.19    20.2   0.539  4.16  0.0313   3.00  3.11e-2
+##  9 Merc 230       22.8  3.15    20.5   0.540  2.35  0.0314   3.07  9.96e-3
+## 10 Merc 280       19.2  3.44    18.9   0.553  0.300 0.0329   3.10  1.71e-4
+## # ... with 22 more rows, and 1 more variable: .std.resid &lt;dbl&gt;</code></pre>
 <p>Note that each of the new columns begins with a <code>.</code> (to avoid overwriting any of the original columns).</p>
 <p>Finally, several summary statistics are computed for the entire regression, such as R^2 and the F-statistic. These can be accessed with the <code>glance</code> function:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/glance.html">glance</a></span>(lmfit)</code></pre></div>
@@ -193,17 +197,21 @@ lmfit</code></pre></div>
 ##   &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;
 ## 1 (Intercept)    12.0       4.51      2.67 0.00759
 ## 2 wt             -4.02      1.44     -2.80 0.00509</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(<span class="kw"><a href="../reference/augment.html">augment</a></span>(glmfit))</code></pre></div>
-<pre><code>## # A tibble: 6 x 10
-##   .rownames          am    wt .fitted .se.fit .resid   .hat .sigma .cooksd
-##   &lt;chr&gt;           &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;
-## 1 Mazda RX4           1  2.62   1.50    0.918  0.635 0.126   0.803 0.0184 
-## 2 Mazda RX4 Wag       1  2.88   0.471   0.676  0.985 0.108   0.790 0.0424 
-## 3 Datsun 710          1  2.32   2.70    1.28   0.360 0.0963  0.810 0.00394
-## 4 Hornet 4 Drive      0  3.22  -0.897   0.601 -0.827 0.0744  0.797 0.0177 
-## 5 Hornet Sportab~     0  3.44  -1.80    0.749 -0.553 0.0681  0.806 0.00647
-## 6 Valiant             0  3.46  -1.88    0.767 -0.532 0.0674  0.807 0.00590
-## # ... with 1 more variable: .std.resid &lt;dbl&gt;</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/augment.html">augment</a></span>(glmfit)</code></pre></div>
+<pre><code>## # A tibble: 32 x 10
+##    .rownames         am    wt .fitted .se.fit .resid   .hat .sigma .cooksd
+##  * &lt;chr&gt;          &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;
+##  1 Mazda RX4          1  2.62   1.50    0.918  0.635 0.126   0.803 0.0184 
+##  2 Mazda RX4 Wag      1  2.88   0.471   0.676  0.985 0.108   0.790 0.0424 
+##  3 Datsun 710         1  2.32   2.70    1.28   0.360 0.0963  0.810 0.00394
+##  4 Hornet 4 Drive     0  3.22  -0.897   0.601 -0.827 0.0744  0.797 0.0177 
+##  5 Hornet Sporta~     0  3.44  -1.80    0.749 -0.553 0.0681  0.806 0.00647
+##  6 Valiant            0  3.46  -1.88    0.767 -0.532 0.0674  0.807 0.00590
+##  7 Duster 360         0  3.57  -2.33    0.878 -0.432 0.0625  0.809 0.00348
+##  8 Merc 240D          0  3.19  -0.796   0.593 -0.863 0.0755  0.796 0.0199 
+##  9 Merc 230           0  3.15  -0.635   0.586 -0.922 0.0776  0.793 0.0242 
+## 10 Merc 280           0  3.44  -1.80    0.749 -0.553 0.0681  0.806 0.00647
+## # ... with 22 more rows, and 1 more variable: .std.resid &lt;dbl&gt;</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/glance.html">glance</a></span>(glmfit)</code></pre></div>
 <pre><code>## # A tibble: 1 x 7
 ##   null.deviance df.null logLik   AIC   BIC deviance df.residual
@@ -218,17 +226,22 @@ lmfit</code></pre></div>
 ##   &lt;chr&gt;    &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
 ## 1 k        45.8       4.25     10.8  7.64e-12
 ## 2 b         4.39      1.54      2.85 7.74e- 3</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(<span class="kw"><a href="../reference/augment.html">augment</a></span>(nlsfit, mtcars))</code></pre></div>
-<pre><code>## # A tibble: 6 x 14
-##   .rownames      mpg   cyl  disp    hp  drat    wt  qsec    vs    am  gear
-##   &lt;chr&gt;        &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
-## 1 Mazda RX4     21       6   160   110  3.9   2.62  16.5     0     1     4
-## 2 Mazda RX4 W~  21       6   160   110  3.9   2.88  17.0     0     1     4
-## 3 Datsun 710    22.8     4   108    93  3.85  2.32  18.6     1     1     4
-## 4 Hornet 4 Dr~  21.4     6   258   110  3.08  3.22  19.4     1     0     3
-## 5 Hornet Spor~  18.7     8   360   175  3.15  3.44  17.0     0     0     3
-## 6 Valiant       18.1     6   225   105  2.76  3.46  20.2     1     0     3
-## # ... with 3 more variables: carb &lt;dbl&gt;, .fitted &lt;dbl&gt;, .resid &lt;dbl&gt;</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/augment.html">augment</a></span>(nlsfit, mtcars)</code></pre></div>
+<pre><code>## # A tibble: 32 x 14
+##    .rownames     mpg   cyl  disp    hp  drat    wt  qsec    vs    am  gear
+##    &lt;chr&gt;       &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+##  1 Mazda RX4    21       6  160    110  3.9   2.62  16.5     0     1     4
+##  2 Mazda RX4 ~  21       6  160    110  3.9   2.88  17.0     0     1     4
+##  3 Datsun 710   22.8     4  108     93  3.85  2.32  18.6     1     1     4
+##  4 Hornet 4 D~  21.4     6  258    110  3.08  3.22  19.4     1     0     3
+##  5 Hornet Spo~  18.7     8  360    175  3.15  3.44  17.0     0     0     3
+##  6 Valiant      18.1     6  225    105  2.76  3.46  20.2     1     0     3
+##  7 Duster 360   14.3     8  360    245  3.21  3.57  15.8     0     0     3
+##  8 Merc 240D    24.4     4  147.    62  3.69  3.19  20       1     0     4
+##  9 Merc 230     22.8     4  141.    95  3.92  3.15  22.9     1     0     4
+## 10 Merc 280     19.2     6  168.   123  3.92  3.44  18.3     1     0     4
+## # ... with 22 more rows, and 3 more variables: carb &lt;dbl&gt;, .fitted &lt;dbl&gt;,
+## #   .resid &lt;dbl&gt;</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/glance.html">glance</a></span>(nlsfit)</code></pre></div>
 <pre><code>## # A tibble: 1 x 8
 ##   sigma isConv       finTol logLik   AIC   BIC deviance df.residual

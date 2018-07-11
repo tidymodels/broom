@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Tidy a distance matrix — tidy.dist • broom</title>
+<title>Tidy a(n) dist object — tidy.dist • broom</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -101,57 +101,78 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Tidy a distance matrix</h1>
+    <h1>Tidy a(n) dist object</h1>
     <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/stats-tidiers.R'><code>R/stats-tidiers.R</code></a></small>
     <div class="hidden name"><code>tidy.dist.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Tidy a distance matrix, such as that computed by the dist
-function, into a one-row-per-pair table. If the distance matrix
-does not include an upper triangle and/or diagonal, this will
-not either.</p>
+    <p>Tidy summarizes information about the components of a model.
+A model component might be a single term in a regression, a single
+hypothesis, a cluster, or a class. Exactly what tidy considers to be a
+model component varies cross models but is usually self-evident.
+If a model has several distinct types of components, you will need to
+specify which components to return.</p>
     
     </div>
 
     <pre class="usage"><span class='co'># S3 method for dist</span>
-<span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>x</span>, <span class='kw'>diag</span> <span class='kw'>=</span> <span class='fu'>attr</span>(<span class='no'>x</span>, <span class='st'>"Diag"</span>), <span class='kw'>upper</span> <span class='kw'>=</span> <span class='fu'>attr</span>(<span class='no'>x</span>, <span class='st'>"Upper"</span>),
-  <span class='no'>...</span>)</pre>
+<span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>x</span>, <span class='kw'>diagonal</span> <span class='kw'>=</span> <span class='fu'>attr</span>(<span class='no'>x</span>, <span class='st'>"Diag"</span>), <span class='kw'>upper</span> <span class='kw'>=</span> <span class='fu'>attr</span>(<span class='no'>x</span>,
+  <span class='st'>"Upper"</span>), <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>x</th>
-      <td><p>A "dist" object</p></td>
+      <td><p>A <code>dist</code> object returned from <code><a href='http://www.rdocumentation.org/packages/stats/topics/dist'>stats::dist()</a></code>.</p></td>
     </tr>
     <tr>
-      <th>diag</th>
-      <td><p>Whether to include the diagonal of the distance
-matrix. Defaults to whether the distance matrix includes it</p></td>
+      <th>diagonal</th>
+      <td><p>Logical indicating whether or not to tidy the diagonal
+elements of the distance matrix. Defaults to whatever was based to the
+<code>diag</code> argument of <code><a href='http://www.rdocumentation.org/packages/stats/topics/dist'>stats::dist()</a></code>.</p></td>
     </tr>
     <tr>
       <th>upper</th>
-      <td><p>Whether to include the upper right triangle of
-the distance matrix. Defaults to whether the distance matrix
-includes it</p></td>
+      <td><p>Logical indicating whether or not to tidy the upper half of
+the distance matrix. Defaults to whatever was based to the
+<code>upper</code> argument of <code><a href='http://www.rdocumentation.org/packages/stats/topics/dist'>stats::dist()</a></code>.</p></td>
     </tr>
     <tr>
       <th>...</th>
-      <td><p>Extra arguments, not used</p></td>
+      <td><p>Additional arguments. Not used. Needed to match generic
+signature only. <strong>Cautionary note:</strong> Misspelled arguments will be
+absorbed in <code>...</code>, where they will be ignored. If the misspelled
+argument has a default value, the default value will be used.
+For example, if you pass <code>conf.lvel = 0.9</code>, all computation will
+proceed using <code>conf.level = 0.95</code>. Additionally, if you pass
+<code>newdata = my_tibble</code> to an <code><a href='augment.html'>augment()</a></code> method that does not
+accept a <code>newdata</code> argument, it will use the default value for
+the <code>data</code> argument.</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A data frame with one row for each pair of
-item distances, with columns:</p><dl class='dl-horizontal'>
+    <p>A <a href='http://www.rdocumentation.org/packages/tibble/topics/tibble'>tibble::tibble</a> with one row for each pair of items in the
+distance matrix, with columns:</p>
 <dt>item1</dt><dd><p>First item</p></dd>
 <dt>item2</dt><dd><p>Second item</p></dd>
 <dt>distance</dt><dd><p>Distance between items</p></dd>
-</dl>
 
+    
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>If the distance matrix does not include an upper triangle and/or
+diagonal, the tidied version will not either.</p>
+    
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p><code><a href='tidy.html'>tidy()</a></code>, <code><a href='http://www.rdocumentation.org/packages/stats/topics/dist'>stats::dist()</a></code></p>
+<p>Other stats tidiers: <code><a href='tidy.density.html'>tidy.density</a></code>,
+  <code><a href='tidy.ftable.html'>tidy.ftable</a></code></p></div>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
@@ -183,7 +204,7 @@ item distances, with columns:</p><dl class='dl-horizontal'>
 #&gt;  9 Petal.Width  Petal.Length     33.9
 #&gt; 10 Sepal.Length Petal.Width      57.2
 #&gt; 11 Sepal.Width  Petal.Width      25.9
-#&gt; 12 Petal.Length Petal.Width      33.9</div><div class='input'><span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>iris_dist</span>, <span class='kw'>diag</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; # A tibble: 10 x 3
+#&gt; 12 Petal.Length Petal.Width      33.9</div><div class='input'><span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>iris_dist</span>, <span class='kw'>diagonal</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; # A tibble: 10 x 3
 #&gt;    item1        item2        distance
 #&gt;  * &lt;fct&gt;        &lt;fct&gt;           &lt;dbl&gt;
 #&gt;  1 Sepal.Length Sepal.Length      0  
@@ -204,6 +225,10 @@ item distances, with columns:</p><dl class='dl-horizontal'>
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
+
+      <li><a href="#details">Details</a></li>
+
+      <li><a href="#see-also">See also</a></li>
       
       <li><a href="#examples">Examples</a></li>
     </ul>

@@ -108,14 +108,14 @@
 
     <div class="ref-description">
     
-    <p>These methods tidy the estimates from <code><a href='http://www.rdocumentation.org/packages/rstanarm/topics/stanreg-objects'>rstanarm::stanreg-objects()</a></code>
-(fitted model objects from the <span class="pkg">rstanarm</span> package) into a summary.</p>
+    <p><code>rstanarm</code> tidiers will soon be deprecated in <code>broom</code> and there is no
+ongoing development of these functions at this time.</p>
     
     </div>
 
     <pre class="usage"><span class='co'># S3 method for stanreg</span>
-<span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>x</span>, <span class='kw'>parameters</span> <span class='kw'>=</span> <span class='st'>"non-varying"</span>, <span class='kw'>intervals</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>prob</span> <span class='kw'>=</span> <span class='fl'>0.9</span>, <span class='no'>...</span>)
+<span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>x</span>, <span class='kw'>parameters</span> <span class='kw'>=</span> <span class='st'>"non-varying"</span>,
+  <span class='kw'>intervals</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>prob</span> <span class='kw'>=</span> <span class='fl'>0.9</span>, <span class='no'>...</span>)
 
 <span class='co'># S3 method for stanreg</span>
 <span class='fu'><a href='glance.html'>glance</a></span>(<span class='no'>x</span>, <span class='kw'>looic</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='no'>...</span>)</pre>
@@ -205,6 +205,11 @@ included:
 <dt>p_loo</dt><dd><p>The effective number of parameters.</p></dd>
 
     
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>These methods tidy the estimates from <code><a href='http://www.rdocumentation.org/packages/rstanarm/topics/stanreg-objects'>rstanarm::stanreg-objects()</a></code>
+(fitted model objects from the <span class="pkg">rstanarm</span> package) into a summary.</p>
+    
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p><code><a href='http://www.rdocumentation.org/packages/rstanarm/topics/summary.stanreg'>rstanarm::summary.stanreg()</a></code></p></div>
@@ -236,6 +241,8 @@ included:
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
+
+      <li><a href="#details">Details</a></li>
 
       <li><a href="#see-also">See also</a></li>
       

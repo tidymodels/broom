@@ -93,7 +93,7 @@
 <div id="overview" class="section level2">
 <h2 class="hasAnchor">
 <a href="#overview" class="anchor"></a>Overview</h2>
-<p>broom makes it easy to work with model objects by summarizing key information in tidy <a href="https://github.com/tidyverse/tibble">tibbles</a>. This makes it convenient to programmatically interact with model information. broom provides three verbs:</p>
+<p>broom summarizes key information about models in tidy <code>tibble()</code>s. broom provides three verbs to make it convenient to interact with model objects:</p>
 <ul>
 <li>
 <code><a href="reference/tidy.html">tidy()</a></code> summarizes information about model components</li>
@@ -103,6 +103,7 @@
 <code><a href="reference/augment.html">augment()</a></code> adds informations about observations to a dataset</li>
 </ul>
 <p>For a detailed introduction, please see <code><a href="articles/broom.html">vignette("broom")</a></code>.</p>
+<p>broom tidies 100+ models from popular modelling packages and almost all of the model objects in the <code>stats</code> package that comes with base R. <code><a href="articles/available-methods.html">vignette("available-methods")</a></code> lists method availabilty.</p>
 <p>If you aren’t familiar with tidy data structures and want to know how they can make your life easier, we highly recommend reading Hadley Wickham’s <a href="http://www.jstatsoft.org/v59/i10">Tidy Data</a>.</p>
 </div>
 <div id="installation" class="section level2">
@@ -158,18 +159,12 @@ fit &lt;-<span class="st"> </span><span class="kw">lm</span>(Sepal.Width <span c
 <span class="co">#&gt; # ... with 140 more rows, and 6 more variables: .se.fit &lt;dbl&gt;,</span>
 <span class="co">#&gt; #   .resid &lt;dbl&gt;, .hat &lt;dbl&gt;, .sigma &lt;dbl&gt;, .cooksd &lt;dbl&gt;,</span>
 <span class="co">#&gt; #   .std.resid &lt;dbl&gt;</span></code></pre></div>
-</div>
-<div id="which-models-does-broom-tidy" class="section level2">
-<h2 class="hasAnchor">
-<a href="#which-models-does-broom-tidy" class="anchor"></a>Which models does broom tidy?</h2>
-<p>broom tidies 100+ models from popular modelling packages and almost all of the model objects in the <code>stats</code> package that comes with base R.</p>
-<p><code><a href="articles/available-methods.html">vignette("available-methods")</a></code> lists method availabilty.</p>
 <div id="contributing" class="section level3">
 <h3 class="hasAnchor">
 <a href="#contributing" class="anchor"></a>Contributing</h3>
 <p>We welcome contributions of all types!</p>
-<p>If you have never made a pull request to an R package before, broom is an excellent place to start. Looking for an <a href="https://github.com/tidyverse/broom/issues/">issue</a> with the <strong>Beginner Friendly</strong> tag and comment that you’d like to take it on and someone will come by to help.</p>
-<p>We encourage typo fixes, bug report, bug fixes and feature requests. Feedback on the clarity of the documentation is especially valuable.</p>
+<p>If you have never made a pull request to an R package before, broom is an excellent place to start. Find an <a href="https://github.com/tidyverse/broom/issues/">issue</a> with the <strong>Beginner Friendly</strong> tag and comment that you’d like to take it on and we’ll help you get started.</p>
+<p>We encourage typo corrections, bug reports, bug fixes and feature requests. Feedback on the clarity of the documentation is especially valuable.</p>
 <p>If you are interested in adding new tidiers methods to broom, please read <code><a href="articles/adding-tidiers.html">vignette("adding-tidiers")</a></code>.</p>
 <p>We have a <a href="CODE_OF_CONDUCT.html">Contributor Code of Conduct</a>. By participating in broom you agree to abide by its terms.</p>
 </div>

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Tidiers for return values from functions that aren't S3 objects — list_tidiers • broom</title>
+<title>Tidying methods for lists / returned values that are not S3 objects — list_tidiers • broom</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -101,17 +101,17 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Tidiers for return values from functions that aren't S3 objects</h1>
+    <h1>Tidying methods for lists / returned values that are not S3 objects</h1>
     <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/list-tidiers.R'><code>R/list-tidiers.R</code></a></small>
     <div class="hidden name"><code>list_tidiers.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>This method handles the return values of functions that return lists
-rather than S3 objects, such as <code>optim</code>, <code>svd</code>, or
-<code><a href='http://www.rdocumentation.org/packages/akima/topics/interp'>akima::interp()</a></code>, and therefore cannot be handled by
-S3 dispatch.</p>
+    <p>Broom tidies a number of lists that are effectively S3 objects without
+a class attribute. For example, <code><a href='http://www.rdocumentation.org/packages/stats/topics/optim'>stats::optim()</a></code>, <code>svd()</code> and
+<code><a href='http://www.rdocumentation.org/packages/akima/topics/interp'>akima::interp()</a></code> produce consistent output, but because they do not
+have a class attribute, they cannot be handled by S3 dispatch.</p>
     
     </div>
 
@@ -126,23 +126,27 @@ S3 dispatch.</p>
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>x</th>
-      <td><p>list object</p></td>
+      <td><p>A list, potentially representing an object that can be tidied.</p></td>
     </tr>
     <tr>
       <th>...</th>
-      <td><p>extra arguments, passed to the tidying function</p></td>
+      <td><p>Additionally arguments passed to the tidying function.</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>Those tidiers themselves are implemented as functions of the
-form tidy_&lt;function&gt; or glance_&lt;function&gt; that are not exported.</p>
+    <p>These functions look at the elements of a list and determine if there is
+an appropriate tidying method to apply to the list. Those tidiers are
+themselves are implemented as functions of the form <code>tidy_&lt;function&gt;</code>
+or <code>glance_&lt;function&gt;</code> and are not exported (but they are documented!).</p>
+<p>If no appropriate tidying method is found, throws an error.</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><a href='optim_tidiers.html'>optim_tidiers</a>, <a href='xyz_tidiers.html'>xyz_tidiers</a>,
-svd_tidiers, <a href='orcutt_tidiers.html'>orcutt_tidiers</a></p></div>
+    <div class='dont-index'><p>Other list tidiers: <code><a href='glance_optim.html'>glance_optim</a></code>,
+  <code><a href='tidy_irlba.html'>tidy_irlba</a></code>, <code><a href='tidy_optim.html'>tidy_optim</a></code>,
+  <code><a href='tidy_svd.html'>tidy_svd</a></code>, <code><a href='tidy_xyz.html'>tidy_xyz</a></code></p></div>
     
 
   </div>

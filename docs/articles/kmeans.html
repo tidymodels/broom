@@ -85,7 +85,7 @@
     <div class="page-header toc-ignore">
       <h1>kmeans with dplyr and broom</h1>
             
-            <h4 class="date">2018-07-03</h4>
+            <h4 class="date">2018-07-11</h4>
       
       <small class="dont-index">Source: <a href="http://github.com/tidyverse/broom/blob/master/vignettes/kmeans.Rmd"><code>vignettes/kmeans.Rmd</code></a></small>
       <div class="hidden name"><code>kmeans.Rmd</code></div>
@@ -125,7 +125,7 @@ labelled_points &lt;-<span class="st"> </span>centers <span class="op">%&gt;%</s
 <span class="kw">ggplot</span>(labelled_points, <span class="kw">aes</span>(x1, x2, <span class="dt">color =</span> cluster)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_point</span>()</code></pre></div>
 <p><img src="kmeans_files/figure-html/unnamed-chunk-1-1.png" width="700"></p>
-<p>This is an ideal case for k-means clustering. We’ll use the built-in <code>kmeans</code> function, which accepts a matrix of a dataframe with all numeric columns as it’s primary argument.</p>
+<p>This is an ideal case for k-means clustering. We’ll use the built-in <code>kmeans</code> function, which accepts a dataframe with all numeric columns as it’s primary argument.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">points &lt;-<span class="st"> </span>labelled_points <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>cluster)
 

@@ -140,8 +140,9 @@ purposes within the <code>lsmeans</code> package but have similar output).</p>
     </tr>
     <tr>
       <th>...</th>
-      <td><p>Extra arguments, passed on to
-<code><a href='http://www.rdocumentation.org/packages/emmeans/topics/summary.emmGrid'>emmeans::summary.emmGrid()</a></code> or <code><a href='http://www.rdocumentation.org/packages/lsmeans/topics/summary'>lsmeans::summary.ref.grid()</a></code></p></td>
+      <td><p>Additional arguments passed to <code><a href='http://www.rdocumentation.org/packages/emmeans/topics/summary.emmGrid'>emmeans::summary.emmGrid()</a></code> or
+<code><a href='http://www.rdocumentation.org/packages/lsmeans/topics/summary'>lsmeans::summary.ref.grid()</a></code>. <strong>Cautionary note</strong>: mispecified arguments
+may be silently ignored!</p></td>
     </tr>
     </table>
     
@@ -182,7 +183,7 @@ By broom convention, we use <code>conf.level</code> to pass the <code>level</cod
   <span class='co'># reference grid; see vignette("basics", package = "emmeans")</span>
   <span class='no'>oranges_rg1</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/emmeans/topics/ref_grid'>ref_grid</a></span>(<span class='no'>oranges_lm1</span>)
   <span class='no'>td</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>oranges_rg1</span>)
-  <span class='fu'>head</span>(<span class='no'>td</span>)
+  <span class='no'>td</span>
 
   <span class='co'># marginal averages</span>
   <span class='no'>marginal</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/emmeans/topics/emmeans'>emmeans</a></span>(<span class='no'>oranges_rg1</span>, <span class='st'>"day"</span>)

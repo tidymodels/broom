@@ -110,7 +110,7 @@
     
     <p>Return a confidence interval as a tidy data frame. This directly wraps the
 <code>confint()</code> function, but ensures it follows broom conventions:
-column names of <code>conf.low</code> and <code>conf.high</code>, and no row names</p>
+column names of <code>conf.low</code> and <code>conf.high</code>, and no row names.</p>
     
     </div>
 
@@ -129,7 +129,10 @@ column names of <code>conf.low</code> and <code>conf.high</code>, and no row nam
     </tr>
     <tr>
       <th>func</th>
-      <td><p>Function to use for computing confint</p></td>
+      <td><p>A function to compute a confidence interval for <code>x</code>. Calling
+<code>func(x, level = conf.level, ...)</code> must return an object coercable to a
+tibble. This dataframe like object should have to columns corresponding
+the lower and upper bounds on the confidence interval.</p></td>
     </tr>
     <tr>
       <th>...</th>
@@ -139,7 +142,11 @@ column names of <code>conf.low</code> and <code>conf.high</code>, and no row nam
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A data frame with two columns: <code>conf.low</code> and <code>conf.high</code>.</p>
+    <p>A tibble with two columns: <code>conf.low</code> and <code>conf.high</code>.</p>
+    
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p><code>confint_tidy</code></p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
@@ -153,6 +160,8 @@ column names of <code>conf.low</code> and <code>conf.high</code>, and no row nam
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
+
+      <li><a href="#details">Details</a></li>
 
       <li><a href="#see-also">See also</a></li>
           </ul>
