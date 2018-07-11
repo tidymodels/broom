@@ -27,6 +27,10 @@ test_that("glance.rlm", {
 })
 
 test_that("augment.rlm", {
+  
+  au <- augment(fit)
+  check_tibble(au, method = "augment")
+  
   check_augment_function(
     aug = augment.rlm,
     model = fit,

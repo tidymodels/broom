@@ -45,18 +45,16 @@ specify which components to return.
 }
 \examples{
 
-if (requireNamespace("gamlss", quietly = TRUE)) {
-  library(gamlss)
-  
-  g <- gamlss(
-    y ~ pb(x),
-    sigma.fo = ~ pb(x),
-    family = BCT,
-    data = abdom,
-    method = mixed(1, 20)
-  )
+library(gamlss)
 
-  tidy(g)
-}
+g <- gamlss(
+  y ~ pb(x),
+  sigma.fo = ~ pb(x),
+  family = BCT,
+  data = abdom,
+  method = mixed(1, 20)
+)
+
+tidy(g)
 
 }

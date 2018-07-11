@@ -126,5 +126,5 @@ glance.survfit <- function(x, ...) {
   )
   
   colnames(ret)[utils::tail(seq_along(ret), 2)] <- c("conf.low", "conf.high")
-  ret
+  as_tibble(ret)
 }

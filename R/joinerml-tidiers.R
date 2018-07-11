@@ -67,8 +67,8 @@ tidy.mjoint <- function(x, component = "survival", conf.int = FALSE,
                         conf.level = 0.95,  boot_se = NULL, ...) {
   component <- match.arg(component, c("survival", "longitudinal"))
   if (!is.null(boot_se)) {
-    if (!inherits(x = boot_se, what = "boot_se")) 
-      stop("'boot_se' object not of class 'boot_se'")
+    if (!inherits(x = boot_se, "bootSE")) 
+      stop("`boot_se` argument must be a `bootSE` object.", call. = FALSE)
   }
   
   if (is.null(boot_se)) {
@@ -126,10 +126,12 @@ tidy.mjoint <- function(x, component = "survival", conf.int = FALSE,
 #'
 #' @export
 augment.mjoint <- function(x, data = x$data, ...) {
-  # checks on 'data'
+  
   if (is.null(data)) {
-    stop("It was not possible to extract 'data' from 'x'",
-         "Please provide 'data' manually.")
+    stop(
+      "`data` argument is NULL. Try specifying `data` manually.",
+      call. = FALSE
+    )
   }
 
   if (length(data) > 1) {

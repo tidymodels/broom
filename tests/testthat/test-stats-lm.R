@@ -61,6 +61,13 @@ test_that("tidy.lm works", {
   expect_false(anyNA(td_ci))
 })
 
+test_that("glance.lm", {
+  gl <- glance(fit)
+  gl2 <- glance(fit2)
+  
+  check_glance_outputs(gl, gl2)
+})
+
 test_that("augment.lm", {
   check_augment_function(
     aug = augment.lm,
