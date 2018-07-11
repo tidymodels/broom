@@ -1,17 +1,14 @@
-#' Tidy a binWidth object
+#' @templateVar class binWidth
+#' @template title_desc_tidy
 #'
-#' Tidy a binWidth object from the "binGroup" package,
-#' which calculates the expected width of a confidence
-#' interval from a binomial test.
-#'
-#' @param x A "binWidth" object
-#' @param ... Extra arguments (not used)
-#'
-#' @return A one-row data.frame with columns:
-#'   \item{ci.width}{Expected width of confidence interval}
-#'   \item{alternative}{Alternative hypothesis}
-#'   \item{p}{True proportion}
-#'   \item{n}{Total sample size}
+#' @param x A [binGroup::binWidth()] object.
+#' @template param_unused_dots
+#' 
+#' @return A one-row [tibble::tibble] with columns:
+#'   \item{ci.width}{Expected width of confidence interval.}
+#'   \item{alternative}{Alternative hypothesis.}
+#'   \item{p}{True proportion.}
+#'   \item{n}{Total sample size.}
 #'
 #' @examples
 #'
@@ -35,38 +32,25 @@
 #'         ylab("Expected CI Width")
 #' }
 #'
-#' @name binWidth_tidiers
-#'
 #' @export
+#' @family bingroup tidiers
+#' @aliases binwidth_tidiers
+#' @seealso [tidy()], [binGroup::binWidth()]
 tidy.binWidth <- function(x, ...) {
   ret <- as_tibble(unclass(x))
   dplyr::rename(ret, ci.width = expCIWidth)
 }
 
 
-#' Tidy a binDesign object
+#' @templateVar class binDesign
+#' @template title_desc_tidy
 #'
-#' Tidy a binDesign object from the "binGroup" package,
-#' which determines the sample size needed for
-#' a particular power.
+#' @param x A [binGroup::binDesign()] object.
+#' @template param_unused_dots
 #'
-#' @param x A "binDesign" object
-#' @param ... Extra arguments (not used)
-#'
-#' @template boilerplate
-#'
-#' @return The `tidy` method returns a data.frame
-#' with one row for each iteration that was performed,
-#' with columns
-#'     \item{n}{Number of trials in this iteration}
-#'     \item{power}{The power achieved for this n}
-#'
-#' The `glance` method returns a one-row data.frame
-#' with columns
-#'     \item{power}{The power achieved by the analysis}
-#'     \item{n}{The sample size used to achieve this power}
-#'     \item{power.reached}{Whether the desired power was reached}
-#'     \item{maxit}{Number of iterations performed}
+#' @return A one-row [tibble::tibble] with columns:
+#'   \item{n}{Number of trials in given iteration.}
+#'   \item{power}{Power achieved for given value of n.}
 #'
 #' @examples
 #'
@@ -75,25 +59,54 @@ tidy.binWidth <- function(x, ...) {
 #'                      p.hyp = 0.1, power = .8)
 #'
 #'     glance(des)
-#'     head(tidy(des))
+#'     tidy(des)
 #'
 #'     # the ggplot2 equivalent of plot(des)
 #'     library(ggplot2)
 #'     ggplot(tidy(des), aes(n, power)) +
 #'         geom_line()
 #' }
-#' @name binDesign_tidiers
 #'
 #' @export
+#' @family bingroup tidiers
+#' @aliases bindesign_tidiers
+#' @seealso [tidy()], [binGroup::binDesign()]
 tidy.binDesign <- function(x, ...) {
   ret <- tibble(n = x$nit, power = x$powerit)
   # only up to the number of iterations performed
   head(ret, x$maxit)
 }
 
-
-#' @rdname binDesign_tidiers
+#' @templateVar class binDesign
+#' @template title_desc_glance
+#'
+#' @param x A [binGroup::binDesign] object.
+#' @template param_unused_dots
+#'
+#' @return A one-row [tibble::tibble] with columns:
+#'   \item{power}{Power achieved by the analysis.}
+#'   \item{n}{Sample size uzed to achieve this power.}
+#'   \item{power.reached}{Whether the desired power was reached.}
+#'   \item{maxit}{Number of iterations performed.}
+#'
+#' @examples
+#'
+#' if (require("binGroup", quietly = TRUE)) {
+#'     des <- binDesign(nmax = 300, delta = 0.06,
+#'                      p.hyp = 0.1, power = .8)
+#'
+#'     glance(des)
+#'     tidy(des)
+#'
+#'     # the ggplot2 equivalent of plot(des)
+#'     library(ggplot2)
+#'     ggplot(tidy(des), aes(n, power)) +
+#'         geom_line()
+#' }
+#'
 #' @export
+#' @family bingroup tidiers
+#' @seealso [glance()], [binGroup::binDesign()]
 glance.binDesign <- function(x, ...) {
   with(unclass(x), tibble(
     power = powerout,

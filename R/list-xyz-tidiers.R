@@ -1,26 +1,29 @@
-#' Tidiers for x, y, z lists suitable for persp, image, etc.
+#' @templateVar class xyz
+#' @template title_desc_tidy_list
+#' 
+#' @description xyz lists (lists where `x` and `y` are vector of coordinates
+#'   and `z` is a matrix of values) are typically used by functions such as
+#'   [graphics::persp()] or [graphics::image()] and returned
+#'   by interpolation functions such as [akima::interp()].
 #'
-#' Tidies lists with components x, y (vector of coordinates) and z (matrix of
-#' values) which are typically used by functions such as
-#' [graphics::persp()] or [graphics::image()] and returned
-#' by interpolation functions such as [akima::interp()].
-#'
-#' @param x list with components x, y and z
-#' @param ... extra arguments
-#'
-#' @template boilerplate
-#'
-#' @return `tidy` returns a data frame with columns x, y and z and one row
-#' per value in matrix z.
-#'
+#' @param x A list with component `x`, `y` and `z`, where `x` and `y` are
+#'   vectors and `z` is a matrix. The length of `x` must equal the number of
+#'   rows in `z` and the length of `y` must equal the number of columns in `z`.   
+#' @template param_unused_dots
+#' 
+#' @return A [tibble::tibble] with vector columns `x`, `y` and `z`.
+#' 
 #' @examples
 #'
-#' A <- list(x=1:5, y=1:3, z=matrix(runif(5*3), nrow=5))
+#' A <- list(x = 1:5, y = 1:3, z = matrix(runif(5 * 3), nrow = 5))
 #' image(A)
 #' tidy(A)
 #'
-#' @name xyz_tidiers
-#' @importFrom reshape2 melt
+#' @aliases xyz_tidiers
+#' @family list tidiers
+#' @seealso [tidy()], [graphics::persp()], [graphics::image()], 
+#'   [akima::interp()]
+#' 
 tidy_xyz <- function(x, ...) {
   
   if (!is.matrix(x$z)) {
@@ -36,8 +39,7 @@ tidy_xyz <- function(x, ...) {
     )
   }
   
-  # convert to data.frame
-  d <- melt(x$z)
+  d <- reshape2::melt(x$z)
   names(d) <- c("x", "y", "z")
   # get coordinates
   d$x <- x$x[d$x]

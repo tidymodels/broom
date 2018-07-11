@@ -128,13 +128,13 @@ packge, or <code><a href='http://www.rdocumentation.org/packages/survey/topics/s
 
 <span class='co'># S3 method for clm</span>
 <span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>x</span>, <span class='kw'>conf.int</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>conf.level</span> <span class='kw'>=</span> <span class='fl'>0.95</span>,
-  <span class='kw'>exponentiate</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>quick</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>conf.type</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"profile"</span>, <span class='st'>"Wald"</span>),
-  <span class='no'>...</span>)
+  <span class='kw'>exponentiate</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>quick</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>conf.type</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"profile"</span>,
+  <span class='st'>"Wald"</span>), <span class='no'>...</span>)
 
 <span class='co'># S3 method for clmm</span>
 <span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>x</span>, <span class='kw'>conf.int</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>conf.level</span> <span class='kw'>=</span> <span class='fl'>0.95</span>,
-  <span class='kw'>exponentiate</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>quick</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>conf.type</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"profile"</span>, <span class='st'>"Wald"</span>),
-  <span class='no'>...</span>)
+  <span class='kw'>exponentiate</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>quick</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>conf.type</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"profile"</span>,
+  <span class='st'>"Wald"</span>), <span class='no'>...</span>)
 
 <span class='co'># S3 method for clm</span>
 <span class='fu'><a href='glance.html'>glance</a></span>(<span class='no'>x</span>, <span class='no'>...</span>)
@@ -246,7 +246,7 @@ The structure depends on the method chosen.
   <span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>clm_mod</span>, <span class='kw'>conf.int</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
   <span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>clm_mod</span>, <span class='kw'>conf.int</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>conf.type</span> <span class='kw'>=</span> <span class='st'>"Wald"</span>, <span class='kw'>exponentiate</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
   <span class='fu'><a href='glance.html'>glance</a></span>(<span class='no'>clm_mod</span>)
-  <span class='fu'>head</span>(<span class='fu'><a href='augment.html'>augment</a></span>(<span class='no'>clm_mod</span>))
+  <span class='fu'><a href='augment.html'>augment</a></span>(<span class='no'>clm_mod</span>)
 
   <span class='no'>clm_mod2</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/ordinal/topics/clm'>clm</a></span>(<span class='no'>rating</span> ~ <span class='no'>temp</span>, <span class='kw'>nominal</span> <span class='kw'>=</span> ~ <span class='no'>contact</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>wine</span>)
   <span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>clm_mod2</span>)
@@ -257,13 +257,9 @@ The structure depends on the method chosen.
 }</div><div class='output co'>#&gt; <span class='message'>Loading required package: ordinal</span></div><div class='output co'>#&gt; <span class='message'></span>
 #&gt; <span class='message'>Attaching package: 'ordinal'</span></div><div class='output co'>#&gt; <span class='message'>The following objects are masked from 'package:nlme':</span>
 #&gt; <span class='message'></span>
-#&gt; <span class='message'>    ranef, VarCorr</span></div><div class='output co'>#&gt; <span class='message'>The following object is masked from 'package:bbmle':</span>
+#&gt; <span class='message'>    ranef, VarCorr</span></div><div class='output co'>#&gt; <span class='message'>The following objects are masked from 'package:lme4':</span>
 #&gt; <span class='message'></span>
-#&gt; <span class='message'>    slice</span></div><div class='output co'>#&gt; <span class='message'>The following objects are masked from 'package:lme4':</span>
-#&gt; <span class='message'></span>
-#&gt; <span class='message'>    ranef, VarCorr</span></div><div class='output co'>#&gt; <span class='message'>The following object is masked from 'package:psych':</span>
-#&gt; <span class='message'></span>
-#&gt; <span class='message'>    income</span></div><div class='output co'>#&gt; <span class='message'>The following object is masked from 'package:dplyr':</span>
+#&gt; <span class='message'>    ranef, VarCorr</span></div><div class='output co'>#&gt; <span class='message'>The following object is masked from 'package:dplyr':</span>
 #&gt; <span class='message'></span>
 #&gt; <span class='message'>    slice</span></div><div class='output co'>#&gt; # A tibble: 1 x 4
 #&gt;     edf logLik   AIC   BIC
@@ -272,16 +268,21 @@ The structure depends on the method chosen.
   <span class='no'>polr_mod</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/MASS/topics/polr'>polr</a></span>(<span class='no'>Sat</span> ~ <span class='no'>Infl</span> + <span class='no'>Type</span> + <span class='no'>Cont</span>, <span class='kw'>weights</span> <span class='kw'>=</span> <span class='no'>Freq</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>housing</span>)
   <span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>polr_mod</span>, <span class='kw'>exponentiate</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>conf.int</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
   <span class='fu'><a href='glance.html'>glance</a></span>(<span class='no'>polr_mod</span>)
-  <span class='fu'>head</span>(<span class='fu'><a href='augment.html'>augment</a></span>(<span class='no'>polr_mod</span>, <span class='kw'>type.predict</span> <span class='kw'>=</span> <span class='st'>"class"</span>))
-}</div><div class='output co'>#&gt; # A tibble: 6 x 6
-#&gt;   Sat    Infl   Type  Cont  X.weights. .fitted
-#&gt;   &lt;ord&gt;  &lt;fct&gt;  &lt;fct&gt; &lt;fct&gt;      &lt;int&gt;   &lt;dbl&gt;
-#&gt; 1 Low    Low    Tower Low           21       1
-#&gt; 2 Medium Low    Tower Low           21       1
-#&gt; 3 High   Low    Tower Low           28       1
-#&gt; 4 Low    Medium Tower Low           34       3
-#&gt; 5 Medium Medium Tower Low           22       3
-#&gt; 6 High   Medium Tower Low           36       3</div></pre>
+  <span class='fu'><a href='augment.html'>augment</a></span>(<span class='no'>polr_mod</span>, <span class='kw'>type.predict</span> <span class='kw'>=</span> <span class='st'>"class"</span>)
+}</div><div class='output co'>#&gt; # A tibble: 72 x 6
+#&gt;    Sat    Infl   Type      Cont  X.weights. .fitted
+#&gt;  * &lt;ord&gt;  &lt;fct&gt;  &lt;fct&gt;     &lt;fct&gt;      &lt;int&gt;   &lt;dbl&gt;
+#&gt;  1 Low    Low    Tower     Low           21       1
+#&gt;  2 Medium Low    Tower     Low           21       1
+#&gt;  3 High   Low    Tower     Low           28       1
+#&gt;  4 Low    Medium Tower     Low           34       3
+#&gt;  5 Medium Medium Tower     Low           22       3
+#&gt;  6 High   Medium Tower     Low           36       3
+#&gt;  7 Low    High   Tower     Low           10       3
+#&gt;  8 Medium High   Tower     Low           11       3
+#&gt;  9 High   High   Tower     Low           36       3
+#&gt; 10 Low    Low    Apartment Low           61       1
+#&gt; # ... with 62 more rows</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

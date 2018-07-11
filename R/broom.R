@@ -1,16 +1,21 @@
-#' @title Convert Statistical Analysis Objects into Tidy Data Frames
+#' @title Convert Statistical Objects into Tidy Tibbles
 #' @name broom
 #' @description Convert statistical analysis objects from R into tidy tibbles,
-#' so that they can more easily be combined, reshaped and otherwise processed
-#' with tools like dplyr, tidyr and ggplot2. The package provides three S3
-#' generics: tidy, which summarizes a model's statistical findings such as
-#' coefficients of a regression; augment, which adds columns to the original
-#' data such as predictions, residuals and cluster assignments; and glance,
-#' which provides a one-row summary of model-level statistics.
+#'   so that they can more easily be combined, reshaped and otherwise processed
+#'   with tools like dplyr, tidyr and ggplot2. The package provides three S3
+#'   generics: tidy, which summarizes a model's statistical findings such as
+#'   coefficients of a regression; augment, which adds columns to the original
+#'   data such as predictions, residuals and cluster assignments; and glance,
+#'   which provides a one-row summary of model-level statistics.
 #'
 #' @importFrom stats AIC BIC coef confint fitted logLik model.frame 
 #' @importFrom stats predict qnorm qt residuals setNames var na.omit
 #' @importFrom stats model.response
+#' 
+#' @importFrom purrr map_df set_names
+#' @importFrom tibble tibble as_tibble
+#' 
+#' @import dplyr
 #'
 #' @importFrom utils head
 #'
@@ -18,18 +23,18 @@
 #' @aliases broom broom-package
 NULL
 
-#' Augment data according to a tidied model
-#'
-#' Given an R statistical model or other non-tidy object, add columns to the
-#' original dataset such as predictions, residuals and cluster assignments.
-#'
-#' Note that by convention the first argument is almost always `data`,
-#' which specifies the original data object. This is not part of the S3
-#' signature, partly because it prevents [rowwise_df_tidiers] from
-#' taking a column name as the first argument. 
-#'
-#' @details This generic originated in the ggplot2 package, where it was called
-#' `fortify`.
+#' @templateVar class statistical
+#' @template title_desc_augment
+#' 
+#' @details The second argument is almost always `data`, which specifies the
+#'   original data object. This is not part of the S3
+#'   signature, partly because it prevents [rowwise_df_tidiers] from
+#'   taking a column name as the first argument. The tidiers are currently
+#'   deprecated and will soon be removed from broom, at which point 
+#'   `data` will become part of the augment signature.
+#'   
+#'   **Historical note**: This generic originated in the ggplot2 package,
+#'   where it was called `fortify`.
 #'
 #' @seealso [augment.lm()]
 #' @param x Model object or other R object with information to append to

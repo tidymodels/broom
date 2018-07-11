@@ -85,7 +85,7 @@
     <div class="page-header toc-ignore">
       <h1>kmeans with dplyr and broom</h1>
             
-            <h4 class="date">2018-06-25</h4>
+            <h4 class="date">2018-07-11</h4>
       
       <small class="dont-index">Source: <a href="http://github.com/tidyverse/broom/blob/master/vignettes/kmeans.Rmd"><code>vignettes/kmeans.Rmd</code></a></small>
       <div class="hidden name"><code>kmeans.Rmd</code></div>
@@ -98,44 +98,61 @@
 <h1 class="hasAnchor">
 <a href="#tidying-k-means-clustering" class="anchor"></a>Tidying k-means clustering</h1>
 <p>K-means clustering serves as a very useful example of tidy data, and especially the distinction between the three tidying functions: <code>tidy</code>, <code>augment</code>, and <code>glance</code>.</p>
-<p>Let’s start by generating some random 2d data with three clusters, within which points are distributed according to a multivariate gaussian:</p>
+<p>Let’s start by generating some random two-dimensional data with three clusters. Data in each cluster will come from a multivariate gaussian distribution, with different means for each cluster:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(dplyr)
-
-<span class="kw">set.seed</span>(<span class="dv">2014</span>)
-centers &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">cluster=</span><span class="kw">factor</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>), <span class="dt">size=</span><span class="kw">c</span>(<span class="dv">100</span>, <span class="dv">150</span>, <span class="dv">50</span>), <span class="dt">x1=</span><span class="kw">c</span>(<span class="dv">5</span>, <span class="dv">0</span>, <span class="op">-</span><span class="dv">3</span>), <span class="dt">x2=</span><span class="kw">c</span>(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>, <span class="op">-</span><span class="dv">2</span>))
-points &lt;-<span class="st"> </span>centers <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">group_by</span>(cluster) <span class="op">%&gt;%</span>
-<span class="st">    </span><span class="kw">do</span>(<span class="kw">data.frame</span>(<span class="dt">x1=</span><span class="kw">rnorm</span>(.<span class="op">$</span>size[<span class="dv">1</span>], .<span class="op">$</span>x1[<span class="dv">1</span>]),
-                  <span class="dt">x2=</span><span class="kw">rnorm</span>(.<span class="op">$</span>size[<span class="dv">1</span>], .<span class="op">$</span>x2[<span class="dv">1</span>])))
-
 <span class="kw">library</span>(ggplot2)
-<span class="kw">ggplot</span>(points, <span class="kw">aes</span>(x1, x2, <span class="dt">color=</span>cluster)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>()</code></pre></div>
-<p><img src="kmeans_files/figure-html/unnamed-chunk-2-1.png" width="700"></p>
-<p>This is an ideal case for k-means clustering. Let’s examine what the built-in <code>kmeans</code> function returns.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">points.matrix &lt;-<span class="st"> </span><span class="kw">cbind</span>(<span class="dt">x1 =</span> points<span class="op">$</span>x1, <span class="dt">x2 =</span> points<span class="op">$</span>x2)
-kclust &lt;-<span class="st"> </span><span class="kw">kmeans</span>(points.matrix, <span class="dv">3</span>)
+<span class="kw">library</span>(purrr)
+<span class="kw">library</span>(tibble)
+<span class="kw">library</span>(tidyr)
+
+<span class="kw">set.seed</span>(<span class="dv">27</span>)
+
+centers &lt;-<span class="st"> </span><span class="kw">tibble</span>(
+  <span class="dt">cluster =</span> <span class="kw">factor</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>), 
+  <span class="dt">num_points =</span> <span class="kw">c</span>(<span class="dv">100</span>, <span class="dv">150</span>, <span class="dv">50</span>),  <span class="co"># number points in each cluster</span>
+  <span class="dt">x1 =</span> <span class="kw">c</span>(<span class="dv">5</span>, <span class="dv">0</span>, <span class="op">-</span><span class="dv">3</span>),              <span class="co"># x1 coordinate of cluster center</span>
+  <span class="dt">x2 =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>, <span class="op">-</span><span class="dv">2</span>)              <span class="co"># x2 coordinate of cluster center</span>
+)
+
+labelled_points &lt;-<span class="st"> </span>centers <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>(
+    <span class="dt">x1 =</span> <span class="kw">map2</span>(num_points, x1, rnorm),
+    <span class="dt">x2 =</span> <span class="kw">map2</span>(num_points, x2, rnorm)
+  ) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>num_points) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">unnest</span>(x1, x2)
+
+<span class="kw">ggplot</span>(labelled_points, <span class="kw">aes</span>(x1, x2, <span class="dt">color =</span> cluster)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>()</code></pre></div>
+<p><img src="kmeans_files/figure-html/unnamed-chunk-1-1.png" width="700"></p>
+<p>This is an ideal case for k-means clustering. We’ll use the built-in <code>kmeans</code> function, which accepts a dataframe with all numeric columns as it’s primary argument.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">points &lt;-<span class="st"> </span>labelled_points <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>cluster)
+
+kclust &lt;-<span class="st"> </span><span class="kw">kmeans</span>(points, <span class="dt">centers =</span> <span class="dv">3</span>)
 kclust</code></pre></div>
-<pre><code>## K-means clustering with 3 clusters of sizes 99, 151, 50
+<pre><code>## K-means clustering with 3 clusters of sizes 51, 101, 148
 ## 
 ## Cluster means:
-##           x1         x2
-## 1  5.1791917 -0.9865170
-## 2  0.1583797  0.9797098
-## 3 -3.0653196 -2.0887225
+##            x1        x2
+## 1 -3.14292460 -2.000043
+## 2  5.00401249 -1.045811
+## 3  0.08853475  1.045461
 ## 
 ## Clustering vector:
-##   [1] 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
-##  [36] 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
-##  [71] 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 2 1 1 1 1 1 1 1 1 1 1 2 2 2 2 2
-## [106] 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2
-## [141] 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2
-## [176] 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2
-## [211] 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2
-## [246] 2 2 2 2 2 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3
-## [281] 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3
+##   [1] 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2
+##  [36] 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2
+##  [71] 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 3 3 3 3 3
+## [106] 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3
+## [141] 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3
+## [176] 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 2 3 3 3 3 3 3 3 3 3 3 3
+## [211] 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 1 3
+## [246] 3 3 3 3 3 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+## [281] 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
 ## 
 ## Within cluster sum of squares by cluster:
-## [1] 204.96483 257.20360  78.64255
-##  (between_SS / total_SS =  85.1 %)
+## [1] 108.8112 243.2092 298.9415
+##  (between_SS / total_SS =  82.5 %)
 ## 
 ## Available components:
 ## 
@@ -168,52 +185,86 @@ kclust</code></pre></div>
 </ul>
 <p>Which of these do we want to extract? There is no right answer: each of them may be interesting to an analyst. Because they communicate entirely different information (not to mention there’s no straightforward way to combine them), they are extracted by separate functions. <code>augment</code> adds the point classifications to the original dataset:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(broom)
-<span class="kw">head</span>(<span class="kw"><a href="../reference/augment.html">augment</a></span>(kclust, points.matrix))</code></pre></div>
-<pre><code>## # A tibble: 6 x 3
-##      x1     x2 .cluster
-##   &lt;dbl&gt;  &lt;dbl&gt; &lt;fct&gt;   
-## 1  4.43  0.542 1       
-## 2  5.32 -0.941 1       
-## 3  5.13 -1.58  1       
-## 4  6.35 -1.60  1       
-## 5  3.71 -3.41  1       
-## 6  5.32 -0.772 1</code></pre>
+
+<span class="kw"><a href="../reference/augment.html">augment</a></span>(kclust, points)</code></pre></div>
+<pre><code>## # A tibble: 300 x 3
+##       x1     x2 .cluster
+##    &lt;dbl&gt;  &lt;dbl&gt; &lt;fct&gt;   
+##  1  6.91 -2.74  2       
+##  2  6.14 -2.45  2       
+##  3  4.24 -0.946 2       
+##  4  3.54  0.287 2       
+##  5  3.91  0.408 2       
+##  6  5.30 -1.58  2       
+##  7  5.01 -1.77  2       
+##  8  6.16 -1.68  2       
+##  9  7.13 -2.17  2       
+## 10  5.24 -2.42  2       
+## # ... with 290 more rows</code></pre>
 <p>The <code>tidy</code> function summarizes on a per-cluster level:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/tidy.html">tidy</a></span>(kclust)</code></pre></div>
 <pre><code>## # A tibble: 3 x 5
-##       x1     x2  size withinss cluster
-## *  &lt;dbl&gt;  &lt;dbl&gt; &lt;int&gt;    &lt;dbl&gt; &lt;fct&gt;  
-## 1  5.18  -0.987    99    205.  1      
-## 2  0.158  0.980   151    257.  2      
-## 3 -3.07  -2.09     50     78.6 3</code></pre>
+##        x1    x2  size withinss cluster
+## *   &lt;dbl&gt; &lt;dbl&gt; &lt;int&gt;    &lt;dbl&gt; &lt;fct&gt;  
+## 1 -3.14   -2.00    51     109. 1      
+## 2  5.00   -1.05   101     243. 2      
+## 3  0.0885  1.05   148     299. 3</code></pre>
 <p>And as it always does, the <code>glance</code> function extracts a single-row summary:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/glance.html">glance</a></span>(kclust)</code></pre></div>
 <pre><code>## # A tibble: 1 x 4
 ##   totss tot.withinss betweenss  iter
 ##   &lt;dbl&gt;        &lt;dbl&gt;     &lt;dbl&gt; &lt;int&gt;
-## 1 3630.         541.     3089.     2</code></pre>
+## 1 3724.         651.     3073.     2</code></pre>
 <div id="broom-and-dplyr-for-exploratory-clustering" class="section level2">
 <h2 class="hasAnchor">
 <a href="#broom-and-dplyr-for-exploratory-clustering" class="anchor"></a>broom and dplyr for exploratory clustering</h2>
-<p>While these summaries are useful, they would not have been too difficult to extract out from the dataset yourself. The real power comes from combining their analyses with dplyr.</p>
-<p>Let’s say we want to explore the effect of different choices of <code>k</code>, from 1 to 9, on this clustering. First cluster the data 9 times, each using a different value of k:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">kclusts &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">k=</span><span class="dv">1</span><span class="op">:</span><span class="dv">9</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">group_by</span>(k) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">do</span>(<span class="dt">kclust=</span><span class="kw">kmeans</span>(points.matrix, .<span class="op">$</span>k))</code></pre></div>
-<p>Then tidy the clusterings three ways: using <code>tidy</code>, using <code>augment</code>, and using <code>glance</code>. Each of these goes into a separate dataset as they represent different types of data.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">clusters &lt;-<span class="st"> </span>kclusts <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">group_by</span>(k) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">do</span>(<span class="kw"><a href="../reference/tidy.html">tidy</a></span>(.<span class="op">$</span>kclust[[<span class="dv">1</span>]]))
-assignments &lt;-<span class="st"> </span>kclusts <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">group_by</span>(k) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">do</span>(<span class="kw"><a href="../reference/augment.html">augment</a></span>(.<span class="op">$</span>kclust[[<span class="dv">1</span>]], points.matrix))
-clusterings &lt;-<span class="st"> </span>kclusts <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">group_by</span>(k) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">do</span>(<span class="kw"><a href="../reference/glance.html">glance</a></span>(.<span class="op">$</span>kclust[[<span class="dv">1</span>]]))</code></pre></div>
-<p>Now we can plot the original points, with each point colored according to the original cluster:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">p1 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(assignments, <span class="kw">aes</span>(x1, x2)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">color=</span>.cluster)) <span class="op">+</span><span class="st"> </span><span class="kw">facet_wrap</span>(<span class="op">~</span><span class="st"> </span>k)
+<p>While these summaries are useful, they would not have been too difficult to extract out from the dataset yourself. The real power comes from combining these analyses with dplyr.</p>
+<p>Let’s say we want to explore the effect of different choices of <code>k</code>, from 1 to 9, on this clustering. First cluster the data 9 times, each using a different value of <code>k</code>, then create columns containing the tidied, glanced and augmented data:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">kclusts &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">k =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">9</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>(
+    <span class="dt">kclust =</span> <span class="kw">map</span>(k, <span class="op">~</span><span class="kw">kmeans</span>(points, .x)),
+    <span class="dt">tidied =</span> <span class="kw">map</span>(kclust, tidy),
+    <span class="dt">glanced =</span> <span class="kw">map</span>(kclust, glance),
+    <span class="dt">augmented =</span> <span class="kw">map</span>(kclust, augment, points)
+  )
+
+kclusts</code></pre></div>
+<pre><code>## # A tibble: 9 x 5
+##       k kclust       tidied           glanced          augmented         
+##   &lt;int&gt; &lt;list&gt;       &lt;list&gt;           &lt;list&gt;           &lt;list&gt;            
+## 1     1 &lt;S3: kmeans&gt; &lt;tibble [1 x 5]&gt; &lt;tibble [1 x 4]&gt; &lt;tibble [300 x 3]&gt;
+## 2     2 &lt;S3: kmeans&gt; &lt;tibble [2 x 5]&gt; &lt;tibble [1 x 4]&gt; &lt;tibble [300 x 3]&gt;
+## 3     3 &lt;S3: kmeans&gt; &lt;tibble [3 x 5]&gt; &lt;tibble [1 x 4]&gt; &lt;tibble [300 x 3]&gt;
+## 4     4 &lt;S3: kmeans&gt; &lt;tibble [4 x 5]&gt; &lt;tibble [1 x 4]&gt; &lt;tibble [300 x 3]&gt;
+## 5     5 &lt;S3: kmeans&gt; &lt;tibble [5 x 5]&gt; &lt;tibble [1 x 4]&gt; &lt;tibble [300 x 3]&gt;
+## 6     6 &lt;S3: kmeans&gt; &lt;tibble [6 x 5]&gt; &lt;tibble [1 x 4]&gt; &lt;tibble [300 x 3]&gt;
+## 7     7 &lt;S3: kmeans&gt; &lt;tibble [7 x 5]&gt; &lt;tibble [1 x 4]&gt; &lt;tibble [300 x 3]&gt;
+## 8     8 &lt;S3: kmeans&gt; &lt;tibble [8 x 5]&gt; &lt;tibble [1 x 4]&gt; &lt;tibble [300 x 3]&gt;
+## 9     9 &lt;S3: kmeans&gt; &lt;tibble [9 x 5]&gt; &lt;tibble [1 x 4]&gt; &lt;tibble [300 x 3]&gt;</code></pre>
+<p>We can turn these into three separate datasets each representing a different type of data: Then tidy the clusterings three ways: using <code>tidy</code>, using <code>augment</code>, and using <code>glance</code>. Each of these goes into a separate dataset as they represent different types of data.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">clusters &lt;-<span class="st"> </span>kclusts <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">unnest</span>(tidied)
+
+assignments &lt;-<span class="st"> </span>kclusts <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">unnest</span>(augmented)
+
+clusterings &lt;-<span class="st"> </span>kclusts <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">unnest</span>(glanced, <span class="dt">.drop =</span> <span class="ot">TRUE</span>)</code></pre></div>
+<p>Now we can plot the original points, with each point colored according to the predicted cluster.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">p1 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(assignments, <span class="kw">aes</span>(x1, x2)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">color =</span> .cluster)) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span><span class="st"> </span>k)
 p1</code></pre></div>
-<p><img src="kmeans_files/figure-html/unnamed-chunk-9-1.png" width="700"></p>
+<p><img src="kmeans_files/figure-html/unnamed-chunk-8-1.png" width="700"></p>
 <p>Already we get a good sense of the proper number of clusters (3), and how the k-means algorithm functions when k is too high or too low. We can then add the centers of the cluster using the data from <code>tidy</code>:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">p2 &lt;-<span class="st"> </span>p1 <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>(<span class="dt">data=</span>clusters, <span class="dt">size=</span><span class="dv">10</span>, <span class="dt">shape=</span><span class="st">"x"</span>)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">p2 &lt;-<span class="st"> </span>p1 <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>(<span class="dt">data =</span> clusters, <span class="dt">size =</span> <span class="dv">10</span>, <span class="dt">shape =</span> <span class="st">"x"</span>)
 p2</code></pre></div>
-<p><img src="kmeans_files/figure-html/unnamed-chunk-10-1.png" width="700"></p>
+<p><img src="kmeans_files/figure-html/unnamed-chunk-9-1.png" width="700"></p>
 <p>The data from <code>glance</code> fits a different but equally important purpose: it lets you view trends of some summary statistics across values of k. Of particular interest is the total within sum of squares, saved in the <code>tot.withinss</code> column.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(clusterings, <span class="kw">aes</span>(k, tot.withinss)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_line</span>()</code></pre></div>
-<p><img src="kmeans_files/figure-html/unnamed-chunk-11-1.png" width="700"></p>
-<p>This represents the variance within the clusters. It decreases as k increases, but one can notice a bend (or “elbow”) right at k=3. This bend indicates that additional clusters beyond the third have little value. (See <a href="http://web.stanford.edu/~hastie/Papers/gap.pdf">here</a> for a more mathematically rigorous interpretation and implementation of this method). Thus, all three methods of tidying data provided by broom are useful for summarizing clustering output.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(clusterings, <span class="kw">aes</span>(k, tot.withinss)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_line</span>()</code></pre></div>
+<p><img src="kmeans_files/figure-html/unnamed-chunk-10-1.png" width="700"></p>
+<p>This represents the variance within the clusters. It decreases as <code>k</code> increases, but one can notice a bend (or “elbow”) right at k=3. This bend indicates that additional clusters beyond the third have little value. (See <a href="http://web.stanford.edu/~hastie/Papers/gap.pdf">here</a> for a more mathematically rigorous interpretation and implementation of this method). Thus, all three methods of tidying data provided by broom are useful for summarizing clustering output.</p>
 </div>
 </div>
   </div>

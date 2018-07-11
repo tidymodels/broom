@@ -1,26 +1,18 @@
-#' tidying methods for classes from the sp package.
-#'
-#' Tidy classes from the sp package to allow them to be plotted using ggplot2.
-#' To figure out the correct variable name for region, inspect
-#' `as.data.frame(x)`.
-#'
-#' These functions originated in the ggplot2 package as "fortify" functions.
-#'
-#' @param x `SpatialPolygonsDataFrame` to convert into a dataframe.
+#' @templateVar class SpatialPolygonsDataFrame
+#' @template title_desc_tidy
+#' 
+#' @description Note that the \pkg{sf} package now defines tidy spatial objects
+#'   and is the recommend approach to spatial data. `sp` tidiers are likely
+#'   to be deprecated in the near future in favor of [sf::st_as_sf()].
+#'   Development of `sp` tidiers has halted in `broom`.
+#' 
+#' @param x A `SpatialPolygonsDataFrame`, `SpatialPolygons`, `Polygons`,
+#'   `Polygon`, `SpatialLinesDataFrame`, `Lines` or `Line` object.
 #' @param region name of variable used to split up regions
 #' @param ... not used by this method
 #'
 #' @name sp_tidiers
-#'
-#' @examples
-#' if (require("maptools")) {
-#'     sids <- system.file("shapes/sids.shp", package="maptools")
-#'     nc1 <- readShapePoly(sids,
-#'     proj4string = CRS("+proj=longlat +datum=NAD27"))
-#'     nc1_df <- tidy(nc1)
-#' }
-#'
-#' @importFrom plyr ldply
+#' 
 NULL
 
 #' @rdname sp_tidiers
@@ -30,7 +22,7 @@ tidy.SpatialPolygonsDataFrame <- function(x, region = NULL, ...) {
   attr <- as.data.frame(x)
   # If not specified, split into regions based on polygons
   if (is.null(region)) {
-    coords <- ldply(x@polygons, tidy)
+    coords <- map_df(x@polygons, tidy)
     message("Regions defined for each Polygons")
   } else {
     cp <- sp::polygons(x)

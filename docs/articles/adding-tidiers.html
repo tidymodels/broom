@@ -85,7 +85,7 @@
     <div class="page-header toc-ignore">
       <h1>Adding tidiers to broom</h1>
             
-            <h4 class="date">2018-06-28</h4>
+            <h4 class="date">2018-07-11</h4>
       
       <small class="dont-index">Source: <a href="http://github.com/tidyverse/broom/blob/master/vignettes/adding-tidiers.Rmd"><code>vignettes/adding-tidiers.Rmd</code></a></small>
       <div class="hidden name"><code>adding-tidiers.Rmd</code></div>
@@ -251,26 +251,36 @@ gl &lt;-<span class="st"> </span><span class="kw"><a href="../reference/glance.h
 <p>Many <code>augment</code> methods will also provide an optional <code>newdata</code> argument that should also default to <code>NULL</code>. Users should only ever specify one of <code>data</code> or <code>newdata</code>. Providing both <code>data</code> and <code>newdata</code> should result in an error. <code>newdata</code> should accept both <code>data.frame</code>s and <code>tibble</code>s and should be tested with both.</p>
 <p>Data given to the <code>data</code> argument must have both the original predictors and the original response. Data given to the <code>newdata</code> argument only needs to have the original predictors. This is important because there may be important information associated with training data that is not associated with test data, for example, leverages (<code>.hat</code> below) in the case in linear regression:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">model &lt;-<span class="st"> </span><span class="kw">lm</span>(speed <span class="op">~</span><span class="st"> </span>dist, <span class="dt">data =</span> cars)
-<span class="kw">head</span>(<span class="kw"><a href="../reference/augment.html">augment</a></span>(model, <span class="dt">data =</span> cars))
-<span class="co">#&gt; # A tibble: 6 x 9</span>
-<span class="co">#&gt;   speed  dist .fitted .se.fit .resid   .hat .sigma .cooksd .std.resid</span>
-<span class="co">#&gt;   &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;      &lt;dbl&gt;</span>
-<span class="co">#&gt; 1     4     2    8.62   0.844 -4.62  0.0716   3.11 0.0888      -1.52 </span>
-<span class="co">#&gt; 2     4    10    9.94   0.729 -5.94  0.0534   3.06 0.106       -1.93 </span>
-<span class="co">#&gt; 3     7     4    8.95   0.815 -1.95  0.0667   3.18 0.0146      -0.638</span>
-<span class="co">#&gt; 4     7    22   11.9    0.578 -4.93  0.0335   3.10 0.0437      -1.59 </span>
-<span class="co">#&gt; 5     8    16   10.9    0.650 -2.93  0.0424   3.16 0.0200      -0.950</span>
-<span class="co">#&gt; 6     9    10    9.94   0.729 -0.940 0.0534   3.19 0.00264     -0.306</span>
-<span class="kw">head</span>(<span class="kw"><a href="../reference/augment.html">augment</a></span>(model, <span class="dt">newdata =</span> cars))
-<span class="co">#&gt; # A tibble: 6 x 4</span>
-<span class="co">#&gt;   speed  dist .fitted .se.fit</span>
-<span class="co">#&gt;   &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;</span>
-<span class="co">#&gt; 1     4     2    8.62   0.844</span>
-<span class="co">#&gt; 2     4    10    9.94   0.729</span>
-<span class="co">#&gt; 3     7     4    8.95   0.815</span>
-<span class="co">#&gt; 4     7    22   11.9    0.578</span>
-<span class="co">#&gt; 5     8    16   10.9    0.650</span>
-<span class="co">#&gt; 6     9    10    9.94   0.729</span></code></pre></div>
+<span class="kw"><a href="../reference/augment.html">augment</a></span>(model, <span class="dt">data =</span> cars)
+<span class="co">#&gt; # A tibble: 50 x 9</span>
+<span class="co">#&gt;    speed  dist .fitted .se.fit  .resid   .hat .sigma   .cooksd .std.resid</span>
+<span class="co">#&gt;  * &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;     &lt;dbl&gt;      &lt;dbl&gt;</span>
+<span class="co">#&gt;  1     4     2    8.62   0.844 -4.62   0.0716   3.11 0.0888       -1.52  </span>
+<span class="co">#&gt;  2     4    10    9.94   0.729 -5.94   0.0534   3.06 0.106        -1.93  </span>
+<span class="co">#&gt;  3     7     4    8.95   0.815 -1.95   0.0667   3.18 0.0146       -0.638 </span>
+<span class="co">#&gt;  4     7    22   11.9    0.578 -4.93   0.0335   3.10 0.0437       -1.59  </span>
+<span class="co">#&gt;  5     8    16   10.9    0.650 -2.93   0.0424   3.16 0.0200       -0.950 </span>
+<span class="co">#&gt;  6     9    10    9.94   0.729 -0.940  0.0534   3.19 0.00264      -0.306 </span>
+<span class="co">#&gt;  7    10    18   11.3    0.625 -1.26   0.0392   3.18 0.00340      -0.409 </span>
+<span class="co">#&gt;  8    10    26   12.6    0.536 -2.59   0.0289   3.17 0.0103       -0.832 </span>
+<span class="co">#&gt;  9    10    34   13.9    0.473 -3.91   0.0225   3.14 0.0181       -1.25  </span>
+<span class="co">#&gt; 10    11    17   11.1    0.637 -0.0986 0.0407   3.19 0.0000216    -0.0319</span>
+<span class="co">#&gt; # ... with 40 more rows</span>
+<span class="kw"><a href="../reference/augment.html">augment</a></span>(model, <span class="dt">newdata =</span> cars)
+<span class="co">#&gt; # A tibble: 50 x 4</span>
+<span class="co">#&gt;    speed  dist .fitted .se.fit</span>
+<span class="co">#&gt;  * &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;</span>
+<span class="co">#&gt;  1     4     2    8.62   0.844</span>
+<span class="co">#&gt;  2     4    10    9.94   0.729</span>
+<span class="co">#&gt;  3     7     4    8.95   0.815</span>
+<span class="co">#&gt;  4     7    22   11.9    0.578</span>
+<span class="co">#&gt;  5     8    16   10.9    0.650</span>
+<span class="co">#&gt;  6     9    10    9.94   0.729</span>
+<span class="co">#&gt;  7    10    18   11.3    0.625</span>
+<span class="co">#&gt;  8    10    26   12.6    0.536</span>
+<span class="co">#&gt;  9    10    34   13.9    0.473</span>
+<span class="co">#&gt; 10    11    17   11.1    0.637</span>
+<span class="co">#&gt; # ... with 40 more rows</span></code></pre></div>
 <p>This means that many <code><a href="../reference/augment.html">augment(model, data = original_data)</a></code> should provide <code>.fitted</code> and <code>.resid</code> columns in most cases, whereas <code><a href="../reference/augment.html">augment(model, data = test_data)</a></code> only needs to a <code>.fitted</code> column, even if the response is present in <code>test_data</code>.</p>
 <p>If the <code>data</code> or <code>newdata</code> is specified as a <code>data.frame</code> with rownames, <code>augment</code> should return them in a column called <code>.rownames</code>.</p>
 <p>For observations where no fitted values or summaries are available (where there’s missing data, for example) return <code>NA</code>.</p>

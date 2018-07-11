@@ -1,38 +1,29 @@
-#' Tidiers for linear model II objects from the lmodel2 package
+#' @templateVar class lmodel2
+#' @template title_desc_tidy
+#' 
+#' @param x A `lmodel2` object returned by [lmodel2::lmodel2()].
+#' @template param_unused_dots
 #'
-#' Tidy or glance an lmodel2 object. An lmodel2 represents model II simple
-#' linear regression, where both variables in the regression equation are
-#' random.
-#'
-#' @param x lmodel2 object
-#' @param ... Extra arguments, not used
-#'
-#' @details Note that unlike linear regression, there are always only two terms
-#' in an lmodel2: Intercept and Slope. Furthermore, these are computed by four
-#' methods: OLS (ordinary least squares), MA (major axis), SMA (standard major
-#' axis), and RMA (ranged major axis). See the lmodel2 documentation for more.
-#'
-#' Note that there is no `augment` method for lmodel2 objects because
-#' lmodel2 does not provide a `predict` or {`residuals`} method
-#' (and since when both observations are random, fitted values and residuals
-#' have a less clear meaning).
-#'
-#' @template boilerplate
-#'
-#' @return `tidy` returns a data frame with one row for each combination
-#' of method (OLS/MA/SMA/RMA) and term (always Intercept/Slope). Its columns
-#' are:
-#' \describe{
+#' @return A [tibble::tibble] within eight rows (one for each term estimated 
+#'   with each method) and columns:
+#'   
 #'   \item{method}{Either OLS/MA/SMA/RMA}
 #'   \item{term}{Either "Intercept" or "Slope"}
 #'   \item{estimate}{Estimated coefficient}
 #'   \item{conf.low}{Lower bound of 95\% confidence interval}
 #'   \item{conf.high}{Upper bound of 95\% confidence interval}
-#' }
+#'
+#' @details There are always only two terms in an `lmodel2`: `"Intercept"`
+#'   and `"Slope"`. These are computed by four methods: OLS
+#'   (ordinary least squares), MA (major axis), SMA (standard major
+#'   axis), and RMA (ranged major axis).
 #'
 #' @examples
 #'
 #' if (require("lmodel2", quietly = TRUE)) {
+#' 
+#'   library(lmodel2)
+#'   
 #'   data(mod2ex2)
 #'   Ex2.res <- lmodel2(Prey ~ Predators, data=mod2ex2, "relative", "relative", 99)
 #'   Ex2.res
@@ -48,9 +39,10 @@
 #'     geom_errorbarh(aes(xmin = conf.low, xmax = conf.high))
 #' }
 #'
-#' @name lmodel2_tidiers
-#'
 #' @export
+#' @seealso [tidy()], [lmodel2::lmodel2()]
+#' @aliases lmodel2_tidiers
+#' @family lmodel2 tidiers
 tidy.lmodel2 <- function(x, ...) {
   ret <- x$regression.results[1:3] %>%
     select(method = Method, Intercept, Slope) %>%
@@ -71,17 +63,21 @@ tidy.lmodel2 <- function(x, ...) {
 }
 
 
-#' @rdname lmodel2_tidiers
-#'
-#' @return `glance` returns a one-row data frame with columns
-#' \describe{
+#' @templateVar class lmodel2
+#' @template title_desc_glance
+#' 
+#' @inheritParams tidy.lmodel2
+#' 
+#' @return A one-row [tibble::tibble] with columns:
 #'   \item{r.squared}{OLS R-squared}
 #'   \item{p.value}{OLS parametric p-value}
 #'   \item{theta}{Angle between OLS lines `lm(y ~ x)` and `lm(x ~ y)`}
 #'   \item{H}{H statistic for computing confidence interval of major axis slope}
-#' }
 #'
 #' @export
+#' @seealso [glance()], [lmodel2::lmodel2()]
+#' @family lmodel2 tidiers
+#' 
 glance.lmodel2 <- function(x, ...) {
   tibble(
     r.squared = x$rsquare,

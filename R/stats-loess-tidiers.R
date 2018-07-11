@@ -1,27 +1,24 @@
-#' Augmenting methods for loess models
-#'
-#' This method augments the original data with information
-#' on the fitted values and residuals, and optionally the
-#' standard errors.
-#'
-#' @param x A "loess" object
-#' @param data Original data, defaults to the extracting it from the model
-#' @param newdata If provided, performs predictions on the new data
-#' @param ... extra arguments
-#'
-#' @name loess_tidiers
+#' @templateVar class loess
+#' @template title_desc_tidy
+#' 
+#' @param x A `loess` objects returned by [stats::loess()].
+#' @template param_data
+#' @template param_newdata
+#' @inheritDotParams stats:::predict.loess
 #'
 #' @template augment_NAs
 #'
 #' @return When `newdata` is not supplied `augment.loess`
 #' returns one row for each observation with three columns added
 #' to the original data:
+#' 
 #'    \item{.fitted}{Fitted values of model}
 #'    \item{.se.fit}{Standard errors of the fitted values}
 #'    \item{.resid}{Residuals of the fitted values}
 #'
 #' When `newdata` is supplied `augment.loess` returns
 #'    one row for each observation with one additional column:
+#'    
 #'    \item{.fitted}{Fitted values of model}
 #'    \item{.se.fit}{Standard errors of the fitted values}
 #'
@@ -36,7 +33,9 @@
 #' # with a new dataset
 #' augment(lo, newdata = head(mtcars))
 #'
+#' @aliases loess_tidiers
 #' @export
+#' @seealso [augment()], [stats::loess()], [stats::predict.loess()]
 augment.loess <- function(x, data = stats::model.frame(x), newdata, ...) {
   augment_columns(x, data, newdata, se.fit = FALSE, se = TRUE, ...)
 }

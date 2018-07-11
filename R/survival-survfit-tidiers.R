@@ -1,64 +1,56 @@
-
-#' tidy survival curve fits
+#' @templateVar class survfit
+#' @template title_desc_tidy
 #'
-#' Construct tidied data frames showing survival curves over time.
+#' @param x An `survfit` object returned from [survival::survfit()].
+#' @template param_unused_dots
 #'
-#' @param x "survfit" object
-#' @param ... extra arguments, not used
-#'
-#' @details `glance` does not work on multi-state survival curves,
-#' since the values `glance` outputs would be calculated for each state.
-#' `tidy` does work for multi-state survival objects, and includes a
-#' `state` column to distinguish between them.
-#'
-#' @template boilerplate
-#'
-#' @examples
-#'
-#' if (require("survival", quietly = TRUE)) {
-#'     cfit <- coxph(Surv(time, status) ~ age + sex, lung)
-#'     sfit <- survfit(cfit)
-#'
-#'     head(tidy(sfit))
-#'     glance(sfit)
-#'
-#'     library(ggplot2)
-#'     ggplot(tidy(sfit), aes(time, estimate)) + geom_line() +
-#'         geom_ribbon(aes(ymin=conf.low, ymax=conf.high), alpha=.25)
-#'
-#'     # multi-state
-#'     fitCI <- survfit(Surv(stop, status * as.numeric(event), type = "mstate") ~ 1,
-#'                   data = mgus1, subset = (start == 0))
-#'     td_multi <- tidy(fitCI)
-#'     head(td_multi)
-#'     tail(td_multi)
-#'     ggplot(td_multi, aes(time, estimate, group = state)) +
-#'         geom_line(aes(color = state)) +
-#'         geom_ribbon(aes(ymin = conf.low, ymax = conf.high), alpha = .25)
-#'
-#' }
-#'
-#' @name survfit_tidiers
-
-
-#' @rdname survfit_tidiers
-#'
-#' @return `tidy` returns a row for each time point, with columns
+#' @return A [tibble::tibble] with one row for each time point and columns: 
+#' 
 #'   \item{time}{timepoint}
 #'   \item{n.risk}{number of subjects at risk at time t0}
 #'   \item{n.event}{number of events at time t}
 #'   \item{n.censor}{number of censored events}
-#'   \item{estimate}{estimate of survival or cumulative incidence rate when multistate}
+#'   \item{estimate}{estimate of survival or cumulative incidence rate when
+#'     multistate}
 #'   \item{std.error}{standard error of estimate}
 #'   \item{conf.high}{upper end of confidence interval}
 #'   \item{conf.low}{lower end of confidence interval}
 #'   \item{state}{state if multistate survfit object inputted}
 #'   \item{strata}{strata if stratified survfit object inputted}
+#' 
+#' @examples 
+#' 
+#' library(survival)
+#' cfit <- coxph(Surv(time, status) ~ age + sex, lung)
+#' sfit <- survfit(cfit)
+#'
+#' tidy(sfit)
+#' glance(sfit)
+#'
+#' library(ggplot2)
+#' ggplot(tidy(sfit), aes(time, estimate)) + geom_line() +
+#'     geom_ribbon(aes(ymin=conf.low, ymax=conf.high), alpha=.25)
+#'
+#' # multi-state
+#' fitCI <- survfit(Surv(stop, status * as.numeric(event), type = "mstate") ~ 1,
+#'               data = mgus1, subset = (start == 0))
+#' td_multi <- tidy(fitCI)
+#' td_multi
+#' 
+#' ggplot(td_multi, aes(time, estimate, group = state)) +
+#'     geom_line(aes(color = state)) +
+#'     geom_ribbon(aes(ymin = conf.low, ymax = conf.high), alpha = .25)
+#'
+#' @aliases survfit_tidiers
 #' @export
+#' @seealso [tidy()], [survival::survfit()]
+#' @family survfit tidiers
+#' @family survival tidiers
+#' 
 tidy.survfit <- function(x, ...) {
   if (inherits(x, "survfitms")) {
     
-    # c(x$???) when value is a matrix and needs to be stacked
+    # c() coerces to vector
     ret <- data.frame(
       time = x$time,
       n.risk = c(x$n.risk),
@@ -91,10 +83,13 @@ tidy.survfit <- function(x, ...) {
   as_tibble(ret)
 }
 
-#' @rdname survfit_tidiers
-#'
-#' @return `glance` returns one-row data.frame with the columns
-#' displayed by [print.survfit()]
+#' @templateVar class survfit
+#' @template title_desc_glance
+#' 
+#' @inheritParams tidy.survfit
+#' 
+#' @return A one-row [tibble::tibble] with columns:
+#' 
 #'   \item{records}{number of observations}
 #'   \item{n.max}{n.max}
 #'   \item{n.start}{n.start}
@@ -106,6 +101,10 @@ tidy.survfit <- function(x, ...) {
 #'   \item{conf.high}{upper end of confidence interval on median}
 #'
 #' @export
+#' @seealso [glance()], [survival::survfit()]
+#' @family cch tidiers
+#' @family survival tidiers
+#' 
 glance.survfit <- function(x, ...) {
   if (inherits(x, "survfitms")) {
     stop("Cannot construct a glance of a multi-state survfit object.")
@@ -117,12 +116,13 @@ glance.survfit <- function(x, ...) {
   s <- summary(x)
   ret <- unrowname(as.data.frame(t(s$table)))
   
-  colnames(ret) <- plyr::revalue(colnames(ret),
-                                 c(
-                                   "*rmean" = "rmean",
-                                   "*se(rmean)" = "rmean.std.error"
-                                 ),
-                                 warn_missing = FALSE
+  colnames(ret) <- plyr::revalue(
+    colnames(ret),
+    c(
+      "*rmean" = "rmean",
+      "*se(rmean)" = "rmean.std.error"
+    ),
+    warn_missing = FALSE
   )
   
   colnames(ret)[utils::tail(seq_along(ret), 2)] <- c("conf.low", "conf.high")

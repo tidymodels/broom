@@ -1,15 +1,16 @@
-#' Tidying methods for fitdistr objects from the MASS package
+#' @templateVar class fitdistr
+#' @template title_desc_tidy
 #'
-#' These methods tidies the parameter estimates resulting
-#' from an estimation of a univariate distribution's parameters.
+#' @param x A `fitdistr` object returned by [MASS::fitdistr()].
+#' @template param_unused_dots
 #'
-#' @param x An object of class "fitdistr"
-#' @param ... extra arguments (not used)
-#'
-#' @template boilerplate
-#'
-#' @name fitdistr_tidiers
-#'
+#' @return A [tibble::tibble] with one row for estimated parameter, with
+#'   columns:
+#'   
+#'   \item{term}{The term that was estimated}
+#'   \item{estimate}{Estimated value}
+#'   \item{std.error}{Standard error of estimate}
+#'   
 #' @examples
 #'
 #' set.seed(2015)
@@ -20,18 +21,11 @@
 #'
 #' tidy(fit)
 #' glance(fit)
-NULL
-
-
-#' @rdname fitdistr_tidiers
-#'
-#' @return `tidy.fitdistr` returns one row for each parameter that
-#' was estimated, with columns:
-#'   \item{term}{The term that was estimated}
-#'   \item{estimate}{Estimated value}
-#'   \item{std.error}{Standard error of estimate}
 #'
 #' @export
+#' @family fitdistr tidiers
+#' @aliases fitdistr_tidiers
+#' @seealso [tidy()], [MASS::fitdistr()]
 tidy.fitdistr <- function(x, ...) {
   tibble(
     term = names(x$estimate),
@@ -41,15 +35,20 @@ tidy.fitdistr <- function(x, ...) {
 }
 
 
-#' @rdname fitdistr_tidiers
+#' @templateVar class fitdistr
+#' @template title_desc_glance
+#' 
+#' @inheritParams tidy.fitdistr
 #'
-#' @return `glance.fitdistr` returns a one-row data.frame with the columns
+#' @return A one-row [tibble::tibble] with columns:
 #'   \item{n}{Number of observations used in estimation}
 #'   \item{logLik}{log-likelihood of estimated data}
 #'   \item{AIC}{Akaike Information Criterion}
 #'   \item{BIC}{Bayesian Information Criterion}
 #'
 #' @export
+#' @family fitdistr tidiers
+#' @seealso [tidy()], [MASS::fitdistr()]
 glance.fitdistr <- function(x, ...) {
   finish_glance(data.frame(n = x$n), x)
 }

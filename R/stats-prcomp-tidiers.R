@@ -1,62 +1,62 @@
-#' Tidying methods for principal components analysis via [prcomp()]
+#' @templateVar class prcomp
+#' @template title_desc_tidy
 #'
-#' These tidiers operate on the results of a principal components analysis
-#' computed using `prcomp`. The `tidy` method returns a data frame
-#' with either the eigenvectors representing each row or each column.
+#' @param x A `prcomp` object returned by [stats::prcomp()].
+#' @param matrix Character specifying which component of the PCA should be
+#'   tidied. 
+#'   
+#'   - `"u"`, `"samples"`, or `"x"`: returns information about the map from
+#'     the original space into principle components space.
+#'   
+#'   - `"v"`, `"rotation"`, or `"variables"`: returns information about the
+#'     map from principle components space back into the original space.
+#'   
+#'   - `"d"` or `"pcs"`: returns information about the eigenvalues
+#'     will return information about
+#' @template param_unused_dots
 #'
-#' @param x an object of class `"prcomp"` resulting from a call to
-#' [stats::prcomp()]
-#' @param matrix character; Indicates which sets of eigenvectors are returned
-#' in tidy form. "v", "rotation", or "variables" will return information about
-#' each variable, while "u", "x", or "samples" (default) returns the loadings
-#' for each original row. "d" or "pcs" returns information about each
-#' principal component.
-#'
-#' @name prcomp_tidiers
-#'
-#' @seealso [prcomp()], \link{svd_tidiers}
-#'
-#' @template boilerplate
-#'
-#' @return If `matrix` is "u", "samples", or "x", the `tidy` method
-#' returns
-#' \describe{
-#'    \item{`row`}{The sample labels (rownames) of the data set on
+#' @return A [tibble::tibble] with columns depending on the component of 
+#'   PCA being tidied.
+#'   
+#'   If `matrix` is `"u"`, `"samples"`, or `"x"` each row in the tidied
+#'   output corresponds to the original data in PCA space. The columns are:
+#'   
+#'   \item{`row`}{ID of the original observation (i.e. rowname from original
+#'     data).}
+#'   \item{`PC`}{Integer indicating a principle component.}
+#'   \item{`value`}{The score of the observation for that particular principle
+#'     component. That is, the location of the observation in PCA space.}
+#'     
+#'   If `matrix` is `"v"`, `"rotation"`, or `"variables"`, each row in the
+#'   tidied ouput corresponds to information about the principle components
+#'   in the original space. The columns are:
+#'   
+#'   \item{`row`}{The variable labels (colnames) of the data set on
 #'   which PCA was performed}
 #'   \item{`PC`}{An integer vector indicating the principal component}
 #'   \item{`value`}{The value of the eigenvector (axis score) on the
 #'   indicated principal component}
-#' }
-#'
-#' If `matrix` is "v", "variables", or "rotation", the `tidy` method
-#' returns
-#' \describe{
-#'    \item{`row`}{The variable labels (colnames) of the data set on
-#'   which PCA was performed}
-#'   \item{`PC`}{An integer vector indicating the principal component}
-#'   \item{`value`}{The value of the eigenvector (axis score) on the
-#'   indicated principal component}
-#' }
-#'
-#' If `matrix` is "d" or "pcs", the `tidy` method returns
-#' \describe{
+#'   
+#'   If `matrix` is `"d"` or `"pcs"`, the columns are:
+#'   
 #'   \item{`PC`}{An integer vector indicating the principal component}
 #'   \item{`std.dev`}{Standard deviation explained by this PC}
 #'   \item{`percent`}{Percentage of variation explained}
 #'   \item{`cumulative`}{Cumulative percentage of variation explained}
-#' }
-#'
-#' @author Gavin L. Simpson
+#' 
+#' @details See https://stats.stackexchange.com/questions/134282/relationship-between-svd-and-pca-how-to-use-svd-to-perform-pca
+#'   for information on how to interpret the various tidied matrices. Note
+#'   that SVD is only equivalent to PCA on centered data.
 #'
 #' @examples
 #'
 #' pc <- prcomp(USArrests, scale = TRUE)
 #'
 #' # information about rotation
-#' head(tidy(pc))
+#' tidy(pc)
 #'
 #' # information about samples (states)
-#' head(tidy(pc, "samples"))
+#' tidy(pc, "samples")
 #'
 #' # information about PCs
 #' tidy(pc, "pcs")
@@ -76,13 +76,16 @@
 #'   ggtitle("Principal components of arrest data")
 #'
 #' au <- augment(pc, data = USArrests)
-#' head(au)
+#' au
 #'
 #' ggplot(au, aes(.fittedPC1, .fittedPC2)) +
 #'   geom_point() +
 #'   geom_text(aes(label = .rownames), vjust = 1, hjust = 1)
 #'
+#' @aliases prcomp_tidiers
 #' @export
+#' @seealso [stats::prcomp()], [svd_tidiers]
+#' @family svd tidiers
 tidy.prcomp <- function(x, matrix = "u", ...) {
   if (length(matrix) > 1) {
     stop("Must select a single matrix to tidy.", call. = FALSE)
@@ -127,23 +130,21 @@ tidy.prcomp <- function(x, matrix = "u", ...) {
 }
 
 
-#' @rdname prcomp_tidiers
+#' @templateVar class prcomp
+#' @template title_desc_augment
+#' 
+#' @inheritParams tidy.prcomp
+#' @template param_data
+#' @template param_newdata
 #'
-#' @param data the original data on which principal components analysis
-#' was performed. This cannot be recovered from `x`. If `newdata`
-#' is supplied, `data` is ignored. If both `data` and `newdata`
-#' are missing, only the fitted locations on the principal components are
-#' returned.
-#' @param newdata data frame; new observations for which locations on principal
-#' components are sought.
-#' @param ... Extra arguments, not used
-#'
-#' @return The `augment.prcomp` method returns a data frame containing
-#' fitted locations on the principal components for the observed data plus
-#' either the original data or the new data if supplied via `data` or
-#' `newdata` respectively.
+#' @return A [tibble::tibble] containing the original data along with 
+#'   additional columns containing each observation's projection into
+#'   PCA space.
 #'
 #' @export
+#' @seealso [stats::prcomp()], [svd_tidiers]
+#' @family svd tidiers
+#' 
 augment.prcomp <- function(x, data = NULL, newdata, ...) {
   ret <- if (!missing(newdata)) {
     ret <- data.frame(.rownames = rownames(newdata))

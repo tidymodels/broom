@@ -1,67 +1,66 @@
-
-#' Tidiers for coxph object
+#' @templateVar class coxph
+#' @template title_desc_tidy
 #'
-#' Tidy the coefficients of a Cox proportional hazards regression model,
-#' construct predictions, or summarize the entire model into a single row.
-#'
-#' @param x "coxph" object
-#' @param data original data for `augment`
-#' @param exponentiate whether to report the estimate and confidence intervals
-#' on an exponential scale
-#' @param conf.int whether to include a confidence interval
-#' @param conf.level confidence level of the interval, used only if `conf.int=TRUE`
-#' @param newdata new data on which to do predictions
-#' @param type.predict type of predicted value (see [predict.coxph()])
-#' @param type.residuals type of residuals (see [residuals.coxph()])
-#' @param ... Extra arguments, not used
-#'
-#' @name coxph_tidiers
-#'
-#' @examples
-#'
-#' if (require("survival", quietly = TRUE)) {
-#'     cfit <- coxph(Surv(time, status) ~ age + sex, lung)
-#'
-#'     tidy(cfit)
-#'     tidy(cfit, exponentiate = TRUE)
-#'
-#'     lp <- augment(cfit, lung)
-#'     risks <- augment(cfit, lung, type.predict = "risk")
-#'     expected <- augment(cfit, lung, type.predict = "expected")
-#'
-#'     glance(cfit)
-#'
-#'     # also works on clogit models
-#'     resp <- levels(logan$occupation)
-#'     n <- nrow(logan)
-#'     indx <- rep(1:n, length(resp))
-#'     logan2 <- data.frame(logan[indx,],
-#'                          id = indx,
-#'                          tocc = factor(rep(resp, each=n)))
-#'     logan2$case <- (logan2$occupation == logan2$tocc)
-#'
-#'     cl <- clogit(case ~ tocc + tocc:education + strata(id), logan2)
-#'     tidy(cl)
-#'     glance(cl)
-#'
-#'     library(ggplot2)
-#'     ggplot(lp, aes(age, .fitted, color = sex)) + geom_point()
-#'     ggplot(risks, aes(age, .fitted, color = sex)) + geom_point()
-#'     ggplot(expected, aes(time, .fitted, color = sex)) + geom_point()
-#' }
-
-
-#' @rdname coxph_tidiers
-#'
-#' @return `tidy` returns a data.frame with one row for each term,
-#' with columns
+#' @param x A `coxph` object returned from [survival::coxph()].
+#' @template param_confint
+#' @template param_exponentiate
+#' @template param_unused_dots
+#' 
+#' @return A [tibble::tibble] with one row for each term and columns:
+#' 
 #'   \item{estimate}{estimate of slope}
 #'   \item{std.error}{standard error of estimate}
 #'   \item{statistic}{test statistic}
 #'   \item{p.value}{p-value}
 #'
+#' @examples 
+#' 
+#' library(survival)
+#' 
+#' cfit <- coxph(Surv(time, status) ~ age + sex, lung)
+#'
+#' tidy(cfit)
+#' tidy(cfit, exponentiate = TRUE)
+#'
+#' lp <- augment(cfit, lung)
+#' risks <- augment(cfit, lung, type.predict = "risk")
+#' expected <- augment(cfit, lung, type.predict = "expected")
+#'
+#' glance(cfit)
+#'
+#' # also works on clogit models
+#' resp <- levels(logan$occupation)
+#' n <- nrow(logan)
+#' indx <- rep(1:n, length(resp))
+#' logan2 <- data.frame(
+#'   logan[indx,],
+#'   id = indx,
+#'   tocc = factor(rep(resp, each=n))
+#' )
+#' 
+#' logan2$case <- (logan2$occupation == logan2$tocc)
+#'
+#' cl <- clogit(case ~ tocc + tocc:education + strata(id), logan2)
+#' tidy(cl)
+#' glance(cl)
+#'
+#' library(ggplot2)
+#' 
+#' ggplot(lp, aes(age, .fitted, color = sex)) +
+#'   geom_point()
+#' 
+#' ggplot(risks, aes(age, .fitted, color = sex)) + 
+#'   geom_point()
+#'   
+#' ggplot(expected, aes(time, .fitted, color = sex)) + 
+#'   geom_point()
+#' 
+#' 
+#' @aliases coxph_tidiers
 #' @export
-
+#' @seealso [tidy()], [survival::coxph()]
+#' @family coxph tidiers
+#' @family survival tidiers
 tidy.coxph <- function(x, exponentiate = FALSE, conf.int = TRUE, conf.level = .95, ...) {
   # backward compatibility (in previous version, conf.int was used instead of conf.level)
   if (is.numeric(conf.int)) {
@@ -100,17 +99,28 @@ tidy.coxph <- function(x, exponentiate = FALSE, conf.int = TRUE, conf.level = .9
 }
 
 
-#' @rdname coxph_tidiers
+#' @templateVar class coxph
+#' @template title_desc_augment
+#' 
+#' @param x A `coxph` object returned from [survival::coxph()].
+#' @template param_data
+#' @template param_newdata
+#' @template param_type_residuals
+#' @template param_type_predict
+#' @template param_unused_dots
 #'
 #' @template augment_NAs
 #'
-#' @return `augment` returns the original data.frame with additional
-#' columns added:
-#'   \item{.fitted}{predicted values}
-#'   \item{.se.fit}{standard errors }
-#'   \item{.resid}{residuals (not present if `newdata` is provided)}
+#' @return A [tibble::tibble] with the passed data and additional columns:
+#' 
+#'   \item{.fitted}{Fitted values of model}
+#'   \item{.se.fit}{Standard errors of fitted values}
+#'   \item{.resid}{Residuals (not present if `newdata` specified.)}
 #'
 #' @export
+#' @seealso [augment()], [survival::coxph()]
+#' @family coxph tidiers
+#' @family survival tidiers
 augment.coxph <- function(x, data = NULL, newdata = NULL,
                           type.predict = "lp", type.residuals = "martingale",
                           ...) {
@@ -124,13 +134,17 @@ augment.coxph <- function(x, data = NULL, newdata = NULL,
   )
 }
 
-
-#' @rdname coxph_tidiers
-#'
-#' @return `glance` returns a one-row data.frame with statistics
-#' calculated on the cox regression.
+#' @templateVar class coxph
+#' @template title_desc_glance
+#' 
+#' @inheritParams tidy.coxph
+#' 
+#' @return A one-row [tibble::tibble] with columns: TODO.
 #'
 #' @export
+#' @seealso [glance()], [survival::coxph()]
+#' @family coxph tidiers
+#' @family survival tidiers
 glance.coxph <- function(x, ...) {
   s <- summary(x)
   

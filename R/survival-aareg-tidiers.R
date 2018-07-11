@@ -1,39 +1,38 @@
-
-#' Tidiers for aareg objects
+#' @templateVar class aareg
+#' @template title_desc_tidy
 #'
-#' These tidy the coefficients of Aalen additive regression objects.
-#'
-#' @param x an "aareg" object
-#' @param ... extra arguments (not used)
-#'
-#' @template boilerplate
-#'
-#' @examples
-#'
-#' if (require("survival", quietly = TRUE)) {
-#'     afit <- aareg(Surv(time, status) ~ age + sex + ph.ecog, data=lung,
-#'                   dfbeta=TRUE)
-#'     summary(afit)
-#'     tidy(afit)
-#' }
-#'
-#' @name aareg_tidiers
-
-
-#' @name aareg_tidiers
-#'
-#' @return `tidy.aareg` returns one row for each coefficient, with
-#' the columns
+#' @param x An `aareg` object returned from [survival::aareg()].
+#' @template param_unused_dots
+#' 
+#' @return A [tibble::tibble] with one row for each coefficient and columns:
+#' 
 #'   \item{term}{name of coefficient}
 #'   \item{estimate}{estimate of the slope}
 #'   \item{statistic}{test statistic for coefficient}
 #'   \item{std.error}{standard error of statistic}
 #'   \item{robust.se}{robust version of standard error estimate (only when
-#'   `x` was called with `dfbeta = TRUE`)}
+#'     `x` was called with `dfbeta = TRUE`)}
 #'   \item{z}{z score}
 #'   \item{p.value}{p-value}
 #'
+#' @examples
+#'
+#' library(survival)
+#' 
+#' afit <- aareg(
+#'   Surv(time, status) ~ age + sex + ph.ecog,
+#'   data = lung,
+#'   dfbeta = TRUE
+#' )
+#' 
+#' tidy(afit) 
+#'
+#' @aliases aareg_tidiers
 #' @export
+#' @seealso [tidy()], [survival::aareg()]
+#' @family aareg tidiers
+#' @family survival tidiers
+#' 
 tidy.aareg <- function(x, ...) {
   if (is.null(x$dfbeta)) {
     nn <- c("estimate", "statistic", "std.error", "statistic.z", "p.value")
@@ -46,15 +45,21 @@ tidy.aareg <- function(x, ...) {
   fix_data_frame(summary(x)$table, nn)
 }
 
-
-#' @name aareg_tidiers
-#'
-#' @return `glance` returns a one-row data frame containing
+#' @templateVar class aareg
+#' @template title_desc_glance
+#' 
+#' @inheritParams tidy.aareg
+#' 
+#' @return A one-row [tibble::tibble] with columns:
+#' 
 #'   \item{statistic}{chi-squared statistic}
 #'   \item{p.value}{p-value based on chi-squared statistic}
 #'   \item{df}{degrees of freedom used by coefficients}
 #'
 #' @export
+#' @seealso [glance()], [survival::aareg()]
+#' @family aareg tidiers
+#' @family survival tidiers
 glance.aareg <- function(x, ...) {
   s <- summary(x)
   chi <- as.numeric(s$chisq)

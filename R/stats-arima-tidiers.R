@@ -1,36 +1,13 @@
-#' Tidying methods for ARIMA modeling of time series
-#'
-#' These methods tidy the coefficients of ARIMA models of univariate time
-#' series.
+#' @templateVar class Arima
+#' @template title_desc_tidy
 #'
 #' @param x An object of class `Arima` created by [stats::arima()].
-#'
-#' @details `augment` is not currently implemented, as it is not clear
-#' whether ARIMA predictions can or should be merged with the original
-#' data frame.
-#'
-#' @template boilerplate
-#'
-#' @seealso [stats::arima()]
-#'
-#' @examples
-#'
-#' fit <- arima(lh, order = c(1, 0, 0))
-#' tidy(fit)
-#' glance(fit)
-#'
-#' @name Arima_tidiers
-NULL
-
-
-#' @rdname Arima_tidiers
-#'
-#' @param conf.int whether to include a confidence interval
-#' @param conf.level confidence level of the interval, used only if
-#' `conf.int=TRUE`
-#'
-#' @return `tidy` returns one row for each coefficient in the model,
-#' with five columns:
+#' @template param_confint
+#' @template param_unused_dots
+#' 
+#' 
+#' @return A [tibble::tibble] with one row for each coefficient and columns:
+#' 
 #'   \item{term}{The term in the nonlinear model being estimated and tested}
 #'   \item{estimate}{The estimated coefficient}
 #'   \item{std.error}{The standard error from the linear model}
@@ -38,9 +15,18 @@ NULL
 #' If `conf.int = TRUE`, also returns
 #'   \item{conf.low}{low end of confidence interval}
 #'   \item{conf.high}{high end of confidence interval}
+#' 
+#' @examples
 #'
+#' fit <- arima(lh, order = c(1, 0, 0))
+#' tidy(fit)
+#' glance(fit)
+#'
+#' @aliases Arima_tidiers
+#' @seealso [stats::arima()]
 #' @export
-tidy.Arima <- function(x, conf.int=FALSE, conf.level=.95, ...) {
+#' @family Arima tidiers
+tidy.Arima <- function(x, conf.int = FALSE, conf.level = 0.95, ...) {
   coefs <- stats::coef(x)
   # standard errors are computed as in stats:::print.Arima
   ses <- rep.int(0, length(coefs))
@@ -55,28 +41,32 @@ tidy.Arima <- function(x, conf.int=FALSE, conf.level=.95, ...) {
   if (conf.int) {
     ret <- cbind(ret, confint_tidy(x))
   }
-  tibble::as_tibble(ret)
+  as_tibble(ret)
 }
 
 
-#' @rdname Arima_tidiers
+#' @templateVar class Arima
+#' @template title_desc_glance
+#' 
+#' @inheritParams tidy.Arima
 #'
-#' @param ... extra arguments (not used)
-#'
-#' @return `glance` returns one row with the columns
+#' @return A one-row [tibble::tibble] with columns:
+#' 
 #'   \item{sigma}{the square root of the estimated residual variance}
 #'   \item{logLik}{the data's log-likelihood under the model}
 #'   \item{AIC}{the Akaike Information Criterion}
 #'   \item{BIC}{the Bayesian Information Criterion}
 #'
+#' @seealso [stats::arima()]
 #' @export
+#' @family Arima tidiers
 glance.Arima <- function(x, ...) {
-  ret <- unrowname(data.frame(sigma = sqrt(x$sigma2)))
+  ret <- tibble(sigma = sqrt(x$sigma2))
   ret$logLik <- tryCatch(as.numeric(stats::logLik(x)), error = function(e) NULL)
   # special case for class Arima when method = "CSS"
   if (!is.na(ret$logLik)) {
     ret$AIC <- tryCatch(stats::AIC(x), error = function(e) NULL)
     ret$BIC <- tryCatch(stats::BIC(x), error = function(e) NULL)
   }
-  return(tibble::as_tibble(ret))
+  as_tibble(ret)
 }

@@ -10,8 +10,9 @@
 #' @param x "emmGrid", lsmobj", or "ref.grid" object
 #' @param conf.level Level of confidence interval, used only for
 #' `emmGrid` and `lsmobj` objects
-#' @param ... Extra arguments, passed on to
-#' [emmeans::summary.emmGrid()] or [lsmeans::summary.ref.grid()]
+#' @param ... Additional arguments passed to [emmeans::summary.emmGrid()] or
+#'   [lsmeans::summary.ref.grid()]. **Cautionary note**: mispecified arguments
+#'   may be silently ignored!
 #'
 #' @return A data frame with one observation for each estimated
 #' mean, and one column for each combination of factors, along with
@@ -44,7 +45,7 @@
 #'   # reference grid; see vignette("basics", package = "emmeans")
 #'   oranges_rg1 <- ref_grid(oranges_lm1)
 #'   td <- tidy(oranges_rg1)
-#'   head(td)
+#'   td
 #'
 #'   # marginal averages
 #'   marginal <- emmeans(oranges_rg1, "day")
@@ -92,11 +93,6 @@ tidy.emmGrid <- function(x, ...) {
   tidy_emmeans(x, ...)
 }
 
-
-#' Tidy one of several object from the emmeans or lsmeans packages, which have
-#' a similar structure
-#'
-#' @noRd
 tidy_emmeans <- function(x, ...) {
   s <- summary(x, ...)
   ret <- as.data.frame(s)
@@ -120,5 +116,5 @@ tidy_emmeans <- function(x, ...) {
   }
 
   colnames(ret) <- plyr::revalue(colnames(ret), repl, warn_missing = FALSE)
-  tibble::as_tibble(ret)
+  as_tibble(ret)
 }

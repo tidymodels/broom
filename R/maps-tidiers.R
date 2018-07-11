@@ -1,28 +1,29 @@
-#' Tidy method for map objects.
+#' @templateVar class map
+#' @template title_desc_tidy
 #'
-#' This function turns a map into a data frame.
-#'
-#' This code and documentation originated in ggplot2, but was called "fortify."
-#' In broom, "fortify" became "augment", which is reserved for functions that *add*
-#' columns to existing data (based on a model fit, for example) so these functions
-#' were renamed as "tidy."
-#'
-#' @param x map object
-#' @param ... not used by this method
+#' @param x A `map` object returned from [maps::map()].
+#' @template param_unused_dots
 #'
 #' @examples
+#' 
 #' if (require("maps") && require("ggplot2")) {
+#'     
+#'     library(maps)
+#'     library(ggplot2)
+#' 
 #'     ca <- map("county", "ca", plot = FALSE, fill = TRUE)
-#'     head(tidy(ca))
+#'     tidy(ca)
 #'     qplot(long, lat, data = ca, geom = "polygon", group = group)
 #'
 #'     tx <- map("county", "texas", plot = FALSE, fill = TRUE)
-#'     head(tidy(tx))
+#'     tidy(tx)
 #'     qplot(long, lat, data = tx, geom = "polygon", group = group,
 #'           colour = I("white"))
 #' }
 #'
 #' @export
+#' @seealso [tidy()], [maps::map()]
+#' @aliases maps_tidiers
 tidy.map <- function(x, ...) {
   df <- as.data.frame(x[c("x", "y")])
   names(df) <- c("long", "lat")

@@ -57,9 +57,6 @@
 #'   \item{statistic}{t-statistic}
 #'   \item{p.value}{P-value computed from t-statistic}
 #'
-#' @importFrom plyr ldply
-#' @import dplyr 
-#'
 #' @export
 tidy.lme <- function(x, effects = "random", ...) {
   effects <- match.arg(effects, c("random", "fixed"))

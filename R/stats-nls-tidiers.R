@@ -1,19 +1,12 @@
-#' Tidying methods for a nonlinear model
-#'
-#' These methods tidy the coefficients of a nonlinear model into a summary,
-#' augment the original data with information on the fitted values and residuals,
-#' and construct a one-row glance of the model's statistics.
-#'
-#' @param x An object of class "nls"
-#' @param data original data this was fitted on; if not given this will
-#' attempt to be reconstructed from nls (may not be successful)
-#'
-#' @return All tidying methods return a `tibble` without rownames.
-#' The structure depends on the method chosen.
-#'
-#' @template augment_NAs
-#'
-#' @seealso [nls()] and [summary.nls()]
+#' @templateVar class nls
+#' @template title_desc_tidy
+#' 
+#' @param x An `nls` object returned from [stats::nls()].
+#' @template param_confint
+#' @template param_quick
+#' @template param_unused_dots
+#' 
+#' @template return_tidy_regression
 #'
 #' @examples
 #'
@@ -24,34 +17,18 @@
 #' glance(n)
 #'
 #' library(ggplot2)
-#' ggplot(augment(n), aes(wt, mpg)) + geom_point() + geom_line(aes(y = .fitted))
+#' ggplot(augment(n), aes(wt, mpg)) +
+#'   geom_point() +
+#'   geom_line(aes(y = .fitted))
 #'
-#' # augment on new data
 #' newdata <- head(mtcars)
 #' newdata$wt <- newdata$wt + 1
 #' augment(n, newdata = newdata)
 #'
-#' @name nls_tidiers
-NULL
-
-
-#' @rdname nls_tidiers
-#'
-#' @param conf.int whether to include a confidence interval
-#' @param conf.level confidence level of the interval, used only if
-#' `conf.int=TRUE`
-#' @param quick whether to compute a smaller and faster version, containing
-#' only the `term` and `estimate` columns.
-#'
-#' @return `tidy` returns one row for each coefficient in the model,
-#' with five columns:
-#'   \item{term}{The term in the nonlinear model being estimated and tested}
-#'   \item{estimate}{The estimated coefficient}
-#'   \item{std.error}{The standard error from the linear model}
-#'   \item{statistic}{t-statistic}
-#'   \item{p.value}{two-sided p-value}
-#'
+#' @aliases  nls_tidiers
 #' @export
+#' @seealso [tidy], [stats::nls()], [stats::summary.nls()]
+#' @family nls tidiers
 tidy.nls <- function(x, conf.int = FALSE, conf.level = .95,
                      quick = FALSE, ...) {
   if (quick) {
@@ -60,7 +37,7 @@ tidy.nls <- function(x, conf.int = FALSE, conf.level = .95,
       term = names(co), estimate = unname(co),
       stringsAsFactors = FALSE
     )
-    return(tibble::as_tibble(ret))
+    return(as_tibble(ret))
   }
 
   nn <- c("estimate", "std.error", "statistic", "p.value")
@@ -75,23 +52,22 @@ tidy.nls <- function(x, conf.int = FALSE, conf.level = .95,
     colnames(CI) <- c("conf.low", "conf.high")
     ret <- cbind(ret, unrowname(CI))
   }
-  tibble::as_tibble(ret)
+  as_tibble(ret)
 }
 
-
-#' @rdname nls_tidiers
-#'
-#' @param newdata new data frame to use for predictions
-#'
-#' @return `augment` returns one row for each original observation,
-#' with two columns added:
-#'   \item{.fitted}{Fitted values of model}
-#'   \item{.resid}{Residuals}
-#'
-#' If `newdata` is provided, these are computed on based on predictions
-#' of the new data.
+#' @templateVar class nls
+#' @template title_desc_augment
+#' 
+#' @inheritParams tidy.nls
+#' @template param_data
+#' @template param_newdata
+#' 
+#' @template return_augment_columns
 #'
 #' @export
+#' @seealso [tidy], [stats::nls()], [stats::predict.nls()]
+#' @family nls tidiers
+#' 
 augment.nls <- function(x, data = NULL, newdata = NULL, ...) {
   
   validate_augment_input(x, data, newdata)
@@ -112,11 +88,13 @@ augment.nls <- function(x, data = NULL, newdata = NULL, ...) {
 }
 
 
-#' @rdname nls_tidiers
+#' @templateVar class nls
+#' @template title_desc_glance
+#' 
+#' @inheritParams tidy.nls
 #'
-#' @param ... extra arguments (not used)
-#'
-#' @return `glance` returns one row with the columns
+#' @return A one-row [tibble::tibble] with columns:
+#' 
 #'   \item{sigma}{the square root of the estimated residual variance}
 #'   \item{isConv}{whether the fit successfully converged}
 #'   \item{finTol}{the achieved convergence tolerance}
@@ -127,11 +105,13 @@ augment.nls <- function(x, data = NULL, newdata = NULL, ...) {
 #'   \item{df.residual}{residual degrees of freedom}
 #'
 #' @export
+#' @seealso [tidy], [stats::nls()]
+#' @family nls tidiers
 glance.nls <- function(x, ...) {
   s <- summary(x)
   ret <- unrowname(data.frame(
     sigma = s$sigma, isConv = s$convInfo$isConv,
     finTol = s$convInfo$finTol
   ))
-  tibble::as_tibble(finish_glance(ret, x))
+  as_tibble(finish_glance(ret, x))
 }

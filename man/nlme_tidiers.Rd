@@ -76,7 +76,7 @@ entirely from the augmented data frame. When the modeling was performed
 with \code{na.action = "na.exclude"}, one should provide the original data
 as a second argument, at which point the augmented data will contain those
 rows (typically with NAs in place of the new columns). If the original data
-is not provided to \code{augment} and \code{na.action = "na.exclude"}, a
+is not provided to \code{\link[=augment]{augment()}} and \code{na.action = "na.exclude"}, a
 warning is raised and the incomplete rows are dropped.
 }
 \examples{

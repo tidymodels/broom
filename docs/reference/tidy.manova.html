@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>tidy a MANOVA object — tidy.manova • broom</title>
+<title>Tidy a(n) manova object — tidy.manova • broom</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -101,15 +101,19 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>tidy a MANOVA object</h1>
+    <h1>Tidy a(n) manova object</h1>
     <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/stats-anova-tidiers.R'><code>R/stats-anova-tidiers.R</code></a></small>
     <div class="hidden name"><code>tidy.manova.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Constructs a data frame with one row for each of the terms in the model,
-containing the information from summary.manova.</p>
+    <p>Tidy summarizes information about the components of a model.
+A model component might be a single term in a regression, a single
+hypothesis, a cluster, or a class. Exactly what tidy considers to be a
+model component varies cross models but is usually self-evident.
+If a model has several distinct types of components, you will need to
+specify which components to return.</p>
     
     </div>
 
@@ -121,42 +125,69 @@ containing the information from summary.manova.</p>
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>x</th>
-      <td><p>object of class "manova"</p></td>
+      <td><p>A <code>manova</code> object return from <code><a href='http://www.rdocumentation.org/packages/stats/topics/manova'>stats::manova()</a></code>.</p></td>
     </tr>
     <tr>
       <th>test</th>
-      <td><p>one of "Pillai" (Pillai's trace), "Wilks" (Wilk's lambda), "Hotelling-Lawley" (Hotelling-Lawley trace) or "Roy" (Roy's greatest root) indicating which test statistic should be used. Defaults to "Pillai"</p></td>
+      <td><p>One of "Pillai" (Pillai's trace), "Wilks" (Wilk's lambda),
+"Hotelling-Lawley" (Hotelling-Lawley trace) or "Roy" (Roy's greatest root)
+indicating which test statistic should be used. Defaults to "Pillai".</p></td>
     </tr>
     <tr>
       <th>...</th>
-      <td><p>additional arguments passed on to <code>summary.manova</code></p></td>
+      <td><p>Arguments passed on to <code><a href='http://www.rdocumentation.org/packages/stats/topics/summary.manova'>stats::summary.manova</a></code></p><dl class='dl-horizontal'>
+  <dt>object</dt><dd><p>An object of class <code>"manova"</code> or an <code>aov</code>
+    object with multiple responses.</p></dd>
+  <dt>test</dt><dd><p>The name of the test statistic to be used.  Partial
+    matching is used so the name can be abbreviated.</p></dd>
+  <dt>intercept</dt><dd><p>logical.  If <code>TRUE</code>, the intercept term is
+    included in the table.</p></dd>
+  <dt>tol</dt><dd><p>tolerance to be used in deciding if the residuals are
+    rank-deficient: see <code>qr</code>.</p></dd>
+</dl></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A data.frame with the columns</p>
-<dt>term</dt><dd><p>Term in design</p></dd>
-<dt>statistic</dt><dd><p>Approximate F statistic</p></dd>
-<dt>num.df</dt><dd><p>Degrees of freedom</p></dd>
-<dt>p.value</dt><dd><p>P-value</p></dd>
+    <p>A <a href='http://www.rdocumentation.org/packages/tibble/topics/tibble'>tibble::tibble</a> with columns:</p><pre>\item{term}{Term in design}
+\item{statistic}{Approximate F statistic}
+\item{num.df}{Degrees of freedom}
+\item{p.value}{P-value}
+</pre>
 
-Depending on which test statistic is specified, one of the following columns is also included:
-<dt>pillai</dt><dd><p>Pillai's trace</p></dd>
-<dt>wilks</dt><dd><p>Wilk's lambda</p></dd>
-<dt>hl</dt><dd><p>Hotelling-Lawley trace</p></dd>
-<dt>roy</dt><dd><p>Roy's greatest root</p></dd>
+<p>Depending on which test statistic is specified, one of the following
+columns is also included:</p><pre>\item{pillai}{Pillai's trace}
+\item{wilks}{Wilk's lambda}
+\item{hl}{Hotelling-Lawley trace}
+\item{roy}{Roy's greatest root}
+</pre>
 
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code>summary.manova()</code></p></div>
+    <div class='dont-index'><p><code><a href='tidy.html'>tidy()</a></code>, <code><a href='http://www.rdocumentation.org/packages/stats/topics/summary.manova'>stats::summary.manova()</a></code></p>
+<p>Other anova tidiers: <code><a href='tidy.TukeyHSD.html'>tidy.TukeyHSD</a></code>,
+  <code><a href='tidy.anova.html'>tidy.anova</a></code>, <code><a href='tidy.aovlist.html'>tidy.aovlist</a></code>,
+  <code><a href='tidy.aov.html'>tidy.aov</a></code></p></div>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
 <span class='no'>npk2</span> <span class='kw'>&lt;-</span> <span class='fu'>within</span>(<span class='no'>npk</span>, <span class='no'>foo</span> <span class='kw'>&lt;-</span> <span class='fu'>rnorm</span>(<span class='fl'>24</span>))
-<span class='no'>npk2.aov</span> <span class='kw'>&lt;-</span> <span class='fu'>manova</span>(<span class='fu'>cbind</span>(<span class='no'>yield</span>, <span class='no'>foo</span>) ~ <span class='no'>block</span> + <span class='no'>N</span>*<span class='no'>P</span>*<span class='no'>K</span>, <span class='no'>npk2</span>)</div></pre>
+<span class='no'>m</span> <span class='kw'>&lt;-</span> <span class='fu'>manova</span>(<span class='fu'>cbind</span>(<span class='no'>yield</span>, <span class='no'>foo</span>) ~ <span class='no'>block</span> + <span class='no'>N</span> * <span class='no'>P</span> * <span class='no'>K</span>, <span class='no'>npk2</span>)
+<span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>m</span>)</div><div class='output co'>#&gt; # A tibble: 8 x 7
+#&gt;   term         df   pillai statistic num.df den.df p.value
+#&gt;   &lt;chr&gt;     &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;
+#&gt; 1 block         5  1.03       2.56       10     24  0.0287
+#&gt; 2 N             1  0.514      5.81        2     11  0.0190
+#&gt; 3 P             1  0.0690     0.408       2     11  0.675 
+#&gt; 4 K             1  0.401      3.68        2     11  0.0598
+#&gt; 5 N:P           1  0.164      1.08        2     11  0.373 
+#&gt; 6 N:K           1  0.213      1.49        2     11  0.268 
+#&gt; 7 P:K           1  0.00795    0.0441      2     11  0.957 
+#&gt; 8 Residuals    12 NA         NA          NA     NA NA     </div><div class='input'>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

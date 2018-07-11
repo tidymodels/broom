@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Tidiers for summaryDefault objects — summary_tidiers • broom</title>
+<title>Tidy/glance a(n) summaryDefault object — summary_tidiers • broom</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -101,14 +101,16 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Tidiers for summaryDefault objects</h1>
+    <h1>Tidy/glance a(n) summaryDefault object</h1>
     <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/base-summary-tidiers.R'><code>R/base-summary-tidiers.R</code></a></small>
     <div class="hidden name"><code>summary_tidiers.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Tidy a summary of a vector.</p>
+    <p>For models that have only a single component, the <code><a href='tidy.html'>tidy()</a></code> and
+<code><a href='glance.html'>glance()</a></code> methods are identical. Please see the documentation for both
+of those methods.</p>
     
     </div>
 
@@ -123,30 +125,39 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>x</th>
-      <td><p>summaryDefault object</p></td>
+      <td><p>A <code>summaryDefault</code> object, created by calling <code>summary()</code> on a
+vector.</p></td>
     </tr>
     <tr>
       <th>...</th>
-      <td><p>extra arguments, not used</p></td>
+      <td><p>Additional arguments. Not used. Needed to match generic
+signature only. <strong>Cautionary note:</strong> Misspelled arguments will be
+absorbed in <code>...</code>, where they will be ignored. If the misspelled
+argument has a default value, the default value will be used.
+For example, if you pass <code>conf.lvel = 0.9</code>, all computation will
+proceed using <code>conf.level = 0.95</code>. Additionally, if you pass
+<code>newdata = my_tibble</code> to an <code><a href='augment.html'>augment()</a></code> method that does not
+accept a <code>newdata</code> argument, it will use the default value for
+the <code>data</code> argument.</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>Both <code>tidy</code> and <code>glance</code> return the same object:
-a one-row data frame with columns</p>
-<dt>minimum</dt><dd><p>smallest value in original vector</p></dd>
-<dt>q1</dt><dd><p>value at the first quartile</p></dd>
-<dt>median</dt><dd><p>median of original vector</p></dd>
-<dt>mean</dt><dd><p>mean of original vector</p></dd>
-<dt>q3</dt><dd><p>value at the third quartile</p></dd>
-<dt>maximum</dt><dd><p>largest value in original vector</p></dd>
-<dt>NAs</dt><dd><p>number of NA values (if any)</p></dd>
+    <p>A one-row <a href='http://www.rdocumentation.org/packages/tibble/topics/tibble'>tibble::tibble</a> with columns:</p>
+<dt>minimum</dt><dd><p>Minimum value in original vector.</p></dd>
+<dt>q1</dt><dd><p>First quartile of original vector.</p></dd>
+<dt>median</dt><dd><p>Median of original vector.</p></dd>
+<dt>mean</dt><dd><p>Mean of original vector.</p></dd>
+<dt>q3</dt><dd><p>Third quartile of original vector.</p></dd>
+<dt>maximum</dt><dd><p>Maximum value in original vector.</p></dd>
+<dt>na</dt><dd><p>Number of <code>NA</code> values in original vector. Column present only
+when original vector had at least one <code>NA</code> entry.</p></dd>
 
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code>summary()</code></p></div>
+    <div class='dont-index'><p><code><a href='tidy.html'>tidy()</a></code>, <code>summary()</code></p></div>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
@@ -154,19 +165,19 @@ a one-row data frame with columns</p>
 <span class='no'>v</span> <span class='kw'>&lt;-</span> <span class='fu'>rnorm</span>(<span class='fl'>1000</span>)
 <span class='no'>s</span> <span class='kw'>&lt;-</span> <span class='fu'>summary</span>(<span class='no'>v</span>)
 <span class='no'>s</span></div><div class='output co'>#&gt;     Min.  1st Qu.   Median     Mean  3rd Qu.     Max. 
-#&gt; -2.92884 -0.63107  0.07610  0.02891  0.68241  3.21552 </div><div class='input'>
+#&gt; -2.90531 -0.64522 -0.01589  0.01123  0.66591  3.49503 </div><div class='input'>
 <span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>s</span>)</div><div class='output co'>#&gt; # A tibble: 1 x 6
-#&gt;   minimum     q1 median   mean    q3 maximum
-#&gt;     &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;
-#&gt; 1   -2.93 -0.631 0.0761 0.0289 0.682    3.22</div><div class='input'><span class='fu'><a href='glance.html'>glance</a></span>(<span class='no'>s</span>)</div><div class='output co'>#&gt; # A tibble: 1 x 6
-#&gt;   minimum     q1 median   mean    q3 maximum
-#&gt;     &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;
-#&gt; 1   -2.93 -0.631 0.0761 0.0289 0.682    3.22</div><div class='input'>
+#&gt;   minimum     q1  median   mean    q3 maximum
+#&gt;     &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;
+#&gt; 1   -2.91 -0.645 -0.0159 0.0112 0.666    3.50</div><div class='input'><span class='fu'><a href='glance.html'>glance</a></span>(<span class='no'>s</span>)</div><div class='output co'>#&gt; # A tibble: 1 x 6
+#&gt;   minimum     q1  median   mean    q3 maximum
+#&gt;     &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;
+#&gt; 1   -2.91 -0.645 -0.0159 0.0112 0.666    3.50</div><div class='input'>
 <span class='no'>v2</span> <span class='kw'>&lt;-</span> <span class='fu'>c</span>(<span class='no'>v</span>,<span class='fl'>NA</span>)
 <span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='fu'>summary</span>(<span class='no'>v2</span>))</div><div class='output co'>#&gt; # A tibble: 1 x 7
-#&gt;   minimum     q1 median   mean    q3 maximum    na
-#&gt;     &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;
-#&gt; 1   -2.93 -0.631 0.0761 0.0289 0.682    3.22     1</div><div class='input'>
+#&gt;   minimum     q1  median   mean    q3 maximum    na
+#&gt;     &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;
+#&gt; 1   -2.91 -0.645 -0.0159 0.0112 0.666    3.50     1</div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

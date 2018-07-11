@@ -1,12 +1,11 @@
-#' Tidying methods for an rlm (robust linear model) object
+#' @templateVar class rlm
+#' @template title_desc_glance
 #'
-#' This method provides a glance of an "rlm" object. The `tidy` and
-#' `augment` methods are handled by [lm_tidiers].
+#' @param x An `rlm` object returned by [MASS::rlm()].
+#' @template param_unused_dots
 #'
-#' @param x rlm object
-#' @param ... extra arguments (not used)
+#' @return A one-row [tibble::tibble] with columns:
 #'
-#' @return `glance.rlm` returns a one-row data.frame with the columns
 #'   \item{sigma}{The square root of the estimated residual variance}
 #'   \item{converged}{whether the IWLS converged}
 #'   \item{logLik}{the data's log-likelihood under the model}
@@ -14,7 +13,8 @@
 #'   \item{BIC}{the Bayesian Information Criterion}
 #'   \item{deviance}{deviance}
 #'
-#' @name rlm_tidiers
+#' @details For tidiers for models from the \pkg{robust} package see
+#'   [tidy.lmRob()] and [tidy.glmRob()].
 #'
 #' @examples
 #'
@@ -25,9 +25,10 @@
 #' augment(r)
 #' glance(r)
 #'
-#' @seealso [lm_tidiers]
-#'
 #' @export
+#' @aliases rlm_tidiers
+#' @family rlm tidiers
+#' @seealso [glance()], [MASS::rlm()]
 glance.rlm <- function(x, ...) {
   s <- summary(x)
   ret <- tibble(sigma = s$sigma, converged = x$converged)
@@ -36,17 +37,31 @@ glance.rlm <- function(x, ...) {
   dplyr::select(ret, -df.residual)
 }
 
-# TODO: document that linking should be explicit to make it easier to find
-# documentation
-
-#' @rdname rlm_tidiers
+#' @templateVar class rlm
+#' @template title_desc_tidy_lm_wrapper
+#' 
+#' @param x An `rlm` object returned by [MASS::rlm()].
+#' 
+#' @details For tidiers for models from the \pkg{robust} package see
+#'   [tidy.lmRob()] and [tidy.glmRob()].
+#' 
+#' @family rlm tidiers
+#' @seealso [MASS::rlm()]
 #' @export
 tidy.rlm <- function(x, ...) {
   tidy.lm(x, ...)
 }
 
-
-#' @rdname rlm_tidiers
+#' @templateVar class rlm
+#' @template title_desc_augment_lm_wrapper
+#' 
+#' @param x An `rlm` object returned by [MASS::rlm()].
+#' 
+#' @details For tidiers for models from the \pkg{robust} package see
+#'   [tidy.lmRob()] and [tidy.glmRob()].
+#' 
+#' @family rlm tidiers
+#' @seealso [MASS::rlm()]
 #' @export
 augment.rlm <- function(x, ...) {
   augment.lm(x, ...)

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>tidy a density objet — tidy.density • broom</title>
+<title>Tidy a(n) density object — tidy.density • broom</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -101,16 +101,19 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>tidy a density objet</h1>
+    <h1>Tidy a(n) density object</h1>
     <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/stats-tidiers.R'><code>R/stats-tidiers.R</code></a></small>
     <div class="hidden name"><code>tidy.density.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Given a "density" object, returns a tidy data frame with two
-columns: points x where the density is estimated, points y
-for the estimate</p>
+    <p>Tidy summarizes information about the components of a model.
+A model component might be a single term in a regression, a single
+hypothesis, a cluster, or a class. Exactly what tidy considers to be a
+model component varies cross models but is usually self-evident.
+If a model has several distinct types of components, you will need to
+specify which components to return.</p>
     
     </div>
 
@@ -122,25 +125,32 @@ for the estimate</p>
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>x</th>
-      <td><p>an object of class "density"</p></td>
+      <td><p>A <code>density</code> object returned from <code><a href='http://www.rdocumentation.org/packages/stats/topics/density'>stats::density()</a></code>.</p></td>
     </tr>
     <tr>
       <th>...</th>
-      <td><p>extra arguments (not used)</p></td>
+      <td><p>Additional arguments. Not used. Needed to match generic
+signature only. <strong>Cautionary note:</strong> Misspelled arguments will be
+absorbed in <code>...</code>, where they will be ignored. If the misspelled
+argument has a default value, the default value will be used.
+For example, if you pass <code>conf.lvel = 0.9</code>, all computation will
+proceed using <code>conf.level = 0.95</code>. Additionally, if you pass
+<code>newdata = my_tibble</code> to an <code><a href='augment.html'>augment()</a></code> method that does not
+accept a <code>newdata</code> argument, it will use the default value for
+the <code>data</code> argument.</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>a data frame with "x" and "y" columns</p>
-<p>d &lt;- density(faithful$eruptions, bw = "sj")
-head(tidy(d))</p>
-<p>library(ggplot2)
-ggplot(tidy(d), aes(x, y)) + geom_line()</p>
+    <p>A <a href='http://www.rdocumentation.org/packages/tibble/topics/tibble'>tibble::tibble</a> with two columns: points <code>x</code> where the density
+is estimated, and estimated density <code>y</code>.</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code>density()</code></p></div>
+    <div class='dont-index'><p><code><a href='tidy.html'>tidy()</a></code>, <code><a href='http://www.rdocumentation.org/packages/stats/topics/density'>stats::density()</a></code></p>
+<p>Other stats tidiers: <code><a href='tidy.dist.html'>tidy.dist</a></code>,
+  <code><a href='tidy.ftable.html'>tidy.ftable</a></code></p></div>
     
 
   </div>

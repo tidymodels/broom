@@ -4,8 +4,7 @@
 \name{broom}
 \alias{broom}
 \alias{broom-package}
-\alias{broom-package}
-\title{Convert Statistical Analysis Objects into Tidy Data Frames}
+\title{Convert Statistical Objects into Tidy Tibbles}
 \description{
 Convert statistical analysis objects from R into tidy tibbles,
 so that they can more easily be combined, reshaped and otherwise processed

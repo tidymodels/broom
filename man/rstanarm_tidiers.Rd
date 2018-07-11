@@ -6,8 +6,8 @@
 \alias{glance.stanreg}
 \title{Tidying methods for an rstanarm model}
 \usage{
-\method{tidy}{stanreg}(x, parameters = "non-varying", intervals = FALSE,
-  prob = 0.9, ...)
+\method{tidy}{stanreg}(x, parameters = "non-varying",
+  intervals = FALSE, prob = 0.9, ...)
 
 \method{glance}{stanreg}(x, looic = FALSE, ...)
 }
@@ -80,6 +80,10 @@ included:
 \item{p_loo}{The effective number of parameters.}
 }
 \description{
+\code{rstanarm} tidiers will soon be deprecated in \code{broom} and there is no
+ongoing development of these functions at this time.
+}
+\details{
 These methods tidy the estimates from \code{\link[rstanarm:stanreg-objects]{rstanarm::stanreg-objects()}}
 (fitted model objects from the \pkg{rstanarm} package) into a summary.
 }

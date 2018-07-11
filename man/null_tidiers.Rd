@@ -19,11 +19,14 @@
 \item{...}{Additional arguments (not used).}
 }
 \value{
-An empty tibble.
+An empty \link[tibble:tibble]{tibble::tibble}.
 }
 \description{
 \code{tidy(NULL)}, \code{glance(NULL)} and \code{augment(NULL)} all return an empty
-\code{\link[tibble:tibble]{tibble::tibble()}}. This empty tibble can be treated a tibble with zero
+\link[tibble:tibble]{tibble::tibble}. This empty tibble can be treated a tibble with zero
 rows, making it convenient to combine with other tibbles using
 functions like \code{\link[purrr:map_df]{purrr::map_df()}} on lists of potentially \code{NULL} objects.
+}
+\seealso{
+\link[tibble:tibble]{tibble::tibble}
 }

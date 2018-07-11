@@ -1,17 +1,16 @@
-#' Tidying methods for a durbinWatsonTest object
+#' @templateVar class durbinWatsonTest
+#' @template title_desc_tidy_glance
 #'
-#' Tidies Durbin-Watson Test objects, from the `car` package
-#' into a one-row data frame.
-#'
-#' @param x An object of class `durbinWatsonTest`
-#' @param ... extra arguments (not used)
-#'
-#' @return Both `tidy` and `glance` return the same output,
-#'   \item{statistic}{Test statistic used to compute the p-value}
-#'   \item{p.value}{P-value}
-#'   \item{autocorrelation}{Residual autocorrelations}
-#'   \item{method}{Method used to compute the statistic as a string}
-#'   \item{alternative}{Alternative hypothesis as a string}
+#' @param x An object of class `durbinWatsonTest` created by a call to
+#'   [car::durbinWatsonTest()].
+#' @template param_unused_dots
+#' 
+#' @return A one-row [tibble::tibble] with columns:
+#'   \item{statistic}{Test statistic for Durbin-Watson test.}
+#'   \item{p.value}{P-value of test statistic.}
+#'   \item{autocorrelation}{Residual autocorrelations.}
+#'   \item{method}{Always `"Durbin-Watson Test"`.}
+#'   \item{alternative}{Alternative hypothesis (character).}
 #'
 #' @examples
 #'
@@ -20,12 +19,11 @@
 #' glance(dw)  # same output for all durbinWatsonTests
 #'
 #' @name durbinWatsonTest_tidiers
-NULL
-
-#' @rdname durbinWatsonTest_tidiers
+#' @family car tidiers
 #' @export
+#' @seealso [tidy()], [glance()], [car::durbinWatsonTest()]
 tidy.durbinWatsonTest <- function(x, ...) {
-  tibble::tibble(
+  tibble(
     statistic = x$dw,
     p.value = x$p,
     autocorrelation = x$r,

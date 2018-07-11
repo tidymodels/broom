@@ -2,37 +2,51 @@
 % Please edit documentation in R/stats-tidiers.R
 \name{tidy.dist}
 \alias{tidy.dist}
-\title{Tidy a distance matrix}
+\title{Tidy a(n) dist object}
 \usage{
-\method{tidy}{dist}(x, diagonal = attr(x, "Diag"), upper = attr(x, "Upper"),
-  ...)
+\method{tidy}{dist}(x, diagonal = attr(x, "Diag"), upper = attr(x,
+  "Upper"), ...)
 }
 \arguments{
-\item{x}{A "dist" object}
+\item{x}{A \code{dist} object returned from \code{\link[stats:dist]{stats::dist()}}.}
 
-\item{diagonal}{Whether to include the diagonal of the distance
-matrix. Defaults to whether the distance matrix includes it}
+\item{diagonal}{Logical indicating whether or not to tidy the diagonal
+elements of the distance matrix. Defaults to whatever was based to the
+\code{diag} argument of \code{\link[stats:dist]{stats::dist()}}.}
 
-\item{upper}{Whether to include the upper right triangle of
-the distance matrix. Defaults to whether the distance matrix
-includes it}
+\item{upper}{Logical indicating whether or not to tidy the upper half of
+the distance matrix. Defaults to whatever was based to the
+\code{upper} argument of \code{\link[stats:dist]{stats::dist()}}.}
 
-\item{...}{Extra arguments, not used}
+\item{...}{Additional arguments. Not used. Needed to match generic
+signature only. \strong{Cautionary note:} Misspelled arguments will be
+absorbed in \code{...}, where they will be ignored. If the misspelled
+argument has a default value, the default value will be used.
+For example, if you pass \code{conf.lvel = 0.9}, all computation will
+proceed using \code{conf.level = 0.95}. Additionally, if you pass
+\code{newdata = my_tibble} to an \code{\link[=augment]{augment()}} method that does not
+accept a \code{newdata} argument, it will use the default value for
+the \code{data} argument.}
 }
 \value{
-A data frame with one row for each pair of
-item distances, with columns:
-\describe{
+A \link[tibble:tibble]{tibble::tibble} with one row for each pair of items in the
+distance matrix, with columns:
+
 \item{item1}{First item}
 \item{item2}{Second item}
 \item{distance}{Distance between items}
 }
-}
 \description{
-Tidy a distance matrix, such as that computed by the \link{dist}
-function, into a one-row-per-pair table. If the distance matrix
-does not include an upper triangle and/or diagonal, this will
-not either.
+Tidy summarizes information about the components of a model.
+A model component might be a single term in a regression, a single
+hypothesis, a cluster, or a class. Exactly what tidy considers to be a
+model component varies cross models but is usually self-evident.
+If a model has several distinct types of components, you will need to
+specify which components to return.
+}
+\details{
+If the distance matrix does not include an upper triangle and/or
+diagonal, the tidied version will not either.
 }
 \examples{
 
@@ -44,3 +58,10 @@ tidy(iris_dist, upper = TRUE)
 tidy(iris_dist, diagonal = TRUE)
 
 }
+\seealso{
+\code{\link[=tidy]{tidy()}}, \code{\link[stats:dist]{stats::dist()}}
+
+Other stats tidiers: \code{\link{tidy.density}},
+  \code{\link{tidy.ftable}}
+}
+\concept{stats tidiers}

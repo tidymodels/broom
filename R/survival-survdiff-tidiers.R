@@ -1,36 +1,35 @@
-
-
-#' Tidiers for Tests of Differences between Survival Curves
+#' @templateVar class survdiff
+#' @template title_desc_tidy
 #'
-#' @param x a "survdiff" object
+#' @param x An `survdiff` object returned from [survival::survdiff()].
 #' @param strata logical, whether to include strata in the output
-#' @param ... other arguments passed to/from other methods, currently ignored
-#'
-#' @seealso [survival::survdiff()]
-#'
-#' @template boilerplate
-#'
-#' @name survdiff_tidiers
+#' @template param_unused_dots
+#' 
+#' @return A [tibble::tibble] with one row for each time point and columns:
+#' 
+#'   \item{...}{The initial columns correspond to the grouping factors
+#'     on the right hand side of the model formula.}
+#'   \item{obs}{weighted observed number of events in each group}
+#'   \item{exp}{weighted expected number of events in each group}
+#'   \item{N}{number of subjects in each group}
 #'
 #' @examples
-#' if( require("survival") ) {
-#'     s <- survdiff( Surv(time, status) ~ pat.karno + strata(inst), data=lung)
-#'     tidy(s)
-#'     glance(s)
-#' }
-NULL
-
-
-#' @rdname survdiff_tidiers
+#' 
+#' library(survival)
+#' 
+#' s <- survdiff(
+#'   Surv(time, status) ~ pat.karno + strata(inst),
+#'   data = lung
+#' )
+#' 
+#' tidy(s)
+#' glance(s)
 #'
-#' @return
-#' `tidy` on "survdiff" objects returns a data frame with the following columns:
-#' \item{...}{initial column(s) correspond to grouping factors (right-hand side of the formula)}
-#' \item{obs}{weighted observed number of events in each group}
-#' \item{exp}{weighted expected number of events in each group}
-#' \item{N}{number of subjects in each group}
-#'
+#' @aliases survdiff_tidiers
 #' @export
+#' @seealso [tidy()], [survival::survdiff()]
+#' @family survdiff tidiers
+#' @family survival tidiers
 tidy.survdiff <- function(x, strata=FALSE, ...) {
   # if one-sample test
   if (length(x$obs) == 1) {
@@ -71,18 +70,21 @@ tidy.survdiff <- function(x, strata=FALSE, ...) {
 }
 
 
-
-
-#' @rdname survdiff_tidiers
-#'
-#' @return
-#' `glance` on "survdiff" objects returns a data frame with the following columns:
-#' \item{statistic}{value of the test statistic}
-#' \item{df}{degrees of freedom}
-#' \item{p.value}{p-value}
-#'
+#' @templateVar class survdiff
+#' @template title_desc_glance
+#' 
+#' @inheritParams tidy.survdiff
+#' 
+#' @return A one-row [tibble::tibble] with columns:
+#' 
+#'   \item{statistic}{value of the test statistic}
+#'   \item{df}{degrees of freedom}
+#'   \item{p.value}{p-value}
 #'
 #' @export
+#' @seealso [glance()], [survival::survdiff()]
+#' @family survdiff tidiers
+#' @family survival tidiers
 glance.survdiff <- function(x, ...) {
   e <- x$exp
   if (is.matrix(e)) {

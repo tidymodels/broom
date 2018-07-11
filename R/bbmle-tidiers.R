@@ -1,11 +1,9 @@
-#' Tidy mle2 maximum likelihood objects
+#' @templateVar class mle2
+#' @template title_desc_tidy
 #'
-#' Tidy mle2 objects from the bbmle package.
-#'
-#' @param x An "mle2" object
-#' @param conf.int Whether to add `conf.low` and `conf.high` columns
-#' @param conf.level Confidence level to use for interval
-#' @param ... Extra arguments, not used
+#' @param x An `mle2` object created by a call to [bbmle::mle2()].
+#' @template param_confint
+#' @template param_unused_dots
 #'
 #' @examples
 #'
@@ -20,9 +18,9 @@
 #'   tidy(fit)
 #' }
 #'
-#' @name mle2_tidiers
-#'
 #' @export
+#' @seealso [tidy()], [bbmle::mle2()], [tidy_optim()]
+#' @aliases mle2_tidiers bbmle_tidiers
 tidy.mle2 <- function(x, conf.int = FALSE, conf.level = .95, ...) {
   co <- bbmle::coef(bbmle::summary(x))
   nn <- c("estimate", "std.error", "statistic", "p.value")

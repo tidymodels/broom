@@ -1,57 +1,53 @@
-#' Tidying methods for Mclust objects
+#' @templateVar class Mclust
+#' @template title_desc_tidy
 #'
-#' These methods summarize the results of Mclust clustering into three
-#' tidy forms. `tidy` describes the size, mixing probability, mean
-#' and variability of each class, `augment` adds the class assignments and
-#' their probabilities to the original data, and
-#' `glance` summarizes the model parameters of the clustering.
-#'
-#' @param x Mclust object
-#' @param data Original data (required for `augment`)
-#' @param ... extra arguments, not used
-#'
-#' @template boilerplate
-#'
-#' @seealso [mclust::Mclust()]
+#' @param x An `Mclust` object return from [mclust::Mclust()].
+#' @template param_unused_dots
+#' 
+#' @return A [tibble::tibble] with one row per component:
+#'   \item{component}{Cluster id as a factor. For a model `k` clusters, these
+#'     will be `as.factor(1:k)`, or `as.factor(0:k)` if there's a noise term.}
+#'   \item{size}{Number of observations assigned to component}
+#'   \item{proportion}{The mixing proportion of each component}
+#'   \item{variance}{In case of one-dimensional and spherical models,
+#'     the variance for each component, omitted otherwise. NA for noise
+#'     component}
+#'   \item{mean}{The mean for each component. In case of 2+ dimensional models,
+#'     a column with the mean is added for each dimension. NA for noise
+#'     component}
 #'
 #' @examples
 #'
-#' library(dplyr)
-#' library(ggplot2)
+#' library(dplyr) 
 #' library(mclust)
+#' set.seed(27)
+#' 
+#' centers <- tibble::tibble(
+#'   cluster = factor(1:3), 
+#'   num_points = c(100, 150, 50),  # number points in each cluster
+#'   x1 = c(5, 0, -3),              # x1 coordinate of cluster center
+#'   x2 = c(-1, 1, -2)              # x2 coordinate of cluster center
+#' )
+#' 
+#' points <- centers %>%
+#'   mutate(
+#'     x1 = purrr::map2(num_points, x1, rnorm),
+#'     x2 = purrr::map2(num_points, x2, rnorm)
+#'   ) %>% 
+#'   select(-num_points, -cluster) %>%
+#'   tidyr::unnest(x1, x2)
 #'
-#' set.seed(2016)
-#' centers <- data.frame(cluster=factor(1:3), size=c(100, 150, 50),
-#'                       x1=c(5, 0, -3), x2=c(-1, 1, -2))
-#' points <- centers %>% group_by(cluster) %>%
-#'  do(data.frame(x1=rnorm(.$size[1], .$x1[1]),
-#'                x2=rnorm(.$size[1], .$x2[1]))) %>%
-#'  ungroup()
-#'
-#' m = Mclust(points %>% dplyr::select(x1, x2))
+#' m <- mclust::Mclust(points)
 #'
 #' tidy(m)
-#' head(augment(m, points))
+#' augment(m, points)
 #' glance(m)
-#'
-#' @name mclust_tidiers
-#'
-NULL
-
-
-#' @rdname mclust_tidiers
-#'
-#' @return `tidy` returns one row per component, with
-#'   \item{component}{A factor describing the cluster from 1:k
-#'   (or 0:k in presence of a noise term in x)}
-#'   \item{size}{The size of each component}
-#'   \item{proportion}{The mixing proportion of each component}
-#'   \item{variance}{In case of one-dimensional and spherical models,
-#'   the variance for each component, omitted otherwise. NA for noise component}
-#'   \item{mean}{The mean for each component. In case of two- or more dimensional models,
-#'   a column with the mean is added for each dimension. NA for noise component}
-#'
+#' 
 #' @export
+#' @aliases mclust_tidiers
+#' @seealso [tidy()], [mclust::Mclust()]
+#' @family mclust tidiers
+#' 
 tidy.Mclust <- function(x, ...) {
   np <- max(x$G, length(table(x$classification)))
   ret <- data.frame(seq_len(np))
@@ -74,13 +70,22 @@ tidy.Mclust <- function(x, ...) {
 }
 
 
-#' @rdname mclust_tidiers
+#' @templateVar class Mclust
+#' @template title_desc_augment
+#' 
+#' @inheritParams tidy.Mclust
+#' @template param_data
 #'
-#' @return `augment` returns the original data with two extra columns:
+#' @return A [tibble::tibble] of the original data with two extra columns:
 #'   \item{.class}{The class assigned by the Mclust algorithm}
-#'   \item{.uncertainty}{The uncertainty associated with the classification}
+#'   \item{.uncertainty}{The uncertainty associated with the classification.
+#'     If a point has a probability of 0.9 of being in its assigned class
+#'     under the model, then the uncertainty is 0.1.}
 #'
 #' @export
+#' @seealso [augment()], [mclust::Mclust()]
+#' @family mclust tidiers
+#' 
 augment.Mclust <- function(x, data, ...) {
   fix_data_frame(data, newcol = ".rownames") %>% 
     mutate(
@@ -90,17 +95,21 @@ augment.Mclust <- function(x, data, ...) {
 }
 
 
-#' @rdname mclust_tidiers
+#' @templateVar class Mclust
+#' @template title_desc_glance
+#' 
+#' @inheritParams tidy.Mclust
 #'
-#' @return `glance` returns a one-row data.frame with the columns
-#'   \item{model}{A character string denoting the model at which the optimal BIC occurs}
+#' @return A one-row [tibble::tibble] with columns:
+#'   \item{model}{A character string denoting the model at which the optimal
+#'     BIC occurs}
 #'   \item{n}{The number of observations in the data}
 #'   \item{G}{The optimal number of mixture components}
 #'   \item{BIC}{The optimal BIC value}
 #'   \item{logLik}{The log-likelihood corresponding to the optimal BIC}
 #'   \item{df}{The number of estimated parameters}
-#'   \item{hypvol}{The hypervolume parameter for the noise component if required,
-#'   otherwise set to NA}
+#'   \item{hypvol}{If the other model contains a noise component, the 
+#'     value of the hypervolume parameter. Otherwise `NA`.}
 #'
 #' @export
 glance.Mclust <- function(x, ...) {

@@ -1,47 +1,20 @@
-#' Tidying methods for generalized method of moments "gmm" objects
+#' @templateVar class gmm
+#' @template title_desc_tidy
 #'
-#' These methods tidy the coefficients of "gmm" objects from the gmm package,
-#' or glance at the model-wide statistics (especially the J-test).
-#'
-#' @param x gmm object
-#' @param conf.int whether to include a confidence interval
-#' @param conf.level confidence level of the interval, used only if
-#' `conf.int=TRUE`
-#' @param exponentiate whether to exponentiate the coefficient estimates
-#' and confidence intervals (typical for logistic regression)
-#' @param quick whether to compute a smaller and faster version, containing
-#' only the `term` and `estimate` columns (and confidence interval
-#' if requested, which may be slower)
-#'
-#' @details If `conf.int=TRUE`, the confidence interval is computed with
-#' the [confint()] function.
-#'
-#' Note that though the "gmm" object contains residuals and fitted values,
-#' there is not yet an `augment` method implemented. This is because
-#' the input to gmm is not tidy (it's a "wide" matrix), so it is not immediately
-#' clear what the augmented results should look like.
-#'
-#' @return All tidying methods return a `data.frame` without rownames.
-#' The structure depends on the method chosen.
-#'
-#' `tidy.gmm` returns one row for each coefficient, with six columns:
-#'   \item{term}{The term in the model being estimated}
-#'   \item{estimate}{The estimated coefficient}
-#'   \item{std.error}{The standard error from the linear model}
-#'   \item{statistic}{t-statistic}
-#'   \item{p.value}{two-sided p-value}
-#'
-#' If all the the terms have _ in them (e.g. `WMK_(Intercept)`),
-#' they are split into `variable` and `term`.
-#'
-#' If `conf.int=TRUE`, it also includes columns for `conf.low` and
-#' `conf.high`, computed with [confint()].
-#'
-#' @name gmm_tidiers
+#' @param x A `gmm` object returned from [gmm::gmm()].
+#' @template param_confint
+#' @template param_exponentiate
+#' @template param_quick
+#' @template param_unused_dots
+#' 
+#' @template return_tidy_regression
 #'
 #' @examples
 #'
-#' if (require("gmm", quietly = TRUE)) {
+#' if (requireNamespace("gmm", quietly = TRUE)) {
+#' 
+#'   library(gmm)
+#'   
 #'   # examples come from the "gmm" package
 #'   ## CAPM test with GMM
 #'   data(Finance)
@@ -105,6 +78,9 @@
 #' }
 #'
 #' @export
+#' @aliases gmm_tidiers
+#' @family gmm tidiers
+#' @seealso [tidy()], [gmm::gmm()]
 tidy.gmm <- function(x, conf.int = FALSE, conf.level = .95,
                      exponentiate = FALSE, quick = FALSE, ...) {
   if (quick) {
@@ -138,21 +114,23 @@ tidy.gmm <- function(x, conf.int = FALSE, conf.level = .95,
 }
 
 
-#' @rdname gmm_tidiers
+#' @templateVar class gmm
+#' @template title_desc_glance
+#' 
+#' @inheritParams tidy.gmm
 #'
-#' @param ... extra arguments (not used)
-#'
-#' @return `glance.gmm` returns a one-row data.frame with the columns
+#' @return A one-row [tibble::tibble] with columns:
 #'   \item{df}{Degrees of freedom}
 #'   \item{statistic}{Statistic from J-test for E(g)=0}
 #'   \item{p.value}{P-value from J-test}
-#'   \item{df.residual}{Residual degrees of freedom, if included in "gmm" object}
+#'   \item{df.residual}{Residual degrees of freedom, if included in `x`.}
 #'
 #' @export
+#' @family gmm tidiers
+#' @seealso [glance()], [gmm::gmm()]
 glance.gmm <- function(x, ...) {
   s <- gmm::summary.gmm(x)
   st <- suppressWarnings(as.numeric(s$stest$test))
-  ret <- data.frame(df = x$df, statistic = st[1], p.value = st[2])
-  ret <- finish_glance(unrowname(ret), x)
-  ret
+  ret <- tibble(df = x$df, statistic = st[1], p.value = st[2])
+  finish_glance(ret, x)
 }

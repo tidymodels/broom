@@ -1,28 +1,25 @@
-#' Tidy a kernel density estimate object from the ks package
-#'
-#' Tidy a kernel density estimate object, into a table with
-#' one row for each point in the estimated grid, and one column
-#' for each dimension (along with an `estimate` column with
-#' the estimated density).
-#'
-#' @param x A "ks" object from the kde package
-#' @param ... Extra arguments, not used
-#'
-#' @return A data frame with one row for each point in the
-#' estimated grid. The result contains one column (named `x1`,
-#' `x2`, etc) for each dimension, and an `estimate` column
-#' containing the estimated density.
-#'
-#' @name kde_tidiers
+#' @templateVar class kde
+#' @template title_desc_tidy
+#' 
+#' @param x A `kde` object returned from [ks::kde()].
+#' @template param_unused_dots
+#' 
+#' @return A [tibble::tibble] with one row for each point in the
+#'   estimated grid. The result contains one column (named `x1`,
+#'   `x2`, etc) for each dimension, and an `estimate` column
+#'   containing the estimated density.
 #'
 #' @examples
 #'
-#' if (require("ks", quietly = TRUE)) {
+#' if (requireNamespace("ks", quietly = TRUE)) {
+#'   
+#'   library(ks)
+#'   
 #'   dat <- replicate(2, rnorm(100))
 #'   k <- kde(dat)
 #'
 #'   td <- tidy(k)
-#'   head(td)
+#'   td
 #'
 #'   library(ggplot2)
 #'   ggplot(td, aes(x1, x2, fill = estimate)) +
@@ -34,10 +31,12 @@
 #'   k3 <- kde(dat3)
 #'
 #'   td3 <- tidy(k3)
-#'   head(td3)
+#'   td3
 #' }
 #'
 #' @export
+#' @aliases kde_tidiers ks_tidiers
+#' @seealso [tidy()], [ks::kde()]
 tidy.kde <- function(x, ...) {
   
   # TODO: would like to use tidyr instead but melt is an arbitrary order array

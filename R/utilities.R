@@ -95,6 +95,7 @@ validate_augment_input <- function(model, data = NULL, newdata = NULL) {
 #' @param data A [data.frame()] or [tibble::tibble()].
 #'
 #' @return A `tibble` potentially with a `.rownames` column
+#' @noRd
 as_rw_tibble <- function(data) {
   
   # TODO: write a test for this
@@ -256,7 +257,7 @@ augment_columns <- function(x, data, newdata, type, type.predict = type,
 
     infl <- influence0(x, do.coef = FALSE)
     if (!is.null(infl)) {
-      if (is_mgcv(x)) {
+      if (inherits(x, "gam")) {
         ret$.hat <- infl
         ret$.sigma <- NA
       } else {
@@ -364,14 +365,19 @@ finish_glance <- function(ret, x) {
 #'
 #' Return a confidence interval as a tidy data frame. This directly wraps the
 #' [confint()] function, but ensures it follows broom conventions:
-#' column names of `conf.low` and `conf.high`, and no row names
+#' column names of `conf.low` and `conf.high`, and no row names.
+#' 
+#' `confint_tidy`
 #'
 #' @param x a model object for which [confint()] can be calculated
 #' @param conf.level confidence level
-#' @param func Function to use for computing confint
+#' @param func A function to compute a confidence interval for `x`. Calling
+#'   `func(x, level = conf.level, ...)` must return an object coercable to a
+#'   tibble. This dataframe like object should have to columns corresponding
+#'   the lower and upper bounds on the confidence interval.
 #' @param ... extra arguments passed on to `confint`
 #'
-#' @return A data frame with two columns: `conf.low` and `conf.high`.
+#' @return A tibble with two columns: `conf.low` and `conf.high`.
 #'
 #' @seealso \link{confint}
 #'
@@ -379,9 +385,14 @@ finish_glance <- function(ret, x) {
 confint_tidy <- function(x, conf.level = .95, func = stats::confint, ...) {
   # avoid "Waiting for profiling to be done..." message for some models
   ci <- suppressMessages(func(x, level = conf.level, ...))
+  
+  # protect against confidence intervals returned as named vectors
   if (is.null(dim(ci))) {
     ci <- matrix(ci, nrow = 1)
   }
+  
+  # TODO: informative errors for non-vector, dataframe, tibble CI output
+  
   # remove rows that are all NA. *not the same* as na.omit which checks
   # for any NA.
   all_na <- apply(ci, 1, function(x) all(is.na(x)))

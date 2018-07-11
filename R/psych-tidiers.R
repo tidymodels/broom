@@ -1,25 +1,20 @@
-#' Tidy a kappa object from a Cohen's kappa calculation
+#' @templateVar class kappa
+#' @template title_desc_tidy
 #'
-#' Tidy a "kappa" object, from the [psych::cohen.kappa()] function
-#' in the psych package. This represents the agreement of two raters
-#' when using nominal scores.
-#'
-#' @param x An object of class "kappa"
-#' @param ... extra arguments (not used)
-#'
-#' @return A data.frame with columns
+#' @param x A `kappa` object returned from [psych::cohen.kappa()].
+#' @template param_unused_dots
+#' 
+#' @return A [tibble::tibble] with columns:
+#' 
 #'   \item{type}{Either "weighted" or "unweighted"}
 #'   \item{estimate}{The estimated value of kappa with this method}
 #'   \item{conf.low}{Lower bound of confidence interval}
 #'   \item{conf.high}{Upper bound of confidence interval}
 #'
-#' @details Note that the alpha of the confidence interval is determined
-#' when the `cohen.kappa` function is originally run.
-#'
-#' @seealso [psych::cohen.kappa()]
-#'
-#' @name kappa_tidiers
-#'
+#' @details Note that confidence level (alpha) for the confidence interval
+#'   cannot be set in `tidy`. Instead you must set the `alpha` argument
+#'   to [psych::cohen.kappa()] when creating the `kappa` object.
+#'   
 #' @examples
 #'
 #' library(psych)
@@ -33,10 +28,13 @@
 #' # graph the confidence intervals
 #' library(ggplot2)
 #' ggplot(tidy(ck), aes(estimate, type)) +
-#'     geom_point() +
-#'     geom_errorbarh(aes(xmin = conf.low, xmax = conf.high))
+#'   geom_point() +
+#'   geom_errorbarh(aes(xmin = conf.low, xmax = conf.high))
 #'
+#' @aliases kappa_tidiers psych_tidiers
 #' @export
+#' @seealso [tidy()], [psych::cohen.kappa()]
+#' 
 tidy.kappa <- function(x, ...) {
   nn <- c("conf.low", "estimate", "conf.high")
   ret <- fix_data_frame(x$confid, nn, newcol = "type") %>%

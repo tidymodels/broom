@@ -1,13 +1,16 @@
-#' tidying methods for objects produced by \pkg{multcomp}
+#' @templateVar class glht
+#' @template title_desc_tidy
+#' 
+#' @param x A `glht` object returned by [multcomp::glht()].
+#' @template param_unused_dots
 #'
-#' @param x an object of class `glht`, `confint.glht`,
-#'  `summary.glht` or [multcomp::cld()]
-#' @param ... extra arguments (not used)
-#'
-#' @name multcomp_tidiers
 #' @examples
 #'
 #' if (require("multcomp") && require("ggplot2")) {
+#' 
+#'     library(multcomp)
+#'     library(ggplot2)
+#'     
 #'     amod <- aov(breaks ~ wool + tension, data = warpbreaks)
 #'     wht <- glht(amod, linfct = mcp(tension = "Tukey"))
 #'
@@ -28,11 +31,12 @@
 #'     cld <- cld(wht)
 #'     tidy(cld)
 #' }
-NULL
-
-#' @method tidy glht
-#' @rdname multcomp_tidiers
+#' 
+#' @aliases multcomp_tidiers
 #' @export
+#' @family multcomp tidiers
+#' @seealso [tidy()], [multcomp::glht()]
+#' 
 tidy.glht <- function(x, ...) {
   tibble(
     lhs = rownames(x$linfct),
@@ -41,9 +45,17 @@ tidy.glht <- function(x, ...) {
   )
 }
 
-#' @rdname multcomp_tidiers
-#' @method tidy confint.glht
+#' @templateVar class confint.glht
+#' @template title_desc_tidy
+#' 
+#' @param x A `confint.glht` object created by calling 
+#'   [multcomp::confint.glht()] on a `glht` object created with
+#'   [multcomp::glht()].
+#' @template param_unused_dots
+#' 
 #' @export
+#' @family multcomp tidiers
+#' @seealso [tidy()], [multcomp::confint.glht()], [multcomp::glht()]
 tidy.confint.glht <- function(x, ...) {
   
   lhs_rhs <- tibble(
@@ -57,9 +69,17 @@ tidy.confint.glht <- function(x, ...) {
   bind_cols(lhs_rhs, coef)
 }
 
-#' @method tidy summary.glht
-#' @rdname multcomp_tidiers
+#' @templateVar class summary.glht
+#' @template title_desc_tidy
+#' 
+#' @param x A `summary.glht` object created by calling 
+#'   [multcomp::summary.glht()] on a `glht` object created with
+#'   [multcomp::glht()].
+#' @template param_unused_dots
+#' 
 #' @export
+#' @family multcomp tidiers
+#' @seealso [tidy()], [multcomp::summary.glht()], [multcomp::glht()]
 tidy.summary.glht <- function(x, ...) {
   
   lhs_rhs <- tibble(
@@ -76,9 +96,17 @@ tidy.summary.glht <- function(x, ...) {
 }
 
 
-#' @method tidy cld
-#' @rdname multcomp_tidiers
+#' @templateVar class cld
+#' @template title_desc_tidy
+#' 
+#' @param x A `cld` object created by calling [multcomp::cld()] on a 
+#'   `glht`, `confint.glht()` or `summary.glht()` object.
+#' @template param_unused_dots
+#' 
 #' @export
+#' @family multcomp tidiers
+#' @seealso [tidy()], [multcomp::cld()], [multcomp::summary.glht()],
+#'   [multcomp::confint.glht()], [multcomp::glht()]
 tidy.cld <- function(x, ...) {
   vec <- x$mcletters$Letters
   tibble(lhs = names(vec), letters = vec)

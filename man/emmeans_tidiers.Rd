@@ -19,8 +19,9 @@
 \item{conf.level}{Level of confidence interval, used only for
 \code{emmGrid} and \code{lsmobj} objects}
 
-\item{...}{Extra arguments, passed on to
-\code{\link[emmeans:summary.emmGrid]{emmeans::summary.emmGrid()}} or \code{\link[lsmeans:summary.ref.grid]{lsmeans::summary.ref.grid()}}}
+\item{...}{Additional arguments passed to \code{\link[emmeans:summary.emmGrid]{emmeans::summary.emmGrid()}} or
+\code{\link[lsmeans:summary.ref.grid]{lsmeans::summary.ref.grid()}}. \strong{Cautionary note}: mispecified arguments
+may be silently ignored!}
 }
 \value{
 A data frame with one observation for each estimated
@@ -63,7 +64,7 @@ if (require("emmeans", quietly = TRUE)) {
   # reference grid; see vignette("basics", package = "emmeans")
   oranges_rg1 <- ref_grid(oranges_lm1)
   td <- tidy(oranges_rg1)
-  head(td)
+  td
 
   # marginal averages
   marginal <- emmeans(oranges_rg1, "day")

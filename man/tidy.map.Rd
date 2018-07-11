@@ -2,34 +2,50 @@
 % Please edit documentation in R/maps-tidiers.R
 \name{tidy.map}
 \alias{tidy.map}
-\title{Tidy method for map objects.}
+\alias{maps_tidiers}
+\title{Tidy a(n) map object}
 \usage{
 \method{tidy}{map}(x, ...)
 }
 \arguments{
-\item{x}{map object}
+\item{x}{A \code{map} object returned from \code{\link[maps:map]{maps::map()}}.}
 
-\item{...}{not used by this method}
+\item{...}{Additional arguments. Not used. Needed to match generic
+signature only. \strong{Cautionary note:} Misspelled arguments will be
+absorbed in \code{...}, where they will be ignored. If the misspelled
+argument has a default value, the default value will be used.
+For example, if you pass \code{conf.lvel = 0.9}, all computation will
+proceed using \code{conf.level = 0.95}. Additionally, if you pass
+\code{newdata = my_tibble} to an \code{\link[=augment]{augment()}} method that does not
+accept a \code{newdata} argument, it will use the default value for
+the \code{data} argument.}
 }
 \description{
-This function turns a map into a data frame.
-}
-\details{
-This code and documentation originated in ggplot2, but was called "fortify."
-In broom, "fortify" became "augment", which is reserved for functions that \emph{add}
-columns to existing data (based on a model fit, for example) so these functions
-were renamed as "tidy."
+Tidy summarizes information about the components of a model.
+A model component might be a single term in a regression, a single
+hypothesis, a cluster, or a class. Exactly what tidy considers to be a
+model component varies cross models but is usually self-evident.
+If a model has several distinct types of components, you will need to
+specify which components to return.
 }
 \examples{
+
 if (require("maps") && require("ggplot2")) {
+    
+    library(maps)
+    library(ggplot2)
+
     ca <- map("county", "ca", plot = FALSE, fill = TRUE)
-    head(tidy(ca))
+    tidy(ca)
     qplot(long, lat, data = ca, geom = "polygon", group = group)
 
     tx <- map("county", "texas", plot = FALSE, fill = TRUE)
-    head(tidy(tx))
+    tidy(tx)
     qplot(long, lat, data = tx, geom = "polygon", group = group,
           colour = I("white"))
 }
 
+}
+\seealso{
+\code{\link[=tidy]{tidy()}}, \code{\link[maps:map]{maps::map()}}
 }

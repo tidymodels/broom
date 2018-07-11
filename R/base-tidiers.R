@@ -1,20 +1,23 @@
-#' tidy a table object
+#' @templateVar class table
+#' @template title_desc_tidy
 #'
-#' A table, typically created by the \link{table} function, contains a
-#' contingency table of frequencies across multiple vectors. This directly
-#' calls the [as.data.frame.table()] method, which melts it into a
-#' data frame with one column for each variable and a `Freq` column.
-#'
-#' @param x An object of class "table"
-#' @param ... Extra arguments (not used)
-#'
+#' @param x A [table] object.
+#' @template param_unused_dots
+#' 
+#' @return A [tibble::tibble] in long-form containing frequency information
+#'   for the table in a `Freq` column. The result is much like what you get
+#'   from [tidyr::gather()].
+#'   
+#' @details Directly calls [tibble::as_tibble()] on a [table] object, which
+#'   does the same things as [as.data.frame.table()] but also gives the
+#'   returned object [tibble::tibble] class.
+#' 
 #' @examples
 #'
 #' tab <- with(airquality, table(cut(Temp, quantile(Temp)), Month))
 #' tidy(tab)
 #'
-#' @seealso [as.data.frame.table()]
-#'
+#' @seealso [as_tibble.table()]
 #' @export
 tidy.table <- function(x, ...) {
   as_tibble(x)

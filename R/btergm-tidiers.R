@@ -1,16 +1,24 @@
-#' Tidying method for a bootstrapped temporal exponential random graph model
-#'
-#' This method tidies the coefficients of a bootstrapped temporal exponential
-#' random graph model estimated with the \pkg{xergm}. It simply returns the
-#' coefficients and their confidence intervals.
-#'
-#' @return A `data.frame` without rownames.
-#'
-#' @seealso [btergm::btergm()]
-#'
-#' @name btergm_tidiers
+#' @templateVar class btergm
+#' @template title_desc_tidy
+#' 
+#' @description This method tidies the coefficients of a bootstrapped
+#'   temporal exponential random graph model estimated with the \pkg{xergm}.
+#'   It simply returns the coefficients and their confidence intervals.
 #'
 #' @param x A [btergm::btergm()] object.
+#' @param conf.level Confidence level for confidence intervals. Defaults to
+#'   0.95.
+#' @template param_exponentiate
+#' @template param_quick
+#' @template param_unused_dots
+#'
+#' @return A  [tibble::tibble] with one row per term in the random graph
+#'   model and columns:
+#'   \item{term}{The term in the model being estimated and tested.}
+#'   \item{estimate}{The estimated value of the coefficient.}
+#'   \item{conf.low}{The lower bound of the confidence interval.}
+#'   \item{conf.high}{The lower bound of the confidence interval.}
+#'   
 #' @examples
 #' 
 #' if (require("xergm")) {
@@ -42,30 +50,15 @@
 #'     # Show coefficients as odds ratios with a 99% CI
 #'     tidy(btfit, exponentiate = TRUE, conf.level = 0.99)
 #' }
-NULL
-
-#' @rdname btergm_tidiers
-#'
-#' @param conf.level confidence level of the bootstrapped interval
-#' @param exponentiate whether to exponentiate the coefficient estimates
-#' and confidence intervals
-#' @param quick whether to compute a smaller and faster version, containing
-#' only the `term` and `estimate` columns.
-#' @param ... extra arguments (currently not used)
-#'
-#' @details There is no `augment` or `glance` method
-#' for \pkg{ergm} objects.
-#'
-#' @return `tidy.btergm` returns one row for each coefficient,
-#' with four columns:
-#'   \item{term}{The term in the model being estimated and tested}
-#'   \item{estimate}{The estimated coefficient}
-#'   \item{conf.low}{The lower bound of the confidence interval}
-#'   \item{conf.high}{The lower bound of the confidence interval}
 #'
 #' @export
+#' @aliases btergm_tidiers
+#' @seealso [tidy()], [btergm::btergm()]
 tidy.btergm <- function(x, conf.level = .95,
                         exponentiate = FALSE, quick = FALSE, ...) {
+  
+  # TODO: what is this `listof` portion doing? add conf.int argument
+  
   if (exponentiate) {
     trans <- exp
   } else {

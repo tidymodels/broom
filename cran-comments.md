@@ -18,7 +18,7 @@ Five of these packages had only deprecation warnings. Near drop in replacements 
 
 Maintainers of these packages were notified on June 25, 2018.
 
-We were unable to check the pyscho package reverse dependency.
+We were unable to check the psycho package reverse dependency.
 
 ## Test environments
 

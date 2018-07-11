@@ -4,28 +4,38 @@
 \alias{durbinWatsonTest_tidiers}
 \alias{tidy.durbinWatsonTest}
 \alias{glance.durbinWatsonTest}
-\title{Tidying methods for a durbinWatsonTest object}
+\title{Tidy/glance a(n) durbinWatsonTest object}
 \usage{
 \method{tidy}{durbinWatsonTest}(x, ...)
 
 \method{glance}{durbinWatsonTest}(x, ...)
 }
 \arguments{
-\item{x}{An object of class \code{durbinWatsonTest}}
+\item{x}{An object of class \code{durbinWatsonTest} created by a call to
+\code{\link[car:durbinWatsonTest]{car::durbinWatsonTest()}}.}
 
-\item{...}{extra arguments (not used)}
+\item{...}{Additional arguments. Not used. Needed to match generic
+signature only. \strong{Cautionary note:} Misspelled arguments will be
+absorbed in \code{...}, where they will be ignored. If the misspelled
+argument has a default value, the default value will be used.
+For example, if you pass \code{conf.lvel = 0.9}, all computation will
+proceed using \code{conf.level = 0.95}. Additionally, if you pass
+\code{newdata = my_tibble} to an \code{\link[=augment]{augment()}} method that does not
+accept a \code{newdata} argument, it will use the default value for
+the \code{data} argument.}
 }
 \value{
-Both \code{tidy} and \code{glance} return the same output,
-\item{statistic}{Test statistic used to compute the p-value}
-\item{p.value}{P-value}
-\item{autocorrelation}{Residual autocorrelations}
-\item{method}{Method used to compute the statistic as a string}
-\item{alternative}{Alternative hypothesis as a string}
+A one-row \link[tibble:tibble]{tibble::tibble} with columns:
+\item{statistic}{Test statistic for Durbin-Watson test.}
+\item{p.value}{P-value of test statistic.}
+\item{autocorrelation}{Residual autocorrelations.}
+\item{method}{Always \code{"Durbin-Watson Test"}.}
+\item{alternative}{Alternative hypothesis (character).}
 }
 \description{
-Tidies Durbin-Watson Test objects, from the \code{car} package
-into a one-row data frame.
+For models that have only a single component, the \code{\link[=tidy]{tidy()}} and
+\code{\link[=glance]{glance()}} methods are identical. Please see the documentation for both
+of those methods.
 }
 \examples{
 
@@ -34,3 +44,7 @@ tidy(dw)
 glance(dw)  # same output for all durbinWatsonTests
 
 }
+\seealso{
+\code{\link[=tidy]{tidy()}}, \code{\link[=glance]{glance()}}, \code{\link[car:durbinWatsonTest]{car::durbinWatsonTest()}}
+}
+\concept{car tidiers}
