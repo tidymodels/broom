@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-broom <img src="man/figures/logo.png" align="right" />
-======================================================
+broom <img src="man/figures/logo.png" align="right" width="50" height="50" />
+=============================================================================
 
 [![CRAN status](https://www.r-pkg.org/badges/version/broom)](https://cran.r-project.org/package=broom) [![Travis-CI Build Status](https://travis-ci.org/tidyverse/broom.svg?branch=master)](https://travis-ci.org/tidyverse/broom) [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/tidyverse/broom?branch=master&svg=true)](https://ci.appveyor.com/project/tidyverse/broom) [![Coverage Status](https://img.shields.io/codecov/c/github/tidyverse/broom/master.svg)](https://codecov.io/github/tidyverse/broom?branch=master)
 
