@@ -21,8 +21,6 @@ accept a \code{newdata} argument, it will use the default value for
 the \code{data} argument.}
 }
 \value{
-TODO FIGURE OUT HOW TO DESCRIBE ROW
-
 The tidied output of the parametric ANOVA for the GAM model as
 a \link[tibble:tibble]{tibble::tibble} with one row for each term in the model.
 }

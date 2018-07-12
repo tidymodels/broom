@@ -34,8 +34,6 @@ accept a \code{newdata} argument, it will use the default value for
 the \code{data} argument.}
 }
 \value{
-TODO FIGURE OUT HOW TO DESCRIBE ROW
-
 A  \link[tibble:tibble]{tibble::tibble} with one row per term in the random graph
 model and columns:
 \item{term}{The term in the model being estimated and tested.}

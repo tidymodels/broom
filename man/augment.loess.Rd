@@ -35,8 +35,6 @@ the \code{data} argument will be ignored.}
 }}
 }
 \value{
-TODO FIGURE OUT HOW TO DESCRIBE ROW
-
 When \code{newdata} is not supplied \code{augment.loess}
 returns one row for each observation with three columns added
 to the original data:

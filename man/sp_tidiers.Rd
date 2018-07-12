@@ -33,9 +33,6 @@
 
 \item{...}{not used by this method}
 }
-\value{
-TODO FIGURE OUT HOW TO DESCRIBE ROW
-}
 \description{
 Tidy summarizes information about the components of a model.
 A model component might be a single term in a regression, a single

@@ -1,56 +1,26 @@
 library(dplyr)
-library(tibble)
+library(purrr)
+library(yaml)
 
-# the goal of this glossary is to keep tidier output behavior consistent
-# add new column names as needed if the current arguments aren't appropriate
+# col_desc() sources this file and then returns an roxygen2::rd_octlet()
+# so that the column glossary is automatically rebuilt everytime
+# devtools::document() is called. this means edits to tidy.yaml, etc, will be
+# reflected immediately after calling document() with no need to manually
+# build the column glossary. sourcing roxygen2 here makes rd_octlet() available
+# to col_desc() so that we don't need to add roxygen2 to Suggests. needless to
+# say, this is a hack 
+library(roxygen2)  
 
-glance_columns <- tribble(
-  ~column, ~description, ~used_by,
-  "sigma", "", c("Arima"),
-  "logLik", "", c("Arima", "betareg"),
-  "AIC", "", c("Arima", "betareg", "biglm"),
-  "BIC", "", c("Arima", "betareg"),
-  "pseudo.r.squared", "", c("betareg"),
-  "df.residual", "", c("betareg"),
-  "df.null", "", c("betareg"),
-  "r.squared", "", c("biglm"),
-  "deviance", "", c("biglm"),
-  "power", "", c("binDesign"),
-  "power.reached", "", c("binDesign"),
-  "n", "", c("binDesign"),
-  "maxit", "", c("binDesign")
-)
+load_columns <- function(file) {
+  paste0("data-raw/", file) %>% 
+    yaml.load_file() %>% 
+    map(as_tibble) %>% 
+    bind_rows()
+}
 
-# only new columns added by augment are checked against this list
-# all names in this list must begin with a dot
-
-augment_columns <- tribble(
-  ~column, ~description, ~used_by,
-  ".fitted", "", c("betareg"),
-  ".resid", "", c("betareg"),
-  ".cooksd", "", c("betareg", ""),
-  ".rownames", "", ""
-)
-
-tidy_columns <- tribble(
-  ~column, ~description, ~used_by,
-  "term", "a", c("Arima", "betareg"),
-  "estimate", "a", c("Arima", "betareg"),
-  "std.error", "a", c("Arima", "betareg"),
-  "p.value", "a", c("betareg"),
-  "conf.low", "a", c("Arima", "betareg"),
-  "conf.high", "a", c("Arima", "betareg"),
-  "cutoffs", "a", c("roc"),
-  "fpr", "a", c("roc"),
-  "tpr", "a", c("roc"),
-  "component", "a", c("betareg"),
-  "statistic", "a", c("betareg"),
-  "ci.width", "a", c("binWidth"),
-  "alternative", "a", c("binWidth"),
-  "p", "a", c("binWidth"),
-  "n", "a", c("binWidth", "binDesign"),
-  "power", "a", c("binDesign")
-)
+tidy_columns <- load_columns("tidy.yaml")
+glance_columns <- load_columns("glance.yaml")
+augment_columns <- load_columns("augment.yaml")
 
 column_glossary <- 
   bind_rows(

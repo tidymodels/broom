@@ -28,8 +28,6 @@ accept a \code{newdata} argument, it will use the default value for
 the \code{data} argument.}
 }
 \value{
-TODO FIGURE OUT HOW TO DESCRIBE ROW
-
 A \code{\link[tibble:tibble]{tibble::tibble()}} with one row for each term in the
 regression. The tibble has columns:
 

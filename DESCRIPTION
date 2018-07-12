@@ -127,5 +127,5 @@ Suggests:
     plyr
 VignetteBuilder: knitr
 LazyData: true
-Roxygen: list(markdown = TRUE)
+Roxygen: list(markdown = TRUE, roclets = c("collate", "namespace", "col_desc"))
 RoxygenNote: 6.0.1.9000

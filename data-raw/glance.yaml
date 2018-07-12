@@ -1,0 +1,58 @@
+- column: adj.r.squared
+  description: Adjusted R squared statistic, taking into account degrees of freedom.
+  used_by:
+    - ivreg
+- column: df
+  description: Degrees of freedom used by the model.
+  used_by:
+    - ivreg
+- column: df.residual
+  description: Residuals degrees of freedom.
+  used_by:
+    - ivreg
+- column: logLik
+  description: Log-likelihood of model. Included only if `logLik = TRUE`. See [stats::logLik()] for details.
+  used_by:
+    - Arima
+    - betareg
+- column: p.value
+  description: P-value associated with `statistic`.
+  used_by:
+    - ivreg
+- column: p.value.Sargan
+  description: P-value for Sargan test.
+  used_by:
+    - ivreg
+- column: p.value.Wu.Hausman
+  description: P-value for Wu-Hausman test.
+  used_by:
+    - ivreg
+- column: p.value.weakinst
+  description: P-value for weak instruments test.
+  used_by:
+    - ivreg
+- column: r.squared
+  description: R squared statistic, or the percent of variation explained by the model. Also known as the coefficient of determination.
+  used_by:
+    - ivreg
+- column: sigma
+  description: Estimated standard error of the residuals.
+  used_by:
+    - Arima
+    - ivreg
+- column: statistic
+  description: TODO TODO TODO Wald test statistic. Should probably be documented individually.
+  used_by:
+    - ivreg
+- column: statistic.Sargan
+  description: Statistic for Sargan test.
+  used_by:
+    - ivreg
+- column: statistic.Wu.Hausman
+  description: Statistic for Wu-Hausman test.
+  used_by:
+    - ivreg
+- column: statistic.weakinst
+  description: Statistic for weak instruments test.
+  used_by:
+    - ivreg

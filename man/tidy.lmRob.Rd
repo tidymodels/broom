@@ -28,8 +28,6 @@ to \code{FALSE}.}
 }}
 }
 \value{
-TODO FIGURE OUT HOW TO DESCRIBE ROW
-
 A \code{\link[tibble:tibble]{tibble::tibble()}} with one row for each term in the
 regression. The tibble has columns:
 

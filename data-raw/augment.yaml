@@ -1,0 +1,16 @@
+- column: .fitted
+  description: TODO
+  used_by:
+    - betareg
+- column: .resid
+  description: TODO
+  used_by:
+    - betareg
+- column: .cooksd
+  description: See [cooks.distance()].
+  used_by:
+    - betareg
+- column: .rownames
+  description: TODO
+  used_by:
+    - all

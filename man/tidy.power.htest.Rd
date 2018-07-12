@@ -21,8 +21,6 @@ accept a \code{newdata} argument, it will use the default value for
 the \code{data} argument.}
 }
 \value{
-TODO FIGURE OUT HOW TO DESCRIBE ROW
-
 A data frame with one row per parameter passed in, with
 columns \code{n}, \code{delta}, \code{sd}, \code{sig.level}, and \code{power}.
 }

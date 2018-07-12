@@ -6,7 +6,8 @@
 #' @template param_exponentiate
 #' @template param_unused_dots
 #' 
-#' @template return_tidy_regression
+#' @template return_tidy
+#' 
 #' @examples
 #' 
 #' library(AER)
@@ -59,7 +60,7 @@ tidy.ivreg <- function(x,
 #' @template param_newdata
 #' @template param_unused_dots
 #' 
-#' @template return_augment_columns
+#' @template return_augment
 #'
 #' @export
 #' @seealso [augment()], [AER::ivreg()]
@@ -75,9 +76,11 @@ augment.ivreg <- function(x, data = model.frame(x), newdata, ...) {
 #' @param diagnostics Logical indicating whether to include statistics and
 #'   p-values for Sargan, Wu-Hausman and weak instrument tests. Defaults to
 #'   `FALSE`.
-#' @template param_unused_dots
+#'   
+#' @template return_glance
 #'
 #' @return A one-row tibble with columns
+#' 
 #'   \item{r.squared}{The percent of variance explained by the model}
 #'   \item{adj.r.squared}{r.squared adjusted based on the degrees of freedom}
 #'   \item{sigma}{The square root of the estimated residual variance}

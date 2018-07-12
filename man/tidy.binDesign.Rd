@@ -21,11 +21,6 @@ accept a \code{newdata} argument, it will use the default value for
 the \code{data} argument.}
 }
 \value{
-TODO FIGURE OUT HOW TO DESCRIBE ROW
-
-\item{n}{a}
-\item{power}{a}
-
 A one-row \link[tibble:tibble]{tibble::tibble} with columns:
 \item{n}{Number of trials in given iteration.}
 \item{power}{Power achieved for given value of n.}

@@ -1,0 +1,35 @@
+- column: term
+  description: TODO
+  used_by:
+    - betareg
+    - ivreg
+- column: estimate
+  description: Estimated value of `term`.
+  used_by:
+    - betareg
+    - ivreg
+- column: std.error
+  description: TODO
+  used_by:
+    - betareg
+    - ivreg
+- column: statistic
+  description: TODO
+  used_by:
+    - betareg
+    - ivreg
+- column: p.value
+  description: TODO
+  used_by:
+    - betareg
+    - ivreg
+- column: conf.low
+  description: TODO
+  used_by:
+    - betareg
+    - ivreg
+- column: conf.high
+  description: TODO
+  used_by:
+    - betareg
+    - ivreg

@@ -35,22 +35,14 @@ accept a \code{newdata} argument, it will use the default value for
 the \code{data} argument.}
 }
 \value{
-TODO FIGURE OUT HOW TO DESCRIBE ROW
-
-A \code{\link[tibble:tibble]{tibble::tibble()}} with one row for each term in the
-regression. The tibble has columns:
-
-\item{term}{The name of the regression term.}
-\item{estimate}{The estimated value of the regression term.}
-\item{std.error}{The standard error of the regression term.}
-\item{statistic}{The value of a statistic, almost always a T-statistic,
-to use in a hypothesis that the regression term is non-zero.}
-\item{p.value}{The two-sided p-value associated with the observed
-statistic.}
-\item{conf.low}{The low end of a confidence interval for the regression
-term. Included only if \code{conf.int = TRUE}.}
-\item{conf.high}{The high end of a confidence interval for the regression
-term. Included only if \code{conf.int = TRUE}.}
+A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
+\item{term}{TODO}
+\item{estimate}{Estimated value of \code{term}.}
+\item{std.error}{TODO}
+\item{statistic}{TODO}
+\item{p.value}{TODO}
+\item{conf.low}{TODO}
+\item{conf.high}{TODO}
 }
 \description{
 Tidy summarizes information about the components of a model.

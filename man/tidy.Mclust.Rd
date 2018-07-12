@@ -21,8 +21,6 @@ accept a \code{newdata} argument, it will use the default value for
 the \code{data} argument.}
 }
 \value{
-TODO FIGURE OUT HOW TO DESCRIBE ROW
-
 A \link[tibble:tibble]{tibble::tibble} with one row per component:
 \item{component}{Cluster id as a factor. For a model \code{k} clusters, these
 will be \code{as.factor(1:k)}, or \code{as.factor(0:k)} if there's a noise term.}

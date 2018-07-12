@@ -31,8 +31,6 @@ covariance and standard error calculations. Defaults to \code{FALSE}.}
 \strong{Cautionary note}: Mispecified arguments may be silently ignored.}
 }
 \value{
-TODO FIGURE OUT HOW TO DESCRIBE ROW
-
 A \link[tibble:tibble]{tibble::tibble} with one row for each coefficient in the
 exponential random graph model, with columns:
 \item{term}{The term in the model being estimated and tested}

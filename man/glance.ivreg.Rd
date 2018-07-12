@@ -24,7 +24,23 @@ accept a \code{newdata} argument, it will use the default value for
 the \code{data} argument.}
 }
 \value{
+A \code{\link[tibble:tibble]{tibble::tibble()}} with exactly one row and columns:
+\item{adj.r.squared}{Adjusted R squared statistic, taking into account degrees of freedom.}
+\item{df}{Degrees of freedom used by the model.}
+\item{df.residual}{Residuals degrees of freedom.}
+\item{p.value}{P-value associated with \code{statistic}.}
+\item{p.value.Sargan}{P-value for Sargan test.}
+\item{p.value.Wu.Hausman}{P-value for Wu-Hausman test.}
+\item{p.value.weakinst}{P-value for weak instruments test.}
+\item{r.squared}{R squared statistic, or the percent of variation explained by the model. Also known as the coefficient of determination.}
+\item{sigma}{Estimated standard error of the residuals.}
+\item{statistic}{TODO TODO TODO Wald test statistic. Should probably be documented individually.}
+\item{statistic.Sargan}{Statistic for Sargan test.}
+\item{statistic.Wu.Hausman}{Statistic for Wu-Hausman test.}
+\item{statistic.weakinst}{Statistic for weak instruments test.}
+
 A one-row tibble with columns
+
 \item{r.squared}{The percent of variance explained by the model}
 \item{adj.r.squared}{r.squared adjusted based on the degrees of freedom}
 \item{sigma}{The square root of the estimated residual variance}

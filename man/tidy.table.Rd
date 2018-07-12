@@ -20,8 +20,6 @@ accept a \code{newdata} argument, it will use the default value for
 the \code{data} argument.}
 }
 \value{
-TODO FIGURE OUT HOW TO DESCRIBE ROW
-
 A \link[tibble:tibble]{tibble::tibble} in long-form containing frequency information
 for the table in a \code{Freq} column. The result is much like what you get
 from \code{\link[tidyr:gather]{tidyr::gather()}}.
