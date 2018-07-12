@@ -27,6 +27,8 @@ will return information about
 }}
 }
 \value{
+TODO FIGURE OUT HOW TO DESCRIBE ROW
+
 A \link[tibble:tibble]{tibble::tibble} with columns depending on the component of
 PCA being tidied.
 

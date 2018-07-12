@@ -34,22 +34,22 @@ augment_columns <- tribble(
 
 tidy_columns <- tribble(
   ~column, ~description, ~used_by,
-  "term", "", c("Arima", "betareg"),
-  "estimate", "", c("Arima", "betareg"),
-  "std.error", "", c("Arima", "betareg"),
-  "p.value", "", c("betareg"),
-  "conf.low", "", c("Arima", "betareg"),
-  "conf.high", "", c("Arima", "betareg"),
-  "cutoffs", "", c("roc"),
-  "fpr", "", c("roc"),
-  "tpr", "", c("roc"),
-  "component", "", c("betareg"),
-  "statistic", "", c("betareg"),
-  "ci.width", "", c("binWidth"),
-  "alternative", "", c("binWidth"),
-  "p", "", c("binWidth"),
-  "n", "", c("binWidth", "binDesign"),
-  "power", "", c("binDesign")
+  "term", "a", c("Arima", "betareg"),
+  "estimate", "a", c("Arima", "betareg"),
+  "std.error", "a", c("Arima", "betareg"),
+  "p.value", "a", c("betareg"),
+  "conf.low", "a", c("Arima", "betareg"),
+  "conf.high", "a", c("Arima", "betareg"),
+  "cutoffs", "a", c("roc"),
+  "fpr", "a", c("roc"),
+  "tpr", "a", c("roc"),
+  "component", "a", c("betareg"),
+  "statistic", "a", c("betareg"),
+  "ci.width", "a", c("binWidth"),
+  "alternative", "a", c("binWidth"),
+  "p", "a", c("binWidth"),
+  "n", "a", c("binWidth", "binDesign"),
+  "power", "a", c("binDesign")
 )
 
 column_glossary <- 

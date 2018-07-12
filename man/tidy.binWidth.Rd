@@ -21,6 +21,13 @@ accept a \code{newdata} argument, it will use the default value for
 the \code{data} argument.}
 }
 \value{
+TODO FIGURE OUT HOW TO DESCRIBE ROW
+
+\item{ci.width}{a}
+\item{alternative}{a}
+\item{p}{a}
+\item{n}{a}
+
 A one-row \link[tibble:tibble]{tibble::tibble} with columns:
 \item{ci.width}{Expected width of confidence interval.}
 \item{alternative}{Alternative hypothesis.}

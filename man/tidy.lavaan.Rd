@@ -24,6 +24,8 @@ Defaults to 0.95, which corresponds to a 95 percent confidence interval.}
 \strong{Cautionary note}: Misspecified arguments may be silently ignored.}
 }
 \value{
+TODO FIGURE OUT HOW TO DESCRIBE ROW
+
 A \link[tibble:tibble]{tibble::tibble} with one row for each estimated parameter and
 columns:
 

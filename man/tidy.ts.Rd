@@ -20,6 +20,8 @@ accept a \code{newdata} argument, it will use the default value for
 the \code{data} argument.}
 }
 \value{
+TODO FIGURE OUT HOW TO DESCRIBE ROW
+
 A \link[tibble:tibble]{tibble::tibble} with one row for each observation and columns:
 
 \item{index}{Index (i.e. date or time) for the "ts" object.}

@@ -22,6 +22,8 @@ accept a \code{newdata} argument, it will use the default value for
 the \code{data} argument.}
 }
 \value{
+TODO FIGURE OUT HOW TO DESCRIBE ROW
+
 A \link[tibble:tibble]{tibble::tibble} with one row for each point in the
 estimated grid. The result contains one column (named \code{x1},
 \code{x2}, etc) for each dimension, and an \code{estimate} column

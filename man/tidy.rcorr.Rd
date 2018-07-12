@@ -27,6 +27,8 @@ accept a \code{newdata} argument, it will use the default value for
 the \code{data} argument.}
 }
 \value{
+TODO FIGURE OUT HOW TO DESCRIBE ROW
+
 A \link[tibble:tibble]{tibble::tibble} with one row for each unique pair of columns
 in the correlatin matrix and columns:
 \item{column1}{Name or index of the first column being described}

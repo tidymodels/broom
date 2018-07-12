@@ -26,6 +26,8 @@ the \code{data} argument will be ignored.}
 }}
 }
 \value{
+TODO FIGURE OUT HOW TO DESCRIBE ROW
+
 A \code{\link[tibble:tibble]{tibble::tibble()}} containing the data passed to \code{augment},
 and \strong{additional} columns:
 

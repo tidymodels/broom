@@ -20,6 +20,8 @@ accept a \code{newdata} argument, it will use the default value for
 the \code{data} argument.}
 }
 \value{
+TODO FIGURE OUT HOW TO DESCRIBE ROW
+
 An ftable contains a "flat" contingency table. This melts it into a
 \link[tibble:tibble]{tibble::tibble} with one column for each variable, then a \code{Freq}
 column.

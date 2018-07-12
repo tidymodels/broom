@@ -28,6 +28,14 @@ accept a \code{newdata} argument, it will use the default value for
 the \code{data} argument.}
 }
 \value{
+TODO FIGURE OUT HOW TO DESCRIBE ROW
+
+\item{term}{a}
+\item{estimate}{a}
+\item{std.error}{a}
+\item{conf.low}{a}
+\item{conf.high}{a}
+
 A \link[tibble:tibble]{tibble::tibble} with one row for each coefficient and columns:
 
 \item{term}{The term in the nonlinear model being estimated and tested}

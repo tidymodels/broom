@@ -26,6 +26,8 @@ indicating which test statistic should be used. Defaults to "Pillai".}
 }}
 }
 \value{
+TODO FIGURE OUT HOW TO DESCRIBE ROW
+
 A \link[tibble:tibble]{tibble::tibble} with columns:\preformatted{\item{term}{Term in design}
 \item{statistic}{Approximate F statistic}
 \item{num.df}{Degrees of freedom}

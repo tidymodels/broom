@@ -27,6 +27,8 @@ accept a \code{newdata} argument, it will use the default value for
 the \code{data} argument.}
 }
 \value{
+TODO FIGURE OUT HOW TO DESCRIBE ROW
+
 A \link[tibble:tibble]{tibble::tibble} with one or more of the following columns:
 \item{term}{The name of a statistic from the confusion matrix}
 \item{class}{Which class the term is a measurement of}
