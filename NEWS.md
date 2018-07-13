@@ -1,7 +1,7 @@
 # broom 0.4.5.9000
 To be released as 0.5.0
 
-Tidiers now returns `tibbles`. This release also includes several new tidiers, new vignettes and a large number of bugfixes. We've also begun to more rigorously define tidier specifications: we've laid part of the groundwork for stricter and more consistent tidying, but the new tidier specifications are not yet complete. These will appear in the next release.
+Tidiers now return `tibble::tibble()`s. This release also includes several new tidiers, new vignettes and a large number of bugfixes. We've also begun to more rigorously define tidier specifications: we've laid part of the groundwork for stricter and more consistent tidying, but the new tidier specifications are not yet complete. These will appear in the next release.
 
 Additionally, users should note that we are in the process of migrating tidying methods for mixed models and Bayesian models to `broom.mixed`. `broom.mixed` is not on CRAN yet, but all mixed model and Bayesian tidiers will be deprecated once `broom.mixed` is on CRAN. No further development of mixed model tidiers will take place in `broom`.
 
@@ -32,6 +32,7 @@ These restrictions will be relaxed in an upcoming release of `broom` pending sup
 - setting rownames on tibbles, which is deprecated.
 - using matrix and vector tidiers, now deprecated.
 - handling the additional tibble classes `tbl_df` and `tbl` beyond the `data.frame` class
+- linking to defunct documentation files -- broom recently moved all tidiers to a `roxygen2` template based documentation system.
 
 ## New vignettes
 

@@ -110,7 +110,7 @@
 <a href="#broom-0-4-5-9000" class="anchor"></a>broom 0.4.5.9000<small> Unreleased </small>
 </h1>
 <p>To be released as 0.5.0</p>
-<p>Tidiers now returns <code>tibbles</code>. This release also includes several new tidiers, new vignettes and a large number of bugfixes. We’ve also begun to more rigorously define tidier specifications: we’ve laid part of the groundwork for stricter and more consistent tidying, but the new tidier specifications are not yet complete. These will appear in the next release.</p>
+<p>Tidiers now return <code><a href="http://www.rdocumentation.org/packages/tibble/topics/tibble">tibble::tibble()</a></code>s. This release also includes several new tidiers, new vignettes and a large number of bugfixes. We’ve also begun to more rigorously define tidier specifications: we’ve laid part of the groundwork for stricter and more consistent tidying, but the new tidier specifications are not yet complete. These will appear in the next release.</p>
 <p>Additionally, users should note that we are in the process of migrating tidying methods for mixed models and Bayesian models to <code>broom.mixed</code>. <code>broom.mixed</code> is not on CRAN yet, but all mixed model and Bayesian tidiers will be deprecated once <code>broom.mixed</code> is on CRAN. No further development of mixed model tidiers will take place in <code>broom</code>.</p>
 <div id="breaking-changes" class="section level2">
 <h2 class="hasAnchor">
@@ -132,6 +132,7 @@ broom<span class="op">::</span><span class="kw"><a href="http://www.rdocumentati
 <li>setting rownames on tibbles, which is deprecated.</li>
 <li>using matrix and vector tidiers, now deprecated.</li>
 <li>handling the additional tibble classes <code>tbl_df</code> and <code>tbl</code> beyond the <code>data.frame</code> class</li>
+<li>linking to defunct documentation files – broom recently moved all tidiers to a <code>roxygen2</code> template based documentation system.</li>
 </ul>
 </div>
 <div id="new-vignettes" class="section level2">
@@ -171,6 +172,7 @@ broom<span class="op">::</span><span class="kw"><a href="http://www.rdocumentati
 <h2 class="hasAnchor">
 <a href="#other-changes" class="anchor"></a>Other changes</h2>
 <ul>
+<li>The <code>alpha</code> argument has been removed from <code>quantreg</code> tidy methods</li>
 <li>The <code>separate.levels</code> argument has been removed from <code>tidy.TukeyHSD</code>. To obtain the effect of <code>separate.levels = TRUE</code>, users may <code><a href="http://www.rdocumentation.org/packages/tidyr/topics/separate">tidyr::separate</a></code> after tidying. This is consistent with the <code>multcomp</code> tidier behavior.</li>
 <li>The <code>fe.error</code> argument was removed from <code>tidy.felm</code>. When fixed effects are tidier, their standard errors are now always included.</li>
 <li>The <code>diag</code> argument in <code>tidy.dist</code> has been renamed <code>diagonal</code>
@@ -339,7 +341,7 @@ broom<span class="op">::</span><span class="kw"><a href="http://www.rdocumentati
 </h1>
 <ul>
 <li>Fixed small bug in <code>felm</code> where the <code>.fitted</code> and <code>.resid</code> columns were matrices rather than vectors.</li>
-<li>Added tidiers for <code>rlm</code> (robust linear model) and <code>gam</code> (generalized additive model) objects, including adjustments to “lm” tidiers in order to handle them. See <code><a href="../reference/rlm_tidiers.html">?rlm_tidiers</a></code> and <code><a href="../reference/gam_tidiers.html">?gam_tidiers</a></code> for more.</li>
+<li>Added tidiers for <code>rlm</code> (robust linear model) and <code>gam</code> (generalized additive model) objects, including adjustments to “lm” tidiers in order to handle them. See <code><a href="../reference/glance.rlm.html">?rlm_tidiers</a></code> and <code><a href="../reference/mgcv_tidy_gam.html">?gam_tidiers</a></code> for more.</li>
 <li>Removed rownames from <code>tidy.cv.glmnet</code> output</li>
 </ul>
 </div>
