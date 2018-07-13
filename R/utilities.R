@@ -464,6 +464,7 @@ globalVariables(
     "PC",
     "percent",
     "pvalue",
+    "rd_roclet",
     "rhs", 
     "rmsea.ci.upper",
     "rowname", 
