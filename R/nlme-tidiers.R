@@ -17,6 +17,7 @@
 #'
 #' @examples
 #'
+#' \dontrun{
 #' if (require("nlme") & require("lme4")) {
 #'     # example regressions are from lme4 documentation, but used for nlme
 #'     lmm1 <- lme(Reaction ~ Days, random=~ Days|Subject, sleepstudy)
@@ -36,6 +37,7 @@
 #'     tidy(nm1, effects = "fixed")
 #'     head(augment(nm1, Orange))
 #'     glance(nm1)
+#' }
 #' }
 #'
 #' @rdname nlme_tidiers

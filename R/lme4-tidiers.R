@@ -17,6 +17,7 @@
 #'
 #' @examples
 #'
+#' \dontrun{
 #' if (require("lme4")) {
 #'     # example regressions are from lme4 documentation
 #'     lmm1 <- lmer(Reaction ~ Days + (Days | Subject), sleepstudy)
@@ -42,6 +43,7 @@
 #'     tidy(nm1, effects = "fixed")
 #'     head(augment(nm1, Orange))
 #'     glance(nm1)
+#' }
 #' }
 NULL
 
