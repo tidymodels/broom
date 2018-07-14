@@ -47,4 +47,3 @@ the measure will be reported as \code{NA}.
 
 Other mjoint tidiers: \code{\link{tidy.mjoint}}
 }
-\concept{mjoint tidiers}

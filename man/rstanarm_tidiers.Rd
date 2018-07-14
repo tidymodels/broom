@@ -6,8 +6,8 @@
 \alias{glance.stanreg}
 \title{Tidying methods for an rstanarm model}
 \usage{
-\method{tidy}{stanreg}(x, parameters = "non-varying",
-  intervals = FALSE, prob = 0.9, ...)
+\method{tidy}{stanreg}(x, parameters = "non-varying", intervals = FALSE,
+  prob = 0.9, ...)
 
 \method{glance}{stanreg}(x, looic = FALSE, ...)
 }

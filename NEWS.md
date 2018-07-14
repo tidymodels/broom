@@ -91,8 +91,6 @@ Several old vignettes have also been updated:
 - Added `augment` method for chi-squared tests (#138 by @larmarange)
 - Many small improvements throughout
 
-## Contributors
-
 # broom 0.4.4
 
 * Fixed gam tidiers to work with "Gam" objects, due to an update in gam 1.15. This fixes failing CRAN tests

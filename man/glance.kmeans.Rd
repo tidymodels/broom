@@ -48,4 +48,3 @@ the measure will be reported as \code{NA}.
 Other kmeans tidiers: \code{\link{augment.kmeans}},
   \code{\link{tidy.kmeans}}
 }
-\concept{kmeans tidiers}

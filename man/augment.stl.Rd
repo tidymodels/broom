@@ -78,4 +78,3 @@ missing at this time.
 
 Other decompose tidiers: \code{\link{augment.decomposed.ts}}
 }
-\concept{decompose tidiers}

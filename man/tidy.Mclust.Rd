@@ -74,4 +74,3 @@ glance(m)
 
 Other mclust tidiers: \code{\link{augment.Mclust}}
 }
-\concept{mclust tidiers}

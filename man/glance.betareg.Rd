@@ -43,24 +43,6 @@ computations to appropriate methods and gathers the results together.
 Sometimes a goodness of fit measure will be undefined. In these cases
 the measure will be reported as \code{NA}.
 }
-\examples{
-
-library(betareg)
-
-data("GasolineYield", package = "betareg")
-
-mod <- betareg(yield ~ batch + temp, data = GasolineYield)
-
-mod
-tidy(mod)
-tidy(mod, conf.int = TRUE)
-tidy(mod, conf.int = TRUE, conf.level = .99)
-
-augment(mod)
-
-glance(mod)
-
-}
 \seealso{
 \code{\link[=glance]{glance()}}, \code{\link[betareg:betareg]{betareg::betareg()}}
 }

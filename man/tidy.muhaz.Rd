@@ -48,4 +48,3 @@ if (require("muhaz", quietly = TRUE)) {
 
 Other muhaz tidiers: \code{\link{glance.muhaz}}
 }
-\concept{muhaz tidiers}

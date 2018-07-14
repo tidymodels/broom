@@ -51,4 +51,3 @@ the measure will be reported as \code{NA}.
 
 Other orcutt tidiers: \code{\link{tidy.orcutt}}
 }
-\concept{orcutt tidiers}

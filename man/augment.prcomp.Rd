@@ -82,4 +82,3 @@ missing at this time.
 Other svd tidiers: \code{\link{tidy.prcomp}},
   \code{\link{tidy_irlba}}, \code{\link{tidy_svd}}
 }
-\concept{svd tidiers}

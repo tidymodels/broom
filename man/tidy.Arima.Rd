@@ -58,4 +58,3 @@ glance(fit)
 
 Other Arima tidiers: \code{\link{glance.Arima}}
 }
-\concept{Arima tidiers}

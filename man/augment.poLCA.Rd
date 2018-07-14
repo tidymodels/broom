@@ -85,4 +85,3 @@ missing at this time.
 Other poLCA tidiers: \code{\link{glance.poLCA}},
   \code{\link{tidy.poLCA}}
 }
-\concept{poLCA tidiers}

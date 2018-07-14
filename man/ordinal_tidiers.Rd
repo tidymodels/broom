@@ -24,12 +24,12 @@
   type.predict = c("probs", "class"), ...)
 
 \method{tidy}{clm}(x, conf.int = FALSE, conf.level = 0.95,
-  exponentiate = FALSE, quick = FALSE, conf.type = c("profile",
-  "Wald"), ...)
+  exponentiate = FALSE, quick = FALSE, conf.type = c("profile", "Wald"),
+  ...)
 
 \method{tidy}{clmm}(x, conf.int = FALSE, conf.level = 0.95,
-  exponentiate = FALSE, quick = FALSE, conf.type = c("profile",
-  "Wald"), ...)
+  exponentiate = FALSE, quick = FALSE, conf.type = c("profile", "Wald"),
+  ...)
 
 \method{glance}{clm}(x, ...)
 

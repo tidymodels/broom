@@ -70,4 +70,3 @@ augment(mod)
 Other speedlm tidiers: \code{\link{augment.speedlm}},
   \code{\link{glance.speedlm}}
 }
-\concept{speedlm tidiers}

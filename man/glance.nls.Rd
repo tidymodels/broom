@@ -52,4 +52,3 @@ the measure will be reported as \code{NA}.
 Other nls tidiers: \code{\link{augment.nls}},
   \code{\link{tidy.nls}}
 }
-\concept{nls tidiers}

@@ -55,4 +55,3 @@ the measure will be reported as \code{NA}.
 Other speedlm tidiers: \code{\link{augment.speedlm}},
   \code{\link{tidy.speedlm}}
 }
-\concept{speedlm tidiers}

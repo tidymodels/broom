@@ -47,4 +47,3 @@ the measure will be reported as \code{NA}.
 
 Other biglm tidiers: \code{\link{tidy.biglm}}
 }
-\concept{biglm tidiers}
