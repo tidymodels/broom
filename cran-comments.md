@@ -1,8 +1,13 @@
 # release summary
 
-broom 0.5.0 is a major new release featuring breaking changes. The main changes are:
+broom 0.5.0 is a major new release featuring breaking changes. The main breaking changes are:
 
-- All tidying methods now return tibbles for cleaner print methods and more consistent behavior
+- All tidying methods now return tibbles rather than data frames for cleaner print methods and more consistent behavior.
+- Methods for tidying data frames, matrices, and vectors have been deprecated, in favor of other packages such as tibble.
+- The bootstrap function has been deprecated in favor of the rsample package.
+
+Other major improvements include:
+
 - A new test suite
 - A new roxygen2 template based system for documentation
 - Several new tidying methods and vignettes
