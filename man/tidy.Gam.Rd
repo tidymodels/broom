@@ -50,3 +50,4 @@ glance(g)
 
 Other gam tidiers: \code{\link{glance.Gam}}
 }
+\concept{gam tidiers}

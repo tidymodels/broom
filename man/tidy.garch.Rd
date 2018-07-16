@@ -55,3 +55,4 @@ glance(dax.garch)
 
 Other garch tidiers: \code{\link{glance.garch}}
 }
+\concept{garch tidiers}

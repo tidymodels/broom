@@ -69,3 +69,4 @@ ggplot(tidy(Zrolled), aes(index, value, color = series)) +
 Other time series tidiers: \code{\link{tidy.acf}},
   \code{\link{tidy.spec}}, \code{\link{tidy.ts}}
 }
+\concept{time series tidiers}

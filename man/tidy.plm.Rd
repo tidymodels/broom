@@ -81,3 +81,4 @@ glance(zz)
 Other plm tidiers: \code{\link{augment.plm}},
   \code{\link{glance.plm}}
 }
+\concept{plm tidiers}

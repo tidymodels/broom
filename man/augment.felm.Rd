@@ -79,3 +79,4 @@ missing at this time.
 
 Other felm tidiers: \code{\link{tidy.felm}}
 }
+\concept{felm tidiers}

@@ -80,3 +80,4 @@ missing at this time.
 Other plm tidiers: \code{\link{glance.plm}},
   \code{\link{tidy.plm}}
 }
+\concept{plm tidiers}

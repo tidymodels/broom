@@ -37,3 +37,4 @@ specify which components to return.
 Other stats tidiers: \code{\link{tidy.dist}},
   \code{\link{tidy.ftable}}
 }
+\concept{stats tidiers}

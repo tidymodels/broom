@@ -67,3 +67,5 @@ Other survival tidiers: \code{\link{augment.coxph}},
   \code{\link{tidy.pyears}}, \code{\link{tidy.survexp}},
   \code{\link{tidy.survfit}}, \code{\link{tidy.survreg}}
 }
+\concept{survdiff tidiers}
+\concept{survival tidiers}

@@ -55,3 +55,4 @@ if (require("orcutt", quietly = TRUE)) {
 
 Other orcutt tidiers: \code{\link{glance.orcutt}}
 }
+\concept{orcutt tidiers}

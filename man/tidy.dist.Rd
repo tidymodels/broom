@@ -4,8 +4,8 @@
 \alias{tidy.dist}
 \title{Tidy a(n) dist object}
 \usage{
-\method{tidy}{dist}(x, diagonal = attr(x, "Diag"), upper = attr(x, "Upper"),
-  ...)
+\method{tidy}{dist}(x, diagonal = attr(x, "Diag"), upper = attr(x,
+  "Upper"), ...)
 }
 \arguments{
 \item{x}{A \code{dist} object returned from \code{\link[stats:dist]{stats::dist()}}.}
@@ -64,3 +64,4 @@ tidy(iris_dist, diagonal = TRUE)
 Other stats tidiers: \code{\link{tidy.density}},
   \code{\link{tidy.ftable}}
 }
+\concept{stats tidiers}

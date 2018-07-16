@@ -52,3 +52,4 @@ glance(g)
 
 Other mgcv tidiers: \code{\link{glance.gam}}
 }
+\concept{mgcv tidiers}

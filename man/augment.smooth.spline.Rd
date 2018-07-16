@@ -61,3 +61,4 @@ ggplot(augment(spl, mtcars), aes(wt, mpg)) +
 
 Other smoothing spline tidiers: \code{\link{glance.smooth.spline}}
 }
+\concept{smoothing spline tidiers}

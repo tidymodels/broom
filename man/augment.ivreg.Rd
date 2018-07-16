@@ -79,9 +79,32 @@ We are in the process of defining behaviors for models fit with various
 \link{na.action} arguments, but make no guarantees about behavior when data is
 missing at this time.
 }
+\examples{
+
+library(AER)
+
+data("CigarettesSW", package = "AER")
+ivr <- ivreg(
+  log(packs) ~ income | population,
+  data = CigarettesSW,
+  subset = year == "1995"
+)
+
+summary(ivr)
+
+tidy(ivr)
+tidy(ivr, conf.int = TRUE)
+tidy(ivr, conf.int = TRUE, exponentiate = TRUE)
+
+augment(ivr)
+
+glance(ivr)
+
+}
 \seealso{
 \code{\link[=augment]{augment()}}, \code{\link[AER:ivreg]{AER::ivreg()}}
 
 Other ivreg tidiers: \code{\link{glance.ivreg}},
   \code{\link{tidy.ivreg}}
 }
+\concept{ivreg tidiers}

@@ -97,3 +97,4 @@ if (requireNamespace("glmnet", quietly = TRUE)) {
 Other glmnet tidiers: \code{\link{glance.cv.glmnet}},
   \code{\link{glance.glmnet}}, \code{\link{tidy.glmnet}}
 }
+\concept{glmnet tidiers}

@@ -79,3 +79,4 @@ if (require("lavaan", quietly = TRUE)) {
 
 Other lavaan tidiers: \code{\link{tidy.lavaan}}
 }
+\concept{lavaan tidiers}

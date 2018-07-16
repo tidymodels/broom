@@ -63,3 +63,5 @@ Other survival tidiers: \code{\link{augment.coxph}},
   \code{\link{tidy.survexp}}, \code{\link{tidy.survfit}},
   \code{\link{tidy.survreg}}
 }
+\concept{cch tidiers}
+\concept{survival tidiers}

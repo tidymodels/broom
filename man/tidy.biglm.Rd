@@ -88,3 +88,4 @@ if (require("biglm", quietly = TRUE)) {
 
 Other biglm tidiers: \code{\link{glance.biglm}}
 }
+\concept{biglm tidiers}

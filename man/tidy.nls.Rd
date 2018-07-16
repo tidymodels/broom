@@ -5,8 +5,8 @@
 \alias{nls_tidiers}
 \title{Tidy a(n) nls object}
 \usage{
-\method{tidy}{nls}(x, conf.int = FALSE, conf.level = 0.95, quick = FALSE,
-  ...)
+\method{tidy}{nls}(x, conf.int = FALSE, conf.level = 0.95,
+  quick = FALSE, ...)
 }
 \arguments{
 \item{x}{An \code{nls} object returned from \code{\link[stats:nls]{stats::nls()}}.}
@@ -80,3 +80,4 @@ augment(n, newdata = newdata)
 Other nls tidiers: \code{\link{augment.nls}},
   \code{\link{glance.nls}}
 }
+\concept{nls tidiers}

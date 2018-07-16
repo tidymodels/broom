@@ -49,3 +49,4 @@ returned rather than printed.
 
 Other ridgelm tidiers: \code{\link{tidy.ridgelm}}
 }
+\concept{ridgelm tidiers}

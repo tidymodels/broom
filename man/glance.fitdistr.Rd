@@ -46,3 +46,4 @@ the measure will be reported as \code{NA}.
 
 Other fitdistr tidiers: \code{\link{tidy.fitdistr}}
 }
+\concept{fitdistr tidiers}

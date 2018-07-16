@@ -131,3 +131,4 @@ Other lm tidiers: \code{\link{augment.glm}},
   \code{\link{augment.lm}}, \code{\link{glance.glm}},
   \code{\link{glance.lm}}, \code{\link{tidy.glm}}
 }
+\concept{lm tidiers}

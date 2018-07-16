@@ -53,3 +53,4 @@ augment(mod, mtcars)
 Other factanal tidiers: \code{\link{augment.factanal}},
   \code{\link{glance.factanal}}
 }
+\concept{factanal tidiers}

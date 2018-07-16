@@ -78,3 +78,4 @@ glance(mod)
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[betareg:betareg]{betareg::betareg()}}
 }
+\concept{betareg tidiers}

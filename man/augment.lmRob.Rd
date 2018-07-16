@@ -69,3 +69,4 @@ Other robust tidiers: \code{\link{augment.glmRob}},
   \code{\link{glance.glmRob}}, \code{\link{glance.lmRob}},
   \code{\link{tidy.glmRob}}, \code{\link{tidy.lmRob}}
 }
+\concept{robust tidiers}
