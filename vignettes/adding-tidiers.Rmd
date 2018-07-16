@@ -67,7 +67,7 @@ You should also be aware of the following helper functions:
 
 # Documenting new tidiers
 
-All new tidiers should be fully documented following the [tidyverse code documentation guidelines](http://style.tidyverse.org/code-documentation.html). Documentation should use full sentences with appropriate punctation. Documentation should also contain at least one but potentially several examples of how the tidiers can be used.
+All new tidiers should be fully documented following the [tidyverse code documentation guidelines](http://style.tidyverse.org/). Documentation should use full sentences with appropriate punctation. Documentation should also contain at least one but potentially several examples of how the tidiers can be used.
 
 Documentation make use of [`rmarkdown`](https://cran.r-project.org/web/packages/roxygen2/vignettes/markdown.html).
 

@@ -33,7 +33,7 @@ Authors@R: c(
     person("Erle", "Holgersen", email = "erle.holgersen@gmail.com", role = "ctb"),
     person("Karl", "Dunkle Werner", role = "ctb"))
 Maintainer: David Robinson <admiral.david@gmail.com>
-Description: Broom summarizes key information about statistical objects in tidy
+Description: Summarizes key information about statistical objects in tidy
     tibbles. This makes it easy to report results, create plots and consistently
     work with large numbers of models at once. Broom provides three verbs that 
     each provide different types of information about a model. `tidy()`

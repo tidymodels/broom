@@ -23,7 +23,7 @@ Additional details may be found in NEWS.md.
 
 ## R CMD check results
 
-There were no ERRORs, WARNINGs or NOTEs.
+There was 1 NOTE about a URL not in CRAN canonical form. This is because the Github page provides much more information about the project than the CRAN page.
 
 ## Reverse dependencies
 
