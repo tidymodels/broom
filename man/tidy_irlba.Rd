@@ -82,5 +82,3 @@ Other list tidiers: \code{\link{glance_optim}},
 Other svd tidiers: \code{\link{augment.prcomp}},
   \code{\link{tidy.prcomp}}, \code{\link{tidy_svd}}
 }
-\concept{list tidiers}
-\concept{svd tidiers}

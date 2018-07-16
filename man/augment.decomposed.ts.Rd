@@ -124,4 +124,3 @@ ggplot(decomps) +
 
 Other decompose tidiers: \code{\link{augment.stl}}
 }
-\concept{decompose tidiers}

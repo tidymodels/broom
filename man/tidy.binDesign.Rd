@@ -55,4 +55,3 @@ if (require("binGroup", quietly = TRUE)) {
 Other bingroup tidiers: \code{\link{glance.binDesign}},
   \code{\link{tidy.binWidth}}
 }
-\concept{bingroup tidiers}

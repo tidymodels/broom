@@ -54,4 +54,3 @@ Other anova tidiers: \code{\link{tidy.TukeyHSD}},
   \code{\link{tidy.anova}}, \code{\link{tidy.aovlist}},
   \code{\link{tidy.manova}}
 }
-\concept{anova tidiers}

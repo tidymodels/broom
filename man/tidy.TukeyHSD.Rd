@@ -55,4 +55,3 @@ Other anova tidiers: \code{\link{tidy.anova}},
   \code{\link{tidy.aovlist}}, \code{\link{tidy.aov}},
   \code{\link{tidy.manova}}
 }
-\concept{anova tidiers}

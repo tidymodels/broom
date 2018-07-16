@@ -86,4 +86,3 @@ glance(ivr)
 Other ivreg tidiers: \code{\link{augment.ivreg}},
   \code{\link{glance.ivreg}}
 }
-\concept{ivreg tidiers}

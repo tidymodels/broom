@@ -47,4 +47,3 @@ tidy(pacf(lh, plot = FALSE))
 Other time series tidiers: \code{\link{tidy.spec}},
   \code{\link{tidy.ts}}, \code{\link{tidy.zoo}}
 }
-\concept{time series tidiers}

@@ -61,4 +61,3 @@ Other list tidiers: \code{\link{glance_optim}},
   \code{\link{list_tidiers}}, \code{\link{tidy_irlba}},
   \code{\link{tidy_svd}}, \code{\link{tidy_xyz}}
 }
-\concept{list tidiers}

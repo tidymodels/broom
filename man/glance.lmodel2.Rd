@@ -46,4 +46,3 @@ the measure will be reported as \code{NA}.
 
 Other lmodel2 tidiers: \code{\link{tidy.lmodel2}}
 }
-\concept{lmodel2 tidiers}

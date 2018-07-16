@@ -115,4 +115,3 @@ ggplot(au, aes(.fittedPC1, .fittedPC2)) +
 Other svd tidiers: \code{\link{augment.prcomp}},
   \code{\link{tidy_irlba}}, \code{\link{tidy_svd}}
 }
-\concept{svd tidiers}

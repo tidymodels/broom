@@ -55,4 +55,3 @@ the measure will be reported as \code{NA}.
 Other factanal tidiers: \code{\link{augment.factanal}},
   \code{\link{tidy.factanal}}
 }
-\concept{factanal tidiers}

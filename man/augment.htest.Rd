@@ -82,4 +82,3 @@ Other htest tidiers: \code{\link{tidy.htest}},
   \code{\link{tidy.pairwise.htest}},
   \code{\link{tidy.power.htest}}
 }
-\concept{htest tidiers}

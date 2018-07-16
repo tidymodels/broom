@@ -51,4 +51,3 @@ the measure will be reported as \code{NA}.
 Other plm tidiers: \code{\link{augment.plm}},
   \code{\link{tidy.plm}}
 }
-\concept{plm tidiers}

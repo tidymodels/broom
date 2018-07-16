@@ -67,4 +67,3 @@ tidy(pairwise.wilcox.test(Petal.Length, Species))
 Other htest tidiers: \code{\link{augment.htest}},
   \code{\link{tidy.htest}}, \code{\link{tidy.power.htest}}
 }
-\concept{htest tidiers}

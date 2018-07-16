@@ -159,12 +159,12 @@ Version: 1.12.0
       Attributes: < Component "class": Lengths (1, 3) differ (string compare on first 1) >
       Attributes: < Component "class": 1 string mismatch >
       
-      [31m──[39m [31m2. Failure: voomWithQualityWeights tidier adds weight and sample.weight columns (@test-limma_tid[39m
+      [31m──[39m [31m2. Failure: voomWithQualityWeights tidier adds weight and sample.weight columns (@test-limma_tidi[39m
       transform(td, weight = NULL) not equal to `ld`.
       Attributes: < Component "class": Lengths (1, 3) differ (string compare on first 1) >
       Attributes: < Component "class": 1 string mismatch >
       
-      ══ testthat results  ══════════════════════════════════════════════════════════════════════════════
+      ══ testthat results  ═══════════════════════════════════════════════════════════════════════════════
       OK: 48 SKIPPED: 0 FAILED: 2
       1. Failure: voom tidier adds weight column (@test-limma_tidiers.R#43) 
       2. Failure: voomWithQualityWeights tidier adds weight and sample.weight columns (@test-limma_tidiers.R#70) 
@@ -179,7 +179,7 @@ Version: 1.12.0
     ```
     Re-running with no redirection of stdout/stderr.
     Hmm ... looks like a package
-    You may want to clean up by 'rm -Rf /var/folders/30/hnwqgmvn6cl_mvs6l1486jnh0000gp/T//Rtmpn2vRQV/Rd2pdf286067cc78b3'
+    You may want to clean up by 'rm -Rf /var/folders/30/hnwqgmvn6cl_mvs6l1486jnh0000gp/T//RtmpmXkC2K/Rd2pdf14c704e3fb65f'
     ```
 
 *   checking re-building of vignette outputs ... WARNING
@@ -385,17 +385,17 @@ Version: 0.1.0
     This typically indicates Rd problems.
     ```
 
-# ciTools
+# ChIPexoQual
 
-Version: 0.3.0
+Version: 1.4.0
 
-## Newly broken
+## In both
 
 *   checking PDF version of manual without hyperrefs or index ... ERROR
     ```
     Re-running with no redirection of stdout/stderr.
     Hmm ... looks like a package
-    You may want to clean up by 'rm -Rf /var/folders/30/hnwqgmvn6cl_mvs6l1486jnh0000gp/T//RtmpruetoA/Rd2pdf35d92a1d5c26'
+    You may want to clean up by 'rm -Rf /var/folders/30/hnwqgmvn6cl_mvs6l1486jnh0000gp/T//RtmpSaekbC/Rd2pdf14ead1924b4eb'
     ```
 
 *   checking PDF version of manual ... WARNING
@@ -404,11 +404,89 @@ Version: 0.3.0
     This typically indicates Rd problems.
     ```
 
-## Newly fixed
+# ciTools
 
-*   R CMD check timed out
-    
+Version: 0.3.0
 
+## In both
+
+*   checking PDF version of manual without hyperrefs or index ... ERROR
+    ```
+    Re-running with no redirection of stdout/stderr.
+    Hmm ... looks like a package
+    You may want to clean up by 'rm -Rf /var/folders/30/hnwqgmvn6cl_mvs6l1486jnh0000gp/T//RtmpyxY4bJ/Rd2pdf150a86469704e'
+    ```
+
+*   checking PDF version of manual ... WARNING
+    ```
+    LaTeX errors when creating PDF version.
+    This typically indicates Rd problems.
+    ```
+
+# crawl
+
+Version: 2.1.1
+
+## In both
+
+*   checking whether package ‘crawl’ can be installed ... ERROR
+    ```
+    Installation failed.
+    See ‘/Users/alexhayes/Documents/broom/revdep/checks.noindex/crawl/new/crawl.Rcheck/00install.out’ for details.
+    ```
+
+## Installation
+
+### Devel
+
+```
+* installing *source* package ‘crawl’ ...
+** package ‘crawl’ successfully unpacked and MD5 sums checked
+** libs
+clang++  -I"/Library/Frameworks/R.framework/Resources/include" -DNDEBUG  -I"/Users/alexhayes/Documents/broom/revdep/library.noindex/crawl/Rcpp/include" -I"/Users/alexhayes/Documents/broom/revdep/library.noindex/crawl/RcppArmadillo/include" -I/usr/local/include   -fPIC  -Wall -g -O2  -c CTCRWN2LL.cpp -o CTCRWN2LL.o
+clang++  -I"/Library/Frameworks/R.framework/Resources/include" -DNDEBUG  -I"/Users/alexhayes/Documents/broom/revdep/library.noindex/crawl/Rcpp/include" -I"/Users/alexhayes/Documents/broom/revdep/library.noindex/crawl/RcppArmadillo/include" -I/usr/local/include   -fPIC  -Wall -g -O2  -c CTCRWN2LL_DRIFT.cpp -o CTCRWN2LL_DRIFT.o
+clang++  -I"/Library/Frameworks/R.framework/Resources/include" -DNDEBUG  -I"/Users/alexhayes/Documents/broom/revdep/library.noindex/crawl/Rcpp/include" -I"/Users/alexhayes/Documents/broom/revdep/library.noindex/crawl/RcppArmadillo/include" -I/usr/local/include   -fPIC  -Wall -g -O2  -c CTCRWPREDICT.cpp -o CTCRWPREDICT.o
+clang++  -I"/Library/Frameworks/R.framework/Resources/include" -DNDEBUG  -I"/Users/alexhayes/Documents/broom/revdep/library.noindex/crawl/Rcpp/include" -I"/Users/alexhayes/Documents/broom/revdep/library.noindex/crawl/RcppArmadillo/include" -I/usr/local/include   -fPIC  -Wall -g -O2  -c CTCRWPREDICT_DRIFT.cpp -o CTCRWPREDICT_DRIFT.o
+clang++  -I"/Library/Frameworks/R.framework/Resources/include" -DNDEBUG  -I"/Users/alexhayes/Documents/broom/revdep/library.noindex/crawl/Rcpp/include" -I"/Users/alexhayes/Documents/broom/revdep/library.noindex/crawl/RcppArmadillo/include" -I/usr/local/include   -fPIC  -Wall -g -O2  -c CTCRWSAMPLE.cpp -o CTCRWSAMPLE.o
+clang++  -I"/Library/Frameworks/R.framework/Resources/include" -DNDEBUG  -I"/Users/alexhayes/Documents/broom/revdep/library.noindex/crawl/Rcpp/include" -I"/Users/alexhayes/Documents/broom/revdep/library.noindex/crawl/RcppArmadillo/include" -I/usr/local/include   -fPIC  -Wall -g -O2  -c CTCRWSAMPLE_DRIFT.cpp -o CTCRWSAMPLE_DRIFT.o
+clang++  -I"/Library/Frameworks/R.framework/Resources/include" -DNDEBUG  -I"/Users/alexhayes/Documents/broom/revdep/library.noindex/crawl/Rcpp/include" -I"/Users/alexhayes/Documents/broom/revdep/library.noindex/crawl/RcppArmadillo/include" -I/usr/local/include   -fPIC  -Wall -g -O2  -c RcppExports.cpp -o RcppExports.o
+clang++  -I"/Library/Frameworks/R.framework/Resources/include" -DNDEBUG  -I"/Users/alexhayes/Documents/broom/revdep/library.noindex/crawl/Rcpp/include" -I"/Users/alexhayes/Documents/broom/revdep/library.noindex/crawl/RcppArmadillo/include" -I/usr/local/include   -fPIC  -Wall -g -O2  -c SMM_MATS.cpp -o SMM_MATS.o
+clang -I"/Library/Frameworks/R.framework/Resources/include" -DNDEBUG  -I"/Users/alexhayes/Documents/broom/revdep/library.noindex/crawl/Rcpp/include" -I"/Users/alexhayes/Documents/broom/revdep/library.noindex/crawl/RcppArmadillo/include" -I/usr/local/include   -fPIC  -Wall -g -O2  -c init.c -o init.o
+clang++ -dynamiclib -Wl,-headerpad_max_install_names -undefined dynamic_lookup -single_module -multiply_defined suppress -L/Library/Frameworks/R.framework/Resources/lib -L/usr/local/lib -o crawl.so CTCRWN2LL.o CTCRWN2LL_DRIFT.o CTCRWPREDICT.o CTCRWPREDICT_DRIFT.o CTCRWSAMPLE.o CTCRWSAMPLE_DRIFT.o RcppExports.o SMM_MATS.o init.o -L/Library/Frameworks/R.framework/Resources/lib -lRlapack -L/Library/Frameworks/R.framework/Resources/lib -lRblas -L/usr/local/gfortran/lib/gcc/x86_64-apple-darwin15/6.1.0 -L/usr/local/gfortran/lib -lgfortran -lquadmath -lm -F/Library/Frameworks/R.framework/.. -framework R -Wl,-framework -Wl,CoreFoundation
+ld: warning: directory not found for option '-L/usr/local/gfortran/lib/gcc/x86_64-apple-darwin15/6.1.0'
+ld: warning: directory not found for option '-L/usr/local/gfortran/lib'
+ld: library not found for -lgfortran
+clang: error: linker command failed with exit code 1 (use -v to see invocation)
+make: *** [crawl.so] Error 1
+ERROR: compilation failed for package ‘crawl’
+* removing ‘/Users/alexhayes/Documents/broom/revdep/checks.noindex/crawl/new/crawl.Rcheck/crawl’
+
+```
+### CRAN
+
+```
+* installing *source* package ‘crawl’ ...
+** package ‘crawl’ successfully unpacked and MD5 sums checked
+** libs
+clang++  -I"/Library/Frameworks/R.framework/Resources/include" -DNDEBUG  -I"/Users/alexhayes/Documents/broom/revdep/library.noindex/crawl/Rcpp/include" -I"/Users/alexhayes/Documents/broom/revdep/library.noindex/crawl/RcppArmadillo/include" -I/usr/local/include   -fPIC  -Wall -g -O2  -c CTCRWN2LL.cpp -o CTCRWN2LL.o
+clang++  -I"/Library/Frameworks/R.framework/Resources/include" -DNDEBUG  -I"/Users/alexhayes/Documents/broom/revdep/library.noindex/crawl/Rcpp/include" -I"/Users/alexhayes/Documents/broom/revdep/library.noindex/crawl/RcppArmadillo/include" -I/usr/local/include   -fPIC  -Wall -g -O2  -c CTCRWN2LL_DRIFT.cpp -o CTCRWN2LL_DRIFT.o
+clang++  -I"/Library/Frameworks/R.framework/Resources/include" -DNDEBUG  -I"/Users/alexhayes/Documents/broom/revdep/library.noindex/crawl/Rcpp/include" -I"/Users/alexhayes/Documents/broom/revdep/library.noindex/crawl/RcppArmadillo/include" -I/usr/local/include   -fPIC  -Wall -g -O2  -c CTCRWPREDICT.cpp -o CTCRWPREDICT.o
+clang++  -I"/Library/Frameworks/R.framework/Resources/include" -DNDEBUG  -I"/Users/alexhayes/Documents/broom/revdep/library.noindex/crawl/Rcpp/include" -I"/Users/alexhayes/Documents/broom/revdep/library.noindex/crawl/RcppArmadillo/include" -I/usr/local/include   -fPIC  -Wall -g -O2  -c CTCRWPREDICT_DRIFT.cpp -o CTCRWPREDICT_DRIFT.o
+clang++  -I"/Library/Frameworks/R.framework/Resources/include" -DNDEBUG  -I"/Users/alexhayes/Documents/broom/revdep/library.noindex/crawl/Rcpp/include" -I"/Users/alexhayes/Documents/broom/revdep/library.noindex/crawl/RcppArmadillo/include" -I/usr/local/include   -fPIC  -Wall -g -O2  -c CTCRWSAMPLE.cpp -o CTCRWSAMPLE.o
+clang++  -I"/Library/Frameworks/R.framework/Resources/include" -DNDEBUG  -I"/Users/alexhayes/Documents/broom/revdep/library.noindex/crawl/Rcpp/include" -I"/Users/alexhayes/Documents/broom/revdep/library.noindex/crawl/RcppArmadillo/include" -I/usr/local/include   -fPIC  -Wall -g -O2  -c CTCRWSAMPLE_DRIFT.cpp -o CTCRWSAMPLE_DRIFT.o
+clang++  -I"/Library/Frameworks/R.framework/Resources/include" -DNDEBUG  -I"/Users/alexhayes/Documents/broom/revdep/library.noindex/crawl/Rcpp/include" -I"/Users/alexhayes/Documents/broom/revdep/library.noindex/crawl/RcppArmadillo/include" -I/usr/local/include   -fPIC  -Wall -g -O2  -c RcppExports.cpp -o RcppExports.o
+clang++  -I"/Library/Frameworks/R.framework/Resources/include" -DNDEBUG  -I"/Users/alexhayes/Documents/broom/revdep/library.noindex/crawl/Rcpp/include" -I"/Users/alexhayes/Documents/broom/revdep/library.noindex/crawl/RcppArmadillo/include" -I/usr/local/include   -fPIC  -Wall -g -O2  -c SMM_MATS.cpp -o SMM_MATS.o
+clang -I"/Library/Frameworks/R.framework/Resources/include" -DNDEBUG  -I"/Users/alexhayes/Documents/broom/revdep/library.noindex/crawl/Rcpp/include" -I"/Users/alexhayes/Documents/broom/revdep/library.noindex/crawl/RcppArmadillo/include" -I/usr/local/include   -fPIC  -Wall -g -O2  -c init.c -o init.o
+clang++ -dynamiclib -Wl,-headerpad_max_install_names -undefined dynamic_lookup -single_module -multiply_defined suppress -L/Library/Frameworks/R.framework/Resources/lib -L/usr/local/lib -o crawl.so CTCRWN2LL.o CTCRWN2LL_DRIFT.o CTCRWPREDICT.o CTCRWPREDICT_DRIFT.o CTCRWSAMPLE.o CTCRWSAMPLE_DRIFT.o RcppExports.o SMM_MATS.o init.o -L/Library/Frameworks/R.framework/Resources/lib -lRlapack -L/Library/Frameworks/R.framework/Resources/lib -lRblas -L/usr/local/gfortran/lib/gcc/x86_64-apple-darwin15/6.1.0 -L/usr/local/gfortran/lib -lgfortran -lquadmath -lm -F/Library/Frameworks/R.framework/.. -framework R -Wl,-framework -Wl,CoreFoundation
+ld: warning: directory not found for option '-L/usr/local/gfortran/lib/gcc/x86_64-apple-darwin15/6.1.0'
+ld: warning: directory not found for option '-L/usr/local/gfortran/lib'
+ld: library not found for -lgfortran
+clang: error: linker command failed with exit code 1 (use -v to see invocation)
+make: *** [crawl.so] Error 1
+ERROR: compilation failed for package ‘crawl’
+* removing ‘/Users/alexhayes/Documents/broom/revdep/checks.noindex/crawl/old/crawl.Rcheck/crawl’
+
+```
 # dotwhisker
 
 Version: 0.5.0
@@ -434,15 +512,91 @@ Version: 1.1
 
 ## In both
 
-*   R CMD check timed out
-    
+*   checking PDF version of manual without hyperrefs or index ... ERROR
+    ```
+    Re-running with no redirection of stdout/stderr.
+    Hmm ... looks like a package
+    You may want to clean up by 'rm -Rf /var/folders/30/hnwqgmvn6cl_mvs6l1486jnh0000gp/T//RtmpfjRGuj/Rd2pdf1585536d418be'
+    ```
+
+*   checking PDF version of manual ... WARNING
+    ```
+    LaTeX errors when creating PDF version.
+    This typically indicates Rd problems.
+    ```
 
 *   checking installed package size ... NOTE
     ```
-      installed size is  7.0Mb
+      installed size is  6.4Mb
       sub-directories of 1Mb or more:
-        data   5.6Mb
+        data   5.1Mb
         doc    1.2Mb
+    ```
+
+# enviGCMS
+
+Version: 0.5.0
+
+## In both
+
+*   checking PDF version of manual without hyperrefs or index ... ERROR
+    ```
+    Re-running with no redirection of stdout/stderr.
+    Hmm ... looks like a package
+    You may want to clean up by 'rm -Rf /var/folders/30/hnwqgmvn6cl_mvs6l1486jnh0000gp/T//RtmprsTBfK/Rd2pdf15d895bc6f447'
+    ```
+
+*   checking PDF version of manual ... WARNING
+    ```
+    LaTeX errors when creating PDF version.
+    This typically indicates Rd problems.
+    ```
+
+*   checking dependencies in R code ... NOTE
+    ```
+    Unable to find any JVMs matching version "(null)".
+    No Java runtime present, try --request to install.
+    Namespaces in Imports field not imported from:
+      ‘BiocParallel’ ‘broom’ ‘reshape2’ ‘rmarkdown’
+      All declared Imports should be used.
+    ```
+
+# ERSA
+
+Version: 0.1.0
+
+## Newly broken
+
+*   checking examples ... WARNING
+    ```
+    Found the following significant warnings:
+    
+      Warning: 'tidy.matrix' is deprecated.
+    Deprecated functions may be defunct as soon as of the next release of
+    R.
+    See ?Deprecated.
+    ```
+
+## In both
+
+*   checking PDF version of manual without hyperrefs or index ... ERROR
+    ```
+    Re-running with no redirection of stdout/stderr.
+    Hmm ... looks like a package
+    You may want to clean up by 'rm -Rf /var/folders/30/hnwqgmvn6cl_mvs6l1486jnh0000gp/T//RtmpQFLhVg/Rd2pdf16bb446242700'
+    ```
+
+*   checking PDF version of manual ... WARNING
+    ```
+    LaTeX errors when creating PDF version.
+    This typically indicates Rd problems.
+    ```
+
+*   checking dependencies in R code ... NOTE
+    ```
+    Namespaces in Imports field not imported from:
+      ‘RColorBrewer’ ‘modelr’
+      All declared Imports should be used.
     ```
 
 # eurostat
@@ -507,8 +661,18 @@ Version: 0.1.7
 
 ## In both
 
-*   R CMD check timed out
-    
+*   checking PDF version of manual without hyperrefs or index ... ERROR
+    ```
+    Re-running with no redirection of stdout/stderr.
+    Hmm ... looks like a package
+    You may want to clean up by 'rm -Rf /var/folders/30/hnwqgmvn6cl_mvs6l1486jnh0000gp/T//RtmpzSXCVq/Rd2pdf169e52ff4f5ab'
+    ```
+
+*   checking PDF version of manual ... WARNING
+    ```
+    LaTeX errors when creating PDF version.
+    This typically indicates Rd problems.
+    ```
 
 # fivethirtyeight
 
@@ -552,8 +716,18 @@ Version: 0.5.0
 
 ## In both
 
-*   R CMD check timed out
-    
+*   checking PDF version of manual without hyperrefs or index ... ERROR
+    ```
+    Re-running with no redirection of stdout/stderr.
+    Hmm ... looks like a package
+    You may want to clean up by 'rm -Rf /var/folders/30/hnwqgmvn6cl_mvs6l1486jnh0000gp/T//Rtmp7W2Hmi/Rd2pdf167a25f64359f'
+    ```
+
+*   checking PDF version of manual ... WARNING
+    ```
+    LaTeX errors when creating PDF version.
+    This typically indicates Rd problems.
+    ```
 
 # germinationmetrics
 
@@ -587,11 +761,13 @@ Version: 0.1.0
     Execution halted
     ```
 
+## In both
+
 *   checking PDF version of manual without hyperrefs or index ... ERROR
     ```
     Re-running with no redirection of stdout/stderr.
     Hmm ... looks like a package
-    You may want to clean up by 'rm -Rf /var/folders/30/hnwqgmvn6cl_mvs6l1486jnh0000gp/T//RtmpxP6w8q/Rd2pdf40b5681a515d'
+    You may want to clean up by 'rm -Rf /var/folders/30/hnwqgmvn6cl_mvs6l1486jnh0000gp/T//RtmpCY4syX/Rd2pdf16e6d45090700'
     ```
 
 *   checking re-building of vignette outputs ... WARNING
@@ -617,16 +793,74 @@ Version: 0.1.0
     This typically indicates Rd problems.
     ```
 
-## Newly fixed
+# GGally
 
-*   R CMD check timed out
-    
+Version: 1.4.0
+
+## In both
+
+*   checking PDF version of manual without hyperrefs or index ... ERROR
+    ```
+    Re-running with no redirection of stdout/stderr.
+    Hmm ... looks like a package
+    You may want to clean up by 'rm -Rf /var/folders/30/hnwqgmvn6cl_mvs6l1486jnh0000gp/T//RtmpFAEDj6/Rd2pdf170d0662e37e1'
+    ```
+
+*   checking PDF version of manual ... WARNING
+    ```
+    LaTeX errors when creating PDF version.
+    This typically indicates Rd problems.
+    ```
+
+*   checking dependencies in R code ... NOTE
+    ```
+    Unable to find any JVMs matching version "(null)".
+    No Java runtime present, try --request to install.
+    ```
+
+# ggformula
+
+Version: 0.8.0
+
+## In both
+
+*   checking PDF version of manual without hyperrefs or index ... ERROR
+    ```
+    Re-running with no redirection of stdout/stderr.
+    Hmm ... looks like a package
+    You may want to clean up by 'rm -Rf /var/folders/30/hnwqgmvn6cl_mvs6l1486jnh0000gp/T//RtmpKMyjDB/Rd2pdf17430616f755b'
+    ```
+
+*   checking PDF version of manual ... WARNING
+    ```
+    LaTeX errors when creating PDF version.
+    This typically indicates Rd problems.
+    ```
+
+*   checking dependencies in R code ... NOTE
+    ```
+    Namespace in Imports field not imported from: ‘dplyr’
+      All declared Imports should be used.
+    ```
 
 # ggpmisc
 
 Version: 0.2.17
 
-## Newly broken
+## In both
+
+*   checking PDF version of manual without hyperrefs or index ... ERROR
+    ```
+    Re-running with no redirection of stdout/stderr.
+    Hmm ... looks like a package
+    You may want to clean up by 'rm -Rf /var/folders/30/hnwqgmvn6cl_mvs6l1486jnh0000gp/T//RtmpXSAAnd/Rd2pdf1764f6e23ab8e'
+    ```
+
+*   checking PDF version of manual ... WARNING
+    ```
+    LaTeX errors when creating PDF version.
+    This typically indicates Rd problems.
+    ```
 
 *   checking dependencies in R code ... NOTE
     ```
@@ -635,22 +869,17 @@ Version: 0.2.17
       All declared Imports should be used.
     ```
 
-## In both
-
-*   R CMD check timed out
-    
-
 # ggsn
 
 Version: 0.4.0
 
-## Newly broken
+## In both
 
 *   checking PDF version of manual without hyperrefs or index ... ERROR
     ```
     Re-running with no redirection of stdout/stderr.
     Hmm ... looks like a package
-    You may want to clean up by 'rm -Rf /var/folders/30/hnwqgmvn6cl_mvs6l1486jnh0000gp/T//Rtmp6RZeVc/Rd2pdf445346a6ddc2'
+    You may want to clean up by 'rm -Rf /var/folders/30/hnwqgmvn6cl_mvs6l1486jnh0000gp/T//RtmpmQ4IS5/Rd2pdf1799b22e71866'
     ```
 
 *   checking PDF version of manual ... WARNING
@@ -659,22 +888,84 @@ Version: 0.4.0
     This typically indicates Rd problems.
     ```
 
-## Newly fixed
+# ggstatsplot
 
-*   R CMD check timed out
-    
+Version: 0.0.4
+
+## In both
+
+*   checking tests ...
+    ```
+     ERROR
+    Running the tests in ‘tests/testthat.R’ failed.
+    Last 13 lines of output:
+      3: gdtools::version_freetype
+      4: getExportedValue(pkg, name)
+      5: asNamespace(ns)
+      6: getNamespace(ns)
+      7: tryCatch(loadNamespace(name), error = function(e) stop(e))
+      8: tryCatchList(expr, classes, parentenv, handlers)
+      9: tryCatchOne(expr, names, parentenv, handlers[[1L]])
+      10: value[[3L]](cond)
+      
+      ══ testthat results  ══════════════════════════════════════════════════════════════════════════════
+      OK: 0 SKIPPED: 0 FAILED: 1
+      1. Error: ggbetweenstats working correctly? (@test_ggbetweenstats.R#15) 
+      
+      Error: testthat unit tests failed
+      Execution halted
+    ```
+
+*   checking PDF version of manual without hyperrefs or index ... ERROR
+    ```
+    Re-running with no redirection of stdout/stderr.
+    Hmm ... looks like a package
+    You may want to clean up by 'rm -Rf /var/folders/30/hnwqgmvn6cl_mvs6l1486jnh0000gp/T//RtmpglMXUu/Rd2pdfafa1c125adc'
+    ```
+
+*   checking PDF version of manual ... WARNING
+    ```
+    LaTeX errors when creating PDF version.
+    This typically indicates Rd problems.
+    ```
+
+*   checking dependencies in R code ... NOTE
+    ```
+    Namespaces in Imports field not imported from:
+      ‘MBESS’ ‘apaTables’
+      All declared Imports should be used.
+    ```
+
+# glmmfields
+
+Version: 0.1.0
+
+## In both
+
+*   checking PDF version of manual without hyperrefs or index ... ERROR
+    ```
+    Re-running with no redirection of stdout/stderr.
+    Hmm ... looks like a package
+    You may want to clean up by 'rm -Rf /var/folders/30/hnwqgmvn6cl_mvs6l1486jnh0000gp/T//Rtmp2dzIIy/Rd2pdf17c877ac41f3b'
+    ```
+
+*   checking PDF version of manual ... WARNING
+    ```
+    LaTeX errors when creating PDF version.
+    This typically indicates Rd problems.
+    ```
 
 # groupdata2
 
 Version: 1.0.0
 
-## Newly broken
+## In both
 
 *   checking PDF version of manual without hyperrefs or index ... ERROR
     ```
     Re-running with no redirection of stdout/stderr.
     Hmm ... looks like a package
-    You may want to clean up by 'rm -Rf /var/folders/30/hnwqgmvn6cl_mvs6l1486jnh0000gp/T//RtmpVsYGAy/Rd2pdf467a44cc121'
+    You may want to clean up by 'rm -Rf /var/folders/30/hnwqgmvn6cl_mvs6l1486jnh0000gp/T//RtmpFsB5re/Rd2pdf1828313439d1c'
     ```
 
 *   checking PDF version of manual ... WARNING
@@ -683,10 +974,24 @@ Version: 1.0.0
     This typically indicates Rd problems.
     ```
 
-## Newly fixed
+# groupedstats
 
-*   R CMD check timed out
-    
+Version: 0.0.1
+
+## In both
+
+*   checking PDF version of manual without hyperrefs or index ... ERROR
+    ```
+    Re-running with no redirection of stdout/stderr.
+    Hmm ... looks like a package
+    You may want to clean up by 'rm -Rf /var/folders/30/hnwqgmvn6cl_mvs6l1486jnh0000gp/T//Rtmpl168Nw/Rd2pdff9e5673a2cb'
+    ```
+
+*   checking PDF version of manual ... WARNING
+    ```
+    LaTeX errors when creating PDF version.
+    This typically indicates Rd problems.
+    ```
 
 # healthcareai
 
@@ -694,8 +999,123 @@ Version: 2.1.0
 
 ## In both
 
-*   R CMD check timed out
+*   checking PDF version of manual without hyperrefs or index ... ERROR
+    ```
+    Re-running with no redirection of stdout/stderr.
+    Hmm ... looks like a package
+    You may want to clean up by 'rm -Rf /var/folders/30/hnwqgmvn6cl_mvs6l1486jnh0000gp/T//RtmpSbQH4o/Rd2pdf1854278c7429f'
+    ```
+
+*   checking PDF version of manual ... WARNING
+    ```
+    LaTeX errors when creating PDF version.
+    This typically indicates Rd problems.
+    ```
+
+# highcharter
+
+Version: 0.5.0
+
+## In both
+
+*   checking PDF version of manual without hyperrefs or index ... ERROR
+    ```
+    Re-running with no redirection of stdout/stderr.
+    Hmm ... looks like a package
+    You may want to clean up by 'rm -Rf /var/folders/30/hnwqgmvn6cl_mvs6l1486jnh0000gp/T//RtmpgGp54u/Rd2pdf128a446f00c9'
+    ```
+
+*   checking PDF version of manual ... WARNING
+    ```
+    LaTeX errors when creating PDF version.
+    This typically indicates Rd problems.
+    ```
+
+*   checking installed package size ... NOTE
+    ```
+      installed size is 16.5Mb
+      sub-directories of 1Mb or more:
+        doc          13.7Mb
+        htmlwidgets   1.8Mb
+    ```
+
+# huxtable
+
+Version: 4.0.1
+
+## In both
+
+*   checking examples ... ERROR
+    ```
+    ...
+    Running examples in ‘huxtable-Ex.R’ failed
+    The error most likely occurred in:
     
+    > ### Name: as_FlexTable
+    > ### Title: Convert a huxtable for Word/Powerpoint
+    > ### Aliases: as_FlexTable as_flextable as_flextable.huxtable
+    > 
+    > ### ** Examples
+    > 
+    > ht <- hux(a = 1:3, b = 1:3)
+    > ft <- as_flextable(ht)
+    Loading required namespace: flextable
+    Failed with error:  ‘unable to load shared object '/Users/alexhayes/Documents/broom/revdep/library.noindex/huxtable/gdtools/libs/gdtools.so':
+      dlopen(/Users/alexhayes/Documents/broom/revdep/library.noindex/huxtable/gdtools/libs/gdtools.so, 6): Library not loaded: /opt/X11/lib/libcairo.2.dylib
+      Referenced from: /Users/alexhayes/Documents/broom/revdep/library.noindex/huxtable/gdtools/libs/gdtools.so
+      Reason: image not found’
+    Error in as_flextable.huxtable(ht) : 
+      as_flextable requires the flextable package. To install, type:
+    install.packages("flextable")
+    Calls: as_flextable -> as_flextable.huxtable
+    Execution halted
+    ```
+
+*   checking tests ...
+    ```
+     ERROR
+    Running the tests in ‘tests/testthat.R’ failed.
+    Last 13 lines of output:
+      ══ testthat results  ══════════════════════════════════════════════════════════════════════════════
+      OK: 460 SKIPPED: 51 FAILED: 14
+      1. Failure: Simple conversion works (@test-flextable.R#10) 
+      2. Error: Simple conversion works (@test-flextable.R#11) 
+      3. Failure: Text properties work (@test-flextable.R#23) 
+      4. Failure: Borders work (@test-flextable.R#33) 
+      5. Error: background colour works (@test-flextable.R#40) 
+      6. Error: merged cells work (@test-flextable.R#48) 
+      7. Error: row heights and column widths work (@test-flextable.R#56) 
+      8. Failure: colnames_to_header argument (@test-flextable.R#62) 
+      9. Failure: colnames_to_header argument (@test-flextable.R#63) 
+      1. ...
+      
+      Error: testthat unit tests failed
+      Execution halted
+    ```
+
+*   checking PDF version of manual without hyperrefs or index ... ERROR
+    ```
+    Re-running with no redirection of stdout/stderr.
+    Hmm ... looks like a package
+    You may want to clean up by 'rm -Rf /var/folders/30/hnwqgmvn6cl_mvs6l1486jnh0000gp/T//RtmpKD0Ejm/Rd2pdf15cb527339f7'
+    ```
+
+*   checking re-building of vignette outputs ... WARNING
+    ```
+    Error in re-building vignettes:
+      ...
+    Warning in system2(..., stdout = FALSE, stderr = FALSE) :
+      error in running command
+    Error: processing vignette 'huxtable.Rmd' failed with diagnostics:
+    Failed to compile huxtable.tex.
+    Execution halted
+    ```
+
+*   checking PDF version of manual ... WARNING
+    ```
+    LaTeX errors when creating PDF version.
+    This typically indicates Rd problems.
+    ```
 
 # infer
 
@@ -965,13 +1385,13 @@ Version: 3.1.0
       
       > 
       > test_check("mice")
-      [31m──[39m [31m1. Error: (unknown) (@test-D1.R#13) [39m [31m─────────────────────────────[39m
+      [31m──[39m [31m1. Error: (unknown) (@test-D1.R#13) [39m [31m───────────────────────────────────────────────────────────[39m
       Non-numeric argument to mathematical function
       1: D1(fit1, fit0) at testthat/test-D1.R:13
       2: testModels(fit1, fit0, method = "D1", df.com = df.com)
       3: pf(val, k, v)
       
-      ══ testthat results  ════════════════════════════════════════════════
+      ══ testthat results  ══════════════════════════════════════════════════════════════════════════════
       OK: 269 SKIPPED: 0 FAILED: 1
       1. Error: (unknown) (@test-D1.R#13) 
       
@@ -985,7 +1405,7 @@ Version: 3.1.0
     ```
     Re-running with no redirection of stdout/stderr.
     Hmm ... looks like a package
-    You may want to clean up by 'rm -Rf /var/folders/30/hnwqgmvn6cl_mvs6l1486jnh0000gp/T//RtmpCAIETM/Rd2pdf66e127c7a46a'
+    You may want to clean up by 'rm -Rf /var/folders/30/hnwqgmvn6cl_mvs6l1486jnh0000gp/T//RtmpxDdtPL/Rd2pdf1adf405f7c18'
     ```
 
 *   checking PDF version of manual ... WARNING
@@ -1221,11 +1641,11 @@ Version: 1.1.1
       > library(nlstimedist)
       > 
       > test_check("nlstimedist")
-      [31m──[39m [31m1. Failure: Ensure the glance method is returning expected values [39m
+      [31m──[39m [31m1. Failure: Ensure the glance method is returning expected values (@test-glance.timedist.R#19) [39m 
       `out` not equal to `expect`.
       Rows in x but not y: 1. Rows in y but not x: 1. 
       
-      ══ testthat results  ════════════════════════════════════════════════
+      ══ testthat results  ══════════════════════════════════════════════════════════════════════════════
       OK: 6 SKIPPED: 0 FAILED: 1
       1. Failure: Ensure the glance method is returning expected values (@test-glance.timedist.R#19) 
       
@@ -1239,7 +1659,7 @@ Version: 1.1.1
     ```
     Re-running with no redirection of stdout/stderr.
     Hmm ... looks like a package
-    You may want to clean up by 'rm -Rf /var/folders/30/hnwqgmvn6cl_mvs6l1486jnh0000gp/T//RtmplswPdI/Rd2pdf75871f1417b5'
+    You may want to clean up by 'rm -Rf /var/folders/30/hnwqgmvn6cl_mvs6l1486jnh0000gp/T//RtmpjfTbBo/Rd2pdf1d8568f76540'
     ```
 
 *   checking PDF version of manual ... WARNING
@@ -1275,7 +1695,7 @@ Version: 1.1.1
     ```
     Re-running with no redirection of stdout/stderr.
     Hmm ... looks like a package
-    You may want to clean up by 'rm -Rf /var/folders/30/hnwqgmvn6cl_mvs6l1486jnh0000gp/T//RtmpbDFlCP/Rd2pdf7637b7d0e71'
+    You may want to clean up by 'rm -Rf /var/folders/30/hnwqgmvn6cl_mvs6l1486jnh0000gp/T//RtmpNAnoU2/Rd2pdf22af153184af'
     ```
 
 *   checking PDF version of manual ... WARNING
@@ -1289,6 +1709,28 @@ Version: 1.1.1
 Version: 1.0.1
 
 ## Newly broken
+
+*   checking tests ...
+    ```
+     ERROR
+    Running the tests in ‘tests/testthat.R’ failed.
+    Last 13 lines of output:
+      5: eval_bare(get_expr(quo), get_env(quo))
+      6: perc_diff(smoking_data, Smoke, Pulse)
+      7: lcmb[1, 4, drop = TRUE]
+      8: `[.tbl_df`(lcmb, 1, 4, drop = TRUE)
+      9: check_names_df(j, x)
+      10: check_names_df.numeric(j, x)
+      11: stopc(pluralise_msg(paste0("Column index(es) must be at most ", length(x), " if positive, not "), j[pos_too_large]))
+      12: abort(paste0(...))
+      
+      ══ testthat results  ══════════════════════════════════════════════════════════════════════════════
+      OK: 8 SKIPPED: 0 FAILED: 1
+      1. Error: When too few categories in df, correct output (@test-perc_funs.R#55) 
+      
+      Error: testthat unit tests failed
+      Execution halted
+    ```
 
 *   checking re-building of vignette outputs ... WARNING
     ```
@@ -1322,7 +1764,7 @@ Version: 1.0.1
     ```
     Re-running with no redirection of stdout/stderr.
     Hmm ... looks like a package
-    You may want to clean up by 'rm -Rf /var/folders/30/hnwqgmvn6cl_mvs6l1486jnh0000gp/T//RtmpsVjRZl/Rd2pdf79305477979e'
+    You may want to clean up by 'rm -Rf /var/folders/30/hnwqgmvn6cl_mvs6l1486jnh0000gp/T//Rtmp8WS5WF/Rd2pdf256f2e657a0d'
     ```
 
 *   checking PDF version of manual ... WARNING
@@ -1453,6 +1895,52 @@ Version: 1.2.0
     Package suggested but not available for checking: ‘airway’
     ```
 
+# psycho
+
+Version: 0.3.4
+
+## In both
+
+*   checking whether package ‘psycho’ can be installed ... ERROR
+    ```
+    Installation failed.
+    See ‘/Users/alexhayes/Documents/broom/revdep/checks.noindex/psycho/new/psycho.Rcheck/00install.out’ for details.
+    ```
+
+## Installation
+
+### Devel
+
+```
+* installing *source* package ‘psycho’ ...
+** package ‘psycho’ successfully unpacked and MD5 sums checked
+** R
+** data
+*** moving datasets to lazyload DB
+** inst
+** byte-compile and prepare package for lazy loading
+Error in loadNamespace(i, c(lib.loc, .libPaths()), versionCheck = vI[[i]]) : 
+  there is no package called ‘glasso’
+ERROR: lazy loading failed for package ‘psycho’
+* removing ‘/Users/alexhayes/Documents/broom/revdep/checks.noindex/psycho/new/psycho.Rcheck/psycho’
+
+```
+### CRAN
+
+```
+* installing *source* package ‘psycho’ ...
+** package ‘psycho’ successfully unpacked and MD5 sums checked
+** R
+** data
+*** moving datasets to lazyload DB
+** inst
+** byte-compile and prepare package for lazy loading
+Error in loadNamespace(i, c(lib.loc, .libPaths()), versionCheck = vI[[i]]) : 
+  there is no package called ‘glasso’
+ERROR: lazy loading failed for package ‘psycho’
+* removing ‘/Users/alexhayes/Documents/broom/revdep/checks.noindex/psycho/old/psycho.Rcheck/psycho’
+
+```
 # radiant.data
 
 Version: 0.9.5
@@ -1786,7 +2274,7 @@ Version: 0.4.2
     ```
     Re-running with no redirection of stdout/stderr.
     Hmm ... looks like a package
-    You may want to clean up by 'rm -Rf /var/folders/30/hnwqgmvn6cl_mvs6l1486jnh0000gp/T//Rtmp84xywZ/Rd2pdfb41a12a415da'
+    You may want to clean up by 'rm -Rf /var/folders/30/hnwqgmvn6cl_mvs6l1486jnh0000gp/T//RtmpnJRXGJ/Rd2pdf28c3277b0cc0'
     ```
 
 *   checking PDF version of manual ... WARNING
@@ -1817,11 +2305,11 @@ Version: 1.0.1
       > library(survutils)
       > 
       > test_check("survutils")
-      [31m──[39m [31m1. Failure: get_cox_res runs univariate Cox regression on a single[39m
+      [31m──[39m [31m1. Failure: get_cox_res runs univariate Cox regression on a single feature (@test_get_cox_res.R#[39m
       `out_df` not equal to `expected_out_df`.
       Rows in x but not y: 1. Rows in y but not x: 1. 
       
-      ══ testthat results  ════════════════════════════════════════════════
+      ══ testthat results  ══════════════════════════════════════════════════════════════════════════════
       OK: 6 SKIPPED: 0 FAILED: 1
       1. Failure: get_cox_res runs univariate Cox regression on a single feature (@test_get_cox_res.R#44) 
       
@@ -1835,7 +2323,7 @@ Version: 1.0.1
     ```
     Re-running with no redirection of stdout/stderr.
     Hmm ... looks like a package
-    You may want to clean up by 'rm -Rf /var/folders/30/hnwqgmvn6cl_mvs6l1486jnh0000gp/T//Rtmph49JGX/Rd2pdfb1ef5404cc0f'
+    You may want to clean up by 'rm -Rf /var/folders/30/hnwqgmvn6cl_mvs6l1486jnh0000gp/T//RtmpAKlsh7/Rd2pdf2ad01f149f7'
     ```
 
 *   checking PDF version of manual ... WARNING
@@ -2140,12 +2628,72 @@ Version: 0.1.1
 
 # TPP
 
-Version: 3.8.1
+Version: 3.8.2
+
+## Newly broken
+
+*   checking tests ...
+    ```
+     ERROR
+    Running the tests in ‘tests/testthat.R’ failed.
+    Last 13 lines of output:
+      ══ testthat results  ══════════════════════════════════════════════════════════════════════════════
+      OK: 13371 SKIPPED: 1 FAILED: 34
+      1. Error: NPARC_allok_plot (@test_analyzeTPPTR.R#61) 
+      2. Error: allOk_H0 (@test_compute_spline_auc.R#43) 
+      3. Error: allOk_H1_1 (@test_compute_spline_auc.R#58) 
+      4. Error: allOk_H1_2 (@test_compute_spline_auc.R#73) 
+      5. Error: (unknown) (@test_create_spline_plots.R#30) 
+      6. Error: allOk_names_H0 (@test_extract_fit_factors.R#30) 
+      7. Error: allOk_values_H0 (@test_extract_fit_factors.R#41) 
+      8. Error: allOk_names_H1 (@test_extract_fit_factors.R#51) 
+      9. Error: allOk_values_H1 (@test_extract_fit_factors.R#62) 
+      1. ...
+      
+      Error: testthat unit tests failed
+      Execution halted
+    ```
 
 ## In both
 
-*   R CMD check timed out
+*   checking PDF version of manual without hyperrefs or index ... ERROR
+    ```
+    Re-running with no redirection of stdout/stderr.
+    Hmm ... looks like a package
+    You may want to clean up by 'rm -Rf /var/folders/30/hnwqgmvn6cl_mvs6l1486jnh0000gp/T//Rtmpf6fkB2/Rd2pdf2e954cad5a47'
+    ```
+
+*   checking re-building of vignette outputs ... WARNING
+    ```
+    ...
+    Fitting null models to 47 proteins (using 7 degrees of freedom)
+    Fitting alternative models to 47 proteins (using 7 degrees of freedom)
+    Evaluate goodness of fit of null and alternative models.
+    Runtime (2 CPUs used): 16.65 secs
     
+    Results table created successfully.
+    
+    Joining, by = "Protein_ID"
+    Writing results to file: /Users/alexhayes/Documents/broom/revdep/checks.noindex/TPP/new/TPP.Rcheck/vign_test/TPP/vignettes/NPARC_Vignette_Example/results_TPP_TR.xlsx
+    File created successfully!
+    
+    Creating QC plots to visualize median curve fits...
+    done.
+    
+    Creating QC plots to visualize normalization effects...
+    done.
+    
+    Error in texi2dvi(file = file, pdf = TRUE, clean = clean, quiet = quiet,  : 
+      Running 'texi2dvi' on 'NPARC_analysis_of_TPP_TR_data.tex' failed.
+    Calls: buildVignettes -> texi2pdf -> texi2dvi
+    Execution halted
+    ```
+
+*   checking PDF version of manual ... WARNING
+    ```
+    LaTeX errors when creating PDF version.
+    This typically indicates Rd problems.
+    ```
 
 *   checking installed package size ... NOTE
     ```
@@ -2203,6 +2751,83 @@ Version: 0.2.13
     Package unavailable to check Rd xrefs: ‘gimms’
     ```
 
+# valr
+
+Version: 0.4.1
+
+## In both
+
+*   checking PDF version of manual without hyperrefs or index ... ERROR
+    ```
+    Re-running with no redirection of stdout/stderr.
+    Hmm ... looks like a package
+    You may want to clean up by 'rm -Rf /var/folders/30/hnwqgmvn6cl_mvs6l1486jnh0000gp/T//RtmppN9Eex/Rd2pdf329b1a83474f'
+    ```
+
+*   checking PDF version of manual ... WARNING
+    ```
+    LaTeX errors when creating PDF version.
+    This typically indicates Rd problems.
+    ```
+
+# vdmR
+
+Version: 0.2.5
+
+## In both
+
+*   checking examples ... ERROR
+    ```
+    Running examples in ‘vdmR-Ex.R’ failed
+    The error most likely occurred in:
+    
+    > ### Name: vhist
+    > ### Title: Generate histogram with interactive functions
+    > ### Aliases: vhist
+    > 
+    > ### ** Examples
+    > 
+    > data(vsfuk2012)
+    > vhist(FertilityRate, vsfuk2012, "hist1", "vsfuk2012", fill=Type)
+    `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
+    Error: $ operator is invalid for atomic vectors
+    Execution halted
+    ```
+
+*   checking PDF version of manual without hyperrefs or index ... ERROR
+    ```
+    Re-running with no redirection of stdout/stderr.
+    Hmm ... looks like a package
+    You may want to clean up by 'rm -Rf /var/folders/30/hnwqgmvn6cl_mvs6l1486jnh0000gp/T//RtmpXzxGy0/Rd2pdf375f5953d3c5'
+    ```
+
+*   checking re-building of vignette outputs ... WARNING
+    ```
+    Error in re-building vignettes:
+      ...
+    sh: kpsewhich: command not found
+    Warning in test_latex_pkg("framed", system.file("misc", "framed.sty", package = "knitr")) :
+      unable to find LaTeX package 'framed'; will use a copy from knitr
+    `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
+    Quitting from lines 153-155 (vdmR-vignette.Rnw) 
+    Error: processing vignette 'vdmR-vignette.Rnw' failed with diagnostics:
+    $ operator is invalid for atomic vectors
+    Execution halted
+    ```
+
+*   checking PDF version of manual ... WARNING
+    ```
+    LaTeX errors when creating PDF version.
+    This typically indicates Rd problems.
+    ```
+
+*   checking dependencies in R code ... NOTE
+    ```
+    Namespaces in Imports field not imported from:
+      ‘Rdpack’ ‘maptools’ ‘rgeos’
+      All declared Imports should be used.
+    ```
+
 # widyr
 
 Version: 0.1.1
@@ -2228,6 +2853,16 @@ Version: 0.0.1
 
 ## In both
 
-*   R CMD check timed out
-    
+*   checking PDF version of manual without hyperrefs or index ... ERROR
+    ```
+    Re-running with no redirection of stdout/stderr.
+    Hmm ... looks like a package
+    You may want to clean up by 'rm -Rf /var/folders/30/hnwqgmvn6cl_mvs6l1486jnh0000gp/T//RtmplAffss/Rd2pdf39b076a28b01'
+    ```
+
+*   checking PDF version of manual ... WARNING
+    ```
+    LaTeX errors when creating PDF version.
+    This typically indicates Rd problems.
+    ```
 

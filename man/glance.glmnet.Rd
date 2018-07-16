@@ -45,4 +45,3 @@ the measure will be reported as \code{NA}.
 Other glmnet tidiers: \code{\link{glance.cv.glmnet}},
   \code{\link{tidy.cv.glmnet}}, \code{\link{tidy.glmnet}}
 }
-\concept{glmnet tidiers}
