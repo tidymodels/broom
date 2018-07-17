@@ -72,9 +72,7 @@ are values from the response object within the model (of type
 \item{deviance}{deviance}
 }
 \description{
-\code{lme4} tidiers will soon be deprecated in \code{broom} and there is no ongoing
-development of these functions at this time. \code{lme4} tidiers are being
-developed in the \code{broom.mixed} package, which is not yet on CRAN.
+\code{lme4} tidiers are deprecated.
 }
 \details{
 These methods tidy the coefficients of mixed effects models, particularly

@@ -46,7 +46,7 @@
 
       <div class="navbar-brand-container">
         <a class="navbar-brand" href="../index.html">broom</a>
-        <small class="tidyverse">part of the <a href="http://tidyverse.org">tidyverse</a></small>
+        <small class="tidyverse">part of the <a href="https://tidyverse.org">tidyverse</a></small>
       </div>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
@@ -225,21 +225,22 @@ the <code>data</code> argument.</p></td>
 
 <span class='no'>logan2</span>$<span class='no'>case</span> <span class='kw'>&lt;-</span> (<span class='no'>logan2</span>$<span class='no'>occupation</span> <span class='kw'>==</span> <span class='no'>logan2</span>$<span class='no'>tocc</span>)
 
-<span class='no'>cl</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/survival/topics/clogit'>clogit</a></span>(<span class='no'>case</span> ~ <span class='no'>tocc</span> + <span class='no'>tocc</span>:<span class='no'>education</span> + <span class='fu'><a href='http://www.rdocumentation.org/packages/survival/topics/strata'>strata</a></span>(<span class='no'>id</span>), <span class='no'>logan2</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: X matrix deemed to be singular; variable 9</span></div><div class='input'><span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>cl</span>)</div><div class='output co'>#&gt; # A tibble: 9 x 7
+<span class='no'>cl</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/survival/topics/clogit'>clogit</a></span>(<span class='no'>case</span> ~ <span class='no'>tocc</span> + <span class='no'>tocc</span>:<span class='no'>education</span> + <span class='fu'><a href='http://www.rdocumentation.org/packages/survival/topics/strata'>strata</a></span>(<span class='no'>id</span>), <span class='no'>logan2</span>)
+<span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>cl</span>)</div><div class='output co'>#&gt; # A tibble: 9 x 7
 #&gt;   term                estimate std.error statistic   p.value conf.low conf.high
 #&gt;   &lt;chr&gt;                  &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;
 #&gt; 1 toccfarm              -1.90     1.38       -1.37  1.70e- 1  -4.60       0.810
 #&gt; 2 toccoperatives         1.17     0.566       2.06  3.91e- 2   0.0581     2.28 
-#&gt; 3 toccprofessional      -8.10     0.699     -11.6   0.        -9.47      -6.73 
+#&gt; 3 toccprofessional      -8.10     0.699     -11.6   4.45e-31  -9.47      -6.73 
 #&gt; 4 toccsales             -5.03     0.770      -6.53  6.54e-11  -6.54      -3.52 
-#&gt; 5 tocccraftsmen:educ~   -0.332    0.0569     -5.84  5.13e- 9  -0.444     -0.221
+#&gt; 5 tocccraftsmen:educ…   -0.332    0.0569     -5.84  5.13e- 9  -0.444     -0.221
 #&gt; 6 toccfarm:education    -0.370    0.116      -3.18  1.47e- 3  -0.598     -0.142
-#&gt; 7 toccoperatives:edu~   -0.422    0.0584     -7.23  4.98e-13  -0.537     -0.308
-#&gt; 8 toccprofessional:e~    0.278    0.0510      5.45  4.94e- 8   0.178      0.378
+#&gt; 7 toccoperatives:edu…   -0.422    0.0584     -7.23  4.98e-13  -0.537     -0.308
+#&gt; 8 toccprofessional:e…    0.278    0.0510      5.45  4.94e- 8   0.178      0.378
 #&gt; 9 toccsales:education   NA        0          NA    NA         NA         NA    </div><div class='input'><span class='fu'><a href='glance.html'>glance</a></span>(<span class='no'>cl</span>)</div><div class='output co'>#&gt; # A tibble: 1 x 13
 #&gt;       n nevent statistic.log p.value.log statistic.sc p.value.sc statistic.wald
 #&gt;   &lt;int&gt;  &lt;dbl&gt;         &lt;dbl&gt;       &lt;dbl&gt;        &lt;dbl&gt;      &lt;dbl&gt;          &lt;dbl&gt;
-#&gt; 1  4190    838          666.           0         682.          0           414.
+#&gt; 1  4190    838          666.   1.90e-138         682.  5.01e-142           414.
 #&gt; # ... with 6 more variables: p.value.wald &lt;dbl&gt;, r.squared &lt;dbl&gt;,
 #&gt; #   r.squared.max &lt;dbl&gt;, logLik &lt;dbl&gt;, AIC &lt;dbl&gt;, BIC &lt;dbl&gt;</div><div class='input'>
 <span class='fu'>library</span>(<span class='no'>ggplot2</span>)
@@ -270,12 +271,12 @@ the <code>data</code> argument.</p></td>
 
       <footer>
       <div class="tidyverse">
-  <p>broom is a part of the <strong>tidyverse</strong>, an ecosystem of packages designed with common APIs and a shared philosophy. Learn more at <a href="http://tidyverse.org">tidyverse.org</a>.</p>
+  <p>broom is a part of the <strong>tidyverse</strong>, an ecosystem of packages designed with common APIs and a shared philosophy. Learn more at <a href="https://tidyverse.org">tidyverse.org</a>.</p>
 </div>
 
 <div class="author">
-  <p>Developed by David Robinson.</p>
-  <p>Site built by <a href="http://pkgdown.r-lib.org">pkgdown</a>.</p>
+  <p>Developed by David Robinson, Alex Hayes.</p>
+  <p>Site built by <a href="https://pkgdown.r-lib.org">pkgdown</a>.</p>
 </div>
 
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-115082821-1"></script>

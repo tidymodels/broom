@@ -4,11 +4,19 @@
 \alias{augment}
 \title{Augment data with information from a(n) statistical object}
 \usage{
-augment(x, ...)
+augment(x, data, ...)
 }
 \arguments{
 \item{x}{Model object or other R object with information to append to
 observations.}
+
+\item{data}{A \code{\link[=data.frame]{data.frame()}} or \code{\link[tibble:tibble]{tibble::tibble()}} containing the original
+data that was used to produce the object \code{x}. Defaults to
+\code{stats::model.frame(x)} so that \code{augment(my_fit)} returns the augmented
+original data. \strong{Do not} pass new data to the \code{data} argument.
+Augment will report information such as influence and cooks distance for
+data passed to the \code{data} argument. These measures are only defined for
+the original training data.}
 
 \item{...}{Addition arguments to augment method.}
 }
@@ -53,17 +61,6 @@ model on data in a tibble.
 We are in the process of defining behaviors for models fit with various
 \link{na.action} arguments, but make no guarantees about behavior when data is
 missing at this time.
-}
-\details{
-The second argument is almost always \code{data}, which specifies the
-original data object. This is not part of the S3
-signature, partly because it prevents \link{rowwise_df_tidiers} from
-taking a column name as the first argument. The tidiers are currently
-deprecated and will soon be removed from broom, at which point
-\code{data} will become part of the augment signature.
-
-\strong{Historical note}: This generic originated in the ggplot2 package,
-where it was called \code{fortify}.
 }
 \seealso{
 \code{\link[=augment.lm]{augment.lm()}}

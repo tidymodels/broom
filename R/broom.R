@@ -25,24 +25,15 @@ NULL
 
 #' @templateVar class statistical
 #' @template title_desc_augment
-#' 
-#' @details The second argument is almost always `data`, which specifies the
-#'   original data object. This is not part of the S3
-#'   signature, partly because it prevents [rowwise_df_tidiers] from
-#'   taking a column name as the first argument. The tidiers are currently
-#'   deprecated and will soon be removed from broom, at which point 
-#'   `data` will become part of the augment signature.
-#'   
-#'   **Historical note**: This generic originated in the ggplot2 package,
-#'   where it was called `fortify`.
 #'
 #' @seealso [augment.lm()]
 #' @param x Model object or other R object with information to append to
 #'   observations.
+#' @template param_data
 #' @param ... Addition arguments to augment method.
 #' @return A [tibble::tibble()] with information about data points.
 #' @export
-augment <- function(x, ...) UseMethod("augment")
+augment <- function(x, data, ...) UseMethod("augment")
 
 #' Turn a model object into a tidy tibble
 #'

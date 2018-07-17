@@ -1,8 +1,6 @@
 #' Tidying methods for a brms model
 #' 
-#' `brms` tidiers will soon be deprecated in `broom` and there is no ongoing
-#' development of these functions at this time. `brms` tidiers are being
-#' developed in the `broom.mixed` package, which is not yet on CRAN.
+#' `brms` tidiers are deprecated.
 #'
 #' These methods tidy the estimates from
 #' [brms::brmsfit()]
@@ -77,6 +75,7 @@ NULL
 tidy.brmsfit <- function(x, parameters = NA,
                          par_type = c("all", "non-varying", "varying", "hierarchical"),
                          robust = FALSE, intervals = TRUE, prob = 0.9, ...) {
+  .Deprecated()
   use_par_type <- anyNA(parameters)
   if (use_par_type) {
     par_type <- match.arg(par_type)

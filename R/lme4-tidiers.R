@@ -1,8 +1,6 @@
 #' Tidying methods for mixed effects models
 #' 
-#' `lme4` tidiers will soon be deprecated in `broom` and there is no ongoing
-#' development of these functions at this time. `lme4` tidiers are being
-#' developed in the `broom.mixed` package, which is not yet on CRAN.
+#' `lme4` tidiers are deprecated.
 #'
 #' These methods tidy the coefficients of mixed effects models, particularly
 #' responses of the `merMod` class
@@ -82,6 +80,7 @@ tidy.merMod <- function(x, effects = c("ran_pars", "fixed"),
                         conf.level = 0.95,
                         conf.method = "Wald",
                         ...) {
+  .Deprecated()
   effect_names <- c("ran_pars", "fixed", "ran_modes")
   if (!is.null(scales)) {
     if (length(scales) != length(effects)) {
@@ -249,6 +248,7 @@ tidy.merMod <- function(x, effects = c("ran_pars", "fixed"),
 #'
 #' @export
 augment.merMod <- function(x, data = stats::model.frame(x), newdata, ...) {
+  .Deprecated()
   # move rownames if necessary
   if (missing(newdata)) {
     newdata <- NULL
@@ -294,6 +294,7 @@ augment.merMod <- function(x, data = stats::model.frame(x), newdata, ...) {
 #'
 #' @export
 glance.merMod <- function(x, ...) {
+  .Deprecated()
   # We cannot use stats::sigma or lme4::sigma here, even in an
   # if statement, since that leads to R CMD CHECK warnings on 3.2
   # or dev R, respectively

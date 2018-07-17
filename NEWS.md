@@ -1,5 +1,29 @@
-# broom 0.4.5.9000
-To be released as 0.5.0
+# broom 0.5.0.9000
+To be released as 0.7.0
+
+## Other changes
+
+- Add `data` argument to `augment()` generic
+
+## Deprecations
+
+- Data frame, rowwise data frame, vector and matrix tidiers have been removed
+- `bootstrap()` has been removed
+
+- `tidy.table()` has been deprecated in favor of `tibble::as_tibble()`
+- `tidy.summaryDefault()` has been deprecated in favor of `skimr::skim()`
+
+### Mixed model deprecations
+
+The following have all been deprecated in favor of `broom.mixed`:
+
+- `tidy.brmsfit()`
+- `tidy.merMod()`, `glance.merMod()`, `augment.merMod()`
+- `tidyMCMC()`, `tidy.rjags()`, `tidy.stanfit()`
+- `tidy.lme()`, `glance.lme()`, `augment.lme()`
+- `tidy.stanreg()`, `glance.stanreg()`
+
+# broom 0.5.0
 
 Tidiers now return `tibble::tibble()`s. This release also includes several new tidiers, new vignettes and a large number of bugfixes. We've also begun to more rigorously define tidier specifications: we've laid part of the groundwork for stricter and more consistent tidying, but the new tidier specifications are not yet complete. These will appear in the next release.
 

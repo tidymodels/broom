@@ -32,6 +32,7 @@
 #' @export
 #' @seealso [tidy()], [summary()]
 tidy.summaryDefault <- function(x, ...) {
+  .Deprecated(msg = "`tidy.summaryDefault()` is deprecated. Please use `skimr::skim()` instead.")
   ret <- as.data.frame(t(as.matrix(x)))
   cnms <- c("minimum", "q1", "median", "mean", "q3", "maximum")
   if ("NA's" %in% names(x)) {

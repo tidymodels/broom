@@ -46,7 +46,7 @@
 
       <div class="navbar-brand-container">
         <a class="navbar-brand" href="../index.html">broom</a>
-        <small class="tidyverse">part of the <a href="http://tidyverse.org">tidyverse</a></small>
+        <small class="tidyverse">part of the <a href="https://tidyverse.org">tidyverse</a></small>
       </div>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
@@ -206,6 +206,7 @@ warning is raised and the incomplete rows are dropped.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
+</div><span class='co'># NOT RUN {</span>
 <span class='kw'>if</span> (<span class='fu'>require</span>(<span class='st'>"nlme"</span>) <span class='kw'>&amp;</span> <span class='fu'>require</span>(<span class='st'>"lme4"</span>)) {
     <span class='co'># example regressions are from lme4 documentation, but used for nlme</span>
     <span class='no'>lmm1</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/nlme/topics/lme'>lme</a></span>(<span class='no'>Reaction</span> ~ <span class='no'>Days</span>, <span class='kw'>random</span><span class='kw'>=</span>~ <span class='no'>Days</span><span class='kw'>|</span><span class='no'>Subject</span>, <span class='no'>sleepstudy</span>)
@@ -225,15 +226,8 @@ warning is raised and the incomplete rows are dropped.</p>
     <span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>nm1</span>, <span class='kw'>effects</span> <span class='kw'>=</span> <span class='st'>"fixed"</span>)
     <span class='fu'>head</span>(<span class='fu'><a href='augment.html'>augment</a></span>(<span class='no'>nm1</span>, <span class='no'>Orange</span>))
     <span class='fu'><a href='glance.html'>glance</a></span>(<span class='no'>nm1</span>)
-}</div><div class='output co'>#&gt; <span class='message'>Loading required package: nlme</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Attaching package: 'nlme'</span></div><div class='output co'>#&gt; <span class='message'>The following object is masked from 'package:lme4':</span>
-#&gt; <span class='message'></span>
-#&gt; <span class='message'>    lmList</span></div><div class='output co'>#&gt; <span class='message'>The following object is masked from 'package:dplyr':</span>
-#&gt; <span class='message'></span>
-#&gt; <span class='message'>    collapse</span></div><div class='output co'>#&gt; <span class='warning'>Warning: deviance undefined for REML fit</span></div><div class='output co'>#&gt; # A tibble: 1 x 5
-#&gt;   sigma logLik   AIC   BIC deviance
-#&gt;   &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;lgl&gt;   
-#&gt; 1  7.85  -132.  273.  281. NA      </div><div class='input'>
+}
+<span class='co'># }</span><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
@@ -255,12 +249,12 @@ warning is raised and the incomplete rows are dropped.</p>
 
       <footer>
       <div class="tidyverse">
-  <p>broom is a part of the <strong>tidyverse</strong>, an ecosystem of packages designed with common APIs and a shared philosophy. Learn more at <a href="http://tidyverse.org">tidyverse.org</a>.</p>
+  <p>broom is a part of the <strong>tidyverse</strong>, an ecosystem of packages designed with common APIs and a shared philosophy. Learn more at <a href="https://tidyverse.org">tidyverse.org</a>.</p>
 </div>
 
 <div class="author">
-  <p>Developed by David Robinson.</p>
-  <p>Site built by <a href="http://pkgdown.r-lib.org">pkgdown</a>.</p>
+  <p>Developed by David Robinson, Alex Hayes.</p>
+  <p>Site built by <a href="https://pkgdown.r-lib.org">pkgdown</a>.</p>
 </div>
 
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-115082821-1"></script>

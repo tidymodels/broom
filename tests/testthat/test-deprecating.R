@@ -50,53 +50,6 @@ test_that("can perform correlations with tidying in dplyr", {
   expect_false(all(pcors$estimate == scors$estimate))
 })
 
-
-### BOOTSTRAP TIDIERS
-
-test_that("bootstrap works with by_group and grouped tbl", {
-  df <- data_frame(
-    x = c(rep("a", 3), rep("b", 5)),
-    y = rnorm(length(x))
-  )
-  df_reps <-
-    df %>%
-    group_by(x) %>%
-    bootstrap(20, by_group = TRUE) %>%
-    do(tally(group_by(., x)))
-  expect_true(all(filter(df_reps, x == "a")$n == 3))
-  expect_true(all(filter(df_reps, x == "b")$n == 5))
-})
-
-test_that("bootstrap does not sample within groups if by_group = FALSE", {
-  set.seed(12334)
-  df <- data_frame(
-    x = c(rep("a", 3), rep("b", 5)),
-    y = rnorm(length(x))
-  )
-  df_reps <-
-    df %>%
-    group_by(x) %>%
-    bootstrap(20, by_group = FALSE) %>%
-    do(tally(group_by(., x)))
-  expect_true(!all(filter(df_reps, x == "a")$n == 3))
-  expect_true(!all(filter(df_reps, x == "b")$n == 5))
-})
-
-test_that("bootstrap does not sample within groups if no groups", {
-  set.seed(12334)
-  df <- data_frame(
-    x = c(rep("a", 3), rep("b", 5)),
-    y = rnorm(length(x))
-  )
-  df_reps <-
-    df %>%
-    ungroup() %>%
-    bootstrap(20, by_group = TRUE) %>%
-    do(tally(group_by(., x)))
-  expect_true(!all(filter(df_reps, x == "a")$n == 3))
-  expect_true(!all(filter(df_reps, x == "b")$n == 5))
-})
-
 ### ROWWISE DATAFRAME TIDIERS
 
 context("rowwise tidiers")
@@ -156,26 +109,6 @@ test_that("rowwise tidiers work even when an ungrouped data frame was used", {
   
   glanced <- one_row %>% glance(model)
   expect_equal(nrow(glanced), 1)
-})
-
-### DATAFRAME TIDIERS
-
-context("data.frame tidiers")
-
-test_that("tidy.data.frame works", {
-  tidy_df <- tidy(mtcars)
-  check_tidy(tidy_df, exp.row = 11, exp.col = 13)
-  expect_false("var" %in% names(tidy_df))
-  expect_equal(names(tidy_df)[1], "column")
-})
-
-test_that("augment.data.frame throws an error", {
-  expect_error(augment(mtcars))
-})
-
-test_that("glance.data.frame works", {
-  glance_df <- glance(mtcars)
-  check_tidy(glance_df, exp.row = 1, exp.col = 4)
 })
 
 # test tidy, augment, glance methods from lme4-tidiers.R
@@ -273,18 +206,6 @@ if (require(lme4, quietly = TRUE)) {
     check_tidy(g, exp.col = 6)
   })
 }
-
-context("matrix tidiers")
-
-test_that("matrix tidiers work", {
-  mat <- as.matrix(mtcars)
-  
-  td <- tidy(mat)
-  check_tidy(td, exp.row = 32, exp.col = 12)
-  
-  gl <- glance(mat)
-  check_tidy(gl, exp.col = 4)
-})
 
 context("mcmc tidiers")
 
@@ -390,48 +311,6 @@ if (suppressPackageStartupMessages(require(nlme, quietly = TRUE))) {
   expect_error(augment(fit), "explicit")
 }
 
-context("vector tidiers")
-
-test_that("tidying numeric vectors works", {
-  skip("deprecating soon")
-  vec <- 1:10
-  tidy_vec <- tidy(vec)
-  check_tidy(tidy_vec, exp.row = 10, exp.col = 1)
-  # test with names
-  vec2 <- vec
-  names(vec2) <- LETTERS[1:10]
-  tidy_vec2 <- tidy(vec2)
-  check_tidy(tidy_vec2, exp.row = 10, exp.col = 2)
-  expect_true(all(c("names", "x") %in% names(tidy_vec2)))
-})
-
-test_that("tidying logical vectors works", {
-  skip("deprecating soon")
-  vec <- rep(c(TRUE, FALSE), 5)
-  tidy_vec <- tidy(vec)
-  check_tidy(tidy_vec, exp.row = 10, exp.col = 1)
-  # test with names
-  vec2 <- vec
-  names(vec2) <- 1:10
-  tidy_vec2 <- tidy(vec2)
-  check_tidy(tidy_vec2, exp.row = 10, exp.col = 2)
-  expect_true(all(c("names", "x") %in% names(tidy_vec2)))
-})
-
-test_that("tidying character vectors works", {
-  skip("deprecating soon")
-  vec <- LETTERS[1:10]
-  tidy_vec <- tidy(vec)
-  check_tidy(tidy_vec, exp.row = 10, exp.col = 1)
-  # test with names
-  vec2 <- vec
-  names(vec2) <- 1:10
-  tidy_vec2 <- tidy(vec2)
-  check_tidy(tidy_vec2, exp.row = 10, exp.col = 2)
-  expect_true(all(c("names", "x") %in% names(tidy_vec2)))
-})
-
-
 # test tidy and glance methods from rstanarm_tidiers.R
 
 context("rstanarm tidiers")
@@ -476,24 +355,11 @@ if (require(rstanarm, quietly = TRUE)) {
   })
 }
 
-
-if (require(Matrix)) {
-  m <- Matrix(0 + 1:28, nrow = 4)
-  m[-3, c(2, 4:5, 7)] <- m[3, 1:4] <- m[1:3, 6] <- 0
-  rownames(m) <- letters[1:4]
-  colnames(m) <- 1:7
-  mT <- as(m, "dgTMatrix")
-  mC <- as(m, "dgCMatrix")
-  mS <- as(m, "sparseMatrix")
-  
-  test_that("tidy.dgTMatrix works", {
-    td <- tidy(mT)
-    check_tidy(td, exp.row = 9, exp.col = 3)
-  })
-  
-  test_that("tidy.dgCMatrix uses tidy.dgTMatrix", {
-    expect_identical(tidy(mC), tidy.dgTMatrix(mC))
-  })
-}
+test_that("tidy.table", {
+  tab <- with(airquality, table(cut(Temp, quantile(Temp)), Month))
+  td <- tidy(tab)
+  check_tidy_output(td)
+  check_dims(td, 20, 3)
+})
 
 
