@@ -218,7 +218,7 @@ augment_columns <- function(x, data, newdata, type, type.predict = type,
   args$se.fit <- se.fit
   args <- c(args, list(...))
 
-
+  has_weights <- "weights" %in% names(x) && ! zero_range(x[["names"]])
 
   if ("panelmodel" %in% class(x)) {
     # work around for panel models (plm)
@@ -261,8 +261,16 @@ augment_columns <- function(x, data, newdata, type, type.predict = type,
         ret$.hat <- infl
         ret$.sigma <- NA
       } else {
-        ret$.hat <- infl$hat
-        ret$.sigma <- infl$sigma
+        if (has_weights && any(abs(x[["weights"]]) < .Machine$double.eps ^ 0.5)) {
+          ret$.hat <- numeric(nrow(ret))
+          ret$.sigma <- numeric(nrow(ret))
+          nonzero_weight_indices <- as.integer(names(x[["weights"]]))
+          ret$.hat[nonzero_weight_indices] <- infl$hat
+          ret$.sigma[nonzero_weight_indices] <- infl$sigma
+        } else {
+          ret$.hat <- infl$hat
+          ret$.sigma <- infl$sigma
+        }
       }
     }
 
@@ -486,3 +494,11 @@ globalVariables(
     "z"
   )
 )
+
+# https://stackoverflow.com/questions/4752275/test-for-equality-among-all-elements-of-a-single-vector
+# Determine if range of vector is FP 0.
+zero_range <- function(x, tol = .Machine$double.eps ^ 0.5) {
+  if (length(x) == 1) return(TRUE)
+  x <- range(x) / mean(x)
+  isTRUE(all.equal(x[1], x[2], tolerance = tol))
+}
