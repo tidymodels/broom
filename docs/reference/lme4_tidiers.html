@@ -46,7 +46,7 @@
 
       <div class="navbar-brand-container">
         <a class="navbar-brand" href="../index.html">broom</a>
-        <small class="tidyverse">part of the <a href="http://tidyverse.org">tidyverse</a></small>
+        <small class="tidyverse">part of the <a href="https://tidyverse.org">tidyverse</a></small>
       </div>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
@@ -226,6 +226,7 @@ warning is raised and the incomplete rows are dropped.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
+</div><span class='co'># NOT RUN {</span>
 <span class='kw'>if</span> (<span class='fu'>require</span>(<span class='st'>"lme4"</span>)) {
     <span class='co'># example regressions are from lme4 documentation</span>
     <span class='no'>lmm1</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/lme4/topics/lmer'>lmer</a></span>(<span class='no'>Reaction</span> ~ <span class='no'>Days</span> + (<span class='no'>Days</span> <span class='kw'>|</span> <span class='no'>Subject</span>), <span class='no'>sleepstudy</span>)
@@ -251,17 +252,8 @@ warning is raised and the incomplete rows are dropped.</p>
     <span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>nm1</span>, <span class='kw'>effects</span> <span class='kw'>=</span> <span class='st'>"fixed"</span>)
     <span class='fu'>head</span>(<span class='fu'><a href='augment.html'>augment</a></span>(<span class='no'>nm1</span>, <span class='no'>Orange</span>))
     <span class='fu'><a href='glance.html'>glance</a></span>(<span class='no'>nm1</span>)
-}</div><div class='output co'>#&gt; <span class='message'>Loading required package: lme4</span></div><div class='output co'>#&gt; <span class='message'>Loading required package: Matrix</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Attaching package: 'Matrix'</span></div><div class='output co'>#&gt; <span class='message'>The following object is masked from 'package:tidyr':</span>
-#&gt; <span class='message'></span>
-#&gt; <span class='message'>    expand</span></div><div class='output co'>#&gt; <span class='warning'>Warning: binding factor and character vector, coercing into character vector</span></div><div class='output co'>#&gt; <span class='warning'>Warning: binding character and factor vector, coercing into character vector</span></div><div class='output co'>#&gt; <span class='message'>Computing profile confidence intervals ...</span></div><div class='output co'>#&gt; <span class='warning'>Warning: binding factor and character vector, coercing into character vector</span></div><div class='output co'>#&gt; <span class='warning'>Warning: binding character and factor vector, coercing into character vector</span></div><div class='output co'>#&gt; <span class='warning'>Warning: variance-covariance matrix computed from finite-difference Hessian is</span>
-#&gt; <span class='warning'>not positive definite or contains NA values: falling back to var-cov estimated from RX</span></div><div class='output co'>#&gt; <span class='warning'>Warning: variance-covariance matrix computed from finite-difference Hessian is</span>
-#&gt; <span class='warning'>not positive definite or contains NA values: falling back to var-cov estimated from RX</span></div><div class='output co'>#&gt; <span class='warning'>Warning: binding factor and character vector, coercing into character vector</span></div><div class='output co'>#&gt; <span class='warning'>Warning: binding character and factor vector, coercing into character vector</span></div><div class='output co'>#&gt; <span class='warning'>Warning: variance-covariance matrix computed from finite-difference Hessian is</span>
-#&gt; <span class='warning'>not positive definite or contains NA values: falling back to var-cov estimated from RX</span></div><div class='output co'>#&gt; <span class='warning'>Warning: variance-covariance matrix computed from finite-difference Hessian is</span>
-#&gt; <span class='warning'>not positive definite or contains NA values: falling back to var-cov estimated from RX</span></div><div class='output co'>#&gt; <span class='warning'>Warning: number of items to replace is not a multiple of replacement length</span></div><div class='output co'>#&gt; # A tibble: 1 x 6
-#&gt;   sigma logLik   AIC   BIC deviance df.residual
-#&gt;   &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;       &lt;int&gt;
-#&gt; 1  7.84  -132.  273.  281.     263.          30</div></pre>
+}
+<span class='co'># }</span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -282,12 +274,12 @@ warning is raised and the incomplete rows are dropped.</p>
 
       <footer>
       <div class="tidyverse">
-  <p>broom is a part of the <strong>tidyverse</strong>, an ecosystem of packages designed with common APIs and a shared philosophy. Learn more at <a href="http://tidyverse.org">tidyverse.org</a>.</p>
+  <p>broom is a part of the <strong>tidyverse</strong>, an ecosystem of packages designed with common APIs and a shared philosophy. Learn more at <a href="https://tidyverse.org">tidyverse.org</a>.</p>
 </div>
 
 <div class="author">
-  <p>Developed by David Robinson.</p>
-  <p>Site built by <a href="http://pkgdown.r-lib.org">pkgdown</a>.</p>
+  <p>Developed by David Robinson, Alex Hayes.</p>
+  <p>Site built by <a href="https://pkgdown.r-lib.org">pkgdown</a>.</p>
 </div>
 
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-115082821-1"></script>

@@ -20,5 +20,6 @@
 #' @seealso [as_tibble.table()]
 #' @export
 tidy.table <- function(x, ...) {
+  .Deprecated()
   as_tibble(x)
 }

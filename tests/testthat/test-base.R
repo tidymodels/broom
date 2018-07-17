@@ -28,10 +28,3 @@ test_that("tidy.summary", {
   expect_identical(td, gl)
 })
 
-
-test_that("tidy.table", {
-  tab <- with(airquality, table(cut(Temp, quantile(Temp)), Month))
-  td <- tidy(tab)
-  check_tidy_output(td)
-  check_dims(td, 20, 3)
-})
