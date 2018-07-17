@@ -11,26 +11,26 @@
 #' @param conf.level Level of confidence interval, used only for
 #' `emmGrid` and `lsmobj` objects
 #' @param ... Additional arguments passed to [emmeans::summary.emmGrid()] or
-#'   [lsmeans::summary.ref.grid()]. **Cautionary note**: mispecified arguments
-#'   may be silently ignored!
+#' [lsmeans::summary.ref.grid()]. **Cautionary note**: mispecified arguments
+#' may be silently ignored!
 #'
 #' @return A data frame with one observation for each estimated
 #' mean, and one column for each combination of factors, along with
 #' the following variables:
-#'   \item{estimate}{Estimated least-squares mean}
-#'   \item{std.error}{Standard error of estimate}
-#'   \item{df}{Degrees of freedom}
-#'   \item{conf.low}{Lower bound of confidence interval}
-#'   \item{conf.high}{Upper bound of confidence interval}
+#' \item{estimate}{Estimated least-squares mean}
+#' \item{std.error}{Standard error of estimate}
+#' \item{df}{Degrees of freedom}
+#' \item{conf.low}{Lower bound of confidence interval}
+#' \item{conf.high}{Upper bound of confidence interval}
 #'
 #' When the input is a contrast, each row will contain one estimated
 #' contrast, along with some of the following columns:
-#'   \item{level1}{One level of the factor being contrasted}
-#'   \item{level2}{Second level}
-#'   \item{contrast}{In cases where the contrast is not made up of
-#'   two levels, describes each}
-#'   \item{statistic}{T-ratio statistic}
-#'   \item{p.value}{P-value}
+#' \item{level1}{One level of the factor being contrasted}
+#' \item{level2}{Second level}
+#' \item{contrast}{In cases where the contrast is not made up of
+#' two levels, describes each}
+#' \item{statistic}{T-ratio statistic}
+#' \item{p.value}{P-value}
 #'
 #' @details There are a large number of arguments that can be
 #' passed on to [emmeans::summary.emmGrid()] or [lsmeans::summary.ref.grid()].
@@ -38,40 +38,39 @@
 #'
 #' @examples
 #'
-#' if (require("emmeans", quietly = TRUE)) {
-#'   # linear model for sales of oranges per day
-#'   oranges_lm1 <- lm(sales1 ~ price1 + price2 + day + store, data = oranges)
+#' library(emmeans)
+#' # linear model for sales of oranges per day
+#' oranges_lm1 <- lm(sales1 ~ price1 + price2 + day + store, data = oranges)
 #'
-#'   # reference grid; see vignette("basics", package = "emmeans")
-#'   oranges_rg1 <- ref_grid(oranges_lm1)
-#'   td <- tidy(oranges_rg1)
-#'   td
+#' # reference grid; see vignette("basics", package = "emmeans")
+#' oranges_rg1 <- ref_grid(oranges_lm1)
+#' td <- tidy(oranges_rg1)
+#' td
 #'
-#'   # marginal averages
-#'   marginal <- emmeans(oranges_rg1, "day")
-#'   tidy(marginal)
+#' # marginal averages
+#' marginal <- emmeans(oranges_rg1, "day")
+#' tidy(marginal)
 #'
-#'   # contrasts
-#'   tidy(contrast(marginal))
-#'   tidy(contrast(marginal, method = "pairwise"))
+#' # contrasts
+#' tidy(contrast(marginal))
+#' tidy(contrast(marginal, method = "pairwise"))
 #'
-#'   # plot confidence intervals
-#'   library(ggplot2)
-#'   ggplot(tidy(marginal), aes(day, estimate)) +
-#'     geom_point() +
-#'     geom_errorbar(aes(ymin = conf.low, ymax = conf.high))
+#' # plot confidence intervals
+#' library(ggplot2)
+#' ggplot(tidy(marginal), aes(day, estimate)) +
+#'   geom_point() +
+#'   geom_errorbar(aes(ymin = conf.low, ymax = conf.high))
 #'
-#'   # by multiple prices
-#'   by_price <- emmeans(oranges_lm1, "day", by = "price2",
-#'                       at = list(price1 = 50, price2 = c(40, 60, 80),
-#'                       day = c("2", "3", "4")) )
-#'   by_price
-#'   tidy(by_price)
+#' # by multiple prices
+#' by_price <- emmeans(oranges_lm1, "day", by = "price2",
+#'                     at = list(price1 = 50, price2 = c(40, 60, 80),
+#'                     day = c("2", "3", "4")) )
+#' by_price
+#' tidy(by_price)
 #'
-#'   ggplot(tidy(by_price), aes(price2, estimate, color = day)) +
-#'     geom_line() +
-#'     geom_errorbar(aes(ymin = conf.low, ymax = conf.high))
-#' }
+#' ggplot(tidy(by_price), aes(price2, estimate, color = day)) +
+#'   geom_line() +
+#'   geom_errorbar(aes(ymin = conf.low, ymax = conf.high))
 #'
 #' @name emmeans_tidiers
 #' @export
@@ -96,15 +95,15 @@ tidy.emmGrid <- function(x, ...) {
 tidy_emmeans <- function(x, ...) {
   s <- summary(x, ...)
   ret <- as.data.frame(s)
-  repl <- c(
-    lsmean = "estimate",
-    emmean = "estimate",
-    pmmean = "estimate",
-    prediction = "estimate",
-    SE = "std.error",
-    lower.CL = "conf.low",
-    upper.CL = "conf.high",
-    t.ratio = "statistic"
+  repl <- list(
+    "lsmean" = "estimate",
+    "emmean" = "estimate",
+    "pmmean" = "estimate",
+    "prediction" = "estimate",
+    "SE" = "std.error",
+    "lower.CL" = "conf.low",
+    "upper.CL" = "conf.high",
+    "t.ratio" = "statistic"
   )
 
   if ("contrast" %in% colnames(ret) &&
@@ -115,6 +114,6 @@ tidy_emmeans <- function(x, ...) {
     )
   }
 
-  colnames(ret) <- plyr::revalue(colnames(ret), repl, warn_missing = FALSE)
+  colnames(ret) <- dplyr::recode(colnames(ret), rlang::UQS(repl))
   as_tibble(ret)
 }

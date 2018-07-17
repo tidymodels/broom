@@ -5,7 +5,7 @@
 #' @param x A list
 #' 
 #' @return Either `TRUE` or `FALSE`
-#' 
+#' @noRd
 all_equal_list <- function(x) {
   sum(duplicated.default(x)) == length(x) - 1L
 }
@@ -28,7 +28,7 @@ check_arguments <- function(tidy_method, strict = FALSE) {
   
   if (!strict) {
     expect_true(TRUE)  # prevent skip message
-    return(invisible(NULL))
+    return(invisible())
   }
   
   args <- names(formals(tidy_method))
@@ -53,6 +53,8 @@ check_arguments <- function(tidy_method, strict = FALSE) {
       "Arguments to `", func_name, "` must be listed in the argument glossary."
     )
   )
+  
+  # check all arguments other than `x` has default arguments
 }
 
 #' Check the output of a tidying method

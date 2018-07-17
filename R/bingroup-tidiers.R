@@ -11,26 +11,14 @@
 #'   \item{n}{Total sample size.}
 #'
 #' @examples
-#'
-#' if (require("binGroup", quietly = TRUE)) {
-#'     bw <- binWidth(100, .1)
-#'     bw
-#'     tidy(bw)
-#'
-#'     library(dplyr)
-#'     d <- expand.grid(n = seq(100, 800, 100),
-#'                      p = .5,
-#'                      method = c("CP", "Blaker", "Score", "Wald"),
-#'                      stringsAsFactors = FALSE) %>%
-#'         group_by(n, p, method) %>%
-#'         do(tidy(binWidth(.$n, .$p, method = .$method)))
-#'
-#'     library(ggplot2)
-#'     ggplot(d, aes(n, ci.width, color = method)) +
-#'         geom_line() +
-#'         xlab("Total Observations") +
-#'         ylab("Expected CI Width")
-#' }
+#' 
+#' library(binGroup)
+#' library(dplyr)
+#' library(ggplot2)
+#' 
+#' bw <- binWidth(100, .1)
+#' bw
+#' tidy(bw)
 #'
 #' @export
 #' @family bingroup tidiers
@@ -54,18 +42,18 @@ tidy.binWidth <- function(x, ...) {
 #'
 #' @examples
 #'
-#' if (require("binGroup", quietly = TRUE)) {
-#'     des <- binDesign(nmax = 300, delta = 0.06,
-#'                      p.hyp = 0.1, power = .8)
+#' library(binGroup)
+#' des <- binDesign(nmax = 300, delta = 0.06,
+#'                  p.hyp = 0.1, power = .8)
 #'
-#'     glance(des)
-#'     tidy(des)
+#' glance(des)
+#' tidy(des)
 #'
-#'     # the ggplot2 equivalent of plot(des)
-#'     library(ggplot2)
-#'     ggplot(tidy(des), aes(n, power)) +
-#'         geom_line()
-#' }
+#' # the ggplot2 equivalent of plot(des)
+#' library(ggplot2)
+#' ggplot(tidy(des), aes(n, power)) +
+#'     geom_line()
+#' 
 #'
 #' @export
 #' @family bingroup tidiers
@@ -91,18 +79,17 @@ tidy.binDesign <- function(x, ...) {
 #'
 #' @examples
 #'
-#' if (require("binGroup", quietly = TRUE)) {
-#'     des <- binDesign(nmax = 300, delta = 0.06,
-#'                      p.hyp = 0.1, power = .8)
+#' library(binGroup)
+#' des <- binDesign(nmax = 300, delta = 0.06,
+#'                  p.hyp = 0.1, power = .8)
 #'
-#'     glance(des)
-#'     tidy(des)
+#' glance(des)
+#' tidy(des)
 #'
-#'     # the ggplot2 equivalent of plot(des)
-#'     library(ggplot2)
-#'     ggplot(tidy(des), aes(n, power)) +
-#'         geom_line()
-#' }
+#' library(ggplot2)
+#' ggplot(tidy(des), aes(n, power)) +
+#'     geom_line()
+#' 
 #'
 #' @export
 #' @family bingroup tidiers

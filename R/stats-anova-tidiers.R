@@ -52,8 +52,8 @@ tidy.anova <- function(x, ...) {
 
   names(renamers) <- make.names(names(renamers))
 
-  x <- fix_data_frame(x)
-  unknown_cols <- setdiff(colnames(x), c("term", names(renamers)))
+  ret <- fix_data_frame(x)
+  unknown_cols <- setdiff(colnames(ret), c("term", names(renamers)))
   if (length(unknown_cols) > 0) {
     warning(
       "The following column names in ANOVA output were not ",
@@ -61,7 +61,7 @@ tidy.anova <- function(x, ...) {
       paste(unknown_cols, collapse = ", ")
     )
   }
-  ret <- plyr::rename(x, renamers, warn_missing = FALSE)
+  colnames(ret) <- dplyr::recode(colnames(ret), rlang::UQS(renamers))
   if (!is.null(ret$term)) {
     # if rows had names, strip whitespace in them
     ret <- mutate(ret, term = stringr::str_trim(term))
