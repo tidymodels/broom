@@ -86,6 +86,7 @@ augment.decomposed.ts <- function(x, ...) {
 #' @template title_desc_augment
 #'
 #' @param x An `stl` object returned from [stats::stl()].
+#' @param data Ignored, included for consistency with the augment generic signature only.
 #' @param weights Logical indicating whether or not to include the robust
 #'   weights in the output.
 #' @template param_unused_dots
@@ -104,7 +105,7 @@ augment.decomposed.ts <- function(x, ...) {
 #' @export
 #' @family decompose tidiers
 #' @seealso [augment()], [stats::stl()]
-augment.stl <- function(x, weights = TRUE, ...) {
+augment.stl <- function(x, data = NULL, weights = TRUE, ...) {
   ret <- as_tibble(x$time.series)
   ret$weight <- x$weights
   # Inspired by forecast::seasadj, this is the "deseasonalised" data:

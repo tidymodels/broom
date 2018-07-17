@@ -40,63 +40,50 @@ specify which components to return.
 }
 \examples{
 
-if (require("poLCA", quietly = TRUE)) {
-  library(poLCA)
-  library(dplyr)
+library(poLCA)
+library(dplyr)
 
-  data(values)
-  f <- cbind(A, B, C, D)~1
-  M1 <- poLCA(f, values, nclass = 2, verbose = FALSE)
+data(values)
+f <- cbind(A, B, C, D)~1
+M1 <- poLCA(f, values, nclass = 2, verbose = FALSE)
 
-  M1
-  tidy(M1)
-  augment(M1)
-  glance(M1)
+M1
+tidy(M1)
+augment(M1)
+glance(M1)
 
-  library(ggplot2)
+library(ggplot2)
 
-  ggplot(tidy(M1), aes(factor(class), estimate, fill = factor(outcome))) +
-    geom_bar(stat = "identity", width = 1) +
-    facet_wrap(~ variable)
+ggplot(tidy(M1), aes(factor(class), estimate, fill = factor(outcome))) +
+  geom_bar(stat = "identity", width = 1) +
+  facet_wrap(~ variable)
+## Three-class model with a single covariate.
 
-  set.seed(2016)
-  # compare multiple
-  mods <- tibble(nclass = 1:3) \%>\%
-    group_by(nclass) \%>\%
-    do(mod = poLCA(f, values, nclass = .$nclass, verbose = FALSE))
+data(election)
+f2a <- cbind(MORALG,CARESG,KNOWG,LEADG,DISHONG,INTELG,
+             MORALB,CARESB,KNOWB,LEADB,DISHONB,INTELB)~PARTY
+nes2a <- poLCA(f2a, election, nclass = 3, nrep = 5, verbose = FALSE)
 
-  # compare log-likelihood and/or AIC, BIC
-  mods \%>\%
-    glance(mod)
+td <- tidy(nes2a)
+td
 
-  ## Three-class model with a single covariate.
+# show
 
-  data(election)
-  f2a <- cbind(MORALG,CARESG,KNOWG,LEADG,DISHONG,INTELG,
-               MORALB,CARESB,KNOWB,LEADB,DISHONB,INTELB)~PARTY
-  nes2a <- poLCA(f2a, election, nclass = 3, nrep = 5, verbose = FALSE)
+ggplot(td, aes(outcome, estimate, color = factor(class), group = class)) +
+  geom_line() +
+  facet_wrap(~ variable, nrow = 2) +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1))
 
-  td <- tidy(nes2a)
-  td
+au <- augment(nes2a)
+au
+au \%>\%
+  count(.class)
 
-  # show
-
-  ggplot(td, aes(outcome, estimate, color = factor(class), group = class)) +
-    geom_line() +
-    facet_wrap(~ variable, nrow = 2) +
-    theme(axis.text.x = element_text(angle = 90, hjust = 1))
-
-  au <- augment(nes2a)
-  au
-  au \%>\%
-    count(.class)
-
-  # if the original data is provided, it leads to NAs in new columns
-  # for rows that weren't predicted
-  au2 <- augment(nes2a, data = election)
-  au2
-  dim(au2)
-}
+# if the original data is provided, it leads to NAs in new columns
+# for rows that weren't predicted
+au2 <- augment(nes2a, data = election)
+au2
+dim(au2)
 
 }
 \seealso{

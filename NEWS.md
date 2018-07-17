@@ -1,6 +1,10 @@
 # broom 0.5.0.9000
 To be released as 0.7.0
 
+## Other changes
+
+- Add `data` argument to `augment()` generic
+
 ## Deprecations
 
 - Data frame, rowwise data frame, vector and matrix tidiers have been removed

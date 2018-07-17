@@ -1,5 +1,7 @@
 #' @templateVar class table
 #' @template title_desc_tidy
+#' 
+#' @description Deprecated. Please use [tibble::as_tibble()] instead.
 #'
 #' @param x A [table] object.
 #' @template param_unused_dots
@@ -11,11 +13,6 @@
 #' @details Directly calls [tibble::as_tibble()] on a [table] object, which
 #'   does the same things as [as.data.frame.table()] but also gives the
 #'   returned object [tibble::tibble] class.
-#' 
-#' @examples
-#'
-#' tab <- with(airquality, table(cut(Temp, quantile(Temp)), Month))
-#' tidy(tab)
 #'
 #' @seealso [as_tibble.table()]
 #' @export
