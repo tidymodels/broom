@@ -82,3 +82,4 @@ missing at this time.
 Other factanal tidiers: \code{\link{glance.factanal}},
   \code{\link{tidy.factanal}}
 }
+\concept{factanal tidiers}

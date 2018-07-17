@@ -4,7 +4,8 @@
 \alias{glance.garch}
 \title{Tidy a(n) garch object}
 \usage{
-\method{glance}{garch}(x, test = c("box-ljung-test", "jarque-bera-test"), ...)
+\method{glance}{garch}(x, test = c("box-ljung-test", "jarque-bera-test"),
+  ...)
 }
 \arguments{
 \item{x}{A \code{garch} object returned by \code{\link[tseries:garch]{tseries::garch()}}.}
@@ -48,3 +49,4 @@ specify which components to return.
 
 Other garch tidiers: \code{\link{tidy.garch}}
 }
+\concept{garch tidiers}

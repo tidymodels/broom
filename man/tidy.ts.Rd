@@ -51,3 +51,4 @@ tidy(z)
 Other time series tidiers: \code{\link{tidy.acf}},
   \code{\link{tidy.spec}}, \code{\link{tidy.zoo}}
 }
+\concept{time series tidiers}

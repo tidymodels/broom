@@ -46,3 +46,4 @@ the measure will be reported as \code{NA}.
 
 Other gmm tidiers: \code{\link{tidy.gmm}}
 }
+\concept{gmm tidiers}

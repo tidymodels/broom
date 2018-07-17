@@ -48,3 +48,4 @@ the measure will be reported as \code{NA}.
 
 Other muhaz tidiers: \code{\link{tidy.muhaz}}
 }
+\concept{muhaz tidiers}

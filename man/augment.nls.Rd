@@ -85,3 +85,4 @@ missing at this time.
 Other nls tidiers: \code{\link{glance.nls}},
   \code{\link{tidy.nls}}
 }
+\concept{nls tidiers}

@@ -64,3 +64,4 @@ if (require("binGroup", quietly = TRUE)) {
 Other bingroup tidiers: \code{\link{glance.binDesign}},
   \code{\link{tidy.binDesign}}
 }
+\concept{bingroup tidiers}

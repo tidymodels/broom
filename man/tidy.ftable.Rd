@@ -43,3 +43,4 @@ tidy(ftable(Titanic, row.vars = 1:3))
 Other stats tidiers: \code{\link{tidy.density}},
   \code{\link{tidy.dist}}
 }
+\concept{stats tidiers}

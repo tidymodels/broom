@@ -77,3 +77,4 @@ missing at this time.
 Other poLCA tidiers: \code{\link{augment.poLCA}},
   \code{\link{tidy.poLCA}}
 }
+\concept{poLCA tidiers}

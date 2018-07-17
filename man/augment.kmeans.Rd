@@ -77,3 +77,4 @@ missing at this time.
 Other kmeans tidiers: \code{\link{glance.kmeans}},
   \code{\link{tidy.kmeans}}
 }
+\concept{kmeans tidiers}

@@ -119,3 +119,5 @@ Other survival tidiers: \code{\link{augment.survreg}},
   \code{\link{tidy.survexp}}, \code{\link{tidy.survfit}},
   \code{\link{tidy.survreg}}
 }
+\concept{coxph tidiers}
+\concept{survival tidiers}

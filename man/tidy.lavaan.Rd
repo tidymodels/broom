@@ -71,3 +71,4 @@ if (require("lavaan")) {
 
 Other lavaan tidiers: \code{\link{glance.lavaan}}
 }
+\concept{lavaan tidiers}

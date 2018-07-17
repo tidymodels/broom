@@ -105,3 +105,4 @@ if (require("poLCA", quietly = TRUE)) {
 Other poLCA tidiers: \code{\link{augment.poLCA}},
   \code{\link{glance.poLCA}}
 }
+\concept{poLCA tidiers}

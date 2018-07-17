@@ -56,9 +56,32 @@ computations to appropriate methods and gathers the results together.
 Sometimes a goodness of fit measure will be undefined. In these cases
 the measure will be reported as \code{NA}.
 }
+\examples{
+
+library(AER)
+
+data("CigarettesSW", package = "AER")
+ivr <- ivreg(
+  log(packs) ~ income | population,
+  data = CigarettesSW,
+  subset = year == "1995"
+)
+
+summary(ivr)
+
+tidy(ivr)
+tidy(ivr, conf.int = TRUE)
+tidy(ivr, conf.int = TRUE, exponentiate = TRUE)
+
+augment(ivr)
+
+glance(ivr)
+
+}
 \seealso{
 \code{\link[=glance]{glance()}}, \code{\link[AER:ivreg]{AER::ivreg()}}
 
 Other ivreg tidiers: \code{\link{augment.ivreg}},
   \code{\link{tidy.ivreg}}
 }
+\concept{ivreg tidiers}

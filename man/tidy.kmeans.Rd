@@ -46,3 +46,4 @@ For examples, see the kmeans vignette.
 Other kmeans tidiers: \code{\link{augment.kmeans}},
   \code{\link{glance.kmeans}}
 }
+\concept{kmeans tidiers}

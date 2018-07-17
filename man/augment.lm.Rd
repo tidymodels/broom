@@ -4,8 +4,8 @@
 \alias{augment.lm}
 \title{Augment data with information from a(n) lm object}
 \usage{
-\method{augment}{lm}(x, data = stats::model.frame(x), newdata, type.predict,
-  type.residuals, ...)
+\method{augment}{lm}(x, data = stats::model.frame(x), newdata,
+  type.predict, type.residuals, ...)
 }
 \arguments{
 \item{x}{An \code{lm} object created by \code{\link[stats:lm]{stats::lm()}}.}
@@ -121,3 +121,4 @@ Other lm tidiers: \code{\link{augment.glm}},
   \code{\link{glance.glm}}, \code{\link{glance.lm}},
   \code{\link{tidy.glm}}, \code{\link{tidy.lm}}
 }
+\concept{lm tidiers}

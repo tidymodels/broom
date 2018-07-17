@@ -35,3 +35,4 @@ specify which components to return.
 Other multcomp tidiers: \code{\link{tidy.confint.glht}},
   \code{\link{tidy.glht}}, \code{\link{tidy.summary.glht}}
 }
+\concept{multcomp tidiers}

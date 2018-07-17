@@ -46,3 +46,4 @@ the measure will be reported as \code{NA}.
 
 Other multinom tidiers: \code{\link{tidy.multinom}}
 }
+\concept{multinom tidiers}

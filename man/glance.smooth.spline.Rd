@@ -42,3 +42,4 @@ specify which components to return.
 
 Other smoothing spline tidiers: \code{\link{augment.smooth.spline}}
 }
+\concept{smoothing spline tidiers}

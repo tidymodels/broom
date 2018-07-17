@@ -78,3 +78,4 @@ missing at this time.
 
 Other mclust tidiers: \code{\link{tidy.Mclust}}
 }
+\concept{mclust tidiers}

@@ -50,3 +50,4 @@ Other htest tidiers: \code{\link{augment.htest}},
   \code{\link{tidy.htest}},
   \code{\link{tidy.pairwise.htest}}
 }
+\concept{htest tidiers}

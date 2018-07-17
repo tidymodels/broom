@@ -45,8 +45,8 @@ the measure will be reported as \code{NA}.
 }
 \details{
 Only models with a single \code{tau} value may be passed.
-For multiple values, please use a \code{\link[purrr:map]{purrr::map()}} workflow instead, e.g.\preformatted{taus %>%
-  map(function(tau_val) rq(y ~ x, tau = tau_val)) %>%
+For multiple values, please use a \code{\link[purrr:map]{purrr::map()}} workflow instead, e.g.\preformatted{taus \%>\%
+  map(function(tau_val) rq(y ~ x, tau = tau_val)) \%>\%
   map_dfr(glance)
 }
 }
@@ -58,3 +58,4 @@ Other quantreg tidiers: \code{\link{augment.nlrq}},
   \code{\link{glance.nlrq}}, \code{\link{tidy.nlrq}},
   \code{\link{tidy.rqs}}, \code{\link{tidy.rq}}
 }
+\concept{quantreg tidiers}

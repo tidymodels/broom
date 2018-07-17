@@ -67,3 +67,4 @@ ggplot(td2, aes(lambda, GCV)) +
 
 Other ridgelm tidiers: \code{\link{glance.ridgelm}}
 }
+\concept{ridgelm tidiers}

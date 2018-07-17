@@ -112,3 +112,4 @@ Other quantreg tidiers: \code{\link{augment.nlrq}},
   \code{\link{glance.rq}}, \code{\link{tidy.nlrq}},
   \code{\link{tidy.rqs}}, \code{\link{tidy.rq}}
 }
+\concept{quantreg tidiers}

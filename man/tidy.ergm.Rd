@@ -93,3 +93,4 @@ Models for Networks. \emph{Journal of Statistical Software}, 24(3).
 
 Other ergm tidiers: \code{\link{glance.ergm}}
 }
+\concept{ergm tidiers}

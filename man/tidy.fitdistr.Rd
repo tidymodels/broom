@@ -53,3 +53,4 @@ glance(fit)
 
 Other fitdistr tidiers: \code{\link{glance.fitdistr}}
 }
+\concept{fitdistr tidiers}
