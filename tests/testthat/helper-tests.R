@@ -26,15 +26,14 @@ all_equal_list <- function(x) {
 #' 
 check_arguments <- function(tidy_method, strict = FALSE) {
   
+  expect_true(TRUE)  # prevent skip message
+  
   if (!strict) {
-    expect_true(TRUE)  # prevent skip message
     return(invisible())
   }
   
   args <- names(formals(tidy_method))
   func_name <- as.character(substitute(tidy_method))
-  
-  stop("Informative message on mistakes to update argument_glossary")
   
   # functions might be: tidy.irlba *or* tidy_irlba for list tidiers
   prefix <- gsub("[\\.|_].*","", func_name)
@@ -46,6 +45,8 @@ check_arguments <- function(tidy_method, strict = FALSE) {
       info = "Tidiers with `conf.level` argument must have `conf.int` argument."
     )
   }
+  
+  # TODO: print names of arguments in violation to make debugging easier
   
   expect_true(
     all(args %in% allowed_args),

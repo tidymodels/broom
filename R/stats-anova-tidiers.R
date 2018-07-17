@@ -28,7 +28,12 @@
 tidy.anova <- function(x, ...) {
   # there are many possible column names that need to be transformed
   renamers <- c(
+    "AIC" = "AIC",              # merMod
+    "BIC" = "BIC",              # merMod
+    "deviance" = "deviance",    # merMod
+    "logLik" = "logLik",        # merMod
     "Df" = "df",
+    "Chi.Df" = "df",
     "Sum Sq" = "sumsq",
     "Mean Sq" = "meansq",
     "F value" = "statistic",
