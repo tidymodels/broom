@@ -1,8 +1,6 @@
 #' Tidying methods for MCMC (Stan, JAGS, etc.) fits
 #' 
-#' MCMC tidiers will soon be deprecated in `broom` and there is no ongoing
-#' development of these functions at this time. MCMC tidiers are being
-#' developed in the `broom.mixed` package, which is not yet on CRAN.
+#' MCMC tidiers are deprecated.
 #'
 #' @param x an object of class \sQuote{"stanfit"}
 #' @param pars (character) specification of which parameters to include
@@ -72,6 +70,7 @@ tidyMCMC <- function(x,
                      rhat = FALSE,
                      ess = FALSE,
                      ...) {
+  .Deprecated()
   stan <- inherits(x, "stanfit")
   ss <- if (stan) as.matrix(x, pars = pars) else as.matrix(x)
   ss <- ss[, !colnames(ss) %in% droppars, drop = FALSE] ## drop log-probability info
@@ -125,6 +124,7 @@ tidy.rjags <- function(x,
                        conf.level = 0.95,
                        conf.method = "quantile",
                        ...) {
+  .Deprecated()
   tidyMCMC(coda::as.mcmc(x$BUGS),
     pars,
     estimate.method, conf.int, conf.level,
@@ -135,4 +135,7 @@ tidy.rjags <- function(x,
 
 ##' @rdname mcmc_tidiers
 ##' @export
-tidy.stanfit <- tidyMCMC
+tidy.stanfit <- function(...) {
+  .Deprecated()
+  tidyMCMC(...)
+}

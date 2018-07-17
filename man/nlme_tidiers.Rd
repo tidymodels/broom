@@ -62,9 +62,7 @@ first edition manages to use 'deviance' in three separate senses on one
 page. }
 }
 \description{
-\code{nlme} tidiers will soon be deprecated in \code{broom} and there is no ongoing
-development of these functions at this time. \code{nlme} tidiers are being
-developed in the \code{broom.mixed} package, which is not yet on CRAN.
+\code{nlme} tidiers are deprecated.
 }
 \details{
 These methods tidy the coefficients of mixed effects models

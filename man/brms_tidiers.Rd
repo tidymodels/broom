@@ -63,9 +63,7 @@ If \code{intervals = TRUE}, columns for the \code{lower} and
 \code{upper} bounds of the posterior intervals computed.
 }
 \description{
-\code{brms} tidiers will soon be deprecated in \code{broom} and there is no ongoing
-development of these functions at this time. \code{brms} tidiers are being
-developed in the \code{broom.mixed} package, which is not yet on CRAN.
+\code{brms} tidiers are deprecated.
 }
 \details{
 These methods tidy the estimates from

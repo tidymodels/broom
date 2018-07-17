@@ -1,7 +1,6 @@
 #' Tidying methods for an rstanarm model
 #' 
-#' `rstanarm` tidiers will soon be deprecated in `broom` and there is no
-#' ongoing development of these functions at this time.
+#' `rstanarm` tidiers are deprecated.
 #'
 #' These methods tidy the estimates from [rstanarm::stanreg-objects()]
 #' (fitted model objects from the \pkg{rstanarm} package) into a summary.
@@ -82,6 +81,7 @@ tidy.stanreg <- function(x,
                          intervals = FALSE,
                          prob = 0.9,
                          ...) {
+  .Deprecated()
   parameters <-
     match.arg(parameters,
       several.ok = TRUE,
@@ -229,6 +229,7 @@ tidy.stanreg <- function(x,
 #'
 #' @export
 glance.stanreg <- function(x, looic = FALSE, ...) {
+  .Deprecated()
   sigma <- if (getRversion() >= "3.3.0") {
     get("sigma", asNamespace("stats"))
   } else {

@@ -14,9 +14,7 @@ tidyMCMC(x, pars, estimate.method = "mean", conf.int = FALSE,
 \method{tidy}{rjags}(x, pars, estimate.method = "mean",
   conf.int = FALSE, conf.level = 0.95, conf.method = "quantile", ...)
 
-\method{tidy}{stanfit}(x, pars, estimate.method = "mean",
-  conf.int = FALSE, conf.level = 0.95, conf.method = "quantile",
-  droppars = "lp__", rhat = FALSE, ess = FALSE, ...)
+\method{tidy}{stanfit}(...)
 }
 \arguments{
 \item{x}{an object of class \sQuote{"stanfit"}}
@@ -40,9 +38,7 @@ as log-probability information)}
 \item{...}{unused}
 }
 \description{
-MCMC tidiers will soon be deprecated in \code{broom} and there is no ongoing
-development of these functions at this time. MCMC tidiers are being
-developed in the \code{broom.mixed} package, which is not yet on CRAN.
+MCMC tidiers are deprecated.
 }
 \examples{
 

@@ -6,8 +6,18 @@ To be released as 0.7.0
 - Data frame, rowwise data frame, vector and matrix tidiers have been removed
 - `bootstrap()` has been removed
 
-- Rowwise data frame tidiers have been deprecated
 - `tidy.table()` has been deprecated in favor of `tibble::as_tibble()`
+- `tidy.summaryDefault()` has been deprecated in favor of `skimr::skim()`
+
+### Mixed model deprecations
+
+The following have all been deprecated in favor of `broom.mixed`:
+
+- `tidy.brmsfit()`
+- `tidy.merMod()`, `glance.merMod()`, `augment.merMod()`
+- `tidyMCMC()`, `tidy.rjags()`, `tidy.stanfit()`
+- `tidy.lme()`, `glance.lme()`, `augment.lme()`
+- `tidy.stanreg()`, `glance.stanreg()`
 
 # broom 0.5.0
 
