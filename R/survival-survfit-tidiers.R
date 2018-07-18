@@ -116,13 +116,10 @@ glance.survfit <- function(x, ...) {
   s <- summary(x)
   ret <- unrowname(as.data.frame(t(s$table)))
   
-  colnames(ret) <- plyr::revalue(
+  colnames(ret) <- dplyr::recode(
     colnames(ret),
-    c(
-      "*rmean" = "rmean",
-      "*se(rmean)" = "rmean.std.error"
-    ),
-    warn_missing = FALSE
+    "*rmean" = "rmean",
+    "*se(rmean)" = "rmean.std.error"
   )
   
   colnames(ret)[utils::tail(seq_along(ret), 2)] <- c("conf.low", "conf.high")

@@ -1,14 +1,5 @@
 context("stats")
 
-test_that("tidy.ftable", {
-  ftab <- ftable(Titanic, row.vars = 1:3)
-  td <- tidy(ftab)
-  
-  check_arguments(tidy.ftable)
-  check_tidy_output(td)
-  check_dims(td, 32, 5)
-})
-
 test_that("tidy.density", {
   den <- density(faithful$eruptions, bw = "sj")
   td <- tidy(den)

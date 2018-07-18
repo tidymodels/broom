@@ -68,7 +68,6 @@ NULL
 #'   \item{p.value}{P-value computed from t-statistic (may be missing/NA)}
 #'
 #' @importFrom tidyr gather spread
-#' @importFrom nlme VarCorr ranef
 ## FIXME: is it OK/sensible to import these from (priority='recommended')
 ## nlme rather than (priority=NA) lme4?
 #'
@@ -123,7 +122,7 @@ tidy.merMod <- function(x, effects = c("ran_pars", "fixed"),
     if (!rscale %in% c("sdcor", "vcov")) {
       stop(sprintf("unrecognized ran_pars scale %s", sQuote(rscale)))
     }
-    ret <- as.data.frame(VarCorr(x))
+    ret <- as.data.frame(nlme::VarCorr(x))
     ret[] <- lapply(ret, function(x) if (is.factor(x)) {
         as.character(x)
       } else {
@@ -171,7 +170,7 @@ tidy.merMod <- function(x, effects = c("ran_pars", "fixed"),
     ## fix each group to be a tidy data frame
 
     nn <- c("estimate", "std.error")
-    re <- ranef(x, condVar = TRUE)
+    re <- nlme::ranef(x, condVar = TRUE)
     getSE <- function(x) {
       v <- attr(x, "postVar")
       setNames(

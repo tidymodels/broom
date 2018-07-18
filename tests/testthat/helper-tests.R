@@ -5,7 +5,7 @@
 #' @param x A list
 #' 
 #' @return Either `TRUE` or `FALSE`
-#' 
+#' @noRd
 all_equal_list <- function(x) {
   sum(duplicated.default(x)) == length(x) - 1L
 }
@@ -26,15 +26,14 @@ all_equal_list <- function(x) {
 #' 
 check_arguments <- function(tidy_method, strict = FALSE) {
   
+  expect_true(TRUE)  # prevent skip message
+  
   if (!strict) {
-    expect_true(TRUE)  # prevent skip message
-    return(invisible(NULL))
+    return(invisible())
   }
   
   args <- names(formals(tidy_method))
   func_name <- as.character(substitute(tidy_method))
-  
-  stop("Informative message on mistakes to update argument_glossary")
   
   # functions might be: tidy.irlba *or* tidy_irlba for list tidiers
   prefix <- gsub("[\\.|_].*","", func_name)
@@ -47,12 +46,16 @@ check_arguments <- function(tidy_method, strict = FALSE) {
     )
   }
   
+  # TODO: print names of arguments in violation to make debugging easier
+  
   expect_true(
     all(args %in% allowed_args),
     info = paste0(
       "Arguments to `", func_name, "` must be listed in the argument glossary."
     )
   )
+  
+  # check all arguments other than `x` has default arguments
 }
 
 #' Check the output of a tidying method
