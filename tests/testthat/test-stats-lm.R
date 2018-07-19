@@ -128,7 +128,7 @@ rep_each <- function(x,times) {
 
 context("stats-mlm")
 
-                # create data
+# create data
 nob <- 100
 set.seed(1234)
 datf <- data.frame(x1 = rnorm(nob),x2 = runif(nob),z1 = rnorm(nob),z2 = rnorm(nob)) %>%
@@ -141,17 +141,31 @@ fit2 <- lm(cbind(y1,y2) ~ x1 + x2, data = datf)
 test_that("tidy.mlm works", {
   td <- tidy(fit)
   td2 <- tidy(fit2)
-
+  # hit the confidence interval code
+  tdc <- tidy(fit,conf.int=TRUE)
+  tdc2 <- tidy(fit2,conf.int=TRUE)
+  # quick tidy
   tdq <- tidy(fit, quick = TRUE)
   tdq2 <- tidy(fit2, quick = TRUE)
 
   check_tidy_output(td)
   check_tidy_output(td2)
+  check_tidy_output(tdc)
+  check_tidy_output(tdc2)
   check_tidy_output(tdq)
   check_tidy_output(tdq2)
 
   check_dims(td, expected_rows = 4)
   check_dims(td2, expected_rows = 6)
+  check_dims(tdc, expected_rows = 4)
+  check_dims(tdc2, expected_rows = 6)
+  check_dims(tdq, expected_rows = 4)
+  check_dims(tdq2, expected_rows = 6)
+
+  check_dims(td, expected_cols = 6)
+  check_dims(td2, expected_cols = 6)
+  check_dims(tdc, expected_cols = 8)
+  check_dims(tdc2, expected_cols = 8)
   check_dims(tdq, expected_cols = 3)
   check_dims(tdq2, expected_cols = 3)
 
