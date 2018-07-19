@@ -225,6 +225,7 @@ glance.summary.lm <- function(x, ...) {
   as_tibble(ret)
 }
 
+
 # compute confidence intervals for mlm object. 
 confint.mlm <- function (object, level = 0.95, ...) {
   cf <- coef(object)
@@ -233,7 +234,7 @@ confint.mlm <- function (object, level = 0.95, ...) {
   a <- c(a, 1 - a)
   fac <- qt(a, object$df.residual)
   pct <- stats:::format.perc(a, 3)
-  ses <- sqrt(diag(vcov(object)))
+  ses <- sqrt(diag(stats::vcov(object)))
   ci <- ncfs + ses %o% fac
   setNames(data.frame(ci),pct)
 }
