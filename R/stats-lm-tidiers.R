@@ -225,6 +225,8 @@ glance.summary.lm <- function(x, ...) {
   as_tibble(ret)
 }
 
+# getAnywhere('format.perc')
+.format.perc <- function (probs, digits) { paste(format(100 * probs, trim = TRUE, scientific = FALSE, digits = digits), "%") }
 
 # compute confidence intervals for mlm object. 
 confint.mlm <- function (object, level = 0.95, ...) {
@@ -233,7 +235,7 @@ confint.mlm <- function (object, level = 0.95, ...) {
   a <- (1 - level)/2
   a <- c(a, 1 - a)
   fac <- qt(a, object$df.residual)
-  pct <- stats:::format.perc(a, 3)
+  pct <- .format.perc(a, 3)
   ses <- sqrt(diag(stats::vcov(object)))
   ci <- ncfs + ses %o% fac
   setNames(data.frame(ci),pct)
