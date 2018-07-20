@@ -1,7 +1,5 @@
 - column: .class
-  description:
-  - The class assigned by the Mclust algorithm
-  - Predicted class, using modal assignment
+  description: The predicted class. Needs custom info. (TODO: make this a factor?)
   used_by:
   - Mclust
   - poLCA
@@ -12,30 +10,18 @@
   description: Column proportion (2 dimensions table only)
   used_by: htest
 - column: .conf.high
-  description:
-  - Upper confidence interval value  `predict.rq` does not provide confidence intervals
-    when `newdata` is provided.
-  - Upper confidence interval value  `predict.rqs` does not provide confidence intervals
+  description: Upper confidence interval value  `predict.rq` does not provide confidence intervals
     when `newdata` is provided.
   used_by:
   - rq
   - rqs
 - column: .conf.low
-  description:
-  - Lower confidence interval value
-  - Lower confidence interval value
+  description: Lower confidence interval value.
   used_by:
   - rq
   - rqs
 - column: .cooksd
-  description:
-  - See [=cooks.distance::cooks.distance()()].  For additional details on Cook's distance,
-    see [stats:cooks.distance::stats::cooks.distance()()].
-  - Cooks distance, [=cooks.distance::cooks.distance()()]
-  - Cooks distance, [=cooks.distance::cooks.distance()()]
-  - Cooks distance, [=cooks.distance::cooks.distance()()]
-  - Cooks distance, [=cooks.distance::cooks.distance()()]
-  - Cooks distance, [=cooks.distance::cooks.distance()()]
+  description: Cooks distance. See [stats::cooks.distance()] for additional details.
   used_by:
   - betareg
   - glm
@@ -47,29 +33,7 @@
   description: Expected count under the null hypothesis
   used_by: htest
 - column: .fitted
-  description:
-  - TODO
-  - Fitted values of model
-  - The predicted response for that observation.
-  - Fitted values of model
-  - Fitted values of model
-  - Fitted values of model
-  - Fitted values of model
-  - Fitted values of model
-  - Fitted values of model
-  - Fitted values of model
-  - Fitted values of model
-  - Fitted values of model
-  - Fitted values of model
-  - The predicted response for that observation.
-  - The predicted response for that observation.
-  - The predicted response for that observation.
-  - Fitted values of model
-  - Fitted values of model
-  - Fitted quantiles of the model
-  - Fitted quantiles of the model
-  - The predicted response for that observation.
-  - Fitted values of model
+  description: Fitted / predicted value.
   used_by:
   - betareg
   - coxph
@@ -100,12 +64,7 @@
   description: individuals-level fitted values for the j-th longitudinal process
   used_by: mjoint
 - column: .hat
-  description:
-  - Diagonal of the hat matrix
-  - Diagonal of the hat matrix
-  - Diagonal of the hat matrix
-  - Diagonal of the hat matrix
-  - Diagonal of the hat matrix
+  description:Diagonal of the hat matrix. TODO -- add interpretation.
   used_by:
   - glm
   - glmRob
@@ -128,34 +87,8 @@
   description: Proportion of the total
   used_by: htest
 - column: .resid
-  description:
-  - TODO
-  - Residuals (not present if `newdata` specified.)
-  - The residual for a particular point. Present only when data has been passed to
-    `augment` via the `data` argument.
-  - Residuals
-  - Residuals of fitted values on the new data
-  - Residuals
-  - Residuals of fitted values on the new data
-  - Residuals
-  - Residuals of fitted values on the new data
-  - Residuals
-  - Residuals of fitted values on the new data
-  - 'Residuals of the fitted values  When `newdata` is supplied `augment.loess` returns
-    one row for each observation with one additional column: '
-  - The residual for a particular point. Present only when data has been passed to
-    `augment` via the `data` argument.
-  - The residual for a particular point. Present only when data has been passed to
-    `augment` via the `data` argument.
-  - The residual for a particular point. Present only when data has been passed to
-    `augment` via the `data` argument.
-  - Residuals
-  - Residuals of fitted values on the new data
-  - Residuals
-  - Residuals
-  - The residual for a particular point. Present only when data has been passed to
-    `augment` via the `data` argument.
-  - Residuals
+  description: Residuals of fitted values. TODO -- document when present. Residuals on which
+    data set?
   used_by:
   - betareg
   - coxph
@@ -191,21 +124,7 @@
   description: Row proportion (2 dimensions table only)
   used_by: htest
 - column: .se.fit
-  description:
-  - Standard errors of fitted values
-  - Standard errors of fitted values
-  - Standard errors of fitted values
-  - Standard errors of fitted values
-  - Standard errors of fitted values
-  - Standard errors of fitted values
-  - Standard errors of fitted values
-  - Standard errors of fitted values
-  - Standard errors of fitted values
-  - Standard errors of the fitted values
-  - Standard errors of the fitted values
-  - Standard errors of fitted values
-  - Standard errors of fitted values
-  - Standard errors of fitted values
+  description: Standard errors of fitted values. TODO -- prediction or mean interval?
   used_by:
   - coxph
   - glm
@@ -222,17 +141,8 @@
   - rlm
   - survreg
 - column: .sigma
-  description:
-  - Estimate of residual standard deviation when corresponding observation is dropped
-    from model
-  - Estimate of residual standard deviation when corresponding observation is dropped
-    from model
-  - Estimate of residual standard deviation when corresponding observation is dropped
-    from model
-  - Estimate of residual standard deviation when corresponding observation is dropped
-    from model
-  - Estimate of residual standard deviation when corresponding observation is dropped
-    from model
+  description: Estimate of residual standard deviation when corresponding observation is dropped
+    from model. Same as LOO-CV estimate?.
   used_by:
   - glm
   - glmRob
@@ -240,27 +150,8 @@
   - lmRob
   - rlm
 - column: .std.resid
-  description:
-  - 'Standardised residuals  Some unusual `lm` objects, such as `rlm` from MASS, may
-    omit `.cooksd` and `.std.resid`. `gam` from mgcv omits `.sigma`.  When `newdata`
-    is supplied, returns one row for each observation, with three columns added to
-    the new data: '
-  - 'Standardised residuals  Some unusual `lm` objects, such as `rlm` from MASS, may
-    omit `.cooksd` and `.std.resid`. `gam` from mgcv omits `.sigma`.  When `newdata`
-    is supplied, returns one row for each observation, with three columns added to
-    the new data: '
-  - 'Standardised residuals  Some unusual `lm` objects, such as `rlm` from MASS, may
-    omit `.cooksd` and `.std.resid`. `gam` from mgcv omits `.sigma`.  When `newdata`
-    is supplied, returns one row for each observation, with three columns added to
-    the new data: '
-  - 'Standardised residuals  Some unusual `lm` objects, such as `rlm` from MASS, may
-    omit `.cooksd` and `.std.resid`. `gam` from mgcv omits `.sigma`.  When `newdata`
-    is supplied, returns one row for each observation, with three columns added to
-    the new data: '
-  - 'Standardised residuals  Some unusual `lm` objects, such as `rlm` from MASS, may
-    omit `.cooksd` and `.std.resid`. `gam` from mgcv omits `.sigma`.  When `newdata`
-    is supplied, returns one row for each observation, with three columns added to
-    the new data: '
+  description: Standardised residuals  Some unusual `lm` objects, such as `rlm` from MASS, may
+    omit `.cooksd` and `.std.resid`.
   used_by:
   - glm
   - glmRob
@@ -271,13 +162,8 @@
   description: Standardized residual
   used_by: htest
 - column: .tau
-  description:
-  - 'Quantile estimated  Depending on the arguments passed on to `predict.rq` via
-    `...`, a confidence interval is also calculated on the fitted values resulting
-    in columns:'
-  - 'Quantile estimated  Depending on the arguments passed on to `predict.rqs` via
-    `...`, a confidence interval is also calculated on the fitted values resulting
-    in columns:'
+  description: Quantile estimated  Depending on the arguments passed on to `predict.rq` via
+    `...`, a confidence interval is also calculated on the fitted values.
   used_by:
   - rq
   - rqs
@@ -286,38 +172,28 @@
     a probability of 0.9 of being in its assigned class under the model, then the
     uncertainty is 0.1.
   used_by: Mclust
-- column: '`.remainder`'
-  description:
-  - The remainder, or "random" component of the decomposition.
-  - The remainder, or "random" component of the decomposition.
+- column: .remainder
+  description: The remainder, or *random* component of the decomposition.
   used_by:
   - decomposed.ts
   - stl
-- column: '`.seasadj`'
-  description:
-  - The seasonally adjusted (or "deseasonalised") series.
-  - The seasonally adjusted (or "deseasonalised") series.
+- column: .seasadj
+  description: The seasonally adjusted (or *deseasonalised*) series.
   used_by:
   - decomposed.ts
   - stl
-- column: '`.seasonal`'
-  description:
-  - The seasonal component of the decomposition.
-  - The seasonal component of the decomposition.
+- column: .seasonal
+  description: The seasonal component of the decomposition.
   used_by:
   - decomposed.ts
   - stl
-- column: '`.trend`'
-  description:
-  - The trend component of the decomposition.
-  - The trend component of the decomposition.
+- column: .trend
+  description: The trend component of the decomposition.
   used_by:
   - decomposed.ts
   - stl
-- column: '`.weight`'
-  description:
-  - The final robust weights (`stl` only).
-  - The final robust weights, if requested.
+- column: .weight
+  description: The final robust weights (`stl` only, if requested).
   used_by:
   - decomposed.ts
   - stl

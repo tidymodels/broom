@@ -125,9 +125,7 @@
   - survdiff
   - survreg
 - column: df.null
-  description: Degrees of freedom for the null model. TODO: pick canonical description
-  - The degrees of freedom of the null deviance
-  - the residual degrees of freedom for the null model
+  description: Needs custom info.
   used_by:
   - ergm
   - glm
@@ -269,9 +267,7 @@
   description: median survival
   used_by: survfit
 - column: method
-  description:
-  - The estimation method; always Maximum Likelihood, "mle"
-  - Method used to compute the statistic as a string
+  description: Needs custom info.
   used_by:
   - factanal
   - garch
@@ -282,21 +278,13 @@
   description: The minimum observed event or censoring time
   used_by: muhaz
 - column: missing_method
-  description: Method for eliminating missing data  For further recommendations on
-    reporting SEM and CFA models see Schreiber, J. B. (2017). Update to core reporting
-    practices in structural equation modeling. Research in Social and Administrative
-    Pharmacy, 13(3), 634-643. https://doi.org/10.1016/j.sapharm.2016.06.006
+  description: Method for eliminating missing data.
   used_by: lavaan
 - column: model
   description: A character string denoting the model at which the optimal BIC occurs
   used_by: Mclust
-- column: 'n'
-  description:
-  - Sample size uzed to achieve this power.
-  - number of predictions
-  - Sample size used in the analysis
-  - Number of observations used in estimation
-  - The number of observations in the data
+- column: n
+  description: Needs custom info.
   used_by:
   - binDesign
   - cch
@@ -355,22 +343,7 @@
   description: total number of person-years off table
   used_by: pyears
 - column: p.value
-  description:
-  - p-value based on chi-squared statistic
-  - p-value from Wald test
-  - p-value from the significance test, describing whether the covariance matrix estimated
-    from the factors is significantly different from the observed covariance matrix
-  - p-value from the F test
-  - P-value
-  - P-value from J-test
-  - P-value associated with `statistic`.
-  - p-value from the Wald test
-  - p-value from the F test, describing whether the full regression is significant
-  - OLS parametric p-value
-  - p-value from the F test, describing whether the full regression is significant
-  - p-value from the F test, describing whether the full regression is significant
-  - p-value
-  - p-value from chi-squared test
+  description: Needs custom info.
   used_by:
   - aareg
   - cch
@@ -440,7 +413,7 @@
   description: Spearman's rho autocorrelation
   used_by: orcutt
 - column: rmean
-  description: Restricted mean (see [survival:print.survfit::survival::print.survfit()()]
+  description: Restricted mean (see [survival::print.survfit()]).
   used_by: survfit
 - column: rmean.std.error
   description: Restricted mean standard error
@@ -478,19 +451,7 @@
   description: Standardised root mean residual
   used_by: lavaan
 - column: statistic
-  description:
-  - chi-squared statistic
-  - Significance-test statistic
-  - F-statistic
-  - Test statistic used to compute the p-value
-  - Statistic from J-test for E(g)=0
-  - TODO TODO TODO Wald test statistic. Should probably be documented individually.
-  - Wald test statistic
-  - F-statistic
-  - F-statistic
-  - F-statistic
-  - value of the test statistic
-  - chi-squared statistic
+  description: Needs custom info.
   used_by:
   - aareg
   - factanal
@@ -505,18 +466,12 @@
   - survdiff
   - survreg
 - column: statistic.Sargan
-  description:
-  - Statistic for Sargan test.
-  - Statistic for Sargan test
+  description: Statistic for Sargan test.
   used_by:
-  - ivreg
   - ivreg
 - column: statistic.weakinst
-  description:
-  - 'Statistic for weak instruments test.  A one-row tibble with columns '
-  - Statistic for Wu-Hausman test
+  description: Statistic for Wu-Hausman test.
   used_by:
-  - ivreg
   - ivreg
 - column: statistic.Wu.Hausman
   description: Statistic for Wu-Hausman test.
