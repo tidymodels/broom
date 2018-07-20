@@ -22,6 +22,8 @@ accept a \code{newdata} argument, it will use the default value for
 the \code{data} argument.}
 }
 \value{
+A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
+
 A \code{\link[tibble:tibble]{tibble::tibble()}} with three columns:
 \item{cutoff}{The cutoff used for classification. Observations with
 predicted probabilities above this value were assigned class 1, and

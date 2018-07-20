@@ -1,35 +1,1008 @@
-- column: term
-  description: TODO
+- column: '...'
+  description: The initial columns correspond to the grouping factors on the right
+    hand side of the model formula.
+  used_by: survdiff
+- column: '`cumulative`'
+  description:
+  - Cumulative percentage of variation explained
+  - Cumulative percentage of variation explained
+  - Cumulative percentage of variation explained
   used_by:
-    - betareg
-    - ivreg
-- column: estimate
-  description: Estimated value of `term`.
+  - tidy_irlba
+  - tidy_svd
+  - prcomp
+- column: '`PC`'
+  description:
+  - Integer indicating a principle component.
+  - An integer vector indicating the principal component
+  - An integer vector indicating the principal component
+  - Integer indicating a principle component.
+  - An integer vector indicating the principal component
+  - An integer vector indicating the principal component
+  - Integer indicating a principle component.
+  - An integer vector indicating the principal component
+  - An integer vector indicating the principal component
   used_by:
-    - betareg
-    - ivreg
-- column: std.error
-  description: TODO
+  - tidy_irlba
+  - tidy_irlba
+  - tidy_irlba
+  - tidy_svd
+  - tidy_svd
+  - tidy_svd
+  - prcomp
+  - prcomp
+  - prcomp
+- column: '`percent`'
+  description:
+  - Percentage of variation explained
+  - Percentage of variation explained
+  - Percentage of variation explained
   used_by:
-    - betareg
-    - ivreg
-- column: statistic
-  description: TODO
+  - tidy_irlba
+  - tidy_svd
+  - prcomp
+- column: '`row`'
+  description:
+  - ID of the original observation (i.e. rowname from original data).
+  - The variable labels (colnames) of the data set on which PCA was performed
+  - ID of the original observation (i.e. rowname from original data).
+  - The variable labels (colnames) of the data set on which PCA was performed
+  - ID of the original observation (i.e. rowname from original data).
+  - The variable labels (colnames) of the data set on which PCA was performed
   used_by:
-    - betareg
-    - ivreg
-- column: p.value
-  description: TODO
+  - tidy_irlba
+  - tidy_irlba
+  - tidy_svd
+  - tidy_svd
+  - prcomp
+  - prcomp
+- column: '`std.dev`'
+  description:
+  - Standard deviation explained by this PC
+  - Standard deviation explained by this PC
+  - Standard deviation explained by this PC
   used_by:
-    - betareg
-    - ivreg
-- column: conf.low
-  description: TODO
+  - tidy_irlba
+  - tidy_svd
+  - prcomp
+- column: '`value`'
+  description:
+  - 'The score of the observation for that particular principle component. That is,
+    the location of the observation in PCA space.  If `matrix` is `"v"`, `"rotation"`,
+    or `"variables"`, each row in the tidied ouput corresponds to information about
+    the principle components in the original space. The columns are: '
+  - 'The value of the eigenvector (axis score) on the indicated principal component  If
+    `matrix` is `"d"` or `"pcs"`, the columns are: '
+  - 'The score of the observation for that particular principle component. That is,
+    the location of the observation in PCA space.  If `matrix` is `"v"`, `"rotation"`,
+    or `"variables"`, each row in the tidied ouput corresponds to information about
+    the principle components in the original space. The columns are: '
+  - 'The value of the eigenvector (axis score) on the indicated principal component  If
+    `matrix` is `"d"` or `"pcs"`, the columns are: '
+  - 'The score of the observation for that particular principle component. That is,
+    the location of the observation in PCA space.  If `matrix` is `"v"`, `"rotation"`,
+    or `"variables"`, each row in the tidied ouput corresponds to information about
+    the principle components in the original space. The columns are: '
+  - 'The value of the eigenvector (axis score) on the indicated principal component  If
+    `matrix` is `"d"` or `"pcs"`, the columns are: '
   used_by:
-    - betareg
-    - ivreg
+  - tidy_irlba
+  - tidy_irlba
+  - tidy_svd
+  - tidy_svd
+  - prcomp
+  - prcomp
+- column: acf
+  description: calculated correlation
+  used_by: acf
+- column: adj.p.value
+  description: P-value adjusted for multiple comparisons
+  used_by: TukeyHSD
+- column: alternative
+  description:
+  - Alternative hypothesis.
+  - Alternative hypothesis as a string
+  used_by:
+  - binWidth
+  - htest
+- column: bias
+  description: Bias of the statistic.
+  used_by: boot
+- column: ci.width
+  description: Expected width of confidence interval.
+  used_by: binWidth
+- column: class
+  description:
+  - Which class the term is a measurement of
+  - Latent class ID, an integer
+  used_by:
+  - confusionMatrix
+  - poLCA
+- column: cluster
+  description: A factor describing the cluster from 1:k
+  used_by: kmeans
+- column: column1
+  description: Name or index of the first column being described
+  used_by: rcorr
+- column: column2
+  description: Name or index of the second column being described
+  used_by: rcorr
+- column: comparison
+  description: Levels being compared, separated by -
+  used_by: TukeyHSD
+- column: component
+  description: Cluster id as a factor. For a model `k` clusters, these will be `as.factor(1:k)`,
+    or `as.factor(0:k)` if there's a noise term.
+  used_by: Mclust
 - column: conf.high
-  description: TODO
+  description:
+  - high end of confidence interval
+  - TODO  The tibble has one row for each term in the regression. The `component`
+    column indicates whether a particular term was used to model either the `"mean"`
+    or `"precision"`. Here the precision is the inverse of the variance, often referred
+    to as `phi`. At least one term will have been used to model the precision `phi`.
+  - The high end of a confidence interval for the regression term. Included only if
+    `conf.int = TRUE`.
+  - The lower bound of the confidence interval.
+  - The high end of a confidence interval for the regression term. Included only if
+    `conf.int = TRUE`.
+  - High end of 95 percent CI only applicable to accuracy
+  - Upper bound on confidence interval for cross-validation estimated loss.
+  - The high end of a confidence interval for the regression term. Included only if
+    `conf.int = TRUE`.  If `fe = TRUE`, also includes rows for for fixed effects estimates.
+  - 'The high end of a confidence interval for the regression term. Included only
+    if `conf.int = TRUE`.  If the linear model is an `mlm` object (multiple linear
+    model), there is an additional column: '
+  - 'The high end of a confidence interval for the regression term. Included only
+    if `conf.int = TRUE`.  If the linear model is an `mlm` object (multiple linear
+    model), there is an additional column: '
+  - The high end of a confidence interval for the regression term. Included only if
+    `conf.int = TRUE`.
+  - Upper bound on a confidence interval
+  - TODO
+  - Upper bound of confidence interval
+  - ''
+  - 'The high end of a confidence interval for the regression term. Included only
+    if `conf.int = TRUE`.  If the linear model is an `mlm` object (multiple linear
+    model), there is an additional column: '
+  - Upper bound of 95\% confidence interval
+  - 'The high end of a confidence interval for the regression term. Included only
+    if `conf.int = TRUE`.  If the linear model is an `mlm` object (multiple linear
+    model), there is an additional column: '
+  - The high end of a confidence interval for the regression term. Included only if
+    `conf.int = TRUE`.
+  - The high end of a confidence interval for the regression term. Included only if
+    `conf.int = TRUE`.
+  - The high end of a confidence interval for the regression term. Included only if
+    `conf.int = TRUE`.
+  - The high end of a confidence interval for the regression term. Included only if
+    `conf.int = TRUE`.
+  - 'The high end of a confidence interval for the regression term. Included only
+    if `conf.int = TRUE`.  If the linear model is an `mlm` object (multiple linear
+    model), there is an additional column: '
+  - The high end of a confidence interval for the regression term. Included only if
+    `conf.int = TRUE`.
+  - The high end of a confidence interval for the regression term. Included only if
+    `conf.int = TRUE`.  An additional `quantile` column indicating with quantile the
+    coefficient corresponds to.
+  - 'The high end of a confidence interval for the regression term. Included only
+    if `conf.int = TRUE`.  If the linear model is an `mlm` object (multiple linear
+    model), there is an additional column: '
+  - upper end of confidence interval
+  - The high end of a confidence interval for the regression term. Included only if
+    `conf.int = TRUE`.
+  - High end of confidence interval of difference
   used_by:
-    - betareg
-    - ivreg
+  - Arima
+  - betareg
+  - biglm
+  - btergm
+  - cch
+  - confusionMatrix
+  - cv.glmnet
+  - felm
+  - glm
+  - glmRob
+  - gmm
+  - htest
+  - ivreg
+  - kappa
+  - lavaan
+  - lm
+  - lmodel2
+  - lmRob
+  - mjoint
+  - nlrq
+  - nls
+  - plm
+  - rlm
+  - rq
+  - rqs
+  - speedlm
+  - survfit
+  - survreg
+  - TukeyHSD
+- column: conf.low
+  description:
+  - low end of confidence interval
+  - TODO
+  - The low end of a confidence interval for the regression term. Included only if
+    `conf.int = TRUE`.
+  - The lower bound of the confidence interval.
+  - The low end of a confidence interval for the regression term. Included only if
+    `conf.int = TRUE`.
+  - Low end of 95 percent CI only applicable to accuracy
+  - lower bound on confidence interval for cross-validation estimated loss.
+  - The low end of a confidence interval for the regression term. Included only if
+    `conf.int = TRUE`.
+  - The low end of a confidence interval for the regression term. Included only if
+    `conf.int = TRUE`.
+  - The low end of a confidence interval for the regression term. Included only if
+    `conf.int = TRUE`.
+  - The low end of a confidence interval for the regression term. Included only if
+    `conf.int = TRUE`.
+  - Lower bound on a confidence interval
+  - TODO
+  - Lower bound of confidence interval
+  - ''
+  - The low end of a confidence interval for the regression term. Included only if
+    `conf.int = TRUE`.
+  - Lower bound of 95\% confidence interval
+  - The low end of a confidence interval for the regression term. Included only if
+    `conf.int = TRUE`.
+  - The low end of a confidence interval for the regression term. Included only if
+    `conf.int = TRUE`.
+  - The low end of a confidence interval for the regression term. Included only if
+    `conf.int = TRUE`.
+  - The low end of a confidence interval for the regression term. Included only if
+    `conf.int = TRUE`.
+  - The low end of a confidence interval for the regression term. Included only if
+    `conf.int = TRUE`.
+  - The low end of a confidence interval for the regression term. Included only if
+    `conf.int = TRUE`.
+  - The low end of a confidence interval for the regression term. Included only if
+    `conf.int = TRUE`.
+  - The low end of a confidence interval for the regression term. Included only if
+    `conf.int = TRUE`.
+  - The low end of a confidence interval for the regression term. Included only if
+    `conf.int = TRUE`.
+  - lower end of confidence interval
+  - The low end of a confidence interval for the regression term. Included only if
+    `conf.int = TRUE`.
+  - Low end of confidence interval of difference
+  used_by:
+  - Arima
+  - betareg
+  - biglm
+  - btergm
+  - cch
+  - confusionMatrix
+  - cv.glmnet
+  - felm
+  - glm
+  - glmRob
+  - gmm
+  - htest
+  - ivreg
+  - kappa
+  - lavaan
+  - lm
+  - lmodel2
+  - lmRob
+  - mjoint
+  - nlrq
+  - nls
+  - plm
+  - rlm
+  - rq
+  - rqs
+  - speedlm
+  - survfit
+  - survreg
+  - TukeyHSD
+- column: cutoff
+  description: The cutoff used for classification. Observations with predicted probabilities
+    above this value were assigned class 1, and observations with predicted probabilities
+    below this value were assigned class 0.
+  used_by: roc
+- column: denominator
+  description: The denominator, which is tau=kendall_score/denominator.
+  used_by: Kendall
+- column: dev.ratio
+  description: fraction of null deviance explained at each value of lambda
+  used_by: glmnet
+- column: df
+  description:
+  - Degrees of freedom used by this term in the model
+  - Degrees of freedom used by this term in the model
+  - Degrees of freedom used by this term in the model
+  used_by:
+  - anova
+  - aov
+  - aovlist
+- column: distance
+  description: Distance between items
+  used_by: dist
+- column: estimate
+  description:
+  - estimate of the slope
+  - The estimated coefficient
+  - Estimated value of `term`.
+  - The estimated value of the regression term.
+  - The estimated value of the coefficient.
+  - The estimated value of the regression term.
+  - The estimated coefficient
+  - The value of the statistic
+  - estimate of slope
+  - Median loss across all cross-validation folds for a given lambda.
+  - The estimated coefficient
+  - The estimated value of the regression term.
+  - Estimated value
+  - Estimate coefficient of given term.
+  - The estimated coefficient
+  - The estimated value of the regression term.
+  - estimate of coefficient
+  - The estimated value of the regression term.
+  - The estimated value of the regression term.
+  - Estimate of the effect size
+  - Estimated value of `term`.
+  - The estimated value of kappa with this method
+  - The parameter estimate (may be standardized)
+  - The estimated value of the regression term.
+  - Estimated coefficient
+  - The estimated value of the regression term.
+  - The estimated value of the regression term.
+  - The estimated hazard rate.
+  - The estimated coefficient
+  - The estimated value of the regression term.
+  - The estimated value of the regression term.
+  - The estimated value of the regression term.
+  - Estimated class-conditional response probability
+  - Estimate of Pearson's r or Spearman's rho
+  - estimate of scaled coefficient using this lambda
+  - The estimated value of the regression term.
+  - The estimated value of the regression term.
+  - The estimated value of the regression term.
+  - The estimated value of the regression term.
+  - estimated survival
+  - estimate of survival or cumulative incidence rate when multistate
+  - The estimated value of the regression term.
+  - Estimate of difference
+  used_by:
+  - aareg
+  - Arima
+  - betareg
+  - biglm
+  - btergm
+  - cch
+  - coeftest
+  - confusionMatrix
+  - coxph
+  - cv.glmnet
+  - ergm
+  - felm
+  - fitdistr
+  - gamlss
+  - garch
+  - glm
+  - glmnet
+  - glmRob
+  - gmm
+  - htest
+  - ivreg
+  - kappa
+  - lavaan
+  - lm
+  - lmodel2
+  - lmRob
+  - mjoint
+  - muhaz
+  - multinom
+  - nlrq
+  - nls
+  - plm
+  - poLCA
+  - rcorr
+  - ridgelm
+  - rlm
+  - rq
+  - rqs
+  - speedlm
+  - survexp
+  - survfit
+  - survreg
+  - TukeyHSD
+- column: estimate1
+  description: Sometimes two estimates are computed, such as in a two-sample t-test
+  used_by: htest
+- column: estimate2
+  description: Sometimes two estimates are computed, such as in a two-sample t-test
+  used_by: htest
+- column: event
+  description: observed number of events
+  used_by: pyears
+- column: exp
+  description: weighted expected number of events in each group
+  used_by: survdiff
+- column: expected
+  description: expected number of events (present only if a `ratetable` term is present)  If
+    the `data.frame = TRUE` argument is supplied to `pyears`, this is simply the contents
+    of `x$data`.
+  used_by: pyears
+- column: flX
+  description: Factor loading of term on factor X. There will be as many columns of
+    this format as there were factors fitted.
+  used_by: factanal
+- column: fpr
+  description: The false positive rate at the given cutoff.
+  used_by: roc
+- column: GCV
+  description: generalized cross validation value for this lambda
+  used_by: ridgelm
+- column: group
+  description: The group (if specified) in the lavaan model
+  used_by: lavaan
+- column: group1
+  description: First group being compared
+  used_by: pairwise.htest
+- column: group2
+  description: Second group being compared
+  used_by: pairwise.htest
+- column: index
+  description:
+  - Index (i.e. date or time) for the "ts" object.
+  - Index (usually date) for the zoo object
+  used_by:
+  - ts
+  - zoo
+- column: item1
+  description: First item
+  used_by: dist
+- column: item2
+  description: Second item
+  used_by: dist
+- column: k[tibble:tibble]{tibble::tibble} with columns:\preformatted{\item{term
+  description: Term in design
+  used_by: manova
+- column: 'k[tibble:tibble]{tibble::tibble} with one row for each pair of items in
+    the distance matrix, with columns: '
+  description: .na.character
+  used_by: dist
+- column: kendall_score
+  description: Kendall score.
+  used_by: Kendall
+- column: lag
+  description: lag values
+  used_by: acf
+- column: lambda
+  description:
+  - Value of the penalty parameter lambda.
+  - value of penalty parameter lambda
+  - choice of lambda
+  used_by:
+  - cv.glmnet
+  - glmnet
+  - ridgelm
+- column: mcmc.error
+  description: The MCMC error
+  used_by: ergm
+- column: mean
+  description: The mean for each component. In case of 2+ dimensional models, a column
+    with the mean is added for each dimension. NA for noise component
+  used_by: Mclust
+- column: meansq
+  description:
+  - Mean of sum of squares among degrees of freedom
+  - Mean of sum of squares among degrees of freedom
+  - Mean of sum of squares among degrees of freedom
+  used_by:
+  - anova
+  - aov
+  - aovlist
+- column: method
+  description:
+  - Method used to compute the statistic as a string
+  - Either OLS/MA/SMA/RMA
+  used_by:
+  - htest
+  - lmodel2
+- column: 'n'
+  description:
+  - Number of trials in given iteration.
+  - Total sample size.
+  - number of subjects contributing time
+  - Number of observations used to compute the correlation
+  used_by:
+  - binDesign
+  - binWidth
+  - pyears
+  - rcorr
+- column: 'N'
+  description: number of subjects in each group
+  used_by: survdiff
+- column: n.censor
+  description: number of censored events
+  used_by: survfit
+- column: n.event
+  description: number of events at time t
+  used_by: survfit
+- column: n.risk
+  description:
+  - number of individuals at risk
+  - number of subjects at risk at time t0
+  used_by:
+  - survexp
+  - survfit
+- column: num.df
+  description: Degrees of freedom
+  used_by: manova
+- column: nzero
+  description: Number of coefficients that are exactly zero for given lambda.
+  used_by: cv.glmnet
+- column: obs
+  description: weighted observed number of events in each group
+  used_by: survdiff
+- column: op
+  description: The operator in the model syntax (e.g. `~~` for covariances, or `~`
+    for regression parameters)
+  used_by: lavaan
+- column: outcome
+  description: Outcome of manifest variable
+  used_by: poLCA
+- column: p
+  description: True proportion.
+  used_by: binWidth
+- column: p.value
+  description:
+  - p-value
+  - P-value from F test
+  - P-value from F test
+  - P-value from F test
+  - TODO
+  - The two-sided p-value associated with the observed statistic.
+  - The two-sided p-value associated with the observed statistic.
+  - p-value
+  - P-value for accuracy and kappa statistics
+  - p-value
+  - The two-sided p-value  If `conf.int = TRUE`, it also includes columns for `conf.low`
+    and `conf.high`.
+  - The two-sided p-value associated with the observed statistic.
+  - Two sided p-value based on null hypothesis of coefficient equaling zero.
+  - p-value
+  - The two-sided p-value associated with the observed statistic.
+  - The two-sided p-value associated with the observed statistic.
+  - The two-sided p-value associated with the observed statistic.
+  - P-value
+  - TODO
+  - two-sided p-value.
+  - ''
+  - The two-sided p-value associated with the observed statistic.
+  - The two-sided p-value associated with the observed statistic.
+  - P-value
+  - The two-sided p-value associated with the observed statistic.
+  - two-sided p-value  If `conf.int = TRUE`, also includes columns for `conf.low`
+    and `conf.high`.
+  - The two-sided p-value associated with the observed statistic.
+  - The two-sided p-value associated with the observed statistic.
+  - (Adjusted) p-value of comparison
+  - The two-sided p-value associated with the observed statistic.
+  - P-value of correlation
+  - The two-sided p-value associated with the observed statistic.
+  - The two-sided p-value associated with the observed statistic.
+  - The two-sided p-value associated with the observed statistic.
+  - The two-sided p-value associated with the observed statistic.
+  - The two-sided p-value associated with the observed statistic.
+  used_by:
+  - aareg
+  - anova
+  - aov
+  - aovlist
+  - betareg
+  - biglm
+  - cch
+  - coeftest
+  - confusionMatrix
+  - coxph
+  - ergm
+  - felm
+  - gamlss
+  - garch
+  - glm
+  - glmRob
+  - gmm
+  - htest
+  - ivreg
+  - Kendall
+  - lavaan
+  - lm
+  - lmRob
+  - manova
+  - mjoint
+  - multinom
+  - nlrq
+  - nls
+  - pairwise.htest
+  - plm
+  - rcorr
+  - rlm
+  - rq
+  - rqs
+  - speedlm
+  - survreg
+- column: parameter
+  description:
+  - name of the parameter, or `parameter1`, `parameter2`... if the input vector is
+    not named
+  - 'Type of coefficient being estimated: `mu`, `sigma`, `nu`, or `tau`.'
+  - Parameter field in the htest, typically degrees of freedom
+  used_by:
+  - tidy_optim
+  - gamlss
+  - htest
+- column: power
+  description: Power achieved for given value of n.
+  used_by: binDesign
+- column: proportion
+  description: The mixing proportion of each component
+  used_by: Mclust
+- column: pyears
+  description: person-years of exposure
+  used_by: pyears
+- column: response
+  description:
+  - Which response column the coefficients correspond to (typically Y1, Y2, etc)
+  - Which response column the coefficients correspond to (typically Y1, Y2, etc)
+  - Which response column the coefficients correspond to (typically Y1, Y2, etc)
+  - Which response column the coefficients correspond to (typically Y1, Y2, etc)
+  - Which response column the coefficients correspond to (typically Y1, Y2, etc)
+  - Which response column the coefficients correspond to (typically Y1, Y2, etc)
+  used_by:
+  - glm
+  - glmRob
+  - lm
+  - lmRob
+  - rlm
+  - speedlm
+- column: robust.se
+  description: robust version of standard error estimate (only when `x` was called
+    with `dfbeta = TRUE`)
+  used_by: aareg
+- column: scale
+  description: Scaling factor of estimated coefficient
+  used_by: ridgelm
+- column: series
+  description:
+  - Name of the series (multivariate "ts" objects only).
+  - Name of the series
+  used_by:
+  - ts
+  - zoo
+- column: size
+  description:
+  - Number of points in cluster
+  - Number of observations assigned to component
+  used_by:
+  - kmeans
+  - Mclust
+- column: state
+  description: state if multistate survfit object inputted
+  used_by: survfit
+- column: statistic
+  description:
+  - test statistic for coefficient
+  - F statistic
+  - F statistic
+  - F statistic
+  - TODO
+  - The value of a statistic, almost always a T-statistic, to use in a hypothesis
+    that the regression term is non-zero.
+  - Original value of the statistic.
+  - The value of a statistic, almost always a T-statistic, to use in a hypothesis
+    that the regression term is non-zero.
+  - test statistic
+  - test statistic
+  - The value of a statistic, almost always a T-statistic, to use in a hypothesis
+    that the regression term is non-zero.
+  - T-statistic used to test hypothesis that coefficien equals zero.
+  - test statistic
+  - The value of a statistic, almost always a T-statistic, to use in a hypothesis
+    that the regression term is non-zero.
+  - The value of a statistic, almost always a T-statistic, to use in a hypothesis
+    that the regression term is non-zero.
+  - The value of a statistic, almost always a T-statistic, to use in a hypothesis
+    that the regression term is non-zero.
+  - Test statistic used to compute the p-value
+  - TODO
+  - Kendall's tau statistic.
+  - The z value returned by [lavaan:parameterEstimates::lavaan::parameterEstimates()()]
+  - The value of a statistic, almost always a T-statistic, to use in a hypothesis
+    that the regression term is non-zero.
+  - The value of a statistic, almost always a T-statistic, to use in a hypothesis
+    that the regression term is non-zero.
+  - Approximate F statistic
+  - The value of a statistic, almost always a T-statistic, to use in a hypothesis
+    that the regression term is non-zero.
+  - Wald z-statistic
+  - The value of a statistic, almost always a T-statistic, to use in a hypothesis
+    that the regression term is non-zero.
+  - The value of a statistic, almost always a T-statistic, to use in a hypothesis
+    that the regression term is non-zero.
+  - The value of a statistic, almost always a T-statistic, to use in a hypothesis
+    that the regression term is non-zero.
+  - The value of a statistic, almost always a T-statistic, to use in a hypothesis
+    that the regression term is non-zero.
+  - The value of a statistic, almost always a T-statistic, to use in a hypothesis
+    that the regression term is non-zero.
+  - The value of a statistic, almost always a T-statistic, to use in a hypothesis
+    that the regression term is non-zero.
+  - The value of a statistic, almost always a T-statistic, to use in a hypothesis
+    that the regression term is non-zero.
+  - The value of a statistic, almost always a T-statistic, to use in a hypothesis
+    that the regression term is non-zero.
+  used_by:
+  - aareg
+  - anova
+  - aov
+  - aovlist
+  - betareg
+  - biglm
+  - boot
+  - cch
+  - coeftest
+  - coxph
+  - felm
+  - gamlss
+  - garch
+  - glm
+  - glmRob
+  - gmm
+  - htest
+  - ivreg
+  - Kendall
+  - lavaan
+  - lm
+  - lmRob
+  - manova
+  - mjoint
+  - multinom
+  - nlrq
+  - nls
+  - plm
+  - rlm
+  - rq
+  - rqs
+  - speedlm
+  - survreg
+- column: std.all
+  description: Standardized estimates based on both the variances of both (continuous)
+    observed and latent variables.
+  used_by: lavaan
+- column: std.error
+  description:
+  - standard error of statistic
+  - The standard error from the linear model  If `conf.int = TRUE`, also returns
+  - TODO
+  - The standard error of the regression term.
+  - Standard error of the statistic.  If weights were provided to the `boot` function,
+    an `estimate` column is included showing the weighted bootstrap estimate, and
+    the standard error is of that estimate.  If there are no original statistics in
+    the "boot" object, such as with a call to `tsboot` with `orig.t = FALSE`, the
+    `original` and `statistic` columns are omitted, and only `estimate` and `std.error`
+    columns shown.
+  - The standard error of the regression term.
+  - The standard error
+  - standard error of estimate
+  - Standard error of the cross-validation estimated loss.
+  - The standard error
+  - The standard error of the regression term.
+  - Standard error of estimate
+  - Standard error of given term.
+  - The standard error
+  - The standard error of the regression term.
+  - The standard error of the regression term.
+  - The standard error of the regression term.
+  - TODO
+  - ''
+  - The standard error of the regression term.
+  - The standard error of the regression term.
+  - The standard error of the regression term.
+  - The standard error from the linear model
+  - The standard error of the regression term.
+  - The standard error of the regression term.
+  - The standard error of the regression term.
+  - Standard error of estimated probability
+  - The standard error of the regression term.
+  - The standard error of the regression term.
+  - The standard error of the regression term.
+  - The standard error of the regression term.
+  - standard error of estimate
+  - The standard error of the regression term.
+  used_by:
+  - aareg
+  - Arima
+  - betareg
+  - biglm
+  - boot
+  - cch
+  - coeftest
+  - coxph
+  - cv.glmnet
+  - ergm
+  - felm
+  - fitdistr
+  - gamlss
+  - garch
+  - glm
+  - glmRob
+  - gmm
+  - ivreg
+  - lavaan
+  - lm
+  - lmRob
+  - mjoint
+  - multinom
+  - nlrq
+  - nls
+  - plm
+  - poLCA
+  - rlm
+  - rq
+  - rqs
+  - speedlm
+  - survfit
+  - survreg
+- column: std.lv
+  description: Standardized estimates based on the variances of the (continuous) latent
+    variables only
+  used_by: lavaan
+- column: std.nox
+  description: Standardized estimates based on both the variances of both (continuous)
+    observed and latent variables, but not the variances of exogenous covariates.
+  used_by: lavaan
+- column: step
+  description: which step of lambda choices was used
+  used_by: glmnet
+- column: strata
+  description: strata if stratified survfit object inputted
+  used_by: survfit
+- column: stratum
+  description: The error stratum
+  used_by: aovlist
+- column: sumsq
+  description:
+  - Sum of squares explained by this term
+  - Sum of squares explained by this term
+  - Sum of squares explained by this term
+  used_by:
+  - anova
+  - aov
+  - aovlist
+- column: term
+  description:
+  - name of coefficient
+  - Term within the model, or "Residuals"
+  - Term within the model, or "Residuals"
+  - Term within the model, or "Residuals"
+  - The term in the nonlinear model being estimated and tested
+  - TODO
+  - The name of the regression term.
+  - Name of the computed statistic, if present.
+  - The term in the model being estimated and tested.
+  - The name of the regression term.
+  - The term in the linear model being estimated and tested
+  - The name of a statistic from the confusion matrix
+  - The term in the model being estimated and tested
+  - The name of the regression term.
+  - The term that was estimated
+  - Name of term in the model.
+  - The term in the linear model being estimated and tested
+  - The name of the regression term.
+  - coefficient name (V1...VN by default, along with "(Intercept)")
+  - The name of the regression term.
+  - The name of the regression term.
+  - TODO
+  - The result of paste(lhs, op, rhs)
+  - The name of the regression term.
+  - Either "Intercept" or "Slope"
+  - The name of the regression term.
+  - The name of the regression term.
+  - The term in the model being estimated and tested
+  - The name of the regression term.
+  - The name of the regression term.
+  - The name of the regression term.
+  - the term in the ridge regression model being estimated
+  - The name of the regression term.
+  - The name of the regression term.
+  - The name of the regression term.
+  - The name of the regression term.
+  - The name of the regression term.
+  - Term for which levels are being compared
+  used_by:
+  - aareg
+  - anova
+  - aov
+  - aovlist
+  - Arima
+  - betareg
+  - biglm
+  - boot
+  - btergm
+  - cch
+  - coeftest
+  - confusionMatrix
+  - ergm
+  - felm
+  - fitdistr
+  - gamlss
+  - garch
+  - glm
+  - glmnet
+  - glmRob
+  - gmm
+  - ivreg
+  - lavaan
+  - lm
+  - lmodel2
+  - lmRob
+  - mjoint
+  - multinom
+  - nlrq
+  - nls
+  - plm
+  - ridgelm
+  - rlm
+  - rq
+  - rqs
+  - speedlm
+  - survreg
+  - TukeyHSD
+- column: time
+  description:
+  - The time at which the hazard rate was estimated.
+  - time point
+  - timepoint
+  used_by:
+  - muhaz
+  - survexp
+  - survfit
+- column: tpr
+  description: The true positive rate at the given cutoff.
+  used_by: roc
+- column: type
+  description: Either "weighted" or "unweighted"
+  used_by: kappa
+- column: uniqueness
+  description: Proportion of residual, or unexplained variance
+  used_by: factanal
+- column: value
+  description:
+  - parameter value that minimizes or maximizes the output
+  - Value of the observation.
+  - Value of the observation
+  used_by:
+  - tidy_optim
+  - ts
+  - zoo
+- column: var_kendall_score
+  description: Variance of the kendall_score.
+  used_by: Kendall
+- column: variable
+  description:
+  - The variable being estimated in the factor analysis
+  - Manifest variable
+  used_by:
+  - factanal
+  - poLCA
+- column: variance
+  description: In case of one-dimensional and spherical models, the variance for each
+    component, omitted otherwise. NA for noise component
+  used_by: Mclust
+- column: withinss
+  description: The within-cluster sum of squares
+  used_by: kmeans
+- column: y.value
+  description: The response level
+  used_by: multinom
+- column: z
+  description: z score
+  used_by: aareg

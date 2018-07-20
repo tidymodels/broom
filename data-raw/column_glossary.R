@@ -1,6 +1,6 @@
-library(dplyr)
-library(purrr)
-library(yaml)
+suppressPackageStartupMessages(library(dplyr))
+suppressPackageStartupMessages(library(purrr))
+suppressPackageStartupMessages(library(yaml))
 
 # col_desc() sources this file and then returns an roxygen2::rd_octlet()
 # so that the column glossary is automatically rebuilt everytime
@@ -18,15 +18,11 @@ load_columns <- function(file) {
     bind_rows()
 }
 
-tidy_columns <- load_columns("tidy.yaml")
-glance_columns <- load_columns("glance.yaml")
-augment_columns <- load_columns("augment.yaml")
-
 column_glossary <- 
   bind_rows(
-    glance_columns,
-    augment_columns,
-    tidy_columns,
+    load_columns("glance.yaml"),
+    load_columns("augment.yaml"),
+    load_columns("tidy.yaml"),
     .id = "method"
   ) %>% mutate(
     method = recode(
@@ -38,3 +34,4 @@ column_glossary <-
   )
 
 usethis::use_data(column_glossary, overwrite = TRUE)
+rm(load_columns, column_glossary)
