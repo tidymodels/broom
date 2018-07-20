@@ -1,18 +1,19 @@
-
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-broom <img src="man/figures/logo.png" align="right" width="100" height="100" />
-===============================================================================
 
-[![CRAN status](https://www.r-pkg.org/badges/version/broom)](https://cran.r-project.org/package=broom) [![Travis-CI Build Status](https://travis-ci.org/tidyverse/broom.svg?branch=master)](https://travis-ci.org/tidyverse/broom) [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/tidyverse/broom?branch=master&svg=true)](https://ci.appveyor.com/project/tidyverse/broom) [![Coverage Status](https://img.shields.io/codecov/c/github/tidyverse/broom/master.svg)](https://codecov.io/github/tidyverse/broom?branch=master)
+# broom  <img src="man/figures/logo.png" align="right" width="100" height="100" />
 
-Overview
---------
+[![CRAN status](https://www.r-pkg.org/badges/version/broom)](https://cran.r-project.org/package=broom)
+[![Travis-CI Build Status](https://travis-ci.org/tidymodels/broom.svg?branch=master)](https://travis-ci.org/tidymodels/broom)
+[![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/tidymodels/broom?branch=master&svg=true)](https://ci.appveyor.com/project/tidymodels/broom)
+[![Coverage Status](https://img.shields.io/codecov/c/github/tidymodels/broom/master.svg)](https://codecov.io/github/tidymodels/broom?branch=master)
+
+## Overview
 
 broom summarizes key information about models in tidy `tibble()`s. broom provides three verbs to make it convenient to interact with model objects:
 
--   `tidy()` summarizes information about model components
--   `glance()` reports information about the entire model
--   `augment()` adds informations about observations to a dataset
+- `tidy()` summarizes information about model components
+- `glance()` reports information about the entire model
+- `augment()` adds informations about observations to a dataset
 
 For a detailed introduction, please see `vignette("broom")`.
 
@@ -20,29 +21,29 @@ broom tidies 100+ models from popular modelling packages and almost all of the m
 
 If you aren't familiar with tidy data structures and want to know how they can make your life easier, we highly recommend reading Hadley Wickham's [Tidy Data](http://www.jstatsoft.org/v59/i10).
 
-Installation
-------------
+## Installation
 
-``` r
-# we recommend installing the entire tidyverse, which includes broom:
-install.packages("tidyverse")
+
+```r
+# we recommend installing the entire tidyverse modeling set, which includes broom:
+install.packages("tidymodels")
 
 # alternatively, to install just broom:
 install.packages("broom")
 
 # to get the development version from GitHub:
 install.packages("devtools")
-devtools::install_github("tidyverse/broom")
+devtools::install_github("tidymodels/broom")
 ```
 
-If you find a bug, please file a minimal reproducible example in the [issues](https://github.com/tidyverse/broom/issues).
+If you find a bug, please file a minimal reproducible example in the [issues](https://github.com/tidymodels/broom/issues).
 
-Usage
------
+## Usage
 
 `tidy()` produces a `tibble()` where each row contains information about an important component of the model. For regression models, this often corresponds to regression coefficients. This is can be useful if you want to inspect a model or create custom visualizations.
 
-``` r
+
+```r
 library(broom)
 
 fit <- lm(Sepal.Width ~ Petal.Length + Petal.Width, iris)
@@ -57,7 +58,8 @@ tidy(fit)
 
 `glance()` returns a tibble with exactly one row of goodness of fitness measures and related statistics. This is useful to check for model misspecification and to compare many models.
 
-``` r
+
+```r
 glance(fit)
 #> # A tibble: 1 x 11
 #>   r.squared adj.r.squared sigma statistic p.value    df logLik   AIC   BIC
@@ -68,7 +70,8 @@ glance(fit)
 
 `augment` adds columns to a dataset, containing information such as fitted values, residuals or cluster assignments. All columns added to a dataset have `.` prefix to prevent existing columns from being overwritten.
 
-``` r
+
+```r
 augment(fit, data = iris)
 #> # A tibble: 150 x 12
 #>    Sepal.Length Sepal.Width Petal.Length Petal.Width Species .fitted
@@ -92,7 +95,7 @@ augment(fit, data = iris)
 
 We welcome contributions of all types!
 
-If you have never made a pull request to an R package before, broom is an excellent place to start. Find an [issue](https://github.com/tidyverse/broom/issues/) with the **Beginner Friendly** tag and comment that you'd like to take it on and we'll help you get started.
+If you have never made a pull request to an R package before, broom is an excellent place to start. Find an [issue](https://github.com/tidymodels/broom/issues/) with the **Beginner Friendly** tag and comment that you'd like to take it on and we'll help you get started.
 
 We encourage typo corrections, bug reports, bug fixes and feature requests. Feedback on the clarity of the documentation is especially valuable.
 
