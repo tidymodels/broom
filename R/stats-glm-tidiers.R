@@ -13,6 +13,10 @@ tidy.glm <- function(x, ...) {
 #' @templateVar class glm
 #' @template title_desc_augment_lm_wrapper
 #'
+#' Note that if the weights for any of the observations in the model
+#'   are 0, then columns ".infl" and ".hat" in the result will be 0
+#'   for those observations.
+#'
 #' @param x A `glm` object returned from [stats::glm()].
 #'
 #' @export
