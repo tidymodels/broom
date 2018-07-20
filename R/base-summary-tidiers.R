@@ -14,24 +14,12 @@
 #'   \item{maximum}{Maximum value in original vector.}
 #'   \item{na}{Number of `NA` values in original vector. Column present only
 #'     when original vector had at least one `NA` entry.}
-#' 
-#'
-#' @examples
-#'
-#' v <- rnorm(1000)
-#' s <- summary(v)
-#' s
-#'
-#' tidy(s)
-#' glance(s)
-#'
-#' v2 <- c(v,NA)
-#' tidy(summary(v2))
 #'
 #' @name summary_tidiers
 #' @export
 #' @seealso [tidy()], [summary()]
 tidy.summaryDefault <- function(x, ...) {
+  .Deprecated(msg = "`tidy.summaryDefault()` is deprecated. Please use `skimr::skim()` instead.")
   ret <- as.data.frame(t(as.matrix(x)))
   cnms <- c("minimum", "q1", "median", "mean", "q3", "maximum")
   if ("NA's" %in% names(x)) {

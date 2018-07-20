@@ -62,9 +62,7 @@ first edition manages to use 'deviance' in three separate senses on one
 page. }
 }
 \description{
-\code{nlme} tidiers will soon be deprecated in \code{broom} and there is no ongoing
-development of these functions at this time. \code{nlme} tidiers are being
-developed in the \code{broom.mixed} package, which is not yet on CRAN.
+\code{nlme} tidiers are deprecated.
 }
 \details{
 These methods tidy the coefficients of mixed effects models
@@ -81,6 +79,7 @@ warning is raised and the incomplete rows are dropped.
 }
 \examples{
 
+\dontrun{
 if (require("nlme") & require("lme4")) {
     # example regressions are from lme4 documentation, but used for nlme
     lmm1 <- lme(Reaction ~ Days, random=~ Days|Subject, sleepstudy)
@@ -100,6 +99,7 @@ if (require("nlme") & require("lme4")) {
     tidy(nm1, effects = "fixed")
     head(augment(nm1, Orange))
     glance(nm1)
+}
 }
 
 }

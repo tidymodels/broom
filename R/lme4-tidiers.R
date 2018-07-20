@@ -1,8 +1,6 @@
 #' Tidying methods for mixed effects models
 #' 
-#' `lme4` tidiers will soon be deprecated in `broom` and there is no ongoing
-#' development of these functions at this time. `lme4` tidiers are being
-#' developed in the `broom.mixed` package, which is not yet on CRAN.
+#' `lme4` tidiers are deprecated.
 #'
 #' These methods tidy the coefficients of mixed effects models, particularly
 #' responses of the `merMod` class
@@ -17,6 +15,7 @@
 #'
 #' @examples
 #'
+#' \dontrun{
 #' if (require("lme4")) {
 #'     # example regressions are from lme4 documentation
 #'     lmm1 <- lmer(Reaction ~ Days + (Days | Subject), sleepstudy)
@@ -43,6 +42,7 @@
 #'     head(augment(nm1, Orange))
 #'     glance(nm1)
 #' }
+#' }
 NULL
 
 
@@ -68,7 +68,6 @@ NULL
 #'   \item{p.value}{P-value computed from t-statistic (may be missing/NA)}
 #'
 #' @importFrom tidyr gather spread
-#' @importFrom nlme VarCorr ranef
 ## FIXME: is it OK/sensible to import these from (priority='recommended')
 ## nlme rather than (priority=NA) lme4?
 #'
@@ -80,6 +79,7 @@ tidy.merMod <- function(x, effects = c("ran_pars", "fixed"),
                         conf.level = 0.95,
                         conf.method = "Wald",
                         ...) {
+  .Deprecated()
   effect_names <- c("ran_pars", "fixed", "ran_modes")
   if (!is.null(scales)) {
     if (length(scales) != length(effects)) {
@@ -122,7 +122,7 @@ tidy.merMod <- function(x, effects = c("ran_pars", "fixed"),
     if (!rscale %in% c("sdcor", "vcov")) {
       stop(sprintf("unrecognized ran_pars scale %s", sQuote(rscale)))
     }
-    ret <- as.data.frame(VarCorr(x))
+    ret <- as.data.frame(nlme::VarCorr(x))
     ret[] <- lapply(ret, function(x) if (is.factor(x)) {
         as.character(x)
       } else {
@@ -170,7 +170,7 @@ tidy.merMod <- function(x, effects = c("ran_pars", "fixed"),
     ## fix each group to be a tidy data frame
 
     nn <- c("estimate", "std.error")
-    re <- ranef(x, condVar = TRUE)
+    re <- nlme::ranef(x, condVar = TRUE)
     getSE <- function(x) {
       v <- attr(x, "postVar")
       setNames(
@@ -247,6 +247,7 @@ tidy.merMod <- function(x, effects = c("ran_pars", "fixed"),
 #'
 #' @export
 augment.merMod <- function(x, data = stats::model.frame(x), newdata, ...) {
+  .Deprecated()
   # move rownames if necessary
   if (missing(newdata)) {
     newdata <- NULL
@@ -292,6 +293,7 @@ augment.merMod <- function(x, data = stats::model.frame(x), newdata, ...) {
 #'
 #' @export
 glance.merMod <- function(x, ...) {
+  .Deprecated()
   # We cannot use stats::sigma or lme4::sigma here, even in an
   # if statement, since that leads to R CMD CHECK warnings on 3.2
   # or dev R, respectively

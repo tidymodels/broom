@@ -72,9 +72,7 @@ are values from the response object within the model (of type
 \item{deviance}{deviance}
 }
 \description{
-\code{lme4} tidiers will soon be deprecated in \code{broom} and there is no ongoing
-development of these functions at this time. \code{lme4} tidiers are being
-developed in the \code{broom.mixed} package, which is not yet on CRAN.
+\code{lme4} tidiers are deprecated.
 }
 \details{
 These methods tidy the coefficients of mixed effects models, particularly
@@ -91,6 +89,7 @@ warning is raised and the incomplete rows are dropped.
 }
 \examples{
 
+\dontrun{
 if (require("lme4")) {
     # example regressions are from lme4 documentation
     lmm1 <- lmer(Reaction ~ Days + (Days | Subject), sleepstudy)
@@ -116,6 +115,7 @@ if (require("lme4")) {
     tidy(nm1, effects = "fixed")
     head(augment(nm1, Orange))
     glance(nm1)
+}
 }
 }
 \seealso{

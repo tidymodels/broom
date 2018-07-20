@@ -1,8 +1,6 @@
 #' Tidying methods for mixed effects models
 #' 
-#' `nlme` tidiers will soon be deprecated in `broom` and there is no ongoing
-#' development of these functions at this time. `nlme` tidiers are being
-#' developed in the `broom.mixed` package, which is not yet on CRAN.
+#' `nlme` tidiers are deprecated.
 #'
 #' These methods tidy the coefficients of mixed effects models
 #' of the `lme` class from functions  of the `nlme` package.
@@ -17,6 +15,7 @@
 #'
 #' @examples
 #'
+#' \dontrun{
 #' if (require("nlme") & require("lme4")) {
 #'     # example regressions are from lme4 documentation, but used for nlme
 #'     lmm1 <- lme(Reaction ~ Days, random=~ Days|Subject, sleepstudy)
@@ -36,6 +35,7 @@
 #'     tidy(nm1, effects = "fixed")
 #'     head(augment(nm1, Orange))
 #'     glance(nm1)
+#' }
 #' }
 #'
 #' @rdname nlme_tidiers
@@ -59,6 +59,7 @@
 #'
 #' @export
 tidy.lme <- function(x, effects = "random", ...) {
+  .Deprecated()
   effects <- match.arg(effects, c("random", "fixed"))
   if (effects == "fixed") {
     # return tidied fixed effects rather than random
@@ -104,6 +105,7 @@ tidy.lme <- function(x, effects = "random", ...) {
 #'
 #' @export
 augment.lme <- function(x, data = x$data, newdata, ...) {
+  .Deprecated()
   if (is.null(data)) {
     stop("augment.lme must be called with an explicit 'data' argument for this (n)lme fit  because of an inconsistency in nlme.")
   }
@@ -139,6 +141,7 @@ augment.lme <- function(x, data = x$data, newdata, ...) {
 #'
 #' @export
 glance.lme <- function(x, ...) {
+  .Deprecated()
   ret <- unrowname(data.frame(sigma = x$sigma))
   ret <- finish_glance(ret, x)
   ret$deviance <- NA

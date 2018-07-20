@@ -1,7 +1,31 @@
-# broom 0.4.5.9000
-To be released as 0.5.0
+# broom 0.5.0.9000
+To be released as 0.7.0
 
-Tidiers now returns `tibbles`. This release also includes several new tidiers, new vignettes and a large number of bugfixes. We've also begun to more rigorously define tidier specifications: we've laid part of the groundwork for stricter and more consistent tidying, but the new tidier specifications are not yet complete. These will appear in the next release.
+## Other changes
+
+- Add `data` argument to `augment()` generic
+
+## Deprecations
+
+- Data frame, rowwise data frame, vector and matrix tidiers have been removed
+- `bootstrap()` has been removed
+
+- `tidy.table()` has been deprecated in favor of `tibble::as_tibble()`
+- `tidy.summaryDefault()` has been deprecated in favor of `skimr::skim()`
+
+### Mixed model deprecations
+
+The following have all been deprecated in favor of `broom.mixed`:
+
+- `tidy.brmsfit()`
+- `tidy.merMod()`, `glance.merMod()`, `augment.merMod()`
+- `tidyMCMC()`, `tidy.rjags()`, `tidy.stanfit()`
+- `tidy.lme()`, `glance.lme()`, `augment.lme()`
+- `tidy.stanreg()`, `glance.stanreg()`
+
+# broom 0.5.0
+
+Tidiers now return `tibble::tibble()`s. This release also includes several new tidiers, new vignettes and a large number of bugfixes. We've also begun to more rigorously define tidier specifications: we've laid part of the groundwork for stricter and more consistent tidying, but the new tidier specifications are not yet complete. These will appear in the next release.
 
 Additionally, users should note that we are in the process of migrating tidying methods for mixed models and Bayesian models to `broom.mixed`. `broom.mixed` is not on CRAN yet, but all mixed model and Bayesian tidiers will be deprecated once `broom.mixed` is on CRAN. No further development of mixed model tidiers will take place in `broom`.
 
@@ -32,6 +56,7 @@ These restrictions will be relaxed in an upcoming release of `broom` pending sup
 - setting rownames on tibbles, which is deprecated.
 - using matrix and vector tidiers, now deprecated.
 - handling the additional tibble classes `tbl_df` and `tbl` beyond the `data.frame` class
+- linking to defunct documentation files -- broom recently moved all tidiers to a `roxygen2` template based documentation system.
 
 ## New vignettes
 
@@ -91,6 +116,10 @@ Several old vignettes have also been updated:
 - Many small improvements throughout
 
 ## Contributors
+
+Many many thanks to all the following for their thoughtful comments on design, bug reports and PRs! The community of broom contributors has been kind, supportive and insighftul and I look forward to working you all again!
+
+[@atyre2](https://github.com/atyre2), [@batpigandme](https://github.com/batpigandme), [@bfgray3](https://github.com/bfgray3), [@bmannakee](https://github.com/bmannakee), [@briatte](https://github.com/briatte), [@cawoodjm](https://github.com/cawoodjm), [@cimentadaj](https://github.com/cimentadaj), [@dan87134](https://github.com/dan87134), [@dgrtwo](https://github.com/dgrtwo), [@dmenne](https://github.com/dmenne), [@ekatko1](https://github.com/ekatko1), [@ellessenne](https://github.com/ellessenne), [@erleholgersen](https://github.com/erleholgersen), [@Hong-Revo](https://github.com/Hong-Revo), [@huftis](https://github.com/huftis), [@IndrajeetPatil](https://github.com/IndrajeetPatil), [@jacob-long](https://github.com/jacob-long), [@jarvisc1](https://github.com/jarvisc1), [@jenzopr](https://github.com/jenzopr), [@jgabry](https://github.com/jgabry), [@jimhester](https://github.com/jimhester), [@josue-rodriguez](https://github.com/josue-rodriguez), [@karldw](https://github.com/karldw), [@kfeilich](https://github.com/kfeilich), [@larmarange](https://github.com/larmarange), [@lboller](https://github.com/lboller), [@mariusbarth](https://github.com/mariusbarth), [@michaelweylandt](https://github.com/michaelweylandt), [@mine-cetinkaya-rundel](https://github.com/mine-cetinkaya-rundel), [@mkuehn10](https://github.com/mkuehn10), [@mvevans89](https://github.com/mvevans89), [@nutterb](https://github.com/nutterb), [@ShreyasSingh](https://github.com/ShreyasSingh), [@stephlocke](https://github.com/stephlocke), [@strengejacke](https://github.com/strengejacke), [@topepo](https://github.com/topepo), [@willbowditch](https://github.com/willbowditch), [@WillemSleegers](https://github.com/WillemSleegers), and [@wilsonfreitas](https://github.com/wilsonfreitas)
 
 # broom 0.4.4
 

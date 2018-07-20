@@ -80,8 +80,7 @@ included:
 \item{p_loo}{The effective number of parameters.}
 }
 \description{
-\code{rstanarm} tidiers will soon be deprecated in \code{broom} and there is no
-ongoing development of these functions at this time.
+\code{rstanarm} tidiers are deprecated.
 }
 \details{
 These methods tidy the estimates from \code{\link[rstanarm:stanreg-objects]{rstanarm::stanreg-objects()}}

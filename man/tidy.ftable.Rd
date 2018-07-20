@@ -31,11 +31,8 @@ hypothesis, a cluster, or a class. Exactly what tidy considers to be a
 model component varies cross models but is usually self-evident.
 If a model has several distinct types of components, you will need to
 specify which components to return.
-}
-\examples{
 
-tidy(ftable(Titanic, row.vars = 1:3))
-
+This function is deprecated. Please use \code{\link[tibble:as_tibble]{tibble::as_tibble()}} instead.
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[stats:ftable]{stats::ftable()}}

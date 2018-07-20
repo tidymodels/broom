@@ -46,7 +46,7 @@
 
       <div class="navbar-brand-container">
         <a class="navbar-brand" href="../index.html">broom</a>
-        <small class="tidyverse">part of the <a href="http://tidyverse.org">tidyverse</a></small>
+        <small class="tidyverse">part of the <a href="https://tidyverse.org">tidyverse</a></small>
       </div>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
@@ -192,10 +192,10 @@ multistate</p></dd>
 #&gt;  8    31    218       1        0    0.954   0.0143      0.981    0.927
 #&gt;  9    53    217       2        0    0.945   0.0157      0.975    0.917
 #&gt; 10    54    215       1        0    0.941   0.0163      0.972    0.911
-#&gt; # ... with 176 more rows</div><div class='input'><span class='fu'><a href='glance.html'>glance</a></span>(<span class='no'>sfit</span>)</div><div class='output co'>#&gt;   records n.max n.start events    rmean rmean.std.error median conf.low
-#&gt; 1     228   228     228    165 380.9381        20.27475    320      285
-#&gt;   conf.high
-#&gt; 1       363</div><div class='input'>
+#&gt; # ... with 176 more rows</div><div class='input'><span class='fu'><a href='glance.html'>glance</a></span>(<span class='no'>sfit</span>)</div><div class='output co'>#&gt; # A tibble: 1 x 9
+#&gt;   records n.max n.start events rmean rmean.std.error median conf.low conf.high
+#&gt;     &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;           &lt;dbl&gt;  &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;
+#&gt; 1     228   228     228    165  381.            20.3    320      285       363</div><div class='input'>
 <span class='fu'>library</span>(<span class='no'>ggplot2</span>)
 <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/ggplot'>ggplot</a></span>(<span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>sfit</span>), <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/aes'>aes</a></span>(<span class='no'>time</span>, <span class='no'>estimate</span>)) + <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/geom_path'>geom_line</a></span>() +
     <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/geom_ribbon'>geom_ribbon</a></span>(<span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/aes'>aes</a></span>(<span class='kw'>ymin</span><span class='kw'>=</span><span class='no'>conf.low</span>, <span class='kw'>ymax</span><span class='kw'>=</span><span class='no'>conf.high</span>), <span class='kw'>alpha</span><span class='kw'>=</span><span class='fl'>.25</span>)</div><div class='img'><img src='tidy.survfit-1.png' alt='' width='700' height='433' /></div><div class='input'>
@@ -206,16 +206,16 @@ multistate</p></dd>
 <span class='no'>td_multi</span></div><div class='output co'>#&gt; # A tibble: 474 x 9
 #&gt;     time n.risk n.event n.censor estimate std.error conf.high conf.low state
 #&gt;  * &lt;dbl&gt;  &lt;int&gt;   &lt;int&gt;    &lt;int&gt;    &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt; &lt;fct&gt;
-#&gt;  1     6      0       0        0        0         0         0        0 2    
-#&gt;  2     7      0       0        0        0         0         0        0 2    
-#&gt;  3    31      0       0        0        0         0         0        0 2    
-#&gt;  4    32      0       0        0        0         0         0        0 2    
-#&gt;  5    39      0       0        0        0         0         0        0 2    
-#&gt;  6    60      0       0        0        0         0         0        0 2    
-#&gt;  7    61      0       0        0        0         0         0        0 2    
-#&gt;  8   152      0       0        0        0         0         0        0 2    
-#&gt;  9   153      0       0        0        0         0         0        0 2    
-#&gt; 10   174      0       0        0        0         0         0        0 2    
+#&gt;  1     6      0       0        0        0         0       NaN       NA 2    
+#&gt;  2     7      0       0        0        0         0       NaN       NA 2    
+#&gt;  3    31      0       0        0        0         0       NaN       NA 2    
+#&gt;  4    32      0       0        0        0         0       NaN       NA 2    
+#&gt;  5    39      0       0        0        0         0       NaN       NA 2    
+#&gt;  6    60      0       0        0        0         0       NaN       NA 2    
+#&gt;  7    61      0       0        0        0         0       NaN       NA 2    
+#&gt;  8   152      0       0        0        0         0       NaN       NA 2    
+#&gt;  9   153      0       0        0        0         0       NaN       NA 2    
+#&gt; 10   174      0       0        0        0         0       NaN       NA 2    
 #&gt; # ... with 464 more rows</div><div class='input'>
 <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/ggplot'>ggplot</a></span>(<span class='no'>td_multi</span>, <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/aes'>aes</a></span>(<span class='no'>time</span>, <span class='no'>estimate</span>, <span class='kw'>group</span> <span class='kw'>=</span> <span class='no'>state</span>)) +
     <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/geom_path'>geom_line</a></span>(<span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/aes'>aes</a></span>(<span class='kw'>color</span> <span class='kw'>=</span> <span class='no'>state</span>)) +
@@ -239,12 +239,12 @@ multistate</p></dd>
 
       <footer>
       <div class="tidyverse">
-  <p>broom is a part of the <strong>tidyverse</strong>, an ecosystem of packages designed with common APIs and a shared philosophy. Learn more at <a href="http://tidyverse.org">tidyverse.org</a>.</p>
+  <p>broom is a part of the <strong>tidyverse</strong>, an ecosystem of packages designed with common APIs and a shared philosophy. Learn more at <a href="https://tidyverse.org">tidyverse.org</a>.</p>
 </div>
 
 <div class="author">
-  <p>Developed by David Robinson.</p>
-  <p>Site built by <a href="http://pkgdown.r-lib.org">pkgdown</a>.</p>
+  <p>Developed by David Robinson, Alex Hayes.</p>
+  <p>Site built by <a href="https://pkgdown.r-lib.org">pkgdown</a>.</p>
 </div>
 
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-115082821-1"></script>

@@ -27,7 +27,7 @@
 
       <div class="navbar-brand-container">
         <a class="navbar-brand" href="../index.html">broom</a>
-        <small class="tidyverse">part of the <a href="http://tidyverse.org">tidyverse</a></small>
+        <small class="tidyverse">part of the <a href="https://tidyverse.org">tidyverse</a></small>
       </div>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
@@ -85,7 +85,7 @@
     <div class="page-header toc-ignore">
       <h1>kmeans with dplyr and broom</h1>
             
-            <h4 class="date">2018-07-11</h4>
+            <h4 class="date">2018-07-17</h4>
       
       <small class="dont-index">Source: <a href="http://github.com/tidyverse/broom/blob/master/vignettes/kmeans.Rmd"><code>vignettes/kmeans.Rmd</code></a></small>
       <div class="hidden name"><code>kmeans.Rmd</code></div>
@@ -107,7 +107,7 @@
 
 <span class="kw">set.seed</span>(<span class="dv">27</span>)
 
-centers &lt;-<span class="st"> </span><span class="kw">tibble</span>(
+centers &lt;-<span class="st"> </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/reexports.html">tibble</a></span>(
   <span class="dt">cluster =</span> <span class="kw">factor</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>), 
   <span class="dt">num_points =</span> <span class="kw">c</span>(<span class="dv">100</span>, <span class="dv">150</span>, <span class="dv">50</span>),  <span class="co"># number points in each cluster</span>
   <span class="dt">x1 =</span> <span class="kw">c</span>(<span class="dv">5</span>, <span class="dv">0</span>, <span class="op">-</span><span class="dv">3</span>),              <span class="co"># x1 coordinate of cluster center</span>
@@ -115,19 +115,19 @@ centers &lt;-<span class="st"> </span><span class="kw">tibble</span>(
 )
 
 labelled_points &lt;-<span class="st"> </span>centers <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">mutate</span>(
-    <span class="dt">x1 =</span> <span class="kw">map2</span>(num_points, x1, rnorm),
-    <span class="dt">x2 =</span> <span class="kw">map2</span>(num_points, x2, rnorm)
+<span class="st">  </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(
+    <span class="dt">x1 =</span> <span class="kw"><a href="http://www.rdocumentation.org/packages/purrr/topics/map2">map2</a></span>(num_points, x1, rnorm),
+    <span class="dt">x2 =</span> <span class="kw"><a href="http://www.rdocumentation.org/packages/purrr/topics/map2">map2</a></span>(num_points, x2, rnorm)
   ) <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>num_points) <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">unnest</span>(x1, x2)
+<span class="st">  </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/select.html">select</a></span>(<span class="op">-</span>num_points) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/tidyr/topics/unnest">unnest</a></span>(x1, x2)
 
-<span class="kw">ggplot</span>(labelled_points, <span class="kw">aes</span>(x1, x2, <span class="dt">color =</span> cluster)) <span class="op">+</span>
-<span class="st">  </span><span class="kw">geom_point</span>()</code></pre></div>
+<span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/ggplot">ggplot</a></span>(labelled_points, <span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/aes">aes</a></span>(x1, x2, <span class="dt">color =</span> cluster)) <span class="op">+</span>
+<span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/geom_point">geom_point</a></span>()</code></pre></div>
 <p><img src="kmeans_files/figure-html/unnamed-chunk-1-1.png" width="700"></p>
 <p>This is an ideal case for k-means clustering. We’ll use the built-in <code>kmeans</code> function, which accepts a dataframe with all numeric columns as it’s primary argument.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">points &lt;-<span class="st"> </span>labelled_points <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>cluster)
+<span class="st">  </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/select.html">select</a></span>(<span class="op">-</span>cluster)
 
 kclust &lt;-<span class="st"> </span><span class="kw">kmeans</span>(points, <span class="dt">centers =</span> <span class="dv">3</span>)
 kclust</code></pre></div>
@@ -220,49 +220,49 @@ kclust</code></pre></div>
 <a href="#broom-and-dplyr-for-exploratory-clustering" class="anchor"></a>broom and dplyr for exploratory clustering</h2>
 <p>While these summaries are useful, they would not have been too difficult to extract out from the dataset yourself. The real power comes from combining these analyses with dplyr.</p>
 <p>Let’s say we want to explore the effect of different choices of <code>k</code>, from 1 to 9, on this clustering. First cluster the data 9 times, each using a different value of <code>k</code>, then create columns containing the tidied, glanced and augmented data:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">kclusts &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">k =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">9</span>) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">mutate</span>(
-    <span class="dt">kclust =</span> <span class="kw">map</span>(k, <span class="op">~</span><span class="kw">kmeans</span>(points, .x)),
-    <span class="dt">tidied =</span> <span class="kw">map</span>(kclust, tidy),
-    <span class="dt">glanced =</span> <span class="kw">map</span>(kclust, glance),
-    <span class="dt">augmented =</span> <span class="kw">map</span>(kclust, augment, points)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">kclusts &lt;-<span class="st"> </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/reexports.html">tibble</a></span>(<span class="dt">k =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">9</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(
+    <span class="dt">kclust =</span> <span class="kw"><a href="http://www.rdocumentation.org/packages/purrr/topics/map">map</a></span>(k, <span class="op">~</span><span class="kw">kmeans</span>(points, .x)),
+    <span class="dt">tidied =</span> <span class="kw"><a href="http://www.rdocumentation.org/packages/purrr/topics/map">map</a></span>(kclust, tidy),
+    <span class="dt">glanced =</span> <span class="kw"><a href="http://www.rdocumentation.org/packages/purrr/topics/map">map</a></span>(kclust, glance),
+    <span class="dt">augmented =</span> <span class="kw"><a href="http://www.rdocumentation.org/packages/purrr/topics/map">map</a></span>(kclust, augment, points)
   )
 
 kclusts</code></pre></div>
 <pre><code>## # A tibble: 9 x 5
 ##       k kclust       tidied           glanced          augmented         
 ##   &lt;int&gt; &lt;list&gt;       &lt;list&gt;           &lt;list&gt;           &lt;list&gt;            
-## 1     1 &lt;S3: kmeans&gt; &lt;tibble [1 x 5]&gt; &lt;tibble [1 x 4]&gt; &lt;tibble [300 x 3]&gt;
-## 2     2 &lt;S3: kmeans&gt; &lt;tibble [2 x 5]&gt; &lt;tibble [1 x 4]&gt; &lt;tibble [300 x 3]&gt;
-## 3     3 &lt;S3: kmeans&gt; &lt;tibble [3 x 5]&gt; &lt;tibble [1 x 4]&gt; &lt;tibble [300 x 3]&gt;
-## 4     4 &lt;S3: kmeans&gt; &lt;tibble [4 x 5]&gt; &lt;tibble [1 x 4]&gt; &lt;tibble [300 x 3]&gt;
-## 5     5 &lt;S3: kmeans&gt; &lt;tibble [5 x 5]&gt; &lt;tibble [1 x 4]&gt; &lt;tibble [300 x 3]&gt;
-## 6     6 &lt;S3: kmeans&gt; &lt;tibble [6 x 5]&gt; &lt;tibble [1 x 4]&gt; &lt;tibble [300 x 3]&gt;
-## 7     7 &lt;S3: kmeans&gt; &lt;tibble [7 x 5]&gt; &lt;tibble [1 x 4]&gt; &lt;tibble [300 x 3]&gt;
-## 8     8 &lt;S3: kmeans&gt; &lt;tibble [8 x 5]&gt; &lt;tibble [1 x 4]&gt; &lt;tibble [300 x 3]&gt;
-## 9     9 &lt;S3: kmeans&gt; &lt;tibble [9 x 5]&gt; &lt;tibble [1 x 4]&gt; &lt;tibble [300 x 3]&gt;</code></pre>
+## 1     1 &lt;S3: kmeans&gt; &lt;tibble [1 × 5]&gt; &lt;tibble [1 × 4]&gt; &lt;tibble [300 × 3]&gt;
+## 2     2 &lt;S3: kmeans&gt; &lt;tibble [2 × 5]&gt; &lt;tibble [1 × 4]&gt; &lt;tibble [300 × 3]&gt;
+## 3     3 &lt;S3: kmeans&gt; &lt;tibble [3 × 5]&gt; &lt;tibble [1 × 4]&gt; &lt;tibble [300 × 3]&gt;
+## 4     4 &lt;S3: kmeans&gt; &lt;tibble [4 × 5]&gt; &lt;tibble [1 × 4]&gt; &lt;tibble [300 × 3]&gt;
+## 5     5 &lt;S3: kmeans&gt; &lt;tibble [5 × 5]&gt; &lt;tibble [1 × 4]&gt; &lt;tibble [300 × 3]&gt;
+## 6     6 &lt;S3: kmeans&gt; &lt;tibble [6 × 5]&gt; &lt;tibble [1 × 4]&gt; &lt;tibble [300 × 3]&gt;
+## 7     7 &lt;S3: kmeans&gt; &lt;tibble [7 × 5]&gt; &lt;tibble [1 × 4]&gt; &lt;tibble [300 × 3]&gt;
+## 8     8 &lt;S3: kmeans&gt; &lt;tibble [8 × 5]&gt; &lt;tibble [1 × 4]&gt; &lt;tibble [300 × 3]&gt;
+## 9     9 &lt;S3: kmeans&gt; &lt;tibble [9 × 5]&gt; &lt;tibble [1 × 4]&gt; &lt;tibble [300 × 3]&gt;</code></pre>
 <p>We can turn these into three separate datasets each representing a different type of data: Then tidy the clusterings three ways: using <code>tidy</code>, using <code>augment</code>, and using <code>glance</code>. Each of these goes into a separate dataset as they represent different types of data.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">clusters &lt;-<span class="st"> </span>kclusts <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">unnest</span>(tidied)
+<span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/tidyr/topics/unnest">unnest</a></span>(tidied)
 
 assignments &lt;-<span class="st"> </span>kclusts <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">unnest</span>(augmented)
+<span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/tidyr/topics/unnest">unnest</a></span>(augmented)
 
 clusterings &lt;-<span class="st"> </span>kclusts <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">unnest</span>(glanced, <span class="dt">.drop =</span> <span class="ot">TRUE</span>)</code></pre></div>
+<span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/tidyr/topics/unnest">unnest</a></span>(glanced, <span class="dt">.drop =</span> <span class="ot">TRUE</span>)</code></pre></div>
 <p>Now we can plot the original points, with each point colored according to the predicted cluster.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">p1 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(assignments, <span class="kw">aes</span>(x1, x2)) <span class="op">+</span>
-<span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">color =</span> .cluster)) <span class="op">+</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span><span class="st"> </span>k)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">p1 &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/ggplot">ggplot</a></span>(assignments, <span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/aes">aes</a></span>(x1, x2)) <span class="op">+</span>
+<span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/geom_point">geom_point</a></span>(<span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/aes">aes</a></span>(<span class="dt">color =</span> .cluster)) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/facet_wrap">facet_wrap</a></span>(<span class="op">~</span><span class="st"> </span>k)
 p1</code></pre></div>
 <p><img src="kmeans_files/figure-html/unnamed-chunk-8-1.png" width="700"></p>
 <p>Already we get a good sense of the proper number of clusters (3), and how the k-means algorithm functions when k is too high or too low. We can then add the centers of the cluster using the data from <code>tidy</code>:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">p2 &lt;-<span class="st"> </span>p1 <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>(<span class="dt">data =</span> clusters, <span class="dt">size =</span> <span class="dv">10</span>, <span class="dt">shape =</span> <span class="st">"x"</span>)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">p2 &lt;-<span class="st"> </span>p1 <span class="op">+</span><span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/geom_point">geom_point</a></span>(<span class="dt">data =</span> clusters, <span class="dt">size =</span> <span class="dv">10</span>, <span class="dt">shape =</span> <span class="st">"x"</span>)
 p2</code></pre></div>
 <p><img src="kmeans_files/figure-html/unnamed-chunk-9-1.png" width="700"></p>
 <p>The data from <code>glance</code> fits a different but equally important purpose: it lets you view trends of some summary statistics across values of k. Of particular interest is the total within sum of squares, saved in the <code>tot.withinss</code> column.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(clusterings, <span class="kw">aes</span>(k, tot.withinss)) <span class="op">+</span>
-<span class="st">  </span><span class="kw">geom_line</span>()</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/ggplot">ggplot</a></span>(clusterings, <span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/aes">aes</a></span>(k, tot.withinss)) <span class="op">+</span>
+<span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/geom_path">geom_line</a></span>()</code></pre></div>
 <p><img src="kmeans_files/figure-html/unnamed-chunk-10-1.png" width="700"></p>
 <p>This represents the variance within the clusters. It decreases as <code>k</code> increases, but one can notice a bend (or “elbow”) right at k=3. This bend indicates that additional clusters beyond the third have little value. (See <a href="http://web.stanford.edu/~hastie/Papers/gap.pdf">here</a> for a more mathematically rigorous interpretation and implementation of this method). Thus, all three methods of tidying data provided by broom are useful for summarizing clustering output.</p>
 </div>
@@ -287,12 +287,12 @@ p2</code></pre></div>
 
 
       <footer><div class="tidyverse">
-  <p>broom is a part of the <strong>tidyverse</strong>, an ecosystem of packages designed with common APIs and a shared philosophy. Learn more at <a href="http://tidyverse.org">tidyverse.org</a>.</p>
+  <p>broom is a part of the <strong>tidyverse</strong>, an ecosystem of packages designed with common APIs and a shared philosophy. Learn more at <a href="https://tidyverse.org">tidyverse.org</a>.</p>
 </div>
 
 <div class="author">
-  <p>Developed by David Robinson.</p>
-  <p>Site built by <a href="http://pkgdown.r-lib.org">pkgdown</a>.</p>
+  <p>Developed by David Robinson, Alex Hayes.</p>
+  <p>Site built by <a href="https://pkgdown.r-lib.org">pkgdown</a>.</p>
 </div>
 
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-115082821-1"></script><script>

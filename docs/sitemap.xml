@@ -7,6 +7,12 @@
     <loc>http://broom.tidyverse.org/reference/argument_glossary.html</loc>
   </url>
   <url>
+    <loc>http://broom.tidyverse.org/reference/augment.Mclust.html</loc>
+  </url>
+  <url>
+    <loc>http://broom.tidyverse.org/reference/augment.html</loc>
+  </url>
+  <url>
     <loc>http://broom.tidyverse.org/reference/augment.betareg.html</loc>
   </url>
   <url>
@@ -46,9 +52,6 @@
     <loc>http://broom.tidyverse.org/reference/augment.loess.html</loc>
   </url>
   <url>
-    <loc>http://broom.tidyverse.org/reference/augment.Mclust.html</loc>
-  </url>
-  <url>
     <loc>http://broom.tidyverse.org/reference/augment.mjoint.html</loc>
   </url>
   <url>
@@ -65,9 +68,6 @@
   </url>
   <url>
     <loc>http://broom.tidyverse.org/reference/augment.prcomp.html</loc>
-  </url>
-  <url>
-    <loc>http://broom.tidyverse.org/reference/augment.html</loc>
   </url>
   <url>
     <loc>http://broom.tidyverse.org/reference/augment.rlm.html</loc>
@@ -127,10 +127,19 @@
     <loc>http://broom.tidyverse.org/reference/geeglm_tidiers.html</loc>
   </url>
   <url>
-    <loc>http://broom.tidyverse.org/reference/glance.aareg.html</loc>
+    <loc>http://broom.tidyverse.org/reference/glance.Arima.html</loc>
   </url>
   <url>
-    <loc>http://broom.tidyverse.org/reference/glance.Arima.html</loc>
+    <loc>http://broom.tidyverse.org/reference/glance.Gam.html</loc>
+  </url>
+  <url>
+    <loc>http://broom.tidyverse.org/reference/glance.Mclust.html</loc>
+  </url>
+  <url>
+    <loc>http://broom.tidyverse.org/reference/glance.html</loc>
+  </url>
+  <url>
+    <loc>http://broom.tidyverse.org/reference/glance.aareg.html</loc>
   </url>
   <url>
     <loc>http://broom.tidyverse.org/reference/glance.betareg.html</loc>
@@ -163,19 +172,16 @@
     <loc>http://broom.tidyverse.org/reference/glance.fitdistr.html</loc>
   </url>
   <url>
-    <loc>http://broom.tidyverse.org/reference/glance.Gam.html</loc>
-  </url>
-  <url>
     <loc>http://broom.tidyverse.org/reference/glance.garch.html</loc>
   </url>
   <url>
     <loc>http://broom.tidyverse.org/reference/glance.glm.html</loc>
   </url>
   <url>
-    <loc>http://broom.tidyverse.org/reference/glance.glmnet.html</loc>
+    <loc>http://broom.tidyverse.org/reference/glance.glmRob.html</loc>
   </url>
   <url>
-    <loc>http://broom.tidyverse.org/reference/glance.glmRob.html</loc>
+    <loc>http://broom.tidyverse.org/reference/glance.glmnet.html</loc>
   </url>
   <url>
     <loc>http://broom.tidyverse.org/reference/glance.gmm.html</loc>
@@ -193,13 +199,10 @@
     <loc>http://broom.tidyverse.org/reference/glance.lm.html</loc>
   </url>
   <url>
-    <loc>http://broom.tidyverse.org/reference/glance.lmodel2.html</loc>
-  </url>
-  <url>
     <loc>http://broom.tidyverse.org/reference/glance.lmRob.html</loc>
   </url>
   <url>
-    <loc>http://broom.tidyverse.org/reference/glance.Mclust.html</loc>
+    <loc>http://broom.tidyverse.org/reference/glance.lmodel2.html</loc>
   </url>
   <url>
     <loc>http://broom.tidyverse.org/reference/glance.mjoint.html</loc>
@@ -227,9 +230,6 @@
   </url>
   <url>
     <loc>http://broom.tidyverse.org/reference/glance.pyears.html</loc>
-  </url>
-  <url>
-    <loc>http://broom.tidyverse.org/reference/glance.html</loc>
   </url>
   <url>
     <loc>http://broom.tidyverse.org/reference/glance.ridgelm.html</loc>
@@ -298,13 +298,31 @@
     <loc>http://broom.tidyverse.org/reference/rstanarm_tidiers.html</loc>
   </url>
   <url>
-    <loc>http://broom.tidyverse.org/reference/sparse_tidiers.html</loc>
-  </url>
-  <url>
     <loc>http://broom.tidyverse.org/reference/sp_tidiers.html</loc>
   </url>
   <url>
+    <loc>http://broom.tidyverse.org/reference/sparse_tidiers.html</loc>
+  </url>
+  <url>
     <loc>http://broom.tidyverse.org/reference/summary_tidiers.html</loc>
+  </url>
+  <url>
+    <loc>http://broom.tidyverse.org/reference/tidy.Arima.html</loc>
+  </url>
+  <url>
+    <loc>http://broom.tidyverse.org/reference/tidy.Gam.html</loc>
+  </url>
+  <url>
+    <loc>http://broom.tidyverse.org/reference/tidy.Kendall.html</loc>
+  </url>
+  <url>
+    <loc>http://broom.tidyverse.org/reference/tidy.Mclust.html</loc>
+  </url>
+  <url>
+    <loc>http://broom.tidyverse.org/reference/tidy.html</loc>
+  </url>
+  <url>
+    <loc>http://broom.tidyverse.org/reference/tidy.TukeyHSD.html</loc>
   </url>
   <url>
     <loc>http://broom.tidyverse.org/reference/tidy.aareg.html</loc>
@@ -320,9 +338,6 @@
   </url>
   <url>
     <loc>http://broom.tidyverse.org/reference/tidy.aovlist.html</loc>
-  </url>
-  <url>
-    <loc>http://broom.tidyverse.org/reference/tidy.Arima.html</loc>
   </url>
   <url>
     <loc>http://broom.tidyverse.org/reference/tidy.betareg.html</loc>
@@ -385,9 +400,6 @@
     <loc>http://broom.tidyverse.org/reference/tidy.ftable.html</loc>
   </url>
   <url>
-    <loc>http://broom.tidyverse.org/reference/tidy.Gam.html</loc>
-  </url>
-  <url>
     <loc>http://broom.tidyverse.org/reference/tidy.gamlss.html</loc>
   </url>
   <url>
@@ -400,10 +412,10 @@
     <loc>http://broom.tidyverse.org/reference/tidy.glm.html</loc>
   </url>
   <url>
-    <loc>http://broom.tidyverse.org/reference/tidy.glmnet.html</loc>
+    <loc>http://broom.tidyverse.org/reference/tidy.glmRob.html</loc>
   </url>
   <url>
-    <loc>http://broom.tidyverse.org/reference/tidy.glmRob.html</loc>
+    <loc>http://broom.tidyverse.org/reference/tidy.glmnet.html</loc>
   </url>
   <url>
     <loc>http://broom.tidyverse.org/reference/tidy.gmm.html</loc>
@@ -421,9 +433,6 @@
     <loc>http://broom.tidyverse.org/reference/tidy.kde.html</loc>
   </url>
   <url>
-    <loc>http://broom.tidyverse.org/reference/tidy.Kendall.html</loc>
-  </url>
-  <url>
     <loc>http://broom.tidyverse.org/reference/tidy.kmeans.html</loc>
   </url>
   <url>
@@ -433,19 +442,16 @@
     <loc>http://broom.tidyverse.org/reference/tidy.lm.html</loc>
   </url>
   <url>
-    <loc>http://broom.tidyverse.org/reference/tidy.lmodel2.html</loc>
+    <loc>http://broom.tidyverse.org/reference/tidy.lmRob.html</loc>
   </url>
   <url>
-    <loc>http://broom.tidyverse.org/reference/tidy.lmRob.html</loc>
+    <loc>http://broom.tidyverse.org/reference/tidy.lmodel2.html</loc>
   </url>
   <url>
     <loc>http://broom.tidyverse.org/reference/tidy.manova.html</loc>
   </url>
   <url>
     <loc>http://broom.tidyverse.org/reference/tidy.map.html</loc>
-  </url>
-  <url>
-    <loc>http://broom.tidyverse.org/reference/tidy.Mclust.html</loc>
   </url>
   <url>
     <loc>http://broom.tidyverse.org/reference/tidy.mjoint.html</loc>
@@ -490,9 +496,6 @@
     <loc>http://broom.tidyverse.org/reference/tidy.rcorr.html</loc>
   </url>
   <url>
-    <loc>http://broom.tidyverse.org/reference/tidy.html</loc>
-  </url>
-  <url>
     <loc>http://broom.tidyverse.org/reference/tidy.ridgelm.html</loc>
   </url>
   <url>
@@ -533,9 +536,6 @@
   </url>
   <url>
     <loc>http://broom.tidyverse.org/reference/tidy.ts.html</loc>
-  </url>
-  <url>
-    <loc>http://broom.tidyverse.org/reference/tidy.TukeyHSD.html</loc>
   </url>
   <url>
     <loc>http://broom.tidyverse.org/reference/tidy.zoo.html</loc>

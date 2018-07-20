@@ -5,74 +5,61 @@
 #' @template param_unused_dots
 #'
 #' @return A [tibble::tibble] with one row per variable-class-outcome
-#'   combination, with columns:
+#' combination, with columns:
 #' 
-#'   \item{variable}{Manifest variable}
-#'   \item{class}{Latent class ID, an integer}
-#'   \item{outcome}{Outcome of manifest variable}
-#'   \item{estimate}{Estimated class-conditional response probability}
-#'   \item{std.error}{Standard error of estimated probability}
+#' \item{variable}{Manifest variable}
+#' \item{class}{Latent class ID, an integer}
+#' \item{outcome}{Outcome of manifest variable}
+#' \item{estimate}{Estimated class-conditional response probability}
+#' \item{std.error}{Standard error of estimated probability}
 #' 
 #'
 #' @examples
 #'
-#' if (require("poLCA", quietly = TRUE)) {
-#'   library(poLCA)
-#'   library(dplyr)
+#' library(poLCA)
+#' library(dplyr)
 #'
-#'   data(values)
-#'   f <- cbind(A, B, C, D)~1
-#'   M1 <- poLCA(f, values, nclass = 2, verbose = FALSE)
+#' data(values)
+#' f <- cbind(A, B, C, D)~1
+#' M1 <- poLCA(f, values, nclass = 2, verbose = FALSE)
 #'
-#'   M1
-#'   tidy(M1)
-#'   augment(M1)
-#'   glance(M1)
+#' M1
+#' tidy(M1)
+#' augment(M1)
+#' glance(M1)
 #'
-#'   library(ggplot2)
+#' library(ggplot2)
 #'
-#'   ggplot(tidy(M1), aes(factor(class), estimate, fill = factor(outcome))) +
-#'     geom_bar(stat = "identity", width = 1) +
-#'     facet_wrap(~ variable)
+#' ggplot(tidy(M1), aes(factor(class), estimate, fill = factor(outcome))) +
+#'   geom_bar(stat = "identity", width = 1) +
+#'   facet_wrap(~ variable)
+#' ## Three-class model with a single covariate.
 #'
-#'   set.seed(2016)
-#'   # compare multiple
-#'   mods <- tibble(nclass = 1:3) %>%
-#'     group_by(nclass) %>%
-#'     do(mod = poLCA(f, values, nclass = .$nclass, verbose = FALSE))
+#' data(election)
+#' f2a <- cbind(MORALG,CARESG,KNOWG,LEADG,DISHONG,INTELG,
+#'              MORALB,CARESB,KNOWB,LEADB,DISHONB,INTELB)~PARTY
+#' nes2a <- poLCA(f2a, election, nclass = 3, nrep = 5, verbose = FALSE)
 #'
-#'   # compare log-likelihood and/or AIC, BIC
-#'   mods %>%
-#'     glance(mod)
+#' td <- tidy(nes2a)
+#' td
 #'
-#'   ## Three-class model with a single covariate.
+#' # show
 #'
-#'   data(election)
-#'   f2a <- cbind(MORALG,CARESG,KNOWG,LEADG,DISHONG,INTELG,
-#'                MORALB,CARESB,KNOWB,LEADB,DISHONB,INTELB)~PARTY
-#'   nes2a <- poLCA(f2a, election, nclass = 3, nrep = 5, verbose = FALSE)
+#' ggplot(td, aes(outcome, estimate, color = factor(class), group = class)) +
+#'   geom_line() +
+#'   facet_wrap(~ variable, nrow = 2) +
+#'   theme(axis.text.x = element_text(angle = 90, hjust = 1))
 #'
-#'   td <- tidy(nes2a)
-#'   td
+#' au <- augment(nes2a)
+#' au
+#' au %>%
+#'   count(.class)
 #'
-#'   # show
-#'
-#'   ggplot(td, aes(outcome, estimate, color = factor(class), group = class)) +
-#'     geom_line() +
-#'     facet_wrap(~ variable, nrow = 2) +
-#'     theme(axis.text.x = element_text(angle = 90, hjust = 1))
-#'
-#'   au <- augment(nes2a)
-#'   au
-#'   au %>%
-#'     count(.class)
-#'
-#'   # if the original data is provided, it leads to NAs in new columns
-#'   # for rows that weren't predicted
-#'   au2 <- augment(nes2a, data = election)
-#'   au2
-#'   dim(au2)
-#' }
+#' # if the original data is provided, it leads to NAs in new columns
+#' # for rows that weren't predicted
+#' au2 <- augment(nes2a, data = election)
+#' au2
+#' dim(au2)
 #'
 #' @aliases poLCA_tidiers
 #' @export
@@ -107,14 +94,14 @@ tidy.poLCA <- function(x, ...) {
 #' 
 #' @inheritParams tidy.poLCA
 #' @param data The original dataset used to fit the latent class model, as
-#'   a tibble or data. If not given, uses manifest variables in
+#' a tibble or data. If not given, uses manifest variables in
 #' `x$y` and, if applicable, covariates in `x$x`
 #'
 #' @return A [tibble::tibble] with one row for each original observation,
-#'   with additional columns:
-#'   
-#'   \item{.class}{Predicted class, using modal assignment}
-#'   \item{.probability}{Posterior probability of predicted class}
+#' with additional columns:
+#' 
+#' \item{.class}{Predicted class, using modal assignment}
+#' \item{.probability}{Posterior probability of predicted class}
 #'
 #' If the `data` argument is given, those columns are included in the output
 #' (only rows for which predictions could be made).
@@ -156,19 +143,19 @@ augment.poLCA <- function(x, data = NULL, ...) {
 #' @templateVar class poLCA
 #' @template title_desc_augment
 #' 
-#' @inheritParams tidy.poLCA
+#' @inherit tidy.poLCA params examples
 #'
 #' @return A one-row [tibble::tibble] with columns:
 #' 
-#'   \item{logLik}{the data's log-likelihood under the model}
-#'   \item{AIC}{the Akaike Information Criterion}
-#'   \item{BIC}{the Bayesian Information Criterion}
-#'   \item{g.squared}{The likelihood ratio/deviance statistic}
-#'   \item{chi.squared}{The Pearson Chi-Square goodness of fit statistic
-#'     for multiway tables}
-#'   \item{df}{Number of parameters estimated, and therefore degrees of
-#'     freedom used}
-#'   \item{df.residual}{Number of residual degrees of freedom left}
+#' \item{logLik}{the data's log-likelihood under the model}
+#' \item{AIC}{the Akaike Information Criterion}
+#' \item{BIC}{the Bayesian Information Criterion}
+#' \item{g.squared}{The likelihood ratio/deviance statistic}
+#' \item{chi.squared}{The Pearson Chi-Square goodness of fit statistic
+#'   for multiway tables}
+#' \item{df}{Number of parameters estimated, and therefore degrees of
+#'   freedom used}
+#' \item{df.residual}{Number of residual degrees of freedom left}
 #'
 #' @export
 #' @seealso [glance()], [poLCA::poLCA()]

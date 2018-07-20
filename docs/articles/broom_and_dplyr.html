@@ -27,7 +27,7 @@
 
       <div class="navbar-brand-container">
         <a class="navbar-brand" href="../index.html">broom</a>
-        <small class="tidyverse">part of the <a href="http://tidyverse.org">tidyverse</a></small>
+        <small class="tidyverse">part of the <a href="https://tidyverse.org">tidyverse</a></small>
       </div>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
@@ -85,7 +85,7 @@
     <div class="page-header toc-ignore">
       <h1>broom and dplyr</h1>
             
-            <h4 class="date">2018-07-11</h4>
+            <h4 class="date">2018-07-17</h4>
       
       <small class="dont-index">Source: <a href="http://github.com/tidyverse/broom/blob/master/vignettes/broom_and_dplyr.Rmd"><code>vignettes/broom_and_dplyr.Rmd</code></a></small>
       <div class="hidden name"><code>broom_and_dplyr.Rmd</code></div>
@@ -104,7 +104,7 @@
 
 <span class="kw">data</span>(Orange)
 
-Orange &lt;-<span class="st"> </span><span class="kw">as_tibble</span>(Orange)
+Orange &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/tibble/topics/as_tibble">as_tibble</a></span>(Orange)
 Orange</code></pre></div>
 <pre><code>## # A tibble: 35 x 3
 ##    Tree    age circumference
@@ -125,15 +125,15 @@ Orange</code></pre></div>
 <pre><code>## [1] 0.9135189</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(ggplot2)
 
-<span class="kw">ggplot</span>(Orange, <span class="kw">aes</span>(age, circumference, <span class="dt">color =</span> Tree)) <span class="op">+</span>
-<span class="st">  </span><span class="kw">geom_line</span>()</code></pre></div>
+<span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/ggplot">ggplot</a></span>(Orange, <span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/aes">aes</a></span>(age, circumference, <span class="dt">color =</span> Tree)) <span class="op">+</span>
+<span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/geom_path">geom_line</a></span>()</code></pre></div>
 <p><img src="broom_and_dplyr_files/figure-html/unnamed-chunk-2-1.png" width="700"></p>
 <p>Suppose you want to test for correlations individually <em>within</em> each tree. You can do this with dplyr’s <code>group_by</code>:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(dplyr)
 
 Orange <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">group_by</span>(Tree) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">summarize</span>(<span class="dt">correlation =</span> <span class="kw">cor</span>(age, circumference))</code></pre></div>
+<span class="st">  </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span>(Tree) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/summarise.html">summarize</a></span>(<span class="dt">correlation =</span> <span class="kw">cor</span>(age, circumference))</code></pre></div>
 <pre><code>## # A tibble: 5 x 2
 ##   Tree  correlation
 ##   &lt;ord&gt;       &lt;dbl&gt;
@@ -162,55 +162,55 @@ ct</code></pre></div>
 <pre><code>## # A tibble: 1 x 8
 ##   estimate statistic  p.value parameter conf.low conf.high method         
 ##      &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;     &lt;int&gt;    &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;          
-## 1    0.914      12.9 1.93e-14        33    0.834     0.956 Pearson's prod~
+## 1    0.914      12.9 1.93e-14        33    0.834     0.956 Pearson's prod…
 ## # ... with 1 more variable: alternative &lt;chr&gt;</code></pre>
 <p>Often, we want to perform multiple tests or fit multiple models, each on a different part of the data. In this case, we recommend a <code>nest-map-unnest</code> workflow. For example, suppose we want to perform correlation tests for each different tree. We start by <code>nest</code>ing our data based on the group of interest:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyr)
 <span class="kw">library</span>(purrr)
 
 nested &lt;-<span class="st"> </span>Orange <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">nest</span>(<span class="op">-</span>Tree)</code></pre></div>
+<span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/tidyr/topics/nest">nest</a></span>(<span class="op">-</span>Tree)</code></pre></div>
 <p>Then we run a correlation test for each nested tibble using <code><a href="http://www.rdocumentation.org/packages/purrr/topics/map">purrr::map</a></code>:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">nested <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">test =</span> <span class="kw">map</span>(data, <span class="op">~</span><span class="st"> </span><span class="kw">cor.test</span>(.x<span class="op">$</span>age, .x<span class="op">$</span>circumference)))</code></pre></div>
+<span class="st">  </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(<span class="dt">test =</span> <span class="kw"><a href="http://www.rdocumentation.org/packages/purrr/topics/map">map</a></span>(data, <span class="op">~</span><span class="st"> </span><span class="kw">cor.test</span>(.x<span class="op">$</span>age, .x<span class="op">$</span>circumference)))</code></pre></div>
 <pre><code>## # A tibble: 5 x 3
 ##   Tree  data             test       
 ##   &lt;ord&gt; &lt;list&gt;           &lt;list&gt;     
-## 1 1     &lt;tibble [7 x 2]&gt; &lt;S3: htest&gt;
-## 2 2     &lt;tibble [7 x 2]&gt; &lt;S3: htest&gt;
-## 3 3     &lt;tibble [7 x 2]&gt; &lt;S3: htest&gt;
-## 4 4     &lt;tibble [7 x 2]&gt; &lt;S3: htest&gt;
-## 5 5     &lt;tibble [7 x 2]&gt; &lt;S3: htest&gt;</code></pre>
+## 1 1     &lt;tibble [7 × 2]&gt; &lt;S3: htest&gt;
+## 2 2     &lt;tibble [7 × 2]&gt; &lt;S3: htest&gt;
+## 3 3     &lt;tibble [7 × 2]&gt; &lt;S3: htest&gt;
+## 4 4     &lt;tibble [7 × 2]&gt; &lt;S3: htest&gt;
+## 5 5     &lt;tibble [7 × 2]&gt; &lt;S3: htest&gt;</code></pre>
 <p>This results in a list-column of S3 objects. We want to tidy each of the objects, which we can also do with <code>map</code>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">nested <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">mutate</span>(
-    <span class="dt">test =</span> <span class="kw">map</span>(data, <span class="op">~</span><span class="st"> </span><span class="kw">cor.test</span>(.x<span class="op">$</span>age, .x<span class="op">$</span>circumference)), <span class="co"># S3 list-col</span>
-    <span class="dt">tidied =</span> <span class="kw">map</span>(test, tidy)
+<span class="st">  </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(
+    <span class="dt">test =</span> <span class="kw"><a href="http://www.rdocumentation.org/packages/purrr/topics/map">map</a></span>(data, <span class="op">~</span><span class="st"> </span><span class="kw">cor.test</span>(.x<span class="op">$</span>age, .x<span class="op">$</span>circumference)), <span class="co"># S3 list-col</span>
+    <span class="dt">tidied =</span> <span class="kw"><a href="http://www.rdocumentation.org/packages/purrr/topics/map">map</a></span>(test, tidy)
   ) </code></pre></div>
 <pre><code>## # A tibble: 5 x 4
 ##   Tree  data             test        tidied          
 ##   &lt;ord&gt; &lt;list&gt;           &lt;list&gt;      &lt;list&gt;          
-## 1 1     &lt;tibble [7 x 2]&gt; &lt;S3: htest&gt; &lt;tibble [1 x 8]&gt;
-## 2 2     &lt;tibble [7 x 2]&gt; &lt;S3: htest&gt; &lt;tibble [1 x 8]&gt;
-## 3 3     &lt;tibble [7 x 2]&gt; &lt;S3: htest&gt; &lt;tibble [1 x 8]&gt;
-## 4 4     &lt;tibble [7 x 2]&gt; &lt;S3: htest&gt; &lt;tibble [1 x 8]&gt;
-## 5 5     &lt;tibble [7 x 2]&gt; &lt;S3: htest&gt; &lt;tibble [1 x 8]&gt;</code></pre>
+## 1 1     &lt;tibble [7 × 2]&gt; &lt;S3: htest&gt; &lt;tibble [1 × 8]&gt;
+## 2 2     &lt;tibble [7 × 2]&gt; &lt;S3: htest&gt; &lt;tibble [1 × 8]&gt;
+## 3 3     &lt;tibble [7 × 2]&gt; &lt;S3: htest&gt; &lt;tibble [1 × 8]&gt;
+## 4 4     &lt;tibble [7 × 2]&gt; &lt;S3: htest&gt; &lt;tibble [1 × 8]&gt;
+## 5 5     &lt;tibble [7 × 2]&gt; &lt;S3: htest&gt; &lt;tibble [1 × 8]&gt;</code></pre>
 <p>Finally, we want to unnest the tidied data frames so we can see the results in a flat tibble. All together, this looks like:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Orange <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">nest</span>(<span class="op">-</span>Tree) <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">mutate</span>(
-    <span class="dt">test =</span> <span class="kw">map</span>(data, <span class="op">~</span><span class="st"> </span><span class="kw">cor.test</span>(.x<span class="op">$</span>age, .x<span class="op">$</span>circumference)), <span class="co"># S3 list-col</span>
-    <span class="dt">tidied =</span> <span class="kw">map</span>(test, tidy)
+<span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/tidyr/topics/nest">nest</a></span>(<span class="op">-</span>Tree) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(
+    <span class="dt">test =</span> <span class="kw"><a href="http://www.rdocumentation.org/packages/purrr/topics/map">map</a></span>(data, <span class="op">~</span><span class="st"> </span><span class="kw">cor.test</span>(.x<span class="op">$</span>age, .x<span class="op">$</span>circumference)), <span class="co"># S3 list-col</span>
+    <span class="dt">tidied =</span> <span class="kw"><a href="http://www.rdocumentation.org/packages/purrr/topics/map">map</a></span>(test, tidy)
   ) <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">unnest</span>(tidied, <span class="dt">.drop =</span> <span class="ot">TRUE</span>)</code></pre></div>
+<span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/tidyr/topics/unnest">unnest</a></span>(tidied, <span class="dt">.drop =</span> <span class="ot">TRUE</span>)</code></pre></div>
 <pre><code>## # A tibble: 5 x 9
 ##   Tree  estimate statistic  p.value parameter conf.low conf.high method   
 ##   &lt;ord&gt;    &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;     &lt;int&gt;    &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;    
-## 1 1        0.985      13.0  4.85e-5         5    0.901     0.998 Pearson'~
-## 2 2        0.987      13.9  3.43e-5         5    0.914     0.998 Pearson'~
-## 3 3        0.988      14.4  2.90e-5         5    0.919     0.998 Pearson'~
-## 4 4        0.984      12.5  5.73e-5         5    0.895     0.998 Pearson'~
-## 5 5        0.988      14.1  3.18e-5         5    0.916     0.998 Pearson'~
+## 1 1        0.985      13.0  4.85e-5         5    0.901     0.998 Pearson'…
+## 2 2        0.987      13.9  3.43e-5         5    0.914     0.998 Pearson'…
+## 3 3        0.988      14.4  2.90e-5         5    0.919     0.998 Pearson'…
+## 4 4        0.984      12.5  5.73e-5         5    0.895     0.998 Pearson'…
+## 5 5        0.988      14.1  3.18e-5         5    0.916     0.998 Pearson'…
 ## # ... with 1 more variable: alternative &lt;chr&gt;</code></pre>
 <p>Note that the <code>.drop</code> argument to <code><a href="http://www.rdocumentation.org/packages/tidyr/topics/unnest">tidyr::unnest</a></code> is often useful.</p>
 <p>This workflow becomes even more useful when applied to regressions. Untidy ouput for a regression looks like:</p>
@@ -243,12 +243,12 @@ nested &lt;-<span class="st"> </span>Orange <span class="op">%&gt;%</span><span 
 ## 2 circumference     7.82     0.606    12.9   1.93e-14</code></pre>
 <p>Now we can handle multiple regressions at once using exactly the same workflow as before:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Orange <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">nest</span>(<span class="op">-</span>Tree) <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">mutate</span>(
-    <span class="dt">fit =</span> <span class="kw">map</span>(data, <span class="op">~</span><span class="st"> </span><span class="kw">lm</span>(age <span class="op">~</span><span class="st"> </span>circumference, <span class="dt">data =</span> .x)),
-    <span class="dt">tidied =</span> <span class="kw">map</span>(fit, tidy)
+<span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/tidyr/topics/nest">nest</a></span>(<span class="op">-</span>Tree) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(
+    <span class="dt">fit =</span> <span class="kw"><a href="http://www.rdocumentation.org/packages/purrr/topics/map">map</a></span>(data, <span class="op">~</span><span class="st"> </span><span class="kw">lm</span>(age <span class="op">~</span><span class="st"> </span>circumference, <span class="dt">data =</span> .x)),
+    <span class="dt">tidied =</span> <span class="kw"><a href="http://www.rdocumentation.org/packages/purrr/topics/map">map</a></span>(fit, tidy)
   ) <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">unnest</span>(tidied)</code></pre></div>
+<span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/tidyr/topics/unnest">unnest</a></span>(tidied)</code></pre></div>
 <pre><code>## # A tibble: 10 x 6
 ##    Tree  term          estimate std.error statistic   p.value
 ##    &lt;ord&gt; &lt;chr&gt;            &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;
@@ -264,7 +264,7 @@ nested &lt;-<span class="st"> </span>Orange <span class="op">%&gt;%</span><span 
 ## 10 5     circumference     8.79     0.621    14.1   0.0000318</code></pre>
 <p>You can just as easily use multiple predictors in the regressions, as shown here on the <code>mtcars</code> dataset. We nest the data into automatic and manual cars (the <code>am</code> column), then perform the regression within each nested tibble.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data</span>(mtcars)
-mtcars &lt;-<span class="st"> </span><span class="kw">as_tibble</span>(mtcars)  <span class="co"># to play nicely with list-cols</span>
+mtcars &lt;-<span class="st"> </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/reexports.html">as_tibble</a></span>(mtcars)  <span class="co"># to play nicely with list-cols</span>
 mtcars</code></pre></div>
 <pre><code>## # A tibble: 32 x 11
 ##      mpg   cyl  disp    hp  drat    wt  qsec    vs    am  gear  carb
@@ -281,12 +281,12 @@ mtcars</code></pre></div>
 ## 10  19.2     6  168.   123  3.92  3.44  18.3     1     0     4     4
 ## # ... with 22 more rows</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mtcars <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">nest</span>(<span class="op">-</span>am) <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">mutate</span>(
-    <span class="dt">fit =</span> <span class="kw">map</span>(data, <span class="op">~</span><span class="st"> </span><span class="kw">lm</span>(wt <span class="op">~</span><span class="st"> </span>mpg <span class="op">+</span><span class="st"> </span>qsec <span class="op">+</span><span class="st"> </span>gear, <span class="dt">data =</span> .x)),  <span class="co"># S3 list-col</span>
-    <span class="dt">tidied =</span> <span class="kw">map</span>(fit, tidy)
+<span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/tidyr/topics/nest">nest</a></span>(<span class="op">-</span>am) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(
+    <span class="dt">fit =</span> <span class="kw"><a href="http://www.rdocumentation.org/packages/purrr/topics/map">map</a></span>(data, <span class="op">~</span><span class="st"> </span><span class="kw">lm</span>(wt <span class="op">~</span><span class="st"> </span>mpg <span class="op">+</span><span class="st"> </span>qsec <span class="op">+</span><span class="st"> </span>gear, <span class="dt">data =</span> .x)),  <span class="co"># S3 list-col</span>
+    <span class="dt">tidied =</span> <span class="kw"><a href="http://www.rdocumentation.org/packages/purrr/topics/map">map</a></span>(fit, tidy)
   ) <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">unnest</span>(tidied)</code></pre></div>
+<span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/tidyr/topics/unnest">unnest</a></span>(tidied)</code></pre></div>
 <pre><code>## # A tibble: 8 x 6
 ##      am term        estimate std.error statistic  p.value
 ##   &lt;dbl&gt; &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
@@ -300,16 +300,16 @@ mtcars</code></pre></div>
 ## 8     0 gear          0.147     0.368     0.398  0.696</code></pre>
 <p>What if you want not just the <code>tidy</code> output, but the <code>augment</code> and <code>glance</code> outputs as well, while still performing each regression only once? Since we’re using list-columns, we can just fit the model once and use multiple list-columns to store the tidied, glanced and augmented outputs.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">regressions &lt;-<span class="st"> </span>mtcars <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">nest</span>(<span class="op">-</span>am) <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">mutate</span>(
-    <span class="dt">fit =</span> <span class="kw">map</span>(data, <span class="op">~</span><span class="st"> </span><span class="kw">lm</span>(wt <span class="op">~</span><span class="st"> </span>mpg <span class="op">+</span><span class="st"> </span>qsec <span class="op">+</span><span class="st"> </span>gear, <span class="dt">data =</span> .x)),
-    <span class="dt">tidied =</span> <span class="kw">map</span>(fit, tidy),
-    <span class="dt">glanced =</span> <span class="kw">map</span>(fit, glance),
-    <span class="dt">augmented =</span> <span class="kw">map</span>(fit, augment)
+<span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/tidyr/topics/nest">nest</a></span>(<span class="op">-</span>am) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(
+    <span class="dt">fit =</span> <span class="kw"><a href="http://www.rdocumentation.org/packages/purrr/topics/map">map</a></span>(data, <span class="op">~</span><span class="st"> </span><span class="kw">lm</span>(wt <span class="op">~</span><span class="st"> </span>mpg <span class="op">+</span><span class="st"> </span>qsec <span class="op">+</span><span class="st"> </span>gear, <span class="dt">data =</span> .x)),
+    <span class="dt">tidied =</span> <span class="kw"><a href="http://www.rdocumentation.org/packages/purrr/topics/map">map</a></span>(fit, tidy),
+    <span class="dt">glanced =</span> <span class="kw"><a href="http://www.rdocumentation.org/packages/purrr/topics/map">map</a></span>(fit, glance),
+    <span class="dt">augmented =</span> <span class="kw"><a href="http://www.rdocumentation.org/packages/purrr/topics/map">map</a></span>(fit, augment)
   )
 
 regressions <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">unnest</span>(tidied)</code></pre></div>
+<span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/tidyr/topics/unnest">unnest</a></span>(tidied)</code></pre></div>
 <pre><code>## # A tibble: 8 x 6
 ##      am term        estimate std.error statistic  p.value
 ##   &lt;dbl&gt; &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
@@ -322,7 +322,7 @@ regressions <span class="op">%&gt;%</span><span class="st"> </span>
 ## 7     0 qsec          0.0919    0.0983    0.935  0.365   
 ## 8     0 gear          0.147     0.368     0.398  0.696</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">regressions <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">unnest</span>(glanced, <span class="dt">.drop =</span> <span class="ot">TRUE</span>)</code></pre></div>
+<span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/tidyr/topics/unnest">unnest</a></span>(glanced, <span class="dt">.drop =</span> <span class="ot">TRUE</span>)</code></pre></div>
 <pre><code>## # A tibble: 2 x 12
 ##      am r.squared adj.r.squared sigma statistic  p.value    df    logLik
 ##   &lt;dbl&gt;     &lt;dbl&gt;         &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt; &lt;int&gt;     &lt;dbl&gt;
@@ -331,7 +331,7 @@ regressions <span class="op">%&gt;%</span><span class="st"> </span>
 ## # ... with 4 more variables: AIC &lt;dbl&gt;, BIC &lt;dbl&gt;, deviance &lt;dbl&gt;,
 ## #   df.residual &lt;int&gt;</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">regressions <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">unnest</span>(augmented)</code></pre></div>
+<span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/tidyr/topics/unnest">unnest</a></span>(augmented)</code></pre></div>
 <pre><code>## # A tibble: 32 x 12
 ##       am    wt   mpg  qsec  gear .fitted .se.fit  .resid  .hat .sigma
 ##    &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;
@@ -371,12 +371,12 @@ regressions <span class="op">%&gt;%</span><span class="st"> </span>
 
 
       <footer><div class="tidyverse">
-  <p>broom is a part of the <strong>tidyverse</strong>, an ecosystem of packages designed with common APIs and a shared philosophy. Learn more at <a href="http://tidyverse.org">tidyverse.org</a>.</p>
+  <p>broom is a part of the <strong>tidyverse</strong>, an ecosystem of packages designed with common APIs and a shared philosophy. Learn more at <a href="https://tidyverse.org">tidyverse.org</a>.</p>
 </div>
 
 <div class="author">
-  <p>Developed by David Robinson.</p>
-  <p>Site built by <a href="http://pkgdown.r-lib.org">pkgdown</a>.</p>
+  <p>Developed by David Robinson, Alex Hayes.</p>
+  <p>Site built by <a href="https://pkgdown.r-lib.org">pkgdown</a>.</p>
 </div>
 
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-115082821-1"></script><script>

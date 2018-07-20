@@ -46,7 +46,7 @@
 
       <div class="navbar-brand-container">
         <a class="navbar-brand" href="../index.html">broom</a>
-        <small class="tidyverse">part of the <a href="http://tidyverse.org">tidyverse</a></small>
+        <small class="tidyverse">part of the <a href="https://tidyverse.org">tidyverse</a></small>
       </div>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
@@ -105,12 +105,11 @@
       <small>Source: <a href='http://github.com/tidyverse/broom/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
-    <div id="broom-0-4-5-9000" class="section level1">
+    <div id="broom-0-5-0" class="section level1">
 <h1 class="page-header">
-<a href="#broom-0-4-5-9000" class="anchor"></a>broom 0.4.5.9000<small> Unreleased </small>
+<a href="#broom-0-5-0" class="anchor"></a>broom 0.5.0<small> 2018-07-17 </small>
 </h1>
-<p>To be released as 0.5.0</p>
-<p>Tidiers now returns <code>tibbles</code>. This release also includes several new tidiers, new vignettes and a large number of bugfixes. We’ve also begun to more rigorously define tidier specifications: we’ve laid part of the groundwork for stricter and more consistent tidying, but the new tidier specifications are not yet complete. These will appear in the next release.</p>
+<p>Tidiers now return <code><a href="http://www.rdocumentation.org/packages/tibble/topics/tibble">tibble::tibble()</a></code>s. This release also includes several new tidiers, new vignettes and a large number of bugfixes. We’ve also begun to more rigorously define tidier specifications: we’ve laid part of the groundwork for stricter and more consistent tidying, but the new tidier specifications are not yet complete. These will appear in the next release.</p>
 <p>Additionally, users should note that we are in the process of migrating tidying methods for mixed models and Bayesian models to <code>broom.mixed</code>. <code>broom.mixed</code> is not on CRAN yet, but all mixed model and Bayesian tidiers will be deprecated once <code>broom.mixed</code> is on CRAN. No further development of mixed model tidiers will take place in <code>broom</code>.</p>
 <div id="breaking-changes" class="section level2">
 <h2 class="hasAnchor">
@@ -132,6 +131,7 @@ broom<span class="op">::</span><span class="kw"><a href="http://www.rdocumentati
 <li>setting rownames on tibbles, which is deprecated.</li>
 <li>using matrix and vector tidiers, now deprecated.</li>
 <li>handling the additional tibble classes <code>tbl_df</code> and <code>tbl</code> beyond the <code>data.frame</code> class</li>
+<li>linking to defunct documentation files – broom recently moved all tidiers to a <code>roxygen2</code> template based documentation system.</li>
 </ul>
 </div>
 <div id="new-vignettes" class="section level2">
@@ -171,6 +171,7 @@ broom<span class="op">::</span><span class="kw"><a href="http://www.rdocumentati
 <h2 class="hasAnchor">
 <a href="#other-changes" class="anchor"></a>Other changes</h2>
 <ul>
+<li>The <code>alpha</code> argument has been removed from <code>quantreg</code> tidy methods</li>
 <li>The <code>separate.levels</code> argument has been removed from <code>tidy.TukeyHSD</code>. To obtain the effect of <code>separate.levels = TRUE</code>, users may <code><a href="http://www.rdocumentation.org/packages/tidyr/topics/separate">tidyr::separate</a></code> after tidying. This is consistent with the <code>multcomp</code> tidier behavior.</li>
 <li>The <code>fe.error</code> argument was removed from <code>tidy.felm</code>. When fixed effects are tidier, their standard errors are now always included.</li>
 <li>The <code>diag</code> argument in <code>tidy.dist</code> has been renamed <code>diagonal</code>
@@ -218,6 +219,8 @@ broom<span class="op">::</span><span class="kw"><a href="http://www.rdocumentati
 <div id="contributors" class="section level2">
 <h2 class="hasAnchor">
 <a href="#contributors" class="anchor"></a>Contributors</h2>
+<p>Many many thanks to all the following for their thoughtful comments on design, bug reports and PRs! The community of broom contributors has been kind, supportive and insighftul and I look forward to working you all again!</p>
+<p><a href="https://github.com/atyre2"><a href='http://github.com/atyre2'>@atyre2</a></a>, <a href="https://github.com/batpigandme"><a href='http://github.com/batpigandme'>@batpigandme</a></a>, <a href="https://github.com/bfgray3"><a href='http://github.com/bfgray3'>@bfgray3</a></a>, <a href="https://github.com/bmannakee"><a href='http://github.com/bmannakee'>@bmannakee</a></a>, <a href="https://github.com/briatte"><a href='http://github.com/briatte'>@briatte</a></a>, <a href="https://github.com/cawoodjm"><a href='http://github.com/cawoodjm'>@cawoodjm</a></a>, <a href="https://github.com/cimentadaj"><a href='http://github.com/cimentadaj'>@cimentadaj</a></a>, <a href="https://github.com/dan87134"><a href='http://github.com/dan87134'>@dan87134</a></a>, <a href="https://github.com/dgrtwo"><a href='http://github.com/dgrtwo'>@dgrtwo</a></a>, <a href="https://github.com/dmenne"><a href='http://github.com/dmenne'>@dmenne</a></a>, <a href="https://github.com/ekatko1"><a href='http://github.com/ekatko1'>@ekatko1</a></a>, <a href="https://github.com/ellessenne"><a href='http://github.com/ellessenne'>@ellessenne</a></a>, <a href="https://github.com/erleholgersen"><a href='http://github.com/erleholgersen'>@erleholgersen</a></a>, <a href="https://github.com/Hong-Revo"><a href='http://github.com/Hong'>@Hong</a>-Revo</a>, <a href="https://github.com/huftis"><a href='http://github.com/huftis'>@huftis</a></a>, <a href="https://github.com/IndrajeetPatil"><a href='http://github.com/IndrajeetPatil'>@IndrajeetPatil</a></a>, <a href="https://github.com/jacob-long"><a href='http://github.com/jacob'>@jacob</a>-long</a>, <a href="https://github.com/jarvisc1"><a href='http://github.com/jarvisc1'>@jarvisc1</a></a>, <a href="https://github.com/jenzopr"><a href='http://github.com/jenzopr'>@jenzopr</a></a>, <a href="https://github.com/jgabry"><a href='http://github.com/jgabry'>@jgabry</a></a>, <a href="https://github.com/jimhester"><a href='http://github.com/jimhester'>@jimhester</a></a>, <a href="https://github.com/josue-rodriguez"><a href='http://github.com/josue'>@josue</a>-rodriguez</a>, <a href="https://github.com/karldw"><a href='http://github.com/karldw'>@karldw</a></a>, <a href="https://github.com/kfeilich"><a href='http://github.com/kfeilich'>@kfeilich</a></a>, <a href="https://github.com/larmarange"><a href='http://github.com/larmarange'>@larmarange</a></a>, <a href="https://github.com/lboller"><a href='http://github.com/lboller'>@lboller</a></a>, <a href="https://github.com/mariusbarth"><a href='http://github.com/mariusbarth'>@mariusbarth</a></a>, <a href="https://github.com/michaelweylandt"><a href='http://github.com/michaelweylandt'>@michaelweylandt</a></a>, <a href="https://github.com/mine-cetinkaya-rundel"><a href='http://github.com/mine'>@mine</a>-cetinkaya-rundel</a>, <a href="https://github.com/mkuehn10"><a href='http://github.com/mkuehn10'>@mkuehn10</a></a>, <a href="https://github.com/mvevans89"><a href='http://github.com/mvevans89'>@mvevans89</a></a>, <a href="https://github.com/nutterb"><a href='http://github.com/nutterb'>@nutterb</a></a>, <a href="https://github.com/ShreyasSingh"><a href='http://github.com/ShreyasSingh'>@ShreyasSingh</a></a>, <a href="https://github.com/stephlocke"><a href='http://github.com/stephlocke'>@stephlocke</a></a>, <a href="https://github.com/strengejacke"><a href='http://github.com/strengejacke'>@strengejacke</a></a>, <a href="https://github.com/topepo"><a href='http://github.com/topepo'>@topepo</a></a>, <a href="https://github.com/willbowditch"><a href='http://github.com/willbowditch'>@willbowditch</a></a>, <a href="https://github.com/WillemSleegers"><a href='http://github.com/WillemSleegers'>@WillemSleegers</a></a>, and <a href="https://github.com/wilsonfreitas"><a href='http://github.com/wilsonfreitas'>@wilsonfreitas</a></a></p>
 </div>
 </div>
     <div id="broom-0-4-4" class="section level1">
@@ -339,7 +342,7 @@ broom<span class="op">::</span><span class="kw"><a href="http://www.rdocumentati
 </h1>
 <ul>
 <li>Fixed small bug in <code>felm</code> where the <code>.fitted</code> and <code>.resid</code> columns were matrices rather than vectors.</li>
-<li>Added tidiers for <code>rlm</code> (robust linear model) and <code>gam</code> (generalized additive model) objects, including adjustments to “lm” tidiers in order to handle them. See <code><a href="../reference/rlm_tidiers.html">?rlm_tidiers</a></code> and <code><a href="../reference/gam_tidiers.html">?gam_tidiers</a></code> for more.</li>
+<li>Added tidiers for <code>rlm</code> (robust linear model) and <code>gam</code> (generalized additive model) objects, including adjustments to “lm” tidiers in order to handle them. See <code><a href="../reference/glance.rlm.html">?rlm_tidiers</a></code> and <code><a href="../reference/mgcv_tidy_gam.html">?gam_tidiers</a></code> for more.</li>
 <li>Removed rownames from <code>tidy.cv.glmnet</code> output</li>
 </ul>
 </div>
@@ -414,7 +417,7 @@ See <code><a href="../reference/rowwise_df_tidiers.html">?rowwise_df_tidiers</a>
     <div id="tocnav">
       <h2>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
-        <li><a href="#broom-0-4-5-9000">0.4.5.9000</a></li>
+        <li><a href="#broom-0-5-0">0.5.0</a></li>
         <li><a href="#broom-0-4-4">0.4.4</a></li>
         <li><a href="#broom-0-4-3">0.4.3</a></li>
         <li><a href="#broom-0-4-2">0.4.2</a></li>
@@ -434,12 +437,12 @@ See <code><a href="../reference/rowwise_df_tidiers.html">?rowwise_df_tidiers</a>
 
       <footer>
       <div class="tidyverse">
-  <p>broom is a part of the <strong>tidyverse</strong>, an ecosystem of packages designed with common APIs and a shared philosophy. Learn more at <a href="http://tidyverse.org">tidyverse.org</a>.</p>
+  <p>broom is a part of the <strong>tidyverse</strong>, an ecosystem of packages designed with common APIs and a shared philosophy. Learn more at <a href="https://tidyverse.org">tidyverse.org</a>.</p>
 </div>
 
 <div class="author">
-  <p>Developed by David Robinson.</p>
-  <p>Site built by <a href="http://pkgdown.r-lib.org">pkgdown</a>.</p>
+  <p>Developed by David Robinson, Alex Hayes.</p>
+  <p>Site built by <a href="https://pkgdown.r-lib.org">pkgdown</a>.</p>
 </div>
 
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-115082821-1"></script>

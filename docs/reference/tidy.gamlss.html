@@ -46,7 +46,7 @@
 
       <div class="navbar-brand-container">
         <a class="navbar-brand" href="../index.html">broom</a>
-        <small class="tidyverse">part of the <a href="http://tidyverse.org">tidyverse</a></small>
+        <small class="tidyverse">part of the <a href="https://tidyverse.org">tidyverse</a></small>
       </div>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
@@ -164,30 +164,29 @@ equaling zero.</p></dd>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
-<span class='kw'>if</span> (<span class='fu'>requireNamespace</span>(<span class='st'>"gamlss"</span>, <span class='kw'>quietly</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)) {
-  <span class='fu'>library</span>(<span class='no'>gamlss</span>)
-
-  <span class='no'>g</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/gamlss/topics/gamlss'>gamlss</a></span>(
-    <span class='no'>y</span> ~ <span class='fu'><a href='http://www.rdocumentation.org/packages/gamlss/topics/ps'>pb</a></span>(<span class='no'>x</span>),
-    <span class='kw'>sigma.fo</span> <span class='kw'>=</span> ~ <span class='fu'><a href='http://www.rdocumentation.org/packages/gamlss/topics/ps'>pb</a></span>(<span class='no'>x</span>),
-    <span class='kw'>family</span> <span class='kw'>=</span> <span class='no'>BCT</span>,
-    <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>abdom</span>,
-    <span class='kw'>method</span> <span class='kw'>=</span> <span class='fu'>mixed</span>(<span class='fl'>1</span>, <span class='fl'>20</span>)
-  )
-
-  <span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>g</span>)
-}</div><div class='output co'>#&gt; <span class='message'>Loading required package: gamlss.data</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Attaching package: 'gamlss.data'</span></div><div class='output co'>#&gt; <span class='message'>The following object is masked from 'package:boot':</span>
+<span class='fu'>library</span>(<span class='no'>gamlss</span>)</div><div class='output co'>#&gt; <span class='message'>Loading required package: gamlss.data</span></div><div class='output co'>#&gt; <span class='message'></span>
+#&gt; <span class='message'>Attaching package: ‘gamlss.data’</span></div><div class='output co'>#&gt; <span class='message'>The following object is masked from ‘package:boot’:</span>
 #&gt; <span class='message'></span>
-#&gt; <span class='message'>    aids</span></div><div class='output co'>#&gt; <span class='message'>Loading required package: gamlss.dist</span></div><div class='output co'>#&gt; <span class='message'>Loading required package: parallel</span></div><div class='output co'>#&gt; <span class='message'> **********   GAMLSS Version 5.1-0  ********** </span></div><div class='output co'>#&gt; <span class='message'>For more on GAMLSS look at http://www.gamlss.org/</span></div><div class='output co'>#&gt; <span class='message'>Type gamlssNews() to see new features/changes/bug fixes.</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Attaching package: 'gamlss'</span></div><div class='output co'>#&gt; <span class='message'>The following objects are masked from 'package:gam':</span>
+#&gt; <span class='message'>    aids</span></div><div class='output co'>#&gt; <span class='message'>Loading required package: gamlss.dist</span></div><div class='output co'>#&gt; <span class='message'>Loading required package: nlme</span></div><div class='output co'>#&gt; <span class='message'></span>
+#&gt; <span class='message'>Attaching package: ‘nlme’</span></div><div class='output co'>#&gt; <span class='message'>The following objects are masked from ‘package:ordinal’:</span>
 #&gt; <span class='message'></span>
-#&gt; <span class='message'>    lo, random</span></div><div class='output co'>#&gt; <span class='message'>The following object is masked from 'package:lme4':</span>
+#&gt; <span class='message'>    ranef, VarCorr</span></div><div class='output co'>#&gt; <span class='message'>The following object is masked from ‘package:dplyr’:</span>
 #&gt; <span class='message'></span>
-#&gt; <span class='message'>    refit</span></div><div class='output co'>#&gt; GAMLSS-RS iteration 1: Global Deviance = 4771.925 
+#&gt; <span class='message'>    collapse</span></div><div class='output co'>#&gt; <span class='message'>Loading required package: parallel</span></div><div class='output co'>#&gt; <span class='message'> **********   GAMLSS Version 5.1-0  ********** </span></div><div class='output co'>#&gt; <span class='message'>For more on GAMLSS look at http://www.gamlss.org/</span></div><div class='output co'>#&gt; <span class='message'>Type gamlssNews() to see new features/changes/bug fixes.</span></div><div class='output co'>#&gt; <span class='message'></span>
+#&gt; <span class='message'>Attaching package: ‘gamlss’</span></div><div class='output co'>#&gt; <span class='message'>The following objects are masked from ‘package:gam’:</span>
+#&gt; <span class='message'></span>
+#&gt; <span class='message'>    lo, random</span></div><div class='input'>
+<span class='no'>g</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/gamlss/topics/gamlss'>gamlss</a></span>(
+  <span class='no'>y</span> ~ <span class='fu'><a href='http://www.rdocumentation.org/packages/gamlss/topics/ps'>pb</a></span>(<span class='no'>x</span>),
+  <span class='kw'>sigma.fo</span> <span class='kw'>=</span> ~ <span class='fu'><a href='http://www.rdocumentation.org/packages/gamlss/topics/ps'>pb</a></span>(<span class='no'>x</span>),
+  <span class='kw'>family</span> <span class='kw'>=</span> <span class='no'>BCT</span>,
+  <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>abdom</span>,
+  <span class='kw'>method</span> <span class='kw'>=</span> <span class='fu'>mixed</span>(<span class='fl'>1</span>, <span class='fl'>20</span>)
+)</div><div class='output co'>#&gt; GAMLSS-RS iteration 1: Global Deviance = 4771.925 
 #&gt; GAMLSS-CG iteration 1: Global Deviance = 4771.013 
 #&gt; GAMLSS-CG iteration 2: Global Deviance = 4770.994 
-#&gt; GAMLSS-CG iteration 3: Global Deviance = 4770.994 </div><div class='output co'>#&gt; # A tibble: 6 x 6
+#&gt; GAMLSS-CG iteration 3: Global Deviance = 4770.994 </div><div class='input'>
+<span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>g</span>)</div><div class='output co'>#&gt; # A tibble: 6 x 6
 #&gt;   parameter term        estimate std.error statistic   p.value
 #&gt;   &lt;chr&gt;     &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;
 #&gt; 1 mu        (Intercept) -64.4      1.33      -48.5   1.89e-210
@@ -213,12 +212,12 @@ equaling zero.</p></dd>
 
       <footer>
       <div class="tidyverse">
-  <p>broom is a part of the <strong>tidyverse</strong>, an ecosystem of packages designed with common APIs and a shared philosophy. Learn more at <a href="http://tidyverse.org">tidyverse.org</a>.</p>
+  <p>broom is a part of the <strong>tidyverse</strong>, an ecosystem of packages designed with common APIs and a shared philosophy. Learn more at <a href="https://tidyverse.org">tidyverse.org</a>.</p>
 </div>
 
 <div class="author">
-  <p>Developed by David Robinson.</p>
-  <p>Site built by <a href="http://pkgdown.r-lib.org">pkgdown</a>.</p>
+  <p>Developed by David Robinson, Alex Hayes.</p>
+  <p>Site built by <a href="https://pkgdown.r-lib.org">pkgdown</a>.</p>
 </div>
 
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-115082821-1"></script>

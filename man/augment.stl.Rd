@@ -4,10 +4,12 @@
 \alias{augment.stl}
 \title{Augment data with information from a(n) stl object}
 \usage{
-\method{augment}{stl}(x, weights = TRUE, ...)
+\method{augment}{stl}(x, data = NULL, weights = TRUE, ...)
 }
 \arguments{
 \item{x}{An \code{stl} object returned from \code{\link[stats:stl]{stats::stl()}}.}
+
+\item{data}{Ignored, included for consistency with the augment generic signature only.}
 
 \item{weights}{Logical indicating whether or not to include the robust
 weights in the output.}

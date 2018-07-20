@@ -1,5 +1,7 @@
 #' @templateVar class ftable
 #' @template title_desc_tidy
+#' 
+#' @description This function is deprecated. Please use [tibble::as_tibble()] instead.
 #'
 #' @param x An `ftable` object returned from [stats::ftable()].
 #' @template param_unused_dots
@@ -8,14 +10,11 @@
 #'   [tibble::tibble] with one column for each variable, then a `Freq`
 #'   column.
 #'
-#' @examples
-#'
-#' tidy(ftable(Titanic, row.vars = 1:3))
-#'
 #' @export
 #' @seealso [tidy()], [stats::ftable()]
 #' @family stats tidiers
 tidy.ftable <- function(x, ...) {
+  .Deprecated()
   as_tibble(x)
 }
 
