@@ -163,7 +163,7 @@
   description: Distance between items
   used_by: dist
 - column: estimate
-  description: Estimated value of the term under consideration. Needs additional custom info.
+  description: The estimated value of the regression term.
   used_by:
   - aareg
   - Arima
@@ -327,7 +327,7 @@
   description: True proportion.
   used_by: binWidth
 - column: p.value
-  description: Needs custom information.
+  description: The two-sided p-value associated with the observed statistic.
   used_by:
   - aareg
   - anova
@@ -410,7 +410,8 @@
   description: state if multistate survfit object inputted
   used_by: survfit
 - column: statistic
-  description: Needs custom information
+  description: The value of a T-statistic to use in a hypothesis that the regression term
+    is non-zero.
   used_by:
   - aareg
   - anova
@@ -450,7 +451,7 @@
     observed and latent variables.
   used_by: lavaan
 - column: std.error
-  description: Standard error of the estimate. `boot` needs custom info.
+  description: The standard error of the regression term.
   used_by:
   - aareg
   - Arima
@@ -509,7 +510,7 @@
   - aov
   - aovlist
 - column: term
-  description: Needs custom info.
+  description: The name of the regression term.
   used_by:
   - aareg
   - anova

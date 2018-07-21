@@ -76,26 +76,14 @@ augment.ivreg <- function(x, data = model.frame(x), newdata, ...) {
 #' @param diagnostics Logical indicating whether to include statistics and
 #'   p-values for Sargan, Wu-Hausman and weak instrument tests. Defaults to
 #'   `FALSE`.
-#'   
-#' @template return_glance
 #'
-#' @return A one-row tibble with columns
+#' @templateVar missing statistic p.value
+#' @template return_glance
 #' 
-#'   \item{r.squared}{The percent of variance explained by the model}
-#'   \item{adj.r.squared}{r.squared adjusted based on the degrees of freedom}
-#'   \item{sigma}{The square root of the estimated residual variance}
-#'   \item{statistic}{Wald test statistic}
-#'   \item{p.value}{p-value from the Wald test}
-#'   \item{df}{Degrees of freedom used by the coefficients}
-#'   \item{df.residual}{residual degrees of freedom}
-#'   
-#' If `diagnostics = TRUE`, will also return the following columns:
-#'   \item{statistic.Sargan}{Statistic for Sargan test}
-#'   \item{p.value.Sargan}{P-value for Sargan test}
-#'   \item{statistic.Wu.Hausman}{Statistic for Wu-Hausman test}
-#'   \item{p.value.Wu.Hausman}{P-value for Wu-Hausman test}
-#'   \item{statistic.weakinst}{Statistic for Wu-Hausman test}
-#'   \item{p.value.weakinst}{P-value for weak instruments test}
+#' @return 
+#' 
+#'   \item{statistic}{Wald test statistic.}
+#'   \item{p.value}{P-value for the Wald test.}
 #'
 #' @export
 #' @seealso [glance()], [AER::ivreg()]

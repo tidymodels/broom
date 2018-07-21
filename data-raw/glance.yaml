@@ -4,7 +4,6 @@
   used_by:
   - felm
   - ivreg
-  - ivreg
   - lm
   - orcutt
   - plm
@@ -116,7 +115,6 @@
   - felm
   - gmm
   - ivreg
-  - ivreg
   - lm
   - Mclust
   - poLCA
@@ -136,11 +134,11 @@
   - biglm
   - ergm
   - felm
+  - gam
   - Gam
   - glm
   - glmRob
   - gmm
-  - ivreg
   - ivreg
   - lm
   - lmRob
@@ -151,7 +149,6 @@
   - rq
   - speedlm
   - survreg
-  - mgcv_glance_gam
 - column: dw.original
   description: Durbin-Watson statistic of original fit
   used_by: orcutt
@@ -283,7 +280,7 @@
 - column: model
   description: A character string denoting the model at which the optimal BIC occurs
   used_by: Mclust
-- column: n
+- column: 'n'   # must wrap 'n' as 'n' is a reserved YAML keyword equivalent to FALSE
   description: Needs custom info.
   used_by:
   - binDesign
@@ -352,7 +349,6 @@
   - garch
   - gmm
   - ivreg
-  - ivreg
   - lm
   - lmodel2
   - plm
@@ -395,7 +391,6 @@
   used_by:
   - biglm
   - felm
-  - ivreg
   - ivreg
   - lm
   - lmodel2
@@ -458,7 +453,6 @@
   - felm
   - garch
   - gmm
-  - ivreg
   - ivreg
   - lm
   - plm

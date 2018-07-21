@@ -21,7 +21,7 @@ the \code{data} argument.}
 }
 \value{
 A \code{\link[tibble:tibble]{tibble::tibble()}} with exactly one row and columns:
-\item{logLik}{Log-likelihood of model. Included only if \code{logLik = TRUE}. See \code{\link[stats:logLik]{stats::logLik()}} for details.}
+\item{logLik}{The log-likelihood of the model. \code{\link[stats:logLik]{stats::logLik()}} may be a useful reference.}
 }
 \description{
 Glance accepts a model object and returns a \code{\link[tibble:tibble]{tibble::tibble()}}

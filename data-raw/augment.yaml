@@ -1,5 +1,5 @@
 - column: .class
-  description: The predicted class. Needs custom info. (TODO: make this a factor?)
+  description: The predicted class. Needs custom info. (TODO -- make this a factor?)
   used_by:
   - Mclust
   - poLCA
@@ -64,7 +64,7 @@
   description: individuals-level fitted values for the j-th longitudinal process
   used_by: mjoint
 - column: .hat
-  description:Diagonal of the hat matrix. TODO -- add interpretation.
+  description: Diagonal of the hat matrix. TODO -- add interpretation.
   used_by:
   - glm
   - glmRob
