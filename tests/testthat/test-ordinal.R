@@ -25,6 +25,12 @@ test_that("tidy.clm", {
   
   check_dims(td, 7, 3)
   check_dims(td2, 7, 8)
+  
+  expect_equal(object = td$term,
+               expected = td2$term,
+               label = "'term' column in tidy output with `conf.int = FALSE`",
+               expected.label = "'term' column in tidy output with `conf.int = TRUE`",
+               info = "The terms (and their order) should be unaffected by whether `conf.int` = TRUE or `conf.int` = FALSE.")
 })
 
 test_that("glance.clm", {
