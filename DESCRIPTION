@@ -55,7 +55,8 @@ Imports:
     reshape2,
     stringr,
     tibble,
-    tidyr
+    tidyr,
+    modelgenerics
 Suggests:
     AER,
     akima,

@@ -1,7 +1,6 @@
 
 #' Title
 #' 
-#' @evalRd erd()
 #' @export
 test <- function() 1
 

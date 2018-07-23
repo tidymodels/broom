@@ -26,34 +26,38 @@ NULL
 #' @templateVar class statistical
 #' @template title_desc_augment
 #'
-#' @seealso [augment.lm()]
 #' @param x Model object or other R object with information to append to
 #'   observations.
 #' @template param_data
 #' @param ... Addition arguments to augment method.
+#' 
 #' @return A [tibble::tibble()] with information about data points.
+#' 
+#' @importFrom modelgenerics augment
 #' @export
-augment <- function(x, data, ...) UseMethod("augment")
+modelgenerics::augment
 
-#' Turn a model object into a tidy tibble
+#' @templateVar class statistical
+#' @template title_desc_tidy
 #'
 #' @param x An object to be converted into a tidy [tibble::tibble()].
 #' @param ... Additional arguments to tidying method.
+#' 
 #' @return A [tibble::tibble()] with information about model components.
 #'
+#' @importFrom modelgenerics tidy
 #' @export
-tidy <- function(x, ...) UseMethod("tidy")
+modelgenerics::tidy
 
-#' Construct a single row summary "glance" of a model, fit, or other
-#' object
-#'
-#' glance methods always return either a one-row data frame (except on NULL, which
-#' returns an empty data frame)
+#' @templateVar class statistical
+#' @template title_desc_glance
 #'
 #' @param x model or other R object to convert to single-row data frame
 #' @param ... other arguments passed to methods
+#' 
+#' @importFrom modelgenerics glance
 #' @export
-glance <- function(x, ...) UseMethod("glance")
+modelgenerics::glance
 
 
 
