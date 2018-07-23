@@ -261,12 +261,12 @@ augment_columns <- function(x, data, newdata, type, type.predict = type,
         ret$.hat <- infl
         ret$.sigma <- NA
       } else {
-        zero_weights <- "weights" %in% names(x) && any(abs(x$weights) < .Machine$double.eps ^ 0.5)
+        zero_weights <- "weights" %in% names(x) &&
+          any(zero_weight_inds <- abs(x$weights) < .Machine$double.eps ^ 0.5)
         if (zero_weights) {
           ret[c(".hat", ".sigma")] <- 0
-          nonzero_weight_indices <- as.integer(names(infl$hat))
-          ret$.hat[nonzero_weight_indices] <- infl$hat
-          ret$.sigma[nonzero_weight_indices] <- infl$sigma
+          ret$.hat[! zero_weight_inds] <- infl$hat
+          ret$.sigma[! zero_weight_inds] <- infl$sigma
         } else {
           ret$.hat <- infl$hat
           ret$.sigma <- infl$sigma
