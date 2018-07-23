@@ -12,7 +12,7 @@ test_that("glm tidier arguments", {
 })
 
 nrow_mtcars <- nrow(mtcars)
-glm_weights <- c(rep(0, nrow_mtcars / 2), rep(1, nrow_mtcars / 2))
+glm_weights <- rep(c(0, 1), each = nrow_mtcars / 2)
 gfit <- glm(am ~ wt, mtcars, family = "binomial")
 gfit2 <- glm(cyl ~ wt + disp, mtcars, family = "poisson")
 gfit3 <- glm(am ~ wt, mtcars, family = "binomial", weights = glm_weights)
