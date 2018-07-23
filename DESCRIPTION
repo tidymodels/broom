@@ -128,8 +128,12 @@ Suggests:
     testthat,
     tseries,
     xergm,
-    zoo
+    zoo,
+    modeltests
 VignetteBuilder: knitr
 LazyData: true
 Roxygen: list(markdown = TRUE, roclets = c("collate", "namespace", "col_desc"))
 RoxygenNote: 6.0.1.9000
+Remotes: 
+    topepo/modelgenerics,
+    alexpghayes/modeltests

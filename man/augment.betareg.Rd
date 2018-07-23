@@ -45,9 +45,6 @@ the \code{data} argument.}
 }
 \value{
 A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
-\item{.cooksd}{Cooks distance. See \code{\link[stats:cooks.distance]{stats::cooks.distance()}} for additional details.}
-\item{.fitted}{Fitted / predicted value.}
-\item{.resid}{Residuals of fitted values. TODO -- document when present. Residuals on which data set?}
 
 For additional details on Cook's distance, see
 \code{\link[stats:cooks.distance]{stats::cooks.distance()}}.

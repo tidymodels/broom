@@ -3,6 +3,7 @@ context("aer")
 skip_if_not_installed("AER")
 library(AER)
 library(dplyr)
+library(modeltests)
 
 data("CigarettesSW")
 df <- CigarettesSW %>% 

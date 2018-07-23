@@ -29,13 +29,6 @@ the \code{data} argument.}
 }
 \value{
 A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
-\item{conf.high}{The upper end of a confidence interval for the term under consideration. Included only if \code{conf.int = TRUE}.}
-\item{conf.low}{The lower end of a confidence interval for the term under consideration. Included only if \code{conf.int = TRUE}.}
-\item{estimate}{The estimated value of the regression term.}
-\item{p.value}{The two-sided p-value associated with the observed statistic.}
-\item{statistic}{The value of a T-statistic to use in a hypothesis that the regression term is non-zero.}
-\item{std.error}{The standard error of the regression term.}
-\item{term}{The name of the regression term.}
 
 The tibble has one row for each term in the regression. The
 \code{component} column indicates whether a particular
