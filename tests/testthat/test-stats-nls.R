@@ -38,13 +38,15 @@ test_that("augment.nls", {
     aug = augment.nls,
     model = fit,
     data = mtcars,
-    newdata = mtcars
+    newdata = mtcars,
+    strict = FALSE
   )
   
   check_augment_function(
     aug = augment.nls,
     model = fit2,
     data = mtcars,
-    newdata = mtcars
+    newdata = mtcars,
+    strict = FALSE
   )
 })

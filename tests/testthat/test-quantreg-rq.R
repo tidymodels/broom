@@ -48,13 +48,15 @@ test_that("augment.rq", {
     aug = augment.rq,
     model = fit,
     data = df,
-    newdata = df
+    newdata = df,
+    strict = FALSE
   )
   
   check_augment_function(
     aug = augment.rq,
     model = fit2,
     data = df,
-    newdata = df
+    newdata = df,
+    strict = FALSE
   )
 })

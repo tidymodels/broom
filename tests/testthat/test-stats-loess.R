@@ -9,6 +9,7 @@ test_that("augment.loess", {
     aug = augment.loess,
     model = fit, 
     data = mtcars,
-    newdata = mtcars
+    newdata = mtcars,
+    strict = FALSE
   )
 })

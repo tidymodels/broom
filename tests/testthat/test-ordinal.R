@@ -39,7 +39,8 @@ test_that("augment.clm", {
     aug = augment.clm,
     model = fit,
     data = wine,
-    newdata = wine
+    newdata = wine,
+    strict = FALSE
   )
 })
 

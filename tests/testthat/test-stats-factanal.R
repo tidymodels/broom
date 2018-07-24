@@ -42,13 +42,15 @@ test_that("augment.factanal works", {
   check_augment_function(
     aug = augment.factanal,
     model = fit_reg,
-    data = mtcars
+    data = mtcars,
+    strict = FALSE
   )
   
   check_augment_function(
     aug = augment.factanal,
     model = fit_bart,
-    data = mtcars
+    data = mtcars,
+    strict = FALSE
   )
   
   # errors for `scores = "none"`

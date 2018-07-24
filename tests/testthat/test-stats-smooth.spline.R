@@ -16,6 +16,7 @@ test_that("augment.smooth.spline", {
   check_augment_function(
     aug = augment.smooth.spline,
     model = fit,
-    data = mtcars
+    data = mtcars,
+    strict = FALSE
   )
 })

@@ -36,6 +36,7 @@ test_that("augment.kmeans", {
     aug = augment.kmeans,
     model = fit,
     data = x,
-    newdata = x
+    newdata = x,
+    strict = FALSE
   )
 })

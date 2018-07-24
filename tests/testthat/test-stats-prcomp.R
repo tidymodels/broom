@@ -50,6 +50,7 @@ test_that("augment.prcomp", {
     aug = augment.prcomp,
     model = pc,
     data = USArrests,
-    newdata = USArrests
+    newdata = USArrests,
+    strict = FALSE
   )
 })

@@ -32,7 +32,8 @@ test_that("augment.poLCA", {
   check_augment_function(
     aug = augment.poLCA,
     model = fit,
-    data = values
+    data = values,
+    strict = FALSE
   )
 })
 

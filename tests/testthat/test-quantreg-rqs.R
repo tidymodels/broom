@@ -43,13 +43,15 @@ test_that("augment.rqs", {
     aug = augment.rqs,
     model = fit,
     data = airquality,
-    newdata = airquality
+    newdata = airquality,
+    strict = FALSE
   )
   
   check_augment_function(
     aug = augment.rqs,
     model = fit2,
     data = airquality,
-    newdata = airquality
+    newdata = airquality,
+    strict = FALSE
   )
 })
