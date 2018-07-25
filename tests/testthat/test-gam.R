@@ -1,5 +1,8 @@
 context("gam")
 
+skip_if_not_installed("modeltests")
+library(modeltests)
+
 skip_if_not_installed("gam")
 
 data(kyphosis, package = "gam")

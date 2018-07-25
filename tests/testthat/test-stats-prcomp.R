@@ -1,5 +1,8 @@
 context("stats-prcomp")
 
+skip_if_not_installed("modeltests")
+library(modeltests)
+
 pc <- prcomp(USArrests, scale = TRUE)
 
 test_that("prcomp tidier arguments", {

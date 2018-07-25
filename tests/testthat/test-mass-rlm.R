@@ -1,5 +1,8 @@
 context("mass-rlm")
 
+skip_if_not_installed("modeltests")
+library(modeltests)
+
 skip_if_not_installed("MASS")
 library(MASS)
 

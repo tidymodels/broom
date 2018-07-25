@@ -1,5 +1,8 @@
 context("maps tidiers")
 
+skip_if_not_installed("modeltests")
+library(modeltests)
+
 skip_if_not_installed("maps")
 ca <- maps::map("county", "ca", plot = FALSE, fill = TRUE)
 

@@ -1,5 +1,8 @@
 context("list-irlba")
 
+skip_if_not_installed("modeltests")
+library(modeltests)
+
 skip_if_not_installed("irlba")
 
 mat <- scale(as.matrix(USJudgeRatings))

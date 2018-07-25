@@ -1,5 +1,8 @@
 context("list-optim")
 
+skip_if_not_installed("modeltests")
+library(modeltests)
+
 test_that("optim tidiers works", {
   func <- function(x) {
     (x[1] - 2)^2 + (x[2] - 3)^2 + (x[3] - 8)^2

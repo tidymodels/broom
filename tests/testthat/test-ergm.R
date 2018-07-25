@@ -1,5 +1,8 @@
 context("ergm")
 
+skip_if_not_installed("modeltests")
+library(modeltests)
+
 skip_if_not_installed("ergm")
 library(ergm)
 data(florentine)

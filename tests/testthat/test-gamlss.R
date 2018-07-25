@@ -1,5 +1,8 @@
 context("gamlss")
 
+skip_if_not_installed("modeltests")
+library(modeltests)
+
 skip_if_not_installed("gamlss")
 skip_if_not_installed("gamlss.data")
 skip_if_not_installed("gamlss.dist")

@@ -1,5 +1,8 @@
 context("list-xyz")
 
+skip_if_not_installed("modeltests")
+library(modeltests)
+
 test_that("tidy_xyz", {
   
   check_arguments(tidy_xyz)

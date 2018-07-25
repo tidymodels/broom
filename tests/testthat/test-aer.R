@@ -1,5 +1,8 @@
 context("aer")
 
+skip_if_not_installed("modeltests")
+library(modeltests)
+
 skip_if_not_installed("AER")
 library(AER)
 library(dplyr)

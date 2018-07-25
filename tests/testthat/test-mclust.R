@@ -1,5 +1,8 @@
 context("mclust")
 
+skip_if_not_installed("modeltests")
+library(modeltests)
+
 skip_if_not_installed("mclust")
 library(mclust)
 dat <- iris[, 1:4]

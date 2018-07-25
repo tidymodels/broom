@@ -1,5 +1,8 @@
 context("stats")
 
+skip_if_not_installed("modeltests")
+library(modeltests)
+
 test_that("tidy.density", {
   den <- density(faithful$eruptions, bw = "sj")
   td <- tidy(den)

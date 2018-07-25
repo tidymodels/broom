@@ -1,5 +1,8 @@
 context("stats-htest")
 
+skip_if_not_installed("modeltests")
+library(modeltests)
+
 test_that("htest tidier arguments", {
   check_arguments(tidy.htest)
   check_arguments(glance.htest)

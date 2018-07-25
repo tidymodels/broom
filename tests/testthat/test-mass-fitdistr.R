@@ -1,5 +1,8 @@
 context("mass-fitdistr")
 
+skip_if_not_installed("modeltests")
+library(modeltests)
+
 skip_if_not_installed("MASS")
 
 set.seed(27)

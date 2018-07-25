@@ -1,5 +1,8 @@
 context("stats-lm")
 
+skip_if_not_installed("modeltests")
+library(modeltests)
+
 test_that("lm tidier arguments", {
   check_arguments(tidy.lm)
   check_arguments(glance.lm)

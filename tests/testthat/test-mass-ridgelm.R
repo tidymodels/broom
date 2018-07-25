@@ -1,5 +1,8 @@
 context("mass-ridgelm")
 
+skip_if_not_installed("modeltests")
+library(modeltests)
+
 skip_if_not_installed("MASS")
 
 names(longley)[1] <- "y"

@@ -1,5 +1,8 @@
 context("list-svd")
 
+skip_if_not_installed("modeltests")
+library(modeltests)
+
 mat <- scale(as.matrix(USJudgeRatings))
 s <- svd(mat)
 p <- prcomp(mat)

@@ -1,5 +1,8 @@
 context("sp")
 
+skip_if_not_installed("modeltests")
+library(modeltests)
+
 skip_if_not_installed("sp")
 skip_if_not_installed("rgeos")
 skip_if_not_installed("maptools")
