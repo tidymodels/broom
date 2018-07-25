@@ -41,7 +41,7 @@ test_that("glance.rq", {
 test_that("augment.rq", {
   
   au <- augment(fit, interval = "confidence")
-  check_tibble(au, method = "augment")
+  check_tibble(au, method = "augment", strict = FALSE)
   check_dims(au, 21, 9)
   
   check_augment_function(

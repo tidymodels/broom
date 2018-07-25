@@ -6,8 +6,6 @@
 #' @template param_exponentiate
 #' @template param_unused_dots
 #' 
-#' @template return_tidy
-#' 
 #' @examples
 #' 
 #' library(AER)
@@ -59,8 +57,6 @@ tidy.ivreg <- function(x,
 #' @template param_data
 #' @template param_newdata
 #' @template param_unused_dots
-#' 
-#' @template return_augment
 #'
 #' @export
 #' @seealso [augment()], [AER::ivreg()]
@@ -76,9 +72,6 @@ augment.ivreg <- function(x, data = model.frame(x), newdata, ...) {
 #' @param diagnostics Logical indicating whether to include statistics and
 #'   p-values for Sargan, Wu-Hausman and weak instrument tests. Defaults to
 #'   `FALSE`.
-#'
-#' @templateVar missing statistic p.value
-#' @template return_glance
 #' 
 #' @return 
 #' 

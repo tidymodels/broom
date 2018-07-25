@@ -29,6 +29,6 @@ test_that("tidy.spec", {
   spc <- spectrum(lh, plot = FALSE)
   td <- tidy(spc)
   
-  check_tidy_output(td)
+  check_tidy_output(td, strict = FALSE)
   check_dims(td, 24, 2)
 })

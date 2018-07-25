@@ -13,7 +13,7 @@ test_that("tidy.gam", {
   td <- tidy(fit)
   tdp <- tidy(fit, parametric = TRUE)
   
-  check_tidy_output(td)
+  check_tidy_output(td, strict = FALSE)
   check_tidy_output(tdp)
 })
 

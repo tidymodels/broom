@@ -33,6 +33,6 @@ test_that("tidy.summary.glht works", {
 
 test_that("tidy.cld works", {
   td <- tidy(cld(wht))
-  check_tidy_output(td)
+  check_tidy_output(td, strict = FALSE)
   check_dims(td, 3, 2)
 })

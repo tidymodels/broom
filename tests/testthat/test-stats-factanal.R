@@ -16,8 +16,8 @@ test_that("tidy.factanal", {
   td <- tidy(fit)
   td2 <- tidy(fit2)
   
-  check_tidy_output(td)
-  check_tidy_output(td2)
+  check_tidy_output(td, strict = FALSE)
+  check_tidy_output(td2, strict = FALSE)
   check_dims(td, ncol(mtcars), 2 + n_factors)
   
   expect_equal(td$variable, colnames(mtcars))

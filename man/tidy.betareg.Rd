@@ -28,8 +28,6 @@ accept a \code{newdata} argument, it will use the default value for
 the \code{data} argument.}
 }
 \value{
-A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
-
 The tibble has one row for each term in the regression. The
 \code{component} column indicates whether a particular
 term was used to model either the \code{"mean"} or \code{"precision"}. Here the

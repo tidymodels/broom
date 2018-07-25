@@ -21,7 +21,7 @@ test_that("tidy.muhaz", {
 
 test_that("glance.muhaz", {
   gl <- glance(fit)
-  check_glance_outputs(gl)
+  check_glance_outputs(gl, strict = FALSE)
   check_dims(gl, expected_cols = 5)
 })
 

@@ -17,8 +17,8 @@ test_that("tidy.Mclust", {
   td <- tidy(fit)
   td2 <- tidy(fit2)
   
-  check_tidy_output(td)
-  check_tidy_output(td2)
+  check_tidy_output(td, strict = FALSE)
+  check_tidy_output(td2, strict = FALSE)
   
   check_dims(td, 7, 8)
   check_dims(td2, 1, 7)

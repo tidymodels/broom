@@ -26,7 +26,7 @@ test_that("glance.coxph", {
   gl <- glance(fit)
   gl2 <- glance(fit2)
   
-  check_glance_outputs(gl, gl2)
+  check_glance_outputs(gl, gl2, strict = FALSE)
 })
 
 test_that("augment.coxph", {

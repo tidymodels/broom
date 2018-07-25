@@ -29,5 +29,5 @@ test_that("glance.Arima", {
   gl1 <- glance(fit1)
   gl2 <- glance(fit2)
   
-  check_glance_outputs(gl1, gl2)
+  check_glance_outputs(gl1, gl2, strict = FALSE)
 })

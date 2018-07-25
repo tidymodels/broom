@@ -42,7 +42,7 @@ test_that("glance.nlrq", {
 test_that("augment.nlrq", {
   
   au <- augment(fit)
-  check_tibble(au, method = "augment")
+  check_tibble(au, method = "augment", strict = FALSE)
   
   check_augment_function(
     aug = augment.nlrq,

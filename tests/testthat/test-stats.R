@@ -5,7 +5,7 @@ test_that("tidy.density", {
   td <- tidy(den)
   
   check_arguments(tidy.density)
-  check_tidy_output(td)
+  check_tidy_output(td, strict = FALSE)
   check_dims(td, 512, 2)
 })
 

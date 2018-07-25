@@ -20,7 +20,7 @@ test_that("tidy_irlba", {
   check_dims(tdd, 5, 4)
   
   tdv <- tidy(i, matrix = "v")
-  check_tidy_output(tdv)
+  check_tidy_output(tdv, strict = FALSE)
   check_dims(tdv, 60, 3)
 })
 

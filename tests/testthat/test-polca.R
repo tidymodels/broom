@@ -27,7 +27,7 @@ test_that("glance.poLCA", {
 test_that("augment.poLCA", {
   
   au <- augment(fit)
-  check_tibble(au, method = "augment")
+  check_tibble(au, method = "augment", strict = FALSE)
   
   check_augment_function(
     aug = augment.poLCA,

@@ -16,7 +16,7 @@ test_that("kmeans tidier arguments", {
 
 test_that("tidy.kmeans", {
   td <- tidy(fit)
-  check_tidy_output(td)
+  check_tidy_output(td, strict = FALSE)
 })
 
 test_that("tidy.kmeans", {

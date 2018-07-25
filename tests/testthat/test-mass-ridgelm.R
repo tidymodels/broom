@@ -16,7 +16,7 @@ test_that("tidy.ridgelm", {
   td2 <- tidy(fit2)
   td3 <- tidy(fit3)
   
-  check_tidy_output(td2)
+  check_tidy_output(td2, strict = FALSE)
   check_tidy_output(td3)
 })
 

@@ -78,8 +78,8 @@ test_that("glance.mjoint", {
   gl <- glance(mjoint_fit)
   gl2 <- glance(mjoint_fit2)
   
-  check_glance_outputs(gl)
-  check_glance_outputs(gl2)
+  check_glance_outputs(gl, strict = FALSE)
+  check_glance_outputs(gl2, strict = FALSE)
 })
 
 
@@ -95,6 +95,6 @@ test_that("augment.mjoint", {
     regexp = "`data` argument is NULL. Try specifying `data` manually."
   )
   
-  check_tibble(au, method = "augment")
-  check_tibble(au, method = "augment")
+  check_tibble(au, method = "augment", strict = FALSE)
+  check_tibble(au, method = "augment", strict = FALSE)
 })

@@ -62,7 +62,7 @@ test_that("tidy.manova", {
   
   td <- tidy(fit)
   
-  check_tidy_output(td)
+  check_tidy_output(td, strict = FALSE)
   check_dims(td, 8, 7)
 })
 

@@ -4,8 +4,6 @@
 #' @param x A `betareg` object produced by a call to [betareg::betareg()].
 #' @template param_confint
 #' @template param_unused_dots
-#' 
-#' @template return_tidy
 #'
 #' @return The tibble has one row for each term in the regression. The
 #'   `component` column indicates whether a particular
@@ -59,8 +57,6 @@ tidy.betareg <- function(x, conf.int = FALSE, conf.level = .95, ...) {
 #' @template param_newdata
 #' @template param_type_predict
 #' @template param_type_residuals
-#' 
-#' @template return_augment
 #'
 #' @return For additional details on Cook's distance, see 
 #'   [stats::cooks.distance()].
@@ -85,8 +81,6 @@ augment.betareg <- function(x, data = stats::model.frame(x), newdata = NULL,
 #' 
 #' @inherit tidy.betareg params examples
 #' @template param_unused_dots
-#' 
-#' @template return_glance
 #' 
 #' @seealso [glance()], [betareg::betareg()]
 #' @export
