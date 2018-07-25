@@ -1,5 +1,8 @@
 context("survival-aareg")
 
+skip_if_not_installed("modeltests")
+library(modeltests)
+
 skip_if_not_installed("survival")
 library(survival)
 
@@ -25,8 +28,8 @@ test_that("tidy.aareg", {
   td <- tidy(afit1)
   td2 <- tidy(afit2)
   
-  check_tidy_output(td)
-  check_tidy_output(td2)
+  check_tidy_output(td, strict = FALSE)
+  check_tidy_output(td2, strict = FALSE)
   
   check_dims(td, 4, 6)
   check_dims(td2, 4, 7)

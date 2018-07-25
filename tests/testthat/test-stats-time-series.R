@@ -1,5 +1,8 @@
 context("stats-time-series")
 
+skip_if_not_installed("modeltests")
+library(modeltests)
+
 test_that("tidy.acf works", {
   check_arguments(tidy.acf)
   
@@ -29,6 +32,6 @@ test_that("tidy.spec", {
   spc <- spectrum(lh, plot = FALSE)
   td <- tidy(spc)
   
-  check_tidy_output(td)
+  check_tidy_output(td, strict = FALSE)
   check_dims(td, 24, 2)
 })

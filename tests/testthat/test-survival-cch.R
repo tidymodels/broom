@@ -1,5 +1,8 @@
 context("survival-cch")
 
+skip_if_not_installed("modeltests")
+library(modeltests)
+
 skip_if_not_installed("survival")
 library(survival)
 
@@ -19,7 +22,7 @@ fit <- cch(
 )
 
 test_that("cch tidier arguments", {
-  check_arguments(tidy.cch)
+  check_arguments(tidy.cch, strict = FALSE)
   check_arguments(glance.cch)
 })
 

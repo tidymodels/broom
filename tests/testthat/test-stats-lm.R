@@ -1,5 +1,8 @@
 context("stats-lm")
 
+skip_if_not_installed("modeltests")
+library(modeltests)
+
 test_that("lm tidier arguments", {
   check_arguments(tidy.lm)
   check_arguments(glance.lm)
@@ -73,28 +76,32 @@ test_that("augment.lm", {
     aug = augment.lm,
     model = fit,
     data = mtcars,
-    newdata = mtcars
+    newdata = mtcars,
+    strict = FALSE
   )
   
   check_augment_function(
     aug = augment.lm,
     model = fit2,
     data = mtcars,
-    newdata = mtcars
+    newdata = mtcars,
+    strict = FALSE
   )
   
   check_augment_function(
     aug = augment.lm,
     model = fit_na_row,
     data = na_row_data,
-    newdata = na_row_data
+    newdata = na_row_data,
+    strict = FALSE
   )
   
   check_augment_function(
     aug = augment.lm,
     model = fit_rd,
     data = rd_data,
-    newdata = rd_data
+    newdata = rd_data,
+    strict = FALSE
   )
 })
 

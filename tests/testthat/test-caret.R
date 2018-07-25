@@ -1,5 +1,8 @@
 context("caret")
 
+skip_if_not_installed("modeltests")
+library(modeltests)
+
 skip_if_not_installed("caret")
 
 test_that("tidy.confusionMatrix", {

@@ -1,5 +1,8 @@
 context("stats-factanal")
 
+skip_if_not_installed("modeltests")
+library(modeltests)
+
 n_factors <- 3
 n_factors2 <- 3
 
@@ -16,8 +19,8 @@ test_that("tidy.factanal", {
   td <- tidy(fit)
   td2 <- tidy(fit2)
   
-  check_tidy_output(td)
-  check_tidy_output(td2)
+  check_tidy_output(td, strict = FALSE)
+  check_tidy_output(td2, strict = FALSE)
   check_dims(td, ncol(mtcars), 2 + n_factors)
   
   expect_equal(td$variable, colnames(mtcars))
@@ -42,13 +45,15 @@ test_that("augment.factanal works", {
   check_augment_function(
     aug = augment.factanal,
     model = fit_reg,
-    data = mtcars
+    data = mtcars,
+    strict = FALSE
   )
   
   check_augment_function(
     aug = augment.factanal,
     model = fit_bart,
-    data = mtcars
+    data = mtcars,
+    strict = FALSE
   )
   
   # errors for `scores = "none"`

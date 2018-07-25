@@ -1,5 +1,8 @@
 context("stats-kmeans")
 
+skip_if_not_installed("modeltests")
+library(modeltests)
+
 set.seed(2)
 x <- rbind(
   matrix(rnorm(100, sd = 0.3), ncol = 2),
@@ -16,7 +19,7 @@ test_that("kmeans tidier arguments", {
 
 test_that("tidy.kmeans", {
   td <- tidy(fit)
-  check_tidy_output(td)
+  check_tidy_output(td, strict = FALSE)
 })
 
 test_that("tidy.kmeans", {
@@ -36,6 +39,7 @@ test_that("augment.kmeans", {
     aug = augment.kmeans,
     model = fit,
     data = x,
-    newdata = x
+    newdata = x,
+    strict = FALSE
   )
 })

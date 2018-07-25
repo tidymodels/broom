@@ -55,7 +55,8 @@ Imports:
     reshape2,
     stringr,
     tibble,
-    tidyr
+    tidyr,
+    modelgenerics
 Suggests:
     AER,
     akima,
@@ -127,8 +128,12 @@ Suggests:
     testthat,
     tseries,
     xergm,
-    zoo
+    zoo,
+    modeltests
 VignetteBuilder: knitr
 LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 6.0.1.9000
+Remotes: 
+    topepo/modelgenerics,
+    alexpghayes/modeltests

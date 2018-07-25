@@ -1,5 +1,8 @@
 context("quantreg-rq")
 
+skip_if_not_installed("modeltests")
+library(modeltests)
+
 skip_if_not_installed("quantreg")
 library(quantreg)
 
@@ -41,20 +44,22 @@ test_that("glance.rq", {
 test_that("augment.rq", {
   
   au <- augment(fit, interval = "confidence")
-  check_tibble(au, method = "augment")
+  check_tibble(au, method = "augment", strict = FALSE)
   check_dims(au, 21, 9)
   
   check_augment_function(
     aug = augment.rq,
     model = fit,
     data = df,
-    newdata = df
+    newdata = df,
+    strict = FALSE
   )
   
   check_augment_function(
     aug = augment.rq,
     model = fit2,
     data = df,
-    newdata = df
+    newdata = df,
+    strict = FALSE
   )
 })

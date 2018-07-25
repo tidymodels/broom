@@ -1,5 +1,8 @@
 context("utilities")
 
+skip_if_not_installed("modeltests")
+library(modeltests)
+
 skip("specification not yet complete")
 
 skip_if_not_installed("betareg")

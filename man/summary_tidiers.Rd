@@ -40,19 +40,6 @@ For models that have only a single component, the \code{\link[=tidy]{tidy()}} an
 \code{\link[=glance]{glance()}} methods are identical. Please see the documentation for both
 of those methods.
 }
-\examples{
-
-v <- rnorm(1000)
-s <- summary(v)
-s
-
-tidy(s)
-glance(s)
-
-v2 <- c(v,NA)
-tidy(summary(v2))
-
-}
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[=summary]{summary()}}
 }

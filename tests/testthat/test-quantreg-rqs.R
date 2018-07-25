@@ -1,5 +1,8 @@
 context("quantreg-rqs")
 
+skip_if_not_installed("modeltests")
+library(modeltests)
+
 skip_if_not_installed("quantreg")
 library(quantreg)
 
@@ -43,13 +46,15 @@ test_that("augment.rqs", {
     aug = augment.rqs,
     model = fit,
     data = airquality,
-    newdata = airquality
+    newdata = airquality,
+    strict = FALSE
   )
   
   check_augment_function(
     aug = augment.rqs,
     model = fit2,
     data = airquality,
-    newdata = airquality
+    newdata = airquality,
+    strict = FALSE
   )
 })

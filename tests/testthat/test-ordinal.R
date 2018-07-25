@@ -1,5 +1,8 @@
 context("ordinal")
 
+skip_if_not_installed("modeltests")
+library(modeltests)
+
 skip_if_not_installed("ordinal")
 library(ordinal)
 
@@ -39,7 +42,8 @@ test_that("augment.clm", {
     aug = augment.clm,
     model = fit,
     data = wine,
-    newdata = wine
+    newdata = wine,
+    strict = FALSE
   )
 })
 

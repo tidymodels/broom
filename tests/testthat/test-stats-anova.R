@@ -1,5 +1,8 @@
 context("stats-anova")
 
+skip_if_not_installed("modeltests")
+library(modeltests)
+
 test_that("tidy.aov", {
   check_arguments(tidy.aov)
   
@@ -34,7 +37,7 @@ test_that("tidy.anova", {
 
 
 test_that("tidy.aovlist", {
-  check_arguments("tidy.aovlist")
+  check_arguments(tidy.aovlist)
   
   aovlist <- aov(mpg ~ wt + disp + Error(drat), mtcars)
   aovlist2 <- aov(mpg ~ wt + qsec + Error(cyl / (wt * qsec)), data = mtcars)
@@ -62,7 +65,7 @@ test_that("tidy.manova", {
   
   td <- tidy(fit)
   
-  check_tidy_output(td)
+  check_tidy_output(td, strict = FALSE)
   check_dims(td, 8, 7)
 })
 

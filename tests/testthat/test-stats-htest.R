@@ -1,5 +1,8 @@
 context("stats-htest")
 
+skip_if_not_installed("modeltests")
+library(modeltests)
+
 test_that("htest tidier arguments", {
   check_arguments(tidy.htest)
   check_arguments(glance.htest)
@@ -15,9 +18,9 @@ test_that("tidy.htest/oneway.test", {
   expect_message(td <- tidy(ot))
   gl <- glance(ot)
   
-  check_tidy_output(td)
+  check_tidy_output(td, strict = FALSE)
   check_dims(td, expected_cols = 5)
-  check_glance_outputs(gl)
+  check_glance_outputs(gl, strict = FALSE)
 })
 
 test_that("tidy.htest/cor.test", {
@@ -26,7 +29,7 @@ test_that("tidy.htest/cor.test", {
   gl <- glance(pco)
   
   check_tidy_output(td)
-  check_glance_outputs(gl)
+  check_glance_outputs(gl, strict = FALSE)
   
   
   sco <- suppressWarnings(cor.test(mtcars$mpg, mtcars$wt, method = "spearman"))
@@ -34,7 +37,7 @@ test_that("tidy.htest/cor.test", {
   gl2 <- glance(sco)
   
   check_tidy_output(td2)
-  check_glance_outputs(gl2)
+  check_glance_outputs(gl2, strict = FALSE)
 })
 
 test_that("tidy.htest/t.test", {
@@ -43,7 +46,7 @@ test_that("tidy.htest/t.test", {
   gl <- glance(tt)
   
   check_tidy_output(td)
-  check_glance_outputs(gl)
+  check_glance_outputs(gl, strict = FALSE)
 })
 
 test_that("tidy.htest/wilcox.test", {
@@ -72,7 +75,7 @@ test_that("tidy.power.htest", {
   # gl <- glance(ptt)
   
   check_arguments(tidy.power.htest)
-  check_tidy_output(td)
+  check_tidy_output(td, strict = FALSE)
   # check_glance_outputs(gl). doesn't exist yet.
 })
 
@@ -85,11 +88,11 @@ test_that("augment.htest (chi squared test)", {
   
   chit <- chisq.test(tab) # 2D table
   au <- augment(chit)
-  check_tibble(au, method = "augment")
+  check_tibble(au, method = "augment", strict = FALSE)
   
   chit2 <- chisq.test(c(A = 20, B = 15, C = 25)) # 1D table
   au2 <- augment(chit2)
-  check_tibble(au2, method = "augment")
+  check_tibble(au2, method = "augment", strict = FALSE)
   
   tt <- t.test(rnorm(10))
   expect_error(

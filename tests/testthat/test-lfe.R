@@ -1,5 +1,8 @@
 context("lfe")
 
+skip_if_not_installed("modeltests")
+library(modeltests)
+
 skip_if_not_installed("lfe")
 
 set.seed(27)

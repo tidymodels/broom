@@ -1,5 +1,8 @@
 context("mass-rlm")
 
+skip_if_not_installed("modeltests")
+library(modeltests)
+
 skip_if_not_installed("MASS")
 library(MASS)
 
@@ -29,7 +32,7 @@ test_that("glance.rlm", {
 test_that("augment.rlm", {
   
   au <- augment(fit)
-  check_tibble(au, method = "augment")
+  check_tibble(au, method = "augment", strict = FALSE)
   
   check_augment_function(
     aug = augment.rlm,

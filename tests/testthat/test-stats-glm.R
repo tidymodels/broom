@@ -1,5 +1,8 @@
 context("stats-glm")
 
+skip_if_not_installed("modeltests")
+library(modeltests)
+
 test_that("glm tidier arguments", {
   
   # note that:
@@ -47,14 +50,16 @@ test_that("augment.glm", {
     aug = augment.lm,
     model = gfit,
     data = mtcars,
-    newdata = mtcars
+    newdata = mtcars,
+    strict = FALSE
   )
   
   check_augment_function(
     aug = augment.lm,
     model = gfit2,
     data = mtcars,
-    newdata = mtcars
+    newdata = mtcars,
+    strict = FALSE
   )
 })
 

@@ -1,5 +1,8 @@
 context("mclust")
 
+skip_if_not_installed("modeltests")
+library(modeltests)
+
 skip_if_not_installed("mclust")
 library(mclust)
 dat <- iris[, 1:4]
@@ -17,8 +20,8 @@ test_that("tidy.Mclust", {
   td <- tidy(fit)
   td2 <- tidy(fit2)
   
-  check_tidy_output(td)
-  check_tidy_output(td2)
+  check_tidy_output(td, strict = FALSE)
+  check_tidy_output(td2, strict = FALSE)
   
   check_dims(td, 7, 8)
   check_dims(td2, 1, 7)
