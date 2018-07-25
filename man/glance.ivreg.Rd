@@ -24,8 +24,6 @@ accept a \code{newdata} argument, it will use the default value for
 the \code{data} argument.}
 }
 \value{
-A \code{\link[tibble:tibble]{tibble::tibble()}} with exactly one row and columns:
-
 \item{statistic}{Wald test statistic.}
 \item{p.value}{P-value for the Wald test.}
 }

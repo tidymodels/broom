@@ -34,7 +34,7 @@ test_that("tidy.anova", {
 
 
 test_that("tidy.aovlist", {
-  check_arguments("tidy.aovlist")
+  check_arguments(tidy.aovlist)
   
   aovlist <- aov(mpg ~ wt + disp + Error(drat), mtcars)
   aovlist2 <- aov(mpg ~ wt + qsec + Error(cyl / (wt * qsec)), data = mtcars)

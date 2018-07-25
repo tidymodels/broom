@@ -44,8 +44,6 @@ accept a \code{newdata} argument, it will use the default value for
 the \code{data} argument.}
 }
 \value{
-A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
-
 For additional details on Cook's distance, see
 \code{\link[stats:cooks.distance]{stats::cooks.distance()}}.
 }

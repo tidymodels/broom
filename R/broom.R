@@ -23,40 +23,19 @@
 #' @aliases broom broom-package
 NULL
 
-#' @templateVar class statistical
-#' @template title_desc_augment
-#'
-#' @param x Model object or other R object with information to append to
-#'   observations.
-#' @template param_data
-#' @param ... Addition arguments to augment method.
-#' 
-#' @return A [tibble::tibble()] with information about data points.
-#' 
 #' @importFrom modelgenerics augment
 #' @export
+#' @seealso [augment.lm()]
 modelgenerics::augment
 
-#' @templateVar class statistical
-#' @template title_desc_tidy
-#'
-#' @param x An object to be converted into a tidy [tibble::tibble()].
-#' @param ... Additional arguments to tidying method.
-#' 
-#' @return A [tibble::tibble()] with information about model components.
-#'
 #' @importFrom modelgenerics tidy
 #' @export
+#' @seealso [tidy.lm()]
 modelgenerics::tidy
 
-#' @templateVar class statistical
-#' @template title_desc_glance
-#'
-#' @param x model or other R object to convert to single-row data frame
-#' @param ... other arguments passed to methods
-#' 
 #' @importFrom modelgenerics glance
 #' @export
+#' @seealso [glance.lm()]
 modelgenerics::glance
 
 

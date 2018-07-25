@@ -34,9 +34,6 @@ proceed using \code{conf.level = 0.95}. Additionally, if you pass
 accept a \code{newdata} argument, it will use the default value for
 the \code{data} argument.}
 }
-\value{
-A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
-}
 \description{
 Tidy summarizes information about the components of a model.
 A model component might be a single term in a regression, a single

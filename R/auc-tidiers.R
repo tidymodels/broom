@@ -3,8 +3,6 @@
 #'
 #' @param x An `roc` object returned from a call to [AUC::roc()].
 #' @template param_unused_dots
-#' 
-#' @template return_tidy
 #'
 #' @return A [tibble::tibble()] with three columns:
 #'   \item{cutoff}{The cutoff used for classification. Observations with
