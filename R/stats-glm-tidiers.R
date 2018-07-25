@@ -15,6 +15,10 @@ tidy.glm <- function(x, ...) {
 #'
 #' @param x A `glm` object returned from [stats::glm()].
 #'
+#' @return Note that if the weights for any of the observations in the model
+#'   are 0, then columns ".infl" and ".hat" in the result will be 0
+#'   for those observations.
+#'
 #' @export
 #' @family lm tidiers
 #' @seealso [stats::glm()]
