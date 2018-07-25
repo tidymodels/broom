@@ -32,7 +32,8 @@ Authors@R: c(
     person("Jorge", "Cimentada", email = "cimentadaj@gmail.com", role = "ctb"),
     person("Erle", "Holgersen", email = "erle.holgersen@gmail.com", role = "ctb"),
     person("Karl", "Dunkle Werner", role = "ctb"),
-    person("Ben", "Schneider", email = "benjamin.julius.schneider@gmail.com", role = "ctb"))
+    person("Ben", "Schneider", email = "benjamin.julius.schneider@gmail.com", role = "ctb"),
+    person("Steven", "Pav", email = "shabbychef@gmail.com", role = "ctb"))
 Maintainer: David Robinson <admiral.david@gmail.com>
 Description: Summarizes key information about statistical objects in tidy
     tibbles. This makes it easy to report results, create plots and consistently
@@ -56,7 +57,8 @@ Imports:
     reshape2,
     stringr,
     tibble,
-    tidyr
+    tidyr,
+    modelgenerics
 Suggests:
     AER,
     akima,
@@ -128,8 +130,12 @@ Suggests:
     testthat,
     tseries,
     xergm,
-    zoo
+    zoo,
+    modeltests
 VignetteBuilder: knitr
 LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 6.0.1.9000
+Remotes: 
+    topepo/modelgenerics,
+    alexpghayes/modeltests

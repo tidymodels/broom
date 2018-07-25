@@ -1,5 +1,8 @@
 context("robust")
 
+skip_if_not_installed("modeltests")
+library(modeltests)
+
 skip_if_not_installed("robust")
 library(robust)
 
@@ -26,7 +29,7 @@ test_that("glance.lmRob", {
 
 test_that("augment.lmRob", {
   au <- augment(fit)
-  check_tibble(au, method = "augment")
+  check_tibble(au, method = "augment", strict = FALSE)
 })
 
 test_that("tidy.glmRob", {
@@ -41,5 +44,5 @@ test_that("glance.glmRob", {
 
 test_that("augment.glmRob", {
   au <- augment(fit2)
-  check_tibble(au, method = "augment")
+  check_tibble(au, method = "augment", strict = FALSE)
 })

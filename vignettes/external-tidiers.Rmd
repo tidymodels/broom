@@ -1,0 +1,35 @@
+---
+title: "Exporting tidying methods from a package"
+author: "Alex Hayes"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Exporting tidying methods from a package}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+## Defining and re-exporting `tidy()`, `glance()` and `augment()` generics
+
+```{r}
+
+#' @importFrom modelgenerics tidy
+#' @export
+modelgenerics::tidy
+
+#' @export
+tidy.dusty <- function(x, ...) {
+  tibble::tibble(x)
+}
+```
+
+## Testing
+
+- don't have access to `helper-tests.R`

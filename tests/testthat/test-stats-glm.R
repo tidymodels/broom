@@ -1,5 +1,8 @@
 context("stats-glm")
 
+skip_if_not_installed("modeltests")
+library(modeltests)
+
 test_that("glm tidier arguments", {
   
   # note that:
@@ -11,8 +14,11 @@ test_that("glm tidier arguments", {
   check_arguments(augment.glm)
 })
 
+nrow_mtcars <- nrow(mtcars)
+glm_weights <- rep(c(0, 1), each = nrow_mtcars / 2)
 gfit <- glm(am ~ wt, mtcars, family = "binomial")
 gfit2 <- glm(cyl ~ wt + disp, mtcars, family = "poisson")
+gfit3 <- glm(am ~ wt, mtcars, family = "binomial", weights = glm_weights)
 
 test_that("tidy.glm works", {
   
@@ -47,12 +53,21 @@ test_that("augment.glm", {
     aug = augment.lm,
     model = gfit,
     data = mtcars,
-    newdata = mtcars
+    newdata = mtcars,
+    strict = FALSE
   )
   
   check_augment_function(
     aug = augment.lm,
     model = gfit2,
+    data = mtcars,
+    newdata = mtcars,
+    strict = FALSE
+  )
+
+  check_augment_function(
+    aug = augment.lm,
+    model = gfit3,
     data = mtcars,
     newdata = mtcars
   )

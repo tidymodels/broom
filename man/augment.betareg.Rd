@@ -44,11 +44,8 @@ accept a \code{newdata} argument, it will use the default value for
 the \code{data} argument.}
 }
 \value{
-augment returns the original data, along with new columns describing
-each observation:
-\item{.fitted}{Fitted values of model}
-\item{.resid}{Residuals}
-\item{.cooksd}{Cooks distance, \code{\link[=cooks.distance]{cooks.distance()}}}
+For additional details on Cook's distance, see
+\code{\link[stats:cooks.distance]{stats::cooks.distance()}}.
 }
 \description{
 Augment accepts a model object and a dataset and adds
@@ -88,6 +85,24 @@ model on data in a tibble.
 We are in the process of defining behaviors for models fit with various
 \link{na.action} arguments, but make no guarantees about behavior when data is
 missing at this time.
+}
+\examples{
+
+library(betareg)
+
+data("GasolineYield", package = "betareg")
+
+mod <- betareg(yield ~ batch + temp, data = GasolineYield)
+
+mod
+tidy(mod)
+tidy(mod, conf.int = TRUE)
+tidy(mod, conf.int = TRUE, conf.level = .99)
+
+augment(mod)
+
+glance(mod)
+
 }
 \seealso{
 \code{\link[=augment]{augment()}}, \code{\link[betareg:betareg]{betareg::betareg()}}

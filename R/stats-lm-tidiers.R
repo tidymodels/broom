@@ -75,8 +75,13 @@ tidy.lm <- function(x, conf.int = FALSE, conf.level = .95,
                     exponentiate = FALSE, quick = FALSE, ...) {
   if (quick) {
     co <- stats::coef(x)
-    ret <- data.frame(term = names(co), estimate = unname(co),
-                      stringsAsFactors = FALSE)
+    if (inherits(x,'mlm')) {
+      ret <- data.frame(response = colnames(co), term = rownames(co), 
+                        estimate = as.numeric(co), stringsAsFactors = FALSE)
+    } else {
+      ret <- data.frame(term = names(co), estimate = unname(co),
+                        stringsAsFactors = FALSE)
+    }
     return(process_lm(ret, x, conf.int = FALSE, exponentiate = exponentiate))
   }
   s <- summary(x)
@@ -218,6 +223,22 @@ glance.summary.lm <- function(x, ...) {
   ))
 
   as_tibble(ret)
+}
+
+# getAnywhere('format.perc')
+.format.perc <- function (probs, digits) { paste(format(100 * probs, trim = TRUE, scientific = FALSE, digits = digits), "%") }
+
+# compute confidence intervals for mlm object. 
+confint.mlm <- function (object, level = 0.95, ...) {
+  cf <- coef(object)
+  ncfs <- as.numeric(cf)
+  a <- (1 - level)/2
+  a <- c(a, 1 - a)
+  fac <- qt(a, object$df.residual)
+  pct <- .format.perc(a, 3)
+  ses <- sqrt(diag(stats::vcov(object)))
+  ci <- ncfs + ses %o% fac
+  setNames(data.frame(ci),pct)
 }
 
 #' @export

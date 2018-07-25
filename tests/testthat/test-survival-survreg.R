@@ -1,5 +1,8 @@
 context("survival-survreg")
 
+skip_if_not_installed("modeltests")
+library(modeltests)
+
 skip_if_not_installed("survival")
 library(survival)
 
@@ -8,7 +11,7 @@ sr <- survreg(Surv(futime, fustat) ~ ecog.ps + rx, ovarian,
 )
 
 test_that("survreg tidier arguments", {
-  check_arguments(tidy.survreg)
+  check_arguments(tidy.survreg, strict = FALSE)
   check_arguments(glance.survreg)
   check_arguments(augment.survreg)
 })

@@ -2,6 +2,9 @@ context("deprecating")
 
 skip("deprecating soon")
 
+skip_if_not_installed("modeltests")
+library(modeltests)
+
 # test tidy, augment, glance methods from lme4-tidiers.R
 
 if (require(lme4, quietly = TRUE)) {

@@ -3,14 +3,15 @@ To be released as 0.7.0
 
 ## Other changes
 
-- Add `data` argument to `augment()` generic
+- Import `tidy()`, `glance()` and `augment()` generics from `modelgenerics`
+- Added `data` argument to `augment()` generic
 
 ## Deprecations
 
 - Data frame, rowwise data frame, vector and matrix tidiers have been removed
 - `bootstrap()` has been removed
 
-- `tidy.table()` has been deprecated in favor of `tibble::as_tibble()`
+- `tidy.table()` and `tidy.ftable()` have been deprecated in favor of `tibble::as_tibble()`
 - `tidy.summaryDefault()` has been deprecated in favor of `skimr::skim()`
 
 ### Mixed model deprecations

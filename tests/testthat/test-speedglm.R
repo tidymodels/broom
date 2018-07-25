@@ -1,5 +1,8 @@
 context("speedglm")
 
+skip_if_not_installed("modeltests")
+library(modeltests)
+
 skip_if_not_installed("speedglm")
 library(speedglm)
 
@@ -37,6 +40,7 @@ test_that("augment works on speedlm", {
     aug = augment.speedlm,
     model = fit, 
     data = mtcars,
-    newdata = mtcars
+    newdata = mtcars,
+    strict = FALSE
   )
 })

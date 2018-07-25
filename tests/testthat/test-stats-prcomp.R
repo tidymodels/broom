@@ -1,5 +1,8 @@
 context("stats-prcomp")
 
+skip_if_not_installed("modeltests")
+library(modeltests)
+
 pc <- prcomp(USArrests, scale = TRUE)
 
 test_that("prcomp tidier arguments", {
@@ -17,7 +20,7 @@ test_that("tidy.prcomp", {
   
   td2 <- tidy(pc, matrix = "v")
   
-  check_tidy_output(td2)
+  check_tidy_output(td2, strict = FALSE)
   check_dims(td2, 16, 3)
   
   expect_identical(
@@ -50,6 +53,7 @@ test_that("augment.prcomp", {
     aug = augment.prcomp,
     model = pc,
     data = USArrests,
-    newdata = USArrests
+    newdata = USArrests,
+    strict = FALSE
   )
 })

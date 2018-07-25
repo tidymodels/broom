@@ -1,5 +1,8 @@
 context("zoo")
 
+skip_if_not_installed("modeltests")
+library(modeltests)
+
 skip_if_not_installed("zoo")
 
 test_that("tidy.zoo", {

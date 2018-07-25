@@ -1,5 +1,8 @@
 context("hmisc")
 
+skip_if_not_installed("modeltests")
+library(modeltests)
+
 skip_if_not_installed("Hmisc")
 
 test_that("tidy.rcorr", {

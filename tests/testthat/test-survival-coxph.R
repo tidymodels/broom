@@ -1,5 +1,8 @@
 context("survival-coxph")
 
+skip_if_not_installed("modeltests")
+library(modeltests)
+
 skip_if_not_installed("survival")
 library(survival)
 
@@ -26,7 +29,7 @@ test_that("glance.coxph", {
   gl <- glance(fit)
   gl2 <- glance(fit2)
   
-  check_glance_outputs(gl, gl2)
+  check_glance_outputs(gl, gl2, strict = FALSE)
 })
 
 test_that("augment.coxph", {

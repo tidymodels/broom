@@ -1,5 +1,8 @@
 context("lmodel2")
 
+skip_if_not_installed("modeltests")
+library(modeltests)
+
 skip_if_not_installed("lmodel2")
 library(lmodel2)
 

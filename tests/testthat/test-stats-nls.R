@@ -1,5 +1,8 @@
 context("stats-nls")
 
+skip_if_not_installed("modeltests")
+library(modeltests)
+
 fit <- nls(
   wt ~ a + b * mpg + c / disp,
   data = mtcars,
@@ -38,13 +41,15 @@ test_that("augment.nls", {
     aug = augment.nls,
     model = fit,
     data = mtcars,
-    newdata = mtcars
+    newdata = mtcars,
+    strict = FALSE
   )
   
   check_augment_function(
     aug = augment.nls,
     model = fit2,
     data = mtcars,
-    newdata = mtcars
+    newdata = mtcars,
+    strict = FALSE
   )
 })

@@ -1,5 +1,8 @@
 context("car")
 
+skip_if_not_installed("modeltests")
+library(modeltests)
+
 skip_if_not_installed("car")
 
 test_that("tidy.durbinWatsonTest", {

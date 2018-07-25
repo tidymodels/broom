@@ -1,5 +1,8 @@
 context("stats-smooth.spline")
 
+skip_if_not_installed("modeltests")
+library(modeltests)
+
 fit <- smooth.spline(mtcars$wt, mtcars$mpg)
 
 test_that("smooth.spline tidier arguments", {
@@ -16,6 +19,7 @@ test_that("augment.smooth.spline", {
   check_augment_function(
     aug = augment.smooth.spline,
     model = fit,
-    data = mtcars
+    data = mtcars,
+    strict = FALSE
   )
 })

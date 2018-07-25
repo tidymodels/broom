@@ -261,8 +261,16 @@ augment_columns <- function(x, data, newdata, type, type.predict = type,
         ret$.hat <- infl
         ret$.sigma <- NA
       } else {
-        ret$.hat <- infl$hat
-        ret$.sigma <- infl$sigma
+        zero_weights <- "weights" %in% names(x) &&
+          any(zero_weight_inds <- abs(x$weights) < .Machine$double.eps ^ 0.5)
+        if (zero_weights) {
+          ret[c(".hat", ".sigma")] <- 0
+          ret$.hat[! zero_weight_inds] <- infl$hat
+          ret$.sigma[! zero_weight_inds] <- infl$sigma
+        } else {
+          ret$.hat <- infl$hat
+          ret$.sigma <- infl$sigma
+        }
       }
     }
 
@@ -464,6 +472,7 @@ globalVariables(
     "PC",
     "percent",
     "pvalue",
+    "rd_roclet",
     "rhs", 
     "rmsea.ci.upper",
     "rowname", 
