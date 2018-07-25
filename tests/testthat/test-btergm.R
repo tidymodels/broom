@@ -8,7 +8,7 @@ skip_if_not_installed("btergm")
 
 test_that("tidy.btergm", {
   
-  check_arguments(tidy.btergm)
+  check_arguments(tidy.btergm, strict = FALSE)
   
   networks <- list()
   
