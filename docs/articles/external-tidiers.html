@@ -101,6 +101,7 @@
 <li>Implement appropriate tidying methods.</li>
 <li>Tests the tidying methods</li>
 </ol>
+<p>The <a href="https://github.com/alexpghayes/dustpan">dustpan</a> package demonstrates use of <code>modelgenerics</code> and <code>modeltests</code>, and you find it helpful to browse.</p>
 <div id="re-exporting-tidy-glance-and-augment-generics" class="section level2">
 <h2 class="hasAnchor">
 <a href="#re-exporting-tidy-glance-and-augment-generics" class="anchor"></a>Re-exporting <code><a href="http://www.rdocumentation.org/packages/modelgenerics/topics/generics">tidy()</a></code>, <code><a href="http://www.rdocumentation.org/packages/modelgenerics/topics/generics">glance()</a></code> and <code><a href="http://www.rdocumentation.org/packages/modelgenerics/topics/generics">augment()</a></code> generics</h2>
@@ -111,6 +112,7 @@
 <span class="co">#' @export</span>
 modelgenerics<span class="op">::</span>glance</code></pre></div>
 <p>Run <code><a href="http://www.rdocumentation.org/packages/devtools/topics/document">devtools::document()</a></code> for these changes to take effect.</p>
+<p>Note: please do not define <code><a href="http://www.rdocumentation.org/packages/modelgenerics/topics/generics">tidy()</a></code>, <code><a href="http://www.rdocumentation.org/packages/modelgenerics/topics/generics">glance()</a></code> or <code><a href="http://www.rdocumentation.org/packages/modelgenerics/topics/generics">augment()</a></code> generics in your package. This will result in namespace conflicts whenever your package is used along other packages that also export tidying methods.</p>
 </div>
 <div id="implement-appropriate-tidying-methods" class="section level2">
 <h2 class="hasAnchor">
@@ -129,8 +131,7 @@ modelgenerics<span class="op">::</span>glance</code></pre></div>
 remotes<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/remotes/topics/install_github">install_github</a></span>(<span class="st">"alexpghayes/modeltests"</span>)
 usethis<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/usethis/topics/use_package">use_dev_package</a></span>(<span class="st">"modeltests"</span>)</code></pre></div>
 <p>If you’re using <a href="https://github.com/r-lib/testthat">testthat</a>, you’ll want to include the following in your tests:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">
-<span class="kw">skip_if_not_installed</span>(<span class="st">"modeltests"</span>)  <span class="co"># can't rely on suggested packages in tests</span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">skip_if_not_installed</span>(<span class="st">"modeltests"</span>)  <span class="co"># can't rely on suggested packages in tests</span>
 <span class="kw">library</span>(modeltests)
 
 <span class="kw">test_that</span>(<span class="st">"myobject tidier arguments"</span>, {
@@ -171,31 +172,14 @@ usethis<span class="op">::</span><span class="kw"><a href="http://www.rdocumenta
     <span class="dt">newdata =</span> my_new_data  <span class="co"># or just my_data</span>
   )
 })</code></pre></div>
-</div>
-<div id="dustpan-a-demonstration-package" class="section level2">
-<h2 class="hasAnchor">
-<a href="#dustpan-a-demonstration-package" class="anchor"></a><code>dustpan</code>: a demonstration package</h2>
-<p>The <a href="https://github.com/alexpghayes/dustpan">dustpan</a> package isa minimal demonstration of <code>modelgenerics</code> and <code>modeltests</code> usage that you may find useful to browse.</p>
-</div>
-<div id="my-tidiers-pass-the-tests" class="section level2">
-<h2 class="hasAnchor">
-<a href="#my-tidiers-pass-the-tests" class="anchor"></a>My tidiers pass the tests</h2>
 <p>If you’re run <code><a href="http://www.rdocumentation.org/packages/devtools/topics/test">devtools::test()</a></code> and <code><a href="http://www.rdocumentation.org/packages/devtools/topics/check">devtools::check()</a></code> and didn’t fail any tests or set off R CMD Check ERRORS, WARNINGS or NOTES, you’re done!</p>
-</div>
-<div id="my-tidiers-dont-pass-the-tests" class="section level2">
-<h2 class="hasAnchor">
-<a href="#my-tidiers-dont-pass-the-tests" class="anchor"></a>My tidiers don’t pass the tests</h2>
+<div id="if-youre-tidiers-dont-pass-the-tests" class="section level3">
+<h3 class="hasAnchor">
+<a href="#if-youre-tidiers-dont-pass-the-tests" class="anchor"></a>If you’re tidiers don’t pass the tests</h3>
 <p>If you are introducing new arguments or column names in output, you’ll need to make a pull request to <code>modeltests</code> to add the new argument/column names to the glossary of allowed names.</p>
 <p>If you’d like to change the test specifications, or if you find a bug in the tests, open an issue in <code>modeltests</code>.</p>
 <p>As a last resort, you can set <code>strict = FALSE</code> to run only a bare minimum of tests. This is not recommended.</p>
 </div>
-<div id="faq" class="section level2">
-<h2 class="hasAnchor">
-<a href="#faq" class="anchor"></a>FAQ</h2>
-<p>Why shouldn’t I just include</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">glance &lt;-<span class="st"> </span><span class="cf">function</span>(x, ...) {
-  <span class="kw">UseMethod</span>(<span class="st">"glance"</span>)
-}</code></pre></div>
 </div>
   </div>
 
@@ -207,10 +191,6 @@ usethis<span class="op">::</span><span class="kw"><a href="http://www.rdocumenta
 <li><a href="#re-exporting-tidy-glance-and-augment-generics">Re-exporting <code><a href="http://www-rdocumentation-org/packages/modelgenerics/topics/generics">tidy()</a></code>, <code><a href="http://www-rdocumentation-org/packages/modelgenerics/topics/generics">glance()</a></code> and <code><a href="http://www-rdocumentation-org/packages/modelgenerics/topics/generics">augment()</a></code> generics</a></li>
       <li><a href="#implement-appropriate-tidying-methods">Implement appropriate tidying methods</a></li>
       <li><a href="#testing">Testing</a></li>
-      <li><a href="#dustpan-a-demonstration-package"><code>dustpan</code>: a demonstration package</a></li>
-      <li><a href="#my-tidiers-pass-the-tests">My tidiers pass the tests</a></li>
-      <li><a href="#my-tidiers-dont-pass-the-tests">My tidiers don’t pass the tests</a></li>
-      <li><a href="#faq">FAQ</a></li>
       </ul>
 </div>
       </div>
