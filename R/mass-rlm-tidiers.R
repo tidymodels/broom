@@ -48,9 +48,23 @@ glance.rlm <- function(x, ...) {
 #' @family rlm tidiers
 #' @seealso [MASS::rlm()]
 #' @export
-tidy.rlm <- function(x, ...) {
-  tidy.lm(x, ...)
+tidy.rlm <- function(x, conf.int = FALSE, conf.level = .95,
+                    exponentiate = FALSE, quick = FALSE, ...) {
+  if (quick) {
+    co <- stats::coef(x)
+    ret <- data.frame(term = names(co), estimate = unname(co),
+                      stringsAsFactors = FALSE)
+    return(process_rlm(ret, x, conf.int = FALSE, exponentiate = exponentiate))
+  }
+  s <- summary(x)
+  ret <- tidy.summary.lm(s)
+  
+  process_rlm(ret, x,
+             conf.int = conf.int, conf.level = conf.level,
+             exponentiate = exponentiate
+  )
 }
+
 
 #' @templateVar class rlm
 #' @template title_desc_augment_lm_wrapper
@@ -65,4 +79,38 @@ tidy.rlm <- function(x, ...) {
 #' @export
 augment.rlm <- function(x, ...) {
   augment.lm(x, ...)
+}
+
+#'
+process_rlm <- function(ret, x, conf.int = FALSE, conf.level = .95,
+                       exponentiate = FALSE) {
+  if (exponentiate) {
+    # save transformation function for use on confidence interval
+    if (is.null(x$family) ||
+        (x$family$link != "logit" && x$family$link != "log")) {
+      warning(paste(
+        "Exponentiating coefficients, but model did not use",
+        "a log or logit link function."
+      ))
+    }
+    trans <- exp
+  } else {
+    trans <- identity
+  }
+  
+  if (conf.int) {
+    # avoid "Waiting for profiling to be done..." message
+    CI <- suppressMessages(stats::confint.default(x, level = conf.level))
+    # Handle case if regression is rank deficient
+    p <- x$rank
+    if (!is.null(p) && !is.null(x$qr)) {
+      piv <- x$qr$pivot[seq_len(p)]
+      CI <- CI[piv, , drop = FALSE]
+    }
+    colnames(CI) <- c("conf.low", "conf.high")
+    ret <- cbind(ret, trans(unrowname(CI)))
+  }
+  ret$estimate <- trans(ret$estimate)
+  
+  as_tibble(ret)
 }
