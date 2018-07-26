@@ -3,7 +3,9 @@ To be released as 0.7.0
 
 ## Other changes
 
+- Moved core tests to the `modeltests` package
 - Import `tidy()`, `glance()` and `augment()` generics from `modelgenerics`
+- Added new vignette detailing use of `modelgenerics` and `modeltests` packages
 - Added `data` argument to `augment()` generic
 
 ## Deprecations

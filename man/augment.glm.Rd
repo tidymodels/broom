@@ -30,28 +30,9 @@ Passed to \code{\link[stats:residuals.glm]{stats::residuals.glm()}}.}
 }}
 }
 \value{
-When \code{newdata} is not supplied \code{augment.lm} returns
-one row for each observation, with seven columns added to the original
-data:
-
-\item{.hat}{Diagonal of the hat matrix}
-\item{.sigma}{Estimate of residual standard deviation when
-corresponding observation is dropped from model}
-\item{.cooksd}{Cooks distance, \code{\link[=cooks.distance]{cooks.distance()}}}
-\item{.fitted}{Fitted values of model}
-\item{.se.fit}{Standard errors of fitted values}
-\item{.resid}{Residuals}
-\item{.std.resid}{Standardised residuals}
-
-Some unusual \code{lm} objects, such as \code{rlm} from MASS, may omit \code{.cooksd}
-and \code{.std.resid}. \code{gam} from mgcv omits \code{.sigma}.
-
-When \code{newdata} is supplied, returns one row for each observation, with
-three columns added to the new data:
-
-\item{.fitted}{Fitted values of model}
-\item{.se.fit}{Standard errors of fitted values}
-\item{.resid}{Residuals of fitted values on the new data}
+Note that if the weights for any of the observations in the model
+are 0, then columns ".infl" and ".hat" in the result will be 0
+for those observations.
 }
 \description{
 This augment method wraps \code{\link[=augment.lm]{augment.lm()}}.
