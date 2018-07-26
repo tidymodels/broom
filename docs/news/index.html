@@ -105,6 +105,55 @@
       <small>Source: <a href='http://github.com/tidyverse/broom/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
+    <div id="broom-0-5-0-9000" class="section level1">
+<h1 class="page-header">
+<a href="#broom-0-5-0-9000" class="anchor"></a>broom 0.5.0.9000<small> Unreleased </small>
+</h1>
+<p>To be released as 0.7.0</p>
+<div id="other-changes" class="section level2">
+<h2 class="hasAnchor">
+<a href="#other-changes" class="anchor"></a>Other changes</h2>
+<ul>
+<li>Moved core tests to the <code>modeltests</code> package</li>
+<li>Import <code><a href="http://www.rdocumentation.org/packages/modelgenerics/topics/generics">tidy()</a></code>, <code><a href="http://www.rdocumentation.org/packages/modelgenerics/topics/generics">glance()</a></code> and <code><a href="http://www.rdocumentation.org/packages/modelgenerics/topics/generics">augment()</a></code> generics from <code>modelgenerics</code>
+</li>
+<li>Added new vignette detailing use of <code>modelgenerics</code> and <code>modeltests</code> packages</li>
+<li>Added <code>data</code> argument to <code><a href="http://www.rdocumentation.org/packages/modelgenerics/topics/generics">augment()</a></code> generic</li>
+</ul>
+</div>
+<div id="deprecations" class="section level2">
+<h2 class="hasAnchor">
+<a href="#deprecations" class="anchor"></a>Deprecations</h2>
+<ul>
+<li>Data frame, rowwise data frame, vector and matrix tidiers have been removed</li>
+<li><p><code>bootstrap()</code> has been removed</p></li>
+<li>
+<code><a href="../reference/tidy.table.html">tidy.table()</a></code> and <code><a href="../reference/tidy.ftable.html">tidy.ftable()</a></code> have been deprecated in favor of <code><a href="http://www.rdocumentation.org/packages/tibble/topics/as_tibble">tibble::as_tibble()</a></code>
+</li>
+<li><p><code><a href="../reference/summary_tidiers.html">tidy.summaryDefault()</a></code> has been deprecated in favor of <code>skimr::skim()</code></p></li>
+</ul>
+<div id="mixed-model-deprecations" class="section level3">
+<h3 class="hasAnchor">
+<a href="#mixed-model-deprecations" class="anchor"></a>Mixed model deprecations</h3>
+<p>The following have all been deprecated in favor of <code>broom.mixed</code>:</p>
+<ul>
+<li><code><a href="../reference/brms_tidiers.html">tidy.brmsfit()</a></code></li>
+<li>
+<code><a href="../reference/lme4_tidiers.html">tidy.merMod()</a></code>, <code><a href="../reference/lme4_tidiers.html">glance.merMod()</a></code>, <code><a href="../reference/lme4_tidiers.html">augment.merMod()</a></code>
+</li>
+<li>
+<code><a href="../reference/mcmc_tidiers.html">tidyMCMC()</a></code>, <code><a href="../reference/mcmc_tidiers.html">tidy.rjags()</a></code>, <code><a href="../reference/mcmc_tidiers.html">tidy.stanfit()</a></code>
+</li>
+<li>
+<code><a href="../reference/nlme_tidiers.html">tidy.lme()</a></code>, <code><a href="../reference/nlme_tidiers.html">glance.lme()</a></code>, <code><a href="../reference/nlme_tidiers.html">augment.lme()</a></code>
+</li>
+<li>
+<code><a href="../reference/rstanarm_tidiers.html">tidy.stanreg()</a></code>, <code><a href="../reference/rstanarm_tidiers.html">glance.stanreg()</a></code>
+</li>
+</ul>
+</div>
+</div>
+</div>
     <div id="broom-0-5-0" class="section level1">
 <h1 class="page-header">
 <a href="#broom-0-5-0" class="anchor"></a>broom 0.5.0<small> 2018-07-17 </small>
@@ -120,7 +169,7 @@
 <span class="kw">library</span>(quantreg)
 
 fit &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/quantreg/topics/rq">rq</a></span>(stack.loss <span class="op">~</span><span class="st"> </span>stack.x, <span class="dt">tau =</span> .<span class="dv">5</span>)
-broom<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/broom/topics/augment">augment</a></span>(fit)
+broom<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/broom/topics/reexports">augment</a></span>(fit)
 <span class="co">#&gt; Error: Column `stack.x` must be a 1d atomic vector or a list</span></code></pre></div>
 <p>This is because the default <code>data</code> argument <code>data = model.frame(fit)</code> cannot be coerced to <code>tibble</code>.</p>
 <p>Another consequence of this is that <code>augment.survreg</code> and <code>augment.coxph</code> from the <code>survival</code> package now require that the user explicitly passes data to either the <code>data</code> or <code>newdata</code> arguments.</p>
@@ -144,7 +193,7 @@ broom<span class="op">::</span><span class="kw"><a href="http://www.rdocumentati
 <li>
 <code><a href="../articles/adding-tidiers.html">vignette("adding-tidiers", package = "broom")</a></code> is an <em>in-progress</em> guide for contributors on how to add new tidiers to broom</li>
 <li>
-<code><a href="../articles/glossary.html">vignette("glossary", package = "broom")</a></code> contains tables describing acceptable argument names and column names for the <em>in-progress</em> new specification.</li>
+<code>vignette("glossary", package = "broom")</code> contains tables describing acceptable argument names and column names for the <em>in-progress</em> new specification.</li>
 </ul>
 <p>Several old vignettes have also been updated:</p>
 <ul>
@@ -152,24 +201,24 @@ broom<span class="op">::</span><span class="kw"><a href="http://www.rdocumentati
 <code><a href="../articles/bootstrapping.html">vignette("bootstrapping", package = "broom")</a></code> now relies on the <code>rsample</code> package and a <code><a href="http://www.rdocumentation.org/packages/tidyr/topics/nest">tidyr::nest</a></code>-<code><a href="http://www.rdocumentation.org/packages/purrr/topics/map">purrr::map</a></code>-<code><a href="http://www.rdocumentation.org/packages/tidyr/topics/unnest">tidyr::unnest</a></code> workflow. This is now the recommended workflow for working with multiple models, as opposed to the old <code><a href="http://dplyr.tidyverse.org/reference/rowwise.html">dplyr::rowwise</a></code>-<code><a href="http://dplyr.tidyverse.org/reference/do.html">dplyr::do</a></code> based workflow.</li>
 </ul>
 </div>
-<div id="deprecations" class="section level2">
+<div id="deprecations-1" class="section level2">
 <h2 class="hasAnchor">
-<a href="#deprecations" class="anchor"></a>Deprecations</h2>
+<a href="#deprecations-1" class="anchor"></a>Deprecations</h2>
 <ul>
 <li>Matrix and vector tidiers have been deprecated in favor of <code><a href="http://www.rdocumentation.org/packages/tibble/topics/as_tibble">tibble::as_tibble</a></code> and <code><a href="http://www.rdocumentation.org/packages/tibble/topics/enframe">tibble::enframe</a></code>
 </li>
 <li>Dataframe tidiers and rowwise dataframe tidiers have been deprecated</li>
 <li>
-<code><a href="../reference/bootstrap.html">bootstrap()</a></code> has been deprecated in favor of the <a href="https://tidymodels.github.io/rsample/"><code>rsample</code></a>
+<code>bootstrap()</code> has been deprecated in favor of the <a href="https://tidymodels.github.io/rsample/"><code>rsample</code></a>
 </li>
 <li>
 <code>inflate</code> has been removed from <code>broom</code>
 </li>
 </ul>
 </div>
-<div id="other-changes" class="section level2">
+<div id="other-changes-1" class="section level2">
 <h2 class="hasAnchor">
-<a href="#other-changes" class="anchor"></a>Other changes</h2>
+<a href="#other-changes-1" class="anchor"></a>Other changes</h2>
 <ul>
 <li>The <code>alpha</code> argument has been removed from <code>quantreg</code> tidy methods</li>
 <li>The <code>separate.levels</code> argument has been removed from <code>tidy.TukeyHSD</code>. To obtain the effect of <code>separate.levels = TRUE</code>, users may <code><a href="http://www.rdocumentation.org/packages/tidyr/topics/separate">tidyr::separate</a></code> after tidying. This is consistent with the <code>multcomp</code> tidier behavior.</li>
@@ -367,9 +416,9 @@ Unit tests in <code>tests/testthat/test-augment.R</code> were added to ensure co
 <li>
 <p><code>tidy</code>, <code>augment</code> and <code>glance</code> methods were added for <code>rowwise_df</code> objects, and are set up to apply across their rows. This allows for simple patterns such as:</p>
 <div class="sourceCode"><pre class="sourceCode R"><code class="sourceCode r">regressions &lt;-<span class="st"> </span>mtcars <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">group_by</span>(cyl) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">do</span>(<span class="dt">mod =</span> <span class="kw">lm</span>(mpg <span class="op">~</span><span class="st"> </span>wt, .))
-regressions <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/tidy.html">tidy</a></span>(mod)
-regressions <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/augment.html">augment</a></span>(mod)</code></pre></div>
-See <code><a href="../reference/rowwise_df_tidiers.html">?rowwise_df_tidiers</a></code> for more.</li>
+regressions <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/modelgenerics/topics/generics">tidy</a></span>(mod)
+regressions <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/modelgenerics/topics/generics">augment</a></span>(mod)</code></pre></div>
+See <code>?rowwise_df_tidiers</code> for more.</li>
 <li>Added <code>tidy</code> and <code>glance</code> methods for <code>Arima</code> objects, and <code>tidy</code> for <code>pairwise.htest</code> objects.</li>
 <li>Fixes for CRAN: change package description to title case, removed NOTES, mostly by adding <code>globals.R</code> to declare global variables.</li>
 <li><p>This is the original version published on CRAN.</p></li>
@@ -417,6 +466,7 @@ See <code><a href="../reference/rowwise_df_tidiers.html">?rowwise_df_tidiers</a>
     <div id="tocnav">
       <h2>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
+        <li><a href="#broom-0-5-0-9000">0.5.0.9000</a></li>
         <li><a href="#broom-0-5-0">0.5.0</a></li>
         <li><a href="#broom-0-4-4">0.4.4</a></li>
         <li><a href="#broom-0-4-3">0.4.3</a></li>

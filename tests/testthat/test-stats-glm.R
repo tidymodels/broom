@@ -69,7 +69,8 @@ test_that("augment.glm", {
     aug = augment.lm,
     model = gfit3,
     data = mtcars,
-    newdata = mtcars
+    newdata = mtcars,
+    strict = FALSE
   )
 })
 
