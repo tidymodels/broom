@@ -23,7 +23,7 @@ If you are a package developer, the best place to include `tidy()`, `glance()` o
 2. Implement appropriate tidying methods.
 3. Tests the tidying methods
 
-The [dustpan](https://github.com/alexpghayes/dustpan) package demonstrates use of `modelgenerics` and `modeltests`, and you find it helpful to browse.
+The [dustpan](https://github.com/alexpghayes/dustpan) package demonstrates use of `modelgenerics` and `modeltests`, and you may find it helpful to browse.
 
 ## Re-exporting `tidy()`, `glance()` and `augment()` generics
 
@@ -113,7 +113,7 @@ test_that("augment.my_object", {
 
 If you're run `devtools::test()` and `devtools::check()` and didn't fail any tests or set off R CMD Check ERRORS, WARNINGS or NOTES, you're done!
 
-### If you're tidiers don't pass the tests
+### If your tidiers don't pass the tests
 
 If you are introducing new arguments or column names in output, you'll need to make a pull request to `modeltests` to add the new argument/column names to the glossary of allowed names.
 

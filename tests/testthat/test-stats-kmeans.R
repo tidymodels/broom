@@ -14,7 +14,7 @@ fit <- kmeans(x, 2)
 test_that("kmeans tidier arguments", {
   check_arguments(tidy.kmeans)
   check_arguments(glance.kmeans)
-  check_arguments(augment.kmeans)
+  check_arguments(augment.kmeans, strict = FALSE)
 })
 
 test_that("tidy.kmeans", {

@@ -1,3 +1,17 @@
+# Rename only those columns in a data frame that are present. Example:
+# 
+# rename2(
+#   tibble(dog = 1),
+#   cat = dog,
+#   mouse = gerbil
+# )
+#
+rename2 <- function(.data, ...) {
+  dots <- quos(...)
+  present <- purrr::keep(dots, ~quo_name(.x) %in% colnames(.data))
+  rename(.data, !!!present)
+}
+
 validate_augment_input <- function(model, data = NULL, newdata = NULL) {
   
   # careful: `data` may be non-null due to default argument such as
@@ -222,7 +236,8 @@ augment_columns <- function(x, data, newdata, type, type.predict = type,
 
   if ("panelmodel" %in% class(x)) {
     # work around for panel models (plm)
-    # stat::predict() returns wrong fitted values when applied to random or fixed effect panel models [plm(..., model="random"), plm(, ..., model="pooling")]
+    # stat::predict() returns wrong fitted values when applied to random or
+    # fixed effect panel models [plm(..., model="random"), plm(, ..., model="pooling")]
     # It works only for pooled OLS models (plm( ..., model="pooling"))
     pred <- model.frame(x)[, 1] - residuals(x)
   } else {

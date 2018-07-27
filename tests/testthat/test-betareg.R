@@ -14,7 +14,7 @@ fit2 <- betareg(yield ~ batch + temp | temp, data = GasolineYield)
 test_that("betareg tidier arguments", {
   check_arguments(tidy.betareg)
   check_arguments(glance.betareg)
-  check_arguments(augment.betareg)
+  check_arguments(augment.betareg, strict = FALSE)
 })
 
 test_that("tidy.betareg", {

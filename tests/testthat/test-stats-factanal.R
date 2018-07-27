@@ -12,7 +12,7 @@ fit2 <- factanal(mtcars, n_factors2)
 test_that("factanal tidier arguments", {
   check_arguments(tidy.factanal)
   check_arguments(glance.factanal)
-  check_arguments(augment.factanal)
+  check_arguments(augment.factanal, strict = FALSE)
 })
 
 test_that("tidy.factanal", {

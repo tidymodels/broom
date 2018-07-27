@@ -6,7 +6,7 @@ library(modeltests)
 test_that("lm tidier arguments", {
   check_arguments(tidy.lm)
   check_arguments(glance.lm)
-  check_arguments(augment.lm)
+  check_arguments(augment.lm, strict = FALSE)
 })
 
 fit <- lm(mpg ~ wt, mtcars)

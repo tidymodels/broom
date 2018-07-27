@@ -24,7 +24,7 @@ fit <- ivreg(
 test_that("ivreg tidier arguments", {
   check_arguments(tidy.ivreg)
   check_arguments(glance.ivreg)
-  check_arguments(augment.ivreg)
+  check_arguments(augment.ivreg, strict = FALSE)
 })
 
 test_that("tidy.ivreg", {

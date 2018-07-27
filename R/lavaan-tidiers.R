@@ -45,7 +45,7 @@
 #' @family lavaan tidiers
 #' @seealso [tidy()], [lavaan::cfa()], [lavaan::sem()], 
 #'   [lavaan::parameterEstimates()]
-tidy.lavaan <- function(x, conf.int = TRUE, conf.level = 0.95, ...) {
+tidy.lavaan <- function(x, conf.int = FALSE, conf.level = 0.95, ...) {
   lavaan::parameterEstimates(x,
     ci = conf.int,
     level = conf.level,
@@ -55,7 +55,7 @@ tidy.lavaan <- function(x, conf.int = TRUE, conf.level = 0.95, ...) {
     as_tibble() %>%
     tibble::rownames_to_column() %>%
     mutate(term = paste(lhs, op, rhs)) %>%
-    rename(
+    rename2(
       estimate = est,
       std.error = se,
       p.value = pvalue,
