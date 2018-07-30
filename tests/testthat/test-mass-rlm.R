@@ -11,7 +11,7 @@ fit <- rlm(stack.loss ~ ., stackloss)
 test_that("MASS::rlm tidier arguments", {
   check_arguments(tidy.rlm)
   check_arguments(glance.rlm)
-  check_arguments(augment.rlm)
+  check_arguments(augment.rlm, strict = FALSE)
 })
 
 test_that("tidy.rlm", {

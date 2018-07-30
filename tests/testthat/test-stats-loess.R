@@ -4,7 +4,7 @@ skip_if_not_installed("modeltests")
 library(modeltests)
 
 test_that("augment.loess", {
-  check_arguments(augment.loess)
+  check_arguments(augment.loess, strict = FALSE)
   
   fit <- loess(mpg ~ wt, mtcars)
   

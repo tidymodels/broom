@@ -151,7 +151,7 @@ tidy.summary.lm <- function(x, ...) {
 #' @export
 #' @seealso [augment()], [stats::predict.lm()]
 #' @family lm tidiers
-augment.lm <- function(x, data = stats::model.frame(x), newdata,
+augment.lm <- function(x, data = stats::model.frame(x), newdata = NULL,
                        type.predict, type.residuals, ...) {
   augment_columns(x, data, newdata,
     type.predict = type.predict,

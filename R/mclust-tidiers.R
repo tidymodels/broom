@@ -86,14 +86,15 @@ tidy.Mclust <- function(x, ...) {
 #' @seealso [augment()], [mclust::Mclust()]
 #' @family mclust tidiers
 #' 
-augment.Mclust <- function(x, data, ...) {
+augment.Mclust <- function(x, data = NULL, ...) {
+  data <- if (is.null(data)) x$data else data
+  
   fix_data_frame(data, newcol = ".rownames") %>% 
     mutate(
       .class = factor(x$classification),
       .uncertainty = x$uncertainty
     )
 }
-
 
 #' @templateVar class Mclust
 #' @template title_desc_glance

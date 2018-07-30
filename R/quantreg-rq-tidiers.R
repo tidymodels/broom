@@ -19,8 +19,8 @@
 #' @export
 #' @seealso [tidy()], [quantreg::rq()]
 #' @family quantreg tidiers
-tidy.rq <- function(x, se.type = "rank",
-                    conf.int = TRUE, conf.level = 0.95, ...) {
+tidy.rq <- function(x, se.type = "rank", conf.int = FALSE,
+                    conf.level = 0.95, ...) {
   
   # specification for confidence level inverted for summary.rq
   alpha <- 1 - conf.level

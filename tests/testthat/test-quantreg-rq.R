@@ -24,7 +24,7 @@ test_that("tidy.rq", {
   
   td <- tidy(fit)
   td2 <- tidy(fit2)
-  td_iid <- tidy(fit, se.type = "iid")
+  td_iid <- tidy(fit, conf.int = TRUE, se.type = "iid")
   
   check_tidy_output(td)
   check_tidy_output(td2)

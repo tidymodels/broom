@@ -37,9 +37,8 @@ tidy.lmRob <- function(x, ...) {
 #' @export
 #' @family robust tidiers
 #' @seealso [robust::lmRob()]
-augment.lmRob <- function(x, ...) {
-  augment.lm(x, ...)
-}
+#' @include stats-lm-tidiers.R
+augment.lmRob <- augment.lm
 
 #' @templateVar class lmRob
 #' @template title_desc_glance
