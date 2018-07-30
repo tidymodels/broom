@@ -57,7 +57,8 @@ Imports:
     stringr,
     tibble,
     tidyr,
-    modelgenerics
+    modelgenerics,
+    glue
 Suggests:
     AER,
     akima,

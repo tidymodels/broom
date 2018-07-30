@@ -15,13 +15,15 @@
 #' @importFrom purrr map_df set_names
 #' @importFrom tibble tibble as_tibble
 #' 
-#' @import dplyr
-#'
 #' @importFrom utils head
+#' @importFrom glue glue
+#' 
+#' @import dplyr
 #'
 #' @docType package
 #' @aliases broom broom-package
-NULL
+#' @keywords internal
+"_PACKAGE"
 
 #' @importFrom modelgenerics augment
 #' @export
@@ -37,6 +39,4 @@ modelgenerics::tidy
 #' @export
 #' @seealso [glance.lm()]
 modelgenerics::glance
-
-
 
