@@ -5,7 +5,7 @@
 \alias{rqs_tidiers}
 \title{Tidy a(n) rqs object}
 \usage{
-\method{tidy}{rqs}(x, se.type = "rank", conf.int = TRUE,
+\method{tidy}{rqs}(x, se.type = "rank", conf.int = FALSE,
   conf.level = 0.95, ...)
 }
 \arguments{

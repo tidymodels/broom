@@ -4,7 +4,7 @@
 \alias{augment.ivreg}
 \title{Augment data with information from a(n) ivreg object}
 \usage{
-\method{augment}{ivreg}(x, data = model.frame(x), newdata, ...)
+\method{augment}{ivreg}(x, data = model.frame(x), newdata = NULL, ...)
 }
 \arguments{
 \item{x}{An \code{ivreg} object created by a call to \code{\link[AER:ivreg]{AER::ivreg()}}.}

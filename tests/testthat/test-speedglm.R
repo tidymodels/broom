@@ -12,7 +12,7 @@ fit2 <- lm(mpg ~ wt + disp, mtcars)
 test_that("speedglm tidiers arguments", {
   check_arguments(tidy.speedlm)
   check_arguments(glance.speedlm)
-  check_arguments(augment.speedlm)
+  check_arguments(augment.speedlm, strict = FALSE)
 })
 
 test_that("tidy.speedlm", {

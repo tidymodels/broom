@@ -1,8 +1,16 @@
 # broom 0.5.0.9000
 To be released as 0.7.0
 
+## Changes to `augment()`
+
+- If you pass a dataset to `augment()` via the `data` or `newdata` arguments, you are now guaranteed that the augmented dataset will have exactly the same number of rows as the original dataset. This differs from previous behavior primarily when there are missing values. Previously `augment()` would drop rows containing `NA`. This should no longer be the case.
+
+- Similarly: augment no longer accepts an `na.action` argument (TODO: figure out why this wasn't in the function signature in the first place)
+
 ## Other changes
 
+- All `conf.int` arguments now default to `FALSE`.
+- All `conf.level` arguments now default to `TRUE`.
 - Moved core tests to the `modeltests` package
 - Import `tidy()`, `glance()` and `augment()` generics from `modelgenerics`
 - Added new vignette detailing use of `modelgenerics` and `modeltests` packages

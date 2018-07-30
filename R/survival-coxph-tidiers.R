@@ -61,7 +61,8 @@
 #' @seealso [tidy()], [survival::coxph()]
 #' @family coxph tidiers
 #' @family survival tidiers
-tidy.coxph <- function(x, exponentiate = FALSE, conf.int = TRUE, conf.level = .95, ...) {
+tidy.coxph <- function(x, exponentiate = FALSE, conf.int = FALSE,
+                       conf.level = .95, ...) {
   # backward compatibility (in previous version, conf.int was used instead of conf.level)
   if (is.numeric(conf.int)) {
     conf.level <- conf.int

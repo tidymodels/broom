@@ -81,7 +81,8 @@ test_that("tidy.power.htest", {
 
 
 test_that("augment.htest (chi squared test)", {
-  check_arguments(augment.htest)
+  # strict = FALSE because don't want to require `data` argument
+  check_arguments(augment.htest, strict = FALSE)
   
   df <- as.data.frame(Titanic)
   tab <- xtabs(Freq ~ Sex + Class, data = df)

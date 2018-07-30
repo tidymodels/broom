@@ -16,7 +16,7 @@ fit2 <- rq(Ozone ~ Temp - 1, data = airquality, tau = 1:19 / 20)
 test_that("quantreg::rqs tidier arguments", {
   check_arguments(tidy.rqs)
   # glance.rqs only exists for informative error
-  check_arguments(augment.rqs)
+  check_arguments(augment.rqs, strict = FALSE)
 })
 
 test_that("tidy.rqs", {

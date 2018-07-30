@@ -157,7 +157,8 @@ glance.clmm <- glance.clm
 #' @rdname ordinal_tidiers
 #' @export
 augment.clm <- function(x, data = stats::model.frame(x),
-                        newdata, type.predict = c("prob", "class"), ...) {
+                        newdata = NULL, type.predict = c("prob", "class"),
+                        ...) {
   type.predict <- match.arg(type.predict)
   augment.lm(x, data, newdata, type.predict, ...)
 }

@@ -4,7 +4,7 @@
 \alias{augment.Mclust}
 \title{Augment data with information from a(n) Mclust object}
 \usage{
-\method{augment}{Mclust}(x, data, ...)
+\method{augment}{Mclust}(x, data = NULL, ...)
 }
 \arguments{
 \item{x}{An \code{Mclust} object return from \code{\link[mclust:Mclust]{mclust::Mclust()}}.}

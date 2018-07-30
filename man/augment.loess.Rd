@@ -5,7 +5,8 @@
 \alias{loess_tidiers}
 \title{Tidy a(n) loess object}
 \usage{
-\method{augment}{loess}(x, data = stats::model.frame(x), newdata, ...)
+\method{augment}{loess}(x, data = stats::model.frame(x),
+  newdata = NULL, ...)
 }
 \arguments{
 \item{x}{A \code{loess} objects returned by \code{\link[stats:loess]{stats::loess()}}.}

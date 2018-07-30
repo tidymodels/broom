@@ -23,7 +23,7 @@
 #' @seealso [tidy()], [quantreg::rq()]
 #' @family quantreg tidiers
 #' 
-tidy.rqs <- function(x, se.type = "rank", conf.int = TRUE,
+tidy.rqs <- function(x, se.type = "rank", conf.int = FALSE,
                      conf.level = 0.95, ...) {
   
   rq_summary <- suppressWarnings(
