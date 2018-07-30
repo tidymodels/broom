@@ -2,6 +2,7 @@ context("plm tidiers")
 
 skip_if_not_installed("modeltests")
 library(modeltests)
+library(broom)
 
 skip_if_not_installed("plm")
 library(plm)

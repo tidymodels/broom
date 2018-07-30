@@ -2,6 +2,7 @@ context("list")
 
 skip_if_not_installed("modeltests")
 library(modeltests)
+library(broom)
 
 test_that("not all lists can be tidied", {
   nl <- list(a = NULL)

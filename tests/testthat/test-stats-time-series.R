@@ -2,6 +2,7 @@ context("stats-time-series")
 
 skip_if_not_installed("modeltests")
 library(modeltests)
+library(broom)
 
 test_that("tidy.acf works", {
   check_arguments(tidy.acf)

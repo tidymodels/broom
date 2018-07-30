@@ -2,6 +2,7 @@ context("muhaz")
 
 skip_if_not_installed("modeltests")
 library(modeltests)
+library(broom)
 
 skip_if_not_installed("muhaz")
 skip_if_not_installed("survival")  # does this skip with base R?

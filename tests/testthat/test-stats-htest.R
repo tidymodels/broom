@@ -2,6 +2,7 @@ context("stats-htest")
 
 skip_if_not_installed("modeltests")
 library(modeltests)
+library(broom)
 
 test_that("htest tidier arguments", {
   check_arguments(tidy.htest)

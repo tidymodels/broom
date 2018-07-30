@@ -2,6 +2,7 @@ context("stats-factanal")
 
 skip_if_not_installed("modeltests")
 library(modeltests)
+library(broom)
 
 n_factors <- 3
 n_factors2 <- 3

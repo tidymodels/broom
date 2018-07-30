@@ -2,6 +2,7 @@ context("survival-survdiff")
 
 skip_if_not_installed("modeltests")
 library(modeltests)
+library(broom)
 
 skip_if_not_installed("survival")
 library(survival)

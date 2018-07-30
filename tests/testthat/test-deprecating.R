@@ -4,6 +4,7 @@ skip("deprecating soon")
 
 skip_if_not_installed("modeltests")
 library(modeltests)
+library(broom)
 
 # test tidy, augment, glance methods from lme4-tidiers.R
 

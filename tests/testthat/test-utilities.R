@@ -2,6 +2,7 @@ context("utilities")
 
 skip_if_not_installed("modeltests")
 library(modeltests)
+library(broom)
 
 skip("specification not yet complete")
 

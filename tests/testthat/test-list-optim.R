@@ -2,6 +2,7 @@ context("list-optim")
 
 skip_if_not_installed("modeltests")
 library(modeltests)
+library(broom)
 
 test_that("optim tidiers works", {
   func <- function(x) {
