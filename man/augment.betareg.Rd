@@ -43,10 +43,6 @@ proceed using \code{conf.level = 0.95}. Additionally, if you pass
 accept a \code{newdata} argument, it will use the default value for
 the \code{data} argument.}
 }
-\value{
-For additional details on Cook's distance, see
-\code{\link[stats:cooks.distance]{stats::cooks.distance()}}.
-}
 \description{
 Augment accepts a model object and a dataset and adds
 information about each observation in the dataset. Most commonly, this
@@ -86,10 +82,13 @@ We are in the process of defining behaviors for models fit with various
 \link{na.action} arguments, but make no guarantees about behavior when data is
 missing at this time.
 }
+\details{
+For additional details on Cook's distance, see
+\code{\link[stats:cooks.distance]{stats::cooks.distance()}}.
+}
 \examples{
 
 library(betareg)
-
 data("GasolineYield", package = "betareg")
 
 mod <- betareg(yield ~ batch + temp, data = GasolineYield)
@@ -106,4 +105,9 @@ glance(mod)
 }
 \seealso{
 \code{\link[=augment]{augment()}}, \code{\link[betareg:betareg]{betareg::betareg()}}
+}
+\value{
+  \item{.cooksd}{Cooks distance. See [stats::cooks.distance()] for additional details.}
+  \item{.fitted}{Fitted / predicted value.}
+  \item{.resid}{Residuals of fitted values. TODO -- document when present. Residuals on which data set?}
 }

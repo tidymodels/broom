@@ -27,13 +27,6 @@ proceed using \code{conf.level = 0.95}. Additionally, if you pass
 accept a \code{newdata} argument, it will use the default value for
 the \code{data} argument.}
 }
-\value{
-The tibble has one row for each term in the regression. The
-\code{component} column indicates whether a particular
-term was used to model either the \code{"mean"} or \code{"precision"}. Here the
-precision is the inverse of the variance, often referred to as \code{phi}.
-At least one term will have been used to model the precision \code{phi}.
-}
 \description{
 Tidy summarizes information about the components of a model.
 A model component might be a single term in a regression, a single
@@ -42,10 +35,16 @@ model component varies cross models but is usually self-evident.
 If a model has several distinct types of components, you will need to
 specify which components to return.
 }
+\details{
+The tibble has one row for each term in the regression. The
+\code{component} column indicates whether a particular
+term was used to model either the \code{"mean"} or \code{"precision"}. Here the
+precision is the inverse of the variance, often referred to as \code{phi}.
+At least one term will have been used to model the precision \code{phi}.
+}
 \examples{
 
 library(betareg)
-
 data("GasolineYield", package = "betareg")
 
 mod <- betareg(yield ~ batch + temp, data = GasolineYield)
@@ -64,3 +63,14 @@ glance(mod)
 \code{\link[=tidy]{tidy()}}, \code{\link[betareg:betareg]{betareg::betareg()}}
 }
 \concept{betareg tidiers}
+\value{
+  \item{conf.high}{The upper end of a confidence interval for the term under consideration. Included only if `conf.int = TRUE`.}
+  \item{conf.low}{The lower end of a confidence interval for the term under consideration. Included only if `conf.int = TRUE`.}
+  \item{estimate}{The estimated value of the regression term.}
+  \item{p.value}{The two-sided p-value associated with the observed statistic.}
+  \item{statistic}{The value of a T-statistic to use in a hypothesis that the regression term is non-zero.}
+  \item{std.error}{The standard error of the regression term.}
+  \item{term}{The name of the regression term.}
+  \item{component}{Whether a particular term was used to model the mean or the
+    precision in the regression. See details.}
+}

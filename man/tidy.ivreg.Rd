@@ -60,6 +60,8 @@ tidy(ivr, conf.int = TRUE)
 tidy(ivr, conf.int = TRUE, exponentiate = TRUE)
 
 augment(ivr)
+augment(ivr, data = CigarettesSW)
+augment(ivr, newdata = CigarettesSW)
 
 glance(ivr)
 
@@ -71,3 +73,12 @@ Other ivreg tidiers: \code{\link{augment.ivreg}},
   \code{\link{glance.ivreg}}
 }
 \concept{ivreg tidiers}
+\value{
+  \item{conf.high}{The upper end of a confidence interval for the term under consideration. Included only if `conf.int = TRUE`.}
+  \item{conf.low}{The lower end of a confidence interval for the term under consideration. Included only if `conf.int = TRUE`.}
+  \item{estimate}{The estimated value of the regression term.}
+  \item{p.value}{The two-sided p-value associated with the observed statistic.}
+  \item{statistic}{The value of a T-statistic to use in a hypothesis that the regression term is non-zero.}
+  \item{std.error}{The standard error of the regression term.}
+  \item{term}{The name of the regression term.}
+}

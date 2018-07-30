@@ -89,6 +89,8 @@ tidy(ivr, conf.int = TRUE)
 tidy(ivr, conf.int = TRUE, exponentiate = TRUE)
 
 augment(ivr)
+augment(ivr, data = CigarettesSW)
+augment(ivr, newdata = CigarettesSW)
 
 glance(ivr)
 
@@ -100,3 +102,7 @@ Other ivreg tidiers: \code{\link{glance.ivreg}},
   \code{\link{tidy.ivreg}}
 }
 \concept{ivreg tidiers}
+\value{
+  \item{.fitted}{Fitted / predicted value.}
+  \item{.resid}{Residuals of fitted values. TODO -- document when present. Residuals on which data set?}
+}

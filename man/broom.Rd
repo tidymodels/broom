@@ -18,8 +18,8 @@ which provides a one-row summary of model-level statistics.
 \seealso{
 Useful links:
 \itemize{
-  \item \url{http://github.com/tidyverse/broom}
-  \item Report bugs at \url{http://github.com/tidyverse/broom/issues}
+  \item \url{http://github.com/tidymodels/broom}
+  \item Report bugs at \url{http://github.com/tidymodels/broom/issues}
 }
 
 }

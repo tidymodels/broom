@@ -37,7 +37,6 @@ the measure will be reported as \code{NA}.
 \examples{
 
 library(betareg)
-
 data("GasolineYield", package = "betareg")
 
 mod <- betareg(yield ~ batch + temp, data = GasolineYield)
