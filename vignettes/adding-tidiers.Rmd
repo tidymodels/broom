@@ -103,7 +103,7 @@ In general, we prefer informative errors to magical behaviors or untested succes
 
 * In order to test your tidiers, you may need to add `your_package` to the **Suggests** section of broom's DESCRIPTION.
 * You should then use `skip_if_not_installed("my_package")` at the beginning of any test that uses `my_package`.
-* Note that testing broom requires a lot of packages. You can install them all with `devtools::install_github("tidyverse/broom", dependencies = TRUE)`.
+* Note that testing broom requires a lot of packages. You can install them all with `devtools::install_github("tidymodels/broom", dependencies = TRUE)`.
 
 ## Catching edge cases
 

@@ -45,5 +45,5 @@ navbar:
     href: news/index.html
   right:
   - icon: fa-github fa-lg
-    href: https://github.com/tidyverse/broom
+    href: https://github.com/tidymodels/broom
  

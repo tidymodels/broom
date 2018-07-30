@@ -11,7 +11,6 @@ To be released as 0.7.0
 
 - All `conf.int` arguments now default to `FALSE`.
 - All `conf.level` arguments now default to `TRUE`.
-
 - Moved core tests to the `modeltests` package
 - Import `tidy()`, `glance()` and `augment()` generics from `modelgenerics`
 - Added new vignette detailing use of `modelgenerics` and `modeltests` packages
