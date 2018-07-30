@@ -136,5 +136,5 @@ LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 6.0.1.9000
 Remotes: 
-    topepo/modelgenerics,
+    topepo/modelgenerics@c14b7a,
     alexpghayes/modeltests
