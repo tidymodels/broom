@@ -6,7 +6,7 @@
 \alias{quantreg_tidiers}
 \title{Tidy a(n) rq object}
 \usage{
-\method{tidy}{rq}(x, se.type = "rank", conf.int = TRUE,
+\method{tidy}{rq}(x, se.type = "rank", conf.int = FALSE,
   conf.level = 0.95, ...)
 }
 \arguments{

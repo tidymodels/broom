@@ -11,7 +11,7 @@ test_that("glm tidier arguments", {
   
   check_arguments(tidy.glm)
   check_arguments(glance.glm)
-  check_arguments(augment.glm)
+  check_arguments(augment.glm, strict = FALSE)
 })
 
 nrow_mtcars <- nrow(mtcars)

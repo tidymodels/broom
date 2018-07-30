@@ -20,7 +20,7 @@
 
 \method{glance}{polr}(x, ...)
 
-\method{augment}{polr}(x, data = stats::model.frame(x), newdata,
+\method{augment}{polr}(x, data = stats::model.frame(x), newdata = NULL,
   type.predict = c("probs", "class"), ...)
 
 \method{tidy}{clm}(x, conf.int = FALSE, conf.level = 0.95,
@@ -35,7 +35,7 @@
 
 \method{glance}{clmm}(x, ...)
 
-\method{augment}{clm}(x, data = stats::model.frame(x), newdata,
+\method{augment}{clm}(x, data = stats::model.frame(x), newdata = NULL,
   type.predict = c("prob", "class"), ...)
 
 \method{tidy}{svyolr}(x, conf.int = FALSE, conf.level = 0.95,

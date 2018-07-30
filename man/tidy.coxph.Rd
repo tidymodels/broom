@@ -5,7 +5,7 @@
 \alias{coxph_tidiers}
 \title{Tidy a(n) coxph object}
 \usage{
-\method{tidy}{coxph}(x, exponentiate = FALSE, conf.int = TRUE,
+\method{tidy}{coxph}(x, exponentiate = FALSE, conf.int = FALSE,
   conf.level = 0.95, ...)
 }
 \arguments{

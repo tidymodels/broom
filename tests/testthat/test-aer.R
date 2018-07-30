@@ -49,7 +49,8 @@ test_that("augment.ivreg", {
     aug = augment.ivreg,
     model = fit,
     data = df,
-    newdata = df
+    newdata = df,
+    strict = FALSE
   )
   
   au <- augment(fit)

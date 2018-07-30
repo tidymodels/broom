@@ -4,7 +4,7 @@
 \alias{augment.lm}
 \title{Augment data with information from a(n) lm object}
 \usage{
-\method{augment}{lm}(x, data = stats::model.frame(x), newdata,
+\method{augment}{lm}(x, data = stats::model.frame(x), newdata = NULL,
   type.predict, type.residuals, ...)
 }
 \arguments{

@@ -61,7 +61,7 @@ tidy.ivreg <- function(x,
 #' @export
 #' @seealso [augment()], [AER::ivreg()]
 #' @family ivreg tidiers
-augment.ivreg <- function(x, data = model.frame(x), newdata, ...) {
+augment.ivreg <- function(x, data = model.frame(x), newdata = NULL, ...) {
   augment_columns(x, data, newdata)
 }
 

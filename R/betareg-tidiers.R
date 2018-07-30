@@ -63,7 +63,7 @@ tidy.betareg <- function(x, conf.int = FALSE, conf.level = .95, ...) {
 #' 
 #' @seealso [augment()], [betareg::betareg()]
 #' @export
-augment.betareg <- function(x, data = stats::model.frame(x), newdata = NULL,
+augment.betareg <- function(x, data = model.frame(x), newdata = NULL,
                             type.predict, type.residuals, ...) {
   validate_augment_input(x, data, newdata)
   

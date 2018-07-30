@@ -4,26 +4,33 @@
 \alias{augment.nlrq}
 \title{Tidy a(n) nlrq object}
 \usage{
-\method{augment}{nlrq}(x, ...)
+\method{augment}{nlrq}(x, data = NULL, newdata = NULL, ...)
 }
 \arguments{
 \item{x}{A \code{nlrq} object returned from \code{\link[quantreg:nlrq]{quantreg::nlrq()}}.}
 
-\item{...}{Arguments passed on to \code{augment.nls}
-\describe{
-  \item{data}{A \code{\link[=data.frame]{data.frame()}} or \code{\link[tibble:tibble]{tibble::tibble()}} containing the original
+\item{data}{A \code{\link[=data.frame]{data.frame()}} or \code{\link[tibble:tibble]{tibble::tibble()}} containing the original
 data that was used to produce the object \code{x}. Defaults to
 \code{stats::model.frame(x)} so that \code{augment(my_fit)} returns the augmented
 original data. \strong{Do not} pass new data to the \code{data} argument.
 Augment will report information such as influence and cooks distance for
 data passed to the \code{data} argument. These measures are only defined for
 the original training data.}
-  \item{newdata}{A \code{\link[=data.frame]{data.frame()}} or \code{\link[tibble:tibble]{tibble::tibble()}} containing all
+
+\item{newdata}{A \code{\link[=data.frame]{data.frame()}} or \code{\link[tibble:tibble]{tibble::tibble()}} containing all
 the original predictors used to create \code{x}. Defaults to \code{NULL}, indicating
 that nothing has been passed to \code{newdata}. If \code{newdata} is specified,
 the \code{data} argument will be ignored.}
-  \item{x}{An \code{nls} object returned from \code{\link[stats:nls]{stats::nls()}}.}
-}}
+
+\item{...}{Additional arguments. Not used. Needed to match generic
+signature only. \strong{Cautionary note:} Misspelled arguments will be
+absorbed in \code{...}, where they will be ignored. If the misspelled
+argument has a default value, the default value will be used.
+For example, if you pass \code{conf.lvel = 0.9}, all computation will
+proceed using \code{conf.level = 0.95}. Additionally, if you pass
+\code{newdata = my_tibble} to an \code{\link[=augment]{augment()}} method that does not
+accept a \code{newdata} argument, it will use the default value for
+the \code{data} argument.}
 }
 \value{
 A \code{\link[tibble:tibble]{tibble::tibble()}} containing the data passed to \code{augment},

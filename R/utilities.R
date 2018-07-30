@@ -12,6 +12,7 @@ rename2 <- function(.data, ...) {
   rename(.data, !!!present)
 }
 
+# probably should just nuke this
 validate_augment_input <- function(model, data = NULL, newdata = NULL) {
   
   # careful: `data` may be non-null due to default argument such as
@@ -209,7 +210,7 @@ insert_NAs <- function(x, original) {
 #' @param ... extra arguments (not used)
 #'
 #' @export
-augment_columns <- function(x, data, newdata, type, type.predict = type,
+augment_columns <- function(x, data, newdata = NULL, type, type.predict = type,
                             type.residuals = type, se.fit = TRUE, ...) {
   notNAs <- function(o) {
     if (is.null(o) || all(is.na(o))) NULL else o
@@ -223,7 +224,7 @@ augment_columns <- function(x, data, newdata, type, type.predict = type,
 
   # call predict with arguments
   args <- list(x)
-  if (!missing(newdata)) {
+  if (!is.null(newdata)) {
     args$newdata <- newdata
   }
   if (!missing(type.predict)) {

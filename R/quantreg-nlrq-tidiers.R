@@ -60,14 +60,13 @@ glance.nlrq <- function(x, ...) {
 #' @template title_desc_tidy
 #' 
 #' @param x A `nlrq` object returned from [quantreg::nlrq()].
-#' @inheritDotParams augment.nls
+#' @inheritParams augment.nls
 #' 
 #' @template return_augment_columns
 #'  
 #' @export
 #' @seealso [augment()], [quantreg::nlrq()]
 #' @family quantreg tidiers
+#' @include stats-nls-tidiers.R
 #' 
-augment.nlrq <- function(x, ...) {
-  augment.nls(x, ...)
-}
+augment.nlrq <- augment.nls

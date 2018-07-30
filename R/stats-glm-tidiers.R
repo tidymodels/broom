@@ -22,9 +22,8 @@ tidy.glm <- function(x, ...) {
 #' @export
 #' @family lm tidiers
 #' @seealso [stats::glm()]
-augment.glm <- function(x, ...) {
-  NextMethod()
-}
+#' @include stats-lm-tidiers.R
+augment.glm <- augment.lm
 
 #' @templateVar class glm
 #' @template title_desc_glance
