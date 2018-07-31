@@ -28,14 +28,6 @@ proceed using \code{conf.level = 0.95}. Additionally, if you pass
 accept a \code{newdata} argument, it will use the default value for
 the \code{data} argument.}
 }
-\value{
-A \link[tibble:tibble]{tibble::tibble} with one row for each pair of items in the
-distance matrix, with columns:
-
-\item{item1}{First item}
-\item{item2}{Second item}
-\item{distance}{Distance between items}
-}
 \description{
 Tidy summarizes information about the components of a model.
 A model component might be a single term in a regression, a single
@@ -65,3 +57,8 @@ Other stats tidiers: \code{\link{tidy.density}},
   \code{\link{tidy.ftable}}
 }
 \concept{stats tidiers}
+\value{
+  \item{distance}{Distance between items}
+  \item{item1}{First item}
+  \item{item2}{Second item}
+}

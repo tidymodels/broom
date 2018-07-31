@@ -49,12 +49,7 @@ tidy.density <- function(x, ...) {
 #'   `upper` argument of [stats::dist()].
 #' @template param_unused_dots
 #'
-#' @return A [tibble::tibble] with one row for each pair of items in the 
-#'   distance matrix, with columns:
-#' 
-#'   \item{item1}{First item}
-#'   \item{item2}{Second item}
-#'   \item{distance}{Distance between items}
+#' @evalRd return_tidy("item1", "item2", "distance")
 #' 
 #' @details If the distance matrix does not include an upper triangle and/or
 #'   diagonal, the tidied version will not either.

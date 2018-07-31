@@ -19,9 +19,6 @@ proceed using \code{conf.level = 0.95}. Additionally, if you pass
 accept a \code{newdata} argument, it will use the default value for
 the \code{data} argument.}
 }
-\value{
-A \link[tibble:tibble]{tibble::tibble} with two columns: \code{freq} and \code{spec}.
-}
 \description{
 Tidy summarizes information about the components of a model.
 A model component might be a single term in a regression, a single
@@ -47,3 +44,6 @@ Other time series tidiers: \code{\link{tidy.acf}},
   \code{\link{tidy.ts}}, \code{\link{tidy.zoo}}
 }
 \concept{time series tidiers}
+\value{
+
+}

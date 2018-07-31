@@ -33,14 +33,6 @@ proceed using \code{conf.level = 0.95}. Additionally, if you pass
 accept a \code{newdata} argument, it will use the default value for
 the \code{data} argument.}
 }
-\value{
-A \link[tibble:tibble]{tibble::tibble} with one row for each term and columns:
-
-\item{estimate}{estimate of slope}
-\item{std.error}{standard error of estimate}
-\item{statistic}{test statistic}
-\item{p.value}{p-value}
-}
 \description{
 Tidy summarizes information about the components of a model.
 A model component might be a single term in a regression, a single
@@ -113,3 +105,9 @@ Other survival tidiers: \code{\link{augment.coxph}},
 }
 \concept{coxph tidiers}
 \concept{survival tidiers}
+\value{
+  \item{estimate}{The estimated value of the regression term.}
+  \item{p.value}{The two-sided p-value associated with the observed statistic.}
+  \item{statistic}{The value of a T-statistic to use in a hypothesis that the regression term is non-zero.}
+  \item{std.error}{The standard error of the regression term.}
+}

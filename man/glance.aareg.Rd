@@ -19,13 +19,6 @@ proceed using \code{conf.level = 0.95}. Additionally, if you pass
 accept a \code{newdata} argument, it will use the default value for
 the \code{data} argument.}
 }
-\value{
-A one-row \link[tibble:tibble]{tibble::tibble} with columns:
-
-\item{statistic}{chi-squared statistic}
-\item{p.value}{p-value based on chi-squared statistic}
-\item{df}{degrees of freedom used by coefficients}
-}
 \description{
 Glance accepts a model object and returns a \code{\link[tibble:tibble]{tibble::tibble()}}
 with exactly one row of model summaries. The summaries are typically
@@ -40,6 +33,19 @@ Glance does not calculate summary measures. Rather, it farms out these
 computations to appropriate methods and gathers the results together.
 Sometimes a goodness of fit measure will be undefined. In these cases
 the measure will be reported as \code{NA}.
+}
+\examples{
+
+library(survival)
+
+afit <- aareg(
+  Surv(time, status) ~ age + sex + ph.ecog,
+  data = lung,
+  dfbeta = TRUE
+)
+
+tidy(afit) 
+
 }
 \seealso{
 \code{\link[=glance]{glance()}}, \code{\link[survival:aareg]{survival::aareg()}}
@@ -60,3 +66,8 @@ Other survival tidiers: \code{\link{augment.coxph}},
 }
 \concept{aareg tidiers}
 \concept{survival tidiers}
+\value{
+  \item{df}{Degrees of freedom used by the model.}
+  \item{p.value}{Needs custom info.}
+  \item{statistic}{Needs custom info.}
+}

@@ -15,7 +15,7 @@
 #' @export
 #' @family speedlm tidiers
 #' @seealso [speedglm::speedlm()]
-#' @include stats-lm-tidiers
+#' @include stats-lm-tidiers.R
 tidy.speedlm <- tidy.lm
 
 #' @templateVar class speedlm

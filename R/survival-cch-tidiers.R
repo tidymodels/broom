@@ -5,7 +5,7 @@
 #' @param conf.level confidence level for CI
 #' @template param_unused_dots
 #' 
-#' @template return_tidy_regression
+#' @evalRd return_tidy(regression = TRUE)
 #'
 #' @examples
 #'
@@ -54,16 +54,16 @@ tidy.cch <- function(x, conf.level = .95, ...) {
 #' @templateVar class cch
 #' @template title_desc_glance
 #' 
-#' @inheritParams tidy.cch
+#' @inherit tidy.cch params examples
 #' 
-#' @return A one-row [tibble::tibble] with columns:
-#' 
-#'   \item{score}{score}
-#'   \item{rscore}{rscore}
-#'   \item{p.value}{p-value from Wald test}
-#'   \item{iter}{number of iterations}
-#'   \item{n}{number of predictions}
-#'   \item{nevent}{number of events}
+#' @evalRd return_glance(
+#'   "score",
+#'   "rscore",
+#'   "p.value",
+#'   "iter",
+#'   n = "number of predictions",
+#'   nevent = "number of events"
+#' )
 #'
 #' @export
 #' @seealso [glance()], [survival::cch()]

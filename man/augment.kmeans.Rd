@@ -27,11 +27,6 @@ proceed using \code{conf.level = 0.95}. Additionally, if you pass
 accept a \code{newdata} argument, it will use the default value for
 the \code{data} argument.}
 }
-\value{
-The original data as a \link[tibble:tibble]{tibble::tibble} with one extra column:
-
-\item{.cluster}{The cluster assigned by the k-means algorithm}
-}
 \description{
 Augment accepts a model object and a dataset and adds
 information about each observation in the dataset. Most commonly, this
@@ -78,3 +73,6 @@ Other kmeans tidiers: \code{\link{glance.kmeans}},
   \code{\link{tidy.kmeans}}
 }
 \concept{kmeans tidiers}
+\value{
+  \item{.cluster}{The cluster assigned by the k-means algorithm}
+}

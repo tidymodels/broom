@@ -25,20 +25,6 @@ indicating which test statistic should be used. Defaults to "Pillai".}
     rank-deficient: see \code{\link{qr}}.}
 }}
 }
-\value{
-A \link[tibble:tibble]{tibble::tibble} with columns:\preformatted{\item{term}{Term in design}
-\item{statistic}{Approximate F statistic}
-\item{num.df}{Degrees of freedom}
-\item{p.value}{P-value}
-}
-
-Depending on which test statistic is specified, one of the following
-columns is also included:\preformatted{\item{pillai}{Pillai's trace}
-\item{wilks}{Wilk's lambda}
-\item{hl}{Hotelling-Lawley trace}
-\item{roy}{Roy's greatest root}
-}
-}
 \description{
 Tidy summarizes information about the components of a model.
 A model component might be a single term in a regression, a single
@@ -46,6 +32,10 @@ hypothesis, a cluster, or a class. Exactly what tidy considers to be a
 model component varies cross models but is usually self-evident.
 If a model has several distinct types of components, you will need to
 specify which components to return.
+}
+\details{
+Depending on which test statistic is specified only one of \code{pillai},
+\code{wilks}, \code{hl} or \code{roy} is included.
 }
 \examples{
 
@@ -62,3 +52,13 @@ Other anova tidiers: \code{\link{tidy.TukeyHSD}},
   \code{\link{tidy.aov}}
 }
 \concept{anova tidiers}
+\value{
+  \item{num.df}{Degrees of freedom}
+  \item{p.value}{The two-sided p-value associated with the observed statistic.}
+  \item{statistic}{The value of a T-statistic to use in a hypothesis that the regression term is non-zero.}
+  \item{term}{The name of the regression term.}
+  \item{pillai}{Pillai's trace.}
+  \item{wilks}{Wilk's lambda.}
+  \item{hl}{Hotelling-Lawley trace.}
+  \item{roy}{Roy's greatest root.}
+}

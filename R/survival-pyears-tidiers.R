@@ -4,13 +4,15 @@
 #' @param x A `pyears` object returned from [survival::pyears()].
 #' @template param_unused_dots
 #' 
-#' @return A [tibble::tibble] with one row for each time point and columns:
+#' @evalRd return_tidy(
+#'   "pyears",
+#'   n = "number of subjects contributing time",
+#'   event = "observed number of events",
+#'   "expected"
+#' )
 #' 
-#'   \item{pyears}{person-years of exposure}
-#'   \item{n}{number of subjects contributing time}
-#'   \item{event}{observed number of events}
-#'   \item{expected}{expected number of events (present only if a
-#'     `ratetable` term is present)}
+#' @details `expected` is only present in the output when if a `ratetable`
+#'   term is present.
 #'     
 #' If the `data.frame = TRUE` argument is supplied to `pyears`,
 #' this is simply the contents of `x$data`.
@@ -52,12 +54,12 @@ tidy.pyears <- function(x, ...) {
 #' @templateVar class pyears
 #' @template title_desc_glance
 #' 
-#' @inheritParams tidy.pyears
+#' @inherit tidy.pyears params examples
 #' 
-#' @return A one-row [tibble::tibble] with columns:
-#' 
-#'   \item{total}{total number of person-years tabulated}
-#'   \item{offtable}{total number of person-years off table}
+#' @evalRd return_glance(
+#'   total = "total number of person-years tabulated",
+#'   offtable = "total number of person-years off table"
+#' )
 #'
 #' @export
 #' @seealso [glance()], [survival::pyears()]

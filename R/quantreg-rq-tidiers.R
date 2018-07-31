@@ -93,12 +93,8 @@ glance.rq <- function(x, ...) {
 #'
 #' @details Depending on the arguments passed on to `predict.rq` via `...`,
 #'   a confidence interval is also calculated on the fitted values resulting in
-#'   columns:
-#'     \item{.conf.low}{Lower confidence interval value}
-#'     \item{.conf.high}{Upper confidence interval value}
-#'
-#'   `predict.rq` does not provide confidence intervals when `newdata`
-#'    is provided.
+#'   columns `.conf.low` and `.conf.high`. Does not provide confidence
+#'   intervals when data is specified via the `newdata` argument.
 #'
 #' @export
 #' @seealso [augment], [quantreg::rq()], [quantreg::predict.rq()]

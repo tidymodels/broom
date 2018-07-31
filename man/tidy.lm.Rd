@@ -40,28 +40,6 @@ proceed using \code{conf.level = 0.95}. Additionally, if you pass
 accept a \code{newdata} argument, it will use the default value for
 the \code{data} argument.}
 }
-\value{
-A \code{\link[tibble:tibble]{tibble::tibble()}} with one row for each term in the
-regression. The tibble has columns:
-
-\item{term}{The name of the regression term.}
-\item{estimate}{The estimated value of the regression term.}
-\item{std.error}{The standard error of the regression term.}
-\item{statistic}{The value of a statistic, almost always a T-statistic,
-to use in a hypothesis that the regression term is non-zero.}
-\item{p.value}{The two-sided p-value associated with the observed
-statistic.}
-\item{conf.low}{The low end of a confidence interval for the regression
-term. Included only if \code{conf.int = TRUE}.}
-\item{conf.high}{The high end of a confidence interval for the regression
-term. Included only if \code{conf.int = TRUE}.}
-
-If the linear model is an \code{mlm} object (multiple linear model),
-there is an additional column:
-
-\item{response}{Which response column the coefficients correspond to
-(typically Y1, Y2, etc)}
-}
 \description{
 Tidy summarizes information about the components of a model.
 A model component might be a single term in a regression, a single
@@ -71,6 +49,9 @@ If a model has several distinct types of components, you will need to
 specify which components to return.
 }
 \details{
+If the linear model is an \code{mlm} object (multiple linear model),
+there is an additional column \code{response}.
+
 If you have missing values in your model data, you may need to refit
 the model with \code{na.action = na.exclude}.
 }
@@ -132,3 +113,12 @@ Other lm tidiers: \code{\link{augment.glm}},
   \code{\link{glance.lm}}, \code{\link{tidy.glm}}
 }
 \concept{lm tidiers}
+\value{
+  \item{conf.high}{The upper end of a confidence interval for the term under consideration. Included only if `conf.int = TRUE`.}
+  \item{conf.low}{The lower end of a confidence interval for the term under consideration. Included only if `conf.int = TRUE`.}
+  \item{estimate}{The estimated value of the regression term.}
+  \item{p.value}{The two-sided p-value associated with the observed statistic.}
+  \item{statistic}{The value of a T-statistic to use in a hypothesis that the regression term is non-zero.}
+  \item{std.error}{The standard error of the regression term.}
+  \item{term}{The name of the regression term.}
+}

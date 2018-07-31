@@ -15,7 +15,7 @@ tidy.glm <- function(x, ...) {
 #'
 #' @param x A `glm` object returned from [stats::glm()].
 #'
-#' @return Note that if the weights for any of the observations in the model
+#' @details Note that if the weights for any of the observations in the model
 #'   are 0, then columns ".infl" and ".hat" in the result will be 0
 #'   for those observations.
 #'
@@ -32,15 +32,15 @@ augment.glm <- augment.lm
 #' @param x A `glm` object returned from [stats::glm()].
 #' @template param_unused_dots
 #'
-#' @return A one-row [tibble::tibble] with columns:
-#' 
-#'   \item{null.deviance}{the deviance of the null model}
-#'   \item{df.null}{the residual degrees of freedom for the null model}
-#'   \item{logLik}{the data's log-likelihood under the model}
-#'   \item{AIC}{the Akaike Information Criterion}
-#'   \item{BIC}{the Bayesian Information Criterion}
-#'   \item{deviance}{deviance}
-#'   \item{df.residual}{residual degrees of freedom}
+#' @evalRd return_glance(
+#'   "null.deviance",
+#'   "df.null",
+#'   "logLik",
+#'   "AIC",
+#'   "BIC",
+#'   "deviance",
+#'   "df.residual"
+#' )
 #'
 #' @examples
 #'

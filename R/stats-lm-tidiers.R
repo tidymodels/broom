@@ -7,16 +7,13 @@
 #' @template param_exponentiate
 #' @template param_unused_dots
 #' 
-#' @template return_tidy_regression
+#' @evalRd return_tidy(regression = TRUE)
 #' 
-#' @return If the linear model is an `mlm` object (multiple linear model),
-#'   there is an additional column:
+#' @details If the linear model is an `mlm` object (multiple linear model),
+#'   there is an additional column `response`.
 #' 
-#'   \item{response}{Which response column the coefficients correspond to
-#'   (typically Y1, Y2, etc)}
-#' 
-#' @details If you have missing values in your model data, you may need to refit
-#' the model with `na.action = na.exclude`.
+#'   If you have missing values in your model data, you may need to refit
+#'   the model with `na.action = na.exclude`.
 #' 
 #' @examples
 #'
@@ -117,7 +114,7 @@ tidy.summary.lm <- function(x, ...) {
 #' 
 #' @template augment_NAs
 #' 
-#' @inheritParams tidy.lm
+#' @inherit tidy.lm params examples
 #' @template param_data
 #' @template param_newdata
 #' @param type.predict Type of predictions to use when `x` is a `glm` object. 
@@ -125,28 +122,19 @@ tidy.summary.lm <- function(x, ...) {
 #' @param type.residuals Type of residuals to use when `x` is a `glm` object. 
 #'   Passed to [stats::residuals.glm()].
 #'
-#' @return When `newdata` is not supplied `augment.lm` returns
-#'   one row for each observation, with seven columns added to the original
-#'   data:
-#' 
-#'   \item{.hat}{Diagonal of the hat matrix}
-#'   \item{.sigma}{Estimate of residual standard deviation when
-#'     corresponding observation is dropped from model}
-#'   \item{.cooksd}{Cooks distance, [cooks.distance()]}
-#'   \item{.fitted}{Fitted values of model}
-#'   \item{.se.fit}{Standard errors of fitted values}
-#'   \item{.resid}{Residuals}
-#'   \item{.std.resid}{Standardised residuals}
+#' @evalRd return_augment(
+#'   ".hat",
+#'   ".sigma",
+#'   ".cooksd",
+#'   ".se.fit",
+#'   ".std.resid"
+#' )
 #'
-#'   Some unusual `lm` objects, such as `rlm` from MASS, may omit `.cooksd`
-#'   and `.std.resid`. `gam` from mgcv omits `.sigma`.
-#'
-#'   When `newdata` is supplied, returns one row for each observation, with
-#'   three columns added to the new data:
-#' 
-#'   \item{.fitted}{Fitted values of model}
-#'   \item{.se.fit}{Standard errors of fitted values}
-#'   \item{.resid}{Residuals of fitted values on the new data}
+#' @details Some unusual `lm` objects, such as `rlm` from MASS, may omit
+#'   `.cooksd` and `.std.resid`. `gam` from mgcv omits `.sigma`.
+#'   
+#'   When `newdata` is supplied, only returns `.fitted`, `.resid` and 
+#'   `.se.fit` columns.
 #'
 #' @export
 #' @seealso [augment()], [stats::predict.lm()]
@@ -163,22 +151,21 @@ augment.lm <- function(x, data = stats::model.frame(x), newdata = NULL,
 #' @templateVar class lm
 #' @template title_desc_glance
 #'
-#' @inheritParams tidy.lm
+#' @inherit tidy.lm params examples
 #'
-#' @return A one-row [tibble::tibble] with columns:
-#' 
-#'   \item{r.squared}{The percent of variance explained by the model}
-#'   \item{adj.r.squared}{r.squared adjusted based on the degrees of freedom}
-#'   \item{sigma}{The square root of the estimated residual variance}
-#'   \item{statistic}{F-statistic}
-#'   \item{p.value}{p-value from the F test, describing whether the full
-#'   regression is significant}
-#'   \item{df}{Degrees of freedom used by the coefficients}
-#'   \item{logLik}{the data's log-likelihood under the model}
-#'   \item{AIC}{the Akaike Information Criterion}
-#'   \item{BIC}{the Bayesian Information Criterion}
-#'   \item{deviance}{deviance}
-#'   \item{df.residual}{residual degrees of freedom}
+#' @evalRd return_glance(
+#'   "r.squared",
+#'   "adj.r.squared",
+#'   "sigma",
+#'   "statistic",
+#'   "p.value",
+#'   "df",
+#'   "logLik",
+#'   "AIC",
+#'   "BIC",
+#'   "deviance",
+#'   "df.residual"
+#' )
 #'
 #' @export
 #' @seealso [glance()]
@@ -226,7 +213,17 @@ glance.summary.lm <- function(x, ...) {
 }
 
 # getAnywhere('format.perc')
-.format.perc <- function (probs, digits) { paste(format(100 * probs, trim = TRUE, scientific = FALSE, digits = digits), "%") }
+.format.perc <- function (probs, digits) {
+  paste(
+    format(
+      100 * probs,
+      trim = TRUE,
+      scientific = FALSE,
+      digits = digits
+    ),
+    "%"
+  )
+}
 
 # compute confidence intervals for mlm object. 
 confint.mlm <- function (object, level = 0.95, ...) {

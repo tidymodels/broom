@@ -6,7 +6,7 @@
 #' @template param_quick
 #' @template param_unused_dots
 #' 
-#' @template return_tidy_regression
+#' @evalRd return_tidy(regression = TRUE)
 #'
 #' @examples
 #'
@@ -62,7 +62,7 @@ tidy.nls <- function(x, conf.int = FALSE, conf.level = .95,
 #' @template param_data
 #' @template param_newdata
 #' 
-#' @template return_augment_columns
+#' @evalRd return_augment()
 #'
 #' @export
 #' @seealso [tidy], [stats::nls()], [stats::predict.nls()]
@@ -91,18 +91,18 @@ augment.nls <- function(x, data = NULL, newdata = NULL, ...) {
 #' @templateVar class nls
 #' @template title_desc_glance
 #' 
-#' @inheritParams tidy.nls
+#' @inherit tidy.nls params examples
 #'
-#' @return A one-row [tibble::tibble] with columns:
-#' 
-#'   \item{sigma}{the square root of the estimated residual variance}
-#'   \item{isConv}{whether the fit successfully converged}
-#'   \item{finTol}{the achieved convergence tolerance}
-#'   \item{logLik}{the data's log-likelihood under the model}
-#'   \item{AIC}{the Akaike Information Criterion}
-#'   \item{BIC}{the Bayesian Information Criterion}
-#'   \item{deviance}{deviance}
-#'   \item{df.residual}{residual degrees of freedom}
+#' @evalRd return_glance(
+#'   "sigma",
+#'   "isConv",
+#'   "finTol",
+#'   "logLik",
+#'   "AIC",
+#'   "BIC",
+#'   "deviance",
+#'   "df.residual"
+#' )
 #'
 #' @export
 #' @seealso [tidy], [stats::nls()]

@@ -93,12 +93,8 @@ missing at this time.
 \details{
 Depending on the arguments passed on to \code{predict.rq} via \code{...},
 a confidence interval is also calculated on the fitted values resulting in
-columns:
-\item{.conf.low}{Lower confidence interval value}
-\item{.conf.high}{Upper confidence interval value}
-
-\code{predict.rq} does not provide confidence intervals when \code{newdata}
-is provided.
+columns \code{.conf.low} and \code{.conf.high}. Does not provide confidence
+intervals when data is specified via the \code{newdata} argument.
 }
 \seealso{
 \link{augment}, \code{\link[quantreg:rq]{quantreg::rq()}}, \code{\link[quantreg:predict.rqs]{quantreg::predict.rqs()}}

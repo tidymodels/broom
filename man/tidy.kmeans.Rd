@@ -22,13 +22,6 @@ proceed using \code{conf.level = 0.95}. Additionally, if you pass
 accept a \code{newdata} argument, it will use the default value for
 the \code{data} argument.}
 }
-\value{
-A \link[tibble:tibble]{tibble::tibble} with one row per cluster, and columns:
-
-\item{size}{Number of points in cluster}
-\item{withinss}{The within-cluster sum of squares}
-\item{cluster}{A factor describing the cluster from 1:k}
-}
 \description{
 Tidy summarizes information about the components of a model.
 A model component might be a single term in a regression, a single
@@ -47,3 +40,8 @@ Other kmeans tidiers: \code{\link{augment.kmeans}},
   \code{\link{glance.kmeans}}
 }
 \concept{kmeans tidiers}
+\value{
+  \item{cluster}{A factor describing the cluster from 1:k}
+  \item{size}{Number of points assigned to cluster.}
+  \item{withinss}{The within-cluster sum of squares}
+}

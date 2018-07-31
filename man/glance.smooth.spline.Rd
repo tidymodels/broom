@@ -19,16 +19,6 @@ proceed using \code{conf.level = 0.95}. Additionally, if you pass
 accept a \code{newdata} argument, it will use the default value for
 the \code{data} argument.}
 }
-\value{
-A one-row \link[tibble:tibble]{tibble::tibble} with columns:
-
-\item{spar}{smoothing parameter}
-\item{lambda}{choice of lambda corresponding to \code{spar}}
-\item{df}{equivalent degrees of freedom}
-\item{crit}{minimized criterion}
-\item{pen.crit}{penalized criterion}
-\item{cv.crit}{cross-validation score}
-}
 \description{
 Tidy summarizes information about the components of a model.
 A model component might be a single term in a regression, a single
@@ -37,9 +27,28 @@ model component varies cross models but is usually self-evident.
 If a model has several distinct types of components, you will need to
 specify which components to return.
 }
+\examples{
+
+spl <- smooth.spline(mtcars$wt, mtcars$mpg, df = 4)
+augment(spl, mtcars)
+augment(spl)  # calls original columns x and y
+
+library(ggplot2)
+ggplot(augment(spl, mtcars), aes(wt, mpg)) +
+    geom_point() + geom_line(aes(y = .fitted))
+
+}
 \seealso{
 \code{\link[=augment]{augment()}}, \code{\link[stats:smooth.spline]{stats::smooth.spline()}}
 
 Other smoothing spline tidiers: \code{\link{augment.smooth.spline}}
 }
 \concept{smoothing spline tidiers}
+\value{
+  \item{crit}{minimized criterion}
+  \item{cv.crit}{cross-validation score}
+  \item{df}{Degrees of freedom used by the model.}
+  \item{lambda}{choice of lambda corresponding to `spar`}
+  \item{pen.crit}{penalized criterion}
+  \item{spar}{smoothing parameter}
+}

@@ -20,12 +20,6 @@ proceed using \code{conf.level = 0.95}. Additionally, if you pass
 accept a \code{newdata} argument, it will use the default value for
 the \code{data} argument.}
 }
-\value{
-A \link[tibble:tibble]{tibble::tibble} with columns:
-
-\item{lag}{lag values}
-\item{acf}{calculated correlation}
-}
 \description{
 Tidy summarizes information about the components of a model.
 A model component might be a single term in a regression, a single
@@ -48,3 +42,7 @@ Other time series tidiers: \code{\link{tidy.spec}},
   \code{\link{tidy.ts}}, \code{\link{tidy.zoo}}
 }
 \concept{time series tidiers}
+\value{
+  \item{acf}{calculated correlation}
+  \item{lag}{lag values}
+}

@@ -4,19 +4,19 @@
 #' @param x An `survfit` object returned from [survival::survfit()].
 #' @template param_unused_dots
 #'
-#' @return A [tibble::tibble] with one row for each time point and columns: 
-#' 
-#'   \item{time}{timepoint}
-#'   \item{n.risk}{number of subjects at risk at time t0}
-#'   \item{n.event}{number of events at time t}
-#'   \item{n.censor}{number of censored events}
-#'   \item{estimate}{estimate of survival or cumulative incidence rate when
-#'     multistate}
-#'   \item{std.error}{standard error of estimate}
-#'   \item{conf.high}{upper end of confidence interval}
-#'   \item{conf.low}{lower end of confidence interval}
-#'   \item{state}{state if multistate survfit object inputted}
-#'   \item{strata}{strata if stratified survfit object inputted}
+#' @evalRd return_tidy(
+#'   "time",
+#'   "n.risk",
+#'   "n.event",
+#'   "n.censor",
+#'   estimate = "estimate of survival or cumulative incidence rate when
+#'     multistate",
+#'   "std.error",
+#'   "conf.low",
+#'   "conf.high",
+#'   state = "state if multistate survfit object input",
+#'   strata = "strata if stratified survfit object input"
+#' )
 #' 
 #' @examples 
 #' 

@@ -19,21 +19,6 @@ proceed using \code{conf.level = 0.95}. Additionally, if you pass
 accept a \code{newdata} argument, it will use the default value for
 the \code{data} argument.}
 }
-\value{
-A one-row \link[tibble:tibble]{tibble::tibble} with columns:
-
-\item{n.factors}{The number of fitted factors}
-\item{total.variance}{Total cumulative proportion of variance accounted
-for by all factors}
-\item{statistic}{Significance-test statistic}
-\item{p.value}{p-value from the significance test, describing whether the
-covariance matrix estimated from the factors is significantly different
-from the observed covariance matrix}
-\item{df}{Degrees of freedom used by the factor analysis}
-\item{n}{Sample size used in the analysis}
-\item{method}{The estimation method; always Maximum Likelihood, "mle"}
-\item{converged}{Whether the factor analysis converged}
-}
 \description{
 Glance accepts a model object and returns a \code{\link[tibble:tibble]{tibble::tibble()}}
 with exactly one row of model summaries. The summaries are typically
@@ -49,6 +34,16 @@ computations to appropriate methods and gathers the results together.
 Sometimes a goodness of fit measure will be undefined. In these cases
 the measure will be reported as \code{NA}.
 }
+\examples{
+
+mod <- factanal(mtcars, 3, scores = "regression")
+
+glance(mod)
+tidy(mod)
+augment(mod)
+augment(mod, mtcars)
+
+}
 \seealso{
 \code{\link[=glance]{glance()}}, \code{\link[stats:factanal]{stats::factanal()}}
 
@@ -56,3 +51,12 @@ Other factanal tidiers: \code{\link{augment.factanal}},
   \code{\link{tidy.factanal}}
 }
 \concept{factanal tidiers}
+\value{
+  \item{converged}{Logical indicating if the model fitting procedure was succesful and converged.}
+  \item{df}{Degrees of freedom used by the model.}
+  \item{method}{Needs custom info.}
+  \item{n}{Needs custom info.}
+  \item{n.factors}{The number of fitted factors}
+  \item{statistic}{Needs custom info.}
+  \item{total.variance}{Total cumulative proportion of variance accounted for by all factors}
+}

@@ -20,10 +20,6 @@ proceed using \code{conf.level = 0.95}. Additionally, if you pass
 accept a \code{newdata} argument, it will use the default value for
 the \code{data} argument.}
 }
-\value{
-A data frame with one row per parameter passed in, with
-columns \code{n}, \code{delta}, \code{sd}, \code{sig.level}, and \code{power}.
-}
 \description{
 Tidy summarizes information about the components of a model.
 A model component might be a single term in a regression, a single
@@ -51,3 +47,7 @@ Other htest tidiers: \code{\link{augment.htest}},
   \code{\link{tidy.pairwise.htest}}
 }
 \concept{htest tidiers}
+\value{
+  \item{n}{Needs custom info.}
+  \item{power}{Power achieved for given value of n.}
+}

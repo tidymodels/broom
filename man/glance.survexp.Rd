@@ -19,13 +19,6 @@ proceed using \code{conf.level = 0.95}. Additionally, if you pass
 accept a \code{newdata} argument, it will use the default value for
 the \code{data} argument.}
 }
-\value{
-A one-row \link[tibble:tibble]{tibble::tibble} with columns:
-
-\item{n.max}{maximum number of subjects at risk}
-\item{n.start}{starting number of subjects at risk}
-\item{timepoints}{number of timepoints}
-}
 \description{
 Glance accepts a model object and returns a \code{\link[tibble:tibble]{tibble::tibble()}}
 with exactly one row of model summaries. The summaries are typically
@@ -40,6 +33,24 @@ Glance does not calculate summary measures. Rather, it farms out these
 computations to appropriate methods and gathers the results together.
 Sometimes a goodness of fit measure will be undefined. In these cases
 the measure will be reported as \code{NA}.
+}
+\examples{
+
+library(survival)
+sexpfit <- survexp(
+  futime ~ 1,
+  rmap = list(
+    sex = "male",
+    year = accept.dt,
+    age = (accept.dt - birth.dt)
+  ),
+  method = 'conditional',
+  data = jasa
+)
+
+tidy(sexpfit)
+glance(sexpfit)
+
 }
 \seealso{
 \code{\link[=glance]{glance()}}, \code{\link[survival:survexp]{survival::survexp()}}
@@ -60,3 +71,8 @@ Other survival tidiers: \code{\link{augment.coxph}},
 }
 \concept{survexp tidiers}
 \concept{survival tidiers}
+\value{
+  \item{n.max}{Maximum number of subjects at risk.}
+  \item{n.start}{Initial number of subjects at risk.}
+  \item{timepoints}{number of timepoints}
+}

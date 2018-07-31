@@ -39,13 +39,13 @@ proceed using \code{conf.level = 0.95}. Additionally, if you pass
 accept a \code{newdata} argument, it will use the default value for
 the \code{data} argument.}
 }
-\value{
+\description{
+This augment method wraps \code{\link[=augment.lm]{augment.lm()}}.
+}
+\details{
 Note that if the weights for any of the observations in the model
 are 0, then columns ".infl" and ".hat" in the result will be 0
 for those observations.
-}
-\description{
-This augment method wraps \code{\link[=augment.lm]{augment.lm()}}.
 }
 \seealso{
 \code{\link[=augment]{augment()}}, \code{\link[=augment.lm]{augment.lm()}}

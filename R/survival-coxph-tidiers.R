@@ -6,12 +6,12 @@
 #' @template param_exponentiate
 #' @template param_unused_dots
 #' 
-#' @return A [tibble::tibble] with one row for each term and columns:
-#' 
-#'   \item{estimate}{estimate of slope}
-#'   \item{std.error}{standard error of estimate}
-#'   \item{statistic}{test statistic}
-#'   \item{p.value}{p-value}
+#' @evalRd return_tidy(
+#'   "estimate",
+#'   "std.error",
+#'   "statistic",
+#'   "p.value"
+#' )
 #'
 #' @examples 
 #' 
@@ -103,7 +103,7 @@ tidy.coxph <- function(x, exponentiate = FALSE, conf.int = FALSE,
 #' @templateVar class coxph
 #' @template title_desc_augment
 #' 
-#' @param x A `coxph` object returned from [survival::coxph()].
+#' @inherit tidy.coxph params examples
 #' @template param_data
 #' @template param_newdata
 #' @template param_type_residuals
@@ -112,11 +112,7 @@ tidy.coxph <- function(x, exponentiate = FALSE, conf.int = FALSE,
 #'
 #' @template augment_NAs
 #'
-#' @return A [tibble::tibble] with the passed data and additional columns:
-#' 
-#'   \item{.fitted}{Fitted values of model}
-#'   \item{.se.fit}{Standard errors of fitted values}
-#'   \item{.resid}{Residuals (not present if `newdata` specified.)}
+#' @evalRd return_augment(".se.fit")
 #'
 #' @export
 #' @seealso [augment()], [survival::coxph()]
@@ -138,7 +134,7 @@ augment.coxph <- function(x, data = NULL, newdata = NULL,
 #' @templateVar class coxph
 #' @template title_desc_glance
 #' 
-#' @inheritParams tidy.coxph
+#' @inherit tidy.coxph params examples
 #' 
 #' @return A one-row [tibble::tibble] with columns: TODO.
 #'
