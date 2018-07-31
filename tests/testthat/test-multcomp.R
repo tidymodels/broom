@@ -1,29 +1,41 @@
-context("multcomp tidiers")
+context("multcomp")
 
+skip_if_not_installed("modeltests")
+library(modeltests)
+
+skip_if_not_installed("multcomp")
 library(multcomp)
 
 amod <- aov(breaks ~ wool + tension, data = warpbreaks)
 wht <- glht(amod, linfct = mcp(tension = "Tukey"))
 
-test_that("tidy.glht works", {
-  td <- tidy(wht)
-  check_tidy(td, exp.row = 3, exp.col = 3)
+test_that("multcomp tidier arguments", {
+  check_arguments(tidy.glht)
+  check_arguments(tidy.confint.glht)
+  check_arguments(tidy.summary.glht)
+  check_arguments(tidy.cld)
 })
 
-test_that("tidy.confint.glht works", {
-  CI <- confint(wht)
-  td <- tidy(CI)
-  check_tidy(td, exp.row = 3, exp.col = 5)
+test_that("tidy.glht", {
+  td <- tidy(wht)
+  check_tidy_output(td)
+  check_dims(td, 3, 3)
+})
+
+test_that("tidy.confint.glht", {
+  td <- tidy(confint(wht))
+  check_tidy_output(td)
+  check_dims(td, 3, 5)
 })
 
 test_that("tidy.summary.glht works", {
-  ss <- summary(wht)
-  td <- tidy(ss)
-  check_tidy(td, exp.row = 3, exp.col = 6)
+  td <- tidy(summary(wht))
+  check_tidy_output(td)
+  check_dims(td, 3, 6)
 })
 
-test_that("tidy.clt works", {
-  cld <- cld(wht)
-  td <- tidy(cld)
-  check_tidy(td, exp.row = 3, exp.col = 2)
+test_that("tidy.cld works", {
+  td <- tidy(cld(wht))
+  check_tidy_output(td, strict = FALSE)
+  check_dims(td, 3, 2)
 })

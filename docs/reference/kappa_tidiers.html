@@ -102,13 +102,13 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Tidy a kappa object from a Cohen's kappa calculation</h1>
-    <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/psych_tidiers.R'><code>R/psych_tidiers.R</code></a></small>
+    <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/psych-tidiers.R'><code>R/psych-tidiers.R</code></a></small>
     <div class="hidden name"><code>kappa_tidiers.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Tidy a "kappa" object, from the <code><a href='http://www.rdocumentation.org/packages/psych/topics/kappa'>cohen.kappa</a></code> function
+    <p>Tidy a "kappa" object, from the <code><a href='http://www.rdocumentation.org/packages/psych/topics/kappa'>psych::cohen.kappa()</a></code> function
 in the psych package. This represents the agreement of two raters
 when using nominal scores.</p>
     
@@ -134,9 +134,9 @@ when using nominal scores.</p>
 
     <p>A data.frame with columns</p>
 <dt>type</dt><dd><p>Either "weighted" or "unweighted"</p></dd>
-  <dt>estimate</dt><dd><p>The estimated value of kappa with this method</p></dd>
-  <dt>conf.low</dt><dd><p>Lower bound of confidence interval</p></dd>
-  <dt>conf.high</dt><dd><p>Upper bound of confidence interval</p></dd>
+<dt>estimate</dt><dd><p>The estimated value of kappa with this method</p></dd>
+<dt>conf.low</dt><dd><p>Lower bound of confidence interval</p></dd>
+<dt>conf.high</dt><dd><p>Upper bound of confidence interval</p></dd>
 
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
@@ -146,13 +146,13 @@ when the <code>cohen.kappa</code> function is originally run.</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='http://www.rdocumentation.org/packages/psych/topics/kappa'>cohen.kappa</a></code></p></div>
+    <div class='dont-index'><p><code><a href='http://www.rdocumentation.org/packages/psych/topics/kappa'>psych::cohen.kappa()</a></code></p></div>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
 <span class='fu'>library</span>(<span class='no'>psych</span>)</div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Attachement du package : 'psych'</span></div><div class='output co'>#&gt; <span class='message'>The following object is masked from 'package:car':</span>
+#&gt; <span class='message'>Attaching package: 'psych'</span></div><div class='output co'>#&gt; <span class='message'>The following object is masked from 'package:car':</span>
 #&gt; <span class='message'></span>
 #&gt; <span class='message'>    logit</span></div><div class='output co'>#&gt; <span class='message'>The following object is masked from 'package:boot':</span>
 #&gt; <span class='message'></span>
@@ -163,9 +163,11 @@ when the <code>cohen.kappa</code> function is originally run.</p>
 <span class='no'>rater2</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='fl'>1</span>, <span class='fl'>3</span>, <span class='fl'>1</span>, <span class='fl'>6</span>, <span class='fl'>1</span>, <span class='fl'>5</span>, <span class='fl'>5</span>, <span class='fl'>6</span>, <span class='fl'>7</span>)
 <span class='no'>ck</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/psych/topics/kappa'>cohen.kappa</a></span>(<span class='fu'>cbind</span>(<span class='no'>rater1</span>, <span class='no'>rater2</span>))
 
-<span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>ck</span>)</div><div class='output co'>#&gt;         type  estimate   conf.low conf.high
-#&gt; 1 unweighted 0.0000000 -0.1846267 0.1846267
-#&gt; 2   weighted 0.6779661  0.4297218 0.9262105</div><div class='input'>
+<span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>ck</span>)</div><div class='output co'>#&gt; # A tibble: 2 x 4
+#&gt;   type       estimate conf.low conf.high
+#&gt;   &lt;chr&gt;         &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;
+#&gt; 1 unweighted    0       -0.185     0.185
+#&gt; 2 weighted      0.678    0.430     0.926</div><div class='input'>
 <span class='co'># graph the confidence intervals</span>
 <span class='fu'>library</span>(<span class='no'>ggplot2</span>)
 <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/ggplot'>ggplot</a></span>(<span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>ck</span>), <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/aes'>aes</a></span>(<span class='no'>estimate</span>, <span class='no'>type</span>)) +

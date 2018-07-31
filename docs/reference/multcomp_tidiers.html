@@ -102,15 +102,13 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>tidying methods for objects produced by <span class="pkg">multcomp</span></h1>
-    <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/multcomp_tidiers.R'><code>R/multcomp_tidiers.R</code></a></small>
+    <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/multcomp-tidiers.R'><code>R/multcomp-tidiers.R</code></a></small>
     <div class="hidden name"><code>multcomp_tidiers.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>These methods originated in ggplot2, as "fortify." In broom,
-they were renamed "tidy" because they summarize terms and
-tests, rather than adding columns to a dataset.</p>
+    <p>tidying methods for objects produced by <span class="pkg">multcomp</span></p>
     
     </div>
 
@@ -132,7 +130,7 @@ tests, rather than adding columns to a dataset.</p>
     <tr>
       <th>x</th>
       <td><p>an object of class <code>glht</code>, <code>confint.glht</code>,
-<code>summary.glht</code> or <code><a href='http://www.rdocumentation.org/packages/multcomp/topics/cld'>cld</a></code></p></td>
+<code>summary.glht</code> or <code><a href='http://www.rdocumentation.org/packages/multcomp/topics/cld'>multcomp::cld()</a></code></p></td>
     </tr>
     <tr>
       <th>...</th>
@@ -163,13 +161,11 @@ tests, rather than adding columns to a dataset.</p>
 
     <span class='no'>cld</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/multcomp/topics/cld'>cld</a></span>(<span class='no'>wht</span>)
     <span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>cld</span>)
-}</div><div class='output co'>#&gt; <span class='message'>Le chargement a nécessité le package : multcomp</span></div><div class='output co'>#&gt; <span class='message'>Le chargement a nécessité le package : mvtnorm</span></div><div class='output co'>#&gt; <span class='message'>Le chargement a nécessité le package : TH.data</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Attachement du package : 'TH.data'</span></div><div class='output co'>#&gt; <span class='message'>The following object is masked from 'package:MASS':</span>
+}</div><div class='output co'>#&gt; <span class='message'>Loading required package: multcomp</span></div><div class='output co'>#&gt; <span class='message'>Loading required package: mvtnorm</span></div><div class='output co'>#&gt; <span class='message'>Loading required package: TH.data</span></div><div class='output co'>#&gt; <span class='message'></span>
+#&gt; <span class='message'>Attaching package: 'TH.data'</span></div><div class='output co'>#&gt; <span class='message'>The following object is masked from 'package:MASS':</span>
 #&gt; <span class='message'></span>
-#&gt; <span class='message'>    geyser</span></div><div class='output co'>#&gt;   lhs letters
-#&gt; 1   L       b
-#&gt; 2   M       a
-#&gt; 3   H       a</div></pre>
+#&gt; <span class='message'>    geyser</span></div><div class='output co'>#&gt; <span class='message'>Error: package or namespace load failed for 'multcomp' in loadNamespace(i, c(lib.loc, .libPaths()), versionCheck = vI[[i]]):</span>
+#&gt; <span class='message'> there is no package called 'zoo'</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

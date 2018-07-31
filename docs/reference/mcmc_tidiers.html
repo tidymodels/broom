@@ -46,7 +46,7 @@
 
       <div class="navbar-brand-container">
         <a class="navbar-brand" href="../index.html">broom</a>
-        <small class="tidyverse">part of the <a href="http://tidyverse.org">tidyverse</a></small>
+        <small class="tidyverse">part of the <a href="https://tidyverse.org">tidyverse</a></small>
       </div>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
@@ -102,13 +102,15 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Tidying methods for MCMC (Stan, JAGS, etc.) fits</h1>
-    <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/mcmc_tidiers.R'><code>R/mcmc_tidiers.R</code></a></small>
+    <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/mcmc-tidiers.R'><code>R/mcmc-tidiers.R</code></a></small>
     <div class="hidden name"><code>mcmc_tidiers.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Tidying methods for MCMC (Stan, JAGS, etc.) fits</p>
+    <p>MCMC tidiers will soon be deprecated in <code>broom</code> and there is no ongoing
+development of these functions at this time. MCMC tidiers are being
+developed in the <code>broom.mixed</code> package, which is not yet on CRAN.</p>
     
     </div>
 
@@ -117,13 +119,13 @@
   <span class='kw'>rhat</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>ess</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='no'>...</span>)
 
 <span class='co'># S3 method for rjags</span>
-<span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>x</span>, <span class='no'>pars</span>, <span class='kw'>estimate.method</span> <span class='kw'>=</span> <span class='st'>"mean"</span>, <span class='kw'>conf.int</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>conf.level</span> <span class='kw'>=</span> <span class='fl'>0.95</span>, <span class='kw'>conf.method</span> <span class='kw'>=</span> <span class='st'>"quantile"</span>, <span class='no'>...</span>)
+<span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>x</span>, <span class='no'>pars</span>, <span class='kw'>estimate.method</span> <span class='kw'>=</span> <span class='st'>"mean"</span>,
+  <span class='kw'>conf.int</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>conf.level</span> <span class='kw'>=</span> <span class='fl'>0.95</span>, <span class='kw'>conf.method</span> <span class='kw'>=</span> <span class='st'>"quantile"</span>, <span class='no'>...</span>)
 
 <span class='co'># S3 method for stanfit</span>
-<span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>x</span>, <span class='no'>pars</span>, <span class='kw'>estimate.method</span> <span class='kw'>=</span> <span class='st'>"mean"</span>, <span class='kw'>conf.int</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>conf.level</span> <span class='kw'>=</span> <span class='fl'>0.95</span>, <span class='kw'>conf.method</span> <span class='kw'>=</span> <span class='st'>"quantile"</span>, <span class='kw'>droppars</span> <span class='kw'>=</span> <span class='st'>"lp__"</span>,
-  <span class='kw'>rhat</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>ess</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='no'>...</span>)</pre>
+<span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>x</span>, <span class='no'>pars</span>, <span class='kw'>estimate.method</span> <span class='kw'>=</span> <span class='st'>"mean"</span>,
+  <span class='kw'>conf.int</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>conf.level</span> <span class='kw'>=</span> <span class='fl'>0.95</span>, <span class='kw'>conf.method</span> <span class='kw'>=</span> <span class='st'>"quantile"</span>,
+  <span class='kw'>droppars</span> <span class='kw'>=</span> <span class='st'>"lp__"</span>, <span class='kw'>rhat</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>ess</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -224,12 +226,12 @@ as log-probability information)</p></td>
 
       <footer>
       <div class="tidyverse">
-  <p>broom is a part of the <strong>tidyverse</strong>, an ecosystem of packages designed with common APIs and a shared philosophy. Learn more at <a href="http://tidyverse.org">tidyverse.org</a>.</p>
+  <p>broom is a part of the <strong>tidyverse</strong>, an ecosystem of packages designed with common APIs and a shared philosophy. Learn more at <a href="https://tidyverse.org">tidyverse.org</a>.</p>
 </div>
 
 <div class="author">
-  <p>Developed by David Robinson.</p>
-  <p>Site built by <a href="http://pkgdown.r-lib.org">pkgdown</a>.</p>
+  <p>Developed by David Robinson, Alex Hayes.</p>
+  <p>Site built by <a href="https://pkgdown.r-lib.org">pkgdown</a>.</p>
 </div>
 
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-115082821-1"></script>

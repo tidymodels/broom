@@ -102,7 +102,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Tidiers for Tests of Differences between Survival Curves</h1>
-    <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/survival_tidiers.R'><code>R/survival_tidiers.R</code></a></small>
+    <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/survival-survdiff-tidiers.R'><code>R/survival-survdiff-tidiers.R</code></a></small>
     <div class="hidden name"><code>survdiff_tidiers.Rd</code></div>
     </div>
 
@@ -153,7 +153,7 @@ glance on "survdiff" objects returns a data frame with the following columns:
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='http://www.rdocumentation.org/packages/survival/topics/survdiff'>survdiff</a></code></p></div>
+    <div class='dont-index'><p><code><a href='http://www.rdocumentation.org/packages/survival/topics/survdiff'>survival::survdiff()</a></code></p></div>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
@@ -161,8 +161,10 @@ glance on "survdiff" objects returns a data frame with the following columns:
     <span class='no'>s</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/survival/topics/survdiff'>survdiff</a></span>( <span class='fu'><a href='http://www.rdocumentation.org/packages/survival/topics/Surv'>Surv</a></span>(<span class='no'>time</span>, <span class='no'>status</span>) ~ <span class='no'>pat.karno</span> + <span class='fu'><a href='http://www.rdocumentation.org/packages/survival/topics/strata'>strata</a></span>(<span class='no'>inst</span>), <span class='kw'>data</span><span class='kw'>=</span><span class='no'>lung</span>)
     <span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>s</span>)
     <span class='fu'><a href='glance.html'>glance</a></span>(<span class='no'>s</span>)
-}</div><div class='output co'>#&gt;   statistic df     p.value
-#&gt; 1  21.36845  7 0.003261437</div></pre>
+}</div><div class='output co'>#&gt; # A tibble: 1 x 3
+#&gt;   statistic    df p.value
+#&gt;       &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;
+#&gt; 1      21.4     7 0.00326</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

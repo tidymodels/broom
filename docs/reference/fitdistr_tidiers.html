@@ -102,7 +102,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Tidying methods for fitdistr objects from the MASS package</h1>
-    <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/fitdistr_tidiers.R'><code>R/fitdistr_tidiers.R</code></a></small>
+    <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/mass-fitdistr-tidiers.R'><code>R/mass-fitdistr-tidiers.R</code></a></small>
     <div class="hidden name"><code>fitdistr_tidiers.Rd</code></div>
     </div>
 
@@ -139,14 +139,14 @@ structure depends on the method chosen.</p>
 <p><code>tidy.fitdistr</code> returns one row for each parameter that
 was estimated, with columns:</p>
 <dt>term</dt><dd><p>The term that was estimated</p></dd>
-  <dt>estimate</dt><dd><p>Estimated value</p></dd>
-  <dt>std.error</dt><dd><p>Standard error of estimate</p></dd>
+<dt>estimate</dt><dd><p>Estimated value</p></dd>
+<dt>std.error</dt><dd><p>Standard error of estimate</p></dd>
 
 glance.fitdistr returns a one-row data.frame with the columns
-  <dt>n</dt><dd><p>Number of observations used in estimation</p></dd>
-  <dt>logLik</dt><dd><p>log-likelihood of estimated data</p></dd>
-  <dt>AIC</dt><dd><p>Akaike Information Criterion</p></dd>
-  <dt>BIC</dt><dd><p>Bayesian Information Criterion</p></dd>
+<dt>n</dt><dd><p>Number of observations used in estimation</p></dd>
+<dt>logLik</dt><dd><p>log-likelihood of estimated data</p></dd>
+<dt>AIC</dt><dd><p>Akaike Information Criterion</p></dd>
+<dt>BIC</dt><dd><p>Bayesian Information Criterion</p></dd>
 
     
 
@@ -156,13 +156,17 @@ glance.fitdistr returns a one-row data.frame with the columns
 <span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'>rnorm</span>(<span class='fl'>100</span>, <span class='fl'>5</span>, <span class='fl'>2</span>)
 
 <span class='fu'>library</span>(<span class='no'>MASS</span>)</div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Attachement du package : 'MASS'</span></div><div class='output co'>#&gt; <span class='message'>The following object is masked from 'package:dplyr':</span>
+#&gt; <span class='message'>Attaching package: 'MASS'</span></div><div class='output co'>#&gt; <span class='message'>The following object is masked from 'package:dplyr':</span>
 #&gt; <span class='message'></span>
-#&gt; <span class='message'>    select</span></div><div class='input'><span class='no'>fit</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/MASS/topics/fitdistr'>fitdistr</a></span>(<span class='no'>x</span>, <span class='no'>dnorm</span>, <span class='fu'>list</span>(<span class='kw'>mean</span> <span class='kw'>=</span> <span class='fl'>3</span>, <span class='kw'>sd</span> <span class='kw'>=</span> <span class='fl'>1</span>))</div><div class='output co'>#&gt; <span class='warning'>Warning: production de NaN</span></div><div class='output co'>#&gt; <span class='warning'>Warning: production de NaN</span></div><div class='output co'>#&gt; <span class='warning'>Warning: production de NaN</span></div><div class='output co'>#&gt; <span class='warning'>Warning: production de NaN</span></div><div class='output co'>#&gt; <span class='warning'>Warning: production de NaN</span></div><div class='output co'>#&gt; <span class='warning'>Warning: production de NaN</span></div><div class='output co'>#&gt; <span class='warning'>Warning: production de NaN</span></div><div class='output co'>#&gt; <span class='warning'>Warning: production de NaN</span></div><div class='output co'>#&gt; <span class='warning'>Warning: production de NaN</span></div><div class='input'>
-<span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>fit</span>)</div><div class='output co'>#&gt;   term estimate std.error
-#&gt; 1 mean 4.898140 0.2008914
-#&gt; 2   sd 2.008914 0.1420515</div><div class='input'><span class='fu'><a href='glance.html'>glance</a></span>(<span class='no'>fit</span>)</div><div class='output co'>#&gt;     n    logLik      AIC      BIC
-#&gt; 1 100 -211.6533 427.3065 432.5168</div></pre>
+#&gt; <span class='message'>    select</span></div><div class='input'><span class='no'>fit</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/MASS/topics/fitdistr'>fitdistr</a></span>(<span class='no'>x</span>, <span class='no'>dnorm</span>, <span class='fu'>list</span>(<span class='kw'>mean</span> <span class='kw'>=</span> <span class='fl'>3</span>, <span class='kw'>sd</span> <span class='kw'>=</span> <span class='fl'>1</span>))</div><div class='output co'>#&gt; <span class='warning'>Warning: NaNs produced</span></div><div class='output co'>#&gt; <span class='warning'>Warning: NaNs produced</span></div><div class='output co'>#&gt; <span class='warning'>Warning: NaNs produced</span></div><div class='output co'>#&gt; <span class='warning'>Warning: NaNs produced</span></div><div class='output co'>#&gt; <span class='warning'>Warning: NaNs produced</span></div><div class='output co'>#&gt; <span class='warning'>Warning: NaNs produced</span></div><div class='output co'>#&gt; <span class='warning'>Warning: NaNs produced</span></div><div class='output co'>#&gt; <span class='warning'>Warning: NaNs produced</span></div><div class='output co'>#&gt; <span class='warning'>Warning: NaNs produced</span></div><div class='input'>
+<span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>fit</span>)</div><div class='output co'>#&gt; # A tibble: 2 x 3
+#&gt;   term  estimate std.error
+#&gt;   &lt;chr&gt;    &lt;dbl&gt;     &lt;dbl&gt;
+#&gt; 1 mean      4.90     0.201
+#&gt; 2 sd        2.01     0.142</div><div class='input'><span class='fu'><a href='glance.html'>glance</a></span>(<span class='no'>fit</span>)</div><div class='output co'>#&gt; # A tibble: 1 x 4
+#&gt;       n logLik   AIC   BIC
+#&gt;   &lt;int&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+#&gt; 1   100  -212.  427.  433.</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

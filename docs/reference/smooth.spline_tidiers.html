@@ -102,7 +102,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>tidying methods for smooth.spline objects</h1>
-    <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/smooth.spline_tidiers.R'><code>R/smooth.spline_tidiers.R</code></a></small>
+    <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/stats-smooth.spline-tidiers.R'><code>R/stats-smooth.spline-tidiers.R</code></a></small>
     <div class="hidden name"><code>smooth.spline_tidiers.Rd</code></div>
     </div>
 
@@ -140,15 +140,15 @@ fit and residuals</p>
 
     <p><code>augment</code> returns the original data with extra columns:</p>
 <dt>.fitted</dt><dd><p>Fitted values of model</p></dd>
-  <dt>.resid</dt><dd><p>Residuals</p></dd>
+<dt>.resid</dt><dd><p>Residuals</p></dd>
 
 glance returns one row with columns
-  <dt>spar</dt><dd><p>smoothing parameter</p></dd>
-  <dt>lambda</dt><dd><p>choice of lambda corresponding to <code>spar</code></p></dd>
-  <dt>df</dt><dd><p>equivalent degrees of freedom</p></dd>
-  <dt>crit</dt><dd><p>minimized criterion</p></dd>
-  <dt>pen.crit</dt><dd><p>penalized criterion</p></dd>
-  <dt>cv.crit</dt><dd><p>cross-validation score</p></dd>
+<dt>spar</dt><dd><p>smoothing parameter</p></dd>
+<dt>lambda</dt><dd><p>choice of lambda corresponding to <code>spar</code></p></dd>
+<dt>df</dt><dd><p>equivalent degrees of freedom</p></dd>
+<dt>crit</dt><dd><p>minimized criterion</p></dd>
+<dt>pen.crit</dt><dd><p>penalized criterion</p></dd>
+<dt>cv.crit</dt><dd><p>cross-validation score</p></dd>
 
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
@@ -159,19 +159,24 @@ glance returns one row with columns
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
 <span class='no'>spl</span> <span class='kw'>&lt;-</span> <span class='fu'>smooth.spline</span>(<span class='no'>mtcars</span>$<span class='no'>wt</span>, <span class='no'>mtcars</span>$<span class='no'>mpg</span>, <span class='kw'>df</span> <span class='kw'>=</span> <span class='fl'>4</span>)
-<span class='fu'>head</span>(<span class='fu'><a href='augment.html'>augment</a></span>(<span class='no'>spl</span>, <span class='no'>mtcars</span>))</div><div class='output co'>#&gt;    mpg cyl disp  hp drat    wt  qsec vs am gear carb  .fitted     .resid
-#&gt; 1 21.0   6  160 110 3.90 2.620 16.46  0  1    4    4 22.86723 -1.8672313
-#&gt; 2 21.0   6  160 110 3.90 2.875 17.02  0  1    4    4 21.11724 -0.1172371
-#&gt; 3 22.8   4  108  93 3.85 2.320 18.61  1  1    4    1 25.27546 -2.4754602
-#&gt; 4 21.4   6  258 110 3.08 3.215 19.44  1  0    3    1 19.06744  2.3325556
-#&gt; 5 18.7   8  360 175 3.15 3.440 17.02  0  0    3    2 17.77217  0.9278317
-#&gt; 6 18.1   6  225 105 2.76 3.460 20.22  1  0    3    1 17.66289  0.4371065</div><div class='input'><span class='fu'>head</span>(<span class='fu'><a href='augment.html'>augment</a></span>(<span class='no'>spl</span>))  <span class='co'># calls original columns x and y</span></div><div class='output co'>#&gt;       x    y w  .fitted     .resid
-#&gt; 1 2.620 21.0 1 22.86723 -1.8672313
-#&gt; 2 2.875 21.0 1 21.11724 -0.1172371
-#&gt; 3 2.320 22.8 1 25.27546 -2.4754602
-#&gt; 4 3.215 21.4 1 19.06744  2.3325556
-#&gt; 5 3.440 18.7 1 17.77217  0.9278317
-#&gt; 6 3.460 18.1 1 17.66289  0.4371065</div><div class='input'>
+<span class='fu'>head</span>(<span class='fu'><a href='augment.html'>augment</a></span>(<span class='no'>spl</span>, <span class='no'>mtcars</span>))</div><div class='output co'>#&gt; # A tibble: 6 x 13
+#&gt;     mpg   cyl  disp    hp  drat    wt  qsec    vs    am  gear  carb .fitted
+#&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;
+#&gt; 1  21       6   160   110  3.9   2.62  16.5     0     1     4     4    22.9
+#&gt; 2  21       6   160   110  3.9   2.88  17.0     0     1     4     4    21.1
+#&gt; 3  22.8     4   108    93  3.85  2.32  18.6     1     1     4     1    25.3
+#&gt; 4  21.4     6   258   110  3.08  3.22  19.4     1     0     3     1    19.1
+#&gt; 5  18.7     8   360   175  3.15  3.44  17.0     0     0     3     2    17.8
+#&gt; 6  18.1     6   225   105  2.76  3.46  20.2     1     0     3     1    17.7
+#&gt; # ... with 1 more variable: .resid &lt;dbl&gt;</div><div class='input'><span class='fu'>head</span>(<span class='fu'><a href='augment.html'>augment</a></span>(<span class='no'>spl</span>))  <span class='co'># calls original columns x and y</span></div><div class='output co'>#&gt; # A tibble: 6 x 5
+#&gt;       x     y     w .fitted .resid
+#&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;
+#&gt; 1  2.62  21       1    22.9 -1.87 
+#&gt; 2  2.88  21       1    21.1 -0.117
+#&gt; 3  2.32  22.8     1    25.3 -2.48 
+#&gt; 4  3.22  21.4     1    19.1  2.33 
+#&gt; 5  3.44  18.7     1    17.8  0.928
+#&gt; 6  3.46  18.1     1    17.7  0.437</div><div class='input'>
 <span class='fu'>library</span>(<span class='no'>ggplot2</span>)
 <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/ggplot'>ggplot</a></span>(<span class='fu'><a href='augment.html'>augment</a></span>(<span class='no'>spl</span>, <span class='no'>mtcars</span>), <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/aes'>aes</a></span>(<span class='no'>wt</span>, <span class='no'>mpg</span>)) +
     <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/geom_point'>geom_point</a></span>() + <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/geom_path'>geom_line</a></span>(<span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/aes'>aes</a></span>(<span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>.fitted</span>))</div><div class='img'><img src='smooth.spline_tidiers-1.png' alt='' width='700' height='433' /></div><div class='input'>

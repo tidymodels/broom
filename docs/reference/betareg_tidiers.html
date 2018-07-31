@@ -102,7 +102,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Tidy betareg objects from the betareg package</h1>
-    <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/betareg_tidiers.R'><code>R/betareg_tidiers.R</code></a></small>
+    <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/betareg-tidiers.R'><code>R/betareg-tidiers.R</code></a></small>
     <div class="hidden name"><code>betareg_tidiers.Rd</code></div>
     </div>
 
@@ -117,7 +117,7 @@ and residuals, or find their model parameters.</p>
 <span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>x</span>, <span class='kw'>conf.int</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>conf.level</span> <span class='kw'>=</span> <span class='fl'>0.95</span>, <span class='no'>...</span>)
 
 <span class='co'># S3 method for betareg</span>
-<span class='fu'><a href='augment.html'>augment</a></span>(<span class='no'>x</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='kw pkg'>stats</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/stats/topics/model.frame'>model.frame</a></span>(<span class='no'>x</span>), <span class='no'>newdata</span>,
+<span class='fu'><a href='augment.html'>augment</a></span>(<span class='no'>x</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='kw pkg'>stats</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/stats/topics/model.frame'>model.frame</a></span>(<span class='no'>x</span>), <span class='kw'>newdata</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='no'>type.predict</span>, <span class='no'>type.residuals</span>, <span class='no'>...</span>)
 
 <span class='co'># S3 method for betareg</span>
@@ -169,20 +169,20 @@ structure depends on the method chosen.</p>
 the mean, along with at least one term used to predict phi (the inverse of
 the variance). It starts with the column <code>component</code> containing either
 "mean" or "precision" to describe which is being modeled, then has the same
-columns as tidied linear models or glm's (see <code><a href='lm_tidiers.html'>lm_tidiers</a></code>).</p>
+columns as tidied linear models or glm's (see <code><a href='lm_tidiers.html'>lm_tidiers()</a></code>).</p>
 <p>augment returns the original data, along with new columns describing
 each observation:</p>
 <dt>.fitted</dt><dd><p>Fitted values of model</p></dd>
-  <dt>.resid</dt><dd><p>Residuals</p></dd>
-  <dt>.cooksd</dt><dd><p>Cooks distance, <code>cooks.distance</code></p></dd>
+<dt>.resid</dt><dd><p>Residuals</p></dd>
+<dt>.cooksd</dt><dd><p>Cooks distance, <code>cooks.distance()</code></p></dd>
 
 glance returns a one-row data.frame with the columns
-  <dt>pseudo.r.squared</dt><dd><p>the deviance of the null model</p></dd>
-  <dt>logLik</dt><dd><p>the data's log-likelihood under the model</p></dd>
-  <dt>AIC</dt><dd><p>the Akaike Information Criterion</p></dd>
-  <dt>BIC</dt><dd><p>the Bayesian Information Criterion</p></dd>
-  <dt>df.residual</dt><dd><p>residual degrees of freedom</p></dd>
-  <dt>df.null</dt><dd><p>degrees of freedom under the null</p></dd>
+<dt>pseudo.r.squared</dt><dd><p>the deviance of the null model</p></dd>
+<dt>logLik</dt><dd><p>the data's log-likelihood under the model</p></dd>
+<dt>AIC</dt><dd><p>the Akaike Information Criterion</p></dd>
+<dt>BIC</dt><dd><p>the Bayesian Information Criterion</p></dd>
+<dt>df.residual</dt><dd><p>residual degrees of freedom</p></dd>
+<dt>df.null</dt><dd><p>degrees of freedom under the null</p></dd>
 
     
 
@@ -201,8 +201,8 @@ glance returns a one-row data.frame with the columns
   <span class='fu'>head</span>(<span class='fu'><a href='augment.html'>augment</a></span>(<span class='no'>mod</span>))
 
   <span class='fu'><a href='glance.html'>glance</a></span>(<span class='no'>mod</span>)
-}</div><div class='output co'>#&gt;   pseudo.r.squared   logLik       AIC       BIC df.residual df.null
-#&gt; 1        0.9617312 84.79756 -145.5951 -128.0063          20      30</div><div class='input'>
+}</div><div class='output co'>#&gt; <span class='message'>Error: package or namespace load failed for 'betareg' in loadNamespace(i, c(lib.loc, .libPaths()), versionCheck = vI[[i]]):</span>
+#&gt; <span class='message'> there is no package called 'zoo'</span></div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

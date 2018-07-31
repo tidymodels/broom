@@ -46,7 +46,7 @@
 
       <div class="navbar-brand-container">
         <a class="navbar-brand" href="../index.html">broom</a>
-        <small class="tidyverse">part of the <a href="http://tidyverse.org">tidyverse</a></small>
+        <small class="tidyverse">part of the <a href="https://tidyverse.org">tidyverse</a></small>
       </div>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
@@ -102,7 +102,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Tidy estimated marginal means (least-squares means) objects from the emmeans and lsmeans packages</h1>
-    <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/emmeans_tidiers.R'><code>R/emmeans_tidiers.R</code></a></small>
+    <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/emmeans-tidiers.R'><code>R/emmeans-tidiers.R</code></a></small>
     <div class="hidden name"><code>emmeans_tidiers.Rd</code></div>
     </div>
 
@@ -140,8 +140,9 @@ purposes within the <code>lsmeans</code> package but have similar output).</p>
     </tr>
     <tr>
       <th>...</th>
-      <td><p>Extra arguments, passed on to
-<a href='http://www.rdocumentation.org/packages/emmeans/topics/summary.emmGrid'>summary.emmGrid</a> or <a href='http://www.rdocumentation.org/packages/lsmeans/topics/summary'>summary.ref.grid</a></p></td>
+      <td><p>Additional arguments passed to <code><a href='http://www.rdocumentation.org/packages/emmeans/topics/summary.emmGrid'>emmeans::summary.emmGrid()</a></code> or
+<code><a href='http://www.rdocumentation.org/packages/lsmeans/topics/summary'>lsmeans::summary.ref.grid()</a></code>. <strong>Cautionary note</strong>: mispecified arguments
+may be silently ignored!</p></td>
     </tr>
     </table>
     
@@ -151,25 +152,25 @@ purposes within the <code>lsmeans</code> package but have similar output).</p>
 mean, and one column for each combination of factors, along with
 the following variables:</p>
 <dt>estimate</dt><dd><p>Estimated least-squares mean</p></dd>
-  <dt>std.error</dt><dd><p>Standard error of estimate</p></dd>
-  <dt>df</dt><dd><p>Degrees of freedom</p></dd>
-  <dt>conf.low</dt><dd><p>Lower bound of confidence interval</p></dd>
-  <dt>conf.high</dt><dd><p>Upper bound of confidence interval</p></dd>
+<dt>std.error</dt><dd><p>Standard error of estimate</p></dd>
+<dt>df</dt><dd><p>Degrees of freedom</p></dd>
+<dt>conf.low</dt><dd><p>Lower bound of confidence interval</p></dd>
+<dt>conf.high</dt><dd><p>Upper bound of confidence interval</p></dd>
 
 When the input is a contrast, each row will contain one estimated
 contrast, along with some of the following columns:
-  <dt>level1</dt><dd><p>One level of the factor being contrasted</p></dd>
-  <dt>level2</dt><dd><p>Second level</p></dd>
-  <dt>contrast</dt><dd><p>In cases where the contrast is not made up of
-  two levels, describes each</p></dd>
-  <dt>statistic</dt><dd><p>T-ratio statistic</p></dd>
-  <dt>p.value</dt><dd><p>P-value</p></dd>
+<dt>level1</dt><dd><p>One level of the factor being contrasted</p></dd>
+<dt>level2</dt><dd><p>Second level</p></dd>
+<dt>contrast</dt><dd><p>In cases where the contrast is not made up of
+two levels, describes each</p></dd>
+<dt>statistic</dt><dd><p>T-ratio statistic</p></dd>
+<dt>p.value</dt><dd><p>P-value</p></dd>
 
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>There are a large number of arguments that can be
-passed on to <a href='http://www.rdocumentation.org/packages/emmeans/topics/summary.emmGrid'>summary.emmGrid</a> or <a href='http://www.rdocumentation.org/packages/lsmeans/topics/summary'>summary.ref.grid</a>.
+passed on to <code><a href='http://www.rdocumentation.org/packages/emmeans/topics/summary.emmGrid'>emmeans::summary.emmGrid()</a></code> or <code><a href='http://www.rdocumentation.org/packages/lsmeans/topics/summary'>lsmeans::summary.ref.grid()</a></code>.
 By broom convention, we use <code>conf.level</code> to pass the <code>level</code> argument.</p>
     
 
@@ -182,7 +183,7 @@ By broom convention, we use <code>conf.level</code> to pass the <code>level</cod
   <span class='co'># reference grid; see vignette("basics", package = "emmeans")</span>
   <span class='no'>oranges_rg1</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/emmeans/topics/ref_grid'>ref_grid</a></span>(<span class='no'>oranges_lm1</span>)
   <span class='no'>td</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>oranges_rg1</span>)
-  <span class='fu'>head</span>(<span class='no'>td</span>)
+  <span class='no'>td</span>
 
   <span class='co'># marginal averages</span>
   <span class='no'>marginal</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/emmeans/topics/emmeans'>emmeans</a></span>(<span class='no'>oranges_rg1</span>, <span class='st'>"day"</span>)
@@ -228,12 +229,12 @@ By broom convention, we use <code>conf.level</code> to pass the <code>level</cod
 
       <footer>
       <div class="tidyverse">
-  <p>broom is a part of the <strong>tidyverse</strong>, an ecosystem of packages designed with common APIs and a shared philosophy. Learn more at <a href="http://tidyverse.org">tidyverse.org</a>.</p>
+  <p>broom is a part of the <strong>tidyverse</strong>, an ecosystem of packages designed with common APIs and a shared philosophy. Learn more at <a href="https://tidyverse.org">tidyverse.org</a>.</p>
 </div>
 
 <div class="author">
-  <p>Developed by David Robinson.</p>
-  <p>Site built by <a href="http://pkgdown.r-lib.org">pkgdown</a>.</p>
+  <p>Developed by David Robinson, Alex Hayes.</p>
+  <p>Site built by <a href="https://pkgdown.r-lib.org">pkgdown</a>.</p>
 </div>
 
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-115082821-1"></script>

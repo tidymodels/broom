@@ -102,14 +102,14 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Tidying methods for kernel based hazard rate estimates</h1>
-    <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/muhaz_tidiers.R'><code>R/muhaz_tidiers.R</code></a></small>
+    <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/muhaz-tidiers.R'><code>R/muhaz-tidiers.R</code></a></small>
     <div class="hidden name"><code>muhaz_tidiers.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
     <p>These methods tidy the output of <code>muhaz</code> objects as returned by the
-<code><a href='http://www.rdocumentation.org/packages/muhaz/topics/muhaz'>muhaz</a></code> function, which provides kernel based
+<code><a href='http://www.rdocumentation.org/packages/muhaz/topics/muhaz'>muhaz::muhaz()</a></code> function, which provides kernel based
 non-parametric hazard rate estimators.</p>
     
     </div>
@@ -141,10 +141,10 @@ structure depends on the method chosen.</p>
 <code>time</code> at which the hazard rate was estimated and <code>estimate</code>.</p>
 <p><code>glance.muhaz</code> returns a one-row data.frame with the columns</p>
 <dt>nobs</dt><dd><p>Number of observations used for estimation</p></dd>
-  <dt>min.time</dt><dd><p>The minimum observed event or censoring time</p></dd>
-  <dt>max.time</dt><dd><p>The maximum observed event or censoring time</p></dd>
-  <dt>min.harzard</dt><dd><p>Minimal estimated hazard</p></dd>
-  <dt>max.hazard</dt><dd><p>Maximal estimated hazard</p></dd>
+<dt>min.time</dt><dd><p>The minimum observed event or censoring time</p></dd>
+<dt>max.time</dt><dd><p>The maximum observed event or censoring time</p></dd>
+<dt>min.harzard</dt><dd><p>Minimal estimated hazard</p></dd>
+<dt>max.hazard</dt><dd><p>Maximal estimated hazard</p></dd>
 
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>

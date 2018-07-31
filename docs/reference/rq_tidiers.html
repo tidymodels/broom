@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Tidying methods for quantile regression models — rq_tidiers • broom</title>
+<title>Tidying methods for quantile regression models — tidy.nlrq • broom</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -102,7 +102,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Tidying methods for quantile regression models</h1>
-    <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/rq_tidiers.R'><code>R/rq_tidiers.R</code></a></small>
+    <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/quantreg-nlrq-tidiers.R'><code>R/quantreg-nlrq-tidiers.R</code></a>, <a href='http://github.com/tidyverse/broom/blob/master/R/quantreg-rq-tidiers.R'><code>R/quantreg-rq-tidiers.R</code></a>, <a href='http://github.com/tidyverse/broom/blob/master/R/quantreg-rqs-tidiers.R'><code>R/quantreg-rqs-tidiers.R</code></a></small>
     <div class="hidden name"><code>rq_tidiers.Rd</code></div>
     </div>
 
@@ -115,31 +115,31 @@ the model's statistics.</p>
     
     </div>
 
-    <pre class="usage"><span class='co'># S3 method for rq</span>
-<span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>x</span>, <span class='kw'>se.type</span> <span class='kw'>=</span> <span class='st'>"rank"</span>, <span class='kw'>conf.int</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>conf.level</span> <span class='kw'>=</span> <span class='fl'>0.95</span>,
+    <pre class="usage"><span class='co'># S3 method for nlrq</span>
+<span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>x</span>, <span class='kw'>conf.int</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>conf.level</span> <span class='kw'>=</span> <span class='fl'>0.95</span>, <span class='no'>...</span>)
+
+<span class='co'># S3 method for nlrq</span>
+<span class='fu'><a href='glance.html'>glance</a></span>(<span class='no'>x</span>, <span class='no'>...</span>)
+
+<span class='co'># S3 method for nlrq</span>
+<span class='fu'><a href='augment.html'>augment</a></span>(<span class='no'>x</span>, <span class='no'>...</span>)
+
+<span class='co'># S3 method for rq</span>
+<span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>x</span>, <span class='kw'>se.type</span> <span class='kw'>=</span> <span class='st'>"rank"</span>, <span class='kw'>conf.int</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>conf.level</span> <span class='kw'>=</span> <span class='fl'>0.9</span>,
+  <span class='kw'>alpha</span> <span class='kw'>=</span> <span class='fl'>1</span> - <span class='no'>conf.level</span>, <span class='no'>...</span>)
+
+<span class='co'># S3 method for rq</span>
+<span class='fu'><a href='glance.html'>glance</a></span>(<span class='no'>x</span>, <span class='no'>...</span>)
+
+<span class='co'># S3 method for rq</span>
+<span class='fu'><a href='augment.html'>augment</a></span>(<span class='no'>x</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='fu'>model.frame</span>(<span class='no'>x</span>), <span class='kw'>newdata</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>...</span>)
+
+<span class='co'># S3 method for rqs</span>
+<span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>x</span>, <span class='kw'>se.type</span> <span class='kw'>=</span> <span class='st'>"rank"</span>, <span class='kw'>conf.int</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>conf.level</span> <span class='kw'>=</span> <span class='fl'>0.9</span>,
   <span class='kw'>alpha</span> <span class='kw'>=</span> <span class='fl'>1</span> - <span class='no'>conf.level</span>, <span class='no'>...</span>)
 
 <span class='co'># S3 method for rqs</span>
-<span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>x</span>, <span class='kw'>se.type</span> <span class='kw'>=</span> <span class='st'>"rank"</span>, <span class='kw'>conf.int</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>conf.level</span> <span class='kw'>=</span> <span class='fl'>0.95</span>, <span class='kw'>alpha</span> <span class='kw'>=</span> <span class='fl'>1</span> - <span class='no'>conf.level</span>, <span class='no'>...</span>)
-
-<span class='co'># S3 method for nlrq</span>
-<span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>x</span>, <span class='kw'>conf.int</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>conf.level</span> <span class='kw'>=</span> <span class='fl'>0.95</span>, <span class='no'>...</span>)
-
-<span class='co'># S3 method for rq</span>
-<span class='fu'><a href='glance.html'>glance</a></span>(<span class='no'>x</span>, <span class='no'>...</span>)
-
-<span class='co'># S3 method for nlrq</span>
-<span class='fu'><a href='glance.html'>glance</a></span>(<span class='no'>x</span>, <span class='no'>...</span>)
-
-<span class='co'># S3 method for rq</span>
-<span class='fu'><a href='augment.html'>augment</a></span>(<span class='no'>x</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='fu'>model.frame</span>(<span class='no'>x</span>), <span class='no'>newdata</span>, <span class='no'>...</span>)
-
-<span class='co'># S3 method for rqs</span>
-<span class='fu'><a href='augment.html'>augment</a></span>(<span class='no'>x</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='fu'>model.frame</span>(<span class='no'>x</span>), <span class='no'>newdata</span>, <span class='no'>...</span>)
-
-<span class='co'># S3 method for nlrq</span>
-<span class='fu'><a href='augment.html'>augment</a></span>(<span class='no'>x</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>newdata</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>...</span>)</pre>
+<span class='fu'><a href='augment.html'>augment</a></span>(<span class='no'>x</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='fu'>model.frame</span>(<span class='no'>x</span>), <span class='no'>newdata</span>, <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -147,10 +147,6 @@ the model's statistics.</p>
     <tr>
       <th>x</th>
       <td><p>model object returned by <code>rq</code> or <code>nlrq</code></p></td>
-    </tr>
-    <tr>
-      <th>se.type</th>
-      <td><p>Type of standard errors to calculate; see <code>summary.rq</code></p></td>
     </tr>
     <tr>
       <th>conf.int</th>
@@ -162,13 +158,17 @@ if <code>se.type = "rank"</code></p></td>
       <td><p>confidence level for intervals</p></td>
     </tr>
     <tr>
+      <th>&#8230;</th>
+      <td><p>other arguments passed on to <code>summary.rq</code></p></td>
+    </tr>
+    <tr>
+      <th>se.type</th>
+      <td><p>Type of standard errors to calculate; see <code>summary.rq</code></p></td>
+    </tr>
+    <tr>
       <th>alpha</th>
       <td><p>confidence level when <code>se.type = "rank"</code>; defaults to the same
 as <code>conf.level</code> although the specification is inverted</p></td>
-    </tr>
-    <tr>
-      <th>&#8230;</th>
-      <td><p>other arguments passed on to <code>summary.rq</code></p></td>
     </tr>
     <tr>
       <th>data</th>
@@ -182,73 +182,83 @@ as <code>conf.level</code> although the specification is inverted</p></td>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>All tidying methods return a data.frame without rownames, whose
-structure depends on the method chosen.</p>
-<p><code>tidy.rq</code> returns a data frame with one row for each coefficient.
-The columns depend upon the confidence interval method selected.</p>
-<p><code>tidy.rqs</code> returns a data frame with one row for each coefficient at
-each quantile that was estimated. The columns depend upon the confidence interval
-method selected.</p>
-<p><code>tidy.nlrq</code> returns one row for each coefficient in the model,
+    <p><code>tidy.nlrq</code> returns one row for each coefficient in the model,
 with five columns:</p>
 <dt>term</dt><dd><p>The term in the nonlinear model being estimated and tested</p></dd>
-  <dt>estimate</dt><dd><p>The estimated coefficient</p></dd>
-  <dt>std.error</dt><dd><p>The standard error from the linear model</p></dd>
-  <dt>statistic</dt><dd><p>t-statistic</p></dd>
-  <dt>p.value</dt><dd><p>two-sided p-value</p></dd>
+<dt>estimate</dt><dd><p>The estimated coefficient</p></dd>
+<dt>std.error</dt><dd><p>The standard error from the linear model</p></dd>
+<dt>statistic</dt><dd><p>t-statistic</p></dd>
+<dt>p.value</dt><dd><p>two-sided p-value</p></dd>
 
 glance.rq returns one row for each quantile (tau)
 with the columns:
- <dt>tau</dt><dd><p>quantile estimated</p></dd>
- <dt>logLik</dt><dd><p>the data's log-likelihood under the model</p></dd>
- <dt>AIC</dt><dd><p>the Akaike Information Criterion</p></dd>
- <dt>BIC</dt><dd><p>the Bayesian Information Criterion</p></dd>
- <dt>df.residual</dt><dd><p>residual degrees of freedom</p></dd>
+<dt>tau</dt><dd><p>quantile estimated</p></dd>
+<dt>logLik</dt><dd><p>the data's log-likelihood under the model</p></dd>
+<dt>AIC</dt><dd><p>the Akaike Information Criterion</p></dd>
+<dt>BIC</dt><dd><p>the Bayesian Information Criterion</p></dd>
+<dt>df.residual</dt><dd><p>residual degrees of freedom</p></dd>
+
+augment.rqs returns a row for each original observation
+with the following columns added:
+<dt>.resid</dt><dd><p>Residuals</p></dd>
+<dt>.fitted</dt><dd><p>Fitted quantiles of the model</p></dd>
+
+All tidying methods return a data.frame without rownames, whose
+structure depends on the method chosen.
+
+tidy.rq returns a tibble with one row for each coefficient.
+The columns depend upon the confidence interval method selected.
 
 glance.rq returns one row for each quantile (tau)
 with the columns:
- <dt>tau</dt><dd><p>quantile estimated</p></dd>
- <dt>logLik</dt><dd><p>the data's log-likelihood under the model</p></dd>
- <dt>AIC</dt><dd><p>the Akaike Information Criterion</p></dd>
- <dt>BIC</dt><dd><p>the Bayesian Information Criterion</p></dd>
- <dt>df.residual</dt><dd><p>residual degrees of freedom</p></dd>
+<dt>tau</dt><dd><p>quantile estimated</p></dd>
+<dt>logLik</dt><dd><p>the data's log-likelihood under the model</p></dd>
+<dt>AIC</dt><dd><p>the Akaike Information Criterion</p></dd>
+<dt>BIC</dt><dd><p>the Bayesian Information Criterion</p></dd>
+<dt>df.residual</dt><dd><p>residual degrees of freedom</p></dd>
 
 augment.rq returns a row for each original observation
 with the following columns added:
- <dt>.resid</dt><dd><p>Residuals</p></dd>
- <dt>.fitted</dt><dd><p>Fitted quantiles of the model</p></dd>
- <dt>.tau</dt><dd><p>Quantile estimated</p></dd>
+<dt>.resid</dt><dd><p>Residuals</p></dd>
+<dt>.fitted</dt><dd><p>Fitted quantiles of the model</p></dd>
+<dt>.tau</dt><dd><p>Quantile estimated</p></dd>
 
- Depending on the arguments passed on to predict.rq via &#8230;
- a confidence interval is also calculated on the fitted values resulting in
- columns:
-     <dt>.conf.low</dt><dd><p>Lower confidence interval value</p></dd>
-     <dt>.conf.high</dt><dd><p>Upper confidence interval value</p></dd>
+Depending on the arguments passed on to predict.rq via &#8230;
+a confidence interval is also calculated on the fitted values resulting in
+columns:
+<dt>.conf.low</dt><dd><p>Lower confidence interval value</p></dd>
+<dt>.conf.high</dt><dd><p>Upper confidence interval value</p></dd>
 
- See predict.rq for details on additional arguments to specify
- confidence intervals. predict.rq does not provide confidence intervals
- when newdata is provided.
+See predict.rq for details on additional arguments to specify
+confidence intervals. predict.rq does not provide confidence intervals
+when newdata is provided.
+
+tidy.rqs returns a data frame with one row for each coefficient at
+each quantile that was estimated. The columns depend upon the confidence interval
+method selected.
 
 augment.rqs returns a row for each original observation
 and each estimated quantile (tau) with the following columns added:
- <dt>.resid</dt><dd><p>Residuals</p></dd>
- <dt>.fitted</dt><dd><p>Fitted quantiles of the model</p></dd>
- <dt>.tau</dt><dd><p>Quantile estimated</p></dd>
+<dt>.resid</dt><dd><p>Residuals</p></dd>
+<dt>.fitted</dt><dd><p>Fitted quantiles of the model</p></dd>
+<dt>.tau</dt><dd><p>Quantile estimated</p></dd>
 
- predict.rqs does not return confidence interval estimates.
-
-augment.rqs returns a row for each original observation
-with the following columns added:
- <dt>.resid</dt><dd><p>Residuals</p></dd>
- <dt>.fitted</dt><dd><p>Fitted quantiles of the model</p></dd>
+predict.rqs does not return confidence interval estimates.
 
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>If <code>se.type != "rank"</code> and <code>conf.int = TRUE</code> confidence
-intervals are calculated by <code>summary.rq</code>. Otherwise they are standard t
-based intervals.</p>
-<p>This simply calls <code>augment.nls</code> on the "nlrq" object.</p>
+    <p>This simply calls <code>augment.nls</code> on the "nlrq" object.</p>
+<p>If <code>se.type = "rank"</code> confidence intervals are calculated by
+<code>summary.rq</code>. When only a single predictor is included in the model,
+no confidence intervals are calculated and the confidence limits are set to NA.
+If <code>se.type != 'rank'</code> and <code>conf.int = TRUE</code>, confidence intervals
+are standard t based intervals.</p>
+<p>Only models with a single <code>tau</code> value may be passed.
+For multiple values, please use a <code><a href='http://www.rdocumentation.org/packages/purrr/topics/map'>purrr::map()</a></code> workflow instead, e.g.</p><pre>taus <!-- %&gt;% -->
+  map(function(tau_val) rq(y ~ x, tau = tau_val)) <!-- %&gt;% -->
+  map_dfr(glance)
+</pre>
     
 
   </div>

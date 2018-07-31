@@ -102,7 +102,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Tidying methods for gamlss objects</h1>
-    <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/gamlss_tidiers.R'><code>R/gamlss_tidiers.R</code></a></small>
+    <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/gamlss-tidiers.R'><code>R/gamlss-tidiers.R</code></a></small>
     <div class="hidden name"><code>gamlss_tidiers.Rd</code></div>
     </div>
 
@@ -138,18 +138,18 @@
 structure depends on the method chosen.</p>
 <p>A data.frame with one row for each coefficient, containing columns</p>
 <dt>parameter</dt><dd><p>Type of coefficient being estimated: <code>mu</code>, <code>sigma</code>,
-  <code>nu</code>, or <code>tau</code></p></dd>
-  <dt>term</dt><dd><p>The term in the model being estimated and tested</p></dd>
-  <dt>estimate</dt><dd><p>The estimated coefficient</p></dd>
-  <dt>std.error</dt><dd><p>The standard error from the linear model</p></dd>
-  <dt>statistic</dt><dd><p>t-statistic</p></dd>
-  <dt>p.value</dt><dd><p>two-sided p-value</p></dd>
+<code>nu</code>, or <code>tau</code></p></dd>
+<dt>term</dt><dd><p>The term in the model being estimated and tested</p></dd>
+<dt>estimate</dt><dd><p>The estimated coefficient</p></dd>
+<dt>std.error</dt><dd><p>The standard error from the linear model</p></dd>
+<dt>statistic</dt><dd><p>t-statistic</p></dd>
+<dt>p.value</dt><dd><p>two-sided p-value</p></dd>
 
 if (requireNamespace("gamlss", quietly = TRUE)) 
-    data(abdom)
-    mod&lt;-gamlss(y~pb(x),sigma.fo=~pb(x),family=BCT, data=abdom, method=mixed(1,20))
+data(abdom)
+mod&lt;-gamlss(y~pb(x),sigma.fo=~pb(x),family=BCT, data=abdom, method=mixed(1,20))<pre>tidy(mod)
+</pre>
 
-    tidy(mod)
 
 
     

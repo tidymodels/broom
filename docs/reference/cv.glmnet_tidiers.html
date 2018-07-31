@@ -102,7 +102,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Tidiers for glmnet cross-validation objects</h1>
-    <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/glmnet_tidiers.R'><code>R/glmnet_tidiers.R</code></a></small>
+    <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/glmnet-tidiers.R'><code>R/glmnet-tidiers.R</code></a></small>
     <div class="hidden name"><code>cv.glmnet_tidiers.Rd</code></div>
     </div>
 
@@ -140,16 +140,16 @@ structure depends on the method chosen.</p>
 <p><code>tidy</code> produces a data.frame with one row per choice of lambda,
 with columns</p>
 <dt>lambda</dt><dd><p>penalty parameter lambda</p></dd>
-  <dt>estimate</dt><dd><p>estimate (median) of mean-squared error or other
-  criterion</p></dd>
-  <dt>std.error</dt><dd><p>standard error of criterion</p></dd>
-  <dt>conf.high</dt><dd><p>high end of confidence interval on criterion</p></dd>
-  <dt>conf.low</dt><dd><p>low end of confidence interval on criterion</p></dd>
-  <dt>nzero</dt><dd><p>number of parameters that are zero at this choice of lambda</p></dd>
+<dt>estimate</dt><dd><p>estimate (median) of mean-squared error or other
+criterion</p></dd>
+<dt>std.error</dt><dd><p>standard error of criterion</p></dd>
+<dt>conf.high</dt><dd><p>high end of confidence interval on criterion</p></dd>
+<dt>conf.low</dt><dd><p>low end of confidence interval on criterion</p></dd>
+<dt>nzero</dt><dd><p>number of parameters that are zero at this choice of lambda</p></dd>
 
 glance returns a one-row data.frame with the values
-  <dt>nulldev</dt><dd><p>null deviance</p></dd>
-  <dt>npasses</dt><dd><p>total passes over the data across all lambda values</p></dd>
+<dt>nulldev</dt><dd><p>null deviance</p></dd>
+<dt>npasses</dt><dd><p>total passes over the data across all lambda values</p></dd>
 
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
@@ -203,10 +203,10 @@ glance returns a one-row data.frame with the values
         <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/geom_abline'>geom_vline</a></span>(<span class='kw'>xintercept</span> <span class='kw'>=</span> <span class='no'>glance_cv</span>$<span class='no'>lambda.min</span>) +
         <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/geom_abline'>geom_vline</a></span>(<span class='kw'>xintercept</span> <span class='kw'>=</span> <span class='no'>glance_cv</span>$<span class='no'>lambda.1se</span>, <span class='kw'>lty</span> <span class='kw'>=</span> <span class='fl'>2</span>)
 }</div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Attachement du package : 'Matrix'</span></div><div class='output co'>#&gt; <span class='message'>The following object is masked from 'package:tidyr':</span>
+#&gt; <span class='message'>Attaching package: 'Matrix'</span></div><div class='output co'>#&gt; <span class='message'>The following object is masked from 'package:tidyr':</span>
 #&gt; <span class='message'></span>
 #&gt; <span class='message'>    expand</span></div><div class='output co'>#&gt; <span class='message'>Loaded glmnet 2.0-16</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Attachement du package : 'glmnet'</span></div><div class='output co'>#&gt; <span class='message'>The following object is masked from 'package:AUC':</span>
+#&gt; <span class='message'>Attaching package: 'glmnet'</span></div><div class='output co'>#&gt; <span class='message'>The following object is masked from 'package:AUC':</span>
 #&gt; <span class='message'></span>
 #&gt; <span class='message'>    auc</span></div><div class='img'><img src='cv.glmnet_tidiers-1.png' alt='' width='700' height='433' /></div><div class='input'>
 </div></pre>

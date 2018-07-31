@@ -1,19 +1,34 @@
-context("bingroup tidiers")
+context("bingroup")
 
+skip_if_not_installed("modeltests")
+library(modeltests)
+
+skip_if_not_installed("binGroup")
 library(binGroup)
 
-test_that("binWidth tidiers work", {
-  bw <- binWidth(100, .1)
-  td <- tidy(bw)
+bw <- binWidth(100, .1)
+bd <- binDesign(nmax = 300, delta = 0.06, p.hyp = 0.1, power = .8)
 
-  check_tidy(td, exp.row = 1, exp.col = 4)
+test_that("binGroup tidier arguments", {
+  check_arguments(tidy.binWidth)
+  check_arguments(tidy.binDesign)
+  check_arguments(glance.binDesign)
 })
 
-test_that("binDesign tidiers work", {
-  bd <- binDesign(nmax = 300, delta = 0.06, p.hyp = 0.1, power = .8)
-  td <- tidy(bd)
-  gl <- glance(bd)
+test_that("tidy.binWidth", {
+  td <- tidy(bw)
+  check_tidy_output(td)
+  check_dims(td, 1, 4)
+})
 
-  check_tidy(td, exp.col = 2)
-  check_tidy(gl, exp.col = 4)
+test_that("tidy.binDesign", {
+  td <- tidy(bd)
+  check_tidy_output(td)
+  check_dims(td, expected_cols = 2)
+})
+
+test_that("glance.binDesign", {
+  gl <- glance(bd)
+  check_glance_outputs(gl)
+  check_dims(gl, expected_cols = 4)
 })

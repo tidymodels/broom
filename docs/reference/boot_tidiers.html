@@ -102,7 +102,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Tidying methods for bootstrap computations</h1>
-    <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/boot_tidiers.R'><code>R/boot_tidiers.R</code></a></small>
+    <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/boot-tidiers.R'><code>R/boot-tidiers.R</code></a></small>
     <div class="hidden name"><code>boot_tidiers.Rd</code></div>
     </div>
 
@@ -121,7 +121,7 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>x</th>
-      <td><p><code>boot</code> object</p></td>
+      <td><p><code>boot()</code> object</p></td>
     </tr>
     <tr>
       <th>conf.int</th>
@@ -133,7 +133,7 @@
     </tr>
     <tr>
       <th>conf.method</th>
-      <td><p>method for computing confidence intervals (see <code>boot.ci</code>)</p></td>
+      <td><p>method for computing confidence intervals (see <code>boot.ci()</code>)</p></td>
     </tr>
     <tr>
       <th>&#8230;</th>
@@ -147,9 +147,9 @@
 bootstrapped statistic that was calculated, and the
 following columns:</p>
 <dt>term</dt><dd><p>Name of the computed statistic, if present</p></dd>
-  <dt>statistic</dt><dd><p>The original values of the statistic</p></dd>
-  <dt>bias</dt><dd><p>The bias of the original statistic value</p></dd>
-  <dt>std.error</dt><dd><p>Standard error of the statistic</p></dd>
+<dt>statistic</dt><dd><p>The original values of the statistic</p></dd>
+<dt>bias</dt><dd><p>The bias of the original statistic value</p></dd>
+<dt>std.error</dt><dd><p>Standard error of the statistic</p></dd>
 
 If weights were provided to the boot function, an estimate
 column is included showing the weighted bootstrap estimate, and the
@@ -177,12 +177,14 @@ std.error columns shown.
    <span class='no'>bootres</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/boot/topics/boot'>boot</a></span>(<span class='no'>clotting</span>, <span class='no'>bootfun</span>, <span class='kw'>R</span> <span class='kw'>=</span> <span class='fl'>999</span>)
    <span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>g1</span>, <span class='kw'>conf.int</span><span class='kw'>=</span><span class='fl'>TRUE</span>)
    <span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>bootres</span>, <span class='kw'>conf.int</span><span class='kw'>=</span><span class='fl'>TRUE</span>)
-}</div><div class='output co'>#&gt; <span class='message'>Le chargement a nécessité le package : boot</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Attachement du package : 'boot'</span></div><div class='output co'>#&gt; <span class='message'>The following object is masked from 'package:survival':</span>
+}</div><div class='output co'>#&gt; <span class='message'>Loading required package: boot</span></div><div class='output co'>#&gt; <span class='message'></span>
+#&gt; <span class='message'>Attaching package: 'boot'</span></div><div class='output co'>#&gt; <span class='message'>The following object is masked from 'package:survival':</span>
 #&gt; <span class='message'></span>
-#&gt; <span class='message'>    aml</span></div><div class='output co'>#&gt;          term   statistic          bias   std.error    conf.low   conf.high
-#&gt; 1 (Intercept) -0.02390847 -0.0019343342 0.003229430 -0.03285854 -0.02232902
-#&gt; 2      log(u)  0.02359921  0.0005811196 0.001034377  0.02273295  0.02649847</div><div class='input'>
+#&gt; <span class='message'>    aml</span></div><div class='output co'>#&gt; # A tibble: 2 x 6
+#&gt;   term        statistic      bias std.error conf.low conf.high
+#&gt;   &lt;chr&gt;           &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;
+#&gt; 1 (Intercept)   -0.0239 -0.00191    0.00322  -0.0328   -0.0223
+#&gt; 2 log(u)         0.0236  0.000575   0.00103   0.0227    0.0265</div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

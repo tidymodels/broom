@@ -102,7 +102,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Tidy person-year summaries</h1>
-    <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/survival_tidiers.R'><code>R/survival_tidiers.R</code></a></small>
+    <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/survival-pyears-tidiers.R'><code>R/survival-pyears-tidiers.R</code></a></small>
     <div class="hidden name"><code>pyears_tidiers.Rd</code></div>
     </div>
 
@@ -138,17 +138,17 @@ is given), this does only a little work and should rarely be necessary.</p>
 
     <p><code>tidy</code> returns a data.frame with the columns</p>
 <dt>pyears</dt><dd><p>person-years of exposure</p></dd>
-  <dt>n</dt><dd><p>number of subjects contributing time</p></dd>
-  <dt>event</dt><dd><p>observed number of events</p></dd>
-  <dt>expected</dt><dd><p>expected number of events (present only if a
-  <code>ratetable</code> term is present)</p></dd>
+<dt>n</dt><dd><p>number of subjects contributing time</p></dd>
+<dt>event</dt><dd><p>observed number of events</p></dd>
+<dt>expected</dt><dd><p>expected number of events (present only if a
+<code>ratetable</code> term is present)</p></dd>
 
 If the data.frame = TRUE argument is supplied to pyears,
 this is simply the contents of x$data.
 
 glance returns a one-row data frame with
-  <dt>total</dt><dd><p>total number of person-years tabulated</p></dd>
-  <dt>offtable</dt><dd><p>total number of person-years off table</p></dd>
+<dt>total</dt><dd><p>total number of person-years tabulated</p></dd>
+<dt>offtable</dt><dd><p>total number of person-years off table</p></dd>
 
 This contains the values printed by summary.pyears.
 
@@ -175,8 +175,10 @@ This contains the values printed by summary.pyears.
     <span class='no'>pfit2</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/survival/topics/pyears'>pyears</a></span>(<span class='fu'><a href='http://www.rdocumentation.org/packages/survival/topics/Surv'>Surv</a></span>(<span class='no'>ptime</span>/<span class='fl'>365.25</span>, <span class='no'>pstat</span>) ~ <span class='no'>temp.yr</span> + <span class='no'>temp.age</span> + <span class='no'>sex</span>,  <span class='no'>mgus</span>)
     <span class='fu'>head</span>(<span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>pfit2</span>))
     <span class='fu'><a href='glance.html'>glance</a></span>(<span class='no'>pfit2</span>)
-}</div><div class='output co'>#&gt;      total  offtable
-#&gt; 1 8.319515 0.7274007</div><div class='input'>
+}</div><div class='output co'>#&gt; # A tibble: 1 x 2
+#&gt;   total offtable
+#&gt;   &lt;dbl&gt;    &lt;dbl&gt;
+#&gt; 1  8.32    0.727</div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

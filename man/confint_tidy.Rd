@@ -11,17 +11,23 @@ confint_tidy(x, conf.level = 0.95, func = stats::confint, ...)
 
 \item{conf.level}{confidence level}
 
-\item{func}{Function to use for computing confint}
+\item{func}{A function to compute a confidence interval for \code{x}. Calling
+\code{func(x, level = conf.level, ...)} must return an object coercable to a
+tibble. This dataframe like object should have to columns corresponding
+the lower and upper bounds on the confidence interval.}
 
 \item{...}{extra arguments passed on to \code{confint}}
 }
 \value{
-A data frame with two columns: \code{conf.low} and \code{conf.high}.
+A tibble with two columns: \code{conf.low} and \code{conf.high}.
 }
 \description{
 Return a confidence interval as a tidy data frame. This directly wraps the
 \code{\link[=confint]{confint()}} function, but ensures it follows broom conventions:
-column names of \code{conf.low} and \code{conf.high}, and no row names
+column names of \code{conf.low} and \code{conf.high}, and no row names.
+}
+\details{
+\code{confint_tidy}
 }
 \seealso{
 \link{confint}

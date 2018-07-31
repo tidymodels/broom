@@ -102,7 +102,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Tidying methods for a zoo object</h1>
-    <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/zoo_tidiers.R'><code>R/zoo_tidiers.R</code></a></small>
+    <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/zoo-tidiers.R'><code>R/zoo-tidiers.R</code></a></small>
     <div class="hidden name"><code>zoo_tidiers.Rd</code></div>
     </div>
 
@@ -136,8 +136,8 @@ observation per series.</p>
     <p><code>tidy</code> returns a data frame with one row for each observation
 in each series, with the following columns:</p>
 <dt>index</dt><dd><p>Index (usually date) for the zoo object</p></dd>
-  <dt>series</dt><dd><p>Name of the series</p></dd>
-  <dt>value</dt><dd><p>Value of the observation</p></dd>
+<dt>series</dt><dd><p>Name of the series</p></dd>
+<dt>value</dt><dd><p>Value of the observation</p></dd>
 
     
 
@@ -147,10 +147,10 @@ in each series, with the following columns:</p>
     <span class='fu'>set.seed</span>(<span class='fl'>1071</span>)
 
     <span class='co'># data generated as shown in the zoo vignette</span>
-    <span class='no'>Z.index</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/zoo/topics/yearmon'>as.Date</a></span>(<span class='fu'>sample</span>(<span class='fl'>12450</span>:<span class='fl'>12500</span>, <span class='fl'>10</span>))
+    <span class='no'>Z.index</span> <span class='kw'>&lt;-</span> <span class='fu'>as.Date</span>(<span class='fu'>sample</span>(<span class='fl'>12450</span>:<span class='fl'>12500</span>, <span class='fl'>10</span>))
     <span class='no'>Z.data</span> <span class='kw'>&lt;-</span> <span class='fu'>matrix</span>(<span class='fu'>rnorm</span>(<span class='fl'>30</span>), <span class='kw'>ncol</span> <span class='kw'>=</span> <span class='fl'>3</span>)
     <span class='fu'>colnames</span>(<span class='no'>Z.data</span>) <span class='kw'>&lt;-</span> <span class='fu'>c</span>(<span class='st'>"Aa"</span>, <span class='st'>"Bb"</span>, <span class='st'>"Cc"</span>)
-    <span class='no'>Z</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/zoo/topics/zoo'>zoo</a></span>(<span class='no'>Z.data</span>, <span class='no'>Z.index</span>)
+    <span class='no'>Z</span> <span class='kw'>&lt;-</span> <span class='fu'>zoo</span>(<span class='no'>Z.data</span>, <span class='no'>Z.index</span>)
 
     <span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>Z</span>)
 
@@ -159,10 +159,10 @@ in each series, with the following columns:</p>
         <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/ggplot'>ggplot</a></span>(<span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>Z</span>), <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/aes'>aes</a></span>(<span class='no'>index</span>, <span class='no'>value</span>)) + <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/geom_path'>geom_line</a></span>() +
             <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/facet_wrap'>facet_wrap</a></span>(~ <span class='no'>series</span>, <span class='kw'>ncol</span> <span class='kw'>=</span> <span class='fl'>1</span>)
 
-        <span class='no'>Zrolled</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/zoo/topics/rollmean'>rollmean</a></span>(<span class='no'>Z</span>, <span class='fl'>5</span>)
+        <span class='no'>Zrolled</span> <span class='kw'>&lt;-</span> <span class='fu'>rollmean</span>(<span class='no'>Z</span>, <span class='fl'>5</span>)
         <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/ggplot'>ggplot</a></span>(<span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>Zrolled</span>), <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/aes'>aes</a></span>(<span class='no'>index</span>, <span class='no'>value</span>, <span class='kw'>color</span> <span class='kw'>=</span> <span class='no'>series</span>)) + <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/geom_path'>geom_line</a></span>()
     }
-}</div><div class='img'><img src='zoo_tidiers-1.png' alt='' width='700' height='433' /></div><div class='input'>
+}</div><div class='output co'>#&gt; <span class='warning'>Warning: there is no package called 'zoo'</span></div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

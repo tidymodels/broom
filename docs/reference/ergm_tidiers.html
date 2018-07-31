@@ -102,7 +102,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Tidying methods for an exponential random graph model</h1>
-    <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/ergm_tidiers.R'><code>R/ergm_tidiers.R</code></a></small>
+    <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/ergm-tidiers.R'><code>R/ergm-tidiers.R</code></a></small>
     <div class="hidden name"><code>ergm_tidiers.Rd</code></div>
     </div>
 
@@ -151,7 +151,7 @@ only the <code>term</code> and <code>estimate</code> columns.</p></td>
     </tr>
     <tr>
       <th>...</th>
-      <td><p>extra arguments passed to <code><a href='http://www.rdocumentation.org/packages/ergm/topics/summary.ergm'>summary.ergm</a></code></p></td>
+      <td><p>extra arguments passed to <code><a href='http://www.rdocumentation.org/packages/ergm/topics/summary.ergm'>ergm::summary.ergm()</a></code></p></td>
     </tr>
     <tr>
       <th>deviance</th>
@@ -171,33 +171,33 @@ estimate the model; defaults to <code>FALSE</code></p></td>
 The structure depends on the method chosen.</p>
 <p><code>tidy.ergm</code> returns one row for each coefficient, with five columns:</p>
 <dt>term</dt><dd><p>The term in the model being estimated and tested</p></dd>
-  <dt>estimate</dt><dd><p>The estimated coefficient</p></dd>
-  <dt>std.error</dt><dd><p>The standard error</p></dd>
-  <dt>mcmc.error</dt><dd><p>The MCMC error</p></dd>
-  <dt>p.value</dt><dd><p>The two-sided p-value</p></dd>
+<dt>estimate</dt><dd><p>The estimated coefficient</p></dd>
+<dt>std.error</dt><dd><p>The standard error</p></dd>
+<dt>mcmc.error</dt><dd><p>The MCMC error</p></dd>
+<dt>p.value</dt><dd><p>The two-sided p-value</p></dd>
 
 If conf.int=TRUE, it also includes columns for conf.low and
 conf.high.
 
 glance.ergm returns a one-row data.frame with the columns
-  <dt>independence</dt><dd><p>Whether the model assumed dyadic independence</p></dd>
-  <dt>iterations</dt><dd><p>The number of iterations performed before convergence</p></dd>
-  <dt>logLik</dt><dd><p>If applicable, the log-likelihood associated with the model</p></dd>
-  <dt>AIC</dt><dd><p>The Akaike Information Criterion</p></dd>
-  <dt>BIC</dt><dd><p>The Bayesian Information Criterion</p></dd>
+<dt>independence</dt><dd><p>Whether the model assumed dyadic independence</p></dd>
+<dt>iterations</dt><dd><p>The number of iterations performed before convergence</p></dd>
+<dt>logLik</dt><dd><p>If applicable, the log-likelihood associated with the model</p></dd>
+<dt>AIC</dt><dd><p>The Akaike Information Criterion</p></dd>
+<dt>BIC</dt><dd><p>The Bayesian Information Criterion</p></dd>
 
 If deviance=TRUE, and if the model supports it, the
 data frame will also contain the columns
-  <dt>null.deviance</dt><dd><p>The null deviance of the model</p></dd>
-  <dt>df.null</dt><dd><p>The degrees of freedom of the null deviance</p></dd>
-  <dt>residual.deviance</dt><dd><p>The residual deviance of the model</p></dd>
-  <dt>df.residual</dt><dd><p>The degrees of freedom of the residual deviance</p></dd>
+<dt>null.deviance</dt><dd><p>The null deviance of the model</p></dd>
+<dt>df.null</dt><dd><p>The degrees of freedom of the null deviance</p></dd>
+<dt>residual.deviance</dt><dd><p>The residual deviance of the model</p></dd>
+<dt>df.residual</dt><dd><p>The degrees of freedom of the residual deviance</p></dd>
 
 Last, if mcmc=TRUE, the data frame will also contain
 the columns
-  <dt>MCMC.interval</dt><dd><p>The interval used during MCMC estimation</p></dd>
-  <dt>MCMC.burnin</dt><dd><p>The burn-in period of the MCMC estimation</p></dd>
-  <dt>MCMC.samplesize</dt><dd><p>The sample size used during MCMC estimation</p></dd>
+<dt>MCMC.interval</dt><dd><p>The interval used during MCMC estimation</p></dd>
+<dt>MCMC.burnin</dt><dd><p>The burn-in period of the MCMC estimation</p></dd>
+<dt>MCMC.samplesize</dt><dd><p>The sample size used during MCMC estimation</p></dd>
 
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
@@ -213,13 +213,14 @@ Models for Networks. <em>Journal of Statistical Software</em>, 24(3).
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='http://www.rdocumentation.org/packages/ergm/topics/ergm'>ergm</a></code>,
-<code><a href='http://www.rdocumentation.org/packages/ergm/topics/control.ergm'>control.ergm</a></code>,
-<code><a href='http://www.rdocumentation.org/packages/ergm/topics/summary.ergm'>summary.ergm</a></code></p></div>
+    <div class='dont-index'><p><code><a href='http://www.rdocumentation.org/packages/ergm/topics/ergm'>ergm::ergm()</a></code>,
+<code><a href='http://www.rdocumentation.org/packages/ergm/topics/control.ergm'>ergm::control.ergm()</a></code>,
+<code><a href='http://www.rdocumentation.org/packages/ergm/topics/summary.ergm'>ergm::summary.ergm()</a></code></p></div>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
+</div><span class='co'># NOT RUN {</span>
 <span class='kw'>if</span> (<span class='fu'>require</span>(<span class='st'>"ergm"</span>)) {
     <span class='co'># Using the same example as the ergm package</span>
     <span class='co'># Load the Florentine marriage network data</span>
@@ -240,10 +241,8 @@ Models for Networks. <em>Journal of Statistical Software</em>, 24(3).
     <span class='fu'><a href='glance.html'>glance</a></span>(<span class='no'>gest</span>)
     <span class='fu'><a href='glance.html'>glance</a></span>(<span class='no'>gest</span>, <span class='kw'>deviance</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
     <span class='fu'><a href='glance.html'>glance</a></span>(<span class='no'>gest</span>, <span class='kw'>mcmc</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
-}</div><div class='output co'>#&gt; <span class='message'>Evaluating log-likelihood at the estimate. </span></div><div class='output co'>#&gt; </div><div class='output co'>#&gt;   independence iterations    logLik      AIC      BIC MCMC.interval MCMC.burnin
-#&gt; 1         TRUE          4 -50.97572 105.9514 111.5264          1024       16384
-#&gt;   MCMC.samplesize
-#&gt; 1            1024</div></pre>
+}
+<span class='co'># }</span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

@@ -102,7 +102,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Tidying methods for a speedlm model</h1>
-    <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/speedlm_tidiers.R'><code>R/speedlm_tidiers.R</code></a></small>
+    <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/speedglm-tidiers.R'><code>R/speedglm-tidiers.R</code></a></small>
     <div class="hidden name"><code>speedlm_tidiers.Rd</code></div>
     </div>
 
@@ -116,8 +116,7 @@ statistics.</p>
     </div>
 
     <pre class="usage"><span class='co'># S3 method for speedlm</span>
-<span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>x</span>, <span class='kw'>conf.int</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>conf.level</span> <span class='kw'>=</span> <span class='fl'>0.95</span>,
-  <span class='kw'>exponentiate</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>quick</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='no'>...</span>)
+<span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>x</span>, <span class='no'>...</span>)
 
 <span class='co'># S3 method for speedlm</span>
 <span class='fu'><a href='glance.html'>glance</a></span>(<span class='no'>x</span>, <span class='no'>...</span>)
@@ -132,25 +131,6 @@ statistics.</p>
     <tr>
       <th>x</th>
       <td><p>speedlm object</p></td>
-    </tr>
-    <tr>
-      <th>conf.int</th>
-      <td><p>whether to include a confidence interval</p></td>
-    </tr>
-    <tr>
-      <th>conf.level</th>
-      <td><p>confidence level of the interval, used only if
-<code>conf.int=TRUE</code></p></td>
-    </tr>
-    <tr>
-      <th>exponentiate</th>
-      <td><p>whether to exponentiate the coefficient estimates
-and confidence intervals (typical for logistic regression)</p></td>
-    </tr>
-    <tr>
-      <th>quick</th>
-      <td><p>whether to compute a smaller and faster version, containing
-only the <code>term</code> and <code>estimate</code> columns.</p></td>
     </tr>
     <tr>
       <th>...</th>
@@ -175,19 +155,19 @@ lm with one row for each term in the formula.
 The columns match those in <a href='lm_tidiers.html'>lm_tidiers</a>.</p>
 <p><code>glance.speedlm</code> returns a one-row data.frame with the columns</p>
 <dt>r.squared</dt><dd><p>The percent of variance explained by the model</p></dd>
-  <dt>adj.r.squared</dt><dd><p>r.squared adjusted based on the degrees of freedom</p></dd>
-  <dt>statistic</dt><dd><p>F-statistic</p></dd>
-  <dt>p.value</dt><dd><p>p-value from the F test, describing whether the full
-  regression is significant</p></dd>
-  <dt>df</dt><dd><p>Degrees of freedom used by the coefficients</p></dd>
-  <dt>logLik</dt><dd><p>the data's log-likelihood under the model</p></dd>
-  <dt>AIC</dt><dd><p>the Akaike Information Criterion</p></dd>
-  <dt>BIC</dt><dd><p>the Bayesian Information Criterion</p></dd>
-  <dt>deviance</dt><dd><p>deviance</p></dd>
-  <dt>df.residual</dt><dd><p>residual degrees of freedom</p></dd>
+<dt>adj.r.squared</dt><dd><p>r.squared adjusted based on the degrees of freedom</p></dd>
+<dt>statistic</dt><dd><p>F-statistic</p></dd>
+<dt>p.value</dt><dd><p>p-value from the F test, describing whether the full
+regression is significant</p></dd>
+<dt>df</dt><dd><p>Degrees of freedom used by the coefficients</p></dd>
+<dt>logLik</dt><dd><p>the data's log-likelihood under the model</p></dd>
+<dt>AIC</dt><dd><p>the Akaike Information Criterion</p></dd>
+<dt>BIC</dt><dd><p>the Bayesian Information Criterion</p></dd>
+<dt>deviance</dt><dd><p>deviance</p></dd>
+<dt>df.residual</dt><dd><p>residual degrees of freedom</p></dd>
 
 augment.speedlm returns  one row for each observation, with just one column added:
-  <dt>.fitted</dt><dd><p>Fitted values of model</p></dd>
+<dt>.fitted</dt><dd><p>Fitted values of model</p></dd>
 
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
@@ -203,41 +183,22 @@ augment.speedlm returns  one row for each observation, with just one column adde
     <span class='fu'><a href='glance.html'>glance</a></span>(<span class='no'>mod</span>)
     <span class='fu'><a href='augment.html'>augment</a></span>(<span class='no'>mod</span>)
 }</div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Attachement du package : 'speedglm'</span></div><div class='output co'>#&gt; <span class='message'>The following object is masked from 'package:boot':</span>
+#&gt; <span class='message'>Attaching package: 'speedglm'</span></div><div class='output co'>#&gt; <span class='message'>The following object is masked from 'package:boot':</span>
 #&gt; <span class='message'></span>
-#&gt; <span class='message'>    control</span></div><div class='output co'>#&gt;              .rownames  mpg    wt  qsec   .fitted
-#&gt; 1            Mazda RX4 21.0 2.620 16.46 21.815109
-#&gt; 2        Mazda RX4 Wag 21.0 2.875 17.02 21.048224
-#&gt; 3           Datsun 710 22.8 2.320 18.61 25.327279
-#&gt; 4       Hornet 4 Drive 21.4 3.215 19.44 21.580569
-#&gt; 5    Hornet Sportabout 18.7 3.440 17.02 18.196114
-#&gt; 6              Valiant 18.1 3.460 20.22 21.068588
-#&gt; 7           Duster 360 14.3 3.570 15.84 16.443423
-#&gt; 8            Merc 240D 24.4 3.190 20.00 22.227120
-#&gt; 9             Merc 230 22.8 3.150 22.90 25.123713
-#&gt; 10            Merc 280 19.2 3.440 18.30 19.385488
-#&gt; 11           Merc 280C 17.8 3.440 18.90 19.943006
-#&gt; 12          Merc 450SE 16.4 4.070 17.40 15.368981
-#&gt; 13          Merc 450SL 17.3 3.730 17.60 17.271134
-#&gt; 14         Merc 450SLC 15.2 3.780 18.00 17.390414
-#&gt; 15  Cadillac Fleetwood 10.4 5.250 17.98  9.951297
-#&gt; 16 Lincoln Continental 10.4 5.424 17.82  8.924276
-#&gt; 17   Chrysler Imperial 14.7 5.345 17.42  8.951388
-#&gt; 18            Fiat 128 32.4 2.200 19.47 26.732147
-#&gt; 19         Honda Civic 30.4 1.615 18.52 28.802478
-#&gt; 20      Toyota Corolla 33.9 1.835 19.90 28.974215
-#&gt; 21       Toyota Corona 21.5 2.465 20.01 25.896199
-#&gt; 22    Dodge Challenger 15.5 3.520 16.87 17.652896
-#&gt; 23         AMC Javelin 15.2 3.435 17.30 18.481530
-#&gt; 24          Camaro Z28 13.3 3.840 15.41 14.680913
-#&gt; 25    Pontiac Firebird 19.2 3.845 17.05 16.179557
-#&gt; 26           Fiat X1-9 27.3 1.935 18.90 27.540219
-#&gt; 27       Porsche 914-2 26.0 2.140 16.70 24.461147
-#&gt; 28        Lotus Europa 30.4 1.513 16.90 27.812072
-#&gt; 29      Ford Pantera L 15.8 3.170 14.50 17.217490
-#&gt; 30        Ferrari Dino 19.7 2.770 15.50 20.165881
-#&gt; 31       Maserati Bora 15.0 3.570 14.60 15.291217
-#&gt; 32          Volvo 142E 21.4 2.780 18.60 22.995915</div><div class='input'>
+#&gt; <span class='message'>    control</span></div><div class='output co'>#&gt; # A tibble: 32 x 5
+#&gt;    .rownames           mpg    wt  qsec .fitted
+#&gt;    &lt;chr&gt;             &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;
+#&gt;  1 Mazda RX4          21    2.62  16.5    21.8
+#&gt;  2 Mazda RX4 Wag      21    2.88  17.0    21.0
+#&gt;  3 Datsun 710         22.8  2.32  18.6    25.3
+#&gt;  4 Hornet 4 Drive     21.4  3.22  19.4    21.6
+#&gt;  5 Hornet Sportabout  18.7  3.44  17.0    18.2
+#&gt;  6 Valiant            18.1  3.46  20.2    21.1
+#&gt;  7 Duster 360         14.3  3.57  15.8    16.4
+#&gt;  8 Merc 240D          24.4  3.19  20      22.2
+#&gt;  9 Merc 230           22.8  3.15  22.9    25.1
+#&gt; 10 Merc 280           19.2  3.44  18.3    19.4
+#&gt; # ... with 22 more rows</div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

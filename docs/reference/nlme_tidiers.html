@@ -46,7 +46,7 @@
 
       <div class="navbar-brand-container">
         <a class="navbar-brand" href="../index.html">broom</a>
-        <small class="tidyverse">part of the <a href="http://tidyverse.org">tidyverse</a></small>
+        <small class="tidyverse">part of the <a href="https://tidyverse.org">tidyverse</a></small>
       </div>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
@@ -102,14 +102,15 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Tidying methods for mixed effects models</h1>
-    <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/nlme_tidiers.R'><code>R/nlme_tidiers.R</code></a></small>
+    <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/nlme-tidiers.R'><code>R/nlme-tidiers.R</code></a></small>
     <div class="hidden name"><code>nlme_tidiers.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>These methods tidy the coefficients of mixed effects models
-of the <code>lme</code> class from functions  of the <code>nlme</code> package.</p>
+    <p><code>nlme</code> tidiers will soon be deprecated in <code>broom</code> and there is no ongoing
+development of these functions at this time. <code>nlme</code> tidiers are being
+developed in the <code>broom.mixed</code> package, which is not yet on CRAN.</p>
     
     </div>
 
@@ -157,43 +158,45 @@ The structure depends on the method chosen.</p>
 random or fixed depending on the <code>effects</code> parameter. If
 <code>effects = "random"</code>, it contains the columns</p>
 <dt>group</dt><dd><p>the group within which the random effect is being estimated</p></dd>
-  <dt>level</dt><dd><p>level within group</p></dd>
-  <dt>term</dt><dd><p>term being estimated</p></dd>
-  <dt>estimate</dt><dd><p>estimated coefficient</p></dd>
+<dt>level</dt><dd><p>level within group</p></dd>
+<dt>term</dt><dd><p>term being estimated</p></dd>
+<dt>estimate</dt><dd><p>estimated coefficient</p></dd>
 
 If effects="fixed", tidy returns the columns
-  <dt>term</dt><dd><p>fixed term being estimated</p></dd>
-  <dt>estimate</dt><dd><p>estimate of fixed effect</p></dd>
-  <dt>std.error</dt><dd><p>standard error</p></dd>
-  <dt>statistic</dt><dd><p>t-statistic</p></dd>
-  <dt>p.value</dt><dd><p>P-value computed from t-statistic</p></dd>
+<dt>term</dt><dd><p>fixed term being estimated</p></dd>
+<dt>estimate</dt><dd><p>estimate of fixed effect</p></dd>
+<dt>std.error</dt><dd><p>standard error</p></dd>
+<dt>statistic</dt><dd><p>t-statistic</p></dd>
+<dt>p.value</dt><dd><p>P-value computed from t-statistic</p></dd>
 
 augment returns one row for each original observation,
 with columns (each prepended by a .) added. Included are the columns
-  <dt>.fitted</dt><dd><p>predicted values</p></dd>
-  <dt>.resid</dt><dd><p>residuals</p></dd>
-  <dt>.fixed</dt><dd><p>predicted values with no random effects</p></dd>
+<dt>.fitted</dt><dd><p>predicted values</p></dd>
+<dt>.resid</dt><dd><p>residuals</p></dd>
+<dt>.fixed</dt><dd><p>predicted values with no random effects</p></dd>
 
 glance returns one row with the columns
-  <dt>sigma</dt><dd><p>the square root of the estimated residual variance</p></dd>
-  <dt>logLik</dt><dd><p>the data's log-likelihood under the model</p></dd>
-  <dt>AIC</dt><dd><p>the Akaike Information Criterion</p></dd>
-  <dt>BIC</dt><dd><p>the Bayesian Information Criterion</p></dd>
-  <dt>deviance</dt><dd><p>returned as NA. To quote Brian Ripley on R-help:
- McCullagh &amp; Nelder (1989) would be the authoritative reference, but the 1982
+<dt>sigma</dt><dd><p>the square root of the estimated residual variance</p></dd>
+<dt>logLik</dt><dd><p>the data's log-likelihood under the model</p></dd>
+<dt>AIC</dt><dd><p>the Akaike Information Criterion</p></dd>
+<dt>BIC</dt><dd><p>the Bayesian Information Criterion</p></dd>
+<dt>deviance</dt><dd><p>returned as NA. To quote Brian Ripley on R-help:
+McCullagh &amp; Nelder (1989) would be the authoritative reference, but the 1982
 first edition manages to use 'deviance' in three separate senses on one
 page.</p></dd>
 
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>When the modeling was performed with <code>na.action = "na.omit"</code>
+    <p>These methods tidy the coefficients of mixed effects models
+of the <code>lme</code> class from functions  of the <code>nlme</code> package.</p>
+<p>When the modeling was performed with <code>na.action = "na.omit"</code>
 (as is the typical default), rows with NA in the initial data are omitted
 entirely from the augmented data frame. When the modeling was performed
 with <code>na.action = "na.exclude"</code>, one should provide the original data
 as a second argument, at which point the augmented data will contain those
 rows (typically with NAs in place of the new columns). If the original data
-is not provided to <code>augment</code> and <code>na.action = "na.exclude"</code>, a
+is not provided to <code><a href='augment.html'>augment()</a></code> and <code>na.action = "na.exclude"</code>, a
 warning is raised and the incomplete rows are dropped.</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
@@ -203,6 +206,7 @@ warning is raised and the incomplete rows are dropped.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
+</div><span class='co'># NOT RUN {</span>
 <span class='kw'>if</span> (<span class='fu'>require</span>(<span class='st'>"nlme"</span>) <span class='kw'>&amp;</span> <span class='fu'>require</span>(<span class='st'>"lme4"</span>)) {
     <span class='co'># example regressions are from lme4 documentation, but used for nlme</span>
     <span class='no'>lmm1</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/nlme/topics/lme'>lme</a></span>(<span class='no'>Reaction</span> ~ <span class='no'>Days</span>, <span class='kw'>random</span><span class='kw'>=</span>~ <span class='no'>Days</span><span class='kw'>|</span><span class='no'>Subject</span>, <span class='no'>sleepstudy</span>)
@@ -222,13 +226,8 @@ warning is raised and the incomplete rows are dropped.</p>
     <span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>nm1</span>, <span class='kw'>effects</span> <span class='kw'>=</span> <span class='st'>"fixed"</span>)
     <span class='fu'>head</span>(<span class='fu'><a href='augment.html'>augment</a></span>(<span class='no'>nm1</span>, <span class='no'>Orange</span>))
     <span class='fu'><a href='glance.html'>glance</a></span>(<span class='no'>nm1</span>)
-}</div><div class='output co'>#&gt; <span class='message'>Le chargement a nécessité le package : nlme</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Attachement du package : 'nlme'</span></div><div class='output co'>#&gt; <span class='message'>The following object is masked from 'package:lme4':</span>
-#&gt; <span class='message'></span>
-#&gt; <span class='message'>    lmList</span></div><div class='output co'>#&gt; <span class='message'>The following object is masked from 'package:dplyr':</span>
-#&gt; <span class='message'></span>
-#&gt; <span class='message'>    collapse</span></div><div class='output co'>#&gt; <span class='warning'>Warning: deviance undefined for REML fit</span></div><div class='output co'>#&gt;      sigma    logLik      AIC      BIC deviance
-#&gt; 1 7.846255 -131.5846 273.1691 280.9458       NA</div><div class='input'>
+}
+<span class='co'># }</span><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
@@ -250,12 +249,12 @@ warning is raised and the incomplete rows are dropped.</p>
 
       <footer>
       <div class="tidyverse">
-  <p>broom is a part of the <strong>tidyverse</strong>, an ecosystem of packages designed with common APIs and a shared philosophy. Learn more at <a href="http://tidyverse.org">tidyverse.org</a>.</p>
+  <p>broom is a part of the <strong>tidyverse</strong>, an ecosystem of packages designed with common APIs and a shared philosophy. Learn more at <a href="https://tidyverse.org">tidyverse.org</a>.</p>
 </div>
 
 <div class="author">
-  <p>Developed by David Robinson.</p>
-  <p>Site built by <a href="http://pkgdown.r-lib.org">pkgdown</a>.</p>
+  <p>Developed by David Robinson, Alex Hayes.</p>
+  <p>Site built by <a href="https://pkgdown.r-lib.org">pkgdown</a>.</p>
 </div>
 
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-115082821-1"></script>

@@ -27,7 +27,7 @@
 
       <div class="navbar-brand-container">
         <a class="navbar-brand" href="../index.html">broom</a>
-        <small class="tidyverse">part of the <a href="http://tidyverse.org">tidyverse</a></small>
+        <small class="tidyverse">part of the <a href="https://tidyverse.org">tidyverse</a></small>
       </div>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
@@ -85,7 +85,7 @@
     <div class="page-header toc-ignore">
       <h1>Tidy bootstrapping</h1>
             
-            <h4 class="date">2018-06-07</h4>
+            <h4 class="date">2018-07-17</h4>
       
       <small class="dont-index">Source: <a href="http://github.com/tidyverse/broom/blob/master/vignettes/bootstrapping.Rmd"><code>vignettes/bootstrapping.Rmd</code></a></small>
       <div class="hidden name"><code>bootstrapping.Rmd</code></div>
@@ -102,8 +102,8 @@
 <p>Let’s say we want to fit a nonlinear model to the weight/mileage relationship in the <code>mtcars</code> dataset.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(ggplot2)
 
-<span class="kw">ggplot</span>(mtcars, <span class="kw">aes</span>(mpg, wt)) <span class="op">+</span><span class="st"> </span>
-<span class="st">    </span><span class="kw">geom_point</span>()</code></pre></div>
+<span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/ggplot">ggplot</a></span>(mtcars, <span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/aes">aes</a></span>(mpg, wt)) <span class="op">+</span><span class="st"> </span>
+<span class="st">    </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/geom_point">geom_point</a></span>()</code></pre></div>
 <p><img src="bootstrapping_files/figure-html/unnamed-chunk-1-1.png" width="700"></p>
 <p>We might use the method of nonlinear least squares (via the <code>nls</code> function) to fit a model.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">nlsfit &lt;-<span class="st"> </span><span class="kw">nls</span>(mpg <span class="op">~</span><span class="st"> </span>k <span class="op">/</span><span class="st"> </span>wt <span class="op">+</span><span class="st"> </span>b, mtcars, <span class="dt">start =</span> <span class="kw">list</span>(<span class="dt">k =</span> <span class="dv">1</span>, <span class="dt">b =</span> <span class="dv">0</span>))
@@ -123,13 +123,13 @@
 <span class="co">#&gt; Number of iterations to convergence: 1 </span>
 <span class="co">#&gt; Achieved convergence tolerance: 2.877e-08</span>
 
-<span class="kw">ggplot</span>(mtcars, <span class="kw">aes</span>(wt, mpg)) <span class="op">+</span>
-<span class="st">    </span><span class="kw">geom_point</span>() <span class="op">+</span>
-<span class="st">    </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">y =</span> <span class="kw">predict</span>(nlsfit)))</code></pre></div>
+<span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/ggplot">ggplot</a></span>(mtcars, <span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/aes">aes</a></span>(wt, mpg)) <span class="op">+</span>
+<span class="st">    </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/geom_point">geom_point</a></span>() <span class="op">+</span>
+<span class="st">    </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/geom_path">geom_line</a></span>(<span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/aes">aes</a></span>(<span class="dt">y =</span> <span class="kw">predict</span>(nlsfit)))</code></pre></div>
 <p><img src="bootstrapping_files/figure-html/unnamed-chunk-2-1.png" width="700"></p>
 <p>While this does provide a p-value and confidence intervals for the parameters, these are based on model assumptions that may not hold in real data. Bootstrapping is a popular method for providing confidence intervals and predictions that are more robust to the nature of the data.</p>
 <p>We can use the <code>bootstraps</code> function in the <strong>rsample</strong> package to sample bootstrap replications. First, we construct 100 bootstrap replications of the data, each of which has been randomly sampled with replacement. The resulting object is an <code>rset</code>, which is a dataframe with a column of <code>rsplit</code> objects.</p>
-<p>An <code>rsplit</code> object has two main components: an analysis dataset and an assessment dataset, accessible via <code>analysis(rsplit)</code> and <code>assessment(rsplit)</code> respectively. For bootstrap samples, the analysis dataset is the bootstrap sample itself, and the assessment dataset consists of all the out of bag samples.</p>
+<p>An <code>rsplit</code> object has two main components: an analysis dataset and an assessment dataset, accessible via <code><a href="http://www.rdocumentation.org/packages/rsample/topics/as.data.frame.rsplit">analysis(rsplit)</a></code> and <code><a href="http://www.rdocumentation.org/packages/rsample/topics/as.data.frame.rsplit">assessment(rsplit)</a></code> respectively. For bootstrap samples, the analysis dataset is the bootstrap sample itself, and the assessment dataset consists of all the out of bag samples.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(dplyr)
 <span class="kw">library</span>(rsample)
 <span class="kw">library</span>(broom)
@@ -137,7 +137,7 @@
 
 <span class="kw">set.seed</span>(<span class="dv">27</span>)
 
-boots &lt;-<span class="st"> </span><span class="kw">bootstraps</span>(mtcars, <span class="dt">times =</span> <span class="dv">100</span>)
+boots &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/rsample/topics/bootstraps">bootstraps</a></span>(mtcars, <span class="dt">times =</span> <span class="dv">100</span>)
 boots
 <span class="co">#&gt; # Bootstrap sampling </span>
 <span class="co">#&gt; # A tibble: 100 x 2</span>
@@ -156,12 +156,12 @@ boots
 <span class="co">#&gt; # ... with 90 more rows</span></code></pre></div>
 <p>We create a helper function to fit an <code>nls</code> model on each bootstrap sample, and then use <code><a href="http://www.rdocumentation.org/packages/purrr/topics/map">purrr::map</a></code> to apply this function to all the bootstrap samples at once. Similarly, we create a column of tidy coefficient information by unnesting.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fit_nls_on_bootstrap &lt;-<span class="st"> </span><span class="cf">function</span>(split) {
-    <span class="kw">nls</span>(mpg <span class="op">~</span><span class="st"> </span>k <span class="op">/</span><span class="st"> </span>wt <span class="op">+</span><span class="st"> </span>b, <span class="kw">analysis</span>(split), <span class="dt">start =</span> <span class="kw">list</span>(<span class="dt">k =</span> <span class="dv">1</span>, <span class="dt">b =</span> <span class="dv">0</span>))
+    <span class="kw">nls</span>(mpg <span class="op">~</span><span class="st"> </span>k <span class="op">/</span><span class="st"> </span>wt <span class="op">+</span><span class="st"> </span>b, <span class="kw"><a href="http://www.rdocumentation.org/packages/rsample/topics/as.data.frame.rsplit">analysis</a></span>(split), <span class="dt">start =</span> <span class="kw">list</span>(<span class="dt">k =</span> <span class="dv">1</span>, <span class="dt">b =</span> <span class="dv">0</span>))
 }
 
 boot_models &lt;-<span class="st"> </span>boots <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">    </span><span class="kw">mutate</span>(<span class="dt">model =</span> <span class="kw">map</span>(splits, fit_nls_on_bootstrap),
-           <span class="dt">coef_info =</span> <span class="kw">map</span>(model, tidy))
+<span class="st">    </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(<span class="dt">model =</span> <span class="kw"><a href="http://www.rdocumentation.org/packages/purrr/topics/map">map</a></span>(splits, fit_nls_on_bootstrap),
+           <span class="dt">coef_info =</span> <span class="kw"><a href="http://www.rdocumentation.org/packages/purrr/topics/map">map</a></span>(model, tidy))
 
 boot_coefs &lt;-<span class="st"> </span>boot_models <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">    </span><span class="kw">unnest</span>(coef_info)</code></pre></div>
@@ -184,8 +184,8 @@ boot_coefs &lt;-<span class="st"> </span>boot_models <span class="op">%&gt;%</sp
 <p>We can then calculate confidence intervals (using what is called the <a href="https://www.uvm.edu/~dhowell/StatPages/Randomization%20Tests/ResamplingWithR/BootstMeans/bootstrapping_means.html">percentile method</a>):</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">alpha &lt;-<span class="st"> </span>.<span class="dv">05</span>
 boot_coefs <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">    </span><span class="kw">group_by</span>(term) <span class="op">%&gt;%</span>
-<span class="st">    </span><span class="kw">summarize</span>(<span class="dt">low =</span> <span class="kw">quantile</span>(estimate, alpha <span class="op">/</span><span class="st"> </span><span class="dv">2</span>),
+<span class="st">    </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span>(term) <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/summarise.html">summarize</a></span>(<span class="dt">low =</span> <span class="kw">quantile</span>(estimate, alpha <span class="op">/</span><span class="st"> </span><span class="dv">2</span>),
               <span class="dt">high =</span> <span class="kw">quantile</span>(estimate, <span class="dv">1</span> <span class="op">-</span><span class="st"> </span>alpha <span class="op">/</span><span class="st"> </span><span class="dv">2</span>))
 <span class="co">#&gt; # A tibble: 2 x 3</span>
 <span class="co">#&gt;   term      low  high</span>
@@ -193,13 +193,13 @@ boot_coefs <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="co">#&gt; 1 b      -0.695  7.40</span>
 <span class="co">#&gt; 2 k      38.7   62.3</span></code></pre></div>
 <p>Or we can use histograms to get a more detailed idea of the uncertainty in each estimate:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(boot_coefs, <span class="kw">aes</span>(estimate)) <span class="op">+</span><span class="st"> </span>
-<span class="st">    </span><span class="kw">geom_histogram</span>(<span class="dt">binwidth =</span> <span class="dv">2</span>) <span class="op">+</span><span class="st"> </span>
-<span class="st">    </span><span class="kw">facet_wrap</span>(<span class="dt">facets =</span> <span class="kw">vars</span>(term), <span class="dt">scales =</span> <span class="st">"free"</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/ggplot">ggplot</a></span>(boot_coefs, <span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/aes">aes</a></span>(estimate)) <span class="op">+</span><span class="st"> </span>
+<span class="st">    </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/geom_histogram">geom_histogram</a></span>(<span class="dt">binwidth =</span> <span class="dv">2</span>) <span class="op">+</span><span class="st"> </span>
+<span class="st">    </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/facet_wrap">facet_wrap</a></span>(<span class="op">~</span><span class="st"> </span>term, <span class="dt">scales =</span> <span class="st">"free"</span>)</code></pre></div>
 <p><img src="bootstrapping_files/figure-html/unnamed-chunk-7-1.png" width="700"></p>
 <p>Or we can use <code>augment</code> to visualize the uncertainty in the curve:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">boot_aug &lt;-<span class="st"> </span>boot_models <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">    </span><span class="kw">mutate</span>(<span class="dt">augmented =</span> <span class="kw">map</span>(model, augment)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">    </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(<span class="dt">augmented =</span> <span class="kw"><a href="http://www.rdocumentation.org/packages/purrr/topics/map">map</a></span>(model, augment)) <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">    </span><span class="kw">unnest</span>(augmented)
 
 boot_aug
@@ -217,26 +217,26 @@ boot_aug
 <span class="co">#&gt;  9 Bootstrap001  18.7  3.44    18.0  0.691</span>
 <span class="co">#&gt; 10 Bootstrap001  14.3  3.57    17.6 -3.26 </span>
 <span class="co">#&gt; # ... with 3,190 more rows</span></code></pre></div>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(boot_aug, <span class="kw">aes</span>(wt, mpg)) <span class="op">+</span>
-<span class="st">    </span><span class="kw">geom_point</span>() <span class="op">+</span>
-<span class="st">    </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">y =</span> .fitted, <span class="dt">group =</span> id), <span class="dt">alpha=</span>.<span class="dv">2</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/ggplot">ggplot</a></span>(boot_aug, <span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/aes">aes</a></span>(wt, mpg)) <span class="op">+</span>
+<span class="st">    </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/geom_point">geom_point</a></span>() <span class="op">+</span>
+<span class="st">    </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/geom_path">geom_line</a></span>(<span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/aes">aes</a></span>(<span class="dt">y =</span> .fitted, <span class="dt">group =</span> id), <span class="dt">alpha=</span>.<span class="dv">2</span>)</code></pre></div>
 <p><img src="bootstrapping_files/figure-html/unnamed-chunk-9-1.png" width="700"></p>
 <p>With only a few small changes, we could easily perform bootstrapping with other kinds of predictive or hypothesis testing models, since the <code>tidy</code> and <code>augment</code> functions works for many statistical outputs. As another example, we could use <code>smooth.spline</code>, which fits a cubic smoothing spline to data:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fit_spline_on_bootstrap &lt;-<span class="st"> </span><span class="cf">function</span>(split) {
-    data &lt;-<span class="st"> </span><span class="kw">analysis</span>(split)
+    data &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/rsample/topics/as.data.frame.rsplit">analysis</a></span>(split)
     <span class="kw">smooth.spline</span>(data<span class="op">$</span>wt, data<span class="op">$</span>mpg, <span class="dt">df =</span> <span class="dv">4</span>)
 }
 
 boot_splines &lt;-<span class="st"> </span>boots <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">    </span><span class="kw">mutate</span>(<span class="dt">spline =</span> <span class="kw">map</span>(splits, fit_spline_on_bootstrap),
-           <span class="dt">aug_train =</span> <span class="kw">map</span>(spline, augment))
+<span class="st">    </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(<span class="dt">spline =</span> <span class="kw"><a href="http://www.rdocumentation.org/packages/purrr/topics/map">map</a></span>(splits, fit_spline_on_bootstrap),
+           <span class="dt">aug_train =</span> <span class="kw"><a href="http://www.rdocumentation.org/packages/purrr/topics/map">map</a></span>(spline, augment))
 
 splines_aug &lt;-<span class="st"> </span>boot_splines <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">    </span><span class="kw">unnest</span>(aug_train)
 
-<span class="kw">ggplot</span>(splines_aug, <span class="kw">aes</span>(x, y)) <span class="op">+</span>
-<span class="st">    </span><span class="kw">geom_point</span>() <span class="op">+</span>
-<span class="st">    </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">y =</span> .fitted, <span class="dt">group =</span> id), <span class="dt">alpha =</span> <span class="fl">0.2</span>)</code></pre></div>
+<span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/ggplot">ggplot</a></span>(splines_aug, <span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/aes">aes</a></span>(x, y)) <span class="op">+</span>
+<span class="st">    </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/geom_point">geom_point</a></span>() <span class="op">+</span>
+<span class="st">    </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/geom_path">geom_line</a></span>(<span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/aes">aes</a></span>(<span class="dt">y =</span> .fitted, <span class="dt">group =</span> id), <span class="dt">alpha =</span> <span class="fl">0.2</span>)</code></pre></div>
 <p><img src="bootstrapping_files/figure-html/unnamed-chunk-10-1.png" width="700"></p>
 </div>
   </div>
@@ -255,12 +255,12 @@ splines_aug &lt;-<span class="st"> </span>boot_splines <span class="op">%&gt;%</
 
 
       <footer><div class="tidyverse">
-  <p>broom is a part of the <strong>tidyverse</strong>, an ecosystem of packages designed with common APIs and a shared philosophy. Learn more at <a href="http://tidyverse.org">tidyverse.org</a>.</p>
+  <p>broom is a part of the <strong>tidyverse</strong>, an ecosystem of packages designed with common APIs and a shared philosophy. Learn more at <a href="https://tidyverse.org">tidyverse.org</a>.</p>
 </div>
 
 <div class="author">
-  <p>Developed by David Robinson.</p>
-  <p>Site built by <a href="http://pkgdown.r-lib.org">pkgdown</a>.</p>
+  <p>Developed by David Robinson, Alex Hayes.</p>
+  <p>Site built by <a href="https://pkgdown.r-lib.org">pkgdown</a>.</p>
 </div>
 
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-115082821-1"></script><script>

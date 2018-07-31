@@ -1,16 +1,28 @@
-context("Kendall tidiers")
+context("kendall")
 
-test_that("Kendall tidiers work", {
-  library(Kendall)
-  A <- c(2.5,2.5,2.5,2.5,5,6.5,6.5,10,10,10,10,10,14,14,14,16,17)
-  B <- c(1,1,1,1,2,1,1,2,1,1,1,1,1,1,2,2,2)
+skip_if_not_installed("modeltests")
+library(modeltests)
+
+skip_if_not_installed("Kendall")
+library(Kendall)
+
+a <- c(2.5, 2.5, 2.5, 2.5, 5, 6.5, 6.5, 10, 10, 10, 10, 10, 14, 14, 14, 16, 17)
+b <- c(1, 1, 1, 1, 2, 1, 1, 2, 1, 1, 1, 1, 1, 1, 2, 2, 2)
+
+kfit <- Kendall(a, b)
+mkfit <- MannKendall(a)
+smkfit <- SeasonalMannKendall(ts(b))
+
+
+test_that("tidy.Kendall", {
   
-  f_res <- tidy(Kendall(A,B))
-  check_tidy(f_res, exp.row = 1, exp.col = 5)
+  check_arguments(tidy.Kendall)
   
-  s_res <- tidy(MannKendall(A))
-  check_tidy(s_res, exp.row = 1, exp.col = 5)
+  ktd <- tidy(kfit)
+  mktd <- tidy(mkfit)
+  smkfit <- tidy(smkfit)
   
-  t_res <- tidy(SeasonalMannKendall(ts(B)))
-  check_tidy(t_res, exp.row = 1, exp.col = 5)
+  check_tidy_output(ktd)
+  check_tidy_output(mktd)
+  check_tidy_output(smkfit)
 })

@@ -46,7 +46,7 @@
 
       <div class="navbar-brand-container">
         <a class="navbar-brand" href="../index.html">broom</a>
-        <small class="tidyverse">part of the <a href="http://tidyverse.org">tidyverse</a></small>
+        <small class="tidyverse">part of the <a href="https://tidyverse.org">tidyverse</a></small>
       </div>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
@@ -109,8 +109,8 @@
     <div class="ref-description">
     
     <p>Return a confidence interval as a tidy data frame. This directly wraps the
-<code>confint</code> function, but ensures it follows broom conventions:
-column names of <code>conf.low</code> and <code>conf.high</code>, and no row names</p>
+<code>confint()</code> function, but ensures it follows broom conventions:
+column names of <code>conf.low</code> and <code>conf.high</code>, and no row names.</p>
     
     </div>
 
@@ -121,7 +121,7 @@ column names of <code>conf.low</code> and <code>conf.high</code>, and no row nam
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>x</th>
-      <td><p>a model object for which <code>confint</code> can be calculated</p></td>
+      <td><p>a model object for which <code>confint()</code> can be calculated</p></td>
     </tr>
     <tr>
       <th>conf.level</th>
@@ -129,7 +129,10 @@ column names of <code>conf.low</code> and <code>conf.high</code>, and no row nam
     </tr>
     <tr>
       <th>func</th>
-      <td><p>Function to use for computing confint</p></td>
+      <td><p>A function to compute a confidence interval for <code>x</code>. Calling
+<code>func(x, level = conf.level, ...)</code> must return an object coercable to a
+tibble. This dataframe like object should have to columns corresponding
+the lower and upper bounds on the confidence interval.</p></td>
     </tr>
     <tr>
       <th>...</th>
@@ -139,7 +142,11 @@ column names of <code>conf.low</code> and <code>conf.high</code>, and no row nam
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A data frame with two columns: <code>conf.low</code> and <code>conf.high</code>.</p>
+    <p>A tibble with two columns: <code>conf.low</code> and <code>conf.high</code>.</p>
+    
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p><code>confint_tidy</code></p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
@@ -154,6 +161,8 @@ column names of <code>conf.low</code> and <code>conf.high</code>, and no row nam
       
       <li><a href="#value">Value</a></li>
 
+      <li><a href="#details">Details</a></li>
+
       <li><a href="#see-also">See also</a></li>
           </ul>
 
@@ -162,12 +171,12 @@ column names of <code>conf.low</code> and <code>conf.high</code>, and no row nam
 
       <footer>
       <div class="tidyverse">
-  <p>broom is a part of the <strong>tidyverse</strong>, an ecosystem of packages designed with common APIs and a shared philosophy. Learn more at <a href="http://tidyverse.org">tidyverse.org</a>.</p>
+  <p>broom is a part of the <strong>tidyverse</strong>, an ecosystem of packages designed with common APIs and a shared philosophy. Learn more at <a href="https://tidyverse.org">tidyverse.org</a>.</p>
 </div>
 
 <div class="author">
-  <p>Developed by David Robinson.</p>
-  <p>Site built by <a href="http://pkgdown.r-lib.org">pkgdown</a>.</p>
+  <p>Developed by David Robinson, Alex Hayes.</p>
+  <p>Site built by <a href="https://pkgdown.r-lib.org">pkgdown</a>.</p>
 </div>
 
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-115082821-1"></script>

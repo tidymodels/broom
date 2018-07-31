@@ -102,7 +102,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Tidying methods for an rlm (robust linear model) object</h1>
-    <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/rlm_tidiers.R'><code>R/rlm_tidiers.R</code></a></small>
+    <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/mass-rlm-tidiers.R'><code>R/mass-rlm-tidiers.R</code></a></small>
     <div class="hidden name"><code>rlm_tidiers.Rd</code></div>
     </div>
 
@@ -114,7 +114,13 @@
     </div>
 
     <pre class="usage"><span class='co'># S3 method for rlm</span>
-<span class='fu'><a href='glance.html'>glance</a></span>(<span class='no'>x</span>, <span class='no'>...</span>)</pre>
+<span class='fu'><a href='glance.html'>glance</a></span>(<span class='no'>x</span>, <span class='no'>...</span>)
+
+<span class='co'># S3 method for rlm</span>
+<span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>x</span>, <span class='no'>...</span>)
+
+<span class='co'># S3 method for rlm</span>
+<span class='fu'><a href='augment.html'>augment</a></span>(<span class='no'>x</span>, <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -133,11 +139,11 @@
 
     <p><code>glance.rlm</code> returns a one-row data.frame with the columns</p>
 <dt>sigma</dt><dd><p>The square root of the estimated residual variance</p></dd>
-  <dt>converged</dt><dd><p>whether the IWLS converged</p></dd>
-  <dt>logLik</dt><dd><p>the data's log-likelihood under the model</p></dd>
-  <dt>AIC</dt><dd><p>the Akaike Information Criterion</p></dd>
-  <dt>BIC</dt><dd><p>the Bayesian Information Criterion</p></dd>
-  <dt>deviance</dt><dd><p>deviance</p></dd>
+<dt>converged</dt><dd><p>whether the IWLS converged</p></dd>
+<dt>logLik</dt><dd><p>the data's log-likelihood under the model</p></dd>
+<dt>AIC</dt><dd><p>the Akaike Information Criterion</p></dd>
+<dt>BIC</dt><dd><p>the Bayesian Information Criterion</p></dd>
+<dt>deviance</dt><dd><p>deviance</p></dd>
 
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
@@ -150,55 +156,29 @@
 <span class='fu'>library</span>(<span class='no'>MASS</span>)
 
 <span class='no'>r</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/MASS/topics/rlm'>rlm</a></span>(<span class='no'>stack.loss</span> ~ <span class='no'>.</span>, <span class='no'>stackloss</span>)
-<span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>r</span>)</div><div class='output co'>#&gt;          term    estimate std.error  statistic
-#&gt; 1 (Intercept) -41.0265311 9.8073472 -4.1832445
-#&gt; 2    Air.Flow   0.8293739 0.1111803  7.4597166
-#&gt; 3  Water.Temp   0.9261082 0.3034081  3.0523516
-#&gt; 4  Acid.Conc.  -0.1278492 0.1288526 -0.9922126</div><div class='input'><span class='fu'><a href='augment.html'>augment</a></span>(<span class='no'>r</span>)</div><div class='output co'>#&gt;    stack.loss Air.Flow Water.Temp Acid.Conc.   .fitted   .se.fit      .resid
-#&gt; 1          42       80         27         89 38.949724 1.3402952  3.05027584
-#&gt; 2          37       80         27         88 39.077573 1.3760106 -2.07757332
-#&gt; 3          37       75         25         90 32.822789 1.0199001  4.17721071
-#&gt; 4          28       62         24         87 21.498368 0.8749380  6.50163171
-#&gt; 5          18       62         22         87 19.646152 0.5577463 -1.64615192
-#&gt; 6          18       62         23         87 20.572260 0.6794106 -2.57226011
-#&gt; 7          19       62         24         93 20.731273 1.1428087 -1.73127333
-#&gt; 8          20       62         24         93 20.731273 1.1428087 -0.73127333
-#&gt; 9          15       58         23         87 17.254765 0.9138302 -2.25476463
-#&gt; 10         14       58         18         80 13.519168 1.0916412  0.48083217
-#&gt; 11         14       58         18         89 12.368525 0.9610128  1.63147461
-#&gt; 12         13       58         17         88 11.570266 1.1374249  1.42973363
-#&gt; 13         11       58         18         82 13.263470 0.9687250 -2.26346951
-#&gt; 14         12       58         19         93 12.783237 1.1072959 -0.78323693
-#&gt; 15          8       50         18         89  5.733534 1.0651832  2.26646556
-#&gt; 16          7       50         18         86  6.117082 0.8836385  0.88291808
-#&gt; 17          8       50         19         72  8.833078 1.5668613 -0.83307835
-#&gt; 18          8       50         19         79  7.938134 0.9780922  0.06186577
-#&gt; 19          9       50         20         80  8.736393 1.0196712  0.26360675
-#&gt; 20         15       56         20         82 13.456938 0.6911395  1.54306186
-#&gt; 21         15       70         20         91 23.917530 1.3019177 -8.91752986
-#&gt;          .hat   .sigma
-#&gt; 1  0.32748886 3.323299
-#&gt; 2  0.34304831 3.390924
-#&gt; 3  0.15483077 3.258627
-#&gt; 4  0.07125885 3.010706
-#&gt; 5  0.05623591 3.424843
-#&gt; 6  0.08345921 3.384940
-#&gt; 7  0.23015606 3.415504
-#&gt; 8  0.23015606 3.444647
-#&gt; 9  0.15450318 3.396056
-#&gt; 10 0.21336372 3.448280
-#&gt; 11 0.17697670 3.421531
-#&gt; 12 0.25351376 3.426056
-#&gt; 13 0.17255096 3.394411
-#&gt; 14 0.22007371 3.443813
-#&gt; 15 0.19202720 3.392882
-#&gt; 16 0.13212489 3.442799
-#&gt; 17 0.42127010 3.440066
-#&gt; 18 0.16617464 3.450901
-#&gt; 19 0.18875542 3.450167
-#&gt; 20 0.08130459 3.427393
-#&gt; 21 0.13072708 2.488256</div><div class='input'><span class='fu'><a href='glance.html'>glance</a></span>(<span class='no'>r</span>)</div><div class='output co'>#&gt;      sigma converged  logLik     AIC      BIC deviance
-#&gt; 1 2.440714      TRUE -52.954 115.908 121.1306 190.5441</div><div class='input'>
+<span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>r</span>)</div><div class='output co'>#&gt; # A tibble: 4 x 4
+#&gt;   term        estimate std.error statistic
+#&gt;   &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;
+#&gt; 1 (Intercept)  -41.0       9.81     -4.18 
+#&gt; 2 Air.Flow       0.829     0.111     7.46 
+#&gt; 3 Water.Temp     0.926     0.303     3.05 
+#&gt; 4 Acid.Conc.    -0.128     0.129    -0.992</div><div class='input'><span class='fu'><a href='augment.html'>augment</a></span>(<span class='no'>r</span>)</div><div class='output co'>#&gt; # A tibble: 21 x 9
+#&gt;    stack.loss Air.Flow Water.Temp Acid.Conc. .fitted .se.fit .resid   .hat
+#&gt;  *      &lt;dbl&gt;    &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;
+#&gt;  1         42       80         27         89    38.9   1.34   3.05  0.327 
+#&gt;  2         37       80         27         88    39.1   1.38  -2.08  0.343 
+#&gt;  3         37       75         25         90    32.8   1.02   4.18  0.155 
+#&gt;  4         28       62         24         87    21.5   0.875  6.50  0.0713
+#&gt;  5         18       62         22         87    19.6   0.558 -1.65  0.0562
+#&gt;  6         18       62         23         87    20.6   0.679 -2.57  0.0835
+#&gt;  7         19       62         24         93    20.7   1.14  -1.73  0.230 
+#&gt;  8         20       62         24         93    20.7   1.14  -0.731 0.230 
+#&gt;  9         15       58         23         87    17.3   0.914 -2.25  0.155 
+#&gt; 10         14       58         18         80    13.5   1.09   0.481 0.213 
+#&gt; # ... with 11 more rows, and 1 more variable: .sigma &lt;dbl&gt;</div><div class='input'><span class='fu'><a href='glance.html'>glance</a></span>(<span class='no'>r</span>)</div><div class='output co'>#&gt; # A tibble: 1 x 6
+#&gt;   sigma converged logLik   AIC   BIC deviance
+#&gt;   &lt;dbl&gt; &lt;lgl&gt;      &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;
+#&gt; 1  2.44 TRUE       -53.0  116.  121.     191.</div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

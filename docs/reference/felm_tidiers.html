@@ -102,7 +102,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Tidying methods for models with multiple group fixed effects</h1>
-    <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/felm_tidiers.R'><code>R/felm_tidiers.R</code></a></small>
+    <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/lfe-tidiers.R'><code>R/lfe-tidiers.R</code></a></small>
     <div class="hidden name"><code>felm_tidiers.Rd</code></div>
     </div>
 
@@ -163,28 +163,25 @@ structure depends on the method chosen.</p>
 <p><code>tidy.felm</code> returns one row for each coefficient. If <code>fe=TRUE</code>, it also includes rows for for fixed effects estimates.
 There are five columns:</p>
 <dt>term</dt><dd><p>The term in the linear model being estimated and tested</p></dd>
-  <dt>estimate</dt><dd><p>The estimated coefficient</p></dd>
-  <dt>std.error</dt><dd><p>The standard error from the linear model</p></dd>
-  <dt>statistic</dt><dd><p>t-statistic</p></dd>
-  <dt>p.value</dt><dd><p>two-sided p-value</p></dd>
+<dt>estimate</dt><dd><p>The estimated coefficient</p></dd>
+<dt>std.error</dt><dd><p>The standard error from the linear model</p></dd>
+<dt>statistic</dt><dd><p>t-statistic</p></dd>
+<dt>p.value</dt><dd><p>two-sided p-value</p></dd>
 
-If cont.int=TRUE, it also includes columns for conf.low and conf.high, computed with confint.
+If cont.int=TRUE, it also includes columns for conf.low and conf.high, computed with confint().
 
 augment.felm returns  one row for each observation, with multiple columns added to the original data:
-  <dt>.fitted</dt><dd><p>Fitted values of model</p></dd>
-  <dt>.resid</dt><dd><p>Residuals</p></dd>
-  If fixed effect are present,
-  <dt>.comp</dt><dd><p>Connected component</p></dd>
-  <dt>.fe_</dt><dd><p>Fixed effects (as many columns as factors)</p></dd>
+<dt>.fitted</dt><dd><p>Fitted values of model</p></dd>
+<dt>.resid</dt><dd><p>Residuals</p></dd>
 
 glance.lm returns a one-row data.frame with the columns
-  <dt>r.squared</dt><dd><p>The percent of variance explained by the model</p></dd>
-  <dt>adj.r.squared</dt><dd><p>r.squared adjusted based on the degrees of freedom</p></dd>
-  <dt>sigma</dt><dd><p>The square root of the estimated residual variance</p></dd>
-  <dt>statistic</dt><dd><p>F-statistic</p></dd>
-  <dt>p.value</dt><dd><p>p-value from the F test</p></dd>
-  <dt>df</dt><dd><p>Degrees of freedom used by the coefficients</p></dd>
-  <dt>df.residual</dt><dd><p>residual degrees of freedom</p></dd>
+<dt>r.squared</dt><dd><p>The percent of variance explained by the model</p></dd>
+<dt>adj.r.squared</dt><dd><p>r.squared adjusted based on the degrees of freedom</p></dd>
+<dt>sigma</dt><dd><p>The square root of the estimated residual variance</p></dd>
+<dt>statistic</dt><dd><p>F-statistic</p></dd>
+<dt>p.value</dt><dd><p>p-value from the F test</p></dd>
+<dt>df</dt><dd><p>Degrees of freedom used by the coefficients</p></dd>
+<dt>df.residual</dt><dd><p>residual degrees of freedom</p></dd>
 
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
@@ -218,7 +215,8 @@ glance.lm returns a one-row data.frame with the columns
     <span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>result_felm</span>)
     <span class='fu'><a href='augment.html'>augment</a></span>(<span class='no'>result_felm</span>)
     <span class='fu'><a href='glance.html'>glance</a></span>(<span class='no'>result_felm</span>)
-}</div><div class='output co'>#&gt; <span class='error'>Error in (function (..., row.names = NULL, check.rows = FALSE, check.names = TRUE,     fix.empty.names = TRUE, stringsAsFactors = default.stringsAsFactors()) {    data.row.names &lt;- if (check.rows &amp;&amp; is.null(row.names))         function(current, new, i) {            if (is.character(current))                 new &lt;- as.character(new)            if (is.character(new))                 current &lt;- as.character(current)            if (anyDuplicated(new))                 return(current)            if (is.null(current))                 return(new)            if (all(current == new) || all(current == ""))                 return(new)            stop(gettextf("mismatch of row names in arguments of 'data.frame', item %d",                 i), domain = NA)        }    else function(current, new, i) {        if (is.null(current)) {            if (anyDuplicated(new)) {                warning(gettextf("some row.names duplicated: %s --&gt; row.names NOT used",                   paste(which(duplicated(new)), collapse = ",")),                   domain = NA)                current            }            else new        }        else current    }    object &lt;- as.list(substitute(list(...)))[-1L]    mirn &lt;- missing(row.names)    mrn &lt;- is.null(row.names)    x &lt;- list(...)    n &lt;- length(x)    if (n &lt; 1L) {        if (!mrn) {            if (is.object(row.names) || !is.integer(row.names))                 row.names &lt;- as.character(row.names)            if (anyNA(row.names))                 stop("row names contain missing values")            if (anyDuplicated(row.names))                 stop(gettextf("duplicate row.names: %s", paste(unique(row.names[duplicated(row.names)]),                   collapse = ", ")), domain = NA)        }        else row.names &lt;- integer()        return(structure(list(), names = character(), row.names = row.names,             class = "data.frame"))    }    vnames &lt;- names(x)    if (length(vnames) != n)         vnames &lt;- character(n)    no.vn &lt;- !nzchar(vnames)    vlist &lt;- vnames &lt;- as.list(vnames)    nrows &lt;- ncols &lt;- integer(n)    for (i in seq_len(n)) {        xi &lt;- if (is.character(x[[i]]) || is.list(x[[i]]))             as.data.frame(x[[i]], optional = TRUE, stringsAsFactors = stringsAsFactors)        else as.data.frame(x[[i]], optional = TRUE)        nrows[i] &lt;- .row_names_info(xi)        ncols[i] &lt;- length(xi)        namesi &lt;- names(xi)        if (ncols[i] &gt; 1L) {            if (length(namesi) == 0L)                 namesi &lt;- seq_len(ncols[i])            vnames[[i]] &lt;- if (no.vn[i])                 namesi            else paste(vnames[[i]], namesi, sep = ".")        }        else if (length(namesi)) {            vnames[[i]] &lt;- namesi        }        else if (fix.empty.names &amp;&amp; no.vn[[i]]) {            tmpname &lt;- deparse(object[[i]], nlines = 1L)[1L]            if (substr(tmpname, 1L, 2L) == "I(") {                ntmpn &lt;- nchar(tmpname, "c")                if (substr(tmpname, ntmpn, ntmpn) == ")")                   tmpname &lt;- substr(tmpname, 3L, ntmpn - 1L)            }            vnames[[i]] &lt;- tmpname        }        if (mirn &amp;&amp; nrows[i] &gt; 0L) {            rowsi &lt;- attr(xi, "row.names")            if (any(nzchar(rowsi)))                 row.names &lt;- data.row.names(row.names, rowsi,                   i)        }        nrows[i] &lt;- abs(nrows[i])        vlist[[i]] &lt;- xi    }    nr &lt;- max(nrows)    for (i in seq_len(n)[nrows &lt; nr]) {        xi &lt;- vlist[[i]]        if (nrows[i] &gt; 0L &amp;&amp; (nr%%nrows[i] == 0L)) {            xi &lt;- unclass(xi)            fixed &lt;- TRUE            for (j in seq_along(xi)) {                xi1 &lt;- xi[[j]]                if (is.vector(xi1) || is.factor(xi1))                   xi[[j]] &lt;- rep(xi1, length.out = nr)                else if (is.character(xi1) &amp;&amp; inherits(xi1, "AsIs"))                   xi[[j]] &lt;- structure(rep(xi1, length.out = nr),                     class = class(xi1))                else if (inherits(xi1, "Date") || inherits(xi1,                   "POSIXct"))                   xi[[j]] &lt;- rep(xi1, length.out = nr)                else {                  fixed &lt;- FALSE                  break                }            }            if (fixed) {                vlist[[i]] &lt;- xi                next            }        }        stop(gettextf("arguments imply differing number of rows: %s",             paste(unique(nrows), collapse = ", ")), domain = NA)    }    value &lt;- unlist(vlist, recursive = FALSE, use.names = FALSE)    vnames &lt;- unlist(vnames[ncols &gt; 0L])    if (fix.empty.names &amp;&amp; any(noname &lt;- !nzchar(vnames)))         vnames[noname] &lt;- paste0("Var.", seq_along(vnames))[noname]    if (check.names) {        if (fix.empty.names)             vnames &lt;- make.names(vnames, unique = TRUE)        else {            nz &lt;- nzchar(vnames)            vnames[nz] &lt;- make.names(vnames[nz], unique = TRUE)        }    }    names(value) &lt;- vnames    if (!mrn) {        if (length(row.names) == 1L &amp;&amp; nr != 1L) {            if (is.character(row.names))                 row.names &lt;- match(row.names, vnames, 0L)            if (length(row.names) != 1L || row.names &lt; 1L ||                 row.names &gt; length(vnames))                 stop("'row.names' should specify one of the variables")            i &lt;- row.names            row.names &lt;- value[[i]]            value &lt;- value[-i]        }        else if (!is.null(row.names) &amp;&amp; length(row.names) !=             nr)             stop("row names supplied are of the wrong length")    }    else if (!is.null(row.names) &amp;&amp; length(row.names) != nr) {        warning("row names were found from a short variable and have been discarded")        row.names &lt;- NULL    }    class(value) &lt;- "data.frame"    if (is.null(row.names))         attr(value, "row.names") &lt;- .set_row_names(nr)    else {        if (is.object(row.names) || !is.integer(row.names))             row.names &lt;- as.character(row.names)        if (anyNA(row.names))             stop("row names contain missing values")        if (anyDuplicated(row.names))             stop(gettextf("duplicate row.names: %s", paste(unique(row.names[duplicated(row.names)]),                 collapse = ", ")), domain = NA)        row.names(value) &lt;- row.names    }    value})(v2, v3, id, v1, check.names = FALSE, fix.empty.names = TRUE,     stringsAsFactors = TRUE): objet 'v2' introuvable</span></div></pre>
+}</div><div class='output co'>#&gt; <span class='message'>Error: package or namespace load failed for 'lfe' in loadNamespace(i, c(lib.loc, .libPaths()), versionCheck = vI[[i]]):</span>
+#&gt; <span class='message'> there is no package called 'zoo'</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

@@ -4,7 +4,7 @@ This outlines how to propose a change to broom. For more detailed
 info about contributing to this, and other tidyverse packages, please see the
 [**development contributing guide**](https://rstd.io/tidy-contrib).
 
-If you are adding new tidiers to broom, be sure to read the vignette on adding tidying methods.
+If you are adding new tidiers to broom, be sure to read the [vignette](https://broom.tidyverse.org/articles/adding-tidiers.html) on adding tidying methods
 
 ### Fixing typos
 
@@ -18,7 +18,7 @@ the GitHub web interface, so long as the changes are made in the _source_ file.
 
 Before you make a substantial pull request, you should always file an issue and
 make sure someone from the team agrees that it's a problem. If you've found a
-bug, create an associated issue and illustrate the bug with a minimal 
+bug, create an associated issue and illustrate the bug with a minimal
 [reprex](https://www.tidyverse.org/help/#reprex).
 
 ### Pull request process
@@ -29,13 +29,14 @@ The `README` should contain badges for any continuous integration services used
 by the package.  
 *  New code should follow the tidyverse [style guide](http://style.tidyverse.org).
 You can use the [styler](https://CRAN.R-project.org/package=styler) package to
-apply these styles, but please don't restyle code that has nothing to do with 
+apply these styles, but please don't restyle code that has nothing to do with
 your PR.  
 *  We use [roxygen2](https://cran.r-project.org/package=roxygen2), with
-[Markdown syntax](https://cran.r-project.org/web/packages/roxygen2/vignettes/markdown.html), 
+[Markdown syntax](https://cran.r-project.org/web/packages/roxygen2/vignettes/markdown.html),
 for documentation.  
 *  We use [testthat](https://cran.r-project.org/package=testthat). Contributions
 with test cases included are easier to accept.  
+    * See additional tips for testing in the [vignette](https://broom.tidyverse.org/articles/adding-tidiers.html#testing-new-tidiers) on adding tidying methods.
 *  For user-facing changes, add a bullet to the top of `NEWS.md` below the current
 development version header describing the changes made followed by your GitHub
 username, and links to relevant issue(s)/PR(s).

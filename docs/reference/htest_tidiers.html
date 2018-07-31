@@ -102,15 +102,15 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Tidying methods for an htest object</h1>
-    <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/htest_tidiers.R'><code>R/htest_tidiers.R</code></a></small>
+    <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/stats-htest-tidiers.R'><code>R/stats-htest-tidiers.R</code></a></small>
     <div class="hidden name"><code>htest_tidiers.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Tidies hypothesis test objects, such as those from 
-<code><a href='http://www.rdocumentation.org/packages/stats/topics/cor.test'>cor.test</a></code>, <code><a href='http://www.rdocumentation.org/packages/stats/topics/t.test'>t.test</a></code>,
-<code><a href='http://www.rdocumentation.org/packages/stats/topics/wilcox.test'>wilcox.test</a></code>, and <code><a href='http://www.rdocumentation.org/packages/stats/topics/chisq.test'>chisq.test</a></code>,
+    <p>Tidies hypothesis test objects, such as those from
+<code><a href='http://www.rdocumentation.org/packages/stats/topics/cor.test'>stats::cor.test()</a></code>, <code><a href='http://www.rdocumentation.org/packages/stats/topics/t.test'>stats::t.test()</a></code>,
+<code><a href='http://www.rdocumentation.org/packages/stats/topics/wilcox.test'>stats::wilcox.test()</a></code>, and <code><a href='http://www.rdocumentation.org/packages/stats/topics/chisq.test'>stats::chisq.test()</a></code>,
 into a one-row data frame.</p>
     
     </div>
@@ -142,32 +142,32 @@ into a one-row data frame.</p>
     <p>Both <code>tidy</code> and <code>glance</code> return the same output,
 a one-row data frame with one or more of the following columns:</p>
 <dt>estimate</dt><dd><p>Estimate of the effect size</p></dd>
-  <dt>statistic</dt><dd><p>Test statistic used to compute the p-value</p></dd>
-  <dt>p.value</dt><dd><p>P-value</p></dd>
-  <dt>parameter</dt><dd><p>Parameter field in the htest, typically degrees of
-  freedom</p></dd>
-  <dt>conf.low</dt><dd><p>Lower bound on a confidence interval</p></dd>
-  <dt>conf.high</dt><dd><p>Upper bound on a confidence interval</p></dd>
-  <dt>estimate1</dt><dd><p>Sometimes two estimates are computed, such as in a
-  two-sample t-test</p></dd>
-  <dt>estimate2</dt><dd><p>Sometimes two estimates are computed, such as in a
-  two-sample t-test</p></dd>
-  <dt>method</dt><dd><p>Method used to compute the statistic as a string</p></dd>
-  <dt>alternative</dt><dd><p>Alternative hypothesis as a string</p></dd>
+<dt>statistic</dt><dd><p>Test statistic used to compute the p-value</p></dd>
+<dt>p.value</dt><dd><p>P-value</p></dd>
+<dt>parameter</dt><dd><p>Parameter field in the htest, typically degrees of
+freedom</p></dd>
+<dt>conf.low</dt><dd><p>Lower bound on a confidence interval</p></dd>
+<dt>conf.high</dt><dd><p>Upper bound on a confidence interval</p></dd>
+<dt>estimate1</dt><dd><p>Sometimes two estimates are computed, such as in a
+two-sample t-test</p></dd>
+<dt>estimate2</dt><dd><p>Sometimes two estimates are computed, such as in a
+two-sample t-test</p></dd>
+<dt>method</dt><dd><p>Method used to compute the statistic as a string</p></dd>
+<dt>alternative</dt><dd><p>Alternative hypothesis as a string</p></dd>
 
 Which columns are included depends on the hypothesis test used.
 
 For chi-squared tests, augment.htest  will returns, for each
 cell of the tested table, the additional columns:
-  <dt>.observed</dt><dd><p>Observed count</p></dd>
-  <dt>.prop</dt><dd><p>Proportion of the total</p></dd>
-  <dt>.row.prop</dt><dd><p>Row proportion (2 dimensions table only)</p></dd>
-  <dt>.col.prop</dt><dd><p>Column proportion (2 dimensions table only)</p></dd>
-  <dt>.expected</dt><dd><p>Expected count under the null hypothesis</p></dd>
-  <dt>.residuals</dt><dd><p>Pearson residual</p></dd>
-  <dt>.stdres</dt><dd><p>Standardized residual</p></dd>
+<dt>.observed</dt><dd><p>Observed count</p></dd>
+<dt>.prop</dt><dd><p>Proportion of the total</p></dd>
+<dt>.row.prop</dt><dd><p>Row proportion (2 dimensions table only)</p></dd>
+<dt>.col.prop</dt><dd><p>Column proportion (2 dimensions table only)</p></dd>
+<dt>.expected</dt><dd><p>Expected count under the null hypothesis</p></dd>
+<dt>.residuals</dt><dd><p>Pearson residual</p></dd>
+<dt>.stdres</dt><dd><p>Standardized residual</p></dd>
 
-See <a href='http://www.rdocumentation.org/packages/stats/topics/chisq.test'>chisq.test</a> for more details on
+See <a href='http://www.rdocumentation.org/packages/stats/topics/chisq.test'>stats::chisq.test()</a> for more details on
 how residuals are computed.
 
     
@@ -181,48 +181,44 @@ generates one value for each observation.</p>
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
 <span class='no'>tt</span> <span class='kw'>&lt;-</span> <span class='fu'>t.test</span>(<span class='fu'>rnorm</span>(<span class='fl'>10</span>))
-<span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>tt</span>)</div><div class='output co'>#&gt;     estimate  statistic   p.value parameter  conf.low conf.high
-#&gt; 1 -0.2178381 -0.5332314 0.6067881         9 -1.141985 0.7063086
-#&gt;              method alternative
-#&gt; 1 One Sample t-test   two.sided</div><div class='input'><span class='fu'><a href='glance.html'>glance</a></span>(<span class='no'>tt</span>)  <span class='co'># same output for all htests</span></div><div class='output co'>#&gt;     estimate  statistic   p.value parameter  conf.low conf.high
-#&gt; 1 -0.2178381 -0.5332314 0.6067881         9 -1.141985 0.7063086
-#&gt;              method alternative
-#&gt; 1 One Sample t-test   two.sided</div><div class='input'>
+<span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>tt</span>)</div><div class='output co'>#&gt; # A tibble: 1 x 8
+#&gt;   estimate statistic p.value parameter conf.low conf.high method    alternative
+#&gt;      &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;     &lt;chr&gt;      
+#&gt; 1   -0.218    -0.533   0.607         9    -1.14     0.706 One Samp~ two.sided  </div><div class='input'><span class='fu'><a href='glance.html'>glance</a></span>(<span class='no'>tt</span>)  <span class='co'># same output for all htests</span></div><div class='output co'>#&gt; # A tibble: 1 x 8
+#&gt;   estimate statistic p.value parameter conf.low conf.high method    alternative
+#&gt;      &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;     &lt;chr&gt;      
+#&gt; 1   -0.218    -0.533   0.607         9    -1.14     0.706 One Samp~ two.sided  </div><div class='input'>
 <span class='no'>tt</span> <span class='kw'>&lt;-</span> <span class='fu'>t.test</span>(<span class='no'>mpg</span> ~ <span class='no'>am</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>mtcars</span>)
-<span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>tt</span>)</div><div class='output co'>#&gt;    estimate estimate1 estimate2 statistic     p.value parameter  conf.low
-#&gt; 1 -7.244939  17.14737  24.39231 -3.767123 0.001373638  18.33225 -11.28019
-#&gt;   conf.high                  method alternative
-#&gt; 1 -3.209684 Welch Two Sample t-test   two.sided</div><div class='input'>
+<span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>tt</span>)</div><div class='output co'>#&gt; # A tibble: 1 x 10
+#&gt;   estimate estimate1 estimate2 statistic p.value parameter conf.low conf.high
+#&gt;      &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;
+#&gt; 1    -7.24      17.1      24.4     -3.77 0.00137      18.3    -11.3     -3.21
+#&gt; # ... with 2 more variables: method &lt;chr&gt;, alternative &lt;chr&gt;</div><div class='input'>
 <span class='no'>wt</span> <span class='kw'>&lt;-</span> <span class='fu'>wilcox.test</span>(<span class='no'>mpg</span> ~ <span class='no'>am</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>mtcars</span>, <span class='kw'>conf.int</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>exact</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
-<span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>wt</span>)</div><div class='output co'>#&gt;    estimate statistic     p.value  conf.low conf.high
-#&gt; 1 -6.799963        42 0.001871391 -11.69994 -2.900042
-#&gt;                                              method alternative
-#&gt; 1 Wilcoxon rank sum test with continuity correction   two.sided</div><div class='input'>
+<span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>wt</span>)</div><div class='output co'>#&gt; # A tibble: 1 x 7
+#&gt;   estimate statistic p.value conf.low conf.high method              alternative
+#&gt;      &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;               &lt;chr&gt;      
+#&gt; 1    -6.80        42 0.00187    -11.7     -2.90 Wilcoxon rank sum ~ two.sided  </div><div class='input'>
 <span class='no'>ct</span> <span class='kw'>&lt;-</span> <span class='fu'>cor.test</span>(<span class='no'>mtcars</span>$<span class='no'>wt</span>, <span class='no'>mtcars</span>$<span class='no'>mpg</span>)
-<span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>ct</span>)</div><div class='output co'>#&gt;     estimate statistic      p.value parameter   conf.low  conf.high
-#&gt; 1 -0.8676594 -9.559044 1.293959e-10        30 -0.9338264 -0.7440872
-#&gt;                                 method alternative
-#&gt; 1 Pearson's product-moment correlation   two.sided</div><div class='input'>
+<span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>ct</span>)</div><div class='output co'>#&gt; # A tibble: 1 x 8
+#&gt;   estimate statistic  p.value parameter conf.low conf.high method   alternative
+#&gt;      &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;     &lt;int&gt;    &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;    &lt;chr&gt;      
+#&gt; 1   -0.868     -9.56 1.29e-10        30   -0.934    -0.744 Pearson~ two.sided  </div><div class='input'>
 <span class='no'>chit</span> <span class='kw'>&lt;-</span> <span class='fu'>chisq.test</span>(<span class='fu'>xtabs</span>(<span class='no'>Freq</span> ~ <span class='no'>Sex</span> + <span class='no'>Class</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='fu'>as.data.frame</span>(<span class='no'>Titanic</span>)))
-<span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>chit</span>)</div><div class='output co'>#&gt;   statistic      p.value parameter                     method
-#&gt; 1  349.9145 1.556637e-75         3 Pearson's Chi-squared test</div><div class='input'><span class='fu'><a href='augment.html'>augment</a></span>(<span class='no'>chit</span>)</div><div class='output co'>#&gt;      Sex Class .observed      .prop  .row.prop .col.prop .expected .residuals
-#&gt; 1   Male   1st       180 0.08178101 0.10398614 0.5538462 255.59973  -4.728681
-#&gt; 2 Female   1st       145 0.06587915 0.30851064 0.4461538  69.40027   9.074854
-#&gt; 3   Male   2nd       179 0.08132667 0.10340843 0.6280702 224.14130  -3.015179
-#&gt; 4 Female   2nd       106 0.04815993 0.22553191 0.3719298  60.85870   5.786457
-#&gt; 5   Male   3rd       510 0.23171286 0.29462738 0.7223796 555.24125  -1.919967
-#&gt; 6 Female   3rd       196 0.08905043 0.41702128 0.2776204 150.75875   3.684626
-#&gt; 7   Male  Crew       862 0.39164016 0.49797805 0.9740113 696.01772   6.291462
-#&gt; 8 Female  Crew        23 0.01044980 0.04893617 0.0259887 188.98228 -12.074000
-#&gt;      .stdres
-#&gt; 1 -11.083954
-#&gt; 2  11.083954
-#&gt; 3  -6.993369
-#&gt; 4   6.993369
-#&gt; 5  -5.041320
-#&gt; 6   5.041320
-#&gt; 7  17.607380
-#&gt; 8 -17.607380</div><div class='input'>
+<span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>chit</span>)</div><div class='output co'>#&gt; # A tibble: 1 x 4
+#&gt;   statistic  p.value parameter method                    
+#&gt;       &lt;dbl&gt;    &lt;dbl&gt;     &lt;int&gt; &lt;chr&gt;                     
+#&gt; 1      350. 1.56e-75         3 Pearson's Chi-squared test</div><div class='input'><span class='fu'><a href='augment.html'>augment</a></span>(<span class='no'>chit</span>)</div><div class='output co'>#&gt; # A tibble: 8 x 9
+#&gt;   Sex   Class .observed  .prop .row.prop .col.prop .expected .residuals .stdres
+#&gt;   &lt;fct&gt; &lt;fct&gt;     &lt;dbl&gt;  &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;      &lt;dbl&gt;   &lt;dbl&gt;
+#&gt; 1 Male  1st         180 0.0818    0.104     0.554      256.       -4.73  -11.1 
+#&gt; 2 Fema~ 1st         145 0.0659    0.309     0.446       69.4       9.07   11.1 
+#&gt; 3 Male  2nd         179 0.0813    0.103     0.628      224.       -3.02   -6.99
+#&gt; 4 Fema~ 2nd         106 0.0482    0.226     0.372       60.9       5.79    6.99
+#&gt; 5 Male  3rd         510 0.232     0.295     0.722      555.       -1.92   -5.04
+#&gt; 6 Fema~ 3rd         196 0.0891    0.417     0.278      151.        3.68    5.04
+#&gt; 7 Male  Crew        862 0.392     0.498     0.974      696.        6.29   17.6 
+#&gt; 8 Fema~ Crew         23 0.0104    0.0489    0.0260     189.      -12.1   -17.6 </div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

@@ -102,7 +102,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Tidiers for x, y, z lists suitable for persp, image, etc.</h1>
-    <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/xyz_tidiers.R'><code>R/xyz_tidiers.R</code></a></small>
+    <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/list-xyz-tidiers.R'><code>R/list-xyz-tidiers.R</code></a></small>
     <div class="hidden name"><code>xyz_tidiers.Rd</code></div>
     </div>
 
@@ -110,8 +110,8 @@
     
     <p>Tidies lists with components x, y (vector of coordinates) and z (matrix of
 values) which are typically used by functions such as
-<code><a href='http://www.rdocumentation.org/packages/graphics/topics/persp'>persp</a></code> or <code><a href='http://www.rdocumentation.org/packages/graphics/topics/image'>image</a></code> and returned
-by interpolation functions such as <code><a href='http://www.rdocumentation.org/packages/akima/topics/interp'>interp</a></code>.</p>
+<code><a href='http://www.rdocumentation.org/packages/graphics/topics/persp'>graphics::persp()</a></code> or <code><a href='http://www.rdocumentation.org/packages/graphics/topics/image'>graphics::image()</a></code> and returned
+by interpolation functions such as <code><a href='http://www.rdocumentation.org/packages/akima/topics/interp'>akima::interp()</a></code>.</p>
     
     </div>
 
@@ -141,22 +141,24 @@ per value in matrix z.</p>
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
 <span class='no'>A</span> <span class='kw'>&lt;-</span> <span class='fu'>list</span>(<span class='kw'>x</span><span class='kw'>=</span><span class='fl'>1</span>:<span class='fl'>5</span>, <span class='kw'>y</span><span class='kw'>=</span><span class='fl'>1</span>:<span class='fl'>3</span>, <span class='kw'>z</span><span class='kw'>=</span><span class='fu'>matrix</span>(<span class='fu'>runif</span>(<span class='fl'>5</span>*<span class='fl'>3</span>), <span class='kw'>nrow</span><span class='kw'>=</span><span class='fl'>5</span>))
-<span class='fu'>image</span>(<span class='no'>A</span>)</div><div class='img'><img src='xyz_tidiers-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>A</span>)</div><div class='output co'>#&gt;    x y          z
-#&gt; 1  1 1 0.95411443
-#&gt; 2  2 1 0.38532908
-#&gt; 3  3 1 0.05822014
-#&gt; 4  4 1 0.07846847
-#&gt; 5  5 1 0.38953420
-#&gt; 6  1 2 0.84178699
-#&gt; 7  2 2 0.54960209
-#&gt; 8  3 2 0.42411878
-#&gt; 9  4 2 0.58030541
-#&gt; 10 5 2 0.82328280
-#&gt; 11 1 3 0.19747151
-#&gt; 12 2 3 0.90880856
-#&gt; 13 3 3 0.80422248
-#&gt; 14 4 3 0.95097634
-#&gt; 15 5 3 0.92494436</div><div class='input'>
+<span class='fu'>image</span>(<span class='no'>A</span>)</div><div class='img'><img src='xyz_tidiers-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>A</span>)</div><div class='output co'>#&gt; # A tibble: 15 x 3
+#&gt;        x     y      z
+#&gt;    &lt;int&gt; &lt;int&gt;  &lt;dbl&gt;
+#&gt;  1     1     1 0.885 
+#&gt;  2     2     1 0.339 
+#&gt;  3     3     1 0.754 
+#&gt;  4     4     1 0.802 
+#&gt;  5     5     1 0.599 
+#&gt;  6     1     2 0.924 
+#&gt;  7     2     2 0.202 
+#&gt;  8     3     2 0.994 
+#&gt;  9     4     2 0.492 
+#&gt; 10     5     2 0.419 
+#&gt; 11     1     3 0.331 
+#&gt; 12     2     3 0.653 
+#&gt; 13     3     3 0.263 
+#&gt; 14     4     3 0.592 
+#&gt; 15     5     3 0.0341</div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

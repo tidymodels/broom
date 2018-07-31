@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Tidying methods for (truncated) singular value decomposition — svd_tidiers • broom</title>
+<title>Tidy an irlba list — svd_tidiers • broom</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -101,65 +101,69 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Tidying methods for (truncated) singular value decomposition</h1>
-    <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/svd_tidiers.R'><code>R/svd_tidiers.R</code></a></small>
+    <h1>Tidy an irlba list</h1>
+    <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/list-irlba.R'><code>R/list-irlba.R</code></a>, <a href='http://github.com/tidyverse/broom/blob/master/R/list-svd-tidiers.R'><code>R/list-svd-tidiers.R</code></a></small>
     <div class="hidden name"><code>svd_tidiers.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>These methods tidy the U, D, and V matrices returned by the
-<code>svd</code> or <code><a href='http://www.rdocumentation.org/packages/irlba/topics/irlba'>irlba</a></code> functions into a tidy format.
-Because <code>svd</code> and <code>irlba</code> return lists without classes, this function
-has to be called by <code><a href='list_tidiers.html'>tidy.list</a></code> when it recognizes a list as an
-SVD or <code>irlba</code> object.</p>
+    <p>A very thin wrapper around <code>tidy_svd()</code>.</p>
+<p>These methods tidy the U, D, and V matrices returned by the
+<code>svd()</code> functions into a tidy format. Because <code>svd</code> returns
+lists without classes, this function has to be called by
+<code><a href='list_tidiers.html'>tidy.list()</a></code> when it recognizes a list as an SVD.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>tidy_svd</span>(<span class='no'>x</span>, <span class='kw'>matrix</span> <span class='kw'>=</span> <span class='st'>"u"</span>, <span class='no'>...</span>)</pre>
+    <pre class="usage"><span class='fu'>tidy_irlba</span>(<span class='no'>x</span>, <span class='no'>...</span>)
+
+<span class='fu'>tidy_svd</span>(<span class='no'>x</span>, <span class='kw'>matrix</span> <span class='kw'>=</span> <span class='st'>"u"</span>, <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>x</th>
-      <td><p>list containing d, u, v components, returned from <code>svd</code> or
-<code>irlba</code></p></td>
-    </tr>
-    <tr>
-      <th>matrix</th>
-      <td><p>which of the u, d or v matrix to tidy</p></td>
+      <td><p>list containing d, u, v components, returned from <code>svd</code></p></td>
     </tr>
     <tr>
       <th>...</th>
       <td><p>Extra arguments (not used)</p></td>
     </tr>
+    <tr>
+      <th>matrix</th>
+      <td><p>which of the u, d or v matrix to tidy</p></td>
+    </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>An SVD object contains a decomposition into u, d, and v matrices, such that
-<code>u %\*% diag(d) %\*% t(v)</code> gives the original matrix. This tidier gives
-a choice of which matrix to tidy.</p>
+    <p>An SVD object contains a decomposition into u, d, and v matrices,
+such that</p><pre>u <!-- %*% diag(d) %*% t(v) -->
+</pre>
+
+<p>gives the original matrix. This tidier gives a choice of which matrix
+to tidy.</p>
 <p>When <code>matrix = "u"</code>, each observation represents one pair of row and
 principal component, with variables:</p>
 <dt>row</dt><dd><p>Number of the row in the original data being described</p></dd>
-  <dt>PC</dt><dd><p>Principal component</p></dd>
-  <dt>value</dt><dd><p>Loading of this principal component for this row</p></dd>
+<dt>PC</dt><dd><p>Principal component</p></dd>
+<dt>value</dt><dd><p>Loading of this principal component for this row</p></dd>
 
 When matrix = "d", each observation represents one principal component,
 with variables:
-  <dt><code>PC</code></dt><dd><p>An integer vector indicating the principal component</p></dd>
-  <dt><code>std.dev</code></dt><dd><p>Standard deviation explained by this PC</p></dd>
-  <dt><code>percent</code></dt><dd><p>Percentage of variation explained. This will be
-    inaccurate for irlba objects due to the SVD truncation.</p></dd>
-  <dt><code>cumulative</code></dt><dd><p>Cumulative percentage of variation explained</p></dd>
+<dt><code>PC</code></dt><dd><p>An integer vector indicating the principal component</p></dd>
+<dt><code>std.dev</code></dt><dd><p>Standard deviation explained by this PC</p></dd>
+<dt><code>percent</code></dt><dd><p>Percentage of variation explained. This will be
+inaccurate for irlba objects due to the SVD truncation.</p></dd>
+<dt><code>cumulative</code></dt><dd><p>Cumulative percentage of variation explained</p></dd>
 
 When matrix = "v", each observation represents a pair of a principal
 component and a column of the original matrix, with variables:
-  <dt>column</dt><dd><p>Column of original matrix described</p></dd>
-  <dt>PC</dt><dd><p>Principal component</p></dd>
-  <dt>value</dt><dd><p>Value of this PC for this column</p></dd>
+<dt>column</dt><dd><p>Column of original matrix described</p></dd>
+<dt>PC</dt><dd><p>Principal component</p></dd>
+<dt>value</dt><dd><p>Value of this PC for this column</p></dd>
 
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
@@ -168,7 +172,8 @@ component and a column of the original matrix, with variables:
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code>svd</code>, <code><a href='http://www.rdocumentation.org/packages/irlba/topics/irlba'>irlba</a></code> <code><a href='list_tidiers.html'>tidy.list</a></code></p></div>
+    <div class='dont-index'><p><code>svd()</code>, <code><a href='http://www.rdocumentation.org/packages/irlba/topics/irlba'>irlba::irlba()</a></code> <code><a href='list_tidiers.html'>tidy.list()</a></code></p>
+<p><code>svd()</code>, <code><a href='http://www.rdocumentation.org/packages/irlba/topics/irlba'>irlba::irlba()</a></code>, <code><a href='list_tidiers.html'>tidy.list()</a></code>, <code>tidy_irlba()</code></p></div>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>

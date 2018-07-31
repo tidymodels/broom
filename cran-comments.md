@@ -1,31 +1,62 @@
-broom 0.4.2
------------
+# release summary
 
-This is a resubmission now that orcutt 2.0 is on CRAN, which returns a different type of object.
+broom 0.5.0 is a major new release featuring breaking changes. The main breaking changes are:
 
-Most important change is fixing behavior with the survival package update. My sincere apologies for taking so long to do so.
+- All tidying methods now return tibbles rather than data frames for cleaner print methods and more consistent behavior.
+- Methods for tidying data frames, matrices, and vectors have been deprecated, in favor of other packages such as tibble.
+- The bootstrap function has been deprecated in favor of the rsample package.
 
-## Changes
+Other major improvements include:
 
-* Changed `tidy.glmnet` to filter out rows where estimate == 0.
-* Updates to `rstanarm` tidiers (thanks to #177 from Jonah Gabry)
-* Repo moved; pointing URLs towards tidyverse/broom rather than dgrtwo/broom
+- A new test suite
+- A new roxygen2 template based system for documentation
+- Several new tidying methods and vignettes
 
-### New tidiers
-
-* Added tidiers for `lsmobj` and `ref.grid` objects from the lsmeans package
-* Added tidiers for `betareg` objects from the betareg package
-* Added tidiers for `lmRob` and `glmRob` objects from the robust package
-* Added tidiers for `brms` objects from the brms package (thanks to #149 from Paul Buerkner)
-
-### Bug fixes
-
-* Fixed issue with survival package 2.40-1 (thanks to #180 from Marcus Walz)
+Additional details may be found in NEWS.md.
 
 ## Test environments
-* local OS X install, R 3.3.0
-* ubuntu 12.04 (on travis-ci), R 3.3.0
-* win-builder (devel and release)
+
+- local windows 8 install: release, oldrel
+- travis-ci ubuntu 14.04: devel, release, oldrel
+- appveyor windows server 2012: release 
+- win-builder: devel, release
 
 ## R CMD check results
-There were no ERRORs, WARNINGs or NOTEs.
+
+There was 1 NOTE about a URL not in CRAN canonical form. This is because the Github page provides much more information about the project than the CRAN page.
+
+## Reverse dependencies
+
+We checked all 92 reverse dependencies by running R CMD check twice, once with the CRAN version installed, and once with this version installed.
+
+## Couldn't check (5)
+
+|package                                      |version |error |warning |note |
+|:--------------------------------------------|:-------|:-----|:-------|:----|
+|[crawl](problems.md#crawl)                   |2.1.1   |1     |        |     |
+|[miceFast](problems.md#micefast)             |0.2.3   |1     |        |     |
+|[nlshelper](problems.md#nlshelper)           |0.2     |1     |        |     |
+|[psycho](problems.md#psycho)                 |0.3.4   |1     |        |     |
+|[SWMPrExtension](problems.md#swmprextension) |0.3.16  |1     |        |     |
+
+## Broken (10)
+
+|package                                              |version |error    |warning  |note |
+|:----------------------------------------------------|:-------|:--------|:--------|:----|
+|[biobroom](problems.md#biobroom)                     |1.12.0  |1 __+2__ |2        |3    |
+|[ERSA](problems.md#ersa)                             |0.1.0   |1        |1 __+1__ |1    |
+|[germinationmetrics](problems.md#germinationmetrics) |0.1.0   |1 __+1__ |2        |     |
+|[mice](problems.md#mice)                             |3.1.0   |1 __+1__ |1        |     |
+|[nlstimedist](problems.md#nlstimedist)               |1.1.1   |1 __+1__ |1        |     |
+|[pcr](problems.md#pcr)                               |1.1.1   |1        |1 __+1__ |     |
+|[perccalc](problems.md#perccalc)                     |1.0.1   |1 __+1__ |1 __+1__ |     |
+|[survminer](problems.md#survminer)                   |0.4.2   |1        |1 __+1__ |1    |
+|[survutils](problems.md#survutils)                   |1.0.1   |1 __+1__ |1        |     |
+|[TPP](problems.md#tpp)                               |3.8.2   |1 __+1__ |2        |3    |
+
+- The maintainer of perccalc informs me that an updated version is on the way
+- I have not heard from maintainers of any of the other broken packages
+- Most issues are related to the switch to tibble output and the deprecation of matrix and vector
+  tidiers. These should be easy fixes.
+
+We notified package maintainers of these specific issues introduced to their packages by broom 0.5.0 on June 29. A detailed explanation of breaking changes was made available at https://broom.tidyverse.org/news/.

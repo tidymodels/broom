@@ -102,7 +102,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Tidying methods for rcorr objects</h1>
-    <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/rcorr_tidiers.R'><code>R/rcorr_tidiers.R</code></a></small>
+    <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/hmisc-tidiers.R'><code>R/hmisc-tidiers.R</code></a></small>
     <div class="hidden name"><code>rcorr_tidiers.Rd</code></div>
     </div>
 
@@ -142,10 +142,10 @@ with one row for each pair of columns being compared.</p>
     <p>A data.frame with one row for each pairing
 in the correlation matrix. Columns are:</p>
 <dt>column1</dt><dd><p>Name or index of the first column being described</p></dd>
-  <dt>column2</dt><dd><p>Name or index of the second column being described</p></dd>
-  <dt>estimate</dt><dd><p>Estimate of Pearson's r or Spearman's rho</p></dd>
-  <dt>n</dt><dd><p>Number of observations used to compute the correlation</p></dd>
-  <dt>p.value</dt><dd><p>P-value of correlation</p></dd>
+<dt>column2</dt><dd><p>Name or index of the second column being described</p></dd>
+<dt>estimate</dt><dd><p>Estimate of Pearson's r or Spearman's rho</p></dd>
+<dt>n</dt><dd><p>Number of observations used to compute the correlation</p></dd>
+<dt>p.value</dt><dd><p>P-value of correlation</p></dd>
 
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
@@ -165,7 +165,7 @@ in the correlation matrix. Columns are:</p>
     <span class='no'>rc</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/Hmisc/topics/rcorr'>rcorr</a></span>(<span class='no'>mat</span>)
 
     <span class='no'>td</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>rc</span>)
-    <span class='fu'>head</span>(<span class='no'>td</span>)
+    <span class='no'>td</span>
 
     <span class='fu'>library</span>(<span class='no'>ggplot2</span>)
     <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/ggplot'>ggplot</a></span>(<span class='no'>td</span>, <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/aes'>aes</a></span>(<span class='no'>p.value</span>)) +
@@ -175,14 +175,12 @@ in the correlation matrix. Columns are:</p>
         <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/geom_point'>geom_point</a></span>() +
         <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/scale_continuous'>scale_y_log10</a></span>()
 }</div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Attachement du package : 'lattice'</span></div><div class='output co'>#&gt; <span class='message'>The following object is masked from 'package:boot':</span>
+#&gt; <span class='message'>Attaching package: 'lattice'</span></div><div class='output co'>#&gt; <span class='message'>The following object is masked from 'package:boot':</span>
 #&gt; <span class='message'></span>
 #&gt; <span class='message'>    melanoma</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Attachement du package : 'Hmisc'</span></div><div class='output co'>#&gt; <span class='message'>The following object is masked from 'package:psych':</span>
+#&gt; <span class='message'>Attaching package: 'Hmisc'</span></div><div class='output co'>#&gt; <span class='message'>The following object is masked from 'package:psych':</span>
 #&gt; <span class='message'></span>
-#&gt; <span class='message'>    describe</span></div><div class='output co'>#&gt; <span class='message'>The following object is masked from 'package:network':</span>
-#&gt; <span class='message'></span>
-#&gt; <span class='message'>    is.discrete</span></div><div class='output co'>#&gt; <span class='message'>The following objects are masked from 'package:dplyr':</span>
+#&gt; <span class='message'>    describe</span></div><div class='output co'>#&gt; <span class='message'>The following objects are masked from 'package:dplyr':</span>
 #&gt; <span class='message'></span>
 #&gt; <span class='message'>    src, summarize</span></div><div class='output co'>#&gt; <span class='message'>The following objects are masked from 'package:base':</span>
 #&gt; <span class='message'></span>

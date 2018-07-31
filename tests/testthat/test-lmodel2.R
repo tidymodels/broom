@@ -1,13 +1,26 @@
-context("lmodel2 tidiers")
+context("lmodel2")
 
+skip_if_not_installed("modeltests")
+library(modeltests)
+
+skip_if_not_installed("lmodel2")
 library(lmodel2)
 
-test_that("lmodel2 tidiers work", {
-  data(mod2ex2)
-  Ex2.res <- lmodel2(Prey ~ Predators, data = mod2ex2, "relative", "relative", 99)
-  td <- tidy(Ex2.res)
-  check_tidy(td, exp.row = 8, exp.col = 5)
+data("mod2ex2")
+fit <- lmodel2(Prey ~ Predators, data = mod2ex2, "relative", "relative", 99)
 
-  gl <- glance(Ex2.res)
-  check_tidy(gl, exp.col = 4)
+test_that("lmodel2 tidier arguments", {
+  check_arguments(tidy.lmodel2)
+  check_arguments(glance.lmodel2)
+})
+
+test_that("tidy.lmodel2", {
+  td <- tidy(fit)
+  check_tidy_output(td)
+  check_dims(td, 8, 5)
+})
+
+test_that("glance.lmodel2", {
+  gl <- glance(fit)
+  check_glance_outputs(gl)
 })

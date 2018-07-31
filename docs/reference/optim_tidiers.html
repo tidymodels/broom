@@ -102,13 +102,13 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Tidiers for lists returned from optim</h1>
-    <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/optim_tidiers.R'><code>R/optim_tidiers.R</code></a></small>
+    <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/list-optim-tidiers.R'><code>R/list-optim-tidiers.R</code></a></small>
     <div class="hidden name"><code>optim_tidiers.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Tidies objects returned by the <code>optim</code> function for
+    <p>Tidies objects returned by the <code>optim()</code> function for
 general-purpose minimization and maximization.</p>
     
     </div>
@@ -137,19 +137,19 @@ structure depends on the method chosen.</p>
 <p><code>tidy</code> returns a data frame with one row per parameter that
 was estimated, with columns</p>
 <dt>parameter</dt><dd><p>name of the parameter, or <code>parameter1</code>,
-  <code>parameter2</code>... if the input vector is not named</p></dd>
-  <dt>value</dt><dd><p>parameter value that minimizes or maximizes the output</p></dd>
+<code>parameter2</code>... if the input vector is not named</p></dd>
+<dt>value</dt><dd><p>parameter value that minimizes or maximizes the output</p></dd>
 
 glance returns a one-row data frame with the columns
-  <dt>value</dt><dd><p>minimized or maximized output value</p></dd>
-  <dt>function.count</dt><dd><p>number of calls to <code>fn</code></p></dd>
-  <dt>gradient.count</dt><dd><p>number of calls to <code>gr</code></p></dd>
-  <dt>convergence</dt><dd><p>convergence code representing the error state</p></dd>
+<dt>value</dt><dd><p>minimized or maximized output value</p></dd>
+<dt>function.count</dt><dd><p>number of calls to <code>fn</code></p></dd>
+<dt>gradient.count</dt><dd><p>number of calls to <code>gr</code></p></dd>
+<dt>convergence</dt><dd><p>convergence code representing the error state</p></dd>
 
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code>optim</code></p></div>
+    <div class='dont-index'><p><code>optim()</code></p></div>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
@@ -160,11 +160,15 @@ glance returns a one-row data frame with the columns
 
 <span class='no'>o</span> <span class='kw'>&lt;-</span> <span class='fu'>optim</span>(<span class='fu'>c</span>(<span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>1</span>), <span class='no'>func</span>)
 
-<span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>o</span>)</div><div class='output co'>#&gt;    parameter    value
-#&gt; 1 parameter1 1.999492
-#&gt; 2 parameter2 2.999986
-#&gt; 3 parameter3 7.999669</div><div class='input'><span class='fu'><a href='glance.html'>glance</a></span>(<span class='no'>o</span>)</div><div class='output co'>#&gt;         value function.count gradient.count convergence
-#&gt; 1 3.68135e-07            144             NA           0</div><div class='input'>
+<span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>o</span>)</div><div class='output co'>#&gt; # A tibble: 3 x 2
+#&gt;   parameter  value
+#&gt;   &lt;chr&gt;      &lt;dbl&gt;
+#&gt; 1 parameter1  2.00
+#&gt; 2 parameter2  3.00
+#&gt; 3 parameter3  8.00</div><div class='input'><span class='fu'><a href='glance.html'>glance</a></span>(<span class='no'>o</span>)</div><div class='output co'>#&gt; # A tibble: 1 x 4
+#&gt;         value function.count gradient.count convergence
+#&gt;         &lt;dbl&gt;          &lt;int&gt;          &lt;int&gt;       &lt;int&gt;
+#&gt; 1 0.000000368            144             NA           0</div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

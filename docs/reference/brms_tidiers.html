@@ -46,7 +46,7 @@
 
       <div class="navbar-brand-container">
         <a class="navbar-brand" href="../index.html">broom</a>
-        <small class="tidyverse">part of the <a href="http://tidyverse.org">tidyverse</a></small>
+        <small class="tidyverse">part of the <a href="https://tidyverse.org">tidyverse</a></small>
       </div>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
@@ -102,15 +102,15 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Tidying methods for a brms model</h1>
-    <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/brms_tidiers.R'><code>R/brms_tidiers.R</code></a></small>
+    <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/brms-tidiers.R'><code>R/brms-tidiers.R</code></a></small>
     <div class="hidden name"><code>brms_tidiers.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>These methods tidy the estimates from
-<code><a href='http://www.rdocumentation.org/packages/brms/topics/brmsfit-class'>brmsfit-objects</a></code>
-(fitted model objects from the <span class="pkg">brms</span> package) into a summary.</p>
+    <p><code>brms</code> tidiers will soon be deprecated in <code>broom</code> and there is no ongoing
+development of these functions at this time. <code>brms</code> tidiers are being
+developed in the <code>broom.mixed</code> package, which is not yet on CRAN.</p>
     
     </div>
 
@@ -125,7 +125,7 @@
     <tr>
       <th>x</th>
       <td><p>Fitted model object from the <span class="pkg">brms</span> package. See
-<code><a href='http://www.rdocumentation.org/packages/brms/topics/brmsfit-class'>brmsfit-class</a></code>.</p></td>
+<code><a href='http://www.rdocumentation.org/packages/brms/topics/brmsfit-class'>brms::brmsfit-class()</a></code>.</p></td>
     </tr>
     <tr>
       <th>parameters</th>
@@ -190,9 +190,15 @@ If intervals = TRUE, columns for the lower and
 upper bounds of the posterior intervals computed.
 
     
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>These methods tidy the estimates from
+<code><a href='http://www.rdocumentation.org/packages/brms/topics/brmsfit-class'>brms::brmsfit()</a></code>
+(fitted model objects from the <span class="pkg">brms</span> package) into a summary.</p>
+    
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='http://www.rdocumentation.org/packages/brms/topics/brms-package'>brms</a></code>, <code><a href='http://www.rdocumentation.org/packages/brms/topics/brmsfit-class'>brmsfit-class</a></code></p></div>
+    <div class='dont-index'><p><code><a href='http://www.rdocumentation.org/packages/brms/topics/brms-package'>brms::brms()</a></code>, <code><a href='http://www.rdocumentation.org/packages/brms/topics/brmsfit-class'>brms::brmsfit()</a></code></p></div>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
@@ -215,6 +221,8 @@ upper bounds of the posterior intervals computed.
       
       <li><a href="#value">Value</a></li>
 
+      <li><a href="#details">Details</a></li>
+
       <li><a href="#see-also">See also</a></li>
       
       <li><a href="#examples">Examples</a></li>
@@ -225,12 +233,12 @@ upper bounds of the posterior intervals computed.
 
       <footer>
       <div class="tidyverse">
-  <p>broom is a part of the <strong>tidyverse</strong>, an ecosystem of packages designed with common APIs and a shared philosophy. Learn more at <a href="http://tidyverse.org">tidyverse.org</a>.</p>
+  <p>broom is a part of the <strong>tidyverse</strong>, an ecosystem of packages designed with common APIs and a shared philosophy. Learn more at <a href="https://tidyverse.org">tidyverse.org</a>.</p>
 </div>
 
 <div class="author">
-  <p>Developed by David Robinson.</p>
-  <p>Site built by <a href="http://pkgdown.r-lib.org">pkgdown</a>.</p>
+  <p>Developed by David Robinson, Alex Hayes.</p>
+  <p>Site built by <a href="https://pkgdown.r-lib.org">pkgdown</a>.</p>
 </div>
 
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-115082821-1"></script>

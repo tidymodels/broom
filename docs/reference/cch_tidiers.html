@@ -102,7 +102,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>tidiers for case-cohort data</h1>
-    <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/survival_tidiers.R'><code>R/survival_tidiers.R</code></a></small>
+    <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/survival-cch-tidiers.R'><code>R/survival-cch-tidiers.R</code></a></small>
     <div class="hidden name"><code>cch_tidiers.Rd</code></div>
     </div>
 
@@ -151,12 +151,12 @@ structure depends on the method chosen.</p>
 
 glance returns a one-row data.frame with the following
 columns:
-  <dt>score</dt><dd><p>score</p></dd>
-  <dt>rscore</dt><dd><p>rscore</p></dd>
-  <dt>p.value</dt><dd><p>p-value from Wald test</p></dd>
-  <dt>iter</dt><dd><p>number of iterations</p></dd>
-  <dt>n</dt><dd><p>number of predictions</p></dd>
-  <dt>nevent</dt><dd><p>number of events</p></dd>
+<dt>score</dt><dd><p>score</p></dd>
+<dt>rscore</dt><dd><p>rscore</p></dd>
+<dt>p.value</dt><dd><p>p-value from Wald test</p></dd>
+<dt>iter</dt><dd><p>number of iterations</p></dd>
+<dt>n</dt><dd><p>number of predictions</p></dd>
+<dt>nevent</dt><dd><p>number of events</p></dd>
 
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
@@ -207,7 +207,7 @@ covariance or the residuals.</p>
     <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/ggplot'>ggplot</a></span>(<span class='no'>fits</span>, <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/aes'>aes</a></span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>estimate</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>term</span>, <span class='kw'>color</span> <span class='kw'>=</span> <span class='no'>method</span>)) + <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/geom_point'>geom_point</a></span>() +
         <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/geom_errorbarh'>geom_errorbarh</a></span>(<span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/aes'>aes</a></span>(<span class='kw'>xmin</span> <span class='kw'>=</span> <span class='no'>conf.low</span>, <span class='kw'>xmax</span> <span class='kw'>=</span> <span class='no'>conf.high</span>)) +
         <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/geom_abline'>geom_vline</a></span>(<span class='kw'>xintercept</span> <span class='kw'>=</span> <span class='fl'>0</span>)
-}</div><div class='output co'>#&gt; <span class='error'>Error in is.data.frame(data): objet 'ccoh.data' introuvable</span></div><div class='input'>
+}</div><div class='output co'>#&gt; <span class='error'>Error in is.data.frame(data): object 'ccoh.data' not found</span></div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

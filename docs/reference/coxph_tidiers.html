@@ -102,7 +102,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Tidiers for coxph object</h1>
-    <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/survival_tidiers.R'><code>R/survival_tidiers.R</code></a></small>
+    <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/survival-coxph-tidiers.R'><code>R/survival-coxph-tidiers.R</code></a></small>
     <div class="hidden name"><code>coxph_tidiers.Rd</code></div>
     </div>
 
@@ -114,10 +114,11 @@ construct predictions, or summarize the entire model into a single row.</p>
     </div>
 
     <pre class="usage"><span class='co'># S3 method for coxph</span>
-<span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>x</span>, <span class='kw'>exponentiate</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>conf.int</span> <span class='kw'>=</span> <span class='fl'>0.95</span>, <span class='no'>...</span>)
+<span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>x</span>, <span class='kw'>exponentiate</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>conf.int</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>conf.level</span> <span class='kw'>=</span> <span class='fl'>0.95</span>, <span class='no'>...</span>)
 
 <span class='co'># S3 method for coxph</span>
-<span class='fu'><a href='augment.html'>augment</a></span>(<span class='no'>x</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='kw pkg'>stats</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/stats/topics/model.frame'>model.frame</a></span>(<span class='no'>x</span>), <span class='no'>newdata</span>,
+<span class='fu'><a href='augment.html'>augment</a></span>(<span class='no'>x</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>newdata</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>type.predict</span> <span class='kw'>=</span> <span class='st'>"lp"</span>, <span class='kw'>type.residuals</span> <span class='kw'>=</span> <span class='st'>"martingale"</span>, <span class='no'>...</span>)
 
 <span class='co'># S3 method for coxph</span>
@@ -137,7 +138,11 @@ on an exponential scale</p></td>
     </tr>
     <tr>
       <th>conf.int</th>
-      <td><p>confidence level to be used for CI</p></td>
+      <td><p>whether to include a confidence interval</p></td>
+    </tr>
+    <tr>
+      <th>conf.level</th>
+      <td><p>confidence level of the interval, used only if <code>conf.int=TRUE</code></p></td>
     </tr>
     <tr>
       <th>...</th>
@@ -153,11 +158,11 @@ on an exponential scale</p></td>
     </tr>
     <tr>
       <th>type.predict</th>
-      <td><p>type of predicted value (see <code>predict.coxph</code>)</p></td>
+      <td><p>type of predicted value (see <code>predict.coxph()</code>)</p></td>
     </tr>
     <tr>
       <th>type.residuals</th>
-      <td><p>type of residuals (see <code>residuals.coxph</code>)</p></td>
+      <td><p>type of residuals (see <code>residuals.coxph()</code>)</p></td>
     </tr>
     </table>
     
@@ -166,15 +171,15 @@ on an exponential scale</p></td>
     <p><code>tidy</code> returns a data.frame with one row for each term,
 with columns</p>
 <dt>estimate</dt><dd><p>estimate of slope</p></dd>
-  <dt>std.error</dt><dd><p>standard error of estimate</p></dd>
-  <dt>statistic</dt><dd><p>test statistic</p></dd>
-  <dt>p.value</dt><dd><p>p-value</p></dd>
+<dt>std.error</dt><dd><p>standard error of estimate</p></dd>
+<dt>statistic</dt><dd><p>test statistic</p></dd>
+<dt>p.value</dt><dd><p>p-value</p></dd>
 
 augment returns the original data.frame with additional
 columns added:
-  <dt>.fitted</dt><dd><p>predicted values</p></dd>
-  <dt>.se.fit</dt><dd><p>standard errors</p></dd>
-  <dt>.resid</dt><dd><p>residuals (not present if <code>newdata</code> is provided)</p></dd>
+<dt>.fitted</dt><dd><p>predicted values</p></dd>
+<dt>.se.fit</dt><dd><p>standard errors</p></dd>
+<dt>.resid</dt><dd><p>residuals (not present if <code>newdata</code> is provided)</p></dd>
 
 glance returns a one-row data.frame with statistics
 calculated on the cox regression.

@@ -102,7 +102,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Tidying methods for a generalized additive model (gam)</h1>
-    <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/gam_tidiers.R'><code>R/gam_tidiers.R</code></a></small>
+    <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/gam-tidiers.R'><code>R/gam-tidiers.R</code></a></small>
     <div class="hidden name"><code>gam_tidiers.Rd</code></div>
     </div>
 
@@ -157,11 +157,11 @@ The columns match those in <a href='anova_tidiers.html'>anova_tidiers</a>.
 <code>parametric = TRUE</code> returns the fixed coefficients.</p>
 <p><code>glance.gam</code> returns a one-row data.frame with the columns</p>
 <dt>df</dt><dd><p>Degrees of freedom used by the coefficients</p></dd>
-  <dt>logLik</dt><dd><p>the data's log-likelihood under the model</p></dd>
-  <dt>AIC</dt><dd><p>the Akaike Information Criterion</p></dd>
-  <dt>BIC</dt><dd><p>the Bayesian Information Criterion</p></dd>
-  <dt>deviance</dt><dd><p>deviance</p></dd>
-  <dt>df.residual</dt><dd><p>residual degrees of freedom</p></dd>
+<dt>logLik</dt><dd><p>the data's log-likelihood under the model</p></dd>
+<dt>AIC</dt><dd><p>the Akaike Information Criterion</p></dd>
+<dt>BIC</dt><dd><p>the Bayesian Information Criterion</p></dd>
+<dt>deviance</dt><dd><p>deviance</p></dd>
+<dt>df.residual</dt><dd><p>residual degrees of freedom</p></dd>
 
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
@@ -179,10 +179,11 @@ The columns match those in <a href='anova_tidiers.html'>anova_tidiers</a>.
     <span class='fu'>data</span>(<span class='no'>kyphosis</span>)
     <span class='no'>g</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/gam/topics/gam'>gam</a></span>(<span class='no'>Kyphosis</span> ~ <span class='fu'><a href='http://www.rdocumentation.org/packages/gam/topics/s'>s</a></span>(<span class='no'>Age</span>,<span class='fl'>4</span>) + <span class='no'>Number</span>, <span class='kw'>family</span> <span class='kw'>=</span> <span class='no'>binomial</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>kyphosis</span>)
     <span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>g</span>)
-    <span class='fu'><a href='augment.html'>augment</a></span>(<span class='no'>g</span>)
     <span class='fu'><a href='glance.html'>glance</a></span>(<span class='no'>g</span>)
-}</div><div class='output co'>#&gt; <span class='message'>Loaded gam 1.15</span></div><div class='output co'>#&gt;         df    logLik      AIC      BIC deviance df.residual
-#&gt; 1 5.999983 -34.55361 75.10722 82.29056 63.10725    75.00002</div><div class='input'>
+}</div><div class='output co'>#&gt; <span class='message'>Loaded gam 1.15</span></div><div class='output co'>#&gt; # A tibble: 1 x 6
+#&gt;      df logLik   AIC   BIC deviance df.residual
+#&gt;   &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;       &lt;dbl&gt;
+#&gt; 1  6.00  -34.6  75.1  82.3     63.1        75.0</div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

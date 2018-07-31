@@ -47,7 +47,7 @@ recombining the results — rowwise_df_tidiers • broom</title>
 
       <div class="navbar-brand-container">
         <a class="navbar-brand" href="../index.html">broom</a>
-        <small class="tidyverse">part of the <a href="http://tidyverse.org">tidyverse</a></small>
+        <small class="tidyverse">part of the <a href="https://tidyverse.org">tidyverse</a></small>
       </div>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
@@ -104,18 +104,15 @@ recombining the results — rowwise_df_tidiers • broom</title>
     <div class="page-header">
     <h1>Tidying methods for rowwise_dfs from dplyr, for tidying each row and
 recombining the results</h1>
-    <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/rowwise_df_tidiers.R'><code>R/rowwise_df_tidiers.R</code></a></small>
+    <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/dplyr-rowwise-df-tidiers.R'><code>R/dplyr-rowwise-df-tidiers.R</code></a></small>
     <div class="hidden name"><code>rowwise_df_tidiers.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>These <code>tidy</code>, <code>augment</code> and <code>glance</code> methods are for
-performing tidying on each row of a rowwise data frame created by dplyr's
-<code>group_by</code> and <code>do</code> operations. They first group a rowwise data
-frame based on all columns that are not lists, then perform the tidying
-operation on the specified column. This greatly shortens a common idiom
-of extracting tidy/augment/glance outputs after a do statement.</p>
+    <p>Rowwise tidiers are deprecated and will be removed from an upcoming version
+of broom. We strongly recommend moving to a <code>nest-map-unnest</code> workflow
+over a <code>rowwise-do</code> workflow. See the vignettes for examples.</p>
     
     </div>
 
@@ -172,7 +169,13 @@ original are used as grouping columns alongside the tidied outputs.</p>
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>Note that this functionality is not currently implemented for
+    <p>These <code>tidy</code>, <code>augment</code> and <code>glance</code> methods are for
+performing tidying on each row of a rowwise data frame created by dplyr's
+<code>group_by</code> and <code>do</code> operations. They first group a rowwise data
+frame based on all columns that are not lists, then perform the tidying
+operation on the specified column. This greatly shortens a common idiom
+of extracting tidy/augment/glance outputs after a do statement.</p>
+<p>Note that this functionality is not currently implemented for
 data.tables, since the result of the do operation is difficult to
 distinguish from a regular data.table.</p>
     
@@ -291,12 +294,12 @@ distinguish from a regular data.table.</p>
 
       <footer>
       <div class="tidyverse">
-  <p>broom is a part of the <strong>tidyverse</strong>, an ecosystem of packages designed with common APIs and a shared philosophy. Learn more at <a href="http://tidyverse.org">tidyverse.org</a>.</p>
+  <p>broom is a part of the <strong>tidyverse</strong>, an ecosystem of packages designed with common APIs and a shared philosophy. Learn more at <a href="https://tidyverse.org">tidyverse.org</a>.</p>
 </div>
 
 <div class="author">
-  <p>Developed by David Robinson.</p>
-  <p>Site built by <a href="http://pkgdown.r-lib.org">pkgdown</a>.</p>
+  <p>Developed by David Robinson, Alex Hayes.</p>
+  <p>Site built by <a href="https://pkgdown.r-lib.org">pkgdown</a>.</p>
 </div>
 
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-115082821-1"></script>

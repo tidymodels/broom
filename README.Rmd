@@ -14,235 +14,74 @@ knitr::opts_chunk$set(
 )
 ```
 
-# broom: let's tidy up a bit
+# broom  <img src="man/figures/logo.png" align="right" width="100" height="100" />
 
 [![CRAN status](https://www.r-pkg.org/badges/version/broom)](https://cran.r-project.org/package=broom)
-[![Travis-CI Build Status](https://travis-ci.org/tidyverse/broom.svg?branch=master)](https://travis-ci.org/tidyverse/broom)
-[![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/tidyverse/broom?branch=master&svg=true)](https://ci.appveyor.com/project/tidyverse/broom)
-[![Coverage Status](https://img.shields.io/codecov/c/github/tidyverse/broom/master.svg)](https://codecov.io/github/tidyverse/broom?branch=master)
+[![Travis-CI Build Status](https://travis-ci.org/tidymodels/broom.svg?branch=master)](https://travis-ci.org/tidymodels/broom)
+[![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/tidymodels/broom?branch=master&svg=true)](https://ci.appveyor.com/project/tidymodels/broom)
+[![Coverage Status](https://img.shields.io/codecov/c/github/tidymodels/broom/master.svg)](https://codecov.io/github/tidymodels/broom?branch=master)
 
-The broom package takes the messy output of built-in functions in R, such as `lm`, `nls`, or `t.test`, and turns them into tidy data frames.
+## Overview
 
-The concept of "tidy data", [as introduced by Hadley Wickham](http://www.jstatsoft.org/v59/i10), offers a powerful framework for data manipulation and analysis. That paper makes a convincing statement of the problem this package tries to solve (emphasis mine):
+broom summarizes key information about models in tidy `tibble()`s. broom provides three verbs to make it convenient to interact with model objects:
 
-> **While model inputs usually require tidy inputs, such attention to detail doesn't carry over to model outputs. Outputs such as predictions and estimated coefficients aren't always tidy. This makes it more difficult to combine results from multiple models.** For example, in R, the default representation of model coefficients is not tidy because it does not have an explicit variable that records the variable name for each estimate, they are instead recorded as row names. In R, row names must be unique, so combining coefficients from many models (e.g., from bootstrap resamples, or subgroups) requires workarounds to avoid losing important information. **This knocks you out of the flow of analysis and makes it harder to combine the results from multiple models. I'm not currently aware of any packages that resolve this problem.**
+- `tidy()` summarizes information about model components
+- `glance()` reports information about the entire model
+- `augment()` adds informations about observations to a dataset
 
-broom is an attempt to bridge the gap from untidy outputs of predictions and estimations to the tidy data we want to work with. It centers around three S3 methods, each of which take common objects produced by R statistical functions (`lm`, `t.test`, `nls`, etc) and convert them into a data frame. broom is particularly designed to work with Hadley's [dplyr](https://github.com/hadley/dplyr) package (see the "broom and dplyr" vignette for more).
+For a detailed introduction, please see `vignette("broom")`.
 
-broom should be distinguished from packages like [reshape2](https://CRAN.R-project.org/package=reshape2) and [tidyr](https://CRAN.R-project.org/package=tidyr), which rearrange and reshape data frames into different forms. Those packages perform critical tasks in tidy data analysis but focus on manipulating data frames in one specific format into another. In contrast, broom is designed to take format that is *not* in a data frame (sometimes not anywhere close) and convert it to a tidy data frame.
+broom tidies 100+ models from popular modelling packages and almost all of the model objects in the `stats` package that comes with base R. `vignette("available-methods")` lists method availabilty.
 
-Tidying model outputs is not an exact science, and it's based on a judgment of the kinds of values a data scientist typically wants out of a tidy analysis (for instance, estimates, test statistics, and p-values). You may lose some of the information in the original object that you wanted, or keep more information than you need. If you think the tidy output for a model should be changed, or if you're missing a tidying function for an S3 class that you'd like, I strongly encourage you to [open an issue](http://github.com/tidyverse/broom/issues) or a pull request.
+If you aren't familiar with tidy data structures and want to know how they can make your life easier, we highly recommend reading Hadley Wickham's [Tidy Data](http://www.jstatsoft.org/v59/i10).
 
-## Installation and Documentation
+## Installation
 
-The broom package is available on CRAN:
+```{r, eval = FALSE}
+# we recommend installing the entire tidyverse modeling set, which includes broom:
+install.packages("tidymodels")
 
-    install.packages("broom")
+# alternatively, to install just broom:
+install.packages("broom")
 
-You can also install the development version of the broom package using [devtools](https://github.com/hadley/devtools):
-
-```{r eval = FALSE}
-library(devtools)
-install_github("tidyverse/broom")
+# to get the development version from GitHub:
+install.packages("devtools")
+devtools::install_github("tidymodels/broom")
 ```
 
-For additional documentation, please browse the vignettes:
+If you find a bug, please file a minimal reproducible example in the [issues](https://github.com/tidymodels/broom/issues).
 
-```{r eval = FALSE}
-browseVignettes(package = "broom")
-```
+## Usage
 
-## Tidying functions
-
-This package provides three S3 methods that do three distinct kinds of tidying.
-
-* `tidy`: constructs a data frame that summarizes the model's statistical findings. This includes coefficients and p-values for each term in a regression, per-cluster information in clustering applications, or per-test information for `multtest` functions.
-* `glance`: construct a concise *one-row* summary of the model. This typically contains values such as R^2, adjusted R^2, and residual standard error that are computed once for the entire model.
-* `augment`: add columns to the original data that was modeled. This includes predictions, residuals, and cluster assignments.
-
-Note that some classes may have only one or two of these methods defined.
-
-Consider as an illustrative example a linear fit on the built-in `mtcars` dataset.
-
-```{r}
-lmfit <- lm(mpg ~ wt, mtcars)
-lmfit
-```
-
-```{r}
-summary(lmfit)
-```
-
-This summary output is useful enough if you just want to read it. However, converting it to a data frame that contains all the same information, so that you can combine it with other models or do further analysis, is not trivial. You have to do `coef(summary(lmfit))` to get a matrix of coefficients, the terms are still stored in row names, and the column names are inconsistent with other packages (e.g. `Pr(>|t|)` compared to `p.value`).
-
-Instead, you can use the `tidy` function, from the broom package, on the fit:
+`tidy()` produces a `tibble()` where each row contains information about an important component of the model. For regression models, this often corresponds to regression coefficients. This is can be useful if you want to inspect a model or create custom visualizations.
 
 ```{r}
 library(broom)
-tidy(lmfit)
+
+fit <- lm(Sepal.Width ~ Petal.Length + Petal.Width, iris)
+tidy(fit)
 ```
 
-This gives you a data.frame representation. Note that the row names have been moved into a column called `term`, and the column names are simple and consistent (and can be accessed using `$`).
-
-Instead of viewing the coefficients, you might be interested in the fitted values and residuals for each of the original points in the regression. For this, use `augment`, which augments the original data with information from the model:
+`glance()` returns a tibble with exactly one row of goodness of fitness measures and related statistics. This is useful to check for model misspecification and to compare many models.
 
 ```{r}
-head(augment(lmfit))
+glance(fit)
 ```
 
-Note that each of the new columns begins with a `.` (to avoid overwriting any of the original columns).
-
-Finally, several summary statistics are computed for the entire regression, such as R^2 and the F-statistic. These can be accessed with the `glance` function:
+`augment` adds columns to a dataset, containing information such as fitted values, residuals or cluster assignments. All columns added to a dataset have `.` prefix to prevent existing columns from being overwritten.
 
 ```{r}
-glance(lmfit)
+augment(fit, data = iris)
 ```
 
-This distinction between the `tidy`, `augment` and `glance` functions is explored in a different context in the k-means vignette.
+### Contributing
 
-## Other Examples
+We welcome contributions of all types!
 
-### Generalized linear and non-linear models
+If you have never made a pull request to an R package before, broom is an excellent place to start. Find an [issue](https://github.com/tidymodels/broom/issues/) with the **Beginner Friendly** tag and comment that you'd like to take it on and we'll help you get started.
 
-These functions apply equally well to the output from `glm`:
+We encourage typo corrections, bug reports, bug fixes and feature requests. Feedback on the clarity of the documentation is especially valuable.
 
+If you are interested in adding new tidiers methods to broom, please read `vignette("adding-tidiers")`.
 
-```{r}
-glmfit <- glm(am ~ wt, mtcars, family="binomial")
-tidy(glmfit)
-```
-
-```{r}
-head(augment(glmfit))
-```
-
-```{r}
-glance(glmfit)
-```
-
-Note that the statistics computed by `glance` are different for `glm` objects than for `lm` (e.g. deviance rather than R^2):
-
-These functions also work on other fits, such as nonlinear models (`nls`):
-
-```{r}
-nlsfit <- nls(mpg ~ k / wt + b, mtcars, start = list(k = 1, b = 0))
-tidy(nlsfit)
-```
-
-```{r}
-head(augment(nlsfit, mtcars))
-```
-
-```{r}
-glance(nlsfit)
-```
-
-### Hypothesis testing
-
-The `tidy` function can also be applied to `htest` objects, such as those output by popular built-in functions like `t.test`, `cor.test`, and `wilcox.test`.
-
-```{r}
-tt <- t.test(wt ~ am, mtcars)
-tidy(tt)
-```
-
-Some cases might have fewer columns (for example, no confidence interval):
-
-```{r warning = FALSE}
-wt <- wilcox.test(wt ~ am, mtcars)
-tidy(wt)
-```
-
-Since the `tidy` output is already only one row, `glance` returns the same output:
-
-```{r}
-glance(tt)
-```
-
-```{r}
-glance(wt)
-```
-
-`augment` method is defined only for chi-squared tests,  since there is no meaningful sense, for other tests, in which a hypothesis test produces output about each initial data point.
-
-```{r}
-chit <- chisq.test(xtabs(Freq ~ Sex + Class, data = as.data.frame(Titanic)))
-tidy(chit)
-augment(chit)
-```
-
-### Available Tidiers
-
-Currently broom provides tidying methods for many S3 objects from the built-in stats package, including
-
-* `lm`
-* `glm`
-* `htest`
-* `anova`
-* `nls`
-* `kmeans`
-* `manova`
-* `TukeyHSD`
-* `arima`
-
-It also provides methods for S3 objects in popular third-party packages, including
-
-* `lme4`
-* `glmnet`
-* `boot`
-* `gam`
-* `survival`
-* `lfe`
-* `zoo`
-* `multcomp`
-* `sp`
-* `maps`
-* etc
-
-A full list of the `tidy`, `augment` and `glance` methods available for each class is available in the Available Methods vignette.
-
-## Conventions
-
-`tidy`, `glance` and `augment` always return a data frame without rownames. In the near future they will return tibbles. 
-
-We attempt to keep column names consistent across models. Some method specific convetions and common columns names are below.
-
-### `tidy` functions
-
-* Each row in a `tidy` output typically represents some well-defined concept, such as one term in a regression, one test, or one cluster/class. This meaning varies across models but is usually self-evident. The one thing each row cannot represent is a point in the initial data (for that, use the `augment` method).
-* Common column names include:
-    * `term`: the term in a regression or model that is being estimated.
-    * `p.value`: this spelling was chosen (over common alternatives such as `pvalue`, `PValue`, or `pval`) to be consistent with functions in R's built-in `stats` package
-    * `statistic` a test statistic, usually the one used to compute the p-value. Combining these across many sub-groups is a reliable way to perform (e.g.) bootstrap hypothesis testing
-    * `estimate` estimate of an effect size, slope, or other value
-    * `std.error` standard error
-    * `conf.low` the low end of a confidence interval on the `estimate`
-    * `conf.high` the high end of a confidence interval on the `estimate`
-    * `df` degrees of freedom
-
-### augment functions
-
-* `augment(model, data)` adds columns to the original data.
-    * If the `data` argument is missing, `augment` attempts to reconstruct the data from the model (note that this may not always be possible, and usually won't contain columns not used in the model).
-* Each row in an `augment` output matches the corresponding row in the original data.
-* If the original data contained rownames, `augment` turns them into a column called `.rownames`.
-* Newly added column names begin with `.` to avoid overwriting columns in the original data.
-* Common column names include:
-    * `.fitted`: the predicted values, on the same scale as the data.
-    * `.resid`: residuals: the actual y values minus the fitted values
-    * `.cluster`: cluster assignments
-
-### glance functions
-
-* `glance` always returns a one-row data frame.
-    * The only exception is that `glance(NULL)` returns an empty data frame.
-* We avoid including arguments that were *given* to the modeling function. For example, a `glm` glance output does not need to contain a field for `family`, since that is decided by the user calling `glm` rather than the modeling function itself.
-* Common column names include:
-    * `r.squared` the fraction of variance explained by the model
-    * `adj.r.squared` R^2 adjusted based on the degrees of freedom
-    * `sigma` the square root of the estimated variance of the residuals
-
-### Code of Conduct
-
-Please note that this project is released with a [Contributor Code of Conduct](CONDUCT.md). By participating in this project you agree to abide by its terms.
-
+We have a [Contributor Code of Conduct](CODE_OF_CONDUCT.md). By participating in broom you agree to abide by its terms.

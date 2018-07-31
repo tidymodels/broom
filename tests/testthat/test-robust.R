@@ -1,27 +1,48 @@
-context("robust tidiers")
+context("robust")
 
+skip_if_not_installed("modeltests")
+library(modeltests)
+
+skip_if_not_installed("robust")
 library(robust)
 
-m <- lmRob(mpg ~ wt, data = mtcars)
-gm <- glmRob(am ~ wt, data = mtcars, family = "binomial")
+fit <- lmRob(mpg ~ wt, data = mtcars)
+fit2 <- glmRob(am ~ wt, data = mtcars, family = "binomial")
 
-test_that("tidy.lmRob, augment.lmRob, tidy.glmRob, augment.glmRob use lm", {
-  expect_identical(tidy(m), tidy.lm(m))
-  expect_identical(augment(m), augment.lm(m))
-  expect_identical(tidy(gm), tidy.lm(gm))
-  expect_identical(augment(gm), augment.lm(gm))
+# tidy and augment methods call lm tidiers. as long as nothing explodes
+# basics tests okay
 
-  td <- tidy(m)
-  check_tidy(td, exp.row = 2, exp.col = 5)
-
-  td <- tidy(gm)
-  check_tidy(td, exp.row = 2, exp.col = 5)
+test_that("robust glance arguments", {
+  check_arguments(glance.lmRob)
+  check_arguments(glance.glmRob)
 })
 
-test_that("glance.lmRob and glance.glmRob work", {
-  gl <- glance(m)
-  check_tidy(gl, exp.col = 4)
+test_that("tidy.lmRob", {
+  td <- tidy(fit)
+  check_tidy_output(td)
+})
 
-  gl <- glance(gm)
-  check_tidy(gl, exp.col = 3)
+test_that("glance.lmRob", {
+  gl <- glance(fit)
+  check_glance_outputs(gl)
+})
+
+test_that("augment.lmRob", {
+  au <- augment(fit)
+  check_tibble(au, method = "augment", strict = FALSE)
+})
+
+test_that("tidy.glmRob", {
+  td <- tidy(fit2)
+  check_tidy_output(td)
+})
+
+test_that("glance.glmRob", {
+  gl <- glance(fit2)
+  check_glance_outputs(gl)
+})
+
+test_that("augment.glmRob", {
+  au <- augment(fit2)
+  check_tibble(au, method = "augment", strict = FALSE)
 })

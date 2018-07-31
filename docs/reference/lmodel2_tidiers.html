@@ -102,7 +102,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Tidiers for linear model II objects from the lmodel2 package</h1>
-    <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/lmodel2_tidiers.R'><code>R/lmodel2_tidiers.R</code></a></small>
+    <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/lmodel2-tidiers.R'><code>R/lmodel2-tidiers.R</code></a></small>
     <div class="hidden name"><code>lmodel2_tidiers.Rd</code></div>
     </div>
 
@@ -140,18 +140,18 @@ structure depends on the method chosen.</p>
 <p><code>tidy</code> returns a data frame with one row for each combination
 of method (OLS/MA/SMA/RMA) and term (always Intercept/Slope). Its columns
 are:</p><dl class='dl-horizontal'>
-  <dt>method</dt><dd><p>Either OLS/MA/SMA/RMA</p></dd>
-  <dt>term</dt><dd><p>Either "Intercept" or "Slope"</p></dd>
-  <dt>estimate</dt><dd><p>Estimated coefficient</p></dd>
-  <dt>conf.low</dt><dd><p>Lower bound of 95% confidence interval</p></dd>
-  <dt>conf.high</dt><dd><p>Upper bound of 95% confidence interval</p></dd>
+<dt>method</dt><dd><p>Either OLS/MA/SMA/RMA</p></dd>
+<dt>term</dt><dd><p>Either "Intercept" or "Slope"</p></dd>
+<dt>estimate</dt><dd><p>Estimated coefficient</p></dd>
+<dt>conf.low</dt><dd><p>Lower bound of 95% confidence interval</p></dd>
+<dt>conf.high</dt><dd><p>Upper bound of 95% confidence interval</p></dd>
 </dl>
 
 <p><code>glance</code> returns a one-row data frame with columns</p><dl class='dl-horizontal'>
-  <dt>r.squared</dt><dd><p>OLS R-squared</p></dd>
-  <dt>p.value</dt><dd><p>OLS parametric p-value</p></dd>
-  <dt>theta</dt><dd><p>Angle between OLS lines <code>lm(y ~ x)</code> and <code>lm(x ~ y)</code></p></dd>
-  <dt>H</dt><dd><p>H statistic for computing confidence interval of major axis slope</p></dd>
+<dt>r.squared</dt><dd><p>OLS R-squared</p></dd>
+<dt>p.value</dt><dd><p>OLS parametric p-value</p></dd>
+<dt>theta</dt><dd><p>Angle between OLS lines <code>lm(y ~ x)</code> and <code>lm(x ~ y)</code></p></dd>
+<dt>H</dt><dd><p>H statistic for computing confidence interval of major axis slope</p></dd>
 </dl>
 
     

@@ -3,7 +3,7 @@ title: "Introduction to broom"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteIndexEntry{Introduction to broom}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -61,7 +61,7 @@ This gives you a data.frame representation. Note that the row names have been mo
 Instead of viewing the coefficients, you might be interested in the fitted values and residuals for each of the original points in the regression. For this, use `augment`, which augments the original data with information from the model:
 
 ```{r}
-head(augment(lmfit))
+augment(lmfit)
 ```
 
 Note that each of the new columns begins with a `.` (to avoid overwriting any of the original columns).
@@ -84,7 +84,7 @@ These functions apply equally well to the output from `glm`:
 ```{r glmfit}
 glmfit <- glm(am ~ wt, mtcars, family="binomial")
 tidy(glmfit)
-head(augment(glmfit))
+augment(glmfit)
 glance(glmfit)
 ```
 
@@ -95,7 +95,7 @@ These functions also work on other fits, such as nonlinear models (`nls`):
 ```{r}
 nlsfit <- nls(mpg ~ k / wt + b, mtcars, start=list(k=1, b=0))
 tidy(nlsfit)
-head(augment(nlsfit, mtcars))
+augment(nlsfit, mtcars)
 glance(nlsfit)
 ```
 

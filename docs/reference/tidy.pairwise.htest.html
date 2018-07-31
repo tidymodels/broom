@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>tidy a pairwise hypothesis test — tidy.pairwise.htest • broom</title>
+<title>Tidy a(n) pairwise.htest object — tidy.pairwise.htest • broom</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -46,7 +46,7 @@
 
       <div class="navbar-brand-container">
         <a class="navbar-brand" href="../index.html">broom</a>
-        <small class="tidyverse">part of the <a href="http://tidyverse.org">tidyverse</a></small>
+        <small class="tidyverse">part of the <a href="https://tidyverse.org">tidyverse</a></small>
       </div>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
@@ -101,15 +101,19 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>tidy a pairwise hypothesis test</h1>
-    <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/stats_tidiers.R'><code>R/stats_tidiers.R</code></a></small>
+    <h1>Tidy a(n) pairwise.htest object</h1>
+    <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/stats-htest-tidiers.R'><code>R/stats-htest-tidiers.R</code></a></small>
     <div class="hidden name"><code>tidy.pairwise.htest.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Tidy a pairwise.htest object, containing (adjusted) p-values for multiple
-pairwise hypothesis tests.</p>
+    <p>Tidy summarizes information about the components of a model.
+A model component might be a single term in a regression, a single
+hypothesis, a cluster, or a class. Exactly what tidy considers to be a
+model component varies cross models but is usually self-evident.
+If a model has several distinct types of components, you will need to
+specify which components to return.</p>
     
     </div>
 
@@ -121,20 +125,30 @@ pairwise hypothesis tests.</p>
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>x</th>
-      <td><p>a "pairwise.htest" object</p></td>
+      <td><p>A <code>pairwise.htest</code> object such as those returned from
+<code><a href='http://www.rdocumentation.org/packages/stats/topics/pairwise.t.test'>stats::pairwise.t.test()</a></code> or <code><a href='http://www.rdocumentation.org/packages/stats/topics/pairwise.wilcox.test'>stats::pairwise.wilcox.test()</a></code>.</p></td>
     </tr>
     <tr>
       <th>...</th>
-      <td><p>extra arguments (not used)</p></td>
+      <td><p>Additional arguments. Not used. Needed to match generic
+signature only. <strong>Cautionary note:</strong> Misspelled arguments will be
+absorbed in <code>...</code>, where they will be ignored. If the misspelled
+argument has a default value, the default value will be used.
+For example, if you pass <code>conf.lvel = 0.9</code>, all computation will
+proceed using <code>conf.level = 0.95</code>. Additionally, if you pass
+<code>newdata = my_tibble</code> to an <code><a href='augment.html'>augment()</a></code> method that does not
+accept a <code>newdata</code> argument, it will use the default value for
+the <code>data</code> argument.</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A data frame with one row per group/group comparison, with columns</p>
+    <p>A <a href='http://www.rdocumentation.org/packages/tibble/topics/tibble'>tibble::tibble</a> with one row per group/group comparison and
+columns:</p>
 <dt>group1</dt><dd><p>First group being compared</p></dd>
-  <dt>group2</dt><dd><p>Second group being compared</p></dd>
-  <dt>p.value</dt><dd><p>(Adjusted) p-value of comparison</p></dd>
+<dt>group2</dt><dd><p>Second group being compared</p></dd>
+<dt>p.value</dt><dd><p>(Adjusted) p-value of comparison</p></dd>
 
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
@@ -146,7 +160,10 @@ even if the original input is (e.g.) numeric.</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p>pairwise.t.test, pairwise.wilcox.test</p></div>
+    <div class='dont-index'><p><code><a href='http://www.rdocumentation.org/packages/stats/topics/pairwise.t.test'>stats::pairwise.t.test()</a></code>, <code><a href='http://www.rdocumentation.org/packages/stats/topics/pairwise.wilcox.test'>stats::pairwise.wilcox.test()</a></code>,
+<code><a href='tidy.html'>tidy()</a></code></p>
+<p>Other htest tidiers: <code><a href='augment.htest.html'>augment.htest</a></code>,
+  <code><a href='tidy.htest.html'>tidy.htest</a></code>, <code><a href='tidy.power.htest.html'>tidy.power.htest</a></code></p></div>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
@@ -154,34 +171,44 @@ even if the original input is (e.g.) numeric.</p>
 <span class='fu'>attach</span>(<span class='no'>airquality</span>)
 <span class='no'>Month</span> <span class='kw'>&lt;-</span> <span class='fu'>factor</span>(<span class='no'>Month</span>, <span class='kw'>labels</span> <span class='kw'>=</span> <span class='no'>month.abb</span>[<span class='fl'>5</span>:<span class='fl'>9</span>])
 <span class='no'>ptt</span> <span class='kw'>&lt;-</span> <span class='fu'>pairwise.t.test</span>(<span class='no'>Ozone</span>, <span class='no'>Month</span>)
-<span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>ptt</span>)</div><div class='output co'>#&gt;    group1 group2      p.value
-#&gt; 1     Jun    May 1.0000000000
-#&gt; 2     Jul    May 0.0002638036
-#&gt; 3     Aug    May 0.0001949061
-#&gt; 4     Sep    May 1.0000000000
-#&gt; 5     Jul    Jun 0.0511274135
-#&gt; 6     Aug    Jun 0.0498733313
-#&gt; 7     Sep    Jun 1.0000000000
-#&gt; 8     Aug    Jul 1.0000000000
-#&gt; 9     Sep    Jul 0.0048787981
-#&gt; 10    Sep    Aug 0.0038781084</div><div class='input'>
+<span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>ptt</span>)</div><div class='output co'>#&gt; # A tibble: 10 x 3
+#&gt;    group1 group2  p.value
+#&gt;  * &lt;chr&gt;  &lt;chr&gt;     &lt;dbl&gt;
+#&gt;  1 Jun    May    1       
+#&gt;  2 Jul    May    0.000264
+#&gt;  3 Aug    May    0.000195
+#&gt;  4 Sep    May    1       
+#&gt;  5 Jul    Jun    0.0511  
+#&gt;  6 Aug    Jun    0.0499  
+#&gt;  7 Sep    Jun    1       
+#&gt;  8 Aug    Jul    1       
+#&gt;  9 Sep    Jul    0.00488 
+#&gt; 10 Sep    Aug    0.00388 </div><div class='input'>
 <span class='fu'>attach</span>(<span class='no'>iris</span>)
 <span class='no'>ptt2</span> <span class='kw'>&lt;-</span> <span class='fu'>pairwise.t.test</span>(<span class='no'>Petal.Length</span>, <span class='no'>Species</span>)
-<span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>ptt2</span>)</div><div class='output co'>#&gt;       group1     group2      p.value
-#&gt; 1 versicolor     setosa 1.050917e-68
-#&gt; 2  virginica     setosa 1.231842e-90
-#&gt; 3  virginica versicolor 1.810597e-31</div><div class='input'>
-<span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='fu'>pairwise.t.test</span>(<span class='no'>Petal.Length</span>, <span class='no'>Species</span>, <span class='kw'>alternative</span> <span class='kw'>=</span> <span class='st'>"greater"</span>))</div><div class='output co'>#&gt;       group1     group2      p.value
-#&gt; 1 versicolor     setosa 5.254587e-69
-#&gt; 2  virginica     setosa 6.159208e-91
-#&gt; 3  virginica versicolor 9.052986e-32</div><div class='input'><span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='fu'>pairwise.t.test</span>(<span class='no'>Petal.Length</span>, <span class='no'>Species</span>, <span class='kw'>alternative</span> <span class='kw'>=</span> <span class='st'>"less"</span>))</div><div class='output co'>#&gt;       group1     group2 p.value
-#&gt; 1 versicolor     setosa       1
-#&gt; 2  virginica     setosa       1
-#&gt; 3  virginica versicolor       1</div><div class='input'>
-<span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='fu'>pairwise.wilcox.test</span>(<span class='no'>Petal.Length</span>, <span class='no'>Species</span>))</div><div class='output co'>#&gt;       group1     group2      p.value
-#&gt; 1 versicolor     setosa 1.695303e-17
-#&gt; 2  virginica     setosa 1.695303e-17
-#&gt; 3  virginica versicolor 9.133545e-17</div><div class='input'>
+<span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>ptt2</span>)</div><div class='output co'>#&gt; # A tibble: 3 x 3
+#&gt;   group1     group2      p.value
+#&gt; * &lt;chr&gt;      &lt;chr&gt;         &lt;dbl&gt;
+#&gt; 1 versicolor setosa     1.05e-68
+#&gt; 2 virginica  setosa     1.23e-90
+#&gt; 3 virginica  versicolor 1.81e-31</div><div class='input'>
+<span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='fu'>pairwise.t.test</span>(<span class='no'>Petal.Length</span>, <span class='no'>Species</span>, <span class='kw'>alternative</span> <span class='kw'>=</span> <span class='st'>"greater"</span>))</div><div class='output co'>#&gt; # A tibble: 3 x 3
+#&gt;   group1     group2      p.value
+#&gt; * &lt;chr&gt;      &lt;chr&gt;         &lt;dbl&gt;
+#&gt; 1 versicolor setosa     5.25e-69
+#&gt; 2 virginica  setosa     6.16e-91
+#&gt; 3 virginica  versicolor 9.05e-32</div><div class='input'><span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='fu'>pairwise.t.test</span>(<span class='no'>Petal.Length</span>, <span class='no'>Species</span>, <span class='kw'>alternative</span> <span class='kw'>=</span> <span class='st'>"less"</span>))</div><div class='output co'>#&gt; # A tibble: 3 x 3
+#&gt;   group1     group2     p.value
+#&gt; * &lt;chr&gt;      &lt;chr&gt;        &lt;dbl&gt;
+#&gt; 1 versicolor setosa           1
+#&gt; 2 virginica  setosa           1
+#&gt; 3 virginica  versicolor       1</div><div class='input'>
+<span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='fu'>pairwise.wilcox.test</span>(<span class='no'>Petal.Length</span>, <span class='no'>Species</span>))</div><div class='output co'>#&gt; # A tibble: 3 x 3
+#&gt;   group1     group2      p.value
+#&gt; * &lt;chr&gt;      &lt;chr&gt;         &lt;dbl&gt;
+#&gt; 1 versicolor setosa     1.70e-17
+#&gt; 2 virginica  setosa     1.70e-17
+#&gt; 3 virginica  versicolor 9.13e-17</div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
@@ -203,12 +230,12 @@ even if the original input is (e.g.) numeric.</p>
 
       <footer>
       <div class="tidyverse">
-  <p>broom is a part of the <strong>tidyverse</strong>, an ecosystem of packages designed with common APIs and a shared philosophy. Learn more at <a href="http://tidyverse.org">tidyverse.org</a>.</p>
+  <p>broom is a part of the <strong>tidyverse</strong>, an ecosystem of packages designed with common APIs and a shared philosophy. Learn more at <a href="https://tidyverse.org">tidyverse.org</a>.</p>
 </div>
 
 <div class="author">
-  <p>Developed by David Robinson.</p>
-  <p>Site built by <a href="http://pkgdown.r-lib.org">pkgdown</a>.</p>
+  <p>Developed by David Robinson, Alex Hayes.</p>
+  <p>Site built by <a href="https://pkgdown.r-lib.org">pkgdown</a>.</p>
 </div>
 
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-115082821-1"></script>

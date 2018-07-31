@@ -102,7 +102,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Tidying methods for a nonlinear model</h1>
-    <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/nls_tidiers.R'><code>R/nls_tidiers.R</code></a></small>
+    <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/stats-nls-tidiers.R'><code>R/stats-nls-tidiers.R</code></a></small>
     <div class="hidden name"><code>nls_tidiers.Rd</code></div>
     </div>
 
@@ -162,33 +162,33 @@ attempt to be reconstructed from nls (may not be successful)</p></td>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>All tidying methods return a <code>data.frame</code> without rownames.
+    <p>All tidying methods return a <code>tibble</code> without rownames.
 The structure depends on the method chosen.</p>
 <p><code>tidy</code> returns one row for each coefficient in the model,
 with five columns:</p>
 <dt>term</dt><dd><p>The term in the nonlinear model being estimated and tested</p></dd>
-  <dt>estimate</dt><dd><p>The estimated coefficient</p></dd>
-  <dt>std.error</dt><dd><p>The standard error from the linear model</p></dd>
-  <dt>statistic</dt><dd><p>t-statistic</p></dd>
-  <dt>p.value</dt><dd><p>two-sided p-value</p></dd>
+<dt>estimate</dt><dd><p>The estimated coefficient</p></dd>
+<dt>std.error</dt><dd><p>The standard error from the linear model</p></dd>
+<dt>statistic</dt><dd><p>t-statistic</p></dd>
+<dt>p.value</dt><dd><p>two-sided p-value</p></dd>
 
 augment returns one row for each original observation,
 with two columns added:
-  <dt>.fitted</dt><dd><p>Fitted values of model</p></dd>
-  <dt>.resid</dt><dd><p>Residuals</p></dd>
+<dt>.fitted</dt><dd><p>Fitted values of model</p></dd>
+<dt>.resid</dt><dd><p>Residuals</p></dd>
 
 If newdata is provided, these are computed on based on predictions
 of the new data.
 
 glance returns one row with the columns
-  <dt>sigma</dt><dd><p>the square root of the estimated residual variance</p></dd>
-  <dt>isConv</dt><dd><p>whether the fit successfully converged</p></dd>
-  <dt>finTol</dt><dd><p>the achieved convergence tolerance</p></dd>
-  <dt>logLik</dt><dd><p>the data's log-likelihood under the model</p></dd>
-  <dt>AIC</dt><dd><p>the Akaike Information Criterion</p></dd>
-  <dt>BIC</dt><dd><p>the Bayesian Information Criterion</p></dd>
-  <dt>deviance</dt><dd><p>deviance</p></dd>
-  <dt>df.residual</dt><dd><p>residual degrees of freedom</p></dd>
+<dt>sigma</dt><dd><p>the square root of the estimated residual variance</p></dd>
+<dt>isConv</dt><dd><p>whether the fit successfully converged</p></dd>
+<dt>finTol</dt><dd><p>the achieved convergence tolerance</p></dd>
+<dt>logLik</dt><dd><p>the data's log-likelihood under the model</p></dd>
+<dt>AIC</dt><dd><p>the Akaike Information Criterion</p></dd>
+<dt>BIC</dt><dd><p>the Bayesian Information Criterion</p></dd>
+<dt>deviance</dt><dd><p>deviance</p></dd>
+<dt>df.residual</dt><dd><p>residual degrees of freedom</p></dd>
 
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
@@ -205,61 +205,49 @@ warning is raised and the incomplete rows are dropped.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p>na.action</p>
-<p><code>nls</code> and <code>summary.nls</code></p></div>
+<p><code>nls()</code> and <code>summary.nls()</code></p></div>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
 <span class='no'>n</span> <span class='kw'>&lt;-</span> <span class='fu'>nls</span>(<span class='no'>mpg</span> ~ <span class='no'>k</span> * <span class='no'>e</span> ^ <span class='no'>wt</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>mtcars</span>, <span class='kw'>start</span> <span class='kw'>=</span> <span class='fu'>list</span>(<span class='kw'>k</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>e</span> <span class='kw'>=</span> <span class='fl'>2</span>))
 
-<span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>n</span>)</div><div class='output co'>#&gt;   term   estimate  std.error statistic      p.value
-#&gt; 1    k 49.6596868 3.78875502  13.10713 5.963165e-14
-#&gt; 2    e  0.7455911 0.01985924  37.54378 8.861929e-27</div><div class='input'><span class='fu'><a href='augment.html'>augment</a></span>(<span class='no'>n</span>)</div><div class='output co'>#&gt;     mpg    wt  .fitted     .resid
-#&gt; 1  21.0 2.620 23.01208 -2.0120762
-#&gt; 2  21.0 2.875 21.35224 -0.3522419
-#&gt; 3  22.8 2.320 25.13076 -2.3307583
-#&gt; 4  21.4 3.215 19.32385  2.0761473
-#&gt; 5  18.7 3.440 18.08866  0.6113409
-#&gt; 6  18.1 3.460 17.98276  0.1172383
-#&gt; 7  14.3 3.570 17.41131 -3.1113107
-#&gt; 8  24.4 3.190 19.46620  4.9337991
-#&gt; 9  22.8 3.150 19.69614  3.1038577
-#&gt; 10 19.2 3.440 18.08866  1.1113409
-#&gt; 11 17.8 3.440 18.08866 -0.2886591
-#&gt; 12 16.4 4.070 15.03425  1.3657484
-#&gt; 13 17.3 3.730 16.61237  0.6876307
-#&gt; 14 15.2 3.780 16.37030 -1.1702990
-#&gt; 15 10.4 5.250 10.63243 -0.2324326
-#&gt; 16 10.4 5.424 10.10294  0.2970604
-#&gt; 17 14.7 5.345 10.33999  4.3600080
-#&gt; 18 32.4 2.200 26.03188  6.3681214
-#&gt; 19 30.4 1.615 30.90954 -0.5095443
-#&gt; 20 33.9 1.835 28.97629  4.9237116
-#&gt; 21 21.5 2.465 24.08342 -2.5834220
-#&gt; 22 15.5 3.520 17.66877 -2.1687746
-#&gt; 23 15.2 3.435 18.11523 -2.9152308
-#&gt; 24 13.3 3.840 16.08447 -2.7844662
-#&gt; 25 19.2 3.845 16.06087  3.1391267
-#&gt; 26 27.3 1.935 28.13797 -0.8379741
-#&gt; 27 26.0 2.140 26.49448 -0.4944842
-#&gt; 28 30.4 1.513 31.84913 -1.4491269
-#&gt; 29 15.8 3.170 19.58083 -3.7808340
-#&gt; 30 19.7 2.770 22.02069 -2.3206892
-#&gt; 31 15.0 3.570 17.41131 -2.4113107
-#&gt; 32 21.4 2.780 21.95614 -0.5561361</div><div class='input'><span class='fu'><a href='glance.html'>glance</a></span>(<span class='no'>n</span>)</div><div class='output co'>#&gt;      sigma isConv       finTol    logLik     AIC      BIC deviance df.residual
-#&gt; 1 2.667878   TRUE 2.042926e-06 -75.77449 157.549 161.9462 213.5273          30</div><div class='input'>
+<span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>n</span>)</div><div class='output co'>#&gt; # A tibble: 2 x 5
+#&gt;   term  estimate std.error statistic  p.value
+#&gt;   &lt;chr&gt;    &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
+#&gt; 1 k       49.7      3.79        13.1 5.96e-14
+#&gt; 2 e        0.746    0.0199      37.5 8.86e-27</div><div class='input'><span class='fu'><a href='augment.html'>augment</a></span>(<span class='no'>n</span>)</div><div class='output co'>#&gt; # A tibble: 32 x 4
+#&gt;      mpg    wt .fitted .resid
+#&gt;    &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;
+#&gt;  1  21    2.62    23.0 -2.01 
+#&gt;  2  21    2.88    21.4 -0.352
+#&gt;  3  22.8  2.32    25.1 -2.33 
+#&gt;  4  21.4  3.22    19.3  2.08 
+#&gt;  5  18.7  3.44    18.1  0.611
+#&gt;  6  18.1  3.46    18.0  0.117
+#&gt;  7  14.3  3.57    17.4 -3.11 
+#&gt;  8  24.4  3.19    19.5  4.93 
+#&gt;  9  22.8  3.15    19.7  3.10 
+#&gt; 10  19.2  3.44    18.1  1.11 
+#&gt; # ... with 22 more rows</div><div class='input'><span class='fu'><a href='glance.html'>glance</a></span>(<span class='no'>n</span>)</div><div class='output co'>#&gt; # A tibble: 1 x 8
+#&gt;   sigma isConv     finTol logLik   AIC   BIC deviance df.residual
+#&gt;   &lt;dbl&gt; &lt;lgl&gt;       &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;       &lt;int&gt;
+#&gt; 1  2.67 TRUE   0.00000204  -75.8  158.  162.     214.          30</div><div class='input'>
 <span class='fu'>library</span>(<span class='no'>ggplot2</span>)
 <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/ggplot'>ggplot</a></span>(<span class='fu'><a href='augment.html'>augment</a></span>(<span class='no'>n</span>), <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/aes'>aes</a></span>(<span class='no'>wt</span>, <span class='no'>mpg</span>)) + <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/geom_point'>geom_point</a></span>() + <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/geom_path'>geom_line</a></span>(<span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/aes'>aes</a></span>(<span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>.fitted</span>))</div><div class='img'><img src='nls_tidiers-1.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'># augment on new data</span>
 <span class='no'>newdata</span> <span class='kw'>&lt;-</span> <span class='fu'>head</span>(<span class='no'>mtcars</span>)
 <span class='no'>newdata</span>$<span class='no'>wt</span> <span class='kw'>&lt;-</span> <span class='no'>newdata</span>$<span class='no'>wt</span> + <span class='fl'>1</span>
-<span class='fu'><a href='augment.html'>augment</a></span>(<span class='no'>n</span>, <span class='kw'>newdata</span> <span class='kw'>=</span> <span class='no'>newdata</span>)</div><div class='output co'>#&gt;           .rownames  mpg cyl disp  hp drat    wt  qsec vs am gear carb  .fitted
-#&gt; 1         Mazda RX4 21.0   6  160 110 3.90 3.620 16.46  0  1    4    4 17.15760
-#&gt; 2     Mazda RX4 Wag 21.0   6  160 110 3.90 3.875 17.02  0  1    4    4 15.92004
-#&gt; 3        Datsun 710 22.8   4  108  93 3.85 3.320 18.61  1  1    4    1 18.73727
-#&gt; 4    Hornet 4 Drive 21.4   6  258 110 3.08 4.215 19.44  1  0    3    1 14.40769
-#&gt; 5 Hornet Sportabout 18.7   8  360 175 3.15 4.440 17.02  0  0    3    2 13.48674
-#&gt; 6           Valiant 18.1   6  225 105 2.76 4.460 20.22  1  0    3    1 13.40779</div><div class='input'>
+<span class='fu'><a href='augment.html'>augment</a></span>(<span class='no'>n</span>, <span class='kw'>newdata</span> <span class='kw'>=</span> <span class='no'>newdata</span>)</div><div class='output co'>#&gt; # A tibble: 6 x 13
+#&gt;   .rownames     mpg   cyl  disp    hp  drat    wt  qsec    vs    am  gear  carb
+#&gt;   &lt;chr&gt;       &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+#&gt; 1 Mazda RX4    21       6   160   110  3.9   3.62  16.5     0     1     4     4
+#&gt; 2 Mazda RX4 ~  21       6   160   110  3.9   3.88  17.0     0     1     4     4
+#&gt; 3 Datsun 710   22.8     4   108    93  3.85  3.32  18.6     1     1     4     1
+#&gt; 4 Hornet 4 D~  21.4     6   258   110  3.08  4.22  19.4     1     0     3     1
+#&gt; 5 Hornet Spo~  18.7     8   360   175  3.15  4.44  17.0     0     0     3     2
+#&gt; 6 Valiant      18.1     6   225   105  2.76  4.46  20.2     1     0     3     1
+#&gt; # ... with 1 more variable: .fitted &lt;dbl&gt;</div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

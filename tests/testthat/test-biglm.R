@@ -1,24 +1,39 @@
 context("biglm")
 
+skip_if_not_installed("modeltests")
+library(modeltests)
+
+skip_if_not_installed("biglm")
 library(biglm)
 
-test_that("biglm tidiers work", {
-  bfit <- biglm(mpg ~ wt + disp, mtcars)
-  td <- tidy(bfit)
-  tdq <- tidy(bfit, quick = TRUE)
-  gl <- glance(bfit)
+fit <- biglm(mpg ~ wt + disp, mtcars)
+fit2 <- bigglm(am ~ mpg, mtcars, family = binomial())
 
-  check_tidy(
-    td,
-    exp.row = 3,
-    exp.col = 4,
-    exp.names = c("term", "estimate", "std.error", "p.value")
-  )
-  check_tidy(
-    tdq,
-    exp.row = 3,
-    exp.col = 2,
-    exp.names = c("term", "estimate")
-  )
-  check_tidy(gl, exp.col = 4)
+test_that("biglm tidier arguments", {
+  check_arguments(tidy.biglm)
+  check_arguments(glance.biglm)
+})
+
+test_that("tidy.biglm", {
+  
+  td <- tidy(fit)
+  tdq <- tidy(fit, quick = TRUE)
+  td2 <- tidy(fit2, conf.int = TRUE, conf.level = 0.9, exponentiate = TRUE)
+  
+  check_tidy_output(td)
+  check_tidy_output(tdq)
+  check_tidy_output(td2)
+  
+  check_dims(td, 3, 4)
+  check_dims(tdq, 3, 2)
+})
+
+
+test_that("glance.betareg", {
+  
+  gl <- glance(fit)
+  check_glance_outputs(gl)
+  
+  gl2 <- glance(fit2)
+  check_glance_outputs(gl2)  # separate glance checks since different models
 })

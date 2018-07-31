@@ -1,23 +1,52 @@
-context("mclust tidiers")
+context("mclust")
 
+skip_if_not_installed("modeltests")
+library(modeltests)
+
+skip_if_not_installed("mclust")
 library(mclust)
 dat <- iris[, 1:4]
 
-test_that("mclust tidiers work", {
-  mod1 <- Mclust(dat, G = 7, modelNames = "EII", verbose = FALSE)
+fit <- Mclust(dat, G = 7, modelNames = "EII", verbose = FALSE)
+fit2 <- Mclust(dat, G = 1, verbose = FALSE)
 
-  td <- tidy(mod1)
-  check_tidy(td, exp.row = 7, exp.col = 8)
-
-  au <- augment(mod1, dat)
-  check_tidy(au, exp.row = 150, exp.col = 6)
-
-  gl <- glance(mod1)
-  check_tidy(gl, exp.col = 7)
+test_that("mclust tidier arguments", {
+  check_arguments(tidy.Mclust)
+  check_arguments(glance.Mclust)
+  check_arguments(augment.Mclust, strict = FALSE)
 })
 
-test_that("G = 1 works", {
-  mod2 <- Mclust(dat, G = 1, verbose = FALSE)
-  td <- tidy(mod2)
-  check_tidy(td, exp.row = 1, exp.col = 7)
+test_that("tidy.Mclust", {
+  td <- tidy(fit)
+  td2 <- tidy(fit2)
+  
+  check_tidy_output(td, strict = FALSE)
+  check_tidy_output(td2, strict = FALSE)
+  
+  check_dims(td, 7, 8)
+  check_dims(td2, 1, 7)
+})
+
+test_that("glance.Mclust", {
+  gl <- glance(fit)
+  gl2 <- glance(fit2)
+  
+  check_glance_outputs(gl, gl2)
+})
+
+test_that("augment.Mclust", {
+  
+  check_augment_function(
+    aug = augment.Mclust,
+    model = fit,
+    data = dat,
+    newdata = dat
+  )
+  
+  check_augment_function(
+    aug = augment.Mclust,
+    model = fit2,
+    data = dat,
+    newdata = dat
+  )
 })

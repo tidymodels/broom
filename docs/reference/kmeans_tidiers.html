@@ -102,7 +102,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Tidying methods for kmeans objects</h1>
-    <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/kmeans_tidiers.R'><code>R/kmeans_tidiers.R</code></a></small>
+    <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/stats-kmeans-tidiers.R'><code>R/stats-kmeans-tidiers.R</code></a></small>
     <div class="hidden name"><code>kmeans_tidiers.Rd</code></div>
     </div>
 
@@ -154,22 +154,22 @@ The structure depends on the method chosen.</p>
 <p><code>tidy</code> returns one row per cluster, with one column for each
 dimension in the data describing the center, followed by</p>
 <dt>size</dt><dd><p>The size of each cluster</p></dd>
-  <dt>withinss</dt><dd><p>The within-cluster sum of squares</p></dd>
-  <dt>cluster</dt><dd><p>A factor describing the cluster from 1:k</p></dd>
+<dt>withinss</dt><dd><p>The within-cluster sum of squares</p></dd>
+<dt>cluster</dt><dd><p>A factor describing the cluster from 1:k</p></dd>
 
 augment returns the original data with one extra column:
-  <dt>.cluster</dt><dd><p>The cluster assigned by the k-means algorithm</p></dd>
+<dt>.cluster</dt><dd><p>The cluster assigned by the k-means algorithm</p></dd>
 
 glance returns a one-row data.frame with the columns
-  <dt>totss</dt><dd><p>The total sum of squares</p></dd>
-  <dt>tot.withinss</dt><dd><p>The total within-cluster sum of squares</p></dd>
-  <dt>betweenss</dt><dd><p>The total between-cluster sum of squares</p></dd>
-  <dt>iter</dt><dd><p>The numbr of (outer) iterations</p></dd>
+<dt>totss</dt><dd><p>The total sum of squares</p></dd>
+<dt>tot.withinss</dt><dd><p>The total within-cluster sum of squares</p></dd>
+<dt>betweenss</dt><dd><p>The total between-cluster sum of squares</p></dd>
+<dt>iter</dt><dd><p>The numbr of (outer) iterations</p></dd>
 
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code>kmeans</code></p></div>
+    <div class='dont-index'><p><code>kmeans()</code></p></div>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
@@ -184,17 +184,23 @@ glance returns a one-row data.frame with the columns
  <span class='fu'><a href='http://dplyr.tidyverse.org/reference/do.html'>do</a></span>(<span class='fu'>data.frame</span>(<span class='kw'>x1</span><span class='kw'>=</span><span class='fu'>rnorm</span>(<span class='no'>.</span>$<span class='no'>size</span>[<span class='fl'>1</span>], <span class='no'>.</span>$<span class='no'>x1</span>[<span class='fl'>1</span>]),
                <span class='kw'>x2</span><span class='kw'>=</span><span class='fu'>rnorm</span>(<span class='no'>.</span>$<span class='no'>size</span>[<span class='fl'>1</span>], <span class='no'>.</span>$<span class='no'>x2</span>[<span class='fl'>1</span>])))
 
-<span class='no'>k</span> <span class='kw'>&lt;-</span> <span class='fu'>kmeans</span>(<span class='no'>points</span> <span class='kw'>%&gt;%</span> <span class='kw pkg'>dplyr</span><span class='kw ns'>::</span><span class='fu'><a href='http://dplyr.tidyverse.org/reference/select.html'>select</a></span>(<span class='no'>x1</span>, <span class='no'>x2</span>), <span class='fl'>3</span>)</div><div class='output co'>#&gt; <span class='message'>Adding missing grouping variables: `cluster`</span></div><div class='input'><span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>k</span>)</div><div class='output co'>#&gt;         x1         x2         x3 size  withinss cluster
-#&gt; 1 1.000000  5.1791917 -0.9865170   99 204.96483       1
-#&gt; 2 1.993377  0.1583797  0.9797098  151 258.19697       2
-#&gt; 3 3.000000 -3.0653196 -2.0887225   50  78.64255       3</div><div class='input'><span class='fu'>head</span>(<span class='fu'><a href='augment.html'>augment</a></span>(<span class='no'>k</span>, <span class='no'>points</span>))</div><div class='output co'>#&gt;   cluster       x1         x2 .cluster
-#&gt; 1       1 4.434320  0.5416470        1
-#&gt; 2       1 5.321046 -0.9412882        1
-#&gt; 3       1 5.125271 -1.5802282        1
-#&gt; 4       1 6.353225 -1.6040549        1
-#&gt; 5       1 3.712270 -3.4079344        1
-#&gt; 6       1 5.322555 -0.7716317        1</div><div class='input'><span class='fu'><a href='glance.html'>glance</a></span>(<span class='no'>k</span>)</div><div class='output co'>#&gt;      totss tot.withinss betweenss iter
-#&gt; 1 3771.337     541.8043  3229.532    2</div><div class='input'>
+<span class='no'>k</span> <span class='kw'>&lt;-</span> <span class='fu'>kmeans</span>(<span class='no'>points</span> <span class='kw'>%&gt;%</span> <span class='kw pkg'>dplyr</span><span class='kw ns'>::</span><span class='fu'><a href='http://dplyr.tidyverse.org/reference/select.html'>select</a></span>(<span class='no'>x1</span>, <span class='no'>x2</span>), <span class='fl'>3</span>)</div><div class='output co'>#&gt; <span class='message'>Adding missing grouping variables: `cluster`</span></div><div class='input'><span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>k</span>)</div><div class='output co'>#&gt; # A tibble: 3 x 6
+#&gt;      x1     x2     x3  size withinss cluster
+#&gt; * &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt; &lt;int&gt;    &lt;dbl&gt; &lt;fct&gt;  
+#&gt; 1  1     5.18  -0.987    99    205.  1      
+#&gt; 2  1.99  0.158  0.980   151    258.  2      
+#&gt; 3  3    -3.07  -2.09     50     78.6 3      </div><div class='input'><span class='fu'>head</span>(<span class='fu'><a href='augment.html'>augment</a></span>(<span class='no'>k</span>, <span class='no'>points</span>))</div><div class='output co'>#&gt; # A tibble: 6 x 4
+#&gt;   cluster    x1     x2 .cluster
+#&gt;   &lt;fct&gt;   &lt;dbl&gt;  &lt;dbl&gt; &lt;fct&gt;   
+#&gt; 1 1        4.43  0.542 1       
+#&gt; 2 1        5.32 -0.941 1       
+#&gt; 3 1        5.13 -1.58  1       
+#&gt; 4 1        6.35 -1.60  1       
+#&gt; 5 1        3.71 -3.41  1       
+#&gt; 6 1        5.32 -0.772 1       </div><div class='input'><span class='fu'><a href='glance.html'>glance</a></span>(<span class='no'>k</span>)</div><div class='output co'>#&gt; # A tibble: 1 x 4
+#&gt;   totss tot.withinss betweenss  iter
+#&gt;   &lt;dbl&gt;        &lt;dbl&gt;     &lt;dbl&gt; &lt;int&gt;
+#&gt; 1 3771.         542.     3230.     2</div><div class='input'>
 <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/ggplot'>ggplot</a></span>(<span class='fu'><a href='augment.html'>augment</a></span>(<span class='no'>k</span>, <span class='no'>points</span>), <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/aes'>aes</a></span>(<span class='no'>x1</span>, <span class='no'>x2</span>)) +
     <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/geom_point'>geom_point</a></span>(<span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/aes'>aes</a></span>(<span class='kw'>color</span> <span class='kw'>=</span> <span class='no'>.cluster</span>)) +
     <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/geom_text'>geom_text</a></span>(<span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/aes'>aes</a></span>(<span class='kw'>label</span> <span class='kw'>=</span> <span class='no'>cluster</span>), <span class='kw'>data</span> <span class='kw'>=</span> <span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>k</span>), <span class='kw'>size</span> <span class='kw'>=</span> <span class='fl'>10</span>)</div><div class='img'><img src='kmeans_tidiers-1.png' alt='' width='700' height='433' /></div><div class='input'>

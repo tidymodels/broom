@@ -102,7 +102,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Tidy an expected survival curve</h1>
-    <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/survival_tidiers.R'><code>R/survival_tidiers.R</code></a></small>
+    <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/survival-survexp-tidiers.R'><code>R/survival-survexp-tidiers.R</code></a></small>
     <div class="hidden name"><code>sexpfit_tidiers.Rd</code></div>
     </div>
 
@@ -138,13 +138,13 @@ curve. Note that this contains less information than most survfit objects.</p>
 structure depends on the method chosen.</p>
 <p><code>tidy</code> returns a one row for each time point, with columns</p>
 <dt>time</dt><dd><p>time point</p></dd>
-  <dt>estimate</dt><dd><p>estimated survival</p></dd>
-  <dt>n.risk</dt><dd><p>number of individuals at risk</p></dd>
+<dt>estimate</dt><dd><p>estimated survival</p></dd>
+<dt>n.risk</dt><dd><p>number of individuals at risk</p></dd>
 
 glance returns a one-row data.frame with the columns:
-  <dt>n.max</dt><dd><p>maximum number of subjects at risk</p></dd>
-  <dt>n.start</dt><dd><p>starting number of subjects at risk</p></dd>
-  <dt>timepoints</dt><dd><p>number of timepoints</p></dd>
+<dt>n.max</dt><dd><p>maximum number of subjects at risk</p></dd>
+<dt>n.start</dt><dd><p>starting number of subjects at risk</p></dd>
+<dt>timepoints</dt><dd><p>number of timepoints</p></dd>
 
     
 
@@ -157,7 +157,9 @@ glance returns a one-row data.frame with the columns:
 
     <span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>sexpfit</span>)
     <span class='fu'><a href='glance.html'>glance</a></span>(<span class='no'>sexpfit</span>)
-}</div><div class='output co'>#&gt;   n.max n.start timepoints
+}</div><div class='output co'>#&gt; # A tibble: 1 x 3
+#&gt;   n.max n.start timepoints
+#&gt;   &lt;int&gt;   &lt;int&gt;      &lt;int&gt;
 #&gt; 1   102     102         88</div><div class='input'>
 </div></pre>
   </div>

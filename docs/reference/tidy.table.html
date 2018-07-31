@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>tidy a table object — tidy.table • broom</title>
+<title>Tidy a(n) table object — tidy.table • broom</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -46,7 +46,7 @@
 
       <div class="navbar-brand-container">
         <a class="navbar-brand" href="../index.html">broom</a>
-        <small class="tidyverse">part of the <a href="http://tidyverse.org">tidyverse</a></small>
+        <small class="tidyverse">part of the <a href="https://tidyverse.org">tidyverse</a></small>
       </div>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
@@ -101,17 +101,19 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>tidy a table object</h1>
-    <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/stats_tidiers.R'><code>R/stats_tidiers.R</code></a></small>
+    <h1>Tidy a(n) table object</h1>
+    <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/base-tidiers.R'><code>R/base-tidiers.R</code></a></small>
     <div class="hidden name"><code>tidy.table.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>A table, typically created by the table function, contains a
-contingency table of frequencies across multiple vectors. This directly
-calls the <code>as.data.frame.table</code> method, which melts it into a
-data frame with one column for each variable and a <code>Freq</code> column.</p>
+    <p>Tidy summarizes information about the components of a model.
+A model component might be a single term in a regression, a single
+hypothesis, a cluster, or a class. Exactly what tidy considers to be a
+model component varies cross models but is usually self-evident.
+If a model has several distinct types of components, you will need to
+specify which components to return.</p>
     
     </div>
 
@@ -123,43 +125,65 @@ data frame with one column for each variable and a <code>Freq</code> column.</p>
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>x</th>
-      <td><p>An object of class "table"</p></td>
+      <td><p>A table object.</p></td>
     </tr>
     <tr>
       <th>...</th>
-      <td><p>Extra arguments (not used)</p></td>
+      <td><p>Additional arguments. Not used. Needed to match generic
+signature only. <strong>Cautionary note:</strong> Misspelled arguments will be
+absorbed in <code>...</code>, where they will be ignored. If the misspelled
+argument has a default value, the default value will be used.
+For example, if you pass <code>conf.lvel = 0.9</code>, all computation will
+proceed using <code>conf.level = 0.95</code>. Additionally, if you pass
+<code>newdata = my_tibble</code> to an <code><a href='augment.html'>augment()</a></code> method that does not
+accept a <code>newdata</code> argument, it will use the default value for
+the <code>data</code> argument.</p></td>
     </tr>
     </table>
     
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>A <a href='http://www.rdocumentation.org/packages/tibble/topics/tibble'>tibble::tibble</a> in long-form containing frequency information
+for the table in a <code>Freq</code> column. The result is much like what you get
+from <code><a href='http://www.rdocumentation.org/packages/tidyr/topics/gather'>tidyr::gather()</a></code>.</p>
+    
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>Directly calls <code><a href='http://www.rdocumentation.org/packages/tibble/topics/as_tibble'>tibble::as_tibble()</a></code> on a table object, which
+does the same things as <code>as.data.frame.table()</code> but also gives the
+returned object <a href='http://www.rdocumentation.org/packages/tibble/topics/tibble'>tibble::tibble</a> class.</p>
+    
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code>as.data.frame.table</code></p></div>
+    <div class='dont-index'><p><code>as_tibble.table()</code></p></div>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
 <span class='no'>tab</span> <span class='kw'>&lt;-</span> <span class='fu'>with</span>(<span class='no'>airquality</span>, <span class='fu'>table</span>(<span class='fu'>cut</span>(<span class='no'>Temp</span>, <span class='fu'>quantile</span>(<span class='no'>Temp</span>)), <span class='no'>Month</span>))
-<span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>tab</span>)</div><div class='output co'>#&gt;       Var1 Month Freq
-#&gt; 1  (56,72]     5   24
-#&gt; 2  (72,79]     5    5
-#&gt; 3  (79,85]     5    1
-#&gt; 4  (85,97]     5    0
-#&gt; 5  (56,72]     6    3
-#&gt; 6  (72,79]     6   15
-#&gt; 7  (79,85]     6    7
-#&gt; 8  (85,97]     6    5
-#&gt; 9  (56,72]     7    0
-#&gt; 10 (72,79]     7    2
-#&gt; 11 (79,85]     7   19
-#&gt; 12 (85,97]     7   10
-#&gt; 13 (56,72]     8    1
-#&gt; 14 (72,79]     8    9
-#&gt; 15 (79,85]     8    7
-#&gt; 16 (85,97]     8   14
-#&gt; 17 (56,72]     9   10
-#&gt; 18 (72,79]     9   10
-#&gt; 19 (79,85]     9    5
-#&gt; 20 (85,97]     9    5</div><div class='input'>
+<span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>tab</span>)</div><div class='output co'>#&gt; # A tibble: 20 x 3
+#&gt;    Var1    Month     n
+#&gt;    &lt;chr&gt;   &lt;chr&gt; &lt;int&gt;
+#&gt;  1 (56,72] 5        24
+#&gt;  2 (72,79] 5         5
+#&gt;  3 (79,85] 5         1
+#&gt;  4 (85,97] 5         0
+#&gt;  5 (56,72] 6         3
+#&gt;  6 (72,79] 6        15
+#&gt;  7 (79,85] 6         7
+#&gt;  8 (85,97] 6         5
+#&gt;  9 (56,72] 7         0
+#&gt; 10 (72,79] 7         2
+#&gt; 11 (79,85] 7        19
+#&gt; 12 (85,97] 7        10
+#&gt; 13 (56,72] 8         1
+#&gt; 14 (72,79] 8         9
+#&gt; 15 (79,85] 8         7
+#&gt; 16 (85,97] 8        14
+#&gt; 17 (56,72] 9        10
+#&gt; 18 (72,79] 9        10
+#&gt; 19 (79,85] 9         5
+#&gt; 20 (85,97] 9         5</div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
@@ -167,6 +191,10 @@ data frame with one column for each variable and a <code>Freq</code> column.</p>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
       
+      <li><a href="#value">Value</a></li>
+
+      <li><a href="#details">Details</a></li>
+
       <li><a href="#see-also">See also</a></li>
       
       <li><a href="#examples">Examples</a></li>
@@ -177,12 +205,12 @@ data frame with one column for each variable and a <code>Freq</code> column.</p>
 
       <footer>
       <div class="tidyverse">
-  <p>broom is a part of the <strong>tidyverse</strong>, an ecosystem of packages designed with common APIs and a shared philosophy. Learn more at <a href="http://tidyverse.org">tidyverse.org</a>.</p>
+  <p>broom is a part of the <strong>tidyverse</strong>, an ecosystem of packages designed with common APIs and a shared philosophy. Learn more at <a href="https://tidyverse.org">tidyverse.org</a>.</p>
 </div>
 
 <div class="author">
-  <p>Developed by David Robinson.</p>
-  <p>Site built by <a href="http://pkgdown.r-lib.org">pkgdown</a>.</p>
+  <p>Developed by David Robinson, Alex Hayes.</p>
+  <p>Site built by <a href="https://pkgdown.r-lib.org">pkgdown</a>.</p>
 </div>
 
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-115082821-1"></script>

@@ -102,7 +102,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Tidiers for biglm and bigglm object</h1>
-    <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/biglm_tidiers.R'><code>R/biglm_tidiers.R</code></a></small>
+    <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/biglm-tidiers.R'><code>R/biglm-tidiers.R</code></a></small>
     <div class="hidden name"><code>biglm_tidiers.Rd</code></div>
     </div>
 
@@ -110,7 +110,7 @@
     
     <p>Tidiers for biglm object from the "biglm" package, which contains a linear model
 object that is limited in memory usage. Generally the behavior is as similar
-to the <code><a href='lm_tidiers.html'>lm_tidiers</a></code> as is possible. Currently no <code>augment</code>
+to the <code><a href='lm_tidiers.html'>lm_tidiers()</a></code> as is possible. Currently no <code>augment</code>
 is defined.</p>
     
     </div>
@@ -160,18 +160,18 @@ only the <code>term</code> and <code>estimate</code> columns.</p></td>
 structure depends on the method chosen.</p>
 <p><code>tidy.biglm</code> returns one row for each coefficient, with columns</p>
 <dt>term</dt><dd><p>The term in the linear model being estimated and tested</p></dd>
-  <dt>estimate</dt><dd><p>The estimated coefficient</p></dd>
-  <dt>std.error</dt><dd><p>The standard error from the linear model</p></dd>
-  <dt>p.value</dt><dd><p>two-sided p-value</p></dd>
+<dt>estimate</dt><dd><p>The estimated coefficient</p></dd>
+<dt>std.error</dt><dd><p>The standard error from the linear model</p></dd>
+<dt>p.value</dt><dd><p>two-sided p-value</p></dd>
 
 If conf.int=TRUE, it also includes columns for conf.low and
-conf.high, computed with confint.
+conf.high, computed with confint().
 
 glance.biglm returns a one-row data frame, with columns
-  <dt>r.squared</dt><dd><p>The percent of variance explained by the model</p></dd>
-  <dt>AIC</dt><dd><p>the Akaike Information Criterion</p></dd>
-  <dt>deviance</dt><dd><p>deviance</p></dd>
-  <dt>df.residual</dt><dd><p>residual degrees of freedom</p></dd>
+<dt>r.squared</dt><dd><p>The percent of variance explained by the model</p></dd>
+<dt>AIC</dt><dd><p>the Akaike Information Criterion</p></dd>
+<dt>deviance</dt><dd><p>deviance</p></dd>
+<dt>df.residual</dt><dd><p>residual degrees of freedom</p></dd>
 
     
 
@@ -194,8 +194,10 @@ glance.biglm returns a one-row data frame, with columns
     <span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>bgfit</span>, <span class='kw'>conf.int</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>conf.level</span> <span class='kw'>=</span> <span class='fl'>.9</span>, <span class='kw'>exponentiate</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
 
     <span class='fu'><a href='glance.html'>glance</a></span>(<span class='no'>bgfit</span>)
-}</div><div class='output co'>#&gt;   r.squared      AIC deviance df.residual
-#&gt; 1  0.174674 33.67517 29.67517          30</div><div class='input'>
+}</div><div class='output co'>#&gt; # A tibble: 1 x 3
+#&gt;   r.squared   AIC deviance
+#&gt;       &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;
+#&gt; 1     0.175  33.7     29.7</div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

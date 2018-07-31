@@ -12,3 +12,5 @@
 ^README\.Rmd$
 ^\.github$
 ^docs$
+^data-raw$
+^\.httr-oauth$

@@ -102,7 +102,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Tidiers for poLCA objects</h1>
-    <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/polca_tidiers.R'><code>R/polca_tidiers.R</code></a></small>
+    <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/polca-tidiers.R'><code>R/polca-tidiers.R</code></a></small>
     <div class="hidden name"><code>poLCA_tidiers.Rd</code></div>
     </div>
 
@@ -119,7 +119,7 @@ or find the log-likelihood/AIC/BIC with <code>glance</code>.</p>
 <span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>x</span>, <span class='no'>...</span>)
 
 <span class='co'># S3 method for poLCA</span>
-<span class='fu'><a href='augment.html'>augment</a></span>(<span class='no'>x</span>, <span class='no'>data</span>, <span class='no'>...</span>)
+<span class='fu'><a href='augment.html'>augment</a></span>(<span class='no'>x</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>...</span>)
 
 <span class='co'># S3 method for poLCA</span>
 <span class='fu'><a href='glance.html'>glance</a></span>(<span class='no'>x</span>, <span class='no'>...</span>)</pre>
@@ -149,18 +149,18 @@ the latent class model. If not given, uses manifest variables in
 structure depends on the method chosen.</p>
 <p><code>tidy</code> returns a data frame with one row per
 variable-class-outcome combination, with columns:</p><dl class='dl-horizontal'>
-  <dt>variable</dt><dd><p>Manifest variable</p></dd>
-  <dt>class</dt><dd><p>Latent class ID, an integer</p></dd>
-  <dt>outcome</dt><dd><p>Outcome of manifest variable</p></dd>
-  <dt>estimate</dt><dd><p>Estimated class-conditional response probability</p></dd>
-  <dt>std.error</dt><dd><p>Standard error of estimated probability</p></dd>
+<dt>variable</dt><dd><p>Manifest variable</p></dd>
+<dt>class</dt><dd><p>Latent class ID, an integer</p></dd>
+<dt>outcome</dt><dd><p>Outcome of manifest variable</p></dd>
+<dt>estimate</dt><dd><p>Estimated class-conditional response probability</p></dd>
+<dt>std.error</dt><dd><p>Standard error of estimated probability</p></dd>
 </dl>
 
 <p><code>augment</code> returns a data frame with one row
 for each original observation, augmented with the following
 columns:</p><dl class='dl-horizontal'>
-  <dt>.class</dt><dd><p>Predicted class, using modal assignment</p></dd>
-  <dt>.probability</dt><dd><p>Posterior probability of predicted class</p></dd>
+<dt>.class</dt><dd><p>Predicted class, using modal assignment</p></dd>
+<dt>.probability</dt><dd><p>Posterior probability of predicted class</p></dd>
 </dl>
 
 <p>If the <code>data</code> argument is given, those columns are included in the output
@@ -174,15 +174,15 @@ included in the augmented output, since it would result in potentially
 many additional columns, which augment tends to avoid.</p>
 <p><code>glance</code> returns a one-row data frame with the
 following columns:</p><dl class='dl-horizontal'>
-  <dt>logLik</dt><dd><p>the data's log-likelihood under the model</p></dd>
-  <dt>AIC</dt><dd><p>the Akaike Information Criterion</p></dd>
-  <dt>BIC</dt><dd><p>the Bayesian Information Criterion</p></dd>
-  <dt>g.squared</dt><dd><p>The likelihood ratio/deviance statistic</p></dd>
-  <dt>chi.squared</dt><dd><p>The Pearson Chi-Square goodness of fit statistic
-  for multiway tables</p></dd>
-  <dt>df</dt><dd><p>Number of parameters estimated, and therefore degrees of
-  freedom used</p></dd>
-  <dt>df.residual</dt><dd><p>Number of residual degrees of freedom left</p></dd>
+<dt>logLik</dt><dd><p>the data's log-likelihood under the model</p></dd>
+<dt>AIC</dt><dd><p>the Akaike Information Criterion</p></dd>
+<dt>BIC</dt><dd><p>the Bayesian Information Criterion</p></dd>
+<dt>g.squared</dt><dd><p>The likelihood ratio/deviance statistic</p></dd>
+<dt>chi.squared</dt><dd><p>The Pearson Chi-Square goodness of fit statistic
+for multiway tables</p></dd>
+<dt>df</dt><dd><p>Number of parameters estimated, and therefore degrees of
+freedom used</p></dd>
+<dt>df.residual</dt><dd><p>Number of residual degrees of freedom left</p></dd>
 </dl>
 
     
@@ -245,7 +245,7 @@ following columns:</p><dl class='dl-horizontal'>
   <span class='no'>au2</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='augment.html'>augment</a></span>(<span class='no'>nes2a</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>election</span>)
   <span class='fu'>head</span>(<span class='no'>au2</span>)
   <span class='fu'>dim</span>(<span class='no'>au2</span>)
-}</div><div class='output co'>#&gt; [1] 1785   19</div><div class='input'>
+}</div><div class='output co'>#&gt; [1] 1785   20</div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

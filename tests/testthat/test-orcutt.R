@@ -1,13 +1,26 @@
-context("orcutt tidiers")
+context("orcutt")
 
-library(orcutt)
+skip_if_not_installed("modeltests")
+library(modeltests)
 
-test_that("orcutt tidiers work", {
-  reg <- lm(mpg ~ wt + qsec + disp, mtcars)
-  co <- cochrane.orcutt(reg)
+skip_if_not_installed("orcutt")
+
+fit <- lm(mpg ~ wt + qsec + disp, mtcars)
+co <- orcutt::cochrane.orcutt(fit)
+
+test_that("orcutt tidier arguments", {
+  check_arguments(tidy.orcutt)
+  check_arguments(glance.orcutt)
+})
+
+test_that("tidy.orcutt", {
   td <- tidy(co)
-  check_tidy(td, exp.row = 4, exp.col = 5)
+  check_tidy_output(td)
+  check_dims(td, 4, 5)
+})
 
+test_that("glance.orcutt", {
   gl <- glance(co)
-  check_tidy(gl, exp.col = 8)
+  check_glance_outputs(gl)
+  check_dims(gl, 1, 8)
 })

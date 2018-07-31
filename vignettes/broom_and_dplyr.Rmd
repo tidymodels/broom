@@ -3,30 +3,29 @@ title: "broom and dplyr"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteIndexEntry{broom and dplyr}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
 
-```{r opts_chunk, echo=FALSE}
-library(knitr)
-opts_chunk$set(message=FALSE, warning=FALSE)
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(message = FALSE, warning = FALSE)
 ```
 
-broom and dplyr
-===============
+# broom and dplyr
 
-While broom is useful for summarizing the result of a single analysis in a consistent format, it is really designed for high-throughput applications, where you must combine results from multiple analyses. These could be subgroups of data, analyses using different models, bootstrap replicates, permutations, and so on. In particular, it plays well with the `group_by` and `do` functions in `dplyr`.
+While broom is useful for summarizing the result of a single analysis in a consistent format, it is really designed for high-throughput applications, where you must combine results from multiple analyses. These could be subgroups of data, analyses using different models, bootstrap replicates, permutations, and so on. In particular, it plays well with the `nest/unnest` functions in `tidyr` and the `map` function in `purrr`.
 
-Let's try this on a simple dataset, the built-in `Orange` data.frame.
+Let's try this on a simple dataset, the built-in `Orange`. We start by coercing `Orange` to a `tibble`. This gives a nicer print method that will especially useful later on when we start working with list-columns.
 
-```{r setup}
+```{r}
 library(broom)
-library(dplyr)
+library(tibble)
+
 data(Orange)
 
-dim(Orange)
-head(Orange)
+Orange <- as_tibble(Orange)
+Orange
 ```
 
 This contains 35 observations of three variables: `Tree`, `age`, and `circumference`. `Tree` is a factor with five levels describing five trees. As might be expected, age and circumference are correlated:
@@ -35,13 +34,19 @@ This contains 35 observations of three variables: `Tree`, `age`, and `circumfere
 cor(Orange$age, Orange$circumference)
 
 library(ggplot2)
-ggplot(Orange, aes(age, circumference, color = Tree)) + geom_line()
+
+ggplot(Orange, aes(age, circumference, color = Tree)) +
+  geom_line()
 ```
 
 Suppose you want to test for correlations individually *within* each tree. You can do this with dplyr's `group_by`:
 
 ```{r}
-Orange %>% group_by(Tree) %>% summarize(correlation = cor(age, circumference))
+library(dplyr)
+
+Orange %>% 
+  group_by(Tree) %>%
+  summarize(correlation = cor(age, circumference))
 ```
 
 (Note that the correlations are much higher than the aggregated one, and furthermore we can now see it is similar across trees).
@@ -49,49 +54,124 @@ Orange %>% group_by(Tree) %>% summarize(correlation = cor(age, circumference))
 Suppose that instead of simply estimating a correlation, we want to perform a hypothesis test with `cor.test`:
 
 ```{r}
-cor.test(Orange$age, Orange$circumference)
+ct <- cor.test(Orange$age, Orange$circumference)
+ct
 ```
 
-This contains multiple values we could want in our output. Some are vectors of length 1, such as the p-value and the estimate, and some are longer, such as the confidence interval. broom's `tidy` S3 method, combined with dplyr's `do`, makes it easy to summarize the information about each test:
+This contains multiple values we could want in our output. Some are vectors of length 1, such as the p-value and the estimate, and some are longer, such as the confidence interval. We can get this into a nicely organized tibble using the `tidy` function:
 
 ```{r}
-Orange %>% group_by(Tree) %>% do(tidy(cor.test(.$age, .$circumference)))
+tidy(ct)
 ```
 
-This becomes even more useful when applied to regressions, which give more than one row of output within each model:
+Often, we want to perform multiple tests or fit multiple models, each on a different part of the data. In this case, we recommend a `nest-map-unnest` workflow. For example, suppose we want to perform correlation tests for each different tree. We start by `nest`ing our data based on the group of interest:
 
 ```{r}
-Orange %>% group_by(Tree) %>% do(tidy(lm(age ~ circumference, data=.)))
+library(tidyr)
+library(purrr)
+
+nested <- Orange %>% 
+  nest(-Tree)
 ```
 
-You can just as easily perform multiple regressions within each group, as shown here on the `mtcars` dataset. We group the data into automatic and manual cars (the `am` column), then perform the regression within each.
+Then we run a correlation test for each nested tibble using `purrr::map`:
+
+```{r}
+nested %>% 
+  mutate(test = map(data, ~ cor.test(.x$age, .x$circumference)))
+```
+
+This results in a list-column of S3 objects. We want to tidy each of the objects, which we can also do with `map`.
+
+```{r}
+nested %>% 
+  mutate(
+    test = map(data, ~ cor.test(.x$age, .x$circumference)), # S3 list-col
+    tidied = map(test, tidy)
+  ) 
+```
+
+Finally, we want to unnest the tidied data frames so we can see the results in a flat tibble. All together, this looks like:
+
+```{r}
+Orange %>% 
+  nest(-Tree) %>% 
+  mutate(
+    test = map(data, ~ cor.test(.x$age, .x$circumference)), # S3 list-col
+    tidied = map(test, tidy)
+  ) %>% 
+  unnest(tidied, .drop = TRUE)
+```
+
+Note that the `.drop` argument to `tidyr::unnest` is often useful.
+
+This workflow becomes even more useful when applied to regressions. Untidy ouput for a regression looks like:
+
+```{r}
+lm_fit <- lm(age ~ circumference, data = Orange)
+summary(lm_fit)
+```
+
+where we tidy these results, we get multiple rows of output for each model:
+
+```{r}
+tidy(lm_fit)
+```
+
+Now we can handle multiple regressions at once using exactly the same workflow as before:
+
+```{r}
+Orange %>%
+  nest(-Tree) %>% 
+  mutate(
+    fit = map(data, ~ lm(age ~ circumference, data = .x)),
+    tidied = map(fit, tidy)
+  ) %>% 
+  unnest(tidied)
+```
+
+You can just as easily use multiple predictors in the regressions, as shown here on the `mtcars` dataset. We nest the data into automatic and manual cars (the `am` column), then perform the regression within each nested tibble.
 
 ```{r}
 data(mtcars)
-head(mtcars)
-mtcars %>% group_by(am) %>% do(tidy(lm(wt ~ mpg + qsec + gear, .)))
+mtcars <- as_tibble(mtcars)  # to play nicely with list-cols
+mtcars
+
+mtcars %>%
+  nest(-am) %>% 
+  mutate(
+    fit = map(data, ~ lm(wt ~ mpg + qsec + gear, data = .x)),  # S3 list-col
+    tidied = map(fit, tidy)
+  ) %>% 
+  unnest(tidied)
 ```
 
-What if you want not just the `tidy` output, but the `augment` and `glance` outputs as well, while still performing each regression only once? First, save the modeling result into a column `fit`.
+What if you want not just the `tidy` output, but the `augment` and `glance` outputs as well, while still performing each regression only once? Since we're using list-columns, we can just fit the model once and use multiple list-columns to store the tidied, glanced and augmented outputs.
 
 ```{r}
-regressions <- mtcars %>% group_by(cyl) %>%
-    do(fit = lm(wt ~ mpg + qsec + gear, .))
-regressions
+regressions <- mtcars %>%
+  nest(-am) %>% 
+  mutate(
+    fit = map(data, ~ lm(wt ~ mpg + qsec + gear, data = .x)),
+    tidied = map(fit, tidy),
+    glanced = map(fit, glance),
+    augmented = map(fit, augment)
+  )
+
+regressions %>% 
+  unnest(tidied)
+
+regressions %>% 
+  unnest(glanced, .drop = TRUE)
+
+regressions %>% 
+  unnest(augmented)
 ```
 
-This creates a rowwise data frame. Tidying methods are designed to work seamlessly with rowwise data frames, grouping them and performing tidying on each row:
+By combining the estimates and p-values across all groups into the same tidy data frame (instead of a list of output model objects), a new class of analyses and visualizations becomes straightforward. This includes
 
-```{r}
-regressions %>% tidy(fit)
-regressions %>% augment(fit)
-regressions %>% glance(fit)
-```
-
-By combining the estimates and p-values across all groups into the same tidy data frame (instead of, for example, a list of output model objects), a new class of analyses and visualizations becomes straightforward. This includes
-
-* Sorting by p-value or estimate to find the most significant terms across all tests
-* P-value histograms
-* Volcano plots comparing p-values to effect size estimates
+- Sorting by p-value or estimate to find the most significant terms across all tests
+- P-value histograms
+- Volcano plots comparing p-values to effect size estimates
 
 In each of these cases, we can easily filter, facet, or distinguish based on the `term` column. In short, this makes the tools of tidy data analysis available for the *results* of data analysis and models, not just the inputs.

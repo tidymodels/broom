@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Tidying methods for generalized estimating equations models — geeglm_tidiers • broom</title>
+<title>Tidy a(n) geeglm object — tidy.geeglm • broom</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -46,7 +46,7 @@
 
       <div class="navbar-brand-container">
         <a class="navbar-brand" href="../index.html">broom</a>
-        <small class="tidyverse">part of the <a href="http://tidyverse.org">tidyverse</a></small>
+        <small class="tidyverse">part of the <a href="https://tidyverse.org">tidyverse</a></small>
       </div>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
@@ -101,16 +101,19 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Tidying methods for generalized estimating equations models</h1>
-    <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/geeglm_tidiers.R'><code>R/geeglm_tidiers.R</code></a></small>
+    <h1>Tidy a(n) geeglm object</h1>
+    <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/geepack-tidiers.R'><code>R/geepack-tidiers.R</code></a></small>
     <div class="hidden name"><code>geeglm_tidiers.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>These methods tidy the coefficients of generalized estimating
-equations models of the <code>geeglm</code> class from functions of the
-<code>geepack</code> package.</p>
+    <p>Tidy summarizes information about the components of a model.
+A model component might be a single term in a regression, a single
+hypothesis, a cluster, or a class. Exactly what tidy considers to be a
+model component varies cross models but is usually self-evident.
+If a model has several distinct types of components, you will need to
+specify which components to return.</p>
     
     </div>
 
@@ -123,82 +126,94 @@ equations models of the <code>geeglm</code> class from functions of the
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>x</th>
-      <td><p>An object of class <code>geeglm</code>, such as from <code>geeglm</code></p></td>
+      <td><p>A <code>geeglm</code> object returned from a call to <code><a href='http://www.rdocumentation.org/packages/geepack/topics/geeglm'>geepack::geeglm()</a></code>.</p></td>
     </tr>
     <tr>
       <th>conf.int</th>
-      <td><p>whether to include a confidence interval</p></td>
+      <td><p>Logical indicating whether or not to include a confidence
+interval in the tidied output. Defaults to <code>FALSE</code>.</p></td>
     </tr>
     <tr>
       <th>conf.level</th>
-      <td><p>confidence level of the interval, used only if
-<code>conf.int=TRUE</code></p></td>
+      <td><p>The confidence level to use for the confidence interval
+if <code>conf.int = TRUE</code>. Must be strictly greater than 0 and less than 1.
+Defaults to 0.95, which corresponds to a 95 percent confidence interval.</p></td>
     </tr>
     <tr>
       <th>exponentiate</th>
-      <td><p>whether to exponentiate the coefficient estimates
-and confidence intervals (typical for log distributions)</p></td>
+      <td><p>Logical indicating whether or not to exponentiate the
+the coefficient estimates. This is typical for logistic and multinomial
+regressions, but a bad idea if there is no log or logit link. Defaults
+to <code>FALSE</code>.</p></td>
     </tr>
     <tr>
       <th>quick</th>
-      <td><p>whether to compute a smaller and faster version, containing
-only the <code>term</code> and <code>estimate</code> columns.</p></td>
+      <td><p>Logical indiciating if the only the <code>term</code> and <code>estimate</code>
+columns should be returned. Often useful to avoid time consuming
+covariance and standard error calculations. Defaults to <code>FALSE</code>.</p></td>
     </tr>
     <tr>
       <th>...</th>
-      <td><p>Additional arguments to be passed to other methods.  Currently
-not used.</p></td>
+      <td><p>Additional arguments. Not used. Needed to match generic
+signature only. <strong>Cautionary note:</strong> Misspelled arguments will be
+absorbed in <code>...</code>, where they will be ignored. If the misspelled
+argument has a default value, the default value will be used.
+For example, if you pass <code>conf.lvel = 0.9</code>, all computation will
+proceed using <code>conf.level = 0.95</code>. Additionally, if you pass
+<code>newdata = my_tibble</code> to an <code><a href='augment.html'>augment()</a></code> method that does not
+accept a <code>newdata</code> argument, it will use the default value for
+the <code>data</code> argument.</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>All tidying methods return a <code>data.frame</code> without rownames.
-The structure depends on the method chosen.</p>
-<p><code>tidy.geeglm</code> returns one row for each coefficient, with five columns:</p>
+    <p>A <a href='http://www.rdocumentation.org/packages/tibble/topics/tibble'>tibble::tibble</a> with one row for each coefficient, with five
+columns:</p>
 <dt>term</dt><dd><p>The term in the linear model being estimated and tested</p></dd>
-  <dt>estimate</dt><dd><p>The estimated coefficient</p></dd>
-  <dt>std.error</dt><dd><p>The standard error from the GEE model</p></dd>
-  <dt>statistic</dt><dd><p>Wald statistic</p></dd>
-  <dt>p.value</dt><dd><p>two-sided p-value</p></dd>
+<dt>estimate</dt><dd><p>The estimated coefficient</p></dd>
+<dt>std.error</dt><dd><p>The standard error from the GEE model</p></dd>
+<dt>statistic</dt><dd><p>Wald statistic</p></dd>
+<dt>p.value</dt><dd><p>two-sided p-value</p></dd>
 
-If conf.int=TRUE, it also includes columns for
-conf.low and conf.high, computed with
-<a href='confint.geeglm.html'>confint.geeglm</a> (included as part of broom).
+If conf.int = TRUE, includes includes columns conf.low and conf.high,
+which are computed internally.
 
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>If <code>conf.int=TRUE</code>, the confidence interval is computed with
-the <code><a href='confint.geeglm.html'>confint.geeglm</a></code> function.</p>
-<p>While <code>tidy</code> is supported for "geeglm" objects, <code>augment</code> and
-<code>glance</code> are not.</p>
+    <p>If <code>conf.int = TRUE</code>, the confidence interval is computed with
+the an internal <code>confint.geeglm()</code> function.</p>
 <p>If you have missing values in your model data, you may need to
 refit the model with <code>na.action = na.exclude</code> or deal with the
 missingness in the data beforehand.</p>
     
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p><code><a href='tidy.html'>tidy()</a></code>, <code><a href='http://www.rdocumentation.org/packages/geepack/topics/geeglm'>geepack::geeglm()</a></code></p></div>
+    
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
-<span class='kw'>if</span> (<span class='fu'>require</span>(<span class='st'>'geepack'</span>)) {
-    <span class='fu'>data</span>(<span class='no'>state</span>)
-    <span class='no'>ds</span> <span class='kw'>&lt;-</span> <span class='fu'>data.frame</span>(<span class='no'>state.region</span>, <span class='no'>state.x77</span>)
+<span class='kw'>if</span> (<span class='fu'>requireNamespace</span>(<span class='st'>"geepack"</span>, <span class='kw'>quietly</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)) {
+  <span class='fu'>library</span>(<span class='no'>geepack</span>)
+  <span class='fu'>data</span>(<span class='no'>state</span>)
 
-    <span class='no'>geefit</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/geepack/topics/geeglm'>geeglm</a></span>(<span class='no'>Income</span> ~ <span class='no'>Frost</span> + <span class='no'>Murder</span>, <span class='kw'>id</span> <span class='kw'>=</span> <span class='no'>state.region</span>,
-                     <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>ds</span>, <span class='kw'>family</span> <span class='kw'>=</span> <span class='no'>gaussian</span>,
-                     <span class='kw'>corstr</span> <span class='kw'>=</span> <span class='st'>'exchangeable'</span>)
+  <span class='no'>ds</span> <span class='kw'>&lt;-</span> <span class='fu'>data.frame</span>(<span class='no'>state.region</span>, <span class='no'>state.x77</span>)
 
-    <span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>geefit</span>)
-    <span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>geefit</span>, <span class='kw'>quick</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
-    <span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>geefit</span>, <span class='kw'>conf.int</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
-}</div><div class='output co'>#&gt; <span class='message'>Le chargement a nécessité le package : geepack</span></div><div class='output co'>#&gt;          term    estimate  std.error   statistic   p.value    conf.low
-#&gt; 1 (Intercept) 4406.193102 407.454998 116.9412561 0.0000000 3607.595981
-#&gt; 2       Frost    1.686945   2.250175   0.5620426 0.4534384   -2.723317
-#&gt; 3      Murder  -22.664350  31.379406   0.5216715 0.4701295  -84.166856
-#&gt;     conf.high
-#&gt; 1 5204.790222
-#&gt; 2    6.097207
-#&gt; 3   38.838155</div><div class='input'>
+  <span class='no'>geefit</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/geepack/topics/geeglm'>geeglm</a></span>(<span class='no'>Income</span> ~ <span class='no'>Frost</span> + <span class='no'>Murder</span>, <span class='kw'>id</span> <span class='kw'>=</span> <span class='no'>state.region</span>,
+                   <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>ds</span>, <span class='kw'>family</span> <span class='kw'>=</span> <span class='no'>gaussian</span>,
+                   <span class='kw'>corstr</span> <span class='kw'>=</span> <span class='st'>"exchangeable"</span>)
+
+  <span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>geefit</span>)
+  <span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>geefit</span>, <span class='kw'>quick</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+  <span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>geefit</span>, <span class='kw'>conf.int</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+}</div><div class='output co'>#&gt; # A tibble: 3 x 7
+#&gt;   term        estimate std.error statistic p.value conf.low conf.high
+#&gt;   &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;
+#&gt; 1 (Intercept)  4406.      407.     117.      0      3608.     5205.  
+#&gt; 2 Frost           1.69      2.25     0.562   0.453    -2.72      6.10
+#&gt; 3 Murder        -22.7      31.4      0.522   0.470   -84.2      38.8 </div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
@@ -209,6 +224,8 @@ missingness in the data beforehand.</p>
       <li><a href="#value">Value</a></li>
 
       <li><a href="#details">Details</a></li>
+
+      <li><a href="#see-also">See also</a></li>
       
       <li><a href="#examples">Examples</a></li>
     </ul>
@@ -218,12 +235,12 @@ missingness in the data beforehand.</p>
 
       <footer>
       <div class="tidyverse">
-  <p>broom is a part of the <strong>tidyverse</strong>, an ecosystem of packages designed with common APIs and a shared philosophy. Learn more at <a href="http://tidyverse.org">tidyverse.org</a>.</p>
+  <p>broom is a part of the <strong>tidyverse</strong>, an ecosystem of packages designed with common APIs and a shared philosophy. Learn more at <a href="https://tidyverse.org">tidyverse.org</a>.</p>
 </div>
 
 <div class="author">
-  <p>Developed by David Robinson.</p>
-  <p>Site built by <a href="http://pkgdown.r-lib.org">pkgdown</a>.</p>
+  <p>Developed by David Robinson, Alex Hayes.</p>
+  <p>Site built by <a href="https://pkgdown.r-lib.org">pkgdown</a>.</p>
 </div>
 
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-115082821-1"></script>

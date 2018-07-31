@@ -102,7 +102,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Tidiers for a parametric regression survival model</h1>
-    <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/survival_tidiers.R'><code>R/survival_tidiers.R</code></a></small>
+    <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/survival-survreg-tidiers.R'><code>R/survival-survreg-tidiers.R</code></a></small>
     <div class="hidden name"><code>survreg_tidiers.Rd</code></div>
     </div>
 
@@ -118,11 +118,11 @@ summarizes the model statistics.</p>
 <span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>x</span>, <span class='kw'>conf.level</span> <span class='kw'>=</span> <span class='fl'>0.95</span>, <span class='no'>...</span>)
 
 <span class='co'># S3 method for survreg</span>
-<span class='fu'><a href='augment.html'>augment</a></span>(<span class='no'>x</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='kw pkg'>stats</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/stats/topics/model.frame'>model.frame</a></span>(<span class='no'>x</span>), <span class='no'>newdata</span>,
+<span class='fu'><a href='augment.html'>augment</a></span>(<span class='no'>x</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>newdata</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>type.predict</span> <span class='kw'>=</span> <span class='st'>"response"</span>, <span class='kw'>type.residuals</span> <span class='kw'>=</span> <span class='st'>"response"</span>, <span class='no'>...</span>)
 
 <span class='co'># S3 method for survreg</span>
-<span class='fu'><a href='glance.html'>glance</a></span>(<span class='no'>x</span>, <span class='kw'>conf.level</span> <span class='kw'>=</span> <span class='fl'>0.95</span>, <span class='no'>...</span>)</pre>
+<span class='fu'><a href='glance.html'>glance</a></span>(<span class='no'>x</span>, <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -142,7 +142,7 @@ summarizes the model statistics.</p>
     <tr>
       <th>data</th>
       <td><p>original data; if it is not provided, it is reconstructed
-as best as possible with <code>model.frame</code></p></td>
+as best as possible with <code>model.frame()</code></p></td>
     </tr>
     <tr>
       <th>newdata</th>
@@ -173,19 +173,19 @@ structure depends on the method chosen.</p>
 
 augment returns the original data.frame with the following
 additional columns:
-  <dt>.fitted</dt><dd><p>Fitted values of model</p></dd>
-  <dt>.se.fit</dt><dd><p>Standard errors of fitted values</p></dd>
-  <dt>.resid</dt><dd><p>Residuals</p></dd>
+<dt>.fitted</dt><dd><p>Fitted values of model</p></dd>
+<dt>.se.fit</dt><dd><p>Standard errors of fitted values</p></dd>
+<dt>.resid</dt><dd><p>Residuals</p></dd>
 
 glance returns a one-row data.frame with the columns:
-  <dt>iter</dt><dd><p>number of iterations</p></dd>
-  <dt>df</dt><dd><p>degrees of freedom</p></dd>
-  <dt>statistic</dt><dd><p>chi-squared statistic</p></dd>
-  <dt>p.value</dt><dd><p>p-value from chi-squared test</p></dd>
-  <dt>logLik</dt><dd><p>log likelihood</p></dd>
-  <dt>AIC</dt><dd><p>Akaike information criterion</p></dd>
-  <dt>BIC</dt><dd><p>Bayesian information criterion</p></dd>
-  <dt>df.residual</dt><dd><p>residual degrees of freedom</p></dd>
+<dt>iter</dt><dd><p>number of iterations</p></dd>
+<dt>df</dt><dd><p>degrees of freedom</p></dd>
+<dt>statistic</dt><dd><p>chi-squared statistic</p></dd>
+<dt>p.value</dt><dd><p>p-value from chi-squared test</p></dd>
+<dt>logLik</dt><dd><p>log likelihood</p></dd>
+<dt>AIC</dt><dd><p>Akaike information criterion</p></dd>
+<dt>BIC</dt><dd><p>Bayesian information criterion</p></dd>
+<dt>df.residual</dt><dd><p>residual degrees of freedom</p></dd>
 
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
@@ -212,7 +212,6 @@ warning is raised and the incomplete rows are dropped.</p>
 
     <span class='no'>td</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>sr</span>)
     <span class='fu'><a href='augment.html'>augment</a></span>(<span class='no'>sr</span>, <span class='no'>ovarian</span>)
-    <span class='fu'><a href='augment.html'>augment</a></span>(<span class='no'>sr</span>)
     <span class='fu'><a href='glance.html'>glance</a></span>(<span class='no'>sr</span>)
 
     <span class='co'># coefficient plot</span>

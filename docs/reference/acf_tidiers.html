@@ -102,7 +102,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Tidying method for the acf function</h1>
-    <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/stats_tidiers.R'><code>R/stats_tidiers.R</code></a></small>
+    <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/stats-time-series-tidiers.R'><code>R/stats-time-series-tidiers.R</code></a></small>
     <div class="hidden name"><code>acf_tidiers.Rd</code></div>
     </div>
 
@@ -133,7 +133,7 @@ related <code>pcf</code> and <code>ccf</code> functions.</p>
 
     <p><code>data.frame</code> with columns</p>
 <dt>lag</dt><dd><p>lag values</p></dd>
- <dt>acf</dt><dd><p>calculated correlation</p></dd>
+<dt>acf</dt><dd><p>calculated correlation</p></dd>
 
     
 
@@ -141,77 +141,63 @@ related <code>pcf</code> and <code>ccf</code> functions.</p>
     <pre class="examples"><div class='input'>
 <span class='co'># acf</span>
 <span class='no'>result</span> <span class='kw'>&lt;-</span> <span class='fu'>acf</span>(<span class='no'>lh</span>, <span class='kw'>plot</span><span class='kw'>=</span><span class='fl'>FALSE</span>)
-<span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>result</span>)</div><div class='output co'>#&gt;    lag          acf
-#&gt; 1    0  1.000000000
-#&gt; 2    1  0.575524476
-#&gt; 3    2  0.181818182
-#&gt; 4    3 -0.144755245
-#&gt; 5    4 -0.174825175
-#&gt; 6    5 -0.149650350
-#&gt; 7    6 -0.020979021
-#&gt; 8    7 -0.020279720
-#&gt; 9    8 -0.004195804
-#&gt; 10   9 -0.135664336
-#&gt; 11  10 -0.153846154
-#&gt; 12  11 -0.097202797
-#&gt; 13  12  0.048951049
-#&gt; 14  13  0.119580420
-#&gt; 15  14  0.086713287
-#&gt; 16  15  0.118881119
-#&gt; 17  16  0.151048951</div><div class='input'>
+<span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>result</span>)</div><div class='output co'>#&gt; # A tibble: 17 x 2
+#&gt;      lag      acf
+#&gt;    &lt;dbl&gt;    &lt;dbl&gt;
+#&gt;  1     0  1.000  
+#&gt;  2     1  0.576  
+#&gt;  3     2  0.182  
+#&gt;  4     3 -0.145  
+#&gt;  5     4 -0.175  
+#&gt;  6     5 -0.150  
+#&gt;  7     6 -0.0210 
+#&gt;  8     7 -0.0203 
+#&gt;  9     8 -0.00420
+#&gt; 10     9 -0.136  
+#&gt; 11    10 -0.154  
+#&gt; 12    11 -0.0972 
+#&gt; 13    12  0.0490 
+#&gt; 14    13  0.120  
+#&gt; 15    14  0.0867 
+#&gt; 16    15  0.119  
+#&gt; 17    16  0.151  </div><div class='input'>
 <span class='co'># ccf</span>
 <span class='no'>result</span> <span class='kw'>&lt;-</span> <span class='fu'>ccf</span>(<span class='no'>mdeaths</span>, <span class='no'>fdeaths</span>, <span class='kw'>plot</span><span class='kw'>=</span><span class='fl'>FALSE</span>)
-<span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>result</span>)</div><div class='output co'>#&gt;            lag          acf
-#&gt; 1  -1.25000000  0.015054983
-#&gt; 2  -1.16666667  0.365626026
-#&gt; 3  -1.08333333  0.615427121
-#&gt; 4  -1.00000000  0.708206289
-#&gt; 5  -0.91666667  0.621895801
-#&gt; 6  -0.83333333  0.340005447
-#&gt; 7  -0.75000000 -0.024534195
-#&gt; 8  -0.66666667 -0.381671430
-#&gt; 9  -0.58333333 -0.611793479
-#&gt; 10 -0.50000000 -0.677803477
-#&gt; 11 -0.41666667 -0.604031174
-#&gt; 12 -0.33333333 -0.349468396
-#&gt; 13 -0.25000000  0.019759425
-#&gt; 14 -0.16666667  0.405200639
-#&gt; 15 -0.08333333  0.744309322
-#&gt; 16  0.00000000  0.976241251
-#&gt; 17  0.08333333  0.735668532
-#&gt; 18  0.16666667  0.364241839
-#&gt; 19  0.25000000 -0.010675725
-#&gt; 20  0.33333333 -0.382920620
-#&gt; 21  0.41666667 -0.622386979
-#&gt; 22  0.50000000 -0.688538519
-#&gt; 23  0.58333333 -0.610583980
-#&gt; 24  0.66666667 -0.383338305
-#&gt; 25  0.75000000 -0.018112073
-#&gt; 26  0.83333333  0.391983088
-#&gt; 27  0.91666667  0.656592111
-#&gt; 28  1.00000000  0.721397236
-#&gt; 29  1.08333333  0.639104375
-#&gt; 30  1.16666667  0.361352626
-#&gt; 31  1.25000000 -0.003385423</div><div class='input'>
+<span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>result</span>)</div><div class='output co'>#&gt; # A tibble: 31 x 2
+#&gt;       lag     acf
+#&gt;     &lt;dbl&gt;   &lt;dbl&gt;
+#&gt;  1 -1.25   0.0151
+#&gt;  2 -1.17   0.366 
+#&gt;  3 -1.08   0.615 
+#&gt;  4 -1      0.708 
+#&gt;  5 -0.917  0.622 
+#&gt;  6 -0.833  0.340 
+#&gt;  7 -0.75  -0.0245
+#&gt;  8 -0.667 -0.382 
+#&gt;  9 -0.583 -0.612 
+#&gt; 10 -0.5   -0.678 
+#&gt; # ... with 21 more rows</div><div class='input'>
 <span class='co'># pcf</span>
 <span class='no'>result</span> <span class='kw'>&lt;-</span> <span class='fu'>pacf</span>(<span class='no'>lh</span>, <span class='kw'>plot</span><span class='kw'>=</span><span class='fl'>FALSE</span>)
-<span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>result</span>)</div><div class='output co'>#&gt;    lag          acf
-#&gt; 1    1  0.575524476
-#&gt; 2    2 -0.223409973
-#&gt; 3    3 -0.226940202
-#&gt; 4    4  0.102768377
-#&gt; 5    5 -0.075934420
-#&gt; 6    6  0.067557935
-#&gt; 7    7 -0.104170251
-#&gt; 8    8  0.012013676
-#&gt; 9    9 -0.187687228
-#&gt; 10  10  0.002551041
-#&gt; 11  11  0.065602013
-#&gt; 12  12  0.031967953
-#&gt; 13  13  0.021882098
-#&gt; 14  14 -0.093124528
-#&gt; 15  15  0.229787629
-#&gt; 16  16  0.044439890</div><div class='input'>
+<span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>result</span>)</div><div class='output co'>#&gt; # A tibble: 16 x 2
+#&gt;      lag      acf
+#&gt;    &lt;dbl&gt;    &lt;dbl&gt;
+#&gt;  1     1  0.576  
+#&gt;  2     2 -0.223  
+#&gt;  3     3 -0.227  
+#&gt;  4     4  0.103  
+#&gt;  5     5 -0.0759 
+#&gt;  6     6  0.0676 
+#&gt;  7     7 -0.104  
+#&gt;  8     8  0.0120 
+#&gt;  9     9 -0.188  
+#&gt; 10    10  0.00255
+#&gt; 11    11  0.0656 
+#&gt; 12    12  0.0320 
+#&gt; 13    13  0.0219 
+#&gt; 14    14 -0.0931 
+#&gt; 15    15  0.230  
+#&gt; 16    16  0.0444 </div><div class='input'>
 <span class='co'># lag plot</span>
 <span class='fu'>library</span>(<span class='no'>ggplot2</span>)
 <span class='no'>result</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='fu'>acf</span>(<span class='no'>lh</span>, <span class='kw'>plot</span><span class='kw'>=</span><span class='fl'>FALSE</span>))
@@ -221,7 +207,7 @@ related <code>pcf</code> and <code>ccf</code> functions.</p>
 <span class='no'>p</span></div><div class='img'><img src='acf_tidiers-1.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'># with confidence intervals</span>
 <span class='no'>conf.level</span> <span class='kw'>&lt;-</span> <span class='fl'>0.95</span>
-<span class='co'># from \code{plot.acf} method</span>
+<span class='co'># from `plot.acf` method</span>
 <span class='no'>len.data</span> <span class='kw'>&lt;-</span> <span class='fu'>length</span>(<span class='no'>lh</span>) <span class='co'># same as acf$n.used</span>
 <span class='no'>conf.int</span> <span class='kw'>&lt;-</span> <span class='fu'>qnorm</span>((<span class='fl'>1</span> + <span class='no'>conf.level</span>) / <span class='fl'>2</span>) / <span class='fu'>sqrt</span>(<span class='no'>len.data</span>)
 <span class='no'>p</span> + <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/geom_abline'>geom_hline</a></span>(<span class='kw'>yintercept</span> <span class='kw'>=</span> <span class='fu'>c</span>(-<span class='no'>conf.int</span>, <span class='no'>conf.int</span>),

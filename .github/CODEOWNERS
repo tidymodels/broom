@@ -1,0 +1,3 @@
+# CODEOWNERS for broom
+# https://www.tidyverse.org/development/understudies
+.github/CODEOWNERS @dgrtwo @alexpghayes

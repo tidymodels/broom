@@ -102,7 +102,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>tidy survival curve fits</h1>
-    <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/survival_tidiers.R'><code>R/survival_tidiers.R</code></a></small>
+    <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/survival-survfit-tidiers.R'><code>R/survival-survfit-tidiers.R</code></a></small>
     <div class="hidden name"><code>survfit_tidiers.Rd</code></div>
     </div>
 
@@ -137,27 +137,27 @@
 structure depends on the method chosen.</p>
 <p><code>tidy</code> returns a row for each time point, with columns</p>
 <dt>time</dt><dd><p>timepoint</p></dd>
-  <dt>n.risk</dt><dd><p>number of subjects at risk at time t0</p></dd>
-  <dt>n.event</dt><dd><p>number of events at time t</p></dd>
-  <dt>n.censor</dt><dd><p>number of censored events</p></dd>
-  <dt>estimate</dt><dd><p>estimate of survival or cumulative incidence rate when multistate</p></dd>
-  <dt>std.error</dt><dd><p>standard error of estimate</p></dd>
-  <dt>conf.high</dt><dd><p>upper end of confidence interval</p></dd>
-  <dt>conf.low</dt><dd><p>lower end of confidence interval</p></dd>
-  <dt>state</dt><dd><p>state if multistate survfit object inputted</p></dd>
-  <dt>strata</dt><dd><p>strata if stratified survfit object inputted</p></dd>
+<dt>n.risk</dt><dd><p>number of subjects at risk at time t0</p></dd>
+<dt>n.event</dt><dd><p>number of events at time t</p></dd>
+<dt>n.censor</dt><dd><p>number of censored events</p></dd>
+<dt>estimate</dt><dd><p>estimate of survival or cumulative incidence rate when multistate</p></dd>
+<dt>std.error</dt><dd><p>standard error of estimate</p></dd>
+<dt>conf.high</dt><dd><p>upper end of confidence interval</p></dd>
+<dt>conf.low</dt><dd><p>lower end of confidence interval</p></dd>
+<dt>state</dt><dd><p>state if multistate survfit object inputted</p></dd>
+<dt>strata</dt><dd><p>strata if stratified survfit object inputted</p></dd>
 
 glance returns one-row data.frame with the columns
-displayed by <a href='http://www.rdocumentation.org/packages/survival/topics/print.survfit'>print.survfit</a>
-  <dt>records</dt><dd><p>number of observations</p></dd>
-  <dt>n.max</dt><dd><p>n.max</p></dd>
-  <dt>n.start</dt><dd><p>n.start</p></dd>
-  <dt>events</dt><dd><p>number of events</p></dd>
-  <dt>rmean</dt><dd><p>Restricted mean (see <a href='http://www.rdocumentation.org/packages/survival/topics/print.survfit'>print.survfit</a>)</p></dd>
-  <dt>rmean.std.error</dt><dd><p>Restricted mean standard error</p></dd>
-  <dt>median</dt><dd><p>median survival</p></dd>
-  <dt>conf.low</dt><dd><p>lower end of confidence interval on median</p></dd>
-  <dt>conf.high</dt><dd><p>upper end of confidence interval on median</p></dd>
+displayed by <a href='http://www.rdocumentation.org/packages/survival/topics/print.survfit'>print.survfit()</a>
+<dt>records</dt><dd><p>number of observations</p></dd>
+<dt>n.max</dt><dd><p>n.max</p></dd>
+<dt>n.start</dt><dd><p>n.start</p></dd>
+<dt>events</dt><dd><p>number of events</p></dd>
+<dt>rmean</dt><dd><p>Restricted mean (see <code><a href='http://www.rdocumentation.org/packages/survival/topics/print.survfit'>survival::print.survfit()</a></code></p></dd>
+<dt>rmean.std.error</dt><dd><p>Restricted mean standard error</p></dd>
+<dt>median</dt><dd><p>median survival</p></dd>
+<dt>conf.low</dt><dd><p>lower end of confidence interval on median</p></dd>
+<dt>conf.high</dt><dd><p>upper end of confidence interval on median</p></dd>
 
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
@@ -191,32 +191,7 @@ since the values <code>glance</code> outputs would be calculated for each state.
         <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/geom_path'>geom_line</a></span>(<span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/aes'>aes</a></span>(<span class='kw'>color</span> <span class='kw'>=</span> <span class='no'>state</span>)) +
         <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/geom_ribbon'>geom_ribbon</a></span>(<span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/aes'>aes</a></span>(<span class='kw'>ymin</span> <span class='kw'>=</span> <span class='no'>conf.low</span>, <span class='kw'>ymax</span> <span class='kw'>=</span> <span class='no'>conf.high</span>), <span class='kw'>alpha</span> <span class='kw'>=</span> <span class='fl'>.25</span>)
 
-    <span class='co'># perform simple bootstrapping</span>
-    <span class='fu'>library</span>(<span class='no'>dplyr</span>)
-    <span class='no'>bootstraps</span> <span class='kw'>&lt;-</span> <span class='no'>lung</span> <span class='kw'>%&gt;%</span> <span class='fu'><a href='bootstrap.html'>bootstrap</a></span>(<span class='fl'>100</span>) <span class='kw'>%&gt;%</span>
-        <span class='fu'><a href='http://dplyr.tidyverse.org/reference/do.html'>do</a></span>(<span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='fu'><a href='http://www.rdocumentation.org/packages/survival/topics/survfit'>survfit</a></span>(<span class='fu'><a href='http://www.rdocumentation.org/packages/survival/topics/coxph'>coxph</a></span>(<span class='fu'><a href='http://www.rdocumentation.org/packages/survival/topics/Surv'>Surv</a></span>(<span class='no'>time</span>, <span class='no'>status</span>) ~ <span class='no'>age</span> + <span class='no'>sex</span>, <span class='no'>.</span>))))
-
-    <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/ggplot'>ggplot</a></span>(<span class='no'>bootstraps</span>, <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/aes'>aes</a></span>(<span class='no'>time</span>, <span class='no'>estimate</span>, <span class='kw'>group</span> <span class='kw'>=</span> <span class='no'>replicate</span>)) +
-        <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/geom_path'>geom_line</a></span>(<span class='kw'>alpha</span> <span class='kw'>=</span> <span class='fl'>.25</span>)
-
-    <span class='no'>bootstraps_bytime</span> <span class='kw'>&lt;-</span> <span class='no'>bootstraps</span> <span class='kw'>%&gt;%</span> <span class='fu'><a href='http://dplyr.tidyverse.org/reference/group_by.html'>group_by</a></span>(<span class='no'>time</span>) <span class='kw'>%&gt;%</span>
-        <span class='fu'><a href='http://dplyr.tidyverse.org/reference/summarise.html'>summarize</a></span>(<span class='kw'>median</span> <span class='kw'>=</span> <span class='fu'>median</span>(<span class='no'>estimate</span>),
-                  <span class='kw'>low</span> <span class='kw'>=</span> <span class='fu'>quantile</span>(<span class='no'>estimate</span>, <span class='fl'>.025</span>),
-                  <span class='kw'>high</span> <span class='kw'>=</span> <span class='fu'>quantile</span>(<span class='no'>estimate</span>, <span class='fl'>.975</span>))
-
-    <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/ggplot'>ggplot</a></span>(<span class='no'>bootstraps_bytime</span>, <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/aes'>aes</a></span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>time</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>median</span>)) + <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/geom_path'>geom_line</a></span>() +
-        <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/geom_ribbon'>geom_ribbon</a></span>(<span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/aes'>aes</a></span>(<span class='kw'>ymin</span> <span class='kw'>=</span> <span class='no'>low</span>, <span class='kw'>ymax</span> <span class='kw'>=</span> <span class='no'>high</span>), <span class='kw'>alpha</span> <span class='kw'>=</span> <span class='fl'>.25</span>)
-
-    <span class='co'># bootstrap for median survival</span>
-    <span class='no'>glances</span> <span class='kw'>&lt;-</span> <span class='no'>lung</span> <span class='kw'>%&gt;%</span>
-        <span class='fu'><a href='bootstrap.html'>bootstrap</a></span>(<span class='fl'>100</span>) <span class='kw'>%&gt;%</span>
-        <span class='fu'><a href='http://dplyr.tidyverse.org/reference/do.html'>do</a></span>(<span class='fu'><a href='glance.html'>glance</a></span>(<span class='fu'><a href='http://www.rdocumentation.org/packages/survival/topics/survfit'>survfit</a></span>(<span class='fu'><a href='http://www.rdocumentation.org/packages/survival/topics/coxph'>coxph</a></span>(<span class='fu'><a href='http://www.rdocumentation.org/packages/survival/topics/Surv'>Surv</a></span>(<span class='no'>time</span>, <span class='no'>status</span>) ~ <span class='no'>age</span> + <span class='no'>sex</span>, <span class='no'>.</span>))))
-
-    <span class='no'>glances</span>
-
-    <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/qplot'>qplot</a></span>(<span class='no'>glances</span>$<span class='no'>median</span>, <span class='kw'>binwidth</span> <span class='kw'>=</span> <span class='fl'>15</span>)
-    <span class='fu'>quantile</span>(<span class='no'>glances</span>$<span class='no'>median</span>, <span class='fu'>c</span>(<span class='fl'>.025</span>, <span class='fl'>.975</span>))
-}</div><div class='output co'>#&gt; <span class='warning'>Warning: `bootstrap()` is deprecated and will be removed in an upcoming release of broom. See the rsample package instead.</span></div><div class='output co'>#&gt; <span class='error'>Error in summarize(., median = median(estimate), low = quantile(estimate,     0.025), high = quantile(estimate, 0.975)): l'argument "by" est manquant, avec aucune valeur par défaut</span></div><div class='input'>
+}</div><div class='img'><img src='survfit_tidiers-1.png' alt='' width='700' height='433' /></div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

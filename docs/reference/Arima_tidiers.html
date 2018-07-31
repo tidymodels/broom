@@ -102,7 +102,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Tidying methods for ARIMA modeling of time series</h1>
-    <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/arima_tidiers.R'><code>R/arima_tidiers.R</code></a></small>
+    <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/stats-arima-tidiers.R'><code>R/stats-arima-tidiers.R</code></a></small>
     <div class="hidden name"><code>Arima_tidiers.Rd</code></div>
     </div>
 
@@ -124,7 +124,7 @@ series.</p>
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>x</th>
-      <td><p>An object of class "Arima"</p></td>
+      <td><p>An object of class <code>Arima</code> created by <code><a href='http://www.rdocumentation.org/packages/stats/topics/arima'>stats::arima()</a></code>.</p></td>
     </tr>
     <tr>
       <th>conf.int</th>
@@ -148,18 +148,18 @@ structure depends on the method chosen.</p>
 <p><code>tidy</code> returns one row for each coefficient in the model,
 with five columns:</p>
 <dt>term</dt><dd><p>The term in the nonlinear model being estimated and tested</p></dd>
-  <dt>estimate</dt><dd><p>The estimated coefficient</p></dd>
-  <dt>std.error</dt><dd><p>The standard error from the linear model</p></dd>
+<dt>estimate</dt><dd><p>The estimated coefficient</p></dd>
+<dt>std.error</dt><dd><p>The standard error from the linear model</p></dd>
 
 If conf.int = TRUE, also returns
-  <dt>conf.low</dt><dd><p>low end of confidence interval</p></dd>
-  <dt>conf.high</dt><dd><p>high end of confidence interval</p></dd>
+<dt>conf.low</dt><dd><p>low end of confidence interval</p></dd>
+<dt>conf.high</dt><dd><p>high end of confidence interval</p></dd>
 
 glance returns one row with the columns
-  <dt>sigma</dt><dd><p>the square root of the estimated residual variance</p></dd>
-  <dt>logLik</dt><dd><p>the data's log-likelihood under the model</p></dd>
-  <dt>AIC</dt><dd><p>the Akaike Information Criterion</p></dd>
-  <dt>BIC</dt><dd><p>the Bayesian Information Criterion</p></dd>
+<dt>sigma</dt><dd><p>the square root of the estimated residual variance</p></dd>
+<dt>logLik</dt><dd><p>the data's log-likelihood under the model</p></dd>
+<dt>AIC</dt><dd><p>the Akaike Information Criterion</p></dd>
+<dt>BIC</dt><dd><p>the Bayesian Information Criterion</p></dd>
 
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
@@ -170,16 +170,20 @@ data frame.</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p>arima</p></div>
+    <div class='dont-index'><p><code><a href='http://www.rdocumentation.org/packages/stats/topics/arima'>stats::arima()</a></code></p></div>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
 <span class='no'>fit</span> <span class='kw'>&lt;-</span> <span class='fu'>arima</span>(<span class='no'>lh</span>, <span class='kw'>order</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='fl'>1</span>, <span class='fl'>0</span>, <span class='fl'>0</span>))
-<span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>fit</span>)</div><div class='output co'>#&gt;        term  estimate std.error
-#&gt; 1       ar1 0.5739296 0.1161393
-#&gt; 2 intercept 2.4132880 0.1466135</div><div class='input'><span class='fu'><a href='glance.html'>glance</a></span>(<span class='no'>fit</span>)</div><div class='output co'>#&gt;       sigma    logLik      AIC      BIC
-#&gt; 1 0.4443979 -29.37916 64.75832 70.37193</div><div class='input'>
+<span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>fit</span>)</div><div class='output co'>#&gt; # A tibble: 2 x 3
+#&gt;   term      estimate std.error
+#&gt;   &lt;fct&gt;        &lt;dbl&gt;     &lt;dbl&gt;
+#&gt; 1 ar1          0.574     0.116
+#&gt; 2 intercept    2.41      0.147</div><div class='input'><span class='fu'><a href='glance.html'>glance</a></span>(<span class='no'>fit</span>)</div><div class='output co'>#&gt; # A tibble: 1 x 4
+#&gt;   sigma logLik   AIC   BIC
+#&gt;   &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+#&gt; 1 0.444  -29.4  64.8  70.4</div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

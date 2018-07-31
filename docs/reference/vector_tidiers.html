@@ -46,7 +46,7 @@
 
       <div class="navbar-brand-container">
         <a class="navbar-brand" href="../index.html">broom</a>
-        <small class="tidyverse">part of the <a href="http://tidyverse.org">tidyverse</a></small>
+        <small class="tidyverse">part of the <a href="https://tidyverse.org">tidyverse</a></small>
       </div>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
@@ -102,14 +102,14 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Tidy atomic vectors</h1>
-    <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/vector_tidiers.R'><code>R/vector_tidiers.R</code></a></small>
+    <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/base-vector-tidiers.R'><code>R/base-vector-tidiers.R</code></a></small>
     <div class="hidden name"><code>vector_tidiers.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Turn atomic vectors into data frames, where the names of the vector (if they
-exist) are a column and the values of the vector are a column.</p>
+    <p>Vector tidiers are deprecated and will be removed from an upcoming release
+of broom.</p>
     
     </div>
 
@@ -136,25 +136,28 @@ Most likely a named vector</p></td>
     </tr>
     </table>
     
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>Turn atomic vectors into data frames, where the names of the vector (if they
+exist) are a column and the values of the vector are a column.</p>
+    
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
+</div><span class='co'># NOT RUN {</span>
 <span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fl'>1</span>:<span class='fl'>5</span>
 <span class='fu'>names</span>(<span class='no'>x</span>) <span class='kw'>&lt;-</span> <span class='no'>letters</span>[<span class='fl'>1</span>:<span class='fl'>5</span>]
-<span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>x</span>)</div><div class='output co'>#&gt; # A tibble: 5 x 2
-#&gt;   names     x
-#&gt;   &lt;chr&gt; &lt;int&gt;
-#&gt; 1 a         1
-#&gt; 2 b         2
-#&gt; 3 c         3
-#&gt; 4 d         4
-#&gt; 5 e         5</div></pre>
+<span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>x</span>)
+<span class='co'># }</span><div class='input'>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-            
+      
+      <li><a href="#details">Details</a></li>
+      
       <li><a href="#examples">Examples</a></li>
     </ul>
 
@@ -163,12 +166,12 @@ Most likely a named vector</p></td>
 
       <footer>
       <div class="tidyverse">
-  <p>broom is a part of the <strong>tidyverse</strong>, an ecosystem of packages designed with common APIs and a shared philosophy. Learn more at <a href="http://tidyverse.org">tidyverse.org</a>.</p>
+  <p>broom is a part of the <strong>tidyverse</strong>, an ecosystem of packages designed with common APIs and a shared philosophy. Learn more at <a href="https://tidyverse.org">tidyverse.org</a>.</p>
 </div>
 
 <div class="author">
-  <p>Developed by David Robinson.</p>
-  <p>Site built by <a href="http://pkgdown.r-lib.org">pkgdown</a>.</p>
+  <p>Developed by David Robinson, Alex Hayes.</p>
+  <p>Site built by <a href="https://pkgdown.r-lib.org">pkgdown</a>.</p>
 </div>
 
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-115082821-1"></script>

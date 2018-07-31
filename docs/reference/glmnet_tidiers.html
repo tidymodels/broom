@@ -102,7 +102,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Tidiers for LASSO or elasticnet regularized fits</h1>
-    <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/glmnet_tidiers.R'><code>R/glmnet_tidiers.R</code></a></small>
+    <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/glmnet-tidiers.R'><code>R/glmnet-tidiers.R</code></a></small>
     <div class="hidden name"><code>glmnet_tidiers.Rd</code></div>
     </div>
 
@@ -114,7 +114,7 @@ the estimates across values of the penalty parameter lambda.</p>
     </div>
 
     <pre class="usage"><span class='co'># S3 method for glmnet</span>
-<span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>x</span>, <span class='no'>...</span>)
+<span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>x</span>, <span class='kw'>return_zeros</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='no'>...</span>)
 
 <span class='co'># S3 method for glmnet</span>
 <span class='fu'><a href='glance.html'>glance</a></span>(<span class='no'>x</span>, <span class='no'>...</span>)</pre>
@@ -125,6 +125,11 @@ the estimates across values of the penalty parameter lambda.</p>
     <tr>
       <th>x</th>
       <td><p>a "glmnet" object</p></td>
+    </tr>
+    <tr>
+      <th>return_zeros</th>
+      <td><p>should coefficients with value zero be included in
+the results (default <code>FALSE</code>)?</p></td>
     </tr>
     <tr>
       <th>...</th>
@@ -140,16 +145,16 @@ structure depends on the method chosen.</p>
 coefficient (including the intercept) and value of lambda for which the estimate
 is nonzero, with the columns:</p>
 <dt>term</dt><dd><p>coefficient name (V1...VN by default, along with
-  "(Intercept)")</p></dd>
-  <dt>step</dt><dd><p>which step of lambda choices was used</p></dd>
-  <dt>estimate</dt><dd><p>estimate of coefficient</p></dd>
-  <dt>lambda</dt><dd><p>value of penalty parameter lambda</p></dd>
-  <dt>dev.ratio</dt><dd><p>fraction of null deviance explained at each
-  value of lambda</p></dd>
+"(Intercept)")</p></dd>
+<dt>step</dt><dd><p>which step of lambda choices was used</p></dd>
+<dt>estimate</dt><dd><p>estimate of coefficient</p></dd>
+<dt>lambda</dt><dd><p>value of penalty parameter lambda</p></dd>
+<dt>dev.ratio</dt><dd><p>fraction of null deviance explained at each
+value of lambda</p></dd>
 
 glance returns a one-row data.frame with the values
-  <dt>nulldev</dt><dd><p>null deviance</p></dd>
-  <dt>npasses</dt><dd><p>total passes over the data across all lambda values</p></dd>
+<dt>nulldev</dt><dd><p>null deviance</p></dd>
+<dt>npasses</dt><dd><p>total passes over the data across all lambda values</p></dd>
 
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
@@ -190,13 +195,15 @@ choice of lambda.</p>
     <span class='no'>g2</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='http://dplyr.tidyverse.org/reference/sample.html'>sample</a></span>(<span class='fl'>1</span>:<span class='fl'>2</span>, <span class='fl'>100</span>, <span class='kw'>replace</span><span class='kw'>=</span><span class='fl'>TRUE</span>)
     <span class='no'>fit2</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/glmnet/topics/glmnet'>glmnet</a></span>(<span class='no'>x</span>, <span class='no'>g2</span>, <span class='kw'>family</span><span class='kw'>=</span><span class='st'>"binomial"</span>)
     <span class='fu'>head</span>(<span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>fit2</span>))
-}</div><div class='output co'>#&gt;          term step    estimate    lambda    dev.ratio
-#&gt; 1 (Intercept)    1 -0.24116206 0.1767352 1.780423e-15
-#&gt; 2 (Intercept)    2 -0.24079189 0.1610346 1.570026e-02
-#&gt; 3         V13    2  0.06204726 0.1610346 1.570026e-02
-#&gt; 4 (Intercept)    3 -0.24086922 0.1467287 2.880651e-02
-#&gt; 5         V13    3  0.11889530 0.1467287 2.880651e-02
-#&gt; 6 (Intercept)    4 -0.24127954 0.1336937 3.980004e-02</div><div class='input'>
+}</div><div class='output co'>#&gt; # A tibble: 6 x 5
+#&gt;   term         step estimate lambda dev.ratio
+#&gt;   &lt;chr&gt;       &lt;dbl&gt;    &lt;dbl&gt;  &lt;dbl&gt;     &lt;dbl&gt;
+#&gt; 1 (Intercept)     1  -0.241   0.177  1.78e-15
+#&gt; 2 (Intercept)     2  -0.241   0.161  1.57e- 2
+#&gt; 3 V13             2   0.0620  0.161  1.57e- 2
+#&gt; 4 (Intercept)     3  -0.241   0.147  2.88e- 2
+#&gt; 5 V13             3   0.119   0.147  2.88e- 2
+#&gt; 6 (Intercept)     4  -0.241   0.134  3.98e- 2</div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

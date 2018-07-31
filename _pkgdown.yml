@@ -17,16 +17,10 @@ reference:
   
 - title: Miscellaneous
   contents:
-  - bootstrap
   - broom
-  - contains("compact")
   - starts_with("confint")
   - finish_glance
-  - fix_data_frame
-  - inflate
-  - insert_NAs
   - starts_with("process")
-  - contains("unrowname")
   
 navbar:
   type: default
@@ -51,5 +45,5 @@ navbar:
     href: news/index.html
   right:
   - icon: fa-github fa-lg
-    href: https://github.com/tidyverse/broom
+    href: https://github.com/tidymodels/broom
  

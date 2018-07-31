@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Augment data according to a tidied model — augment • broom</title>
+<title>Augment data with information from a(n) statistical object — augment • broom</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -46,7 +46,7 @@
 
       <div class="navbar-brand-container">
         <a class="navbar-brand" href="../index.html">broom</a>
-        <small class="tidyverse">part of the <a href="http://tidyverse.org">tidyverse</a></small>
+        <small class="tidyverse">part of the <a href="https://tidyverse.org">tidyverse</a></small>
       </div>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
@@ -101,15 +101,45 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Augment data according to a tidied model</h1>
-    <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/augment.R'><code>R/augment.R</code></a></small>
+    <h1>Augment data with information from a(n) statistical object</h1>
+    <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/broom.R'><code>R/broom.R</code></a></small>
     <div class="hidden name"><code>augment.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Given an R statistical model or other non-tidy object, add columns to the
-original dataset such as predictions, residuals and cluster assignments.</p>
+    <p>Augment accepts a model object and a dataset and adds
+information about each observation in the dataset. Most commonly, this
+includes predicted values in the <code>.fitted</code> column, residuals in the
+<code>.resid</code> column, and standard errors for the fitted values in a <code>.se.fit</code>
+column. New columns always begin with a <code>.</code> prefix to avoid overwriting
+columns in the original dataset.</p>
+<p>Users may pass data to augment via either the <code>data</code> argument or the
+<code>newdata</code> argument. If the user passes data to the <code>data</code> argument,
+it <strong>must</strong> be exactly the data that was used to fit the model
+object. Pass datasets to <code>newdata</code> to augment data that was not used
+during model fitting. This still requires that all columns used to fit
+the model are present.</p>
+<p>Augment will often behavior different depending on whether <code>data</code> or
+<code>newdata</code> is specified. This is because there is often information
+associated with training observations (such as influences or related)
+measures that is not meaningfully defined for new observations.</p>
+<p>For convenience, many augment methods provide default <code>data</code> arguments,
+so that <code>augment(fit)</code> will return the augmented training data. In these
+cases augment tries to reconstruct the original data based on the model
+object, with some varying degrees of success.</p>
+<p>The augmented dataset is always returned as a <a href='http://www.rdocumentation.org/packages/tibble/topics/tibble'>tibble::tibble</a> with the
+<strong>same number of rows</strong> as the passed dataset. This means that the
+passed data must be coercible to a tibble. At this time, tibbles do not
+support matrix-columns. This means you should not specify a matrix
+of covariates in a model formula during the original model fitting
+process, and that <code><a href='http://www.rdocumentation.org/packages/splines/topics/ns'>splines::ns()</a></code>, <code><a href='http://www.rdocumentation.org/packages/stats/topics/poly'>stats::poly()</a></code> and
+<code><a href='http://www.rdocumentation.org/packages/survival/topics/Surv'>survival::Surv()</a></code> objects are not supported in input data. If you
+encounter errors, try explicitly passing a tibble, or fitting the original
+model on data in a tibble.</p>
+<p>We are in the process of defining behaviors for models fit with various
+na.action arguments, but make no guarantees about behavior when data is
+missing at this time.</p>
     
     </div>
 
@@ -120,26 +150,33 @@ original dataset such as predictions, residuals and cluster assignments.</p>
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>x</th>
-      <td><p>model or other R object to convert to data frame</p></td>
+      <td><p>Model object or other R object with information to append to
+observations.</p></td>
     </tr>
     <tr>
       <th>...</th>
-      <td><p>other arguments passed to methods</p></td>
+      <td><p>Addition arguments to augment method.</p></td>
     </tr>
     </table>
     
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>A <code><a href='http://www.rdocumentation.org/packages/tibble/topics/tibble'>tibble::tibble()</a></code> with information about data points.</p>
+    
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>Note that by convention the first argument is almost always <code>data</code>,
-which specifies the original data object. This is not part of the S3
+    <p>The second argument is almost always <code>data</code>, which specifies the
+original data object. This is not part of the S3
 signature, partly because it prevents <a href='rowwise_df_tidiers.html'>rowwise_df_tidiers</a> from
-taking a column name as the first argument.</p>
-<p>This generic originated in the ggplot2 package, where it was called
-"fortify."</p>
+taking a column name as the first argument. The tidiers are currently
+deprecated and will soon be removed from broom, at which point
+<code>data</code> will become part of the augment signature.</p>
+<p><strong>Historical note</strong>: This generic originated in the ggplot2 package,
+where it was called <code>fortify</code>.</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='lm_tidiers.html'>augment.lm</a></code></p></div>
+    <div class='dont-index'><p><code><a href='augment.lm.html'>augment.lm()</a></code></p></div>
     
 
   </div>
@@ -148,6 +185,8 @@ taking a column name as the first argument.</p>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
       
+      <li><a href="#value">Value</a></li>
+
       <li><a href="#details">Details</a></li>
 
       <li><a href="#see-also">See also</a></li>
@@ -158,12 +197,12 @@ taking a column name as the first argument.</p>
 
       <footer>
       <div class="tidyverse">
-  <p>broom is a part of the <strong>tidyverse</strong>, an ecosystem of packages designed with common APIs and a shared philosophy. Learn more at <a href="http://tidyverse.org">tidyverse.org</a>.</p>
+  <p>broom is a part of the <strong>tidyverse</strong>, an ecosystem of packages designed with common APIs and a shared philosophy. Learn more at <a href="https://tidyverse.org">tidyverse.org</a>.</p>
 </div>
 
 <div class="author">
-  <p>Developed by David Robinson.</p>
-  <p>Site built by <a href="http://pkgdown.r-lib.org">pkgdown</a>.</p>
+  <p>Developed by David Robinson, Alex Hayes.</p>
+  <p>Site built by <a href="https://pkgdown.r-lib.org">pkgdown</a>.</p>
 </div>
 
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-115082821-1"></script>

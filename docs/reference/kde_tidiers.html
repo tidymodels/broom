@@ -102,7 +102,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Tidy a kernel density estimate object from the ks package</h1>
-    <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/kde_tidiers.R'><code>R/kde_tidiers.R</code></a></small>
+    <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/ks-tidiers.R'><code>R/ks-tidiers.R</code></a></small>
     <div class="hidden name"><code>kde_tidiers.Rd</code></div>
     </div>
 
@@ -159,13 +159,15 @@ containing the estimated density.</p>
 
   <span class='no'>td3</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>k3</span>)
   <span class='fu'>head</span>(<span class='no'>td3</span>)
-}</div><div class='output co'>#&gt;          x1        x2        x3 estimate
-#&gt; 1 -4.767251 -3.934812 -3.729787        0
-#&gt; 2 -4.587759 -3.934812 -3.729787        0
-#&gt; 3 -4.408267 -3.934812 -3.729787        0
-#&gt; 4 -4.228775 -3.934812 -3.729787        0
-#&gt; 5 -4.049283 -3.934812 -3.729787        0
-#&gt; 6 -3.869791 -3.934812 -3.729787        0</div><div class='input'>
+}</div><div class='output co'>#&gt; # A tibble: 6 x 4
+#&gt;     obs variable value estimate
+#&gt;   &lt;int&gt; &lt;chr&gt;    &lt;dbl&gt;    &lt;dbl&gt;
+#&gt; 1     1 x1       -4.77        0
+#&gt; 2     2 x1       -4.59        0
+#&gt; 3     3 x1       -4.41        0
+#&gt; 4     4 x1       -4.23        0
+#&gt; 5     5 x1       -4.05        0
+#&gt; 6     6 x1       -3.87        0</div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

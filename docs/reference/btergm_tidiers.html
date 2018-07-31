@@ -102,7 +102,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Tidying method for a bootstrapped temporal exponential random graph model</h1>
-    <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/btergm_tidiers.R'><code>R/btergm_tidiers.R</code></a></small>
+    <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/btergm-tidiers.R'><code>R/btergm-tidiers.R</code></a></small>
     <div class="hidden name"><code>btergm_tidiers.Rd</code></div>
     </div>
 
@@ -123,7 +123,7 @@ coefficients and their confidence intervals.</p>
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>x</th>
-      <td><p>a <code><a href='http://www.rdocumentation.org/packages/btergm/topics/btergm'>btergm</a></code> object</p></td>
+      <td><p>A <code><a href='http://www.rdocumentation.org/packages/btergm/topics/btergm'>btergm::btergm()</a></code> object.</p></td>
     </tr>
     <tr>
       <th>conf.level</th>
@@ -151,9 +151,9 @@ only the <code>term</code> and <code>estimate</code> columns.</p></td>
 <p><code>tidy.btergm</code> returns one row for each coefficient,
 with four columns:</p>
 <dt>term</dt><dd><p>The term in the model being estimated and tested</p></dd>
-  <dt>estimate</dt><dd><p>The estimated coefficient</p></dd>
-  <dt>conf.low</dt><dd><p>The lower bound of the confidence interval</p></dd>
-  <dt>conf.high</dt><dd><p>The lower bound of the confidence interval</p></dd>
+<dt>estimate</dt><dd><p>The estimated coefficient</p></dd>
+<dt>conf.low</dt><dd><p>The lower bound of the confidence interval</p></dd>
+<dt>conf.high</dt><dd><p>The lower bound of the confidence interval</p></dd>
 
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
@@ -163,12 +163,13 @@ for <span class="pkg">ergm</span> objects.</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='http://www.rdocumentation.org/packages/btergm/topics/btergm'>btergm</a></code></p></div>
+    <div class='dont-index'><p><code><a href='http://www.rdocumentation.org/packages/btergm/topics/btergm'>btergm::btergm()</a></code></p></div>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
 <span class='kw'>if</span> (<span class='fu'>require</span>(<span class='st'>"xergm"</span>)) {
+    <span class='fu'>set.seed</span>(<span class='fl'>1</span>)
     <span class='co'># Using the same simulated example as the xergm package</span>
     <span class='co'># Create 10 random networks with 10 actors</span>
     <span class='no'>networks</span> <span class='kw'>&lt;-</span> <span class='fu'>list</span>()
@@ -187,85 +188,15 @@ for <span class="pkg">ergm</span> objects.</p>
     <span class='co'># Fit a model where the propensity to form ties depends</span>
     <span class='co'># on the edge covariates, controlling for the number of</span>
     <span class='co'># in-stars</span>
-    <span class='no'>btfit</span> <span class='kw'>&lt;-</span> <span class='fu'>btergm</span>(<span class='no'>networks</span> ~ <span class='no'>edges</span> + <span class='fu'>istar</span>(<span class='fl'>2</span>) +
-                      <span class='fu'>edgecov</span>(<span class='no'>covariates</span>), <span class='kw'>R</span> <span class='kw'>=</span> <span class='fl'>100</span>)
+    <span class='fu'>suppressWarnings</span>(<span class='no'>btfit</span> <span class='kw'>&lt;-</span> <span class='fu'>btergm</span>(<span class='no'>networks</span> ~ <span class='no'>edges</span> + <span class='fu'>istar</span>(<span class='fl'>2</span>) +
+                       <span class='fu'>edgecov</span>(<span class='no'>covariates</span>), <span class='kw'>R</span> <span class='kw'>=</span> <span class='fl'>100</span>))
 
     <span class='co'># Show terms, coefficient estimates and errors</span>
     <span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>btfit</span>)
 
     <span class='co'># Show coefficients as odds ratios with a 99% CI</span>
     <span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>btfit</span>, <span class='kw'>exponentiate</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>conf.level</span> <span class='kw'>=</span> <span class='fl'>0.99</span>)
-}</div><div class='output co'>#&gt; <span class='message'>Le chargement a nécessité le package : xergm</span></div><div class='output co'>#&gt; <span class='message'>Le chargement a nécessité le package : xergm.common</span></div><div class='output co'>#&gt; <span class='message'>Le chargement a nécessité le package : ergm</span></div><div class='output co'>#&gt; <span class='message'>Le chargement a nécessité le package : statnet.common</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Attachement du package : 'statnet.common'</span></div><div class='output co'>#&gt; <span class='message'>The following object is masked from 'package:base':</span>
-#&gt; <span class='message'></span>
-#&gt; <span class='message'>    order</span></div><div class='output co'>#&gt; <span class='message'>Le chargement a nécessité le package : network</span></div><div class='output co'>#&gt; <span class='message'>network: Classes for Relational Data</span>
-#&gt; <span class='message'>Version 1.13.0.1 created on 2015-08-31.</span>
-#&gt; <span class='message'>copyright (c) 2005, Carter T. Butts, University of California-Irvine</span>
-#&gt; <span class='message'>                    Mark S. Handcock, University of California -- Los Angeles</span>
-#&gt; <span class='message'>                    David R. Hunter, Penn State University</span>
-#&gt; <span class='message'>                    Martina Morris, University of Washington</span>
-#&gt; <span class='message'>                    Skye Bender-deMoll, University of Washington</span>
-#&gt; <span class='message'> For citation information, type citation("network").</span>
-#&gt; <span class='message'> Type help("network-package") to get started.</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>ergm: version 3.8.0, created on 2017-08-18</span>
-#&gt; <span class='message'>Copyright (c) 2017, Mark S. Handcock, University of California -- Los Angeles</span>
-#&gt; <span class='message'>                    David R. Hunter, Penn State University</span>
-#&gt; <span class='message'>                    Carter T. Butts, University of California -- Irvine</span>
-#&gt; <span class='message'>                    Steven M. Goodreau, University of Washington</span>
-#&gt; <span class='message'>                    Pavel N. Krivitsky, University of Wollongong</span>
-#&gt; <span class='message'>                    Martina Morris, University of Washington</span>
-#&gt; <span class='message'>                    with contributions from</span>
-#&gt; <span class='message'>                    Li Wang</span>
-#&gt; <span class='message'>                    Kirk Li, University of Washington</span>
-#&gt; <span class='message'>                    Skye Bender-deMoll, University of Washington</span>
-#&gt; <span class='message'>Based on "statnet" project software (statnet.org).</span>
-#&gt; <span class='message'>For license and citation information see statnet.org/attribution</span>
-#&gt; <span class='message'>or type citation("ergm").</span></div><div class='output co'>#&gt; <span class='message'>NOTE: Versions before 3.6.1 had a bug in the implementation of the bd()</span>
-#&gt; <span class='message'>constriant which distorted the sampled distribution somewhat. In</span>
-#&gt; <span class='message'>addition, Sampson's Monks datasets had mislabeled vertices. See the</span>
-#&gt; <span class='message'>NEWS and the documentation for more details.</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Attachement du package : 'xergm.common'</span></div><div class='output co'>#&gt; <span class='message'>The following object is masked from 'package:ergm':</span>
-#&gt; <span class='message'></span>
-#&gt; <span class='message'>    gof</span></div><div class='output co'>#&gt; <span class='message'>Le chargement a nécessité le package : btergm</span></div><div class='output co'>#&gt; <span class='message'>Package:  btergm</span>
-#&gt; <span class='message'>Version:  1.9.1</span>
-#&gt; <span class='message'>Date:     2018-02-14</span>
-#&gt; <span class='message'>Authors:  Philip Leifeld (University of Glasgow)</span>
-#&gt; <span class='message'>          Skyler J. Cranmer (The Ohio State University)</span>
-#&gt; <span class='message'>          Bruce A. Desmarais (Pennsylvania State University)</span></div><div class='output co'>#&gt; <span class='message'>Le chargement a nécessité le package : tnam</span></div><div class='output co'>#&gt; <span class='message'>Package:  tnam</span>
-#&gt; <span class='message'>Version:  1.6.5</span>
-#&gt; <span class='message'>Date:     2017-03-31</span>
-#&gt; <span class='message'>Authors:  Philip Leifeld (University of Glasgow)</span>
-#&gt; <span class='message'>          Skyler J. Cranmer (The Ohio State University)</span></div><div class='output co'>#&gt; <span class='message'>Le chargement a nécessité le package : rem</span></div><div class='output co'>#&gt; <span class='message'>Le chargement a nécessité le package : GERGM</span></div><div class='output co'>#&gt; <span class='message'>GERGM: Generalized Exponential Random Graph Models</span>
-#&gt; <span class='message'>Version 0.13.0 created on 2018-05-14.</span>
-#&gt; <span class='message'>copyright (c) 2018, Matthew J. Denny, Penn State University</span>
-#&gt; <span class='message'>                    James D. Wilson, University of San Francisco</span>
-#&gt; <span class='message'>                    Skyler Cranmer, Ohio State University</span>
-#&gt; <span class='message'>                    Bruce A. Desmarais, Penn State University</span>
-#&gt; <span class='message'>                    Shankar Bhamidi, University of North Carolina</span>
-#&gt; <span class='message'>Type help('gergm') to get started.</span>
-#&gt; <span class='message'>Development website: https://github.com/matthewjdenny/GERGM</span></div><div class='output co'>#&gt; <span class='message'>Package:  xergm</span>
-#&gt; <span class='message'>Version:  1.8.2</span>
-#&gt; <span class='message'>Date:     2017-04-01</span>
-#&gt; <span class='message'>Authors:  Philip Leifeld (University of Glasgow)</span>
-#&gt; <span class='message'>          Skyler J. Cranmer (The Ohio State University)</span>
-#&gt; <span class='message'>          Bruce A. Desmarais (Pennsylvania State University)</span>
-#&gt; <span class='message'></span>
-#&gt; <span class='message'>Please cite the xergm package in your publications -- see citation("xergm").</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Initial dimensions of the network and covariates:</span></div><div class='output co'>#&gt;                  t=1 t=2 t=3 t=4 t=5 t=6 t=7 t=8 t=9 t=10
-#&gt; networks (row)    10  10  10  10  10  10  10  10  10   10
-#&gt; networks (col)    10  10  10  10  10  10  10  10  10   10
-#&gt; covariates (row)  10  10  10  10  10  10  10  10  10   10
-#&gt; covariates (col)  10  10  10  10  10  10  10  10  10   10</div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>All networks are conformable.</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Dimensions of the network and covariates after adjustment:</span></div><div class='output co'>#&gt;                  t=1 t=2 t=3 t=4 t=5 t=6 t=7 t=8 t=9 t=10
-#&gt; networks (row)    10  10  10  10  10  10  10  10  10   10
-#&gt; networks (col)    10  10  10  10  10  10  10  10  10   10
-#&gt; covariates (row)  10  10  10  10  10  10  10  10  10   10
-#&gt; covariates (col)  10  10  10  10  10  10  10  10  10   10</div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Starting pseudolikelihood estimation with 100 bootstrapping replications on a single computing core...</span></div><div class='output co'>#&gt; <span class='message'>Done.</span></div><div class='output co'>#&gt; <span class='warning'>Warning: extreme order statistics used as endpoints</span></div><div class='output co'>#&gt; <span class='warning'>Warning: extreme order statistics used as endpoints</span></div><div class='output co'>#&gt; <span class='warning'>Warning: extreme order statistics used as endpoints</span></div><div class='output co'>#&gt;                      term  estimate  conf.low conf.high
-#&gt; 1                   edges 0.2943735 0.1682938 0.8107676
-#&gt; 2                  istar2 1.0760679 0.7581794 1.2903869
-#&gt; 3 edgecov.covariates[[i]] 1.0442169 0.8496848 1.4029402</div></pre>
+}</div><div class='output co'>#&gt; <span class='message'>Loading required package: xergm</span></div><div class='output co'>#&gt; <span class='message'>Loading required package: xergm.common</span></div><div class='output co'>#&gt; <span class='message'>Loading required package: ergm</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

@@ -102,7 +102,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Tidiers for aareg objects</h1>
-    <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/survival_tidiers.R'><code>R/survival_tidiers.R</code></a></small>
+    <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/survival-aareg-tidiers.R'><code>R/survival-aareg-tidiers.R</code></a></small>
     <div class="hidden name"><code>aareg_tidiers.Rd</code></div>
     </div>
 
@@ -138,18 +138,18 @@ structure depends on the method chosen.</p>
 <p><code>tidy.aareg</code> returns one row for each coefficient, with
 the columns</p>
 <dt>term</dt><dd><p>name of coefficient</p></dd>
-  <dt>estimate</dt><dd><p>estimate of the slope</p></dd>
-  <dt>statistic</dt><dd><p>test statistic for coefficient</p></dd>
-  <dt>std.error</dt><dd><p>standard error of statistic</p></dd>
-  <dt>robust.se</dt><dd><p>robust version of standard error estimate (only when
-  <code>x</code> was called with <code>dfbeta = TRUE</code>)</p></dd>
-  <dt>z</dt><dd><p>z score</p></dd>
-  <dt>p.value</dt><dd><p>p-value</p></dd>
+<dt>estimate</dt><dd><p>estimate of the slope</p></dd>
+<dt>statistic</dt><dd><p>test statistic for coefficient</p></dd>
+<dt>std.error</dt><dd><p>standard error of statistic</p></dd>
+<dt>robust.se</dt><dd><p>robust version of standard error estimate (only when
+<code>x</code> was called with <code>dfbeta = TRUE</code>)</p></dd>
+<dt>z</dt><dd><p>z score</p></dd>
+<dt>p.value</dt><dd><p>p-value</p></dd>
 
 glance returns a one-row data frame containing
-  <dt>statistic</dt><dd><p>chi-squared statistic</p></dd>
-  <dt>p.value</dt><dd><p>p-value based on chi-squared statistic</p></dd>
-  <dt>df</dt><dd><p>degrees of freedom used by coefficients</p></dd>
+<dt>statistic</dt><dd><p>chi-squared statistic</p></dd>
+<dt>p.value</dt><dd><p>p-value based on chi-squared statistic</p></dd>
+<dt>df</dt><dd><p>degrees of freedom used by coefficients</p></dd>
 
     
 
@@ -160,16 +160,13 @@ glance returns a one-row data frame containing
                   <span class='kw'>dfbeta</span><span class='kw'>=</span><span class='fl'>TRUE</span>)
     <span class='fu'>summary</span>(<span class='no'>afit</span>)
     <span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>afit</span>)
-}</div><div class='output co'>#&gt;        term      estimate     statistic    std.error    robust.se statistic.z
-#&gt; 1 Intercept  5.048983e-03  5.868616e-03 4.739162e-03 4.771021e-03    1.230055
-#&gt; 2       age  4.005089e-05  7.149015e-05 7.228889e-05 6.996847e-05    1.021748
-#&gt; 3       sex -3.164485e-03 -4.030555e-03 1.217949e-03 1.227954e-03   -3.282333
-#&gt; 4   ph.ecog  3.009913e-03  3.673470e-03 1.016785e-03 1.015845e-03    3.616171
-#&gt;        p.value
-#&gt; 1 0.2186766165
-#&gt; 2 0.3069001400
-#&gt; 3 0.0010295209
-#&gt; 4 0.0002989931</div><div class='input'>
+}</div><div class='output co'>#&gt; # A tibble: 4 x 7
+#&gt;   term        estimate  statistic std.error robust.se statistic.z  p.value
+#&gt;   &lt;chr&gt;          &lt;dbl&gt;      &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;       &lt;dbl&gt;    &lt;dbl&gt;
+#&gt; 1 Intercept  0.00505    0.00587   0.00474   0.00477          1.23 0.219   
+#&gt; 2 age        0.0000401  0.0000715 0.0000723 0.0000700        1.02 0.307   
+#&gt; 3 sex       -0.00316   -0.00403   0.00122   0.00123         -3.28 0.00103 
+#&gt; 4 ph.ecog    0.00301    0.00367   0.00102   0.00102          3.62 0.000299</div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

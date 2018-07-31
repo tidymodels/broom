@@ -102,7 +102,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Tidying methods for a linear model</h1>
-    <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/lm_tidiers.R'><code>R/lm_tidiers.R</code></a></small>
+    <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/stats-lm-tidiers.R'><code>R/stats-lm-tidiers.R</code></a></small>
     <div class="hidden name"><code>lm_tidiers.Rd</code></div>
     </div>
 
@@ -172,12 +172,12 @@ only the <code>term</code> and <code>estimate</code> columns.</p></td>
     <tr>
       <th>type.predict</th>
       <td><p>Type of prediction to compute for a GLM; passed on to
-<code>predict.glm</code></p></td>
+<code>predict.glm()</code></p></td>
     </tr>
     <tr>
       <th>type.residuals</th>
       <td><p>Type of residuals to compute for a GLM; passed on to
-<code>residuals.glm</code></p></td>
+<code>residuals.glm()</code></p></td>
     </tr>
     </table>
     
@@ -187,30 +187,30 @@ only the <code>term</code> and <code>estimate</code> columns.</p></td>
 The structure depends on the method chosen.</p>
 <p><code>tidy.lm</code> returns one row for each coefficient, with five columns:</p>
 <dt>term</dt><dd><p>The term in the linear model being estimated and tested</p></dd>
-  <dt>estimate</dt><dd><p>The estimated coefficient</p></dd>
-  <dt>std.error</dt><dd><p>The standard error from the linear model</p></dd>
-  <dt>statistic</dt><dd><p>t-statistic</p></dd>
-  <dt>p.value</dt><dd><p>two-sided p-value</p></dd>
+<dt>estimate</dt><dd><p>The estimated coefficient</p></dd>
+<dt>std.error</dt><dd><p>The standard error from the linear model</p></dd>
+<dt>statistic</dt><dd><p>t-statistic</p></dd>
+<dt>p.value</dt><dd><p>two-sided p-value</p></dd>
 
 If the linear model is an "mlm" object (multiple linear model), there is an
 additional column:
-  <dt>response</dt><dd><p>Which response column the coefficients correspond to
-  (typically Y1, Y2, etc)</p></dd>
+<dt>response</dt><dd><p>Which response column the coefficients correspond to
+(typically Y1, Y2, etc)</p></dd>
 
 If conf.int=TRUE, it also includes columns for conf.low and
-conf.high, computed with confint.
+conf.high, computed with confint().
 
 When newdata is not supplied augment.lm returns
 one row for each observation, with seven columns added to the original
 data:
-  <dt>.hat</dt><dd><p>Diagonal of the hat matrix</p></dd>
-  <dt>.sigma</dt><dd><p>Estimate of residual standard deviation when
-    corresponding observation is dropped from model</p></dd>
-  <dt>.cooksd</dt><dd><p>Cooks distance, <code>cooks.distance</code></p></dd>
-  <dt>.fitted</dt><dd><p>Fitted values of model</p></dd>
-  <dt>.se.fit</dt><dd><p>Standard errors of fitted values</p></dd>
-  <dt>.resid</dt><dd><p>Residuals</p></dd>
-  <dt>.std.resid</dt><dd><p>Standardised residuals</p></dd>
+<dt>.hat</dt><dd><p>Diagonal of the hat matrix</p></dd>
+<dt>.sigma</dt><dd><p>Estimate of residual standard deviation when
+corresponding observation is dropped from model</p></dd>
+<dt>.cooksd</dt><dd><p>Cooks distance, <code>cooks.distance()</code></p></dd>
+<dt>.fitted</dt><dd><p>Fitted values of model</p></dd>
+<dt>.se.fit</dt><dd><p>Standard errors of fitted values</p></dd>
+<dt>.resid</dt><dd><p>Residuals</p></dd>
+<dt>.std.resid</dt><dd><p>Standardised residuals</p></dd>
 
 (Some unusual "lm" objects, such as "rlm" from MASS, may omit
 .cooksd and .std.resid. "gam" from mgcv omits
@@ -218,23 +218,23 @@ data:
 
 When newdata is supplied, augment.lm returns one row for each
 observation, with three columns added to the new data:
-  <dt>.fitted</dt><dd><p>Fitted values of model</p></dd>
-  <dt>.se.fit</dt><dd><p>Standard errors of fitted values</p></dd>
-  <dt>.resid</dt><dd><p>Residuals of fitted values on the new data</p></dd>
+<dt>.fitted</dt><dd><p>Fitted values of model</p></dd>
+<dt>.se.fit</dt><dd><p>Standard errors of fitted values</p></dd>
+<dt>.resid</dt><dd><p>Residuals of fitted values on the new data</p></dd>
 
 glance.lm returns a one-row data.frame with the columns
-  <dt>r.squared</dt><dd><p>The percent of variance explained by the model</p></dd>
-  <dt>adj.r.squared</dt><dd><p>r.squared adjusted based on the degrees of freedom</p></dd>
-  <dt>sigma</dt><dd><p>The square root of the estimated residual variance</p></dd>
-  <dt>statistic</dt><dd><p>F-statistic</p></dd>
-  <dt>p.value</dt><dd><p>p-value from the F test, describing whether the full
-  regression is significant</p></dd>
-  <dt>df</dt><dd><p>Degrees of freedom used by the coefficients</p></dd>
-  <dt>logLik</dt><dd><p>the data's log-likelihood under the model</p></dd>
-  <dt>AIC</dt><dd><p>the Akaike Information Criterion</p></dd>
-  <dt>BIC</dt><dd><p>the Bayesian Information Criterion</p></dd>
-  <dt>deviance</dt><dd><p>deviance</p></dd>
-  <dt>df.residual</dt><dd><p>residual degrees of freedom</p></dd>
+<dt>r.squared</dt><dd><p>The percent of variance explained by the model</p></dd>
+<dt>adj.r.squared</dt><dd><p>r.squared adjusted based on the degrees of freedom</p></dd>
+<dt>sigma</dt><dd><p>The square root of the estimated residual variance</p></dd>
+<dt>statistic</dt><dd><p>F-statistic</p></dd>
+<dt>p.value</dt><dd><p>p-value from the F test, describing whether the full
+regression is significant</p></dd>
+<dt>df</dt><dd><p>Degrees of freedom used by the coefficients</p></dd>
+<dt>logLik</dt><dd><p>the data's log-likelihood under the model</p></dd>
+<dt>AIC</dt><dd><p>the Akaike Information Criterion</p></dd>
+<dt>BIC</dt><dd><p>the Bayesian Information Criterion</p></dd>
+<dt>deviance</dt><dd><p>deviance</p></dd>
+<dt>df.residual</dt><dd><p>residual degrees of freedom</p></dd>
 
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
@@ -242,7 +242,7 @@ glance.lm returns a one-row data.frame with the columns
     <p>If you have missing values in your model data, you may need to refit
 the model with <code>na.action = na.exclude</code>.</p>
 <p>If <code>conf.int=TRUE</code>, the confidence interval is computed with
-the <code>confint</code> function.</p>
+the <code>confint()</code> function.</p>
 <p>While <code>tidy</code> is supported for "mlm" objects, <code>augment</code> and
 <code>glance</code> are not.</p>
 <p>When the modeling was performed with <code>na.action = "na.omit"</code>
@@ -258,7 +258,7 @@ ggplot2 package, where it was called <code>fortify.lm</code></p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code>summary.lm</code></p>
+    <div class='dont-index'><p><code>summary.lm()</code></p>
 <p>na.action</p></div>
     
 
@@ -269,13 +269,16 @@ ggplot2 package, where it was called <code>fortify.lm</code></p>
 
 <span class='no'>mod</span> <span class='kw'>&lt;-</span> <span class='fu'>lm</span>(<span class='no'>mpg</span> ~ <span class='no'>wt</span> + <span class='no'>qsec</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>mtcars</span>)
 
-<span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>mod</span>)</div><div class='output co'>#&gt;          term  estimate std.error  statistic      p.value
-#&gt; 1 (Intercept) 19.746223 5.2520617   3.759709 7.650466e-04
-#&gt; 2          wt -5.047982 0.4839974 -10.429771 2.518948e-11
-#&gt; 3        qsec  0.929198 0.2650173   3.506179 1.499883e-03</div><div class='input'><span class='fu'><a href='glance.html'>glance</a></span>(<span class='no'>mod</span>)</div><div class='output co'>#&gt;   r.squared adj.r.squared    sigma statistic      p.value df    logLik      AIC
-#&gt; 1 0.8264161     0.8144448 2.596175  69.03311 9.394765e-12  3 -74.36025 156.7205
-#&gt;        BIC deviance df.residual
-#&gt; 1 162.5834 195.4636          29</div><div class='input'>
+<span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>mod</span>)</div><div class='output co'>#&gt; # A tibble: 3 x 5
+#&gt;   term        estimate std.error statistic  p.value
+#&gt;   &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
+#&gt; 1 (Intercept)   19.7       5.25       3.76 7.65e- 4
+#&gt; 2 wt            -5.05      0.484    -10.4  2.52e-11
+#&gt; 3 qsec           0.929     0.265      3.51 1.50e- 3</div><div class='input'><span class='fu'><a href='glance.html'>glance</a></span>(<span class='no'>mod</span>)</div><div class='output co'>#&gt; # A tibble: 1 x 11
+#&gt;   r.squared adj.r.squared sigma statistic  p.value    df logLik   AIC   BIC
+#&gt; *     &lt;dbl&gt;         &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt; &lt;int&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+#&gt; 1     0.826         0.814  2.60      69.0 9.39e-12     3  -74.4  157.  163.
+#&gt; # ... with 2 more variables: deviance &lt;dbl&gt;, df.residual &lt;int&gt;</div><div class='input'>
 <span class='co'># coefficient plot</span>
 <span class='no'>d</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>mod</span>) <span class='kw'>%&gt;%</span> <span class='fu'><a href='http://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span>(<span class='kw'>low</span> <span class='kw'>=</span> <span class='no'>estimate</span> - <span class='no'>std.error</span>,
                           <span class='kw'>high</span> <span class='kw'>=</span> <span class='no'>estimate</span> + <span class='no'>std.error</span>)
@@ -283,42 +286,38 @@ ggplot2 package, where it was called <code>fortify.lm</code></p>
      <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/geom_point'>geom_point</a></span>() +
      <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/geom_abline'>geom_vline</a></span>(<span class='kw'>xintercept</span> <span class='kw'>=</span> <span class='fl'>0</span>) +
      <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/geom_errorbarh'>geom_errorbarh</a></span>()</div><div class='img'><img src='lm_tidiers-1.png' alt='' width='700' height='433' /></div><div class='input'>
-<span class='fu'>head</span>(<span class='fu'><a href='augment.html'>augment</a></span>(<span class='no'>mod</span>))</div><div class='output co'>#&gt;           .rownames  mpg    wt  qsec  .fitted   .se.fit      .resid       .hat
-#&gt; 1         Mazda RX4 21.0 2.620 16.46 21.81511 0.6832424 -0.81510855 0.06925986
-#&gt; 2     Mazda RX4 Wag 21.0 2.875 17.02 21.04822 0.5468271 -0.04822401 0.04436414
-#&gt; 3        Datsun 710 22.8 2.320 18.61 25.32728 0.6397681 -2.52727880 0.06072636
-#&gt; 4    Hornet 4 Drive 21.4 3.215 19.44 21.58057 0.6231436 -0.18056924 0.05761138
-#&gt; 5 Hornet Sportabout 18.7 3.440 17.02 18.19611 0.5120709  0.50388581 0.03890382
-#&gt; 6           Valiant 18.1 3.460 20.22 21.06859 0.8032106 -2.96858808 0.09571739
-#&gt;     .sigma      .cooksd  .std.resid
-#&gt; 1 2.637300 2.627038e-03 -0.32543724
-#&gt; 2 2.642112 5.587076e-06 -0.01900129
-#&gt; 3 2.595763 2.174253e-02 -1.00443793
-#&gt; 4 2.641895 1.046036e-04 -0.07164647
-#&gt; 5 2.640343 5.288512e-04  0.19797699
-#&gt; 6 2.575422 5.101445e-02 -1.20244126</div><div class='input'><span class='fu'>head</span>(<span class='fu'><a href='augment.html'>augment</a></span>(<span class='no'>mod</span>, <span class='no'>mtcars</span>))</div><div class='output co'>#&gt;           .rownames  mpg cyl disp  hp drat    wt  qsec vs am gear carb  .fitted
-#&gt; 1         Mazda RX4 21.0   6  160 110 3.90 2.620 16.46  0  1    4    4 21.81511
-#&gt; 2     Mazda RX4 Wag 21.0   6  160 110 3.90 2.875 17.02  0  1    4    4 21.04822
-#&gt; 3        Datsun 710 22.8   4  108  93 3.85 2.320 18.61  1  1    4    1 25.32728
-#&gt; 4    Hornet 4 Drive 21.4   6  258 110 3.08 3.215 19.44  1  0    3    1 21.58057
-#&gt; 5 Hornet Sportabout 18.7   8  360 175 3.15 3.440 17.02  0  0    3    2 18.19611
-#&gt; 6           Valiant 18.1   6  225 105 2.76 3.460 20.22  1  0    3    1 21.06859
-#&gt;     .se.fit      .resid       .hat   .sigma      .cooksd  .std.resid
-#&gt; 1 0.6832424 -0.81510855 0.06925986 2.637300 2.627038e-03 -0.32543724
-#&gt; 2 0.5468271 -0.04822401 0.04436414 2.642112 5.587076e-06 -0.01900129
-#&gt; 3 0.6397681 -2.52727880 0.06072636 2.595763 2.174253e-02 -1.00443793
-#&gt; 4 0.6231436 -0.18056924 0.05761138 2.641895 1.046036e-04 -0.07164647
-#&gt; 5 0.5120709  0.50388581 0.03890382 2.640343 5.288512e-04  0.19797699
-#&gt; 6 0.8032106 -2.96858808 0.09571739 2.575422 5.101445e-02 -1.20244126</div><div class='input'>
+<span class='fu'>head</span>(<span class='fu'><a href='augment.html'>augment</a></span>(<span class='no'>mod</span>))</div><div class='output co'>#&gt; # A tibble: 6 x 11
+#&gt;   .rownames      mpg    wt  qsec .fitted .se.fit  .resid   .hat .sigma  .cooksd
+#&gt;   &lt;chr&gt;        &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;    &lt;dbl&gt;
+#&gt; 1 Mazda RX4     21    2.62  16.5    21.8   0.683 -0.815  0.0693   2.64  2.63e-3
+#&gt; 2 Mazda RX4 W~  21    2.88  17.0    21.0   0.547 -0.0482 0.0444   2.64  5.59e-6
+#&gt; 3 Datsun 710    22.8  2.32  18.6    25.3   0.640 -2.53   0.0607   2.60  2.17e-2
+#&gt; 4 Hornet 4 Dr~  21.4  3.22  19.4    21.6   0.623 -0.181  0.0576   2.64  1.05e-4
+#&gt; 5 Hornet Spor~  18.7  3.44  17.0    18.2   0.512  0.504  0.0389   2.64  5.29e-4
+#&gt; 6 Valiant       18.1  3.46  20.2    21.1   0.803 -2.97   0.0957   2.58  5.10e-2
+#&gt; # ... with 1 more variable: .std.resid &lt;dbl&gt;</div><div class='input'><span class='fu'>head</span>(<span class='fu'><a href='augment.html'>augment</a></span>(<span class='no'>mod</span>, <span class='no'>mtcars</span>))</div><div class='output co'>#&gt; # A tibble: 6 x 19
+#&gt;   .rownames     mpg   cyl  disp    hp  drat    wt  qsec    vs    am  gear  carb
+#&gt;   &lt;chr&gt;       &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+#&gt; 1 Mazda RX4    21       6   160   110  3.9   2.62  16.5     0     1     4     4
+#&gt; 2 Mazda RX4 ~  21       6   160   110  3.9   2.88  17.0     0     1     4     4
+#&gt; 3 Datsun 710   22.8     4   108    93  3.85  2.32  18.6     1     1     4     1
+#&gt; 4 Hornet 4 D~  21.4     6   258   110  3.08  3.22  19.4     1     0     3     1
+#&gt; 5 Hornet Spo~  18.7     8   360   175  3.15  3.44  17.0     0     0     3     2
+#&gt; 6 Valiant      18.1     6   225   105  2.76  3.46  20.2     1     0     3     1
+#&gt; # ... with 7 more variables: .fitted &lt;dbl&gt;, .se.fit &lt;dbl&gt;, .resid &lt;dbl&gt;,
+#&gt; #   .hat &lt;dbl&gt;, .sigma &lt;dbl&gt;, .cooksd &lt;dbl&gt;, .std.resid &lt;dbl&gt;</div><div class='input'>
 <span class='co'># predict on new data</span>
 <span class='no'>newdata</span> <span class='kw'>&lt;-</span> <span class='no'>mtcars</span> <span class='kw'>%&gt;%</span> <span class='fu'>head</span>(<span class='fl'>6</span>) <span class='kw'>%&gt;%</span> <span class='fu'><a href='http://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span>(<span class='kw'>wt</span> <span class='kw'>=</span> <span class='no'>wt</span> + <span class='fl'>1</span>)
-<span class='fu'><a href='augment.html'>augment</a></span>(<span class='no'>mod</span>, <span class='kw'>newdata</span> <span class='kw'>=</span> <span class='no'>newdata</span>)</div><div class='output co'>#&gt;    mpg cyl disp  hp drat    wt  qsec vs am gear carb  .fitted   .se.fit
-#&gt; 1 21.0   6  160 110 3.90 3.620 16.46  0  1    4    4 16.76713 0.5991769
-#&gt; 2 21.0   6  160 110 3.90 3.875 17.02  0  1    4    4 16.00024 0.5794666
-#&gt; 3 22.8   4  108  93 3.85 3.320 18.61  1  1    4    1 20.27930 0.5072560
-#&gt; 4 21.4   6  258 110 3.08 4.215 19.44  1  0    3    1 16.53259 0.8323631
-#&gt; 5 18.7   8  360 175 3.15 4.440 17.02  0  0    3    2 13.14813 0.7507894
-#&gt; 6 18.1   6  225 105 2.76 4.460 20.22  1  0    3    1 16.02061 1.0485285</div><div class='input'>
+<span class='fu'><a href='augment.html'>augment</a></span>(<span class='no'>mod</span>, <span class='kw'>newdata</span> <span class='kw'>=</span> <span class='no'>newdata</span>)</div><div class='output co'>#&gt; # A tibble: 6 x 13
+#&gt;     mpg   cyl  disp    hp  drat    wt  qsec    vs    am  gear  carb .fitted
+#&gt; * &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;
+#&gt; 1  21       6   160   110  3.9   3.62  16.5     0     1     4     4    16.8
+#&gt; 2  21       6   160   110  3.9   3.88  17.0     0     1     4     4    16.0
+#&gt; 3  22.8     4   108    93  3.85  3.32  18.6     1     1     4     1    20.3
+#&gt; 4  21.4     6   258   110  3.08  4.22  19.4     1     0     3     1    16.5
+#&gt; 5  18.7     8   360   175  3.15  4.44  17.0     0     0     3     2    13.1
+#&gt; 6  18.1     6   225   105  2.76  4.46  20.2     1     0     3     1    16.0
+#&gt; # ... with 1 more variable: .se.fit &lt;dbl&gt;</div><div class='input'>
 <span class='no'>au</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='augment.html'>augment</a></span>(<span class='no'>mod</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>mtcars</span>)
 
 <span class='fu'>plot</span>(<span class='no'>mod</span>, <span class='kw'>which</span> <span class='kw'>=</span> <span class='fl'>1</span>)</div><div class='img'><img src='lm_tidiers-2.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/qplot'>qplot</a></span>(<span class='no'>.fitted</span>, <span class='no'>.resid</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>au</span>) +
@@ -346,13 +345,15 @@ ggplot2 package, where it was called <code>fortify.lm</code></p>
 <span class='no'>a</span> <span class='kw'>&lt;-</span> <span class='fu'>matrix</span>(<span class='fu'>rnorm</span>(<span class='fl'>20</span>), <span class='kw'>nrow</span> <span class='kw'>=</span> <span class='fl'>10</span>)
 <span class='no'>b</span> <span class='kw'>&lt;-</span> <span class='no'>a</span> + <span class='fu'>rnorm</span>(<span class='fu'>length</span>(<span class='no'>a</span>))
 <span class='no'>result</span> <span class='kw'>&lt;-</span> <span class='fu'>lm</span>(<span class='no'>b</span> ~ <span class='no'>a</span>)
-<span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>result</span>)</div><div class='output co'>#&gt;   response        term   estimate std.error  statistic    p.value
-#&gt; 1       Y1 (Intercept)  0.2319346 0.3851758  0.6021526 0.56605822
-#&gt; 2       Y1          a1  1.2113326 0.4704696  2.5747307 0.03675351
-#&gt; 3       Y1          a2 -0.1010004 0.3432436 -0.2942529 0.77709887
-#&gt; 4       Y2 (Intercept)  0.2445486 0.5204455  0.4698833 0.65272483
-#&gt; 5       Y2          a1  0.2932774 0.6356936  0.4613503 0.65854043
-#&gt; 6       Y2          a2  0.9794628 0.4637871  2.1118800 0.07258664</div></pre>
+<span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>result</span>)</div><div class='output co'>#&gt; # A tibble: 6 x 6
+#&gt;   response term        estimate std.error statistic p.value
+#&gt;   &lt;chr&gt;    &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;
+#&gt; 1 Y1       (Intercept)    0.232     0.385     0.602  0.566 
+#&gt; 2 Y1       a1             1.21      0.470     2.57   0.0368
+#&gt; 3 Y1       a2            -0.101     0.343    -0.294  0.777 
+#&gt; 4 Y2       (Intercept)    0.245     0.520     0.470  0.653 
+#&gt; 5 Y2       a1             0.293     0.636     0.461  0.659 
+#&gt; 6 Y2       a2             0.979     0.464     2.11   0.0726</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

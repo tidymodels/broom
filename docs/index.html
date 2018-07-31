@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Convert Statistical Analysis Objects into Tidy Data Frames • broom</title>
+<title>Convert Statistical Analysis Objects into Tidy Tibbles • broom</title>
 <!-- jquery --><script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script><!-- Bootstrap --><link href="tidyverse.css" rel="stylesheet">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script><!-- Font Awesome icons --><link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 <!-- tidyverse --><link href="pkgdown.css" rel="stylesheet">
@@ -27,7 +27,7 @@
 
       <div class="navbar-brand-container">
         <a class="navbar-brand" href="index.html">broom</a>
-        <small class="tidyverse">part of the <a href="http://tidyverse.org">tidyverse</a></small>
+        <small class="tidyverse">part of the <a href="https://tidyverse.org">tidyverse</a></small>
       </div>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
@@ -87,332 +87,86 @@
     
     
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-<div id="broom-lets-tidy-up-a-bit" class="section level1">
+<div id="broom" class="section level1">
 
 
-<p>The broom package takes the messy output of built-in functions in R, such as <code>lm</code>, <code>nls</code>, or <code>t.test</code>, and turns them into tidy data frames.</p>
-<p>The concept of “tidy data”, <a href="http://www.jstatsoft.org/v59/i10">as introduced by Hadley Wickham</a>, offers a powerful framework for data manipulation and analysis. That paper makes a convincing statement of the problem this package tries to solve (emphasis mine):</p>
-<blockquote>
-<p><strong>While model inputs usually require tidy inputs, such attention to detail doesn’t carry over to model outputs. Outputs such as predictions and estimated coefficients aren’t always tidy. This makes it more difficult to combine results from multiple models.</strong> For example, in R, the default representation of model coefficients is not tidy because it does not have an explicit variable that records the variable name for each estimate, they are instead recorded as row names. In R, row names must be unique, so combining coefficients from many models (e.g., from bootstrap resamples, or subgroups) requires workarounds to avoid losing important information. <strong>This knocks you out of the flow of analysis and makes it harder to combine the results from multiple models. I’m not currently aware of any packages that resolve this problem.</strong></p>
-</blockquote>
-<p>broom is an attempt to bridge the gap from untidy outputs of predictions and estimations to the tidy data we want to work with. It centers around three S3 methods, each of which take common objects produced by R statistical functions (<code>lm</code>, <code>t.test</code>, <code>nls</code>, etc) and convert them into a data frame. broom is particularly designed to work with Hadley’s <a href="https://github.com/hadley/dplyr">dplyr</a> package (see the “broom and dplyr” vignette for more).</p>
-<p>broom should be distinguished from packages like <a href="https://CRAN.R-project.org/package=reshape2">reshape2</a> and <a href="https://CRAN.R-project.org/package=tidyr">tidyr</a>, which rearrange and reshape data frames into different forms. Those packages perform critical tasks in tidy data analysis but focus on manipulating data frames in one specific format into another. In contrast, broom is designed to take format that is <em>not</em> in a data frame (sometimes not anywhere close) and convert it to a tidy data frame.</p>
-<p>Tidying model outputs is not an exact science, and it’s based on a judgment of the kinds of values a data scientist typically wants out of a tidy analysis (for instance, estimates, test statistics, and p-values). You may lose some of the information in the original object that you wanted, or keep more information than you need. If you think the tidy output for a model should be changed, or if you’re missing a tidying function for an S3 class that you’d like, I strongly encourage you to <a href="http://github.com/tidyverse/broom/issues">open an issue</a> or a pull request.</p>
-<div id="installation-and-documentation" class="section level2">
+<div id="overview" class="section level2">
 <h2 class="hasAnchor">
-<a href="#installation-and-documentation" class="anchor"></a>Installation and Documentation</h2>
-<p>The broom package is available on CRAN:</p>
-<pre><code>install.packages("broom")</code></pre>
-<p>You can also install the development version of the broom package using <a href="https://github.com/hadley/devtools">devtools</a>:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(devtools)
-<span class="kw">install_github</span>(<span class="st">"tidyverse/broom"</span>)</code></pre></div>
-<p>For additional documentation, please browse the vignettes:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">browseVignettes</span>(<span class="dt">package =</span> <span class="st">"broom"</span>)</code></pre></div>
-</div>
-<div id="tidying-functions" class="section level2">
-<h2 class="hasAnchor">
-<a href="#tidying-functions" class="anchor"></a>Tidying functions</h2>
-<p>This package provides three S3 methods that do three distinct kinds of tidying.</p>
+<a href="#overview" class="anchor"></a>Overview</h2>
+<p>broom summarizes key information about models in tidy <code>tibble()</code>s. broom provides three verbs to make it convenient to interact with model objects:</p>
 <ul>
 <li>
-<code>tidy</code>: constructs a data frame that summarizes the model’s statistical findings. This includes coefficients and p-values for each term in a regression, per-cluster information in clustering applications, or per-test information for <code>multtest</code> functions.</li>
+<code><a href="reference/tidy.html">tidy()</a></code> summarizes information about model components</li>
 <li>
-<code>glance</code>: construct a concise <em>one-row</em> summary of the model. This typically contains values such as R^2, adjusted R^2, and residual standard error that are computed once for the entire model.</li>
+<code><a href="reference/glance.html">glance()</a></code> reports information about the entire model</li>
 <li>
-<code>augment</code>: add columns to the original data that was modeled. This includes predictions, residuals, and cluster assignments.</li>
+<code><a href="reference/augment.html">augment()</a></code> adds informations about observations to a dataset</li>
 </ul>
-<p>Note that some classes may have only one or two of these methods defined.</p>
-<p>Consider as an illustrative example a linear fit on the built-in <code>mtcars</code> dataset.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">lmfit &lt;-<span class="st"> </span><span class="kw">lm</span>(mpg <span class="op">~</span><span class="st"> </span>wt, mtcars)
-lmfit
-<span class="co">#&gt; </span>
-<span class="co">#&gt; Call:</span>
-<span class="co">#&gt; lm(formula = mpg ~ wt, data = mtcars)</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; Coefficients:</span>
-<span class="co">#&gt; (Intercept)           wt  </span>
-<span class="co">#&gt;      37.285       -5.344</span></code></pre></div>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(lmfit)
-<span class="co">#&gt; </span>
-<span class="co">#&gt; Call:</span>
-<span class="co">#&gt; lm(formula = mpg ~ wt, data = mtcars)</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; Residuals:</span>
-<span class="co">#&gt;     Min      1Q  Median      3Q     Max </span>
-<span class="co">#&gt; -4.5432 -2.3647 -0.1252  1.4096  6.8727 </span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; Coefficients:</span>
-<span class="co">#&gt;             Estimate Std. Error t value Pr(&gt;|t|)    </span>
-<span class="co">#&gt; (Intercept)  37.2851     1.8776  19.858  &lt; 2e-16 ***</span>
-<span class="co">#&gt; wt           -5.3445     0.5591  -9.559 1.29e-10 ***</span>
-<span class="co">#&gt; ---</span>
-<span class="co">#&gt; Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; Residual standard error: 3.046 on 30 degrees of freedom</span>
-<span class="co">#&gt; Multiple R-squared:  0.7528, Adjusted R-squared:  0.7446 </span>
-<span class="co">#&gt; F-statistic: 91.38 on 1 and 30 DF,  p-value: 1.294e-10</span></code></pre></div>
-<p>This summary output is useful enough if you just want to read it. However, converting it to a data frame that contains all the same information, so that you can combine it with other models or do further analysis, is not trivial. You have to do <code>coef(summary(lmfit))</code> to get a matrix of coefficients, the terms are still stored in row names, and the column names are inconsistent with other packages (e.g. <code>Pr(&gt;|t|)</code> compared to <code>p.value</code>).</p>
-<p>Instead, you can use the <code>tidy</code> function, from the broom package, on the fit:</p>
+<p>For a detailed introduction, please see <code><a href="articles/broom.html">vignette("broom")</a></code>.</p>
+<p>broom tidies 100+ models from popular modelling packages and almost all of the model objects in the <code>stats</code> package that comes with base R. <code><a href="articles/available-methods.html">vignette("available-methods")</a></code> lists method availabilty.</p>
+<p>If you aren’t familiar with tidy data structures and want to know how they can make your life easier, we highly recommend reading Hadley Wickham’s <a href="http://www.jstatsoft.org/v59/i10">Tidy Data</a>.</p>
+</div>
+<div id="installation" class="section level2">
+<h2 class="hasAnchor">
+<a href="#installation" class="anchor"></a>Installation</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># we recommend installing the entire tidyverse, which includes broom:</span>
+<span class="kw">install.packages</span>(<span class="st">"tidyverse"</span>)
+
+<span class="co"># alternatively, to install just broom:</span>
+<span class="kw">install.packages</span>(<span class="st">"broom"</span>)
+
+<span class="co"># to get the development version from GitHub:</span>
+<span class="kw">install.packages</span>(<span class="st">"devtools"</span>)
+devtools<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/devtools/topics/install_github">install_github</a></span>(<span class="st">"tidyverse/broom"</span>)</code></pre></div>
+<p>If you find a bug, please file a minimal reproducible example in the <a href="https://github.com/tidyverse/broom/issues">issues</a>.</p>
+</div>
+<div id="usage" class="section level2">
+<h2 class="hasAnchor">
+<a href="#usage" class="anchor"></a>Usage</h2>
+<p><code><a href="reference/tidy.html">tidy()</a></code> produces a <code>tibble()</code> where each row contains information about an important component of the model. For regression models, this often corresponds to regression coefficients. This is can be useful if you want to inspect a model or create custom visualizations.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(broom)
-<span class="kw"><a href="reference/tidy.html">tidy</a></span>(lmfit)
-<span class="co">#&gt;          term  estimate std.error statistic      p.value</span>
-<span class="co">#&gt; 1 (Intercept) 37.285126  1.877627 19.857575 8.241799e-19</span>
-<span class="co">#&gt; 2          wt -5.344472  0.559101 -9.559044 1.293959e-10</span></code></pre></div>
-<p>This gives you a data.frame representation. Note that the row names have been moved into a column called <code>term</code>, and the column names are simple and consistent (and can be accessed using <code>$</code>).</p>
-<p>Instead of viewing the coefficients, you might be interested in the fitted values and residuals for each of the original points in the regression. For this, use <code>augment</code>, which augments the original data with information from the model:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(<span class="kw"><a href="reference/augment.html">augment</a></span>(lmfit))
-<span class="co">#&gt;           .rownames  mpg    wt  .fitted   .se.fit     .resid       .hat</span>
-<span class="co">#&gt; 1         Mazda RX4 21.0 2.620 23.28261 0.6335798 -2.2826106 0.04326896</span>
-<span class="co">#&gt; 2     Mazda RX4 Wag 21.0 2.875 21.91977 0.5714319 -0.9197704 0.03519677</span>
-<span class="co">#&gt; 3        Datsun 710 22.8 2.320 24.88595 0.7359177 -2.0859521 0.05837573</span>
-<span class="co">#&gt; 4    Hornet 4 Drive 21.4 3.215 20.10265 0.5384424  1.2973499 0.03125017</span>
-<span class="co">#&gt; 5 Hornet Sportabout 18.7 3.440 18.90014 0.5526562 -0.2001440 0.03292182</span>
-<span class="co">#&gt; 6           Valiant 18.1 3.460 18.79325 0.5552829 -0.6932545 0.03323551</span>
-<span class="co">#&gt;     .sigma      .cooksd  .std.resid</span>
-<span class="co">#&gt; 1 3.067494 1.327407e-02 -0.76616765</span>
-<span class="co">#&gt; 2 3.093068 1.723963e-03 -0.30743051</span>
-<span class="co">#&gt; 3 3.072127 1.543937e-02 -0.70575249</span>
-<span class="co">#&gt; 4 3.088268 3.020558e-03  0.43275114</span>
-<span class="co">#&gt; 5 3.097722 7.599578e-05 -0.06681879</span>
-<span class="co">#&gt; 6 3.095184 9.210650e-04 -0.23148309</span></code></pre></div>
-<p>Note that each of the new columns begins with a <code>.</code> (to avoid overwriting any of the original columns).</p>
-<p>Finally, several summary statistics are computed for the entire regression, such as R^2 and the F-statistic. These can be accessed with the <code>glance</code> function:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="reference/glance.html">glance</a></span>(lmfit)
-<span class="co">#&gt;   r.squared adj.r.squared    sigma statistic      p.value df    logLik</span>
-<span class="co">#&gt; 1 0.7528328     0.7445939 3.045882  91.37533 1.293959e-10  2 -80.01471</span>
-<span class="co">#&gt;        AIC      BIC deviance df.residual</span>
-<span class="co">#&gt; 1 166.0294 170.4266 278.3219          30</span></code></pre></div>
-<p>This distinction between the <code>tidy</code>, <code>augment</code> and <code>glance</code> functions is explored in a different context in the k-means vignette.</p>
-</div>
-<div id="other-examples" class="section level2">
-<h2 class="hasAnchor">
-<a href="#other-examples" class="anchor"></a>Other Examples</h2>
-<div id="generalized-linear-and-non-linear-models" class="section level3">
+
+fit &lt;-<span class="st"> </span><span class="kw">lm</span>(Sepal.Width <span class="op">~</span><span class="st"> </span>Petal.Length <span class="op">+</span><span class="st"> </span>Petal.Width, iris)
+<span class="kw"><a href="reference/tidy.html">tidy</a></span>(fit)
+<span class="co">#&gt; # A tibble: 3 x 5</span>
+<span class="co">#&gt;   term         estimate std.error statistic  p.value</span>
+<span class="co">#&gt;   &lt;chr&gt;           &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;</span>
+<span class="co">#&gt; 1 (Intercept)     3.59     0.0937     38.3  2.51e-78</span>
+<span class="co">#&gt; 2 Petal.Length   -0.257    0.0669     -3.84 1.80e- 4</span>
+<span class="co">#&gt; 3 Petal.Width     0.364    0.155       2.35 2.01e- 2</span></code></pre></div>
+<p><code><a href="reference/glance.html">glance()</a></code> returns a tibble with exactly one row of goodness of fitness measures and related statistics. This is useful to check for model misspecification and to compare many models.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="reference/glance.html">glance</a></span>(fit)
+<span class="co">#&gt; # A tibble: 1 x 11</span>
+<span class="co">#&gt;   r.squared adj.r.squared sigma statistic p.value    df logLik   AIC   BIC</span>
+<span class="co">#&gt; *     &lt;dbl&gt;         &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt; &lt;int&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;</span>
+<span class="co">#&gt; 1     0.213         0.202 0.389      19.9 2.24e-8     3  -69.8  148.  160.</span>
+<span class="co">#&gt; # ... with 2 more variables: deviance &lt;dbl&gt;, df.residual &lt;int&gt;</span></code></pre></div>
+<p><code>augment</code> adds columns to a dataset, containing information such as fitted values, residuals or cluster assignments. All columns added to a dataset have <code>.</code> prefix to prevent existing columns from being overwritten.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="reference/augment.html">augment</a></span>(fit, <span class="dt">data =</span> iris)
+<span class="co">#&gt; # A tibble: 150 x 12</span>
+<span class="co">#&gt;    Sepal.Length Sepal.Width Petal.Length Petal.Width Species .fitted</span>
+<span class="co">#&gt;  *        &lt;dbl&gt;       &lt;dbl&gt;        &lt;dbl&gt;       &lt;dbl&gt; &lt;fct&gt;     &lt;dbl&gt;</span>
+<span class="co">#&gt;  1          5.1         3.5          1.4         0.2 setosa     3.30</span>
+<span class="co">#&gt;  2          4.9         3            1.4         0.2 setosa     3.30</span>
+<span class="co">#&gt;  3          4.7         3.2          1.3         0.2 setosa     3.33</span>
+<span class="co">#&gt;  4          4.6         3.1          1.5         0.2 setosa     3.27</span>
+<span class="co">#&gt;  5          5           3.6          1.4         0.2 setosa     3.30</span>
+<span class="co">#&gt;  6          5.4         3.9          1.7         0.4 setosa     3.30</span>
+<span class="co">#&gt;  7          4.6         3.4          1.4         0.3 setosa     3.34</span>
+<span class="co">#&gt;  8          5           3.4          1.5         0.2 setosa     3.27</span>
+<span class="co">#&gt;  9          4.4         2.9          1.4         0.2 setosa     3.30</span>
+<span class="co">#&gt; 10          4.9         3.1          1.5         0.1 setosa     3.24</span>
+<span class="co">#&gt; # ... with 140 more rows, and 6 more variables: .se.fit &lt;dbl&gt;,</span>
+<span class="co">#&gt; #   .resid &lt;dbl&gt;, .hat &lt;dbl&gt;, .sigma &lt;dbl&gt;, .cooksd &lt;dbl&gt;,</span>
+<span class="co">#&gt; #   .std.resid &lt;dbl&gt;</span></code></pre></div>
+<div id="contributing" class="section level3">
 <h3 class="hasAnchor">
-<a href="#generalized-linear-and-non-linear-models" class="anchor"></a>Generalized linear and non-linear models</h3>
-<p>These functions apply equally well to the output from <code>glm</code>:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">glmfit &lt;-<span class="st"> </span><span class="kw">glm</span>(am <span class="op">~</span><span class="st"> </span>wt, mtcars, <span class="dt">family=</span><span class="st">"binomial"</span>)
-<span class="kw"><a href="reference/tidy.html">tidy</a></span>(glmfit)
-<span class="co">#&gt;          term estimate std.error statistic     p.value</span>
-<span class="co">#&gt; 1 (Intercept) 12.04037  4.509706  2.669879 0.007587858</span>
-<span class="co">#&gt; 2          wt -4.02397  1.436416 -2.801396 0.005088198</span></code></pre></div>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(<span class="kw"><a href="reference/augment.html">augment</a></span>(glmfit))
-<span class="co">#&gt;           .rownames am    wt    .fitted   .se.fit     .resid       .hat</span>
-<span class="co">#&gt; 1         Mazda RX4  1 2.620  1.4975684 0.9175750  0.6353854 0.12577908</span>
-<span class="co">#&gt; 2     Mazda RX4 Wag  1 2.875  0.4714561 0.6761141  0.9848344 0.10816226</span>
-<span class="co">#&gt; 3        Datsun 710  1 2.320  2.7047594 1.2799233  0.3598458 0.09628500</span>
-<span class="co">#&gt; 4    Hornet 4 Drive  0 3.215 -0.8966937 0.6012064 -0.8271767 0.07438175</span>
-<span class="co">#&gt; 5 Hornet Sportabout  0 3.440 -1.8020869 0.7486164 -0.5525972 0.06812194</span>
-<span class="co">#&gt; 6           Valiant  0 3.460 -1.8825663 0.7669573 -0.5323012 0.06744101</span>
-<span class="co">#&gt;      .sigma     .cooksd .std.resid</span>
-<span class="co">#&gt; 1 0.8033182 0.018405616  0.6795582</span>
-<span class="co">#&gt; 2 0.7897742 0.042434911  1.0428463</span>
-<span class="co">#&gt; 3 0.8101256 0.003942789  0.3785304</span>
-<span class="co">#&gt; 4 0.7973421 0.017706938 -0.8597702</span>
-<span class="co">#&gt; 5 0.8061915 0.006469973 -0.5724389</span>
-<span class="co">#&gt; 6 0.8067014 0.005901376 -0.5512128</span></code></pre></div>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="reference/glance.html">glance</a></span>(glmfit)
-<span class="co">#&gt;   null.deviance df.null    logLik      AIC      BIC deviance df.residual</span>
-<span class="co">#&gt; 1      43.22973      31 -9.588042 23.17608 26.10756 19.17608          30</span></code></pre></div>
-<p>Note that the statistics computed by <code>glance</code> are different for <code>glm</code> objects than for <code>lm</code> (e.g. deviance rather than R^2):</p>
-<p>These functions also work on other fits, such as nonlinear models (<code>nls</code>):</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">nlsfit &lt;-<span class="st"> </span><span class="kw">nls</span>(mpg <span class="op">~</span><span class="st"> </span>k <span class="op">/</span><span class="st"> </span>wt <span class="op">+</span><span class="st"> </span>b, mtcars, <span class="dt">start =</span> <span class="kw">list</span>(<span class="dt">k =</span> <span class="dv">1</span>, <span class="dt">b =</span> <span class="dv">0</span>))
-<span class="kw"><a href="reference/tidy.html">tidy</a></span>(nlsfit)
-<span class="co">#&gt;   term  estimate std.error statistic      p.value</span>
-<span class="co">#&gt; 1    k 45.829488  4.249155 10.785554 7.639162e-12</span>
-<span class="co">#&gt; 2    b  4.386254  1.536418  2.854858 7.737378e-03</span></code></pre></div>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(<span class="kw"><a href="reference/augment.html">augment</a></span>(nlsfit, mtcars))
-<span class="co">#&gt;           .rownames  mpg cyl disp  hp drat    wt  qsec vs am gear carb</span>
-<span class="co">#&gt; 1         Mazda RX4 21.0   6  160 110 3.90 2.620 16.46  0  1    4    4</span>
-<span class="co">#&gt; 2     Mazda RX4 Wag 21.0   6  160 110 3.90 2.875 17.02  0  1    4    4</span>
-<span class="co">#&gt; 3        Datsun 710 22.8   4  108  93 3.85 2.320 18.61  1  1    4    1</span>
-<span class="co">#&gt; 4    Hornet 4 Drive 21.4   6  258 110 3.08 3.215 19.44  1  0    3    1</span>
-<span class="co">#&gt; 5 Hornet Sportabout 18.7   8  360 175 3.15 3.440 17.02  0  0    3    2</span>
-<span class="co">#&gt; 6           Valiant 18.1   6  225 105 2.76 3.460 20.22  1  0    3    1</span>
-<span class="co">#&gt;    .fitted     .resid</span>
-<span class="co">#&gt; 1 21.87843 -0.8784251</span>
-<span class="co">#&gt; 2 20.32695  0.6730544</span>
-<span class="co">#&gt; 3 24.14034 -1.3403437</span>
-<span class="co">#&gt; 4 18.64115  2.7588507</span>
-<span class="co">#&gt; 5 17.70878  0.9912203</span>
-<span class="co">#&gt; 6 17.63177  0.4682291</span></code></pre></div>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="reference/glance.html">glance</a></span>(nlsfit)
-<span class="co">#&gt;     sigma isConv      finTol    logLik      AIC      BIC deviance</span>
-<span class="co">#&gt; 1 2.77405   TRUE 2.87694e-08 -77.02329 160.0466 164.4438 230.8606</span>
-<span class="co">#&gt;   df.residual</span>
-<span class="co">#&gt; 1          30</span></code></pre></div>
-</div>
-<div id="hypothesis-testing" class="section level3">
-<h3 class="hasAnchor">
-<a href="#hypothesis-testing" class="anchor"></a>Hypothesis testing</h3>
-<p>The <code>tidy</code> function can also be applied to <code>htest</code> objects, such as those output by popular built-in functions like <code>t.test</code>, <code>cor.test</code>, and <code>wilcox.test</code>.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">tt &lt;-<span class="st"> </span><span class="kw">t.test</span>(wt <span class="op">~</span><span class="st"> </span>am, mtcars)
-<span class="kw"><a href="reference/tidy.html">tidy</a></span>(tt)
-<span class="co">#&gt;   estimate estimate1 estimate2 statistic     p.value parameter  conf.low</span>
-<span class="co">#&gt; 1 1.357895  3.768895     2.411  5.493905 6.27202e-06  29.23352 0.8525632</span>
-<span class="co">#&gt;   conf.high                  method alternative</span>
-<span class="co">#&gt; 1  1.863226 Welch Two Sample t-test   two.sided</span></code></pre></div>
-<p>Some cases might have fewer columns (for example, no confidence interval):</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">wt &lt;-<span class="st"> </span><span class="kw">wilcox.test</span>(wt <span class="op">~</span><span class="st"> </span>am, mtcars)
-<span class="kw"><a href="reference/tidy.html">tidy</a></span>(wt)
-<span class="co">#&gt;   statistic      p.value                                            method</span>
-<span class="co">#&gt; 1     230.5 4.347026e-05 Wilcoxon rank sum test with continuity correction</span>
-<span class="co">#&gt;   alternative</span>
-<span class="co">#&gt; 1   two.sided</span></code></pre></div>
-<p>Since the <code>tidy</code> output is already only one row, <code>glance</code> returns the same output:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="reference/glance.html">glance</a></span>(tt)
-<span class="co">#&gt;   estimate estimate1 estimate2 statistic     p.value parameter  conf.low</span>
-<span class="co">#&gt; 1 1.357895  3.768895     2.411  5.493905 6.27202e-06  29.23352 0.8525632</span>
-<span class="co">#&gt;   conf.high                  method alternative</span>
-<span class="co">#&gt; 1  1.863226 Welch Two Sample t-test   two.sided</span></code></pre></div>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="reference/glance.html">glance</a></span>(wt)
-<span class="co">#&gt;   statistic      p.value                                            method</span>
-<span class="co">#&gt; 1     230.5 4.347026e-05 Wilcoxon rank sum test with continuity correction</span>
-<span class="co">#&gt;   alternative</span>
-<span class="co">#&gt; 1   two.sided</span></code></pre></div>
-<p><code>augment</code> method is defined only for chi-squared tests, since there is no meaningful sense, for other tests, in which a hypothesis test produces output about each initial data point.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">chit &lt;-<span class="st"> </span><span class="kw">chisq.test</span>(<span class="kw">xtabs</span>(Freq <span class="op">~</span><span class="st"> </span>Sex <span class="op">+</span><span class="st"> </span>Class, <span class="dt">data =</span> <span class="kw">as.data.frame</span>(Titanic)))
-<span class="kw"><a href="reference/tidy.html">tidy</a></span>(chit)
-<span class="co">#&gt;   statistic      p.value parameter                     method</span>
-<span class="co">#&gt; 1  349.9145 1.556637e-75         3 Pearson's Chi-squared test</span>
-<span class="kw"><a href="reference/augment.html">augment</a></span>(chit)
-<span class="co">#&gt;      Sex Class .observed      .prop  .row.prop .col.prop .expected</span>
-<span class="co">#&gt; 1   Male   1st       180 0.08178101 0.10398614 0.5538462 255.59973</span>
-<span class="co">#&gt; 2 Female   1st       145 0.06587915 0.30851064 0.4461538  69.40027</span>
-<span class="co">#&gt; 3   Male   2nd       179 0.08132667 0.10340843 0.6280702 224.14130</span>
-<span class="co">#&gt; 4 Female   2nd       106 0.04815993 0.22553191 0.3719298  60.85870</span>
-<span class="co">#&gt; 5   Male   3rd       510 0.23171286 0.29462738 0.7223796 555.24125</span>
-<span class="co">#&gt; 6 Female   3rd       196 0.08905043 0.41702128 0.2776204 150.75875</span>
-<span class="co">#&gt; 7   Male  Crew       862 0.39164016 0.49797805 0.9740113 696.01772</span>
-<span class="co">#&gt; 8 Female  Crew        23 0.01044980 0.04893617 0.0259887 188.98228</span>
-<span class="co">#&gt;   .residuals    .stdres</span>
-<span class="co">#&gt; 1  -4.728681 -11.083954</span>
-<span class="co">#&gt; 2   9.074854  11.083954</span>
-<span class="co">#&gt; 3  -3.015179  -6.993369</span>
-<span class="co">#&gt; 4   5.786457   6.993369</span>
-<span class="co">#&gt; 5  -1.919967  -5.041320</span>
-<span class="co">#&gt; 6   3.684626   5.041320</span>
-<span class="co">#&gt; 7   6.291462  17.607380</span>
-<span class="co">#&gt; 8 -12.074000 -17.607380</span></code></pre></div>
-</div>
-<div id="available-tidiers" class="section level3">
-<h3 class="hasAnchor">
-<a href="#available-tidiers" class="anchor"></a>Available Tidiers</h3>
-<p>Currently broom provides tidying methods for many S3 objects from the built-in stats package, including</p>
-<ul>
-<li><code>lm</code></li>
-<li><code>glm</code></li>
-<li><code>htest</code></li>
-<li><code>anova</code></li>
-<li><code>nls</code></li>
-<li><code>kmeans</code></li>
-<li><code>manova</code></li>
-<li><code>TukeyHSD</code></li>
-<li><code>arima</code></li>
-</ul>
-<p>It also provides methods for S3 objects in popular third-party packages, including</p>
-<ul>
-<li><code>lme4</code></li>
-<li><code>glmnet</code></li>
-<li><code>boot</code></li>
-<li><code>gam</code></li>
-<li><code>survival</code></li>
-<li><code>lfe</code></li>
-<li><code>zoo</code></li>
-<li><code>multcomp</code></li>
-<li><code>sp</code></li>
-<li><code>maps</code></li>
-<li>etc</li>
-</ul>
-<p>A full list of the <code>tidy</code>, <code>augment</code> and <code>glance</code> methods available for each class is available in the Available Methods vignette.</p>
-</div>
-</div>
-<div id="conventions" class="section level2">
-<h2 class="hasAnchor">
-<a href="#conventions" class="anchor"></a>Conventions</h2>
-<p><code>tidy</code>, <code>glance</code> and <code>augment</code> always return a data frame without rownames. In the near future they will return tibbles.</p>
-<p>We attempt to keep column names consistent across models. Some method specific convetions and common columns names are below.</p>
-<div id="tidy-functions" class="section level3">
-<h3 class="hasAnchor">
-<a href="#tidy-functions" class="anchor"></a><code>tidy</code> functions</h3>
-<ul>
-<li>Each row in a <code>tidy</code> output typically represents some well-defined concept, such as one term in a regression, one test, or one cluster/class. This meaning varies across models but is usually self-evident. The one thing each row cannot represent is a point in the initial data (for that, use the <code>augment</code> method).</li>
-<li>Common column names include:
-<ul>
-<li>
-<code>term</code>: the term in a regression or model that is being estimated.</li>
-<li>
-<code>p.value</code>: this spelling was chosen (over common alternatives such as <code>pvalue</code>, <code>PValue</code>, or <code>pval</code>) to be consistent with functions in R’s built-in <code>stats</code> package</li>
-<li>
-<code>statistic</code> a test statistic, usually the one used to compute the p-value. Combining these across many sub-groups is a reliable way to perform (e.g.) bootstrap hypothesis testing</li>
-<li>
-<code>estimate</code> estimate of an effect size, slope, or other value</li>
-<li>
-<code>std.error</code> standard error</li>
-<li>
-<code>conf.low</code> the low end of a confidence interval on the <code>estimate</code>
-</li>
-<li>
-<code>conf.high</code> the high end of a confidence interval on the <code>estimate</code>
-</li>
-<li>
-<code>df</code> degrees of freedom</li>
-</ul>
-</li>
-</ul>
-</div>
-<div id="augment-functions" class="section level3">
-<h3 class="hasAnchor">
-<a href="#augment-functions" class="anchor"></a>augment functions</h3>
-<ul>
-<li>
-<code><a href="reference/augment.html">augment(model, data)</a></code> adds columns to the original data.
-<ul>
-<li>If the <code>data</code> argument is missing, <code>augment</code> attempts to reconstruct the data from the model (note that this may not always be possible, and usually won’t contain columns not used in the model).</li>
-</ul>
-</li>
-<li>Each row in an <code>augment</code> output matches the corresponding row in the original data.</li>
-<li>If the original data contained rownames, <code>augment</code> turns them into a column called <code>.rownames</code>.</li>
-<li>Newly added column names begin with <code>.</code> to avoid overwriting columns in the original data.</li>
-<li>Common column names include:
-<ul>
-<li>
-<code>.fitted</code>: the predicted values, on the same scale as the data.</li>
-<li>
-<code>.resid</code>: residuals: the actual y values minus the fitted values</li>
-<li>
-<code>.cluster</code>: cluster assignments</li>
-</ul>
-</li>
-</ul>
-</div>
-<div id="glance-functions" class="section level3">
-<h3 class="hasAnchor">
-<a href="#glance-functions" class="anchor"></a>glance functions</h3>
-<ul>
-<li>
-<code>glance</code> always returns a one-row data frame.
-<ul>
-<li>The only exception is that <code><a href="reference/glance.html">glance(NULL)</a></code> returns an empty data frame.</li>
-</ul>
-</li>
-<li>We avoid including arguments that were <em>given</em> to the modeling function. For example, a <code>glm</code> glance output does not need to contain a field for <code>family</code>, since that is decided by the user calling <code>glm</code> rather than the modeling function itself.</li>
-<li>Common column names include:
-<ul>
-<li>
-<code>r.squared</code> the fraction of variance explained by the model</li>
-<li>
-<code>adj.r.squared</code> R^2 adjusted based on the degrees of freedom</li>
-<li>
-<code>sigma</code> the square root of the estimated variance of the residuals</li>
-</ul>
-</li>
-</ul>
-</div>
-<div id="code-of-conduct" class="section level3">
-<h3 class="hasAnchor">
-<a href="#code-of-conduct" class="anchor"></a>Code of Conduct</h3>
-<p>Please note that this project is released with a <a href="CONDUCT.html">Contributor Code of Conduct</a>. By participating in this project you agree to abide by its terms.</p>
+<a href="#contributing" class="anchor"></a>Contributing</h3>
+<p>We welcome contributions of all types!</p>
+<p>If you have never made a pull request to an R package before, broom is an excellent place to start. Find an <a href="https://github.com/tidyverse/broom/issues/">issue</a> with the <strong>Beginner Friendly</strong> tag and comment that you’d like to take it on and we’ll help you get started.</p>
+<p>We encourage typo corrections, bug reports, bug fixes and feature requests. Feedback on the clarity of the documentation is especially valuable.</p>
+<p>If you are interested in adding new tidiers methods to broom, please read <code><a href="articles/adding-tidiers.html">vignette("adding-tidiers")</a></code>.</p>
+<p>We have a <a href="CODE_OF_CONDUCT.html">Contributor Code of Conduct</a>. By participating in broom you agree to abide by its terms.</p>
 </div>
 </div>
 </div>
@@ -442,6 +196,7 @@ lmfit
 <h2>Developers</h2>
 <ul class="list-unstyled">
 <li>David Robinson <br><small class="roles"> Author, maintainer </small>  </li>
+<li>Alex Hayes <br><small class="roles"> Author </small>  </li>
 <li><a href="authors.html">All authors...</a></li>
 </ul>
 </div>
@@ -461,12 +216,12 @@ lmfit
 
 
       <footer><div class="tidyverse">
-  <p>broom is a part of the <strong>tidyverse</strong>, an ecosystem of packages designed with common APIs and a shared philosophy. Learn more at <a href="http://tidyverse.org">tidyverse.org</a>.</p>
+  <p>broom is a part of the <strong>tidyverse</strong>, an ecosystem of packages designed with common APIs and a shared philosophy. Learn more at <a href="https://tidyverse.org">tidyverse.org</a>.</p>
 </div>
 
 <div class="author">
-  <p>Developed by David Robinson.</p>
-  <p>Site built by <a href="http://pkgdown.r-lib.org">pkgdown</a>.</p>
+  <p>Developed by David Robinson, Alex Hayes.</p>
+  <p>Site built by <a href="https://pkgdown.r-lib.org">pkgdown</a>.</p>
 </div>
 
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-115082821-1"></script><script>

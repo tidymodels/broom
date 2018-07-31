@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Tidying methods for principal components analysis via <code>prcomp</code> — prcomp_tidiers • broom</title>
+<title>Tidying methods for principal components analysis via <code>prcomp()</code> — prcomp_tidiers • broom</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -101,8 +101,8 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Tidying methods for principal components analysis via <code>prcomp</code></h1>
-    <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/prcomp_tidiers.R'><code>R/prcomp_tidiers.R</code></a></small>
+    <h1>Tidying methods for principal components analysis via <code>prcomp()</code></h1>
+    <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/stats-prcomp-tidiers.R'><code>R/stats-prcomp-tidiers.R</code></a></small>
     <div class="hidden name"><code>prcomp_tidiers.Rd</code></div>
     </div>
 
@@ -126,7 +126,7 @@ with either the eigenvectors representing each row or each column.</p>
     <tr>
       <th>x</th>
       <td><p>an object of class <code>"prcomp"</code> resulting from a call to
-<code><a href='http://www.rdocumentation.org/packages/stats/topics/prcomp'>prcomp</a></code></p></td>
+<code><a href='http://www.rdocumentation.org/packages/stats/topics/prcomp'>stats::prcomp()</a></code></p></td>
     </tr>
     <tr>
       <th>matrix</th>
@@ -161,27 +161,27 @@ components are sought.</p></td>
 structure depends on the method chosen.</p>
 <p>If <code>matrix</code> is "u", "samples", or "x", the <code>tidy</code> method
 returns</p><dl class='dl-horizontal'>
-   <dt><code>row</code></dt><dd><p>The sample labels (rownames) of the data set on
-  which PCA was performed</p></dd>
-  <dt><code>PC</code></dt><dd><p>An integer vector indicating the principal component</p></dd>
-  <dt><code>value</code></dt><dd><p>The value of the eigenvector (axis score) on the
-  indicated principal component</p></dd>
+<dt><code>row</code></dt><dd><p>The sample labels (rownames) of the data set on
+which PCA was performed</p></dd>
+<dt><code>PC</code></dt><dd><p>An integer vector indicating the principal component</p></dd>
+<dt><code>value</code></dt><dd><p>The value of the eigenvector (axis score) on the
+indicated principal component</p></dd>
 </dl>
 
 <p>If <code>matrix</code> is "v", "variables", or "rotation", the <code>tidy</code> method
 returns</p><dl class='dl-horizontal'>
-   <dt><code>row</code></dt><dd><p>The variable labels (colnames) of the data set on
-  which PCA was performed</p></dd>
-  <dt><code>PC</code></dt><dd><p>An integer vector indicating the principal component</p></dd>
-  <dt><code>value</code></dt><dd><p>The value of the eigenvector (axis score) on the
-  indicated principal component</p></dd>
+<dt><code>row</code></dt><dd><p>The variable labels (colnames) of the data set on
+which PCA was performed</p></dd>
+<dt><code>PC</code></dt><dd><p>An integer vector indicating the principal component</p></dd>
+<dt><code>value</code></dt><dd><p>The value of the eigenvector (axis score) on the
+indicated principal component</p></dd>
 </dl>
 
 <p>If <code>matrix</code> is "d" or "pcs", the <code>tidy</code> method returns</p><dl class='dl-horizontal'>
-  <dt><code>PC</code></dt><dd><p>An integer vector indicating the principal component</p></dd>
-  <dt><code>std.dev</code></dt><dd><p>Standard deviation explained by this PC</p></dd>
-  <dt><code>percent</code></dt><dd><p>Percentage of variation explained</p></dd>
-  <dt><code>cumulative</code></dt><dd><p>Cumulative percentage of variation explained</p></dd>
+<dt><code>PC</code></dt><dd><p>An integer vector indicating the principal component</p></dd>
+<dt><code>std.dev</code></dt><dd><p>Standard deviation explained by this PC</p></dd>
+<dt><code>percent</code></dt><dd><p>Percentage of variation explained</p></dd>
+<dt><code>cumulative</code></dt><dd><p>Cumulative percentage of variation explained</p></dd>
 </dl>
 
 <p>The <code>augment.prcomp</code> method returns a data frame containing
@@ -191,7 +191,7 @@ either the original data or the new data if supplied via <code>data</code> or
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code>prcomp</code>, <a href='svd_tidiers.html'>svd_tidiers</a></p></div>
+    <div class='dont-index'><p><code>prcomp()</code>, svd_tidiers</p></div>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
@@ -199,27 +199,33 @@ either the original data or the new data if supplied via <code>data</code> or
 <span class='no'>pc</span> <span class='kw'>&lt;-</span> <span class='fu'>prcomp</span>(<span class='no'>USArrests</span>, <span class='kw'>scale</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
 
 <span class='co'># information about rotation</span>
-<span class='fu'>head</span>(<span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>pc</span>))</div><div class='output co'>#&gt;          row PC      value
-#&gt; 1    Alabama  1 -0.9756604
-#&gt; 2     Alaska  1 -1.9305379
-#&gt; 3    Arizona  1 -1.7454429
-#&gt; 4   Arkansas  1  0.1399989
-#&gt; 5 California  1 -2.4986128
-#&gt; 6   Colorado  1 -1.4993407</div><div class='input'>
+<span class='fu'>head</span>(<span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>pc</span>))</div><div class='output co'>#&gt; # A tibble: 6 x 3
+#&gt;   row           PC  value
+#&gt;   &lt;fct&gt;      &lt;dbl&gt;  &lt;dbl&gt;
+#&gt; 1 Alabama        1 -0.976
+#&gt; 2 Alaska         1 -1.93 
+#&gt; 3 Arizona        1 -1.75 
+#&gt; 4 Arkansas       1  0.140
+#&gt; 5 California     1 -2.50 
+#&gt; 6 Colorado       1 -1.50 </div><div class='input'>
 <span class='co'># information about samples (states)</span>
-<span class='fu'>head</span>(<span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>pc</span>, <span class='st'>"samples"</span>))</div><div class='output co'>#&gt;          row PC      value
-#&gt; 1    Alabama  1 -0.9756604
-#&gt; 2     Alaska  1 -1.9305379
-#&gt; 3    Arizona  1 -1.7454429
-#&gt; 4   Arkansas  1  0.1399989
-#&gt; 5 California  1 -2.4986128
-#&gt; 6   Colorado  1 -1.4993407</div><div class='input'>
+<span class='fu'>head</span>(<span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>pc</span>, <span class='st'>"samples"</span>))</div><div class='output co'>#&gt; # A tibble: 6 x 3
+#&gt;   row           PC  value
+#&gt;   &lt;fct&gt;      &lt;dbl&gt;  &lt;dbl&gt;
+#&gt; 1 Alabama        1 -0.976
+#&gt; 2 Alaska         1 -1.93 
+#&gt; 3 Arizona        1 -1.75 
+#&gt; 4 Arkansas       1  0.140
+#&gt; 5 California     1 -2.50 
+#&gt; 6 Colorado       1 -1.50 </div><div class='input'>
 <span class='co'># information about PCs</span>
-<span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>pc</span>, <span class='st'>"pcs"</span>)</div><div class='output co'>#&gt;   PC   std.dev percent cumulative
-#&gt; 1  1 1.5748783 0.62006    0.62006
-#&gt; 2  2 0.9948694 0.24744    0.86750
-#&gt; 3  3 0.5971291 0.08914    0.95664
-#&gt; 4  4 0.4164494 0.04336    1.00000</div><div class='input'>
+<span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>pc</span>, <span class='st'>"pcs"</span>)</div><div class='output co'>#&gt; # A tibble: 4 x 4
+#&gt;      PC std.dev percent cumulative
+#&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;      &lt;dbl&gt;
+#&gt; 1     1   1.57   0.620       0.620
+#&gt; 2     2   0.995  0.247       0.868
+#&gt; 3     3   0.597  0.0891      0.957
+#&gt; 4     4   0.416  0.0434      1    </div><div class='input'>
 <span class='co'># state map</span>
 <span class='fu'>library</span>(<span class='no'>dplyr</span>)
 <span class='fu'>library</span>(<span class='no'>ggplot2</span>)
@@ -233,24 +239,20 @@ either the original data or the new data if supplied via <code>data</code> or
   <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/facet_wrap'>facet_wrap</a></span>(~ <span class='no'>PC</span>) +
   <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/ggtheme'>theme_void</a></span>() +
   <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/labs'>ggtitle</a></span>(<span class='st'>"Principal components of arrest data"</span>)</div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Attachement du package : 'maps'</span></div><div class='output co'>#&gt; <span class='message'>The following object is masked from 'package:mclust':</span>
+#&gt; <span class='message'>Attaching package: 'maps'</span></div><div class='output co'>#&gt; <span class='message'>The following object is masked from 'package:mclust':</span>
 #&gt; <span class='message'></span>
 #&gt; <span class='message'>    map</span></div><div class='img'><img src='prcomp_tidiers-1.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='no'>au</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='augment.html'>augment</a></span>(<span class='no'>pc</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>USArrests</span>)
-<span class='fu'>head</span>(<span class='no'>au</span>)</div><div class='output co'>#&gt;    .rownames Murder Assault UrbanPop Rape .fittedPC1 .fittedPC2  .fittedPC3
-#&gt; 1    Alabama   13.2     236       58 21.2 -0.9756604  1.1220012 -0.43980366
-#&gt; 2     Alaska   10.0     263       48 44.5 -1.9305379  1.0624269  2.01950027
-#&gt; 3    Arizona    8.1     294       80 31.0 -1.7454429 -0.7384595  0.05423025
-#&gt; 4   Arkansas    8.8     190       50 19.5  0.1399989  1.1085423  0.11342217
-#&gt; 5 California    9.0     276       91 40.6 -2.4986128 -1.5274267  0.59254100
-#&gt; 6   Colorado    7.9     204       78 38.7 -1.4993407 -0.9776297  1.08400162
-#&gt;     .fittedPC4
-#&gt; 1  0.154696581
-#&gt; 2 -0.434175454
-#&gt; 3 -0.826264240
-#&gt; 4 -0.180973554
-#&gt; 5 -0.338559240
-#&gt; 6  0.001450164</div><div class='input'>
+<span class='fu'>head</span>(<span class='no'>au</span>)</div><div class='output co'>#&gt; # A tibble: 6 x 9
+#&gt;   .rownames  Murder Assault UrbanPop  Rape .fittedPC1 .fittedPC2 .fittedPC3
+#&gt;   &lt;fct&gt;       &lt;dbl&gt;   &lt;int&gt;    &lt;int&gt; &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt;
+#&gt; 1 Alabama      13.2     236       58  21.2     -0.976      1.12     -0.440 
+#&gt; 2 Alaska       10       263       48  44.5     -1.93       1.06      2.02  
+#&gt; 3 Arizona       8.1     294       80  31       -1.75      -0.738     0.0542
+#&gt; 4 Arkansas      8.8     190       50  19.5      0.140      1.11      0.113 
+#&gt; 5 California    9       276       91  40.6     -2.50      -1.53      0.593 
+#&gt; 6 Colorado      7.9     204       78  38.7     -1.50      -0.978     1.08  
+#&gt; # ... with 1 more variable: .fittedPC4 &lt;dbl&gt;</div><div class='input'>
 <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/ggplot'>ggplot</a></span>(<span class='no'>au</span>, <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/aes'>aes</a></span>(<span class='no'>.fittedPC1</span>, <span class='no'>.fittedPC2</span>)) +
   <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/geom_point'>geom_point</a></span>() +
   <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/geom_text'>geom_text</a></span>(<span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/aes'>aes</a></span>(<span class='kw'>label</span> <span class='kw'>=</span> <span class='no'>.rownames</span>), <span class='kw'>vjust</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>hjust</span> <span class='kw'>=</span> <span class='fl'>1</span>)</div><div class='img'><img src='prcomp_tidiers-2.png' alt='' width='700' height='433' /></div><div class='input'>

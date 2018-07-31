@@ -102,7 +102,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Tidiers for lmRob and glmRob objects</h1>
-    <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/robust_tidiers.R'><code>R/robust_tidiers.R</code></a></small>
+    <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/robust-tidiers.R'><code>R/robust-tidiers.R</code></a></small>
     <div class="hidden name"><code>robust_tidiers.Rd</code></div>
     </div>
 
@@ -148,22 +148,22 @@ methods simply pass it on to the linear model tidiers.</p>
 
     <p>All tidying methods return a data.frame without rownames, whose
 structure depends on the method chosen.</p>
-<p><code>tidy</code> and <code>augment</code> return the same results as <code><a href='lm_tidiers.html'>lm_tidiers</a></code>.</p>
+<p><code>tidy</code> and <code>augment</code> return the same results as <code><a href='lm_tidiers.html'>lm_tidiers()</a></code>.</p>
 <p>On an <code>lmRob</code> <code>glance</code> returns a one-row data frame with the following columns:</p>
 <dt>r.squared</dt><dd><p>R-squared</p></dd>
-  <dt>deviance</dt><dd><p>Robust deviance</p></dd>
-  <dt>sigma</dt><dd><p>Residual scale estimate</p></dd>
-  <dt>df.residual</dt><dd><p>Number of residual degrees of freedom</p></dd>
+<dt>deviance</dt><dd><p>Robust deviance</p></dd>
+<dt>sigma</dt><dd><p>Residual scale estimate</p></dd>
+<dt>df.residual</dt><dd><p>Number of residual degrees of freedom</p></dd>
 
 On an glmRob glance returns a one-row data frame with the following columns:
-  <dt>deviance</dt><dd><p>Robust deviance</p></dd>
-  <dt>null.deviance</dt><dd><p>Deviance under the null model</p></dd>
-  <dt>df.residual</dt><dd><p>Number of residual degrees of freedom</p></dd>
+<dt>deviance</dt><dd><p>Robust deviance</p></dd>
+<dt>null.deviance</dt><dd><p>Deviance under the null model</p></dd>
+<dt>df.residual</dt><dd><p>Number of residual degrees of freedom</p></dd>
 
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='lm_tidiers.html'>lm_tidiers</a></code>, <code><a href='http://www.rdocumentation.org/packages/robust/topics/lmRob'>lmRob</a></code>, <code><a href='http://www.rdocumentation.org/packages/robust/topics/glmRob'>glmRob</a></code></p></div>
+    <div class='dont-index'><p><code><a href='lm_tidiers.html'>lm_tidiers()</a></code>, <code><a href='http://www.rdocumentation.org/packages/robust/topics/lmRob'>robust::lmRob()</a></code>, <code><a href='http://www.rdocumentation.org/packages/robust/topics/glmRob'>robust::glmRob()</a></code></p></div>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
@@ -177,8 +177,8 @@ On an glmRob glance returns a one-row data frame with the following columns:
 
   <span class='no'>gm</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/robust/topics/glmRob'>glmRob</a></span>(<span class='no'>am</span> ~ <span class='no'>wt</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>mtcars</span>, <span class='kw'>family</span> <span class='kw'>=</span> <span class='st'>"binomial"</span>)
   <span class='fu'><a href='glance.html'>glance</a></span>(<span class='no'>gm</span>)
-}</div><div class='output co'>#&gt;   deviance null.deviance df.residual
-#&gt; 1 19.17608      44.36142          30</div><div class='input'>
+}</div><div class='output co'>#&gt; <span class='message'>Error: package or namespace load failed for 'robust' in loadNamespace(j &lt;- i[[1L]], c(lib.loc, .libPaths()), versionCheck = vI[[j]]):</span>
+#&gt; <span class='message'> there is no package called 'robustbase'</span></div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

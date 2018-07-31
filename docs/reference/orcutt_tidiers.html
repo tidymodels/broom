@@ -102,7 +102,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Tidiers for Cochrane Orcutt object</h1>
-    <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/orcutt_tidiers.R'><code>R/orcutt_tidiers.R</code></a></small>
+    <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/orcutt-tidiers.R'><code>R/orcutt-tidiers.R</code></a></small>
     <div class="hidden name"><code>orcutt_tidiers.Rd</code></div>
     </div>
 
@@ -128,7 +128,7 @@ and beta coefficients in a linear fit.</p>
     </tr>
     <tr>
       <th>...</th>
-      <td><p>Extra arguments passed on to <code><a href='lm_tidiers.html'>tidy.lm</a></code></p></td>
+      <td><p>Extra arguments passed on to <code><a href='lm_tidiers.html'>tidy.lm()</a></code></p></td>
     </tr>
     </table>
     
@@ -137,39 +137,37 @@ and beta coefficients in a linear fit.</p>
     <p>All tidying methods return a data.frame without rownames, whose
 structure depends on the method chosen.</p>
 <p><code>tidy</code> returns the same information as
-<code><a href='lm_tidiers.html'>tidy.lm</a></code>, though without confidence interval options.</p>
+<code><a href='lm_tidiers.html'>tidy.lm()</a></code>, though without confidence interval options.</p>
 <p><code>glance</code></p>
 <p><code>glance</code> returns a one-row data frame with the following columns:</p>
 <dt>r.squared</dt><dd><p>R-squared</p></dd>
-  <dt>adj.r.squared</dt><dd><p>Adjusted R-squared</p></dd>
-  <dt>rho</dt><dd><p>Spearman's rho autocorrelation</p></dd>
-  <dt>number.interaction</dt><dd><p>Number of interactions</p></dd>
-  <dt>dw.original</dt><dd><p>Durbin-Watson statistic of original fit</p></dd>
-  <dt>p.value.original</dt><dd><p>P-value of original Durbin-Watson statistic</p></dd>
-  <dt>dw.transformed</dt><dd><p>Durbin-Watson statistic of transformed fit</p></dd>
-  <dt>p.value.transformed</dt><dd><p>P-value of autocorrelation after transformation</p></dd>
+<dt>adj.r.squared</dt><dd><p>Adjusted R-squared</p></dd>
+<dt>rho</dt><dd><p>Spearman's rho autocorrelation</p></dd>
+<dt>number.interaction</dt><dd><p>Number of interactions</p></dd>
+<dt>dw.original</dt><dd><p>Durbin-Watson statistic of original fit</p></dd>
+<dt>p.value.original</dt><dd><p>P-value of original Durbin-Watson statistic</p></dd>
+<dt>dw.transformed</dt><dd><p>Durbin-Watson statistic of transformed fit</p></dd>
+<dt>p.value.transformed</dt><dd><p>P-value of autocorrelation after transformation</p></dd>
 
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
 <span class='no'>reg</span> <span class='kw'>&lt;-</span> <span class='fu'>lm</span>(<span class='no'>mpg</span> ~ <span class='no'>wt</span> + <span class='no'>qsec</span> + <span class='no'>disp</span>, <span class='no'>mtcars</span>)
-<span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>reg</span>)</div><div class='output co'>#&gt;          term      estimate  std.error   statistic      p.value
-#&gt; 1 (Intercept) 19.7775575655 5.93828659  3.33051585 0.0024420674
-#&gt; 2          wt -5.0344097167 1.22411993 -4.11267686 0.0003104157
-#&gt; 3        qsec  0.9266492353 0.34209668  2.70873496 0.0113897664
-#&gt; 4        disp -0.0001278962 0.01056025 -0.01211109 0.9904228666</div><div class='input'>
+<span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>reg</span>)</div><div class='output co'>#&gt; # A tibble: 4 x 5
+#&gt;   term          estimate std.error statistic  p.value
+#&gt;   &lt;chr&gt;            &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
+#&gt; 1 (Intercept)  19.8         5.94      3.33   0.00244 
+#&gt; 2 wt           -5.03        1.22     -4.11   0.000310
+#&gt; 3 qsec          0.927       0.342     2.71   0.0114  
+#&gt; 4 disp         -0.000128    0.0106   -0.0121 0.990   </div><div class='input'>
 <span class='kw'>if</span> (<span class='fu'>require</span>(<span class='st'>"orcutt"</span>, <span class='kw'>quietly</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)) {
   <span class='no'>co</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/orcutt/topics/cochrane.orcutt'>cochrane.orcutt</a></span>(<span class='no'>reg</span>)
   <span class='no'>co</span>
 
   <span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>co</span>)
   <span class='fu'><a href='glance.html'>glance</a></span>(<span class='no'>co</span>)
-}</div><div class='output co'>#&gt;   r.squared adj.r.squared       rho number.interaction dw.original
-#&gt; 1 0.7993079     0.7770088 0.2681905                  7    1.495745
-#&gt;   p.value.original dw.transformed p.value.transformed
-#&gt; 1       0.04063484       2.056964           0.5210259</div><div class='input'>
-</div></pre>
+}</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

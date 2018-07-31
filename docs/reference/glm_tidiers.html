@@ -102,7 +102,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Tidying methods for a glm object</h1>
-    <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/glm_tidiers.R'><code>R/glm_tidiers.R</code></a></small>
+    <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/stats-glm-tidiers.R'><code>R/stats-glm-tidiers.R</code></a></small>
     <div class="hidden name"><code>glm_tidiers.Rd</code></div>
     </div>
 
@@ -114,6 +114,12 @@ by <a href='lm_tidiers.html'>lm_tidiers</a>.</p>
     </div>
 
     <pre class="usage"><span class='co'># S3 method for glm</span>
+<span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>x</span>, <span class='no'>...</span>)
+
+<span class='co'># S3 method for glm</span>
+<span class='fu'><a href='augment.html'>augment</a></span>(<span class='no'>x</span>, <span class='no'>...</span>)
+
+<span class='co'># S3 method for glm</span>
 <span class='fu'><a href='glance.html'>glance</a></span>(<span class='no'>x</span>, <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -132,28 +138,30 @@ by <a href='lm_tidiers.html'>lm_tidiers</a>.</p>
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p><code>tidy</code> and <code>augment</code> return the same values as do
-<code><a href='lm_tidiers.html'>tidy.lm</a></code> and <code><a href='lm_tidiers.html'>augment.lm</a></code>.</p>
+<code><a href='lm_tidiers.html'>tidy.lm()</a></code> and <code><a href='lm_tidiers.html'>augment.lm()</a></code>.</p>
 <p><code>glance</code> returns a one-row data.frame with the columns</p>
 <dt>null.deviance</dt><dd><p>the deviance of the null model</p></dd>
-  <dt>df.null</dt><dd><p>the residual degrees of freedom for the null model</p></dd>
-  <dt>logLik</dt><dd><p>the data's log-likelihood under the model</p></dd>
-  <dt>AIC</dt><dd><p>the Akaike Information Criterion</p></dd>
-  <dt>BIC</dt><dd><p>the Bayesian Information Criterion</p></dd>
-  <dt>deviance</dt><dd><p>deviance</p></dd>
-  <dt>df.residual</dt><dd><p>residual degrees of freedom</p></dd>
+<dt>df.null</dt><dd><p>the residual degrees of freedom for the null model</p></dd>
+<dt>logLik</dt><dd><p>the data's log-likelihood under the model</p></dd>
+<dt>AIC</dt><dd><p>the Akaike Information Criterion</p></dd>
+<dt>BIC</dt><dd><p>the Bayesian Information Criterion</p></dd>
+<dt>deviance</dt><dd><p>deviance</p></dd>
+<dt>df.residual</dt><dd><p>residual degrees of freedom</p></dd>
 
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='lm_tidiers.html'>tidy.lm</a></code> and <code><a href='lm_tidiers.html'>augment.lm</a></code>. Also <code>glm</code>, which
+    <div class='dont-index'><p><code><a href='lm_tidiers.html'>tidy.lm()</a></code> and <code><a href='lm_tidiers.html'>augment.lm()</a></code>. Also <code>glm()</code>, which
 computes the values reported by the <code>glance</code> method.</p></div>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
 <span class='no'>g</span> <span class='kw'>&lt;-</span> <span class='fu'>glm</span>(<span class='no'>am</span> ~ <span class='no'>mpg</span>, <span class='no'>mtcars</span>, <span class='kw'>family</span> <span class='kw'>=</span> <span class='st'>"binomial"</span>)
-<span class='fu'><a href='glance.html'>glance</a></span>(<span class='no'>g</span>)</div><div class='output co'>#&gt;   null.deviance df.null    logLik      AIC      BIC deviance df.residual
-#&gt; 1      43.22973      31 -14.83758 33.67517 36.60664 29.67517          30</div><div class='input'>
+<span class='fu'><a href='glance.html'>glance</a></span>(<span class='no'>g</span>)</div><div class='output co'>#&gt; # A tibble: 1 x 7
+#&gt;   null.deviance df.null logLik   AIC   BIC deviance df.residual
+#&gt;           &lt;dbl&gt;   &lt;int&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;       &lt;int&gt;
+#&gt; 1          43.2      31  -14.8  33.7  36.6     29.7          30</div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

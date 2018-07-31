@@ -102,7 +102,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Tidying methods for multinomial logistic regression models</h1>
-    <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/multinom_tidiers.R'><code>R/multinom_tidiers.R</code></a></small>
+    <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/nnet-tidiers.R'><code>R/nnet-tidiers.R</code></a></small>
     <div class="hidden name"><code>multinom_tidiers.Rd</code></div>
     </div>
 
@@ -154,27 +154,27 @@ The structure depends on the method chosen.</p>
 <p><code>tidy.multinom</code> returns one row for each coefficient at each
 level of the response variable, with six columns:</p>
 <dt>y.value</dt><dd><p>The response level</p></dd>
-  <dt>term</dt><dd><p>The term in the model being estimated and tested</p></dd>
-  <dt>estimate</dt><dd><p>The estimated coefficient</p></dd>
-  <dt>std.error</dt><dd><p>The standard error from the linear model</p></dd>
-  <dt>statistic</dt><dd><p>Wald z-statistic</p></dd>
-  <dt>p.value</dt><dd><p>two-sided p-value</p></dd>
+<dt>term</dt><dd><p>The term in the model being estimated and tested</p></dd>
+<dt>estimate</dt><dd><p>The estimated coefficient</p></dd>
+<dt>std.error</dt><dd><p>The standard error from the linear model</p></dd>
+<dt>statistic</dt><dd><p>Wald z-statistic</p></dd>
+<dt>p.value</dt><dd><p>two-sided p-value</p></dd>
 
 If conf.int=TRUE, it also includes columns for conf.low and
-conf.high, computed with confint.
+conf.high, computed with confint().
 
 glance.multinom returns a
 
 glance.multinom returns a one-row data.frame with the columns
-  <dt>edf</dt><dd><p>The effective degrees of freedom</p></dd>
-  <dt>deviance</dt><dd><p>deviance</p></dd>
-  <dt>AIC</dt><dd><p>the Akaike Information Criterion</p></dd>
+<dt>edf</dt><dd><p>The effective degrees of freedom</p></dd>
+<dt>deviance</dt><dd><p>deviance</p></dd>
+<dt>AIC</dt><dd><p>the Akaike Information Criterion</p></dd>
 
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>If <code>conf.int=TRUE</code>, the confidence interval is computed with
-the <code>confint</code> function.</p>
+the <code>confint()</code> function.</p>
 <p>While <code>tidy</code> and <code>glance</code> are supported for "multinom" objects,
 <code>augment</code> is not.</p>
     
@@ -194,7 +194,7 @@ the <code>confint</code> function.</p>
   <span class='no'>fit.gear</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/nnet/topics/multinom'>multinom</a></span>(<span class='no'>gear</span> ~ <span class='no'>mpg</span> + <span class='fu'>factor</span>(<span class='no'>am</span>), <span class='kw'>data</span><span class='kw'>=</span><span class='no'>mtcars</span>)
   <span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>fit.gear</span>)
   <span class='fu'><a href='glance.html'>glance</a></span>(<span class='no'>fit.gear</span>)
-}</div><div class='output co'>#&gt; <span class='message'>Le chargement a nécessité le package : nnet</span></div><div class='output co'>#&gt; 
+}</div><div class='output co'>#&gt; <span class='message'>Loading required package: nnet</span></div><div class='output co'>#&gt; 
 #&gt; brthwt&gt; bwt &lt;- with(birthwt, {
 #&gt; brthwt+ race &lt;- factor(race, labels = c("white", "black", "other"))
 #&gt; brthwt+ ptd &lt;- factor(ptl &gt; 0)
@@ -237,8 +237,10 @@ the <code>confint</code> function.</p>
 #&gt; iter  80 value 14.018282
 #&gt; iter  90 value 14.017126
 #&gt; final  value 14.015374 
-#&gt; converged</div><div class='output co'>#&gt;   edf deviance      AIC
-#&gt; 1   6 28.03075 40.03075</div><div class='input'>
+#&gt; converged</div><div class='output co'>#&gt; # A tibble: 1 x 3
+#&gt;     edf deviance   AIC
+#&gt;   &lt;dbl&gt;    &lt;dbl&gt; &lt;dbl&gt;
+#&gt; 1     6     28.0  40.0</div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

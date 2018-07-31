@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Tidying methods for anova and AOV objects — anova_tidiers • broom</title>
+<title>Tidying methods for ANOVA and AOV objects — anova_tidiers • broom</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -101,8 +101,8 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Tidying methods for anova and AOV objects</h1>
-    <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/anova_tidiers.R'><code>R/anova_tidiers.R</code></a></small>
+    <h1>Tidying methods for ANOVA and AOV objects</h1>
+    <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/stats-anova-tidiers.R'><code>R/stats-anova-tidiers.R</code></a></small>
     <div class="hidden name"><code>anova_tidiers.Rd</code></div>
     </div>
 
@@ -128,25 +128,25 @@ Only a <code>tidy</code> method is provided, not an <code>augment</code> or
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>x</th>
-      <td><p>An object of class "anova", "aov", or "aovlist"</p></td>
+      <td><p>An object of class <code>anova</code>, <code>aov</code>, or <code>aovlist</code>.</p></td>
     </tr>
     <tr>
       <th>...</th>
-      <td><p>extra arguments (not used)</p></td>
+      <td><p>Additional arguments (not used).</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A data.frame with columns</p>
+    <p>A `tibble`` with columns</p>
 <dt>term</dt><dd><p>Term within the model, or "Residuals"</p></dd>
-  <dt>df</dt><dd><p>Degrees of freedom used by this term in the model</p></dd>
-  <dt>sumsq</dt><dd><p>Sum of squares explained by this term</p></dd>
-  <dt>meansq</dt><dd><p>Mean of sum of squares among degrees of freedom</p></dd>
-  <dt>statistic</dt><dd><p>F statistic</p></dd>
-  <dt>p.value</dt><dd><p>P-value from F test</p></dd>
+<dt>df</dt><dd><p>Degrees of freedom used by this term in the model</p></dd>
+<dt>sumsq</dt><dd><p>Sum of squares explained by this term</p></dd>
+<dt>meansq</dt><dd><p>Mean of sum of squares among degrees of freedom</p></dd>
+<dt>statistic</dt><dd><p>F statistic</p></dd>
+<dt>p.value</dt><dd><p>P-value from F test</p></dd>
 
-In the case of an "aovlist" object, there is also a stratum
+In the case of an aovlist object, there is also a stratum
 column describing the error stratum
 
     
@@ -162,23 +162,30 @@ also supported.</p>
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
 <span class='no'>a</span> <span class='kw'>&lt;-</span> <span class='fu'>anova</span>(<span class='fu'>lm</span>(<span class='no'>mpg</span> ~ <span class='no'>wt</span> + <span class='no'>qsec</span> + <span class='no'>disp</span>, <span class='no'>mtcars</span>))
-<span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>a</span>)</div><div class='output co'>#&gt;        term df        sumsq       meansq    statistic      p.value
-#&gt; 1        wt  1 8.477252e+02 8.477252e+02 1.214366e+02 1.081618e-11
-#&gt; 2      qsec  1 8.285831e+01 8.285831e+01 1.186944e+01 1.817334e-03
-#&gt; 3      disp  1 1.023935e-03 1.023935e-03 1.466785e-04 9.904229e-01
-#&gt; 4 Residuals 28 1.954626e+02 6.980807e+00           NA           NA</div><div class='input'>
+<span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>a</span>)</div><div class='output co'>#&gt; # A tibble: 4 x 6
+#&gt;   term         df     sumsq    meansq  statistic   p.value
+#&gt;   &lt;chr&gt;     &lt;int&gt;     &lt;dbl&gt;     &lt;dbl&gt;      &lt;dbl&gt;     &lt;dbl&gt;
+#&gt; 1 wt            1 848.      848.      121.        1.08e-11
+#&gt; 2 qsec          1  82.9      82.9      11.9       1.82e- 3
+#&gt; 3 disp          1   0.00102   0.00102   0.000147  9.90e- 1
+#&gt; 4 Residuals    28 195.        6.98     NA        NA       </div><div class='input'>
 <span class='no'>a</span> <span class='kw'>&lt;-</span> <span class='fu'>aov</span>(<span class='no'>mpg</span> ~ <span class='no'>wt</span> + <span class='no'>qsec</span> + <span class='no'>disp</span>, <span class='no'>mtcars</span>)
-<span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>a</span>)</div><div class='output co'>#&gt;        term df        sumsq       meansq    statistic      p.value
-#&gt; 1        wt  1 8.477252e+02 8.477252e+02 1.214366e+02 1.081618e-11
-#&gt; 2      qsec  1 8.285831e+01 8.285831e+01 1.186944e+01 1.817334e-03
-#&gt; 3      disp  1 1.023935e-03 1.023935e-03 1.466785e-04 9.904229e-01
-#&gt; 4 Residuals 28 1.954626e+02 6.980807e+00           NA           NA</div><div class='input'>
+<span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>a</span>)</div><div class='output co'>#&gt; # A tibble: 4 x 6
+#&gt;   term         df     sumsq    meansq  statistic   p.value
+#&gt;   &lt;chr&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;      &lt;dbl&gt;     &lt;dbl&gt;
+#&gt; 1 wt            1 848.      848.      121.        1.08e-11
+#&gt; 2 qsec          1  82.9      82.9      11.9       1.82e- 3
+#&gt; 3 disp          1   0.00102   0.00102   0.000147  9.90e- 1
+#&gt; 4 Residuals    28 195.        6.98     NA        NA       </div><div class='input'>
 <span class='no'>al</span> <span class='kw'>&lt;-</span> <span class='fu'>aov</span>(<span class='no'>mpg</span> ~ <span class='no'>wt</span> + <span class='no'>qsec</span> + <span class='fu'>Error</span>(<span class='no'>disp</span> / <span class='no'>am</span>), <span class='no'>mtcars</span>)
-<span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>al</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: ANOVA F-tests on an essentially perfect fit are unreliable</span></div><div class='output co'>#&gt; <span class='warning'>Warning: ANOVA F-tests on an essentially perfect fit are unreliable</span></div><div class='output co'>#&gt;        term df     sumsq    meansq statistic    p.value stratum
-#&gt; 1 Residuals  0   0.00000       NaN        NA         NA    disp
-#&gt; 2 Residuals  0   0.00000       NaN        NA         NA disp:am
-#&gt; 3      qsec  1  34.16791 34.167910  4.720651 0.03874957  Within
-#&gt; 4 Residuals 27 195.42508  7.237966        NA         NA  Within</div><div class='input'>
+<span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>al</span>)</div><div class='output co'>#&gt; # A tibble: 5 x 7
+#&gt;   stratum term         df   sumsq  meansq statistic  p.value
+#&gt;   &lt;chr&gt;   &lt;chr&gt;     &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
+#&gt; 1 disp    wt            1 809.    809.        NA    NA      
+#&gt; 2 disp:am wt            1   0.389   0.389     NA    NA      
+#&gt; 3 Within  wt            1  87.2    87.2       12.0   0.00176
+#&gt; 4 Within  qsec          1  34.2    34.2        4.72  0.0387 
+#&gt; 5 Within  Residuals    27 195.      7.24      NA    NA      </div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

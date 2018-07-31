@@ -1,11 +1,19 @@
-context("lmtest tidiers")
+context("lmtest")
 
+skip_if_not_installed("modeltests")
+library(modeltests)
+
+skip_if_not_installed("lmtest")
 library(lmtest)
 
-test_that("tidy.coeftest works", {
-  data(Mandible)
-  fm <- lm(length ~ age, data = Mandible, subset = (age <= 28))
-  ct <- coeftest(fm)
+fit <- lm(length ~ age, data = Mandible, subset = (age <= 28))
+ct <- lmtest::coeftest(fit)
+
+test_that("tidy.coeftest", {
+  
+  check_arguments(tidy.coeftest)
+  
   td <- tidy(ct)
-  check_tidy(td, exp.row = 2, exp.col = 5)
+  check_tidy_output(td)
+  check_dims(td, 2, 5)
 })

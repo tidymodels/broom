@@ -27,7 +27,7 @@
 
       <div class="navbar-brand-container">
         <a class="navbar-brand" href="../index.html">broom</a>
-        <small class="tidyverse">part of the <a href="http://tidyverse.org">tidyverse</a></small>
+        <small class="tidyverse">part of the <a href="https://tidyverse.org">tidyverse</a></small>
       </div>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
@@ -85,7 +85,7 @@
     <div class="page-header toc-ignore">
       <h1>Adding tidiers to broom</h1>
             
-            <h4 class="date">2018-06-08</h4>
+            <h4 class="date">2018-07-26</h4>
       
       <small class="dont-index">Source: <a href="http://github.com/tidyverse/broom/blob/master/vignettes/adding-tidiers.Rmd"><code>vignettes/adding-tidiers.Rmd</code></a></small>
       <div class="hidden name"><code>adding-tidiers.Rmd</code></div>
@@ -100,7 +100,7 @@
 <p>Thank you for your interest in contributing to broom! This document is a <strong>work in progress</strong> describing the conventions that you should follow when adding tidiers to broom.</p>
 <p>General guidelines:</p>
 <ul>
-<li>Try to reach a minimum 90% test coverage for new tidiers.</li>
+<li>Try to reach a minimum 90% test coverage for new tidiers. To check your test coverage we recommend using <code><a href="http://www.rdocumentation.org/packages/covr/topics/report">covr::report()</a></code>.</li>
 <li>
 <code>tidy</code>, <code>glance</code> and <code>augment</code> methods <strong>must</strong> return tibbles.</li>
 <li>Update <code>NEWS.md</code> to reflect the changes you’ve made</li>
@@ -108,7 +108,8 @@
 <li>Use new tidyverse packages such as <code>dplyr</code> and <code>tidyr</code> over older packages such as <code>plyr</code> and <code>reshape2</code>.</li>
 <li>It’s better to have a predictable number of columns and unknown number rows than an unknown number of columns and a predictable number of rows.</li>
 <li>It’s better for users to need to <code><a href="http://www.rdocumentation.org/packages/tidyr/topics/spread">tidyr::spread</a></code>than <code><a href="http://www.rdocumentation.org/packages/tidyr/topics/gather">tidyr::gather</a></code> data after it’s been tidied.</li>
-<li>Feel free to add yourself as a contributor to <code>DESCRIPTION</code>.</li>
+<li>Add yourself as a contributor to <code>DESCRIPTION</code>.</li>
+<li>Pull requests must pass the AppVeyor and Travis CI builds to be merged.</li>
 <li>When in doubt, please reach out to the maintainers. We are happy to help with any questions.</li>
 </ul>
 <p>If you are just getting into open source development, <code>broom</code> is an excellent place to get started and we are more than happy to help. We recommend you start contributing by improving the documentation, writing issues with reproducible errors, or taking on issues tagged <code>beginner-friendly</code>.</p>
@@ -128,13 +129,28 @@
 </li>
 </ul>
 <p>We will keep you updated as we work towards a final solution.</p>
-<!-- - TODO: Helper functions that you should be aware of and use -->
 </div>
+</div>
+<div id="implementing-new-tiders" class="section level1">
+<h1 class="hasAnchor">
+<a href="#implementing-new-tiders" class="anchor"></a>Implementing new tiders</h1>
+<p>NOTE: okay to write <code>tidyverse</code> code to tidy and wrap it in a function. encouraged, in fact.</p>
+<p>We encourage you to develop new tidiers using your favorite tidyverse tools. Pipes are welcome, as is any code that you might write for tidyverse-style interactive data manipulation.</p>
+<p>If you are implementing a new tidier, we recommend taking a look at the internals of the tidying methods for <code>betareg</code> and <code>rq</code> objects and using those as a starting point.</p>
+<p>You should also be aware of the following helper functions:</p>
+<ul>
+<li><code><a href="../reference/finish_glance.html">finish_glance()</a></code></li>
+<li><code><a href="../reference/augment_columns.html">augment_columns()</a></code></li>
+<li><code><a href="../reference/fix_data_frame.html">fix_data_frame()</a></code></li>
+<li><code>validate_augment_input()</code></li>
+</ul>
 </div>
 <div id="documenting-new-tidiers" class="section level1">
 <h1 class="hasAnchor">
 <a href="#documenting-new-tidiers" class="anchor"></a>Documenting new tidiers</h1>
-<p>All new tidiers should be fully documented following the <a href="http://style.tidyverse.org/code-documentation.html">tidyverse code documentation guidelines</a>. Documentation should use full sentences with appropriate punctation. Documentation should also contain at least one but potentially several examples of how the tidiers can be used.</p>
+<p>All new tidiers should be fully documented following the <a href="http://style.tidyverse.org/">tidyverse code documentation guidelines</a>. Documentation should use full sentences with appropriate punctation. Documentation should also contain at least one but potentially several examples of how the tidiers can be used.</p>
+<p>Documentation should be written in R markdown as much as possible.</p>
+<p>There’ll be a major overhaul of documentation later this summer, at which point this portion of the vignette will also get some major updates.</p>
 </div>
 <div id="testing-new-tidiers" class="section level1">
 <h1 class="hasAnchor">
@@ -142,27 +158,43 @@
 <div id="basic-checks" class="section level2">
 <h2 class="hasAnchor">
 <a href="#basic-checks" class="anchor"></a>Basic checks</h2>
-<p>All <code>tidy</code> methods should <code>check_tidy</code>, all <code>glance</code> methods should pass <code>check_glance</code> and all <code>augment</code> methods should pass <code>check_augment</code>. That is, your test should include:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">t &lt;-<span class="st"> </span><span class="kw"><a href="../reference/tidy.html">tidy</a></span>(object)
-g &lt;-<span class="st"> </span><span class="kw"><a href="../reference/glance.html">glance</a></span>(object)
-a &lt;-<span class="st"> </span><span class="kw"><a href="../reference/augment.html">augment</a></span>(object)
+<p>Your tests should include:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">td &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/modelgenerics/topics/generics">tidy</a></span>(object)
+gl &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/modelgenerics/topics/generics">glance</a></span>(object)
 
-<span class="kw">check_tidy</span>(t)
-<span class="kw">check_glance</span>(g)
-<span class="kw">check_augment</span>(a)</code></pre></div>
+<span class="kw">check_tidy_output</span>(td)
+<span class="kw">check_glance_outputs</span>(gl)</code></pre></div>
+<p>The tests for <code>augment</code> are rapidly evolving at the moment, and we’ll follow up with more details on them soon.</p>
+<p>If any of your tests use random number generation, you should call <code>set.seed()</code> in the body of the test.</p>
+<p>In general, we prefer informative errors to magical behaviors or untested success.</p>
+</div>
+<div id="more-complete-checks" class="section level2">
+<h2 class="hasAnchor">
+<a href="#more-complete-checks" class="anchor"></a>More complete checks</h2>
+<ul>
+<li>You can verify that your changes pass existing tests with <code><a href="http://www.rdocumentation.org/packages/devtools/topics/test">devtools::test()</a></code>
+<ul>
+<li>For R &lt; 3.5.0, the number of packages used in the tests exceeds the number R can load. To change this on R 3.4.0 and above, set the environment variable R_MAX_NUM_DLLS to 150.</li>
+<li>For R ≥ 3.5.0, issue has been fixed.</li>
+</ul>
+</li>
+</ul>
 </div>
 <div id="package-dependencies" class="section level2">
 <h2 class="hasAnchor">
 <a href="#package-dependencies" class="anchor"></a>Package dependencies</h2>
-<p>In order to test your tidiers, you may need to add <code>your_package</code> to the <strong>Suggests</strong> section of broom’s DESCRIPTION.</p>
-<p>We are currently in the process of developing a new set of tests for tidying methods. Recommendations on how to test your tidiers will appear here soon.</p>
-<!-- requireNamespace(package, quietly = TRUE)??? -->
-<p>At the moment, pull requests must pass the AppVeyor build to be added to <code>broom</code>. It is okay if the Travis CI build times out.</p>
+<ul>
+<li>In order to test your tidiers, you may need to add <code>your_package</code> to the <strong>Suggests</strong> section of broom’s DESCRIPTION.</li>
+<li>You should then use <code>skip_if_not_installed("my_package")</code> at the beginning of any test that uses <code>my_package</code>.</li>
+<li>Note that testing broom requires a lot of packages. You can install them all with <code><a href="http://www.rdocumentation.org/packages/devtools/topics/install_github">devtools::install_github("tidyverse/broom", dependencies = TRUE)</a></code>.</li>
+</ul>
 </div>
 <div id="catching-edge-cases" class="section level2">
 <h2 class="hasAnchor">
 <a href="#catching-edge-cases" class="anchor"></a>Catching edge cases</h2>
-<p>Many modelling function allow users to specify a variety of options. For example, <code>glm</code> allows various response types via the <code>family</code> argument. Good tests for <code>glm</code> tidying methods would test tidiers on <code>glm</code> objects fit for all acceptable values of <code>family</code>.</p>
+<p>You should test new tidiers on a representative set of <code>my_object</code> objects. At a minimum, you should have a test for each distinct type of fit that appears in the examples for a particular model (if we working with <code><a href="http://www.rdocumentation.org/packages/stats/topics/arima">stats::arima</a></code> models, the tidiers should work for seasonal and non-seasonal models).</p>
+<p>It’s important to test your tidiers for fits estimated with different algorithms (i.e. <code><a href="http://www.rdocumentation.org/packages/stats/topics/arima">stats::arima</a></code> tidier should be tested for <code>method = "CSS-ML"</code>, <code>method = "ML"</code> and <code>method = "ML"</code>). As another example, good tests for <code>glm</code> tidying methods would test tidiers on <code>glm</code> objects fit for all acceptable values of <code>family</code>.</p>
+<p>In short: be sure that you’ve tested your tidiers on models fit with all the major modelling options (both statistical options, and estimation options).</p>
 </div>
 </div>
 <div id="before-submitting-your-pull-request" class="section level1">
@@ -170,19 +202,15 @@ a &lt;-<span class="st"> </span><span class="kw"><a href="../reference/augment.h
 <a href="#before-submitting-your-pull-request" class="anchor"></a>Before submitting your pull request</h1>
 <ul>
 <li>Check that your PR contains a big picture summary of what you’ve done and a brief example usage in the PR text</li>
-<li>If you know how, squash your PR into a single commit. If you don’t know how, don’t worry about it. <!-- (TODO: add link on how to do this) -->
-</li>
 <li>Make sure that you have run and passed:
 <ul>
+<li><code><a href="http://www.rdocumentation.org/packages/devtools/topics/check">devtools::check()</a></code></li>
 <li><code><a href="http://www.rdocumentation.org/packages/devtools/topics/spell_check">devtools::spell_check()</a></code></li>
-<li><code><a href="http://www.rdocumentation.org/packages/goodpractice/topics/gp">goodpractice::gp()</a></code></li>
-<li>R CMD Check</li>
+<li><code>goodpractice::gp()</code></li>
 </ul>
 </li>
-<li>Run <code><a href="http://www.rdocumentation.org/packages/devtools/topics/document">devtools::document()</a></code> but <strong>do not</strong> run <code><a href="http://pkgdown.r-lib.org/reference/build_site.html">pkgdown::build_site()</a></code> unless requested to.</li>
 </ul>
 <p><code>broom</code> doesn’t currently pass all of these. If you are adding new tidiers at the moment, it’s enough for these to throw no warnings for the files you’ve changed.</p>
-<p>If asked to build the site, developers outside the US or UK should run <code>Sys.setlocale("LC_ALL", "English")</code> before <code><a href="http://pkgdown.r-lib.org/reference/build_site.html">pkgdown::build_site()</a></code>. This is so that messages are in English.</p>
 </div>
 <div id="defining-tidiers" class="section level1">
 <h1 class="hasAnchor">
@@ -201,31 +229,32 @@ a &lt;-<span class="st"> </span><span class="kw"><a href="../reference/augment.h
 <h2 class="hasAnchor">
 <a href="#glance" class="anchor"></a><code>glance</code>
 </h2>
-<p>The <code><a href="../reference/glance.html">glance(x, ...)</a></code> method accepts a model object <code>x</code> and returns a tibble with exactly one row containing model level summary information.</p>
-<p>The summary should not include the name of the modelling function or any arguments given to the modelling function. For example, <code><a href="../reference/glance.html">glance(glm_object)</a></code> does not contain a <code>family</code> column.</p>
-<p>In some cases, you may wish to provide model level diagnostics not returned by the original object. If these are easy to compute, feel free to add them. However, <code>broom</code> is not an appropriate place to implement complex or time consuming statistical calculations.</p>
-<p><code>glance</code> should always return the same columns in the same order for an object <code>x</code> of class <code>my_object</code>. If a summary metric such as <code>AIC</code> is not defined in certain circumstances, use <code>NA</code>.</p>
+<p>The <code><a href="http://www.rdocumentation.org/packages/modelgenerics/topics/generics">glance(x, ...)</a></code> method accepts a model object <code>x</code> and returns a tibble with exactly one row containing model level summary information.</p>
+<ul>
+<li><p>Output should not include the name of the modelling function or any arguments given to the modelling function. For example, <code><a href="http://www.rdocumentation.org/packages/modelgenerics/topics/generics">glance(glm_object)</a></code> does not contain a <code>family</code> column.</p></li>
+<li><p>In some cases, you may wish to provide model level diagnostics not returned by the original object. If these are easy to compute, feel free to add them. However, <code>broom</code> is not an appropriate place to implement complex or time consuming calculations.</p></li>
+<li><p><code>glance</code> should always return the same columns in the same order for an object <code>x</code> of class <code>my_object</code>. If a summary metric such as <code>AIC</code> is not defined in certain circumstances, use <code>NA</code>.</p></li>
+</ul>
 </div>
 <div id="augment" class="section level2">
 <h2 class="hasAnchor">
 <a href="#augment" class="anchor"></a><code>augment</code>
 </h2>
-<p>The <code><a href="../reference/augment.html">augment(x, data = NULL, ...)</a></code> method accepts a model object and optionally a data frame <code>data</code> and adds columns of observation level information to <code>data</code>. <code>augment</code> returns a <code>tibble</code> with the same number of rows as <code>data</code>.</p>
+<p>The <code><a href="http://www.rdocumentation.org/packages/modelgenerics/topics/generics">augment(x, data = NULL, ...)</a></code> method accepts a model object and optionally a data frame <code>data</code> and adds columns of observation level information to <code>data</code>. <code>augment</code> returns a <code>tibble</code> with the same number of rows as <code>data</code>.</p>
 <p>The <code>data</code> argument can be any of the following:</p>
 <ul>
 <li>a <code>data.frame</code> containing both the original predictors and the original responses</li>
 <li>a <code>tibble</code> containing both the the original predictors and the original responses</li>
-<li>
-<code>NULL</code> (default), in which case <code>augment</code> should try to reconstruct the original data as much as possible from the model object. This may not always be possible, and often it will not be possible to recover columns not used by the model.</li>
+<li>if not <code>data</code> argument is specified, <code>augment</code> should try to reconstruct the original data as much as possible from the model object. This may not always be possible, and often it will not be possible to recover columns not used by the model.</li>
 </ul>
-<p>Any other inputs should result in an error. It is important that you test both <code>data.frame</code> and <code>tibble</code> arguments to <code>data</code>. We recommend coercing <code>data.frame</code>s to <code>tibble</code>s and then working directly with <code>tibble</code>s in your implementation.</p>
+<p>Any other inputs should result in an error. This will eventually be checked by the <code>validate_augment_input()</code> function.</p>
 <p>Many <code>augment</code> methods will also provide an optional <code>newdata</code> argument that should also default to <code>NULL</code>. Users should only ever specify one of <code>data</code> or <code>newdata</code>. Providing both <code>data</code> and <code>newdata</code> should result in an error. <code>newdata</code> should accept both <code>data.frame</code>s and <code>tibble</code>s and should be tested with both.</p>
 <p>Data given to the <code>data</code> argument must have both the original predictors and the original response. Data given to the <code>newdata</code> argument only needs to have the original predictors. This is important because there may be important information associated with training data that is not associated with test data, for example, leverages (<code>.hat</code> below) in the case in linear regression:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">model &lt;-<span class="st"> </span><span class="kw">lm</span>(speed <span class="op">~</span><span class="st"> </span>dist, <span class="dt">data =</span> cars)
-<span class="kw">as_tibble</span>(<span class="kw"><a href="../reference/augment.html">augment</a></span>(model, <span class="dt">data =</span> cars))
+<span class="kw"><a href="http://www.rdocumentation.org/packages/modelgenerics/topics/generics">augment</a></span>(model, <span class="dt">data =</span> cars)
 <span class="co">#&gt; # A tibble: 50 x 9</span>
 <span class="co">#&gt;    speed  dist .fitted .se.fit  .resid   .hat .sigma   .cooksd .std.resid</span>
-<span class="co">#&gt;    &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;     &lt;dbl&gt;      &lt;dbl&gt;</span>
+<span class="co">#&gt;  * &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;     &lt;dbl&gt;      &lt;dbl&gt;</span>
 <span class="co">#&gt;  1     4     2    8.62   0.844 -4.62   0.0716   3.11 0.0888       -1.52  </span>
 <span class="co">#&gt;  2     4    10    9.94   0.729 -5.94   0.0534   3.06 0.106        -1.93  </span>
 <span class="co">#&gt;  3     7     4    8.95   0.815 -1.95   0.0667   3.18 0.0146       -0.638 </span>
@@ -237,10 +266,10 @@ a &lt;-<span class="st"> </span><span class="kw"><a href="../reference/augment.h
 <span class="co">#&gt;  9    10    34   13.9    0.473 -3.91   0.0225   3.14 0.0181       -1.25  </span>
 <span class="co">#&gt; 10    11    17   11.1    0.637 -0.0986 0.0407   3.19 0.0000216    -0.0319</span>
 <span class="co">#&gt; # ... with 40 more rows</span>
-<span class="kw">as_tibble</span>(<span class="kw"><a href="../reference/augment.html">augment</a></span>(model, <span class="dt">newdata =</span> cars))
+<span class="kw"><a href="http://www.rdocumentation.org/packages/modelgenerics/topics/generics">augment</a></span>(model, <span class="dt">newdata =</span> cars)
 <span class="co">#&gt; # A tibble: 50 x 4</span>
 <span class="co">#&gt;    speed  dist .fitted .se.fit</span>
-<span class="co">#&gt;    &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;</span>
+<span class="co">#&gt;  * &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;</span>
 <span class="co">#&gt;  1     4     2    8.62   0.844</span>
 <span class="co">#&gt;  2     4    10    9.94   0.729</span>
 <span class="co">#&gt;  3     7     4    8.95   0.815</span>
@@ -252,30 +281,25 @@ a &lt;-<span class="st"> </span><span class="kw"><a href="../reference/augment.h
 <span class="co">#&gt;  9    10    34   13.9    0.473</span>
 <span class="co">#&gt; 10    11    17   11.1    0.637</span>
 <span class="co">#&gt; # ... with 40 more rows</span></code></pre></div>
-<p>This means that many <code><a href="../reference/augment.html">augment(model, data = original_data)</a></code> should provide <code>.fitted</code> and <code>.resid</code> columns in most cases, whereas <code><a href="../reference/augment.html">augment(model, data = test_data)</a></code> only needs to a <code>.fitted</code> column, even if the response is present in <code>test_data</code>. While it would be nice to provide a <code>.resid</code> column in this case, determining the response variable from a formula specification is often a brittle process.</p>
+<p>This means that many <code><a href="http://www.rdocumentation.org/packages/modelgenerics/topics/generics">augment(model, data = original_data)</a></code> should provide <code>.fitted</code> and <code>.resid</code> columns in most cases, whereas <code><a href="http://www.rdocumentation.org/packages/modelgenerics/topics/generics">augment(model, data = test_data)</a></code> only needs to a <code>.fitted</code> column, even if the response is present in <code>test_data</code>.</p>
 <p>If the <code>data</code> or <code>newdata</code> is specified as a <code>data.frame</code> with rownames, <code>augment</code> should return them in a column called <code>.rownames</code>.</p>
 <p>For observations where no fitted values or summaries are available (where there’s missing data, for example) return <code>NA</code>.</p>
 <p>Added column names should begin with <code>.</code> to avoid overwriting columns in the original data.</p>
-<p><strong>Other commons arguments</strong></p>
-<ul>
-<li><code>type.residuals</code></li>
-<li><code>type.predict</code></li>
-<li><code>weights</code></li>
-</ul>
 </div>
 <div id="tidy" class="section level2">
 <h2 class="hasAnchor">
 <a href="#tidy" class="anchor"></a><code>tidy</code>
 </h2>
-<p>The <code><a href="../reference/tidy.html">tidy(x, ...)</a></code> method accepts a model object <code>x</code> and returns a tibble with one row per model component. A model component might be a single term in a regression, a single test, or one cluster/class. Exactly what a component is varies across models but is usually self-evident.</p>
+<p>The <code><a href="http://www.rdocumentation.org/packages/modelgenerics/topics/generics">tidy(x, ...)</a></code> method accepts a model object <code>x</code> and returns a tibble with one row per model component. A model component might be a single term in a regression, a single test, or one cluster/class. Exactly what a component is varies across models but is usually self-evident.</p>
 <p>Sometimes a model will have different types of components. For example, in mixed models, there is different information associated with fixed effects and random effects, since this information doesn’t have the same interpretation, it doesn’t make sense to summarize the fixed and random effects in the same table. In cases like this you should add an argument that allows the user to specify which type of information they want. For example, you might implement an interface along the lines of:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">model &lt;-<span class="st"> </span><span class="kw">mixed_model</span>(...)
-<span class="kw"><a href="../reference/tidy.html">tidy</a></span>(model, <span class="dt">effects =</span> <span class="st">"fixed"</span>)
-<span class="kw"><a href="../reference/tidy.html">tidy</a></span>(model, <span class="dt">effects =</span> <span class="st">"random"</span>)</code></pre></div>
+<span class="kw"><a href="http://www.rdocumentation.org/packages/modelgenerics/topics/generics">tidy</a></span>(model, <span class="dt">effects =</span> <span class="st">"fixed"</span>)
+<span class="kw"><a href="http://www.rdocumentation.org/packages/modelgenerics/topics/generics">tidy</a></span>(model, <span class="dt">effects =</span> <span class="st">"random"</span>)</code></pre></div>
 <p><strong>Common arguments to tidy methods</strong>:</p>
 <ul>
 <li>
-<code>conf.int</code>: logical indicating whether or not to calculate confidence/credible intervals</li>
+<code>conf.int</code>: logical indicating whether or not to calculate confidence/credible intervals. should default to <code>FALSE</code>
+</li>
 <li>
 <code>conf.level</code>: the confidence level to use for the interval when <code>conf.int = TRUE</code>
 </li>
@@ -285,46 +309,6 @@ a &lt;-<span class="st"> </span><span class="kw"><a href="../reference/augment.h
 <code>quick</code>: logical indicating whether to use a faster <code>tidy</code> method that returns less information about each component, typically only <code>term</code> and <code>estimate</code> columns</li>
 </ul>
 </div>
-</div>
-<div id="glossary" class="section level1">
-<h1 class="hasAnchor">
-<a href="#glossary" class="anchor"></a>Glossary</h1>
-<p>The following are common column names output from tidiers. You should use them when implementing new tidiers. <strong>More details to come, this is incomplete at the moment.</strong></p>
-<ul>
-<li>
-<code>term</code>: the term in a regression or model that is being estimated.</li>
-<li>
-<code>p.value</code>: the p-value associated with a test statistic</li>
-<li>
-<code>statistic</code>: a test statistic, usually the one used to compute the p-value. Combining these across many sub-groups is a reliable way to perform (e.g.) bootstrap hypothesis testing</li>
-<li>
-<code>estimate</code>: estimate of an effect size, slope, or other value</li>
-<li>
-<code>std.error</code>: standard error</li>
-<li>
-<code>conf.low</code>: the low end of a confidence interval on the <code>estimate</code>
-</li>
-<li>
-<code>conf.high</code>: the high end of a confidence interval on the <code>estimate</code>
-</li>
-<li>
-<code>df</code>: degrees of freedom</li>
-<li>
-<code>r.squared</code> the fraction of variance explained by the model</li>
-<li>
-<code>adj.r.squared</code> R^2 adjusted based on the degrees of freedom</li>
-<li>
-<code>sigma</code> the square root of the estimated variance of the residuals</li>
-<li><code>df</code></li>
-<li><code>logLik</code></li>
-<li><code>AIC</code></li>
-<li><code>BIC</code></li>
-<li><code>deviance</code></li>
-<li><code>df.residual</code></li>
-<li><code>.fitted</code></li>
-<li><code>.resid</code></li>
-<li><code>.cluster</code></li>
-</ul>
 </div>
   </div>
 
@@ -338,10 +322,12 @@ a &lt;-<span class="st"> </span><span class="kw"><a href="../reference/augment.h
 <li><a href="#which-package-does-my-tidier-belong-in">Which package does my tidier belong in?</a></li>
       </ul>
 </li>
+      <li><a href="#implementing-new-tiders">Implementing new tiders</a></li>
       <li><a href="#documenting-new-tidiers">Documenting new tidiers</a></li>
       <li>
 <a href="#testing-new-tidiers">Testing new tidiers</a><ul class="nav nav-pills nav-stacked">
 <li><a href="#basic-checks">Basic checks</a></li>
+      <li><a href="#more-complete-checks">More complete checks</a></li>
       <li><a href="#package-dependencies">Package dependencies</a></li>
       <li><a href="#catching-edge-cases">Catching edge cases</a></li>
       </ul>
@@ -354,7 +340,6 @@ a &lt;-<span class="st"> </span><span class="kw"><a href="../reference/augment.h
       <li><a href="#tidy"><code>tidy</code></a></li>
       </ul>
 </li>
-      <li><a href="#glossary">Glossary</a></li>
       </ul>
 </div>
       </div>
@@ -363,12 +348,12 @@ a &lt;-<span class="st"> </span><span class="kw"><a href="../reference/augment.h
 
 
       <footer><div class="tidyverse">
-  <p>broom is a part of the <strong>tidyverse</strong>, an ecosystem of packages designed with common APIs and a shared philosophy. Learn more at <a href="http://tidyverse.org">tidyverse.org</a>.</p>
+  <p>broom is a part of the <strong>tidyverse</strong>, an ecosystem of packages designed with common APIs and a shared philosophy. Learn more at <a href="https://tidyverse.org">tidyverse.org</a>.</p>
 </div>
 
 <div class="author">
-  <p>Developed by David Robinson.</p>
-  <p>Site built by <a href="http://pkgdown.r-lib.org">pkgdown</a>.</p>
+  <p>Developed by David Robinson, Alex Hayes.</p>
+  <p>Site built by <a href="https://pkgdown.r-lib.org">pkgdown</a>.</p>
 </div>
 
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-115082821-1"></script><script>

@@ -102,13 +102,13 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Tidiers for objects from the AUC package</h1>
-    <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/auc_tidiers.R'><code>R/auc_tidiers.R</code></a></small>
+    <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/auc-tidiers.R'><code>R/auc-tidiers.R</code></a></small>
     <div class="hidden name"><code>auc_tidiers.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Tidy "roc" objects from the "auc" package. This can be used to,
+    <p>Tidy objects returned from <code><a href='http://www.rdocumentation.org/packages/AUC/topics/roc'>AUC::roc()</a></code>. This can be used to,
 for example, draw ROC curves in ggplot2.</p>
     
     </div>
@@ -121,21 +121,21 @@ for example, draw ROC curves in ggplot2.</p>
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>x</th>
-      <td><p>an "roc" object</p></td>
+      <td><p>Object of class <code>roc</code>.</p></td>
     </tr>
     <tr>
       <th>...</th>
-      <td><p>Additional arguments, not used</p></td>
+      <td><p>Additional arguments (not used).</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A data frame with three columns:</p>
+    <p>A tibble with three columns:</p>
 <dt>cutoff</dt><dd><p>The cutoff of the prediction scores used
-  for classification</p></dd>
-  <dt>tpr</dt><dd><p>The resulting true positive rate at that cutoff</p></dd>
-  <dt>fpr</dt><dd><p>The resulting false positive rate at that cutoff</p></dd>
+for classification</p></dd>
+<dt>tpr</dt><dd><p>The resulting true positive rate at that cutoff</p></dd>
+<dt>fpr</dt><dd><p>The resulting false positive rate at that cutoff</p></dd>
 
 If the labels had names, those are added as an "instance" column.
 
@@ -166,7 +166,7 @@ If the labels had names, those are added as an "instance" column.
   <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/ggplot'>ggplot</a></span>(<span class='no'>rocs</span>, <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/aes'>aes</a></span>(<span class='no'>fpr</span>, <span class='no'>tpr</span>, <span class='kw'>color</span> <span class='kw'>=</span> <span class='no'>algorithm</span>)) +
     <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/geom_path'>geom_line</a></span>()
 }</div><div class='output co'>#&gt; <span class='message'>AUC 0.3.0</span></div><div class='output co'>#&gt; <span class='message'>Type AUCNews() to see the change log and ?AUC to get an overview.</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Attachement du package : 'dplyr'</span></div><div class='output co'>#&gt; <span class='message'>The following objects are masked from 'package:stats':</span>
+#&gt; <span class='message'>Attaching package: 'dplyr'</span></div><div class='output co'>#&gt; <span class='message'>The following objects are masked from 'package:stats':</span>
 #&gt; <span class='message'></span>
 #&gt; <span class='message'>    filter, lag</span></div><div class='output co'>#&gt; <span class='message'>The following objects are masked from 'package:base':</span>
 #&gt; <span class='message'></span>

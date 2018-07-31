@@ -102,7 +102,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Tidiers for ivreg models</h1>
-    <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/ivreg_tidiers.R'><code>R/ivreg_tidiers.R</code></a></small>
+    <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/aer-tidiers.R'><code>R/aer-tidiers.R</code></a></small>
     <div class="hidden name"><code>ivreg_tidiers.Rd</code></div>
     </div>
 
@@ -154,10 +154,6 @@ and confidence intervals</p></td>
     </tr>
     <tr>
       <th>newdata</th>
-      <td><p>New data to make predictions from (optional)</p></td>
-    </tr>
-    <tr>
-      <th>newdata</th>
       <td><p>If provided, performs predictions on the new data</p></td>
     </tr>
     <tr>
@@ -171,31 +167,32 @@ and confidence intervals</p></td>
     <p>All tidying methods return a data.frame without rownames, whose
 structure depends on the method chosen.</p>
 <p><code>tidy.ivreg</code> returns a data frame with one row per
-coefficient, of the same form as <code><a href='lm_tidiers.html'>tidy.lm</a></code>.</p>
+coefficient, of the same form as <code><a href='lm_tidiers.html'>tidy.lm()</a></code>.</p>
 <p><code>augment</code> returns a data frame with one row for each
 initial observation, adding the columns:</p>
 <dt>.fitted</dt><dd><p>predicted (fitted) values</p></dd>
 and if newdata is NULL:
-  <dt>.resid</dt><dd><p>residuals</p></dd>
+<dt>.resid</dt><dd><p>residuals</p></dd>
 
 glance returns a one-row data frame with columns
-  <dt>r.squared</dt><dd><p>The percent of variance explained by the model</p></dd>
-  <dt>adj.r.squared</dt><dd><p>r.squared adjusted based on the degrees of freedom</p></dd>
-  <dt>statistic</dt><dd><p>Wald test statistic</p></dd>
-  <dt>p.value</dt><dd><p>p-value from the Wald test</p></dd>
-  <dt>df</dt><dd><p>Degrees of freedom used by the coefficients</p></dd>
-  <dt>sigma</dt><dd><p>The square root of the estimated residual variance</p></dd>
-  <dt>df.residual</dt><dd><p>residual degrees of freedom</p></dd>
+<dt>r.squared</dt><dd><p>The percent of variance explained by the model</p></dd>
+<dt>adj.r.squared</dt><dd><p>r.squared adjusted based on the degrees of freedom</p></dd>
+<dt>statistic</dt><dd><p>Wald test statistic</p></dd>
+<dt>p.value</dt><dd><p>p-value from the Wald test</p></dd>
+<dt>df</dt><dd><p>Degrees of freedom used by the coefficients</p></dd>
+<dt>sigma</dt><dd><p>The square root of the estimated residual variance</p></dd>
+<dt>df.residual</dt><dd><p>residual degrees of freedom</p></dd>
 If diagnostics is TRUE, glance also returns:
-  <dt>p.value.Sargan</dt><dd><p>P value of Sargan test</p></dd>
-  <dt>p.value.Wu.Hausman</dt><dd><p>P value of Wu-Hausman test</p></dd>
-  <dt>p.value.weakinst</dt><dd><p>P value of weak instruments test</p></dd>
-and corresponding columns statistics.Sargan etc. for the statistics of those tests.
+<dt>p.value.Sargan</dt><dd><p>P value of Sargan test</p></dd>
+<dt>p.value.Wu.Hausman</dt><dd><p>P value of Wu-Hausman test</p></dd>
+<dt>p.value.weakinst</dt><dd><p>P value of weak instruments test</p></dd>
+and corresponding columns statistics.Sargan
+for the statistics of those tests.
 
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='lm_tidiers.html'>lm_tidiers</a></code></p></div>
+    <div class='dont-index'><p><code><a href='lm_tidiers.html'>lm_tidiers()</a></code></p></div>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
@@ -218,18 +215,11 @@ and corresponding columns statistics.Sargan etc. for the statistics of those tes
 
     <span class='fu'><a href='glance.html'>glance</a></span>(<span class='no'>ivr</span>)
 }</div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Attachement du package : 'car'</span></div><div class='output co'>#&gt; <span class='message'>The following object is masked from 'package:boot':</span>
+#&gt; <span class='message'>Attaching package: 'car'</span></div><div class='output co'>#&gt; <span class='message'>The following object is masked from 'package:boot':</span>
 #&gt; <span class='message'></span>
 #&gt; <span class='message'>    logit</span></div><div class='output co'>#&gt; <span class='message'>The following object is masked from 'package:dplyr':</span>
 #&gt; <span class='message'></span>
-#&gt; <span class='message'>    recode</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Attachement du package : 'zoo'</span></div><div class='output co'>#&gt; <span class='message'>The following objects are masked from 'package:base':</span>
-#&gt; <span class='message'></span>
-#&gt; <span class='message'>    as.Date, as.Date.numeric</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Attachement du package : 'lmtest'</span></div><div class='output co'>#&gt; <span class='message'>The following object is masked from 'package:lfe':</span>
-#&gt; <span class='message'></span>
-#&gt; <span class='message'>    waldtest</span></div><div class='output co'>#&gt; <span class='warning'>Warning: Exponentiating coefficients, but model did not use a log or logit link function</span></div><div class='output co'>#&gt;   r.squared adj.r.squared    sigma statistic      p.value df df.residual
-#&gt; 1 0.4294224     0.4040634 0.187856  13.28079 2.930789e-05  3          45</div><div class='input'>
+#&gt; <span class='message'>    recode</span></div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

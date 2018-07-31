@@ -46,7 +46,7 @@
 
       <div class="navbar-brand-container">
         <a class="navbar-brand" href="../index.html">broom</a>
-        <small class="tidyverse">part of the <a href="http://tidyverse.org">tidyverse</a></small>
+        <small class="tidyverse">part of the <a href="https://tidyverse.org">tidyverse</a></small>
       </div>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
@@ -102,7 +102,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Set up bootstrap replicates of a dplyr operation</h1>
-    <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/extras.R'><code>R/extras.R</code></a></small>
+    <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/bootstrap.R'><code>R/bootstrap.R</code></a></small>
     <div class="hidden name"><code>bootstrap.Rd</code></div>
     </div>
 
@@ -139,37 +139,14 @@ a grouped tbl.</p></td>
     <p>This code originates from Hadley Wickham (with a few small
 corrections) here:</p>
 <p>https://github.com/hadley/dplyr/issues/269</p>
-<p>Some examples can be found at</p>
-<p>https://github.com/dgrtwo/broom/blob/master/vignettes/bootstrapping.Rmd</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
+</div><span class='co'># NOT RUN {</span>
 <span class='fu'>library</span>(<span class='no'>dplyr</span>)
-<span class='no'>mtcars</span> <span class='kw'>%&gt;%</span> <span class='fu'>bootstrap</span>(<span class='fl'>10</span>) <span class='kw'>%&gt;%</span> <span class='fu'><a href='http://dplyr.tidyverse.org/reference/do.html'>do</a></span>(<span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='fu'>lm</span>(<span class='no'>mpg</span> ~ <span class='no'>wt</span>, <span class='no'>.</span>)))</div><div class='output co'>#&gt; <span class='warning'>Warning: `bootstrap()` is deprecated and will be removed in an upcoming release of broom. See the rsample package instead.</span></div><div class='output co'>#&gt; # A tibble: 20 x 6
-#&gt; # Groups:   replicate [10]
-#&gt;    replicate term        estimate std.error statistic  p.value
-#&gt;        &lt;int&gt; &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
-#&gt;  1         1 (Intercept)    35.5      1.88      18.9  3.46e-18
-#&gt;  2         1 wt             -5.01     0.544     -9.21 3.04e-10
-#&gt;  3         2 (Intercept)    35.4      1.78      19.9  7.45e-19
-#&gt;  4         2 wt             -4.90     0.492     -9.95 5.18e-11
-#&gt;  5         3 (Intercept)    39.5      2.01      19.6  1.14e-18
-#&gt;  6         3 wt             -5.67     0.574     -9.89 5.90e-11
-#&gt;  7         4 (Intercept)    35.6      1.54      23.2  1.07e-20
-#&gt;  8         4 wt             -4.64     0.463    -10.0  4.33e-11
-#&gt;  9         5 (Intercept)    39.8      1.86      21.4  9.61e-20
-#&gt; 10         5 wt             -6.24     0.598    -10.4  1.64e-11
-#&gt; 11         6 (Intercept)    37.2      1.60      23.2  1.03e-20
-#&gt; 12         6 wt             -5.54     0.480    -11.5  1.49e-12
-#&gt; 13         7 (Intercept)    36.5      2.13      17.2  4.58e-17
-#&gt; 14         7 wt             -5.32     0.653     -8.15 4.27e- 9
-#&gt; 15         8 (Intercept)    39.3      2.30      17.1  5.31e-17
-#&gt; 16         8 wt             -5.95     0.693     -8.58 1.42e- 9
-#&gt; 17         9 (Intercept)    39.1      2.57      15.2  1.15e-15
-#&gt; 18         9 wt             -5.99     0.784     -7.64 1.59e- 8
-#&gt; 19        10 (Intercept)    37.9      1.99      19.1  2.45e-18
-#&gt; 20        10 wt             -5.62     0.626     -8.98 5.28e-10</div><div class='input'>
+<span class='no'>mtcars</span> <span class='kw'>%&gt;%</span> <span class='fu'>bootstrap</span>(<span class='fl'>10</span>) <span class='kw'>%&gt;%</span> <span class='fu'><a href='http://dplyr.tidyverse.org/reference/do.html'>do</a></span>(<span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='fu'>lm</span>(<span class='no'>mpg</span> ~ <span class='no'>wt</span>, <span class='no'>.</span>)))
+<span class='co'># }</span><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
@@ -187,12 +164,12 @@ corrections) here:</p>
 
       <footer>
       <div class="tidyverse">
-  <p>broom is a part of the <strong>tidyverse</strong>, an ecosystem of packages designed with common APIs and a shared philosophy. Learn more at <a href="http://tidyverse.org">tidyverse.org</a>.</p>
+  <p>broom is a part of the <strong>tidyverse</strong>, an ecosystem of packages designed with common APIs and a shared philosophy. Learn more at <a href="https://tidyverse.org">tidyverse.org</a>.</p>
 </div>
 
 <div class="author">
-  <p>Developed by David Robinson.</p>
-  <p>Site built by <a href="http://pkgdown.r-lib.org">pkgdown</a>.</p>
+  <p>Developed by David Robinson, Alex Hayes.</p>
+  <p>Site built by <a href="https://pkgdown.r-lib.org">pkgdown</a>.</p>
 </div>
 
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-115082821-1"></script>
