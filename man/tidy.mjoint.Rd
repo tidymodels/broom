@@ -6,8 +6,8 @@
 \alias{joinerml_tidiers}
 \title{Tidy a(n) mjoint object}
 \usage{
-\method{tidy}{mjoint}(x, component = "survival", conf.int = FALSE,
-  conf.level = 0.95, boot_se = NULL, ...)
+\method{tidy}{mjoint}(x, component = "survival", bootSE = NULL,
+  conf.int = FALSE, conf.level = 0.95, ...)
 }
 \arguments{
 \item{x}{An \code{mjoint} object returned from \code{\link[joineRML:mjoint]{joineRML::mjoint()}}.}
@@ -23,11 +23,6 @@ interval in the tidied output. Defaults to \code{FALSE}.}
 if \code{conf.int = TRUE}. Must be strictly greater than 0 and less than 1.
 Defaults to 0.95, which corresponds to a 95 percent confidence interval.}
 
-\item{boot_se}{Optionally a \code{bootSE} object from \code{\link[joineRML:bootSE]{joineRML::bootSE()}}. If
-specified, calcalutes confidence intervals via the bootstrap. Defaults to
-\code{NULL}, in which case standard errors are calculated from the
-empirical information matrix.}
-
 \item{...}{Additional arguments. Not used. Needed to match generic
 signature only. \strong{Cautionary note:} Misspelled arguments will be
 absorbed in \code{...}, where they will be ignored. If the misspelled
@@ -37,6 +32,11 @@ proceed using \code{conf.level = 0.95}. Additionally, if you pass
 \code{newdata = my_tibble} to an \code{\link[=augment]{augment()}} method that does not
 accept a \code{newdata} argument, it will use the default value for
 the \code{data} argument.}
+
+\item{boot_se}{Optionally a \code{bootSE} object from \code{\link[joineRML:bootSE]{joineRML::bootSE()}}. If
+specified, calcalutes confidence intervals via the bootstrap. Defaults to
+\code{NULL}, in which case standard errors are calculated from the
+empirical information matrix.}
 }
 \value{
 A \code{\link[tibble:tibble]{tibble::tibble()}} with one row for each term in the
