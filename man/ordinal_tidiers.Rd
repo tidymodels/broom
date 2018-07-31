@@ -46,22 +46,36 @@
 \arguments{
 \item{x}{a model of class \code{clm}, \code{clmm}, \code{polr} or \code{svyolr}}
 
-\item{conf.int}{whether to include a confidence interval}
+\item{conf.int}{Logical indicating whether or not to include a confidence
+interval in the tidied output. Defaults to \code{FALSE}.}
 
-\item{conf.level}{confidence level of the interval, used only if
-\code{conf.int=TRUE}}
+\item{conf.level}{The confidence level to use for the confidence interval
+if \code{conf.int = TRUE}. Must be strictly greater than 0 and less than 1.
+Defaults to 0.95, which corresponds to a 95 percent confidence interval.}
 
-\item{exponentiate}{whether to exponentiate the coefficient estimates
-and confidence intervals (typical for ordinal logistic regression)}
+\item{exponentiate}{Logical indicating whether or not to exponentiate the
+the coefficient estimates. This is typical for logistic and multinomial
+regressions, but a bad idea if there is no log or logit link. Defaults
+to \code{FALSE}.}
 
-\item{quick}{whether to compute a smaller and faster version, containing only
-the term, estimate and coefficient_type columns}
+\item{quick}{Logical indiciating if the only the \code{term} and \code{estimate}
+columns should be returned. Often useful to avoid time consuming
+covariance and standard error calculations. Defaults to \code{FALSE}.}
 
 \item{...}{extra arguments}
 
-\item{data}{original data, defaults to the extracting it from the model}
+\item{data}{A \code{\link[=data.frame]{data.frame()}} or \code{\link[tibble:tibble]{tibble::tibble()}} containing the original
+data that was used to produce the object \code{x}. Defaults to
+\code{stats::model.frame(x)} so that \code{augment(my_fit)} returns the augmented
+original data. \strong{Do not} pass new data to the \code{data} argument.
+Augment will report information such as influence and cooks distance for
+data passed to the \code{data} argument. These measures are only defined for
+the original training data.}
 
-\item{newdata}{if provided, performs predictions on the new data}
+\item{newdata}{A \code{\link[=data.frame]{data.frame()}} or \code{\link[tibble:tibble]{tibble::tibble()}} containing all
+the original predictors used to create \code{x}. Defaults to \code{NULL}, indicating
+that nothing has been passed to \code{newdata}. If \code{newdata} is specified,
+the \code{data} argument will be ignored.}
 
 \item{type.predict}{type of prediction to compute for a CLM; passed on to
 \code{\link[ordinal:predict.clm]{ordinal::predict.clm()}} or \code{predict.polr}}

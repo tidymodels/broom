@@ -29,23 +29,28 @@ If a model has several distinct types of components, you will need to
 specify which components to return.
 }
 \examples{
-
-if (require("maps") && require("ggplot2")) {
     
-    library(maps)
-    library(ggplot2)
+library(maps)
+library(ggplot2)
 
-    ca <- map("county", "ca", plot = FALSE, fill = TRUE)
-    tidy(ca)
-    qplot(long, lat, data = ca, geom = "polygon", group = group)
+ca <- map("county", "ca", plot = FALSE, fill = TRUE)
+tidy(ca)
+qplot(long, lat, data = ca, geom = "polygon", group = group)
 
-    tx <- map("county", "texas", plot = FALSE, fill = TRUE)
-    tidy(tx)
-    qplot(long, lat, data = tx, geom = "polygon", group = group,
-          colour = I("white"))
-}
+tx <- map("county", "texas", plot = FALSE, fill = TRUE)
+tidy(tx)
+qplot(long, lat, data = tx, geom = "polygon", group = group,
+      colour = I("white"))
 
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[maps:map]{maps::map()}}
+}
+\value{
+  \item{long}{TODO}
+  \item{lat}{TODO}
+  \item{group}{TODO}
+  \item{order}{TODO}
+  \item{region}{TODO}
+  \item{subregion}{TODO}
 }

@@ -25,22 +25,6 @@ Defaults to 0.95, which corresponds to a 95 percent confidence interval.}
 
 \item{...}{Additional arguments passed to \code{\link[quantreg:summary.rq]{quantreg::summary.rq()}}.}
 }
-\value{
-A \code{\link[tibble:tibble]{tibble::tibble()}} with one row for each term in the
-regression. The tibble has columns:
-
-\item{term}{The name of the regression term.}
-\item{estimate}{The estimated value of the regression term.}
-\item{std.error}{The standard error of the regression term.}
-\item{statistic}{The value of a statistic, almost always a T-statistic,
-to use in a hypothesis that the regression term is non-zero.}
-\item{p.value}{The two-sided p-value associated with the observed
-statistic.}
-\item{conf.low}{The low end of a confidence interval for the regression
-term. Included only if \code{conf.int = TRUE}.}
-\item{conf.high}{The high end of a confidence interval for the regression
-term. Included only if \code{conf.int = TRUE}.}
-}
 \description{
 Tidy summarizes information about the components of a model.
 A model component might be a single term in a regression, a single
@@ -55,6 +39,10 @@ If \code{se.type = "rank"} confidence intervals are calculated by
 no confidence intervals are calculated and the confidence limits are
 set to NA.
 }
+\examples{
+
+print('TODO')
+}
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[quantreg:rq]{quantreg::rq()}}
 
@@ -64,3 +52,12 @@ Other quantreg tidiers: \code{\link{augment.nlrq}},
   \code{\link{tidy.nlrq}}, \code{\link{tidy.rqs}}
 }
 \concept{quantreg tidiers}
+\value{
+  \item{conf.high}{The upper end of a confidence interval for the term under consideration. Included only if `conf.int = TRUE`.}
+  \item{conf.low}{The lower end of a confidence interval for the term under consideration. Included only if `conf.int = TRUE`.}
+  \item{estimate}{The estimated value of the regression term.}
+  \item{p.value}{The two-sided p-value associated with the observed statistic.}
+  \item{statistic}{The value of a T-statistic to use in a hypothesis that the regression term is non-zero.}
+  \item{std.error}{The standard error of the regression term.}
+  \item{term}{The name of the regression term.}
+}

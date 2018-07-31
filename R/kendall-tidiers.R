@@ -5,13 +5,13 @@
 #'   [Kendall::MannKendall()], or [Kendall::SeasonalMannKendall()].
 #' @template param_unused_dots
 #'
-#' @return A [tibble::tibble] with one row and columns:
-#'
-#' \item{statistic}{Kendall's tau statistic.}
-#' \item{p.value}{two-sided p-value.}
-#' \item{kendall_score}{Kendall score.}
-#' \item{denominator}{The denominator, which is tau=kendall_score/denominator.}
-#' \item{var_kendall_score}{Variance of the kendall_score.}
+#' @evalRd return_tidy(
+#'   "p.value",
+#'   "kendall_score",
+#'   "var_kendall_score",
+#'   statistic = "Kendall's tau statistic",
+#'   denominator = "The denominator, which is tau=kendall_score/denominator."
+#' )
 #' 
 #' @examples
 #' library(Kendall)

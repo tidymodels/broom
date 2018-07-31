@@ -28,24 +28,42 @@ to \code{FALSE}.}
 }}
 }
 \value{
-\code{tidy} returns the same information as \code{\link[=tidy.lm]{tidy.lm()}},
-though without confidence interval options.
+A \code{\link[tibble:tibble]{tibble::tibble()}} with one row for each term in the
+regression. The tibble has columns:
+
+\item{term}{The name of the regression term.}
+\item{estimate}{The estimated value of the regression term.}
+\item{std.error}{The standard error of the regression term.}
+\item{statistic}{The value of a statistic, almost always a T-statistic,
+to use in a hypothesis that the regression term is non-zero.}
+\item{p.value}{The two-sided p-value associated with the observed
+statistic.}
+\item{conf.low}{The low end of a confidence interval for the regression
+term. Included only if \code{conf.int = TRUE}.}
+\item{conf.high}{The high end of a confidence interval for the regression
+term. Included only if \code{conf.int = TRUE}.}
+
+If the linear model is an \code{mlm} object (multiple linear model),
+there is an additional column:
+
+\item{response}{Which response column the coefficients correspond to
+(typically Y1, Y2, etc)}
 }
 \description{
 This method wraps \code{\link[=tidy.lm]{tidy.lm()}}.
 }
 \examples{
 
+library(orcutt)
+
 reg <- lm(mpg ~ wt + qsec + disp, mtcars)
 tidy(reg)
 
-if (require("orcutt", quietly = TRUE)) {
-  co <- cochrane.orcutt(reg)
-  co
+co <- cochrane.orcutt(reg)
+co
 
-  tidy(co)
-  glance(co)
-}
+tidy(co)
+glance(co)
 
 }
 \seealso{
@@ -56,3 +74,10 @@ if (require("orcutt", quietly = TRUE)) {
 Other orcutt tidiers: \code{\link{glance.orcutt}}
 }
 \concept{orcutt tidiers}
+\value{
+  \item{estimate}{The estimated value of the regression term.}
+  \item{p.value}{The two-sided p-value associated with the observed statistic.}
+  \item{statistic}{The value of a T-statistic to use in a hypothesis that the regression term is non-zero.}
+  \item{std.error}{The standard error of the regression term.}
+  \item{term}{The name of the regression term.}
+}

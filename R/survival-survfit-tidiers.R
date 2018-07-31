@@ -86,20 +86,20 @@ tidy.survfit <- function(x, ...) {
 #' @templateVar class survfit
 #' @template title_desc_glance
 #' 
-#' @inheritParams tidy.survfit
+#' @inherit tidy.survfit params examples
 #' 
-#' @return A one-row [tibble::tibble] with columns:
+#' @evalRd return_glance(
+#'   "records",
+#'   "n.max",
+#'   "n.start",
+#'   "events",
+#'   "rmean",
+#'   "rmean.std.error",
+#'   conf.low = "lower end of confidence interval on median",
+#'   conf.high = "upper end of confidence interval on median",
+#'   median = "median survival"
+#' )
 #' 
-#'   \item{records}{number of observations}
-#'   \item{n.max}{n.max}
-#'   \item{n.start}{n.start}
-#'   \item{events}{number of events}
-#'   \item{rmean}{Restricted mean (see [survival::print.survfit()]}
-#'   \item{rmean.std.error}{Restricted mean standard error}
-#'   \item{median}{median survival}
-#'   \item{conf.low}{lower end of confidence interval on median}
-#'   \item{conf.high}{upper end of confidence interval on median}
-#'
 #' @export
 #' @seealso [glance()], [survival::survfit()]
 #' @family cch tidiers

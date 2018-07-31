@@ -8,7 +8,7 @@
   newdata = NULL, type.predict, type.residuals, ...)
 }
 \arguments{
-\item{x}{A \code{lmRob} object returned from \code{\link[robust:lmRob]{robust::lmRob()}}.}
+\item{x}{An \code{lm} object created by \code{\link[stats:lm]{stats::lm()}}.}
 
 \item{data}{A \code{\link[=data.frame]{data.frame()}} or \code{\link[tibble:tibble]{tibble::tibble()}} containing the original
 data that was used to produce the object \code{x}. Defaults to
@@ -69,6 +69,19 @@ This augment method wraps \code{\link[=augment.lm]{augment.lm()}}.
 \details{
 For tidiers for robust models from the \pkg{MASS} package see
 \code{\link[=tidy.rlm]{tidy.rlm()}}.
+}
+\examples{
+
+library(robust)
+m <- lmRob(mpg ~ wt, data = mtcars)
+
+tidy(m)
+augment(m)
+glance(m)
+
+gm <- glmRob(am ~ wt, data = mtcars, family = "binomial")
+glance(gm)
+
 }
 \seealso{
 \code{\link[=augment]{augment()}}, \code{\link[=augment.lm]{augment.lm()}}

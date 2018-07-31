@@ -20,16 +20,6 @@ proceed using \code{conf.level = 0.95}. Additionally, if you pass
 accept a \code{newdata} argument, it will use the default value for
 the \code{data} argument.}
 }
-\value{
-A \link[tibble:tibble]{tibble::tibble} with one row per variable-class-outcome
-combination, with columns:
-
-\item{variable}{Manifest variable}
-\item{class}{Latent class ID, an integer}
-\item{outcome}{Outcome of manifest variable}
-\item{estimate}{Estimated class-conditional response probability}
-\item{std.error}{Standard error of estimated probability}
-}
 \description{
 Tidy summarizes information about the components of a model.
 A model component might be a single term in a regression, a single
@@ -93,3 +83,10 @@ Other poLCA tidiers: \code{\link{augment.poLCA}},
   \code{\link{glance.poLCA}}
 }
 \concept{poLCA tidiers}
+\value{
+  \item{class}{The class under consideration.}
+  \item{outcome}{Outcome of manifest variable}
+  \item{std.error}{The standard error of the regression term.}
+  \item{variable}{Manifest variable}
+  \item{estimate}{Estimated class-conditional response probability}
+}

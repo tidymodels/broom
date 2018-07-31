@@ -19,15 +19,6 @@ proceed using \code{conf.level = 0.95}. Additionally, if you pass
 accept a \code{newdata} argument, it will use the default value for
 the \code{data} argument.}
 }
-\value{
-A one-row \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
-
-\item{tau}{quantile}
-\item{logLik}{the data's log-likelihood under the model}
-\item{AIC}{the Akaike Information Criterion}
-\item{BIC}{the Bayesian Information Criterion}
-\item{df.residual}{residual degrees of freedom}
-}
 \description{
 Glance accepts a model object and returns a \code{\link[tibble:tibble]{tibble::tibble()}}
 with exactly one row of model summaries. The summaries are typically
@@ -52,3 +43,10 @@ Other quantreg tidiers: \code{\link{augment.nlrq}},
   \code{\link{tidy.rqs}}, \code{\link{tidy.rq}}
 }
 \concept{quantreg tidiers}
+\value{
+  \item{AIC}{Akaike's Information Criterion for the model.}
+  \item{BIC}{Bayesian Information Criterion for the model.}
+  \item{df.residual}{Residual degrees of freedom for the model.}
+  \item{logLik}{The log-likelihood of the model. [stats::logLik()] may be a useful reference.}
+  \item{tau}{Quantile.}
+}

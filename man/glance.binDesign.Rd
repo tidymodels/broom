@@ -19,13 +19,6 @@ proceed using \code{conf.level = 0.95}. Additionally, if you pass
 accept a \code{newdata} argument, it will use the default value for
 the \code{data} argument.}
 }
-\value{
-A one-row \link[tibble:tibble]{tibble::tibble} with columns:
-\item{power}{Power achieved by the analysis.}
-\item{n}{Sample size uzed to achieve this power.}
-\item{power.reached}{Whether the desired power was reached.}
-\item{maxit}{Number of iterations performed.}
-}
 \description{
 Glance accepts a model object and returns a \code{\link[tibble:tibble]{tibble::tibble()}}
 with exactly one row of model summaries. The summaries are typically
@@ -63,3 +56,9 @@ Other bingroup tidiers: \code{\link{tidy.binDesign}},
   \code{\link{tidy.binWidth}}
 }
 \concept{bingroup tidiers}
+\value{
+  \item{power}{Power achieved by the analysis.}
+  \item{n}{Sample size uzed to achieve this power.}
+  \item{power.reached}{Whether the desired power was reached.}
+  \item{maxit}{Number of iterations performed.}
+}

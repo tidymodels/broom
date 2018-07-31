@@ -1,40 +1,31 @@
-#' Tidy estimated marginal means (least-squares means) objects from the emmeans and lsmeans packages
+#' @templateVar class lsmobj
+#' @template title_desc_tidy
 #'
-#' Tidiers for estimated marginal means objects, which report the predicted
-#' means for factors or factor combinations in a linear model. This
-#' covers three classes:
-#' `emmGrid`, `lsmobj`, and `ref.grid`. (The first class is from the `emmeans`
-#' package, and is the successor to the latter two classes, which have slightly different
-#' purposes within the `lsmeans` package but have similar output).
-#'
-#' @param x "emmGrid", lsmobj", or "ref.grid" object
-#' @param conf.level Level of confidence interval, used only for
-#' `emmGrid` and `lsmobj` objects
+#' @param x An `lsmobj` object.
+#' @template param_confint
 #' @param ... Additional arguments passed to [emmeans::summary.emmGrid()] or
-#' [lsmeans::summary.ref.grid()]. **Cautionary note**: mispecified arguments
-#' may be silently ignored!
+#'   [lsmeans::summary.ref.grid()]. **Cautionary note**: misspecified arguments
+#'   may be silently ignored!
+#'   
+#' @evalRd return_tidy(
+#'   "std.error", 
+#'   "df", 
+#'   "conf.low", 
+#'   "conf.high",
+#'   "level1",
+#'   "level2",
+#'   "contrast",
+#'   "p.value",
+#'   statistic = "T-ratio statistic",
+#'   estimate = "Estimated least-squares mean."
+#' )
 #'
-#' @return A data frame with one observation for each estimated
-#' mean, and one column for each combination of factors, along with
-#' the following variables:
-#' \item{estimate}{Estimated least-squares mean}
-#' \item{std.error}{Standard error of estimate}
-#' \item{df}{Degrees of freedom}
-#' \item{conf.low}{Lower bound of confidence interval}
-#' \item{conf.high}{Upper bound of confidence interval}
+#' @details Returns a data frame with one observation for each estimated
+#'   mean, and one column for each combination of factors. When the input is a
+#'   contrast, each row will contain one estimated contrast.
 #'
-#' When the input is a contrast, each row will contain one estimated
-#' contrast, along with some of the following columns:
-#' \item{level1}{One level of the factor being contrasted}
-#' \item{level2}{Second level}
-#' \item{contrast}{In cases where the contrast is not made up of
-#' two levels, describes each}
-#' \item{statistic}{T-ratio statistic}
-#' \item{p.value}{P-value}
-#'
-#' @details There are a large number of arguments that can be
-#' passed on to [emmeans::summary.emmGrid()] or [lsmeans::summary.ref.grid()].
-#' By broom convention, we use `conf.level` to pass the `level` argument.
+#'   There are a large number of arguments that can be
+#'   passed on to [emmeans::summary.emmGrid()] or [lsmeans::summary.ref.grid()].
 #'
 #' @examples
 #'
@@ -72,22 +63,65 @@
 #'   geom_line() +
 #'   geom_errorbar(aes(ymin = conf.low, ymax = conf.high))
 #'
-#' @name emmeans_tidiers
+#' @aliases emmeans_tidiers
 #' @export
+#' @family emmeans tidiers
+#' @seealso [tidy()], [emmeans::ref_grid()], [emmeans::emmeans()],
+#'   [emmeans::contrast()]
 tidy.lsmobj <- function(x, conf.level = .95, ...) {
   tidy_emmeans(x, level = conf.level, ...)
 }
 
-
-#' @rdname emmeans_tidiers
+#' @templateVar class ref.grid
+#' @template title_desc_tidy
+#' 
+#' @param x A `ref.grid` object created by [emmeans::ref_grid()].
+#' @inherit tidy.lsmobj params examples details 
+#'   
+#' @evalRd return_tidy(
+#'   "std.error", 
+#'   "df", 
+#'   "conf.low", 
+#'   "conf.high",
+#'   "level1",
+#'   "level2",
+#'   "contrast",
+#'   "p.value",
+#'   statistic = "T-ratio statistic",
+#'   estimate = "Estimated least-squares mean."
+#' )
+#'
 #' @export
+#' @family emmeans tidiers
+#' @seealso [tidy()], [emmeans::ref_grid()], [emmeans::emmeans()],
+#'   [emmeans::contrast()]
 tidy.ref.grid <- function(x, ...) {
   tidy_emmeans(x, ...)
 }
 
-
-#' @rdname emmeans_tidiers
+#' @templateVar class emmGrid
+#' @template title_desc_tidy
+#' 
+#' @param x An `emmGrid` object.
+#' @inherit tidy.lsmobj params examples details 
+#'   
+#' @evalRd return_tidy(
+#'   "std.error", 
+#'   "df", 
+#'   "conf.low", 
+#'   "conf.high",
+#'   "level1",
+#'   "level2",
+#'   "contrast",
+#'   "p.value",
+#'   statistic = "T-ratio statistic",
+#'   estimate = "Estimated least-squares mean."
+#' )
+#'
 #' @export
+#' @family emmeans tidiers
+#' @seealso [tidy()], [emmeans::ref_grid()], [emmeans::emmeans()],
+#'   [emmeans::contrast()]
 tidy.emmGrid <- function(x, ...) {
   tidy_emmeans(x, ...)
 }

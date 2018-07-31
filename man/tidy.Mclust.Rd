@@ -20,19 +20,6 @@ proceed using \code{conf.level = 0.95}. Additionally, if you pass
 accept a \code{newdata} argument, it will use the default value for
 the \code{data} argument.}
 }
-\value{
-A \link[tibble:tibble]{tibble::tibble} with one row per component:
-\item{component}{Cluster id as a factor. For a model \code{k} clusters, these
-will be \code{as.factor(1:k)}, or \code{as.factor(0:k)} if there's a noise term.}
-\item{size}{Number of observations assigned to component}
-\item{proportion}{The mixing proportion of each component}
-\item{variance}{In case of one-dimensional and spherical models,
-the variance for each component, omitted otherwise. NA for noise
-component}
-\item{mean}{The mean for each component. In case of 2+ dimensional models,
-a column with the mean is added for each dimension. NA for noise
-component}
-}
 \description{
 Tidy summarizes information about the components of a model.
 A model component might be a single term in a regression, a single
@@ -75,3 +62,14 @@ glance(m)
 Other mclust tidiers: \code{\link{augment.Mclust}}
 }
 \concept{mclust tidiers}
+\value{
+  \item{proportion}{The mixing proportion of each component}
+  \item{size}{Number of points assigned to cluster.}
+  \item{mean}{The mean for each component. In case of 2+ dimensional models,
+    a column with the mean is added for each dimension. NA for noise
+    component}
+  \item{variance}{In case of one-dimensional and spherical models,
+    the variance for each component, omitted otherwise. NA for noise
+    component}
+  \item{component}{Cluster id as a factor.}
+}

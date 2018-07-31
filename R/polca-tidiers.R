@@ -4,16 +4,14 @@
 #' @param x A `poLCA` object returned from [poLCA::poLCA()].
 #' @template param_unused_dots
 #'
-#' @return A [tibble::tibble] with one row per variable-class-outcome
-#' combination, with columns:
+#' @evalRd return_tidy(
+#'   variable = "Manifest variable",
+#'   "class",
+#'   "outcome",
+#'   estimate = "Estimated class-conditional response probability",
+#'   "std.error"
+#' )
 #' 
-#' \item{variable}{Manifest variable}
-#' \item{class}{Latent class ID, an integer}
-#' \item{outcome}{Outcome of manifest variable}
-#' \item{estimate}{Estimated class-conditional response probability}
-#' \item{std.error}{Standard error of estimated probability}
-#' 
-#'
 #' @examples
 #'
 #' library(poLCA)
@@ -92,26 +90,25 @@ tidy.poLCA <- function(x, ...) {
 #' @templateVar class poLCA
 #' @template title_desc_augment
 #' 
-#' @inheritParams tidy.poLCA
-#' @param data The original dataset used to fit the latent class model, as
-#' a tibble or data. If not given, uses manifest variables in
-#' `x$y` and, if applicable, covariates in `x$x`
-#'
-#' @return A [tibble::tibble] with one row for each original observation,
-#' with additional columns:
+#' @inherit tidy.poLCA params examples
+#' @template param_data
 #' 
-#' \item{.class}{Predicted class, using modal assignment}
-#' \item{.probability}{Posterior probability of predicted class}
+#' @evalRd return_augment(
+#'   .fitted = FALSE,
+#'   .resid = FALSE,
+#'   ".class",
+#'   ".probability"
+#' )
+#' 
+#' @details If the `data` argument is given, those columns are included in
+#'   the output (only rows for which predictions could be made).
+#'   Otherwise, the `y` element of the poLCA object, which contains the
+#'   manifest variables used to fit the model, are used, along with any
+#'   covariates, if present, in `x`.
 #'
-#' If the `data` argument is given, those columns are included in the output
-#' (only rows for which predictions could be made).
-#' Otherwise, the `y` element of the poLCA object, which contains the
-#' manifest variables used to fit the model, are used, along with any covariates,
-#' if present, in `x`.
-#'
-#' Note that while the probability of all the classes (not just the predicted
-#' modal class) can be found in the `posterior` element, these are not
-#' included in the augmented output.
+#'   Note that while the probability of all the classes (not just the predicted
+#'   modal class) can be found in the `posterior` element, these are not
+#'   included in the augmented output.
 #'
 #' @export
 #' @seealso [augment()], [poLCA::poLCA()]
@@ -141,21 +138,19 @@ augment.poLCA <- function(x, data = NULL, ...) {
 }
 
 #' @templateVar class poLCA
-#' @template title_desc_augment
+#' @template title_desc_glance
 #' 
 #' @inherit tidy.poLCA params examples
 #'
-#' @return A one-row [tibble::tibble] with columns:
-#' 
-#' \item{logLik}{the data's log-likelihood under the model}
-#' \item{AIC}{the Akaike Information Criterion}
-#' \item{BIC}{the Bayesian Information Criterion}
-#' \item{g.squared}{The likelihood ratio/deviance statistic}
-#' \item{chi.squared}{The Pearson Chi-Square goodness of fit statistic
-#'   for multiway tables}
-#' \item{df}{Number of parameters estimated, and therefore degrees of
-#'   freedom used}
-#' \item{df.residual}{Number of residual degrees of freedom left}
+#' @evalRd return_glance(
+#'   "logLik",
+#'   "AIC",
+#'   "BIC",
+#'   "chi.squared",
+#'   "df",
+#'   "df.residual",
+#'   g.squared = "The likelihood ratio/deviance statistic"
+#' )
 #'
 #' @export
 #' @seealso [glance()], [poLCA::poLCA()]

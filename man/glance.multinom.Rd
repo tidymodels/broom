@@ -19,13 +19,6 @@ proceed using \code{conf.level = 0.95}. Additionally, if you pass
 accept a \code{newdata} argument, it will use the default value for
 the \code{data} argument.}
 }
-\value{
-A one-row \link[tibble:tibble]{tibble::tibble} with columns:
-
-\item{edf}{The effective degrees of freedom}
-\item{deviance}{deviance}
-\item{AIC}{the Akaike Information Criterion}
-}
 \description{
 Glance accepts a model object and returns a \code{\link[tibble:tibble]{tibble::tibble()}}
 with exactly one row of model summaries. The summaries are typically
@@ -41,9 +34,33 @@ computations to appropriate methods and gathers the results together.
 Sometimes a goodness of fit measure will be undefined. In these cases
 the measure will be reported as \code{NA}.
 }
+\examples{
+
+library(nnet)
+library(MASS)
+
+example(birthwt)
+bwt.mu <- multinom(low ~ ., bwt)
+tidy(bwt.mu)
+glance(bwt.mu)
+
+#* This model is a truly terrible model
+#* but it should show you what the output looks
+#* like in a multinomial logistic regression
+
+fit.gear <- multinom(gear ~ mpg + factor(am), data = mtcars)
+tidy(fit.gear)
+glance(fit.gear)
+
+}
 \seealso{
 \code{\link[=glance]{glance()}}, \code{\link[nnet:multinom]{nnet::multinom()}}
 
 Other multinom tidiers: \code{\link{tidy.multinom}}
 }
 \concept{multinom tidiers}
+\value{
+  \item{AIC}{Akaike's Information Criterion for the model.}
+  \item{deviance}{Deviance of the model.}
+  \item{edf}{The effective degrees of freedom}
+}

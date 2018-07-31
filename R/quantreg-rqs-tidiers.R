@@ -8,7 +8,7 @@
 #' @template param_confint
 #' @param ... Additional arguments passed to [quantreg::summary.rqs()]
 #' 
-#' @template return_tidy_regression
+#' @evalRd return_tidy(regression = TRUE)
 #' 
 #' @return An additional `quantile` column indicating with quantile the 
 #'   coefficient corresponds to.
@@ -51,25 +51,11 @@ glance.rqs <- function(x, ...) {
 #' @templateVar class rqs
 #' @template title_desc_augment
 #'
-#' @param x An `rqs` object returned from [quantreg::rq()].
+#' @inherit tidy.rqs params examples
+#' @inherit augment.rq return details
 #' @template param_data
 #' @template param_newdata
 #' @inheritDotParams quantreg::predict.rqs
-#' 
-#' @return A [tibble::tibble] with one row per obseration and columns:
-#' 
-#'   \item{.resid}{Residuals}
-#'   \item{.fitted}{Fitted quantiles of the model}
-#'   \item{.tau}{Quantile estimated}
-#'
-#'   Depending on the arguments passed on to `predict.rqs` via `...`,
-#'   a confidence interval is also calculated on the fitted values resulting in
-#'   columns:
-#'     \item{.conf.low}{Lower confidence interval value}
-#'     \item{.conf.high}{Upper confidence interval value}
-#'
-#'   `predict.rqs` does not provide confidence intervals when `newdata`
-#'    is provided.
 #'
 #' @export
 #' @seealso [augment], [quantreg::rq()], [quantreg::predict.rqs()]

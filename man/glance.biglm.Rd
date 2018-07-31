@@ -20,13 +20,6 @@ proceed using \code{conf.level = 0.95}. Additionally, if you pass
 accept a \code{newdata} argument, it will use the default value for
 the \code{data} argument.}
 }
-\value{
-\code{glance.biglm} returns a one-row data frame, with columns
-\item{r.squared}{The percent of variance explained by the model}
-\item{AIC}{the Akaike Information Criterion}
-\item{deviance}{deviance}
-\item{df.residual}{residual degrees of freedom}
-}
 \description{
 Glance accepts a model object and returns a \code{\link[tibble:tibble]{tibble::tibble()}}
 with exactly one row of model summaries. The summaries are typically
@@ -42,9 +35,35 @@ computations to appropriate methods and gathers the results together.
 Sometimes a goodness of fit measure will be undefined. In these cases
 the measure will be reported as \code{NA}.
 }
+\examples{
+
+bfit <- biglm(mpg ~ wt + disp, mtcars)
+tidy(bfit)
+tidy(bfit, conf.int = TRUE)
+tidy(bfit, conf.int = TRUE, conf.level = .9)
+
+glance(bfit)
+
+# bigglm: logistic regression
+bgfit <- bigglm(am ~ mpg, mtcars, family = binomial())
+tidy(bgfit)
+tidy(bgfit, exponentiate = TRUE)
+tidy(bgfit, conf.int = TRUE)
+tidy(bgfit, conf.int = TRUE, conf.level = .9)
+tidy(bgfit, conf.int = TRUE, conf.level = .9, exponentiate = TRUE)
+
+glance(bgfit)
+
+}
 \seealso{
 \code{\link[=glance]{glance()}}, \code{\link[biglm:biglm]{biglm::biglm()}}, \code{\link[biglm:bigglm]{biglm::bigglm()}}
 
 Other biglm tidiers: \code{\link{tidy.biglm}}
 }
 \concept{biglm tidiers}
+\value{
+  \item{AIC}{Akaike's Information Criterion for the model.}
+  \item{deviance}{Deviance of the model.}
+  \item{df.residual}{Residual degrees of freedom for the model.}
+  \item{r.squared}{R squared statistic, or the percent of variation explained by the model. Also known as the coefficient of determination.}
+}

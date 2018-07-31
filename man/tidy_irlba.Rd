@@ -11,20 +11,15 @@ tidy_irlba(x, ...)
 \arguments{
 \item{x}{A list returned from \code{\link[irlba:irlba]{irlba::irlba()}}.}
 
-\item{...}{Arguments passed on to \code{tidy_svd}
-\describe{
-  \item{x}{A list with components \code{u}, \code{d}, \code{v} returned by \code{\link[=svd]{svd()}}.}
-  \item{matrix}{Character specifying which component of the PCA should be
-tidied.
-\itemize{
-\item \code{"u"}, \code{"samples"}, or \code{"x"}: returns information about the map from
-the original space into principle components space.
-\item \code{"v"}, \code{"rotation"}, or \code{"variables"}: returns information about the
-map from principle components space back into the original space.
-\item \code{"d"} or \code{"pcs"}: returns information about the eigenvalues
-will return information about
-}}
-}}
+\item{...}{Additional arguments. Not used. Needed to match generic
+signature only. \strong{Cautionary note:} Misspelled arguments will be
+absorbed in \code{...}, where they will be ignored. If the misspelled
+argument has a default value, the default value will be used.
+For example, if you pass \code{conf.lvel = 0.9}, all computation will
+proceed using \code{conf.level = 0.95}. Additionally, if you pass
+\code{newdata = my_tibble} to an \code{\link[=augment]{augment()}} method that does not
+accept a \code{newdata} argument, it will use the default value for
+the \code{data} argument.}
 }
 \value{
 A \link[tibble:tibble]{tibble::tibble} with columns depending on the component of
@@ -71,6 +66,35 @@ If no appropriate tidying method is found, throws an error.
 }
 \details{
 A very thin wrapper around \code{\link[=tidy_svd]{tidy_svd()}}.
+}
+\examples{
+
+mat <- scale(as.matrix(iris[, 1:4]))
+s <- svd(mat)
+
+tidy_u <- tidy(s, matrix = "u")
+tidy_u
+
+tidy_d <- tidy(s, matrix = "d")
+tidy_d
+
+tidy_v <- tidy(s, matrix = "v")
+tidy_v
+
+library(ggplot2)
+library(dplyr)
+
+ggplot(tidy_d, aes(PC, percent)) +
+    geom_point() +
+    ylab("\% of variance explained")
+
+tidy_u \%>\%
+    mutate(Species = iris$Species[row]) \%>\%
+    ggplot(aes(Species, value)) +
+    geom_boxplot() +
+    facet_wrap(~ PC, scale = "free_y")
+
+
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[irlba:irlba]{irlba::irlba()}}

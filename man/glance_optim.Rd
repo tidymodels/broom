@@ -20,14 +20,6 @@ proceed using \code{conf.level = 0.95}. Additionally, if you pass
 accept a \code{newdata} argument, it will use the default value for
 the \code{data} argument.}
 }
-\value{
-A one-row \link[tibble:tibble]{tibble::tibble} with columns:
-
-\item{value}{minimized or maximized output value}
-\item{function.count}{number of calls to \code{fn}}
-\item{gradient.count}{number of calls to \code{gr}}
-\item{convergence}{convergence code representing the error state}
-}
 \description{
 Broom tidies a number of lists that are effectively S3
 objects without a class attribute. For example, \code{\link[stats:optim]{stats::optim()}},
@@ -41,6 +33,15 @@ or \code{glance_<function>} and are not exported (but they are documented!).
 
 If no appropriate tidying method is found, throws an error.
 }
+\examples{
+
+f <- function(x) (x[1] - 2)^2 + (x[2] - 3)^2 + (x[3] - 8)^2
+o <- optim(c(1, 1, 1), f)
+
+tidy(o)
+glance(o)
+
+}
 \seealso{
 \code{\link[=glance]{glance()}}, \code{\link[=optim]{optim()}}
 
@@ -49,3 +50,9 @@ Other list tidiers: \code{\link{list_tidiers}},
   \code{\link{tidy_svd}}, \code{\link{tidy_xyz}}
 }
 \concept{list tidiers}
+\value{
+  \item{convergence}{convergence code representing the error state}
+  \item{function.count}{number of calls to `fn`}
+  \item{gradient.count}{number of calls to `gr`}
+  \item{value}{minimized or maximized output value}
+}

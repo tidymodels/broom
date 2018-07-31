@@ -4,13 +4,13 @@
 #' @param x A `garch` object returned by [tseries::garch()].
 #' @template param_unused_dots
 #'
-#' @return A [tibble::tibble] with one row for each coefficient and columns:
-#' 
-#'   \item{term}{The term in the linear model being estimated and tested}
-#'   \item{estimate}{The estimated coefficient}
-#'   \item{std.error}{The standard error}
-#'   \item{statistic}{test statistic}
-#'   \item{p.value}{p-value}
+#' @evalRd return_tidy(
+#'   "term",
+#'   "estimate",
+#'   "std.error",
+#'   "statistic",
+#'   "p.value"
+#' )
 #'
 #' @examples
 #'
@@ -45,16 +45,16 @@ tidy.garch <- function(x, ...) {
 #'    and Box-Ljung to squared residuals.
 #' @template param_unused_dots
 #'
-#' @return A one-row [tibble::tibble] with columns:
-#' 
-#'   \item{statistic}{Test statistic used to compute the p-value}
-#'   \item{p.value}{P-value}
-#'   \item{parameter}{Parameter field in the htest, typically degrees of
-#'   freedom}
-#'   \item{method}{Method used to compute the statistic as a string}
-#'   \item{logLik}{the data's log-likelihood under the model}
-#'   \item{AIC}{the Akaike Information Criterion}
-#'   \item{BIC}{the Bayesian Information Criterion}
+#' @evalRd return_glance(
+#'   "statistic",
+#'   "p.value",
+#'   "method",
+#'   "logLik",
+#'   "AIC",
+#'   "BIC",
+#'   parameter = "Parameter field in the htest, typically degrees of
+#'     freedom."
+#' )
 #'
 #' @export
 #' @family garch tidiers

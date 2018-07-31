@@ -23,16 +23,6 @@ proceed using \code{conf.level = 0.95}. Additionally, if you pass
 accept a \code{newdata} argument, it will use the default value for
 the \code{data} argument.}
 }
-\value{
-A \link[tibble:tibble]{tibble::tibble} with columns:
-\item{term}{coefficient name (V1...VN by default, along with
-"(Intercept)")}
-\item{step}{which step of lambda choices was used}
-\item{estimate}{estimate of coefficient}
-\item{lambda}{value of penalty parameter lambda}
-\item{dev.ratio}{fraction of null deviance explained at each
-value of lambda}
-}
 \description{
 Tidy summarizes information about the components of a model.
 A model component might be a single term in a regression, a single
@@ -54,34 +44,31 @@ choice of lambda.
 }
 \examples{
 
-if (requireNamespace("glmnet", quietly = TRUE)) {
+library(glmnet)
 
-    library(glmnet)
-    
-    set.seed(2014)
-    x <- matrix(rnorm(100*20),100,20)
-    y <- rnorm(100)
-    fit1 <- glmnet(x,y)
+set.seed(2014)
+x <- matrix(rnorm(100*20),100,20)
+y <- rnorm(100)
+fit1 <- glmnet(x,y)
 
-    tidy(fit1)
-    glance(fit1)
+tidy(fit1)
+glance(fit1)
 
-    library(dplyr)
-    library(ggplot2)
+library(dplyr)
+library(ggplot2)
 
-    tidied <- tidy(fit1) \%>\% filter(term != "(Intercept)")
+tidied <- tidy(fit1) \%>\% filter(term != "(Intercept)")
 
-    ggplot(tidied, aes(step, estimate, group = term)) + geom_line()
-    ggplot(tidied, aes(lambda, estimate, group = term)) +
-        geom_line() + scale_x_log10()
+ggplot(tidied, aes(step, estimate, group = term)) + geom_line()
+ggplot(tidied, aes(lambda, estimate, group = term)) +
+    geom_line() + scale_x_log10()
 
-    ggplot(tidied, aes(lambda, dev.ratio)) + geom_line()
+ggplot(tidied, aes(lambda, dev.ratio)) + geom_line()
 
-    # works for other types of regressions as well, such as logistic
-    g2 <- sample(1:2, 100, replace=TRUE)
-    fit2 <- glmnet(x, g2, family="binomial")
-    tidy(fit2)
-}
+# works for other types of regressions as well, such as logistic
+g2 <- sample(1:2, 100, replace=TRUE)
+fit2 <- glmnet(x, g2, family="binomial")
+tidy(fit2)
 
 }
 \seealso{
@@ -91,3 +78,10 @@ Other glmnet tidiers: \code{\link{glance.cv.glmnet}},
   \code{\link{glance.glmnet}}, \code{\link{tidy.cv.glmnet}}
 }
 \concept{glmnet tidiers}
+\value{
+  \item{dev.ratio}{fraction of null deviance explained at each value of lambda}
+  \item{estimate}{The estimated value of the regression term.}
+  \item{lambda}{Value of penalty parameter lambda.}
+  \item{step}{which step of lambda choices was used}
+  \item{term}{The name of the regression term.}
+}

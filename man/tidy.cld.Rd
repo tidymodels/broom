@@ -28,6 +28,32 @@ model component varies cross models but is usually self-evident.
 If a model has several distinct types of components, you will need to
 specify which components to return.
 }
+\examples{
+
+library(multcomp)
+library(ggplot2)
+
+amod <- aov(breaks ~ wool + tension, data = warpbreaks)
+wht <- glht(amod, linfct = mcp(tension = "Tukey"))
+
+tidy(wht)
+ggplot(wht, aes(lhs, estimate)) + geom_point()
+
+CI <- confint(wht)
+tidy(CI)
+ggplot(CI, aes(lhs, estimate, ymin = lwr, ymax = upr)) +
+   geom_pointrange()
+
+tidy(summary(wht))
+ggplot(mapping = aes(lhs, estimate)) +
+   geom_linerange(aes(ymin = lwr, ymax = upr), data = CI) +
+   geom_point(aes(size = p), data = summary(wht)) +
+   scale_size(trans = "reverse")
+
+cld <- cld(wht)
+tidy(cld)
+
+}
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[multcomp:cld]{multcomp::cld()}}, \code{\link[multcomp:summary.glht]{multcomp::summary.glht()}},
 \code{\link[multcomp:confint.glht]{multcomp::confint.glht()}}, \code{\link[multcomp:glht]{multcomp::glht()}}
@@ -36,3 +62,6 @@ Other multcomp tidiers: \code{\link{tidy.confint.glht}},
   \code{\link{tidy.glht}}, \code{\link{tidy.summary.glht}}
 }
 \concept{multcomp tidiers}
+\value{
+  \item{lhs}{TODO}
+}

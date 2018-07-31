@@ -73,7 +73,6 @@ augment.betareg <- function(x, data = model.frame(x), newdata = NULL,
                             type.predict, type.residuals, ...) {
   validate_augment_input(x, data, newdata)
   
-  # TODO: match.arg on type.predict and type.residuals
   augment_columns(
     x, data, newdata,
     type.predict = type.predict,
@@ -87,6 +86,15 @@ augment.betareg <- function(x, data = model.frame(x), newdata = NULL,
 #' 
 #' @inherit tidy.betareg params examples
 #' @template param_unused_dots
+#' 
+#' @evalRd return_glance(
+#'   "pseudo.r.squared",
+#'   "df.null", 
+#'   "logLik", 
+#'   "AIC",
+#'   "BIC",
+#'   "df.residual"
+#' )
 #' 
 #' @seealso [glance()], [betareg::betareg()]
 #' @export

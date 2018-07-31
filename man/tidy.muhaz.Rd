@@ -20,12 +20,6 @@ proceed using \code{conf.level = 0.95}. Additionally, if you pass
 accept a \code{newdata} argument, it will use the default value for
 the \code{data} argument.}
 }
-\value{
-A \link[tibble:tibble]{tibble::tibble} with two columns:
-
-\item{time}{The time at which the hazard rate was estimated.}
-\item{estimate}{The estimated hazard rate.}
-}
 \description{
 Tidy summarizes information about the components of a model.
 A model component might be a single term in a regression, a single
@@ -35,12 +29,13 @@ If a model has several distinct types of components, you will need to
 specify which components to return.
 }
 \examples{
-if (require("muhaz", quietly = TRUE)) {
-  data(ovarian, package="survival")
-  x <- muhaz::muhaz(ovarian$futime, ovarian$fustat)
-  tidy(x)
-  glance(x)
-}
+
+library(muhaz)
+
+data(ovarian, package="survival")
+x <- muhaz::muhaz(ovarian$futime, ovarian$fustat)
+tidy(x)
+glance(x)
 
 }
 \seealso{
@@ -49,3 +44,7 @@ if (require("muhaz", quietly = TRUE)) {
 Other muhaz tidiers: \code{\link{glance.muhaz}}
 }
 \concept{muhaz tidiers}
+\value{
+  \item{time}{Point in time.}
+  \item{estimate}{Estimated hazard rate.}
+}

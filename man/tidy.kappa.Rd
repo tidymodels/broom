@@ -21,14 +21,6 @@ proceed using \code{conf.level = 0.95}. Additionally, if you pass
 accept a \code{newdata} argument, it will use the default value for
 the \code{data} argument.}
 }
-\value{
-A \link[tibble:tibble]{tibble::tibble} with columns:
-
-\item{type}{Either "weighted" or "unweighted"}
-\item{estimate}{The estimated value of kappa with this method}
-\item{conf.low}{Lower bound of confidence interval}
-\item{conf.high}{Upper bound of confidence interval}
-}
 \description{
 Tidy summarizes information about the components of a model.
 A model component might be a single term in a regression, a single
@@ -61,4 +53,10 @@ ggplot(tidy(ck), aes(estimate, type)) +
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[psych:cohen.kappa]{psych::cohen.kappa()}}
+}
+\value{
+  \item{conf.high}{The upper end of a confidence interval for the term under consideration. Included only if `conf.int = TRUE`.}
+  \item{conf.low}{The lower end of a confidence interval for the term under consideration. Included only if `conf.int = TRUE`.}
+  \item{estimate}{The estimated value of the regression term.}
+  \item{type}{Either `weighted` or `unweighted`.}
 }

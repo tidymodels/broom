@@ -137,7 +137,7 @@ LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 6.1.0
 Remotes: 
-    topepo/modelgenerics@c14b7a,
+    topepo/modelgenerics,
     alexpghayes/modeltests
 Collate: 
     'aaa-documentation-helper.R'

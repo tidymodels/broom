@@ -34,6 +34,9 @@ If a model has several distinct types of components, you will need to
 specify which components to return.
 }
 \details{
+When \code{parametric = TRUE} return columns \code{edf} and \code{ref.df} rather
+than \code{estimate} and \code{std.error}.
+
 To tidy \code{Gam} objects created by calls to \code{\link[gam:gam]{gam::gam()}},
 see \code{\link[=tidy.Gam]{tidy.Gam()}}.
 }
@@ -53,3 +56,10 @@ glance(g)
 Other mgcv tidiers: \code{\link{glance.gam}}
 }
 \concept{mgcv tidiers}
+\value{
+  \item{estimate}{The estimated value of the regression term.}
+  \item{p.value}{The two-sided p-value associated with the observed statistic.}
+  \item{statistic}{The value of a T-statistic to use in a hypothesis that the regression term is non-zero.}
+  \item{std.error}{The standard error of the regression term.}
+  \item{term}{The name of the regression term.}
+}

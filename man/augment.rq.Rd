@@ -22,6 +22,8 @@ the original predictors used to create \code{x}. Defaults to \code{NULL}, indica
 that nothing has been passed to \code{newdata}. If \code{newdata} is specified,
 the \code{data} argument will be ignored.}
 
+\item{...}{Additional arguments passed to \code{\link[quantreg:summary.rq]{quantreg::summary.rq()}}.}
+
 \item{...}{Arguments passed on to \code{quantreg::predict.rq}
 \describe{
   \item{object}{ object of class rq or rqs or rq.process produced by \code{rq} }
@@ -47,22 +49,6 @@ the \code{data} argument will be ignored.}
   \item{na.action}{ function determining what should be done with missing values
     in 'newdata'.  The default is to predict 'NA'.}
 }}
-}
-\value{
-A \link[tibble:tibble]{tibble::tibble} with one row per obseration and columns:
-
-\item{.resid}{Residuals}
-\item{.fitted}{Fitted quantiles of the model}
-\item{.tau}{Quantile estimated}
-
-Depending on the arguments passed on to \code{predict.rq} via \code{...},
-a confidence interval is also calculated on the fitted values resulting in
-columns:
-\item{.conf.low}{Lower confidence interval value}
-\item{.conf.high}{Upper confidence interval value}
-
-\code{predict.rq} does not provide confidence intervals when \code{newdata}
-is provided.
 }
 \description{
 Augment accepts a model object and a dataset and adds
@@ -103,6 +89,20 @@ We are in the process of defining behaviors for models fit with various
 \link{na.action} arguments, but make no guarantees about behavior when data is
 missing at this time.
 }
+\details{
+Depending on the arguments passed on to \code{predict.rq} via \code{...},
+a confidence interval is also calculated on the fitted values resulting in
+columns:
+\item{.conf.low}{Lower confidence interval value}
+\item{.conf.high}{Upper confidence interval value}
+
+\code{predict.rq} does not provide confidence intervals when \code{newdata}
+is provided.
+}
+\examples{
+
+print('TODO')
+}
 \seealso{
 \link{augment}, \code{\link[quantreg:rq]{quantreg::rq()}}, \code{\link[quantreg:predict.rq]{quantreg::predict.rq()}}
 
@@ -112,3 +112,8 @@ Other quantreg tidiers: \code{\link{augment.nlrq}},
   \code{\link{tidy.rqs}}, \code{\link{tidy.rq}}
 }
 \concept{quantreg tidiers}
+\value{
+  \item{.fitted}{Fitted / predicted value.}
+  \item{.resid}{Residuals of fitted values. TODO -- document when present. Residuals on which data set?}
+  \item{.tau}{Quantile estimated  Depending on the arguments passed on to `predict.rq` via `...`, a confidence interval is also calculated on the fitted values.}
+}

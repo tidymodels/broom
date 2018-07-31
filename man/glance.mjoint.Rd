@@ -19,14 +19,6 @@ proceed using \code{conf.level = 0.95}. Additionally, if you pass
 accept a \code{newdata} argument, it will use the default value for
 the \code{data} argument.}
 }
-\value{
-A one-row \link[tibble:tibble]{tibble::tibble} with columns:
-\item{sigma2_j}{the square root of the estimated residual variance for
-the j-th longitudinal process}
-\item{AIC}{the Akaike Information Criterion}
-\item{BIC}{the Bayesian Information Criterion}
-\item{logLik}{the data's log-likelihood under the model}
-}
 \description{
 Glance accepts a model object and returns a \code{\link[tibble:tibble]{tibble::tibble()}}
 with exactly one row of model summaries. The summaries are typically
@@ -42,9 +34,61 @@ computations to appropriate methods and gathers the results together.
 Sometimes a goodness of fit measure will be undefined. In these cases
 the measure will be reported as \code{NA}.
 }
+\examples{
+\dontrun{
+# Fit a joint model with bivariate longitudinal outcomes
+library(joineRML)
+data(heart.valve)
+hvd <- heart.valve[!is.na(heart.valve$log.grad) &
+                       !is.na(heart.valve$log.lvmi) &
+                       heart.valve$num <= 50, ]
+fit <- mjoint(
+    formLongFixed = list(
+        "grad" = log.grad ~ time + sex + hs,
+        "lvmi" = log.lvmi ~ time + sex
+    ),
+    formLongRandom = list(
+        "grad" = ~ 1 | num,
+        "lvmi" = ~ time | num
+    ),
+    formSurv = Surv(fuyrs, status) ~ age,
+    data = hvd,
+    inits = list("gamma" = c(0.11, 1.51, 0.80)),
+    timeVar = "time"
+)
+
+# Extract the survival fixed effects
+tidy(fit)
+
+# Extract the longitudinal fixed effects
+tidy(fit, component = "longitudinal")
+
+# Extract the survival fixed effects with confidence intervals
+tidy(fit, ci = TRUE)
+
+# Extract the survival fixed effects with confidence intervals based
+# on bootstrapped standard errors
+bSE <- bootSE(fit, nboot = 5, safe.boot = TRUE)
+tidy(fit, boot_se = bSE, ci = TRUE)
+
+# Augment original data with fitted longitudinal values and residuals
+hvd2 <- augment(fit)
+
+# Extract model statistics
+glance(fit)
+}
+
+}
 \seealso{
 \code{\link[=glance]{glance()}}, \code{\link[joineRML:mjoint]{joineRML::mjoint()}}
 
 Other mjoint tidiers: \code{\link{tidy.mjoint}}
 }
 \concept{mjoint tidiers}
+\value{
+  \item{AIC}{Akaike's Information Criterion for the model.}
+  \item{BIC}{Bayesian Information Criterion for the model.}
+  \item{logLik}{The log-likelihood of the model. [stats::logLik()] may be a useful reference.}
+  \item{sigma2_j}{The square root of the estimated residual variance for
+    the j-th longitudinal process}
+}

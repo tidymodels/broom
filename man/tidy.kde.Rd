@@ -37,28 +37,25 @@ specify which components to return.
 }
 \examples{
 
-if (requireNamespace("ks", quietly = TRUE)) {
-  
-  library(ks)
-  
-  dat <- replicate(2, rnorm(100))
-  k <- kde(dat)
+library(ks)
 
-  td <- tidy(k)
-  td
+dat <- replicate(2, rnorm(100))
+k <- kde(dat)
 
-  library(ggplot2)
-  ggplot(td, aes(x1, x2, fill = estimate)) +
-    geom_tile() +
-    theme_void()
+td <- tidy(k)
+td
 
-  # also works with 3 dimensions
-  dat3 <- replicate(3, rnorm(100))
-  k3 <- kde(dat3)
+library(ggplot2)
+ggplot(td, aes(x1, x2, fill = estimate)) +
+  geom_tile() +
+  theme_void()
 
-  td3 <- tidy(k3)
-  td3
-}
+# also works with 3 dimensions
+dat3 <- replicate(3, rnorm(100))
+k3 <- kde(dat3)
+
+td3 <- tidy(k3)
+td3
 
 }
 \seealso{

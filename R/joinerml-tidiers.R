@@ -12,7 +12,7 @@
 #'   empirical information matrix.
 #' @template param_unused_dots
 #'
-#' @template return_tidy_regression
+#' @evalRd return_tidy(regression = TRUE)
 #'
 #' @examples
 #' \dontrun{
@@ -102,7 +102,7 @@ tidy.mjoint <- function(x, component = "survival", conf.int = FALSE,
 #' @templateVar class mjoint
 #' @template title_desc_augment
 #' 
-#' @inheritParams tidy.mjoint
+#' @inherit tidy.mjoint params examples
 #' @template param_data
 #' 
 #' @return A [tibble::tibble()] with one row for each original observation
@@ -117,10 +117,10 @@ tidy.mjoint <- function(x, component = "survival", conf.int = FALSE,
 #'     longitudinal process}
 #' 
 #' @details See [joineRML::fitted.mjoint()] and [joineRML::residuals.mjoint()] for
-#' more information on the difference between population-level and
-#' individual-level fitted values and residuals.
+#'   more information on the difference between population-level and
+#'   individual-level fitted values and residuals.
 #'
-#' If fitting a joint model with a single longitudinal process,
+#'   If fitting a joint model with a single longitudinal process,
 #'   make sure you are using a named `list` to define the formula
 #'   for the fixed and random effects of the longitudinal submodel.
 #'
@@ -164,14 +164,12 @@ augment.mjoint <- function(x, data = x$data, ...) {
 #' @templateVar class mjoint
 #' @template title_desc_glance
 #' 
-#' @inheritParams tidy.mjoint
+#' @inherit tidy.mjoint params examples
 #'
-#' @return A one-row [tibble::tibble] with columns:
-#'   \item{sigma2_j}{the square root of the estimated residual variance for
-#'     the j-th longitudinal process}
-#'   \item{AIC}{the Akaike Information Criterion}
-#'   \item{BIC}{the Bayesian Information Criterion}
-#'   \item{logLik}{the data's log-likelihood under the model}
+#' @evalRd return_glance("AIC", "BIC", "logLik",
+#'   sigma2_j = "The square root of the estimated residual variance for
+#'     the j-th longitudinal process"
+#' )
 #'
 #' @export
 #' @family mjoint tidiers
