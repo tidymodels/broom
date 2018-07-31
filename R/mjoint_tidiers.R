@@ -38,11 +38,11 @@
 #' tidy(fit, component = "longitudinal")
 #'
 #' # Extract the survival fixed effects with confidence intervals
-#' tidy(fit, ci = TRUE)
+#' tidy(fit, conf.int = TRUE)
 #'
 #' # Extract the survival fixed effects with confidence intervals based on bootstrapped standard errors
 #' bSE <- bootSE(fit, nboot = 5, safe.boot = TRUE)
-#' tidy(fit, bootSE = bSE, ci = TRUE)
+#' tidy(fit, bootSE = bSE, conf.int = TRUE)
 #'
 #' # Augment original data with fitted longitudinal values and residuals
 #' hvd2 <- augment(fit)
@@ -71,7 +71,7 @@
 #'   \item{conf.high}{The high end of a confidence interval on \code{estimate}, if required}
 #'
 #' @export
-tidy.mjoint <- function(x, component = "survival", bootSE = NULL, ci = FALSE, level = 0.95, ...) {
+tidy.mjoint <- function(x, component = "survival", bootSE = NULL, conf.int = FALSE, conf.level = 0.95, ...) {
   component <- match.arg(component, c("survival", "longitudinal"))
   if (!is.null(bootSE)) {
     if (!inherits(x = bootSE, what = "bootSE")) stop("'bootSE' object not of class 'bootSE'")
@@ -100,8 +100,8 @@ tidy.mjoint <- function(x, component = "survival", bootSE = NULL, ci = FALSE, le
   out <- out[, c(5, 1:4)]
 
   # make confidence intervals (if required)
-  if (ci) {
-    cv <- qnorm(1 - (1 - level) / 2)
+  if (conf.int) {
+    cv <- qnorm(1 - (1 - conf.level) / 2)
     out$conf.low <- out$estimate - cv * out$std.error
     out$conf.high <- out$estimate + cv * out$std.error
   }

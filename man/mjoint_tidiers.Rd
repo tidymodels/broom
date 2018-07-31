@@ -8,7 +8,7 @@
 \title{Tidying methods for joint models for time-to-event data and multivariate longitudinal data}
 \usage{
 \method{tidy}{mjoint}(x, component = "survival", bootSE = NULL,
-  ci = FALSE, level = 0.95, ...)
+  conf.int = FALSE, conf.level = 0.95, ...)
 
 \method{augment}{mjoint}(x, data = x$data, ...)
 
@@ -21,41 +21,44 @@
 
 \item{bootSE}{An object of class \code{bootSE} for the corresponding model. If \code{bootSE = NULL} (the default), the function will use approximate standard error estimates calculated from the empirical information matrix.}
 
+\item{...}{extra arguments (not used)}
+
+\item{data}{Original data this was fitted on, in a list (e.g. \code{list(data)}). This will be extracted from \code{x} if not given.}
+
 \item{ci}{Include (\code{1 - level})\% confidence intervals? Defaults to \code{FALSE}.}
 
 \item{level}{The confidence level required.}
-
-\item{...}{extra arguments (not used)}
-
-\item{data}{Original data this was fitted on; this will be extracted from \code{x} if not given.}
 }
 \value{
 All tidying methods return a \code{data.frame} without rownames. The structure depends on the method chosen.
 
 \code{tidy} returns one row for each estimated fixed effect depending on the \code{component} parameter. It contains the following  columns:
-  \item{term}{The term being estimated}
-  \item{estimate}{Estimated value}
-  \item{std.error}{Standard error}
-  \item{statistic}{Z-statistic}
-  \item{p.value}{P-value computed from Z-statistic}
-  \item{conf.low}{The low end of a confidence interval on \code{estimate}, if required}
-  \item{conf.high}{The high end of a confidence interval on \code{estimate}, if required}
+\item{term}{The term being estimated}
+\item{estimate}{Estimated value}
+\item{std.error}{Standard error}
+\item{statistic}{Z-statistic}
+\item{p.value}{P-value computed from Z-statistic}
+\item{conf.low}{The low end of a confidence interval on \code{estimate}, if required}
+\item{conf.high}{The high end of a confidence interval on \code{estimate}, if required}
 
 \code{augment} returns one row for each original observation, with columns (each prepended by a .) added. Included are the columns:
-  \item{.fitted_j_0}{population-level fitted values for the j-th longitudinal process}
-  \item{.fitted_j_1}{individuals-level fitted values for the j-th longitudinal process}
-  \item{.resid_j_0}{population-level residuals for the j-th longitudinal process}
-  \item{.resid_j_1}{individual-level residuals for the j-th longitudinal process}
+\item{.fitted_j_0}{population-level fitted values for the j-th longitudinal process}
+\item{.fitted_j_1}{individuals-level fitted values for the j-th longitudinal process}
+\item{.resid_j_0}{population-level residuals for the j-th longitudinal process}
+\item{.resid_j_1}{individual-level residuals for the j-th longitudinal process}
 See \code{\link[joineRML]{fitted.mjoint}} and \code{\link[joineRML]{residuals.mjoint}} for more information on the difference between population-level and individual-level fitted values and residuals.
 
 \code{glance} returns one row with the columns
-  \item{sigma2_j}{the square root of the estimated residual variance for the j-th longitudinal process}
-  \item{AIC}{the Akaike Information Criterion}
-  \item{BIC}{the Bayesian Information Criterion}
-  \item{logLik}{the data's log-likelihood under the model}
+\item{sigma2_j}{the square root of the estimated residual variance for the j-th longitudinal process}
+\item{AIC}{the Akaike Information Criterion}
+\item{BIC}{the Bayesian Information Criterion}
+\item{logLik}{the data's log-likelihood under the model}
 }
 \description{
 These methods tidy the coefficients of joint models for time-to-event data and multivariate longitudinal data of the \code{mjoint} class from the \code{joineRML} package.
+}
+\note{
+If fitting a joint model with a single longitudinal process, please make sure you are using a named \code{list} to define the formula for the fixed and random effects of the longitudinal submodel.
 }
 \examples{
 \dontrun{
@@ -87,11 +90,11 @@ tidy(fit)
 tidy(fit, component = "longitudinal")
 
 # Extract the survival fixed effects with confidence intervals
-tidy(fit, ci = TRUE)
+tidy(fit, conf.int = TRUE)
 
 # Extract the survival fixed effects with confidence intervals based on bootstrapped standard errors
 bSE <- bootSE(fit, nboot = 5, safe.boot = TRUE)
-tidy(fit, bootSE = bSE, ci = TRUE)
+tidy(fit, bootSE = bSE, conf.int = TRUE)
 
 # Augment original data with fitted longitudinal values and residuals
 hvd2 <- augment(fit)
