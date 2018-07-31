@@ -63,7 +63,9 @@ Other time series tidiers: \code{\link{tidy.acf}},
 }
 \concept{time series tidiers}
 \value{
+A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
   \item{index}{Index (i.e. date or time) for a `ts` or `zoo` object.}
   \item{series}{Name of the series (present only for multivariate time series).}
   \item{value}{Needs custom desciption.}
+
 }

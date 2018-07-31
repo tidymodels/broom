@@ -64,6 +64,7 @@ glance(mod)
 }
 \concept{betareg tidiers}
 \value{
+A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
   \item{conf.high}{The upper end of a confidence interval for the term under consideration. Included only if `conf.int = TRUE`.}
   \item{conf.low}{The lower end of a confidence interval for the term under consideration. Included only if `conf.int = TRUE`.}
   \item{estimate}{The estimated value of the regression term.}
@@ -73,4 +74,5 @@ glance(mod)
   \item{term}{The name of the regression term.}
   \item{component}{Whether a particular term was used to model the mean or the
     precision in the regression. See details.}
+
 }

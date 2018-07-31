@@ -67,6 +67,7 @@ glance(result_felm)
 
 }
 \value{
+A \code{\link[tibble:tibble]{tibble::tibble()}} with exactly one row and columns:
   \item{adj.r.squared}{Adjusted R squared statistic, which is like the R squared statistic except taking degrees of freedom into account.}
   \item{df}{Degrees of freedom used by the model.}
   \item{df.residual}{Residual degrees of freedom for the model.}
@@ -74,4 +75,5 @@ glance(result_felm)
   \item{r.squared}{R squared statistic, or the percent of variation explained by the model. Also known as the coefficient of determination.}
   \item{sigma}{Estimated standard error of the residuals.}
   \item{statistic}{Needs custom info.}
+
 }

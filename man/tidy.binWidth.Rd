@@ -47,8 +47,10 @@ Other bingroup tidiers: \code{\link{glance.binDesign}},
 }
 \concept{bingroup tidiers}
 \value{
+A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
   \item{alternative}{Alternative hypothesis (character).}
   \item{ci.width}{Expected width of confidence interval.}
   \item{p}{True proportion.}
   \item{n}{Total sample size}
+
 }

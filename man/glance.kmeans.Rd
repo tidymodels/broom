@@ -42,8 +42,10 @@ Other kmeans tidiers: \code{\link{augment.kmeans}},
 }
 \concept{kmeans tidiers}
 \value{
+A \code{\link[tibble:tibble]{tibble::tibble()}} with exactly one row and columns:
   \item{betweenss}{The total between-cluster sum of squares}
   \item{iter}{Iterations of algorithm/fitting procedure completed.}
   \item{tot.withinss}{The total within-cluster sum of squares}
   \item{totss}{The total sum of squares}
+
 }

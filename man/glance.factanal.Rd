@@ -52,6 +52,7 @@ Other factanal tidiers: \code{\link{augment.factanal}},
 }
 \concept{factanal tidiers}
 \value{
+A \code{\link[tibble:tibble]{tibble::tibble()}} with exactly one row and columns:
   \item{converged}{Logical indicating if the model fitting procedure was succesful and converged.}
   \item{df}{Degrees of freedom used by the model.}
   \item{method}{Needs custom info.}
@@ -59,4 +60,5 @@ Other factanal tidiers: \code{\link{augment.factanal}},
   \item{n.factors}{The number of fitted factors}
   \item{statistic}{Needs custom info.}
   \item{total.variance}{Total cumulative proportion of variance accounted for by all factors}
+
 }

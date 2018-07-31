@@ -59,6 +59,7 @@ Other htest tidiers: \code{\link{augment.htest}},
 }
 \concept{htest tidiers}
 \value{
+A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
   \item{alternative}{Alternative hypothesis (character).}
   \item{conf.high}{The upper end of a confidence interval for the term under consideration. Included only if `conf.int = TRUE`.}
   \item{conf.low}{The lower end of a confidence interval for the term under consideration. Included only if `conf.int = TRUE`.}
@@ -69,4 +70,5 @@ Other htest tidiers: \code{\link{augment.htest}},
   \item{p.value}{The two-sided p-value associated with the observed statistic.}
   \item{parameter}{Needs custom info.}
   \item{statistic}{The value of a T-statistic to use in a hypothesis that the regression term is non-zero.}
+
 }

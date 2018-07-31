@@ -46,7 +46,9 @@ Other factanal tidiers: \code{\link{augment.factanal}},
 }
 \concept{factanal tidiers}
 \value{
+A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
   \item{flX}{Factor loading of term on factor X. There will be as many columns of this format as there were factors fitted.}
   \item{variable}{Needs custom info.}
   \item{uniqueness}{Proportion of residual, or unexplained variance}
+
 }

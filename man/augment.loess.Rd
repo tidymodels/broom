@@ -74,7 +74,9 @@ augment(lo, newdata = head(mtcars))
 \code{\link[=augment]{augment()}}, \code{\link[stats:loess]{stats::loess()}}, \code{\link[stats:predict.loess]{stats::predict.loess()}}
 }
 \value{
+A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
   \item{.fitted}{Fitted / predicted value.}
   \item{.resid}{Residuals of fitted values. TODO -- document when present. Residuals on which data set?}
   \item{.se.fit}{Standard errors of fitted values. TODO -- prediction or mean interval?}
+
 }

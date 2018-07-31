@@ -89,5 +89,7 @@ Other speedlm tidiers: \code{\link{glance.speedlm}},
 }
 \concept{speedlm tidiers}
 \value{
+A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
   \item{.fitted}{Fitted / predicted value.}
+
 }

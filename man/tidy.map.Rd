@@ -47,10 +47,12 @@ qplot(long, lat, data = tx, geom = "polygon", group = group,
 \code{\link[=tidy]{tidy()}}, \code{\link[maps:map]{maps::map()}}
 }
 \value{
+A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
   \item{long}{TODO}
   \item{lat}{TODO}
   \item{group}{TODO}
   \item{order}{TODO}
   \item{region}{TODO}
   \item{subregion}{TODO}
+
 }

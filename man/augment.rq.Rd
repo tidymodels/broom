@@ -109,7 +109,9 @@ Other quantreg tidiers: \code{\link{augment.nlrq}},
 }
 \concept{quantreg tidiers}
 \value{
+A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
   \item{.fitted}{Fitted / predicted value.}
   \item{.resid}{Residuals of fitted values. TODO -- document when present. Residuals on which data set?}
   \item{.tau}{Quantile estimated  Depending on the arguments passed on to `predict.rq` via `...`, a confidence interval is also calculated on the fitted values.}
+
 }

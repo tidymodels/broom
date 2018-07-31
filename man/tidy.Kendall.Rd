@@ -51,9 +51,11 @@ tidy(t_res)
 \code{\link[Kendall:SeasonalMannKendall]{Kendall::SeasonalMannKendall()}}
 }
 \value{
+A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
   \item{kendall_score}{Kendall score.}
   \item{p.value}{The two-sided p-value associated with the observed statistic.}
   \item{var_kendall_score}{Variance of the kendall_score.}
   \item{statistic}{Kendall's tau statistic}
   \item{denominator}{The denominator, which is tau=kendall_score/denominator.}
+
 }

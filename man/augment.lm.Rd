@@ -155,6 +155,7 @@ Other lm tidiers: \code{\link{augment.glm}},
 }
 \concept{lm tidiers}
 \value{
+A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
   \item{.cooksd}{Cooks distance. See [stats::cooks.distance()] for additional details.}
   \item{.fitted}{Fitted / predicted value.}
   \item{.hat}{Diagonal of the hat matrix. TODO -- add interpretation.}
@@ -162,4 +163,5 @@ Other lm tidiers: \code{\link{augment.glm}},
   \item{.se.fit}{Standard errors of fitted values. TODO -- prediction or mean interval?}
   \item{.sigma}{Estimate of residual standard deviation when corresponding observation is dropped from model. Same as LOO-CV estimate?.}
   \item{.std.resid}{Standardised residuals  Some unusual `lm` objects, such as `rlm` from MASS, may omit `.cooksd` and `.std.resid`.}
+
 }

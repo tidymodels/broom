@@ -79,6 +79,8 @@ Other nls tidiers: \code{\link{glance.nls}},
 }
 \concept{nls tidiers}
 \value{
+A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
   \item{.fitted}{Fitted / predicted value.}
   \item{.resid}{Residuals of fitted values. TODO -- document when present. Residuals on which data set?}
+
 }

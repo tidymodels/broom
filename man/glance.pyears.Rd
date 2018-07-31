@@ -75,6 +75,8 @@ Other survival tidiers: \code{\link{augment.coxph}},
 \concept{pyears tidiers}
 \concept{survival tidiers}
 \value{
+A \code{\link[tibble:tibble]{tibble::tibble()}} with exactly one row and columns:
   \item{total}{total number of person-years tabulated}
   \item{offtable}{total number of person-years off table}
+
 }

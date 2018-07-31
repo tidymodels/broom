@@ -69,10 +69,12 @@ tidy(six_class_cm, by_class = FALSE)
 \code{\link[=tidy]{tidy()}}, \code{\link[caret:confusionMatrix]{caret::confusionMatrix()}}
 }
 \value{
+A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
   \item{class}{The class under consideration.}
   \item{conf.high}{The upper end of a confidence interval for the term under consideration. Included only if `conf.int = TRUE`.}
   \item{conf.low}{The lower end of a confidence interval for the term under consideration. Included only if `conf.int = TRUE`.}
   \item{estimate}{The estimated value of the regression term.}
   \item{term}{The name of the regression term.}
   \item{p.value}{P-value for accuracy and kappa statistics.}
+
 }

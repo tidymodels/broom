@@ -74,5 +74,7 @@ tidy(geefit, conf.int = TRUE)
 \code{\link[=tidy]{tidy()}}, \code{\link[geepack:geeglm]{geepack::geeglm()}}
 }
 \value{
+A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
   \item{regresion}{TRUE}
+
 }

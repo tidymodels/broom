@@ -74,6 +74,7 @@ Other ivreg tidiers: \code{\link{augment.ivreg}},
 }
 \concept{ivreg tidiers}
 \value{
+A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
   \item{conf.high}{The upper end of a confidence interval for the term under consideration. Included only if `conf.int = TRUE`.}
   \item{conf.low}{The lower end of a confidence interval for the term under consideration. Included only if `conf.int = TRUE`.}
   \item{estimate}{The estimated value of the regression term.}
@@ -81,4 +82,5 @@ Other ivreg tidiers: \code{\link{augment.ivreg}},
   \item{statistic}{The value of a T-statistic to use in a hypothesis that the regression term is non-zero.}
   \item{std.error}{The standard error of the regression term.}
   \item{term}{The name of the regression term.}
+
 }

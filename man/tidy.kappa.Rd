@@ -55,8 +55,10 @@ ggplot(tidy(ck), aes(estimate, type)) +
 \code{\link[=tidy]{tidy()}}, \code{\link[psych:cohen.kappa]{psych::cohen.kappa()}}
 }
 \value{
+A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
   \item{conf.high}{The upper end of a confidence interval for the term under consideration. Included only if `conf.int = TRUE`.}
   \item{conf.low}{The lower end of a confidence interval for the term under consideration. Included only if `conf.int = TRUE`.}
   \item{estimate}{The estimated value of the regression term.}
   \item{type}{Either `weighted` or `unweighted`.}
+
 }

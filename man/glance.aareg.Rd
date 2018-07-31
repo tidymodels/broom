@@ -67,7 +67,9 @@ Other survival tidiers: \code{\link{augment.coxph}},
 \concept{aareg tidiers}
 \concept{survival tidiers}
 \value{
+A \code{\link[tibble:tibble]{tibble::tibble()}} with exactly one row and columns:
   \item{df}{Degrees of freedom used by the model.}
   \item{p.value}{Needs custom info.}
   \item{statistic}{Needs custom info.}
+
 }

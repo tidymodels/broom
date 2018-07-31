@@ -70,6 +70,7 @@ Other ivreg tidiers: \code{\link{augment.ivreg}},
 }
 \concept{ivreg tidiers}
 \value{
+A \code{\link[tibble:tibble]{tibble::tibble()}} with exactly one row and columns:
   \item{adj.r.squared}{Adjusted R squared statistic, which is like the R squared statistic except taking degrees of freedom into account.}
   \item{df}{Degrees of freedom used by the model.}
   \item{df.residual}{Residual degrees of freedom for the model.}
@@ -83,4 +84,5 @@ Other ivreg tidiers: \code{\link{augment.ivreg}},
   \item{statistic.Wu.Hausman}{Statistic for Wu-Hausman test.}
   \item{statistic}{Wald test statistic.}
   \item{p.value}{P-value for the Wald test.}
+
 }

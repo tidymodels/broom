@@ -55,10 +55,12 @@ glance(mod)
 \code{\link[=glance]{glance()}}, \code{\link[betareg:betareg]{betareg::betareg()}}
 }
 \value{
+A \code{\link[tibble:tibble]{tibble::tibble()}} with exactly one row and columns:
   \item{AIC}{Akaike's Information Criterion for the model.}
   \item{BIC}{Bayesian Information Criterion for the model.}
   \item{df.null}{Needs custom info.}
   \item{df.residual}{Residual degrees of freedom for the model.}
   \item{logLik}{The log-likelihood of the model. [stats::logLik()] may be a useful reference.}
   \item{pseudo.r.squared}{TODO}
+
 }

@@ -68,9 +68,11 @@ ggplot(td, aes(estimate, p.value)) +
 \code{\link[=tidy]{tidy()}}, \code{\link[Hmisc:rcorr]{Hmisc::rcorr()}}
 }
 \value{
+A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
   \item{column1}{Name or index of the first column being described}
   \item{column2}{Name or index of the second column being described}
   \item{estimate}{The estimated value of the regression term.}
   \item{p.value}{The two-sided p-value associated with the observed statistic.}
   \item{n}{Number of observations used to compute the correlation}
+
 }

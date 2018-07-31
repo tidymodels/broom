@@ -63,6 +63,7 @@ glance(m)
 
 }
 \value{
+A \code{\link[tibble:tibble]{tibble::tibble()}} with exactly one row and columns:
   \item{BIC}{Bayesian Information Criterion for the model.}
   \item{df}{Degrees of freedom used by the model.}
   \item{logLik}{The log-likelihood of the model. [stats::logLik()] may be a useful reference.}
@@ -71,4 +72,5 @@ glance(m)
   \item{G}{Number mixture components in optimal model}
   \item{hypvol}{If the other model contains a noise component, the 
     value of the hypervolume parameter. Otherwise `NA`.}
+
 }

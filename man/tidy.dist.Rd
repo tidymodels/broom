@@ -58,7 +58,9 @@ Other stats tidiers: \code{\link{tidy.density}},
 }
 \concept{stats tidiers}
 \value{
+A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
   \item{distance}{Distance between items}
   \item{item1}{First item}
   \item{item2}{Second item}
+
 }

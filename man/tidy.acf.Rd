@@ -43,6 +43,8 @@ Other time series tidiers: \code{\link{tidy.spec}},
 }
 \concept{time series tidiers}
 \value{
+A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
   \item{acf}{calculated correlation}
   \item{lag}{lag values}
+
 }

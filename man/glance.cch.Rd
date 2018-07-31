@@ -84,10 +84,12 @@ Other survival tidiers: \code{\link{augment.coxph}},
 \concept{cch tidiers}
 \concept{survival tidiers}
 \value{
+A \code{\link[tibble:tibble]{tibble::tibble()}} with exactly one row and columns:
   \item{iter}{Iterations of algorithm/fitting procedure completed.}
   \item{p.value}{Needs custom info.}
   \item{rscore}{rscore}
   \item{score}{score}
   \item{n}{number of predictions}
   \item{nevent}{number of events}
+
 }

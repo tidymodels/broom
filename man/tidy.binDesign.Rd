@@ -52,6 +52,8 @@ Other bingroup tidiers: \code{\link{glance.binDesign}},
 }
 \concept{bingroup tidiers}
 \value{
+A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
   \item{n}{Number of trials in given iteration.}
   \item{power}{Power achieved for given value of n.}
+
 }

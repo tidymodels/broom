@@ -92,6 +92,7 @@ Other htest tidiers: \code{\link{tidy.htest}},
 }
 \concept{htest tidiers}
 \value{
+A \code{\link[tibble:tibble]{tibble::tibble()}} with exactly one row and columns:
   \item{.observed}{Observed count.}
   \item{.prop}{Proportion of the total.}
   \item{.row.prop}{Row proportion (2 dimensions table only).}
@@ -99,4 +100,5 @@ Other htest tidiers: \code{\link{tidy.htest}},
   \item{.expected}{Expected count under the null hypothesis.}
   \item{.residuals}{Pearson residual.}
   \item{.stdres}{Standardized residual.}
+
 }

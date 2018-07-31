@@ -96,6 +96,7 @@ Other lm tidiers: \code{\link{augment.glm}},
 }
 \concept{lm tidiers}
 \value{
+A \code{\link[tibble:tibble]{tibble::tibble()}} with exactly one row and columns:
   \item{adj.r.squared}{Adjusted R squared statistic, which is like the R squared statistic except taking degrees of freedom into account.}
   \item{AIC}{Akaike's Information Criterion for the model.}
   \item{BIC}{Bayesian Information Criterion for the model.}
@@ -107,4 +108,5 @@ Other lm tidiers: \code{\link{augment.glm}},
   \item{r.squared}{R squared statistic, or the percent of variation explained by the model. Also known as the coefficient of determination.}
   \item{sigma}{Estimated standard error of the residuals.}
   \item{statistic}{Needs custom info.}
+
 }

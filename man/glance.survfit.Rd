@@ -79,6 +79,7 @@ Other survival tidiers: \code{\link{augment.coxph}},
 \concept{cch tidiers}
 \concept{survival tidiers}
 \value{
+A \code{\link[tibble:tibble]{tibble::tibble()}} with exactly one row and columns:
   \item{events}{number of events}
   \item{n.max}{Maximum number of subjects at risk.}
   \item{n.start}{Initial number of subjects at risk.}
@@ -88,4 +89,5 @@ Other survival tidiers: \code{\link{augment.coxph}},
   \item{conf.low}{lower end of confidence interval on median}
   \item{conf.high}{upper end of confidence interval on median}
   \item{median}{median survival}
+
 }

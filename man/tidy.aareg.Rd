@@ -65,6 +65,7 @@ Other survival tidiers: \code{\link{augment.coxph}},
 \concept{aareg tidiers}
 \concept{survival tidiers}
 \value{
+A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
   \item{estimate}{The estimated value of the regression term.}
   \item{p.value}{The two-sided p-value associated with the observed statistic.}
   \item{robust.se}{robust version of standard error estimate (only when `x` was called with `dfbeta = TRUE`)}
@@ -72,4 +73,5 @@ Other survival tidiers: \code{\link{augment.coxph}},
   \item{std.error}{The standard error of the regression term.}
   \item{term}{The name of the regression term.}
   \item{z}{z score}
+
 }

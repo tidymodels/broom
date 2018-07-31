@@ -46,6 +46,7 @@ Other anova tidiers: \code{\link{tidy.TukeyHSD}},
 }
 \concept{anova tidiers}
 \value{
+A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
   \item{df}{Degrees of freedom used by this term in the model.}
   \item{meansq}{Mean sum of squares. Equal to total sum of squares divided by degrees of freedom.}
   \item{p.value}{The two-sided p-value associated with the observed statistic.}
@@ -53,4 +54,5 @@ Other anova tidiers: \code{\link{tidy.TukeyHSD}},
   \item{stratum}{The error stratum}
   \item{sumsq}{Sum of squares explained by this term}
   \item{term}{The name of the regression term.}
+
 }

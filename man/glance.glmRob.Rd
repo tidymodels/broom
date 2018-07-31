@@ -56,7 +56,9 @@ Other robust tidiers: \code{\link{augment.glmRob}},
 }
 \concept{robust tidiers}
 \value{
+A \code{\link[tibble:tibble]{tibble::tibble()}} with exactly one row and columns:
   \item{deviance}{Deviance of the model.}
   \item{df.residual}{Residual degrees of freedom for the model.}
   \item{null.deviance}{Deviance of the null model.}
+
 }

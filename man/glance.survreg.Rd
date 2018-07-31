@@ -77,6 +77,7 @@ Other survival tidiers: \code{\link{augment.coxph}},
 \concept{survival tidiers}
 \concept{survreg tidiers}
 \value{
+A \code{\link[tibble:tibble]{tibble::tibble()}} with exactly one row and columns:
   \item{AIC}{Akaike's Information Criterion for the model.}
   \item{BIC}{Bayesian Information Criterion for the model.}
   \item{df}{Degrees of freedom used by the model.}
@@ -85,4 +86,5 @@ Other survival tidiers: \code{\link{augment.coxph}},
   \item{logLik}{The log-likelihood of the model. [stats::logLik()] may be a useful reference.}
   \item{p.value}{Needs custom info.}
   \item{statistic}{Chi-squared statistic.}
+
 }

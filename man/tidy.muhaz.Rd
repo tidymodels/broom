@@ -45,6 +45,8 @@ Other muhaz tidiers: \code{\link{glance.muhaz}}
 }
 \concept{muhaz tidiers}
 \value{
+A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
   \item{time}{Point in time.}
   \item{estimate}{Estimated hazard rate.}
+
 }

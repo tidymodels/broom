@@ -64,6 +64,7 @@ Other multinom tidiers: \code{\link{glance.multinom}}
 }
 \concept{multinom tidiers}
 \value{
+A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
   \item{conf.high}{The upper end of a confidence interval for the term under consideration. Included only if `conf.int = TRUE`.}
   \item{conf.low}{The lower end of a confidence interval for the term under consideration. Included only if `conf.int = TRUE`.}
   \item{estimate}{The estimated value of the regression term.}
@@ -72,4 +73,5 @@ Other multinom tidiers: \code{\link{glance.multinom}}
   \item{std.error}{The standard error of the regression term.}
   \item{term}{The name of the regression term.}
   \item{y.value}{The response level}
+
 }

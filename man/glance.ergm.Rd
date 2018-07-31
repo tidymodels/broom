@@ -41,6 +41,7 @@ Other ergm tidiers: \code{\link{tidy.ergm}}
 }
 \concept{ergm tidiers}
 \value{
+A \code{\link[tibble:tibble]{tibble::tibble()}} with exactly one row and columns:
   \item{AIC}{Akaike's Information Criterion for the model.}
   \item{BIC}{Bayesian Information Criterion for the model.}
   \item{df.null}{Needs custom info.}
@@ -53,4 +54,5 @@ Other ergm tidiers: \code{\link{tidy.ergm}}
   \item{null.deviance}{Deviance of the null model.}
   \item{residual.deviance}{The residual deviance of the model}
   \item{independence}{Whether the model assumed dyadic independence}
+
 }

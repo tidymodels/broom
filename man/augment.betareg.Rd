@@ -107,7 +107,9 @@ glance(mod)
 \code{\link[=augment]{augment()}}, \code{\link[betareg:betareg]{betareg::betareg()}}
 }
 \value{
+A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
   \item{.cooksd}{Cooks distance. See [stats::cooks.distance()] for additional details.}
   \item{.fitted}{Fitted / predicted value.}
   \item{.resid}{Residuals of fitted values. TODO -- document when present. Residuals on which data set?}
+
 }

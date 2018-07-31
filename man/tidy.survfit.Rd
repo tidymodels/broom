@@ -70,6 +70,7 @@ Other survival tidiers: \code{\link{augment.coxph}},
 \concept{survfit tidiers}
 \concept{survival tidiers}
 \value{
+A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
   \item{conf.high}{The upper end of a confidence interval for the term under consideration. Included only if `conf.int = TRUE`.}
   \item{conf.low}{The lower end of a confidence interval for the term under consideration. Included only if `conf.int = TRUE`.}
   \item{n.censor}{number of censored events}
@@ -81,4 +82,5 @@ Other survival tidiers: \code{\link{augment.coxph}},
     multistate}
   \item{state}{state if multistate survfit object input}
   \item{strata}{strata if stratified survfit object input}
+
 }

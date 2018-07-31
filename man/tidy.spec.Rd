@@ -45,5 +45,7 @@ Other time series tidiers: \code{\link{tidy.acf}},
 }
 \concept{time series tidiers}
 \value{
+A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
+
 
 }

@@ -125,7 +125,9 @@ Other survival tidiers: \code{\link{augment.coxph}},
 \concept{survival tidiers}
 \concept{survreg tidiers}
 \value{
+A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
   \item{.fitted}{Fitted / predicted value.}
   \item{.resid}{Residuals of fitted values. TODO -- document when present. Residuals on which data set?}
   \item{.se.fit}{Standard errors of fitted values. TODO -- prediction or mean interval?}
+
 }

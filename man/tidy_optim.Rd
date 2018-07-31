@@ -52,6 +52,8 @@ Other list tidiers: \code{\link{glance_optim}},
 }
 \concept{list tidiers}
 \value{
+A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
   \item{parameter}{Needs custom info.}
   \item{value}{Needs custom desciption.}
+
 }

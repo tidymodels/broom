@@ -53,6 +53,8 @@ Other anova tidiers: \code{\link{tidy.TukeyHSD}},
 }
 \concept{anova tidiers}
 \value{
+A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
+  \item{den.df}{TODO}
   \item{num.df}{Degrees of freedom}
   \item{p.value}{The two-sided p-value associated with the observed statistic.}
   \item{statistic}{The value of a T-statistic to use in a hypothesis that the regression term is non-zero.}
@@ -61,4 +63,5 @@ Other anova tidiers: \code{\link{tidy.TukeyHSD}},
   \item{wilks}{Wilk's lambda.}
   \item{hl}{Hotelling-Lawley trace.}
   \item{roy}{Roy's greatest root.}
+
 }

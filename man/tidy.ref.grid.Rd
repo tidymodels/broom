@@ -75,11 +75,16 @@ Other emmeans tidiers: \code{\link{tidy.emmGrid}},
 }
 \concept{emmeans tidiers}
 \value{
+A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
   \item{conf.high}{The upper end of a confidence interval for the term under consideration. Included only if `conf.int = TRUE`.}
   \item{conf.low}{The lower end of a confidence interval for the term under consideration. Included only if `conf.int = TRUE`.}
+  \item{contrast}{Levels being compared.}
   \item{df}{Degrees of freedom used by this term in the model.}
   \item{p.value}{The two-sided p-value associated with the observed statistic.}
   \item{std.error}{The standard error of the regression term.}
+  \item{level1}{One level of the factor being contrasted}
+  \item{level2}{The other level of the factor being contrasted}
   \item{statistic}{T-ratio statistic}
   \item{estimate}{Estimated least-squares mean.}
+
 }

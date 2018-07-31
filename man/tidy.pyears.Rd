@@ -75,8 +75,10 @@ Other survival tidiers: \code{\link{augment.coxph}},
 \concept{pyears tidiers}
 \concept{survival tidiers}
 \value{
+A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
   \item{expected}{expected number of events (present only if a `ratetable` term is present)  If the `data.frame = TRUE` argument is supplied to `pyears`, this is simply the contents of `x$data`.}
   \item{pyears}{person-years of exposure}
   \item{n}{number of subjects contributing time}
   \item{event}{observed number of events}
+
 }

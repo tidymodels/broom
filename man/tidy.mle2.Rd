@@ -54,6 +54,7 @@ tidy(fit)
 \code{\link[=tidy]{tidy()}}, \code{\link[bbmle:mle2]{bbmle::mle2()}}, \code{\link[=tidy_optim]{tidy_optim()}}
 }
 \value{
+A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
   \item{conf.high}{The upper end of a confidence interval for the term under consideration. Included only if `conf.int = TRUE`.}
   \item{conf.low}{The lower end of a confidence interval for the term under consideration. Included only if `conf.int = TRUE`.}
   \item{estimate}{The estimated value of the regression term.}
@@ -61,4 +62,5 @@ tidy(fit)
   \item{statistic}{The value of a T-statistic to use in a hypothesis that the regression term is non-zero.}
   \item{std.error}{The standard error of the regression term.}
   \item{term}{The name of the regression term.}
+
 }

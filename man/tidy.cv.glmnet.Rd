@@ -89,6 +89,7 @@ Other glmnet tidiers: \code{\link{glance.cv.glmnet}},
 }
 \concept{glmnet tidiers}
 \value{
+A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
   \item{lambda}{Value of penalty parameter lambda.}
   \item{nzero}{Number of coefficients that are exactly zero for given lambda.}
   \item{std.error}{The standard error of the regression term.}
@@ -98,4 +99,5 @@ Other glmnet tidiers: \code{\link{glance.cv.glmnet}},
     estimated loss.}
   \item{estimate}{Median loss across all cross-validation folds for a given
     lamdba}
+
 }

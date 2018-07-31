@@ -74,5 +74,7 @@ Other kmeans tidiers: \code{\link{glance.kmeans}},
 }
 \concept{kmeans tidiers}
 \value{
+A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
   \item{.cluster}{The cluster assigned by the k-means algorithm}
+
 }

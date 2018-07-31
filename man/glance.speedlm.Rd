@@ -51,6 +51,7 @@ Other speedlm tidiers: \code{\link{augment.speedlm}},
 }
 \concept{speedlm tidiers}
 \value{
+A \code{\link[tibble:tibble]{tibble::tibble()}} with exactly one row and columns:
   \item{adj.r.squared}{Adjusted R squared statistic, which is like the R squared statistic except taking degrees of freedom into account.}
   \item{AIC}{Akaike's Information Criterion for the model.}
   \item{BIC}{Bayesian Information Criterion for the model.}
@@ -61,4 +62,5 @@ Other speedlm tidiers: \code{\link{augment.speedlm}},
   \item{p.value}{Needs custom info.}
   \item{r.squared}{R squared statistic, or the percent of variation explained by the model. Also known as the coefficient of determination.}
   \item{statistic}{F-statistic.}
+
 }

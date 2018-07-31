@@ -60,6 +60,7 @@ Other nls tidiers: \code{\link{augment.nls}},
 }
 \concept{nls tidiers}
 \value{
+A \code{\link[tibble:tibble]{tibble::tibble()}} with exactly one row and columns:
   \item{AIC}{Akaike's Information Criterion for the model.}
   \item{BIC}{Bayesian Information Criterion for the model.}
   \item{deviance}{Deviance of the model.}
@@ -68,4 +69,5 @@ Other nls tidiers: \code{\link{augment.nls}},
   \item{isConv}{whether the fit successfully converged}
   \item{logLik}{The log-likelihood of the model. [stats::logLik()] may be a useful reference.}
   \item{sigma}{Estimated standard error of the residuals.}
+
 }
