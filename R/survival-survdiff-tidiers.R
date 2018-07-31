@@ -43,7 +43,7 @@ tidy.survdiff <- function(x, ...) {
   
   # grouping variables (unless one-sample test)
   gvars = data.frame("..." = rownames(x$n), stringsAsFactors = FALSE)
-  
+
   has_strata <- "strata" %in% names(x)
   rval <- data.frame(
     N = as.numeric(x$n),
