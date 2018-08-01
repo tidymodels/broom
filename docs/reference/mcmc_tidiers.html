@@ -77,6 +77,9 @@
       <a href="../articles/broom_and_dplyr.html">Broom and dplyr</a>
     </li>
     <li>
+      <a href="../articles/external-tidiers.html">Tidiers in external packages</a>
+    </li>
+    <li>
       <a href="../articles/kmeans.html">K-means</a>
     </li>
   </ul>
@@ -85,7 +88,7 @@
   <a href="../news/index.html">News</a>
 </li>
         <li>
-  <a href="https://github.com/tidyverse/broom">
+  <a href="https://github.com/tidymodels/broom">
     <span class="fa fa-github fa-lg"></span>
      
   </a>
@@ -102,15 +105,13 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Tidying methods for MCMC (Stan, JAGS, etc.) fits</h1>
-    <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/mcmc-tidiers.R'><code>R/mcmc-tidiers.R</code></a></small>
+    <small class="dont-index">Source: <a href='http://github.com/tidymodels/broom/blob/master/R/mcmc-tidiers.R'><code>R/mcmc-tidiers.R</code></a></small>
     <div class="hidden name"><code>mcmc_tidiers.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>MCMC tidiers will soon be deprecated in <code>broom</code> and there is no ongoing
-development of these functions at this time. MCMC tidiers are being
-developed in the <code>broom.mixed</code> package, which is not yet on CRAN.</p>
+    <p>MCMC tidiers are deprecated.</p>
     
     </div>
 
@@ -119,13 +120,11 @@ developed in the <code>broom.mixed</code> package, which is not yet on CRAN.</p>
   <span class='kw'>rhat</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>ess</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='no'>...</span>)
 
 <span class='co'># S3 method for rjags</span>
-<span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>x</span>, <span class='no'>pars</span>, <span class='kw'>estimate.method</span> <span class='kw'>=</span> <span class='st'>"mean"</span>,
+<span class='fu'><a href='http://www.rdocumentation.org/packages/modelgenerics/topics/generics'>tidy</a></span>(<span class='no'>x</span>, <span class='no'>pars</span>, <span class='kw'>estimate.method</span> <span class='kw'>=</span> <span class='st'>"mean"</span>,
   <span class='kw'>conf.int</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>conf.level</span> <span class='kw'>=</span> <span class='fl'>0.95</span>, <span class='kw'>conf.method</span> <span class='kw'>=</span> <span class='st'>"quantile"</span>, <span class='no'>...</span>)
 
 <span class='co'># S3 method for stanfit</span>
-<span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>x</span>, <span class='no'>pars</span>, <span class='kw'>estimate.method</span> <span class='kw'>=</span> <span class='st'>"mean"</span>,
-  <span class='kw'>conf.int</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>conf.level</span> <span class='kw'>=</span> <span class='fl'>0.95</span>, <span class='kw'>conf.method</span> <span class='kw'>=</span> <span class='st'>"quantile"</span>,
-  <span class='kw'>droppars</span> <span class='kw'>=</span> <span class='st'>"lp__"</span>, <span class='kw'>rhat</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>ess</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='no'>...</span>)</pre>
+<span class='fu'><a href='http://www.rdocumentation.org/packages/modelgenerics/topics/generics'>tidy</a></span>(<span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -171,55 +170,12 @@ as log-probability information)</p></td>
     </table>
     
 
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'>
-</div><span class='co'># NOT RUN {</span>
-<span class='co'># Using example from "RStan Getting Started"</span>
-<span class='co'># https://github.com/stan-dev/rstan/wiki/RStan-Getting-Started</span>
-
-<span class='no'>model_file</span> <span class='kw'>&lt;-</span> <span class='fu'>system.file</span>(<span class='st'>"extdata"</span>, <span class='st'>"8schools.stan"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"broom"</span>)
-
-<span class='no'>schools_dat</span> <span class='kw'>&lt;-</span> <span class='fu'>list</span>(<span class='kw'>J</span> <span class='kw'>=</span> <span class='fl'>8</span>,
-                    <span class='kw'>y</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='fl'>28</span>,  <span class='fl'>8</span>, -<span class='fl'>3</span>,  <span class='fl'>7</span>, -<span class='fl'>1</span>,  <span class='fl'>1</span>, <span class='fl'>18</span>, <span class='fl'>12</span>),
-                    <span class='kw'>sigma</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='fl'>15</span>, <span class='fl'>10</span>, <span class='fl'>16</span>, <span class='fl'>11</span>,  <span class='fl'>9</span>, <span class='fl'>11</span>, <span class='fl'>10</span>, <span class='fl'>18</span>))
-
-<span class='kw'>if</span> (<span class='fu'>requireNamespace</span>(<span class='st'>"rstan"</span>, <span class='kw'>quietly</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)) {
-  <span class='fu'>set.seed</span>(<span class='fl'>2015</span>)
-  <span class='no'>rstan_example</span> <span class='kw'>&lt;-</span> <span class='fu'>stan</span>(<span class='kw'>file</span> <span class='kw'>=</span> <span class='no'>model_file</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>schools_dat</span>,
-                        <span class='kw'>iter</span> <span class='kw'>=</span> <span class='fl'>100</span>, <span class='kw'>chains</span> <span class='kw'>=</span> <span class='fl'>2</span>)
-}
-
-<span class='co'># }</span><div class='input'>
-<span class='kw'>if</span> (<span class='fu'>requireNamespace</span>(<span class='st'>"rstan"</span>, <span class='kw'>quietly</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)) {
-  <span class='co'># the object from the above code was saved as rstan_example.rda</span>
-  <span class='no'>infile</span> <span class='kw'>&lt;-</span> <span class='fu'>system.file</span>(<span class='st'>"extdata"</span>, <span class='st'>"rstan_example.rda"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"broom"</span>)
-  <span class='fu'>load</span>(<span class='no'>infile</span>)
-
-  <span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>rstan_example</span>)
-  <span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>rstan_example</span>, <span class='kw'>conf.int</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>pars</span> <span class='kw'>=</span> <span class='st'>"theta"</span>)
-
-  <span class='no'>td_mean</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>rstan_example</span>, <span class='kw'>conf.int</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
-  <span class='no'>td_median</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>rstan_example</span>, <span class='kw'>conf.int</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>estimate.method</span> <span class='kw'>=</span> <span class='st'>"median"</span>)
-
-  <span class='fu'>library</span>(<span class='no'>dplyr</span>)
-  <span class='fu'>library</span>(<span class='no'>ggplot2</span>)
-  <span class='no'>tds</span> <span class='kw'>&lt;-</span> <span class='fu'>rbind</span>(<span class='fu'><a href='http://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span>(<span class='no'>td_mean</span>, <span class='kw'>method</span> <span class='kw'>=</span> <span class='st'>"mean"</span>),
-               <span class='fu'><a href='http://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span>(<span class='no'>td_median</span>, <span class='kw'>method</span> <span class='kw'>=</span> <span class='st'>"median"</span>))
-
-  <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/ggplot'>ggplot</a></span>(<span class='no'>tds</span>, <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/aes'>aes</a></span>(<span class='no'>estimate</span>, <span class='no'>term</span>)) +
-    <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/geom_errorbarh'>geom_errorbarh</a></span>(<span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/aes'>aes</a></span>(<span class='kw'>xmin</span> <span class='kw'>=</span> <span class='no'>conf.low</span>, <span class='kw'>xmax</span> <span class='kw'>=</span> <span class='no'>conf.high</span>)) +
-    <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/geom_point'>geom_point</a></span>(<span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/aes'>aes</a></span>(<span class='kw'>color</span> <span class='kw'>=</span> <span class='no'>method</span>))
-}</div><div class='img'><img src='mcmc_tidiers-1.png' alt='' width='700' height='433' /></div><div class='input'>
-
-</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-            
-      <li><a href="#examples">Examples</a></li>
-    </ul>
+                </ul>
 
   </div>
 </div>

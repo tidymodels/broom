@@ -77,6 +77,9 @@
       <a href="../articles/broom_and_dplyr.html">Broom and dplyr</a>
     </li>
     <li>
+      <a href="../articles/external-tidiers.html">Tidiers in external packages</a>
+    </li>
+    <li>
       <a href="../articles/kmeans.html">K-means</a>
     </li>
   </ul>
@@ -85,7 +88,7 @@
   <a href="../news/index.html">News</a>
 </li>
         <li>
-  <a href="https://github.com/tidyverse/broom">
+  <a href="https://github.com/tidymodels/broom">
     <span class="fa fa-github fa-lg"></span>
      
   </a>
@@ -102,7 +105,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Tidying methods for lists / returned values that are not S3 objects</h1>
-    <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/list-tidiers.R'><code>R/list-tidiers.R</code></a></small>
+    <small class="dont-index">Source: <a href='http://github.com/tidymodels/broom/blob/master/R/list-tidiers.R'><code>R/list-tidiers.R</code></a></small>
     <div class="hidden name"><code>list_tidiers.Rd</code></div>
     </div>
 
@@ -116,10 +119,10 @@ have a class attribute, they cannot be handled by S3 dispatch.</p>
     </div>
 
     <pre class="usage"><span class='co'># S3 method for list</span>
-<span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>x</span>, <span class='no'>...</span>)
+<span class='fu'><a href='http://www.rdocumentation.org/packages/modelgenerics/topics/generics'>tidy</a></span>(<span class='no'>x</span>, <span class='no'>...</span>)
 
 <span class='co'># S3 method for list</span>
-<span class='fu'><a href='glance.html'>glance</a></span>(<span class='no'>x</span>, <span class='no'>...</span>)</pre>
+<span class='fu'><a href='http://www.rdocumentation.org/packages/modelgenerics/topics/generics'>glance</a></span>(<span class='no'>x</span>, <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">

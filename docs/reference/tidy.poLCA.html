@@ -77,6 +77,9 @@
       <a href="../articles/broom_and_dplyr.html">Broom and dplyr</a>
     </li>
     <li>
+      <a href="../articles/external-tidiers.html">Tidiers in external packages</a>
+    </li>
+    <li>
       <a href="../articles/kmeans.html">K-means</a>
     </li>
   </ul>
@@ -85,7 +88,7 @@
   <a href="../news/index.html">News</a>
 </li>
         <li>
-  <a href="https://github.com/tidyverse/broom">
+  <a href="https://github.com/tidymodels/broom">
     <span class="fa fa-github fa-lg"></span>
      
   </a>
@@ -102,7 +105,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Tidy a(n) poLCA object</h1>
-    <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/polca-tidiers.R'><code>R/polca-tidiers.R</code></a></small>
+    <small class="dont-index">Source: <a href='http://github.com/tidymodels/broom/blob/master/R/polca-tidiers.R'><code>R/polca-tidiers.R</code></a></small>
     <div class="hidden name"><code>tidy.poLCA.Rd</code></div>
     </div>
 
@@ -118,7 +121,7 @@ specify which components to return.</p>
     </div>
 
     <pre class="usage"><span class='co'># S3 method for poLCA</span>
-<span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>x</span>, <span class='no'>...</span>)</pre>
+<span class='fu'><a href='http://www.rdocumentation.org/packages/modelgenerics/topics/generics'>tidy</a></span>(<span class='no'>x</span>, <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -135,89 +138,188 @@ absorbed in <code>...</code>, where they will be ignored. If the misspelled
 argument has a default value, the default value will be used.
 For example, if you pass <code>conf.lvel = 0.9</code>, all computation will
 proceed using <code>conf.level = 0.95</code>. Additionally, if you pass
-<code>newdata = my_tibble</code> to an <code><a href='augment.html'>augment()</a></code> method that does not
+<code>newdata = my_tibble</code> to an <code><a href='http://www.rdocumentation.org/packages/modelgenerics/topics/generics'>augment()</a></code> method that does not
 accept a <code>newdata</code> argument, it will use the default value for
 the <code>data</code> argument.</p></td>
     </tr>
     </table>
     
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
-
-    <p>A <a href='http://www.rdocumentation.org/packages/tibble/topics/tibble'>tibble::tibble</a> with one row per variable-class-outcome
-combination, with columns:</p>
-<dt>variable</dt><dd><p>Manifest variable</p></dd>
-<dt>class</dt><dd><p>Latent class ID, an integer</p></dd>
-<dt>outcome</dt><dd><p>Outcome of manifest variable</p></dd>
-<dt>estimate</dt><dd><p>Estimated class-conditional response probability</p></dd>
-<dt>std.error</dt><dd><p>Standard error of estimated probability</p></dd>
-
-    
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='tidy.html'>tidy()</a></code>, <code><a href='http://www.rdocumentation.org/packages/poLCA/topics/poLCA'>poLCA::poLCA()</a></code></p>
+    <div class='dont-index'><p><code><a href='http://www.rdocumentation.org/packages/modelgenerics/topics/generics'>tidy()</a></code>, <code><a href='http://www.rdocumentation.org/packages/poLCA/topics/poLCA'>poLCA::poLCA()</a></code></p>
 <p>Other poLCA tidiers: <code><a href='augment.poLCA.html'>augment.poLCA</a></code>,
   <code><a href='glance.poLCA.html'>glance.poLCA</a></code></p></div>
+    
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>A <code><a href='http://www.rdocumentation.org/packages/tibble/topics/tibble'>tibble::tibble()</a></code> with columns:</p>
+<dt>class</dt><dd><p>The class under consideration.</p></dd>
+  <dt>outcome</dt><dd><p>Outcome of manifest variable</p></dd>
+  <dt>std.error</dt><dd><p>The standard error of the regression term.</p></dd>
+  <dt>variable</dt><dd><p>Manifest variable</p></dd>
+  <dt>estimate</dt><dd><p>Estimated class-conditional response probability</p></dd>
+
+
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
-<span class='kw'>if</span> (<span class='fu'>require</span>(<span class='st'>"poLCA"</span>, <span class='kw'>quietly</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)) {
-  <span class='fu'>library</span>(<span class='no'>poLCA</span>)
-  <span class='fu'>library</span>(<span class='no'>dplyr</span>)
+<span class='fu'>library</span>(<span class='no'>poLCA</span>)
+<span class='fu'>library</span>(<span class='no'>dplyr</span>)
 
-  <span class='fu'>data</span>(<span class='no'>values</span>)
-  <span class='no'>f</span> <span class='kw'>&lt;-</span> <span class='fu'>cbind</span>(<span class='no'>A</span>, <span class='no'>B</span>, <span class='no'>C</span>, <span class='no'>D</span>)~<span class='fl'>1</span>
-  <span class='no'>M1</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/poLCA/topics/poLCA'>poLCA</a></span>(<span class='no'>f</span>, <span class='no'>values</span>, <span class='kw'>nclass</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
+<span class='fu'>data</span>(<span class='no'>values</span>)
+<span class='no'>f</span> <span class='kw'>&lt;-</span> <span class='fu'>cbind</span>(<span class='no'>A</span>, <span class='no'>B</span>, <span class='no'>C</span>, <span class='no'>D</span>)~<span class='fl'>1</span>
+<span class='no'>M1</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/poLCA/topics/poLCA'>poLCA</a></span>(<span class='no'>f</span>, <span class='no'>values</span>, <span class='kw'>nclass</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
 
-  <span class='no'>M1</span>
-  <span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>M1</span>)
-  <span class='fu'><a href='augment.html'>augment</a></span>(<span class='no'>M1</span>)
-  <span class='fu'><a href='glance.html'>glance</a></span>(<span class='no'>M1</span>)
+<span class='no'>M1</span></div><div class='output co'>#&gt; Conditional item response (column) probabilities,
+#&gt;  by outcome variable, for each class (row) 
+#&gt;  
+#&gt; $A
+#&gt;            Pr(1)  Pr(2)
+#&gt; class 1:  0.2864 0.7136
+#&gt; class 2:  0.0068 0.9932
+#&gt; 
+#&gt; $B
+#&gt;            Pr(1)  Pr(2)
+#&gt; class 1:  0.6704 0.3296
+#&gt; class 2:  0.0602 0.9398
+#&gt; 
+#&gt; $C
+#&gt;            Pr(1)  Pr(2)
+#&gt; class 1:  0.6460 0.3540
+#&gt; class 2:  0.0735 0.9265
+#&gt; 
+#&gt; $D
+#&gt;            Pr(1)  Pr(2)
+#&gt; class 1:  0.8676 0.1324
+#&gt; class 2:  0.2309 0.7691
+#&gt; 
+#&gt; Estimated class population shares 
+#&gt;  0.7208 0.2792 
+#&gt;  
+#&gt; Predicted class memberships (by modal posterior prob.) 
+#&gt;  0.6713 0.3287 
+#&gt;  
+#&gt; ========================================================= 
+#&gt; Fit for 2 latent classes: 
+#&gt; ========================================================= 
+#&gt; number of observations: 216 
+#&gt; number of estimated parameters: 9 
+#&gt; residual degrees of freedom: 6 
+#&gt; maximum log-likelihood: -504.4677 
+#&gt;  
+#&gt; AIC(2): 1026.935
+#&gt; BIC(2): 1057.313
+#&gt; G^2(2): 2.719922 (Likelihood ratio/deviance statistic) 
+#&gt; X^2(2): 2.719764 (Chi-square goodness of fit) 
+#&gt;  </div><div class='input'><span class='fu'><a href='http://www.rdocumentation.org/packages/modelgenerics/topics/generics'>tidy</a></span>(<span class='no'>M1</span>)</div><div class='output co'>#&gt; # A tibble: 16 x 5
+#&gt;    variable class outcome estimate std.error
+#&gt;    &lt;chr&gt;    &lt;int&gt;   &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;
+#&gt;  1 A            1       1  0.286      0.0393
+#&gt;  2 A            2       1  0.00681    0.0254
+#&gt;  3 A            1       2  0.714      0.0393
+#&gt;  4 A            2       2  0.993      0.0254
+#&gt;  5 B            1       1  0.670      0.0489
+#&gt;  6 B            2       1  0.0602     0.0649
+#&gt;  7 B            1       2  0.330      0.0489
+#&gt;  8 B            2       2  0.940      0.0649
+#&gt;  9 C            1       1  0.646      0.0482
+#&gt; 10 C            2       1  0.0735     0.0642
+#&gt; 11 C            1       2  0.354      0.0482
+#&gt; 12 C            2       2  0.927      0.0642
+#&gt; 13 D            1       1  0.868      0.0379
+#&gt; 14 D            2       1  0.231      0.0929
+#&gt; 15 D            1       2  0.132      0.0379
+#&gt; 16 D            2       2  0.769      0.0929</div><div class='input'><span class='fu'><a href='http://www.rdocumentation.org/packages/modelgenerics/topics/generics'>augment</a></span>(<span class='no'>M1</span>)</div><div class='output co'>#&gt; # A tibble: 216 x 7
+#&gt;        A     B     C     D X.Intercept. .class .probability
+#&gt;  * &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;        &lt;dbl&gt;  &lt;int&gt;        &lt;dbl&gt;
+#&gt;  1     2     2     2     2            1      2        0.959
+#&gt;  2     2     2     2     2            1      2        0.959
+#&gt;  3     2     2     2     2            1      2        0.959
+#&gt;  4     2     2     2     2            1      2        0.959
+#&gt;  5     2     2     2     2            1      2        0.959
+#&gt;  6     2     2     2     2            1      2        0.959
+#&gt;  7     2     2     2     2            1      2        0.959
+#&gt;  8     2     2     2     2            1      2        0.959
+#&gt;  9     2     2     2     2            1      2        0.959
+#&gt; 10     2     2     2     2            1      2        0.959
+#&gt; # ... with 206 more rows</div><div class='input'><span class='fu'><a href='http://www.rdocumentation.org/packages/modelgenerics/topics/generics'>glance</a></span>(<span class='no'>M1</span>)</div><div class='output co'>#&gt; # A tibble: 1 x 7
+#&gt;   logLik   AIC   BIC g.squared chi.squared    df df.residual
+#&gt;    &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;       &lt;dbl&gt; &lt;dbl&gt;       &lt;dbl&gt;
+#&gt; 1  -504. 1027. 1057.      2.72        2.72     9           6</div><div class='input'>
+<span class='fu'>library</span>(<span class='no'>ggplot2</span>)
 
-  <span class='fu'>library</span>(<span class='no'>ggplot2</span>)
+<span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/ggplot'>ggplot</a></span>(<span class='fu'><a href='http://www.rdocumentation.org/packages/modelgenerics/topics/generics'>tidy</a></span>(<span class='no'>M1</span>), <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/aes'>aes</a></span>(<span class='fu'>factor</span>(<span class='no'>class</span>), <span class='no'>estimate</span>, <span class='kw'>fill</span> <span class='kw'>=</span> <span class='fu'>factor</span>(<span class='no'>outcome</span>))) +
+  <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/geom_bar'>geom_bar</a></span>(<span class='kw'>stat</span> <span class='kw'>=</span> <span class='st'>"identity"</span>, <span class='kw'>width</span> <span class='kw'>=</span> <span class='fl'>1</span>) +
+  <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/facet_wrap'>facet_wrap</a></span>(~ <span class='no'>variable</span>)</div><div class='img'><img src='tidy.poLCA-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'>## Three-class model with a single covariate.</span>
 
-  <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/ggplot'>ggplot</a></span>(<span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>M1</span>), <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/aes'>aes</a></span>(<span class='fu'>factor</span>(<span class='no'>class</span>), <span class='no'>estimate</span>, <span class='kw'>fill</span> <span class='kw'>=</span> <span class='fu'>factor</span>(<span class='no'>outcome</span>))) +
-    <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/geom_bar'>geom_bar</a></span>(<span class='kw'>stat</span> <span class='kw'>=</span> <span class='st'>"identity"</span>, <span class='kw'>width</span> <span class='kw'>=</span> <span class='fl'>1</span>) +
-    <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/facet_wrap'>facet_wrap</a></span>(~ <span class='no'>variable</span>)
+<span class='fu'>data</span>(<span class='no'>election</span>)
+<span class='no'>f2a</span> <span class='kw'>&lt;-</span> <span class='fu'>cbind</span>(<span class='no'>MORALG</span>,<span class='no'>CARESG</span>,<span class='no'>KNOWG</span>,<span class='no'>LEADG</span>,<span class='no'>DISHONG</span>,<span class='no'>INTELG</span>,
+             <span class='no'>MORALB</span>,<span class='no'>CARESB</span>,<span class='no'>KNOWB</span>,<span class='no'>LEADB</span>,<span class='no'>DISHONB</span>,<span class='no'>INTELB</span>)~<span class='no'>PARTY</span>
+<span class='no'>nes2a</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/poLCA/topics/poLCA'>poLCA</a></span>(<span class='no'>f2a</span>, <span class='no'>election</span>, <span class='kw'>nclass</span> <span class='kw'>=</span> <span class='fl'>3</span>, <span class='kw'>nrep</span> <span class='kw'>=</span> <span class='fl'>5</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
 
-  <span class='fu'>set.seed</span>(<span class='fl'>2016</span>)
-  <span class='co'># compare multiple</span>
-  <span class='no'>mods</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='http://dplyr.tidyverse.org/reference/reexports.html'>tibble</a></span>(<span class='kw'>nclass</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>3</span>) <span class='kw'>%&gt;%</span>
-    <span class='fu'><a href='http://dplyr.tidyverse.org/reference/group_by.html'>group_by</a></span>(<span class='no'>nclass</span>) <span class='kw'>%&gt;%</span>
-    <span class='fu'><a href='http://dplyr.tidyverse.org/reference/do.html'>do</a></span>(<span class='kw'>mod</span> <span class='kw'>=</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/poLCA/topics/poLCA'>poLCA</a></span>(<span class='no'>f</span>, <span class='no'>values</span>, <span class='kw'>nclass</span> <span class='kw'>=</span> <span class='no'>.</span>$<span class='no'>nclass</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>))
+<span class='no'>td</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/modelgenerics/topics/generics'>tidy</a></span>(<span class='no'>nes2a</span>)
+<span class='no'>td</span></div><div class='output co'>#&gt; # A tibble: 144 x 5
+#&gt;    variable class outcome           estimate std.error
+#&gt;    &lt;chr&gt;    &lt;int&gt; &lt;fct&gt;                &lt;dbl&gt;     &lt;dbl&gt;
+#&gt;  1 MORALG       1 1 Extremely well    0.137    0.0182 
+#&gt;  2 MORALG       2 1 Extremely well    0.108    0.0175 
+#&gt;  3 MORALG       3 1 Extremely well    0.622    0.0309 
+#&gt;  4 MORALG       1 2 Quite well        0.668    0.0247 
+#&gt;  5 MORALG       2 2 Quite well        0.383    0.0274 
+#&gt;  6 MORALG       3 2 Quite well        0.335    0.0293 
+#&gt;  7 MORALG       1 3 Not too well      0.180    0.0208 
+#&gt;  8 MORALG       2 3 Not too well      0.304    0.0253 
+#&gt;  9 MORALG       3 3 Not too well      0.0172   0.00841
+#&gt; 10 MORALG       1 4 Not well at all   0.0143   0.00680
+#&gt; # ... with 134 more rows</div><div class='input'>
+<span class='co'># show</span>
 
-  <span class='co'># compare log-likelihood and/or AIC, BIC</span>
-  <span class='no'>mods</span> <span class='kw'>%&gt;%</span>
-    <span class='fu'><a href='glance.html'>glance</a></span>(<span class='no'>mod</span>)
-
-  <span class='co'>## Three-class model with a single covariate.</span>
-
-  <span class='fu'>data</span>(<span class='no'>election</span>)
-  <span class='no'>f2a</span> <span class='kw'>&lt;-</span> <span class='fu'>cbind</span>(<span class='no'>MORALG</span>,<span class='no'>CARESG</span>,<span class='no'>KNOWG</span>,<span class='no'>LEADG</span>,<span class='no'>DISHONG</span>,<span class='no'>INTELG</span>,
-               <span class='no'>MORALB</span>,<span class='no'>CARESB</span>,<span class='no'>KNOWB</span>,<span class='no'>LEADB</span>,<span class='no'>DISHONB</span>,<span class='no'>INTELB</span>)~<span class='no'>PARTY</span>
-  <span class='no'>nes2a</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/poLCA/topics/poLCA'>poLCA</a></span>(<span class='no'>f2a</span>, <span class='no'>election</span>, <span class='kw'>nclass</span> <span class='kw'>=</span> <span class='fl'>3</span>, <span class='kw'>nrep</span> <span class='kw'>=</span> <span class='fl'>5</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
-
-  <span class='no'>td</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>nes2a</span>)
-  <span class='no'>td</span>
-
-  <span class='co'># show</span>
-
-  <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/ggplot'>ggplot</a></span>(<span class='no'>td</span>, <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/aes'>aes</a></span>(<span class='no'>outcome</span>, <span class='no'>estimate</span>, <span class='kw'>color</span> <span class='kw'>=</span> <span class='fu'>factor</span>(<span class='no'>class</span>), <span class='kw'>group</span> <span class='kw'>=</span> <span class='no'>class</span>)) +
-    <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/geom_path'>geom_line</a></span>() +
-    <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/facet_wrap'>facet_wrap</a></span>(~ <span class='no'>variable</span>, <span class='kw'>nrow</span> <span class='kw'>=</span> <span class='fl'>2</span>) +
-    <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/theme'>theme</a></span>(<span class='kw'>axis.text.x</span> <span class='kw'>=</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/element'>element_text</a></span>(<span class='kw'>angle</span> <span class='kw'>=</span> <span class='fl'>90</span>, <span class='kw'>hjust</span> <span class='kw'>=</span> <span class='fl'>1</span>))
-
-  <span class='no'>au</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='augment.html'>augment</a></span>(<span class='no'>nes2a</span>)
-  <span class='no'>au</span>
-  <span class='no'>au</span> <span class='kw'>%&gt;%</span>
-    <span class='fu'><a href='http://dplyr.tidyverse.org/reference/tally.html'>count</a></span>(<span class='no'>.class</span>)
-
-  <span class='co'># if the original data is provided, it leads to NAs in new columns</span>
-  <span class='co'># for rows that weren't predicted</span>
-  <span class='no'>au2</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='augment.html'>augment</a></span>(<span class='no'>nes2a</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>election</span>)
-  <span class='no'>au2</span>
-  <span class='fu'>dim</span>(<span class='no'>au2</span>)
-}</div><div class='output co'>#&gt; [1] 1785   20</div><div class='input'>
+<span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/ggplot'>ggplot</a></span>(<span class='no'>td</span>, <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/aes'>aes</a></span>(<span class='no'>outcome</span>, <span class='no'>estimate</span>, <span class='kw'>color</span> <span class='kw'>=</span> <span class='fu'>factor</span>(<span class='no'>class</span>), <span class='kw'>group</span> <span class='kw'>=</span> <span class='no'>class</span>)) +
+  <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/geom_path'>geom_line</a></span>() +
+  <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/facet_wrap'>facet_wrap</a></span>(~ <span class='no'>variable</span>, <span class='kw'>nrow</span> <span class='kw'>=</span> <span class='fl'>2</span>) +
+  <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/theme'>theme</a></span>(<span class='kw'>axis.text.x</span> <span class='kw'>=</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/element'>element_text</a></span>(<span class='kw'>angle</span> <span class='kw'>=</span> <span class='fl'>90</span>, <span class='kw'>hjust</span> <span class='kw'>=</span> <span class='fl'>1</span>))</div><div class='img'><img src='tidy.poLCA-2.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='no'>au</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/modelgenerics/topics/generics'>augment</a></span>(<span class='no'>nes2a</span>)
+<span class='no'>au</span></div><div class='output co'>#&gt; # A tibble: 1,300 x 16
+#&gt;    MORALG CARESG KNOWG LEADG DISHONG INTELG MORALB CARESB KNOWB LEADB DISHONB
+#&gt;  * &lt;fct&gt;  &lt;fct&gt;  &lt;fct&gt; &lt;fct&gt; &lt;fct&gt;   &lt;fct&gt;  &lt;fct&gt;  &lt;fct&gt;  &lt;fct&gt; &lt;fct&gt; &lt;fct&gt;  
+#&gt;  1 3 Not… 1 Ext… 2 Qu… 2 Qu… 3 Not … 2 Qui… 1 Ext… 1 Ext… 2 Qu… 2 Qu… 4 Not …
+#&gt;  2 1 Ext… 2 Qui… 2 Qu… 1 Ex… 3 Not … 2 Qui… 2 Qui… 2 Qui… 2 Qu… 3 No… 3 Not …
+#&gt;  3 2 Qui… 2 Qui… 2 Qu… 2 Qu… 2 Quit… 2 Qui… 2 Qui… 3 Not… 2 Qu… 2 Qu… 3 Not …
+#&gt;  4 2 Qui… 4 Not… 2 Qu… 3 No… 2 Quit… 2 Qui… 1 Ext… 1 Ext… 2 Qu… 2 Qu… 3 Not …
+#&gt;  5 2 Qui… 2 Qui… 2 Qu… 2 Qu… 3 Not … 2 Qui… 3 Not… 4 Not… 4 No… 4 No… 3 Not …
+#&gt;  6 2 Qui… 2 Qui… 2 Qu… 3 No… 4 Not … 2 Qui… 2 Qui… 3 Not… 2 Qu… 2 Qu… 3 Not …
+#&gt;  7 1 Ext… 1 Ext… 1 Ex… 1 Ex… 4 Not … 1 Ext… 2 Qui… 4 Not… 2 Qu… 3 No… 3 Not …
+#&gt;  8 2 Qui… 2 Qui… 2 Qu… 2 Qu… 3 Not … 2 Qui… 3 Not… 2 Qui… 2 Qu… 2 Qu… 3 Not …
+#&gt;  9 2 Qui… 2 Qui… 2 Qu… 2 Qu… 3 Not … 2 Qui… 2 Qui… 2 Qui… 2 Qu… 3 No… 2 Quit…
+#&gt; 10 2 Qui… 3 Not… 2 Qu… 2 Qu… 3 Not … 2 Qui… 2 Qui… 4 Not… 2 Qu… 4 No… 2 Quit…
+#&gt; # ... with 1,290 more rows, and 5 more variables: INTELB &lt;fct&gt;,
+#&gt; #   X.Intercept. &lt;dbl&gt;, PARTY &lt;dbl&gt;, .class &lt;int&gt;, .probability &lt;dbl&gt;</div><div class='input'><span class='no'>au</span> <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='http://dplyr.tidyverse.org/reference/tally.html'>count</a></span>(<span class='no'>.class</span>)</div><div class='output co'>#&gt; # A tibble: 3 x 2
+#&gt;   .class     n
+#&gt;    &lt;int&gt; &lt;int&gt;
+#&gt; 1      1   496
+#&gt; 2      2   444
+#&gt; 3      3   360</div><div class='input'>
+<span class='co'># if the original data is provided, it leads to NAs in new columns</span>
+<span class='co'># for rows that weren't predicted</span>
+<span class='no'>au2</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/modelgenerics/topics/generics'>augment</a></span>(<span class='no'>nes2a</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>election</span>)
+<span class='no'>au2</span></div><div class='output co'>#&gt; # A tibble: 1,785 x 20
+#&gt;    MORALG CARESG KNOWG LEADG DISHONG INTELG MORALB CARESB KNOWB LEADB DISHONB
+#&gt;    &lt;fct&gt;  &lt;fct&gt;  &lt;fct&gt; &lt;fct&gt; &lt;fct&gt;   &lt;fct&gt;  &lt;fct&gt;  &lt;fct&gt;  &lt;fct&gt; &lt;fct&gt; &lt;fct&gt;  
+#&gt;  1 3 Not… 1 Ext… 2 Qu… 2 Qu… 3 Not … 2 Qui… 1 Ext… 1 Ext… 2 Qu… 2 Qu… 4 Not …
+#&gt;  2 4 Not… 3 Not… 4 No… 3 No… 2 Quit… 2 Qui… &lt;NA&gt;   &lt;NA&gt;   2 Qu… 3 No… &lt;NA&gt;   
+#&gt;  3 1 Ext… 2 Qui… 2 Qu… 1 Ex… 3 Not … 2 Qui… 2 Qui… 2 Qui… 2 Qu… 3 No… 3 Not …
+#&gt;  4 2 Qui… 2 Qui… 2 Qu… 2 Qu… 2 Quit… 2 Qui… 2 Qui… 3 Not… 2 Qu… 2 Qu… 3 Not …
+#&gt;  5 2 Qui… 4 Not… 2 Qu… 3 No… 2 Quit… 2 Qui… 1 Ext… 1 Ext… 2 Qu… 2 Qu… 3 Not …
+#&gt;  6 2 Qui… 3 Not… 3 No… 2 Qu… 2 Quit… 2 Qui… 2 Qui… &lt;NA&gt;   3 No… 2 Qu… 2 Quit…
+#&gt;  7 2 Qui… &lt;NA&gt;   2 Qu… 2 Qu… 4 Not … 2 Qui… &lt;NA&gt;   3 Not… 2 Qu… 2 Qu… 4 Not …
+#&gt;  8 2 Qui… 2 Qui… 2 Qu… 2 Qu… 3 Not … 2 Qui… 3 Not… 4 Not… 4 No… 4 No… 3 Not …
+#&gt;  9 2 Qui… 2 Qui… 2 Qu… 3 No… 4 Not … 2 Qui… 2 Qui… 3 Not… 2 Qu… 2 Qu… 3 Not …
+#&gt; 10 1 Ext… 1 Ext… 1 Ex… 1 Ex… 4 Not … 1 Ext… 2 Qui… 4 Not… 2 Qu… 3 No… 3 Not …
+#&gt; # ... with 1,775 more rows, and 9 more variables: INTELB &lt;fct&gt;, VOTE3 &lt;dbl&gt;,
+#&gt; #   AGE &lt;dbl&gt;, EDUC &lt;dbl&gt;, GENDER &lt;dbl&gt;, PARTY &lt;dbl&gt;, .class &lt;int&gt;,
+#&gt; #   .probability &lt;dbl&gt;, .rownames &lt;chr&gt;</div><div class='input'><span class='fu'>dim</span>(<span class='no'>au2</span>)</div><div class='output co'>#&gt; [1] 1785   20</div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
@@ -225,9 +327,9 @@ combination, with columns:</p>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
       
-      <li><a href="#value">Value</a></li>
-
       <li><a href="#see-also">See also</a></li>
+
+      <li><a href="#value">Value</a></li>
       
       <li><a href="#examples">Examples</a></li>
     </ul>

@@ -77,6 +77,9 @@
       <a href="../articles/broom_and_dplyr.html">Broom and dplyr</a>
     </li>
     <li>
+      <a href="../articles/external-tidiers.html">Tidiers in external packages</a>
+    </li>
+    <li>
       <a href="../articles/kmeans.html">K-means</a>
     </li>
   </ul>
@@ -85,7 +88,7 @@
   <a href="../news/index.html">News</a>
 </li>
         <li>
-  <a href="https://github.com/tidyverse/broom">
+  <a href="https://github.com/tidymodels/broom">
     <span class="fa fa-github fa-lg"></span>
      
   </a>
@@ -102,7 +105,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Tidy a(n) lmRob object</h1>
-    <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/robust-lmrob-tidiers.R'><code>R/robust-lmrob-tidiers.R</code></a></small>
+    <small class="dont-index">Source: <a href='http://github.com/tidymodels/broom/blob/master/R/robust-lmrob-tidiers.R'><code>R/robust-lmrob-tidiers.R</code></a></small>
     <div class="hidden name"><code>tidy.lmRob.Rd</code></div>
     </div>
 
@@ -113,7 +116,7 @@
     </div>
 
     <pre class="usage"><span class='co'># S3 method for lmRob</span>
-<span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>x</span>, <span class='no'>...</span>)</pre>
+<span class='fu'><a href='http://www.rdocumentation.org/packages/modelgenerics/topics/generics'>tidy</a></span>(<span class='no'>x</span>, <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -142,29 +145,6 @@ to <code>FALSE</code>.</p></dd>
     </tr>
     </table>
     
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
-
-    <p>A <code><a href='http://www.rdocumentation.org/packages/tibble/topics/tibble'>tibble::tibble()</a></code> with one row for each term in the
-regression. The tibble has columns:</p>
-<dt>term</dt><dd><p>The name of the regression term.</p></dd>
-<dt>estimate</dt><dd><p>The estimated value of the regression term.</p></dd>
-<dt>std.error</dt><dd><p>The standard error of the regression term.</p></dd>
-<dt>statistic</dt><dd><p>The value of a statistic, almost always a T-statistic,
-to use in a hypothesis that the regression term is non-zero.</p></dd>
-<dt>p.value</dt><dd><p>The two-sided p-value associated with the observed
-statistic.</p></dd>
-<dt>conf.low</dt><dd><p>The low end of a confidence interval for the regression
-term. Included only if <code>conf.int = TRUE</code>.</p></dd>
-<dt>conf.high</dt><dd><p>The high end of a confidence interval for the regression
-term. Included only if <code>conf.int = TRUE</code>.</p></dd>
-
-If the linear model is an mlm object (multiple linear model),
-there is an additional column:
-
-<dt>response</dt><dd><p>Which response column the coefficients correspond to
-(typically Y1, Y2, etc)</p></dd>
-
-    
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>For tidiers for robust models from the <span class="pkg">MASS</span> package see
@@ -172,7 +152,7 @@ there is an additional column:
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='tidy.html'>tidy()</a></code>, <code><a href='tidy.lm.html'>tidy.lm()</a></code></p>
+    <div class='dont-index'><p><code><a href='http://www.rdocumentation.org/packages/modelgenerics/topics/generics'>tidy()</a></code>, <code><a href='tidy.lm.html'>tidy.lm()</a></code></p>
 <p><code><a href='http://www.rdocumentation.org/packages/robust/topics/lmRob'>robust::lmRob()</a></code></p>
 <p>Other robust tidiers: <code><a href='augment.glmRob.html'>augment.glmRob</a></code>,
   <code><a href='augment.lmRob.html'>augment.lmRob</a></code>, <code><a href='glance.glmRob.html'>glance.glmRob</a></code>,
@@ -184,11 +164,11 @@ there is an additional column:
 <span class='fu'>library</span>(<span class='no'>robust</span>)
 <span class='no'>m</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/robust/topics/lmRob'>lmRob</a></span>(<span class='no'>mpg</span> ~ <span class='no'>wt</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>mtcars</span>)
 
-<span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>m</span>)</div><div class='output co'>#&gt; # A tibble: 2 x 5
+<span class='fu'><a href='http://www.rdocumentation.org/packages/modelgenerics/topics/generics'>tidy</a></span>(<span class='no'>m</span>)</div><div class='output co'>#&gt; # A tibble: 2 x 5
 #&gt;   term        estimate std.error statistic  p.value
 #&gt;   &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
 #&gt; 1 (Intercept)    35.6       3.58      9.93 5.37e-11
-#&gt; 2 wt             -4.91      1.09     -4.49 9.67e- 5</div><div class='input'><span class='fu'><a href='augment.html'>augment</a></span>(<span class='no'>m</span>)</div><div class='output co'>#&gt; # A tibble: 32 x 6
+#&gt; 2 wt             -4.91      1.09     -4.49 9.67e- 5</div><div class='input'><span class='fu'><a href='http://www.rdocumentation.org/packages/modelgenerics/topics/generics'>augment</a></span>(<span class='no'>m</span>)</div><div class='output co'>#&gt; # A tibble: 32 x 6
 #&gt;    .rownames           mpg    wt .fitted .se.fit  .resid
 #&gt;  * &lt;chr&gt;             &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;
 #&gt;  1 Mazda RX4          21    2.62    22.7   1.12  -1.68  
@@ -201,12 +181,12 @@ there is an additional column:
 #&gt;  8 Merc 240D          24.4  3.19    19.9   0.955  4.52  
 #&gt;  9 Merc 230           22.8  3.15    20.1   0.955  2.72  
 #&gt; 10 Merc 280           19.2  3.44    18.7   1.00   0.545 
-#&gt; # ... with 22 more rows</div><div class='input'><span class='fu'><a href='glance.html'>glance</a></span>(<span class='no'>m</span>)</div><div class='output co'>#&gt; # A tibble: 1 x 4
+#&gt; # ... with 22 more rows</div><div class='input'><span class='fu'><a href='http://www.rdocumentation.org/packages/modelgenerics/topics/generics'>glance</a></span>(<span class='no'>m</span>)</div><div class='output co'>#&gt; # A tibble: 1 x 4
 #&gt;   r.squared deviance sigma df.residual
 #&gt;       &lt;dbl&gt;    &lt;dbl&gt; &lt;dbl&gt;       &lt;int&gt;
 #&gt; 1     0.567     136.  2.95          30</div><div class='input'>
 <span class='no'>gm</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/robust/topics/glmRob'>glmRob</a></span>(<span class='no'>am</span> ~ <span class='no'>wt</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>mtcars</span>, <span class='kw'>family</span> <span class='kw'>=</span> <span class='st'>"binomial"</span>)
-<span class='fu'><a href='glance.html'>glance</a></span>(<span class='no'>gm</span>)</div><div class='output co'>#&gt; # A tibble: 1 x 3
+<span class='fu'><a href='http://www.rdocumentation.org/packages/modelgenerics/topics/generics'>glance</a></span>(<span class='no'>gm</span>)</div><div class='output co'>#&gt; # A tibble: 1 x 3
 #&gt;   deviance null.deviance df.residual
 #&gt;      &lt;dbl&gt;         &lt;dbl&gt;       &lt;int&gt;
 #&gt; 1     19.2          44.4          30</div><div class='input'>
@@ -217,8 +197,6 @@ there is an additional column:
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
       
-      <li><a href="#value">Value</a></li>
-
       <li><a href="#details">Details</a></li>
 
       <li><a href="#see-also">See also</a></li>

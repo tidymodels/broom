@@ -77,6 +77,9 @@
       <a href="../articles/broom_and_dplyr.html">Broom and dplyr</a>
     </li>
     <li>
+      <a href="../articles/external-tidiers.html">Tidiers in external packages</a>
+    </li>
+    <li>
       <a href="../articles/kmeans.html">K-means</a>
     </li>
   </ul>
@@ -85,7 +88,7 @@
   <a href="../news/index.html">News</a>
 </li>
         <li>
-  <a href="https://github.com/tidyverse/broom">
+  <a href="https://github.com/tidymodels/broom">
     <span class="fa fa-github fa-lg"></span>
      
   </a>
@@ -102,7 +105,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Glance at a(n) multinom object</h1>
-    <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/nnet-tidiers.R'><code>R/nnet-tidiers.R</code></a></small>
+    <small class="dont-index">Source: <a href='http://github.com/tidymodels/broom/blob/master/R/nnet-tidiers.R'><code>R/nnet-tidiers.R</code></a></small>
     <div class="hidden name"><code>glance.multinom.Rd</code></div>
     </div>
 
@@ -123,7 +126,7 @@ the measure will be reported as <code>NA</code>.</p>
     </div>
 
     <pre class="usage"><span class='co'># S3 method for multinom</span>
-<span class='fu'><a href='glance.html'>glance</a></span>(<span class='no'>x</span>, <span class='no'>...</span>)</pre>
+<span class='fu'><a href='http://www.rdocumentation.org/packages/modelgenerics/topics/generics'>glance</a></span>(<span class='no'>x</span>, <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -140,36 +143,119 @@ absorbed in <code>...</code>, where they will be ignored. If the misspelled
 argument has a default value, the default value will be used.
 For example, if you pass <code>conf.lvel = 0.9</code>, all computation will
 proceed using <code>conf.level = 0.95</code>. Additionally, if you pass
-<code>newdata = my_tibble</code> to an <code><a href='augment.html'>augment()</a></code> method that does not
+<code>newdata = my_tibble</code> to an <code><a href='http://www.rdocumentation.org/packages/modelgenerics/topics/generics'>augment()</a></code> method that does not
 accept a <code>newdata</code> argument, it will use the default value for
 the <code>data</code> argument.</p></td>
     </tr>
     </table>
     
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
-
-    <p>A one-row <a href='http://www.rdocumentation.org/packages/tibble/topics/tibble'>tibble::tibble</a> with columns:</p>
-<dt>edf</dt><dd><p>The effective degrees of freedom</p></dd>
-<dt>deviance</dt><dd><p>deviance</p></dd>
-<dt>AIC</dt><dd><p>the Akaike Information Criterion</p></dd>
-
-    
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='glance.html'>glance()</a></code>, <code><a href='http://www.rdocumentation.org/packages/nnet/topics/multinom'>nnet::multinom()</a></code></p>
+    <div class='dont-index'><p><code><a href='http://www.rdocumentation.org/packages/modelgenerics/topics/generics'>glance()</a></code>, <code><a href='http://www.rdocumentation.org/packages/nnet/topics/multinom'>nnet::multinom()</a></code></p>
 <p>Other multinom tidiers: <code><a href='tidy.multinom.html'>tidy.multinom</a></code></p></div>
     
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
+    <p>A <code><a href='http://www.rdocumentation.org/packages/tibble/topics/tibble'>tibble::tibble()</a></code> with exactly one row and columns:</p>
+<dt>AIC</dt><dd><p>Akaike's Information Criterion for the model.</p></dd>
+  <dt>deviance</dt><dd><p>Deviance of the model.</p></dd>
+  <dt>edf</dt><dd><p>The effective degrees of freedom</p></dd>
+
+
+    
+
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'>
+<span class='fu'>library</span>(<span class='no'>nnet</span>)
+<span class='fu'>library</span>(<span class='no'>MASS</span>)
+
+<span class='fu'>example</span>(<span class='no'>birthwt</span>)</div><div class='output co'>#&gt; 
+#&gt; brthwt&gt; bwt &lt;- with(birthwt, {
+#&gt; brthwt+ race &lt;- factor(race, labels = c("white", "black", "other"))
+#&gt; brthwt+ ptd &lt;- factor(ptl &gt; 0)
+#&gt; brthwt+ ftv &lt;- factor(ftv)
+#&gt; brthwt+ levels(ftv)[-(1:2)] &lt;- "2+"
+#&gt; brthwt+ data.frame(low = factor(low), age, lwt, race, smoke = (smoke &gt; 0),
+#&gt; brthwt+            ptd, ht = (ht &gt; 0), ui = (ui &gt; 0), ftv)
+#&gt; brthwt+ })
+#&gt; 
+#&gt; brthwt&gt; options(contrasts = c("contr.treatment", "contr.poly"))
+#&gt; 
+#&gt; brthwt&gt; glm(low ~ ., binomial, bwt)
+#&gt; 
+#&gt; Call:  glm(formula = low ~ ., family = binomial, data = bwt)
+#&gt; 
+#&gt; Coefficients:
+#&gt; (Intercept)          age          lwt    raceblack    raceother    smokeTRUE  
+#&gt;     0.82302     -0.03723     -0.01565      1.19241      0.74068      0.75553  
+#&gt;     ptdTRUE       htTRUE       uiTRUE         ftv1        ftv2+  
+#&gt;     1.34376      1.91317      0.68020     -0.43638      0.17901  
+#&gt; 
+#&gt; Degrees of Freedom: 188 Total (i.e. Null);  178 Residual
+#&gt; Null Deviance:	    234.7 
+#&gt; Residual Deviance: 195.5 	AIC: 217.5</div><div class='input'><span class='no'>bwt.mu</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/nnet/topics/multinom'>multinom</a></span>(<span class='no'>low</span> ~ <span class='no'>.</span>, <span class='no'>bwt</span>)</div><div class='output co'>#&gt; # weights:  12 (11 variable)
+#&gt; initial  value 131.004817 
+#&gt; iter  10 value 98.029803
+#&gt; final  value 97.737759 
+#&gt; converged</div><div class='input'><span class='fu'><a href='http://www.rdocumentation.org/packages/modelgenerics/topics/generics'>tidy</a></span>(<span class='no'>bwt.mu</span>)</div><div class='output co'>#&gt; # A tibble: 11 x 6
+#&gt;    y.level term        estimate std.error statistic p.value
+#&gt;    &lt;chr&gt;   &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;
+#&gt;  1 1       (Intercept)    2.28    1.24        0.661 0.508  
+#&gt;  2 1       age            0.963   0.0387     -0.962 0.336  
+#&gt;  3 1       lwt            0.984   0.00708    -2.21  0.0271 
+#&gt;  4 1       raceblack      3.29    0.536       2.22  0.0261 
+#&gt;  5 1       raceother      2.10    0.462       1.60  0.109  
+#&gt;  6 1       smokeTRUE      2.13    0.425       1.78  0.0755 
+#&gt;  7 1       ptdTRUE        3.83    0.481       2.80  0.00518
+#&gt;  8 1       htTRUE         6.77    0.721       2.65  0.00794
+#&gt;  9 1       uiTRUE         1.97    0.464       1.46  0.143  
+#&gt; 10 1       ftv1           0.646   0.479      -0.910 0.363  
+#&gt; 11 1       ftv2+          1.20    0.456       0.392 0.695  </div><div class='input'><span class='fu'><a href='http://www.rdocumentation.org/packages/modelgenerics/topics/generics'>glance</a></span>(<span class='no'>bwt.mu</span>)</div><div class='output co'>#&gt; # A tibble: 1 x 3
+#&gt;     edf deviance   AIC
+#&gt;   &lt;dbl&gt;    &lt;dbl&gt; &lt;dbl&gt;
+#&gt; 1    11     195.  217.</div><div class='input'>
+<span class='co'>#* This model is a truly terrible model</span>
+<span class='co'>#* but it should show you what the output looks</span>
+<span class='co'>#* like in a multinomial logistic regression</span>
+
+<span class='no'>fit.gear</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/nnet/topics/multinom'>multinom</a></span>(<span class='no'>gear</span> ~ <span class='no'>mpg</span> + <span class='fu'>factor</span>(<span class='no'>am</span>), <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>mtcars</span>)</div><div class='output co'>#&gt; # weights:  12 (6 variable)
+#&gt; initial  value 35.155593 
+#&gt; iter  10 value 14.156582
+#&gt; iter  20 value 14.031881
+#&gt; iter  30 value 14.025659
+#&gt; iter  40 value 14.021414
+#&gt; iter  50 value 14.019824
+#&gt; iter  60 value 14.019278
+#&gt; iter  70 value 14.018601
+#&gt; iter  80 value 14.018282
+#&gt; iter  80 value 14.018282
+#&gt; iter  90 value 14.017126
+#&gt; final  value 14.015374 
+#&gt; converged</div><div class='input'><span class='fu'><a href='http://www.rdocumentation.org/packages/modelgenerics/topics/generics'>tidy</a></span>(<span class='no'>fit.gear</span>)</div><div class='output co'>#&gt; # A tibble: 6 x 6
+#&gt;   y.level term        estimate std.error statistic  p.value
+#&gt;   &lt;chr&gt;   &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
+#&gt; 1 4       (Intercept)  1.44e-5     5.32     -2.10  3.60e- 2
+#&gt; 2 4       mpg          1.69e+0     0.268     1.96  5.02e- 2
+#&gt; 3 4       factor(am)1  1.47e+5    66.9       0.178 8.59e- 1
+#&gt; 4 5       (Intercept)  1.03e-8    67.9      -0.271 7.87e- 1
+#&gt; 5 5       mpg          1.44e+0     0.292     1.25  2.10e- 1
+#&gt; 6 5       factor(am)1  5.58e+9     2.17     10.3   4.54e-25</div><div class='input'><span class='fu'><a href='http://www.rdocumentation.org/packages/modelgenerics/topics/generics'>glance</a></span>(<span class='no'>fit.gear</span>)</div><div class='output co'>#&gt; # A tibble: 1 x 3
+#&gt;     edf deviance   AIC
+#&gt;   &lt;dbl&gt;    &lt;dbl&gt; &lt;dbl&gt;
+#&gt; 1     6     28.0  40.0</div><div class='input'>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
       
-      <li><a href="#value">Value</a></li>
-
       <li><a href="#see-also">See also</a></li>
-          </ul>
+
+      <li><a href="#value">Value</a></li>
+      
+      <li><a href="#examples">Examples</a></li>
+    </ul>
 
   </div>
 </div>

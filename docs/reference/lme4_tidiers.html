@@ -77,6 +77,9 @@
       <a href="../articles/broom_and_dplyr.html">Broom and dplyr</a>
     </li>
     <li>
+      <a href="../articles/external-tidiers.html">Tidiers in external packages</a>
+    </li>
+    <li>
       <a href="../articles/kmeans.html">K-means</a>
     </li>
   </ul>
@@ -85,7 +88,7 @@
   <a href="../news/index.html">News</a>
 </li>
         <li>
-  <a href="https://github.com/tidyverse/broom">
+  <a href="https://github.com/tidymodels/broom">
     <span class="fa fa-github fa-lg"></span>
      
   </a>
@@ -102,28 +105,26 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Tidying methods for mixed effects models</h1>
-    <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/lme4-tidiers.R'><code>R/lme4-tidiers.R</code></a></small>
+    <small class="dont-index">Source: <a href='http://github.com/tidymodels/broom/blob/master/R/lme4-tidiers.R'><code>R/lme4-tidiers.R</code></a></small>
     <div class="hidden name"><code>lme4_tidiers.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p><code>lme4</code> tidiers will soon be deprecated in <code>broom</code> and there is no ongoing
-development of these functions at this time. <code>lme4</code> tidiers are being
-developed in the <code>broom.mixed</code> package, which is not yet on CRAN.</p>
+    <p><code>lme4</code> tidiers are deprecated.</p>
     
     </div>
 
     <pre class="usage"><span class='co'># S3 method for merMod</span>
-<span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>x</span>, <span class='kw'>effects</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"ran_pars"</span>, <span class='st'>"fixed"</span>),
+<span class='fu'><a href='http://www.rdocumentation.org/packages/modelgenerics/topics/generics'>tidy</a></span>(<span class='no'>x</span>, <span class='kw'>effects</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"ran_pars"</span>, <span class='st'>"fixed"</span>),
   <span class='kw'>scales</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>ran_prefix</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>conf.int</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
   <span class='kw'>conf.level</span> <span class='kw'>=</span> <span class='fl'>0.95</span>, <span class='kw'>conf.method</span> <span class='kw'>=</span> <span class='st'>"Wald"</span>, <span class='no'>...</span>)
 
 <span class='co'># S3 method for merMod</span>
-<span class='fu'><a href='augment.html'>augment</a></span>(<span class='no'>x</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='kw pkg'>stats</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/stats/topics/model.frame'>model.frame</a></span>(<span class='no'>x</span>), <span class='no'>newdata</span>, <span class='no'>...</span>)
+<span class='fu'><a href='http://www.rdocumentation.org/packages/modelgenerics/topics/generics'>augment</a></span>(<span class='no'>x</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='kw pkg'>stats</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/stats/topics/model.frame'>model.frame</a></span>(<span class='no'>x</span>), <span class='no'>newdata</span>, <span class='no'>...</span>)
 
 <span class='co'># S3 method for merMod</span>
-<span class='fu'><a href='glance.html'>glance</a></span>(<span class='no'>x</span>, <span class='no'>...</span>)</pre>
+<span class='fu'><a href='http://www.rdocumentation.org/packages/modelgenerics/topics/generics'>glance</a></span>(<span class='no'>x</span>, <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -216,7 +217,7 @@ entirely from the augmented data frame. When the modeling was performed
 with <code>na.action = "na.exclude"</code>, one should provide the original data
 as a second argument, at which point the augmented data will contain those
 rows (typically with NAs in place of the new columns). If the original data
-is not provided to <code><a href='augment.html'>augment()</a></code> and <code>na.action = "na.exclude"</code>, a
+is not provided to <code><a href='http://www.rdocumentation.org/packages/modelgenerics/topics/generics'>augment()</a></code> and <code>na.action = "na.exclude"</code>, a
 warning is raised and the incomplete rows are dropped.</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
@@ -230,28 +231,28 @@ warning is raised and the incomplete rows are dropped.</p>
 <span class='kw'>if</span> (<span class='fu'>require</span>(<span class='st'>"lme4"</span>)) {
     <span class='co'># example regressions are from lme4 documentation</span>
     <span class='no'>lmm1</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/lme4/topics/lmer'>lmer</a></span>(<span class='no'>Reaction</span> ~ <span class='no'>Days</span> + (<span class='no'>Days</span> <span class='kw'>|</span> <span class='no'>Subject</span>), <span class='no'>sleepstudy</span>)
-    <span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>lmm1</span>)
-    <span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>lmm1</span>, <span class='kw'>effects</span> <span class='kw'>=</span> <span class='st'>"fixed"</span>)
-    <span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>lmm1</span>, <span class='kw'>effects</span> <span class='kw'>=</span> <span class='st'>"fixed"</span>, <span class='kw'>conf.int</span><span class='kw'>=</span><span class='fl'>TRUE</span>)
-    <span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>lmm1</span>, <span class='kw'>effects</span> <span class='kw'>=</span> <span class='st'>"fixed"</span>, <span class='kw'>conf.int</span><span class='kw'>=</span><span class='fl'>TRUE</span>, <span class='kw'>conf.method</span><span class='kw'>=</span><span class='st'>"profile"</span>)
-    <span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>lmm1</span>, <span class='kw'>effects</span> <span class='kw'>=</span> <span class='st'>"ran_modes"</span>, <span class='kw'>conf.int</span><span class='kw'>=</span><span class='fl'>TRUE</span>)
-    <span class='fu'>head</span>(<span class='fu'><a href='augment.html'>augment</a></span>(<span class='no'>lmm1</span>, <span class='no'>sleepstudy</span>))
-    <span class='fu'><a href='glance.html'>glance</a></span>(<span class='no'>lmm1</span>)
+    <span class='fu'><a href='http://www.rdocumentation.org/packages/modelgenerics/topics/generics'>tidy</a></span>(<span class='no'>lmm1</span>)
+    <span class='fu'><a href='http://www.rdocumentation.org/packages/modelgenerics/topics/generics'>tidy</a></span>(<span class='no'>lmm1</span>, <span class='kw'>effects</span> <span class='kw'>=</span> <span class='st'>"fixed"</span>)
+    <span class='fu'><a href='http://www.rdocumentation.org/packages/modelgenerics/topics/generics'>tidy</a></span>(<span class='no'>lmm1</span>, <span class='kw'>effects</span> <span class='kw'>=</span> <span class='st'>"fixed"</span>, <span class='kw'>conf.int</span><span class='kw'>=</span><span class='fl'>TRUE</span>)
+    <span class='fu'><a href='http://www.rdocumentation.org/packages/modelgenerics/topics/generics'>tidy</a></span>(<span class='no'>lmm1</span>, <span class='kw'>effects</span> <span class='kw'>=</span> <span class='st'>"fixed"</span>, <span class='kw'>conf.int</span><span class='kw'>=</span><span class='fl'>TRUE</span>, <span class='kw'>conf.method</span><span class='kw'>=</span><span class='st'>"profile"</span>)
+    <span class='fu'><a href='http://www.rdocumentation.org/packages/modelgenerics/topics/generics'>tidy</a></span>(<span class='no'>lmm1</span>, <span class='kw'>effects</span> <span class='kw'>=</span> <span class='st'>"ran_modes"</span>, <span class='kw'>conf.int</span><span class='kw'>=</span><span class='fl'>TRUE</span>)
+    <span class='fu'>head</span>(<span class='fu'><a href='http://www.rdocumentation.org/packages/modelgenerics/topics/generics'>augment</a></span>(<span class='no'>lmm1</span>, <span class='no'>sleepstudy</span>))
+    <span class='fu'><a href='http://www.rdocumentation.org/packages/modelgenerics/topics/generics'>glance</a></span>(<span class='no'>lmm1</span>)
 
     <span class='no'>glmm1</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/lme4/topics/glmer'>glmer</a></span>(<span class='fu'>cbind</span>(<span class='no'>incidence</span>, <span class='no'>size</span> - <span class='no'>incidence</span>) ~ <span class='no'>period</span> + (<span class='fl'>1</span> <span class='kw'>|</span> <span class='no'>herd</span>),
                   <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>cbpp</span>, <span class='kw'>family</span> <span class='kw'>=</span> <span class='no'>binomial</span>)
-    <span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>glmm1</span>)
-    <span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>glmm1</span>, <span class='kw'>effects</span> <span class='kw'>=</span> <span class='st'>"fixed"</span>)
-    <span class='fu'>head</span>(<span class='fu'><a href='augment.html'>augment</a></span>(<span class='no'>glmm1</span>, <span class='no'>cbpp</span>))
-    <span class='fu'><a href='glance.html'>glance</a></span>(<span class='no'>glmm1</span>)
+    <span class='fu'><a href='http://www.rdocumentation.org/packages/modelgenerics/topics/generics'>tidy</a></span>(<span class='no'>glmm1</span>)
+    <span class='fu'><a href='http://www.rdocumentation.org/packages/modelgenerics/topics/generics'>tidy</a></span>(<span class='no'>glmm1</span>, <span class='kw'>effects</span> <span class='kw'>=</span> <span class='st'>"fixed"</span>)
+    <span class='fu'>head</span>(<span class='fu'><a href='http://www.rdocumentation.org/packages/modelgenerics/topics/generics'>augment</a></span>(<span class='no'>glmm1</span>, <span class='no'>cbpp</span>))
+    <span class='fu'><a href='http://www.rdocumentation.org/packages/modelgenerics/topics/generics'>glance</a></span>(<span class='no'>glmm1</span>)
 
     <span class='no'>startvec</span> <span class='kw'>&lt;-</span> <span class='fu'>c</span>(<span class='kw'>Asym</span> <span class='kw'>=</span> <span class='fl'>200</span>, <span class='kw'>xmid</span> <span class='kw'>=</span> <span class='fl'>725</span>, <span class='kw'>scal</span> <span class='kw'>=</span> <span class='fl'>350</span>)
     <span class='no'>nm1</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/lme4/topics/nlmer'>nlmer</a></span>(<span class='no'>circumference</span> ~ <span class='fu'>SSlogis</span>(<span class='no'>age</span>, <span class='no'>Asym</span>, <span class='no'>xmid</span>, <span class='no'>scal</span>) ~ <span class='no'>Asym</span><span class='kw'>|</span><span class='no'>Tree</span>,
                   <span class='no'>Orange</span>, <span class='kw'>start</span> <span class='kw'>=</span> <span class='no'>startvec</span>)
-    <span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>nm1</span>)
-    <span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>nm1</span>, <span class='kw'>effects</span> <span class='kw'>=</span> <span class='st'>"fixed"</span>)
-    <span class='fu'>head</span>(<span class='fu'><a href='augment.html'>augment</a></span>(<span class='no'>nm1</span>, <span class='no'>Orange</span>))
-    <span class='fu'><a href='glance.html'>glance</a></span>(<span class='no'>nm1</span>)
+    <span class='fu'><a href='http://www.rdocumentation.org/packages/modelgenerics/topics/generics'>tidy</a></span>(<span class='no'>nm1</span>)
+    <span class='fu'><a href='http://www.rdocumentation.org/packages/modelgenerics/topics/generics'>tidy</a></span>(<span class='no'>nm1</span>, <span class='kw'>effects</span> <span class='kw'>=</span> <span class='st'>"fixed"</span>)
+    <span class='fu'>head</span>(<span class='fu'><a href='http://www.rdocumentation.org/packages/modelgenerics/topics/generics'>augment</a></span>(<span class='no'>nm1</span>, <span class='no'>Orange</span>))
+    <span class='fu'><a href='http://www.rdocumentation.org/packages/modelgenerics/topics/generics'>glance</a></span>(<span class='no'>nm1</span>)
 }
 <span class='co'># }</span></pre>
   </div>

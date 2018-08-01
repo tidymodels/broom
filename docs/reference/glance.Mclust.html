@@ -77,6 +77,9 @@
       <a href="../articles/broom_and_dplyr.html">Broom and dplyr</a>
     </li>
     <li>
+      <a href="../articles/external-tidiers.html">Tidiers in external packages</a>
+    </li>
+    <li>
       <a href="../articles/kmeans.html">K-means</a>
     </li>
   </ul>
@@ -85,7 +88,7 @@
   <a href="../news/index.html">News</a>
 </li>
         <li>
-  <a href="https://github.com/tidyverse/broom">
+  <a href="https://github.com/tidymodels/broom">
     <span class="fa fa-github fa-lg"></span>
      
   </a>
@@ -102,7 +105,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Glance at a(n) Mclust object</h1>
-    <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/mclust-tidiers.R'><code>R/mclust-tidiers.R</code></a></small>
+    <small class="dont-index">Source: <a href='http://github.com/tidymodels/broom/blob/master/R/mclust-tidiers.R'><code>R/mclust-tidiers.R</code></a></small>
     <div class="hidden name"><code>glance.Mclust.Rd</code></div>
     </div>
 
@@ -123,7 +126,7 @@ the measure will be reported as <code>NA</code>.</p>
     </div>
 
     <pre class="usage"><span class='co'># S3 method for Mclust</span>
-<span class='fu'><a href='glance.html'>glance</a></span>(<span class='no'>x</span>, <span class='no'>...</span>)</pre>
+<span class='fu'><a href='http://www.rdocumentation.org/packages/modelgenerics/topics/generics'>glance</a></span>(<span class='no'>x</span>, <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -140,7 +143,7 @@ absorbed in <code>...</code>, where they will be ignored. If the misspelled
 argument has a default value, the default value will be used.
 For example, if you pass <code>conf.lvel = 0.9</code>, all computation will
 proceed using <code>conf.level = 0.95</code>. Additionally, if you pass
-<code>newdata = my_tibble</code> to an <code><a href='augment.html'>augment()</a></code> method that does not
+<code>newdata = my_tibble</code> to an <code><a href='http://www.rdocumentation.org/packages/modelgenerics/topics/generics'>augment()</a></code> method that does not
 accept a <code>newdata</code> argument, it will use the default value for
 the <code>data</code> argument.</p></td>
     </tr>
@@ -148,19 +151,42 @@ the <code>data</code> argument.</p></td>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A one-row <a href='http://www.rdocumentation.org/packages/tibble/topics/tibble'>tibble::tibble</a> with columns:</p>
-<dt>model</dt><dd><p>A character string denoting the model at which the optimal
-BIC occurs</p></dd>
-<dt>n</dt><dd><p>The number of observations in the data</p></dd>
-<dt>G</dt><dd><p>The optimal number of mixture components</p></dd>
-<dt>BIC</dt><dd><p>The optimal BIC value</p></dd>
-<dt>logLik</dt><dd><p>The log-likelihood corresponding to the optimal BIC</p></dd>
-<dt>df</dt><dd><p>The number of estimated parameters</p></dd>
-<dt>hypvol</dt><dd><p>If the other model contains a noise component, the
-value of the hypervolume parameter. Otherwise <code>NA</code>.</p></dd>
+    <p>A <code><a href='http://www.rdocumentation.org/packages/tibble/topics/tibble'>tibble::tibble()</a></code> with exactly one row and columns:</p>
+<dt>BIC</dt><dd><p>Bayesian Information Criterion for the model.</p></dd>
+  <dt>df</dt><dd><p>Degrees of freedom used by the model.</p></dd>
+  <dt>logLik</dt><dd><p>The log-likelihood of the model. [stats::logLik()] may be a useful reference.</p></dd>
+  <dt>n</dt><dd><p>Needs custom info.</p></dd>
+  <dt>model</dt><dd><p>A string denoting the model type with optimal BIC</p></dd>
+  <dt>G</dt><dd><p>Number mixture components in optimal model</p></dd>
+  <dt>hypvol</dt><dd><p>If the other model contains a noise component, the 
+    value of the hypervolume parameter. Otherwise `NA`.</p></dd>
+
 
     
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'>
+<span class='fu'>library</span>(<span class='no'>dplyr</span>)
+<span class='fu'>library</span>(<span class='no'>mclust</span>)
+<span class='fu'>set.seed</span>(<span class='fl'>27</span>)
+
+<span class='no'>centers</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>tibble</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/tibble/topics/tibble'>tibble</a></span>(
+  <span class='kw'>cluster</span> <span class='kw'>=</span> <span class='fu'>factor</span>(<span class='fl'>1</span>:<span class='fl'>3</span>),
+  <span class='kw'>num_points</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='fl'>100</span>, <span class='fl'>150</span>, <span class='fl'>50</span>),  <span class='co'># number points in each cluster</span>
+  <span class='kw'>x1</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='fl'>5</span>, <span class='fl'>0</span>, -<span class='fl'>3</span>),              <span class='co'># x1 coordinate of cluster center</span>
+  <span class='kw'>x2</span> <span class='kw'>=</span> <span class='fu'>c</span>(-<span class='fl'>1</span>, <span class='fl'>1</span>, -<span class='fl'>2</span>)              <span class='co'># x2 coordinate of cluster center</span>
+)
+
+<span class='no'>points</span> <span class='kw'>&lt;-</span> <span class='no'>centers</span> <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='http://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span>(
+    <span class='kw'>x1</span> <span class='kw'>=</span> <span class='kw pkg'>purrr</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/purrr/topics/map2'>map2</a></span>(<span class='no'>num_points</span>, <span class='no'>x1</span>, <span class='no'>rnorm</span>),
+    <span class='kw'>x2</span> <span class='kw'>=</span> <span class='kw pkg'>purrr</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/purrr/topics/map2'>map2</a></span>(<span class='no'>num_points</span>, <span class='no'>x2</span>, <span class='no'>rnorm</span>)
+  ) <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='http://dplyr.tidyverse.org/reference/select.html'>select</a></span>(-<span class='no'>num_points</span>, -<span class='no'>cluster</span>) <span class='kw'>%&gt;%</span>
+  <span class='kw pkg'>tidyr</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/tidyr/topics/unnest'>unnest</a></span>(<span class='no'>x1</span>, <span class='no'>x2</span>)</div><div class='output co'>#&gt; <span class='error'>Error in select(., -num_points, -cluster): unused arguments (-num_points, -cluster)</span></div><div class='input'>
+<span class='no'>m</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>mclust</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/mclust/topics/Mclust'>Mclust</a></span>(<span class='no'>points</span>)</div><div class='output co'>#&gt; <span class='error'>Error in as.vector(x, mode): cannot coerce type 'closure' to vector of type 'any'</span></div><div class='input'>
+<span class='fu'><a href='http://www.rdocumentation.org/packages/modelgenerics/topics/generics'>tidy</a></span>(<span class='no'>m</span>)</div><div class='output co'>#&gt; <span class='error'>Error in tidy(m): object 'm' not found</span></div><div class='input'><span class='fu'><a href='http://www.rdocumentation.org/packages/modelgenerics/topics/generics'>augment</a></span>(<span class='no'>m</span>, <span class='no'>points</span>)</div><div class='output co'>#&gt; <span class='error'>Error in augment(m, points): object 'm' not found</span></div><div class='input'><span class='fu'><a href='http://www.rdocumentation.org/packages/modelgenerics/topics/generics'>glance</a></span>(<span class='no'>m</span>)</div><div class='output co'>#&gt; <span class='error'>Error in glance(m): object 'm' not found</span></div><div class='input'>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -168,7 +194,9 @@ value of the hypervolume parameter. Otherwise <code>NA</code>.</p></dd>
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
-          </ul>
+      
+      <li><a href="#examples">Examples</a></li>
+    </ul>
 
   </div>
 </div>
