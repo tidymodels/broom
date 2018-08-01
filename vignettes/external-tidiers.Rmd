@@ -21,7 +21,7 @@ If you are a package developer, the best place to include `tidy()`, `glance()` o
 
 1. Re-export the `tidy()`, `glance()` and `augment()` generics from the `modelgenerics` package.
 2. Implement appropriate tidying methods.
-3. Tests the tidying methods
+3. Test the tidying methods
 
 The [dustpan](https://github.com/alexpghayes/dustpan) package demonstrates use of `modelgenerics` and `modeltests`, and you may find it helpful to browse.
 
@@ -113,7 +113,25 @@ test_that("augment.my_object", {
 
 If you're run `devtools::test()` and `devtools::check()` and didn't fail any tests or set off R CMD Check ERRORS, WARNINGS or NOTES, you're done!
 
-### If your tidiers don't pass the tests
+## F.A.Q.
+
+### Should I `Import` or `Suggest` `broom` or `broom.mixed`?
+
+If you are using tidiers from broom, such as `tidy.lm()`, then you will need to depend on `broom`, probably via `Imports`:
+
+```{r}
+use_package("broom", "Imports")
+```
+
+Similarly, if you are using tidiers from `broom.mixed`, you'll need to `Import` `broom.mixed`.
+
+You can import `broom.mixed` separately from `broom`, or you can mix and match them however you want.
+
+### I don't want to depend on `modelgenerics`. Can I re-export `tidy()`, `glance()` and `augment()` from `broom`?
+
+I think so, although I haven't tested this yet. This is on the TODO list at the moment.
+
+### What do I do if my tidiers don't pass the tests?
 
 If you are introducing new arguments or column names in output, you'll need to make a pull request to `modeltests` to add the new argument/column names to the glossary of allowed names.
 
