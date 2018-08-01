@@ -21,12 +21,6 @@ proceed using \code{conf.level = 0.95}. Additionally, if you pass
 accept a \code{newdata} argument, it will use the default value for
 the \code{data} argument.}
 }
-\value{
-A \link[tibble:tibble]{tibble::tibble} with one row for each point in the
-estimated grid. The result contains one column (named \code{x1},
-\code{x2}, etc) for each dimension, and an \code{estimate} column
-containing the estimated density.
-}
 \description{
 Tidy summarizes information about the components of a model.
 A model component might be a single term in a regression, a single
@@ -34,6 +28,11 @@ hypothesis, a cluster, or a class. Exactly what tidy considers to be a
 model component varies cross models but is usually self-evident.
 If a model has several distinct types of components, you will need to
 specify which components to return.
+}
+\details{
+Returns a data frame in long format with four columns. Use
+\code{tidyr::spread(..., variable, value)} on the output to return to a
+wide format.
 }
 \examples{
 
@@ -46,7 +45,12 @@ td <- tidy(k)
 td
 
 library(ggplot2)
-ggplot(td, aes(x1, x2, fill = estimate)) +
+library(dplyr)
+library(tidyr)
+
+td \%>\% 
+  spread(variable, value) \%>\% 
+  ggplot(aes(x1, x2, fill = estimate)) +
   geom_tile() +
   theme_void()
 
@@ -60,4 +64,12 @@ td3
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[ks:kde]{ks::kde()}}
+}
+\value{
+A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
+  \item{estimate}{The estimated value of the regression term.}
+  \item{obs}{weighted observed number of events in each group}
+  \item{value}{Needs custom desciption.}
+  \item{variable}{Needs custom info.}
+
 }

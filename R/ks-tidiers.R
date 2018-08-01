@@ -4,10 +4,11 @@
 #' @param x A `kde` object returned from [ks::kde()].
 #' @template param_unused_dots
 #' 
-#' @return A [tibble::tibble] with one row for each point in the
-#' estimated grid. The result contains one column (named `x1`,
-#' `x2`, etc) for each dimension, and an `estimate` column
-#' containing the estimated density.
+#' @evalRd return_tidy("obs", "variable", "value", "estimate")
+#' 
+#' @details Returns a data frame in long format with four columns. Use
+#'   `tidyr::spread(..., variable, value)` on the output to return to a 
+#'   wide format.
 #'
 #' @examples
 #'
@@ -20,7 +21,12 @@
 #' td
 #'
 #' library(ggplot2)
-#' ggplot(td, aes(x1, x2, fill = estimate)) +
+#' library(dplyr)
+#' library(tidyr)
+#' 
+#' td %>% 
+#'   spread(variable, value) %>% 
+#'   ggplot(aes(x1, x2, fill = estimate)) +
 #'   geom_tile() +
 #'   theme_void()
 #'

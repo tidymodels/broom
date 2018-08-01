@@ -8,11 +8,8 @@
 #' @template param_confint
 #' @param ... Additional arguments passed to [quantreg::summary.rqs()]
 #' 
-#' @evalRd return_tidy(regression = TRUE)
+#' @evalRd return_tidy(regression = TRUE, "quantile")
 #' 
-#' @return An additional `quantile` column indicating with quantile the 
-#'   coefficient corresponds to.
-#'   
 #' @details If `se.type = "rank"` confidence intervals are calculated by 
 #'   `summary.rq`. When only a single predictor is included in the model, 
 #'   no confidence intervals are calculated and the confidence limits are
@@ -51,8 +48,10 @@ glance.rqs <- function(x, ...) {
 #' @templateVar class rqs
 #' @template title_desc_augment
 #'
-#' @inherit tidy.rqs params examples
+#' @inherit tidy.rqs examples
 #' @inherit augment.rq return details
+#' 
+#' @param x An `rqs` object returned from [quantreg::rq()].
 #' @template param_data
 #' @template param_newdata
 #' @inheritDotParams quantreg::predict.rqs

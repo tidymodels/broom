@@ -37,6 +37,8 @@ the measure will be reported as \code{NA}.
 }
 \examples{
 
+library(biglm)
+
 bfit <- biglm(mpg ~ wt + disp, mtcars)
 tidy(bfit)
 tidy(bfit, conf.int = TRUE)

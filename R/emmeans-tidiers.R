@@ -68,8 +68,8 @@
 #' @family emmeans tidiers
 #' @seealso [tidy()], [emmeans::ref_grid()], [emmeans::emmeans()],
 #'   [emmeans::contrast()]
-tidy.lsmobj <- function(x, conf.level = .95, ...) {
-  tidy_emmeans(x, level = conf.level, ...)
+tidy.lsmobj <- function(x, conf.int = FALSE, conf.level = .95, ...) {
+  tidy_emmeans(x, infer = c(conf.int, TRUE), level = conf.level, ...)
 }
 
 #' @templateVar class ref.grid

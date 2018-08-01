@@ -62,11 +62,14 @@ glance.speedlm <- function(x, ...) {
 #' @template param_newdata
 #' @template param_unused_dots
 #' 
-#' @evalRd return_augment(.resid = FALSE)
+#' @evalRd return_augment()
 #'
 #' @export
 #' @family speedlm tidiers
 #' @seealso [speedglm::speedlm()]
 augment.speedlm <- function(x, data = model.frame(x), newdata = NULL, ...) {
-  augment_columns(x, data, newdata)
+  # no influence measures for speedlm, can only get fitted values
+  df <- if (is.null(newdata)) data else newdata
+  augment_newdata(x, df)
 }
+

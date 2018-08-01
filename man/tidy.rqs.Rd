@@ -24,10 +24,6 @@ Defaults to 0.95, which corresponds to a 95 percent confidence interval.}
 
 \item{...}{Additional arguments passed to \code{\link[quantreg:summary.rqs]{quantreg::summary.rqs()}}}
 }
-\value{
-An additional \code{quantile} column indicating with quantile the
-coefficient corresponds to.
-}
 \description{
 Tidy summarizes information about the components of a model.
 A model component might be a single term in a regression, a single

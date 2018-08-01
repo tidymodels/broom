@@ -8,6 +8,7 @@
 #'
 #' @examples
 #'
+#' library(AUC)
 #' data(churn)
 #' r <- roc(churn$predictions,churn$labels)
 #'

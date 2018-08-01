@@ -47,6 +47,8 @@ specify which components to return.
 }
 \examples{
 
+library(biglm)
+
 bfit <- biglm(mpg ~ wt + disp, mtcars)
 tidy(bfit)
 tidy(bfit, conf.int = TRUE)

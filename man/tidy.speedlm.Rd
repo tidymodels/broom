@@ -12,22 +12,31 @@
 \arguments{
 \item{x}{A \code{speedlm} object returned from \code{\link[speedglm:speedlm]{speedglm::speedlm()}}.}
 
-\item{...}{Arguments passed on to \code{tidy.lm}
-\describe{
-  \item{x}{An \code{lm} object created by \code{\link[stats:lm]{stats::lm()}}.}
-  \item{conf.int}{Logical indicating whether or not to include a confidence
+\item{conf.int}{Logical indicating whether or not to include a confidence
 interval in the tidied output. Defaults to \code{FALSE}.}
-  \item{conf.level}{The confidence level to use for the confidence interval
+
+\item{conf.level}{The confidence level to use for the confidence interval
 if \code{conf.int = TRUE}. Must be strictly greater than 0 and less than 1.
 Defaults to 0.95, which corresponds to a 95 percent confidence interval.}
-  \item{quick}{Logical indiciating if the only the \code{term} and \code{estimate}
-columns should be returned. Often useful to avoid time consuming
-covariance and standard error calculations. Defaults to \code{FALSE}.}
-  \item{exponentiate}{Logical indicating whether or not to exponentiate the
+
+\item{exponentiate}{Logical indicating whether or not to exponentiate the
 the coefficient estimates. This is typical for logistic and multinomial
 regressions, but a bad idea if there is no log or logit link. Defaults
 to \code{FALSE}.}
-}}
+
+\item{quick}{Logical indiciating if the only the \code{term} and \code{estimate}
+columns should be returned. Often useful to avoid time consuming
+covariance and standard error calculations. Defaults to \code{FALSE}.}
+
+\item{...}{Additional arguments. Not used. Needed to match generic
+signature only. \strong{Cautionary note:} Misspelled arguments will be
+absorbed in \code{...}, where they will be ignored. If the misspelled
+argument has a default value, the default value will be used.
+For example, if you pass \code{conf.lvel = 0.9}, all computation will
+proceed using \code{conf.level = 0.95}. Additionally, if you pass
+\code{newdata = my_tibble} to an \code{\link[=augment]{augment()}} method that does not
+accept a \code{newdata} argument, it will use the default value for
+the \code{data} argument.}
 }
 \description{
 This method wraps \code{\link[=tidy.lm]{tidy.lm()}}.

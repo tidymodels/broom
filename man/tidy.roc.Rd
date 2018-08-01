@@ -31,6 +31,7 @@ specify which components to return.
 }
 \examples{
 
+library(AUC)
 data(churn)
 r <- roc(churn$predictions,churn$labels)
 

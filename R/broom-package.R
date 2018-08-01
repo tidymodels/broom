@@ -10,9 +10,9 @@
 #'
 #' @importFrom stats AIC BIC coef confint fitted logLik model.frame 
 #' @importFrom stats predict qnorm qt residuals setNames var na.omit
-#' @importFrom stats model.response
+#' @importFrom stats model.response terms na.pass
 #' 
-#' @importFrom purrr map_df set_names
+#' @importFrom purrr map_df set_names possibly
 #' @importFrom tibble tibble as_tibble
 #' 
 #' @importFrom utils head

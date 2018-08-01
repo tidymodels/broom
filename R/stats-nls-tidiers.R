@@ -70,21 +70,15 @@ tidy.nls <- function(x, conf.int = FALSE, conf.level = .95,
 #' 
 augment.nls <- function(x, data = NULL, newdata = NULL, ...) {
   
-  validate_augment_input(x, data, newdata)
-  
   if (!is.null(newdata)) {
-    ret <- as_rw_tibble(newdata)
-    ret$.fitted <- predict(x, newdata = newdata)
-    return(ret)
-  }
-  
-  if (is.null(data)) {
+    data <- newdata
+  } else if (is.null(data)) {
     pars <- names(x$m$getPars())
     env <- as.list(x$m$getEnv())
     data <- as_tibble(env[!(names(env) %in% pars)])
   }
   
-  augment_columns(x, data)
+  augment_newdata(x, data)
 }
 
 

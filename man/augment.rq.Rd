@@ -22,8 +22,6 @@ the original predictors used to create \code{x}. Defaults to \code{NULL}, indica
 that nothing has been passed to \code{newdata}. If \code{newdata} is specified,
 the \code{data} argument will be ignored.}
 
-\item{...}{Additional arguments passed to \code{\link[quantreg:summary.rq]{quantreg::summary.rq()}}.}
-
 \item{...}{Arguments passed on to \code{quantreg::predict.rq}
 \describe{
   \item{object}{ object of class rq or rqs or rq.process produced by \code{rq} }

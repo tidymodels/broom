@@ -83,11 +83,12 @@ glance.rq <- function(x, ...) {
 #' @templateVar class rq
 #' @template title_desc_augment
 #'
+#' @param x An `rq` object returned from [quantreg::rq()].
 #' @template param_data
 #' @template param_newdata
 #' @inheritDotParams quantreg::predict.rq
 #' 
-#' @inherit tidy.rq examples params
+#' @inherit tidy.rq examples
 #' 
 #' @evalRd return_augment(".tau")
 #'
