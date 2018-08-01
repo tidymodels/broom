@@ -29,7 +29,7 @@ tidy.lmRob <- function(x, ...) {
 #' @templateVar class lmRob
 #' @template title_desc_augment_lm_wrapper
 #'
-#' @param x A `lmRob` object returned from [robust::lmRob()].
+#' @inherit tidy.lmRob params examples
 #' 
 #' @details For tidiers for robust models from the \pkg{MASS} package see
 #'   [tidy.rlm()].
@@ -43,15 +43,15 @@ augment.lmRob <- augment.lm
 #' @templateVar class lmRob
 #' @template title_desc_glance
 #' 
-#' @param x A `lmRob` object returned from [robust::lmRob()].
+#' @inherit tidy.lmRob params examples
 #' @template param_unused_dots
 #' 
-#' @return A one-row [tibble::tibble] with columns:
-#' 
-#'   \item{r.squared}{R-squared}
-#'   \item{deviance}{Robust deviance}
-#'   \item{sigma}{Residual scale estimate}
-#'   \item{df.residual}{Number of residual degrees of freedom}
+#' @evalRd return_glance(
+#'   "r.squared",
+#'   "deviance",
+#'   "sigma",
+#'   "df.residual"
+#' )
 #' 
 #' @export
 #' @family robust tidiers

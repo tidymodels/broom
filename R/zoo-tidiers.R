@@ -4,12 +4,7 @@
 #' @param x A `zoo` object such as those created by [zoo::zoo()].
 #' @template param_unused_dots
 #' 
-#' @return A [tibble::tibble] with one row for each observation in the `zoo`
-#'   time series and columns:
-#'   
-#'   \item{index}{Index (usually date) for the zoo object}
-#'   \item{series}{Name of the series}
-#'   \item{value}{Value of the observation}
+#' @evalRd return_tidy("index", "series", "value")
 #'
 #' @examples
 #'

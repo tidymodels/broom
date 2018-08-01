@@ -4,13 +4,7 @@
 #' @param x An `survdiff` object returned from [survival::survdiff()].
 #' @template param_unused_dots
 #' 
-#' @return A [tibble::tibble] with one row for each time point and columns:
-#' 
-#'   \item{...}{The initial columns correspond to the grouping factors
-#'     on the right hand side of the model formula.}
-#'   \item{obs}{weighted observed number of events in each group}
-#'   \item{exp}{weighted expected number of events in each group}
-#'   \item{N}{number of subjects in each group}
+#' @evalRd return_tidy("obs", "exp", "N")
 #'
 #' @examples
 #' 
@@ -61,13 +55,9 @@ tidy.survdiff <- function(x, ...) {
 #' @templateVar class survdiff
 #' @template title_desc_glance
 #' 
-#' @inheritParams tidy.survdiff
+#' @inherit tidy.survdiff params examples
 #' 
-#' @return A one-row [tibble::tibble] with columns:
-#' 
-#'   \item{statistic}{value of the test statistic}
-#'   \item{df}{degrees of freedom}
-#'   \item{p.value}{p-value}
+#' @evalRd return_glance("statistic", "df", "p.value")
 #'
 #' @export
 #' @seealso [glance()], [survival::survdiff()]

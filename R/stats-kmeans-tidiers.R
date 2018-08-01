@@ -5,12 +5,8 @@
 #' @param col.names Dimension names. Defaults to `x1, x2, ...`
 #' @template param_unused_dots
 #'
-#' @return A [tibble::tibble] with one row per cluster, and columns:
+#' @evalRd return_tidy("size", "withinss", "cluster")
 #' 
-#'   \item{size}{Number of points in cluster}
-#'   \item{withinss}{The within-cluster sum of squares}
-#'   \item{cluster}{A factor describing the cluster from 1:k}
-#'
 #' @details For examples, see the kmeans vignette.
 #'
 #' @aliases kmeans_tidiers
@@ -30,12 +26,14 @@ tidy.kmeans <- function(x, col.names = paste0("x", 1:ncol(x$centers)), ...) {
 #' @templateVar class kmeans
 #' @template title_desc_augment
 #' 
-#' @inheritParams tidy.kmeans
+#' @inherit tidy.kmeans params examples
 #' @template param_data
 #'
-#' @return The original data as a [tibble::tibble] with one extra column:
-#' 
-#'   \item{.cluster}{The cluster assigned by the k-means algorithm}
+#' @evalRd return_augment(
+#'   ".cluster",
+#'   .fitted = FALSE,
+#'   .resid = FALSE
+#' )
 #'
 #' @export
 #' @seealso [augment()], [stats::kmeans()]
@@ -49,14 +47,9 @@ augment.kmeans <- function(x, data, ...) {
 #' @templateVar class kmeans
 #' @template title_desc_glance
 #' 
-#' @inheritParams tidy.kmeans
+#' @inherit tidy.kmeans params examples
 #'
-#' @return A one-row [tibble::tibble] with columns:
-#' 
-#'   \item{totss}{The total sum of squares}
-#'   \item{tot.withinss}{The total within-cluster sum of squares}
-#'   \item{betweenss}{The total between-cluster sum of squares}
-#'   \item{iter}{The numbr of (outer) iterations}
+#' @evalRd return_glance("totss", "tot.withinss", "betweenss", "iter")
 #'
 #' @export
 #' @seealso [glance()], [stats::kmeans()]

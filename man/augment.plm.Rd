@@ -27,14 +27,6 @@ proceed using \code{conf.level = 0.95}. Additionally, if you pass
 accept a \code{newdata} argument, it will use the default value for
 the \code{data} argument.}
 }
-\value{
-A \code{\link[tibble:tibble]{tibble::tibble()}} containing the data passed to \code{augment},
-and \strong{additional} columns:
-
-\item{.fitted}{The predicted response for that observation.}
-\item{.resid}{The residual for a particular point. Present only when
-data has been passed to \code{augment} via the \code{data} argument.}
-}
 \description{
 Augment accepts a model object and a dataset and adds
 information about each observation in the dataset. Most commonly, this
@@ -74,6 +66,24 @@ We are in the process of defining behaviors for models fit with various
 \link{na.action} arguments, but make no guarantees about behavior when data is
 missing at this time.
 }
+\examples{
+
+library(plm)
+
+data("Produc", package = "plm")
+zz <- plm(log(gsp) ~ log(pcap) + log(pc) + log(emp) + unemp,
+          data = Produc, index = c("state","year"))
+
+summary(zz)
+
+tidy(zz)
+tidy(zz, conf.int = TRUE)
+tidy(zz, conf.int = TRUE, conf.level = .9)
+
+augment(zz)
+glance(zz)
+
+}
 \seealso{
 \code{\link[=augment]{augment()}}, \code{\link[plm:plm]{plm::plm()}}
 
@@ -81,3 +91,9 @@ Other plm tidiers: \code{\link{glance.plm}},
   \code{\link{tidy.plm}}
 }
 \concept{plm tidiers}
+\value{
+A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
+  \item{.fitted}{Fitted / predicted value.}
+  \item{.resid}{Residuals of fitted values. TODO -- document when present. Residuals on which data set?}
+
+}

@@ -4,13 +4,8 @@
 #' @param x A `fitdistr` object returned by [MASS::fitdistr()].
 #' @template param_unused_dots
 #'
-#' @return A [tibble::tibble] with one row for estimated parameter, with
-#'   columns:
-#'   
-#'   \item{term}{The term that was estimated}
-#'   \item{estimate}{Estimated value}
-#'   \item{std.error}{Standard error of estimate}
-#'   
+#' @evalRd return_tidy("term", "estimate", "std.error")
+#' 
 #' @examples
 #'
 #' set.seed(2015)
@@ -38,13 +33,9 @@ tidy.fitdistr <- function(x, ...) {
 #' @templateVar class fitdistr
 #' @template title_desc_glance
 #' 
-#' @inheritParams tidy.fitdistr
+#' @inherit tidy.fitdistr params examples
 #'
-#' @return A one-row [tibble::tibble] with columns:
-#'   \item{n}{Number of observations used in estimation}
-#'   \item{logLik}{log-likelihood of estimated data}
-#'   \item{AIC}{Akaike Information Criterion}
-#'   \item{BIC}{Bayesian Information Criterion}
+#' @evalRd return_glance("n", "logLik", "AIC", "BIC")
 #'
 #' @export
 #' @family fitdistr tidiers

@@ -77,6 +77,9 @@
       <a href="../articles/broom_and_dplyr.html">Broom and dplyr</a>
     </li>
     <li>
+      <a href="../articles/external-tidiers.html">Tidiers in external packages</a>
+    </li>
+    <li>
       <a href="../articles/kmeans.html">K-means</a>
     </li>
   </ul>
@@ -85,7 +88,7 @@
   <a href="../news/index.html">News</a>
 </li>
         <li>
-  <a href="https://github.com/tidyverse/broom">
+  <a href="https://github.com/tidymodels/broom">
     <span class="fa fa-github fa-lg"></span>
      
   </a>
@@ -102,23 +105,22 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Tidying methods for an rstanarm model</h1>
-    <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/rstanarm-tidiers.R'><code>R/rstanarm-tidiers.R</code></a></small>
+    <small class="dont-index">Source: <a href='http://github.com/tidymodels/broom/blob/master/R/rstanarm-tidiers.R'><code>R/rstanarm-tidiers.R</code></a></small>
     <div class="hidden name"><code>rstanarm_tidiers.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p><code>rstanarm</code> tidiers will soon be deprecated in <code>broom</code> and there is no
-ongoing development of these functions at this time.</p>
+    <p><code>rstanarm</code> tidiers are deprecated.</p>
     
     </div>
 
     <pre class="usage"><span class='co'># S3 method for stanreg</span>
-<span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>x</span>, <span class='kw'>parameters</span> <span class='kw'>=</span> <span class='st'>"non-varying"</span>,
+<span class='fu'><a href='http://www.rdocumentation.org/packages/modelgenerics/topics/generics'>tidy</a></span>(<span class='no'>x</span>, <span class='kw'>parameters</span> <span class='kw'>=</span> <span class='st'>"non-varying"</span>,
   <span class='kw'>intervals</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>prob</span> <span class='kw'>=</span> <span class='fl'>0.9</span>, <span class='no'>...</span>)
 
 <span class='co'># S3 method for stanreg</span>
-<span class='fu'><a href='glance.html'>glance</a></span>(<span class='no'>x</span>, <span class='kw'>looic</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='no'>...</span>)</pre>
+<span class='fu'><a href='http://www.rdocumentation.org/packages/modelgenerics/topics/generics'>glance</a></span>(<span class='no'>x</span>, <span class='kw'>looic</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -221,17 +223,17 @@ included:
 <span class='no'>fit</span> <span class='kw'>&lt;-</span> <span class='fu'>stan_glmer</span>(<span class='no'>mpg</span> ~ <span class='no'>wt</span> + (<span class='fl'>1</span><span class='kw'>|</span><span class='no'>cyl</span>) + (<span class='fl'>1</span>+<span class='no'>wt</span><span class='kw'>|</span><span class='no'>gear</span>), <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>mtcars</span>,
                   <span class='kw'>iter</span> <span class='kw'>=</span> <span class='fl'>300</span>, <span class='kw'>chains</span> <span class='kw'>=</span> <span class='fl'>2</span>)
 <span class='co'># non-varying ("population") parameters</span>
-<span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>fit</span>, <span class='kw'>intervals</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>prob</span> <span class='kw'>=</span> <span class='fl'>0.5</span>)
+<span class='fu'><a href='http://www.rdocumentation.org/packages/modelgenerics/topics/generics'>tidy</a></span>(<span class='no'>fit</span>, <span class='kw'>intervals</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>prob</span> <span class='kw'>=</span> <span class='fl'>0.5</span>)
 
 <span class='co'># hierarchical sd &amp; correlation parameters</span>
-<span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>fit</span>, <span class='kw'>parameters</span> <span class='kw'>=</span> <span class='st'>"hierarchical"</span>)
+<span class='fu'><a href='http://www.rdocumentation.org/packages/modelgenerics/topics/generics'>tidy</a></span>(<span class='no'>fit</span>, <span class='kw'>parameters</span> <span class='kw'>=</span> <span class='st'>"hierarchical"</span>)
 
 <span class='co'># group-specific deviations from "population" parameters</span>
-<span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>fit</span>, <span class='kw'>parameters</span> <span class='kw'>=</span> <span class='st'>"varying"</span>)
+<span class='fu'><a href='http://www.rdocumentation.org/packages/modelgenerics/topics/generics'>tidy</a></span>(<span class='no'>fit</span>, <span class='kw'>parameters</span> <span class='kw'>=</span> <span class='st'>"varying"</span>)
 
 <span class='co'># glance method</span>
-<span class='fu'><a href='glance.html'>glance</a></span>(<span class='no'>fit</span>)
-<span class='fu'><a href='glance.html'>glance</a></span>(<span class='no'>fit</span>, <span class='kw'>looic</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>cores</span> <span class='kw'>=</span> <span class='fl'>1</span>)
+<span class='fu'><a href='http://www.rdocumentation.org/packages/modelgenerics/topics/generics'>glance</a></span>(<span class='no'>fit</span>)
+<span class='fu'><a href='http://www.rdocumentation.org/packages/modelgenerics/topics/generics'>glance</a></span>(<span class='no'>fit</span>, <span class='kw'>looic</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>cores</span> <span class='kw'>=</span> <span class='fl'>1</span>)
 <span class='co'># }</span><div class='input'>
 </div></pre>
   </div>

@@ -5,21 +5,21 @@
 #'   [car::Anova()].
 #' @template param_unused_dots
 #' 
-#' @return A [tibble::tibble] with columns
-#' 
-#'   \item{term}{Term within the model, or "Residuals"}
-#'   \item{df}{Degrees of freedom used by this term in the model}
-#'   \item{sumsq}{Sum of squares explained by this term}
-#'   \item{meansq}{Mean of sum of squares among degrees of freedom}
-#'   \item{statistic}{F statistic}
-#'   \item{p.value}{P-value from F test}
+#' @evalRd return_tidy(
+#'   "term",
+#'   "df",
+#'   "sumsq",
+#'   "meansq",
+#'   "statistic",
+#'   "p.value"
+#' )
 #'   
 #' @details The `term` column of an ANOVA table can come with leading or
 #'   trailing whitespace, which this tidying method trims.
 #'   
 #' @examples
 #'
-#' a <- a <- aov(mpg ~ wt + qsec + disp, mtcars)
+#' a <- anova(lm(mpg ~ wt + qsec + disp, mtcars))
 #' tidy(a)
 #'
 #' @export
@@ -81,17 +81,7 @@ tidy.anova <- function(x, ...) {
 #' @param x An `aov` objects, such as those created by [stats::aov()].
 #' @template param_unused_dots
 #' 
-#' @return A [tibble::tibble] with columns
-#' 
-#'   \item{term}{Term within the model, or "Residuals"}
-#'   \item{df}{Degrees of freedom used by this term in the model}
-#'   \item{sumsq}{Sum of squares explained by this term}
-#'   \item{meansq}{Mean of sum of squares among degrees of freedom}
-#'   \item{statistic}{F statistic}
-#'   \item{p.value}{P-value from F test}
-#'   
-#' @details The `term` column of an ANOVA table can come with leading or
-#'   trailing whitespace, which this tidying method trims.
+#' @inherit tidy.anova return details
 #'   
 #' @examples
 #'
@@ -113,18 +103,17 @@ tidy.aov <- function(x, ...) {
 #' @param x An `aovlist` objects, such as those created by [stats::aov()].
 #' @template param_unused_dots
 #' 
-#' @return A [tibble::tibble] with columns
-#' 
-#'   \item{term}{Term within the model, or "Residuals"}
-#'   \item{df}{Degrees of freedom used by this term in the model}
-#'   \item{sumsq}{Sum of squares explained by this term}
-#'   \item{meansq}{Mean of sum of squares among degrees of freedom}
-#'   \item{statistic}{F statistic}
-#'   \item{p.value}{P-value from F test}
-#'   \item{stratum}{The error stratum}
+#' @evalRd return_tidy(
+#'   "term",
+#'   "df",
+#'   "sumsq",
+#'   "meansq",
+#'   "statistic",
+#'   "p.value",
+#'   "stratum"
+#' )
 #'   
-#' @details The `term` column of an ANOVA table can come with leading or
-#'   trailing whitespace, which this tidying method trims.
+#' @inherit tidy.anova details
 #'   
 #' @examples
 #'
@@ -163,20 +152,21 @@ tidy.aovlist <- function(x, ...) {
 #'   indicating which test statistic should be used. Defaults to "Pillai".
 #' @inheritDotParams stats::summary.manova
 #'
-#' @return A [tibble::tibble] with columns:
+#' @evalRd return_tidy(
+#'   "term",
+#'   "num.df",
+#'   "den.df",
+#'   "statistic",
+#'   "p.value",
+#'   pillai = "Pillai's trace.",
+#'   wilks = "Wilk's lambda.",
+#'   hl = "Hotelling-Lawley trace.",
+#'   roy = "Roy's greatest root."
+#' )
 #' 
-#'     \item{term}{Term in design}
-#'     \item{statistic}{Approximate F statistic}
-#'     \item{num.df}{Degrees of freedom}
-#'     \item{p.value}{P-value}
 #'
-#' Depending on which test statistic is specified, one of the following
-#' columns is also included:
-#' 
-#'     \item{pillai}{Pillai's trace}
-#'     \item{wilks}{Wilk's lambda}
-#'     \item{hl}{Hotelling-Lawley trace}
-#'     \item{roy}{Roy's greatest root}
+#' @details Depending on which test statistic is specified only one of `pillai`,
+#'   `wilks`, `hl` or `roy` is included.
 #'
 #' @examples
 #'
@@ -206,14 +196,14 @@ tidy.manova <- function(x, test = "Pillai", ...) {
 #' @param x A `TukeyHSD` object return from [stats::TukeyHSD()].
 #' @template param_unused_dots
 #'
-#' @return A [tibble::tibble] with one row per comparison and columns:
-#' 
-#'   \item{term}{Term for which levels are being compared}
-#'   \item{comparison}{Levels being compared, separated by -}
-#'   \item{estimate}{Estimate of difference}
-#'   \item{conf.low}{Low end of confidence interval of difference}
-#'   \item{conf.high}{High end of confidence interval of difference}
-#'   \item{adj.p.value}{P-value adjusted for multiple comparisons}
+#' @evalRd return_tidy(
+#'   "tidy",
+#'   "comparison",
+#'   "estimate",
+#'   "conf.low",
+#'   "conf.high",
+#'   "adj.p.value"
+#' )
 #'
 #' @examples
 #'

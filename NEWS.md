@@ -9,6 +9,7 @@ To be released as 0.7.0
 
 ## Other changes
 
+- tidy.lsmobj gains a `conf.int` argument.
 - All `conf.int` arguments now default to `FALSE`.
 - All `conf.level` arguments now default to `TRUE`.
 - Moved core tests to the `modeltests` package

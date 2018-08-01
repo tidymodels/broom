@@ -4,19 +4,19 @@
 #' @param x An `survfit` object returned from [survival::survfit()].
 #' @template param_unused_dots
 #'
-#' @return A [tibble::tibble] with one row for each time point and columns: 
-#' 
-#'   \item{time}{timepoint}
-#'   \item{n.risk}{number of subjects at risk at time t0}
-#'   \item{n.event}{number of events at time t}
-#'   \item{n.censor}{number of censored events}
-#'   \item{estimate}{estimate of survival or cumulative incidence rate when
-#'     multistate}
-#'   \item{std.error}{standard error of estimate}
-#'   \item{conf.high}{upper end of confidence interval}
-#'   \item{conf.low}{lower end of confidence interval}
-#'   \item{state}{state if multistate survfit object inputted}
-#'   \item{strata}{strata if stratified survfit object inputted}
+#' @evalRd return_tidy(
+#'   "time",
+#'   "n.risk",
+#'   "n.event",
+#'   "n.censor",
+#'   estimate = "estimate of survival or cumulative incidence rate when
+#'     multistate",
+#'   "std.error",
+#'   "conf.low",
+#'   "conf.high",
+#'   state = "state if multistate survfit object input",
+#'   strata = "strata if stratified survfit object input"
+#' )
 #' 
 #' @examples 
 #' 
@@ -86,20 +86,20 @@ tidy.survfit <- function(x, ...) {
 #' @templateVar class survfit
 #' @template title_desc_glance
 #' 
-#' @inheritParams tidy.survfit
+#' @inherit tidy.survfit params examples
 #' 
-#' @return A one-row [tibble::tibble] with columns:
+#' @evalRd return_glance(
+#'   "records",
+#'   "n.max",
+#'   "n.start",
+#'   "events",
+#'   "rmean",
+#'   "rmean.std.error",
+#'   conf.low = "lower end of confidence interval on median",
+#'   conf.high = "upper end of confidence interval on median",
+#'   median = "median survival"
+#' )
 #' 
-#'   \item{records}{number of observations}
-#'   \item{n.max}{n.max}
-#'   \item{n.start}{n.start}
-#'   \item{events}{number of events}
-#'   \item{rmean}{Restricted mean (see [survival::print.survfit()]}
-#'   \item{rmean.std.error}{Restricted mean standard error}
-#'   \item{median}{median survival}
-#'   \item{conf.low}{lower end of confidence interval on median}
-#'   \item{conf.high}{upper end of confidence interval on median}
-#'
 #' @export
 #' @seealso [glance()], [survival::survfit()]
 #' @family cch tidiers

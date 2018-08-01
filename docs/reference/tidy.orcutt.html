@@ -77,6 +77,9 @@
       <a href="../articles/broom_and_dplyr.html">Broom and dplyr</a>
     </li>
     <li>
+      <a href="../articles/external-tidiers.html">Tidiers in external packages</a>
+    </li>
+    <li>
       <a href="../articles/kmeans.html">K-means</a>
     </li>
   </ul>
@@ -85,7 +88,7 @@
   <a href="../news/index.html">News</a>
 </li>
         <li>
-  <a href="https://github.com/tidyverse/broom">
+  <a href="https://github.com/tidymodels/broom">
     <span class="fa fa-github fa-lg"></span>
      
   </a>
@@ -102,7 +105,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Tidy a(n) orcutt object</h1>
-    <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/orcutt-tidiers.R'><code>R/orcutt-tidiers.R</code></a></small>
+    <small class="dont-index">Source: <a href='http://github.com/tidymodels/broom/blob/master/R/orcutt-tidiers.R'><code>R/orcutt-tidiers.R</code></a></small>
     <div class="hidden name"><code>tidy.orcutt.Rd</code></div>
     </div>
 
@@ -113,7 +116,7 @@
     </div>
 
     <pre class="usage"><span class='co'># S3 method for orcutt</span>
-<span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>x</span>, <span class='no'>...</span>)</pre>
+<span class='fu'><a href='http://www.rdocumentation.org/packages/modelgenerics/topics/generics'>tidy</a></span>(<span class='no'>x</span>, <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -142,38 +145,62 @@ to <code>FALSE</code>.</p></dd>
     </tr>
     </table>
     
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
-
-    <p><code>tidy</code> returns the same information as <code><a href='tidy.lm.html'>tidy.lm()</a></code>,
-though without confidence interval options.</p>
-    
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='tidy.html'>tidy()</a></code>, <code><a href='tidy.lm.html'>tidy.lm()</a></code></p>
+    <div class='dont-index'><p><code><a href='http://www.rdocumentation.org/packages/modelgenerics/topics/generics'>tidy()</a></code>, <code><a href='tidy.lm.html'>tidy.lm()</a></code></p>
 <p><code><a href='http://www.rdocumentation.org/packages/orcutt/topics/cochrane.orcutt'>orcutt::cochrane.orcutt()</a></code></p>
 <p>Other orcutt tidiers: <code><a href='glance.orcutt.html'>glance.orcutt</a></code></p></div>
+    
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>A <code><a href='http://www.rdocumentation.org/packages/tibble/topics/tibble'>tibble::tibble()</a></code> with columns:</p>
+<dt>estimate</dt><dd><p>The estimated value of the regression term.</p></dd>
+  <dt>p.value</dt><dd><p>The two-sided p-value associated with the observed statistic.</p></dd>
+  <dt>statistic</dt><dd><p>The value of a T-statistic to use in a hypothesis that the regression term is non-zero.</p></dd>
+  <dt>std.error</dt><dd><p>The standard error of the regression term.</p></dd>
+  <dt>term</dt><dd><p>The name of the regression term.</p></dd>
+
+
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
+<span class='fu'>library</span>(<span class='no'>orcutt</span>)
+
 <span class='no'>reg</span> <span class='kw'>&lt;-</span> <span class='fu'>lm</span>(<span class='no'>mpg</span> ~ <span class='no'>wt</span> + <span class='no'>qsec</span> + <span class='no'>disp</span>, <span class='no'>mtcars</span>)
-<span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>reg</span>)</div><div class='output co'>#&gt; # A tibble: 4 x 5
+<span class='fu'><a href='http://www.rdocumentation.org/packages/modelgenerics/topics/generics'>tidy</a></span>(<span class='no'>reg</span>)</div><div class='output co'>#&gt; # A tibble: 4 x 5
 #&gt;   term          estimate std.error statistic  p.value
 #&gt;   &lt;chr&gt;            &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
 #&gt; 1 (Intercept)  19.8         5.94      3.33   0.00244 
 #&gt; 2 wt           -5.03        1.22     -4.11   0.000310
 #&gt; 3 qsec          0.927       0.342     2.71   0.0114  
 #&gt; 4 disp         -0.000128    0.0106   -0.0121 0.990   </div><div class='input'>
-<span class='kw'>if</span> (<span class='fu'>require</span>(<span class='st'>"orcutt"</span>, <span class='kw'>quietly</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)) {
-  <span class='no'>co</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/orcutt/topics/cochrane.orcutt'>cochrane.orcutt</a></span>(<span class='no'>reg</span>)
-  <span class='no'>co</span>
-
-  <span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>co</span>)
-  <span class='fu'><a href='glance.html'>glance</a></span>(<span class='no'>co</span>)
-}</div><div class='output co'>#&gt; <span class='warning'>Warning: deal with tidy.orcutt conf.int nonsense</span></div><div class='output co'>#&gt; # A tibble: 1 x 8
-#&gt;   r.squared adj.r.squared   rho number.interaction dw.original p.value.original
-#&gt;       &lt;dbl&gt;         &lt;dbl&gt; &lt;dbl&gt;              &lt;dbl&gt;       &lt;dbl&gt;            &lt;dbl&gt;
-#&gt; 1     0.799         0.777 0.268                  7        1.50           0.0406
+<span class='no'>co</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/orcutt/topics/cochrane.orcutt'>cochrane.orcutt</a></span>(<span class='no'>reg</span>)
+<span class='no'>co</span></div><div class='output co'>#&gt; Cochrane-orcutt estimation for first order autocorrelation 
+#&gt;  
+#&gt; Call:
+#&gt; lm(formula = mpg ~ wt + qsec + disp, data = mtcars)
+#&gt; 
+#&gt;  number of interaction: 7
+#&gt;  rho 0.26819
+#&gt; 
+#&gt; Durbin-Watson statistic 
+#&gt; (original):    1.49575 , p-value: 4.063e-02
+#&gt; (transformed): 2.05696 , p-value: 5.21e-01
+#&gt;  
+#&gt;  coefficients: 
+#&gt; (Intercept)          wt        qsec        disp 
+#&gt;   21.814858   -4.852590    0.797029   -0.001359 </div><div class='input'>
+<span class='fu'><a href='http://www.rdocumentation.org/packages/modelgenerics/topics/generics'>tidy</a></span>(<span class='no'>co</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: deal with tidy.orcutt conf.int nonsense</span></div><div class='output co'>#&gt; # A tibble: 4 x 5
+#&gt;   term         estimate std.error statistic p.value
+#&gt;   &lt;chr&gt;           &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;
+#&gt; 1 (Intercept)  21.8        6.63       3.29  0.00279
+#&gt; 2 wt           -4.85       1.33      -3.65  0.00112
+#&gt; 3 qsec          0.797      0.370      2.15  0.0402 
+#&gt; 4 disp         -0.00136    0.0110    -0.123 0.903  </div><div class='input'><span class='fu'><a href='http://www.rdocumentation.org/packages/modelgenerics/topics/generics'>glance</a></span>(<span class='no'>co</span>)</div><div class='output co'>#&gt; # A tibble: 1 x 8
+#&gt;   r.squared adj.r.squared   rho number.interact… dw.original p.value.original
+#&gt;       &lt;dbl&gt;         &lt;dbl&gt; &lt;dbl&gt;            &lt;dbl&gt;       &lt;dbl&gt;            &lt;dbl&gt;
+#&gt; 1     0.799         0.777 0.268                7        1.50           0.0406
 #&gt; # ... with 2 more variables: dw.transformed &lt;dbl&gt;, p.value.transformed &lt;dbl&gt;</div><div class='input'>
 </div></pre>
   </div>
@@ -182,9 +209,9 @@ though without confidence interval options.</p>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
       
-      <li><a href="#value">Value</a></li>
-
       <li><a href="#see-also">See also</a></li>
+
+      <li><a href="#value">Value</a></li>
       
       <li><a href="#examples">Examples</a></li>
     </ul>

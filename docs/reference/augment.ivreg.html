@@ -77,6 +77,9 @@
       <a href="../articles/broom_and_dplyr.html">Broom and dplyr</a>
     </li>
     <li>
+      <a href="../articles/external-tidiers.html">Tidiers in external packages</a>
+    </li>
+    <li>
       <a href="../articles/kmeans.html">K-means</a>
     </li>
   </ul>
@@ -85,7 +88,7 @@
   <a href="../news/index.html">News</a>
 </li>
         <li>
-  <a href="https://github.com/tidyverse/broom">
+  <a href="https://github.com/tidymodels/broom">
     <span class="fa fa-github fa-lg"></span>
      
   </a>
@@ -102,7 +105,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Augment data with information from a(n) ivreg object</h1>
-    <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/aer-tidiers.R'><code>R/aer-tidiers.R</code></a></small>
+    <small class="dont-index">Source: <a href='http://github.com/tidymodels/broom/blob/master/R/aer-tidiers.R'><code>R/aer-tidiers.R</code></a></small>
     <div class="hidden name"><code>augment.ivreg.Rd</code></div>
     </div>
 
@@ -125,7 +128,7 @@ the model are present.</p>
 associated with training observations (such as influences or related)
 measures that is not meaningfully defined for new observations.</p>
 <p>For convenience, many augment methods provide default <code>data</code> arguments,
-so that <code><a href='augment.html'>augment(fit)</a></code> will return the augmented training data. In these
+so that <code><a href='http://www.rdocumentation.org/packages/modelgenerics/topics/generics'>augment(fit)</a></code> will return the augmented training data. In these
 cases augment tries to reconstruct the original data based on the model
 object, with some varying degrees of success.</p>
 <p>The augmented dataset is always returned as a <a href='http://www.rdocumentation.org/packages/tibble/topics/tibble'>tibble::tibble</a> with the
@@ -144,7 +147,7 @@ missing at this time.</p>
     </div>
 
     <pre class="usage"><span class='co'># S3 method for ivreg</span>
-<span class='fu'><a href='augment.html'>augment</a></span>(<span class='no'>x</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='fu'>model.frame</span>(<span class='no'>x</span>), <span class='no'>newdata</span>, <span class='no'>...</span>)</pre>
+<span class='fu'><a href='http://www.rdocumentation.org/packages/modelgenerics/topics/generics'>augment</a></span>(<span class='no'>x</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='fu'>model.frame</span>(<span class='no'>x</span>), <span class='kw'>newdata</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -157,7 +160,7 @@ missing at this time.</p>
       <th>data</th>
       <td><p>A <code>data.frame()</code> or <code><a href='http://www.rdocumentation.org/packages/tibble/topics/tibble'>tibble::tibble()</a></code> containing the original
 data that was used to produce the object <code>x</code>. Defaults to
-<code><a href='http://www.rdocumentation.org/packages/stats/topics/model.frame'>stats::model.frame(x)</a></code> so that <code><a href='augment.html'>augment(my_fit)</a></code> returns the augmented
+<code><a href='http://www.rdocumentation.org/packages/stats/topics/model.frame'>stats::model.frame(x)</a></code> so that <code><a href='http://www.rdocumentation.org/packages/modelgenerics/topics/generics'>augment(my_fit)</a></code> returns the augmented
 original data. <strong>Do not</strong> pass new data to the <code>data</code> argument.
 Augment will report information such as influence and cooks distance for
 data passed to the <code>data</code> argument. These measures are only defined for
@@ -178,26 +181,25 @@ absorbed in <code>...</code>, where they will be ignored. If the misspelled
 argument has a default value, the default value will be used.
 For example, if you pass <code>conf.lvel = 0.9</code>, all computation will
 proceed using <code>conf.level = 0.95</code>. Additionally, if you pass
-<code>newdata = my_tibble</code> to an <code><a href='augment.html'>augment()</a></code> method that does not
+<code>newdata = my_tibble</code> to an <code><a href='http://www.rdocumentation.org/packages/modelgenerics/topics/generics'>augment()</a></code> method that does not
 accept a <code>newdata</code> argument, it will use the default value for
 the <code>data</code> argument.</p></td>
     </tr>
     </table>
     
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
-
-    <p>A <code><a href='http://www.rdocumentation.org/packages/tibble/topics/tibble'>tibble::tibble()</a></code> containing the data passed to <code>augment</code>,
-and <strong>additional</strong> columns:</p>
-<dt>.fitted</dt><dd><p>The predicted response for that observation.</p></dd>
-<dt>.resid</dt><dd><p>The residual for a particular point. Present only when
-data has been passed to <code>augment</code> via the <code>data</code> argument.</p></dd>
-
-    
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='augment.html'>augment()</a></code>, <code><a href='http://www.rdocumentation.org/packages/AER/topics/ivreg'>AER::ivreg()</a></code></p>
+    <div class='dont-index'><p><code><a href='http://www.rdocumentation.org/packages/modelgenerics/topics/generics'>augment()</a></code>, <code><a href='http://www.rdocumentation.org/packages/AER/topics/ivreg'>AER::ivreg()</a></code></p>
 <p>Other ivreg tidiers: <code><a href='glance.ivreg.html'>glance.ivreg</a></code>,
   <code><a href='tidy.ivreg.html'>tidy.ivreg</a></code></p></div>
+    
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>A <code><a href='http://www.rdocumentation.org/packages/tibble/topics/tibble'>tibble::tibble()</a></code> with columns:</p>
+<dt>.fitted</dt><dd><p>Fitted / predicted value.</p></dd>
+  <dt>.resid</dt><dd><p>Residuals of fitted values. TODO -- document when present. Residuals on which data set?</p></dd>
+
+
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
@@ -208,7 +210,10 @@ data has been passed to <code>augment</code> via the <code>data</code> argument.
 #&gt; <span class='message'>    recode</span></div><div class='output co'>#&gt; <span class='message'>Loading required package: lmtest</span></div><div class='output co'>#&gt; <span class='message'>Loading required package: zoo</span></div><div class='output co'>#&gt; <span class='message'></span>
 #&gt; <span class='message'>Attaching package: ‘zoo’</span></div><div class='output co'>#&gt; <span class='message'>The following objects are masked from ‘package:base’:</span>
 #&gt; <span class='message'></span>
-#&gt; <span class='message'>    as.Date, as.Date.numeric</span></div><div class='output co'>#&gt; <span class='message'>Loading required package: sandwich</span></div><div class='output co'>#&gt; <span class='message'>Loading required package: survival</span></div><div class='input'>
+#&gt; <span class='message'>    as.Date, as.Date.numeric</span></div><div class='output co'>#&gt; <span class='message'></span>
+#&gt; <span class='message'>Attaching package: ‘lmtest’</span></div><div class='output co'>#&gt; <span class='message'>The following object is masked from ‘package:lfe’:</span>
+#&gt; <span class='message'></span>
+#&gt; <span class='message'>    waldtest</span></div><div class='output co'>#&gt; <span class='message'>Loading required package: sandwich</span></div><div class='input'>
 <span class='fu'>data</span>(<span class='st'>"CigarettesSW"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"AER"</span>)
 <span class='no'>ivr</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/AER/topics/ivreg'>ivreg</a></span>(
   <span class='fu'>log</span>(<span class='no'>packs</span>) ~ <span class='no'>income</span> <span class='kw'>|</span> <span class='no'>population</span>,
@@ -236,20 +241,20 @@ data has been passed to <code>augment</code> via the <code>data</code> argument.
 #&gt; Multiple R-Squared: 0.1308,	Adjusted R-squared: 0.1119 
 #&gt; Wald test: 5.976 on 1 and 46 DF,  p-value: 0.01839 
 #&gt; </div><div class='input'>
-<span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>ivr</span>)</div><div class='output co'>#&gt; # A tibble: 2 x 5
+<span class='fu'><a href='http://www.rdocumentation.org/packages/modelgenerics/topics/generics'>tidy</a></span>(<span class='no'>ivr</span>)</div><div class='output co'>#&gt; # A tibble: 2 x 5
 #&gt;   term         estimate std.error statistic  p.value
 #&gt;   &lt;chr&gt;           &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
 #&gt; 1 (Intercept)  4.61e+ 0  4.45e- 2    104.   3.74e-56
-#&gt; 2 income      -5.71e-10  2.33e-10     -2.44 1.84e- 2</div><div class='input'><span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>ivr</span>, <span class='kw'>conf.int</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; # A tibble: 2 x 7
+#&gt; 2 income      -5.71e-10  2.33e-10     -2.44 1.84e- 2</div><div class='input'><span class='fu'><a href='http://www.rdocumentation.org/packages/modelgenerics/topics/generics'>tidy</a></span>(<span class='no'>ivr</span>, <span class='kw'>conf.int</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; # A tibble: 2 x 7
 #&gt;   term         estimate std.error statistic  p.value conf.low conf.high
 #&gt;   &lt;chr&gt;           &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;
 #&gt; 1 (Intercept)  4.61e+ 0  4.45e- 2    104.   3.74e-56  4.52e+0  4.70e+ 0
-#&gt; 2 income      -5.71e-10  2.33e-10     -2.44 1.84e- 2 -1.03e-9 -1.13e-10</div><div class='input'><span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>ivr</span>, <span class='kw'>conf.int</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>exponentiate</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: Exponentiating coefficients, but model did not use a log or logit link function.</span></div><div class='output co'>#&gt; # A tibble: 2 x 7
+#&gt; 2 income      -5.71e-10  2.33e-10     -2.44 1.84e- 2 -1.03e-9 -1.13e-10</div><div class='input'><span class='fu'><a href='http://www.rdocumentation.org/packages/modelgenerics/topics/generics'>tidy</a></span>(<span class='no'>ivr</span>, <span class='kw'>conf.int</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>exponentiate</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: Exponentiating coefficients, but model did not use a log or logit link function.</span></div><div class='output co'>#&gt; # A tibble: 2 x 7
 #&gt;   term        estimate std.error statistic  p.value conf.low conf.high
 #&gt;   &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;
 #&gt; 1 (Intercept)  101.     4.45e- 2    104.   3.74e-56   92.2     110.   
 #&gt; 2 income         1.000  2.33e-10     -2.44 1.84e- 2    1.000     1.000</div><div class='input'>
-<span class='fu'><a href='augment.html'>augment</a></span>(<span class='no'>ivr</span>)</div><div class='output co'>#&gt; # A tibble: 48 x 6
+<span class='fu'><a href='http://www.rdocumentation.org/packages/modelgenerics/topics/generics'>augment</a></span>(<span class='no'>ivr</span>)</div><div class='output co'>#&gt; # A tibble: 48 x 6
 #&gt;    .rownames log.packs.    income population .fitted  .resid
 #&gt;    &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;      &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;
 #&gt;  1 49              4.62  83903280    4262731    4.56  0.0522
@@ -262,8 +267,34 @@ data has been passed to <code>augment</code> via the <code>data</code> argument.
 #&gt;  8 56              4.53 333525344   14185403    4.42  0.112 
 #&gt;  9 57              4.58 159800448    7188538    4.52  0.0591
 #&gt; 10 58              4.53  60170928    2840860    4.58 -0.0512
-#&gt; # ... with 38 more rows</div><div class='input'>
-<span class='fu'><a href='glance.html'>glance</a></span>(<span class='no'>ivr</span>)</div><div class='output co'>#&gt; # A tibble: 1 x 7
+#&gt; # ... with 38 more rows</div><div class='input'><span class='fu'><a href='http://www.rdocumentation.org/packages/modelgenerics/topics/generics'>augment</a></span>(<span class='no'>ivr</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>CigarettesSW</span>)</div><div class='output co'>#&gt; # A tibble: 96 x 11
+#&gt;    state year    cpi population packs  income   tax price  taxs .fitted  .resid
+#&gt;  * &lt;fct&gt; &lt;fct&gt; &lt;dbl&gt;      &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;
+#&gt;  1 AL    1985   1.08    3973000  116.  4.60e7  32.5 102.   33.3    4.56  0.0522
+#&gt;  2 AR    1985   1.08    2327000  129.  2.62e7  37   101.   37      4.59  0.124 
+#&gt;  3 AZ    1985   1.08    3184000  105.  4.40e7  31   109.   36.2    4.56 -0.285 
+#&gt;  4 CA    1985   1.08   26444000  100.  4.47e8  26   108.   32.1    4.17 -0.131 
+#&gt;  5 CO    1985   1.08    3209000  113.  4.95e7  31    94.3  31      4.56 -0.145 
+#&gt;  6 CT    1985   1.08    3201000  109.  6.01e7  42   128.   51.5    4.55 -0.177 
+#&gt;  7 DE    1985   1.08     618000  144.  9.93e6  30   102.   30      4.60  0.223 
+#&gt;  8 FL    1985   1.08   11352000  122.  1.67e8  37   115.   42.5    4.42  0.112 
+#&gt;  9 GA    1985   1.08    5963000  127.  7.84e7  28    97.0  28.8    4.52  0.0591
+#&gt; 10 IA    1985   1.08    2830000  114.  3.79e7  34   102.   37.9    4.58 -0.0512
+#&gt; # ... with 86 more rows</div><div class='input'><span class='fu'><a href='http://www.rdocumentation.org/packages/modelgenerics/topics/generics'>augment</a></span>(<span class='no'>ivr</span>, <span class='kw'>newdata</span> <span class='kw'>=</span> <span class='no'>CigarettesSW</span>)</div><div class='output co'>#&gt; # A tibble: 96 x 10
+#&gt;    state year    cpi population packs    income   tax price  taxs .fitted
+#&gt;  * &lt;fct&gt; &lt;fct&gt; &lt;dbl&gt;      &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;
+#&gt;  1 AL    1985   1.08    3973000  116.  46014968  32.5 102.   33.3    4.59
+#&gt;  2 AR    1985   1.08    2327000  129.  26210736  37   101.   37      4.60
+#&gt;  3 AZ    1985   1.08    3184000  105.  43956936  31   109.   36.2    4.59
+#&gt;  4 CA    1985   1.08   26444000  100. 447102816  26   108.   32.1    4.36
+#&gt;  5 CO    1985   1.08    3209000  113.  49466672  31    94.3  31      4.58
+#&gt;  6 CT    1985   1.08    3201000  109.  60063368  42   128.   51.5    4.58
+#&gt;  7 DE    1985   1.08     618000  144.   9927301  30   102.   30      4.61
+#&gt;  8 FL    1985   1.08   11352000  122. 166919248  37   115.   42.5    4.52
+#&gt;  9 GA    1985   1.08    5963000  127.  78364336  28    97.0  28.8    4.57
+#&gt; 10 IA    1985   1.08    2830000  114.  37902896  34   102.   37.9    4.59
+#&gt; # ... with 86 more rows</div><div class='input'>
+<span class='fu'><a href='http://www.rdocumentation.org/packages/modelgenerics/topics/generics'>glance</a></span>(<span class='no'>ivr</span>)</div><div class='output co'>#&gt; # A tibble: 1 x 7
 #&gt;   r.squared adj.r.squared sigma statistic p.value    df df.residual
 #&gt;       &lt;dbl&gt;         &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt; &lt;int&gt;       &lt;int&gt;
 #&gt; 1     0.131         0.112 0.229      5.98  0.0184     2          46</div><div class='input'>
@@ -274,9 +305,9 @@ data has been passed to <code>augment</code> via the <code>data</code> argument.
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
       
-      <li><a href="#value">Value</a></li>
-
       <li><a href="#see-also">See also</a></li>
+
+      <li><a href="#value">Value</a></li>
       
       <li><a href="#examples">Examples</a></li>
     </ul>

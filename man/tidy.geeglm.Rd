@@ -38,18 +38,6 @@ proceed using \code{conf.level = 0.95}. Additionally, if you pass
 accept a \code{newdata} argument, it will use the default value for
 the \code{data} argument.}
 }
-\value{
-A \link[tibble:tibble]{tibble::tibble} with one row for each coefficient, with five
-columns:
-\item{term}{The term in the linear model being estimated and tested}
-\item{estimate}{The estimated coefficient}
-\item{std.error}{The standard error from the GEE model}
-\item{statistic}{Wald statistic}
-\item{p.value}{two-sided p-value}
-
-If \code{conf.int = TRUE}, includes includes columns \code{conf.low} and \code{conf.high},
-which are computed internally.
-}
 \description{
 Tidy summarizes information about the components of a model.
 A model component might be a single term in a regression, a single
@@ -68,22 +56,25 @@ missingness in the data beforehand.
 }
 \examples{
 
-if (requireNamespace("geepack", quietly = TRUE)) {
-  library(geepack)
-  data(state)
-    
-  ds <- data.frame(state.region, state.x77)
+library(geepack)
+data(state)
+  
+ds <- data.frame(state.region, state.x77)
 
-  geefit <- geeglm(Income ~ Frost + Murder, id = state.region,
-                   data = ds, family = gaussian,
-                   corstr = "exchangeable")
+geefit <- geeglm(Income ~ Frost + Murder, id = state.region,
+                 data = ds, family = gaussian,
+                 corstr = "exchangeable")
 
-  tidy(geefit)
-  tidy(geefit, quick = TRUE)
-  tidy(geefit, conf.int = TRUE)
-}
+tidy(geefit)
+tidy(geefit, quick = TRUE)
+tidy(geefit, conf.int = TRUE)
 
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[geepack:geeglm]{geepack::geeglm()}}
+}
+\value{
+A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
+  \item{regresion}{TRUE}
+
 }

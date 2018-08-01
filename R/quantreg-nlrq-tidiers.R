@@ -5,7 +5,7 @@
 #' @template param_confint
 #' @template param_unused_dots
 #'
-#' @template return_tidy_regression
+#' @evalRd return_tidy(regression = TRUE)
 #'
 #' @aliases nlrq_tidiers 
 #' @export
@@ -28,15 +28,15 @@ tidy.nlrq <- function(x, conf.int = FALSE, conf.level = 0.95, ...) {
 #' @templateVar class nlrq
 #' @template title_desc_glance
 #' 
-#' @inheritParams tidy.nlrq
+#' @inherit tidy.nlrq params examples
 #'
-#' @return A one-row [tibble::tibble()] with columns:
-#' 
-#'  \item{tau}{quantile}
-#'  \item{logLik}{the data's log-likelihood under the model}
-#'  \item{AIC}{the Akaike Information Criterion}
-#'  \item{BIC}{the Bayesian Information Criterion}
-#'  \item{df.residual}{residual degrees of freedom}
+#' @evalRd return_glance(
+#'   "tau",
+#'   "logLik",
+#'   "AIC",
+#'   "BIC",
+#'   "df.residual"
+#' )
 #'  
 #' @export
 #' @seealso [glance()], [quantreg::nlrq()]
@@ -60,9 +60,7 @@ glance.nlrq <- function(x, ...) {
 #' @template title_desc_tidy
 #' 
 #' @param x A `nlrq` object returned from [quantreg::nlrq()].
-#' @inheritParams augment.nls
-#' 
-#' @template return_augment_columns
+#' @inherit augment.nls params examples return
 #'  
 #' @export
 #' @seealso [augment()], [quantreg::nlrq()]

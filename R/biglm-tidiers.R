@@ -8,28 +8,28 @@
 #' @template param_quick
 #' @template param_unused_dots
 #' 
-#' @template return_tidy_regression
+#' @evalRd return_tidy(regression = TRUE)
 #'
 #' @examples
 #'
-#' if (require("biglm", quietly = TRUE)) {
-#'     bfit <- biglm(mpg ~ wt + disp, mtcars)
-#'     tidy(bfit)
-#'     tidy(bfit, conf.int = TRUE)
-#'     tidy(bfit, conf.int = TRUE, conf.level = .9)
+#' library(biglm)
 #'
-#'     glance(bfit)
+#' bfit <- biglm(mpg ~ wt + disp, mtcars)
+#' tidy(bfit)
+#' tidy(bfit, conf.int = TRUE)
+#' tidy(bfit, conf.int = TRUE, conf.level = .9)
 #'
-#'     # bigglm: logistic regression
-#'     bgfit <- bigglm(am ~ mpg, mtcars, family = binomial())
-#'     tidy(bgfit)
-#'     tidy(bgfit, exponentiate = TRUE)
-#'     tidy(bgfit, conf.int = TRUE)
-#'     tidy(bgfit, conf.int = TRUE, conf.level = .9)
-#'     tidy(bgfit, conf.int = TRUE, conf.level = .9, exponentiate = TRUE)
+#' glance(bfit)
 #'
-#'     glance(bgfit)
-#' }
+#' # bigglm: logistic regression
+#' bgfit <- bigglm(am ~ mpg, mtcars, family = binomial())
+#' tidy(bgfit)
+#' tidy(bgfit, exponentiate = TRUE)
+#' tidy(bgfit, conf.int = TRUE)
+#' tidy(bgfit, conf.int = TRUE, conf.level = .9)
+#' tidy(bgfit, conf.int = TRUE, conf.level = .9, exponentiate = TRUE)
+#'
+#' glance(bgfit)
 #'
 #' @export
 #' @family biglm tidiers
@@ -61,14 +61,10 @@ tidy.biglm <- function(x, conf.int = FALSE, conf.level = .95,
 #' @templateVar class biglm
 #' @template title_desc_glance
 #' 
-#' @inheritParams tidy.biglm
+#' @inherit tidy.biglm params examples
 #' @template param_unused_dots
 #' 
-#' @return `glance.biglm` returns a one-row data frame, with columns
-#'   \item{r.squared}{The percent of variance explained by the model}
-#'   \item{AIC}{the Akaike Information Criterion}
-#'   \item{deviance}{deviance}
-#'   \item{df.residual}{residual degrees of freedom}
+#' @evalRd return_glance("r.squared", "AIC", "deviance", "df.residual")
 #'
 #' @export
 #' @family biglm tidiers

@@ -19,13 +19,6 @@ proceed using \code{conf.level = 0.95}. Additionally, if you pass
 accept a \code{newdata} argument, it will use the default value for
 the \code{data} argument.}
 }
-\value{
-A one-row \link[tibble:tibble]{tibble::tibble} with columns:
-
-\item{deviance}{Robust deviance}
-\item{null.deviance}{Deviance under the null model}
-\item{df.residual}{Number of residual degrees of freedom}
-}
 \description{
 Glance accepts a model object and returns a \code{\link[tibble:tibble]{tibble::tibble()}}
 with exactly one row of model summaries. The summaries are typically
@@ -41,6 +34,19 @@ computations to appropriate methods and gathers the results together.
 Sometimes a goodness of fit measure will be undefined. In these cases
 the measure will be reported as \code{NA}.
 }
+\examples{
+
+library(robust)
+m <- lmRob(mpg ~ wt, data = mtcars)
+
+tidy(m)
+augment(m)
+glance(m)
+
+gm <- glmRob(am ~ wt, data = mtcars, family = "binomial")
+glance(gm)
+
+}
 \seealso{
 \code{\link[robust:glmRob]{robust::glmRob()}}
 
@@ -49,3 +55,10 @@ Other robust tidiers: \code{\link{augment.glmRob}},
   \code{\link{tidy.glmRob}}, \code{\link{tidy.lmRob}}
 }
 \concept{robust tidiers}
+\value{
+A \code{\link[tibble:tibble]{tibble::tibble()}} with exactly one row and columns:
+  \item{deviance}{Deviance of the model.}
+  \item{df.residual}{Residual degrees of freedom for the model.}
+  \item{null.deviance}{Deviance of the null model.}
+
+}

@@ -8,37 +8,25 @@
 #' @template param_exponentiate
 #' @template param_unused_dots
 #' 
-#' @return `tidy.multinom` returns one row for each coefficient at each
-#' level of the response variable, with six columns:
-#'   \item{y.value}{The response level}
-#'   \item{term}{The term in the model being estimated and tested}
-#'   \item{estimate}{The estimated coefficient}
-#'   \item{std.error}{The standard error from the linear model}
-#'   \item{statistic}{Wald z-statistic}
-#'   \item{p.value}{two-sided p-value}
-#'
-#' If `conf.int = TRUE`, also includes columns for `conf.low` and
-#' `conf.high`.
+#' @evalRd return_tidy("y.value", regression = TRUE)
 #'
 #' @examples
 #'
-#' if (require(nnet) & require(MASS)){
-#'   library(nnet)
-#'   library(MASS)
-#'   
-#'   example(birthwt)
-#'   bwt.mu <- multinom(low ~ ., bwt)
-#'   tidy(bwt.mu)
-#'   glance(bwt.mu)
+#' library(nnet)
+#' library(MASS)
+#' 
+#' example(birthwt)
+#' bwt.mu <- multinom(low ~ ., bwt)
+#' tidy(bwt.mu)
+#' glance(bwt.mu)
 #'
-#'   #* This model is a truly terrible model
-#'   #* but it should show you what the output looks
-#'   #* like in a multinomial logistic regression
+#' #* This model is a truly terrible model
+#' #* but it should show you what the output looks
+#' #* like in a multinomial logistic regression
 #'
-#'   fit.gear <- multinom(gear ~ mpg + factor(am), data = mtcars)
-#'   tidy(fit.gear)
-#'   glance(fit.gear)
-#' }
+#' fit.gear <- multinom(gear ~ mpg + factor(am), data = mtcars)
+#' tidy(fit.gear)
+#' glance(fit.gear)
 #'
 #' @aliases multinom_tidiers nnet_tidiers
 #' @export
@@ -107,14 +95,9 @@ tidy.multinom <- function(x, conf.int = FALSE, conf.level = .95,
 #' @templateVar class multinom
 #' @template title_desc_glance
 #' 
-#' @inheritParams tidy.multinom
+#' @inherit tidy.multinom params examples
 #' 
-#' @return A one-row [tibble::tibble] with columns:
-#' 
-#'   \item{edf}{The effective degrees of freedom}
-#'   \item{deviance}{deviance}
-#'   \item{AIC}{the Akaike Information Criterion}
-#'
+#' @evalRd return_glance("edf", "deviance", "AIC")
 #' @export
 #' @family multinom tidiers
 #' @seealso [glance()], [nnet::multinom()]

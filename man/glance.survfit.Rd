@@ -19,19 +19,6 @@ proceed using \code{conf.level = 0.95}. Additionally, if you pass
 accept a \code{newdata} argument, it will use the default value for
 the \code{data} argument.}
 }
-\value{
-A one-row \link[tibble:tibble]{tibble::tibble} with columns:
-
-\item{records}{number of observations}
-\item{n.max}{n.max}
-\item{n.start}{n.start}
-\item{events}{number of events}
-\item{rmean}{Restricted mean (see \code{\link[survival:print.survfit]{survival::print.survfit()}}}
-\item{rmean.std.error}{Restricted mean standard error}
-\item{median}{median survival}
-\item{conf.low}{lower end of confidence interval on median}
-\item{conf.high}{upper end of confidence interval on median}
-}
 \description{
 Glance accepts a model object and returns a \code{\link[tibble:tibble]{tibble::tibble()}}
 with exactly one row of model summaries. The summaries are typically
@@ -46,6 +33,30 @@ Glance does not calculate summary measures. Rather, it farms out these
 computations to appropriate methods and gathers the results together.
 Sometimes a goodness of fit measure will be undefined. In these cases
 the measure will be reported as \code{NA}.
+}
+\examples{
+
+library(survival)
+cfit <- coxph(Surv(time, status) ~ age + sex, lung)
+sfit <- survfit(cfit)
+
+tidy(sfit)
+glance(sfit)
+
+library(ggplot2)
+ggplot(tidy(sfit), aes(time, estimate)) + geom_line() +
+    geom_ribbon(aes(ymin=conf.low, ymax=conf.high), alpha=.25)
+
+# multi-state
+fitCI <- survfit(Surv(stop, status * as.numeric(event), type = "mstate") ~ 1,
+              data = mgus1, subset = (start == 0))
+td_multi <- tidy(fitCI)
+td_multi
+
+ggplot(td_multi, aes(time, estimate, group = state)) +
+    geom_line(aes(color = state)) +
+    geom_ribbon(aes(ymin = conf.low, ymax = conf.high), alpha = .25)
+
 }
 \seealso{
 \code{\link[=glance]{glance()}}, \code{\link[survival:survfit]{survival::survfit()}}
@@ -67,3 +78,16 @@ Other survival tidiers: \code{\link{augment.coxph}},
 }
 \concept{cch tidiers}
 \concept{survival tidiers}
+\value{
+A \code{\link[tibble:tibble]{tibble::tibble()}} with exactly one row and columns:
+  \item{events}{number of events}
+  \item{n.max}{Maximum number of subjects at risk.}
+  \item{n.start}{Initial number of subjects at risk.}
+  \item{records}{number of observations}
+  \item{rmean}{Restricted mean (see [survival::print.survfit()]).}
+  \item{rmean.std.error}{Restricted mean standard error}
+  \item{conf.low}{lower end of confidence interval on median}
+  \item{conf.high}{upper end of confidence interval on median}
+  \item{median}{median survival}
+
+}

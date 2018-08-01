@@ -43,13 +43,6 @@ proceed using \code{conf.level = 0.95}. Additionally, if you pass
 accept a \code{newdata} argument, it will use the default value for
 the \code{data} argument.}
 }
-\value{
-A \link[tibble:tibble]{tibble::tibble} with the passed data and additional columns:
-
-\item{.fitted}{Fitted values of model}
-\item{.se.fit}{Standard errors of fitted values}
-\item{.resid}{Residuals}
-}
 \description{
 Augment accepts a model object and a dataset and adds
 information about each observation in the dataset. Most commonly, this
@@ -89,19 +82,29 @@ We are in the process of defining behaviors for models fit with various
 \link{na.action} arguments, but make no guarantees about behavior when data is
 missing at this time.
 }
-\details{
-When the modeling was performed with \code{na.action = "na.omit"}
-(as is the typical default), rows with NA in the initial data are omitted
-entirely from the augmented data frame. When the modeling was performed
-with \code{na.action = "na.exclude"}, one should provide the original data
-as a second argument, at which point the augmented data will contain those
-rows (typically with NAs in place of the new columns). If the original data
-is not provided to \code{\link[=augment]{augment()}} and \code{na.action = "na.exclude"}, a
-warning is raised and the incomplete rows are dropped.
+\examples{
+
+library(survival)
+
+sr <- survreg(
+  Surv(futime, fustat) ~ ecog.ps + rx,
+  ovarian,
+  dist = "exponential"
+)
+
+td <- tidy(sr)
+augment(sr, ovarian)
+glance(sr)
+
+# coefficient plot
+library(ggplot2)
+ggplot(td, aes(estimate, term)) + 
+  geom_point() +
+  geom_errorbarh(aes(xmin = conf.low, xmax = conf.high), height = 0) +
+  geom_vline(xintercept = 0)
+
 }
 \seealso{
-\link{na.action}
-
 \code{\link[=augment]{augment()}}, \code{\link[survival:survreg]{survival::survreg()}}
 
 Other survreg tidiers: \code{\link{glance.survreg}},
@@ -121,3 +124,10 @@ Other survival tidiers: \code{\link{augment.coxph}},
 }
 \concept{survival tidiers}
 \concept{survreg tidiers}
+\value{
+A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
+  \item{.fitted}{Fitted / predicted value.}
+  \item{.resid}{Residuals of fitted values. TODO -- document when present. Residuals on which data set?}
+  \item{.se.fit}{Standard errors of fitted values. TODO -- prediction or mean interval?}
+
+}

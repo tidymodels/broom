@@ -20,14 +20,6 @@ proceed using \code{conf.level = 0.95}. Additionally, if you pass
 accept a \code{newdata} argument, it will use the default value for
 the \code{data} argument.}
 }
-\value{
-A \link[tibble:tibble]{tibble::tibble} with one row for estimated parameter, with
-columns:
-
-\item{term}{The term that was estimated}
-\item{estimate}{Estimated value}
-\item{std.error}{Standard error of estimate}
-}
 \description{
 Tidy summarizes information about the components of a model.
 A model component might be a single term in a regression, a single
@@ -54,3 +46,10 @@ glance(fit)
 Other fitdistr tidiers: \code{\link{glance.fitdistr}}
 }
 \concept{fitdistr tidiers}
+\value{
+A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
+  \item{estimate}{The estimated value of the regression term.}
+  \item{std.error}{The standard error of the regression term.}
+  \item{term}{The name of the regression term.}
+
+}

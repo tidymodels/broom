@@ -58,6 +58,9 @@
       <a href="../articles/broom_and_dplyr.html">Broom and dplyr</a>
     </li>
     <li>
+      <a href="../articles/external-tidiers.html">Tidiers in external packages</a>
+    </li>
+    <li>
       <a href="../articles/kmeans.html">K-means</a>
     </li>
   </ul>
@@ -66,7 +69,7 @@
   <a href="../news/index.html">News</a>
 </li>
         <li>
-  <a href="https://github.com/tidyverse/broom">
+  <a href="https://github.com/tidymodels/broom">
     <span class="fa fa-github fa-lg"></span>
      
   </a>
@@ -85,9 +88,9 @@
     <div class="page-header toc-ignore">
       <h1>kmeans with dplyr and broom</h1>
             
-            <h4 class="date">2018-07-17</h4>
+            <h4 class="date">2018-08-01</h4>
       
-      <small class="dont-index">Source: <a href="http://github.com/tidyverse/broom/blob/master/vignettes/kmeans.Rmd"><code>vignettes/kmeans.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="http://github.com/tidymodels/broom/blob/master/vignettes/kmeans.Rmd"><code>vignettes/kmeans.Rmd</code></a></small>
       <div class="hidden name"><code>kmeans.Rmd</code></div>
 
     </div>
@@ -186,7 +189,7 @@ kclust</code></pre></div>
 <p>Which of these do we want to extract? There is no right answer: each of them may be interesting to an analyst. Because they communicate entirely different information (not to mention there’s no straightforward way to combine them), they are extracted by separate functions. <code>augment</code> adds the point classifications to the original dataset:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(broom)
 
-<span class="kw"><a href="../reference/augment.html">augment</a></span>(kclust, points)</code></pre></div>
+<span class="kw"><a href="http://www.rdocumentation.org/packages/modelgenerics/topics/generics">augment</a></span>(kclust, points)</code></pre></div>
 <pre><code>## # A tibble: 300 x 3
 ##       x1     x2 .cluster
 ##    &lt;dbl&gt;  &lt;dbl&gt; &lt;fct&gt;   
@@ -202,7 +205,7 @@ kclust</code></pre></div>
 ## 10  5.24 -2.42  2       
 ## # ... with 290 more rows</code></pre>
 <p>The <code>tidy</code> function summarizes on a per-cluster level:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/tidy.html">tidy</a></span>(kclust)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="http://www.rdocumentation.org/packages/modelgenerics/topics/generics">tidy</a></span>(kclust)</code></pre></div>
 <pre><code>## # A tibble: 3 x 5
 ##        x1    x2  size withinss cluster
 ## *   &lt;dbl&gt; &lt;dbl&gt; &lt;int&gt;    &lt;dbl&gt; &lt;fct&gt;  
@@ -210,7 +213,7 @@ kclust</code></pre></div>
 ## 2  5.00   -1.05   101     243. 2      
 ## 3  0.0885  1.05   148     299. 3</code></pre>
 <p>And as it always does, the <code>glance</code> function extracts a single-row summary:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/glance.html">glance</a></span>(kclust)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="http://www.rdocumentation.org/packages/modelgenerics/topics/generics">glance</a></span>(kclust)</code></pre></div>
 <pre><code>## # A tibble: 1 x 4
 ##   totss tot.withinss betweenss  iter
 ##   &lt;dbl&gt;        &lt;dbl&gt;     &lt;dbl&gt; &lt;int&gt;

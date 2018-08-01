@@ -4,8 +4,14 @@
 #' @param x A `Gam` object returned from a call to [gam::gam()].
 #' @template param_unused_dots
 #'
-#' @return The tidied output of the parametric ANOVA for the GAM model as 
-#'   a [tibble::tibble] with one row for each term in the model.
+#' @evalRd return_tidy(
+#'   "term",
+#'   "df",
+#'   "sumsq",
+#'   "meansq",
+#'   "statistic",
+#'   "p.value"
+#' )
 #'   
 #' @details Tidy `gam` objects created by calls to [mgcv::gam()] with
 #'   [tidy.gam()].
@@ -31,7 +37,14 @@ tidy.Gam <- function(x, ...) {
 #' 
 #' @inheritParams tidy.Gam
 #' 
-#' @template return_finish_glance
+#' @evalRd return_glance(
+#'   "df",
+#'   "logLik",
+#'   "AIC",
+#'   "BIC",
+#'   "deviance",
+#'   "df.residual"
+#' )
 #' 
 #' @details Glance at `gam` objects created by calls to [mgcv::gam()] with
 #'   [glance.gam()].

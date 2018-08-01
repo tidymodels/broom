@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Convert Statistical Analysis Objects into Tidy Tibbles • broom</title>
+<title>Convert Statistical Objects into Tidy Tibbles • broom</title>
 <!-- jquery --><script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script><!-- Bootstrap --><link href="tidyverse.css" rel="stylesheet">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script><!-- Font Awesome icons --><link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 <!-- tidyverse --><link href="pkgdown.css" rel="stylesheet">
@@ -58,6 +58,9 @@
       <a href="articles/broom_and_dplyr.html">Broom and dplyr</a>
     </li>
     <li>
+      <a href="articles/external-tidiers.html">Tidiers in external packages</a>
+    </li>
+    <li>
       <a href="articles/kmeans.html">K-means</a>
     </li>
   </ul>
@@ -66,7 +69,7 @@
   <a href="news/index.html">News</a>
 </li>
         <li>
-  <a href="https://github.com/tidyverse/broom">
+  <a href="https://github.com/tidymodels/broom">
     <span class="fa fa-github fa-lg"></span>
      
   </a>
@@ -96,11 +99,11 @@
 <p>broom summarizes key information about models in tidy <code>tibble()</code>s. broom provides three verbs to make it convenient to interact with model objects:</p>
 <ul>
 <li>
-<code><a href="reference/tidy.html">tidy()</a></code> summarizes information about model components</li>
+<code><a href="http://www.rdocumentation.org/packages/modelgenerics/topics/generics">tidy()</a></code> summarizes information about model components</li>
 <li>
-<code><a href="reference/glance.html">glance()</a></code> reports information about the entire model</li>
+<code><a href="http://www.rdocumentation.org/packages/modelgenerics/topics/generics">glance()</a></code> reports information about the entire model</li>
 <li>
-<code><a href="reference/augment.html">augment()</a></code> adds informations about observations to a dataset</li>
+<code><a href="http://www.rdocumentation.org/packages/modelgenerics/topics/generics">augment()</a></code> adds informations about observations to a dataset</li>
 </ul>
 <p>For a detailed introduction, please see <code><a href="articles/broom.html">vignette("broom")</a></code>.</p>
 <p>broom tidies 100+ models from popular modelling packages and almost all of the model objects in the <code>stats</code> package that comes with base R. <code><a href="articles/available-methods.html">vignette("available-methods")</a></code> lists method availabilty.</p>
@@ -109,40 +112,40 @@
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># we recommend installing the entire tidyverse, which includes broom:</span>
-<span class="kw">install.packages</span>(<span class="st">"tidyverse"</span>)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># we recommend installing the entire tidyverse modeling set, which includes broom:</span>
+<span class="kw">install.packages</span>(<span class="st">"tidymodels"</span>)
 
 <span class="co"># alternatively, to install just broom:</span>
 <span class="kw">install.packages</span>(<span class="st">"broom"</span>)
 
 <span class="co"># to get the development version from GitHub:</span>
 <span class="kw">install.packages</span>(<span class="st">"devtools"</span>)
-devtools<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/devtools/topics/install_github">install_github</a></span>(<span class="st">"tidyverse/broom"</span>)</code></pre></div>
-<p>If you find a bug, please file a minimal reproducible example in the <a href="https://github.com/tidyverse/broom/issues">issues</a>.</p>
+devtools<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/devtools/topics/install_github">install_github</a></span>(<span class="st">"tidymodels/broom"</span>)</code></pre></div>
+<p>If you find a bug, please file a minimal reproducible example in the <a href="https://github.com/tidymodels/broom/issues">issues</a>.</p>
 </div>
 <div id="usage" class="section level2">
 <h2 class="hasAnchor">
 <a href="#usage" class="anchor"></a>Usage</h2>
-<p><code><a href="reference/tidy.html">tidy()</a></code> produces a <code>tibble()</code> where each row contains information about an important component of the model. For regression models, this often corresponds to regression coefficients. This is can be useful if you want to inspect a model or create custom visualizations.</p>
+<p><code><a href="http://www.rdocumentation.org/packages/modelgenerics/topics/generics">tidy()</a></code> produces a <code>tibble()</code> where each row contains information about an important component of the model. For regression models, this often corresponds to regression coefficients. This is can be useful if you want to inspect a model or create custom visualizations.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(broom)
 
 fit &lt;-<span class="st"> </span><span class="kw">lm</span>(Sepal.Width <span class="op">~</span><span class="st"> </span>Petal.Length <span class="op">+</span><span class="st"> </span>Petal.Width, iris)
-<span class="kw"><a href="reference/tidy.html">tidy</a></span>(fit)
+<span class="kw"><a href="http://www.rdocumentation.org/packages/modelgenerics/topics/generics">tidy</a></span>(fit)
 <span class="co">#&gt; # A tibble: 3 x 5</span>
 <span class="co">#&gt;   term         estimate std.error statistic  p.value</span>
 <span class="co">#&gt;   &lt;chr&gt;           &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;</span>
 <span class="co">#&gt; 1 (Intercept)     3.59     0.0937     38.3  2.51e-78</span>
 <span class="co">#&gt; 2 Petal.Length   -0.257    0.0669     -3.84 1.80e- 4</span>
 <span class="co">#&gt; 3 Petal.Width     0.364    0.155       2.35 2.01e- 2</span></code></pre></div>
-<p><code><a href="reference/glance.html">glance()</a></code> returns a tibble with exactly one row of goodness of fitness measures and related statistics. This is useful to check for model misspecification and to compare many models.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="reference/glance.html">glance</a></span>(fit)
+<p><code><a href="http://www.rdocumentation.org/packages/modelgenerics/topics/generics">glance()</a></code> returns a tibble with exactly one row of goodness of fitness measures and related statistics. This is useful to check for model misspecification and to compare many models.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="http://www.rdocumentation.org/packages/modelgenerics/topics/generics">glance</a></span>(fit)
 <span class="co">#&gt; # A tibble: 1 x 11</span>
 <span class="co">#&gt;   r.squared adj.r.squared sigma statistic p.value    df logLik   AIC   BIC</span>
 <span class="co">#&gt; *     &lt;dbl&gt;         &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt; &lt;int&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;</span>
 <span class="co">#&gt; 1     0.213         0.202 0.389      19.9 2.24e-8     3  -69.8  148.  160.</span>
 <span class="co">#&gt; # ... with 2 more variables: deviance &lt;dbl&gt;, df.residual &lt;int&gt;</span></code></pre></div>
 <p><code>augment</code> adds columns to a dataset, containing information such as fitted values, residuals or cluster assignments. All columns added to a dataset have <code>.</code> prefix to prevent existing columns from being overwritten.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="reference/augment.html">augment</a></span>(fit, <span class="dt">data =</span> iris)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="http://www.rdocumentation.org/packages/modelgenerics/topics/generics">augment</a></span>(fit, <span class="dt">data =</span> iris)
 <span class="co">#&gt; # A tibble: 150 x 12</span>
 <span class="co">#&gt;    Sepal.Length Sepal.Width Petal.Length Petal.Width Species .fitted</span>
 <span class="co">#&gt;  *        &lt;dbl&gt;       &lt;dbl&gt;        &lt;dbl&gt;       &lt;dbl&gt; &lt;fct&gt;     &lt;dbl&gt;</span>
@@ -163,7 +166,7 @@ fit &lt;-<span class="st"> </span><span class="kw">lm</span>(Sepal.Width <span c
 <h3 class="hasAnchor">
 <a href="#contributing" class="anchor"></a>Contributing</h3>
 <p>We welcome contributions of all types!</p>
-<p>If you have never made a pull request to an R package before, broom is an excellent place to start. Find an <a href="https://github.com/tidyverse/broom/issues/">issue</a> with the <strong>Beginner Friendly</strong> tag and comment that you’d like to take it on and we’ll help you get started.</p>
+<p>If you have never made a pull request to an R package before, broom is an excellent place to start. Find an <a href="https://github.com/tidymodels/broom/issues/">issue</a> with the <strong>Beginner Friendly</strong> tag and comment that you’d like to take it on and we’ll help you get started.</p>
 <p>We encourage typo corrections, bug reports, bug fixes and feature requests. Feedback on the clarity of the documentation is especially valuable.</p>
 <p>If you are interested in adding new tidiers methods to broom, please read <code><a href="articles/adding-tidiers.html">vignette("adding-tidiers")</a></code>.</p>
 <p>We have a <a href="CODE_OF_CONDUCT.html">Contributor Code of Conduct</a>. By participating in broom you agree to abide by its terms.</p>
@@ -178,9 +181,9 @@ fit &lt;-<span class="st"> </span><span class="kw">lm</span>(Sepal.Width <span c
 <ul class="list-unstyled">
 <li>Download from CRAN at <br><a href="https://cloud.r-project.org/package=broom">https://​cloud.r-project.org/​package=broom</a>
 </li>
-<li>Browse source code at <br><a href="http://github.com/tidyverse/broom">http://​github.com/​tidyverse/​broom</a>
+<li>Browse source code at <br><a href="http://github.com/tidymodels/broom">http://​github.com/​tidymodels/​broom</a>
 </li>
-<li>Report a bug at <br><a href="http://github.com/tidyverse/broom/issues">http://​github.com/​tidyverse/​broom/​issues</a>
+<li>Report a bug at <br><a href="http://github.com/tidymodels/broom/issues">http://​github.com/​tidymodels/​broom/​issues</a>
 </li>
 </ul>
 </div>
@@ -205,9 +208,9 @@ fit &lt;-<span class="st"> </span><span class="kw">lm</span>(Sepal.Width <span c
 <h2>Dev status</h2>
 <ul class="list-unstyled">
 <li><a href="https://cran.r-project.org/package=broom"><img src="https://www.r-pkg.org/badges/version/broom" alt="CRAN status"></a></li>
-<li><a href="https://travis-ci.org/tidyverse/broom"><img src="https://travis-ci.org/tidyverse/broom.svg?branch=master" alt="Travis-CI Build Status"></a></li>
-<li><a href="https://ci.appveyor.com/project/tidyverse/broom"><img src="https://ci.appveyor.com/api/projects/status/github/tidyverse/broom?branch=master&amp;svg=true" alt="AppVeyor Build Status"></a></li>
-<li><a href="https://codecov.io/github/tidyverse/broom?branch=master"><img src="https://img.shields.io/codecov/c/github/tidyverse/broom/master.svg" alt="Coverage Status"></a></li>
+<li><a href="https://travis-ci.org/tidymodels/broom"><img src="https://travis-ci.org/tidymodels/broom.svg?branch=master" alt="Travis-CI Build Status"></a></li>
+<li><a href="https://ci.appveyor.com/project/alexpghayes/broom"><img src="https://ci.appveyor.com/api/projects/status/github/alexpghayes/broom?branch=master&amp;svg=true" alt="AppVeyor build status"></a></li>
+<li><a href="https://codecov.io/github/tidymodels/broom?branch=master"><img src="https://img.shields.io/codecov/c/github/tidymodels/broom/master.svg" alt="Coverage Status"></a></li>
 </ul>
 </div>
 </div>

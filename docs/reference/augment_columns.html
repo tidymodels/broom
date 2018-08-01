@@ -78,6 +78,9 @@ an augment call — augment_columns • broom</title>
       <a href="../articles/broom_and_dplyr.html">Broom and dplyr</a>
     </li>
     <li>
+      <a href="../articles/external-tidiers.html">Tidiers in external packages</a>
+    </li>
+    <li>
       <a href="../articles/kmeans.html">K-means</a>
     </li>
   </ul>
@@ -86,7 +89,7 @@ an augment call — augment_columns • broom</title>
   <a href="../news/index.html">News</a>
 </li>
         <li>
-  <a href="https://github.com/tidyverse/broom">
+  <a href="https://github.com/tidymodels/broom">
     <span class="fa fa-github fa-lg"></span>
      
   </a>
@@ -104,7 +107,7 @@ an augment call — augment_columns • broom</title>
     <div class="page-header">
     <h1>add fitted values, residuals, and other common outputs to
 an augment call</h1>
-    <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/utilities.R'><code>R/utilities.R</code></a></small>
+    <small class="dont-index">Source: <a href='http://github.com/tidymodels/broom/blob/master/R/utilities.R'><code>R/utilities.R</code></a></small>
     <div class="hidden name"><code>augment_columns.Rd</code></div>
     </div>
 
@@ -115,7 +118,7 @@ the value returned from <code>augment</code>.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>augment_columns</span>(<span class='no'>x</span>, <span class='no'>data</span>, <span class='no'>newdata</span>, <span class='no'>type</span>, <span class='kw'>type.predict</span> <span class='kw'>=</span> <span class='no'>type</span>,
+    <pre class="usage"><span class='fu'>augment_columns</span>(<span class='no'>x</span>, <span class='no'>data</span>, <span class='kw'>newdata</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>type</span>, <span class='kw'>type.predict</span> <span class='kw'>=</span> <span class='no'>type</span>,
   <span class='kw'>type.residuals</span> <span class='kw'>=</span> <span class='no'>type</span>, <span class='kw'>se.fit</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>

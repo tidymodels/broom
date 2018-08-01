@@ -6,15 +6,12 @@
 #' @param conf.method Passed to the `type` argument of [boot::boot.ci()]. 
 #'   Defaults to `"perc"`.
 #' @template param_unused_dots
+#' 
+#' @evalRd return_tidy("bias", "std.error", "term",
+#'   statistic = "Original value of the statistic."
+#' )
 #'
-#' @return A [tibble::tibble] with one row per bootstrapped statistic and
-#'   columns:
-#'   \item{term}{Name of the computed statistic, if present.}
-#'   \item{statistic}{Original value of the statistic.}
-#'   \item{bias}{Bias of the statistic.}
-#'   \item{std.error}{Standard error of the statistic.}
-#'
-#' If weights were provided to the `boot` function, an `estimate`
+#' @details If weights were provided to the `boot` function, an `estimate`
 #' column is included showing the weighted bootstrap estimate, and the
 #' standard error is of that estimate.
 #'
@@ -24,21 +21,24 @@
 #' `std.error` columns shown. 
 #'
 #' @examples
-#' if (require("boot")) {
-#'    clotting <- data.frame(
-#'           u = c(5,10,15,20,30,40,60,80,100),
-#'           lot1 = c(118,58,42,35,27,25,21,19,18),
-#'           lot2 = c(69,35,26,21,18,16,13,12,12))
+#' 
+#' library(boot)
+#' 
+#' clotting <- data.frame(
+#'   u = c(5,10,15,20,30,40,60,80,100),
+#'   lot1 = c(118,58,42,35,27,25,21,19,18),
+#'   lot2 = c(69,35,26,21,18,16,13,12,12)
+#' )
 #'
-#'    g1 <- glm(lot2 ~ log(u), data = clotting, family = Gamma)
+#' g1 <- glm(lot2 ~ log(u), data = clotting, family = Gamma)
 #'
-#'    bootfun <- function(d, i) {
-#'       coef(update(g1, data= d[i,]))
-#'    }
-#'    bootres <- boot(clotting, bootfun, R = 999)
-#'    tidy(g1, conf.int=TRUE)
-#'    tidy(bootres, conf.int=TRUE)
+#' bootfun <- function(d, i) {
+#'    coef(update(g1, data = d[i, ]))
 #' }
+#' 
+#' bootres <- boot(clotting, bootfun, R = 999)
+#' tidy(g1, conf.int = TRUE)
+#' tidy(bootres, conf.int = TRUE)
 #'
 #' @export
 #' @aliases boot_tidiers
@@ -67,7 +67,10 @@ tidy.boot <- function(x,
   rn <- paste("t", index, "*", sep = "")
   if (is.null(t0 <- boot.out$t0)) {
     if (is.null(boot.out$call$weights)) {
-      op <- cbind(apply(t, 2L, mean, na.rm = TRUE), sqrt(apply(t, 2L, function(t.st) var(t.st[!is.na(t.st)]))))
+      op <- cbind(
+        apply(t, 2L, mean, na.rm = TRUE),
+        sqrt(apply(t, 2L, function(t.st) var(t.st[!is.na(t.st)])))
+      )
     } else {
       op <- NULL
       for (i in index) op <- rbind(op, boot::imp.moments(boot.out, index = i)$rat)

@@ -77,6 +77,9 @@
       <a href="../articles/broom_and_dplyr.html">Broom and dplyr</a>
     </li>
     <li>
+      <a href="../articles/external-tidiers.html">Tidiers in external packages</a>
+    </li>
+    <li>
       <a href="../articles/kmeans.html">K-means</a>
     </li>
   </ul>
@@ -85,7 +88,7 @@
   <a href="../news/index.html">News</a>
 </li>
         <li>
-  <a href="https://github.com/tidyverse/broom">
+  <a href="https://github.com/tidymodels/broom">
     <span class="fa fa-github fa-lg"></span>
      
   </a>
@@ -102,26 +105,24 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Tidying methods for mixed effects models</h1>
-    <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/nlme-tidiers.R'><code>R/nlme-tidiers.R</code></a></small>
+    <small class="dont-index">Source: <a href='http://github.com/tidymodels/broom/blob/master/R/nlme-tidiers.R'><code>R/nlme-tidiers.R</code></a></small>
     <div class="hidden name"><code>nlme_tidiers.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p><code>nlme</code> tidiers will soon be deprecated in <code>broom</code> and there is no ongoing
-development of these functions at this time. <code>nlme</code> tidiers are being
-developed in the <code>broom.mixed</code> package, which is not yet on CRAN.</p>
+    <p><code>nlme</code> tidiers are deprecated.</p>
     
     </div>
 
     <pre class="usage"><span class='co'># S3 method for lme</span>
-<span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>x</span>, <span class='kw'>effects</span> <span class='kw'>=</span> <span class='st'>"random"</span>, <span class='no'>...</span>)
+<span class='fu'><a href='http://www.rdocumentation.org/packages/modelgenerics/topics/generics'>tidy</a></span>(<span class='no'>x</span>, <span class='kw'>effects</span> <span class='kw'>=</span> <span class='st'>"random"</span>, <span class='no'>...</span>)
 
 <span class='co'># S3 method for lme</span>
-<span class='fu'><a href='augment.html'>augment</a></span>(<span class='no'>x</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>x</span>$<span class='no'>data</span>, <span class='no'>newdata</span>, <span class='no'>...</span>)
+<span class='fu'><a href='http://www.rdocumentation.org/packages/modelgenerics/topics/generics'>augment</a></span>(<span class='no'>x</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>x</span>$<span class='no'>data</span>, <span class='no'>newdata</span>, <span class='no'>...</span>)
 
 <span class='co'># S3 method for lme</span>
-<span class='fu'><a href='glance.html'>glance</a></span>(<span class='no'>x</span>, <span class='no'>...</span>)</pre>
+<span class='fu'><a href='http://www.rdocumentation.org/packages/modelgenerics/topics/generics'>glance</a></span>(<span class='no'>x</span>, <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -196,7 +197,7 @@ entirely from the augmented data frame. When the modeling was performed
 with <code>na.action = "na.exclude"</code>, one should provide the original data
 as a second argument, at which point the augmented data will contain those
 rows (typically with NAs in place of the new columns). If the original data
-is not provided to <code><a href='augment.html'>augment()</a></code> and <code>na.action = "na.exclude"</code>, a
+is not provided to <code><a href='http://www.rdocumentation.org/packages/modelgenerics/topics/generics'>augment()</a></code> and <code>na.action = "na.exclude"</code>, a
 warning is raised and the incomplete rows are dropped.</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
@@ -210,10 +211,10 @@ warning is raised and the incomplete rows are dropped.</p>
 <span class='kw'>if</span> (<span class='fu'>require</span>(<span class='st'>"nlme"</span>) <span class='kw'>&amp;</span> <span class='fu'>require</span>(<span class='st'>"lme4"</span>)) {
     <span class='co'># example regressions are from lme4 documentation, but used for nlme</span>
     <span class='no'>lmm1</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/nlme/topics/lme'>lme</a></span>(<span class='no'>Reaction</span> ~ <span class='no'>Days</span>, <span class='kw'>random</span><span class='kw'>=</span>~ <span class='no'>Days</span><span class='kw'>|</span><span class='no'>Subject</span>, <span class='no'>sleepstudy</span>)
-    <span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>lmm1</span>)
-    <span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>lmm1</span>, <span class='kw'>effects</span> <span class='kw'>=</span> <span class='st'>"fixed"</span>)
-    <span class='fu'>head</span>(<span class='fu'><a href='augment.html'>augment</a></span>(<span class='no'>lmm1</span>, <span class='no'>sleepstudy</span>))
-    <span class='fu'><a href='glance.html'>glance</a></span>(<span class='no'>lmm1</span>)
+    <span class='fu'><a href='http://www.rdocumentation.org/packages/modelgenerics/topics/generics'>tidy</a></span>(<span class='no'>lmm1</span>)
+    <span class='fu'><a href='http://www.rdocumentation.org/packages/modelgenerics/topics/generics'>tidy</a></span>(<span class='no'>lmm1</span>, <span class='kw'>effects</span> <span class='kw'>=</span> <span class='st'>"fixed"</span>)
+    <span class='fu'>head</span>(<span class='fu'><a href='http://www.rdocumentation.org/packages/modelgenerics/topics/generics'>augment</a></span>(<span class='no'>lmm1</span>, <span class='no'>sleepstudy</span>))
+    <span class='fu'><a href='http://www.rdocumentation.org/packages/modelgenerics/topics/generics'>glance</a></span>(<span class='no'>lmm1</span>)
 
 
     <span class='no'>startvec</span> <span class='kw'>&lt;-</span> <span class='fu'>c</span>(<span class='kw'>Asym</span> <span class='kw'>=</span> <span class='fl'>200</span>, <span class='kw'>xmid</span> <span class='kw'>=</span> <span class='fl'>725</span>, <span class='kw'>scal</span> <span class='kw'>=</span> <span class='fl'>350</span>)
@@ -222,10 +223,10 @@ warning is raised and the incomplete rows are dropped.</p>
                   <span class='kw'>fixed</span> <span class='kw'>=</span> <span class='no'>Asym</span> + <span class='no'>xmid</span> + <span class='no'>scal</span> ~<span class='fl'>1</span>,
                   <span class='kw'>random</span> <span class='kw'>=</span> <span class='no'>Asym</span> ~<span class='fl'>1</span>,
                   <span class='kw'>start</span> <span class='kw'>=</span> <span class='no'>startvec</span>)
-    <span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>nm1</span>)
-    <span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>nm1</span>, <span class='kw'>effects</span> <span class='kw'>=</span> <span class='st'>"fixed"</span>)
-    <span class='fu'>head</span>(<span class='fu'><a href='augment.html'>augment</a></span>(<span class='no'>nm1</span>, <span class='no'>Orange</span>))
-    <span class='fu'><a href='glance.html'>glance</a></span>(<span class='no'>nm1</span>)
+    <span class='fu'><a href='http://www.rdocumentation.org/packages/modelgenerics/topics/generics'>tidy</a></span>(<span class='no'>nm1</span>)
+    <span class='fu'><a href='http://www.rdocumentation.org/packages/modelgenerics/topics/generics'>tidy</a></span>(<span class='no'>nm1</span>, <span class='kw'>effects</span> <span class='kw'>=</span> <span class='st'>"fixed"</span>)
+    <span class='fu'>head</span>(<span class='fu'><a href='http://www.rdocumentation.org/packages/modelgenerics/topics/generics'>augment</a></span>(<span class='no'>nm1</span>, <span class='no'>Orange</span>))
+    <span class='fu'><a href='http://www.rdocumentation.org/packages/modelgenerics/topics/generics'>glance</a></span>(<span class='no'>nm1</span>)
 }
 <span class='co'># }</span><div class='input'>
 </div></pre>

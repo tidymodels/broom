@@ -13,12 +13,16 @@
 #'   no confidence intervals are calculated and the confidence limits are
 #'   set to NA. 
 #' 
-#' @template return_tidy_regression
+#' @evalRd return_tidy(regression = TRUE)
 #'
 #' @aliases rq_tidiers quantreg_tidiers
 #' @export
 #' @seealso [tidy()], [quantreg::rq()]
 #' @family quantreg tidiers
+#' 
+#' @examples 
+#' 
+#' print('TODO')
 tidy.rq <- function(x, se.type = "rank", conf.int = FALSE,
                     conf.level = 0.95, ...) {
   
@@ -41,16 +45,16 @@ tidy.rq <- function(x, se.type = "rank", conf.int = FALSE,
 #' @templateVar class rq
 #' @template title_desc_glance
 #' 
-#' @param x An `rq` object returned from [quantreg::rq()].
+#' @inherit tidy.rq examples params
 #' @template param_unused_dots
 #'
-#' @return A one-row [tibble::tibble] with columns:
-#' 
-#'  \item{tau}{quantile estimated}
-#'  \item{logLik}{the data's log-likelihood under the model}
-#'  \item{AIC}{the Akaike Information Criterion}
-#'  \item{BIC}{the Bayesian Information Criterion}
-#'  \item{df.residual}{residual degrees of freedom}
+#' @evalRd return_glance(
+#'   "tau",
+#'   "logLik",
+#'   "AIC",
+#'   "BIC",
+#'   "df.residuals"
+#' )
 #' 
 #' @details Only models with a single `tau` value may be passed.
 #'  For multiple values, please use a [purrr::map()] workflow instead, e.g.
@@ -84,20 +88,14 @@ glance.rq <- function(x, ...) {
 #' @template param_newdata
 #' @inheritDotParams quantreg::predict.rq
 #' 
-#' @return A [tibble::tibble] with one row per obseration and columns:
+#' @inherit tidy.rq examples
 #' 
-#'   \item{.resid}{Residuals}
-#'   \item{.fitted}{Fitted quantiles of the model}
-#'   \item{.tau}{Quantile estimated}
+#' @evalRd return_augment(".tau")
 #'
-#'   Depending on the arguments passed on to `predict.rq` via `...`,
+#' @details Depending on the arguments passed on to `predict.rq` via `...`,
 #'   a confidence interval is also calculated on the fitted values resulting in
-#'   columns:
-#'     \item{.conf.low}{Lower confidence interval value}
-#'     \item{.conf.high}{Upper confidence interval value}
-#'
-#'   `predict.rq` does not provide confidence intervals when `newdata`
-#'    is provided.
+#'   columns `.conf.low` and `.conf.high`. Does not provide confidence
+#'   intervals when data is specified via the `newdata` argument.
 #'
 #' @export
 #' @seealso [augment], [quantreg::rq()], [quantreg::predict.rq()]

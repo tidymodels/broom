@@ -6,55 +6,51 @@
 #'   zero should be included in the results. Defaults to `FALSE`.
 #' @template param_unused_dots
 #' 
-#' @return A [tibble::tibble] with columns:
-#'   \item{term}{coefficient name (V1...VN by default, along with
-#'   "(Intercept)")}
-#'   \item{step}{which step of lambda choices was used}
-#'   \item{estimate}{estimate of coefficient}
-#'   \item{lambda}{value of penalty parameter lambda}
-#'   \item{dev.ratio}{fraction of null deviance explained at each
-#'   value of lambda}
+#' @evalRd return_tidy(
+#'   "term",
+#'   "step",
+#'   "estimate",
+#'   "lambda",
+#'   "dev.ratio"
+#' )
 #'   
 #' @details Note that while this representation of GLMs is much easier
-#' to plot and combine than the default structure, it is also much
-#' more memory-intensive. Do not use for large, sparse matrices.
+#'   to plot and combine than the default structure, it is also much
+#'   more memory-intensive. Do not use for large, sparse matrices.
 #'
-#' No `augment` method is yet provided even though the model produces
-#' predictions, because the input data is not tidy (it is a matrix that
-#' may be very wide) and therefore combining predictions with it is not
-#' logical. Furthermore, predictions make sense only with a specific
-#' choice of lambda.
+#'   No `augment` method is yet provided even though the model produces
+#'   predictions, because the input data is not tidy (it is a matrix that
+#'   may be very wide) and therefore combining predictions with it is not
+#'   logical. Furthermore, predictions make sense only with a specific
+#'   choice of lambda.
 #'   
 #' @examples
-#'
-#' if (requireNamespace("glmnet", quietly = TRUE)) {
 #' 
-#'     library(glmnet)
-#'     
-#'     set.seed(2014)
-#'     x <- matrix(rnorm(100*20),100,20)
-#'     y <- rnorm(100)
-#'     fit1 <- glmnet(x,y)
+#' library(glmnet)
+#' 
+#' set.seed(2014)
+#' x <- matrix(rnorm(100*20),100,20)
+#' y <- rnorm(100)
+#' fit1 <- glmnet(x,y)
 #'
-#'     tidy(fit1)
-#'     glance(fit1)
+#' tidy(fit1)
+#' glance(fit1)
 #'
-#'     library(dplyr)
-#'     library(ggplot2)
+#' library(dplyr)
+#' library(ggplot2)
 #'
-#'     tidied <- tidy(fit1) %>% filter(term != "(Intercept)")
+#' tidied <- tidy(fit1) %>% filter(term != "(Intercept)")
 #'
-#'     ggplot(tidied, aes(step, estimate, group = term)) + geom_line()
-#'     ggplot(tidied, aes(lambda, estimate, group = term)) +
-#'         geom_line() + scale_x_log10()
+#' ggplot(tidied, aes(step, estimate, group = term)) + geom_line()
+#' ggplot(tidied, aes(lambda, estimate, group = term)) +
+#'     geom_line() + scale_x_log10()
 #'
-#'     ggplot(tidied, aes(lambda, dev.ratio)) + geom_line()
+#' ggplot(tidied, aes(lambda, dev.ratio)) + geom_line()
 #'
-#'     # works for other types of regressions as well, such as logistic
-#'     g2 <- sample(1:2, 100, replace=TRUE)
-#'     fit2 <- glmnet(x, g2, family="binomial")
-#'     tidy(fit2)
-#' }
+#' # works for other types of regressions as well, such as logistic
+#' g2 <- sample(1:2, 100, replace=TRUE)
+#' fit2 <- glmnet(x, g2, family="binomial")
+#' tidy(fit2)
 #'
 #' @export
 #' @aliases glmnet_tidiers
@@ -96,11 +92,9 @@ tidy.glmnet <- function(x, return_zeros = FALSE, ...) {
 #' @templateVar class glmnet
 #' @template title_desc_glance
 #' 
-#' @inheritParams tidy.glmnet
+#' @inherit tidy.glmnet params examples
 #' 
-#' @return A one-row [tibble::tibble] with columns:
-#'   \item{nulldev}{null deviance}
-#'   \item{npasses}{total passes over the data across all lambda values}
+#' @evalRd return_glance("nulldev", "npasses")
 #'
 #' @export
 #' @family glmnet tidiers

@@ -19,18 +19,6 @@ proceed using \code{conf.level = 0.95}. Additionally, if you pass
 accept a \code{newdata} argument, it will use the default value for
 the \code{data} argument.}
 }
-\value{
-A one-row \link[tibble:tibble]{tibble::tibble} with columns:
-
-\item{sigma}{the square root of the estimated residual variance}
-\item{isConv}{whether the fit successfully converged}
-\item{finTol}{the achieved convergence tolerance}
-\item{logLik}{the data's log-likelihood under the model}
-\item{AIC}{the Akaike Information Criterion}
-\item{BIC}{the Bayesian Information Criterion}
-\item{deviance}{deviance}
-\item{df.residual}{residual degrees of freedom}
-}
 \description{
 Glance accepts a model object and returns a \code{\link[tibble:tibble]{tibble::tibble()}}
 with exactly one row of model summaries. The summaries are typically
@@ -46,6 +34,24 @@ computations to appropriate methods and gathers the results together.
 Sometimes a goodness of fit measure will be undefined. In these cases
 the measure will be reported as \code{NA}.
 }
+\examples{
+
+n <- nls(mpg ~ k * e ^ wt, data = mtcars, start = list(k = 1, e = 2))
+
+tidy(n)
+augment(n)
+glance(n)
+
+library(ggplot2)
+ggplot(augment(n), aes(wt, mpg)) +
+  geom_point() +
+  geom_line(aes(y = .fitted))
+
+newdata <- head(mtcars)
+newdata$wt <- newdata$wt + 1
+augment(n, newdata = newdata)
+
+}
 \seealso{
 \link{tidy}, \code{\link[stats:nls]{stats::nls()}}
 
@@ -53,3 +59,15 @@ Other nls tidiers: \code{\link{augment.nls}},
   \code{\link{tidy.nls}}
 }
 \concept{nls tidiers}
+\value{
+A \code{\link[tibble:tibble]{tibble::tibble()}} with exactly one row and columns:
+  \item{AIC}{Akaike's Information Criterion for the model.}
+  \item{BIC}{Bayesian Information Criterion for the model.}
+  \item{deviance}{Deviance of the model.}
+  \item{df.residual}{Residual degrees of freedom for the model.}
+  \item{finTol}{the achieved convergence tolerance}
+  \item{isConv}{whether the fit successfully converged}
+  \item{logLik}{The log-likelihood of the model. [stats::logLik()] may be a useful reference.}
+  \item{sigma}{Estimated standard error of the residuals.}
+
+}

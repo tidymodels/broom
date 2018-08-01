@@ -4,8 +4,13 @@
 #' @param x A `betareg` object produced by a call to [betareg::betareg()].
 #' @template param_confint
 #' @template param_unused_dots
+#' 
+#' @evalRd return_tidy(regression = TRUE,
+#'   component = "Whether a particular term was used to model the mean or the
+#'     precision in the regression. See details."
+#' )
 #'
-#' @return The tibble has one row for each term in the regression. The
+#' @details The tibble has one row for each term in the regression. The
 #'   `component` column indicates whether a particular
 #'   term was used to model either the `"mean"` or `"precision"`. Here the
 #'   precision is the inverse of the variance, often referred to as `phi`.
@@ -14,7 +19,6 @@
 #' @examples
 #'
 #' library(betareg)
-#' 
 #' data("GasolineYield", package = "betareg")
 #'
 #' mod <- betareg(yield ~ batch + temp, data = GasolineYield)
@@ -57,8 +61,10 @@ tidy.betareg <- function(x, conf.int = FALSE, conf.level = .95, ...) {
 #' @template param_newdata
 #' @template param_type_predict
 #' @template param_type_residuals
+#' 
+#' @evalRd return_augment(".cooksd")
 #'
-#' @return For additional details on Cook's distance, see 
+#' @details For additional details on Cook's distance, see 
 #'   [stats::cooks.distance()].
 #' 
 #' @seealso [augment()], [betareg::betareg()]
@@ -67,7 +73,6 @@ augment.betareg <- function(x, data = model.frame(x), newdata = NULL,
                             type.predict, type.residuals, ...) {
   validate_augment_input(x, data, newdata)
   
-  # TODO: match.arg on type.predict and type.residuals
   augment_columns(
     x, data, newdata,
     type.predict = type.predict,
@@ -81,6 +86,15 @@ augment.betareg <- function(x, data = model.frame(x), newdata = NULL,
 #' 
 #' @inherit tidy.betareg params examples
 #' @template param_unused_dots
+#' 
+#' @evalRd return_glance(
+#'   "pseudo.r.squared",
+#'   "df.null", 
+#'   "logLik", 
+#'   "AIC",
+#'   "BIC",
+#'   "df.residual"
+#' )
 #' 
 #' @seealso [glance()], [betareg::betareg()]
 #' @export

@@ -8,7 +8,7 @@
   newdata = NULL, type.predict, type.residuals, ...)
 }
 \arguments{
-\item{x}{A \code{glmRob} object returned from \code{\link[robust:glmRob]{robust::glmRob()}}.}
+\item{x}{An \code{lm} object created by \code{\link[stats:lm]{stats::lm()}}.}
 
 \item{data}{A \code{\link[=data.frame]{data.frame()}} or \code{\link[tibble:tibble]{tibble::tibble()}} containing the original
 data that was used to produce the object \code{x}. Defaults to
@@ -39,36 +39,25 @@ proceed using \code{conf.level = 0.95}. Additionally, if you pass
 accept a \code{newdata} argument, it will use the default value for
 the \code{data} argument.}
 }
-\value{
-When \code{newdata} is not supplied \code{augment.lm} returns
-one row for each observation, with seven columns added to the original
-data:
-
-\item{.hat}{Diagonal of the hat matrix}
-\item{.sigma}{Estimate of residual standard deviation when
-corresponding observation is dropped from model}
-\item{.cooksd}{Cooks distance, \code{\link[=cooks.distance]{cooks.distance()}}}
-\item{.fitted}{Fitted values of model}
-\item{.se.fit}{Standard errors of fitted values}
-\item{.resid}{Residuals}
-\item{.std.resid}{Standardised residuals}
-
-Some unusual \code{lm} objects, such as \code{rlm} from MASS, may omit \code{.cooksd}
-and \code{.std.resid}. \code{gam} from mgcv omits \code{.sigma}.
-
-When \code{newdata} is supplied, returns one row for each observation, with
-three columns added to the new data:
-
-\item{.fitted}{Fitted values of model}
-\item{.se.fit}{Standard errors of fitted values}
-\item{.resid}{Residuals of fitted values on the new data}
-}
 \description{
 This augment method wraps \code{\link[=augment.lm]{augment.lm()}}.
 }
 \details{
 For tidiers for robust models from the \pkg{MASS} package see
 \code{\link[=tidy.rlm]{tidy.rlm()}}.
+}
+\examples{
+
+library(robust)
+m <- lmRob(mpg ~ wt, data = mtcars)
+
+tidy(m)
+augment(m)
+glance(m)
+
+gm <- glmRob(am ~ wt, data = mtcars, family = "binomial")
+glance(gm)
+
 }
 \seealso{
 \code{\link[=augment]{augment()}}, \code{\link[=augment.lm]{augment.lm()}}

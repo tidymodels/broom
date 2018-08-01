@@ -58,6 +58,9 @@
       <a href="../articles/broom_and_dplyr.html">Broom and dplyr</a>
     </li>
     <li>
+      <a href="../articles/external-tidiers.html">Tidiers in external packages</a>
+    </li>
+    <li>
       <a href="../articles/kmeans.html">K-means</a>
     </li>
   </ul>
@@ -66,7 +69,7 @@
   <a href="../news/index.html">News</a>
 </li>
         <li>
-  <a href="https://github.com/tidyverse/broom">
+  <a href="https://github.com/tidymodels/broom">
     <span class="fa fa-github fa-lg"></span>
      
   </a>
@@ -86,9 +89,9 @@
       <h1>Exporting tidying methods from a package</h1>
                         <h4 class="author">Alex Hayes</h4>
             
-            <h4 class="date">2018-07-26</h4>
+            <h4 class="date">2018-08-01</h4>
       
-      <small class="dont-index">Source: <a href="http://github.com/tidyverse/broom/blob/master/vignettes/external-tidiers.Rmd"><code>vignettes/external-tidiers.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="http://github.com/tidymodels/broom/blob/master/vignettes/external-tidiers.Rmd"><code>vignettes/external-tidiers.Rmd</code></a></small>
       <div class="hidden name"><code>external-tidiers.Rmd</code></div>
 
     </div>
@@ -99,9 +102,9 @@
 <ol style="list-style-type: decimal">
 <li>Re-export the <code><a href="http://www.rdocumentation.org/packages/modelgenerics/topics/generics">tidy()</a></code>, <code><a href="http://www.rdocumentation.org/packages/modelgenerics/topics/generics">glance()</a></code> and <code><a href="http://www.rdocumentation.org/packages/modelgenerics/topics/generics">augment()</a></code> generics from the <code>modelgenerics</code> package.</li>
 <li>Implement appropriate tidying methods.</li>
-<li>Tests the tidying methods</li>
+<li>Test the tidying methods</li>
 </ol>
-<p>The <a href="https://github.com/alexpghayes/dustpan">dustpan</a> package demonstrates use of <code>modelgenerics</code> and <code>modeltests</code>, and you find it helpful to browse.</p>
+<p>The <a href="https://github.com/alexpghayes/dustpan">dustpan</a> package demonstrates use of <code>modelgenerics</code> and <code>modeltests</code>, and you may find it helpful to browse.</p>
 <div id="re-exporting-tidy-glance-and-augment-generics" class="section level2">
 <h2 class="hasAnchor">
 <a href="#re-exporting-tidy-glance-and-augment-generics" class="anchor"></a>Re-exporting <code><a href="http://www.rdocumentation.org/packages/modelgenerics/topics/generics">tidy()</a></code>, <code><a href="http://www.rdocumentation.org/packages/modelgenerics/topics/generics">glance()</a></code> and <code><a href="http://www.rdocumentation.org/packages/modelgenerics/topics/generics">augment()</a></code> generics</h2>
@@ -173,9 +176,26 @@ usethis<span class="op">::</span><span class="kw"><a href="http://www.rdocumenta
   )
 })</code></pre></div>
 <p>If you’re run <code><a href="http://www.rdocumentation.org/packages/devtools/topics/test">devtools::test()</a></code> and <code><a href="http://www.rdocumentation.org/packages/devtools/topics/check">devtools::check()</a></code> and didn’t fail any tests or set off R CMD Check ERRORS, WARNINGS or NOTES, you’re done!</p>
-<div id="if-youre-tidiers-dont-pass-the-tests" class="section level3">
+</div>
+<div id="f-a-q-" class="section level2">
+<h2 class="hasAnchor">
+<a href="#f-a-q-" class="anchor"></a>F.A.Q.</h2>
+<div id="should-i-import-or-suggest-broom-or-broom-mixed" class="section level3">
 <h3 class="hasAnchor">
-<a href="#if-youre-tidiers-dont-pass-the-tests" class="anchor"></a>If you’re tidiers don’t pass the tests</h3>
+<a href="#should-i-import-or-suggest-broom-or-broom-mixed" class="anchor"></a>Should I <code>Import</code> or <code>Suggest</code> <code>broom</code> or <code>broom.mixed</code>?</h3>
+<p>If you are using tidiers from broom, such as <code><a href="../reference/tidy.lm.html">tidy.lm()</a></code>, then you will need to depend on <code>broom</code>, probably via <code>Imports</code>:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">use_package</span>(<span class="st">"broom"</span>, <span class="st">"Imports"</span>)</code></pre></div>
+<p>Similarly, if you are using tidiers from <code>broom.mixed</code>, you’ll need to <code>Import</code> <code>broom.mixed</code>.</p>
+<p>You can import <code>broom.mixed</code> separately from <code>broom</code>, or you can mix and match them however you want.</p>
+</div>
+<div id="i-dont-want-to-depend-on-modelgenerics--can-i-re-export-tidy-glance-and-augment-from-broom" class="section level3">
+<h3 class="hasAnchor">
+<a href="#i-dont-want-to-depend-on-modelgenerics--can-i-re-export-tidy-glance-and-augment-from-broom" class="anchor"></a>I don’t want to depend on <code>modelgenerics</code>. Can I re-export <code><a href="http://www.rdocumentation.org/packages/modelgenerics/topics/generics">tidy()</a></code>, <code><a href="http://www.rdocumentation.org/packages/modelgenerics/topics/generics">glance()</a></code> and <code><a href="http://www.rdocumentation.org/packages/modelgenerics/topics/generics">augment()</a></code> from <code>broom</code>?</h3>
+<p>I think so, although I haven’t tested this yet. This is on the TODO list at the moment.</p>
+</div>
+<div id="what-do-i-do-if-my-tidiers-dont-pass-the-tests" class="section level3">
+<h3 class="hasAnchor">
+<a href="#what-do-i-do-if-my-tidiers-dont-pass-the-tests" class="anchor"></a>What do I do if my tidiers don’t pass the tests?</h3>
 <p>If you are introducing new arguments or column names in output, you’ll need to make a pull request to <code>modeltests</code> to add the new argument/column names to the glossary of allowed names.</p>
 <p>If you’d like to change the test specifications, or if you find a bug in the tests, open an issue in <code>modeltests</code>.</p>
 <p>As a last resort, you can set <code>strict = FALSE</code> to run only a bare minimum of tests. This is not recommended.</p>
@@ -191,6 +211,7 @@ usethis<span class="op">::</span><span class="kw"><a href="http://www.rdocumenta
 <li><a href="#re-exporting-tidy-glance-and-augment-generics">Re-exporting <code><a href="http://www-rdocumentation-org/packages/modelgenerics/topics/generics">tidy()</a></code>, <code><a href="http://www-rdocumentation-org/packages/modelgenerics/topics/generics">glance()</a></code> and <code><a href="http://www-rdocumentation-org/packages/modelgenerics/topics/generics">augment()</a></code> generics</a></li>
       <li><a href="#implement-appropriate-tidying-methods">Implement appropriate tidying methods</a></li>
       <li><a href="#testing">Testing</a></li>
+      <li><a href="#f-a-q-">F.A.Q.</a></li>
       </ul>
 </div>
       </div>

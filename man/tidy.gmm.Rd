@@ -37,22 +37,6 @@ proceed using \code{conf.level = 0.95}. Additionally, if you pass
 accept a \code{newdata} argument, it will use the default value for
 the \code{data} argument.}
 }
-\value{
-A \code{\link[tibble:tibble]{tibble::tibble()}} with one row for each term in the
-regression. The tibble has columns:
-
-\item{term}{The name of the regression term.}
-\item{estimate}{The estimated value of the regression term.}
-\item{std.error}{The standard error of the regression term.}
-\item{statistic}{The value of a statistic, almost always a T-statistic,
-to use in a hypothesis that the regression term is non-zero.}
-\item{p.value}{The two-sided p-value associated with the observed
-statistic.}
-\item{conf.low}{The low end of a confidence interval for the regression
-term. Included only if \code{conf.int = TRUE}.}
-\item{conf.high}{The high end of a confidence interval for the regression
-term. Included only if \code{conf.int = TRUE}.}
-}
 \description{
 Tidy summarizes information about the components of a model.
 A model component might be a single term in a regression, a single
@@ -63,71 +47,68 @@ specify which components to return.
 }
 \examples{
 
-if (requireNamespace("gmm", quietly = TRUE)) {
+library(gmm)
 
-  library(gmm)
-  
-  # examples come from the "gmm" package
-  ## CAPM test with GMM
-  data(Finance)
-  r <- Finance[1:300, 1:10]
-  rm <- Finance[1:300, "rm"]
-  rf <- Finance[1:300, "rf"]
+# examples come from the "gmm" package
+## CAPM test with GMM
+data(Finance)
+r <- Finance[1:300, 1:10]
+rm <- Finance[1:300, "rm"]
+rf <- Finance[1:300, "rf"]
 
-  z <- as.matrix(r-rf)
-  t <- nrow(z)
-  zm <- rm-rf
-  h <- matrix(zm, t, 1)
-  res <- gmm(z ~ zm, x = h)
+z <- as.matrix(r-rf)
+t <- nrow(z)
+zm <- rm-rf
+h <- matrix(zm, t, 1)
+res <- gmm(z ~ zm, x = h)
 
-  # tidy result
-  tidy(res)
-  tidy(res, conf.int = TRUE)
-  tidy(res, conf.int = TRUE, conf.level = .99)
+# tidy result
+tidy(res)
+tidy(res, conf.int = TRUE)
+tidy(res, conf.int = TRUE, conf.level = .99)
 
-  # coefficient plot
-  library(ggplot2)
-  library(dplyr)
-  tidy(res, conf.int = TRUE) \%>\%
-    mutate(variable = reorder(variable, estimate)) \%>\%
-    ggplot(aes(estimate, variable)) +
-    geom_point() +
-    geom_errorbarh(aes(xmin = conf.low, xmax = conf.high)) +
-    facet_wrap(~ term) +
-    geom_vline(xintercept = 0, color = "red", lty = 2)
+# coefficient plot
+library(ggplot2)
+library(dplyr)
+tidy(res, conf.int = TRUE) \%>\%
+  mutate(variable = reorder(variable, estimate)) \%>\%
+  ggplot(aes(estimate, variable)) +
+  geom_point() +
+  geom_errorbarh(aes(xmin = conf.low, xmax = conf.high)) +
+  facet_wrap(~ term) +
+  geom_vline(xintercept = 0, color = "red", lty = 2)
 
-  # from a function instead of a matrix
-  g <- function(theta, x) {
-  	e <- x[,2:11] - theta[1] - (x[,1] - theta[1]) \%*\% matrix(theta[2:11], 1, 10)
-  	gmat <- cbind(e, e*c(x[,1]))
-  	return(gmat) }
+# from a function instead of a matrix
+g <- function(theta, x) {
+	e <- x[,2:11] - theta[1] - (x[,1] - theta[1]) \%*\% matrix(theta[2:11], 1, 10)
+	gmat <- cbind(e, e*c(x[,1]))
+	return(gmat) }
 
-  x <- as.matrix(cbind(rm, r))
-  res_black <- gmm(g, x = x, t0 = rep(0, 11))
+x <- as.matrix(cbind(rm, r))
+res_black <- gmm(g, x = x, t0 = rep(0, 11))
 
-  tidy(res_black)
-  tidy(res_black, conf.int = TRUE)
+tidy(res_black)
+tidy(res_black, conf.int = TRUE)
 
-  ## APT test with Fama-French factors and GMM
+## APT test with Fama-French factors and GMM
 
-  f1 <- zm
-  f2 <- Finance[1:300, "hml"] - rf
-  f3 <- Finance[1:300, "smb"] - rf
-  h <- cbind(f1, f2, f3)
-  res2 <- gmm(z ~ f1 + f2 + f3, x = h)
+f1 <- zm
+f2 <- Finance[1:300, "hml"] - rf
+f3 <- Finance[1:300, "smb"] - rf
+h <- cbind(f1, f2, f3)
+res2 <- gmm(z ~ f1 + f2 + f3, x = h)
 
-  td2 <- tidy(res2, conf.int = TRUE)
-  td2
+td2 <- tidy(res2, conf.int = TRUE)
+td2
 
-  # coefficient plot
-  td2 \%>\%
-    mutate(variable = reorder(variable, estimate)) \%>\%
-    ggplot(aes(estimate, variable)) +
-    geom_point() +
-    geom_errorbarh(aes(xmin = conf.low, xmax = conf.high)) +
-    facet_wrap(~ term) +
-    geom_vline(xintercept = 0, color = "red", lty = 2)
-}
+# coefficient plot
+td2 \%>\%
+  mutate(variable = reorder(variable, estimate)) \%>\%
+  ggplot(aes(estimate, variable)) +
+  geom_point() +
+  geom_errorbarh(aes(xmin = conf.low, xmax = conf.high)) +
+  facet_wrap(~ term) +
+  geom_vline(xintercept = 0, color = "red", lty = 2)
 
 }
 \seealso{
@@ -136,3 +117,14 @@ if (requireNamespace("gmm", quietly = TRUE)) {
 Other gmm tidiers: \code{\link{glance.gmm}}
 }
 \concept{gmm tidiers}
+\value{
+A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
+  \item{conf.high}{The upper end of a confidence interval for the term under consideration. Included only if `conf.int = TRUE`.}
+  \item{conf.low}{The lower end of a confidence interval for the term under consideration. Included only if `conf.int = TRUE`.}
+  \item{estimate}{The estimated value of the regression term.}
+  \item{p.value}{The two-sided p-value associated with the observed statistic.}
+  \item{statistic}{The value of a T-statistic to use in a hypothesis that the regression term is non-zero.}
+  \item{std.error}{The standard error of the regression term.}
+  \item{term}{The name of the regression term.}
+
+}

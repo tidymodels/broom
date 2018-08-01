@@ -111,22 +111,20 @@ validate_augment_input <- function(model, data = NULL, newdata = NULL) {
 #'
 #' @return A `tibble` potentially with a `.rownames` column
 #' @noRd
-as_rw_tibble <- function(data) {
-  
-  # TODO: write a test for this
-  
-  row_nm <- rownames(data)
-  has_row_nms <- any(row_nm != as.character(seq_along(row_nm)))
-  
+as_broom_tibble <- function(data) {
   df <- as_tibble(data)
-  
-  if (has_row_nms) {
-    df <- tibble::rownames_to_column(df, var = ".rownames")
-  }
-  
+  if (has_rownames(data))
+    df <- tibble::add_column(df, .rownames = rownames(data), .before = TRUE)
   df
 }
 
+# copied from modeltests. re-export if at some we Import modeltests rather
+# than suggest it
+has_rownames <- function(df) {
+  if (tibble::is_tibble(df))
+    return(FALSE)
+  any(rownames(df) != as.character(1:nrow(df)))
+}
 
 
 #' Ensure an object is a data frame, with rownames moved into a column
@@ -337,6 +335,24 @@ augment_columns <- function(x, data, newdata = NULL, type, type.predict = type,
   }
   
   as_tibble(ret)
+}
+
+response <- function(object, newdata = NULL) {
+  model.response(model.frame(terms(object), data = newdata, na.action = na.pass))
+}
+
+safe_response <- purrr::possibly(response, NULL)
+
+# add .fitted column
+# add .resid column if response is present
+# deal with rownames and convert to tibble as necessary
+augment_newdata <- function(object, newdata) {
+  df <- as_broom_tibble(newdata)
+  df$.fitted <- predict(object, newdata = newdata, na.action = na.pass)
+  resp <- safe_response(object, newdata)
+  if (!is.null(resp))
+    df$.resid <- df$.fitted - resp
+  df
 }
 
 

@@ -19,12 +19,6 @@ proceed using \code{conf.level = 0.95}. Additionally, if you pass
 accept a \code{newdata} argument, it will use the default value for
 the \code{data} argument.}
 }
-\value{
-A one-row \link[tibble:tibble]{tibble::tibble} with columns:
-
-\item{total}{total number of person-years tabulated}
-\item{offtable}{total number of person-years off table}
-}
 \description{
 Glance accepts a model object and returns a \code{\link[tibble:tibble]{tibble::tibble()}}
 with exactly one row of model summaries. The summaries are typically
@@ -39,6 +33,26 @@ Glance does not calculate summary measures. Rather, it farms out these
 computations to appropriate methods and gathers the results together.
 Sometimes a goodness of fit measure will be undefined. In these cases
 the measure will be reported as \code{NA}.
+}
+\examples{
+
+library(survival)
+
+temp.yr  <- tcut(mgus$dxyr, 55:92, labels=as.character(55:91))
+temp.age <- tcut(mgus$age, 34:101, labels=as.character(34:100))
+ptime <- ifelse(is.na(mgus$pctime), mgus$futime, mgus$pctime)
+pstat <- ifelse(is.na(mgus$pctime), 0, 1)
+pfit <- pyears(Surv(ptime/365.25, pstat) ~ temp.yr + temp.age + sex,  mgus,
+               data.frame=TRUE)
+tidy(pfit)
+glance(pfit)
+
+# if data.frame argument is not given, different information is present in
+# output
+pfit2 <- pyears(Surv(ptime/365.25, pstat) ~ temp.yr + temp.age + sex,  mgus)
+tidy(pfit2)
+glance(pfit2)
+
 }
 \seealso{
 \code{\link[=glance]{glance()}}, \code{\link[survival:pyears]{survival::pyears()}}
@@ -60,3 +74,9 @@ Other survival tidiers: \code{\link{augment.coxph}},
 }
 \concept{pyears tidiers}
 \concept{survival tidiers}
+\value{
+A \code{\link[tibble:tibble]{tibble::tibble()}} with exactly one row and columns:
+  \item{total}{total number of person-years tabulated}
+  \item{offtable}{total number of person-years off table}
+
+}

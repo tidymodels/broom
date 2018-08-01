@@ -77,6 +77,9 @@
       <a href="../articles/broom_and_dplyr.html">Broom and dplyr</a>
     </li>
     <li>
+      <a href="../articles/external-tidiers.html">Tidiers in external packages</a>
+    </li>
+    <li>
       <a href="../articles/kmeans.html">K-means</a>
     </li>
   </ul>
@@ -85,7 +88,7 @@
   <a href="../news/index.html">News</a>
 </li>
         <li>
-  <a href="https://github.com/tidyverse/broom">
+  <a href="https://github.com/tidymodels/broom">
     <span class="fa fa-github fa-lg"></span>
      
   </a>
@@ -102,7 +105,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Glance at a(n) coxph object</h1>
-    <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/survival-coxph-tidiers.R'><code>R/survival-coxph-tidiers.R</code></a></small>
+    <small class="dont-index">Source: <a href='http://github.com/tidymodels/broom/blob/master/R/survival-coxph-tidiers.R'><code>R/survival-coxph-tidiers.R</code></a></small>
     <div class="hidden name"><code>glance.coxph.Rd</code></div>
     </div>
 
@@ -123,7 +126,7 @@ the measure will be reported as <code>NA</code>.</p>
     </div>
 
     <pre class="usage"><span class='co'># S3 method for coxph</span>
-<span class='fu'><a href='glance.html'>glance</a></span>(<span class='no'>x</span>, <span class='no'>...</span>)</pre>
+<span class='fu'><a href='http://www.rdocumentation.org/packages/modelgenerics/topics/generics'>glance</a></span>(<span class='no'>x</span>, <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -140,7 +143,7 @@ absorbed in <code>...</code>, where they will be ignored. If the misspelled
 argument has a default value, the default value will be used.
 For example, if you pass <code>conf.lvel = 0.9</code>, all computation will
 proceed using <code>conf.level = 0.95</code>. Additionally, if you pass
-<code>newdata = my_tibble</code> to an <code><a href='augment.html'>augment()</a></code> method that does not
+<code>newdata = my_tibble</code> to an <code><a href='http://www.rdocumentation.org/packages/modelgenerics/topics/generics'>augment()</a></code> method that does not
 accept a <code>newdata</code> argument, it will use the default value for
 the <code>data</code> argument.</p></td>
     </tr>
@@ -152,7 +155,7 @@ the <code>data</code> argument.</p></td>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='glance.html'>glance()</a></code>, <code><a href='http://www.rdocumentation.org/packages/survival/topics/coxph'>survival::coxph()</a></code></p>
+    <div class='dont-index'><p><code><a href='http://www.rdocumentation.org/packages/modelgenerics/topics/generics'>glance()</a></code>, <code><a href='http://www.rdocumentation.org/packages/survival/topics/coxph'>survival::coxph()</a></code></p>
 <p>Other coxph tidiers: <code><a href='augment.coxph.html'>augment.coxph</a></code>,
   <code><a href='tidy.coxph.html'>tidy.coxph</a></code></p>
 <p>Other survival tidiers: <code><a href='augment.coxph.html'>augment.coxph</a></code>,
@@ -169,6 +172,72 @@ the <code>data</code> argument.</p></td>
   <code><a href='tidy.survreg.html'>tidy.survreg</a></code></p></div>
     
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'>
+<span class='fu'>library</span>(<span class='no'>survival</span>)
+
+<span class='no'>cfit</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/survival/topics/coxph'>coxph</a></span>(<span class='fu'><a href='http://www.rdocumentation.org/packages/survival/topics/Surv'>Surv</a></span>(<span class='no'>time</span>, <span class='no'>status</span>) ~ <span class='no'>age</span> + <span class='no'>sex</span>, <span class='no'>lung</span>)
+
+<span class='fu'><a href='http://www.rdocumentation.org/packages/modelgenerics/topics/generics'>tidy</a></span>(<span class='no'>cfit</span>)</div><div class='output co'>#&gt; # A tibble: 2 x 5
+#&gt;   term  estimate std.error statistic p.value
+#&gt;   &lt;chr&gt;    &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;
+#&gt; 1 age     0.0170   0.00922      1.85 0.0646 
+#&gt; 2 sex    -0.513    0.167       -3.06 0.00218</div><div class='input'><span class='fu'><a href='http://www.rdocumentation.org/packages/modelgenerics/topics/generics'>tidy</a></span>(<span class='no'>cfit</span>, <span class='kw'>exponentiate</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; # A tibble: 2 x 5
+#&gt;   term  estimate std.error statistic p.value
+#&gt;   &lt;chr&gt;    &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;
+#&gt; 1 age      1.02    0.00922      1.85 0.0646 
+#&gt; 2 sex      0.599   0.167       -3.06 0.00218</div><div class='input'>
+<span class='no'>lp</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/modelgenerics/topics/generics'>augment</a></span>(<span class='no'>cfit</span>, <span class='no'>lung</span>)
+<span class='no'>risks</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/modelgenerics/topics/generics'>augment</a></span>(<span class='no'>cfit</span>, <span class='no'>lung</span>, <span class='kw'>type.predict</span> <span class='kw'>=</span> <span class='st'>"risk"</span>)
+<span class='no'>expected</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/modelgenerics/topics/generics'>augment</a></span>(<span class='no'>cfit</span>, <span class='no'>lung</span>, <span class='kw'>type.predict</span> <span class='kw'>=</span> <span class='st'>"expected"</span>)
+
+<span class='fu'><a href='http://www.rdocumentation.org/packages/modelgenerics/topics/generics'>glance</a></span>(<span class='no'>cfit</span>)</div><div class='output co'>#&gt; # A tibble: 1 x 15
+#&gt;       n nevent statistic.log p.value.log statistic.sc p.value.sc statistic.wald
+#&gt;   &lt;int&gt;  &lt;dbl&gt;         &lt;dbl&gt;       &lt;dbl&gt;        &lt;dbl&gt;      &lt;dbl&gt;          &lt;dbl&gt;
+#&gt; 1   228    165          14.1    0.000857         13.7    0.00105           13.5
+#&gt; # ... with 8 more variables: p.value.wald &lt;dbl&gt;, r.squared &lt;dbl&gt;,
+#&gt; #   r.squared.max &lt;dbl&gt;, concordance &lt;dbl&gt;, std.error.concordance &lt;dbl&gt;,
+#&gt; #   logLik &lt;dbl&gt;, AIC &lt;dbl&gt;, BIC &lt;dbl&gt;</div><div class='input'>
+<span class='co'># also works on clogit models</span>
+<span class='no'>resp</span> <span class='kw'>&lt;-</span> <span class='fu'>levels</span>(<span class='no'>logan</span>$<span class='no'>occupation</span>)
+<span class='no'>n</span> <span class='kw'>&lt;-</span> <span class='fu'>nrow</span>(<span class='no'>logan</span>)
+<span class='no'>indx</span> <span class='kw'>&lt;-</span> <span class='fu'>rep</span>(<span class='fl'>1</span>:<span class='no'>n</span>, <span class='fu'>length</span>(<span class='no'>resp</span>))
+<span class='no'>logan2</span> <span class='kw'>&lt;-</span> <span class='fu'>data.frame</span>(
+  <span class='no'>logan</span>[<span class='no'>indx</span>,],
+  <span class='kw'>id</span> <span class='kw'>=</span> <span class='no'>indx</span>,
+  <span class='kw'>tocc</span> <span class='kw'>=</span> <span class='fu'>factor</span>(<span class='fu'>rep</span>(<span class='no'>resp</span>, <span class='kw'>each</span><span class='kw'>=</span><span class='no'>n</span>))
+)
+
+<span class='no'>logan2</span>$<span class='no'>case</span> <span class='kw'>&lt;-</span> (<span class='no'>logan2</span>$<span class='no'>occupation</span> <span class='kw'>==</span> <span class='no'>logan2</span>$<span class='no'>tocc</span>)
+
+<span class='no'>cl</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/survival/topics/clogit'>clogit</a></span>(<span class='no'>case</span> ~ <span class='no'>tocc</span> + <span class='no'>tocc</span>:<span class='no'>education</span> + <span class='fu'><a href='http://www.rdocumentation.org/packages/survival/topics/strata'>strata</a></span>(<span class='no'>id</span>), <span class='no'>logan2</span>)
+<span class='fu'><a href='http://www.rdocumentation.org/packages/modelgenerics/topics/generics'>tidy</a></span>(<span class='no'>cl</span>)</div><div class='output co'>#&gt; # A tibble: 9 x 5
+#&gt;   term                       estimate std.error statistic   p.value
+#&gt;   &lt;chr&gt;                         &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;
+#&gt; 1 toccfarm                     -1.90     1.38       -1.37  1.70e- 1
+#&gt; 2 toccoperatives                1.17     0.566       2.06  3.91e- 2
+#&gt; 3 toccprofessional             -8.10     0.699     -11.6   4.45e-31
+#&gt; 4 toccsales                    -5.03     0.770      -6.53  6.54e-11
+#&gt; 5 tocccraftsmen:education      -0.332    0.0569     -5.84  5.13e- 9
+#&gt; 6 toccfarm:education           -0.370    0.116      -3.18  1.47e- 3
+#&gt; 7 toccoperatives:education     -0.422    0.0584     -7.23  4.98e-13
+#&gt; 8 toccprofessional:education    0.278    0.0510      5.45  4.94e- 8
+#&gt; 9 toccsales:education          NA        0          NA    NA       </div><div class='input'><span class='fu'><a href='http://www.rdocumentation.org/packages/modelgenerics/topics/generics'>glance</a></span>(<span class='no'>cl</span>)</div><div class='output co'>#&gt; # A tibble: 1 x 13
+#&gt;       n nevent statistic.log p.value.log statistic.sc p.value.sc statistic.wald
+#&gt;   &lt;int&gt;  &lt;dbl&gt;         &lt;dbl&gt;       &lt;dbl&gt;        &lt;dbl&gt;      &lt;dbl&gt;          &lt;dbl&gt;
+#&gt; 1  4190    838          666.   1.90e-138         682.  5.01e-142           414.
+#&gt; # ... with 6 more variables: p.value.wald &lt;dbl&gt;, r.squared &lt;dbl&gt;,
+#&gt; #   r.squared.max &lt;dbl&gt;, logLik &lt;dbl&gt;, AIC &lt;dbl&gt;, BIC &lt;dbl&gt;</div><div class='input'>
+<span class='fu'>library</span>(<span class='no'>ggplot2</span>)
+
+<span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/ggplot'>ggplot</a></span>(<span class='no'>lp</span>, <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/aes'>aes</a></span>(<span class='no'>age</span>, <span class='no'>.fitted</span>, <span class='kw'>color</span> <span class='kw'>=</span> <span class='no'>sex</span>)) +
+  <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/geom_point'>geom_point</a></span>()</div><div class='img'><img src='glance.coxph-1.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/ggplot'>ggplot</a></span>(<span class='no'>risks</span>, <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/aes'>aes</a></span>(<span class='no'>age</span>, <span class='no'>.fitted</span>, <span class='kw'>color</span> <span class='kw'>=</span> <span class='no'>sex</span>)) +
+  <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/geom_point'>geom_point</a></span>()</div><div class='img'><img src='glance.coxph-2.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/ggplot'>ggplot</a></span>(<span class='no'>expected</span>, <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/aes'>aes</a></span>(<span class='no'>time</span>, <span class='no'>.fitted</span>, <span class='kw'>color</span> <span class='kw'>=</span> <span class='no'>sex</span>)) +
+  <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/geom_point'>geom_point</a></span>()</div><div class='img'><img src='glance.coxph-3.png' alt='' width='700' height='433' /></div><div class='input'>
+
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -178,7 +247,9 @@ the <code>data</code> argument.</p></td>
       <li><a href="#value">Value</a></li>
 
       <li><a href="#see-also">See also</a></li>
-          </ul>
+      
+      <li><a href="#examples">Examples</a></li>
+    </ul>
 
   </div>
 </div>

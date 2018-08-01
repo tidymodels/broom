@@ -5,7 +5,7 @@
 #' @param conf.level confidence level for CI
 #' @template param_unused_dots
 #' 
-#' @template return_tidy_regression
+#' @evalRd return_tidy(regression = TRUE)
 #'
 #' @examples
 #'
@@ -51,20 +51,14 @@ tidy.survreg <- function(x, conf.level = .95, ...) {
 #' @templateVar class survreg
 #' @template title_desc_augment
 #' 
-#' @param x An `survreg` object returned from [survival::survreg()].
+#' @inherit tidy.survreg params examples
 #' @template param_data
 #' @template param_newdata
 #' @template param_type_residuals
 #' @template param_type_predict
 #' @template param_unused_dots
 #'
-#' @template augment_NAs
-#'
-#' @return A [tibble::tibble] with the passed data and additional columns:
-#' 
-#'   \item{.fitted}{Fitted values of model}
-#'   \item{.se.fit}{Standard errors of fitted values}
-#'   \item{.resid}{Residuals}
+#' @evalRd return_augment(".se.fit")
 #'
 #' @export
 #' @seealso [augment()], [survival::survreg()]
@@ -87,19 +81,19 @@ augment.survreg <- function(x, data = NULL, newdata = NULL,
 #' @templateVar class survreg
 #' @template title_desc_glance
 #' 
-#' @inheritParams tidy.survreg
+#' @inherit tidy.survreg params examples
 #' 
-#' @return A one-row [tibble::tibble] with columns:
+#' @evalRd return_glance(
+#'   "iter",
+#'   "df",
+#'   "p.value",
+#'   "logLik",
+#'   "AIC",
+#'   "BIC",
+#'   "df.residual",
+#'   statistic = "Chi-squared statistic."
+#' )
 #' 
-#'   \item{iter}{number of iterations}
-#'   \item{df}{degrees of freedom}
-#'   \item{statistic}{chi-squared statistic}
-#'   \item{p.value}{p-value from chi-squared test}
-#'   \item{logLik}{log likelihood}
-#'   \item{AIC}{Akaike information criterion}
-#'   \item{BIC}{Bayesian information criterion}
-#'   \item{df.residual}{residual degrees of freedom}
-#'
 #' @export
 #' @seealso [glance()], [survival::survreg()]
 #' @family survreg tidiers

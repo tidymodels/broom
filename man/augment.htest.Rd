@@ -20,18 +20,6 @@ proceed using \code{conf.level = 0.95}. Additionally, if you pass
 accept a \code{newdata} argument, it will use the default value for
 the \code{data} argument.}
 }
-\value{
-Errors unless \code{x} is a chi-squared test. If \code{x} is a chi-squared
-test, for each cell of the tested table returns columns:
-
-\item{.observed}{Observed count}
-\item{.prop}{Proportion of the total}
-\item{.row.prop}{Row proportion (2 dimensions table only)}
-\item{.col.prop}{Column proportion (2 dimensions table only)}
-\item{.expected}{Expected count under the null hypothesis}
-\item{.residuals}{Pearson residual}
-\item{.stdres}{Standardized residual}
-}
 \description{
 Augment accepts a model object and a dataset and adds
 information about each observation in the dataset. Most commonly, this
@@ -75,6 +63,26 @@ missing at this time.
 See \code{\link[stats:chisq.test]{stats::chisq.test()}} for more details on
 how residuals are computed.
 }
+\examples{
+
+tt <- t.test(rnorm(10))
+tidy(tt)
+glance(tt)  # same output for all htests
+
+tt <- t.test(mpg ~ am, data = mtcars)
+tidy(tt)
+
+wt <- wilcox.test(mpg ~ am, data = mtcars, conf.int = TRUE, exact = FALSE)
+tidy(wt)
+
+ct <- cor.test(mtcars$wt, mtcars$mpg)
+tidy(ct)
+
+chit <- chisq.test(xtabs(Freq ~ Sex + Class, data = as.data.frame(Titanic)))
+tidy(chit)
+augment(chit)
+
+}
 \seealso{
 \code{\link[=augment]{augment()}}, \code{\link[stats:chisq.test]{stats::chisq.test()}}
 
@@ -83,3 +91,14 @@ Other htest tidiers: \code{\link{tidy.htest}},
   \code{\link{tidy.power.htest}}
 }
 \concept{htest tidiers}
+\value{
+A \code{\link[tibble:tibble]{tibble::tibble()}} with exactly one row and columns:
+  \item{.observed}{Observed count.}
+  \item{.prop}{Proportion of the total.}
+  \item{.row.prop}{Row proportion (2 dimensions table only).}
+  \item{.col.prop}{Column proportion (2 dimensions table only).}
+  \item{.expected}{Expected count under the null hypothesis.}
+  \item{.residuals}{Pearson residual.}
+  \item{.stdres}{Standardized residual.}
+
+}

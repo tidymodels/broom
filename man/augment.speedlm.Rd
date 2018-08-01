@@ -4,7 +4,7 @@
 \alias{augment.speedlm}
 \title{Augment data with information from a(n) speedlm object}
 \usage{
-\method{augment}{speedlm}(x, data = model.frame(x), newdata = data,
+\method{augment}{speedlm}(x, data = model.frame(x), newdata = NULL,
   ...)
 }
 \arguments{
@@ -32,10 +32,6 @@ proceed using \code{conf.level = 0.95}. Additionally, if you pass
 \code{newdata = my_tibble} to an \code{\link[=augment]{augment()}} method that does not
 accept a \code{newdata} argument, it will use the default value for
 the \code{data} argument.}
-}
-\value{
-A \link[tibble:tibble]{tibble::tibble} containing the original data and one additional
-column \code{.fitted}.
 }
 \description{
 Augment accepts a model object and a dataset and adds
@@ -76,6 +72,15 @@ We are in the process of defining behaviors for models fit with various
 \link{na.action} arguments, but make no guarantees about behavior when data is
 missing at this time.
 }
+\examples{
+
+mod <- speedglm::speedlm(mpg ~ wt + qsec, data = mtcars)
+
+tidy(mod)
+glance(mod)
+augment(mod)
+
+}
 \seealso{
 \code{\link[speedglm:speedlm]{speedglm::speedlm()}}
 
@@ -83,3 +88,9 @@ Other speedlm tidiers: \code{\link{glance.speedlm}},
   \code{\link{tidy.speedlm}}
 }
 \concept{speedlm tidiers}
+\value{
+A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
+  \item{.fitted}{Fitted / predicted value.}
+  \item{.resid}{Residuals of fitted values. TODO -- document when present. Residuals on which data set?}
+
+}

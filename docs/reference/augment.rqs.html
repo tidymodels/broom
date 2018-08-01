@@ -77,6 +77,9 @@
       <a href="../articles/broom_and_dplyr.html">Broom and dplyr</a>
     </li>
     <li>
+      <a href="../articles/external-tidiers.html">Tidiers in external packages</a>
+    </li>
+    <li>
       <a href="../articles/kmeans.html">K-means</a>
     </li>
   </ul>
@@ -85,7 +88,7 @@
   <a href="../news/index.html">News</a>
 </li>
         <li>
-  <a href="https://github.com/tidyverse/broom">
+  <a href="https://github.com/tidymodels/broom">
     <span class="fa fa-github fa-lg"></span>
      
   </a>
@@ -102,7 +105,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Augment data with information from a(n) rqs object</h1>
-    <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/quantreg-rqs-tidiers.R'><code>R/quantreg-rqs-tidiers.R</code></a></small>
+    <small class="dont-index">Source: <a href='http://github.com/tidymodels/broom/blob/master/R/quantreg-rqs-tidiers.R'><code>R/quantreg-rqs-tidiers.R</code></a></small>
     <div class="hidden name"><code>augment.rqs.Rd</code></div>
     </div>
 
@@ -125,7 +128,7 @@ the model are present.</p>
 associated with training observations (such as influences or related)
 measures that is not meaningfully defined for new observations.</p>
 <p>For convenience, many augment methods provide default <code>data</code> arguments,
-so that <code><a href='augment.html'>augment(fit)</a></code> will return the augmented training data. In these
+so that <code><a href='http://www.rdocumentation.org/packages/modelgenerics/topics/generics'>augment(fit)</a></code> will return the augmented training data. In these
 cases augment tries to reconstruct the original data based on the model
 object, with some varying degrees of success.</p>
 <p>The augmented dataset is always returned as a <a href='http://www.rdocumentation.org/packages/tibble/topics/tibble'>tibble::tibble</a> with the
@@ -144,7 +147,7 @@ missing at this time.</p>
     </div>
 
     <pre class="usage"><span class='co'># S3 method for rqs</span>
-<span class='fu'><a href='augment.html'>augment</a></span>(<span class='no'>x</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='fu'>model.frame</span>(<span class='no'>x</span>), <span class='no'>newdata</span>, <span class='no'>...</span>)</pre>
+<span class='fu'><a href='http://www.rdocumentation.org/packages/modelgenerics/topics/generics'>augment</a></span>(<span class='no'>x</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='fu'>model.frame</span>(<span class='no'>x</span>), <span class='no'>newdata</span>, <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -157,7 +160,7 @@ missing at this time.</p>
       <th>data</th>
       <td><p>A <code>data.frame()</code> or <code><a href='http://www.rdocumentation.org/packages/tibble/topics/tibble'>tibble::tibble()</a></code> containing the original
 data that was used to produce the object <code>x</code>. Defaults to
-<code><a href='http://www.rdocumentation.org/packages/stats/topics/model.frame'>stats::model.frame(x)</a></code> so that <code><a href='augment.html'>augment(my_fit)</a></code> returns the augmented
+<code><a href='http://www.rdocumentation.org/packages/stats/topics/model.frame'>stats::model.frame(x)</a></code> so that <code><a href='http://www.rdocumentation.org/packages/modelgenerics/topics/generics'>augment(my_fit)</a></code> returns the augmented
 original data. <strong>Do not</strong> pass new data to the <code>data</code> argument.
 Augment will report information such as influence and cooks distance for
 data passed to the <code>data</code> argument. These measures are only defined for
@@ -169,6 +172,10 @@ the original training data.</p></td>
 the original predictors used to create <code>x</code>. Defaults to <code>NULL</code>, indicating
 that nothing has been passed to <code>newdata</code>. If <code>newdata</code> is specified,
 the <code>data</code> argument will be ignored.</p></td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td><p>Additional arguments passed to <code><a href='http://www.rdocumentation.org/packages/quantreg/topics/summary.rq'>quantreg::summary.rqs()</a></code></p></td>
     </tr>
     <tr>
       <th>...</th>
@@ -200,26 +207,16 @@ the <code>data</code> argument will be ignored.</p></td>
     </tr>
     </table>
     
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>A <a href='http://www.rdocumentation.org/packages/tibble/topics/tibble'>tibble::tibble</a> with one row per obseration and columns:</p>
-<dt>.resid</dt><dd><p>Residuals</p></dd>
-<dt>.fitted</dt><dd><p>Fitted quantiles of the model</p></dd>
-<dt>.tau</dt><dd><p>Quantile estimated</p></dd>
-
-Depending on the arguments passed on to predict.rqs via ...,
+    <p>Depending on the arguments passed on to <code>predict.rq</code> via <code>...</code>,
 a confidence interval is also calculated on the fitted values resulting in
-columns:
-<dt>.conf.low</dt><dd><p>Lower confidence interval value</p></dd>
-<dt>.conf.high</dt><dd><p>Upper confidence interval value</p></dd>
-
-predict.rqs does not provide confidence intervals when newdata
-is provided.
-
+columns <code>.conf.low</code> and <code>.conf.high</code>. Does not provide confidence
+intervals when data is specified via the <code>newdata</code> argument.</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><a href='augment.html'>augment</a>, <code><a href='http://www.rdocumentation.org/packages/quantreg/topics/rq'>quantreg::rq()</a></code>, <code><a href='http://www.rdocumentation.org/packages/quantreg/topics/predict.rq'>quantreg::predict.rqs()</a></code></p>
+    <div class='dont-index'><p><a href='http://www.rdocumentation.org/packages/modelgenerics/topics/generics'>augment</a>, <code><a href='http://www.rdocumentation.org/packages/quantreg/topics/rq'>quantreg::rq()</a></code>, <code><a href='http://www.rdocumentation.org/packages/quantreg/topics/predict.rq'>quantreg::predict.rqs()</a></code></p>
 <p>Other quantreg tidiers: <code><a href='augment.nlrq.html'>augment.nlrq</a></code>,
   <code><a href='augment.rq.html'>augment.rq</a></code>, <code><a href='glance.nlrq.html'>glance.nlrq</a></code>,
   <code><a href='glance.rq.html'>glance.rq</a></code>, <code><a href='tidy.nlrq.html'>tidy.nlrq</a></code>,
@@ -232,7 +229,7 @@ is provided.
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
       
-      <li><a href="#value">Value</a></li>
+      <li><a href="#details">Details</a></li>
 
       <li><a href="#see-also">See also</a></li>
           </ul>

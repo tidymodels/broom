@@ -4,12 +4,10 @@
 #' @param x A univariate or multivariate `ts` times series object.
 #' @template param_unused_dots
 #' 
-#' @return A [tibble::tibble] with one row for each observation and columns:
+#' @evalRd return_tidy("index", "series", "value")
 #' 
-#'   \item{index}{Index (i.e. date or time) for the "ts" object.}
-#'   \item{series}{Name of the series (multivariate "ts" objects only).}
-#'   \item{value}{Value of the observation.}
-#'
+#' @details `series` column is only present for multivairate `ts` objects.
+#' 
 #' @examples
 #'
 #' set.seed(678)
@@ -46,10 +44,7 @@ tidy.ts <- function(x, ...) {
 #'   [stats::ccf()].
 #' @template param_unused_dots
 #' 
-#' @return A [tibble::tibble] with columns:
-#' 
-#'  \item{lag}{lag values}
-#'  \item{acf}{calculated correlation}
+#' @evalRd return_tidy("lag", "acf")
 #'  
 #' @examples
 #' 
@@ -71,8 +66,8 @@ tidy.acf <- function(x, ...) {
 #' @param x A `spec` object created by [stats::spectrum()].
 #' @template param_unused_dots
 #'
-#' @return A [tibble::tibble] with two columns: `freq` and `spec`.
-#'
+#' @evalRd return_tidy("freq", "spec")
+#' 
 #' @examples
 #'
 #' spc <- spectrum(lh)

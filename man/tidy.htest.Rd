@@ -24,24 +24,6 @@ proceed using \code{conf.level = 0.95}. Additionally, if you pass
 accept a \code{newdata} argument, it will use the default value for
 the \code{data} argument.}
 }
-\value{
-A one-row \link[tibble:tibble]{tibble::tibble} with one or more of the following
-columns, depending on which hypothesis test was used.
-
-\item{estimate}{Estimate of the effect size}
-\item{statistic}{Test statistic used to compute the p-value}
-\item{p.value}{P-value}
-\item{parameter}{Parameter field in the htest, typically degrees of
-freedom}
-\item{conf.low}{Lower bound on a confidence interval}
-\item{conf.high}{Upper bound on a confidence interval}
-\item{estimate1}{Sometimes two estimates are computed, such as in a
-two-sample t-test}
-\item{estimate2}{Sometimes two estimates are computed, such as in a
-two-sample t-test}
-\item{method}{Method used to compute the statistic as a string}
-\item{alternative}{Alternative hypothesis as a string}
-}
 \description{
 For models that have only a single component, the \code{\link[=tidy]{tidy()}} and
 \code{\link[=glance]{glance()}} methods are identical. Please see the documentation for both
@@ -76,3 +58,17 @@ Other htest tidiers: \code{\link{augment.htest}},
   \code{\link{tidy.power.htest}}
 }
 \concept{htest tidiers}
+\value{
+A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
+  \item{alternative}{Alternative hypothesis (character).}
+  \item{conf.high}{The upper end of a confidence interval for the term under consideration. Included only if `conf.int = TRUE`.}
+  \item{conf.low}{The lower end of a confidence interval for the term under consideration. Included only if `conf.int = TRUE`.}
+  \item{estimate}{The estimated value of the regression term.}
+  \item{estimate1}{Sometimes two estimates are computed, such as in a two-sample t-test}
+  \item{estimate2}{Sometimes two estimates are computed, such as in a two-sample t-test}
+  \item{method}{Needs custom info.}
+  \item{p.value}{The two-sided p-value associated with the observed statistic.}
+  \item{parameter}{Needs custom info.}
+  \item{statistic}{The value of a T-statistic to use in a hypothesis that the regression term is non-zero.}
+
+}

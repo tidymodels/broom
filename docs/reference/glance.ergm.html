@@ -77,6 +77,9 @@
       <a href="../articles/broom_and_dplyr.html">Broom and dplyr</a>
     </li>
     <li>
+      <a href="../articles/external-tidiers.html">Tidiers in external packages</a>
+    </li>
+    <li>
       <a href="../articles/kmeans.html">K-means</a>
     </li>
   </ul>
@@ -85,7 +88,7 @@
   <a href="../news/index.html">News</a>
 </li>
         <li>
-  <a href="https://github.com/tidyverse/broom">
+  <a href="https://github.com/tidymodels/broom">
     <span class="fa fa-github fa-lg"></span>
      
   </a>
@@ -102,7 +105,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Glance at a(n) ergm object</h1>
-    <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/ergm-tidiers.R'><code>R/ergm-tidiers.R</code></a></small>
+    <small class="dont-index">Source: <a href='http://github.com/tidymodels/broom/blob/master/R/ergm-tidiers.R'><code>R/ergm-tidiers.R</code></a></small>
     <div class="hidden name"><code>glance.ergm.Rd</code></div>
     </div>
 
@@ -123,7 +126,7 @@ the measure will be reported as <code>NA</code>.</p>
     </div>
 
     <pre class="usage"><span class='co'># S3 method for ergm</span>
-<span class='fu'><a href='glance.html'>glance</a></span>(<span class='no'>x</span>, <span class='kw'>deviance</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>mcmc</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='no'>...</span>)</pre>
+<span class='fu'><a href='http://www.rdocumentation.org/packages/modelgenerics/topics/generics'>glance</a></span>(<span class='no'>x</span>, <span class='kw'>deviance</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>mcmc</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -150,33 +153,28 @@ burn-in and sample size used to estimate the model. Defaults to <code>FALSE</cod
     </tr>
     </table>
     
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
-
-    <p><code>glance.ergm</code> returns a one-row data.frame with the columns</p>
-<dt>independence</dt><dd><p>Whether the model assumed dyadic independence</p></dd>
-<dt>iterations</dt><dd><p>The number of iterations performed before convergence</p></dd>
-<dt>logLik</dt><dd><p>If applicable, the log-likelihood associated with the model</p></dd>
-<dt>AIC</dt><dd><p>The Akaike Information Criterion</p></dd>
-<dt>BIC</dt><dd><p>The Bayesian Information Criterion</p></dd>
-
-If deviance = TRUE, and if the model supports it, the
-data frame will also contain the columns
-<dt>null.deviance</dt><dd><p>The null deviance of the model</p></dd>
-<dt>df.null</dt><dd><p>The degrees of freedom of the null deviance</p></dd>
-<dt>residual.deviance</dt><dd><p>The residual deviance of the model</p></dd>
-<dt>df.residual</dt><dd><p>The degrees of freedom of the residual deviance</p></dd>
-
-Last, if mcmc = TRUE, the data frame will also contain
-the columns
-<dt>MCMC.interval</dt><dd><p>The interval used during MCMC estimation</p></dd>
-<dt>MCMC.burnin</dt><dd><p>The burn-in period of the MCMC estimation</p></dd>
-<dt>MCMC.samplesize</dt><dd><p>The sample size used during MCMC estimation</p></dd>
-
-    
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='glance.html'>glance()</a></code>, <code><a href='http://www.rdocumentation.org/packages/ergm/topics/ergm'>ergm::ergm()</a></code>, <code><a href='http://www.rdocumentation.org/packages/ergm/topics/summary.ergm'>ergm::summary.ergm()</a></code></p>
+    <div class='dont-index'><p><code><a href='http://www.rdocumentation.org/packages/modelgenerics/topics/generics'>glance()</a></code>, <code><a href='http://www.rdocumentation.org/packages/ergm/topics/ergm'>ergm::ergm()</a></code>, <code><a href='http://www.rdocumentation.org/packages/ergm/topics/summary.ergm'>ergm::summary.ergm()</a></code></p>
 <p>Other ergm tidiers: <code><a href='tidy.ergm.html'>tidy.ergm</a></code></p></div>
+    
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>A <code><a href='http://www.rdocumentation.org/packages/tibble/topics/tibble'>tibble::tibble()</a></code> with exactly one row and columns:</p>
+<dt>AIC</dt><dd><p>Akaike's Information Criterion for the model.</p></dd>
+  <dt>BIC</dt><dd><p>Bayesian Information Criterion for the model.</p></dd>
+  <dt>df.null</dt><dd><p>Needs custom info.</p></dd>
+  <dt>df.residual</dt><dd><p>Residual degrees of freedom for the model.</p></dd>
+  <dt>iterations</dt><dd><p>The number of iterations performed before convergence</p></dd>
+  <dt>logLik</dt><dd><p>The log-likelihood of the model. [stats::logLik()] may be a useful reference.</p></dd>
+  <dt>MCMC.burnin</dt><dd><p>The burn-in period of the MCMC estimation</p></dd>
+  <dt>MCMC.interval</dt><dd><p>The interval used during MCMC estimation</p></dd>
+  <dt>MCMC.samplesize</dt><dd><p>The sample size used during MCMC estimation</p></dd>
+  <dt>null.deviance</dt><dd><p>Deviance of the null model.</p></dd>
+  <dt>residual.deviance</dt><dd><p>The residual deviance of the model</p></dd>
+  <dt>independence</dt><dd><p>Whether the model assumed dyadic independence</p></dd>
+
+
     
 
   </div>
@@ -185,9 +183,9 @@ the columns
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
       
-      <li><a href="#value">Value</a></li>
-
       <li><a href="#see-also">See also</a></li>
+
+      <li><a href="#value">Value</a></li>
           </ul>
 
   </div>

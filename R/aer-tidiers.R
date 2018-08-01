@@ -6,6 +6,8 @@
 #' @template param_exponentiate
 #' @template param_unused_dots
 #' 
+#' @evalRd return_tidy(regression = TRUE)
+#' 
 #' @examples
 #' 
 #' library(AER)
@@ -24,6 +26,8 @@
 #' tidy(ivr, conf.int = TRUE, exponentiate = TRUE)
 #'
 #' augment(ivr)
+#' augment(ivr, data = CigarettesSW)
+#' augment(ivr, newdata = CigarettesSW)
 #'
 #' glance(ivr)
 #' 
@@ -57,6 +61,8 @@ tidy.ivreg <- function(x,
 #' @template param_data
 #' @template param_newdata
 #' @template param_unused_dots
+#' 
+#' @evalRd return_augment()
 #'
 #' @export
 #' @seealso [augment()], [AER::ivreg()]
@@ -73,10 +79,21 @@ augment.ivreg <- function(x, data = model.frame(x), newdata = NULL, ...) {
 #'   p-values for Sargan, Wu-Hausman and weak instrument tests. Defaults to
 #'   `FALSE`.
 #' 
-#' @return 
-#' 
-#'   \item{statistic}{Wald test statistic.}
-#'   \item{p.value}{P-value for the Wald test.}
+#' @evalRd return_glance(
+#'   "r.squared",
+#'   "adj.r.squared",
+#'   "sigma",
+#'   "df",
+#'   "df.residual",
+#'   "statistic.Sargan",
+#'   "p.value.Sargan",
+#'   "statistic.Wu.Hausman",
+#'   "p.value.Wu.Hausman",
+#'   "statistic.weakinst",
+#'   "p.value.weakinst",
+#'   statistic = "Wald test statistic.",
+#'   p.value = "P-value for the Wald test."
+#' )
 #'
 #' @export
 #' @seealso [glance()], [AER::ivreg()]

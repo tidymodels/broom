@@ -9,9 +9,13 @@
 \arguments{
 \item{x}{A \code{poLCA} object returned from \code{\link[poLCA:poLCA]{poLCA::poLCA()}}.}
 
-\item{data}{The original dataset used to fit the latent class model, as
-a tibble or data. If not given, uses manifest variables in
-\code{x$y} and, if applicable, covariates in \code{x$x}}
+\item{data}{A \code{\link[=data.frame]{data.frame()}} or \code{\link[tibble:tibble]{tibble::tibble()}} containing the original
+data that was used to produce the object \code{x}. Defaults to
+\code{stats::model.frame(x)} so that \code{augment(my_fit)} returns the augmented
+original data. \strong{Do not} pass new data to the \code{data} argument.
+Augment will report information such as influence and cooks distance for
+data passed to the \code{data} argument. These measures are only defined for
+the original training data.}
 
 \item{...}{Additional arguments. Not used. Needed to match generic
 signature only. \strong{Cautionary note:} Misspelled arguments will be
@@ -22,23 +26,6 @@ proceed using \code{conf.level = 0.95}. Additionally, if you pass
 \code{newdata = my_tibble} to an \code{\link[=augment]{augment()}} method that does not
 accept a \code{newdata} argument, it will use the default value for
 the \code{data} argument.}
-}
-\value{
-A \link[tibble:tibble]{tibble::tibble} with one row for each original observation,
-with additional columns:
-
-\item{.class}{Predicted class, using modal assignment}
-\item{.probability}{Posterior probability of predicted class}
-
-If the \code{data} argument is given, those columns are included in the output
-(only rows for which predictions could be made).
-Otherwise, the \code{y} element of the poLCA object, which contains the
-manifest variables used to fit the model, are used, along with any covariates,
-if present, in \code{x}.
-
-Note that while the probability of all the classes (not just the predicted
-modal class) can be found in the \code{posterior} element, these are not
-included in the augmented output.
 }
 \description{
 Augment accepts a model object and a dataset and adds
@@ -79,6 +66,65 @@ We are in the process of defining behaviors for models fit with various
 \link{na.action} arguments, but make no guarantees about behavior when data is
 missing at this time.
 }
+\details{
+If the \code{data} argument is given, those columns are included in
+the output (only rows for which predictions could be made).
+Otherwise, the \code{y} element of the poLCA object, which contains the
+manifest variables used to fit the model, are used, along with any
+covariates, if present, in \code{x}.
+
+Note that while the probability of all the classes (not just the predicted
+modal class) can be found in the \code{posterior} element, these are not
+included in the augmented output.
+}
+\examples{
+
+library(poLCA)
+library(dplyr)
+
+data(values)
+f <- cbind(A, B, C, D)~1
+M1 <- poLCA(f, values, nclass = 2, verbose = FALSE)
+
+M1
+tidy(M1)
+augment(M1)
+glance(M1)
+
+library(ggplot2)
+
+ggplot(tidy(M1), aes(factor(class), estimate, fill = factor(outcome))) +
+  geom_bar(stat = "identity", width = 1) +
+  facet_wrap(~ variable)
+## Three-class model with a single covariate.
+
+data(election)
+f2a <- cbind(MORALG,CARESG,KNOWG,LEADG,DISHONG,INTELG,
+             MORALB,CARESB,KNOWB,LEADB,DISHONB,INTELB)~PARTY
+nes2a <- poLCA(f2a, election, nclass = 3, nrep = 5, verbose = FALSE)
+
+td <- tidy(nes2a)
+td
+
+# show
+
+ggplot(td, aes(outcome, estimate, color = factor(class), group = class)) +
+  geom_line() +
+  facet_wrap(~ variable, nrow = 2) +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1))
+
+au <- augment(nes2a)
+au
+au \%>\%
+  count(.class)
+
+# if the original data is provided, it leads to NAs in new columns
+# for rows that weren't predicted
+au2 <- augment(nes2a, data = election)
+au2
+dim(au2)
+
+}
 \seealso{
 \code{\link[=augment]{augment()}}, \code{\link[poLCA:poLCA]{poLCA::poLCA()}}
 
@@ -86,3 +132,9 @@ Other poLCA tidiers: \code{\link{glance.poLCA}},
   \code{\link{tidy.poLCA}}
 }
 \concept{poLCA tidiers}
+\value{
+A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
+  \item{.class}{The predicted class. Needs custom info. (TODO -- make this a factor?)}
+  \item{.probability}{Posterior probability of predicted class  If the `data` argument is given, those columns are included in the output (only rows for which predictions could be made). Otherwise, the `y` element of the poLCA object, which contains the manifest variables used to fit the model, are used, along with any covariates, if present, in `x`.  Note that while the probability of all the classes (not just the predicted modal class) can be found in the `posterior` element, these are not included in the augmented output.}
+
+}

@@ -4,12 +4,12 @@
 #' @param x A `kappa` object returned from [psych::cohen.kappa()].
 #' @template param_unused_dots
 #' 
-#' @return A [tibble::tibble] with columns:
-#' 
-#'   \item{type}{Either "weighted" or "unweighted"}
-#'   \item{estimate}{The estimated value of kappa with this method}
-#'   \item{conf.low}{Lower bound of confidence interval}
-#'   \item{conf.high}{Upper bound of confidence interval}
+#' @evalRd return_tidy(
+#'   type = "Either `weighted` or `unweighted`.",
+#'   "estimate",
+#'   "conf.low",
+#'   "conf.high"
+#' )
 #'
 #' @details Note that confidence level (alpha) for the confidence interval
 #'   cannot be set in `tidy`. Instead you must set the `alpha` argument

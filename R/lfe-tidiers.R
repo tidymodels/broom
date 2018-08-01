@@ -7,40 +7,38 @@
 #'   fixed effects. Defaults to `FALSE`.
 #' @template param_unused_dots
 #'
-#' @template return_tidy_regression
-#'
-#' @return If `fe = TRUE`, also includes rows for for fixed effects estimates.
+#' @evalRd return_tidy(regression = TRUE)
 #'   
 #' @examples
-#'
-#' if (require("lfe", quietly = TRUE)) {
 #' 
-#'     library(lfe)
-#'     
-#'     N=1e2
-#'     DT <- data.frame(
-#'       id = sample(5, N, TRUE),
-#'       v1 =  sample(5, N, TRUE),
-#'       v2 =  sample(1e6, N, TRUE),
-#'       v3 =  sample(round(runif(100,max=100),4), N, TRUE),
-#'       v4 =  sample(round(runif(100,max=100),4), N, TRUE)
-#'     )
+#' library(lfe)
+#' 
+#' N=1e2
+#' DT <- data.frame(
+#'   id = sample(5, N, TRUE),
+#'   v1 =  sample(5, N, TRUE),
+#'   v2 =  sample(1e6, N, TRUE),
+#'   v3 =  sample(round(runif(100,max=100),4), N, TRUE),
+#'   v4 =  sample(round(runif(100,max=100),4), N, TRUE)
+#' )
 #'
-#'     result_felm <- felm(v2~v3, DT)
-#'     tidy(result_felm)
-#'     augment(result_felm)
-#'     result_felm <- felm(v2~v3|id+v1, DT)
-#'     tidy(result_felm, fe = TRUE)
-#'     augment(result_felm)
-#'     v1<-DT$v1
-#'     v2 <- DT$v2
-#'     v3 <- DT$v3
-#'     id <- DT$id
-#'     result_felm <- felm(v2~v3|id+v1)
-#'     tidy(result_felm)
-#'     augment(result_felm)
-#'     glance(result_felm)
-#' }
+#' result_felm <- felm(v2~v3, DT)
+#' tidy(result_felm)
+#' augment(result_felm)
+#' 
+#' result_felm <- felm(v2~v3|id+v1, DT)
+#' tidy(result_felm, fe = TRUE)
+#' augment(result_felm)
+#' 
+#' v1<-DT$v1
+#' v2 <- DT$v2
+#' v3 <- DT$v3
+#' id <- DT$id
+#' result_felm <- felm(v2~v3|id+v1)
+#' 
+#' tidy(result_felm)
+#' augment(result_felm)
+#' glance(result_felm)
 #'
 #' @export
 #' @aliases felm_tidiers lfe_tidiers
@@ -87,10 +85,10 @@ tidy.felm <- function(x, conf.int = FALSE, conf.level = .95, fe = FALSE, ...) {
 #' @templateVar class felm
 #' @template title_desc_augment
 #' 
-#' @inheritParams tidy.felm
+#' @inherit tidy.felm params examples
 #' @template param_data 
 #' 
-#' @template return_augment_columns
+#' @evalRd return_augment()
 #' 
 #' @export
 #' @family felm tidiers
@@ -115,17 +113,17 @@ augment.felm <- function(x, data = NULL, ...) {
 #' @templateVar class felm
 #' @template title_desc_glance
 #' 
-#' @inheritParams tidy.felm
-#'
-#' @return A one-row [tibble::tibble] with columns:
+#' @inherit tidy.felm params examples
 #' 
-#'   \item{r.squared}{The percent of variance explained by the model}
-#'   \item{adj.r.squared}{r.squared adjusted based on the degrees of freedom}
-#'   \item{sigma}{The square root of the estimated residual variance}
-#'   \item{statistic}{F-statistic}
-#'   \item{p.value}{p-value from the F test}
-#'   \item{df}{Degrees of freedom used by the coefficients}
-#'   \item{df.residual}{residual degrees of freedom}
+#' @evalRd return_glance(
+#'   "r.squared",
+#'   "adj.r.squared",
+#'   "sigma",
+#'   "statistic",
+#'   "p.value",
+#'   "df",
+#'   "df.residual"
+#' )
 #'
 #' @export
 glance.felm <- function(x, ...) {

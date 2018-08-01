@@ -19,14 +19,6 @@ proceed using \code{conf.level = 0.95}. Additionally, if you pass
 accept a \code{newdata} argument, it will use the default value for
 the \code{data} argument.}
 }
-\value{
-A one-row \link[tibble:tibble]{tibble::tibble} with columns:
-
-\item{totss}{The total sum of squares}
-\item{tot.withinss}{The total within-cluster sum of squares}
-\item{betweenss}{The total between-cluster sum of squares}
-\item{iter}{The numbr of (outer) iterations}
-}
 \description{
 Glance accepts a model object and returns a \code{\link[tibble:tibble]{tibble::tibble()}}
 with exactly one row of model summaries. The summaries are typically
@@ -49,3 +41,11 @@ Other kmeans tidiers: \code{\link{augment.kmeans}},
   \code{\link{tidy.kmeans}}
 }
 \concept{kmeans tidiers}
+\value{
+A \code{\link[tibble:tibble]{tibble::tibble()}} with exactly one row and columns:
+  \item{betweenss}{The total between-cluster sum of squares}
+  \item{iter}{Iterations of algorithm/fitting procedure completed.}
+  \item{tot.withinss}{The total within-cluster sum of squares}
+  \item{totss}{The total sum of squares}
+
+}

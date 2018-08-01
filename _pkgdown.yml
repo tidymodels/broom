@@ -9,6 +9,12 @@ home:
 
 reference:
 
+- title: Tidying generics
+  contents:
+  - tidy
+  - glance
+  - augment
+
 - title: Tidiers
   contents:
   - starts_with('tidy')
@@ -39,6 +45,8 @@ navbar:
       href: articles/bootstrapping.html
     - text: Broom and dplyr
       href: articles/broom_and_dplyr.html
+    - text: Tidiers in external packages
+      href: articles/external-tidiers.html
     - text: K-means
       href: articles/kmeans.html
   - text: News

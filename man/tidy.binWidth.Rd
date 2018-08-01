@@ -20,13 +20,6 @@ proceed using \code{conf.level = 0.95}. Additionally, if you pass
 accept a \code{newdata} argument, it will use the default value for
 the \code{data} argument.}
 }
-\value{
-A one-row \link[tibble:tibble]{tibble::tibble} with columns:
-\item{ci.width}{Expected width of confidence interval.}
-\item{alternative}{Alternative hypothesis.}
-\item{p}{True proportion.}
-\item{n}{Total sample size.}
-}
 \description{
 Tidy summarizes information about the components of a model.
 A model component might be a single term in a regression, a single
@@ -53,3 +46,11 @@ Other bingroup tidiers: \code{\link{glance.binDesign}},
   \code{\link{tidy.binDesign}}
 }
 \concept{bingroup tidiers}
+\value{
+A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
+  \item{alternative}{Alternative hypothesis (character).}
+  \item{ci.width}{Expected width of confidence interval.}
+  \item{p}{True proportion.}
+  \item{n}{Total sample size}
+
+}
