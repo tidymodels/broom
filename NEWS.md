@@ -113,13 +113,16 @@ Several old vignettes have also been updated:
 - Added tidiers for the `lavaan` package (#233 by @puterleat)
 - Added `conf.int` argument to `tidy.coxph` (#220 by @larmarange)
 - Added `augment` method for chi-squared tests (#138 by @larmarange)
+- changed default se.type for `tidy.rq` to match that of `quantreg::summary.rq()` (#404 by @ethchr)
 - Many small improvements throughout
 
 ## Contributors
 
-Many many thanks to all the following for their thoughtful comments on design, bug reports and PRs! The community of broom contributors has been kind, supportive and insighftul and I look forward to working you all again!
+Many many thanks to all the following for their thoughtful comments on design, bug reports and PRs! The community of broom contributors has been kind, supportive and insightful and I look forward to working you all again!
 
-[@atyre2](https://github.com/atyre2), [@batpigandme](https://github.com/batpigandme), [@bfgray3](https://github.com/bfgray3), [@bmannakee](https://github.com/bmannakee), [@briatte](https://github.com/briatte), [@cawoodjm](https://github.com/cawoodjm), [@cimentadaj](https://github.com/cimentadaj), [@dan87134](https://github.com/dan87134), [@dgrtwo](https://github.com/dgrtwo), [@dmenne](https://github.com/dmenne), [@ekatko1](https://github.com/ekatko1), [@ellessenne](https://github.com/ellessenne), [@erleholgersen](https://github.com/erleholgersen), [@Hong-Revo](https://github.com/Hong-Revo), [@huftis](https://github.com/huftis), [@IndrajeetPatil](https://github.com/IndrajeetPatil), [@jacob-long](https://github.com/jacob-long), [@jarvisc1](https://github.com/jarvisc1), [@jenzopr](https://github.com/jenzopr), [@jgabry](https://github.com/jgabry), [@jimhester](https://github.com/jimhester), [@josue-rodriguez](https://github.com/josue-rodriguez), [@karldw](https://github.com/karldw), [@kfeilich](https://github.com/kfeilich), [@larmarange](https://github.com/larmarange), [@lboller](https://github.com/lboller), [@mariusbarth](https://github.com/mariusbarth), [@michaelweylandt](https://github.com/michaelweylandt), [@mine-cetinkaya-rundel](https://github.com/mine-cetinkaya-rundel), [@mkuehn10](https://github.com/mkuehn10), [@mvevans89](https://github.com/mvevans89), [@nutterb](https://github.com/nutterb), [@ShreyasSingh](https://github.com/ShreyasSingh), [@stephlocke](https://github.com/stephlocke), [@strengejacke](https://github.com/strengejacke), [@topepo](https://github.com/topepo), [@willbowditch](https://github.com/willbowditch), [@WillemSleegers](https://github.com/WillemSleegers), and [@wilsonfreitas](https://github.com/wilsonfreitas)
+[@atyre2](https://github.com/atyre2), [@batpigandme](https://github.com/batpigandme), [@bfgray3](https://github.com/bfgray3), [@bmannakee](https://github.com/bmannakee), [@briatte](https://github.com/briatte), [@cawoodjm](https://github.com/cawoodjm), [@cimentadaj](https://github.com/cimentadaj), [@dan87134](https://github.com/dan87134), [@dgrtwo](https://github.com/dgrtwo), [@dmenne](https://github.com/dmenne), [@ekatko1](https://github.com/ekatko1), [@ellessenne](https://github.com/ellessenne), [@erleholgersen](https://github.com/erleholgersen),
+[@ethchr](https://github.com/ethchr),
+[@Hong-Revo](https://github.com/Hong-Revo), [@huftis](https://github.com/huftis), [@IndrajeetPatil](https://github.com/IndrajeetPatil), [@jacob-long](https://github.com/jacob-long), [@jarvisc1](https://github.com/jarvisc1), [@jenzopr](https://github.com/jenzopr), [@jgabry](https://github.com/jgabry), [@jimhester](https://github.com/jimhester), [@josue-rodriguez](https://github.com/josue-rodriguez), [@karldw](https://github.com/karldw), [@kfeilich](https://github.com/kfeilich), [@larmarange](https://github.com/larmarange), [@lboller](https://github.com/lboller), [@mariusbarth](https://github.com/mariusbarth), [@michaelweylandt](https://github.com/michaelweylandt), [@mine-cetinkaya-rundel](https://github.com/mine-cetinkaya-rundel), [@mkuehn10](https://github.com/mkuehn10), [@mvevans89](https://github.com/mvevans89), [@nutterb](https://github.com/nutterb), [@ShreyasSingh](https://github.com/ShreyasSingh), [@stephlocke](https://github.com/stephlocke), [@strengejacke](https://github.com/strengejacke), [@topepo](https://github.com/topepo), [@willbowditch](https://github.com/willbowditch), [@WillemSleegers](https://github.com/WillemSleegers), and [@wilsonfreitas](https://github.com/wilsonfreitas)
 
 # broom 0.4.4
 
@@ -185,7 +188,7 @@ Many many thanks to all the following for their thoughtful comments on design, b
 * Added `tidy.coeftest` for coeftest objects from the lmtest package.
 * Set up `tidy.lm` to work with "mlm" (multiple linear model) objects (those with multiple response columns).
 * Added `tidy` and `glance` for "biglm" and "bigglm" objects from the biglm package.
-* Fixed bug in `tidy.coxph` when one-row matrices are returned 
+* Fixed bug in `tidy.coxph` when one-row matrices are returned
 * Added `tidy.power.htest`
 * Added `tidy` and `glance` for `summaryDefault` objects
 * Added tidiers for "lme" (linear mixed effects models) from the nlme package
@@ -217,11 +220,11 @@ Many many thanks to all the following for their thoughtful comments on design, b
 
     Unit tests in `tests/testthat/test-augment.R` were added to ensure consistency across these models.
 * `tidy`, `augment` and `glance` methods were added for `rowwise_df` objects, and are set up to apply across their rows. This allows for simple patterns such as:
-      
+
         regressions <- mtcars %>% group_by(cyl) %>% do(mod = lm(mpg ~ wt, .))
         regressions %>% tidy(mod)
         regressions %>% augment(mod)
-    
+
     See `?rowwise_df_tidiers` for more.
 * Added `tidy` and `glance` methods for `Arima` objects, and `tidy` for `pairwise.htest` objects.
 * Fixes for CRAN: change package description to title case, removed NOTES, mostly by adding `globals.R` to declare global variables.
