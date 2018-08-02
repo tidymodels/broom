@@ -28,7 +28,7 @@ tidy.rq <- function(x, se.type = NULL,
   #se.type default contingent on sample size
   n <- length(x$residuals)
   if (is.null(se.type)) {
-    if (n < 1001)  #THIS WOULD BE BETTER IF I COULD CHECK IF THERE WAS A COVARIANCE ARGUMENT OR NOT. I don't know how to just see if an object exists.
+    if (n < 1001) 
       se.type <- "rank"
     else se.type <- "nid"
   }
