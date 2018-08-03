@@ -2,6 +2,7 @@ context("stats-loess")
 
 skip_if_not_installed("modeltests")
 library(modeltests)
+library(broom)
 
 test_that("augment.loess", {
   check_arguments(augment.loess, strict = FALSE)

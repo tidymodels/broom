@@ -2,6 +2,7 @@ context("survey")
 
 skip_if_not_installed("modeltests")
 library(modeltests)
+library(broom)
 
 skip_if_not_installed("survey")
 skip_if_not_installed("MASS")

@@ -2,6 +2,7 @@ context("null-and-default")
 
 skip_if_not_installed("modeltests")
 library(modeltests)
+library(broom)
 
 test_that("tidy.NULL", {
   expect_equal(tidy(NULL), tibble())

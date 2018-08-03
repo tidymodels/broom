@@ -2,6 +2,7 @@ context("stats-nls")
 
 skip_if_not_installed("modeltests")
 library(modeltests)
+library(broom)
 
 fit <- nls(
   wt ~ a + b * mpg + c / disp,

@@ -2,6 +2,7 @@ context("stats-smooth.spline")
 
 skip_if_not_installed("modeltests")
 library(modeltests)
+library(broom)
 
 fit <- smooth.spline(mtcars$wt, mtcars$mpg)
 

@@ -2,6 +2,7 @@ context("stats-anova")
 
 skip_if_not_installed("modeltests")
 library(modeltests)
+library(broom)
 
 test_that("tidy.aov", {
   check_arguments(tidy.aov)

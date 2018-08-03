@@ -2,6 +2,7 @@ context("stats-arima")
 
 skip_if_not_installed("modeltests")
 library(modeltests)
+library(broom)
 
 fit1 <- arima(lh, order = c(1, 0, 0))
 

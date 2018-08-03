@@ -2,6 +2,7 @@ context("stats-lm")
 
 skip_if_not_installed("modeltests")
 library(modeltests)
+library(broom)
 
 test_that("lm tidier arguments", {
   check_arguments(tidy.lm)

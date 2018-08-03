@@ -2,6 +2,7 @@ context("joinerml")
 
 skip_if_not_installed("modeltests")
 library(modeltests)
+library(broom)
 
 # TODO: think about the tidy interface when bootstrapping standard errors
 # should tidy work on two objects are once?

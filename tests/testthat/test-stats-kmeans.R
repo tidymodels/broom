@@ -2,6 +2,7 @@ context("stats-kmeans")
 
 skip_if_not_installed("modeltests")
 library(modeltests)
+library(broom)
 
 set.seed(2)
 x <- rbind(
