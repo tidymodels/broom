@@ -54,7 +54,7 @@ glance.polr <- function(x, ...) {
 
 #' @rdname ordinal_tidiers
 #' @export
-augment.polr <- function(x, data = stats::model.frame(x),
+augment.polr <- function(x, data = model.frame(x),
                          newdata = NULL, type.predict = c("probs", "class"),
                          ...) {
   type.predict <- match.arg(type.predict)

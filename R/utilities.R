@@ -341,15 +341,67 @@ response <- function(object, newdata = NULL) {
   model.response(model.frame(terms(object), data = newdata, na.action = na.pass))
 }
 
+data_error <- function(cnd) {
+  stop(
+    "Can't augment data with observation level measures.\n",
+    "Did you provide `data` with the exact data used for model fitting?",
+    call. = FALSE
+  )
+}
+
 safe_response <- purrr::possibly(response, NULL)
 
+# in weighted regressions, influence measures should be zero for
+# data points with zero weight
+# helper for augment.lm and augment.glm
+add_hat_sigma_cooksd_cols <-  function(df, x, infl) {
+  
+  df$.cooksd <- cooks.distance(x, infl = infl)
+  
+  df$.hat <- 0
+  df$.sigma <- 0
+  
+  w <- x$weights
+  nonzero_idx <- if (is.null(w)) seq_along(df$.hat) else which(w != 0)
+  
+  df$.hat[nonzero_idx] <- infl$hat
+  df$.sigma[nonzero_idx] <- infl$sigma
+  df
+}
+
+# adds only the information that can be defined for newdata. no influence
+# measure of anything fun like goes here.
+#
 # add .fitted column
 # add .resid column if response is present
 # deal with rownames and convert to tibble as necessary
-augment_newdata <- function(object, newdata) {
-  df <- as_broom_tibble(newdata)
-  df$.fitted <- predict(object, newdata = newdata, na.action = na.pass)
-  resp <- safe_response(object, newdata)
+# add .se.fit column if present
+# be *incredibly* careful that the ... are passed correctly
+augment_newdata <- function(x, data, newdata, se_fit, ...) {
+  df <- if (is.null(newdata)) data else newdata
+  df <- as_broom_tibble(df)
+  
+  # NOTE: It is important use predict(x, newdata = newdata) rather than 
+  # predict(x, newdata = df). This is to avoid an edge case breakage
+  # when augment is called with no data argument, so that data is
+  # model.frame(x). When data = model.frame(x) and the model formula
+  # contains a term like `log(x)`, the predict method will break. Luckily,
+  # predict(x, newdata = NULL) works perfectly well in this case.
+  
+  if (se_fit) {
+    pred_obj <- predict(x, newdata = newdata, na.action = na.pass, se.fit = TRUE, ...)
+    df$.fitted <- pred_obj$fit
+    
+    # a couple possible names for the standard error element of the list
+    # se.fit: lm, glm
+    # se: loess
+    se_idx <- which(names(pred_obj) %in% c("se.fit", "se"))
+    df$.se.fit <- pred_obj[[se_idx]]
+  } else {
+    df$.fitted <- predict(x, newdata = newdata, na.action = na.pass, ...)
+  }
+  
+  resp <- safe_response(x, df)
   if (!is.null(resp))
     df$.resid <- df$.fitted - resp
   df

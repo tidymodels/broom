@@ -10,12 +10,20 @@
 #'
 #' @evalRd return_augment(".se.fit")
 #' 
-#' @details The `.se.fit` column is only present when data is specified via
-#'   the `data` argument.
+#' @details  Note that `loess` objects by default will not predict on data
+#'   outside of a bounding hypercube defined by the training data unless the
+#'   original `loess` object was fit with 
+#'   `control = loess.control(surface = \"direct\"))`. See 
+#'   [stats::predict.loess()] for details.
 #'   
 #' @examples
 #'
-#' lo <- loess(mpg ~ wt, mtcars)
+#' lo <- loess(
+#'   mpg ~ hp + wt, 
+#'   mtcars, 
+#'   control = loess.control(surface = "direct")
+#' )
+#' 
 #' augment(lo)
 #'
 #' # with all columns of original data
@@ -27,7 +35,8 @@
 #' @aliases loess_tidiers
 #' @export
 #' @seealso [augment()], [stats::loess()], [stats::predict.loess()]
-augment.loess <- function(x, data = stats::model.frame(x), newdata = NULL, ...) {
-  augment_columns(x, data, newdata, se.fit = FALSE, se = TRUE, ...)
+augment.loess <- function(x, data = model.frame(x), newdata = NULL,
+                          se_fit = FALSE, ...) {
+  augment_newdata(x, data, newdata, se_fit, se = se_fit)
 }
 

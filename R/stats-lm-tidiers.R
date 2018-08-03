@@ -139,13 +139,30 @@ tidy.summary.lm <- function(x, ...) {
 #' @export
 #' @seealso [augment()], [stats::predict.lm()]
 #' @family lm tidiers
-augment.lm <- function(x, data = stats::model.frame(x), newdata = NULL,
-                       type.predict, type.residuals, ...) {
-  augment_columns(x, data, newdata,
-    type.predict = type.predict,
-    type.residuals = type.residuals
-  )
+augment.lm <- function(x, data = model.frame(x), newdata = NULL,
+                       se_fit = FALSE, ...) {
+  
+  # TODO: remove eventually
+  if (length(class(x)) > 1)
+    stop("augment.lm called on an object with additional classes")
+  
+  df <- augment_newdata(x, data, newdata, se_fit)
+  
+  if (is.null(newdata)) {
+    
+    tryCatch({
+      infl <- influence(x, do.coef = FALSE)
+      df$.resid <- residuals(x)
+      df$.std.resid <- rstandard(x, infl = infl)
+      df <- add_hat_sigma_cooksd_cols(df, x, infl)
+    }, 
+    
+    error = data_error)
+  }
+  
+  df
 }
+
 
 
 #' @templateVar class lm

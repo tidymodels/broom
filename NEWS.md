@@ -7,6 +7,10 @@ To be released as 0.7.0
 
 - Similarly: augment no longer accepts an `na.action` argument (TODO: figure out why this wasn't in the function signature in the first place)
 
+- lm augment loses a lot of arguments 
+
+- augment tries gives an informative error when `data` isn't the original training data
+
 ## Other changes
 
 - tidy.lsmobj gains a `conf.int` argument.
