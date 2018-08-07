@@ -20,9 +20,6 @@
 #' @seealso [tidy()], [quantreg::rq()]
 #' @family quantreg tidiers
 #' 
-#' @examples 
-#' 
-#' print('TODO')
 tidy.rq <- function(x, se.type = "rank", conf.int = FALSE,
                     conf.level = 0.95, ...) {
   

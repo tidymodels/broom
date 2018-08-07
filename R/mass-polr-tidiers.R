@@ -54,9 +54,8 @@ glance.polr <- function(x, ...) {
 
 #' @rdname ordinal_tidiers
 #' @export
-augment.polr <- function(x, data = model.frame(x),
-                         newdata = NULL, type.predict = c("probs", "class"),
-                         ...) {
-  type.predict <- match.arg(type.predict)
-  augment.lm(x, data, newdata, type.predict, ...)
+augment.polr <- function(x, data = model.frame(x), newdata = NULL,
+                         type.predict = c("probs", "class"), ...) {
+  type <- match.arg(type.predict)
+  augment_columns(x, data, newdata, type = type.predict)
 }

@@ -4,8 +4,8 @@
 \alias{augment.lm}
 \title{Augment data with information from a(n) lm object}
 \usage{
-\method{augment}{lm}(x, data = stats::model.frame(x), newdata = NULL,
-  type.predict, type.residuals, ...)
+\method{augment}{lm}(x, data = model.frame(x), newdata = NULL,
+  se_fit = FALSE, ...)
 }
 \arguments{
 \item{x}{An \code{lm} object created by \code{\link[stats:lm]{stats::lm()}}.}
@@ -23,12 +23,6 @@ the original predictors used to create \code{x}. Defaults to \code{NULL}, indica
 that nothing has been passed to \code{newdata}. If \code{newdata} is specified,
 the \code{data} argument will be ignored.}
 
-\item{type.predict}{Type of predictions to use when \code{x} is a \code{glm} object.
-Passed to \code{\link[stats:predict.glm]{stats::predict.glm()}}.}
-
-\item{type.residuals}{Type of residuals to use when \code{x} is a \code{glm} object.
-Passed to \code{\link[stats:residuals.glm]{stats::residuals.glm()}}.}
-
 \item{...}{Additional arguments. Not used. Needed to match generic
 signature only. \strong{Cautionary note:} Misspelled arguments will be
 absorbed in \code{...}, where they will be ignored. If the misspelled
@@ -38,6 +32,12 @@ proceed using \code{conf.level = 0.95}. Additionally, if you pass
 \code{newdata = my_tibble} to an \code{\link[=augment]{augment()}} method that does not
 accept a \code{newdata} argument, it will use the default value for
 the \code{data} argument.}
+
+\item{type.predict}{Type of predictions to use when \code{x} is a \code{glm} object.
+Passed to \code{\link[stats:predict.glm]{stats::predict.glm()}}.}
+
+\item{type.residuals}{Type of residuals to use when \code{x} is a \code{glm} object.
+Passed to \code{\link[stats:residuals.glm]{stats::residuals.glm()}}.}
 }
 \description{
 Augment accepts a model object and a dataset and adds

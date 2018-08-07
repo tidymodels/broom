@@ -141,23 +141,17 @@ tidy.summary.lm <- function(x, ...) {
 #' @family lm tidiers
 augment.lm <- function(x, data = model.frame(x), newdata = NULL,
                        se_fit = FALSE, ...) {
-  
-  # TODO: remove eventually
-  if (length(class(x)) > 1)
-    stop("augment.lm called on an object with additional classes")
-  
+ 
   df <- augment_newdata(x, data, newdata, se_fit)
   
   if (is.null(newdata)) {
     
     tryCatch({
       infl <- influence(x, do.coef = FALSE)
-      df$.resid <- residuals(x)
       df$.std.resid <- rstandard(x, infl = infl)
-      df <- add_hat_sigma_cooksd_cols(df, x, infl)
-    }, 
-    
-    error = data_error)
+      df <- add_hat_sigma_cols(df, x, infl)
+      df$.cooksd <- cooks.distance(x, infl = infl)
+    }, error = data_error)
   }
   
   df
@@ -271,8 +265,6 @@ glance.mlm <- function(x, ...) {
     call. = FALSE
   )
 }
-
-# TODO: the various process_* functions need to be consolidated
 
 process_lm <- function(ret, x, conf.int = FALSE, conf.level = .95,
                        exponentiate = FALSE) {

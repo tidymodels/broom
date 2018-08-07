@@ -5,8 +5,8 @@
 \alias{loess_tidiers}
 \title{Tidy a(n) loess object}
 \usage{
-\method{augment}{loess}(x, data = stats::model.frame(x),
-  newdata = NULL, ...)
+\method{augment}{loess}(x, data = model.frame(x), newdata = NULL,
+  se_fit = FALSE, ...)
 }
 \arguments{
 \item{x}{A \code{loess} objects returned by \code{\link[stats:loess]{stats::loess()}}.}
@@ -53,12 +53,20 @@ rows (typically with NAs in place of the new columns). If the original data
 is not provided to \code{\link[=augment]{augment()}} and \code{na.action = "na.exclude"}, a
 warning is raised and the incomplete rows are dropped.
 
-The \code{.se.fit} column is only present when data is specified via
-the \code{data} argument.
+Note that \code{loess} objects by default will not predict on data
+outside of a bounding hypercube defined by the training data unless the
+original \code{loess} object was fit with
+\code{control = loess.control(surface = \"direct\"))}. See
+\code{\link[stats:predict.loess]{stats::predict.loess()}} for details.
 }
 \examples{
 
-lo <- loess(mpg ~ wt, mtcars)
+lo <- loess(
+  mpg ~ hp + wt, 
+  mtcars, 
+  control = loess.control(surface = "direct")
+)
+
 augment(lo)
 
 # with all columns of original data

@@ -4,7 +4,8 @@
 \alias{augment.nls}
 \title{Augment data with information from a(n) nls object}
 \usage{
-\method{augment}{nls}(x, data = NULL, newdata = NULL, ...)
+\method{augment}{nls}(x, data = NULL, newdata = NULL, se_fit = FALSE,
+  ...)
 }
 \arguments{
 \item{x}{An \code{nls} object returned from \code{\link[stats:nls]{stats::nls()}}.}

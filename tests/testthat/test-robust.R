@@ -9,11 +9,12 @@ library(robust)
 fit <- lmRob(mpg ~ wt, data = mtcars)
 fit2 <- glmRob(am ~ wt, data = mtcars, family = "binomial")
 
-# tidy and augment methods call lm tidiers. as long as nothing explodes
-# basics tests okay
-
-test_that("robust glance arguments", {
+test_that("robust tidier arguments", {
+  check_arguments(tidy.lmRob)
   check_arguments(glance.lmRob)
+  check_arguments(augment.lmRob)
+  
+  check_arguments(tidy.glmRob)
   check_arguments(glance.glmRob)
 })
 
@@ -28,8 +29,12 @@ test_that("glance.lmRob", {
 })
 
 test_that("augment.lmRob", {
-  au <- augment(fit)
-  check_tibble(au, method = "augment", strict = FALSE)
+  check_augment_function(
+    aug = augment.lmRob,
+    model = fit,
+    data = mtcars,
+    newdata = mtcars
+  )
 })
 
 test_that("tidy.glmRob", {
@@ -43,6 +48,8 @@ test_that("glance.glmRob", {
 })
 
 test_that("augment.glmRob", {
-  au <- augment(fit2)
-  check_tibble(au, method = "augment", strict = FALSE)
+  expect_error(
+    augment.glmRob(),
+    "`augment.glmRob` has been removed from broom. See the documentation."
+  )
 })

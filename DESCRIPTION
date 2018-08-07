@@ -58,7 +58,8 @@ Imports:
     tibble,
     tidyr,
     modelgenerics,
-    glue
+    glue,
+    rlang
 Suggests:
     AER,
     akima,
@@ -116,7 +117,6 @@ Suggests:
     psych,
     quantreg,
     rgeos,
-    rlang,
     rmarkdown,
     robust,
     rsample,

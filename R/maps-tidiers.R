@@ -3,15 +3,6 @@
 #'
 #' @param x A `map` object returned from [maps::map()].
 #' @template param_unused_dots
-#' 
-#' @evalRd return_tidy(
-#'   long = "TODO",
-#'   lat = "TODO",
-#'   group = "TODO",
-#'   order = "TODO",
-#'   region = "TODO",
-#'   subregion = "TODO"
-#' )
 #'
 #' @examples
 #'     

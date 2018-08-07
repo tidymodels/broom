@@ -4,7 +4,8 @@
 \alias{augment.nlrq}
 \title{Tidy a(n) nlrq object}
 \usage{
-\method{augment}{nlrq}(x, data = NULL, newdata = NULL, ...)
+\method{augment}{nlrq}(x, data = NULL, newdata = NULL,
+  se_fit = FALSE, ...)
 }
 \arguments{
 \item{x}{A \code{nlrq} object returned from \code{\link[quantreg:nlrq]{quantreg::nlrq()}}.}
