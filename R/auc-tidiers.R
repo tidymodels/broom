@@ -38,5 +38,5 @@
 #' @aliases auc_tidiers roc_tidiers
 #' @seealso [tidy()], [AUC::roc()]
 tidy.roc <- function(x, ...) {
-  as_tibble(unclass(x))
+  rename2(as_tibble(unclass(x)), cutoff = cutoffs)
 }
