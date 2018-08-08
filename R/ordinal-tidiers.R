@@ -117,7 +117,11 @@ process_clm <- function(ret, x, conf.int = FALSE, conf.level = .95,
     colnames(CI) <- c("conf.low", "conf.high")
     CI <- as.data.frame(CI)
     CI$term <- rownames(CI)
+    
+    ret$orig_row_order <- seq_len(nrow(ret))
     ret <- merge(ret, unrowname(CI), by = "term", all.x = TRUE)
+    ret <- ret[order(ret$orig_row_order),]
+    ret$orig_row_order <- NULL
   }
 
   ret$estimate <- trans(ret$estimate)
