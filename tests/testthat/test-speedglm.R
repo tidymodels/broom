@@ -6,8 +6,9 @@ library(modeltests)
 skip_if_not_installed("speedglm")
 library(speedglm)
 
-fit <- speedlm(mpg ~ wt, mtcars)
-fit2 <- speedlm(mpg ~ wt + disp, mtcars)
+fit <- speedlm(mpg ~ wt, mtcars, fitted = TRUE)
+fit2 <- speedlm(mpg ~ wt + disp, mtcars, fitted = TRUE)
+fit3 <- speedlm(mpg ~ wt, mtcars)
 
 test_that("speedglm tidiers arguments", {
   check_arguments(tidy.speedlm)
@@ -42,4 +43,17 @@ test_that("augment.speedlm", {
     data = mtcars,
     newdata = mtcars
   )
+  
+  check_augment_function(
+    aug = augment.speedlm,
+    model = fit2, 
+    data = mtcars,
+    newdata = mtcars
+  )
+  
+  expect_error(
+    augment(fit3),
+    "Must specify `data` argument or refit speedglm with `fitted = TRUE`."
+  )
 })
+

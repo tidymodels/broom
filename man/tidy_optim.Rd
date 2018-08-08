@@ -53,7 +53,7 @@ Other list tidiers: \code{\link{glance_optim}},
 \concept{list tidiers}
 \value{
 A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
-  \item{parameter}{Needs custom info.}
-  \item{value}{Needs custom desciption.}
+  \item{parameter}{The parameter being modeled.}
+  \item{value}{TODO. needs better documentation.}
 
 }

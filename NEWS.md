@@ -7,8 +7,17 @@ To be released as 0.7.0
 
 - Similarly: augment no longer accepts an `na.action` argument (TODO: figure out why this wasn't in the function signature in the first place)
 
+- lm augment loses a lot of arguments 
+
+- augment tries gives an informative error when `data` isn't the original training data
+
+- `augment.glmRob()` has been removed from broom. We regret that we were unable to provide any warning for this change. The \pkg{robust} package does not provide the functionality necessary to implement an augment method. We are looking into supporting the \pkg{robustbase} package in the future.
+
+in the augment method for the chi sq test, .residuals column was renamed to .resid and .stdres column was renamed to .std.resid
+
 ## Other changes
 
+- augment
 - tidy.lsmobj gains a `conf.int` argument.
 - All `conf.int` arguments now default to `FALSE`.
 - All `conf.level` arguments now default to `TRUE`.

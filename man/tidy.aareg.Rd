@@ -68,7 +68,7 @@ Other survival tidiers: \code{\link{augment.coxph}},
 A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
   \item{estimate}{The estimated value of the regression term.}
   \item{p.value}{The two-sided p-value associated with the observed statistic.}
-  \item{robust.se}{robust version of standard error estimate (only when `x` was called with `dfbeta = TRUE`)}
+  \item{robust.se}{robust version of standard error estimate.}
   \item{statistic}{The value of a T-statistic to use in a hypothesis that the regression term is non-zero.}
   \item{std.error}{The standard error of the regression term.}
   \item{term}{The name of the regression term.}

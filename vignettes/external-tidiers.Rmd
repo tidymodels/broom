@@ -17,11 +17,17 @@ knitr::opts_chunk$set(
 )
 ```
 
+NOTE: This vignette describes how extend the broom generics in an external package. To *use* the broom generics in an external you can `Import` broom as you would normally.
+
+This guide describes how to extend the `tidy()`, `glance()` and `augment()` generics. broom recently started re-exporting these generics from the `modelgenerics` package. `modelgenerics` is not yet on CRAN, nor is the version of broom that uses `modelgenerics`. You'll need to wait for these CRAN releases (timeline TBD at the moment) before release your package to CRAN if you extend broom in the manner described here.
+
 If you are a package developer, the best place to include `tidy()`, `glance()` or `augment()` methods is in your own package. To do this, you'll need to:
 
 1. Re-export the `tidy()`, `glance()` and `augment()` generics from the `modelgenerics` package.
 2. Implement appropriate tidying methods.
 3. Test the tidying methods
+
+You can re-export generics from broom itself, but `modelgenerics` is a much lighter dependency.
 
 The [dustpan](https://github.com/alexpghayes/dustpan) package demonstrates use of `modelgenerics` and `modeltests`, and you may find it helpful to browse.
 
@@ -64,52 +70,7 @@ remotes::install_github("alexpghayes/modeltests")
 usethis::use_dev_package("modeltests")
 ```
 
-If you're using [testthat](https://github.com/r-lib/testthat), you'll want to include the following in your tests:
-
-```{r}
-skip_if_not_installed("modeltests")  # can't rely on suggested packages in tests
-library(modeltests)
-
-test_that("myobject tidier arguments", {
-  check_arguments(tidy.my_object)
-  check_arguments(glance.my_object)
-  check_arguments(augment.myobject)
-})
-
-test_that("tidy.my_object", {
-  my_object <-  my_object(y ~ x, data = my_data, ...)
-  
-  td <- tidy(my_object)
-  tdci <- tidy(my_object, conf.int = TRUE)
-  # ...
-  
-  check_tidy_output(td)
-  check_tidy_output(tdci)
-  # ...
-})
-
-test_that("glance.my_object", {
-  my_object <-  my_object(y ~ x, data = my_data, ...)
-  my_object2 <-  my_object(y ~ x, data = my_data2, ...)
-  
-  gl <- glance(my_object)
-  gl2 <- glance(my_object2)
-  
-  check_glance_outputs(gl, gl2)
-})
-
-test_that("augment.my_object", {
-  my_object <-  my_object(y ~ x, data = my_data, ...)
-  
-  check_augment_function(
-    aug = augment.my_object,
-    model = my_object,
-    data  = my_data,
-    newdata = my_new_data  # or just my_data
-  )
-})
-
-```
+You can then write tests for your tidiers following the advice in `vignette("adding-tidiers")`.
 
 If you're run `devtools::test()` and `devtools::check()` and didn't fail any tests or set off R CMD Check ERRORS, WARNINGS or NOTES, you're done!
 
@@ -129,7 +90,7 @@ You can import `broom.mixed` separately from `broom`, or you can mix and match t
 
 ### I don't want to depend on `modelgenerics`. Can I re-export `tidy()`, `glance()` and `augment()` from `broom`?
 
-I think so, although I haven't tested this yet. This is on the TODO list at the moment.
+Yes, this is fine.
 
 ### What do I do if my tidiers don't pass the tests?
 

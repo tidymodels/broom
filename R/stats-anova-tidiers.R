@@ -179,7 +179,6 @@ tidy.aovlist <- function(x, ...) {
 #' @family anova tidiers
 tidy.manova <- function(x, test = "Pillai", ...) {
   
-  # TODO: use match.arg here
   test.pos <- pmatch(test, c(
     "Pillai", "Wilks",
     "Hotelling-Lawley", "Roy"

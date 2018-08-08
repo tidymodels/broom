@@ -4,7 +4,8 @@
 \alias{augment.nlrq}
 \title{Tidy a(n) nlrq object}
 \usage{
-\method{augment}{nlrq}(x, data = NULL, newdata = NULL, ...)
+\method{augment}{nlrq}(x, data = NULL, newdata = NULL,
+  se_fit = FALSE, ...)
 }
 \arguments{
 \item{x}{A \code{nlrq} object returned from \code{\link[quantreg:nlrq]{quantreg::nlrq()}}.}
@@ -21,6 +22,10 @@ the original training data.}
 the original predictors used to create \code{x}. Defaults to \code{NULL}, indicating
 that nothing has been passed to \code{newdata}. If \code{newdata} is specified,
 the \code{data} argument will be ignored.}
+
+\item{se_fit}{Logical indicating whether or not a \code{.se.fit} column should be
+added to the augmented output. For some models, this calculation can be
+somwhat time-consuming. Defaults to \code{FALSE}.}
 
 \item{...}{Additional arguments. Not used. Needed to match generic
 signature only. \strong{Cautionary note:} Misspelled arguments will be

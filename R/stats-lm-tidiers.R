@@ -117,10 +117,7 @@ tidy.summary.lm <- function(x, ...) {
 #' @inherit tidy.lm params examples
 #' @template param_data
 #' @template param_newdata
-#' @param type.predict Type of predictions to use when `x` is a `glm` object. 
-#'   Passed to [stats::predict.glm()].
-#' @param type.residuals Type of residuals to use when `x` is a `glm` object. 
-#'   Passed to [stats::residuals.glm()].
+#' @template param_se_fit
 #'
 #' @evalRd return_augment(
 #'   ".hat",
@@ -139,13 +136,24 @@ tidy.summary.lm <- function(x, ...) {
 #' @export
 #' @seealso [augment()], [stats::predict.lm()]
 #' @family lm tidiers
-augment.lm <- function(x, data = stats::model.frame(x), newdata = NULL,
-                       type.predict, type.residuals, ...) {
-  augment_columns(x, data, newdata,
-    type.predict = type.predict,
-    type.residuals = type.residuals
-  )
+augment.lm <- function(x, data = model.frame(x), newdata = NULL,
+                       se_fit = FALSE, ...) {
+ 
+  df <- augment_newdata(x, data, newdata, se_fit)
+  
+  if (is.null(newdata)) {
+    
+    tryCatch({
+      infl <- influence(x, do.coef = FALSE)
+      df$.std.resid <- rstandard(x, infl = infl)
+      df <- add_hat_sigma_cols(df, x, infl)
+      df$.cooksd <- cooks.distance(x, infl = infl)
+    }, error = data_error)
+  }
+  
+  df
 }
+
 
 
 #' @templateVar class lm
@@ -254,8 +262,6 @@ glance.mlm <- function(x, ...) {
     call. = FALSE
   )
 }
-
-# TODO: the various process_* functions need to be consolidated
 
 process_lm <- function(ret, x, conf.int = FALSE, conf.level = .95,
                        exponentiate = FALSE) {

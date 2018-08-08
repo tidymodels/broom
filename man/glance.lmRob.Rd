@@ -50,15 +50,15 @@ glance(gm)
 \seealso{
 \code{\link[robust:lmRob]{robust::lmRob()}}
 
-Other robust tidiers: \code{\link{augment.glmRob}},
-  \code{\link{augment.lmRob}}, \code{\link{glance.glmRob}},
-  \code{\link{tidy.glmRob}}, \code{\link{tidy.lmRob}}
+Other robust tidiers: \code{\link{augment.lmRob}},
+  \code{\link{glance.glmRob}}, \code{\link{tidy.glmRob}},
+  \code{\link{tidy.lmRob}}
 }
 \concept{robust tidiers}
 \value{
 A \code{\link[tibble:tibble]{tibble::tibble()}} with exactly one row and columns:
   \item{deviance}{Deviance of the model.}
-  \item{df.residual}{Residual degrees of freedom for the model.}
+  \item{df.residual}{Residual degrees of freedom.}
   \item{r.squared}{R squared statistic, or the percent of variation explained by the model. Also known as the coefficient of determination.}
   \item{sigma}{Estimated standard error of the residuals.}
 

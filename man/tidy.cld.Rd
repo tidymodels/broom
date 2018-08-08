@@ -64,6 +64,6 @@ Other multcomp tidiers: \code{\link{tidy.confint.glht}},
 \concept{multcomp tidiers}
 \value{
 A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
-  \item{lhs}{TODO}
+  \item{lhs}{Left hand side.}
 
 }
