@@ -4,12 +4,13 @@
 #' @param x An `rq` object returned from [quantreg::rq()].
 #' @param se.type Character specifying the method to use to calculate
 #'   standard errors. Passed to [quantreg::summary.rq()] `se` argument.
-#'   Defaults to `"rank"`.
+#'   Defaults to `"rank"` if the sample size is less than 1000,
+#'   otherwise defaults to `"nid"`.
 #' @template param_confint
 #' @param ... Additional arguments passed to [quantreg::summary.rq()].
 #'
 #' @details If `se.type = "rank"` confidence intervals are calculated by 
-#'   `summary.rq`. When only a single predictor is included in the model, 
+#'   `summary.rq` and `statistic` and `p.value` values are not returned. When only a single predictor is included in the model, 
 #'   no confidence intervals are calculated and the confidence limits are
 #'   set to NA. 
 #' 
@@ -19,12 +20,16 @@
 #' @export
 #' @seealso [tidy()], [quantreg::rq()]
 #' @family quantreg tidiers
-#' 
-tidy.rq <- function(x, se.type = "rank", conf.int = FALSE,
+tidy.rq <- function(x, se.type = NULL, conf.int = FALSE,
                     conf.level = 0.95, ...) {
   
   # specification for confidence level inverted for summary.rq
   alpha <- 1 - conf.level
+  
+  #se.type default contingent on sample size
+  n <- length(x$residuals)
+  if (is.null(se.type))
+    se.type <- if (n < 1001) "rank" else "nid"
   
   # summary.rq often issues warnings when computing standard error
   rq_summary <- suppressWarnings(
@@ -127,7 +132,7 @@ augment.rq <- function(x, data = model.frame(x), newdata = NULL, ...) {
   }
 }
 
-process_rq <- function(rq_obj, se.type = "rank",
+process_rq <- function(rq_obj, se.type = NULL,
                        conf.int = TRUE,
                        conf.level = 0.95) {
   nn <- c("estimate", "std.error", "statistic", "p.value")
