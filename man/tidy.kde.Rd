@@ -69,7 +69,7 @@ td3
 A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
   \item{estimate}{The estimated value of the regression term.}
   \item{obs}{weighted observed number of events in each group}
-  \item{value}{Needs custom desciption.}
-  \item{variable}{Needs custom info.}
+  \item{value}{TODO. needs better documentation.}
+  \item{variable}{Variable under consideration.}
 
 }

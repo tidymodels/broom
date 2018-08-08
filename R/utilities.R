@@ -293,7 +293,7 @@ add_hat_sigma_cols <-  function(df, x, infl) {
 # deal with rownames and convert to tibble as necessary
 # add .se.fit column if present
 # be *incredibly* careful that the ... are passed correctly
-augment_newdata <- function(x, data, newdata, se_fit, ...) {
+augment_newdata <- function(x, data, newdata, .se_fit, ...) {
   passed_newdata <- !is.null(newdata)
   df <- if (passed_newdata) newdata else data
   df <- as_broom_tibble(df)
@@ -313,7 +313,7 @@ augment_newdata <- function(x, data, newdata, se_fit, ...) {
   # This helper *should not* be used for predict methods that do not have
   # an na.pass argument
   
-  if (se_fit) {
+  if (.se_fit) {
     pred_obj <- predict(x, newdata = newdata, na.action = na.pass, se.fit = TRUE, ...)
     df$.fitted <- pred_obj$fit
     
@@ -440,6 +440,8 @@ globalVariables(
     ".",
     ".id",
     ".rownames",
+    "aic",
+    "bic",
     "ci.lower",
     "ci.upper",
     "column", 
@@ -449,6 +451,7 @@ globalVariables(
     "comparison",
     "conf.high",
     "conf.low", 
+    "cutoffs",
     "data",
     "df.residual",
     "effect",

@@ -43,9 +43,9 @@ A \code{\link[tibble:tibble]{tibble::tibble()}} with exactly one row and columns
   \item{AIC}{Akaike's Information Criterion for the model.}
   \item{BIC}{Bayesian Information Criterion for the model.}
   \item{logLik}{The log-likelihood of the model. [stats::logLik()] may be a useful reference.}
-  \item{method}{Needs custom info.}
-  \item{p.value}{Needs custom info.}
-  \item{statistic}{Needs custom info.}
+  \item{method}{Which method was used.}
+  \item{p.value}{P-value corresponding to the test statistic.}
+  \item{statistic}{Test statistic.}
   \item{parameter}{Parameter field in the htest, typically degrees of
     freedom.}
 

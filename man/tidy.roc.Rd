@@ -64,7 +64,7 @@ ggplot(rocs, aes(fpr, tpr, color = algorithm)) +
 \value{
 A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
   \item{cutoff}{The cutoff used for classification. Observations with predicted probabilities above this value were assigned class 1, and observations with predicted probabilities below this value were assigned class 0.}
-  \item{fpr}{The false positive rate at the given cutoff.}
+  \item{fpr}{False positive rate.}
   \item{tpr}{The true positive rate at the given cutoff.}
 
 }

@@ -19,6 +19,7 @@ tidy.glm <- tidy.lm
 #' @param type.residuals Passed to [stats::residuals.glm()] and
 #'   to [stats::rstandard.glm()] `type` arguments. Defaults to `"deviance"`.
 #' @template param_se_fit
+#' @template param_unused_dots
 #' 
 #' @evalRd return_augment(
 #'   ".se.fit",

@@ -63,8 +63,8 @@ Other plm tidiers: \code{\link{augment.plm}},
 A \code{\link[tibble:tibble]{tibble::tibble()}} with exactly one row and columns:
   \item{adj.r.squared}{Adjusted R squared statistic, which is like the R squared statistic except taking degrees of freedom into account.}
   \item{deviance}{Deviance of the model.}
-  \item{df.residual}{Residual degrees of freedom for the model.}
-  \item{p.value}{Needs custom info.}
+  \item{df.residual}{Residual degrees of freedom.}
+  \item{p.value}{P-value corresponding to the test statistic.}
   \item{r.squared}{R squared statistic, or the percent of variation explained by the model. Also known as the coefficient of determination.}
   \item{statistic}{F-statistic}
 

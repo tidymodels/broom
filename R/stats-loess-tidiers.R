@@ -4,7 +4,8 @@
 #' @param x A `loess` objects returned by [stats::loess()].
 #' @template param_data
 #' @template param_newdata
-#' @inheritDotParams stats:::predict.loess
+#' @template param_se_fit
+#' @template param_unused_dots
 #'
 #' @template augment_NAs
 #'

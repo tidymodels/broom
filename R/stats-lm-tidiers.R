@@ -117,10 +117,7 @@ tidy.summary.lm <- function(x, ...) {
 #' @inherit tidy.lm params examples
 #' @template param_data
 #' @template param_newdata
-#' @param type.predict Type of predictions to use when `x` is a `glm` object. 
-#'   Passed to [stats::predict.glm()].
-#' @param type.residuals Type of residuals to use when `x` is a `glm` object. 
-#'   Passed to [stats::residuals.glm()].
+#' @template param_se_fit
 #'
 #' @evalRd return_augment(
 #'   ".hat",

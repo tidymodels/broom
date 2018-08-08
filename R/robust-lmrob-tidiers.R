@@ -29,6 +29,8 @@ tidy.lmRob <- tidy.lm
 #' @template title_desc_augment
 #'
 #' @inherit tidy.lmRob params examples
+#' @template param_data
+#' @template param_newdata
 #' 
 #' @details For tidiers for robust models from the \pkg{MASS} package see
 #'   [tidy.rlm()].

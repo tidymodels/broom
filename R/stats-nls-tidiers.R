@@ -61,6 +61,7 @@ tidy.nls <- function(x, conf.int = FALSE, conf.level = .95,
 #' @inheritParams tidy.nls
 #' @template param_data
 #' @template param_newdata
+#' @template param_se_fit
 #' 
 #' @evalRd return_augment()
 #'

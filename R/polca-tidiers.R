@@ -50,8 +50,7 @@
 #'
 #' au <- augment(nes2a)
 #' au
-#' au %>%
-#'   count(.class)
+#' count(au, .class)
 #'
 #' # if the original data is provided, it leads to NAs in new columns
 #' # for rows that weren't predicted
@@ -116,13 +115,22 @@ tidy.poLCA <- function(x, ...) {
 augment.poLCA <- function(x, data = NULL, ...) {
   indices <- cbind(seq_len(nrow(x$posterior)), x$predclass)
   
-  new_cols <- tibble(
+  ret <- tibble(
     .class = x$predclass,
     .probability = x$posterior[indices]
   )
-
-  data <- if (is.null(data)) bind_cols(x$y, x$x) else as_broom_tibble(data)
-  as_tibble(bind_cols(data, new_cols))
+  
+  if (is.null(data)) {
+    data <- bind_cols(x$y, x$x)
+  } else {
+    if (nrow(data) != nrow(ret)) {
+      # Rows may have been removed for NAs. For those rows, the new columns NAs
+      ret$.rownames <- rownames(x$y)
+      ret <- ret[rownames(data), ]
+    }
+  }
+  
+  as_tibble(bind_cols(data, ret))
 }
 
 #' @templateVar class poLCA

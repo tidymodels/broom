@@ -23,6 +23,10 @@ the original predictors used to create \code{x}. Defaults to \code{NULL}, indica
 that nothing has been passed to \code{newdata}. If \code{newdata} is specified,
 the \code{data} argument will be ignored.}
 
+\item{se_fit}{Logical indicating whether or not a \code{.se.fit} column should be
+added to the augmented output. For some models, this calculation can be
+somwhat time-consuming. Defaults to \code{FALSE}.}
+
 \item{...}{Additional arguments. Not used. Needed to match generic
 signature only. \strong{Cautionary note:} Misspelled arguments will be
 absorbed in \code{...}, where they will be ignored. If the misspelled
@@ -81,7 +85,7 @@ Other nls tidiers: \code{\link{glance.nls}},
 \concept{nls tidiers}
 \value{
 A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
-  \item{.fitted}{Fitted / predicted value.}
-  \item{.resid}{Residuals of fitted values. TODO -- document when present. Residuals on which data set?}
+  \item{.fitted}{Fitted or predicted value.}
+  \item{.resid}{The difference between fitted and observed values.}
 
 }

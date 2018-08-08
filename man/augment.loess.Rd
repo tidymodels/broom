@@ -24,16 +24,19 @@ the original predictors used to create \code{x}. Defaults to \code{NULL}, indica
 that nothing has been passed to \code{newdata}. If \code{newdata} is specified,
 the \code{data} argument will be ignored.}
 
-\item{...}{Arguments passed on to \code{stats:::predict.loess}
-\describe{
-  \item{object}{an object fitted by \code{loess}.}
-  \item{newdata}{an optional data frame in which to look for variables with
-    which to predict, or a matrix or vector containing exactly the variables
-    needs for prediction.  If missing, the original data points are used.}
-  \item{se}{should standard errors be computed?}
-  \item{na.action}{function determining what should be done with missing
-    values in data frame \code{newdata}.  The default is to predict \code{NA}.}
-}}
+\item{se_fit}{Logical indicating whether or not a \code{.se.fit} column should be
+added to the augmented output. For some models, this calculation can be
+somwhat time-consuming. Defaults to \code{FALSE}.}
+
+\item{...}{Additional arguments. Not used. Needed to match generic
+signature only. \strong{Cautionary note:} Misspelled arguments will be
+absorbed in \code{...}, where they will be ignored. If the misspelled
+argument has a default value, the default value will be used.
+For example, if you pass \code{conf.lvel = 0.9}, all computation will
+proceed using \code{conf.level = 0.95}. Additionally, if you pass
+\code{newdata = my_tibble} to an \code{\link[=augment]{augment()}} method that does not
+accept a \code{newdata} argument, it will use the default value for
+the \code{data} argument.}
 }
 \description{
 Tidy summarizes information about the components of a model.
@@ -83,8 +86,8 @@ augment(lo, newdata = head(mtcars))
 }
 \value{
 A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
-  \item{.fitted}{Fitted / predicted value.}
-  \item{.resid}{Residuals of fitted values. TODO -- document when present. Residuals on which data set?}
-  \item{.se.fit}{Standard errors of fitted values. TODO -- prediction or mean interval?}
+  \item{.fitted}{Fitted or predicted value.}
+  \item{.resid}{The difference between fitted and observed values.}
+  \item{.se.fit}{Standard errors of fitted values.}
 
 }

@@ -74,7 +74,7 @@ missing at this time.
 }
 \examples{
 
-mod <- speedglm::speedlm(mpg ~ wt + qsec, data = mtcars)
+mod <- speedglm::speedlm(mpg ~ wt + qsec, data = mtcars, fitted = TRUE)
 
 tidy(mod)
 glance(mod)
@@ -90,7 +90,7 @@ Other speedlm tidiers: \code{\link{glance.speedlm}},
 \concept{speedlm tidiers}
 \value{
 A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
-  \item{.fitted}{Fitted / predicted value.}
-  \item{.resid}{Residuals of fitted values. TODO -- document when present. Residuals on which data set?}
+  \item{.fitted}{Fitted or predicted value.}
+  \item{.resid}{The difference between fitted and observed values.}
 
 }

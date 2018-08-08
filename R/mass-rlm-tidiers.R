@@ -59,6 +59,10 @@ tidy.rlm <- tidy.lm
 #' @template title_desc_augment
 #' 
 #' @param x An `rlm` object returned by [MASS::rlm()].
+#' @template param_data
+#' @template param_newdata
+#' @template param_se_fit
+#' @template param_unused_dots
 #'
 #' @evalRd return_augment(".se.fit", ".hat", ".sigma")
 #' @inherit glance.rlm examples

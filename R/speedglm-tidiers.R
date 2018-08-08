@@ -5,7 +5,7 @@
 #'
 #' @examples
 #'
-#' mod <- speedglm::speedlm(mpg ~ wt + qsec, data = mtcars)
+#' mod <- speedglm::speedlm(mpg ~ wt + qsec, data = mtcars, fitted = TRUE)
 #' 
 #' tidy(mod)
 #' glance(mod)
@@ -88,6 +88,6 @@ augment.speedlm <- function(x, data = model.frame(x), newdata = NULL, ...) {
   
   # no influence measures for speedlm, can only get fitted values
   # standard errors also not available for fit
-  augment_newdata(x, data, newdata, se_fit = FALSE)
+  augment_newdata(x, data, newdata, .se_fit = FALSE)
 }
 

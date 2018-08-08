@@ -9,6 +9,33 @@
 }
 \arguments{
 \item{x}{An \code{rlm} object returned by \code{\link[MASS:rlm]{MASS::rlm()}}.}
+
+\item{data}{A \code{\link[=data.frame]{data.frame()}} or \code{\link[tibble:tibble]{tibble::tibble()}} containing the original
+data that was used to produce the object \code{x}. Defaults to
+\code{stats::model.frame(x)} so that \code{augment(my_fit)} returns the augmented
+original data. \strong{Do not} pass new data to the \code{data} argument.
+Augment will report information such as influence and cooks distance for
+data passed to the \code{data} argument. These measures are only defined for
+the original training data.}
+
+\item{newdata}{A \code{\link[=data.frame]{data.frame()}} or \code{\link[tibble:tibble]{tibble::tibble()}} containing all
+the original predictors used to create \code{x}. Defaults to \code{NULL}, indicating
+that nothing has been passed to \code{newdata}. If \code{newdata} is specified,
+the \code{data} argument will be ignored.}
+
+\item{se_fit}{Logical indicating whether or not a \code{.se.fit} column should be
+added to the augmented output. For some models, this calculation can be
+somwhat time-consuming. Defaults to \code{FALSE}.}
+
+\item{...}{Additional arguments. Not used. Needed to match generic
+signature only. \strong{Cautionary note:} Misspelled arguments will be
+absorbed in \code{...}, where they will be ignored. If the misspelled
+argument has a default value, the default value will be used.
+For example, if you pass \code{conf.lvel = 0.9}, all computation will
+proceed using \code{conf.level = 0.95}. Additionally, if you pass
+\code{newdata = my_tibble} to an \code{\link[=augment]{augment()}} method that does not
+accept a \code{newdata} argument, it will use the default value for
+the \code{data} argument.}
 }
 \description{
 Augment accepts a model object and a dataset and adds
@@ -72,10 +99,10 @@ Other rlm tidiers: \code{\link{glance.rlm}},
 \concept{rlm tidiers}
 \value{
 A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
-  \item{.fitted}{Fitted / predicted value.}
-  \item{.hat}{Diagonal of the hat matrix. TODO -- add interpretation.}
-  \item{.resid}{Residuals of fitted values. TODO -- document when present. Residuals on which data set?}
-  \item{.se.fit}{Standard errors of fitted values. TODO -- prediction or mean interval?}
-  \item{.sigma}{Estimate of residual standard deviation when corresponding observation is dropped from model. Same as LOO-CV estimate?.}
+  \item{.fitted}{Fitted or predicted value.}
+  \item{.hat}{Diagonal of the hat matrix.}
+  \item{.resid}{The difference between fitted and observed values.}
+  \item{.se.fit}{Standard errors of fitted values.}
+  \item{.sigma}{Estimated residual standard deviation when corresponding observation is dropped from model.}
 
 }

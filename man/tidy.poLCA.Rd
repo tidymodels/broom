@@ -66,8 +66,7 @@ ggplot(td, aes(outcome, estimate, color = factor(class), group = class)) +
 
 au <- augment(nes2a)
 au
-au \%>\%
-  count(.class)
+count(au, .class)
 
 # if the original data is provided, it leads to NAs in new columns
 # for rows that weren't predicted

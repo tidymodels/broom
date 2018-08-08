@@ -7,7 +7,7 @@
 #' @evalRd return_tidy(
 #'   "variable",
 #'   uniqueness = "Proportion of residual, or unexplained variance",
-#'   "flX"
+#'   flX = "Factor loading for level X."
 #' )
 #'
 #' @examples

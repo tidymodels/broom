@@ -9,6 +9,19 @@
 \arguments{
 \item{x}{A \code{lmRob} object returned from \code{\link[robust:lmRob]{robust::lmRob()}}.}
 
+\item{data}{A \code{\link[=data.frame]{data.frame()}} or \code{\link[tibble:tibble]{tibble::tibble()}} containing the original
+data that was used to produce the object \code{x}. Defaults to
+\code{stats::model.frame(x)} so that \code{augment(my_fit)} returns the augmented
+original data. \strong{Do not} pass new data to the \code{data} argument.
+Augment will report information such as influence and cooks distance for
+data passed to the \code{data} argument. These measures are only defined for
+the original training data.}
+
+\item{newdata}{A \code{\link[=data.frame]{data.frame()}} or \code{\link[tibble:tibble]{tibble::tibble()}} containing all
+the original predictors used to create \code{x}. Defaults to \code{NULL}, indicating
+that nothing has been passed to \code{newdata}. If \code{newdata} is specified,
+the \code{data} argument will be ignored.}
+
 \item{...}{Additional arguments. Not used. Needed to match generic
 signature only. \strong{Cautionary note:} Misspelled arguments will be
 absorbed in \code{...}, where they will be ignored. If the misspelled
