@@ -7,7 +7,7 @@
 \method{glance}{lavaan}(x, ...)
 }
 \arguments{
-\item{x}{A \code{lavaan} object, such as those return from \code{\link[lavaan:cfa]{lavaan::cfa()}},
+\item{x}{A \code{lavaan} object, such as those returned from \code{\link[lavaan:cfa]{lavaan::cfa()}},
 and \code{\link[lavaan:sem]{lavaan::sem()}}.}
 
 \item{...}{Additional arguments. Not used. Needed to match generic
@@ -60,17 +60,13 @@ the measure will be reported as \code{NA}.
 }
 \examples{
 
-if (require("lavaan", quietly = TRUE)) {
+library(lavaan)
 
- library(lavaan)
-
- cfa.fit <- cfa(
-   'F =~ x1 + x2 + x3 + x4 + x5',
-   data = HolzingerSwineford1939, group = "school"
- )
- glance(cfa.fit)
-
-}
+cfa.fit <- cfa(
+  'F =~ x1 + x2 + x3 + x4 + x5',
+  data = HolzingerSwineford1939, group = "school"
+)
+glance(cfa.fit)
 
 }
 \seealso{

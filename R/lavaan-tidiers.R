@@ -1,7 +1,7 @@
 #' @templateVar class lavaan
 #' @template title_desc_tidy
 #' 
-#' @param x A `lavaan` object, such as those return from [lavaan::cfa()],
+#' @param x A `lavaan` object, such as those returned from [lavaan::cfa()],
 #'   and [lavaan::sem()].
 #' 
 #' @template param_confint
@@ -31,14 +31,11 @@
 #'   
 #' @examples
 #' 
-#' if (require("lavaan")) {
-#' 
-#'  library(lavaan)
+#' library(lavaan)
 #'  
-#'  cfa.fit <- cfa('F =~ x1 + x2 + x3 + x4 + x5 + x6 + x7 + x8 + x9',
-#'                 data = HolzingerSwineford1939, group = "school")
-#'  tidy(cfa.fit)
-#' }
+#' cfa.fit <- cfa('F =~ x1 + x2 + x3 + x4 + x5 + x6 + x7 + x8 + x9',
+#'                data = HolzingerSwineford1939, group = "school")
+#' tidy(cfa.fit)
 #' 
 #' @export
 #' @aliases lavaan_tidiers sem_tidiers cfa_tidiers
@@ -98,17 +95,13 @@ tidy.lavaan <- function(x, conf.int = FALSE, conf.level = 0.95, ...) {
 #'   
 #' @examples
 #'
-#' if (require("lavaan", quietly = TRUE)) {
-#' 
-#'  library(lavaan)
+#' library(lavaan)
 #'
-#'  cfa.fit <- cfa(
-#'    'F =~ x1 + x2 + x3 + x4 + x5',
-#'    data = HolzingerSwineford1939, group = "school"
-#'  )
-#'  glance(cfa.fit)
-#'
-#' }
+#' cfa.fit <- cfa(
+#'   'F =~ x1 + x2 + x3 + x4 + x5',
+#'   data = HolzingerSwineford1939, group = "school"
+#' )
+#' glance(cfa.fit)
 #'
 #' @export
 #' @family lavaan tidiers
