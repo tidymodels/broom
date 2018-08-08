@@ -19,15 +19,6 @@ proceed using \code{conf.level = 0.95}. Additionally, if you pass
 accept a \code{newdata} argument, it will use the default value for
 the \code{data} argument.}
 }
-\value{
-A one-row \link[tibble:tibble]{tibble::tibble} with columns:
-
-\item{logLik}{Log-likelihood of the model.}
-\item{AIC}{Akaike's Information Criterion for the model.}
-\item{BIC}{Bayesian Information Criterion for the model.}
-\item{deviance}{Deviance of the model.}
-\item{df.residual}{Residual degrees of freedom for the model.}
-}
 \description{
 Glance accepts a model object and returns a \code{\link[tibble:tibble]{tibble::tibble()}}
 with exactly one row of model summaries. The summaries are typically
@@ -47,9 +38,29 @@ the measure will be reported as \code{NA}.
 To glance \code{Gam} objects created by calls to \code{\link[gam:gam]{gam::gam()}}, see
 \code{\link[=glance.Gam]{glance.Gam()}}.
 }
+\examples{
+
+g <- mgcv::gam(mpg ~ s(hp) + am + qsec, data = mtcars)
+  
+tidy(g)
+tidy(g, parametric = TRUE)
+glance(g)
+
+
+}
 \seealso{
 \code{\link[=glance]{glance()}}, \code{\link[mgcv:gam]{mgcv::gam()}}, \code{\link[=glance.Gam]{glance.Gam()}}
 
 Other mgcv tidiers: \code{\link{tidy.gam}}
 }
 \concept{mgcv tidiers}
+\value{
+A \code{\link[tibble:tibble]{tibble::tibble()}} with exactly one row and columns:
+  \item{AIC}{Akaike's Information Criterion for the model.}
+  \item{BIC}{Bayesian Information Criterion for the model.}
+  \item{deviance}{Deviance of the model.}
+  \item{df}{Degrees of freedom used by the model.}
+  \item{df.residual}{Residual degrees of freedom for the model.}
+  \item{logLik}{The log-likelihood of the model. [stats::logLik()] may be a useful reference.}
+
+}

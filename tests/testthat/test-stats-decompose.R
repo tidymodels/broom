@@ -1,7 +1,11 @@
 context("stats-decompose")
 
+skip_if_not_installed("modeltests")
+library(modeltests)
+
 test_that("augment.decomposed.ts", {
-  check_arguments(augment.decomposed.ts)
+  # TODO: decide how to approach this. migrate tidier to sweep?
+  check_arguments(augment.decomposed.ts, strict = FALSE)
   
   d1a <- stats::decompose(nottem, type = "additive")
   d1b <- stats::decompose(nottem, type = "multiplicative")

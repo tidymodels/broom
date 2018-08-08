@@ -77,6 +77,9 @@
       <a href="../articles/broom_and_dplyr.html">Broom and dplyr</a>
     </li>
     <li>
+      <a href="../articles/external-tidiers.html">Tidiers in external packages</a>
+    </li>
+    <li>
       <a href="../articles/kmeans.html">K-means</a>
     </li>
   </ul>
@@ -85,7 +88,7 @@
   <a href="../news/index.html">News</a>
 </li>
         <li>
-  <a href="https://github.com/tidyverse/broom">
+  <a href="https://github.com/tidymodels/broom">
     <span class="fa fa-github fa-lg"></span>
      
   </a>
@@ -115,6 +118,20 @@
     <tbody>
       <tr>
         <th colspan="2">
+          <h2 id="section-tidying-generics" class="hasAnchor"><a href="#section-tidying-generics" class="anchor"></a>Tidying generics</h2>
+          <p class="section-desc"></p>
+        </th>
+      </tr>
+      <tr>
+        
+        <td>
+          <p><code><a href="reexports.html">reexports</a></code> </p>
+        </td>
+        <td><p>Objects exported from other packages</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
           <h2 id="section-tidiers" class="hasAnchor"><a href="#section-tidiers" class="anchor"></a>Tidiers</h2>
           <p class="section-desc"></p>
         </th>
@@ -128,27 +145,9 @@
       </tr><tr>
         
         <td>
-          <p><code><a href="data.frame_tidiers.html">tidy(<i>&lt;data.frame&gt;</i>)</a></code> <code><a href="data.frame_tidiers.html">glance(<i>&lt;data.frame&gt;</i>)</a></code> </p>
-        </td>
-        <td><p>Tidiers for data.frame objects</p></td>
-      </tr><tr>
-        
-        <td>
           <p><code><a href="durbinWatsonTest_tidiers.html">tidy(<i>&lt;durbinWatsonTest&gt;</i>)</a></code> <code><a href="durbinWatsonTest_tidiers.html">glance(<i>&lt;durbinWatsonTest&gt;</i>)</a></code> </p>
         </td>
         <td><p>Tidy/glance a(n) durbinWatsonTest object</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="emmeans_tidiers.html">tidy(<i>&lt;lsmobj&gt;</i>)</a></code> <code><a href="emmeans_tidiers.html">tidy(<i>&lt;ref.grid&gt;</i>)</a></code> <code><a href="emmeans_tidiers.html">tidy(<i>&lt;emmGrid&gt;</i>)</a></code> </p>
-        </td>
-        <td><p>Tidy estimated marginal means (least-squares means) objects from the emmeans and lsmeans packages</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="geeglm_tidiers.html">tidy(<i>&lt;geeglm&gt;</i>)</a></code> </p>
-        </td>
-        <td><p>Tidy a(n) geeglm object</p></td>
       </tr><tr>
         
         <td>
@@ -161,12 +160,6 @@
           <p><code><a href="lme4_tidiers.html">tidy(<i>&lt;merMod&gt;</i>)</a></code> <code><a href="lme4_tidiers.html">augment(<i>&lt;merMod&gt;</i>)</a></code> <code><a href="lme4_tidiers.html">glance(<i>&lt;merMod&gt;</i>)</a></code> </p>
         </td>
         <td><p>Tidying methods for mixed effects models</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="matrix_tidiers.html">tidy(<i>&lt;matrix&gt;</i>)</a></code> <code><a href="matrix_tidiers.html">glance(<i>&lt;matrix&gt;</i>)</a></code> </p>
-        </td>
-        <td><p>Tidiers for matrix objects</p></td>
       </tr><tr>
         
         <td>
@@ -200,13 +193,6 @@
       </tr><tr>
         
         <td>
-          <p><code><a href="rowwise_df_tidiers.html">tidy(<i>&lt;rowwise_df&gt;</i>)</a></code> <code><a href="rowwise_df_tidiers.html">tidy_(<i>&lt;rowwise_df&gt;</i>)</a></code> <code><a href="rowwise_df_tidiers.html">augment(<i>&lt;rowwise_df&gt;</i>)</a></code> <code><a href="rowwise_df_tidiers.html">augment_(<i>&lt;rowwise_df&gt;</i>)</a></code> <code><a href="rowwise_df_tidiers.html">glance(<i>&lt;rowwise_df&gt;</i>)</a></code> <code><a href="rowwise_df_tidiers.html">glance_(<i>&lt;rowwise_df&gt;</i>)</a></code> <code><a href="rowwise_df_tidiers.html">tidy(<i>&lt;tbl_df&gt;</i>)</a></code> <code><a href="rowwise_df_tidiers.html">augment(<i>&lt;tbl_df&gt;</i>)</a></code> <code><a href="rowwise_df_tidiers.html">glance(<i>&lt;tbl_df&gt;</i>)</a></code> </p>
-        </td>
-        <td><p>Tidying methods for rowwise_dfs from dplyr, for tidying each row and
-recombining the results</p></td>
-      </tr><tr>
-        
-        <td>
           <p><code><a href="rstanarm_tidiers.html">tidy(<i>&lt;stanreg&gt;</i>)</a></code> <code><a href="rstanarm_tidiers.html">glance(<i>&lt;stanreg&gt;</i>)</a></code> </p>
         </td>
         <td><p>Tidying methods for an rstanarm model</p></td>
@@ -216,12 +202,6 @@ recombining the results</p></td>
           <p><code><a href="sp_tidiers.html">tidy(<i>&lt;SpatialPolygonsDataFrame&gt;</i>)</a></code> <code><a href="sp_tidiers.html">tidy(<i>&lt;SpatialPolygons&gt;</i>)</a></code> <code><a href="sp_tidiers.html">tidy(<i>&lt;Polygons&gt;</i>)</a></code> <code><a href="sp_tidiers.html">tidy(<i>&lt;Polygon&gt;</i>)</a></code> <code><a href="sp_tidiers.html">tidy(<i>&lt;SpatialLinesDataFrame&gt;</i>)</a></code> <code><a href="sp_tidiers.html">tidy(<i>&lt;Lines&gt;</i>)</a></code> <code><a href="sp_tidiers.html">tidy(<i>&lt;Line&gt;</i>)</a></code> </p>
         </td>
         <td><p>Tidy a(n) SpatialPolygonsDataFrame object</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="sparse_tidiers.html">tidy(<i>&lt;dgTMatrix&gt;</i>)</a></code> <code><a href="sparse_tidiers.html">tidy(<i>&lt;dgCMatrix&gt;</i>)</a></code> <code><a href="sparse_tidiers.html">tidy(<i>&lt;sparseMatrix&gt;</i>)</a></code> </p>
-        </td>
-        <td><p>Tidy a sparseMatrix object from the Matrix package</p></td>
       </tr><tr>
         
         <td>
@@ -252,12 +232,6 @@ recombining the results</p></td>
           <p><code><a href="tidy.Mclust.html">tidy(<i>&lt;Mclust&gt;</i>)</a></code> </p>
         </td>
         <td><p>Tidy a(n) Mclust object</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="tidy.html">tidy()</a></code> </p>
-        </td>
-        <td><p>Turn a model object into a tidy tibble</p></td>
       </tr><tr>
         
         <td>
@@ -387,6 +361,12 @@ recombining the results</p></td>
       </tr><tr>
         
         <td>
+          <p><code><a href="tidy.emmGrid.html">tidy(<i>&lt;emmGrid&gt;</i>)</a></code> </p>
+        </td>
+        <td><p>Tidy a(n) emmGrid object</p></td>
+      </tr><tr>
+        
+        <td>
           <p><code><a href="tidy.ergm.html">tidy(<i>&lt;ergm&gt;</i>)</a></code> </p>
         </td>
         <td><p>Tidy a(n) ergm object</p></td>
@@ -426,6 +406,12 @@ recombining the results</p></td>
           <p><code><a href="tidy.garch.html">tidy(<i>&lt;garch&gt;</i>)</a></code> </p>
         </td>
         <td><p>Tidy a(n) garch object</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="tidy.geeglm.html">tidy(<i>&lt;geeglm&gt;</i>)</a></code> </p>
+        </td>
+        <td><p>Tidy a(n) geeglm object</p></td>
       </tr><tr>
         
         <td>
@@ -510,6 +496,12 @@ recombining the results</p></td>
           <p><code><a href="tidy.lmodel2.html">tidy(<i>&lt;lmodel2&gt;</i>)</a></code> </p>
         </td>
         <td><p>Tidy a(n) lmodel2 object</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="tidy.lsmobj.html">tidy(<i>&lt;lsmobj&gt;</i>)</a></code> </p>
+        </td>
+        <td><p>Tidy a(n) lsmobj object</p></td>
       </tr><tr>
         
         <td>
@@ -606,6 +598,12 @@ recombining the results</p></td>
           <p><code><a href="tidy.rcorr.html">tidy(<i>&lt;rcorr&gt;</i>)</a></code> </p>
         </td>
         <td><p>Tidy a(n) rcorr object</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="tidy.ref.grid.html">tidy(<i>&lt;ref.grid&gt;</i>)</a></code> </p>
+        </td>
+        <td><p>Tidy a(n) ref.grid object</p></td>
       </tr><tr>
         
         <td>
@@ -723,12 +721,6 @@ recombining the results</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="vector_tidiers.html">tidy(<i>&lt;numeric&gt;</i>)</a></code> <code><a href="vector_tidiers.html">tidy(<i>&lt;character&gt;</i>)</a></code> <code><a href="vector_tidiers.html">tidy(<i>&lt;logical&gt;</i>)</a></code> </p>
-        </td>
-        <td><p>Tidy atomic vectors</p></td>
-      </tr><tr>
-        
-        <td>
           <p><code><a href="glance.Arima.html">glance(<i>&lt;Arima&gt;</i>)</a></code> </p>
         </td>
         <td><p>Glance at a(n) Arima object</p></td>
@@ -744,13 +736,6 @@ recombining the results</p></td>
           <p><code><a href="glance.Mclust.html">glance(<i>&lt;Mclust&gt;</i>)</a></code> </p>
         </td>
         <td><p>Glance at a(n) Mclust object</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="glance.html">glance()</a></code> </p>
-        </td>
-        <td><p>Construct a single row summary "glance" of a model, fit, or other
-object</p></td>
       </tr><tr>
         
         <td>
@@ -930,7 +915,7 @@ object</p></td>
         <td>
           <p><code><a href="glance.poLCA.html">glance(<i>&lt;poLCA&gt;</i>)</a></code> </p>
         </td>
-        <td><p>Augment data with information from a(n) poLCA object</p></td>
+        <td><p>Glance at a(n) poLCA object</p></td>
       </tr><tr>
         
         <td>
@@ -1009,12 +994,6 @@ object</p></td>
           <p><code><a href="augment.Mclust.html">augment(<i>&lt;Mclust&gt;</i>)</a></code> </p>
         </td>
         <td><p>Augment data with information from a(n) Mclust object</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="augment.html">augment()</a></code> </p>
-        </td>
-        <td><p>Augment data with information from a(n) statistical object</p></td>
       </tr><tr>
         
         <td>
@@ -1189,12 +1168,6 @@ an augment call</p></td>
       <tr>
         
         <td>
-          <p><code><a href="bootstrap.html">bootstrap()</a></code> </p>
-        </td>
-        <td><p>Set up bootstrap replicates of a dplyr operation</p></td>
-      </tr><tr>
-        
-        <td>
           <p><code><a href="broom.html">broom</a></code> </p>
         </td>
         <td><p>Convert Statistical Objects into Tidy Tibbles</p></td>
@@ -1211,18 +1184,6 @@ an augment call</p></td>
         </td>
         <td><p>Add logLik, AIC, BIC, and other common measurements to a glance of
 a prediction</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="fix_data_frame.html">fix_data_frame()</a></code> </p>
-        </td>
-        <td><p>Ensure an object is a data frame, with rownames moved into a column</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="insert_NAs.html">insert_NAs()</a></code> </p>
-        </td>
-        <td><p>insert a row of NAs into a data frame wherever another data frame has NAs</p></td>
       </tr>
     </tbody>
     </table>
@@ -1231,6 +1192,7 @@ a prediction</p></td>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
+      <li><a href="#section-tidying-generics">Tidying generics</a></li>
       <li><a href="#section-tidiers">Tidiers</a></li>
       <li><a href="#section-miscellaneous">Miscellaneous</a></li>
     </ul>

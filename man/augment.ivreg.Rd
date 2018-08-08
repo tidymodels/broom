@@ -4,7 +4,7 @@
 \alias{augment.ivreg}
 \title{Augment data with information from a(n) ivreg object}
 \usage{
-\method{augment}{ivreg}(x, data = model.frame(x), newdata, ...)
+\method{augment}{ivreg}(x, data = model.frame(x), newdata = NULL, ...)
 }
 \arguments{
 \item{x}{An \code{ivreg} object created by a call to \code{\link[AER:ivreg]{AER::ivreg()}}.}
@@ -31,14 +31,6 @@ proceed using \code{conf.level = 0.95}. Additionally, if you pass
 \code{newdata = my_tibble} to an \code{\link[=augment]{augment()}} method that does not
 accept a \code{newdata} argument, it will use the default value for
 the \code{data} argument.}
-}
-\value{
-A \code{\link[tibble:tibble]{tibble::tibble()}} containing the data passed to \code{augment},
-and \strong{additional} columns:
-
-\item{.fitted}{The predicted response for that observation.}
-\item{.resid}{The residual for a particular point. Present only when
-data has been passed to \code{augment} via the \code{data} argument.}
 }
 \description{
 Augment accepts a model object and a dataset and adds
@@ -97,6 +89,8 @@ tidy(ivr, conf.int = TRUE)
 tidy(ivr, conf.int = TRUE, exponentiate = TRUE)
 
 augment(ivr)
+augment(ivr, data = CigarettesSW)
+augment(ivr, newdata = CigarettesSW)
 
 glance(ivr)
 
@@ -108,3 +102,9 @@ Other ivreg tidiers: \code{\link{glance.ivreg}},
   \code{\link{tidy.ivreg}}
 }
 \concept{ivreg tidiers}
+\value{
+A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
+  \item{.fitted}{Fitted / predicted value.}
+  \item{.resid}{Residuals of fitted values. TODO -- document when present. Residuals on which data set?}
+
+}

@@ -5,16 +5,13 @@
 #' @template param_confint
 #' @template param_unused_dots
 #' 
-#' 
-#' @return A [tibble::tibble] with one row for each coefficient and columns:
-#' 
-#'   \item{term}{The term in the nonlinear model being estimated and tested}
-#'   \item{estimate}{The estimated coefficient}
-#'   \item{std.error}{The standard error from the linear model}
-#'
-#' If `conf.int = TRUE`, also returns
-#'   \item{conf.low}{low end of confidence interval}
-#'   \item{conf.high}{high end of confidence interval}
+#' @evalRd return_tidy(
+#'  "term",
+#'  "estimate",
+#'  "std.error",
+#'  "conf.low",
+#'  "conf.high"
+#'  )
 #' 
 #' @examples
 #'
@@ -48,14 +45,9 @@ tidy.Arima <- function(x, conf.int = FALSE, conf.level = 0.95, ...) {
 #' @templateVar class Arima
 #' @template title_desc_glance
 #' 
-#' @inheritParams tidy.Arima
+#' @inherit tidy.Arima params examples
 #'
-#' @return A one-row [tibble::tibble] with columns:
-#' 
-#'   \item{sigma}{the square root of the estimated residual variance}
-#'   \item{logLik}{the data's log-likelihood under the model}
-#'   \item{AIC}{the Akaike Information Criterion}
-#'   \item{BIC}{the Bayesian Information Criterion}
+#' @evalRd return_glance("sigma", "logLik", "AIC", "BIC")
 #'
 #' @seealso [stats::arima()]
 #' @export

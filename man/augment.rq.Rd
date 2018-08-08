@@ -48,22 +48,6 @@ the \code{data} argument will be ignored.}
     in 'newdata'.  The default is to predict 'NA'.}
 }}
 }
-\value{
-A \link[tibble:tibble]{tibble::tibble} with one row per obseration and columns:
-
-\item{.resid}{Residuals}
-\item{.fitted}{Fitted quantiles of the model}
-\item{.tau}{Quantile estimated}
-
-Depending on the arguments passed on to \code{predict.rq} via \code{...},
-a confidence interval is also calculated on the fitted values resulting in
-columns:
-\item{.conf.low}{Lower confidence interval value}
-\item{.conf.high}{Upper confidence interval value}
-
-\code{predict.rq} does not provide confidence intervals when \code{newdata}
-is provided.
-}
 \description{
 Augment accepts a model object and a dataset and adds
 information about each observation in the dataset. Most commonly, this
@@ -103,6 +87,16 @@ We are in the process of defining behaviors for models fit with various
 \link{na.action} arguments, but make no guarantees about behavior when data is
 missing at this time.
 }
+\details{
+Depending on the arguments passed on to \code{predict.rq} via \code{...},
+a confidence interval is also calculated on the fitted values resulting in
+columns \code{.conf.low} and \code{.conf.high}. Does not provide confidence
+intervals when data is specified via the \code{newdata} argument.
+}
+\examples{
+
+print('TODO')
+}
 \seealso{
 \link{augment}, \code{\link[quantreg:rq]{quantreg::rq()}}, \code{\link[quantreg:predict.rq]{quantreg::predict.rq()}}
 
@@ -112,3 +106,10 @@ Other quantreg tidiers: \code{\link{augment.nlrq}},
   \code{\link{tidy.rqs}}, \code{\link{tidy.rq}}
 }
 \concept{quantreg tidiers}
+\value{
+A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
+  \item{.fitted}{Fitted / predicted value.}
+  \item{.resid}{Residuals of fitted values. TODO -- document when present. Residuals on which data set?}
+  \item{.tau}{Quantile estimated  Depending on the arguments passed on to `predict.rq` via `...`, a confidence interval is also calculated on the fitted values.}
+
+}

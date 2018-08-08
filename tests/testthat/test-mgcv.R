@@ -1,5 +1,8 @@
 context("mgcv")
 
+skip_if_not_installed("modeltests")
+library(modeltests)
+
 skip_if_not_installed("mgcv")
 
 fit <- mgcv::gam(weight ~ s(Time) + factor(Diet), data = ChickWeight)
@@ -13,7 +16,7 @@ test_that("tidy.gam", {
   td <- tidy(fit)
   tdp <- tidy(fit, parametric = TRUE)
   
-  check_tidy_output(td)
+  check_tidy_output(td, strict = FALSE)
   check_tidy_output(tdp)
 })
 

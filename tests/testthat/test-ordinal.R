@@ -1,5 +1,8 @@
 context("ordinal")
 
+skip_if_not_installed("modeltests")
+library(modeltests)
+
 skip_if_not_installed("ordinal")
 library(ordinal)
 
@@ -9,7 +12,7 @@ mfit <- clmm(rating ~ temp + contact + (1 | judge), data = wine)
 test_that("ordinal tidier arguments", {
   check_arguments(tidy.clm)
   check_arguments(glance.clm)
-  check_arguments(augment.clm)
+  check_arguments(augment.clm, strict = FALSE)
   
   check_arguments(tidy.clmm)
   check_arguments(glance.clmm)
@@ -25,6 +28,12 @@ test_that("tidy.clm", {
   
   check_dims(td, 7, 3)
   check_dims(td2, 7, 8)
+  
+  expect_equal(object = td$term,
+               expected = td2$term,
+               label = "'term' column in tidy output with `conf.int = FALSE`",
+               expected.label = "'term' column in tidy output with `conf.int = TRUE`",
+               info = "The terms (and their order) should be unaffected by whether `conf.int` = TRUE or `conf.int` = FALSE.")
 })
 
 test_that("glance.clm", {
@@ -39,7 +48,8 @@ test_that("augment.clm", {
     aug = augment.clm,
     model = fit,
     data = wine,
-    newdata = wine
+    newdata = wine,
+    strict = FALSE
   )
 })
 

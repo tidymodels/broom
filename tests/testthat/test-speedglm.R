@@ -1,10 +1,13 @@
 context("speedglm")
 
+skip_if_not_installed("modeltests")
+library(modeltests)
+
 skip_if_not_installed("speedglm")
 library(speedglm)
 
 fit <- speedlm(mpg ~ wt, mtcars)
-fit2 <- lm(mpg ~ wt + disp, mtcars)
+fit2 <- speedlm(mpg ~ wt + disp, mtcars)
 
 test_that("speedglm tidiers arguments", {
   check_arguments(tidy.speedlm)
@@ -32,7 +35,7 @@ test_that("glance.speedlm", {
   check_glance_outputs(gl)
 })
 
-test_that("augment works on speedlm", {
+test_that("augment.speedlm", {
   check_augment_function(
     aug = augment.speedlm,
     model = fit, 

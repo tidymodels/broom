@@ -24,18 +24,6 @@ proceed using \code{conf.level = 0.95}. Additionally, if you pass
 accept a \code{newdata} argument, it will use the default value for
 the \code{data} argument.}
 }
-\value{
-A one-row \link[tibble:tibble]{tibble::tibble} with columns:
-
-\item{statistic}{Test statistic used to compute the p-value}
-\item{p.value}{P-value}
-\item{parameter}{Parameter field in the htest, typically degrees of
-freedom}
-\item{method}{Method used to compute the statistic as a string}
-\item{logLik}{the data's log-likelihood under the model}
-\item{AIC}{the Akaike Information Criterion}
-\item{BIC}{the Bayesian Information Criterion}
-}
 \description{
 Tidy summarizes information about the components of a model.
 A model component might be a single term in a regression, a single
@@ -50,3 +38,15 @@ specify which components to return.
 Other garch tidiers: \code{\link{tidy.garch}}
 }
 \concept{garch tidiers}
+\value{
+A \code{\link[tibble:tibble]{tibble::tibble()}} with exactly one row and columns:
+  \item{AIC}{Akaike's Information Criterion for the model.}
+  \item{BIC}{Bayesian Information Criterion for the model.}
+  \item{logLik}{The log-likelihood of the model. [stats::logLik()] may be a useful reference.}
+  \item{method}{Needs custom info.}
+  \item{p.value}{Needs custom info.}
+  \item{statistic}{Needs custom info.}
+  \item{parameter}{Parameter field in the htest, typically degrees of
+    freedom.}
+
+}

@@ -1,5 +1,8 @@
 context("quantreg-rq")
 
+skip_if_not_installed("modeltests")
+library(modeltests)
+
 skip_if_not_installed("quantreg")
 library(quantreg)
 
@@ -25,7 +28,7 @@ test_that("tidy.rq", {
   td <- tidy(fit)
   td2 <- tidy(fit2)
   tdlarge_n <- tidy(fitlarge_n)
-  td_iid <- tidy(fit, se.type = "iid")
+  td_iid <- tidy(fit, conf.int = TRUE, se.type = "iid")
   
   check_tidy_output(td)
   check_tidy_output(td2)
@@ -34,7 +37,7 @@ test_that("tidy.rq", {
   
   check_dims(td, 4, 5)
   check_dims(td2, 1, 5)
-  check_dims(tdlarge_n, 4, 8)
+  check_dims(tdlarge_n, 4, 6)
   check_dims(td_iid, 4, 8)
 })
 
@@ -47,20 +50,22 @@ test_that("glance.rq", {
 test_that("augment.rq", {
   
   au <- augment(fit, interval = "confidence")
-  check_tibble(au, method = "augment")
+  check_tibble(au, method = "augment", strict = FALSE)
   check_dims(au, 21, 9)
   
   check_augment_function(
     aug = augment.rq,
     model = fit,
     data = df,
-    newdata = df
+    newdata = df,
+    strict = FALSE
   )
   
   check_augment_function(
     aug = augment.rq,
     model = fit2,
     data = df,
-    newdata = df
+    newdata = df,
+    strict = FALSE
   )
 })

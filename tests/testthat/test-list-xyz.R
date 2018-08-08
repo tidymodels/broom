@@ -1,5 +1,8 @@
 context("list-xyz")
 
+skip_if_not_installed("modeltests")
+library(modeltests)
+
 test_that("tidy_xyz", {
   
   check_arguments(tidy_xyz)
@@ -28,7 +31,7 @@ test_that("tidy_xyz", {
   
   td <- tidy(a)
   
-  check_tidy_output(td)
+  check_tidy_output(td, strict = FALSE)
   check_dims(td, 15, 3)
   
   expect_error(

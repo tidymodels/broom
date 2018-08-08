@@ -1,5 +1,8 @@
 context("stats-nls")
 
+skip_if_not_installed("modeltests")
+library(modeltests)
+
 fit <- nls(
   wt ~ a + b * mpg + c / disp,
   data = mtcars,

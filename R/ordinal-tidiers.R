@@ -6,17 +6,15 @@
 #' packge, or [survey::svyolr()] of the `survey` package.
 #'
 #' @param x a model of class `clm`, `clmm`, `polr` or `svyolr`
-#' @param conf.int whether to include a confidence interval
-#' @param conf.level confidence level of the interval, used only if
-#' `conf.int=TRUE`
-#' @param exponentiate whether to exponentiate the coefficient estimates
-#' and confidence intervals (typical for ordinal logistic regression)
-#' @param quick	whether to compute a smaller and faster version, containing only
-#' the term, estimate and coefficient_type columns
+#' @template param_confint
+#' @template param_exponentiate
+#' @template param_quick
+#' @template param_data
+#' @template param_newdata
+#' 
 #' @param conf.type the type of confidence interval
 #' (see [ordinal::confint.clm()])
-#' @param data original data, defaults to the extracting it from the model
-#' @param newdata if provided, performs predictions on the new data
+#' 
 #' @param type.predict type of prediction to compute for a CLM; passed on to
 #' [ordinal::predict.clm()] or `predict.polr`
 #' @param ... extra arguments
@@ -119,7 +117,11 @@ process_clm <- function(ret, x, conf.int = FALSE, conf.level = .95,
     colnames(CI) <- c("conf.low", "conf.high")
     CI <- as.data.frame(CI)
     CI$term <- rownames(CI)
+    
+    ret$orig_row_order <- seq_len(nrow(ret))
     ret <- merge(ret, unrowname(CI), by = "term", all.x = TRUE)
+    ret <- ret[order(ret$orig_row_order),]
+    ret$orig_row_order <- NULL
   }
 
   ret$estimate <- trans(ret$estimate)
@@ -157,7 +159,8 @@ glance.clmm <- glance.clm
 #' @rdname ordinal_tidiers
 #' @export
 augment.clm <- function(x, data = stats::model.frame(x),
-                        newdata, type.predict = c("prob", "class"), ...) {
+                        newdata = NULL, type.predict = c("prob", "class"),
+                        ...) {
   type.predict <- match.arg(type.predict)
   augment.lm(x, data, newdata, type.predict, ...)
 }

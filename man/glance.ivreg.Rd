@@ -23,24 +23,6 @@ proceed using \code{conf.level = 0.95}. Additionally, if you pass
 accept a \code{newdata} argument, it will use the default value for
 the \code{data} argument.}
 }
-\value{
-A one-row tibble with columns
-\item{r.squared}{The percent of variance explained by the model}
-\item{adj.r.squared}{r.squared adjusted based on the degrees of freedom}
-\item{sigma}{The square root of the estimated residual variance}
-\item{statistic}{Wald test statistic}
-\item{p.value}{p-value from the Wald test}
-\item{df}{Degrees of freedom used by the coefficients}
-\item{df.residual}{residual degrees of freedom}
-
-If \code{diagnostics = TRUE}, will also return the following columns:
-\item{statistic.Sargan}{Statistic for Sargan test}
-\item{p.value.Sargan}{P-value for Sargan test}
-\item{statistic.Wu.Hausman}{Statistic for Wu-Hausman test}
-\item{p.value.Wu.Hausman}{P-value for Wu-Hausman test}
-\item{statistic.weakinst}{Statistic for Wu-Hausman test}
-\item{p.value.weakinst}{P-value for weak instruments test}
-}
 \description{
 Glance accepts a model object and returns a \code{\link[tibble:tibble]{tibble::tibble()}}
 with exactly one row of model summaries. The summaries are typically
@@ -74,6 +56,8 @@ tidy(ivr, conf.int = TRUE)
 tidy(ivr, conf.int = TRUE, exponentiate = TRUE)
 
 augment(ivr)
+augment(ivr, data = CigarettesSW)
+augment(ivr, newdata = CigarettesSW)
 
 glance(ivr)
 
@@ -85,3 +69,20 @@ Other ivreg tidiers: \code{\link{augment.ivreg}},
   \code{\link{tidy.ivreg}}
 }
 \concept{ivreg tidiers}
+\value{
+A \code{\link[tibble:tibble]{tibble::tibble()}} with exactly one row and columns:
+  \item{adj.r.squared}{Adjusted R squared statistic, which is like the R squared statistic except taking degrees of freedom into account.}
+  \item{df}{Degrees of freedom used by the model.}
+  \item{df.residual}{Residual degrees of freedom for the model.}
+  \item{p.value.Sargan}{P-value for Sargan test.}
+  \item{p.value.weakinst}{P-value for weak instruments test.}
+  \item{p.value.Wu.Hausman}{P-value for Wu-Hausman test.}
+  \item{r.squared}{R squared statistic, or the percent of variation explained by the model. Also known as the coefficient of determination.}
+  \item{sigma}{Estimated standard error of the residuals.}
+  \item{statistic.Sargan}{Statistic for Sargan test.}
+  \item{statistic.weakinst}{Statistic for Wu-Hausman test.}
+  \item{statistic.Wu.Hausman}{Statistic for Wu-Hausman test.}
+  \item{statistic}{Wald test statistic.}
+  \item{p.value}{P-value for the Wald test.}
+
+}

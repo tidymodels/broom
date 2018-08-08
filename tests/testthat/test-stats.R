@@ -1,11 +1,14 @@
 context("stats")
 
+skip_if_not_installed("modeltests")
+library(modeltests)
+
 test_that("tidy.density", {
   den <- density(faithful$eruptions, bw = "sj")
   td <- tidy(den)
   
   check_arguments(tidy.density)
-  check_tidy_output(td)
+  check_tidy_output(td, strict = FALSE)
   check_dims(td, 512, 2)
 })
 

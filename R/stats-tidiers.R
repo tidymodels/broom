@@ -25,15 +25,14 @@ tidy.ftable <- function(x, ...) {
 #' @template param_unused_dots
 #' 
 #' @return A [tibble::tibble] with two columns: points `x` where the density
-#'   is estimated, and estimated density `y`.
-#'
+#'   is estimated, and estimated density `y`. When the input to the [stats::density()]
+#' function is an `nXm` matrix, as opposed to a `1Xm` vector, the input matrix is first flattened into a `1X(m*n)` vector
+#' and then the density function is applied as usual.
+
 #' @export
 #' @seealso [tidy()], [stats::density()]
 #' @family stats tidiers
 tidy.density <- function(x, ...) {
-  
-  # TODO: what happens when `x` has more than one dimension??
-  
   as_tibble(x[c("x", "y")])
 }
 
@@ -49,12 +48,7 @@ tidy.density <- function(x, ...) {
 #'   `upper` argument of [stats::dist()].
 #' @template param_unused_dots
 #'
-#' @return A [tibble::tibble] with one row for each pair of items in the 
-#'   distance matrix, with columns:
-#' 
-#'   \item{item1}{First item}
-#'   \item{item2}{Second item}
-#'   \item{distance}{Distance between items}
+#' @evalRd return_tidy("item1", "item2", "distance")
 #' 
 #' @details If the distance matrix does not include an upper triangle and/or
 #'   diagonal, the tidied version will not either.

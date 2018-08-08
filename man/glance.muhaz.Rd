@@ -19,15 +19,6 @@ proceed using \code{conf.level = 0.95}. Additionally, if you pass
 accept a \code{newdata} argument, it will use the default value for
 the \code{data} argument.}
 }
-\value{
-A one-row \link[tibble:tibble]{tibble::tibble} with columns:
-
-\item{nobs}{Number of observations used for estimation}
-\item{min.time}{The minimum observed event or censoring time}
-\item{max.time}{The maximum observed event or censoring time}
-\item{min.harzard}{Minimal estimated hazard}
-\item{max.hazard}{Maximal estimated hazard}
-}
 \description{
 Glance accepts a model object and returns a \code{\link[tibble:tibble]{tibble::tibble()}}
 with exactly one row of model summaries. The summaries are typically
@@ -43,9 +34,27 @@ computations to appropriate methods and gathers the results together.
 Sometimes a goodness of fit measure will be undefined. In these cases
 the measure will be reported as \code{NA}.
 }
+\examples{
+
+library(muhaz)
+
+data(ovarian, package="survival")
+x <- muhaz::muhaz(ovarian$futime, ovarian$fustat)
+tidy(x)
+glance(x)
+
+}
 \seealso{
 \code{\link[=glance]{glance()}}, \code{\link[muhaz:muhaz]{muhaz::muhaz()}}
 
 Other muhaz tidiers: \code{\link{tidy.muhaz}}
 }
 \concept{muhaz tidiers}
+\value{
+A \code{\link[tibble:tibble]{tibble::tibble()}} with exactly one row and columns:
+  \item{max.hazard}{Maximal estimated hazard}
+  \item{max.time}{The maximum observed event or censoring time}
+  \item{min.time}{The minimum observed event or censoring time}
+  \item{nobs}{Number of observations used.}
+
+}

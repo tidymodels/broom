@@ -19,13 +19,6 @@ proceed using \code{conf.level = 0.95}. Additionally, if you pass
 accept a \code{newdata} argument, it will use the default value for
 the \code{data} argument.}
 }
-\value{
-A one-row \link[tibble:tibble]{tibble::tibble} with columns:
-\item{n}{Number of observations used in estimation}
-\item{logLik}{log-likelihood of estimated data}
-\item{AIC}{Akaike Information Criterion}
-\item{BIC}{Bayesian Information Criterion}
-}
 \description{
 Glance accepts a model object and returns a \code{\link[tibble:tibble]{tibble::tibble()}}
 with exactly one row of model summaries. The summaries are typically
@@ -41,9 +34,29 @@ computations to appropriate methods and gathers the results together.
 Sometimes a goodness of fit measure will be undefined. In these cases
 the measure will be reported as \code{NA}.
 }
+\examples{
+
+set.seed(2015)
+x <- rnorm(100, 5, 2)
+
+library(MASS)
+fit <- fitdistr(x, dnorm, list(mean = 3, sd = 1))
+
+tidy(fit)
+glance(fit)
+
+}
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[MASS:fitdistr]{MASS::fitdistr()}}
 
 Other fitdistr tidiers: \code{\link{tidy.fitdistr}}
 }
 \concept{fitdistr tidiers}
+\value{
+A \code{\link[tibble:tibble]{tibble::tibble()}} with exactly one row and columns:
+  \item{AIC}{Akaike's Information Criterion for the model.}
+  \item{BIC}{Bayesian Information Criterion for the model.}
+  \item{logLik}{The log-likelihood of the model. [stats::logLik()] may be a useful reference.}
+  \item{n}{Needs custom info.}
+
+}

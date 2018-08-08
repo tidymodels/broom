@@ -77,6 +77,9 @@
       <a href="../articles/broom_and_dplyr.html">Broom and dplyr</a>
     </li>
     <li>
+      <a href="../articles/external-tidiers.html">Tidiers in external packages</a>
+    </li>
+    <li>
       <a href="../articles/kmeans.html">K-means</a>
     </li>
   </ul>
@@ -85,7 +88,7 @@
   <a href="../news/index.html">News</a>
 </li>
         <li>
-  <a href="https://github.com/tidyverse/broom">
+  <a href="https://github.com/tidymodels/broom">
     <span class="fa fa-github fa-lg"></span>
      
   </a>
@@ -102,7 +105,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Tidying methods for ordinal logistic regression models</h1>
-    <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/mass-polr-tidiers.R'><code>R/mass-polr-tidiers.R</code></a>, <a href='http://github.com/tidyverse/broom/blob/master/R/ordinal-tidiers.R'><code>R/ordinal-tidiers.R</code></a>, <a href='http://github.com/tidyverse/broom/blob/master/R/survey-tidiers.R'><code>R/survey-tidiers.R</code></a></small>
+    <small class="dont-index">Source: <a href='http://github.com/tidymodels/broom/blob/master/R/mass-polr-tidiers.R'><code>R/mass-polr-tidiers.R</code></a>, <a href='http://github.com/tidymodels/broom/blob/master/R/ordinal-tidiers.R'><code>R/ordinal-tidiers.R</code></a>, <a href='http://github.com/tidymodels/broom/blob/master/R/survey-tidiers.R'><code>R/survey-tidiers.R</code></a></small>
     <div class="hidden name"><code>ordinal_tidiers.Rd</code></div>
     </div>
 
@@ -116,42 +119,42 @@ packge, or <code><a href='http://www.rdocumentation.org/packages/survey/topics/s
     </div>
 
     <pre class="usage"><span class='co'># S3 method for polr</span>
-<span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>x</span>, <span class='kw'>conf.int</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>conf.level</span> <span class='kw'>=</span> <span class='fl'>0.95</span>,
+<span class='fu'><a href='http://www.rdocumentation.org/packages/modelgenerics/topics/generics'>tidy</a></span>(<span class='no'>x</span>, <span class='kw'>conf.int</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>conf.level</span> <span class='kw'>=</span> <span class='fl'>0.95</span>,
   <span class='kw'>exponentiate</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>quick</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='no'>...</span>)
 
 <span class='co'># S3 method for polr</span>
-<span class='fu'><a href='glance.html'>glance</a></span>(<span class='no'>x</span>, <span class='no'>...</span>)
+<span class='fu'><a href='http://www.rdocumentation.org/packages/modelgenerics/topics/generics'>glance</a></span>(<span class='no'>x</span>, <span class='no'>...</span>)
 
 <span class='co'># S3 method for polr</span>
-<span class='fu'><a href='augment.html'>augment</a></span>(<span class='no'>x</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='kw pkg'>stats</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/stats/topics/model.frame'>model.frame</a></span>(<span class='no'>x</span>), <span class='no'>newdata</span>,
+<span class='fu'><a href='http://www.rdocumentation.org/packages/modelgenerics/topics/generics'>augment</a></span>(<span class='no'>x</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='kw pkg'>stats</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/stats/topics/model.frame'>model.frame</a></span>(<span class='no'>x</span>), <span class='kw'>newdata</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>type.predict</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"probs"</span>, <span class='st'>"class"</span>), <span class='no'>...</span>)
 
 <span class='co'># S3 method for clm</span>
-<span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>x</span>, <span class='kw'>conf.int</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>conf.level</span> <span class='kw'>=</span> <span class='fl'>0.95</span>,
+<span class='fu'><a href='http://www.rdocumentation.org/packages/modelgenerics/topics/generics'>tidy</a></span>(<span class='no'>x</span>, <span class='kw'>conf.int</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>conf.level</span> <span class='kw'>=</span> <span class='fl'>0.95</span>,
   <span class='kw'>exponentiate</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>quick</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>conf.type</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"profile"</span>,
   <span class='st'>"Wald"</span>), <span class='no'>...</span>)
 
 <span class='co'># S3 method for clmm</span>
-<span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>x</span>, <span class='kw'>conf.int</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>conf.level</span> <span class='kw'>=</span> <span class='fl'>0.95</span>,
+<span class='fu'><a href='http://www.rdocumentation.org/packages/modelgenerics/topics/generics'>tidy</a></span>(<span class='no'>x</span>, <span class='kw'>conf.int</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>conf.level</span> <span class='kw'>=</span> <span class='fl'>0.95</span>,
   <span class='kw'>exponentiate</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>quick</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>conf.type</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"profile"</span>,
   <span class='st'>"Wald"</span>), <span class='no'>...</span>)
 
 <span class='co'># S3 method for clm</span>
-<span class='fu'><a href='glance.html'>glance</a></span>(<span class='no'>x</span>, <span class='no'>...</span>)
+<span class='fu'><a href='http://www.rdocumentation.org/packages/modelgenerics/topics/generics'>glance</a></span>(<span class='no'>x</span>, <span class='no'>...</span>)
 
 <span class='co'># S3 method for clmm</span>
-<span class='fu'><a href='glance.html'>glance</a></span>(<span class='no'>x</span>, <span class='no'>...</span>)
+<span class='fu'><a href='http://www.rdocumentation.org/packages/modelgenerics/topics/generics'>glance</a></span>(<span class='no'>x</span>, <span class='no'>...</span>)
 
 <span class='co'># S3 method for clm</span>
-<span class='fu'><a href='augment.html'>augment</a></span>(<span class='no'>x</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='kw pkg'>stats</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/stats/topics/model.frame'>model.frame</a></span>(<span class='no'>x</span>), <span class='no'>newdata</span>,
+<span class='fu'><a href='http://www.rdocumentation.org/packages/modelgenerics/topics/generics'>augment</a></span>(<span class='no'>x</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='kw pkg'>stats</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/stats/topics/model.frame'>model.frame</a></span>(<span class='no'>x</span>), <span class='kw'>newdata</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>type.predict</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"prob"</span>, <span class='st'>"class"</span>), <span class='no'>...</span>)
 
 <span class='co'># S3 method for svyolr</span>
-<span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>x</span>, <span class='kw'>conf.int</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>conf.level</span> <span class='kw'>=</span> <span class='fl'>0.95</span>,
+<span class='fu'><a href='http://www.rdocumentation.org/packages/modelgenerics/topics/generics'>tidy</a></span>(<span class='no'>x</span>, <span class='kw'>conf.int</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>conf.level</span> <span class='kw'>=</span> <span class='fl'>0.95</span>,
   <span class='kw'>exponentiate</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>quick</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='no'>...</span>)
 
 <span class='co'># S3 method for svyolr</span>
-<span class='fu'><a href='glance.html'>glance</a></span>(<span class='no'>x</span>, <span class='no'>...</span>)</pre>
+<span class='fu'><a href='http://www.rdocumentation.org/packages/modelgenerics/topics/generics'>glance</a></span>(<span class='no'>x</span>, <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -162,22 +165,27 @@ packge, or <code><a href='http://www.rdocumentation.org/packages/survey/topics/s
     </tr>
     <tr>
       <th>conf.int</th>
-      <td><p>whether to include a confidence interval</p></td>
+      <td><p>Logical indicating whether or not to include a confidence
+interval in the tidied output. Defaults to <code>FALSE</code>.</p></td>
     </tr>
     <tr>
       <th>conf.level</th>
-      <td><p>confidence level of the interval, used only if
-<code>conf.int=TRUE</code></p></td>
+      <td><p>The confidence level to use for the confidence interval
+if <code>conf.int = TRUE</code>. Must be strictly greater than 0 and less than 1.
+Defaults to 0.95, which corresponds to a 95 percent confidence interval.</p></td>
     </tr>
     <tr>
       <th>exponentiate</th>
-      <td><p>whether to exponentiate the coefficient estimates
-and confidence intervals (typical for ordinal logistic regression)</p></td>
+      <td><p>Logical indicating whether or not to exponentiate the
+the coefficient estimates. This is typical for logistic and multinomial
+regressions, but a bad idea if there is no log or logit link. Defaults
+to <code>FALSE</code>.</p></td>
     </tr>
     <tr>
       <th>quick</th>
-      <td><p>whether to compute a smaller and faster version, containing only
-the term, estimate and coefficient_type columns</p></td>
+      <td><p>Logical indiciating if the only the <code>term</code> and <code>estimate</code>
+columns should be returned. Often useful to avoid time consuming
+covariance and standard error calculations. Defaults to <code>FALSE</code>.</p></td>
     </tr>
     <tr>
       <th>...</th>
@@ -185,11 +193,20 @@ the term, estimate and coefficient_type columns</p></td>
     </tr>
     <tr>
       <th>data</th>
-      <td><p>original data, defaults to the extracting it from the model</p></td>
+      <td><p>A <code>data.frame()</code> or <code><a href='http://www.rdocumentation.org/packages/tibble/topics/tibble'>tibble::tibble()</a></code> containing the original
+data that was used to produce the object <code>x</code>. Defaults to
+<code><a href='http://www.rdocumentation.org/packages/stats/topics/model.frame'>stats::model.frame(x)</a></code> so that <code><a href='http://www.rdocumentation.org/packages/modelgenerics/topics/generics'>augment(my_fit)</a></code> returns the augmented
+original data. <strong>Do not</strong> pass new data to the <code>data</code> argument.
+Augment will report information such as influence and cooks distance for
+data passed to the <code>data</code> argument. These measures are only defined for
+the original training data.</p></td>
     </tr>
     <tr>
       <th>newdata</th>
-      <td><p>if provided, performs predictions on the new data</p></td>
+      <td><p>A <code>data.frame()</code> or <code><a href='http://www.rdocumentation.org/packages/tibble/topics/tibble'>tibble::tibble()</a></code> containing all
+the original predictors used to create <code>x</code>. Defaults to <code>NULL</code>, indicating
+that nothing has been passed to <code>newdata</code>. If <code>newdata</code> is specified,
+the <code>data</code> argument will be ignored.</p></td>
     </tr>
     <tr>
       <th>type.predict</th>
@@ -242,29 +259,31 @@ The structure depends on the method chosen.
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fu'>require</span>(<span class='no'>ordinal</span>)){
   <span class='no'>clm_mod</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/ordinal/topics/clm'>clm</a></span>(<span class='no'>rating</span> ~ <span class='no'>temp</span> * <span class='no'>contact</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>wine</span>)
-  <span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>clm_mod</span>)
-  <span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>clm_mod</span>, <span class='kw'>conf.int</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
-  <span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>clm_mod</span>, <span class='kw'>conf.int</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>conf.type</span> <span class='kw'>=</span> <span class='st'>"Wald"</span>, <span class='kw'>exponentiate</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
-  <span class='fu'><a href='glance.html'>glance</a></span>(<span class='no'>clm_mod</span>)
-  <span class='fu'><a href='augment.html'>augment</a></span>(<span class='no'>clm_mod</span>)
+  <span class='fu'><a href='http://www.rdocumentation.org/packages/modelgenerics/topics/generics'>tidy</a></span>(<span class='no'>clm_mod</span>)
+  <span class='fu'><a href='http://www.rdocumentation.org/packages/modelgenerics/topics/generics'>tidy</a></span>(<span class='no'>clm_mod</span>, <span class='kw'>conf.int</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+  <span class='fu'><a href='http://www.rdocumentation.org/packages/modelgenerics/topics/generics'>tidy</a></span>(<span class='no'>clm_mod</span>, <span class='kw'>conf.int</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>conf.type</span> <span class='kw'>=</span> <span class='st'>"Wald"</span>, <span class='kw'>exponentiate</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+  <span class='fu'><a href='http://www.rdocumentation.org/packages/modelgenerics/topics/generics'>glance</a></span>(<span class='no'>clm_mod</span>)
+  <span class='fu'><a href='http://www.rdocumentation.org/packages/modelgenerics/topics/generics'>augment</a></span>(<span class='no'>clm_mod</span>)
 
   <span class='no'>clm_mod2</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/ordinal/topics/clm'>clm</a></span>(<span class='no'>rating</span> ~ <span class='no'>temp</span>, <span class='kw'>nominal</span> <span class='kw'>=</span> ~ <span class='no'>contact</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>wine</span>)
-  <span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>clm_mod2</span>)
+  <span class='fu'><a href='http://www.rdocumentation.org/packages/modelgenerics/topics/generics'>tidy</a></span>(<span class='no'>clm_mod2</span>)
 
   <span class='no'>clmm_mod</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/ordinal/topics/clmm'>clmm</a></span>(<span class='no'>rating</span> ~ <span class='no'>temp</span> + <span class='no'>contact</span> + (<span class='fl'>1</span> <span class='kw'>|</span> <span class='no'>judge</span>), <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>wine</span>)
-  <span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>clmm_mod</span>)
-  <span class='fu'><a href='glance.html'>glance</a></span>(<span class='no'>clmm_mod</span>)
+  <span class='fu'><a href='http://www.rdocumentation.org/packages/modelgenerics/topics/generics'>tidy</a></span>(<span class='no'>clmm_mod</span>)
+  <span class='fu'><a href='http://www.rdocumentation.org/packages/modelgenerics/topics/generics'>glance</a></span>(<span class='no'>clmm_mod</span>)
 }</div><div class='output co'>#&gt; <span class='message'>Loading required package: ordinal</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Attaching package: ‘ordinal’</span></div><div class='output co'>#&gt; <span class='message'>The following object is masked from ‘package:dplyr’:</span>
+#&gt; <span class='message'>Attaching package: ‘ordinal’</span></div><div class='output co'>#&gt; <span class='message'>The following object is masked from ‘package:plm’:</span>
+#&gt; <span class='message'></span>
+#&gt; <span class='message'>    ranef</span></div><div class='output co'>#&gt; <span class='message'>The following object is masked from ‘package:dplyr’:</span>
 #&gt; <span class='message'></span>
 #&gt; <span class='message'>    slice</span></div><div class='output co'>#&gt; # A tibble: 1 x 4
 #&gt;     edf logLik   AIC   BIC
 #&gt;   &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
 #&gt; 1     7  -81.6  177.  193.</div><div class='input'><span class='kw'>if</span> (<span class='fu'>require</span>(<span class='no'>MASS</span>)) {
   <span class='no'>polr_mod</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/MASS/topics/polr'>polr</a></span>(<span class='no'>Sat</span> ~ <span class='no'>Infl</span> + <span class='no'>Type</span> + <span class='no'>Cont</span>, <span class='kw'>weights</span> <span class='kw'>=</span> <span class='no'>Freq</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>housing</span>)
-  <span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>polr_mod</span>, <span class='kw'>exponentiate</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>conf.int</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
-  <span class='fu'><a href='glance.html'>glance</a></span>(<span class='no'>polr_mod</span>)
-  <span class='fu'><a href='augment.html'>augment</a></span>(<span class='no'>polr_mod</span>, <span class='kw'>type.predict</span> <span class='kw'>=</span> <span class='st'>"class"</span>)
+  <span class='fu'><a href='http://www.rdocumentation.org/packages/modelgenerics/topics/generics'>tidy</a></span>(<span class='no'>polr_mod</span>, <span class='kw'>exponentiate</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>conf.int</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+  <span class='fu'><a href='http://www.rdocumentation.org/packages/modelgenerics/topics/generics'>glance</a></span>(<span class='no'>polr_mod</span>)
+  <span class='fu'><a href='http://www.rdocumentation.org/packages/modelgenerics/topics/generics'>augment</a></span>(<span class='no'>polr_mod</span>, <span class='kw'>type.predict</span> <span class='kw'>=</span> <span class='st'>"class"</span>)
 }</div><div class='output co'>#&gt; # A tibble: 72 x 6
 #&gt;    Sat    Infl   Type      Cont  X.weights. .fitted
 #&gt;  * &lt;ord&gt;  &lt;fct&gt;  &lt;fct&gt;     &lt;fct&gt;      &lt;int&gt;   &lt;dbl&gt;

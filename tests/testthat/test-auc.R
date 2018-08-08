@@ -1,4 +1,8 @@
 context("auc")
+
+skip_if_not_installed("modeltests")
+library(modeltests)
+
 skip_if_not_installed("AUC")
 
 test_that("AUC::roc tidier arguments", {

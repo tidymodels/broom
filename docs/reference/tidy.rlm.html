@@ -77,6 +77,9 @@
       <a href="../articles/broom_and_dplyr.html">Broom and dplyr</a>
     </li>
     <li>
+      <a href="../articles/external-tidiers.html">Tidiers in external packages</a>
+    </li>
+    <li>
       <a href="../articles/kmeans.html">K-means</a>
     </li>
   </ul>
@@ -85,7 +88,7 @@
   <a href="../news/index.html">News</a>
 </li>
         <li>
-  <a href="https://github.com/tidyverse/broom">
+  <a href="https://github.com/tidymodels/broom">
     <span class="fa fa-github fa-lg"></span>
      
   </a>
@@ -102,7 +105,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Tidy a(n) rlm object</h1>
-    <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/mass-rlm-tidiers.R'><code>R/mass-rlm-tidiers.R</code></a></small>
+    <small class="dont-index">Source: <a href='http://github.com/tidymodels/broom/blob/master/R/mass-rlm-tidiers.R'><code>R/mass-rlm-tidiers.R</code></a></small>
     <div class="hidden name"><code>tidy.rlm.Rd</code></div>
     </div>
 
@@ -113,7 +116,7 @@
     </div>
 
     <pre class="usage"><span class='co'># S3 method for rlm</span>
-<span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>x</span>, <span class='no'>...</span>)</pre>
+<span class='fu'><a href='http://www.rdocumentation.org/packages/modelgenerics/topics/generics'>tidy</a></span>(<span class='no'>x</span>, <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -142,29 +145,6 @@ to <code>FALSE</code>.</p></dd>
     </tr>
     </table>
     
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
-
-    <p>A <code><a href='http://www.rdocumentation.org/packages/tibble/topics/tibble'>tibble::tibble()</a></code> with one row for each term in the
-regression. The tibble has columns:</p>
-<dt>term</dt><dd><p>The name of the regression term.</p></dd>
-<dt>estimate</dt><dd><p>The estimated value of the regression term.</p></dd>
-<dt>std.error</dt><dd><p>The standard error of the regression term.</p></dd>
-<dt>statistic</dt><dd><p>The value of a statistic, almost always a T-statistic,
-to use in a hypothesis that the regression term is non-zero.</p></dd>
-<dt>p.value</dt><dd><p>The two-sided p-value associated with the observed
-statistic.</p></dd>
-<dt>conf.low</dt><dd><p>The low end of a confidence interval for the regression
-term. Included only if <code>conf.int = TRUE</code>.</p></dd>
-<dt>conf.high</dt><dd><p>The high end of a confidence interval for the regression
-term. Included only if <code>conf.int = TRUE</code>.</p></dd>
-
-If the linear model is an mlm object (multiple linear model),
-there is an additional column:
-
-<dt>response</dt><dd><p>Which response column the coefficients correspond to
-(typically Y1, Y2, etc)</p></dd>
-
-    
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>For tidiers for models from the <span class="pkg">robust</span> package see
@@ -172,7 +152,7 @@ there is an additional column:
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='tidy.html'>tidy()</a></code>, <code><a href='tidy.lm.html'>tidy.lm()</a></code></p>
+    <div class='dont-index'><p><code><a href='http://www.rdocumentation.org/packages/modelgenerics/topics/generics'>tidy()</a></code>, <code><a href='tidy.lm.html'>tidy.lm()</a></code></p>
 <p><code><a href='http://www.rdocumentation.org/packages/MASS/topics/rlm'>MASS::rlm()</a></code></p>
 <p>Other rlm tidiers: <code><a href='augment.rlm.html'>augment.rlm</a></code>,
   <code><a href='glance.rlm.html'>glance.rlm</a></code></p></div>
@@ -184,8 +164,6 @@ there is an additional column:
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
       
-      <li><a href="#value">Value</a></li>
-
       <li><a href="#details">Details</a></li>
 
       <li><a href="#see-also">See also</a></li>

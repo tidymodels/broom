@@ -17,9 +17,9 @@ knitr::opts_chunk$set(
 # broom  <img src="man/figures/logo.png" align="right" width="100" height="100" />
 
 [![CRAN status](https://www.r-pkg.org/badges/version/broom)](https://cran.r-project.org/package=broom)
-[![Travis-CI Build Status](https://travis-ci.org/tidyverse/broom.svg?branch=master)](https://travis-ci.org/tidyverse/broom)
-[![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/tidyverse/broom?branch=master&svg=true)](https://ci.appveyor.com/project/tidyverse/broom)
-[![Coverage Status](https://img.shields.io/codecov/c/github/tidyverse/broom/master.svg)](https://codecov.io/github/tidyverse/broom?branch=master)
+[![Travis-CI Build Status](https://travis-ci.org/tidymodels/broom.svg?branch=master)](https://travis-ci.org/tidymodels/broom)
+[![AppVeyor build status](https://ci.appveyor.com/api/projects/status/github/alexpghayes/broom?branch=master&svg=true)](https://ci.appveyor.com/project/alexpghayes/broom)
+[![Coverage Status](https://img.shields.io/codecov/c/github/tidymodels/broom/master.svg)](https://codecov.io/github/tidymodels/broom?branch=master)
 
 ## Overview
 
@@ -38,18 +38,18 @@ If you aren't familiar with tidy data structures and want to know how they can m
 ## Installation
 
 ```{r, eval = FALSE}
-# we recommend installing the entire tidyverse, which includes broom:
-install.packages("tidyverse")
+# we recommend installing the entire tidyverse modeling set, which includes broom:
+install.packages("tidymodels")
 
 # alternatively, to install just broom:
 install.packages("broom")
 
 # to get the development version from GitHub:
 install.packages("devtools")
-devtools::install_github("tidyverse/broom")
+devtools::install_github("tidymodels/broom")
 ```
 
-If you find a bug, please file a minimal reproducible example in the [issues](https://github.com/tidyverse/broom/issues).
+If you find a bug, please file a minimal reproducible example in the [issues](https://github.com/tidymodels/broom/issues).
 
 ## Usage
 
@@ -78,7 +78,7 @@ augment(fit, data = iris)
 
 We welcome contributions of all types!
 
-If you have never made a pull request to an R package before, broom is an excellent place to start. Find an [issue](https://github.com/tidyverse/broom/issues/) with the **Beginner Friendly** tag and comment that you'd like to take it on and we'll help you get started.
+If you have never made a pull request to an R package before, broom is an excellent place to start. Find an [issue](https://github.com/tidymodels/broom/issues/) with the **Beginner Friendly** tag and comment that you'd like to take it on and we'll help you get started.
 
 We encourage typo corrections, bug reports, bug fixes and feature requests. Feedback on the clarity of the documentation is especially valuable.
 

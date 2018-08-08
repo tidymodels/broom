@@ -5,7 +5,7 @@
 \title{add fitted values, residuals, and other common outputs to
 an augment call}
 \usage{
-augment_columns(x, data, newdata, type, type.predict = type,
+augment_columns(x, data, newdata = NULL, type, type.predict = type,
   type.residuals = type, se.fit = TRUE, ...)
 }
 \arguments{

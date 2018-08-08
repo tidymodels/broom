@@ -7,7 +7,7 @@
 \alias{cfa_tidiers}
 \title{Tidy a(n) lavaan object}
 \usage{
-\method{tidy}{lavaan}(x, conf.int = TRUE, conf.level = 0.95, ...)
+\method{tidy}{lavaan}(x, conf.int = FALSE, conf.level = 0.95, ...)
 }
 \arguments{
 \item{x}{A \code{lavaan} object, such as those return from \code{\link[lavaan:cfa]{lavaan::cfa()}},

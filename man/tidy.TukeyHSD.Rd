@@ -19,16 +19,6 @@ proceed using \code{conf.level = 0.95}. Additionally, if you pass
 accept a \code{newdata} argument, it will use the default value for
 the \code{data} argument.}
 }
-\value{
-A \link[tibble:tibble]{tibble::tibble} with one row per comparison and columns:
-
-\item{term}{Term for which levels are being compared}
-\item{comparison}{Levels being compared, separated by -}
-\item{estimate}{Estimate of difference}
-\item{conf.low}{Low end of confidence interval of difference}
-\item{conf.high}{High end of confidence interval of difference}
-\item{adj.p.value}{P-value adjusted for multiple comparisons}
-}
 \description{
 Tidy summarizes information about the components of a model.
 A model component might be a single term in a regression, a single
@@ -56,3 +46,12 @@ Other anova tidiers: \code{\link{tidy.anova}},
   \code{\link{tidy.manova}}
 }
 \concept{anova tidiers}
+\value{
+A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
+  \item{adj.p.value}{P-value adjusted for multiple comparisons}
+  \item{comparison}{Levels being compared, separated by -}
+  \item{conf.high}{The upper end of a confidence interval for the term under consideration. Included only if `conf.int = TRUE`.}
+  \item{conf.low}{The lower end of a confidence interval for the term under consideration. Included only if `conf.int = TRUE`.}
+  \item{estimate}{The estimated value of the regression term.}
+
+}

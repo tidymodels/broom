@@ -20,14 +20,6 @@ proceed using \code{conf.level = 0.95}. Additionally, if you pass
 accept a \code{newdata} argument, it will use the default value for
 the \code{data} argument.}
 }
-\value{
-A \link[tibble:tibble]{tibble::tibble} with one row per group/group comparison and
-columns:
-
-\item{group1}{First group being compared}
-\item{group2}{Second group being compared}
-\item{p.value}{(Adjusted) p-value of comparison}
-}
 \description{
 Tidy summarizes information about the components of a model.
 A model component might be a single term in a regression, a single
@@ -68,3 +60,10 @@ Other htest tidiers: \code{\link{augment.htest}},
   \code{\link{tidy.htest}}, \code{\link{tidy.power.htest}}
 }
 \concept{htest tidiers}
+\value{
+A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
+  \item{group1}{First group being compared}
+  \item{group2}{Second group being compared}
+  \item{p.value}{The two-sided p-value associated with the observed statistic.}
+
+}

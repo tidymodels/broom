@@ -6,8 +6,21 @@
 #'   be tidied. Defaults to `FALSE`, meaning that smooth terms are tidied
 #'   by default.
 #' @template param_unused_dots
+#' 
+#' @evalRd return_tidy(
+#'   "term",
+#'   "estimate",
+#'   "std.error",
+#'   "statistic",
+#'   "p.value",
+#'   "edf",
+#'   "ref.df"
+#' )
 #'
-#' @details To tidy `Gam` objects created by calls to [gam::gam()],
+#' @details When `parametric = TRUE` return columns `edf` and `ref.df` rather
+#'   than `estimate` and `std.error`.
+#' 
+#'   To tidy `Gam` objects created by calls to [gam::gam()],
 #'   see [tidy.Gam()].
 #'
 #' @examples
@@ -40,9 +53,16 @@ tidy.gam <- function(x, parametric = FALSE, ...) {
 #' @templateVar class gam
 #' @template title_desc_glance
 #' 
-#' @inheritParams tidy.gam
+#' @inherit tidy.gam params examples
 #' 
-#' @template return_finish_glance
+#' @evalRd return_glance(
+#'   "df",
+#'   "logLik",
+#'   "AIC",
+#'   "BIC",
+#'   "deviance",
+#'   "df.residual"
+#' )
 #' 
 #' @details To glance `Gam` objects created by calls to [gam::gam()], see
 #'   [glance.Gam()].

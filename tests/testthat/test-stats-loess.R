@@ -1,7 +1,10 @@
 context("stats-loess")
 
+skip_if_not_installed("modeltests")
+library(modeltests)
+
 test_that("augment.loess", {
-  check_arguments(augment.loess)
+  check_arguments(augment.loess, strict = FALSE)
   
   fit <- loess(mpg ~ wt, mtcars)
   
@@ -9,6 +12,7 @@ test_that("augment.loess", {
     aug = augment.loess,
     model = fit, 
     data = mtcars,
-    newdata = mtcars
+    newdata = mtcars,
+    strict = FALSE
   )
 })

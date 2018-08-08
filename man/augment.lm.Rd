@@ -4,7 +4,7 @@
 \alias{augment.lm}
 \title{Augment data with information from a(n) lm object}
 \usage{
-\method{augment}{lm}(x, data = stats::model.frame(x), newdata,
+\method{augment}{lm}(x, data = stats::model.frame(x), newdata = NULL,
   type.predict, type.residuals, ...)
 }
 \arguments{
@@ -38,30 +38,6 @@ proceed using \code{conf.level = 0.95}. Additionally, if you pass
 \code{newdata = my_tibble} to an \code{\link[=augment]{augment()}} method that does not
 accept a \code{newdata} argument, it will use the default value for
 the \code{data} argument.}
-}
-\value{
-When \code{newdata} is not supplied \code{augment.lm} returns
-one row for each observation, with seven columns added to the original
-data:
-
-\item{.hat}{Diagonal of the hat matrix}
-\item{.sigma}{Estimate of residual standard deviation when
-corresponding observation is dropped from model}
-\item{.cooksd}{Cooks distance, \code{\link[=cooks.distance]{cooks.distance()}}}
-\item{.fitted}{Fitted values of model}
-\item{.se.fit}{Standard errors of fitted values}
-\item{.resid}{Residuals}
-\item{.std.resid}{Standardised residuals}
-
-Some unusual \code{lm} objects, such as \code{rlm} from MASS, may omit \code{.cooksd}
-and \code{.std.resid}. \code{gam} from mgcv omits \code{.sigma}.
-
-When \code{newdata} is supplied, returns one row for each observation, with
-three columns added to the new data:
-
-\item{.fitted}{Fitted values of model}
-\item{.se.fit}{Standard errors of fitted values}
-\item{.resid}{Residuals of fitted values on the new data}
 }
 \description{
 Augment accepts a model object and a dataset and adds
@@ -111,6 +87,62 @@ as a second argument, at which point the augmented data will contain those
 rows (typically with NAs in place of the new columns). If the original data
 is not provided to \code{\link[=augment]{augment()}} and \code{na.action = "na.exclude"}, a
 warning is raised and the incomplete rows are dropped.
+
+Some unusual \code{lm} objects, such as \code{rlm} from MASS, may omit
+\code{.cooksd} and \code{.std.resid}. \code{gam} from mgcv omits \code{.sigma}.
+
+When \code{newdata} is supplied, only returns \code{.fitted}, \code{.resid} and
+\code{.se.fit} columns.
+}
+\examples{
+
+library(ggplot2)
+library(dplyr)
+
+mod <- lm(mpg ~ wt + qsec, data = mtcars)
+
+tidy(mod)
+glance(mod)
+
+# coefficient plot
+d <- tidy(mod) \%>\% 
+  mutate(
+    low = estimate - std.error,
+    high = estimate + std.error
+  )
+  
+ggplot(d, aes(estimate, term, xmin = low, xmax = high, height = 0)) +
+     geom_point() +
+     geom_vline(xintercept = 0) +
+     geom_errorbarh()
+
+augment(mod)
+augment(mod, mtcars)
+
+# predict on new data
+newdata <- mtcars \%>\% head(6) \%>\% mutate(wt = wt + 1)
+augment(mod, newdata = newdata)
+
+au <- augment(mod, data = mtcars)
+
+ggplot(au, aes(.hat, .std.resid)) +
+  geom_vline(size = 2, colour = "white", xintercept = 0) +
+  geom_hline(size = 2, colour = "white", yintercept = 0) +
+  geom_point() + geom_smooth(se = FALSE)
+
+plot(mod, which = 6)
+ggplot(au, aes(.hat, .cooksd)) +
+  geom_vline(xintercept = 0, colour = NA) +
+  geom_abline(slope = seq(0, 3, by = 0.5), colour = "white") +
+  geom_smooth(se = FALSE) +
+  geom_point()
+
+# column-wise models
+a <- matrix(rnorm(20), nrow = 10)
+b <- a + rnorm(length(a))
+result <- lm(b ~ a)
+tidy(result)
+
 }
 \seealso{
 \link{na.action}
@@ -122,3 +154,14 @@ Other lm tidiers: \code{\link{augment.glm}},
   \code{\link{tidy.glm}}, \code{\link{tidy.lm}}
 }
 \concept{lm tidiers}
+\value{
+A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
+  \item{.cooksd}{Cooks distance. See [stats::cooks.distance()] for additional details.}
+  \item{.fitted}{Fitted / predicted value.}
+  \item{.hat}{Diagonal of the hat matrix. TODO -- add interpretation.}
+  \item{.resid}{Residuals of fitted values. TODO -- document when present. Residuals on which data set?}
+  \item{.se.fit}{Standard errors of fitted values. TODO -- prediction or mean interval?}
+  \item{.sigma}{Estimate of residual standard deviation when corresponding observation is dropped from model. Same as LOO-CV estimate?.}
+  \item{.std.resid}{Standardised residuals  Some unusual `lm` objects, such as `rlm` from MASS, may omit `.cooksd` and `.std.resid`.}
+
+}

@@ -19,12 +19,6 @@ proceed using \code{conf.level = 0.95}. Additionally, if you pass
 accept a \code{newdata} argument, it will use the default value for
 the \code{data} argument.}
 }
-\value{
-A one-row \link[tibble:tibble]{tibble::tibble} with columns:
-\item{kHKB}{modified HKB estimate of the ridge constant}
-\item{kLW}{modified L-W estimate of the ridge constant}
-\item{lambdaGCV}{choice of lambda that minimizes GCV}
-}
 \description{
 Glance accepts a model object and returns a \code{\link[tibble:tibble]{tibble::tibble()}}
 with exactly one row of model summaries. The summaries are typically
@@ -44,9 +38,41 @@ the measure will be reported as \code{NA}.
 This is similar to the output of \code{select.ridgelm}, but it is
 returned rather than printed.
 }
+\examples{
+
+names(longley)[1] <- "y"
+fit1 <- MASS::lm.ridge(y ~ ., longley)
+tidy(fit1)
+
+fit2 <- MASS::lm.ridge(y ~ ., longley, lambda = seq(0.001, .05, .001))
+td2 <- tidy(fit2)
+g2 <- glance(fit2)
+
+# coefficient plot
+library(ggplot2)
+ggplot(td2, aes(lambda, estimate, color = term)) +
+  geom_line()
+
+# GCV plot
+ggplot(td2, aes(lambda, GCV)) +
+  geom_line()
+
+# add line for the GCV minimizing estimate
+ggplot(td2, aes(lambda, GCV)) + 
+  geom_line() +
+  geom_vline(xintercept = g2$lambdaGCV, col = "red", lty = 2)
+
+}
 \seealso{
 \code{\link[=glance]{glance()}}, \code{\link[MASS:select.ridgelm]{MASS::select.ridgelm()}}, \code{\link[MASS:lm.ridge]{MASS::lm.ridge()}}
 
 Other ridgelm tidiers: \code{\link{tidy.ridgelm}}
 }
 \concept{ridgelm tidiers}
+\value{
+A \code{\link[tibble:tibble]{tibble::tibble()}} with exactly one row and columns:
+  \item{kHKB}{modified HKB estimate of the ridge constant}
+  \item{kLW}{modified L-W estimate of the ridge constant}
+  \item{lambdaGCV}{choice of lambda that minimizes GCV}
+
+}

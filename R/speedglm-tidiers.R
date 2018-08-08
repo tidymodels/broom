@@ -15,30 +15,27 @@
 #' @export
 #' @family speedlm tidiers
 #' @seealso [speedglm::speedlm()]
-tidy.speedlm <- function(x, ...) {
-  tidy.lm(x, ...)
-}
-
+#' @include stats-lm-tidiers.R
+tidy.speedlm <- tidy.lm
 
 #' @templateVar class speedlm
 #' @template title_desc_glance
 #'
-#' @param x A `speedlm` object returned from [speedglm::speedlm()].
+#' @inherit tidy.speedlm params examples
 #' @template param_unused_dots
 #' 
-#' @return A one-row [tibble::tibble] with columns:
-#' 
-#'   \item{r.squared}{The percent of variance explained by the model}
-#'   \item{adj.r.squared}{r.squared adjusted based on the degrees of freedom}
-#'   \item{statistic}{F-statistic}
-#'   \item{p.value}{p-value from the F test, describing whether the full
-#'     regression is significant}
-#'   \item{df}{Degrees of freedom used by the coefficients}
-#'   \item{logLik}{the data's log-likelihood under the model}
-#'   \item{AIC}{the Akaike Information Criterion}
-#'   \item{BIC}{the Bayesian Information Criterion}
-#'   \item{deviance}{deviance}
-#'   \item{df.residual}{residual degrees of freedom}
+#' @evalRd return_glance(
+#'   "r.squared",
+#'   "adj.r.squared",
+#'   statistic = "F-statistic.",
+#'   "p.value",
+#'   "df",
+#'   "logLik",
+#'   "AIC",
+#'   "BIC",
+#'   "deviance",
+#'   "df.residual"
+#' )
 #'
 #' @export
 #' @family speedlm tidiers
@@ -60,17 +57,19 @@ glance.speedlm <- function(x, ...) {
 #' @templateVar class speedlm
 #' @template title_desc_augment
 #'
-#' @param x A `speedlm` object returned from [speedglm::speedlm()].
+#' @inherit tidy.speedlm params examples
 #' @template param_data
 #' @template param_newdata
 #' @template param_unused_dots
 #' 
-#' @return A [tibble::tibble] containing the original data and one additional
-#'   column `.fitted`.
+#' @evalRd return_augment()
 #'
 #' @export
 #' @family speedlm tidiers
 #' @seealso [speedglm::speedlm()]
-augment.speedlm <- function(x, data = model.frame(x), newdata = data, ...) {
-  augment_columns(x, data, newdata)
+augment.speedlm <- function(x, data = model.frame(x), newdata = NULL, ...) {
+  # no influence measures for speedlm, can only get fitted values
+  df <- if (is.null(newdata)) data else newdata
+  augment_newdata(x, df)
 }
+

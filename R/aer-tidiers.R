@@ -6,7 +6,8 @@
 #' @template param_exponentiate
 #' @template param_unused_dots
 #' 
-#' @template return_tidy_regression
+#' @evalRd return_tidy(regression = TRUE)
+#' 
 #' @examples
 #' 
 #' library(AER)
@@ -25,6 +26,8 @@
 #' tidy(ivr, conf.int = TRUE, exponentiate = TRUE)
 #'
 #' augment(ivr)
+#' augment(ivr, data = CigarettesSW)
+#' augment(ivr, newdata = CigarettesSW)
 #'
 #' glance(ivr)
 #' 
@@ -59,12 +62,12 @@ tidy.ivreg <- function(x,
 #' @template param_newdata
 #' @template param_unused_dots
 #' 
-#' @template return_augment_columns
+#' @evalRd return_augment()
 #'
 #' @export
 #' @seealso [augment()], [AER::ivreg()]
 #' @family ivreg tidiers
-augment.ivreg <- function(x, data = model.frame(x), newdata, ...) {
+augment.ivreg <- function(x, data = model.frame(x), newdata = NULL, ...) {
   augment_columns(x, data, newdata)
 }
 
@@ -75,24 +78,22 @@ augment.ivreg <- function(x, data = model.frame(x), newdata, ...) {
 #' @param diagnostics Logical indicating whether to include statistics and
 #'   p-values for Sargan, Wu-Hausman and weak instrument tests. Defaults to
 #'   `FALSE`.
-#' @template param_unused_dots
-#'
-#' @return A one-row tibble with columns
-#'   \item{r.squared}{The percent of variance explained by the model}
-#'   \item{adj.r.squared}{r.squared adjusted based on the degrees of freedom}
-#'   \item{sigma}{The square root of the estimated residual variance}
-#'   \item{statistic}{Wald test statistic}
-#'   \item{p.value}{p-value from the Wald test}
-#'   \item{df}{Degrees of freedom used by the coefficients}
-#'   \item{df.residual}{residual degrees of freedom}
-#'   
-#' If `diagnostics = TRUE`, will also return the following columns:
-#'   \item{statistic.Sargan}{Statistic for Sargan test}
-#'   \item{p.value.Sargan}{P-value for Sargan test}
-#'   \item{statistic.Wu.Hausman}{Statistic for Wu-Hausman test}
-#'   \item{p.value.Wu.Hausman}{P-value for Wu-Hausman test}
-#'   \item{statistic.weakinst}{Statistic for Wu-Hausman test}
-#'   \item{p.value.weakinst}{P-value for weak instruments test}
+#' 
+#' @evalRd return_glance(
+#'   "r.squared",
+#'   "adj.r.squared",
+#'   "sigma",
+#'   "df",
+#'   "df.residual",
+#'   "statistic.Sargan",
+#'   "p.value.Sargan",
+#'   "statistic.Wu.Hausman",
+#'   "p.value.Wu.Hausman",
+#'   "statistic.weakinst",
+#'   "p.value.weakinst",
+#'   statistic = "Wald test statistic.",
+#'   p.value = "P-value for the Wald test."
+#' )
 #'
 #' @export
 #' @seealso [glance()], [AER::ivreg()]

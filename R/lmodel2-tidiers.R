@@ -4,14 +4,13 @@
 #' @param x A `lmodel2` object returned by [lmodel2::lmodel2()].
 #' @template param_unused_dots
 #'
-#' @return A [tibble::tibble] within eight rows (one for each term estimated 
-#'   with each method) and columns:
-#'   
-#'   \item{method}{Either OLS/MA/SMA/RMA}
-#'   \item{term}{Either "Intercept" or "Slope"}
-#'   \item{estimate}{Estimated coefficient}
-#'   \item{conf.low}{Lower bound of 95\% confidence interval}
-#'   \item{conf.high}{Upper bound of 95\% confidence interval}
+#' @evalRd return_tidy(
+#'   "term",
+#'   "estimate",
+#'   "conf.low",
+#'   "conf.high",
+#'   method = "Either OLS/MA/SMA/RMA"
+#' )
 #'
 #' @details There are always only two terms in an `lmodel2`: `"Intercept"`
 #'   and `"Slope"`. These are computed by four methods: OLS
@@ -19,25 +18,22 @@
 #'   axis), and RMA (ranged major axis).
 #'
 #' @examples
-#'
-#' if (require("lmodel2", quietly = TRUE)) {
 #' 
-#'   library(lmodel2)
-#'   
-#'   data(mod2ex2)
-#'   Ex2.res <- lmodel2(Prey ~ Predators, data=mod2ex2, "relative", "relative", 99)
-#'   Ex2.res
+#' library(lmodel2)
+#' 
+#' data(mod2ex2)
+#' Ex2.res <- lmodel2(Prey ~ Predators, data=mod2ex2, "relative", "relative", 99)
+#' Ex2.res
 #'
-#'   tidy(Ex2.res)
-#'   glance(Ex2.res)
+#' tidy(Ex2.res)
+#' glance(Ex2.res)
 #'
-#'   # this allows coefficient plots with ggplot2
-#'   library(ggplot2)
-#'   ggplot(tidy(Ex2.res), aes(estimate, term, color = method)) +
-#'     geom_point() +
-#'     geom_errorbarh(aes(xmin = conf.low, xmax = conf.high)) +
-#'     geom_errorbarh(aes(xmin = conf.low, xmax = conf.high))
-#' }
+#' # this allows coefficient plots with ggplot2
+#' library(ggplot2)
+#' ggplot(tidy(Ex2.res), aes(estimate, term, color = method)) +
+#'   geom_point() +
+#'   geom_errorbarh(aes(xmin = conf.low, xmax = conf.high)) +
+#'   geom_errorbarh(aes(xmin = conf.low, xmax = conf.high))
 #'
 #' @export
 #' @seealso [tidy()], [lmodel2::lmodel2()]
@@ -66,13 +62,14 @@ tidy.lmodel2 <- function(x, ...) {
 #' @templateVar class lmodel2
 #' @template title_desc_glance
 #' 
-#' @inheritParams tidy.lmodel2
+#' @inherit tidy.lmodel2 params examples
 #' 
-#' @return A one-row [tibble::tibble] with columns:
-#'   \item{r.squared}{OLS R-squared}
-#'   \item{p.value}{OLS parametric p-value}
-#'   \item{theta}{Angle between OLS lines `lm(y ~ x)` and `lm(x ~ y)`}
-#'   \item{H}{H statistic for computing confidence interval of major axis slope}
+#' @evalRd return_glance(
+#'   "r.squared",
+#'   "p.value",
+#'   theta = "Angle between OLS lines `lm(y ~ x)` and `lm(x ~ y)`",
+#'   H = "H statistic for computing confidence interval of major axis slope"
+#' )
 #'
 #' @export
 #' @seealso [glance()], [lmodel2::lmodel2()]

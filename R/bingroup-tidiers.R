@@ -4,11 +4,9 @@
 #' @param x A [binGroup::binWidth()] object.
 #' @template param_unused_dots
 #' 
-#' @return A one-row [tibble::tibble] with columns:
-#'   \item{ci.width}{Expected width of confidence interval.}
-#'   \item{alternative}{Alternative hypothesis.}
-#'   \item{p}{True proportion.}
-#'   \item{n}{Total sample size.}
+#' @evalRd return_tidy("ci.width", "alternative", "p",
+#'   n = "Total sample size"
+#' )
 #'
 #' @examples
 #' 
@@ -26,7 +24,7 @@
 #' @seealso [tidy()], [binGroup::binWidth()]
 tidy.binWidth <- function(x, ...) {
   ret <- as_tibble(unclass(x))
-  dplyr::rename(ret, ci.width = expCIWidth)
+  rename(ret, ci.width = expCIWidth)
 }
 
 
@@ -36,9 +34,10 @@ tidy.binWidth <- function(x, ...) {
 #' @param x A [binGroup::binDesign()] object.
 #' @template param_unused_dots
 #'
-#' @return A one-row [tibble::tibble] with columns:
-#'   \item{n}{Number of trials in given iteration.}
-#'   \item{power}{Power achieved for given value of n.}
+#' @evalRd return_tidy(
+#'   n = "Number of trials in given iteration.",
+#'   power = "Power achieved for given value of n."
+#' )
 #'
 #' @examples
 #'
@@ -70,12 +69,13 @@ tidy.binDesign <- function(x, ...) {
 #'
 #' @param x A [binGroup::binDesign] object.
 #' @template param_unused_dots
-#'
-#' @return A one-row [tibble::tibble] with columns:
-#'   \item{power}{Power achieved by the analysis.}
-#'   \item{n}{Sample size uzed to achieve this power.}
-#'   \item{power.reached}{Whether the desired power was reached.}
-#'   \item{maxit}{Number of iterations performed.}
+#' 
+#' @evalRd return_glance(
+#'   power = "Power achieved by the analysis.",
+#'   n = "Sample size uzed to achieve this power.",
+#'   power.reached = "Whether the desired power was reached.",
+#'   maxit = "Number of iterations performed."
+#' )
 #'
 #' @examples
 #'

@@ -1,8 +1,12 @@
 context("aer")
 
+skip_if_not_installed("modeltests")
+library(modeltests)
+
 skip_if_not_installed("AER")
 library(AER)
 library(dplyr)
+library(modeltests)
 
 data("CigarettesSW")
 df <- CigarettesSW %>% 
@@ -20,7 +24,7 @@ fit <- ivreg(
 test_that("ivreg tidier arguments", {
   check_arguments(tidy.ivreg)
   check_arguments(glance.ivreg)
-  check_arguments(augment.ivreg)
+  check_arguments(augment.ivreg, strict = FALSE)
 })
 
 test_that("tidy.ivreg", {
@@ -45,7 +49,8 @@ test_that("augment.ivreg", {
     aug = augment.ivreg,
     model = fit,
     data = df,
-    newdata = df
+    newdata = df,
+    strict = FALSE
   )
   
   au <- augment(fit)

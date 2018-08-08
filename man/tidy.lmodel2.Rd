@@ -20,16 +20,6 @@ proceed using \code{conf.level = 0.95}. Additionally, if you pass
 accept a \code{newdata} argument, it will use the default value for
 the \code{data} argument.}
 }
-\value{
-A \link[tibble:tibble]{tibble::tibble} within eight rows (one for each term estimated
-with each method) and columns:
-
-\item{method}{Either OLS/MA/SMA/RMA}
-\item{term}{Either "Intercept" or "Slope"}
-\item{estimate}{Estimated coefficient}
-\item{conf.low}{Lower bound of 95\% confidence interval}
-\item{conf.high}{Upper bound of 95\% confidence interval}
-}
 \description{
 Tidy summarizes information about the components of a model.
 A model component might be a single term in a regression, a single
@@ -46,24 +36,21 @@ axis), and RMA (ranged major axis).
 }
 \examples{
 
-if (require("lmodel2", quietly = TRUE)) {
+library(lmodel2)
 
-  library(lmodel2)
-  
-  data(mod2ex2)
-  Ex2.res <- lmodel2(Prey ~ Predators, data=mod2ex2, "relative", "relative", 99)
-  Ex2.res
+data(mod2ex2)
+Ex2.res <- lmodel2(Prey ~ Predators, data=mod2ex2, "relative", "relative", 99)
+Ex2.res
 
-  tidy(Ex2.res)
-  glance(Ex2.res)
+tidy(Ex2.res)
+glance(Ex2.res)
 
-  # this allows coefficient plots with ggplot2
-  library(ggplot2)
-  ggplot(tidy(Ex2.res), aes(estimate, term, color = method)) +
-    geom_point() +
-    geom_errorbarh(aes(xmin = conf.low, xmax = conf.high)) +
-    geom_errorbarh(aes(xmin = conf.low, xmax = conf.high))
-}
+# this allows coefficient plots with ggplot2
+library(ggplot2)
+ggplot(tidy(Ex2.res), aes(estimate, term, color = method)) +
+  geom_point() +
+  geom_errorbarh(aes(xmin = conf.low, xmax = conf.high)) +
+  geom_errorbarh(aes(xmin = conf.low, xmax = conf.high))
 
 }
 \seealso{
@@ -72,3 +59,12 @@ if (require("lmodel2", quietly = TRUE)) {
 Other lmodel2 tidiers: \code{\link{glance.lmodel2}}
 }
 \concept{lmodel2 tidiers}
+\value{
+A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
+  \item{conf.high}{The upper end of a confidence interval for the term under consideration. Included only if `conf.int = TRUE`.}
+  \item{conf.low}{The lower end of a confidence interval for the term under consideration. Included only if `conf.int = TRUE`.}
+  \item{estimate}{The estimated value of the regression term.}
+  \item{term}{The name of the regression term.}
+  \item{method}{Either OLS/MA/SMA/RMA}
+
+}

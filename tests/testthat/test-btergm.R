@@ -1,11 +1,14 @@
 context("btergm")
 
+skip_if_not_installed("modeltests")
+library(modeltests)
+
 skip_if_not_installed("network")
 skip_if_not_installed("btergm")
 
 test_that("tidy.btergm", {
   
-  check_arguments(tidy.btergm)
+  check_arguments(tidy.btergm, strict = FALSE)
   
   networks <- list()
   

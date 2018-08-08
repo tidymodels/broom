@@ -24,14 +24,6 @@ proceed using \code{conf.level = 0.95}. Additionally, if you pass
 accept a \code{newdata} argument, it will use the default value for
 the \code{data} argument.}
 }
-\value{
-A one-row \link[tibble:tibble]{tibble::tibble} with columns:
-\item{statistic}{Test statistic for Durbin-Watson test.}
-\item{p.value}{P-value of test statistic.}
-\item{autocorrelation}{Residual autocorrelations.}
-\item{method}{Always \code{"Durbin-Watson Test"}.}
-\item{alternative}{Alternative hypothesis (character).}
-}
 \description{
 For models that have only a single component, the \code{\link[=tidy]{tidy()}} and
 \code{\link[=glance]{glance()}} methods are identical. Please see the documentation for both
@@ -48,3 +40,12 @@ glance(dw)  # same output for all durbinWatsonTests
 \code{\link[=tidy]{tidy()}}, \code{\link[=glance]{glance()}}, \code{\link[car:durbinWatsonTest]{car::durbinWatsonTest()}}
 }
 \concept{car tidiers}
+\value{
+A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
+  \item{alternative}{Alternative hypothesis (character).}
+  \item{autocorrelation}{TODO}
+  \item{p.value}{The two-sided p-value associated with the observed statistic.}
+  \item{statistic}{Test statistic for Durbin-Watson test.}
+  \item{method}{Always `Durbin-Watson Test`.}
+
+}

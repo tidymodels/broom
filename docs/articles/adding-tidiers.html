@@ -58,6 +58,9 @@
       <a href="../articles/broom_and_dplyr.html">Broom and dplyr</a>
     </li>
     <li>
+      <a href="../articles/external-tidiers.html">Tidiers in external packages</a>
+    </li>
+    <li>
       <a href="../articles/kmeans.html">K-means</a>
     </li>
   </ul>
@@ -66,7 +69,7 @@
   <a href="../news/index.html">News</a>
 </li>
         <li>
-  <a href="https://github.com/tidyverse/broom">
+  <a href="https://github.com/tidymodels/broom">
     <span class="fa fa-github fa-lg"></span>
      
   </a>
@@ -85,9 +88,9 @@
     <div class="page-header toc-ignore">
       <h1>Adding tidiers to broom</h1>
             
-            <h4 class="date">2018-07-17</h4>
+            <h4 class="date">2018-08-01</h4>
       
-      <small class="dont-index">Source: <a href="http://github.com/tidyverse/broom/blob/master/vignettes/adding-tidiers.Rmd"><code>vignettes/adding-tidiers.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="http://github.com/tidymodels/broom/blob/master/vignettes/adding-tidiers.Rmd"><code>vignettes/adding-tidiers.Rmd</code></a></small>
       <div class="hidden name"><code>adding-tidiers.Rmd</code></div>
 
     </div>
@@ -159,8 +162,8 @@
 <h2 class="hasAnchor">
 <a href="#basic-checks" class="anchor"></a>Basic checks</h2>
 <p>Your tests should include:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">td &lt;-<span class="st"> </span><span class="kw"><a href="../reference/tidy.html">tidy</a></span>(object)
-gl &lt;-<span class="st"> </span><span class="kw"><a href="../reference/glance.html">glance</a></span>(object)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">td &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/modelgenerics/topics/generics">tidy</a></span>(object)
+gl &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/modelgenerics/topics/generics">glance</a></span>(object)
 
 <span class="kw">check_tidy_output</span>(td)
 <span class="kw">check_glance_outputs</span>(gl)</code></pre></div>
@@ -186,7 +189,7 @@ gl &lt;-<span class="st"> </span><span class="kw"><a href="../reference/glance.h
 <ul>
 <li>In order to test your tidiers, you may need to add <code>your_package</code> to the <strong>Suggests</strong> section of broom’s DESCRIPTION.</li>
 <li>You should then use <code>skip_if_not_installed("my_package")</code> at the beginning of any test that uses <code>my_package</code>.</li>
-<li>Note that testing broom requires a lot of packages. You can install them all with <code><a href="http://www.rdocumentation.org/packages/devtools/topics/install_github">devtools::install_github("tidyverse/broom", dependencies = TRUE)</a></code>.</li>
+<li>Note that testing broom requires a lot of packages. You can install them all with <code><a href="http://www.rdocumentation.org/packages/devtools/topics/install_github">devtools::install_github("tidymodels/broom", dependencies = TRUE)</a></code>.</li>
 </ul>
 </div>
 <div id="catching-edge-cases" class="section level2">
@@ -229,9 +232,9 @@ gl &lt;-<span class="st"> </span><span class="kw"><a href="../reference/glance.h
 <h2 class="hasAnchor">
 <a href="#glance" class="anchor"></a><code>glance</code>
 </h2>
-<p>The <code><a href="../reference/glance.html">glance(x, ...)</a></code> method accepts a model object <code>x</code> and returns a tibble with exactly one row containing model level summary information.</p>
+<p>The <code><a href="http://www.rdocumentation.org/packages/modelgenerics/topics/generics">glance(x, ...)</a></code> method accepts a model object <code>x</code> and returns a tibble with exactly one row containing model level summary information.</p>
 <ul>
-<li><p>Output should not include the name of the modelling function or any arguments given to the modelling function. For example, <code><a href="../reference/glance.html">glance(glm_object)</a></code> does not contain a <code>family</code> column.</p></li>
+<li><p>Output should not include the name of the modelling function or any arguments given to the modelling function. For example, <code><a href="http://www.rdocumentation.org/packages/modelgenerics/topics/generics">glance(glm_object)</a></code> does not contain a <code>family</code> column.</p></li>
 <li><p>In some cases, you may wish to provide model level diagnostics not returned by the original object. If these are easy to compute, feel free to add them. However, <code>broom</code> is not an appropriate place to implement complex or time consuming calculations.</p></li>
 <li><p><code>glance</code> should always return the same columns in the same order for an object <code>x</code> of class <code>my_object</code>. If a summary metric such as <code>AIC</code> is not defined in certain circumstances, use <code>NA</code>.</p></li>
 </ul>
@@ -240,7 +243,7 @@ gl &lt;-<span class="st"> </span><span class="kw"><a href="../reference/glance.h
 <h2 class="hasAnchor">
 <a href="#augment" class="anchor"></a><code>augment</code>
 </h2>
-<p>The <code><a href="../reference/augment.html">augment(x, data = NULL, ...)</a></code> method accepts a model object and optionally a data frame <code>data</code> and adds columns of observation level information to <code>data</code>. <code>augment</code> returns a <code>tibble</code> with the same number of rows as <code>data</code>.</p>
+<p>The <code><a href="http://www.rdocumentation.org/packages/modelgenerics/topics/generics">augment(x, data = NULL, ...)</a></code> method accepts a model object and optionally a data frame <code>data</code> and adds columns of observation level information to <code>data</code>. <code>augment</code> returns a <code>tibble</code> with the same number of rows as <code>data</code>.</p>
 <p>The <code>data</code> argument can be any of the following:</p>
 <ul>
 <li>a <code>data.frame</code> containing both the original predictors and the original responses</li>
@@ -251,7 +254,7 @@ gl &lt;-<span class="st"> </span><span class="kw"><a href="../reference/glance.h
 <p>Many <code>augment</code> methods will also provide an optional <code>newdata</code> argument that should also default to <code>NULL</code>. Users should only ever specify one of <code>data</code> or <code>newdata</code>. Providing both <code>data</code> and <code>newdata</code> should result in an error. <code>newdata</code> should accept both <code>data.frame</code>s and <code>tibble</code>s and should be tested with both.</p>
 <p>Data given to the <code>data</code> argument must have both the original predictors and the original response. Data given to the <code>newdata</code> argument only needs to have the original predictors. This is important because there may be important information associated with training data that is not associated with test data, for example, leverages (<code>.hat</code> below) in the case in linear regression:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">model &lt;-<span class="st"> </span><span class="kw">lm</span>(speed <span class="op">~</span><span class="st"> </span>dist, <span class="dt">data =</span> cars)
-<span class="kw"><a href="../reference/augment.html">augment</a></span>(model, <span class="dt">data =</span> cars)
+<span class="kw"><a href="http://www.rdocumentation.org/packages/modelgenerics/topics/generics">augment</a></span>(model, <span class="dt">data =</span> cars)
 <span class="co">#&gt; # A tibble: 50 x 9</span>
 <span class="co">#&gt;    speed  dist .fitted .se.fit  .resid   .hat .sigma   .cooksd .std.resid</span>
 <span class="co">#&gt;  * &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;     &lt;dbl&gt;      &lt;dbl&gt;</span>
@@ -266,7 +269,7 @@ gl &lt;-<span class="st"> </span><span class="kw"><a href="../reference/glance.h
 <span class="co">#&gt;  9    10    34   13.9    0.473 -3.91   0.0225   3.14 0.0181       -1.25  </span>
 <span class="co">#&gt; 10    11    17   11.1    0.637 -0.0986 0.0407   3.19 0.0000216    -0.0319</span>
 <span class="co">#&gt; # ... with 40 more rows</span>
-<span class="kw"><a href="../reference/augment.html">augment</a></span>(model, <span class="dt">newdata =</span> cars)
+<span class="kw"><a href="http://www.rdocumentation.org/packages/modelgenerics/topics/generics">augment</a></span>(model, <span class="dt">newdata =</span> cars)
 <span class="co">#&gt; # A tibble: 50 x 4</span>
 <span class="co">#&gt;    speed  dist .fitted .se.fit</span>
 <span class="co">#&gt;  * &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;</span>
@@ -281,7 +284,7 @@ gl &lt;-<span class="st"> </span><span class="kw"><a href="../reference/glance.h
 <span class="co">#&gt;  9    10    34   13.9    0.473</span>
 <span class="co">#&gt; 10    11    17   11.1    0.637</span>
 <span class="co">#&gt; # ... with 40 more rows</span></code></pre></div>
-<p>This means that many <code><a href="../reference/augment.html">augment(model, data = original_data)</a></code> should provide <code>.fitted</code> and <code>.resid</code> columns in most cases, whereas <code><a href="../reference/augment.html">augment(model, data = test_data)</a></code> only needs to a <code>.fitted</code> column, even if the response is present in <code>test_data</code>.</p>
+<p>This means that many <code><a href="http://www.rdocumentation.org/packages/modelgenerics/topics/generics">augment(model, data = original_data)</a></code> should provide <code>.fitted</code> and <code>.resid</code> columns in most cases, whereas <code><a href="http://www.rdocumentation.org/packages/modelgenerics/topics/generics">augment(model, data = test_data)</a></code> only needs to a <code>.fitted</code> column, even if the response is present in <code>test_data</code>.</p>
 <p>If the <code>data</code> or <code>newdata</code> is specified as a <code>data.frame</code> with rownames, <code>augment</code> should return them in a column called <code>.rownames</code>.</p>
 <p>For observations where no fitted values or summaries are available (where there’s missing data, for example) return <code>NA</code>.</p>
 <p>Added column names should begin with <code>.</code> to avoid overwriting columns in the original data.</p>
@@ -290,11 +293,11 @@ gl &lt;-<span class="st"> </span><span class="kw"><a href="../reference/glance.h
 <h2 class="hasAnchor">
 <a href="#tidy" class="anchor"></a><code>tidy</code>
 </h2>
-<p>The <code><a href="../reference/tidy.html">tidy(x, ...)</a></code> method accepts a model object <code>x</code> and returns a tibble with one row per model component. A model component might be a single term in a regression, a single test, or one cluster/class. Exactly what a component is varies across models but is usually self-evident.</p>
+<p>The <code><a href="http://www.rdocumentation.org/packages/modelgenerics/topics/generics">tidy(x, ...)</a></code> method accepts a model object <code>x</code> and returns a tibble with one row per model component. A model component might be a single term in a regression, a single test, or one cluster/class. Exactly what a component is varies across models but is usually self-evident.</p>
 <p>Sometimes a model will have different types of components. For example, in mixed models, there is different information associated with fixed effects and random effects, since this information doesn’t have the same interpretation, it doesn’t make sense to summarize the fixed and random effects in the same table. In cases like this you should add an argument that allows the user to specify which type of information they want. For example, you might implement an interface along the lines of:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">model &lt;-<span class="st"> </span><span class="kw">mixed_model</span>(...)
-<span class="kw"><a href="../reference/tidy.html">tidy</a></span>(model, <span class="dt">effects =</span> <span class="st">"fixed"</span>)
-<span class="kw"><a href="../reference/tidy.html">tidy</a></span>(model, <span class="dt">effects =</span> <span class="st">"random"</span>)</code></pre></div>
+<span class="kw"><a href="http://www.rdocumentation.org/packages/modelgenerics/topics/generics">tidy</a></span>(model, <span class="dt">effects =</span> <span class="st">"fixed"</span>)
+<span class="kw"><a href="http://www.rdocumentation.org/packages/modelgenerics/topics/generics">tidy</a></span>(model, <span class="dt">effects =</span> <span class="st">"random"</span>)</code></pre></div>
 <p><strong>Common arguments to tidy methods</strong>:</p>
 <ul>
 <li>

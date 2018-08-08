@@ -21,15 +21,6 @@ proceed using \code{conf.level = 0.95}. Additionally, if you pass
 accept a \code{newdata} argument, it will use the default value for
 the \code{data} argument.}
 }
-\value{
-A \code{\link[tibble:tibble]{tibble::tibble()}} with three columns:
-\item{cutoff}{The cutoff used for classification. Observations with
-predicted probabilities above this value were assigned class 1, and
-observations with predicted probabilities below this value were
-assigned class 0.}
-\item{tpr}{The true positive rate at the given cutoff.}
-\item{fpr}{The false positive rate at the given cutoff.}
-}
 \description{
 Tidy summarizes information about the components of a model.
 A model component might be a single term in a regression, a single
@@ -40,34 +31,40 @@ specify which components to return.
 }
 \examples{
 
-if (require("AUC", quietly = TRUE)) {
-  data(churn)
-  r <- roc(churn$predictions,churn$labels)
+library(AUC)
+data(churn)
+r <- roc(churn$predictions,churn$labels)
 
-  td <- tidy(r)
-  td
+td <- tidy(r)
+td
 
-  library(ggplot2)
-  
-  ggplot(td, aes(fpr, tpr)) +
-    geom_line()
+library(ggplot2)
 
-  # compare the ROC curves for two prediction algorithms
-  
-  library(dplyr)
-  library(tidyr)
+ggplot(td, aes(fpr, tpr)) +
+  geom_line()
 
-  rocs <- churn \%>\%
-    gather(algorithm, value, -labels) \%>\%
-    nest(-algorithm) \%>\% 
-    mutate(tidy_roc = purrr::map(data, ~tidy(roc(.x$value, .x$labels)))) \%>\% 
-    unnest(tidy_roc)
+# compare the ROC curves for two prediction algorithms
 
-  ggplot(rocs, aes(fpr, tpr, color = algorithm)) +
-    geom_line()
-}
+library(dplyr)
+library(tidyr)
+
+rocs <- churn \%>\%
+  gather(algorithm, value, -labels) \%>\%
+  nest(-algorithm) \%>\% 
+  mutate(tidy_roc = purrr::map(data, ~tidy(roc(.x$value, .x$labels)))) \%>\% 
+  unnest(tidy_roc)
+
+ggplot(rocs, aes(fpr, tpr, color = algorithm)) +
+  geom_line()
 
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[AUC:roc]{AUC::roc()}}
+}
+\value{
+A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
+  \item{cutoff}{The cutoff used for classification. Observations with predicted probabilities above this value were assigned class 1, and observations with predicted probabilities below this value were assigned class 0.}
+  \item{fpr}{The false positive rate at the given cutoff.}
+  \item{tpr}{The true positive rate at the given cutoff.}
+
 }

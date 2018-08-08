@@ -1,5 +1,8 @@
 context("survival-survdiff")
 
+skip_if_not_installed("modeltests")
+library(modeltests)
+
 skip_if_not_installed("survival")
 library(survival)
 
@@ -37,11 +40,11 @@ test_that("tidy.survdiff", {
   td4 <- tidy(fit4)
   td5 <- tidy(fit5)
   
-  check_tidy_output(td)
-  check_tidy_output(td2)
-  check_tidy_output(td3)
+  check_tidy_output(td, strict = FALSE)
+  check_tidy_output(td2, strict = FALSE)
+  check_tidy_output(td3, strict = FALSE)
   check_tidy_output(td4)
-  check_tidy_output(td5)
+  check_tidy_output(td5, strict = FALSE)
 })
 
 test_that("glance.survdiff", {

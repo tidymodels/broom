@@ -77,6 +77,9 @@
       <a href="../articles/broom_and_dplyr.html">Broom and dplyr</a>
     </li>
     <li>
+      <a href="../articles/external-tidiers.html">Tidiers in external packages</a>
+    </li>
+    <li>
       <a href="../articles/kmeans.html">K-means</a>
     </li>
   </ul>
@@ -85,7 +88,7 @@
   <a href="../news/index.html">News</a>
 </li>
         <li>
-  <a href="https://github.com/tidyverse/broom">
+  <a href="https://github.com/tidymodels/broom">
     <span class="fa fa-github fa-lg"></span>
      
   </a>
@@ -102,7 +105,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Tidy a(n) boot object</h1>
-    <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/boot-tidiers.R'><code>R/boot-tidiers.R</code></a></small>
+    <small class="dont-index">Source: <a href='http://github.com/tidymodels/broom/blob/master/R/boot-tidiers.R'><code>R/boot-tidiers.R</code></a></small>
     <div class="hidden name"><code>tidy.boot.Rd</code></div>
     </div>
 
@@ -118,7 +121,7 @@ specify which components to return.</p>
     </div>
 
     <pre class="usage"><span class='co'># S3 method for boot</span>
-<span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>x</span>, <span class='kw'>conf.int</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>conf.level</span> <span class='kw'>=</span> <span class='fl'>0.95</span>,
+<span class='fu'><a href='http://www.rdocumentation.org/packages/modelgenerics/topics/generics'>tidy</a></span>(<span class='no'>x</span>, <span class='kw'>conf.int</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>conf.level</span> <span class='kw'>=</span> <span class='fl'>0.95</span>,
   <span class='kw'>conf.method</span> <span class='kw'>=</span> <span class='st'>"perc"</span>, <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -152,62 +155,57 @@ absorbed in <code>...</code>, where they will be ignored. If the misspelled
 argument has a default value, the default value will be used.
 For example, if you pass <code>conf.lvel = 0.9</code>, all computation will
 proceed using <code>conf.level = 0.95</code>. Additionally, if you pass
-<code>newdata = my_tibble</code> to an <code><a href='augment.html'>augment()</a></code> method that does not
+<code>newdata = my_tibble</code> to an <code><a href='http://www.rdocumentation.org/packages/modelgenerics/topics/generics'>augment()</a></code> method that does not
 accept a <code>newdata</code> argument, it will use the default value for
 the <code>data</code> argument.</p></td>
     </tr>
     </table>
     
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>A <a href='http://www.rdocumentation.org/packages/tibble/topics/tibble'>tibble::tibble</a> with one row per bootstrapped statistic and
-columns:</p>
-<dt>term</dt><dd><p>Name of the computed statistic, if present.</p></dd>
-<dt>statistic</dt><dd><p>Original value of the statistic.</p></dd>
-<dt>bias</dt><dd><p>Bias of the statistic.</p></dd>
-<dt>std.error</dt><dd><p>Standard error of the statistic.</p></dd>
-
-If weights were provided to the boot function, an estimate
+    <p>If weights were provided to the <code>boot</code> function, an <code>estimate</code>
 column is included showing the weighted bootstrap estimate, and the
-standard error is of that estimate.
-
-If there are no original statistics in the "boot" object, such as with a
-call to tsboot with orig.t = FALSE, the original
-and statistic columns are omitted, and only estimate and
-std.error columns shown.
-
+standard error is of that estimate.</p>
+<p>If there are no original statistics in the "boot" object, such as with a
+call to <code>tsboot</code> with <code>orig.t = FALSE</code>, the <code>original</code>
+and <code>statistic</code> columns are omitted, and only <code>estimate</code> and
+<code>std.error</code> columns shown.</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='tidy.html'>tidy()</a></code>, <code><a href='http://www.rdocumentation.org/packages/boot/topics/boot'>boot::boot()</a></code>, <code><a href='http://www.rdocumentation.org/packages/boot/topics/tsboot'>boot::tsboot()</a></code>, <code><a href='http://www.rdocumentation.org/packages/boot/topics/boot.ci'>boot::boot.ci()</a></code>,
+    <div class='dont-index'><p><code><a href='http://www.rdocumentation.org/packages/modelgenerics/topics/generics'>tidy()</a></code>, <code><a href='http://www.rdocumentation.org/packages/boot/topics/boot'>boot::boot()</a></code>, <code><a href='http://www.rdocumentation.org/packages/boot/topics/tsboot'>boot::tsboot()</a></code>, <code><a href='http://www.rdocumentation.org/packages/boot/topics/boot.ci'>boot::boot.ci()</a></code>,
 <code><a href='http://www.rdocumentation.org/packages/rsample/topics/bootstraps'>rsample::bootstraps()</a></code></p></div>
+    
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>A <code><a href='http://www.rdocumentation.org/packages/tibble/topics/tibble'>tibble::tibble()</a></code> with columns:</p>
+<dt>bias</dt><dd><p>Bias of the statistic.</p></dd>
+  <dt>std.error</dt><dd><p>The standard error of the regression term.</p></dd>
+  <dt>term</dt><dd><p>The name of the regression term.</p></dd>
+  <dt>statistic</dt><dd><p>Original value of the statistic.</p></dd>
+
+
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fu'>require</span>(<span class='st'>"boot"</span>)) {
-   <span class='no'>clotting</span> <span class='kw'>&lt;-</span> <span class='fu'>data.frame</span>(
-          <span class='kw'>u</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='fl'>5</span>,<span class='fl'>10</span>,<span class='fl'>15</span>,<span class='fl'>20</span>,<span class='fl'>30</span>,<span class='fl'>40</span>,<span class='fl'>60</span>,<span class='fl'>80</span>,<span class='fl'>100</span>),
-          <span class='kw'>lot1</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='fl'>118</span>,<span class='fl'>58</span>,<span class='fl'>42</span>,<span class='fl'>35</span>,<span class='fl'>27</span>,<span class='fl'>25</span>,<span class='fl'>21</span>,<span class='fl'>19</span>,<span class='fl'>18</span>),
-          <span class='kw'>lot2</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='fl'>69</span>,<span class='fl'>35</span>,<span class='fl'>26</span>,<span class='fl'>21</span>,<span class='fl'>18</span>,<span class='fl'>16</span>,<span class='fl'>13</span>,<span class='fl'>12</span>,<span class='fl'>12</span>))
+    <pre class="examples"><div class='input'>
+<span class='no'>clotting</span> <span class='kw'>&lt;-</span> <span class='fu'>data.frame</span>(
+  <span class='kw'>u</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='fl'>5</span>,<span class='fl'>10</span>,<span class='fl'>15</span>,<span class='fl'>20</span>,<span class='fl'>30</span>,<span class='fl'>40</span>,<span class='fl'>60</span>,<span class='fl'>80</span>,<span class='fl'>100</span>),
+  <span class='kw'>lot1</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='fl'>118</span>,<span class='fl'>58</span>,<span class='fl'>42</span>,<span class='fl'>35</span>,<span class='fl'>27</span>,<span class='fl'>25</span>,<span class='fl'>21</span>,<span class='fl'>19</span>,<span class='fl'>18</span>),
+  <span class='kw'>lot2</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='fl'>69</span>,<span class='fl'>35</span>,<span class='fl'>26</span>,<span class='fl'>21</span>,<span class='fl'>18</span>,<span class='fl'>16</span>,<span class='fl'>13</span>,<span class='fl'>12</span>,<span class='fl'>12</span>)
+)
 
-   <span class='no'>g1</span> <span class='kw'>&lt;-</span> <span class='fu'>glm</span>(<span class='no'>lot2</span> ~ <span class='fu'>log</span>(<span class='no'>u</span>), <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>clotting</span>, <span class='kw'>family</span> <span class='kw'>=</span> <span class='no'>Gamma</span>)
+<span class='no'>g1</span> <span class='kw'>&lt;-</span> <span class='fu'>glm</span>(<span class='no'>lot2</span> ~ <span class='fu'>log</span>(<span class='no'>u</span>), <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>clotting</span>, <span class='kw'>family</span> <span class='kw'>=</span> <span class='no'>Gamma</span>)
 
-   <span class='no'>bootfun</span> <span class='kw'>&lt;-</span> <span class='kw'>function</span>(<span class='no'>d</span>, <span class='no'>i</span>) {
-      <span class='fu'>coef</span>(<span class='fu'>update</span>(<span class='no'>g1</span>, <span class='kw'>data</span><span class='kw'>=</span> <span class='no'>d</span>[<span class='no'>i</span>,]))
-   }
-   <span class='no'>bootres</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/boot/topics/boot'>boot</a></span>(<span class='no'>clotting</span>, <span class='no'>bootfun</span>, <span class='kw'>R</span> <span class='kw'>=</span> <span class='fl'>999</span>)
-   <span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>g1</span>, <span class='kw'>conf.int</span><span class='kw'>=</span><span class='fl'>TRUE</span>)
-   <span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>bootres</span>, <span class='kw'>conf.int</span><span class='kw'>=</span><span class='fl'>TRUE</span>)
-}</div><div class='output co'>#&gt; <span class='message'>Loading required package: boot</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Attaching package: ‘boot’</span></div><div class='output co'>#&gt; <span class='message'>The following object is masked from ‘package:survival’:</span>
-#&gt; <span class='message'></span>
-#&gt; <span class='message'>    aml</span></div><div class='output co'>#&gt; <span class='message'>The following object is masked from ‘package:car’:</span>
-#&gt; <span class='message'></span>
-#&gt; <span class='message'>    logit</span></div><div class='output co'>#&gt; # A tibble: 2 x 6
-#&gt;   term        statistic      bias std.error conf.low conf.high
-#&gt;   &lt;chr&gt;           &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;
-#&gt; 1 (Intercept)   -0.0239 -0.00180    0.00330  -0.0327   -0.0222
-#&gt; 2 log(u)         0.0236  0.000538   0.00106   0.0227    0.0265</div><div class='input'>
+<span class='no'>bootfun</span> <span class='kw'>&lt;-</span> <span class='kw'>function</span>(<span class='no'>d</span>, <span class='no'>i</span>) {
+   <span class='fu'>coef</span>(<span class='fu'>update</span>(<span class='no'>g1</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>d</span>[<span class='no'>i</span>, ]))
+}
+
+<span class='no'>bootres</span> <span class='kw'>&lt;-</span> <span class='fu'>boot</span>(<span class='no'>clotting</span>, <span class='no'>bootfun</span>, <span class='kw'>R</span> <span class='kw'>=</span> <span class='fl'>999</span>)</div><div class='output co'>#&gt; <span class='error'>Error in boot(clotting, bootfun, R = 999): could not find function "boot"</span></div><div class='input'><span class='fu'><a href='http://www.rdocumentation.org/packages/modelgenerics/topics/generics'>tidy</a></span>(<span class='no'>g1</span>, <span class='kw'>conf.int</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; # A tibble: 2 x 7
+#&gt;   term        estimate std.error statistic       p.value conf.low conf.high
+#&gt;   &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;         &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;
+#&gt; 1 (Intercept)  -0.0239  0.00133      -18.0 0.000000400    -0.0265   -0.0213
+#&gt; 2 log(u)        0.0236  0.000577      40.9 0.00000000136   0.0225    0.0247</div><div class='input'><span class='fu'><a href='http://www.rdocumentation.org/packages/modelgenerics/topics/generics'>tidy</a></span>(<span class='no'>bootres</span>, <span class='kw'>conf.int</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; <span class='error'>Error in tidy(bootres, conf.int = TRUE): object 'bootres' not found</span></div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
@@ -215,9 +213,11 @@ std.error columns shown.
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
       
-      <li><a href="#value">Value</a></li>
+      <li><a href="#details">Details</a></li>
 
       <li><a href="#see-also">See also</a></li>
+
+      <li><a href="#value">Value</a></li>
       
       <li><a href="#examples">Examples</a></li>
     </ul>

@@ -58,6 +58,9 @@
       <a href="../articles/broom_and_dplyr.html">Broom and dplyr</a>
     </li>
     <li>
+      <a href="../articles/external-tidiers.html">Tidiers in external packages</a>
+    </li>
+    <li>
       <a href="../articles/kmeans.html">K-means</a>
     </li>
   </ul>
@@ -66,7 +69,7 @@
   <a href="../news/index.html">News</a>
 </li>
         <li>
-  <a href="https://github.com/tidyverse/broom">
+  <a href="https://github.com/tidymodels/broom">
     <span class="fa fa-github fa-lg"></span>
      
   </a>
@@ -85,9 +88,9 @@
     <div class="page-header toc-ignore">
       <h1>broom and dplyr</h1>
             
-            <h4 class="date">2018-07-17</h4>
+            <h4 class="date">2018-08-01</h4>
       
-      <small class="dont-index">Source: <a href="http://github.com/tidyverse/broom/blob/master/vignettes/broom_and_dplyr.Rmd"><code>vignettes/broom_and_dplyr.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="http://github.com/tidymodels/broom/blob/master/vignettes/broom_and_dplyr.Rmd"><code>vignettes/broom_and_dplyr.Rmd</code></a></small>
       <div class="hidden name"><code>broom_and_dplyr.Rmd</code></div>
 
     </div>
@@ -158,11 +161,11 @@ ct</code></pre></div>
 ##       cor 
 ## 0.9135189</code></pre>
 <p>This contains multiple values we could want in our output. Some are vectors of length 1, such as the p-value and the estimate, and some are longer, such as the confidence interval. We can get this into a nicely organized tibble using the <code>tidy</code> function:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/tidy.html">tidy</a></span>(ct)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="http://www.rdocumentation.org/packages/modelgenerics/topics/generics">tidy</a></span>(ct)</code></pre></div>
 <pre><code>## # A tibble: 1 x 8
-##   estimate statistic  p.value parameter conf.low conf.high method         
-##      &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;     &lt;int&gt;    &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;          
-## 1    0.914      12.9 1.93e-14        33    0.834     0.956 Pearson's prod…
+##   estimate statistic  p.value parameter conf.low conf.high method
+##      &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;     &lt;int&gt;    &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt; 
+## 1    0.914      12.9 1.93e-14        33    0.834     0.956 Pears…
 ## # ... with 1 more variable: alternative &lt;chr&gt;</code></pre>
 <p>Often, we want to perform multiple tests or fit multiple models, each on a different part of the data. In this case, we recommend a <code>nest-map-unnest</code> workflow. For example, suppose we want to perform correlation tests for each different tree. We start by <code>nest</code>ing our data based on the group of interest:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyr)
@@ -204,13 +207,13 @@ nested &lt;-<span class="st"> </span>Orange <span class="op">%&gt;%</span><span 
   ) <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/tidyr/topics/unnest">unnest</a></span>(tidied, <span class="dt">.drop =</span> <span class="ot">TRUE</span>)</code></pre></div>
 <pre><code>## # A tibble: 5 x 9
-##   Tree  estimate statistic  p.value parameter conf.low conf.high method   
-##   &lt;ord&gt;    &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;     &lt;int&gt;    &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;    
-## 1 1        0.985      13.0  4.85e-5         5    0.901     0.998 Pearson'…
-## 2 2        0.987      13.9  3.43e-5         5    0.914     0.998 Pearson'…
-## 3 3        0.988      14.4  2.90e-5         5    0.919     0.998 Pearson'…
-## 4 4        0.984      12.5  5.73e-5         5    0.895     0.998 Pearson'…
-## 5 5        0.988      14.1  3.18e-5         5    0.916     0.998 Pearson'…
+##   Tree  estimate statistic p.value parameter conf.low conf.high method
+##   &lt;ord&gt;    &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;     &lt;int&gt;    &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt; 
+## 1 1        0.985      13.0 4.85e-5         5    0.901     0.998 Pears…
+## 2 2        0.987      13.9 3.43e-5         5    0.914     0.998 Pears…
+## 3 3        0.988      14.4 2.90e-5         5    0.919     0.998 Pears…
+## 4 4        0.984      12.5 5.73e-5         5    0.895     0.998 Pears…
+## 5 5        0.988      14.1 3.18e-5         5    0.916     0.998 Pears…
 ## # ... with 1 more variable: alternative &lt;chr&gt;</code></pre>
 <p>Note that the <code>.drop</code> argument to <code><a href="http://www.rdocumentation.org/packages/tidyr/topics/unnest">tidyr::unnest</a></code> is often useful.</p>
 <p>This workflow becomes even more useful when applied to regressions. Untidy ouput for a regression looks like:</p>
@@ -235,7 +238,7 @@ nested &lt;-<span class="st"> </span>Orange <span class="op">%&gt;%</span><span 
 ## Multiple R-squared:  0.8345, Adjusted R-squared:  0.8295 
 ## F-statistic: 166.4 on 1 and 33 DF,  p-value: 1.931e-14</code></pre>
 <p>where we tidy these results, we get multiple rows of output for each model:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/tidy.html">tidy</a></span>(lm_fit)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="http://www.rdocumentation.org/packages/modelgenerics/topics/generics">tidy</a></span>(lm_fit)</code></pre></div>
 <pre><code>## # A tibble: 2 x 5
 ##   term          estimate std.error statistic  p.value
 ##   &lt;chr&gt;            &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
@@ -324,10 +327,10 @@ regressions <span class="op">%&gt;%</span><span class="st"> </span>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">regressions <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/tidyr/topics/unnest">unnest</a></span>(glanced, <span class="dt">.drop =</span> <span class="ot">TRUE</span>)</code></pre></div>
 <pre><code>## # A tibble: 2 x 12
-##      am r.squared adj.r.squared sigma statistic  p.value    df    logLik
-##   &lt;dbl&gt;     &lt;dbl&gt;         &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt; &lt;int&gt;     &lt;dbl&gt;
-## 1     1     0.833         0.778 0.291     15.0  0.000759     4  -0.00580
-## 2     0     0.625         0.550 0.522      8.32 0.00170      4 -12.4    
+##      am r.squared adj.r.squared sigma statistic p.value    df   logLik
+##   &lt;dbl&gt;     &lt;dbl&gt;         &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt; &lt;int&gt;    &lt;dbl&gt;
+## 1     1     0.833         0.778 0.291     15.0  7.59e-4     4 -5.80e-3
+## 2     0     0.625         0.550 0.522      8.32 1.70e-3     4 -1.24e+1
 ## # ... with 4 more variables: AIC &lt;dbl&gt;, BIC &lt;dbl&gt;, deviance &lt;dbl&gt;,
 ## #   df.residual &lt;int&gt;</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">regressions <span class="op">%&gt;%</span><span class="st"> </span>

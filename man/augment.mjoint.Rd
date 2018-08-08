@@ -87,3 +87,48 @@ If fitting a joint model with a single longitudinal process,
 make sure you are using a named \code{list} to define the formula
 for the fixed and random effects of the longitudinal submodel.
 }
+\examples{
+\dontrun{
+# Fit a joint model with bivariate longitudinal outcomes
+library(joineRML)
+data(heart.valve)
+hvd <- heart.valve[!is.na(heart.valve$log.grad) &
+                       !is.na(heart.valve$log.lvmi) &
+                       heart.valve$num <= 50, ]
+fit <- mjoint(
+    formLongFixed = list(
+        "grad" = log.grad ~ time + sex + hs,
+        "lvmi" = log.lvmi ~ time + sex
+    ),
+    formLongRandom = list(
+        "grad" = ~ 1 | num,
+        "lvmi" = ~ time | num
+    ),
+    formSurv = Surv(fuyrs, status) ~ age,
+    data = hvd,
+    inits = list("gamma" = c(0.11, 1.51, 0.80)),
+    timeVar = "time"
+)
+
+# Extract the survival fixed effects
+tidy(fit)
+
+# Extract the longitudinal fixed effects
+tidy(fit, component = "longitudinal")
+
+# Extract the survival fixed effects with confidence intervals
+tidy(fit, ci = TRUE)
+
+# Extract the survival fixed effects with confidence intervals based
+# on bootstrapped standard errors
+bSE <- bootSE(fit, nboot = 5, safe.boot = TRUE)
+tidy(fit, boot_se = bSE, ci = TRUE)
+
+# Augment original data with fitted longitudinal values and residuals
+hvd2 <- augment(fit)
+
+# Extract model statistics
+glance(fit)
+}
+
+}

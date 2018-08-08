@@ -8,20 +8,11 @@
 #'
 #' @template augment_NAs
 #'
-#' @return When `newdata` is not supplied `augment.loess`
-#' returns one row for each observation with three columns added
-#' to the original data:
+#' @evalRd return_augment(".se.fit")
 #' 
-#'    \item{.fitted}{Fitted values of model}
-#'    \item{.se.fit}{Standard errors of the fitted values}
-#'    \item{.resid}{Residuals of the fitted values}
-#'
-#' When `newdata` is supplied `augment.loess` returns
-#'    one row for each observation with one additional column:
-#'    
-#'    \item{.fitted}{Fitted values of model}
-#'    \item{.se.fit}{Standard errors of the fitted values}
-#'
+#' @details The `.se.fit` column is only present when data is specified via
+#'   the `data` argument.
+#'   
 #' @examples
 #'
 #' lo <- loess(mpg ~ wt, mtcars)
@@ -36,6 +27,7 @@
 #' @aliases loess_tidiers
 #' @export
 #' @seealso [augment()], [stats::loess()], [stats::predict.loess()]
-augment.loess <- function(x, data = stats::model.frame(x), newdata, ...) {
+augment.loess <- function(x, data = stats::model.frame(x), newdata = NULL, ...) {
   augment_columns(x, data, newdata, se.fit = FALSE, se = TRUE, ...)
 }
+

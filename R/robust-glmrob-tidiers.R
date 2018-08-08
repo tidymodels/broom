@@ -28,7 +28,7 @@ tidy.glmRob <- function(x, ...) {
 #' @templateVar class glmRob
 #' @template title_desc_augment_lm_wrapper
 #'
-#' @param x A `glmRob` object returned from [robust::glmRob()].
+#' @inherit tidy.glmRob params examples
 #' 
 #' @details For tidiers for robust models from the \pkg{MASS} package see
 #'   [tidy.rlm()].
@@ -36,21 +36,20 @@ tidy.glmRob <- function(x, ...) {
 #' @export
 #' @family robust tidiers
 #' @seealso [robust::glmRob()]
-augment.glmRob <- function(x, ...) {
-  augment.lm(x, ...)
-}
+#' @include stats-lm-tidiers.R
+augment.glmRob <- augment.lm
 
 #' @templateVar class glmRob
 #' @template title_desc_glance
 #' 
-#' @param x A `glmRob` object returned from [robust::glmRob()].
+#' @inherit tidy.glmRob params examples
 #' @template param_unused_dots
 #' 
-#' @return A one-row [tibble::tibble] with columns:
-#' 
-#'   \item{deviance}{Robust deviance}
-#'   \item{null.deviance}{Deviance under the null model}
-#'   \item{df.residual}{Number of residual degrees of freedom}
+#' @evalRd return_glance(
+#'   "deviance",
+#'   "null.deviance",
+#'   "df.residual"
+#' )
 #' 
 #' @export
 #' @family robust tidiers

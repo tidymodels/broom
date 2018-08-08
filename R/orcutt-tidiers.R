@@ -3,21 +3,26 @@
 #' 
 #' @param x An `orcutt` object returned from [orcutt::cochrane.orcutt()].
 #'
-#' @return `tidy` returns the same information as [tidy.lm()], 
-#' though without confidence interval options.
+#' @evalRd return_tidy(
+#'   "term",
+#'   "estimate",
+#'   "std.error",
+#'   "statistic",
+#'   "p.value"
+#' )
 #'
 #' @examples
+#' 
+#' library(orcutt)
 #'
 #' reg <- lm(mpg ~ wt + qsec + disp, mtcars)
 #' tidy(reg)
 #'
-#' if (require("orcutt", quietly = TRUE)) {
-#'   co <- cochrane.orcutt(reg)
-#'   co
+#' co <- cochrane.orcutt(reg)
+#' co
 #'
-#'   tidy(co)
-#'   glance(co)
-#' }
+#' tidy(co)
+#' glance(co)
 #' 
 #' @aliases orcutt_tidiers
 #' @export
@@ -32,19 +37,19 @@ tidy.orcutt <- function(x, ...) {
 #' @templateVar class orcutt
 #' @template title_desc_glance
 #' 
-#' @param x An `orcutt` object returned from [orcutt::cochrane.orcutt()].
+#' @inherit tidy.orcutt params examples
 #' @template param_unused_dots
 #'
-#' @return A one-row [tibble::tibble] with columns:
-#' 
-#'   \item{r.squared}{R-squared}
-#'   \item{adj.r.squared}{Adjusted R-squared}
-#'   \item{rho}{Spearman's rho autocorrelation}
-#'   \item{number.interaction}{Number of interactions}
-#'   \item{dw.original}{Durbin-Watson statistic of original fit}
-#'   \item{p.value.original}{P-value of original Durbin-Watson statistic}
-#'   \item{dw.transformed}{Durbin-Watson statistic of transformed fit}
-#'   \item{p.value.transformed}{P-value of autocorrelation after transformation}
+#' @evalRd return_glance(
+#'   "r.squared",
+#'   "adj.r.squared",
+#'   rho = "Spearman's rho autocorrelation",
+#'   "number.interaction",
+#'   "dw.original",
+#'   "p.value.original",
+#'   "dw.transformed",
+#'   "p.value.transformed"
+#' )
 #'
 #' @export
 #' @family orcutt tidiers

@@ -1,5 +1,8 @@
 context("nnet")
 
+skip_if_not_installed("modeltests")
+library(modeltests)
+
 skip_if_not_installed("nnet")
 library(nnet)
 

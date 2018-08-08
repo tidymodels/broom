@@ -19,11 +19,6 @@ proceed using \code{conf.level = 0.95}. Additionally, if you pass
 accept a \code{newdata} argument, it will use the default value for
 the \code{data} argument.}
 }
-\value{
-A one-row \link[tibble:tibble]{tibble::tibble} with columns:
-\item{nulldev}{null deviance}
-\item{npasses}{total passes over the data across all lambda values}
-}
 \description{
 Glance accepts a model object and returns a \code{\link[tibble:tibble]{tibble::tibble()}}
 with exactly one row of model summaries. The summaries are typically
@@ -39,6 +34,35 @@ computations to appropriate methods and gathers the results together.
 Sometimes a goodness of fit measure will be undefined. In these cases
 the measure will be reported as \code{NA}.
 }
+\examples{
+
+library(glmnet)
+
+set.seed(2014)
+x <- matrix(rnorm(100*20),100,20)
+y <- rnorm(100)
+fit1 <- glmnet(x,y)
+
+tidy(fit1)
+glance(fit1)
+
+library(dplyr)
+library(ggplot2)
+
+tidied <- tidy(fit1) \%>\% filter(term != "(Intercept)")
+
+ggplot(tidied, aes(step, estimate, group = term)) + geom_line()
+ggplot(tidied, aes(lambda, estimate, group = term)) +
+    geom_line() + scale_x_log10()
+
+ggplot(tidied, aes(lambda, dev.ratio)) + geom_line()
+
+# works for other types of regressions as well, such as logistic
+g2 <- sample(1:2, 100, replace=TRUE)
+fit2 <- glmnet(x, g2, family="binomial")
+tidy(fit2)
+
+}
 \seealso{
 \code{\link[=glance]{glance()}}, \code{\link[glmnet:glmnet]{glmnet::glmnet()}}
 
@@ -46,3 +70,9 @@ Other glmnet tidiers: \code{\link{glance.cv.glmnet}},
   \code{\link{tidy.cv.glmnet}}, \code{\link{tidy.glmnet}}
 }
 \concept{glmnet tidiers}
+\value{
+A \code{\link[tibble:tibble]{tibble::tibble()}} with exactly one row and columns:
+  \item{npasses}{total passes over the data across all lambda values}
+  \item{nulldev}{null deviance}
+
+}

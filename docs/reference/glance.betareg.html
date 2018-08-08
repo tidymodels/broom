@@ -77,6 +77,9 @@
       <a href="../articles/broom_and_dplyr.html">Broom and dplyr</a>
     </li>
     <li>
+      <a href="../articles/external-tidiers.html">Tidiers in external packages</a>
+    </li>
+    <li>
       <a href="../articles/kmeans.html">K-means</a>
     </li>
   </ul>
@@ -85,7 +88,7 @@
   <a href="../news/index.html">News</a>
 </li>
         <li>
-  <a href="https://github.com/tidyverse/broom">
+  <a href="https://github.com/tidymodels/broom">
     <span class="fa fa-github fa-lg"></span>
      
   </a>
@@ -102,7 +105,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Glance at a(n) betareg object</h1>
-    <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/betareg-tidiers.R'><code>R/betareg-tidiers.R</code></a></small>
+    <small class="dont-index">Source: <a href='http://github.com/tidymodels/broom/blob/master/R/betareg-tidiers.R'><code>R/betareg-tidiers.R</code></a></small>
     <div class="hidden name"><code>glance.betareg.Rd</code></div>
     </div>
 
@@ -123,7 +126,7 @@ the measure will be reported as <code>NA</code>.</p>
     </div>
 
     <pre class="usage"><span class='co'># S3 method for betareg</span>
-<span class='fu'><a href='glance.html'>glance</a></span>(<span class='no'>x</span>, <span class='no'>...</span>)</pre>
+<span class='fu'><a href='http://www.rdocumentation.org/packages/modelgenerics/topics/generics'>glance</a></span>(<span class='no'>x</span>, <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -140,32 +143,32 @@ absorbed in <code>...</code>, where they will be ignored. If the misspelled
 argument has a default value, the default value will be used.
 For example, if you pass <code>conf.lvel = 0.9</code>, all computation will
 proceed using <code>conf.level = 0.95</code>. Additionally, if you pass
-<code>newdata = my_tibble</code> to an <code><a href='augment.html'>augment()</a></code> method that does not
+<code>newdata = my_tibble</code> to an <code><a href='http://www.rdocumentation.org/packages/modelgenerics/topics/generics'>augment()</a></code> method that does not
 accept a <code>newdata</code> argument, it will use the default value for
 the <code>data</code> argument.</p></td>
     </tr>
     </table>
     
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
-
-    <p><code>glance</code> returns a one-row tibble with columns:</p>
-<dt>pseudo.r.squared</dt><dd><p>the deviance of the null model</p></dd>
-<dt>logLik</dt><dd><p>the data's log-likelihood under the model</p></dd>
-<dt>AIC</dt><dd><p>the Akaike Information Criterion</p></dd>
-<dt>BIC</dt><dd><p>the Bayesian Information Criterion</p></dd>
-<dt>df.residual</dt><dd><p>residual degrees of freedom</p></dd>
-<dt>df.null</dt><dd><p>degrees of freedom under the null</p></dd>
-
-    
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='glance.html'>glance()</a></code>, <code><a href='http://www.rdocumentation.org/packages/betareg/topics/betareg'>betareg::betareg()</a></code></p></div>
+    <div class='dont-index'><p><code><a href='http://www.rdocumentation.org/packages/modelgenerics/topics/generics'>glance()</a></code>, <code><a href='http://www.rdocumentation.org/packages/betareg/topics/betareg'>betareg::betareg()</a></code></p></div>
+    
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>A <code><a href='http://www.rdocumentation.org/packages/tibble/topics/tibble'>tibble::tibble()</a></code> with exactly one row and columns:</p>
+<dt>AIC</dt><dd><p>Akaike's Information Criterion for the model.</p></dd>
+  <dt>BIC</dt><dd><p>Bayesian Information Criterion for the model.</p></dd>
+  <dt>df.null</dt><dd><p>Needs custom info.</p></dd>
+  <dt>df.residual</dt><dd><p>Residual degrees of freedom for the model.</p></dd>
+  <dt>logLik</dt><dd><p>The log-likelihood of the model. [stats::logLik()] may be a useful reference.</p></dd>
+  <dt>pseudo.r.squared</dt><dd><p>TODO</p></dd>
+
+
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
 <span class='fu'>library</span>(<span class='no'>betareg</span>)
-
 <span class='fu'>data</span>(<span class='st'>"GasolineYield"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"betareg"</span>)
 
 <span class='no'>mod</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/betareg/topics/betareg'>betareg</a></span>(<span class='no'>yield</span> ~ <span class='no'>batch</span> + <span class='no'>temp</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>GasolineYield</span>)
@@ -183,7 +186,7 @@ the <code>data</code> argument.</p></td>
 #&gt; Phi coefficients (precision model with identity link):
 #&gt; (phi)  
 #&gt; 440.3  
-#&gt; </div><div class='input'><span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>mod</span>)</div><div class='output co'>#&gt; # A tibble: 12 x 6
+#&gt; </div><div class='input'><span class='fu'><a href='http://www.rdocumentation.org/packages/modelgenerics/topics/generics'>tidy</a></span>(<span class='no'>mod</span>)</div><div class='output co'>#&gt; # A tibble: 12 x 6
 #&gt;    component term         estimate  std.error statistic   p.value
 #&gt;    &lt;chr&gt;     &lt;chr&gt;           &lt;dbl&gt;      &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;
 #&gt;  1 mean      (Intercept)   -6.16     0.182       -33.8  3.44e-250
@@ -197,7 +200,7 @@ the <code>data</code> argument.</p></td>
 #&gt;  9 mean      batch8         0.496    0.109         4.55 5.30e-  6
 #&gt; 10 mean      batch9         0.386    0.119         3.25 1.14e-  3
 #&gt; 11 mean      temp           0.0110   0.000413     26.6  1.26e-155
-#&gt; 12 precision (phi)        440.     110.            4.00 6.29e-  5</div><div class='input'><span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>mod</span>, <span class='kw'>conf.int</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; # A tibble: 12 x 8
+#&gt; 12 precision (phi)        440.     110.            4.00 6.29e-  5</div><div class='input'><span class='fu'><a href='http://www.rdocumentation.org/packages/modelgenerics/topics/generics'>tidy</a></span>(<span class='no'>mod</span>, <span class='kw'>conf.int</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; # A tibble: 12 x 8
 #&gt;    component term     estimate std.error statistic   p.value conf.low conf.high
 #&gt;    &lt;chr&gt;     &lt;chr&gt;       &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;
 #&gt;  1 mean      (Inter…   -6.16     1.82e-1    -33.8  3.44e-250 -6.52e+0   -5.80  
@@ -211,7 +214,7 @@ the <code>data</code> argument.</p></td>
 #&gt;  9 mean      batch8     0.496    1.09e-1      4.55 5.30e-  6  2.82e-1    0.709 
 #&gt; 10 mean      batch9     0.386    1.19e-1      3.25 1.14e-  3  1.53e-1    0.618 
 #&gt; 11 mean      temp       0.0110   4.13e-4     26.6  1.26e-155  1.02e-2    0.0118
-#&gt; 12 precision (phi)    440.       1.10e+2      4.00 6.29e-  5  2.25e+2  656.    </div><div class='input'><span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>mod</span>, <span class='kw'>conf.int</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>conf.level</span> <span class='kw'>=</span> <span class='fl'>.99</span>)</div><div class='output co'>#&gt; # A tibble: 12 x 8
+#&gt; 12 precision (phi)    440.       1.10e+2      4.00 6.29e-  5  2.25e+2  656.    </div><div class='input'><span class='fu'><a href='http://www.rdocumentation.org/packages/modelgenerics/topics/generics'>tidy</a></span>(<span class='no'>mod</span>, <span class='kw'>conf.int</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>conf.level</span> <span class='kw'>=</span> <span class='fl'>.99</span>)</div><div class='output co'>#&gt; # A tibble: 12 x 8
 #&gt;    component term     estimate std.error statistic   p.value conf.low conf.high
 #&gt;    &lt;chr&gt;     &lt;chr&gt;       &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;
 #&gt;  1 mean      (Inter…   -6.16     1.82e-1    -33.8  3.44e-250 -6.63e+0   -5.69  
@@ -226,7 +229,7 @@ the <code>data</code> argument.</p></td>
 #&gt; 10 mean      batch9     0.386    1.19e-1      3.25 1.14e-  3  8.03e-2    0.691 
 #&gt; 11 mean      temp       0.0110   4.13e-4     26.6  1.26e-155  9.90e-3    0.0120
 #&gt; 12 precision (phi)    440.       1.10e+2      4.00 6.29e-  5  1.57e+2  724.    </div><div class='input'>
-<span class='fu'><a href='augment.html'>augment</a></span>(<span class='no'>mod</span>)</div><div class='output co'>#&gt; # A tibble: 32 x 6
+<span class='fu'><a href='http://www.rdocumentation.org/packages/modelgenerics/topics/generics'>augment</a></span>(<span class='no'>mod</span>)</div><div class='output co'>#&gt; # A tibble: 32 x 6
 #&gt;    yield batch  temp .fitted .resid   .cooksd
 #&gt;  * &lt;dbl&gt; &lt;fct&gt; &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;     &lt;dbl&gt;
 #&gt;  1 0.122 1       205  0.101   1.59  0.0791   
@@ -240,7 +243,7 @@ the <code>data</code> argument.</p></td>
 #&gt;  9 0.182 3       272  0.167   1.02  0.0441   
 #&gt; 10 0.304 3       340  0.298   0.446 0.0170   
 #&gt; # ... with 22 more rows</div><div class='input'>
-<span class='fu'><a href='glance.html'>glance</a></span>(<span class='no'>mod</span>)</div><div class='output co'>#&gt; # A tibble: 1 x 6
+<span class='fu'><a href='http://www.rdocumentation.org/packages/modelgenerics/topics/generics'>glance</a></span>(<span class='no'>mod</span>)</div><div class='output co'>#&gt; # A tibble: 1 x 6
 #&gt;   pseudo.r.squared df.null logLik   AIC   BIC df.residual
 #&gt;              &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;       &lt;int&gt;
 #&gt; 1            0.962      30   84.8 -146. -128.          20</div><div class='input'>
@@ -251,9 +254,9 @@ the <code>data</code> argument.</p></td>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
       
-      <li><a href="#value">Value</a></li>
-
       <li><a href="#see-also">See also</a></li>
+
+      <li><a href="#value">Value</a></li>
       
       <li><a href="#examples">Examples</a></li>
     </ul>

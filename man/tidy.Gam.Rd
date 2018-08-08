@@ -20,10 +20,6 @@ proceed using \code{conf.level = 0.95}. Additionally, if you pass
 accept a \code{newdata} argument, it will use the default value for
 the \code{data} argument.}
 }
-\value{
-The tidied output of the parametric ANOVA for the GAM model as
-a \link[tibble:tibble]{tibble::tibble} with one row for each term in the model.
-}
 \description{
 Tidy summarizes information about the components of a model.
 A model component might be a single term in a regression, a single
@@ -51,3 +47,13 @@ glance(g)
 Other gam tidiers: \code{\link{glance.Gam}}
 }
 \concept{gam tidiers}
+\value{
+A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
+  \item{df}{Degrees of freedom used by this term in the model.}
+  \item{meansq}{Mean sum of squares. Equal to total sum of squares divided by degrees of freedom.}
+  \item{p.value}{The two-sided p-value associated with the observed statistic.}
+  \item{statistic}{The value of a T-statistic to use in a hypothesis that the regression term is non-zero.}
+  \item{sumsq}{Sum of squares explained by this term}
+  \item{term}{The name of the regression term.}
+
+}

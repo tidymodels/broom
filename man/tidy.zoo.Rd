@@ -20,14 +20,6 @@ proceed using \code{conf.level = 0.95}. Additionally, if you pass
 accept a \code{newdata} argument, it will use the default value for
 the \code{data} argument.}
 }
-\value{
-A \link[tibble:tibble]{tibble::tibble} with one row for each observation in the \code{zoo}
-time series and columns:
-
-\item{index}{Index (usually date) for the zoo object}
-\item{series}{Name of the series}
-\item{value}{Value of the observation}
-}
 \description{
 Tidy summarizes information about the components of a model.
 A model component might be a single term in a regression, a single
@@ -70,3 +62,10 @@ Other time series tidiers: \code{\link{tidy.acf}},
   \code{\link{tidy.spec}}, \code{\link{tidy.ts}}
 }
 \concept{time series tidiers}
+\value{
+A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
+  \item{index}{Index (i.e. date or time) for a `ts` or `zoo` object.}
+  \item{series}{Name of the series (present only for multivariate time series).}
+  \item{value}{Needs custom desciption.}
+
+}

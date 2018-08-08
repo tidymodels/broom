@@ -1,5 +1,8 @@
 context("muhaz")
 
+skip_if_not_installed("modeltests")
+library(modeltests)
+
 skip_if_not_installed("muhaz")
 skip_if_not_installed("survival")  # does this skip with base R?
 
@@ -21,7 +24,7 @@ test_that("tidy.muhaz", {
 
 test_that("glance.muhaz", {
   gl <- glance(fit)
-  check_glance_outputs(gl)
+  check_glance_outputs(gl, strict = FALSE)
   check_dims(gl, expected_cols = 5)
 })
 

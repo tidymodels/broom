@@ -77,6 +77,9 @@
       <a href="../articles/broom_and_dplyr.html">Broom and dplyr</a>
     </li>
     <li>
+      <a href="../articles/external-tidiers.html">Tidiers in external packages</a>
+    </li>
+    <li>
       <a href="../articles/kmeans.html">K-means</a>
     </li>
   </ul>
@@ -85,7 +88,7 @@
   <a href="../news/index.html">News</a>
 </li>
         <li>
-  <a href="https://github.com/tidyverse/broom">
+  <a href="https://github.com/tidymodels/broom">
     <span class="fa fa-github fa-lg"></span>
      
   </a>
@@ -102,7 +105,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Tidy a(n) ergm object</h1>
-    <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/ergm-tidiers.R'><code>R/ergm-tidiers.R</code></a></small>
+    <small class="dont-index">Source: <a href='http://github.com/tidymodels/broom/blob/master/R/ergm-tidiers.R'><code>R/ergm-tidiers.R</code></a></small>
     <div class="hidden name"><code>tidy.ergm.Rd</code></div>
     </div>
 
@@ -121,7 +124,7 @@ the <span class="pkg">ergm</span> class, such as those produced from weighted ne
     </div>
 
     <pre class="usage"><span class='co'># S3 method for ergm</span>
-<span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>x</span>, <span class='kw'>conf.int</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>conf.level</span> <span class='kw'>=</span> <span class='fl'>0.95</span>,
+<span class='fu'><a href='http://www.rdocumentation.org/packages/modelgenerics/topics/generics'>tidy</a></span>(<span class='no'>x</span>, <span class='kw'>conf.int</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>conf.level</span> <span class='kw'>=</span> <span class='fl'>0.95</span>,
   <span class='kw'>exponentiate</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>quick</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -162,20 +165,6 @@ covariance and standard error calculations. Defaults to <code>FALSE</code>.</p><
     </tr>
     </table>
     
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
-
-    <p>A <a href='http://www.rdocumentation.org/packages/tibble/topics/tibble'>tibble::tibble</a> with one row for each coefficient in the
-exponential random graph model, with columns:</p>
-<dt>term</dt><dd><p>The term in the model being estimated and tested</p></dd>
-<dt>estimate</dt><dd><p>The estimated coefficient</p></dd>
-<dt>std.error</dt><dd><p>The standard error</p></dd>
-<dt>mcmc.error</dt><dd><p>The MCMC error</p></dd>
-<dt>p.value</dt><dd><p>The two-sided p-value</p></dd>
-
-If conf.int = TRUE, it also includes columns for conf.low and
-conf.high.
-
-    
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
     <p>Hunter DR, Handcock MS, Butts CT, Goodreau SM, Morris M (2008b).
@@ -185,36 +174,60 @@ Models for Networks. <em>Journal of Statistical Software</em>, 24(3).
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='tidy.html'>tidy()</a></code>, <code><a href='http://www.rdocumentation.org/packages/ergm/topics/ergm'>ergm::ergm()</a></code>, <code><a href='http://www.rdocumentation.org/packages/ergm/topics/control.ergm'>ergm::control.ergm()</a></code>,
+    <div class='dont-index'><p><code><a href='http://www.rdocumentation.org/packages/modelgenerics/topics/generics'>tidy()</a></code>, <code><a href='http://www.rdocumentation.org/packages/ergm/topics/ergm'>ergm::ergm()</a></code>, <code><a href='http://www.rdocumentation.org/packages/ergm/topics/control.ergm'>ergm::control.ergm()</a></code>,
 <code><a href='http://www.rdocumentation.org/packages/ergm/topics/summary.ergm'>ergm::summary.ergm()</a></code></p>
 <p>Other ergm tidiers: <code><a href='glance.ergm.html'>glance.ergm</a></code></p></div>
+    
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>A <code><a href='http://www.rdocumentation.org/packages/tibble/topics/tibble'>tibble::tibble()</a></code> with columns:</p>
+<dt>conf.high</dt><dd><p>The upper end of a confidence interval for the term under consideration. Included only if `conf.int = TRUE`.</p></dd>
+  <dt>conf.low</dt><dd><p>The lower end of a confidence interval for the term under consideration. Included only if `conf.int = TRUE`.</p></dd>
+  <dt>estimate</dt><dd><p>The estimated value of the regression term.</p></dd>
+  <dt>mcmc.error</dt><dd><p>The MCMC error</p></dd>
+  <dt>p.value</dt><dd><p>The two-sided p-value associated with the observed statistic.</p></dd>
+  <dt>std.error</dt><dd><p>The standard error of the regression term.</p></dd>
+  <dt>term</dt><dd><p>The name of the regression term.</p></dd>
+
+
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
-</div><span class='co'># NOT RUN {</span>
-<span class='kw'>if</span> (<span class='fu'>require</span>(<span class='st'>"ergm"</span>)) {
-    <span class='co'># Using the same example as the ergm package</span>
-    <span class='co'># Load the Florentine marriage network data</span>
-    <span class='fu'>data</span>(<span class='no'>florentine</span>)
+<span class='fu'>library</span>(<span class='no'>ergm</span>)
+<span class='co'># Using the same example as the ergm package</span>
+<span class='co'># Load the Florentine marriage network data</span>
+<span class='fu'>data</span>(<span class='no'>florentine</span>)
 
-    <span class='co'># Fit a model where the propensity to form ties between</span>
-    <span class='co'># families depends on the absolute difference in wealth</span>
-    <span class='no'>gest</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/ergm/topics/ergm'>ergm</a></span>(<span class='no'>flomarriage</span> ~ <span class='no'>edges</span> + <span class='fu'><a href='http://www.rdocumentation.org/packages/ergm/topics/ergm-terms'>absdiff</a></span>(<span class='st'>"wealth"</span>))
-
-    <span class='co'># Show terms, coefficient estimates and errors</span>
-    <span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>gest</span>)
-
-    <span class='co'># Show coefficients as odds ratios with a 99% CI</span>
-    <span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>gest</span>, <span class='kw'>exponentiate</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>conf.int</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>conf.level</span> <span class='kw'>=</span> <span class='fl'>0.99</span>)
-
-    <span class='co'># Take a look at likelihood measures and other</span>
-    <span class='co'># control parameters used during MCMC estimation</span>
-    <span class='fu'><a href='glance.html'>glance</a></span>(<span class='no'>gest</span>)
-    <span class='fu'><a href='glance.html'>glance</a></span>(<span class='no'>gest</span>, <span class='kw'>deviance</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
-    <span class='fu'><a href='glance.html'>glance</a></span>(<span class='no'>gest</span>, <span class='kw'>mcmc</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
-}
-<span class='co'># }</span><div class='input'>
+<span class='co'># Fit a model where the propensity to form ties between</span>
+<span class='co'># families depends on the absolute difference in wealth</span>
+<span class='no'>gest</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/ergm/topics/ergm'>ergm</a></span>(<span class='no'>flomarriage</span> ~ <span class='no'>edges</span> + <span class='fu'><a href='http://www.rdocumentation.org/packages/ergm/topics/ergm-terms'>absdiff</a></span>(<span class='st'>"wealth"</span>))</div><div class='output co'>#&gt; <span class='message'>Evaluating log-likelihood at the estimate. </span></div><div class='output co'>#&gt; </div><div class='input'>
+<span class='co'># Show terms, coefficient estimates and errors</span>
+<span class='fu'><a href='http://www.rdocumentation.org/packages/modelgenerics/topics/generics'>tidy</a></span>(<span class='no'>gest</span>)</div><div class='output co'>#&gt; # A tibble: 2 x 5
+#&gt;   term           estimate std.error mcmc.error      p.value
+#&gt;   &lt;chr&gt;             &lt;dbl&gt;     &lt;dbl&gt;      &lt;dbl&gt;        &lt;dbl&gt;
+#&gt; 1 edges           -2.30     0.402            0 0.0000000791
+#&gt; 2 absdiff.wealth   0.0155   0.00616          0 0.0131      </div><div class='input'>
+<span class='co'># Show coefficients as odds ratios with a 99% CI</span>
+<span class='fu'><a href='http://www.rdocumentation.org/packages/modelgenerics/topics/generics'>tidy</a></span>(<span class='no'>gest</span>, <span class='kw'>exponentiate</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>conf.int</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>conf.level</span> <span class='kw'>=</span> <span class='fl'>0.99</span>)</div><div class='output co'>#&gt; # A tibble: 2 x 7
+#&gt;   term           estimate std.error mcmc.error      p.value conf.low conf.high
+#&gt;   &lt;chr&gt;             &lt;dbl&gt;     &lt;dbl&gt;      &lt;dbl&gt;        &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;
+#&gt; 1 edges             0.100   0.402            0 0.0000000791   0.0355     0.282
+#&gt; 2 absdiff.wealth    1.02    0.00616          0 0.0131         1.000      1.03 </div><div class='input'>
+<span class='co'># Take a look at likelihood measures and other</span>
+<span class='co'># control parameters used during MCMC estimation</span>
+<span class='fu'><a href='http://www.rdocumentation.org/packages/modelgenerics/topics/generics'>glance</a></span>(<span class='no'>gest</span>)</div><div class='output co'>#&gt; # A tibble: 1 x 5
+#&gt;   independence iterations logLik   AIC   BIC
+#&gt;   &lt;lgl&gt;             &lt;int&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+#&gt; 1 TRUE                  4  -51.0  106.  112.</div><div class='input'><span class='fu'><a href='http://www.rdocumentation.org/packages/modelgenerics/topics/generics'>glance</a></span>(<span class='no'>gest</span>, <span class='kw'>deviance</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; # A tibble: 1 x 9
+#&gt;   independence iterations logLik null.deviance df.null residual.devian…
+#&gt;   &lt;lgl&gt;             &lt;int&gt;  &lt;dbl&gt;         &lt;dbl&gt;   &lt;dbl&gt;            &lt;dbl&gt;
+#&gt; 1 TRUE                  4  -51.0          166.     120             102.
+#&gt; # ... with 3 more variables: df.residual &lt;dbl&gt;, AIC &lt;dbl&gt;, BIC &lt;dbl&gt;</div><div class='input'><span class='fu'><a href='http://www.rdocumentation.org/packages/modelgenerics/topics/generics'>glance</a></span>(<span class='no'>gest</span>, <span class='kw'>mcmc</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; # A tibble: 1 x 8
+#&gt;   independence iterations logLik   AIC   BIC MCMC.interval MCMC.burnin
+#&gt;   &lt;lgl&gt;             &lt;int&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;         &lt;dbl&gt;       &lt;dbl&gt;
+#&gt; 1 TRUE                  4  -51.0  106.  112.          1024       16384
+#&gt; # ... with 1 more variable: MCMC.samplesize &lt;dbl&gt;</div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
@@ -222,11 +235,11 @@ Models for Networks. <em>Journal of Statistical Software</em>, 24(3).
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
       
-      <li><a href="#value">Value</a></li>
-
       <li><a href="#references">References</a></li>
 
       <li><a href="#see-also">See also</a></li>
+
+      <li><a href="#value">Value</a></li>
       
       <li><a href="#examples">Examples</a></li>
     </ul>

@@ -19,17 +19,6 @@ proceed using \code{conf.level = 0.95}. Additionally, if you pass
 accept a \code{newdata} argument, it will use the default value for
 the \code{data} argument.}
 }
-\value{
-A one-row \link[tibble:tibble]{tibble::tibble} with columns:
-
-\item{null.deviance}{the deviance of the null model}
-\item{df.null}{the residual degrees of freedom for the null model}
-\item{logLik}{the data's log-likelihood under the model}
-\item{AIC}{the Akaike Information Criterion}
-\item{BIC}{the Bayesian Information Criterion}
-\item{deviance}{deviance}
-\item{df.residual}{residual degrees of freedom}
-}
 \description{
 Glance accepts a model object and returns a \code{\link[tibble:tibble]{tibble::tibble()}}
 with exactly one row of model summaries. The summaries are typically
@@ -59,3 +48,14 @@ Other lm tidiers: \code{\link{augment.glm}},
   \code{\link{tidy.glm}}, \code{\link{tidy.lm}}
 }
 \concept{lm tidiers}
+\value{
+A \code{\link[tibble:tibble]{tibble::tibble()}} with exactly one row and columns:
+  \item{AIC}{Akaike's Information Criterion for the model.}
+  \item{BIC}{Bayesian Information Criterion for the model.}
+  \item{deviance}{Deviance of the model.}
+  \item{df.null}{Needs custom info.}
+  \item{df.residual}{Residual degrees of freedom for the model.}
+  \item{logLik}{The log-likelihood of the model. [stats::logLik()] may be a useful reference.}
+  \item{null.deviance}{Deviance of the null model.}
+
+}

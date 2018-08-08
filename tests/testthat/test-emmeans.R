@@ -1,5 +1,8 @@
 context("emmeans")
 
+skip_if_not_installed("modeltests")
+library(modeltests)
+
 skip_if_not_installed("lsmeans")
 library(lsmeans)
 
@@ -18,7 +21,7 @@ marginal_dashes <- tibble(
   lsmeans::contrast(., "pairwise")
 
 test_that("lsmeans tidier arguments", {
-  check_arguments(tidy.lsmobj)
+  check_arguments(tidy.lsmobj, strict = FALSE)
   check_arguments(tidy.ref.grid)
   check_arguments(tidy.emmGrid)  # TODO: test this more
 })
@@ -28,9 +31,9 @@ test_that("tidy.lsmobj", {
   tdmd <- tidy(marginal_dashes)
   tdc <- tidy(contrast(marginal, method = "pairwise"))
   
-  check_tidy_output(tdm)
-  check_tidy_output(tdmd)
-  check_tidy_output(tdc)
+  check_tidy_output(tdm, strict = FALSE)
+  check_tidy_output(tdmd, strict = FALSE)
+  check_tidy_output(tdc, strict = FALSE)
   
   check_dims(tdm, 6, 6)
   check_dims(tdmd, 1, 7)
@@ -39,6 +42,6 @@ test_that("tidy.lsmobj", {
 
 test_that("ref.grid tidiers work", {
   td <- tidy(rg)
-  check_tidy_output(td)
+  check_tidy_output(td, strict = FALSE)
   check_dims(td, 36, 7)
 })

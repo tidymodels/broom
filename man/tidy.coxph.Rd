@@ -5,7 +5,7 @@
 \alias{coxph_tidiers}
 \title{Tidy a(n) coxph object}
 \usage{
-\method{tidy}{coxph}(x, exponentiate = FALSE, conf.int = TRUE,
+\method{tidy}{coxph}(x, exponentiate = FALSE, conf.int = FALSE,
   conf.level = 0.95, ...)
 }
 \arguments{
@@ -32,14 +32,6 @@ proceed using \code{conf.level = 0.95}. Additionally, if you pass
 \code{newdata = my_tibble} to an \code{\link[=augment]{augment()}} method that does not
 accept a \code{newdata} argument, it will use the default value for
 the \code{data} argument.}
-}
-\value{
-A \link[tibble:tibble]{tibble::tibble} with one row for each term and columns:
-
-\item{estimate}{estimate of slope}
-\item{std.error}{standard error of estimate}
-\item{statistic}{test statistic}
-\item{p.value}{p-value}
 }
 \description{
 Tidy summarizes information about the components of a model.
@@ -113,3 +105,11 @@ Other survival tidiers: \code{\link{augment.coxph}},
 }
 \concept{coxph tidiers}
 \concept{survival tidiers}
+\value{
+A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
+  \item{estimate}{The estimated value of the regression term.}
+  \item{p.value}{The two-sided p-value associated with the observed statistic.}
+  \item{statistic}{The value of a T-statistic to use in a hypothesis that the regression term is non-zero.}
+  \item{std.error}{The standard error of the regression term.}
+
+}

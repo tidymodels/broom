@@ -6,7 +6,7 @@
 #' @template param_exponentiate
 #' @template param_unused_dots
 #' 
-#' @template return_tidy_regression
+#' @evalRd return_tidy(regression = TRUE)
 #'
 #' @examples
 #'
@@ -41,10 +41,10 @@ tidy.plm <- function(x, conf.int = FALSE, conf.level = .95,
 #' @templateVar class plm
 #' @template title_desc_augment
 #' 
-#' @inheritParams tidy.plm
+#' @inherit tidy.plm params examples
 #' @template param_data
 #' 
-#' @template return_augment_columns
+#' @evalRd return_augment()
 #'
 #' @export
 #' @seealso [augment()], [plm::plm()]
@@ -60,18 +60,17 @@ augment.plm <- function(x, data = model.frame(x), ...) {
 #' @templateVar class plm
 #' @template title_desc_glance
 #' 
-#' @inheritParams tidy.plm
+#' @inherit tidy.plm params examples
 #'
-#' @return A one-row [tibble::tibble] with columns:
+#' @evalRd return_glance(
+#'   "r.squared",
+#'   "adj.r.squared",
+#'   statistic = "F-statistic",
+#'   "p.value",
+#'   "deviance",
+#'   "df.residual"
+#' )
 #' 
-#'   \item{r.squared}{The percent of variance explained by the model}
-#'   \item{adj.r.squared}{r.squared adjusted based on the degrees of freedom}
-#'   \item{statistic}{F-statistic}
-#'   \item{p.value}{p-value from the F test, describing whether the full
-#'   regression is significant}
-#'   \item{deviance}{deviance}
-#'   \item{df.residual}{residual degrees of freedom}
-#'
 #' @export
 #' @seealso [glance()], [plm::plm()]
 #' @family plm tidiers

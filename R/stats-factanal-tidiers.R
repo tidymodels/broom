@@ -4,13 +4,11 @@
 #' @param x A `factanal` object created by [stats::factanal()].
 #' @template param_unused_dots
 #' 
-#' @return A [tibble::tibble] with one row for each variable used in the 
-#'   analysis and columns:
-#'   
-#'   \item{variable}{The variable being estimated in the factor analysis}
-#'   \item{uniqueness}{Proportion of residual, or unexplained variance}
-#'   \item{flX}{Factor loading of term on factor X. There will be as many
-#'     columns of this format as there were factors fitted.}
+#' @evalRd return_tidy(
+#'   "variable",
+#'   uniqueness = "Proportion of residual, or unexplained variance",
+#'   "flX"
+#' )
 #'
 #' @examples
 #'
@@ -102,21 +100,18 @@ augment.factanal <- function(x, data, ...) {
 #' @templateVar class factanal
 #' @template title_desc_glance
 #' 
-#' @inheritParams tidy.factanal
+#' @inherit tidy.factanal params examples
 #'
-#' @return A one-row [tibble::tibble] with columns:
-#' 
-#'   \item{n.factors}{The number of fitted factors}
-#'   \item{total.variance}{Total cumulative proportion of variance accounted
-#'     for by all factors}
-#'   \item{statistic}{Significance-test statistic}
-#'   \item{p.value}{p-value from the significance test, describing whether the
-#'     covariance matrix estimated from the factors is significantly different
-#'     from the observed covariance matrix}
-#'   \item{df}{Degrees of freedom used by the factor analysis}
-#'   \item{n}{Sample size used in the analysis}
-#'   \item{method}{The estimation method; always Maximum Likelihood, "mle"}
-#'   \item{converged}{Whether the factor analysis converged}
+#' @evalRd return_glance(
+#'   "n.factors",
+#'   "total.variance",
+#'   "statistic",
+#'   "p-value",
+#'   "df",
+#'   "n",
+#'   "method",
+#'   "converged"
+#' )
 #'
 #' @export
 #' 

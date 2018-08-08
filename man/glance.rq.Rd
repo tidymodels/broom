@@ -19,15 +19,6 @@ proceed using \code{conf.level = 0.95}. Additionally, if you pass
 accept a \code{newdata} argument, it will use the default value for
 the \code{data} argument.}
 }
-\value{
-A one-row \link[tibble:tibble]{tibble::tibble} with columns:
-
-\item{tau}{quantile estimated}
-\item{logLik}{the data's log-likelihood under the model}
-\item{AIC}{the Akaike Information Criterion}
-\item{BIC}{the Bayesian Information Criterion}
-\item{df.residual}{residual degrees of freedom}
-}
 \description{
 Glance accepts a model object and returns a \code{\link[tibble:tibble]{tibble::tibble()}}
 with exactly one row of model summaries. The summaries are typically
@@ -50,6 +41,10 @@ For multiple values, please use a \code{\link[purrr:map]{purrr::map()}} workflow
   map_dfr(glance)
 }
 }
+\examples{
+
+print('TODO')
+}
 \seealso{
 \code{\link[=glance]{glance()}}, \code{\link[quantreg:rq]{quantreg::rq()}}
 
@@ -59,3 +54,11 @@ Other quantreg tidiers: \code{\link{augment.nlrq}},
   \code{\link{tidy.rqs}}, \code{\link{tidy.rq}}
 }
 \concept{quantreg tidiers}
+\value{
+A \code{\link[tibble:tibble]{tibble::tibble()}} with exactly one row and columns:
+  \item{AIC}{Akaike's Information Criterion for the model.}
+  \item{BIC}{Bayesian Information Criterion for the model.}
+  \item{logLik}{The log-likelihood of the model. [stats::logLik()] may be a useful reference.}
+  \item{tau}{Quantile.}
+
+}

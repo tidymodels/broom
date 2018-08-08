@@ -5,7 +5,8 @@
 \alias{loess_tidiers}
 \title{Tidy a(n) loess object}
 \usage{
-\method{augment}{loess}(x, data = stats::model.frame(x), newdata, ...)
+\method{augment}{loess}(x, data = stats::model.frame(x),
+  newdata = NULL, ...)
 }
 \arguments{
 \item{x}{A \code{loess} objects returned by \code{\link[stats:loess]{stats::loess()}}.}
@@ -34,21 +35,6 @@ the \code{data} argument will be ignored.}
     values in data frame \code{newdata}.  The default is to predict \code{NA}.}
 }}
 }
-\value{
-When \code{newdata} is not supplied \code{augment.loess}
-returns one row for each observation with three columns added
-to the original data:
-
-\item{.fitted}{Fitted values of model}
-\item{.se.fit}{Standard errors of the fitted values}
-\item{.resid}{Residuals of the fitted values}
-
-When \code{newdata} is supplied \code{augment.loess} returns
-one row for each observation with one additional column:
-
-\item{.fitted}{Fitted values of model}
-\item{.se.fit}{Standard errors of the fitted values}
-}
 \description{
 Tidy summarizes information about the components of a model.
 A model component might be a single term in a regression, a single
@@ -66,6 +52,9 @@ as a second argument, at which point the augmented data will contain those
 rows (typically with NAs in place of the new columns). If the original data
 is not provided to \code{\link[=augment]{augment()}} and \code{na.action = "na.exclude"}, a
 warning is raised and the incomplete rows are dropped.
+
+The \code{.se.fit} column is only present when data is specified via
+the \code{data} argument.
 }
 \examples{
 
@@ -83,4 +72,11 @@ augment(lo, newdata = head(mtcars))
 \link{na.action}
 
 \code{\link[=augment]{augment()}}, \code{\link[stats:loess]{stats::loess()}}, \code{\link[stats:predict.loess]{stats::predict.loess()}}
+}
+\value{
+A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
+  \item{.fitted}{Fitted / predicted value.}
+  \item{.resid}{Residuals of fitted values. TODO -- document when present. Residuals on which data set?}
+  \item{.se.fit}{Standard errors of fitted values. TODO -- prediction or mean interval?}
+
 }

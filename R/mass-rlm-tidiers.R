@@ -63,6 +63,5 @@ tidy.rlm <- function(x, ...) {
 #' @family rlm tidiers
 #' @seealso [MASS::rlm()]
 #' @export
-augment.rlm <- function(x, ...) {
-  augment.lm(x, ...)
-}
+#' @include stats-lm-tidiers.R
+augment.rlm <- augment.lm

@@ -2,8 +2,7 @@
 #' 
 #' @description This method wraps [tidy.lm()].
 #'   
-#' @inheritDotParams tidy.lm
-#' @inherit tidy.lm return
+#' @inherit tidy.lm return params
 #' 
 #' @seealso [tidy()], [tidy.lm()]
 #' 

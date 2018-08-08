@@ -7,7 +7,7 @@ articles:
   bootstrapping: bootstrapping.html
   broom: broom.html
   broom_and_dplyr: broom_and_dplyr.html
-  glossary: glossary.html
+  external-tidiers: external-tidiers.html
   kmeans: kmeans.html
 urls:
   reference: http://broom.tidyverse.org/reference

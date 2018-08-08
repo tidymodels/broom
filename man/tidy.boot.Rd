@@ -31,14 +31,15 @@ proceed using \code{conf.level = 0.95}. Additionally, if you pass
 accept a \code{newdata} argument, it will use the default value for
 the \code{data} argument.}
 }
-\value{
-A \link[tibble:tibble]{tibble::tibble} with one row per bootstrapped statistic and
-columns:
-\item{term}{Name of the computed statistic, if present.}
-\item{statistic}{Original value of the statistic.}
-\item{bias}{Bias of the statistic.}
-\item{std.error}{Standard error of the statistic.}
-
+\description{
+Tidy summarizes information about the components of a model.
+A model component might be a single term in a regression, a single
+hypothesis, a cluster, or a class. Exactly what tidy considers to be a
+model component varies cross models but is usually self-evident.
+If a model has several distinct types of components, you will need to
+specify which components to return.
+}
+\details{
 If weights were provided to the \code{boot} function, an \code{estimate}
 column is included showing the weighted bootstrap estimate, and the
 standard error is of that estimate.
@@ -48,33 +49,36 @@ call to \code{tsboot} with \code{orig.t = FALSE}, the \code{original}
 and \code{statistic} columns are omitted, and only \code{estimate} and
 \code{std.error} columns shown.
 }
-\description{
-Tidy summarizes information about the components of a model.
-A model component might be a single term in a regression, a single
-hypothesis, a cluster, or a class. Exactly what tidy considers to be a
-model component varies cross models but is usually self-evident.
-If a model has several distinct types of components, you will need to
-specify which components to return.
-}
 \examples{
-if (require("boot")) {
-   clotting <- data.frame(
-          u = c(5,10,15,20,30,40,60,80,100),
-          lot1 = c(118,58,42,35,27,25,21,19,18),
-          lot2 = c(69,35,26,21,18,16,13,12,12))
 
-   g1 <- glm(lot2 ~ log(u), data = clotting, family = Gamma)
+library(boot)
 
-   bootfun <- function(d, i) {
-      coef(update(g1, data= d[i,]))
-   }
-   bootres <- boot(clotting, bootfun, R = 999)
-   tidy(g1, conf.int=TRUE)
-   tidy(bootres, conf.int=TRUE)
+clotting <- data.frame(
+  u = c(5,10,15,20,30,40,60,80,100),
+  lot1 = c(118,58,42,35,27,25,21,19,18),
+  lot2 = c(69,35,26,21,18,16,13,12,12)
+)
+
+g1 <- glm(lot2 ~ log(u), data = clotting, family = Gamma)
+
+bootfun <- function(d, i) {
+   coef(update(g1, data = d[i, ]))
 }
+
+bootres <- boot(clotting, bootfun, R = 999)
+tidy(g1, conf.int = TRUE)
+tidy(bootres, conf.int = TRUE)
 
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[boot:boot]{boot::boot()}}, \code{\link[boot:tsboot]{boot::tsboot()}}, \code{\link[boot:boot.ci]{boot::boot.ci()}},
 \code{\link[rsample:bootstraps]{rsample::bootstraps()}}
+}
+\value{
+A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
+  \item{bias}{Bias of the statistic.}
+  \item{std.error}{The standard error of the regression term.}
+  \item{term}{The name of the regression term.}
+  \item{statistic}{Original value of the statistic.}
+
 }

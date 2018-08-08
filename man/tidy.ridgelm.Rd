@@ -20,15 +20,6 @@ proceed using \code{conf.level = 0.95}. Additionally, if you pass
 accept a \code{newdata} argument, it will use the default value for
 the \code{data} argument.}
 }
-\value{
-A \link[tibble:tibble]{tibble::tibble} with one row for each combination of lambda and
-a term in the formula, with columns:
-\item{lambda}{choice of lambda}
-\item{GCV}{generalized cross validation value for this lambda}
-\item{term}{the term in the ridge regression model being estimated}
-\item{estimate}{estimate of scaled coefficient using this lambda}
-\item{scale}{Scaling factor of estimated coefficient}
-}
 \description{
 Tidy summarizes information about the components of a model.
 A model component might be a single term in a regression, a single
@@ -68,3 +59,12 @@ ggplot(td2, aes(lambda, GCV)) +
 Other ridgelm tidiers: \code{\link{glance.ridgelm}}
 }
 \concept{ridgelm tidiers}
+\value{
+A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
+  \item{GCV}{generalized cross validation value for this lambda}
+  \item{lambda}{Value of penalty parameter lambda.}
+  \item{term}{The name of the regression term.}
+  \item{estimate}{estimate of scaled coefficient using this lambda}
+  \item{scale}{Scaling factor of estimated coefficient}
+
+}

@@ -4,7 +4,7 @@
 \alias{augment.Mclust}
 \title{Augment data with information from a(n) Mclust object}
 \usage{
-\method{augment}{Mclust}(x, data, ...)
+\method{augment}{Mclust}(x, data = NULL, ...)
 }
 \arguments{
 \item{x}{An \code{Mclust} object return from \code{\link[mclust:Mclust]{mclust::Mclust()}}.}
@@ -26,13 +26,6 @@ proceed using \code{conf.level = 0.95}. Additionally, if you pass
 \code{newdata = my_tibble} to an \code{\link[=augment]{augment()}} method that does not
 accept a \code{newdata} argument, it will use the default value for
 the \code{data} argument.}
-}
-\value{
-A \link[tibble:tibble]{tibble::tibble} of the original data with two extra columns:
-\item{.class}{The class assigned by the Mclust algorithm}
-\item{.uncertainty}{The uncertainty associated with the classification.
-If a point has a probability of 0.9 of being in its assigned class
-under the model, then the uncertainty is 0.1.}
 }
 \description{
 Augment accepts a model object and a dataset and adds
@@ -73,9 +66,43 @@ We are in the process of defining behaviors for models fit with various
 \link{na.action} arguments, but make no guarantees about behavior when data is
 missing at this time.
 }
+\examples{
+
+library(dplyr) 
+library(mclust)
+set.seed(27)
+
+centers <- tibble::tibble(
+  cluster = factor(1:3), 
+  num_points = c(100, 150, 50),  # number points in each cluster
+  x1 = c(5, 0, -3),              # x1 coordinate of cluster center
+  x2 = c(-1, 1, -2)              # x2 coordinate of cluster center
+)
+
+points <- centers \%>\%
+  mutate(
+    x1 = purrr::map2(num_points, x1, rnorm),
+    x2 = purrr::map2(num_points, x2, rnorm)
+  ) \%>\% 
+  select(-num_points, -cluster) \%>\%
+  tidyr::unnest(x1, x2)
+
+m <- mclust::Mclust(points)
+
+tidy(m)
+augment(m, points)
+glance(m)
+
+}
 \seealso{
 \code{\link[=augment]{augment()}}, \code{\link[mclust:Mclust]{mclust::Mclust()}}
 
 Other mclust tidiers: \code{\link{tidy.Mclust}}
 }
 \concept{mclust tidiers}
+\value{
+A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
+  \item{.class}{The predicted class. Needs custom info. (TODO -- make this a factor?)}
+  \item{.uncertainty}{The uncertainty associated with the classification. If a point has a probability of 0.9 of being in its assigned class under the model, then the uncertainty is 0.1.}
+
+}

@@ -77,6 +77,9 @@
       <a href="../articles/broom_and_dplyr.html">Broom and dplyr</a>
     </li>
     <li>
+      <a href="../articles/external-tidiers.html">Tidiers in external packages</a>
+    </li>
+    <li>
       <a href="../articles/kmeans.html">K-means</a>
     </li>
   </ul>
@@ -85,7 +88,7 @@
   <a href="../news/index.html">News</a>
 </li>
         <li>
-  <a href="https://github.com/tidyverse/broom">
+  <a href="https://github.com/tidymodels/broom">
     <span class="fa fa-github fa-lg"></span>
      
   </a>
@@ -102,13 +105,13 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Tidiers for NULL inputs</h1>
-    <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/null-and-default-tidiers.R'><code>R/null-and-default-tidiers.R</code></a></small>
+    <small class="dont-index">Source: <a href='http://github.com/tidymodels/broom/blob/master/R/null-and-default-tidiers.R'><code>R/null-and-default-tidiers.R</code></a></small>
     <div class="hidden name"><code>null_tidiers.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p><code><a href='tidy.html'>tidy(NULL)</a></code>, <code><a href='glance.html'>glance(NULL)</a></code> and <code><a href='augment.html'>augment(NULL)</a></code> all return an empty
+    <p><code><a href='http://www.rdocumentation.org/packages/modelgenerics/topics/generics'>tidy(NULL)</a></code>, <code><a href='http://www.rdocumentation.org/packages/modelgenerics/topics/generics'>glance(NULL)</a></code> and <code><a href='http://www.rdocumentation.org/packages/modelgenerics/topics/generics'>augment(NULL)</a></code> all return an empty
 <a href='http://www.rdocumentation.org/packages/tibble/topics/tibble'>tibble::tibble</a>. This empty tibble can be treated a tibble with zero
 rows, making it convenient to combine with other tibbles using
 functions like <code><a href='http://www.rdocumentation.org/packages/purrr/topics/map'>purrr::map_df()</a></code> on lists of potentially <code>NULL</code> objects.</p>
@@ -116,13 +119,13 @@ functions like <code><a href='http://www.rdocumentation.org/packages/purrr/topic
     </div>
 
     <pre class="usage"><span class='co'># S3 method for NULL</span>
-<span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>x</span>, <span class='no'>...</span>)
+<span class='fu'><a href='http://www.rdocumentation.org/packages/modelgenerics/topics/generics'>tidy</a></span>(<span class='no'>x</span>, <span class='no'>...</span>)
 
 <span class='co'># S3 method for NULL</span>
-<span class='fu'><a href='glance.html'>glance</a></span>(<span class='no'>x</span>, <span class='no'>...</span>)
+<span class='fu'><a href='http://www.rdocumentation.org/packages/modelgenerics/topics/generics'>glance</a></span>(<span class='no'>x</span>, <span class='no'>...</span>)
 
 <span class='co'># S3 method for NULL</span>
-<span class='fu'><a href='augment.html'>augment</a></span>(<span class='no'>x</span>, <span class='no'>...</span>)</pre>
+<span class='fu'><a href='http://www.rdocumentation.org/packages/modelgenerics/topics/generics'>augment</a></span>(<span class='no'>x</span>, <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">

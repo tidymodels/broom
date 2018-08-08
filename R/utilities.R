@@ -1,3 +1,18 @@
+# Rename only those columns in a data frame that are present. Example:
+# 
+# rename2(
+#   tibble(dog = 1),
+#   cat = dog,
+#   mouse = gerbil
+# )
+#
+rename2 <- function(.data, ...) {
+  dots <- quos(...)
+  present <- purrr::keep(dots, ~quo_name(.x) %in% colnames(.data))
+  rename(.data, !!!present)
+}
+
+# probably should just nuke this
 validate_augment_input <- function(model, data = NULL, newdata = NULL) {
   
   # careful: `data` may be non-null due to default argument such as
@@ -96,22 +111,20 @@ validate_augment_input <- function(model, data = NULL, newdata = NULL) {
 #'
 #' @return A `tibble` potentially with a `.rownames` column
 #' @noRd
-as_rw_tibble <- function(data) {
-  
-  # TODO: write a test for this
-  
-  row_nm <- rownames(data)
-  has_row_nms <- any(row_nm != as.character(seq_along(row_nm)))
-  
+as_broom_tibble <- function(data) {
   df <- as_tibble(data)
-  
-  if (has_row_nms) {
-    df <- tibble::rownames_to_column(df, var = ".rownames")
-  }
-  
+  if (has_rownames(data))
+    df <- tibble::add_column(df, .rownames = rownames(data), .before = TRUE)
   df
 }
 
+# copied from modeltests. re-export if at some we Import modeltests rather
+# than suggest it
+has_rownames <- function(df) {
+  if (tibble::is_tibble(df))
+    return(FALSE)
+  any(rownames(df) != as.character(1:nrow(df)))
+}
 
 
 #' Ensure an object is a data frame, with rownames moved into a column
@@ -195,7 +208,7 @@ insert_NAs <- function(x, original) {
 #' @param ... extra arguments (not used)
 #'
 #' @export
-augment_columns <- function(x, data, newdata, type, type.predict = type,
+augment_columns <- function(x, data, newdata = NULL, type, type.predict = type,
                             type.residuals = type, se.fit = TRUE, ...) {
   notNAs <- function(o) {
     if (is.null(o) || all(is.na(o))) NULL else o
@@ -209,7 +222,7 @@ augment_columns <- function(x, data, newdata, type, type.predict = type,
 
   # call predict with arguments
   args <- list(x)
-  if (!missing(newdata)) {
+  if (!is.null(newdata)) {
     args$newdata <- newdata
   }
   if (!missing(type.predict)) {
@@ -222,7 +235,8 @@ augment_columns <- function(x, data, newdata, type, type.predict = type,
 
   if ("panelmodel" %in% class(x)) {
     # work around for panel models (plm)
-    # stat::predict() returns wrong fitted values when applied to random or fixed effect panel models [plm(..., model="random"), plm(, ..., model="pooling")]
+    # stat::predict() returns wrong fitted values when applied to random or
+    # fixed effect panel models [plm(..., model="random"), plm(, ..., model="pooling")]
     # It works only for pooled OLS models (plm( ..., model="pooling"))
     pred <- model.frame(x)[, 1] - residuals(x)
   } else {
@@ -261,8 +275,16 @@ augment_columns <- function(x, data, newdata, type, type.predict = type,
         ret$.hat <- infl
         ret$.sigma <- NA
       } else {
-        ret$.hat <- infl$hat
-        ret$.sigma <- infl$sigma
+        zero_weights <- "weights" %in% names(x) &&
+          any(zero_weight_inds <- abs(x$weights) < .Machine$double.eps ^ 0.5)
+        if (zero_weights) {
+          ret[c(".hat", ".sigma")] <- 0
+          ret$.hat[! zero_weight_inds] <- infl$hat
+          ret$.sigma[! zero_weight_inds] <- infl$sigma
+        } else {
+          ret$.hat <- infl$hat
+          ret$.sigma <- infl$sigma
+        }
       }
     }
 
@@ -313,6 +335,24 @@ augment_columns <- function(x, data, newdata, type, type.predict = type,
   }
   
   as_tibble(ret)
+}
+
+response <- function(object, newdata = NULL) {
+  model.response(model.frame(terms(object), data = newdata, na.action = na.pass))
+}
+
+safe_response <- purrr::possibly(response, NULL)
+
+# add .fitted column
+# add .resid column if response is present
+# deal with rownames and convert to tibble as necessary
+augment_newdata <- function(object, newdata) {
+  df <- as_broom_tibble(newdata)
+  df$.fitted <- predict(object, newdata = newdata, na.action = na.pass)
+  resp <- safe_response(object, newdata)
+  if (!is.null(resp))
+    df$.resid <- df$.fitted - resp
+  df
 }
 
 
@@ -464,6 +504,7 @@ globalVariables(
     "PC",
     "percent",
     "pvalue",
+    "rd_roclet",
     "rhs", 
     "rmsea.ci.upper",
     "rowname", 

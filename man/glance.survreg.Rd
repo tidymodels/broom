@@ -19,18 +19,6 @@ proceed using \code{conf.level = 0.95}. Additionally, if you pass
 accept a \code{newdata} argument, it will use the default value for
 the \code{data} argument.}
 }
-\value{
-A one-row \link[tibble:tibble]{tibble::tibble} with columns:
-
-\item{iter}{number of iterations}
-\item{df}{degrees of freedom}
-\item{statistic}{chi-squared statistic}
-\item{p.value}{p-value from chi-squared test}
-\item{logLik}{log likelihood}
-\item{AIC}{Akaike information criterion}
-\item{BIC}{Bayesian information criterion}
-\item{df.residual}{residual degrees of freedom}
-}
 \description{
 Glance accepts a model object and returns a \code{\link[tibble:tibble]{tibble::tibble()}}
 with exactly one row of model summaries. The summaries are typically
@@ -45,6 +33,28 @@ Glance does not calculate summary measures. Rather, it farms out these
 computations to appropriate methods and gathers the results together.
 Sometimes a goodness of fit measure will be undefined. In these cases
 the measure will be reported as \code{NA}.
+}
+\examples{
+
+library(survival)
+
+sr <- survreg(
+  Surv(futime, fustat) ~ ecog.ps + rx,
+  ovarian,
+  dist = "exponential"
+)
+
+td <- tidy(sr)
+augment(sr, ovarian)
+glance(sr)
+
+# coefficient plot
+library(ggplot2)
+ggplot(td, aes(estimate, term)) + 
+  geom_point() +
+  geom_errorbarh(aes(xmin = conf.low, xmax = conf.high), height = 0) +
+  geom_vline(xintercept = 0)
+
 }
 \seealso{
 \code{\link[=glance]{glance()}}, \code{\link[survival:survreg]{survival::survreg()}}
@@ -66,3 +76,15 @@ Other survival tidiers: \code{\link{augment.coxph}},
 }
 \concept{survival tidiers}
 \concept{survreg tidiers}
+\value{
+A \code{\link[tibble:tibble]{tibble::tibble()}} with exactly one row and columns:
+  \item{AIC}{Akaike's Information Criterion for the model.}
+  \item{BIC}{Bayesian Information Criterion for the model.}
+  \item{df}{Degrees of freedom used by the model.}
+  \item{df.residual}{Residual degrees of freedom for the model.}
+  \item{iter}{Iterations of algorithm/fitting procedure completed.}
+  \item{logLik}{The log-likelihood of the model. [stats::logLik()] may be a useful reference.}
+  \item{p.value}{Needs custom info.}
+  \item{statistic}{Chi-squared statistic.}
+
+}

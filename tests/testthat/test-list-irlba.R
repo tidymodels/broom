@@ -1,5 +1,8 @@
 context("list-irlba")
 
+skip_if_not_installed("modeltests")
+library(modeltests)
+
 skip_if_not_installed("irlba")
 
 mat <- scale(as.matrix(USJudgeRatings))
@@ -20,7 +23,7 @@ test_that("tidy_irlba", {
   check_dims(tdd, 5, 4)
   
   tdv <- tidy(i, matrix = "v")
-  check_tidy_output(tdv)
+  check_tidy_output(tdv, strict = FALSE)
   check_dims(tdv, 60, 3)
 })
 

@@ -77,6 +77,9 @@
       <a href="../articles/broom_and_dplyr.html">Broom and dplyr</a>
     </li>
     <li>
+      <a href="../articles/external-tidiers.html">Tidiers in external packages</a>
+    </li>
+    <li>
       <a href="../articles/kmeans.html">K-means</a>
     </li>
   </ul>
@@ -85,7 +88,7 @@
   <a href="../news/index.html">News</a>
 </li>
         <li>
-  <a href="https://github.com/tidyverse/broom">
+  <a href="https://github.com/tidymodels/broom">
     <span class="fa fa-github fa-lg"></span>
      
   </a>
@@ -102,7 +105,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Tidy a(n) coeftest object</h1>
-    <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/lmtest-tidiers.R'><code>R/lmtest-tidiers.R</code></a></small>
+    <small class="dont-index">Source: <a href='http://github.com/tidymodels/broom/blob/master/R/lmtest-tidiers.R'><code>R/lmtest-tidiers.R</code></a></small>
     <div class="hidden name"><code>tidy.coeftest.Rd</code></div>
     </div>
 
@@ -118,7 +121,7 @@ specify which components to return.</p>
     </div>
 
     <pre class="usage"><span class='co'># S3 method for coeftest</span>
-<span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>x</span>, <span class='no'>...</span>)</pre>
+<span class='fu'><a href='http://www.rdocumentation.org/packages/modelgenerics/topics/generics'>tidy</a></span>(<span class='no'>x</span>, <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -135,36 +138,44 @@ absorbed in <code>...</code>, where they will be ignored. If the misspelled
 argument has a default value, the default value will be used.
 For example, if you pass <code>conf.lvel = 0.9</code>, all computation will
 proceed using <code>conf.level = 0.95</code>. Additionally, if you pass
-<code>newdata = my_tibble</code> to an <code><a href='augment.html'>augment()</a></code> method that does not
+<code>newdata = my_tibble</code> to an <code><a href='http://www.rdocumentation.org/packages/modelgenerics/topics/generics'>augment()</a></code> method that does not
 accept a <code>newdata</code> argument, it will use the default value for
 the <code>data</code> argument.</p></td>
     </tr>
     </table>
     
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
-
-    <p>A <a href='http://www.rdocumentation.org/packages/tibble/topics/tibble'>tibble::tibble</a> with one row for each coefficient and columns:</p>
-<dt>term</dt><dd><p>The term in the linear model being estimated and tested</p></dd>
-<dt>estimate</dt><dd><p>The estimated coefficient</p></dd>
-<dt>std.error</dt><dd><p>The standard error</p></dd>
-<dt>statistic</dt><dd><p>test statistic</p></dd>
-<dt>p.value</dt><dd><p>p-value</p></dd>
-
-    
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='tidy.html'>tidy()</a></code>, <code><a href='http://www.rdocumentation.org/packages/lmtest/topics/coeftest'>lmtest::coeftest()</a></code></p></div>
+    <div class='dont-index'><p><code><a href='http://www.rdocumentation.org/packages/modelgenerics/topics/generics'>tidy()</a></code>, <code><a href='http://www.rdocumentation.org/packages/lmtest/topics/coeftest'>lmtest::coeftest()</a></code></p></div>
+    
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>A <code><a href='http://www.rdocumentation.org/packages/tibble/topics/tibble'>tibble::tibble()</a></code> with columns:</p>
+<dt>estimate</dt><dd><p>The estimated value of the regression term.</p></dd>
+  <dt>p.value</dt><dd><p>The two-sided p-value associated with the observed statistic.</p></dd>
+  <dt>statistic</dt><dd><p>The value of a T-statistic to use in a hypothesis that the regression term is non-zero.</p></dd>
+  <dt>std.error</dt><dd><p>The standard error of the regression term.</p></dd>
+  <dt>term</dt><dd><p>The name of the regression term.</p></dd>
+
+
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
-<span class='kw'>if</span> (<span class='fu'>require</span>(<span class='st'>"lmtest"</span>, <span class='kw'>quietly</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)) {
-    <span class='fu'>data</span>(<span class='no'>Mandible</span>)
-    <span class='no'>fm</span> <span class='kw'>&lt;-</span> <span class='fu'>lm</span>(<span class='no'>length</span> ~ <span class='no'>age</span>, <span class='kw'>data</span><span class='kw'>=</span><span class='no'>Mandible</span>, <span class='kw'>subset</span><span class='kw'>=</span>(<span class='no'>age</span> <span class='kw'>&lt;=</span> <span class='fl'>28</span>))
+<span class='fu'>library</span>(<span class='no'>lmtest</span>)
 
-    <span class='kw pkg'>lmtest</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/lmtest/topics/coeftest'>coeftest</a></span>(<span class='no'>fm</span>)
-    <span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='fu'><a href='http://www.rdocumentation.org/packages/lmtest/topics/coeftest'>coeftest</a></span>(<span class='no'>fm</span>))
-}</div><div class='output co'>#&gt; # A tibble: 2 x 5
+<span class='fu'>data</span>(<span class='no'>Mandible</span>)
+<span class='no'>fm</span> <span class='kw'>&lt;-</span> <span class='fu'>lm</span>(<span class='no'>length</span> ~ <span class='no'>age</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>Mandible</span>, <span class='kw'>subset</span> <span class='kw'>=</span> (<span class='no'>age</span> <span class='kw'>&lt;=</span> <span class='fl'>28</span>))
+
+<span class='kw pkg'>lmtest</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/lmtest/topics/coeftest'>coeftest</a></span>(<span class='no'>fm</span>)</div><div class='output co'>#&gt; 
+#&gt; t test of coefficients:
+#&gt; 
+#&gt;               Estimate Std. Error t value  Pr(&gt;|t|)    
+#&gt; (Intercept) -11.953366   0.976227 -12.245 &lt; 2.2e-16 ***
+#&gt; age           1.772730   0.047704  37.161 &lt; 2.2e-16 ***
+#&gt; ---
+#&gt; Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+#&gt; </div><div class='input'><span class='fu'><a href='http://www.rdocumentation.org/packages/modelgenerics/topics/generics'>tidy</a></span>(<span class='fu'><a href='http://www.rdocumentation.org/packages/lmtest/topics/coeftest'>coeftest</a></span>(<span class='no'>fm</span>))</div><div class='output co'>#&gt; # A tibble: 2 x 5
 #&gt;   term        estimate std.error statistic  p.value
 #&gt;   &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
 #&gt; 1 (Intercept)   -12.0     0.976      -12.2 1.39e-24
@@ -176,9 +187,9 @@ the <code>data</code> argument.</p></td>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
       
-      <li><a href="#value">Value</a></li>
-
       <li><a href="#see-also">See also</a></li>
+
+      <li><a href="#value">Value</a></li>
       
       <li><a href="#examples">Examples</a></li>
     </ul>

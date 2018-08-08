@@ -77,6 +77,9 @@
       <a href="../articles/broom_and_dplyr.html">Broom and dplyr</a>
     </li>
     <li>
+      <a href="../articles/external-tidiers.html">Tidiers in external packages</a>
+    </li>
+    <li>
       <a href="../articles/kmeans.html">K-means</a>
     </li>
   </ul>
@@ -85,7 +88,7 @@
   <a href="../news/index.html">News</a>
 </li>
         <li>
-  <a href="https://github.com/tidyverse/broom">
+  <a href="https://github.com/tidymodels/broom">
     <span class="fa fa-github fa-lg"></span>
      
   </a>
@@ -102,7 +105,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Tidy a(n) confusionMatrix object</h1>
-    <small class="dont-index">Source: <a href='http://github.com/tidyverse/broom/blob/master/R/caret-tidiers.R'><code>R/caret-tidiers.R</code></a></small>
+    <small class="dont-index">Source: <a href='http://github.com/tidymodels/broom/blob/master/R/caret-tidiers.R'><code>R/caret-tidiers.R</code></a></small>
     <div class="hidden name"><code>tidy.confusionMatrix.Rd</code></div>
     </div>
 
@@ -118,7 +121,7 @@ specify which components to return.</p>
     </div>
 
     <pre class="usage"><span class='co'># S3 method for confusionMatrix</span>
-<span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>x</span>, <span class='kw'>by_class</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='no'>...</span>)</pre>
+<span class='fu'><a href='http://www.rdocumentation.org/packages/modelgenerics/topics/generics'>tidy</a></span>(<span class='no'>x</span>, <span class='kw'>by_class</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -142,58 +145,89 @@ absorbed in <code>...</code>, where they will be ignored. If the misspelled
 argument has a default value, the default value will be used.
 For example, if you pass <code>conf.lvel = 0.9</code>, all computation will
 proceed using <code>conf.level = 0.95</code>. Additionally, if you pass
-<code>newdata = my_tibble</code> to an <code><a href='augment.html'>augment()</a></code> method that does not
+<code>newdata = my_tibble</code> to an <code><a href='http://www.rdocumentation.org/packages/modelgenerics/topics/generics'>augment()</a></code> method that does not
 accept a <code>newdata</code> argument, it will use the default value for
 the <code>data</code> argument.</p></td>
     </tr>
     </table>
     
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
-
-    <p>A <a href='http://www.rdocumentation.org/packages/tibble/topics/tibble'>tibble::tibble</a> with one or more of the following columns:</p>
-<dt>term</dt><dd><p>The name of a statistic from the confusion matrix</p></dd>
-<dt>class</dt><dd><p>Which class the term is a measurement of</p></dd>
-<dt>estimate</dt><dd><p>The value of the statistic</p></dd>
-<dt>conf.low</dt><dd><p>Low end of 95 percent CI only applicable to accuracy</p></dd>
-<dt>conf.high</dt><dd><p>High end of 95 percent CI only applicable to accuracy</p></dd>
-<dt>p.value</dt><dd><p>P-value for accuracy and kappa statistics</p></dd>
-
-    
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='tidy.html'>tidy()</a></code>, <code><a href='http://www.rdocumentation.org/packages/caret/topics/confusionMatrix'>caret::confusionMatrix()</a></code></p></div>
+    <div class='dont-index'><p><code><a href='http://www.rdocumentation.org/packages/modelgenerics/topics/generics'>tidy()</a></code>, <code><a href='http://www.rdocumentation.org/packages/caret/topics/confusionMatrix'>caret::confusionMatrix()</a></code></p></div>
+    
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>A <code><a href='http://www.rdocumentation.org/packages/tibble/topics/tibble'>tibble::tibble()</a></code> with columns:</p>
+<dt>class</dt><dd><p>The class under consideration.</p></dd>
+  <dt>conf.high</dt><dd><p>The upper end of a confidence interval for the term under consideration. Included only if `conf.int = TRUE`.</p></dd>
+  <dt>conf.low</dt><dd><p>The lower end of a confidence interval for the term under consideration. Included only if `conf.int = TRUE`.</p></dd>
+  <dt>estimate</dt><dd><p>The estimated value of the regression term.</p></dd>
+  <dt>term</dt><dd><p>The name of the regression term.</p></dd>
+  <dt>p.value</dt><dd><p>P-value for accuracy and kappa statistics.</p></dd>
+
+
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
-<span class='kw'>if</span> (<span class='fu'>requireNamespace</span>(<span class='st'>"caret"</span>, <span class='kw'>quietly</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)) {
+<span class='fu'>library</span>(<span class='no'>caret</span>)</div><div class='output co'>#&gt; <span class='message'>Loading required package: lattice</span></div><div class='output co'>#&gt; <span class='message'></span>
+#&gt; <span class='message'>Attaching package: ‘caret’</span></div><div class='output co'>#&gt; <span class='message'>The following object is masked from ‘package:survival’:</span>
+#&gt; <span class='message'></span>
+#&gt; <span class='message'>    cluster</span></div><div class='input'>
+<span class='fu'>set.seed</span>(<span class='fl'>27</span>)
 
-  <span class='fu'>set.seed</span>(<span class='fl'>27</span>)
+<span class='no'>two_class_sample1</span> <span class='kw'>&lt;-</span> <span class='fu'>as.factor</span>(<span class='fu'>sample</span>(<span class='no'>letters</span>[<span class='fl'>1</span>:<span class='fl'>2</span>], <span class='fl'>100</span>, <span class='fl'>TRUE</span>))
+<span class='no'>two_class_sample2</span> <span class='kw'>&lt;-</span> <span class='fu'>as.factor</span>(<span class='fu'>sample</span>(<span class='no'>letters</span>[<span class='fl'>1</span>:<span class='fl'>2</span>], <span class='fl'>100</span>, <span class='fl'>TRUE</span>))
 
-  <span class='no'>two_class_sample1</span> <span class='kw'>&lt;-</span> <span class='fu'>as.factor</span>(<span class='fu'>sample</span>(<span class='no'>letters</span>[<span class='fl'>1</span>:<span class='fl'>2</span>], <span class='fl'>100</span>, <span class='fl'>TRUE</span>))
-  <span class='no'>two_class_sample2</span> <span class='kw'>&lt;-</span> <span class='fu'>as.factor</span>(<span class='fu'>sample</span>(<span class='no'>letters</span>[<span class='fl'>1</span>:<span class='fl'>2</span>], <span class='fl'>100</span>, <span class='fl'>TRUE</span>))
+<span class='no'>two_class_cm</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>caret</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/caret/topics/confusionMatrix'>confusionMatrix</a></span>(
+  <span class='no'>two_class_sample1</span>,
+  <span class='no'>two_class_sample2</span>
+)
 
-  <span class='no'>two_class_cm</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>caret</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/caret/topics/confusionMatrix'>confusionMatrix</a></span>(
-    <span class='no'>two_class_sample1</span>,
-    <span class='no'>two_class_sample2</span>
-  )
+<span class='fu'><a href='http://www.rdocumentation.org/packages/modelgenerics/topics/generics'>tidy</a></span>(<span class='no'>two_class_cm</span>)</div><div class='output co'>#&gt; # A tibble: 13 x 6
+#&gt;    term                 class estimate conf.low conf.high p.value
+#&gt;    &lt;chr&gt;                &lt;chr&gt;    &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;
+#&gt;  1 accuracy             &lt;NA&gt;     0.570    0.467     0.669   0.309
+#&gt;  2 kappa                &lt;NA&gt;     0.147   NA        NA       0.222
+#&gt;  3 sensitivity          a        0.630   NA        NA      NA    
+#&gt;  4 specificity          a        0.519   NA        NA      NA    
+#&gt;  5 pos_pred_value       a        0.527   NA        NA      NA    
+#&gt;  6 neg_pred_value       a        0.622   NA        NA      NA    
+#&gt;  7 precision            a        0.527   NA        NA      NA    
+#&gt;  8 recall               a        0.630   NA        NA      NA    
+#&gt;  9 f1                   a        0.574   NA        NA      NA    
+#&gt; 10 prevalence           a        0.46    NA        NA      NA    
+#&gt; 11 detection_rate       a        0.290   NA        NA      NA    
+#&gt; 12 detection_prevalence a        0.55    NA        NA      NA    
+#&gt; 13 balanced_accuracy    a        0.574   NA        NA      NA    </div><div class='input'><span class='fu'><a href='http://www.rdocumentation.org/packages/modelgenerics/topics/generics'>tidy</a></span>(<span class='no'>two_class_cm</span>, <span class='kw'>by_class</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</div><div class='output co'>#&gt; # A tibble: 2 x 5
+#&gt;   term     estimate conf.low conf.high p.value
+#&gt;   &lt;chr&gt;       &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;
+#&gt; 1 accuracy    0.570    0.467     0.669   0.309
+#&gt; 2 kappa       0.147   NA        NA       0.222</div><div class='input'>
+<span class='co'># multiclass example</span>
 
-  <span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>two_class_cm</span>)
-  <span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>two_class_cm</span>, <span class='kw'>by_class</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
+<span class='no'>six_class_sample1</span> <span class='kw'>&lt;-</span> <span class='fu'>as.factor</span>(<span class='fu'>sample</span>(<span class='no'>letters</span>[<span class='fl'>1</span>:<span class='fl'>6</span>], <span class='fl'>100</span>, <span class='fl'>TRUE</span>))
+<span class='no'>six_class_sample2</span> <span class='kw'>&lt;-</span> <span class='fu'>as.factor</span>(<span class='fu'>sample</span>(<span class='no'>letters</span>[<span class='fl'>1</span>:<span class='fl'>6</span>], <span class='fl'>100</span>, <span class='fl'>TRUE</span>))
 
-  <span class='co'># multiclass example</span>
+<span class='no'>six_class_cm</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>caret</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/caret/topics/confusionMatrix'>confusionMatrix</a></span>(
+  <span class='no'>six_class_sample1</span>,
+  <span class='no'>six_class_sample2</span>
+)
 
-  <span class='no'>six_class_sample1</span> <span class='kw'>&lt;-</span> <span class='fu'>as.factor</span>(<span class='fu'>sample</span>(<span class='no'>letters</span>[<span class='fl'>1</span>:<span class='fl'>6</span>], <span class='fl'>100</span>, <span class='fl'>TRUE</span>))
-  <span class='no'>six_class_sample2</span> <span class='kw'>&lt;-</span> <span class='fu'>as.factor</span>(<span class='fu'>sample</span>(<span class='no'>letters</span>[<span class='fl'>1</span>:<span class='fl'>6</span>], <span class='fl'>100</span>, <span class='fl'>TRUE</span>))
-
-  <span class='no'>six_class_cm</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>caret</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/caret/topics/confusionMatrix'>confusionMatrix</a></span>(
-    <span class='no'>six_class_sample1</span>,
-    <span class='no'>six_class_sample2</span>
-  )
-
-  <span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>six_class_cm</span>)
-  <span class='fu'><a href='tidy.html'>tidy</a></span>(<span class='no'>six_class_cm</span>, <span class='kw'>by_class</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
-}</div><div class='output co'>#&gt; # A tibble: 2 x 5
+<span class='fu'><a href='http://www.rdocumentation.org/packages/modelgenerics/topics/generics'>tidy</a></span>(<span class='no'>six_class_cm</span>)</div><div class='output co'>#&gt; # A tibble: 68 x 6
+#&gt;    term        class estimate conf.low conf.high p.value
+#&gt;    &lt;chr&gt;       &lt;chr&gt;    &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;
+#&gt;  1 accuracy    &lt;NA&gt;   0.16      0.0943     0.247   0.946
+#&gt;  2 kappa       &lt;NA&gt;  -0.00756  NA         NA       0.757
+#&gt;  3 sensitivity a      0.176    NA         NA      NA    
+#&gt;  4 sensitivity b      0.118    NA         NA      NA    
+#&gt;  5 sensitivity c      0.0909   NA         NA      NA    
+#&gt;  6 sensitivity d      0.222    NA         NA      NA    
+#&gt;  7 sensitivity e      0.0909   NA         NA      NA    
+#&gt;  8 sensitivity f      0.267    NA         NA      NA    
+#&gt;  9 specificity a      0.867    NA         NA      NA    
+#&gt; 10 specificity b      0.892    NA         NA      NA    
+#&gt; # ... with 58 more rows</div><div class='input'><span class='fu'><a href='http://www.rdocumentation.org/packages/modelgenerics/topics/generics'>tidy</a></span>(<span class='no'>six_class_cm</span>, <span class='kw'>by_class</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</div><div class='output co'>#&gt; # A tibble: 2 x 5
 #&gt;   term     estimate conf.low conf.high p.value
 #&gt;   &lt;chr&gt;       &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;
 #&gt; 1 accuracy  0.16      0.0943     0.247   0.946
@@ -205,9 +239,9 @@ the <code>data</code> argument.</p></td>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
       
-      <li><a href="#value">Value</a></li>
-
       <li><a href="#see-also">See also</a></li>
+
+      <li><a href="#value">Value</a></li>
       
       <li><a href="#examples">Examples</a></li>
     </ul>
