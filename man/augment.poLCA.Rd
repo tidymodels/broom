@@ -115,8 +115,7 @@ ggplot(td, aes(outcome, estimate, color = factor(class), group = class)) +
 
 au <- augment(nes2a)
 au
-au \%>\%
-  count(.class)
+count(au, .class)
 
 # if the original data is provided, it leads to NAs in new columns
 # for rows that weren't predicted
@@ -134,7 +133,7 @@ Other poLCA tidiers: \code{\link{glance.poLCA}},
 \concept{poLCA tidiers}
 \value{
 A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
-  \item{.class}{The predicted class. Needs custom info. (TODO -- make this a factor?)}
-  \item{.probability}{Posterior probability of predicted class  If the `data` argument is given, those columns are included in the output (only rows for which predictions could be made). Otherwise, the `y` element of the poLCA object, which contains the manifest variables used to fit the model, are used, along with any covariates, if present, in `x`.  Note that while the probability of all the classes (not just the predicted modal class) can be found in the `posterior` element, these are not included in the augmented output.}
+  \item{.class}{Predicted class.}
+  \item{.probability}{Class probability of modal class.}
 
 }

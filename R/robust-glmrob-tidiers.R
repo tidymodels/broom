@@ -21,23 +21,28 @@
 #' @export
 #' @family robust tidiers
 #' @seealso [robust::glmRob()]
-tidy.glmRob <- function(x, ...) {
-  tidy.lm(x, ...)
-}
+#' @include stats-lm-tidiers.R
+tidy.glmRob <- tidy.lm
 
 #' @templateVar class glmRob
-#' @template title_desc_augment_lm_wrapper
-#'
-#' @inherit tidy.glmRob params examples
+#' @template title_desc_augment
 #' 
-#' @details For tidiers for robust models from the \pkg{MASS} package see
-#'   [tidy.rlm()].
+#' @param x Unused.
+#' @param ... Unused.
+#' 
+#' @description `augment.glmRob()` has been removed from broom. We regret
+#'   that we were unable to provide any warning for this change. The
+#'   \pkg{robust} package does not provide the functionality necessary
+#'   to implement an augment method. We are looking into supporting the
+#'   \pkg{robustbase} package in the future.
 #'
 #' @export
-#' @family robust tidiers
-#' @seealso [robust::glmRob()]
-#' @include stats-lm-tidiers.R
-augment.glmRob <- augment.lm
+augment.glmRob <- function(x, ...) {
+  stop(
+    "`augment.glmRob` has been removed from broom. See the documentation.",
+    call. = FALSE
+  )
+}
 
 #' @templateVar class glmRob
 #' @template title_desc_glance

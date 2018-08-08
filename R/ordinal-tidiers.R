@@ -116,7 +116,11 @@ process_clm <- function(ret, x, conf.int = FALSE, conf.level = .95,
     colnames(CI) <- c("conf.low", "conf.high")
     CI <- as.data.frame(CI)
     CI$term <- rownames(CI)
+    
+    ret$orig_row_order <- seq_len(nrow(ret))
     ret <- merge(ret, unrowname(CI), by = "term", all.x = TRUE)
+    ret <- ret[order(ret$orig_row_order),]
+    ret$orig_row_order <- NULL
   }
 
   ret$estimate <- trans(ret$estimate)
@@ -153,9 +157,8 @@ glance.clmm <- glance.clm
 
 #' @rdname ordinal_tidiers
 #' @export
-augment.clm <- function(x, data = stats::model.frame(x),
-                        newdata = NULL, type.predict = c("prob", "class"),
-                        ...) {
+augment.clm <- function(x, data = model.frame(x), newdata = NULL,
+                        type.predict = c("prob", "class"), ...) {
   type.predict <- match.arg(type.predict)
-  augment.lm(x, data, newdata, type.predict, ...)
+  augment_columns(x, data, newdata, type = type.predict)
 }

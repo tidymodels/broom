@@ -58,9 +58,9 @@ glance(mod)
 A \code{\link[tibble:tibble]{tibble::tibble()}} with exactly one row and columns:
   \item{AIC}{Akaike's Information Criterion for the model.}
   \item{BIC}{Bayesian Information Criterion for the model.}
-  \item{df.null}{Needs custom info.}
-  \item{df.residual}{Residual degrees of freedom for the model.}
+  \item{df.null}{Degrees of freedom used by the null model.}
+  \item{df.residual}{Residual degrees of freedom.}
   \item{logLik}{The log-likelihood of the model. [stats::logLik()] may be a useful reference.}
-  \item{pseudo.r.squared}{TODO}
+  \item{pseudo.r.squared}{Like the R squared statistic, but for situations when the R squared statistic isn't defined.}
 
 }

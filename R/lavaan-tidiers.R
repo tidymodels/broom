@@ -81,8 +81,8 @@ tidy.lavaan <- function(x, conf.int = FALSE, conf.level = 0.95, ...) {
 #'   \item{agfi}{Adjusted goodness of fit}
 #'   \item{cfi}{Comparative fit index}
 #'   \item{tli}{Tucker Lewis index}
-#'   \item{aic}{Akaike information criterion}
-#'   \item{bic}{Bayesian information criterion}
+#'   \item{AIC}{Akaike information criterion}
+#'   \item{BIC}{Bayesian information criterion}
 #'   \item{ngroups}{Number of groups in model}
 #'   \item{nobs}{Number of observations included}
 #'   \item{norig}{Number of observation in the original dataset}
@@ -139,5 +139,5 @@ glance.lavaan <- function(x, ...) {
         nexcluded = norig - nobs
       )
     ) %>%
-    rename(rmsea.conf.high = rmsea.ci.upper)
+    rename(rmsea.conf.high = rmsea.ci.upper, AIC = aic, BIC = bic)
 }

@@ -85,7 +85,6 @@ tidy.multinom <- function(x, conf.int = FALSE, conf.level = .95,
       to_exp <- c(to_exp, "conf.low", "conf.high")
     }
     
-    # TODO: use mutate_at
     ret[, to_exp] <- lapply(ret[, to_exp, drop = FALSE], exp)
   }
 
