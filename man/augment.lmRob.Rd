@@ -2,13 +2,12 @@
 % Please edit documentation in R/robust-lmrob-tidiers.R
 \name{augment.lmRob}
 \alias{augment.lmRob}
-\title{Augment a(n) lmRob object}
+\title{Augment data with information from a(n) lmRob object}
 \usage{
-\method{augment}{lmRob}(x, data = stats::model.frame(x),
-  newdata = NULL, type.predict, type.residuals, ...)
+\method{augment}{lmRob}(x, data = model.frame(x), newdata = NULL, ...)
 }
 \arguments{
-\item{x}{An \code{lm} object created by \code{\link[stats:lm]{stats::lm()}}.}
+\item{x}{A \code{lmRob} object returned from \code{\link[robust:lmRob]{robust::lmRob()}}.}
 
 \item{data}{A \code{\link[=data.frame]{data.frame()}} or \code{\link[tibble:tibble]{tibble::tibble()}} containing the original
 data that was used to produce the object \code{x}. Defaults to
@@ -23,12 +22,6 @@ the original predictors used to create \code{x}. Defaults to \code{NULL}, indica
 that nothing has been passed to \code{newdata}. If \code{newdata} is specified,
 the \code{data} argument will be ignored.}
 
-\item{type.predict}{Type of predictions to use when \code{x} is a \code{glm} object.
-Passed to \code{\link[stats:predict.glm]{stats::predict.glm()}}.}
-
-\item{type.residuals}{Type of residuals to use when \code{x} is a \code{glm} object.
-Passed to \code{\link[stats:residuals.glm]{stats::residuals.glm()}}.}
-
 \item{...}{Additional arguments. Not used. Needed to match generic
 signature only. \strong{Cautionary note:} Misspelled arguments will be
 absorbed in \code{...}, where they will be ignored. If the misspelled
@@ -40,7 +33,43 @@ accept a \code{newdata} argument, it will use the default value for
 the \code{data} argument.}
 }
 \description{
-This augment method wraps \code{\link[=augment.lm]{augment.lm()}}.
+Augment accepts a model object and a dataset and adds
+information about each observation in the dataset. Most commonly, this
+includes predicted values in the \code{.fitted} column, residuals in the
+\code{.resid} column, and standard errors for the fitted values in a \code{.se.fit}
+column. New columns always begin with a \code{.} prefix to avoid overwriting
+columns in the original dataset.
+
+Users may pass data to augment via either the \code{data} argument or the
+\code{newdata} argument. If the user passes data to the \code{data} argument,
+it \strong{must} be exactly the data that was used to fit the model
+object. Pass datasets to \code{newdata} to augment data that was not used
+during model fitting. This still requires that all columns used to fit
+the model are present.
+
+Augment will often behavior different depending on whether \code{data} or
+\code{newdata} is specified. This is because there is often information
+associated with training observations (such as influences or related)
+measures that is not meaningfully defined for new observations.
+
+For convenience, many augment methods provide default \code{data} arguments,
+so that \code{augment(fit)} will return the augmented training data. In these
+cases augment tries to reconstruct the original data based on the model
+object, with some varying degrees of success.
+
+The augmented dataset is always returned as a \link[tibble:tibble]{tibble::tibble} with the
+\strong{same number of rows} as the passed dataset. This means that the
+passed data must be coercible to a tibble. At this time, tibbles do not
+support matrix-columns. This means you should not specify a matrix
+of covariates in a model formula during the original model fitting
+process, and that \code{\link[splines:ns]{splines::ns()}}, \code{\link[stats:poly]{stats::poly()}} and
+\code{\link[survival:Surv]{survival::Surv()}} objects are not supported in input data. If you
+encounter errors, try explicitly passing a tibble, or fitting the original
+model on data in a tibble.
+
+We are in the process of defining behaviors for models fit with various
+\link{na.action} arguments, but make no guarantees about behavior when data is
+missing at this time.
 }
 \details{
 For tidiers for robust models from the \pkg{MASS} package see
@@ -60,12 +89,10 @@ glance(gm)
 
 }
 \seealso{
-\code{\link[=augment]{augment()}}, \code{\link[=augment.lm]{augment.lm()}}
-
 \code{\link[robust:lmRob]{robust::lmRob()}}
 
-Other robust tidiers: \code{\link{augment.glmRob}},
-  \code{\link{glance.glmRob}}, \code{\link{glance.lmRob}},
-  \code{\link{tidy.glmRob}}, \code{\link{tidy.lmRob}}
+Other robust tidiers: \code{\link{glance.glmRob}},
+  \code{\link{glance.lmRob}}, \code{\link{tidy.glmRob}},
+  \code{\link{tidy.lmRob}}
 }
 \concept{robust tidiers}

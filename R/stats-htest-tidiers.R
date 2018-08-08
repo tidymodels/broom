@@ -100,8 +100,8 @@ glance.htest <- function(x, ...) tidy(x)
 #'   .row.prop = "Row proportion (2 dimensions table only).",
 #'   .col.prop = "Column proportion (2 dimensions table only).",
 #'   .expected = "Expected count under the null hypothesis.",
-#'   .residuals = "Pearson residual.",
-#'   .stdres = "Standardized residual."
+#'   .resid = "Pearson residuals.",
+#'   .std.resid = "Standardized residual."
 #' )
 #'
 #' @details See [stats::chisq.test()] for more details on
@@ -142,8 +142,8 @@ augment_chisq_test <- function(x, ...) {
   }
 
   ret <- cbind(ret, .expected = as.data.frame(as.table(x$expected))[[d + 1]])
-  ret <- cbind(ret, .residuals = as.data.frame(as.table(x$residuals))[[d + 1]])
-  ret <- cbind(ret, .stdres = as.data.frame(as.table(x$stdres))[[d + 1]])
+  ret <- cbind(ret, .resid = as.data.frame(as.table(x$residuals))[[d + 1]])
+  ret <- cbind(ret, .std.resid = as.data.frame(as.table(x$stdres))[[d + 1]])
   as_tibble(ret)
 }
 

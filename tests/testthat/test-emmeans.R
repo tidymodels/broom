@@ -23,7 +23,7 @@ marginal_dashes <- tibble(
 test_that("lsmeans tidier arguments", {
   check_arguments(tidy.lsmobj, strict = FALSE)
   check_arguments(tidy.ref.grid)
-  check_arguments(tidy.emmGrid)  # TODO: test this more
+  check_arguments(tidy.emmGrid)
 })
 
 test_that("tidy.lsmobj", {

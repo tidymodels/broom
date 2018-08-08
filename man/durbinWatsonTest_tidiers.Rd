@@ -43,7 +43,7 @@ glance(dw)  # same output for all durbinWatsonTests
 \value{
 A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
   \item{alternative}{Alternative hypothesis (character).}
-  \item{autocorrelation}{TODO}
+  \item{autocorrelation}{Autocorrelation.}
   \item{p.value}{The two-sided p-value associated with the observed statistic.}
   \item{statistic}{Test statistic for Durbin-Watson test.}
   \item{method}{Always `Durbin-Watson Test`.}

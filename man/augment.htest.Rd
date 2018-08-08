@@ -98,7 +98,7 @@ A \code{\link[tibble:tibble]{tibble::tibble()}} with exactly one row and columns
   \item{.row.prop}{Row proportion (2 dimensions table only).}
   \item{.col.prop}{Column proportion (2 dimensions table only).}
   \item{.expected}{Expected count under the null hypothesis.}
-  \item{.residuals}{Pearson residual.}
-  \item{.stdres}{Standardized residual.}
+  \item{.resid}{Pearson residuals.}
+  \item{.std.resid}{Standardized residual.}
 
 }

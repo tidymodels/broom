@@ -12,93 +12,6 @@ rename2 <- function(.data, ...) {
   rename(.data, !!!present)
 }
 
-# probably should just nuke this
-validate_augment_input <- function(model, data = NULL, newdata = NULL) {
-  
-  # careful: `data` may be non-null due to default argument such as
-  # `data = stats::model.frame(x)`
-  # newdata argument default *should* always `NULL`
-  
-  data_passed <- !is.null(data)
-  newdata_passed <- !is.null(newdata)
-  
-  # TODO: the following is bad if someone maps over models to augment
-  
-  # if (data_passed && newdata_passed) {
-  #   warning(
-  #     "Both `data` and `newdata` have been specified. Ignoring `data`.",
-  #     call. = FALSE
-  #   )
-  # }
-  
-  # this test means that for `augment(fit)` to work, `augment.my_model`
-  # must have a non-null default value for either `data` or `newdata`.
-  
-  # if (!data_passed && !newdata_passed) {
-  #   message(
-  #     "Neither `data` nor `newdata` has been specified.\n",
-  #     "Attempting to reconstruct original data."
-  #   )
-  # }
-  
-  if (data_passed) {
-    
-    if (!inherits(data, "data.frame")) {
-      stop("`data` argument must be a tibble or dataframe.", call. = FALSE)
-    }
-    
-    tryCatch(
-      as_tibble(data),
-      error = function(e) {
-        stop(
-          "`data` is malformed: must be coercable to a tibble.\n",
-          "Did you pass `data` the data originally used to fit your model?")
-      }
-    )
-
-    # experimental checks that all columns in original data are present
-    # in `data`. only warns on failure.
-    
-    possible_mf <- purrr::possibly(model.frame, otherwise = NULL)
-    mf <- possible_mf(model)
-    
-    if (!is.null(mf)) {
-      
-      if (nrow(data) != nrow(mf)) {
-        warning(
-          "`data` must contain all rows passed to the original modelling ",
-          "function with no extras rows.",
-          call. = FALSE
-        )
-      }
-      
-      orig_cols <- all.vars(stats::terms(mf))
-      
-      if (!all(orig_cols %in% colnames(data))) {
-        warning(
-          "`data` might not contain columns present in original data.",
-          call. = FALSE
-        )
-      }
-    }
-  }
-  
-  # TODO: check for predictor columns only when newdata is passed?
-  # only warn if not found
-  # if yes, be sure to add a test in `check_augment_function`
-  # to do this, need to be able to determine what the response is
-  # 
-  # max says to look into `recipes:::get_rhs_vars` as a way to do this
-  
-  if (newdata_passed) {
-    if (!inherits(newdata, "data.frame")) {
-      stop("`newdata` argument must be a tibble or dataframe.", call. = FALSE)
-    }
-  }
-}
-
-
-
 #' Coerce a data frame to a tibble, preserving rownames
 #' 
 #' A thin wrapper around [tibble::as_tibble()], except checks for
@@ -112,7 +25,12 @@ validate_augment_input <- function(model, data = NULL, newdata = NULL) {
 #' @return A `tibble` potentially with a `.rownames` column
 #' @noRd
 as_broom_tibble <- function(data) {
-  df <- as_tibble(data)
+  tryCatch(
+    df <- as_tibble(data),
+    error = function(cnd)
+      stop("Provided data must be coercible to `tibble`.", call. = FALSE)
+  )
+  
   if (has_rownames(data))
     df <- tibble::add_column(df, .rownames = rownames(data), .before = TRUE)
   df
@@ -341,20 +259,80 @@ response <- function(object, newdata = NULL) {
   model.response(model.frame(terms(object), data = newdata, na.action = na.pass))
 }
 
+data_error <- function(cnd) {
+  stop(
+    "Can't augment data with observation level measures.\n",
+    "Did you provide `data` with the exact data used for model fitting?",
+    call. = FALSE
+  )
+}
+
 safe_response <- purrr::possibly(response, NULL)
 
-# add .fitted column
-# add .resid column if response is present
-# deal with rownames and convert to tibble as necessary
-augment_newdata <- function(object, newdata) {
-  df <- as_broom_tibble(newdata)
-  df$.fitted <- predict(object, newdata = newdata, na.action = na.pass)
-  resp <- safe_response(object, newdata)
-  if (!is.null(resp))
-    df$.resid <- df$.fitted - resp
+# in weighted regressions, influence measures should be zero for
+# data points with zero weight
+# helper for augment.lm and augment.glm
+add_hat_sigma_cols <-  function(df, x, infl) {
+  
+  df$.hat <- 0
+  df$.sigma <- 0
+  
+  w <- x$weights
+  nonzero_idx <- if (is.null(w)) seq_along(df$.hat) else which(w != 0)
+  
+  df$.hat[nonzero_idx] <- infl$hat
+  df$.sigma[nonzero_idx] <- infl$sigma
   df
 }
 
+# adds only the information that can be defined for newdata. no influence
+# measure of anything fun like goes here.
+#
+# add .fitted column
+# add .resid column if response is present
+# deal with rownames and convert to tibble as necessary
+# add .se.fit column if present
+# be *incredibly* careful that the ... are passed correctly
+augment_newdata <- function(x, data, newdata, .se_fit, ...) {
+  passed_newdata <- !is.null(newdata)
+  df <- if (passed_newdata) newdata else data
+  df <- as_broom_tibble(df)
+  
+  # NOTE: It is important use predict(x, newdata = newdata) rather than 
+  # predict(x, newdata = df). This is to avoid an edge case breakage
+  # when augment is called with no data argument, so that data is
+  # model.frame(x). When data = model.frame(x) and the model formula
+  # contains a term like `log(x)`, the predict method will break. Luckily,
+  # predict(x, newdata = NULL) works perfectly well in this case. 
+  # 
+  # The current code relies on predict(x, newdata = NULL) functioning
+  # equivalently to predict(x, newdata = data). An alternative would be to use
+  # fitted(x) instead, although this may not play well with missing data,
+  # and may behave like na.action = na.omit rather than na.action = na.pass.
+  
+  # This helper *should not* be used for predict methods that do not have
+  # an na.pass argument
+  
+  if (.se_fit) {
+    pred_obj <- predict(x, newdata = newdata, na.action = na.pass, se.fit = TRUE, ...)
+    df$.fitted <- pred_obj$fit
+    
+    # a couple possible names for the standard error element of the list
+    # se.fit: lm, glm
+    # se: loess
+    se_idx <- which(names(pred_obj) %in% c("se.fit", "se"))
+    df$.se.fit <- pred_obj[[se_idx]]
+  } else if (passed_newdata) {
+    df$.fitted <- predict(x, newdata = newdata, na.action = na.pass, ...)
+  } else {
+    df$.fitted <- predict(x, na.action = na.pass, ...)
+  }
+  
+  resp <- safe_response(x, df)
+  if (!is.null(resp) && is.numeric(resp))
+    df$.resid <- df$.fitted - resp
+  df
+}
 
 #' Add logLik, AIC, BIC, and other common measurements to a glance of
 #' a prediction
@@ -431,8 +409,6 @@ confint_tidy <- function(x, conf.level = .95, func = stats::confint, ...) {
     ci <- matrix(ci, nrow = 1)
   }
   
-  # TODO: informative errors for non-vector, dataframe, tibble CI output
-  
   # remove rows that are all NA. *not the same* as na.omit which checks
   # for any NA.
   all_na <- apply(ci, 1, function(x) all(is.na(x)))
@@ -464,6 +440,8 @@ globalVariables(
     ".",
     ".id",
     ".rownames",
+    "aic",
+    "bic",
     "ci.lower",
     "ci.upper",
     "column", 
@@ -473,6 +451,7 @@ globalVariables(
     "comparison",
     "conf.high",
     "conf.low", 
+    "cutoffs",
     "data",
     "df.residual",
     "effect",

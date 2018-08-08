@@ -41,10 +41,6 @@ For multiple values, please use a \code{\link[purrr:map]{purrr::map()}} workflow
   map_dfr(glance)
 }
 }
-\examples{
-
-print('TODO')
-}
 \seealso{
 \code{\link[=glance]{glance()}}, \code{\link[quantreg:rq]{quantreg::rq()}}
 

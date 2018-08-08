@@ -43,7 +43,7 @@ This method wraps \code{\link[=tidy.lm]{tidy.lm()}}.
 }
 \examples{
 
-mod <- speedglm::speedlm(mpg ~ wt + qsec, data = mtcars)
+mod <- speedglm::speedlm(mpg ~ wt + qsec, data = mtcars, fitted = TRUE)
 
 tidy(mod)
 glance(mod)

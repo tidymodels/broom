@@ -102,7 +102,7 @@ Other mclust tidiers: \code{\link{tidy.Mclust}}
 \concept{mclust tidiers}
 \value{
 A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
-  \item{.class}{The predicted class. Needs custom info. (TODO -- make this a factor?)}
-  \item{.uncertainty}{The uncertainty associated with the classification. If a point has a probability of 0.9 of being in its assigned class under the model, then the uncertainty is 0.1.}
+  \item{.class}{Predicted class.}
+  \item{.uncertainty}{The uncertainty associated with the classification. Equal to one minus the model class probability.}
 
 }

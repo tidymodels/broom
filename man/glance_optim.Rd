@@ -52,7 +52,7 @@ Other list tidiers: \code{\link{list_tidiers}},
 \concept{list tidiers}
 \value{
 A \code{\link[tibble:tibble]{tibble::tibble()}} with exactly one row and columns:
-  \item{convergence}{convergence code representing the error state}
+  \item{convergence}{Convergence code.}
   \item{function.count}{number of calls to `fn`}
   \item{gradient.count}{number of calls to `gr`}
   \item{value}{minimized or maximized output value}
