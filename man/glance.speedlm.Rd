@@ -36,7 +36,7 @@ the measure will be reported as \code{NA}.
 }
 \examples{
 
-mod <- speedglm::speedlm(mpg ~ wt + qsec, data = mtcars)
+mod <- speedglm::speedlm(mpg ~ wt + qsec, data = mtcars, fitted = TRUE)
 
 tidy(mod)
 glance(mod)
@@ -57,9 +57,9 @@ A \code{\link[tibble:tibble]{tibble::tibble()}} with exactly one row and columns
   \item{BIC}{Bayesian Information Criterion for the model.}
   \item{deviance}{Deviance of the model.}
   \item{df}{Degrees of freedom used by the model.}
-  \item{df.residual}{Residual degrees of freedom for the model.}
+  \item{df.residual}{Residual degrees of freedom.}
   \item{logLik}{The log-likelihood of the model. [stats::logLik()] may be a useful reference.}
-  \item{p.value}{Needs custom info.}
+  \item{p.value}{P-value corresponding to the test statistic.}
   \item{r.squared}{R squared statistic, or the percent of variation explained by the model. Also known as the coefficient of determination.}
   \item{statistic}{F-statistic.}
 

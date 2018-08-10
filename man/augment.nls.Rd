@@ -4,7 +4,8 @@
 \alias{augment.nls}
 \title{Augment data with information from a(n) nls object}
 \usage{
-\method{augment}{nls}(x, data = NULL, newdata = NULL, ...)
+\method{augment}{nls}(x, data = NULL, newdata = NULL, se_fit = FALSE,
+  ...)
 }
 \arguments{
 \item{x}{An \code{nls} object returned from \code{\link[stats:nls]{stats::nls()}}.}
@@ -21,6 +22,10 @@ the original training data.}
 the original predictors used to create \code{x}. Defaults to \code{NULL}, indicating
 that nothing has been passed to \code{newdata}. If \code{newdata} is specified,
 the \code{data} argument will be ignored.}
+
+\item{se_fit}{Logical indicating whether or not a \code{.se.fit} column should be
+added to the augmented output. For some models, this calculation can be
+somwhat time-consuming. Defaults to \code{FALSE}.}
 
 \item{...}{Additional arguments. Not used. Needed to match generic
 signature only. \strong{Cautionary note:} Misspelled arguments will be
@@ -80,7 +85,7 @@ Other nls tidiers: \code{\link{glance.nls}},
 \concept{nls tidiers}
 \value{
 A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
-  \item{.fitted}{Fitted / predicted value.}
-  \item{.resid}{Residuals of fitted values. TODO -- document when present. Residuals on which data set?}
+  \item{.fitted}{Fitted or predicted value.}
+  \item{.resid}{The difference between fitted and observed values.}
 
 }

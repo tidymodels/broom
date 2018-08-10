@@ -49,7 +49,7 @@ Other htest tidiers: \code{\link{augment.htest}},
 \concept{htest tidiers}
 \value{
 A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
-  \item{n}{Needs custom info.}
+  \item{n}{Number of TODO}
   \item{power}{Power achieved for given value of n.}
 
 }

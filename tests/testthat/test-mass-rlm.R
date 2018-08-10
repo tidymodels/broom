@@ -11,7 +11,7 @@ fit <- rlm(stack.loss ~ ., stackloss)
 test_that("MASS::rlm tidier arguments", {
   check_arguments(tidy.rlm)
   check_arguments(glance.rlm)
-  check_arguments(augment.rlm, strict = FALSE)
+  check_arguments(augment.rlm)
 })
 
 test_that("tidy.rlm", {
@@ -21,6 +21,10 @@ test_that("tidy.rlm", {
   
   check_tidy_output(td)
   check_tidy_output(td2)
+  
+  # regression test for #380
+  expect_false(NA %in% td2$conf.low)
+  expect_false(NA %in% td2$conf.high)
 })
 
 test_that("glance.rlm", {
@@ -30,9 +34,6 @@ test_that("glance.rlm", {
 })
 
 test_that("augment.rlm", {
-  
-  au <- augment(fit)
-  check_tibble(au, method = "augment", strict = FALSE)
   
   check_augment_function(
     aug = augment.rlm,

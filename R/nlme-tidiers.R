@@ -16,26 +16,25 @@
 #' @examples
 #'
 #' \dontrun{
-#' if (require("nlme") & require("lme4")) {
-#'     # example regressions are from lme4 documentation, but used for nlme
-#'     lmm1 <- lme(Reaction ~ Days, random=~ Days|Subject, sleepstudy)
-#'     tidy(lmm1)
-#'     tidy(lmm1, effects = "fixed")
-#'     head(augment(lmm1, sleepstudy))
-#'     glance(lmm1)
-#'
-#'
-#'     startvec <- c(Asym = 200, xmid = 725, scal = 350)
-#'     nm1 <- nlme(circumference ~ SSlogis(age, Asym, xmid, scal),
-#'                   data = Orange,
-#'                   fixed = Asym + xmid + scal ~1,
-#'                   random = Asym ~1,
-#'                   start = startvec)
-#'     tidy(nm1)
-#'     tidy(nm1, effects = "fixed")
-#'     head(augment(nm1, Orange))
-#'     glance(nm1)
-#' }
+#'   library(nlme)
+#'   library(lme4)
+#'   # example regressions are from lme4 documentation, but used for nlme
+#'   lmm1 <- lme(Reaction ~ Days, random =  ~ Days | Subject, sleepstudy)
+#'   tidy(lmm1)
+#'   tidy(lmm1, effects = "fixed")
+#'   head(augment(lmm1, sleepstudy))
+#'   glance(lmm1)
+#'   
+#'   startvec <- c(Asym = 200, xmid = 725,scal = 350)
+#'   nm1 <- nlme(circumference ~ SSlogis(age, Asym, xmid, scal),
+#'               data = Orange,
+#'               fixed = Asym + xmid + scal ~ 1,
+#'               random = Asym ~ 1,
+#'               start = startvec)
+#'   tidy(nm1)
+#'   tidy(nm1, effects = "fixed")
+#'   head(augment(nm1, Orange))
+#'   glance(nm1)
 #' }
 #'
 #' @rdname nlme_tidiers

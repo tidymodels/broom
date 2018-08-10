@@ -71,8 +71,6 @@ tidy.betareg <- function(x, conf.int = FALSE, conf.level = .95, ...) {
 #' @export
 augment.betareg <- function(x, data = model.frame(x), newdata = NULL,
                             type.predict, type.residuals, ...) {
-  validate_augment_input(x, data, newdata)
-  
   augment_columns(
     x, data, newdata,
     type.predict = type.predict,

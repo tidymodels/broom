@@ -61,6 +61,7 @@ tidy.nls <- function(x, conf.int = FALSE, conf.level = .95,
 #' @inheritParams tidy.nls
 #' @template param_data
 #' @template param_newdata
+#' @template param_se_fit
 #' 
 #' @evalRd return_augment()
 #'
@@ -68,17 +69,15 @@ tidy.nls <- function(x, conf.int = FALSE, conf.level = .95,
 #' @seealso [tidy], [stats::nls()], [stats::predict.nls()]
 #' @family nls tidiers
 #' 
-augment.nls <- function(x, data = NULL, newdata = NULL, ...) {
+augment.nls <- function(x, data = NULL, newdata = NULL, se_fit = FALSE, ...) {
   
-  if (!is.null(newdata)) {
-    data <- newdata
-  } else if (is.null(data)) {
+  if (is.null(data) && is.null(newdata)) {
     pars <- names(x$m$getPars())
     env <- as.list(x$m$getEnv())
     data <- as_tibble(env[!(names(env) %in% pars)])
   }
   
-  augment_newdata(x, data)
+  augment_newdata(x, data, newdata, se_fit)
 }
 
 

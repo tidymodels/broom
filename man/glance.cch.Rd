@@ -86,7 +86,7 @@ Other survival tidiers: \code{\link{augment.coxph}},
 \value{
 A \code{\link[tibble:tibble]{tibble::tibble()}} with exactly one row and columns:
   \item{iter}{Iterations of algorithm/fitting procedure completed.}
-  \item{p.value}{Needs custom info.}
+  \item{p.value}{P-value corresponding to the test statistic.}
   \item{rscore}{rscore}
   \item{score}{score}
   \item{n}{number of predictions}

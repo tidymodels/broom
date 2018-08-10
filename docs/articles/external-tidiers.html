@@ -89,7 +89,7 @@
       <h1>Exporting tidying methods from a package</h1>
                         <h4 class="author">Alex Hayes</h4>
             
-            <h4 class="date">2018-08-01</h4>
+            <h4 class="date">2018-08-07</h4>
       
       <small class="dont-index">Source: <a href="http://github.com/tidymodels/broom/blob/master/vignettes/external-tidiers.Rmd"><code>vignettes/external-tidiers.Rmd</code></a></small>
       <div class="hidden name"><code>external-tidiers.Rmd</code></div>
@@ -98,12 +98,15 @@
 
     
     
+<p>NOTE: This vignette describes how extend the broom generics in an external package. To <em>use</em> the broom generics in an external you can <code>Import</code> broom as you would normally.</p>
+<p>This guide describes how to extend the <code><a href="http://www.rdocumentation.org/packages/modelgenerics/topics/generics">tidy()</a></code>, <code><a href="http://www.rdocumentation.org/packages/modelgenerics/topics/generics">glance()</a></code> and <code><a href="http://www.rdocumentation.org/packages/modelgenerics/topics/generics">augment()</a></code> generics. broom recently started re-exporting these generics from the <code>modelgenerics</code> package. <code>modelgenerics</code> is not yet on CRAN, nor is the version of broom that uses <code>modelgenerics</code>. You’ll need to wait for these CRAN releases (timeline TBD at the moment) before release your package to CRAN if you extend broom in the manner described here.</p>
 <p>If you are a package developer, the best place to include <code><a href="http://www.rdocumentation.org/packages/modelgenerics/topics/generics">tidy()</a></code>, <code><a href="http://www.rdocumentation.org/packages/modelgenerics/topics/generics">glance()</a></code> or <code><a href="http://www.rdocumentation.org/packages/modelgenerics/topics/generics">augment()</a></code> methods is in your own package. To do this, you’ll need to:</p>
 <ol style="list-style-type: decimal">
 <li>Re-export the <code><a href="http://www.rdocumentation.org/packages/modelgenerics/topics/generics">tidy()</a></code>, <code><a href="http://www.rdocumentation.org/packages/modelgenerics/topics/generics">glance()</a></code> and <code><a href="http://www.rdocumentation.org/packages/modelgenerics/topics/generics">augment()</a></code> generics from the <code>modelgenerics</code> package.</li>
 <li>Implement appropriate tidying methods.</li>
 <li>Test the tidying methods</li>
 </ol>
+<p>You can re-export generics from broom itself, but <code>modelgenerics</code> is a much lighter dependency.</p>
 <p>The <a href="https://github.com/alexpghayes/dustpan">dustpan</a> package demonstrates use of <code>modelgenerics</code> and <code>modeltests</code>, and you may find it helpful to browse.</p>
 <div id="re-exporting-tidy-glance-and-augment-generics" class="section level2">
 <h2 class="hasAnchor">
@@ -133,48 +136,7 @@ modelgenerics<span class="op">::</span>glance</code></pre></div>
 <span class="co"># until then:</span>
 remotes<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/remotes/topics/install_github">install_github</a></span>(<span class="st">"alexpghayes/modeltests"</span>)
 usethis<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/usethis/topics/use_package">use_dev_package</a></span>(<span class="st">"modeltests"</span>)</code></pre></div>
-<p>If you’re using <a href="https://github.com/r-lib/testthat">testthat</a>, you’ll want to include the following in your tests:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">skip_if_not_installed</span>(<span class="st">"modeltests"</span>)  <span class="co"># can't rely on suggested packages in tests</span>
-<span class="kw">library</span>(modeltests)
-
-<span class="kw">test_that</span>(<span class="st">"myobject tidier arguments"</span>, {
-  <span class="kw"><a href="http://www.rdocumentation.org/packages/modeltests/topics/check_arguments">check_arguments</a></span>(tidy.my_object)
-  <span class="kw"><a href="http://www.rdocumentation.org/packages/modeltests/topics/check_arguments">check_arguments</a></span>(glance.my_object)
-  <span class="kw"><a href="http://www.rdocumentation.org/packages/modeltests/topics/check_arguments">check_arguments</a></span>(augment.myobject)
-})
-
-<span class="kw">test_that</span>(<span class="st">"tidy.my_object"</span>, {
-  my_object &lt;-<span class="st">  </span><span class="kw">my_object</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data =</span> my_data, ...)
-  
-  td &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/modelgenerics/topics/generics">tidy</a></span>(my_object)
-  tdci &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/modelgenerics/topics/generics">tidy</a></span>(my_object, <span class="dt">conf.int =</span> <span class="ot">TRUE</span>)
-  <span class="co"># ...</span>
-  
-  <span class="kw"><a href="http://www.rdocumentation.org/packages/modeltests/topics/check_tidy_output">check_tidy_output</a></span>(td)
-  <span class="kw"><a href="http://www.rdocumentation.org/packages/modeltests/topics/check_tidy_output">check_tidy_output</a></span>(tdci)
-  <span class="co"># ...</span>
-})
-
-<span class="kw">test_that</span>(<span class="st">"glance.my_object"</span>, {
-  my_object &lt;-<span class="st">  </span><span class="kw">my_object</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data =</span> my_data, ...)
-  my_object2 &lt;-<span class="st">  </span><span class="kw">my_object</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data =</span> my_data2, ...)
-  
-  gl &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/modelgenerics/topics/generics">glance</a></span>(my_object)
-  gl2 &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/modelgenerics/topics/generics">glance</a></span>(my_object2)
-  
-  <span class="kw"><a href="http://www.rdocumentation.org/packages/modeltests/topics/check_glance_outputs">check_glance_outputs</a></span>(gl, gl2)
-})
-
-<span class="kw">test_that</span>(<span class="st">"augment.my_object"</span>, {
-  my_object &lt;-<span class="st">  </span><span class="kw">my_object</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data =</span> my_data, ...)
-  
-  <span class="kw"><a href="http://www.rdocumentation.org/packages/modeltests/topics/check_augment_function">check_augment_function</a></span>(
-    <span class="dt">aug =</span> augment.my_object,
-    <span class="dt">model =</span> my_object,
-    <span class="dt">data  =</span> my_data,
-    <span class="dt">newdata =</span> my_new_data  <span class="co"># or just my_data</span>
-  )
-})</code></pre></div>
+<p>You can then write tests for your tidiers following the advice in <code><a href="../articles/adding-tidiers.html">vignette("adding-tidiers")</a></code>.</p>
 <p>If you’re run <code><a href="http://www.rdocumentation.org/packages/devtools/topics/test">devtools::test()</a></code> and <code><a href="http://www.rdocumentation.org/packages/devtools/topics/check">devtools::check()</a></code> and didn’t fail any tests or set off R CMD Check ERRORS, WARNINGS or NOTES, you’re done!</p>
 </div>
 <div id="f-a-q-" class="section level2">

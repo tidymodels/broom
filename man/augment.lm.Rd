@@ -4,8 +4,8 @@
 \alias{augment.lm}
 \title{Augment data with information from a(n) lm object}
 \usage{
-\method{augment}{lm}(x, data = stats::model.frame(x), newdata = NULL,
-  type.predict, type.residuals, ...)
+\method{augment}{lm}(x, data = model.frame(x), newdata = NULL,
+  se_fit = FALSE, ...)
 }
 \arguments{
 \item{x}{An \code{lm} object created by \code{\link[stats:lm]{stats::lm()}}.}
@@ -23,11 +23,9 @@ the original predictors used to create \code{x}. Defaults to \code{NULL}, indica
 that nothing has been passed to \code{newdata}. If \code{newdata} is specified,
 the \code{data} argument will be ignored.}
 
-\item{type.predict}{Type of predictions to use when \code{x} is a \code{glm} object.
-Passed to \code{\link[stats:predict.glm]{stats::predict.glm()}}.}
-
-\item{type.residuals}{Type of residuals to use when \code{x} is a \code{glm} object.
-Passed to \code{\link[stats:residuals.glm]{stats::residuals.glm()}}.}
+\item{se_fit}{Logical indicating whether or not a \code{.se.fit} column should be
+added to the augmented output. For some models, this calculation can be
+somwhat time-consuming. Defaults to \code{FALSE}.}
 
 \item{...}{Additional arguments. Not used. Needed to match generic
 signature only. \strong{Cautionary note:} Misspelled arguments will be
@@ -156,12 +154,12 @@ Other lm tidiers: \code{\link{augment.glm}},
 \concept{lm tidiers}
 \value{
 A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
-  \item{.cooksd}{Cooks distance. See [stats::cooks.distance()] for additional details.}
-  \item{.fitted}{Fitted / predicted value.}
-  \item{.hat}{Diagonal of the hat matrix. TODO -- add interpretation.}
-  \item{.resid}{Residuals of fitted values. TODO -- document when present. Residuals on which data set?}
-  \item{.se.fit}{Standard errors of fitted values. TODO -- prediction or mean interval?}
-  \item{.sigma}{Estimate of residual standard deviation when corresponding observation is dropped from model. Same as LOO-CV estimate?.}
-  \item{.std.resid}{Standardised residuals  Some unusual `lm` objects, such as `rlm` from MASS, may omit `.cooksd` and `.std.resid`.}
+  \item{.cooksd}{Cooks distance.}
+  \item{.fitted}{Fitted or predicted value.}
+  \item{.hat}{Diagonal of the hat matrix.}
+  \item{.resid}{The difference between fitted and observed values.}
+  \item{.se.fit}{Standard errors of fitted values.}
+  \item{.sigma}{Estimated residual standard deviation when corresponding observation is dropped from model.}
+  \item{.std.resid}{Standardised residuals.}
 
 }

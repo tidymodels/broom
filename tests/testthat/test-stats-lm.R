@@ -6,19 +6,19 @@ library(modeltests)
 test_that("lm tidier arguments", {
   check_arguments(tidy.lm)
   check_arguments(glance.lm)
-  check_arguments(augment.lm, strict = FALSE)
+  check_arguments(augment.lm)
 })
 
 fit <- lm(mpg ~ wt, mtcars)
-fit2 <- lm(mpg ~ wt + disp, mtcars)
+fit2 <- lm(mpg ~ wt + log(disp), mtcars)
 
 # the cyl:qsec term isn't defined for this fit
 na_row_data <- mtcars[c(6, 9, 13:15, 22), ]
 fit_na_row <- lm(mpg ~ cyl * qsec + gear, data = na_row_data)
 
 # rank-deficient fit
-rd_data <- data.frame(y = rnorm(4), x = letters[seq_len(4)])
-fit_rd <- lm(y ~ x, data = rd_data)
+rd_data <- data.frame(y = rnorm(10), x = letters[seq_len(10)])
+fit_rd <- lm(y ~ x - 1, data = rd_data)
 
 test_that("tidy.lm works", {
   
@@ -45,7 +45,7 @@ test_that("tidy.lm works", {
   check_dims(tdq2, expected_cols = 2)
   
   expect_equal(td$term, c("(Intercept)", "wt"))
-  expect_equal(td2$term, c("(Intercept)", "wt", "disp"))
+  expect_equal(td2$term, c("(Intercept)", "wt", "log(disp)"))
 
   expect_warning(
     tidy(fit2, exponentiate = TRUE),
@@ -76,32 +76,32 @@ test_that("augment.lm", {
     aug = augment.lm,
     model = fit,
     data = mtcars,
-    newdata = mtcars,
-    strict = FALSE
+    newdata = mtcars
   )
   
   check_augment_function(
     aug = augment.lm,
     model = fit2,
     data = mtcars,
-    newdata = mtcars,
-    strict = FALSE
+    newdata = mtcars
   )
   
-  check_augment_function(
-    aug = augment.lm,
-    model = fit_na_row,
-    data = na_row_data,
-    newdata = na_row_data,
-    strict = FALSE
+  expect_warning(
+    check_augment_function(
+      aug = augment.lm,
+      model = fit_na_row,
+      data = na_row_data,
+      newdata = na_row_data
+    ),
+    "prediction from a rank-deficient fit may be misleading"
   )
+  
   
   check_augment_function(
     aug = augment.lm,
     model = fit_rd,
     data = rd_data,
-    newdata = rd_data,
-    strict = FALSE
+    newdata = rd_data
   )
 })
 
