@@ -33,6 +33,7 @@ specify which components to return.
 tidy(acf(lh, plot = FALSE))
 tidy(ccf(mdeaths, fdeaths, plot = FALSE))
 tidy(pacf(lh, plot = FALSE))
+tidy(acf(diff(log(EuStockMarkets)), plot = FALSE))
 
 }
 \seealso{
@@ -44,7 +45,7 @@ Other time series tidiers: \code{\link{tidy.spec}},
 \concept{time series tidiers}
 \value{
 A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
-  \item{acf}{calculated correlation}
+  \item{acf}{Autocorrelation.}
   \item{lag}{lag values}
 
 }

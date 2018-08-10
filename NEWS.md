@@ -16,6 +16,7 @@ To be released as 0.7.0
 - Import `tidy()`, `glance()` and `augment()` generics from `modelgenerics`
 - Added new vignette detailing use of `modelgenerics` and `modeltests` packages
 - Added `data` argument to `augment()` generic
+- `tidy.acf()` now handles acf objects with multivariate inputs more cleanly.
 
 ## Deprecations
 

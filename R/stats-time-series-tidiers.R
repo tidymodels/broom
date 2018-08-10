@@ -51,19 +51,19 @@ tidy.ts <- function(x, ...) {
 #' tidy(acf(lh, plot = FALSE))
 #' tidy(ccf(mdeaths, fdeaths, plot = FALSE))
 #' tidy(pacf(lh, plot = FALSE))
-#' tidy(acf(diff(log(EUStockMarkets)), plot = FALSE))
+#' tidy(acf(diff(log(EuStockMarkets)), plot = FALSE))
 #'
 #' @export
 #' @seealso [tidy()], [stats::acf()], [stats::pacf()], [stats::ccf()]
 #' @family time series tidiers
 tidy.acf <- function(x, ...) {
-  if(is.null(x$snames)) { # If the acf object was called on a univariate time series
+  if(is.null(x$snames) | length(x$snames) == 1) { # If the acf object was called on a univariate time series, or by ccf
     return(tibble(lag = as.numeric(x$lag), acf = as.numeric(x$acf)))
   } else { # for multivariate acf objects
     nms <- expand.grid(seq(dim(x$lag)[1]), x$snames, x$snames)
     colnames(nms) <- c("ind", "row", "col")
     return(tibble(row=nms$row,
-		  col=nms$col,
+		  column1=nms$col,
 		  lag=as.numeric(x$lag),
 		  acf=as.vector(x$acf)))
   }

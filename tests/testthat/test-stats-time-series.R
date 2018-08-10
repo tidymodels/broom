@@ -6,10 +6,24 @@ library(modeltests)
 test_that("tidy.acf works", {
   check_arguments(tidy.acf)
   
+  # univariate
   result <- acf(lh, plot = FALSE)
   td <- tidy(result)
   check_tidy_output(td)
   check_dims(td, 17, 2)
+  
+  # multivariate
+  eu <- diff(log(EuStockMarkets))
+  result <- acf(eu, plot = FALSE)
+  td <- tidy(result)
+  check_tidy_output(td)
+  check_dims(td, 432, 4)
+  
+  # ccf
+  result <- ccf(mdeaths, fdeaths, plot = FALSE)
+  td <- tidy(result)
+  check_tidy_output(td)
+  check_dims(td, 31, 2)
 })
 
 
