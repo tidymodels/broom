@@ -36,7 +36,8 @@ Authors@R: c(
     person("Steven", "Pav", email = "shabbychef@gmail.com", role = "ctb"),
     person("Paul", "PJ", email = "pjpaul.stephens@gmail.com", role = "ctb"),
     person("Ben", "Schneider", email = "benjamin.julius.schneider@gmail.com", role = "ctb"),
-    person("Patrick", "Kennedy", email = "pkqstr@protonmail.com", role = "ctb"))
+    person("Patrick", "Kennedy", email = "pkqstr@protonmail.com", role = "ctb"),
+    person("Nic", "Crane", email = "thisisnic@gmail.com", role = "ctb"))
 Maintainer: David Robinson <admiral.david@gmail.com>
 Description: Summarizes key information about statistical objects in tidy
     tibbles. This makes it easy to report results, create plots and consistently
