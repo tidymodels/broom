@@ -17,6 +17,8 @@ test_that("kmeans tidier arguments", {
   check_arguments(augment.kmeans, strict = FALSE)
 })
 
+# tidy.kmeans uses the orginal column names to name columns in output.  
+# Therefore, strict must be set to FALSE for this test to pass.
 test_that("tidy.kmeans", {
   td <- tidy(fit)
   check_tidy_output(td, strict = FALSE)

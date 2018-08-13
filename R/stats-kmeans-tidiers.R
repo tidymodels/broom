@@ -13,7 +13,11 @@
 #' @export
 #' @seealso [tidy()], [stats::kmeans()]
 #' @family kmeans tidiers
-tidy.kmeans <- function(x, col.names = paste0("x", 1:ncol(x$centers)), ...) {
+tidy.kmeans <- function(x, col.names = colnames(x$centers), ...) {
+  
+  if(is.null(col.names)){
+    col.names <- paste0("x", 1:ncol(x$centers))
+  }
   ret <- as.data.frame(x$centers)
   colnames(ret) <- col.names
   ret$size <- x$size
