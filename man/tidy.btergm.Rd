@@ -83,8 +83,8 @@ tidy(btfit, exponentiate = TRUE, conf.level = 0.99)
 }
 \value{
 A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
-  \item{conf.high}{The upper end of a confidence interval for the term under consideration. Included only if `conf.int = TRUE`.}
-  \item{conf.low}{The lower end of a confidence interval for the term under consideration. Included only if `conf.int = TRUE`.}
+  \item{conf.high}{Upper bound on the confidence interval for the estimate.}
+  \item{conf.low}{Lower bound on the confidence interval for the estimate.}
   \item{estimate}{The estimated value of the regression term.}
   \item{term}{The name of the regression term.}
 

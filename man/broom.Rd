@@ -61,6 +61,7 @@ Other contributors:
   \item Erle Holgersen \email{erle.holgersen@gmail.com} [contributor]
   \item Karl Dunkle Werner [contributor]
   \item Steven Pav \email{shabbychef@gmail.com} [contributor]
+  \item Patrick Kennedy \email{pkqstr@protonmail.com} [contributor]
 }
 
 }

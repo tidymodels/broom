@@ -55,10 +55,10 @@ Other factanal tidiers: \code{\link{augment.factanal}},
 A \code{\link[tibble:tibble]{tibble::tibble()}} with exactly one row and columns:
   \item{converged}{Logical indicating if the model fitting procedure was succesful and converged.}
   \item{df}{Degrees of freedom used by the model.}
-  \item{method}{Needs custom info.}
-  \item{n}{Needs custom info.}
+  \item{method}{Which method was used.}
+  \item{n}{The number of TODO.}
   \item{n.factors}{The number of fitted factors}
-  \item{statistic}{Needs custom info.}
+  \item{statistic}{Test statistic.}
   \item{total.variance}{Total cumulative proportion of variance accounted for by all factors}
 
 }

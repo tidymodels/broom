@@ -3,9 +3,6 @@ context("joinerml")
 skip_if_not_installed("modeltests")
 library(modeltests)
 
-# TODO: think about the tidy interface when bootstrapping standard errors
-# should tidy work on two objects are once?
-
 skip_if_not_installed("joineRML")
 library(joineRML)
 
@@ -87,8 +84,6 @@ test_that("glance.mjoint", {
 
 
 test_that("augment.mjoint", {
-  
-  # TODO: check for consistent 0 and 1 indexing in output colum names
   
   au <- augment(mjoint_fit)
   au2 <- augment(mjoint_fit2)

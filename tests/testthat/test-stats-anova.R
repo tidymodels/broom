@@ -31,7 +31,6 @@ test_that("tidy.anova", {
     loess(dist ~ speed, cars, control = loess.control(surface = "direct"))
   )
   
-  # TODO: can we throw a more informative error here
   expect_warning(tidy(loess_anova))
 })
 

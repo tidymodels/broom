@@ -42,8 +42,6 @@
 #' @seealso [tidy()], [ks::kde()]
 tidy.kde <- function(x, ...) {
   
-  # TODO: would like to use tidyr instead but melt is an arbitrary order array
-  # so not sure how to make that change
   estimate <- reshape2::melt(x$estimate)
   dims <- seq_len(length(x$eval.points))
   

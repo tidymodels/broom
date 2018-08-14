@@ -281,7 +281,7 @@ test_that("tidy.summary", {
   
   td <- tidy(summary(df$val))
   
-  gl <- glance(summary(df$val)) # same as td. TODO: does this make sense?
+  gl <- glance(summary(df$val))
   expect_identical(td, gl)
 })
 

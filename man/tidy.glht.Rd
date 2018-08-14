@@ -65,7 +65,7 @@ Other multcomp tidiers: \code{\link{tidy.cld}},
 \value{
 A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
   \item{estimate}{The estimated value of the regression term.}
-  \item{lhs}{TODO}
-  \item{rhs}{TODO}
+  \item{lhs}{Left hand side.}
+  \item{rhs}{Right hand side.}
 
 }

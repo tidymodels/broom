@@ -71,8 +71,8 @@ Other survival tidiers: \code{\link{augment.coxph}},
 \concept{survival tidiers}
 \value{
 A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
-  \item{conf.high}{The upper end of a confidence interval for the term under consideration. Included only if `conf.int = TRUE`.}
-  \item{conf.low}{The lower end of a confidence interval for the term under consideration. Included only if `conf.int = TRUE`.}
+  \item{conf.high}{Upper bound on the confidence interval for the estimate.}
+  \item{conf.low}{Lower bound on the confidence interval for the estimate.}
   \item{n.censor}{number of censored events}
   \item{n.event}{number of events at time t}
   \item{n.risk}{Number of individuals at risk at time zero.}

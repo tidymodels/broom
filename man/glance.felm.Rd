@@ -70,10 +70,10 @@ glance(result_felm)
 A \code{\link[tibble:tibble]{tibble::tibble()}} with exactly one row and columns:
   \item{adj.r.squared}{Adjusted R squared statistic, which is like the R squared statistic except taking degrees of freedom into account.}
   \item{df}{Degrees of freedom used by the model.}
-  \item{df.residual}{Residual degrees of freedom for the model.}
-  \item{p.value}{Needs custom info.}
+  \item{df.residual}{Residual degrees of freedom.}
+  \item{p.value}{P-value corresponding to the test statistic.}
   \item{r.squared}{R squared statistic, or the percent of variation explained by the model. Also known as the coefficient of determination.}
   \item{sigma}{Estimated standard error of the residuals.}
-  \item{statistic}{Needs custom info.}
+  \item{statistic}{Test statistic.}
 
 }

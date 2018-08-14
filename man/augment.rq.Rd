@@ -93,10 +93,6 @@ a confidence interval is also calculated on the fitted values resulting in
 columns \code{.conf.low} and \code{.conf.high}. Does not provide confidence
 intervals when data is specified via the \code{newdata} argument.
 }
-\examples{
-
-print('TODO')
-}
 \seealso{
 \link{augment}, \code{\link[quantreg:rq]{quantreg::rq()}}, \code{\link[quantreg:predict.rq]{quantreg::predict.rq()}}
 
@@ -108,8 +104,8 @@ Other quantreg tidiers: \code{\link{augment.nlrq}},
 \concept{quantreg tidiers}
 \value{
 A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
-  \item{.fitted}{Fitted / predicted value.}
-  \item{.resid}{Residuals of fitted values. TODO -- document when present. Residuals on which data set?}
-  \item{.tau}{Quantile estimated  Depending on the arguments passed on to `predict.rq` via `...`, a confidence interval is also calculated on the fitted values.}
+  \item{.fitted}{Fitted or predicted value.}
+  \item{.resid}{The difference between fitted and observed values.}
+  \item{.tau}{Quantile.}
 
 }

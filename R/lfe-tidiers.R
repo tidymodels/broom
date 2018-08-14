@@ -93,21 +93,9 @@ tidy.felm <- function(x, conf.int = FALSE, conf.level = .95, fe = FALSE, ...) {
 #' @export
 #' @family felm tidiers
 #' @seealso [augment()], [lfe::felm()]
-augment.felm <- function(x, data = NULL, ...) {
-  
-  # TODO: consider adding connencted component and fixed effect summaries
-  # back in. need to think about if this makes sense. removing at the 
-  # moment because of errors and time crunch for CRAN.
-  
-  mf <- model.frame(x)
-  
-  if (is.null(data)) {
-    data <- as_tibble(mf)  # will fail for poly terms
-  } else {
-    data <- fix_data_frame(data, newcol = ".rownames")
-  }
-  
-  mutate(data, .fitted = x$fitted.values, .resid = x$residuals)
+augment.felm <- function(x, data = model.frame(x), ...) {
+  df <- as_broom_tibble(data)
+  mutate(df, .fitted = x$fitted.values, .resid = x$residuals)
 }
 
 #' @templateVar class felm

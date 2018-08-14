@@ -11,8 +11,11 @@ data(stackloss)
 df <- as_tibble(stack.x) %>% 
   mutate(stack.loss = stack.loss)
 
+dflarge_n <- df%>% slice(rep(row_number(), 500))
+
 fit <- rq(stack.loss ~ ., data = df, tau = .5)
 fit2 <- rq(stack.loss ~ 1, data = df, tau = .5)
+fitlarge_n <- rq(stack.loss ~ ., data = dflarge_n, tau = .5)
 
 test_that("quantreg::rq tidier arguments", {
   check_arguments(tidy.rq)
@@ -24,14 +27,17 @@ test_that("tidy.rq", {
   
   td <- tidy(fit)
   td2 <- tidy(fit2)
+  tdlarge_n <- tidy(fitlarge_n)
   td_iid <- tidy(fit, conf.int = TRUE, se.type = "iid")
   
   check_tidy_output(td)
   check_tidy_output(td2)
+  check_tidy_output(tdlarge_n)
   check_tidy_output(td_iid)
   
   check_dims(td, 4, 5)
   check_dims(td2, 1, 5)
+  check_dims(tdlarge_n, 4, 6)
   check_dims(td_iid, 4, 8)
 })
 

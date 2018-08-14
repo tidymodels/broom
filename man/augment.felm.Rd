@@ -4,7 +4,7 @@
 \alias{augment.felm}
 \title{Augment data with information from a(n) felm object}
 \usage{
-\method{augment}{felm}(x, data = NULL, ...)
+\method{augment}{felm}(x, data = model.frame(x), ...)
 }
 \arguments{
 \item{x}{A \code{felm} object returned from \code{\link[lfe:felm]{lfe::felm()}}.}
@@ -106,7 +106,7 @@ Other felm tidiers: \code{\link{tidy.felm}}
 \concept{felm tidiers}
 \value{
 A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
-  \item{.fitted}{Fitted / predicted value.}
-  \item{.resid}{Residuals of fitted values. TODO -- document when present. Residuals on which data set?}
+  \item{.fitted}{Fitted or predicted value.}
+  \item{.resid}{The difference between fitted and observed values.}
 
 }
