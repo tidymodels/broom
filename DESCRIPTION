@@ -189,6 +189,7 @@ Collate:
     'mass-rlm-tidiers.R'
     'mclust-tidiers.R'
     'mcmc-tidiers.R'
+    'mediate-tidiers.R'
     'mgcv-tidiers.R'
     'muhaz-tidiers.R'
     'multcomp-tidiers.R'
