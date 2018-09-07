@@ -108,6 +108,7 @@ Suggests:
     MASS,
     Matrix,
     mclust,
+    mediation,
     mgcv,
     muhaz,
     multcomp,
@@ -139,7 +140,7 @@ Suggests:
 VignetteBuilder: knitr
 LazyData: true
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 6.1.0
+RoxygenNote: 6.1.0.9000
 Remotes: 
     topepo/modelgenerics,
     alexpghayes/modeltests
@@ -189,6 +190,7 @@ Collate:
     'mass-rlm-tidiers.R'
     'mclust-tidiers.R'
     'mcmc-tidiers.R'
+    'mediate-tidiers.R'
     'mgcv-tidiers.R'
     'muhaz-tidiers.R'
     'multcomp-tidiers.R'
