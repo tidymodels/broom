@@ -20,6 +20,6 @@ These objects are imported from other packages. Follow the links
 below to see their documentation.
 
 \describe{
-  \item{modelgenerics}{\code{\link[modelgenerics]{augment}}, \code{\link[modelgenerics]{tidy}}, \code{\link[modelgenerics]{glance}}}
+  \item{generics}{\code{\link[generics]{augment}}, \code{\link[generics]{tidy}}, \code{\link[generics]{glance}}}
 }}
 
