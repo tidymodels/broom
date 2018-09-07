@@ -62,7 +62,7 @@ Imports:
     stringr,
     tibble,
     tidyr,
-    modelgenerics,
+    generics,
     glue,
     rlang
 Suggests:
@@ -143,7 +143,7 @@ LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 6.1.0.9000
 Remotes: 
-    topepo/modelgenerics,
+    r-lib/generics,
     alexpghayes/modeltests
 Collate: 
     'aaa-documentation-helper.R'
