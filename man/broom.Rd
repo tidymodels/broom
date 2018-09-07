@@ -60,8 +60,12 @@ Other contributors:
   \item Jorge Cimentada \email{cimentadaj@gmail.com} [contributor]
   \item Erle Holgersen \email{erle.holgersen@gmail.com} [contributor]
   \item Karl Dunkle Werner [contributor]
+  \item Ethan Christensen \email{christensen.ej@gmail.com} [contributor]
   \item Steven Pav \email{shabbychef@gmail.com} [contributor]
+  \item Paul PJ \email{pjpaul.stephens@gmail.com} [contributor]
+  \item Ben Schneider \email{benjamin.julius.schneider@gmail.com} [contributor]
   \item Patrick Kennedy \email{pkqstr@protonmail.com} [contributor]
+  \item Lily Medina \email{lilymiru@gmail.com} [contributor]
 }
 
 }
