@@ -65,6 +65,7 @@ Other contributors:
   \item Paul PJ \email{pjpaul.stephens@gmail.com} [contributor]
   \item Ben Schneider \email{benjamin.julius.schneider@gmail.com} [contributor]
   \item Patrick Kennedy \email{pkqstr@protonmail.com} [contributor]
+  \item Lily Medina \email{lilymiru@gmail.com} [contributor]
 }
 
 }

@@ -46,12 +46,9 @@ b <- lm(job_seek ~ treat + econ_hard + sex + age, data = jobs)
 c <- lm(depress2 ~ treat + job_seek + econ_hard + sex + age, data = jobs)
 mod <- mediate(b, c, sims = 50, treat = "treat", mediator = "job_seek")
 
-mod
 tidy(mod)
 tidy(mod, conf.int = TRUE)
 tidy(mod, conf.int = TRUE, conf.level = .99)
-
-
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[mediation:mediate]{mediation::mediate()}}
