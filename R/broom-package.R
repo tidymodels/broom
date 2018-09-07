@@ -36,7 +36,7 @@ generics::augment
 #' @seealso [tidy.lm()]
 generics::tidy
 
-#' @importFrom modelgenerics glance
+#' @importFrom generics glance
 #' @export
 #' @seealso [glance.lm()]
 generics::glance
