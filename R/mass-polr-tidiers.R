@@ -32,7 +32,11 @@ process_polr <- function(ret, x, conf.int = FALSE, conf.level = .95,
   
   if (conf.int) {
     CI <- suppressMessages(trans(stats::confint(x, level = conf.level)))
-    names(CI) <- c("conf.low", "conf.high")
+    if (!is.matrix(CI)) {
+      CI <- rbind(CI)
+      rownames(CI) <- names(coef(x))
+    }
+    colnames(CI) <- c("conf.low", "conf.high")
     CI <- as.data.frame(CI)
     CI$term <- rownames(CI)
     ret <- merge(ret, unrowname(CI), by = "term", all.x = TRUE)

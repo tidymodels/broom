@@ -44,6 +44,10 @@ The following have all been deprecated in favor of `broom.mixed`:
 - `tidy.lme()`, `glance.lme()`, `augment.lme()`
 - `tidy.stanreg()`, `glance.stanreg()`
 
+## Other changes
+
+- Bug fix for tidy.polr for incorrectly using colnames. (#498)
+
 # broom 0.5.0
 
 Tidiers now return `tibble::tibble()`s. This release also includes several new tidiers, new vignettes and a large number of bugfixes. We've also begun to more rigorously define tidier specifications: we've laid part of the groundwork for stricter and more consistent tidying, but the new tidier specifications are not yet complete. These will appear in the next release.
