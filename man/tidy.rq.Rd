@@ -6,7 +6,7 @@
 \alias{quantreg_tidiers}
 \title{Tidy a(n) rq object}
 \usage{
-\method{tidy}{rq}(x, se.type = "rank", conf.int = FALSE,
+\method{tidy}{rq}(x, se.type = NULL, conf.int = FALSE,
   conf.level = 0.95, ...)
 }
 \arguments{
@@ -14,7 +14,8 @@
 
 \item{se.type}{Character specifying the method to use to calculate
 standard errors. Passed to \code{\link[quantreg:summary.rq]{quantreg::summary.rq()}} \code{se} argument.
-Defaults to \code{"rank"}.}
+Defaults to \code{"rank"} if the sample size is less than 1000,
+otherwise defaults to \code{"nid"}.}
 
 \item{conf.int}{Logical indicating whether or not to include a confidence
 interval in the tidied output. Defaults to \code{FALSE}.}
@@ -35,7 +36,7 @@ specify which components to return.
 }
 \details{
 If \code{se.type = "rank"} confidence intervals are calculated by
-\code{summary.rq}. When only a single predictor is included in the model,
+\code{summary.rq} and \code{statistic} and \code{p.value} values are not returned. When only a single predictor is included in the model,
 no confidence intervals are calculated and the confidence limits are
 set to NA.
 }
