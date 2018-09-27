@@ -2,7 +2,7 @@
 #' @template title_desc_tidy
 #'
 #' @param x A `kmeans` object created by [stats::kmeans()].
-#' @param col.names Dimension names. Defaults to `x1, x2, ...`
+#' @param col.names Dimension names. Defaults to the names of the variables in x.  Set to NULL to get names `x1, x2, ...`.
 #' @template param_unused_dots
 #'
 #' @evalRd return_tidy("size", "withinss", "cluster")
