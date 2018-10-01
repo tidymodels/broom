@@ -162,6 +162,7 @@ Collate:
     'btergm-tidiers.R'
     'car-tidiers.R'
     'caret-tidiers.R'
+    'data-frame-tidiers.R'
     'emmeans-tidiers.R'
     'ergm-tidiers.R'
     'gam-tidiers.R'
