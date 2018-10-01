@@ -39,10 +39,9 @@ tidy_xyz <- function(x, ...) {
     )
   }
   
-  d <- reshape2::melt(x$z)
-  names(d) <- c("x", "y", "z")
-  # get coordinates
-  d$x <- x$x[d$x]
-  d$y <- x$y[d$y]
-  as_tibble(d)
+  d <- as_tibble(x$z)
+  names(d) <- x$y
+  d$x <- x$x
+  tidyr::gather(d, y, z, -x)
+
 }

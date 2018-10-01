@@ -70,19 +70,19 @@ tidy.dist <- function(x, diagonal = attr(x, "Diag"),
                       upper = attr(x, "Upper"), ...) {
   m <- as.matrix(x)
 
-  ret <- reshape2::melt(m,
-    varnames = c("item1", "item2"),
-    value.name = "distance"
-  )
-
+  ret <- as_tibble(m, rownames = 'item1')
+  ret <- tidyr::gather(ret, item2, distance, -item1)
+  
   if (!upper) {
     ret <- ret[!upper.tri(m), ]
   }
 
   if (!diagonal) {
-    ret <- filter(ret, item1 != item2)
+    ret <- dplyr::filter(ret, item1 != item2)
   }
-  as_tibble(ret)
+  
+  ret
+
 }
 
 
