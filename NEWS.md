@@ -25,6 +25,7 @@ in the augment method for the chi sq test, .residuals column was renamed to .res
 - Import `tidy()`, `glance()` and `augment()` generics from `modelgenerics`
 - Added new vignette detailing use of `modelgenerics` and `modeltests` packages
 - Added `data` argument to `augment()` generic
+- tidy.kmeans now defaults to using variable names in output columns
 
 ## Deprecations
 
@@ -43,6 +44,10 @@ The following have all been deprecated in favor of `broom.mixed`:
 - `tidyMCMC()`, `tidy.rjags()`, `tidy.stanfit()`
 - `tidy.lme()`, `glance.lme()`, `augment.lme()`
 - `tidy.stanreg()`, `glance.stanreg()`
+
+## Other changes
+
+- Bug fix for tidy.polr for incorrectly using colnames. (#498)
 
 # broom 0.5.0
 
