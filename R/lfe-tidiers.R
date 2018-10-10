@@ -3,6 +3,7 @@
 #'
 #' @param x A `felm` object returned from [lfe::felm()].
 #' @template param_confint
+#' @template param_quick
 #' @param fe Logical indicating whether or not to include estimates of
 #'   fixed effects. Defaults to `FALSE`.
 #' @template param_unused_dots
@@ -44,9 +45,17 @@
 #' @aliases felm_tidiers lfe_tidiers
 #' @family felm tidiers
 #' @seealso [tidy()], [lfe::felm()]
-tidy.felm <- function(x, conf.int = FALSE, conf.level = .95, fe = FALSE, ...) {
-  nn <- c("estimate", "std.error", "statistic", "p.value")
-  ret <- fix_data_frame(stats::coef(summary(x)), nn)
+tidy.felm <- function(x, conf.int = FALSE, conf.level = .95, fe = FALSE, quick = FALSE, ...) {
+
+  if(quick) {
+    co <- stats::coef(x)
+    ret <- data.frame(term = names(co), estimate = unname(co),
+                      stringsAsFactors = FALSE)
+  } else {
+    nn <- c("estimate", "std.error", "statistic", "p.value")
+    ret <- fix_data_frame(stats::coef(summary(x)), nn)  
+  }
+  
 
   if (conf.int) {
     # avoid "Waiting for profiling to be done..." message
@@ -57,14 +66,18 @@ tidy.felm <- function(x, conf.int = FALSE, conf.level = .95, fe = FALSE, ...) {
 
   if (fe) {
     ret <- mutate(ret, N = NA, comp = NA)
-    object <- lfe::getfe(x)
-    
-    nn <- c("estimate", "std.error", "N", "comp")
-    ret_fe <- lfe::getfe(x, se = TRUE, bN = 100) %>%
-      select(effect, se, obs, comp) %>%
-      fix_data_frame(nn) %>%
-      mutate(statistic = estimate / std.error) %>%
-      mutate(p.value = 2 * (1 - stats::pt(statistic, df = N)))
+    if(quick) {
+      ret_fe <- lfe::getfe(x) %>%
+        select(effect, obs, comp) %>%
+        fix_data_frame(c("estimate",  "N", "comp")) 
+    } else {
+      nn <- c("estimate", "std.error", "N", "comp")
+      ret_fe <- lfe::getfe(x, se = TRUE, bN = 100) %>%
+        select(effect, se, obs, comp) %>%
+        fix_data_frame(nn) %>%
+        mutate(statistic = estimate / std.error) %>%
+        mutate(p.value = 2 * (1 - stats::pt(statistic, df = N)))  
+    }
     
     if (conf.int) {
       
