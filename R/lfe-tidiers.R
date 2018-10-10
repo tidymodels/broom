@@ -49,15 +49,14 @@ tidy.felm <- function(x, conf.int = FALSE, conf.level = .95, fe = FALSE, quick =
 
   if(quick) {
     co <- stats::coef(x)
-    ret <- data.frame(term = names(co), estimate = unname(co),
-                      stringsAsFactors = FALSE)
+    ret <- data_frame(term = names(co), estimate = unname(co))
   } else {
     nn <- c("estimate", "std.error", "statistic", "p.value")
     ret <- fix_data_frame(stats::coef(summary(x)), nn)  
   }
   
 
-  if (conf.int) {
+  if (!quick & conf.int) {
     # avoid "Waiting for profiling to be done..." message
     CI <- suppressMessages(stats::confint(x, level = conf.level))
     colnames(CI) <- c("conf.low", "conf.high")
@@ -79,7 +78,7 @@ tidy.felm <- function(x, conf.int = FALSE, conf.level = .95, fe = FALSE, quick =
         mutate(p.value = 2 * (1 - stats::pt(statistic, df = N)))  
     }
     
-    if (conf.int) {
+    if (!quick & conf.int) {
       
       crit_val_low <- stats::qnorm(1 - (1 - conf.level) / 2)
       crit_val_high <- stats::qnorm(1 - (1 - conf.level) / 2)

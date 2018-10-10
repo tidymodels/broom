@@ -29,14 +29,22 @@ test_that("felm tidier arguments", {
 
 test_that("tidy.felm", {
   td <- tidy(fit)
+  td_quick <- tidy(fit, quick = TRUE)
   td2 <- tidy(fit2, conf.int = TRUE, fe = TRUE, fe.error = FALSE)
+  td2_quick <- tidy(fit2, conf.int = TRUE, fe = TRUE, fe.error = FALSE, quick = TRUE)
   td3 <- tidy(fit2, conf.int = TRUE, fe = TRUE)
+  td3_quick <- tidy(fit2, conf.int = TRUE, fe = TRUE, quick = TRUE)
   td4 <- tidy(fit_form)
+  td4_quick <- tidy(fit_form, quick = TRUE)
   
   check_tidy_output(td)
+  check_tidy_output(td_quick)
   check_tidy_output(td2)
+  check_tidy_output(td2_quick)
   check_tidy_output(td3)
+  check_tidy_output(td3_quick)
   check_tidy_output(td4)
+  check_tidy_output(td4_quick)
   
   check_dims(td, 2, 5)
 })
