@@ -65,8 +65,8 @@ Other contributors:
   \item Paul PJ \email{pjpaul.stephens@gmail.com} [contributor]
   \item Ben Schneider \email{benjamin.julius.schneider@gmail.com} [contributor]
   \item Patrick Kennedy \email{pkqstr@protonmail.com} [contributor]
-  \item Nic Crane \email{thisisnic@gmail.com} [contributor]
-  \item Lily Medina \email{lilymiru@gmail.com} [contributor]
+  \item Brian Fannin \email{captain@pirategrunt.com} [contributor]
+  \item Luke Sonnet \email{luke.sonnet@gmail.com} [contributor]
 }
 
 }
