@@ -7,7 +7,7 @@
 \title{Tidy a(n) felm object}
 \usage{
 \method{tidy}{felm}(x, conf.int = FALSE, conf.level = 0.95,
-  fe = FALSE, ...)
+  fe = FALSE, quick = FALSE, ...)
 }
 \arguments{
 \item{x}{A \code{felm} object returned from \code{\link[lfe:felm]{lfe::felm()}}.}
@@ -21,6 +21,10 @@ Defaults to 0.95, which corresponds to a 95 percent confidence interval.}
 
 \item{fe}{Logical indicating whether or not to include estimates of
 fixed effects. Defaults to \code{FALSE}.}
+
+\item{quick}{Logical indiciating if the only the \code{term} and \code{estimate}
+columns should be returned. Often useful to avoid time consuming
+covariance and standard error calculations. Defaults to \code{FALSE}.}
 
 \item{...}{Additional arguments. Not used. Needed to match generic
 signature only. \strong{Cautionary note:} Misspelled arguments will be

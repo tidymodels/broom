@@ -28,7 +28,7 @@ Useful links:
 
 Authors:
 \itemize{
-  \item Alex Hayes \email{alexpghayes@gmail.com}
+  \item Alex Hayes \email{alexpghayes@gmail.com} (0000-0002-4985-5160)
 }
 
 Other contributors:
