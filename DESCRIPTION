@@ -4,7 +4,7 @@ Title: Convert Statistical Objects into Tidy Tibbles
 Version: 0.5.0.9001
 Authors@R: c(
     person("David", "Robinson", email = "admiral.david@gmail.com", role = c("aut", "cre")),
-    person("Alex", "Hayes", email = "alexpghayes@gmail.com", role = "aut"),
+    person("Alex", "Hayes", email = "alexpghayes@gmail.com", role = "aut", comment = c(ORCID = "0000-0002-4985-5160")),
     person("Matthieu", "Gomez", email = "mattg@princeton.edu", role = "ctb"),
     person("Boris", "Demeshev", email = "boris.demeshev@gmail.com", role = "ctb"),
     person("Dieter", "Menne", email = "dieter.menne@menne-biomed.de", role = "ctb"),
