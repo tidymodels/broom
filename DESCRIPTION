@@ -37,8 +37,7 @@ Authors@R: c(
     person("Paul", "PJ", email = "pjpaul.stephens@gmail.com", role = "ctb"),
     person("Ben", "Schneider", email = "benjamin.julius.schneider@gmail.com", role = "ctb"),
     person("Patrick", "Kennedy", email = "pkqstr@protonmail.com", role = "ctb"),
-    person("Brian", "Fannin", email = "captain@pirategrunt.com", role = "ctb"),
-    person("Luke", "Sonnet", email = "luke.sonnet@gmail.com", role = "ctb"))
+    person("Brian", "Fannin", email = "captain@pirategrunt.com", role = "ctb"))
 Maintainer: David Robinson <admiral.david@gmail.com>
 Description: Summarizes key information about statistical objects in tidy
     tibbles. This makes it easy to report results, create plots and consistently
@@ -165,7 +164,6 @@ Collate:
     'data-frame-tidiers.R'
     'emmeans-tidiers.R'
     'ergm-tidiers.R'
-    'estimatr-tidiers.R'
     'gam-tidiers.R'
     'gamlss-tidiers.R'
     'geepack-tidiers.R'

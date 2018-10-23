@@ -26,7 +26,6 @@ in the augment method for the chi sq test, .residuals column was renamed to .res
 - Added new vignette detailing use of `modelgenerics` and `modeltests` packages
 - Added `data` argument to `augment()` generic
 - tidy.kmeans now defaults to using variable names in output columns
-- Added `tidy` methods for `estimatr` objects
 
 ## Deprecations
 
