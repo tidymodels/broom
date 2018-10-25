@@ -31,7 +31,7 @@ tidy.mediate <- function(x, conf.int = FALSE, conf.level = .95, ...){
   sims <- s$sims
   ci <- NULL
   co <- with(s, 
-             cbind( c("acme_0", "acme_1", "ade_0", "ade_1"), 
+            tibble( c("acme_0", "acme_1", "ade_0", "ade_1"), 
                     c(d0, d1, z0, z1),
                     c(sd(d0.sims), sd(d1.sims) , sd(z0.sims), sd(z1.sims)),
                     c(d0.p, d1.p, z0.p, z1.p)))
