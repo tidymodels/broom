@@ -40,7 +40,6 @@ tidy.mediate <- function(x, conf.int = FALSE, conf.level = .95, ...){
   if(conf.int){
     low <- (1 - conf.level)/2
     high <- 1 - low
-    if(s$boot.ci.type == "bca"){
       BC.CI <- function(theta){
         z.inv <- length(theta[theta < mean(theta)])/sims
         z <- qnorm(z.inv)
@@ -56,7 +55,7 @@ tidy.mediate <- function(x, conf.int = FALSE, conf.level = .95, ...){
       }
       ci <- with(x,
                  sapply(list(d0.sims, d1.sims, z0.sims, z1.sims), function(x)  apply(x, 1, BC.CI)))
-    } else {
+      if(s$boot.ci.type != "bca"){
       CI <- function(theta){
         return(quantile(theta, c(low, high), na.rm = TRUE))
       }
