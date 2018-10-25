@@ -122,6 +122,7 @@ Suggests:
     poLCA,
     psych,
     quantreg,
+    rem,
     rgeos,
     rmarkdown,
     robust,
