@@ -102,11 +102,11 @@ tidy.merMod <- function(x, effects = c("ran_pars", "fixed"),
 
     if (conf.int) {
       cifix <- confint(x, parm = "beta_", method = conf.method, ...)
-      ret <- data.frame(ret, cifix)
+      ret <- data.frame(ret, cifix, stringsAsFactors = FALSE)
       nn <- c(nn, "conf.low", "conf.high")
     }
     if ("ran_pars" %in% effects || "ran_modes" %in% effects) {
-      ret <- data.frame(ret, group = "fixed")
+      ret <- data.frame(ret, group = "fixed", stringsAsFactors = FALSE)
       nn <- c(nn, "group")
     }
     ret_list$fixed <-
@@ -121,7 +121,7 @@ tidy.merMod <- function(x, effects = c("ran_pars", "fixed"),
     if (!rscale %in% c("sdcor", "vcov")) {
       stop(sprintf("unrecognized ran_pars scale %s", sQuote(rscale)))
     }
-    ret <- as.data.frame(nlme::VarCorr(x))
+    ret <- as.data.frame(nlme::VarCorr(x), stringsAsFactors = FALSE)
     ret[] <- lapply(ret, function(x) if (is.factor(x)) {
         as.character(x)
       } else {
@@ -155,7 +155,7 @@ tidy.merMod <- function(x, effects = c("ran_pars", "fixed"),
 
     if (conf.int) {
       ciran <- confint(x, parm = "theta_", method = conf.method, ...)
-      ret <- data.frame(ret, ciran)
+      ret <- data.frame(ret, ciran, stringsAsFactors = FALSE)
       nn <- c(nn, "conf.low", "conf.high")
     }
 
@@ -173,7 +173,7 @@ tidy.merMod <- function(x, effects = c("ran_pars", "fixed"),
     getSE <- function(x) {
       v <- attr(x, "postVar")
       setNames(
-        as.data.frame(sqrt(t(apply(v, 3, diag)))),
+        as.data.frame(sqrt(t(apply(v, 3, diag))), stringsAsFactors = FALSE),
         colnames(x)
       )
     }
@@ -188,9 +188,10 @@ tidy.merMod <- function(x, effects = c("ran_pars", "fixed"),
       newg.se$level <- rownames(re)
       newg.se$type <- "std.error"
 
-      data.frame(rbind(newg, newg.se),
+      data.frame(rbind(newg, newg.se, stringsAsFactors = FALSE),
         .id = .id,
-        check.names = FALSE
+        check.names = FALSE,
+        stringsAsFactors = FALSE
       )
       ## prevent coercion of variable names
     }
@@ -268,7 +269,7 @@ augment.merMod <- function(x, data = stats::model.frame(x), newdata, ...) {
   respCols <- c("mu", "offset", "sqrtXwt", "sqrtrwt", "weights", "wtres", "gam", "eta")
   cols <- lapply(respCols, function(n) x@resp[[n]])
   names(cols) <- paste0(".", respCols)
-  cols <- as.data.frame(compact(cols)) # remove missing fields
+  cols <- as.data.frame(compact(cols), stringsAsFactors = FALSE) # remove missing fields
 
   cols <- insert_NAs(cols, ret)
   if (length(cols) > 0) {
@@ -301,6 +302,6 @@ glance.merMod <- function(x, ...) {
   } else {
     get("sigma", asNamespace("lme4"))
   }
-  ret <- unrowname(data.frame(sigma = sigma(x)))
+  ret <- unrowname(data.frame(sigma = sigma(x), stringsAsFactors = FALSE))
   finish_glance(ret, x)
 }
