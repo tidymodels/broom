@@ -28,7 +28,7 @@ Useful links:
 
 Authors:
 \itemize{
-  \item Alex Hayes \email{alexpghayes@gmail.com}
+  \item Alex Hayes \email{alexpghayes@gmail.com} (0000-0002-4985-5160)
 }
 
 Other contributors:
@@ -60,8 +60,12 @@ Other contributors:
   \item Jorge Cimentada \email{cimentadaj@gmail.com} [contributor]
   \item Erle Holgersen \email{erle.holgersen@gmail.com} [contributor]
   \item Karl Dunkle Werner [contributor]
+  \item Ethan Christensen \email{christensen.ej@gmail.com} [contributor]
   \item Steven Pav \email{shabbychef@gmail.com} [contributor]
+  \item Paul PJ \email{pjpaul.stephens@gmail.com} [contributor]
+  \item Ben Schneider \email{benjamin.julius.schneider@gmail.com} [contributor]
   \item Patrick Kennedy \email{pkqstr@protonmail.com} [contributor]
+  \item Brian Fannin \email{captain@pirategrunt.com} [contributor]
 }
 
 }

@@ -26,18 +26,18 @@
 #' @keywords internal
 "_PACKAGE"
 
-#' @importFrom modelgenerics augment
+#' @importFrom generics augment
 #' @export
 #' @seealso [augment.lm()]
-modelgenerics::augment
+generics::augment
 
-#' @importFrom modelgenerics tidy
+#' @importFrom generics tidy
 #' @export
 #' @seealso [tidy.lm()]
-modelgenerics::tidy
+generics::tidy
 
-#' @importFrom modelgenerics glance
+#' @importFrom generics glance
 #' @export
 #' @seealso [glance.lm()]
-modelgenerics::glance
+generics::glance
 

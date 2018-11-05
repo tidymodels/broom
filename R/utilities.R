@@ -28,7 +28,7 @@ as_broom_tibble <- function(data) {
   tryCatch(
     df <- as_tibble(data),
     error = function(cnd)
-      stop("Provided data must be coercible to `tibble`.", call. = FALSE)
+      stop("Could not coerce data to `tibble`. Try explicitly passing a dataset to either the `data` or `newdata` argument.", call. = FALSE)
   )
   
   if (has_rownames(data))

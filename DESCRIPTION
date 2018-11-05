@@ -4,7 +4,7 @@ Title: Convert Statistical Objects into Tidy Tibbles
 Version: 0.5.0.9001
 Authors@R: c(
     person("David", "Robinson", email = "admiral.david@gmail.com", role = c("aut", "cre")),
-    person("Alex", "Hayes", email = "alexpghayes@gmail.com", role = "aut"),
+    person("Alex", "Hayes", email = "alexpghayes@gmail.com", role = "aut", comment = c(ORCID = "0000-0002-4985-5160")),
     person("Matthieu", "Gomez", email = "mattg@princeton.edu", role = "ctb"),
     person("Boris", "Demeshev", email = "boris.demeshev@gmail.com", role = "ctb"),
     person("Dieter", "Menne", email = "dieter.menne@menne-biomed.de", role = "ctb"),
@@ -36,7 +36,8 @@ Authors@R: c(
     person("Steven", "Pav", email = "shabbychef@gmail.com", role = "ctb"),
     person("Paul", "PJ", email = "pjpaul.stephens@gmail.com", role = "ctb"),
     person("Ben", "Schneider", email = "benjamin.julius.schneider@gmail.com", role = "ctb"),
-    person("Patrick", "Kennedy", email = "pkqstr@protonmail.com", role = "ctb"))
+    person("Patrick", "Kennedy", email = "pkqstr@protonmail.com", role = "ctb"),
+    person("Brian", "Fannin", email = "captain@pirategrunt.com", role = "ctb"))
 Maintainer: David Robinson <admiral.david@gmail.com>
 Description: Summarizes key information about statistical objects in tidy
     tibbles. This makes it easy to report results, create plots and consistently
@@ -61,7 +62,7 @@ Imports:
     stringr,
     tibble,
     tidyr,
-    modelgenerics,
+    generics,
     glue,
     rlang
 Suggests:
@@ -108,6 +109,7 @@ Suggests:
     MASS,
     Matrix,
     mclust,
+    mediation,
     mgcv,
     muhaz,
     multcomp,
@@ -139,9 +141,9 @@ Suggests:
 VignetteBuilder: knitr
 LazyData: true
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 6.1.0
+RoxygenNote: 6.1.0.9000
 Remotes: 
-    topepo/modelgenerics,
+    r-lib/generics,
     alexpghayes/modeltests
 Collate: 
     'aaa-documentation-helper.R'
@@ -159,6 +161,7 @@ Collate:
     'btergm-tidiers.R'
     'car-tidiers.R'
     'caret-tidiers.R'
+    'data-frame-tidiers.R'
     'emmeans-tidiers.R'
     'ergm-tidiers.R'
     'gam-tidiers.R'
@@ -189,6 +192,7 @@ Collate:
     'mass-rlm-tidiers.R'
     'mclust-tidiers.R'
     'mcmc-tidiers.R'
+    'mediate-tidiers.R'
     'mgcv-tidiers.R'
     'muhaz-tidiers.R'
     'multcomp-tidiers.R'
