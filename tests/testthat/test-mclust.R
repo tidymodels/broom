@@ -6,11 +6,13 @@ library(modeltests)
 skip_if_not_installed("mclust")
 library(mclust)
 dat <- iris[, 1:4]
-dat3 <- iris[, 1]
+dat3 <- iris[, 1, drop=FALSE]
+dat4 <- iris[, 1]
 
 fit <- Mclust(dat, G = 7, modelNames = "EII", verbose = FALSE)
 fit2 <- Mclust(dat, G = 1, verbose = FALSE)
 fit3 <- Mclust(dat3, G = 2, verbose = FALSE)
+fit4 <- Mclust(dat4, G = 2, verbose = FALSE)
 
 test_that("mclust tidier arguments", {
   check_arguments(tidy.Mclust)
@@ -22,22 +24,26 @@ test_that("tidy.Mclust", {
   td <- tidy(fit)
   td2 <- tidy(fit2)
   td3 <- tidy(fit3)
+  td4 <- tidy(fit4)
   
   check_tidy_output(td, strict = FALSE)
   check_tidy_output(td2, strict = FALSE)
   check_tidy_output(td3, strict = FALSE)
+  check_tidy_output(td4, strict = FALSE)
   
   check_dims(td, 7, 8)
   check_dims(td2, 1, 7)
   check_dims(td3, 2, 5)
+  check_dims(td4, 2, 5)
 })
 
 test_that("glance.Mclust", {
   gl <- glance(fit)
   gl2 <- glance(fit2)
   gl3 <- glance(fit3)
+  gl4 <- glance(fit4)
   
-  check_glance_outputs(gl, gl2, gl3)
+  check_glance_outputs(gl, gl2, gl3, gl4)
 })
 
 test_that("augment.Mclust", {
@@ -61,5 +67,12 @@ test_that("augment.Mclust", {
     model = fit3,
     data = dat3,
     newdata = dat3
+  )
+  
+  check_augment_function(
+    aug = augment.Mclust,
+    model = fit4,
+    data = dat4,
+    newdata = dat4
   )
 })
