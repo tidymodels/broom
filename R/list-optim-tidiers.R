@@ -21,9 +21,12 @@ tidy_optim <- function(x, ...) {
   if (is.null(names(x$par))) {
     names(x$par) <- paste0("parameter", seq_along(x$par))
   }
-  tibble(parameter = names(x$par), value = unname(x$par))
+  ret <- tibble(parameter = names(x$par), value = unname(x$par))
+  if ("hessian" %in% names(x)) {
+    ret$std.error <- sqrt(diag(solve(x$hessian)))
+  }
+  ret
 }
-
 
 #' @templateVar class optim
 #' @template title_desc_tidy_list
