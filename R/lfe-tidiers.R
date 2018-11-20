@@ -148,7 +148,7 @@ augment.felm <- function(x, data = model.frame(x), ...) {
   
   if(has_multi_response) {
     stop(
-      "Glance does not support linear models with multiple responses.",
+      "Augment does not support linear models with multiple responses.",
       call. = FALSE
     )  
   } 
