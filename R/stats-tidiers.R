@@ -16,7 +16,7 @@
 #' @seealso [tidy()], [stats::ftable()]
 #' @family stats tidiers
 tidy.ftable <- function(x, ...) {
-  as_tibble(x)
+  as_tibble(as.table(x))
 }
 
 #' @templateVar class density
