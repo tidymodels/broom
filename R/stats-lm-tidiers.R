@@ -73,7 +73,8 @@ tidy.lm <- function(x, conf.int = FALSE, conf.level = .95,
   if (quick) {
     co <- stats::coef(x)
     if (inherits(x,'mlm')) {
-      ret <- data.frame(response = colnames(co), term = rownames(co), 
+      ret <- data.frame(response = rep(colnames(co), each = nrow(co)),
+                        term = rep(rownames(co), times = ncol(co)),
                         estimate = as.numeric(co), stringsAsFactors = FALSE)
     } else {
       ret <- data.frame(term = names(co), estimate = unname(co),
