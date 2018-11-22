@@ -23,46 +23,18 @@
 #' @aliases broom broom-package
 NULL
 
-#' @templateVar class statistical
-#' @template title_desc_augment
-#' 
-#' @details The second argument is almost always `data`, which specifies the
-#'   original data object. This is not part of the S3
-#'   signature, partly because it prevents [rowwise_df_tidiers] from
-#'   taking a column name as the first argument. The tidiers are currently
-#'   deprecated and will soon be removed from broom, at which point 
-#'   `data` will become part of the augment signature.
-#'   
-#'   **Historical note**: This generic originated in the ggplot2 package,
-#'   where it was called `fortify`.
-#'
+#' @importFrom generics augment
+#' @export
 #' @seealso [augment.lm()]
-#' @param x Model object or other R object with information to append to
-#'   observations.
-#' @param ... Addition arguments to augment method.
-#' @return A [tibble::tibble()] with information about data points.
+generics::augment
+
+#' @importFrom generics tidy
 #' @export
-augment <- function(x, ...) UseMethod("augment")
+#' @seealso [tidy.lm()]
+generics::tidy
 
-#' Turn a model object into a tidy tibble
-#'
-#' @param x An object to be converted into a tidy [tibble::tibble()].
-#' @param ... Additional arguments to tidying method.
-#' @return A [tibble::tibble()] with information about model components.
-#'
+#' @importFrom generics glance
 #' @export
-tidy <- function(x, ...) UseMethod("tidy")
-
-#' Construct a single row summary "glance" of a model, fit, or other
-#' object
-#'
-#' glance methods always return either a one-row data frame (except on NULL, which
-#' returns an empty data frame)
-#'
-#' @param x model or other R object to convert to single-row data frame
-#' @param ... other arguments passed to methods
-#' @export
-glance <- function(x, ...) UseMethod("glance")
-
-
+#' @seealso [glance.lm()]
+generics::glance
 
