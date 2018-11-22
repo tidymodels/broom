@@ -66,6 +66,7 @@ Other contributors:
   \item Ben Schneider \email{benjamin.julius.schneider@gmail.com} [contributor]
   \item Patrick Kennedy \email{pkqstr@protonmail.com} [contributor]
   \item Brian Fannin \email{captain@pirategrunt.com} [contributor]
+  \item Jason Muhlenkamp \email{jason.muhlenkamp@gmail.com} [contributor]
 }
 
 }
