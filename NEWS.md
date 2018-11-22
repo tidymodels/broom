@@ -1,5 +1,8 @@
-# broom 0.4.5.9000
-To be released as 0.5.0
+# broom 0.5.1
+
+- `tidy()`, `glance()` and `augment()` are now re-exported from the [generics](https://github.com/r-lib/generics) package.
+
+# broom 0.5.0
 
 Tidiers now return `tibble::tibble()`s. This release also includes several new tidiers, new vignettes and a large number of bugfixes. We've also begun to more rigorously define tidier specifications: we've laid part of the groundwork for stricter and more consistent tidying, but the new tidier specifications are not yet complete. These will appear in the next release.
 
