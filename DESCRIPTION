@@ -141,7 +141,7 @@ Suggests:
 VignetteBuilder: knitr
 LazyData: true
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 6.1.0.9000
+RoxygenNote: 6.1.1
 Remotes: 
     r-lib/generics,
     alexpghayes/modeltests
@@ -175,6 +175,7 @@ Collate:
     'kendall-tidiers.R'
     'ks-tidiers.R'
     'lavaan-tidiers.R'
+    'leaps.R'
     'lfe-tidiers.R'
     'list-irlba.R'
     'list-optim-tidiers.R'
