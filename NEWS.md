@@ -1,4 +1,4 @@
-# broom 0.5.0.9000
+# broom 0.5.1.9000
 To be released as 0.7.0
 
 ## Changes to `augment()`
@@ -11,7 +11,7 @@ To be released as 0.7.0
 
 - augment tries gives an informative error when `data` isn't the original training data
 
-- `augment.glmRob()` has been removed from broom. We regret that we were unable to provide any warning for this change. The \pkg{robust} package does not provide the functionality necessary to implement an augment method. We are looking into supporting the \pkg{robustbase} package in the future.
+- `augment.glmRob()` has been removed from broom. We regret that we were unable to provide any warning for this change. The `robust` package does not provide the functionality necessary to implement an augment method. We are looking into supporting the `robustbase` package in the future.
 
 in the augment method for the chi sq test, .residuals column was renamed to .resid and .stdres column was renamed to .std.resid
 
@@ -19,12 +19,13 @@ in the augment method for the chi sq test, .residuals column was renamed to .res
 
 - augment
 - tidy.lsmobj gains a `conf.int` argument.
+- Add `tidy.regsubsets()` for best subsets linear regression from the `leaps` package
 - All `conf.int` arguments now default to `FALSE`.
 - All `conf.level` arguments now default to `TRUE`.
 - Moved core tests to the `modeltests` package
 - Import `tidy()`, `glance()` and `augment()` generics from `modelgenerics`
 - Added new vignette detailing use of `modelgenerics` and `modeltests` packages
-- Added `data` argument to `augment()` generic
+- Added `data` argument to `augment()` generic (did this happen?)
 - tidy.kmeans now defaults to using variable names in output columns
 
 ## Deprecations
@@ -47,7 +48,7 @@ The following have all been deprecated in favor of `broom.mixed`:
 
 ## Other changes
 
-- Bug fix for tidy.polr for incorrectly using colnames. (#498)
+- Bug fix for `tidy.polr()` for incorrectly using colnames. (#498)
 
 # broom 0.5.0
 
