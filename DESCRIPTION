@@ -4,7 +4,7 @@ Title: Convert Statistical Analysis Objects into Tidy Tibbles
 Version: 0.5.1
 Authors@R: c(
     person("David", "Robinson", email = "admiral.david@gmail.com", role = c("aut", "cre")),
-    person("Alex", "Hayes", email = "alexpghayes@gmail.com", role = "aut"),
+    person("Alex", "Hayes", email = "alexpghayes@gmail.com", role = "aut", comment = c(ORCID = "0000-0002-4985-5160")),
     person("Matthieu", "Gomez", email = "mattg@princeton.edu", role = "ctb"),
     person("Boris", "Demeshev", email = "boris.demeshev@gmail.com", role = "ctb"),
     person("Dieter", "Menne", email = "dieter.menne@menne-biomed.de", role = "ctb"),
@@ -32,7 +32,7 @@ Authors@R: c(
     person("Jorge", "Cimentada", email = "cimentadaj@gmail.com", role = "ctb"),
     person("Erle", "Holgersen", email = "erle.holgersen@gmail.com", role = "ctb"),
     person("Karl", "Dunkle Werner", role = "ctb"))
-Maintainer: David Robinson <admiral.david@gmail.com>
+Maintainer: Alex Hayes <alexpghayes@gmail.com>
 Description: Summarizes key information about statistical objects in tidy
     tibbles. This makes it easy to report results, create plots and consistently
     work with large numbers of models at once. Broom provides three verbs that 
