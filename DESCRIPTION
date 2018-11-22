@@ -137,7 +137,8 @@ Suggests:
     tseries,
     xergm,
     zoo,
-    modeltests
+    modeltests,
+    leaps
 VignetteBuilder: knitr
 LazyData: true
 Roxygen: list(markdown = TRUE)
