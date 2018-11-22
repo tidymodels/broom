@@ -12,5 +12,8 @@ test_that("tidy.regsubsets", {
   all_fits <- leaps::regsubsets(hp ~ ., mtcars)
   td <- tidy(all_fits)
   
-  check_tidy_output(td)
+  # column names are essentially those for glance,
+  # also column names from training data sneak through,
+  # so strict tests will fail
+  check_tidy_output(td, strict = FALSE)
 })
