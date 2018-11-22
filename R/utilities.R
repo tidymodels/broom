@@ -454,6 +454,7 @@ globalVariables(
     "cutoffs",
     "data",
     "df.residual",
+    "distance",
     "effect",
     "est",
     "estimate",
@@ -503,6 +504,7 @@ globalVariables(
     "Var2", 
     "variable",
     "wald.test",
+    "y",
     "z"
   )
 )

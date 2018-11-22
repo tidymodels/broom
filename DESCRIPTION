@@ -1,7 +1,7 @@
 Type: Package
 Package: broom
 Title: Convert Statistical Objects into Tidy Tibbles
-Version: 0.5.0.9001
+Version: 0.5.1.9000
 Authors@R: c(
     person("David", "Robinson", email = "admiral.david@gmail.com", role = c("aut", "cre")),
     person("Alex", "Hayes", email = "alexpghayes@gmail.com", role = "aut", comment = c(ORCID = "0000-0002-4985-5160")),
@@ -138,11 +138,12 @@ Suggests:
     tseries,
     xergm,
     zoo,
-    modeltests
+    modeltests,
+    leaps
 VignetteBuilder: knitr
 LazyData: true
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 6.1.0.9000
+RoxygenNote: 6.1.1
 Remotes: 
     r-lib/generics,
     alexpghayes/modeltests
@@ -176,6 +177,7 @@ Collate:
     'kendall-tidiers.R'
     'ks-tidiers.R'
     'lavaan-tidiers.R'
+    'leaps.R'
     'lfe-tidiers.R'
     'list-irlba.R'
     'list-optim-tidiers.R'
