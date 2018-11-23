@@ -28,6 +28,8 @@ in the augment method for the chi sq test, .residuals column was renamed to .res
 - Added `data` argument to `augment()` generic (did this happen?)
 - tidy.kmeans now defaults to using variable names in output columns
 - Bug fix for tidy.ridgelm returning inconsistent columns (#532)
+- Correct output for  `tidy.mlm(, quick=TRUE)`, add tests (#539 by @MatthieuStigler)
+
 
 ## Deprecations
 
