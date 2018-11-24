@@ -180,7 +180,11 @@ test_that("tidy.mlm works", {
   expect_equal(td2$term, rep(c("(Intercept)", "x1","x2"),2))
   expect_equal(td$response, rep_each(c("y1", "y2"), 2))
   expect_equal(td2$response, rep_each(c("y1", "y2"), 3))
-
+  expect_equal(tdq$term, rep(c("(Intercept)", "x1"),2))
+  expect_equal(tdq2$term, rep(c("(Intercept)", "x1", "x2"),2))
+  expect_equal(tdq$response, rep_each(c("y1", "y2"), 2))
+  expect_equal(tdq2$response, rep_each(c("y1", "y2"), 3))
+  
   expect_warning(
     tidy(fit2, exponentiate = TRUE),
     regexp = paste(

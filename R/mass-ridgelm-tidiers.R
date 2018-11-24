@@ -42,10 +42,10 @@ tidy.ridgelm <- function(x, ...) {
     # only one choice of lambda
     ret <- tibble(
       lambda = x$lambda,
+      GCV = unname(x$GCV),
       term = names(x$coef),
       estimate = x$coef,
-      scale = x$scales,
-      xm = x$xm
+      scale = x$scales
     )
     return(ret)
   }

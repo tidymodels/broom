@@ -47,12 +47,30 @@
 #' @seealso [tidy()], [lfe::felm()]
 tidy.felm <- function(x, conf.int = FALSE, conf.level = .95, fe = FALSE, quick = FALSE, ...) {
 
+  has_multi_response <- length(x$lhs) > 1
+  
   if(quick) {
     co <- stats::coef(x)
-    ret <- data_frame(term = names(co), estimate = unname(co))
+    if(has_multi_response) {
+      ret <- co <- stats::coef(x) %>%  
+        as_tibble(rownames = "term") %>% 
+        tidyr::gather(response, estimate, -term) %>% 
+        select(response, term, estimate) 
+    } else {
+      ret <- data_frame(term = names(co), estimate = unname(co))  
+    }
+    
   } else {
     nn <- c("estimate", "std.error", "statistic", "p.value")
-    ret <- fix_data_frame(stats::coef(summary(x)), nn)  
+    if(has_multi_response) {
+      ret <-  map_df(x$lhs, function(y) stats::coef(summary(x, lhs = y)) %>% 
+               fix_data_frame(nn) %>% 
+               mutate(response = y)) %>% 
+        select(response, everything())
+      
+    } else {
+      ret <- fix_data_frame(stats::coef(summary(x)), nn)  
+    }
   }
   
 
@@ -66,14 +84,34 @@ tidy.felm <- function(x, conf.int = FALSE, conf.level = .95, fe = FALSE, quick =
   if (fe) {
     ret <- mutate(ret, N = NA, comp = NA)
     if(quick) {
-      ret_fe <- lfe::getfe(x) %>%
-        select(effect, obs, comp) %>%
-        fix_data_frame(c("estimate",  "N", "comp")) 
+      ret_fe_prep <- lfe::getfe(x) %>% 
+        tibble::rownames_to_column(var = "term") 
+      if(has_multi_response) ret_fe_prep <-  ret_fe_prep %>% 
+          tidyr::gather(response, effect, starts_with("effect.")) %>% 
+          mutate(response = stringr::str_remove(response, "effect."))
+      
+      ret_fe <-  ret_fe_prep%>%
+        select(contains("response"), term, effect, obs, comp) %>%
+        rename(N = obs,
+               estimate = effect)
     } else {
       nn <- c("estimate", "std.error", "N", "comp")
-      ret_fe <- lfe::getfe(x, se = TRUE, bN = 100) %>%
-        select(effect, se, obs, comp) %>%
-        fix_data_frame(nn) %>%
+      ret_fe_prep <- lfe::getfe(x, se = TRUE, bN = 100) %>% 
+        tibble::rownames_to_column(var = "term") %>% 
+        select(term, contains("effect"),  contains("se"), obs, comp) %>% # effect and se are multiple if multiple y
+        rename(N=obs) 
+      
+      if(has_multi_response) {
+        ret_fe_prep <-  ret_fe_prep  %>% 
+          tidyr::gather(key = "stat_resp", value, starts_with("effect."), starts_with("se.")) %>% 
+          tidyr::separate(col = "stat_resp", c("stat", "response"), sep="\\.") %>% 
+          tidyr::spread(key = "stat", value) 
+        # nn <-  c("response", nn)
+      }
+      ret_fe <-  ret_fe_prep %>%
+        rename(estimate = effect, std.error = se) %>% 
+        select(contains("response"), everything()) %>%
+        # fix_data_frame(nn) %>%
         mutate(statistic = estimate / std.error) %>%
         mutate(p.value = 2 * (1 - stats::pt(statistic, df = N)))  
     }
@@ -106,8 +144,18 @@ tidy.felm <- function(x, conf.int = FALSE, conf.level = .95, fe = FALSE, quick =
 #' @family felm tidiers
 #' @seealso [augment()], [lfe::felm()]
 augment.felm <- function(x, data = model.frame(x), ...) {
+  has_multi_response <- length(x$lhs) > 1
+  
+  if(has_multi_response) {
+    stop(
+      "Augment does not support linear models with multiple responses.",
+      call. = FALSE
+    )  
+  } 
   df <- as_broom_tibble(data)
   mutate(df, .fitted = x$fitted.values, .resid = x$residuals)
+  
+  
 }
 
 #' @templateVar class felm
@@ -127,6 +175,15 @@ augment.felm <- function(x, data = model.frame(x), ...) {
 #'
 #' @export
 glance.felm <- function(x, ...) {
+  
+  has_multi_response <- length(x$lhs) > 1
+  
+  if(has_multi_response) {
+    stop(
+      "Glance does not support linear models with multiple responses.",
+      call. = FALSE
+    )  
+  } 
   ret <- with(
     summary(x),
     tibble(

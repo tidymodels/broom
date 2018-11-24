@@ -1,7 +1,7 @@
 Type: Package
 Package: broom
 Title: Convert Statistical Objects into Tidy Tibbles
-Version: 0.5.0.9001
+Version: 0.5.1.9000
 Authors@R: c(
     person("David", "Robinson", email = "admiral.david@gmail.com", role = c("aut", "cre")),
     person("Alex", "Hayes", email = "alexpghayes@gmail.com", role = "aut", comment = c(ORCID = "0000-0002-4985-5160")),
@@ -38,7 +38,8 @@ Authors@R: c(
     person("Ben", "Schneider", email = "benjamin.julius.schneider@gmail.com", role = "ctb"),
     person("Patrick", "Kennedy", email = "pkqstr@protonmail.com", role = "ctb"),
     person("Brian", "Fannin", email = "captain@pirategrunt.com", role = "ctb"),
-    person("Bill", "Denney", email = "wdenney@humanpredictions.com", role = c("ctb"), comment = c(ORCID = "0000-0002-5759-428X")))
+    person("Jason", "Muhlenkamp", email = "jason.muhlenkamp@gmail.com", role = "ctb"),
+    person("Bill", "Denney", email = "wdenney@humanpredictions.com", role = "ctb", comment = c(ORCID = "0000-0002-5759-428X")))
 Maintainer: David Robinson <admiral.david@gmail.com>
 Description: Summarizes key information about statistical objects in tidy
     tibbles. This makes it easy to report results, create plots and consistently
@@ -138,11 +139,12 @@ Suggests:
     tseries,
     xergm,
     zoo,
-    modeltests
+    modeltests,
+    leaps
 VignetteBuilder: knitr
 LazyData: true
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 6.1.0.9000
+RoxygenNote: 6.1.1
 Remotes: 
     r-lib/generics,
     alexpghayes/modeltests
@@ -176,6 +178,7 @@ Collate:
     'kendall-tidiers.R'
     'ks-tidiers.R'
     'lavaan-tidiers.R'
+    'leaps.R'
     'lfe-tidiers.R'
     'list-irlba.R'
     'list-optim-tidiers.R'
