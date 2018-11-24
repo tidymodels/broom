@@ -4,7 +4,7 @@
 #' @param x A list returned from [stats::optim()].
 #' @template param_unused_dots
 #'
-#' @evalRd return_tidy("parameter", "value")
+#' @evalRd return_tidy("parameter", "value", "std.error", .post="\\code{std.error} is only provided as a column if the Hessian is calculated.")
 #'
 #' @examples
 #'
