@@ -132,9 +132,8 @@ glance.lavaan <- function(x, ...) {
           "cfi"
         )
     ) %>%
-    as_tibble() %>%
-    tibble::rownames_to_column(var = "term") %>%
-    spread(., term, value) %>%
+    tibble::enframe(name = "term") %>%
+    spread(term, value) %>%
     bind_cols(
       tibble(
         converged = x@Fit@converged,

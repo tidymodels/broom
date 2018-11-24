@@ -10,6 +10,13 @@ init:
 install:
   ps: Bootstrap
 
+environment:
+  global:
+    USE_RTOOLS: true
+
+cache:
+  - C:\RLibrary
+
 # Adapt as necessary starting from here
 
 build_script:

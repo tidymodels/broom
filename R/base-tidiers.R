@@ -14,7 +14,7 @@
 #' 
 #' @examples
 #'
-#' tab <- with(airquality, table(cut(Temp, quantile(Temp)), Month))
+#' tab <- with(airquality, table(Temp = cut(Temp, quantile(Temp)), Month))
 #' tidy(tab)
 #'
 #' @seealso [as_tibble.table()]
