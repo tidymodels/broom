@@ -54,6 +54,7 @@ Other list tidiers: \code{\link{glance_optim}},
 \value{
 A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
   \item{parameter}{The parameter being modeled.}
+  \item{std.error}{The standard error of the regression term.}
   \item{value}{TODO. needs better documentation.}
-
+\code{std.error} is only provided as a column if the Hessian is calculated.
 }
