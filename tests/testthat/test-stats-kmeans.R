@@ -14,7 +14,7 @@ fit <- kmeans(x, 2)
 test_that("kmeans tidier arguments", {
   check_arguments(tidy.kmeans)
   check_arguments(glance.kmeans)
-  check_arguments(augment.kmeans, strict = FALSE)
+  check_arguments(augment.kmeans)
 })
 
 # tidy.kmeans uses the orginal column names to name columns in output.  
