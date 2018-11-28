@@ -62,4 +62,9 @@ test_that("augment.factanal works", {
     augment(fit_none),
     regexp = "Cannot augment factanal objects fit with `scores = 'none'`."
   )
+  
+  au_reg0 <- augment(fit_reg)
+  au_reg1 <- augment(fit_reg, data = mtcars)
+  check_dims(au_reg0, expected_cols = n_factors + 1)
+  check_dims(au_reg1, expected_cols = ncol(mtcars) + n_factors + 1)
 })

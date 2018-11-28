@@ -44,4 +44,7 @@ test_that("augment.kmeans", {
     newdata = x,
     strict = FALSE
   )
+  
+  au <- augment(fit, data = x)
+  check_dims(au, expected_cols = ncol(x) + 1)
 })
