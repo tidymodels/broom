@@ -298,5 +298,52 @@ process_lm <- function(ret, x, conf.int = FALSE, conf.level = .95,
 }
 
 
+#' TODO: documentation
+#' @evalRd return_tidy(regression = TRUE)
+#' 
+#' @examples 
+#' CarReg = lm(formula = speed ~., data = cars)
+#' 
+#' # Standardize coefficients
+#' library(lm.beta)
+#' CarRegS = lm.beta::lm.beta(CarReg)
+#' 
+#' # Table format
+#' tidy(CarRegS)
+#'
+#' @export
+#' @family lm tidiers
+tidy.lm.beta <- function (x, conf.int = FALSE, conf.level = 0.95, exponentiate = FALSE, 
+                          quick = FALSE, ...) {
+  if (quick) {
+    co <- stats::coef(x)
+    ret <- data.frame(term = names(co), estimate = unname(co), 
+                      stringsAsFactors = FALSE)
+    return(process_lm(ret, x, conf.int = FALSE, exponentiate = exponentiate))
+  }
+  s <- summary(x)
+  ret <- tidy.summary.lm.beta(s)
+  process_lm(ret, x, conf.int = conf.int, conf.level = conf.level, 
+             exponentiate = exponentiate)
+}
+
+#' TODO: document
+#' @rdname tidy.lm.beta
+#' @export
+tidy.summary.lm.beta <- function (x, ...) {
+  co <- stats::coef(x)
+  nn <- c("estimate", 'standardized.estimate', "std.error", "statistic", "p.value")
+  if (inherits(co, "listof")) {
+    ret <- map_df(co, fix_data_frame, nn[1:ncol(co[[1]])], 
+                  .id = "response")
+    ret$response <- stringr::str_replace(ret$response, "Response ", 
+                                         "")
+  }
+  else {
+    ret <- fix_data_frame(co, nn[1:ncol(co)])
+  }
+  as_tibble(ret)
+}
+
 
 
