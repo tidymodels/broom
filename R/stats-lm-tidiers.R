@@ -296,3 +296,6 @@ process_lm <- function(ret, x, conf.int = FALSE, conf.level = .95,
 
   as_tibble(ret)
 }
+
+
+
