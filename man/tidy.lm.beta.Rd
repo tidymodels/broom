@@ -53,17 +53,16 @@ there is an additional column \code{response}.
 
 If you have missing values in your model data, you may need to refit
 the model with \code{na.action = na.exclude}.
-
-TODO: what is this:
 }
 \examples{
 
-CarReg = stats::lm(formula = speed ~., data = cars)
+library(lm.beta)
+
+mod <- stats::lm(speed ~ ., data = cars)
 
 # standardize
-library(lm.beta)
-CarRegS = lm.beta::lm.beta(CarReg)
-tidy(CarRegS)
+mod_standardized <- lm.beta::lm.beta(mod)
+tidy(mod_standardized)
 
 ## Taken from lm/ lm.beta help
 ##
@@ -76,7 +75,6 @@ weight <- c(ctl, trt)
 lm.D9 <- stats::lm(weight ~ group)
 
 # standardize
-library(lm.beta)
 lm.D9.beta <- lm.beta::lm.beta(lm.D9)
 tidy(lm.D9.beta)
 
