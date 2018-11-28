@@ -70,7 +70,9 @@ tidy.betareg <- function(x, conf.int = FALSE, conf.level = .95, ...) {
 #' @seealso [augment()], [betareg::betareg()]
 #' @export
 augment.betareg <- function(x, data = model.frame(x), newdata = NULL,
-                            type.predict, type.residuals, ...) {
+                            type.predict = eval(formals(betareg:::predict.betareg)$type),
+                            type.residuals = eval(formals(betareg:::residuals.betareg)$type),
+                            ...) {
   augment_columns(
     x, data, newdata,
     type.predict = type.predict,

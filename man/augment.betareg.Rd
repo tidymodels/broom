@@ -5,7 +5,8 @@
 \title{Augment data with information from a(n) betareg object}
 \usage{
 \method{augment}{betareg}(x, data = model.frame(x), newdata = NULL,
-  type.predict, type.residuals, ...)
+  type.predict = eval(formals(betareg:::predict.betareg)$type),
+  type.residuals = eval(formals(betareg:::residuals.betareg)$type), ...)
 }
 \arguments{
 \item{x}{A \code{betareg} object produced by a call to \code{\link[betareg:betareg]{betareg::betareg()}}.}
