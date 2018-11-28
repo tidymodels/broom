@@ -75,7 +75,9 @@ augment.factanal <- function(x, data, ...) {
   }
 
   # Place relevant values into a tidy data frame
-  tidy_df <- data.frame(.rownames = rownames(scores), data.frame(scores)) %>%
+  tidy_df <- data.frame(.rownames = rownames(scores),
+                        data.frame(scores),
+                        stringsAsFactors = FALSE) %>%
     as_tibble()
 
   colnames(tidy_df) <- gsub("Factor", ".fs", colnames(tidy_df))
