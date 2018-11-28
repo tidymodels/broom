@@ -63,7 +63,7 @@ tidy.factanal <- function(x, ...) {
 #' @export
 #' @seealso [augment()], [stats::factanal()]
 #' @family factanal tidiers
-augment.factanal <- function(x, data, ...) {
+augment.factanal <- function(x, data = NULL, ...) {
   scores <- x$scores
 
   # Check scores were computed
