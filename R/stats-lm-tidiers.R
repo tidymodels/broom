@@ -298,8 +298,6 @@ process_lm <- function(ret, x, conf.int = FALSE, conf.level = .95,
 }
 
 
-# TODO: documentation
-
 #' @templateVar class lm.beta
 #' @template title_desc_tidy
 #' 
@@ -359,7 +357,6 @@ tidy.lm.beta <- function (x, conf.int = FALSE, conf.level = 0.95,
              exponentiate = exponentiate)
 }
 
-#' TODO: document
 #' @rdname tidy.lm.beta
 #' @export
 tidy.summary.lm.beta <- function (x, ...) {
