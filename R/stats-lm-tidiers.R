@@ -346,8 +346,8 @@ process_lm <- function(ret, x, conf.int = FALSE, conf.level = .95,
 #'
 #' @export
 #' @family lm tidiers
-tidy.lm.beta <- function (x, conf.int = FALSE, conf.level = 0.95, exponentiate = FALSE, 
-                          quick = FALSE, ...) {
+tidy.lm.beta <- function (x, conf.int = FALSE, conf.level = 0.95,
+                          exponentiate = FALSE, quick = FALSE, ...) {
   if (quick) {
     co <- stats::coef(x)
     ret <- data.frame(term = names(co), estimate = unname(co), 
@@ -365,7 +365,8 @@ tidy.lm.beta <- function (x, conf.int = FALSE, conf.level = 0.95, exponentiate =
 #' @export
 tidy.summary.lm.beta <- function (x, ...) {
   co <- stats::coef(x)
-  nn <- c("estimate", 'standardized.estimate', "std.error", "statistic", "p.value")
+  nn <- c("estimate", "standardized.estimate", "std.error", "statistic", 
+          "p.value")
   if (inherits(co, "listof")) {
     ret <- map_df(co, fix_data_frame, nn[1:ncol(co[[1]])], 
                   .id = "response")
