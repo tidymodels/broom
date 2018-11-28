@@ -26,7 +26,7 @@ test_that("tidy.lm.beta works", {
   td2 <- tidy(fit2)
   
   tdq <- tidy(fit, quick = TRUE)
-  tdq2 <- tidy(fit, quick = TRUE)
+  tdq2 <- tidy(fit2, quick = TRUE)
   
   # conf.int = TRUE works for rank deficient fits
   # should get a "NaNs produced" warning
