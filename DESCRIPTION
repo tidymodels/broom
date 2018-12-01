@@ -134,7 +134,7 @@ Depends:
 Imports:
     backports,
     dplyr,
-    generics,
+    generics (>= 0.0.2),
     methods,
     nlme,
     purrr,
