@@ -17,4 +17,4 @@ Additionally, Alex Hayes will take over maintaining the package from David Robin
 
 ## R CMD check results
 
-There was 1 NOTE about a URL not in CRAN canonical form. This is because the Github page provides much more information about the project than the CRAN page.
+There was 1 NOTE due to a change in maintainership.
