@@ -61,7 +61,7 @@ tidy.lm.beta <- function (x, conf.int = FALSE, conf.level = 0.95,
 #' @export
 tidy.summary.lm.beta <- function (x, ...) {
   co <- stats::coef(x)
-  nn <- c("estimate", "standardized.estimate", "std.error", "statistic", 
+  nn <- c("estimate", "std_estimate", "std.error", "statistic", 
           "p.value")
   if (inherits(co, "listof")) {
     ret <- map_df(co, fix_data_frame, nn[1:ncol(co[[1]])], 
