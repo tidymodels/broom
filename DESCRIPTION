@@ -187,7 +187,7 @@ Collate:
     'list-svd-tidiers.R'
     'list-tidiers.R'
     'list-xyz-tidiers.R'
-    'lmbeta-lm-beta-tidiers.R'
+    'lm-beta-tidiers.R'
     'lme4-tidiers.R'
     'lmodel2-tidiers.R'
     'lmtest-tidiers.R'
