@@ -141,7 +141,8 @@ Suggests:
     xergm,
     zoo,
     modeltests,
-    leaps
+    leaps,
+    lm.beta
 VignetteBuilder: knitr
 LazyData: true
 Roxygen: list(markdown = TRUE)
