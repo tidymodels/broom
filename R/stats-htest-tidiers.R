@@ -67,6 +67,7 @@ tidy.htest <- function(x, ...) {
         "Multiple parameters; naming those columns ",
         paste(make.names(names(x$parameter)), collapse = ", ")
       )
+      names(x$parameter) <- make.names(names(x$parameter))
       ret <- append(ret, x$parameter, after = 1)
     }
   }
