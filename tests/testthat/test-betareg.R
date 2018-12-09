@@ -50,4 +50,12 @@ test_that("augment.betareg", {
     data = GasolineYield,
     newdata = GasolineYield
   )
+  
+  # Ensure augment.betareg() formals align exactly with betareg()
+  betareg_predict <- eval(formals(betareg:::predict.betareg)$type)
+  betareg_residuals <- eval(formals(betareg:::residuals.betareg)$type)
+  broom_predict <- eval(formals(broom:::augment.betareg)$type.predict)
+  broom_residuals <- eval(formals(broom:::augment.betareg)$type.residuals)
+  expect_identical(betareg_predict, broom_predict)
+  expect_identical(betareg_residuals, broom_residuals)
 })
