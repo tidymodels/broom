@@ -46,6 +46,7 @@ This method wraps \code{\link[=tidy.lm]{tidy.lm()}}.
 
 Other lm tidiers: \code{\link{augment.glm}},
   \code{\link{augment.lm}}, \code{\link{glance.glm}},
-  \code{\link{glance.lm}}, \code{\link{tidy.lm}}
+  \code{\link{glance.lm}}, \code{\link{tidy.lm.beta}},
+  \code{\link{tidy.lm}}
 }
 \concept{lm tidiers}

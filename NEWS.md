@@ -34,6 +34,7 @@ in the augment method for the chi sq test, .residuals column was renamed to .res
 - Added default arugments for data to augment.factanal and augment.kmeans (#543)
 - Added default arugments for type.predict and type.residuals to augment.betareg (#543)
 - Removed coercion warning for augment.factanal (#543)
+- Added method `tidy.lm.beta()` to tidy `lm.beta` class models (#545 by @mattle24)
 
 ## Deprecations
 
