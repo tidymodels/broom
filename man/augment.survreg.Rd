@@ -92,11 +92,12 @@ sr <- survreg(
   dist = "exponential"
 )
 
-td <- tidy(sr)
+tidy(sr)
 augment(sr, ovarian)
 glance(sr)
 
 # coefficient plot
+td <- tidy(sr, conf.int = TRUE)
 library(ggplot2)
 ggplot(td, aes(estimate, term)) + 
   geom_point() +
@@ -126,8 +127,8 @@ Other survival tidiers: \code{\link{augment.coxph}},
 \concept{survreg tidiers}
 \value{
 A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
-  \item{.fitted}{Fitted or predicted value.}
-  \item{.resid}{The difference between fitted and observed values.}
-  \item{.se.fit}{Standard errors of fitted values.}
+  \item{.fitted}{Fitted / predicted value.}
+  \item{.resid}{Residuals of fitted values. TODO -- document when present. Residuals on which data set?}
+  \item{.se.fit}{Standard errors of fitted values. TODO -- prediction or mean interval?}
 
 }
