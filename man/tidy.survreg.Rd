@@ -8,7 +8,7 @@
 \method{tidy}{survreg}(x, conf.level = 0.95, conf.int = FALSE, ...)
 }
 \arguments{
-\item{x}{An \code{survreg} object returned from \code{\link[survival:survreg]{survival::survreg()}}.}
+\item{x}{A \code{survreg} object returned from \code{\link[survival:survreg]{survival::survreg()}}.}
 
 \item{conf.level}{The confidence level to use for the confidence interval if conf.int = TRUE. Must be strictly greater than 0 and less than 1. Defaults to 0.95, which corresponds to a 95 percent confidence interval.}
 
