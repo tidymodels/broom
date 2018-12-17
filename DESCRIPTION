@@ -40,6 +40,7 @@ Authors@R: c(
     person("Patrick", "Kennedy", email = "pkqstr@protonmail.com", role = "ctb"),
     person("Brian", "Fannin", email = "captain@pirategrunt.com", role = "ctb"),
     person("Jason", "Muhlenkamp", email = "jason.muhlenkamp@gmail.com", role = "ctb"),
+    person("Matt", "Lehman", role = "ctb"),
     person("Bill", "Denney", email = "wdenney@humanpredictions.com", role = "ctb", comment = c(ORCID = "0000-0002-5759-428X")))
 Maintainer: David Robinson <admiral.david@gmail.com>
 Description: Summarizes key information about statistical objects in tidy
@@ -141,7 +142,8 @@ Suggests:
     xergm,
     zoo,
     modeltests,
-    leaps
+    leaps,
+    lm.beta
 VignetteBuilder: knitr
 LazyData: true
 Roxygen: list(markdown = TRUE)
@@ -186,6 +188,7 @@ Collate:
     'list-svd-tidiers.R'
     'list-tidiers.R'
     'list-xyz-tidiers.R'
+    'lm-beta-tidiers.R'
     'lme4-tidiers.R'
     'lmodel2-tidiers.R'
     'lmtest-tidiers.R'

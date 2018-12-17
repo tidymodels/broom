@@ -14,7 +14,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-# broom  <img src="man/figures/logo.png" align="right" width="100" height="100" />
+# broom  <img src="man/figures/logo.png" align="right" width="100" />
 
 [![CRAN status](https://www.r-pkg.org/badges/version/broom)](https://cran.r-project.org/package=broom)
 [![Travis-CI Build Status](https://travis-ci.org/tidymodels/broom.svg?branch=master)](https://travis-ci.org/tidymodels/broom)

@@ -67,6 +67,7 @@ Other contributors:
   \item Patrick Kennedy \email{pkqstr@protonmail.com} [contributor]
   \item Brian Fannin \email{captain@pirategrunt.com} [contributor]
   \item Jason Muhlenkamp \email{jason.muhlenkamp@gmail.com} [contributor]
+  \item Matt Lehman [contributor]
   \item Bill Denney \email{wdenney@humanpredictions.com} (0000-0002-5759-428X) [contributor]
 }
 
