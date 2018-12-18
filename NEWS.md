@@ -17,7 +17,6 @@ in the augment method for the chi sq test, .residuals column was renamed to .res
 
 ## Other changes
 
-- augment
 - tidy.lsmobj gains a `conf.int` argument.
 - Add `tidy.regsubsets()` for best subsets linear regression from the `leaps` package
 - All `conf.int` arguments now default to `FALSE`.
@@ -30,6 +29,7 @@ in the augment method for the chi sq test, .residuals column was renamed to .res
 - Bug fix for tidy.ridgelm returning inconsistent columns (#532)
 - Correct output for  `tidy.mlm(, quick=TRUE)`, add tests (#539 by @MatthieuStigler)
 - `tidy_optim()` provides the standard error if the Hessian is present. (#529 by @billdenney)
+- `tidy.htest()` column names are now run through `make.names()` to ensure syntactic correctness (#549 by @karissawhiting) 
 - Added method `tidy.lm.beta()` to tidy `lm.beta` class models (#545 by @mattle24)
 
 
