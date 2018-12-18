@@ -20,7 +20,7 @@ test_that("tidy.htest/oneway.test", {
   
   check_tidy_output(td, strict = FALSE)
   expect_false("num df" %in% colnames(td))
-  expect_true(!("denom df" %in% colnames(td)))
+  expect_false("denom df" %in% colnames(td))
   check_dims(td, expected_cols = 5)
   check_glance_outputs(gl, strict = FALSE)
 })
