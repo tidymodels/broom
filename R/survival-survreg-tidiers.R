@@ -2,7 +2,6 @@
 #' @template title_desc_tidy
 #'
 #' @param x An `survreg` object returned from [survival::survreg()].
-#' @template param_conflevel
 #' @template param_confint
 #' @template param_unused_dots
 #' 
