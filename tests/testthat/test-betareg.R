@@ -51,7 +51,10 @@ test_that("augment.betareg", {
     newdata = GasolineYield
   )
   
-  # Ensure augment.betareg() formals align exactly with betareg()
+  ## Ensure augment.betareg() formals align exactly with betareg()
+  ## This test will fail if the betareg options for predict or residuals
+  ## change.  At which point, we should also update the options for
+  ## augment.betareg() accordingly.
   betareg_predict <- eval(formals(betareg:::predict.betareg)$type)
   betareg_residuals <- eval(formals(betareg:::residuals.betareg)$type)
   broom_predict <- eval(formals(broom:::augment.betareg)$type.predict)
