@@ -11,8 +11,8 @@
 #'   - `"v"`, `"rotation"`, or `"variables"`: returns information about the
 #'     map from principle components space back into the original space.
 #'   
-#'   - `"d"` or `"pcs"`: returns information about the eigenvalues
-#'     will return information about
+#'   - `"d"` or `"pcs"`: returns information about the eigenvalues.
+#'        
 #' @template param_unused_dots
 #'
 #' @return A [tibble::tibble] with columns depending on the component of 

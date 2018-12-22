@@ -124,10 +124,13 @@ process_clm <- function(ret, x, conf.int = FALSE, conf.level = .95,
   }
 
   ret$estimate <- trans(ret$estimate)
-  ret$coefficient_type <- ""
-  ret[ret$term %in% names(x$alpha), "coefficient_type"] <- "alpha"
-  ret[ret$term %in% names(x$beta), "coefficient_type"] <- "beta"
-  ret[ret$term %in% names(x$zeta), "coefficient_type"] <- "zeta"
+  ## make sure original order hasn't changed
+  if (!identical(ret$term,c(names(x$alpha),names(x$beta),names(x$zeta)))) {
+      stop("row order changed; please contact maintainers")
+  }
+  ret$coefficient_type <- rep(c("alpha","beta","zeta"),
+                              vapply(x[c("alpha","beta","zeta")],
+                                     length, numeric(1)))
   as_tibble(ret)
 }
 
