@@ -30,9 +30,9 @@ in the augment method for the chi sq test, .residuals column was renamed to .res
 - Bug fix for tidy.ridgelm returning inconsistent columns (#532)
 - Correct output for  `tidy.mlm(, quick=TRUE)`, add tests (#539 by @MatthieuStigler)
 - `tidy_optim()` provides the standard error if the Hessian is present. (#529 by @billdenney)
-- Added default arugments for newdata to augment.prcomp and augment.rqs (#543)
-- Added default arugments for data to augment.factanal and augment.kmeans (#543)
-- Added default arugments for type.predict and type.residuals to augment.betareg (#543)
+- Added default arugment of newdata=NULL to augment.prcomp and augment.rqs (#543)
+- Added default arugment of data=NULL to augment.factanal and augment.kmeans (#543)
+- Added default arugments for type.predict and type.residuals to augment.betareg that correspond to default arguments for betareg (#543)
 - Removed coercion warning for augment.factanal (#543)
 
 ## Deprecations
