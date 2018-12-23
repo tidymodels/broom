@@ -2,7 +2,7 @@
 #' @template title_desc_tidy
 #'
 #' @param x An `survreg` object returned from [survival::survreg()].
-#' @param conf.level confidence level for CI
+#' @template param_confint
 #' @template param_unused_dots
 #' 
 #' @evalRd return_tidy(regression = TRUE)
@@ -17,11 +17,12 @@
 #'   dist = "exponential"
 #' )
 #'
-#' td <- tidy(sr)
+#' tidy(sr)
 #' augment(sr, ovarian)
 #' glance(sr)
 #'
 #' # coefficient plot
+#' td <- tidy(sr, conf.int = TRUE)
 #' library(ggplot2)
 #' ggplot(td, aes(estimate, term)) + 
 #'   geom_point() +
@@ -34,17 +35,20 @@
 #' @family survreg tidiers
 #' @family survival tidiers
 #' 
-tidy.survreg <- function(x, conf.level = .95, ...) {
+tidy.survreg <- function(x, conf.level = .95, conf.int = FALSE, ...) {
   s <- summary(x)
   nn <- c("estimate", "std.error", "statistic", "p.value")
   ret <- fix_data_frame(s$table, newnames = nn)
-  ret
   
-  # add confidence interval
-  ci <- stats::confint(x, level = conf.level)
-  colnames(ci) <- c("conf.low", "conf.high")
-  ci <- fix_data_frame(ci)
-  as_tibble(merge(ret, ci, all.x = TRUE, sort = FALSE))
+  if(conf.int){
+    # add confidence interval
+    ci <- stats::confint(x, level = conf.level)
+    colnames(ci) <- c("conf.low", "conf.high")
+    ci <- fix_data_frame(ci)
+    ret <- as_tibble(merge(ret, ci, all.x = TRUE, sort = FALSE))
+  }
+  
+  ret
 }
 
 

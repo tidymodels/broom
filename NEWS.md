@@ -18,6 +18,7 @@ in the augment method for the chi sq test, .residuals column was renamed to .res
 ## Other changes
 
 - tidy.lsmobj gains a `conf.int` argument.
+- tidy.survreg gains a `conf.int` argument which is set to FALSE by default. Note that previously this function always included confidence intervals in its output.
 - Add `tidy.regsubsets()` for best subsets linear regression from the `leaps` package
 - All `conf.int` arguments now default to `FALSE`.
 - All `conf.level` arguments now default to `TRUE`.

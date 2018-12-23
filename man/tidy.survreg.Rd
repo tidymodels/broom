@@ -5,12 +5,14 @@
 \alias{survreg_tidiers}
 \title{Tidy a(n) survreg object}
 \usage{
-\method{tidy}{survreg}(x, conf.level = 0.95, ...)
+\method{tidy}{survreg}(x, conf.level = 0.95, conf.int = FALSE, ...)
 }
 \arguments{
-\item{x}{An \code{survreg} object returned from \code{\link[survival:survreg]{survival::survreg()}}.}
+\item{x}{A \code{survreg} object returned from \code{\link[survival:survreg]{survival::survreg()}}.}
 
-\item{conf.level}{confidence level for CI}
+\item{conf.level}{The confidence level to use for the confidence interval if conf.int = TRUE. Must be strictly greater than 0 and less than 1. Defaults to 0.95, which corresponds to a 95 percent confidence interval.}
+
+\item{conf.int}{Logical indicating whether or not to include a confidence interval in the tidied output. Defaults to FALSE.}
 
 \item{...}{Additional arguments. Not used. Needed to match generic
 signature only. \strong{Cautionary note:} Misspelled arguments will be
@@ -40,11 +42,12 @@ sr <- survreg(
   dist = "exponential"
 )
 
-td <- tidy(sr)
+tidy(sr)
 augment(sr, ovarian)
 glance(sr)
 
 # coefficient plot
+td <- tidy(sr, conf.int = TRUE)
 library(ggplot2)
 ggplot(td, aes(estimate, term)) + 
   geom_point() +
@@ -74,8 +77,8 @@ Other survival tidiers: \code{\link{augment.coxph}},
 \concept{survreg tidiers}
 \value{
 A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
-  \item{conf.high}{Upper bound on the confidence interval for the estimate.}
-  \item{conf.low}{Lower bound on the confidence interval for the estimate.}
+  \item{conf.high}{The upper end of a confidence interval for the term under consideration. Included only if `conf.int = TRUE`.}
+  \item{conf.low}{The lower end of a confidence interval for the term under consideration. Included only if `conf.int = TRUE`.}
   \item{estimate}{The estimated value of the regression term.}
   \item{p.value}{The two-sided p-value associated with the observed statistic.}
   \item{statistic}{The value of a T-statistic to use in a hypothesis that the regression term is non-zero.}

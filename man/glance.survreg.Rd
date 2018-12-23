@@ -44,11 +44,12 @@ sr <- survreg(
   dist = "exponential"
 )
 
-td <- tidy(sr)
+tidy(sr)
 augment(sr, ovarian)
 glance(sr)
 
 # coefficient plot
+td <- tidy(sr, conf.int = TRUE)
 library(ggplot2)
 ggplot(td, aes(estimate, term)) + 
   geom_point() +
@@ -81,10 +82,10 @@ A \code{\link[tibble:tibble]{tibble::tibble()}} with exactly one row and columns
   \item{AIC}{Akaike's Information Criterion for the model.}
   \item{BIC}{Bayesian Information Criterion for the model.}
   \item{df}{Degrees of freedom used by the model.}
-  \item{df.residual}{Residual degrees of freedom.}
+  \item{df.residual}{Residual degrees of freedom for the model.}
   \item{iter}{Iterations of algorithm/fitting procedure completed.}
   \item{logLik}{The log-likelihood of the model. [stats::logLik()] may be a useful reference.}
-  \item{p.value}{P-value corresponding to the test statistic.}
+  \item{p.value}{Needs custom info.}
   \item{statistic}{Chi-squared statistic.}
 
 }
