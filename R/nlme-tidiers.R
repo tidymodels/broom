@@ -59,7 +59,7 @@
 #' @export
 tidy.lme <- function(x, effects = "random", ...) {
   .Deprecated()
-  effects <- match.arg(effects, c("random", "fixed"))
+  effects <- rlang::arg_match(effects, c("random", "fixed"))
   if (effects == "fixed") {
     # return tidied fixed effects rather than random
     ret <- summary(x)$tTable

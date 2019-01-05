@@ -83,7 +83,7 @@ tidy.stanreg <- function(x,
                          ...) {
   .Deprecated()
   parameters <-
-    match.arg(parameters,
+    rlang::arg_match(parameters,
       several.ok = TRUE,
       choices = c(
         "non-varying", "varying",
