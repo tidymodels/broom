@@ -34,7 +34,7 @@
 
 #' glance(mod)
 
-#' augment(mod)
+#' # augment(mod)
 #' @export
 #' @seealso [tidy()], [drc::drm()]
 #' @family drc tidiers
