@@ -56,6 +56,7 @@ Other contributors:
   \item Jason Cory Brunson \email{cornelioid@gmail.com} [contributor]
   \item Simon Jackson \email{drsimonjackson@gmail.com} [contributor]
   \item Ben Whalley \email{ben.whalley@plymouth.ac.uk} [contributor]
+  \item Karissa Whiting \email{karissa.whiting@gmail.com} [contributor]
   \item Michael Kuehn \email{mkuehn10@gmail.com} [contributor]
   \item Jorge Cimentada \email{cimentadaj@gmail.com} [contributor]
   \item Erle Holgersen \email{erle.holgersen@gmail.com} [contributor]
@@ -69,6 +70,8 @@ Other contributors:
   \item Jason Muhlenkamp \email{jason.muhlenkamp@gmail.com} [contributor]
   \item Matt Lehman [contributor]
   \item Bill Denney \email{wdenney@humanpredictions.com} (0000-0002-5759-428X) [contributor]
+  \item Eduard Szoecs \email{eduardszoecs@gmail.com} [contributor]
+  \item Nic Crane [contributor]
 }
 
 }
