@@ -72,7 +72,7 @@ tidy.biglm <- function(x, conf.int = FALSE, conf.level = .95,
 glance.biglm <- function(x, ...) {
   # biglm objects have `df.resid` instead of `df.residual`, so 
   # `finish_glance()` will not work with default biglm fields. 
-  if (sum(names(x) == "df.resid") >= 1) {
+  if (sum(names(x) == "df.resid") == 1) {
     x$df.residual <- x$df.resid
   }
   finish_glance(tibble(r.squared = summary(x)$rsq), x)
