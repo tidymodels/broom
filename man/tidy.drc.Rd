@@ -6,7 +6,7 @@
 \title{Tidy a(n) drc object}
 \usage{
 \method{tidy}{drc}(x, conf.int = FALSE, conf.level = 0.95,
-  quick = FALSE, robust = FALSE, ...)
+  quick = FALSE, ...)
 }
 \arguments{
 \item{x}{A \code{drc} object produced by a call to \code{\link[drc:drm]{drc::drm()}}.}
@@ -20,8 +20,6 @@ Defaults to 0.95, which corresponds to a 95 percent confidence interval.}
 
 \item{quick}{whether to compute a smaller and faster version, containing
 only the \code{term}, \code{curveid} and \code{estimate} columns.}
-
-\item{robust}{use robust standard errors (via \code{\link[sandwich:sandwich]{sandwich::sandwich()}})?}
 
 \item{...}{Additional arguments. Not used. Needed to match generic
 signature only. \strong{Cautionary note:} Misspelled arguments will be
@@ -55,7 +53,7 @@ tidy(mod)
 tidy(mod, conf.int = TRUE)
 tidy(mod, quick = TRUE)
 glance(mod)
-augment(mod)
+# augment(mod)
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[drc:drm]{drc::drm()}}

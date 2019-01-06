@@ -6,7 +6,6 @@
 #' @template param_unused_dots
 #' @param quick whether to compute a smaller and faster version, containing
 #' only the \code{term}, \code{curveid} and \code{estimate} columns.
-#' @param robust use robust standard errors (via [sandwich::sandwich()])?
 #' @evalRd return_tidy(   
 #'       curveid = "Id of the curve",   
 #'       "term",
@@ -20,8 +19,6 @@
 #' @details The tibble has one row for each curve and term in the regression. The
 #'   `curveid` column indicates the curve.
 #' @author Eduard Szoecs, \email{eduardszoecs@@gmail.com}
-#' @importFrom lmtest coeftest coefci
-#' @importFrom sandwich sandwich
 #' @examples 
 #' library(drc)
 #' mod <- drm(dead/total~conc, type, 
@@ -39,8 +36,7 @@
 #' @seealso [tidy()], [drc::drm()]
 #' @family drc tidiers
 #' @aliases drc_tidiers
-tidy.drc <- function(x, conf.int = FALSE, conf.level = 0.95, quick = FALSE,
-  robust = FALSE, ...) {
+tidy.drc <- function(x, conf.int = FALSE, conf.level = 0.95, quick = FALSE, ...) {
   if (quick) {
     co <- coef(x)
     nam <- names(co)
@@ -57,12 +53,7 @@ tidy.drc <- function(x, conf.int = FALSE, conf.level = 0.95, quick = FALSE,
     return(ret)
   }
 
-  if (robust) {
-    co <- lmtest::coeftest(x, vcov. = sandwich::sandwich)
-    co <- data.frame(co[, 1:ncol(co)])
-  } else {
-    co <- coef(summary(x))
-  }
+  co <- coef(summary(x))
 
   nam <- rownames(co)
   term <- gsub("^(.*):(.*)$", "\\1", nam)
@@ -80,11 +71,7 @@ tidy.drc <- function(x, conf.int = FALSE, conf.level = 0.95, quick = FALSE,
   rownames(ret) <- NULL
 
   if (conf.int) {
-    if (robust) {
-      conf <- lmtest::coefci(x, level = conf.level, vcov. = sandwich::sandwich)
-    } else {
-      conf <- confint(x, level = conf.level)
-    }
+    conf <- confint(x, level = conf.level)
     colnames(conf) <- c("conf.low", "conf.high")
     rownames(conf) <- NULL
     ret <- cbind(ret, conf)
@@ -106,12 +93,10 @@ tidy.drc <- function(x, conf.int = FALSE, conf.level = 0.95, quick = FALSE,
 #'   "BIC",
 #'   "df.residual"
 #' )
-#' @importFrom MuMIn AICc
 #' @seealso [glance()], [drc::drm()]
 #' @export
 glance.drc <- function(x, ...) {
   ret <- data.frame(AIC = AIC(x),
-                    AICc = AICc(x),
                     BIC = BIC(x),
                     logLik = logLik(x),
                     df.residual =  x$df.residual)
