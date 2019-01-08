@@ -125,5 +125,5 @@ valuable.
 If you are interested in adding new tidiers methods to broom, please
 read `vignette("adding-tidiers")`.
 
-We have a [Contributor Code of Conduct](CODE_OF_CONDUCT.md). By
+We have a [Contributor Code of Conduct](.github/CODE_OF_CONDUCT.md). By
 participating in broom you agree to abide by its terms.
