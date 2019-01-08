@@ -32,6 +32,7 @@ in the augment method for the chi sq test, .residuals column was renamed to .res
 - `tidy_optim()` provides the standard error if the Hessian is present. (#529 by @billdenney)
 - `tidy.htest()` column names are now run through `make.names()` to ensure syntactic correctness (#549 by @karissawhiting) 
 - Added method `tidy.lm.beta()` to tidy `lm.beta` class models (#545 by @mattle24)
+- Add feature for glance.biglm to return df.residual
 
 
 ## Deprecations
