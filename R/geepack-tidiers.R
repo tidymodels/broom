@@ -121,11 +121,11 @@ confint.geeglm <- function(object, parm, level = 0.95, ...) {
 glance.geeglm  <- function(x, ...) {
   s <- summary(x)
   ret <- tibble(
-    df.residual = x$df.residual,
-    num.clusters = length(s$clusz),
-    max.cluster.size = max(s$clusz),
-    alpha = x$geese$alpha,
-    gamma = x$geese$gamma
+    df.residual <- x$df.residual,
+    num.clusters <- length(s$clusz),
+    max.cluster.size <- max(s$clusz),
+    alpha <- x$geese$alpha,
+    gamma <- x$geese$gamma
   )
   ret
 }
