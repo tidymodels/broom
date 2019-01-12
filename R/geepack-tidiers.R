@@ -107,3 +107,25 @@ confint.geeglm <- function(object, parm, level = 0.95, ...) {
   rownames(citab) <- rownames(cc)
   citab[parm, ]
 }
+
+#' @templateVar class geeglm
+#' @template title_desc_glance
+#' 
+#' @inherit tidy.geeglm params examples
+#'
+#' @evalRd return_glance("df.residual", "num.clusters", "max.cluster.size", "alpha", "gamma")
+#'
+#' @export
+#' @seealso [glance()], [geepack::geeglm()]
+#' @family geepack tidiers
+glance.geeglm  <- function(x, ...) {
+  s <- summary(x)
+  ret <- tibble(
+    df.residual = x$df.residual,
+    num.clusters = length(s$clusz),
+    max.cluster.size = max(s$clusz),
+    alpha = x$geese$alpha,
+    gamma = x$geese$gamma
+  )
+  ret
+}
