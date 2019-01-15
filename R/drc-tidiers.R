@@ -103,83 +103,82 @@ glance.drc <- function(x, ...) {
   return(as_tibble(ret))
 }
 
-# #' @templateVar class drc
-# #' @template title_desc_augment
+#' @templateVar class drc
+#' @template title_desc_augment
 
-# #' @inherit tidy.drc params examples
-# #' @template param_data
-# #' @template param_newdata
-# #' @template param_confint
-# #' @template param_se_fit
-# #'
-# #' @evalRd return_augment(`.conf.low` = "Lower Confidence Interval",
-# #'   `.conf.high` = "Upper Confidence Interval",
-# #'   ".se.fit",
-# #'   ".fitted",
-# #'   ".resid",
-# #'   ".hat",
-# #'   ".cooksd")
-# #' 
-# #' @seealso [augment()], [drc::drm()]
-# #' @export
-# #' @author Eduard Szoecs, \email{eduardszoecs@@gmail.com}
-# augment.drc <- function(x, data = NULL, newdata = NULL,
-#   se_fit = FALSE,  conf.int = FALSE, conf.level = 0.95) {
+#' @inherit tidy.drc params examples
+#' @template param_data
+#' @template param_newdata
+#' @template param_confint
+#' @template param_se_fit
+#'
+#' @evalRd return_augment(`.conf.low` = "Lower Confidence Interval",
+#'   `.conf.high` = "Upper Confidence Interval",
+#'   ".se.fit",
+#'   ".fitted",
+#'   ".resid",
+#'   ".hat",
+#'   ".cooksd")
+#' 
+#' @seealso [augment()], [drc::drm()]
+#' @export
+#' @author Eduard Szoecs, \email{eduardszoecs@@gmail.com}
+augment.drc <- function(x, data = NULL, newdata = NULL,
+  se_fit = FALSE,  conf.int = FALSE, conf.level = 0.95) {
 
-#   if (is.null(data) && is.null(newdata)) {
-#     stop("Must specify either `data` or `newdata` argument.", call. = FALSE)
-#   }
+  if (is.null(data) && is.null(newdata)) {
+    stop("Must specify either `data` or `newdata` argument.", call. = FALSE)
+  }
 
-#   # drc doesn't like tibbles
-#   if (inherits(newdata, "tbl")) {
-#     newdata <- data.frame(newdata)
-#   }
+  # drc doesn't like tibbles
+  if (inherits(newdata, "tbl")) {
+    newdata <- data.frame(newdata)
+  }
 
-#   # drc doesn't like NA in the type
-#   if (!missing(newdata) || is.null(newdata)) {
-#     original <- newdata
-#     original$.rownames <- rownames(original)
-#   }
+  # drc doesn't like NA in the type
+  if (!missing(newdata) || is.null(newdata)) {
+    original <- newdata
+    original$.rownames <- rownames(original)
+  }
 
-#   if (!missing(newdata) && x$curveVarNam %in% names(newdata) && 
-#     any(is.na(newdata[[x$curveVarNam]]))) {
-#       newdata <- newdata[!is.na(newdata[[x$curveVarNam]]), ]
-#   }
+  if (!missing(newdata) && x$curveVarNam %in% names(newdata) && 
+    any(is.na(newdata[[x$curveVarNam]]))) {
+      newdata <- newdata[!is.na(newdata[[x$curveVarNam]]), ]
+  }
 
-#   ret <- augment_columns(x, data, newdata, se.fit = FALSE)
+  ret <- augment_columns(x, data, newdata, se.fit = FALSE)
 
-#   if (!is.null(newdata)) {
-#     if (conf.int) {
-#       preds <- data.frame(predict(x, newdata = newdata, interval = "confidence",
-#         level = conf.level))
-#       ret[[".conf.low"]] <- preds[["Lower"]]
-#       ret[[".conf.high"]] <- preds[["Upper"]]
-#     }
-#     if (se_fit) {
-#       preds <- data.frame(predict(x, newdata = newdata, se.fit = TRUE))
-#       ret[[".se.fit"]] <- preds[["SE"]]
-#     }
-#   }
+  if (!is.null(newdata)) {
+    if (conf.int) {
+      preds <- data.frame(predict(x, newdata = newdata, interval = "confidence",
+        level = conf.level))
+      ret[[".conf.low"]] <- preds[["Lower"]]
+      ret[[".conf.high"]] <- preds[["Upper"]]
+    }
+    if (se_fit) {
+      preds <- data.frame(predict(x, newdata = newdata, se.fit = TRUE))
+      ret[[".se.fit"]] <- preds[["SE"]]
+    }
+  }
 
-#   # join back removed rows
-#   if (!".rownames" %in% names(ret)) {
-#     ret$.rownames <- rownames(ret)
-#   }
+  # join back removed rows
+  if (!".rownames" %in% names(ret)) {
+    ret$.rownames <- rownames(ret)
+  }
 
-#   if (!is.null(original)) {
-#     browser()
-#     reto <- ret %>% select(starts_with('.'))
-#     ret <- merge(original, reto, by = ".rownames")
-#   }
+  if (!is.null(original)) {
+    reto <- ret %>% select(starts_with(".""))
+    ret <- merge(reto, original, by = ".rownames", all.y = TRUE)
+  }
 
-#   # reorder to line up with original
-#   ret <- ret[order(match(ret$.rownames, rownames(original))), ]
-#   rownames(ret) <- NULL
+  # reorder to line up with original
+  ret <- ret[order(match(ret$.rownames, rownames(original))), ]
+  rownames(ret) <- NULL
 
-#   # if rownames are just the original 1...n, they can be removed
-#   if (all(ret$.rownames == seq_along(ret$.rownames))) {
-#     ret$.rownames <- NULL
-#   }
+  # if rownames are just the original 1...n, they can be removed
+  if (all(ret$.rownames == seq_along(ret$.rownames))) {
+    ret$.rownames <- NULL
+  }
 
-#   as_tibble(ret)
-# }
+  as_tibble(ret)
+}
