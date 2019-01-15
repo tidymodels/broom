@@ -123,22 +123,30 @@ glance.drc <- function(x, ...) {
 # #' @seealso [augment()], [drc::drm()]
 # #' @export
 # #' @author Eduard Szoecs, \email{eduardszoecs@@gmail.com}
-# augment.drc <- function(x, data = x[["origData"]], newdata = NULL,
+# augment.drc <- function(x, data = NULL, newdata = NULL,
 #   se_fit = FALSE,  conf.int = FALSE, conf.level = 0.95) {
 
-#   if (is.null(data) & is.null(newdata)) {
-#     data <- x[["origData"]]
+#   if (is.null(data) && is.null(newdata)) {
+#     stop("Must specify either `data` or `newdata` argument.", call. = FALSE)
 #   }
 
-#   if (is.tibble(newdata)) {
-#     newdata <- as.data.frame(newdata)
+#   # drc doesn't like tibbles
+#   if (inherits(newdata, "tbl")) {
+#     newdata <- data.frame(newdata)
 #   }
 
-#   if (!is.null(newdata)) {
-#    newdata <- newdata[complete.cases(newdata), ]
+#   # drc doesn't like NA in the type
+#   if (!missing(newdata) || is.null(newdata)) {
+#     original <- newdata
+#     original$.rownames <- rownames(original)
 #   }
 
-#   ret <- augment_newdata(x, data, newdata, FALSE)
+#   if (!missing(newdata) && x$curveVarNam %in% names(newdata) && 
+#     any(is.na(newdata[[x$curveVarNam]]))) {
+#       newdata <- newdata[!is.na(newdata[[x$curveVarNam]]), ]
+#   }
+
+#   ret <- augment_columns(x, data, newdata, se.fit = FALSE)
 
 #   if (!is.null(newdata)) {
 #     if (conf.int) {
@@ -152,11 +160,26 @@ glance.drc <- function(x, ...) {
 #       ret[[".se.fit"]] <- preds[["SE"]]
 #     }
 #   }
-#   if (is.null(newdata)) {
-#     ret$.resid <- residuals(x)
-#     ret$.cooksd <- cooks.distance(x)
-#     ret$.hat <- hatvalues(x)
+
+#   # join back removed rows
+#   if (!".rownames" %in% names(ret)) {
+#     ret$.rownames <- rownames(ret)
 #   }
 
-#   return(ret)
+#   if (!is.null(original)) {
+#     browser()
+#     reto <- ret %>% select(starts_with('.'))
+#     ret <- merge(original, reto, by = ".rownames")
+#   }
+
+#   # reorder to line up with original
+#   ret <- ret[order(match(ret$.rownames, rownames(original))), ]
+#   rownames(ret) <- NULL
+
+#   # if rownames are just the original 1...n, they can be removed
+#   if (all(ret$.rownames == seq_along(ret$.rownames))) {
+#     ret$.rownames <- NULL
+#   }
+
+#   as_tibble(ret)
 # }

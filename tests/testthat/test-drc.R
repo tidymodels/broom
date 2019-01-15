@@ -33,11 +33,16 @@ test_that("glance.drc", {
   check_glance_outputs(gl1, strict = FALSE)
 })
 
-# test_that("augment.drc", {
+test_that("augment.drc", {
 
-#   check_augment_function(
-#     augment.drc,
-#     mod,
-#     data = selenium,
-#     newdata = selenium)
-# })
+  expect_error(
+    augment(mod),
+    regexp = "Must specify either `data` or `newdata` argument."
+  )
+
+  check_augment_function(
+    augment.drc,
+    mod,
+    data = selenium,
+    newdata = selenium)
+})
