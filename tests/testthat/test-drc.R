@@ -12,7 +12,8 @@ mod <- drm(dead/total~conc, type,
 test_that("drc tidier arguments", {
   check_arguments(tidy.drc)
   check_arguments(glance.drc)
-  check_arguments(augment.drc, strict = FALSE)
+  check_arguments(augment.drc, strict = FALSE) 
+  # Arguments conf.int, conf.level to `augment.drc` must be listed in the argument glossary.
 })
 
 test_that("tidy.drc", {

@@ -112,12 +112,11 @@ glance.drc <- function(x, ...) {
 #' @template param_confint
 #' @template param_se_fit
 #'
-#' @evalRd return_augment(`.conf.low` = "Lower Confidence Interval",
-#'   `.conf.high` = "Upper Confidence Interval",
+#' @evalRd return_augment(".conf.low" = "Lower Confidence Interval",
+#'   ".conf.high" = "Upper Confidence Interval",
 #'   ".se.fit",
 #'   ".fitted",
 #'   ".resid",
-#'   ".hat",
 #'   ".cooksd")
 #' 
 #' @seealso [augment()], [drc::drm()]
