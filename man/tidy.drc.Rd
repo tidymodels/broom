@@ -57,6 +57,9 @@ glance(mod)
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[drc:drm]{drc::drm()}}
+
+Other drc tidiers: \code{\link{augment.drc}},
+  \code{\link{glance.drc}}
 }
 \author{
 Eduard Szoecs, \email{eduardszoecs@gmail.com}

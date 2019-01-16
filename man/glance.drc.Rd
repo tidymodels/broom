@@ -48,7 +48,11 @@ glance(mod)
 }
 \seealso{
 \code{\link[=glance]{glance()}}, \code{\link[drc:drm]{drc::drm()}}
+
+Other drc tidiers: \code{\link{augment.drc}},
+  \code{\link{tidy.drc}}
 }
+\concept{drc tidiers}
 \value{
 A \code{\link[tibble:tibble]{tibble::tibble()}} with exactly one row and columns:
   \item{AIC}{Akaike's Information Criterion for the model.}

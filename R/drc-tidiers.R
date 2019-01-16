@@ -95,6 +95,7 @@ tidy.drc <- function(x, conf.int = FALSE, conf.level = 0.95, quick = FALSE, ...)
 #' )
 #' @seealso [glance()], [drc::drm()]
 #' @export
+#' @family drc tidiers
 glance.drc <- function(x, ...) {
   ret <- data.frame(AIC = AIC(x),
                     BIC = BIC(x),
@@ -111,6 +112,7 @@ glance.drc <- function(x, ...) {
 #' @template param_newdata
 #' @template param_confint
 #' @template param_se_fit
+#' @template param_unused_dots
 #'
 #' @evalRd return_augment(".conf.low" = "Lower Confidence Interval",
 #'   ".conf.high" = "Upper Confidence Interval",
@@ -122,8 +124,9 @@ glance.drc <- function(x, ...) {
 #' @seealso [augment()], [drc::drm()]
 #' @export
 #' @author Eduard Szoecs, \email{eduardszoecs@@gmail.com}
+#' @family drc tidiers
 augment.drc <- function(x, data = NULL, newdata = NULL,
-  se_fit = FALSE,  conf.int = FALSE, conf.level = 0.95) {
+  se_fit = FALSE,  conf.int = FALSE, conf.level = 0.95, ...) {
 
   if (is.null(data) && is.null(newdata)) {
     stop("Must specify either `data` or `newdata` argument.", call. = FALSE)
