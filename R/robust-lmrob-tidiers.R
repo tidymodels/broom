@@ -27,7 +27,7 @@ tidy.lmRob <- function (x, ...) {
   dots <- enquos(...)
   dots$conf.int <- FALSE
   
-  rlang::exec(broom:::tidy.lm, x, !!!dots)
+  rlang::exec(tidy.lm, x, !!!dots)
 }
 
 #' @templateVar class lmRob
