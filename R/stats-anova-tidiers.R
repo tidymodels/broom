@@ -19,8 +19,9 @@
 #'   
 #' @examples
 #'
-#' a <- anova(lm(mpg ~ wt + qsec + disp, mtcars))
-#' tidy(a)
+#' a <- lm(mpg ~ wt + qsec + disp, mtcars)
+#' b <- lm(mpg ~ wt + qsec, mtcars)
+#' tidy(anova(a, b))
 #'
 #' @export
 #' @family anova tidiers
@@ -67,7 +68,8 @@ tidy.anova <- function(x, ...) {
     )
   }
   colnames(ret) <- dplyr::recode(colnames(ret), rlang::UQS(renamers))
-  if (!is.null(ret$term)) {
+  
+  if("term" %in% names(ret)){
     # if rows had names, strip whitespace in them
     ret <- mutate(ret, term = stringr::str_trim(term))
   }
