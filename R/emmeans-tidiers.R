@@ -148,6 +148,6 @@ tidy_emmeans <- function(x, ...) {
     )
   }
 
-  colnames(ret) <- dplyr::recode(colnames(ret), rlang::UQS(repl))
+  colnames(ret) <- dplyr::recode(colnames(ret), !!!(repl))
   as_tibble(ret)
 }
