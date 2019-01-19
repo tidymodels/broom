@@ -17,7 +17,7 @@
 #'   "ref.df"
 #' )
 #'
-#' @details When `parametric = TRUE` return columns `edf` and `ref.df` rather
+#' @details When `parametric = FALSE` return columns `edf` and `ref.df` rather
 #'   than `estimate` and `std.error`.
 #' 
 #'   To tidy `Gam` objects created by calls to [gam::gam()],
