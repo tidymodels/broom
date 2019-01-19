@@ -37,17 +37,26 @@
 #' @aliases mgcv_tidiers gam_tidiers tidy.gam
 #' @family mgcv tidiers
 #' @seealso [tidy()], [mgcv::gam()], [tidy.Gam()]
-tidy.gam <- function(x, parametric = FALSE, ...) {
+tidy.gam <- function(x, parametric = FALSE, conf.int = FALSE, 
+                     conf.level = 0.95, ...) {
   if (parametric) {
     px <- summary(x)$p.table
     px <- as.data.frame(px)
-    fix_data_frame(px, c("estimate", "std.error", "statistic", "p.value"))
+    ret <- fix_data_frame(px, c("estimate", "std.error", "statistic", "p.value"))
   } else {
     sx <- summary(x)$s.table
     sx <- as.data.frame(sx)
     class(sx) <- c("anova", "data.frame")
-    tidy(sx)
+    ret <- tidy(sx)
   }
+  if (conf.int) {
+    # avoid "Waiting for profiling to be done..." message
+    CI <- suppressMessages(stats::confint.default(x, level = conf.level)[rownames(px), ,drop = FALSE])
+    # Think about rank deficiency
+    colnames(CI) <- c("conf.low", "conf.high")
+    ret <- cbind(ret, trans(unrowname(CI)))
+  }
+  ret
 }
 
 #' @templateVar class gam
