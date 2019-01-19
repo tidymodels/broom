@@ -39,18 +39,21 @@
 #' @seealso [tidy()], [mgcv::gam()], [tidy.Gam()]
 tidy.gam <- function(x, parametric = FALSE, conf.int = FALSE, 
                      conf.level = 0.95, ...) {
-  if (parametric) {
+    if (!parametric && conf.int) {
+      message("Confidence intervals only available for parametric terms.")
+    }
+    if (parametric) {
     px <- summary(x)$p.table
     px <- as.data.frame(px)
     ret <- fix_data_frame(px, c("estimate", "std.error", "statistic", "p.value"))
     if (conf.int) {
       # avoid "Waiting for profiling to be done..." message
-      # this doesn't seem to happen with confint.default
+      # This message doesn't seem to happen with confint.default
       CI <- suppressMessages(stats::confint.default(x, level = conf.level)[rownames(px), ,drop = FALSE])
       # Think about rank deficiency
       colnames(CI) <- c("conf.low", "conf.high")
       ret <- cbind(ret, unrowname(CI))
-      ret <- as_tibble(ret)
+    ret <- as_tibble(ret)
     }
   } else {
     sx <- summary(x)$s.table
