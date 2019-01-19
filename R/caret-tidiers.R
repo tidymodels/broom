@@ -5,7 +5,7 @@
 #' [caret::confusionMatrix()].
 #' @param by_class Logical indicating whether or not to show performance 
 #' measures broken down by class. Defaults to `TRUE`. When `by_class = FALSE`
-#' only returns a tibble with accuracy and kappa statistics.
+#' only returns a tibble with accuracy, kappa, and McNamara statistics.
 #' @template param_unused_dots
 #' 
 #' @evalRd return_tidy(
@@ -52,7 +52,7 @@
 #' @seealso [tidy()], [caret::confusionMatrix()]
 tidy.confusionMatrix <- function(x, by_class = TRUE, ...) {
   cm <- as.list(x$overall)
-  nms_cm <- stringr::str_to_lower(names(cm)[1:2])
+  nms_cm <- stringr::str_to_lower(c(names(cm)[1:2], "McNamara"))
 
 
   if (by_class) {
@@ -66,13 +66,13 @@ tidy.confusionMatrix <- function(x, by_class = TRUE, ...) {
         mutate(var = stringr::str_to_lower(gsub(" ", "_", var)))
 
       terms <- c(nms_cm, classes$var)
-      class <- c(rep(NA_character_, 2), rep(x$positive, length(terms) - 2))
-      estimates <- c(cm$Accuracy, cm$Kappa, classes$value)
+      class <- c(rep(NA_character_, 3), rep(x$positive, length(terms) - 3))
+      estimates <- c(cm$Accuracy, cm$Kappa, NA, classes$value)
       conf.low <- c(cm$AccuracyLower, rep(NA, length(terms) - 1))
       conf.high <- c(cm$AccuracyUpper, rep(NA, length(terms) - 1))
       p.value <- c(
-        cm$AccuracyPValue, cm$McnemarPValue,
-        rep(NA, length(terms) - 2)
+        cm$AccuracyPValue, NA, cm$McnemarPValue,
+        rep(NA, length(terms) - 3)
       )
     }
     else {
@@ -88,13 +88,13 @@ tidy.confusionMatrix <- function(x, by_class = TRUE, ...) {
         )
 
       terms <- c(nms_cm, classes$var)
-      class <- c(rep(NA_character_, 2), classes$class)
-      estimates <- c(cm$Accuracy, cm$Kappa, classes$value)
+      class <- c(rep(NA_character_, 3), classes$class)
+      estimates <- c(cm$Accuracy, cm$Kappa, NA, classes$value)
       conf.low <- c(cm$AccuracyLower, rep(NA, length(terms) - 1))
       conf.high <- c(cm$AccuracyUpper, rep(NA, length(terms) - 1))
       p.value <- c(
-        cm$AccuracyPValue, cm$McnemarPValue,
-        rep(NA, length(terms) - 2)
+        cm$AccuracyPValue, NA, cm$McnemarPValue,
+        rep(NA, length(terms) - 3)
       )
     }
     df <- tibble(
@@ -106,12 +106,12 @@ tidy.confusionMatrix <- function(x, by_class = TRUE, ...) {
       p.value = p.value
     )
   } else {
-    # only show alpha and kappa when show_class = FALSE
+    # only show alpha, kappa, and mcnamara, when show_class = FALSE
     terms <- c(nms_cm)
-    estimates <- c(cm$Accuracy, cm$Kappa)
-    conf.low <- c(cm$AccuracyLower, NA)
-    conf.high <- c(cm$AccuracyUpper, NA)
-    p.value <- c(cm$AccuracyPValue, cm$McnemarPValue)
+    estimates <- c(cm$Accuracy, cm$Kappa, NA)
+    conf.low <- c(cm$AccuracyLower, NA, NA)
+    conf.high <- c(cm$AccuracyUpper, NA, NA)
+    p.value <- c(cm$AccuracyPValue, NA, cm$McnemarPValue)
 
     df <- tibble(
       term = terms,
