@@ -43,18 +43,20 @@ tidy.gam <- function(x, parametric = FALSE, conf.int = FALSE,
     px <- summary(x)$p.table
     px <- as.data.frame(px)
     ret <- fix_data_frame(px, c("estimate", "std.error", "statistic", "p.value"))
+    if (conf.int) {
+      # avoid "Waiting for profiling to be done..." message
+      # this doesn't seem to happen with confint.default
+      CI <- suppressMessages(stats::confint.default(x, level = conf.level)[rownames(px), ,drop = FALSE])
+      # Think about rank deficiency
+      colnames(CI) <- c("conf.low", "conf.high")
+      ret <- cbind(ret, unrowname(CI))
+      ret <- as_tibble(ret)
+    }
   } else {
     sx <- summary(x)$s.table
     sx <- as.data.frame(sx)
     class(sx) <- c("anova", "data.frame")
     ret <- tidy(sx)
-  }
-  if (conf.int) {
-    # avoid "Waiting for profiling to be done..." message
-    CI <- suppressMessages(stats::confint.default(x, level = conf.level)[rownames(px), ,drop = FALSE])
-    # Think about rank deficiency
-    colnames(CI) <- c("conf.low", "conf.high")
-    ret <- cbind(ret, trans(unrowname(CI)))
   }
   ret
 }
