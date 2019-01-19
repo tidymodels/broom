@@ -5,6 +5,7 @@
 #' @param parametric Logical indicating if parametric or smooth terms should
 #'   be tidied. Defaults to `FALSE`, meaning that smooth terms are tidied
 #'   by default.
+#' @template param_confint 
 #' @template param_unused_dots
 #' 
 #' @evalRd return_tidy(
