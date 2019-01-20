@@ -90,7 +90,7 @@ with six columns:
 \item{term}{term in the model}
 \item{estimate}{estimated coefficient}
 \item{std.error}{standard error}
-\item{statistic}{z-statistic}
+\item{statistic}{t-statistic}
 \item{p.value}{two-sided p-value}
 \item{coefficient_type}{type of coefficient, see \code{\link[ordinal:clm]{ordinal::clm()}}}
 
