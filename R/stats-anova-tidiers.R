@@ -67,8 +67,9 @@ tidy.anova <- function(x, ...) {
       paste(unknown_cols, collapse = ", ")
     )
   }
-  colnames(ret) <- dplyr::recode(colnames(ret), rlang::UQS(renamers))
   
+  colnames(ret) <- dplyr::recode(colnames(ret), !!!renamers)
+
   if("term" %in% names(ret)){
     # if rows had names, strip whitespace in them
     ret <- mutate(ret, term = stringr::str_trim(term))
