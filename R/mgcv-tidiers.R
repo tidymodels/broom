@@ -5,6 +5,7 @@
 #' @param parametric Logical indicating if parametric or smooth terms should
 #'   be tidied. Defaults to `FALSE`, meaning that smooth terms are tidied
 #'   by default.
+#' @template param_confint 
 #' @template param_unused_dots
 #' 
 #' @evalRd return_tidy(
@@ -17,7 +18,7 @@
 #'   "ref.df"
 #' )
 #'
-#' @details When `parametric = TRUE` return columns `edf` and `ref.df` rather
+#' @details When `parametric = FALSE` return columns `edf` and `ref.df` rather
 #'   than `estimate` and `std.error`.
 #' 
 #'   To tidy `Gam` objects created by calls to [gam::gam()],
@@ -37,17 +38,31 @@
 #' @aliases mgcv_tidiers gam_tidiers tidy.gam
 #' @family mgcv tidiers
 #' @seealso [tidy()], [mgcv::gam()], [tidy.Gam()]
-tidy.gam <- function(x, parametric = FALSE, ...) {
-  if (parametric) {
+tidy.gam <- function(x, parametric = FALSE, conf.int = FALSE, 
+                     conf.level = 0.95, ...) {
+    if (!parametric && conf.int) {
+      message("Confidence intervals only available for parametric terms.")
+    }
+    if (parametric) {
     px <- summary(x)$p.table
     px <- as.data.frame(px)
-    fix_data_frame(px, c("estimate", "std.error", "statistic", "p.value"))
+    ret <- fix_data_frame(px, c("estimate", "std.error", "statistic", "p.value"))
+    if (conf.int) {
+      # avoid "Waiting for profiling to be done..." message
+      # This message doesn't seem to happen with confint.default
+      CI <- suppressMessages(stats::confint.default(x, level = conf.level)[rownames(px), ,drop = FALSE])
+      # Think about rank deficiency
+      colnames(CI) <- c("conf.low", "conf.high")
+      ret <- cbind(ret, unrowname(CI))
+    ret <- as_tibble(ret)
+    }
   } else {
     sx <- summary(x)$s.table
     sx <- as.data.frame(sx)
     class(sx) <- c("anova", "data.frame")
-    tidy(sx)
+    ret <- tidy(sx)
   }
+  ret
 }
 
 #' @templateVar class gam
