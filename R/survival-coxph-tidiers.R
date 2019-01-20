@@ -76,13 +76,19 @@ tidy.coxph <- function(x, exponentiate = FALSE, conf.int = FALSE,
   }
   co <- stats::coef(s)
   
-  if (s$used.robust) {
+  if (! is.null(x$frail)){
+    nn <- c("estimate", "std.error", "statistic", "p.value")
+  }else if (s$used.robust) {
     nn <- c("estimate", "std.error", "robust.se", "statistic", "p.value")
   } else {
     nn <- c("estimate", "std.error", "statistic", "p.value")
   }
   
-  ret <- fix_data_frame(co[, -2, drop = FALSE], nn)
+  if (is.null(x$frail)){
+    ret <- fix_data_frame(co[, -2, drop = FALSE], nn)
+  } else{
+    ret <- fix_data_frame(co[, -c(3, 5), drop = FALSE], nn)
+  }
   
   if (exponentiate) {
     ret$estimate <- exp(ret$estimate)
