@@ -56,7 +56,7 @@ tidy.lmodel2 <- function(x, ...) {
 
   ret %>%
     inner_join(confints, by = c("method", "term")) %>% 
-    select(p.value, dplyr::everything()) %>% 
+    select(-p.value, dplyr::everything()) %>% 
     as_tibble()
 }
 
