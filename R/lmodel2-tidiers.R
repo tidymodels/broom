@@ -7,6 +7,7 @@
 #' @evalRd return_tidy(
 #'   "term",
 #'   "estimate",
+#'   "p.value",
 #'   "conf.low",
 #'   "conf.high",
 #'   method = "Either OLS/MA/SMA/RMA"
@@ -40,8 +41,8 @@
 #' @aliases lmodel2_tidiers
 #' @family lmodel2 tidiers
 tidy.lmodel2 <- function(x, ...) {
-  ret <- x$regression.results[1:3] %>%
-    select(method = Method, Intercept, Slope) %>%
+  ret <- x$regression.results[c(1:3, 5)] %>%
+    select(method = Method, Intercept, Slope, p.value = quote("P-perm (1-tailed)")) %>%
     tidyr::gather(term, estimate, -method) %>%
     arrange(method, term)
 
