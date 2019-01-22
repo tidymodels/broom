@@ -43,7 +43,7 @@
 tidy.lmodel2 <- function(x, ...) {
   ret <- x$regression.results[c(1:3, 5)] %>%
     select(method = Method, Intercept, Slope, p.value = quote("P-perm (1-tailed)")) %>%
-    tidyr::gather(term, estimate, -method) %>%
+    tidyr::gather(term, estimate, -method, -p.value) %>%
     arrange(method, term)
 
   # add confidence intervals
