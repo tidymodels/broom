@@ -10,6 +10,7 @@
 #'
 #' @export
 #' @family robustbase tidiers
+#' @rdname tidy.robustbase.glmrob
 #' @seealso [robustbase::glmrob()]
 #' @include stats-lm-tidiers.R
 tidy.glmrob <- function (x, ...) {
@@ -39,22 +40,19 @@ tidy.glmrob <- function (x, ...) {
 #' @templateVar class glmrob
 #' @template title_desc_augment
 #' 
-#' @param x Unused.
-#' @param ... Unused.
+#' @inherit tidy.glmrob params 
+#' @template param_data
+#' @template param_newdata
 #' 
-#' @description `augment.glmrob()` has been removed from broom. We regret
-#'   that we were unable to provide any warning for this change. The
-#'   \pkg{robustbase} package does not provide the functionality necessary
-#'   to implement an augment method. We are looking into supporting the
-#'   \pkg{robustbase} package in the future.
+#' @details For tidiers for robustbase models from the \pkg{MASS} package see
+#'   [tidy.rlm()].
 #'
 #' @export
-augment.glmrob <- function(x, ...) {
-  stop(
-    "`augment.glmrob` has been removed from broom. See the documentation.",
-    call. = FALSE
-  )
-}
+#' @family robustbase tidiers
+#' @rdname augment.robustbase.glmrob
+#' @seealso [robustbase::glmrob()]
+#' @include stats-lm-tidiers.R
+augment.glmrob <- augment.lm
 
 #' @templateVar class glmrob
 #' @template title_desc_glance
@@ -69,9 +67,9 @@ augment.glmrob <- function(x, ...) {
 #' )
 #' 
 #' @export
+#' @rdname glance.robustbase.glmrob
 #' @family robustbase tidiers
 #' @seealso [robustbase::glmrob()]
-#' 
 glance.glmrob <- function(x, ...) {
   ret <- tibble(
     deviance = x$deviance,
