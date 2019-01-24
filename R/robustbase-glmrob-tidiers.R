@@ -6,27 +6,34 @@
 #' @details For tidiers for robustbase models from the \pkg{MASS} package see
 #'   [tidy.rlm()].
 #'
-#' @examples
-#'
-#' library(robustbase)
-#' m <- lmrob(mpg ~ wt, data = mtcars)
-#'
-#' tidy(m)
-#' augment(m)
-#' glance(m)
-#'
-#' gm <- glmrob(am ~ wt, data = mtcars, family = "binomial")
-#' glance(gm)
+#' @inherit tidy.lmrob examples
 #'
 #' @export
 #' @family robustbase tidiers
 #' @seealso [robustbase::glmrob()]
 #' @include stats-lm-tidiers.R
 tidy.glmrob <- function (x, ...) {
-  dots <- enquos(...)
+  dots <- rlang::enquos(...)
   dots$conf.int <- FALSE
   
-  rlang::exec(tidy.lm, x, !!!dots)
+  ret <- rlang::exec(tidy.lm, x, !!!dots)
+  
+  # tidy.glmrob(..., conf.int = TRUE) throws an error, 
+  # so calc conf.int separately if requested
+  conf.int <- list(...)$conf.int
+  
+  if (!is.null(conf.int)) {
+    level <- list(...)$level
+    level <- ifelse(is.null(level), 0.95, level)
+    ci <- stats::confint.default(x, level = level) %>% 
+      as_tibble(rownames = NA) 
+    names(ci) <- c("conf.low", "conf.high")
+    ci$term <- rownames(ci)
+    ret <- ret %>% 
+      left_join(ci, by = 'term')
+  }
+  
+  ret
 }
 
 #' @templateVar class glmrob
