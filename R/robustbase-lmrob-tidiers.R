@@ -55,27 +55,6 @@ tidy.lmrob <- function (x, ...) {
 #' @family robustbase tidiers
 #' @seealso [robustbase::lmrob()]
 augment.lmrob <- function(x, data = model.frame(x), newdata = NULL, ...) {
-  
-  # NOTES on predict.lmRob:
-  #   - there's no na.action = na.pass argument
-  #   - predict(x, single_row_df_with_missing_data) returns numeric(0)
-  
-  # passed_newdata <- !is.null(newdata)
-  # df <- if (passed_newdata) newdata else data
-  # df <- as_broom_tibble(df)
-  # 
-  # # this is a really ugly way to recover NA predictions
-  # rows <- split(df, 1:nrow(df))
-  # preds <- purrr::map(rows, ~predict(x, newdata = .x))
-  # no_pred <- purrr::map_lgl(preds, ~length(.x) == 0)
-  # preds[no_pred] <- NA
-  # 
-  # df$.fitted <- as.numeric(preds)
-  # 
-  # resp <- safe_response(x, df)
-  # if (!is.null(resp))
-  #   df$.resid <- df$.fitted - resp
-  # df
   augment_newdata(x, data, newdata, .se_fit = FALSE)
 }
 
@@ -103,8 +82,9 @@ augment.lmrob <- function(x, data = model.frame(x), newdata = NULL, ...) {
 glance.lmrob <- function(x, ...) {
   s <- summary(x)
   tibble(
-    r.squared = x$r.squared,
-    deviance = x$dev,
+    r.squared = s$r.squared,
+    # FIXME
+    # deviance = x$dev, 
     sigma = s$sigma,
     df.residual = x$df.residual
   )
