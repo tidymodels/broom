@@ -4,8 +4,7 @@
 \alias{augment.glmrob}
 \title{Augment data with information from a(n) glmrob object}
 \usage{
-\method{augment}{glmrob}(x, data = model.frame(x), newdata = NULL,
-  se_fit = FALSE, ...)
+\method{augment}{glmrob}(x, data = model.frame(x), newdata = NULL, ...)
 }
 \arguments{
 \item{x}{A \code{glmrob} object returned from \code{\link[robustbase:glmrob]{robustbase::glmrob()}}.}

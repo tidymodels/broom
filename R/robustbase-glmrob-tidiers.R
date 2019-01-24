@@ -23,7 +23,7 @@ tidy.glmrob <- function (x, ...) {
   # so calc conf.int separately if requested
   conf.int <- list(...)$conf.int
   
-  if (!is.null(conf.int)) {
+  if (!is.null(conf.int) && conf.int) {
     level <- list(...)$level
     level <- ifelse(is.null(level), 0.95, level)
     ci <- stats::confint.default(x, level = level) %>% 
@@ -52,7 +52,9 @@ tidy.glmrob <- function (x, ...) {
 #' @rdname augment.robustbase.glmrob
 #' @seealso [robustbase::glmrob()]
 #' @include stats-lm-tidiers.R
-augment.glmrob <- augment.lm
+augment.glmrob <- function(x, data = model.frame(x), newdata = NULL, ...) {
+  augment_newdata(x, data, newdata, .se_fit = FALSE, ...)
+}
 
 #' @templateVar class glmrob
 #' @template title_desc_glance
