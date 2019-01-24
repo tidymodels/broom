@@ -375,6 +375,10 @@ finish_glance <- function(ret, x) {
   }
   ret$df.residual <- tryCatch(df.residual(x), error = function(e) NULL)
   
+  if (!'n' %in% names(ret)) {
+    ret$n <- tryCatch(stats::nobs(x), error = function(e) NULL)
+  }
+  
   as_tibble(ret, rownames = NULL)
 }
 

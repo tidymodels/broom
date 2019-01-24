@@ -81,7 +81,8 @@ glance.plm <- function(x, ...) {
     r.squared = r.squared[1],
     adj.r.squared = r.squared[2],
     statistic = fstatistic$statistic,
-    p.value = fstatistic$p.value
+    p.value = fstatistic$p.value,
+    n = length(s$residuals)
   ))
   finish_glance(ret, x)
 }

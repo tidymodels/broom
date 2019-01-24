@@ -106,7 +106,8 @@ glance.multinom <- function(x, ...) {
     tibble(
       edf = edf,
       deviance = deviance,
-      AIC = AIC
+      AIC = AIC,
+      n = nrow(x$residuals)
     )
   )
 }

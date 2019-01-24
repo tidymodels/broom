@@ -63,7 +63,8 @@ augment.glmRob <- function(x, ...) {
 glance.glmRob <- function(x, ...) {
   ret <- tibble(
     deviance = x$deviance,
-    null.deviance = x$null.deviance
+    null.deviance = x$null.deviance,
+    n = length(x$residuals)
   )
   finish_glance(ret, x)
 }

@@ -92,6 +92,7 @@ glance.lmRob <- function(x, ...) {
     r.squared = x$r.squared,
     deviance = x$dev,
     sigma = s$sigma,
-    df.residual = x$df.residual
+    df.residual = x$df.residual,
+    n = length(x$residuals)
   )
 }
