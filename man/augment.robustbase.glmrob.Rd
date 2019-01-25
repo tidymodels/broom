@@ -23,7 +23,7 @@ the original predictors used to create \code{x}. Defaults to \code{NULL}, indica
 that nothing has been passed to \code{newdata}. If \code{newdata} is specified,
 the \code{data} argument will be ignored.}
 
-\item{se_fit}{a switch indicating if standard errors are required}
+\item{se_fit}{a switch indicating if standard errors are required.}
 
 \item{...}{Additional arguments. Not used. Needed to match generic
 signature only. \strong{Cautionary note:} Misspelled arguments will be
@@ -75,8 +75,9 @@ We are in the process of defining behaviors for models fit with various
 missing at this time.
 }
 \details{
-For tidiers for robustbase models from the \pkg{MASS} package see
-\code{\link[=tidy.rlm]{tidy.rlm()}}.
+For tidiers for robust models from the \pkg{MASS} package see
+\code{\link[=tidy.rlm]{tidy.rlm()}}. For tidiers for robust models from the \pkg{robust} package
+see \code{\link[=tidy.lmRob]{tidy.lmRob()}}.
 }
 \seealso{
 \code{\link[robustbase:glmrob]{robustbase::glmrob()}}

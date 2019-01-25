@@ -23,8 +23,9 @@ the \code{data} argument.}
 This method wraps \code{\link[=tidy.lm]{tidy.lm()}}.
 }
 \details{
-For tidiers for robustbase models from the \pkg{MASS} package see
-\code{\link[=tidy.rlm]{tidy.rlm()}}.
+For tidiers for robust models from the \pkg{MASS} package see
+\code{\link[=tidy.rlm]{tidy.rlm()}}. For tidiers for robust models from the \pkg{robust} package
+see \code{\link[=tidy.lmRob]{tidy.lmRob()}}.
 }
 \examples{
 
