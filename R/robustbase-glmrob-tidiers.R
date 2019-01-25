@@ -3,8 +3,9 @@
 #'
 #' @param x A `glmrob` object returned from [robustbase::glmrob()].
 #' 
-#' @details For tidiers for robustbase models from the \pkg{MASS} package see
-#'   [tidy.rlm()].
+#' @details For tidiers for robust models from the \pkg{MASS} package see
+#'   [tidy.rlm()]. For tidiers for robust models from the \pkg{robust} package
+#'   see [tidy.lmRob()].
 #'
 #' @inherit tidy.lmrob examples
 #'
@@ -44,10 +45,12 @@ tidy.glmrob <- function (x, ...) {
 #' @inherit tidy.glmrob params 
 #' @template param_data
 #' @template param_newdata
+#' 
 #' @param se_fit a switch indicating if standard errors are required.
 #' 
-#' @details For tidiers for robustbase models from the \pkg{MASS} package see
-#'   [tidy.rlm()].
+#' @details For tidiers for robust models from the \pkg{MASS} package see
+#'   [tidy.rlm()]. For tidiers for robust models from the \pkg{robust} package
+#'   see [tidy.lmRob()].
 #'
 #' @export
 #' @family robustbase tidiers
@@ -65,6 +68,10 @@ augment.glmrob <- function(x, data = model.frame(x), newdata = NULL, se_fit = FA
 #' @param x Unused.
 #' @param ... Unused.
 #' 
+#' @details For tidiers for robust models from the \pkg{MASS} package see
+#'   [tidy.rlm()]. For tidiers for robust models from the \pkg{robust} package
+#'   see [tidy.lmRob()].
+
 #' @description `glance.glmrob()` has not yet been implemented in broom. The
 #'   \pkg{robustbase} package does not provide the functionality necessary to
 #'   implement a glance method.
