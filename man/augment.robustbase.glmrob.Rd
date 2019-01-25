@@ -4,7 +4,8 @@
 \alias{augment.glmrob}
 \title{Augment data with information from a(n) glmrob object}
 \usage{
-\method{augment}{glmrob}(x, data = model.frame(x), newdata = NULL, ...)
+\method{augment}{glmrob}(x, data = model.frame(x), newdata = NULL,
+  se_fit = FALSE, ...)
 }
 \arguments{
 \item{x}{A \code{glmrob} object returned from \code{\link[robustbase:glmrob]{robustbase::glmrob()}}.}
@@ -21,6 +22,8 @@ the original training data.}
 the original predictors used to create \code{x}. Defaults to \code{NULL}, indicating
 that nothing has been passed to \code{newdata}. If \code{newdata} is specified,
 the \code{data} argument will be ignored.}
+
+\item{se_fit}{a switch indicating if standard errors are required}
 
 \item{...}{Additional arguments. Not used. Needed to match generic
 signature only. \strong{Cautionary note:} Misspelled arguments will be
