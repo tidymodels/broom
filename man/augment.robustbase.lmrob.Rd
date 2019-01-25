@@ -90,13 +90,13 @@ tidy(m)
 augment(m)
 glance(m)
 
-TODO: glm
 # From the robustbase::glmrob examples:
 data(carrots)
 Rfit <- glmrob(cbind(success, total-success) ~ logdose + block,
                 family = binomial, data = carrots, method= "Mqle",
                 control= glmrobMqle.control(tcc=1.2))
 tidy(Rfit)
+augment(Rfit)
 
 }
 \seealso{
