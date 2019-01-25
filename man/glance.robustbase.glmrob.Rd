@@ -7,7 +7,7 @@
 \method{glance}{glmrob}(x, ...)
 }
 \arguments{
-\item{x}{A \code{glmrob} object returned from \code{\link[robustbase:glmrob]{robustbase::glmrob()}}.}
+\item{x}{Unused.}
 
 \item{...}{Additional arguments. Not used. Needed to match generic
 signature only. \strong{Cautionary note:} Misspelled arguments will be
@@ -18,6 +18,8 @@ proceed using \code{conf.level = 0.95}. Additionally, if you pass
 \code{newdata = my_tibble} to an \code{\link[=augment]{augment()}} method that does not
 accept a \code{newdata} argument, it will use the default value for
 the \code{data} argument.}
+
+\item{...}{Unused.}
 }
 \description{
 Glance accepts a model object and returns a \code{\link[tibble:tibble]{tibble::tibble()}}
@@ -33,26 +35,15 @@ Glance does not calculate summary measures. Rather, it farms out these
 computations to appropriate methods and gathers the results together.
 Sometimes a goodness of fit measure will be undefined. In these cases
 the measure will be reported as \code{NA}.
+
+\code{glance.glmrob()} has not yet been implemented in broom. The
+\pkg{robustbase} package does not provide the functionality necessary to
+implement a glance method.
 }
-\examples{
-
-# From the robustbase::lmrob examples:
-data(coleman)
-set.seed(0)
-
-m <- robustbase::lmrob(Y ~ ., data=coleman)
-tidy(m)
-augment(m)
-glance(m)
-
-TODO: glm
-# From the robustbase::glmrob examples:
-data(carrots)
-Rfit <- glmrob(cbind(success, total-success) ~ logdose + block,
-                family = binomial, data = carrots, method= "Mqle",
-                control= glmrobMqle.control(tcc=1.2))
-tidy(Rfit)
-
+\details{
+For tidiers for robust models from the \pkg{MASS} package see
+\code{\link[=tidy.rlm]{tidy.rlm()}}. For tidiers for robust models from the \pkg{robust} package
+see \code{\link[=tidy.lmRob]{tidy.lmRob()}}.
 }
 \seealso{
 \code{\link[robustbase:glmrob]{robustbase::glmrob()}}
@@ -62,10 +53,3 @@ Other robustbase tidiers: \code{\link{augment.glmrob}},
   \code{\link{tidy.glmrob}}, \code{\link{tidy.lmrob}}
 }
 \concept{robustbase tidiers}
-\value{
-A \code{\link[tibble:tibble]{tibble::tibble()}} with exactly one row and columns:
-  \item{deviance}{Deviance of the model.}
-  \item{df.residual}{Residual degrees of freedom.}
-  \item{null.deviance}{Deviance of the null model.}
-
-}

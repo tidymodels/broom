@@ -5,10 +5,27 @@
 \alias{robustbase_tidiers}
 \title{Tidy a(n) lmrob object}
 \usage{
-\method{tidy}{lmrob}(x, ...)
+\method{tidy}{lmrob}(x, conf.int = FALSE, conf.level = 0.95,
+  exponentiate = FALSE, quick = FALSE, ...)
 }
 \arguments{
 \item{x}{A \code{lmrob} object returned from \code{\link[robustbase:lmrob]{robustbase::lmrob()}}.}
+
+\item{conf.int}{Logical indicating whether or not to include a confidence
+interval in the tidied output. Defaults to \code{FALSE}.}
+
+\item{conf.level}{The confidence level to use for the confidence interval
+if \code{conf.int = TRUE}. Must be strictly greater than 0 and less than 1.
+Defaults to 0.95, which corresponds to a 95 percent confidence interval.}
+
+\item{exponentiate}{Logical indicating whether or not to exponentiate the
+the coefficient estimates. This is typical for logistic and multinomial
+regressions, but a bad idea if there is no log or logit link. Defaults
+to \code{FALSE}.}
+
+\item{quick}{Logical indiciating if the only the \code{term} and \code{estimate}
+columns should be returned. Often useful to avoid time consuming
+covariance and standard error calculations. Defaults to \code{FALSE}.}
 
 \item{...}{Additional arguments. Not used. Needed to match generic
 signature only. \strong{Cautionary note:} Misspelled arguments will be

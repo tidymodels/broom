@@ -32,12 +32,7 @@
 #' @rdname tidy.robustbase.lmrob
 #' @seealso [robustbase::lmrob()]
 #' @include stats-lm-tidiers.R
-tidy.lmrob <- function (x, ...) {
-  dots <- enquos(...)
-  dots$conf.int <- FALSE
-  
-  rlang::exec(tidy.lm, x, !!!dots)
-}
+tidy.lmrob <- tidy.lm
 
 #' @templateVar class lmrob
 #' @template title_desc_augment
@@ -45,6 +40,8 @@ tidy.lmrob <- function (x, ...) {
 #' @inherit tidy.lmrob params examples
 #' @template param_data
 #' @template param_newdata
+#' 
+#' @param se_fit a switch indicating if standard errors are required.
 #' 
 #' @details For tidiers for robust models from the \pkg{MASS} package see
 #'   [tidy.rlm()]. For tidiers for robust models from the \pkg{robust} package
@@ -54,8 +51,8 @@ tidy.lmrob <- function (x, ...) {
 #' @rdname augment.robustbase.lmrob
 #' @family robustbase tidiers
 #' @seealso [robustbase::lmrob()]
-augment.lmrob <- function(x, data = model.frame(x), newdata = NULL, ...) {
-  augment_newdata(x, data, newdata, .se_fit = FALSE)
+augment.lmrob <- function(x, data = model.frame(x), newdata = NULL, se_fit = FALSE, ...) {
+  augment_newdata(x, data, newdata, .se_fit = se_fit, ...)
 }
 
 #' @templateVar class lmrob
@@ -70,7 +67,6 @@ augment.lmrob <- function(x, data = model.frame(x), newdata = NULL, ...) {
 #'
 #' @evalRd return_glance(
 #'   "r.squared",
-#'   "deviance",
 #'   "sigma",
 #'   "df.residual"
 #' )
@@ -83,8 +79,6 @@ glance.lmrob <- function(x, ...) {
   s <- summary(x)
   tibble(
     r.squared = s$r.squared,
-    # FIXME
-    # deviance = x$dev, 
     sigma = s$sigma,
     df.residual = x$df.residual
   )
