@@ -14,8 +14,8 @@ test_that("robustbase tidier arguments", {
   check_arguments(glance.lmrob)
   check_arguments(augment.lmrob)
   
-  # check_arguments(tidy.glmrob)
-  # check_arguments(glance.glmrob)
+  check_arguments(tidy.glmrob)
+  check_arguments(glance.glmrob)
 })
 
 test_that("tidy.lmrob", {
@@ -37,19 +37,23 @@ test_that("augment.lmrob", {
   )
 })
 
-# test_that("tidy.glmrob", {
-#   td <- tidy(fit2)
-#   check_tidy_output(td)
-# })
-# 
-# test_that("glance.glmrob", {
-#   gl <- glance(fit2)
-#   check_glance_outputs(gl)
-# })
-# 
-# test_that("augment.glmrob", {
-#   expect_error(
-#     augment.glmrob(),
-#     "`augment.glmrob` has been removed from broom. See the documentation."
-#   )
-# })
+test_that("tidy.glmrob", {
+  td <- tidy(fit2)
+  check_tidy_output(td)
+})
+
+test_that("glance.glmrob", {
+  expect_error(
+    glance.glmrob(),
+    "`glance.glmrob()` has not yet been implemented. See the documentation."
+  )
+})
+
+test_that("augment.glmrob", {
+  check_augment_function(
+    aug = augment.glmrob,
+    model = fit2,
+    data = mtcars,
+    newdata = mtcars
+  )
+})
