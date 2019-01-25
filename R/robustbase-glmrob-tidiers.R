@@ -21,15 +21,15 @@ tidy.glmrob <- function (x, ...) {
   
   # tidy.glmrob(..., conf.int = TRUE) throws an error, 
   # so calc conf.int separately if requested
-  conf.int <- list(...)$conf.int
+  conf.int <- rlang::`%||%`(rlang::dots_list(...)$conf.int, FALSE)
   
-  if (!is.null(conf.int) && conf.int) {
-    level <- list(...)$level
-    level <- ifelse(is.null(level), 0.95, level)
+  if (conf.int) {
+    level <- rlang::`%||%`(rlang::dots_list(...)$level, 0.95)
     ci <- stats::confint.default(x, level = level) %>% 
-      as_tibble(rownames = NA) 
-    names(ci) <- c("conf.low", "conf.high")
-    ci$term <- rownames(ci)
+      as_tibble(rownames = NA)  %>% 
+      tibble::rownames_to_column(var = 'term')
+    names(ci)[2:3] <- c("conf.low", "conf.high")
+
     ret <- ret %>% 
       left_join(ci, by = 'term')
   }
@@ -37,12 +37,14 @@ tidy.glmrob <- function (x, ...) {
   ret
 }
 
+
 #' @templateVar class glmrob
 #' @template title_desc_augment
 #' 
 #' @inherit tidy.glmrob params 
 #' @template param_data
 #' @template param_newdata
+#' @param se_fit a switch indicating if standard errors are required.
 #' 
 #' @details For tidiers for robustbase models from the \pkg{MASS} package see
 #'   [tidy.rlm()].
@@ -52,30 +54,28 @@ tidy.glmrob <- function (x, ...) {
 #' @rdname augment.robustbase.glmrob
 #' @seealso [robustbase::glmrob()]
 #' @include stats-lm-tidiers.R
-augment.glmrob <- function(x, data = model.frame(x), newdata = NULL, ...) {
-  augment_newdata(x, data, newdata, .se_fit = FALSE, ...)
+augment.glmrob <- function(x, data = model.frame(x), newdata = NULL, se_fit = FALSE, ...) {
+  augment_newdata(x, data, newdata, .se_fit = se_fit, ...)
 }
 
 #' @templateVar class glmrob
 #' @template title_desc_glance
-#' 
-#' @inherit tidy.glmrob params examples
 #' @template param_unused_dots
 #' 
-#' @evalRd return_glance(
-#'   "deviance",
-#'   "null.deviance",
-#'   "df.residual"
-#' )
+#' @param x Unused.
+#' @param ... Unused.
 #' 
+#' @description `glance.glmrob()` has not yet been implemented in broom. The
+#'   \pkg{robustbase} package does not provide the functionality necessary to
+#'   implement a glance method.
+#'
 #' @export
 #' @rdname glance.robustbase.glmrob
 #' @family robustbase tidiers
 #' @seealso [robustbase::glmrob()]
 glance.glmrob <- function(x, ...) {
-  ret <- tibble(
-    deviance = x$deviance,
-    null.deviance = x$null.deviance
+  stop(
+    "`glance.glmrob()` has not yet been implemented. See the documentation.",
+    call. = FALSE
   )
-  finish_glance(ret, x)
 }
