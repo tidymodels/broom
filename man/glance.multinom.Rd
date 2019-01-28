@@ -64,5 +64,6 @@ A \code{\link[tibble:tibble]{tibble::tibble()}} with exactly one row and columns
   \item{AIC}{Akaike's Information Criterion for the model.}
   \item{deviance}{Deviance of the model.}
   \item{edf}{The effective degrees of freedom}
+  \item{nobs}{Number of observations used.}
 
 }

@@ -63,16 +63,6 @@ A \code{\link[tibble:tibble]{tibble::tibble()}} with exactly one row and columns
   \item{converged}{Logical indicating if the model fitting procedure was succesful and converged.}
   \item{deviance}{Deviance of the model.}
   \item{logLik}{The log-likelihood of the model. [stats::logLik()] may be a useful reference.}
-  \item{sigma}{Estimated standard error of the residuals.}
-
-}
-\value{
-A \code{\link[tibble:tibble]{tibble::tibble()}} with exactly one row and columns:
-  \item{AIC}{Akaike's Information Criterion for the model.}
-  \item{BIC}{Bayesian Information Criterion for the model.}
-  \item{converged}{Logical indicating if the model fitting procedure was succesful and converged.}
-  \item{deviance}{Deviance of the model.}
-  \item{logLik}{The log-likelihood of the model. [stats::logLik()] may be a useful reference.}
   \item{nobs}{Number of observations used.}
   \item{sigma}{Estimated standard error of the residuals.}
 

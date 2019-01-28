@@ -32,7 +32,7 @@ test_that("tidy.nls", {
 test_that("glance.nls", {
   gl <- glance(fit)
   check_glance_outputs(gl)
-  check_dims(gl, expected_cols = 8)
+  check_dims(gl, expected_cols = 9)
 })
 
 test_that("augment.nls", {

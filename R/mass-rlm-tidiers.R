@@ -10,7 +10,8 @@
 #'   "logLik",
 #'   "AIC",
 #'   "BIC",
-#'   "deviance"
+#'   "deviance",
+#'   "nobs"
 #' )
 #'
 #' @details For tidiers for models from the \pkg{robust} package see
@@ -25,15 +26,6 @@
 #' augment(r)
 #' glance(r)
 #'
-#' @evalRd return_glance(
-#'   "sigma",
-#'   "converged",
-#'   "logLik",
-#'   "AIC",
-#'   "BIC",
-#'   "deviance",
-#'   "nobs"
-#' )
 #' @export
 #' @aliases rlm_tidiers
 #' @family rlm tidiers

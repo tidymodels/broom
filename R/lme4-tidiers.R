@@ -8,9 +8,6 @@
 #' @param x An object of class `merMod`, such as those from `lmer`,
 #' `glmer`, or `nlmer`
 #'
-#' @return All tidying methods return a `data.frame` without rownames.
-#' The structure depends on the method chosen.
-#'
 #' @name lme4_tidiers
 #'
 #' @examples

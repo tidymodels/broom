@@ -1,25 +1,4 @@
-# These packages were checked are are compatible with `stats::nobs`:
-
-# aer
-# plm
-# betareg
-# gam
-# gamlss
-# geefit
-# glmnet
-# lme4
-# mass-polr
-# mass-rlm
-# mediate
-# mgcv
-# ordinal
-# psych
-# speedglm
-# stats-arima
-# stats-factanal
-# stats-glm
-# stats-lm
-# stats-nls
+#`stats::nobs` is a standard function to retrieve the number of observations used to fit a model. Unfortunately, Some packages do not define a `stats::nobs.MODEL` method. This file fills-in those missing methods. Ideally, we should offload these methods by submitting them for adoption in the upstream packages.
 
 # These packages still need to be checked:
 
@@ -31,13 +10,8 @@
 # lavaan: conflict between stats::nobs and lavaan::nobs
 # mass-ridgelm
 # survival-*
-
-# These packages do not have exxamples in the broom docs
-
 # quantreg-rq
 # quantreg-rqs
-
-# Custom `nobs` methods
 
 # nnet-multinom
 nobs.multinom <- function(object, ...) {

@@ -96,14 +96,6 @@ with six columns:
 
 If \code{conf.int=TRUE}, it also includes columns for \code{conf.low} and
 
-\code{glance.clm}, \code{glance.clmm}, \code{glance.polr} and \code{glance.svyolr}
-return a one-row data.frame with the columns:
-\item{edf}{the effective degrees of freedom}
-\item{logLik}{the data's log-likelihood under the model}
-\item{AIC}{the Akaike Information Criterion}
-\item{BIC}{the Bayesian Information Criterion}
-\item{df.residual}{residual degrees of freedom}
-
 \code{augment.clm} and \code{augment.polr} returns
 one row for each observation, with additional columns added to
 the original data:
@@ -112,9 +104,6 @@ the original data:
 
 \code{augment} is not supportted for \code{\link[ordinal:clmm]{ordinal::clmm()}}
 and \code{\link[survey:svyolr]{survey::svyolr()}} models.
-
-All tidying methods return a \code{data.frame} without rownames.
-The structure depends on the method chosen.
 }
 \description{
 These methods tidy the coefficients of ordinal logistic regression
@@ -155,6 +144,16 @@ A \code{\link[tibble:tibble]{tibble::tibble()}} with exactly one row and columns
   \item{AIC}{Akaike's Information Criterion for the model.}
   \item{BIC}{Bayesian Information Criterion for the model.}
   \item{deviance}{Deviance of the model.}
+  \item{df.residual}{Residual degrees of freedom.}
+  \item{edf}{The effective degrees of freedom}
+  \item{logLik}{The log-likelihood of the model. [stats::logLik()] may be a useful reference.}
+  \item{nobs}{Number of observations used.}
+
+}
+\value{
+A \code{\link[tibble:tibble]{tibble::tibble()}} with exactly one row and columns:
+  \item{AIC}{Akaike's Information Criterion for the model.}
+  \item{BIC}{Bayesian Information Criterion for the model.}
   \item{df.residual}{Residual degrees of freedom.}
   \item{edf}{The effective degrees of freedom}
   \item{logLik}{The log-likelihood of the model. [stats::logLik()] may be a useful reference.}
