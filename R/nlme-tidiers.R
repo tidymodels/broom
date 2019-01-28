@@ -133,11 +133,11 @@ augment.lme <- function(x, data = x$data, newdata, ...) {
 #'   \item{logLik}{the data's log-likelihood under the model}
 #'   \item{AIC}{the Akaike Information Criterion}
 #'   \item{BIC}{the Bayesian Information Criterion}
-#'   \item{nobs}{the number of observations used}
 #'   \item{deviance}{returned as NA. To quote Brian Ripley on R-help:
 #'  McCullagh & Nelder (1989) would be the authoritative reference, but the 1982
 #' first edition manages to use 'deviance' in three separate senses on one
 #' page. }
+#'   \item{nobs}{the number of observations used}
 #'
 #' @export
 glance.lme <- function(x, ...) {
@@ -146,8 +146,8 @@ glance.lme <- function(x, ...) {
                 logLik = as.numeric(stats::logLik(x)),
                 AIC = stats::AIC(x),
                 BIC = stats::BIC(x),
-                nobs = stats::nobs(x),
-                deviance = NA)
+                deviance = NA,
+                nobs = stats::nobs(x))
   # ret$deviance = -2 * x$logLik # Or better leave this out totally?
   ret
 }

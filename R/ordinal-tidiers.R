@@ -153,14 +153,15 @@ tidy.clmm <- function(x, conf.int = FALSE, conf.level = .95,
 #'   )
 #' @export
 glance.clm <- function(x, ...) {
-  ret <- tibble(edf = x$edf,
-                nobs = stats::nobs(x))
+  ret <- tibble(edf = x$edf)
   # survey-svyolr returns NULL AIC, BIC, logLik
   ret$AIC <- tryCatch(as.numeric(stats::AIC(x)), error = function(e) NULL)
   ret$BIC <- tryCatch(as.numeric(stats::BIC(x)), error = function(e) NULL)
   ret$logLik <- tryCatch(as.numeric(stats::logLik(x)), error = function(e) NULL)
-  # clmm returns NULL df.residual
+  # clmm returns returns NULL df.residual
   ret$df.residual <- tryCatch(stats::df.residual(x), error = function(e) NULL)
+  # nobs
+  ret$nobs <- tryCatch(stats::nobs(x), error = function(e) NULL)
   ret
 }
 

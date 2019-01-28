@@ -189,6 +189,6 @@ glance.coxph <- function(x, ...) {
     BIC = stats::BIC(x),
     nobs = stats::nobs(x)
   )
-  ret <- as.data.frame(compact(ret))
+  ret <- as_tibble(compact(ret))
   ret
 }

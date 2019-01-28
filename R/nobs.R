@@ -26,17 +26,28 @@
 # caret
 # joineRML
 # ergm
-# mass-ridgelm
 # nlme
-# multinom
-# orcutt
+# rstanarm
+# lavaan: conflict between stats::nobs and lavaan::nobs
+# mass-ridgelm
+# survival-*
+
+# These packages do not have exxamples in the broom docs
+
 # quantreg-rq
 # quantreg-rqs
-# rstanarm
-# survival-*
-# lavaan: conflict between stats::nobs and lavaan::nobs
 
 # Custom `nobs` methods
+
+# nnet-multinom
+nobs.multinom <- function(object, ...) {
+    nrow(object$residuals)
+}
+
+# orcutt
+nobs.orcutt <- function(object, ...) {
+    nrow(object$residuals)
+}
 
 # mass-fitdistr
 nobs.fitdistr <- function(object, ...) {
@@ -101,9 +112,9 @@ nobs.prcomp <- function(object, ...) {
     NROW(object$x)
 }
 
-#stats-smooth
+#stats-smooth.spline
 nobs.smooth.spline <- function(object, ...) {
-    length(spl$x)
+    length(object$x)
 }
 
 #bbmle
@@ -126,9 +137,25 @@ nobs.survfit <- function(object, ...) {
     object$n
 }
 
+#survival-survfit.cox
+nobs.survfit.cox <- function(object, ...) {
+    object$n
+}
+
 #survival-coxph
 nobs.coxph <- function(object, ...) {
     length(object$linear.predictors)
+}
+
+#survival-pyears
+nobs.pyears <- function(object, ...) {
+    object$observations
+}
+
+#survival-survdiff
+nobs.survdiff <- function(object, ...) {
+    s <- summary(object)
+    s$nobs
 }
 
 #tseries

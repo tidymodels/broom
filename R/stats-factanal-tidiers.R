@@ -110,7 +110,8 @@ augment.factanal <- function(x, data, ...) {
 #'   "df",
 #'   "n",
 #'   "method",
-#'   "converged"
+#'   "converged",
+#'   "nobs"
 #' )
 #'
 #' @export
@@ -133,6 +134,7 @@ glance.factanal <- function(x, ...) {
     df = x$dof,
     n = x$n.obs,
     method = x$method,
-    converged = x$converged
+    converged = x$converged,
+    nobs = stats::nobs(x)
   )
 }
