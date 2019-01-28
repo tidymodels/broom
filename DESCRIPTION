@@ -207,6 +207,7 @@ Collate:
     'multcomp-tidiers.R'
     'nlme-tidiers.R'
     'nnet-tidiers.R'
+    'nobs.R'
     'null-and-default-tidiers.R'
     'orcutt-tidiers.R'
     'ordinal-tidiers.R'

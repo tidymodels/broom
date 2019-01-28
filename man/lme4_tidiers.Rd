@@ -63,13 +63,6 @@ with columns (each prepended by a .) added. Included are the columns
 Also added for "merMod" objects, but not for "mer" objects,
 are values from the response object within the model (of type
 \code{lmResp}, \code{glmResp}, \code{nlsResp}, etc). These include \code{".mu", ".offset", ".sqrtXwt", ".sqrtrwt", ".eta"}.
-
-\code{glance} returns one row with the columns
-\item{sigma}{the square root of the estimated residual variance}
-\item{logLik}{the data's log-likelihood under the model}
-\item{AIC}{the Akaike Information Criterion}
-\item{BIC}{the Bayesian Information Criterion}
-\item{deviance}{deviance}
 }
 \description{
 \code{lme4} tidiers are deprecated.
@@ -119,4 +112,14 @@ warning is raised and the incomplete rows are dropped.
 }
 \seealso{
 \link{na.action}
+}
+\value{
+A \code{\link[tibble:tibble]{tibble::tibble()}} with exactly one row and columns:
+  \item{AIC}{Akaike's Information Criterion for the model.}
+  \item{BIC}{Bayesian Information Criterion for the model.}
+  \item{deviance}{Deviance of the model.}
+  \item{logLik}{The log-likelihood of the model. [stats::logLik()] may be a useful reference.}
+  \item{nobs}{Number of observations used.}
+  \item{sigma}{Estimated standard error of the residuals.}
+
 }

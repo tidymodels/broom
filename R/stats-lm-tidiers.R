@@ -173,7 +173,8 @@ augment.lm <- function(x, data = model.frame(x), newdata = NULL,
 #'   "AIC",
 #'   "BIC",
 #'   "deviance",
-#'   "df.residual"
+#'   "df.residual",
+#'   "nobs"
 #' )
 #'
 #' @export
@@ -184,7 +185,12 @@ glance.lm <- function(x, ...) {
   # summarized and glanced at
   s <- stats::summary.lm(x)
   ret <- glance.summary.lm(s, ...)
-  ret <- finish_glance(ret, x)
+  ret$logLik <- as.numeric(stats::logLik(x))
+  ret$AIC <- stats::AIC(x)
+  ret$BIC <- stats::BIC(x)
+  ret$deviance <- stats::deviance(x)
+  ret$df.residual <- stats::df.residual(x)
+  ret$nobs <- stats::nobs(x)
   as_tibble(ret)
 }
 

@@ -85,6 +85,7 @@ augment.ivreg <- function(x, data = model.frame(x), newdata = NULL, ...) {
 #'   "sigma",
 #'   "df",
 #'   "df.residual",
+#'   "nobs",
 #'   "statistic.Sargan",
 #'   "p.value.Sargan",
 #'   "statistic.Wu.Hausman",
@@ -112,6 +113,8 @@ glance.ivreg <- function(x, diagnostics = FALSE, ...) {
       df = df[1]
     )
   )
+  ret$df.residual <- df.residual(x)
+  ret$nobs <- stats::nobs(x)
   
   if (diagnostics) {
     diag <- with(s,
@@ -126,6 +129,7 @@ glance.ivreg <- function(x, diagnostics = FALSE, ...) {
     )
     ret <- bind_cols(ret, diag)
   }
+
+  as_tibble(ret, rownames = NULL)
   
-  finish_glance(ret, x)
 }

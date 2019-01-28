@@ -143,15 +143,25 @@ tidy.clmm <- function(x, conf.int = FALSE, conf.level = .95,
 }
 
 #' @rdname ordinal_tidiers
+#' @evalRd return_glance(
+#'   'edf',
+#'   'logLik',
+#'   'AIC',
+#'   'BIC',
+#'   'df.residual',
+#'   'nobs'
+#'   )
 #' @export
 glance.clm <- function(x, ...) {
-  ret <- with(
-    x,
-    tibble(
-      edf = edf
-    )
-  )
-  finish_glance(ret, x)
+  ret <- tibble(edf = x$edf,
+                nobs = stats::nobs(x))
+  # survey-svyolr returns NULL AIC, BIC, logLik
+  ret$AIC <- tryCatch(as.numeric(stats::AIC(x)), error = function(e) NULL)
+  ret$BIC <- tryCatch(as.numeric(stats::BIC(x)), error = function(e) NULL)
+  ret$logLik <- tryCatch(as.numeric(stats::logLik(x)), error = function(e) NULL)
+  # clmm returns NULL df.residual
+  ret$df.residual <- tryCatch(stats::df.residual(x), error = function(e) NULL)
+  ret
 }
 
 #' @rdname ordinal_tidiers

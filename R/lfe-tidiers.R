@@ -170,7 +170,8 @@ augment.felm <- function(x, data = model.frame(x), ...) {
 #'   "statistic",
 #'   "p.value",
 #'   "df",
-#'   "df.residual"
+#'   "df.residual",
+#'   "nobs"
 #' )
 #'
 #' @export
@@ -193,7 +194,8 @@ glance.felm <- function(x, ...) {
       statistic = fstat,
       p.value = pval,
       df = df[1],
-      df.residual = rdf
+      df.residual = rdf,
+      nobs = stats::nobs(x)
   ))
-  finish_glance(ret, x)
+  ret
 }

@@ -283,12 +283,14 @@ augment.merMod <- function(x, data = stats::model.frame(x), newdata, ...) {
 #'
 #' @param ... extra arguments (not used)
 #'
-#' @return `glance` returns one row with the columns
-#'   \item{sigma}{the square root of the estimated residual variance}
-#'   \item{logLik}{the data's log-likelihood under the model}
-#'   \item{AIC}{the Akaike Information Criterion}
-#'   \item{BIC}{the Bayesian Information Criterion}
-#'   \item{deviance}{deviance}
+#' @evalRd return_glance(
+#'   "sigma",
+#'   "logLik",
+#'   "AIC",
+#'   "BIC",
+#'   "deviance",
+#'   "nobs"
+#' )
 #'
 #' @export
 glance.merMod <- function(x, ...) {
@@ -301,6 +303,12 @@ glance.merMod <- function(x, ...) {
   } else {
     get("sigma", asNamespace("lme4"))
   }
-  ret <- unrowname(data.frame(sigma = sigma(x)))
-  finish_glance(ret, x)
+  ret <- tibble(sigma = sigma(x),
+                logLik = stats::logLik(x),
+                AIC = stats::AIC(x),
+                BIC = stats::BIC(x),
+                deviance = stats::deviance(x),
+                nobs = stats::nobs(x)
+                )
+  ret
 }

@@ -1,6 +1,13 @@
 
 #' @rdname ordinal_tidiers
 #' @export
+#' @examples
+#' 
+#' library(MASS)
+#' data(housing)
+#' mod <- polr(Sat ~ Infl + Type + Cont, weights = Freq, data = housing)    
+#' tidy(mod)
+#' glance(mod)
 tidy.polr <- function(x, conf.int = FALSE, conf.level = .95,
                       exponentiate = FALSE, quick = FALSE, ...) {
   if (quick) {
@@ -51,9 +58,26 @@ process_polr <- function(ret, x, conf.int = FALSE, conf.level = .95,
 
 
 #' @rdname ordinal_tidiers
+#' @evalRd return_glance(
+#'  "edf",
+#'  "logLik",
+#'  "AIC",
+#'  "BIC",
+#'  "deviance",
+#'  "df.residual",
+#'  "nobs"
+#' )
 #' @export
 glance.polr <- function(x, ...) {
-  finish_glance(tibble(edf = x$edf), x)
+  ret <- tibble(edf = x$edf,
+                logLik = as.numeric(stats::logLik(x)),
+                AIC = stats::AIC(x),
+                BIC = stats::BIC(x),
+                deviance = stats::deviance(x),
+                df.residual = stats::df.residual(x),
+                nobs = stats::nobs(x)
+                )
+  ret
 }
 
 #' @rdname ordinal_tidiers
