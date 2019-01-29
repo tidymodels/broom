@@ -19,8 +19,12 @@ test_that("robustbase tidier arguments", {
 })
 
 test_that("tidy.lmrob", {
+  # check tidy.lmrob returns right columns
   td <- tidy(fit)
   check_tidy_output(td)
+  # check tidy.lmrob returns confidence intervals for params when requested
+  td_ci <- tidy(fit, conf.int = TRUE)
+  check_dims(td_ci, 6, 7)
 })
 
 test_that("glance.lmrob", {
@@ -35,6 +39,8 @@ test_that("augment.lmrob", {
     data = mtcars,
     newdata = mtcars
   )
+  # check that .se.fit column is included
+  check_dims(augment(fit, se_fit = TRUE), 20, 9)
 })
 
 test_that("tidy.glmrob", {
