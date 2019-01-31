@@ -82,7 +82,7 @@ augment.glmrob <- function(x, data = model.frame(x), newdata = NULL, se_fit = FA
 #' @seealso [robustbase::glmrob()]
 glance.glmrob <- function(x, ...) {
   stop(
-    "`glance.glmrob()` has not yet been implemented. See the documentation.",
+    "`glance.glmrob` has not yet been implemented. See the documentation.",
     call. = FALSE
   )
 }

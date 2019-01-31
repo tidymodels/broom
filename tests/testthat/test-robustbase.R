@@ -24,7 +24,7 @@ test_that("tidy.lmrob", {
   check_tidy_output(td)
   # check tidy.lmrob returns confidence intervals for params when requested
   td_ci <- tidy(fit, conf.int = TRUE)
-  check_dims(td_ci, 6, 7)
+  check_dims(td_ci, 2, 7)
 })
 
 test_that("glance.lmrob", {
@@ -40,18 +40,20 @@ test_that("augment.lmrob", {
     newdata = mtcars
   )
   # check that .se.fit column is included
-  check_dims(augment(fit, se_fit = TRUE), 20, 9)
+  check_dims(augment(fit, se_fit = TRUE), 32, 6)
 })
 
 test_that("tidy.glmrob", {
   td <- tidy(fit2)
   check_tidy_output(td)
+  td_ci <- tidy(fit2, conf.int = TRUE)
+  check_dims(td_ci, 2, 7)
 })
 
 test_that("glance.glmrob", {
   expect_error(
     glance.glmrob(),
-    "`glance.glmrob()` has not yet been implemented. See the documentation."
+    "`glance.glmrob` has not yet been implemented. See the documentation."
   )
 })
 
