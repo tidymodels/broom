@@ -29,6 +29,7 @@ see \code{\link[=tidy.lmRob]{tidy.lmRob()}}.
 }
 \examples{
 
+library(robustbase)
 # From the robustbase::lmrob examples:
 data(coleman)
 set.seed(0)
