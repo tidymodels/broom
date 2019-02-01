@@ -57,8 +57,34 @@ tidy.glmrob <- function (x, ...) {
 #' @rdname augment.robustbase.glmrob
 #' @seealso [robustbase::glmrob()]
 #' @include stats-lm-tidiers.R
-augment.glmrob <- function(x, data = model.frame(x), newdata = NULL, se_fit = FALSE, ...) {
-  augment_newdata(x, data, newdata, .se_fit = se_fit, ...)
+augment.glmrob <- function(x, data = model.frame(x), newdata = NULL,
+                           type.predict = c("link", "response", "terms"),
+                           type.residuals = c("deviance", "pearson"),
+                           se_fit = FALSE, ...) {
+  # slightly modified version of `augment.glm`
+  type.predict <- match.arg(type.predict)
+  type.residuals <- match.arg(type.residuals)
+  
+  df <- if (is.null(newdata)) data else newdata
+  df <- as_broom_tibble(df)
+  
+  # don't use augment_newdata here; don't want raw/response residuals in .resid
+  if (se_fit) {
+    pred_obj <- predict(x, newdata, type = type.predict, se.fit = TRUE)
+    df$.fitted <- pred_obj$fit
+    df$.se.fit <- pred_obj$se.fit
+  } else {
+    df$.fitted <- predict(x, newdata, type = type.predict)
+  }
+  
+  if (is.null(newdata)) {
+    
+    tryCatch({
+      df$.resid <- residuals(x, type = type.residuals)
+    }, error = data_error)
+  }
+  
+  df
 }
 
 #' @templateVar class glmrob

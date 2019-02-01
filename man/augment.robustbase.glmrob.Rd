@@ -5,7 +5,8 @@
 \title{Augment data with information from a(n) glmrob object}
 \usage{
 \method{augment}{glmrob}(x, data = model.frame(x), newdata = NULL,
-  se_fit = FALSE, ...)
+  type.predict = c("link", "response", "terms"),
+  type.residuals = c("deviance", "pearson"), se_fit = FALSE, ...)
 }
 \arguments{
 \item{x}{A \code{glmrob} object returned from \code{\link[robustbase:glmrob]{robustbase::glmrob()}}.}
