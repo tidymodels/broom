@@ -15,13 +15,14 @@
 #'   "conf.high"
 #' )
 #'
-#' @details The tibble has four columns. 
+#' @details This tidy method works with any model objects of class `systemfit`. 
+#'          Default returns a tibble of six columns.
 #' @importFrom stats confint
 #' @examples
 #' library(systemfit)
 #' df <- data.frame(X = rnorm(100), Y = rnorm(100), Z = rnorm(100), W = rnorm(100))
 #'
-#` fit <- systemfit(formula = list(Y ~ Z, W ~ X), data = df)
+#` fit <- systemfit(formula = list(Y ~ Z, W ~ X), data = df, method = "SUR")
 #'
 #' tidy(fit)
 #' tidy(fit, conf.int = TRUE)
