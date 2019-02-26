@@ -2,14 +2,13 @@
 #' @template title_desc_tidy
 #' 
 #' @param x A `systemfit` object produced by a call to [systemfit::systemfit()].
-#' @template param_confint
+#' @param conf.int Logical indicating whether or not to include a confidence interval in the tidied output. Defaults to `FALSE`.
 #' @template param_unused_dots
 #' 
 #' @evalRd return_tidy(
 #'   "term", 
 #'   "estimate", 
 #'   "std.error", 
-#'   "mcmc.error", 
 #'   "p.value",
 #'   "conf.low",
 #'   "conf.high"
