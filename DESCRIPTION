@@ -139,6 +139,7 @@ Suggests:
     statnet.common,
     survey,
     survival,
+    systemfit,
     testthat,
     tseries,
     xergm,
@@ -244,6 +245,7 @@ Collate:
     'survival-survexp-tidiers.R'
     'survival-survfit-tidiers.R'
     'survival-survreg-tidiers.R'
+    'systemfit-tidiers.R'
     'tseries-tidiers.R'
     'utilities.R'
     'zoo-tidiers.R'
