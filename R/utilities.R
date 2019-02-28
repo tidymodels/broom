@@ -361,10 +361,28 @@ augment_newdata <- function(x, data, newdata, .se_fit, ...) {
 #'
 #' @export
 finish_glance <- function(ret, x) {
+  
+  # log-likelihood
+  #
   ret$logLik <- tryCatch(as.numeric(stats::logLik(x)), error = function(e) NULL)
-  ret$AIC <- tryCatch(stats::AIC(x), error = function(e) NULL)
+
+  # AIC
+  #
+  # special case for survey::svyglm objects (better way?)
+  if (inherits(x, "svyglm")) {
+    ret$AIC <- tryCatch(survey:::AIC.svyglm(mod)["AIC"],
+                        error = function(e) NULL
+    )
+  } else {
+    ret$AIC <- tryCatch(stats::AIC(x), error = function(e) NULL)
+  }
+  
+  # BIC
+  #
   ret$BIC <- tryCatch(stats::BIC(x), error = function(e) NULL)
 
+  # deviance
+  #
   # special case for REML objects (better way?)
   if (inherits(x, "lmerMod")) {
     ret$deviance <- tryCatch(stats::deviance(x, REML = FALSE),
@@ -373,6 +391,9 @@ finish_glance <- function(ret, x) {
   } else {
     ret$deviance <- tryCatch(stats::deviance(x), error = function(e) NULL)
   }
+  
+  # df.residual
+  #
   ret$df.residual <- tryCatch(df.residual(x), error = function(e) NULL)
   
   as_tibble(ret, rownames = NULL)
