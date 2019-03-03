@@ -25,9 +25,14 @@
 #' @include stats-lm-tidiers.R
 tidy.lmRob <- function (x, ...) {
   dots <- enquos(...)
-  dots$conf.int <- FALSE
+  m <- as.list(match.call())[-1]
+  unwanted <- names(m)[-which(names(m) %in% c("x", "conf.level"))]
   
-  rlang::exec(tidy.lm, x, !!!dots)
+  dots[unwanted] <- unwanted[1] %>% purrr::map( ~{
+    purrr::pluck(m, .x) <- FALSE
+  })
+  
+  rlang::exec(broom:::tidy.lm, x, !!!dots2)
 }
 
 #' @templateVar class lmRob
