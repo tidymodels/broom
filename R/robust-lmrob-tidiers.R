@@ -28,9 +28,11 @@ tidy.lmRob <- function (x, ...) {
   m <- as.list(match.call())[-1]
   unwanted <- names(m)[-which(names(m) %in% c("x", "conf.level"))]
   
-  dots[unwanted] <- unwanted[1] %>% purrr::map( ~{
-    purrr::pluck(m, .x) <- FALSE
-  })
+  if(length(unwanted) > 0){
+    dots[unwanted] <- unwanted[1] %>% purrr::map( ~{
+      purrr::pluck(m, .x) <- FALSE
+    })
+  }
   
   rlang::exec(broom:::tidy.lm, x, !!!dots)
 }
