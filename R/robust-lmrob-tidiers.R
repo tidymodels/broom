@@ -32,7 +32,7 @@ tidy.lmRob <- function (x, ...) {
     purrr::pluck(m, .x) <- FALSE
   })
   
-  rlang::exec(broom:::tidy.lm, x, !!!dots2)
+  rlang::exec(broom:::tidy.lm, x, !!!dots)
 }
 
 #' @templateVar class lmRob
