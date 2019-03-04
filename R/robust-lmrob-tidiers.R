@@ -29,7 +29,7 @@ tidy.lmRob <- function (x, ...) {
   unwanted <- names(m)[-which(names(m) %in% c("x", "conf.level"))]
   
   if(length(unwanted) > 0){
-    dots[unwanted] <- unwanted[1] %>% purrr::map( ~{
+    dots[unwanted] <- unwanted %>% purrr::map( ~{
       purrr::pluck(m, .x) <- FALSE
     })
   }
