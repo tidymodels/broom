@@ -6,7 +6,8 @@
 \alias{gam_tidiers}
 \title{Tidy a(n) gam object}
 \usage{
-\method{tidy}{gam}(x, parametric = FALSE, ...)
+\method{tidy}{gam}(x, parametric = FALSE, conf.int = FALSE,
+  conf.level = 0.95, ...)
 }
 \arguments{
 \item{x}{A \code{gam} object returned from a call to \code{\link[mgcv:gam]{mgcv::gam()}}.}
@@ -14,6 +15,13 @@
 \item{parametric}{Logical indicating if parametric or smooth terms should
 be tidied. Defaults to \code{FALSE}, meaning that smooth terms are tidied
 by default.}
+
+\item{conf.int}{Logical indicating whether or not to include a confidence
+interval in the tidied output. Defaults to \code{FALSE}.}
+
+\item{conf.level}{The confidence level to use for the confidence interval
+if \code{conf.int = TRUE}. Must be strictly greater than 0 and less than 1.
+Defaults to 0.95, which corresponds to a 95 percent confidence interval.}
 
 \item{...}{Additional arguments. Not used. Needed to match generic
 signature only. \strong{Cautionary note:} Misspelled arguments will be
@@ -34,7 +42,7 @@ If a model has several distinct types of components, you will need to
 specify which components to return.
 }
 \details{
-When \code{parametric = TRUE} return columns \code{edf} and \code{ref.df} rather
+When \code{parametric = FALSE} return columns \code{edf} and \code{ref.df} rather
 than \code{estimate} and \code{std.error}.
 
 To tidy \code{Gam} objects created by calls to \code{\link[gam:gam]{gam::gam()}},
