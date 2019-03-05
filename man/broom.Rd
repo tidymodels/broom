@@ -79,6 +79,7 @@ Other contributors:
   \item Matt Lehman [contributor]
   \item Bill Denney \email{wdenney@humanpredictions.com} (0000-0002-5759-428X) [contributor]
   \item Nic Crane [contributor]
+  \item Andrew Bates [contributor]
 }
 
 }
