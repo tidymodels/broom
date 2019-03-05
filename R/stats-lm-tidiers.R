@@ -180,45 +180,27 @@ augment.lm <- function(x, data = model.frame(x), newdata = NULL,
 #' @seealso [glance()]
 #' @family lm tidiers
 glance.lm <- function(x, ...) {
-  # use summary.lm explicity, so that c("aov", "lm") objects can be
-  # summarized and glanced at
-  s <- stats::summary.lm(x)
-  ret <- glance.summary.lm(s, ...)
-  ret <- finish_glance(ret, x)
-  as_tibble(ret)
-}
-
-
-#' @rdname glance.lm
-#' @export
-glance.summary.lm <- function(x, ...) {
-  ret <- with(x, cbind(
-    data.frame(
+  with(
+    summary(x),
+    tibble(
       r.squared = r.squared,
       adj.r.squared = adj.r.squared,
-      sigma = sigma
-    ),
-    if (exists("fstatistic")) {
-      data.frame(
-        statistic = fstatistic[1],
-        p.value = pf(fstatistic[1], fstatistic[2],
-          fstatistic[3],
-          lower.tail = FALSE
-        )
-      )
-    }
-    else {
-      data.frame(
-        statistic = NA_real_,
-        p.value = NA_real_
-      )
-    },
-    data.frame(
-      df = df[1]
+      sigma = sigma,
+      statistic = fstatistic["value"],
+      p.value = pf(
+        fstatistic["value"],
+        fstatistic["numdf"],
+        fstatistic["dendf"],
+        lower.tail = FALSE
+      ),
+      df = fstatistic["numdf"],
+      logLik = as.numeric(stats::logLik(x)),
+      AIC = stats::AIC(x),
+      BIC = stats::BIC(x),
+      deviance = stats::deviance(x),
+      df.residual = df.residual(x)
     )
-  ))
-
-  as_tibble(ret)
+  )
 }
 
 # getAnywhere('format.perc')
