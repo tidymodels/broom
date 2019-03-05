@@ -15,6 +15,8 @@ have overhauled `augment()` for general consistency improvements (hopefully, pen
 
 Previously the `df` column in `glance` reported the rank of the design matrix. Now it reports degrees of freedom of the numerator for the overall F-statistic. This is always equals equal to the rank of the model matrix minus one, so the new `df` will always be the old `df` minus one.
 
+TODO: sort out what happens to `glance.aov()`
+
 ## Structural changes
 
 - We now use `rlang::arg_match()` when possible instead of `arg.match()` to give more informative errors on argument mismatches.
