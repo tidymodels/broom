@@ -81,7 +81,7 @@ tidy.anova <- function(x, ...) {
 #' @templateVar class aov
 #' @template title_desc_tidy
 #' 
-#' @param x An `aov` objects, such as those created by [stats::aov()].
+#' @param x An `aov` object, such as those created by [stats::aov()].
 #' @template param_unused_dots
 #' 
 #' @inherit tidy.anova return details
@@ -99,6 +99,11 @@ tidy.aov <- function(x, ...) {
   tidy.anova(s[[1]])
 }
 
+# this is a placeholder while we decide what to do
+# it's not clear to me if glancing at an aov object should
+# return the same glance info as glance at the corresponding
+# regression. tentatively i'm calling this an error.
+glance.aov <- glance.default
 
 #' @templateVar class aovlist
 #' @template title_desc_tidy

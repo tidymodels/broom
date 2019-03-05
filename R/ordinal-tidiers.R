@@ -69,7 +69,7 @@ tidy.clm <- function(x, conf.int = FALSE, conf.level = .95,
     )
     return(process_clm(ret, x, conf.int = FALSE, exponentiate = exponentiate))
   }
-  conf.type <- match.arg(conf.type)
+  conf.type <- rlang::arg_match(conf.type)
   co <- coef(summary(x))
   nn <- c("estimate", "std.error", "statistic", "p.value")
   ret <- fix_data_frame(co, nn[seq_len(ncol(co))])
@@ -171,6 +171,6 @@ glance.clmm <- glance.clm
 #' @export
 augment.clm <- function(x, data = model.frame(x), newdata = NULL,
                         type.predict = c("prob", "class"), ...) {
-  type.predict <- match.arg(type.predict)
+  type.predict <- rlang::arg_match(type.predict)
   augment_columns(x, data, newdata, type = type.predict)
 }

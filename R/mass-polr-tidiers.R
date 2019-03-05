@@ -84,6 +84,6 @@ glance.polr <- function(x, ...) {
 #' @export
 augment.polr <- function(x, data = model.frame(x), newdata = NULL,
                          type.predict = c("probs", "class"), ...) {
-  type <- match.arg(type.predict)
+  type <- rlang::arg_match(type.predict)
   augment_columns(x, data, newdata, type = type.predict)
 }

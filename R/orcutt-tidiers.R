@@ -30,9 +30,11 @@
 #' @seealso [orcutt::cochrane.orcutt()]
 tidy.orcutt <- function(x, ...) {
   warning("deal with tidy.orcutt conf.int nonsense")
-  tidy.lm(x, ...)
-}
+  dots <- enquos(...)
+  dots$conf.int <- FALSE
 
+  rlang::exec(tidy.lm, x, !!!dots)
+}
 
 #' @templateVar class orcutt
 #' @template title_desc_glance

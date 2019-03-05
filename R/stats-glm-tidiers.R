@@ -47,8 +47,8 @@ augment.glm <- function(x,
   type.residuals = c("deviance", "pearson"),
   se_fit = FALSE, ...) {
   
-  type.predict <- match.arg(type.predict)
-  type.residuals <- match.arg(type.residuals)
+  type.predict <- rlang::arg_match(type.predict)
+  type.residuals <- rlang::arg_match(type.residuals)
   
   df <- if (is.null(newdata)) data else newdata
   df <- as_broom_tibble(df)

@@ -22,7 +22,12 @@
 #' @family robust tidiers
 #' @seealso [robust::glmRob()]
 #' @include stats-lm-tidiers.R
-tidy.glmRob <- tidy.lm
+tidy.glmRob <- function (x, ...) {
+  dots <- enquos(...)
+  dots$conf.int <- FALSE
+
+  rlang::exec(tidy.lm, x, !!!dots)
+}
 
 #' @templateVar class glmRob
 #' @template title_desc_augment
