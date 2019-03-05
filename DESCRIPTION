@@ -3,8 +3,8 @@ Package: broom
 Title: Convert Statistical Objects into Tidy Tibbles
 Version: 0.5.1.9000
 Authors@R: c(
-    person("David", "Robinson", email = "admiral.david@gmail.com", role = c("aut", "cre")),
-    person("Alex", "Hayes", email = "alexpghayes@gmail.com", role = "aut", comment = c(ORCID = "0000-0002-4985-5160")),
+    person("David", "Robinson", email = "admiral.david@gmail.com", role = "aut"),
+    person("Alex", "Hayes", email = "alexpghayes@gmail.com", role = c("aut", "cre"), comment = c(ORCID = "0000-0002-4985-5160")),
     person("Matthieu", "Gomez", email = "mattg@princeton.edu", role = "ctb"),
     person("Boris", "Demeshev", email = "boris.demeshev@gmail.com", role = "ctb"),
     person("Dieter", "Menne", email = "dieter.menne@menne-biomed.de", role = "ctb"),
@@ -44,7 +44,6 @@ Authors@R: c(
     person("Bill", "Denney", email = "wdenney@humanpredictions.com", role = "ctb", comment = c(ORCID = "0000-0002-5759-428X")),
     person("Nic", "Crane", role = "ctb"),
     person("Andrew", "Bates", role = "ctb"))
-Maintainer: David Robinson <admiral.david@gmail.com>
 Description: Summarizes key information about statistical objects in tidy
     tibbles. This makes it easy to report results, create plots and consistently
     work with large numbers of models at once. Broom provides three verbs that
@@ -62,13 +61,13 @@ Depends:
 Imports:
     backports,
     dplyr,
+    generics (>= 0.0.2),
     methods,
     purrr,
     reshape2,
     stringr,
     tibble,
     tidyr,
-    generics,
     glue,
     rlang
 Suggests:
@@ -151,7 +150,6 @@ LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 6.1.1
 Remotes: 
-    r-lib/generics,
     alexpghayes/modeltests
 Collate: 
     'aaa-documentation-helper.R'
@@ -166,6 +164,7 @@ Collate:
     'boot-tidiers.R'
     'brms-tidiers.R'
     'broom-package.R'
+    'broom.R'
     'btergm-tidiers.R'
     'car-tidiers.R'
     'caret-tidiers.R'
