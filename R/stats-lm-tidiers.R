@@ -168,13 +168,14 @@ augment.lm <- function(x, data = model.frame(x), newdata = NULL,
 #'   "sigma",
 #'   "statistic",
 #'   "p.value",
-#'   "df",
+#'   df = "The degrees for freedom from the numerator of the overall F-statistic. This is new in broom 0.7.0. Previously, this reported the rank of the design matrix, which is one more than the numerator degrees of freedom of the overall F-statistic.",
 #'   "logLik",
 #'   "AIC",
 #'   "BIC",
 #'   "deviance",
 #'   "df.residual"
 #' )
+#' 
 #'
 #' @export
 #' @seealso [glance()]
@@ -229,14 +230,10 @@ confint.mlm <- function (object, level = 0.95, ...) {
   setNames(data.frame(ci),pct)
 }
 
-#' @export
-augment.mlm <- function(x, ...) {
-  stop(
-    "Augment does not support linear models with multiple responses.",
-    call. = FALSE
-  )
-}
-
+# mlm objects subclass lm objects so this gives a better error than
+# letting augment.lm() fail
+#' @include null-and-default-tidiers.R
+augment.mlm <- augment.default
 
 #' @export
 glance.mlm <- function(x, ...) {
