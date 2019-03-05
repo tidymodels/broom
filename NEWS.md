@@ -34,7 +34,7 @@ in the augment method for the chi sq test, .residuals column was renamed to .res
 - Added method `tidy.lm.beta()` to tidy `lm.beta` class models (#545 by @mattle24)
 - Add feature for glance.biglm to return df.residual
 - Patch bug in glance.lavaan (#577)
-
+- Many `glance()` methods now return the number of observations in a `nobs` column, which is typically the rightmost column.
 
 ## Deprecations
 
