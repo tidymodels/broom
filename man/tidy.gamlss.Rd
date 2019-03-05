@@ -9,7 +9,7 @@
 \arguments{
 \item{x}{A \code{gamlss} object returned from \code{\link[gamlss:gamlss]{gamlss::gamlss()}}.}
 
-\item{quick}{Logical indiciating if the only the \code{term} and \code{estimate}
+\item{quick}{Logical indicating if the only the \code{term} and \code{estimate}
 columns should be returned. Often useful to avoid time consuming
 covariance and standard error calculations. Defaults to \code{FALSE}.}
 

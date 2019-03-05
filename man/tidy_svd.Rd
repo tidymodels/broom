@@ -17,8 +17,7 @@ tidied.
 the original space into principle components space.
 \item \code{"v"}, \code{"rotation"}, or \code{"variables"}: returns information about the
 map from principle components space back into the original space.
-\item \code{"d"} or \code{"pcs"}: returns information about the eigenvalues
-will return information about
+\item \code{"d"} or \code{"pcs"}: returns information about the eigenvalues.
 }}
 
 \item{...}{Additional arguments. Not used. Needed to match generic
