@@ -14,7 +14,7 @@
 
 \item{by_class}{Logical indicating whether or not to show performance
 measures broken down by class. Defaults to \code{TRUE}. When \code{by_class = FALSE}
-only returns a tibble with accuracy, kappa, and McNamara statistics.}
+only returns a tibble with accuracy, kappa, and McNemar statistics.}
 
 \item{...}{Additional arguments. Not used. Needed to match generic
 signature only. \strong{Cautionary note:} Misspelled arguments will be
@@ -67,4 +67,14 @@ tidy(six_class_cm, by_class = FALSE)
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[caret:confusionMatrix]{caret::confusionMatrix()}}
+}
+\value{
+A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
+  \item{class}{The class under consideration.}
+  \item{conf.high}{Upper bound on the confidence interval for the estimate.}
+  \item{conf.low}{Lower bound on the confidence interval for the estimate.}
+  \item{estimate}{The estimated value of the regression term.}
+  \item{term}{The name of the regression term.}
+  \item{p.value}{P-value for accuracy and kappa statistics.}
+
 }
