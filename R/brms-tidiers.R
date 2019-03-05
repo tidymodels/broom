@@ -78,7 +78,7 @@ tidy.brmsfit <- function(x, parameters = NA,
   .Deprecated()
   use_par_type <- anyNA(parameters)
   if (use_par_type) {
-    par_type <- match.arg(par_type)
+    par_type <- rlang::arg_match(par_type)
     if (par_type == "all") {
       parameters <- NA
     } else if (par_type == "non-varying") {

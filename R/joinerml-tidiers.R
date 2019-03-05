@@ -65,7 +65,7 @@
 #' 
 tidy.mjoint <- function(x, component = "survival", conf.int = FALSE,
                         conf.level = 0.95,  boot_se = NULL, ...) {
-  component <- match.arg(component, c("survival", "longitudinal"))
+  component <- rlang::arg_match(component, c("survival", "longitudinal"))
   if (!is.null(boot_se)) {
     if (!inherits(x = boot_se, "bootSE")) 
       stop("`boot_se` argument must be a `bootSE` object.", call. = FALSE)
