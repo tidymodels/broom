@@ -42,17 +42,17 @@ Authors@R: c(
     person("Jason", "Muhlenkamp", email = "jason.muhlenkamp@gmail.com", role = "ctb"),
     person("Matt", "Lehman", role = "ctb"),
     person("Bill", "Denney", email = "wdenney@humanpredictions.com", role = "ctb", comment = c(ORCID = "0000-0002-5759-428X")),
-    person("Nic", "Crane", role = "ctb"))
-Description: Summarizes key information about statistical
-    objects in tidy tibbles. This makes it easy to report results, create
-    plots and consistently work with large numbers of models at once.
-    Broom provides three verbs that each provide different types of
-    information about a model. tidy() summarizes information about model
-    components such as coefficients of a regression. glance() reports
-    information about an entire model, such as goodness of fit measures
-    like AIC and BIC. augment() adds information about individual
-    observations to a dataset, such as fitted values or influence
-    measures.
+    person("Nic", "Crane", role = "ctb"),
+    person("Andrew", "Bates", role = "ctb"))
+Description: Summarizes key information about statistical objects in tidy
+    tibbles. This makes it easy to report results, create plots and consistently
+    work with large numbers of models at once. Broom provides three verbs that
+    each provide different types of information about a model. tidy()
+    summarizes information about model components such as coefficients of
+    a regression. glance() reports information about an entire model, such as
+    goodness of fit measures like AIC and BIC. augment() adds information
+    about individual observations to a dataset, such as fitted values or
+    influence measures.
 License: MIT + file LICENSE
 URL: http://github.com/tidymodels/broom
 BugReports: http://github.com/tidymodels/broom/issues

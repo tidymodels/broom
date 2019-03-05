@@ -38,7 +38,7 @@ tidyMCMC <- function(x,
     ss <- ss[, pars]
   }
 
-  estimate.method <- match.arg(estimate.method, c("mean", "median"))
+  estimate.method <- rlang::arg_match(estimate.method, c("mean", "median"))
   m <- switch(estimate.method,
     mean = colMeans(ss),
     median = apply(ss, 2, stats::median)
@@ -51,7 +51,7 @@ tidyMCMC <- function(x,
   if (conf.int) {
     levs <- c((1 - conf.level) / 2, (1 + conf.level) / 2)
 
-    conf.method <- match.arg(conf.method, c("quantile", "HPDinterval"))
+    conf.method <- rlang::arg_match(conf.method, c("quantile", "HPDinterval"))
     ci <- switch(conf.method,
       quantile = t(apply(ss, 2, stats::quantile, levs)),
       coda::HPDinterval(coda::as.mcmc(ss), prob = conf.level)
