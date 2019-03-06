@@ -62,6 +62,8 @@ tidy.Mclust <- function(x, ...) {
   }
   if (dim(as.matrix(x$parameters$mean))[2] > 1) {
     mean <- t(x$parameters$mean)
+  } else if (is.null(dim(x$parameters$mean))){
+    mean <- as.matrix(x$parameters$mean)
   } else {
     mean <- t(as.matrix(x$parameters$mean))
   }
