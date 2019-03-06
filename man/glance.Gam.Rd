@@ -52,5 +52,6 @@ A \code{\link[tibble:tibble]{tibble::tibble()}} with exactly one row and columns
   \item{df}{Degrees of freedom used by the model.}
   \item{df.residual}{Residual degrees of freedom.}
   \item{logLik}{The log-likelihood of the model. [stats::logLik()] may be a useful reference.}
+  \item{nobs}{Number of observations used.}
 
 }

@@ -59,6 +59,7 @@ A \code{\link[tibble:tibble]{tibble::tibble()}} with exactly one row and columns
   \item{df}{Degrees of freedom used by the model.}
   \item{df.residual}{Residual degrees of freedom.}
   \item{logLik}{The log-likelihood of the model. [stats::logLik()] may be a useful reference.}
+  \item{nobs}{Number of observations used.}
   \item{p.value}{P-value corresponding to the test statistic.}
   \item{r.squared}{R squared statistic, or the percent of variation explained by the model. Also known as the coefficient of determination.}
   \item{statistic}{F-statistic.}

@@ -76,7 +76,8 @@ tidy.lmodel2 <- function(x, ...) {
 #'   "r.squared",
 #'   "p.value",
 #'   theta = "Angle between OLS lines `lm(y ~ x)` and `lm(x ~ y)`",
-#'   H = "H statistic for computing confidence interval of major axis slope"
+#'   H = "H statistic for computing confidence interval of major axis slope",
+#'   "nobs"
 #' )
 #'
 #' @export
@@ -88,6 +89,7 @@ glance.lmodel2 <- function(x, ...) {
     r.squared = x$rsquare,
     theta = x$theta,
     p.value = x$P.param,
-    H = x$H
+    H = x$H,
+    nobs = stats::nobs(x)
   )
 }

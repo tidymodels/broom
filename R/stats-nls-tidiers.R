@@ -94,7 +94,8 @@ augment.nls <- function(x, data = NULL, newdata = NULL, se_fit = FALSE, ...) {
 #'   "AIC",
 #'   "BIC",
 #'   "deviance",
-#'   "df.residual"
+#'   "df.residual",
+#'   "nobs"
 #' )
 #'
 #' @export
@@ -102,9 +103,14 @@ augment.nls <- function(x, data = NULL, newdata = NULL, se_fit = FALSE, ...) {
 #' @family nls tidiers
 glance.nls <- function(x, ...) {
   s <- summary(x)
-  ret <- unrowname(data.frame(
-    sigma = s$sigma, isConv = s$convInfo$isConv,
-    finTol = s$convInfo$finTol
-  ))
-  as_tibble(finish_glance(ret, x))
+  ret <- tibble(sigma = s$sigma, 
+                isConv = s$convInfo$isConv,
+                finTol = s$convInfo$finTol,
+                logLik = as.numeric(stats::logLik(x)),
+                AIC = stats::AIC(x),
+                BIC = stats::BIC(x),
+                deviance = stats::deviance(x),
+                df.residual = stats::df.residual(x),
+                nobs = stats::nobs(x))
+  ret
 }

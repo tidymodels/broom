@@ -34,7 +34,8 @@ tidy.speedlm <- tidy.lm
 #'   "AIC",
 #'   "BIC",
 #'   "deviance",
-#'   "df.residual"
+#'   "df.residual",
+#'   "nobs"
 #' )
 #'
 #' @export
@@ -47,10 +48,14 @@ glance.speedlm <- function(x, ...) {
     adj.r.squared = s$adj.r.squared,
     statistic = s$fstatistic[1],
     p.value = s$f.pvalue,
-    df = x$nvar
+    df = x$nvar,
+    logLik = as.numeric(stats::logLik(x)),
+    AIC = stats::AIC(x),
+    BIC = stats::BIC(x),
+    deviance = x$RSS,
+    df.residual = stats::df.residual(x),
+    nobs = stats::nobs(x)
   )
-  ret <- finish_glance(ret, x)
-  ret$deviance <- x$RSS  # overwritten by finish_glance
   ret
 }
 

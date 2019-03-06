@@ -43,7 +43,8 @@ tidy.Gam <- function(x, ...) {
 #'   "AIC",
 #'   "BIC",
 #'   "deviance",
-#'   "df.residual"
+#'   "df.residual",
+#'   "nobs"
 #' )
 #' 
 #' @details Glance at `gam` objects created by calls to [mgcv::gam()] with
@@ -54,6 +55,12 @@ tidy.Gam <- function(x, ...) {
 #' @seealso [glance()], [gam::gam()]
 glance.Gam <- function(x, ...) {
   s <- summary(x)
-  ret <- tibble(df = s$df[1])
-  finish_glance(ret, x)
+  ret <- tibble(df = s$df[1],
+                logLik = as.numeric(stats::logLik(x)),
+                AIC = stats::AIC(x),
+                BIC = stats::BIC(x),
+                deviance = stats::deviance(x),
+                df.residual = stats::df.residual(x),
+                nobs = stats::nobs(x))
+  ret
 }

@@ -58,7 +58,8 @@ tidy.pyears <- function(x, ...) {
 #' 
 #' @evalRd return_glance(
 #'   total = "total number of person-years tabulated",
-#'   offtable = "total number of person-years off table"
+#'   offtable = "total number of person-years off table",
+#'   "nobs"
 #' )
 #'
 #' @export
@@ -67,8 +68,12 @@ tidy.pyears <- function(x, ...) {
 #' @family survival tidiers
 glance.pyears <- function(x, ...) {
   if (is.null(x$data)) {
-    tibble(total = sum(x$pyears), offtable = x$offtable)
+    tibble(total = sum(x$pyears), 
+           offtable = x$offtable,
+           nobs = stats::nobs(x))
   } else {
-    tibble(total = sum(x$data$pyears), offtable = x$offtable)
+    tibble(total = sum(x$data$pyears), 
+           offtable = x$offtable,
+           nobs = stats::nobs(x))
   }
 }

@@ -51,6 +51,15 @@ test_that("tidy.htest/t.test", {
   check_glance_outputs(gl, strict = FALSE)
 })
 
+test_that("tidy.htest/t.test (equal variance)", {
+  tt <- t.test(mpg ~ am, mtcars, var.equal = TRUE)
+  td <- tidy(tt)
+  gl <- glance(tt)
+  
+  check_tidy_output(td)
+  check_glance_outputs(gl, strict = FALSE)
+})
+
 test_that("tidy.htest/wilcox.test", {
   wt <- suppressWarnings(wilcox.test(mpg ~ am, mtcars))
   td <- tidy(wt)

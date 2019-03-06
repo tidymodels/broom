@@ -91,7 +91,8 @@ augment.betareg <- function(x, data = model.frame(x), newdata = NULL,
 #'   "logLik", 
 #'   "AIC",
 #'   "BIC",
-#'   "df.residual"
+#'   "df.residual",
+#'   "nobs"
 #' )
 #' 
 #' @seealso [glance()], [betareg::betareg()]
@@ -100,8 +101,12 @@ glance.betareg <- function(x, ...) {
   s <- summary(x)
   ret <- tibble(
     pseudo.r.squared = s$pseudo.r.squared,
-    df.null = s$df.null
+    df.null = s$df.null,
+    logLik = as.numeric(stats::logLik(x)),
+    AIC = stats::AIC(x),
+    BIC = stats::BIC(x),
+    df.residual = stats::df.residual(x),
+    nobs = stats::nobs(x)
   )
-  ret <- finish_glance(ret, x)
   as_tibble(ret)
 }

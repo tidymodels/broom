@@ -3,47 +3,79 @@ To be released as 0.7.0
 
 ## Changes to `augment()`
 
+have overhauled `augment()` for general consistency improvements (hopefully, pending getting `safepredict()` going urgh)
+
 - If you pass a dataset to `augment()` via the `data` or `newdata` arguments, you are now guaranteed that the augmented dataset will have exactly the same number of rows as the original dataset. This differs from previous behavior primarily when there are missing values. Previously `augment()` would drop rows containing `NA`. This should no longer be the case.
 
-- Similarly: augment no longer accepts an `na.action` argument (TODO: figure out why this wasn't in the function signature in the first place)
+- `augment()` no longer accepts an `na.action` argument
+- We no longer cram everything through `augment.lm()` and it has subsequently losts a lot of arguments that were needed when it was a frankenstein do everything function
+- `augment()` tries to give an informative error when `data` isn't the original training data
 
-- lm augment loses a lot of arguments 
+## Degrees of freedom in `glance.lm()` have changed! (#212, #273)
 
-- augment tries gives an informative error when `data` isn't the original training data
+Previously the `df` column in `glance` reported the rank of the design matrix. Now it reports degrees of freedom of the numerator for the overall F-statistic. This is always equals equal to the rank of the model matrix minus one, so the new `df` will always be the old `df` minus one.
 
-- `augment.glmRob()` has been removed from broom. We regret that we were unable to provide any warning for this change. The `robust` package does not provide the functionality necessary to implement an augment method. We are looking into supporting the `robustbase` package in the future.
+TODO: sort out what happens to `glance.aov()`
 
-in the augment method for the chi sq test, .residuals column was renamed to .resid and .stdres column was renamed to .std.resid
+## Structural changes
 
-## Other changes
-
-- tidy.lsmobj gains a `conf.int` argument.
-- tidy.survreg gains a `conf.int` argument which is set to FALSE by default. Note that previously this function always included confidence intervals in its output.
-- Add `tidy.regsubsets()` for best subsets linear regression from the `leaps` package
-- All `conf.int` arguments now default to `FALSE`.
-- All `conf.level` arguments now default to `TRUE`.
+- We now use `rlang::arg_match()` when possible instead of `arg.match()` to give more informative errors on argument mismatches.
 - Moved core tests to the `modeltests` package
-- Import `tidy()`, `glance()` and `augment()` generics from `modelgenerics`
 - Added new vignette detailing use of `modelgenerics` and `modeltests` packages
 - Added `data` argument to `augment()` generic (did this happen?)
-- tidy.kmeans now defaults to using variable names in output columns
-- Bug fix for tidy.ridgelm returning inconsistent columns (#532)
-- Correct output for  `tidy.mlm(, quick=TRUE)`, add tests (#539 by @MatthieuStigler)
-- `tidy_optim()` provides the standard error if the Hessian is present. (#529 by @billdenney)
-- `tidy.htest()` column names are now run through `make.names()` to ensure syntactic correctness (#549 by @karissawhiting) 
-- Added method `tidy.lm.beta()` to tidy `lm.beta` class models (#545 by @mattle24)
-- Add feature for glance.biglm to return df.residual
-- Patch bug in glance.lavaan (#577)
-- Add feature to return p-values in tidy.lmodel2 (#570)
 
+## Additional control over confidence intervals
+
+- All `conf.int` arguments now default to `FALSE`. This primarily effects `tidy.survreg()`, which previously always returned confidence intervals.
+- All `conf.level` arguments now default to `0.95`.
+- `tidy.lsmobj()` gained a `conf.int` argument
+
+## New tidiers, features and bugfixes
+
+- Added `tidy.regsubsets()` for best subsets linear regression from the `leaps` package
+- Added method `tidy.lm.beta()` to tidy `lm.beta` class models (#545 by @mattle24)
+- `tidy.kmeans()` now uses the names of the input variables in the output by default. Set `col.names = NULL` to recover the old behavior.
+- `tidy_optim()` now returns the standard error provides the standard error if the Hessian is present. (#529 by @billdenney) (TODO: think about this)
+- `glance.biglm()` now returns a `df.residual` column
+- `tidy.htest()` column names are now run through `make.names()` to ensure syntactic correctness (#549 by @karissawhiting) (TODO: use tidyverse name repair?)
+- Many `glance()` methods now return the number of observations in a `nobs` column, which is typically the rightmost column.
+- `tidy.lmodel2()` now returns a `p.value` column (#570)
+
+### Name changes for consistency
+
+- `augment.htest()`:
+  - `.residuals` -> `.resid`
+  - `.stdres` -> `.std.resid`
+  - These changes only effect chi-squared tests
+- `tidy.ridgelm()` will now always return a `GCV` column and never returns an `xm` column (#532)
+
+### Bug fixes
+
+- Bug fix to allow `augment.Mclust()` to work on univariate data (#490)
+- Bug fix to allow `tidy.htest()` to supports equal variances (#608)
+- Bug fix for `tidy.mlm()` when passed `quick = TRUE` (#539 by @MatthieuStigler)
+- Bug fix for `tidy.polr()` when passed `conf.int = TRUE` (#498)
+- Bug fix in `glance.lavaan()` (#577)
 
 ## Deprecations
+
+### Hard deprecations
+
+**Planned**
 
 - Data frame, rowwise data frame, vector and matrix tidiers have been removed
 - `bootstrap()` has been removed
 
-- `tidy.table()` and `tidy.ftable()` have been deprecated in favor of `tibble::as_tibble()`
-- `tidy.summaryDefault()` has been deprecated in favor of `skimr::skim()`
+**Unplanned**
+
+The following tidiers have been removed from `broom` but were not soft deprecated in the previous release:
+
+- `glance.summary.lm()`
+- `augment.glmRob()`
+
+We regret that we were unable to provide any warning for these changes.
+
+The `robust` package does not provide the functionality necessary to implement an augment method. We are looking into supporting the `robustbase` package in the future.
 
 ### Mixed model deprecations
 
@@ -55,9 +87,14 @@ The following have all been deprecated in favor of `broom.mixed`:
 - `tidy.lme()`, `glance.lme()`, `augment.lme()`
 - `tidy.stanreg()`, `glance.stanreg()`
 
-## Other changes
+### Soft deprecations
 
-- Bug fix for `tidy.polr()` for incorrectly using colnames. (#498)
+- `tidy.table()` and `tidy.ftable()` have been deprecated in favor of `tibble::as_tibble()`
+- `tidy.summaryDefault()` has been deprecated in favor of `skimr::skim()`
+
+# broom 0.5.1
+
+- `tidy()`, `glance()` and `augment()` are now re-exported from the [generics](https://github.com/r-lib/generics) package.
 
 # broom 0.5.0
 

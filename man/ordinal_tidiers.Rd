@@ -58,7 +58,7 @@ the coefficient estimates. This is typical for logistic and multinomial
 regressions, but a bad idea if there is no log or logit link. Defaults
 to \code{FALSE}.}
 
-\item{quick}{Logical indiciating if the only the \code{term} and \code{estimate}
+\item{quick}{Logical indicating if the only the \code{term} and \code{estimate}
 columns should be returned. Often useful to avoid time consuming
 covariance and standard error calculations. Defaults to \code{FALSE}.}
 
@@ -96,14 +96,6 @@ with six columns:
 
 If \code{conf.int=TRUE}, it also includes columns for \code{conf.low} and
 
-\code{glance.clm}, \code{glance.clmm}, \code{glance.polr} and \code{glance.svyolr}
-return a one-row data.frame with the columns:
-\item{edf}{the effective degrees of freedom}
-\item{logLik}{the data's log-likelihood under the model}
-\item{AIC}{the Akaike Information Criterion}
-\item{BIC}{the Bayesian Information Criterion}
-\item{df.residual}{residual degrees of freedom}
-
 \code{augment.clm} and \code{augment.polr} returns
 one row for each observation, with additional columns added to
 the original data:
@@ -112,9 +104,6 @@ the original data:
 
 \code{augment} is not supportted for \code{\link[ordinal:clmm]{ordinal::clmm()}}
 and \code{\link[survey:svyolr]{survey::svyolr()}} models.
-
-All tidying methods return a \code{data.frame} without rownames.
-The structure depends on the method chosen.
 }
 \description{
 These methods tidy the coefficients of ordinal logistic regression
@@ -123,6 +112,12 @@ of the \code{ordinal} package, \code{\link[MASS:polr]{MASS::polr()}} of the \cod
 packge, or \code{\link[survey:svyolr]{survey::svyolr()}} of the \code{survey} package.
 }
 \examples{
+
+library(MASS)
+data(housing)
+mod <- polr(Sat ~ Infl + Type + Cont, weights = Freq, data = housing)    
+tidy(mod)
+glance(mod)
 library(ordinal)
 clm_mod <- clm(rating ~ temp * contact, data = wine)
 tidy(clm_mod)
@@ -143,4 +138,35 @@ polr_mod <- polr(Sat ~ Infl + Type + Cont, weights = Freq, data = housing)
 tidy(polr_mod, exponentiate = TRUE, conf.int = TRUE)
 glance(polr_mod)
 augment(polr_mod, type.predict = "class")
+}
+\value{
+A \code{\link[tibble:tibble]{tibble::tibble()}} with exactly one row and columns:
+  \item{AIC}{Akaike's Information Criterion for the model.}
+  \item{BIC}{Bayesian Information Criterion for the model.}
+  \item{deviance}{Deviance of the model.}
+  \item{df.residual}{Residual degrees of freedom.}
+  \item{edf}{The effective degrees of freedom}
+  \item{logLik}{The log-likelihood of the model. [stats::logLik()] may be a useful reference.}
+  \item{nobs}{Number of observations used.}
+
+}
+\value{
+A \code{\link[tibble:tibble]{tibble::tibble()}} with exactly one row and columns:
+  \item{AIC}{Akaike's Information Criterion for the model.}
+  \item{BIC}{Bayesian Information Criterion for the model.}
+  \item{df.residual}{Residual degrees of freedom.}
+  \item{edf}{The effective degrees of freedom}
+  \item{logLik}{The log-likelihood of the model. [stats::logLik()] may be a useful reference.}
+  \item{nobs}{Number of observations used.}
+
+}
+\value{
+A \code{\link[tibble:tibble]{tibble::tibble()}} with exactly one row and columns:
+  \item{AIC}{Akaike's Information Criterion for the model.}
+  \item{BIC}{Bayesian Information Criterion for the model.}
+  \item{df.residual}{Residual degrees of freedom.}
+  \item{edf}{The effective degrees of freedom}
+  \item{logLik}{The log-likelihood of the model. [stats::logLik()] may be a useful reference.}
+  \item{nobs}{Number of observations used.}
+
 }

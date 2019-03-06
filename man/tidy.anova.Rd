@@ -34,8 +34,9 @@ trailing whitespace, which this tidying method trims.
 }
 \examples{
 
-a <- anova(lm(mpg ~ wt + qsec + disp, mtcars))
-tidy(a)
+a <- lm(mpg ~ wt + qsec + disp, mtcars)
+b <- lm(mpg ~ wt + qsec, mtcars)
+tidy(anova(a, b))
 
 }
 \seealso{

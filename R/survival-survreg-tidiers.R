@@ -95,7 +95,8 @@ augment.survreg <- function(x, data = NULL, newdata = NULL,
 #'   "AIC",
 #'   "BIC",
 #'   "df.residual",
-#'   statistic = "Chi-squared statistic."
+#'   statistic = "Chi-squared statistic.",
+#'   "nobs"
 #' )
 #' 
 #' @export
@@ -103,8 +104,13 @@ augment.survreg <- function(x, data = NULL, newdata = NULL,
 #' @family survreg tidiers
 #' @family survival tidiers
 glance.survreg <- function(x, ...) {
-  ret <- tibble(iter = x$iter, df = sum(x$df))
-  ret$statistic <- 2 * diff(x$loglik)
+  ret <- tibble(iter = x$iter, df = sum(x$df),
+                statistic = 2 * diff(x$loglik),
+                logLik = as.numeric(stats::logLik(x)),
+                AIC = stats::AIC(x),
+                BIC = stats::BIC(x),
+                df.residual = stats::df.residual(x),
+                nobs = stats::nobs(x))
   ret$p.value <- 1 - stats::pchisq(ret$statistic, sum(x$df) - x$idf)
-  finish_glance(ret, x)
+  ret
 }

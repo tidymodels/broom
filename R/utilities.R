@@ -25,10 +25,16 @@ rename2 <- function(.data, ...) {
 #' @return A `tibble` potentially with a `.rownames` column
 #' @noRd
 as_broom_tibble <- function(data) {
+  
+  # TODO: error when there aren't column names?
+  
   tryCatch(
     df <- as_tibble(data),
+    
     error = function(cnd)
-      stop("Could not coerce data to `tibble`. Try explicitly passing a dataset to either the `data` or `newdata` argument.", call. = FALSE)
+      stop("Could not coerce data to `tibble`. Try explicitly passing a",
+           "dataset to either the `data` or `newdata` argument.",
+           call. = FALSE)
   )
   
   if (has_rownames(data))
@@ -332,50 +338,6 @@ augment_newdata <- function(x, data, newdata, .se_fit, ...) {
   if (!is.null(resp) && is.numeric(resp))
     df$.resid <- df$.fitted - resp
   df
-}
-
-#' Add logLik, AIC, BIC, and other common measurements to a glance of
-#' a prediction
-#'
-#' A helper function for several functions in the glance generic. Methods
-#' such as logLik, AIC, and BIC are defined for many prediction
-#' objects, such as lm, glm, and nls. This is a helper function that adds
-#' them to a glance data.frame can be performed. If any of them cannot be
-#' computed, it fails quietly.
-#'
-#' @details In one special case, deviance for objects of the
-#' `lmerMod` class from lme4 is computed with
-#' `deviance(x, REML=FALSE)`.
-#'
-#' @param ret a one-row data frame (a partially complete glance)
-#' @param x the prediction model
-#'
-#' @return a one-row data frame with additional columns added, such as
-#'   \item{logLik}{log likelihoods}
-#'   \item{AIC}{Akaike Information Criterion}
-#'   \item{BIC}{Bayesian Information Criterion}
-#'   \item{deviance}{deviance}
-#'   \item{df.residual}{residual degrees of freedom}
-#'
-#' Each of these are produced by the corresponding generics
-#'
-#' @export
-finish_glance <- function(ret, x) {
-  ret$logLik <- tryCatch(as.numeric(stats::logLik(x)), error = function(e) NULL)
-  ret$AIC <- tryCatch(stats::AIC(x), error = function(e) NULL)
-  ret$BIC <- tryCatch(stats::BIC(x), error = function(e) NULL)
-
-  # special case for REML objects (better way?)
-  if (inherits(x, "lmerMod")) {
-    ret$deviance <- tryCatch(stats::deviance(x, REML = FALSE),
-      error = function(e) NULL
-    )
-  } else {
-    ret$deviance <- tryCatch(stats::deviance(x), error = function(e) NULL)
-  }
-  ret$df.residual <- tryCatch(df.residual(x), error = function(e) NULL)
-  
-  as_tibble(ret, rownames = NULL)
 }
 
 

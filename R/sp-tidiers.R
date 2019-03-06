@@ -66,8 +66,8 @@ tidy.Polygons <- function(x, ...) {
 #' @export
 #' @method tidy Polygon
 tidy.Polygon <- function(x, ...) {
+  sp::coordnames(x) <- c("long", "lat")
   df <- as_tibble(x@coords)
-  names(df) <- c("long", "lat")
   df$order <- 1:nrow(df)
   df$hole <- x@hole
   df
@@ -103,8 +103,8 @@ tidy.Lines <- function(x, ...) {
 #' @export
 #' @method tidy Line
 tidy.Line <- function(x, ...) {
+  sp::coordnames(x) <- c("long", "lat")
   df <- as_tibble(x@coords)
-  names(df) <- c("long", "lat")
   df$order <- 1:nrow(df)
   unrowname(df)
 }
