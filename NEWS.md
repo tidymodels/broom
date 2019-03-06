@@ -50,10 +50,11 @@ TODO: sort out what happens to `glance.aov()`
 
 ### Bug fixes
 
+- Bug fix to allow `augment.Mclust()` to work on univariate data (#490)
+- Bug fix to allow `tidy.htest()` to supports equal variances (#608)
 - Bug fix for `tidy.mlm()` when passed `quick = TRUE` (#539 by @MatthieuStigler)
 - Bug fix for `tidy.polr()` when passed `conf.int = TRUE` (#498)
 - Bug fix in `glance.lavaan()` (#577)
-- Bug fix to all `tidy.htest()` to supports equal variances (#608)
 
 ## Deprecations
 

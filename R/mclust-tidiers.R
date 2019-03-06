@@ -62,6 +62,8 @@ tidy.Mclust <- function(x, ...) {
   }
   if (dim(as.matrix(x$parameters$mean))[2] > 1) {
     mean <- t(x$parameters$mean)
+  } else if (is.null(dim(x$parameters$mean))){
+    mean <- as.matrix(x$parameters$mean)
   } else {
     mean <- t(as.matrix(x$parameters$mean))
   }
@@ -88,12 +90,16 @@ tidy.Mclust <- function(x, ...) {
 #' @family mclust tidiers
 #' 
 augment.Mclust <- function(x, data = NULL, ...) {
-  data <- if (is.null(data)) x$data else data
   
-  fix_data_frame(data, newcol = ".rownames") %>% 
+  if (is.null(data))
+    data <- x$data
+  else if (!(is.data.frame(data) || is.matrix(data)))
+    stop("`data` must be a data frame or matrix.", call. = FALSE)
+  
+  as_broom_tibble(data) %>% 
     mutate(
-      .class = factor(x$classification),
-      .uncertainty = x$uncertainty
+      .class = as.factor(!!x$classification),
+      .uncertainty = !!x$uncertainty
     )
 }
 
