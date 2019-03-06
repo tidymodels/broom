@@ -18,6 +18,11 @@
 #'   (ordinary least squares), MA (major axis), SMA (standard major
 #'   axis), and RMA (ranged major axis).
 #'
+#'   The returned p-value is one-tailed and calculated via a permutation test.
+#'   A permutational test is used because distributional assumptions may not not
+#'   be valid. More information can be found in the vignette
+#'   (\code{\link{vignette("mod2user")}})
+#'
 #' @examples
 #' 
 #' library(lmodel2)
@@ -55,7 +60,8 @@ tidy.lmodel2 <- function(x, ...) {
     select(method = Method, term, conf.low, conf.high)
 
   ret %>%
-    inner_join(confints, by = c("method", "term")) %>% 
+    inner_join(confints, by = c("method", "term")) %>%
+    # change column order so `p.value` is at the end
     select(-p.value, dplyr::everything()) %>% 
     as_tibble()
 }
