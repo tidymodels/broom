@@ -39,6 +39,7 @@ TODO: sort out what happens to `glance.aov()`
 - `glance.biglm()` now returns a `df.residual` column
 - `tidy.htest()` column names are now run through `make.names()` to ensure syntactic correctness (#549 by @karissawhiting) (TODO: use tidyverse name repair?)
 - Many `glance()` methods now return the number of observations in a `nobs` column, which is typically the rightmost column.
+- `tidy.lmodel2()` now returns a `p.value` column (#570)
 
 ### Name changes for consistency
 
