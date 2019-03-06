@@ -6,7 +6,7 @@ library(modeltests)
 skip_if_not_installed("mclust")
 library(mclust)
 dat <- iris[, 1:4]
-dat3 <- iris[, 1, drop=FALSE]
+dat3 <- iris[, 1, drop = FALSE]
 dat4 <- iris[, 1]
 
 fit <- Mclust(dat, G = 7, modelNames = "EII", verbose = FALSE)
@@ -66,13 +66,18 @@ test_that("augment.Mclust", {
     aug = augment.Mclust,
     model = fit3,
     data = dat3,
-    newdata = dat3
+    newdata = dat3,
+    strict = FALSE
   )
   
-  check_augment_function(
-    aug = augment.Mclust,
-    model = fit4,
-    data = dat4,
-    newdata = dat4
+  fit_on_vector <- Mclust(1:10)
+  
+  expect_silent(
+    augment(fit_on_vector)
+  )
+  
+  expect_error(
+    augment(fit, 1:10),
+    "`data` must be a data frame or matrix."
   )
 })

@@ -25,10 +25,16 @@ rename2 <- function(.data, ...) {
 #' @return A `tibble` potentially with a `.rownames` column
 #' @noRd
 as_broom_tibble <- function(data) {
+  
+  # TODO: error when there aren't column names?
+  
   tryCatch(
     df <- as_tibble(data),
+    
     error = function(cnd)
-      stop("Could not coerce data to `tibble`. Try explicitly passing a dataset to either the `data` or `newdata` argument.", call. = FALSE)
+      stop("Could not coerce data to `tibble`. Try explicitly passing a",
+           "dataset to either the `data` or `newdata` argument.",
+           call. = FALSE)
   )
   
   if (has_rownames(data))

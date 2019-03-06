@@ -82,6 +82,7 @@ Other contributors:
   \item Andrew Bates [contributor]
   \item Vincent Arel-Bundock \email{vincent.arel-bundock@umontreal.ca} (0000-0003-2042-7063) [contributor]
   \item Hideaki Hayashi [contributor]
+  \item Luis Tobalina [contributor]
 }
 
 }

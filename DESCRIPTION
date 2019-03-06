@@ -45,7 +45,8 @@ Authors@R: c(
     person("Nic", "Crane", role = "ctb"),
     person("Andrew", "Bates", role = "ctb"),
     person("Vincent", "Arel-Bundock", email = "vincent.arel-bundock@umontreal.ca", role = "ctb", comment = c(ORCID = "0000-0003-2042-7063")),
-    person("Hideaki", "Hayashi", role = "ctb"))
+    person("Hideaki", "Hayashi", role = "ctb"),
+    person("Luis", "Tobalina", role = "ctb"))
 Description: Summarizes key information about statistical objects in tidy
     tibbles. This makes it easy to report results, create plots and consistently
     work with large numbers of models at once. Broom provides three verbs that
