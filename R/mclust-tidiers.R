@@ -110,7 +110,7 @@ augment.Mclust <- function(x, data = NULL, ...) {
 #'   G = "Number mixture components in optimal model",
 #'   hypvol = "If the other model contains a noise component, the 
 #'     value of the hypervolume parameter. Otherwise `NA`.",
-#'   nobs
+#'   "nobs"
 #' )
 #'
 #' @export

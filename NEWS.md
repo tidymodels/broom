@@ -53,7 +53,7 @@ TODO: sort out what happens to `glance.aov()`
 - Bug fix for `tidy.mlm()` when passed `quick = TRUE` (#539 by @MatthieuStigler)
 - Bug fix for `tidy.polr()` when passed `conf.int = TRUE` (#498)
 - Bug fix in `glance.lavaan()` (#577)
->>>>>>> upstream/master
+- Bug fix to all `tidy.htest()` to supports equal variances (#608)
 
 ## Deprecations
 
