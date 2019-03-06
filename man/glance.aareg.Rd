@@ -69,6 +69,7 @@ Other survival tidiers: \code{\link{augment.coxph}},
 \value{
 A \code{\link[tibble:tibble]{tibble::tibble()}} with exactly one row and columns:
   \item{df}{Degrees of freedom used by the model.}
+  \item{nobs}{Number of observations used.}
   \item{p.value}{P-value corresponding to the test statistic.}
   \item{statistic}{Test statistic.}
 

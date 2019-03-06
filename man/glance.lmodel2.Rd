@@ -61,6 +61,7 @@ Other lmodel2 tidiers: \code{\link{tidy.lmodel2}}
 \concept{lmodel2 tidiers}
 \value{
 A \code{\link[tibble:tibble]{tibble::tibble()}} with exactly one row and columns:
+  \item{nobs}{Number of observations used.}
   \item{p.value}{P-value corresponding to the test statistic.}
   \item{r.squared}{R squared statistic, or the percent of variation explained by the model. Also known as the coefficient of determination.}
   \item{theta}{Angle between OLS lines `lm(y ~ x)` and `lm(x ~ y)`}

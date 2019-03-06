@@ -57,6 +57,6 @@ A \code{\link[tibble:tibble]{tibble::tibble()}} with exactly one row and columns
   \item{AIC}{Akaike's Information Criterion for the model.}
   \item{BIC}{Bayesian Information Criterion for the model.}
   \item{logLik}{The log-likelihood of the model. [stats::logLik()] may be a useful reference.}
-  \item{n}{The number of TODO.}
+  \item{nobs}{Number of observations used.}
 
 }

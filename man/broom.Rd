@@ -80,6 +80,7 @@ Other contributors:
   \item Bill Denney \email{wdenney@humanpredictions.com} (0000-0002-5759-428X) [contributor]
   \item Nic Crane [contributor]
   \item Andrew Bates [contributor]
+  \item Vincent Arel-Bundock \email{vincent.arel-bundock@umontreal.ca} (0000-0003-2042-7063) [contributor]
 }
 
 }

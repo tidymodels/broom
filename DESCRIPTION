@@ -43,7 +43,8 @@ Authors@R: c(
     person("Matt", "Lehman", role = "ctb"),
     person("Bill", "Denney", email = "wdenney@humanpredictions.com", role = "ctb", comment = c(ORCID = "0000-0002-5759-428X")),
     person("Nic", "Crane", role = "ctb"),
-    person("Andrew", "Bates", role = "ctb"))
+    person("Andrew", "Bates", role = "ctb"),
+    person("Vincent", "Arel-Bundock", email = "vincent.arel-bundock@umontreal.ca", role = "ctb", comment = c(ORCID = "0000-0003-2042-7063")))
 Description: Summarizes key information about statistical objects in tidy
     tibbles. This makes it easy to report results, create plots and consistently
     work with large numbers of models at once. Broom provides three verbs that
@@ -204,6 +205,7 @@ Collate:
     'muhaz-tidiers.R'
     'multcomp-tidiers.R'
     'nnet-tidiers.R'
+    'nobs.R'
     'orcutt-tidiers.R'
     'ordinal-tidiers.R'
     'plm-tidiers.R'

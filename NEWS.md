@@ -38,7 +38,7 @@ TODO: sort out what happens to `glance.aov()`
 - `tidy_optim()` now returns the standard error provides the standard error if the Hessian is present. (#529 by @billdenney) (TODO: think about this)
 - `glance.biglm()` now returns a `df.residual` column
 - `tidy.htest()` column names are now run through `make.names()` to ensure syntactic correctness (#549 by @karissawhiting) (TODO: use tidyverse name repair?)
-
+- Many `glance()` methods now return the number of observations in a `nobs` column, which is typically the rightmost column.
 
 ### Name changes for consistency
 
@@ -53,6 +53,7 @@ TODO: sort out what happens to `glance.aov()`
 - Bug fix for `tidy.mlm()` when passed `quick = TRUE` (#539 by @MatthieuStigler)
 - Bug fix for `tidy.polr()` when passed `conf.int = TRUE` (#498)
 - Bug fix in `glance.lavaan()` (#577)
+>>>>>>> upstream/master
 
 ## Deprecations
 

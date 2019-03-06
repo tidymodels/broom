@@ -22,5 +22,5 @@ test_that("tidy.orcutt", {
 test_that("glance.orcutt", {
   gl <- glance(co)
   check_glance_outputs(gl)
-  check_dims(gl, 1, 8)
+  check_dims(gl, 1, 9)
 })

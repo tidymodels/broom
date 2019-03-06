@@ -173,7 +173,8 @@ augment.lm <- function(x, data = model.frame(x), newdata = NULL,
 #'   "AIC",
 #'   "BIC",
 #'   "deviance",
-#'   "df.residual"
+#'   "df.residual",
+#'   "nobs"
 #' )
 #' 
 #'
@@ -199,7 +200,8 @@ glance.lm <- function(x, ...) {
       AIC = stats::AIC(x),
       BIC = stats::BIC(x),
       deviance = stats::deviance(x),
-      df.residual = df.residual(x)
+      df.residual = df.residual(x),
+      nobs = stats::nobs(x)
     )
   )
 }

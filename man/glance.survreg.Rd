@@ -85,6 +85,7 @@ A \code{\link[tibble:tibble]{tibble::tibble()}} with exactly one row and columns
   \item{df.residual}{Residual degrees of freedom.}
   \item{iter}{Iterations of algorithm/fitting procedure completed.}
   \item{logLik}{The log-likelihood of the model. [stats::logLik()] may be a useful reference.}
+  \item{nobs}{Number of observations used.}
   \item{p.value}{P-value corresponding to the test statistic.}
   \item{statistic}{Chi-squared statistic.}
 
