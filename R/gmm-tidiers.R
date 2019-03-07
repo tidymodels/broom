@@ -116,7 +116,11 @@ tidy.gmm <- function(x, conf.int = FALSE, conf.level = .95,
 #' 
 #' @inherit tidy.gmm params examples
 #'
-#' @evalRd return_glance("df", "statistic", "p.value", "df.residual")
+#' @evalRd return_glance("df", 
+#'                       "statistic", 
+#'                       "p.value", 
+#'                       "df.residual", 
+#'                       "nobs")
 #'
 #' @export
 #' @family gmm tidiers
@@ -124,6 +128,10 @@ tidy.gmm <- function(x, conf.int = FALSE, conf.level = .95,
 glance.gmm <- function(x, ...) {
   s <- gmm::summary.gmm(x)
   st <- suppressWarnings(as.numeric(s$stest$test))
-  ret <- tibble(df = x$df, statistic = st[1], p.value = st[2])
-  finish_glance(ret, x)
+  ret <- tibble(df = x$df, 
+                statistic = st[1], 
+                p.value = st[2],
+                df.residual = stats::df.residual(x),
+                nobs = stats::nobs(x))
+  ret
 }

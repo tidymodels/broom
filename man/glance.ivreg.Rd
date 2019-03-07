@@ -74,6 +74,7 @@ A \code{\link[tibble:tibble]{tibble::tibble()}} with exactly one row and columns
   \item{adj.r.squared}{Adjusted R squared statistic, which is like the R squared statistic except taking degrees of freedom into account.}
   \item{df}{Degrees of freedom used by the model.}
   \item{df.residual}{Residual degrees of freedom.}
+  \item{nobs}{Number of observations used.}
   \item{p.value.Sargan}{P-value for Sargan test.}
   \item{p.value.weakinst}{P-value for weak instruments test.}
   \item{p.value.Wu.Hausman}{P-value for Wu-Hausman test.}

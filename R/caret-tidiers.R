@@ -5,7 +5,7 @@
 #' [caret::confusionMatrix()].
 #' @param by_class Logical indicating whether or not to show performance 
 #' measures broken down by class. Defaults to `TRUE`. When `by_class = FALSE`
-#' only returns a tibble with accuracy, kappa, and McNamara statistics.
+#' only returns a tibble with accuracy, kappa, and McNemar statistics.
 #' @template param_unused_dots
 #' 
 #' @evalRd return_tidy(
@@ -52,7 +52,7 @@
 #' @seealso [tidy()], [caret::confusionMatrix()]
 tidy.confusionMatrix <- function(x, by_class = TRUE, ...) {
   cm <- as.list(x$overall)
-  nms_cm <- stringr::str_to_lower(c(names(cm)[1:2], "McNamara"))
+  nms_cm <- stringr::str_to_lower(c(names(cm)[1:2], "McNemar"))
 
 
   if (by_class) {

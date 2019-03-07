@@ -7,6 +7,7 @@
 #' @evalRd return_tidy(
 #'   "term",
 #'   "estimate",
+#'   "p.value",
 #'   "conf.low",
 #'   "conf.high",
 #'   method = "Either OLS/MA/SMA/RMA"
@@ -16,6 +17,11 @@
 #'   and `"Slope"`. These are computed by four methods: OLS
 #'   (ordinary least squares), MA (major axis), SMA (standard major
 #'   axis), and RMA (ranged major axis).
+#'
+#'   The returned p-value is one-tailed and calculated via a permutation test.
+#'   A permutational test is used because distributional assumptions may not not
+#'   be valid. More information can be found in the vignette
+#'   (\code{\link{vignette("mod2user")}})
 #'
 #' @examples
 #' 
@@ -40,9 +46,9 @@
 #' @aliases lmodel2_tidiers
 #' @family lmodel2 tidiers
 tidy.lmodel2 <- function(x, ...) {
-  ret <- x$regression.results[1:3] %>%
-    select(method = Method, Intercept, Slope) %>%
-    tidyr::gather(term, estimate, -method) %>%
+  ret <- x$regression.results[c(1:3, 5)] %>%
+    select(method = Method, Intercept, Slope, p.value = quote("P-perm (1-tailed)")) %>%
+    tidyr::gather(term, estimate, -method, -p.value) %>%
     arrange(method, term)
 
   # add confidence intervals
@@ -54,7 +60,9 @@ tidy.lmodel2 <- function(x, ...) {
     select(method = Method, term, conf.low, conf.high)
 
   ret %>%
-    inner_join(confints, by = c("method", "term")) %>% 
+    inner_join(confints, by = c("method", "term")) %>%
+    # change column order so `p.value` is at the end
+    select(-p.value, dplyr::everything()) %>% 
     as_tibble()
 }
 
@@ -68,7 +76,8 @@ tidy.lmodel2 <- function(x, ...) {
 #'   "r.squared",
 #'   "p.value",
 #'   theta = "Angle between OLS lines `lm(y ~ x)` and `lm(x ~ y)`",
-#'   H = "H statistic for computing confidence interval of major axis slope"
+#'   H = "H statistic for computing confidence interval of major axis slope",
+#'   "nobs"
 #' )
 #'
 #' @export
@@ -80,6 +89,7 @@ glance.lmodel2 <- function(x, ...) {
     r.squared = x$rsquare,
     theta = x$theta,
     p.value = x$P.param,
-    H = x$H
+    H = x$H,
+    nobs = stats::nobs(x)
   )
 }

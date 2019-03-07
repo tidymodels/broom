@@ -168,57 +168,42 @@ augment.lm <- function(x, data = model.frame(x), newdata = NULL,
 #'   "sigma",
 #'   "statistic",
 #'   "p.value",
-#'   "df",
+#'   df = "The degrees for freedom from the numerator of the overall F-statistic. This is new in broom 0.7.0. Previously, this reported the rank of the design matrix, which is one more than the numerator degrees of freedom of the overall F-statistic.",
 #'   "logLik",
 #'   "AIC",
 #'   "BIC",
 #'   "deviance",
-#'   "df.residual"
+#'   "df.residual",
+#'   "nobs"
 #' )
+#' 
 #'
 #' @export
 #' @seealso [glance()]
 #' @family lm tidiers
 glance.lm <- function(x, ...) {
-  # use summary.lm explicity, so that c("aov", "lm") objects can be
-  # summarized and glanced at
-  s <- stats::summary.lm(x)
-  ret <- glance.summary.lm(s, ...)
-  ret <- finish_glance(ret, x)
-  as_tibble(ret)
-}
-
-
-#' @rdname glance.lm
-#' @export
-glance.summary.lm <- function(x, ...) {
-  ret <- with(x, cbind(
-    data.frame(
+  with(
+    summary(x),
+    tibble(
       r.squared = r.squared,
       adj.r.squared = adj.r.squared,
-      sigma = sigma
-    ),
-    if (exists("fstatistic")) {
-      data.frame(
-        statistic = fstatistic[1],
-        p.value = pf(fstatistic[1], fstatistic[2],
-          fstatistic[3],
-          lower.tail = FALSE
-        )
-      )
-    }
-    else {
-      data.frame(
-        statistic = NA_real_,
-        p.value = NA_real_
-      )
-    },
-    data.frame(
-      df = df[1]
+      sigma = sigma,
+      statistic = fstatistic["value"],
+      p.value = pf(
+        fstatistic["value"],
+        fstatistic["numdf"],
+        fstatistic["dendf"],
+        lower.tail = FALSE
+      ),
+      df = fstatistic["numdf"],
+      logLik = as.numeric(stats::logLik(x)),
+      AIC = stats::AIC(x),
+      BIC = stats::BIC(x),
+      deviance = stats::deviance(x),
+      df.residual = df.residual(x),
+      nobs = stats::nobs(x)
     )
-  ))
-
-  as_tibble(ret)
+  )
 }
 
 # getAnywhere('format.perc')
@@ -247,14 +232,10 @@ confint.mlm <- function (object, level = 0.95, ...) {
   setNames(data.frame(ci),pct)
 }
 
-#' @export
-augment.mlm <- function(x, ...) {
-  stop(
-    "Augment does not support linear models with multiple responses.",
-    call. = FALSE
-  )
-}
-
+# mlm objects subclass lm objects so this gives a better error than
+# letting augment.lm() fail
+#' @include null-and-default-tidiers.R
+augment.mlm <- augment.default
 
 #' @export
 glance.mlm <- function(x, ...) {

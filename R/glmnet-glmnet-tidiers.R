@@ -94,11 +94,13 @@ tidy.glmnet <- function(x, return_zeros = FALSE, ...) {
 #' 
 #' @inherit tidy.glmnet params examples
 #' 
-#' @evalRd return_glance("nulldev", "npasses")
+#' @evalRd return_glance("nulldev", "npasses", "nobs")
 #'
 #' @export
 #' @family glmnet tidiers
 #' @seealso [glance()], [glmnet::glmnet()]
 glance.glmnet <- function(x, ...) {
-  tibble(nulldev = x$nulldev, npasses = x$npasses)
+  tibble(nulldev = x$nulldev, 
+         npasses = x$npasses,
+         nobs = stats::nobs(x))
 }

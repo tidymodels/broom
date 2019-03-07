@@ -18,39 +18,6 @@
 #' @param type.predict type of prediction to compute for a CLM; passed on to
 #' [ordinal::predict.clm()] or `predict.polr`
 #' @param ... extra arguments
-#' @return
-#' `tidy.clm`, `tidy.clmm`, `tidy.polr` and `tidy.svyolr`
-#' return one row for each coefficient at each level of the response variable,
-#' with six columns:
-#'   \item{term}{term in the model}
-#'   \item{estimate}{estimated coefficient}
-#'   \item{std.error}{standard error}
-#'   \item{statistic}{t-statistic}
-#'   \item{p.value}{two-sided p-value}
-#'   \item{coefficient_type}{type of coefficient, see [ordinal::clm()]}
-#'
-#' If `conf.int=TRUE`, it also includes columns for `conf.low` and
-#'
-#' `glance.clm`, `glance.clmm`, `glance.polr` and `glance.svyolr`
-#' return a one-row data.frame with the columns:
-#'   \item{edf}{the effective degrees of freedom}
-#'   \item{logLik}{the data's log-likelihood under the model}
-#'   \item{AIC}{the Akaike Information Criterion}
-#'   \item{BIC}{the Bayesian Information Criterion}
-#'   \item{df.residual}{residual degrees of freedom}
-#'
-#' `augment.clm` and `augment.polr` returns
-#' one row for each observation, with additional columns added to
-#' the original data:
-#'   \item{.fitted}{fitted values of model}
-#'   \item{.se.fit}{standard errors of fitted values}
-#'
-#' `augment` is not supportted for [ordinal::clmm()]
-#' and [survey::svyolr()] models.
-#'
-#' All tidying methods return a `data.frame` without rownames.
-#' The structure depends on the method chosen.
-#'
 #' @name ordinal_tidiers
 #'
 #' @examples
@@ -77,6 +44,19 @@
 NULL
 
 #' @rdname ordinal_tidiers
+#' @return
+#' `tidy.clm`, `tidy.clmm`, `tidy.polr` and `tidy.svyolr`
+#' return one row for each coefficient at each level of the response variable,
+#' with six columns:
+#'   \item{term}{term in the model}
+#'   \item{estimate}{estimated coefficient}
+#'   \item{std.error}{standard error}
+#'   \item{statistic}{t-statistic}
+#'   \item{p.value}{two-sided p-value}
+#'   \item{coefficient_type}{type of coefficient, see [ordinal::clm()]}
+#'
+#' If `conf.int=TRUE`, it also includes columns for `conf.low` and
+#'
 #' @export
 tidy.clm <- function(x, conf.int = FALSE, conf.level = .95,
                      exponentiate = FALSE, quick = FALSE,
@@ -89,7 +69,7 @@ tidy.clm <- function(x, conf.int = FALSE, conf.level = .95,
     )
     return(process_clm(ret, x, conf.int = FALSE, exponentiate = exponentiate))
   }
-  conf.type <- match.arg(conf.type)
+  conf.type <- rlang::arg_match(conf.type)
   co <- coef(summary(x))
   nn <- c("estimate", "std.error", "statistic", "p.value")
   ret <- fix_data_frame(co, nn[seq_len(ncol(co))])
@@ -143,25 +123,54 @@ tidy.clmm <- function(x, conf.int = FALSE, conf.level = .95,
 }
 
 #' @rdname ordinal_tidiers
+#' @evalRd return_glance(
+#'   'edf',
+#'   'logLik',
+#'   'AIC',
+#'   'BIC',
+#'   'df.residual',
+#'   'nobs'
+#'   )
 #' @export
 glance.clm <- function(x, ...) {
-  ret <- with(
-    x,
-    tibble(
-      edf = edf
-    )
-  )
-  finish_glance(ret, x)
+  ret <- tibble(edf = x$edf)
+  # survey-svyolr returns NULL AIC, BIC, logLik
+  ret$AIC <- tryCatch(as.numeric(stats::AIC(x)), error = function(e) NULL)
+  ret$BIC <- tryCatch(as.numeric(stats::BIC(x)), error = function(e) NULL)
+  ret$logLik <- tryCatch(as.numeric(stats::logLik(x)), error = function(e) NULL)
+  # clmm returns returns NULL df.residual
+  ret$df.residual <- tryCatch(stats::df.residual(x), error = function(e) NULL)
+  # nobs
+  ret$nobs <- tryCatch(stats::nobs(x), error = function(e) NULL)
+  ret
 }
 
 #' @rdname ordinal_tidiers
+#' @evalRd return_glance(
+#'   'edf',
+#'   'logLik',
+#'   'AIC',
+#'   'BIC',
+#'   'df.residual',
+#'   'nobs'
+#'   )
 #' @export
 glance.clmm <- glance.clm
 
 #' @rdname ordinal_tidiers
+#' @return
+#' `augment.clm` and `augment.polr` returns
+#' one row for each observation, with additional columns added to
+#' the original data:
+#'   \item{.fitted}{fitted values of model}
+#'   \item{.se.fit}{standard errors of fitted values}
+#'
+#' `augment` is not supportted for [ordinal::clmm()]
+#' and [survey::svyolr()] models.
+#'
 #' @export
 augment.clm <- function(x, data = model.frame(x), newdata = NULL,
                         type.predict = c("prob", "class"), ...) {
-  type.predict <- match.arg(type.predict)
+  type.predict <- rlang::arg_match(type.predict)
   augment_columns(x, data, newdata, type = type.predict)
 }

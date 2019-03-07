@@ -7,7 +7,7 @@
 \method{tidy}{aov}(x, ...)
 }
 \arguments{
-\item{x}{An \code{aov} objects, such as those created by \code{\link[stats:aov]{stats::aov()}}.}
+\item{x}{An \code{aov} object, such as those created by \code{\link[stats:aov]{stats::aov()}}.}
 
 \item{...}{Additional arguments. Not used. Needed to match generic
 signature only. \strong{Cautionary note:} Misspelled arguments will be
