@@ -340,6 +340,7 @@ augment_newdata <- function(x, data, newdata, .se_fit, ...) {
   df
 }
 
+
 #' Calculate confidence interval as a tidy data frame
 #'
 #' Return a confidence interval as a tidy data frame. This directly wraps the
