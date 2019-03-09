@@ -1,4 +1,3 @@
-
 #' @rdname ordinal_tidiers
 #' @export
 tidy.svyolr <- tidy.polr

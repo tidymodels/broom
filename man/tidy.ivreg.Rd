@@ -7,7 +7,7 @@
 \title{Tidy a(n) ivreg object}
 \usage{
 \method{tidy}{ivreg}(x, conf.int = FALSE, conf.level = 0.95,
-  exponentiate = FALSE, ...)
+  exponentiate = FALSE, instruments = FALSE, ...)
 }
 \arguments{
 \item{x}{An \code{ivreg} object created by a call to \code{\link[AER:ivreg]{AER::ivreg()}}.}
@@ -23,6 +23,10 @@ Defaults to 0.95, which corresponds to a 95 percent confidence interval.}
 the coefficient estimates. This is typical for logistic and multinomial
 regressions, but a bad idea if there is no log or logit link. Defaults
 to \code{FALSE}.}
+
+\item{instruments}{Logical indicating whether to return
+coefficients from the second-stage or diagnostics tests for
+each endogenous regressor (F-statistics). Defaults to \code{FALSE}.}
 
 \item{...}{Additional arguments. Not used. Needed to match generic
 signature only. \strong{Cautionary note:} Misspelled arguments will be

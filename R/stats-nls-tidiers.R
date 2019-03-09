@@ -58,7 +58,7 @@ tidy.nls <- function(x, conf.int = FALSE, conf.level = .95,
 #' @templateVar class nls
 #' @template title_desc_augment
 #' 
-#' @inheritParams tidy.nls
+#' @inherit tidy.nls params examples
 #' @template param_data
 #' @template param_newdata
 #' @template param_se_fit
