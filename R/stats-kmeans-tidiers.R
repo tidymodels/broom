@@ -5,9 +5,7 @@
 #' @param col.names Dimension names. Defaults to the names of the variables in x.  Set to NULL to get names `x1, x2, ...`.
 #' @template param_unused_dots
 #'
-#' @evalRd return_tidy(size= "The number of points in each cluster.", 
-#'  withinss = "Vector of within-cluster sum of squares, one component per cluster." ,
-#'  cluster= "A vector of integers (from 1:k) indicating the cluster to which each point is allocated.")
+#' @evalRd return_tidy("size", "withinss", "cluster")
 #' 
 #' @details For examples, see the kmeans vignette.
 #'
@@ -36,7 +34,7 @@ tidy.kmeans <- function(x, col.names = colnames(x$centers), ...) {
 #' @template param_data
 #'
 #' @evalRd return_augment(
-#'   .cluster="Cluster assignment.",
+#'   ".cluster",
 #'   .fitted = FALSE,
 #'   .resid = FALSE
 #' )
@@ -55,10 +53,7 @@ augment.kmeans <- function(x, data, ...) {
 #' 
 #' @inherit tidy.kmeans params examples
 #'
-#' @evalRd return_glance(totts= "The total sum of squares.",
-#' tot.withinss="Total within-cluster sum of squares, i.e. sum(withinss).", 
-#' betweenss= "The between-cluster sum of squares, i.e. totss-tot.withinss.", 
-#' iter="The number of (outer) iterations.")
+#' @evalRd return_glance("totts","tot.withinss", "betweenss", "iter")
 #'
 #' @export
 #' @seealso [glance()], [stats::kmeans()]
