@@ -1,10 +1,12 @@
 #' @templateVar class glmrob
 #' @template title_desc_tidy
-
+#'
 #' @param x A `glmrob` object returned from [robustbase::glmrob()].
 #' @template param_confint
 #' @template param_unused_dots
-
+#'
+#' @evalRd return_tidy(regression = TRUE)
+#'
 #' @details For tidiers for robust models from the \pkg{MASS} package see
 #'   [tidy.rlm()]. For tidiers for robust models from the \pkg{robust} package
 #'   see [tidy.lmRob()].
@@ -15,17 +17,11 @@
 #' @family robustbase tidiers
 #' @rdname tidy.robustbase.glmrob
 #' @seealso [robustbase::glmrob()]
-#' @include stats-lm-tidiers.R
 tidy.glmrob <- function (x, conf.int = FALSE, conf.level = 0.95, ...) {
 
   ret <- coef(summary(x)) %>% 
-    tibble::as_tibble(rownames = "term") %>% 
-    dplyr::rename(
-      estimate = Estimate
-      ,std.error = `Std. Error`
-      ,statistic = `t value`
-      ,p.value = `Pr(>|t|)`
-    )
+    tibble::as_tibble(rownames = "term")
+  names(ret) <- c("term", "estimate", "std.error", "statistic", "p.value")
 
   if (conf.int) {
     ci <- stats::confint.default(x, level = conf.level) %>% 
@@ -48,9 +44,9 @@ tidy.glmrob <- function (x, conf.int = FALSE, conf.level = 0.95, ...) {
 #' @inherit tidy.glmrob params 
 #' @template param_data
 #' @template param_newdata
-#' 
-#' @param se_fit a switch indicating if standard errors are required.
-#' 
+#' @template param_se_fit
+#' @template param_unused_dots
+#'
 #' @details For tidiers for robust models from the \pkg{MASS} package see
 #'   [tidy.rlm()]. For tidiers for robust models from the \pkg{robust} package
 #'   see [tidy.lmRob()].
@@ -59,35 +55,20 @@ tidy.glmrob <- function (x, conf.int = FALSE, conf.level = 0.95, ...) {
 #' @family robustbase tidiers
 #' @rdname augment.robustbase.glmrob
 #' @seealso [robustbase::glmrob()]
-#' @include stats-lm-tidiers.R
 augment.glmrob <- function(x, data = model.frame(x), newdata = NULL,
-                           type.predict = c("link", "response", "terms"),
+                           type.predict = c("link", "response"),
                            type.residuals = c("deviance", "pearson"),
                            se_fit = FALSE, ...) {
-  # slightly modified version of `augment.glm`
-  type.predict <- match.arg(type.predict)
-  type.residuals <- match.arg(type.residuals)
-  
-  df <- if (is.null(newdata)) data else newdata
-  df <- as_broom_tibble(df)
-  
-  # don't use augment_newdata here; don't want raw/response residuals in .resid
-  if (se_fit) {
-    pred_obj <- predict(x, newdata, type = type.predict, se.fit = TRUE)
-    df$.fitted <- pred_obj$fit
-    df$.se.fit <- pred_obj$se.fit
-  } else {
-    df$.fitted <- predict(x, newdata, type = type.predict)
-  }
-  
-  if (is.null(newdata)) {
-    
-    tryCatch({
-      df$.resid <- residuals(x, type = type.residuals)
-    }, error = data_error)
-  }
-  
-  df
+  # TODO: add "terms" back into the possibilities for `type.predict`. Currently,
+  # predict.glmrob(x, type = "terms") throws an error and specifying `type.predict`
+  # = "terms" returns the same tibble as when `type.predict` = "response"
+
+  augment_columns(
+    x, data, newdata,
+    type.predict = type.predict,
+    type.residuals = type.residuals,
+    se.fit = se_fit
+  )
 }
 
 #' @templateVar class glmrob
