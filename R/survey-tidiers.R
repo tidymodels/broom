@@ -36,8 +36,8 @@ tidy.svyglm <- function(x, conf.int = FALSE, conf.level = .95,
 #' @evalRd return_glance(
 #'   "null.deviance",
 #'   "df.null",
-#'   "logLik",
 #'   "AIC",
+#'   "BIC,
 #'   "deviance",
 #'   "df.residual"
 #' )
