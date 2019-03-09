@@ -3,17 +3,14 @@
 \name{tidy.pam}
 \alias{tidy.pam}
 \alias{pam_tidiers}
-\title{These methods summarize the results of Partitioning Around Medoids (PAM) clustering into three
-tidy forms. \code{tidy} describes the medoid and size of each cluster,
-\code{augment} adds the cluster assignments to the original data, and
-\code{glance} summarizes the average silhouette with of the clustering.}
+\title{Tidy a(n) pam object}
 \usage{
 \method{tidy}{pam}(x, col.names = paste0("x", 1:ncol(x$medoids)), ...)
 }
 \arguments{
 \item{x}{An \code{pam} object returned from \code{\link[cluster:pam]{cluster::pam()}}}
 
-\item{col.names}{Dimension names. Defaults to the names of the variables in x.  Set to NULL to get names \code{x1, x2, ...}.}
+\item{col.names}{Column names in the input data frame. Defaults to the names of the variables in x.  Set to NULL to get names \code{x1, x2, ...}.}
 
 \item{...}{Additional arguments. Not used. Needed to match generic
 signature only. \strong{Cautionary note:} Misspelled arguments will be
@@ -26,11 +23,6 @@ accept a \code{newdata} argument, it will use the default value for
 the \code{data} argument.}
 }
 \description{
-These methods summarize the results of Partitioning Around Medoids (PAM) clustering into three
-tidy forms. \code{tidy} describes the medoid and size of each cluster,
-\code{augment} adds the cluster assignments to the original data, and
-\code{glance} summarizes the average silhouette with of the clustering.
-
 Tidy summarizes information about the components of a model.
 A model component might be a single term in a regression, a single
 hypothesis, a cluster, or a class. Exactly what tidy considers to be a

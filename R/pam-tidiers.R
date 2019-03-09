@@ -1,25 +1,18 @@
-' Tidying methods for pam objects
-#' 
-#' These methods summarize the results of Partitioning Around Medoids (PAM) clustering into three
-#' tidy forms. `tidy` describes the medoid and size of each cluster,
-#' `augment` adds the cluster assignments to the original data, and
-#' `glance` summarizes the average silhouette with of the clustering.
-#'
 #' @templateVar class pam
 #' @template title_desc_tidy
 #' 
 #' @param x An `pam` object returned from [cluster::pam()]
-#' @param col.names Dimension names. Defaults to the names of the variables in x.  Set to NULL to get names `x1, x2, ...`.
+#' @param col.names Column names in the input data frame. Defaults to the names of the variables in x.  Set to NULL to get names `x1, x2, ...`.
 #' @template param_unused_dots
 #' 
 #' @evalRd return_tidy(
-#'   size = "The size of each cluster",
-#'   max_diss ="The maximal dissimilarity between the observations in the cluster and the cluster's medoid",
-#'   av_diss= "The average dissimilarity between the observations in the cluster and the cluster's medoid", 
-#'   diameter="The diameter of the cluster",
-#'   separation="The separation of the cluster",
-#'   avg.width="The average silhouette width of the cluster",
-#'   cluster= "A factor describing the cluster from 1:k"
+#'   size = "Size of each cluster.",
+#'   max_diss = "Maximal dissimilarity between the observations in the cluster and that cluster's medoid.",
+#'   av_diss = "Average dissimilarity between the observations in the cluster and that cluster's medoid.", 
+#'   diameter = "Diameter of the cluster.",
+#'   separation = "Separation of the cluster.",
+#'   avg.width = "Average silhouette width of the cluster.",
+#'   cluster = "A factor describing the cluster from 1:k."
 #'
 #' )
 #'
@@ -58,7 +51,7 @@ tidy.pam <- function(x, col.names=paste0("x", 1:ncol(x$medoids)), ...) {
 #' @template param_data
 #'
 #' @evalRd return_augment(
-#'   .cluster= "cluster"
+#'   .cluster= "Cluster assignment."
 #' )
 #'
 #' @export
@@ -79,12 +72,11 @@ augment.pam <- function(x, data, ...) {
 #' 
 #' @inherit tidy.kmeans params examples
 #'
-#' @evalRd return_glance(avg.width = "average width of a cluster")
+#' @evalRd return_glance(avg.width = "Average width of a cluster.")
 #'
 #' @export
 #' @seealso [glance()], [cluster::pam()]
 #' @family pam tidiers
 glance.pam <- function(x, ...) {
-  ret <- tibble(avg.width = x$silinfo$avg.width)
-  ret
+  tibble(avg.width = x$silinfo$avg.width)
 }
