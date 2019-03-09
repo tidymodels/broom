@@ -15,8 +15,6 @@
 #'   If you have missing values in your model data, you may need to refit
 #'   the model with `na.action = na.exclude`.
 #' 
-#' @evalRd return_tidy(regression = TRUE)
-#' 
 #' @examples 
 #' 
 #' library(lm.beta)

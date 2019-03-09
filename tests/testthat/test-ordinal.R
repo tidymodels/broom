@@ -48,7 +48,7 @@ test_that("tidy.clm works with scale parameter", {
 test_that("glance.clm", {
   gl <- glance(fit)
   check_glance_outputs(gl)
-  check_dims(gl, 1, 5)
+  check_dims(gl, 1, 6)
 })
 
 test_that("augment.clm", {
@@ -78,6 +78,6 @@ test_that("tidy.clmm", {
 test_that("glance.clmm", {
   gl <- glance(mfit)
   check_glance_outputs(gl)
-  check_dims(gl, 1, 4)
+  check_dims(gl, 1, 5)
 })
 

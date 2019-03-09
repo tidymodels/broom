@@ -25,7 +25,7 @@ the coefficient estimates. This is typical for logistic and multinomial
 regressions, but a bad idea if there is no log or logit link. Defaults
 to \code{FALSE}.}
 
-\item{quick}{Logical indiciating if the only the \code{term} and \code{estimate}
+\item{quick}{Logical indicating if the only the \code{term} and \code{estimate}
 columns should be returned. Often useful to avoid time consuming
 covariance and standard error calculations. Defaults to \code{FALSE}.}
 
@@ -86,17 +86,6 @@ Other lm tidiers: \code{\link{augment.glm}},
   \code{\link{tidy.lm}}
 }
 \concept{lm tidiers}
-\value{
-A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
-  \item{conf.high}{Upper bound on the confidence interval for the estimate.}
-  \item{conf.low}{Lower bound on the confidence interval for the estimate.}
-  \item{estimate}{The estimated value of the regression term.}
-  \item{p.value}{The two-sided p-value associated with the observed statistic.}
-  \item{statistic}{The value of a T-statistic to use in a hypothesis that the regression term is non-zero.}
-  \item{std.error}{The standard error of the regression term.}
-  \item{term}{The name of the regression term.}
-
-}
 \value{
 A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
   \item{conf.high}{Upper bound on the confidence interval for the estimate.}

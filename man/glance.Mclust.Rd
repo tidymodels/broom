@@ -52,7 +52,7 @@ points <- centers \%>\%
     x1 = purrr::map2(num_points, x1, rnorm),
     x2 = purrr::map2(num_points, x2, rnorm)
   ) \%>\% 
-  select(-num_points, -cluster) \%>\%
+  dplyr::select(-num_points, -cluster) \%>\%
   tidyr::unnest(x1, x2)
 
 m <- mclust::Mclust(points)
@@ -67,7 +67,7 @@ A \code{\link[tibble:tibble]{tibble::tibble()}} with exactly one row and columns
   \item{BIC}{Bayesian Information Criterion for the model.}
   \item{df}{Degrees of freedom used by the model.}
   \item{logLik}{The log-likelihood of the model. [stats::logLik()] may be a useful reference.}
-  \item{n}{The number of TODO.}
+  \item{nobs}{Number of observations used.}
   \item{model}{A string denoting the model type with optimal BIC}
   \item{G}{Number mixture components in optimal model}
   \item{hypvol}{If the other model contains a noise component, the 

@@ -34,7 +34,7 @@
 #'     x1 = purrr::map2(num_points, x1, rnorm),
 #'     x2 = purrr::map2(num_points, x2, rnorm)
 #'   ) %>% 
-#'   select(-num_points, -cluster) %>%
+#'   dplyr::select(-num_points, -cluster) %>%
 #'   tidyr::unnest(x1, x2)
 #'
 #' m <- mclust::Mclust(points)
@@ -62,6 +62,8 @@ tidy.Mclust <- function(x, ...) {
   }
   if (dim(as.matrix(x$parameters$mean))[2] > 1) {
     mean <- t(x$parameters$mean)
+  } else if (is.null(dim(x$parameters$mean))){
+    mean <- as.matrix(x$parameters$mean)
   } else {
     mean <- t(as.matrix(x$parameters$mean))
   }
@@ -88,12 +90,16 @@ tidy.Mclust <- function(x, ...) {
 #' @family mclust tidiers
 #' 
 augment.Mclust <- function(x, data = NULL, ...) {
-  data <- if (is.null(data)) x$data else data
   
-  fix_data_frame(data, newcol = ".rownames") %>% 
+  if (is.null(data))
+    data <- x$data
+  else if (!(is.data.frame(data) || is.matrix(data)))
+    stop("`data` must be a data frame or matrix.", call. = FALSE)
+  
+  as_broom_tibble(data) %>% 
     mutate(
-      .class = factor(x$classification),
-      .uncertainty = x$uncertainty
+      .class = as.factor(!!x$classification),
+      .uncertainty = !!x$uncertainty
     )
 }
 
@@ -103,23 +109,22 @@ augment.Mclust <- function(x, data = NULL, ...) {
 #' @inherit tidy.Mclust params examples
 #'
 #' @evalRd return_glance(
-#'   "n",
 #'   "BIC",
 #'   "logLik",
 #'   "df",
 #'   model = "A string denoting the model type with optimal BIC",
 #'   G = "Number mixture components in optimal model",
 #'   hypvol = "If the other model contains a noise component, the 
-#'     value of the hypervolume parameter. Otherwise `NA`."
+#'     value of the hypervolume parameter. Otherwise `NA`.",
+#'   "nobs"
 #' )
 #'
 #' @export
 glance.Mclust <- function(x, ...) {
-  with(
+  ret <- with(
     x,
     tibble(
       model = modelName,
-      n,
       G,
       BIC = bic, 
       logLik = loglik,
@@ -127,4 +132,6 @@ glance.Mclust <- function(x, ...) {
       hypvol
     )
   )
+  ret$nobs <- stats::nobs(x)
+  ret
 }

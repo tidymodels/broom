@@ -47,8 +47,8 @@ augment.glm <- function(x,
   type.residuals = c("deviance", "pearson"),
   se_fit = FALSE, ...) {
   
-  type.predict <- match.arg(type.predict)
-  type.residuals <- match.arg(type.residuals)
+  type.predict <- rlang::arg_match(type.predict)
+  type.residuals <- rlang::arg_match(type.residuals)
   
   df <- if (is.null(newdata)) data else newdata
   df <- as_broom_tibble(df)
@@ -91,7 +91,8 @@ augment.glm <- function(x,
 #'   "AIC",
 #'   "BIC",
 #'   "deviance",
-#'   "df.residual"
+#'   "df.residual",
+#'   "nobs"
 #' )
 #'
 #' @examples
@@ -104,6 +105,13 @@ augment.glm <- function(x,
 #' @seealso [stats::glm()]
 glance.glm <- function(x, ...) {
   s <- summary(x)
-  ret <- unrowname(as.data.frame(s[c("null.deviance", "df.null")]))
-  finish_glance(ret, x)
+  ret <- tibble(null.deviance = x$null.deviance,
+                df.null = x$df.null,
+                logLik = as.numeric(stats::logLik(x)),
+                AIC = stats::AIC(x),
+                BIC = stats::BIC(x),
+                deviance = stats::deviance(x),
+                df.residual = stats::df.residual(x),
+                nobs = stats::nobs(x))
+  ret
 }

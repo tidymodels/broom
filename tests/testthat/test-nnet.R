@@ -22,5 +22,5 @@ test_that("tidy.multinom", {
 test_that("glance.multinom", {
   gl <- glance(fit)
   check_glance_outputs(gl)
-  check_dims(gl, expected_cols = 3)
+  check_dims(gl, expected_cols = 4)
 })

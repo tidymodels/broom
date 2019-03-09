@@ -64,6 +64,7 @@ A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
   \item{conf.high}{Upper bound on the confidence interval for the estimate.}
   \item{conf.low}{Lower bound on the confidence interval for the estimate.}
   \item{estimate}{The estimated value of the regression term.}
+  \item{p.value}{The two-sided p-value associated with the observed statistic.}
   \item{term}{The name of the regression term.}
   \item{method}{Either OLS/MA/SMA/RMA}
 

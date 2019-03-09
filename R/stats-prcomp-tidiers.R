@@ -92,7 +92,7 @@ tidy.prcomp <- function(x, matrix = "u", ...) {
   }
 
   MATRIX <- c("rotation", "x", "variables", "samples", "v", "u", "pcs", "d")
-  matrix <- match.arg(matrix, MATRIX)
+  matrix <- rlang::arg_match(matrix, MATRIX)
 
   ncomp <- NCOL(x$rotation)
   if (matrix %in% c("pcs", "d")) {
