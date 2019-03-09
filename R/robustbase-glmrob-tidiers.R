@@ -86,7 +86,6 @@ augment.glmrob <- function(x, data = model.frame(x), newdata = NULL,
 #'   \pkg{robustbase} package does not provide the functionality necessary to
 #'   implement a glance method.
 #'
-#' @export
 #' @rdname glance.robustbase.glmrob
 #' @family robustbase tidiers
 #' @seealso [robustbase::glmrob()]
