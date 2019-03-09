@@ -35,7 +35,6 @@ trailing whitespace, which this tidying method trims.
 
 a <- aov(mpg ~ wt + qsec + Error(disp / am), mtcars)
 tidy(a)
-
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[stats:aov]{stats::aov()}}

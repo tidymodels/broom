@@ -58,17 +58,18 @@ missingness in the data beforehand.
 
 library(geepack)
 data(state)
-  
+
 ds <- data.frame(state.region, state.x77)
 
-geefit <- geeglm(Income ~ Frost + Murder, id = state.region,
-                 data = ds, family = gaussian,
-                 corstr = "exchangeable")
+geefit <- geeglm(Income ~ Frost + Murder,
+  id = state.region,
+  data = ds, family = gaussian,
+  corstr = "exchangeable"
+)
 
 tidy(geefit)
 tidy(geefit, quick = TRUE)
 tidy(geefit, conf.int = TRUE)
-
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[geepack:geeglm]{geepack::geeglm()}}

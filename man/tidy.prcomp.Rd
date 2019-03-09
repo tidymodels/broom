@@ -96,7 +96,7 @@ pc \%>\%
   inner_join(map_data("state"), by = "region") \%>\%
   ggplot(aes(long, lat, group = group, fill = value)) +
   geom_polygon() +
-  facet_wrap(~ PC) +
+  facet_wrap(~PC) +
   theme_void() +
   ggtitle("Principal components of arrest data")
 
@@ -106,7 +106,6 @@ au
 ggplot(au, aes(.fittedPC1, .fittedPC2)) +
   geom_point() +
   geom_text(aes(label = .rownames), vjust = 1, hjust = 1)
-
 }
 \seealso{
 \code{\link[stats:prcomp]{stats::prcomp()}}, \link{svd_tidiers}

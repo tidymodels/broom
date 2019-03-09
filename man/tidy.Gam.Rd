@@ -36,10 +36,9 @@ Tidy \code{gam} objects created by calls to \code{\link[mgcv:gam]{mgcv::gam()}} 
 
 library(gam)
 g <- gam(mpg ~ s(hp, 4) + am + qsec, data = mtcars)
-  
+
 tidy(g)
 glance(g)
-
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[gam:gam]{gam::gam()}}, \code{\link[=tidy.anova]{tidy.anova()}}, \code{\link[=tidy.gam]{tidy.gam()}}

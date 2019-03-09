@@ -35,7 +35,6 @@ tidy(spc)
 library(ggplot2)
 ggplot(tidy(spc), aes(freq, spec)) +
   geom_line()
-
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[stats:spectrum]{stats::spectrum()}}

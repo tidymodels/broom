@@ -40,7 +40,6 @@ o <- optim(c(1, 1, 1), f)
 
 tidy(o)
 glance(o)
-
 }
 \seealso{
 \code{\link[=glance]{glance()}}, \code{\link[=optim]{optim()}}

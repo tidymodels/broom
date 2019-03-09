@@ -42,13 +42,13 @@ library(bbmle)
 
 x <- 0:10
 y <- c(26, 17, 13, 12, 20, 5, 9, 8, 5, 4, 8)
-d <- data.frame(x,y)
+d <- data.frame(x, y)
 
 fit <- mle2(y ~ dpois(lambda = ymean),
-            start = list(ymean = mean(y)), data = d)
+  start = list(ymean = mean(y)), data = d
+)
 
 tidy(fit)
-
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[bbmle:mle2]{bbmle::mle2()}}, \code{\link[=tidy_optim]{tidy_optim()}}

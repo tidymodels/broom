@@ -64,7 +64,6 @@ augment(ivr, data = CigarettesSW)
 augment(ivr, newdata = CigarettesSW)
 
 glance(ivr)
-
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[AER:ivreg]{AER::ivreg()}}

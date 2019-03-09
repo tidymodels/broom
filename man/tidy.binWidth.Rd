@@ -37,7 +37,6 @@ library(ggplot2)
 bw <- binWidth(100, .1)
 bw
 tidy(bw)
-
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[binGroup:binWidth]{binGroup::binWidth()}}

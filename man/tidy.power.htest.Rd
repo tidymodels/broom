@@ -37,7 +37,6 @@ library(ggplot2)
 
 ggplot(tidy(ptt), aes(n, power)) +
   geom_line()
-
 }
 \seealso{
 \code{\link[stats:power.t.test]{stats::power.t.test()}}

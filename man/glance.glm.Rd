@@ -38,7 +38,6 @@ the measure will be reported as \code{NA}.
 
 g <- glm(am ~ mpg, mtcars, family = "binomial")
 glance(g)
-
 }
 \seealso{
 \code{\link[stats:glm]{stats::glm()}}

@@ -32,7 +32,6 @@ specify which components to return.
 
 all_fits <- leaps::regsubsets(hp ~ ., mtcars)
 tidy(all_fits)
-
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[leaps:regsubsets]{leaps::regsubsets()}}

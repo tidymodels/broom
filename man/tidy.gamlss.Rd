@@ -44,7 +44,6 @@ g <- gamlss(
 )
 
 tidy(g)
-
 }
 \value{
 A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:

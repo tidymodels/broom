@@ -38,11 +38,10 @@ the measure will be reported as \code{NA}.
 
 library(muhaz)
 
-data(ovarian, package="survival")
+data(ovarian, package = "survival")
 x <- muhaz::muhaz(ovarian$futime, ovarian$fustat)
 tidy(x)
 glance(x)
-
 }
 \seealso{
 \code{\link[=glance]{glance()}}, \code{\link[muhaz:muhaz]{muhaz::muhaz()}}

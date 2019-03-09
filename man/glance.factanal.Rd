@@ -42,7 +42,6 @@ glance(mod)
 tidy(mod)
 augment(mod)
 augment(mod, mtcars)
-
 }
 \seealso{
 \code{\link[=glance]{glance()}}, \code{\link[stats:factanal]{stats::factanal()}}

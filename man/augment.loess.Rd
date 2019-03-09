@@ -65,8 +65,8 @@ original \code{loess} object was fit with
 \examples{
 
 lo <- loess(
-  mpg ~ hp + wt, 
-  mtcars, 
+  mpg ~ hp + wt,
+  mtcars,
   control = loess.control(surface = "direct")
 )
 
@@ -77,7 +77,6 @@ augment(lo, mtcars)
 
 # with a new dataset
 augment(lo, newdata = head(mtcars))
-
 }
 \seealso{
 \link{na.action}

@@ -85,16 +85,14 @@ library(ggplot2)
 library(dplyr)
 
 ggplot(tidy_d, aes(PC, percent)) +
-    geom_point() +
-    ylab("\% of variance explained")
+  geom_point() +
+  ylab("\% of variance explained")
 
 tidy_u \%>\%
-    mutate(Species = iris$Species[row]) \%>\%
-    ggplot(aes(Species, value)) +
-    geom_boxplot() +
-    facet_wrap(~ PC, scale = "free_y")
-
-
+  mutate(Species = iris$Species[row]) \%>\%
+  ggplot(aes(Species, value)) +
+  geom_boxplot() +
+  facet_wrap(~PC, scale = "free_y")
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[irlba:irlba]{irlba::irlba()}}

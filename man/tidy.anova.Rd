@@ -37,7 +37,6 @@ trailing whitespace, which this tidying method trims.
 a <- lm(mpg ~ wt + qsec + disp, mtcars)
 b <- lm(mpg ~ wt + qsec, mtcars)
 tidy(anova(a, b))
-
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[stats:anova]{stats::anova()}}, \code{\link[car:Anova]{car::Anova()}}

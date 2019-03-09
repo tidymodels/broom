@@ -39,7 +39,7 @@ the measure will be reported as \code{NA}.
 library(lmodel2)
 
 data(mod2ex2)
-Ex2.res <- lmodel2(Prey ~ Predators, data=mod2ex2, "relative", "relative", 99)
+Ex2.res <- lmodel2(Prey ~ Predators, data = mod2ex2, "relative", "relative", 99)
 Ex2.res
 
 tidy(Ex2.res)
@@ -51,7 +51,6 @@ ggplot(tidy(Ex2.res), aes(estimate, term, color = method)) +
   geom_point() +
   geom_errorbarh(aes(xmin = conf.low, xmax = conf.high)) +
   geom_errorbarh(aes(xmin = conf.low, xmax = conf.high))
-
 }
 \seealso{
 \code{\link[=glance]{glance()}}, \code{\link[lmodel2:lmodel2]{lmodel2::lmodel2()}}

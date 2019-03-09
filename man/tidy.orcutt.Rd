@@ -35,7 +35,6 @@ co
 
 tidy(co)
 glance(co)
-
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[=tidy.lm]{tidy.lm()}}

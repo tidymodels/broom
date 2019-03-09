@@ -55,7 +55,6 @@ glance(bwt.mu)
 fit.gear <- multinom(gear ~ mpg + factor(am), data = mtcars)
 tidy(fit.gear)
 glance(fit.gear)
-
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[nnet:multinom]{nnet::multinom()}}

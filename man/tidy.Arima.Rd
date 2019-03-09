@@ -40,7 +40,6 @@ specify which components to return.
 fit <- arima(lh, order = c(1, 0, 0))
 tidy(fit)
 glance(fit)
-
 }
 \seealso{
 \code{\link[stats:arima]{stats::arima()}}

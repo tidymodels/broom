@@ -31,8 +31,10 @@ specify which components to return.
 \examples{
 
 library(binGroup)
-des <- binDesign(nmax = 300, delta = 0.06,
-                 p.hyp = 0.1, power = .8)
+des <- binDesign(
+  nmax = 300, delta = 0.06,
+  p.hyp = 0.1, power = .8
+)
 
 glance(des)
 tidy(des)
@@ -40,9 +42,7 @@ tidy(des)
 # the ggplot2 equivalent of plot(des)
 library(ggplot2)
 ggplot(tidy(des), aes(n, power)) +
-    geom_line()
-
-
+  geom_line()
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[binGroup:binDesign]{binGroup::binDesign()}}

@@ -115,7 +115,7 @@ packge, or \code{\link[survey:svyolr]{survey::svyolr()}} of the \code{survey} pa
 
 library(MASS)
 data(housing)
-mod <- polr(Sat ~ Infl + Type + Cont, weights = Freq, data = housing)    
+mod <- polr(Sat ~ Infl + Type + Cont, weights = Freq, data = housing)
 tidy(mod)
 glance(mod)
 library(ordinal)
@@ -126,7 +126,7 @@ tidy(clm_mod, conf.int = TRUE, conf.type = "Wald", exponentiate = TRUE)
 glance(clm_mod)
 augment(clm_mod)
 
-clm_mod2 <- clm(rating ~ temp, nominal = ~ contact, data = wine)
+clm_mod2 <- clm(rating ~ temp, nominal = ~contact, data = wine)
 tidy(clm_mod2)
 
 clmm_mod <- clmm(rating ~ temp + contact + (1 | judge), data = wine)

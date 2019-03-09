@@ -48,7 +48,6 @@ by interpolation functions such as \code{\link[akima:interp]{akima::interp()}}.
 A <- list(x = 1:5, y = 1:3, z = matrix(runif(5 * 3), nrow = 5))
 image(A)
 tidy(A)
-
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[graphics:persp]{graphics::persp()}}, \code{\link[graphics:image]{graphics::image()}},

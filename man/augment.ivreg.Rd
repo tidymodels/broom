@@ -93,7 +93,6 @@ augment(ivr, data = CigarettesSW)
 augment(ivr, newdata = CigarettesSW)
 
 glance(ivr)
-
 }
 \seealso{
 \code{\link[=augment]{augment()}}, \code{\link[AER:ivreg]{AER::ivreg()}}

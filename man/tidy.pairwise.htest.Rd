@@ -50,7 +50,6 @@ tidy(pairwise.t.test(Petal.Length, Species, alternative = "greater"))
 tidy(pairwise.t.test(Petal.Length, Species, alternative = "less"))
 
 tidy(pairwise.wilcox.test(Petal.Length, Species))
-
 }
 \seealso{
 \code{\link[stats:pairwise.t.test]{stats::pairwise.t.test()}}, \code{\link[stats:pairwise.wilcox.test]{stats::pairwise.wilcox.test()}},

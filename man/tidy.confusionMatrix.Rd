@@ -63,7 +63,6 @@ six_class_cm <- caret::confusionMatrix(
 
 tidy(six_class_cm)
 tidy(six_class_cm, by_class = FALSE)
-
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[caret:confusionMatrix]{caret::confusionMatrix()}}

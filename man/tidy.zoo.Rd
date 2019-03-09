@@ -45,15 +45,14 @@ tidy(Z)
 
 ggplot(tidy(Z), aes(index, value, color = series)) +
   geom_line()
-  
+
 ggplot(tidy(Z), aes(index, value)) +
   geom_line() +
-  facet_wrap(~ series, ncol = 1)
+  facet_wrap(~series, ncol = 1)
 
 Zrolled <- rollmean(Z, 5)
 ggplot(tidy(Zrolled), aes(index, value, color = series)) +
   geom_line()
-
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[zoo:zoo]{zoo::zoo()}}

@@ -48,8 +48,8 @@ library(ggplot2)
 library(dplyr)
 library(tidyr)
 
-td \%>\% 
-  spread(variable, value) \%>\% 
+td \%>\%
+  spread(variable, value) \%>\%
   ggplot(aes(x1, x2, fill = estimate)) +
   geom_tile() +
   theme_void()
@@ -60,7 +60,6 @@ k3 <- kde(dat3)
 
 td3 <- tidy(k3)
 td3
-
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[ks:kde]{ks::kde()}}
