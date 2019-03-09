@@ -70,7 +70,7 @@ augment.pam <- function(x, data, ...) {
   data <- as_broom_tibble(data)
   
   # show cluster assignment as a factor (it's not numeric)
-  add_column(data, .cluster = factor(x$clustering))
+  add_column(data, .cluster = as.factor(!!x$clustering))
 }
 
 
