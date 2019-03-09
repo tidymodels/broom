@@ -95,54 +95,15 @@ tidy.anova <- function(x, ...) {
 #' @family anova tidiers
 #' @seealso [tidy()], [stats::aov()]
 tidy.aov <- function(x, ...) {
-  # there are many possible column names that need to be transformed
-  renamers <- c(
-    "AIC" = "AIC",              # merMod
-    "BIC" = "BIC",              # merMod
-    "deviance" = "deviance",    # merMod
-    "logLik" = "logLik",        # merMod
-    "Df" = "df",
-    "Chi.Df" = "df",
-    "Sum Sq" = "sumsq",
-    "Mean Sq" = "meansq",
-    "F value" = "statistic",
-    "Pr(>F)" = "p.value",
-    "Res.Df" = "res.df",
-    "RSS" = "rss",
-    "Sum of Sq" = "sumsq",
-    "F" = "statistic",
-    "Chisq" = "statistic",
-    "P(>|Chi|)" = "p.value",
-    "Pr(>Chi)" = "p.value",
-    "Pr..Chisq." = "p.value",
-    "Pr..Chi." = "p.value",
-    "p.value" = "p.value",
-    "Chi.sq" = "statistic",
-    "LR.Chisq" = "statistic",
-    "LR Chisq" = "statistic",
-    "edf" = "edf",
-    "Ref.df" = "ref.df"
-  )
-  
-  names(renamers) <- make.names(names(renamers))
-  
-  ret <- fix_data_frame(summary(x)[[1]])
-  unknown_cols <- setdiff(colnames(ret), c("term", names(renamers)))
-  if (length(unknown_cols) > 0) {
-    warning(
-      "The following column names in AOV output were not ",
-      "recognized or transformed: ",
-      paste(unknown_cols, collapse = ", ")
-    )
-  }
-  
-  colnames(ret) <- dplyr::recode(colnames(ret), !!!renamers)
-  
-  if("term" %in% names(ret)){
-    # if rows had names, strip whitespace in them
-    ret <- mutate(ret, term = stringr::str_trim(term))
-  }
-  as_tibble(ret)
+  # grab the desired information from the AOV object and convert into a tibble
+  summary(x)[[1]] %>% 
+    tibble::as_tibble(rownames = "term") %>% 
+    dplyr::mutate("term" = stringr::str_trim(term)) %>%
+    dplyr::rename("df" = "Df",
+                  "sumsq" = "Sum Sq",
+                  "meansq" = "Mean Sq",
+                  "statistic" = "F value",
+                  "p.value" = "Pr(>F)")
 }
 
 # this is a placeholder while we decide what to do
