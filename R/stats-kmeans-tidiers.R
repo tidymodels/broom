@@ -6,7 +6,7 @@
 #' @template param_unused_dots
 #'
 #' @evalRd return_tidy("size", "withinss", "cluster")
-#' 
+#'
 #' @details For examples, see the kmeans vignette.
 #'
 #' @aliases kmeans_tidiers
@@ -14,8 +14,7 @@
 #' @seealso [tidy()], [stats::kmeans()]
 #' @family kmeans tidiers
 tidy.kmeans <- function(x, col.names = colnames(x$centers), ...) {
-  
-  if(is.null(col.names)){
+  if (is.null(col.names)) {
     col.names <- paste0("x", 1:ncol(x$centers))
   }
   ret <- as.data.frame(x$centers)
@@ -29,7 +28,7 @@ tidy.kmeans <- function(x, col.names = colnames(x$centers), ...) {
 
 #' @templateVar class kmeans
 #' @template title_desc_augment
-#' 
+#'
 #' @inherit tidy.kmeans params examples
 #' @template param_data
 #'
@@ -43,14 +42,14 @@ tidy.kmeans <- function(x, col.names = colnames(x$centers), ...) {
 #' @seealso [augment()], [stats::kmeans()]
 #' @family kmeans tidiers
 augment.kmeans <- function(x, data, ...) {
-  fix_data_frame(data, newcol = ".rownames") %>% 
+  fix_data_frame(data, newcol = ".rownames") %>%
     mutate(.cluster = factor(x$cluster))
 }
 
 
 #' @templateVar class kmeans
 #' @template title_desc_glance
-#' 
+#'
 #' @inherit tidy.kmeans params examples
 #'
 #' @evalRd return_glance("totss", "tot.withinss", "betweenss", "iter")

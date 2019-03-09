@@ -17,16 +17,15 @@ test_that("speedglm tidiers arguments", {
 })
 
 test_that("tidy.speedlm", {
-  
   td <- tidy(fit)
   td2 <- tidy(fit2)
-  
+
   check_tidy_output(td)
   check_tidy_output(td2)
-  
+
   check_dims(td, 2)
   check_dims(td2, 3)
-  
+
   expect_equal(td$term, c("(Intercept)", "wt"))
   expect_equal(td2$term, c("(Intercept)", "wt", "disp"))
 })
@@ -39,21 +38,20 @@ test_that("glance.speedlm", {
 test_that("augment.speedlm", {
   check_augment_function(
     aug = augment.speedlm,
-    model = fit, 
+    model = fit,
     data = mtcars,
     newdata = mtcars
   )
-  
+
   check_augment_function(
     aug = augment.speedlm,
-    model = fit2, 
+    model = fit2,
     data = mtcars,
     newdata = mtcars
   )
-  
+
   expect_error(
     augment(fit3),
     "Must specify `data` argument or refit speedglm with `fitted = TRUE`."
   )
 })
-

@@ -11,10 +11,10 @@
 #' @template param_quick
 #' @template param_data
 #' @template param_newdata
-#' 
+#'
 #' @param conf.type the type of confidence interval
 #' (see [ordinal::confint.clm()])
-#' 
+#'
 #' @param type.predict type of prediction to compute for a CLM; passed on to
 #' [ordinal::predict.clm()] or `predict.polr`
 #' @param ... extra arguments
@@ -28,14 +28,14 @@
 #' tidy(clm_mod, conf.int = TRUE, conf.type = "Wald", exponentiate = TRUE)
 #' glance(clm_mod)
 #' augment(clm_mod)
-#' 
-#' clm_mod2 <- clm(rating ~ temp, nominal = ~ contact, data = wine)
+#'
+#' clm_mod2 <- clm(rating ~ temp, nominal = ~contact, data = wine)
 #' tidy(clm_mod2)
-#' 
+#'
 #' clmm_mod <- clmm(rating ~ temp + contact + (1 | judge), data = wine)
 #' tidy(clmm_mod)
 #' glance(clmm_mod)
-#' 
+#'
 #' library(MASS)
 #' polr_mod <- polr(Sat ~ Infl + Type + Cont, weights = Freq, data = housing)
 #' tidy(polr_mod, exponentiate = TRUE, conf.int = TRUE)
@@ -96,21 +96,25 @@ process_clm <- function(ret, x, conf.int = FALSE, conf.level = .95,
     colnames(CI) <- c("conf.low", "conf.high")
     CI <- as.data.frame(CI)
     CI$term <- rownames(CI)
-    
+
     ret$orig_row_order <- seq_len(nrow(ret))
     ret <- merge(ret, unrowname(CI), by = "term", all.x = TRUE)
-    ret <- ret[order(ret$orig_row_order),]
+    ret <- ret[order(ret$orig_row_order), ]
     ret$orig_row_order <- NULL
   }
 
   ret$estimate <- trans(ret$estimate)
   ## make sure original order hasn't changed
-  if (!identical(ret$term,c(names(x$alpha),names(x$beta),names(x$zeta)))) {
-      stop("row order changed; please contact maintainers")
+  if (!identical(ret$term, c(names(x$alpha), names(x$beta), names(x$zeta)))) {
+    stop("row order changed; please contact maintainers")
   }
-  ret$coefficient_type <- rep(c("alpha","beta","zeta"),
-                              vapply(x[c("alpha","beta","zeta")],
-                                     length, numeric(1)))
+  ret$coefficient_type <- rep(
+    c("alpha", "beta", "zeta"),
+    vapply(
+      x[c("alpha", "beta", "zeta")],
+      length, numeric(1)
+    )
+  )
   as_tibble(ret)
 }
 

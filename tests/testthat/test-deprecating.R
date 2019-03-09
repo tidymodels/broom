@@ -9,16 +9,16 @@ library(modeltests)
 
 if (require(lme4, quietly = TRUE)) {
   context("lme4 models")
-  
+
   d <- as.data.frame(ChickWeight)
   colnames(d) <- c("y", "x", "subj", "tx")
   fit <- lmer(y ~ tx * x + (x | subj), data = d)
-  
+
   test_that("tidy works on lme4 fits", {
     td <- tidy(fit)
     check_tidy(td, exp.row = 12, exp.col = 5)
   })
-  
+
   test_that("scales works", {
     t1 <- tidy(fit, effects = "ran_pars")
     t2 <- tidy(fit, effects = "ran_pars", scales = "sdcor")
@@ -37,7 +37,7 @@ if (require(lme4, quietly = TRUE)) {
       "must be provided for each effect"
     )
   })
-  
+
   test_that("tidy works with more than one RE grouping variable", {
     dd <- expand.grid(
       f = factor(1:10),
@@ -59,42 +59,42 @@ if (require(lme4, quietly = TRUE)) {
       paste("sd_(Intercept)", c("f", "g"), sep = ".")
     )
   })
-  
+
   test_that("tidy works for different effects and conf ints", {
     lmm1 <- lmer(Reaction ~ Days + (Days | Subject), sleepstudy)
     td <- tidy(lmm1, effects = "ran_modes", conf.int = TRUE)
     check_tidy(td, exp.col = 7)
-    
+
     td <- tidy(lmm1, effects = "fixed", conf.int = TRUE)
     check_tidy(td, exp.col = 6)
   })
-  
+
   test_that("augment works on lme4 fits with or without data", {
     au <- augment(fit)
     aud <- augment(fit, d)
     expect_equal(dim(au), dim(aud))
   })
-  
+
   dNAs <- d
   dNAs$y[c(1, 3, 5)] <- NA
-  
+
   test_that("augment works on lme4 fits with NAs", {
     fitNAs <- lmer(y ~ tx * x + (x | subj), data = dNAs)
     au <- augment(fitNAs)
     expect_equal(nrow(au), sum(complete.cases(dNAs)))
   })
-  
+
   test_that("augment works on lme4 fits with na.exclude", {
     fitNAs <- lmer(y ~ tx * x + (x | subj), data = dNAs, na.action = "na.exclude")
-    
+
     # expect_error(suppressWarnings(augment(fitNAs)))
     au <- augment(fitNAs, dNAs)
-    
+
     # with na.exclude, should have NAs in the output where there were NAs in input
     expect_equal(nrow(au), nrow(dNAs))
     expect_equal(complete.cases(au), complete.cases(dNAs))
   })
-  
+
   test_that("glance works on lme4 fits", {
     g <- glance(fit)
     check_tidy(g, exp.col = 6)
@@ -116,16 +116,16 @@ test_that("tidy.stanfit works", {
 if (suppressPackageStartupMessages(require(nlme, quietly = TRUE))) {
   skip("Skipping nlme tidying tests")
   context("nlme models")
-  
+
   d <- as.data.frame(ChickWeight)
   colnames(d) <- c("y", "x", "subj", "tx")
   fit <- lme(y ~ tx * x, random = ~ x | subj, data = d)
-  
+
   test_that("tidy works on nlme/lme fits", {
     td <- tidy(fit)
     check_tidy(td, exp.col = 4)
   })
-  
+
   test_that("augment works on lme4 fits with or without data", {
     au <- augment(fit)
     aud <- augment(fit, d)
@@ -133,36 +133,36 @@ if (suppressPackageStartupMessages(require(nlme, quietly = TRUE))) {
   })
   dNAs <- d
   dNAs$y[c(1, 3, 5)] <- NA
-  
+
   test_that("augment works on lme fits with NAs and na.omit", {
     fitNAs <- lme(y ~ tx * x,
-                  random = ~ x | subj, data = dNAs,
-                  na.action = "na.omit"
+      random = ~ x | subj, data = dNAs,
+      na.action = "na.omit"
     )
     au <- augment(fitNAs)
     expect_equal(nrow(au), sum(complete.cases(dNAs)))
   })
-  
-  
+
+
   test_that("augment works on lme fits with na.omit", {
     fitNAs <- lme(y ~ tx * x,
-                  random = ~ x | subj, data = dNAs,
-                  na.action = "na.exclude"
+      random = ~ x | subj, data = dNAs,
+      na.action = "na.exclude"
     )
-    
+
     au <- augment(fitNAs, dNAs)
-    
+
     # with na.exclude, should have NAs in the output where there were NAs in input
     expect_equal(nrow(au), nrow(dNAs))
     expect_equal(complete.cases(au), complete.cases(dNAs))
   })
-  
+
   test_that("glance works on nlme fits", {
     g <- suppressWarnings(glance(fit))
     check_tidy(g, exp.col = 5)
   })
-  
-  
+
+
   testFit <- function(fit, data = NULL) {
     test_that("Pinheiro/Bates fit works", {
       tidy(fit, "fixed")
@@ -178,29 +178,29 @@ if (suppressPackageStartupMessages(require(nlme, quietly = TRUE))) {
       }
     })
   }
-  
+
   testFit(lme(score ~ Machine, data = Machines, random = ~ 1 | Worker))
   testFit(lme(score ~ Machine, data = Machines, random = ~ 1 | Worker))
   testFit(lme(score ~ Machine, data = Machines, random = ~ 1 | Worker / Machine))
-  testFit(lme(pixel ~ day + day^2, data = Pixel, random = list(Dog = ~ day, Side = ~ 1)))
+  testFit(lme(pixel ~ day + day^2, data = Pixel, random = list(Dog = ~day, Side = ~1)))
   testFit(lme(pixel ~ day + day^2 + Side,
-              data = Pixel,
-              random = list(Dog = ~ day, Side = ~ 1)
+    data = Pixel,
+    random = list(Dog = ~day, Side = ~1)
   ))
-  
+
   testFit(lme(yield ~ ordered(nitro) * Variety,
-              data = Oats,
-              random = ~ 1 / Block / Variety
+    data = Oats,
+    random = ~ 1 / Block / Variety
   ))
   # There are cases where no data set is returned in the result
   # We can do nothing about this inconsitency but give a useful error message in augment
   fit <- nlme(conc ~ SSfol(Dose, Time, lKe, lKa, lCl),
-              data = Theoph,
-              random = pdDiag(lKe + lKa + lCl ~ 1)
+    data = Theoph,
+    random = pdDiag(lKe + lKa + lCl ~ 1)
   )
   # Fit without data in returned structure works when data are given
   testFit(fit, Theoph)
-  
+
   # When no data are passed, a meaningful message is issued
   expect_error(augment(fit), "explicit")
 }
@@ -214,11 +214,11 @@ if (require(rstanarm, quietly = TRUE)) {
   set.seed(2016)
   capture.output(
     fit <- stan_glmer(mpg ~ wt + (1 | cyl) + (1 + wt | gear),
-                      data = mtcars,
-                      iter = 200, chains = 2
+      data = mtcars,
+      iter = 200, chains = 2
     )
   )
-  
+
   context("rstanarm models")
   test_that("tidy works on rstanarm fits", {
     td1 <- tidy(fit)
@@ -227,20 +227,20 @@ if (require(rstanarm, quietly = TRUE)) {
     td4 <- tidy(fit, parameters = "auxiliary")
     expect_equal(colnames(td1), c("term", "estimate", "std.error"))
   })
-  
+
   test_that("tidy with multiple 'parameters' selections works on rstanarm fits", {
     td1 <- tidy(fit, parameters = c("varying", "auxiliary"))
     expect_true(all(c("sigma", "mean_PPD") %in% td1$term))
     expect_equal(colnames(td1), c("term", "estimate", "std.error", "level", "group"))
   })
-  
+
   test_that("intervals works on rstanarm fits", {
     td1 <- tidy(fit, intervals = TRUE, prob = 0.8)
     td2 <- tidy(fit, parameters = "varying", intervals = TRUE, prob = 0.5)
     nms <- c("level", "group", "term", "estimate", "std.error", "lower", "upper")
     expect_equal(colnames(td2), nms)
   })
-  
+
   test_that("glance works on rstanarm fits", {
     g1 <- glance(fit)
     g2 <- suppressWarnings(glance(fit, looic = TRUE, cores = 1))
@@ -258,15 +258,14 @@ test_that("tidy.table", {
 
 
 test_that("tidy.summary", {
-  
   df <- tibble(
     group = c(rep("M", 6), "F", "F", "M", "M", "F", "F"),
     val = c(6, 5, NA, NA, 6, 13, NA, 8, 10, 7, 14, 6)
   )
-  
+
   summ <- summary(df$val)
   td <- tidy(summ)
-  
+
   expected <- tibble(
     minimum = 5,
     q1 = 6,
@@ -276,11 +275,11 @@ test_that("tidy.summary", {
     maximum = 14,
     na = 3
   )
-  
+
   expect_equivalent(td, expected)
-  
+
   td <- tidy(summary(df$val))
-  
+
   gl <- glance(summary(df$val))
   expect_identical(td, gl)
 })
@@ -289,12 +288,8 @@ test_that("tidy.summary", {
 test_that("tidy.ftable", {
   ftab <- ftable(Titanic, row.vars = 1:3)
   td <- tidy(ftab)
-  
+
   check_arguments(tidy.ftable)
   check_tidy_output(td)
   check_dims(td, 32, 5)
 })
-
-
-
-

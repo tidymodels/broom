@@ -1,15 +1,15 @@
 #' @templateVar class ivreg
 #' @template title_desc_tidy
-#' 
+#'
 #' @param x An `ivreg` object created by a call to [AER::ivreg()].
 #' @template param_confint
 #' @template param_exponentiate
 #' @template param_unused_dots
-#' 
+#'
 #' @evalRd return_tidy(regression = TRUE)
-#' 
+#'
 #' @examples
-#' 
+#'
 #' library(AER)
 #'
 #' data("CigarettesSW", package = "AER")
@@ -30,17 +30,15 @@
 #' augment(ivr, newdata = CigarettesSW)
 #'
 #' glance(ivr)
-#' 
 #' @export
 #' @seealso [tidy()], [AER::ivreg()]
 #' @family ivreg tidiers
 #' @aliases ivreg_tidiers aer_tidiers
 tidy.ivreg <- function(x,
-  conf.int = FALSE,
-  conf.level = .95, 
-  exponentiate = FALSE,
-  ...) {
-  
+                       conf.int = FALSE,
+                       conf.level = .95,
+                       exponentiate = FALSE,
+                       ...) {
   co <- stats::coef(summary(x))
   nn <- c("estimate", "std.error", "statistic", "p.value")
   ret <- fix_data_frame(co, nn[1:ncol(co)])
@@ -56,12 +54,12 @@ tidy.ivreg <- function(x,
 
 #' @templateVar class ivreg
 #' @template title_desc_augment
-#' 
+#'
 #' @inherit tidy.ivreg params examples
 #' @template param_data
 #' @template param_newdata
 #' @template param_unused_dots
-#' 
+#'
 #' @evalRd return_augment()
 #'
 #' @export
@@ -73,12 +71,12 @@ augment.ivreg <- function(x, data = model.frame(x), newdata = NULL, ...) {
 
 #' @templateVar class ivreg
 #' @template title_desc_glance
-#' 
+#'
 #' @inherit tidy.ivreg params examples
 #' @param diagnostics Logical indicating whether to include statistics and
 #'   p-values for Sargan, Wu-Hausman and weak instrument tests. Defaults to
 #'   `FALSE`.
-#' 
+#'
 #' @evalRd return_glance(
 #'   "r.squared",
 #'   "adj.r.squared",
@@ -100,10 +98,10 @@ augment.ivreg <- function(x, data = model.frame(x), newdata = NULL, ...) {
 #' @seealso [glance()], [AER::ivreg()]
 #' @family ivreg tidiers
 glance.ivreg <- function(x, diagnostics = FALSE, ...) {
-  
   s <- summary(x, diagnostics = diagnostics)
-  
-  ret <- with(s, 
+
+  ret <- with(
+    s,
     tibble(
       r.squared = r.squared,
       adj.r.squared = adj.r.squared,
@@ -115,9 +113,10 @@ glance.ivreg <- function(x, diagnostics = FALSE, ...) {
   )
   ret$df.residual <- df.residual(x)
   ret$nobs <- stats::nobs(x)
-  
+
   if (diagnostics) {
-    diag <- with(s,
+    diag <- with(
+      s,
       tibble(
         statistic.Sargan = diagnostics["Sargan", "statistic"],
         p.value.Sargan = diagnostics["Sargan", "p-value"],
@@ -131,5 +130,4 @@ glance.ivreg <- function(x, diagnostics = FALSE, ...) {
   }
 
   as_tibble(ret, rownames = NULL)
-  
 }

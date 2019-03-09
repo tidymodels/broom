@@ -9,7 +9,7 @@ test_that("tidy.NULL", {
 
 test_that("tidy.default", {
   expect_error(td <- tidy(raw(1)))
-  
+
   x <- 5
   class(x) <- c("foo", "bar")
   expect_error(glance(x), regexp = "foo")
@@ -26,7 +26,7 @@ test_that("glance.default", {
   expect_error(glance(1))
   expect_error(glance(1L))
   expect_error(glance("a"))
-  
+
   x <- 5
   class(x) <- c("foo", "bar")
   expect_error(glance(x), regexp = "foo")
@@ -42,7 +42,7 @@ test_that("augment.default", {
   expect_error(augment(1))
   expect_error(augment(1L))
   expect_error(augment("a"))
-  
+
   x <- 5
   class(x) <- c("foo", "bar")
   expect_error(augment(x), regexp = "foo")

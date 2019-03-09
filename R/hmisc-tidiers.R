@@ -7,7 +7,7 @@
 #'   itself. For the elements, `estimate` is always 1 and `p.value` is always
 #'   `NA`. Defaults to `FALSE`.
 #' @template param_unused_dots
-#' 
+#'
 #' @evalRd return_tidy(
 #'   "column1",
 #'   "column2",
@@ -17,14 +17,14 @@
 #' )
 #'
 #' @details Suppose the original data has columns A and B. In the correlation
-#'   matrix from `rcorr` there may be entries for both the `cor(A, B)` and 
+#'   matrix from `rcorr` there may be entries for both the `cor(A, B)` and
 #'   `cor(B, A)`. Only one of these pairs will ever be present in the tidy
 #'   output.
 #'
 #' @examples
-#' 
+#'
 #' library(Hmisc)
-#' 
+#'
 #' mat <- replicate(52, rnorm(100))
 #' # add some NAs
 #' mat[sample(length(mat), 2000)] <- NA
@@ -43,20 +43,17 @@
 #' ggplot(td, aes(estimate, p.value)) +
 #'   geom_point() +
 #'   scale_y_log10()
-#'
 #' @export
 #' @aliases rcorr_tidiers Hmisc_tidiers
 #' @seealso [tidy()], [Hmisc::rcorr()]
 tidy.rcorr <- function(x, diagonal = FALSE, ...) {
-  ret <- x$r %>% 
-    as.data.frame() %>% 
-    tibble::rownames_to_column("column1") %>% 
-    gather(column2, estimate, -column1) %>% 
+  ret <- x$r %>%
+    as.data.frame() %>%
+    tibble::rownames_to_column("column1") %>%
+    gather(column2, estimate, -column1) %>%
     mutate(n = as.vector(x$n), p.value = as.vector(x$P))
 
   # include only half the symmetric matrix.
   ret <- ret[upper.tri(x$r, diag = diagonal), ]
   as_tibble(ret)
 }
-
-

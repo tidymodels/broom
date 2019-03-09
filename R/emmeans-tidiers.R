@@ -6,11 +6,11 @@
 #' @param ... Additional arguments passed to [emmeans::summary.emmGrid()] or
 #'   [lsmeans::summary.ref.grid()]. **Cautionary note**: misspecified arguments
 #'   may be silently ignored!
-#'   
+#'
 #' @evalRd return_tidy(
-#'   "std.error", 
-#'   "df", 
-#'   "conf.low", 
+#'   "std.error",
+#'   "df",
+#'   "conf.low",
 #'   "conf.high",
 #'   level1 = "One level of the factor being contrasted",
 #'   level2 = "The other level of the factor being contrasted",
@@ -53,16 +53,19 @@
 #'   geom_errorbar(aes(ymin = conf.low, ymax = conf.high))
 #'
 #' # by multiple prices
-#' by_price <- emmeans(oranges_lm1, "day", by = "price2",
-#'                     at = list(price1 = 50, price2 = c(40, 60, 80),
-#'                     day = c("2", "3", "4")) )
+#' by_price <- emmeans(oranges_lm1, "day",
+#'   by = "price2",
+#'   at = list(
+#'     price1 = 50, price2 = c(40, 60, 80),
+#'     day = c("2", "3", "4")
+#'   )
+#' )
 #' by_price
 #' tidy(by_price)
 #'
 #' ggplot(tidy(by_price), aes(price2, estimate, color = day)) +
 #'   geom_line() +
 #'   geom_errorbar(aes(ymin = conf.low, ymax = conf.high))
-#'
 #' @aliases emmeans_tidiers
 #' @export
 #' @family emmeans tidiers
@@ -74,14 +77,14 @@ tidy.lsmobj <- function(x, conf.int = FALSE, conf.level = .95, ...) {
 
 #' @templateVar class ref.grid
 #' @template title_desc_tidy
-#' 
+#'
 #' @param x A `ref.grid` object created by [emmeans::ref_grid()].
-#' @inherit tidy.lsmobj params examples details 
-#'   
+#' @inherit tidy.lsmobj params examples details
+#'
 #' @evalRd return_tidy(
-#'   "std.error", 
-#'   "df", 
-#'   "conf.low", 
+#'   "std.error",
+#'   "df",
+#'   "conf.low",
 #'   "conf.high",
 #'   level1 = "One level of the factor being contrasted",
 #'   level2 = "The other level of the factor being contrasted",
@@ -101,14 +104,14 @@ tidy.ref.grid <- function(x, ...) {
 
 #' @templateVar class emmGrid
 #' @template title_desc_tidy
-#' 
+#'
 #' @param x An `emmGrid` object.
-#' @inherit tidy.lsmobj params examples details 
-#'   
+#' @inherit tidy.lsmobj params examples details
+#'
 #' @evalRd return_tidy(
-#'   "std.error", 
-#'   "df", 
-#'   "conf.low", 
+#'   "std.error",
+#'   "df",
+#'   "conf.low",
 #'   "conf.high",
 #'   level1 = "One level of the factor being contrasted",
 #'   level2 = "The other level of the factor being contrasted",

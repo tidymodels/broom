@@ -1,4 +1,4 @@
-#`stats::nobs` is a standard function to retrieve the number of observations used to fit a model. Unfortunately, Some packages do not define a `stats::nobs.MODEL` method. This file fills-in those missing methods. Ideally, we should offload these methods by submitting them for adoption in the upstream packages.
+# `stats::nobs` is a standard function to retrieve the number of observations used to fit a model. Unfortunately, Some packages do not define a `stats::nobs.MODEL` method. This file fills-in those missing methods. Ideally, we should offload these methods by submitting them for adoption in the upstream packages.
 
 # These packages still need to be checked:
 
@@ -15,124 +15,124 @@
 
 # nnet-multinom
 nobs.multinom <- function(object, ...) {
-    nrow(object$residuals)
+  nrow(object$residuals)
 }
 
 # orcutt
 nobs.orcutt <- function(object, ...) {
-    nrow(object$residuals)
+  nrow(object$residuals)
 }
 
 # mass-fitdistr
 nobs.fitdistr <- function(object, ...) {
-    object$n
+  object$n
 }
 
 # biglm
 nobs.biglm <- function(object, ...) {
-    object$n
+  object$n
 }
 
 # glmnet-cv-glmnet
 nobs.cv.glmnet <- function(object, ...) {
-    stats::nobs(object$glmnet.fit)
+  stats::nobs(object$glmnet.fit)
 }
 
 # gmm
 nobs.gmm <- function(object, ...) {
-    object$n
+  object$n
 }
 
-#lfe - felm
+# lfe - felm
 nobs.felm <- function(object, ...) {
-    object$N
+  object$N
 }
 
-#lmodel2
+# lmodel2
 nobs.lmodel2 <- function(object, ...) {
-    object$n
+  object$n
 }
 
-#mclust
+# mclust
 nobs.Mclust <- function(object, ...) {
-    object$n
+  object$n
 }
 
-#muhaz
+# muhaz
 nobs.muhaz <- function(object, ...) {
-    length(object$pin$times)
+  length(object$pin$times)
 }
 
-#polca
+# polca
 nobs.poLCA <- function(object, ...) {
-    object$N
+  object$N
 }
 
-#robust-glmrob
+# robust-glmrob
 nobs.lmRob <- function(object, ...) {
-    length(object$residuals)
+  length(object$residuals)
 }
 nobs.glmRob <- function(object, ...) {
-    length(object$residuals)
+  length(object$residuals)
 }
 
-#stats-loess
+# stats-loess
 nobs.loess <- function(object, ...) {
-    object$n
+  object$n
 }
 
-#stats-prcomp
+# stats-prcomp
 nobs.prcomp <- function(object, ...) {
-    NROW(object$x)
+  NROW(object$x)
 }
 
-#stats-smooth.spline
+# stats-smooth.spline
 nobs.smooth.spline <- function(object, ...) {
-    length(object$x)
+  length(object$x)
 }
 
-#bbmle
+# bbmle
 nobs.bbmle <- function(object, ...) {
-    length(object@data[[1]])
+  length(object@data[[1]])
 }
 
-#survival-aareg
+# survival-aareg
 nobs.aareg <- function(object, ...) {
-    object$n[1] # obs / event times / event times in computation
+  object$n[1] # obs / event times / event times in computation
 }
 
-#survival-survreg
+# survival-survreg
 nobs.survreg <- function(object, ...) {
-    length(object$linear.predictors)
+  length(object$linear.predictors)
 }
 
-#survival-survfit
+# survival-survfit
 nobs.survfit <- function(object, ...) {
-    object$n
+  object$n
 }
 
-#survival-survfit.cox
+# survival-survfit.cox
 nobs.survfit.cox <- function(object, ...) {
-    object$n
+  object$n
 }
 
-#survival-coxph
+# survival-coxph
 nobs.coxph <- function(object, ...) {
-    length(object$linear.predictors)
+  length(object$linear.predictors)
 }
 
-#survival-pyears
+# survival-pyears
 nobs.pyears <- function(object, ...) {
-    object$observations
+  object$observations
 }
 
-#survival-survdiff
+# survival-survdiff
 nobs.survdiff <- function(object, ...) {
-    s <- summary(object)
-    s$nobs
+  s <- summary(object)
+  s$nobs
 }
 
-#tseries
+# tseries
 nobs.garch <- function(object, ...) {
-    object$n.used
+  object$n.used
 }

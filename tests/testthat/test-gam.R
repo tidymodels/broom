@@ -27,4 +27,3 @@ test_that("glance.Gam", {
   gl <- glance(fit)
   check_glance_outputs(gl)
 })
-

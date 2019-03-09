@@ -4,7 +4,7 @@
 #' @param x A `summaryDefault` object, created by calling [summary()] on a
 #'   vector.
 #' @template param_unused_dots
-#' 
+#'
 #' @return A one-row [tibble::tibble] with columns:
 #'   \item{minimum}{Minimum value in original vector.}
 #'   \item{q1}{First quartile of original vector.}

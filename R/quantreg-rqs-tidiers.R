@@ -1,32 +1,31 @@
 #' @templateVar class rqs
 #' @template title_desc_tidy
-#' 
+#'
 #' @param x An `rqs` object returned from [quantreg::rq()].
 #' @param se.type Character specifying the method to use to calculate
 #'   standard errors. Passed to [quantreg::summary.rq()] `se` argument.
 #'   Defaults to `"rank"`.
 #' @template param_confint
 #' @param ... Additional arguments passed to [quantreg::summary.rqs()]
-#' 
+#'
 #' @evalRd return_tidy(regression = TRUE, "quantile")
-#' 
-#' @details If `se.type = "rank"` confidence intervals are calculated by 
-#'   `summary.rq`. When only a single predictor is included in the model, 
+#'
+#' @details If `se.type = "rank"` confidence intervals are calculated by
+#'   `summary.rq`. When only a single predictor is included in the model,
 #'   no confidence intervals are calculated and the confidence limits are
-#'   set to NA. 
-#'   
+#'   set to NA.
+#'
 #' @aliases rqs_tidiers
 #' @export
 #' @seealso [tidy()], [quantreg::rq()]
 #' @family quantreg tidiers
-#' 
+#'
 tidy.rqs <- function(x, se.type = "rank", conf.int = FALSE,
                      conf.level = 0.95, ...) {
-  
   rq_summary <- suppressWarnings(
     quantreg::summary.rqs(x, se = se.type, alpha = 1 - conf.level, ...)
   )
-  
+
   purrr::map_df(
     rq_summary,
     process_rq,
@@ -39,9 +38,9 @@ tidy.rqs <- function(x, se.type = "rank", conf.int = FALSE,
 #' @export
 glance.rqs <- function(x, ...) {
   stop("`glance` cannot handle objects of class 'rqs',",
-       " i.e. models with more than one tau value. Please",
-       " use a purrr `map`-based workflow with 'rq' models instead.",
-       call. = FALSE
+    " i.e. models with more than one tau value. Please",
+    " use a purrr `map`-based workflow with 'rq' models instead.",
+    call. = FALSE
   )
 }
 
@@ -50,7 +49,7 @@ glance.rqs <- function(x, ...) {
 #'
 #' @inherit tidy.rqs examples
 #' @inherit augment.rq return details
-#' 
+#'
 #' @param x An `rqs` object returned from [quantreg::rq()].
 #' @template param_data
 #' @template param_newdata
@@ -80,4 +79,3 @@ augment.rqs <- function(x, data = model.frame(x), newdata, ...) {
   }
   as_tibble(ret)
 }
-

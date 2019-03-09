@@ -13,7 +13,7 @@ test_that("robust tidier arguments", {
   check_arguments(tidy.lmRob)
   check_arguments(glance.lmRob)
   check_arguments(augment.lmRob)
-  
+
   check_arguments(tidy.glmRob)
   check_arguments(glance.glmRob)
 })

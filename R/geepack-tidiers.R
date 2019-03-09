@@ -18,23 +18,24 @@
 #'
 #' library(geepack)
 #' data(state)
-#'   
+#'
 #' ds <- data.frame(state.region, state.x77)
 #'
-#' geefit <- geeglm(Income ~ Frost + Murder, id = state.region,
-#'                  data = ds, family = gaussian,
-#'                  corstr = "exchangeable")
+#' geefit <- geeglm(Income ~ Frost + Murder,
+#'   id = state.region,
+#'   data = ds, family = gaussian,
+#'   corstr = "exchangeable"
+#' )
 #'
 #' tidy(geefit)
 #' tidy(geefit, quick = TRUE)
 #' tidy(geefit, conf.int = TRUE)
-#'
 #' @evalRd return_tidy(regresion = TRUE)
 #'
 #' @export
 #' @aliases geeglm_tidiers geepack_tidiers
 #' @seealso [tidy()], [geepack::geeglm()]
-#' 
+#'
 tidy.geeglm <- function(x, conf.int = FALSE, conf.level = .95,
                         exponentiate = FALSE, quick = FALSE, ...) {
   if (quick) {
@@ -88,11 +89,11 @@ process_geeglm <- function(ret, x, conf.int = FALSE, conf.level = .95,
 #' interval on all parameters (all variables in the model).
 #' @param level Confidence level of the interval.
 #' @param ... Additional parameters (ignored).
-#' 
+#'
 #' @details From http://stackoverflow.com/a/21221995/2632184.
-#' 
+#'
 #' @return Lower and upper confidence bounds in a data.frame(?).
-#' 
+#'
 #' @noRd
 confint.geeglm <- function(object, parm, level = 0.95, ...) {
   cc <- stats::coef(summary(object))

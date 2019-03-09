@@ -7,14 +7,14 @@
 #' @template param_confint
 #' @template param_exponentiate
 #' @template param_unused_dots
-#' 
+#'
 #' @evalRd return_tidy("y.value", regression = TRUE)
 #'
 #' @examples
 #'
 #' library(nnet)
 #' library(MASS)
-#' 
+#'
 #' example(birthwt)
 #' bwt.mu <- multinom(low ~ ., bwt)
 #' tidy(bwt.mu)
@@ -27,7 +27,6 @@
 #' fit.gear <- multinom(gear ~ mpg + factor(am), data = mtcars)
 #' tidy(fit.gear)
 #' glance(fit.gear)
-#'
 #' @aliases multinom_tidiers nnet_tidiers
 #' @export
 #' @family multinom tidiers
@@ -78,13 +77,12 @@ tidy.multinom <- function(x, conf.int = FALSE, conf.level = .95,
   }
 
   if (exponentiate) {
-    
     to_exp <- "estimate"
-    
+
     if (conf.int) {
       to_exp <- c(to_exp, "conf.low", "conf.high")
     }
-    
+
     ret[, to_exp] <- lapply(ret[, to_exp, drop = FALSE], exp)
   }
 
@@ -93,9 +91,9 @@ tidy.multinom <- function(x, conf.int = FALSE, conf.level = .95,
 
 #' @templateVar class multinom
 #' @template title_desc_glance
-#' 
+#'
 #' @inherit tidy.multinom params examples
-#' 
+#'
 #' @evalRd return_glance("edf", "deviance", "AIC", "nobs")
 #' @export
 #' @family multinom tidiers

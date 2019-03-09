@@ -17,9 +17,9 @@
 #'   state = "state if multistate survfit object input",
 #'   strata = "strata if stratified survfit object input"
 #' )
-#' 
-#' @examples 
-#' 
+#'
+#' @examples
+#'
 #' library(survival)
 #' cfit <- coxph(Surv(time, status) ~ age + sex, lung)
 #' sfit <- survfit(cfit)
@@ -29,27 +29,27 @@
 #'
 #' library(ggplot2)
 #' ggplot(tidy(sfit), aes(time, estimate)) + geom_line() +
-#'     geom_ribbon(aes(ymin=conf.low, ymax=conf.high), alpha=.25)
+#'   geom_ribbon(aes(ymin = conf.low, ymax = conf.high), alpha = .25)
 #'
 #' # multi-state
 #' fitCI <- survfit(Surv(stop, status * as.numeric(event), type = "mstate") ~ 1,
-#'               data = mgus1, subset = (start == 0))
+#'   data = mgus1, subset = (start == 0)
+#' )
 #' td_multi <- tidy(fitCI)
 #' td_multi
-#' 
-#' ggplot(td_multi, aes(time, estimate, group = state)) +
-#'     geom_line(aes(color = state)) +
-#'     geom_ribbon(aes(ymin = conf.low, ymax = conf.high), alpha = .25)
 #'
+#' ggplot(td_multi, aes(time, estimate, group = state)) +
+#'   geom_line(aes(color = state)) +
+#'   geom_ribbon(aes(ymin = conf.low, ymax = conf.high), alpha = .25)
 #' @aliases survfit_tidiers
 #' @export
 #' @seealso [tidy()], [survival::survfit()]
 #' @family survfit tidiers
 #' @family survival tidiers
-#' 
+#'
 tidy.survfit <- function(x, ...) {
   if (inherits(x, "survfitms")) {
-    
+
     # c() coerces to vector
     ret <- data.frame(
       time = x$time,
@@ -62,7 +62,7 @@ tidy.survfit <- function(x, ...) {
       conf.low = c(x$lower),
       state = rep(x$states, each = nrow(x$pstate))
     )
-    
+
     ret <- ret[ret$state != "", ]
   } else {
     ret <- data.frame(
@@ -85,9 +85,9 @@ tidy.survfit <- function(x, ...) {
 
 #' @templateVar class survfit
 #' @template title_desc_glance
-#' 
+#'
 #' @inherit tidy.survfit params examples
-#' 
+#'
 #' @evalRd return_glance(
 #'   "records",
 #'   "n.max",
@@ -100,12 +100,12 @@ tidy.survfit <- function(x, ...) {
 #'   median = "median survival",
 #'   "nobs"
 #' )
-#' 
+#'
 #' @export
 #' @seealso [glance()], [survival::survfit()]
 #' @family cch tidiers
 #' @family survival tidiers
-#' 
+#'
 glance.survfit <- function(x, ...) {
   if (inherits(x, "survfitms")) {
     stop("Cannot construct a glance of a multi-state survfit object.")
@@ -113,16 +113,16 @@ glance.survfit <- function(x, ...) {
   if (!is.null(x$strata)) {
     stop("Cannot construct a glance of a multi-strata survfit object.")
   }
-  
+
   s <- summary(x)
   ret <- unrowname(as.data.frame(t(s$table)))
-  
+
   colnames(ret) <- dplyr::recode(
     colnames(ret),
     "*rmean" = "rmean",
     "*se(rmean)" = "rmean.std.error"
   )
-  
+
   colnames(ret)[utils::tail(seq_along(ret), 2)] <- c("conf.low", "conf.high")
 
   ret$nobs <- stats::nobs(x)

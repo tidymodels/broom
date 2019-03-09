@@ -1,21 +1,22 @@
 #' @templateVar class plm
 #' @template title_desc_tidy
-#' 
+#'
 #' @param x A `plm` objected returned by [plm::plm()].
 #' @template param_confint
 #' @template param_exponentiate
 #' @template param_quick
 #' @template param_unused_dots
-#' 
+#'
 #' @evalRd return_tidy(regression = TRUE)
 #'
 #' @examples
 #'
 #' library(plm)
-#' 
+#'
 #' data("Produc", package = "plm")
 #' zz <- plm(log(gsp) ~ log(pcap) + log(pc) + log(emp) + unemp,
-#'           data = Produc, index = c("state","year"))
+#'   data = Produc, index = c("state", "year")
+#' )
 #'
 #' summary(zz)
 #'
@@ -25,7 +26,6 @@
 #'
 #' augment(zz)
 #' glance(zz)
-#'
 #' @aliases plm_tidiers
 #' @export
 #' @seealso [tidy()], [plm::plm()], [tidy.lm()]
@@ -41,10 +41,10 @@ tidy.plm <- function(x, conf.int = FALSE, conf.level = .95,
 
 #' @templateVar class plm
 #' @template title_desc_augment
-#' 
+#'
 #' @inherit tidy.plm params examples
 #' @template param_data
-#' 
+#'
 #' @evalRd return_augment()
 #'
 #' @export
@@ -60,7 +60,7 @@ augment.plm <- function(x, data = model.frame(x), ...) {
 
 #' @templateVar class plm
 #' @template title_desc_glance
-#' 
+#'
 #' @inherit tidy.plm params examples
 #'
 #' @evalRd return_glance(
@@ -72,18 +72,20 @@ augment.plm <- function(x, data = model.frame(x), ...) {
 #'   "df.residual",
 #'   "nobs"
 #' )
-#' 
+#'
 #' @export
 #' @seealso [glance()], [plm::plm()]
 #' @family plm tidiers
 glance.plm <- function(x, ...) {
   s <- summary(x)
-  ret <- tibble(r.squared = s$r.squared['rsq'],
-                adj.r.squared = s$r.squared['adjrsq'],
-                statistic = s$fstatistic$statistic,
-                p.value = s$fstatistic$p.value,
-                deviance = stats::deviance(x),
-                df.residual = stats::df.residual(x),
-                nobs = stats::nobs(x))
+  ret <- tibble(
+    r.squared = s$r.squared["rsq"],
+    adj.r.squared = s$r.squared["adjrsq"],
+    statistic = s$fstatistic$statistic,
+    p.value = s$fstatistic$p.value,
+    deviance = stats::deviance(x),
+    df.residual = stats::df.residual(x),
+    nobs = stats::nobs(x)
+  )
   ret
 }

@@ -3,7 +3,7 @@
 #'
 #' @param x A `factanal` object created by [stats::factanal()].
 #' @template param_unused_dots
-#' 
+#'
 #' @evalRd return_tidy(
 #'   "variable",
 #'   uniqueness = "Proportion of residual, or unexplained variance",
@@ -18,14 +18,13 @@
 #' tidy(mod)
 #' augment(mod)
 #' augment(mod, mtcars)
-#'
 #' @aliases factanal_tidiers
 #' @export
 #' @seealso [tidy()], [stats::factanal()]
 #' @family factanal tidiers
-#' 
+#'
 tidy.factanal <- function(x, ...) {
-  
+
   # as.matrix() causes this to break. unsure if this is a hack or appropriate
   loadings <- stats::loadings(x)
   class(loadings) <- "matrix"
@@ -47,7 +46,7 @@ tidy.factanal <- function(x, ...) {
 
 #' @templateVar class factanal
 #' @template title_desc_augment
-#' 
+#'
 #' @inheritParams tidy.factanal
 #' @template param_data
 #'
@@ -71,7 +70,7 @@ augment.factanal <- function(x, data, ...) {
     stop(
       "Cannot augment factanal objects fit with `scores = 'none'`.",
       call. = FALSE
-      )
+    )
   }
 
   # Place relevant values into a tidy data frame
@@ -87,10 +86,10 @@ augment.factanal <- function(x, data, ...) {
 
   # Bind to data
   data$.rownames <- rownames(data)
-  tidy_df <- tidy_df %>% 
+  tidy_df <- tidy_df %>%
     dplyr::right_join(data, by = ".rownames")
 
-  tidy_df %>% 
+  tidy_df %>%
     dplyr::select(
       .rownames, everything(),
       -matches("\\.fs[0-9]*"), matches("\\.fs[0-9]*")
@@ -99,7 +98,7 @@ augment.factanal <- function(x, data, ...) {
 
 #' @templateVar class factanal
 #' @template title_desc_glance
-#' 
+#'
 #' @inherit tidy.factanal params examples
 #'
 #' @evalRd return_glance(
@@ -115,7 +114,7 @@ augment.factanal <- function(x, data, ...) {
 #' )
 #'
 #' @export
-#' 
+#'
 #' @seealso [glance()], [stats::factanal()]
 #' @family factanal tidiers
 glance.factanal <- function(x, ...) {

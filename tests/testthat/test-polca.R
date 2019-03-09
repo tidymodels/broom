@@ -28,9 +28,8 @@ test_that("glance.poLCA", {
 })
 
 test_that("augment.poLCA", {
-  
   au <- augment(fit)
-  
+
   check_augment_function(
     aug = augment.poLCA,
     model = fit,
@@ -39,5 +38,3 @@ test_that("augment.poLCA", {
     strict = FALSE
   )
 })
-
-

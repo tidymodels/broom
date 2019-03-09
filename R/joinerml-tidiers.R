@@ -1,6 +1,6 @@
 #' @templateVar class mjoint
 #' @template title_desc_tidy
-#' 
+#'
 #' @param x An `mjoint` object returned from [joineRML::mjoint()].
 #' @template param_confint
 #' @param component Character specifying whether to tidy the survival or
@@ -8,7 +8,7 @@
 #'   `"longitudinal"`. Defaults to `"survival"`.
 #' @param boot_se Optionally a `bootSE` object from [joineRML::bootSE()]. If
 #'   specified, calcalutes confidence intervals via the bootstrap. Defaults to
-#'   `NULL`, in which case standard errors are calculated from the 
+#'   `NULL`, in which case standard errors are calculated from the
 #'   empirical information matrix.
 #' @template param_unused_dots
 #'
@@ -20,21 +20,21 @@
 #' library(joineRML)
 #' data(heart.valve)
 #' hvd <- heart.valve[!is.na(heart.valve$log.grad) &
-#'                        !is.na(heart.valve$log.lvmi) &
-#'                        heart.valve$num <= 50, ]
+#'   !is.na(heart.valve$log.lvmi) &
+#'   heart.valve$num <= 50, ]
 #' fit <- mjoint(
-#'     formLongFixed = list(
-#'         "grad" = log.grad ~ time + sex + hs,
-#'         "lvmi" = log.lvmi ~ time + sex
-#'     ),
-#'     formLongRandom = list(
-#'         "grad" = ~ 1 | num,
-#'         "lvmi" = ~ time | num
-#'     ),
-#'     formSurv = Surv(fuyrs, status) ~ age,
-#'     data = hvd,
-#'     inits = list("gamma" = c(0.11, 1.51, 0.80)),
-#'     timeVar = "time"
+#'   formLongFixed = list(
+#'     "grad" = log.grad ~ time + sex + hs,
+#'     "lvmi" = log.lvmi ~ time + sex
+#'   ),
+#'   formLongRandom = list(
+#'     "grad" = ~ 1 | num,
+#'     "lvmi" = ~ time | num
+#'   ),
+#'   formSurv = Surv(fuyrs, status) ~ age,
+#'   data = hvd,
+#'   inits = list("gamma" = c(0.11, 1.51, 0.80)),
+#'   timeVar = "time"
 #' )
 #'
 #' # Extract the survival fixed effects
@@ -62,15 +62,16 @@
 #' @aliases mjoint_tidiers joinerml_tidiers
 #' @family mjoint tidiers
 #' @seealso [tidy()], [joineRML::mjoint()], [joineRML::bootSE()]
-#' 
+#'
 tidy.mjoint <- function(x, component = "survival", conf.int = FALSE,
-                        conf.level = 0.95,  boot_se = NULL, ...) {
+                        conf.level = 0.95, boot_se = NULL, ...) {
   component <- rlang::arg_match(component, c("survival", "longitudinal"))
   if (!is.null(boot_se)) {
-    if (!inherits(x = boot_se, "bootSE")) 
+    if (!inherits(x = boot_se, "bootSE")) {
       stop("`boot_se` argument must be a `bootSE` object.", call. = FALSE)
+    }
   }
-  
+
   if (is.null(boot_se)) {
     smr <- summary(x)
   } else {
@@ -101,10 +102,10 @@ tidy.mjoint <- function(x, component = "survival", conf.int = FALSE,
 
 #' @templateVar class mjoint
 #' @template title_desc_augment
-#' 
+#'
 #' @inherit tidy.mjoint params examples
 #' @template param_data
-#' 
+#'
 #' @return A [tibble::tibble()] with one row for each original observation
 #'   with addition columns:
 #'   \item{.fitted_j_0}{population-level fitted values for the
@@ -115,7 +116,7 @@ tidy.mjoint <- function(x, component = "survival", conf.int = FALSE,
 #'     longitudinal process}
 #'   \item{.resid_j_1}{individual-level residuals for the j-th
 #'     longitudinal process}
-#' 
+#'
 #' @details See [joineRML::fitted.mjoint()] and [joineRML::residuals.mjoint()] for
 #'   more information on the difference between population-level and
 #'   individual-level fitted values and residuals.
@@ -126,7 +127,6 @@ tidy.mjoint <- function(x, component = "survival", conf.int = FALSE,
 #'
 #' @export
 augment.mjoint <- function(x, data = x$data, ...) {
-  
   if (is.null(data)) {
     stop(
       "`data` argument is NULL. Try specifying `data` manually.",
@@ -136,8 +136,10 @@ augment.mjoint <- function(x, data = x$data, ...) {
 
   if (length(data) > 1) {
     if (!do.call(all.equal, data)) {
-      stop("List of 'data' extracted from 'x' does not",
-           "include equal data frames.")
+      stop(
+        "List of 'data' extracted from 'x' does not",
+        "include equal data frames."
+      )
     }
     data <- data[[1]]
   }
@@ -163,7 +165,7 @@ augment.mjoint <- function(x, data = x$data, ...) {
 
 #' @templateVar class mjoint
 #' @template title_desc_glance
-#' 
+#'
 #' @inherit tidy.mjoint params examples
 #'
 #' @evalRd return_glance("AIC", "BIC", "logLik",

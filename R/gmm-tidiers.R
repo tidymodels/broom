@@ -6,13 +6,13 @@
 #' @template param_exponentiate
 #' @template param_quick
 #' @template param_unused_dots
-#' 
+#'
 #' @evalRd return_tidy(regression = TRUE)
 #'
 #' @examples
-#' 
+#'
 #' library(gmm)
-#' 
+#'
 #' # examples come from the "gmm" package
 #' ## CAPM test with GMM
 #' data(Finance)
@@ -20,9 +20,9 @@
 #' rm <- Finance[1:300, "rm"]
 #' rf <- Finance[1:300, "rf"]
 #'
-#' z <- as.matrix(r-rf)
+#' z <- as.matrix(r - rf)
 #' t <- nrow(z)
-#' zm <- rm-rf
+#' zm <- rm - rf
 #' h <- matrix(zm, t, 1)
 #' res <- gmm(z ~ zm, x = h)
 #'
@@ -39,14 +39,15 @@
 #'   ggplot(aes(estimate, variable)) +
 #'   geom_point() +
 #'   geom_errorbarh(aes(xmin = conf.low, xmax = conf.high)) +
-#'   facet_wrap(~ term) +
+#'   facet_wrap(~term) +
 #'   geom_vline(xintercept = 0, color = "red", lty = 2)
 #'
 #' # from a function instead of a matrix
 #' g <- function(theta, x) {
-#' 	e <- x[,2:11] - theta[1] - (x[,1] - theta[1]) %*% matrix(theta[2:11], 1, 10)
-#' 	gmat <- cbind(e, e*c(x[,1]))
-#' 	return(gmat) }
+#'   e <- x[, 2:11] - theta[1] - (x[, 1] - theta[1]) %*% matrix(theta[2:11], 1, 10)
+#'   gmat <- cbind(e, e * c(x[, 1]))
+#'   return(gmat)
+#' }
 #'
 #' x <- as.matrix(cbind(rm, r))
 #' res_black <- gmm(g, x = x, t0 = rep(0, 11))
@@ -71,9 +72,8 @@
 #'   ggplot(aes(estimate, variable)) +
 #'   geom_point() +
 #'   geom_errorbarh(aes(xmin = conf.low, xmax = conf.high)) +
-#'   facet_wrap(~ term) +
+#'   facet_wrap(~term) +
 #'   geom_vline(xintercept = 0, color = "red", lty = 2)
-#'
 #' @export
 #' @aliases gmm_tidiers
 #' @family gmm tidiers
@@ -113,13 +113,13 @@ tidy.gmm <- function(x, conf.int = FALSE, conf.level = .95,
 
 #' @templateVar class gmm
 #' @template title_desc_glance
-#' 
+#'
 #' @inherit tidy.gmm params examples
 #'
-#' @evalRd return_glance("df", 
-#'                       "statistic", 
-#'                       "p.value", 
-#'                       "df.residual", 
+#' @evalRd return_glance("df",
+#'                       "statistic",
+#'                       "p.value",
+#'                       "df.residual",
 #'                       "nobs")
 #'
 #' @export
@@ -128,10 +128,12 @@ tidy.gmm <- function(x, conf.int = FALSE, conf.level = .95,
 glance.gmm <- function(x, ...) {
   s <- gmm::summary.gmm(x)
   st <- suppressWarnings(as.numeric(s$stest$test))
-  ret <- tibble(df = x$df, 
-                statistic = st[1], 
-                p.value = st[2],
-                df.residual = stats::df.residual(x),
-                nobs = stats::nobs(x))
+  ret <- tibble(
+    df = x$df,
+    statistic = st[1],
+    p.value = st[2],
+    df.residual = stats::df.residual(x),
+    nobs = stats::nobs(x)
+  )
   ret
 }

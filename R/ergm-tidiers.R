@@ -1,8 +1,8 @@
 #' @templateVar class ergm
 #' @template title_desc_tidy
 #'
-#' @description The methods should work with any model that conforms to 
-#' the \pkg{ergm} class, such as those produced from weighted networks by the 
+#' @description The methods should work with any model that conforms to
+#' the \pkg{ergm} class, such as those produced from weighted networks by the
 #' \pkg{ergm.count} package.
 #'
 #' @param x An `ergm` object returned from a call to [ergm::ergm()].
@@ -11,19 +11,19 @@
 #' @template param_quick
 #' @param ... Additional arguments to pass to [ergm::summary.ergm()].
 #'   **Cautionary note**: Mispecified arguments may be silently ignored.
-#' 
+#'
 #' @evalRd return_tidy(
-#'   "term", 
-#'   "estimate", 
-#'   "std.error", 
-#'   "mcmc.error", 
+#'   "term",
+#'   "estimate",
+#'   "std.error",
+#'   "mcmc.error",
 #'   "p.value",
 #'   "conf.low",
 #'   "conf.high"
 #' )
 #'
 #' @examples
-#' 
+#'
 #' library(ergm)
 #' # Using the same example as the ergm package
 #' # Load the Florentine marriage network data
@@ -44,15 +44,14 @@
 #' glance(gest)
 #' glance(gest, deviance = TRUE)
 #' glance(gest, mcmc = TRUE)
-#' 
 #' @references Hunter DR, Handcock MS, Butts CT, Goodreau SM, Morris M (2008b).
 #'   \pkg{ergm}: A Package to Fit, Simulate and Diagnose Exponential-Family
 #'   Models for Networks. *Journal of Statistical Software*, 24(3).
-#'   <http://www.jstatsoft.org/v24/i03/>. 
+#'   <http://www.jstatsoft.org/v24/i03/>.
 #'
-#' @export 
+#' @export
 #' @aliases ergm_tidiers
-#' @seealso [tidy()], [ergm::ergm()], [ergm::control.ergm()], 
+#' @seealso [tidy()], [ergm::ergm()], [ergm::control.ergm()],
 #'   [ergm::summary.ergm()]
 #' @family ergm tidiers
 tidy.ergm <- function(x, conf.int = FALSE, conf.level = .95,
@@ -66,7 +65,7 @@ tidy.ergm <- function(x, conf.int = FALSE, conf.level = .95,
 
   nn <- c("estimate", "std.error", "mcmc.error", "p.value")
   ret <- fix_data_frame(co, nn[1:ncol(co)])
-  
+
   process_ergm(ret, x,
     conf.int = conf.int, conf.level = conf.level,
     exponentiate = exponentiate
@@ -80,7 +79,7 @@ tidy.ergm <- function(x, conf.int = FALSE, conf.level = .95,
 #' @param deviance Logical indicating whether or not to report null and
 #'   residual deviance for the model, as well as degrees of freedom. Defaults
 #'   to `FALSE`.
-#' @param mcmc Logical indicating whether or not to report MCMC interval, 
+#' @param mcmc Logical indicating whether or not to report MCMC interval,
 #'   burn-in and sample size used to estimate the model. Defaults to `FALSE`.
 #'
 #' @evalRd return_glance(
@@ -133,7 +132,7 @@ glance.ergm <- function(x, deviance = FALSE, mcmc = FALSE, ...) {
       MCMC.samplesize = x$control$MCMC.samplesize
     ))
   }
-  
+
   as_tibble(ret)
 }
 

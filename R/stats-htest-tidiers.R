@@ -4,7 +4,7 @@
 #' @param x An `htest` objected, such as those created by [stats::cor.test()],
 #'   [stats::t.test()], [stats::wilcox.test()], [stats::chisq.test()], etc.
 #' @template param_unused_dots
-#' 
+#'
 #' @evalRd  return_tidy(
 #'   "estimate",
 #'   "statistic",
@@ -22,7 +22,7 @@
 #'
 #' tt <- t.test(rnorm(10))
 #' tidy(tt)
-#' glance(tt)  # same output for all htests
+#' glance(tt) # same output for all htests
 #'
 #' tt <- t.test(mpg ~ am, data = mtcars)
 #' tidy(tt)
@@ -36,7 +36,6 @@
 #' chit <- chisq.test(xtabs(Freq ~ Sex + Class, data = as.data.frame(Titanic)))
 #' tidy(chit)
 #' augment(chit)
-#'
 #' @aliases htest_tidiers
 #' @export
 #' @family htest tidiers
@@ -93,9 +92,9 @@ glance.htest <- function(x, ...) tidy(x)
 
 #' @templateVar class htest
 #' @template title_desc_augment
-#' 
+#'
 #' @inherit tidy.htest params examples
-#' 
+#'
 #' @evalRd return_glance(
 #'   .observed = "Observed count.",
 #'   .prop = "Proportion of the total.",
@@ -115,8 +114,8 @@ glance.htest <- function(x, ...) tidy(x)
 augment.htest <- function(x, ...) {
   if (all(c("observed", "expected", "residuals", "stdres") %in% names(x))) {
     return(augment_chisq_test(x, ...))
-  } 
-  
+  }
+
   stop(
     "Augment is only defined for chi squared hypothesis tests.",
     call. = FALSE
@@ -159,7 +158,7 @@ augment_chisq_test <- function(x, ...) {
 #' @template param_unused_dots
 #'
 #' @evalRd return_tidy("group1", "group2", "p.value")
-#' 
+#'
 #' @details Note that in one-sided tests, the alternative hypothesis of each
 #'   test can be stated as "group1 is greater/less than group2".
 #'
@@ -181,17 +180,16 @@ augment_chisq_test <- function(x, ...) {
 #' tidy(pairwise.t.test(Petal.Length, Species, alternative = "less"))
 #'
 #' tidy(pairwise.wilcox.test(Petal.Length, Species))
-#'
 #' @export
 #' @seealso [stats::pairwise.t.test()], [stats::pairwise.wilcox.test()],
 #'   [tidy()]
 #' @family htest tidiers
-#' 
+#'
 tidy.pairwise.htest <- function(x, ...) {
   tibble(group1 = rownames(x$p.value)) %>%
     cbind(x$p.value) %>%
     tidyr::gather(group2, p.value, -group1) %>%
-    stats::na.omit() %>% 
+    stats::na.omit() %>%
     as_tibble()
 }
 
@@ -203,17 +201,16 @@ tidy.pairwise.htest <- function(x, ...) {
 #' @template param_unused_dots
 #'
 #' @evalRd return_tidy("n", "delta", "sd", "sig.level", "power")
-#' 
+#'
 #' @examples
 #'
 #' ptt <- power.t.test(n = 2:30, delta = 1)
 #' tidy(ptt)
 #'
 #' library(ggplot2)
-#' 
+#'
 #' ggplot(tidy(ptt), aes(n, power)) +
 #'   geom_line()
-#'
 #' @export
 #' @family htest tidiers
 #' @seealso [stats::power.t.test()]

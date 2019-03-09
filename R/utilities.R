@@ -1,5 +1,5 @@
 # Rename only those columns in a data frame that are present. Example:
-# 
+#
 # rename2(
 #   tibble(dog = 1),
 #   cat = dog,
@@ -8,16 +8,16 @@
 #
 rename2 <- function(.data, ...) {
   dots <- quos(...)
-  present <- purrr::keep(dots, ~quo_name(.x) %in% colnames(.data))
+  present <- purrr::keep(dots, ~ quo_name(.x) %in% colnames(.data))
   rename(.data, !!!present)
 }
 
 #' Coerce a data frame to a tibble, preserving rownames
-#' 
+#'
 #' A thin wrapper around [tibble::as_tibble()], except checks for
 #' rownames and adds them to a new column `.rownames` if they are
 #' interesting (i.e. more than `1, 2, 3, ...`).
-#' 
+#'
 #' Replacement for `fix_data_frame()`.
 #'
 #' @param data A [data.frame()] or [tibble::tibble()].
@@ -25,28 +25,30 @@ rename2 <- function(.data, ...) {
 #' @return A `tibble` potentially with a `.rownames` column
 #' @noRd
 as_broom_tibble <- function(data) {
-  
+
   # TODO: error when there aren't column names?
-  
+
   tryCatch(
     df <- as_tibble(data),
-    
     error = function(cnd)
       stop("Could not coerce data to `tibble`. Try explicitly passing a",
-           "dataset to either the `data` or `newdata` argument.",
-           call. = FALSE)
+        "dataset to either the `data` or `newdata` argument.",
+        call. = FALSE
+      )
   )
-  
-  if (has_rownames(data))
+
+  if (has_rownames(data)) {
     df <- tibble::add_column(df, .rownames = rownames(data), .before = TRUE)
+  }
   df
 }
 
 # copied from modeltests. re-export if at some we Import modeltests rather
 # than suggest it
 has_rownames <- function(df) {
-  if (tibble::is_tibble(df))
+  if (tibble::is_tibble(df)) {
     return(FALSE)
+  }
   any(rownames(df) != as.character(1:nrow(df)))
 }
 
@@ -137,7 +139,7 @@ augment_columns <- function(x, data, newdata = NULL, type, type.predict = type,
   notNAs <- function(o) {
     if (is.null(o) || all(is.na(o))) NULL else o
   }
-  
+
   residuals0 <- purrr::possibly(stats::residuals, NULL)
   influence0 <- purrr::possibly(stats::influence, NULL)
   cooks.distance0 <- purrr::possibly(stats::cooks.distance, NULL)
@@ -200,11 +202,11 @@ augment_columns <- function(x, data, newdata = NULL, type, type.predict = type,
         ret$.sigma <- NA
       } else {
         zero_weights <- "weights" %in% names(x) &&
-          any(zero_weight_inds <- abs(x$weights) < .Machine$double.eps ^ 0.5)
+          any(zero_weight_inds <- abs(x$weights) < .Machine$double.eps^0.5)
         if (zero_weights) {
           ret[c(".hat", ".sigma")] <- 0
-          ret$.hat[! zero_weight_inds] <- infl$hat
-          ret$.sigma[! zero_weight_inds] <- infl$sigma
+          ret$.hat[!zero_weight_inds] <- infl$hat
+          ret$.sigma[!zero_weight_inds] <- infl$sigma
         } else {
           ret$.hat <- infl$hat
           ret$.sigma <- infl$sigma
@@ -257,7 +259,7 @@ augment_columns <- function(x, data, newdata = NULL, type, type.predict = type,
   if (all(ret$.rownames == seq_along(ret$.rownames))) {
     ret$.rownames <- NULL
   }
-  
+
   as_tibble(ret)
 }
 
@@ -278,14 +280,13 @@ safe_response <- purrr::possibly(response, NULL)
 # in weighted regressions, influence measures should be zero for
 # data points with zero weight
 # helper for augment.lm and augment.glm
-add_hat_sigma_cols <-  function(df, x, infl) {
-  
+add_hat_sigma_cols <- function(df, x, infl) {
   df$.hat <- 0
   df$.sigma <- 0
-  
+
   w <- x$weights
   nonzero_idx <- if (is.null(w)) seq_along(df$.hat) else which(w != 0)
-  
+
   df$.hat[nonzero_idx] <- infl$hat
   df$.sigma[nonzero_idx] <- infl$sigma
   df
@@ -303,26 +304,26 @@ augment_newdata <- function(x, data, newdata, .se_fit, ...) {
   passed_newdata <- !is.null(newdata)
   df <- if (passed_newdata) newdata else data
   df <- as_broom_tibble(df)
-  
-  # NOTE: It is important use predict(x, newdata = newdata) rather than 
+
+  # NOTE: It is important use predict(x, newdata = newdata) rather than
   # predict(x, newdata = df). This is to avoid an edge case breakage
   # when augment is called with no data argument, so that data is
   # model.frame(x). When data = model.frame(x) and the model formula
   # contains a term like `log(x)`, the predict method will break. Luckily,
-  # predict(x, newdata = NULL) works perfectly well in this case. 
-  # 
+  # predict(x, newdata = NULL) works perfectly well in this case.
+  #
   # The current code relies on predict(x, newdata = NULL) functioning
   # equivalently to predict(x, newdata = data). An alternative would be to use
   # fitted(x) instead, although this may not play well with missing data,
   # and may behave like na.action = na.omit rather than na.action = na.pass.
-  
+
   # This helper *should not* be used for predict methods that do not have
   # an na.pass argument
-  
+
   if (.se_fit) {
     pred_obj <- predict(x, newdata = newdata, na.action = na.pass, se.fit = TRUE, ...)
     df$.fitted <- pred_obj$fit
-    
+
     # a couple possible names for the standard error element of the list
     # se.fit: lm, glm
     # se: loess
@@ -333,10 +334,11 @@ augment_newdata <- function(x, data, newdata, .se_fit, ...) {
   } else {
     df$.fitted <- predict(x, na.action = na.pass, ...)
   }
-  
+
   resp <- safe_response(x, df)
-  if (!is.null(resp) && is.numeric(resp))
+  if (!is.null(resp) && is.numeric(resp)) {
     df$.resid <- df$.fitted - resp
+  }
   df
 }
 
@@ -346,7 +348,7 @@ augment_newdata <- function(x, data, newdata, .se_fit, ...) {
 #' Return a confidence interval as a tidy data frame. This directly wraps the
 #' [confint()] function, but ensures it follows broom conventions:
 #' column names of `conf.low` and `conf.high`, and no row names.
-#' 
+#'
 #' `confint_tidy`
 #'
 #' @param x a model object for which [confint()] can be calculated
@@ -365,12 +367,12 @@ augment_newdata <- function(x, data, newdata, .se_fit, ...) {
 confint_tidy <- function(x, conf.level = .95, func = stats::confint, ...) {
   # avoid "Waiting for profiling to be done..." message for some models
   ci <- suppressMessages(func(x, level = conf.level, ...))
-  
+
   # protect against confidence intervals returned as named vectors
   if (is.null(dim(ci))) {
     ci <- matrix(ci, nrow = 1)
   }
-  
+
   # remove rows that are all NA. *not the same* as na.omit which checks
   # for any NA.
   all_na <- apply(ci, 1, function(x) all(is.na(x)))
@@ -406,13 +408,13 @@ globalVariables(
     "bic",
     "ci.lower",
     "ci.upper",
-    "column", 
+    "column",
     "column1",
     "column2",
     "comp",
     "comparison",
     "conf.high",
-    "conf.low", 
+    "conf.low",
     "cutoffs",
     "data",
     "df.residual",
@@ -420,42 +422,42 @@ globalVariables(
     "effect",
     "est",
     "estimate",
-    "expCIWidth", 
+    "expCIWidth",
     "fit",
     "GCV",
     "group1",
     "group2",
     "index",
     "Intercept",
-    "item1", 
+    "item1",
     "item2",
     "key",
     "lambda",
-    "level", 
+    "level",
     "lhs",
     "loading",
-    "method", 
+    "method",
     "Method",
-    "N", 
-    "nobs", 
+    "N",
+    "nobs",
     "norig",
     "objs",
     "obs",
     "op",
-    "p.value", 
+    "p.value",
     "PC",
     "percent",
     "pvalue",
     "rd_roclet",
-    "rhs", 
+    "rhs",
     "rmsea.ci.upper",
-    "rowname", 
-    "se", 
+    "rowname",
+    "se",
     "series",
     "Slope",
-    "statistic", 
+    "statistic",
     "std.dev",
-    "std.error", 
+    "std.error",
     "step",
     "stratum",
     "surv",
@@ -463,7 +465,7 @@ globalVariables(
     "type",
     "value",
     "Var1",
-    "Var2", 
+    "Var2",
     "variable",
     "wald.test",
     "y",
