@@ -22,9 +22,9 @@ the original predictors used to create \code{x}. Defaults to \code{NULL}, indica
 that nothing has been passed to \code{newdata}. If \code{newdata} is specified,
 the \code{data} argument will be ignored.}
 
-<<<<<<< HEAD
-=======
-\item{se_fit}{a switch indicating if standard errors are required.}
+\item{se_fit}{Logical indicating whether or not a \code{.se.fit} column should be
+added to the augmented output. For some models, this calculation can be
+somwhat time-consuming. Defaults to \code{FALSE}.}
 
 >>>>>>> simplify tidy, pass more args to augment
 \item{...}{Additional arguments. Not used. Needed to match generic
