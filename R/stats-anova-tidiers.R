@@ -99,16 +99,18 @@ tidy.aov <- function(x, ...) {
   tidy.anova(s[[1]])
 }
 
-# this is a placeholder while we decide what to do
-# it's not clear to me if glancing at an aov object should
-# return the same glance info as glance at the corresponding
-# regression. tentatively i'm calling this an error.
-# 
 #' @templateVar class lm
 #' @template title_desc_glance
 #'
 #' @inherit tidy.aov params examples
-#'
+#' 
+#' @note 
+#' From `0.7.0`, `broom` has changed the return summary and the new model
+#' summary dataframe contains only the following information- `logLik`, `IC`,
+#' `BIC`, `deviance`, `nobs`. Note that `tidy.aov` contains the numerator and
+#' denominator degrees of freedom, which were previously included in the glance
+#' summary.
+#' 
 #' @evalRd return_glance(
 #'   "logLik",
 #'   "AIC",

@@ -9,7 +9,7 @@ changes in this version of `broom`. We list them below-
   - New `glance.aov` method replaces the older one which relied on `glance.lm`.
     The new model summary dataframe contains following information- `logLik`,
     `AIC`, `BIC, deviance`, `nobs`. This is in response to conversation that
-    took place in \#212. Note that `tidy.aov` can be used to get numerator and
+    took place in #212. Note that `tidy.aov` can be used to get numerator and
     denominator degrees of freedom.
 
 ## Changes to `augment()`
