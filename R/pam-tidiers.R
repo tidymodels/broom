@@ -2,7 +2,8 @@
 #' @template title_desc_tidy
 #' 
 #' @param x An `pam` object returned from [cluster::pam()]
-#' @param col.names Column names in the input data frame. Defaults to the names of the variables in x.  Set to NULL to get names `x1, x2, ...`.
+#' @param col.names Column names in the input data frame. 
+#'   Defaults to the names of the variables in x.
 #' @template param_unused_dots
 #' 
 #' @evalRd return_tidy(
@@ -34,20 +35,21 @@
 #' 
 #' tidy(p)
 #' glance(p)
-#' augment(p,x)
+#' augment(p, x)
 #' 
 #' augment(p, x) %>% 
 #'   ggplot(aes(Sepal.Length, Sepal.Width)) +
 #'     geom_point(aes(color = .cluster)) +
 #'     geom_text(aes(label = cluster), data = tidy(p), size = 10)
 
-tidy.pam <- function(x, col.names=paste0("x", 1:ncol(x$medoids)), ...) {
-  ret <- bind_cols(as_broom_tibble(p$medoids), as_broom_tibble(p$clusinfo))
-  ret %>% mutate(avg.width = x$silinf$clus.avg.widths,
-                 cluster = factor(seq_len(nrow(ret))))
+tidy.pam <- function(x, col.names = paste0("x", 1:ncol(x$medoids)), ...) {
+  as_tibble(x$clusinfo) %>% 
+    mutate(
+      avg.width = x$silinfo$clus.avg.widths,
+      cluster = as.factor(row_number())
+    ) %>% 
+    bind_cols(as_tibble(x$medoids))
 }
-
-
 
 #' @templateVar class pam
 #' @template title_desc_augment
@@ -80,7 +82,6 @@ augment.pam <- function(x, data, ...) {
 #' @family pam tidiers
 glance.pam <- function(x, ...) {
     tibble(
-      clus.avg.width = x$silinfo$clus.avg.widths,
       avg.width = x$silinfo$avg.width
     )
 }
