@@ -51,6 +51,7 @@ TODO: sort out what happens to `glance.aov()`
 
 ### Bug fixes
 
+- Bug fix to allow `augment.kmeans()` to work with masked data (#609)
 - Bug fix to allow `augment.Mclust()` to work on univariate data (#490)
 - Bug fix to allow `tidy.htest()` to supports equal variances (#608)
 - Bug fix for `tidy.mlm()` when passed `quick = TRUE` (#539 by @MatthieuStigler)
