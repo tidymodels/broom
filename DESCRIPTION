@@ -180,7 +180,12 @@ Authors@R:
       person(given = "Wei Yang", 
              family = "Tham", 
              role = "ctb", 
-             email = "weiyang.tham@gmail.com"))
+             email = "weiyang.tham@gmail.com"),
+      person(given = "Abby",
+             family = "Smith",
+             role = "ctb",
+             email = "als1@u.northwestern.edu",
+             comment = c(ORCID = "0000-0002-3207-0375")))
 Description: Summarizes key information about statistical
     objects in tidy tibbles. This makes it easy to report results, create
     plots and consistently work with large numbers of models at once.
@@ -349,6 +354,7 @@ Collate:
     'nobs.R'
     'orcutt-tidiers.R'
     'ordinal-tidiers.R'
+    'pam-tidiers.R'
     'plm-tidiers.R'
     'polca-tidiers.R'
     'psych-tidiers.R'
