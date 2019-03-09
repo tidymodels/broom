@@ -354,7 +354,7 @@ augment_newdata <- function(x, data, newdata, .se_fit, ...) {
 #' @param x a model object for which [confint()] can be calculated
 #' @param conf.level confidence level
 #' @param func A function to compute a confidence interval for `x`. Calling
-#'   `func(x, level = conf.level, ...)` must return an object coercable to a
+#'   `func(x, level = conf.level, ...)` must return an object coercibleto a
 #'   tibble. This dataframe like object should have to columns corresponding
 #'   the lower and upper bounds on the confidence interval.
 #' @param ... extra arguments passed on to `confint`
