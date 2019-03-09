@@ -33,6 +33,23 @@ specify which components to return.
 \details{
 For examples, see the kmeans vignette.
 }
+\examples{
+
+library(cluster)
+library(dplyr)
+
+x <- iris \%>\% 
+  select(-Species)
+  
+fit <- pam(x, k = 3)
+
+tidy(fit)
+glance(fit)
+augment(fit, x)
+
+
+
+}
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[stats:kmeans]{stats::kmeans()}}
 

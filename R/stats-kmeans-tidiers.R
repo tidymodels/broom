@@ -7,6 +7,22 @@
 #'
 #' @evalRd return_tidy("size", "withinss", "cluster")
 #' 
+#' @examples 
+#' 
+#' library(cluster)
+#' library(dplyr)
+#' 
+#' x <- iris %>% 
+#'   select(-Species)
+#'   
+#' fit <- pam(x, k = 3)
+#' 
+#' tidy(fit)
+#' glance(fit)
+#' augment(fit, x)
+#'
+#' 
+#' 
 #' @details For examples, see the kmeans vignette.
 #'
 #' @aliases kmeans_tidiers

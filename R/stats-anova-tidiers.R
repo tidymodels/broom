@@ -122,7 +122,6 @@ tidy.aov <- function(x, ...) {
 #' @export
 #' @seealso [glance()]
 #' @family anova tidiers
-
 glance.aov <- function(x, ...) {
   with(
     summary(x),
