@@ -67,16 +67,18 @@ augment.pam <- function(x, data, ...) {
 }
 
 
-#' @templateVar class kmeans
+#' @templateVar class pam
 #' @template title_desc_glance
 #' 
-#' @inherit tidy.kmeans params examples
+#' @inherit tidy.pam params examples
 #'
-#' @evalRd return_glance(avg.width = "Average width of a cluster.")
+#' @evalRd return_glance(clus.avg.width = "The average silhouette width per cluster.",
+#' avg.width = "The average silhouette width for the dataset, i.e., simply the average of s(i) over all observations i.")
 #'
 #' @export
 #' @seealso [glance()], [cluster::pam()]
 #' @family pam tidiers
 glance.pam <- function(x, ...) {
-  tibble(avg.width = x$silinfo$avg.width)
+    tibble(clus.avg.width = x$silinfo$clus.avg.widths,
+    avg.width = x$silinfo$avg.width)
 }
