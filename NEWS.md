@@ -143,6 +143,7 @@ TODO: sort out what happens to `glance.aov()`
 - Bug fix for `tidy.mlm()` when passed `quick = TRUE` (#539 by @MatthieuStigler)
 - Bug fix for `tidy.polr()` when passed `conf.int = TRUE` (#498)
 - Bug fix in `glance.lavaan()` (#577)
+- Added tidiers for `lmrob` and `glmrob` objects from the `robustbase` package (#205, #505).
 
 ## Deprecations
 
