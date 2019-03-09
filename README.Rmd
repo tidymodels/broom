@@ -21,6 +21,9 @@ knitr::opts_chunk$set(
 [![AppVeyor build status](https://ci.appveyor.com/api/projects/status/github/alexpghayes/broom?branch=master&svg=true)](https://ci.appveyor.com/project/alexpghayes/broom)
 [![Coverage Status](https://img.shields.io/codecov/c/github/tidymodels/broom/master.svg)](https://codecov.io/github/tidymodels/broom?branch=master)
 
+THIS IS AN EXAMPLE CHANGE
+
+
 ## Overview
 
 broom summarizes key information about models in tidy `tibble()`s. broom provides three verbs to make it convenient to interact with model objects:
