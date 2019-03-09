@@ -60,7 +60,7 @@ tidy.kmeans <- function(x, col.names = colnames(x$centers), ...) {
 #' @family kmeans tidiers
 augment.kmeans <- function(x, data, ...) {
   fix_data_frame(data, newcol = ".rownames") %>% 
-    mutate(.cluster = factor(x$cluster))
+    mutate(.cluster = as.factor(!!x$cluster))
 }
 
 
