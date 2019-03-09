@@ -2,53 +2,187 @@ Type: Package
 Package: broom
 Title: Convert Statistical Objects into Tidy Tibbles
 Version: 0.5.1.9000
-Authors@R: c(
-    person("David", "Robinson", email = "admiral.david@gmail.com", role = c("aut", "cre")),
-    person("Alex", "Hayes", email = "alexpghayes@gmail.com", role = "aut", comment = c(ORCID = "0000-0002-4985-5160")),
-    person("Matthieu", "Gomez", email = "mattg@princeton.edu", role = "ctb"),
-    person("Boris", "Demeshev", email = "boris.demeshev@gmail.com", role = "ctb"),
-    person("Dieter", "Menne", email = "dieter.menne@menne-biomed.de", role = "ctb"),
-    person("Benjamin", "Nutter", email = "nutter@battelle.org", role = "ctb"),
-    person("Luke", "Johnston", email = "luke.johnston@mail.utoronto.ca", role = "ctb"),
-    person("Ben", "Bolker", email = "bolker@mcmaster.ca", role = "ctb"),
-    person("Francois", "Briatte", email = "f.briatte@gmail.com", role = "ctb"),
-    person("Jeffrey", "Arnold", email = "jeffrey.arnold@gmail.com", role = "ctb"),
-    person("Jonah", "Gabry", email = "jsg2201@columbia.edu", role = "ctb"),
-    person("Luciano", "Selzer", email = "luciano.selzer@gmail.com", role = "ctb"),
-    person("Gavin", "Simpson", email = "ucfagls@gmail.com", role = "ctb"),
-    person("Jens", "Preussner", email = " jens.preussner@mpi-bn.mpg.de", role = "ctb"),
-    person("Jay", "Hesselberth", email = "jay.hesselberth@gmail.com", role = "ctb"),
-    person("Hadley", "Wickham", email = "hadley@rstudio.com", role = "ctb"),
-    person("Matthew", "Lincoln", email = "matthew.d.lincoln@gmail.com", role = "ctb"),
-    person("Alessandro", "Gasparini", email = "ag475@leicester.ac.uk", role = "ctb"),
-    person("Lukasz", "Komsta", email = "lukasz.komsta@umlub.pl", role = "ctb"),
-    person("Frederick", "Novometsky", role = "ctb"),
-    person("Wilson", "Freitas", role = "ctb"),
-    person("Michelle", "Evans", role = "ctb"),
-    person("Jason Cory", "Brunson", email = "cornelioid@gmail.com", role = "ctb"),
-    person("Simon", "Jackson", email = "drsimonjackson@gmail.com", role = "ctb"),
-    person("Ben", "Whalley", email = "ben.whalley@plymouth.ac.uk", role = "ctb"),
-    person("Michael", "Kuehn", email = "mkuehn10@gmail.com", role = "ctb"),
-    person("Jorge", "Cimentada", email = "cimentadaj@gmail.com", role = "ctb"),
-    person("Erle", "Holgersen", email = "erle.holgersen@gmail.com", role = "ctb"),
-    person("Karl", "Dunkle Werner", role = "ctb"),
-    person("Ethan", "Christensen", email = "christensen.ej@gmail.com", role = "ctb"),
-    person("Steven", "Pav", email = "shabbychef@gmail.com", role = "ctb"),
-    person("Paul", "PJ", email = "pjpaul.stephens@gmail.com", role = "ctb"),
-    person("Ben", "Schneider", email = "benjamin.julius.schneider@gmail.com", role = "ctb"),
-    person("Patrick", "Kennedy", email = "pkqstr@protonmail.com", role = "ctb"),
-    person("Brian", "Fannin", email = "captain@pirategrunt.com", role = "ctb"),
-    person("Jason", "Muhlenkamp", email = "jason.muhlenkamp@gmail.com", role = "ctb"))
-Maintainer: David Robinson <admiral.david@gmail.com>
-Description: Summarizes key information about statistical objects in tidy
-    tibbles. This makes it easy to report results, create plots and consistently
-    work with large numbers of models at once. Broom provides three verbs that
-    each provide different types of information about a model. tidy()
-    summarizes information about model components such as coefficients of
-    a regression. glance() reports information about an entire model, such as
-    goodness of fit measures like AIC and BIC. augment() adds information
-    about individual observations to a dataset, such as fitted values or
-    influence measures.
+Authors@R: 
+    c(person(given = "David",
+             family = "Robinson",
+             role = "aut",
+             email = "admiral.david@gmail.com"),
+      person(given = "Alex",
+             family = "Hayes",
+             role = c("aut", "cre"),
+             email = "alexpghayes@gmail.com",
+             comment = c(ORCID = "0000-0002-4985-5160")),
+      person(given = "Matthieu",
+             family = "Gomez",
+             role = "ctb",
+             email = "mattg@princeton.edu"),
+      person(given = "Boris",
+             family = "Demeshev",
+             role = "ctb",
+             email = "boris.demeshev@gmail.com"),
+      person(given = "Dieter",
+             family = "Menne",
+             role = "ctb",
+             email = "dieter.menne@menne-biomed.de"),
+      person(given = "Benjamin",
+             family = "Nutter",
+             role = "ctb",
+             email = "nutter@battelle.org"),
+      person(given = "Luke",
+             family = "Johnston",
+             role = "ctb",
+             email = "luke.johnston@mail.utoronto.ca"),
+      person(given = "Ben",
+             family = "Bolker",
+             role = "ctb",
+             email = "bolker@mcmaster.ca"),
+      person(given = "Francois",
+             family = "Briatte",
+             role = "ctb",
+             email = "f.briatte@gmail.com"),
+      person(given = "Jeffrey",
+             family = "Arnold",
+             role = "ctb",
+             email = "jeffrey.arnold@gmail.com"),
+      person(given = "Jonah",
+             family = "Gabry",
+             role = "ctb",
+             email = "jsg2201@columbia.edu"),
+      person(given = "Luciano",
+             family = "Selzer",
+             role = "ctb",
+             email = "luciano.selzer@gmail.com"),
+      person(given = "Gavin",
+             family = "Simpson",
+             role = "ctb",
+             email = "ucfagls@gmail.com"),
+      person(given = "Jens",
+             family = "Preussner",
+             role = "ctb",
+             email = " jens.preussner@mpi-bn.mpg.de"),
+      person(given = "Jay",
+             family = "Hesselberth",
+             role = "ctb",
+             email = "jay.hesselberth@gmail.com"),
+      person(given = "Hadley",
+             family = "Wickham",
+             role = "ctb",
+             email = "hadley@rstudio.com"),
+      person(given = "Matthew",
+             family = "Lincoln",
+             role = "ctb",
+             email = "matthew.d.lincoln@gmail.com"),
+      person(given = "Alessandro",
+             family = "Gasparini",
+             role = "ctb",
+             email = "ag475@leicester.ac.uk"),
+      person(given = "Lukasz",
+             family = "Komsta",
+             role = "ctb",
+             email = "lukasz.komsta@umlub.pl"),
+      person(given = "Frederick",
+             family = "Novometsky",
+             role = "ctb"),
+      person(given = "Wilson",
+             family = "Freitas",
+             role = "ctb"),
+      person(given = "Michelle",
+             family = "Evans",
+             role = "ctb"),
+      person(given = "Jason Cory",
+             family = "Brunson",
+             role = "ctb",
+             email = "cornelioid@gmail.com"),
+      person(given = "Simon",
+             family = "Jackson",
+             role = "ctb",
+             email = "drsimonjackson@gmail.com"),
+      person(given = "Ben",
+             family = "Whalley",
+             role = "ctb",
+             email = "ben.whalley@plymouth.ac.uk"),
+      person(given = "Karissa",
+             family = "Whiting",
+             role = "ctb",
+             email = "karissa.whiting@gmail.com"),
+      person(given = "Michael",
+             family = "Kuehn",
+             role = "ctb",
+             email = "mkuehn10@gmail.com"),
+      person(given = "Jorge",
+             family = "Cimentada",
+             role = "ctb",
+             email = "cimentadaj@gmail.com"),
+      person(given = "Erle",
+             family = "Holgersen",
+             role = "ctb",
+             email = "erle.holgersen@gmail.com"),
+      person(given = "Karl",
+             family = "Dunkle Werner",
+             role = "ctb"),
+      person(given = "Ethan",
+             family = "Christensen",
+             role = "ctb",
+             email = "christensen.ej@gmail.com"),
+      person(given = "Steven",
+             family = "Pav",
+             role = "ctb",
+             email = "shabbychef@gmail.com"),
+      person(given = "Paul",
+             family = "PJ",
+             role = "ctb",
+             email = "pjpaul.stephens@gmail.com"),
+      person(given = "Ben",
+             family = "Schneider",
+             role = "ctb",
+             email = "benjamin.julius.schneider@gmail.com"),
+      person(given = "Patrick",
+             family = "Kennedy",
+             role = "ctb",
+             email = "pkqstr@protonmail.com"),
+      person(given = "Brian",
+             family = "Fannin",
+             role = "ctb",
+             email = "captain@pirategrunt.com"),
+      person(given = "Jason",
+             family = "Muhlenkamp",
+             role = "ctb",
+             email = "jason.muhlenkamp@gmail.com"),
+      person(given = "Matt",
+             family = "Lehman",
+             role = "ctb"),
+      person(given = "Bill",
+             family = "Denney",
+             role = "ctb",
+             email = "wdenney@humanpredictions.com",
+             comment = c(ORCID = "0000-0002-5759-428X")),
+      person(given = "Nic",
+             family = "Crane",
+             role = "ctb"),
+      person(given = "Andrew",
+             family = "Bates",
+             role = "ctb"),
+      person(given = "Vincent",
+             family = "Arel-Bundock",
+             role = "ctb",
+             email = "vincent.arel-bundock@umontreal.ca",
+             comment = c(ORCID = "0000-0003-2042-7063")),
+      person(given = "Hideaki",
+             family = "Hayashi",
+             role = "ctb"),
+      person(given = "Luis",
+             family = "Tobalina",
+             role = "ctb"))
+Description: Summarizes key information about statistical
+    objects in tidy tibbles. This makes it easy to report results, create
+    plots and consistently work with large numbers of models at once.
+    Broom provides three verbs that each provide different types of
+    information about a model. tidy() summarizes information about model
+    components such as coefficients of a regression. glance() reports
+    information about an entire model, such as goodness of fit measures
+    like AIC and BIC. augment() adds information about individual
+    observations to a dataset, such as fitted values or influence
+    measures.
 License: MIT + file LICENSE
 URL: http://github.com/tidymodels/broom
 BugReports: http://github.com/tidymodels/broom/issues
@@ -57,15 +191,15 @@ Depends:
 Imports:
     backports,
     dplyr,
+    generics (>= 0.0.2),
+    glue,
     methods,
     purrr,
     reshape2,
+    rlang,
     stringr,
     tibble,
-    tidyr,
-    generics,
-    glue,
-    rlang
+    tidyr
 Suggests:
     AER,
     akima,
@@ -100,7 +234,9 @@ Suggests:
     ks,
     Lahman,
     lavaan,
+    leaps,
     lfe,
+    lm.beta,
     lme4,
     lmodel2,
     lmtest,
@@ -112,6 +248,7 @@ Suggests:
     mclust,
     mediation,
     mgcv,
+    modeltests,
     muhaz,
     multcomp,
     network,
@@ -131,22 +268,23 @@ Suggests:
     rstanarm,
     sp,
     speedglm,
+    spelling,
     statnet.common,
     survey,
     survival,
     testthat,
     tseries,
     xergm,
-    zoo,
-    modeltests,
-    leaps
-VignetteBuilder: knitr
+    zoo
+VignetteBuilder: 
+    knitr
+Remotes: 
+    alexpghayes/modeltests
+Encoding: UTF-8
+Language: en-US
 LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 6.1.1
-Remotes: 
-    r-lib/generics,
-    alexpghayes/modeltests
 Collate: 
     'aaa-documentation-helper.R'
     'aer-tidiers.R'
@@ -158,8 +296,8 @@ Collate:
     'biglm-tidiers.R'
     'bingroup-tidiers.R'
     'boot-tidiers.R'
-    'brms-tidiers.R'
     'broom-package.R'
+    'broom.R'
     'btergm-tidiers.R'
     'car-tidiers.R'
     'caret-tidiers.R'
@@ -184,24 +322,23 @@ Collate:
     'list-svd-tidiers.R'
     'list-tidiers.R'
     'list-xyz-tidiers.R'
-    'lme4-tidiers.R'
+    'lm-beta-tidiers.R'
     'lmodel2-tidiers.R'
     'lmtest-tidiers.R'
     'maps-tidiers.R'
     'mass-fitdistr-tidiers.R'
     'mass-polr-tidiers.R'
     'mass-ridgelm-tidiers.R'
+    'null-and-default-tidiers.R'
     'stats-lm-tidiers.R'
     'mass-rlm-tidiers.R'
     'mclust-tidiers.R'
-    'mcmc-tidiers.R'
     'mediate-tidiers.R'
     'mgcv-tidiers.R'
     'muhaz-tidiers.R'
     'multcomp-tidiers.R'
-    'nlme-tidiers.R'
     'nnet-tidiers.R'
-    'null-and-default-tidiers.R'
+    'nobs.R'
     'orcutt-tidiers.R'
     'ordinal-tidiers.R'
     'plm-tidiers.R'
@@ -213,7 +350,6 @@ Collate:
     'quantreg-rqs-tidiers.R'
     'robust-glmrob-tidiers.R'
     'robust-lmrob-tidiers.R'
-    'rstanarm-tidiers.R'
     'sp-tidiers.R'
     'speedglm-tidiers.R'
     'stats-anova-tidiers.R'

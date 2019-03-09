@@ -92,11 +92,12 @@ sr <- survreg(
   dist = "exponential"
 )
 
-td <- tidy(sr)
+tidy(sr)
 augment(sr, ovarian)
 glance(sr)
 
 # coefficient plot
+td <- tidy(sr, conf.int = TRUE)
 library(ggplot2)
 ggplot(td, aes(estimate, term)) + 
   geom_point() +

@@ -76,13 +76,19 @@ tidy.coxph <- function(x, exponentiate = FALSE, conf.int = FALSE,
   }
   co <- stats::coef(s)
   
-  if (s$used.robust) {
+  if (! is.null(x$frail)){
+    nn <- c("estimate", "std.error", "statistic", "p.value")
+  }else if (s$used.robust) {
     nn <- c("estimate", "std.error", "robust.se", "statistic", "p.value")
   } else {
     nn <- c("estimate", "std.error", "statistic", "p.value")
   }
   
-  ret <- fix_data_frame(co[, -2, drop = FALSE], nn)
+  if (is.null(x$frail)){
+    ret <- fix_data_frame(co[, -2, drop = FALSE], nn)
+  } else{
+    ret <- fix_data_frame(co[, -c(3, 5), drop = FALSE], nn)
+  }
   
   if (exponentiate) {
     ret$estimate <- exp(ret$estimate)
@@ -136,7 +142,25 @@ augment.coxph <- function(x, data = NULL, newdata = NULL,
 #' 
 #' @inherit tidy.coxph params examples
 #' 
-#' @return A one-row [tibble::tibble] with columns: TODO.
+#' @evalRd return_glance(
+#'    "nevent",
+#'    "statistic.log",
+#'    "p.value.log",
+#'    "statistic.sc",
+#'    "p.value.sc",
+#'    "statistic.wald",
+#'    "p.value.wald",
+#'    "statistic.robust",
+#'    "p.value.robust",
+#'    "r.squared",
+#'    "r.squared.max",
+#'    "concordance",
+#'    "std.error.concordance",
+#'    "logLik",
+#'    "AIC",
+#'    "BIC",
+#'    "nobs"
+#'    )
 #'
 #' @export
 #' @seealso [glance()], [survival::coxph()]
@@ -144,11 +168,9 @@ augment.coxph <- function(x, data = NULL, newdata = NULL,
 #' @family survival tidiers
 glance.coxph <- function(x, ...) {
   s <- summary(x)
-  
   # including all the test statistics and p-values as separate
   # columns. Admittedly not perfect but does capture most use cases.
   ret <- list(
-    n = s$n,
     nevent = s$nevent,
     statistic.log = s$logtest[1],
     p.value.log = s$logtest[3],
@@ -161,8 +183,12 @@ glance.coxph <- function(x, ...) {
     r.squared = s$rsq[1],
     r.squared.max = s$rsq[2],
     concordance = s$concordance[1],
-    std.error.concordance = s$concordance[2]
+    std.error.concordance = s$concordance[2],
+    logLik = as.numeric(stats::logLik(x)),
+    AIC = stats::AIC(x),
+    BIC = stats::BIC(x),
+    nobs = stats::nobs(x)
   )
-  ret <- as.data.frame(compact(ret))
-  finish_glance(ret, x)
+  ret <- as_tibble(compact(ret))
+  ret
 }

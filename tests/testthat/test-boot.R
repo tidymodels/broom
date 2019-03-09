@@ -21,7 +21,7 @@ test_that("tidy.boot for glms", {
   g1 <- glm(lot2 ~ log(u), data = clotting, family = Gamma)
 
   boot_fun <- function(d, i) {
-    coef(update(g1, data = d[i, ]))
+      stats::coef(stats::update(g1, data = d[i, ]))
   }
   
   bootres <- boot::boot(clotting, boot_fun, R = 100)

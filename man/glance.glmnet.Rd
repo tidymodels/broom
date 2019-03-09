@@ -72,6 +72,7 @@ Other glmnet tidiers: \code{\link{glance.cv.glmnet}},
 \concept{glmnet tidiers}
 \value{
 A \code{\link[tibble:tibble]{tibble::tibble()}} with exactly one row and columns:
+  \item{nobs}{Number of observations used.}
   \item{npasses}{total passes over the data across all lambda values}
   \item{nulldev}{null deviance}
 

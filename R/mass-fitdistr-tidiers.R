@@ -35,11 +35,16 @@ tidy.fitdistr <- function(x, ...) {
 #' 
 #' @inherit tidy.fitdistr params examples
 #'
-#' @evalRd return_glance("n", "logLik", "AIC", "BIC")
+#' @evalRd return_glance("logLik", "AIC", "BIC", "nobs")
 #'
 #' @export
 #' @family fitdistr tidiers
 #' @seealso [tidy()], [MASS::fitdistr()]
 glance.fitdistr <- function(x, ...) {
-  finish_glance(data.frame(n = x$n), x)
+  ret <- tibble(logLik = stats::logLik(x),
+                AIC = stats::AIC(x),
+                BIC = stats::BIC(x),
+                nobs = stats::nobs(x)
+                )
+  ret
 }

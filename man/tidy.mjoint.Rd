@@ -24,7 +24,7 @@ if \code{conf.int = TRUE}. Must be strictly greater than 0 and less than 1.
 Defaults to 0.95, which corresponds to a 95 percent confidence interval.}
 
 \item{boot_se}{Optionally a \code{bootSE} object from \code{\link[joineRML:bootSE]{joineRML::bootSE()}}. If
-specified, calcalutes confidence intervals via the bootstrap. Defaults to
+specified, calculates confidence intervals via the bootstrap. Defaults to
 \code{NULL}, in which case standard errors are calculated from the
 empirical information matrix.}
 

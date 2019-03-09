@@ -19,8 +19,9 @@
 #'   
 #' @examples
 #'
-#' a <- anova(lm(mpg ~ wt + qsec + disp, mtcars))
-#' tidy(a)
+#' a <- lm(mpg ~ wt + qsec + disp, mtcars)
+#' b <- lm(mpg ~ wt + qsec, mtcars)
+#' tidy(anova(a, b))
 #'
 #' @export
 #' @family anova tidiers
@@ -66,8 +67,10 @@ tidy.anova <- function(x, ...) {
       paste(unknown_cols, collapse = ", ")
     )
   }
-  colnames(ret) <- dplyr::recode(colnames(ret), rlang::UQS(renamers))
-  if (!is.null(ret$term)) {
+  
+  colnames(ret) <- dplyr::recode(colnames(ret), !!!renamers)
+
+  if("term" %in% names(ret)){
     # if rows had names, strip whitespace in them
     ret <- mutate(ret, term = stringr::str_trim(term))
   }
@@ -78,7 +81,7 @@ tidy.anova <- function(x, ...) {
 #' @templateVar class aov
 #' @template title_desc_tidy
 #' 
-#' @param x An `aov` objects, such as those created by [stats::aov()].
+#' @param x An `aov` object, such as those created by [stats::aov()].
 #' @template param_unused_dots
 #' 
 #' @inherit tidy.anova return details
@@ -96,6 +99,42 @@ tidy.aov <- function(x, ...) {
   tidy.anova(s[[1]])
 }
 
+#' @templateVar class lm
+#' @template title_desc_glance
+#'
+#' @inherit tidy.aov params examples
+#' 
+#' @note 
+#' From `0.7.0`, `broom` has changed the return summary and the new model
+#' summary dataframe contains only the following information- `logLik`, `IC`,
+#' `BIC`, `deviance`, `nobs`. Note that `tidy.aov` contains the numerator and
+#' denominator degrees of freedom, which were previously included in the glance
+#' summary.
+#' 
+#' @evalRd return_glance(
+#'   "logLik",
+#'   "AIC",
+#'   "BIC",
+#'   "deviance",
+#'   "nobs"
+#' )
+#' 
+#' @export
+#' @seealso [glance()]
+#' @family anova tidiers
+
+glance.aov <- function(x, ...) {
+  with(
+    summary(x),
+    tibble(
+      logLik = as.numeric(stats::logLik(x)),
+      AIC = stats::AIC(x),
+      BIC = stats::BIC(x),
+      deviance = stats::deviance(x),
+      nobs = stats::nobs(x)
+    )
+  )
+}
 
 #' @templateVar class aovlist
 #' @template title_desc_tidy

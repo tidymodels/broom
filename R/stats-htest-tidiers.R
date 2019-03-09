@@ -52,7 +52,7 @@ tidy.htest <- function(x, ...) {
     ret$estimate <- NULL
 
     # special case: in a t-test, estimate = estimate1 - estimate2
-    if (x$method == "Welch Two Sample t-test") {
+    if (x$method %in% c("Welch Two Sample t-test", " Two Sample t-test")) {
       ret <- c(estimate = ret$estimate1 - ret$estimate2, ret)
     }
   }
@@ -67,6 +67,8 @@ tidy.htest <- function(x, ...) {
         "Multiple parameters; naming those columns ",
         paste(make.names(names(x$parameter)), collapse = ", ")
       )
+      # rename num df to num.df and denom df to denom.df
+      names(x$parameter) <- make.names(names(x$parameter))
       ret <- append(ret, x$parameter, after = 1)
     }
   }
