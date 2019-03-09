@@ -39,17 +39,34 @@ library(dplyr)
 library(ggplot2)
 library(cluster)
 
-x<- iris \%>\%select(-Species)
-p<-pam(x, k = 3)
+x <- iris \%>\%
+  select(-Species)
+p <- pam(x, k = 3)
 
 tidy(p)
 glance(p)
 augment(p,x)
-ggplot(augment(p,x), aes(Sepal.Length, Sepal.Width)) + geom_point(aes(color = .cluster)) +geom_text(aes(label = cluster), data = tidy(p), size = 10)
+
+augment(p, x) \%>\% 
+  ggplot(aes(Sepal.Length, Sepal.Width)) +
+    geom_point(aes(color = .cluster)) +
+    geom_text(aes(label = cluster), data = tidy(p), size = 10)
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[cluster:pam]{cluster::pam()}}
 
 Other pam tidiers: \code{\link{augment.pam}},
   \code{\link{glance.pam}}
+}
+\concept{pam tidiers}
+\value{
+A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
+  \item{size}{Size of each cluster.}
+  \item{max_diss}{Maximal dissimilarity between the observations in the cluster and that cluster's medoid.}
+  \item{av_diss}{Average dissimilarity between the observations in the cluster and that cluster's medoid.}
+  \item{diameter}{Diameter of the cluster.}
+  \item{separation}{Separation of the cluster.}
+  \item{avg.width}{Average silhouette width of the cluster.}
+  \item{cluster}{A factor describing the cluster from 1:k.}
+
 }

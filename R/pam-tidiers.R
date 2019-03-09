@@ -28,13 +28,18 @@
 #' library(ggplot2)
 #' library(cluster)
 #' 
-#' x<- iris %>%select(-Species)
-#' p<-pam(x, k = 3)
+#' x <- iris %>%
+#'   select(-Species)
+#' p <- pam(x, k = 3)
 #' 
 #' tidy(p)
 #' glance(p)
-#'augment(p,x)
-#'ggplot(augment(p,x), aes(Sepal.Length, Sepal.Width)) + geom_point(aes(color = .cluster)) +geom_text(aes(label = cluster), data = tidy(p), size = 10)
+#' augment(p,x)
+#' 
+#' augment(p, x) %>% 
+#'   ggplot(aes(Sepal.Length, Sepal.Width)) +
+#'     geom_point(aes(color = .cluster)) +
+#'     geom_text(aes(label = cluster), data = tidy(p), size = 10)
 
 tidy.pam <- function(x, col.names=paste0("x", 1:ncol(x$medoids)), ...) {
   ret <- bind_cols(as_broom_tibble(p$medoids), as_broom_tibble(p$clusinfo))
@@ -50,20 +55,15 @@ tidy.pam <- function(x, col.names=paste0("x", 1:ncol(x$medoids)), ...) {
 #' @inherit tidy.pam params examples
 #' @template param_data
 #'
-#' @evalRd return_augment(
-#'   .cluster= "Cluster assignment."
-#' )
+#' @evalRd return_augment(".cluster")
 #'
 #' @export
 #' @seealso [augment()], [cluster::pam()]
 #' @family pam tidiers
 #' 
 augment.pam <- function(x, data, ...) {
-  # move rownames if necessary
-  data <- as_broom_tibble(data)
-  
-  # show cluster assignment as a factor (it's not numeric)
-  add_column(data, .cluster = as.factor(!!x$clustering))
+  as_broom_tibble(data) %>% 
+    mutate(.cluster = as.factor(!!x$clustering))
 }
 
 
@@ -79,6 +79,8 @@ augment.pam <- function(x, data, ...) {
 #' @seealso [glance()], [cluster::pam()]
 #' @family pam tidiers
 glance.pam <- function(x, ...) {
-    tibble(clus.avg.width = x$silinfo$clus.avg.widths,
-    avg.width = x$silinfo$avg.width)
+    tibble(
+      clus.avg.width = x$silinfo$clus.avg.widths,
+      avg.width = x$silinfo$avg.width
+    )
 }

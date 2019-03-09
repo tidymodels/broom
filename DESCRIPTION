@@ -292,7 +292,8 @@ Suggests:
     testthat,
     tseries,
     xergm,
-    zoo
+    zoo,
+    cluster
 VignetteBuilder: 
     knitr
 Remotes: 

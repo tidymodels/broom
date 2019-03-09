@@ -146,14 +146,6 @@ glance.clm <- function(x, ...) {
 }
 
 #' @rdname ordinal_tidiers
-#' @evalRd return_glance(
-#'   'edf',
-#'   'logLik',
-#'   'AIC',
-#'   'BIC',
-#'   'df.residual',
-#'   'nobs'
-#'   )
 #' @export
 glance.clmm <- glance.clm
 

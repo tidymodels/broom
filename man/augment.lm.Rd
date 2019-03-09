@@ -150,7 +150,7 @@ tidy(result)
 Other lm tidiers: \code{\link{augment.glm}},
   \code{\link{glance.glm}}, \code{\link{glance.lm}},
   \code{\link{tidy.glm}}, \code{\link{tidy.lm.beta}},
-  \code{\link{tidy.lm}}, \code{\link{tidy.svyglm}}
+  \code{\link{tidy.lm}}
 }
 \concept{lm tidiers}
 \value{

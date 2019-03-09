@@ -27,7 +27,7 @@ to \code{FALSE}.}
 columns should be returned. Often useful to avoid time consuming
 covariance and standard error calculations. Defaults to \code{FALSE}.}
 
-\item{...}{Additional arguments to pass to \code{\link[ergm:summary]{ergm::summary()}}.
+\item{...}{Additional arguments to pass to \code{\link[ergm:summary.ergm]{ergm::summary.ergm()}}.
 \strong{Cautionary note}: Mispecified arguments may be silently ignored.}
 }
 \description{
@@ -74,7 +74,7 @@ Models for Networks. \emph{Journal of Statistical Software}, 24(3).
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[ergm:ergm]{ergm::ergm()}}, \code{\link[ergm:control.ergm]{ergm::control.ergm()}},
-\code{\link[ergm:summary]{ergm::summary()}}
+\code{\link[ergm:summary.ergm]{ergm::summary.ergm()}}
 
 Other ergm tidiers: \code{\link{glance.ergm}}
 }

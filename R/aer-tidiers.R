@@ -114,6 +114,8 @@ augment.ivreg <- function(x, data = model.frame(x), newdata = NULL, ...) {
 #' @template title_desc_glance
 #' 
 #' @inherit tidy.ivreg params examples
+#' @param diagnostics Logical indicating whether or not to return the
+#'   Wu-Hausman and Sargan diagnostic information.
 #' 
 #' @note Beginning 0.7.0, `glance.ivreg` returns statistics for the 
 #' Wu-Hausman test for endogeneity and the Sargan test of 

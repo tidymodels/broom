@@ -66,9 +66,36 @@ We are in the process of defining behaviors for models fit with various
 \link{na.action} arguments, but make no guarantees about behavior when data is
 missing at this time.
 }
+\examples{
+
+library(dplyr)
+library(ggplot2)
+library(cluster)
+
+x <- iris \%>\%
+  select(-Species)
+p <- pam(x, k = 3)
+
+tidy(p)
+glance(p)
+augment(p,x)
+
+augment(p, x) \%>\% 
+  ggplot(aes(Sepal.Length, Sepal.Width)) +
+    geom_point(aes(color = .cluster)) +
+    geom_text(aes(label = cluster), data = tidy(p), size = 10)
+}
 \seealso{
 \code{\link[=augment]{augment()}}, \code{\link[cluster:pam]{cluster::pam()}}
 
 Other pam tidiers: \code{\link{glance.pam}},
   \code{\link{tidy.pam}}
+}
+\concept{pam tidiers}
+\value{
+A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
+  \item{.fitted}{Fitted or predicted value.}
+  \item{.resid}{The difference between fitted and observed values.}
+  \item{.cluster}{Cluster assignment.}
+
 }

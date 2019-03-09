@@ -83,7 +83,10 @@ Other contributors:
   \item Vincent Arel-Bundock \email{vincent.arel-bundock@umontreal.ca} (0000-0003-2042-7063) [contributor]
   \item Hideaki Hayashi [contributor]
   \item Luis Tobalina [contributor]
+  \item Annie Wang \email{anniewang.uc@gmail.com} [contributor]
   \item Wei Yang Tham \email{weiyang.tham@gmail.com} [contributor]
+  \item Clara Wang \email{clara.wang.94@gmail.com} [contributor]
+  \item Abby Smith \email{als1@u.northwestern.edu} (0000-0002-3207-0375) [contributor]
 }
 
 }

@@ -2,12 +2,12 @@
 % Please edit documentation in R/pam-tidiers.R
 \name{glance.pam}
 \alias{glance.pam}
-\title{Glance at a(n) kmeans object}
+\title{Glance at a(n) pam object}
 \usage{
 \method{glance}{pam}(x, ...)
 }
 \arguments{
-\item{x}{A \code{kmeans} object created by \code{\link[stats:kmeans]{stats::kmeans()}}.}
+\item{x}{An \code{pam} object returned from \code{\link[cluster:pam]{cluster::pam()}}}
 
 \item{...}{Additional arguments. Not used. Needed to match generic
 signature only. \strong{Cautionary note:} Misspelled arguments will be
@@ -34,9 +34,35 @@ computations to appropriate methods and gathers the results together.
 Sometimes a goodness of fit measure will be undefined. In these cases
 the measure will be reported as \code{NA}.
 }
+\examples{
+
+library(dplyr)
+library(ggplot2)
+library(cluster)
+
+x <- iris \%>\%
+  select(-Species)
+p <- pam(x, k = 3)
+
+tidy(p)
+glance(p)
+augment(p,x)
+
+augment(p, x) \%>\% 
+  ggplot(aes(Sepal.Length, Sepal.Width)) +
+    geom_point(aes(color = .cluster)) +
+    geom_text(aes(label = cluster), data = tidy(p), size = 10)
+}
 \seealso{
 \code{\link[=glance]{glance()}}, \code{\link[cluster:pam]{cluster::pam()}}
 
 Other pam tidiers: \code{\link{augment.pam}},
   \code{\link{tidy.pam}}
+}
+\concept{pam tidiers}
+\value{
+A \code{\link[tibble:tibble]{tibble::tibble()}} with exactly one row and columns:
+  \item{clus.avg.width}{The average silhouette width per cluster.}
+  \item{avg.width}{The average silhouette width for the dataset, i.e., simply the average of s(i) over all observations i.}
+
 }
