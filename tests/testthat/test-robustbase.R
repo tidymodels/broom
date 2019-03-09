@@ -15,7 +15,8 @@ test_that("robustbase tidier arguments", {
   check_arguments(augment.lmrob)
   
   check_arguments(tidy.glmrob)
-  check_arguments(glance.glmrob)
+  # check_arguments(glance.glmrob)
+  check_arguments(augment.glmrob)
 })
 
 test_that("tidy.lmrob", {
@@ -50,12 +51,8 @@ test_that("tidy.glmrob", {
   check_dims(td_ci, 2, 7)
 })
 
-test_that("glance.glmrob", {
-  expect_error(
-    glance.glmrob(),
-    "`glance.glmrob` has not yet been implemented. See the documentation."
-  )
-})
+# test_that("glance.glmrob", {
+# })
 
 test_that("augment.glmrob", {
   check_augment_function(
