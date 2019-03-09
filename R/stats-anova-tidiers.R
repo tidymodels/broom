@@ -103,7 +103,36 @@ tidy.aov <- function(x, ...) {
 # it's not clear to me if glancing at an aov object should
 # return the same glance info as glance at the corresponding
 # regression. tentatively i'm calling this an error.
-glance.aov <- glance.default
+# 
+#' @templateVar class lm
+#' @template title_desc_glance
+#'
+#' @inherit tidy.aov params examples
+#'
+#' @evalRd return_glance(
+#'   "logLik",
+#'   "AIC",
+#'   "BIC",
+#'   "deviance",
+#'   "nobs"
+#' )
+#' 
+#' @export
+#' @seealso [glance()]
+#' @family anova tidiers
+
+glance.aov <- function(x, ...) {
+  with(
+    summary(x),
+    tibble(
+      logLik = as.numeric(stats::logLik(x)),
+      AIC = stats::AIC(x),
+      BIC = stats::BIC(x),
+      deviance = stats::deviance(x),
+      nobs = stats::nobs(x)
+    )
+  )
+}
 
 #' @templateVar class aovlist
 #' @template title_desc_tidy
