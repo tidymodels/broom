@@ -63,6 +63,7 @@ TODO: sort out what happens to `glance.aov()`
 
 ## New tidiers, features and bugfixes
 
+- Added tidiers for `pam` objects from the `cluster` package. (#637)
 - Previously, F-statistics for weak instruments were returned through `glance.ivreg()`. F-statistics are now returned through `tidy.ivreg(instruments = TRUE)`. Default is `tidy.ivreg(instruments = FALSE)`. `glance.ivreg()` still returns Wu-Hausman and Sargan test statistics.
 - Added `tidy.regsubsets()` for best subsets linear regression from the `leaps` package
 - Added method `tidy.lm.beta()` to tidy `lm.beta` class models (#545 by @mattle24)

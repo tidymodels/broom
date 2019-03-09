@@ -15,16 +15,15 @@ test_that("pam tidier arguments", {
 })
 
 test_that("tidy.pam", {
-  
   td <- tidy(fit)
   check_tidy_output(td)
-  check_dims(td, 3, 7)
+  check_dims(td, 3, 11)
 })
 
 test_that("glance.pam", {
   gl <- glance(fit)
   check_glance_outputs(gl)
-  check_dims(gl, expected_cols = 9)
+  check_dims(gl, expected_cols = 1)
 })
 
 test_that("augment.pam", {
