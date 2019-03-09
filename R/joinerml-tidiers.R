@@ -7,7 +7,7 @@
 #'   the longitudinal component of the model. Must be either `"survival"` or
 #'   `"longitudinal"`. Defaults to `"survival"`.
 #' @param boot_se Optionally a `bootSE` object from [joineRML::bootSE()]. If
-#'   specified, calcalutes confidence intervals via the bootstrap. Defaults to
+#'   specified, calculates confidence intervals via the bootstrap. Defaults to
 #'   `NULL`, in which case standard errors are calculated from the 
 #'   empirical information matrix.
 #' @template param_unused_dots
