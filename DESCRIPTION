@@ -176,7 +176,11 @@ Authors@R:
       person(given = "Annie",
              family = "Wang",
              email = "anniewang.uc@gmail.com",
-             role = "ctb"))
+             role = "ctb"),
+      person(given = "Wei Yang", 
+             family = "Tham", 
+             role = "ctb", 
+             email = "weiyang.tham@gmail.com"))
 Description: Summarizes key information about statistical
     objects in tidy tibbles. This makes it easy to report results, create
     plots and consistently work with large numbers of models at once.

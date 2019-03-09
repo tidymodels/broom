@@ -34,6 +34,23 @@ computations to appropriate methods and gathers the results together.
 Sometimes a goodness of fit measure will be undefined. In these cases
 the measure will be reported as \code{NA}.
 }
+\examples{
+
+library(cluster)
+library(dplyr)
+
+x <- iris \%>\% 
+  select(-Species)
+  
+fit <- pam(x, k = 3)
+
+tidy(fit)
+glance(fit)
+augment(fit, x)
+
+
+
+}
 \seealso{
 \code{\link[=glance]{glance()}}, \code{\link[stats:kmeans]{stats::kmeans()}}
 
