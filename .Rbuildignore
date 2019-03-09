@@ -14,3 +14,4 @@
 ^docs$
 ^data-raw$
 ^\.httr-oauth$
+^\.lintr$
