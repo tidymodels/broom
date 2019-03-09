@@ -1,8 +1,10 @@
 #' @templateVar class glmrob
-#' @template title_desc_tidy_lm_wrapper
-#'
+#' @template title_desc_tidy
+
 #' @param x A `glmrob` object returned from [robustbase::glmrob()].
-#' 
+#' @template param_confint
+#' @template param_unused_dots
+
 #' @details For tidiers for robust models from the \pkg{MASS} package see
 #'   [tidy.rlm()]. For tidiers for robust models from the \pkg{robust} package
 #'   see [tidy.lmRob()].
@@ -14,25 +16,26 @@
 #' @rdname tidy.robustbase.glmrob
 #' @seealso [robustbase::glmrob()]
 #' @include stats-lm-tidiers.R
-tidy.glmrob <- function (x, ...) {
-  dots <- rlang::enquos(...)
-  dots$conf.int <- FALSE
-  
-  ret <- rlang::exec(tidy.lm, x, !!!dots)
-  
-  # tidy.glmrob(..., conf.int = TRUE) throws an error, 
-  # so calc conf.int separately if requested
-  conf.int <- rlang::`%||%`(rlang::dots_list(...)$conf.int, FALSE)
-  
-  if (conf.int) {
-    level <- rlang::`%||%`(rlang::dots_list(...)$level, 0.95)
-    ci <- stats::confint.default(x, level = level) %>% 
-      as_tibble(rownames = NA)  %>% 
-      tibble::rownames_to_column(var = 'term')
-    names(ci)[2:3] <- c("conf.low", "conf.high")
+tidy.glmrob <- function (x, conf.int = FALSE, conf.level = 0.95, ...) {
 
+  ret <- coef(summary(x)) %>% 
+    tibble::as_tibble(rownames = "term") %>% 
+    dplyr::rename(
+      estimate = Estimate
+      ,std.error = `Std. Error`
+      ,statistic = `t value`
+      ,p.value = `Pr(>|t|)`
+    )
+
+  if (conf.int) {
+    ci <- stats::confint.default(x, level = conf.level) %>% 
+      tibble::as_tibble(rownames = NULL) %>% 
+      dplyr::rename(
+        conf.low = `2.5 %`
+        ,conf.high = `97.5 %`
+      )
     ret <- ret %>% 
-      left_join(ci, by = 'term')
+      cbind(ci)
   }
   
   ret
