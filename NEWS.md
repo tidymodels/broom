@@ -32,7 +32,7 @@ TODO: sort out what happens to `glance.aov()`
 
 ## New tidiers, features and bugfixes
 
-- `tidy.ivreg(instruments = TRUE)` now returns F-statistics for endogenous regressors. Default is `tidy.ivreg(instruments = FALSE)`.
+- Previously, F-statistics for weak instruments were returned through `glance.ivreg()`. F-statistics are now returned through `tidy.ivreg(instruments = TRUE)`. Default is `tidy.ivreg(instruments = FALSE)`. `glance.ivreg()` still returns Wu-Hausman and Sargan test statistics.
 - Added `tidy.regsubsets()` for best subsets linear regression from the `leaps` package
 - Added method `tidy.lm.beta()` to tidy `lm.beta` class models (#545 by @mattle24)
 - `tidy.kmeans()` now uses the names of the input variables in the output by default. Set `col.names = NULL` to recover the old behavior.
