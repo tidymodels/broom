@@ -95,15 +95,14 @@ tidy.anova <- function(x, ...) {
 #' @family anova tidiers
 #' @seealso [tidy()], [stats::aov()]
 tidy.aov <- function(x, ...) {
-  # grab the desired information from the AOV object and convert into a tibble
   summary(x)[[1]] %>% 
     tibble::as_tibble(rownames = "term") %>% 
     dplyr::mutate("term" = stringr::str_trim(term)) %>%
-    dplyr::rename("df" = "Df",
-                  "sumsq" = "Sum Sq",
-                  "meansq" = "Mean Sq",
-                  "statistic" = "F value",
-                  "p.value" = "Pr(>F)")
+    dplyr::rename("df" = Df,
+                  "sumsq" = `Sum Sq`,
+                  "meansq" = `Mean Sq`,
+                  "statistic" = `F value`,
+                  "p.value" = `Pr(>F)`)
 }
 
 # this is a placeholder while we decide what to do
