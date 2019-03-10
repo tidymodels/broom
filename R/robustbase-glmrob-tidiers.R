@@ -61,12 +61,11 @@ augment.glmrob <- function(x, data = model.frame(x), newdata = NULL,
   # TODO: add "terms" back into the possibilities for `type.predict`. Currently,
   # predict.glmrob(x, type = "terms") throws an error and specifying `type.predict`
   # = "terms" returns the same tibble as when `type.predict` = "response"
-
-  augment_columns(
+  augment_newdata(
     x, data, newdata,
     type.predict = type.predict,
     type.residuals = type.residuals,
-    se.fit = se_fit
+    .se_fit = se_fit
   )
 }
 
