@@ -22,19 +22,35 @@
 #' @export
 #' @family robust tidiers
 #' @seealso [robust::lmRob()]
-#' @include stats-lm-tidiers.R
-tidy.lmRob <- function (x, ...) {
-  dots <- enquos(...)
-  m <- as.list(match.call())[-1]
-  unwanted <- names(m)[-which(names(m) %in% c("x", "conf.level"))]
-  
-  if(length(unwanted) > 0){
-    dots[unwanted] <- unwanted %>% purrr::map( ~{
-      purrr::pluck(m, .x) <- FALSE
-    })
+tidy.lmRob <- function (x, quick = FALSE,...){
+  if (quick) {
+    co <- stats::coef(x)
+    ret <- data.frame(term = names(co), estimate = unname(co), 
+                      stringsAsFactors = FALSE)
+    
+    return(as_tibble(ret))
   }
-  
-  rlang::exec(broom:::tidy.lm, x, !!!dots)
+  s <- robust::summary.lmRob(x)
+  ret <- tidy.summary.lmRob(s)
+  ret
+}
+
+#' @rdname tidy.lmRob
+#' @export
+
+tidy.summary.lmRob <- function(x,...) {
+  co <- stats::coef(x)
+  nn <- c("estimate", "std.error", "statistic", "p.value")
+  if (inherits(co, "listof")) {
+    ret <- map_df(co, fix_data_frame, nn[1:ncol(co[[1]])], 
+                  .id = "response")
+    ret$response <- stringr::str_replace(ret$response, "Response ", 
+                                         "")
+  }
+  else {
+    ret <- fix_data_frame(co, nn[1:ncol(co)])
+  }
+  as_tibble(ret)
 }
 
 #' @templateVar class lmRob

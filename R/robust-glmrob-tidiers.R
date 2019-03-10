@@ -21,12 +21,8 @@
 #' @export
 #' @family robust tidiers
 #' @seealso [robust::glmRob()]
-#' @include stats-lm-tidiers.R
-tidy.glmRob <- function (x, ...) {
-  dots <- enquos(...)
-  dots$conf.int <- FALSE
-
-  rlang::exec(tidy.lm, x, !!!dots)
+tidy.glmRob <- function (x,...) {
+  tidy.lmRob(x)
 }
 
 #' @templateVar class glmRob
