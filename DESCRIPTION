@@ -152,9 +152,9 @@ VignetteBuilder: knitr
 LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 6.1.1
-Remotes:
+Remotes: 
     alexpghayes/modeltests
-Collate:
+Collate: 
     'aaa-documentation-helper.R'
     'aer-tidiers.R'
     'auc-tidiers.R'
