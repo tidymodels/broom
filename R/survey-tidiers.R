@@ -74,34 +74,42 @@ tidy.svyglm <- function(x, conf.int = FALSE, conf.level = .95,
 #' 
 #' @export
 #' @family lm tidiers
-#' @seealso [survey::svyglm()], [stats::glm()]
+#' @seealso [survey::svyglm()], [stats::glm()], [survey::anova.svyglm]
 glance.svyglm <- function(x, maximal = x, ...) {
   
-  s <- survey:::summary.svyglm(x)
-  ret <- unrowname(as.data.frame(s[c("null.deviance", "df.null")]))
+  ret <- with(x, tibble::tibble(null.deviance, df.null))
   
-  # log-likelihood does not apply
+  # log-likelihood does not apply (returns deviance instead)
   #
   # > ret$logLik <- tryCatch(as.numeric(stats::logLik(x)), error = function(e) NULL)
   # Warning in logLik.svyglm(x) : svyglm not fitted by maximum likelihood.
   
   # AIC
   #
-  ret$AIC <- tryCatch(survey:::AIC.svyglm(mod)["AIC"], error = function(e) NULL)
+  #   equivalent to stats::AIC(x)
+  #   not always directly computed by svyglm, e.g. if family = quasibinomial()
+  #
+  ret$AIC <- tryCatch(survey:::AIC.svyglm(x)["AIC"], error = function(e) NULL)
   
   # BIC
   #
-  ret$BIC <- tryCatch(stats::BIC(x, maximal = maximal)[2], error = function(e) NULL)
+  #   equivalent to stats::(x, maximal)
+  #
+  ret$BIC <- tryCatch(survey:::dBIC(x, maximal)["BIC"], error = function(e) NULL)
   
   # deviance
   #
-  ret$deviance <- tryCatch(stats::deviance(x), error = function(e) NULL)
+  #   equivalent to stats::deviance(x)
+  #
+  ret$deviance <- tryCatch(x$deviance, error = function(e) NULL)
   
   # df.residual
   #
-  ret$df.residual <- tryCatch(df.residual(x), error = function(e) NULL)
+  #   equivalent to stats::df.residual(x)
+  #
+  ret$df.residual <- tryCatch(x$df.residual, error = function(e) NULL)
   
-  as_tibble(ret, rownames = NULL)
+  ret
   
 }
 
