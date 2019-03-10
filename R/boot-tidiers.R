@@ -4,7 +4,8 @@
 #' @param x A [boot::boot()] object.
 #' @template param_confint
 #' @param conf.method Passed to the `type` argument of [boot::boot.ci()]. 
-#'   Defaults to `"perc"`.
+#'   Defaults to `"perc"`. The allowed types are `"perc"`, `"basic"`, 
+#'   `"bca"`, and `"norm"`. Does not support `"stud"` or `"all"`.
 #' @template param_unused_dots
 #' 
 #' @evalRd return_tidy("bias", "std.error", "term",
@@ -49,9 +50,10 @@ tidy.boot <- function(x,
                       ## conf.int?
                       conf.int = FALSE,
                       conf.level = 0.95,
-                      conf.method = "perc", ...) {
+                      conf.method = c("perc", "bca", "basic", "norm"),
+                      ...) {
   
-  # TODO: arg.match on conf.method
+  conf.method <- rlang::arg_match(conf.method)
   
   # calculate the bias and standard error
   # this is an adapted version of the code in print.boot, where the bias
@@ -102,16 +104,11 @@ tidy.boot <- function(x,
   ret <- fix_data_frame(op)
 
   if (conf.int) {
-    if(conf.method == "stud" | conf.method == "all"){
-      #TODO: This breaks for conf.method = "stud"
-      stop("Error: Studentized bootstrap confidence intervals are not supported by broom.")
-    } else {
       ci.list <- lapply(seq_along(x$t0),
         boot::boot.ci,
         boot.out = x,
         conf = conf.level, type = conf.method
         )
-    }
     
     ## boot.ci uses c("norm", "basic", "perc", "stud") for types
     ## stores them with longer names
