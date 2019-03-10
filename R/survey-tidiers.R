@@ -87,25 +87,25 @@ glance.svyglm <- function(x, maximal = x, ...) {
   #   equivalent to stats::AIC(x)
   #   not always directly computed by svyglm, e.g. if family = quasibinomial()
   #
-  ret$AIC <- tryCatch(survey:::AIC.svyglm(x)["AIC"], error = function(e) NULL)
+  ret$AIC <- survey:::AIC.svyglm(x)["AIC"]
   
   # BIC
   #
   #   equivalent to stats::(x, maximal)
   #
-  ret$BIC <- tryCatch(survey:::dBIC(x, maximal)["BIC"], error = function(e) NULL)
+  ret$BIC <- survey:::dBIC(x, maximal)["BIC"]
   
   # deviance
   #
   #   equivalent to stats::deviance(x)
   #
-  ret$deviance <- tryCatch(x$deviance, error = function(e) NULL)
+  ret$deviance <- x$deviance
   
   # df.residual
   #
   #   equivalent to stats::df.residual(x)
   #
-  ret$df.residual <- tryCatch(x$df.residual, error = function(e) NULL)
+  ret$df.residual <- x$df.residual
   
   ret
   
