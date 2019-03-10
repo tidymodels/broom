@@ -99,7 +99,7 @@ augment.betareg <- function(x, data = model.frame(x), newdata = NULL,
 #' @export
 glance.betareg <- function(x, ...) {
   s <- summary(x)
-  ret <- tibble(
+  tibble(
     pseudo.r.squared = s$pseudo.r.squared,
     df.null = s$df.null,
     logLik = as.numeric(stats::logLik(x)),
@@ -108,5 +108,4 @@ glance.betareg <- function(x, ...) {
     df.residual = stats::df.residual(x),
     nobs = stats::nobs(x)
   )
-  as_tibble(ret)
 }

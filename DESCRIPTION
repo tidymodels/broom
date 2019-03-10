@@ -12,6 +12,11 @@ Authors@R:
              role = c("aut", "cre"),
              email = "alexpghayes@gmail.com",
              comment = c(ORCID = "0000-0002-4985-5160")),
+      person(given = "Indrajeet",
+             family = "Patil",
+             role = "ctb",
+             email = "patilindrajeet.science@gmail.com",
+             comment = c(ORCID = "0000-0003-1995-6531")),
       person(given = "Matthieu",
              family = "Gomez",
              role = "ctb",
@@ -175,11 +180,11 @@ Authors@R:
              role = "ctb"),
       person(given = "Annie",
              family = "Wang",
-             email = "anniewang.uc@gmail.com",
-             role = "ctb"),
-      person(given = "Wei Yang", 
-             family = "Tham", 
-             role = "ctb", 
+             role = "ctb",
+             email = "anniewang.uc@gmail.com"),
+      person(given = "Wei Yang",
+             family = "Tham",
+             role = "ctb",
              email = "weiyang.tham@gmail.com"),
       person(given = "Clara",
              family = "Wang",
@@ -213,6 +218,7 @@ Depends:
 Imports:
     backports,
     dplyr,
+    ellipsis,
     generics (>= 0.0.2),
     glue,
     methods,
@@ -235,6 +241,7 @@ Suggests:
     btergm,
     car,
     caret,
+    cluster,
     coda,
     covr,
     e1071,
@@ -297,8 +304,7 @@ Suggests:
     testthat,
     tseries,
     xergm,
-    zoo,
-    cluster
+    zoo
 VignetteBuilder: 
     knitr
 Remotes: 
@@ -312,7 +318,6 @@ Collate:
     'aaa-documentation-helper.R'
     'aer-tidiers.R'
     'auc-tidiers.R'
-    'base-summary-tidiers.R'
     'base-tidiers.R'
     'bbmle-tidiers.R'
     'betareg-tidiers.R'
@@ -363,7 +368,8 @@ Collate:
     'nnet-tidiers.R'
     'nobs.R'
     'orcutt-tidiers.R'
-    'ordinal-tidiers.R'
+    'ordinal-clm-tidiers.R'
+    'ordinal-clmm-tidiers.R'
     'pam-tidiers.R'
     'plm-tidiers.R'
     'polca-tidiers.R'

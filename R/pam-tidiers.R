@@ -49,8 +49,8 @@ tidy.pam <- function(x, col.names = paste0("x", 1:ncol(x$medoids)), ...) {
     ) %>% 
     bind_cols(as_tibble(x$medoids)) %>% 
     rename(
-      max.diss = max_diss,
-      avg.diss = av_diss
+      "max.diss" = "max_diss",
+      "avg.diss" = "av_diss"
     )
 }
 
