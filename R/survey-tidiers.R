@@ -91,7 +91,7 @@ glance.svyglm <- function(x, maximal = x, ...) {
   
   # BIC
   #
-  #   equivalent to stats::(x, maximal)
+  #   equivalent to stats::BIC(x, maximal)
   #
   ret$BIC <- survey:::dBIC(x, maximal)["BIC"]
   
