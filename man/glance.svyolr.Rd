@@ -56,8 +56,6 @@ Other ordinal tidiers: \code{\link{augment.clm}},
 \concept{ordinal tidiers}
 \value{
 A \code{\link[tibble:tibble]{tibble::tibble()}} with exactly one row and columns:
-  \item{AIC}{Akaike's Information Criterion for the model.}
-  \item{BIC}{Bayesian Information Criterion for the model.}
   \item{df.residual}{Residual degrees of freedom.}
   \item{edf}{The effective degrees of freedom}
   \item{nobs}{Number of observations used.}
