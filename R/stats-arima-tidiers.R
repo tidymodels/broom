@@ -47,7 +47,7 @@ tidy.Arima <- function(x, conf.int = FALSE, conf.level = 0.95, ...) {
 #' 
 #' @inherit tidy.Arima params examples
 #'
-#' @evalRd return_glance("sigma", "logLik", "AIC", "BIC")
+#' @evalRd return_glance("sigma", "logLik", "AIC", "BIC", "nobs")
 #'
 #' @seealso [stats::arima()]
 #' @export
@@ -60,5 +60,6 @@ glance.Arima <- function(x, ...) {
     ret$AIC <- tryCatch(stats::AIC(x), error = function(e) NULL)
     ret$BIC <- tryCatch(stats::BIC(x), error = function(e) NULL)
   }
+  ret$nobs <- stats::nobs(x)
   as_tibble(ret)
 }

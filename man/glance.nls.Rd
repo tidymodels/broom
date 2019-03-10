@@ -68,6 +68,7 @@ A \code{\link[tibble:tibble]{tibble::tibble()}} with exactly one row and columns
   \item{finTol}{the achieved convergence tolerance}
   \item{isConv}{whether the fit successfully converged}
   \item{logLik}{The log-likelihood of the model. [stats::logLik()] may be a useful reference.}
+  \item{nobs}{Number of observations used.}
   \item{sigma}{Estimated standard error of the residuals.}
 
 }

@@ -91,7 +91,7 @@ Other glmnet tidiers: \code{\link{glance.cv.glmnet}},
 \value{
 A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
   \item{lambda}{Value of penalty parameter lambda.}
-  \item{nzero}{Number of coefficients that are exactly zero for given lambda.}
+  \item{nzero}{Number of non-zero coefficients for the given lambda.}
   \item{std.error}{The standard error of the regression term.}
   \item{conf.low}{lower bound on confidence interval for cross-validation
     estimated loss.}

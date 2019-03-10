@@ -52,7 +52,7 @@ tidy.aareg <- function(x, ...) {
 #' 
 #' @inherit tidy.aareg params examples
 #' 
-#' @evalRd return_glance("statistic", "p.value", "df")
+#' @evalRd return_glance("statistic", "p.value", "df", "nobs")
 #'
 #' @export
 #' @seealso [glance()], [survival::aareg()]
@@ -66,6 +66,7 @@ glance.aareg <- function(x, ...) {
   tibble(
     statistic = chi,
     p.value = as.numeric(1 - stats::pchisq(chi, df)),
-    df = df
+    df = df,
+    nobs = stats::nobs(x)
   )
 }

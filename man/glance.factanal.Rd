@@ -58,6 +58,7 @@ A \code{\link[tibble:tibble]{tibble::tibble()}} with exactly one row and columns
   \item{method}{Which method was used.}
   \item{n}{The number of TODO.}
   \item{n.factors}{The number of fitted factors}
+  \item{nobs}{Number of observations used.}
   \item{statistic}{Test statistic.}
   \item{total.variance}{Total cumulative proportion of variance accounted for by all factors}
 

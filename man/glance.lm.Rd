@@ -2,12 +2,9 @@
 % Please edit documentation in R/stats-lm-tidiers.R
 \name{glance.lm}
 \alias{glance.lm}
-\alias{glance.summary.lm}
 \title{Glance at a(n) lm object}
 \usage{
 \method{glance}{lm}(x, ...)
-
-\method{glance}{summary.lm}(x, ...)
 }
 \arguments{
 \item{x}{An \code{lm} object created by \code{\link[stats:lm]{stats::lm()}}.}
@@ -102,12 +99,13 @@ A \code{\link[tibble:tibble]{tibble::tibble()}} with exactly one row and columns
   \item{AIC}{Akaike's Information Criterion for the model.}
   \item{BIC}{Bayesian Information Criterion for the model.}
   \item{deviance}{Deviance of the model.}
-  \item{df}{Degrees of freedom used by the model.}
   \item{df.residual}{Residual degrees of freedom.}
   \item{logLik}{The log-likelihood of the model. [stats::logLik()] may be a useful reference.}
+  \item{nobs}{Number of observations used.}
   \item{p.value}{P-value corresponding to the test statistic.}
   \item{r.squared}{R squared statistic, or the percent of variation explained by the model. Also known as the coefficient of determination.}
   \item{sigma}{Estimated standard error of the residuals.}
   \item{statistic}{Test statistic.}
+  \item{df}{The degrees for freedom from the numerator of the overall F-statistic. This is new in broom 0.7.0. Previously, this reported the rank of the design matrix, which is one more than the numerator degrees of freedom of the overall F-statistic.}
 
 }
