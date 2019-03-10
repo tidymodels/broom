@@ -10,7 +10,8 @@
 \arguments{
 \item{x}{An \code{pam} object returned from \code{\link[cluster:pam]{cluster::pam()}}}
 
-\item{col.names}{Column names in the input data frame. Defaults to the names of the variables in x.  Set to NULL to get names \code{x1, x2, ...}.}
+\item{col.names}{Column names in the input data frame.
+Defaults to the names of the variables in x.}
 
 \item{...}{Additional arguments. Not used. Needed to match generic
 signature only. \strong{Cautionary note:} Misspelled arguments will be
@@ -45,7 +46,7 @@ p <- pam(x, k = 3)
 
 tidy(p)
 glance(p)
-augment(p,x)
+augment(p, x)
 
 augment(p, x) \%>\% 
   ggplot(aes(Sepal.Length, Sepal.Width)) +

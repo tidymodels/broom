@@ -78,7 +78,7 @@ p <- pam(x, k = 3)
 
 tidy(p)
 glance(p)
-augment(p,x)
+augment(p, x)
 
 augment(p, x) \%>\% 
   ggplot(aes(Sepal.Length, Sepal.Width)) +
@@ -94,8 +94,8 @@ Other pam tidiers: \code{\link{glance.pam}},
 \concept{pam tidiers}
 \value{
 A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
+  \item{.cluster}{Cluster assignment.}
   \item{.fitted}{Fitted or predicted value.}
   \item{.resid}{The difference between fitted and observed values.}
-  \item{.cluster}{Cluster assignment.}
 
 }

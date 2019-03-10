@@ -46,7 +46,7 @@ p <- pam(x, k = 3)
 
 tidy(p)
 glance(p)
-augment(p,x)
+augment(p, x)
 
 augment(p, x) \%>\% 
   ggplot(aes(Sepal.Length, Sepal.Width)) +
