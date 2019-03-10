@@ -110,3 +110,9 @@ Other robustbase tidiers: \code{\link{augment.glmrob}},
   \code{\link{tidy.glmrob}}, \code{\link{tidy.lmrob}}
 }
 \concept{robustbase tidiers}
+\value{
+A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
+  \item{.fitted}{Fitted or predicted value.}
+  \item{.resid}{The difference between fitted and observed values.}
+
+}

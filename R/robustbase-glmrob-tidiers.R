@@ -46,6 +46,7 @@ tidy.glmrob <- function (x, conf.int = FALSE, conf.level = 0.95, ...) {
 #' @template param_se_fit
 #' @template param_unused_dots
 #'
+#' @evalRd return_augment()
 #' @details For tidiers for robust models from the \pkg{MASS} package see
 #'   [tidy.rlm()]. For tidiers for robust models from the \pkg{robust} package
 #'   see [tidy.lmRob()].
