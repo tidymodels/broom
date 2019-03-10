@@ -1,7 +1,9 @@
 #' @templateVar class lmrob
-#' @template title_desc_tidy_lm_wrapper
+#' @template title_desc_tidy
 #'
 #' @param x A `lmrob` object returned from [robustbase::lmrob()].
+#' @template param_confint
+#' @template param_unused_dots
 #' 
 #' @details For tidiers for robust models from the \pkg{MASS} package see
 #'   [tidy.rlm()]. For tidiers for robust models from the \pkg{robust} package
@@ -32,8 +34,24 @@
 #' @family robustbase tidiers
 #' @rdname tidy.robustbase.lmrob
 #' @seealso [robustbase::lmrob()]
-#' @include stats-lm-tidiers.R
-tidy.lmrob <- tidy.lm
+tidy.lmrob <- function(x, conf.int = FALSE, conf.level = 0.95, ...) {
+  ret <- coef(summary(x)) %>% 
+    tibble::as_tibble(rownames = "term")
+  names(ret) <- c("term", "estimate", "std.error", "statistic", "p.value")
+  
+  if (conf.int) {
+    ci <- stats::confint.default(x, level = conf.level) %>% 
+      tibble::as_tibble(rownames = NULL) %>% 
+      dplyr::rename(
+        conf.low = `2.5 %`
+        ,conf.high = `97.5 %`
+      )
+    ret <- ret %>% 
+      cbind(ci)
+  }
+  
+  ret
+}
 
 #' @templateVar class lmrob
 #' @template title_desc_augment

@@ -5,8 +5,7 @@
 \alias{robustbase_tidiers}
 \title{Tidy a(n) lmrob object}
 \usage{
-\method{tidy}{lmrob}(x, conf.int = FALSE, conf.level = 0.95,
-  exponentiate = FALSE, quick = FALSE, ...)
+\method{tidy}{lmrob}(x, conf.int = FALSE, conf.level = 0.95, ...)
 }
 \arguments{
 \item{x}{A \code{lmrob} object returned from \code{\link[robustbase:lmrob]{robustbase::lmrob()}}.}
@@ -17,15 +16,6 @@ interval in the tidied output. Defaults to \code{FALSE}.}
 \item{conf.level}{The confidence level to use for the confidence interval
 if \code{conf.int = TRUE}. Must be strictly greater than 0 and less than 1.
 Defaults to 0.95, which corresponds to a 95 percent confidence interval.}
-
-\item{exponentiate}{Logical indicating whether or not to exponentiate the
-the coefficient estimates. This is typical for logistic and multinomial
-regressions, but a bad idea if there is no log or logit link. Defaults
-to \code{FALSE}.}
-
-\item{quick}{Logical indicating if the only the \code{term} and \code{estimate}
-columns should be returned. Often useful to avoid time consuming
-covariance and standard error calculations. Defaults to \code{FALSE}.}
 
 \item{...}{Additional arguments. Not used. Needed to match generic
 signature only. \strong{Cautionary note:} Misspelled arguments will be
@@ -38,7 +28,12 @@ accept a \code{newdata} argument, it will use the default value for
 the \code{data} argument.}
 }
 \description{
-This method wraps \code{\link[=tidy.lm]{tidy.lm()}}.
+Tidy summarizes information about the components of a model.
+A model component might be a single term in a regression, a single
+hypothesis, a cluster, or a class. Exactly what tidy considers to be a
+model component varies cross models but is usually self-evident.
+If a model has several distinct types of components, you will need to
+specify which components to return.
 }
 \details{
 For tidiers for robust models from the \pkg{MASS} package see
@@ -67,8 +62,6 @@ augment(Rfit)
 
 }
 \seealso{
-\code{\link[=tidy]{tidy()}}, \code{\link[=tidy.lm]{tidy.lm()}}
-
 \code{\link[robustbase:lmrob]{robustbase::lmrob()}}
 
 Other robustbase tidiers: \code{\link{augment.glmrob}},
