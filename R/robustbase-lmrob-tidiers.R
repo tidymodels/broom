@@ -59,9 +59,9 @@ tidy.lmrob <- function(x, conf.int = FALSE, conf.level = 0.95, ...) {
 #' @inherit tidy.lmrob params examples
 #' @template param_data
 #' @template param_newdata
-#' 
-#' @param se_fit a switch indicating if standard errors are required.
-#' 
+#' @template param_se_fit
+#' @template param_unused_dots
+#'    
 #' @details For tidiers for robust models from the \pkg{MASS} package see
 #'   [tidy.rlm()]. For tidiers for robust models from the \pkg{robust} package
 #'   see [tidy.lmRob()].
@@ -71,7 +71,13 @@ tidy.lmrob <- function(x, conf.int = FALSE, conf.level = 0.95, ...) {
 #' @family robustbase tidiers
 #' @seealso [robustbase::lmrob()]
 augment.lmrob <- function(x, data = model.frame(x), newdata = NULL, se_fit = FALSE, ...) {
-  augment_newdata(x, data, newdata, .se_fit = se_fit, ...)
+  # augment_newdata(x, data, newdata, .se_fit = se_fit, ...)
+  augment_newdata(
+    x, data, newdata,
+    type.residuals = type.residuals,
+    .se_fit = se_fit
+  )
+  
 }
 
 #' @templateVar class lmrob
@@ -96,7 +102,7 @@ augment.lmrob <- function(x, data = model.frame(x), newdata = NULL, se_fit = FAL
 #' @seealso [robustbase::lmrob()]
 glance.lmrob <- function(x, ...) {
   s <- summary(x)
-  tibble(
+  tibble::tibble(
     r.squared = s$r.squared,
     sigma = s$sigma,
     df.residual = x$df.residual
