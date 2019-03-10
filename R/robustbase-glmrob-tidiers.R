@@ -56,12 +56,22 @@ tidy.glmrob <- function (x, conf.int = FALSE, conf.level = 0.95, ...) {
 #' @rdname augment.robustbase.glmrob
 #' @seealso [robustbase::glmrob()]
 augment.glmrob <- function(x, data = model.frame(x), newdata = NULL,
-                           type.predict = c("link", "response"),
+                           type.predict = c("link", "response", "terms"),
                            type.residuals = c("deviance", "pearson"),
                            se_fit = FALSE, ...) {
-  # TODO: add "terms" back into the possibilities for `type.predict`. Currently,
-  # predict.glmrob(x, type = "terms") throws an error and specifying `type.predict`
-  # = "terms" returns the same tibble as when `type.predict` = "response"
+  # FIXME:
+  # predict.glmrob(x, type = "terms") throws an error and specifying
+  # `type.predict` = "terms" returns the same output as when `type.predict` =
+  # "response" if this isn't handled
+  if (length(type.predict) == 1 && type.predict == "terms") {
+    # check to make sure behavior still exists in robustbase
+    tryCatch({
+      predict(x, type = type.predict)
+       },
+      error = function(e) {
+        rlang::abort('`type.predict` = "terms" is not supported')
+      })
+  }
   augment_newdata(
     x, data, newdata,
     type.predict = type.predict,
