@@ -30,7 +30,6 @@
 #' @family systemfit tidiers
 #' @aliases systemfit_tidiers
 tidy.systemfit <- function(x, conf.int = TRUE, ...) {
-  nn <- c("term", "estimate", "std.error", "p.value")
   
   sf_summary <- summary(x)
   sf_coefs <- as.data.frame(sf_summary$coefficients)
@@ -42,8 +41,7 @@ tidy.systemfit <- function(x, conf.int = TRUE, ...) {
     sf_cis <- matrix(sf_cis,ncol = 2)
     sf_coefs <- cbind(sf_coefs, sf_cis)
   }
-  names(sf_coefs) <- nn
-  rownames(sf_coefs) <- NULL
+  names(sf_coefs) <- c("term", "estimate", "std.error", "p.value")
   
   ret <- as_broom_tibble(data = sf_coefs)
   
