@@ -66,16 +66,16 @@ tidy(mod)
 glance(mod)
 
 # coefficient plot
-d <- tidy(mod) \%>\% 
+d <- tidy(mod) \%>\%
   mutate(
     low = estimate - std.error,
     high = estimate + std.error
   )
-  
+
 ggplot(d, aes(estimate, term, xmin = low, xmax = high, height = 0)) +
-     geom_point() +
-     geom_vline(xintercept = 0) +
-     geom_errorbarh()
+  geom_point() +
+  geom_vline(xintercept = 0) +
+  geom_errorbarh()
 
 augment(mod)
 augment(mod, mtcars)
@@ -103,7 +103,6 @@ a <- matrix(rnorm(20), nrow = 10)
 b <- a + rnorm(length(a))
 result <- lm(b ~ a)
 tidy(result)
-
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[stats:summary.lm]{stats::summary.lm()}}
@@ -111,7 +110,7 @@ tidy(result)
 Other lm tidiers: \code{\link{augment.glm}},
   \code{\link{augment.lm}}, \code{\link{glance.glm}},
   \code{\link{glance.lm}}, \code{\link{tidy.glm}},
-  \code{\link{tidy.lm.beta}}
+  \code{\link{tidy.lm.beta}}, \code{\link{tidy.mlm}}
 }
 \concept{lm tidiers}
 \value{
