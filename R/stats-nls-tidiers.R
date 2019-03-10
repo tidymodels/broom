@@ -79,7 +79,7 @@ augment.nls <- function(x, data = NULL, newdata = NULL, ...) {
     data <- as_tibble(env[!(names(env) %in% pars)])
   }
 
-  augment_newdata(x, data, newdata, se_fit = FALSE)
+  augment_newdata(x, data, newdata, .se_fit = FALSE)
 }
 
 
