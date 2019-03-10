@@ -62,7 +62,6 @@ Other pam tidiers: \code{\link{augment.pam}},
 \concept{pam tidiers}
 \value{
 A \code{\link[tibble:tibble]{tibble::tibble()}} with exactly one row and columns:
-  \item{clus.avg.width}{The average silhouette width per cluster.}
-  \item{avg.width}{The average silhouette width for the dataset, i.e., simply the average of s(i) over all observations i.}
+
 
 }

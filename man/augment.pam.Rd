@@ -4,7 +4,7 @@
 \alias{augment.pam}
 \title{Augment data with information from a(n) pam object}
 \usage{
-\method{augment}{pam}(x, data, ...)
+\method{augment}{pam}(x, data = NULL, ...)
 }
 \arguments{
 \item{x}{An \code{pam} object returned from \code{\link[cluster:pam]{cluster::pam()}}}

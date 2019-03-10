@@ -1,35 +1,31 @@
 #' @templateVar class clm
 #' @template title_desc_tidy
 #' 
-#' @param x A `clm` or `clmm` object returned from [ordinal::clm()] or 
+#' @param x A `clm` object returned from [ordinal::clm()] or 
 #'   [ordinal::clmm()].
 #' @template param_confint
-#' @template param_quick
-#' @template param_unused_dots
 #' @template param_exponentiate
 #' @template param_quick
 #' @template param_unused_dots
 #' @param conf.type Which type of confidence interval to use. Passed to the
 #'   `type` argument of [ordinal::confint.clm()]. Defaults to `"profile`.
+#'   
 #' @examples
+#' 
 #' library(ordinal)
 #' 
-#' clm_mod <- clm(rating ~ temp * contact, data = wine)
+#' fit <- clm(rating ~ temp * contact, data = wine)
 #' 
-#' tidy(clm_mod)
-#' tidy(clm_mod, conf.int = TRUE)
-#' tidy(clm_mod, conf.int = TRUE, conf.type = "Wald", exponentiate = TRUE)
+#' tidy(fit)
+#' tidy(fit, conf.int = TRUE)
+#' tidy(fit, conf.int = TRUE, conf.type = "Wald", exponentiate = TRUE)
 #' 
-#' glance(clm_mod)
-#' augment(clm_mod)
+#' glance(fit)
+#' augment(fit)
 #' 
-#' clm_mod2 <- clm(rating ~ temp, nominal = ~ contact, data = wine)
-#' tidy(clm_mod2)
-#' 
-#' clmm_mod <- clmm(rating ~ temp + contact + (1 | judge), data = wine)
-#' 
-#' tidy(clmm_mod)
-#' glance(clmm_mod) 
+#' fit2 <- clm(rating ~ temp, nominal = ~ contact, data = wine)
+#' tidy(fit2)
+#' glance(fit2)
 #' 
 #' @evalRd return_tidy(regression = TRUE)
 #'
@@ -38,18 +34,11 @@
 #' @seealso [tidy], [ordinal::clm()], [ordinal::clmm()]
 #' @family ordinal tidiers
 tidy.clm <- function(x, conf.int = FALSE, conf.level = .95,
-                     exponentiate = FALSE, quick = FALSE,
+                     exponentiate = FALSE,
                      conf.type = c("profile", "Wald"), ...) {
-  if (quick) {
-    co <- coef(x)
-    ret <- data.frame(
-      term = names(co), estimate = unname(co),
-      stringsAsFactors = FALSE
-    )
-    return(process_clm(ret, x, conf.int = FALSE, exponentiate = exponentiate))
-  }
   
   conf.type <- rlang::arg_match(conf.type)
+  
   co <- coef(summary(x))
   nn <- c("estimate", "std.error", "statistic", "p.value")
   ret <- fix_data_frame(co, nn[seq_len(ncol(co))])
@@ -60,33 +49,52 @@ tidy.clm <- function(x, conf.int = FALSE, conf.level = .95,
   )
 }
 
-#' @rdname tidy.clm
+#' @templateVar class clm
+#' @template title_desc_glance
+#' 
+#' @inherit tidy.clm params examples
+#'
+#' @evalRd return_glance(
+#'   "edf",
+#'   "AIC",
+#'   "BIC",
+#'   "logLik",
+#'   "df.residual",
+#'   "nobs"
+#' )
+#'
 #' @export
-tidy.clmm <- tidy.clm
-
-#' @rdname ordinal_tidiers
-#' @export
+#' @seealso [tidy], [ordinal::clm()]
+#' @family ordinal tidiers
 glance.clm <- function(x, ...) {
-  ret <- tibble(edf = x$edf)
-  # survey-svyolr returns NULL AIC, BIC, logLik
-  ret$AIC <- tryCatch(as.numeric(stats::AIC(x)), error = function(e) NULL)
-  ret$BIC <- tryCatch(as.numeric(stats::BIC(x)), error = function(e) NULL)
-  ret$logLik <- tryCatch(as.numeric(stats::logLik(x)), error = function(e) NULL)
-  # clmm returns returns NULL df.residual
-  ret$df.residual <- tryCatch(stats::df.residual(x), error = function(e) NULL)
-  # nobs
-  ret$nobs <- tryCatch(stats::nobs(x), error = function(e) NULL)
-  ret
+  tibble(
+    edf = x$edf,
+    AIC = stats::AIC(x),
+    BIC = stats::BIC(x),
+    logLik = stats::logLik(x),
+    df.residual = stats::df.residual(x),
+    nobs = stats::nobs(x)
+  )
 }
 
-#' @rdname ordinal_tidiers
-#' @export
-glance.clmm <- glance.clm
-
+#' @templateVar class clm
+#' @template title_desc_augment
+#' 
+#' @inherit tidy.clm params examples
+#' @template param_data
+#' @template param_newdata
+#' @template param_se_fit
+#' 
+#' @evalRd return_augment()
+#'
+#' 
 #' @param type.predict type of prediction to compute for a CLM; passed on to
-#' [ordinal::predict.clm()] or `predict.polr`
+#' [ordinal::predict.clm()]
 #' @rdname ordinal_tidiers
 #' @export
+#' @seealso [tidy], [ordinal::clm()], [stats::predict.clm()]
+#' @family nls tidiers
+#' 
 augment.clm <- function(x, data = model.frame(x), newdata = NULL,
                         type.predict = c("prob", "class"), ...) {
   type.predict <- rlang::arg_match(type.predict)
@@ -125,14 +133,3 @@ process_clm <- function(ret, x, conf.int = FALSE, conf.level = .95,
                                      length, numeric(1)))
   as_tibble(ret)
 }
-
-
-
-#' @rdname ordinal_tidiers
-#' @export
-tidy.svyolr <- tidy.polr
-
-#' @rdname ordinal_tidiers
-#' @export
-glance.svyolr <- glance.clm
-

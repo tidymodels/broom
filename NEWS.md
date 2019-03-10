@@ -11,6 +11,7 @@ changes in this version of `broom`. We list them below-
     `AIC`, `BIC, deviance`, `nobs`. This is in response to conversation that
     took place in #212. Note that `tidy.aov` can be used to get numerator and
     denominator degrees of freedom.
+    
 
 ## Changes to `augment()`
 
@@ -31,6 +32,10 @@ pending getting `safepredict()` going urgh)
 
 - `augment()` tries to give an informative error when `data` isn't the original
   training data
+  
+## Changes to `glance()`
+
+- Most of the glance methods return a `nobs` column now! (TODO: KUDOS)
 
 ## Degrees of freedom in `glance.lm()` have changed! (#212, #273)
 
@@ -62,6 +67,8 @@ TODO: sort out what happens to `glance.aov()`
 - `tidy.lsmobj()` gained a `conf.int` argument
 
 ## New tidiers, features and bugfixes
+
+- `ordinal` tidier rewrite
 
 - Added tidiers for `pam` objects from the `cluster` package. (#637)
 - Previously, F-statistics for weak instruments were returned through `glance.ivreg()`. F-statistics are now returned through `tidy.ivreg(instruments = TRUE)`. Default is `tidy.ivreg(instruments = FALSE)`. `glance.ivreg()` still returns Wu-Hausman and Sargan test statistics.

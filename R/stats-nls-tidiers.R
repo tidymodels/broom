@@ -103,14 +103,15 @@ augment.nls <- function(x, data = NULL, newdata = NULL, se_fit = FALSE, ...) {
 #' @family nls tidiers
 glance.nls <- function(x, ...) {
   s <- summary(x)
-  ret <- tibble(sigma = s$sigma, 
-                isConv = s$convInfo$isConv,
-                finTol = s$convInfo$finTol,
-                logLik = as.numeric(stats::logLik(x)),
-                AIC = stats::AIC(x),
-                BIC = stats::BIC(x),
-                deviance = stats::deviance(x),
-                df.residual = stats::df.residual(x),
-                nobs = stats::nobs(x))
-  ret
+  tibble(
+    sigma = s$sigma, 
+    isConv = s$convInfo$isConv,
+    finTol = s$convInfo$finTol,
+    logLik = as.numeric(stats::logLik(x)),
+    AIC = stats::AIC(x),
+    BIC = stats::BIC(x),
+    deviance = stats::deviance(x),
+    df.residual = stats::df.residual(x),
+    nobs = stats::nobs(x)
+  )
 }

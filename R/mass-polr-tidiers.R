@@ -4,10 +4,10 @@
 #' @examples
 #' 
 #' library(MASS)
-#' data(housing)
-#' mod <- polr(Sat ~ Infl + Type + Cont, weights = Freq, data = housing)    
-#' tidy(mod)
-#' glance(mod)
+#' polr_mod <- polr(Sat ~ Infl + Type + Cont, weights = Freq, data = housing)
+#' tidy(polr_mod, exponentiate = TRUE, conf.int = TRUE)
+#' glance(polr_mod)
+#' augment(polr_mod, type.predict = "class")
 tidy.polr <- function(x, conf.int = FALSE, conf.level = .95,
                       exponentiate = FALSE, quick = FALSE, ...) {
   if (quick) {
