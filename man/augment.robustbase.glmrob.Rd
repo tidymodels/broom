@@ -24,6 +24,16 @@ the original predictors used to create \code{x}. Defaults to \code{NULL}, indica
 that nothing has been passed to \code{newdata}. If \code{newdata} is specified,
 the \code{data} argument will be ignored.}
 
+\item{type.predict}{Character indicating type of prediction to use. Passed
+to the \code{type} argument of the \code{\link[stats:predict]{stats::predict()}} generic. Allowed arguments
+vary with model class, so be sure to read the \code{predict.my_class}
+documentation.}
+
+\item{type.residuals}{Character indicating type of residuals to use. Passed
+to the \code{type} argument of \code{\link[stats:residuals]{stats::residuals()}} generic. Allowed arguments
+vary with model class, so be sure to read the \code{residuals.my_class}
+documentation.}
+
 \item{se_fit}{Logical indicating whether or not a \code{.se.fit} column should be
 added to the augmented output. For some models, this calculation can be
 somwhat time-consuming. Defaults to \code{FALSE}.}
