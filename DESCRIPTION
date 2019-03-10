@@ -175,11 +175,11 @@ Authors@R:
              role = "ctb"),
       person(given = "Annie",
              family = "Wang",
-             email = "anniewang.uc@gmail.com",
-             role = "ctb"),
-      person(given = "Wei Yang", 
-             family = "Tham", 
-             role = "ctb", 
+             role = "ctb",
+             email = "anniewang.uc@gmail.com"),
+      person(given = "Wei Yang",
+             family = "Tham",
+             role = "ctb",
              email = "weiyang.tham@gmail.com"),
       person(given = "Clara",
              family = "Wang",
@@ -208,6 +208,7 @@ Depends:
 Imports:
     backports,
     dplyr,
+    ellipsis (>= 0.1.0.9000),
     generics (>= 0.0.2),
     glue,
     methods,
@@ -230,6 +231,7 @@ Suggests:
     btergm,
     car,
     caret,
+    cluster,
     coda,
     covr,
     e1071,
@@ -292,8 +294,7 @@ Suggests:
     testthat,
     tseries,
     xergm,
-    zoo,
-    cluster
+    zoo
 VignetteBuilder: 
     knitr
 Remotes: 

@@ -25,7 +25,7 @@ test_that("tidy.polr", {
   check_tidy_output(td2, strict = FALSE)
   check_tidy_output(td3, strict = FALSE)
   
-  check_dims(td, expected_cols = 3)
+  check_dims(td, expected_cols = 5)
   check_dims(td2, expected_cols = 7)
   check_dims(td3, expected_cols = 7)
 })

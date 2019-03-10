@@ -378,6 +378,7 @@ broom_confint_terms <- function(x, ...) {
   
   if (is.null(dim(ci))) {
     ci <- matrix(ci, nrow = 1)
+    rownames(ci) <- names(coef(x))[1]
   }
   
   ci <- as_tibble(ci, rownames = "term")
