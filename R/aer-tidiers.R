@@ -5,8 +5,8 @@
 #' @template param_confint
 #' @template param_exponentiate
 #' @param instruments Logical indicating whether to return 
-#' coefficients from the second-stage or diagnostics tests for
-#' each endogenous regressor (F-statistics). Defaults to `FALSE`.
+#'   coefficients from the second-stage or diagnostics tests for
+#'   each endogenous regressor (F-statistics). Defaults to `FALSE`.
 #' @template param_unused_dots
 #' 
 #' @evalRd return_tidy(
