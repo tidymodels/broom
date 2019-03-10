@@ -33,15 +33,15 @@ tidy.systemfit <- function(x, conf.int = TRUE, ...) {
   
   sf_summary <- summary(x)
   sf_coefs <- as.data.frame(sf_summary$coefficients)
-  sf_coefs <- sf_coefs[,- which(names(sf_coefs) == "t value")]
   sf_coefs <- cbind(term = rownames(sf_coefs), sf_coefs)
+  cis <- NULL
   if(conf.int){
-    nn <- c(nn, "conf.low", "conf.high")
+    cis <- c("conf.low", "conf.high")
     sf_cis <- confint(x)
     sf_cis <- matrix(sf_cis,ncol = 2)
     sf_coefs <- cbind(sf_coefs, sf_cis)
   }
-  names(sf_coefs) <- c("term", "estimate", "std.error", "p.value")
+  names(sf_coefs) <- c("term", "estimate", "std.error", "statistic", "p.value", cis)
   
   ret <- as_broom_tibble(data = sf_coefs)
   
