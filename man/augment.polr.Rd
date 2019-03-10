@@ -5,10 +5,10 @@
 \title{Augment data with information from a(n) polr object}
 \usage{
 \method{augment}{polr}(x, data = model.frame(x), newdata = NULL,
-  type.predict = c("probs", "class"), ...)
+  type.predict = c("class"), ...)
 }
 \arguments{
-\item{x}{A \code{clm} object returned from \code{\link[ordinal:clm]{ordinal::clm()}}.}
+\item{x}{A \code{polr} object returned from \code{\link[MASS:polr]{MASS::polr()}}.}
 
 \item{data}{A \code{\link[=data.frame]{data.frame()}} or \code{\link[tibble:tibble]{tibble::tibble()}} containing the original
 data that was used to produce the object \code{x}. Defaults to
@@ -23,8 +23,9 @@ the original predictors used to create \code{x}. Defaults to \code{NULL}, indica
 that nothing has been passed to \code{newdata}. If \code{newdata} is specified,
 the \code{data} argument will be ignored.}
 
-\item{type.predict}{Which type of prediction to compute, either \code{"prob"}
-or \code{"class"}, passed to \code{\link[MASS:predict.polr]{MASS::predict.polr()}}. Defaults to \code{"prob"}.}
+\item{type.predict}{Which type of prediction to compute,
+passed to \code{\link[MASS:predict.polr]{MASS::predict.polr()}}. Only supports \code{"class"} at
+the moment.}
 
 \item{...}{Additional arguments. Not used. Needed to match generic
 signature only. \strong{Cautionary note:} Misspelled arguments will be
@@ -92,7 +93,8 @@ augment(fit, type.predict = "class")
 
 Other ordinal tidiers: \code{\link{augment.clm}},
   \code{\link{glance.clmm}}, \code{\link{glance.clm}},
-  \code{\link{glance.polr}}, \code{\link{tidy.clmm}},
-  \code{\link{tidy.clm}}, \code{\link{tidy.polr}}
+  \code{\link{glance.polr}}, \code{\link{glance.svyolr}},
+  \code{\link{tidy.clmm}}, \code{\link{tidy.clm}},
+  \code{\link{tidy.polr}}, \code{\link{tidy.svyolr}}
 }
 \concept{ordinal tidiers}

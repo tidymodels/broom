@@ -17,7 +17,7 @@ test_that("MASS::polr tidier arguments", {
 
 test_that("tidy.polr", {
   
-  td <- tidy(fit, quick = TRUE)
+  td <- tidy(fit)
   td2 <- tidy(fit, conf.int = TRUE, exponentiate = TRUE)
   td3 <- tidy(fit2, conf.int = TRUE, exponentiate = TRUE)
   

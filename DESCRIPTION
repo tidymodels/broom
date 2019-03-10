@@ -307,7 +307,6 @@ Collate:
     'aaa-documentation-helper.R'
     'aer-tidiers.R'
     'auc-tidiers.R'
-    'base-summary-tidiers.R'
     'base-tidiers.R'
     'bbmle-tidiers.R'
     'betareg-tidiers.R'

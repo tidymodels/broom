@@ -28,7 +28,7 @@
 #' 
 #' @evalRd return_tidy(regression = TRUE)
 #' 
-#' @note In `broom 0.7.0` the `coefficient_type` column was renamed to
+#' @details In `broom 0.7.0` the `coefficient_type` column was renamed to
 #'   `coef.type`, and the contents were changed as well.
 #'   
 #'   Note that `intercept` type coefficients correspond to `alpha`
@@ -45,25 +45,20 @@ tidy.clm <- function(x, conf.int = FALSE, conf.level = 0.95,
                      ...) {
   
   conf.type <- rlang::arg_match(conf.type)
-  ret <- as_broom_tibble(coef(summary(x)))
+  ret <- as_tibble(coef(summary(x)), rownames = "term")
   colnames(ret) <- c("term", "estimate", "std.error", "statistic", "p.value")
   
   if (conf.int) {
-    ci <- confint(x, level = conf.level, type = conf.type)
-    ci <- as_broom_tibble(ci)
-    colnames(ci) <- c("term", "conf.low", "conf.high")
-    ret <- dplyr::left_join(ret, ci)
+    ci <- broom_confint_terms(x, level = conf.level, type = conf.type)
+    ret <- dplyr::left_join(ret, ci, by = "term")
   }
   
-  if (exponentiate) {
-    ret <- mutate_at(ret, vars(estimate, conf.low, conf.high), exp)
-  }
-  
-  # TODO: exponentiate without conf.int?
+  if (exponentiate)
+    ret <- exponentiate(ret)
   
   types <- c("alpha", "beta", "zeta")
   new_types <- c("intercept", "location", "scale")
-  ret$coef.type <- rep(types, vapply(x[types], length, numeric(1)))
+  ret$coef.type <- rep(new_types, vapply(x[types], length, numeric(1)))
   as_tibble(ret)
 }
 

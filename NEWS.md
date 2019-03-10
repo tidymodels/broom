@@ -133,6 +133,8 @@ TODO: sort out what happens to `glance.aov()`
 The following tidiers have been removed from `broom` but were not soft
 deprecated in the previous release:
 
+- `tidy.summaryDefault()`, `glance.summaryDefault()` are gone
+
 - `glance.summary.lm()`
 
 - `augment.glmRob()`

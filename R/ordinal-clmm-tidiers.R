@@ -67,23 +67,3 @@ glance.clmm <- function(x, ...) {
     nobs = stats::nobs(x)
   )
 }
-
-#' @templateVar class clmm
-#' @template title_desc_augment
-#' 
-#' @inherit tidy.clmm params examples
-#' @template param_data
-#' @template param_newdata
-#' 
-#' @param type.predict Which type of prediction to compute, either `"prob"`
-#'   or `"class"`, passed to [ordinal::predict.clmm()]. Defaults to `"prob"`.
-#' 
-#' @export
-#' @seealso [tidy], [ordinal::clmm()], [stats::predict.clmm()]
-#' @family ordinal tidiers
-#' 
-augment.clm <- function(x, data = model.frame(x), newdata = NULL,
-                        type.predict = c("prob", "class"), ...) {
-  type.predict <- rlang::arg_match(type.predict)
-  augment_columns(x, data, newdata, type = type.predict)
-}

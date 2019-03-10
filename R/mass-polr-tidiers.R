@@ -1,7 +1,7 @@
 #' @templateVar class polr
 #' @template title_desc_tidy
 #' 
-#' @param x A `polr` object returned from [MASS::polr().
+#' @param x A `polr` object returned from [MASS::polr()].
 #' @template param_confint
 #' @template param_exponentiate
 #' @param conf.type Whether to use `"profile"` or `"Wald"` confidendence
@@ -22,44 +22,32 @@
 #' 
 #' @evalRd return_tidy(regression = TRUE)
 #' 
-#' @note In `broom 0.7.0` the `coefficient_type` column was renamed to
-#'   `coef.type`, and the contents were changed as well.
-#'   
-#'   Note that `intercept` type coefficients correspond to `alpha`
-#'   parameters, `location` type coefficients correspond to `beta`
-#'   parameters, and `scale` type coefficients correspond to `zeta`
-#'   parameters.
+#' @details In `broom 0.7.0` the `coefficient_type` column was renamed to
+#'   `coef.type`, and the contents were changed as well. Now the contents
+#'   are `coefficient` and `scale`, rather than `coefficient` and `zeta`.
 #'
-#' @aliases ordinal_tidiers
+#' @aliases polr_tidiers
 #' @export
-#' @seealso [tidy], [ordinal::clm()], [ordinal::confint.clm()]
+#' @seealso [tidy], [MASS::polr()]
 #' @family ordinal tidiers
-tidy.polr <- function(x, conf.int = FALSE, conf.level = .95,
+tidy.polr <- function(x, conf.int = FALSE, conf.level = 0.95,
                       exponentiate = FALSE, ...) {
   
-  conf.type <- rlang::arg_match(conf.type)
-  ret <- as_broom_tibble(coef(summary(x)))
-  colnames(ret) <- c("term", "estimate", "std.error", "statistic", "p.value")
+  ret <- as_tibble(coef(summary(x)), rownames = "term")
+  colnames(ret) <- c("term", "estimate", "std.error", "statistic")
   
   if (conf.int) {
-    ci <- confint(x, level = conf.level)
-    ci <- as_broom_tibble(ci)
-    colnames(ci) <- c("term", "conf.low", "conf.high")
-    ret <- dplyr::left_join(ret, ci)
+    ci <- broom_confint_terms(x, level = conf.level)
+    ret <- dplyr::left_join(ret, ci, by = "term")
   }
   
-  if (exponentiate) {
-    ret <- mutate_at(ret, vars(estimate, conf.low, conf.high), exp)
-  }
+  if (exponentiate)
+    ret <- exponentiate(ret)
   
-  types <- c("alpha", "beta", "zeta")
-  new_types <- c("intercept", "location", "scale")
-  ret$coef.type <- rep(types, vapply(x[types], length, numeric(1)))
-  
-  ret[ret$term %in% names(x$coefficients), "coefficient_type"] <- "coefficient"
-  ret[ret$term %in% names(x$zeta), "coefficient_type"] <- "zeta"
-  
-  as_tibble(ret)
+  mutate(
+    ret, 
+    coef.type = if_else(term %in% names(x$zeta), "scale", "coefficient")
+  )
 }
 
 #' @templateVar class polr
@@ -99,15 +87,16 @@ glance.polr <- function(x, ...) {
 #' @template param_data
 #' @template param_newdata
 #' 
-#' @param type.predict Which type of prediction to compute, either `"prob"`
-#'   or `"class"`, passed to [MASS::predict.polr()]. Defaults to `"prob"`.
+#' @param type.predict Which type of prediction to compute,
+#'  passed to [MASS::predict.polr()]. Only supports `"class"` at
+#'  the moment.
 #' 
 #' @export
 #' @seealso [tidy], [MASS::polr()], [stats::predict.polr()]
 #' @family ordinal tidiers
 #' 
 augment.polr <- function(x, data = model.frame(x), newdata = NULL,
-                         type.predict = c("probs", "class"), ...) {
+                         type.predict = c("class"), ...) {
   type <- rlang::arg_match(type.predict)
   augment_columns(x, data, newdata, type = type.predict)
 }

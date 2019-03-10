@@ -6,8 +6,7 @@
 \title{Tidy a(n) clmm object}
 \usage{
 \method{tidy}{clmm}(x, conf.int = FALSE, conf.level = 0.95,
-  exponentiate = FALSE, quick = FALSE, conf.type = c("profile",
-  "Wald"), ...)
+  conf.type = c("profile", "Wald"), exponentiate = FALSE, ...)
 }
 \arguments{
 \item{x}{A \code{clmm} object returned from \code{\link[ordinal:clmm]{ordinal::clmm()}}.}
@@ -19,14 +18,14 @@ interval in the tidied output. Defaults to \code{FALSE}.}
 if \code{conf.int = TRUE}. Must be strictly greater than 0 and less than 1.
 Defaults to 0.95, which corresponds to a 95 percent confidence interval.}
 
+\item{conf.type}{Whether to use \code{"profile"} or \code{"Wald"} confidendence
+intervals, passed to the \code{type} argument of \code{\link[ordinal:confint.clmm]{ordinal::confint.clmm()}}.
+Defaults to \code{"profile"}.}
+
 \item{exponentiate}{Logical indicating whether or not to exponentiate the
 the coefficient estimates. This is typical for logistic and multinomial
 regressions, but a bad idea if there is no log or logit link. Defaults
 to \code{FALSE}.}
-
-\item{conf.type}{Whether to use \code{"profile"} or \code{"Wald"} confidendence
-intervals, passed to the \code{type} argument of \code{\link[ordinal:confint.clmm]{ordinal::confint.clmm()}}.
-Defaults to \code{"profile"}.}
 
 \item{...}{Additional arguments. Not used. Needed to match generic
 signature only. \strong{Cautionary note:} Misspelled arguments will be
@@ -79,7 +78,8 @@ glance(fit2)
 Other ordinal tidiers: \code{\link{augment.clm}},
   \code{\link{augment.polr}}, \code{\link{glance.clmm}},
   \code{\link{glance.clm}}, \code{\link{glance.polr}},
-  \code{\link{tidy.clm}}, \code{\link{tidy.polr}}
+  \code{\link{glance.svyolr}}, \code{\link{tidy.clm}},
+  \code{\link{tidy.polr}}, \code{\link{tidy.svyolr}}
 }
 \concept{ordinal tidiers}
 \value{

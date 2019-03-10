@@ -12,6 +12,16 @@ rename2 <- function(.data, ...) {
   rename(.data, !!!present)
 }
 
+exponentiate <- function(data) {
+  
+  data <- mutate_at(data, vars(estimate), exp)
+  
+  if ("conf.low" %in% colnames(data))
+    data <- mutate_at(data, vars(conf.low, conf.high), exp)
+  
+  data
+}
+
 #' Coerce a data frame to a tibble, preserving rownames
 #' 
 #' A thin wrapper around [tibble::as_tibble()], except checks for
@@ -93,10 +103,6 @@ unrowname <- function(x) {
   rownames(x) <- NULL
   x
 }
-
-
-# remove NULL items in a vector or list
-compact <- function(x) Filter(Negate(is.null), x)
 
 
 #' insert a row of NAs into a data frame wherever another data frame has NAs
@@ -338,6 +344,45 @@ augment_newdata <- function(x, data, newdata, .se_fit, ...) {
   if (!is.null(resp) && is.numeric(resp))
     df$.resid <- df$.fitted - resp
   df
+}
+
+# this exists to avoid the single predictor gotcha
+# this version adds a terms column
+broom_confint <- function(x, ...) {
+  
+  # warn on arguments silently being ignored
+  ellipsis::check_dots_used()
+  ci <- confint(x, ...)
+  
+  # confint called on models with a single predictor
+  # often returns a named vector rather than a matrix :(
+  
+  if (is.null(dim(ci))) {
+    ci <- matrix(ci, nrow = 1)
+  }
+  
+  ci <- as_tibble(ci)
+  names(ci) <- c("term", "conf.low", "conf.high")
+  ci
+}
+
+# this version adds a terms column
+broom_confint_terms <- function(x, ...) {
+  
+  # warn on arguments silently being ignored
+  ellipsis::check_dots_used()
+  ci <- confint(x, ...)
+  
+  # confint called on models with a single predictor
+  # often returns a named vector rather than a matrix :(
+  
+  if (is.null(dim(ci))) {
+    ci <- matrix(ci, nrow = 1)
+  }
+  
+  ci <- as_tibble(ci, rownames = "term")
+  names(ci) <- c("term", "conf.low", "conf.high")
+  ci
 }
 
 #' Calculate confidence interval as a tidy data frame

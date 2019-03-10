@@ -2,14 +2,14 @@
 % Please edit documentation in R/mass-polr-tidiers.R
 \name{tidy.polr}
 \alias{tidy.polr}
-\alias{ordinal_tidiers}
-\title{Tidy a(n) clm object}
+\alias{polr_tidiers}
+\title{Tidy a(n) polr object}
 \usage{
 \method{tidy}{polr}(x, conf.int = FALSE, conf.level = 0.95,
   exponentiate = FALSE, ...)
 }
 \arguments{
-\item{x}{A \code{clm} object returned from \code{\link[ordinal:clm]{ordinal::clm()}}.}
+\item{x}{A \code{polr} object returned from \code{\link[MASS:polr]{MASS::polr()}}.}
 
 \item{conf.int}{Logical indicating whether or not to include a confidence
 interval in the tidied output. Defaults to \code{FALSE}.}
@@ -45,14 +45,10 @@ model component varies cross models but is usually self-evident.
 If a model has several distinct types of components, you will need to
 specify which components to return.
 }
-\note{
+\details{
 In \code{broom 0.7.0} the \code{coefficient_type} column was renamed to
-\code{coef.type}, and the contents were changed as well.
-
-Note that \code{intercept} type coefficients correspond to \code{alpha}
-parameters, \code{location} type coefficients correspond to \code{beta}
-parameters, and \code{scale} type coefficients correspond to \code{zeta}
-parameters.
+\code{coef.type}, and the contents were changed as well. Now the contents
+are \code{coefficient} and \code{scale}, rather than \code{coefficient} and \code{zeta}.
 }
 \examples{
 
@@ -67,12 +63,13 @@ augment(fit, type.predict = "class")
 
 }
 \seealso{
-\link{tidy}, \code{\link[ordinal:clm]{ordinal::clm()}}, \code{\link[ordinal:confint.clm]{ordinal::confint.clm()}}
+\link{tidy}, \code{\link[MASS:polr]{MASS::polr()}}
 
 Other ordinal tidiers: \code{\link{augment.clm}},
   \code{\link{augment.polr}}, \code{\link{glance.clmm}},
   \code{\link{glance.clm}}, \code{\link{glance.polr}},
-  \code{\link{tidy.clmm}}, \code{\link{tidy.clm}}
+  \code{\link{glance.svyolr}}, \code{\link{tidy.clmm}},
+  \code{\link{tidy.clm}}, \code{\link{tidy.svyolr}}
 }
 \concept{ordinal tidiers}
 \value{

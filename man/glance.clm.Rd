@@ -51,33 +51,15 @@ fit2 <- clm(rating ~ temp, nominal = ~ contact, data = wine)
 tidy(fit2)
 glance(fit2)
 
-library(ordinal)
-
-clm_mod <- clm(rating ~ temp * contact, data = wine)
-
-tidy(clm_mod)
-tidy(clm_mod, conf.int = TRUE)
-tidy(clm_mod, conf.int = TRUE, conf.type = "Wald", exponentiate = TRUE)
-
-glance(clm_mod)
-augment(clm_mod)
-
-clm_mod2 <- clm(rating ~ temp, nominal = ~ contact, data = wine)
-tidy(clm_mod2)
-
-clmm_mod <- clmm(rating ~ temp + contact + (1 | judge), data = wine)
-
-tidy(clmm_mod)
-glance(clmm_mod) 
-
 }
 \seealso{
 \link{tidy}, \code{\link[ordinal:clm]{ordinal::clm()}}
 
 Other ordinal tidiers: \code{\link{augment.clm}},
   \code{\link{augment.polr}}, \code{\link{glance.clmm}},
-  \code{\link{glance.polr}}, \code{\link{tidy.clmm}},
-  \code{\link{tidy.clm}}, \code{\link{tidy.polr}}
+  \code{\link{glance.polr}}, \code{\link{glance.svyolr}},
+  \code{\link{tidy.clmm}}, \code{\link{tidy.clm}},
+  \code{\link{tidy.polr}}, \code{\link{tidy.svyolr}}
 }
 \concept{ordinal tidiers}
 \value{
