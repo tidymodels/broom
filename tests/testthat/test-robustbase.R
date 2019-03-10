@@ -63,5 +63,5 @@ test_that("augment.glmrob", {
   )
   
   # check that .se.fit column is included
-  check_dims(augment(fit2, se_fit = TRUE), 32, 5)
+  check_dims(augment(fit2, se_fit = TRUE), 32, 6)
 })

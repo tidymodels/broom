@@ -44,6 +44,8 @@ tidy.glmrob <- function (x, conf.int = FALSE, conf.level = 0.95, ...) {
 #' @template param_data
 #' @template param_newdata
 #' @template param_se_fit
+#' @template param_type_predict
+#' @template param_type_residuals
 #' @template param_unused_dots
 #'
 #' @evalRd return_augment()
