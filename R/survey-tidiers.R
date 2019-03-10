@@ -6,22 +6,20 @@
 #' @export
 #' @family lm tidiers
 #' @seealso [survey::svyglm()], [stats::glm()]
-# copied from tidy.glm, itself a copy of tidy.lm
+# [NOTES]
+# - partly copies tidy.glm, which itself copies tidy.lm
+# - depends on process_lm, but that might change in the future
 tidy.svyglm <- function(x, conf.int = FALSE, conf.level = .95,
-                        exponentiate = FALSE, quick = FALSE, ...) {
-  if (quick) {
-    co <- stats::coef(x)
-    ret <- data.frame(term = names(co), estimate = unname(co),
-                      stringsAsFactors = FALSE)
-    return(process_lm(ret, x, conf.int = FALSE, exponentiate = exponentiate))
-  }
-  s <- summary(x)
+                        exponentiate = FALSE, ...) {
+  
+  s <- survey:::summary.svyglm(x)
   ret <- tidy.summary.lm(s)
   
   process_lm(ret, x,
              conf.int = conf.int, conf.level = conf.level,
              exponentiate = exponentiate
   )
+  
 }
 
 #' @templateVar class svyglm
