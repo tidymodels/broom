@@ -396,7 +396,39 @@ col_name <- function(x, default = stop("Please supply column name", call. = FALS
   stop("Invalid column specification", call. = FALSE)
 }
 
+## The following code was borrowed from `broom.mixed` (written by Ben Bolkar)
+## FIXME: store functions to run as a list of expressions,
+##  allow user-specified 'skip' argument?
+finish_glance <- function(ret = dplyr::tibble(), x) {
+  stopifnot(length(ret) == 0 || nrow(ret) == 1)
+  
+  ## catch NULL, numeric(0), error responses
+  
+  tfun <- function(e) {
+    tt <- tryCatch(eval(substitute(e)), error = function(e) NA)
+    if (length(tt) == 0) tt <- NA
+    return(tt)
+  }
+  
+  newvals <- dplyr::tibble(
+    sigma = tfun(sigma(x)),
+    logLik = tfun(as.numeric(stats::logLik(x))),
+    AIC = tfun(stats::AIC(x)),
+    BIC = tfun(stats::BIC(x)),
+    deviance = suppressWarnings(tfun(stats::deviance(x))),
+    df.residual = tfun(stats::df.residual(x))
+  )
+  ## drop NA values
+  newvals <- newvals[!vapply(newvals, is.na, logical(1))]
+  
+  if (length(ret) == 0) {
+    return(newvals)
+  } else {
+    return(dplyr::bind_cols(ret, newvals))
+  }
+}
 
+# to pass R CMD CHECK
 globalVariables(
   c(
     ".",

@@ -7,3 +7,4 @@
 #'   \item{df.residual}{Residual degrees of freedom for the model.}
 #'   
 #' @md
+
