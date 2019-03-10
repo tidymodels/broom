@@ -65,6 +65,7 @@ tidy.boot <- function(x,
   index <- index[!allNA]
   t <- matrix(t[, !allNA], nrow = nrow(t))
   rn <- paste("t", index, "*", sep = "")
+  
   if (is.null(t0 <- boot.out$t0)) {
     if (is.null(boot.out$call$weights)) {
       op <- cbind(
@@ -101,15 +102,26 @@ tidy.boot <- function(x,
   ret <- fix_data_frame(op)
 
   if (conf.int) {
-    ci.list <- lapply(seq_along(x$t0),
-      boot::boot.ci,
-      boot.out = x,
-      conf = conf.level, type = conf.method
-    )
+    if(conf.method == "stud" | conf.method == "all"){
+      #TODO: This breaks for conf.method = "stud"
+      stop("Error: Studentized bootstrap confidence intervals are not supported by broom.")
+    } else {
+      ci.list <- lapply(seq_along(x$t0),
+        boot::boot.ci,
+        boot.out = x,
+        conf = conf.level, type = conf.method
+        )
+    }
+    
     ## boot.ci uses c("norm", "basic", "perc", "stud") for types
     ## stores them with longer names
     ci.pos <- pmatch(conf.method, names(ci.list[[1]]))
-    ci.tab <- t(sapply(ci.list, function(x) x[[ci.pos]][4:5]))
+    
+    if(conf.method == "norm"){
+      ci.tab <- cbind(ci.list[[1]][ci.pos][[1]][2:3], ci.list[[2]][ci.pos][[1]][2:3])
+    } else {
+      ci.tab <- t(sapply(ci.list, function(x) x[[ci.pos]][4:5]))
+    }
 
     colnames(ci.tab) <- c("conf.low", "conf.high")
     ret <- cbind(ret, ci.tab)
