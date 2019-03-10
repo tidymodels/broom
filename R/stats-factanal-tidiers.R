@@ -12,12 +12,43 @@
 #'
 #' @examples
 #'
-#' mod <- factanal(mtcars, 3, scores = "regression")
-#'
-#' glance(mod)
-#' tidy(mod)
-#' augment(mod)
-#' augment(mod, mtcars)
+#' set.seed(123)
+#' 
+#' # data
+#' v1 <- c(1,1,1,1,1,1,1,1,1,1,3,3,3,3,3,4,5,6)
+#' v2 <- c(1,2,1,1,1,1,2,1,2,1,3,4,3,3,3,4,6,5)
+#' v3 <- c(3,3,3,3,3,1,1,1,1,1,1,1,1,1,1,5,4,6)
+#' v4 <- c(3,3,4,3,3,1,1,2,1,1,1,1,2,1,1,5,6,4)
+#' v5 <- c(1,1,1,1,1,3,3,3,3,3,1,1,1,1,1,6,4,5)
+#' v6 <- c(1,1,1,2,1,3,3,3,4,3,1,1,1,2,1,6,5,4)
+#' m1 <- cbind.data.frame(v1,v2,v3,v4,v5,v6)
+#' 
+#' # new data
+#' m2 <-
+#'   cbind.data.frame(
+#'     x1 = rev(v1),
+#'     x2 = rev(v2),
+#'     x3 = rev(v3),
+#'     x4 = rev(v4),
+#'     x5 = rev(v5),
+#'     x6 = rev(v6)
+#'   )
+#' 
+#' # factor analysis objects
+#' x1 <- stats::factanal(m1, factors = 3, scores = "Bartlett")
+#' x2 <- stats::factanal(m1, factors = 3, scores = "regression")
+#' 
+#' # tidying the object
+#' broom::tidy(x1)
+#' broom::tidy(x2)
+#' 
+#' # augmented dataframe
+#' broom::augment(x1)
+#' broom::augment(x2)
+#' 
+#' # augmented dataframe (with new data)
+#' broom::augment(x1, data = m2)
+#' broom::augment(x2, data = m2)
 #'
 #' @aliases factanal_tidiers
 #' @export
@@ -75,25 +106,35 @@ augment.factanal <- function(x, data, ...) {
   }
 
   # Place relevant values into a tidy data frame
-  tidy_df <- data.frame(.rownames = rownames(scores), data.frame(scores)) %>%
-    as_tibble()
+  if (has_rownames(scores)) {
+    tidy_df <- data.frame(.rownames = rownames(scores), data.frame(scores)) %>%
+      as_tibble() %>%
+      dplyr::mutate(.rownames = as.character(.rownames))
+  } else {
+    tidy_df <- tibble::rownames_to_column(as.data.frame(scores), var = ".rownames") %>% 
+      as_tibble() %>%
+      dplyr::mutate(.rownames = as.character(.rownames))
+  }
 
   colnames(tidy_df) <- gsub("Factor", ".fs", colnames(tidy_df))
 
   # Check if original data provided
   if (missing(data)) {
     return(tidy_df)
+  } else {
+    data <- tibble::rownames_to_column(as.data.frame(data), var = ".rownames") %>% 
+      as_tibble() %>%
+      dplyr::mutate(.rownames = as.character(.rownames))
   }
 
   # Bind to data
-  data$.rownames <- rownames(data)
   tidy_df <- tidy_df %>% 
     dplyr::right_join(data, by = ".rownames")
 
   tidy_df %>% 
     dplyr::select(
-      .rownames, everything(),
-      -matches("\\.fs[0-9]*"), matches("\\.fs[0-9]*")
+      .rownames, dplyr::everything(),
+      -dplyr::matches("\\.fs[0-9]*"), dplyr::matches("\\.fs[0-9]*")
     )
 }
 
