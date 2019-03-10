@@ -1,14 +1,13 @@
 #' @templateVar class clm
 #' @template title_desc_tidy
 #' 
-#' @param x A `clm` object returned from [ordinal::clm()] or 
-#'   [ordinal::clmm()].
+#' @param x A `clm` object returned from [ordinal::clm()].
 #' @template param_confint
 #' @template param_exponentiate
-#' @template param_quick
+#' @param conf.type Whether to use `"profile"` or `"Wald"` confidendence
+#'   intervals, passed to the `type` argument of [ordinal::confint.clm()].
+#'   Defaults to `"profile"`.
 #' @template param_unused_dots
-#' @param conf.type Which type of confidence interval to use. Passed to the
-#'   `type` argument of [ordinal::confint.clm()]. Defaults to `"profile`.
 #'   
 #' @examples
 #' 
@@ -17,7 +16,7 @@
 #' fit <- clm(rating ~ temp * contact, data = wine)
 #' 
 #' tidy(fit)
-#' tidy(fit, conf.int = TRUE)
+#' tidy(fit, conf.int = TRUE, conf.level = 0.9)
 #' tidy(fit, conf.int = TRUE, conf.type = "Wald", exponentiate = TRUE)
 #' 
 #' glance(fit)
@@ -28,25 +27,44 @@
 #' glance(fit2)
 #' 
 #' @evalRd return_tidy(regression = TRUE)
+#' 
+#' @note In `broom 0.7.0` the `coefficient_type` column was renamed to
+#'   `coef.type`, and the contents were changed as well.
+#'   
+#'   Note that `intercept` type coefficients correspond to `alpha`
+#'   parameters, `location` type coefficients correspond to `beta`
+#'   parameters, and `scale` type coefficients correspond to `zeta`
+#'   parameters.
 #'
-#' @aliases  ordinal_tidiers
+#' @aliases ordinal_tidiers
 #' @export
-#' @seealso [tidy], [ordinal::clm()], [ordinal::clmm()]
+#' @seealso [tidy], [ordinal::clm()], [ordinal::confint.clm()]
 #' @family ordinal tidiers
-tidy.clm <- function(x, conf.int = FALSE, conf.level = .95,
-                     exponentiate = FALSE,
-                     conf.type = c("profile", "Wald"), ...) {
+tidy.clm <- function(x, conf.int = FALSE, conf.level = 0.95,
+                     conf.type = c("profile", "Wald"), exponentiate = FALSE, 
+                     ...) {
   
   conf.type <- rlang::arg_match(conf.type)
+  ret <- as_broom_tibble(coef(summary(x)))
+  colnames(ret) <- c("term", "estimate", "std.error", "statistic", "p.value")
   
-  co <- coef(summary(x))
-  nn <- c("estimate", "std.error", "statistic", "p.value")
-  ret <- fix_data_frame(co, nn[seq_len(ncol(co))])
-  process_clm(
-    ret, x,
-    conf.int = conf.int, conf.level = conf.level,
-    exponentiate = exponentiate, conf.type = conf.type
-  )
+  if (conf.int) {
+    ci <- confint(x, level = conf.level, type = conf.type)
+    ci <- as_broom_tibble(ci)
+    colnames(ci) <- c("term", "conf.low", "conf.high")
+    ret <- dplyr::left_join(ret, ci)
+  }
+  
+  if (exponentiate) {
+    ret <- mutate_at(ret, vars(estimate, conf.low, conf.high), exp)
+  }
+  
+  # TODO: exponentiate without conf.int?
+  
+  types <- c("alpha", "beta", "zeta")
+  new_types <- c("intercept", "location", "scale")
+  ret$coef.type <- rep(types, vapply(x[types], length, numeric(1)))
+  as_tibble(ret)
 }
 
 #' @templateVar class clm
@@ -83,53 +101,16 @@ glance.clm <- function(x, ...) {
 #' @inherit tidy.clm params examples
 #' @template param_data
 #' @template param_newdata
-#' @template param_se_fit
 #' 
-#' @evalRd return_augment()
-#'
+#' @param type.predict Which type of prediction to compute, either `"prob"`
+#'   or `"class"`, passed to [ordinal::predict.clm()]. Defaults to `"prob"`.
 #' 
-#' @param type.predict type of prediction to compute for a CLM; passed on to
-#' [ordinal::predict.clm()]
-#' @rdname ordinal_tidiers
 #' @export
 #' @seealso [tidy], [ordinal::clm()], [stats::predict.clm()]
-#' @family nls tidiers
+#' @family ordinal tidiers
 #' 
 augment.clm <- function(x, data = model.frame(x), newdata = NULL,
                         type.predict = c("prob", "class"), ...) {
   type.predict <- rlang::arg_match(type.predict)
   augment_columns(x, data, newdata, type = type.predict)
-}
-
-process_clm <- function(ret, x, conf.int = FALSE, conf.level = .95,
-                        exponentiate = FALSE, conf.type = "profile") {
-  if (exponentiate) {
-    trans <- exp
-  } else {
-    trans <- identity
-  }
-  
-  if (conf.int) {
-    CI <- suppressMessages(
-      trans(stats::confint(x, level = conf.level, type = conf.type))
-    )
-    colnames(CI) <- c("conf.low", "conf.high")
-    CI <- as.data.frame(CI)
-    CI$term <- rownames(CI)
-    
-    ret$orig_row_order <- seq_len(nrow(ret))
-    ret <- merge(ret, unrowname(CI), by = "term", all.x = TRUE)
-    ret <- ret[order(ret$orig_row_order),]
-    ret$orig_row_order <- NULL
-  }
-  
-  ret$estimate <- trans(ret$estimate)
-  ## make sure original order hasn't changed
-  if (!identical(ret$term,c(names(x$alpha),names(x$beta),names(x$zeta)))) {
-    stop("row order changed; please contact maintainers")
-  }
-  ret$coefficient_type <- rep(c("alpha","beta","zeta"),
-                              vapply(x[c("alpha","beta","zeta")],
-                                     length, numeric(1)))
-  as_tibble(ret)
 }
