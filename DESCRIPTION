@@ -198,7 +198,7 @@ Authors@R:
       person(given = "E Auden",
              family = "Krauska",
              role = "ctb",
-             email = "krauskae@gmail.com"),
+             email = "krauskae@gmail.com",
              comment = c(ORCID = "0000-0002-1466-5850")))
 Description: Summarizes key information about statistical
     objects in tidy tibbles. This makes it easy to report results, create
