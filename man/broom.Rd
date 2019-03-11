@@ -41,6 +41,7 @@ Authors:
 
 Other contributors:
 \itemize{
+  \item Indrajeet Patil \email{patilindrajeet.science@gmail.com} (0000-0003-1995-6531) [contributor]
   \item Matthieu Gomez \email{mattg@princeton.edu} [contributor]
   \item Boris Demeshev \email{boris.demeshev@gmail.com} [contributor]
   \item Dieter Menne \email{dieter.menne@menne-biomed.de} [contributor]

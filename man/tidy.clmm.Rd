@@ -2,7 +2,6 @@
 % Please edit documentation in R/ordinal-clmm-tidiers.R
 \name{tidy.clmm}
 \alias{tidy.clmm}
-\alias{ordinal_tidiers}
 \title{Tidy a(n) clmm object}
 \usage{
 \method{tidy}{clmm}(x, conf.int = FALSE, conf.level = 0.95,
@@ -65,7 +64,6 @@ tidy(fit, conf.int = TRUE, conf.level = 0.9)
 tidy(fit, conf.int = TRUE, conf.type = "Wald", exponentiate = TRUE)
 
 glance(fit)
-augment(fit)
 
 fit2 <- clmm(rating ~ temp + (1|judge), nominal = ~ contact, data = wine)
 tidy(fit2)
