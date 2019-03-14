@@ -155,9 +155,9 @@ augment.prcomp <- function(x, data = NULL, newdata, ...) {
     pred <- as.data.frame(predict(x))
     names(pred) <- paste0(".fitted", names(pred))
     if (!missing(data) && !is.null(data)) {
-      cbind(.rownames = rownames(data), data, pred)
+      cbind(.rownames = rownames(as.data.frame(data)), data, pred)
     } else {
-      data.frame(.rownames = rownames(x$x), pred)
+      data.frame(.rownames = rownames(as.data.frame(x$x)), pred)
     }
   }
   as_tibble(ret)
