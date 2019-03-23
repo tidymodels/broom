@@ -57,7 +57,7 @@
 #' @export 
 #' @aliases ergm_tidiers
 #' @seealso [tidy()], [ergm::ergm()], [ergm::control.ergm()], 
-#'   [ergm::summary.ergm()]
+#'   [ergm::summary()]
 #' @family ergm tidiers
 tidy.ergm <- function(x, conf.int = FALSE, conf.level = .95,
                       exponentiate = FALSE, quick = FALSE, ...) {
@@ -66,7 +66,7 @@ tidy.ergm <- function(x, conf.int = FALSE, conf.level = .95,
     ret <- tibble(term = names(co), estimate = unname(co))
     return(process_ergm(ret, conf.int = FALSE, exponentiate = exponentiate))
   }
-  co <- ergm::summary.ergm(x, ...)$coefs
+  co <- ergm:::summary.ergm(x, ...)$coefs
 
   nn <- c("estimate", "std.error", "mcmc.error", "p.value")
   ret <- fix_data_frame(co, nn[1:ncol(co)])
@@ -112,11 +112,11 @@ tidy.ergm <- function(x, conf.int = FALSE, conf.level = .95,
 #' @family ergm tidiers
 glance.ergm <- function(x, deviance = FALSE, mcmc = FALSE, ...) {
   # will show appropriate warnings about standard errors, pseudolikelihood etc.
-  s <- ergm::summary.ergm(x, ...)
+  s <- ergm:::summary.ergm(x, ...)
   # dyadic (in)dependence and number of MCMLE iterations
   ret <- tibble(independence = s$independence, iterations = x$iterations)
   # log-likelihood
-  ret$logLik <- tryCatch(as.numeric(ergm::logLik.ergm(x)), error = function(e) NULL)
+  ret$logLik <- tryCatch(as.numeric(ergm:::logLik.ergm(x)), error = function(e) NULL)
   # null and residual deviance
   if (deviance & !is.null(ret$logLik)) {
     dyads <- ergm::get.miss.dyads(x$constrained, x$constrained.obs)

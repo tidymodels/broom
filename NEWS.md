@@ -1,3 +1,8 @@
+# broom 0.5.2
+
+- Changes to accomodate ergm 3.10 release
+- Fix failing CRAN checks
+
 # broom 0.5.1
 
 - `tidy()`, `glance()` and `augment()` are now re-exported from the [generics](https://github.com/r-lib/generics) package.
