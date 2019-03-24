@@ -2,9 +2,6 @@
 
 language: r
 r:
-  - 3.1
-  - 3.2
-  - 3.3
   - oldrel
   - release
   - devel
@@ -17,7 +14,8 @@ warnings_are_errors: false
 env:
   global:
     - R_MAX_NUM_DLLS=999
-    - _R_CHECK_FORCE_SUGGESTS_=FALSE
+    - _R_CHECK_FORCE_SUGGESTS_=true
+    - _R_CHECK_CRAN_INCOMING_=true
 
 r_build_args: "--no-build-vignettes"
 r_check_args: "--no-build-vignettes --as-cran"
@@ -51,5 +49,16 @@ r_packages:
   - dplyr
   - readr
 
+r_github_packages:
+  - jimhester/lintr
+  - r-lib/covr
+
+notifications:
+  email:
+  on_success: change
+  on_failure: change
+
 after_success:
   - Rscript -e 'covr::codecov()'
+  - R CMD INSTALL $PKG_TARBALL
+  - Rscript -e 'lintr::lint_package()'

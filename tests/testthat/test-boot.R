@@ -26,6 +26,9 @@ test_that("tidy.boot for glms", {
   
   bootres <- boot::boot(clotting, boot_fun, R = 100)
   td <- tidy(bootres, conf.int = TRUE)
+  
+  tdnorm <- tidy(bootres, conf.int = TRUE, conf.method = "norm")
+  expect_false(any(is.na(tdnorm[[4]])))
 
   bootresw <- boot::boot(clotting, boot_fun, R = 100, weights = rep(1 / 9, 9))
   tdw <- tidy(bootresw, conf.int = TRUE)

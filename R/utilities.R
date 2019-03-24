@@ -12,6 +12,16 @@ rename2 <- function(.data, ...) {
   rename(.data, !!!present)
 }
 
+exponentiate <- function(data) {
+  
+  data <- mutate_at(data, vars(estimate), exp)
+  
+  if ("conf.low" %in% colnames(data))
+    data <- mutate_at(data, vars(conf.low, conf.high), exp)
+  
+  data
+}
+
 #' Coerce a data frame to a tibble, preserving rownames
 #' 
 #' A thin wrapper around [tibble::as_tibble()], except checks for
@@ -93,10 +103,6 @@ unrowname <- function(x) {
   rownames(x) <- NULL
   x
 }
-
-
-# remove NULL items in a vector or list
-compact <- function(x) Filter(Negate(is.null), x)
 
 
 #' insert a row of NAs into a data frame wherever another data frame has NAs
@@ -340,6 +346,45 @@ augment_newdata <- function(x, data, newdata, .se_fit, ...) {
   df
 }
 
+# this exists to avoid the single predictor gotcha
+# this version adds a terms column
+broom_confint <- function(x, ...) {
+  
+  # warn on arguments silently being ignored
+  ellipsis::check_dots_used()
+  ci <- confint(x, ...)
+  
+  # confint called on models with a single predictor
+  # often returns a named vector rather than a matrix :(
+  
+  if (is.null(dim(ci))) {
+    ci <- matrix(ci, nrow = 1)
+  }
+  
+  ci <- as_tibble(ci)
+  names(ci) <- c("term", "conf.low", "conf.high")
+  ci
+}
+
+# this version adds a terms column
+broom_confint_terms <- function(x, ...) {
+  
+  # warn on arguments silently being ignored
+  ellipsis::check_dots_used()
+  ci <- confint(x, ...)
+  
+  # confint called on models with a single predictor
+  # often returns a named vector rather than a matrix :(
+  
+  if (is.null(dim(ci))) {
+    ci <- matrix(ci, nrow = 1)
+    rownames(ci) <- names(coef(x))[1]
+  }
+  
+  ci <- as_tibble(ci, rownames = "term")
+  names(ci) <- c("term", "conf.low", "conf.high")
+  ci
+}
 
 #' Calculate confidence interval as a tidy data frame
 #'
@@ -352,7 +397,7 @@ augment_newdata <- function(x, data, newdata, .se_fit, ...) {
 #' @param x a model object for which [confint()] can be calculated
 #' @param conf.level confidence level
 #' @param func A function to compute a confidence interval for `x`. Calling
-#'   `func(x, level = conf.level, ...)` must return an object coercable to a
+#'   `func(x, level = conf.level, ...)` must return an object coercibleto a
 #'   tibble. This dataframe like object should have to columns corresponding
 #'   the lower and upper bounds on the confidence interval.
 #' @param ... extra arguments passed on to `confint`

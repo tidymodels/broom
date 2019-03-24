@@ -66,6 +66,23 @@ We are in the process of defining behaviors for models fit with various
 \link{na.action} arguments, but make no guarantees about behavior when data is
 missing at this time.
 }
+\examples{
+
+library(cluster)
+library(dplyr)
+
+x <- iris \%>\% 
+  select(-Species)
+  
+fit <- pam(x, k = 3)
+
+tidy(fit)
+glance(fit)
+augment(fit, x)
+
+
+
+}
 \seealso{
 \code{\link[=augment]{augment()}}, \code{\link[stats:kmeans]{stats::kmeans()}}
 

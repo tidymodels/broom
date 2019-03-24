@@ -12,7 +12,7 @@ confint_tidy(x, conf.level = 0.95, func = stats::confint, ...)
 \item{conf.level}{confidence level}
 
 \item{func}{A function to compute a confidence interval for \code{x}. Calling
-\code{func(x, level = conf.level, ...)} must return an object coercable to a
+\code{func(x, level = conf.level, ...)} must return an object coercibleto a
 tibble. This dataframe like object should have to columns corresponding
 the lower and upper bounds on the confidence interval.}
 

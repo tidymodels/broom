@@ -41,6 +41,7 @@ Authors:
 
 Other contributors:
 \itemize{
+  \item Indrajeet Patil \email{patilindrajeet.science@gmail.com} (0000-0003-1995-6531) [contributor]
   \item Matthieu Gomez \email{mattg@princeton.edu} [contributor]
   \item Boris Demeshev \email{boris.demeshev@gmail.com} [contributor]
   \item Dieter Menne \email{dieter.menne@menne-biomed.de} [contributor]
@@ -83,6 +84,11 @@ Other contributors:
   \item Vincent Arel-Bundock \email{vincent.arel-bundock@umontreal.ca} (0000-0003-2042-7063) [contributor]
   \item Hideaki Hayashi [contributor]
   \item Luis Tobalina [contributor]
+  \item Annie Wang \email{anniewang.uc@gmail.com} [contributor]
+  \item Wei Yang Tham \email{weiyang.tham@gmail.com} [contributor]
+  \item Clara Wang \email{clara.wang.94@gmail.com} [contributor]
+  \item Abby Smith \email{als1@u.northwestern.edu} (0000-0002-3207-0375) [contributor]
+  \item E Auden Krauska \email{krauskae@gmail.com} (0000-0002-1466-5850) [contributor]
 }
 
 }

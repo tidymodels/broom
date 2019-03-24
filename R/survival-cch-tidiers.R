@@ -70,7 +70,7 @@ tidy.cch <- function(x, conf.level = .95, ...) {
 #' @family cch tidiers
 #' @family survival tidiers
 glance.cch <- function(x, ...) {
-  ret <- compact(unclass(x)[c(
+  ret <- purrr::compact(unclass(x)[c(
     "score", "rscore", "wald.test", "iter",
     "n", "nevent"
   )])
