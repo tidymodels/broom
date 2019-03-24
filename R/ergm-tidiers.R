@@ -115,7 +115,7 @@ glance.ergm <- function(x, deviance = FALSE, mcmc = FALSE, ...) {
     dyads <- network::network.edgecount(dyads)
     dyads <- network::network.dyadcount(x$network, FALSE) - dyads
 
-    ret$null.deviance <- ergm::logLikNull(x)
+    ret$null.deviance <- ergm:::logLikNull(x)
     ret$null.deviance <- ifelse(is.na(ret$null.deviance), 0, -2 * ret$null.deviance)
     ret$df.null <- dyads
 
