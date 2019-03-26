@@ -110,16 +110,13 @@ glance.ergm <- function(x, deviance = FALSE, mcmc = FALSE, ...) {
   ret$logLik <- tryCatch(as.numeric(ergm:::logLik.ergm(x)), error = function(e) NULL)
   # null and residual deviance
   if (deviance & !is.null(ret$logLik)) {
-    # line below should be equivalent to calling this (deprecated) function:
-    #   ergm::get.miss.dyads(x$constrained, x$constrained.obs)
-    dyads <- statnet.common::NVL3(
-      as.rlebdm(x$constrained, x$constrained.obs, which = "missing"),
-      as.network(as.edgelist(x), matrix.type = "edgelist", directed = TRUE),
-      network.initialize(2)
-    ) # returns a network indicating which dyads are missing
-    dyads <- statnet.common::NVL(dyads, network::network.initialize(1))
-    dyads <- network::network.edgecount(dyads)
-    dyads <- network::network.dyadcount(x$network, FALSE) - dyads
+    # thanks to Pavel N. Krivitsky (@krivit)
+    # https://github.com/tidymodels/broom/issues/567
+    if (packageVersion("ergm") < "3.10") {
+      dyads <- sum(as.rlebdm(x$constrained, x$constrained.obs, which = "informative"))
+    } else {
+      dyads <- stats::nobs(x)
+    }
 
     ret$null.deviance <- ergm:::logLikNull(x)
     ret$null.deviance <- ifelse(is.na(ret$null.deviance), 0, -2 * ret$null.deviance)
@@ -128,7 +125,6 @@ glance.ergm <- function(x, deviance = FALSE, mcmc = FALSE, ...) {
     ret$residual.deviance <- -2 * ret$logLik
     ret$df.residual <- dyads - length(x$coef)
   }
-
   ret$AIC <- tryCatch(stats::AIC(x), error = function(e) NULL)
   ret$BIC <- tryCatch(stats::BIC(x), error = function(e) NULL)
 
