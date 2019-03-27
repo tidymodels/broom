@@ -6,10 +6,10 @@
 #'   tidied. 
 #'   
 #'   - `"u"`, `"samples"`, or `"x"`: returns information about the map from
-#'     the original space into principle components space.
+#'     the original space into principal components space.
 #'   
 #'   - `"v"`, `"rotation"`, or `"variables"`: returns information about the
-#'     map from principle components space back into the original space.
+#'     map from principal components space back into the original space.
 #'   
 #'   - `"d"` or `"pcs"`: returns information about the eigenvalues.
 #'        
@@ -23,12 +23,12 @@
 #'   
 #'   \item{`row`}{ID of the original observation (i.e. rowname from original
 #'     data).}
-#'   \item{`PC`}{Integer indicating a principle component.}
-#'   \item{`value`}{The score of the observation for that particular principle
+#'   \item{`PC`}{Integer indicating a principal component.}
+#'   \item{`value`}{The score of the observation for that particular principal
 #'     component. That is, the location of the observation in PCA space.}
 #'     
 #'   If `matrix` is `"v"`, `"rotation"`, or `"variables"`, each row in the
-#'   tidied ouput corresponds to information about the principle components
+#'   tidied ouput corresponds to information about the principal components
 #'   in the original space. The columns are:
 #'   
 #'   \item{`row`}{The variable labels (colnames) of the data set on
