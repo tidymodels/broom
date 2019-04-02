@@ -68,6 +68,8 @@ TODO: sort out what happens to `glance.aov()`
 
 ## New tidiers, features and bugfixes
 
+- Added support for `tidy.lavaan()` to take `quick = TRUE`. (#628)
+
 - `ordinal` tidier rewrite
 
 - Added tidiers for `pam` objects from the `cluster` package. (#637)
