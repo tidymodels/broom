@@ -68,6 +68,8 @@ TODO: sort out what happens to `glance.aov()`
 
 ## New tidiers, features and bugfixes
 
+- Make fitted values returned by `augment.polr()` match `predict.polr` output. (#619)
+
 - `ordinal` tidier rewrite
 
 - Added tidiers for `pam` objects from the `cluster` package. (#637)
