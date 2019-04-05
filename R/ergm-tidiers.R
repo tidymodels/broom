@@ -94,7 +94,7 @@ tidy.ergm <- function(x, conf.int = FALSE, conf.level = 0.95,
 #'
 #' @return `glance.ergm` returns a one-row data.frame with the columns
 #'   \item{independence}{Whether the model assumed dyadic independence}
-#'   \item{iterations}{The number of iterations performed before convergence}
+#'   \item{iterations}{The number of MCMLE iterations performed before convergence}
 #'   \item{logLik}{If applicable, the log-likelihood associated with the model}
 #'   \item{AIC}{The Akaike Information Criterion}
 #'   \item{BIC}{The Bayesian Information Criterion}
@@ -110,39 +110,43 @@ tidy.ergm <- function(x, conf.int = FALSE, conf.level = 0.95,
 #' @seealso [glance()], [ergm::ergm()], [ergm::summary.ergm()]
 #' @family ergm tidiers
 glance.ergm <- function(x, deviance = FALSE, mcmc = FALSE, ...) {
-  # will show appropriate warnings about standard errors, pseudolikelihood etc.
-  s <- summary(x, ...)
-  # dyadic (in)dependence and number of MCMLE iterations
-  ret <- tibble(independence = s$independence, iterations = x$iterations)
-  # log-likelihood
-  ret$logLik <- tryCatch(as.numeric(ergm:::logLik.ergm(x)), error = function(e) NULL)
-  # null and residual deviance
+  
+  s <- summary(x, ...)  # produces lots of messages
+  
+  ret <- tibble(
+    independence = s$independence,
+    iterations = x$iterations,
+    logLik = as.numeric(logLik(x))
+  )
+  
   if (deviance & !is.null(ret$logLik)) {
-    # thanks to Pavel N. Krivitsky (@krivit)
-    # https://github.com/tidymodels/broom/issues/567
+    
+    # see #567 for details on the following
+    
     if (utils::packageVersion("ergm") < "3.10") {
-      dyads <- sum(ergm::as.rlebdm(x$constrained, x$constrained.obs, which = "informative"))
+      dyads <- sum(
+        ergm::as.rlebdm(x$constrained, x$constrained.obs, which = "informative")
+      )
     } else {
       dyads <- stats::nobs(x)
     }
-
-    ret$null.deviance <- ergm:::logLikNull(x)
-    ret$null.deviance <- ifelse(is.na(ret$null.deviance), 0, -2 * ret$null.deviance)
+    
+    lln <- ergm::logLikNull(x)
+    ret$null.deviance <- if (is.na(lln)) 0 else -2 * lln
     ret$df.null <- dyads
 
     ret$residual.deviance <- -2 * ret$logLik
     ret$df.residual <- dyads - length(x$coef)
   }
-  ret$AIC <- tryCatch(stats::AIC(x), error = function(e) NULL)
-  ret$BIC <- tryCatch(stats::BIC(x), error = function(e) NULL)
+  
+  ret$AIC <- stats::AIC(x)
+  ret$BIC <- stats::BIC(x)
 
   if (mcmc) {
-    ret <- cbind(ret, data.frame(
-      MCMC.interval = x$control$MCMC.interval,
-      MCMC.burnin = x$control$MCMC.burnin,
-      MCMC.samplesize = x$control$MCMC.samplesize
-    ))
+    ret$MCMC.interval <- x$control$MCMC.interval
+    ret$MCMC.burnin <- x$control$MCMC.burnin
+    ret$MCMC.samplesize <- x$control$MCMC.samplesize
   }
   
-  as_tibble(ret)
+  ret
 }
