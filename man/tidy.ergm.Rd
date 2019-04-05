@@ -6,7 +6,7 @@
 \title{Tidy a(n) ergm object}
 \usage{
 \method{tidy}{ergm}(x, conf.int = FALSE, conf.level = 0.95,
-  exponentiate = FALSE, quick = FALSE, ...)
+  exponentiate = FALSE, ...)
 }
 \arguments{
 \item{x}{An \code{ergm} object returned from a call to \code{\link[ergm:ergm]{ergm::ergm()}}.}
@@ -23,11 +23,7 @@ the coefficient estimates. This is typical for logistic and multinomial
 regressions, but a bad idea if there is no log or logit link. Defaults
 to \code{FALSE}.}
 
-\item{quick}{Logical indiciating if the only the \code{term} and \code{estimate}
-columns should be returned. Often useful to avoid time consuming
-covariance and standard error calculations. Defaults to \code{FALSE}.}
-
-\item{...}{Additional arguments to pass to \code{\link[ergm:summary.ergm]{ergm::summary.ergm()}}.
+\item{...}{Additional arguments to pass to \code{\link[ergm:summary]{ergm::summary()}}.
 \strong{Cautionary note}: Mispecified arguments may be silently ignored.}
 }
 \value{
@@ -38,9 +34,6 @@ exponential random graph model, with columns:
 \item{std.error}{The standard error}
 \item{mcmc.error}{The MCMC error}
 \item{p.value}{The two-sided p-value}
-
-If \code{conf.int = TRUE}, it also includes columns for \code{conf.low} and
-\code{conf.high}.
 }
 \description{
 Tidy summarizes information about the components of a model.
@@ -56,29 +49,26 @@ the \pkg{ergm} class, such as those produced from weighted networks by the
 }
 \examples{
 
-\dontrun{
-if (require("ergm")) {
-    # Using the same example as the ergm package
-    # Load the Florentine marriage network data
-    data(florentine)
+library(ergm)
+# Using the same example as the ergm package
+# Load the Florentine marriage network data
+data(florentine)
 
-    # Fit a model where the propensity to form ties between
-    # families depends on the absolute difference in wealth
-    gest <- ergm(flomarriage ~ edges + absdiff("wealth"))
+# Fit a model where the propensity to form ties between
+# families depends on the absolute difference in wealth
+gest <- ergm(flomarriage ~ edges + absdiff("wealth"))
 
-    # Show terms, coefficient estimates and errors
-    tidy(gest)
+# Show terms, coefficient estimates and errors
+tidy(gest)
 
-    # Show coefficients as odds ratios with a 99\% CI
-    tidy(gest, exponentiate = TRUE, conf.int = TRUE, conf.level = 0.99)
+# Show coefficients as odds ratios with a 99\% CI
+tidy(gest, exponentiate = TRUE, conf.int = TRUE, conf.level = 0.99)
 
-    # Take a look at likelihood measures and other
-    # control parameters used during MCMC estimation
-    glance(gest)
-    glance(gest, deviance = TRUE)
-    glance(gest, mcmc = TRUE)
-}
-}
+# Take a look at likelihood measures and other
+# control parameters used during MCMC estimation
+glance(gest)
+glance(gest, deviance = TRUE)
+glance(gest, mcmc = TRUE)
 
 }
 \references{
@@ -89,7 +79,7 @@ Models for Networks. \emph{Journal of Statistical Software}, 24(3).
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[ergm:ergm]{ergm::ergm()}}, \code{\link[ergm:control.ergm]{ergm::control.ergm()}},
-\code{\link[ergm:summary.ergm]{ergm::summary.ergm()}}
+\code{\link[ergm:summary]{ergm::summary()}}
 
 Other ergm tidiers: \code{\link{glance.ergm}}
 }

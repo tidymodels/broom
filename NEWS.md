@@ -1,5 +1,6 @@
 # broom 0.5.2
 
+- `tidy.ergm()` no longer has a `quick` argument
 - Changes to accomodate ergm 3.10 release
 - Fix failing CRAN checks
 

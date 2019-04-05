@@ -13,13 +13,9 @@ test_that("ergm tidier arguments", {
 })
 
 test_that("tidy.ergm", {
-  tdq <- tidy(gest, quick = TRUE)
   tde <- tidy(gest, conf.int = TRUE, exponentiate = TRUE)
   
-  check_tidy_output(tdq)
   check_tidy_output(tde)
-  
-  check_dims(tdq, 2, 2)
   check_dims(tde, 2, 7)
   
   # tidy.ergm warns when exponentiating w/o link
@@ -34,5 +30,5 @@ test_that("glance.ergm", {
   gl <- glance(gest, deviance = TRUE, mcmc = TRUE)
   
   check_glance_outputs(gl)
-  check_dims(gl, expected_col = 12)
+  check_dims(gl, expected_cols = 12)
 })

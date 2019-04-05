@@ -11,7 +11,9 @@ test_that("tidy.htest same as glance.htest", {
 })
 
 test_that("tidy.htest/oneway.test", {
-  ot <- oneway.test(extra ~ group, data = sleep)
+  
+  mtcars$cyl <- as.factor(mtcars$cyl)
+  ot <- oneway.test(mpg ~ cyl, mtcars)
   expect_message(td <- tidy(ot))
   gl <- glance(ot)
   
