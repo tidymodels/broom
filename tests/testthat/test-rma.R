@@ -131,7 +131,7 @@ res.MV <-
 
 test_that(("returns tibble for MV"), {
   check_tidy_output(tidy(res.MV))
-  check_augment_outputs(glance(res.MV))
+  # check_augment_outputs(glance(res.MV))
   check_glance_output(glance(res.MV))
 })
 

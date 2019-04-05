@@ -21,6 +21,7 @@
 #'   tidy()
 #'
 #' @rdname tidiers
+#' 
 tidy.rma <- function(x, conf.int = TRUE, exponentiate = FALSE,
                      include_studies = TRUE, measure = "GEN", ...) {
   
