@@ -12,6 +12,11 @@ Authors@R:
              role = c("aut", "cre"),
              email = "alexpghayes@gmail.com",
              comment = c(ORCID = "0000-0002-4985-5160")),
+      person(given = "Indrajeet",
+             family = "Patil",
+             role = "ctb",
+             email = "patilindrajeet.science@gmail.com",
+             comment = c(ORCID = "0000-0003-1995-6531")),
       person(given = "Matthieu",
              family = "Gomez",
              role = "ctb",
@@ -173,10 +178,28 @@ Authors@R:
       person(given = "Luis",
              family = "Tobalina",
              role = "ctb"),
-      person(given = "Wei Yang", 
-             family = "Tham", 
-             role = "ctb", 
-             email = "weiyang.tham@gmail.com"))
+      person(given = "Annie",
+             family = "Wang",
+             role = "ctb",
+             email = "anniewang.uc@gmail.com"),
+      person(given = "Wei Yang",
+             family = "Tham",
+             role = "ctb",
+             email = "weiyang.tham@gmail.com"),
+      person(given = "Clara",
+             family = "Wang",
+             role = "ctb",
+             email = "clara.wang.94@gmail.com"),
+      person(given = "Abby",
+             family = "Smith",
+             role = "ctb",
+             email = "als1@u.northwestern.edu",
+             comment = c(ORCID = "0000-0002-3207-0375")),
+      person(given = "E Auden",
+             family = "Krauska",
+             role = "ctb",
+             email = "krauskae@gmail.com",
+             comment = c(ORCID = "0000-0002-1466-5850")))
 Description: Summarizes key information about statistical
     objects in tidy tibbles. This makes it easy to report results, create
     plots and consistently work with large numbers of models at once.
@@ -195,6 +218,7 @@ Depends:
 Imports:
     backports,
     dplyr,
+    ellipsis,
     generics (>= 0.0.2),
     glue,
     methods,
@@ -217,6 +241,7 @@ Suggests:
     btergm,
     car,
     caret,
+    cluster,
     coda,
     covr,
     e1071,
@@ -293,7 +318,6 @@ Collate:
     'aaa-documentation-helper.R'
     'aer-tidiers.R'
     'auc-tidiers.R'
-    'base-summary-tidiers.R'
     'base-tidiers.R'
     'bbmle-tidiers.R'
     'betareg-tidiers.R'
@@ -344,7 +368,9 @@ Collate:
     'nnet-tidiers.R'
     'nobs.R'
     'orcutt-tidiers.R'
-    'ordinal-tidiers.R'
+    'ordinal-clm-tidiers.R'
+    'ordinal-clmm-tidiers.R'
+    'pam-tidiers.R'
     'plm-tidiers.R'
     'polca-tidiers.R'
     'psych-tidiers.R'

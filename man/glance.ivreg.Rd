@@ -9,6 +9,9 @@
 \arguments{
 \item{x}{An \code{ivreg} object created by a call to \code{\link[AER:ivreg]{AER::ivreg()}}.}
 
+\item{diagnostics}{Logical indicating whether or not to return the
+Wu-Hausman and Sargan diagnostic information.}
+
 \item{...}{Additional arguments. Not used. Needed to match generic
 signature only. \strong{Cautionary note:} Misspelled arguments will be
 absorbed in \code{...}, where they will be ignored. If the misspelled

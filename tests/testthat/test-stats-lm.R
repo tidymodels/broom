@@ -110,7 +110,7 @@ test_that("augment and glance do not support multiple responses", {
   
   expect_error(
     augment(mfit),
-    regexp = "Augment does not support linear models with multiple responses."
+    regexp = "No augment method for objects of class mlm"
   )
   
   expect_error(
