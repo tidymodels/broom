@@ -22,7 +22,7 @@ burn-in and sample size used to estimate the model. Defaults to \code{FALSE}.}
 \value{
 \code{glance.ergm} returns a one-row data.frame with the columns
 \item{independence}{Whether the model assumed dyadic independence}
-\item{iterations}{The number of iterations performed before convergence}
+\item{iterations}{The number of MCMLE iterations performed before convergence}
 \item{logLik}{If applicable, the log-likelihood associated with the model}
 \item{AIC}{The Akaike Information Criterion}
 \item{BIC}{The Bayesian Information Criterion}
