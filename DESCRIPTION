@@ -378,6 +378,7 @@ Collate:
     'quantreg-nlrq-tidiers.R'
     'quantreg-rq-tidiers.R'
     'quantreg-rqs-tidiers.R'
+    'rma-tidiers.R'
     'robust-glmrob-tidiers.R'
     'robust-lmrob-tidiers.R'
     'sp-tidiers.R'
