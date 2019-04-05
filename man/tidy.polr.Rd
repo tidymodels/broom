@@ -32,6 +32,10 @@ proceed using \code{conf.level = 0.95}. Additionally, if you pass
 \code{newdata = my_tibble} to an \code{\link[=augment]{augment()}} method that does not
 accept a \code{newdata} argument, it will use the default value for
 the \code{data} argument.}
+
+\item{conf.type}{Whether to use \code{"profile"} or \code{"Wald"} confidendence
+intervals, passed to the \code{type} argument of \code{\link[ordinal:confint.clm]{ordinal::confint.clm()}}.
+Defaults to \code{"profile"}.}
 }
 \description{
 Tidy summarizes information about the components of a model.

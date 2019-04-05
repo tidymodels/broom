@@ -34,7 +34,7 @@
 #'   parameters, `location` type coefficients correspond to `beta`
 #'   parameters, and `scale` type coefficients correspond to `zeta`
 #'   parameters.
-#'
+#' 
 #' @export
 #' @seealso [tidy], [ordinal::clmm()], [ordinal::confint.clmm()]
 #' @family ordinal tidiers

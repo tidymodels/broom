@@ -88,6 +88,7 @@ Other contributors:
   \item Wei Yang Tham \email{weiyang.tham@gmail.com} [contributor]
   \item Clara Wang \email{clara.wang.94@gmail.com} [contributor]
   \item Abby Smith \email{als1@u.northwestern.edu} (0000-0002-3207-0375) [contributor]
+  \item E Auden Krauska \email{krauskae@gmail.com} (0000-0002-1466-5850) [contributor]
 }
 
 }
