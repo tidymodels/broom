@@ -1,9 +1,23 @@
 context("rma")
 
-# todo: remove when we make this a proper fork
+skip_if_not_installed("modeltests")
+library(modeltests)
 
 skip_if_not_installed("metafor")
 library(metafor)
+
+skip_if_not_installed("lme4")
+library(lme4)
+
+# check arguments ---------------------------------------------------------
+
+test_that("metafor::rma tidier arguments", {
+  check_arguments(tidy.rma)
+  check_arguments(glance.rma)
+  check_arguments(augment.rma)
+})
+
+# RR test -----------------------------------------------------------------
 
 # from the metafor homepage
 dat <-
@@ -21,8 +35,8 @@ res.RE <- rma(yi, vi, data = dat, method = "EB")
 
 
 test_that(("returns tibble for RR"), {
-  check_tidy_output(tidy(res.RE), "data.frame")
-  check_augment_outputs(glance(res.RE), "data.frame")
+  check_tidy_output(tidy(res.RE))
+  # check_augment_outputs(glance(res.RE)
   check_glance_output(glance(res.RE))
 })
 
@@ -39,7 +53,7 @@ res.ME <-
 
 test_that(("returns tibble for ME"), {
   check_tidy_output(tidy(res.ME))
-  check_augment_outputs(glance(res.ME))
+  # check_augment_outputs(glance(res.ME))
   check_glance_output(glance(res.ME))
 })
 
@@ -56,7 +70,7 @@ res.FE <-
 
 test_that(("returns tibble for FE"), {
   check_tidy_output(tidy(res.FE))
-  check_augment_outputs(glance(res.FE))
+  # check_augment_outputs(glance(res.FE))
   check_glance_output(glance(res.FE))
 })
 
@@ -75,7 +89,7 @@ res.WFE <- rma(yi, vi, mods = ~random + intensity, data = dat2, method = "FE")
 
 test_that(("returns tibble for weighted FE"), {
   check_tidy_output(tidy(res.WFE))
-  check_augment_outputs(glance(res.WFE))
+  # check_augment_outputs(glance(res.WFE))
   check_glance_output(glance(res.WFE))
 })
 
