@@ -9,50 +9,46 @@
 #' @template param_confint
 #' @template param_exponentiate
 #' @template param_quick
-#' @param ... Additional arguments to pass to [ergm::summary.ergm()].
+#' @param ... Additional arguments to pass to [ergm::summary()].
 #'   **Cautionary note**: Mispecified arguments may be silently ignored.
 #' 
-#' @return A [tibble::tibble] with one row for each coefficient in the
-#'   exponential random graph model, with columns:
-#'   \item{term}{The term in the model being estimated and tested}
-#'   \item{estimate}{The estimated coefficient}
-#'   \item{std.error}{The standard error}
-#'   \item{mcmc.error}{The MCMC error}
-#'   \item{p.value}{The two-sided p-value}
-#'
-#' If `conf.int = TRUE`, it also includes columns for `conf.low` and
-#' `conf.high`.
+#' @evalRd return_tidy(
+#'   "term", 
+#'   "estimate", 
+#'   "std.error", 
+#'   "mcmc.error", 
+#'   "p.value",
+#'   "conf.low",
+#'   "conf.high"
+#' )
 #'
 #' @examples
+#' 
+#' library(ergm)
+#' # Using the same example as the ergm package
+#' # Load the Florentine marriage network data
+#' data(florentine)
 #'
-#' \dontrun{
-#' if (require("ergm")) {
-#'     # Using the same example as the ergm package
-#'     # Load the Florentine marriage network data
-#'     data(florentine)
+#' # Fit a model where the propensity to form ties between
+#' # families depends on the absolute difference in wealth
+#' gest <- ergm(flomarriage ~ edges + absdiff("wealth"))
 #'
-#'     # Fit a model where the propensity to form ties between
-#'     # families depends on the absolute difference in wealth
-#'     gest <- ergm(flomarriage ~ edges + absdiff("wealth"))
+#' # Show terms, coefficient estimates and errors
+#' tidy(gest)
 #'
-#'     # Show terms, coefficient estimates and errors
-#'     tidy(gest)
+#' # Show coefficients as odds ratios with a 99% CI
+#' tidy(gest, exponentiate = TRUE, conf.int = TRUE, conf.level = 0.99)
 #'
-#'     # Show coefficients as odds ratios with a 99% CI
-#'     tidy(gest, exponentiate = TRUE, conf.int = TRUE, conf.level = 0.99)
-#'
-#'     # Take a look at likelihood measures and other
-#'     # control parameters used during MCMC estimation
-#'     glance(gest)
-#'     glance(gest, deviance = TRUE)
-#'     glance(gest, mcmc = TRUE)
-#' }
-#' }
+#' # Take a look at likelihood measures and other
+#' # control parameters used during MCMC estimation
+#' glance(gest)
+#' glance(gest, deviance = TRUE)
+#' glance(gest, mcmc = TRUE)
 #' 
 #' @references Hunter DR, Handcock MS, Butts CT, Goodreau SM, Morris M (2008b).
-#' \pkg{ergm}: A Package to Fit, Simulate and Diagnose Exponential-Family
-#' Models for Networks. *Journal of Statistical Software*, 24(3).
-#' <http://www.jstatsoft.org/v24/i03/>. 
+#'   \pkg{ergm}: A Package to Fit, Simulate and Diagnose Exponential-Family
+#'   Models for Networks. *Journal of Statistical Software*, 24(3).
+#'   <http://www.jstatsoft.org/v24/i03/>. 
 #'
 #' @export 
 #' @aliases ergm_tidiers
@@ -87,25 +83,20 @@ tidy.ergm <- function(x, conf.int = FALSE, conf.level = .95,
 #' @param mcmc Logical indicating whether or not to report MCMC interval, 
 #'   burn-in and sample size used to estimate the model. Defaults to `FALSE`.
 #'
-#' @return `glance.ergm` returns a one-row data.frame with the columns
-#'   \item{independence}{Whether the model assumed dyadic independence}
-#'   \item{iterations}{The number of iterations performed before convergence}
-#'   \item{logLik}{If applicable, the log-likelihood associated with the model}
-#'   \item{AIC}{The Akaike Information Criterion}
-#'   \item{BIC}{The Bayesian Information Criterion}
-#'
-#' If `deviance = TRUE`, and if the model supports it, the
-#' data frame will also contain the columns
-#'   \item{null.deviance}{The null deviance of the model}
-#'   \item{df.null}{The degrees of freedom of the null deviance}
-#'   \item{residual.deviance}{The residual deviance of the model}
-#'   \item{df.residual}{The degrees of freedom of the residual deviance}
-#'
-#' Last, if `mcmc = TRUE`, the data frame will also contain
-#' the columns
-#'   \item{MCMC.interval}{The interval used during MCMC estimation}
-#'   \item{MCMC.burnin}{The burn-in period of the MCMC estimation}
-#'   \item{MCMC.samplesize}{The sample size used during MCMC estimation}
+#' @evalRd return_glance(
+#'   independence = "Whether the model assumed dyadic independence",
+#'   "iterations",
+#'   "logLik",
+#'   "AIC",
+#'   "BIC",
+#'   "null.deviance",
+#'   "df.null",
+#'   "residual.deviance",
+#'   "df.residual",
+#'   "MCMC.interval",
+#'   "MCMC.burnin",
+#'   "MCMC.samplesize"
+#' )
 #'
 #' @export
 #' @seealso [glance()], [ergm::ergm()], [ergm::summary.ergm()]
@@ -119,19 +110,21 @@ glance.ergm <- function(x, deviance = FALSE, mcmc = FALSE, ...) {
   ret$logLik <- tryCatch(as.numeric(ergm:::logLik.ergm(x)), error = function(e) NULL)
   # null and residual deviance
   if (deviance & !is.null(ret$logLik)) {
-    dyads <- ergm::get.miss.dyads(x$constrained, x$constrained.obs)
-    dyads <- statnet.common::NVL(dyads, network::network.initialize(1))
-    dyads <- network::network.edgecount(dyads)
-    dyads <- network::network.dyadcount(x$network, FALSE) - dyads
+    # thanks to Pavel N. Krivitsky (@krivit)
+    # https://github.com/tidymodels/broom/issues/567
+    if (packageVersion("ergm") < "3.10") {
+      dyads <- sum(as.rlebdm(x$constrained, x$constrained.obs, which = "informative"))
+    } else {
+      dyads <- stats::nobs(x)
+    }
 
-    ret$null.deviance <- ergm::logLikNull(x)
+    ret$null.deviance <- ergm:::logLikNull(x)
     ret$null.deviance <- ifelse(is.na(ret$null.deviance), 0, -2 * ret$null.deviance)
     ret$df.null <- dyads
 
     ret$residual.deviance <- -2 * ret$logLik
     ret$df.residual <- dyads - length(x$coef)
   }
-
   ret$AIC <- tryCatch(stats::AIC(x), error = function(e) NULL)
   ret$BIC <- tryCatch(stats::BIC(x), error = function(e) NULL)
 
