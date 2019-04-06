@@ -22,11 +22,12 @@
 #'
 #' @rdname tidiers
 #' 
-tidy.rma <- function(x, conf.int = TRUE, exponentiate = FALSE,
+tidy.rma <- function(x, conf.int = FALSE, conf.level = 0.95, exponentiate = FALSE,
                      include_studies = TRUE, measure = "GEN", ...) {
   
   estimates <- metafor::escalc(yi = x$yi.f, vi = x$vi.f, measure = measure) %>%
-    metafor2df()
+    summary(level = conf.level * 100) %>% 
+    as.data.frame(stringsAsFactors = FALSE)
   
   estimates <- cbind(x$slab, "study", estimates[, c("yi", "sei", "zi")], NA,
                      estimates[, c("ci.lb", "ci.ub")], stringsAsFactors = FALSE)
@@ -108,6 +109,8 @@ glance.rma <- function(x, ...) {
   ) %>%
     # get rid of null values
     purrr::discard(is.null) %>%
+    # don't include multivariate model stats
+    purrr::discard(~length(.x) >= 2) %>%
     # change to tibble with correct column and row names
     as.data.frame() %>%
     tibble::as_tibble() %>%
@@ -132,11 +135,10 @@ glance.rma <- function(x, ...) {
 #'   augment()
 #'
 #' @rdname augmenters
-augment.rma <- function(x, ...) {
+augment.rma <- function(x, ..., data = NULL) {
   blup0 <- purrr::possibly(metafor::blup, NULL)
   residuals0 <- purrr::possibly(stats::residuals, NULL)
   influence0 <- purrr::possibly(stats::influence, NULL)
-  
   
   y <- x$yi
   pred <- blup0(x)
