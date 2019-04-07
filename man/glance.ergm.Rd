@@ -16,7 +16,7 @@ to \code{FALSE}.}
 \item{mcmc}{Logical indicating whether or not to report MCMC interval,
 burn-in and sample size used to estimate the model. Defaults to \code{FALSE}.}
 
-\item{...}{Additional arguments to pass to \code{\link[ergm:summary.ergm]{ergm::summary.ergm()}}.
+\item{...}{Additional arguments to pass to \code{\link[ergm:summary]{ergm::summary()}}.
 \strong{Cautionary note}: Mispecified arguments may be silently ignored.}
 }
 \description{
