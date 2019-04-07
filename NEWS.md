@@ -1,4 +1,4 @@
-# broom 0.5.1.9000
+# broom 0.5.2.9000
 (To be released as 0.7.0)
 
 ## Breaking changes
