@@ -52,7 +52,7 @@ tidy.htest <- function(x, ...) {
     ret$estimate <- NULL
 
     # special case: in a t-test, estimate = estimate1 - estimate2
-    if (x$method == "Welch Two Sample t-test") {
+    if (x$method %in% c("Welch Two Sample t-test", " Two Sample t-test")) {
       ret <- c(estimate = ret$estimate1 - ret$estimate2, ret)
     }
   }
@@ -73,7 +73,7 @@ tidy.htest <- function(x, ...) {
     }
   }
 
-  ret <- compact(ret)
+  ret <- purrr::compact(ret)
   if (!is.null(x$conf.int)) {
     ret <- c(ret, conf.low = x$conf.int[1], conf.high = x$conf.int[2])
   }
@@ -218,6 +218,6 @@ tidy.pairwise.htest <- function(x, ...) {
 #' @family htest tidiers
 #' @seealso [stats::power.t.test()]
 tidy.power.htest <- function(x, ...) {
-  cols <- compact(x[c("n", "delta", "sd", "sig.level", "power", "p1", "p2")])
+  cols <- purrr::compact(x[c("n", "delta", "sd", "sig.level", "power", "p1", "p2")])
   as_tibble(cols)
 }

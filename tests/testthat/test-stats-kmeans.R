@@ -11,6 +11,9 @@ x <- rbind(
 
 fit <- kmeans(x, 2)
 
+d <- data.frame(x = runif(100), y = runif(100))
+fit2 <- kmeans(x = d, centers = 5)
+
 test_that("kmeans tidier arguments", {
   check_arguments(tidy.kmeans)
   check_arguments(glance.kmeans)
@@ -42,6 +45,14 @@ test_that("augment.kmeans", {
     model = fit,
     data = x,
     newdata = x,
+    strict = FALSE
+  )
+  
+  check_augment_function(
+    aug = augment.kmeans,
+    model = fit2,
+    data = d,
+    newdata = d,
     strict = FALSE
   )
 })

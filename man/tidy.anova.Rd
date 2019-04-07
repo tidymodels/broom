@@ -34,16 +34,17 @@ trailing whitespace, which this tidying method trims.
 }
 \examples{
 
-a <- anova(lm(mpg ~ wt + qsec + disp, mtcars))
-tidy(a)
+a <- lm(mpg ~ wt + qsec + disp, mtcars)
+b <- lm(mpg ~ wt + qsec, mtcars)
+tidy(anova(a, b))
 
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[stats:anova]{stats::anova()}}, \code{\link[car:Anova]{car::Anova()}}
 
-Other anova tidiers: \code{\link{tidy.TukeyHSD}},
-  \code{\link{tidy.aovlist}}, \code{\link{tidy.aov}},
-  \code{\link{tidy.manova}}
+Other anova tidiers: \code{\link{glance.aov}},
+  \code{\link{tidy.TukeyHSD}}, \code{\link{tidy.aovlist}},
+  \code{\link{tidy.aov}}, \code{\link{tidy.manova}}
 }
 \concept{anova tidiers}
 \value{

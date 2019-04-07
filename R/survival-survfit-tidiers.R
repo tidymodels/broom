@@ -97,7 +97,8 @@ tidy.survfit <- function(x, ...) {
 #'   "rmean.std.error",
 #'   conf.low = "lower end of confidence interval on median",
 #'   conf.high = "upper end of confidence interval on median",
-#'   median = "median survival"
+#'   median = "median survival",
+#'   "nobs"
 #' )
 #' 
 #' @export
@@ -123,5 +124,8 @@ glance.survfit <- function(x, ...) {
   )
   
   colnames(ret)[utils::tail(seq_along(ret), 2)] <- c("conf.low", "conf.high")
+
+  ret$nobs <- stats::nobs(x)
+
   as_tibble(ret)
 }
