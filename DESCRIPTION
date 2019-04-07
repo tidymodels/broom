@@ -313,7 +313,8 @@ Suggests:
     testthat,
     tseries,
     xergm,
-    zoo
+    zoo,
+    metafor
 VignetteBuilder: 
     knitr
 Remotes: 

@@ -4,16 +4,15 @@
 \alias{augment.rma}
 \title{Augment data with values from a meta-analysis model}
 \usage{
-\method{augment}{rma}(x, ..., data = NULL)
+\method{augment}{rma}(x, ...)
 }
 \arguments{
-\item{x}{a meta-analysis object. Currently supports \code{rma.uni} from the
-\code{metafor} package.}
+\item{x}{An \code{rma} created by the \code{metafor} package.}
 
 \item{...}{additional arguments}
 }
 \value{
-a \code{data.frame}
+a \code{tibble}
 }
 \description{
 Augment the original data with model residuals, fitted values, and influence
@@ -21,7 +20,20 @@ statistics.
 }
 \examples{
 
-example_ma \%>\%
-  augment()
+library(metafor)
+
+df <-
+  escalc(
+    measure = "RR",
+    ai = tpos,
+    bi = tneg,
+    ci = cpos,
+    di = cneg,
+    data = dat.bcg
+  )
+
+meta_analysis <- rma(yi, vi, data = df, method = "EB")
+
+augment(meta_analysis)
 
 }
