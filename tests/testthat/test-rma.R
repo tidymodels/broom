@@ -12,9 +12,9 @@ library(lme4)
 # check arguments ---------------------------------------------------------
 
 test_that("metafor::rma tidier arguments", {
-  check_arguments(tidy.rma, strict = FALSE)
-  check_arguments(glance.rma, strict = FALSE)
-  check_arguments(augment.rma, strict = FALSE)
+  check_arguments(tidy.rma)
+  check_arguments(glance.rma)
+  check_arguments(augment.rma)
 })
 
 # RR test -----------------------------------------------------------------
@@ -35,9 +35,9 @@ res.RE <- rma(yi, vi, data = dat, method = "EB")
 
 
 test_that(("returns tibble for RR"), {
-  check_tidy_output(tidy(res.RE), strict = FALSE)
+  check_tidy_output(tidy(res.RE))
   # check_augment_outputs(glance(res.RE)
-  check_glance_outputs(glance(res.RE), strict = FALSE)
+  check_glance_outputs(glance(res.RE))
 })
 
 
@@ -52,9 +52,9 @@ res.ME <-
   )
 
 test_that(("returns tibble for ME"), {
-  check_tidy_output(tidy(res.ME), strict = FALSE)
+  check_tidy_output(tidy(res.ME))
   # check_augment_outputs(glance(res.ME))
-  check_glance_outputs(glance(res.ME), strict = FALSE)
+  check_glance_outputs(glance(res.ME))
 })
 
 
@@ -69,9 +69,9 @@ res.FE <-
   )
 
 test_that(("returns tibble for FE"), {
-  check_tidy_output(tidy(res.FE), strict = FALSE)
+  check_tidy_output(tidy(res.FE))
   # check_augment_outputs(glance(res.FE))
-  check_glance_outputs(glance(res.FE), strict = FALSE)
+  check_glance_outputs(glance(res.FE))
 })
 
 
@@ -88,9 +88,9 @@ dat2 <- data.frame(
 res.WFE <- rma(yi, vi, mods = ~random + intensity, data = dat2, method = "FE")
 
 test_that(("returns tibble for weighted FE"), {
-  check_tidy_output(tidy(res.WFE), strict = FALSE)
+  check_tidy_output(tidy(res.WFE))
   # check_augment_outputs(glance(res.WFE))
-  check_glance_outputs(glance(res.WFE), strict = FALSE)
+  check_glance_outputs(glance(res.WFE))
 })
 
 
@@ -130,9 +130,9 @@ res.MV <-
   )
 
 test_that(("returns tibble for MV"), {
-  check_tidy_output(tidy(res.MV), strict = FALSE)
+  check_tidy_output(tidy(res.MV))
   # check_augment_outputs(glance(res.MV))
-  check_glance_outputs(glance(res.MV), strict = FALSE)
+  check_glance_outputs(glance(res.MV))
 })
 
 
@@ -149,9 +149,9 @@ res.GLMM <-
   )
 
 test_that(("returns tibble for GLMM"), {
-  check_tidy_output(tidy(res.GLMM), strict = FALSE)
+  check_tidy_output(tidy(res.GLMM))
   # check_augment_outputs(glance(res.GLMM))
-  check_glance_outputs(glance(res.GLMM), strict = FALSE)
+  check_glance_outputs(glance(res.GLMM))
 })
 
 
@@ -172,9 +172,9 @@ suppressWarnings(
 )
 
 test_that(("returns tibble for peto"), {
-  check_tidy_output(tidy(res.peto), strict = FALSE)
+  check_tidy_output(tidy(res.peto))
   # check_augment_outputs(glance(res.peto))
-  check_glance_outputs(glance(res.peto), strict = FALSE)
+  check_glance_outputs(glance(res.peto))
 })
 
 # Mantel-Haenszel Method for the Risk Difference --------------------------
@@ -200,8 +200,8 @@ res.MH <-
   )
 
 test_that(("returns tibble for MH"), {
-  check_tidy_output(tidy(res.MH), strict = FALSE)
+  check_tidy_output(tidy(res.MH))
   # check_augment_outputs(glance(res.MH))
-  check_glance_outputs(glance(res.MH), strict = FALSE)
+  check_glance_outputs(glance(res.MH))
 })
 

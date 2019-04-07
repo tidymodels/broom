@@ -1,24 +1,34 @@
 #' Tidying methods for meta-analyis objects
 #'
-#' These methods tidy the results of meta-analysis objects
+#' These methods tidy the results of meta-analysis objects from the metafor package
 #'
-#' @param x a meta-analysis object. Currently supports `rma.uni` from the
-#'   `metafor` package.
-#' @param conf.int logical. Include confidence intervals?
-#' @param exponentiate logical. Should the estimates and (if `conf.int` =
-#'   `TRUE`) confidence intervals be exponentiated?
-#' @param include_studies logical. Should individual studies be included in the
+#' @param x An `rma` created by the `metafor` package.
+#' @inheritParams tidy.lm
+#' @param include_studies Logical. Should individual studies be included in the
 #'    output?
-#' @param ... additional arguments
-#' @param measure measure type. See [metafor::rma()]
+#' @param ... Additional arguments
+#' @param measure Measure type. See [metafor::rma()]
 #'
-#' @return a `data.frame`
+#' @return A `tibble`
 #' @export
 #'
 #' @examples
+#' 
+#' library(metafor)
+#' 
+#' df <-
+#'   escalc(
+#'     measure = "RR",
+#'     ai = tpos,
+#'     bi = tneg,
+#'     ci = cpos,
+#'     di = cneg,
+#'     data = dat.bcg
+#'   )
+#' 
+#' meta_analysis <- rma(yi, vi, data = df, method = "EB")
 #'
-#' example_ma %>%
-#'   tidy()
+#' tidy(meta_analysis)
 #'
 #' @rdname tidiers
 #' 
@@ -73,17 +83,29 @@ tidy.rma <- function(x, conf.int = FALSE, conf.level = 0.95, exponentiate = FALS
 #' `glance()` computes a one-row summary of  meta-analysis objects,
 #'  including estimates of heterogenity and model fit.
 #'
-#' @param x a meta-analysis object. Currently supports `rma.uni` from the
-#'   `metafor` package.
-#' @param ... additional arguments
+#' @param x An `rma` created by the `metafor` package.
+#' @param ... Additional arguments
 #'
-#' @return a `data.frame`
+#' @return a `tibble`
 #' @export
 #'
 #' @examples
 #'
-#' example_ma %>%
-#'   glance()
+#' library(metafor)
+#' 
+#' df <-
+#'   escalc(
+#'     measure = "RR",
+#'     ai = tpos,
+#'     bi = tneg,
+#'     ci = cpos,
+#'     di = cneg,
+#'     data = dat.bcg
+#'   )
+#' 
+#' meta_analysis <- rma(yi, vi, data = df, method = "EB")
+#'
+#' glance(meta_analysis)
 #'
 glance.rma <- function(x, ...) {
   fit_stats <- metafor::fitstats(x)
@@ -94,17 +116,17 @@ glance.rma <- function(x, ...) {
     stringr::str_replace(names(fit_stats), "\\:", "")
   
   list(
-    k = x$k,
+    nobs = x$k,
     measure = x$measure,
     method = x$method,
     i.squared = x$I2,
     h.squared = x$H2,
     tau.squared = x$tau2,
     tau.squared.se = x$se.tau2,
-    QE = x$QE,
-    QE_p = x$QEp,
-    QM = x$QM,
-    QM_p = x$QMp,
+    qe = x$QE,
+    p.value.qe = x$QEp,
+    qm = x$QM,
+    p.value.qm = x$QMp,
     fit_stats
   ) %>%
     # get rid of null values
@@ -122,20 +144,32 @@ glance.rma <- function(x, ...) {
 #' Augment the original data with model residuals, fitted values, and influence
 #' statistics.
 #'
-#' @param x a meta-analysis object. Currently supports `rma.uni` from the
-#'   `metafor` package.
+#' @param x An `rma` created by the `metafor` package.
 #' @param ... additional arguments
 #'
-#' @return a `data.frame`
+#' @return a `tibble`
 #' @export
 #'
 #' @examples
 #'
-#' example_ma %>%
-#'   augment()
+#' library(metafor)
+#' 
+#' df <-
+#'   escalc(
+#'     measure = "RR",
+#'     ai = tpos,
+#'     bi = tneg,
+#'     ci = cpos,
+#'     di = cneg,
+#'     data = dat.bcg
+#'   )
+#' 
+#' meta_analysis <- rma(yi, vi, data = df, method = "EB")
+#'
+#' augment(meta_analysis)
 #'
 #' @rdname augmenters
-augment.rma <- function(x, ..., data = NULL) {
+augment.rma <- function(x, ...) {
   blup0 <- purrr::possibly(metafor::blup, NULL)
   residuals0 <- purrr::possibly(stats::residuals, NULL)
   influence0 <- purrr::possibly(stats::influence, NULL)
@@ -146,21 +180,28 @@ augment.rma <- function(x, ..., data = NULL) {
   pred <- as.data.frame(pred)
   
   # fix names
-  names(pred)[1:4] <- c(".fitted", ".se.fit", "conf.low.fit", "conf.high.fit")
+  names(pred)[1:4] <- c(".fitted", ".se.fit", ".conf.low", ".conf.high")
   credible_intervals <- names(pred) %in% c("cr.lb", "cr.ub")
-  names(pred)[credible_intervals] <- c("cred.low.fit", "cred.high.fit")
+  names(pred)[credible_intervals] <- c(".cred.low", ".cred.high")
   moderator <- names(pred) == "X"
-  names(pred)[moderator] <- "moderator"
+  names(pred)[moderator] <- ".moderator"
   
   res <- residuals0(x)
   inf <- influence0(x)
   if (!is.null(inf)) {
     inf <- cbind(as.data.frame(inf$inf), dfbetas = inf$dfbs$intrcpt)
     inf <- dplyr::select(
-      inf, .hat = hat, .cooksd = cook.d, .std.resid = rstudent,
-      .dffits = dffits, .cov.ratio = cov.r,
-      tau.squared.del = tau2.del, qe.del = QE.del,
-      .weight = weight, .dfbetas = dfbetas)
+      inf, 
+      .hat = hat, 
+      .cooksd = cook.d, 
+      .std.resid = rstudent,
+      .dffits = dffits, 
+      .cov.ratio = cov.r,
+      .tau.squared.del = tau2.del, 
+      .qe.del = QE.del,
+      .weight = weight, 
+      .dfbetas = dfbetas
+    )
   }
   
   ret <- cbind(

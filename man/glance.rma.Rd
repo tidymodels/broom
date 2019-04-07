@@ -7,13 +7,12 @@
 \method{glance}{rma}(x, ...)
 }
 \arguments{
-\item{x}{a meta-analysis object. Currently supports \code{rma.uni} from the
-\code{metafor} package.}
+\item{x}{An \code{rma} created by the \code{metafor} package.}
 
-\item{...}{additional arguments}
+\item{...}{Additional arguments}
 }
 \value{
-a \code{data.frame}
+a \code{tibble}
 }
 \description{
 \code{glance()} computes a one-row summary of  meta-analysis objects,
@@ -21,7 +20,20 @@ including estimates of heterogenity and model fit.
 }
 \examples{
 
-example_ma \%>\%
-  glance()
+library(metafor)
+
+df <-
+  escalc(
+    measure = "RR",
+    ai = tpos,
+    bi = tneg,
+    ci = cpos,
+    di = cneg,
+    data = dat.bcg
+  )
+
+meta_analysis <- rma(yi, vi, data = df, method = "EB")
+
+glance(meta_analysis)
 
 }

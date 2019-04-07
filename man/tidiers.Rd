@@ -8,30 +8,49 @@
   exponentiate = FALSE, include_studies = TRUE, measure = "GEN", ...)
 }
 \arguments{
-\item{x}{a meta-analysis object. Currently supports \code{rma.uni} from the
-\code{metafor} package.}
+\item{x}{An \code{rma} created by the \code{metafor} package.}
 
-\item{conf.int}{logical. Include confidence intervals?}
+\item{conf.int}{Logical indicating whether or not to include a confidence
+interval in the tidied output. Defaults to \code{FALSE}.}
 
-\item{exponentiate}{logical. Should the estimates and (if \code{conf.int} =
-\code{TRUE}) confidence intervals be exponentiated?}
+\item{conf.level}{The confidence level to use for the confidence interval
+if \code{conf.int = TRUE}. Must be strictly greater than 0 and less than 1.
+Defaults to 0.95, which corresponds to a 95 percent confidence interval.}
 
-\item{include_studies}{logical. Should individual studies be included in the
+\item{exponentiate}{Logical indicating whether or not to exponentiate the
+the coefficient estimates. This is typical for logistic and multinomial
+regressions, but a bad idea if there is no log or logit link. Defaults
+to \code{FALSE}.}
+
+\item{include_studies}{Logical. Should individual studies be included in the
 output?}
 
-\item{measure}{measure type. See \code{\link[metafor:rma]{metafor::rma()}}}
+\item{measure}{Measure type. See \code{\link[metafor:rma]{metafor::rma()}}}
 
-\item{...}{additional arguments}
+\item{...}{Additional arguments}
 }
 \value{
-a \code{data.frame}
+A \code{tibble}
 }
 \description{
-These methods tidy the results of meta-analysis objects
+These methods tidy the results of meta-analysis objects from the metafor package
 }
 \examples{
 
-example_ma \%>\%
-  tidy()
+library(metafor)
+
+df <-
+  escalc(
+    measure = "RR",
+    ai = tpos,
+    bi = tneg,
+    ci = cpos,
+    di = cneg,
+    data = dat.bcg
+  )
+
+meta_analysis <- rma(yi, vi, data = df, method = "EB")
+
+tidy(meta_analysis)
 
 }
