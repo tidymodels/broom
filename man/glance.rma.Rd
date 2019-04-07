@@ -2,7 +2,7 @@
 % Please edit documentation in R/rma-tidiers.R
 \name{glance.rma}
 \alias{glance.rma}
-\title{Construct a one-row summary of meta-analysis model fit statistics.}
+\title{Glance at a(n) rma object}
 \usage{
 \method{glance}{rma}(x, ...)
 }
@@ -15,8 +15,19 @@
 a \code{tibble}
 }
 \description{
-\code{glance()} computes a one-row summary of  meta-analysis objects,
-including estimates of heterogenity and model fit.
+Glance accepts a model object and returns a \code{\link[tibble:tibble]{tibble::tibble()}}
+with exactly one row of model summaries. The summaries are typically
+goodness of fit measures, p-values for hypothesis tests on residuals,
+or model convergence information.
+
+Glance never returns information from the original call to the modelling
+function. This includes the name of the modelling function or any
+arguments passed to the modelling function.
+
+Glance does not calculate summary measures. Rather, it farms out these
+computations to appropriate methods and gathers the results together.
+Sometimes a goodness of fit measure will be undefined. In these cases
+the measure will be reported as \code{NA}.
 }
 \examples{
 

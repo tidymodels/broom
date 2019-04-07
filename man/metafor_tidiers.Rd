@@ -2,7 +2,7 @@
 % Please edit documentation in R/rma-tidiers.R
 \name{tidy.rma}
 \alias{tidy.rma}
-\title{Tidying methods for meta-analyis objects}
+\title{Tidy a(n) rma object}
 \usage{
 \method{tidy}{rma}(x, conf.int = FALSE, conf.level = 0.95,
   exponentiate = FALSE, include_studies = TRUE, measure = "GEN", ...)
@@ -33,7 +33,12 @@ output?}
 A \code{tibble}
 }
 \description{
-These methods tidy the results of meta-analysis objects from the metafor package
+Tidy summarizes information about the components of a model.
+A model component might be a single term in a regression, a single
+hypothesis, a cluster, or a class. Exactly what tidy considers to be a
+model component varies cross models but is usually self-evident.
+If a model has several distinct types of components, you will need to
+specify which components to return.
 }
 \examples{
 

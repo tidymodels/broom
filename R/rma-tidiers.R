@@ -1,7 +1,6 @@
-#' Tidying methods for meta-analyis objects
-#'
-#' These methods tidy the results of meta-analysis objects from the metafor package
-#'
+#' @templateVar class rma
+#' @template title_desc_tidy
+#' 
 #' @param x An `rma` created by the `metafor` package.
 #' @inheritParams tidy.lm
 #' @param include_studies Logical. Should individual studies be included in the
@@ -30,7 +29,7 @@
 #'
 #' tidy(meta_analysis)
 #'
-#' @rdname tidiers
+#' @rdname metafor_tidiers
 #' 
 tidy.rma <- function(x, conf.int = FALSE, conf.level = 0.95, exponentiate = FALSE,
                      include_studies = TRUE, measure = "GEN", ...) {
@@ -39,8 +38,17 @@ tidy.rma <- function(x, conf.int = FALSE, conf.level = 0.95, exponentiate = FALS
     summary(level = conf.level * 100) %>% 
     as.data.frame(stringsAsFactors = FALSE)
   
-  estimates <- cbind(x$slab, "study", estimates[, c("yi", "sei", "zi")], NA,
-                     estimates[, c("ci.lb", "ci.ub")], stringsAsFactors = FALSE)
+  n_studies <- length(x$slab)
+  
+  estimates <- dplyr::bind_cols(
+    study = x$slab, 
+    # dplyr::bind_cols is strict about recycling
+    type = rep("study", n_studies), 
+    estimates[, c("yi", "sei", "zi")], 
+    p.value = rep(NA, n_studies),
+    estimates[, c("ci.lb", "ci.ub")] 
+  )
+  
   names(estimates) <- c("study", "type", "estimate", "std.error", "statistic",
                         "p.value", "conf.low", "conf.high")
   estimates <- tibble::as_tibble(estimates)
@@ -75,13 +83,11 @@ tidy.rma <- function(x, conf.int = FALSE, conf.level = 0.95, exponentiate = FALS
   
   attributes(.data$study) <- NULL
   
-  tibble::remove_rownames(.data)
+  .data
 }
 
-#' Construct a one-row summary of meta-analysis model fit statistics.
-#'
-#' `glance()` computes a one-row summary of  meta-analysis objects,
-#'  including estimates of heterogenity and model fit.
+#' @templateVar class rma
+#' @template title_desc_glance
 #'
 #' @param x An `rma` created by the `metafor` package.
 #' @param ... Additional arguments
@@ -135,14 +141,11 @@ glance.rma <- function(x, ...) {
     purrr::discard(~length(.x) >= 2) %>%
     # change to tibble with correct column and row names
     as.data.frame() %>%
-    tibble::as_tibble() %>%
-    tibble::remove_rownames()
+    tibble::as_tibble()
 }
 
-#' Augment data with values from a meta-analysis model
-#'
-#' Augment the original data with model residuals, fitted values, and influence
-#' statistics.
+#' @templateVar class rma
+#' @template title_desc_augment
 #'
 #' @param x An `rma` created by the `metafor` package.
 #' @param ... additional arguments
@@ -168,7 +171,7 @@ glance.rma <- function(x, ...) {
 #'
 #' augment(meta_analysis)
 #'
-#' @rdname augmenters
+#' @rdname metafor_augmenters
 augment.rma <- function(x, ...) {
   blup0 <- purrr::possibly(metafor::blup, NULL)
   residuals0 <- purrr::possibly(stats::residuals, NULL)
@@ -189,7 +192,7 @@ augment.rma <- function(x, ...) {
   res <- residuals0(x)
   inf <- influence0(x)
   if (!is.null(inf)) {
-    inf <- cbind(as.data.frame(inf$inf), dfbetas = inf$dfbs$intrcpt)
+    inf <- dplyr::bind_cols(as.data.frame(inf$inf), dfbetas = inf$dfbs$intrcpt)
     inf <- dplyr::select(
       inf, 
       .hat = hat, 
@@ -204,19 +207,14 @@ augment.rma <- function(x, ...) {
     )
   }
   
-  ret <- cbind(
-    .rownames = x$slab,
-    y,
+  any_study_names <- all(x$slab == seq_along(x$slab))
+  
+  ret <- dplyr::bind_cols(
+    .rownames = ifelse(any_study_names, x$slab, NULL),
+    y = y,
     pred,
     .resid = res
   )
   
-  ret <- tibble::as_tibble(ret) %>%
-    tibble::remove_rownames()
-  
-  if (all(ret$.rownames == seq_along(ret$.rownames))) {
-    ret$.rownames <- NULL
-  }
-  
-  ret
+  tibble::as_tibble(ret)
 }
