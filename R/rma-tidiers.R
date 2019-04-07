@@ -42,26 +42,7 @@
 #' 
 tidy.rma <- function(x, conf.int = FALSE, conf.level = 0.95, exponentiate = FALSE,
                      include_studies = TRUE, measure = "GEN", ...) {
-  
-  estimates <- metafor::escalc(yi = x$yi.f, vi = x$vi.f, measure = measure) %>%
-    summary(level = conf.level * 100) %>% 
-    as.data.frame(stringsAsFactors = FALSE)
-  
-  n_studies <- length(x$slab)
-  
-  estimates <- dplyr::bind_cols(
-    study = x$slab, 
-    # dplyr::bind_cols is strict about recycling
-    type = rep("study", n_studies), 
-    estimates[, c("yi", "sei", "zi")], 
-    p.value = rep(NA, n_studies),
-    estimates[, c("ci.lb", "ci.ub")] 
-  )
-  
-  names(estimates) <- c("study", "type", "estimate", "std.error", "statistic",
-                        "p.value", "conf.low", "conf.high")
-  estimates <- tibble::as_tibble(estimates)
-  
+  # tidy summary estimates
   betas <- x$beta
   if (!is.null(nrow(betas)) && nrow(betas) > 1) {
     # get estimate type and fix spelling
@@ -74,25 +55,53 @@ tidy.rma <- function(x, conf.int = FALSE, conf.level = 0.95, exponentiate = FALS
     betas <- betas[1]
   }
   
-  results <- tibble::tibble(study = study, type = "summary",
-                            estimate = betas, std.error = x$se,
-                            statistic = x$zval, p.value = x$pval,
-                            conf.low = x$ci.lb, conf.high = x$ci.ub)
-  .data <- if (include_studies) rbind(estimates, results) else results
+  results <- tibble::tibble(
+    study = study, 
+    type = "summary",
+    estimate = betas, 
+    std.error = x$se,
+    statistic = x$zval, 
+    p.value = x$pval,
+    conf.low = x$ci.lb, 
+    conf.high = x$ci.ub
+  )
+  
+  # tidy individual studies
+  if (include_studies) {
+    # use `metafor::escalc` to standardize estimates and confidence intervals
+    estimates <- metafor::escalc(yi = x$yi.f, vi = x$vi.f, measure = measure) %>%
+      summary(level = conf.level * 100) %>% 
+      as.data.frame(stringsAsFactors = FALSE)
+    
+    n_studies <- length(x$slab)
+    
+    estimates <- dplyr::bind_cols(
+      study = as.character(x$slab), 
+      # dplyr::bind_cols is strict about recycling, so repeat for each study
+      type = rep("study", n_studies), 
+      estimates[, c("yi", "sei", "zi")], 
+      p.value = rep(NA, n_studies),
+      estimates[, c("ci.lb", "ci.ub")] 
+    )
+    
+    names(estimates) <- c("study", "type", "estimate", "std.error", "statistic",
+                          "p.value", "conf.low", "conf.high")
+    estimates <- tibble::as_tibble(estimates)
+    results <- dplyr::bind_rows(estimates, results) 
+  }
   
   if (exponentiate) {
-    .data$estimate <- exp(.data$estimate)
-    .data$conf.low <- exp(.data$conf.low)
-    .data$conf.high <- exp(.data$conf.high)
+    results <-  dplyr::mutate_at(results, dplyr::vars(estimate, conf.low, conf.high), exp)
   }
   
   if (!conf.int) {
-    .data <- .data[-which(names(.data) %in% c("conf.low", "conf.high"))]
+    results <- dplyr::select(results, -conf.low, -conf.high)
   }
   
-  attributes(.data$study) <- NULL
+  # remove extra model data from study names
+  attributes(results$study) <- NULL
   
-  .data
+  results
 }
 
 #' @templateVar class rma
@@ -135,6 +144,7 @@ tidy.rma <- function(x, conf.int = FALSE, conf.level = 0.95, exponentiate = FALS
 #' glance(meta_analysis)
 #'
 glance.rma <- function(x, ...) {
+  # reshape model fit statistics and clean names
   fit_stats <- metafor::fitstats(x)
   fit_stats <- fit_stats %>%
     t() %>%
@@ -142,6 +152,8 @@ glance.rma <- function(x, ...) {
   names(fit_stats) <-
     stringr::str_replace(names(fit_stats), "\\:", "")
   
+  # metafor returns different fit statistics for different models
+  # so use a list + `purrr::discard` to remove unrelated statistics
   list(
     nobs = x$k,
     measure = x$measure,
@@ -205,12 +217,17 @@ glance.rma <- function(x, ...) {
 #'
 #' @rdname metafor_augmenters
 augment.rma <- function(x, ...) {
+  # metafor generally handles these for different models through the monolith
+  # `rma` class; using `purrr::possibly` primarily helps discard unused
+  # components but also helps get the right component for each model
   blup0 <- purrr::possibly(metafor::blup, NULL)
   residuals0 <- purrr::possibly(stats::residuals, NULL)
   influence0 <- purrr::possibly(stats::influence, NULL)
   
   y <- x$yi.f
+  # get best linear unbiased predictors if available
   pred <- blup0(x)
+  # otherwise use `predict.rma()`
   if (is.null(pred)) pred <- predict(x)
   pred <- as.data.frame(pred)
   
@@ -225,6 +242,7 @@ augment.rma <- function(x, ...) {
   
   res <- residuals0(x)
   inf <- influence0(x)
+  # if model has influence statistics, bind them and clean their names
   if (!is.null(inf)) {
     inf <- dplyr::bind_cols(as.data.frame(inf$inf), dfbetas = inf$dfbs$intrcpt)
     inf <- dplyr::select(
@@ -255,13 +273,15 @@ augment.rma <- function(x, ...) {
     pred
   )
   
-  no_study_names <- all(x$slab == as.character(seq_along(x$slab)))
   
+  # join residuals, if they exist for the model
   if (!is.null(res)) {
     res <- tibble::enframe(res, name = ".rownames", value = ".resid")
     ret <- dplyr::left_join(ret, res, by = ".rownames")
   }
   
+  # don't return rownames if they are just row numbers
+  no_study_names <- all(x$slab == as.character(seq_along(x$slab)))
   if (no_study_names) ret$.rownames <- NULL
   
   tibble::as_tibble(ret)
