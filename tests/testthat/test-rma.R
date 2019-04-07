@@ -146,6 +146,9 @@ res.MH <-
     level = 90
   )
 
+check_augment_rma_output <- function(x) {
+  modeltests::check_tibble(x, "augment")
+}
 
 # test rma tidiers output -------------------------------------------------
 
@@ -169,4 +172,15 @@ test_that(("glance.rma"), {
   check_glance_outputs(glance(res.GLMM))
   check_glance_outputs(glance(res.peto))
   check_glance_outputs(glance(res.MH))
+})
+
+test_that(("augment.rma"), {
+  check_augment_rma_output(augment(res.RE))
+  check_augment_rma_output(augment(res.ME))
+  check_augment_rma_output(augment(res.FE))
+  check_augment_rma_output(augment(res.WFE))
+  check_augment_rma_output(augment(res.MV))
+  check_augment_rma_output(augment(res.GLMM))
+  check_augment_rma_output(augment(res.peto))
+  check_augment_rma_output(augment(res.MH))
 })

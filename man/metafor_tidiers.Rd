@@ -25,12 +25,17 @@ to \code{FALSE}.}
 \item{include_studies}{Logical. Should individual studies be included in the
 output?}
 
-\item{measure}{Measure type. See \code{\link[metafor:rma]{metafor::rma()}}}
+\item{measure}{Measure type. See \code{\link[metafor:escalc]{metafor::escalc()}}}
 
-\item{...}{Additional arguments}
-}
-\value{
-A \code{tibble}
+\item{...}{Additional arguments. Not used. Needed to match generic
+signature only. \strong{Cautionary note:} Misspelled arguments will be
+absorbed in \code{...}, where they will be ignored. If the misspelled
+argument has a default value, the default value will be used.
+For example, if you pass \code{conf.lvel = 0.9}, all computation will
+proceed using \code{conf.level = 0.95}. Additionally, if you pass
+\code{newdata = my_tibble} to an \code{\link[=augment]{augment()}} method that does not
+accept a \code{newdata} argument, it will use the default value for
+the \code{data} argument.}
 }
 \description{
 Tidy summarizes information about the components of a model.
@@ -57,5 +62,17 @@ df <-
 meta_analysis <- rma(yi, vi, data = df, method = "EB")
 
 tidy(meta_analysis)
+
+}
+\value{
+A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
+  \item{conf.high}{Upper bound on the confidence interval for the estimate.}
+  \item{conf.low}{Lower bound on the confidence interval for the estimate.}
+  \item{estimate}{The estimated value of the regression term.}
+  \item{p.value}{The two-sided p-value associated with the observed statistic.}
+  \item{statistic}{The value of a T-statistic to use in a hypothesis that the regression term is non-zero.}
+  \item{std.error}{The standard error of the regression term.}
+  \item{study}{The name of the individual study}
+  \item{type}{The estimate type  (summary vs individual study)}
 
 }

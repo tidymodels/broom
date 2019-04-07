@@ -5,10 +5,19 @@
 #' @inheritParams tidy.lm
 #' @param include_studies Logical. Should individual studies be included in the
 #'    output?
-#' @param ... Additional arguments
-#' @param measure Measure type. See [metafor::rma()]
+#' @template param_unused_dots
+#' @param measure Measure type. See [metafor::escalc()]
 #'
-#' @return A `tibble`
+#' @evalRd return_tidy(
+#'   study = "The name of the individual study",
+#'   type = "The estimate type  (summary vs individual study)",
+#'   "estimate",
+#'   "std.error",
+#'   "statistic",
+#'   "p.value",
+#'   "conf.low",
+#'   "conf.high"
+#' )
 #' @export
 #'
 #' @examples
@@ -90,7 +99,7 @@ tidy.rma <- function(x, conf.int = FALSE, conf.level = 0.95, exponentiate = FALS
 #' @template title_desc_glance
 #'
 #' @param x An `rma` created by the `metafor` package.
-#' @param ... Additional arguments
+#' @template param_unused_dots
 #'
 #' @return a `tibble`
 #' @export
@@ -148,7 +157,7 @@ glance.rma <- function(x, ...) {
 #' @template title_desc_augment
 #'
 #' @param x An `rma` created by the `metafor` package.
-#' @param ... additional arguments
+#' @template param_unused_dots
 #'
 #' @return a `tibble`
 #' @export
@@ -177,7 +186,7 @@ augment.rma <- function(x, ...) {
   residuals0 <- purrr::possibly(stats::residuals, NULL)
   influence0 <- purrr::possibly(stats::influence, NULL)
   
-  y <- x$yi
+  y <- x$yi.f
   pred <- blup0(x)
   if (is.null(pred)) pred <- predict(x)
   pred <- as.data.frame(pred)
@@ -188,6 +197,8 @@ augment.rma <- function(x, ...) {
   names(pred)[credible_intervals] <- c(".cred.low", ".cred.high")
   moderator <- names(pred) == "X"
   names(pred)[moderator] <- ".moderator"
+  moderator_level <- names(pred) == "tau2.level"
+  names(pred)[moderator_level] <- ".moderator.level"
   
   res <- residuals0(x)
   inf <- influence0(x)
@@ -207,14 +218,29 @@ augment.rma <- function(x, ...) {
     )
   }
   
-  any_study_names <- all(x$slab == seq_along(x$slab))
+  if (nrow(pred) == 1) {
+    # Some metafor models only return a single prediction
+    # based on the summary estimate. `dplyr::bind_cols()` requires
+    # `pred` to be the same length as other results, so replicate
+    # prediction for each row
+    pred <- purrr::map_dfr(seq_along(x$slab), ~pred)
+  }
   
   ret <- dplyr::bind_cols(
-    .rownames = ifelse(any_study_names, x$slab, NULL),
-    y = y,
-    pred,
-    .resid = res
+    .rownames = as.character(x$slab),
+    .observed = y,
+    pred
   )
+  
+  
+  no_study_names <- all(x$slab == as.character(seq_along(x$slab)))
+  
+  if (!is.null(res)) {
+    res <- tibble::enframe(res, name = ".rownames", value = ".resid")
+    ret <- dplyr::left_join(ret, res, by = ".rownames")
+  }
+  
+  if (no_study_names) ret$.rownames <- NULL
   
   tibble::as_tibble(ret)
 }
