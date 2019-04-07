@@ -3,7 +3,6 @@
 #'
 #' @param x A `geeglm` object returned from a call to [geepack::geeglm()].
 #' @template param_confint
-#' @template param_quick
 #' @template param_exponentiate
 #' @template param_unused_dots
 #'
@@ -26,7 +25,6 @@
 #'                  corstr = "exchangeable")
 #'
 #' tidy(geefit)
-#' tidy(geefit, quick = TRUE)
 #' tidy(geefit, conf.int = TRUE)
 #'
 #' @evalRd return_tidy(regresion = TRUE)
@@ -36,12 +34,8 @@
 #' @seealso [tidy()], [geepack::geeglm()]
 #' 
 tidy.geeglm <- function(x, conf.int = FALSE, conf.level = .95,
-                        exponentiate = FALSE, quick = FALSE, ...) {
-  if (quick) {
-    co <- stats::coef(x)
-    ret <- tibble(term = names(co), estimate = unname(co))
-    return(ret)
-  }
+                        exponentiate = FALSE, ...) {
+  
   co <- stats::coef(summary(x))
 
   nn <- c("estimate", "std.error", "statistic", "p.value")

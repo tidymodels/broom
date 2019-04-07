@@ -16,10 +16,8 @@ test_that("survey tidier arguments", {
 })
 
 test_that("tidy.svyolr", {
-  td <- tidy(fit, quick = TRUE)
   td2 <- tidy(fit, conf.int = TRUE, exponentiate = TRUE)
   
-  check_tidy_output(td)
   check_tidy_output(td2)
 })
 

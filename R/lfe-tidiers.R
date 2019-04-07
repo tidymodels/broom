@@ -3,7 +3,6 @@
 #'
 #' @param x A `felm` object returned from [lfe::felm()].
 #' @template param_confint
-#' @template param_quick
 #' @param fe Logical indicating whether or not to include estimates of
 #'   fixed effects. Defaults to `FALSE`.
 #' @template param_unused_dots
@@ -45,36 +44,22 @@
 #' @aliases felm_tidiers lfe_tidiers
 #' @family felm tidiers
 #' @seealso [tidy()], [lfe::felm()]
-tidy.felm <- function(x, conf.int = FALSE, conf.level = .95, fe = FALSE, quick = FALSE, ...) {
+tidy.felm <- function(x, conf.int = FALSE, conf.level = .95, fe = FALSE, ...) {
 
   has_multi_response <- length(x$lhs) > 1
   
-  if(quick) {
-    co <- stats::coef(x)
-    if(has_multi_response) {
-      ret <- co <- stats::coef(x) %>%  
-        as_tibble(rownames = "term") %>% 
-        tidyr::gather(response, estimate, -term) %>% 
-        select(response, term, estimate) 
-    } else {
-      ret <- data_frame(term = names(co), estimate = unname(co))  
-    }
+  nn <- c("estimate", "std.error", "statistic", "p.value")
+  if(has_multi_response) {
+    ret <-  map_df(x$lhs, function(y) stats::coef(summary(x, lhs = y)) %>% 
+                     fix_data_frame(nn) %>% 
+                     mutate(response = y)) %>% 
+      select(response, everything())
     
   } else {
-    nn <- c("estimate", "std.error", "statistic", "p.value")
-    if(has_multi_response) {
-      ret <-  map_df(x$lhs, function(y) stats::coef(summary(x, lhs = y)) %>% 
-               fix_data_frame(nn) %>% 
-               mutate(response = y)) %>% 
-        select(response, everything())
-      
-    } else {
-      ret <- fix_data_frame(stats::coef(summary(x)), nn)  
-    }
+    ret <- fix_data_frame(stats::coef(summary(x)), nn)  
   }
-  
 
-  if (!quick & conf.int) {
+  if (conf.int) {
     # avoid "Waiting for profiling to be done..." message
     CI <- suppressMessages(stats::confint(x, level = conf.level))
     colnames(CI) <- c("conf.low", "conf.high")
@@ -116,7 +101,7 @@ tidy.felm <- function(x, conf.int = FALSE, conf.level = .95, fe = FALSE, quick =
         mutate(p.value = 2 * (1 - stats::pt(statistic, df = N)))  
     }
     
-    if (!quick & conf.int) {
+    if (conf.int) {
       
       crit_val_low <- stats::qnorm(1 - (1 - conf.level) / 2)
       crit_val_high <- stats::qnorm(1 - (1 - conf.level) / 2)
@@ -154,8 +139,6 @@ augment.felm <- function(x, data = model.frame(x), ...) {
   } 
   df <- as_broom_tibble(data)
   mutate(df, .fitted = x$fitted.values, .resid = x$residuals)
-  
-  
 }
 
 #' @templateVar class felm

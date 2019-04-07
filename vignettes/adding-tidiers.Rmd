@@ -266,4 +266,3 @@ tidy(model, effects = "random")
 - `conf.int`: Logical indicating whether or not to calculate confidence/credible intervals. Should default to `FALSE`.
 - `conf.level`: The confidence level to use for the interval when `conf.int = TRUE`. If a tidying has a `conf.level` argument it must have a `conf.int` argument.
 - `exponentiate`: Logical indicating whether or not model terms should be presented on an exponential scale (typical for logistic regression).
-- `quick`: Logical indicating whether to use a faster `tidy` method that returns less information about each component, typically only `term` and `estimate` columns.

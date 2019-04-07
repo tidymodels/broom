@@ -20,7 +20,6 @@ test_that("tidy.geeglm", {
   check_arguments(tidy.geeglm)
   
   td <- tidy(fit, conf.int = TRUE)
-  tdq <- tidy(fit, quick = TRUE)
   
   expect_warning(
     td2 <- tidy(fit, conf.int = FALSE, exponentiate = TRUE),
@@ -31,6 +30,5 @@ test_that("tidy.geeglm", {
   )
   
   check_tidy_output(td)
-  check_tidy_output(tdq)
   check_tidy_output(td2)
 })

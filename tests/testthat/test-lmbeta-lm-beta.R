@@ -26,8 +26,6 @@ test_that("tidy.lm.beta works", {
   td <- tidy(fit)
   td2 <- tidy(fit2)
   
-  tdq <- tidy(fit, quick = TRUE)
-  tdq2 <- tidy(fit2, quick = TRUE)
   
   # conf.int = TRUE works for rank deficient fits
   # should get a "NaNs produced" warning
@@ -35,15 +33,11 @@ test_that("tidy.lm.beta works", {
   
   check_tidy_output(td)
   check_tidy_output(td2)
-  check_tidy_output(tdq)
-  check_tidy_output(tdq2)
   
   check_tidy_output(td_rd)
   
   check_dims(td, expected_rows = 2)
   check_dims(td2, expected_rows = 3)
-  check_dims(tdq, expected_cols = 2)
-  check_dims(tdq2, expected_cols = 2)
   
   expect_equal(td$term, c("(Intercept)", "wt"))
   expect_equal(td2$term, c("(Intercept)", "wt", "log(disp)"))

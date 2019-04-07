@@ -20,10 +20,8 @@ test_that("nls tidier arguments", {
 test_that("tidy.nls", {
   
   td <- tidy(fit, conf.int = TRUE)
-  tdq <- tidy(fit, conf.int = TRUE, quick = TRUE)
   
   check_tidy_output(td)
-  check_tidy_output(tdq)
   check_dims(td, 3, 7)
   
   expect_equal(td$term, c("a", "b", "c"))

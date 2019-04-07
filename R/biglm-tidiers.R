@@ -5,7 +5,6 @@
 #'   [biglm::bigglm()].
 #' @template param_confint
 #' @template param_exponentiate
-#' @template param_quick
 #' @template param_unused_dots
 #' 
 #' @evalRd return_tidy(regression = TRUE)
@@ -35,13 +34,8 @@
 #' @family biglm tidiers
 #' @seealso [tidy()], [biglm::biglm()], [biglm::bigglm()]
 tidy.biglm <- function(x, conf.int = FALSE, conf.level = .95,
-                       exponentiate = FALSE, quick = FALSE, ...) {
-  if (quick) {
-    co <- stats::coef(x)
-    ret <- tibble::enframe(co, name = "term", value = "estimate")
-    return(ret)
-  }
-  
+                       exponentiate = FALSE, ...) {
+
   mat <- summary(x)$mat
   nn <- c("estimate", "conf.low", "conf.high", "std.error", "p.value")
   ret <- fix_data_frame(mat, nn)

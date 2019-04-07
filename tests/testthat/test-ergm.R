@@ -16,13 +16,10 @@ test_that("ergm tidier arguments", {
 })
 
 test_that("tidy.ergm", {
-  tdq <- tidy(gest, quick = TRUE)
   tde <- tidy(gest, conf.int = TRUE, exponentiate = TRUE)
   
-  check_tidy_output(tdq)
   check_tidy_output(tde)
   
-  check_dims(tdq, 2, 2)
   check_dims(tde, 2, 7)
   
   # tidy.ergm warns when exponentiating w/o link

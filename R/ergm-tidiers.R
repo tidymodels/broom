@@ -8,7 +8,6 @@
 #' @param x An `ergm` object returned from a call to [ergm::ergm()].
 #' @template param_confint
 #' @template param_exponentiate
-#' @template param_quick
 #' @param ... Additional arguments to pass to [ergm::summary()].
 #'   **Cautionary note**: Mispecified arguments may be silently ignored.
 #' 
@@ -56,12 +55,8 @@
 #'   [ergm::summary()]
 #' @family ergm tidiers
 tidy.ergm <- function(x, conf.int = FALSE, conf.level = .95,
-                      exponentiate = FALSE, quick = FALSE, ...) {
-  if (quick) {
-    co <- x$coef
-    ret <- tibble(term = names(co), estimate = unname(co))
-    return(process_ergm(ret, conf.int = FALSE, exponentiate = exponentiate))
-  }
+                      exponentiate = FALSE, ...) {
+
   co <- ergm:::summary.ergm(x, ...)$coefs
 
   nn <- c("estimate", "std.error", "mcmc.error", "p.value")

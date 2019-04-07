@@ -4,7 +4,6 @@
 #' @param x A `plm` objected returned by [plm::plm()].
 #' @template param_confint
 #' @template param_exponentiate
-#' @template param_quick
 #' @template param_unused_dots
 #' 
 #' @evalRd return_tidy(regression = TRUE)
@@ -31,10 +30,10 @@
 #' @seealso [tidy()], [plm::plm()], [tidy.lm()]
 #' @family plm tidiers
 tidy.plm <- function(x, conf.int = FALSE, conf.level = .95,
-                     exponentiate = FALSE, quick = FALSE, ...) {
+                     exponentiate = FALSE, ...) {
   tidy.lm(x,
     conf.int = conf.int, conf.level = conf.level,
-    exponentiate = exponentiate, quick = quick
+    exponentiate = exponentiate
   )
 }
 
@@ -78,12 +77,13 @@ augment.plm <- function(x, data = model.frame(x), ...) {
 #' @family plm tidiers
 glance.plm <- function(x, ...) {
   s <- summary(x)
-  ret <- tibble(r.squared = s$r.squared['rsq'],
-                adj.r.squared = s$r.squared['adjrsq'],
-                statistic = s$fstatistic$statistic,
-                p.value = s$fstatistic$p.value,
-                deviance = stats::deviance(x),
-                df.residual = stats::df.residual(x),
-                nobs = stats::nobs(x))
-  ret
+  tibble(
+    r.squared = s$r.squared['rsq'],
+    adj.r.squared = s$r.squared['adjrsq'],
+    statistic = s$fstatistic$statistic,
+    p.value = s$fstatistic$p.value,
+    deviance = stats::deviance(x),
+    df.residual = stats::df.residual(x),
+    nobs = stats::nobs(x)
+  )
 }

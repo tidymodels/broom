@@ -28,11 +28,8 @@ test_that("gamless tidier arguments", {
 
 test_that("tidy.gamlss", {
   td <- tidy(fit)
-  tdq <- tidy(fit, quick = TRUE)
   
   check_tidy_output(td)
-  check_tidy_output(tdq)
   
   check_dims(td, 6, 6)
-  check_dims(tdq, 2, 2)
 })
