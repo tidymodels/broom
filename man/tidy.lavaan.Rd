@@ -7,7 +7,8 @@
 \alias{cfa_tidiers}
 \title{Tidy a(n) lavaan object}
 \usage{
-\method{tidy}{lavaan}(x, conf.int = FALSE, conf.level = 0.95, ...)
+\method{tidy}{lavaan}(x, conf.int = FALSE, conf.level = 0.95,
+  quick = FALSE, ...)
 }
 \arguments{
 \item{x}{A \code{lavaan} object, such as those returned from \code{\link[lavaan:cfa]{lavaan::cfa()}},
@@ -19,6 +20,10 @@ interval in the tidied output. Defaults to \code{FALSE}.}
 \item{conf.level}{The confidence level to use for the confidence interval
 if \code{conf.int = TRUE}. Must be strictly greater than 0 and less than 1.
 Defaults to 0.95, which corresponds to a 95 percent confidence interval.}
+
+\item{quick}{Logical indicating if the only the \code{term} and \code{estimate}
+columns should be returned. Often useful to avoid time consuming
+covariance and standard error calculations. Defaults to \code{FALSE}.}
 
 \item{...}{Additional arguments passed to \code{\link[lavaan:parameterEstimates]{lavaan::parameterEstimates()}}.
 \strong{Cautionary note}: Misspecified arguments may be silently ignored.}
@@ -59,7 +64,9 @@ library(lavaan)
  
 cfa.fit <- cfa('F =~ x1 + x2 + x3 + x4 + x5 + x6 + x7 + x8 + x9',
                data = HolzingerSwineford1939, group = "school")
+               
 tidy(cfa.fit)
+tidy(cfa.fit, quick = TRUE)
 
 }
 \seealso{
