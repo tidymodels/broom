@@ -1,4 +1,4 @@
-# broom 0.5.1.9000
+# broom 0.5.2.9000
 (To be released as 0.7.0)
 
 ## Breaking changes
@@ -11,6 +11,7 @@ changes in this version of `broom`. We list them below-
     `AIC`, `BIC, deviance`, `nobs`. This is in response to conversation that
     took place in #212. Note that `tidy.aov` can be used to get numerator and
     denominator degrees of freedom.
+    
 
 ## Changes to `augment()`
 
@@ -31,6 +32,10 @@ pending getting `safepredict()` going urgh)
 
 - `augment()` tries to give an informative error when `data` isn't the original
   training data
+  
+## Changes to `glance()`
+
+- Most of the glance methods return a `nobs` column now! (TODO: KUDOS)
 
 ## Degrees of freedom in `glance.lm()` have changed! (#212, #273)
 
@@ -63,9 +68,18 @@ TODO: sort out what happens to `glance.aov()`
 
 ## New tidiers, features and bugfixes
 
+- Added support for `tidy.lavaan()` to take `quick = TRUE`. (#628)
+
+- `ordinal` tidier rewrite
+
 - Added tidiers for `pam` objects from the `cluster` package. (#637)
+
+- Added `tidy.svyglm()` and `glance.svyglm()` (#611)
+
 - Previously, F-statistics for weak instruments were returned through `glance.ivreg()`. F-statistics are now returned through `tidy.ivreg(instruments = TRUE)`. Default is `tidy.ivreg(instruments = FALSE)`. `glance.ivreg()` still returns Wu-Hausman and Sargan test statistics.
+
 - Added `tidy.regsubsets()` for best subsets linear regression from the `leaps` package
+
 - Added method `tidy.lm.beta()` to tidy `lm.beta` class models (#545 by @mattle24)
 - Add feature for glance.biglm to return df.residual
 - Patch bug in glance.lavaan (#577)
@@ -103,15 +117,12 @@ TODO: sort out what happens to `glance.aov()`
 
 ### Bug fixes
 
+- Bug fix to better allow `tidy.boot()` to support confidence intervals (#581)
 - Bug fix to allow `augment.kmeans()` to work with masked data (#609)
 - Bug fix to allow `augment.Mclust()` to work on univariate data (#490)
-
 - Bug fix to allow `tidy.htest()` to supports equal variances (#608)
-
 - Bug fix for `tidy.mlm()` when passed `quick = TRUE` (#539 by @MatthieuStigler)
-
 - Bug fix for `tidy.polr()` when passed `conf.int = TRUE` (#498)
-
 - Bug fix in `glance.lavaan()` (#577)
 
 ## Deprecations
@@ -128,6 +139,8 @@ TODO: sort out what happens to `glance.aov()`
 
 The following tidiers have been removed from `broom` but were not soft
 deprecated in the previous release:
+
+- `tidy.summaryDefault()`, `glance.summaryDefault()` are gone
 
 - `glance.summary.lm()`
 

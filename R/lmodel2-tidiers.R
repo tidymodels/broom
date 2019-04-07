@@ -20,8 +20,8 @@
 #'
 #'   The returned p-value is one-tailed and calculated via a permutation test.
 #'   A permutational test is used because distributional assumptions may not not
-#'   be valid. More information can be found in the vignette
-#'   (\code{\link{vignette("mod2user")}})
+#'   be valid. More information can be found in
+#'   `vignette("mod2user", package = "lmodel2")`.
 #'
 #' @examples
 #' 
@@ -47,7 +47,11 @@
 #' @family lmodel2 tidiers
 tidy.lmodel2 <- function(x, ...) {
   ret <- x$regression.results[c(1:3, 5)] %>%
-    select(method = Method, Intercept, Slope, p.value = quote("P-perm (1-tailed)")) %>%
+    select(
+      method = Method,
+      Intercept,
+      Slope,
+      p.value = `P-perm (1-tailed)`) %>%
     tidyr::gather(term, estimate, -method, -p.value) %>%
     arrange(method, term)
 

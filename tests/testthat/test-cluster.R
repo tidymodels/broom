@@ -3,6 +3,9 @@ context("test-cluster")
 skip_if_not_installed("modeltests")
 library(modeltests)
 
+skip_if_not_installed("cluster")
+library(cluster)
+
 x <- iris %>%
   select(-Species)
 
@@ -16,7 +19,9 @@ test_that("pam tidier arguments", {
 
 test_that("tidy.pam", {
   td <- tidy(fit)
-  check_tidy_output(td)
+  
+  # includes names of input data columns, so strict = FALSE
+  check_tidy_output(td, strict = FALSE)
   check_dims(td, 3, 11)
 })
 

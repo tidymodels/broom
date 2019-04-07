@@ -98,25 +98,26 @@ tidy.aov <- function(x, ...) {
   summary(x)[[1]] %>%
     tibble::as_tibble(rownames = "term") %>%
     dplyr::mutate("term" = stringr::str_trim(term)) %>%
-    dplyr::rename("df" = "Df",
-                  "sumsq" = "Sum Sq",
-                  "meansq" = "Mean Sq",
-                  "statistic" = "F value",
-                  "p.value" = "Pr(>F)")
+    rename2("df" = "Df",
+            "sumsq" = "Sum Sq",
+            "meansq" = "Mean Sq",
+            "statistic" = "F value",
+            "p.value" = "Pr(>F)")
 }
+
 
 #' @templateVar class lm
 #' @template title_desc_glance
 #'
 #' @inherit tidy.aov params examples
-#' 
-#' @note 
+#'
+#' @note
 #' From `0.7.0`, `broom` has changed the return summary and the new model
 #' summary dataframe contains only the following information- `logLik`, `IC`,
 #' `BIC`, `deviance`, `nobs`. Note that `tidy.aov` contains the numerator and
 #' denominator degrees of freedom, which were previously included in the glance
 #' summary.
-#' 
+#'
 #' @evalRd return_glance(
 #'   "logLik",
 #'   "AIC",
@@ -124,7 +125,7 @@ tidy.aov <- function(x, ...) {
 #'   "deviance",
 #'   "nobs"
 #' )
-#' 
+#'
 #' @export
 #' @seealso [glance()]
 #' @family anova tidiers

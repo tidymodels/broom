@@ -10,7 +10,8 @@
 \arguments{
 \item{x}{An \code{pam} object returned from \code{\link[cluster:pam]{cluster::pam()}}}
 
-\item{col.names}{Column names in the input data frame. Defaults to the names of the variables in x.  Set to NULL to get names \code{x1, x2, ...}.}
+\item{col.names}{Column names in the input data frame.
+Defaults to the names of the variables in x.}
 
 \item{...}{Additional arguments. Not used. Needed to match generic
 signature only. \strong{Cautionary note:} Misspelled arguments will be
@@ -45,7 +46,7 @@ p <- pam(x, k = 3)
 
 tidy(p)
 glance(p)
-augment(p,x)
+augment(p, x)
 
 augment(p, x) \%>\% 
   ggplot(aes(Sepal.Length, Sepal.Width)) +
@@ -62,8 +63,8 @@ Other pam tidiers: \code{\link{augment.pam}},
 \value{
 A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
   \item{size}{Size of each cluster.}
-  \item{max_diss}{Maximal dissimilarity between the observations in the cluster and that cluster's medoid.}
-  \item{av_diss}{Average dissimilarity between the observations in the cluster and that cluster's medoid.}
+  \item{max.diss}{Maximal dissimilarity between the observations in the cluster and that cluster's medoid.}
+  \item{avg.diss}{Average dissimilarity between the observations in the cluster and that cluster's medoid.}
   \item{diameter}{Diameter of the cluster.}
   \item{separation}{Separation of the cluster.}
   \item{avg.width}{Average silhouette width of the cluster.}
