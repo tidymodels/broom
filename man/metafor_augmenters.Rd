@@ -19,9 +19,6 @@ proceed using \code{conf.level = 0.95}. Additionally, if you pass
 accept a \code{newdata} argument, it will use the default value for
 the \code{data} argument.}
 }
-\value{
-a \code{tibble}
-}
 \description{
 Augment accepts a model object and a dataset and adds
 information about each observation in the dataset. Most commonly, this
@@ -78,5 +75,19 @@ df <-
 meta_analysis <- rma(yi, vi, data = df, method = "EB")
 
 augment(meta_analysis)
+
+}
+\value{
+A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
+  \item{.conf.high}{Upper bound on confidence interval for fitted values.}
+  \item{.conf.low}{Lower bound on confidence interval for fitted values.}
+  \item{.cred.high}{Upper bound on credible interval for fitted values.}
+  \item{.cred.low}{Lower bound on credible interval for fitted values.}
+  \item{.fitted}{Fitted or predicted value.}
+  \item{.moderator}{In meta-analysis, the moderators used to calculate the predicted values.}
+  \item{.moderator.level}{In meta-analysis, the level of the moderators used to calculate the predicted values.}
+  \item{.resid}{The difference between fitted and observed values.}
+  \item{.se.fit}{Standard errors of fitted values.}
+  \item{.observed}{The observed values for the individual studies}
 
 }

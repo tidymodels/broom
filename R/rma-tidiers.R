@@ -101,7 +101,19 @@ tidy.rma <- function(x, conf.int = FALSE, conf.level = 0.95, exponentiate = FALS
 #' @param x An `rma` created by the `metafor` package.
 #' @template param_unused_dots
 #'
-#' @return a `tibble`
+#' @evalRd return_glance(
+#'   "nobs", 
+#'   "measure", 
+#'   "method", 
+#'   "i.squared", 
+#'   "h.squared", 
+#'   "tau.squared", 
+#'   "tau.squared.se", 
+#'   "cochran.qe", 
+#'   "p.value.cochran.qe", 
+#'   "cochran.qm", 
+#'   "p.value.cochran.qm"
+#' )
 #' @export
 #'
 #' @examples
@@ -159,7 +171,18 @@ glance.rma <- function(x, ...) {
 #' @param x An `rma` created by the `metafor` package.
 #' @template param_unused_dots
 #'
-#' @return a `tibble`
+#' @evalRd return_augment(
+#'   .observed = "The observed values for the individual studies", 
+#'   ".fitted", 
+#'   ".se.fit", 
+#'   ".conf.low", 
+#'   ".conf.high", 
+#'   ".cred.low", 
+#'   ".cred.high", 
+#'   ".resid",
+#'   ".moderator",
+#'   ".moderator.level"
+#' )
 #' @export
 #'
 #' @examples
@@ -231,7 +254,6 @@ augment.rma <- function(x, ...) {
     .observed = y,
     pred
   )
-  
   
   no_study_names <- all(x$slab == as.character(seq_along(x$slab)))
   
