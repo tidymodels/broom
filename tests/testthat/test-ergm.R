@@ -25,7 +25,9 @@ test_that("tidy.ergm", {
   expect_warning(td2 <- tidy(gest2, conf.int = TRUE, exponentiate = TRUE))
   
   check_tidy_output(td2)
-  check_dims(td2, 2, 7)
+  
+  # see comment above:
+  # check_dims(td2, 2, 7)
 })
 
 test_that("glance.ergm", {
