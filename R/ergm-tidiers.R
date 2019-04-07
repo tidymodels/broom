@@ -55,9 +55,21 @@
 #' @family ergm tidiers
 tidy.ergm <- function(x, conf.int = FALSE, conf.level = 0.95,
                       exponentiate = FALSE,  ...) {
-
-  ret <- summary(x, ...)$coefs
-  names(ret) <- c("estimate", "std.error", "mcmc.error", "statistic", "p.value")
+  
+  # in ergm 3.9 summary(x, ...)$coefs has columns:
+  #   Estimate, Std. Error, MCMC %, Pr(>|Z|)
+  
+  # in ergm 3.10 summary(x, ...)$coefs has columns:
+  #   Estimate, Std. Error, MCMC %, z value, Pr(>|Z|)
+  
+  ret <- summary(x, ...)$coefs %>% 
+    rename2(
+      estimate = "Estimate", 
+      std.error = "Std. Error",
+      mcmc.error = "MCMC %",
+      statistic = "z value",
+      p.value = "Pr(>|z|)"
+    )
   
   if (conf.int) {
     z <- stats::qnorm(1 - (1 - conf.level) / 2)

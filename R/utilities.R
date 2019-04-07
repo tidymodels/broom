@@ -1,3 +1,17 @@
+# Rename only those columns in a data frame that are present. Example:
+# 
+# rename2(
+#   tibble(dog = 1),
+#   cat = dog,
+#   mouse = gerbil
+# )
+#
+rename2 <- function(.data, ...) {
+  dots <- quos(...)
+  present <- purrr::keep(dots, ~quo_name(.x) %in% colnames(.data))
+  rename(.data, !!!present)
+}
+
 validate_augment_input <- function(model, data = NULL, newdata = NULL) {
   
   # careful: `data` may be non-null due to default argument such as
