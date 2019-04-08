@@ -1,7 +1,7 @@
 #' @templateVar class survfit
 #' @template title_desc_tidy
 #'
-#' @param x An `survfit` object returned from [survival::survfit()].
+#' @param x A `survfit` object returned from [survival::survfit()].
 #' @template param_unused_dots
 #'
 #' @evalRd return_tidy(
@@ -48,39 +48,89 @@
 #' @family survival tidiers
 #' 
 tidy.survfit <- function(x, ...) {
-  if (inherits(x, "survfitms")) {
-    
-    # c() coerces to vector
-    ret <- data.frame(
-      time = x$time,
-      n.risk = c(x$n.risk),
-      n.event = c(x$n.event),
-      n.censor = c(x$n.censor),
-      estimate = c(x$pstate),
-      std.error = c(x$std.err),
-      conf.high = c(x$upper),
-      conf.low = c(x$lower),
-      state = rep(x$states, each = nrow(x$pstate))
-    )
-    
-    ret <- ret[ret$state != "", ]
-  } else {
-    ret <- data.frame(
-      time = x$time,
-      n.risk = x$n.risk,
-      n.event = x$n.event,
-      n.censor = x$n.censor,
-      estimate = x$surv,
-      std.error = x$std.err,
-      conf.high = x$upper,
-      conf.low = x$lower
-    )
+  
+  ret <- tibble(
+    time = x$time,
+    n.risk = x$n.risk,
+    n.event = x$n.event,
+    n.censor = x$n.censor,
+    estimate = x$surv,
+    std.error = x$std.err
+  )
+  
+  # TODO: when is std.err present?
+  
+  # add confidence intervals (only) if present
+  if (!is.null(x$lower)) {
+    ret$conf.low <- c(x$lower)
+    ret$conf.high <- c(x$upper)
   }
+  
+  
   # strata are automatically recycled if there are multiple states
   if (!is.null(x$strata)) {
     ret$strata <- rep(names(x$strata), x$strata)
   }
-  as_tibble(ret)
+  
+  ret
+}
+
+#' @templateVar class survfitms
+#' @template title_desc_tidy
+#'
+#' @param x A `survfitms` object returned from [survival::survfit()].
+#' @template param_unused_dots
+#'
+#' @evalRd return_tidy(
+#'   "time",
+#'   "n.risk",
+#'   "n.event",
+#'   "n.censor",
+#'   estimate = "estimate of survival or cumulative incidence rate when
+#'     multistate",
+#'   "std.error",
+#'   "conf.low",
+#'   "conf.high",
+#'   state = "state if multistate survfit object input",
+#'   strata = "strata if stratified survfit object input"
+#' )
+#' 
+#' @inherit tidy.survfit examples
+#' 
+#' @export
+#' @seealso [tidy()], [survival::survfit()]
+#' @family survfit tidiers
+#' @family survival tidiers
+#' 
+tidy.survfitms <- function(x, ...) {
+  
+  # c() coerces to vector
+  ret <- tibble(
+    time = x$time,
+    n.risk = c(x$n.risk),
+    n.event = c(x$n.event),
+    n.censor = c(x$n.censor),
+    estimate = c(x$pstate),
+    std.error = c(x$std.err),
+    state = rep(x$states, each = nrow(x$pstate)) # distinct from tidy.survfit()
+  )
+  
+  # TODO: when is std.err present?
+  
+  # add confidence intervals (only) if present
+  if (!is.null(x$lower)) {
+    ret$conf.low <- c(x$lower)
+    ret$conf.high <- c(x$upper)
+  }
+  
+  ret <- ret[ret$state != "", ]
+  
+  # strata are automatically recycled if there are multiple states
+  if (!is.null(x$strata)) {
+    ret$strata <- rep(names(x$strata), x$strata)
+  }
+  
+  ret
 }
 
 #' @templateVar class survfit
@@ -107,14 +157,17 @@ tidy.survfit <- function(x, ...) {
 #' @family survival tidiers
 #' 
 glance.survfit <- function(x, ...) {
-  if (inherits(x, "survfitms")) {
-    stop("Cannot construct a glance of a multi-state survfit object.")
-  }
-  if (!is.null(x$strata)) {
-    stop("Cannot construct a glance of a multi-strata survfit object.")
-  }
+  if (inherits(x, "survfitms"))
+    stop("No glance method exists for multi-state survfit objects.",
+         call. = FALSE)
+  
+  if (!is.null(x$strata)) 
+    stop("No glance method exists for multi-strata survfit objects.",
+         call. = FALSE)
   
   s <- summary(x)
+  
+  # TODO: as_tibble?
   ret <- unrowname(as.data.frame(t(s$table)))
   
   colnames(ret) <- dplyr::recode(
@@ -122,9 +175,18 @@ glance.survfit <- function(x, ...) {
     "*rmean" = "rmean",
     "*se(rmean)" = "rmean.std.error"
   )
-  
-  colnames(ret)[utils::tail(seq_along(ret), 2)] <- c("conf.low", "conf.high")
 
+  # if a CI was calculated, the last two elements
+  # contain the CI, but with auto-generated names
+  # (e.g. 0.95LCL and 0.95UCL), so we rename them
+  
+  # TODO: use rename2?
+  
+  if (!is.null(x$lower)) {
+    colnames(ret)[utils::tail(seq_along(ret), 2)] <-
+      c("conf.low", "conf.high")
+  }
+  
   ret$nobs <- stats::nobs(x)
 
   as_tibble(ret)
