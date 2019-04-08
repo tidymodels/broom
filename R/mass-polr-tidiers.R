@@ -97,6 +97,14 @@ glance.polr <- function(x, ...) {
 #' 
 augment.polr <- function(x, data = model.frame(x), newdata = NULL,
                          type.predict = c("class"), ...) {
+  
   type <- rlang::arg_match(type.predict)
-  augment_columns(x, data, newdata, type = type.predict)
+  
+  df <- if (is.null(newdata)) data else newdata
+  df <- as_broom_tibble(df)
+  
+  df$.fitted <- predict(object = x, newdata = df, type = type)
+  
+  df
+  
 }

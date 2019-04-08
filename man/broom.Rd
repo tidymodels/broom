@@ -89,10 +89,12 @@ Other contributors:
   \item Clara Wang \email{clara.wang.94@gmail.com} [contributor]
   \item Abby Smith \email{als1@u.northwestern.edu} (0000-0002-3207-0375) [contributor]
   \item E Auden Krauska \email{krauskae@gmail.com} (0000-0002-1466-5850) [contributor]
+  \item Alex Wang \email{x249wang@uwaterloo.ca} [contributor]
   \item Malcolm Barrett \email{malcolmbarrett@gmail.com} (0000-0003-0299-5825) [contributor]
   \item Charles Gray \email{charlestigray@gmail.com} (0000-0002-9978-011X) [contributor]
   \item Jared Wilber [contributor]
   \item Vilmantas Gegzna \email{GegznaV@gmail.com} (0000-0002-9500-5167) [contributor]
+  \item Eduard Szoecs \email{eduardszoecs@gmail.com} [contributor]
 }
 
 }
