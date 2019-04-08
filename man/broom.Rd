@@ -79,7 +79,6 @@ Other contributors:
   \item Jason Muhlenkamp \email{jason.muhlenkamp@gmail.com} [contributor]
   \item Matt Lehman [contributor]
   \item Bill Denney \email{wdenney@humanpredictions.com} (0000-0002-5759-428X) [contributor]
-  \item Eduard Szoecs \email{eduardszoecs@gmail.com} [contributor]
   \item Nic Crane [contributor]
   \item Andrew Bates [contributor]
   \item Vincent Arel-Bundock \email{vincent.arel-bundock@umontreal.ca} (0000-0003-2042-7063) [contributor]
@@ -94,6 +93,8 @@ Other contributors:
   \item Malcolm Barrett \email{malcolmbarrett@gmail.com} (0000-0003-0299-5825) [contributor]
   \item Charles Gray \email{charlestigray@gmail.com} (0000-0002-9978-011X) [contributor]
   \item Jared Wilber [contributor]
+  \item Vilmantas Gegzna \email{GegznaV@gmail.com} (0000-0002-9500-5167) [contributor]
+  \item Eduard Szoecs \email{eduardszoecs@gmail.com} [contributor]
 }
 
 }

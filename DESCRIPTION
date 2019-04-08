@@ -207,7 +207,7 @@ Authors@R:
       person(given = "Malcolm",
              family = "Barrett",
              role = "ctb",
-             email = "malcolmbarrett@gmail.com", 
+             email = "malcolmbarrett@gmail.com",
              comment = c(ORCID = "0000-0003-0299-5825")),
       person(given = "Charles",
              family = "Gray",
@@ -219,13 +219,13 @@ Authors@R:
              role = "ctb"),
       person(given = "Vilmantas",
              family = "Gegzna",
-             email = "GegznaV@gmail.com",
              role = "ctb",
+             email = "GegznaV@gmail.com",
              comment = c(ORCID = "0000-0002-9500-5167")),
-      person(given = "Eduard", 
+      person(given = "Eduard",
              family = "Szoecs",
-             email = "eduardszoecs@gmail.com",
-             role = "ctb"))
+             role = "ctb",
+             email = "eduardszoecs@gmail.com"))
 Description: Summarizes key information about statistical
     objects in tidy tibbles. This makes it easy to report results, create
     plots and consistently work with large numbers of models at once.
@@ -263,13 +263,13 @@ Suggests:
     biglm,
     binGroup,
     boot,
-    brms,
     btergm,
     car,
     caret,
     cluster,
     coda,
     covr,
+    drc,
     e1071,
     emmeans,
     ergm,
@@ -290,9 +290,10 @@ Suggests:
     Lahman,
     lavaan,
     leaps,
+    leaps,
     lfe,
     lm.beta,
-    lme4,
+    lm.beta,
     lmodel2,
     lmtest,
     lsmeans,
@@ -302,12 +303,13 @@ Suggests:
     Matrix,
     mclust,
     mediation,
+    metafor,
     mgcv,
+    modeltests,
     modeltests,
     muhaz,
     multcomp,
     network,
-    nlme,
     nnet,
     orcutt (>= 2.2),
     ordinal,
@@ -319,8 +321,6 @@ Suggests:
     rmarkdown,
     robust,
     rsample,
-    rstan,
-    rstanarm,
     sp,
     speedglm,
     spelling,
@@ -330,12 +330,7 @@ Suggests:
     testthat,
     tseries,
     xergm,
-    zoo,
-    modeltests,
-    leaps,
-    lm.beta,
-    drc
-    metafor
+    zoo
 VignetteBuilder: 
     knitr
 Remotes: 
