@@ -2,21 +2,37 @@
 % Please edit documentation in R/rma-tidiers.R
 \name{glance.rma}
 \alias{glance.rma}
-\title{Construct a one-row summary of meta-analysis model fit statistics.}
+\title{Glance at a(n) rma object}
 \usage{
 \method{glance}{rma}(x, ...)
 }
 \arguments{
 \item{x}{An \code{rma} created by the \code{metafor} package.}
 
-\item{...}{Additional arguments}
-}
-\value{
-a \code{tibble}
+\item{...}{Additional arguments. Not used. Needed to match generic
+signature only. \strong{Cautionary note:} Misspelled arguments will be
+absorbed in \code{...}, where they will be ignored. If the misspelled
+argument has a default value, the default value will be used.
+For example, if you pass \code{conf.lvel = 0.9}, all computation will
+proceed using \code{conf.level = 0.95}. Additionally, if you pass
+\code{newdata = my_tibble} to an \code{\link[=augment]{augment()}} method that does not
+accept a \code{newdata} argument, it will use the default value for
+the \code{data} argument.}
 }
 \description{
-\code{glance()} computes a one-row summary of  meta-analysis objects,
-including estimates of heterogenity and model fit.
+Glance accepts a model object and returns a \code{\link[tibble:tibble]{tibble::tibble()}}
+with exactly one row of model summaries. The summaries are typically
+goodness of fit measures, p-values for hypothesis tests on residuals,
+or model convergence information.
+
+Glance never returns information from the original call to the modelling
+function. This includes the name of the modelling function or any
+arguments passed to the modelling function.
+
+Glance does not calculate summary measures. Rather, it farms out these
+computations to appropriate methods and gathers the results together.
+Sometimes a goodness of fit measure will be undefined. In these cases
+the measure will be reported as \code{NA}.
 }
 \examples{
 
@@ -35,5 +51,20 @@ df <-
 meta_analysis <- rma(yi, vi, data = df, method = "EB")
 
 glance(meta_analysis)
+
+}
+\value{
+A \code{\link[tibble:tibble]{tibble::tibble()}} with exactly one row and columns:
+  \item{cochran.qe}{In meta-analysis, test statistic for the Cochran's Q_e test of residual heterogeneity.}
+  \item{cochran.qm}{In meta-analysis, test statistic for the Cochran's Q_m omnibus test of coefficients.}
+  \item{h.squared}{Value of the H-Squared statistic}
+  \item{i.squared}{Value of the I-Squared statistic}
+  \item{measure}{the measure used in the meta-analysis}
+  \item{method}{Which method was used.}
+  \item{nobs}{Number of observations used.}
+  \item{p.value.cochran.qe}{In meta-analysis, p-value for the Cochran's Q_e test of residual heterogeneity.}
+  \item{p.value.cochran.qm}{In meta-analysis, p-value for the Cochran's Q_m omnibus test of coefficients.}
+  \item{tau.squared}{In meta-analysis, estimated amount of residual heterogeneity.}
+  \item{tau.squared.se}{In meta-analysis, standard error of residual heterogeneity.}
 
 }

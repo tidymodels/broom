@@ -1,15 +1,23 @@
-#' Tidying methods for meta-analyis objects
-#'
-#' These methods tidy the results of meta-analysis objects from the metafor package
-#'
+#' @templateVar class rma
+#' @template title_desc_tidy
+#' 
 #' @param x An `rma` created by the `metafor` package.
 #' @inheritParams tidy.lm
 #' @param include_studies Logical. Should individual studies be included in the
 #'    output?
-#' @param ... Additional arguments
-#' @param measure Measure type. See [metafor::rma()]
+#' @template param_unused_dots
+#' @param measure Measure type. See [metafor::escalc()]
 #'
-#' @return A `tibble`
+#' @evalRd return_tidy(
+#'   study = "The name of the individual study",
+#'   type = "The estimate type  (summary vs individual study)",
+#'   "estimate",
+#'   "std.error",
+#'   "statistic",
+#'   "p.value",
+#'   "conf.low",
+#'   "conf.high"
+#' )
 #' @export
 #'
 #' @examples
@@ -30,21 +38,11 @@
 #'
 #' tidy(meta_analysis)
 #'
-#' @rdname tidiers
+#' @rdname metafor_tidiers
 #' 
 tidy.rma <- function(x, conf.int = FALSE, conf.level = 0.95, exponentiate = FALSE,
                      include_studies = TRUE, measure = "GEN", ...) {
-  
-  estimates <- metafor::escalc(yi = x$yi.f, vi = x$vi.f, measure = measure) %>%
-    summary(level = conf.level * 100) %>% 
-    as.data.frame(stringsAsFactors = FALSE)
-  
-  estimates <- cbind(x$slab, "study", estimates[, c("yi", "sei", "zi")], NA,
-                     estimates[, c("ci.lb", "ci.ub")], stringsAsFactors = FALSE)
-  names(estimates) <- c("study", "type", "estimate", "std.error", "statistic",
-                        "p.value", "conf.low", "conf.high")
-  estimates <- tibble::as_tibble(estimates)
-  
+  # tidy summary estimates
   betas <- x$beta
   if (!is.null(nrow(betas)) && nrow(betas) > 1) {
     # get estimate type and fix spelling
@@ -57,36 +55,74 @@ tidy.rma <- function(x, conf.int = FALSE, conf.level = 0.95, exponentiate = FALS
     betas <- betas[1]
   }
   
-  results <- tibble::tibble(study = study, type = "summary",
-                            estimate = betas, std.error = x$se,
-                            statistic = x$zval, p.value = x$pval,
-                            conf.low = x$ci.lb, conf.high = x$ci.ub)
-  .data <- if (include_studies) rbind(estimates, results) else results
+  results <- tibble::tibble(
+    study = study, 
+    type = "summary",
+    estimate = betas, 
+    std.error = x$se,
+    statistic = x$zval, 
+    p.value = x$pval,
+    conf.low = x$ci.lb, 
+    conf.high = x$ci.ub
+  )
+  
+  # tidy individual studies
+  if (include_studies) {
+    # use `metafor::escalc` to standardize estimates and confidence intervals
+    estimates <- metafor::escalc(yi = x$yi.f, vi = x$vi.f, measure = measure) %>%
+      summary(level = conf.level * 100) %>% 
+      as.data.frame(stringsAsFactors = FALSE)
+    
+    n_studies <- length(x$slab)
+    
+    estimates <- dplyr::bind_cols(
+      study = as.character(x$slab), 
+      # dplyr::bind_cols is strict about recycling, so repeat for each study
+      type = rep("study", n_studies), 
+      estimates[, c("yi", "sei", "zi")], 
+      p.value = rep(NA, n_studies),
+      estimates[, c("ci.lb", "ci.ub")] 
+    )
+    
+    names(estimates) <- c("study", "type", "estimate", "std.error", "statistic",
+                          "p.value", "conf.low", "conf.high")
+    estimates <- tibble::as_tibble(estimates)
+    results <- dplyr::bind_rows(estimates, results) 
+  }
   
   if (exponentiate) {
-    .data$estimate <- exp(.data$estimate)
-    .data$conf.low <- exp(.data$conf.low)
-    .data$conf.high <- exp(.data$conf.high)
+    results <-  dplyr::mutate_at(results, dplyr::vars(estimate, conf.low, conf.high), exp)
   }
   
   if (!conf.int) {
-    .data <- .data[-which(names(.data) %in% c("conf.low", "conf.high"))]
+    results <- dplyr::select(results, -conf.low, -conf.high)
   }
   
-  attributes(.data$study) <- NULL
+  # remove extra model data from study names
+  attributes(results$study) <- NULL
   
-  tibble::remove_rownames(.data)
+  results
 }
 
-#' Construct a one-row summary of meta-analysis model fit statistics.
-#'
-#' `glance()` computes a one-row summary of  meta-analysis objects,
-#'  including estimates of heterogenity and model fit.
+#' @templateVar class rma
+#' @template title_desc_glance
 #'
 #' @param x An `rma` created by the `metafor` package.
-#' @param ... Additional arguments
+#' @template param_unused_dots
 #'
-#' @return a `tibble`
+#' @evalRd return_glance(
+#'   "nobs", 
+#'   "measure", 
+#'   "method", 
+#'   "i.squared", 
+#'   "h.squared", 
+#'   "tau.squared", 
+#'   "tau.squared.se", 
+#'   "cochran.qe", 
+#'   "p.value.cochran.qe", 
+#'   "cochran.qm", 
+#'   "p.value.cochran.qm"
+#' )
 #' @export
 #'
 #' @examples
@@ -108,6 +144,7 @@ tidy.rma <- function(x, conf.int = FALSE, conf.level = 0.95, exponentiate = FALS
 #' glance(meta_analysis)
 #'
 glance.rma <- function(x, ...) {
+  # reshape model fit statistics and clean names
   fit_stats <- metafor::fitstats(x)
   fit_stats <- fit_stats %>%
     t() %>%
@@ -115,6 +152,8 @@ glance.rma <- function(x, ...) {
   names(fit_stats) <-
     stringr::str_replace(names(fit_stats), "\\:", "")
   
+  # metafor returns different fit statistics for different models
+  # so use a list + `purrr::discard` to remove unrelated statistics
   list(
     nobs = x$k,
     measure = x$measure,
@@ -135,19 +174,27 @@ glance.rma <- function(x, ...) {
     purrr::discard(~length(.x) >= 2) %>%
     # change to tibble with correct column and row names
     as.data.frame() %>%
-    tibble::as_tibble() %>%
-    tibble::remove_rownames()
+    tibble::as_tibble()
 }
 
-#' Augment data with values from a meta-analysis model
-#'
-#' Augment the original data with model residuals, fitted values, and influence
-#' statistics.
+#' @templateVar class rma
+#' @template title_desc_augment
 #'
 #' @param x An `rma` created by the `metafor` package.
-#' @param ... additional arguments
+#' @template param_unused_dots
 #'
-#' @return a `tibble`
+#' @evalRd return_augment(
+#'   .observed = "The observed values for the individual studies", 
+#'   ".fitted", 
+#'   ".se.fit", 
+#'   ".conf.low", 
+#'   ".conf.high", 
+#'   ".cred.low", 
+#'   ".cred.high", 
+#'   ".resid",
+#'   ".moderator",
+#'   ".moderator.level"
+#' )
 #' @export
 #'
 #' @examples
@@ -168,14 +215,19 @@ glance.rma <- function(x, ...) {
 #'
 #' augment(meta_analysis)
 #'
-#' @rdname augmenters
+#' @rdname metafor_augmenters
 augment.rma <- function(x, ...) {
+  # metafor generally handles these for different models through the monolith
+  # `rma` class; using `purrr::possibly` primarily helps discard unused
+  # components but also helps get the right component for each model
   blup0 <- purrr::possibly(metafor::blup, NULL)
   residuals0 <- purrr::possibly(stats::residuals, NULL)
   influence0 <- purrr::possibly(stats::influence, NULL)
   
-  y <- x$yi
+  y <- x$yi.f
+  # get best linear unbiased predictors if available
   pred <- blup0(x)
+  # otherwise use `predict.rma()`
   if (is.null(pred)) pred <- predict(x)
   pred <- as.data.frame(pred)
   
@@ -185,11 +237,14 @@ augment.rma <- function(x, ...) {
   names(pred)[credible_intervals] <- c(".cred.low", ".cred.high")
   moderator <- names(pred) == "X"
   names(pred)[moderator] <- ".moderator"
+  moderator_level <- names(pred) == "tau2.level"
+  names(pred)[moderator_level] <- ".moderator.level"
   
   res <- residuals0(x)
   inf <- influence0(x)
+  # if model has influence statistics, bind them and clean their names
   if (!is.null(inf)) {
-    inf <- cbind(as.data.frame(inf$inf), dfbetas = inf$dfbs$intrcpt)
+    inf <- dplyr::bind_cols(as.data.frame(inf$inf), dfbetas = inf$dfbs$intrcpt)
     inf <- dplyr::select(
       inf, 
       .hat = hat, 
@@ -204,19 +259,30 @@ augment.rma <- function(x, ...) {
     )
   }
   
-  ret <- cbind(
-    .rownames = x$slab,
-    y,
-    pred,
-    .resid = res
-  )
-  
-  ret <- tibble::as_tibble(ret) %>%
-    tibble::remove_rownames()
-  
-  if (all(ret$.rownames == seq_along(ret$.rownames))) {
-    ret$.rownames <- NULL
+  if (nrow(pred) == 1) {
+    # Some metafor models only return a single prediction
+    # based on the summary estimate. `dplyr::bind_cols()` requires
+    # `pred` to be the same length as other results, so replicate
+    # prediction for each row
+    pred <- purrr::map_dfr(seq_along(x$slab), ~pred)
   }
   
-  ret
+  ret <- dplyr::bind_cols(
+    .rownames = as.character(x$slab),
+    .observed = y,
+    pred
+  )
+  
+  
+  # join residuals, if they exist for the model
+  if (!is.null(res)) {
+    res <- tibble::enframe(res, name = ".rownames", value = ".resid")
+    ret <- dplyr::left_join(ret, res, by = ".rownames")
+  }
+  
+  # don't return rownames if they are just row numbers
+  no_study_names <- all(x$slab == as.character(seq_along(x$slab)))
+  if (no_study_names) ret$.rownames <- NULL
+  
+  tibble::as_tibble(ret)
 }

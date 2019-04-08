@@ -19,8 +19,9 @@ test_that("metafor::rma tidier arguments", {
   check_arguments(augment.rma, strict = FALSE)
 })
 
-# RR test -----------------------------------------------------------------
 
+# set up metafor testing models -------------------------------------------
+# RR test -----------------------------------------------------------------
 # from the metafor homepage
 dat <-
   escalc(
@@ -35,14 +36,6 @@ dat <-
 # random effects ----------------------------------------------------------
 res.RE <- rma(yi, vi, data = dat, method = "EB")
 
-
-test_that(("returns tibble for RR"), {
-  check_tidy_output(tidy(res.RE))
-  # check_augment_outputs(glance(res.RE)
-  check_glance_outputs(glance(res.RE))
-})
-
-
 # mixed effects ----------------------------------------------------------
 res.ME <-
   rma(
@@ -52,13 +45,6 @@ res.ME <-
     data = dat,
     method = "EB"
   )
-
-test_that(("returns tibble for ME"), {
-  check_tidy_output(tidy(res.ME))
-  # check_augment_outputs(glance(res.ME))
-  check_glance_outputs(glance(res.ME))
-})
-
 
 # fixed effects ----------------------------------------------------------
 res.FE <-
@@ -70,15 +56,7 @@ res.FE <-
     method = "FE"
   )
 
-test_that(("returns tibble for FE"), {
-  check_tidy_output(tidy(res.FE))
-  # check_augment_outputs(glance(res.FE))
-  check_glance_outputs(glance(res.FE))
-})
-
-
 # Weighted Regression Analysis ---------------------------------------------
-
 dat2 <- data.frame(
   id = c(100, 308, 1596, 2479, 9021, 9028, 161, 172, 537, 7049),
   yi = c(-0.33, 0.32, 0.39, 0.31, 0.17, 0.64, -0.33, 0.15, -0.02, 0.00),
@@ -89,15 +67,7 @@ dat2 <- data.frame(
 
 res.WFE <- rma(yi, vi, mods = ~random + intensity, data = dat2, method = "FE")
 
-test_that(("returns tibble for weighted FE"), {
-  check_tidy_output(tidy(res.WFE))
-  # check_augment_outputs(glance(res.WFE))
-  check_glance_outputs(glance(res.WFE))
-})
-
-
 # multivariate models -----------------------------------------------------
-
 dat.long <-
   to.long(
     measure = "OR",
@@ -131,15 +101,7 @@ res.MV <-
     method = "ML"
   )
 
-test_that(("returns tibble for MV"), {
-  check_tidy_output(tidy(res.MV))
-  # check_augment_outputs(glance(res.MV))
-  check_glance_outputs(glance(res.MV))
-})
-
-
 # GLMM --------------------------------------------------------------------
-
 res.GLMM <-
   suppressWarnings(
     rma.glmm(
@@ -150,15 +112,7 @@ res.GLMM <-
     )
   )
 
-test_that(("returns tibble for GLMM"), {
-  check_tidy_output(tidy(res.GLMM))
-  # check_augment_outputs(glance(res.GLMM))
-  check_glance_outputs(glance(res.GLMM))
-})
-
-
 # Peto method -------------------------------------------------------------
-
 dat.yusuf1985$grp_ratios <-
   round(dat.yusuf1985$n1i / dat.yusuf1985$n2i, 2)
 
@@ -173,14 +127,7 @@ suppressWarnings(
   )
 )
 
-test_that(("returns tibble for peto"), {
-  check_tidy_output(tidy(res.peto))
-  # check_augment_outputs(glance(res.peto))
-  check_glance_outputs(glance(res.peto))
-})
-
 # Mantel-Haenszel Method for the Risk Difference --------------------------
-
 dat <- data.frame(
   age = c("Age <55", "Age 55+"),
   ai = c(8, 22),
@@ -201,9 +148,41 @@ res.MH <-
     level = 90
   )
 
-test_that(("returns tibble for MH"), {
+check_augment_rma_output <- function(x) {
+  modeltests::check_tibble(x, "augment")
+}
+
+# test rma tidiers output -------------------------------------------------
+
+test_that(("tidy.rma"), {
+  check_tidy_output(tidy(res.RE))
+  check_tidy_output(tidy(res.ME))
+  check_tidy_output(tidy(res.FE))
+  check_tidy_output(tidy(res.WFE))
+  check_tidy_output(tidy(res.MV))
+  check_tidy_output(tidy(res.GLMM))
+  check_tidy_output(tidy(res.peto))
   check_tidy_output(tidy(res.MH))
-  # check_augment_outputs(glance(res.MH))
+})
+
+test_that(("glance.rma"), {
+  check_glance_outputs(glance(res.RE))
+  check_glance_outputs(glance(res.ME))
+  check_glance_outputs(glance(res.FE))
+  check_glance_outputs(glance(res.WFE))
+  check_glance_outputs(glance(res.MV))
+  check_glance_outputs(glance(res.GLMM))
+  check_glance_outputs(glance(res.peto))
   check_glance_outputs(glance(res.MH))
 })
 
+test_that(("augment.rma"), {
+  check_augment_rma_output(augment(res.RE))
+  check_augment_rma_output(augment(res.ME))
+  check_augment_rma_output(augment(res.FE))
+  check_augment_rma_output(augment(res.WFE))
+  check_augment_rma_output(augment(res.MV))
+  check_augment_rma_output(augment(res.GLMM))
+  check_augment_rma_output(augment(res.peto))
+  check_augment_rma_output(augment(res.MH))
+})
