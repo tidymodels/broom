@@ -4,7 +4,8 @@
 #' @param x A [boot::boot()] object.
 #' @template param_confint
 #' @param conf.method Passed to the `type` argument of [boot::boot.ci()]. 
-#'   Defaults to `"perc"`.
+#'   Defaults to `"perc"`. The allowed types are `"perc"`, `"basic"`, 
+#'   `"bca"`, and `"norm"`. Does not support `"stud"` or `"all"`.
 #' @template param_unused_dots
 #' 
 #' @evalRd return_tidy("bias", "std.error", "term",
@@ -49,9 +50,10 @@ tidy.boot <- function(x,
                       ## conf.int?
                       conf.int = FALSE,
                       conf.level = 0.95,
-                      conf.method = "perc", ...) {
+                      conf.method = c("perc", "bca", "basic", "norm"),
+                      ...) {
   
-  # TODO: arg.match on conf.method
+  conf.method <- rlang::arg_match(conf.method)
   
   # calculate the bias and standard error
   # this is an adapted version of the code in print.boot, where the bias
@@ -65,6 +67,7 @@ tidy.boot <- function(x,
   index <- index[!allNA]
   t <- matrix(t[, !allNA], nrow = nrow(t))
   rn <- paste("t", index, "*", sep = "")
+  
   if (is.null(t0 <- boot.out$t0)) {
     if (is.null(boot.out$call$weights)) {
       op <- cbind(
@@ -101,15 +104,21 @@ tidy.boot <- function(x,
   ret <- fix_data_frame(op)
 
   if (conf.int) {
-    ci.list <- lapply(seq_along(x$t0),
-      boot::boot.ci,
-      boot.out = x,
-      conf = conf.level, type = conf.method
-    )
+      ci.list <- lapply(seq_along(x$t0),
+        boot::boot.ci,
+        boot.out = x,
+        conf = conf.level, type = conf.method
+        )
+    
     ## boot.ci uses c("norm", "basic", "perc", "stud") for types
     ## stores them with longer names
     ci.pos <- pmatch(conf.method, names(ci.list[[1]]))
-    ci.tab <- t(sapply(ci.list, function(x) x[[ci.pos]][4:5]))
+    
+    if(conf.method == "norm"){
+      ci.tab <- cbind(ci.list[[1]][ci.pos][[1]][2:3], ci.list[[2]][ci.pos][[1]][2:3])
+    } else {
+      ci.tab <- t(sapply(ci.list, function(x) x[[ci.pos]][4:5]))
+    }
 
     colnames(ci.tab) <- c("conf.low", "conf.high")
     ret <- cbind(ret, ci.tab)

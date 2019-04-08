@@ -69,7 +69,8 @@ augment.plm <- function(x, data = model.frame(x), ...) {
 #'   statistic = "F-statistic",
 #'   "p.value",
 #'   "deviance",
-#'   "df.residual"
+#'   "df.residual",
+#'   "nobs"
 #' )
 #' 
 #' @export
@@ -77,11 +78,12 @@ augment.plm <- function(x, data = model.frame(x), ...) {
 #' @family plm tidiers
 glance.plm <- function(x, ...) {
   s <- summary(x)
-  ret <- with(s, data.frame(
-    r.squared = r.squared[1],
-    adj.r.squared = r.squared[2],
-    statistic = fstatistic$statistic,
-    p.value = fstatistic$p.value
-  ))
-  finish_glance(ret, x)
+  ret <- tibble(r.squared = s$r.squared['rsq'],
+                adj.r.squared = s$r.squared['adjrsq'],
+                statistic = s$fstatistic$statistic,
+                p.value = s$fstatistic$p.value,
+                deviance = stats::deviance(x),
+                df.residual = stats::df.residual(x),
+                nobs = stats::nobs(x))
+  ret
 }

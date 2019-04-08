@@ -32,7 +32,7 @@ test_that("glance.factanal works", {
   gl2 <- glance(fit2)
   
   check_glance_outputs(gl, gl2)
-  check_dims(gl, 1, 8)
+  check_dims(gl, 1, 9)
   
   expect_equal(gl$n.factors, n_factors)
 })

@@ -5,6 +5,8 @@
 #'   and [lavaan::sem()].
 #' 
 #' @template param_confint
+#' @template param_quick
+#' 
 #' @param ... Additional arguments passed to [lavaan::parameterEstimates()].
 #'   **Cautionary note**: Misspecified arguments may be silently ignored.
 #'
@@ -35,14 +37,24 @@
 #'  
 #' cfa.fit <- cfa('F =~ x1 + x2 + x3 + x4 + x5 + x6 + x7 + x8 + x9',
 #'                data = HolzingerSwineford1939, group = "school")
+#'                
 #' tidy(cfa.fit)
+#' tidy(cfa.fit, quick = TRUE)
 #' 
 #' @export
 #' @aliases lavaan_tidiers sem_tidiers cfa_tidiers
 #' @family lavaan tidiers
 #' @seealso [tidy()], [lavaan::cfa()], [lavaan::sem()], 
 #'   [lavaan::parameterEstimates()]
-tidy.lavaan <- function(x, conf.int = FALSE, conf.level = 0.95, ...) {
+tidy.lavaan <- function(x, conf.int = FALSE, conf.level = 0.95, quick = FALSE, ...) {
+  
+  if (quick) {
+    terms <- paste(x@ParTable$lhs, x@ParTable$op, x@ParTable$rhs, sep = ' ')
+    ests <- x@ParTable$est
+    ret <- tibble(term = terms, estimate = ests)
+    return(ret)
+  }
+  
   lavaan::parameterEstimates(x,
     ci = conf.int,
     level = conf.level,
@@ -125,7 +137,7 @@ glance.lavaan <- function(x, ...) {
           "cfi"
         )
     ) %>%
-    as_tibble() %>%
+    as_tibble(rownames = NA) %>%
     tibble::rownames_to_column(var = "term") %>%
     spread(., term, value) %>%
     bind_cols(

@@ -26,8 +26,8 @@
 #'   
 #'   \item{`row`}{ID of the original observation (i.e. rowname from original
 #'     data).}
-#'   \item{`PC`}{Integer indicating a principle component.}
-#'   \item{`value`}{The score of the observation for that particular principle
+#'   \item{`PC`}{Integer indicating a principal component.}
+#'   \item{`value`}{The score of the observation for that particular principal
 #'     component. That is, the location of the observation in PCA space.}
 #'     
 #'   If `matrix` is `"v"`, `"rotation"`, `"loadings"` or `"variables"`, each 
@@ -96,7 +96,7 @@ tidy.prcomp <- function(x, matrix = "u", ...) {
 
   MATRIX <- c("rotation", "x", "variables", "samples", "v", "u", "pcs", "d",
               "scores", "loadings", "eigenvalues")
-  matrix <- match.arg(matrix, MATRIX)
+  matrix <- rlang::arg_match(matrix, MATRIX)
 
   ncomp <- NCOL(x$rotation)
   if (matrix %in% c("pcs", "d", "eigenvalues")) {
@@ -159,9 +159,9 @@ augment.prcomp <- function(x, data = NULL, newdata, ...) {
     pred <- as.data.frame(predict(x))
     names(pred) <- paste0(".fitted", names(pred))
     if (!missing(data) && !is.null(data)) {
-      cbind(.rownames = rownames(data), data, pred)
+      cbind(.rownames = rownames(as.data.frame(data)), data, pred)
     } else {
-      data.frame(.rownames = rownames(x$x), pred)
+      data.frame(.rownames = rownames(as.data.frame(x$x)), pred)
     }
   }
   as_tibble(ret)

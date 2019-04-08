@@ -14,7 +14,7 @@
 
 \item{by_class}{Logical indicating whether or not to show performance
 measures broken down by class. Defaults to \code{TRUE}. When \code{by_class = FALSE}
-only returns a tibble with accuracy and kappa statistics.}
+only returns a tibble with accuracy, kappa, and McNemar statistics.}
 
 \item{...}{Additional arguments. Not used. Needed to match generic
 signature only. \strong{Cautionary note:} Misspelled arguments will be

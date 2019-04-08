@@ -23,7 +23,12 @@
 #' @family robust tidiers
 #' @seealso [robust::lmRob()]
 #' @include stats-lm-tidiers.R
-tidy.lmRob <- tidy.lm
+tidy.lmRob <- function (x, ...) {
+  dots <- enquos(...)
+  dots$conf.int <- FALSE
+  
+  rlang::exec(tidy.lm, x, !!!dots)
+}
 
 #' @templateVar class lmRob
 #' @template title_desc_augment
@@ -74,7 +79,8 @@ augment.lmRob <- function(x, data = model.frame(x), newdata = NULL, ...) {
 #'   "r.squared",
 #'   "deviance",
 #'   "sigma",
-#'   "df.residual"
+#'   "df.residual",
+#'   "nobs"
 #' )
 #' 
 #' @export
@@ -87,6 +93,7 @@ glance.lmRob <- function(x, ...) {
     r.squared = x$r.squared,
     deviance = x$dev,
     sigma = s$sigma,
-    df.residual = x$df.residual
+    df.residual = x$df.residual,
+    nobs = stats::nobs(x)
   )
 }

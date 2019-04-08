@@ -10,7 +10,8 @@
 #'   "logLik",
 #'   "AIC",
 #'   "BIC",
-#'   "deviance"
+#'   "deviance",
+#'   "nobs"
 #' )
 #'
 #' @details For tidiers for models from the \pkg{robust} package see
@@ -31,10 +32,15 @@
 #' @seealso [glance()], [MASS::rlm()]
 glance.rlm <- function(x, ...) {
   s <- summary(x)
-  ret <- tibble(sigma = s$sigma, converged = x$converged)
-  ret <- finish_glance(ret, x)
-  # remove df.residual, which is always set to NA in rlm objects
-  dplyr::select(ret, -df.residual)
+  ret <- tibble(sigma = s$sigma, 
+                converged = x$converged,
+                logLik = stats::logLik(x),
+                AIC = stats::AIC(x),
+                BIC = stats::BIC(x),
+                deviance = stats::deviance(x),
+                nobs = stats::nobs(x))
+  ret
+  # df.residual is always set to NA in rlm objects
 }
 
 # confint.lm gets called on rlm objects. should use the default instead.

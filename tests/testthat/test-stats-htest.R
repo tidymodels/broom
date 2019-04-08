@@ -19,6 +19,8 @@ test_that("tidy.htest/oneway.test", {
   gl <- glance(ot)
   
   check_tidy_output(td, strict = FALSE)
+  expect_false("num df" %in% colnames(td))
+  expect_false("denom df" %in% colnames(td))
   check_dims(td, expected_cols = 5)
   check_glance_outputs(gl, strict = FALSE)
 })
@@ -42,6 +44,15 @@ test_that("tidy.htest/cor.test", {
 
 test_that("tidy.htest/t.test", {
   tt <- t.test(mpg ~ am, mtcars)
+  td <- tidy(tt)
+  gl <- glance(tt)
+  
+  check_tidy_output(td)
+  check_glance_outputs(gl, strict = FALSE)
+})
+
+test_that("tidy.htest/t.test (equal variance)", {
+  tt <- t.test(mpg ~ am, mtcars, var.equal = TRUE)
   td <- tidy(tt)
   gl <- glance(tt)
   

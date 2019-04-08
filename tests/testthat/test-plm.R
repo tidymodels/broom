@@ -31,7 +31,7 @@ test_that("tidy.plm", {
 test_that("glance.plm", {
   gl <- glance(fit)
   check_glance_outputs(gl)
-  check_dims(gl, expected_cols = 6)
+  check_dims(gl, expected_cols = 7)
 })
 
 test_that("augment.plm", {

@@ -14,11 +14,10 @@
 tidied.
 \itemize{
 \item \code{"u"}, \code{"samples"}, or \code{"x"}: returns information about the map from
-the original space into principle components space.
+the original space into principal components space.
 \item \code{"v"}, \code{"rotation"}, or \code{"variables"}: returns information about the
-map from principle components space back into the original space.
-\item \code{"d"} or \code{"pcs"}: returns information about the eigenvalues
-will return information about
+map from principal components space back into the original space.
+\item \code{"d"} or \code{"pcs"}: returns information about the eigenvalues.
 }}
 
 \item{...}{Additional arguments. Not used. Needed to match generic
@@ -40,12 +39,12 @@ output corresponds to the original data in PCA space. The columns are:
 
 \item{\code{row}}{ID of the original observation (i.e. rowname from original
 data).}
-\item{\code{PC}}{Integer indicating a principle component.}
-\item{\code{value}}{The score of the observation for that particular principle
+\item{\code{PC}}{Integer indicating a principal component.}
+\item{\code{value}}{The score of the observation for that particular principal
 component. That is, the location of the observation in PCA space.}
 
 If \code{matrix} is \code{"v"}, \code{"rotation"}, or \code{"variables"}, each row in the
-tidied ouput corresponds to information about the principle components
+tidied ouput corresponds to information about the principal components
 in the original space. The columns are:
 
 \item{\code{row}}{The variable labels (colnames) of the data set on

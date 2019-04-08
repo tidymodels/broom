@@ -91,11 +91,13 @@ tidy.cv.glmnet <- function(x, ...) {
 #' 
 #' @inherit tidy.cv.glmnet params examples
 #' 
-#' @evalRd return_glance("lambda.min", "lambda.1se")
+#' @evalRd return_glance("lambda.min", "lambda.1se", "nobs")
 #'
 #' @export
 #' @seealso [glance()], [glmnet::cv.glmnet()]
 #' @family glmnet tidiers
 glance.cv.glmnet <- function(x, ...) {
-  tibble(lambda.min = x$lambda.min, lambda.1se = x$lambda.1se)
+  tibble(lambda.min = x$lambda.min, 
+         lambda.1se = x$lambda.1se,
+         nobs = stats::nobs(x))
 }

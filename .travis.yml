@@ -1,23 +1,30 @@
 # documentation at https://docs.travis-ci.com/user/languages/r
 
 language: r
-r:
-  - 3.1
-  - 3.2
-  - 3.3
-  - oldrel
-  - release
-  - devel
-
 sudo: required
 cache: packages  
 bioc_required: true
 warnings_are_errors: false
 
+matrix:
+  include:
+  - r: devel
+  - r: release
+    before_deploy: Rscript -e 'remotes::install_cran("pkgdown")'  
+    deploy:
+      provider: script
+      script: Rscript -e 'pkgdown::deploy_site_github(verbose = TRUE)'
+      skip_cleanup: true
+  - r: oldrel
+  - r: 3.3
+  - r: 3.2
+  - r: 3.1
+
 env:
   global:
     - R_MAX_NUM_DLLS=999
-    - _R_CHECK_FORCE_SUGGESTS_=FALSE
+    - _R_CHECK_FORCE_SUGGESTS_=true
+    - _R_CHECK_CRAN_INCOMING_=true
 
 r_build_args: "--no-build-vignettes"
 r_check_args: "--no-build-vignettes --as-cran"
@@ -51,5 +58,17 @@ r_packages:
   - dplyr
   - readr
 
+r_github_packages:
+  - jimhester/lintr
+  - r-lib/covr
+  - r-lib/pkgdown
+
+notifications:
+  email:
+  on_success: change
+  on_failure: change
+
 after_success:
   - Rscript -e 'covr::codecov()'
+  - R CMD INSTALL $PKG_TARBALL
+  - Rscript -e 'lintr::lint_package()'

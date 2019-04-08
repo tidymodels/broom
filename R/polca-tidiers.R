@@ -145,14 +145,15 @@ augment.poLCA <- function(x, data = NULL, ...) {
 #'   "chi.squared",
 #'   "df",
 #'   "df.residual",
-#'   g.squared = "The likelihood ratio/deviance statistic"
+#'   g.squared = "The likelihood ratio/deviance statistic",
+#'   "nobs"
 #' )
 #'
 #' @export
 #' @seealso [glance()], [poLCA::poLCA()]
 #' @family poLCA tidiers
 glance.poLCA <- function(x, ...) {
-  with(
+  ret <- with(
     x,
     tibble(
       logLik = llik,
@@ -164,4 +165,6 @@ glance.poLCA <- function(x, ...) {
       df.residual = resid.df
     )
   )
+  ret$nobs <- stats::nobs(x)
+  ret
 }

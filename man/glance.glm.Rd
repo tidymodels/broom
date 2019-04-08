@@ -45,8 +45,9 @@ glance(g)
 
 Other lm tidiers: \code{\link{augment.glm}},
   \code{\link{augment.lm}}, \code{\link{glance.lm}},
-  \code{\link{tidy.glm}}, \code{\link{tidy.lm.beta}},
-  \code{\link{tidy.lm}}
+  \code{\link{glance.svyglm}}, \code{\link{tidy.glm}},
+  \code{\link{tidy.lm.beta}}, \code{\link{tidy.lm}},
+  \code{\link{tidy.svyglm}}
 }
 \concept{lm tidiers}
 \value{
@@ -57,6 +58,7 @@ A \code{\link[tibble:tibble]{tibble::tibble()}} with exactly one row and columns
   \item{df.null}{Degrees of freedom used by the null model.}
   \item{df.residual}{Residual degrees of freedom.}
   \item{logLik}{The log-likelihood of the model. [stats::logLik()] may be a useful reference.}
+  \item{nobs}{Number of observations used.}
   \item{null.deviance}{Deviance of the null model.}
 
 }

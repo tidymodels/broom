@@ -24,7 +24,7 @@ test_that("tidy.poLCA", {
 test_that("glance.poLCA", {
   gl <- glance(fit)
   check_glance_outputs(gl)
-  check_dims(gl, expected_cols = 7)
+  check_dims(gl, expected_cols = 8)
 })
 
 test_that("augment.poLCA", {

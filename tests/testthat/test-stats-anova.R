@@ -18,7 +18,7 @@ test_that("tidy.aov", {
 test_that("tidy.anova", {
   check_arguments(tidy.anova)
   
-  anovafit <- anova(lm(mpg ~ wt + disp, mtcars))
+  anovafit <- stats::anova(lm(mpg ~ wt + disp, mtcars))
   td <- tidy(anovafit)
   
   check_tidy_output(td)
@@ -26,7 +26,7 @@ test_that("tidy.anova", {
              
   expect_true("Residuals" %in% td$term)
   
-  loess_anova <- anova(
+  loess_anova <- stats::anova(
     loess(dist ~ speed, cars),
     loess(dist ~ speed, cars, control = loess.control(surface = "direct"))
   )
@@ -60,7 +60,7 @@ test_that("tidy.manova", {
   check_arguments(tidy.manova)
   
   df <- within(npk, foo <- rnorm(24))
-  fit <- manova(cbind(yield, foo) ~ block + N * P * K, df)
+  fit <- stats::manova(cbind(yield, foo) ~ block + N * P * K, df)
   
   td <- tidy(fit)
   
