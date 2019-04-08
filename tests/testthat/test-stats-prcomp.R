@@ -17,7 +17,8 @@ test_that("tidy.prcomp", {
   check_tidy_output(td)
   check_dims(td, 4, 4)
   expect_identical(tidy(pc, matrix = "pcs"), td)
-
+  expect_identical(tidy(pc, matrix = "eigenvalues"), td)
+  
   td2 <- tidy(pc, matrix = "v")
 
   check_tidy_output(td2, strict = FALSE)
@@ -29,7 +30,8 @@ test_that("tidy.prcomp", {
   )
   expect_identical(tidy(pc, matrix = "rotation"), td2)
   expect_identical(tidy(pc, matrix = "variables"), td2)
-
+  expect_identical(tidy(pc, matrix = "loadings"), td2)
+  
   td3 <- tidy(pc, matrix = "u")
 
   check_tidy_output(td3)
@@ -37,7 +39,8 @@ test_that("tidy.prcomp", {
   expect_identical(tidy(pc, matrix = "x"), tidy(pc, matrix = "samples"))
   expect_identical(tidy(pc, matrix = "x"), td3)
   expect_identical(tidy(pc, matrix = "samples"), td3)
-
+  expect_identical(tidy(pc, matrix = "scores"), td3)
+  
   expect_error(
     tidy(pc, matrix = c("d", "u")),
     regexp = "Must select a single matrix to tidy."

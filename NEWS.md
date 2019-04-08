@@ -83,6 +83,7 @@ TODO: sort out what happens to `glance.aov()`
 - Added `tidy.regsubsets()` for best subsets linear regression from the `leaps` package
 
 - Added method `tidy.lm.beta()` to tidy `lm.beta` class models (#545 by @mattle24)
+- `tidy.prcomp()` parameter `matrix` gained new options `"scores"`, `"loadings"`, and `"eigenvalues"` (#557 by @GegznaV)
 
 - `tidy.kmeans()` now uses the names of the input variables in the output by
   default. Set `col.names = NULL` to recover the old behavior.

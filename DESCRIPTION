@@ -212,7 +212,12 @@ Authors@R:
              comment = c(ORCID = "0000-0002-9978-011X")),
       person(given = "Jared",
              family = "Wilber",
-             role = "ctb"))
+             role = "ctb"),
+      person(given = "Vilmantas",
+             family = "Gegzna",
+             email = "GegznaV@gmail.com",
+             role = "ctb",
+             comment = c(ORCID = "0000-0002-9500-5167")))
 Description: Summarizes key information about statistical
     objects in tidy tibbles. This makes it easy to report results, create
     plots and consistently work with large numbers of models at once.
