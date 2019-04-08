@@ -44,7 +44,7 @@
 #' 
 tidy.pyears <- function(x, ...) {
   if (is.null(x$data)) {
-    ret <- compact(unclass(x)[c("pyears", "n", "event", "expected")])
+    ret <- purrr::compact(unclass(x)[c("pyears", "n", "event", "expected")])
   } else {
     ret <- x$data
   }

@@ -88,8 +88,9 @@ tidy(result)
 
 Other lm tidiers: \code{\link{augment.glm}},
   \code{\link{augment.lm}}, \code{\link{glance.glm}},
-  \code{\link{tidy.glm}}, \code{\link{tidy.lm.beta}},
-  \code{\link{tidy.lm}}, \code{\link{tidy.mlm}}
+  \code{\link{glance.svyglm}}, \code{\link{tidy.glm}},
+  \code{\link{tidy.lm.beta}}, \code{\link{tidy.lm}},
+  \code{\link{tidy.svyglm}}
 }
 \concept{lm tidiers}
 \value{
