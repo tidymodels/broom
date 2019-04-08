@@ -1,8 +1,5 @@
 context("stats-htest")
 
-skip_if_not_installed("modeltests")
-library(modeltests)
-
 test_that("htest tidier arguments", {
   check_arguments(tidy.htest)
   check_arguments(glance.htest)
@@ -14,15 +11,15 @@ test_that("tidy.htest same as glance.htest", {
 })
 
 test_that("tidy.htest/oneway.test", {
-  ot <- oneway.test(extra ~ group, data = sleep)
+  
+  mtcars$cyl <- as.factor(mtcars$cyl)
+  ot <- oneway.test(mpg ~ cyl, mtcars)
   expect_message(td <- tidy(ot))
   gl <- glance(ot)
   
-  check_tidy_output(td, strict = FALSE)
-  expect_false("num df" %in% colnames(td))
-  expect_false("denom df" %in% colnames(td))
+  check_tidy_output(td)
   check_dims(td, expected_cols = 5)
-  check_glance_outputs(gl, strict = FALSE)
+  check_glance_outputs(gl)
 })
 
 test_that("tidy.htest/cor.test", {
@@ -31,7 +28,7 @@ test_that("tidy.htest/cor.test", {
   gl <- glance(pco)
   
   check_tidy_output(td)
-  check_glance_outputs(gl, strict = FALSE)
+  check_glance_outputs(gl)
   
   
   sco <- suppressWarnings(cor.test(mtcars$mpg, mtcars$wt, method = "spearman"))
@@ -39,7 +36,7 @@ test_that("tidy.htest/cor.test", {
   gl2 <- glance(sco)
   
   check_tidy_output(td2)
-  check_glance_outputs(gl2, strict = FALSE)
+  check_glance_outputs(gl2)
 })
 
 test_that("tidy.htest/t.test", {
@@ -48,16 +45,7 @@ test_that("tidy.htest/t.test", {
   gl <- glance(tt)
   
   check_tidy_output(td)
-  check_glance_outputs(gl, strict = FALSE)
-})
-
-test_that("tidy.htest/t.test (equal variance)", {
-  tt <- t.test(mpg ~ am, mtcars, var.equal = TRUE)
-  td <- tidy(tt)
-  gl <- glance(tt)
-  
-  check_tidy_output(td)
-  check_glance_outputs(gl, strict = FALSE)
+  check_glance_outputs(gl)
 })
 
 test_that("tidy.htest/wilcox.test", {
@@ -86,25 +74,24 @@ test_that("tidy.power.htest", {
   # gl <- glance(ptt)
   
   check_arguments(tidy.power.htest)
-  check_tidy_output(td, strict = FALSE)
+  check_tidy_output(td)
   # check_glance_outputs(gl). doesn't exist yet.
 })
 
 
 test_that("augment.htest (chi squared test)", {
-  # strict = FALSE because don't want to require `data` argument
-  check_arguments(augment.htest, strict = FALSE)
+  check_arguments(augment.htest)
   
   df <- as.data.frame(Titanic)
   tab <- xtabs(Freq ~ Sex + Class, data = df)
   
   chit <- chisq.test(tab) # 2D table
   au <- augment(chit)
-  check_tibble(au, method = "augment", strict = FALSE)
+  check_tibble(au, method = "augment")
   
   chit2 <- chisq.test(c(A = 20, B = 15, C = 25)) # 1D table
   au2 <- augment(chit2)
-  check_tibble(au2, method = "augment", strict = FALSE)
+  check_tibble(au2, method = "augment")
   
   tt <- t.test(rnorm(10))
   expect_error(
