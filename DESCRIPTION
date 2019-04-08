@@ -221,7 +221,11 @@ Authors@R:
              family = "Gegzna",
              email = "GegznaV@gmail.com",
              role = "ctb",
-             comment = c(ORCID = "0000-0002-9500-5167")))
+             comment = c(ORCID = "0000-0002-9500-5167")),
+      person(given = "Eduard", 
+             family = "Szoecs",
+             email = "eduardszoecs@gmail.com",
+             role = "ctb"))
 Description: Summarizes key information about statistical
     objects in tidy tibbles. This makes it easy to report results, create
     plots and consistently work with large numbers of models at once.
@@ -327,6 +331,10 @@ Suggests:
     tseries,
     xergm,
     zoo,
+    modeltests,
+    leaps,
+    lm.beta,
+    drc
     metafor
 VignetteBuilder: 
     knitr
@@ -353,6 +361,7 @@ Collate:
     'car-tidiers.R'
     'caret-tidiers.R'
     'data-frame-tidiers.R'
+    'drc-tidiers.R'
     'emmeans-tidiers.R'
     'ergm-tidiers.R'
     'gam-tidiers.R'
