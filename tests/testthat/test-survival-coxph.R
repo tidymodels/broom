@@ -8,6 +8,7 @@ library(survival)
 
 fit <- coxph(Surv(time, status) ~ age + sex, lung)
 fit2 <- coxph(Surv(time, status) ~ age + sex, lung, robust = TRUE)
+fit3 <- coxph(Surv(time, status) ~ age + sex + frailty(inst), lung)
 
 test_that("coxph tidier arguments", {
   check_arguments(tidy.coxph)
@@ -19,10 +20,14 @@ test_that("tidy.coxph", {
   td <- tidy(fit)
   td2 <- tidy(fit, exponentiate = TRUE)
   td3 <- tidy(fit2)
+  td4 <- tidy(fit3)
+  td5 <- tidy(fit3, exponentiate = TRUE)
   
   check_tidy_output(td)
   check_tidy_output(td2)
   check_tidy_output(td3)
+  check_tidy_output(td4)
+  check_tidy_output(td5)
 })
 
 test_that("glance.coxph", {

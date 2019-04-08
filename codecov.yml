@@ -1,1 +1,6 @@
 comment: false
+
+coverage:
+  precision: 3
+  round: nearest
+  range: "50...100"
