@@ -68,10 +68,12 @@ TODO: sort out what happens to `glance.aov()`
 
 ## New tidiers, features and bugfixes
 
+ 
+- Added tidiers for `rma` objects from the `metafor` package (#674, @malcolmbarrett, @softloud)
+
 - Added support for `tidy.lavaan()` to take `quick = TRUE`. (#628)
 
 - `ordinal` tidier rewrite
-
 - Added tidiers for `pam` objects from the `cluster` package. (#637)
 
 - Added `tidy.svyglm()` and `glance.svyglm()` (#611)

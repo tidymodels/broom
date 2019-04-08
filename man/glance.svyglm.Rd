@@ -81,3 +81,13 @@ Other lm tidiers: \code{\link{augment.glm}},
   \code{\link{tidy.svyglm}}
 }
 \concept{lm tidiers}
+\value{
+A \code{\link[tibble:tibble]{tibble::tibble()}} with exactly one row and columns:
+  \item{AIC}{Akaike's Information Criterion for the model.}
+  \item{BIC}{Bayesian Information Criterion for the model.}
+  \item{deviance}{Deviance of the model.}
+  \item{df.null}{Degrees of freedom used by the null model.}
+  \item{df.residual}{Residual degrees of freedom.}
+  \item{null.deviance}{Deviance of the null model.}
+
+}

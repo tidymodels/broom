@@ -83,7 +83,7 @@ tidy.svyglm <- function(x, conf.int = FALSE, conf.level = .95,
 #'   "null.deviance",
 #'   "df.null",
 #'   "AIC",
-#'   "BIC,
+#'   "BIC",
 #'   "deviance",
 #'   "df.residual"
 #' )
