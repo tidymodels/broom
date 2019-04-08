@@ -63,38 +63,23 @@ test_that("tidy.mlm works", {
   tdc <- tidy(fit, conf.int = TRUE)
   tdc2 <- tidy(fit2, conf.int = TRUE)
   
-  # quick tidy
-  tdq <- tidy(fit, quick = TRUE)
-  tdq2 <- tidy(fit2, quick = TRUE)
-  
   modeltests::check_tidy_output(td)
   modeltests::check_tidy_output(td2)
   modeltests::check_tidy_output(tdc)
   modeltests::check_tidy_output(tdc2)
-  modeltests::check_tidy_output(tdq, strict = FALSE)
-  modeltests::check_tidy_output(tdq2, strict = FALSE)
   
   modeltests::check_dims(td, expected_rows = 4)
   modeltests::check_dims(td2, expected_rows = 6)
   modeltests::check_dims(tdc, expected_rows = 4)
   modeltests::check_dims(tdc2, expected_rows = 6)
-  modeltests::check_dims(tdq, expected_rows = 4)
-  modeltests::check_dims(tdq2, expected_rows = 6)
   
   modeltests::check_dims(td, expected_cols = 6)
   modeltests::check_dims(td2, expected_cols = 6)
   modeltests::check_dims(tdc, expected_cols = 8)
   modeltests::check_dims(tdc2, expected_cols = 8)
-  modeltests::check_dims(tdq, expected_cols = 4)
-  modeltests::check_dims(tdq2, expected_cols = 4)
   
   expect_equal(td$term, rep(c("(Intercept)", "x1"), 2))
   expect_equal(td2$term, rep(c("(Intercept)", "x1", "x2"), 2))
   expect_equal(td$response, rep_each(c("y1", "y2"), 2))
   expect_equal(td2$response, rep_each(c("y1", "y2"), 3))
-  expect_equal(tdq$term, rep(c("(Intercept)", "x1"), 2))
-  expect_equal(tdq2$term, rep(c("(Intercept)", "x1", "x2"), 2))
-  expect_equal(tdq$response, rep_each(c("y1", "y2"), 2))
-  expect_equal(tdq2$response, rep_each(c("y1", "y2"), 3))
-  
 })

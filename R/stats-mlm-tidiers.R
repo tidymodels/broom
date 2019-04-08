@@ -20,46 +20,42 @@
 #'
 #' mod <- lm(cbind(mpg, disp) ~ wt, mtcars)
 #' tidy(mod, conf.int = TRUE)
-#' @aliases lm_tidiers
 #' @export
 #' @seealso [tidy()]
 #' @family lm tidiers
-#' @rdname tidy.mlm
 #' @export
 
 tidy.mlm <- function(x,
                      conf.int = FALSE,
                      conf.level = .95,
-                     quick = FALSE,
                      ...) {
-  # if only term and estimate columns are needed
-  if (quick) {
-    co <- stats::coef(x)
-
-    ret <-
-      dplyr::tibble(
-        response = rep(colnames(co), each = nrow(co)),
-        term = rep(rownames(co), times = ncol(co)),
-        estimate = as.numeric(co),
-        stringsAsFactors = FALSE
-      )
-
-    return(process_mlm(ret, 
-                      x, 
-                      conf.int = FALSE))
-  }
 
   # adding other details from summary object
   s <- summary(x)
   ret <- tidy.summary.mlm(s)
 
   # adding confidence intervals
-  process_mlm(
-    ret,
-    x,
-    conf.int = conf.int,
-    conf.level = conf.level
-  )
+  if (isTRUE(conf.int)) {
+
+    # S3 method for computing confidence intervals for `mlm` objects was
+    # introduced in R 3.5
+    CI <- tryCatch(
+      expr = stats::confint(x, level = conf.level),
+      error = function(x) {
+        NULL
+      }
+    )
+
+    # if R version is prior to 3.5, use the custom function
+    if (is.null(CI)) {
+      CI <- confint.mlm(x, level = conf.level)
+    }
+
+    colnames(CI) <- c("conf.low", "conf.high")
+    ret <- cbind(ret, unrowname(CI))
+  }
+
+  tibble::as_tibble(ret)
 }
 
 # mlm objects subclass lm objects so this gives a better error than
@@ -75,31 +71,29 @@ glance.mlm <- function(x, ...) {
   )
 }
 
-# cleaning up the tidy dataframe
-process_mlm <- function(ret,
-                        x,
-                        conf.int = FALSE,
-                        conf.level = .95) {
-  if (isTRUE(conf.int)) {
-    CI <- stats::confint(x, level = conf.level)
-    colnames(CI) <- c("conf.low", "conf.high")
-    ret <- cbind(ret, unrowname(CI))
-  }
-
-  tibble::as_tibble(ret)
-}
-
-#' @rdname tidy.mlm
 #' @export
 tidy.summary.mlm <- function(x, ...) {
   co <- stats::coef(x)
   nn <- c("estimate", "std.error", "statistic", "p.value")
 
-    # multiple response variables
-    ret <- purrr::map_df(co, fix_data_frame, nn[1:ncol(co[[1]])],
-                  .id = "response"
-    )
-    ret$response <- stringr::str_replace(ret$response, "Response ", "")
+  # multiple response variables
+  ret <- purrr::map_df(co, fix_data_frame, nn[1:ncol(co[[1]])],
+    .id = "response"
+  )
+  ret$response <- stringr::str_replace(ret$response, "Response ", "")
 
   as_tibble(ret)
+}
+
+# compute confidence intervals for mlm object.
+confint.mlm <- function(object, level = 0.95, ...) {
+  cf <- coef(object)
+  ncfs <- as.numeric(cf)
+  a <- (1 - level) / 2
+  a <- c(a, 1 - a)
+  fac <- qt(a, object$df.residual)
+  pct <- .format.perc(a, 3)
+  ses <- sqrt(diag(stats::vcov(object)))
+  ci <- ncfs + ses %o% fac
+  setNames(data.frame(ci), pct)
 }
