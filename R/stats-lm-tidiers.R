@@ -99,15 +99,8 @@ tidy.lm <- function(x,
 tidy.summary.lm <- function(x, ...) {
   co <- stats::coef(x)
   nn <- c("estimate", "std.error", "statistic", "p.value")
-  if (inherits(co, "listof")) {
-    # multiple response variables
-    ret <- map_df(co, fix_data_frame, nn[1:ncol(co[[1]])],
-      .id = "response"
-    )
-    ret$response <- stringr::str_replace(ret$response, "Response ", "")
-  } else {
-    ret <- fix_data_frame(co, nn[1:ncol(co)])
-  }
+
+  ret <- fix_data_frame(co, nn[1:ncol(co)])
 
   as_tibble(ret)
 }

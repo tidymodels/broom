@@ -1,15 +1,17 @@
-#' @templateVar class lm
+#' @templateVar class mlm
 #' @template title_desc_tidy
 #'
-#' @param x An `lm` object created by [stats::lm()].
+#' @param x An `mlm` object created by [stats::lm()] with a matrix as the
+#'   response.
 #' @template param_confint
 #' @template param_quick
 #' @template param_unused_dots
 #'
 #' @evalRd return_tidy(regression = TRUE)
 #'
-#' @details If the linear model is an `mlm` object (multiple linear model),
-#'   there is an additional column `response`.
+#' @details In contrast to `lm` object (simple linear model), tidy output for
+#'   `mlm` (multiple linear model) objects contain an additional column
+#'   `response`.
 #'
 #'   If you have missing values in your model data, you may need to refit
 #'   the model with `na.action = na.exclude`.
@@ -35,7 +37,7 @@ tidy.mlm <- function(x,
     co <- stats::coef(x)
 
     ret <-
-      data.frame(
+      dplyr::tibble(
         response = rep(colnames(co), each = nrow(co)),
         term = rep(rownames(co), times = ncol(co)),
         estimate = as.numeric(co),
@@ -49,7 +51,7 @@ tidy.mlm <- function(x,
 
   # adding other details from summary object
   s <- summary(x)
-  ret <- tidy.summary.lm(s)
+  ret <- tidy.summary.mlm(s)
 
   # adding confidence intervals
   process_mlm(
@@ -85,4 +87,19 @@ process_mlm <- function(ret,
   }
 
   tibble::as_tibble(ret)
+}
+
+#' @rdname tidy.mlm
+#' @export
+tidy.summary.mlm <- function(x, ...) {
+  co <- stats::coef(x)
+  nn <- c("estimate", "std.error", "statistic", "p.value")
+
+    # multiple response variables
+    ret <- purrr::map_df(co, fix_data_frame, nn[1:ncol(co[[1]])],
+                  .id = "response"
+    )
+    ret$response <- stringr::str_replace(ret$response, "Response ", "")
+
+  as_tibble(ret)
 }

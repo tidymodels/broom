@@ -3,13 +3,17 @@
 \name{tidy.mlm}
 \alias{tidy.mlm}
 \alias{lm_tidiers}
-\title{Tidy a(n) lm object}
+\alias{tidy.summary.mlm}
+\title{Tidy a(n) mlm object}
 \usage{
 \method{tidy}{mlm}(x, conf.int = FALSE, conf.level = 0.95,
   quick = FALSE, ...)
+
+\method{tidy}{summary.mlm}(x, ...)
 }
 \arguments{
-\item{x}{An \code{lm} object created by \code{\link[stats:lm]{stats::lm()}}.}
+\item{x}{An \code{mlm} object created by \code{\link[stats:lm]{stats::lm()}} with a matrix as the
+response.}
 
 \item{conf.int}{Logical indicating whether or not to include a confidence
 interval in the tidied output. Defaults to \code{FALSE}.}
@@ -41,8 +45,9 @@ If a model has several distinct types of components, you will need to
 specify which components to return.
 }
 \details{
-If the linear model is an \code{mlm} object (multiple linear model),
-there is an additional column \code{response}.
+In contrast to \code{lm} object (simple linear model), tidy output for
+\code{mlm} (multiple linear model) objects contain an additional column
+\code{response}.
 
 If you have missing values in your model data, you may need to refit
 the model with \code{na.action = na.exclude}.
@@ -57,8 +62,9 @@ tidy(mod, conf.int = TRUE)
 
 Other lm tidiers: \code{\link{augment.glm}},
   \code{\link{augment.lm}}, \code{\link{glance.glm}},
-  \code{\link{glance.lm}}, \code{\link{tidy.glm}},
-  \code{\link{tidy.lm.beta}}, \code{\link{tidy.lm}}
+  \code{\link{glance.lm}}, \code{\link{glance.svyglm}},
+  \code{\link{tidy.glm}}, \code{\link{tidy.lm.beta}},
+  \code{\link{tidy.lm}}, \code{\link{tidy.svyglm}}
 }
 \concept{lm tidiers}
 \value{

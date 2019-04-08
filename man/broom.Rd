@@ -92,6 +92,7 @@ Other contributors:
   \item Malcolm Barrett \email{malcolmbarrett@gmail.com} (0000-0003-0299-5825) [contributor]
   \item Charles Gray \email{charlestigray@gmail.com} (0000-0002-9978-011X) [contributor]
   \item Jared Wilber [contributor]
+  \item Vilmantas Gegzna \email{GegznaV@gmail.com} (0000-0002-9500-5167) [contributor]
 }
 
 }
