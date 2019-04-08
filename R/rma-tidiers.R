@@ -4,7 +4,7 @@
 #' @param x An `rma` created by the `metafor` package.
 #' @inheritParams tidy.lm
 #' @param include_studies Logical. Should individual studies be included in the
-#'    output?
+#'    output? Defaults to `TRUE`.
 #' @template param_unused_dots
 #' @param measure Measure type. See [metafor::escalc()]
 #'
