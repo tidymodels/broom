@@ -14,7 +14,9 @@ library(lme4)
 test_that("metafor::rma tidier arguments", {
   check_arguments(tidy.rma)
   check_arguments(glance.rma)
-  check_arguments(augment.rma)
+  # not checking strictly for `augment.rma()` because
+  # it does not need or use a `data` argument
+  check_arguments(augment.rma, strict = FALSE)
 })
 
 # RR test -----------------------------------------------------------------
