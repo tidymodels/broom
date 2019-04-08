@@ -1,7 +1,9 @@
 #' @templateVar class rma
 #' @template title_desc_tidy
 #' 
-#' @param x An `rma` created by the `metafor` package.
+#' @param x An `rma` object such as those created by [metafor::rma()],
+#'   [metafor::rma.uni()], [metafor::rma.glmm()], [metafor::rma.mh()],
+#'   [metafor::rma.mv()], or [metafor::rma.peto()].
 #' @inheritParams tidy.lm
 #' @param include_studies Logical. Should individual studies be included in the
 #'    output? Defaults to `TRUE`.
@@ -98,17 +100,13 @@ tidy.rma <- function(x, conf.int = FALSE, conf.level = 0.95, exponentiate = FALS
     results <- dplyr::select(results, -conf.low, -conf.high)
   }
   
-  # remove extra model data from study names
-  attributes(results$study) <- NULL
-  
   results
 }
 
 #' @templateVar class rma
 #' @template title_desc_glance
 #'
-#' @param x An `rma` created by the `metafor` package.
-#' @template param_unused_dots
+#' @inheritParams tidy.rma
 #'
 #' @evalRd return_glance(
 #'   "nobs", 
@@ -180,8 +178,7 @@ glance.rma <- function(x, ...) {
 #' @templateVar class rma
 #' @template title_desc_augment
 #'
-#' @param x An `rma` created by the `metafor` package.
-#' @template param_unused_dots
+#' @inheritParams tidy.rma
 #'
 #' @evalRd return_augment(
 #'   .observed = "The observed values for the individual studies", 

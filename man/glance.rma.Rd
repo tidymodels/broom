@@ -7,7 +7,9 @@
 \method{glance}{rma}(x, ...)
 }
 \arguments{
-\item{x}{An \code{rma} created by the \code{metafor} package.}
+\item{x}{An \code{rma} object such as those created by \code{\link[metafor:rma]{metafor::rma()}},
+\code{\link[metafor:rma.uni]{metafor::rma.uni()}}, \code{\link[metafor:rma.glmm]{metafor::rma.glmm()}}, \code{\link[metafor:rma.mh]{metafor::rma.mh()}},
+\code{\link[metafor:rma.mv]{metafor::rma.mv()}}, or \code{\link[metafor:rma.peto]{metafor::rma.peto()}}.}
 
 \item{...}{Additional arguments. Not used. Needed to match generic
 signature only. \strong{Cautionary note:} Misspelled arguments will be

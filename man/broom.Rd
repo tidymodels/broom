@@ -91,6 +91,7 @@ Other contributors:
   \item E Auden Krauska \email{krauskae@gmail.com} (0000-0002-1466-5850) [contributor]
   \item Malcolm Barrett \email{malcolmbarrett@gmail.com} (0000-0003-0299-5825) [contributor]
   \item Charles Gray \email{charlestigray@gmail.com} (0000-0002-9978-011X) [contributor]
+  \item Jared Wilber [contributor]
 }
 
 }

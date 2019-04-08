@@ -8,7 +8,9 @@
   exponentiate = FALSE, include_studies = TRUE, measure = "GEN", ...)
 }
 \arguments{
-\item{x}{An \code{rma} created by the \code{metafor} package.}
+\item{x}{An \code{rma} object such as those created by \code{\link[metafor:rma]{metafor::rma()}},
+\code{\link[metafor:rma.uni]{metafor::rma.uni()}}, \code{\link[metafor:rma.glmm]{metafor::rma.glmm()}}, \code{\link[metafor:rma.mh]{metafor::rma.mh()}},
+\code{\link[metafor:rma.mv]{metafor::rma.mv()}}, or \code{\link[metafor:rma.peto]{metafor::rma.peto()}}.}
 
 \item{conf.int}{Logical indicating whether or not to include a confidence
 interval in the tidied output. Defaults to \code{FALSE}.}
@@ -23,7 +25,7 @@ regressions, but a bad idea if there is no log or logit link. Defaults
 to \code{FALSE}.}
 
 \item{include_studies}{Logical. Should individual studies be included in the
-output?}
+output? Defaults to \code{TRUE}.}
 
 \item{measure}{Measure type. See \code{\link[metafor:escalc]{metafor::escalc()}}}
 
