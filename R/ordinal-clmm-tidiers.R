@@ -20,7 +20,6 @@
 #' tidy(fit, conf.int = TRUE, conf.type = "Wald", exponentiate = TRUE)
 #' 
 #' glance(fit)
-#' augment(fit)
 #' 
 #' fit2 <- clmm(rating ~ temp + (1|judge), nominal = ~ contact, data = wine)
 #' tidy(fit2)
@@ -35,8 +34,7 @@
 #'   parameters, `location` type coefficients correspond to `beta`
 #'   parameters, and `scale` type coefficients correspond to `zeta`
 #'   parameters.
-#'
-#' @aliases ordinal_tidiers
+#' 
 #' @export
 #' @seealso [tidy], [ordinal::clmm()], [ordinal::confint.clmm()]
 #' @family ordinal tidiers
