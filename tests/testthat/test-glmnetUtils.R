@@ -8,15 +8,12 @@ library(glmnetUtils)
 
 set.seed(27)
 
-x <- matrix(rnorm(100 * 20), 100, 20)
-y <- rnorm(100)
-g <- sample(1:4, 100, replace = TRUE)
+fit <- glmnet(formula = mpg ~ ., data = mtcars)
+fit2 <- glmnet(formula = Species ~ ., data = iris, family = "multinomial")
 
-fit <- glmnet(x, y)
-fit2 <- glmnet(x, g, family = "multinomial")
+cv_fit <- cv.glmnet(formula = mpg ~ ., data = mtcars)
+cv_fit2 <- cv.glmnet(formula = Species ~ ., data = iris, family = "multinomial")
 
-cv_fit <- cv.glmnet(x, y)
-cv_fit2 <- cv.glmnet(x, g, family = "multinomial")
 
 test_that("glmnet.formula tidier arguments", {
   check_arguments(tidy.glmnet)
@@ -47,6 +44,11 @@ test_that("tidy.glmnet.formula", {
   check_tidy_output(td2)
   check_tidy_output(td2z)
 
+  expect_is(td2, "tbl_df")
+
+  expect_equal(dim(td2), c(839L, 6L))
+  expect_equal(dim(td2z), c(1500L, 6L))
+
   expect_true(all(td2$estimate != 0))
   expect_true(any(td2z$estimate == 0))
 
@@ -60,4 +62,7 @@ test_that("glance.glmnet.formula", {
   gl2 <- glance(fit2)
 
   check_glance_outputs(gl, gl2)
+  
+  expect_is(gl, "tbl_df")
+  expect_equal(dim(gl), c(1L, 3L))
 })
