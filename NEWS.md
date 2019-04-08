@@ -68,7 +68,10 @@ TODO: sort out what happens to `glance.aov()`
 
 ## New tidiers, features and bugfixes
 
- 
+- Return factor rather than numeric class predictions in `.fitted` of `augment.polr()`. (#619)
+
+- `ordinal` tidier rewrite
+
 - Added tidiers for `rma` objects from the `metafor` package (#674, @malcolmbarrett, @softloud)
 
 - Added support for `tidy.lavaan()` to take `quick = TRUE`. (#628)
