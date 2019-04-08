@@ -68,7 +68,7 @@ TODO: sort out what happens to `glance.aov()`
 
 ## New tidiers, features and bugfixes
 
-- Make fitted values returned by `augment.polr()` match `predict.polr` output. (#619)
+- Return factor rather than numeric class predictions in `.fitted` of `augment.polr()`. (#619)
 
 - `ordinal` tidier rewrite
 
