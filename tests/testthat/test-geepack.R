@@ -34,3 +34,8 @@ test_that("tidy.geeglm", {
   check_tidy_output(tdq)
   check_tidy_output(td2)
 })
+
+test_that("glance.geeglm", {
+  gl <- glance(fit)
+  check_glance_outputs(gl)
+})
