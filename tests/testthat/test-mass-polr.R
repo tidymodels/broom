@@ -36,10 +36,16 @@ test_that("glance.polr", {
 })
 
 test_that("augment.polr", {
+  
   check_augment_function(
     aug = augment.polr,
     model = fit,
     data = housing,
     newdata = housing
   )
+  
+  au <- augment(fit, type.predict = 'class')
+  expect_is(au$.fitted, 'factor')
+  expect_equal(predict(fit, type = 'class'), au$.fitted)
+  
 })

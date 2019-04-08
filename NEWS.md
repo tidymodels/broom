@@ -68,10 +68,15 @@ TODO: sort out what happens to `glance.aov()`
 
 ## New tidiers, features and bugfixes
 
-- Added support for `tidy.lavaan()` to take `quick = TRUE`. (#628)
+- Return factor rather than numeric class predictions in `.fitted` of `augment.polr()`. (#619)
 
 - `ordinal` tidier rewrite
 
+- Added tidiers for `rma` objects from the `metafor` package (#674, @malcolmbarrett, @softloud)
+
+- Added support for `tidy.lavaan()` to take `quick = TRUE`. (#628)
+
+- `ordinal` tidier rewrite
 - Added tidiers for `pam` objects from the `cluster` package. (#637)
 
 - Added `tidy.svyglm()` and `glance.svyglm()` (#611)
@@ -81,9 +86,14 @@ TODO: sort out what happens to `glance.aov()`
 - Added `tidy.regsubsets()` for best subsets linear regression from the `leaps` package
 
 - Added method `tidy.lm.beta()` to tidy `lm.beta` class models (#545 by @mattle24)
+
 - Add feature for glance.biglm to return df.residual
+
 - Patch bug in glance.lavaan (#577)
+
 - Added method `tidy.systemfit()` to tidy `systemfit` class models (by @jaspercooper)
+
+- `tidy.prcomp()` parameter `matrix` gained new options `"scores"`, `"loadings"`, and `"eigenvalues"` (#557 by @GegznaV)
 
 - `tidy.kmeans()` now uses the names of the input variables in the output by
   default. Set `col.names = NULL` to recover the old behavior.

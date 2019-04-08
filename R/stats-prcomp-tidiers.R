@@ -5,21 +5,24 @@
 #' @param matrix Character specifying which component of the PCA should be
 #'   tidied. 
 #'   
-#'   - `"u"`, `"samples"`, or `"x"`: returns information about the map from
-#'     the original space into principal components space.
+#'   - `"u"`, `"samples"`, `"scores"`, or `"x"`: returns information about 
+#'     the map from the original space into principle components space.
 #'   
-#'   - `"v"`, `"rotation"`, or `"variables"`: returns information about the
-#'     map from principal components space back into the original space.
+#'   - `"v"`, `"rotation"`, `"loadings"` or `"variables"`: returns information 
+#'     about the map from principle components space back into the original 
+#'     space.
 #'   
-#'   - `"d"` or `"pcs"`: returns information about the eigenvalues.
+#'   - `"d"`, `"eigenvalues"` or `"pcs"`: returns information about the 
+#'     eigenvalues.
 #'        
 #' @template param_unused_dots
 #'
 #' @return A [tibble::tibble] with columns depending on the component of 
 #'   PCA being tidied.
 #'   
-#'   If `matrix` is `"u"`, `"samples"`, or `"x"` each row in the tidied
-#'   output corresponds to the original data in PCA space. The columns are:
+#'   If `matrix` is `"u"`, `"samples"`, `"scores"`, or `"x"` each row in the 
+#'   tidied output corresponds to the original data in PCA space. The columns 
+#'   are:
 #'   
 #'   \item{`row`}{ID of the original observation (i.e. rowname from original
 #'     data).}
@@ -27,9 +30,9 @@
 #'   \item{`value`}{The score of the observation for that particular principal
 #'     component. That is, the location of the observation in PCA space.}
 #'     
-#'   If `matrix` is `"v"`, `"rotation"`, or `"variables"`, each row in the
-#'   tidied ouput corresponds to information about the principal components
-#'   in the original space. The columns are:
+#'   If `matrix` is `"v"`, `"rotation"`, `"loadings"` or `"variables"`, each 
+#'   row in the tidied ouput corresponds to information about the principle 
+#'   components in the original space. The columns are:
 #'   
 #'   \item{`row`}{The variable labels (colnames) of the data set on
 #'   which PCA was performed}
@@ -37,7 +40,7 @@
 #'   \item{`value`}{The value of the eigenvector (axis score) on the
 #'   indicated principal component}
 #'   
-#'   If `matrix` is `"d"` or `"pcs"`, the columns are:
+#'   If `matrix` is `"d"`, `"eigenvalues"` or `"pcs"`, the columns are:
 #'   
 #'   \item{`PC`}{An integer vector indicating the principal component}
 #'   \item{`std.dev`}{Standard deviation explained by this PC}
@@ -91,17 +94,18 @@ tidy.prcomp <- function(x, matrix = "u", ...) {
     stop("Must select a single matrix to tidy.", call. = FALSE)
   }
 
-  MATRIX <- c("rotation", "x", "variables", "samples", "v", "u", "pcs", "d")
+  MATRIX <- c("rotation", "x", "variables", "samples", "v", "u", "pcs", "d",
+              "scores", "loadings", "eigenvalues")
   matrix <- rlang::arg_match(matrix, MATRIX)
 
   ncomp <- NCOL(x$rotation)
-  if (matrix %in% c("pcs", "d")) {
+  if (matrix %in% c("pcs", "d", "eigenvalues")) {
     nn <- c("std.dev", "percent", "cumulative")
     ret <- fix_data_frame(t(summary(x)$importance),
       newnames = nn,
       newcol = "PC"
     )
-  } else if (matrix %in% c("rotation", "variables", "v")) {
+  } else if (matrix %in% c("rotation", "variables", "v", "loadings")) {
     labels <- if (is.null(rownames(x$rotation))) {
       1:nrow(x$rotation)
     } else {
@@ -114,7 +118,7 @@ tidy.prcomp <- function(x, matrix = "u", ...) {
       stringsAsFactors = FALSE
     )
     names(ret) <- c("column", "PC", "value")
-  } else if (matrix %in% c("x", "samples", "u")) {
+  } else if (matrix %in% c("x", "samples", "u", "scores")) {
     labels <- if (is.null(rownames(x$x))) 1:nrow(x$x) else rownames(x$x)
     samples <- tidyr::gather(as.data.frame(x$x))
     ret <- data.frame(
