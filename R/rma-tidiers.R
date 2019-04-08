@@ -162,10 +162,10 @@ glance.rma <- function(x, ...) {
     h.squared = x$H2,
     tau.squared = x$tau2,
     tau.squared.se = x$se.tau2,
-    qe = x$QE,
-    p.value.qe = x$QEp,
-    qm = x$QM,
-    p.value.qm = x$QMp,
+    cochran.qe = x$QE,
+    p.value.cochran.qe = x$QEp,
+    cochran.qm = x$QM,
+    p.value.cochran.qm = x$QMp,
     fit_stats
   ) %>%
     # get rid of null values
@@ -252,8 +252,8 @@ augment.rma <- function(x, ...) {
       .std.resid = rstudent,
       .dffits = dffits, 
       .cov.ratio = cov.r,
-      .tau.squared.del = tau2.del, 
-      .qe.del = QE.del,
+      .tau.squared.loo = tau2.del, 
+      .cochran.qe.loo = QE.del,
       .weight = weight, 
       .dfbetas = dfbetas
     )
