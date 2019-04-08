@@ -39,41 +39,33 @@ the measure will be reported as \code{NA}.
 set.seed(123)
 
 # data
-v1 <- c(1,1,1,1,1,1,1,1,1,1,3,3,3,3,3,4,5,6)
-v2 <- c(1,2,1,1,1,1,2,1,2,1,3,4,3,3,3,4,6,5)
-v3 <- c(3,3,3,3,3,1,1,1,1,1,1,1,1,1,1,5,4,6)
-v4 <- c(3,3,4,3,3,1,1,2,1,1,1,1,2,1,1,5,6,4)
-v5 <- c(1,1,1,1,1,3,3,3,3,3,1,1,1,1,1,6,4,5)
-v6 <- c(1,1,1,2,1,3,3,3,4,3,1,1,1,2,1,6,5,4)
-m1 <- cbind.data.frame(v1,v2,v3,v4,v5,v6)
+m1 <- dplyr::tibble(
+  v1 = c(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 3, 3, 3, 3, 3, 4, 5, 6),
+  v2 = c(1, 2, 1, 1, 1, 1, 2, 1, 2, 1, 3, 4, 3, 3, 3, 4, 6, 5),
+  v3 = c(3, 3, 3, 3, 3, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 5, 4, 6),
+  v4 = c(3, 3, 4, 3, 3, 1, 1, 2, 1, 1, 1, 1, 2, 1, 1, 5, 6, 4),
+  v5 = c(1, 1, 1, 1, 1, 3, 3, 3, 3, 3, 1, 1, 1, 1, 1, 6, 4, 5),
+  v6 = c(1, 1, 1, 2, 1, 3, 3, 3, 4, 3, 1, 1, 1, 2, 1, 6, 5, 4)
+)
 
 # new data
-m2 <-
-  cbind.data.frame(
-    x1 = rev(v1),
-    x2 = rev(v2),
-    x3 = rev(v3),
-    x4 = rev(v4),
-    x5 = rev(v5),
-    x6 = rev(v6)
-  )
+m2 <- purrr::map_dfr(m1, rev)
 
 # factor analysis objects
-x1 <- stats::factanal(m1, factors = 3, scores = "Bartlett")
-x2 <- stats::factanal(m1, factors = 3, scores = "regression")
+fit1 <- stats::factanal(m1, factors = 3, scores = "Bartlett")
+fit2 <- stats::factanal(m1, factors = 3, scores = "regression")
 
 # tidying the object
-broom::tidy(x1)
-broom::tidy(x2)
+tidy(fit1)
+tidy(fit2)
 
 # augmented dataframe
-broom::augment(x1)
-broom::augment(x2)
+augment(fit1)
+augment(fit2)
 
 # augmented dataframe (with new data)
-broom::augment(x1, data = m2)
-broom::augment(x2, data = m2)
-
+augment(fit1, data = m2)
+augment(fit2, data = m2)
 }
 \seealso{
 \code{\link[=glance]{glance()}}, \code{\link[stats:factanal]{stats::factanal()}}

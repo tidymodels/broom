@@ -67,6 +67,9 @@ test_that("augment.factanal works with matrix", {
   library(broom)
   set.seed(123)
 
+  library(broom)
+  set.seed(123)
+  
   # data
   v1 <- c(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 3, 3, 3, 3, 3, 4, 5, 6)
   v2 <- c(1, 2, 1, 1, 1, 1, 2, 1, 2, 1, 3, 4, 3, 3, 3, 4, 6, 5)
@@ -74,10 +77,10 @@ test_that("augment.factanal works with matrix", {
   v4 <- c(3, 3, 4, 3, 3, 1, 1, 2, 1, 1, 1, 1, 2, 1, 1, 5, 6, 4)
   v5 <- c(1, 1, 1, 1, 1, 3, 3, 3, 3, 3, 1, 1, 1, 1, 1, 6, 4, 5)
   v6 <- c(1, 1, 1, 2, 1, 3, 3, 3, 4, 3, 1, 1, 1, 2, 1, 6, 5, 4)
-  m1 <- cbind.data.frame(v1, v2, v3, v4, v5, v6)
-
+  fit1 <- cbind.data.frame(v1, v2, v3, v4, v5, v6)
+  
   # new data
-  m2 <-
+  fit2 <-
     cbind.data.frame(
       x1 = rev(v1),
       x2 = rev(v2),
@@ -88,16 +91,16 @@ test_that("augment.factanal works with matrix", {
     )
 
   # objects
-  x1 <- stats::factanal(m1, factors = 3, scores = "Bartlett")
-  x2 <- stats::factanal(m1, factors = 3, scores = "regression")
+  fit1 <- stats::factanal(m1, factors = 3, scores = "Bartlett")
+  fit2 <- stats::factanal(m1, factors = 3, scores = "regression")
 
   # augmented dataframe
-  df1 <- broom::augment(x1)
-  df2 <- broom::augment(x2)
+  df1 <- broom::augment(fit1)
+  df2 <- broom::augment(fit2)
 
   # augmented dataframe (with new data)
-  df3 <- broom::augment(x1, data = m2)
-  df4 <- broom::augment(x2, data = m2)
+  df3 <- broom::augment(fit1, data = m2)
+  df4 <- broom::augment(fit2, data = m2)
 
   # checking dataframe dimensions
   testthat::expect_is(df1, "tbl_df")
@@ -109,12 +112,12 @@ test_that("augment.factanal works with matrix", {
   testthat::expect_identical(names(df3),
                              c(
                                ".rownames",
-                               "x1",
-                               "x2",
-                               "x3",
-                               "x4",
-                               "x5",
-                               "x6",
+                               "v1",
+                               "v2",
+                               "v3",
+                               "v4",
+                               "v5",
+                               "v6",
                                ".fs1",
                                ".fs2",
                                ".fs3"

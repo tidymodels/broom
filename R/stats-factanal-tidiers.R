@@ -3,7 +3,7 @@
 #'
 #' @param x A `factanal` object created by [stats::factanal()].
 #' @template param_unused_dots
-#' 
+#'
 #' @evalRd return_tidy(
 #'   "variable",
 #'   uniqueness = "Proportion of residual, or unexplained variance",
@@ -13,50 +13,42 @@
 #' @examples
 #'
 #' set.seed(123)
-#' 
+#'
 #' # data
-#' v1 <- c(1,1,1,1,1,1,1,1,1,1,3,3,3,3,3,4,5,6)
-#' v2 <- c(1,2,1,1,1,1,2,1,2,1,3,4,3,3,3,4,6,5)
-#' v3 <- c(3,3,3,3,3,1,1,1,1,1,1,1,1,1,1,5,4,6)
-#' v4 <- c(3,3,4,3,3,1,1,2,1,1,1,1,2,1,1,5,6,4)
-#' v5 <- c(1,1,1,1,1,3,3,3,3,3,1,1,1,1,1,6,4,5)
-#' v6 <- c(1,1,1,2,1,3,3,3,4,3,1,1,1,2,1,6,5,4)
-#' m1 <- cbind.data.frame(v1,v2,v3,v4,v5,v6)
+#' m1 <- dplyr::tibble(
+#'   v1 = c(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 3, 3, 3, 3, 3, 4, 5, 6),
+#'   v2 = c(1, 2, 1, 1, 1, 1, 2, 1, 2, 1, 3, 4, 3, 3, 3, 4, 6, 5),
+#'   v3 = c(3, 3, 3, 3, 3, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 5, 4, 6),
+#'   v4 = c(3, 3, 4, 3, 3, 1, 1, 2, 1, 1, 1, 1, 2, 1, 1, 5, 6, 4),
+#'   v5 = c(1, 1, 1, 1, 1, 3, 3, 3, 3, 3, 1, 1, 1, 1, 1, 6, 4, 5),
+#'   v6 = c(1, 1, 1, 2, 1, 3, 3, 3, 4, 3, 1, 1, 1, 2, 1, 6, 5, 4)
+#' )
 #' 
 #' # new data
-#' m2 <-
-#'   cbind.data.frame(
-#'     x1 = rev(v1),
-#'     x2 = rev(v2),
-#'     x3 = rev(v3),
-#'     x4 = rev(v4),
-#'     x5 = rev(v5),
-#'     x6 = rev(v6)
-#'   )
-#' 
-#' # factor analysis objects
-#' x1 <- stats::factanal(m1, factors = 3, scores = "Bartlett")
-#' x2 <- stats::factanal(m1, factors = 3, scores = "regression")
-#' 
-#' # tidying the object
-#' broom::tidy(x1)
-#' broom::tidy(x2)
-#' 
-#' # augmented dataframe
-#' broom::augment(x1)
-#' broom::augment(x2)
-#' 
-#' # augmented dataframe (with new data)
-#' broom::augment(x1, data = m2)
-#' broom::augment(x2, data = m2)
+#' m2 <- purrr::map_dfr(m1, rev)
 #'
+#' # factor analysis objects
+#' fit1 <- stats::factanal(m1, factors = 3, scores = "Bartlett")
+#' fit2 <- stats::factanal(m1, factors = 3, scores = "regression")
+#'
+#' # tidying the object
+#' tidy(fit1)
+#' tidy(fit2)
+#'
+#' # augmented dataframe
+#' augment(fit1)
+#' augment(fit2)
+#'
+#' # augmented dataframe (with new data)
+#' augment(fit1, data = m2)
+#' augment(fit2, data = m2)
 #' @aliases factanal_tidiers
 #' @export
 #' @seealso [tidy()], [stats::factanal()]
 #' @family factanal tidiers
-#' 
+
 tidy.factanal <- function(x, ...) {
-  
+
   # as.matrix() causes this to break. unsure if this is a hack or appropriate
   loadings <- stats::loadings(x)
   class(loadings) <- "matrix"
@@ -78,7 +70,7 @@ tidy.factanal <- function(x, ...) {
 
 #' @templateVar class factanal
 #' @template title_desc_augment
-#' 
+#'
 #' @inheritParams tidy.factanal
 #' @template param_data
 #'
@@ -102,7 +94,7 @@ augment.factanal <- function(x, data, ...) {
     stop(
       "Cannot augment factanal objects fit with `scores = 'none'`.",
       call. = FALSE
-      )
+    )
   }
 
   # Place relevant values into a tidy data frame
@@ -111,7 +103,7 @@ augment.factanal <- function(x, data, ...) {
       as_tibble() %>%
       dplyr::mutate(.rownames = as.character(.rownames))
   } else {
-    tidy_df <- tibble::rownames_to_column(as.data.frame(scores), var = ".rownames") %>% 
+    tidy_df <- tibble::rownames_to_column(as.data.frame(scores), var = ".rownames") %>%
       as_tibble() %>%
       dplyr::mutate(.rownames = as.character(.rownames))
   }
@@ -122,16 +114,18 @@ augment.factanal <- function(x, data, ...) {
   if (missing(data)) {
     return(tidy_df)
   } else {
-    data <- tibble::rownames_to_column(as.data.frame(data), var = ".rownames") %>% 
+    data <- tibble::rownames_to_column(as.data.frame(data), var = ".rownames") %>%
       as_tibble() %>%
       dplyr::mutate(.rownames = as.character(.rownames))
   }
 
   # Bind to data
-  tidy_df <- tidy_df %>% 
-    dplyr::right_join(data, by = ".rownames")
+  tidy_df <- tidy_df %>%
+    dplyr::right_join(x = ., y = data, by = ".rownames")
 
-  tidy_df %>% 
+  # select all columns with name pattern `.fs` and move them to the end of the
+  # augmented dataframe
+  tidy_df %>%
     dplyr::select(
       .rownames, dplyr::everything(),
       -dplyr::matches("\\.fs[0-9]*"), dplyr::matches("\\.fs[0-9]*")
@@ -140,7 +134,7 @@ augment.factanal <- function(x, data, ...) {
 
 #' @templateVar class factanal
 #' @template title_desc_glance
-#' 
+#'
 #' @inherit tidy.factanal params examples
 #'
 #' @evalRd return_glance(
@@ -156,7 +150,7 @@ augment.factanal <- function(x, data, ...) {
 #' )
 #'
 #' @export
-#' 
+#'
 #' @seealso [glance()], [stats::factanal()]
 #' @family factanal tidiers
 glance.factanal <- function(x, ...) {

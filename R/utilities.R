@@ -34,6 +34,7 @@ exponentiate <- function(data) {
 #'
 #' @return A `tibble` potentially with a `.rownames` column
 #' @noRd
+#' 
 as_broom_tibble <- function(data) {
   
   # TODO: error when there aren't column names?
