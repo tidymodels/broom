@@ -96,6 +96,7 @@ Other contributors:
   \item Charles Gray \email{charlestigray@gmail.com} (0000-0002-9978-011X) [contributor]
   \item Jared Wilber [contributor]
   \item Vilmantas Gegzna \email{GegznaV@gmail.com} (0000-0002-9500-5167) [contributor]
+  \item Eduard Szoecs \email{eduardszoecs@gmail.com} [contributor]
 }
 
 }

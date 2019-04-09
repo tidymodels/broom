@@ -151,7 +151,8 @@ glance.rma <- function(x, ...) {
     stringr::str_replace(names(fit_stats), "\\:", "")
   
   # metafor returns different fit statistics for different models
-  # so use a list + `purrr::discard` to remove unrelated statistics
+  # so use a list + `purrr::discard` to remove unrelated / missing statistics
+  
   list(
     nobs = x$k,
     measure = x$measure,
@@ -166,13 +167,9 @@ glance.rma <- function(x, ...) {
     p.value.cochran.qm = x$QMp,
     fit_stats
   ) %>%
-    # get rid of null values
     purrr::discard(is.null) %>%
-    # don't include multivariate model stats
     purrr::discard(~length(.x) >= 2) %>%
-    # change to tibble with correct column and row names
-    as.data.frame() %>%
-    tibble::as_tibble()
+    as_tibble()
 }
 
 #' @templateVar class rma
@@ -192,6 +189,7 @@ glance.rma <- function(x, ...) {
 #'   ".moderator",
 #'   ".moderator.level"
 #' )
+#' 
 #' @export
 #'
 #' @examples
@@ -212,7 +210,6 @@ glance.rma <- function(x, ...) {
 #'
 #' augment(meta_analysis)
 #'
-#' @rdname metafor_augmenters
 augment.rma <- function(x, ...) {
   # metafor generally handles these for different models through the monolith
   # `rma` class; using `purrr::possibly` primarily helps discard unused

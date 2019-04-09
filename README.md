@@ -8,7 +8,8 @@ status](https://www.r-pkg.org/badges/version/broom)](https://cran.r-project.org/
 [![Travis-CI Build
 Status](https://travis-ci.org/tidymodels/broom.svg?branch=master)](https://travis-ci.org/tidymodels/broom)
 [![AppVeyor build
-status](https://ci.appveyor.com/api/projects/status/github/alexpghayes/broom?branch=master&svg=true)](https://ci.appveyor.com/project/alexpghayes/broom)
+status](https://ci.appveyor.com/api/projects/status/github/tidymodels/broom?branch=master&svg=true)](https://ci.appveyor.com/project/tidymodels/broom)
+[![CircleCI](https://circleci.com/gh/tidymodels/broom.svg?style=svg)](https://circleci.com/gh/tidymodels/broom)
 [![Coverage
 Status](https://img.shields.io/codecov/c/github/tidymodels/broom/master.svg)](https://codecov.io/github/tidymodels/broom?branch=master)
 
@@ -26,7 +27,7 @@ For a detailed introduction, please see `vignette("broom")`.
 
 broom tidies 100+ models from popular modelling packages and almost all
 of the model objects in the `stats` package that comes with base R.
-`vignette("available-methods")` lists method availabilty.
+`vignette("available-methods")` lists method availability.
 
 If you aren’t familiar with tidy data structures and want to know how
 they can make your life easier, we highly recommend reading Hadley
@@ -76,11 +77,11 @@ misspecification and to compare many models.
 
 ``` r
 glance(fit)
-#> # A tibble: 1 x 11
+#> # A tibble: 1 x 12
 #>   r.squared adj.r.squared sigma statistic p.value    df logLik   AIC   BIC
-#> *     <dbl>         <dbl> <dbl>     <dbl>   <dbl> <int>  <dbl> <dbl> <dbl>
-#> 1     0.213         0.202 0.389      19.9 2.24e-8     3  -69.8  148.  160.
-#> # ... with 2 more variables: deviance <dbl>, df.residual <int>
+#>       <dbl>         <dbl> <dbl>     <dbl>   <dbl> <dbl>  <dbl> <dbl> <dbl>
+#> 1     0.213         0.202 0.389      19.9 2.24e-8     2  -69.8  148.  160.
+#> # ... with 3 more variables: deviance <dbl>, df.residual <int>, nobs <int>
 ```
 
 `augment` adds columns to a dataset, containing information such as
@@ -90,9 +91,9 @@ overwritten.
 
 ``` r
 augment(fit, data = iris)
-#> # A tibble: 150 x 12
+#> # A tibble: 150 x 11
 #>    Sepal.Length Sepal.Width Petal.Length Petal.Width Species .fitted
-#>  *        <dbl>       <dbl>        <dbl>       <dbl> <fct>     <dbl>
+#>           <dbl>       <dbl>        <dbl>       <dbl> <fct>     <dbl>
 #>  1          5.1         3.5          1.4         0.2 setosa     3.30
 #>  2          4.9         3            1.4         0.2 setosa     3.30
 #>  3          4.7         3.2          1.3         0.2 setosa     3.33
@@ -103,9 +104,8 @@ augment(fit, data = iris)
 #>  8          5           3.4          1.5         0.2 setosa     3.27
 #>  9          4.4         2.9          1.4         0.2 setosa     3.30
 #> 10          4.9         3.1          1.5         0.1 setosa     3.24
-#> # ... with 140 more rows, and 6 more variables: .se.fit <dbl>,
-#> #   .resid <dbl>, .hat <dbl>, .sigma <dbl>, .cooksd <dbl>,
-#> #   .std.resid <dbl>
+#> # ... with 140 more rows, and 5 more variables: .resid <dbl>,
+#> #   .std.resid <dbl>, .hat <dbl>, .sigma <dbl>, .cooksd <dbl>
 ```
 
 ### Contributing
@@ -125,5 +125,5 @@ valuable.
 If you are interested in adding new tidiers methods to broom, please
 read `vignette("adding-tidiers")`.
 
-We have a [Contributor Code of Conduct](.github/CODE_OF_CONDUCT.md). By
+We have a [Contributor Code of Conduct](CODE_OF_CONDUCT.md). By
 participating in broom you agree to abide by its terms.
