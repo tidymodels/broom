@@ -4,8 +4,7 @@
 #' @param x A `drc` object produced by a call to [drc::drm()].
 #' @template param_confint
 #' @template param_unused_dots
-#' @param quick whether to compute a smaller and faster version, containing
-#' only the \code{term}, \code{curveid} and \code{estimate} columns.
+#'
 #' @evalRd return_tidy(   
 #'       curveid = "Id of the curve",   
 #'       "term",
@@ -18,7 +17,7 @@
 #' )
 #' @details The tibble has one row for each curve and term in the regression. The
 #'   `curveid` column indicates the curve.
-#' @author Eduard Szoecs, \email{eduardszoecs@@gmail.com}
+#'  
 #' @examples 
 #' library(drc)
 #' mod <- drm(dead/total~conc, type, 
@@ -27,31 +26,15 @@
 #' 
 #' tidy(mod)
 #' tidy(mod, conf.int = TRUE)
-#' tidy(mod, quick = TRUE)
-
+#' 
 #' glance(mod)
-
-#' # augment(mod)
+#' 
+#' 
 #' @export
 #' @seealso [tidy()], [drc::drm()]
 #' @family drc tidiers
 #' @aliases drc_tidiers
-tidy.drc <- function(x, conf.int = FALSE, conf.level = 0.95, quick = FALSE, ...) {
-  if (quick) {
-    co <- coef(x)
-    nam <- names(co)
-    term <- gsub("^(.*):(.*)$", "\\1", nam)
-    curves <- x[["dataList"]][["curveid"]]
-    if (length(unique(curves)) > 1) {
-      curveid <- gsub("^(.*):(.*)$", "\\2", nam)
-    } else {
-      curveid <- unique(curves)
-    }
-    ret <- tibble(term = term,
-                      curveid = curveid,
-                      estimate = unname(co))
-    return(ret)
-  }
+tidy.drc <- function(x, conf.int = FALSE, conf.level = 0.95, ...) {
 
   co <- coef(summary(x))
 
@@ -63,9 +46,7 @@ tidy.drc <- function(x, conf.int = FALSE, conf.level = 0.95, quick = FALSE, ...)
   } else {
     curveid <- unique(curves)
   }
-  ret <- data.frame(term = term,
-                    curveid = curveid,
-                    co, stringsAsFactors = FALSE)
+  ret <- tibble(term = term, curveid = curveid, co)
   names(ret) <- c("term", "curveid", "estimate", "std.error", "statistic",
     "p.value")
   rownames(ret) <- NULL
@@ -76,8 +57,8 @@ tidy.drc <- function(x, conf.int = FALSE, conf.level = 0.95, quick = FALSE, ...)
     rownames(conf) <- NULL
     ret <- cbind(ret, conf)
   }
-
-  return(as_tibble(ret))
+  
+  as_tibble(ret)
 }
 
 #' @templateVar class drc
@@ -97,11 +78,12 @@ tidy.drc <- function(x, conf.int = FALSE, conf.level = 0.95, quick = FALSE, ...)
 #' @export
 #' @family drc tidiers
 glance.drc <- function(x, ...) {
-  ret <- data.frame(AIC = AIC(x),
-                    BIC = BIC(x),
-                    logLik = logLik(x),
-                    df.residual =  x$df.residual)
-  return(as_tibble(ret))
+  tibble(
+    AIC = stats::AIC(x),
+    BIC = stats::BIC(x),
+    logLik = stats::logLik(x),
+    df.residual =  x$df.residual
+  )
 }
 
 #' @templateVar class drc
@@ -123,7 +105,7 @@ glance.drc <- function(x, ...) {
 #' 
 #' @seealso [augment()], [drc::drm()]
 #' @export
-#' @author Eduard Szoecs, \email{eduardszoecs@@gmail.com}
+#' 
 #' @family drc tidiers
 augment.drc <- function(x, data = NULL, newdata = NULL,
   se_fit = FALSE,  conf.int = FALSE, conf.level = 0.95, ...) {
