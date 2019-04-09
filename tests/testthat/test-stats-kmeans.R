@@ -34,7 +34,7 @@ test_that("augment.kmeans", {
   # data argument cannot be empty
   expect_error(
     augment(fit),
-    regexp = "Must specify `data` argument."
+    regexp = "Must specify `data` argument for augment.kmeans."
   )
   
   check_augment_function(
