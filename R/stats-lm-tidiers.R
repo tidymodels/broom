@@ -3,7 +3,6 @@
 #' 
 #' @param x An `lm` object created by [stats::lm()].
 #' @template param_confint 
-#' @template param_quick
 #' @template param_exponentiate
 #' @template param_unused_dots
 #' 
@@ -69,19 +68,8 @@
 #' @seealso [tidy()], [stats::summary.lm()]
 #' @family lm tidiers
 tidy.lm <- function(x, conf.int = FALSE, conf.level = .95,
-                    exponentiate = FALSE, quick = FALSE, ...) {
-  if (quick) {
-    co <- stats::coef(x)
-    if (inherits(x,'mlm')) {
-      ret <- data.frame(response = rep(colnames(co), each = nrow(co)),
-                        term = rep(rownames(co), times = ncol(co)),
-                        estimate = as.numeric(co), stringsAsFactors = FALSE)
-    } else {
-      ret <- data.frame(term = names(co), estimate = unname(co),
-                        stringsAsFactors = FALSE)
-    }
-    return(process_lm(ret, x, conf.int = FALSE, exponentiate = exponentiate))
-  }
+                    exponentiate = FALSE, ...) {
+  
   s <- summary(x)
   ret <- tidy.summary.lm(s)
 

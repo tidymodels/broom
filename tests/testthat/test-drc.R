@@ -19,11 +19,9 @@ test_that("drc tidier arguments", {
 test_that("tidy.drc", {
 
   td1 <- tidy(mod)
-  td2 <- tidy(mod, quick = TRUE)
   td3 <- tidy(mod, robust = TRUE)
 
   check_tidy_output(td1, strict = FALSE)
-  check_tidy_output(td2, strict = FALSE)
   check_tidy_output(td3, strict = FALSE)
 })
 
@@ -54,11 +52,9 @@ mod2 <- drm(rootl ~ conc, data = ryegrass, fct = W2.4())
 test_that("tidy.drc", {
 
   td1 <- tidy(mod2)
-  td2 <- tidy(mod2, quick = TRUE)
   td3 <- tidy(mod2, robust = TRUE)
 
   check_tidy_output(td1, strict = FALSE)
-  check_tidy_output(td2, strict = FALSE)
   check_tidy_output(td3, strict = FALSE)
 })
 

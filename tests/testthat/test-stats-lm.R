@@ -25,24 +25,16 @@ test_that("tidy.lm works", {
   td <- tidy(fit)
   td2 <- tidy(fit2)
   
-  tdq <- tidy(fit, quick = TRUE)
-  tdq2 <- tidy(fit, quick = TRUE)
-  
   # conf.int = TRUE works for rank deficient fits
   # should get a "NaNs produced" warning
   expect_warning(td_rd <- tidy(fit_rd, conf.int = TRUE))
   
   check_tidy_output(td)
   check_tidy_output(td2)
-  check_tidy_output(tdq)
-  check_tidy_output(tdq2)
-  
   check_tidy_output(td_rd)
   
   check_dims(td, expected_rows = 2)
   check_dims(td2, expected_rows = 3)
-  check_dims(tdq, expected_cols = 2)
-  check_dims(tdq2, expected_cols = 2)
   
   expect_equal(td$term, c("(Intercept)", "wt"))
   expect_equal(td2$term, c("(Intercept)", "wt", "log(disp)"))
@@ -159,31 +151,21 @@ test_that("tidy.mlm works", {
   check_tidy_output(td2)
   check_tidy_output(tdc)
   check_tidy_output(tdc2)
-  check_tidy_output(tdq)
-  check_tidy_output(tdq2)
-
+  
   check_dims(td, expected_rows = 4)
   check_dims(td2, expected_rows = 6)
   check_dims(tdc, expected_rows = 4)
   check_dims(tdc2, expected_rows = 6)
-  check_dims(tdq, expected_rows = 4)
-  check_dims(tdq2, expected_rows = 6)
-
+  
   check_dims(td, expected_cols = 6)
   check_dims(td2, expected_cols = 6)
   check_dims(tdc, expected_cols = 8)
   check_dims(tdc2, expected_cols = 8)
-  check_dims(tdq, expected_cols = 3)
-  check_dims(tdq2, expected_cols = 3)
-
+  
   expect_equal(td$term, rep(c("(Intercept)", "x1"),2))
   expect_equal(td2$term, rep(c("(Intercept)", "x1","x2"),2))
   expect_equal(td$response, rep_each(c("y1", "y2"), 2))
   expect_equal(td2$response, rep_each(c("y1", "y2"), 3))
-  expect_equal(tdq$term, rep(c("(Intercept)", "x1"),2))
-  expect_equal(tdq2$term, rep(c("(Intercept)", "x1", "x2"),2))
-  expect_equal(tdq$response, rep_each(c("y1", "y2"), 2))
-  expect_equal(tdq2$response, rep_each(c("y1", "y2"), 3))
   
   expect_warning(
     tidy(fit2, exponentiate = TRUE),
