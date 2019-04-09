@@ -3,7 +3,6 @@
 #'
 #' @param x An `nls` object returned from [stats::nls()].
 #' @template param_confint
-#' @template param_quick
 #' @template param_unused_dots
 #'
 #' @evalRd return_tidy(regression = TRUE)
@@ -29,16 +28,7 @@
 #' @export
 #' @seealso [tidy], [stats::nls()], [stats::summary.nls()]
 #' @family nls tidiers
-tidy.nls <- function(x, conf.int = FALSE, conf.level = .95,
-                     quick = FALSE, ...) {
-  if (quick) {
-    co <- stats::coef(x)
-    ret <- data.frame(
-      term = names(co), estimate = unname(co),
-      stringsAsFactors = FALSE
-    )
-    return(as_tibble(ret))
-  }
+tidy.nls <- function(x, conf.int = FALSE, conf.level = .95, ...) {
 
   nn <- c("estimate", "std.error", "statistic", "p.value")
   ret <- fix_data_frame(stats::coef(summary(x)), nn)
