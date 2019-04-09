@@ -76,10 +76,9 @@ tidy.lm <- function(x,
   if (quick) {
     co <- stats::coef(x)
 
-    ret <- data.frame(
+    ret <- tibble(
       term = names(co),
-      estimate = unname(co),
-      stringsAsFactors = FALSE
+      estimate = unname(co)
     )
 
     return(process_lm(ret, x, conf.int = FALSE, exponentiate = exponentiate))

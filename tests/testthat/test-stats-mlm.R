@@ -4,8 +4,8 @@ fit_mlm <- lm(cbind(mpg, disp) ~ wt, mtcars)
 df_tidy <- tidy(fit_mlm, conf.int = TRUE)
 
 test_that("tidy.mlm works", {
-  testthat::expect_equal(dim(df_tidy), c(4L, 8L))
-  testthat::expect_is(df_tidy, "tbl_df")
+  expect_equal(dim(df_tidy), c(4L, 8L))
+  expect_is(df_tidy, "tbl_df")
 })
 
 test_that("augment and glance do not support multiple responses", {
@@ -18,7 +18,7 @@ test_that("augment and glance do not support multiple responses", {
   
   expect_error(
     glance(mfit),
-    regexp = "Glance does not support linear models with multiple responses."
+    regexp = "No glance method for objects of class mlm"
   )
 })
 

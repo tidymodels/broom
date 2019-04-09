@@ -20,6 +20,7 @@
 #'
 #' mod <- lm(cbind(mpg, disp) ~ wt, mtcars)
 #' tidy(mod, conf.int = TRUE)
+#' @importFrom dplyr bind_cols
 #' @export
 #' @seealso [tidy()]
 #' @family lm tidiers
@@ -32,8 +33,19 @@ tidy.mlm <- function(x,
 
   # adding other details from summary object
   s <- summary(x)
-  ret <- tidy.summary.mlm(s)
+  #ret <- tidy.summary.mlm(s)
 
+  co <- stats::coef(s)
+  nn <- c("estimate", "std.error", "statistic", "p.value")
+  
+  # multiple response variables
+  ret <- purrr::map_df(co, fix_data_frame, nn[1:ncol(co[[1]])],
+                       .id = "response"
+  )
+  ret$response <- stringr::str_replace(ret$response, "Response ", "")
+  
+  ret <- as_tibble(ret)
+  
   # adding confidence intervals
   if (isTRUE(conf.int)) {
 
@@ -52,10 +64,10 @@ tidy.mlm <- function(x,
     }
 
     colnames(CI) <- c("conf.low", "conf.high")
-    ret <- cbind(ret, unrowname(CI))
+    ret <- bind_cols(ret, CI)
   }
 
-  tibble::as_tibble(ret)
+  as_tibble(ret)
 }
 
 # mlm objects subclass lm objects so this gives a better error than
@@ -64,26 +76,8 @@ tidy.mlm <- function(x,
 augment.mlm <- augment.default
 
 #' @export
-glance.mlm <- function(x, ...) {
-  stop(
-    "Glance does not support linear models with multiple responses.",
-    call. = FALSE
-  )
-}
 
-#' @export
-tidy.summary.mlm <- function(x, ...) {
-  co <- stats::coef(x)
-  nn <- c("estimate", "std.error", "statistic", "p.value")
-
-  # multiple response variables
-  ret <- purrr::map_df(co, fix_data_frame, nn[1:ncol(co[[1]])],
-    .id = "response"
-  )
-  ret$response <- stringr::str_replace(ret$response, "Response ", "")
-
-  as_tibble(ret)
-}
+glance.mlm <- glance.default
 
 # compute confidence intervals for mlm object.
 confint.mlm <- function(object, level = 0.95, ...) {
