@@ -143,10 +143,7 @@ test_that("tidy.mlm works", {
   # hit the confidence interval code
   tdc <- tidy(fit,conf.int=TRUE)
   tdc2 <- tidy(fit2,conf.int=TRUE)
-  # quick tidy
-  tdq <- tidy(fit, quick = TRUE)
-  tdq2 <- tidy(fit2, quick = TRUE)
-
+  
   check_tidy_output(td)
   check_tidy_output(td2)
   check_tidy_output(tdc)

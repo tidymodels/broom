@@ -69,38 +69,26 @@ tidy.felm <- function(x, conf.int = FALSE, conf.level = .95, fe = FALSE, ...) {
 
   if (fe) {
     ret <- mutate(ret, N = NA, comp = NA)
-    if(quick) {
-      ret_fe_prep <- lfe::getfe(x) %>% 
-        tibble::rownames_to_column(var = "term") 
-      if(has_multi_response) ret_fe_prep <-  ret_fe_prep %>% 
-          tidyr::gather(response, effect, starts_with("effect.")) %>% 
-          mutate(response = stringr::str_remove(response, "effect."))
-      
-      ret_fe <-  ret_fe_prep%>%
-        select(contains("response"), term, effect, obs, comp) %>%
-        rename(N = obs,
-               estimate = effect)
-    } else {
-      nn <- c("estimate", "std.error", "N", "comp")
-      ret_fe_prep <- lfe::getfe(x, se = TRUE, bN = 100) %>% 
-        tibble::rownames_to_column(var = "term") %>% 
-        select(term, contains("effect"),  contains("se"), obs, comp) %>% # effect and se are multiple if multiple y
-        rename(N=obs) 
-      
-      if(has_multi_response) {
-        ret_fe_prep <-  ret_fe_prep  %>% 
-          tidyr::gather(key = "stat_resp", value, starts_with("effect."), starts_with("se.")) %>% 
-          tidyr::separate(col = "stat_resp", c("stat", "response"), sep="\\.") %>% 
-          tidyr::spread(key = "stat", value) 
-        # nn <-  c("response", nn)
-      }
-      ret_fe <-  ret_fe_prep %>%
-        rename(estimate = effect, std.error = se) %>% 
-        select(contains("response"), everything()) %>%
-        # fix_data_frame(nn) %>%
-        mutate(statistic = estimate / std.error) %>%
-        mutate(p.value = 2 * (1 - stats::pt(statistic, df = N)))  
+    
+    nn <- c("estimate", "std.error", "N", "comp")
+    ret_fe_prep <- lfe::getfe(x, se = TRUE, bN = 100) %>% 
+      tibble::rownames_to_column(var = "term") %>% 
+      select(term, contains("effect"),  contains("se"), obs, comp) %>% # effect and se are multiple if multiple y
+      rename(N=obs) 
+    
+    if(has_multi_response) {
+      ret_fe_prep <-  ret_fe_prep  %>% 
+        tidyr::gather(key = "stat_resp", value, starts_with("effect."), starts_with("se.")) %>% 
+        tidyr::separate(col = "stat_resp", c("stat", "response"), sep="\\.") %>% 
+        tidyr::spread(key = "stat", value) 
+      # nn <-  c("response", nn)
     }
+    ret_fe <-  ret_fe_prep %>%
+      rename(estimate = effect, std.error = se) %>% 
+      select(contains("response"), everything()) %>%
+      # fix_data_frame(nn) %>%
+      mutate(statistic = estimate / std.error) %>%
+      mutate(p.value = 2 * (1 - stats::pt(statistic, df = N)))  
     
     if (conf.int) {
       
