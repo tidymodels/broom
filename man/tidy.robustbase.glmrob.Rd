@@ -36,8 +36,7 @@ specify which components to return.
 }
 \details{
 For tidiers for robust models from the \pkg{MASS} package see
-\code{\link[=tidy.rlm]{tidy.rlm()}}. For tidiers for robust models from the \pkg{robust} package
-see \code{\link[=tidy.lmRob]{tidy.lmRob()}}.
+\code{\link[=tidy.rlm]{tidy.rlm()}}.
 }
 \examples{
 
@@ -64,8 +63,8 @@ augment(Rfit)
 \code{\link[robustbase:glmrob]{robustbase::glmrob()}}
 
 Other robustbase tidiers: \code{\link{augment.glmrob}},
-  \code{\link{augment.lmrob}}, \code{\link{glance.glmrob}},
-  \code{\link{glance.lmrob}}, \code{\link{tidy.lmrob}}
+  \code{\link{augment.lmrob}}, \code{\link{glance.lmrob}},
+  \code{\link{tidy.lmrob}}
 }
 \concept{robustbase tidiers}
 \value{

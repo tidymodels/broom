@@ -8,8 +8,7 @@
 #' @evalRd return_tidy(regression = TRUE)
 #'
 #' @details For tidiers for robust models from the \pkg{MASS} package see
-#'   [tidy.rlm()]. For tidiers for robust models from the \pkg{robust} package
-#'   see [tidy.lmRob()].
+#'   [tidy.rlm()].
 #'
 #' @inherit tidy.lmrob examples
 #'
@@ -19,16 +18,14 @@
 #' @seealso [robustbase::glmrob()]
 tidy.glmrob <- function (x, conf.int = FALSE, conf.level = 0.95, ...) {
   ret <- coef(summary(x)) %>% 
-    tibble::as_tibble(rownames = "term")
+    as_tibble(rownames = "term")
   names(ret) <- c("term", "estimate", "std.error", "statistic", "p.value")
 
   if (conf.int) {
     ci <- stats::confint.default(x, level = conf.level) %>% 
-      tibble::as_tibble(rownames = NULL) %>% 
-      dplyr::rename(
-        conf.low = `2.5 %`
-        ,conf.high = `97.5 %`
-      )
+      as_tibble()
+
+    names(ci) <- c("conf.low", "conf.high")
     ret <- ret %>% 
       cbind(ci)
   }
@@ -50,8 +47,7 @@ tidy.glmrob <- function (x, conf.int = FALSE, conf.level = 0.95, ...) {
 #'
 #' @evalRd return_augment()
 #' @details For tidiers for robust models from the \pkg{MASS} package see
-#'   [tidy.rlm()]. For tidiers for robust models from the \pkg{robust} package
-#'   see [tidy.lmRob()].
+#'   [tidy.rlm()].
 #'
 #' @export
 #' @family robustbase tidiers
@@ -61,19 +57,6 @@ augment.glmrob <- function(x, data = model.frame(x), newdata = NULL,
                            type.predict = c("link", "response"),
                            type.residuals = c("deviance", "pearson"),
                            se_fit = FALSE, ...) {
-  # FIXME:
-  # predict.glmrob(x, type = "terms") throws an error and specifying
-  # `type.predict` = "terms" returns the same output as when `type.predict` =
-  # "response" if this isn't handled
-  if (length(type.predict) == 1 && type.predict == "terms") {
-    # check to make sure behavior still exists in robustbase
-    tryCatch({
-      predict(x, type = type.predict)
-       },
-      error = function(e) {
-        rlang::abort('`type.predict` = "terms" is not supported')
-      })
-  }
   augment_newdata(
     x, data, newdata,
     type.predict = type.predict,
@@ -82,27 +65,3 @@ augment.glmrob <- function(x, data = model.frame(x), newdata = NULL,
   )
 }
 
-#' @templateVar class glmrob
-#' @template title_desc_glance
-#' @template param_unused_dots
-#' 
-#' @param x Unused.
-#' @param ... Unused.
-#' 
-#' @details For tidiers for robust models from the \pkg{MASS} package see
-#'   [tidy.rlm()]. For tidiers for robust models from the \pkg{robust} package
-#'   see [tidy.lmRob()].
-
-#' @description `glance.glmrob()` has not yet been implemented in broom. The
-#'   \pkg{robustbase} package does not provide the functionality necessary to
-#'   implement a glance method.
-#'
-#' @rdname glance.robustbase.glmrob
-#' @family robustbase tidiers
-#' @seealso [robustbase::glmrob()]
-glance.glmrob <- function(x, ...) {
-  stop(
-    "`glance.glmrob` has not yet been implemented. See the documentation.",
-    call. = FALSE
-  )
-}

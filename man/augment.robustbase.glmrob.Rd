@@ -5,8 +5,8 @@
 \title{Augment data with information from a(n) glmrob object}
 \usage{
 \method{augment}{glmrob}(x, data = model.frame(x), newdata = NULL,
-  type.predict = c("link", "response", "terms"),
-  type.residuals = c("deviance", "pearson"), se_fit = FALSE, ...)
+  type.predict = c("link", "response"), type.residuals = c("deviance",
+  "pearson"), se_fit = FALSE, ...)
 }
 \arguments{
 \item{x}{A \code{glmrob} object returned from \code{\link[robustbase:glmrob]{robustbase::glmrob()}}.}
@@ -89,15 +89,14 @@ missing at this time.
 }
 \details{
 For tidiers for robust models from the \pkg{MASS} package see
-\code{\link[=tidy.rlm]{tidy.rlm()}}. For tidiers for robust models from the \pkg{robust} package
-see \code{\link[=tidy.lmRob]{tidy.lmRob()}}.
+\code{\link[=tidy.rlm]{tidy.rlm()}}.
 }
 \seealso{
 \code{\link[robustbase:glmrob]{robustbase::glmrob()}}
 
 Other robustbase tidiers: \code{\link{augment.lmrob}},
-  \code{\link{glance.glmrob}}, \code{\link{glance.lmrob}},
-  \code{\link{tidy.glmrob}}, \code{\link{tidy.lmrob}}
+  \code{\link{glance.lmrob}}, \code{\link{tidy.glmrob}},
+  \code{\link{tidy.lmrob}}
 }
 \concept{robustbase tidiers}
 \value{

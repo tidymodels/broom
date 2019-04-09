@@ -6,9 +6,8 @@
 #' @template param_unused_dots
 #' 
 #' @details For tidiers for robust models from the \pkg{MASS} package see
-#'   [tidy.rlm()]. For tidiers for robust models from the \pkg{robust} package
-#'   see [tidy.lmRob()].
-#' 
+#'   [tidy.rlm()].
+#'   
 #' @examples
 #'
 #' library(robustbase)
@@ -36,16 +35,15 @@
 #' @seealso [robustbase::lmrob()]
 tidy.lmrob <- function(x, conf.int = FALSE, conf.level = 0.95, ...) {
   ret <- coef(summary(x)) %>% 
-    tibble::as_tibble(rownames = "term")
+    as_tibble(rownames = "term")
   names(ret) <- c("term", "estimate", "std.error", "statistic", "p.value")
   
   if (conf.int) {
     ci <- stats::confint.default(x, level = conf.level) %>% 
-      tibble::as_tibble(rownames = NULL) %>% 
-      dplyr::rename(
-        conf.low = `2.5 %`
-        ,conf.high = `97.5 %`
-      )
+      as_tibble()
+    
+    names(ci) <- c("conf.low", "conf.high")
+
     ret <- ret %>% 
       cbind(ci)
   }
@@ -64,8 +62,7 @@ tidy.lmrob <- function(x, conf.int = FALSE, conf.level = 0.95, ...) {
 #'
 #' @evalRd return_augment()
 #' @details For tidiers for robust models from the \pkg{MASS} package see
-#'   [tidy.rlm()]. For tidiers for robust models from the \pkg{robust} package
-#'   see [tidy.lmRob()].
+#'   [tidy.rlm()].
 #' 
 #' @export
 #' @rdname augment.robustbase.lmrob
@@ -88,8 +85,7 @@ augment.lmrob <- function(x, data = model.frame(x), newdata = NULL, se_fit = FAL
 #' @template param_unused_dots
 #' 
 #' @details For tidiers for robust models from the \pkg{MASS} package see
-#'   [tidy.rlm()]. For tidiers for robust models from the \pkg{robust} package
-#'   see [tidy.lmRob()].
+#'   [tidy.rlm()].
 #'
 #' @evalRd return_glance(
 #'   "r.squared",
@@ -103,7 +99,7 @@ augment.lmrob <- function(x, data = model.frame(x), newdata = NULL, se_fit = FAL
 #' @seealso [robustbase::lmrob()]
 glance.lmrob <- function(x, ...) {
   s <- summary(x)
-  tibble::tibble(
+  tibble(
     r.squared = s$r.squared,
     sigma = s$sigma,
     df.residual = x$df.residual
