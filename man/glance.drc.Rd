@@ -42,9 +42,10 @@ mod
 
 tidy(mod)
 tidy(mod, conf.int = TRUE)
-tidy(mod, quick = TRUE)
+
 glance(mod)
-# augment(mod)
+
+
 }
 \seealso{
 \code{\link[=glance]{glance()}}, \code{\link[drc:drm]{drc::drm()}}

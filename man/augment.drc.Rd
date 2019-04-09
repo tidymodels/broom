@@ -91,18 +91,16 @@ mod
 
 tidy(mod)
 tidy(mod, conf.int = TRUE)
-tidy(mod, quick = TRUE)
+
 glance(mod)
-# augment(mod)
+
+
 }
 \seealso{
 \code{\link[=augment]{augment()}}, \code{\link[drc:drm]{drc::drm()}}
 
 Other drc tidiers: \code{\link{glance.drc}},
   \code{\link{tidy.drc}}
-}
-\author{
-Eduard Szoecs, \email{eduardszoecs@gmail.com}
 }
 \concept{drc tidiers}
 \value{
