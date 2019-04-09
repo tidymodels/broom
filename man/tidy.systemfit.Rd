@@ -5,12 +5,17 @@
 \alias{systemfit_tidiers}
 \title{Tidy a(n) systemfit object}
 \usage{
-\method{tidy}{systemfit}(x, conf.int = TRUE, ...)
+\method{tidy}{systemfit}(x, conf.int = TRUE, conf.level = 0.95, ...)
 }
 \arguments{
 \item{x}{A \code{systemfit} object produced by a call to \code{\link[systemfit:systemfit]{systemfit::systemfit()}}.}
 
-\item{conf.int}{Logical indicating whether or not to include a confidence interval in the tidied output. Defaults to \code{FALSE}.}
+\item{conf.int}{Logical indicating whether or not to include a confidence
+interval in the tidied output. Defaults to \code{FALSE}.}
+
+\item{conf.level}{The confidence level to use for the confidence interval
+if \code{conf.int = TRUE}. Must be strictly greater than 0 and less than 1.
+Defaults to 0.95, which corresponds to a 95 percent confidence interval.}
 
 \item{...}{Additional arguments. Not used. Needed to match generic
 signature only. \strong{Cautionary note:} Misspelled arguments will be
