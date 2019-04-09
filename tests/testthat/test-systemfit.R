@@ -23,6 +23,12 @@ test_that("tidy.systemfit with OLS", {
   check_tidy_output(td)
   
   check_dims(td, 7, 6)
+  
+  td <- tidy(fitols, conf.level = .99)
+  
+  check_tidy_output(td)
+  
+  check_dims(td, 7, 6)
 })
 
 ## OLS estimation with 2 restrictions
