@@ -1,4 +1,4 @@
-# broom 0.5.2.9000
+# broom 0.5.2.9001
 (To be released as 0.7.0)
 
 ## Breaking changes
@@ -11,6 +11,8 @@ changes in this version of `broom`. We list them below-
     `AIC`, `BIC, deviance`, `nobs`. This is in response to conversation that
     took place in #212. Note that `tidy.aov` can be used to get numerator and
     denominator degrees of freedom.
+    
+  - We have removed all support for the `quick` argument in `tidy()` methods.
     
 
 ## Changes to `augment()`
