@@ -59,7 +59,7 @@ tidy.glmrob <- function (x, conf.int = FALSE, conf.level = 0.95, ...) {
 #' @rdname augment.robustbase.glmrob
 #' @seealso [robustbase::glmrob()]
 augment.glmrob <- function(x, data = model.frame(x), newdata = NULL,
-                           type.predict = c("link", "response", "terms"),
+                           type.predict = c("link", "response"),
                            type.residuals = c("deviance", "pearson"),
                            se_fit = FALSE, ...) {
   # FIXME:
