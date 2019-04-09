@@ -2,7 +2,7 @@
 #' @template title_desc_tidy
 #' 
 #' @param x A `systemfit` object produced by a call to [systemfit::systemfit()].
-#' @param conf.int Logical indicating whether or not to include a confidence interval in the tidied output. Defaults to `FALSE`.
+#' @template param_confint
 #' @template param_unused_dots
 #' 
 #' @evalRd return_tidy(
@@ -29,7 +29,7 @@
 #' @seealso [tidy()], [systemfit::systemfit()]
 #' @family systemfit tidiers
 #' @aliases systemfit_tidiers
-tidy.systemfit <- function(x, conf.int = TRUE, ...) {
+tidy.systemfit <- function(x, conf.int = TRUE, conf.level = .95, ...) {
   
   sf_summary <- summary(x)
   sf_coefs <- as.data.frame(sf_summary$coefficients)
@@ -37,7 +37,7 @@ tidy.systemfit <- function(x, conf.int = TRUE, ...) {
   cis <- NULL
   if(conf.int){
     cis <- c("conf.low", "conf.high")
-    sf_cis <- confint(x)
+    sf_cis <- confint(x, level = conf.level)
     sf_cis <- matrix(sf_cis,ncol = 2)
     sf_coefs <- cbind(sf_coefs, sf_cis)
   }
