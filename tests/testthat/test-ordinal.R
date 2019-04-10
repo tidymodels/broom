@@ -64,6 +64,13 @@ test_that("augment.clm", {
     newdata = wine,
     strict = FALSE
   )
+  
+  au_c <- augment(fit, type.predict = 'class')
+  expect_equal(predict(fit, type = 'class')$fit, au_c$.fitted)
+  
+  au_p <- augment(fit, type.predict = 'prob')
+  expect_equal(predict(fit, type = 'prob')$fit, au_p$.fitted)
+  
 })
 
 

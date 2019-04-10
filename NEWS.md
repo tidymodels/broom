@@ -68,6 +68,8 @@ TODO: sort out what happens to `glance.aov()`
 
 ## New tidiers, features and bugfixes
 
+- Make `.fitted` values respect `type.predict` of `augment.clm()`. (#617)
+
 - Return factor rather than numeric class predictions in `.fitted` of `augment.polr()`. (#619)
 
 - Added support for `tidy.lavaan()` to take `quick = TRUE`. (#628)
