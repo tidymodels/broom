@@ -25,18 +25,19 @@ the \code{data} argument.}
 A \link[tibble:tibble]{tibble::tibble} with columns depending on the component of
 PCA being tidied.
 
-If \code{matrix} is \code{"u"}, \code{"samples"}, or \code{"x"} each row in the tidied
-output corresponds to the original data in PCA space. The columns are:
+If \code{matrix} is \code{"u"}, \code{"samples"}, \code{"scores"}, or \code{"x"} each row in the
+tidied output corresponds to the original data in PCA space. The columns
+are:
 
 \item{\code{row}}{ID of the original observation (i.e. rowname from original
 data).}
-\item{\code{PC}}{Integer indicating a principle component.}
-\item{\code{value}}{The score of the observation for that particular principle
+\item{\code{PC}}{Integer indicating a principal component.}
+\item{\code{value}}{The score of the observation for that particular principal
 component. That is, the location of the observation in PCA space.}
 
-If \code{matrix} is \code{"v"}, \code{"rotation"}, or \code{"variables"}, each row in the
-tidied ouput corresponds to information about the principle components
-in the original space. The columns are:
+If \code{matrix} is \code{"v"}, \code{"rotation"}, \code{"loadings"} or \code{"variables"}, each
+row in the tidied ouput corresponds to information about the principle
+components in the original space. The columns are:
 
 \item{\code{row}}{The variable labels (colnames) of the data set on
 which PCA was performed}
@@ -44,7 +45,7 @@ which PCA was performed}
 \item{\code{value}}{The value of the eigenvector (axis score) on the
 indicated principal component}
 
-If \code{matrix} is \code{"d"} or \code{"pcs"}, the columns are:
+If \code{matrix} is \code{"d"}, \code{"eigenvalues"} or \code{"pcs"}, the columns are:
 
 \item{\code{PC}}{An integer vector indicating the principal component}
 \item{\code{std.dev}}{Standard deviation explained by this PC}
