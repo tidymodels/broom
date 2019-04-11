@@ -11,8 +11,10 @@ changes in this version of `broom`. We list them below-
     `AIC`, `BIC, deviance`, `nobs`. This is in response to conversation that
     took place in #212. Note that `tidy.aov` can be used to get numerator and
     denominator degrees of freedom.
+  - Augment method for `factanal` objects now returns a tibble with name
+    pattern `.fs` (e.g., `.fs1`, `.fs2`, `.fs3`, etc.), instead of `factor`
+    (e.g., `factor1`, `factor2`, `factor3`, etc.) (#650).
     
-
 ## Changes to `augment()`
 
 have overhauled `augment()` for general consistency improvements (hopefully,
