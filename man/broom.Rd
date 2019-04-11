@@ -97,6 +97,7 @@ Other contributors:
   \item Jared Wilber [contributor]
   \item Vilmantas Gegzna \email{GegznaV@gmail.com} (0000-0002-9500-5167) [contributor]
   \item Eduard Szoecs \email{eduardszoecs@gmail.com} [contributor]
+  \item Frederik Aust \email{frederik.aust@uni-koeln.de} (0000-0003-4900-788X) [contributor]
 }
 
 }

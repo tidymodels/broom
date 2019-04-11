@@ -79,7 +79,8 @@ ggplot(tidy(by_price), aes(price2, estimate, color = day)) +
 \code{\link[emmeans:contrast]{emmeans::contrast()}}
 
 Other emmeans tidiers: \code{\link{tidy.emmGrid}},
-  \code{\link{tidy.ref.grid}}
+  \code{\link{tidy.ref.grid}},
+  \code{\link{tidy.summary_emm}}
 }
 \concept{emmeans tidiers}
 \value{
