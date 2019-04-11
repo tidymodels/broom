@@ -20,7 +20,8 @@
 #' tidy(fit, conf.int = TRUE, conf.type = "Wald", exponentiate = TRUE)
 #' 
 #' glance(fit)
-#' augment(fit)
+#' augment(fit, type.predict = "prob")
+#' augment(fit, type.predict = "class")
 #' 
 #' fit2 <- clm(rating ~ temp, nominal = ~ contact, data = wine)
 #' tidy(fit2)
@@ -106,6 +107,13 @@ glance.clm <- function(x, ...) {
 #' 
 augment.clm <- function(x, data = model.frame(x), newdata = NULL,
                         type.predict = c("prob", "class"), ...) {
+  
   type.predict <- rlang::arg_match(type.predict)
-  augment_columns(x, data, newdata, type = type.predict)
+  
+  df <- if (is.null(newdata)) data else newdata
+  df <- as_broom_tibble(df)
+  
+  df$.fitted <- predict(object = x, newdata = df, type = type.predict)$fit
+  
+  df
 }
