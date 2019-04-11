@@ -47,7 +47,7 @@ tidy.mlm <- function(x,
   ret <- as_tibble(ret)
   
   # adding confidence intervals
-  if (isTRUE(conf.int)) {
+  if (conf.int) {
 
     # S3 method for computing confidence intervals for `mlm` objects was
     # introduced in R 3.5
