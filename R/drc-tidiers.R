@@ -19,15 +19,18 @@
 #'   `curveid` column indicates the curve.
 #'  
 #' @examples 
+#' 
 #' library(drc)
+#' 
 #' mod <- drm(dead/total~conc, type, 
 #'    weights = total, data = selenium, fct = LL.2(), type = "binomial")
-#' mod
 #' 
 #' tidy(mod)
 #' tidy(mod, conf.int = TRUE)
 #' 
 #' glance(mod)
+#' 
+#' augment(mod, selenium)
 #' 
 #' 
 #' @export
@@ -35,30 +38,19 @@
 #' @family drc tidiers
 #' @aliases drc_tidiers
 tidy.drc <- function(x, conf.int = FALSE, conf.level = 0.95, ...) {
-
-  co <- coef(summary(x))
-
-  nam <- rownames(co)
-  term <- gsub("^(.*):(.*)$", "\\1", nam)
-  curves <- x[["dataList"]][["curveid"]]
-  if (length(unique(curves)) > 1) {
-    curveid <- gsub("^(.*):(.*)$", "\\2", nam)
-  } else {
-    curveid <- unique(curves)
-  }
-  ret <- tibble(term = term, curveid = curveid, co)
-  names(ret) <- c("term", "curveid", "estimate", "std.error", "statistic",
-    "p.value")
-  rownames(ret) <- NULL
+  
+  ret <- coef(summary(x))
+  ret <- as_tibble(ret, rownames = "term")
+  ret <- tidyr::separate(ret, term, c("term", "curve"))
+  
+  names(ret) <- c("term", "curve", "estimate", "std.error", "statistic", "p.value")
 
   if (conf.int) {
-    conf <- confint(x, level = conf.level)
-    colnames(conf) <- c("conf.low", "conf.high")
-    rownames(conf) <- NULL
-    ret <- cbind(ret, conf)
+    ci <- broom_confint_terms(x, level = conf.level)
+    ret <- dplyr::left_join(ret, ci, by = "term")
   }
   
-  as_tibble(ret)
+  ret
 }
 
 #' @templateVar class drc
@@ -96,12 +88,14 @@ glance.drc <- function(x, ...) {
 #' @template param_se_fit
 #' @template param_unused_dots
 #'
-#' @evalRd return_augment(".conf.low" = "Lower Confidence Interval",
-#'   ".conf.high" = "Upper Confidence Interval",
+#' @evalRd return_augment(
+#'   ".conf.low",
+#'   ".conf.high",
 #'   ".se.fit",
 #'   ".fitted",
 #'   ".resid",
-#'   ".cooksd")
+#'   ".cooksd"
+#' )
 #' 
 #' @seealso [augment()], [drc::drm()]
 #' @export

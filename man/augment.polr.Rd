@@ -89,7 +89,7 @@ augment(fit, type.predict = "class")
 
 }
 \seealso{
-\link{tidy}, \code{\link[MASS:polr]{MASS::polr()}}, \code{\link[stats:predict.polr]{stats::predict.polr()}}
+\code{\link[=tidy]{tidy()}}, \code{\link[MASS:polr]{MASS::polr()}}
 
 Other ordinal tidiers: \code{\link{augment.clm}},
   \code{\link{glance.clmm}}, \code{\link{glance.clm}},

@@ -9,11 +9,12 @@ library(drc)
 mod <- drm(dead/total~conc, type,
   weights = total, data = selenium, fct = LL.2(), type = "binomial")
 
+mod2 <- drm(rootl ~ conc, data = ryegrass, fct = W2.4())
+
 test_that("drc tidier arguments", {
   check_arguments(tidy.drc)
   check_arguments(glance.drc)
   check_arguments(augment.drc, strict = FALSE) 
-  # Arguments conf.int, conf.level to `augment.drc` must be listed in the argument glossary.
 })
 
 test_that("tidy.drc", {
@@ -23,13 +24,20 @@ test_that("tidy.drc", {
 
   check_tidy_output(td1, strict = FALSE)
   check_tidy_output(td3, strict = FALSE)
+  
+  td1 <- tidy(mod2)
+  td3 <- tidy(mod2, robust = TRUE)
+  
+  check_tidy_output(td1, strict = FALSE)
+  check_tidy_output(td3, strict = FALSE)
 })
 
 test_that("glance.drc", {
 
   gl1 <- glance(mod)
+  gl2 <- glance(mod2)
 
-  check_glance_outputs(gl1, strict = FALSE)
+  check_glance_outputs(gl1, gl2)
 })
 
 test_that("augment.drc", {
@@ -43,30 +51,9 @@ test_that("augment.drc", {
     augment.drc,
     mod,
     data = selenium,
-    newdata = selenium)
-})
-
-
-mod2 <- drm(rootl ~ conc, data = ryegrass, fct = W2.4())
-
-test_that("tidy.drc", {
-
-  td1 <- tidy(mod2)
-  td3 <- tidy(mod2, robust = TRUE)
-
-  check_tidy_output(td1, strict = FALSE)
-  check_tidy_output(td3, strict = FALSE)
-})
-
-test_that("glance.drc", {
-
-  gl2 <- glance(mod2)
-
-  check_glance_outputs(gl2, strict = FALSE)
-})
-
-test_that("augment.drc", {
-
+    newdata = selenium
+  )
+  
   expect_error(
     augment(mod2),
     regexp = "Must specify either `data` or `newdata` argument."
@@ -76,5 +63,6 @@ test_that("augment.drc", {
     augment.drc,
     mod2,
     data = ryegrass,
-    newdata = ryegrass)
+    newdata = ryegrass
+  )
 })

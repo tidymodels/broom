@@ -116,8 +116,8 @@ glance.geeglm  <- function(x, ...) {
   s <- summary(x)
   tibble(
     df.residual = x$df.residual,
-    n_clusters = length(s$clusz),
-    max_cluster_size = max(s$clusz),
+    n.clusters = length(s$clusz),
+    max.cluster.size = max(s$clusz),
     alpha = x$geese$alpha,
     gamma = x$geese$gamma
   )

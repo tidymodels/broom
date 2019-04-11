@@ -18,7 +18,7 @@ if \code{conf.int = TRUE}. Must be strictly greater than 0 and less than 1.
 Defaults to 0.95, which corresponds to a 95 percent confidence interval.}
 
 \item{conf.type}{Whether to use \code{"profile"} or \code{"Wald"} confidendence
-intervals, passed to the \code{type} argument of \code{\link[ordinal:confint.clmm]{ordinal::confint.clmm()}}.
+intervals, passed to the \code{type} argument of \code{\link[ordinal:confint.clm]{ordinal::confint.clm()}}.
 Defaults to \code{"profile"}.}
 
 \item{exponentiate}{Logical indicating whether or not to exponentiate the
@@ -71,7 +71,7 @@ glance(fit2)
 
 }
 \seealso{
-\link{tidy}, \code{\link[ordinal:clmm]{ordinal::clmm()}}, \code{\link[ordinal:confint.clmm]{ordinal::confint.clmm()}}
+\link{tidy}, \code{\link[ordinal:clmm]{ordinal::clmm()}}, \code{\link[ordinal:confint.clm]{ordinal::confint.clm()}}
 
 Other ordinal tidiers: \code{\link{augment.clm}},
   \code{\link{augment.polr}}, \code{\link{glance.clmm}},

@@ -94,7 +94,7 @@ glance(fit2)
 
 }
 \seealso{
-\link{tidy}, \code{\link[ordinal:clm]{ordinal::clm()}}, \code{\link[stats:predict.clm]{stats::predict.clm()}}
+\link{tidy}, \code{\link[ordinal:clm]{ordinal::clm()}}, \code{\link[ordinal:predict.clm]{ordinal::predict.clm()}}
 
 Other ordinal tidiers: \code{\link{augment.polr}},
   \code{\link{glance.clmm}}, \code{\link{glance.clm}},

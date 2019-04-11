@@ -57,7 +57,7 @@ glance.svyolr <- function(x, ...) {
 tidy.svyglm <- function(x, conf.int = FALSE, conf.level = .95,
                         exponentiate = FALSE, ...) {
   
-  s <- survey:::summary.svyglm(x)
+  s <- summary(x)
   ret <- tidy.summary.lm(s)
   
   # TODO: drop process_lm() dependence

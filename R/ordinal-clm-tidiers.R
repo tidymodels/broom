@@ -101,7 +101,7 @@ glance.clm <- function(x, ...) {
 #'   or `"class"`, passed to [ordinal::predict.clm()]. Defaults to `"prob"`.
 #' 
 #' @export
-#' @seealso [tidy], [ordinal::clm()], [stats::predict.clm()]
+#' @seealso [tidy], [ordinal::clm()], [ordinal::predict.clm()]
 #' @family ordinal tidiers
 #' 
 augment.clm <- function(x, data = model.frame(x), newdata = NULL,

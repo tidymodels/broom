@@ -6,13 +6,12 @@ library(modeltests)
 skip_if_not_installed("geepack")
 library(geepack)
 
-df <- data.frame(state.region, state.x77)
+dat <- data.frame(state.region, state.x77)
 
 fit <- geeglm(
   Income ~ Frost + Murder,
   id = state.region,
-  data = df,
-  family = gaussian,
+  data = dat,
   corstr = "exchangeable"
 )
 

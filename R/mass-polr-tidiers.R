@@ -89,7 +89,7 @@ glance.polr <- function(x, ...) {
 #'  the moment.
 #' 
 #' @export
-#' @seealso [tidy], [MASS::polr()], [stats::predict.polr()]
+#' @seealso [tidy()], [MASS::polr()]
 #' @family ordinal tidiers
 #' 
 augment.polr <- function(x, data = model.frame(x), newdata = NULL,

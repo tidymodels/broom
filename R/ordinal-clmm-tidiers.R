@@ -5,7 +5,7 @@
 #' @template param_confint
 #' @template param_exponentiate
 #' @param conf.type Whether to use `"profile"` or `"Wald"` confidendence
-#'   intervals, passed to the `type` argument of [ordinal::confint.clmm()].
+#'   intervals, passed to the `type` argument of [ordinal::confint.clm()].
 #'   Defaults to `"profile"`.
 #' @template param_unused_dots
 #'   
@@ -36,7 +36,7 @@
 #'   parameters.
 #' 
 #' @export
-#' @seealso [tidy], [ordinal::clmm()], [ordinal::confint.clmm()]
+#' @seealso [tidy], [ordinal::clmm()], [ordinal::confint.clm()]
 #' @family ordinal tidiers
 tidy.clmm <- tidy.clm
 

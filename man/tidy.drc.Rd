@@ -40,15 +40,18 @@ The tibble has one row for each curve and term in the regression. The
 \code{curveid} column indicates the curve.
 }
 \examples{
+
 library(drc)
+
 mod <- drm(dead/total~conc, type, 
    weights = total, data = selenium, fct = LL.2(), type = "binomial")
-mod
 
 tidy(mod)
 tidy(mod, conf.int = TRUE)
 
 glance(mod)
+
+augment(mod, selenium)
 
 
 }
