@@ -145,6 +145,10 @@ Authors@R:
              family = "Kennedy",
              role = "ctb",
              email = "pkqstr@protonmail.com"),
+      person(given = "Lily", 
+             family = "Medina", 
+             role = "ctb",
+             email = "lilymiru@gmail.com"),
       person(given = "Brian",
              family = "Fannin",
              role = "ctb",
@@ -195,6 +199,11 @@ Authors@R:
              role = "ctb",
              email = "als1@u.northwestern.edu",
              comment = c(ORCID = "0000-0002-3207-0375")),
+      person(given = "Jasper",
+             family = "Cooper",
+             role = "ctb",
+             email = "jaspercooper@gmail.com",
+             comment = c(ORCID = "0000-0002-8639-3188")),
       person(given = "E Auden",
              family = "Krauska",
              role = "ctb",
@@ -327,6 +336,7 @@ Suggests:
     statnet.common,
     survey,
     survival,
+    systemfit,
     testthat,
     tseries,
     xergm,
@@ -431,6 +441,7 @@ Collate:
     'survival-survexp-tidiers.R'
     'survival-survfit-tidiers.R'
     'survival-survreg-tidiers.R'
+    'systemfit-tidiers.R'
     'tseries-tidiers.R'
     'utilities.R'
     'zoo-tidiers.R'
