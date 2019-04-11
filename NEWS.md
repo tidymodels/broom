@@ -118,6 +118,8 @@ TODO: sort out what happens to `glance.aov()`
 
 - `tidy.lmodel2()` now returns a `p.value` column (#570)
 
+- Added `tidy.summary_emm()` (#691 by @crsh)
+
 ### Name changes for consistency
 
 - `augment.htest()`:
