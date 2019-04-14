@@ -22,34 +22,11 @@
 #' @export
 #' @family robust tidiers
 #' @seealso [robust::lmRob()]
-tidy.lmRob <- function (x, quick = FALSE,...){
-  if (quick) {
-    co <- stats::coef(x)
-    ret <- data.frame(term = names(co), estimate = unname(co), 
-                      stringsAsFactors = FALSE)
-    
-    return(as_tibble(ret))
-  }
-  s <- robust::summary.lmRob(x)
-  ret <- tidy.summary.lmRob(s)
-  ret
-}
-
-#' @rdname tidy.lmRob
-#' @export
-
-tidy.summary.lmRob <- function(x,...) {
-  co <- stats::coef(x)
+tidy.lmRob <- function (x, summary_function = robust::summary.lmRob,...){
+  summ <- summary_function(x)
+  co <- stats::coef(summ)
   nn <- c("estimate", "std.error", "statistic", "p.value")
-  if (inherits(co, "listof")) {
-    ret <- map_df(co, fix_data_frame, nn[1:ncol(co[[1]])], 
-                  .id = "response")
-    ret$response <- stringr::str_replace(ret$response, "Response ", 
-                                         "")
-  }
-  else {
-    ret <- fix_data_frame(co, nn[1:ncol(co)])
-  }
+  ret <- fix_data_frame(co, nn[1:ncol(co)])
   as_tibble(ret)
 }
 

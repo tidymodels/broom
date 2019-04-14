@@ -21,8 +21,8 @@
 #' @export
 #' @family robust tidiers
 #' @seealso [robust::glmRob()]
-tidy.glmRob <- function (x,...) {
-  tidy.lmRob(x)
+tidy.glmRob <- function (x, summary_function = robust::summary.glmRob,...){
+  tidy.lmRob(x, summary_function = summary_function)
 }
 
 #' @templateVar class glmRob
