@@ -153,10 +153,7 @@ glance.rma <- function(x, ...) {
   # metafor returns different fit statistics for different models
   # so use a list + `purrr::discard` to remove unrelated / missing statistics
   
-  list(
-    nobs = x$k,
-    measure = x$measure,
-    method = x$method,
+  results <- list(
     i.squared = x$I2,
     h.squared = x$H2,
     tau.squared = x$tau2,
@@ -164,12 +161,20 @@ glance.rma <- function(x, ...) {
     cochran.qe = x$QE,
     p.value.cochran.qe = x$QEp,
     cochran.qm = x$QM,
-    p.value.cochran.qm = x$QMp,
-    fit_stats
+    p.value.cochran.qm = x$QMp
   ) %>%
     purrr::discard(is.null) %>%
+    # drop multivariate statistics
     purrr::discard(~length(.x) >= 2) %>%
     as_tibble()
+  
+  if (!purrr::is_empty(fit_stats) && nrow(fit_stats) == 1) {
+    results <- dplyr::bind_cols(results, fit_stats)
+  }
+  
+  results$nobs <- x$k
+  
+  results
 }
 
 #' @templateVar class rma
