@@ -82,8 +82,9 @@ tidy(lm.D9.beta)
 \seealso{
 Other lm tidiers: \code{\link{augment.glm}},
   \code{\link{augment.lm}}, \code{\link{glance.glm}},
-  \code{\link{glance.lm}}, \code{\link{tidy.glm}},
-  \code{\link{tidy.lm}}
+  \code{\link{glance.lm}}, \code{\link{glance.svyglm}},
+  \code{\link{tidy.glm}}, \code{\link{tidy.lm}},
+  \code{\link{tidy.mlm}}, \code{\link{tidy.svyglm}}
 }
 \concept{lm tidiers}
 \value{

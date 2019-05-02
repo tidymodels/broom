@@ -1,7 +1,7 @@
 Type: Package
 Package: broom
 Title: Convert Statistical Objects into Tidy Tibbles
-Version: 0.5.1.9000
+Version: 0.5.2.9001
 Authors@R: 
     c(person(given = "David",
              family = "Robinson",
@@ -12,6 +12,11 @@ Authors@R:
              role = c("aut", "cre"),
              email = "alexpghayes@gmail.com",
              comment = c(ORCID = "0000-0002-4985-5160")),
+      person(given = "Indrajeet",
+             family = "Patil",
+             role = "ctb",
+             email = "patilindrajeet.science@gmail.com",
+             comment = c(ORCID = "0000-0003-1995-6531")),
       person(given = "Matthieu",
              family = "Gomez",
              role = "ctb",
@@ -140,6 +145,10 @@ Authors@R:
              family = "Kennedy",
              role = "ctb",
              email = "pkqstr@protonmail.com"),
+      person(given = "Lily", 
+             family = "Medina", 
+             role = "ctb",
+             email = "lilymiru@gmail.com"),
       person(given = "Brian",
              family = "Fannin",
              role = "ctb",
@@ -172,7 +181,60 @@ Authors@R:
              role = "ctb"),
       person(given = "Luis",
              family = "Tobalina",
-             role = "ctb"))
+             role = "ctb"),
+      person(given = "Annie",
+             family = "Wang",
+             role = "ctb",
+             email = "anniewang.uc@gmail.com"),
+      person(given = "Wei Yang",
+             family = "Tham",
+             role = "ctb",
+             email = "weiyang.tham@gmail.com"),
+      person(given = "Clara",
+             family = "Wang",
+             role = "ctb",
+             email = "clara.wang.94@gmail.com"),
+      person(given = "Abby",
+             family = "Smith",
+             role = "ctb",
+             email = "als1@u.northwestern.edu",
+             comment = c(ORCID = "0000-0002-3207-0375")),
+      person(given = "Jasper",
+             family = "Cooper",
+             role = "ctb",
+             email = "jaspercooper@gmail.com",
+             comment = c(ORCID = "0000-0002-8639-3188")),
+      person(given = "E Auden",
+             family = "Krauska",
+             role = "ctb",
+             email = "krauskae@gmail.com",
+             comment = c(ORCID = "0000-0002-1466-5850")),
+      person(given = "Alex",
+             family = "Wang",
+             role = "ctb",
+             email = "x249wang@uwaterloo.ca"),
+      person(given = "Malcolm",
+             family = "Barrett",
+             role = "ctb",
+             email = "malcolmbarrett@gmail.com",
+             comment = c(ORCID = "0000-0003-0299-5825")),
+      person(given = "Charles",
+             family = "Gray",
+             role = "ctb",
+             email = "charlestigray@gmail.com",
+             comment = c(ORCID = "0000-0002-9978-011X")),
+      person(given = "Jared",
+             family = "Wilber",
+             role = "ctb"),
+      person(given = "Vilmantas",
+             family = "Gegzna",
+             role = "ctb",
+             email = "GegznaV@gmail.com",
+             comment = c(ORCID = "0000-0002-9500-5167")),
+      person(given = "Eduard",
+             family = "Szoecs",
+             role = "ctb",
+             email = "eduardszoecs@gmail.com"))
 Description: Summarizes key information about statistical
     objects in tidy tibbles. This makes it easy to report results, create
     plots and consistently work with large numbers of models at once.
@@ -191,6 +253,7 @@ Depends:
 Imports:
     backports,
     dplyr,
+    ellipsis,
     generics (>= 0.0.2),
     glue,
     methods,
@@ -209,12 +272,13 @@ Suggests:
     biglm,
     binGroup,
     boot,
-    brms,
     btergm,
     car,
     caret,
+    cluster,
     coda,
     covr,
+    drc,
     e1071,
     emmeans,
     ergm,
@@ -235,9 +299,10 @@ Suggests:
     Lahman,
     lavaan,
     leaps,
+    leaps,
     lfe,
     lm.beta,
-    lme4,
+    lm.beta,
     lmodel2,
     lmtest,
     lsmeans,
@@ -247,12 +312,13 @@ Suggests:
     Matrix,
     mclust,
     mediation,
+    metafor,
     mgcv,
+    modeltests,
     modeltests,
     muhaz,
     multcomp,
     network,
-    nlme,
     nnet,
     orcutt (>= 2.2),
     ordinal,
@@ -264,14 +330,13 @@ Suggests:
     rmarkdown,
     robust,
     rsample,
-    rstan,
-    rstanarm,
     sp,
     speedglm,
     spelling,
     statnet.common,
     survey,
     survival,
+    systemfit,
     testthat,
     tseries,
     xergm,
@@ -289,7 +354,6 @@ Collate:
     'aaa-documentation-helper.R'
     'aer-tidiers.R'
     'auc-tidiers.R'
-    'base-summary-tidiers.R'
     'base-tidiers.R'
     'bbmle-tidiers.R'
     'betareg-tidiers.R'
@@ -302,6 +366,7 @@ Collate:
     'car-tidiers.R'
     'caret-tidiers.R'
     'data-frame-tidiers.R'
+    'drc-tidiers.R'
     'emmeans-tidiers.R'
     'ergm-tidiers.R'
     'gam-tidiers.R'
@@ -329,7 +394,6 @@ Collate:
     'mass-fitdistr-tidiers.R'
     'mass-polr-tidiers.R'
     'mass-ridgelm-tidiers.R'
-    'null-and-default-tidiers.R'
     'stats-lm-tidiers.R'
     'mass-rlm-tidiers.R'
     'mclust-tidiers.R'
@@ -339,8 +403,11 @@ Collate:
     'multcomp-tidiers.R'
     'nnet-tidiers.R'
     'nobs.R'
+    'null-and-default-tidiers.R'
     'orcutt-tidiers.R'
-    'ordinal-tidiers.R'
+    'ordinal-clm-tidiers.R'
+    'ordinal-clmm-tidiers.R'
+    'pam-tidiers.R'
     'plm-tidiers.R'
     'polca-tidiers.R'
     'psych-tidiers.R'
@@ -348,6 +415,7 @@ Collate:
     'quantreg-nlrq-tidiers.R'
     'quantreg-rq-tidiers.R'
     'quantreg-rqs-tidiers.R'
+    'rma-tidiers.R'
     'robust-glmrob-tidiers.R'
     'robust-lmrob-tidiers.R'
     'sp-tidiers.R'
@@ -360,6 +428,7 @@ Collate:
     'stats-htest-tidiers.R'
     'stats-kmeans-tidiers.R'
     'stats-loess-tidiers.R'
+    'stats-mlm-tidiers.R'
     'stats-prcomp-tidiers.R'
     'stats-smooth.spline-tidiers.R'
     'stats-tidiers.R'
@@ -373,6 +442,7 @@ Collate:
     'survival-survexp-tidiers.R'
     'survival-survfit-tidiers.R'
     'survival-survreg-tidiers.R'
+    'systemfit-tidiers.R'
     'tseries-tidiers.R'
     'utilities.R'
     'zoo-tidiers.R'

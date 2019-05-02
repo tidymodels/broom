@@ -20,11 +20,11 @@ library(tibble)
 
 # Adding new tidiers to broom
 
-Thank you for your interest in contributing to broom! This document describes the conventions that you should follow when adding tidiers to broom.
+Thank you for your interest in contributing to broom! This document is a **work in progress** describing the conventions that you should follow when adding tidiers to broom.
 
 General guidelines:
 
-- Reach a minimum 90% test coverage for new tidiers. To check your test coverage we recommend using `covr::report()`.
+- Try to reach a minimum 90% test coverage for new tidiers. To check your test coverage we recommend using `covr::report()`.
 - `tidy`, `glance` and `augment` methods **must** return tibbles.
 - Update `NEWS.md` to reflect the changes you've made
 - Follow the [tidyverse style conventions](http://style.tidyverse.org/). You can use the [`styler`](https://github.com/r-lib/styler) package to reformat your code according to these conventions, and the [`lintr`](https://github.com/jimhester/lintr) package to check that your code meets the conventions.
@@ -33,15 +33,13 @@ General guidelines:
 - It's better for users to need to `tidyr::spread`than `tidyr::gather` data after it's been tidied.
 - Add yourself as a contributor to `DESCRIPTION`.
 - Pull requests must pass the AppVeyor and Travis CI builds to be merged.
-- Check that your PR contains a big picture summary of what you've done
-- Include an example that demonstrates the new behavior implemented in your PR
 - When in doubt, please reach out to the maintainers. We are happy to help with any questions.
 
 If you are just getting into open source development, `broom` is an excellent place to get started and we are more than happy to help. We recommend you start contributing by improving the documentation, writing issues with reproducible errors, or taking on issues tagged `beginner-friendly`.
 
 ## Which package does my tidier belong in?
 
-Ideally, tidying methods should live in the packages of their associated modelling functions. That is, if you have some object `my_object` produced by`my_package`, the functions `tidy.my_object`, `glance.my_object` and `augment.my_object` should live in `my_package`, provided there are sensible ways to define these tidiers for `my_object`. For guidance on writing tidiers that live in external packages, please see `vignette("external-tidiers")`.
+Ideally, tidying methods should live in the packages of their associated modelling functions. That is, if you have some object `my_object` produced by`my_package`, the functions `tidy.my_object`, `glance.my_object` and `augment.my_object` should live in `my_package`, provided there are sensible ways to define these tidiers for `my_object`.
 
 We are currently working on an appropriate way to split tidiers into several domain specific tidying packages. For now, if you don't own `my_package`, you should add the tidiers to `broom`. There are some exceptions:
 
@@ -54,140 +52,58 @@ We will keep you updated as we work towards a final solution.
 
 # Implementing new tiders
 
+NOTE: okay to write `tidyverse` code to tidy and wrap it in a function. encouraged, in fact.
+
 We encourage you to develop new tidiers using your favorite tidyverse tools. Pipes are welcome, as is any code that you might write for tidyverse-style interactive data manipulation.
 
 If you are implementing a new tidier, we recommend taking a look at the internals of the tidying methods for `betareg` and `rq` objects and using those as a starting point.
 
 You should also be aware of the following helper functions:
 
-- `as_broom_tibble()` (this is a newer implementation of `fix_data_frame()`)
 - `finish_glance()`
-- `augment_newdata()` (this is a newer implementation of `augment_columns()`)
+- `augment_columns()`
+- `fix_data_frame()`
+- `validate_augment_input()`
 
 # Documenting new tidiers
 
-All new tidiers should be fully documented following the [tidyverse code documentation guidelines](http://style.tidyverse.org/). Documentation should use full sentences with appropriate punctation. Documentation should also contain at least one but potentially several examples of how the tidiers can be used. Documentation should be written in R markdown as much as possible.
+All new tidiers should be fully documented following the [tidyverse code documentation guidelines](http://style.tidyverse.org/). Documentation should use full sentences with appropriate punctation. Documentation should also contain at least one but potentially several examples of how the tidiers can be used.
 
-Many behaviors in broom are quite repetitive. We have tried to automate the documentation process as much as possible to keep documentation as consistent as possible across the package. Beyond the standard `roxygen2` tags, we also make extensive use of the `@template` tag.
+Documentation should be written in R markdown as much as possible.
 
-We recommend emulating the style in the `betareg` tidiers as much as possible.
-
-If you implement `tidy.my_object()`, `glance.my_object()` and `augment.my_object()`, each method should be documented separately. Treat the tidy method as the default method that the user will read first. We commonly write the examples for all tidying methods in the `tidy()` documentation, and then use `@inherit tidy.my_object examples` in the other tidying methods.
-
-By such to link methods together using the `@family` tag. We strongly encourage heavy cross-referencing in the documentation.
-
-Lastly, we have a slightly non-standard approach to documenting function returns. In particular, we almost never use `@return` and prefer `@evalRd return_tidy()` (or `@evalRd return_glance()` for glance methods, and `@evalRd return_augment()` and so on). Never use `@evalRd` alongside `@return`. Additionally note that `@evalRd` does not support Markdown documentation at this time.
-
-Using `@evalRd return_tidy("column_name")` will automatically pull the documentation for `column_name` from the column glossary in [`modeltests`](https://github.com/alexpghayes/modeltests). This allows use to consistently describe columns that are used many time throughout broom. If you need to define a new column, you do so inline:
-
-```{r, eval = FALSE}
-#' @evalRd return_tidy(my_new_column = "Description of the column goes here")
-```
-
-Column names that will be used be many models (for example, "AIC" or "BIC") should be defined in the column glossary in `modeltests` via a pull request. Please read the documentation for `return_tidy()`, `return_glance()` and `return_augment()`.
+There'll be a major overhaul of documentation later this summer, at which point this portion of the vignette will also get some major updates.
 
 # Testing new tidiers
 
-Any changes that you make will need to pass the existing tests. The tests can be run with
+## Basic checks
+
+Your tests should include:
 
 ```{r, eval = FALSE}
-devtools::test()
+td <- tidy(object)
+gl <- glance(object)
+
+check_tidy_output(td)
+check_glance_outputs(gl)
 ```
 
-Your changes should also pass R CMD Check, which can be run with
+The tests for `augment` are rapidly evolving at the moment, and we'll follow up with more details on them soon.
 
-```{r, eval = FALSE}
-devtools::check()
-```
+If any of your tests use random number generation, you should call `set.seed()` in the body of the test.
 
-We recommend testing broom locally with R 3.5.0 or later. To test earlier versions of R, you'll need to see the environment variable `R_MAX_NUM_DLLS` to 250.
+In general, we prefer informative errors to magical behaviors or untested success.
 
-Note that testing broom requires a lot of packages. You can install them all with:
+## More complete checks
 
-```{r, eval = FALSE}
-devtools::install_github("tidymodels/broom", dependencies = TRUE)
-```
+- You can verify that your changes pass existing tests with `devtools::test()`
+    - For R < 3.5.0, the number of packages used in the tests exceeds the number R can load. To change this on R 3.4.0 and above, set the environment variable R_MAX_NUM_DLLS to 150.
+    - For R ≥ 3.5.0, issue has been fixed.
 
-## File naming
+## Package dependencies
 
-If you are only tidying a single class from a package and have fewer than 300 or so lines of code, please put your tidiers in a file `R/<package>-tidiers.R`. If you are adding multiple tidiers from the same package, they should live in `R/<package>-<class>-tidiers.R`.
-
-The corresponding tests should have the same prefix, and should live in `tests/testthat/`. For example: `tests/testthat/test-<package>.R` or `tests/testthat/test-<package>-<class>.R`.
-
-## Tests for new tidiers
-
-Again we recommend following the basic outline of the betareg tests. At a minimum new tests should include
-
-```{r, eval = FALSE}
-context("myobj")
-
-skip_if_not_installed("modeltests")
-library(modeltests)
-
-# be sure you've added any package your tidying methods depend on to Suggests
-# you can do so with:
-#   usethis::use_package("mypkg", type = "Suggests")
-skip_if_not_installed("mypkg")
-library(mypkg)
-
-fit1 <- myobj(...)
-fit2 <- myobj(..., option = "something different")
-
-test_that("myobj tidier arguments", {
-  check_arguments(tidy.myobj)
-  check_arguments(glance.myobj)
-  check_arguments(augment.myobj)
-})
-
-test_that("tidy.myobj", {
-  
-  td1 <- tidy(fit1)
-  td2 <- tidy(fit2, conf.int = TRUE, option = "another case")
-  
-  check_tidy_output(td1)
-  check_tidy_output(td2)
-  
-  check_dims(td1, 12, 8)  # optional but a good idea
-})
-
-test_that("glance.myobj", {
-  
-  gl1 <- glance(fit1)
-  gl2 <- glance(fit2)
-  
-  check_glance_outputs(gl1, gl2)
-})
-
-test_that("augment.myobj", {
-  
-  check_augment_function(
-    augment.myobj,           # *must* pass the specific method here
-    fit1,
-    data = mydata,
-    newdata = mydata
-  )
-  
-  check_augment_function(
-    augment.myobj,
-    fit2,
-    data = mydata2,
-    newdata = mydata2
-  )
-})
-```
-
-For details on what gets tests, see `modeltests::check_tidy_output()`, `modeltests::check_glance_outputs()` and `modeltests::check_augment_function()`.
-
-These **do not** check for correctness. They only check for behavioral consistency with the rest of broom. You also need to write tests to check that your logic is correct and the values returned by the tidiers are the values you expect.
-
-If you find a bug in the `check_*` function, please [open an issue in modeltests](https://github.com/alexpghayes/modeltests/issues), or even better, a PR.
-
-In some cases the tests may simply not be appropriate for your methods. In this case you can set `strict = FALSE`. Be sure to document which tests fail when `strict = TRUE` and why this is acceptable. You'll also want to mention this in the body of your pull request.
-
-### Testing miscellenea
-
-- If any of your tests use random number generation, you should call `set.seed()` in the body of the test.
-- We prefer informative errors to magical behaviors or untested success.
+* In order to test your tidiers, you may need to add `your_package` to the **Suggests** section of broom's DESCRIPTION.
+* You should then use `skip_if_not_installed("my_package")` at the beginning of any test that uses `my_package`.
+* Note that testing broom requires a lot of packages. You can install them all with `devtools::install_github("tidyverse/broom", dependencies = TRUE)`.
 
 ## Catching edge cases
 
@@ -196,6 +112,16 @@ You should test new tidiers on a representative set of `my_object` objects. At a
 It's important to test your tidiers for fits estimated with different algorithms (i.e. `stats::arima` tidier should be tested for `method = "CSS-ML"`, `method = "ML"` and `method = "ML"`). As another example, good tests for `glm` tidying methods would test tidiers on `glm` objects fit for all acceptable values of `family`.
 
 In short: be sure that you've tested your tidiers on models fit with all the major modelling options (both statistical options, and estimation options).
+
+# Before submitting your pull request
+
+- Check that your PR contains a big picture summary of what you've done and a brief example usage in the PR text
+- Make sure that you have run and passed:
+    - `devtools::check()`
+    - `devtools::spell_check()`
+    - `goodpractice::gp()`
+
+`broom` doesn't currently pass all of these. If you are adding new tidiers at the moment, it's enough for these to throw no warnings for the files you've changed.
 
 # Defining tidiers
 
@@ -227,9 +153,9 @@ The `data` argument can be any of the following:
 - a `tibble` containing both the the original predictors and the original responses
 - if not `data` argument is specified, `augment` should try to reconstruct the original data as much as possible from the model object. This may not always be possible, and often it will not be possible to recover columns not used by the model.
 
-Any other inputs should result in an error.
+Any other inputs should result in an error. This will eventually be checked by the `validate_augment_input()` function. 
 
-Many `augment` methods will also provide an optional `newdata` argument that should also default to `NULL`. `newdata` should always precedence over `data` (you can check if `newdata` has been specified by checking whether not `newdata` still has the default `NULL` value).
+Many `augment` methods will also provide an optional `newdata` argument that should also default to `NULL`. Users should only ever specify one of `data` or `newdata`. Providing both `data` and `newdata` should result in an error. `newdata` should accept both `data.frame`s and `tibble`s and should be tested with both.
 
 Data given to the `data` argument must have both the original predictors and the original response. Data given to the `newdata` argument only needs to have the original predictors. This is important because there may be important information associated with training data that is not associated with test data, for example, leverages (`.hat` below) in the case in linear regression:
 
@@ -239,15 +165,13 @@ augment(model, data = cars)
 augment(model, newdata = cars)
 ```
 
-This means that many `augment(model, data = original_data)` should provide `.fitted` and `.resid` columns in most cases. `augment(model, data = test_data)` only needs to add a `.fitted` column, but if you can add `.resid` column we when the response is present in `test_data`, we encourage it.
+This means that many `augment(model, data = original_data)` should provide `.fitted` and `.resid` columns in most cases, whereas `augment(model, data = test_data)` only needs to a `.fitted` column, even if the response is present in `test_data`.
 
-If the `data` or `newdata` is specified as a `data.frame` with rownames, `augment` should return them in a column called `.rownames`. Use the helper `as_broom_tibble()` for this.
+If the `data` or `newdata` is specified as a `data.frame` with rownames, `augment` should return them in a column called `.rownames`.
 
-For observations where no fitted values or summaries are available (where there's missing data, for example) return `NA`. Rows with missing data should never silently disappear. That is `nrow(input)` should equal `nrow(output)` with rare exceptions.
+For observations where no fitted values or summaries are available (where there's missing data, for example) return `NA`.
 
 Added column names should begin with `.` to avoid overwriting columns in the original data.
-
-Please do not use `augment_columns()`, which we are slowly phasing out.
 
 ## `tidy`
 
@@ -263,7 +187,7 @@ tidy(model, effects = "random")
 
 **Common arguments to tidy methods**:
 
-- `conf.int`: Logical indicating whether or not to calculate confidence/credible intervals. Should default to `FALSE`.
-- `conf.level`: The confidence level to use for the interval when `conf.int = TRUE`. If a tidying has a `conf.level` argument it must have a `conf.int` argument.
-- `exponentiate`: Logical indicating whether or not model terms should be presented on an exponential scale (typical for logistic regression).
-- `quick`: Logical indicating whether to use a faster `tidy` method that returns less information about each component, typically only `term` and `estimate` columns.
+- `conf.int`: logical indicating whether or not to calculate confidence/credible intervals. should default to `FALSE`
+- `conf.level`: the confidence level to use for the interval when `conf.int = TRUE`
+- `exponentiate`: logical indicating whether or not model terms should be presented on an exponential scale (typical for logistic regression)
+- `quick`: logical indicating whether to use a faster `tidy` method that returns less information about each component, typically only `term` and `estimate` columns
