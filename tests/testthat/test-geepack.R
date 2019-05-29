@@ -12,7 +12,7 @@ fit <- geeglm(
   Income ~ Frost + Murder,
   id = state.region,
   data = df,
-  family = gaussian,
+  family = stats::gaussian(),
   corstr = "exchangeable"
 )
 
@@ -37,5 +37,5 @@ test_that("tidy.geeglm", {
 
 test_that("glance.geeglm", {
   gl <- glance(fit)
-  check_glance_outputs(gl)
+  check_glance_outputs(gl, strict = FALSE)
 })

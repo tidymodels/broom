@@ -4,7 +4,7 @@ skip_if_not_installed("modeltests")
 library(modeltests)
 
 test_that("glm tidier arguments", {
-  check_arguments(tidy.glm)  # just points to tidy.lm
+  check_arguments(tidy.glm) # just points to tidy.lm
   check_arguments(glance.glm)
   check_arguments(augment.glm)
 })
@@ -12,34 +12,33 @@ test_that("glm tidier arguments", {
 nrow_mtcars <- nrow(mtcars)
 glm_weights <- rep(c(0, 1), each = nrow_mtcars / 2)
 gfit <- glm(am ~ wt, mtcars, family = "binomial")
-gfit2 <- glm(cyl ~ wt + log(disp), mtcars, family = "poisson")
+#gfit2 <- glm(cyl ~ wt + log(disp), mtcars, family = "poisson")
 gfit3 <- glm(am ~ wt, mtcars, family = "binomial", weights = glm_weights)
 
 test_that("tidy.glm works", {
-  
   td <- tidy(gfit)
-  td2 <- tidy(gfit2)
+  #td2 <- tidy(gfit2)
   tde <- tidy(gfit, exponentiate = TRUE)
-  tde2 <- tidy(gfit2, exponentiate = TRUE)
-  
+  #tde2 <- tidy(gfit2, exponentiate = TRUE)
+
   check_tidy_output(td)
-  check_tidy_output(td2)
+  #check_tidy_output(td2)
   check_tidy_output(tde)
-  check_tidy_output(tde2)
-  
+  #check_tidy_output(tde2)
+
   check_dims(td, 2, 5)
-  check_dims(td2, 3, 5)
-  
+  #check_dims(td2, 3, 5)
+
   expect_equal(td$term, c("(Intercept)", "wt"))
-  expect_equal(td2$term, c("(Intercept)", "wt", "log(disp)"))
+  #expect_equal(td2$term, c("(Intercept)", "wt", "log(disp)"))
 })
 
 test_that("glance.glm works", {
   gl <- glance(gfit)
-  gl2 <- glance(gfit2)
-  
+  #gl2 <- glance(gfit2)
+
   check_glance_outputs(gl)
-  check_glance_outputs(gl2)
+  #check_glance_outputs(gl2)
 })
 
 
@@ -50,13 +49,13 @@ test_that("augment.glm", {
     data = mtcars,
     newdata = mtcars
   )
-  
-  check_augment_function(
-    aug = augment.glm,
-    model = gfit2,
-    data = mtcars,
-    newdata = mtcars
-  )
+
+  # check_augment_function(
+  #   aug = augment.glm,
+  #   model = gfit2,
+  #   data = mtcars,
+  #   newdata = mtcars
+  # )
 
   check_augment_function(
     aug = augment.glm,
@@ -65,4 +64,3 @@ test_that("augment.glm", {
     newdata = mtcars
   )
 })
-

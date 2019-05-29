@@ -9,7 +9,7 @@ library(nnet)
 fit <- multinom(gear ~ mpg + factor(am), data = mtcars, trace = FALSE)
 
 test_that("nnet tidier arguments", {
-  check_arguments(tidy.multinom)
+  check_arguments(tidy.multinom, strict = FALSE)
   check_arguments(glance.multinom)
 })
 
