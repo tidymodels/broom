@@ -5,8 +5,7 @@
 \alias{btergm_tidiers}
 \title{Tidy a(n) btergm object}
 \usage{
-\method{tidy}{btergm}(x, conf.level = 0.95, exponentiate = FALSE,
-  quick = FALSE, ...)
+\method{tidy}{btergm}(x, conf.level = 0.95, exponentiate = FALSE, ...)
 }
 \arguments{
 \item{x}{A \code{\link[btergm:btergm]{btergm::btergm()}} object.}
@@ -19,10 +18,6 @@ the coefficient estimates. This is typical for logistic and multinomial
 regressions, but a bad idea if there is no log or logit link. Defaults
 to \code{FALSE}.}
 
-\item{quick}{Logical indicating if the only the \code{term} and \code{estimate}
-columns should be returned. Often useful to avoid time consuming
-covariance and standard error calculations. Defaults to \code{FALSE}.}
-
 \item{...}{Additional arguments. Not used. Needed to match generic
 signature only. \strong{Cautionary note:} Misspelled arguments will be
 absorbed in \code{...}, where they will be ignored. If the misspelled
@@ -32,6 +27,10 @@ proceed using \code{conf.level = 0.95}. Additionally, if you pass
 \code{newdata = my_tibble} to an \code{\link[=augment]{augment()}} method that does not
 accept a \code{newdata} argument, it will use the default value for
 the \code{data} argument.}
+
+\item{quick}{Logical indicating if the only the \code{term} and \code{estimate}
+columns should be returned. Often useful to avoid time consuming
+covariance and standard error calculations. Defaults to \code{FALSE}.}
 }
 \description{
 Tidy summarizes information about the components of a model.

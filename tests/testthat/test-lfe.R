@@ -17,11 +17,11 @@ df <- data.frame(
 
 fit <- lfe::felm(v2 ~ v3, df)
 fit2 <- lfe::felm(v2 ~ v3 | id + v1, df, na.action = na.exclude)
-fit_multi <- lfe::felm(v1 + v2 ~ v3 , df)
+fit_multi <- lfe::felm(v1 + v2 ~ v3, df)
 
 
 form <- v2 ~ v4
-fit_form <- lfe::felm(form, df)  # part of a regression test
+fit_form <- lfe::felm(form, df) # part of a regression test
 
 test_that("felm tidier arguments", {
   check_arguments(tidy.felm)
@@ -38,10 +38,10 @@ test_that("tidy.felm", {
   td3_quick <- tidy(fit2, conf.int = TRUE, fe = TRUE, quick = TRUE)
   td4 <- tidy(fit_form)
   td4_quick <- tidy(fit_form, quick = TRUE)
-  
+
   td_multi <- tidy(fit_multi)
   td_multi_quick <- tidy(fit_multi, quick = TRUE)
-  
+
   check_tidy_output(td)
   check_tidy_output(td_quick)
   check_tidy_output(td2)
@@ -52,36 +52,35 @@ test_that("tidy.felm", {
   check_tidy_output(td4_quick)
   check_tidy_output(td_multi)
   check_tidy_output(td_multi_quick)
-  
+
   check_dims(td, 2, 5)
-  
+
   expect_equal(tidy(fit_multi)[3:4, -1], tidy(fit))
 })
 
 test_that("glance.felm", {
   gl <- glance(fit)
   gl2 <- glance(fit2)
-  
+
   check_glance_outputs(gl, gl2)
   check_dims(gl, expected_cols = 8)
-  
+
   expect_error(glance(fit_multi), "Glance does not support linear models with multiple responses.")
 })
 
 test_that("augment.felm", {
-  
   check_augment_function(
     aug = augment.felm,
     model = fit,
     data = df
   )
-  
+
   check_augment_function(
     aug = augment.felm,
     model = fit2,
     data = df
   )
-  
+
   check_augment_function(
     aug = augment.felm,
     model = fit_form,

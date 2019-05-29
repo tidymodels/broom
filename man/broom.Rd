@@ -26,6 +26,7 @@ which provides a one-row summary of model-level statistics.
 \seealso{
 Useful links:
 \itemize{
+  \item \url{https://broom.tidyverse.org/}
   \item \url{http://github.com/tidymodels/broom}
   \item Report bugs at \url{http://github.com/tidymodels/broom/issues}
 }
