@@ -2,6 +2,8 @@
 #' @template title_desc_tidy
 #'
 #' @param x A `epi.2by2` object produced by a call to [epiR::epi.2by2()]
+#' @param parameters Return measures of association (`moa`) or test statistics (`stat`), 
+#'    default is `moa` (measures of association)
 #' @template param_unused_dots
 #'
 #' @evalRd return_tidy("parameter", estimate = "Estimated measure of association", "conf.low", "conf.high", "statistic", "df", "p.value")
@@ -10,28 +12,36 @@
 #'    [epiR::epi.2by2()] is called. 
 #'    
 #' @examples 
-#' 
 #' library(epiR)
-#' 
 #' dat <- matrix(c(13,2163,5,3349), nrow = 2, byrow = TRUE)
 #' rownames(dat) <- c("DF+", "DF-")
 #' colnames(dat) <- c("FUS+", "FUS-")
-#' birthwt$low <- factor(birthwt$low, levels = c(1,0))
-#' birthwt$smoke <- factor(birthwt$smoke, levels = c(1,0))
-#' birthwt$race <- factor(birthwt$race, levels = c(1,2,3))
-#' tab1 <- table(birthwt$smoke, birthwt$low, dnn = c("Smoke", "Low BW"))
+#' fit <- epi.2by2(dat = as.table(dat), method = "cross.sectional", 
+#'                 conf.level = 0.95, units = 100, outcome = "as.columns")
 #' 
-#' tidy(tab1)
+#' tidy(fit, parameters = "moa")
 #' @export
 #' @seealso [tidy()], [epiR::epi.2by2()]
 #' @family epiR tidiers
 #' @aliases epiR_tidiers
-tidy.epi.2by2 <- function(x, ...) {
+tidy.epi.2by2 <- function(x, parameters = c("moa", "stat"),...) {
   s <- summary(x, ...)
+  method <- match.arg(parameters)
   nm <- names(x$massoc)
-  tibble(s) %>%
-    dplyr::mutate(measure = nm) %>%
-    tidyr::unnest() %>%
-    dplyr::select(measure, everything()) %>%
-    dplyr::rename_all(funs(c("parameter", "estimate", "conf.low", "conf.high", "statistic", "df", "p.value")))
+  
+  if (method == "moa") {
+    keep <- c("measure", "est", "lower", "upper")
+    tibble::tibble(s, measure = nm) %>% 
+      tidyr::unnest() %>% 
+      dplyr::filter(!is.na(.$est)) %>% 
+      dplyr::select(keep) %>% 
+      dplyr::rename_all(funs(c("parameter", "estimate", "conf.low", "conf.high")))
+  } else if (method == "stat") {
+    keep <- c("measure", "test.statistic", "df", "p.value")
+    tibble::tibble(s, measure = nm) %>% 
+      tidyr::unnest() %>% 
+      dplyr::filter(!is.na(.$test.statistic)) %>% 
+      dplyr::select(keep) %>% 
+      dplyr::rename_all(funs(c("parameter", "statistic", "df", "p.value")))
+  }
 }

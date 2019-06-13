@@ -5,10 +5,13 @@
 \alias{epiR_tidiers}
 \title{Tidy a(n) epi.2by2 object}
 \usage{
-\method{tidy}{epi.2by2}(x, ...)
+\method{tidy}{epi.2by2}(x, parameters = c("moa", "stat"), ...)
 }
 \arguments{
 \item{x}{A \code{epi.2by2} object produced by a call to \code{\link[epiR:epi.2by2]{epiR::epi.2by2()}}}
+
+\item{parameters}{Return measures of association (\code{moa}) or test statistics (\code{stat}),
+default is \code{moa} (measures of association)}
 
 \item{...}{Additional arguments. Not used. Needed to match generic
 signature only. \strong{Cautionary note:} Misspelled arguments will be
@@ -33,18 +36,14 @@ The tibble has a column for each of the measures of association or tests contain
 \code{\link[epiR:epi.2by2]{epiR::epi.2by2()}} is called.
 }
 \examples{
-
 library(epiR)
-
 dat <- matrix(c(13,2163,5,3349), nrow = 2, byrow = TRUE)
 rownames(dat) <- c("DF+", "DF-")
 colnames(dat) <- c("FUS+", "FUS-")
-birthwt$low <- factor(birthwt$low, levels = c(1,0))
-birthwt$smoke <- factor(birthwt$smoke, levels = c(1,0))
-birthwt$race <- factor(birthwt$race, levels = c(1,2,3))
-tab1 <- table(birthwt$smoke, birthwt$low, dnn = c("Smoke", "Low BW"))
+fit <- epi.2by2(dat = as.table(dat), method = "cross.sectional", 
+                conf.level = 0.95, units = 100, outcome = "as.columns")
 
-tidy(tab1)
+tidy(fit, parameters = "moa")
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[epiR:epi.2by2]{epiR::epi.2by2()}}

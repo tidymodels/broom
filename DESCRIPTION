@@ -344,7 +344,8 @@ Suggests:
     testthat,
     tseries,
     xergm,
-    zoo
+    zoo,
+    epiR
 VignetteBuilder: 
     knitr
 Remotes: 

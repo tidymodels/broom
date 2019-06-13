@@ -1,7 +1,6 @@
 context("epiR")
 
 skip_if_not_installed("epiR")
-library(epiR)
 
 dat <- matrix(c(13,2163,5,3349), nrow = 2, byrow = TRUE)
 rownames(dat) <- c("DF+", "DF-")
@@ -18,10 +17,11 @@ tab1 <- table(birthwt$smoke, birthwt$low, dnn = c("Smoke", "Low BW"))
 tab2 <- table(birthwt$smoke, birthwt$low, birthwt$race, 
               dnn = c("Smoke", "Low BW", "Race"))
 
+library(epiR)
 fit1 <- epi.2by2(dat = as.table(dat), method = "cross.sectional", 
-         conf.level = 0.95, units = 100, outcome = "as.columns")
+                 conf.level = 0.95, units = 100, outcome = "as.columns")
 fit2 <- epi.2by2(dat = tab1, method = "cohort.count", 
-         conf.level = 0.95, units = 100, outcome = "as.columns")
+                 conf.level = 0.95, units = 100, outcome = "as.columns")
 fit3 <- epi.2by2(dat = tab2, method = "case.control", 
                  conf.level = 0.95, units = 100, outcome = "as.columns")
 
@@ -32,9 +32,11 @@ test_that("epi2by2 arguments", {
 test_that("tidy.epi2by2", {
   tidy1 <- tidy(fit1)
   tidy2 <- tidy(fit2)
-  tidy3 <- tidy(fit3)
+  tidy3 <- tidy(fit3, parameters = "stat")
   
   check_tidy_output(tidy1)
   check_tidy_output(tidy2)
   check_tidy_output(tidy3)
+  
+  check_dims(tidy1, 12, 4)
 })
