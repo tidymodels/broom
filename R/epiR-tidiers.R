@@ -26,7 +26,7 @@
 #' @aliases epiR_tidiers
 tidy.epi.2by2 <- function(x, parameters = c("moa", "stat"),...) {
   s <- summary(x, ...)
-  method <- match.arg(parameters)
+  method <- rlang::arg_match(parameters)
   nm <- names(x$massoc)
   
   if (method == "moa") {
