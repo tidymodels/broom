@@ -234,7 +234,11 @@ Authors@R:
       person(given = "Eduard",
              family = "Szoecs",
              role = "ctb",
-             email = "eduardszoecs@gmail.com"))
+             email = "eduardszoecs@gmail.com"), 
+      person(given = "Nick",
+             family = "Williams",
+             role = "ctb",
+             email = "ntwilliams.personal@gmail.com"))
 Description: Summarizes key information about statistical
     objects in tidy tibbles. This makes it easy to report results, create
     plots and consistently work with large numbers of models at once.
@@ -340,7 +344,8 @@ Suggests:
     testthat,
     tseries,
     xergm,
-    zoo
+    zoo,
+    epiR
 VignetteBuilder: 
     knitr
 Remotes: 
@@ -368,6 +373,7 @@ Collate:
     'data-frame-tidiers.R'
     'drc-tidiers.R'
     'emmeans-tidiers.R'
+    'epiR-tidiers.R'
     'ergm-tidiers.R'
     'gam-tidiers.R'
     'gamlss-tidiers.R'
