@@ -22,11 +22,11 @@ tidy.glmrob <- function (x, conf.int = FALSE, conf.level = 0.95, ...) {
   names(ret) <- c("term", "estimate", "std.error", "statistic", "p.value")
 
   if (conf.int) {
-    ci <- stats::confint.default(x, level = conf.level) %>% 
+    ci <- stats::confint.default(x, level = conf.level) %>%
       as_tibble()
 
     names(ci) <- c("conf.low", "conf.high")
-    ret <- ret %>% 
+    ret <- ret %>%
       cbind(ci)
   }
   
@@ -36,8 +36,8 @@ tidy.glmrob <- function (x, conf.int = FALSE, conf.level = 0.95, ...) {
 
 #' @templateVar class glmrob
 #' @template title_desc_augment
-#' 
-#' @inherit tidy.glmrob params 
+#'
+#' @inherit tidy.glmrob params
 #' @template param_data
 #' @template param_newdata
 #' @template param_se_fit
@@ -64,4 +64,3 @@ augment.glmrob <- function(x, data = model.frame(x), newdata = NULL,
     .se_fit = se_fit
   )
 }
-

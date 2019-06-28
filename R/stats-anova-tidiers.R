@@ -1,10 +1,10 @@
 #' @templateVar class anova
 #' @template title_desc_tidy
-#' 
+#'
 #' @param x An `anova` objects, such as those created by [stats::anova()] or
 #'   [car::Anova()].
 #' @template param_unused_dots
-#' 
+#'
 #' @evalRd return_tidy(
 #'   "term",
 #'   "df",
@@ -13,10 +13,10 @@
 #'   "statistic",
 #'   "p.value"
 #' )
-#'   
+#'
 #' @details The `term` column of an ANOVA table can come with leading or
 #'   trailing whitespace, which this tidying method trims.
-#'   
+#'
 #' @examples
 #'
 #' a <- lm(mpg ~ wt + qsec + disp, mtcars)
@@ -67,7 +67,7 @@ tidy.anova <- function(x, ...) {
       paste(unknown_cols, collapse = ", ")
     )
   }
-  
+
   colnames(ret) <- dplyr::recode(colnames(ret), !!!renamers)
 
   if("term" %in% names(ret)){
@@ -80,12 +80,12 @@ tidy.anova <- function(x, ...) {
 
 #' @templateVar class aov
 #' @template title_desc_tidy
-#' 
+#'
 #' @param x An `aov` object, such as those created by [stats::aov()].
 #' @template param_unused_dots
-#' 
+#'
 #' @inherit tidy.anova return details
-#'   
+#'
 #' @examples
 #'
 #' a <- aov(mpg ~ wt + qsec + disp, mtcars)
@@ -95,22 +95,59 @@ tidy.anova <- function(x, ...) {
 #' @family anova tidiers
 #' @seealso [tidy()], [stats::aov()]
 tidy.aov <- function(x, ...) {
-  s <- summary(x)
-  tidy.anova(s[[1]])
+  summary(x)[[1]] %>%
+    tibble::as_tibble(rownames = "term") %>%
+    dplyr::mutate("term" = stringr::str_trim(term)) %>%
+    rename2("df" = "Df",
+            "sumsq" = "Sum Sq",
+            "meansq" = "Mean Sq",
+            "statistic" = "F value",
+            "p.value" = "Pr(>F)")
 }
 
-# this is a placeholder while we decide what to do
-# it's not clear to me if glancing at an aov object should
-# return the same glance info as glance at the corresponding
-# regression. tentatively i'm calling this an error.
-glance.aov <- glance.default
+
+#' @templateVar class lm
+#' @template title_desc_glance
+#'
+#' @inherit tidy.aov params examples
+#'
+#' @note
+#' From `0.7.0`, `broom` has changed the return summary and the new model
+#' summary dataframe contains only the following information- `logLik`, `IC`,
+#' `BIC`, `deviance`, `nobs`. Note that `tidy.aov` contains the numerator and
+#' denominator degrees of freedom, which were previously included in the glance
+#' summary.
+#'
+#' @evalRd return_glance(
+#'   "logLik",
+#'   "AIC",
+#'   "BIC",
+#'   "deviance",
+#'   "nobs"
+#' )
+#'
+#' @export
+#' @seealso [glance()]
+#' @family anova tidiers
+glance.aov <- function(x, ...) {
+  with(
+    summary(x),
+    tibble(
+      logLik = as.numeric(stats::logLik(x)),
+      AIC = stats::AIC(x),
+      BIC = stats::BIC(x),
+      deviance = stats::deviance(x),
+      nobs = stats::nobs(x)
+    )
+  )
+}
 
 #' @templateVar class aovlist
 #' @template title_desc_tidy
-#' 
+#'
 #' @param x An `aovlist` objects, such as those created by [stats::aov()].
 #' @template param_unused_dots
-#' 
+#'
 #' @evalRd return_tidy(
 #'   "term",
 #'   "df",
@@ -120,9 +157,9 @@ glance.aov <- glance.default
 #'   "p.value",
 #'   "stratum"
 #' )
-#'   
+#'
 #' @inherit tidy.anova details
-#'   
+#'
 #' @examples
 #'
 #' a <- aov(mpg ~ wt + qsec + Error(disp / am), mtcars)
@@ -132,21 +169,21 @@ glance.aov <- glance.default
 #' @family anova tidiers
 #' @seealso [tidy()], [stats::aov()]
 tidy.aovlist <- function(x, ...) {
-  
+
   # must filter out Intercept stratum since it has no dimensions
   if (names(x)[1L] == "(Intercept)") {
     x <- x[-1L]
   }
 
   ret <- map_df(x, tidy, .id = "stratum")
-  
+
   # get rid of leading and trailing whitespace in term and stratum columns
-  ret <- ret %>% 
+  ret <- ret %>%
     mutate(
       term = stringr::str_trim(term),
       stratum = stringr::str_trim(stratum)
     )
-  
+
   as_tibble(ret)
 }
 
@@ -171,7 +208,7 @@ tidy.aovlist <- function(x, ...) {
 #'   hl = "Hotelling-Lawley trace.",
 #'   roy = "Roy's greatest root."
 #' )
-#' 
+#'
 #'
 #' @details Depending on which test statistic is specified only one of `pillai`,
 #'   `wilks`, `hl` or `roy` is included.
@@ -180,19 +217,19 @@ tidy.aovlist <- function(x, ...) {
 #'
 #' npk2 <- within(npk, foo <- rnorm(24))
 #' m <- manova(cbind(yield, foo) ~ block + N * P * K, npk2)
-#' tidy(m) 
+#' tidy(m)
 #'
 #' @export
 #' @seealso [tidy()], [stats::summary.manova()]
 #' @family anova tidiers
 tidy.manova <- function(x, test = "Pillai", ...) {
-  
+
   test.pos <- pmatch(test, c(
     "Pillai", "Wilks",
     "Hotelling-Lawley", "Roy"
   ))
   test.name <- c("pillai", "wilks", "hl", "roy")[test.pos]
-  
+
   nn <- c("df", test.name, "statistic", "num.df", "den.df", "p.value")
   fix_data_frame(summary(x, test = test, ...)$stats, nn)
 }

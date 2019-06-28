@@ -26,6 +26,7 @@ which provides a one-row summary of model-level statistics.
 \seealso{
 Useful links:
 \itemize{
+  \item \url{https://broom.tidyverse.org/}
   \item \url{http://github.com/tidymodels/broom}
   \item Report bugs at \url{http://github.com/tidymodels/broom/issues}
 }
@@ -41,6 +42,7 @@ Authors:
 
 Other contributors:
 \itemize{
+  \item Indrajeet Patil \email{patilindrajeet.science@gmail.com} (0000-0003-1995-6531) [contributor]
   \item Matthieu Gomez \email{mattg@princeton.edu} [contributor]
   \item Boris Demeshev \email{boris.demeshev@gmail.com} [contributor]
   \item Dieter Menne \email{dieter.menne@menne-biomed.de} [contributor]
@@ -74,6 +76,7 @@ Other contributors:
   \item Paul PJ \email{pjpaul.stephens@gmail.com} [contributor]
   \item Ben Schneider \email{benjamin.julius.schneider@gmail.com} [contributor]
   \item Patrick Kennedy \email{pkqstr@protonmail.com} [contributor]
+  \item Lily Medina \email{lilymiru@gmail.com} [contributor]
   \item Brian Fannin \email{captain@pirategrunt.com} [contributor]
   \item Jason Muhlenkamp \email{jason.muhlenkamp@gmail.com} [contributor]
   \item Matt Lehman [contributor]
@@ -83,6 +86,19 @@ Other contributors:
   \item Vincent Arel-Bundock \email{vincent.arel-bundock@umontreal.ca} (0000-0003-2042-7063) [contributor]
   \item Hideaki Hayashi [contributor]
   \item Luis Tobalina [contributor]
+  \item Annie Wang \email{anniewang.uc@gmail.com} [contributor]
+  \item Wei Yang Tham \email{weiyang.tham@gmail.com} [contributor]
+  \item Clara Wang \email{clara.wang.94@gmail.com} [contributor]
+  \item Abby Smith \email{als1@u.northwestern.edu} (0000-0002-3207-0375) [contributor]
+  \item Jasper Cooper \email{jaspercooper@gmail.com} (0000-0002-8639-3188) [contributor]
+  \item E Auden Krauska \email{krauskae@gmail.com} (0000-0002-1466-5850) [contributor]
+  \item Alex Wang \email{x249wang@uwaterloo.ca} [contributor]
+  \item Malcolm Barrett \email{malcolmbarrett@gmail.com} (0000-0003-0299-5825) [contributor]
+  \item Charles Gray \email{charlestigray@gmail.com} (0000-0002-9978-011X) [contributor]
+  \item Jared Wilber [contributor]
+  \item Vilmantas Gegzna \email{GegznaV@gmail.com} (0000-0002-9500-5167) [contributor]
+  \item Eduard Szoecs \email{eduardszoecs@gmail.com} [contributor]
+  \item Nick Williams \email{ntwilliams.personal@gmail.com} [contributor]
 }
 
 }
