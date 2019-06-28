@@ -38,7 +38,6 @@ documentation.}
 added to the augmented output. For some models, this calculation can be
 somwhat time-consuming. Defaults to \code{FALSE}.}
 
->>>>>>> simplify tidy, pass more args to augment
 \item{...}{Additional arguments. Not used. Needed to match generic
 signature only. \strong{Cautionary note:} Misspelled arguments will be
 absorbed in \code{...}, where they will be ignored. If the misspelled
