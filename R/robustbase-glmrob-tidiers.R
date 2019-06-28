@@ -17,7 +17,7 @@
 #' @rdname tidy.robustbase.glmrob
 #' @seealso [robustbase::glmrob()]
 tidy.glmrob <- function (x, conf.int = FALSE, conf.level = 0.95, ...) {
-  ret <- coef(summary(x)) %>%
+  ret <- coef(summary(x)) %>% 
     as_tibble(rownames = "term")
   names(ret) <- c("term", "estimate", "std.error", "statistic", "p.value")
 
@@ -29,7 +29,7 @@ tidy.glmrob <- function (x, conf.int = FALSE, conf.level = 0.95, ...) {
     ret <- ret %>%
       cbind(ci)
   }
-
+  
   ret
 }
 
