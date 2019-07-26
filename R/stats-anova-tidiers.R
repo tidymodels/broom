@@ -268,10 +268,10 @@ tidy.manova <- function(x, test = "Pillai", ...) {
 tidy.summary.manova <- function(x, ...) {
   
   manova_tests <- c(
-    "Pillai" = "pillai"
-    , "Wilks" = "wilks"
-    , "Hotelling-Lawley" = "hl"
-    , "Roy" = "roy"
+    "Pillai" = "pillai",
+    "Wilks" = "wilks",
+    "Hotelling-Lawley" = "hl",
+    "Roy" = "roy"
   )
   test.name <- intersect(colnames(x$stats), names(manova_tests))[[1]]
   nn <- c("df", test.name, "statistic", "num.df", "den.df", 
