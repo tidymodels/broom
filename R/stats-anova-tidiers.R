@@ -253,7 +253,7 @@ tidy.manova <- function(x, test = "Pillai", ...) {
 #' )
 #'
 #'
-#' @details Depending on which test statistic is calculated in theobject only one of `pillai`,
+#' @details Depending on which test statistic was calculated when the object was created, only one of `pillai`,
 #'   `wilks`, `hl` or `roy` is included.
 #'
 #' @examples
