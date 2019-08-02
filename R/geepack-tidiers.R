@@ -94,6 +94,8 @@ process_geeglm <- function(ret, x, conf.int = FALSE, conf.level = .95,
 #' @return Lower and upper confidence bounds in a data.frame(?).
 #' 
 #' @noRd
+#' 
+#' @export
 confint.geeglm <- function(object, parm, level = 0.95, ...) {
   cc <- stats::coef(summary(object))
   mult <- stats::qnorm((1 + level) / 2)
