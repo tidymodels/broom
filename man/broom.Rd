@@ -26,6 +26,7 @@ which provides a one-row summary of model-level statistics.
 \seealso{
 Useful links:
 \itemize{
+  \item \url{https://broom.tidyverse.org/}
   \item \url{http://github.com/tidymodels/broom}
   \item Report bugs at \url{http://github.com/tidymodels/broom/issues}
 }
@@ -97,6 +98,7 @@ Other contributors:
   \item Jared Wilber [contributor]
   \item Vilmantas Gegzna \email{GegznaV@gmail.com} (0000-0002-9500-5167) [contributor]
   \item Eduard Szoecs \email{eduardszoecs@gmail.com} [contributor]
+  \item Nick Williams \email{ntwilliams.personal@gmail.com} [contributor]
 }
 
 }

@@ -6,19 +6,27 @@ cache: packages
 bioc_required: true
 warnings_are_errors: false
 
+# testing btergm is truly a nightmare. the following is an attempt to fix
+# https://travis-ci.org/tidymodels/broom/builds/568934841#L8845 pull from
+# https://github.com/travis-ci/travis-ci/issues/6987#issuecomment-266754776
+
+services:
+  - xvfb
+
+before_cache: Rscript -e 'remotes::install_cran("pkgdown")'
+
+deploy:
+  provider: script
+  script: Rscript -e 'pkgdown::deploy_site_github()'
+  skip_cleanup: true
+
 matrix:
   include:
   - r: devel
   - r: release
-    before_deploy: Rscript -e 'remotes::install_cran("pkgdown")'  
-    deploy:
-      provider: script
-      script: Rscript -e 'pkgdown::deploy_site_github(verbose = TRUE)'
-      skip_cleanup: true
   - r: oldrel
   - r: 3.3
   - r: 3.2
-  - r: 3.1
 
 env:
   global:
@@ -36,9 +44,6 @@ matrix:
     - r: 3.3
 
 r_binary_packages:
-  - rstanarm
-  - rstan
-  - lme4
   - psych
   - survival
   - mclust
@@ -60,13 +65,6 @@ r_packages:
 
 r_github_packages:
   - jimhester/lintr
-  - r-lib/covr
-  - r-lib/pkgdown
-
-notifications:
-  email:
-  on_success: change
-  on_failure: change
 
 after_success:
   - Rscript -e 'covr::codecov()'

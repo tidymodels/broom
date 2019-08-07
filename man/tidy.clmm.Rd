@@ -5,7 +5,7 @@
 \title{Tidy a(n) clmm object}
 \usage{
 \method{tidy}{clmm}(x, conf.int = FALSE, conf.level = 0.95,
-  conf.type = c("profile", "Wald"), exponentiate = FALSE, ...)
+  exponentiate = FALSE, ...)
 }
 \arguments{
 \item{x}{A \code{clmm} object returned from \code{\link[ordinal:clmm]{ordinal::clmm()}}.}
@@ -16,10 +16,6 @@ interval in the tidied output. Defaults to \code{FALSE}.}
 \item{conf.level}{The confidence level to use for the confidence interval
 if \code{conf.int = TRUE}. Must be strictly greater than 0 and less than 1.
 Defaults to 0.95, which corresponds to a 95 percent confidence interval.}
-
-\item{conf.type}{Whether to use \code{"profile"} or \code{"Wald"} confidendence
-intervals, passed to the \code{type} argument of \code{\link[ordinal:confint.clmm]{ordinal::confint.clmm()}}.
-Defaults to \code{"profile"}.}
 
 \item{exponentiate}{Logical indicating whether or not to exponentiate the
 the coefficient estimates. This is typical for logistic and multinomial
@@ -61,7 +57,7 @@ fit <- clmm(rating ~ temp + contact + (1|judge), data = wine)
 
 tidy(fit)
 tidy(fit, conf.int = TRUE, conf.level = 0.9)
-tidy(fit, conf.int = TRUE, conf.type = "Wald", exponentiate = TRUE)
+tidy(fit, conf.int = TRUE, exponentiate = TRUE)
 
 glance(fit)
 
@@ -71,7 +67,7 @@ glance(fit2)
 
 }
 \seealso{
-\link{tidy}, \code{\link[ordinal:clmm]{ordinal::clmm()}}, \code{\link[ordinal:confint.clmm]{ordinal::confint.clmm()}}
+\link{tidy}, \code{\link[ordinal:clmm]{ordinal::clmm()}}, \code{\link[ordinal:confint.clm]{ordinal::confint.clm()}}
 
 Other ordinal tidiers: \code{\link{augment.clm}},
   \code{\link{augment.polr}}, \code{\link{glance.clmm}},

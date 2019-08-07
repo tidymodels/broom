@@ -5,8 +5,7 @@
 \alias{drc_tidiers}
 \title{Tidy a(n) drc object}
 \usage{
-\method{tidy}{drc}(x, conf.int = FALSE, conf.level = 0.95,
-  quick = FALSE, ...)
+\method{tidy}{drc}(x, conf.int = FALSE, conf.level = 0.95, ...)
 }
 \arguments{
 \item{x}{A \code{drc} object produced by a call to \code{\link[drc:drm]{drc::drm()}}.}
@@ -17,9 +16,6 @@ interval in the tidied output. Defaults to \code{FALSE}.}
 \item{conf.level}{The confidence level to use for the confidence interval
 if \code{conf.int = TRUE}. Must be strictly greater than 0 and less than 1.
 Defaults to 0.95, which corresponds to a 95 percent confidence interval.}
-
-\item{quick}{whether to compute a smaller and faster version, containing
-only the \code{term}, \code{curveid} and \code{estimate} columns.}
 
 \item{...}{Additional arguments. Not used. Needed to match generic
 signature only. \strong{Cautionary note:} Misspelled arguments will be
@@ -44,25 +40,26 @@ The tibble has one row for each curve and term in the regression. The
 \code{curveid} column indicates the curve.
 }
 \examples{
+
 library(drc)
+
 mod <- drm(dead/total~conc, type, 
    weights = total, data = selenium, fct = LL.2(), type = "binomial")
-mod
 
 tidy(mod)
 tidy(mod, conf.int = TRUE)
-tidy(mod, quick = TRUE)
+
 glance(mod)
-# augment(mod)
+
+augment(mod, selenium)
+
+
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[drc:drm]{drc::drm()}}
 
 Other drc tidiers: \code{\link{augment.drc}},
   \code{\link{glance.drc}}
-}
-\author{
-Eduard Szoecs, \email{eduardszoecs@gmail.com}
 }
 \concept{drc tidiers}
 \value{

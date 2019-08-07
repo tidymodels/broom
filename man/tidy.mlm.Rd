@@ -26,10 +26,6 @@ proceed using \code{conf.level = 0.95}. Additionally, if you pass
 \code{newdata = my_tibble} to an \code{\link[=augment]{augment()}} method that does not
 accept a \code{newdata} argument, it will use the default value for
 the \code{data} argument.}
-
-\item{quick}{Logical indicating if the only the \code{term} and \code{estimate}
-columns should be returned. Often useful to avoid time consuming
-covariance and standard error calculations. Defaults to \code{FALSE}.}
 }
 \description{
 Tidy summarizes information about the components of a model.

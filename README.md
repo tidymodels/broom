@@ -9,7 +9,6 @@ status](https://www.r-pkg.org/badges/version/broom)](https://cran.r-project.org/
 Status](https://travis-ci.org/tidymodels/broom.svg?branch=master)](https://travis-ci.org/tidymodels/broom)
 [![AppVeyor build
 status](https://ci.appveyor.com/api/projects/status/github/tidymodels/broom?branch=master&svg=true)](https://ci.appveyor.com/project/tidymodels/broom)
-[![CircleCI](https://circleci.com/gh/tidymodels/broom.svg?style=svg)](https://circleci.com/gh/tidymodels/broom)
 [![Coverage
 Status](https://img.shields.io/codecov/c/github/tidymodels/broom/master.svg)](https://codecov.io/github/tidymodels/broom?branch=master)
 
@@ -31,8 +30,7 @@ of the model objects in the `stats` package that comes with base R.
 
 If you aren’t familiar with tidy data structures and want to know how
 they can make your life easier, we highly recommend reading Hadley
-Wickham’s [Tidy
-Data](http://www.jstatsoft.org/v59/i10).
+Wickham’s [Tidy Data](http://www.jstatsoft.org/v59/i10).
 
 ## Installation
 
