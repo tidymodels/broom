@@ -15,5 +15,4 @@
 ^data-raw$
 ^\.httr-oauth$
 ^\.lintr$
-^\.circleci$
 ^pkgdown$
