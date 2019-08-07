@@ -11,7 +11,7 @@
 #' glance(mod)
 #' augment(mod)
 #'
-#' @aliases speedlm_tidiers speedglm_tidiers
+#' @aliases speedlm_tidiers
 #' @export
 #' @family speedlm tidiers
 #' @seealso [speedglm::speedlm()]
@@ -43,7 +43,7 @@ tidy.speedlm <- tidy.lm
 #' @seealso [speedglm::speedlm()]
 glance.speedlm <- function(x, ...) {
   s <- summary(x)
-  ret <- tibble(
+  tibble(
     r.squared = s$r.squared,
     adj.r.squared = s$adj.r.squared,
     statistic = s$fstatistic[1],
@@ -56,7 +56,6 @@ glance.speedlm <- function(x, ...) {
     df.residual = stats::df.residual(x),
     nobs = stats::nobs(x)
   )
-  ret
 }
 
 #' @templateVar class speedlm

@@ -72,6 +72,8 @@ TODO: sort out what happens to `glance.aov()`
 
 ## New tidiers, features and bugfixes
 
+- Added `tidy()` and `glance()` methods for `speedglm` objects from the `speedglm` package
+
 - Added tidier for `epiR::epi.2by2` (#711)
 
 - Make `.fitted` values respect `type.predict` argument of `augment.clm()`. (#617)
