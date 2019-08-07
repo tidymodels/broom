@@ -4,9 +4,6 @@
 #' @param x A `polr` object returned from [MASS::polr()].
 #' @template param_confint
 #' @template param_exponentiate
-#' @param conf.type Whether to use `"profile"` or `"Wald"` confidendence
-#'   intervals, passed to the `type` argument of [ordinal::confint.clm()].
-#'   Defaults to `"profile"`.
 #' @template param_unused_dots
 #'   
 #' @examples
@@ -88,11 +85,11 @@ glance.polr <- function(x, ...) {
 #' @template param_newdata
 #' 
 #' @param type.predict Which type of prediction to compute,
-#'  passed to [MASS::predict.polr()]. Only supports `"class"` at
+#'  passed to `MASS:::predict.polr()`. Only supports `"class"` at
 #'  the moment.
 #' 
 #' @export
-#' @seealso [tidy], [MASS::polr()], [stats::predict.polr()]
+#' @seealso [tidy()], [MASS::polr()]
 #' @family ordinal tidiers
 #' 
 augment.polr <- function(x, data = model.frame(x), newdata = NULL,

@@ -33,7 +33,7 @@
 #' @family multinom tidiers
 #' @seealso [tidy()], [nnet::multinom()]
 tidy.multinom <- function(x, conf.int = FALSE, conf.level = .95,
-                          exponentiate = TRUE, ...) {
+                          exponentiate = FALSE, ...) {
   col_names <- if (length(x$lev) > 2) colnames(coef(x)) else names(coef(x))
   s <- summary(x)
 

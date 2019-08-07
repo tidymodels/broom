@@ -36,9 +36,6 @@ matrix:
     - r: 3.3
 
 r_binary_packages:
-  - rstanarm
-  - rstan
-  - lme4
   - psych
   - survival
   - mclust
