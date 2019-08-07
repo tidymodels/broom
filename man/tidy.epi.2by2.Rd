@@ -55,8 +55,8 @@ A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
   \item{conf.low}{Lower bound on the confidence interval for the estimate.}
   \item{df}{Degrees of freedom used by this term in the model.}
   \item{p.value}{The two-sided p-value associated with the observed statistic.}
-  \item{parameter}{The parameter being modeled.}
   \item{statistic}{The value of a T-statistic to use in a hypothesis that the regression term is non-zero.}
+  \item{term}{The name of the regression term.}
   \item{estimate}{Estimated measure of association}
 
 }

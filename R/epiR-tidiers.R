@@ -6,7 +6,7 @@
 #'    default is `moa` (measures of association)
 #' @template param_unused_dots
 #'
-#' @evalRd return_tidy("parameter", estimate = "Estimated measure of association", "conf.low", "conf.high", "statistic", "df", "p.value")
+#' @evalRd return_tidy("term", estimate = "Estimated measure of association", "conf.low", "conf.high", "statistic", "df", "p.value")
 #' 
 #' @details The tibble has a column for each of the measures of association or tests contained in `massoc` when 
 #'    [epiR::epi.2by2()] is called. 
@@ -35,13 +35,13 @@ tidy.epi.2by2 <- function(x, parameters = c("moa", "stat"),...) {
       tidyr::unnest() %>% 
       dplyr::filter(!is.na(.$est)) %>% 
       dplyr::select(keep) %>% 
-      dplyr::rename_all(funs(c("parameter", "estimate", "conf.low", "conf.high")))
+      dplyr::rename_all(funs(c("term", "estimate", "conf.low", "conf.high")))
   } else if (method == "stat") {
     keep <- c("measure", "test.statistic", "df", "p.value")
     tibble::tibble(s, measure = nm) %>% 
       tidyr::unnest() %>% 
       dplyr::filter(!is.na(.$test.statistic)) %>% 
       dplyr::select(keep) %>% 
-      dplyr::rename_all(funs(c("parameter", "statistic", "df", "p.value")))
+      dplyr::rename_all(funs(c("term", "statistic", "df", "p.value")))
   }
 }

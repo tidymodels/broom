@@ -56,23 +56,16 @@
 tidy.ergm <- function(x, conf.int = FALSE, conf.level = 0.95,
                       exponentiate = FALSE,  ...) {
   
-  # in ergm 3.9 summary(x, ...)$coef (no final 's') has columns:
-  #   Estimate, Std. Error, MCMC %, Pr(>|Z|)
-  
-  # in ergm 3.10 summary(x, ...)$coefs (extra 's' from v3.9) has columns:
-  #   Estimate, Std. Error, MCMC %, z value, Pr(>|Z|)
-  
-  coefs <- if_else(packageVersion("ergm") >= "3.10", "coefs", "coef")
-  
-  ret <- summary(x, ...)[[ coefs ]] %>% 
+  ret <- summary(x, ...)$coefs %>% 
+    tibble::rownames_to_column() %>% 
     rename2(
+      term = "rowname",
       estimate = "Estimate", 
       std.error = "Std. Error",
       mcmc.error = "MCMC %",
       statistic = "z value",
       p.value = "Pr(>|z|)"
-    ) %>% 
-    add_column(term = names(x[[ coefs ]]), .before = 1)
+    )
   
   if (conf.int) {
     z <- stats::qnorm(1 - (1 - conf.level) / 2)
@@ -151,7 +144,7 @@ glance.ergm <- function(x, deviance = FALSE, mcmc = FALSE, ...) {
     ret$df.null <- dyads
 
     ret$residual.deviance <- -2 * ret$logLik
-    ret$df.residual <- dyads - length(x[[ coefs ]])
+    ret$df.residual <- dyads - length(x$coefs)
   }
   
   ret$AIC <- stats::AIC(x)

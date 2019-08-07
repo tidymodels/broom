@@ -21,10 +21,7 @@ test_that("plm tidier arguments", {
 
 test_that("tidy.plm", {
   td <- tidy(fit, conf.int = TRUE)
-  tdq <- tidy(fit, conf.int = TRUE, quick = TRUE)
-  
   check_tidy_output(td)
-  check_tidy_output(tdq)
   check_dims(td, 4, 7)
 })
 
