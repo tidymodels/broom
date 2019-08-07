@@ -1,7 +1,7 @@
 Type: Package
 Package: broom
 Title: Convert Statistical Objects into Tidy Tibbles
-Version: 0.5.2.9001
+Version: 0.5.2.9002
 Authors@R: 
     c(person(given = "David",
              family = "Robinson",
@@ -145,8 +145,8 @@ Authors@R:
              family = "Kennedy",
              role = "ctb",
              email = "pkqstr@protonmail.com"),
-      person(given = "Lily", 
-             family = "Medina", 
+      person(given = "Lily",
+             family = "Medina",
              role = "ctb",
              email = "lilymiru@gmail.com"),
       person(given = "Brian",
@@ -234,7 +234,7 @@ Authors@R:
       person(given = "Eduard",
              family = "Szoecs",
              role = "ctb",
-             email = "eduardszoecs@gmail.com"), 
+             email = "eduardszoecs@gmail.com"),
       person(given = "Nick",
              family = "Williams",
              role = "ctb",
@@ -290,6 +290,7 @@ Suggests:
     drc,
     e1071,
     emmeans,
+    epiR,
     ergm,
     gam (>= 1.15),
     gamlss,
@@ -308,9 +309,7 @@ Suggests:
     Lahman,
     lavaan,
     leaps,
-    leaps,
     lfe,
-    lm.beta,
     lm.beta,
     lmodel2,
     lmtest,
@@ -348,18 +347,15 @@ Suggests:
     testthat,
     tseries,
     xergm,
-    zoo,
-    epiR
-VignetteBuilder: 
-    knitr
-Remotes: 
+    zoo
+Remotes:
     alexpghayes/modeltests
 Encoding: UTF-8
 Language: en-US
 LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 6.1.1
-Collate: 
+Collate:
     'aaa-documentation-helper.R'
     'aer-tidiers.R'
     'auc-tidiers.R'
@@ -428,8 +424,11 @@ Collate:
     'rma-tidiers.R'
     'robust-glmrob-tidiers.R'
     'robust-lmrob-tidiers.R'
+    'robustbase-glmrob-tidiers.R'
+    'robustbase-lmrob-tidiers.R'
     'sp-tidiers.R'
-    'speedglm-tidiers.R'
+    'speedglm-speedglm-tidiers.R'
+    'speedglm-speedlm-tidiers.R'
     'stats-anova-tidiers.R'
     'stats-arima-tidiers.R'
     'stats-decompose-tidiers.R'

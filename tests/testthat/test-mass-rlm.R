@@ -16,10 +16,8 @@ test_that("MASS::rlm tidier arguments", {
 
 test_that("tidy.rlm", {
   
-  td <- tidy(fit, quick = TRUE)
   td2 <- tidy(fit, conf.int = TRUE)
   
-  check_tidy_output(td)
   check_tidy_output(td2)
   
   # regression test for #380

@@ -46,7 +46,6 @@ geefit <- geeglm(Income ~ Frost + Murder, id = state.region,
                  corstr = "exchangeable")
 
 tidy(geefit)
-tidy(geefit, quick = TRUE)
 tidy(geefit, conf.int = TRUE)
 
 }
@@ -56,6 +55,8 @@ tidy(geefit, conf.int = TRUE)
 \concept{geepack tidiers}
 \value{
 A \code{\link[tibble:tibble]{tibble::tibble()}} with exactly one row and columns:
+  \item{alpha}{Estimated correlation parameter for geepack::geeglm.}
   \item{df.residual}{Residual degrees of freedom.}
+  \item{gamma}{Estimated scale parameter for geepack::geeglm.}
 
 }

@@ -2,7 +2,6 @@
 #' @template title_desc_tidy
 #'
 #' @param x A `gamlss` object returned from [gamlss::gamlss()].
-#' @template param_quick
 #' @template param_unused_dots
 #' 
 #' @evalRd return_tidy(
@@ -30,11 +29,7 @@
 #' tidy(g)
 #'
 #' @export
-tidy.gamlss <- function(x, quick = FALSE, ...) {
-  if (quick) {
-    co <- stats::coef(x)
-    return(tibble(term = names(co), estimate = unname(co)))
-  }
+tidy.gamlss <- function(x, ...) {
 
   # use capture.output to prevent summary from being printed to screen
   utils::capture.output(s <- summary(x, type = "qr"))

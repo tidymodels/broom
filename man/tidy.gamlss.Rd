@@ -4,14 +4,10 @@
 \alias{tidy.gamlss}
 \title{Tidy a(n) gamlss object}
 \usage{
-\method{tidy}{gamlss}(x, quick = FALSE, ...)
+\method{tidy}{gamlss}(x, ...)
 }
 \arguments{
 \item{x}{A \code{gamlss} object returned from \code{\link[gamlss:gamlss]{gamlss::gamlss()}}.}
-
-\item{quick}{Logical indicating if the only the \code{term} and \code{estimate}
-columns should be returned. Often useful to avoid time consuming
-covariance and standard error calculations. Defaults to \code{FALSE}.}
 
 \item{...}{Additional arguments. Not used. Needed to match generic
 signature only. \strong{Cautionary note:} Misspelled arguments will be

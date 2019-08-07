@@ -4,7 +4,6 @@
 #' @param x An `mlm` object created by [stats::lm()] with a matrix as the
 #'   response.
 #' @template param_confint
-#' @template param_quick
 #' @template param_unused_dots
 #'
 #' @evalRd return_tidy(regression = TRUE)

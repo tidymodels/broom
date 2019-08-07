@@ -21,17 +21,14 @@ test_that("tidy.lavaan", {
   td2 <- tidy(fit2, conf.int = TRUE)
   tdc <- tidy(fit2, conf.int = TRUE, conf.level = .999)
   tdr <- tidy(fit2, rsquare = TRUE)
-  tdq <- tidy(fit2, quick = TRUE)
   
   check_tidy_output(td)
   check_tidy_output(td2)
   check_tidy_output(tdc)
   check_tidy_output(tdr)
-  check_tidy_output(tdq)
   
   check_dims(td, 3, 11)
   check_dims(td2, 19, 11)
-  check_dims(tdq, 19, 2)
   
   expect_equal(td$term, c("mpg ~ wt", "mpg ~~ mpg", "wt ~~ wt"))
   

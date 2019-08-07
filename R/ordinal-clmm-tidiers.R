@@ -4,9 +4,6 @@
 #' @param x A `clmm` object returned from [ordinal::clmm()].
 #' @template param_confint
 #' @template param_exponentiate
-#' @param conf.type Whether to use `"profile"` or `"Wald"` confidendence
-#'   intervals, passed to the `type` argument of [ordinal::confint.clmm()].
-#'   Defaults to `"profile"`.
 #' @template param_unused_dots
 #'   
 #' @examples
@@ -17,7 +14,7 @@
 #' 
 #' tidy(fit)
 #' tidy(fit, conf.int = TRUE, conf.level = 0.9)
-#' tidy(fit, conf.int = TRUE, conf.type = "Wald", exponentiate = TRUE)
+#' tidy(fit, conf.int = TRUE, exponentiate = TRUE)
 #' 
 #' glance(fit)
 #' 
@@ -36,9 +33,30 @@
 #'   parameters.
 #' 
 #' @export
-#' @seealso [tidy], [ordinal::clmm()], [ordinal::confint.clmm()]
+#' @seealso [tidy], [ordinal::clmm()], [ordinal::confint.clm()]
 #' @family ordinal tidiers
-tidy.clmm <- tidy.clm
+tidy.clmm <- function(x, conf.int = FALSE, conf.level = 0.95,
+                     exponentiate = FALSE, ...) {
+  
+  # NOTE: pretty much the same as tidy.clm() except there is no
+  # `type` argument to confint.clmm()
+
+  ret <- as_tibble(coef(summary(x)), rownames = "term")
+  colnames(ret) <- c("term", "estimate", "std.error", "statistic", "p.value")
+  
+  if (conf.int) {
+    ci <- broom_confint_terms(x, level = conf.level)
+    ret <- dplyr::left_join(ret, ci, by = "term")
+  }
+  
+  if (exponentiate)
+    ret <- exponentiate(ret)
+  
+  types <- c("alpha", "beta", "zeta")
+  new_types <- c("intercept", "location", "scale")
+  ret$coef.type <- rep(new_types, vapply(x[types], length, numeric(1)))
+  as_tibble(ret)
+}
 
 #' @templateVar class clmm
 #' @template title_desc_glance
