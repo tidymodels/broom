@@ -285,7 +285,7 @@ Suggests:
     drc,
     e1071,
     emmeans,
-    epiR
+    epiR,
     ergm,
     gam (>= 1.15),
     gamlss,
