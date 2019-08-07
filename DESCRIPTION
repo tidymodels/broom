@@ -285,6 +285,7 @@ Suggests:
     drc,
     e1071,
     emmeans,
+    epiR
     ergm,
     gam (>= 1.15),
     gamlss,
@@ -303,9 +304,7 @@ Suggests:
     Lahman,
     lavaan,
     leaps,
-    leaps,
     lfe,
-    lm.beta,
     lm.beta,
     lmodel2,
     lmtest,
@@ -318,7 +317,6 @@ Suggests:
     mediation,
     metafor,
     mgcv,
-    modeltests,
     modeltests,
     muhaz,
     multcomp,
@@ -344,8 +342,7 @@ Suggests:
     testthat,
     tseries,
     xergm,
-    zoo,
-    epiR
+    zoo
 VignetteBuilder: 
     knitr
 Remotes: 
