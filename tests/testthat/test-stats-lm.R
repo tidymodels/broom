@@ -21,18 +21,17 @@ rd_data <- data.frame(y = rnorm(10), x = letters[seq_len(10)])
 fit_rd <- lm(y ~ x - 1, data = rd_data)
 
 test_that("tidy.lm works", {
-  
   td <- tidy(fit)
   td2 <- tidy(fit2)
   
   # conf.int = TRUE works for rank deficient fits
   # should get a "NaNs produced" warning
   expect_warning(td_rd <- tidy(fit_rd, conf.int = TRUE))
-  
+
   check_tidy_output(td)
   check_tidy_output(td2)
   check_tidy_output(td_rd)
-  
+
   check_dims(td, expected_rows = 2)
   check_dims(td2, expected_rows = 3)
   
@@ -42,7 +41,7 @@ test_that("tidy.lm works", {
   expect_warning(
     tidy(fit2, exponentiate = TRUE),
     regexp = paste(
-      "Exponentiating coefficients, but model did not use a log or logit", 
+      "Exponentiating coefficients, but model did not use a log or logit",
       "link function"
     )
   )
@@ -50,7 +49,7 @@ test_that("tidy.lm works", {
   # shouldn't error. regression test for issues 166, 241
   # rows for confidence intervals of undefined terms should be dropped
   expect_error(tidy(fit_na_row, conf.int = TRUE), NA)
-  
+
   # should drop the NA row
   td_ci <- confint_tidy(fit_na_row)
   expect_false(anyNA(td_ci))
@@ -59,7 +58,7 @@ test_that("tidy.lm works", {
 test_that("glance.lm", {
   gl <- glance(fit)
   gl2 <- glance(fit2)
-  
+
   check_glance_outputs(gl, gl2)
 })
 
@@ -70,14 +69,14 @@ test_that("augment.lm", {
     data = mtcars,
     newdata = mtcars
   )
-  
+
   check_augment_function(
     aug = augment.lm,
     model = fit2,
     data = mtcars,
     newdata = mtcars
   )
-  
+
   expect_warning(
     check_augment_function(
       aug = augment.lm,
@@ -87,8 +86,7 @@ test_that("augment.lm", {
     ),
     "prediction from a rank-deficient fit may be misleading"
   )
-  
-  
+
   check_augment_function(
     aug = augment.lm,
     model = fit_rd,
@@ -96,81 +94,3 @@ test_that("augment.lm", {
     newdata = rd_data
   )
 })
-
-test_that("augment and glance do not support multiple responses", {
-  mfit <- lm(cbind(mpg, am) ~ wt + disp, mtcars)
-  
-  expect_error(
-    augment(mfit),
-    regexp = "No augment method for objects of class mlm"
-  )
-  
-  expect_error(
-    glance(mfit),
-    regexp = "Glance does not support linear models with multiple responses."
-  )
-})
-
-#' helper function: replicate each element of x
-#' times times.
-rep_each <- function(x,times) {
-  retv <- outer(rep(1,times),x,function(x,y) y)
-  dim(retv) <- c(prod(dim(retv)),1)
-  retv <- switch(class(x),
-                 character=as.character(retv),
-                 numeric=as.numeric(retv),
-                 integer=as.integer(retv),
-                 retv)
-  retv
-}
-
-
-context("stats-mlm")
-
-# create data
-nob <- 100
-set.seed(1234)
-datf <- data.frame(x1 = rnorm(nob),x2 = runif(nob),z1 = rnorm(nob),z2 = rnorm(nob)) %>%
-  dplyr::mutate(y1 = 0.5*x1 + x2 + z1 - z2,y2 = -2*x1 + 0.25*x2 + 3*z1 + z2)
-
-# fit two mlm objects
-fit <- lm(cbind(y1,y2) ~ x1, data = datf)
-fit2 <- lm(cbind(y1,y2) ~ x1 + x2, data = datf)
-
-test_that("tidy.mlm works", {
-  td <- tidy(fit)
-  td2 <- tidy(fit2)
-  # hit the confidence interval code
-  tdc <- tidy(fit,conf.int=TRUE)
-  tdc2 <- tidy(fit2,conf.int=TRUE)
-  
-  check_tidy_output(td)
-  check_tidy_output(td2)
-  check_tidy_output(tdc)
-  check_tidy_output(tdc2)
-  
-  check_dims(td, expected_rows = 4)
-  check_dims(td2, expected_rows = 6)
-  check_dims(tdc, expected_rows = 4)
-  check_dims(tdc2, expected_rows = 6)
-  
-  check_dims(td, expected_cols = 6)
-  check_dims(td2, expected_cols = 6)
-  check_dims(tdc, expected_cols = 8)
-  check_dims(tdc2, expected_cols = 8)
-  
-  expect_equal(td$term, rep(c("(Intercept)", "x1"),2))
-  expect_equal(td2$term, rep(c("(Intercept)", "x1","x2"),2))
-  expect_equal(td$response, rep_each(c("y1", "y2"), 2))
-  expect_equal(td2$response, rep_each(c("y1", "y2"), 3))
-  
-  expect_warning(
-    tidy(fit2, exponentiate = TRUE),
-    regexp = paste(
-      "Exponentiating coefficients, but model did not use a log or logit",
-      "link function"
-    )
-  )
-})
-
-

@@ -86,7 +86,8 @@ tidy(fit, conf.int = TRUE, conf.level = 0.9)
 tidy(fit, conf.int = TRUE, conf.type = "Wald", exponentiate = TRUE)
 
 glance(fit)
-augment(fit)
+augment(fit, type.predict = "prob")
+augment(fit, type.predict = "class")
 
 fit2 <- clm(rating ~ temp, nominal = ~ contact, data = wine)
 tidy(fit2)
