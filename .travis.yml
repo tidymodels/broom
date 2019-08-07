@@ -10,10 +10,8 @@ warnings_are_errors: false
 # https://travis-ci.org/tidymodels/broom/builds/568934841#L8845 pull from
 # https://github.com/travis-ci/travis-ci/issues/6987#issuecomment-266754776
 
-
-
-before_install:
-  - export DISPLAY=:99.0
+services:
+  - xvfb
 
 before_cache: Rscript -e 'remotes::install_cran("pkgdown")'
 
@@ -29,7 +27,6 @@ matrix:
   - r: oldrel
   - r: 3.3
   - r: 3.2
-  - r: 3.1
 
 env:
   global:
