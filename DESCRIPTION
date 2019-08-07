@@ -238,7 +238,10 @@ Authors@R:
       person(given = "Nick",
              family = "Williams",
              role = "ctb",
-             email = "ntwilliams.personal@gmail.com"))
+             email = "ntwilliams.personal@gmail.com"),
+      person(given = "Karl",
+             family = "Hufthammer",
+             role = "ctb"))
 Description: Summarizes key information about statistical
     objects in tidy tibbles. This makes it easy to report results, create
     plots and consistently work with large numbers of models at once.
