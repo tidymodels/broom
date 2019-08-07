@@ -29,11 +29,15 @@
 #'
 #' library(ggplot2)
 #' ggplot(tidy(sfit), aes(time, estimate)) + geom_line() +
-#'     geom_ribbon(aes(ymin=conf.low, ymax=conf.high), alpha=.25)
+#'     geom_ribbon(aes(ymin = conf.low, ymax = conf.high), alpha = 0.25)
 #'
 #' # multi-state
-#' fitCI <- survfit(Surv(stop, status * as.numeric(event), type = "mstate") ~ 1,
-#'               data = mgus1, subset = (start == 0))
+#' fitCI <- survfit(
+#'   Surv(stop, status * as.numeric(event), type = "mstate") ~ 1,
+#'   data = mgus1,
+#'   subset = (start == 0)
+#' )
+#' 
 #' td_multi <- tidy(fitCI)
 #' td_multi
 #' 
@@ -65,7 +69,6 @@ tidy.survfit <- function(x, ...) {
     ret$conf.low <- c(x$lower)
     ret$conf.high <- c(x$upper)
   }
-  
   
   # strata are automatically recycled if there are multiple states
   if (!is.null(x$strata)) {
