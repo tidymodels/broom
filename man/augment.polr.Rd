@@ -24,7 +24,7 @@ that nothing has been passed to \code{newdata}. If \code{newdata} is specified,
 the \code{data} argument will be ignored.}
 
 \item{type.predict}{Which type of prediction to compute,
-passed to \code{\link[MASS:predict.polr]{MASS::predict.polr()}}. Only supports \code{"class"} at
+passed to \code{MASS:::predict.polr()}. Only supports \code{"class"} at
 the moment.}
 
 \item{...}{Additional arguments. Not used. Needed to match generic
@@ -89,7 +89,7 @@ augment(fit, type.predict = "class")
 
 }
 \seealso{
-\link{tidy}, \code{\link[MASS:polr]{MASS::polr()}}, \code{\link[stats:predict.polr]{stats::predict.polr()}}
+\code{\link[=tidy]{tidy()}}, \code{\link[MASS:polr]{MASS::polr()}}
 
 Other ordinal tidiers: \code{\link{augment.clm}},
   \code{\link{glance.clmm}}, \code{\link{glance.clm}},

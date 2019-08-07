@@ -3,7 +3,6 @@
 #'
 #' @param x A `felm` object returned from [lfe::felm()].
 #' @template param_confint
-#' @template param_quick
 #' @param fe Logical indicating whether or not to include estimates of
 #'   fixed effects. Defaults to `FALSE`.
 #' @template param_unused_dots
@@ -45,36 +44,23 @@
 #' @aliases felm_tidiers lfe_tidiers
 #' @family felm tidiers
 #' @seealso [tidy()], [lfe::felm()]
-tidy.felm <- function(x, conf.int = FALSE, conf.level = .95, fe = FALSE, quick = FALSE, ...) {
+tidy.felm <- function(x, conf.int = FALSE, conf.level = .95, fe = FALSE, ...) {
 
   has_multi_response <- length(x$lhs) > 1
   
-  if(quick) {
-    co <- stats::coef(x)
-    if(has_multi_response) {
-      ret <- co <- stats::coef(x) %>%  
-        as_tibble(rownames = "term") %>% 
-        tidyr::gather(response, estimate, -term) %>% 
-        select(response, term, estimate) 
-    } else {
-      ret <- data_frame(term = names(co), estimate = unname(co))  
-    }
+  nn <- c("estimate", "std.error", "statistic", "p.value")
+  if(has_multi_response) {
+    ret <-  map_df(x$lhs, function(y) stats::coef(summary(x, lhs = y)) %>% 
+                     fix_data_frame(nn) %>% 
+                     mutate(response = y)) %>% 
+      select(response, everything())
     
   } else {
-    nn <- c("estimate", "std.error", "statistic", "p.value")
-    if(has_multi_response) {
-      ret <-  map_df(x$lhs, function(y) stats::coef(summary(x, lhs = y)) %>% 
-               fix_data_frame(nn) %>% 
-               mutate(response = y)) %>% 
-        select(response, everything())
-      
-    } else {
-      ret <- fix_data_frame(stats::coef(summary(x)), nn)  
-    }
+    ret <- fix_data_frame(stats::coef(summary(x)), nn)  
   }
   
 
-  if (!quick & conf.int) {
+  if (conf.int) {
     # avoid "Waiting for profiling to be done..." message
     CI <- suppressMessages(stats::confint(x, level = conf.level))
     colnames(CI) <- c("conf.low", "conf.high")
@@ -83,40 +69,28 @@ tidy.felm <- function(x, conf.int = FALSE, conf.level = .95, fe = FALSE, quick =
 
   if (fe) {
     ret <- mutate(ret, N = NA, comp = NA)
-    if(quick) {
-      ret_fe_prep <- lfe::getfe(x) %>% 
-        tibble::rownames_to_column(var = "term") 
-      if(has_multi_response) ret_fe_prep <-  ret_fe_prep %>% 
-          tidyr::gather(response, effect, starts_with("effect.")) %>% 
-          mutate(response = stringr::str_remove(response, "effect."))
-      
-      ret_fe <-  ret_fe_prep%>%
-        select(contains("response"), term, effect, obs, comp) %>%
-        rename(N = obs,
-               estimate = effect)
-    } else {
-      nn <- c("estimate", "std.error", "N", "comp")
-      ret_fe_prep <- lfe::getfe(x, se = TRUE, bN = 100) %>% 
-        tibble::rownames_to_column(var = "term") %>% 
-        select(term, contains("effect"),  contains("se"), obs, comp) %>% # effect and se are multiple if multiple y
-        rename(N=obs) 
-      
-      if(has_multi_response) {
-        ret_fe_prep <-  ret_fe_prep  %>% 
-          tidyr::gather(key = "stat_resp", value, starts_with("effect."), starts_with("se.")) %>% 
-          tidyr::separate(col = "stat_resp", c("stat", "response"), sep="\\.") %>% 
-          tidyr::spread(key = "stat", value) 
-        # nn <-  c("response", nn)
-      }
-      ret_fe <-  ret_fe_prep %>%
-        rename(estimate = effect, std.error = se) %>% 
-        select(contains("response"), everything()) %>%
-        # fix_data_frame(nn) %>%
-        mutate(statistic = estimate / std.error) %>%
-        mutate(p.value = 2 * (1 - stats::pt(statistic, df = N)))  
-    }
     
-    if (!quick & conf.int) {
+    nn <- c("estimate", "std.error", "N", "comp")
+    ret_fe_prep <- lfe::getfe(x, se = TRUE, bN = 100) %>% 
+      tibble::rownames_to_column(var = "term") %>% 
+      select(term, contains("effect"),  contains("se"), obs, comp) %>% # effect and se are multiple if multiple y
+      rename(N=obs) 
+    
+    if(has_multi_response) {
+      ret_fe_prep <-  ret_fe_prep  %>% 
+        tidyr::gather(key = "stat_resp", value, starts_with("effect."), starts_with("se.")) %>% 
+        tidyr::separate(col = "stat_resp", c("stat", "response"), sep="\\.") %>% 
+        tidyr::spread(key = "stat", value) 
+      # nn <-  c("response", nn)
+    }
+    ret_fe <-  ret_fe_prep %>%
+      rename(estimate = effect, std.error = se) %>% 
+      select(contains("response"), everything()) %>%
+      # fix_data_frame(nn) %>%
+      mutate(statistic = estimate / std.error) %>%
+      mutate(p.value = 2 * (1 - stats::pt(statistic, df = N)))  
+    
+    if (conf.int) {
       
       crit_val_low <- stats::qnorm(1 - (1 - conf.level) / 2)
       crit_val_high <- stats::qnorm(1 - (1 - conf.level) / 2)
@@ -146,7 +120,7 @@ tidy.felm <- function(x, conf.int = FALSE, conf.level = .95, fe = FALSE, quick =
 augment.felm <- function(x, data = model.frame(x), ...) {
   has_multi_response <- length(x$lhs) > 1
   
-  if(has_multi_response) {
+  if (has_multi_response) {
     stop(
       "Augment does not support linear models with multiple responses.",
       call. = FALSE

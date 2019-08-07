@@ -35,16 +35,20 @@ Sometimes a goodness of fit measure will be undefined. In these cases
 the measure will be reported as \code{NA}.
 }
 \examples{
+
 library(drc)
+
 mod <- drm(dead/total~conc, type, 
    weights = total, data = selenium, fct = LL.2(), type = "binomial")
-mod
 
 tidy(mod)
 tidy(mod, conf.int = TRUE)
-tidy(mod, quick = TRUE)
+
 glance(mod)
-# augment(mod)
+
+augment(mod, selenium)
+
+
 }
 \seealso{
 \code{\link[=glance]{glance()}}, \code{\link[drc:drm]{drc::drm()}}

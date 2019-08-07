@@ -42,7 +42,7 @@ fit <- clmm(rating ~ temp + contact + (1|judge), data = wine)
 
 tidy(fit)
 tidy(fit, conf.int = TRUE, conf.level = 0.9)
-tidy(fit, conf.int = TRUE, conf.type = "Wald", exponentiate = TRUE)
+tidy(fit, conf.int = TRUE, exponentiate = TRUE)
 
 glance(fit)
 

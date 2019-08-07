@@ -3,7 +3,6 @@
 #' 
 #' @param x An `lm.beta` object created by [lm.beta::lm.beta].
 #' @template param_confint 
-#' @template param_quick
 #' @template param_exponentiate
 #' @template param_unused_dots
 #' 
@@ -42,13 +41,7 @@
 #' @export
 #' @family lm tidiers
 tidy.lm.beta <- function (x, conf.int = FALSE, conf.level = 0.95,
-                          exponentiate = FALSE, quick = FALSE, ...) {
-  if (quick) {
-    co <- stats::coef(x)
-    ret <- data.frame(term = names(co), estimate = unname(co), 
-                      stringsAsFactors = FALSE)
-    return(process_lm(ret, x, conf.int = FALSE, exponentiate = exponentiate))
-  }
+                          exponentiate = FALSE, ...) {
   s <- summary(x)
   ret <- tidy.summary.lm.beta(s)
   process_lm(ret, x, conf.int = conf.int, conf.level = conf.level, 

@@ -1,4 +1,4 @@
-# broom 0.5.2.9000
+# broom 0.5.2.9001
 (To be released as 0.7.0)
 
 ## Breaking changes
@@ -14,6 +14,8 @@ changes in this version of `broom`. We list them below-
   - Augment method for `factanal` objects now returns a tibble with name
     pattern `.fs` (e.g., `.fs1`, `.fs2`, `.fs3`, etc.), instead of `factor`
     (e.g., `factor1`, `factor2`, `factor3`, etc.) (#650).
+    
+  - We have removed all support for the `quick` argument in `tidy()` methods. TODO: explain why, and discuss alternatives.
     
 ## Changes to `augment()`
 

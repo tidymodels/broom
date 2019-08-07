@@ -46,7 +46,6 @@ geefit <- geeglm(Income ~ Frost + Murder, id = state.region,
                  corstr = "exchangeable")
 
 tidy(geefit)
-tidy(geefit, quick = TRUE)
 tidy(geefit, conf.int = TRUE)
 
 }

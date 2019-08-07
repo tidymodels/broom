@@ -88,7 +88,7 @@ tidy.rma <- function(x, conf.int = FALSE, conf.level = 0.95, exponentiate = FALS
     
     names(estimates) <- c("study", "type", "estimate", "std.error", "statistic",
                           "p.value", "conf.low", "conf.high")
-    estimates <- tibble::as_tibble(estimates)
+    estimates <- as_tibble(estimates)
     results <- dplyr::bind_rows(estimates, results) 
   }
   
