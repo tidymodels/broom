@@ -15,6 +15,7 @@
 #'   
 #' @examples
 #' 
+#' \dontrun{
 #' library(xergm)
 #' 
 #' set.seed(1)
@@ -44,6 +45,7 @@
 #'
 #' # Show coefficients as odds ratios with a 99% CI
 #' tidy(btfit, exponentiate = TRUE, conf.level = 0.99)
+#' }
 #'
 #' @export
 #' @aliases btergm_tidiers

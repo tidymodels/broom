@@ -69,13 +69,10 @@ tidy.lmrob <- function(x, conf.int = FALSE, conf.level = 0.95, ...) {
 #' @family robustbase tidiers
 #' @seealso [robustbase::lmrob()]
 augment.lmrob <- function(x, data = model.frame(x), newdata = NULL, se_fit = FALSE, ...) {
-  # augment_newdata(x, data, newdata, .se_fit = se_fit, ...)
   augment_newdata(
     x, data, newdata,
-    type.residuals = type.residuals,
     .se_fit = se_fit
   )
-  
 }
 
 #' @templateVar class lmrob

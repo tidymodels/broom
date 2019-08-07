@@ -42,6 +42,7 @@ It simply returns the coefficients and their confidence intervals.
 }
 \examples{
 
+\dontrun{
 library(xergm)
 
 set.seed(1)
@@ -71,6 +72,7 @@ tidy(btfit)
 
 # Show coefficients as odds ratios with a 99\% CI
 tidy(btfit, exponentiate = TRUE, conf.level = 0.99)
+}
 
 }
 \seealso{
