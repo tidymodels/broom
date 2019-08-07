@@ -32,6 +32,10 @@ tidy.speedglm <- function(x, conf.int = FALSE, conf.level = 0.95,
   ret <- as_tibble(coef(summary(x)), rownames = "term")
   colnames(ret) <- c("term", "estimate", "std.error", "statistic", "p.value")
   
+  # for some reason the p.value column is a factor, so
+  # undo that nonsense
+  ret$p.value <- as.numeric(levels(ret$p.value))
+  
   if (conf.int) {
     ci <- broom_confint_terms(x, level = conf.level)
     ret <- dplyr::left_join(ret, ci, by = "term")
