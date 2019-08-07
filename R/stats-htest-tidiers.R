@@ -68,7 +68,10 @@ tidy.htest <- function(x, ...) {
         paste(make.names(names(x$parameter)), collapse = ", ")
       )
       # rename num df to num.df and denom df to denom.df
-      names(x$parameter) <- make.names(names(x$parameter))
+      np <- names(x$parameter)
+      np <- stringr::str_replace(np, "num df", "num.df")
+      np <- stringr::str_replace(np, "denom df", "den.df")
+      names(x$parameter) <- np
       ret <- append(ret, x$parameter, after = 1)
     }
   }

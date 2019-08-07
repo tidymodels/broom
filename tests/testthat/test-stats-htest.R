@@ -14,15 +14,15 @@ test_that("tidy.htest same as glance.htest", {
 })
 
 test_that("tidy.htest/oneway.test", {
-  ot <- oneway.test(extra ~ group, data = sleep)
+  
+  mtcars$cyl <- as.factor(mtcars$cyl)
+  ot <- oneway.test(mpg ~ cyl, mtcars)
   expect_message(td <- tidy(ot))
   gl <- glance(ot)
   
-  check_tidy_output(td, strict = FALSE)
-  expect_false("num df" %in% colnames(td))
-  expect_false("denom df" %in% colnames(td))
+  check_tidy_output(td)
   check_dims(td, expected_cols = 5)
-  check_glance_outputs(gl, strict = FALSE)
+  check_glance_outputs(gl)
 })
 
 test_that("tidy.htest/cor.test", {
@@ -32,7 +32,6 @@ test_that("tidy.htest/cor.test", {
   
   check_tidy_output(td)
   check_glance_outputs(gl, strict = FALSE)
-  
   
   sco <- suppressWarnings(cor.test(mtcars$mpg, mtcars$wt, method = "spearman"))
   td2 <- tidy(sco)
@@ -51,20 +50,10 @@ test_that("tidy.htest/t.test", {
   check_glance_outputs(gl, strict = FALSE)
 })
 
-test_that("tidy.htest/t.test (equal variance)", {
-  tt <- t.test(mpg ~ am, mtcars, var.equal = TRUE)
-  td <- tidy(tt)
-  gl <- glance(tt)
-  
-  check_tidy_output(td)
-  check_glance_outputs(gl, strict = FALSE)
-})
-
 test_that("tidy.htest/wilcox.test", {
   wt <- suppressWarnings(wilcox.test(mpg ~ am, mtcars))
   td <- tidy(wt)
   gl <- glance(wt)
-  
   
   check_tidy_output(td)
   check_glance_outputs(gl)
@@ -92,7 +81,8 @@ test_that("tidy.power.htest", {
 
 
 test_that("augment.htest (chi squared test)", {
-  # strict = FALSE because don't want to require `data` argument
+  
+  # doesn't have a data argument
   check_arguments(augment.htest, strict = FALSE)
   
   df <- as.data.frame(Titanic)

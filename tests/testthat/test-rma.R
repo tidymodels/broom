@@ -166,7 +166,10 @@ test_that(("tidy.rma"), {
 })
 
 test_that(("glance.rma"), {
-  check_glance_outputs(glance(res.RE))
+  # save this one for other test
+  re.glance <- glance(res.RE)
+  
+  check_glance_outputs(re.glance)
   check_glance_outputs(glance(res.ME))
   check_glance_outputs(glance(res.FE))
   check_glance_outputs(glance(res.WFE))
@@ -174,6 +177,10 @@ test_that(("glance.rma"), {
   check_glance_outputs(glance(res.GLMM))
   check_glance_outputs(glance(res.peto))
   check_glance_outputs(glance(res.MH))
+  
+  # check that fit statistics are not being dropped
+  fit.stats <- c("logLik", "deviance", "AIC", "BIC", "AICc")
+  expect_true(all(fit.stats %in% names(re.glance)))
 })
 
 test_that(("augment.rma"), {

@@ -88,7 +88,7 @@ tidy.rma <- function(x, conf.int = FALSE, conf.level = 0.95, exponentiate = FALS
     
     names(estimates) <- c("study", "type", "estimate", "std.error", "statistic",
                           "p.value", "conf.low", "conf.high")
-    estimates <- tibble::as_tibble(estimates)
+    estimates <- as_tibble(estimates)
     results <- dplyr::bind_rows(estimates, results) 
   }
   
@@ -151,11 +151,9 @@ glance.rma <- function(x, ...) {
     stringr::str_replace(names(fit_stats), "\\:", "")
   
   # metafor returns different fit statistics for different models
-  # so use a list + `purrr::discard` to remove unrelated statistics
-  list(
-    nobs = x$k,
-    measure = x$measure,
-    method = x$method,
+  # so use a list + `purrr::discard` to remove unrelated / missing statistics
+  
+  results <- list(
     i.squared = x$I2,
     h.squared = x$H2,
     tau.squared = x$tau2,
@@ -163,16 +161,20 @@ glance.rma <- function(x, ...) {
     cochran.qe = x$QE,
     p.value.cochran.qe = x$QEp,
     cochran.qm = x$QM,
-    p.value.cochran.qm = x$QMp,
-    fit_stats
+    p.value.cochran.qm = x$QMp
   ) %>%
-    # get rid of null values
     purrr::discard(is.null) %>%
-    # don't include multivariate model stats
+    # drop multivariate statistics
     purrr::discard(~length(.x) >= 2) %>%
-    # change to tibble with correct column and row names
-    as.data.frame() %>%
-    tibble::as_tibble()
+    as_tibble()
+  
+  if (!purrr::is_empty(fit_stats) && nrow(fit_stats) == 1) {
+    results <- dplyr::bind_cols(results, fit_stats)
+  }
+  
+  results$nobs <- x$k
+  
+  results
 }
 
 #' @templateVar class rma
@@ -192,6 +194,7 @@ glance.rma <- function(x, ...) {
 #'   ".moderator",
 #'   ".moderator.level"
 #' )
+#' 
 #' @export
 #'
 #' @examples
@@ -212,7 +215,6 @@ glance.rma <- function(x, ...) {
 #'
 #' augment(meta_analysis)
 #'
-#' @rdname metafor_augmenters
 augment.rma <- function(x, ...) {
   # metafor generally handles these for different models through the monolith
   # `rma` class; using `purrr::possibly` primarily helps discard unused

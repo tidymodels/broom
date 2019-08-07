@@ -36,13 +36,10 @@ test_that("tidy.btergm", {
   
   td <- tidy(fit)
   tde <- tidy(fit, exponentiate = TRUE)
-  tdq <- tidy(fit, quick = TRUE)
   
   check_tidy_output(td)
   check_tidy_output(tde)
-  check_tidy_output(tdq)
   
   check_dims(td, 3, 4)
   check_dims(tde, 3, 4)
-  check_dims(tdq, 3, 2)
 })
