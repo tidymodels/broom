@@ -100,6 +100,7 @@ TODO: sort out what happens to `glance.aov()`
 - Add feature for glance.biglm to return df.residual
 
 - Patch bug in glance.lavaan (#577)
+- Added tidiers for `lmrob` and `glmrob` objects from the `robustbase` package (#205, #505).
 
 - Added method `tidy.systemfit()` to tidy `systemfit` class models (by @jaspercooper)
 
@@ -146,6 +147,7 @@ TODO: sort out what happens to `glance.aov()`
 - Bug fix for `tidy.mlm()` when passed `quick = TRUE` (#539 by @MatthieuStigler)
 - Bug fix for `tidy.polr()` when passed `conf.int = TRUE` (#498)
 - Bug fix in `glance.lavaan()` (#577)
+- Added tidiers for `lmrob` and `glmrob` objects from the `robustbase` package (#205, #505).
 
 ## Deprecations
 

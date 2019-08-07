@@ -145,8 +145,8 @@ Authors@R:
              family = "Kennedy",
              role = "ctb",
              email = "pkqstr@protonmail.com"),
-      person(given = "Lily", 
-             family = "Medina", 
+      person(given = "Lily",
+             family = "Medina",
              role = "ctb",
              email = "lilymiru@gmail.com"),
       person(given = "Brian",
@@ -234,7 +234,7 @@ Authors@R:
       person(given = "Eduard",
              family = "Szoecs",
              role = "ctb",
-             email = "eduardszoecs@gmail.com"), 
+             email = "eduardszoecs@gmail.com"),
       person(given = "Nick",
              family = "Williams",
              role = "ctb",
@@ -343,16 +343,14 @@ Suggests:
     tseries,
     xergm,
     zoo
-VignetteBuilder: 
-    knitr
-Remotes: 
+Remotes:
     alexpghayes/modeltests
 Encoding: UTF-8
 Language: en-US
 LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 6.1.1
-Collate: 
+Collate:
     'aaa-documentation-helper.R'
     'aer-tidiers.R'
     'auc-tidiers.R'
@@ -421,6 +419,8 @@ Collate:
     'rma-tidiers.R'
     'robust-glmrob-tidiers.R'
     'robust-lmrob-tidiers.R'
+    'robustbase-glmrob-tidiers.R'
+    'robustbase-lmrob-tidiers.R'
     'sp-tidiers.R'
     'speedglm-speedglm-tidiers.R'
     'speedglm-speedlm-tidiers.R'
