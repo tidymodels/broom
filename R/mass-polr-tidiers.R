@@ -85,7 +85,7 @@ glance.polr <- function(x, ...) {
 #' @template param_newdata
 #' 
 #' @param type.predict Which type of prediction to compute,
-#'  passed to [MASS::predict.polr()]. Only supports `"class"` at
+#'  passed to `MASS:::predict.polr()`. Only supports `"class"` at
 #'  the moment.
 #' 
 #' @export
