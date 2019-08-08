@@ -1,7 +1,8 @@
 #' @templateVar class lmRob
-#' @template title_desc_tidy_lm_wrapper
+#' @template title_desc_tidy
 #'
 #' @param x A `lmRob` object returned from [robust::lmRob()].
+#' @template param_unused_dots
 #' 
 #' @details For tidiers for robust models from the \pkg{MASS} package see
 #'   [tidy.rlm()].

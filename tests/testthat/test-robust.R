@@ -51,7 +51,7 @@ test_that("tidy.glmRob", {
 test_that("glance.glmRob", {
   gl <- glance(fit2)
   check_glance_outputs(gl)
-})
+}) 
 
 test_that("augment.glmRob", {
   expect_error(
