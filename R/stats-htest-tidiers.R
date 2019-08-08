@@ -47,9 +47,7 @@ tidy.htest <- function(x, ...) {
 
   # estimate may have multiple values
   if (length(ret$estimate) > 1) {
-    if (is.null(names(ret$estimate))) {
-      names(ret$estimate) <- paste0("estimate", seq_along(ret$estimate))
-    }
+    names(ret$estimate) <- paste0("estimate", seq_along(ret$estimate))
     ret <- c(ret$estimate, ret)
     ret$estimate <- NULL
 
