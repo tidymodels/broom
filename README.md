@@ -14,9 +14,9 @@ Status](https://img.shields.io/codecov/c/github/tidymodels/broom/master.svg)](ht
 
 ## Overview
 
-broom summarizes key information about models in tidy `tibble()`s. broom
-provides three verbs to make it convenient to interact with model
-objects:
+`broom` summarizes key information about models in tidy `tibble()`s.
+`broom` provides three verbs to make it convenient to interact with
+model objects:
 
   - `tidy()` summarizes information about model components
   - `glance()` reports information about the entire model
@@ -24,8 +24,8 @@ objects:
 
 For a detailed introduction, please see `vignette("broom")`.
 
-broom tidies 100+ models from popular modelling packages and almost all
-of the model objects in the `stats` package that comes with base R.
+`broom` tidies 100+ models from popular modelling packages and almost
+all of the model objects in the `stats` package that comes with base R.
 `vignette("available-methods")` lists method availability.
 
 If you aren’t familiar with tidy data structures and want to know how
@@ -110,7 +110,7 @@ augment(fit, data = iris)
 
 We welcome contributions of all types\!
 
-If you have never made a pull request to an R package before, broom is
+If you have never made a pull request to an R package before, `broom` is
 an excellent place to start. Find an
 [issue](https://github.com/tidymodels/broom/issues/) with the **Beginner
 Friendly** tag and comment that you’d like to take it on and we’ll help
@@ -120,8 +120,8 @@ We encourage typo corrections, bug reports, bug fixes and feature
 requests. Feedback on the clarity of the documentation is especially
 valuable.
 
-If you are interested in adding new tidiers methods to broom, please
+If you are interested in adding new tidiers methods to `broom`, please
 read `vignette("adding-tidiers")`.
 
 We have a [Contributor Code of Conduct](CODE_OF_CONDUCT.md). By
-participating in broom you agree to abide by its terms.
+participating in `broom` you agree to abide by its terms.
