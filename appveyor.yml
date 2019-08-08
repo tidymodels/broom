@@ -33,7 +33,7 @@ matrix:
   fast_finish: true
 
 cache:
-  #- C:\RLibrary
+  - C:\RLibrary
 
 # Adapt as necessary starting from here
 

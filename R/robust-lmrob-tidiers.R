@@ -15,19 +15,14 @@
 #' augment(m)
 #' glance(m)
 #'
-#' gm <- glmRob(am ~ wt, data = mtcars, family = "binomial")
-#' glance(gm)
-#'
 #' @aliases robust_tidiers
 #' @export
 #' @family robust tidiers
 #' @seealso [robust::lmRob()]
-tidy.lmRob <- function (x, summary_function = robust::summary.lmRob,...){
-  summ <- summary_function(x)
-  co <- stats::coef(summ)
+tidy.lmRob <- function (x, ...){
+  co <- stats::coef(summary(x))
   nn <- c("estimate", "std.error", "statistic", "p.value")
-  ret <- fix_data_frame(co, nn[1:ncol(co)])
-  as_tibble(ret)
+  fix_data_frame(co, nn[1:ncol(co)])
 }
 
 #' @templateVar class lmRob
@@ -88,11 +83,10 @@ augment.lmRob <- function(x, data = model.frame(x), newdata = NULL, ...) {
 #' @seealso [robust::lmRob()]
 #' 
 glance.lmRob <- function(x, ...) {
-  s <- robust::summary.lmRob(x)
   tibble(
     r.squared = x$r.squared,
     deviance = x$dev,
-    sigma = s$sigma,
+    sigma = summary(x)$sigma,
     df.residual = x$df.residual,
     nobs = stats::nobs(x)
   )

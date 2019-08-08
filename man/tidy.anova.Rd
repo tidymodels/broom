@@ -44,7 +44,8 @@ tidy(anova(a, b))
 
 Other anova tidiers: \code{\link{glance.aov}},
   \code{\link{tidy.TukeyHSD}}, \code{\link{tidy.aovlist}},
-  \code{\link{tidy.aov}}, \code{\link{tidy.manova}}
+  \code{\link{tidy.aov}}, \code{\link{tidy.manova}},
+  \code{\link{tidy.summary.manova}}
 }
 \concept{anova tidiers}
 \value{

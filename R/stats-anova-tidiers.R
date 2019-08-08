@@ -239,6 +239,7 @@ tidy.manova <- function(x, test = "Pillai", ...) {
 #' @template title_desc_tidy
 #'
 #' @param x A `summary.manova` object return from [stats::summary.manova()].
+#' @template param_unused_dots
 #'
 #' @evalRd return_tidy(
 #'   "term",
@@ -253,13 +254,18 @@ tidy.manova <- function(x, test = "Pillai", ...) {
 #' )
 #'
 #'
-#' @details Depending on which test statistic was calculated when the object was created, only one of `pillai`,
-#'   `wilks`, `hl` or `roy` is included.
+#' @details Depending on which test statistic was calculated when the object
+#'   was created, only one of `pillai`, `wilks`, `hl` or `roy` is included.
 #'
 #' @examples
 #'
 #' npk2 <- within(npk, foo <- rnorm(24))
-#' m <- summary(manova(cbind(yield, foo) ~ block + N * P * K, npk2), test = "Wilks")
+#' 
+#' m <- summary(
+#'   manova(cbind(yield, foo) ~ block + N * P * K, npk2),
+#'   test = "Wilks"
+#' )
+#' 
 #' tidy(m)
 #'
 #' @export
@@ -273,9 +279,10 @@ tidy.summary.manova <- function(x, ...) {
     "Hotelling-Lawley" = "hl",
     "Roy" = "roy"
   )
+  
   test.name <- manova_tests[[intersect(colnames(x$stats), names(manova_tests))[[1]]]]
-  nn <- c("df", test.name, "statistic", "num.df", "den.df", 
-          "p.value")
+  
+  nn <- c("df", test.name, "statistic", "num.df", "den.df", "p.value")
   fix_data_frame(x$stats, nn)
 }
 
