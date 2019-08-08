@@ -22,12 +22,12 @@
 #' @export
 #' @family robust tidiers
 #' @seealso [robust::lmRob()]
-#' @include stats-lm-tidiers.R
-tidy.lmRob <- function (x, ...) {
-  dots <- enquos(...)
-  dots$conf.int <- FALSE
-  
-  rlang::exec(tidy.lm, x, !!!dots)
+tidy.lmRob <- function (x, summary_function = robust::summary.lmRob,...){
+  summ <- summary_function(x)
+  co <- stats::coef(summ)
+  nn <- c("estimate", "std.error", "statistic", "p.value")
+  ret <- fix_data_frame(co, nn[1:ncol(co)])
+  as_tibble(ret)
 }
 
 #' @templateVar class lmRob
