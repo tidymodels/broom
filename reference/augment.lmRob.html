@@ -267,9 +267,7 @@ the <code>data</code> argument.</p></td>
     <pre class="examples"><div class='input'>
 <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/library'>library</a></span>(<span class='no'>robust</span>)</div><div class='output co'>#&gt; <span class='message'>Loading required package: fit.models</span></div><div class='input'><span class='no'>m</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/robust/topics/lmRob'>lmRob</a></span>(<span class='no'>mpg</span> ~ <span class='no'>wt</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>mtcars</span>)
 
-<span class='fu'><a href='https://www.rdocumentation.org/packages/generics/topics/tidy'>tidy</a></span>(<span class='no'>m</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: Assigning non-quosure objects to quosure lists is deprecated as of rlang 0.3.0.</span>
-#&gt; <span class='warning'>Please coerce to a bare list beforehand with `as.list()`</span>
-#&gt; <span class='warning'>This warning is displayed once per session.</span></div><div class='output co'>#&gt; # A tibble: 2 x 5
+<span class='fu'><a href='https://www.rdocumentation.org/packages/generics/topics/tidy'>tidy</a></span>(<span class='no'>m</span>)</div><div class='output co'>#&gt; # A tibble: 2 x 5
 #&gt;   term        estimate std.error statistic  p.value
 #&gt;   &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
 #&gt; 1 (Intercept)    35.6       3.58      9.93 5.37e-11
@@ -290,11 +288,6 @@ the <code>data</code> argument.</p></td>
 #&gt;   r.squared deviance sigma df.residual  nobs
 #&gt;       &lt;dbl&gt;    &lt;dbl&gt; &lt;dbl&gt;       &lt;int&gt; &lt;int&gt;
 #&gt; 1     0.567     136.  2.95          30    32</div><div class='input'>
-<span class='no'>gm</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/robust/topics/glmRob'>glmRob</a></span>(<span class='no'>am</span> ~ <span class='no'>wt</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>mtcars</span>, <span class='kw'>family</span> <span class='kw'>=</span> <span class='st'>"binomial"</span>)
-<span class='fu'><a href='https://www.rdocumentation.org/packages/generics/topics/glance'>glance</a></span>(<span class='no'>gm</span>)</div><div class='output co'>#&gt; # A tibble: 1 x 5
-#&gt;   deviance sigma null.deviance df.residual  nobs
-#&gt;      &lt;dbl&gt; &lt;dbl&gt;         &lt;dbl&gt;       &lt;int&gt; &lt;int&gt;
-#&gt; 1     19.2 0.800          44.4          30    32</div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

@@ -229,6 +229,7 @@
 <li><p><code><a href="../reference/tidy.htest.html">tidy.htest()</a></code> column names are now run through <code><a href="https://www.rdocumentation.org/packages/base/topics/make.names">make.names()</a></code> to ensure syntactic correctness (<a href='https://github.com/tidymodels/broom/issues/549'>#549</a> by <a href='https://github.com/karissawhiting'>@karissawhiting</a>) (TODO: use tidyverse name repair?)</p></li>
 <li><p>Many <code><a href="https://www.rdocumentation.org/packages/generics/topics/glance">glance()</a></code> methods now return the number of observations in a <code>nobs</code> column, which is typically the rightmost column.</p></li>
 <li><p><code><a href="../reference/tidy.lmodel2.html">tidy.lmodel2()</a></code> now returns a <code>p.value</code> column (<a href='https://github.com/tidymodels/broom/issues/570'>#570</a>)</p></li>
+<li><p><code><a href="../reference/tidy.zoo.html">tidy.zoo()</a></code> now doesn’t change column names that have spaces or other special characters (previously they were converted to data.frame friendly column names by <code>make.names</code>)</p></li>
 </ul>
 <div id="name-changes-for-consistency" class="section level3">
 <h3 class="hasAnchor">

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Glance at a(n) glmRob object — glance.glmRob • broom</title>
+<title>Tidy a(n) summary.manova object — tidy.summary.manova • broom</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -31,19 +31,14 @@
 
 
 
-<meta property="og:title" content="Glance at a(n) glmRob object — glance.glmRob" />
+<meta property="og:title" content="Tidy a(n) summary.manova object — tidy.summary.manova" />
 
-<meta property="og:description" content="Glance accepts a model object and returns a tibble::tibble()
-with exactly one row of model summaries. The summaries are typically
-goodness of fit measures, p-values for hypothesis tests on residuals,
-or model convergence information.
-Glance never returns information from the original call to the modelling
-function. This includes the name of the modelling function or any
-arguments passed to the modelling function.
-Glance does not calculate summary measures. Rather, it farms out these
-computations to appropriate methods and gathers the results together.
-Sometimes a goodness of fit measure will be undefined. In these cases
-the measure will be reported as NA." />
+<meta property="og:description" content="Tidy summarizes information about the components of a model.
+A model component might be a single term in a regression, a single
+hypothesis, a cluster, or a class. Exactly what tidy considers to be a
+model component varies cross models but is usually self-evident.
+If a model has several distinct types of components, you will need to
+specify which components to return." />
 
 <meta property="og:image" content="http://broom.tidyverse.org/logo.png" />
 <meta name="twitter:card" content="summary" />
@@ -146,36 +141,31 @@ the measure will be reported as NA." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Glance at a(n) glmRob object</h1>
-    <small class="dont-index">Source: <a href='https://github.com/tidymodels/broom/blob/master/R/robust-glmrob-tidiers.R'><code>R/robust-glmrob-tidiers.R</code></a></small>
-    <div class="hidden name"><code>glance.glmRob.Rd</code></div>
+    <h1>Tidy a(n) summary.manova object</h1>
+    <small class="dont-index">Source: <a href='https://github.com/tidymodels/broom/blob/master/R/stats-anova-tidiers.R'><code>R/stats-anova-tidiers.R</code></a></small>
+    <div class="hidden name"><code>tidy.summary.manova.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Glance accepts a model object and returns a <code><a href='https://tibble.tidyverse.org/reference/tibble.html'>tibble::tibble()</a></code>
-with exactly one row of model summaries. The summaries are typically
-goodness of fit measures, p-values for hypothesis tests on residuals,
-or model convergence information.</p>
-<p>Glance never returns information from the original call to the modelling
-function. This includes the name of the modelling function or any
-arguments passed to the modelling function.</p>
-<p>Glance does not calculate summary measures. Rather, it farms out these
-computations to appropriate methods and gathers the results together.
-Sometimes a goodness of fit measure will be undefined. In these cases
-the measure will be reported as <code>NA</code>.</p>
+    <p>Tidy summarizes information about the components of a model.
+A model component might be a single term in a regression, a single
+hypothesis, a cluster, or a class. Exactly what tidy considers to be a
+model component varies cross models but is usually self-evident.
+If a model has several distinct types of components, you will need to
+specify which components to return.</p>
     
     </div>
 
-    <pre class="usage"><span class='co'># S3 method for glmRob</span>
-<span class='fu'><a href='https://www.rdocumentation.org/packages/generics/topics/glance'>glance</a></span>(<span class='no'>x</span>, <span class='no'>...</span>)</pre>
+    <pre class="usage"><span class='co'># S3 method for summary.manova</span>
+<span class='fu'><a href='https://www.rdocumentation.org/packages/generics/topics/tidy'>tidy</a></span>(<span class='no'>x</span>, <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>x</th>
-      <td><p>A <code>glmRob</code> object returned from <code><a href='https://www.rdocumentation.org/packages/robust/topics/glmRob'>robust::glmRob()</a></code>.</p></td>
+      <td><p>A <code>summary.manova</code> object return from <code><a href='https://www.rdocumentation.org/packages/stats/topics/summary.manova'>stats::summary.manova()</a></code>.</p></td>
     </tr>
     <tr>
       <th>...</th>
@@ -191,39 +181,55 @@ the <code>data</code> argument.</p></td>
     </tr>
     </table>
     
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>Depending on which test statistic was calculated when the object
+was created, only one of <code>pillai</code>, <code>wilks</code>, <code>hl</code> or <code>roy</code> is included.</p>
+    
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='https://www.rdocumentation.org/packages/robust/topics/glmRob'>robust::glmRob()</a></code></p>
-<p>Other robust tidiers: <code><a href='augment.lmRob.html'>augment.lmRob</a></code>,
-  <code><a href='glance.lmRob.html'>glance.lmRob</a></code>, <code><a href='tidy.glmRob.html'>tidy.glmRob</a></code>,
-  <code><a href='tidy.lmRob.html'>tidy.lmRob</a></code></p></div>
+    <div class='dont-index'><p><code><a href='https://www.rdocumentation.org/packages/generics/topics/tidy'>tidy()</a></code>, <code><a href='https://www.rdocumentation.org/packages/stats/topics/summary.manova'>stats::summary.manova()</a></code></p>
+<p>Other anova tidiers: <code><a href='glance.aov.html'>glance.aov</a></code>,
+  <code><a href='tidy.TukeyHSD.html'>tidy.TukeyHSD</a></code>, <code><a href='tidy.anova.html'>tidy.anova</a></code>,
+  <code><a href='tidy.aovlist.html'>tidy.aovlist</a></code>, <code><a href='tidy.aov.html'>tidy.aov</a></code>,
+  <code><a href='tidy.manova.html'>tidy.manova</a></code></p></div>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A <code><a href='https://tibble.tidyverse.org/reference/tibble.html'>tibble::tibble()</a></code> with exactly one row and columns:</p>
-<dt>deviance</dt><dd><p>Deviance of the model.</p></dd>
-  <dt>df.residual</dt><dd><p>Residual degrees of freedom.</p></dd>
-  <dt>nobs</dt><dd><p>Number of observations used.</p></dd>
-  <dt>null.deviance</dt><dd><p>Deviance of the null model.</p></dd>
-  <dt>sigma</dt><dd><p>Estimated standard error of the residuals.</p></dd>
+    <p>A <code><a href='https://tibble.tidyverse.org/reference/tibble.html'>tibble::tibble()</a></code> with columns:</p>
+<dt>den.df</dt><dd><p>Degrees of freedom of the denominator</p></dd>
+  <dt>num.df</dt><dd><p>Degrees of freedom</p></dd>
+  <dt>p.value</dt><dd><p>The two-sided p-value associated with the observed statistic.</p></dd>
+  <dt>statistic</dt><dd><p>The value of a T-statistic to use in a hypothesis that the regression term is non-zero.</p></dd>
+  <dt>term</dt><dd><p>The name of the regression term.</p></dd>
+  <dt>pillai</dt><dd><p>Pillai's trace.</p></dd>
+  <dt>wilks</dt><dd><p>Wilk's lambda.</p></dd>
+  <dt>hl</dt><dd><p>Hotelling-Lawley trace.</p></dd>
+  <dt>roy</dt><dd><p>Roy's greatest root.</p></dd>
 
 
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
-<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/library'>library</a></span>(<span class='no'>robust</span>)
+<span class='no'>npk2</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/with'>within</a></span>(<span class='no'>npk</span>, <span class='no'>foo</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/stats/topics/Normal'>rnorm</a></span>(<span class='fl'>24</span>))
 
-<span class='no'>gm</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/robust/topics/glmRob'>glmRob</a></span>(<span class='no'>am</span> ~ <span class='no'>wt</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>mtcars</span>, <span class='kw'>family</span> <span class='kw'>=</span> <span class='st'>"binomial"</span>)
+<span class='no'>m</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/summary'>summary</a></span>(
+  <span class='fu'><a href='https://www.rdocumentation.org/packages/stats/topics/manova'>manova</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/cbind'>cbind</a></span>(<span class='no'>yield</span>, <span class='no'>foo</span>) ~ <span class='no'>block</span> + <span class='no'>N</span> * <span class='no'>P</span> * <span class='no'>K</span>, <span class='no'>npk2</span>),
+  <span class='kw'>test</span> <span class='kw'>=</span> <span class='st'>"Wilks"</span>
+)
 
-<span class='fu'><a href='https://www.rdocumentation.org/packages/generics/topics/tidy'>tidy</a></span>(<span class='no'>gm</span>)</div><div class='output co'>#&gt; # A tibble: 2 x 5
-#&gt;   term        estimate std.error statistic p.value
-#&gt;   &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;
-#&gt; 1 (Intercept)    12.0       4.51      2.67 0.00759
-#&gt; 2 wt             -4.02      1.44     -2.80 0.00509</div><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/generics/topics/glance'>glance</a></span>(<span class='no'>gm</span>)</div><div class='output co'>#&gt; # A tibble: 1 x 5
-#&gt;   deviance sigma null.deviance df.residual  nobs
-#&gt;      &lt;dbl&gt; &lt;dbl&gt;         &lt;dbl&gt;       &lt;int&gt; &lt;int&gt;
-#&gt; 1     19.2 0.800          44.4          30    32</div><div class='input'>
+<span class='fu'><a href='https://www.rdocumentation.org/packages/generics/topics/tidy'>tidy</a></span>(<span class='no'>m</span>)</div><div class='output co'>#&gt; # A tibble: 8 x 7
+#&gt;   term         df  wilks statistic num.df den.df  p.value
+#&gt;   &lt;chr&gt;     &lt;dbl&gt;  &lt;dbl&gt;     &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;    &lt;dbl&gt;
+#&gt; 1 block         5  0.147     3.54      10     22  0.00646
+#&gt; 2 N             1  0.491     5.70       2     11  0.0200 
+#&gt; 3 P             1  0.956     0.254      2     11  0.780  
+#&gt; 4 K             1  0.563     4.27       2     11  0.0424 
+#&gt; 5 N:P           1  0.894     0.651      2     11  0.540  
+#&gt; 6 N:K           1  0.311    12.2        2     11  0.00162
+#&gt; 7 P:K           1  0.808     1.31       2     11  0.309  
+#&gt; 8 Residuals    12 NA        NA         NA     NA NA      </div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
@@ -231,6 +237,8 @@ the <code>data</code> argument.</p></td>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
       
+      <li><a href="#details">Details</a></li>
+
       <li><a href="#see-also">See also</a></li>
 
       <li><a href="#value">Value</a></li>
