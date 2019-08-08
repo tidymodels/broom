@@ -276,7 +276,7 @@ tidy.summary.manova <- function(x, ...) {
   test.name <- manova_tests[[intersect(colnames(x$stats), names(manova_tests))[[1]]]]
   nn <- c("df", test.name, "statistic", "num.df", "den.df", 
           "p.value")
-  broom:::fix_data_frame(x$stats, nn)
+  fix_data_frame(x$stats, nn)
 }
 
 #' @templateVar class TukeyHSD
