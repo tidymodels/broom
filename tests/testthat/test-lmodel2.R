@@ -17,7 +17,7 @@ test_that("lmodel2 tidier arguments", {
 test_that("tidy.lmodel2", {
   td <- tidy(fit)
   check_tidy_output(td)
-  check_dims(td, 8, 5)
+  check_dims(td, 8, 6)
 })
 
 test_that("glance.lmodel2", {

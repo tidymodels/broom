@@ -7,7 +7,7 @@
 \title{Tidy a(n) lm object}
 \usage{
 \method{tidy}{lm}(x, conf.int = FALSE, conf.level = 0.95,
-  exponentiate = FALSE, quick = FALSE, ...)
+  exponentiate = FALSE, ...)
 
 \method{tidy}{summary.lm}(x, ...)
 }
@@ -25,10 +25,6 @@ Defaults to 0.95, which corresponds to a 95 percent confidence interval.}
 the coefficient estimates. This is typical for logistic and multinomial
 regressions, but a bad idea if there is no log or logit link. Defaults
 to \code{FALSE}.}
-
-\item{quick}{Logical indiciating if the only the \code{term} and \code{estimate}
-columns should be returned. Often useful to avoid time consuming
-covariance and standard error calculations. Defaults to \code{FALSE}.}
 
 \item{...}{Additional arguments. Not used. Needed to match generic
 signature only. \strong{Cautionary note:} Misspelled arguments will be
@@ -66,16 +62,16 @@ tidy(mod)
 glance(mod)
 
 # coefficient plot
-d <- tidy(mod) \%>\% 
+d <- tidy(mod) \%>\%
   mutate(
     low = estimate - std.error,
     high = estimate + std.error
   )
-  
+
 ggplot(d, aes(estimate, term, xmin = low, xmax = high, height = 0)) +
-     geom_point() +
-     geom_vline(xintercept = 0) +
-     geom_errorbarh()
+  geom_point() +
+  geom_vline(xintercept = 0) +
+  geom_errorbarh()
 
 augment(mod)
 augment(mod, mtcars)
@@ -103,15 +99,15 @@ a <- matrix(rnorm(20), nrow = 10)
 b <- a + rnorm(length(a))
 result <- lm(b ~ a)
 tidy(result)
-
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[stats:summary.lm]{stats::summary.lm()}}
 
 Other lm tidiers: \code{\link{augment.glm}},
   \code{\link{augment.lm}}, \code{\link{glance.glm}},
-  \code{\link{glance.lm}}, \code{\link{tidy.glm}},
-  \code{\link{tidy.lm.beta}}
+  \code{\link{glance.lm}}, \code{\link{glance.svyglm}},
+  \code{\link{tidy.glm}}, \code{\link{tidy.lm.beta}},
+  \code{\link{tidy.mlm}}, \code{\link{tidy.svyglm}}
 }
 \concept{lm tidiers}
 \value{

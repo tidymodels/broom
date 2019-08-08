@@ -5,6 +5,7 @@
 #'   and [lavaan::sem()].
 #' 
 #' @template param_confint
+#' 
 #' @param ... Additional arguments passed to [lavaan::parameterEstimates()].
 #'   **Cautionary note**: Misspecified arguments may be silently ignored.
 #'
@@ -35,6 +36,7 @@
 #'  
 #' cfa.fit <- cfa('F =~ x1 + x2 + x3 + x4 + x5 + x6 + x7 + x8 + x9',
 #'                data = HolzingerSwineford1939, group = "school")
+#'                
 #' tidy(cfa.fit)
 #' 
 #' @export
@@ -43,6 +45,7 @@
 #' @seealso [tidy()], [lavaan::cfa()], [lavaan::sem()], 
 #'   [lavaan::parameterEstimates()]
 tidy.lavaan <- function(x, conf.int = FALSE, conf.level = 0.95, ...) {
+  
   lavaan::parameterEstimates(x,
     ci = conf.int,
     level = conf.level,

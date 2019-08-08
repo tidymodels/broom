@@ -6,7 +6,7 @@
 \title{Tidy a(n) ergm object}
 \usage{
 \method{tidy}{ergm}(x, conf.int = FALSE, conf.level = 0.95,
-  exponentiate = FALSE, quick = FALSE, ...)
+  exponentiate = FALSE, ...)
 }
 \arguments{
 \item{x}{An \code{ergm} object returned from a call to \code{\link[ergm:ergm]{ergm::ergm()}}.}
@@ -23,12 +23,17 @@ the coefficient estimates. This is typical for logistic and multinomial
 regressions, but a bad idea if there is no log or logit link. Defaults
 to \code{FALSE}.}
 
-\item{quick}{Logical indiciating if the only the \code{term} and \code{estimate}
-columns should be returned. Often useful to avoid time consuming
-covariance and standard error calculations. Defaults to \code{FALSE}.}
-
-\item{...}{Additional arguments to pass to \code{\link[ergm:summary.ergm]{ergm::summary.ergm()}}.
+\item{...}{Additional arguments to pass to \code{\link[ergm:summary]{ergm::summary()}}.
 \strong{Cautionary note}: Mispecified arguments may be silently ignored.}
+}
+\value{
+A \link[tibble:tibble]{tibble::tibble} with one row for each coefficient in the
+exponential random graph model, with columns:
+\item{term}{The term in the model being estimated and tested}
+\item{estimate}{The estimated coefficient}
+\item{std.error}{The standard error}
+\item{mcmc.error}{The MCMC error}
+\item{p.value}{The two-sided p-value}
 }
 \description{
 Tidy summarizes information about the components of a model.
@@ -44,6 +49,7 @@ the \pkg{ergm} class, such as those produced from weighted networks by the
 }
 \examples{
 
+\dontrun{
 library(ergm)
 # Using the same example as the ergm package
 # Load the Florentine marriage network data
@@ -64,6 +70,7 @@ tidy(gest, exponentiate = TRUE, conf.int = TRUE, conf.level = 0.99)
 glance(gest)
 glance(gest, deviance = TRUE)
 glance(gest, mcmc = TRUE)
+}
 
 }
 \references{
@@ -74,19 +81,8 @@ Models for Networks. \emph{Journal of Statistical Software}, 24(3).
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[ergm:ergm]{ergm::ergm()}}, \code{\link[ergm:control.ergm]{ergm::control.ergm()}},
-\code{\link[ergm:summary.ergm]{ergm::summary.ergm()}}
+\code{\link[ergm:summary]{ergm::summary()}}
 
 Other ergm tidiers: \code{\link{glance.ergm}}
 }
 \concept{ergm tidiers}
-\value{
-A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
-  \item{conf.high}{Upper bound on the confidence interval for the estimate.}
-  \item{conf.low}{Lower bound on the confidence interval for the estimate.}
-  \item{estimate}{The estimated value of the regression term.}
-  \item{mcmc.error}{The MCMC error}
-  \item{p.value}{The two-sided p-value associated with the observed statistic.}
-  \item{std.error}{The standard error of the regression term.}
-  \item{term}{The name of the regression term.}
-
-}

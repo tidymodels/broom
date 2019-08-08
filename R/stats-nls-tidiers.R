@@ -1,11 +1,10 @@
 #' @templateVar class nls
 #' @template title_desc_tidy
-#' 
+#'
 #' @param x An `nls` object returned from [stats::nls()].
 #' @template param_confint
-#' @template param_quick
 #' @template param_unused_dots
-#' 
+#'
 #' @evalRd return_tidy(regression = TRUE)
 #'
 #' @examples
@@ -29,16 +28,7 @@
 #' @export
 #' @seealso [tidy], [stats::nls()], [stats::summary.nls()]
 #' @family nls tidiers
-tidy.nls <- function(x, conf.int = FALSE, conf.level = .95,
-                     quick = FALSE, ...) {
-  if (quick) {
-    co <- stats::coef(x)
-    ret <- data.frame(
-      term = names(co), estimate = unname(co),
-      stringsAsFactors = FALSE
-    )
-    return(as_tibble(ret))
-  }
+tidy.nls <- function(x, conf.int = FALSE, conf.level = .95, ...) {
 
   nn <- c("estimate", "std.error", "statistic", "p.value")
   ret <- fix_data_frame(stats::coef(summary(x)), nn)
@@ -57,33 +47,35 @@ tidy.nls <- function(x, conf.int = FALSE, conf.level = .95,
 
 #' @templateVar class nls
 #' @template title_desc_augment
-#' 
-#' @inheritParams tidy.nls
+#'
+#' @inherit tidy.nls params examples
 #' @template param_data
 #' @template param_newdata
-#' @template param_se_fit
-#' 
+#'
 #' @evalRd return_augment()
+#'
+#' @details augment.nls does not currently support confidence intervals due to
+#' a lack of support in stats::predict.nls().
 #'
 #' @export
 #' @seealso [tidy], [stats::nls()], [stats::predict.nls()]
 #' @family nls tidiers
-#' 
-augment.nls <- function(x, data = NULL, newdata = NULL, se_fit = FALSE, ...) {
-  
+#'
+augment.nls <- function(x, data = NULL, newdata = NULL, ...) {
+
   if (is.null(data) && is.null(newdata)) {
     pars <- names(x$m$getPars())
     env <- as.list(x$m$getEnv())
     data <- as_tibble(env[!(names(env) %in% pars)])
   }
-  
-  augment_newdata(x, data, newdata, se_fit)
+
+  augment_newdata(x, data, newdata, .se_fit = FALSE)
 }
 
 
 #' @templateVar class nls
 #' @template title_desc_glance
-#' 
+#'
 #' @inherit tidy.nls params examples
 #'
 #' @evalRd return_glance(
@@ -94,7 +86,8 @@ augment.nls <- function(x, data = NULL, newdata = NULL, se_fit = FALSE, ...) {
 #'   "AIC",
 #'   "BIC",
 #'   "deviance",
-#'   "df.residual"
+#'   "df.residual",
+#'   "nobs"
 #' )
 #'
 #' @export
@@ -102,9 +95,16 @@ augment.nls <- function(x, data = NULL, newdata = NULL, se_fit = FALSE, ...) {
 #' @family nls tidiers
 glance.nls <- function(x, ...) {
   s <- summary(x)
-  ret <- unrowname(data.frame(
-    sigma = s$sigma, isConv = s$convInfo$isConv,
-    finTol = s$convInfo$finTol
-  ))
-  as_tibble(finish_glance(ret, x))
+
+  tibble(
+    sigma = s$sigma, 
+    isConv = s$convInfo$isConv,
+    finTol = s$convInfo$finTol,
+    logLik = as.numeric(stats::logLik(x)),
+    AIC = stats::AIC(x),
+    BIC = stats::BIC(x),
+    deviance = stats::deviance(x),
+    df.residual = stats::df.residual(x),
+    nobs = stats::nobs(x)
+  )
 }

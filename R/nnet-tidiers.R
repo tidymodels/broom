@@ -35,6 +35,7 @@
 tidy.multinom <- function (x, conf.int = FALSE, conf.level = 0.95, 
                            exponentiate = TRUE,...){
   col_names <- x$coefnames
+
   s <- summary(x)
   coef <- matrix(coef(s), byrow = FALSE, nrow = nrow(s$coefficients),
                  dimnames = list(2:(nrow(s$coefficients)+1), col_names))
@@ -74,12 +75,12 @@ tidy.multinom <- function (x, conf.int = FALSE, conf.level = 0.95,
 #' 
 #' @inherit tidy.multinom params examples
 #' 
-#' @evalRd return_glance("edf", "deviance", "AIC")
+#' @evalRd return_glance("edf", "deviance", "AIC", "nobs")
 #' @export
 #' @family multinom tidiers
 #' @seealso [glance()], [nnet::multinom()]
 glance.multinom <- function(x, ...) {
-  with(
+  ret <- with(
     x,
     tibble(
       edf = edf,
@@ -87,4 +88,6 @@ glance.multinom <- function(x, ...) {
       AIC = AIC
     )
   )
+  ret$nobs <- stats::nobs(x)
+  ret
 }

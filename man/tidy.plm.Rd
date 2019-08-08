@@ -6,7 +6,7 @@
 \title{Tidy a(n) plm object}
 \usage{
 \method{tidy}{plm}(x, conf.int = FALSE, conf.level = 0.95,
-  exponentiate = FALSE, quick = FALSE, ...)
+  exponentiate = FALSE, ...)
 }
 \arguments{
 \item{x}{A \code{plm} objected returned by \code{\link[plm:plm]{plm::plm()}}.}
@@ -22,10 +22,6 @@ Defaults to 0.95, which corresponds to a 95 percent confidence interval.}
 the coefficient estimates. This is typical for logistic and multinomial
 regressions, but a bad idea if there is no log or logit link. Defaults
 to \code{FALSE}.}
-
-\item{quick}{Logical indiciating if the only the \code{term} and \code{estimate}
-columns should be returned. Often useful to avoid time consuming
-covariance and standard error calculations. Defaults to \code{FALSE}.}
 
 \item{...}{Additional arguments. Not used. Needed to match generic
 signature only. \strong{Cautionary note:} Misspelled arguments will be

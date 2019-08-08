@@ -3,7 +3,6 @@
 #'
 #' @param x A `geeglm` object returned from a call to [geepack::geeglm()].
 #' @template param_confint
-#' @template param_quick
 #' @template param_exponentiate
 #' @template param_unused_dots
 #'
@@ -26,7 +25,6 @@
 #'                  corstr = "exchangeable")
 #'
 #' tidy(geefit)
-#' tidy(geefit, quick = TRUE)
 #' tidy(geefit, conf.int = TRUE)
 #'
 #' @evalRd return_tidy(regresion = TRUE)
@@ -36,12 +34,8 @@
 #' @seealso [tidy()], [geepack::geeglm()]
 #' 
 tidy.geeglm <- function(x, conf.int = FALSE, conf.level = .95,
-                        exponentiate = FALSE, quick = FALSE, ...) {
-  if (quick) {
-    co <- stats::coef(x)
-    ret <- tibble(term = names(co), estimate = unname(co))
-    return(ret)
-  }
+                        exponentiate = FALSE, ...) {
+  
   co <- stats::coef(summary(x))
 
   nn <- c("estimate", "std.error", "statistic", "p.value")
@@ -106,4 +100,25 @@ confint.geeglm <- function(object, parm, level = 0.95, ...) {
   )
   rownames(citab) <- rownames(cc)
   citab[parm, ]
+}
+
+#' @templateVar class geeglm
+#' @template title_desc_glance
+#' 
+#' @inherit tidy.geeglm params examples
+#'
+#' @evalRd return_glance("df.residual", "n_clusters", "max_cluster_size", "alpha", "gamma")
+#'
+#' @export
+#' @seealso [glance()], [geepack::geeglm()]
+#' @family geepack tidiers
+glance.geeglm  <- function(x, ...) {
+  s <- summary(x)
+  tibble(
+    df.residual = x$df.residual,
+    n.clusters = length(s$clusz),
+    max.cluster.size = max(s$clusz),
+    alpha = x$geese$alpha,
+    gamma = x$geese$gamma
+  )
 }

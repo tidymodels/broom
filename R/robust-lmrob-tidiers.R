@@ -79,7 +79,8 @@ augment.lmRob <- function(x, data = model.frame(x), newdata = NULL, ...) {
 #'   "r.squared",
 #'   "deviance",
 #'   "sigma",
-#'   "df.residual"
+#'   "df.residual",
+#'   "nobs"
 #' )
 #' 
 #' @export
@@ -92,6 +93,7 @@ glance.lmRob <- function(x, ...) {
     r.squared = x$r.squared,
     deviance = x$dev,
     sigma = s$sigma,
-    df.residual = x$df.residual
+    df.residual = x$df.residual,
+    nobs = stats::nobs(x)
   )
 }

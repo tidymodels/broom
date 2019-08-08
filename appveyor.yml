@@ -13,9 +13,27 @@ install:
 environment:
   global:
     USE_RTOOLS: true
+    #NOT_CRAN: true
+    _R_CHECK_FORCE_SUGGESTS: true
+    _R_CHECK_CRAN_INCOMING_: true
+    #R_CHECK_ARGS: "--run-dontrun"
+  matrix:
+  - R_VERSION: 3.5.0
+    R_ARCH: x64
+    GCC_PATH: mingw_64
+
+  - R_VERSION: devel
+    R_ARCH: x64
+    GCC_PATH: mingw_64
+
+  - R_VERSION: patched
+    GCC_PATH: mingw_32
+
+matrix:
+  fast_finish: true
 
 cache:
-  - C:\RLibrary
+  #- C:\RLibrary
 
 # Adapt as necessary starting from here
 

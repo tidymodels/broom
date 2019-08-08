@@ -53,8 +53,10 @@ augment.glmRob <- function(x, ...) {
 #' 
 #' @evalRd return_glance(
 #'   "deviance",
+#'   "sigma",
 #'   "null.deviance",
-#'   "df.residual"
+#'   "df.residual",
+#'   "nobs"
 #' )
 #' 
 #' @export
@@ -62,9 +64,13 @@ augment.glmRob <- function(x, ...) {
 #' @seealso [robust::glmRob()]
 #' 
 glance.glmRob <- function(x, ...) {
+  s <- summary(x)
   ret <- tibble(
     deviance = x$deviance,
-    null.deviance = x$null.deviance
+    sigma = stats::sigma(x),
+    null.deviance = x$null.deviance,
+    df.residual = stats::df.residual(x),
+    nobs = stats::nobs(x)
   )
-  finish_glance(ret, x)
+  ret
 }

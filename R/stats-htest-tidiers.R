@@ -47,12 +47,14 @@ tidy.htest <- function(x, ...) {
 
   # estimate may have multiple values
   if (length(ret$estimate) > 1) {
-    names(ret$estimate) <- paste0("estimate", seq_along(ret$estimate))
+    if (is.null(names(ret$estimate))) {
+      names(ret$estimate) <- paste0("estimate", seq_along(ret$estimate))
+    }
     ret <- c(ret$estimate, ret)
     ret$estimate <- NULL
 
     # special case: in a t-test, estimate = estimate1 - estimate2
-    if (x$method == "Welch Two Sample t-test") {
+    if (x$method %in% c("Welch Two Sample t-test", " Two Sample t-test")) {
       ret <- c(estimate = ret$estimate1 - ret$estimate2, ret)
     }
   }
@@ -68,12 +70,15 @@ tidy.htest <- function(x, ...) {
         paste(make.names(names(x$parameter)), collapse = ", ")
       )
       # rename num df to num.df and denom df to denom.df
-      names(x$parameter) <- make.names(names(x$parameter))
+      np <- names(x$parameter)
+      np <- stringr::str_replace(np, "num df", "num.df")
+      np <- stringr::str_replace(np, "denom df", "den.df")
+      names(x$parameter) <- np
       ret <- append(ret, x$parameter, after = 1)
     }
   }
 
-  ret <- compact(ret)
+  ret <- purrr::compact(ret)
   if (!is.null(x$conf.int)) {
     ret <- c(ret, conf.low = x$conf.int[1], conf.high = x$conf.int[2])
   }
@@ -218,6 +223,6 @@ tidy.pairwise.htest <- function(x, ...) {
 #' @family htest tidiers
 #' @seealso [stats::power.t.test()]
 tidy.power.htest <- function(x, ...) {
-  cols <- compact(x[c("n", "delta", "sd", "sig.level", "power", "p1", "p2")])
+  cols <- purrr::compact(x[c("n", "delta", "sd", "sig.level", "power", "p1", "p2")])
   as_tibble(cols)
 }

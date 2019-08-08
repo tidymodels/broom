@@ -7,7 +7,7 @@
 #'   the longitudinal component of the model. Must be either `"survival"` or
 #'   `"longitudinal"`. Defaults to `"survival"`.
 #' @param boot_se Optionally a `bootSE` object from [joineRML::bootSE()]. If
-#'   specified, calcalutes confidence intervals via the bootstrap. Defaults to
+#'   specified, calculates confidence intervals via the bootstrap. Defaults to
 #'   `NULL`, in which case standard errors are calculated from the 
 #'   empirical information matrix.
 #' @template param_unused_dots
@@ -65,7 +65,7 @@
 #' 
 tidy.mjoint <- function(x, component = "survival", conf.int = FALSE,
                         conf.level = 0.95,  boot_se = NULL, ...) {
-  component <- match.arg(component, c("survival", "longitudinal"))
+  component <- rlang::arg_match(component, c("survival", "longitudinal"))
   if (!is.null(boot_se)) {
     if (!inherits(x = boot_se, "bootSE")) 
       stop("`boot_se` argument must be a `bootSE` object.", call. = FALSE)

@@ -50,7 +50,8 @@ tidy.orcutt <- function(x, ...) {
 #'   "dw.original",
 #'   "p.value.original",
 #'   "dw.transformed",
-#'   "p.value.transformed"
+#'   "p.value.transformed",
+#'   "nobs"
 #' )
 #'
 #' @export
@@ -65,6 +66,7 @@ glance.orcutt <- function(x, ...) {
     dw.original = x$DW[1],
     p.value.original = x$DW[2],
     dw.transformed = x$DW[3],
-    p.value.transformed = x$DW[4]
+    p.value.transformed = x$DW[4],
+    nobs = stats::nobs(x)
   )
 }

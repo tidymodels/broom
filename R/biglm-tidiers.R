@@ -5,7 +5,6 @@
 #'   [biglm::bigglm()].
 #' @template param_confint
 #' @template param_exponentiate
-#' @template param_quick
 #' @template param_unused_dots
 #' 
 #' @evalRd return_tidy(regression = TRUE)
@@ -35,12 +34,7 @@
 #' @family biglm tidiers
 #' @seealso [tidy()], [biglm::biglm()], [biglm::bigglm()]
 tidy.biglm <- function(x, conf.int = FALSE, conf.level = .95,
-                       exponentiate = FALSE, quick = FALSE, ...) {
-  if (quick) {
-    co <- stats::coef(x)
-    ret <- tibble::enframe(co, name = "term", value = "estimate")
-    return(ret)
-  }
+                       exponentiate = FALSE, ...) {
   
   mat <- summary(x)$mat
   nn <- c("estimate", "conf.low", "conf.high", "std.error", "p.value")
@@ -64,16 +58,22 @@ tidy.biglm <- function(x, conf.int = FALSE, conf.level = .95,
 #' @inherit tidy.biglm params examples
 #' @template param_unused_dots
 #' 
-#' @evalRd return_glance("r.squared", "AIC", "deviance", "df.residual")
+#' @evalRd return_glance("r.squared", 
+#                        "AIC", 
+#'                       "deviance", 
+#'                       "df.residual",
+#'                       "nobs")
 #'
 #' @export
 #' @family biglm tidiers
 #' @seealso [glance()], [biglm::biglm()], [biglm::bigglm()]
 glance.biglm <- function(x, ...) {
-  # biglm objects have `df.resid` instead of `df.residual`, so 
-  # `finish_glance()` will not work with default biglm fields. 
-  if (sum(names(x) == "df.resid") == 1) {
-    x$df.residual <- x$df.resid
-  }
-  finish_glance(tibble(r.squared = summary(x)$rsq), x)
+  s <- summary(x)
+  tibble(
+    r.squared = s$rsq,
+    AIC = stats::AIC(x),
+    deviance = stats::deviance(x),
+    df.residual = x$df.resid,
+    nobs = stats::nobs(x)
+  )
 }

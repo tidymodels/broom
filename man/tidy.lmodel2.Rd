@@ -33,6 +33,11 @@ There are always only two terms in an \code{lmodel2}: \code{"Intercept"}
 and \code{"Slope"}. These are computed by four methods: OLS
 (ordinary least squares), MA (major axis), SMA (standard major
 axis), and RMA (ranged major axis).
+
+The returned p-value is one-tailed and calculated via a permutation test.
+A permutational test is used because distributional assumptions may not not
+be valid. More information can be found in
+\code{vignette("mod2user", package = "lmodel2")}.
 }
 \examples{
 
@@ -64,6 +69,7 @@ A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
   \item{conf.high}{Upper bound on the confidence interval for the estimate.}
   \item{conf.low}{Lower bound on the confidence interval for the estimate.}
   \item{estimate}{The estimated value of the regression term.}
+  \item{p.value}{The two-sided p-value associated with the observed statistic.}
   \item{term}{The name of the regression term.}
   \item{method}{Either OLS/MA/SMA/RMA}
 

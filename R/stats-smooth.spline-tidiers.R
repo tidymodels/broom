@@ -41,7 +41,8 @@ augment.smooth.spline <- function(x, data = x$data, ...) {
 #'   "df",
 #'   "crit",
 #'   "pen.crit",
-#'   "cv.crit"
+#'   "cv.crit",
+#'   "nobs"
 #' )
 #'
 #' @export
@@ -49,7 +50,8 @@ augment.smooth.spline <- function(x, data = x$data, ...) {
 #' @seealso [augment()], [stats::smooth.spline()]
 #' 
 glance.smooth.spline <- function(x, ...) {
-  as_tibble(
-    x[c("df", "lambda", "cv.crit", "pen.crit", "crit", "spar")]
-  )
+  ret <- x[c("df", "lambda", "cv.crit", "pen.crit", "crit", "spar")]
+  ret <- as_tibble(ret)
+  ret$nobs <- stats::nobs(x)
+  ret
 }

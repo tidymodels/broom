@@ -21,17 +21,14 @@ test_that("plm tidier arguments", {
 
 test_that("tidy.plm", {
   td <- tidy(fit, conf.int = TRUE)
-  tdq <- tidy(fit, conf.int = TRUE, quick = TRUE)
-  
   check_tidy_output(td)
-  check_tidy_output(tdq)
   check_dims(td, 4, 7)
 })
 
 test_that("glance.plm", {
   gl <- glance(fit)
   check_glance_outputs(gl)
-  check_dims(gl, expected_cols = 6)
+  check_dims(gl, expected_cols = 7)
 })
 
 test_that("augment.plm", {

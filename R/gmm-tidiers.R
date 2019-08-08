@@ -4,7 +4,6 @@
 #' @param x A `gmm` object returned from [gmm::gmm()].
 #' @template param_confint
 #' @template param_exponentiate
-#' @template param_quick
 #' @template param_unused_dots
 #' 
 #' @evalRd return_tidy(regression = TRUE)
@@ -79,17 +78,14 @@
 #' @family gmm tidiers
 #' @seealso [tidy()], [gmm::gmm()]
 tidy.gmm <- function(x, conf.int = FALSE, conf.level = .95,
-                     exponentiate = FALSE, quick = FALSE, ...) {
-  if (quick) {
-    co <- stats::coef(x)
-    ret <- tibble(term = names(co), estimate = unname(co))
-  } else {
-    co <- stats::coef(summary(x))
+                     exponentiate = FALSE, ...) {
+  
+  co <- stats::coef(summary(x))
+  nn <- c("estimate", "std.error", "statistic", "p.value")
+  ret <- fix_data_frame(co, nn[1:ncol(co)])
 
-    nn <- c("estimate", "std.error", "statistic", "p.value")
-    ret <- fix_data_frame(co, nn[1:ncol(co)])
-  }
-
+  # TODO: bump version requirement and use current returned object
+  
   # newer versions of GMM create a 'confint' object, so we can't use process_lm
   ret <- process_lm(ret, x,
     conf.int = FALSE, conf.level = conf.level,
@@ -116,7 +112,11 @@ tidy.gmm <- function(x, conf.int = FALSE, conf.level = .95,
 #' 
 #' @inherit tidy.gmm params examples
 #'
-#' @evalRd return_glance("df", "statistic", "p.value", "df.residual")
+#' @evalRd return_glance("df", 
+#'                       "statistic", 
+#'                       "p.value", 
+#'                       "df.residual", 
+#'                       "nobs")
 #'
 #' @export
 #' @family gmm tidiers
@@ -124,6 +124,10 @@ tidy.gmm <- function(x, conf.int = FALSE, conf.level = .95,
 glance.gmm <- function(x, ...) {
   s <- gmm::summary.gmm(x)
   st <- suppressWarnings(as.numeric(s$stest$test))
-  ret <- tibble(df = x$df, statistic = st[1], p.value = st[2])
-  finish_glance(ret, x)
+  ret <- tibble(df = x$df, 
+                statistic = st[1], 
+                p.value = st[2],
+                df.residual = stats::df.residual(x),
+                nobs = stats::nobs(x))
+  ret
 }

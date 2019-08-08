@@ -16,10 +16,8 @@ test_that("MASS::rlm tidier arguments", {
 
 test_that("tidy.rlm", {
   
-  td <- tidy(fit, quick = TRUE)
   td2 <- tidy(fit, conf.int = TRUE)
   
-  check_tidy_output(td)
   check_tidy_output(td2)
   
   # regression test for #380
@@ -30,7 +28,7 @@ test_that("tidy.rlm", {
 test_that("glance.rlm", {
   gl <- glance(fit)
   check_glance_outputs(gl)
-  check_dims(gl, 1, 6)
+  check_dims(gl, 1, 7)
 })
 
 test_that("augment.rlm", {
