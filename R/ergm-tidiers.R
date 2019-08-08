@@ -22,6 +22,7 @@
 #'
 #' @examples
 #' 
+#' \dontrun{
 #' library(ergm)
 #' # Using the same example as the ergm package
 #' # Load the Florentine marriage network data
@@ -42,6 +43,7 @@
 #' glance(gest)
 #' glance(gest, deviance = TRUE)
 #' glance(gest, mcmc = TRUE)
+#' }
 #' 
 #' @references Hunter DR, Handcock MS, Butts CT, Goodreau SM, Morris M (2008b).
 #'   \pkg{ergm}: A Package to Fit, Simulate and Diagnose Exponential-Family
