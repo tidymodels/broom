@@ -57,7 +57,7 @@ glance.svyolr <- function(x, ...) {
 tidy.svyglm <- function(x, conf.int = FALSE, conf.level = .95,
                         exponentiate = FALSE, ...) {
   
-  s <- survey:::summary.svyglm(x)
+  s <- summary(x)
   ret <- tidy.summary.lm(s)
   
   # TODO: drop process_lm() dependence
@@ -136,8 +136,8 @@ glance.svyglm <- function(x, maximal = x, ...) {
   tibble(
     null.deviance = x$null.deviance,
     df.null = x$df.null,
-    AIC = survey:::AIC.svyglm(x)["AIC"],
-    BIC = survey:::dBIC(x, maximal)["BIC"],  # equiv to stats::BIC(x, maximal)
+    AIC = stats::AIC(x)["AIC"],
+    BIC = stats::BIC(x, maximal = maximal)["BIC"],
     deviance = x$deviance,
     df.residual = x$df.residual
   )

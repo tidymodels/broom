@@ -1,7 +1,7 @@
 Type: Package
 Package: broom
 Title: Convert Statistical Objects into Tidy Tibbles
-Version: 0.5.2.9001
+Version: 0.5.2.9002
 Authors@R: 
     c(person(given = "David",
              family = "Robinson",
@@ -145,8 +145,8 @@ Authors@R:
              family = "Kennedy",
              role = "ctb",
              email = "pkqstr@protonmail.com"),
-      person(given = "Lily", 
-             family = "Medina", 
+      person(given = "Lily",
+             family = "Medina",
              role = "ctb",
              email = "lilymiru@gmail.com"),
       person(given = "Brian",
@@ -234,7 +234,25 @@ Authors@R:
       person(given = "Eduard",
              family = "Szoecs",
              role = "ctb",
-             email = "eduardszoecs@gmail.com"))
+             email = "eduardszoecs@gmail.com"),
+      person(given = "Angus",
+             family = "Moore",
+             role = "ctb",
+             email = "angusmoore9@gmail.com"),
+      person(given = "Nick",
+             family = "Williams",
+             role = "ctb",
+             email = "ntwilliams.personal@gmail.com"),
+      person(given = "Marius",
+             family = "Barth",
+             role = "ctb",
+             email = "marius.barth.uni.koeln@gmail.com",
+             comment = c(ORCID = "0000-0002-3421-6665")),
+      person(given = "Bruna",
+             family = "Wundervald",
+             role = "ctb",
+             email = "brunadaviesw@gmail.com",
+             comment = c(ORCID = "0000-0001-8163-220X")))
 Description: Summarizes key information about statistical
     objects in tidy tibbles. This makes it easy to report results, create
     plots and consistently work with large numbers of models at once.
@@ -246,7 +264,8 @@ Description: Summarizes key information about statistical
     observations to a dataset, such as fitted values or influence
     measures.
 License: MIT + file LICENSE
-URL: http://github.com/tidymodels/broom
+URL: https://broom.tidyverse.org/,
+    http://github.com/tidymodels/broom
 BugReports: http://github.com/tidymodels/broom/issues
 Depends:
     R (>= 3.1)
@@ -281,6 +300,7 @@ Suggests:
     drc,
     e1071,
     emmeans,
+    epiR,
     ergm,
     gam (>= 1.15),
     gamlss,
@@ -299,9 +319,7 @@ Suggests:
     Lahman,
     lavaan,
     leaps,
-    leaps,
     lfe,
-    lm.beta,
     lm.beta,
     lmodel2,
     lmtest,
@@ -314,7 +332,6 @@ Suggests:
     mediation,
     metafor,
     mgcv,
-    modeltests,
     modeltests,
     muhaz,
     multcomp,
@@ -329,6 +346,7 @@ Suggests:
     rgeos,
     rmarkdown,
     robust,
+    robustbase,
     rsample,
     sp,
     speedglm,
@@ -341,16 +359,14 @@ Suggests:
     tseries,
     xergm,
     zoo
-VignetteBuilder: 
-    knitr
-Remotes: 
+Remotes:
     alexpghayes/modeltests
 Encoding: UTF-8
 Language: en-US
 LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 6.1.1
-Collate: 
+Collate:
     'aaa-documentation-helper.R'
     'aer-tidiers.R'
     'auc-tidiers.R'
@@ -368,6 +384,7 @@ Collate:
     'data-frame-tidiers.R'
     'drc-tidiers.R'
     'emmeans-tidiers.R'
+    'epiR-tidiers.R'
     'ergm-tidiers.R'
     'gam-tidiers.R'
     'gamlss-tidiers.R'
@@ -418,8 +435,11 @@ Collate:
     'rma-tidiers.R'
     'robust-glmrob-tidiers.R'
     'robust-lmrob-tidiers.R'
+    'robustbase-glmrob-tidiers.R'
+    'robustbase-lmrob-tidiers.R'
     'sp-tidiers.R'
-    'speedglm-tidiers.R'
+    'speedglm-speedglm-tidiers.R'
+    'speedglm-speedlm-tidiers.R'
     'stats-anova-tidiers.R'
     'stats-arima-tidiers.R'
     'stats-decompose-tidiers.R'

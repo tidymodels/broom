@@ -33,27 +33,27 @@
 #' @family multinom tidiers
 #' @seealso [tidy()], [nnet::multinom()]
 tidy.multinom <- function(x, conf.int = FALSE, conf.level = .95,
-                          exponentiate = TRUE, ...) {
+                          exponentiate = FALSE, ...) {
   col_names <- if (length(x$lev) > 2) colnames(coef(x)) else names(coef(x))
   s <- summary(x)
-
+  
   coef <- matrix(coef(s),
-    byrow = FALSE,
-    nrow = length(x$lev) - 1,
-    dimnames = list(
-      x$lev[-1],
-      col_names
-    )
+                 byrow = FALSE,
+                 nrow = length(x$lev) - 1,
+                 dimnames = list(
+                   x$lev[-1],
+                   col_names
+                 )
   )
   se <- matrix(s$standard.errors,
-    byrow = FALSE,
-    nrow = length(x$lev) - 1,
-    dimnames = list(
-      x$lev[-1],
-      col_names
-    )
+               byrow = FALSE,
+               nrow = length(x$lev) - 1,
+               dimnames = list(
+                 x$lev[-1],
+                 col_names
+               )
   )
-
+  
   multinomRowToDf <- function(r, coef, se, col_names) {
     unrowname(data.frame(
       y.level = rep(r, length(col_names)),
@@ -63,20 +63,20 @@ tidy.multinom <- function(x, conf.int = FALSE, conf.level = .95,
       stringsAsFactors = FALSE
     ))
   }
-
+  
   ret <- lapply(rownames(coef), multinomRowToDf, coef, se, col_names)
   ret <- do.call("rbind", ret)
-
+  
   ret$statistic <- ret$estimate / ret$std.error
   ret$p.value <- stats::pnorm(abs(ret$statistic), 0, 1, lower.tail = FALSE) * 2
-
+  
   if (conf.int) {
     ci <- apply(stats::confint(x), 2, function(a) unlist(as.data.frame(a)))
     ci <- as.data.frame(ci)
     names(ci) <- c("conf.low", "conf.high")
     ret <- cbind(ret, ci)
   }
-
+  
   if (exponentiate) {
     
     to_exp <- "estimate"
@@ -87,7 +87,7 @@ tidy.multinom <- function(x, conf.int = FALSE, conf.level = .95,
     
     ret[, to_exp] <- lapply(ret[, to_exp, drop = FALSE], exp)
   }
-
+  
   as_tibble(ret)
 }
 

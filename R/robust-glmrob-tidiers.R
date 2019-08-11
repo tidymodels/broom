@@ -1,7 +1,8 @@
 #' @templateVar class glmRob
-#' @template title_desc_tidy_lm_wrapper
+#' @template title_desc_tidy
 #'
 #' @param x A `glmRob` object returned from [robust::glmRob()].
+#' @template param_unused_dots
 #' 
 #' @details For tidiers for robust models from the \pkg{MASS} package see
 #'   [tidy.rlm()].
@@ -9,24 +10,19 @@
 #' @examples
 #'
 #' library(robust)
-#' m <- lmRob(mpg ~ wt, data = mtcars)
-#'
-#' tidy(m)
-#' augment(m)
-#' glance(m)
 #'
 #' gm <- glmRob(am ~ wt, data = mtcars, family = "binomial")
+#' 
+#' tidy(gm)
 #' glance(gm)
 #'
 #' @export
 #' @family robust tidiers
 #' @seealso [robust::glmRob()]
-#' @include stats-lm-tidiers.R
-tidy.glmRob <- function (x, ...) {
-  dots <- enquos(...)
-  dots$conf.int <- FALSE
-
-  rlang::exec(tidy.lm, x, !!!dots)
+tidy.glmRob <- function (x, ...){
+  co <- stats::coef(summary(x))
+  nn <- c("estimate", "std.error", "statistic", "p.value")
+  fix_data_frame(co, nn[1:ncol(co)])
 }
 
 #' @templateVar class glmRob

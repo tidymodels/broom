@@ -1,4 +1,4 @@
-# broom 0.5.2.9000
+# broom 0.5.2.9001
 (To be released as 0.7.0)
 
 ## Breaking changes
@@ -14,6 +14,8 @@ changes in this version of `broom`. We list them below-
   - Augment method for `factanal` objects now returns a tibble with name
     pattern `.fs` (e.g., `.fs1`, `.fs2`, `.fs3`, etc.), instead of `factor`
     (e.g., `factor1`, `factor2`, `factor3`, etc.) (#650).
+    
+  - We have removed all support for the `quick` argument in `tidy()` methods. TODO: explain why, and discuss alternatives.
     
 ## Changes to `augment()`
 
@@ -74,6 +76,12 @@ TODO: sort out what happens to `glance.aov()`
 
 ## New tidiers, features and bugfixes
 
+- Added tidier for `summary.manova` (#729)
+
+- Added `tidy()` and `glance()` methods for `speedglm` objects from the `speedglm` package
+
+- Added tidier for `epiR::epi.2by2` (#711)
+
 - Make `.fitted` values respect `type.predict` argument of `augment.clm()`. (#617)
 
 - Return factor rather than numeric class predictions in `.fitted` of `augment.polr()`. (#619)
@@ -98,6 +106,7 @@ TODO: sort out what happens to `glance.aov()`
 - Add feature for glance.biglm to return df.residual
 
 - Patch bug in glance.lavaan (#577)
+- Added tidiers for `lmrob` and `glmrob` objects from the `robustbase` package (#205, #505).
 
 - Added method `tidy.systemfit()` to tidy `systemfit` class models (by @jaspercooper)
 
@@ -122,6 +131,10 @@ TODO: sort out what happens to `glance.aov()`
 
 - `tidy.lmodel2()` now returns a `p.value` column (#570)
 
+- `tidy.zoo()` now doesn't change column names that have spaces or other
+special characters (previously they were converted to data.frame friendly
+column names by `make.names`)
+
 ### Name changes for consistency
 
 - `augment.htest()`:
@@ -144,7 +157,7 @@ TODO: sort out what happens to `glance.aov()`
 - Bug fix for `tidy.mlm()` when passed `quick = TRUE` (#539 by @MatthieuStigler)
 - Bug fix for `tidy.polr()` when passed `conf.int = TRUE` (#498)
 - Bug fix in `glance.lavaan()` (#577)
->>>>>>> upstream/master
+- Added tidiers for `lmrob` and `glmrob` objects from the `robustbase` package (#205, #505).
 
 ## Deprecations
 
