@@ -101,6 +101,7 @@ Other contributors:
   \item Angus Moore \email{angusmoore9@gmail.com} [contributor]
   \item Nick Williams \email{ntwilliams.personal@gmail.com} [contributor]
   \item Marius Barth \email{marius.barth.uni.koeln@gmail.com} (0000-0002-3421-6665) [contributor]
+  \item Bruna Wundervald \email{brunadaviesw@gmail.com} (0000-0001-8163-220X) [contributor]
 }
 
 }

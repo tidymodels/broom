@@ -47,6 +47,7 @@ the model with \code{na.action = na.exclude}.
 
 mod <- lm(cbind(mpg, disp) ~ wt, mtcars)
 tidy(mod, conf.int = TRUE)
+
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}

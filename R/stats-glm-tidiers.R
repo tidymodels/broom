@@ -1,12 +1,34 @@
 #' @templateVar class glm
-#' @template title_desc_tidy_lm_wrapper
+#' @template title_desc_tidy
 #'
 #' @param x A `glm` object returned from [stats::glm()].
+#' @template param_exponentiate
 #'
 #' @export
 #' @family lm tidiers
 #' @seealso [stats::glm()]
-tidy.glm <- tidy.lm
+tidy.glm <- function(x, conf.int = FALSE, conf.level = .95, 
+                     exponentiate = FALSE, ...) {
+  
+  ret <- as_tibble(summary(x)$coefficients, rownames = "term")
+  colnames(ret) <- c("term", "estimate", "std.error", "statistic", "p.value")
+  
+  # summary(x)$coefficients misses rank deficient rows (i.e. coefs that
+  # summary.lm() sets to NA), catch them here and add them back
+  
+  coefs <- tibble::enframe(stats::coef(x), name = "term", value = "estimate")
+  ret <- left_join(coefs, ret)
+  
+  if (conf.int) {
+    ci <- broom_confint_terms(x, level = conf.level)
+    ret <- dplyr::left_join(ret, ci, by = "term")
+  }
+  
+  if (exponentiate)
+    ret <- exponentiate(ret)
+  
+  ret
+}
 
 #' @templateVar class glm
 #' @template title_desc_augment

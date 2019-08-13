@@ -82,7 +82,7 @@ tidy.gmm <- function(x, conf.int = FALSE, conf.level = .95,
   
   coef <- summary(x)$coefficients
   ret <- as_tibble(coef, rownames = "term")
-  colnames(ret) <- c("term", "estimate", "std.error", "statistic")
+  colnames(ret) <- c("term", "estimate", "std.error", "statistic", "p.value")
   
   if (conf.int) {
     # non-standard confint return object, so can't use

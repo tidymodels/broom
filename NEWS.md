@@ -16,6 +16,8 @@ changes in this version of `broom`. We list them below-
     (e.g., `factor1`, `factor2`, `factor3`, etc.) (#650).
     
   - We have removed all support for the `quick` argument in `tidy()` methods. TODO: explain why, and discuss alternatives.
+  
+  - Remove `tidy.summary.lm()`. Call `tidy()` on the `lm` object directly.
     
 ## Changes to `augment()`
 

@@ -19,12 +19,12 @@
 #'
 #' mod <- lm(cbind(mpg, disp) ~ wt, mtcars)
 #' tidy(mod, conf.int = TRUE)
+#' 
 #' @importFrom dplyr bind_cols
 #' @export
 #' @seealso [tidy()]
 #' @family lm tidiers
 #' @export
-
 tidy.mlm <- function(x,
                      conf.int = FALSE,
                      conf.level = .95,
@@ -45,7 +45,6 @@ tidy.mlm <- function(x,
   
   ret <- as_tibble(ret)
   
-  # adding confidence intervals
   if (conf.int) {
 
     # S3 method for computing confidence intervals for `mlm` objects was

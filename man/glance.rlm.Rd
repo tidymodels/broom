@@ -44,6 +44,7 @@ For tidiers for models from the \pkg{robust} package see
 library(MASS)
 
 r <- rlm(stack.loss ~ ., stackloss)
+
 tidy(r)
 augment(r)
 glance(r)

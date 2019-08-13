@@ -54,6 +54,7 @@ glance(bfit)
 
 # bigglm: logistic regression
 bgfit <- bigglm(am ~ mpg, mtcars, family = binomial())
+
 tidy(bgfit)
 tidy(bgfit, exponentiate = TRUE)
 tidy(bgfit, conf.int = TRUE)

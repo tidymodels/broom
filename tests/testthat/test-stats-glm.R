@@ -32,6 +32,15 @@ test_that("tidy.glm works", {
   
   expect_equal(td$term, c("(Intercept)", "wt"))
   expect_equal(td2$term, c("(Intercept)", "wt", "log(disp)"))
+  
+  # TODO: write this test
+  expect_warning(
+    tidy(fit2, exponentiate = TRUE),
+    regexp = paste(
+      "Exponentiating coefficients, but model did not use a log or logit",
+      "link function"
+    )
+  )
 })
 
 test_that("glance.glm works", {

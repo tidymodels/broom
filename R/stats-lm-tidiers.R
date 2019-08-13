@@ -62,32 +62,32 @@
 #' b <- a + rnorm(length(a))
 #' result <- lm(b ~ a)
 #' tidy(result)
+#' 
 #' @aliases lm_tidiers
 #' @export
 #' @seealso [tidy()], [stats::summary.lm()]
 #' @family lm tidiers
-tidy.lm <- function(x, conf.int = FALSE, conf.level = .95,
-                    exponentiate = FALSE, ...) {
+tidy.lm <- function(x, conf.int = FALSE, conf.level = .95, ...) {
   
-  s <- summary(x)
-  ret <- tidy.summary.lm(s)
-
-  process_lm(ret, x,
-    conf.int = conf.int, conf.level = conf.level,
-    exponentiate = exponentiate
-  )
-}
-
-
-#' @rdname tidy.lm
-#' @export
-tidy.summary.lm <- function(x, ...) {
-  co <- stats::coef(x)
-  nn <- c("estimate", "std.error", "statistic", "p.value")
-
-  ret <- fix_data_frame(co, nn[1:ncol(co)])
-
-  as_tibble(ret)
+  # error on inappropriate subclassing
+  # TODO: undo gee / mclogit and other catches
+  if (length(class(x)) > 1)
+    stop("No tidy method for objects of class ", class(x)[1], call. = FALSE)
+  
+  ret <- as_tibble(summary(x)$coefficients, rownames = "term")
+  colnames(ret) <- c("term", "estimate", "std.error", "statistic", "p.value")
+  
+  # summary(x)$coefficients misses rank deficient rows (i.e. coefs that
+  # summary.lm() sets to NA), catch them here and add them back
+  coefs <- tibble::enframe(stats::coef(x), name = "term", value = "estimate")
+  ret <- left_join(coefs, ret)
+  
+  if (conf.int) {
+    ci <- broom_confint_terms(x, level = conf.level)
+    ret <- dplyr::left_join(ret, ci, by = "term")
+  }
+  
+  ret
 }
 
 #' @templateVar class lm
@@ -181,45 +181,4 @@ glance.lm <- function(x, ...) {
       nobs = stats::nobs(x)
     )
   )
-}
-
-
-
-
-process_lm <- function(ret,
-                       x,
-                       conf.int = FALSE,
-                       conf.level = .95,
-                       exponentiate = FALSE) {
-  if (exponentiate) {
-    # save transformation function for use on confidence interval
-    if (is.null(x$family) ||
-      (x$family$link != "logit" && x$family$link != "log")) {
-      warning(paste(
-        "Exponentiating coefficients, but model did not use",
-        "a log or logit link function."
-      ))
-    }
-    trans <- exp
-  } else {
-    trans <- identity
-  }
-
-  if (conf.int) {
-
-    # avoid "Waiting for profiling to be done..." message
-    CI <- suppressMessages(stats::confint(x, level = conf.level))
-    # Handle case if regression is rank deficient
-    p <- x$rank
-    if (!is.null(p) && !is.null(x$qr)) {
-      piv <- x$qr$pivot[seq_len(p)]
-      CI <- CI[piv, , drop = FALSE]
-    }
-    colnames(CI) <- c("conf.low", "conf.high")
-    ret <- cbind(ret, trans(unrowname(CI)))
-  }
-
-  ret$estimate <- trans(ret$estimate)
-
-  as_tibble(ret)
 }

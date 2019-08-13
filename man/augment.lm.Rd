@@ -140,6 +140,7 @@ a <- matrix(rnorm(20), nrow = 10)
 b <- a + rnorm(length(a))
 result <- lm(b ~ a)
 tidy(result)
+
 }
 \seealso{
 \link{na.action}
