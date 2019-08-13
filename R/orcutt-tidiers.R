@@ -33,6 +33,7 @@ tidy.orcutt <- function(x, ...) {
   co <- stats::coef(s)
   ret <- as_tibble(co, rownames = "term")
   names(ret) <- c("term", "estimate", "std.error", "statistic", "p.value")
+  return(ret)
 }
 
 #' @templateVar class orcutt
