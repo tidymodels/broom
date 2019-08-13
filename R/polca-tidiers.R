@@ -1,6 +1,6 @@
 #' @templateVar class poLCA
 #' @template title_desc_tidy
-#' 
+#'
 #' @param x A `poLCA` object returned from [poLCA::poLCA()].
 #' @template param_unused_dots
 #'
@@ -11,14 +11,14 @@
 #'   estimate = "Estimated class-conditional response probability",
 #'   "std.error"
 #' )
-#' 
+#'
 #' @examples
 #'
 #' library(poLCA)
 #' library(dplyr)
 #'
 #' data(values)
-#' f <- cbind(A, B, C, D)~1
+#' f <- cbind(A, B, C, D) ~ 1
 #' M1 <- poLCA(f, values, nclass = 2, verbose = FALSE)
 #'
 #' M1
@@ -30,12 +30,14 @@
 #'
 #' ggplot(tidy(M1), aes(factor(class), estimate, fill = factor(outcome))) +
 #'   geom_bar(stat = "identity", width = 1) +
-#'   facet_wrap(~ variable)
+#'   facet_wrap(~variable)
 #' ## Three-class model with a single covariate.
 #'
 #' data(election)
-#' f2a <- cbind(MORALG,CARESG,KNOWG,LEADG,DISHONG,INTELG,
-#'              MORALB,CARESB,KNOWB,LEADB,DISHONB,INTELB)~PARTY
+#' f2a <- cbind(
+#'   MORALG, CARESG, KNOWG, LEADG, DISHONG, INTELG,
+#'   MORALB, CARESB, KNOWB, LEADB, DISHONB, INTELB
+#' ) ~ PARTY
 #' nes2a <- poLCA(f2a, election, nclass = 3, nrep = 5, verbose = FALSE)
 #'
 #' td <- tidy(nes2a)
@@ -45,7 +47,7 @@
 #'
 #' ggplot(td, aes(outcome, estimate, color = factor(class), group = class)) +
 #'   geom_line() +
-#'   facet_wrap(~ variable, nrow = 2) +
+#'   facet_wrap(~variable, nrow = 2) +
 #'   theme(axis.text.x = element_text(angle = 90, hjust = 1))
 #'
 #' au <- augment(nes2a)
@@ -57,11 +59,10 @@
 #' au2 <- augment(nes2a, data = election)
 #' au2
 #' dim(au2)
-#'
 #' @aliases poLCA_tidiers
 #' @export
 #' @seealso [tidy()], [poLCA::poLCA()]
-#' @family poLCA tidiers 
+#' @family poLCA tidiers
 #'
 tidy.poLCA <- function(x, ...) {
   probs <- purrr::map_df(x$probs, reshape2::melt, .id = "variable") %>%
@@ -88,17 +89,17 @@ tidy.poLCA <- function(x, ...) {
 
 #' @templateVar class poLCA
 #' @template title_desc_augment
-#' 
+#'
 #' @inherit tidy.poLCA params examples
 #' @template param_data
-#' 
+#'
 #' @evalRd return_augment(
 #'   .fitted = FALSE,
 #'   .resid = FALSE,
 #'   ".class",
 #'   ".probability"
 #' )
-#' 
+#'
 #' @details If the `data` argument is given, those columns are included in
 #'   the output (only rows for which predictions could be made).
 #'   Otherwise, the `y` element of the poLCA object, which contains the
@@ -114,12 +115,12 @@ tidy.poLCA <- function(x, ...) {
 #' @family poLCA tidiers
 augment.poLCA <- function(x, data = NULL, ...) {
   indices <- cbind(seq_len(nrow(x$posterior)), x$predclass)
-  
+
   ret <- tibble(
     .class = x$predclass,
     .probability = x$posterior[indices]
   )
-  
+
   if (is.null(data)) {
     data <- bind_cols(x$y, x$x)
   } else {
@@ -129,13 +130,13 @@ augment.poLCA <- function(x, data = NULL, ...) {
       ret <- ret[rownames(data), ]
     }
   }
-  
+
   as_tibble(bind_cols(data, ret))
 }
 
 #' @templateVar class poLCA
 #' @template title_desc_glance
-#' 
+#'
 #' @inherit tidy.poLCA params examples
 #'
 #' @evalRd return_glance(

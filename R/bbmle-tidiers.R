@@ -4,22 +4,22 @@
 #' @param x An `mle2` object created by a call to [bbmle::mle2()].
 #' @template param_confint
 #' @template param_unused_dots
-#' 
+#'
 #' @evalRd return_tidy(regression = TRUE)
 #'
 #' @examples
-#' 
+#'
 #' library(bbmle)
 #'
 #' x <- 0:10
 #' y <- c(26, 17, 13, 12, 20, 5, 9, 8, 5, 4, 8)
-#' d <- data.frame(x,y)
+#' d <- data.frame(x, y)
 #'
 #' fit <- mle2(y ~ dpois(lambda = ymean),
-#'             start = list(ymean = mean(y)), data = d)
+#'   start = list(ymean = mean(y)), data = d
+#' )
 #'
 #' tidy(fit)
-#'
 #' @export
 #' @seealso [tidy()], [bbmle::mle2()], [tidy_optim()]
 #' @aliases mle2_tidiers bbmle_tidiers

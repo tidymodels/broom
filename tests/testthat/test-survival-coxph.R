@@ -22,7 +22,7 @@ test_that("tidy.coxph", {
   td3 <- tidy(fit2)
   td4 <- tidy(fit3)
   td5 <- tidy(fit3, exponentiate = TRUE)
-  
+
   check_tidy_output(td)
   check_tidy_output(td2)
   check_tidy_output(td3)
@@ -33,24 +33,23 @@ test_that("tidy.coxph", {
 test_that("glance.coxph", {
   gl <- glance(fit)
   gl2 <- glance(fit2)
-  
+
   check_glance_outputs(gl, gl2, strict = FALSE)
 })
 
 test_that("augment.coxph", {
-  
   expect_error(
     augment(fit),
     regexp = "Must specify either `data` or `newdata` argument."
   )
-  
+
   check_augment_function(
     aug = augment.coxph,
     model = fit,
     data = lung,
     newdata = lung
   )
-  
+
   check_augment_function(
     aug = augment.coxph,
     model = fit2,

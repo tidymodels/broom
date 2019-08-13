@@ -62,7 +62,7 @@ test_that("glance.glmnet.formula", {
   gl2 <- glance(fit2)
 
   check_glance_outputs(gl, gl2)
-  
+
   expect_is(gl, "tbl_df")
   expect_equal(dim(gl), c(1L, 3L))
 })

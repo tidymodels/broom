@@ -17,7 +17,7 @@ marginal_dashes <- tibble(
   x = rep(c("Single", "Double-Barrelled"), 50)
 ) %>%
   lm(y ~ x, data = .) %>%
-  lsmeans::lsmeans(., ~ x) %>%
+  lsmeans::lsmeans(., ~x) %>%
   lsmeans::contrast(., "pairwise")
 
 test_that("lsmeans tidier arguments", {
@@ -30,11 +30,11 @@ test_that("tidy.lsmobj", {
   tdm <- tidy(marginal)
   tdmd <- tidy(marginal_dashes)
   tdc <- tidy(contrast(marginal, method = "pairwise"))
-  
+
   check_tidy_output(tdm, strict = FALSE)
   check_tidy_output(tdmd, strict = FALSE)
   check_tidy_output(tdc, strict = FALSE)
-  
+
   check_dims(tdm, 6, 6)
   check_dims(tdmd, 1, 7)
   check_dims(tdc, 15, 7)

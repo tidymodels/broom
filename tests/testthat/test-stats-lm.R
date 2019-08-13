@@ -23,7 +23,7 @@ fit_rd <- lm(y ~ x - 1, data = rd_data)
 test_that("tidy.lm works", {
   td <- tidy(fit)
   td2 <- tidy(fit2)
-  
+
   # conf.int = TRUE works for rank deficient fits
   # should get a "NaNs produced" warning
   expect_warning(td_rd <- tidy(fit_rd, conf.int = TRUE))
@@ -34,7 +34,7 @@ test_that("tidy.lm works", {
 
   check_dims(td, expected_rows = 2)
   check_dims(td2, expected_rows = 3)
-  
+
   expect_equal(td$term, c("(Intercept)", "wt"))
   expect_equal(td2$term, c("(Intercept)", "wt", "log(disp)"))
 

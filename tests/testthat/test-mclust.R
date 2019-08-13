@@ -25,12 +25,12 @@ test_that("tidy.Mclust", {
   td2 <- tidy(fit2)
   td3 <- tidy(fit3)
   td4 <- tidy(fit4)
-  
+
   check_tidy_output(td, strict = FALSE)
   check_tidy_output(td2, strict = FALSE)
   check_tidy_output(td3, strict = FALSE)
   check_tidy_output(td4, strict = FALSE)
-  
+
   check_dims(td, 7, 8)
   check_dims(td2, 1, 7)
   check_dims(td3, 2, 5)
@@ -42,26 +42,25 @@ test_that("glance.Mclust", {
   gl2 <- glance(fit2)
   gl3 <- glance(fit3)
   gl4 <- glance(fit4)
-  
+
   check_glance_outputs(gl, gl2, gl3, gl4)
 })
 
 test_that("augment.Mclust", {
-  
   check_augment_function(
     aug = augment.Mclust,
     model = fit,
     data = dat,
     newdata = dat
   )
-  
+
   check_augment_function(
     aug = augment.Mclust,
     model = fit2,
     data = dat,
     newdata = dat
   )
-  
+
   check_augment_function(
     aug = augment.Mclust,
     model = fit3,
@@ -69,13 +68,13 @@ test_that("augment.Mclust", {
     newdata = dat3,
     strict = FALSE
   )
-  
+
   fit_on_vector <- Mclust(1:10)
-  
+
   expect_silent(
     augment(fit_on_vector)
   )
-  
+
   expect_error(
     augment(fit, 1:10),
     "`data` must be a data frame or matrix."

@@ -5,8 +5,8 @@
 #' @template param_unused_dots
 #'
 #' @evalRd return_tidy(
-#'   "parameter", 
-#'   "value", 
+#'   "parameter",
+#'   "value",
 #'   "std.error",
 #'   .post = "\\code{std.error} is only provided as a column if the Hessian is calculated."
 #' )
@@ -18,7 +18,6 @@
 #'
 #' tidy(o)
 #' glance(o)
-#'
 #' @aliases optim_tidiers tidy.optim
 #' @family list tidiers
 #' @seealso [tidy()], [stats::optim()]

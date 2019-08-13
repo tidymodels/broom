@@ -2,7 +2,7 @@
 #' @template title_desc_tidy
 #'
 #' @param x An `lm` object created by [stats::lm()].
-#' @template param_confint 
+#' @template param_confint
 #' @template param_exponentiate
 #' @template param_unused_dots
 #'
@@ -40,7 +40,9 @@
 #' augment(mod, mtcars)
 #'
 #' # predict on new data
-#' newdata <- mtcars %>% head(6) %>% mutate(wt = wt + 1)
+#' newdata <- mtcars %>%
+#'   head(6) %>%
+#'   mutate(wt = wt + 1)
 #' augment(mod, newdata = newdata)
 #'
 #' au <- augment(mod, data = mtcars)
@@ -68,7 +70,6 @@
 #' @family lm tidiers
 tidy.lm <- function(x, conf.int = FALSE, conf.level = .95,
                     exponentiate = FALSE, ...) {
-  
   s <- summary(x)
   ret <- tidy.summary.lm(s)
 

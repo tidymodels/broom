@@ -1,16 +1,16 @@
 #' @templateVar class zoo
 #' @template title_desc_tidy
-#' 
+#'
 #' @param x A `zoo` object such as those created by [zoo::zoo()].
 #' @template param_unused_dots
-#' 
+#'
 #' @evalRd return_tidy("index", "series", "value")
 #'
 #' @examples
 #'
 #' library(zoo)
 #' library(ggplot2)
-#' 
+#'
 #' set.seed(1071)
 #'
 #' # data generated as shown in the zoo vignette
@@ -23,15 +23,14 @@
 #'
 #' ggplot(tidy(Z), aes(index, value, color = series)) +
 #'   geom_line()
-#'   
+#'
 #' ggplot(tidy(Z), aes(index, value)) +
 #'   geom_line() +
-#'   facet_wrap(~ series, ncol = 1)
+#'   facet_wrap(~series, ncol = 1)
 #'
 #' Zrolled <- rollmean(Z, 5)
 #' ggplot(tidy(Zrolled), aes(index, value, color = series)) +
 #'   geom_line()
-#' 
 #' @aliases zoo_tidiers
 #' @export
 #' @seealso [tidy()], [zoo::zoo()]

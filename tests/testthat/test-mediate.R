@@ -21,17 +21,14 @@ mod <- mediate(b, c, sims = 50, treat = "treat", mediator = "job_seek")
 
 test_that("mediation tidier arguments", {
   check_arguments(tidy.mediate)
-
 })
 
 test_that("tidy.mediation", {
-  
   td1 <- tidy(mod, conf.int = TRUE, conf.level = .99)
   td2 <- tidy(mod, conf.int = TRUE)
-  
+
   check_tidy_output(td1)
   check_tidy_output(td2)
-  
+
   check_dims(td1, 4, 6)
 })
-

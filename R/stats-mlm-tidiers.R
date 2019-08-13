@@ -32,19 +32,19 @@ tidy.mlm <- function(x,
 
   # adding other details from summary object
   s <- summary(x)
-  #ret <- tidy.summary.mlm(s)
+  # ret <- tidy.summary.mlm(s)
 
   co <- stats::coef(s)
   nn <- c("estimate", "std.error", "statistic", "p.value")
-  
+
   # multiple response variables
   ret <- purrr::map_df(co, fix_data_frame, nn[1:ncol(co[[1]])],
-                       .id = "response"
+    .id = "response"
   )
   ret$response <- stringr::str_replace(ret$response, "Response ", "")
-  
+
   ret <- as_tibble(ret)
-  
+
   # adding confidence intervals
   if (conf.int) {
 

@@ -3,21 +3,20 @@
 #'
 #' @param x An `survdiff` object returned from [survival::survdiff()].
 #' @template param_unused_dots
-#' 
+#'
 #' @evalRd return_tidy("obs", "exp", "N")
 #'
 #' @examples
-#' 
+#'
 #' library(survival)
-#' 
+#'
 #' s <- survdiff(
 #'   Surv(time, status) ~ pat.karno + strata(inst),
 #'   data = lung
 #' )
-#' 
+#'
 #' tidy(s)
 #' glance(s)
-#'
 #' @aliases survdiff_tidiers
 #' @export
 #' @seealso [tidy()], [survival::survdiff()]
@@ -54,9 +53,9 @@ tidy.survdiff <- function(x, ...) {
 
 #' @templateVar class survdiff
 #' @template title_desc_glance
-#' 
+#'
 #' @inherit tidy.survdiff params examples
-#' 
+#'
 #' @evalRd return_glance("statistic", "df", "p.value")
 #'
 #' @export

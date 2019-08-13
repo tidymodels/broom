@@ -8,19 +8,19 @@
 #'   data such as predictions, residuals and cluster assignments; and glance,
 #'   which provides a one-row summary of model-level statistics.
 #'
-#' @importFrom stats AIC BIC coef confint fitted logLik model.frame 
+#' @importFrom stats AIC BIC coef confint fitted logLik model.frame
 #' @importFrom stats predict qnorm qt residuals setNames var na.omit
 #' @importFrom stats model.response terms na.pass cooks.distance
 #' @importFrom stats influence rstandard
-#' 
+#'
 #' @importFrom purrr map_df set_names possibly
 #' @importFrom tibble tibble as_tibble
 #' @importFrom tidyr gather spread
 #' @importFrom dplyr select filter mutate mutate_at
-#' 
+#'
 #' @importFrom utils head
 #' @importFrom glue glue
-#' 
+#'
 #' @import dplyr
 #'
 #' @docType package
@@ -42,4 +42,3 @@ generics::tidy
 #' @export
 #' @seealso [glance.lm()]
 generics::glance
-

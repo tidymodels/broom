@@ -15,11 +15,10 @@ test_that("MASS::rlm tidier arguments", {
 })
 
 test_that("tidy.rlm", {
-  
   td2 <- tidy(fit, conf.int = TRUE)
-  
+
   check_tidy_output(td2)
-  
+
   # regression test for #380
   expect_false(NA %in% td2$conf.low)
   expect_false(NA %in% td2$conf.high)
@@ -32,7 +31,6 @@ test_that("glance.rlm", {
 })
 
 test_that("augment.rlm", {
-  
   check_augment_function(
     aug = augment.rlm,
     model = fit,

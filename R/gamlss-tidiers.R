@@ -3,7 +3,7 @@
 #'
 #' @param x A `gamlss` object returned from [gamlss::gamlss()].
 #' @template param_unused_dots
-#' 
+#'
 #' @evalRd return_tidy(
 #'   parameter = "Type of coefficient being estimated: `mu`, `sigma`,
 #'     `nu`, or `tau`.",
@@ -13,11 +13,11 @@
 #'   "statistic",
 #'   "p.value"
 #' )
-#' 
+#'
 #' @examples
-#' 
+#'
 #' library(gamlss)
-#' 
+#'
 #' g <- gamlss(
 #'   y ~ pb(x),
 #'   sigma.fo = ~ pb(x),
@@ -27,7 +27,6 @@
 #' )
 #'
 #' tidy(g)
-#'
 #' @export
 tidy.gamlss <- function(x, ...) {
 

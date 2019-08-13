@@ -5,7 +5,7 @@
 #' @param return_zeros Logical indicating whether coefficients with value zero
 #'   zero should be included in the results. Defaults to `FALSE`.
 #' @template param_unused_dots
-#' 
+#'
 #' @evalRd return_tidy(
 #'   "term",
 #'   "step",
@@ -13,7 +13,7 @@
 #'   "lambda",
 #'   "dev.ratio"
 #' )
-#'   
+#'
 #' @details Note that while this representation of GLMs is much easier
 #'   to plot and combine than the default structure, it is also much
 #'   more memory-intensive. Do not use for large, sparse matrices.
@@ -23,15 +23,15 @@
 #'   may be very wide) and therefore combining predictions with it is not
 #'   logical. Furthermore, predictions make sense only with a specific
 #'   choice of lambda.
-#'   
+#'
 #' @examples
-#' 
+#'
 #' library(glmnet)
-#' 
+#'
 #' set.seed(2014)
-#' x <- matrix(rnorm(100*20),100,20)
+#' x <- matrix(rnorm(100 * 20), 100, 20)
 #' y <- rnorm(100)
-#' fit1 <- glmnet(x,y)
+#' fit1 <- glmnet(x, y)
 #'
 #' tidy(fit1)
 #' glance(fit1)
@@ -43,27 +43,26 @@
 #'
 #' ggplot(tidied, aes(step, estimate, group = term)) + geom_line()
 #' ggplot(tidied, aes(lambda, estimate, group = term)) +
-#'     geom_line() + scale_x_log10()
+#'   geom_line() + scale_x_log10()
 #'
 #' ggplot(tidied, aes(lambda, dev.ratio)) + geom_line()
 #'
 #' # works for other types of regressions as well, such as logistic
-#' g2 <- sample(1:2, 100, replace=TRUE)
-#' fit2 <- glmnet(x, g2, family="binomial")
+#' g2 <- sample(1:2, 100, replace = TRUE)
+#' fit2 <- glmnet(x, g2, family = "binomial")
 #' tidy(fit2)
-#'
 #' @export
 #' @aliases glmnet_tidiers
 #' @family glmnet tidiers
 #' @seealso [tidy()], [glmnet::glmnet()]
 tidy.glmnet <- function(x, return_zeros = FALSE, ...) {
   beta <- coef(x)
-  
+
   if (inherits(x, "multnet")) {
     beta_d <- purrr::map_df(beta, function(b) {
       fix_data_frame(as.matrix(b), newnames = 1:ncol(b), newcol = "term")
     }, .id = "class")
-    ret <- beta_d %>% 
+    ret <- beta_d %>%
       tidyr::gather(step, estimate, -term, -class)
   } else {
     beta_d <- fix_data_frame(
@@ -80,27 +79,29 @@ tidy.glmnet <- function(x, return_zeros = FALSE, ...) {
       lambda = x$lambda[step],
       dev.ratio = x$dev.ratio[step]
     )
-  
+
   if (!return_zeros) {
     ret <- filter(ret, estimate != 0)
   }
-  
+
   as_tibble(ret)
 }
 
 
 #' @templateVar class glmnet
 #' @template title_desc_glance
-#' 
+#'
 #' @inherit tidy.glmnet params examples
-#' 
+#'
 #' @evalRd return_glance("nulldev", "npasses", "nobs")
 #'
 #' @export
 #' @family glmnet tidiers
 #' @seealso [glance()], [glmnet::glmnet()]
 glance.glmnet <- function(x, ...) {
-  tibble(nulldev = x$nulldev, 
-         npasses = x$npasses,
-         nobs = stats::nobs(x))
+  tibble(
+    nulldev = x$nulldev,
+    npasses = x$npasses,
+    nobs = stats::nobs(x)
+  )
 }
