@@ -355,7 +355,7 @@ Suggests:
     survey,
     survival,
     systemfit,
-    testthat,
+    testthat (>= 2.1.0),
     tseries,
     xergm,
     zoo
