@@ -183,18 +183,7 @@ glance.lm <- function(x, ...) {
   )
 }
 
-# getAnywhere('format.perc')
-.format.perc <- function(probs, digits) {
-  paste(
-    format(
-      100 * probs,
-      trim = TRUE,
-      scientific = FALSE,
-      digits = digits
-    ),
-    "%"
-  )
-}
+
 
 
 process_lm <- function(ret,

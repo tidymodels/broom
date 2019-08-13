@@ -59,7 +59,7 @@ tidy.mlm <- function(x,
 
     # if R version is prior to 3.5, use the custom function
     if (is.null(CI)) {
-      CI <- confint.mlm(x, level = conf.level)
+      CI <- confint_mlm(x, level = conf.level)
     }
 
     colnames(CI) <- c("conf.low", "conf.high")
@@ -75,18 +75,15 @@ tidy.mlm <- function(x,
 augment.mlm <- augment.default
 
 #' @export
-
 glance.mlm <- glance.default
 
 # compute confidence intervals for mlm object.
-confint.mlm <- function(object, level = 0.95, ...) {
-  cf <- coef(object)
-  ncfs <- as.numeric(cf)
-  a <- (1 - level) / 2
-  a <- c(a, 1 - a)
-  fac <- qt(a, object$df.residual)
-  pct <- .format.perc(a, 3)
-  ses <- sqrt(diag(stats::vcov(object)))
-  ci <- ncfs + ses %o% fac
-  setNames(data.frame(ci), pct)
+confint_mlm <- function(object, level = 0.95, ...) {
+  coef <- as.numeric(coef(object))
+  alpha <- (1 - level) / 2
+  crit_val <- qt(c(alpha, 1 - alpha), object$df.residual)
+  se <- sqrt(diag(stats::vcov(object)))
+  ci <- as.data.frame(coef + se %o% crit_val)
+  colnames(ci) <- c("conf.low", "conf.high")
+  ci
 }
