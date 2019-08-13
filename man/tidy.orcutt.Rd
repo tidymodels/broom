@@ -5,15 +5,10 @@
 \alias{orcutt_tidiers}
 \title{Tidy a(n) orcutt object}
 \usage{
-\method{tidy}{orcutt}(x, exponentiate = FALSE, ...)
+\method{tidy}{orcutt}(x, ...)
 }
 \arguments{
 \item{x}{An \code{orcutt} object returned from \code{\link[orcutt:cochrane.orcutt]{orcutt::cochrane.orcutt()}}.}
-
-\item{exponentiate}{Logical indicating whether or not to exponentiate the
-the coefficient estimates. This is typical for logistic and multinomial
-regressions, but a bad idea if there is no log or logit link. Defaults
-to \code{FALSE}.}
 
 \item{...}{Additional arguments. Not used. Needed to match generic
 signature only. \strong{Cautionary note:} Misspelled arguments will be
