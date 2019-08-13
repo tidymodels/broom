@@ -28,21 +28,11 @@
 #' @export
 #' @family orcutt tidiers
 #' @seealso [orcutt::cochrane.orcutt()]
-tidy.orcutt <- function(x, exponentiate = FALSE, ...) {
+tidy.orcutt <- function(x, ...) {
   s <- summary(x)
-  ret <- tidy.summary.orcutt(s)
-  
-  process_orcutt(ret, x, exponentiate = exponentiate)
-}
-
-#' @rdname orcutt
-#' @export
-tidy.summary.orcutt <- function(x, ...) {
-  co <- stats::coef(x)
+  co <- stats::coef(s)
   nn <- c("estimate", "std.error", "statistic", "p.value")
-  
   ret <- fix_data_frame(co, nn[1:ncol(co)])
-  
   as_tibble(ret)
 }
 
@@ -79,27 +69,4 @@ glance.orcutt <- function(x, ...) {
     p.value.transformed = x$DW[4],
     nobs = stats::nobs(x)
   )
-}
-
-
-process_orcutt <- function(ret,
-                           x,
-                           exponentiate = FALSE) {
-  if (exponentiate) {
-    # save transformation function for use on confidence interval
-    if (is.null(x$family) ||
-        (x$family$link != "logit" && x$family$link != "log")) {
-      warning(paste(
-        "Exponentiating coefficients, but model did not use",
-        "a log or logit link function."
-      ))
-    }
-    trans <- exp
-  } else {
-    trans <- identity
-  }
-  
-  ret$estimate <- trans(ret$estimate)
-  
-  as_tibble(ret)
 }
