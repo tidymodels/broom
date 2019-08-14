@@ -33,7 +33,12 @@
 
 <meta property="og:title" content="Tidy a(n) lmRob object — tidy.lmRob" />
 
-<meta property="og:description" content="This method wraps tidy.lm()." />
+<meta property="og:description" content="Tidy summarizes information about the components of a model.
+A model component might be a single term in a regression, a single
+hypothesis, a cluster, or a class. Exactly what tidy considers to be a
+model component varies cross models but is usually self-evident.
+If a model has several distinct types of components, you will need to
+specify which components to return." />
 
 <meta property="og:image" content="http://broom.tidyverse.org/logo.png" />
 <meta name="twitter:card" content="summary" />
@@ -143,7 +148,12 @@
 
     <div class="ref-description">
     
-    <p>This method wraps <code><a href='tidy.lm.html'>tidy.lm()</a></code>.</p>
+    <p>Tidy summarizes information about the components of a model.
+A model component might be a single term in a regression, a single
+hypothesis, a cluster, or a class. Exactly what tidy considers to be a
+model component varies cross models but is usually self-evident.
+If a model has several distinct types of components, you will need to
+specify which components to return.</p>
     
     </div>
 
@@ -178,8 +188,7 @@ the <code>data</code> argument.</p></td>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='https://www.rdocumentation.org/packages/generics/topics/tidy'>tidy()</a></code>, <code><a href='tidy.lm.html'>tidy.lm()</a></code></p>
-<p><code><a href='https://www.rdocumentation.org/packages/robust/topics/lmRob'>robust::lmRob()</a></code></p>
+    <div class='dont-index'><p><code><a href='https://www.rdocumentation.org/packages/robust/topics/lmRob'>robust::lmRob()</a></code></p>
 <p>Other robust tidiers: <code><a href='augment.lmRob.html'>augment.lmRob</a></code>,
   <code><a href='glance.glmRob.html'>glance.glmRob</a></code>, <code><a href='glance.lmRob.html'>glance.lmRob</a></code>,
   <code><a href='tidy.glmRob.html'>tidy.glmRob</a></code></p></div>
