@@ -126,7 +126,7 @@ tidy.emmGrid <- function(x, ...) {
   tidy_emmeans(x, ...)
 }
 
-#' @templateVar class emmGrid
+#' @templateVar class summary_emm
 #' @template title_desc_tidy
 #' 
 #' @param x An `summary_emm` object.
