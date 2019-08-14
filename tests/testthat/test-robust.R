@@ -59,3 +59,27 @@ test_that("augment.glmRob", {
     "`augment.glmRob` has been removed from broom. See the documentation."
   )
 })
+
+test_that("no more rlang issues with model objects from robust", { # from issue 720
+  
+  expect_equal(
+    tidy(fit, conf.int = TRUE), 
+    tidy(fit)
+  )
+  
+  expect_equal(
+    tidy(fit, exponentiate = TRUE), 
+    tidy(fit)
+  )
+  
+  expect_equal(
+    tidy(fit2, conf.int = TRUE), 
+    tidy(fit2)
+  )
+  
+  expect_equal(
+    tidy(fit2, exponentiate = TRUE), 
+    tidy(fit2)
+  )
+  
+})

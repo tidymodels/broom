@@ -21,8 +21,9 @@
 #' @seealso [robust::glmRob()]
 tidy.glmRob <- function (x, ...){
   co <- stats::coef(summary(x))
-  nn <- c("estimate", "std.error", "statistic", "p.value")
-  fix_data_frame(co, nn[1:ncol(co)])
+  ret <- as_tibble(co, rownames = "term")
+  names(ret) <- c("term", "estimate", "std.error", "statistic", "p.value")
+  ret
 }
 
 #' @templateVar class glmRob
