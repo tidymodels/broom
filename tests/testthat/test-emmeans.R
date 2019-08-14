@@ -57,6 +57,6 @@ test_that("summary_emm tidiers work", {
   expect_identical(tdm, tdms)
   
   tdjt <- tidy(joint_tests_summary)
-  check_tidy_output(tdjt, strict = FALSE)
+  check_tidy_output(tdjt)
   check_dims(tdjt, 2, 5)
 })

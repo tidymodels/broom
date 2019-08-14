@@ -62,6 +62,9 @@
 #' ggplot(tidy(by_price), aes(price2, estimate, color = day)) +
 #'   geom_line() +
 #'   geom_errorbar(aes(ymin = conf.low, ymax = conf.high))
+#'   
+#' # joint_tests
+#' tidy(joint_tests(oranges_lm1))
 #'
 #' @aliases emmeans_tidiers
 #' @export
