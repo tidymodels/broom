@@ -2,7 +2,7 @@
 % Please edit documentation in R/emmeans-tidiers.R
 \name{tidy.summary_emm}
 \alias{tidy.summary_emm}
-\title{Tidy a(n) emmGrid object}
+\title{Tidy a(n) summary_emm object}
 \usage{
 \method{tidy}{summary_emm}(x, ...)
 }
@@ -64,6 +64,9 @@ tidy(by_price)
 ggplot(tidy(by_price), aes(price2, estimate, color = day)) +
   geom_line() +
   geom_errorbar(aes(ymin = conf.low, ymax = conf.high))
+  
+# joint_tests
+tidy(joint_tests(oranges_lm1))
 
 }
 \seealso{
