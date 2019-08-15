@@ -188,7 +188,8 @@ passed on to <code><a href='https://www.rdocumentation.org/packages/emmeans/topi
     <div class='dont-index'><p><code><a href='https://www.rdocumentation.org/packages/generics/topics/tidy'>tidy()</a></code>, <code><a href='https://www.rdocumentation.org/packages/emmeans/topics/ref_grid'>emmeans::ref_grid()</a></code>, <code><a href='https://www.rdocumentation.org/packages/emmeans/topics/emmeans'>emmeans::emmeans()</a></code>,
 <code><a href='https://www.rdocumentation.org/packages/emmeans/topics/contrast'>emmeans::contrast()</a></code></p>
 <p>Other emmeans tidiers: <code><a href='tidy.lsmobj.html'>tidy.lsmobj</a></code>,
-  <code><a href='tidy.ref.grid.html'>tidy.ref.grid</a></code></p></div>
+  <code><a href='tidy.ref.grid.html'>tidy.ref.grid</a></code>,
+  <code><a href='tidy.summary_emm.html'>tidy.summary_emm</a></code></p></div>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
@@ -311,6 +312,12 @@ passed on to <code><a href='https://www.rdocumentation.org/packages/emmeans/topi
 <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/generics/topics/tidy'>tidy</a></span>(<span class='no'>by_price</span>), <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='no'>price2</span>, <span class='no'>estimate</span>, <span class='kw'>color</span> <span class='kw'>=</span> <span class='no'>day</span>)) +
   <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_path.html'>geom_line</a></span>() +
   <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_linerange.html'>geom_errorbar</a></span>(<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='kw'>ymin</span> <span class='kw'>=</span> <span class='no'>conf.low</span>, <span class='kw'>ymax</span> <span class='kw'>=</span> <span class='no'>conf.high</span>))</div><div class='img'><img src='tidy.emmGrid-2.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='co'># joint_tests</span>
+<span class='fu'><a href='https://www.rdocumentation.org/packages/generics/topics/tidy'>tidy</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/emmeans/topics/joint_tests'>joint_tests</a></span>(<span class='no'>oranges_lm1</span>))</div><div class='output co'>#&gt; # A tibble: 2 x 5
+#&gt;   term  num.df den.df statistic p.value
+#&gt;   &lt;chr&gt;  &lt;dbl&gt;  &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;
+#&gt; 1 day        5     23      4.88 0.00346
+#&gt; 2 store      5     23      2.52 0.0583 </div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

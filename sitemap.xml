@@ -577,6 +577,9 @@
     <loc>http://broom.tidyverse.org/reference/tidy.summary.manova.html</loc>
   </url>
   <url>
+    <loc>http://broom.tidyverse.org/reference/tidy.summary_emm.html</loc>
+  </url>
+  <url>
     <loc>http://broom.tidyverse.org/reference/tidy.survdiff.html</loc>
   </url>
   <url>

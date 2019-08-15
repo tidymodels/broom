@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Tidy a(n) lsmobj object — tidy.lsmobj • broom</title>
+<title>Tidy a(n) summary_emm object — tidy.summary_emm • broom</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -31,7 +31,7 @@
 
 
 
-<meta property="og:title" content="Tidy a(n) lsmobj object — tidy.lsmobj" />
+<meta property="og:title" content="Tidy a(n) summary_emm object — tidy.summary_emm" />
 
 <meta property="og:description" content="Tidy summarizes information about the components of a model.
 A model component might be a single term in a regression, a single
@@ -141,9 +141,9 @@ specify which components to return." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Tidy a(n) lsmobj object</h1>
+    <h1>Tidy a(n) summary_emm object</h1>
     <small class="dont-index">Source: <a href='https://github.com/tidymodels/broom/blob/master/R/emmeans-tidiers.R'><code>R/emmeans-tidiers.R</code></a></small>
-    <div class="hidden name"><code>tidy.lsmobj.Rd</code></div>
+    <div class="hidden name"><code>tidy.summary_emm.Rd</code></div>
     </div>
 
     <div class="ref-description">
@@ -157,26 +157,15 @@ specify which components to return.</p>
     
     </div>
 
-    <pre class="usage"><span class='co'># S3 method for lsmobj</span>
-<span class='fu'><a href='https://www.rdocumentation.org/packages/generics/topics/tidy'>tidy</a></span>(<span class='no'>x</span>, <span class='kw'>conf.int</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>conf.level</span> <span class='kw'>=</span> <span class='fl'>0.95</span>, <span class='no'>...</span>)</pre>
+    <pre class="usage"><span class='co'># S3 method for summary_emm</span>
+<span class='fu'><a href='https://www.rdocumentation.org/packages/generics/topics/tidy'>tidy</a></span>(<span class='no'>x</span>, <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>x</th>
-      <td><p>An <code>lsmobj</code> object.</p></td>
-    </tr>
-    <tr>
-      <th>conf.int</th>
-      <td><p>Logical indicating whether or not to include a confidence
-interval in the tidied output. Defaults to <code>FALSE</code>.</p></td>
-    </tr>
-    <tr>
-      <th>conf.level</th>
-      <td><p>The confidence level to use for the confidence interval
-if <code>conf.int = TRUE</code>. Must be strictly greater than 0 and less than 1.
-Defaults to 0.95, which corresponds to a 95 percent confidence interval.</p></td>
+      <td><p>An <code>summary_emm</code> object.</p></td>
     </tr>
     <tr>
       <th>...</th>
@@ -199,8 +188,7 @@ passed on to <code><a href='https://www.rdocumentation.org/packages/emmeans/topi
     <div class='dont-index'><p><code><a href='https://www.rdocumentation.org/packages/generics/topics/tidy'>tidy()</a></code>, <code><a href='https://www.rdocumentation.org/packages/emmeans/topics/ref_grid'>emmeans::ref_grid()</a></code>, <code><a href='https://www.rdocumentation.org/packages/emmeans/topics/emmeans'>emmeans::emmeans()</a></code>,
 <code><a href='https://www.rdocumentation.org/packages/emmeans/topics/contrast'>emmeans::contrast()</a></code></p>
 <p>Other emmeans tidiers: <code><a href='tidy.emmGrid.html'>tidy.emmGrid</a></code>,
-  <code><a href='tidy.ref.grid.html'>tidy.ref.grid</a></code>,
-  <code><a href='tidy.summary_emm.html'>tidy.summary_emm</a></code></p></div>
+  <code><a href='tidy.lsmobj.html'>tidy.lsmobj</a></code>, <code><a href='tidy.ref.grid.html'>tidy.ref.grid</a></code></p></div>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
@@ -208,12 +196,15 @@ passed on to <code><a href='https://www.rdocumentation.org/packages/emmeans/topi
 <dt>conf.high</dt><dd><p>Upper bound on the confidence interval for the estimate.</p></dd>
   <dt>conf.low</dt><dd><p>Lower bound on the confidence interval for the estimate.</p></dd>
   <dt>contrast</dt><dd><p>Levels being compared.</p></dd>
+  <dt>den.df</dt><dd><p>Degrees of freedom of the denominator</p></dd>
   <dt>df</dt><dd><p>Degrees of freedom used by this term in the model.</p></dd>
+  <dt>num.df</dt><dd><p>Degrees of freedom</p></dd>
   <dt>p.value</dt><dd><p>The two-sided p-value associated with the observed statistic.</p></dd>
   <dt>std.error</dt><dd><p>The standard error of the regression term.</p></dd>
   <dt>level1</dt><dd><p>One level of the factor being contrasted</p></dd>
   <dt>level2</dt><dd><p>The other level of the factor being contrasted</p></dd>
-  <dt>statistic</dt><dd><p>T-ratio statistic</p></dd>
+  <dt>term</dt><dd><p>Model term in joint tests</p></dd>
+  <dt>statistic</dt><dd><p>T-ratio statistic or F-ratio statistic</p></dd>
   <dt>estimate</dt><dd><p>Estimated least-squares mean.</p></dd>
 
 
@@ -284,7 +275,7 @@ passed on to <code><a href='https://www.rdocumentation.org/packages/emmeans/topi
 <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/library'>library</a></span>(<span class='no'>ggplot2</span>)
 <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/generics/topics/tidy'>tidy</a></span>(<span class='no'>marginal</span>), <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='no'>day</span>, <span class='no'>estimate</span>)) +
   <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_point.html'>geom_point</a></span>() +
-  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_linerange.html'>geom_errorbar</a></span>(<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='kw'>ymin</span> <span class='kw'>=</span> <span class='no'>conf.low</span>, <span class='kw'>ymax</span> <span class='kw'>=</span> <span class='no'>conf.high</span>))</div><div class='img'><img src='tidy.lsmobj-1.png' alt='' width='700' height='433' /></div><div class='input'>
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_linerange.html'>geom_errorbar</a></span>(<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='kw'>ymin</span> <span class='kw'>=</span> <span class='no'>conf.low</span>, <span class='kw'>ymax</span> <span class='kw'>=</span> <span class='no'>conf.high</span>))</div><div class='img'><img src='tidy.summary_emm-1.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'># by multiple prices</span>
 <span class='no'>by_price</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/emmeans/topics/emmeans'>emmeans</a></span>(<span class='no'>oranges_lm1</span>, <span class='st'>"day"</span>, <span class='kw'>by</span> <span class='kw'>=</span> <span class='st'>"price2"</span>,
                     <span class='kw'>at</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/list'>list</a></span>(<span class='kw'>price1</span> <span class='kw'>=</span> <span class='fl'>50</span>, <span class='kw'>price2</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>40</span>, <span class='fl'>60</span>, <span class='fl'>80</span>),
@@ -322,7 +313,7 @@ passed on to <code><a href='https://www.rdocumentation.org/packages/emmeans/topi
 #&gt; 9 4         80    14.4       3.74    23     6.71      22.2</div><div class='input'>
 <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/generics/topics/tidy'>tidy</a></span>(<span class='no'>by_price</span>), <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='no'>price2</span>, <span class='no'>estimate</span>, <span class='kw'>color</span> <span class='kw'>=</span> <span class='no'>day</span>)) +
   <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_path.html'>geom_line</a></span>() +
-  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_linerange.html'>geom_errorbar</a></span>(<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='kw'>ymin</span> <span class='kw'>=</span> <span class='no'>conf.low</span>, <span class='kw'>ymax</span> <span class='kw'>=</span> <span class='no'>conf.high</span>))</div><div class='img'><img src='tidy.lsmobj-2.png' alt='' width='700' height='433' /></div><div class='input'>
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_linerange.html'>geom_errorbar</a></span>(<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='kw'>ymin</span> <span class='kw'>=</span> <span class='no'>conf.low</span>, <span class='kw'>ymax</span> <span class='kw'>=</span> <span class='no'>conf.high</span>))</div><div class='img'><img src='tidy.summary_emm-2.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'># joint_tests</span>
 <span class='fu'><a href='https://www.rdocumentation.org/packages/generics/topics/tidy'>tidy</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/emmeans/topics/joint_tests'>joint_tests</a></span>(<span class='no'>oranges_lm1</span>))</div><div class='output co'>#&gt; # A tibble: 2 x 5
 #&gt;   term  num.df den.df statistic p.value
