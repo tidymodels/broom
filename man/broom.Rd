@@ -98,9 +98,12 @@ Other contributors:
   \item Jared Wilber [contributor]
   \item Vilmantas Gegzna \email{GegznaV@gmail.com} (0000-0002-9500-5167) [contributor]
   \item Eduard Szoecs \email{eduardszoecs@gmail.com} [contributor]
+  \item Frederik Aust \email{frederik.aust@uni-koeln.de} (0000-0003-4900-788X) [contributor]
   \item Angus Moore \email{angusmoore9@gmail.com} [contributor]
   \item Nick Williams \email{ntwilliams.personal@gmail.com} [contributor]
   \item Marius Barth \email{marius.barth.uni.koeln@gmail.com} (0000-0002-3421-6665) [contributor]
+  \item Bruna Wundervald \email{brunadaviesw@gmail.com} (0000-0001-8163-220X) [contributor]
+  \item Joyce Cahoon \email{joyceyu48@gmail.com} (0000-0001-7217-4702) [contributor]
 }
 
 }

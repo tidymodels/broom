@@ -127,6 +127,8 @@ TODO: sort out what happens to `glance.aov()`
 
 - `tidy.lmodel2()` now returns a `p.value` column (#570)
 
+- Added `tidy.summary_emm()` (#691 by @crsh)
+
 - `tidy.zoo()` now doesn't change column names that have spaces or other
 special characters (previously they were converted to data.frame friendly
 column names by `make.names`)
