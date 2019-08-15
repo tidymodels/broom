@@ -9,13 +9,13 @@
 #' @param conf.level Confidence level for confidence intervals. Defaults to
 #'   0.95.
 #' @template param_exponentiate
-#' @template param_quick
 #' @template param_unused_dots
 #'
 #' @evalRd return_tidy("term", "estimate", "conf.low", "conf.high")
 #'   
 #' @examples
 #' 
+#' \dontrun{
 #' library(xergm)
 #' 
 #' set.seed(1)
@@ -45,26 +45,17 @@
 #'
 #' # Show coefficients as odds ratios with a 99% CI
 #' tidy(btfit, exponentiate = TRUE, conf.level = 0.99)
+#' }
 #'
 #' @export
 #' @aliases btergm_tidiers
 #' @seealso [tidy()], [btergm::btergm()]
-tidy.btergm <- function(x, conf.level = .95,
-                        exponentiate = FALSE, quick = FALSE, ...) {
+tidy.btergm <- function(x, conf.level = .95, exponentiate = FALSE, ...) {
   
   if (exponentiate) {
     trans <- exp
   } else {
     trans <- identity
-  }
-
-  if (quick) {
-    co <- x@coef
-    ret <- tibble(
-      term = names(co),
-      estimate = trans(unname(co))
-    )
-    return(ret)
   }
   
   co <- btergm::confint(x, level = conf.level)

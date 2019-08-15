@@ -21,7 +21,12 @@ accept a \code{newdata} argument, it will use the default value for
 the \code{data} argument.}
 }
 \description{
-This method wraps \code{\link[=tidy.lm]{tidy.lm()}}.
+Tidy summarizes information about the components of a model.
+A model component might be a single term in a regression, a single
+hypothesis, a cluster, or a class. Exactly what tidy considers to be a
+model component varies cross models but is usually self-evident.
+If a model has several distinct types of components, you will need to
+specify which components to return.
 }
 \details{
 For tidiers for robust models from the \pkg{MASS} package see
@@ -36,13 +41,8 @@ tidy(m)
 augment(m)
 glance(m)
 
-gm <- glmRob(am ~ wt, data = mtcars, family = "binomial")
-glance(gm)
-
 }
 \seealso{
-\code{\link[=tidy]{tidy()}}, \code{\link[=tidy.lm]{tidy.lm()}}
-
 \code{\link[robust:lmRob]{robust::lmRob()}}
 
 Other robust tidiers: \code{\link{augment.lmRob}},

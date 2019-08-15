@@ -20,7 +20,10 @@ test_that("robust tidier arguments", {
 
 test_that("tidy.lmRob", {
   td <- tidy(fit)
+  td2 <- tidy(fit, conf.int = TRUE)
+  
   check_tidy_output(td)
+  check_tidy_output(td2)
 })
 
 test_that("glance.lmRob", {
@@ -39,17 +42,44 @@ test_that("augment.lmRob", {
 
 test_that("tidy.glmRob", {
   td <- tidy(fit2)
+  td2 <- tidy(fit2)
+  
   check_tidy_output(td)
+  check_tidy_output(td2)
 })
 
 test_that("glance.glmRob", {
   gl <- glance(fit2)
   check_glance_outputs(gl)
-})
+}) 
 
 test_that("augment.glmRob", {
   expect_error(
     augment.glmRob(),
     "`augment.glmRob` has been removed from broom. See the documentation."
   )
+})
+
+test_that("no more rlang issues with model objects from robust", { # from issue 720
+  
+  expect_equal(
+    tidy(fit, conf.int = TRUE), 
+    tidy(fit)
+  )
+  
+  expect_equal(
+    tidy(fit, exponentiate = TRUE), 
+    tidy(fit)
+  )
+  
+  expect_equal(
+    tidy(fit2, conf.int = TRUE), 
+    tidy(fit2)
+  )
+  
+  expect_equal(
+    tidy(fit2, exponentiate = TRUE), 
+    tidy(fit2)
+  )
+  
 })

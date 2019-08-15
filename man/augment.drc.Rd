@@ -84,16 +84,20 @@ We are in the process of defining behaviors for models fit with various
 missing at this time.
 }
 \examples{
+
 library(drc)
+
 mod <- drm(dead/total~conc, type, 
    weights = total, data = selenium, fct = LL.2(), type = "binomial")
-mod
 
 tidy(mod)
 tidy(mod, conf.int = TRUE)
-tidy(mod, quick = TRUE)
+
 glance(mod)
-# augment(mod)
+
+augment(mod, selenium)
+
+
 }
 \seealso{
 \code{\link[=augment]{augment()}}, \code{\link[drc:drm]{drc::drm()}}
@@ -101,17 +105,14 @@ glance(mod)
 Other drc tidiers: \code{\link{glance.drc}},
   \code{\link{tidy.drc}}
 }
-\author{
-Eduard Szoecs, \email{eduardszoecs@gmail.com}
-}
 \concept{drc tidiers}
 \value{
 A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
+  \item{.conf.high}{Upper bound on confidence interval for fitted values.}
+  \item{.conf.low}{Lower bound on confidence interval for fitted values.}
   \item{.cooksd}{Cooks distance.}
   \item{.fitted}{Fitted or predicted value.}
   \item{.resid}{The difference between fitted and observed values.}
   \item{.se.fit}{Standard errors of fitted values.}
-  \item{.conf.low}{Lower Confidence Interval}
-  \item{.conf.high}{Upper Confidence Interval}
 
 }

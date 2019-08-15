@@ -38,6 +38,7 @@
 #' @family time series tidiers
 tidy.zoo <- function(x, ...) {
   ret <- data.frame(as.matrix(x), index = zoo::index(x))
-  ret <- tidyr::gather(ret, series, value, -index)
-  as_tibble(ret)
+  ret <- tibble::as_tibble(ret)
+  colnames(ret)[1:ncol(x)] <- colnames(x)
+  tidyr::gather(ret, series, value, -index)
 }

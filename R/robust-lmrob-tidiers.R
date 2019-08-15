@@ -1,7 +1,8 @@
 #' @templateVar class lmRob
-#' @template title_desc_tidy_lm_wrapper
+#' @template title_desc_tidy
 #'
 #' @param x A `lmRob` object returned from [robust::lmRob()].
+#' @template param_unused_dots
 #' 
 #' @details For tidiers for robust models from the \pkg{MASS} package see
 #'   [tidy.rlm()].
@@ -15,19 +16,15 @@
 #' augment(m)
 #' glance(m)
 #'
-#' gm <- glmRob(am ~ wt, data = mtcars, family = "binomial")
-#' glance(gm)
-#'
 #' @aliases robust_tidiers
 #' @export
 #' @family robust tidiers
 #' @seealso [robust::lmRob()]
-#' @include stats-lm-tidiers.R
-tidy.lmRob <- function (x, ...) {
-  dots <- enquos(...)
-  dots$conf.int <- FALSE
-  
-  rlang::exec(tidy.lm, x, !!!dots)
+tidy.lmRob <- function (x, ...){
+  co <- stats::coef(summary(x))
+  ret <- as_tibble(co, rownames = "term")
+  names(ret) <- c("term", "estimate", "std.error", "statistic", "p.value")
+  ret
 }
 
 #' @templateVar class lmRob
@@ -88,11 +85,10 @@ augment.lmRob <- function(x, data = model.frame(x), newdata = NULL, ...) {
 #' @seealso [robust::lmRob()]
 #' 
 glance.lmRob <- function(x, ...) {
-  s <- robust::summary.lmRob(x)
   tibble(
     r.squared = x$r.squared,
     deviance = x$dev,
-    sigma = s$sigma,
+    sigma = summary(x)$sigma,
     df.residual = x$df.residual,
     nobs = stats::nobs(x)
   )
