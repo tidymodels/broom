@@ -45,7 +45,7 @@ tidy.logitmfx <-
       dplyr::select(term=rowname, estimate=`dF/dx`, std.error=`Std. Err.`, statistic=z, p.value=`P>|z|`)
     
     ## Optional: Add "atmean" column
-    x_tidy$atmean <- as.logical(gsub(".*atmean = |[:punct:].*|).*", "", format(x$call)))
+    x_tidy$atmean <- as.logical(gsub(".*atmean = |,.*|).*", "", format(c(x$call))))
     
     if (conf.int) {
       x_tidy <-
