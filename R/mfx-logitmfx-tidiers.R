@@ -22,13 +22,19 @@
 #'   coefficients). Calling the function on a `logitmfx()` regression object will
 #'   yield a tibble containing these marginal effects and other key model components.
 #'   Note that this includes a column indicating whether the marginal effects were 
-#'   originally calculated for the average observation, or the average of the sample
-#'   marginal effects. See [vignette("mfxarticle")] for more details.
+#'   originally calculated as the partial effects for the average observation, 
+#'   or as the average of the sample partial effects. See [vignette("mfxarticle")] 
+#'   for more details.
 
 #' @examples 
 #' library(mfx)
-#' mfx_reg <- logitmfx(am ~ cyl + hp + wt, atmean = T, data = mtcars)
-#' tidy(mfx_reg, conf.int=T)
+#' # Marginal effects calculated as the partial effects for the average observation
+#' mfx_logreg <- logitmfx(am ~ cyl + hp + wt, atmean = T, data = mtcars)
+#' tidy(mfx_logreg)
+#' tidy(mfx_logreg, conf.int=T)
+#' # Marginal effects calculated as the average of the sample partial effects
+#' mfx_logreg2 <- logitmfx(am ~ cyl + hp + wt, atmean = F, data = mtcars)
+#' tidy(mfx_logreg2, conf.int=T)
 #' @export
 #' @seealso [tidy()], [tidy.glm()], [mfx::logitmfx()]
 #' @family mfx tidiers
