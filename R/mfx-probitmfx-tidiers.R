@@ -37,34 +37,7 @@
 #' @family mfx tidiers
 #' @aliases mfx_tidiers
 
-tidy.probitmfx <- 
-  function(x, conf.int = FALSE, conf.level = 0.95, ...) {
-    
-    x_tidy <-
-      x$mfxest %>% 
-      as.data.frame() %>% 
-      tibble::rownames_to_column() %>% 
-      tibble::as_tibble() %>%
-      dplyr::select(term=rowname, estimate=`dF/dx`, std.error=`Std. Err.`, statistic=z, p.value=`P>|z|`)
-    
-    ## Optional: Add "atmean" column
-    x_tidy$atmean <- as.logical(gsub(".*atmean = |,.*|).*", "", format(c(x$call))))
-    
-    if (conf.int) {
-      x_tidy <-
-        x_tidy %>%
-        dplyr::mutate(
-          conf.low = estimate - qt(1-(1-conf.level)/2, df=x$fit$df.residual)*std.error,
-          conf.high = estimate + qt(1-(1-conf.level)/2, df=x$fit$df.residual)*std.error
-        )
-    }
-    
-    x_tidy <-
-      x_tidy %>%
-      dplyr::select(term, contains("atmean"), everything())
-    
-    x_tidy
-  }
+tidy.probitmfx <- tidy.logitmfx
 
 
 #' @templateVar class probitmfx
@@ -95,22 +68,7 @@ tidy.probitmfx <-
 #' @seealso [augment()], [augment.glm()], [mfx::probitmfx()]
 #' @family mfx tidiers
 #' @aliases mfx_tidiers
-augment.probitmfx <- function(x, 
-                             data = model.frame(x$fit),
-                             newdata = NULL,
-                             type.predict = c("link", "response", "terms"),
-                             type.residuals = c("deviance", "pearson"),
-                             se_fit = FALSE, ...) {
-  ## Use augment.glm() method on internal fit object
-  df <- augment(x$fit, 
-                data = data,
-                newdata = newdata,
-                type.predict = type.predict,
-                type.residuals = type.residuals,
-                se_fit = se_fit)
-  
-  df
-}
+augment.probitmfx <- augment.logitmfx
 
 
 #' @templateVar class probitmfx
@@ -141,8 +99,4 @@ augment.probitmfx <- function(x,
 #' @family mfx tidiers
 #' @aliases mfx_tidiers
 #' @seealso [mfx::probitmfx()], [glance.glm()]
-glance.mfxprobit <- function(x, ...) {
-  ## Use glance.glm() method on internal fit object
-  ret <- glance(x$fit)
-  ret
-}
+glance.probitmfx <- glance.logitmfx
