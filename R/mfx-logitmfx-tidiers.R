@@ -144,7 +144,7 @@ augment.logitmfx <- function(x,
 #' @family mfx tidiers
 #' @aliases mfx_tidiers
 #' @seealso [mfx::logitmfx()], [glance.glm()]
-glance.mfxlogit <- function(x, ...) {
+glance.logitmfx <- function(x, ...) {
   ## Use glance.glm() method on internal fit object
   ret <- glance(x$fit)
   ret
