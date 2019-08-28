@@ -1,4 +1,4 @@
-context("mfxlogit")
+context("logitmfx")
 
 skip_if_not_installed("modeltests")
 library(modeltests)
