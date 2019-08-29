@@ -42,6 +42,7 @@ Authors:
 
 Other contributors:
 \itemize{
+  \item Grant McDermott \email{grantmcd@uoregon.edu} (0000-0001-7883-8573) [contributor]
   \item Indrajeet Patil \email{patilindrajeet.science@gmail.com} (0000-0003-1995-6531) [contributor]
   \item Derek Chiu \email{dchiu@bccrc.ca} [contributor]
   \item Matthieu Gomez \email{mattg@princeton.edu} [contributor]

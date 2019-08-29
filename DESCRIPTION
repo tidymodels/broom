@@ -12,6 +12,11 @@ Authors@R:
              role = c("aut", "cre"),
              email = "alexpghayes@gmail.com",
              comment = c(ORCID = "0000-0002-4985-5160")),
+      person(given = "Grant",
+             family = "McDermott",
+             role = "ctb",
+             email = "grantmcd@uoregon.edu",
+             comment = c(ORCID = "0000-0001-7883-8573")),
       person(given = "Indrajeet",
              family = "Patil",
              role = "ctb",
@@ -369,7 +374,7 @@ Suggests:
     survey,
     survival,
     systemfit,
-    testthat,
+    testthat (>= 2.1.0),
     tseries,
     xergm,
     zoo
@@ -429,6 +434,7 @@ Collate:
     'mass-rlm-tidiers.R'
     'mclust-tidiers.R'
     'mediate-tidiers.R'
+    'mfx-tidiers.R'
     'mgcv-tidiers.R'
     'muhaz-tidiers.R'
     'multcomp-tidiers.R'
