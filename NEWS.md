@@ -72,6 +72,8 @@ TODO: sort out what happens to `glance.aov()`
 
 ## New tidiers, features and bugfixes
 
+- Added tidier for `car::Anova` (#754)
+
 - Added tidier for `summary.manova` (#729)
 
 - Added `tidy()` and `glance()` methods for `speedglm` objects from the `speedglm` package
