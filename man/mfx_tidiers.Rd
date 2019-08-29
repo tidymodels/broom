@@ -26,9 +26,9 @@
 
 \method{tidy}{logitmfx}(x, conf.int = FALSE, conf.level = 0.95, ...)
 
-\method{tidy}{betamfx}(x, conf.int = FALSE, conf.level = 0.95, ...)
+\method{tidy}{negbinmfx}(x, conf.int = FALSE, conf.level = 0.95, ...)
 
-\method{tidy}{betamfx}(x, conf.int = FALSE, conf.level = 0.95, ...)
+\method{tidy}{poissonmfx}(x, conf.int = FALSE, conf.level = 0.95, ...)
 
 \method{tidy}{probitmfx}(x, conf.int = FALSE, conf.level = 0.95, ...)
 
@@ -40,12 +40,12 @@
   newdata = NULL, type.predict = c("link", "response", "terms"),
   type.residuals = c("deviance", "pearson"), se_fit = FALSE, ...)
 
-\method{augment}{betamfx}(x, data = model.frame(x$fit), newdata = NULL,
-  type.predict = c("link", "response", "terms"),
+\method{augment}{negbinmfx}(x, data = model.frame(x$fit),
+  newdata = NULL, type.predict = c("link", "response", "terms"),
   type.residuals = c("deviance", "pearson"), se_fit = FALSE, ...)
 
-\method{augment}{betamfx}(x, data = model.frame(x$fit), newdata = NULL,
-  type.predict = c("link", "response", "terms"),
+\method{augment}{poissonmfx}(x, data = model.frame(x$fit),
+  newdata = NULL, type.predict = c("link", "response", "terms"),
   type.residuals = c("deviance", "pearson"), se_fit = FALSE, ...)
 
 \method{augment}{probitmfx}(x, data = model.frame(x$fit),
@@ -56,9 +56,9 @@
 
 \method{glance}{logitmfx}(x, ...)
 
-\method{glance}{betamfx}(x, ...)
+\method{glance}{negbinmfx}(x, ...)
 
-\method{glance}{betamfx}(x, ...)
+\method{glance}{poissonmfx}(x, ...)
 
 \method{glance}{probitmfx}(x, ...)
 }

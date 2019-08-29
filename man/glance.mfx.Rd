@@ -3,7 +3,7 @@
 \name{glance.mfx}
 \alias{glance.mfx}
 \alias{mfx_tidiers}
-\title{Glance at a(n) logitmfx object}
+\title{Glance at a(n) mfx object}
 \usage{
 \method{glance}{mfx}(x, ...)
 }

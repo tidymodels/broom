@@ -109,12 +109,12 @@ tidy.logitmfx <- tidy.mfx
 
 #' @rdname mfx_tidiers
 #' @export
-#' @method tidy betamfx
+#' @method tidy negbinmfx
 tidy.negbinmfx <- tidy.mfx
 
 #' @rdname mfx_tidiers
 #' @export
-#' @method tidy betamfx
+#' @method tidy poissonmfx
 tidy.poissonmfx <- tidy.mfx
 
 #' @rdname mfx_tidiers
@@ -187,12 +187,12 @@ augment.logitmfx <- augment.mfx
 
 #' @rdname mfx_tidiers
 #' @export
-#' @method augment betamfx
+#' @method augment negbinmfx
 augment.negbinmfx <- augment.mfx
 
 #' @rdname mfx_tidiers
 #' @export
-#' @method augment betamfx
+#' @method augment poissonmfx
 augment.poissonmfx <- augment.mfx
 
 #' @rdname mfx_tidiers
@@ -202,7 +202,7 @@ augment.probitmfx <- augment.mfx
 
 
 
-#' @templateVar class logitmfx
+#' @templateVar class mfx
 #' @template title_desc_glance
 #' 
 #' @param x A `betamfx`, `logitmfx`, `negbinmfx`, `poissonmfx`, or `probitmfx`  object.
@@ -250,12 +250,12 @@ glance.logitmfx <- glance.mfx
 
 #' @rdname mfx_tidiers
 #' @export
-#' @method glance betamfx
+#' @method glance negbinmfx
 glance.negbinmfx <- glance.mfx
 
 #' @rdname mfx_tidiers
 #' @export
-#' @method glance betamfx
+#' @method glance poissonmfx
 glance.poissonmfx <- glance.mfx
 
 #' @rdname mfx_tidiers
