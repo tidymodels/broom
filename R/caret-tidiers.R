@@ -3,8 +3,8 @@
 #'
 #' @param x An object of class `confusionMatrix` created by a call to
 #' [caret::confusionMatrix()].
-#' @param by_class Logical indicating whether or not to show performance 
-#' measures broken down by class. Defaults to `TRUE`. When `by_class = FALSE`
+#' @param by.class Logical indicating whether or not to show performance 
+#' measures broken down by class. Defaults to `TRUE`. When `by.class = FALSE`
 #' only returns a tibble with accuracy, kappa, and McNemar statistics.
 #' @template param_unused_dots
 #' 
@@ -32,7 +32,7 @@
 #' )
 #' 
 #' tidy(two_class_cm)
-#' tidy(two_class_cm, by_class = FALSE)
+#' tidy(two_class_cm, by.class = FALSE)
 #' 
 #' # multiclass example
 #' 
@@ -45,17 +45,17 @@
 #' )
 #' 
 #' tidy(six_class_cm)
-#' tidy(six_class_cm, by_class = FALSE)
+#' tidy(six_class_cm, by.class = FALSE)
 #' 
 #' @aliases caret_tidiers confusionMatrix_tidiers
 #' @export
 #' @seealso [tidy()], [caret::confusionMatrix()]
-tidy.confusionMatrix <- function(x, by_class = TRUE, ...) {
+tidy.confusionMatrix <- function(x, by.class = TRUE, ...) {
   cm <- as.list(x$overall)
   nms_cm <- stringr::str_to_lower(c(names(cm)[1:2], "McNemar"))
 
 
-  if (by_class) {
+  if (by.class) {
     # case when only 2 classes
     if (class(x$byClass) != "matrix") {
       classes <-
