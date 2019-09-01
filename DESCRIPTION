@@ -266,7 +266,12 @@ Authors@R:
              family = "Cahoon",
              role = "ctb",
              email = "joyceyu48@gmail.com",
-             comment = c(ORCID = "0000-0001-7217-4702")))
+             comment = c(ORCID = "0000-0001-7217-4702")),
+      person(given = "Yusuke",
+             family = "Kawashima",
+             role = "ctb",
+             email = "kawashima-y@phs.osaka-u.ac.jp",
+             comment = c(ORCID = "0000-0001-8465-6848")))
 Description: Summarizes key information about statistical
     objects in tidy tibbles. This makes it easy to report results, create
     plots and consistently work with large numbers of models at once.
@@ -354,6 +359,7 @@ Suggests:
     orcutt (>= 2.2),
     ordinal,
     plm,
+    pls,
     poLCA,
     psych,
     quantreg,
@@ -440,6 +446,7 @@ Collate:
     'ordinal-clmm-tidiers.R'
     'pam-tidiers.R'
     'plm-tidiers.R'
+    'pls-mvr-tidiers.R'
     'polca-tidiers.R'
     'psych-tidiers.R'
     'stats-nls-tidiers.R'

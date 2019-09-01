@@ -105,6 +105,7 @@ Other contributors:
   \item Marius Barth \email{marius.barth.uni.koeln@gmail.com} (0000-0002-3421-6665) [contributor]
   \item Bruna Wundervald \email{brunadaviesw@gmail.com} (0000-0001-8163-220X) [contributor]
   \item Joyce Cahoon \email{joyceyu48@gmail.com} (0000-0001-7217-4702) [contributor]
+  \item Yusuke Kawashima \email{kawashima-y@phs.osaka-u.ac.jp} (0000-0001-8465-6848) [contributor]
 }
 
 }
