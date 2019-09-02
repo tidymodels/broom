@@ -40,11 +40,11 @@ test_that("tidy car::Anova coxph", {
   car_anova_coxph <- car::Anova(fit)
   
   expected <- tibble(
-    term = c(NULL, "differ"),
+    term = c("NULL", "differ"),
     logLik = car_anova_coxph$loglik,
     statistic = car_anova_coxph$Chisq,
     df = car_anova_coxph$Df,
-    p.value = car_anova_coxph$`Pr(>|Chisq|)`
+    p.value = car_anova_coxph$`Pr(>|Chi|)`
   )
   
   expect_equal(tidy(car_anova_coxph), expected)
