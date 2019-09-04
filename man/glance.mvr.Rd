@@ -7,7 +7,7 @@
 \method{glance}{mvr}(x, ncomp = x$ncomp, ...)
 }
 \arguments{
-\item{x}{An \code{mvr} object such as those created by \code{\link[pls:mvr]{pls::mvr()}}, \code{\link[pls:plsr]{pls::plsr()}}, \code{\link[pls:cpplsr]{pls::cpplsr()}} and \code{\link[pls:pcr]{pls::pcr()}}.}
+\item{x}{An \code{mvr} object such as those created by \code{\link[pls:mvr]{pls::mvr()}}, \code{\link[pls:plsr]{pls::plsr()}}, \code{\link[pls:cppls]{pls::cppls()}} and \code{\link[pls:pcr]{pls::pcr()}}.}
 
 \item{ncomp}{The number of components to include in the model. Ignored if comps is specified.}
 

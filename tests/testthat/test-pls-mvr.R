@@ -46,7 +46,8 @@ test_that("augment.mvr", {
   )
 
   au <- augment(yarn_pls)
-  expect_true(all(c(".resid", ".fitted", ".t.squared", ".scores") %in% names(au)))
+  expect_true(all(c(".resid", ".fitted", ".t.squared", ".scores") 
+                  %in% names(au)))
 })
 
 test_that("glance.mvr", {

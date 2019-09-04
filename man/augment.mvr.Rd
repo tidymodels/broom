@@ -8,7 +8,7 @@
   ncomp = x$ncomp, ...)
 }
 \arguments{
-\item{x}{a mvr object such as those created by \code{\link[pls:mvr]{pls::mvr()}}, \code{\link[pls:plsr]{pls::plsr()}}, \code{\link[pls:cpplsr]{pls::cpplsr()}} and \code{\link[pls:pcr]{pls::pcr()}}.}
+\item{x}{a mvr object such as those created by \code{\link[pls:mvr]{pls::mvr()}}, \code{\link[pls:plsr]{pls::plsr()}}, \code{\link[pls:cppls]{pls::cppls()}} and \code{\link[pls:pcr]{pls::pcr()}}.}
 
 \item{data}{A \code{\link[=data.frame]{data.frame()}} or \code{\link[tibble:tibble]{tibble::tibble()}} containing the original
 data that was used to produce the object \code{x}. Defaults to
@@ -98,7 +98,7 @@ augment(yarn.pls.train, newdata = slice(yarn, test_id)) \%>\%
   ggtitle("How far each sample is from the center of the model.")
 }
 \seealso{
-\code{\link[=augment]{augment()}}, \code{\link[pls:::predict.mvr]{pls::::predict.mvr()}}
+\code{\link[=augment]{augment()}}, \code{\link[pls:predict.mvr]{pls::predict.mvr()}}
 
 Other mvr tidiers: \code{\link{glance.mvr}},
   \code{\link{tidy.mvr}}

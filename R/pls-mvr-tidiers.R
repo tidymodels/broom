@@ -1,7 +1,7 @@
 #' @templateVar class mvr
 #' @template title_desc_tidy
 #'
-#' @param x An `mvr` object such as those created by [pls::mvr()], [pls::plsr()], [pls::cpplsr()] and [pls::pcr()].
+#' @param x An `mvr` object such as those created by [pls::mvr()], [pls::plsr()], [pls::cppls()] and [pls::pcr()].
 #' @param ncomp The number of components to include in the model. Ignored if comps is specified.
 #' @param comps If specified, the values of each component out of comps are shown.
 #' @param intercept Whether coefficients for the intercept should be included. Ignored if comps is specified.
@@ -16,7 +16,7 @@
 #' @details
 #' The number of components to fit is specified with the argument ncomp.
 #' It means from the 1st component to the ncomp-th component are used to fit.
-#' If comps is given, however, estimates are the coefficients for a model with only the component comps[i], i.e. the contribution of the component comps[i] on the regression coefficients.
+#' If comps is given, however, estimates are the coefficients for a model with only the component comps\[i\], i.e. the contribution of the component comps\[i\] on the regression coefficients.
 #'
 #' @family mvr tidiers
 #'
@@ -70,7 +70,7 @@ tidy.mvr <- function(x, ncomp = x$ncomp, comps = NULL, intercept = FALSE, ...) {
 #' @templateVar class mvr
 #' @template title_desc_augment
 #'
-#' @param x a mvr object such as those created by [pls::mvr()], [pls::plsr()], [pls::cpplsr()] and [pls::pcr()].
+#' @param x a mvr object such as those created by [pls::mvr()], [pls::plsr()], [pls::cppls()] and [pls::pcr()].
 #' @template param_data
 #' @template param_newdata
 #' @param ncomp The number of components to include in the model. Ignored if comps is specified.
@@ -89,7 +89,7 @@ tidy.mvr <- function(x, ncomp = x$ncomp, comps = NULL, intercept = FALSE, ...) {
 #'
 #' @export
 #'
-#' @seealso [augment()], [pls:::predict.mvr()]
+#' @seealso [augment()], [pls::predict.mvr()]
 #'
 augment.mvr <- function(x, 
                         data = model.frame(x),
@@ -123,13 +123,13 @@ augment.mvr <- function(x,
 
 # Make predict(), an S3 method, preferable in augment_newdata() using a temporary class
 predict.mvr_temp <- function(object, ncomp, type, ...) {
-  predict(object, ncomp = ncomp, type = type, ...)[, , 1]
+  pls:::predict.mvr(object, ncomp = ncomp, type = type, ...)[, , 1]
 }
 
 #' @templateVar class mvr
 #' @template title_desc_glance
 #'
-#' @param x An `mvr` object such as those created by [pls::mvr()], [pls::plsr()], [pls::cpplsr()] and [pls::pcr()].
+#' @param x An `mvr` object such as those created by [pls::mvr()], [pls::plsr()], [pls::cppls()] and [pls::pcr()].
 #' @param ncomp The number of components to include in the model. Ignored if comps is specified.
 #' @template param_unused_dots
 #'
