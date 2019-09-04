@@ -41,6 +41,9 @@ If comps is given, however, estimates are the coefficients for a model with only
 }
 \examples{
 library(pls)
+library(dplyr)
+library(ggplot2)
+
 data(yarn) # Single-response model
 yarn.pls <- plsr(density ~ NIR, 6, data = yarn, validation = "CV")
 glance(yarn.pls)

@@ -76,6 +76,9 @@ missing at this time.
 }
 \examples{
 library(pls)
+library(dplyr)
+library(ggplot2)
+
 data(yarn) # Single-response model
 yarn.pls <- plsr(density ~ NIR, 6, data = yarn, validation = "CV")
 glance(yarn.pls)
