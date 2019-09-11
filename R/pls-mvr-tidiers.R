@@ -1,10 +1,12 @@
 #' @templateVar class mvr
 #' @template title_desc_tidy
 #'
-#' @param x An `mvr` object such as those created by [pls::mvr()], [pls::plsr()], [pls::cppls()] and [pls::pcr()].
+#' @param x An `mvr` object such as those created by [pls::mvr()], [pls::plsr()], [pls::cppls()]
+#'  and [pls::pcr()].
 #' @param ncomp The number of components to include in the model. Ignored if comps is specified.
 #' @param comps If specified, the values of each component out of comps are shown.
-#' @param intercept Whether coefficients for the intercept should be included. Ignored if comps is specified.
+#' @param intercept Whether coefficients for the intercept should be included. Ignored if comps is
+#'  specified.
 #' @template param_unused_dots
 #'
 #' @evalRd return_tidy(
@@ -16,7 +18,8 @@
 #' @details
 #' The number of components to fit is specified with the argument ncomp.
 #' It means from the 1st component to the ncomp-th component are used to fit.
-#' If comps is given, however, estimates are the coefficients for a model with only the component comps\[i\], i.e. the contribution of the component comps\[i\] on the regression coefficients.
+#' If comps is given, however, estimates are the coefficients for a model with only the component
+#'  comps\[i\], i.e. the contribution of the component comps\[i\] on the regression coefficients.
 #'
 #' @family mvr tidiers
 #'
@@ -24,7 +27,7 @@
 #' library(pls)
 #' library(dplyr)
 #' library(ggplot2)
-#' 
+#'
 #' data(yarn) # Single-response model
 #' yarn.pls <- plsr(density ~ NIR, 6, data = yarn, validation = "CV")
 #' glance(yarn.pls)
@@ -53,14 +56,18 @@ tidy.mvr <- function(x, ncomp = x$ncomp, comps = NULL, intercept = FALSE, ...) {
   comp_type <- ifelse(is.null(comps), "ncomp", "comps")
   if (comp_type == "comps") {
     if (length(comps) > 1) {
-      line <- paste("comps is a multi-component vector:",
-                    "comps = {comps[1]} will be used.")
+      line <- paste(
+        "comps is a multi-component vector:",
+        "comps = {comps[1]} will be used."
+      )
       message(glue(line))
     }
   } else {
     if (length(ncomp) > 1) {
-      line <- paste("ncomp is a multi-component vector:",
-                    "ncomp = {ncomp[1]} will be used.")
+      line <- paste(
+        "ncomp is a multi-component vector:",
+        "ncomp = {ncomp[1]} will be used."
+      )
       message(glue(line))
     }
   }
@@ -73,7 +80,8 @@ tidy.mvr <- function(x, ncomp = x$ncomp, comps = NULL, intercept = FALSE, ...) {
 #' @templateVar class mvr
 #' @template title_desc_augment
 #'
-#' @param x a mvr object such as those created by [pls::mvr()], [pls::plsr()], [pls::cppls()] and [pls::pcr()].
+#' @param x a mvr object such as those created by [pls::mvr()], [pls::plsr()], [pls::cppls()] and
+#'  [pls::pcr()].
 #' @template param_data
 #' @template param_newdata
 #' @param ncomp The number of components to include in the model. Ignored if comps is specified.
@@ -87,30 +95,33 @@ tidy.mvr <- function(x, ncomp = x$ncomp, comps = NULL, intercept = FALSE, ...) {
 #' )
 #'
 #' @inherit tidy.mvr examples
-#' 
+#'
 #' @family mvr tidiers
 #'
 #' @export
 #'
 #' @seealso [augment()], [pls::predict.mvr()]
 #'
-augment.mvr <- function(x, 
+augment.mvr <- function(x,
                         data = model.frame(x),
-                        newdata = NULL, 
+                        newdata = NULL,
                         ncomp = x$ncomp, ...) {
   if (length(ncomp) > 1) {
-    line <- paste("ncomp is a multi-component vector:",
-                  "ncomp = {ncomp[1]} will be used.")
+    line <- paste(
+      "ncomp is a multi-component vector:",
+      "ncomp = {ncomp[1]} will be used."
+    )
     message(glue(line))
   }
   temp <- x
   class(temp) <- c("mvr_temp", class(temp))
-  df <- augment_newdata(temp, 
-                        data, 
-                        newdata, 
-                        FALSE, 
-                        ncomp = ncomp[1], 
-                        type = "response", ...)
+  df <- augment_newdata(temp,
+    data,
+    newdata,
+    FALSE,
+    ncomp = ncomp[1],
+    type = "response", ...
+  )
   df$.scores <- predict(x, newdata = newdata, type = "scores", ...)
 
   t2 <- as.data.frame(df$.scores^2)
@@ -132,7 +143,8 @@ predict.mvr_temp <- function(object, ncomp, type, ...) {
 #' @templateVar class mvr
 #' @template title_desc_glance
 #'
-#' @param x An `mvr` object such as those created by [pls::mvr()], [pls::plsr()], [pls::cppls()] and [pls::pcr()].
+#' @param x An `mvr` object such as those created by [pls::mvr()], [pls::plsr()], [pls::cppls()]
+#'  and [pls::pcr()].
 #' @param ncomp The number of components to include in the model. Ignored if comps is specified.
 #' @template param_unused_dots
 #'
@@ -150,8 +162,10 @@ predict.mvr_temp <- function(object, ncomp, type, ...) {
 #'
 glance.mvr <- function(x, ncomp = x$ncomp, ...) {
   if (length(ncomp) > 1) {
-    line <- paste("ncomp is a multi-component vector:",
-                  "ncomp = {ncomp[1]} will be used.")
+    line <- paste(
+      "ncomp is a multi-component vector:",
+      "ncomp = {ncomp[1]} will be used."
+    )
     message(glue(line))
   }
   r2 <- pls::R2(x, ncomp = ncomp[1])$val

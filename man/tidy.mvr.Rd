@@ -8,13 +8,15 @@
   intercept = FALSE, ...)
 }
 \arguments{
-\item{x}{An \code{mvr} object such as those created by \code{\link[pls:mvr]{pls::mvr()}}, \code{\link[pls:plsr]{pls::plsr()}}, \code{\link[pls:cppls]{pls::cppls()}} and \code{\link[pls:pcr]{pls::pcr()}}.}
+\item{x}{An \code{mvr} object such as those created by \code{\link[pls:mvr]{pls::mvr()}}, \code{\link[pls:plsr]{pls::plsr()}}, \code{\link[pls:cppls]{pls::cppls()}}
+and \code{\link[pls:pcr]{pls::pcr()}}.}
 
 \item{ncomp}{The number of components to include in the model. Ignored if comps is specified.}
 
 \item{comps}{If specified, the values of each component out of comps are shown.}
 
-\item{intercept}{Whether coefficients for the intercept should be included. Ignored if comps is specified.}
+\item{intercept}{Whether coefficients for the intercept should be included. Ignored if comps is
+specified.}
 
 \item{...}{Additional arguments. Not used. Needed to match generic
 signature only. \strong{Cautionary note:} Misspelled arguments will be
@@ -37,7 +39,8 @@ specify which components to return.
 \details{
 The number of components to fit is specified with the argument ncomp.
 It means from the 1st component to the ncomp-th component are used to fit.
-If comps is given, however, estimates are the coefficients for a model with only the component comps[i], i.e. the contribution of the component comps[i] on the regression coefficients.
+If comps is given, however, estimates are the coefficients for a model with only the component
+comps[i], i.e. the contribution of the component comps[i] on the regression coefficients.
 }
 \examples{
 library(pls)
