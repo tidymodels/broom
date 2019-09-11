@@ -4,13 +4,21 @@
 \alias{glance.mvr}
 \title{Glance at a(n) mvr object}
 \usage{
-\method{glance}{mvr}(x, ncomp = x$ncomp, ...)
+\method{glance}{mvr}(x, ncomp = x$ncomp, test = NULL,
+  estimate = c("train", "test", "CV", "adjCV"), ...)
 }
 \arguments{
 \item{x}{An \code{mvr} object such as those created by \code{\link[pls:mvr]{pls::mvr()}}, \code{\link[pls:plsr]{pls::plsr()}}, \code{\link[pls:cppls]{pls::cppls()}}
 and \code{\link[pls:pcr]{pls::pcr()}}.}
 
 \item{ncomp}{The number of components to include in the model. Ignored if comps is specified.}
+
+\item{test}{A \code{\link[=data.frame]{data.frame()}} or \code{\link[tibble:tibble]{tibble::tibble()}} to estimate the predictive performance of
+\code{x}. It contains all the original predictors used to create \code{x}.}
+
+\item{estimate}{Which estimators to use to estimate mesures of fit, containing the mean
+squared error of prediction (MSEP) root mean squared error of prediction (RMSEP) and R^2.
+"adjCV" is only available for (R)MSEP.}
 
 \item{...}{Additional arguments. Not used. Needed to match generic
 signature only. \strong{Cautionary note:} Misspelled arguments will be
@@ -72,6 +80,9 @@ Other mvr tidiers: \code{\link{augment.mvr}},
 \concept{mvr tidiers}
 \value{
 A \code{\link[tibble:tibble]{tibble::tibble()}} with exactly one row and columns:
+  \item{estimator}{Estimator used}
   \item{r.squared}{R squared statistic, or the percent of variation explained by the model. Also known as the coefficient of determination.}
+  \item{msep}{Mean squared error of prediction}
+  \item{rmsep}{Root mean squared error of prediction}
 
 }

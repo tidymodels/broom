@@ -146,10 +146,18 @@ predict.mvr_temp <- function(object, ncomp, type, ...) {
 #' @param x An `mvr` object such as those created by [pls::mvr()], [pls::plsr()], [pls::cppls()]
 #'  and [pls::pcr()].
 #' @param ncomp The number of components to include in the model. Ignored if comps is specified.
+#' @param test A [data.frame()] or [tibble::tibble()] to estimate the predictive performance of 
+#' `x`. It contains all the original predictors used to create `x`.
+#' @param estimate Which estimators to use to estimate mesures of fit, containing the mean
+#'  squared error of prediction (MSEP) root mean squared error of prediction (RMSEP) and R^2.
+#'   "adjCV" is only available for (R)MSEP.
 #' @template param_unused_dots
 #'
 #' @evalRd return_glance(
-#'   "r.squared"
+#'   "estimator",
+#'   "r.squared",
+#'   msep = "Mean squared error of prediction",
+#'   rmsep = "Root mean squared error of prediction"
 #' )
 #'
 #' @inherit tidy.mvr examples
@@ -160,7 +168,10 @@ predict.mvr_temp <- function(object, ncomp, type, ...) {
 #'
 #' @seealso [glance()], [pls::R2()]
 #'
-glance.mvr <- function(x, ncomp = x$ncomp, ...) {
+glance.mvr <- function(x, 
+                       ncomp = x$ncomp, 
+                       test = NULL,
+                       estimate = c("train", "test", "CV", "adjCV"), ...) {
   if (length(ncomp) > 1) {
     line <- paste(
       "ncomp is a multi-component vector:",
@@ -168,12 +179,25 @@ glance.mvr <- function(x, ncomp = x$ncomp, ...) {
     )
     message(glue(line))
   }
-  r2 <- pls::R2(x, ncomp = ncomp[1])$val
-  response_names <- dimnames(r2)$response
-  r2 <- r2[, , 2]
-  names(r2) <- response_names
-  r2 <- matrix(r2, ncol = length(r2), dimnames = list(NULL, names(r2)))
-  ret <- tibble::tibble(r.squared = 1)
-  ret$r.squared <- r2
+  
+  estimate <- match.arg(estimate)
+  if (!is.null(test) && estimate != "test") {
+    message("test is not NULL: estimate = \"test\" will be used.")
+    estimate <- "test"
+  }
+  
+  ret <- tibble::tibble(estimator = estimate, r.squared = NA)
+  if (estimate != "adjCV") ret$r.squared <- grance.mvr.estimate(x, pls::R2, ncomp[1], test, estimate)
+  ret$msep <- grance.mvr.estimate(x, pls::MSEP, ncomp[1], test, estimate)
+  ret$rmsep <- grance.mvr.estimate(x, pls::RMSEP, ncomp[1], test, estimate)
+  ret
+}
+
+grance.mvr.estimate <- function(x, f, ncomp, test, estimate){
+  ret <- do.call(f, list(object = x, newdata = test, estimate = estimate, ncomp = ncomp))$val
+  response_names <- dimnames(ret)$response
+  ret <- ret[, , 2]
+  names(ret) <- response_names
+  ret <- matrix(ret, ncol = length(ret), dimnames = list(NULL, names(ret)))
   ret
 }

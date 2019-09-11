@@ -54,6 +54,6 @@ test_that("glance.mvr", {
   gl <- glance(yarn_pls)
   gl2 <- glance(sens_pls)
 
-  check_glance_outputs(gl)
-  check_glance_outputs(gl2)
+  check_glance_outputs(gl, strict = FALSE)
+  check_glance_outputs(gl2, strict = FALSE)
 })
