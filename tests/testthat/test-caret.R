@@ -27,13 +27,13 @@ test_that("tidy.confusionMatrix", {
   )
   
   td_2c_by_class <- tidy(two_class_cm)
-  td_2c <- tidy(two_class_cm, by_class = FALSE)
+  td_2c <- tidy(two_class_cm, by.class = FALSE)
   
   check_tidy_output(td_2c_by_class)
   check_tidy_output(td_2c)
   
   td_mc_by_class <- tidy(multi_class_cm)
-  td_mc <- tidy(multi_class_cm, by_class = FALSE)
+  td_mc <- tidy(multi_class_cm, by.class = FALSE)
   
   check_tidy_output(td_mc_by_class)
   check_tidy_output(td_mc)
