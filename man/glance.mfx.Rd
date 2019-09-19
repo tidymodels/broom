@@ -2,10 +2,24 @@
 % Please edit documentation in R/mfx-tidiers.R
 \name{glance.mfx}
 \alias{glance.mfx}
-\alias{mfx_tidiers}
+\alias{glance.betamfx}
+\alias{glance.logitmfx}
+\alias{glance.negbinmfx}
+\alias{glance.poissonmfx}
+\alias{glance.probitmfx}
 \title{Glance at a(n) mfx object}
 \usage{
 \method{glance}{mfx}(x, ...)
+
+\method{glance}{betamfx}(x, ...)
+
+\method{glance}{logitmfx}(x, ...)
+
+\method{glance}{negbinmfx}(x, ...)
+
+\method{glance}{poissonmfx}(x, ...)
+
+\method{glance}{probitmfx}(x, ...)
 }
 \arguments{
 \item{x}{A \code{betamfx}, \code{logitmfx}, \code{negbinmfx}, \code{poissonmfx}, or \code{probitmfx}  object.}
@@ -40,17 +54,32 @@ This generic glance method wraps \code{\link[=glance.glm]{glance.glm()}} for obj
 the \code{mfx} package.
 }
 \examples{
+\dontrun{ 
 library(mfx)
-mfx_logitreg <- logitmfx(am ~ cyl + hp + wt, atmean = T, data = mtcars)
-glance(mfx_logitreg)
-mfx_probitreg <- probitmfx(am ~ cyl + hp + wt, atmean = T, data = mtcars)
-glance(mfx_probitreg)
+
+## Get the marginal effects from a logit regression
+mod_logmfx <- logitmfx(am ~ cyl + hp + wt, atmean = T, data = mtcars)
+tidy(mod_logmfx, conf.int=T)
+
+## Compare with the naive model coefficients of the same logit call (not run)
+# tidy(glm(am ~ cyl + hp + wt, family = binomial, data = mtcars), conf.int=T)
+
+augment(mod_logmfx)
+glance(mod_logmfx)
+
+## Another example, this time using probit regression
+mod_probmfx <- probitmfx(am ~ cyl + hp + wt, atmean = T, data = mtcars)
+tidy(mod_probmfx, conf.int=T)
+augment(mod_probmfx)
+glance(mod_probmfx)
+}
 
 }
 \seealso{
 \code{\link[=glance]{glance()}}, \code{\link[=glance.glm]{glance.glm()}}, \code{\link[mfx:betamfx]{mfx::betamfx()}}, \code{\link[mfx:logitmfx]{mfx::logitmfx()}}, \code{\link[mfx:negbinmfx]{mfx::negbinmfx()}}, \code{\link[mfx:poissonmfx]{mfx::poissonmfx()}}, \code{\link[mfx:probitmfx]{mfx::probitmfx()}}
 
-Other mfx tidiers: \code{\link{augment.mfx}}
+Other mfx tidiers: \code{\link{augment.mfx}},
+  \code{\link{tidy.mfx}}
 }
 \concept{mfx tidiers}
 \value{

@@ -2,11 +2,35 @@
 % Please edit documentation in R/mfx-tidiers.R
 \name{augment.mfx}
 \alias{augment.mfx}
-\alias{mfx_tidiers}
+\alias{augment.betamfx}
+\alias{augment.logitmfx}
+\alias{augment.negbinmfx}
+\alias{augment.poissonmfx}
+\alias{augment.probitmfx}
 \title{Augment data with information from a(n) mfx object}
 \usage{
 \method{augment}{mfx}(x, data = model.frame(x$fit), newdata = NULL,
   type.predict = c("link", "response", "terms"),
+  type.residuals = c("deviance", "pearson"), se_fit = FALSE, ...)
+
+\method{augment}{betamfx}(x, data = model.frame(x$fit), newdata = NULL,
+  type.predict = c("link", "response", "terms"),
+  type.residuals = c("deviance", "pearson"), se_fit = FALSE, ...)
+
+\method{augment}{logitmfx}(x, data = model.frame(x$fit),
+  newdata = NULL, type.predict = c("link", "response", "terms"),
+  type.residuals = c("deviance", "pearson"), se_fit = FALSE, ...)
+
+\method{augment}{negbinmfx}(x, data = model.frame(x$fit),
+  newdata = NULL, type.predict = c("link", "response", "terms"),
+  type.residuals = c("deviance", "pearson"), se_fit = FALSE, ...)
+
+\method{augment}{poissonmfx}(x, data = model.frame(x$fit),
+  newdata = NULL, type.predict = c("link", "response", "terms"),
+  type.residuals = c("deviance", "pearson"), se_fit = FALSE, ...)
+
+\method{augment}{probitmfx}(x, data = model.frame(x$fit),
+  newdata = NULL, type.predict = c("link", "response", "terms"),
   type.residuals = c("deviance", "pearson"), se_fit = FALSE, ...)
 }
 \arguments{
@@ -89,16 +113,32 @@ This generic augment method wraps \code{\link[=augment.glm]{augment.glm()}} for 
 the \code{mfx} package.
 }
 \examples{
+\dontrun{ 
 library(mfx)
-mfx_logitreg <- logitmfx(am ~ cyl + hp + wt, atmean = T, data = mtcars)
-augment(mfx_logitreg)
-mfx_probitreg <- probitmfx(am ~ cyl + hp + wt, atmean = T, data = mtcars)
-augment(mfx_probitreg)
+
+## Get the marginal effects from a logit regression
+mod_logmfx <- logitmfx(am ~ cyl + hp + wt, atmean = T, data = mtcars)
+tidy(mod_logmfx, conf.int=T)
+
+## Compare with the naive model coefficients of the same logit call (not run)
+# tidy(glm(am ~ cyl + hp + wt, family = binomial, data = mtcars), conf.int=T)
+
+augment(mod_logmfx)
+glance(mod_logmfx)
+
+## Another example, this time using probit regression
+mod_probmfx <- probitmfx(am ~ cyl + hp + wt, atmean = T, data = mtcars)
+tidy(mod_probmfx, conf.int=T)
+augment(mod_probmfx)
+glance(mod_probmfx)
+}
+
 }
 \seealso{
 \code{\link[=augment]{augment()}}, \code{\link[=augment.glm]{augment.glm()}}, \code{\link[mfx:betamfx]{mfx::betamfx()}}, \code{\link[mfx:logitmfx]{mfx::logitmfx()}}, \code{\link[mfx:negbinmfx]{mfx::negbinmfx()}}, \code{\link[mfx:poissonmfx]{mfx::poissonmfx()}}, \code{\link[mfx:probitmfx]{mfx::probitmfx()}}
 
-Other mfx tidiers: \code{\link{glance.mfx}}
+Other mfx tidiers: \code{\link{glance.mfx}},
+  \code{\link{tidy.mfx}}
 }
 \concept{mfx tidiers}
 \value{

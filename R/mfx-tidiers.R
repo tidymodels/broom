@@ -4,7 +4,7 @@
 #' @description The particular functions below provide generic tidy methods for 
 #'   objects returned by the `mfx` package, preserving the calculated marginal 
 #'   effects instead of the naive model coefficients. The returned tidy tibble 
-#'   will also include an additional "atmean"column indicating how the marginal 
+#'   will also include an additional "atmean" column indicating how the marginal 
 #'   effects were originally calculated (see Details below).
 #' 
 #' @param x A `betamfx`, `logitmfx`, `negbinmfx`, `poissonmfx`, or `probitmfx`  object.
@@ -13,7 +13,7 @@
 #'
 #' @evalRd return_tidy(
 #'   "term",
-#'   atmean = "were the marginal effects originally calculated as the partial effects for the average observation? If FALSE, then these were instead calculated as average partial effects.",
+#'   atmean = "TRUE if the marginal effects were originally calculated as the partial effects for the average observation. If FALSE, then these were instead calculated as average partial effects.",
 #'   "estimate",
 #'   "std.error",
 #'   "statistic",
@@ -32,29 +32,30 @@
 #'   that were included in the model. When calculating marginal effects, users
 #'   must typically choose whether they want to use i) the average observation 
 #'   in the data, or ii) the average of the sample marginal effects. See 
-#'   `vignette("mfxarticle")` from the `mfx` vignette for more details.
+#'   `vignette("mfxarticle")` from the `mfx` package for more details.
 #'   
-#' @examples 
+#' @examples
+#' \dontrun{ 
 #' library(mfx)
 #' 
-#' ## Using logit regression
-#' mfx_logitreg <- logitmfx(am ~ cyl + hp + wt, atmean = T, data = mtcars)
-#' tidy(mfx_logitreg)
-#' tidy(mfx_logitreg, conf.int=T)
-#' mfx_logitreg2 <- logitmfx(am ~ cyl + hp + wt, atmean = F, robust = T, data = mtcars)
-#' tidy(mfx_logitreg, conf.int=T)
+#' ## Get the marginal effects from a logit regression
+#' mod_logmfx <- logitmfx(am ~ cyl + hp + wt, atmean = T, data = mtcars)
+#' tidy(mod_logmfx, conf.int=T)
 #' 
-#' ## Compare with naive model coefficients (not run)
+#' ## Compare with the naive model coefficients of the same logit call (not run)
 #' # tidy(glm(am ~ cyl + hp + wt, family = binomial, data = mtcars), conf.int=T)
 #' 
-#' ## One more example, this time using probit regression on the same data
-#' mfx_probitreg <- probitmfx(am ~ cyl + hp + wt, atmean = T, data = mtcars)
-#' tidy(mfx_probitreg, conf.int=T)
+#' augment(mod_logmfx)
+#' glance(mod_logmfx)
 #' 
-#' @name mfx_tidiers
+#' ## Another example, this time using probit regression
+#' mod_probmfx <- probitmfx(am ~ cyl + hp + wt, atmean = T, data = mtcars)
+#' tidy(mod_probmfx, conf.int=T)
+#' augment(mod_probmfx)
+#' glance(mod_probmfx)
+#' }
 #' 
-NULL
-#' @rdname mfx_tidiers
+#' @family mfx tidiers
 #' @seealso [tidy()], [mfx::betamfx()], [mfx::logitmfx()], [mfx::negbinmfx()], [mfx::poissonmfx()], [mfx::probitmfx()]
 #' @export
 tidy.mfx <-
@@ -97,28 +98,24 @@ tidy.mfx <-
     x_tidy
   }
 
-#' @rdname mfx_tidiers
-#' @export
+
+#' @rdname tidy.mfx
 #' @method tidy betamfx
 tidy.betamfx <- tidy.mfx
 
-#' @rdname mfx_tidiers
-#' @export
+#' @rdname tidy.mfx
 #' @method tidy logitmfx
 tidy.logitmfx <- tidy.mfx
 
-#' @rdname mfx_tidiers
-#' @export
+#' @rdname tidy.mfx
 #' @method tidy negbinmfx
 tidy.negbinmfx <- tidy.mfx
 
-#' @rdname mfx_tidiers
-#' @export
+#' @rdname tidy.mfx
 #' @method tidy poissonmfx
 tidy.poissonmfx <- tidy.mfx
 
-#' @rdname mfx_tidiers
-#' @export
+#' @rdname tidy.mfx
 #' @method tidy probitmfx
 tidy.probitmfx <- tidy.mfx
 
@@ -126,6 +123,8 @@ tidy.probitmfx <- tidy.mfx
 
 #' @templateVar class mfx
 #' @template title_desc_augment
+#' 
+#' @inherit tidy.mfx params examples
 #' 
 #' @param x A `betamfx`, `logitmfx`, `negbinmfx`, `poissonmfx`, or `probitmfx`  object.
 #' @template param_data
@@ -148,16 +147,9 @@ tidy.probitmfx <- tidy.mfx
 #' @details This generic augment method wraps [augment.glm()] for objects from
 #'   the `mfx` package.
 #'   
-#' @examples
-#' library(mfx)
-#' mfx_logitreg <- logitmfx(am ~ cyl + hp + wt, atmean = T, data = mtcars)
-#' augment(mfx_logitreg)
-#' mfx_probitreg <- probitmfx(am ~ cyl + hp + wt, atmean = T, data = mtcars)
-#' augment(mfx_probitreg)
-#' @export
-#' @seealso [augment()], [augment.glm()], [mfx::betamfx()], [mfx::logitmfx()], [mfx::negbinmfx()], [mfx::poissonmfx()], [mfx::probitmfx()]
 #' @family mfx tidiers
-#' @aliases mfx_tidiers
+#' @seealso [augment()], [augment.glm()], [mfx::betamfx()], [mfx::logitmfx()], [mfx::negbinmfx()], [mfx::poissonmfx()], [mfx::probitmfx()]
+#' @export
 augment.mfx <- function(x, 
                         data = model.frame(x$fit),
                         newdata = NULL,
@@ -165,38 +157,33 @@ augment.mfx <- function(x,
                         type.residuals = c("deviance", "pearson"),
                         se_fit = FALSE, ...) {
   ## Use augment.glm() method on internal fit object
-  df <- augment(x$fit, 
+  df <- augment.glm(x$fit, 
                 data = data,
                 newdata = newdata,
                 type.predict = type.predict,
                 type.residuals = type.residuals,
-                se_fit = se_fit)
+                se_fit = se_fit, ...)
   
   df
 }
 
-#' @rdname mfx_tidiers
-#' @export
+#' @rdname augment.mfx
 #' @method augment betamfx
 augment.betamfx <- augment.mfx
 
-#' @rdname mfx_tidiers
-#' @export
+#' @rdname augment.mfx
 #' @method augment logitmfx
 augment.logitmfx <- augment.mfx
 
-#' @rdname mfx_tidiers
-#' @export
+#' @rdname augment.mfx
 #' @method augment negbinmfx
 augment.negbinmfx <- augment.mfx
 
-#' @rdname mfx_tidiers
-#' @export
+#' @rdname augment.mfx
 #' @method augment poissonmfx
 augment.poissonmfx <- augment.mfx
 
-#' @rdname mfx_tidiers
-#' @export
+#' @rdname augment.mfx
 #' @method augment probitmfx
 augment.probitmfx <- augment.mfx
 
@@ -204,6 +191,8 @@ augment.probitmfx <- augment.mfx
 
 #' @templateVar class mfx
 #' @template title_desc_glance
+#' 
+#' @inherit tidy.mfx params examples
 #' 
 #' @param x A `betamfx`, `logitmfx`, `negbinmfx`, `poissonmfx`, or `probitmfx`  object.
 #' @template param_unused_dots
@@ -221,44 +210,32 @@ augment.probitmfx <- augment.mfx
 #'
 #' @details This generic glance method wraps [glance.glm()] for objects from
 #'   the `mfx` package.   
-#' @examples
-#' library(mfx)
-#' mfx_logitreg <- logitmfx(am ~ cyl + hp + wt, atmean = T, data = mtcars)
-#' glance(mfx_logitreg)
-#' mfx_probitreg <- probitmfx(am ~ cyl + hp + wt, atmean = T, data = mtcars)
-#' glance(mfx_probitreg)
 #'
-#' @export
-#' @seealso [glance()], [glance.glm()], [mfx::betamfx()], [mfx::logitmfx()], [mfx::negbinmfx()], [mfx::poissonmfx()], [mfx::probitmfx()]
 #' @family mfx tidiers
-#' @aliases mfx_tidiers
+#' @seealso [glance()], [glance.glm()], [mfx::betamfx()], [mfx::logitmfx()], [mfx::negbinmfx()], [mfx::poissonmfx()], [mfx::probitmfx()]
+#' @export
 glance.mfx <- function(x, ...) {
   ## Use glance.glm() method on internal fit object
   ret <- glance(x$fit)
   ret
 }
 
-#' @rdname mfx_tidiers
-#' @export
+#' @rdname glance.mfx
 #' @method glance betamfx
 glance.betamfx <- glance.mfx
 
-#' @rdname mfx_tidiers
-#' @export
+#' @rdname glance.mfx
 #' @method glance logitmfx
 glance.logitmfx <- glance.mfx
 
-#' @rdname mfx_tidiers
-#' @export
+#' @rdname glance.mfx
 #' @method glance negbinmfx
 glance.negbinmfx <- glance.mfx
 
-#' @rdname mfx_tidiers
-#' @export
+#' @rdname glance.mfx
 #' @method glance poissonmfx
 glance.poissonmfx <- glance.mfx
 
-#' @rdname mfx_tidiers
-#' @export
+#' @rdname glance.mfx
 #' @method glance probitmfx
 glance.probitmfx <- glance.mfx
