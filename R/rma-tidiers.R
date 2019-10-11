@@ -6,7 +6,7 @@
 #'   [metafor::rma.mv()], or [metafor::rma.peto()].
 #' @inheritParams tidy.lm
 #' @param include_studies Logical. Should individual studies be included in the
-#'    output? Defaults to `TRUE`.
+#'    output? Defaults to `FALSE`.
 #' @template param_unused_dots
 #' @param measure Measure type. See [metafor::escalc()]
 #'
@@ -43,7 +43,7 @@
 #' @rdname metafor_tidiers
 #' 
 tidy.rma <- function(x, conf.int = FALSE, conf.level = 0.95, exponentiate = FALSE,
-                     include_studies = TRUE, measure = "GEN", ...) {
+                     include_studies = FALSE, measure = "GEN", ...) {
   # tidy summary estimates
   betas <- x$beta
   if (!is.null(nrow(betas)) && nrow(betas) > 1) {
