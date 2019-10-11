@@ -161,7 +161,8 @@ glance.rma <- function(x, ...) {
     cochran.qe = x$QE,
     p.value.cochran.qe = x$QEp,
     cochran.qm = x$QM,
-    p.value.cochran.qm = x$QMp
+    p.value.cochran.qm = x$QMp,
+    df.residual = df.residual(x)
   ) %>%
     purrr::discard(is.null) %>%
     # drop multivariate statistics

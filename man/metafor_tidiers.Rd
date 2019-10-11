@@ -5,7 +5,8 @@
 \title{Tidy a(n) rma object}
 \usage{
 \method{tidy}{rma}(x, conf.int = FALSE, conf.level = 0.95,
-  exponentiate = FALSE, include_studies = TRUE, measure = "GEN", ...)
+  exponentiate = FALSE, include_studies = FALSE, measure = "GEN",
+  ...)
 }
 \arguments{
 \item{x}{An \code{rma} object such as those created by \code{\link[metafor:rma]{metafor::rma()}},
@@ -25,7 +26,7 @@ regressions, but a bad idea if there is no log or logit link. Defaults
 to \code{FALSE}.}
 
 \item{include_studies}{Logical. Should individual studies be included in the
-output? Defaults to \code{TRUE}.}
+output? Defaults to \code{FALSE}.}
 
 \item{measure}{Measure type. See \code{\link[metafor:escalc]{metafor::escalc()}}}
 
