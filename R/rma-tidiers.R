@@ -58,7 +58,7 @@ tidy.rma <- function(x, conf.int = FALSE, conf.level = 0.95, exponentiate = FALS
   }
   
   results <- tibble::tibble(
-    study = study, 
+    term = study, 
     type = "summary",
     estimate = betas, 
     std.error = x$se,
@@ -78,7 +78,7 @@ tidy.rma <- function(x, conf.int = FALSE, conf.level = 0.95, exponentiate = FALS
     n_studies <- length(x$slab)
     
     estimates <- dplyr::bind_cols(
-      study = as.character(x$slab), 
+      term = as.character(x$slab), 
       # dplyr::bind_cols is strict about recycling, so repeat for each study
       type = rep("study", n_studies), 
       estimates[, c("yi", "sei", "zi")], 
@@ -86,7 +86,7 @@ tidy.rma <- function(x, conf.int = FALSE, conf.level = 0.95, exponentiate = FALS
       estimates[, c("ci.lb", "ci.ub")] 
     )
     
-    names(estimates) <- c("study", "type", "estimate", "std.error", "statistic",
+    names(estimates) <- c("term", "type", "estimate", "std.error", "statistic",
                           "p.value", "conf.low", "conf.high")
     estimates <- as_tibble(estimates)
     results <- dplyr::bind_rows(estimates, results) 
