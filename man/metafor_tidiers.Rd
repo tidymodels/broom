@@ -75,7 +75,7 @@ A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
   \item{p.value}{The two-sided p-value associated with the observed statistic.}
   \item{statistic}{The value of a T-statistic to use in a hypothesis that the regression term is non-zero.}
   \item{std.error}{The standard error of the regression term.}
-  \item{study}{The name of the individual study}
+  \item{term}{The name of the individual study}
   \item{type}{The estimate type  (summary vs individual study)}
 
 }

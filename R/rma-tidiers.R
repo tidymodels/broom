@@ -11,7 +11,7 @@
 #' @param measure Measure type. See [metafor::escalc()]
 #'
 #' @evalRd return_tidy(
-#'   study = "The name of the individual study",
+#'   term = "The name of the individual study",
 #'   type = "The estimate type  (summary vs individual study)",
 #'   "estimate",
 #'   "std.error",
@@ -119,7 +119,8 @@ tidy.rma <- function(x, conf.int = FALSE, conf.level = 0.95, exponentiate = FALS
 #'   "cochran.qe", 
 #'   "p.value.cochran.qe", 
 #'   "cochran.qm", 
-#'   "p.value.cochran.qm"
+#'   "p.value.cochran.qm",
+#'   "df.residual"
 #' )
 #' @export
 #'
