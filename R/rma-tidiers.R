@@ -165,6 +165,7 @@ glance.rma <- function(x, ...) {
     df.residual = df.residual(x)
   ) %>%
     purrr::discard(is.null) %>%
+    purrr::discard(purrr::is_empty) %>%
     # drop multivariate statistics
     purrr::discard(~length(.x) >= 2) %>%
     as_tibble()
