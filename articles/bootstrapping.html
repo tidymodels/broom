@@ -6,24 +6,25 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Tidy bootstrapping • broom</title>
-<!-- jquery --><script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script><!-- Bootstrap --><link href="../tidyverse.css" rel="stylesheet">
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script><!-- Font Awesome icons --><link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
-<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- sticky kit --><script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
+<!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+<link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png">
+<link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png">
+<link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png">
+<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script><!-- Bootstrap --><link href="../tidyverse.css" rel="stylesheet">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous">
+<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
 <script src="../pkgdown.js"></script><link href="../tidyverse-2.css" rel="stylesheet">
 <meta property="og:title" content="Tidy bootstrapping">
 <meta property="og:description" content="">
 <meta property="og:image" content="http://broom.tidyverse.org/logo.png">
 <meta name="twitter:card" content="summary">
-<!-- mathjax --><script src="https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!--[if lt IE 9]>
+<!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-<![endif]--><!-- google analytics --><script async src="https://www.googletagmanager.com/gtag/js?id=UA-115082821-1"></script><script>
- window.dataLayer = window.dataLayer || [];
- function gtag(){dataLayer.push(arguments);}
- gtag('js', new Date());
-
- gtag('config', 'UA-115082821-1');
-</script>
+<![endif]-->
 </head>
 <body>
     <div class="container template-article">
@@ -98,12 +99,13 @@
 <!--/.navbar -->
 
       
+
       </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1>Tidy bootstrapping</h1>
             
-            <h4 class="date">2019-08-20</h4>
+            <h4 class="date">2019-10-13</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/tidymodels/broom/blob/master/vignettes/bootstrapping.Rmd"><code>vignettes/bootstrapping.Rmd</code></a></small>
       <div class="hidden name"><code>bootstrapping.Rmd</code></div>
@@ -118,14 +120,14 @@
 <p>Another place where combining model fits in a tidy way becomes useful is when performing bootstrapping or permutation tests. These approaches have been explored before, for instance by <a href="http://rstudio-pubs-static.s3.amazonaws.com/19698_a4c472606e3c43e4b94720506e49bb7b.html">Andrew MacDonald here</a>, and <a href="https://github.com/hadley/dplyr/issues/269">Hadley has explored efficient support for bootstrapping</a> as a potential enhancement to dplyr. broom fits naturally with dplyr in performing these analyses.</p>
 <p>Bootstrapping consists of randomly sampling a dataset with replacement, then performing the analysis individually on each bootstrapped replicate. The variation in the resulting estimate is then a reasonable approximation of the variance in our estimate.</p>
 <p>Let’s say we want to fit a nonlinear model to the weight/mileage relationship in the <code>mtcars</code> dataset.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(ggplot2)</a>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(ggplot2)</a>
 <a class="sourceLine" id="cb1-2" data-line-number="2"></a>
 <a class="sourceLine" id="cb1-3" data-line-number="3"><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(mtcars, <span class="kw"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(mpg, wt)) <span class="op">+</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb1-4" data-line-number="4"><span class="st">    </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span>()</a></code></pre></div>
 <p><img src="bootstrapping_files/figure-html/unnamed-chunk-1-1.png" width="700"></p>
 <p>We might use the method of nonlinear least squares (via the <code>nls</code> function) to fit a model.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1">nlsfit &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/stats/topics/nls">nls</a></span>(mpg <span class="op">~</span><span class="st"> </span>k <span class="op">/</span><span class="st"> </span>wt <span class="op">+</span><span class="st"> </span>b, mtcars, <span class="dt">start =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/list">list</a></span>(<span class="dt">k =</span> <span class="dv">1</span>, <span class="dt">b =</span> <span class="dv">0</span>))</a>
-<a class="sourceLine" id="cb2-2" data-line-number="2"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/summary">summary</a></span>(nlsfit)</a>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1">nlsfit &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/stats/nls.html">nls</a></span>(mpg <span class="op">~</span><span class="st"> </span>k <span class="op">/</span><span class="st"> </span>wt <span class="op">+</span><span class="st"> </span>b, mtcars, <span class="dt">start =</span> <span class="kw"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="dt">k =</span> <span class="dv">1</span>, <span class="dt">b =</span> <span class="dv">0</span>))</a>
+<a class="sourceLine" id="cb2-2" data-line-number="2"><span class="kw"><a href="https://rdrr.io/r/base/summary.html">summary</a></span>(nlsfit)</a>
 <a class="sourceLine" id="cb2-3" data-line-number="3"><span class="co">#&gt; </span></a>
 <a class="sourceLine" id="cb2-4" data-line-number="4"><span class="co">#&gt; Formula: mpg ~ k/wt + b</span></a>
 <a class="sourceLine" id="cb2-5" data-line-number="5"><span class="co">#&gt; </span></a>
@@ -143,19 +145,19 @@
 <a class="sourceLine" id="cb2-17" data-line-number="17"></a>
 <a class="sourceLine" id="cb2-18" data-line-number="18"><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(mtcars, <span class="kw"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(wt, mpg)) <span class="op">+</span></a>
 <a class="sourceLine" id="cb2-19" data-line-number="19"><span class="st">    </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span>() <span class="op">+</span></a>
-<a class="sourceLine" id="cb2-20" data-line-number="20"><span class="st">    </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span>(<span class="kw"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="dt">y =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/stats/topics/predict">predict</a></span>(nlsfit)))</a></code></pre></div>
+<a class="sourceLine" id="cb2-20" data-line-number="20"><span class="st">    </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span>(<span class="kw"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="dt">y =</span> <span class="kw"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span>(nlsfit)))</a></code></pre></div>
 <p><img src="bootstrapping_files/figure-html/unnamed-chunk-2-1.png" width="700"></p>
 <p>While this does provide a p-value and confidence intervals for the parameters, these are based on model assumptions that may not hold in real data. Bootstrapping is a popular method for providing confidence intervals and predictions that are more robust to the nature of the data.</p>
 <p>We can use the <code>bootstraps</code> function in the <strong>rsample</strong> package to sample bootstrap replications. First, we construct 100 bootstrap replications of the data, each of which has been randomly sampled with replacement. The resulting object is an <code>rset</code>, which is a dataframe with a column of <code>rsplit</code> objects.</p>
-<p>An <code>rsplit</code> object has two main components: an analysis dataset and an assessment dataset, accessible via <code><a href="https://www.rdocumentation.org/packages/rsample/topics/as.data.frame.rsplit">analysis(rsplit)</a></code> and <code><a href="https://www.rdocumentation.org/packages/rsample/topics/as.data.frame.rsplit">assessment(rsplit)</a></code> respectively. For bootstrap samples, the analysis dataset is the bootstrap sample itself, and the assessment dataset consists of all the out of bag samples.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(dplyr)</a>
-<a class="sourceLine" id="cb3-2" data-line-number="2"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(rsample)</a>
-<a class="sourceLine" id="cb3-3" data-line-number="3"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(broom)</a>
-<a class="sourceLine" id="cb3-4" data-line-number="4"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(purrr)</a>
+<p>An <code>rsplit</code> object has two main components: an analysis dataset and an assessment dataset, accessible via <code><a href="https://rdrr.io/pkg/rsample/man/as.data.frame.rsplit.html">analysis(rsplit)</a></code> and <code><a href="https://rdrr.io/pkg/rsample/man/as.data.frame.rsplit.html">assessment(rsplit)</a></code> respectively. For bootstrap samples, the analysis dataset is the bootstrap sample itself, and the assessment dataset consists of all the out of bag samples.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(dplyr)</a>
+<a class="sourceLine" id="cb3-2" data-line-number="2"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(rsample)</a>
+<a class="sourceLine" id="cb3-3" data-line-number="3"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(broom)</a>
+<a class="sourceLine" id="cb3-4" data-line-number="4"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(purrr)</a>
 <a class="sourceLine" id="cb3-5" data-line-number="5"></a>
-<a class="sourceLine" id="cb3-6" data-line-number="6"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/Random">set.seed</a></span>(<span class="dv">27</span>)</a>
+<a class="sourceLine" id="cb3-6" data-line-number="6"><span class="kw"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span>(<span class="dv">27</span>)</a>
 <a class="sourceLine" id="cb3-7" data-line-number="7"></a>
-<a class="sourceLine" id="cb3-8" data-line-number="8">boots &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/rsample/topics/bootstraps">bootstraps</a></span>(mtcars, <span class="dt">times =</span> <span class="dv">100</span>)</a>
+<a class="sourceLine" id="cb3-8" data-line-number="8">boots &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/pkg/rsample/man/bootstraps.html">bootstraps</a></span>(mtcars, <span class="dt">times =</span> <span class="dv">100</span>)</a>
 <a class="sourceLine" id="cb3-9" data-line-number="9">boots</a>
 <a class="sourceLine" id="cb3-10" data-line-number="10"><span class="co">#&gt; # Bootstrap sampling </span></a>
 <a class="sourceLine" id="cb3-11" data-line-number="11"><span class="co">#&gt; # A tibble: 100 x 2</span></a>
@@ -174,7 +176,7 @@
 <a class="sourceLine" id="cb3-24" data-line-number="24"><span class="co">#&gt; # … with 90 more rows</span></a></code></pre></div>
 <p>We create a helper function to fit an <code>nls</code> model on each bootstrap sample, and then use <code><a href="https://purrr.tidyverse.org/reference/map.html">purrr::map</a></code> to apply this function to all the bootstrap samples at once. Similarly, we create a column of tidy coefficient information by unnesting.</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1">fit_nls_on_bootstrap &lt;-<span class="st"> </span><span class="cf">function</span>(split) {</a>
-<a class="sourceLine" id="cb4-2" data-line-number="2">    <span class="kw"><a href="https://www.rdocumentation.org/packages/stats/topics/nls">nls</a></span>(mpg <span class="op">~</span><span class="st"> </span>k <span class="op">/</span><span class="st"> </span>wt <span class="op">+</span><span class="st"> </span>b, <span class="kw"><a href="https://www.rdocumentation.org/packages/rsample/topics/as.data.frame.rsplit">analysis</a></span>(split), <span class="dt">start =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/list">list</a></span>(<span class="dt">k =</span> <span class="dv">1</span>, <span class="dt">b =</span> <span class="dv">0</span>))</a>
+<a class="sourceLine" id="cb4-2" data-line-number="2">    <span class="kw"><a href="https://rdrr.io/r/stats/nls.html">nls</a></span>(mpg <span class="op">~</span><span class="st"> </span>k <span class="op">/</span><span class="st"> </span>wt <span class="op">+</span><span class="st"> </span>b, <span class="kw"><a href="https://rdrr.io/pkg/rsample/man/as.data.frame.rsplit.html">analysis</a></span>(split), <span class="dt">start =</span> <span class="kw"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="dt">k =</span> <span class="dv">1</span>, <span class="dt">b =</span> <span class="dv">0</span>))</a>
 <a class="sourceLine" id="cb4-3" data-line-number="3">}</a>
 <a class="sourceLine" id="cb4-4" data-line-number="4"></a>
 <a class="sourceLine" id="cb4-5" data-line-number="5">boot_models &lt;-<span class="st"> </span>boots <span class="op">%&gt;%</span><span class="st"> </span></a>
@@ -185,26 +187,26 @@
 <a class="sourceLine" id="cb4-10" data-line-number="10"><span class="st">    </span><span class="kw">unnest</span>(coef_info)</a></code></pre></div>
 <p>The unnested coefficient information contains a summary of each replication combined in a single data frame:</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1">boot_coefs</a>
-<a class="sourceLine" id="cb5-2" data-line-number="2"><span class="co">#&gt; # A tibble: 200 x 6</span></a>
-<a class="sourceLine" id="cb5-3" data-line-number="3"><span class="co">#&gt;    id           term  estimate std.error statistic  p.value</span></a>
-<a class="sourceLine" id="cb5-4" data-line-number="4"><span class="co">#&gt;    &lt;chr&gt;        &lt;chr&gt;    &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;</span></a>
-<a class="sourceLine" id="cb5-5" data-line-number="5"><span class="co">#&gt;  1 Bootstrap001 k        42.1       4.05     10.4  1.91e-11</span></a>
-<a class="sourceLine" id="cb5-6" data-line-number="6"><span class="co">#&gt;  2 Bootstrap001 b         5.39      1.43      3.78 6.93e- 4</span></a>
-<a class="sourceLine" id="cb5-7" data-line-number="7"><span class="co">#&gt;  3 Bootstrap002 k        49.9       5.66      8.82 7.82e-10</span></a>
-<a class="sourceLine" id="cb5-8" data-line-number="8"><span class="co">#&gt;  4 Bootstrap002 b         3.73      1.92      1.94 6.13e- 2</span></a>
-<a class="sourceLine" id="cb5-9" data-line-number="9"><span class="co">#&gt;  5 Bootstrap003 k        37.8       2.68     14.1  9.01e-15</span></a>
-<a class="sourceLine" id="cb5-10" data-line-number="10"><span class="co">#&gt;  6 Bootstrap003 b         6.73      1.17      5.75 2.78e- 6</span></a>
-<a class="sourceLine" id="cb5-11" data-line-number="11"><span class="co">#&gt;  7 Bootstrap004 k        45.6       4.45     10.2  2.70e-11</span></a>
-<a class="sourceLine" id="cb5-12" data-line-number="12"><span class="co">#&gt;  8 Bootstrap004 b         4.75      1.62      2.93 6.38e- 3</span></a>
-<a class="sourceLine" id="cb5-13" data-line-number="13"><span class="co">#&gt;  9 Bootstrap005 k        43.6       4.63      9.41 1.85e-10</span></a>
-<a class="sourceLine" id="cb5-14" data-line-number="14"><span class="co">#&gt; 10 Bootstrap005 b         5.89      1.68      3.51 1.44e- 3</span></a>
+<a class="sourceLine" id="cb5-2" data-line-number="2"><span class="co">#&gt; # A tibble: 200 x 8</span></a>
+<a class="sourceLine" id="cb5-3" data-line-number="3"><span class="co">#&gt;    splits       id        model term  estimate std.error statistic  p.value</span></a>
+<a class="sourceLine" id="cb5-4" data-line-number="4"><span class="co">#&gt;    &lt;list&gt;       &lt;chr&gt;     &lt;lis&gt; &lt;chr&gt;    &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;</span></a>
+<a class="sourceLine" id="cb5-5" data-line-number="5"><span class="co">#&gt;  1 &lt;split [32/… Bootstra… &lt;nls&gt; k        42.1       4.05     10.4  1.91e-11</span></a>
+<a class="sourceLine" id="cb5-6" data-line-number="6"><span class="co">#&gt;  2 &lt;split [32/… Bootstra… &lt;nls&gt; b         5.39      1.43      3.78 6.93e- 4</span></a>
+<a class="sourceLine" id="cb5-7" data-line-number="7"><span class="co">#&gt;  3 &lt;split [32/… Bootstra… &lt;nls&gt; k        49.9       5.66      8.82 7.82e-10</span></a>
+<a class="sourceLine" id="cb5-8" data-line-number="8"><span class="co">#&gt;  4 &lt;split [32/… Bootstra… &lt;nls&gt; b         3.73      1.92      1.94 6.13e- 2</span></a>
+<a class="sourceLine" id="cb5-9" data-line-number="9"><span class="co">#&gt;  5 &lt;split [32/… Bootstra… &lt;nls&gt; k        37.8       2.68     14.1  9.01e-15</span></a>
+<a class="sourceLine" id="cb5-10" data-line-number="10"><span class="co">#&gt;  6 &lt;split [32/… Bootstra… &lt;nls&gt; b         6.73      1.17      5.75 2.78e- 6</span></a>
+<a class="sourceLine" id="cb5-11" data-line-number="11"><span class="co">#&gt;  7 &lt;split [32/… Bootstra… &lt;nls&gt; k        45.6       4.45     10.2  2.70e-11</span></a>
+<a class="sourceLine" id="cb5-12" data-line-number="12"><span class="co">#&gt;  8 &lt;split [32/… Bootstra… &lt;nls&gt; b         4.75      1.62      2.93 6.38e- 3</span></a>
+<a class="sourceLine" id="cb5-13" data-line-number="13"><span class="co">#&gt;  9 &lt;split [32/… Bootstra… &lt;nls&gt; k        43.6       4.63      9.41 1.85e-10</span></a>
+<a class="sourceLine" id="cb5-14" data-line-number="14"><span class="co">#&gt; 10 &lt;split [32/… Bootstra… &lt;nls&gt; b         5.89      1.68      3.51 1.44e- 3</span></a>
 <a class="sourceLine" id="cb5-15" data-line-number="15"><span class="co">#&gt; # … with 190 more rows</span></a></code></pre></div>
 <p>We can then calculate confidence intervals (using what is called the <a href="https://www.uvm.edu/~dhowell/StatPages/Randomization%20Tests/ResamplingWithR/BootstMeans/bootstrapping_means.html">percentile method</a>):</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1">alpha &lt;-<span class="st"> </span><span class="fl">.05</span></a>
 <a class="sourceLine" id="cb6-2" data-line-number="2">boot_coefs <span class="op">%&gt;%</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb6-3" data-line-number="3"><span class="st">    </span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span>(term) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb6-4" data-line-number="4"><span class="st">    </span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarize</a></span>(<span class="dt">low =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/stats/topics/quantile">quantile</a></span>(estimate, alpha <span class="op">/</span><span class="st"> </span><span class="dv">2</span>),</a>
-<a class="sourceLine" id="cb6-5" data-line-number="5">              <span class="dt">high =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/stats/topics/quantile">quantile</a></span>(estimate, <span class="dv">1</span> <span class="op">-</span><span class="st"> </span>alpha <span class="op">/</span><span class="st"> </span><span class="dv">2</span>))</a>
+<a class="sourceLine" id="cb6-4" data-line-number="4"><span class="st">    </span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarize</a></span>(<span class="dt">low =</span> <span class="kw"><a href="https://rdrr.io/r/stats/quantile.html">quantile</a></span>(estimate, alpha <span class="op">/</span><span class="st"> </span><span class="dv">2</span>),</a>
+<a class="sourceLine" id="cb6-5" data-line-number="5">              <span class="dt">high =</span> <span class="kw"><a href="https://rdrr.io/r/stats/quantile.html">quantile</a></span>(estimate, <span class="dv">1</span> <span class="op">-</span><span class="st"> </span>alpha <span class="op">/</span><span class="st"> </span><span class="dv">2</span>))</a>
 <a class="sourceLine" id="cb6-6" data-line-number="6"><span class="co">#&gt; # A tibble: 2 x 3</span></a>
 <a class="sourceLine" id="cb6-7" data-line-number="7"><span class="co">#&gt;   term     low  high</span></a>
 <a class="sourceLine" id="cb6-8" data-line-number="8"><span class="co">#&gt;   &lt;chr&gt;  &lt;dbl&gt; &lt;dbl&gt;</span></a>
@@ -221,19 +223,19 @@
 <a class="sourceLine" id="cb8-3" data-line-number="3"><span class="st">    </span><span class="kw">unnest</span>(augmented)</a>
 <a class="sourceLine" id="cb8-4" data-line-number="4"></a>
 <a class="sourceLine" id="cb8-5" data-line-number="5">boot_aug</a>
-<a class="sourceLine" id="cb8-6" data-line-number="6"><span class="co">#&gt; # A tibble: 3,200 x 4</span></a>
-<a class="sourceLine" id="cb8-7" data-line-number="7"><span class="co">#&gt;    id             mpg    wt .fitted</span></a>
-<a class="sourceLine" id="cb8-8" data-line-number="8"><span class="co">#&gt;    &lt;chr&gt;        &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;</span></a>
-<a class="sourceLine" id="cb8-9" data-line-number="9"><span class="co">#&gt;  1 Bootstrap001  18.7  3.44    17.6</span></a>
-<a class="sourceLine" id="cb8-10" data-line-number="10"><span class="co">#&gt;  2 Bootstrap001  32.4  2.2     24.5</span></a>
-<a class="sourceLine" id="cb8-11" data-line-number="11"><span class="co">#&gt;  3 Bootstrap001  15.5  3.52    17.3</span></a>
-<a class="sourceLine" id="cb8-12" data-line-number="12"><span class="co">#&gt;  4 Bootstrap001  22.8  3.15    18.7</span></a>
-<a class="sourceLine" id="cb8-13" data-line-number="13"><span class="co">#&gt;  5 Bootstrap001  24.4  3.19    18.6</span></a>
-<a class="sourceLine" id="cb8-14" data-line-number="14"><span class="co">#&gt;  6 Bootstrap001  30.4  1.62    31.4</span></a>
-<a class="sourceLine" id="cb8-15" data-line-number="15"><span class="co">#&gt;  7 Bootstrap001  10.4  5.42    13.1</span></a>
-<a class="sourceLine" id="cb8-16" data-line-number="16"><span class="co">#&gt;  8 Bootstrap001  21    2.62    21.4</span></a>
-<a class="sourceLine" id="cb8-17" data-line-number="17"><span class="co">#&gt;  9 Bootstrap001  19.2  3.84    16.3</span></a>
-<a class="sourceLine" id="cb8-18" data-line-number="18"><span class="co">#&gt; 10 Bootstrap001  21    2.62    21.4</span></a>
+<a class="sourceLine" id="cb8-6" data-line-number="6"><span class="co">#&gt; # A tibble: 3,200 x 7</span></a>
+<a class="sourceLine" id="cb8-7" data-line-number="7"><span class="co">#&gt;    splits          id           model  coef_info          mpg    wt .fitted</span></a>
+<a class="sourceLine" id="cb8-8" data-line-number="8"><span class="co">#&gt;    &lt;list&gt;          &lt;chr&gt;        &lt;list&gt; &lt;list&gt;           &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;</span></a>
+<a class="sourceLine" id="cb8-9" data-line-number="9"><span class="co">#&gt;  1 &lt;split [32/13]&gt; Bootstrap001 &lt;nls&gt;  &lt;tibble [2 × 5]&gt;  18.7  3.44    17.6</span></a>
+<a class="sourceLine" id="cb8-10" data-line-number="10"><span class="co">#&gt;  2 &lt;split [32/13]&gt; Bootstrap001 &lt;nls&gt;  &lt;tibble [2 × 5]&gt;  32.4  2.2     24.5</span></a>
+<a class="sourceLine" id="cb8-11" data-line-number="11"><span class="co">#&gt;  3 &lt;split [32/13]&gt; Bootstrap001 &lt;nls&gt;  &lt;tibble [2 × 5]&gt;  15.5  3.52    17.3</span></a>
+<a class="sourceLine" id="cb8-12" data-line-number="12"><span class="co">#&gt;  4 &lt;split [32/13]&gt; Bootstrap001 &lt;nls&gt;  &lt;tibble [2 × 5]&gt;  22.8  3.15    18.7</span></a>
+<a class="sourceLine" id="cb8-13" data-line-number="13"><span class="co">#&gt;  5 &lt;split [32/13]&gt; Bootstrap001 &lt;nls&gt;  &lt;tibble [2 × 5]&gt;  24.4  3.19    18.6</span></a>
+<a class="sourceLine" id="cb8-14" data-line-number="14"><span class="co">#&gt;  6 &lt;split [32/13]&gt; Bootstrap001 &lt;nls&gt;  &lt;tibble [2 × 5]&gt;  30.4  1.62    31.4</span></a>
+<a class="sourceLine" id="cb8-15" data-line-number="15"><span class="co">#&gt;  7 &lt;split [32/13]&gt; Bootstrap001 &lt;nls&gt;  &lt;tibble [2 × 5]&gt;  10.4  5.42    13.1</span></a>
+<a class="sourceLine" id="cb8-16" data-line-number="16"><span class="co">#&gt;  8 &lt;split [32/13]&gt; Bootstrap001 &lt;nls&gt;  &lt;tibble [2 × 5]&gt;  21    2.62    21.4</span></a>
+<a class="sourceLine" id="cb8-17" data-line-number="17"><span class="co">#&gt;  9 &lt;split [32/13]&gt; Bootstrap001 &lt;nls&gt;  &lt;tibble [2 × 5]&gt;  19.2  3.84    16.3</span></a>
+<a class="sourceLine" id="cb8-18" data-line-number="18"><span class="co">#&gt; 10 &lt;split [32/13]&gt; Bootstrap001 &lt;nls&gt;  &lt;tibble [2 × 5]&gt;  21    2.62    21.4</span></a>
 <a class="sourceLine" id="cb8-19" data-line-number="19"><span class="co">#&gt; # … with 3,190 more rows</span></a></code></pre></div>
 <div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(boot_aug, <span class="kw"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(wt, mpg)) <span class="op">+</span></a>
 <a class="sourceLine" id="cb9-2" data-line-number="2"><span class="st">    </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span>() <span class="op">+</span></a>
@@ -241,8 +243,8 @@
 <p><img src="bootstrapping_files/figure-html/unnamed-chunk-9-1.png" width="700"></p>
 <p>With only a few small changes, we could easily perform bootstrapping with other kinds of predictive or hypothesis testing models, since the <code>tidy</code> and <code>augment</code> functions works for many statistical outputs. As another example, we could use <code>smooth.spline</code>, which fits a cubic smoothing spline to data:</p>
 <div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1">fit_spline_on_bootstrap &lt;-<span class="st"> </span><span class="cf">function</span>(split) {</a>
-<a class="sourceLine" id="cb10-2" data-line-number="2">    data &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/rsample/topics/as.data.frame.rsplit">analysis</a></span>(split)</a>
-<a class="sourceLine" id="cb10-3" data-line-number="3">    <span class="kw"><a href="https://www.rdocumentation.org/packages/stats/topics/smooth.spline">smooth.spline</a></span>(data<span class="op">$</span>wt, data<span class="op">$</span>mpg, <span class="dt">df =</span> <span class="dv">4</span>)</a>
+<a class="sourceLine" id="cb10-2" data-line-number="2">    data &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/pkg/rsample/man/as.data.frame.rsplit.html">analysis</a></span>(split)</a>
+<a class="sourceLine" id="cb10-3" data-line-number="3">    <span class="kw"><a href="https://rdrr.io/r/stats/smooth.spline.html">smooth.spline</a></span>(data<span class="op">$</span>wt, data<span class="op">$</span>mpg, <span class="dt">df =</span> <span class="dv">4</span>)</a>
 <a class="sourceLine" id="cb10-4" data-line-number="4">}</a>
 <a class="sourceLine" id="cb10-5" data-line-number="5"></a>
 <a class="sourceLine" id="cb10-6" data-line-number="6">boot_splines &lt;-<span class="st"> </span>boots <span class="op">%&gt;%</span><span class="st"> </span></a>
@@ -260,6 +262,7 @@
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
+
         <div id="tocnav">
       <h2 class="hasAnchor">
 <a href="#tocnav" class="anchor"></a>Contents</h2>
@@ -272,6 +275,7 @@
 </div>
 
 
+
       <footer><div class="tidyverse">
   <p>broom is a part of the <strong>tidyverse</strong>, an ecosystem of packages designed with common APIs and a shared philosophy. Learn more at <a href="https://tidyverse.org">tidyverse.org</a>.</p>
 </div>
@@ -282,10 +286,12 @@
     Site built by <a href="https://pkgdown.r-lib.org">pkgdown</a>.
   </p>
 </div>
+
       </footer>
 </div>
 
   
+
 
   </body>
 </html>

@@ -8,21 +8,31 @@
 
 <title>Tidy a(n) prcomp object — tidy.prcomp • broom</title>
 
+<!-- favicons -->
+<link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+<link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png" />
+
 <!-- jquery -->
-<script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 
 <!-- Bootstrap -->
 <link href="../tidyverse.css" rel="stylesheet">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
 <!-- Font Awesome icons -->
-<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
 
-<!-- sticky kit -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
+<!-- headroom.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -32,36 +42,29 @@
 
 
 <meta property="og:title" content="Tidy a(n) prcomp object — tidy.prcomp" />
-
 <meta property="og:description" content="Tidy summarizes information about the components of a model.
 A model component might be a single term in a regression, a single
 hypothesis, a cluster, or a class. Exactly what tidy considers to be a
 model component varies cross models but is usually self-evident.
 If a model has several distinct types of components, you will need to
 specify which components to return." />
-
 <meta property="og:image" content="http://broom.tidyverse.org/logo.png" />
 <meta name="twitter:card" content="summary" />
 
 
 
+
 <!-- mathjax -->
-<script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script>
 
 <!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
 
-<!-- google analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-115082821-1"></script>
-<script>
- window.dataLayer = window.dataLayer || [];
- function gtag(){dataLayer.push(arguments);}
- gtag('js', new Date());
 
- gtag('config', 'UA-115082821-1');
-</script>
+
   </head>
 
   <body>
@@ -136,6 +139,7 @@ specify which components to return." />
 </div><!--/.navbar -->
 
       
+
       </header>
 
 <div class="row">
@@ -147,25 +151,23 @@ specify which components to return." />
     </div>
 
     <div class="ref-description">
-    
     <p>Tidy summarizes information about the components of a model.
 A model component might be a single term in a regression, a single
 hypothesis, a cluster, or a class. Exactly what tidy considers to be a
 model component varies cross models but is usually self-evident.
 If a model has several distinct types of components, you will need to
 specify which components to return.</p>
-    
     </div>
 
     <pre class="usage"><span class='co'># S3 method for prcomp</span>
-<span class='fu'><a href='https://www.rdocumentation.org/packages/generics/topics/tidy'>tidy</a></span>(<span class='no'>x</span>, <span class='kw'>matrix</span> <span class='kw'>=</span> <span class='st'>"u"</span>, <span class='no'>...</span>)</pre>
-    
+<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>x</span>, <span class='kw'>matrix</span> <span class='kw'>=</span> <span class='st'>"u"</span>, <span class='no'>...</span>)</pre>
+
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>x</th>
-      <td><p>A <code>prcomp</code> object returned by <code><a href='https://www.rdocumentation.org/packages/stats/topics/prcomp'>stats::prcomp()</a></code>.</p></td>
+      <td><p>A <code>prcomp</code> object returned by <code><a href='https://rdrr.io/r/stats/prcomp.html'>stats::prcomp()</a></code>.</p></td>
     </tr>
     <tr>
       <th>matrix</th>
@@ -188,12 +190,12 @@ absorbed in <code>...</code>, where they will be ignored. If the misspelled
 argument has a default value, the default value will be used.
 For example, if you pass <code>conf.lvel = 0.9</code>, all computation will
 proceed using <code>conf.level = 0.95</code>. Additionally, if you pass
-<code>newdata = my_tibble</code> to an <code><a href='https://www.rdocumentation.org/packages/generics/topics/augment'>augment()</a></code> method that does not
+<code>newdata = my_tibble</code> to an <code><a href='https://rdrr.io/pkg/generics/man/augment.html'>augment()</a></code> method that does not
 accept a <code>newdata</code> argument, it will use the default value for
 the <code>data</code> argument.</p></td>
     </tr>
     </table>
-    
+
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>A <a href='https://tibble.tidyverse.org/reference/tibble.html'>tibble::tibble</a> with columns depending on the component of
@@ -224,26 +226,23 @@ If matrix is "d", "eigenvalues" or "pcs", the columns are:
 <dt><code>percent</code></dt><dd><p>Percentage of variation explained</p></dd>
 <dt><code>cumulative</code></dt><dd><p>Cumulative percentage of variation explained</p></dd>
 
-    
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>See https://stats.stackexchange.com/questions/134282/relationship-between-svd-and-pca-how-to-use-svd-to-perform-pca
 for information on how to interpret the various tidied matrices. Note
 that SVD is only equivalent to PCA on centered data.</p>
-    
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='https://www.rdocumentation.org/packages/stats/topics/prcomp'>stats::prcomp()</a></code>, <a href='tidy_svd.html'>svd_tidiers</a></p>
+    <div class='dont-index'><p><code><a href='https://rdrr.io/r/stats/prcomp.html'>stats::prcomp()</a></code>, <a href='tidy_svd.html'>svd_tidiers</a></p>
 <p>Other svd tidiers: <code><a href='augment.prcomp.html'>augment.prcomp</a></code>,
   <code><a href='tidy_irlba.html'>tidy_irlba</a></code>, <code><a href='tidy_svd.html'>tidy_svd</a></code></p></div>
-    
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
-<span class='no'>pc</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/stats/topics/prcomp'>prcomp</a></span>(<span class='no'>USArrests</span>, <span class='kw'>scale</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+<span class='no'>pc</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/prcomp.html'>prcomp</a></span>(<span class='no'>USArrests</span>, <span class='kw'>scale</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
 
 <span class='co'># information about rotation</span>
-<span class='fu'><a href='https://www.rdocumentation.org/packages/generics/topics/tidy'>tidy</a></span>(<span class='no'>pc</span>)</div><div class='output co'>#&gt; # A tibble: 200 x 3
+<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>pc</span>)</div><div class='output co'>#&gt; # A tibble: 200 x 3
 #&gt;    row            PC   value
 #&gt;    &lt;fct&gt;       &lt;dbl&gt;   &lt;dbl&gt;
 #&gt;  1 Alabama         1 -0.976 
@@ -258,7 +257,7 @@ that SVD is only equivalent to PCA on centered data.</p>
 #&gt; 10 Georgia         1 -1.62  
 #&gt; # … with 190 more rows</div><div class='input'>
 <span class='co'># information about samples (states)</span>
-<span class='fu'><a href='https://www.rdocumentation.org/packages/generics/topics/tidy'>tidy</a></span>(<span class='no'>pc</span>, <span class='st'>"samples"</span>)</div><div class='output co'>#&gt; # A tibble: 200 x 3
+<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>pc</span>, <span class='st'>"samples"</span>)</div><div class='output co'>#&gt; # A tibble: 200 x 3
 #&gt;    row            PC   value
 #&gt;    &lt;fct&gt;       &lt;dbl&gt;   &lt;dbl&gt;
 #&gt;  1 Alabama         1 -0.976 
@@ -273,7 +272,7 @@ that SVD is only equivalent to PCA on centered data.</p>
 #&gt; 10 Georgia         1 -1.62  
 #&gt; # … with 190 more rows</div><div class='input'>
 <span class='co'># information about PCs</span>
-<span class='fu'><a href='https://www.rdocumentation.org/packages/generics/topics/tidy'>tidy</a></span>(<span class='no'>pc</span>, <span class='st'>"pcs"</span>)</div><div class='output co'>#&gt; # A tibble: 4 x 4
+<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>pc</span>, <span class='st'>"pcs"</span>)</div><div class='output co'>#&gt; # A tibble: 4 x 4
 #&gt;      PC std.dev percent cumulative
 #&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;      &lt;dbl&gt;
 #&gt; 1     1   1.57   0.620       0.620
@@ -281,19 +280,19 @@ that SVD is only equivalent to PCA on centered data.</p>
 #&gt; 3     3   0.597  0.0891      0.957
 #&gt; 4     4   0.416  0.0434      1    </div><div class='input'>
 <span class='co'># state map</span>
-<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/library'>library</a></span>(<span class='no'>dplyr</span>)
-<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/library'>library</a></span>(<span class='no'>ggplot2</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>dplyr</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>ggplot2</span>)
 
 <span class='no'>pc</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='https://www.rdocumentation.org/packages/generics/topics/tidy'>tidy</a></span>(<span class='kw'>matrix</span> <span class='kw'>=</span> <span class='st'>"samples"</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span>(<span class='kw'>region</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/chartr'>tolower</a></span>(<span class='no'>row</span>)) <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='kw'>matrix</span> <span class='kw'>=</span> <span class='st'>"samples"</span>) <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span>(<span class='kw'>region</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/chartr.html'>tolower</a></span>(<span class='no'>row</span>)) <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='https://dplyr.tidyverse.org/reference/join.html'>inner_join</a></span>(<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/map_data.html'>map_data</a></span>(<span class='st'>"state"</span>), <span class='kw'>by</span> <span class='kw'>=</span> <span class='st'>"region"</span>) <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span>(<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='no'>long</span>, <span class='no'>lat</span>, <span class='kw'>group</span> <span class='kw'>=</span> <span class='no'>group</span>, <span class='kw'>fill</span> <span class='kw'>=</span> <span class='no'>value</span>)) +
   <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_polygon.html'>geom_polygon</a></span>() +
   <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/facet_wrap.html'>facet_wrap</a></span>(~ <span class='no'>PC</span>) +
   <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggtheme.html'>theme_void</a></span>() +
   <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/labs.html'>ggtitle</a></span>(<span class='st'>"Principal components of arrest data"</span>)</div><div class='img'><img src='tidy.prcomp-1.png' alt='' width='700' height='433' /></div><div class='input'>
-<span class='no'>au</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/generics/topics/augment'>augment</a></span>(<span class='no'>pc</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>USArrests</span>)
+<span class='no'>au</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/generics/man/augment.html'>augment</a></span>(<span class='no'>pc</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>USArrests</span>)
 <span class='no'>au</span></div><div class='output co'>#&gt; # A tibble: 50 x 9
 #&gt;    .rownames Murder Assault UrbanPop  Rape .fittedPC1 .fittedPC2 .fittedPC3
 #&gt;    &lt;fct&gt;      &lt;dbl&gt;   &lt;int&gt;    &lt;int&gt; &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt;
@@ -317,18 +316,15 @@ that SVD is only equivalent to PCA on centered data.</p>
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-      
       <li><a href="#value">Value</a></li>
-
       <li><a href="#details">Details</a></li>
-
       <li><a href="#see-also">See also</a></li>
-      
       <li><a href="#examples">Examples</a></li>
     </ul>
 
   </div>
 </div>
+
 
       <footer>
       <div class="tidyverse">
@@ -341,11 +337,14 @@ that SVD is only equivalent to PCA on centered data.</p>
     Site built by <a href="https://pkgdown.r-lib.org">pkgdown</a>.
   </p>
 </div>
+
       </footer>
    </div>
 
   
 
+
   </body>
 </html>
+
 

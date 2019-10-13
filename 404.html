@@ -6,21 +6,21 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Contributing to broom • broom</title>
+<title>Page not found (404) • broom</title>
 
 <!-- favicons -->
-<link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
-<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
-<link rel="apple-touch-icon" type="image/png" sizes="180x180" href="apple-touch-icon.png" />
-<link rel="apple-touch-icon" type="image/png" sizes="120x120" href="apple-touch-icon-120x120.png" />
-<link rel="apple-touch-icon" type="image/png" sizes="76x76" href="apple-touch-icon-76x76.png" />
-<link rel="apple-touch-icon" type="image/png" sizes="60x60" href="apple-touch-icon-60x60.png" />
+<link rel="icon" type="image/png" sizes="16x16" href="http://broom.tidyverse.org/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="http://broom.tidyverse.org/favicon-32x32.png">
+<link rel="apple-touch-icon" type="image/png" sizes="180x180" href="http://broom.tidyverse.org/apple-touch-icon.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="120x120" href="http://broom.tidyverse.org/apple-touch-icon-120x120.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="76x76" href="http://broom.tidyverse.org/apple-touch-icon-76x76.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="60x60" href="http://broom.tidyverse.org/apple-touch-icon-60x60.png" />
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 
 <!-- Bootstrap -->
-<link href="tidyverse.css" rel="stylesheet">
+<link href="http://broom.tidyverse.org/tidyverse.css" rel="stylesheet">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
 <!-- Font Awesome icons -->
@@ -35,13 +35,13 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
-<link href="pkgdown.css" rel="stylesheet">
-<script src="pkgdown.js"></script>
-<link href="tidyverse-2.css" rel="stylesheet">
+<link href="http://broom.tidyverse.org/pkgdown.css" rel="stylesheet">
+<script src="http://broom.tidyverse.org/pkgdown.js"></script>
+<link href="http://broom.tidyverse.org/tidyverse-2.css" rel="stylesheet">
 
 
 
-<meta property="og:title" content="Contributing to broom" />
+<meta property="og:title" content="Page not found (404)" />
 <meta property="og:image" content="http://broom.tidyverse.org/logo.png" />
 <meta name="twitter:card" content="summary" />
 
@@ -75,7 +75,7 @@
       </button>
 
       <div class="navbar-brand-container">
-        <a class="navbar-brand" href="index.html">broom</a>
+        <a class="navbar-brand" href="http://broom.tidyverse.org/index.html">broom</a>
         <div class="info">
           <span class="partof">part of the <a href="https://tidyverse.org">tidyverse</a></span>
           <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.2.9002</span>
@@ -139,57 +139,10 @@
 <div class="row">
   <div class="contents col-md-9">
     <div class="page-header">
-      <h1>Contributing to broom</h1>
+      <h1>Page not found (404)</h1>
     </div>
 
-<div id="contributing-to-broom" class="section level1">
-
-<p>This outlines how to propose a change to broom. For more detailed info about contributing to this, and other tidyverse packages, please see the <a href="https://rstd.io/tidy-contrib"><strong>development contributing guide</strong></a>.</p>
-<p>If you are adding new tidiers to broom, be sure to read the <a href="https://broom.tidyverse.org/articles/adding-tidiers.html">vignette</a> on adding tidying methods</p>
-<div id="fixing-typos" class="section level3">
-<h3 class="hasAnchor">
-<a href="#fixing-typos" class="anchor"></a>Fixing typos</h3>
-<p>Small typos or grammatical errors in documentation may be edited directly using the GitHub web interface, so long as the changes are made in the <em>source</em> file.</p>
-<ul>
-<li>YES: you edit a roxygen comment in a <code>.R</code> file below <code>R/</code>.</li>
-<li>NO: you edit an <code>.Rd</code> file below <code>man/</code>.</li>
-</ul>
-</div>
-<div id="prerequisites" class="section level3">
-<h3 class="hasAnchor">
-<a href="#prerequisites" class="anchor"></a>Prerequisites</h3>
-<p>Before you make a substantial pull request, you should always file an issue and make sure someone from the team agrees that it’s a problem. If you’ve found a bug, create an associated issue and illustrate the bug with a minimal <a href="https://www.tidyverse.org/help/#reprex">reprex</a>.</p>
-</div>
-<div id="pull-request-process" class="section level3">
-<h3 class="hasAnchor">
-<a href="#pull-request-process" class="anchor"></a>Pull request process</h3>
-<ul>
-<li>We recommend that you create a Git branch for each pull request (PR).<br>
-</li>
-<li>Look at the Travis and AppVeyor build status before and after making changes. The <code>README</code> should contain badges for any continuous integration services used by the package.<br>
-</li>
-<li>New code should follow the tidyverse <a href="http://style.tidyverse.org">style guide</a>. You can use the <a href="https://CRAN.R-project.org/package=styler">styler</a> package to apply these styles, but please don’t restyle code that has nothing to do with your PR.<br>
-</li>
-<li>We use <a href="https://cran.r-project.org/package=roxygen2">roxygen2</a>, with <a href="https://cran.r-project.org/web/packages/roxygen2/vignettes/markdown.html">Markdown syntax</a>, for documentation.<br>
-</li>
-<li>We use <a href="https://cran.r-project.org/package=testthat">testthat</a>. Contributions with test cases included are easier to accept.
-<ul>
-<li>See additional tips for testing in the <a href="https://broom.tidyverse.org/articles/adding-tidiers.html#testing-new-tidiers">vignette</a> on adding tidying methods.</li>
-</ul>
-</li>
-<li>For user-facing changes, add a bullet to the top of <code>NEWS.md</code> below the current development version header describing the changes made followed by your GitHub username, and links to relevant issue(s)/PR(s).</li>
-</ul>
-</div>
-<div id="code-of-conduct" class="section level3">
-<h3 class="hasAnchor">
-<a href="#code-of-conduct" class="anchor"></a>Code of Conduct</h3>
-<p>Please note that this project is released with a <a href="CODE_OF_CONDUCT.html">Contributor Code of Conduct</a>. By participating in this project you agree to abide by its terms.</p>
-</div>
-<div id="see-tidyverse-development-contributing-guide-for-further-details-" class="section level3">
-<h3 class="hasAnchor">
-<a href="#see-tidyverse-development-contributing-guide-for-further-details-" class="anchor"></a>See tidyverse <a href="https://rstd.io/tidy-contrib">development contributing guide</a> for further details.</h3>
-</div>
-</div>
+Content not found. Please use links in the navbar.
 
   </div>
 
