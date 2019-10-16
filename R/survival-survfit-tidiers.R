@@ -79,6 +79,11 @@ tidy.survfit <- function(x, ...) {
   # strata are automatically recycled if there are multiple states
   if (!is.null(x$strata)) {
     ret$strata <- rep(names(x$strata), x$strata)
+    rhs <- strsplit(ret$strata, ",")
+    ret[, stringr::str_trim(sub("=.*", "", rhs[[1]]))] <- do.call(
+      rbind, 
+      lapply(rhs, sub, pattern = ".*=", replacement = "")
+    )
   }
   as_tibble(ret)
 }
