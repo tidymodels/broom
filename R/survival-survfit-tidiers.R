@@ -79,11 +79,32 @@ tidy.survfit <- function(x, ...) {
   # strata are automatically recycled if there are multiple states
   if (!is.null(x$strata)) {
     ret$strata <- rep(names(x$strata), x$strata)
-    rhs <- strsplit(ret$strata, ",")
-    ret[, stringr::str_trim(sub("=.*", "", rhs[[1]]))] <- do.call(
-      rbind, 
-      lapply(rhs, sub, pattern = ".*=", replacement = "")
+    
+    # Get text strings for each term in the equation
+    rhs_names <- attr(terms(as.formula(x$call)), "term.labels")
+    
+    # Find those terms in the "strata" string
+    name_locs <- lapply(ret$strata, stringr::str_locate_all, 
+                        pattern = stringr::fixed(rhs_names))
+    name_locs <- lapply(name_locs, do.call, what = c)
+    
+    # Get starting and ending values for the space between those terms
+    rhs_value_locs <- lapply(
+      name_locs, 
+      function(x) c(x[-1] + rep(c(2, -3), length.out = length(x) - 1), -1)
     )
+    
+    odd_nums <- seq(from = 1, to = 2 * length(rhs_names), by = 2)
+    starts <- lapply(rhs_value_locs, `[`, odd_nums)
+    ends <- lapply(rhs_value_locs, `[`, -odd_nums)
+    
+    # Pull out the space between those terms -- the values of rhs -- and save
+    # them to the output dataset
+    ret[, rhs_names] <- do.call(
+      rbind, 
+      mapply(stringr::str_sub, string = ret$strata, start = starts, end = ends,
+             USE.NAMES = F, SIMPLIFY = F)
+      )
   }
   as_tibble(ret)
 }
