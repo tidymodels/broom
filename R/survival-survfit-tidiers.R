@@ -106,7 +106,7 @@ tidy.survfit <- function(x, ...) {
              USE.NAMES = F, SIMPLIFY = F)
       )
   }
-  as_tibble(ret)
+  as_tibble(ret, validate = FALSE)
 }
 
 #' @templateVar class survfit
