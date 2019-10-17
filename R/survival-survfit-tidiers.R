@@ -100,11 +100,11 @@ tidy.survfit <- function(x, ...) {
     
     # Pull out the space between those terms -- the values of rhs -- and save
     # them to the output dataset
-    ret[, rhs_names] <- do.call(
+    ret[, rhs_names] <- stringr::str_trim(do.call(
       rbind, 
       mapply(stringr::str_sub, string = ret$strata, start = starts, end = ends,
              USE.NAMES = F, SIMPLIFY = F)
-      )
+      ))
   }
   as_tibble(ret, validate = FALSE)
 }
