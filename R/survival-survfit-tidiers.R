@@ -85,13 +85,13 @@ tidy.survfit <- function(x, ...) {
     
     # Find those terms in the "strata" string
     name_locs <- lapply(ret$strata, stringr::str_locate_all, 
-                        pattern = stringr::fixed(rhs_names))
+                        pattern = stringr::fixed(paste0(rhs_names, "=")))
     name_locs <- lapply(name_locs, do.call, what = c)
     
     # Get starting and ending values for the space between those terms
     rhs_value_locs <- lapply(
       name_locs, 
-      function(x) c(x[-1] + rep(c(2, -3), length.out = length(x) - 1), -1)
+      function(x) c(x[-1] + rep(c(1, -3), length.out = length(x) - 1), -1)
     )
     
     odd_nums <- seq(from = 1, to = 2 * length(rhs_names), by = 2)
