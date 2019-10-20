@@ -53,7 +53,7 @@ tidy.felm <- function(x, conf.int = FALSE, conf.level = .95, fe = FALSE, robust 
   
   nn <- c("estimate", "std.error", "statistic", "p.value")
   if(has_multi_response) {
-    ret <-  map_df(x$lhs, function(y) stats::coef(summary(x, lhs = y)) %>% 
+    ret <-  map_df(x$lhs, function(y) stats::coef(summary(x, lhs = y, robust = robust)) %>% 
                      fix_data_frame(nn) %>% 
                      mutate(response = y)) %>% 
       select(response, everything())
