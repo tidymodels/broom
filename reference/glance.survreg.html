@@ -68,7 +68,15 @@ the measure will be reported as NA." />
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
 
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-115082821-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
+  gtag('config', 'UA-115082821-1');
+</script>
 
   </head>
 
@@ -255,7 +263,7 @@ the <code>data</code> argument.</p></td>
 #&gt; # … with 16 more rows</div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/generics/man/glance.html'>glance</a></span>(<span class='no'>sr</span>)</div><div class='output co'>#&gt; # A tibble: 1 x 9
 #&gt;    iter    df statistic logLik   AIC   BIC df.residual  nobs p.value
 #&gt;   &lt;int&gt; &lt;int&gt;     &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;       &lt;int&gt; &lt;int&gt;   &lt;dbl&gt;
-#&gt; 1     4     3      1.67  -97.2  200.  204.          23    26   0.434</div><div class='input'>
+#&gt; 1     4     3      1.67  -97.2  200.    NA          23    26   0.434</div><div class='input'>
 <span class='co'># coefficient plot</span>
 <span class='no'>td</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>sr</span>, <span class='kw'>conf.int</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
 <span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>ggplot2</span>)

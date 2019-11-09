@@ -63,7 +63,15 @@ specify which components to return." />
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
 
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-115082821-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
+  gtag('config', 'UA-115082821-1');
+</script>
 
   </head>
 
@@ -200,9 +208,7 @@ the <code>data</code> argument.</p></td>
 <span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>AUC</span>)</div><div class='output co'>#&gt; <span class='message'>AUC 0.3.0</span></div><div class='output co'>#&gt; <span class='message'>Type AUCNews() to see the change log and ?AUC to get an overview.</span></div><div class='output co'>#&gt; <span class='message'></span>
 #&gt; <span class='message'>Attaching package: ‘AUC’</span></div><div class='output co'>#&gt; <span class='message'>The following objects are masked from ‘package:caret’:</span>
 #&gt; <span class='message'></span>
-#&gt; <span class='message'>    sensitivity, specificity</span></div><div class='output co'>#&gt; <span class='message'>The following object is masked from ‘package:glmnet’:</span>
-#&gt; <span class='message'></span>
-#&gt; <span class='message'>    auc</span></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>churn</span>)
+#&gt; <span class='message'>    sensitivity, specificity</span></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>churn</span>)
 <span class='no'>r</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/AUC/man/roc.html'>roc</a></span>(<span class='no'>churn</span>$<span class='no'>predictions</span>,<span class='no'>churn</span>$<span class='no'>labels</span>)
 
 <span class='no'>td</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>r</span>)

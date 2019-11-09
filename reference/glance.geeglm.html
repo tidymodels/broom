@@ -68,7 +68,15 @@ the measure will be reported as NA." />
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
 
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-115082821-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
+  gtag('config', 'UA-115082821-1');
+</script>
 
   </head>
 
@@ -222,8 +230,8 @@ the <code>data</code> argument.</p></td>
 #&gt;     fd(dose, parmMat[, 1], parmMat[, 2], parmMat[, 3], parmMat[, 
 #&gt;         4], parmMat[, 5])
 #&gt; }
-#&gt; &lt;bytecode: 0xe6dee00&gt;
-#&gt; &lt;environment: 0x86f81b8&gt;
+#&gt; &lt;bytecode: 0x111a5f08&gt;
+#&gt; &lt;environment: 0x1378c0e8&gt;
 #&gt; 
 #&gt; $ssfct
 #&gt; function (dframe) 
@@ -242,8 +250,8 @@ the <code>data</code> argument.</p></td>
 #&gt;     befVal &lt;- c(bVal, x[which.max(y)], 1)
 #&gt;     return(c(befVal[1], cdVal, befVal[2:3])[is.na(fixed)])
 #&gt; }
-#&gt; &lt;bytecode: 0x86f2030&gt;
-#&gt; &lt;environment: 0x86daa40&gt;
+#&gt; &lt;bytecode: 0x13a0fbe0&gt;
+#&gt; &lt;environment: 0x14316b08&gt;
 #&gt; 
 #&gt; $names
 #&gt; [1] "b" "c" "d" "e" "f"
@@ -256,8 +264,8 @@ the <code>data</code> argument.</p></td>
 #&gt;     attr(fd(dose, parmMat[, 1], parmMat[, 2], parmMat[, 3], parmMat[, 
 #&gt;         4], parmMat[, 5]), "gradient")[, notFixed]
 #&gt; }
-#&gt; &lt;bytecode: 0xe6dc2d8&gt;
-#&gt; &lt;environment: 0x86f81b8&gt;
+#&gt; &lt;bytecode: 0x111a71d8&gt;
+#&gt; &lt;environment: 0x1378c0e8&gt;
 #&gt; 
 #&gt; $deriv2
 #&gt; NULL
@@ -283,8 +291,8 @@ the <code>data</code> argument.</p></td>
 #&gt;     attr(dFct(dose, parmMat[, 1], parmMat[, 2], parmMat[, 3], 
 #&gt;         parmMat[, 4], parmMat[, 5]), "gradient")
 #&gt; }
-#&gt; &lt;bytecode: 0xe6d97a8&gt;
-#&gt; &lt;environment: 0x86f81b8&gt;
+#&gt; &lt;bytecode: 0x111a45c0&gt;
+#&gt; &lt;environment: 0x1378c0e8&gt;
 #&gt; 
 #&gt; $edfct
 #&gt; function (parm, respl, reference, type, ...) 
@@ -319,8 +327,8 @@ the <code>data</code> argument.</p></td>
 #&gt;         parmVec[5]), "gradient")
 #&gt;     return(list(EDp, EDder[notFixed]))
 #&gt; }
-#&gt; &lt;bytecode: 0xe6c4fb8&gt;
-#&gt; &lt;environment: 0x86f81b8&gt;
+#&gt; &lt;bytecode: 0x1119e530&gt;
+#&gt; &lt;environment: 0x1378c0e8&gt;
 #&gt; 
 #&gt; $name
 #&gt; [1] "family"
@@ -337,8 +345,8 @@ the <code>data</code> argument.</p></td>
 #&gt;     parmVec[indexVec] &lt;- parm
 #&gt;     parmVec[parmNo]
 #&gt; }
-#&gt; &lt;bytecode: 0xe46ea08&gt;
-#&gt; &lt;environment: 0x86d8458&gt;
+#&gt; &lt;bytecode: 0x11018508&gt;
+#&gt; &lt;environment: 0x14317f98&gt;
 #&gt; 
 #&gt; $upperAs
 #&gt; function (parm) 
@@ -346,8 +354,8 @@ the <code>data</code> argument.</p></td>
 #&gt;     parmVec[indexVec] &lt;- parm
 #&gt;     parmVec[parmNo]
 #&gt; }
-#&gt; &lt;bytecode: 0xe46ea08&gt;
-#&gt; &lt;environment: 0x86d8848&gt;
+#&gt; &lt;bytecode: 0x11018508&gt;
+#&gt; &lt;environment: 0x14318200&gt;
 #&gt; 
 #&gt; $monoton
 #&gt; [1] NA

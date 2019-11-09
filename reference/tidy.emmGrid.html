@@ -63,7 +63,15 @@ specify which components to return." />
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
 
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-115082821-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
+  gtag('config', 'UA-115082821-1');
+</script>
 
   </head>
 
@@ -209,8 +217,10 @@ passed on to <code><a href='https://rdrr.io/pkg/emmeans/man/summary.emmGrid.html
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
-<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>emmeans</span>)
-<span class='co'># linear model for sales of oranges per day</span>
+<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>emmeans</span>)</div><div class='output co'>#&gt; <span class='message'>Welcome to emmeans.</span>
+#&gt; <span class='message'>NOTE -- Important change from versions &lt;= 1.41:</span>
+#&gt; <span class='message'>    Indicator predictors are now treated as 2-level factors by default.</span>
+#&gt; <span class='message'>    To revert to old behavior, use emm_options(cov.keep = character(0))</span></div><div class='input'><span class='co'># linear model for sales of oranges per day</span>
 <span class='no'>oranges_lm1</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span>(<span class='no'>sales1</span> ~ <span class='no'>price1</span> + <span class='no'>price2</span> + <span class='no'>day</span> + <span class='no'>store</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>oranges</span>)
 
 <span class='co'># reference grid; see vignette("basics", package = "emmeans")</span>
