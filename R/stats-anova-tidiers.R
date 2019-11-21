@@ -45,6 +45,7 @@ tidy.anova <- function(x, ...) {
     "F" = "statistic",
     "Chisq" = "statistic",
     "P(>|Chi|)" = "p.value",
+    "Pr(>|Chi|)" = "p.value",
     "Pr(>Chi)" = "p.value",
     "Pr..Chisq." = "p.value",
     "Pr..Chi." = "p.value",
@@ -53,7 +54,8 @@ tidy.anova <- function(x, ...) {
     "LR.Chisq" = "statistic",
     "LR Chisq" = "statistic",
     "edf" = "edf",
-    "Ref.df" = "ref.df"
+    "Ref.df" = "ref.df",
+    "loglik" = "logLik"
   )
 
   names(renamers) <- make.names(names(renamers))

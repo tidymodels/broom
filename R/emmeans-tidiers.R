@@ -150,6 +150,36 @@ tidy.summary_emm <- function(x, null.value = NULL) {
   tidy_emmeans_summary(x, null.value = null.value)
 }
 
+#' @templateVar class summary_emm
+#' @template title_desc_tidy
+#' 
+#' @param x An `summary_emm` object.
+#' @inherit tidy.lsmobj params examples details 
+#'   
+#' @evalRd return_tidy(
+#'   "std.error", 
+#'   "df", 
+#'   "num.df",
+#'   "den.df",
+#'   "conf.low", 
+#'   "conf.high",
+#'   level1 = "One level of the factor being contrasted",
+#'   level2 = "The other level of the factor being contrasted",
+#'   "contrast",
+#'   term = "Model term in joint tests",
+#'   "p.value",
+#'   statistic = "T-ratio statistic or F-ratio statistic",
+#'   estimate = "Estimated least-squares mean."
+#' )
+#'
+#' @export
+#' @family emmeans tidiers
+#' @seealso [tidy()], [emmeans::ref_grid()], [emmeans::emmeans()],
+#'   [emmeans::contrast()]
+tidy.summary_emm <- function(x, ...) {
+  tidy_emmeans_summary(x, ...)
+}
+
 tidy_emmeans <- function(x, ...) {
   s <- summary(x, ...)
   

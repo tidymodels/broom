@@ -15,6 +15,10 @@ marginal_summary <- summary(marginal, infer = TRUE)
 
 joint_tests_summary <- joint_tests(fit)
 
+marginal_summary <- summary(marginal)
+
+joint_tests_summary <- joint_tests(fit)
+
 # generate dataset with dashes
 marginal_dashes <- tibble(
   y = rnorm(100),
@@ -131,4 +135,15 @@ test_that("tidy.emmGrid for combined contrasts", {
   # strict = FALSE needed becasue of factor names and "null.value" column
   check_tidy_output(td_noise, strict = FALSE)
   check_dims(td_noise, 20, 11)
+})
+
+test_that("summary_emm tidiers work", {
+  tdm <- tidy(marginal)
+  tdms <- tidy(marginal_summary)
+  
+  expect_identical(tdm, tdms)
+  
+  tdjt <- tidy(joint_tests_summary)
+  check_tidy_output(tdjt)
+  check_dims(tdjt, 2, 5)
 })
