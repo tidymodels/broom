@@ -8,19 +8,18 @@
 #'   may be silently ignored!
 #'   
 #' @evalRd return_tidy(
+#'   "contrast",
+#'   "null.value",
+#'   estimate = "Expected marginal mean",
 #'   "std.error", 
 #'   "df", 
 #'   "conf.low", 
 #'   "conf.high",
-#'   level1 = "One level of the factor being contrasted",
-#'   level2 = "The other level of the factor being contrasted",
-#'   "contrast",
-#'   "p.value",
 #'   statistic = "T-ratio statistic",
-#'   estimate = "Estimated least-squares mean."
+#'   "p.value"
 #' )
 #'
-#' @details Returns a data frame with one observation for each estimated
+#' @details Returns a data frame with one observation for each estimated marginal
 #'   mean, and one column for each combination of factors. When the input is a
 #'   contrast, each row will contain one estimated contrast.
 #'
@@ -82,24 +81,21 @@ tidy.lsmobj <- function(x, conf.int = FALSE, conf.level = .95, ...) {
 #' @inherit tidy.lsmobj params examples details 
 #'   
 #' @evalRd return_tidy(
+#'   estimate = "Expected marginal mean",
 #'   "std.error", 
 #'   "df", 
 #'   "conf.low", 
 #'   "conf.high",
-#'   level1 = "One level of the factor being contrasted",
-#'   level2 = "The other level of the factor being contrasted",
-#'   "contrast",
-#'   "p.value",
 #'   statistic = "T-ratio statistic",
-#'   estimate = "Estimated least-squares mean."
+#'   "p.value"
 #' )
 #'
 #' @export
 #' @family emmeans tidiers
 #' @seealso [tidy()], [emmeans::ref_grid()], [emmeans::emmeans()],
 #'   [emmeans::contrast()]
-tidy.ref.grid <- function(x, ...) {
-  tidy_emmeans(x, ...)
+tidy.ref.grid <- function(x, conf.int = FALSE, conf.level = .95, ...) {
+  tidy_emmeans(x, infer = c(conf.int, TRUE), level = conf.level, ...)
 }
 
 #' @templateVar class emmGrid
@@ -109,24 +105,21 @@ tidy.ref.grid <- function(x, ...) {
 #' @inherit tidy.lsmobj params examples details 
 #'   
 #' @evalRd return_tidy(
+#'   estimate = "Expected marginal mean",
 #'   "std.error", 
 #'   "df", 
 #'   "conf.low", 
 #'   "conf.high",
-#'   level1 = "One level of the factor being contrasted",
-#'   level2 = "The other level of the factor being contrasted",
-#'   "contrast",
-#'   "p.value",
 #'   statistic = "T-ratio statistic",
-#'   estimate = "Estimated least-squares mean."
+#'   "p.value"
 #' )
 #'
 #' @export
 #' @family emmeans tidiers
 #' @seealso [tidy()], [emmeans::ref_grid()], [emmeans::emmeans()],
 #'   [emmeans::contrast()]
-tidy.emmGrid <- function(x, ...) {
-  tidy_emmeans(x, ...)
+tidy.emmGrid <- function(x, conf.int = FALSE, conf.level = .95, ...) {
+  tidy_emmeans(x, infer = c(conf.int, TRUE), level = conf.level, ...)
 }
 
 #' @templateVar class summary_emm
@@ -136,35 +129,44 @@ tidy.emmGrid <- function(x, ...) {
 #' @inherit tidy.lsmobj params examples details 
 #'   
 #' @evalRd return_tidy(
+#'   "contrast",
+#'   "null.value",
+#'   estimate = "Expected marginal mean",
 #'   "std.error", 
 #'   "df", 
 #'   "num.df",
 #'   "den.df",
 #'   "conf.low", 
 #'   "conf.high",
-#'   level1 = "One level of the factor being contrasted",
-#'   level2 = "The other level of the factor being contrasted",
-#'   "contrast",
-#'   term = "Model term in joint tests",
-#'   "p.value",
-#'   statistic = "T-ratio statistic or F-ratio statistic",
-#'   estimate = "Estimated least-squares mean."
+#'   statistic = "T-ratio statistic",
+#'   "p.value"
 #' )
 #'
 #' @export
 #' @family emmeans tidiers
 #' @seealso [tidy()], [emmeans::ref_grid()], [emmeans::emmeans()],
 #'   [emmeans::contrast()]
-tidy.summary_emm <- function(x, ...) {
-  tidy_emmeans_summary(x, ...)
+tidy.summary_emm <- function(x, null.value = NULL) {
+  tidy_emmeans_summary(x, null.value = null.value)
 }
 
 tidy_emmeans <- function(x, ...) {
   s <- summary(x, ...)
-  tidy_emmeans_summary(s)
+  
+  # Get null.value
+  if(".offset." %in% colnames(x@grid)) {
+    null.value <- x@grid[, ".offset."]
+  } else {
+    null.value <- 0
+  }
+  
+  # Get term names
+  term_names <- names(x@misc$orig.grid)
+  
+  tidy_emmeans_summary(s, null.value = null.value, term_names = term_names)
 }
 
-tidy_emmeans_summary <- function(x) {
+tidy_emmeans_summary <- function(x, null.value = NULL, term_names = NULL) {
   ret <- as.data.frame(x)
   repl <- list(
     "lsmean" = "estimate",
@@ -179,22 +181,51 @@ tidy_emmeans_summary <- function(x) {
     "df1" = "num.df",
     "df2" = "den.df",
     "model term" = "term"
+    # "contrast" = "lhs"
   )
   
-  if ("contrast" %in% colnames(ret) &&
-      all(stringr::str_detect(ret$contrast, " - "))) {
-    ret <- tidyr::separate_(ret, "contrast",
-                            c("level1", "level2"),
-                            sep = " - "
+  mc_adjusted <- any(
+    grepl(
+      "conf-level adjustment|p value adjustment",
+      attr(x, "mesg"),
+      ignore.case = TRUE
     )
+  )
+  
+  if(mc_adjusted) {
+    repl <- c(repl, "p.value" = "adj.p.value")
   }
   
   colnames(ret) <- dplyr::recode(colnames(ret), !!!(repl))
   
+  # Remove std.error if conf.low/high exist
+  if(any(c("conf.low", "conf.high") %in% colnames(ret))) {
+    ret <- select(ret, -std.error)
+  }
+  
+  # If contrast column exists, add null.value column
+  if("contrast" %in% colnames(ret)) {
+    if(length(null.value) < nrow(ret)) null.value <- rep_len(null.value, nrow(ret))
+    ret <- bind_cols(contrast = ret[, "contrast"], null.value = null.value, select(ret, -contrast))
+  }
+  
+  # Add term column, if appropriate, unless it exists
   if("term" %in% colnames(ret)) {
     ret <- ret %>%
       mutate(term = stringr::str_trim(term))
+  } else if(!is.null(term_names)) {
+    term <- term_names[!term_names %in% colnames(ret)]
+    
+    if(length(term) != 0) {
+      term <- paste(term_names[!term_names %in% colnames(ret)], collapse = "*") %>% 
+        rep_len(nrow(ret))
+    } else { # No missing term names, because combine = TRUE?
+      term <- apply(ret, 1, function(x) colnames(ret)[which(x == ".")])
+    }
+    
+    ret <- bind_cols(ret[, colnames(ret) %in% term_names, drop = FALSE], term = term, ret[, !colnames(ret) %in% term_names, drop = FALSE])
   }
   
-  as_tibble(ret)
+  as_tibble(ret) %>% 
+    mutate_if(is.factor, as.character)
 }

@@ -317,8 +317,10 @@ tidy.summary.manova <- function(x, ...) {
 tidy.TukeyHSD <- function(x, ...) {
   purrr::map_df(x,
     function(e) {
-      nn <- c("estimate", "conf.low", "conf.high", "adj.p.value")
-      fix_data_frame(e, nn, "comparison")
+      null.value <- rep(0, nrow(e))
+      e <- cbind(null.value, e)
+      nn <- c("null.value", "estimate", "conf.low", "conf.high", "adj.p.value")
+      fix_data_frame(e, nn, "contrast")
     }, .id = "term"
   )
 }

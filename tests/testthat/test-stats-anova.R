@@ -89,6 +89,6 @@ test_that("tidy.TukeyHSD", {
   td <- tidy(thsd)
   
   check_tidy_output(td)
-  check_dims(td, 3, 6)
+  check_dims(td, 3, 7)
 })
 
