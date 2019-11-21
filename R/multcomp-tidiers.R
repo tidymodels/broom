@@ -75,6 +75,7 @@ tidy.confint.glht <- function(x, ...) {
   coef <- as_tibble(x$confint)
   
   colnames(coef) <- c("estimate", "conf.low", "conf.high")
+  coef$estimate <- as.vector(coef$estimate) # Remove attributes
 
   bind_cols(glht_term_column(x), lhs_rhs[, "contrast", drop = FALSE], coef)
 }

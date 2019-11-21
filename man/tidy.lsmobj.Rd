@@ -30,7 +30,7 @@ If a model has several distinct types of components, you will need to
 specify which components to return.
 }
 \details{
-Returns a data frame with one observation for each estimated
+Returns a data frame with one observation for each estimated marginal
 mean, and one column for each combination of factors. When the input is a
 contrast, each row will contain one estimated contrast.
 
@@ -94,9 +94,8 @@ A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
   \item{df}{Degrees of freedom used by this term in the model.}
   \item{p.value}{The two-sided p-value associated with the observed statistic.}
   \item{std.error}{The standard error of the regression term.}
-  \item{level1}{One level of the factor being contrasted}
-  \item{level2}{The other level of the factor being contrasted}
+  \item{null.value}{Value to which estimate is compared}
+  \item{estimate}{Expected marginal mean}
   \item{statistic}{T-ratio statistic}
-  \item{estimate}{Estimated least-squares mean.}
 
 }

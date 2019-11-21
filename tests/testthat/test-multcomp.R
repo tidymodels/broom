@@ -18,7 +18,7 @@ test_that("multcomp tidier arguments", {
 
 test_that("tidy.glht", {
   td <- tidy(wht)
-  check_tidy_output(td)
+  check_tidy_output(td, strict = FALSE)
   check_dims(td, 3, 7)
 })
 
@@ -30,7 +30,7 @@ test_that("tidy.confint.glht", {
 
 test_that("tidy.summary.glht works", {
   td <- tidy(summary(wht, test = adjusted("bonferroni")))
-  check_tidy_output(td)
+  check_tidy_output(td, strict = FALSE)
   check_dims(td, 3, 7)
   
   expect_true("adj.p.value" %in% colnames(td))

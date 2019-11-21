@@ -12,11 +12,6 @@ rg <- ref.grid(fit)
 marginal <- lsmeans(rg, ~ day)
 
 marginal_summary <- summary(marginal, infer = TRUE)
-
-joint_tests_summary <- joint_tests(fit)
-
-marginal_summary <- summary(marginal)
-
 joint_tests_summary <- joint_tests(fit)
 
 # generate dataset with dashes
@@ -51,18 +46,18 @@ test_that("tidy.lsmobj", {
   tdmd <- tidy(marginal_dashes, conf.int = TRUE)
   tdc <- tidy(contrast(marginal, method = "pairwise"), conf.int = TRUE)
   
-  check_dims(tdm, 6, 8)
-  check_dims(tdmd, 1, 10)
-  check_dims(tdc, 15, 10)
+  check_dims(tdm, 6, 7)
+  check_dims(tdmd, 1, 9)
+  check_dims(tdc, 15, 9)
 })
 
 test_that("ref.grid tidiers work", {
   td <- tidy(rg)
   check_tidy_output(td, strict = FALSE)
-  check_dims(td, 36, 7)
+  check_dims(td, 36, 9)
   
   td <- tidy(rg, conf.int = TRUE)
-  check_dims(td, 36, 9)
+  check_dims(td, 36, 10)
 })
 
 test_that("summary_emm tidiers work", {
@@ -126,7 +121,6 @@ test_that("tidy.ref.grid consistency with tidy.glht", {
   )
 })
 
-
 test_that("tidy.emmGrid for combined contrasts", {
   noise.emm <- emmeans(noise.lm, ~ size * side * type)
   noise_c.s <- contrast(noise.emm, method = "consec", simple = "each", combine = TRUE, adjust = "mvt")
@@ -137,13 +131,3 @@ test_that("tidy.emmGrid for combined contrasts", {
   check_dims(td_noise, 20, 11)
 })
 
-test_that("summary_emm tidiers work", {
-  tdm <- tidy(marginal)
-  tdms <- tidy(marginal_summary)
-  
-  expect_identical(tdm, tdms)
-  
-  tdjt <- tidy(joint_tests_summary)
-  check_tidy_output(tdjt)
-  check_dims(tdjt, 2, 5)
-})

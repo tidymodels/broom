@@ -37,15 +37,15 @@ amod <- aov(breaks ~ wool + tension, data = warpbreaks)
 wht <- glht(amod, linfct = mcp(tension = "Tukey"))
 
 tidy(wht)
-ggplot(wht, aes(lhs, estimate)) + geom_point()
+ggplot(wht, aes(contrast, estimate)) + geom_point()
 
 CI <- confint(wht)
 tidy(CI)
-ggplot(CI, aes(lhs, estimate, ymin = lwr, ymax = upr)) +
+ggplot(CI, aes(contrast, estimate, ymin = lwr, ymax = upr)) +
    geom_pointrange()
 
 tidy(summary(wht))
-ggplot(mapping = aes(lhs, estimate)) +
+ggplot(mapping = aes(contrast, estimate)) +
    geom_linerange(aes(ymin = lwr, ymax = upr), data = CI) +
    geom_point(aes(size = p), data = summary(wht)) +
    scale_size(trans = "reverse")
@@ -64,6 +64,6 @@ Other multcomp tidiers: \code{\link{tidy.confint.glht}},
 \concept{multcomp tidiers}
 \value{
 A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
-  \item{lhs}{Left hand side.}
+  \item{contrast}{Levels being compared.}
 
 }
