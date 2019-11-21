@@ -16,6 +16,15 @@ changes in this version of `broom`. We list them below-
     (e.g., `factor1`, `factor2`, `factor3`, etc.) (#650).
     
   - We have removed all support for the `quick` argument in `tidy()` methods. TODO: explain why, and discuss alternatives.
+  
+  - Tidiers for `emmeans`-objects use the arguments `conf.int` and `conf.level`
+    instead of relying on the argument names native to the `emmeans::summary()`-
+    methods (i.e., `infer` and `level`). Similarly, `multcomp`-tidiers now
+    include a call to `summary()` as previous behavior was akin to passing
+    `quick = TRUE`. Both families of tidiers now use the `adj.p.value` column
+    name when appropriate. Finally, `emmeans`-, `multcomp`-, and `TukeyHSD`-
+    tidiers now consistently use the column names `contrast` and `null.value`
+    instead of `comparison`, `level1` and `level2`, or `lhs` and `rhs` (see #692).
     
 ## Changes to `augment()`
 
