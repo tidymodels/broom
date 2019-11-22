@@ -135,6 +135,9 @@ TODO: sort out what happens to `glance.aov()`
 special characters (previously they were converted to data.frame friendly
 column names by `make.names`)
 
+- Added `tidy.fixest()`, `glance.fixest()`, and `augment.fixest()` methods to
+support the `fixest` package. (#785 by @karldw)
+
 ### Name changes for consistency
 
 - `augment.htest()`:

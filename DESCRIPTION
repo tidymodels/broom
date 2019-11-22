@@ -128,7 +128,8 @@ Authors@R:
              email = "erle.holgersen@gmail.com"),
       person(given = "Karl",
              family = "Dunkle Werner",
-             role = "ctb"),
+             role = "ctb",
+             comment = c(ORCID = "0000-0003-0523-7309")),
       person(given = "Ethan",
              family = "Christensen",
              role = "ctb",
@@ -321,6 +322,7 @@ Suggests:
     emmeans,
     epiR,
     ergm,
+    fixest,
     gam (>= 1.15),
     gamlss,
     gamlss.data,
@@ -384,7 +386,7 @@ Encoding: UTF-8
 Language: en-US
 LazyData: true
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 6.1.1
+RoxygenNote: 7.0.0
 Collate:
     'aaa-documentation-helper.R'
     'aer-tidiers.R'
@@ -405,6 +407,7 @@ Collate:
     'emmeans-tidiers.R'
     'epiR-tidiers.R'
     'ergm-tidiers.R'
+    'fixest-tidiers.R'
     'gam-tidiers.R'
     'gamlss-tidiers.R'
     'geepack-tidiers.R'
