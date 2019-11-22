@@ -2,7 +2,7 @@ Type: Package
 Package: broom
 Title: Convert Statistical Objects into Tidy Tibbles
 Version: 0.5.2.9002
-Authors@R: 
+Authors@R:
     c(person(given = "David",
              family = "Robinson",
              role = "aut",

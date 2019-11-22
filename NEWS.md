@@ -14,9 +14,9 @@ changes in this version of `broom`. We list them below-
   - Augment method for `factanal` objects now returns a tibble with name
     pattern `.fs` (e.g., `.fs1`, `.fs2`, `.fs3`, etc.), instead of `factor`
     (e.g., `factor1`, `factor2`, `factor3`, etc.) (#650).
-    
+
   - We have removed all support for the `quick` argument in `tidy()` methods. TODO: explain why, and discuss alternatives.
-    
+
 ## Changes to `augment()`
 
 have overhauled `augment()` for general consistency improvements (hopefully,
@@ -36,7 +36,7 @@ pending getting `safepredict()` going urgh)
 
 - `augment()` tries to give an informative error when `data` isn't the original
   training data
-  
+
 ## Changes to `glance()`
 
 - Most of the glance methods return a `nobs` column now! (TODO: KUDOS)
@@ -681,4 +681,3 @@ See `?rowwise_df_tidiers` for more.
 
 * Because this integrates substantial amounts of ggplot2 code (with permission),
   added Hadley Wickham as an author in DESCRIPTION.
-
