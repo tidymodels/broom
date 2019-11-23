@@ -46,7 +46,7 @@ test_that("glance.fixest", {
   gl2 <- glance(fit2)
 
   check_glance_outputs(gl, gl2)
-  check_dims(gl, expected_cols = 8)
+  check_dims(gl, expected_cols = 6)
 })
 
 test_that("augment.fixest", {
@@ -55,26 +55,29 @@ test_that("augment.fixest", {
     aug = augment.fixest,
     model = fit,
     data = df,
-    newdata = df
+    newdata = df,
+    strict = FALSE
   )
 
   check_augment_function(
     aug = augment.fixest,
     model = fit2,
     data = df,
-    newdata = df
+    newdata = df,
+    strict = FALSE
   )
 
   check_augment_function(
     aug = augment.fixest,
     model = fit_form,
     data = df,
-    newdata = df
+    newdata = df,
+    strict = FALSE
   )
 })
 
 test_that("all other fixest estimators run", {
-  form <- v2 ~ v4 | v1^id
+  form <- v2 ~ v4 | id
   res_feglm    <- fixest::feglm(form,    data=df)
   res_fenegbin <- fixest::fenegbin(form, data=df)
   res_feNmlm   <- fixest::feNmlm(form,   data=df)
@@ -98,9 +101,42 @@ test_that("all other fixest estimators run", {
   )
 
   # Augment
-  check_augment_function(aug = augment.fixest, model = res_feglm,    data = df, newdata = df)
-  check_augment_function(aug = augment.fixest, model = res_fenegbin, data = df, newdata = df)
-  check_augment_function(aug = augment.fixest, model = res_feNmlm,   data = df, newdata = df)
-  check_augment_function(aug = augment.fixest, model = res_femlm,    data = df, newdata = df)
-  check_augment_function(aug = augment.fixest, model = res_fepois,   data = df, newdata = df)
+  # Note this this causes warnings with strict=TRUE because
+  # modeltests:::acceptable_augment_colnames calls model.frame, which doesn't
+  # work for fixest models.
+  check_augment_function(
+    aug = augment.fixest,
+    model = res_feglm,
+    data = df,
+    newdata = df,
+    strict = FALSE
+  )
+  check_augment_function(
+    aug = augment.fixest,
+    model = res_fenegbin,
+    data = df,
+    newdata = df,
+    strict = FALSE
+  )
+  check_augment_function(
+    aug = augment.fixest,
+    model = res_feNmlm,
+    data = df,
+    newdata = df,
+    strict = FALSE
+  )
+  check_augment_function(
+    aug = augment.fixest,
+    model = res_femlm,
+    data = df,
+    newdata = df,
+    strict = FALSE
+  )
+  check_augment_function(
+    aug = augment.fixest,
+    model = res_fepois,
+    data = df,
+    newdata = df,
+    strict = FALSE
+  )
 })

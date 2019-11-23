@@ -99,7 +99,6 @@ augment.fixest <- function(x, data = NULL, newdata = NULL, type.predict="link", 
 #' @evalRd return_glance(
 #'   "r.squared",
 #'   "adj.r.squared",
-#'   "sigma",
 #'   "logLik",
 #'   "AIC",
 #'   "BIC",
@@ -120,10 +119,11 @@ glance.fixest <- function(x, ...) {
   if (is.na(r2adj)) {
     r2adj <- fixest::r2(x, type="apr2")
   }
-  r2within <- fixest::r2(x, type="wr2")
-  if (is.na(r2within)) {
-    r2within <- fixest::r2(x, type="wpr2")
-  }
+  # wr2 and wpr2 can be trouble because of https://github.com/lrberge/fixest/issues/5
+  # r2within <- fixest::r2(x, type="wr2")
+  # if (is.na(r2within)) {
+  #   r2within <- fixest::r2(x, type="wpr2")
+  # }
 
   ret <- with(
     summary(x, ...),
@@ -131,7 +131,7 @@ glance.fixest <- function(x, ...) {
       r.squared = r2,
       adj.r.squared = r2adj,
       # within.r.squared = r2within,
-      sigma = sqrt(sigma2),
+      # sigma = sqrt(sigma2), # only available for feols?
       # statistic = fstat,
       # p.value = pval,
       logLik = logLik(x),
