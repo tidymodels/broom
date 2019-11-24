@@ -111,7 +111,7 @@
     <div class="page-header toc-ignore">
       <h1>broom and dplyr</h1>
             
-            <h4 class="date">2019-11-09</h4>
+            <h4 class="date">2019-11-24</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/tidymodels/broom/blob/master/vignettes/broom_and_dplyr.Rmd"><code>vignettes/broom_and_dplyr.Rmd</code></a></small>
       <div class="hidden name"><code>broom_and_dplyr.Rmd</code></div>
@@ -186,10 +186,9 @@
 <p>This contains multiple values we could want in our output. Some are vectors of length 1, such as the p-value and the estimate, and some are longer, such as the confidence interval. We can get this into a nicely organized tibble using the <code>tidy</code> function:</p>
 <div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/pkg/generics/man/tidy.html">tidy</a></span>(ct)</a></code></pre></div>
 <pre><code>## # A tibble: 1 x 8
-##   estimate statistic  p.value parameter conf.low conf.high method
-##      &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;     &lt;int&gt;    &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt; 
-## 1    0.914      12.9 1.93e-14        33    0.834     0.956 Pears…
-## # … with 1 more variable: alternative &lt;chr&gt;</code></pre>
+##   estimate statistic  p.value parameter conf.low conf.high method    alternative
+##      &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;     &lt;int&gt;    &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;     &lt;chr&gt;      
+## 1    0.914      12.9 1.93e-14        33    0.834     0.956 Pearson'… two.sided</code></pre>
 <p>Often, we want to perform multiple tests or fit multiple models, each on a different part of the data. In this case, we recommend a <code>nest-map-unnest</code> workflow. For example, suppose we want to perform correlation tests for each different tree. We start by <code>nest</code>ing our data based on the group of interest:</p>
 <div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(tidyr)</a>
 <a class="sourceLine" id="cb12-2" data-line-number="2"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(purrr)</a>
@@ -230,15 +229,14 @@
 <a class="sourceLine" id="cb17-6" data-line-number="6">  ) <span class="op">%&gt;%</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb17-7" data-line-number="7"><span class="st">  </span><span class="kw"><a href="https://tidyr.tidyverse.org/reference/nest.html">unnest</a></span>(tidied, <span class="dt">.drop =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
 <pre><code>## # A tibble: 5 x 11
-##   Tree     data test  estimate statistic p.value parameter conf.low
-##   &lt;ord&gt; &lt;list&lt;&gt; &lt;lis&gt;    &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;     &lt;int&gt;    &lt;dbl&gt;
-## 1 1     [7 × 2] &lt;hte…    0.985      13.0 4.85e-5         5    0.901
-## 2 2     [7 × 2] &lt;hte…    0.987      13.9 3.43e-5         5    0.914
-## 3 3     [7 × 2] &lt;hte…    0.988      14.4 2.90e-5         5    0.919
-## 4 4     [7 × 2] &lt;hte…    0.984      12.5 5.73e-5         5    0.895
-## 5 5     [7 × 2] &lt;hte…    0.988      14.1 3.18e-5         5    0.916
-## # … with 3 more variables: conf.high &lt;dbl&gt;, method &lt;chr&gt;,
-## #   alternative &lt;chr&gt;</code></pre>
+##   Tree     data test  estimate statistic p.value parameter conf.low conf.high
+##   &lt;ord&gt; &lt;list&lt;&gt; &lt;lis&gt;    &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;     &lt;int&gt;    &lt;dbl&gt;     &lt;dbl&gt;
+## 1 1     [7 × 2] &lt;hte…    0.985      13.0 4.85e-5         5    0.901     0.998
+## 2 2     [7 × 2] &lt;hte…    0.987      13.9 3.43e-5         5    0.914     0.998
+## 3 3     [7 × 2] &lt;hte…    0.988      14.4 2.90e-5         5    0.919     0.998
+## 4 4     [7 × 2] &lt;hte…    0.984      12.5 5.73e-5         5    0.895     0.998
+## 5 5     [7 × 2] &lt;hte…    0.988      14.1 3.18e-5         5    0.916     0.998
+## # … with 2 more variables: method &lt;chr&gt;, alternative &lt;chr&gt;</code></pre>
 <p>Note that the <code>.drop</code> argument to <code><a href="https://tidyr.tidyverse.org/reference/nest.html">tidyr::unnest</a></code> is often useful.</p>
 <p>This workflow becomes even more useful when applied to regressions. Untidy ouput for a regression looks like:</p>
 <div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb19-1" data-line-number="1">lm_fit &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span>(age <span class="op">~</span><span class="st"> </span>circumference, <span class="dt">data =</span> Orange)</a>
@@ -277,18 +275,18 @@
 <a class="sourceLine" id="cb23-6" data-line-number="6">  ) <span class="op">%&gt;%</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb23-7" data-line-number="7"><span class="st">  </span><span class="kw"><a href="https://tidyr.tidyverse.org/reference/nest.html">unnest</a></span>(tidied)</a></code></pre></div>
 <pre><code>## # A tibble: 10 x 8
-##    Tree         data fit    term      estimate std.error statistic  p.value
-##    &lt;ord&gt; &lt;list&lt;df[,&gt; &lt;list&gt; &lt;chr&gt;        &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
-##  1 1         [7 × 2] &lt;lm&gt;   (Interce…  -265.      98.6      -2.68   4.36e-2
-##  2 1         [7 × 2] &lt;lm&gt;   circumfe…    11.9      0.919    13.0    4.85e-5
-##  3 2         [7 × 2] &lt;lm&gt;   (Interce…  -132.      83.1      -1.59   1.72e-1
-##  4 2         [7 × 2] &lt;lm&gt;   circumfe…     7.80     0.560    13.9    3.43e-5
-##  5 3         [7 × 2] &lt;lm&gt;   (Interce…  -210.      85.3      -2.46   5.74e-2
-##  6 3         [7 × 2] &lt;lm&gt;   circumfe…    12.0      0.835    14.4    2.90e-5
-##  7 4         [7 × 2] &lt;lm&gt;   (Interce…   -76.5     88.3      -0.867  4.26e-1
-##  8 4         [7 × 2] &lt;lm&gt;   circumfe…     7.17     0.572    12.5    5.73e-5
-##  9 5         [7 × 2] &lt;lm&gt;   (Interce…   -54.5     76.9      -0.709  5.10e-1
-## 10 5         [7 × 2] &lt;lm&gt;   circumfe…     8.79     0.621    14.1    3.18e-5</code></pre>
+##    Tree           data fit    term         estimate std.error statistic  p.value
+##    &lt;ord&gt; &lt;list&lt;df[,2]&gt; &lt;list&gt; &lt;chr&gt;           &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
+##  1 1           [7 × 2] &lt;lm&gt;   (Intercept)   -265.      98.6      -2.68   4.36e-2
+##  2 1           [7 × 2] &lt;lm&gt;   circumferen…    11.9      0.919    13.0    4.85e-5
+##  3 2           [7 × 2] &lt;lm&gt;   (Intercept)   -132.      83.1      -1.59   1.72e-1
+##  4 2           [7 × 2] &lt;lm&gt;   circumferen…     7.80     0.560    13.9    3.43e-5
+##  5 3           [7 × 2] &lt;lm&gt;   (Intercept)   -210.      85.3      -2.46   5.74e-2
+##  6 3           [7 × 2] &lt;lm&gt;   circumferen…    12.0      0.835    14.4    2.90e-5
+##  7 4           [7 × 2] &lt;lm&gt;   (Intercept)    -76.5     88.3      -0.867  4.26e-1
+##  8 4           [7 × 2] &lt;lm&gt;   circumferen…     7.17     0.572    12.5    5.73e-5
+##  9 5           [7 × 2] &lt;lm&gt;   (Intercept)    -54.5     76.9      -0.709  5.10e-1
+## 10 5           [7 × 2] &lt;lm&gt;   circumferen…     8.79     0.621    14.1    3.18e-5</code></pre>
 <p>You can just as easily use multiple predictors in the regressions, as shown here on the <code>mtcars</code> dataset. We nest the data into automatic and manual cars (the <code>am</code> column), then perform the regression within each nested tibble.</p>
 <div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb25-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(mtcars)</a>
 <a class="sourceLine" id="cb25-2" data-line-number="2">mtcars &lt;-<span class="st"> </span><span class="kw"><a href="https://tidyr.tidyverse.org/reference/reexports.html">as_tibble</a></span>(mtcars)  <span class="co"># to play nicely with list-cols</span></a>
@@ -315,16 +313,16 @@
 <a class="sourceLine" id="cb27-6" data-line-number="6">  ) <span class="op">%&gt;%</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb27-7" data-line-number="7"><span class="st">  </span><span class="kw"><a href="https://tidyr.tidyverse.org/reference/nest.html">unnest</a></span>(tidied)</a></code></pre></div>
 <pre><code>## # A tibble: 8 x 8
-##      am          data fit    term      estimate std.error statistic p.value
-##   &lt;dbl&gt; &lt;list&lt;df[,10&gt; &lt;list&gt; &lt;chr&gt;        &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;
-## 1     1     [13 × 10] &lt;lm&gt;   (Interce…   4.28      3.46      1.24   2.47e-1
-## 2     1     [13 × 10] &lt;lm&gt;   mpg        -0.101     0.0294   -3.43   7.50e-3
-## 3     1     [13 × 10] &lt;lm&gt;   qsec        0.0398    0.151     0.264  7.98e-1
-## 4     1     [13 × 10] &lt;lm&gt;   gear       -0.0229    0.349    -0.0656 9.49e-1
-## 5     0     [19 × 10] &lt;lm&gt;   (Interce…   4.92      1.40      3.52   3.09e-3
-## 6     0     [19 × 10] &lt;lm&gt;   mpg        -0.192     0.0443   -4.33   5.91e-4
-## 7     0     [19 × 10] &lt;lm&gt;   qsec        0.0919    0.0983    0.935  3.65e-1
-## 8     0     [19 × 10] &lt;lm&gt;   gear        0.147     0.368     0.398  6.96e-1</code></pre>
+##      am            data fit    term        estimate std.error statistic  p.value
+##   &lt;dbl&gt; &lt;list&lt;df[,10]&gt;&gt; &lt;list&gt; &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
+## 1     1       [13 × 10] &lt;lm&gt;   (Intercept)   4.28      3.46      1.24   0.247   
+## 2     1       [13 × 10] &lt;lm&gt;   mpg          -0.101     0.0294   -3.43   0.00750 
+## 3     1       [13 × 10] &lt;lm&gt;   qsec          0.0398    0.151     0.264  0.798   
+## 4     1       [13 × 10] &lt;lm&gt;   gear         -0.0229    0.349    -0.0656 0.949   
+## 5     0       [19 × 10] &lt;lm&gt;   (Intercept)   4.92      1.40      3.52   0.00309 
+## 6     0       [19 × 10] &lt;lm&gt;   mpg          -0.192     0.0443   -4.33   0.000591
+## 7     0       [19 × 10] &lt;lm&gt;   qsec          0.0919    0.0983    0.935  0.365   
+## 8     0       [19 × 10] &lt;lm&gt;   gear          0.147     0.368     0.398  0.696</code></pre>
 <p>What if you want not just the <code>tidy</code> output, but the <code>augment</code> and <code>glance</code> outputs as well, while still performing each regression only once? Since we’re using list-columns, we can just fit the model once and use multiple list-columns to store the tidied, glanced and augmented outputs.</p>
 <div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb29-1" data-line-number="1">regressions &lt;-<span class="st"> </span>mtcars <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb29-2" data-line-number="2"><span class="st">  </span><span class="kw"><a href="https://tidyr.tidyverse.org/reference/nest.html">nest</a></span>(<span class="op">-</span>am) <span class="op">%&gt;%</span><span class="st"> </span></a>
@@ -352,30 +350,29 @@
 <div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb31-1" data-line-number="1">regressions <span class="op">%&gt;%</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb31-2" data-line-number="2"><span class="st">  </span><span class="kw"><a href="https://tidyr.tidyverse.org/reference/nest.html">unnest</a></span>(glanced, <span class="dt">.drop =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
 <pre><code>## # A tibble: 2 x 17
-##      am      data fit   tidied r.squared adj.r.squared sigma statistic
-##   &lt;dbl&gt; &lt;list&lt;df&gt; &lt;lis&gt; &lt;list&gt;     &lt;dbl&gt;         &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;
-## 1     1 [13 × 10] &lt;lm&gt;  &lt;tibb…     0.833         0.778 0.291     15.0 
-## 2     0 [19 × 10] &lt;lm&gt;  &lt;tibb…     0.625         0.550 0.522      8.32
-## # … with 9 more variables: p.value &lt;dbl&gt;, df &lt;dbl&gt;, logLik &lt;dbl&gt;,
-## #   AIC &lt;dbl&gt;, BIC &lt;dbl&gt;, deviance &lt;dbl&gt;, df.residual &lt;int&gt;, nobs &lt;int&gt;,
-## #   augmented &lt;list&gt;</code></pre>
+##      am      data fit   tidied r.squared adj.r.squared sigma statistic p.value
+##   &lt;dbl&gt; &lt;list&lt;df&gt; &lt;lis&gt; &lt;list&gt;     &lt;dbl&gt;         &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;
+## 1     1 [13 × 10] &lt;lm&gt;  &lt;tibb…     0.833         0.778 0.291     15.0  7.59e-4
+## 2     0 [19 × 10] &lt;lm&gt;  &lt;tibb…     0.625         0.550 0.522      8.32 1.70e-3
+## # … with 8 more variables: df &lt;dbl&gt;, logLik &lt;dbl&gt;, AIC &lt;dbl&gt;, BIC &lt;dbl&gt;,
+## #   deviance &lt;dbl&gt;, df.residual &lt;int&gt;, nobs &lt;int&gt;, augmented &lt;list&gt;</code></pre>
 <div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb33-1" data-line-number="1">regressions <span class="op">%&gt;%</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb33-2" data-line-number="2"><span class="st">  </span><span class="kw"><a href="https://tidyr.tidyverse.org/reference/nest.html">unnest</a></span>(augmented)</a></code></pre></div>
 <pre><code>## # A tibble: 32 x 15
-##       am      data fit   tidied glanced    wt   mpg  qsec  gear .fitted
-##    &lt;dbl&gt; &lt;list&lt;df&gt; &lt;lis&gt; &lt;list&gt; &lt;list&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;
-##  1     1 [13 × 10] &lt;lm&gt;  &lt;tibb… &lt;tibbl…  2.62  21    16.5     4    2.73
-##  2     1 [13 × 10] &lt;lm&gt;  &lt;tibb… &lt;tibbl…  2.88  21    17.0     4    2.75
-##  3     1 [13 × 10] &lt;lm&gt;  &lt;tibb… &lt;tibbl…  2.32  22.8  18.6     4    2.63
-##  4     1 [13 × 10] &lt;lm&gt;  &lt;tibb… &lt;tibbl…  2.2   32.4  19.5     4    1.70
-##  5     1 [13 × 10] &lt;lm&gt;  &lt;tibb… &lt;tibbl…  1.62  30.4  18.5     4    1.86
-##  6     1 [13 × 10] &lt;lm&gt;  &lt;tibb… &lt;tibbl…  1.84  33.9  19.9     4    1.56
-##  7     1 [13 × 10] &lt;lm&gt;  &lt;tibb… &lt;tibbl…  1.94  27.3  18.9     4    2.19
-##  8     1 [13 × 10] &lt;lm&gt;  &lt;tibb… &lt;tibbl…  2.14  26    16.7     5    2.21
-##  9     1 [13 × 10] &lt;lm&gt;  &lt;tibb… &lt;tibbl…  1.51  30.4  16.9     5    1.77
-## 10     1 [13 × 10] &lt;lm&gt;  &lt;tibb… &lt;tibbl…  3.17  15.8  14.5     5    3.15
-## # … with 22 more rows, and 5 more variables: .resid &lt;dbl&gt;,
-## #   .std.resid &lt;dbl&gt;, .hat &lt;dbl&gt;, .sigma &lt;dbl&gt;, .cooksd &lt;dbl&gt;</code></pre>
+##       am      data fit   tidied glanced    wt   mpg  qsec  gear .fitted  .resid
+##    &lt;dbl&gt; &lt;list&lt;df&gt; &lt;lis&gt; &lt;list&gt; &lt;list&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;
+##  1     1 [13 × 10] &lt;lm&gt;  &lt;tibb… &lt;tibbl…  2.62  21    16.5     4    2.73  0.107 
+##  2     1 [13 × 10] &lt;lm&gt;  &lt;tibb… &lt;tibbl…  2.88  21    17.0     4    2.75 -0.126 
+##  3     1 [13 × 10] &lt;lm&gt;  &lt;tibb… &lt;tibbl…  2.32  22.8  18.6     4    2.63  0.310 
+##  4     1 [13 × 10] &lt;lm&gt;  &lt;tibb… &lt;tibbl…  2.2   32.4  19.5     4    1.70 -0.505 
+##  5     1 [13 × 10] &lt;lm&gt;  &lt;tibb… &lt;tibbl…  1.62  30.4  18.5     4    1.86  0.244 
+##  6     1 [13 × 10] &lt;lm&gt;  &lt;tibb… &lt;tibbl…  1.84  33.9  19.9     4    1.56 -0.274 
+##  7     1 [13 × 10] &lt;lm&gt;  &lt;tibb… &lt;tibbl…  1.94  27.3  18.9     4    2.19  0.253 
+##  8     1 [13 × 10] &lt;lm&gt;  &lt;tibb… &lt;tibbl…  2.14  26    16.7     5    2.21  0.0683
+##  9     1 [13 × 10] &lt;lm&gt;  &lt;tibb… &lt;tibbl…  1.51  30.4  16.9     5    1.77  0.259 
+## 10     1 [13 × 10] &lt;lm&gt;  &lt;tibb… &lt;tibbl…  3.17  15.8  14.5     5    3.15 -0.0193
+## # … with 22 more rows, and 4 more variables: .std.resid &lt;dbl&gt;, .hat &lt;dbl&gt;,
+## #   .sigma &lt;dbl&gt;, .cooksd &lt;dbl&gt;</code></pre>
 <p>By combining the estimates and p-values across all groups into the same tidy data frame (instead of a list of output model objects), a new class of analyses and visualizations becomes straightforward. This includes</p>
 <ul>
 <li>Sorting by p-value or estimate to find the most significant terms across all tests</li>

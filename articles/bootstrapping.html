@@ -111,7 +111,7 @@
     <div class="page-header toc-ignore">
       <h1>Tidy bootstrapping</h1>
             
-            <h4 class="date">2019-11-09</h4>
+            <h4 class="date">2019-11-24</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/tidymodels/broom/blob/master/vignettes/bootstrapping.Rmd"><code>vignettes/bootstrapping.Rmd</code></a></small>
       <div class="hidden name"><code>bootstrapping.Rmd</code></div>
@@ -194,18 +194,18 @@
 <p>The unnested coefficient information contains a summary of each replication combined in a single data frame:</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1">boot_coefs</a>
 <a class="sourceLine" id="cb5-2" data-line-number="2"><span class="co">#&gt; # A tibble: 200 x 8</span></a>
-<a class="sourceLine" id="cb5-3" data-line-number="3"><span class="co">#&gt;    splits       id        model term  estimate std.error statistic  p.value</span></a>
-<a class="sourceLine" id="cb5-4" data-line-number="4"><span class="co">#&gt;    &lt;list&gt;       &lt;chr&gt;     &lt;lis&gt; &lt;chr&gt;    &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;</span></a>
-<a class="sourceLine" id="cb5-5" data-line-number="5"><span class="co">#&gt;  1 &lt;split [32/… Bootstra… &lt;nls&gt; k        42.1       4.05     10.4  1.91e-11</span></a>
-<a class="sourceLine" id="cb5-6" data-line-number="6"><span class="co">#&gt;  2 &lt;split [32/… Bootstra… &lt;nls&gt; b         5.39      1.43      3.78 6.93e- 4</span></a>
-<a class="sourceLine" id="cb5-7" data-line-number="7"><span class="co">#&gt;  3 &lt;split [32/… Bootstra… &lt;nls&gt; k        49.9       5.66      8.82 7.82e-10</span></a>
-<a class="sourceLine" id="cb5-8" data-line-number="8"><span class="co">#&gt;  4 &lt;split [32/… Bootstra… &lt;nls&gt; b         3.73      1.92      1.94 6.13e- 2</span></a>
-<a class="sourceLine" id="cb5-9" data-line-number="9"><span class="co">#&gt;  5 &lt;split [32/… Bootstra… &lt;nls&gt; k        37.8       2.68     14.1  9.01e-15</span></a>
-<a class="sourceLine" id="cb5-10" data-line-number="10"><span class="co">#&gt;  6 &lt;split [32/… Bootstra… &lt;nls&gt; b         6.73      1.17      5.75 2.78e- 6</span></a>
-<a class="sourceLine" id="cb5-11" data-line-number="11"><span class="co">#&gt;  7 &lt;split [32/… Bootstra… &lt;nls&gt; k        45.6       4.45     10.2  2.70e-11</span></a>
-<a class="sourceLine" id="cb5-12" data-line-number="12"><span class="co">#&gt;  8 &lt;split [32/… Bootstra… &lt;nls&gt; b         4.75      1.62      2.93 6.38e- 3</span></a>
-<a class="sourceLine" id="cb5-13" data-line-number="13"><span class="co">#&gt;  9 &lt;split [32/… Bootstra… &lt;nls&gt; k        43.6       4.63      9.41 1.85e-10</span></a>
-<a class="sourceLine" id="cb5-14" data-line-number="14"><span class="co">#&gt; 10 &lt;split [32/… Bootstra… &lt;nls&gt; b         5.89      1.68      3.51 1.44e- 3</span></a>
+<a class="sourceLine" id="cb5-3" data-line-number="3"><span class="co">#&gt;    splits         id           model term  estimate std.error statistic  p.value</span></a>
+<a class="sourceLine" id="cb5-4" data-line-number="4"><span class="co">#&gt;    &lt;list&gt;         &lt;chr&gt;        &lt;lis&gt; &lt;chr&gt;    &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;</span></a>
+<a class="sourceLine" id="cb5-5" data-line-number="5"><span class="co">#&gt;  1 &lt;split [32/13… Bootstrap001 &lt;nls&gt; k        42.1       4.05     10.4  1.91e-11</span></a>
+<a class="sourceLine" id="cb5-6" data-line-number="6"><span class="co">#&gt;  2 &lt;split [32/13… Bootstrap001 &lt;nls&gt; b         5.39      1.43      3.78 6.93e- 4</span></a>
+<a class="sourceLine" id="cb5-7" data-line-number="7"><span class="co">#&gt;  3 &lt;split [32/10… Bootstrap002 &lt;nls&gt; k        49.9       5.66      8.82 7.82e-10</span></a>
+<a class="sourceLine" id="cb5-8" data-line-number="8"><span class="co">#&gt;  4 &lt;split [32/10… Bootstrap002 &lt;nls&gt; b         3.73      1.92      1.94 6.13e- 2</span></a>
+<a class="sourceLine" id="cb5-9" data-line-number="9"><span class="co">#&gt;  5 &lt;split [32/13… Bootstrap003 &lt;nls&gt; k        37.8       2.68     14.1  9.01e-15</span></a>
+<a class="sourceLine" id="cb5-10" data-line-number="10"><span class="co">#&gt;  6 &lt;split [32/13… Bootstrap003 &lt;nls&gt; b         6.73      1.17      5.75 2.78e- 6</span></a>
+<a class="sourceLine" id="cb5-11" data-line-number="11"><span class="co">#&gt;  7 &lt;split [32/11… Bootstrap004 &lt;nls&gt; k        45.6       4.45     10.2  2.70e-11</span></a>
+<a class="sourceLine" id="cb5-12" data-line-number="12"><span class="co">#&gt;  8 &lt;split [32/11… Bootstrap004 &lt;nls&gt; b         4.75      1.62      2.93 6.38e- 3</span></a>
+<a class="sourceLine" id="cb5-13" data-line-number="13"><span class="co">#&gt;  9 &lt;split [32/9]&gt; Bootstrap005 &lt;nls&gt; k        43.6       4.63      9.41 1.85e-10</span></a>
+<a class="sourceLine" id="cb5-14" data-line-number="14"><span class="co">#&gt; 10 &lt;split [32/9]&gt; Bootstrap005 &lt;nls&gt; b         5.89      1.68      3.51 1.44e- 3</span></a>
 <a class="sourceLine" id="cb5-15" data-line-number="15"><span class="co">#&gt; # … with 190 more rows</span></a></code></pre></div>
 <p>We can then calculate confidence intervals (using what is called the <a href="https://www.uvm.edu/~dhowell/StatPages/Randomization%20Tests/ResamplingWithR/BootstMeans/bootstrapping_means.html">percentile method</a>):</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1">alpha &lt;-<span class="st"> </span><span class="fl">.05</span></a>
