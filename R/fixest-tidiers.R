@@ -7,50 +7,89 @@
 #' arguments are `se` and `cluster`. See [fixest:::summary.fixest()].
 #' @evalRd return_tidy(regression = TRUE)
 #'
+#' @details The `fixest` package provides a family of functions for estimating 
+#'   models with arbitrary numbers of fixed-effects, in both an OLS and a GLM 
+#'   context. The package also supports robust (i.e. White) and clustered
+#'   standard error reporting via the generic `summary.fixest()` command. In a 
+#'   similar vein, the `tidy()` method for these models allows users to specify
+#'   a desired standard error correction either 1) implicitly via the supplied 
+#'   fixest object, or 2) explicitly as part of the tidy call. See examples 
+#'   below.
+#'
 #' @examples
 #'
 #' library(fixest)
-#'
-#' N=1e2
-#' DT <- data.frame(
-#'   id = sample(5, N, TRUE),
-#'   v1 =  sample(5, N, TRUE),
-#'   v2 =  sample(1e6, N, TRUE),
-#'   v3 =  sample(round(runif(100,max=100),4), N, TRUE),
-#'   v4 =  sample(round(runif(100,max=100),4), N, TRUE)
-#' )
-#'
-#' result_feols <- feols(v2~v3, DT)
-#' tidy(result_feols)
-#' augment(result_feols)
-#'
-#' result_feols <- feols(v2~v3|id+v1, DT)
-#' tidy(result_feols, fe = TRUE)
-#' augment(result_feols)
-#'
-#' v1<-DT$v1
-#' v2 <- DT$v2
-#' v3 <- DT$v3
-#' id <- DT$id
-#' result_feols <- feols(v2~v3|id+v1)
-#'
-#' tidy(result_feols)
-#' augment(result_feols)
-#' glance(result_feols)
+#' 
+#' gravity <- feols(log(Euros) ~ log(dist_km) | Origin + Destination + Product + Year, trade)
+#' 
+#' tidy(gravity)
+#' glance(gravity)
+#' augment(gravity, trade)
+#' 
+#' ## To get robust or clustered SEs, users can either:
+#' # 1) Feed tidy() a summary.fixest object that has already accepted these arguments
+#' gravity_summ <- summary(gravity, cluster = c("Product", "Year"))
+#' tidy(gravity_summ, conf.int = T)
+#' # 2) Or, specify the arguments directly in the tidy() call
+#' tidy(gravity, conf.int = T, cluster = c("Product", "Year"))
+#' tidy(gravity, conf.int = T, se = "threeway")
+#' # etc.
+#' 
+#' ## The other fixest methods all working similarly. For example:
+#' gravity_pois <- feglm(Euros ~ log(dist_km) | Origin + Destination + Product + Year, trade)
+#' tidy(gravity_pois)
+#' glance(gravity_pois)
+#' augment(gravity_pois, trade)
+#' }
 #'
 #' @export
 #' @family fixest tidiers
 #' @seealso [tidy()], [fixest::feglm()], [fixest::fenegbin()],
 #' [fixest::feNmlm()], [fixest::femlm()], [fixest::feols()], [fixest::fepois()]
 tidy.fixest <- function(x, conf.int = FALSE, conf.level = 0.95,   ...) {
+  
   nn <- c("estimate", "std.error", "statistic", "p.value")
-  ret <- fix_data_frame(summary(x, ...)$coeftable, nn)
-
+  
+  ## Option 1) User specifies se or cluster arguments as part of tidy() call
+  # if (!is.null(se) | !is.null(cluster)) {
+  if (!missing(...)) {
+    ret <- fix_data_frame(summary(x, ...)$coeftable, nn)
+  }
+  
+  ## Option 2) Otherwise, just use whatever object the user feeds into tidy()
+  if (missing(...)) {
+    ret <- fix_data_frame(x$coeftable, nn)
+  }
+  
+  ## CIs (if desired) will follow a simiar pattern as above, depending on what
+  ## the user specifies in the tidy() call.
   if (conf.int) {
-    CI <- stats::confint(x, level = conf.level, ...)
+    ## Option 1
+    if (!missing(...)) {
+      CI <- stats::confint(x, level = conf.level, ...)
+      colnames(CI) <- c("conf.low", "conf.high")
+    }
+    ## Option 2 (Requires some reverse engineering to get CIs)
+    if (missing(...)) {
+      ## First determine SE type (and cluster variables if applicable)
+      se_type <- attributes(x$se)$type
+      cluster_vars <- gsub("[\\(\\)]", "", regmatches(se_type, gregexpr("\\(.*?\\)", se_type)))
+      cluster_vars <- gsub(" & ", "+", cluster_vars)
+      if (cluster_vars=="character0") cluster_vars <- NULL ## Optional: Shouldn't make a difference
+      ## Non-clustered SEs
+      if (se_type=="Standard") se_type <- "standard"
+      if (se_type=="White") se_type <- "white"
+      if (grepl("Clustered", se_type)) se_type <- "cluster"
+      if (grepl("Two-way", se_type)) se_type <- "twoway"
+      if (grepl("Three-way", se_type)) se_type <- "threeway"
+      if (grepl("Four-way", se_type)) se_type <- "fourway"
+      CI <- stats::confint(x, level = conf.level, se = se_type, cluster = formula(noquote(paste0("~",cluster_vars))))
+    }
+    ## Bind to rest of tibble
     colnames(CI) <- c("conf.low", "conf.high")
     ret <- cbind(ret, unrowname(CI))
   }
+  
   as_tibble(ret)
 }
 
