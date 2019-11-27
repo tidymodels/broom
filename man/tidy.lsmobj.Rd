@@ -58,7 +58,7 @@ tidy(contrast(marginal, method = "pairwise"))
 
 # plot confidence intervals
 library(ggplot2)
-ggplot(tidy(marginal), aes(day, estimate)) +
+ggplot(tidy(marginal, conf.int = TRUE), aes(day, estimate)) +
   geom_point() +
   geom_errorbar(aes(ymin = conf.low, ymax = conf.high))
 
@@ -69,7 +69,7 @@ by_price <- emmeans(oranges_lm1, "day", by = "price2",
 by_price
 tidy(by_price)
 
-ggplot(tidy(by_price), aes(price2, estimate, color = day)) +
+ggplot(tidy(by_price, conf.int = TRUE), aes(price2, estimate, color = day)) +
   geom_line() +
   geom_errorbar(aes(ymin = conf.low, ymax = conf.high))
   
