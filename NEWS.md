@@ -72,6 +72,8 @@ TODO: sort out what happens to `glance.aov()`
 
 ## New tidiers, features and bugfixes
 
+- Added tidiers for objects from the `mfx` package (#700, @grantmcdermott)
+
 - Added tidier for `summary.manova` (#729)
 
 - Added `tidy()` and `glance()` methods for `speedglm` objects from the `speedglm` package
