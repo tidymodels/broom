@@ -46,7 +46,7 @@ test_that("glance.fixest", {
   gl2 <- glance(fit2)
 
   check_glance_outputs(gl, gl2)
-  check_dims(gl, expected_cols = 6)
+  check_dims(gl, expected_cols = 8)
 })
 
 test_that("augment.fixest", {
@@ -113,30 +113,39 @@ test_that("all other fixest estimators run", {
   )
   check_augment_function(
     aug = augment.fixest,
-    model = res_fenegbin,
-    data = df,
-    newdata = df,
-    strict = FALSE
-  )
-  check_augment_function(
-    aug = augment.fixest,
-    model = res_feNmlm,
-    data = df,
-    newdata = df,
-    strict = FALSE
-  )
-  check_augment_function(
-    aug = augment.fixest,
     model = res_femlm,
     data = df,
     newdata = df,
     strict = FALSE
   )
-  check_augment_function(
-    aug = augment.fixest,
-    model = res_fepois,
-    data = df,
-    newdata = df,
-    strict = FALSE
+
+  augment_error <- "augment is only supported for fixest models estimated with feols, felm, or femlm"
+  expect_error(augment(res_fenegbin, df), augment_error)
+  expect_error(augment(res_feNmlm, df), augment_error)
+  expect_error(augment(res_fepois, df), augment_error)
+})
+
+
+test_that("tidiers work with model results or summary of model results", {
+  # Default standard errors are clustered by `id`. Test against non-default
+  # independent, heteroskedastic (aka White) standard errors.
+  fit2_summ <- summary(fit2, se="white")
+  expect_equal(tidy(fit2, se="white"), tidy(fit2_summ))
+  expect_equal(
+    tidy(fit2, se="white", conf.int = TRUE),
+    tidy(fit2_summ, conf.int = TRUE)
   )
+  expect_equal(glance(fit2, se="white"), glance(fit2_summ))
+  expect_equal(augment(fit2, df, se="white"), augment(fit2_summ, df))
+
+  # Repeat for feglm
+  res_glm <- fixest::feglm(v2 ~ v4 | id, data=df)
+  res_glm_summ <- summary(fixest::feglm(v2 ~ v4 | id, data=df), se="white")
+  expect_equal(tidy(res_glm, se="white"), tidy(res_glm_summ))
+  expect_equal(
+    tidy(res_glm, se="white", conf.int = TRUE),
+    tidy(res_glm_summ, conf.int = TRUE)
+  )
+  expect_equal(glance(res_glm, se="white"), glance(res_glm_summ))
+  expect_equal(augment(res_glm, df, se="white"), augment(res_glm_summ, df))
 })
