@@ -356,6 +356,7 @@ Suggests:
     mediation,
     metafor,
     mgcv,
+    mlogit,
     modeltests,
     muhaz,
     multcomp,
