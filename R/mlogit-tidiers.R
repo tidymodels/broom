@@ -56,7 +56,7 @@ augment.mlogit <- function(x, data = model.frame(x), newdata = NULL,
                        se_fit = FALSE, ...) {
   augment_newdata(x, data, newdata, se_fit) %>%
     tidyr::separate(.rownames, into = c("id", "alternative")) %>%
-    dplyr::rename(.probability = probability, .utility = linpred,
+    dplyr::rename(.probability = probabilities, .utility = linpred,
                   .fitted = .fitted)
   
 }
