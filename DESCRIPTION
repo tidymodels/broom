@@ -272,7 +272,7 @@ Authors@R:
              role = "ctb",
              email = "kevin.zarca@gmail.com"),
       person(given = "Greg",
-             family = "Macfaralne",
+             family = "Macfarlane",
              role = "ctb",
              email = "gregmacfarlane@gmail.com",
              comment = c(ORCID = "0000-0003-3999-7584"))       

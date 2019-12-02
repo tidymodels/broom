@@ -106,7 +106,7 @@ Other contributors:
   \item Bruna Wundervald \email{brunadaviesw@gmail.com} (0000-0001-8163-220X) [contributor]
   \item Joyce Cahoon \email{joyceyu48@gmail.com} (0000-0001-7217-4702) [contributor]
   \item Kevin Zarca \email{kevin.zarca@gmail.com} [contributor]
-  \item Greg Macfaralne \email{gregmacfarlane@gmail.com} (0000-0003-3999-7584) [contributor]
+  \item Greg Macfarlane \email{gregmacfarlane@gmail.com} (0000-0003-3999-7584) [contributor]
 }
 
 }
