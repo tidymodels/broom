@@ -4,6 +4,7 @@ skip_if_not_installed("modeltests")
 library(modeltests)
 
 skip_if_not_installed("fixest")
+fixest::setFixest_nthreads(1) # avoid warnings about requesting more threads
 
 set.seed(27)
 n <- 100
@@ -119,7 +120,7 @@ test_that("all other fixest estimators run", {
     strict = FALSE
   )
 
-  augment_error <- "augment is only supported for fixest models estimated with feols, felm, or femlm"
+  augment_error <- "augment is only supported for fixest models estimated with feols, feglm, or femlm"
   expect_error(augment(res_fenegbin, df), augment_error)
   expect_error(augment(res_feNmlm, df), augment_error)
   expect_error(augment(res_fepois, df), augment_error)

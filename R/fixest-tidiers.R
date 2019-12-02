@@ -4,7 +4,7 @@
 #' @param x A `fixest` object returned from any of the `fixest` estimators
 #' @template param_confint
 #' @param ... Additional arguments passed to `summary` and `confint`. Important
-#' arguments are `se` and `cluster`. See [fixest:::summary.fixest()].
+#' arguments are `se` and `cluster`. See [`summary.fixest`][fixest::summary.fixest()].
 #' @evalRd return_tidy(regression = TRUE)
 #'
 #' @details The `fixest` package provides a family of functions for estimating
@@ -90,8 +90,9 @@ tidy.fixest <- function(x, conf.int = FALSE, conf.level = 0.95, ...) {
 #'
 #' @inherit tidy.fixest params examples
 #' @template param_data
-#' @param type.predict Passed to [fixest:::predict.fixest()] `type` argument.
-#'   Defaults to `"link"` (like [stats::glm.predict()]).
+#' @template param_newdata
+#' @param type.predict Passed to [`predict.fixest`][fixest::predict.fixest()]
+#'   `type` argument. Defaults to `"link"` (like `glm.predict`).
 #'
 #' @evalRd return_augment()
 #'
