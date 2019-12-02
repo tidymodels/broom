@@ -270,7 +270,12 @@ Authors@R:
       person(given = "Kevin",
              family = "Zarca",
              role = "ctb",
-             email = "kevin.zarca@gmail.com")
+             email = "kevin.zarca@gmail.com"),
+      person(given = "Greg",
+             family = "Macfaralne",
+             role = "ctb",
+             email = "gregmacfarlane@gmail.com",
+             comment = c(ORCID = "0000-0003-3999-7584"))       
    )
 Description: Summarizes key information about statistical
     objects in tidy tibbles. This makes it easy to report results, create
@@ -435,6 +440,7 @@ Collate:
     'mclust-tidiers.R'
     'mediate-tidiers.R'
     'mgcv-tidiers.R'
+    'mlogit-tidiers.R'
     'muhaz-tidiers.R'
     'multcomp-tidiers.R'
     'nnet-tidiers.R'
