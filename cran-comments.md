@@ -1,6 +1,6 @@
 # release summary
 
-broom 0.5.2 is a minor release featuring changes to clean up CRAN check errors
+broom 0.5.3 is a minor release for compatibility with the new classing for matrix objects in R 4.0.0
 
 ## Test environments
 
