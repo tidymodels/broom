@@ -60,6 +60,10 @@ TODO: sort out what happens to `glance.aov()`
 - Added new vignette detailing use of `modelgenerics` and `modeltests` packages
 
 - Added `data` argument to `augment()` generic (did this happen?)
+- tidy.kmeans now defaults to using variable names in output columns
+- Bug fix for tidy.ridgelm returning inconsistent columns (#532)
+- Correct output for  `tidy.mlm(, quick=TRUE)`, add tests (#539 by @MatthieuStigler)
+
 
 ## Additional control over confidence intervals
 
@@ -72,7 +76,11 @@ TODO: sort out what happens to `glance.aov()`
 
 ## New tidiers, features and bugfixes
 
-- Added tidiers for objects from the `mfx` package (#700, @grantmcdermott)
+- Add option to `lfe::felm` for robust and cluster standard errors (#772)
+
+- Added tidier for `car::Anova` (#754)
+
+- Added tidiers for objects from the `mfx` package (#700 by @grantmcdermott)
 
 - Added tidier for `summary.manova` (#729)
 

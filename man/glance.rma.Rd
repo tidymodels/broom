@@ -59,6 +59,7 @@ glance(meta_analysis)
 A \code{\link[tibble:tibble]{tibble::tibble()}} with exactly one row and columns:
   \item{cochran.qe}{In meta-analysis, test statistic for the Cochran's Q_e test of residual heterogeneity.}
   \item{cochran.qm}{In meta-analysis, test statistic for the Cochran's Q_m omnibus test of coefficients.}
+  \item{df.residual}{Residual degrees of freedom.}
   \item{h.squared}{Value of the H-Squared statistic}
   \item{i.squared}{Value of the I-Squared statistic}
   \item{measure}{the measure used in the meta-analysis}
