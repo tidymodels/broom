@@ -1,3 +1,7 @@
+# broom 0.5.3
+
+- Fixes failing CRAN checks due to new matrix classing in R 4.0.0
+
 # broom 0.5.2
 
 - Fixes failing CRAN checks
