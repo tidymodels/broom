@@ -17,7 +17,7 @@ tidy.glm <- function(x, conf.int = FALSE, conf.level = .95,
   # summary.lm() sets to NA), catch them here and add them back
   
   coefs <- tibble::enframe(stats::coef(x), name = "term", value = "estimate")
-  ret <- left_join(coefs, ret, by = "term")
+  ret <- left_join(coefs, ret, by = c("term", "estimate"))
   
   if (conf.int) {
     ci <- broom_confint_terms(x, level = conf.level)
@@ -127,13 +127,14 @@ augment.glm <- function(x,
 #' @seealso [stats::glm()]
 glance.glm <- function(x, ...) {
   s <- summary(x)
-  ret <- tibble(null.deviance = x$null.deviance,
-                df.null = x$df.null,
-                logLik = as.numeric(stats::logLik(x)),
-                AIC = stats::AIC(x),
-                BIC = stats::BIC(x),
-                deviance = stats::deviance(x),
-                df.residual = stats::df.residual(x),
-                nobs = stats::nobs(x))
-  ret
+  tibble(
+    null.deviance = x$null.deviance,
+    df.null = x$df.null,
+    logLik = as.numeric(stats::logLik(x)),
+    AIC = stats::AIC(x),
+    BIC = stats::BIC(x),
+    deviance = stats::deviance(x),
+    df.residual = stats::df.residual(x),
+    nobs = stats::nobs(x)
+  )
 }

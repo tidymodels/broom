@@ -72,7 +72,12 @@ TODO: sort out what happens to `glance.aov()`
 
 - `tidy.lsmobj()` gained a `conf.int` argument
 
+## The great `lm` disentanglement
+
+- `tidy()` no longer checks for a log or logit link when `exponentiate = TRUE`, as internals have been to refactored to remove extraneous `exponentiate` arguments. If you set `exponentiate`, we assume you know what you are doing and that you want exponentiate coefficients (and confidence intervals if `conf.int = TRUE`) regardless of link function.
+
 ## New tidiers, features and bugfixes
+
 
 - Added tidier for `summary.manova` (#729)
 
