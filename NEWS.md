@@ -76,6 +76,8 @@ TODO: sort out what happens to `glance.aov()`
 
 ## New tidiers, features and bugfixes
 
+- Add option to `lfe::felm` for robust and cluster standard errors (#772)
+
 - Added tidier for `car::Anova` (#754)
 
 - Added tidier for `summary.manova` (#729)
