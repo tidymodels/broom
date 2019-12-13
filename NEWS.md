@@ -60,6 +60,10 @@ TODO: sort out what happens to `glance.aov()`
 - Added new vignette detailing use of `modelgenerics` and `modeltests` packages
 
 - Added `data` argument to `augment()` generic (did this happen?)
+- tidy.kmeans now defaults to using variable names in output columns
+- Bug fix for tidy.ridgelm returning inconsistent columns (#532)
+- Correct output for  `tidy.mlm(, quick=TRUE)`, add tests (#539 by @MatthieuStigler)
+
 
 ## Additional control over confidence intervals
 
