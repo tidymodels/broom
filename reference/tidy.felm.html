@@ -169,7 +169,7 @@ specify which components to return.</p>
 
     <pre class="usage"><span class='co'># S3 method for felm</span>
 <span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>x</span>, <span class='kw'>conf.int</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>conf.level</span> <span class='kw'>=</span> <span class='fl'>0.95</span>,
-  <span class='kw'>fe</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='no'>...</span>)</pre>
+  <span class='kw'>fe</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>robust</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='no'>...</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -193,6 +193,11 @@ Defaults to 0.95, which corresponds to a 95 percent confidence interval.</p></td
       <th>fe</th>
       <td><p>Logical indicating whether or not to include estimates of
 fixed effects. Defaults to <code>FALSE</code>.</p></td>
+    </tr>
+    <tr>
+      <th>robust</th>
+      <td><p>Logical indicating robust or clustered SEs should be used.
+See lfe::summary.felm for details. Defaults to <code>FALSE</code>.</p></td>
     </tr>
     <tr>
       <th>...</th>
@@ -271,7 +276,10 @@ the <code>data</code> argument.</p></td>
 #&gt;  8 v1.2    28466.    81280.     0.350   0.730       20     1
 #&gt;  9 v1.3    61511.   105015.     0.586   0.567       14     1
 #&gt; 10 v1.4  -134391.    88261.    -1.52    1.85        17     1
-#&gt; 11 v1.5    36990.    88533.     0.418   0.680       24     1</div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/generics/man/augment.html'>augment</a></span>(<span class='no'>result_felm</span>)</div><div class='output co'>#&gt; # A tibble: 100 x 6
+#&gt; 11 v1.5    36990.    88533.     0.418   0.680       24     1</div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>result_felm</span>, <span class='kw'>robust</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; # A tibble: 1 x 5
+#&gt;   term  estimate std.error statistic p.value
+#&gt;   &lt;chr&gt;    &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;
+#&gt; 1 v3        849.     1131.     0.750   0.455</div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/generics/man/augment.html'>augment</a></span>(<span class='no'>result_felm</span>)</div><div class='output co'>#&gt; # A tibble: 100 x 6
 #&gt;        v2    v3    id    v1 .fitted[,"v2"] .resid[,"v2"]
 #&gt;     &lt;int&gt; &lt;dbl&gt; &lt;int&gt; &lt;int&gt;          &lt;dbl&gt;         &lt;dbl&gt;
 #&gt;  1 638177 54.7      3     5        559497.        78680.
@@ -285,7 +293,7 @@ the <code>data</code> argument.</p></td>
 #&gt;  9 539312 78.2      2     4        348000.       191312.
 #&gt; 10   8949 66.7      3     4        398271.      -389322.
 #&gt; # … with 90 more rows</div><div class='input'>
-<span class='no'>v1</span><span class='kw'>&lt;-</span><span class='no'>DT</span>$<span class='no'>v1</span>
+<span class='no'>v1</span> <span class='kw'>&lt;-</span> <span class='no'>DT</span>$<span class='no'>v1</span>
 <span class='no'>v2</span> <span class='kw'>&lt;-</span> <span class='no'>DT</span>$<span class='no'>v2</span>
 <span class='no'>v3</span> <span class='kw'>&lt;-</span> <span class='no'>DT</span>$<span class='no'>v3</span>
 <span class='no'>id</span> <span class='kw'>&lt;-</span> <span class='no'>DT</span>$<span class='no'>id</span>

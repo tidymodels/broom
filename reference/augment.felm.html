@@ -313,7 +313,10 @@ the <code>data</code> argument.</p></td>
 #&gt;  8 v1.2   -81178.    79232.    -1.02    1.68           15     1
 #&gt;  9 v1.3        0         0    NaN     NaN              31     1
 #&gt; 10 v1.4   -10660.    90314.    -0.118   1.09           15     1
-#&gt; 11 v1.5    -7811.    66144.    -0.118   1.09           23     1</div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/generics/man/augment.html'>augment</a></span>(<span class='no'>result_felm</span>)</div><div class='output co'>#&gt; # A tibble: 100 x 6
+#&gt; 11 v1.5    -7811.    66144.    -0.118   1.09           23     1</div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>result_felm</span>, <span class='kw'>robust</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; # A tibble: 1 x 5
+#&gt;   term  estimate std.error statistic p.value
+#&gt;   &lt;chr&gt;    &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;
+#&gt; 1 v3       1514.      959.      1.58   0.118</div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/generics/man/augment.html'>augment</a></span>(<span class='no'>result_felm</span>)</div><div class='output co'>#&gt; # A tibble: 100 x 6
 #&gt;        v2     v3    id    v1 .fitted[,"v2"] .resid[,"v2"]
 #&gt;     &lt;int&gt;  &lt;dbl&gt; &lt;int&gt; &lt;int&gt;          &lt;dbl&gt;         &lt;dbl&gt;
 #&gt;  1 954279 92.8       4     3        516568.       437711.
@@ -327,7 +330,7 @@ the <code>data</code> argument.</p></td>
 #&gt;  9 360434  0.404     3     4        547728.      -187294.
 #&gt; 10 884671 91.9       1     5        571240.       313431.
 #&gt; # … with 90 more rows</div><div class='input'>
-<span class='no'>v1</span><span class='kw'>&lt;-</span><span class='no'>DT</span>$<span class='no'>v1</span>
+<span class='no'>v1</span> <span class='kw'>&lt;-</span> <span class='no'>DT</span>$<span class='no'>v1</span>
 <span class='no'>v2</span> <span class='kw'>&lt;-</span> <span class='no'>DT</span>$<span class='no'>v2</span>
 <span class='no'>v3</span> <span class='kw'>&lt;-</span> <span class='no'>DT</span>$<span class='no'>v3</span>
 <span class='no'>id</span> <span class='kw'>&lt;-</span> <span class='no'>DT</span>$<span class='no'>id</span>

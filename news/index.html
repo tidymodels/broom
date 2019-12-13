@@ -199,7 +199,10 @@
 <li><p>We now use <code><a href="https://rlang.r-lib.org/reference/arg_match.html">rlang::arg_match()</a></code> when possible instead of <code>arg.match()</code> to give more informative errors on argument mismatches.</p></li>
 <li><p>Moved core tests to the <code>modeltests</code> package</p></li>
 <li><p>Added new vignette detailing use of <code>modelgenerics</code> and <code>modeltests</code> packages</p></li>
-<li><p>Added <code>data</code> argument to <code><a href="https://rdrr.io/pkg/generics/man/augment.html">augment()</a></code> generic (did this happen?)</p></li>
+<li>Added <code>data</code> argument to <code><a href="https://rdrr.io/pkg/generics/man/augment.html">augment()</a></code> generic (did this happen?)</li>
+<li>tidy.kmeans now defaults to using variable names in output columns</li>
+<li>Bug fix for tidy.ridgelm returning inconsistent columns (<a href='https://github.com/tidymodels/broom/issues/532'>#532</a>)</li>
+<li><p>Correct output for <code><a href="../reference/tidy.mlm.html">tidy.mlm(, quick=TRUE)</a></code>, add tests (<a href='https://github.com/tidymodels/broom/issues/539'>#539</a> by <a href='https://github.com/MatthieuStigler'>@MatthieuStigler</a>)</p></li>
 </ul>
 </div>
 <div id="additional-control-over-confidence-intervals" class="section level2">
@@ -215,6 +218,7 @@
 <h2 class="hasAnchor">
 <a href="#new-tidiers-features-and-bugfixes" class="anchor"></a>New tidiers, features and bugfixes</h2>
 <ul>
+<li><p>Add option to <code><a href="https://rdrr.io/pkg/lfe/man/felm.html">lfe::felm</a></code> for robust and cluster standard errors (<a href='https://github.com/tidymodels/broom/issues/772'>#772</a>)</p></li>
 <li><p>Added tidier for <code><a href="https://rdrr.io/pkg/car/man/Anova.html">car::Anova</a></code> (<a href='https://github.com/tidymodels/broom/issues/754'>#754</a>)</p></li>
 <li><p>Added tidier for <code>summary.manova</code> (<a href='https://github.com/tidymodels/broom/issues/729'>#729</a>)</p></li>
 <li><p>Added <code><a href="https://rdrr.io/pkg/generics/man/tidy.html">tidy()</a></code> and <code><a href="https://rdrr.io/pkg/generics/man/glance.html">glance()</a></code> methods for <code>speedglm</code> objects from the <code>speedglm</code> package</p></li>
