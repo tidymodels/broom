@@ -3,7 +3,6 @@
 #'
 #' @param x An `lm.beta` object created by [lm.beta::lm.beta].
 #' @template param_confint
-#' @template param_exponentiate
 #' @template param_unused_dots
 #'
 #' @evalRd return_tidy(regression = TRUE)
