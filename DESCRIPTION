@@ -12,11 +12,6 @@ Authors@R:
              role = c("aut", "cre"),
              email = "alexpghayes@gmail.com",
              comment = c(ORCID = "0000-0002-4985-5160")),
-      person(given = "Grant",
-             family = "McDermott",
-             role = "ctb",
-             email = "grantmcd@uoregon.edu",
-             comment = c(ORCID = "0000-0001-7883-8573")),
       person(given = "Indrajeet",
              family = "Patil",
              role = "ctb",
@@ -271,7 +266,12 @@ Authors@R:
              family = "Cahoon",
              role = "ctb",
              email = "joyceyu48@gmail.com",
-             comment = c(ORCID = "0000-0001-7217-4702")))
+             comment = c(ORCID = "0000-0001-7217-4702")),
+      person(given = "Grant",
+             family = "McDermott",
+             role = "ctb",
+             email = "grantmcd@uoregon.edu",
+             comment = c(ORCID = "0000-0001-7883-8573")))
 Description: Summarizes key information about statistical
     objects in tidy tibbles. This makes it easy to report results, create
     plots and consistently work with large numbers of models at once.
@@ -386,7 +386,7 @@ Encoding: UTF-8
 Language: en-US
 LazyData: true
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 6.1.1
+RoxygenNote: 7.0.2
 Collate:
     'aaa-documentation-helper.R'
     'aer-tidiers.R'

@@ -39,18 +39,18 @@
 #' library(mfx)
 #' 
 #' ## Get the marginal effects from a logit regression
-#' mod_logmfx <- logitmfx(am ~ cyl + hp + wt, atmean = T, data = mtcars)
-#' tidy(mod_logmfx, conf.int=T)
+#' mod_logmfx <- logitmfx(am ~ cyl + hp + wt, atmean = TRUE, data = mtcars)
+#' tidy(mod_logmfx, conf.int = TRUE)
 #' 
 #' ## Compare with the naive model coefficients of the same logit call (not run)
-#' # tidy(glm(am ~ cyl + hp + wt, family = binomial, data = mtcars), conf.int=T)
+#' # tidy(glm(am ~ cyl + hp + wt, family = binomial, data = mtcars), conf.int = TRUE)
 #' 
 #' augment(mod_logmfx)
 #' glance(mod_logmfx)
 #' 
 #' ## Another example, this time using probit regression
-#' mod_probmfx <- probitmfx(am ~ cyl + hp + wt, atmean = T, data = mtcars)
-#' tidy(mod_probmfx, conf.int=T)
+#' mod_probmfx <- probitmfx(am ~ cyl + hp + wt, atmean = TRUE, data = mtcars)
+#' tidy(mod_probmfx, conf.int = TRUE)
 #' augment(mod_probmfx)
 #' glance(mod_probmfx)
 #' }
@@ -61,17 +61,8 @@
 tidy.mfx <-
   function(x, conf.int = FALSE, conf.level = 0.95, ...) {
     
-    x_tidy <-
-      x$mfxest %>% 
-      as.data.frame() %>% 
-      tibble::rownames_to_column() %>% 
-      tibble::as_tibble() %>%
-      ## Note: using the ".data" prefix to avoid "no visible binding for global 
-      ## variable" warning during devtools::check()
-      dplyr::select(
-        term=.data$rowname, estimate=.data$`dF/dx`, std.error=.data$`Std. Err.`, 
-        statistic=.data$z, p.value=.data$`P>|z|`
-        )
+    nn <- c("estimate", "std.error", "statistic", "p.value")
+    x_tidy <- fix_data_frame(x$mfxest, nn)
     
     ## Optional: Add "atmean" column
     ## If no "atmean" argument is specified in the model call, then will default to TRUE
@@ -91,11 +82,7 @@ tidy.mfx <-
         )
     }
     
-    x_tidy <-
-      x_tidy %>%
-      dplyr::select(term, contains("atmean"), everything())
-    
-    x_tidy
+    dplyr::select(x_tidy, term, contains("atmean"), everything())
   }
 
 
@@ -157,14 +144,12 @@ augment.mfx <- function(x,
                         type.residuals = c("deviance", "pearson"),
                         se_fit = FALSE, ...) {
   ## Use augment.glm() method on internal fit object
-  df <- augment.glm(x$fit, 
-                data = data,
-                newdata = newdata,
-                type.predict = type.predict,
-                type.residuals = type.residuals,
-                se_fit = se_fit, ...)
-  
-  df
+  augment.glm(x$fit, 
+              data = data,
+              newdata = newdata,
+              type.predict = type.predict,
+              type.residuals = type.residuals,
+              se_fit = se_fit, ...)
 }
 
 #' @rdname augment.mfx
@@ -216,8 +201,7 @@ augment.probitmfx <- augment.mfx
 #' @export
 glance.mfx <- function(x, ...) {
   ## Use glance.glm() method on internal fit object
-  ret <- glance(x$fit)
-  ret
+  glance.glm(x$fit)
 }
 
 #' @rdname glance.mfx
