@@ -27,7 +27,7 @@
 #' @export
 tidy.mlm <- function(x,
                      conf.int = FALSE,
-                     conf.level = .95,
+                     conf.level = 0.95,
                      ...) {
 
   # adding other details from summary object
@@ -38,9 +38,7 @@ tidy.mlm <- function(x,
   nn <- c("estimate", "std.error", "statistic", "p.value")
   
   # multiple response variables
-  ret <- purrr::map_df(co, fix_data_frame, nn[1:ncol(co[[1]])],
-                       .id = "response"
-  )
+  ret <- purrr::map_df(co, fix_data_frame, nn[1:ncol(co[[1]])], .id = "response")
   ret$response <- stringr::str_replace(ret$response, "Response ", "")
   
   ret <- as_tibble(ret)
@@ -50,7 +48,7 @@ tidy.mlm <- function(x,
     # S3 method for computing confidence intervals for `mlm` objects was
     # introduced in R 3.5
     CI <- tryCatch(
-      expr = stats::confint(x, level = conf.level),
+      stats::confint(x, level = conf.level),
       error = function(x) {
         NULL
       }
@@ -62,7 +60,7 @@ tidy.mlm <- function(x,
     }
 
     colnames(CI) <- c("conf.low", "conf.high")
-    ret <- bind_cols(ret, CI)
+    ret <- bind_cols(ret, as_tibble(CI))
   }
 
   as_tibble(ret)
