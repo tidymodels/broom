@@ -60,6 +60,10 @@ TODO: sort out what happens to `glance.aov()`
 - Added new vignette detailing use of `modelgenerics` and `modeltests` packages
 
 - Added `data` argument to `augment()` generic (did this happen?)
+- tidy.kmeans now defaults to using variable names in output columns
+- Bug fix for tidy.ridgelm returning inconsistent columns (#532)
+- Correct output for  `tidy.mlm(, quick=TRUE)`, add tests (#539 by @MatthieuStigler)
+
 
 ## Additional control over confidence intervals
 
@@ -71,6 +75,8 @@ TODO: sort out what happens to `glance.aov()`
 - `tidy.lsmobj()` gained a `conf.int` argument
 
 ## New tidiers, features and bugfixes
+
+- Added tidier for `car::Anova` (#754)
 
 - Added tidier for `summary.manova` (#729)
 
