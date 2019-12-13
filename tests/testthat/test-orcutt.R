@@ -24,3 +24,21 @@ test_that("glance.orcutt", {
   check_glance_outputs(gl)
   check_dims(gl, 1, 9)
 })
+
+test_that("no effect from additional parameters", { # from issue 734
+ 
+  expect_equal(
+    tidy(co, conf.int = TRUE, exponentiate = FALSE), 
+    tidy(co)
+  )
+  
+  expect_equal(
+    tidy(co, exponentiate = TRUE), 
+    tidy(co)
+  )
+  
+  expect_equal(
+    tidy(co, conf.int = TRUE, exponentiate = TRUE), 
+    tidy(co)
+  )
+})

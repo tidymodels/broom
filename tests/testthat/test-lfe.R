@@ -30,22 +30,32 @@ test_that("felm tidier arguments", {
 })
 
 test_that("tidy.felm", {
-  td <- tidy(fit)
+  td1 <- tidy(fit)
   td2 <- tidy(fit2, conf.int = TRUE, fe = TRUE, fe.error = FALSE)
   td3 <- tidy(fit2, conf.int = TRUE, fe = TRUE)
   td4 <- tidy(fit_form)
+  td5 <- tidy(fit, robust = TRUE)
+  td6 <- tidy(fit2, robust = TRUE)
+  td7 <- tidy(fit2, robust = TRUE, fe = TRUE)
   
   td_multi <- tidy(fit_multi)
 
-  check_tidy_output(td)
+  check_tidy_output(td1)
   check_tidy_output(td2)
   check_tidy_output(td3)
   check_tidy_output(td4)
+  check_tidy_output(td5)
+  check_tidy_output(td6)
+  check_tidy_output(td7)
   check_tidy_output(td_multi)
 
-  check_dims(td, 2, 5)
+  check_dims(td1, 2, 5)
   
   expect_equal(tidy(fit_multi)[3:4, -1], tidy(fit))
+  expect_equal(dplyr::pull(td5, std.error), 
+               as.numeric(lfe:::summary.felm(fit, robust = TRUE)$coef[, "Robust s.e"]))
+  expect_equal(dplyr::pull(td6, std.error), 
+               as.numeric(lfe:::summary.felm(fit2, robust = TRUE)$coef[, "Robust s.e"]))
 })
 
 test_that("glance.felm", {

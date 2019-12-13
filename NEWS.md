@@ -17,7 +17,7 @@ changes in this version of `broom`. We list them below-
     
   - We have removed all support for the `quick` argument in `tidy()` methods. TODO: explain why, and discuss alternatives.
   
-  - Remove `tidy.summary.lm()`. Call `tidy()` on the `lm` object directly.
+  - Remove `tidy.summary.lm()`. Call `tidy()` on the `lm` object directly. General philosophy: call `tidy()` on model objects, not model summary objects.
     
 ## Changes to `augment()`
 
@@ -62,6 +62,10 @@ TODO: sort out what happens to `glance.aov()`
 - Added new vignette detailing use of `modelgenerics` and `modeltests` packages
 
 - Added `data` argument to `augment()` generic (did this happen?)
+- tidy.kmeans now defaults to using variable names in output columns
+- Bug fix for tidy.ridgelm returning inconsistent columns (#532)
+- Correct output for  `tidy.mlm(, quick=TRUE)`, add tests (#539 by @MatthieuStigler)
+
 
 ## Additional control over confidence intervals
 
@@ -78,6 +82,9 @@ TODO: sort out what happens to `glance.aov()`
 
 ## New tidiers, features and bugfixes
 
+- Add option to `lfe::felm` for robust and cluster standard errors (#772)
+
+- Added tidier for `car::Anova` (#754)
 
 - Added tidier for `summary.manova` (#729)
 
@@ -133,6 +140,8 @@ TODO: sort out what happens to `glance.aov()`
   column, which is typically the rightmost column.
 
 - `tidy.lmodel2()` now returns a `p.value` column (#570)
+
+- Added `tidy.summary_emm()` (#691 by @crsh)
 
 - `tidy.zoo()` now doesn't change column names that have spaces or other
 special characters (previously they were converted to data.frame friendly

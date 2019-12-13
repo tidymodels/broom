@@ -62,6 +62,9 @@
 #' ggplot(tidy(by_price), aes(price2, estimate, color = day)) +
 #'   geom_line() +
 #'   geom_errorbar(aes(ymin = conf.low, ymax = conf.high))
+#'   
+#' # joint_tests
+#' tidy(joint_tests(oranges_lm1))
 #'
 #' @aliases emmeans_tidiers
 #' @export
@@ -126,9 +129,43 @@ tidy.emmGrid <- function(x, ...) {
   tidy_emmeans(x, ...)
 }
 
+#' @templateVar class summary_emm
+#' @template title_desc_tidy
+#' 
+#' @param x An `summary_emm` object.
+#' @inherit tidy.lsmobj params examples details 
+#'   
+#' @evalRd return_tidy(
+#'   "std.error", 
+#'   "df", 
+#'   "num.df",
+#'   "den.df",
+#'   "conf.low", 
+#'   "conf.high",
+#'   level1 = "One level of the factor being contrasted",
+#'   level2 = "The other level of the factor being contrasted",
+#'   "contrast",
+#'   term = "Model term in joint tests",
+#'   "p.value",
+#'   statistic = "T-ratio statistic or F-ratio statistic",
+#'   estimate = "Estimated least-squares mean."
+#' )
+#'
+#' @export
+#' @family emmeans tidiers
+#' @seealso [tidy()], [emmeans::ref_grid()], [emmeans::emmeans()],
+#'   [emmeans::contrast()]
+tidy.summary_emm <- function(x, ...) {
+  tidy_emmeans_summary(x, ...)
+}
+
 tidy_emmeans <- function(x, ...) {
   s <- summary(x, ...)
-  ret <- as.data.frame(s)
+  tidy_emmeans_summary(s)
+}
+
+tidy_emmeans_summary <- function(x) {
+  ret <- as.data.frame(x)
   repl <- list(
     "lsmean" = "estimate",
     "emmean" = "estimate",
@@ -137,17 +174,27 @@ tidy_emmeans <- function(x, ...) {
     "SE" = "std.error",
     "lower.CL" = "conf.low",
     "upper.CL" = "conf.high",
-    "t.ratio" = "statistic"
+    "t.ratio" = "statistic",
+    "F.ratio" = "statistic",
+    "df1" = "num.df",
+    "df2" = "den.df",
+    "model term" = "term"
   )
-
+  
   if ("contrast" %in% colnames(ret) &&
-    all(stringr::str_detect(ret$contrast, " - "))) {
+      all(stringr::str_detect(ret$contrast, " - "))) {
     ret <- tidyr::separate_(ret, "contrast",
-      c("level1", "level2"),
-      sep = " - "
+                            c("level1", "level2"),
+                            sep = " - "
     )
   }
-
+  
   colnames(ret) <- dplyr::recode(colnames(ret), !!!(repl))
+  
+  if("term" %in% colnames(ret)) {
+    ret <- ret %>%
+      mutate(term = stringr::str_trim(term))
+  }
+  
   as_tibble(ret)
 }

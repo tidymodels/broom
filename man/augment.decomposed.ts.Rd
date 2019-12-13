@@ -122,6 +122,7 @@ ggplot(decomps) +
 \seealso{
 \code{\link[=augment]{augment()}}, \code{\link[stats:decompose]{stats::decompose()}}
 
-Other decompose tidiers: \code{\link{augment.stl}}
+Other decompose tidiers: 
+\code{\link{augment.stl}()}
 }
 \concept{decompose tidiers}

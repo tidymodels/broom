@@ -64,14 +64,19 @@ tidy(by_price)
 ggplot(tidy(by_price), aes(price2, estimate, color = day)) +
   geom_line() +
   geom_errorbar(aes(ymin = conf.low, ymax = conf.high))
+  
+# joint_tests
+tidy(joint_tests(oranges_lm1))
 
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[emmeans:ref_grid]{emmeans::ref_grid()}}, \code{\link[emmeans:emmeans]{emmeans::emmeans()}},
 \code{\link[emmeans:contrast]{emmeans::contrast()}}
 
-Other emmeans tidiers: \code{\link{tidy.emmGrid}},
-  \code{\link{tidy.lsmobj}}
+Other emmeans tidiers: 
+\code{\link{tidy.emmGrid}()},
+\code{\link{tidy.lsmobj}()},
+\code{\link{tidy.summary_emm}()}
 }
 \concept{emmeans tidiers}
 \value{

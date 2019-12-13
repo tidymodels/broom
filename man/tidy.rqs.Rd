@@ -5,8 +5,7 @@
 \alias{rqs_tidiers}
 \title{Tidy a(n) rqs object}
 \usage{
-\method{tidy}{rqs}(x, se.type = "rank", conf.int = FALSE,
-  conf.level = 0.95, ...)
+\method{tidy}{rqs}(x, se.type = "rank", conf.int = FALSE, conf.level = 0.95, ...)
 }
 \arguments{
 \item{x}{An \code{rqs} object returned from \code{\link[quantreg:rq]{quantreg::rq()}}.}
@@ -41,10 +40,14 @@ set to NA.
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[quantreg:rq]{quantreg::rq()}}
 
-Other quantreg tidiers: \code{\link{augment.nlrq}},
-  \code{\link{augment.rqs}}, \code{\link{augment.rq}},
-  \code{\link{glance.nlrq}}, \code{\link{glance.rq}},
-  \code{\link{tidy.nlrq}}, \code{\link{tidy.rq}}
+Other quantreg tidiers: 
+\code{\link{augment.nlrq}()},
+\code{\link{augment.rqs}()},
+\code{\link{augment.rq}()},
+\code{\link{glance.nlrq}()},
+\code{\link{glance.rq}()},
+\code{\link{tidy.nlrq}()},
+\code{\link{tidy.rq}()}
 }
 \concept{quantreg tidiers}
 \value{

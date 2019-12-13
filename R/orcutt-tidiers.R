@@ -30,11 +30,11 @@
 #' @family orcutt tidiers
 #' @seealso [orcutt::cochrane.orcutt()]
 tidy.orcutt <- function(x, ...) {
-  warning("deal with tidy.orcutt conf.int nonsense")
-  dots <- enquos(...)
-  dots$conf.int <- FALSE
-
-  rlang::exec(tidy.lm, x, !!!dots)
+  s <- summary(x)
+  co <- stats::coef(s)
+  ret <- as_tibble(co, rownames = "term")
+  names(ret) <- c("term", "estimate", "std.error", "statistic", "p.value")
+  ret
 }
 
 #' @templateVar class orcutt

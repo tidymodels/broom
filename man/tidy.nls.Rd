@@ -56,8 +56,9 @@ augment(n, newdata = newdata)
 \seealso{
 \link{tidy}, \code{\link[stats:nls]{stats::nls()}}, \code{\link[stats:summary.nls]{stats::summary.nls()}}
 
-Other nls tidiers: \code{\link{augment.nls}},
-  \code{\link{glance.nls}}
+Other nls tidiers: 
+\code{\link{augment.nls}()},
+\code{\link{glance.nls}()}
 }
 \concept{nls tidiers}
 \value{

@@ -28,7 +28,12 @@ accept a \code{newdata} argument, it will use the default value for
 the \code{data} argument.}
 }
 \description{
-This method wraps \code{\link[=tidy.lm]{tidy.lm()}}.
+Tidy summarizes information about the components of a model.
+A model component might be a single term in a regression, a single
+hypothesis, a cluster, or a class. Exactly what tidy considers to be a
+model component varies cross models but is usually self-evident.
+If a model has several distinct types of components, you will need to
+specify which components to return.
 }
 \examples{
 
@@ -40,12 +45,23 @@ augment(mod)
 
 }
 \seealso{
-\code{\link[=tidy]{tidy()}}, \code{\link[=tidy.lm]{tidy.lm()}}
+\code{\link[speedglm:speedlm]{speedglm::speedlm()}}, \code{\link[=tidy.lm]{tidy.lm()}}
 
-\code{\link[speedglm:speedlm]{speedglm::speedlm()}}
-
-Other speedlm tidiers: \code{\link{augment.speedlm}},
-  \code{\link{glance.speedglm}},
-  \code{\link{glance.speedlm}}, \code{\link{tidy.speedglm}}
+Other speedlm tidiers: 
+\code{\link{augment.speedlm}()},
+\code{\link{glance.speedglm}()},
+\code{\link{glance.speedlm}()},
+\code{\link{tidy.speedglm}()}
 }
 \concept{speedlm tidiers}
+\value{
+A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
+  \item{conf.high}{Upper bound on the confidence interval for the estimate.}
+  \item{conf.low}{Lower bound on the confidence interval for the estimate.}
+  \item{estimate}{The estimated value of the regression term.}
+  \item{p.value}{The two-sided p-value associated with the observed statistic.}
+  \item{statistic}{The value of a T-statistic to use in a hypothesis that the regression term is non-zero.}
+  \item{std.error}{The standard error of the regression term.}
+  \item{term}{The name of the regression term.}
+
+}

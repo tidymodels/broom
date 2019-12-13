@@ -97,7 +97,8 @@ glance(m)
 \seealso{
 \code{\link[=augment]{augment()}}, \code{\link[mclust:Mclust]{mclust::Mclust()}}
 
-Other mclust tidiers: \code{\link{tidy.Mclust}}
+Other mclust tidiers: 
+\code{\link{tidy.Mclust}()}
 }
 \concept{mclust tidiers}
 \value{

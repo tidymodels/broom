@@ -31,7 +31,8 @@ For tidiers for models from the \pkg{robust} package see
 \seealso{
 \code{\link[MASS:rlm]{MASS::rlm()}}
 
-Other rlm tidiers: \code{\link{augment.rlm}},
-  \code{\link{glance.rlm}}
+Other rlm tidiers: 
+\code{\link{augment.rlm}()},
+\code{\link{glance.rlm}()}
 }
 \concept{rlm tidiers}
