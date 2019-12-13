@@ -52,6 +52,7 @@ confint.rlm <- confint.default
 #' 
 #' @param x An `rlm` object returned by [MASS::rlm()].
 #' @template param_confint
+#' @template param_unused_dots
 #' 
 #' @details For tidiers for models from the \pkg{robust} package see
 #'   [tidy.lmRob()] and [tidy.glmRob()].

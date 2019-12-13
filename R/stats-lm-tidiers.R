@@ -2,8 +2,7 @@
 #' @template title_desc_tidy
 #'
 #' @param x An `lm` object created by [stats::lm()].
-#' @template param_confint 
-#' @template param_exponentiate
+#' @template param_confint
 #' @template param_unused_dots
 #'
 #' @evalRd return_tidy(regression = TRUE)

@@ -2,7 +2,9 @@
 #' @template title_desc_tidy
 #'
 #' @param x A `glm` object returned from [stats::glm()].
+#' @template param_confint
 #' @template param_exponentiate
+#' @template param_unused_dots
 #'
 #' @export
 #' @family lm tidiers
