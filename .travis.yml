@@ -39,7 +39,6 @@ r_check_args: "--no-build-vignettes --as-cran"
     
 matrix:
   allow_failures:
-    - r: 3.1
     - r: 3.2
     - r: 3.3
 
@@ -69,5 +68,3 @@ r_github_packages:
 
 after_success:
   - Rscript -e 'covr::codecov()'
-  - R CMD INSTALL $PKG_TARBALL
-  - Rscript -e 'lintr::lint_package()'
