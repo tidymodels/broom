@@ -67,7 +67,7 @@
 #' @export
 #' @seealso [tidy()], [stats::summary.lm()]
 #' @family lm tidiers
-tidy.lm <- function(x, conf.int = FALSE, conf.level = .95, ...) {
+tidy.lm <- function(x, conf.int = FALSE, conf.level = 0.95, ...) {
   
   # error on inappropriate subclassing
   # TODO: undo gee / mclogit and other catches

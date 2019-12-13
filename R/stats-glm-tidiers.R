@@ -17,7 +17,7 @@ tidy.glm <- function(x, conf.int = FALSE, conf.level = .95,
   # summary.lm() sets to NA), catch them here and add them back
   
   coefs <- tibble::enframe(stats::coef(x), name = "term", value = "estimate")
-  ret <- left_join(coefs, ret)
+  ret <- left_join(coefs, ret, by = "term")
   
   if (conf.int) {
     ci <- broom_confint_terms(x, level = conf.level)
