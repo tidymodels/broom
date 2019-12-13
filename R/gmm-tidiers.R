@@ -33,12 +33,12 @@
 #' # coefficient plot
 #' library(ggplot2)
 #' library(dplyr)
+#' 
 #' tidy(res, conf.int = TRUE) %>%
-#'   mutate(variable = reorder(variable, estimate)) %>%
+#'   mutate(variable = reorder(term, estimate)) %>%
 #'   ggplot(aes(estimate, variable)) +
 #'   geom_point() +
 #'   geom_errorbarh(aes(xmin = conf.low, xmax = conf.high)) +
-#'   facet_wrap(~ term) +
 #'   geom_vline(xintercept = 0, color = "red", lty = 2)
 #'
 #' # from a function instead of a matrix
@@ -66,11 +66,10 @@
 #'
 #' # coefficient plot
 #' td2 %>%
-#'   mutate(variable = reorder(variable, estimate)) %>%
+#'   mutate(variable = reorder(term, estimate)) %>%
 #'   ggplot(aes(estimate, variable)) +
 #'   geom_point() +
 #'   geom_errorbarh(aes(xmin = conf.low, xmax = conf.high)) +
-#'   facet_wrap(~ term) +
 #'   geom_vline(xintercept = 0, color = "red", lty = 2)
 #'
 #' @export
