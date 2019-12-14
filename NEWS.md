@@ -162,6 +162,7 @@ column names by `make.names`)
 
 ### Bug fixes
 
+- Bug fix to return confidence intervals correct in `tidy.drc()` (#798)
 - Bug fix to better allow `tidy.boot()` to support confidence intervals (#581)
 - Bug fix to allow `augment.kmeans()` to work with masked data (#609)
 - Bug fix to allow `augment.Mclust()` to work on univariate data (#490)

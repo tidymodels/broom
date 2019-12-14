@@ -37,10 +37,7 @@ specify which components to return.
 }
 \details{
 If the linear model is an \code{mlm} object (multiple linear model),
-there is an additional column \code{response}.
-
-If you have missing values in your model data, you may need to refit
-the model with \code{na.action = na.exclude}.
+there is an additional column \code{response}. See \code{\link[=tidy.mlm]{tidy.mlm()}}.
 }
 \examples{
 

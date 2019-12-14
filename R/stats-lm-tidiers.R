@@ -8,10 +8,7 @@
 #' @evalRd return_tidy(regression = TRUE)
 #'
 #' @details If the linear model is an `mlm` object (multiple linear model),
-#'   there is an additional column `response`.
-#'
-#'   If you have missing values in your model data, you may need to refit
-#'   the model with `na.action = na.exclude`.
+#'   there is an additional column `response`. See [tidy.mlm()].
 #'
 #' @examples
 #'
