@@ -293,7 +293,6 @@ the <code>data</code> argument.</p></td>
 <span class='no'>fit</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/MASS/man/polr.html'>polr</a></span>(<span class='no'>Sat</span> ~ <span class='no'>Infl</span> + <span class='no'>Type</span> + <span class='no'>Cont</span>, <span class='kw'>weights</span> <span class='kw'>=</span> <span class='no'>Freq</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>housing</span>)
 
 <span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>fit</span>, <span class='kw'>exponentiate</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>conf.int</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Re-fitting to get Hessian</span></div><div class='output co'>#&gt; <span class='message'>Waiting for profiling to be done...</span></div><div class='output co'>#&gt; <span class='message'></span>
 #&gt; <span class='message'>Re-fitting to get Hessian</span></div><div class='output co'>#&gt; # A tibble: 8 x 7
 #&gt;   term          estimate std.error statistic conf.low conf.high coef.type  
 #&gt;   &lt;chr&gt;            &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;      
