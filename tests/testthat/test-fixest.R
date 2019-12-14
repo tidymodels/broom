@@ -47,7 +47,7 @@ test_that("glance.fixest", {
   gl2 <- glance(fit2)
 
   check_glance_outputs(gl, gl2)
-  check_dims(gl, expected_cols = 8)
+  check_dims(gl, expected_cols = 9)
 })
 
 test_that("augment.fixest", {

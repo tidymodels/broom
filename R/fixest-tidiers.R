@@ -18,6 +18,13 @@
 #'   fixest object, or 2) explicitly as part of the tidy call. See examples
 #'   below.
 #'
+#'   Note that fixest confindence intervals are calculated assuming a normal
+#'   distribution -- this assumes infinite degrees of freedom for the CI.
+#'   (This assumption is distinct from the degrees of freedom used to calculate
+#'   the standard errors. For more on degrees of freedom with clusters and
+#'   fixed effects, see https://github.com/lrberge/fixest/issues/6 and
+#'   https://github.com/sgaure/lfe/issues/1#issuecomment-530646990)
+#'
 #' @examples
 #' \donttest{
 #' library(fixest)
@@ -173,20 +180,19 @@ augment.fixest <- function(x, data = NULL, newdata = NULL, type.predict="link", 
 #' @note The columns of the result depend on the type of model estimated.
 #'
 #' @return A one-row [tibble::tibble()] with exactly one row and columns:
-#'
-#' - logLik The log-likelihood of the model. [stats::logLik()] may be a useful
-#'   reference.
-#' - AIC Akaike's Information Criterion for the model.
-#' - BIC Bayesian Information Criterion for the model.
-#' - nobs Number of observations used.
-#' - sigma (`feols` models only)
-#' - r.squared (`feols` models only)
-#' - adj.r.squared Adjusted R squared statistic, which is like the R squared
-#'   statistic except taking degrees of freedom into account. (`feols` models only)
-#' - within.r.squared R squared within fixed-effect groups (`feols` models only)
-#' - pseudo.r.squared Like the R squared statistic, but for situations when the
-#'   R squared statistic isn't defined. (non-`feols` models only)
-#'
+#' Note that `sigma`, `r.squared`, `adj.r.squared`, and `within.r.squared` will
+#' be NA for any model other than `feols`. `pseudo.r.squared` is NA for feols.
+#' @evalRd return_glance(
+#'   "r.squared",
+#'   "adj.r.squared",
+#'   "within.r.squared",
+#'   "pseudo.r.squared",
+#'   "sigma",
+#'   "nobs",
+#'   "AIC",
+#'   "BIC",
+#'   "logLik"
+#' )
 #' @export
 glance.fixest <- function(x, ...) {
   stopifnot(length(x$method) == 1)
@@ -201,12 +207,12 @@ glance.fixest <- function(x, ...) {
   if (identical(x$method, "feols")) {
     r2_vals <- fixest::r2(x, type = c("r2", "ar2", "wr2"))
     r2_names <- c("r.squared", "adj.r.squared", "within.r.squared")
-
     # Pull the summary objects that are specific to OLS
     res_specific <- with(
       summary(x, ...),
       tibble(
         sigma = sqrt(sigma2),
+        pseudo.r.squared = NA_real_, # always NA for OLS
       )
     )
   } else {
@@ -214,14 +220,26 @@ glance.fixest <- function(x, ...) {
     # requires re-estimating the model, so don't do it.
     # Also, these are now pseudo R2. Could use adjusted pseudo R2, but that
     # isn't supported by modeltests, and seems niche.
-    r2_vals <- fixest::r2(x, type = c("pr2"))
-    r2_names <- c("pseudo.r.squared")
+    r2_vals <- fixest::r2(x, type = "pr2")
+    r2_names <- "pseudo.r.squared"
 
     # Currently no other stats for non-OLS models (beyond pseudo R2, logLik,
     # AIC, BIC, and nobs), but you could add them if you wanted.
-    res_specific <- tibble()
+    # Fill in the sigma and other R2 values with NA.
+    res_specific <- tibble(
+      sigma = NA_real_,
+      r.squared = NA_real_,
+      adj.r.squared = NA_real_,
+      within.r.squared = NA_real_,
+    )
   }
+  # Some of these will be NA, depending on the model, but for consistency we'll
+  # always return all four R2 values.
   names(r2_vals) <- r2_names
   res_r2 <- tibble(!!!r2_vals)
-  bind_cols(res_common, res_r2, res_specific)
+  col_order <- c("r.squared", "adj.r.squared", "within.r.squared",
+    "pseudo.r.squared", "sigma", "nobs", "AIC", "BIC", "logLik")
+  res <- bind_cols(res_common, res_r2, res_specific) %>%
+    select(col_order)
+  res
 }

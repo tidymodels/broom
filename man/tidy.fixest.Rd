@@ -38,6 +38,13 @@ similar vein, the \code{tidy()} method for these models allows users to specify
 a desired standard error correction either 1) implicitly via the supplied
 fixest object, or 2) explicitly as part of the tidy call. See examples
 below.
+
+Note that fixest confindence intervals are calculated assuming a normal
+distribution -- this assumes infinite degrees of freedom for the CI.
+(This assumption is distinct from the degrees of freedom used to calculate
+the standard errors. For more on degrees of freedom with clusters and
+fixed effects, see https://github.com/lrberge/fixest/issues/6 and
+https://github.com/sgaure/lfe/issues/1#issuecomment-530646990)
 }
 \examples{
 \donttest{

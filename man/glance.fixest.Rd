@@ -16,20 +16,8 @@ See \code{\link[fixest:summary.fixest]{summary.fixest}}.}
 }
 \value{
 A one-row \code{\link[tibble:tibble]{tibble::tibble()}} with exactly one row and columns:
-\itemize{
-\item logLik The log-likelihood of the model. \code{\link[stats:logLik]{stats::logLik()}} may be a useful
-reference.
-\item AIC Akaike's Information Criterion for the model.
-\item BIC Bayesian Information Criterion for the model.
-\item nobs Number of observations used.
-\item sigma (\code{feols} models only)
-\item r.squared (\code{feols} models only)
-\item adj.r.squared Adjusted R squared statistic, which is like the R squared
-statistic except taking degrees of freedom into account. (\code{feols} models only)
-\item within.r.squared R squared within fixed-effect groups (\code{feols} models only)
-\item pseudo.r.squared Like the R squared statistic, but for situations when the
-R squared statistic isn't defined. (non-\code{feols} models only)
-}
+Note that \code{sigma}, \code{r.squared}, \code{adj.r.squared}, and \code{within.r.squared} will
+be NA for any model other than \code{feols}. \code{pseudo.r.squared} is NA for feols.
 }
 \description{
 Glance accepts a model object and returns a \code{\link[tibble:tibble]{tibble::tibble()}}
@@ -72,5 +60,18 @@ tidy(gravity_pois)
 glance(gravity_pois)
 augment(gravity_pois, trade)
 }
+
+}
+\value{
+A \code{\link[tibble:tibble]{tibble::tibble()}} with exactly one row and columns:
+  \item{adj.r.squared}{Adjusted R squared statistic, which is like the R squared statistic except taking degrees of freedom into account.}
+  \item{AIC}{Akaike's Information Criterion for the model.}
+  \item{BIC}{Bayesian Information Criterion for the model.}
+  \item{logLik}{The log-likelihood of the model. [stats::logLik()] may be a useful reference.}
+  \item{nobs}{Number of observations used.}
+  \item{pseudo.r.squared}{Like the R squared statistic, but for situations when the R squared statistic isn't defined.}
+  \item{r.squared}{R squared statistic, or the percent of variation explained by the model. Also known as the coefficient of determination.}
+  \item{sigma}{Estimated standard error of the residuals.}
+  \item{within.r.squared}{R squared within fixed-effect groups}
 
 }
