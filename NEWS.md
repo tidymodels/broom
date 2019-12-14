@@ -16,6 +16,8 @@ changes in this version of `broom`. We list them below-
     (e.g., `factor1`, `factor2`, `factor3`, etc.) (#650).
     
   - We have removed all support for the `quick` argument in `tidy()` methods. TODO: explain why, and discuss alternatives.
+  
+  - Remove `tidy.summary.lm()`. Call `tidy()` on the `lm` object directly. General philosophy: call `tidy()` on model objects, not model summary objects.
     
 ## Changes to `augment()`
 
@@ -73,6 +75,10 @@ TODO: sort out what happens to `glance.aov()`
 - All `conf.level` arguments now default to `0.95`.
 
 - `tidy.lsmobj()` gained a `conf.int` argument
+
+## The great `lm` disentanglement
+
+- `tidy()` no longer checks for a log or logit link when `exponentiate = TRUE`, as internals have been to refactored to remove extraneous `exponentiate` arguments. If you set `exponentiate`, we assume you know what you are doing and that you want exponentiate coefficients (and confidence intervals if `conf.int = TRUE`) regardless of link function.
 
 ## New tidiers, features and bugfixes
 

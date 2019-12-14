@@ -13,17 +13,16 @@
 "Hotelling-Lawley" (Hotelling-Lawley trace) or "Roy" (Roy's greatest root)
 indicating which test statistic should be used. Defaults to "Pillai".}
 
-\item{...}{Arguments passed on to \code{stats::summary.manova}
-\describe{
-  \item{object}{An object of class \code{"manova"} or an \code{aov}
+\item{...}{
+  Arguments passed on to \code{\link[stats:summary.manova]{stats::summary.manova}}
+  \describe{
+    \item{\code{object}}{An object of class \code{"manova"} or an \code{aov}
     object with multiple responses.}
-  \item{test}{The name of the test statistic to be used.  Partial
-    matching is used so the name can be abbreviated.}
-  \item{intercept}{logical.  If \code{TRUE}, the intercept term is
+    \item{\code{intercept}}{logical.  If \code{TRUE}, the intercept term is
     included in the table.}
-  \item{tol}{tolerance to be used in deciding if the residuals are
+    \item{\code{tol}}{tolerance to be used in deciding if the residuals are
     rank-deficient: see \code{\link{qr}}.}
-}}
+  }}
 }
 \description{
 Tidy summarizes information about the components of a model.
@@ -47,10 +46,13 @@ tidy(m)
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[stats:summary.manova]{stats::summary.manova()}}
 
-Other anova tidiers: \code{\link{glance.aov}},
-  \code{\link{tidy.TukeyHSD}}, \code{\link{tidy.anova}},
-  \code{\link{tidy.aovlist}}, \code{\link{tidy.aov}},
-  \code{\link{tidy.summary.manova}}
+Other anova tidiers: 
+\code{\link{glance.aov}()},
+\code{\link{tidy.TukeyHSD}()},
+\code{\link{tidy.anova}()},
+\code{\link{tidy.aovlist}()},
+\code{\link{tidy.aov}()},
+\code{\link{tidy.summary.manova}()}
 }
 \concept{anova tidiers}
 \value{

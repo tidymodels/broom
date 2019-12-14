@@ -44,19 +44,27 @@ glance(s)
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[survival:survdiff]{survival::survdiff()}}
 
-Other survdiff tidiers: \code{\link{glance.survdiff}}
+Other survdiff tidiers: 
+\code{\link{glance.survdiff}()}
 
-Other survival tidiers: \code{\link{augment.coxph}},
-  \code{\link{augment.survreg}},
-  \code{\link{glance.aareg}}, \code{\link{glance.cch}},
-  \code{\link{glance.coxph}}, \code{\link{glance.pyears}},
-  \code{\link{glance.survdiff}},
-  \code{\link{glance.survexp}},
-  \code{\link{glance.survfit}},
-  \code{\link{glance.survreg}}, \code{\link{tidy.aareg}},
-  \code{\link{tidy.cch}}, \code{\link{tidy.coxph}},
-  \code{\link{tidy.pyears}}, \code{\link{tidy.survexp}},
-  \code{\link{tidy.survfit}}, \code{\link{tidy.survreg}}
+Other survival tidiers: 
+\code{\link{augment.coxph}()},
+\code{\link{augment.survreg}()},
+\code{\link{glance.aareg}()},
+\code{\link{glance.cch}()},
+\code{\link{glance.coxph}()},
+\code{\link{glance.pyears}()},
+\code{\link{glance.survdiff}()},
+\code{\link{glance.survexp}()},
+\code{\link{glance.survfit}()},
+\code{\link{glance.survreg}()},
+\code{\link{tidy.aareg}()},
+\code{\link{tidy.cch}()},
+\code{\link{tidy.coxph}()},
+\code{\link{tidy.pyears}()},
+\code{\link{tidy.survexp}()},
+\code{\link{tidy.survfit}()},
+\code{\link{tidy.survreg}()}
 }
 \concept{survdiff tidiers}
 \concept{survival tidiers}

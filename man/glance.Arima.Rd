@@ -44,7 +44,8 @@ glance(fit)
 \seealso{
 \code{\link[stats:arima]{stats::arima()}}
 
-Other Arima tidiers: \code{\link{tidy.Arima}}
+Other Arima tidiers: 
+\code{\link{tidy.Arima}()}
 }
 \concept{Arima tidiers}
 \value{
