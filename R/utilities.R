@@ -70,8 +70,6 @@ has_rownames <- function(df) {
 #'
 #' @return a data.frame, with rownames moved into a column and new column
 #' names assigned
-#'
-#' @export
 fix_data_frame <- function(x, newnames = NULL, newcol = "term") {
   if (!is.null(newnames) && length(newnames) != ncol(x)) {
     stop("newnames must be NULL or have length equal to number of columns")
@@ -104,18 +102,6 @@ unrowname <- function(x) {
   rownames(x) <- NULL
   x
 }
-
-
-#' insert a row of NAs into a data frame wherever another data frame has NAs
-#'
-#' @param x data frame that has one row for each non-NA row in original
-#' @param original data frame with NAs
-insert_NAs <- function(x, original) {
-  indices <- rep(NA, nrow(original))
-  indices[which(stats::complete.cases(original))] <- seq_len(nrow(x))
-  x[indices, ]
-}
-
 
 #' add fitted values, residuals, and other common outputs to
 #' an augment call
