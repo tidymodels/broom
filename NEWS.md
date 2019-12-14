@@ -145,6 +145,8 @@ column names by `make.names`)
 
 - `tidy.ridgelm()` will now always return a `GCV` column and never returns an
   `xm` column (#532)
+  
+- `by_class` is now `by.class` in `tidy.confusionMatrix()` (#757)  
 
 ### Bug fixes
 

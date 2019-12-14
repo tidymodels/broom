@@ -266,7 +266,12 @@ Authors@R:
              family = "Cahoon",
              role = "ctb",
              email = "joyceyu48@gmail.com",
-             comment = c(ORCID = "0000-0001-7217-4702")))
+             comment = c(ORCID = "0000-0001-7217-4702")),
+      person(given = "Sushmita",
+             family = "V Gopalan",
+             role = "ctb",
+             email = "sushmitavgopalan@gmail.com")))
+             
 Description: Summarizes key information about statistical
     objects in tidy tibbles. This makes it easy to report results, create
     plots and consistently work with large numbers of models at once.
