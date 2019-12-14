@@ -34,7 +34,8 @@ specify which components to return.
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[stats:density]{stats::density()}}
 
-Other stats tidiers: \code{\link{tidy.dist}},
-  \code{\link{tidy.ftable}}
+Other stats tidiers: 
+\code{\link{tidy.dist}()},
+\code{\link{tidy.ftable}()}
 }
 \concept{stats tidiers}

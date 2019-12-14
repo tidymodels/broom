@@ -4,7 +4,7 @@
 #' @param x A `loess` objects returned by [stats::loess()].
 #' @template param_data
 #' @template param_newdata
-#' @inheritDotParams stats:::predict.loess
+#' @param ... Arguments passed on the loess predict method.
 #'
 #' @template augment_NAs
 #'
@@ -35,7 +35,7 @@
 #'
 #' @aliases loess_tidiers
 #' @export
-#' @seealso [augment()], [stats::loess()], [stats::predict.loess()]
+#' @seealso [augment()], [stats::loess()]
 augment.loess <- function(x, data = stats::model.frame(x), newdata, ...) {
   augment_columns(x, data, newdata, se.fit = FALSE, se = TRUE, ...)
 }

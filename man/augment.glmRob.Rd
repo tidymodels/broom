@@ -9,25 +9,25 @@
 \arguments{
 \item{x}{A \code{glmRob} object returned from \code{\link[robust:glmRob]{robust::glmRob()}}.}
 
-\item{...}{Arguments passed on to \code{augment.lm}
-\describe{
-  \item{data}{A \code{\link[=data.frame]{data.frame()}} or \code{\link[tibble:tibble]{tibble::tibble()}} containing the original
+\item{...}{
+  Arguments passed on to \code{\link[=augment.lm]{augment.lm}}
+  \describe{
+    \item{\code{data}}{A \code{\link[=data.frame]{data.frame()}} or \code{\link[tibble:tibble]{tibble::tibble()}} containing the original
 data that was used to produce the object \code{x}. Defaults to
 \code{stats::model.frame(x)} so that \code{augment(my_fit)} returns the augmented
 original data. \strong{Do not} pass new data to the \code{data} argument.
 Augment will report information such as influence and cooks distance for
 data passed to the \code{data} argument. These measures are only defined for
 the original training data.}
-  \item{newdata}{A \code{\link[=data.frame]{data.frame()}} or \code{\link[tibble:tibble]{tibble::tibble()}} containing all
+    \item{\code{newdata}}{A \code{\link[=data.frame]{data.frame()}} or \code{\link[tibble:tibble]{tibble::tibble()}} containing all
 the original predictors used to create \code{x}. Defaults to \code{NULL}, indicating
 that nothing has been passed to \code{newdata}. If \code{newdata} is specified,
 the \code{data} argument will be ignored.}
-  \item{type.predict}{Type of predictions to use when \code{x} is a \code{glm} object.
+    \item{\code{type.predict}}{Type of predictions to use when \code{x} is a \code{glm} object.
 Passed to \code{\link[stats:predict.glm]{stats::predict.glm()}}.}
-  \item{type.residuals}{Type of residuals to use when \code{x} is a \code{glm} object.
+    \item{\code{type.residuals}}{Type of residuals to use when \code{x} is a \code{glm} object.
 Passed to \code{\link[stats:residuals.glm]{stats::residuals.glm()}}.}
-  \item{x}{An \code{lm} object created by \code{\link[stats:lm]{stats::lm()}}.}
-}}
+  }}
 }
 \value{
 When \code{newdata} is not supplied \code{augment.lm} returns
@@ -65,8 +65,11 @@ For tidiers for robust models from the \pkg{MASS} package see
 
 \code{\link[robust:glmRob]{robust::glmRob()}}
 
-Other robust tidiers: \code{\link{augment.lmRob}},
-  \code{\link{glance.glmRob}}, \code{\link{glance.lmRob}},
-  \code{\link{tidy.glmRob}}, \code{\link{tidy.lmRob}}
+Other robust tidiers: 
+\code{\link{augment.lmRob}()},
+\code{\link{glance.glmRob}()},
+\code{\link{glance.lmRob}()},
+\code{\link{tidy.glmRob}()},
+\code{\link{tidy.lmRob}()}
 }
 \concept{robust tidiers}

@@ -50,6 +50,7 @@ To glance \code{Gam} objects created by calls to \code{\link[gam:gam]{gam::gam()
 \seealso{
 \code{\link[=glance]{glance()}}, \code{\link[mgcv:gam]{mgcv::gam()}}, \code{\link[=glance.Gam]{glance.Gam()}}
 
-Other mgcv tidiers: \code{\link{tidy.gam}}
+Other mgcv tidiers: 
+\code{\link{tidy.gam}()}
 }
 \concept{mgcv tidiers}

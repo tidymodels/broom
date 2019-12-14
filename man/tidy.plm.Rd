@@ -5,8 +5,7 @@
 \alias{plm_tidiers}
 \title{Tidy a(n) plm object}
 \usage{
-\method{tidy}{plm}(x, conf.int = FALSE, conf.level = 0.95,
-  exponentiate = FALSE, ...)
+\method{tidy}{plm}(x, conf.int = FALSE, conf.level = 0.95, exponentiate = FALSE, ...)
 }
 \arguments{
 \item{x}{A \code{plm} objected returned by \code{\link[plm:plm]{plm::plm()}}.}
@@ -78,7 +77,8 @@ glance(zz)
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[plm:plm]{plm::plm()}}, \code{\link[=tidy.lm]{tidy.lm()}}
 
-Other plm tidiers: \code{\link{augment.plm}},
-  \code{\link{glance.plm}}
+Other plm tidiers: 
+\code{\link{augment.plm}()},
+\code{\link{glance.plm}()}
 }
 \concept{plm tidiers}

@@ -15,31 +15,65 @@
 \alias{glance.svyolr}
 \title{Tidying methods for ordinal logistic regression models}
 \usage{
-\method{tidy}{polr}(x, conf.int = FALSE, conf.level = 0.95,
-  exponentiate = FALSE, quick = FALSE, ...)
+\method{tidy}{polr}(
+  x,
+  conf.int = FALSE,
+  conf.level = 0.95,
+  exponentiate = FALSE,
+  quick = FALSE,
+  ...
+)
 
 \method{glance}{polr}(x, ...)
 
-\method{augment}{polr}(x, data = stats::model.frame(x), newdata,
-  type.predict = c("probs", "class"), ...)
+\method{augment}{polr}(
+  x,
+  data = stats::model.frame(x),
+  newdata,
+  type.predict = c("probs", "class"),
+  ...
+)
 
-\method{tidy}{clm}(x, conf.int = FALSE, conf.level = 0.95,
-  exponentiate = FALSE, quick = FALSE, conf.type = c("profile",
-  "Wald"), ...)
+\method{tidy}{clm}(
+  x,
+  conf.int = FALSE,
+  conf.level = 0.95,
+  exponentiate = FALSE,
+  quick = FALSE,
+  conf.type = c("profile", "Wald"),
+  ...
+)
 
-\method{tidy}{clmm}(x, conf.int = FALSE, conf.level = 0.95,
-  exponentiate = FALSE, quick = FALSE, conf.type = c("profile",
-  "Wald"), ...)
+\method{tidy}{clmm}(
+  x,
+  conf.int = FALSE,
+  conf.level = 0.95,
+  exponentiate = FALSE,
+  quick = FALSE,
+  conf.type = c("profile", "Wald"),
+  ...
+)
 
 \method{glance}{clm}(x, ...)
 
 \method{glance}{clmm}(x, ...)
 
-\method{augment}{clm}(x, data = stats::model.frame(x), newdata,
-  type.predict = c("prob", "class"), ...)
+\method{augment}{clm}(
+  x,
+  data = stats::model.frame(x),
+  newdata,
+  type.predict = c("prob", "class"),
+  ...
+)
 
-\method{tidy}{svyolr}(x, conf.int = FALSE, conf.level = 0.95,
-  exponentiate = FALSE, quick = FALSE, ...)
+\method{tidy}{svyolr}(
+  x,
+  conf.int = FALSE,
+  conf.level = 0.95,
+  exponentiate = FALSE,
+  quick = FALSE,
+  ...
+)
 
 \method{glance}{svyolr}(x, ...)
 }

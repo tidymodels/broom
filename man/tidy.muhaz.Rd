@@ -46,6 +46,7 @@ if (require("muhaz", quietly = TRUE)) {
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[muhaz:muhaz]{muhaz::muhaz()}}
 
-Other muhaz tidiers: \code{\link{glance.muhaz}}
+Other muhaz tidiers: 
+\code{\link{glance.muhaz}()}
 }
 \concept{muhaz tidiers}

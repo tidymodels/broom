@@ -5,9 +5,15 @@
 \alias{tidy.brmsfit}
 \title{Tidying methods for a brms model}
 \usage{
-\method{tidy}{brmsfit}(x, parameters = NA, par_type = c("all",
-  "non-varying", "varying", "hierarchical"), robust = FALSE,
-  intervals = TRUE, prob = 0.9, ...)
+\method{tidy}{brmsfit}(
+  x,
+  parameters = NA,
+  par_type = c("all", "non-varying", "varying", "hierarchical"),
+  robust = FALSE,
+  intervals = TRUE,
+  prob = 0.9,
+  ...
+)
 }
 \arguments{
 \item{x}{Fitted model object from the \pkg{brms} package. See
@@ -29,7 +35,7 @@ than mean and standard deviation.}
 posterior uncertainty intervals are included.}
 
 \item{prob}{Defines the range of the posterior uncertainty intervals,
-such that \code{100 * prob}\% of the parameter's posterior distribution
+such that \code{100 * prob}\\% of the parameter's posterior distribution
 lies within the corresponding interval.
 Only used if \code{intervals = TRUE}.}
 

@@ -6,8 +6,14 @@
 \alias{geepack_tidiers}
 \title{Tidy a(n) geeglm object}
 \usage{
-\method{tidy}{geeglm}(x, conf.int = FALSE, conf.level = 0.95,
-  exponentiate = FALSE, quick = FALSE, ...)
+\method{tidy}{geeglm}(
+  x,
+  conf.int = FALSE,
+  conf.level = 0.95,
+  exponentiate = FALSE,
+  quick = FALSE,
+  ...
+)
 }
 \arguments{
 \item{x}{A \code{geeglm} object returned from a call to \code{\link[geepack:geeglm]{geepack::geeglm()}}.}

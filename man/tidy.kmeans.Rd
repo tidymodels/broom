@@ -10,7 +10,7 @@
 \arguments{
 \item{x}{A \code{kmeans} object created by \code{\link[stats:kmeans]{stats::kmeans()}}.}
 
-\item{col.names}{Dimension names. Defaults to \code{x1, x2, ...}}
+\item{col.names}{Dimension names. Defaults to \verb{x1, x2, ...}}
 
 \item{...}{Additional arguments. Not used. Needed to match generic
 signature only. \strong{Cautionary note:} Misspelled arguments will be
@@ -43,7 +43,8 @@ For examples, see the kmeans vignette.
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[stats:kmeans]{stats::kmeans()}}
 
-Other kmeans tidiers: \code{\link{augment.kmeans}},
-  \code{\link{glance.kmeans}}
+Other kmeans tidiers: 
+\code{\link{augment.kmeans}()},
+\code{\link{glance.kmeans}()}
 }
 \concept{kmeans tidiers}

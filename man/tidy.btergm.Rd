@@ -5,8 +5,7 @@
 \alias{btergm_tidiers}
 \title{Tidy a(n) btergm object}
 \usage{
-\method{tidy}{btergm}(x, conf.level = 0.95, exponentiate = FALSE,
-  quick = FALSE, ...)
+\method{tidy}{btergm}(x, conf.level = 0.95, exponentiate = FALSE, quick = FALSE, ...)
 }
 \arguments{
 \item{x}{A \code{\link[btergm:btergm]{btergm::btergm()}} object.}

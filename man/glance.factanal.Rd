@@ -52,7 +52,8 @@ the measure will be reported as \code{NA}.
 \seealso{
 \code{\link[=glance]{glance()}}, \code{\link[stats:factanal]{stats::factanal()}}
 
-Other factanal tidiers: \code{\link{augment.factanal}},
-  \code{\link{tidy.factanal}}
+Other factanal tidiers: 
+\code{\link{augment.factanal}()},
+\code{\link{tidy.factanal}()}
 }
 \concept{factanal tidiers}

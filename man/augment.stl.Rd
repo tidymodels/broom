@@ -76,6 +76,7 @@ missing at this time.
 \seealso{
 \code{\link[=augment]{augment()}}, \code{\link[stats:stl]{stats::stl()}}
 
-Other decompose tidiers: \code{\link{augment.decomposed.ts}}
+Other decompose tidiers: 
+\code{\link{augment.decomposed.ts}()}
 }
 \concept{decompose tidiers}

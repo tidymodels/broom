@@ -49,6 +49,7 @@ the measure will be reported as \code{NA}.
 \seealso{
 \code{\link[=glance]{glance()}}, \code{\link[orcutt:cochrane.orcutt]{orcutt::cochrane.orcutt()}}
 
-Other orcutt tidiers: \code{\link{tidy.orcutt}}
+Other orcutt tidiers: 
+\code{\link{tidy.orcutt}()}
 }
 \concept{orcutt tidiers}

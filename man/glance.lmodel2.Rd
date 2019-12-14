@@ -21,10 +21,12 @@ the \code{data} argument.}
 }
 \value{
 A one-row \link[tibble:tibble]{tibble::tibble} with columns:
-\item{r.squared}{OLS R-squared}
-\item{p.value}{OLS parametric p-value}
-\item{theta}{Angle between OLS lines \code{lm(y ~ x)} and \code{lm(x ~ y)}}
-\item{H}{H statistic for computing confidence interval of major axis slope}
+\itemize{
+\item \code{r.squared}: OLS R-squared
+\item \code{p.value}: OLS parametric p-value
+\item \code{theta}: Angle between OLS lines \code{lm(y ~ x)} and \code{lm(x ~ y)}
+\item \code{H}: H statistic for computing confidence interval of major axis slope
+}
 }
 \description{
 Glance accepts a model object and returns a \code{\link[tibble:tibble]{tibble::tibble()}}
@@ -44,6 +46,7 @@ the measure will be reported as \code{NA}.
 \seealso{
 \code{\link[=glance]{glance()}}, \code{\link[lmodel2:lmodel2]{lmodel2::lmodel2()}}
 
-Other lmodel2 tidiers: \code{\link{tidy.lmodel2}}
+Other lmodel2 tidiers: 
+\code{\link{tidy.lmodel2}()}
 }
 \concept{lmodel2 tidiers}

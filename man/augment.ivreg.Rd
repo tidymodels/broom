@@ -104,7 +104,8 @@ glance(ivr)
 \seealso{
 \code{\link[=augment]{augment()}}, \code{\link[AER:ivreg]{AER::ivreg()}}
 
-Other ivreg tidiers: \code{\link{glance.ivreg}},
-  \code{\link{tidy.ivreg}}
+Other ivreg tidiers: 
+\code{\link{glance.ivreg}()},
+\code{\link{tidy.ivreg}()}
 }
 \concept{ivreg tidiers}

@@ -53,6 +53,7 @@ glance(dax.garch)
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[tseries:garch]{tseries::garch()}}
 
-Other garch tidiers: \code{\link{glance.garch}}
+Other garch tidiers: 
+\code{\link{glance.garch}()}
 }
 \concept{garch tidiers}

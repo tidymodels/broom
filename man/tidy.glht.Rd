@@ -60,8 +60,9 @@ if (require("multcomp") && require("ggplot2")) {
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[multcomp:glht]{multcomp::glht()}}
 
-Other multcomp tidiers: \code{\link{tidy.cld}},
-  \code{\link{tidy.confint.glht}},
-  \code{\link{tidy.summary.glht}}
+Other multcomp tidiers: 
+\code{\link{tidy.cld}()},
+\code{\link{tidy.confint.glht}()},
+\code{\link{tidy.summary.glht}()}
 }
 \concept{multcomp tidiers}

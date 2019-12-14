@@ -77,6 +77,7 @@ missing at this time.
 \seealso{
 \code{\link[=augment]{augment()}}, \code{\link[lfe:felm]{lfe::felm()}}
 
-Other felm tidiers: \code{\link{tidy.felm}}
+Other felm tidiers: 
+\code{\link{tidy.felm}()}
 }
 \concept{felm tidiers}

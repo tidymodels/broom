@@ -9,22 +9,22 @@
 \arguments{
 \item{x}{A \code{glm} object returned from \code{\link[stats:glm]{stats::glm()}}.}
 
-\item{...}{Arguments passed on to \code{tidy.lm}
-\describe{
-  \item{x}{An \code{lm} object created by \code{\link[stats:lm]{stats::lm()}}.}
-  \item{conf.int}{Logical indicating whether or not to include a confidence
+\item{...}{
+  Arguments passed on to \code{\link[=tidy.lm]{tidy.lm}}
+  \describe{
+    \item{\code{conf.int}}{Logical indicating whether or not to include a confidence
 interval in the tidied output. Defaults to \code{FALSE}.}
-  \item{conf.level}{The confidence level to use for the confidence interval
+    \item{\code{conf.level}}{The confidence level to use for the confidence interval
 if \code{conf.int = TRUE}. Must be strictly greater than 0 and less than 1.
 Defaults to 0.95, which corresponds to a 95 percent confidence interval.}
-  \item{quick}{Logical indiciating if the only the \code{term} and \code{estimate}
+    \item{\code{quick}}{Logical indiciating if the only the \code{term} and \code{estimate}
 columns should be returned. Often useful to avoid time consuming
 covariance and standard error calculations. Defaults to \code{FALSE}.}
-  \item{exponentiate}{Logical indicating whether or not to exponentiate the
+    \item{\code{exponentiate}}{Logical indicating whether or not to exponentiate the
 the coefficient estimates. This is typical for logistic and multinomial
 regressions, but a bad idea if there is no log or logit link. Defaults
 to \code{FALSE}.}
-}}
+  }}
 }
 \value{
 A \code{\link[tibble:tibble]{tibble::tibble()}} with one row for each term in the
@@ -56,8 +56,11 @@ This method wraps \code{\link[=tidy.lm]{tidy.lm()}}.
 
 \code{\link[stats:glm]{stats::glm()}}
 
-Other lm tidiers: \code{\link{augment.glm}},
-  \code{\link{augment.lm}}, \code{\link{glance.glm}},
-  \code{\link{glance.lm}}, \code{\link{tidy.lm}}
+Other lm tidiers: 
+\code{\link{augment.glm}()},
+\code{\link{augment.lm}()},
+\code{\link{glance.glm}()},
+\code{\link{glance.lm}()},
+\code{\link{tidy.lm}()}
 }
 \concept{lm tidiers}

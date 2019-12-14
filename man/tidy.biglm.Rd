@@ -4,8 +4,14 @@
 \alias{tidy.biglm}
 \title{Tidy a(n) biglm object}
 \usage{
-\method{tidy}{biglm}(x, conf.int = FALSE, conf.level = 0.95,
-  exponentiate = FALSE, quick = FALSE, ...)
+\method{tidy}{biglm}(
+  x,
+  conf.int = FALSE,
+  conf.level = 0.95,
+  exponentiate = FALSE,
+  quick = FALSE,
+  ...
+)
 }
 \arguments{
 \item{x}{A \code{biglm} object created by a call to \code{\link[biglm:biglm]{biglm::biglm()}} or
@@ -86,6 +92,7 @@ if (require("biglm", quietly = TRUE)) {
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[biglm:biglm]{biglm::biglm()}}, \code{\link[biglm:bigglm]{biglm::bigglm()}}
 
-Other biglm tidiers: \code{\link{glance.biglm}}
+Other biglm tidiers: 
+\code{\link{glance.biglm}()}
 }
 \concept{biglm tidiers}

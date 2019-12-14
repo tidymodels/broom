@@ -6,8 +6,7 @@
 \alias{glance.stanreg}
 \title{Tidying methods for an rstanarm model}
 \usage{
-\method{tidy}{stanreg}(x, parameters = "non-varying",
-  intervals = FALSE, prob = 0.9, ...)
+\method{tidy}{stanreg}(x, parameters = "non-varying", intervals = FALSE, prob = 0.9, ...)
 
 \method{glance}{stanreg}(x, looic = FALSE, ...)
 }
@@ -20,7 +19,7 @@
 Value section for details.}
 
 \item{intervals}{If \code{TRUE} columns for the lower and upper bounds of the
-\code{100*prob}\% posterior uncertainty intervals are included. See
+\code{100*prob}\\% posterior uncertainty intervals are included. See
 \code{\link[rstanarm:posterior_interval]{rstanarm::posterior_interval()}} for details.}
 
 \item{prob}{See \code{\link[rstanarm:posterior_interval]{rstanarm::posterior_interval()}}.}

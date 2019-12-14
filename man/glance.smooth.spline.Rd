@@ -40,6 +40,7 @@ specify which components to return.
 \seealso{
 \code{\link[=augment]{augment()}}, \code{\link[stats:smooth.spline]{stats::smooth.spline()}}
 
-Other smoothing spline tidiers: \code{\link{augment.smooth.spline}}
+Other smoothing spline tidiers: 
+\code{\link{augment.smooth.spline}()}
 }
 \concept{smoothing spline tidiers}

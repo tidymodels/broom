@@ -44,6 +44,7 @@ the measure will be reported as \code{NA}.
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[MASS:fitdistr]{MASS::fitdistr()}}
 
-Other fitdistr tidiers: \code{\link{tidy.fitdistr}}
+Other fitdistr tidiers: 
+\code{\link{tidy.fitdistr}()}
 }
 \concept{fitdistr tidiers}

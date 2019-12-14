@@ -78,8 +78,9 @@ how residuals are computed.
 \seealso{
 \code{\link[=augment]{augment()}}, \code{\link[stats:chisq.test]{stats::chisq.test()}}
 
-Other htest tidiers: \code{\link{tidy.htest}},
-  \code{\link{tidy.pairwise.htest}},
-  \code{\link{tidy.power.htest}}
+Other htest tidiers: 
+\code{\link{tidy.htest}()},
+\code{\link{tidy.pairwise.htest}()},
+\code{\link{tidy.power.htest}()}
 }
 \concept{htest tidiers}

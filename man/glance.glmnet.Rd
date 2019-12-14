@@ -42,7 +42,9 @@ the measure will be reported as \code{NA}.
 \seealso{
 \code{\link[=glance]{glance()}}, \code{\link[glmnet:glmnet]{glmnet::glmnet()}}
 
-Other glmnet tidiers: \code{\link{glance.cv.glmnet}},
-  \code{\link{tidy.cv.glmnet}}, \code{\link{tidy.glmnet}}
+Other glmnet tidiers: 
+\code{\link{glance.cv.glmnet}()},
+\code{\link{tidy.cv.glmnet}()},
+\code{\link{tidy.glmnet}()}
 }
 \concept{glmnet tidiers}

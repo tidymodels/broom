@@ -6,8 +6,14 @@
 \alias{tidy.summary.lm}
 \title{Tidy a(n) lm object}
 \usage{
-\method{tidy}{lm}(x, conf.int = FALSE, conf.level = 0.95,
-  exponentiate = FALSE, quick = FALSE, ...)
+\method{tidy}{lm}(
+  x,
+  conf.int = FALSE,
+  conf.level = 0.95,
+  exponentiate = FALSE,
+  quick = FALSE,
+  ...
+)
 
 \method{tidy}{summary.lm}(x, ...)
 }
@@ -127,8 +133,11 @@ tidy(result)
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[stats:summary.lm]{stats::summary.lm()}}
 
-Other lm tidiers: \code{\link{augment.glm}},
-  \code{\link{augment.lm}}, \code{\link{glance.glm}},
-  \code{\link{glance.lm}}, \code{\link{tidy.glm}}
+Other lm tidiers: 
+\code{\link{augment.glm}()},
+\code{\link{augment.lm}()},
+\code{\link{glance.glm}()},
+\code{\link{glance.lm}()},
+\code{\link{tidy.glm}()}
 }
 \concept{lm tidiers}

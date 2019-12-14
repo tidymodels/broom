@@ -11,10 +11,10 @@ tidy_irlba(x, ...)
 \arguments{
 \item{x}{A list returned from \code{\link[irlba:irlba]{irlba::irlba()}}.}
 
-\item{...}{Arguments passed on to \code{tidy_svd}
-\describe{
-  \item{x}{A list with components \code{u}, \code{d}, \code{v} returned by \code{\link[=svd]{svd()}}.}
-  \item{matrix}{Character specifying which component of the PCA should be
+\item{...}{
+  Arguments passed on to \code{\link[=tidy_svd]{tidy_svd}}
+  \describe{
+    \item{\code{matrix}}{Character specifying which component of the PCA should be
 tidied.
 \itemize{
 \item \code{"u"}, \code{"samples"}, or \code{"x"}: returns information about the map from
@@ -24,7 +24,7 @@ map from principle components space back into the original space.
 \item \code{"d"} or \code{"pcs"}: returns information about the eigenvalues
 will return information about
 }}
-}}
+  }}
 }
 \value{
 A \link[tibble:tibble]{tibble::tibble} with columns depending on the component of
@@ -64,8 +64,8 @@ they do not have a class attribute, they cannot be handled by S3 dispatch.
 
 These functions look at the elements of a list and determine if there is
 an appropriate tidying method to apply to the list. Those tidiers are
-themselves are implemented as functions of the form \code{tidy_<function>}
-or \code{glance_<function>} and are not exported (but they are documented!).
+themselves are implemented as functions of the form \verb{tidy_<function>}
+or \verb{glance_<function>} and are not exported (but they are documented!).
 
 If no appropriate tidying method is found, throws an error.
 }
@@ -75,12 +75,17 @@ A very thin wrapper around \code{\link[=tidy_svd]{tidy_svd()}}.
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[irlba:irlba]{irlba::irlba()}}
 
-Other list tidiers: \code{\link{glance_optim}},
-  \code{\link{list_tidiers}}, \code{\link{tidy_optim}},
-  \code{\link{tidy_svd}}, \code{\link{tidy_xyz}}
+Other list tidiers: 
+\code{\link{glance_optim}()},
+\code{\link{list_tidiers}},
+\code{\link{tidy_optim}()},
+\code{\link{tidy_svd}()},
+\code{\link{tidy_xyz}()}
 
-Other svd tidiers: \code{\link{augment.prcomp}},
-  \code{\link{tidy.prcomp}}, \code{\link{tidy_svd}}
+Other svd tidiers: 
+\code{\link{augment.prcomp}()},
+\code{\link{tidy.prcomp}()},
+\code{\link{tidy_svd}()}
 }
 \concept{list tidiers}
 \concept{svd tidiers}

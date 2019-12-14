@@ -50,6 +50,7 @@ glance(g)
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[mgcv:gam]{mgcv::gam()}}, \code{\link[=tidy.Gam]{tidy.Gam()}}
 
-Other mgcv tidiers: \code{\link{glance.gam}}
+Other mgcv tidiers: 
+\code{\link{glance.gam}()}
 }
 \concept{mgcv tidiers}

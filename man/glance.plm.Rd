@@ -48,7 +48,8 @@ the measure will be reported as \code{NA}.
 \seealso{
 \code{\link[=glance]{glance()}}, \code{\link[plm:plm]{plm::plm()}}
 
-Other plm tidiers: \code{\link{augment.plm}},
-  \code{\link{tidy.plm}}
+Other plm tidiers: 
+\code{\link{augment.plm}()},
+\code{\link{tidy.plm}()}
 }
 \concept{plm tidiers}

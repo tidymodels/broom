@@ -74,7 +74,8 @@ missing at this time.
 \seealso{
 \code{\link[=augment]{augment()}}, \code{\link[stats:kmeans]{stats::kmeans()}}
 
-Other kmeans tidiers: \code{\link{glance.kmeans}},
-  \code{\link{tidy.kmeans}}
+Other kmeans tidiers: 
+\code{\link{glance.kmeans}()},
+\code{\link{tidy.kmeans}()}
 }
 \concept{kmeans tidiers}

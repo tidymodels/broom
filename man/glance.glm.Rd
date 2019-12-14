@@ -54,8 +54,11 @@ glance(g)
 \seealso{
 \code{\link[stats:glm]{stats::glm()}}
 
-Other lm tidiers: \code{\link{augment.glm}},
-  \code{\link{augment.lm}}, \code{\link{glance.lm}},
-  \code{\link{tidy.glm}}, \code{\link{tidy.lm}}
+Other lm tidiers: 
+\code{\link{augment.glm}()},
+\code{\link{augment.lm}()},
+\code{\link{glance.lm}()},
+\code{\link{tidy.glm}()},
+\code{\link{tidy.lm}()}
 }
 \concept{lm tidiers}

@@ -56,8 +56,11 @@ the measure will be reported as \code{NA}.
 \seealso{
 \code{\link[=glance]{glance()}}
 
-Other lm tidiers: \code{\link{augment.glm}},
-  \code{\link{augment.lm}}, \code{\link{glance.glm}},
-  \code{\link{tidy.glm}}, \code{\link{tidy.lm}}
+Other lm tidiers: 
+\code{\link{augment.glm}()},
+\code{\link{augment.lm}()},
+\code{\link{glance.glm}()},
+\code{\link{tidy.glm}()},
+\code{\link{tidy.lm}()}
 }
 \concept{lm tidiers}

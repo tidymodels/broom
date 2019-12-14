@@ -7,16 +7,41 @@
 \alias{tidy.stanfit}
 \title{Tidying methods for MCMC (Stan, JAGS, etc.) fits}
 \usage{
-tidyMCMC(x, pars, estimate.method = "mean", conf.int = FALSE,
-  conf.level = 0.95, conf.method = "quantile", droppars = "lp__",
-  rhat = FALSE, ess = FALSE, ...)
+tidyMCMC(
+  x,
+  pars,
+  estimate.method = "mean",
+  conf.int = FALSE,
+  conf.level = 0.95,
+  conf.method = "quantile",
+  droppars = "lp__",
+  rhat = FALSE,
+  ess = FALSE,
+  ...
+)
 
-\method{tidy}{rjags}(x, pars, estimate.method = "mean",
-  conf.int = FALSE, conf.level = 0.95, conf.method = "quantile", ...)
+\method{tidy}{rjags}(
+  x,
+  pars,
+  estimate.method = "mean",
+  conf.int = FALSE,
+  conf.level = 0.95,
+  conf.method = "quantile",
+  ...
+)
 
-\method{tidy}{stanfit}(x, pars, estimate.method = "mean",
-  conf.int = FALSE, conf.level = 0.95, conf.method = "quantile",
-  droppars = "lp__", rhat = FALSE, ess = FALSE, ...)
+\method{tidy}{stanfit}(
+  x,
+  pars,
+  estimate.method = "mean",
+  conf.int = FALSE,
+  conf.level = 0.95,
+  conf.method = "quantile",
+  droppars = "lp__",
+  rhat = FALSE,
+  ess = FALSE,
+  ...
+)
 }
 \arguments{
 \item{x}{an object of class \sQuote{"stanfit"}}

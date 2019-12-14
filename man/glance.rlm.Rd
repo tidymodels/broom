@@ -62,7 +62,8 @@ glance(r)
 \seealso{
 \code{\link[=glance]{glance()}}, \code{\link[MASS:rlm]{MASS::rlm()}}
 
-Other rlm tidiers: \code{\link{augment.rlm}},
-  \code{\link{tidy.rlm}}
+Other rlm tidiers: 
+\code{\link{augment.rlm}()},
+\code{\link{tidy.rlm}()}
 }
 \concept{rlm tidiers}

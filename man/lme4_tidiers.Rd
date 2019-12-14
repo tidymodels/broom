@@ -7,9 +7,16 @@
 \alias{glance.merMod}
 \title{Tidying methods for mixed effects models}
 \usage{
-\method{tidy}{merMod}(x, effects = c("ran_pars", "fixed"),
-  scales = NULL, ran_prefix = NULL, conf.int = FALSE,
-  conf.level = 0.95, conf.method = "Wald", ...)
+\method{tidy}{merMod}(
+  x,
+  effects = c("ran_pars", "fixed"),
+  scales = NULL,
+  ran_prefix = NULL,
+  conf.int = FALSE,
+  conf.level = 0.95,
+  conf.method = "Wald",
+  ...
+)
 
 \method{augment}{merMod}(x, data = stats::model.frame(x), newdata, ...)
 
@@ -62,7 +69,7 @@ with columns (each prepended by a .) added. Included are the columns
 
 Also added for "merMod" objects, but not for "mer" objects,
 are values from the response object within the model (of type
-\code{lmResp}, \code{glmResp}, \code{nlsResp}, etc). These include \code{".mu", ".offset", ".sqrtXwt", ".sqrtrwt", ".eta"}.
+\code{lmResp}, \code{glmResp}, \code{nlsResp}, etc). These include \verb{".mu", ".offset", ".sqrtXwt", ".sqrtrwt", ".eta"}.
 
 \code{glance} returns one row with the columns
 \item{sigma}{the square root of the estimated residual variance}

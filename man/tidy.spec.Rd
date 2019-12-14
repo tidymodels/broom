@@ -43,7 +43,9 @@ ggplot(tidy(spc), aes(freq, spec)) +
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[stats:spectrum]{stats::spectrum()}}
 
-Other time series tidiers: \code{\link{tidy.acf}},
-  \code{\link{tidy.ts}}, \code{\link{tidy.zoo}}
+Other time series tidiers: 
+\code{\link{tidy.acf}()},
+\code{\link{tidy.ts}()},
+\code{\link{tidy.zoo}()}
 }
 \concept{time series tidiers}

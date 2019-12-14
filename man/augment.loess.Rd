@@ -23,16 +23,7 @@ the original predictors used to create \code{x}. Defaults to \code{NULL}, indica
 that nothing has been passed to \code{newdata}. If \code{newdata} is specified,
 the \code{data} argument will be ignored.}
 
-\item{...}{Arguments passed on to \code{stats:::predict.loess}
-\describe{
-  \item{object}{an object fitted by \code{loess}.}
-  \item{newdata}{an optional data frame in which to look for variables with
-    which to predict, or a matrix or vector containing exactly the variables
-    needs for prediction.  If missing, the original data points are used.}
-  \item{se}{should standard errors be computed?}
-  \item{na.action}{function determining what should be done with missing
-    values in data frame \code{newdata}.  The default is to predict \code{NA}.}
-}}
+\item{...}{Arguments passed on the loess predict method.}
 }
 \value{
 When \code{newdata} is not supplied \code{augment.loess}
@@ -82,5 +73,5 @@ augment(lo, newdata = head(mtcars))
 \seealso{
 \link{na.action}
 
-\code{\link[=augment]{augment()}}, \code{\link[stats:loess]{stats::loess()}}, \code{\link[stats:predict.loess]{stats::predict.loess()}}
+\code{\link[=augment]{augment()}}, \code{\link[stats:loess]{stats::loess()}}
 }

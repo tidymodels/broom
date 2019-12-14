@@ -45,8 +45,11 @@ the measure will be reported as \code{NA}.
 \seealso{
 \code{\link[robust:lmRob]{robust::lmRob()}}
 
-Other robust tidiers: \code{\link{augment.glmRob}},
-  \code{\link{augment.lmRob}}, \code{\link{glance.glmRob}},
-  \code{\link{tidy.glmRob}}, \code{\link{tidy.lmRob}}
+Other robust tidiers: 
+\code{\link{augment.glmRob}()},
+\code{\link{augment.lmRob}()},
+\code{\link{glance.glmRob}()},
+\code{\link{tidy.glmRob}()},
+\code{\link{tidy.lmRob}()}
 }
 \concept{robust tidiers}

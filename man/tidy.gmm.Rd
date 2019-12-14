@@ -5,8 +5,14 @@
 \alias{gmm_tidiers}
 \title{Tidy a(n) gmm object}
 \usage{
-\method{tidy}{gmm}(x, conf.int = FALSE, conf.level = 0.95,
-  exponentiate = FALSE, quick = FALSE, ...)
+\method{tidy}{gmm}(
+  x,
+  conf.int = FALSE,
+  conf.level = 0.95,
+  exponentiate = FALSE,
+  quick = FALSE,
+  ...
+)
 }
 \arguments{
 \item{x}{A \code{gmm} object returned from \code{\link[gmm:gmm]{gmm::gmm()}}.}
@@ -133,6 +139,7 @@ if (requireNamespace("gmm", quietly = TRUE)) {
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[gmm:gmm]{gmm::gmm()}}
 
-Other gmm tidiers: \code{\link{glance.gmm}}
+Other gmm tidiers: 
+\code{\link{glance.gmm}()}
 }
 \concept{gmm tidiers}

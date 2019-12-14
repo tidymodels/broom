@@ -52,7 +52,8 @@ if (require("binGroup", quietly = TRUE)) {
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[binGroup:binDesign]{binGroup::binDesign()}}
 
-Other bingroup tidiers: \code{\link{glance.binDesign}},
-  \code{\link{tidy.binWidth}}
+Other bingroup tidiers: 
+\code{\link{glance.binDesign}()},
+\code{\link{tidy.binWidth}()}
 }
 \concept{bingroup tidiers}

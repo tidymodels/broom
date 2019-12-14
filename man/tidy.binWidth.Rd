@@ -61,7 +61,8 @@ if (require("binGroup", quietly = TRUE)) {
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[binGroup:binWidth]{binGroup::binWidth()}}
 
-Other bingroup tidiers: \code{\link{glance.binDesign}},
-  \code{\link{tidy.binDesign}}
+Other bingroup tidiers: 
+\code{\link{glance.binDesign}()},
+\code{\link{tidy.binDesign}()}
 }
 \concept{bingroup tidiers}

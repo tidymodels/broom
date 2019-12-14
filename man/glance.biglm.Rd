@@ -45,6 +45,7 @@ the measure will be reported as \code{NA}.
 \seealso{
 \code{\link[=glance]{glance()}}, \code{\link[biglm:biglm]{biglm::biglm()}}, \code{\link[biglm:bigglm]{biglm::bigglm()}}
 
-Other biglm tidiers: \code{\link{tidy.biglm}}
+Other biglm tidiers: 
+\code{\link{tidy.biglm}()}
 }
 \concept{biglm tidiers}

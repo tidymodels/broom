@@ -6,8 +6,7 @@
 \alias{aer_tidiers}
 \title{Tidy a(n) ivreg object}
 \usage{
-\method{tidy}{ivreg}(x, conf.int = FALSE, conf.level = 0.95,
-  exponentiate = FALSE, ...)
+\method{tidy}{ivreg}(x, conf.int = FALSE, conf.level = 0.95, exponentiate = FALSE, ...)
 }
 \arguments{
 \item{x}{An \code{ivreg} object created by a call to \code{\link[AER:ivreg]{AER::ivreg()}}.}
@@ -83,7 +82,8 @@ glance(ivr)
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[AER:ivreg]{AER::ivreg()}}
 
-Other ivreg tidiers: \code{\link{augment.ivreg}},
-  \code{\link{glance.ivreg}}
+Other ivreg tidiers: 
+\code{\link{augment.ivreg}()},
+\code{\link{glance.ivreg}()}
 }
 \concept{ivreg tidiers}
