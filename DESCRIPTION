@@ -396,6 +396,7 @@ Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.0.2
 Collate:
     'aaa-documentation-helper.R'
+    'null-and-default-tidiers.R'
     'aer-tidiers.R'
     'auc-tidiers.R'
     'base-tidiers.R'
@@ -416,7 +417,6 @@ Collate:
     'ergm-tidiers.R'
     'gam-tidiers.R'
     'gamlss-tidiers.R'
-    'null-and-default-tidiers.R'
     'gee.R'
     'geepack-tidiers.R'
     'glmnet-cv-glmnet-tidiers.R'
