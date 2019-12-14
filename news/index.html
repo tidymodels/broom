@@ -159,6 +159,9 @@
 <div id="breaking-changes" class="section level2">
 <h2 class="hasAnchor">
 <a href="#breaking-changes" class="anchor"></a>Breaking changes</h2>
+<ul>
+<li>no longer export <code>confint_tidy()</code>, and in fact has been removed.</li>
+</ul>
 <p>Removing few bugs and achieving internal consistency has led to few breaking changes in this version of <code>broom</code>. We list them below-</p>
 <ul>
 <li>New <code>glance.aov</code> method replaces the older one which relied on <code>glance.lm</code>. The new model summary dataframe contains following information- <code>logLik</code>, <code>AIC</code>, <code>BIC, deviance</code>, <code>nobs</code>. This is in response to conversation that took place in <a href='https://github.com/tidymodels/broom/issues/212'>#212</a>. Note that <code>tidy.aov</code> can be used to get numerator and denominator degrees of freedom.</li>
