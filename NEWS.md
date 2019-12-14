@@ -23,10 +23,11 @@ This release features a number of unannounced hard-deprecations. I am sorry that
 
 ### Deprecations
 
-This release of `broom` hard-deprecates the following tidiers:
+This release of `broom` hard-deprecates the following functions and tidiers:
 
 - Data frame, rowwise data frame, vector and matrix tidiers have been removed from `broom`
 - `bootstrap()`
+- `confint_tidy()`
 - `glance.summary.lm()`
 - `augment.glmRob()`
 - `tidy.table()` and `tidy.ftable()` have been deprecated in favor of
@@ -155,6 +156,7 @@ column names by `make.names`)
 
 ### Bug fixes
 
+- Bug fix to return confidence intervals correct in tidy.drc() (#798)
 - Bug fix to better allow `tidy.boot()` to support confidence intervals (#581)
 - Bug fix to allow `augment.kmeans()` to work with masked data (#609)
 - Bug fix to allow `augment.Mclust()` to work on univariate data (#490)
