@@ -19,7 +19,6 @@ knitr::opts_chunk$set(
 [![CRAN status](https://www.r-pkg.org/badges/version/broom)](https://cran.r-project.org/package=broom)
 [![Travis-CI Build Status](https://travis-ci.org/tidyverse/broom.svg?branch=master)](https://travis-ci.org/tidyverse/broom)
 [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/tidyverse/broom?branch=master&svg=true)](https://ci.appveyor.com/project/tidyverse/broom)
-[![Coverage Status](https://img.shields.io/codecov/c/github/tidyverse/broom/master.svg)](https://codecov.io/github/tidyverse/broom?branch=master)
 
 ## Overview
 
@@ -84,4 +83,4 @@ We encourage typo corrections, bug reports, bug fixes and feature requests. Feed
 
 If you are interested in adding new tidiers methods to broom, please read `vignette("adding-tidiers")`.
 
-We have a [Contributor Code of Conduct](CODE_OF_CONDUCT.md). By participating in broom you agree to abide by its terms.
+We have a [Contributor Code of Conduct](https://github.com/tidymodels/broom/blob/master/.github/CODE_OF_CONDUCT.md). By participating in broom you agree to abide by its terms.

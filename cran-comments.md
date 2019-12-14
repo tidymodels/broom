@@ -2,6 +2,8 @@
 
 broom 0.5.3 is a minor release for compatibility with the new classing for matrix objects in R 4.0.0
 
+this is a resubmission that fixes a URL from the previous attempt
+
 ## Test environments
 
 - local windows 8 install: release
