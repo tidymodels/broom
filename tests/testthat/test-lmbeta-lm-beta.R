@@ -44,8 +44,4 @@ test_that("tidy.lm.beta works", {
   # shouldn't error. regression test for issues 166, 241
   # rows for confidence intervals of undefined terms should be dropped
   expect_error(tidy(fit_na_row, conf.int = TRUE), NA)
-  
-  # should drop the NA row
-  td_ci <- confint_tidy(fit_na_row)
-  expect_false(anyNA(td_ci))
 })

@@ -24,7 +24,7 @@ Defaults to 0.95, which corresponds to a 95 percent confidence interval.}
 \strong{Cautionary note}: Misspecified arguments may be silently ignored.}
 }
 \value{
-A \link[tibble:tibble]{tibble::tibble} with one row for each estimated parameter and
+A \code{\link[tibble:tibble]{tibble::tibble()}} with one row for each estimated parameter and
 columns:
 
 \item{term}{The result of paste(lhs, op, rhs)}

@@ -38,6 +38,7 @@ specify which components to return.
 \examples{
 
 fit <- arima(lh, order = c(1, 0, 0))
+
 tidy(fit)
 glance(fit)
 

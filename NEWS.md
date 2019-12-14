@@ -3,6 +3,8 @@
 
 ## Breaking changes
 
+- no longer export `confint_tidy()`, and in fact has been removed.
+
 Removing few bugs and achieving internal consistency has led to few breaking
 changes in this version of `broom`. We list them below-
 
