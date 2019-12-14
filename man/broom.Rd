@@ -33,7 +33,7 @@ Useful links:
 
 }
 \author{
-\strong{Maintainer}: Alex Hayes \email{alexpghayes@gmail.com} (0000-0002-4985-5160)
+\strong{Maintainer}: Alex Hayes \email{alexpghayes@gmail.com} (\href{https://orcid.org/0000-0002-4985-5160}{ORCID})
 
 Authors:
 \itemize{
@@ -42,7 +42,7 @@ Authors:
 
 Other contributors:
 \itemize{
-  \item Indrajeet Patil \email{patilindrajeet.science@gmail.com} (0000-0003-1995-6531) [contributor]
+  \item Indrajeet Patil \email{patilindrajeet.science@gmail.com} (\href{https://orcid.org/0000-0003-1995-6531}{ORCID}) [contributor]
   \item Derek Chiu \email{dchiu@bccrc.ca} [contributor]
   \item Matthieu Gomez \email{mattg@princeton.edu} [contributor]
   \item Boris Demeshev \email{boris.demeshev@gmail.com} [contributor]
@@ -81,30 +81,32 @@ Other contributors:
   \item Brian Fannin \email{captain@pirategrunt.com} [contributor]
   \item Jason Muhlenkamp \email{jason.muhlenkamp@gmail.com} [contributor]
   \item Matt Lehman [contributor]
-  \item Bill Denney \email{wdenney@humanpredictions.com} (0000-0002-5759-428X) [contributor]
+  \item Bill Denney \email{wdenney@humanpredictions.com} (\href{https://orcid.org/0000-0002-5759-428X}{ORCID}) [contributor]
   \item Nic Crane [contributor]
   \item Andrew Bates [contributor]
-  \item Vincent Arel-Bundock \email{vincent.arel-bundock@umontreal.ca} (0000-0003-2042-7063) [contributor]
+  \item Vincent Arel-Bundock \email{vincent.arel-bundock@umontreal.ca} (\href{https://orcid.org/0000-0003-2042-7063}{ORCID}) [contributor]
   \item Hideaki Hayashi [contributor]
   \item Luis Tobalina [contributor]
   \item Annie Wang \email{anniewang.uc@gmail.com} [contributor]
   \item Wei Yang Tham \email{weiyang.tham@gmail.com} [contributor]
   \item Clara Wang \email{clara.wang.94@gmail.com} [contributor]
-  \item Abby Smith \email{als1@u.northwestern.edu} (0000-0002-3207-0375) [contributor]
-  \item Jasper Cooper \email{jaspercooper@gmail.com} (0000-0002-8639-3188) [contributor]
-  \item E Auden Krauska \email{krauskae@gmail.com} (0000-0002-1466-5850) [contributor]
+  \item Abby Smith \email{als1@u.northwestern.edu} (\href{https://orcid.org/0000-0002-3207-0375}{ORCID}) [contributor]
+  \item Jasper Cooper \email{jaspercooper@gmail.com} (\href{https://orcid.org/0000-0002-8639-3188}{ORCID}) [contributor]
+  \item E Auden Krauska \email{krauskae@gmail.com} (\href{https://orcid.org/0000-0002-1466-5850}{ORCID}) [contributor]
   \item Alex Wang \email{x249wang@uwaterloo.ca} [contributor]
-  \item Malcolm Barrett \email{malcolmbarrett@gmail.com} (0000-0003-0299-5825) [contributor]
-  \item Charles Gray \email{charlestigray@gmail.com} (0000-0002-9978-011X) [contributor]
+  \item Malcolm Barrett \email{malcolmbarrett@gmail.com} (\href{https://orcid.org/0000-0003-0299-5825}{ORCID}) [contributor]
+  \item Charles Gray \email{charlestigray@gmail.com} (\href{https://orcid.org/0000-0002-9978-011X}{ORCID}) [contributor]
   \item Jared Wilber [contributor]
-  \item Vilmantas Gegzna \email{GegznaV@gmail.com} (0000-0002-9500-5167) [contributor]
+  \item Vilmantas Gegzna \email{GegznaV@gmail.com} (\href{https://orcid.org/0000-0002-9500-5167}{ORCID}) [contributor]
   \item Eduard Szoecs \email{eduardszoecs@gmail.com} [contributor]
-  \item Frederik Aust \email{frederik.aust@uni-koeln.de} (0000-0003-4900-788X) [contributor]
+  \item Frederik Aust \email{frederik.aust@uni-koeln.de} (\href{https://orcid.org/0000-0003-4900-788X}{ORCID}) [contributor]
   \item Angus Moore \email{angusmoore9@gmail.com} [contributor]
   \item Nick Williams \email{ntwilliams.personal@gmail.com} [contributor]
-  \item Marius Barth \email{marius.barth.uni.koeln@gmail.com} (0000-0002-3421-6665) [contributor]
-  \item Bruna Wundervald \email{brunadaviesw@gmail.com} (0000-0001-8163-220X) [contributor]
-  \item Joyce Cahoon \email{joyceyu48@gmail.com} (0000-0001-7217-4702) [contributor]
+  \item Marius Barth \email{marius.barth.uni.koeln@gmail.com} (\href{https://orcid.org/0000-0002-3421-6665}{ORCID}) [contributor]
+  \item Bruna Wundervald \email{brunadaviesw@gmail.com} (\href{https://orcid.org/0000-0001-8163-220X}{ORCID}) [contributor]
+  \item Joyce Cahoon \email{joyceyu48@gmail.com} (\href{https://orcid.org/0000-0001-7217-4702}{ORCID}) [contributor]
+  \item Kevin Zarca \email{kevin.zarca@gmail.com} [contributor]
+  \item Shiro Kuriwaki \email{shirokuriwaki@gmail.com} (\href{https://orcid.org/0000-0002-5687-2647}{ORCID}) [contributor]
 }
 
 }

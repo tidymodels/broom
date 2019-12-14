@@ -37,10 +37,14 @@ the measure will be reported as \code{NA}.
 \seealso{
 \code{\link[=glance]{glance()}}, \code{\link[quantreg:nlrq]{quantreg::nlrq()}}
 
-Other quantreg tidiers: \code{\link{augment.nlrq}},
-  \code{\link{augment.rqs}}, \code{\link{augment.rq}},
-  \code{\link{glance.rq}}, \code{\link{tidy.nlrq}},
-  \code{\link{tidy.rqs}}, \code{\link{tidy.rq}}
+Other quantreg tidiers: 
+\code{\link{augment.nlrq}()},
+\code{\link{augment.rqs}()},
+\code{\link{augment.rq}()},
+\code{\link{glance.rq}()},
+\code{\link{tidy.nlrq}()},
+\code{\link{tidy.rqs}()},
+\code{\link{tidy.rq}()}
 }
 \concept{quantreg tidiers}
 \value{

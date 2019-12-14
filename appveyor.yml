@@ -10,27 +10,15 @@ init:
 install:
   ps: Bootstrap
 
+cache:
+  - C:\RLibrary
+
 environment:
-  global:
-    USE_RTOOLS: true
-    #NOT_CRAN: true
-    _R_CHECK_FORCE_SUGGESTS: true
-    _R_CHECK_CRAN_INCOMING_: true
-    #R_CHECK_ARGS: "--run-dontrun"
-  matrix:
-  - R_VERSION: 3.5.0
-    R_ARCH: x64
-    GCC_PATH: mingw_64
-
-  - R_VERSION: devel
-    R_ARCH: x64
-    GCC_PATH: mingw_64
-
-  - R_VERSION: patched
-    GCC_PATH: mingw_32
-
-matrix:
-  fast_finish: true
+  NOT_CRAN: true
+  # env vars that may need to be set, at least temporarily, from time to time
+  # see https://github.com/krlmlr/r-appveyor#readme for details
+  # USE_RTOOLS: true
+  # R_REMOTES_STANDALONE: true
 
 # Adapt as necessary starting from here
 

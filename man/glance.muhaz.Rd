@@ -47,7 +47,8 @@ glance(x)
 \seealso{
 \code{\link[=glance]{glance()}}, \code{\link[muhaz:muhaz]{muhaz::muhaz()}}
 
-Other muhaz tidiers: \code{\link{tidy.muhaz}}
+Other muhaz tidiers: 
+\code{\link{tidy.muhaz}()}
 }
 \concept{muhaz tidiers}
 \value{

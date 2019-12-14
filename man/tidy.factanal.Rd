@@ -64,8 +64,9 @@ augment(fit2, data = m2)
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[stats:factanal]{stats::factanal()}}
 
-Other factanal tidiers: \code{\link{augment.factanal}},
-  \code{\link{glance.factanal}}
+Other factanal tidiers: 
+\code{\link{augment.factanal}()},
+\code{\link{glance.factanal}()}
 }
 \concept{factanal tidiers}
 \value{

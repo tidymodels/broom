@@ -59,12 +59,12 @@ tidy(res, conf.int = TRUE, conf.level = .99)
 # coefficient plot
 library(ggplot2)
 library(dplyr)
+
 tidy(res, conf.int = TRUE) \%>\%
-  mutate(variable = reorder(variable, estimate)) \%>\%
+  mutate(variable = reorder(term, estimate)) \%>\%
   ggplot(aes(estimate, variable)) +
   geom_point() +
   geom_errorbarh(aes(xmin = conf.low, xmax = conf.high)) +
-  facet_wrap(~ term) +
   geom_vline(xintercept = 0, color = "red", lty = 2)
 
 # from a function instead of a matrix
@@ -92,18 +92,18 @@ td2
 
 # coefficient plot
 td2 \%>\%
-  mutate(variable = reorder(variable, estimate)) \%>\%
+  mutate(variable = reorder(term, estimate)) \%>\%
   ggplot(aes(estimate, variable)) +
   geom_point() +
   geom_errorbarh(aes(xmin = conf.low, xmax = conf.high)) +
-  facet_wrap(~ term) +
   geom_vline(xintercept = 0, color = "red", lty = 2)
 
 }
 \seealso{
 \code{\link[=glance]{glance()}}, \code{\link[gmm:gmm]{gmm::gmm()}}
 
-Other gmm tidiers: \code{\link{tidy.gmm}}
+Other gmm tidiers: 
+\code{\link{tidy.gmm}()}
 }
 \concept{gmm tidiers}
 \value{

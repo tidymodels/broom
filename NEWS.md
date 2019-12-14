@@ -16,7 +16,9 @@ changes in this version of `broom`. We list them below-
     (e.g., `factor1`, `factor2`, `factor3`, etc.) (#650).
 
   - We have removed all support for the `quick` argument in `tidy()` methods. TODO: explain why, and discuss alternatives.
-
+  
+  - Remove `tidy.summary.lm()`. Call `tidy()` on the `lm` object directly. General philosophy: call `tidy()` on model objects, not model summary objects.
+    
 ## Changes to `augment()`
 
 have overhauled `augment()` for general consistency improvements (hopefully,
@@ -60,6 +62,10 @@ TODO: sort out what happens to `glance.aov()`
 - Added new vignette detailing use of `modelgenerics` and `modeltests` packages
 
 - Added `data` argument to `augment()` generic (did this happen?)
+- tidy.kmeans now defaults to using variable names in output columns
+- Bug fix for tidy.ridgelm returning inconsistent columns (#532)
+- Correct output for  `tidy.mlm(, quick=TRUE)`, add tests (#539 by @MatthieuStigler)
+
 
 ## Additional control over confidence intervals
 
@@ -70,7 +76,13 @@ TODO: sort out what happens to `glance.aov()`
 
 - `tidy.lsmobj()` gained a `conf.int` argument
 
+## The great `lm` disentanglement
+
+- `tidy()` no longer checks for a log or logit link when `exponentiate = TRUE`, as internals have been to refactored to remove extraneous `exponentiate` arguments. If you set `exponentiate`, we assume you know what you are doing and that you want exponentiate coefficients (and confidence intervals if `conf.int = TRUE`) regardless of link function.
+
 ## New tidiers, features and bugfixes
+
+- Add option to `lfe::felm` for robust and cluster standard errors (#772)
 
 - Added tidier for `car::Anova` (#754)
 

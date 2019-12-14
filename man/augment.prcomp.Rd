@@ -79,7 +79,9 @@ missing at this time.
 \seealso{
 \code{\link[stats:prcomp]{stats::prcomp()}}, \link{svd_tidiers}
 
-Other svd tidiers: \code{\link{tidy.prcomp}},
-  \code{\link{tidy_irlba}}, \code{\link{tidy_svd}}
+Other svd tidiers: 
+\code{\link{tidy.prcomp}()},
+\code{\link{tidy_irlba}()},
+\code{\link{tidy_svd}()}
 }
 \concept{svd tidiers}

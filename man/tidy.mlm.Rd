@@ -47,15 +47,20 @@ the model with \code{na.action = na.exclude}.
 
 mod <- lm(cbind(mpg, disp) ~ wt, mtcars)
 tidy(mod, conf.int = TRUE)
+
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}
 
-Other lm tidiers: \code{\link{augment.glm}},
-  \code{\link{augment.lm}}, \code{\link{glance.glm}},
-  \code{\link{glance.lm}}, \code{\link{glance.svyglm}},
-  \code{\link{tidy.glm}}, \code{\link{tidy.lm.beta}},
-  \code{\link{tidy.lm}}, \code{\link{tidy.svyglm}}
+Other lm tidiers: 
+\code{\link{augment.glm}()},
+\code{\link{augment.lm}()},
+\code{\link{glance.glm}()},
+\code{\link{glance.lm}()},
+\code{\link{glance.svyglm}()},
+\code{\link{tidy.glm}()},
+\code{\link{tidy.lm.beta}()},
+\code{\link{tidy.lm}()}
 }
 \concept{lm tidiers}
 \value{

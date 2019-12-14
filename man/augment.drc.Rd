@@ -4,8 +4,15 @@
 \alias{augment.drc}
 \title{Augment data with information from a(n) drc object}
 \usage{
-\method{augment}{drc}(x, data = NULL, newdata = NULL, se_fit = FALSE,
-  conf.int = FALSE, conf.level = 0.95, ...)
+\method{augment}{drc}(
+  x,
+  data = NULL,
+  newdata = NULL,
+  se_fit = FALSE,
+  conf.int = FALSE,
+  conf.level = 0.95,
+  ...
+)
 }
 \arguments{
 \item{x}{A \code{drc} object produced by a call to \code{\link[drc:drm]{drc::drm()}}.}
@@ -102,8 +109,9 @@ augment(mod, selenium)
 \seealso{
 \code{\link[=augment]{augment()}}, \code{\link[drc:drm]{drc::drm()}}
 
-Other drc tidiers: \code{\link{glance.drc}},
-  \code{\link{tidy.drc}}
+Other drc tidiers: 
+\code{\link{glance.drc}()},
+\code{\link{tidy.drc}()}
 }
 \concept{drc tidiers}
 \value{
