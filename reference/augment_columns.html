@@ -90,7 +90,7 @@ the value returned from augment." />
         <a class="navbar-brand" href="../index.html">broom</a>
         <div class="info">
           <span class="partof">part of the <a href="https://tidyverse.org">tidyverse</a></span>
-          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.2.9002</span>
+          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.2.9003</span>
         </div>
       </div>
     </div>
@@ -162,8 +162,16 @@ an augment call</h1>
 the value returned from <code>augment</code>.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>augment_columns</span>(<span class='no'>x</span>, <span class='no'>data</span>, <span class='kw'>newdata</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>type</span>, <span class='kw'>type.predict</span> <span class='kw'>=</span> <span class='no'>type</span>,
-  <span class='kw'>type.residuals</span> <span class='kw'>=</span> <span class='no'>type</span>, <span class='kw'>se.fit</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='no'>...</span>)</pre>
+    <pre class="usage"><span class='fu'>augment_columns</span>(
+  <span class='no'>x</span>,
+  <span class='no'>data</span>,
+  <span class='kw'>newdata</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='no'>type</span>,
+  <span class='kw'>type.predict</span> <span class='kw'>=</span> <span class='no'>type</span>,
+  <span class='kw'>type.residuals</span> <span class='kw'>=</span> <span class='no'>type</span>,
+  <span class='kw'>se.fit</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='no'>...</span>
+)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">

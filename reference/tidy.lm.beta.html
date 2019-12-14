@@ -92,7 +92,7 @@ specify which components to return." />
         <a class="navbar-brand" href="../index.html">broom</a>
         <div class="info">
           <span class="partof">part of the <a href="https://tidyverse.org">tidyverse</a></span>
-          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.2.9002</span>
+          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.2.9003</span>
         </div>
       </div>
     </div>
@@ -168,11 +168,7 @@ specify which components to return.</p>
     </div>
 
     <pre class="usage"><span class='co'># S3 method for lm.beta</span>
-<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>x</span>, <span class='kw'>conf.int</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>conf.level</span> <span class='kw'>=</span> <span class='fl'>0.95</span>,
-  <span class='kw'>exponentiate</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='no'>...</span>)
-
-<span class='co'># S3 method for summary.lm.beta</span>
-<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>x</span>, <span class='no'>...</span>)</pre>
+<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>x</span>, <span class='kw'>conf.int</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>conf.level</span> <span class='kw'>=</span> <span class='fl'>0.95</span>, <span class='no'>...</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -191,13 +187,6 @@ interval in the tidied output. Defaults to <code>FALSE</code>.</p></td>
       <td><p>The confidence level to use for the confidence interval
 if <code>conf.int = TRUE</code>. Must be strictly greater than 0 and less than 1.
 Defaults to 0.95, which corresponds to a 95 percent confidence interval.</p></td>
-    </tr>
-    <tr>
-      <th>exponentiate</th>
-      <td><p>Logical indicating whether or not to exponentiate the
-the coefficient estimates. This is typical for logistic and multinomial
-regressions, but a bad idea if there is no log or logit link. Defaults
-to <code>FALSE</code>.</p></td>
     </tr>
     <tr>
       <th>...</th>
@@ -221,11 +210,15 @@ there is an additional column <code>response</code>.</p>
 the model with <code>na.action = na.exclude</code>.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p>Other lm tidiers: <code><a href='augment.glm.html'>augment.glm</a></code>,
-  <code><a href='augment.lm.html'>augment.lm</a></code>, <code><a href='glance.glm.html'>glance.glm</a></code>,
-  <code><a href='glance.lm.html'>glance.lm</a></code>, <code><a href='glance.svyglm.html'>glance.svyglm</a></code>,
-  <code><a href='tidy.glm.html'>tidy.glm</a></code>, <code><a href='tidy.lm.html'>tidy.lm</a></code>,
-  <code><a href='tidy.mlm.html'>tidy.mlm</a></code>, <code><a href='tidy.svyglm.html'>tidy.svyglm</a></code></p></div>
+    <div class='dont-index'><p>Other lm tidiers: 
+<code><a href='augment.glm.html'>augment.glm</a>()</code>,
+<code><a href='augment.lm.html'>augment.lm</a>()</code>,
+<code><a href='glance.glm.html'>glance.glm</a>()</code>,
+<code><a href='glance.lm.html'>glance.lm</a>()</code>,
+<code><a href='glance.svyglm.html'>glance.svyglm</a>()</code>,
+<code><a href='tidy.glm.html'>tidy.glm</a>()</code>,
+<code><a href='tidy.lm.html'>tidy.lm</a>()</code>,
+<code><a href='tidy.mlm.html'>tidy.mlm</a>()</code></p></div>
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>A <code><a href='https://tibble.tidyverse.org/reference/tibble.html'>tibble::tibble()</a></code> with columns:</p>
@@ -244,31 +237,25 @@ the model with <code>na.action = na.exclude</code>.</p>
 <span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>lm.beta</span>)
 
 <span class='no'>mod</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>stats</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span>(<span class='no'>speed</span> ~ <span class='no'>.</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>cars</span>)
-
-<span class='co'># standardize</span>
-<span class='no'>mod_standardized</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>lm.beta</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/lm.beta/man/lm.beta.html'>lm.beta</a></span>(<span class='no'>mod</span>)
-<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>mod_standardized</span>)</div><div class='output co'>#&gt; # A tibble: 2 x 6
-#&gt;   term        estimate std_estimate std.error statistic  p.value
-#&gt;   &lt;chr&gt;          &lt;dbl&gt;        &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
-#&gt; 1 (Intercept)    8.28         0        0.874       9.47 1.44e-12
-#&gt; 2 dist           0.166        0.807    0.0175      9.46 1.49e-12</div><div class='input'>
-<span class='co'>## Taken from lm/ lm.beta help</span>
-<span class='co'>##</span>
-<span class='co'>## Annette Dobson (1990) "An Introduction to Generalized Linear Models".</span>
-<span class='co'>## Page 9: Plant Weight Data.</span>
-<span class='no'>ctl</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4.17</span>,<span class='fl'>5.58</span>,<span class='fl'>5.18</span>,<span class='fl'>6.11</span>,<span class='fl'>4.50</span>,<span class='fl'>4.61</span>,<span class='fl'>5.17</span>,<span class='fl'>4.53</span>,<span class='fl'>5.33</span>,<span class='fl'>5.14</span>)
-<span class='no'>trt</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4.81</span>,<span class='fl'>4.17</span>,<span class='fl'>4.41</span>,<span class='fl'>3.59</span>,<span class='fl'>5.87</span>,<span class='fl'>3.83</span>,<span class='fl'>6.03</span>,<span class='fl'>4.89</span>,<span class='fl'>4.32</span>,<span class='fl'>4.69</span>)
-<span class='no'>group</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/gl.html'>gl</a></span>(<span class='fl'>2</span>, <span class='fl'>10</span>, <span class='fl'>20</span>, <span class='kw'>labels</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"Ctl"</span>,<span class='st'>"Trt"</span>))
+<span class='no'>std</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/lm.beta/man/lm.beta.html'>lm.beta</a></span>(<span class='no'>mod</span>)
+<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>std</span>, <span class='kw'>conf.int</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; # A tibble: 2 x 8
+#&gt;   term     estimate std_estimate std.error statistic  p.value conf.low conf.high
+#&gt;   &lt;chr&gt;       &lt;dbl&gt;        &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;
+#&gt; 1 (Interc…    8.28         0        0.874       9.47 1.44e-12   -1.76      1.76 
+#&gt; 2 dist        0.166        0.807    0.0175      9.46 1.49e-12    0.772     0.842</div><div class='input'>
+<span class='no'>ctl</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4.17</span>, <span class='fl'>5.58</span>, <span class='fl'>5.18</span>, <span class='fl'>6.11</span>, <span class='fl'>4.50</span>, <span class='fl'>4.61</span>, <span class='fl'>5.17</span>, <span class='fl'>4.53</span>, <span class='fl'>5.33</span>, <span class='fl'>5.14</span>)
+<span class='no'>trt</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4.81</span>, <span class='fl'>4.17</span>, <span class='fl'>4.41</span>, <span class='fl'>3.59</span>, <span class='fl'>5.87</span>, <span class='fl'>3.83</span>, <span class='fl'>6.03</span>, <span class='fl'>4.89</span>, <span class='fl'>4.32</span>, <span class='fl'>4.69</span>)
+<span class='no'>group</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/gl.html'>gl</a></span>(<span class='fl'>2</span>, <span class='fl'>10</span>, <span class='fl'>20</span>, <span class='kw'>labels</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"Ctl"</span>, <span class='st'>"Trt"</span>))
 <span class='no'>weight</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='no'>ctl</span>, <span class='no'>trt</span>)
-<span class='no'>lm.D9</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>stats</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span>(<span class='no'>weight</span> ~ <span class='no'>group</span>)
 
-<span class='co'># standardize</span>
-<span class='no'>lm.D9.beta</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>lm.beta</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/lm.beta/man/lm.beta.html'>lm.beta</a></span>(<span class='no'>lm.D9</span>)
-<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>lm.D9.beta</span>)</div><div class='output co'>#&gt; # A tibble: 2 x 6
-#&gt;   term        estimate std_estimate std.error statistic  p.value
-#&gt;   &lt;chr&gt;          &lt;dbl&gt;        &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
-#&gt; 1 (Intercept)    5.03         0         0.220     22.9  9.55e-15
-#&gt; 2 groupTrt      -0.371       -0.270     0.311     -1.19 2.49e- 1</div><div class='input'>
+<span class='no'>mod2</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span>(<span class='no'>weight</span> ~ <span class='no'>group</span>)
+
+<span class='no'>std2</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/lm.beta/man/lm.beta.html'>lm.beta</a></span>(<span class='no'>mod2</span>)
+<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>std2</span>, <span class='kw'>conf.int</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; # A tibble: 2 x 8
+#&gt;   term     estimate std_estimate std.error statistic  p.value conf.low conf.high
+#&gt;   &lt;chr&gt;       &lt;dbl&gt;        &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;
+#&gt; 1 (Interc…    5.03         0         0.220     22.9  9.55e-15   -0.463     0.463
+#&gt; 2 groupTrt   -0.371       -0.270     0.311     -1.19 2.49e- 1   -0.925     0.384</div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

@@ -51,7 +51,7 @@ an appropriate tidying method to apply to the list. Those tidiers are
 themselves are implemented as functions of the form tidy_&amp;lt;function&amp;gt;
 or glance_&amp;lt;function&amp;gt; and are not exported (but they are documented!).
 If no appropriate tidying method is found, throws an error.
-xyz lists (lists where x and y are vector of coordinates
+xyz lists (lists where x and y are vectors of coordinates
 and z is a matrix of values) are typically used by functions such as
 graphics::persp() or graphics::image() and returned
 by interpolation functions such as akima::interp()." />
@@ -99,7 +99,7 @@ by interpolation functions such as akima::interp()." />
         <a class="navbar-brand" href="../index.html">broom</a>
         <div class="info">
           <span class="partof">part of the <a href="https://tidyverse.org">tidyverse</a></span>
-          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.2.9002</span>
+          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.2.9003</span>
         </div>
       </div>
     </div>
@@ -175,7 +175,7 @@ an appropriate tidying method to apply to the list. Those tidiers are
 themselves are implemented as functions of the form <code>tidy_&lt;function&gt;</code>
 or <code>glance_&lt;function&gt;</code> and are not exported (but they are documented!).</p>
 <p>If no appropriate tidying method is found, throws an error.</p>
-<p>xyz lists (lists where <code>x</code> and <code>y</code> are vector of coordinates
+<p>xyz lists (lists where <code>x</code> and <code>y</code> are vectors of coordinates
 and <code>z</code> is a matrix of values) are typically used by functions such as
 <code><a href='https://rdrr.io/r/graphics/persp.html'>graphics::persp()</a></code> or <code><a href='https://rdrr.io/r/graphics/image.html'>graphics::image()</a></code> and returned
 by interpolation functions such as <code><a href='https://rdrr.io/pkg/akima/man/interp.html'>akima::interp()</a></code>.</p>
@@ -213,9 +213,12 @@ the <code>data</code> argument.</p></td>
 
     <div class='dont-index'><p><code><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy()</a></code>, <code><a href='https://rdrr.io/r/graphics/persp.html'>graphics::persp()</a></code>, <code><a href='https://rdrr.io/r/graphics/image.html'>graphics::image()</a></code>,
 <code><a href='https://rdrr.io/pkg/akima/man/interp.html'>akima::interp()</a></code></p>
-<p>Other list tidiers: <code><a href='glance_optim.html'>glance_optim</a></code>,
-  <code><a href='list_tidiers.html'>list_tidiers</a></code>, <code><a href='tidy_irlba.html'>tidy_irlba</a></code>,
-  <code><a href='tidy_optim.html'>tidy_optim</a></code>, <code><a href='tidy_svd.html'>tidy_svd</a></code></p></div>
+<p>Other list tidiers: 
+<code><a href='glance_optim.html'>glance_optim</a>()</code>,
+<code><a href='list_tidiers.html'>list_tidiers</a></code>,
+<code><a href='tidy_irlba.html'>tidy_irlba</a>()</code>,
+<code><a href='tidy_optim.html'>tidy_optim</a>()</code>,
+<code><a href='tidy_svd.html'>tidy_svd</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>

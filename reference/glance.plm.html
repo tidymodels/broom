@@ -97,7 +97,7 @@ the measure will be reported as NA." />
         <a class="navbar-brand" href="../index.html">broom</a>
         <div class="info">
           <span class="partof">part of the <a href="https://tidyverse.org">tidyverse</a></span>
-          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.2.9002</span>
+          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.2.9003</span>
         </div>
       </div>
     </div>
@@ -204,8 +204,9 @@ the <code>data</code> argument.</p></td>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p><code><a href='https://rdrr.io/pkg/generics/man/glance.html'>glance()</a></code>, <code><a href='https://rdrr.io/pkg/plm/man/plm.html'>plm::plm()</a></code></p>
-<p>Other plm tidiers: <code><a href='augment.plm.html'>augment.plm</a></code>,
-  <code><a href='tidy.plm.html'>tidy.plm</a></code></p></div>
+<p>Other plm tidiers: 
+<code><a href='augment.plm.html'>augment.plm</a>()</code>,
+<code><a href='tidy.plm.html'>tidy.plm</a>()</code></p></div>
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>A <code><a href='https://tibble.tidyverse.org/reference/tibble.html'>tibble::tibble()</a></code> with exactly one row and columns:</p>
@@ -265,7 +266,7 @@ the <code>data</code> argument.</p></td>
 #&gt; 1 log(pcap) -0.0261   0.0290      -0.902 3.68e-  1 -0.0830    0.0307 
 #&gt; 2 log(pc)    0.292    0.0251      11.6   7.08e- 29  0.243     0.341  
 #&gt; 3 log(emp)   0.768    0.0301      25.5   2.02e-104  0.709     0.827  
-#&gt; 4 unemp     -0.00530  0.000989    -5.36  1.11e-  7 -0.00724  -0.00336</div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>zz</span>, <span class='kw'>conf.int</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>conf.level</span> <span class='kw'>=</span> <span class='fl'>.9</span>)</div><div class='output co'>#&gt; # A tibble: 4 x 7
+#&gt; 4 unemp     -0.00530  0.000989    -5.36  1.11e-  7 -0.00724  -0.00336</div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>zz</span>, <span class='kw'>conf.int</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>conf.level</span> <span class='kw'>=</span> <span class='fl'>0.9</span>)</div><div class='output co'>#&gt; # A tibble: 4 x 7
 #&gt;   term      estimate std.error statistic   p.value conf.low conf.high
 #&gt;   &lt;chr&gt;        &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;
 #&gt; 1 log(pcap) -0.0261   0.0290      -0.902 3.68e-  1 -0.0739    0.0216 

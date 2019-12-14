@@ -92,7 +92,7 @@ specify which components to return." />
         <a class="navbar-brand" href="../index.html">broom</a>
         <div class="info">
           <span class="partof">part of the <a href="https://tidyverse.org">tidyverse</a></span>
-          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.2.9002</span>
+          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.2.9003</span>
         </div>
       </div>
     </div>
@@ -168,8 +168,7 @@ specify which components to return.</p>
     </div>
 
     <pre class="usage"><span class='co'># S3 method for gmm</span>
-<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>x</span>, <span class='kw'>conf.int</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>conf.level</span> <span class='kw'>=</span> <span class='fl'>0.95</span>,
-  <span class='kw'>exponentiate</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='no'>...</span>)</pre>
+<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>x</span>, <span class='kw'>conf.int</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>conf.level</span> <span class='kw'>=</span> <span class='fl'>0.95</span>, <span class='kw'>exponentiate</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='no'>...</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -213,7 +212,8 @@ the <code>data</code> argument.</p></td>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p><code><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy()</a></code>, <code><a href='https://rdrr.io/pkg/gmm/man/gmm.html'>gmm::gmm()</a></code></p>
-<p>Other gmm tidiers: <code><a href='glance.gmm.html'>glance.gmm</a></code></p></div>
+<p>Other gmm tidiers: 
+<code><a href='glance.gmm.html'>glance.gmm</a>()</code></p></div>
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>A <code><a href='https://tibble.tidyverse.org/reference/tibble.html'>tibble::tibble()</a></code> with columns:</p>
@@ -245,82 +245,82 @@ the <code>data</code> argument.</p></td>
 <span class='no'>res</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/gmm/man/gmm.html'>gmm</a></span>(<span class='no'>z</span> ~ <span class='no'>zm</span>, <span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>h</span>)
 
 <span class='co'># tidy result</span>
-<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>res</span>)</div><div class='output co'>#&gt; # A tibble: 20 x 6
-#&gt;    variable term        estimate std.error statistic  p.value
-#&gt;    &lt;chr&gt;    &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
-#&gt;  1 WMK      (Intercept) -0.00467    0.0566   -0.0824 9.34e- 1
-#&gt;  2 UIS      (Intercept)  0.102      0.126     0.816  4.15e- 1
-#&gt;  3 ORB      (Intercept)  0.146      0.203     0.718  4.73e- 1
-#&gt;  4 MAT      (Intercept)  0.0359     0.110     0.326  7.45e- 1
-#&gt;  5 ABAX     (Intercept)  0.0917     0.288     0.318  7.50e- 1
-#&gt;  6 T        (Intercept)  0.0231     0.0774    0.298  7.65e- 1
-#&gt;  7 EMR      (Intercept)  0.0299     0.0552    0.542  5.88e- 1
-#&gt;  8 JCS      (Intercept)  0.117      0.155     0.756  4.50e- 1
-#&gt;  9 VOXX     (Intercept)  0.0209     0.182     0.115  9.09e- 1
-#&gt; 10 ZOOM     (Intercept) -0.219      0.202    -1.08   2.79e- 1
-#&gt; 11 WMK      zm           0.317      0.126     2.52   1.16e- 2
-#&gt; 12 UIS      zm           1.26       0.230     5.49   3.94e- 8
-#&gt; 13 ORB      zm           1.49       0.428     3.49   4.87e- 4
-#&gt; 14 MAT      zm           1.01       0.218     4.66   3.09e- 6
-#&gt; 15 ABAX     zm           1.09       0.579     1.88   5.98e- 2
-#&gt; 16 T        zm           0.849      0.154     5.52   3.41e- 8
-#&gt; 17 EMR      zm           0.741      0.0998    7.43   1.13e-13
-#&gt; 18 JCS      zm           0.959      0.348     2.76   5.85e- 3
-#&gt; 19 VOXX     zm           1.48       0.369     4.01   6.04e- 5
-#&gt; 20 ZOOM     zm           2.08       0.321     6.46   1.02e-10</div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>res</span>, <span class='kw'>conf.int</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; # A tibble: 20 x 8
-#&gt;    variable term        estimate std.error statistic  p.value conf.low conf.high
-#&gt;    &lt;chr&gt;    &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;
-#&gt;  1 WMK      (Intercept) -0.00467    0.0566   -0.0824 9.34e- 1  -0.116      0.106
-#&gt;  2 UIS      (Intercept)  0.102      0.126     0.816  4.15e- 1  -0.144      0.348
-#&gt;  3 ORB      (Intercept)  0.146      0.203     0.718  4.73e- 1  -0.252      0.544
-#&gt;  4 MAT      (Intercept)  0.0359     0.110     0.326  7.45e- 1  -0.180      0.252
-#&gt;  5 ABAX     (Intercept)  0.0917     0.288     0.318  7.50e- 1  -0.473      0.656
-#&gt;  6 T        (Intercept)  0.0231     0.0774    0.298  7.65e- 1  -0.129      0.175
-#&gt;  7 EMR      (Intercept)  0.0299     0.0552    0.542  5.88e- 1  -0.0782     0.138
-#&gt;  8 JCS      (Intercept)  0.117      0.155     0.756  4.50e- 1  -0.186      0.420
-#&gt;  9 VOXX     (Intercept)  0.0209     0.182     0.115  9.09e- 1  -0.335      0.377
-#&gt; 10 ZOOM     (Intercept) -0.219      0.202    -1.08   2.79e- 1  -0.616      0.177
-#&gt; 11 WMK      zm           0.317      0.126     2.52   1.16e- 2   0.0708     0.564
-#&gt; 12 UIS      zm           1.26       0.230     5.49   3.94e- 8   0.812      1.71 
-#&gt; 13 ORB      zm           1.49       0.428     3.49   4.87e- 4   0.654      2.33 
-#&gt; 14 MAT      zm           1.01       0.218     4.66   3.09e- 6   0.588      1.44 
-#&gt; 15 ABAX     zm           1.09       0.579     1.88   5.98e- 2  -0.0451     2.22 
-#&gt; 16 T        zm           0.849      0.154     5.52   3.41e- 8   0.547      1.15 
-#&gt; 17 EMR      zm           0.741      0.0998    7.43   1.13e-13   0.545      0.936
-#&gt; 18 JCS      zm           0.959      0.348     2.76   5.85e- 3   0.277      1.64 
-#&gt; 19 VOXX     zm           1.48       0.369     4.01   6.04e- 5   0.758      2.21 
-#&gt; 20 ZOOM     zm           2.08       0.321     6.46   1.02e-10   1.45       2.71 </div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>res</span>, <span class='kw'>conf.int</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>conf.level</span> <span class='kw'>=</span> <span class='fl'>.99</span>)</div><div class='output co'>#&gt; # A tibble: 20 x 8
-#&gt;    variable term        estimate std.error statistic  p.value conf.low conf.high
-#&gt;    &lt;chr&gt;    &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;
-#&gt;  1 WMK      (Intercept) -0.00467    0.0566   -0.0824 9.34e- 1 -0.151       0.141
-#&gt;  2 UIS      (Intercept)  0.102      0.126     0.816  4.15e- 1 -0.221       0.426
-#&gt;  3 ORB      (Intercept)  0.146      0.203     0.718  4.73e- 1 -0.377       0.669
-#&gt;  4 MAT      (Intercept)  0.0359     0.110     0.326  7.45e- 1 -0.248       0.320
-#&gt;  5 ABAX     (Intercept)  0.0917     0.288     0.318  7.50e- 1 -0.650       0.834
-#&gt;  6 T        (Intercept)  0.0231     0.0774    0.298  7.65e- 1 -0.176       0.223
-#&gt;  7 EMR      (Intercept)  0.0299     0.0552    0.542  5.88e- 1 -0.112       0.172
-#&gt;  8 JCS      (Intercept)  0.117      0.155     0.756  4.50e- 1 -0.281       0.515
-#&gt;  9 VOXX     (Intercept)  0.0209     0.182     0.115  9.09e- 1 -0.447       0.489
-#&gt; 10 ZOOM     (Intercept) -0.219      0.202    -1.08   2.79e- 1 -0.740       0.302
-#&gt; 11 WMK      zm           0.317      0.126     2.52   1.16e- 2 -0.00656     0.641
-#&gt; 12 UIS      zm           1.26       0.230     5.49   3.94e- 8  0.671       1.85 
-#&gt; 13 ORB      zm           1.49       0.428     3.49   4.87e- 4  0.391       2.60 
-#&gt; 14 MAT      zm           1.01       0.218     4.66   3.09e- 6  0.454       1.58 
-#&gt; 15 ABAX     zm           1.09       0.579     1.88   5.98e- 2 -0.401       2.58 
-#&gt; 16 T        zm           0.849      0.154     5.52   3.41e- 8  0.453       1.25 
-#&gt; 17 EMR      zm           0.741      0.0998    7.43   1.13e-13  0.484       0.998
-#&gt; 18 JCS      zm           0.959      0.348     2.76   5.85e- 3  0.0627      1.85 
-#&gt; 19 VOXX     zm           1.48       0.369     4.01   6.04e- 5  0.530       2.43 
-#&gt; 20 ZOOM     zm           2.08       0.321     6.46   1.02e-10  1.25        2.91 </div><div class='input'>
+<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>res</span>)</div><div class='output co'>#&gt; # A tibble: 20 x 5
+#&gt;    term             estimate std.error statistic  p.value
+#&gt;    &lt;chr&gt;               &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
+#&gt;  1 WMK_(Intercept)  -0.00467    0.0566   -0.0824 9.34e- 1
+#&gt;  2 UIS_(Intercept)   0.102      0.126     0.816  4.15e- 1
+#&gt;  3 ORB_(Intercept)   0.146      0.203     0.718  4.73e- 1
+#&gt;  4 MAT_(Intercept)   0.0359     0.110     0.326  7.45e- 1
+#&gt;  5 ABAX_(Intercept)  0.0917     0.288     0.318  7.50e- 1
+#&gt;  6 T_(Intercept)     0.0231     0.0774    0.298  7.65e- 1
+#&gt;  7 EMR_(Intercept)   0.0299     0.0552    0.542  5.88e- 1
+#&gt;  8 JCS_(Intercept)   0.117      0.155     0.756  4.50e- 1
+#&gt;  9 VOXX_(Intercept)  0.0209     0.182     0.115  9.09e- 1
+#&gt; 10 ZOOM_(Intercept) -0.219      0.202    -1.08   2.79e- 1
+#&gt; 11 WMK_zm            0.317      0.126     2.52   1.16e- 2
+#&gt; 12 UIS_zm            1.26       0.230     5.49   3.94e- 8
+#&gt; 13 ORB_zm            1.49       0.428     3.49   4.87e- 4
+#&gt; 14 MAT_zm            1.01       0.218     4.66   3.09e- 6
+#&gt; 15 ABAX_zm           1.09       0.579     1.88   5.98e- 2
+#&gt; 16 T_zm              0.849      0.154     5.52   3.41e- 8
+#&gt; 17 EMR_zm            0.741      0.0998    7.43   1.13e-13
+#&gt; 18 JCS_zm            0.959      0.348     2.76   5.85e- 3
+#&gt; 19 VOXX_zm           1.48       0.369     4.01   6.04e- 5
+#&gt; 20 ZOOM_zm           2.08       0.321     6.46   1.02e-10</div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>res</span>, <span class='kw'>conf.int</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; # A tibble: 20 x 7
+#&gt;    term             estimate std.error statistic  p.value conf.low conf.high
+#&gt;    &lt;chr&gt;               &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;
+#&gt;  1 WMK_(Intercept)  -0.00467    0.0566   -0.0824 9.34e- 1  -0.116      0.106
+#&gt;  2 UIS_(Intercept)   0.102      0.126     0.816  4.15e- 1  -0.144      0.348
+#&gt;  3 ORB_(Intercept)   0.146      0.203     0.718  4.73e- 1  -0.252      0.544
+#&gt;  4 MAT_(Intercept)   0.0359     0.110     0.326  7.45e- 1  -0.180      0.252
+#&gt;  5 ABAX_(Intercept)  0.0917     0.288     0.318  7.50e- 1  -0.473      0.656
+#&gt;  6 T_(Intercept)     0.0231     0.0774    0.298  7.65e- 1  -0.129      0.175
+#&gt;  7 EMR_(Intercept)   0.0299     0.0552    0.542  5.88e- 1  -0.0782     0.138
+#&gt;  8 JCS_(Intercept)   0.117      0.155     0.756  4.50e- 1  -0.186      0.420
+#&gt;  9 VOXX_(Intercept)  0.0209     0.182     0.115  9.09e- 1  -0.335      0.377
+#&gt; 10 ZOOM_(Intercept) -0.219      0.202    -1.08   2.79e- 1  -0.616      0.177
+#&gt; 11 WMK_zm            0.317      0.126     2.52   1.16e- 2   0.0708     0.564
+#&gt; 12 UIS_zm            1.26       0.230     5.49   3.94e- 8   0.812      1.71 
+#&gt; 13 ORB_zm            1.49       0.428     3.49   4.87e- 4   0.654      2.33 
+#&gt; 14 MAT_zm            1.01       0.218     4.66   3.09e- 6   0.588      1.44 
+#&gt; 15 ABAX_zm           1.09       0.579     1.88   5.98e- 2  -0.0451     2.22 
+#&gt; 16 T_zm              0.849      0.154     5.52   3.41e- 8   0.547      1.15 
+#&gt; 17 EMR_zm            0.741      0.0998    7.43   1.13e-13   0.545      0.936
+#&gt; 18 JCS_zm            0.959      0.348     2.76   5.85e- 3   0.277      1.64 
+#&gt; 19 VOXX_zm           1.48       0.369     4.01   6.04e- 5   0.758      2.21 
+#&gt; 20 ZOOM_zm           2.08       0.321     6.46   1.02e-10   1.45       2.71 </div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>res</span>, <span class='kw'>conf.int</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>conf.level</span> <span class='kw'>=</span> <span class='fl'>.99</span>)</div><div class='output co'>#&gt; # A tibble: 20 x 7
+#&gt;    term             estimate std.error statistic  p.value conf.low conf.high
+#&gt;    &lt;chr&gt;               &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;
+#&gt;  1 WMK_(Intercept)  -0.00467    0.0566   -0.0824 9.34e- 1 -0.151       0.141
+#&gt;  2 UIS_(Intercept)   0.102      0.126     0.816  4.15e- 1 -0.221       0.426
+#&gt;  3 ORB_(Intercept)   0.146      0.203     0.718  4.73e- 1 -0.377       0.669
+#&gt;  4 MAT_(Intercept)   0.0359     0.110     0.326  7.45e- 1 -0.248       0.320
+#&gt;  5 ABAX_(Intercept)  0.0917     0.288     0.318  7.50e- 1 -0.650       0.834
+#&gt;  6 T_(Intercept)     0.0231     0.0774    0.298  7.65e- 1 -0.176       0.223
+#&gt;  7 EMR_(Intercept)   0.0299     0.0552    0.542  5.88e- 1 -0.112       0.172
+#&gt;  8 JCS_(Intercept)   0.117      0.155     0.756  4.50e- 1 -0.281       0.515
+#&gt;  9 VOXX_(Intercept)  0.0209     0.182     0.115  9.09e- 1 -0.447       0.489
+#&gt; 10 ZOOM_(Intercept) -0.219      0.202    -1.08   2.79e- 1 -0.740       0.302
+#&gt; 11 WMK_zm            0.317      0.126     2.52   1.16e- 2 -0.00656     0.641
+#&gt; 12 UIS_zm            1.26       0.230     5.49   3.94e- 8  0.671       1.85 
+#&gt; 13 ORB_zm            1.49       0.428     3.49   4.87e- 4  0.391       2.60 
+#&gt; 14 MAT_zm            1.01       0.218     4.66   3.09e- 6  0.454       1.58 
+#&gt; 15 ABAX_zm           1.09       0.579     1.88   5.98e- 2 -0.401       2.58 
+#&gt; 16 T_zm              0.849      0.154     5.52   3.41e- 8  0.453       1.25 
+#&gt; 17 EMR_zm            0.741      0.0998    7.43   1.13e-13  0.484       0.998
+#&gt; 18 JCS_zm            0.959      0.348     2.76   5.85e- 3  0.0627      1.85 
+#&gt; 19 VOXX_zm           1.48       0.369     4.01   6.04e- 5  0.530       2.43 
+#&gt; 20 ZOOM_zm           2.08       0.321     6.46   1.02e-10  1.25        2.91 </div><div class='input'>
 <span class='co'># coefficient plot</span>
 <span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>ggplot2</span>)
 <span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>dplyr</span>)
+
 <span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>res</span>, <span class='kw'>conf.int</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span>(<span class='kw'>variable</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/reorder.factor.html'>reorder</a></span>(<span class='no'>variable</span>, <span class='no'>estimate</span>)) <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span>(<span class='kw'>variable</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/reorder.factor.html'>reorder</a></span>(<span class='no'>term</span>, <span class='no'>estimate</span>)) <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span>(<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='no'>estimate</span>, <span class='no'>variable</span>)) +
   <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_point.html'>geom_point</a></span>() +
   <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_errorbarh.html'>geom_errorbarh</a></span>(<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='kw'>xmin</span> <span class='kw'>=</span> <span class='no'>conf.low</span>, <span class='kw'>xmax</span> <span class='kw'>=</span> <span class='no'>conf.high</span>)) +
-  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/facet_wrap.html'>facet_wrap</a></span>(~ <span class='no'>term</span>) +
   <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_abline.html'>geom_vline</a></span>(<span class='kw'>xintercept</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"red"</span>, <span class='kw'>lty</span> <span class='kw'>=</span> <span class='fl'>2</span>)</div><div class='img'><img src='tidy.gmm-1.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'># from a function instead of a matrix</span>
 <span class='no'>g</span> <span class='kw'>&lt;-</span> <span class='kw'>function</span>(<span class='no'>theta</span>, <span class='no'>x</span>) {
@@ -367,27 +367,26 @@ the <code>data</code> argument.</p></td>
 <span class='no'>res2</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/gmm/man/gmm.html'>gmm</a></span>(<span class='no'>z</span> ~ <span class='no'>f1</span> + <span class='no'>f2</span> + <span class='no'>f3</span>, <span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>h</span>)
 
 <span class='no'>td2</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>res2</span>, <span class='kw'>conf.int</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
-<span class='no'>td2</span></div><div class='output co'>#&gt; # A tibble: 40 x 8
-#&gt;    variable term        estimate std.error statistic p.value conf.low conf.high
-#&gt;    &lt;chr&gt;    &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;
-#&gt;  1 WMK      (Intercept) -0.0240     0.0548   -0.438    0.662  -0.131     0.0834
-#&gt;  2 UIS      (Intercept)  0.0723     0.127     0.567    0.570  -0.177     0.322 
-#&gt;  3 ORB      (Intercept)  0.114      0.212     0.534    0.593  -0.303     0.530 
-#&gt;  4 MAT      (Intercept)  0.0694     0.0979    0.709    0.478  -0.122     0.261 
-#&gt;  5 ABAX     (Intercept)  0.0668     0.275     0.242    0.808  -0.473     0.606 
-#&gt;  6 T        (Intercept)  0.0195     0.0745    0.262    0.793  -0.126     0.165 
-#&gt;  7 EMR      (Intercept)  0.0217     0.0538    0.404    0.687  -0.0837    0.127 
-#&gt;  8 JCS      (Intercept)  0.0904     0.154     0.586    0.558  -0.212     0.393 
-#&gt;  9 VOXX     (Intercept) -0.00706    0.179    -0.0394   0.969  -0.359     0.344 
-#&gt; 10 ZOOM     (Intercept) -0.189      0.215    -0.878    0.380  -0.610     0.233 
+<span class='no'>td2</span></div><div class='output co'>#&gt; # A tibble: 40 x 7
+#&gt;    term             estimate std.error statistic p.value conf.low conf.high
+#&gt;    &lt;chr&gt;               &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;
+#&gt;  1 WMK_(Intercept)  -0.0240     0.0548   -0.438    0.662  -0.131     0.0834
+#&gt;  2 UIS_(Intercept)   0.0723     0.127     0.567    0.570  -0.177     0.322 
+#&gt;  3 ORB_(Intercept)   0.114      0.212     0.534    0.593  -0.303     0.530 
+#&gt;  4 MAT_(Intercept)   0.0694     0.0979    0.709    0.478  -0.122     0.261 
+#&gt;  5 ABAX_(Intercept)  0.0668     0.275     0.242    0.808  -0.473     0.606 
+#&gt;  6 T_(Intercept)     0.0195     0.0745    0.262    0.793  -0.126     0.165 
+#&gt;  7 EMR_(Intercept)   0.0217     0.0538    0.404    0.687  -0.0837    0.127 
+#&gt;  8 JCS_(Intercept)   0.0904     0.154     0.586    0.558  -0.212     0.393 
+#&gt;  9 VOXX_(Intercept) -0.00706    0.179    -0.0394   0.969  -0.359     0.344 
+#&gt; 10 ZOOM_(Intercept) -0.189      0.215    -0.878    0.380  -0.610     0.233 
 #&gt; # … with 30 more rows</div><div class='input'>
 <span class='co'># coefficient plot</span>
 <span class='no'>td2</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span>(<span class='kw'>variable</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/reorder.factor.html'>reorder</a></span>(<span class='no'>variable</span>, <span class='no'>estimate</span>)) <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span>(<span class='kw'>variable</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/reorder.factor.html'>reorder</a></span>(<span class='no'>term</span>, <span class='no'>estimate</span>)) <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span>(<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='no'>estimate</span>, <span class='no'>variable</span>)) +
   <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_point.html'>geom_point</a></span>() +
   <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_errorbarh.html'>geom_errorbarh</a></span>(<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='kw'>xmin</span> <span class='kw'>=</span> <span class='no'>conf.low</span>, <span class='kw'>xmax</span> <span class='kw'>=</span> <span class='no'>conf.high</span>)) +
-  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/facet_wrap.html'>facet_wrap</a></span>(~ <span class='no'>term</span>) +
   <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_abline.html'>geom_vline</a></span>(<span class='kw'>xintercept</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"red"</span>, <span class='kw'>lty</span> <span class='kw'>=</span> <span class='fl'>2</span>)</div><div class='img'><img src='tidy.gmm-2.png' alt='' width='700' height='433' /></div><div class='input'>
 </div></pre>
   </div>

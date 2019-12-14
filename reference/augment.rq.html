@@ -118,7 +118,7 @@ missing at this time." />
         <a class="navbar-brand" href="../index.html">broom</a>
         <div class="info">
           <span class="partof">part of the <a href="https://tidyverse.org">tidyverse</a></span>
-          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.2.9002</span>
+          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.2.9003</span>
         </div>
       </div>
     </div>
@@ -249,14 +249,12 @@ the <code>data</code> argument will be ignored.</p></td>
     <tr>
       <th>...</th>
       <td><p>Arguments passed on to <code><a href='https://rdrr.io/pkg/quantreg/man/predict.rq.html'>quantreg::predict.rq</a></code></p><dl class='dl-horizontal'>
-  <dt>object</dt><dd><p>object of class rq or rqs or rq.process produced by <code>rq</code></p></dd>
-  <dt>newdata</dt><dd><p>An optional data frame in which to look for variables with
-    which to predict.  If omitted, the fitted values are used.</p></dd>
-  <dt>interval</dt><dd><p>type of interval desired:  default is  'none', when set to
+    <dt><code>object</code></dt><dd><p>object of class rq or rqs or rq.process produced by <code>rq</code></p></dd>
+    <dt><code>interval</code></dt><dd><p>type of interval desired:  default is  'none', when set to
     'confidence' the function returns a matrix predictions with point predictions
     for each of the 'newdata' points as well as lower and upper confidence limits.</p></dd>
-  <dt>level</dt><dd><p>converage probability for the 'confidence' intervals.</p></dd>
-  <dt>type</dt><dd><p>For <code>predict.rq</code>, the  method for 'confidence' intervals, if desired. 
+    <dt><code>level</code></dt><dd><p>converage probability for the 'confidence' intervals.</p></dd>
+    <dt><code>type</code></dt><dd><p>For <code>predict.rq</code>, the  method for 'confidence' intervals, if desired. 
     If 'percentile' then one of the bootstrap methods is used to generate percentile 
     intervals for each prediction, if 'direct' then a version of the Portnoy and Zhou 
     (1998) method is used, and otherwise an estimated covariance matrix for the parameter
@@ -269,9 +267,9 @@ the <code>data</code> argument will be ignored.</p></td>
     function <code>rearrange</code>.  When the "fhat" option is invoked, a list of conditional
     density functions is returned based on Silverman's adaptive kernel method as
     implemented in <code>akj</code> and <code>approxfun</code>.</p></dd>
-  <dt>na.action</dt><dd><p>function determining what should be done with missing values
+    <dt><code>na.action</code></dt><dd><p>function determining what should be done with missing values
     in 'newdata'.  The default is to predict 'NA'.</p></dd>
-
+  
 </dl></td>
     </tr>
     </table>
@@ -285,10 +283,14 @@ intervals when data is specified via the <code>newdata</code> argument.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p><a href='https://rdrr.io/pkg/generics/man/augment.html'>augment</a>, <code><a href='https://rdrr.io/pkg/quantreg/man/rq.html'>quantreg::rq()</a></code>, <code><a href='https://rdrr.io/pkg/quantreg/man/predict.rq.html'>quantreg::predict.rq()</a></code></p>
-<p>Other quantreg tidiers: <code><a href='augment.nlrq.html'>augment.nlrq</a></code>,
-  <code><a href='augment.rqs.html'>augment.rqs</a></code>, <code><a href='glance.nlrq.html'>glance.nlrq</a></code>,
-  <code><a href='glance.rq.html'>glance.rq</a></code>, <code><a href='tidy.nlrq.html'>tidy.nlrq</a></code>,
-  <code><a href='tidy.rqs.html'>tidy.rqs</a></code>, <code><a href='tidy.rq.html'>tidy.rq</a></code></p></div>
+<p>Other quantreg tidiers: 
+<code><a href='augment.nlrq.html'>augment.nlrq</a>()</code>,
+<code><a href='augment.rqs.html'>augment.rqs</a>()</code>,
+<code><a href='glance.nlrq.html'>glance.nlrq</a>()</code>,
+<code><a href='glance.rq.html'>glance.rq</a>()</code>,
+<code><a href='tidy.nlrq.html'>tidy.nlrq</a>()</code>,
+<code><a href='tidy.rqs.html'>tidy.rqs</a>()</code>,
+<code><a href='tidy.rq.html'>tidy.rq</a>()</code></p></div>
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>A <code><a href='https://tibble.tidyverse.org/reference/tibble.html'>tibble::tibble()</a></code> with columns:</p>

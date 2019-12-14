@@ -92,7 +92,7 @@ specify which components to return." />
         <a class="navbar-brand" href="../index.html">broom</a>
         <div class="info">
           <span class="partof">part of the <a href="https://tidyverse.org">tidyverse</a></span>
-          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.2.9002</span>
+          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.2.9003</span>
         </div>
       </div>
     </div>
@@ -168,8 +168,7 @@ specify which components to return.</p>
     </div>
 
     <pre class="usage"><span class='co'># S3 method for ivreg</span>
-<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>x</span>, <span class='kw'>conf.int</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>conf.level</span> <span class='kw'>=</span> <span class='fl'>0.95</span>,
-  <span class='kw'>exponentiate</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>instruments</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='no'>...</span>)</pre>
+<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>x</span>, <span class='kw'>conf.int</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>conf.level</span> <span class='kw'>=</span> <span class='fl'>0.95</span>, <span class='kw'>instruments</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='no'>...</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -188,13 +187,6 @@ interval in the tidied output. Defaults to <code>FALSE</code>.</p></td>
       <td><p>The confidence level to use for the confidence interval
 if <code>conf.int = TRUE</code>. Must be strictly greater than 0 and less than 1.
 Defaults to 0.95, which corresponds to a 95 percent confidence interval.</p></td>
-    </tr>
-    <tr>
-      <th>exponentiate</th>
-      <td><p>Logical indicating whether or not to exponentiate the
-the coefficient estimates. This is typical for logistic and multinomial
-regressions, but a bad idea if there is no log or logit link. Defaults
-to <code>FALSE</code>.</p></td>
     </tr>
     <tr>
       <th>instruments</th>
@@ -219,8 +211,9 @@ the <code>data</code> argument.</p></td>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p><code><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy()</a></code>, <code><a href='https://rdrr.io/pkg/AER/man/ivreg.html'>AER::ivreg()</a></code></p>
-<p>Other ivreg tidiers: <code><a href='augment.ivreg.html'>augment.ivreg</a></code>,
-  <code><a href='glance.ivreg.html'>glance.ivreg</a></code></p></div>
+<p>Other ivreg tidiers: 
+<code><a href='augment.ivreg.html'>augment.ivreg</a>()</code>,
+<code><a href='glance.ivreg.html'>glance.ivreg</a>()</code></p></div>
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>A <code><a href='https://tibble.tidyverse.org/reference/tibble.html'>tibble::tibble()</a></code> with columns:</p>
@@ -241,6 +234,7 @@ the <code>data</code> argument.</p></td>
 <span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>AER</span>)
 
 <span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='st'>"CigarettesSW"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"AER"</span>)
+
 <span class='no'>ivr</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/AER/man/ivreg.html'>ivreg</a></span>(
   <span class='fu'><a href='https://rdrr.io/r/base/Log.html'>log</a></span>(<span class='no'>packs</span>) ~ <span class='no'>income</span> <span class='kw'>|</span> <span class='no'>population</span>,
   <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>CigarettesSW</span>,
@@ -275,11 +269,10 @@ the <code>data</code> argument.</p></td>
 #&gt;   term         estimate std.error statistic  p.value conf.low conf.high
 #&gt;   &lt;chr&gt;           &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;
 #&gt; 1 (Intercept)  4.61e+ 0  4.45e- 2    104.   3.74e-56  4.52e+0  4.70e+ 0
-#&gt; 2 income      -5.71e-10  2.33e-10     -2.44 1.84e- 2 -1.03e-9 -1.13e-10</div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>ivr</span>, <span class='kw'>conf.int</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>exponentiate</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: Exponentiating coefficients, but model did not use a log or logit link function.</span></div><div class='output co'>#&gt; # A tibble: 2 x 7
-#&gt;   term        estimate std.error statistic  p.value conf.low conf.high
-#&gt;   &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;
-#&gt; 1 (Intercept)  101.     4.45e- 2    104.   3.74e-56   92.2     110.   
-#&gt; 2 income         1.000  2.33e-10     -2.44 1.84e- 2    1.000     1.000</div><div class='input'>
+#&gt; 2 income      -5.71e-10  2.33e-10     -2.44 1.84e- 2 -1.03e-9 -1.13e-10</div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>ivr</span>, <span class='kw'>conf.int</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>instruments</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; # A tibble: 1 x 5
+#&gt;   term   num.df den.df statistic  p.value
+#&gt;   &lt;chr&gt;   &lt;dbl&gt;  &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
+#&gt; 1 income      1     46     3329. 1.46e-44</div><div class='input'>
 <span class='fu'><a href='https://rdrr.io/pkg/generics/man/augment.html'>augment</a></span>(<span class='no'>ivr</span>)</div><div class='output co'>#&gt; # A tibble: 48 x 6
 #&gt;    .rownames log.packs.    income population .fitted  .resid
 #&gt;    &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;      &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;
@@ -323,8 +316,7 @@ the <code>data</code> argument.</p></td>
 <span class='fu'><a href='https://rdrr.io/pkg/generics/man/glance.html'>glance</a></span>(<span class='no'>ivr</span>)</div><div class='output co'>#&gt; # A tibble: 1 x 8
 #&gt;   r.squared adj.r.squared sigma statistic p.value    df df.residual  nobs
 #&gt;       &lt;dbl&gt;         &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt; &lt;int&gt;       &lt;int&gt; &lt;int&gt;
-#&gt; 1     0.131         0.112 0.229      5.98  0.0184     2          46    48</div><div class='input'>
-</div></pre>
+#&gt; 1     0.131         0.112 0.229      5.98  0.0184     2          46    48</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

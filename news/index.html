@@ -86,7 +86,7 @@
         <a class="navbar-brand" href="../index.html">broom</a>
         <div class="info">
           <span class="partof">part of the <a href="https://tidyverse.org">tidyverse</a></span>
-          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.2.9002</span>
+          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.2.9003</span>
         </div>
       </div>
     </div>
@@ -164,6 +164,7 @@
 <li>New <code>glance.aov</code> method replaces the older one which relied on <code>glance.lm</code>. The new model summary dataframe contains following information- <code>logLik</code>, <code>AIC</code>, <code>BIC, deviance</code>, <code>nobs</code>. This is in response to conversation that took place in <a href='https://github.com/tidymodels/broom/issues/212'>#212</a>. Note that <code>tidy.aov</code> can be used to get numerator and denominator degrees of freedom.</li>
 <li><p>Augment method for <code>factanal</code> objects now returns a tibble with name pattern <code>.fs</code> (e.g., <code>.fs1</code>, <code>.fs2</code>, <code>.fs3</code>, etc.), instead of <code>factor</code> (e.g., <code>factor1</code>, <code>factor2</code>, <code>factor3</code>, etc.) (<a href='https://github.com/tidymodels/broom/issues/650'>#650</a>).</p></li>
 <li><p>We have removed all support for the <code>quick</code> argument in <code><a href="https://rdrr.io/pkg/generics/man/tidy.html">tidy()</a></code> methods. TODO: explain why, and discuss alternatives.</p></li>
+<li><p>Remove <code>tidy.summary.lm()</code>. Call <code><a href="https://rdrr.io/pkg/generics/man/tidy.html">tidy()</a></code> on the <code>lm</code> object directly. General philosophy: call <code><a href="https://rdrr.io/pkg/generics/man/tidy.html">tidy()</a></code> on model objects, not model summary objects.</p></li>
 </ul>
 </div>
 <div id="changes-to-augment" class="section level2">
@@ -212,6 +213,14 @@
 <li><p>All <code>conf.int</code> arguments now default to <code>FALSE</code>. This primarily effects <code><a href="../reference/tidy.survreg.html">tidy.survreg()</a></code>, which previously always returned confidence intervals.</p></li>
 <li><p>All <code>conf.level</code> arguments now default to <code>0.95</code>.</p></li>
 <li><p><code><a href="../reference/tidy.lsmobj.html">tidy.lsmobj()</a></code> gained a <code>conf.int</code> argument</p></li>
+</ul>
+</div>
+<div id="the-great-lm-disentanglement" class="section level2">
+<h2 class="hasAnchor">
+<a href="#the-great-lm-disentanglement" class="anchor"></a>The great <code>lm</code> disentanglement</h2>
+<ul>
+<li>
+<code><a href="https://rdrr.io/pkg/generics/man/tidy.html">tidy()</a></code> no longer checks for a log or logit link when <code>exponentiate = TRUE</code>, as internals have been to refactored to remove extraneous <code>exponentiate</code> arguments. If you set <code>exponentiate</code>, we assume you know what you are doing and that you want exponentiate coefficients (and confidence intervals if <code>conf.int = TRUE</code>) regardless of link function.</li>
 </ul>
 </div>
 <div id="new-tidiers-features-and-bugfixes" class="section level2">

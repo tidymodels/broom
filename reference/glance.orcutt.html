@@ -97,7 +97,7 @@ the measure will be reported as NA." />
         <a class="navbar-brand" href="../index.html">broom</a>
         <div class="info">
           <span class="partof">part of the <a href="https://tidyverse.org">tidyverse</a></span>
-          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.2.9002</span>
+          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.2.9003</span>
         </div>
       </div>
     </div>
@@ -204,7 +204,8 @@ the <code>data</code> argument.</p></td>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p><code><a href='https://rdrr.io/pkg/generics/man/glance.html'>glance()</a></code>, <code><a href='https://rdrr.io/pkg/orcutt/man/cochrane.orcutt.html'>orcutt::cochrane.orcutt()</a></code></p>
-<p>Other orcutt tidiers: <code><a href='tidy.orcutt.html'>tidy.orcutt</a></code></p></div>
+<p>Other orcutt tidiers: 
+<code><a href='tidy.orcutt.html'>tidy.orcutt</a>()</code></p></div>
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>A <code><a href='https://tibble.tidyverse.org/reference/tibble.html'>tibble::tibble()</a></code> with exactly one row and columns:</p>
@@ -225,7 +226,7 @@ the <code>data</code> argument.</p></td>
 <span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>orcutt</span>)
 
 <span class='no'>reg</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span>(<span class='no'>mpg</span> ~ <span class='no'>wt</span> + <span class='no'>qsec</span> + <span class='no'>disp</span>, <span class='no'>mtcars</span>)
-<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>reg</span>)</div><div class='output co'>#&gt; # A tibble: 4 x 5
+<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>reg</span>)</div><div class='output co'>#&gt; <span class='message'>Joining, by = c("term", "estimate")</span></div><div class='output co'>#&gt; # A tibble: 4 x 5
 #&gt;   term         estimate std.error statistic  p.value
 #&gt;   &lt;chr&gt;           &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
 #&gt; 1 (Intercept) 19.8         5.94      3.33   0.00244 

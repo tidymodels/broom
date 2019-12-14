@@ -92,7 +92,7 @@ specify which components to return." />
         <a class="navbar-brand" href="../index.html">broom</a>
         <div class="info">
           <span class="partof">part of the <a href="https://tidyverse.org">tidyverse</a></span>
-          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.2.9002</span>
+          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.2.9003</span>
         </div>
       </div>
     </div>
@@ -168,11 +168,7 @@ specify which components to return.</p>
     </div>
 
     <pre class="usage"><span class='co'># S3 method for lm</span>
-<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>x</span>, <span class='kw'>conf.int</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>conf.level</span> <span class='kw'>=</span> <span class='fl'>0.95</span>,
-  <span class='kw'>exponentiate</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='no'>...</span>)
-
-<span class='co'># S3 method for summary.lm</span>
-<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>x</span>, <span class='no'>...</span>)</pre>
+<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>x</span>, <span class='kw'>conf.int</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>conf.level</span> <span class='kw'>=</span> <span class='fl'>0.95</span>, <span class='no'>...</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -191,13 +187,6 @@ interval in the tidied output. Defaults to <code>FALSE</code>.</p></td>
       <td><p>The confidence level to use for the confidence interval
 if <code>conf.int = TRUE</code>. Must be strictly greater than 0 and less than 1.
 Defaults to 0.95, which corresponds to a 95 percent confidence interval.</p></td>
-    </tr>
-    <tr>
-      <th>exponentiate</th>
-      <td><p>Logical indicating whether or not to exponentiate the
-the coefficient estimates. This is typical for logistic and multinomial
-regressions, but a bad idea if there is no log or logit link. Defaults
-to <code>FALSE</code>.</p></td>
     </tr>
     <tr>
       <th>...</th>
@@ -222,11 +211,15 @@ the model with <code>na.action = na.exclude</code>.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p><code><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy()</a></code>, <code><a href='https://rdrr.io/r/stats/summary.lm.html'>stats::summary.lm()</a></code></p>
-<p>Other lm tidiers: <code><a href='augment.glm.html'>augment.glm</a></code>,
-  <code><a href='augment.lm.html'>augment.lm</a></code>, <code><a href='glance.glm.html'>glance.glm</a></code>,
-  <code><a href='glance.lm.html'>glance.lm</a></code>, <code><a href='glance.svyglm.html'>glance.svyglm</a></code>,
-  <code><a href='tidy.glm.html'>tidy.glm</a></code>, <code><a href='tidy.lm.beta.html'>tidy.lm.beta</a></code>,
-  <code><a href='tidy.mlm.html'>tidy.mlm</a></code>, <code><a href='tidy.svyglm.html'>tidy.svyglm</a></code></p></div>
+<p>Other lm tidiers: 
+<code><a href='augment.glm.html'>augment.glm</a>()</code>,
+<code><a href='augment.lm.html'>augment.lm</a>()</code>,
+<code><a href='glance.glm.html'>glance.glm</a>()</code>,
+<code><a href='glance.lm.html'>glance.lm</a>()</code>,
+<code><a href='glance.svyglm.html'>glance.svyglm</a>()</code>,
+<code><a href='tidy.glm.html'>tidy.glm</a>()</code>,
+<code><a href='tidy.lm.beta.html'>tidy.lm.beta</a>()</code>,
+<code><a href='tidy.mlm.html'>tidy.mlm</a>()</code></p></div>
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>A <code><a href='https://tibble.tidyverse.org/reference/tibble.html'>tibble::tibble()</a></code> with columns:</p>
@@ -247,7 +240,7 @@ the model with <code>na.action = na.exclude</code>.</p>
 
 <span class='no'>mod</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span>(<span class='no'>mpg</span> ~ <span class='no'>wt</span> + <span class='no'>qsec</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>mtcars</span>)
 
-<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>mod</span>)</div><div class='output co'>#&gt; # A tibble: 3 x 5
+<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>mod</span>)</div><div class='output co'>#&gt; <span class='message'>Joining, by = c("term", "estimate")</span></div><div class='output co'>#&gt; # A tibble: 3 x 5
 #&gt;   term        estimate std.error statistic  p.value
 #&gt;   &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
 #&gt; 1 (Intercept)   19.7       5.25       3.76 7.65e- 4
@@ -262,8 +255,7 @@ the model with <code>na.action = na.exclude</code>.</p>
   <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span>(
     <span class='kw'>low</span> <span class='kw'>=</span> <span class='no'>estimate</span> - <span class='no'>std.error</span>,
     <span class='kw'>high</span> <span class='kw'>=</span> <span class='no'>estimate</span> + <span class='no'>std.error</span>
-  )
-
+  )</div><div class='output co'>#&gt; <span class='message'>Joining, by = c("term", "estimate")</span></div><div class='input'>
 <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span>(<span class='no'>d</span>, <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='no'>estimate</span>, <span class='no'>term</span>, <span class='kw'>xmin</span> <span class='kw'>=</span> <span class='no'>low</span>, <span class='kw'>xmax</span> <span class='kw'>=</span> <span class='no'>high</span>, <span class='kw'>height</span> <span class='kw'>=</span> <span class='fl'>0</span>)) +
   <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_point.html'>geom_point</a></span>() +
   <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_abline.html'>geom_vline</a></span>(<span class='kw'>xintercept</span> <span class='kw'>=</span> <span class='fl'>0</span>) +
@@ -331,7 +323,8 @@ the model with <code>na.action = na.exclude</code>.</p>
 #&gt; 3 Y1       a2           0.00979     0.337    0.0291 0.978  
 #&gt; 4 Y2       (Intercept) -0.300       0.320   -0.940  0.379  
 #&gt; 5 Y2       a1           0.160       0.278    0.578  0.582  
-#&gt; 6 Y2       a2           0.913       0.234    3.90   0.00589</div></pre>
+#&gt; 6 Y2       a2           0.913       0.234    3.90   0.00589</div><div class='input'>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

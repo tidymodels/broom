@@ -97,7 +97,7 @@ the measure will be reported as NA." />
         <a class="navbar-brand" href="../index.html">broom</a>
         <div class="info">
           <span class="partof">part of the <a href="https://tidyverse.org">tidyverse</a></span>
-          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.2.9002</span>
+          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.2.9003</span>
         </div>
       </div>
     </div>
@@ -208,8 +208,9 @@ the <code>data</code> argument.</p></td>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p><code><a href='https://rdrr.io/pkg/generics/man/glance.html'>glance()</a></code>, <code><a href='https://rdrr.io/pkg/MASS/man/rlm.html'>MASS::rlm()</a></code></p>
-<p>Other rlm tidiers: <code><a href='augment.rlm.html'>augment.rlm</a></code>,
-  <code><a href='tidy.rlm.html'>tidy.rlm</a></code></p></div>
+<p>Other rlm tidiers: 
+<code><a href='augment.rlm.html'>augment.rlm</a>()</code>,
+<code><a href='tidy.rlm.html'>tidy.rlm</a>()</code></p></div>
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>A <code><a href='https://tibble.tidyverse.org/reference/tibble.html'>tibble::tibble()</a></code> with exactly one row and columns:</p>
@@ -228,6 +229,7 @@ the <code>data</code> argument.</p></td>
 <span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>MASS</span>)
 
 <span class='no'>r</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/MASS/man/rlm.html'>rlm</a></span>(<span class='no'>stack.loss</span> ~ <span class='no'>.</span>, <span class='no'>stackloss</span>)
+
 <span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>r</span>)</div><div class='output co'>#&gt; # A tibble: 4 x 4
 #&gt;   term        estimate std.error statistic
 #&gt;   &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;

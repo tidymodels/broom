@@ -118,7 +118,7 @@ missing at this time." />
         <a class="navbar-brand" href="../index.html">broom</a>
         <div class="info">
           <span class="partof">part of the <a href="https://tidyverse.org">tidyverse</a></span>
-          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.2.9002</span>
+          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.2.9003</span>
         </div>
       </div>
     </div>
@@ -220,8 +220,13 @@ missing at this time.</p>
     </div>
 
     <pre class="usage"><span class='co'># S3 method for polr</span>
-<span class='fu'><a href='https://rdrr.io/pkg/generics/man/augment.html'>augment</a></span>(<span class='no'>x</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/model.frame.html'>model.frame</a></span>(<span class='no'>x</span>), <span class='kw'>newdata</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>type.predict</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"class"</span>), <span class='no'>...</span>)</pre>
+<span class='fu'><a href='https://rdrr.io/pkg/generics/man/augment.html'>augment</a></span>(
+  <span class='no'>x</span>,
+  <span class='kw'>data</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/model.frame.html'>model.frame</a></span>(<span class='no'>x</span>),
+  <span class='kw'>newdata</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>type.predict</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"class"</span>),
+  <span class='no'>...</span>
+)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -270,11 +275,16 @@ the <code>data</code> argument.</p></td>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p><code><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy()</a></code>, <code><a href='https://rdrr.io/pkg/MASS/man/polr.html'>MASS::polr()</a></code></p>
-<p>Other ordinal tidiers: <code><a href='augment.clm.html'>augment.clm</a></code>,
-  <code><a href='glance.clmm.html'>glance.clmm</a></code>, <code><a href='glance.clm.html'>glance.clm</a></code>,
-  <code><a href='glance.polr.html'>glance.polr</a></code>, <code><a href='glance.svyolr.html'>glance.svyolr</a></code>,
-  <code><a href='tidy.clmm.html'>tidy.clmm</a></code>, <code><a href='tidy.clm.html'>tidy.clm</a></code>,
-  <code><a href='tidy.polr.html'>tidy.polr</a></code>, <code><a href='tidy.svyolr.html'>tidy.svyolr</a></code></p></div>
+<p>Other ordinal tidiers: 
+<code><a href='augment.clm.html'>augment.clm</a>()</code>,
+<code><a href='glance.clmm.html'>glance.clmm</a>()</code>,
+<code><a href='glance.clm.html'>glance.clm</a>()</code>,
+<code><a href='glance.polr.html'>glance.polr</a>()</code>,
+<code><a href='glance.svyolr.html'>glance.svyolr</a>()</code>,
+<code><a href='tidy.clmm.html'>tidy.clmm</a>()</code>,
+<code><a href='tidy.clm.html'>tidy.clm</a>()</code>,
+<code><a href='tidy.polr.html'>tidy.polr</a>()</code>,
+<code><a href='tidy.svyolr.html'>tidy.svyolr</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
