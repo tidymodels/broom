@@ -381,7 +381,11 @@ Suggests:
     testthat (>= 2.1.0),
     tseries,
     xergm,
-    zoo
+    zoo,
+    glmnetUtils,
+    lme4,
+    gee,
+    mclogit
 Remotes:
     alexpghayes/modeltests
 Encoding: UTF-8
