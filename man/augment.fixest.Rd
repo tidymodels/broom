@@ -26,7 +26,9 @@ the \code{data} argument will be ignored.}
 \code{type} argument. Defaults to \code{"link"} (like \code{glm.predict}).}
 
 \item{...}{Additional arguments passed to \code{summary} and \code{confint}. Important
-arguments are \code{se} and \code{cluster}. See \code{\link[fixest:summary.fixest]{summary.fixest}}.}
+arguments are \code{se} and \code{cluster}. Other arguments are \code{dof}, \code{exact_dof},
+\code{forceCovariance}, and \code{keepBounded}.
+See \code{\link[fixest:summary.fixest]{summary.fixest}}.}
 }
 \description{
 Augment accepts a model object and a dataset and adds
@@ -72,7 +74,8 @@ Important note: \code{fixest} models do not include a copy of the input
 data, so you must provide it manually.
 
 augment.fixest only works for \code{\link[fixest:feols]{fixest::feols()}}, \code{\link[fixest:feglm]{fixest::feglm()}}, and
-\code{\link[fixest:femlm]{fixest::femlm()}} models.
+\code{\link[fixest:femlm]{fixest::femlm()}} models. It does not work with results from
+\code{\link[fixest:fenegbin]{fixest::fenegbin()}}, \code{\link[fixest:feNmlm]{fixest::feNmlm()}}, or \code{\link[fixest:fepois]{fixest::fepois()}}.
 }
 \examples{
 \donttest{
@@ -84,15 +87,14 @@ glance(gravity)
 augment(gravity, trade)
 
 ## To get robust or clustered SEs, users can either:
-# 1) Feed tidy() a summary.fixest object that has already accepted these arguments
-gravity_summ <- summary(gravity, cluster = c("Product", "Year"))
-tidy(gravity_summ, conf.int = TRUE)
-# 2) Or, specify the arguments directly in the tidy() call
 tidy(gravity, conf.int = TRUE, cluster = c("Product", "Year"))
 tidy(gravity, conf.int = TRUE, se = "threeway")
-# etc.
+# 2) Feed tidy() a summary.fixest object that has already accepted these arguments
+gravity_summ <- summary(gravity, cluster = c("Product", "Year"))
+tidy(gravity_summ, conf.int = TRUE)
+# Approach (1) is preferred.
 
-## The other fixest methods all working similarly. For example:
+## The other fixest methods all work similarly. For example:
 gravity_pois <- feglm(Euros ~ log(dist_km) | Origin + Destination + Product + Year, trade)
 tidy(gravity_pois)
 glance(gravity_pois)

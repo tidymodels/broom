@@ -4,7 +4,9 @@
 #' @param x A `fixest` object returned from any of the `fixest` estimators
 #' @template param_confint
 #' @param ... Additional arguments passed to `summary` and `confint`. Important
-#' arguments are `se` and `cluster`. See [`summary.fixest`][fixest::summary.fixest()].
+#'   arguments are `se` and `cluster`. Other arguments are `dof`, `exact_dof`,
+#'   `forceCovariance`, and `keepBounded`.
+#'   See [`summary.fixest`][fixest::summary.fixest()].
 #' @evalRd return_tidy(regression = TRUE)
 #'
 #' @details The `fixest` package provides a family of functions for estimating
@@ -26,15 +28,15 @@
 #' augment(gravity, trade)
 #'
 #' ## To get robust or clustered SEs, users can either:
-#' # 1) Feed tidy() a summary.fixest object that has already accepted these arguments
-#' gravity_summ <- summary(gravity, cluster = c("Product", "Year"))
-#' tidy(gravity_summ, conf.int = TRUE)
-#' # 2) Or, specify the arguments directly in the tidy() call
+#  # 1) Or, specify the arguments directly in the tidy() call
 #' tidy(gravity, conf.int = TRUE, cluster = c("Product", "Year"))
 #' tidy(gravity, conf.int = TRUE, se = "threeway")
-#' # etc.
+#' # 2) Feed tidy() a summary.fixest object that has already accepted these arguments
+#' gravity_summ <- summary(gravity, cluster = c("Product", "Year"))
+#' tidy(gravity_summ, conf.int = TRUE)
+#' # Approach (1) is preferred.
 #'
-#' ## The other fixest methods all working similarly. For example:
+#' ## The other fixest methods all work similarly. For example:
 #' gravity_pois <- feglm(Euros ~ log(dist_km) | Origin + Destination + Product + Year, trade)
 #' tidy(gravity_pois)
 #' glance(gravity_pois)
@@ -46,44 +48,72 @@
 #' @seealso [tidy()], [fixest::feglm()], [fixest::fenegbin()],
 #' [fixest::feNmlm()], [fixest::femlm()], [fixest::feols()], [fixest::fepois()]
 tidy.fixest <- function(x, conf.int = FALSE, conf.level = 0.95, ...) {
-  has_dots <- !missing(...)
+  not_summary <- !is_fixest_summary(x)
   # These two options are necessary because the user might specify
   # broom(x, cluster="something") or
   # broom(summary(x, cluster="something"))
   # and calling summary() again will overwrite the arguments in the second case.
   # Note that class(summary(x)) == class(x) == "fixest".
-  if (has_dots) {
-    # Option 1) User specifies se or cluster arguments as part of tidy() call
-    coeftable <- summary(x, ...)$coeftable
+  if (not_summary) {
+    # Option 1) User provides a non-summary object
+    ret <- tidy_fixest(x, conf.int = conf.int, conf.level = conf.level, ...)
   } else {
-    # Option 2) Otherwise, just use whatever object the user feeds into tidy()
-    coeftable <- x$coeftable
-  }
-  nn <- c("estimate", "std.error", "statistic", "p.value")
-  ret <- fix_data_frame(coeftable, nn)
-
-  # CIs (if desired) will follow a simiar pattern as above, depending on what
-  # the user specifies in the tidy() call.
-  if (conf.int) {
-    if (has_dots) {
-      CI <- stats::confint(x, level = conf.level, ...)
-      # Bind to rest of tibble
-      colnames(CI) <- c("conf.low", "conf.high")
-      ret <- cbind(ret, unrowname(CI))
-    } else {
-      # It's possible we were passed a summary of a fixest object. If no `...`
-      # arguments were specified, then we want to use the std error that `x`
-      # already has. That is, we don't want to call confint() because
-      # doing so throws away whatever arguments were provided to summary().
-      ci_fact <- abs(qnorm((1 - conf.level) / 2))
-      ret <- mutate(ret,
-        conf.low  = estimate - ci_fact * std.error,
-        conf.high = estimate + ci_fact * std.error
-      )
-    }
+    # Option 2) User provides a fixest summary object
+    ret <- tidy_summary_fixest(x, conf.int = conf.int, conf.level = conf.level)
   }
   as_tibble(ret)
 }
+
+is_fixest_summary <- function(x) {
+  # Is `x` the result of summary(some_fixest_result)?
+  # Returns TRUE/FALSE.
+  if (!inherits(x, "fixest")) {
+    stop("This is a fixest helper function only.")
+  }
+  "cov.scaled" %in% names(x)
+}
+
+tidy_summary_fixest <- function(x, conf.int = conf.int, conf.level = conf.level, ...) {
+  # If this is a summary object, assume the user has already applied whatever
+  # clustering or standard error specification they want.
+  if (length(list(...)) > 0) {
+    stop(
+      "The fixest object provided to tidy() was already a summary. ",
+      "Additional arguments were provided but can't be used. ",
+      "To specify `cluster` or `se`, call tidy() without summary()."
+    )
+  }
+  coeftable <- x$coeftable
+  nn <- c("estimate", "std.error", "statistic", "p.value")
+  ret <- fix_data_frame(coeftable, nn)
+  if (conf.int) {
+    # It's possible we were passed a summary of a fixest object. If no `...`
+    # arguments were specified, then we want to use the std error that `x`
+    # already has. That is, we don't want to call confint() because
+    # doing so throws away whatever arguments were provided to summary().
+    ci_fact <- abs(qnorm((1 - conf.level) / 2))
+    ret <- mutate(ret,
+      conf.low  = estimate - ci_fact * std.error,
+      conf.high = estimate + ci_fact * std.error
+    )
+  }
+  ret
+}
+
+tidy_fixest <- function(x, conf.int = conf.int, conf.level = conf.level, ...) {
+  coeftable <- summary(x, ...)$coeftable
+  nn <- c("estimate", "std.error", "statistic", "p.value")
+  ret <- fix_data_frame(coeftable, nn)
+  if (conf.int) {
+    CI <- stats::confint(x, level = conf.level, ...)
+    # Bind to rest of tibble
+    colnames(CI) <- c("conf.low", "conf.high")
+    ret <- cbind(ret, unrowname(CI))
+  }
+  ret
+}
+
+
 
 #' @templateVar class fixest
 #' @template title_desc_augment
@@ -100,8 +130,8 @@ tidy.fixest <- function(x, conf.int = FALSE, conf.level = 0.95, ...) {
 #' data, so you must provide it manually.
 #'
 #' augment.fixest only works for [fixest::feols()], [fixest::feglm()], and
-#' [fixest::femlm()] models.
-#'
+#' [fixest::femlm()] models. It does not work with results from
+#' [fixest::fenegbin()], [fixest::feNmlm()], or [fixest::fepois()].
 #' @export
 #' @family fixest tidiers
 #' @seealso [augment()], [fixest::feglm()], [fixest::femlm()], [fixest::feols()]

@@ -10,7 +10,9 @@
 \item{x}{A \code{fixest} object returned from any of the \code{fixest} estimators}
 
 \item{...}{Additional arguments passed to \code{summary} and \code{confint}. Important
-arguments are \code{se} and \code{cluster}. See \code{\link[fixest:summary.fixest]{summary.fixest}}.}
+arguments are \code{se} and \code{cluster}. Other arguments are \code{dof}, \code{exact_dof},
+\code{forceCovariance}, and \code{keepBounded}.
+See \code{\link[fixest:summary.fixest]{summary.fixest}}.}
 }
 \value{
 A one-row \code{\link[tibble:tibble]{tibble::tibble()}} with exactly one row and columns:
@@ -57,15 +59,14 @@ glance(gravity)
 augment(gravity, trade)
 
 ## To get robust or clustered SEs, users can either:
-# 1) Feed tidy() a summary.fixest object that has already accepted these arguments
-gravity_summ <- summary(gravity, cluster = c("Product", "Year"))
-tidy(gravity_summ, conf.int = TRUE)
-# 2) Or, specify the arguments directly in the tidy() call
 tidy(gravity, conf.int = TRUE, cluster = c("Product", "Year"))
 tidy(gravity, conf.int = TRUE, se = "threeway")
-# etc.
+# 2) Feed tidy() a summary.fixest object that has already accepted these arguments
+gravity_summ <- summary(gravity, cluster = c("Product", "Year"))
+tidy(gravity_summ, conf.int = TRUE)
+# Approach (1) is preferred.
 
-## The other fixest methods all working similarly. For example:
+## The other fixest methods all work similarly. For example:
 gravity_pois <- feglm(Euros ~ log(dist_km) | Origin + Destination + Product + Year, trade)
 tidy(gravity_pois)
 glance(gravity_pois)

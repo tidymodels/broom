@@ -17,7 +17,9 @@ if \code{conf.int = TRUE}. Must be strictly greater than 0 and less than 1.
 Defaults to 0.95, which corresponds to a 95 percent confidence interval.}
 
 \item{...}{Additional arguments passed to \code{summary} and \code{confint}. Important
-arguments are \code{se} and \code{cluster}. See \code{\link[fixest:summary.fixest]{summary.fixest}}.}
+arguments are \code{se} and \code{cluster}. Other arguments are \code{dof}, \code{exact_dof},
+\code{forceCovariance}, and \code{keepBounded}.
+See \code{\link[fixest:summary.fixest]{summary.fixest}}.}
 }
 \description{
 Tidy summarizes information about the components of a model.
@@ -47,15 +49,14 @@ glance(gravity)
 augment(gravity, trade)
 
 ## To get robust or clustered SEs, users can either:
-# 1) Feed tidy() a summary.fixest object that has already accepted these arguments
-gravity_summ <- summary(gravity, cluster = c("Product", "Year"))
-tidy(gravity_summ, conf.int = TRUE)
-# 2) Or, specify the arguments directly in the tidy() call
 tidy(gravity, conf.int = TRUE, cluster = c("Product", "Year"))
 tidy(gravity, conf.int = TRUE, se = "threeway")
-# etc.
+# 2) Feed tidy() a summary.fixest object that has already accepted these arguments
+gravity_summ <- summary(gravity, cluster = c("Product", "Year"))
+tidy(gravity_summ, conf.int = TRUE)
+# Approach (1) is preferred.
 
-## The other fixest methods all working similarly. For example:
+## The other fixest methods all work similarly. For example:
 gravity_pois <- feglm(Euros ~ log(dist_km) | Origin + Destination + Product + Year, trade)
 tidy(gravity_pois)
 glance(gravity_pois)
