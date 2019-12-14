@@ -66,11 +66,11 @@ tidy.svyglm <- function(x, conf.int = FALSE, conf.level = 0.95,
   # summary.lm() sets to NA), catch them here and add them back
   
   coefs <- tibble::enframe(stats::coef(x), name = "term", value = "estimate")
-  ret <- left_join(coefs, ret, by = "term")
+  ret <- left_join(coefs, ret, by = c("term", "estimate"))
   
   if (conf.int) {
     ci <- broom_confint_terms(x, level = conf.level)
-    ret <- dplyr::left_join(ret, ci, by = c("term", "estimate"))
+    ret <- dplyr::left_join(ret, ci, by = "term")
   }
   
   if (exponentiate)
