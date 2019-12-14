@@ -246,14 +246,14 @@ the <code>data</code> argument.</p></td>
 #&gt; 8 e     4       88.8       8.62      10.3  3.28e-25</div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>mod</span>, <span class='kw'>conf.int</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; # A tibble: 8 x 8
 #&gt;   term  curve estimate std.error statistic  p.value conf.low conf.high
 #&gt;   &lt;chr&gt; &lt;chr&gt;    &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;
-#&gt; 1 b     1       -1.50      0.155     -9.67 2.01e-22       NA        NA
-#&gt; 2 b     2       -0.843     0.139     -6.06 1.35e- 9       NA        NA
-#&gt; 3 b     3       -2.16      0.138    -15.7  1.65e-55       NA        NA
-#&gt; 4 b     4       -1.45      0.169     -8.62 3.41e-18       NA        NA
-#&gt; 5 e     1      252.       13.8       18.2  1.16e-74       NA        NA
-#&gt; 6 e     2      378.       39.4        9.61 3.53e-22       NA        NA
-#&gt; 7 e     3      120.        5.91      20.3  1.14e-91       NA        NA
-#&gt; 8 e     4       88.8       8.62      10.3  3.28e-25       NA        NA</div><div class='input'>
+#&gt; 1 b     1       -1.50      0.155     -9.67 2.01e-22    -1.81    -1.20 
+#&gt; 2 b     2       -0.843     0.139     -6.06 1.35e- 9    -1.12    -0.571
+#&gt; 3 b     3       -2.16      0.138    -15.7  1.65e-55    -2.43    -1.89 
+#&gt; 4 b     4       -1.45      0.169     -8.62 3.41e-18    -1.78    -1.12 
+#&gt; 5 e     1      252.       13.8       18.2  1.16e-74   225.     279.   
+#&gt; 6 e     2      378.       39.4        9.61 3.53e-22   301.     456.   
+#&gt; 7 e     3      120.        5.91      20.3  1.14e-91   108.     131.   
+#&gt; 8 e     4       88.8       8.62      10.3  3.28e-25    71.9    106.   </div><div class='input'>
 <span class='fu'><a href='https://rdrr.io/pkg/generics/man/glance.html'>glance</a></span>(<span class='no'>mod</span>)</div><div class='output co'>#&gt; # A tibble: 1 x 4
 #&gt;     AIC   BIC logLik df.residual
 #&gt;   &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;       &lt;int&gt;
