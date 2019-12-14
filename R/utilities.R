@@ -353,7 +353,7 @@ broom_confint <- function(x, ...) {
   
   # warn on arguments silently being ignored
   ellipsis::check_dots_used()
-  ci <- confint(x, ...)
+  ci <- suppresMessages(confint(x, ...))
   
   # confint called on models with a single predictor
   # often returns a named vector rather than a matrix :(
@@ -372,7 +372,7 @@ broom_confint_terms <- function(x, ...) {
   
   # warn on arguments silently being ignored
   ellipsis::check_dots_used()
-  ci <- confint(x, ...)
+  ci <- suppressMessages(confint(x, ...))
   
   # confint called on models with a single predictor
   # often returns a named vector rather than a matrix :(
