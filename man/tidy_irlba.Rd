@@ -49,8 +49,9 @@ If \code{matrix} is \code{"d"}, \code{"eigenvalues"} or \code{"pcs"}, the column
 
 \item{\code{PC}}{An integer vector indicating the principal component}
 \item{\code{std.dev}}{Standard deviation explained by this PC}
-\item{\code{percent}}{Percentage of variation explained}
-\item{\code{cumulative}}{Cumulative percentage of variation explained}
+\item{\code{percent}}{Fraction of variation explained by this component}
+\item{\code{cumulative}}{Cumulative fraction of variation explained by
+principle components up to this component.}
 }
 \description{
 Broom tidies a number of lists that are effectively S3
@@ -60,8 +61,8 @@ they do not have a class attribute, they cannot be handled by S3 dispatch.
 
 These functions look at the elements of a list and determine if there is
 an appropriate tidying method to apply to the list. Those tidiers are
-themselves are implemented as functions of the form \code{tidy_<function>}
-or \code{glance_<function>} and are not exported (but they are documented!).
+themselves are implemented as functions of the form \verb{tidy_<function>}
+or \verb{glance_<function>} and are not exported (but they are documented!).
 
 If no appropriate tidying method is found, throws an error.
 }
@@ -100,12 +101,17 @@ tidy_u \%>\%
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[irlba:irlba]{irlba::irlba()}}
 
-Other list tidiers: \code{\link{glance_optim}},
-  \code{\link{list_tidiers}}, \code{\link{tidy_optim}},
-  \code{\link{tidy_svd}}, \code{\link{tidy_xyz}}
+Other list tidiers: 
+\code{\link{glance_optim}()},
+\code{\link{list_tidiers}},
+\code{\link{tidy_optim}()},
+\code{\link{tidy_svd}()},
+\code{\link{tidy_xyz}()}
 
-Other svd tidiers: \code{\link{augment.prcomp}},
-  \code{\link{tidy.prcomp}}, \code{\link{tidy_svd}}
+Other svd tidiers: 
+\code{\link{augment.prcomp}()},
+\code{\link{tidy.prcomp}()},
+\code{\link{tidy_svd}()}
 }
 \concept{list tidiers}
 \concept{svd tidiers}

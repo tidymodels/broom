@@ -4,14 +4,15 @@
 #' @param x An `rma` object such as those created by [metafor::rma()],
 #'   [metafor::rma.uni()], [metafor::rma.glmm()], [metafor::rma.mh()],
 #'   [metafor::rma.mv()], or [metafor::rma.peto()].
-#' @inheritParams tidy.lm
+#' @template param_confint
+#' @template param_exponentiate
 #' @param include_studies Logical. Should individual studies be included in the
-#'    output? Defaults to `TRUE`.
+#'    output? Defaults to `FALSE`.
 #' @template param_unused_dots
 #' @param measure Measure type. See [metafor::escalc()]
 #'
 #' @evalRd return_tidy(
-#'   study = "The name of the individual study",
+#'   term = "The name of the individual study",
 #'   type = "The estimate type  (summary vs individual study)",
 #'   "estimate",
 #'   "std.error",
@@ -42,8 +43,9 @@
 #'
 #' @rdname metafor_tidiers
 #' 
-tidy.rma <- function(x, conf.int = FALSE, conf.level = 0.95, exponentiate = FALSE,
-                     include_studies = TRUE, measure = "GEN", ...) {
+tidy.rma <- function(x, conf.int = FALSE, conf.level = 0.95,
+                     exponentiate = FALSE, include_studies = FALSE,
+                     measure = "GEN", ...) {
   # tidy summary estimates
   betas <- x$beta
   if (!is.null(nrow(betas)) && nrow(betas) > 1) {
@@ -58,7 +60,7 @@ tidy.rma <- function(x, conf.int = FALSE, conf.level = 0.95, exponentiate = FALS
   }
   
   results <- tibble::tibble(
-    study = study, 
+    term = study, 
     type = "summary",
     estimate = betas, 
     std.error = x$se,
@@ -78,7 +80,7 @@ tidy.rma <- function(x, conf.int = FALSE, conf.level = 0.95, exponentiate = FALS
     n_studies <- length(x$slab)
     
     estimates <- dplyr::bind_cols(
-      study = as.character(x$slab), 
+      term = as.character(x$slab), 
       # dplyr::bind_cols is strict about recycling, so repeat for each study
       type = rep("study", n_studies), 
       estimates[, c("yi", "sei", "zi")], 
@@ -86,7 +88,7 @@ tidy.rma <- function(x, conf.int = FALSE, conf.level = 0.95, exponentiate = FALS
       estimates[, c("ci.lb", "ci.ub")] 
     )
     
-    names(estimates) <- c("study", "type", "estimate", "std.error", "statistic",
+    names(estimates) <- c("term", "type", "estimate", "std.error", "statistic",
                           "p.value", "conf.low", "conf.high")
     estimates <- as_tibble(estimates)
     results <- dplyr::bind_rows(estimates, results) 
@@ -119,7 +121,8 @@ tidy.rma <- function(x, conf.int = FALSE, conf.level = 0.95, exponentiate = FALS
 #'   "cochran.qe", 
 #'   "p.value.cochran.qe", 
 #'   "cochran.qm", 
-#'   "p.value.cochran.qm"
+#'   "p.value.cochran.qm",
+#'   "df.residual"
 #' )
 #' @export
 #'
@@ -161,9 +164,11 @@ glance.rma <- function(x, ...) {
     cochran.qe = x$QE,
     p.value.cochran.qe = x$QEp,
     cochran.qm = x$QM,
-    p.value.cochran.qm = x$QMp
+    p.value.cochran.qm = x$QMp,
+    df.residual = df.residual(x)
   ) %>%
     purrr::discard(is.null) %>%
+    purrr::discard(purrr::is_empty) %>%
     # drop multivariate statistics
     purrr::discard(~length(.x) >= 2) %>%
     as_tibble()

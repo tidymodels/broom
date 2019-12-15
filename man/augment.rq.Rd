@@ -22,16 +22,15 @@ the original predictors used to create \code{x}. Defaults to \code{NULL}, indica
 that nothing has been passed to \code{newdata}. If \code{newdata} is specified,
 the \code{data} argument will be ignored.}
 
-\item{...}{Arguments passed on to \code{quantreg::predict.rq}
-\describe{
-  \item{object}{ object of class rq or rqs or rq.process produced by \code{rq} }
-  \item{newdata}{An optional data frame in which to look for variables with
-    which to predict.  If omitted, the fitted values are used.}
-  \item{interval}{type of interval desired:  default is  'none', when set to
+\item{...}{
+  Arguments passed on to \code{\link[quantreg:predict.rq]{quantreg::predict.rq}}
+  \describe{
+    \item{\code{object}}{ object of class rq or rqs or rq.process produced by \code{rq} }
+    \item{\code{interval}}{type of interval desired:  default is  'none', when set to
     'confidence' the function returns a matrix predictions with point predictions
     for each of the 'newdata' points as well as lower and upper confidence limits.}
-  \item{level}{converage probability for the 'confidence' intervals.}
-  \item{type}{For \code{predict.rq}, the  method for 'confidence' intervals, if desired. 
+    \item{\code{level}}{converage probability for the 'confidence' intervals.}
+    \item{\code{type}}{For \code{predict.rq}, the  method for 'confidence' intervals, if desired. 
     If 'percentile' then one of the bootstrap methods is used to generate percentile 
     intervals for each prediction, if 'direct' then a version of the Portnoy and Zhou 
     (1998) method is used, and otherwise an estimated covariance matrix for the parameter
@@ -44,9 +43,9 @@ the \code{data} argument will be ignored.}
     function \code{rearrange}.  When the "fhat" option is invoked, a list of conditional
     density functions is returned based on Silverman's adaptive kernel method as
     implemented in \code{akj} and \code{approxfun}.}
-  \item{na.action}{ function determining what should be done with missing values
+    \item{\code{na.action}}{ function determining what should be done with missing values
     in 'newdata'.  The default is to predict 'NA'.}
-}}
+  }}
 }
 \description{
 Augment accepts a model object and a dataset and adds
@@ -96,10 +95,14 @@ intervals when data is specified via the \code{newdata} argument.
 \seealso{
 \link{augment}, \code{\link[quantreg:rq]{quantreg::rq()}}, \code{\link[quantreg:predict.rq]{quantreg::predict.rq()}}
 
-Other quantreg tidiers: \code{\link{augment.nlrq}},
-  \code{\link{augment.rqs}}, \code{\link{glance.nlrq}},
-  \code{\link{glance.rq}}, \code{\link{tidy.nlrq}},
-  \code{\link{tidy.rqs}}, \code{\link{tidy.rq}}
+Other quantreg tidiers: 
+\code{\link{augment.nlrq}()},
+\code{\link{augment.rqs}()},
+\code{\link{glance.nlrq}()},
+\code{\link{glance.rq}()},
+\code{\link{tidy.nlrq}()},
+\code{\link{tidy.rqs}()},
+\code{\link{tidy.rq}()}
 }
 \concept{quantreg tidiers}
 \value{

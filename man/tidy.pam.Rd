@@ -56,8 +56,9 @@ augment(p, x) \%>\%
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[cluster:pam]{cluster::pam()}}
 
-Other pam tidiers: \code{\link{augment.pam}},
-  \code{\link{glance.pam}}
+Other pam tidiers: 
+\code{\link{augment.pam}()},
+\code{\link{glance.pam}()}
 }
 \concept{pam tidiers}
 \value{

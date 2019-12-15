@@ -21,7 +21,12 @@ accept a \code{newdata} argument, it will use the default value for
 the \code{data} argument.}
 }
 \description{
-This method wraps \code{\link[=tidy.lm]{tidy.lm()}}.
+Tidy summarizes information about the components of a model.
+A model component might be a single term in a regression, a single
+hypothesis, a cluster, or a class. Exactly what tidy considers to be a
+model component varies cross models but is usually self-evident.
+If a model has several distinct types of components, you will need to
+specify which components to return.
 }
 \examples{
 
@@ -38,11 +43,10 @@ glance(co)
 
 }
 \seealso{
-\code{\link[=tidy]{tidy()}}, \code{\link[=tidy.lm]{tidy.lm()}}
-
 \code{\link[orcutt:cochrane.orcutt]{orcutt::cochrane.orcutt()}}
 
-Other orcutt tidiers: \code{\link{glance.orcutt}}
+Other orcutt tidiers: 
+\code{\link{glance.orcutt}()}
 }
 \concept{orcutt tidiers}
 \value{

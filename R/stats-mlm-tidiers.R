@@ -19,15 +19,15 @@
 #'
 #' mod <- lm(cbind(mpg, disp) ~ wt, mtcars)
 #' tidy(mod, conf.int = TRUE)
+#' 
 #' @importFrom dplyr bind_cols
 #' @export
 #' @seealso [tidy()]
 #' @family lm tidiers
 #' @export
-
 tidy.mlm <- function(x,
                      conf.int = FALSE,
-                     conf.level = .95,
+                     conf.level = 0.95,
                      ...) {
 
   # adding other details from summary object
@@ -38,20 +38,17 @@ tidy.mlm <- function(x,
   nn <- c("estimate", "std.error", "statistic", "p.value")
   
   # multiple response variables
-  ret <- purrr::map_df(co, fix_data_frame, nn[1:ncol(co[[1]])],
-                       .id = "response"
-  )
+  ret <- purrr::map_df(co, fix_data_frame, nn[1:ncol(co[[1]])], .id = "response")
   ret$response <- stringr::str_replace(ret$response, "Response ", "")
   
   ret <- as_tibble(ret)
   
-  # adding confidence intervals
   if (conf.int) {
 
     # S3 method for computing confidence intervals for `mlm` objects was
     # introduced in R 3.5
     CI <- tryCatch(
-      expr = stats::confint(x, level = conf.level),
+      stats::confint(x, level = conf.level),
       error = function(x) {
         NULL
       }
@@ -59,11 +56,11 @@ tidy.mlm <- function(x,
 
     # if R version is prior to 3.5, use the custom function
     if (is.null(CI)) {
-      CI <- confint.mlm(x, level = conf.level)
+      CI <- confint_mlm(x, level = conf.level)
     }
 
     colnames(CI) <- c("conf.low", "conf.high")
-    ret <- bind_cols(ret, CI)
+    ret <- bind_cols(ret, as_tibble(CI))
   }
 
   as_tibble(ret)
@@ -75,18 +72,15 @@ tidy.mlm <- function(x,
 augment.mlm <- augment.default
 
 #' @export
-
 glance.mlm <- glance.default
 
 # compute confidence intervals for mlm object.
-confint.mlm <- function(object, level = 0.95, ...) {
-  cf <- coef(object)
-  ncfs <- as.numeric(cf)
-  a <- (1 - level) / 2
-  a <- c(a, 1 - a)
-  fac <- qt(a, object$df.residual)
-  pct <- .format.perc(a, 3)
-  ses <- sqrt(diag(stats::vcov(object)))
-  ci <- ncfs + ses %o% fac
-  setNames(data.frame(ci), pct)
+confint_mlm <- function(object, level = 0.95, ...) {
+  coef <- as.numeric(coef(object))
+  alpha <- (1 - level) / 2
+  crit_val <- qt(c(alpha, 1 - alpha), object$df.residual)
+  se <- sqrt(diag(stats::vcov(object)))
+  ci <- as.data.frame(coef + se %o% crit_val)
+  colnames(ci) <- c("conf.low", "conf.high")
+  ci
 }

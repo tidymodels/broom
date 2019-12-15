@@ -5,8 +5,7 @@
 \alias{svyolr_tidiers}
 \title{Tidy a(n) svyolr object}
 \usage{
-\method{tidy}{svyolr}(x, conf.int = FALSE, conf.level = 0.95,
-  exponentiate = FALSE, ...)
+\method{tidy}{svyolr}(x, conf.int = FALSE, conf.level = 0.95, exponentiate = FALSE, ...)
 }
 \arguments{
 \item{x}{A \code{svyolr} object returned from \code{\link[survey:svyolr]{survey::svyolr()}}.}
@@ -42,7 +41,7 @@ If a model has several distinct types of components, you will need to
 specify which components to return.
 }
 \details{
-In \code{broom 0.7.0} the \code{coefficient_type} column was renamed to
+In \verb{broom 0.7.0} the \code{coefficient_type} column was renamed to
 \code{coef.type}, and the contents were changed as well. Now the contents
 are \code{coefficient} and \code{scale}, rather than \code{coefficient} and \code{zeta}.
 }
@@ -59,11 +58,16 @@ glance(fit)
 \seealso{
 \link{tidy}, \code{\link[survey:svyolr]{survey::svyolr()}}
 
-Other ordinal tidiers: \code{\link{augment.clm}},
-  \code{\link{augment.polr}}, \code{\link{glance.clmm}},
-  \code{\link{glance.clm}}, \code{\link{glance.polr}},
-  \code{\link{glance.svyolr}}, \code{\link{tidy.clmm}},
-  \code{\link{tidy.clm}}, \code{\link{tidy.polr}}
+Other ordinal tidiers: 
+\code{\link{augment.clm}()},
+\code{\link{augment.polr}()},
+\code{\link{glance.clmm}()},
+\code{\link{glance.clm}()},
+\code{\link{glance.polr}()},
+\code{\link{glance.svyolr}()},
+\code{\link{tidy.clmm}()},
+\code{\link{tidy.clm}()},
+\code{\link{tidy.polr}()}
 }
 \concept{ordinal tidiers}
 \value{

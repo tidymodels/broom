@@ -6,8 +6,7 @@
 \alias{gam_tidiers}
 \title{Tidy a(n) gam object}
 \usage{
-\method{tidy}{gam}(x, parametric = FALSE, conf.int = FALSE,
-  conf.level = 0.95, ...)
+\method{tidy}{gam}(x, parametric = FALSE, conf.int = FALSE, conf.level = 0.95, ...)
 }
 \arguments{
 \item{x}{A \code{gam} object returned from a call to \code{\link[mgcv:gam]{mgcv::gam()}}.}
@@ -61,7 +60,8 @@ glance(g)
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[mgcv:gam]{mgcv::gam()}}, \code{\link[=tidy.Gam]{tidy.Gam()}}
 
-Other mgcv tidiers: \code{\link{glance.gam}}
+Other mgcv tidiers: 
+\code{\link{glance.gam}()}
 }
 \concept{mgcv tidiers}
 \value{

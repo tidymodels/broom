@@ -74,8 +74,10 @@ tidy(fit2)
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[glmnet:glmnet]{glmnet::glmnet()}}
 
-Other glmnet tidiers: \code{\link{glance.cv.glmnet}},
-  \code{\link{glance.glmnet}}, \code{\link{tidy.cv.glmnet}}
+Other glmnet tidiers: 
+\code{\link{glance.cv.glmnet}()},
+\code{\link{glance.glmnet}()},
+\code{\link{tidy.cv.glmnet}()}
 }
 \concept{glmnet tidiers}
 \value{

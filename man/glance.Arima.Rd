@@ -37,6 +37,7 @@ the measure will be reported as \code{NA}.
 \examples{
 
 fit <- arima(lh, order = c(1, 0, 0))
+
 tidy(fit)
 glance(fit)
 
@@ -44,7 +45,8 @@ glance(fit)
 \seealso{
 \code{\link[stats:arima]{stats::arima()}}
 
-Other Arima tidiers: \code{\link{tidy.Arima}}
+Other Arima tidiers: 
+\code{\link{tidy.Arima}()}
 }
 \concept{Arima tidiers}
 \value{

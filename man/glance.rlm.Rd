@@ -44,6 +44,7 @@ For tidiers for models from the \pkg{robust} package see
 library(MASS)
 
 r <- rlm(stack.loss ~ ., stackloss)
+
 tidy(r)
 augment(r)
 glance(r)
@@ -52,8 +53,9 @@ glance(r)
 \seealso{
 \code{\link[=glance]{glance()}}, \code{\link[MASS:rlm]{MASS::rlm()}}
 
-Other rlm tidiers: \code{\link{augment.rlm}},
-  \code{\link{tidy.rlm}}
+Other rlm tidiers: 
+\code{\link{augment.rlm}()},
+\code{\link{tidy.rlm}()}
 }
 \concept{rlm tidiers}
 \value{

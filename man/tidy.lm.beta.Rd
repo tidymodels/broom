@@ -2,13 +2,9 @@
 % Please edit documentation in R/lm-beta-tidiers.R
 \name{tidy.lm.beta}
 \alias{tidy.lm.beta}
-\alias{tidy.summary.lm.beta}
 \title{Tidy a(n) lm.beta object}
 \usage{
-\method{tidy}{lm.beta}(x, conf.int = FALSE, conf.level = 0.95,
-  exponentiate = FALSE, ...)
-
-\method{tidy}{summary.lm.beta}(x, ...)
+\method{tidy}{lm.beta}(x, conf.int = FALSE, conf.level = 0.95, ...)
 }
 \arguments{
 \item{x}{An \code{lm.beta} object created by \link[lm.beta:lm.beta]{lm.beta::lm.beta}.}
@@ -19,11 +15,6 @@ interval in the tidied output. Defaults to \code{FALSE}.}
 \item{conf.level}{The confidence level to use for the confidence interval
 if \code{conf.int = TRUE}. Must be strictly greater than 0 and less than 1.
 Defaults to 0.95, which corresponds to a 95 percent confidence interval.}
-
-\item{exponentiate}{Logical indicating whether or not to exponentiate the
-the coefficient estimates. This is typical for logistic and multinomial
-regressions, but a bad idea if there is no log or logit link. Defaults
-to \code{FALSE}.}
 
 \item{...}{Additional arguments. Not used. Needed to match generic
 signature only. \strong{Cautionary note:} Misspelled arguments will be
@@ -55,32 +46,30 @@ the model with \code{na.action = na.exclude}.
 library(lm.beta)
 
 mod <- stats::lm(speed ~ ., data = cars)
+std <- lm.beta(mod)
+tidy(std, conf.int = TRUE)
 
-# standardize
-mod_standardized <- lm.beta::lm.beta(mod)
-tidy(mod_standardized)
-
-## Taken from lm/ lm.beta help
-##
-## Annette Dobson (1990) "An Introduction to Generalized Linear Models".
-## Page 9: Plant Weight Data.
-ctl <- c(4.17,5.58,5.18,6.11,4.50,4.61,5.17,4.53,5.33,5.14)
-trt <- c(4.81,4.17,4.41,3.59,5.87,3.83,6.03,4.89,4.32,4.69)
-group <- gl(2, 10, 20, labels = c("Ctl","Trt"))
+ctl <- c(4.17, 5.58, 5.18, 6.11, 4.50, 4.61, 5.17, 4.53, 5.33, 5.14)
+trt <- c(4.81, 4.17, 4.41, 3.59, 5.87, 3.83, 6.03, 4.89, 4.32, 4.69)
+group <- gl(2, 10, 20, labels = c("Ctl", "Trt"))
 weight <- c(ctl, trt)
-lm.D9 <- stats::lm(weight ~ group)
 
-# standardize
-lm.D9.beta <- lm.beta::lm.beta(lm.D9)
-tidy(lm.D9.beta)
+mod2 <- lm(weight ~ group)
+
+std2 <- lm.beta(mod2)
+tidy(std2, conf.int = TRUE)
 
 }
 \seealso{
-Other lm tidiers: \code{\link{augment.glm}},
-  \code{\link{augment.lm}}, \code{\link{glance.glm}},
-  \code{\link{glance.lm}}, \code{\link{glance.svyglm}},
-  \code{\link{tidy.glm}}, \code{\link{tidy.lm}},
-  \code{\link{tidy.mlm}}, \code{\link{tidy.svyglm}}
+Other lm tidiers: 
+\code{\link{augment.glm}()},
+\code{\link{augment.lm}()},
+\code{\link{glance.glm}()},
+\code{\link{glance.lm}()},
+\code{\link{glance.svyglm}()},
+\code{\link{tidy.glm}()},
+\code{\link{tidy.lm}()},
+\code{\link{tidy.mlm}()}
 }
 \concept{lm tidiers}
 \value{

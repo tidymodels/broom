@@ -66,7 +66,8 @@ ggplot(td2, aes(lambda, GCV)) +
 \seealso{
 \code{\link[=glance]{glance()}}, \code{\link[MASS:select.ridgelm]{MASS::select.ridgelm()}}, \code{\link[MASS:lm.ridge]{MASS::lm.ridge()}}
 
-Other ridgelm tidiers: \code{\link{tidy.ridgelm}}
+Other ridgelm tidiers: 
+\code{\link{tidy.ridgelm}()}
 }
 \concept{ridgelm tidiers}
 \value{

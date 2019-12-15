@@ -4,8 +4,15 @@
 \alias{tidy.rma}
 \title{Tidy a(n) rma object}
 \usage{
-\method{tidy}{rma}(x, conf.int = FALSE, conf.level = 0.95,
-  exponentiate = FALSE, include_studies = TRUE, measure = "GEN", ...)
+\method{tidy}{rma}(
+  x,
+  conf.int = FALSE,
+  conf.level = 0.95,
+  exponentiate = FALSE,
+  include_studies = FALSE,
+  measure = "GEN",
+  ...
+)
 }
 \arguments{
 \item{x}{An \code{rma} object such as those created by \code{\link[metafor:rma]{metafor::rma()}},
@@ -25,7 +32,7 @@ regressions, but a bad idea if there is no log or logit link. Defaults
 to \code{FALSE}.}
 
 \item{include_studies}{Logical. Should individual studies be included in the
-output? Defaults to \code{TRUE}.}
+output? Defaults to \code{FALSE}.}
 
 \item{measure}{Measure type. See \code{\link[metafor:escalc]{metafor::escalc()}}}
 
@@ -74,7 +81,7 @@ A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
   \item{p.value}{The two-sided p-value associated with the observed statistic.}
   \item{statistic}{The value of a T-statistic to use in a hypothesis that the regression term is non-zero.}
   \item{std.error}{The standard error of the regression term.}
-  \item{study}{The name of the individual study}
+  \item{term}{The name of the individual study}
   \item{type}{The estimate type  (summary vs individual study)}
 
 }

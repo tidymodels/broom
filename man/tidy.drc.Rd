@@ -36,8 +36,8 @@ If a model has several distinct types of components, you will need to
 specify which components to return.
 }
 \details{
-The tibble has one row for each curve and term in the regression. The
-\code{curveid} column indicates the curve.
+The tibble has one row for each curve and term in the regression.
+The \code{curveid} column indicates the curve.
 }
 \examples{
 
@@ -58,8 +58,9 @@ augment(mod, selenium)
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[drc:drm]{drc::drm()}}
 
-Other drc tidiers: \code{\link{augment.drc}},
-  \code{\link{glance.drc}}
+Other drc tidiers: 
+\code{\link{augment.drc}()},
+\code{\link{glance.drc}()}
 }
 \concept{drc tidiers}
 \value{
@@ -71,6 +72,6 @@ A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
   \item{statistic}{The value of a T-statistic to use in a hypothesis that the regression term is non-zero.}
   \item{std.error}{The standard error of the regression term.}
   \item{term}{The name of the regression term.}
-  \item{curveid}{Id of the curve}
+  \item{curve}{Index identifying the curve.}
 
 }

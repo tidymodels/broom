@@ -41,7 +41,8 @@ Glance at \code{gam} objects created by calls to \code{\link[mgcv:gam]{mgcv::gam
 \seealso{
 \code{\link[=glance]{glance()}}, \code{\link[gam:gam]{gam::gam()}}
 
-Other gam tidiers: \code{\link{tidy.Gam}}
+Other gam tidiers: 
+\code{\link{tidy.Gam}()}
 }
 \concept{gam tidiers}
 \value{
