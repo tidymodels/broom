@@ -1,7 +1,11 @@
 #' @templateVar class speedlm
-#' @template title_desc_tidy_lm_wrapper
+#' @template title_desc_tidy
 #'
 #' @param x A `speedlm` object returned from [speedglm::speedlm()].
+#' @template param_confint
+#' @template param_unused_dots
+#' 
+#' @evalRd return_tidy(regression = TRUE)
 #'
 #' @examples
 #'
@@ -14,9 +18,25 @@
 #' @aliases speedlm_tidiers
 #' @export
 #' @family speedlm tidiers
-#' @seealso [speedglm::speedlm()]
+#' @seealso [speedglm::speedlm()], [tidy.lm()]
 #' @include stats-lm-tidiers.R
-tidy.speedlm <- tidy.lm
+tidy.speedlm <- function(x, conf.int = FALSE, conf.level = 0.95, ...) {
+  
+  ret <- as_tibble(summary(x)$coefficients, rownames = "term")
+  colnames(ret) <- c("term", "estimate", "std.error", "statistic", "p.value")
+  
+  # summary(x)$coefficients misses rank deficient rows (i.e. coefs that
+  # summary.lm() sets to NA), catch them here and add them back
+  coefs <- tibble::enframe(stats::coef(x), name = "term", value = "estimate")
+  ret <- left_join(coefs, ret)
+  
+  if (conf.int) {
+    ci <- broom_confint_terms(x, level = conf.level)
+    ret <- dplyr::left_join(ret, ci, by = "term")
+  }
+  
+  ret
+}
 
 #' @templateVar class speedlm
 #' @template title_desc_glance

@@ -22,6 +22,7 @@
 #' library(MASS)
 #'
 #' r <- rlm(stack.loss ~ ., stackloss)
+#' 
 #' tidy(r)
 #' augment(r)
 #' glance(r)
@@ -32,25 +33,26 @@
 #' @seealso [glance()], [MASS::rlm()]
 glance.rlm <- function(x, ...) {
   s <- summary(x)
-  ret <- tibble(sigma = s$sigma, 
-                converged = x$converged,
-                logLik = stats::logLik(x),
-                AIC = stats::AIC(x),
-                BIC = stats::BIC(x),
-                deviance = stats::deviance(x),
-                nobs = stats::nobs(x))
-  ret
-  # df.residual is always set to NA in rlm objects
+  tibble(
+    sigma = s$sigma, 
+    converged = x$converged,
+    logLik = stats::logLik(x),
+    AIC = stats::AIC(x),
+    BIC = stats::BIC(x),
+    deviance = stats::deviance(x),
+    nobs = stats::nobs(x)
+  )
 }
 
 # confint.lm gets called on rlm objects. should use the default instead.
 confint.rlm <- confint.default
 
 #' @templateVar class rlm
-#' @template title_desc_tidy_lm_wrapper
+#' @template title_desc_tidy
 #' 
 #' @param x An `rlm` object returned by [MASS::rlm()].
-#' @inheritParams tidy.lm
+#' @template param_confint
+#' @template param_unused_dots
 #' 
 #' @details For tidiers for models from the \pkg{robust} package see
 #'   [tidy.lmRob()] and [tidy.glmRob()].
@@ -59,7 +61,18 @@ confint.rlm <- confint.default
 #' @seealso [MASS::rlm()]
 #' @export
 #' @include stats-lm-tidiers.R
-tidy.rlm <- tidy.lm
+tidy.rlm <- function(x, conf.int = FALSE, conf.level = .95, ...) {
+  
+  ret <- as_tibble(summary(x)$coefficients, rownames = "term")
+  colnames(ret) <- c("term", "estimate", "std.error", "statistic")
+  
+  if (conf.int) {
+    ci <- broom_confint_terms(x, level = conf.level)
+    ret <- dplyr::left_join(ret, ci, by = "term")
+  }
+  
+  ret
+}
 
 #' @templateVar class rlm
 #' @template title_desc_augment

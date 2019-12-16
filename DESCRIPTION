@@ -1,7 +1,7 @@
 Type: Package
 Package: broom
 Title: Convert Statistical Objects into Tidy Tibbles
-Version: 0.5.2.9002
+Version: 0.5.3.9000
 Authors@R: 
     c(person(given = "David",
              family = "Robinson",
@@ -270,8 +270,12 @@ Authors@R:
       person(given = "Kevin",
              family = "Zarca",
              role = "ctb",
-             email = "kevin.zarca@gmail.com")
-   )
+             email = "kevin.zarca@gmail.com"),
+      person(given = "Shiro",
+             family = "Kuriwaki",
+             role = "ctb",
+             email = "shirokuriwaki@gmail.com",
+             comment = c(ORCID = "0000-0002-5687-2647")))
 Description: Summarizes key information about statistical
     objects in tidy tibbles. This makes it easy to report results, create
     plots and consistently work with large numbers of models at once.
@@ -374,19 +378,25 @@ Suggests:
     survey,
     survival,
     systemfit,
-    testthat,
+    testthat (>= 2.1.0),
     tseries,
     xergm,
-    zoo
+    zoo,
+    glmnetUtils,
+    lme4,
+    gee,
+    mclogit
 Remotes:
     alexpghayes/modeltests
 Encoding: UTF-8
+VignetteBuilder: knitr
 Language: en-US
 LazyData: true
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 6.1.1
+RoxygenNote: 7.0.2
 Collate:
     'aaa-documentation-helper.R'
+    'null-and-default-tidiers.R'
     'aer-tidiers.R'
     'auc-tidiers.R'
     'base-tidiers.R'
@@ -407,6 +417,7 @@ Collate:
     'ergm-tidiers.R'
     'gam-tidiers.R'
     'gamlss-tidiers.R'
+    'gee.R'
     'geepack-tidiers.R'
     'glmnet-cv-glmnet-tidiers.R'
     'glmnet-glmnet-tidiers.R'
@@ -432,6 +443,7 @@ Collate:
     'mass-ridgelm-tidiers.R'
     'stats-lm-tidiers.R'
     'mass-rlm-tidiers.R'
+    'mclogit.R'
     'mclust-tidiers.R'
     'mediate-tidiers.R'
     'mgcv-tidiers.R'
@@ -439,7 +451,6 @@ Collate:
     'multcomp-tidiers.R'
     'nnet-tidiers.R'
     'nobs.R'
-    'null-and-default-tidiers.R'
     'orcutt-tidiers.R'
     'ordinal-clm-tidiers.R'
     'ordinal-clmm-tidiers.R'

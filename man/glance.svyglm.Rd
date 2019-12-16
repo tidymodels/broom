@@ -74,11 +74,15 @@ survey data. \emph{Journal of Survey Statistics and Methodology}, 3(1).
 \seealso{
 \code{\link[survey:svyglm]{survey::svyglm()}}, \code{\link[stats:glm]{stats::glm()}}, \link[survey:anova.svyglm]{survey::anova.svyglm}
 
-Other lm tidiers: \code{\link{augment.glm}},
-  \code{\link{augment.lm}}, \code{\link{glance.glm}},
-  \code{\link{glance.lm}}, \code{\link{tidy.glm}},
-  \code{\link{tidy.lm.beta}}, \code{\link{tidy.lm}},
-  \code{\link{tidy.mlm}}, \code{\link{tidy.svyglm}}
+Other lm tidiers: 
+\code{\link{augment.glm}()},
+\code{\link{augment.lm}()},
+\code{\link{glance.glm}()},
+\code{\link{glance.lm}()},
+\code{\link{tidy.glm}()},
+\code{\link{tidy.lm.beta}()},
+\code{\link{tidy.lm}()},
+\code{\link{tidy.mlm}()}
 }
 \concept{lm tidiers}
 \value{

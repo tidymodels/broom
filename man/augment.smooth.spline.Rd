@@ -51,7 +51,8 @@ ggplot(augment(spl, mtcars), aes(wt, mpg)) +
 \code{\link[=augment]{augment()}}, \code{\link[stats:smooth.spline]{stats::smooth.spline()}},
 \code{\link[stats:predict.smooth.spline]{stats::predict.smooth.spline()}}
 
-Other smoothing spline tidiers: \code{\link{glance.smooth.spline}}
+Other smoothing spline tidiers: 
+\code{\link{glance.smooth.spline}()}
 }
 \concept{smoothing spline tidiers}
 \value{

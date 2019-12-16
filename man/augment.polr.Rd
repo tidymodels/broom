@@ -4,8 +4,13 @@
 \alias{augment.polr}
 \title{Augment data with information from a(n) polr object}
 \usage{
-\method{augment}{polr}(x, data = model.frame(x), newdata = NULL,
-  type.predict = c("class"), ...)
+\method{augment}{polr}(
+  x,
+  data = model.frame(x),
+  newdata = NULL,
+  type.predict = c("class"),
+  ...
+)
 }
 \arguments{
 \item{x}{A \code{polr} object returned from \code{\link[MASS:polr]{MASS::polr()}}.}
@@ -91,10 +96,15 @@ augment(fit, type.predict = "class")
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[MASS:polr]{MASS::polr()}}
 
-Other ordinal tidiers: \code{\link{augment.clm}},
-  \code{\link{glance.clmm}}, \code{\link{glance.clm}},
-  \code{\link{glance.polr}}, \code{\link{glance.svyolr}},
-  \code{\link{tidy.clmm}}, \code{\link{tidy.clm}},
-  \code{\link{tidy.polr}}, \code{\link{tidy.svyolr}}
+Other ordinal tidiers: 
+\code{\link{augment.clm}()},
+\code{\link{glance.clmm}()},
+\code{\link{glance.clm}()},
+\code{\link{glance.polr}()},
+\code{\link{glance.svyolr}()},
+\code{\link{tidy.clmm}()},
+\code{\link{tidy.clm}()},
+\code{\link{tidy.polr}()},
+\code{\link{tidy.svyolr}()}
 }
 \concept{ordinal tidiers}

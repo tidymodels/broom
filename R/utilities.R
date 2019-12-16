@@ -70,8 +70,6 @@ has_rownames <- function(df) {
 #'
 #' @return a data.frame, with rownames moved into a column and new column
 #' names assigned
-#'
-#' @export
 fix_data_frame <- function(x, newnames = NULL, newcol = "term") {
   if (!is.null(newnames) && length(newnames) != ncol(x)) {
     stop("newnames must be NULL or have length equal to number of columns")
@@ -104,18 +102,6 @@ unrowname <- function(x) {
   rownames(x) <- NULL
   x
 }
-
-
-#' insert a row of NAs into a data frame wherever another data frame has NAs
-#'
-#' @param x data frame that has one row for each non-NA row in original
-#' @param original data frame with NAs
-insert_NAs <- function(x, original) {
-  indices <- rep(NA, nrow(original))
-  indices[which(stats::complete.cases(original))] <- seq_len(nrow(x))
-  x[indices, ]
-}
-
 
 #' add fitted values, residuals, and other common outputs to
 #' an augment call
@@ -353,7 +339,7 @@ broom_confint <- function(x, ...) {
   
   # warn on arguments silently being ignored
   ellipsis::check_dots_used()
-  ci <- confint(x, ...)
+  ci <- suppressMessages(confint(x, ...))
   
   # confint called on models with a single predictor
   # often returns a named vector rather than a matrix :(
@@ -372,7 +358,7 @@ broom_confint_terms <- function(x, ...) {
   
   # warn on arguments silently being ignored
   ellipsis::check_dots_used()
-  ci <- confint(x, ...)
+  ci <- suppressMessages(confint(x, ...))
   
   # confint called on models with a single predictor
   # often returns a named vector rather than a matrix :(
@@ -387,62 +373,7 @@ broom_confint_terms <- function(x, ...) {
   ci
 }
 
-#' Calculate confidence interval as a tidy data frame
-#'
-#' Return a confidence interval as a tidy data frame. This directly wraps the
-#' [confint()] function, but ensures it follows broom conventions:
-#' column names of `conf.low` and `conf.high`, and no row names.
-#' 
-#' `confint_tidy`
-#'
-#' @param x a model object for which [confint()] can be calculated
-#' @param conf.level confidence level
-#' @param func A function to compute a confidence interval for `x`. Calling
-#'   `func(x, level = conf.level, ...)` must return an object coercibleto a
-#'   tibble. This dataframe like object should have to columns corresponding
-#'   the lower and upper bounds on the confidence interval.
-#' @param ... extra arguments passed on to `confint`
-#'
-#' @return A tibble with two columns: `conf.low` and `conf.high`.
-#'
-#' @seealso \link{confint}
-#'
-#' @export
-confint_tidy <- function(x, conf.level = .95, func = stats::confint, ...) {
-  # avoid "Waiting for profiling to be done..." message for some models
-  ci <- suppressMessages(func(x, level = conf.level, ...))
-  
-  # protect against confidence intervals returned as named vectors
-  if (is.null(dim(ci))) {
-    ci <- matrix(ci, nrow = 1)
-  }
-  
-  # remove rows that are all NA. *not the same* as na.omit which checks
-  # for any NA.
-  all_na <- apply(ci, 1, function(x) all(is.na(x)))
-  ci <- ci[!all_na, , drop = FALSE]
-  colnames(ci) <- c("conf.low", "conf.high")
-  as_tibble(ci)
-}
-
-# utility function from tidyr::col_name
-col_name <- function(x, default = stop("Please supply column name", call. = FALSE)) {
-  if (is.character(x)) {
-    return(x)
-  }
-  if (identical(x, quote(expr = ))) {
-    return(default)
-  }
-  if (is.name(x)) {
-    return(as.character(x))
-  }
-  if (is.null(x)) {
-    return(x)
-  }
-  stop("Invalid column specification", call. = FALSE)
-}
-
-
+#' @importFrom utils globalVariables
 globalVariables(
   c(
     ".",

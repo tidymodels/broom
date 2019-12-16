@@ -6,8 +6,14 @@
 \alias{joinerml_tidiers}
 \title{Tidy a(n) mjoint object}
 \usage{
-\method{tidy}{mjoint}(x, component = "survival", conf.int = FALSE,
-  conf.level = 0.95, boot_se = NULL, ...)
+\method{tidy}{mjoint}(
+  x,
+  component = "survival",
+  conf.int = FALSE,
+  conf.level = 0.95,
+  boot_se = NULL,
+  ...
+)
 }
 \arguments{
 \item{x}{An \code{mjoint} object returned from \code{\link[joineRML:mjoint]{joineRML::mjoint()}}.}
@@ -94,7 +100,8 @@ glance(fit)
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[joineRML:mjoint]{joineRML::mjoint()}}, \code{\link[joineRML:bootSE]{joineRML::bootSE()}}
 
-Other mjoint tidiers: \code{\link{glance.mjoint}}
+Other mjoint tidiers: 
+\code{\link{glance.mjoint}()}
 }
 \concept{mjoint tidiers}
 \value{

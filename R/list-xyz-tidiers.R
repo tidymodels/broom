@@ -1,7 +1,7 @@
 #' @templateVar class xyz
 #' @template title_desc_tidy_list
 #' 
-#' @description xyz lists (lists where `x` and `y` are vector of coordinates
+#' @description xyz lists (lists where `x` and `y` are vectors of coordinates
 #'   and `z` is a matrix of values) are typically used by functions such as
 #'   [graphics::persp()] or [graphics::image()] and returned
 #'   by interpolation functions such as [akima::interp()].

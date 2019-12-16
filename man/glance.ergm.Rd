@@ -52,6 +52,7 @@ the measure will be reported as \code{NA}.
 \seealso{
 \code{\link[=glance]{glance()}}, \code{\link[ergm:ergm]{ergm::ergm()}}, \code{\link[ergm:summary.ergm]{ergm::summary.ergm()}}
 
-Other ergm tidiers: \code{\link{tidy.ergm}}
+Other ergm tidiers: 
+\code{\link{tidy.ergm}()}
 }
 \concept{ergm tidiers}

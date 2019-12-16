@@ -41,19 +41,7 @@ test_that("tidy.lm.beta works", {
   expect_equal(td$term, c("(Intercept)", "wt"))
   expect_equal(td2$term, c("(Intercept)", "wt", "log(disp)"))
   
-  expect_warning(
-    tidy(fit2, exponentiate = TRUE),
-    regexp = paste(
-      "Exponentiating coefficients, but model did not use a log or logit", 
-      "link function"
-    )
-  )
-  
   # shouldn't error. regression test for issues 166, 241
   # rows for confidence intervals of undefined terms should be dropped
   expect_error(tidy(fit_na_row, conf.int = TRUE), NA)
-  
-  # should drop the NA row
-  td_ci <- confint_tidy(fit_na_row)
-  expect_false(anyNA(td_ci))
 })

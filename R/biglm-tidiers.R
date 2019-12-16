@@ -22,6 +22,7 @@
 #'
 #' # bigglm: logistic regression
 #' bgfit <- bigglm(am ~ mpg, mtcars, family = binomial())
+#' 
 #' tidy(bgfit)
 #' tidy(bgfit, exponentiate = TRUE)
 #' tidy(bgfit, conf.int = TRUE)
@@ -36,19 +37,25 @@
 tidy.biglm <- function(x, conf.int = FALSE, conf.level = .95,
                        exponentiate = FALSE, ...) {
   
-  mat <- summary(x)$mat
-  nn <- c("estimate", "conf.low", "conf.high", "std.error", "p.value")
-  ret <- fix_data_frame(mat, nn)
+  # TODO: separate in biglm and bigglm tidiers
+  
+  ret <- as_tibble(summary(x)$mat, rownames = "term")
+  colnames(ret) <- c("term", "estimate", "conf.low", "conf.high", "std.error", "p.value")
   
   # remove the 95% confidence interval and replace:
   # it isn't exactly 95% (uses 2 rather than 1.96), and doesn't allow
   # specification of confidence level in any case
   ret <- dplyr::select(ret, -conf.low, -conf.high)
   
-  process_lm(ret, x,
-             conf.int = conf.int, conf.level = conf.level,
-             exponentiate = exponentiate
-  )
+  if (conf.int) {
+    ci <- broom_confint_terms(x, level = conf.level)
+    ret <- dplyr::left_join(ret, ci, by = "term")
+  }
+  
+  if (exponentiate)
+    ret <- exponentiate(ret)
+  
+  ret
 }
 
 

@@ -1,14 +1,13 @@
 #' @templateVar class ivreg
 #' @template title_desc_tidy
-#' 
+#'
 #' @param x An `ivreg` object created by a call to [AER::ivreg()].
 #' @template param_confint
-#' @template param_exponentiate
-#' @param instruments Logical indicating whether to return 
+#' @param instruments Logical indicating whether to return
 #'   coefficients from the second-stage or diagnostics tests for
 #'   each endogenous regressor (F-statistics). Defaults to `FALSE`.
 #' @template param_unused_dots
-#' 
+#'
 #' @evalRd return_tidy(
 #'   "statistic.Sargan",
 #'   "p.value.Sargan",
@@ -18,12 +17,13 @@
 #'   "p.value.weakinst",
 #'   regression = TRUE
 #' )
-#' 
+#'
 #' @examples
-#' 
+#'
 #' library(AER)
 #'
 #' data("CigarettesSW", package = "AER")
+#'
 #' ivr <- ivreg(
 #'   log(packs) ~ income | population,
 #'   data = CigarettesSW,
@@ -34,73 +34,60 @@
 #'
 #' tidy(ivr)
 #' tidy(ivr, conf.int = TRUE)
-#' tidy(ivr, conf.int = TRUE, exponentiate = TRUE)
+#' tidy(ivr, conf.int = TRUE, instruments = TRUE)
 #'
 #' augment(ivr)
 #' augment(ivr, data = CigarettesSW)
 #' augment(ivr, newdata = CigarettesSW)
 #'
 #' glance(ivr)
-#' 
 #' @export
 #' @seealso [tidy()], [AER::ivreg()]
 #' @family ivreg tidiers
 #' @aliases ivreg_tidiers aer_tidiers
 tidy.ivreg <- function(x,
-  conf.int = FALSE,
-  conf.level = .95, 
-  exponentiate = FALSE,
-  instruments = FALSE,
-  ...) {
+                       conf.int = FALSE,
+                       conf.level = 0.95,
+                       instruments = FALSE,
+                       ...) {
+
+  # TODO: documentation on when you get what needs to be updated !!!
+
+  # case 1: user does not ask for instruments
   
-  co <- stats::coef(summary(x))
-  nn <- c("estimate", "std.error", "statistic", "p.value")
-  ret <- fix_data_frame(co, nn[1:ncol(co)])
-  
-  if (instruments) {
+  if (!instruments) {
     
-    endogenous_names <- rownames(co)[!grepl("Intercept", rownames(co))]
-    diagnostic_endogenous_names <- paste0("Weak instruments (", endogenous_names, ")")
-    n_endogenous <- length(endogenous_names)
+    ret <- as_tibble(summary(x)$coefficients, rownames = "term")
+    colnames(ret) <- c("term", "estimate", "std.error", "statistic", "p.value")
     
-    if (n_endogenous > 1){
-    ret <- with(summary(x, diagnostics = TRUE),
-         tibble(
-           term = endogenous_names,
-           statistic.weakinst = diagnostics[c(diagnostic_endogenous_names), "statistic"],
-           p.value.weakinst = diagnostics[c(diagnostic_endogenous_names), "p-value"]
-         )
-    )
-    } else {
-      ret <- with(summary(x, diagnostics = TRUE),
-                  tibble(
-                    term = endogenous_names,
-                    statistic.weakinst = diagnostics["Weak instruments", "statistic"],
-                    p.value.weakinst = diagnostics["Weak instruments", "p-value"]
-                  )
-      )
+    if (conf.int) {
+      ci <- broom_confint_terms(x, level = conf.level)
+      ret <- dplyr::left_join(ret, ci, by = "term")
     }
-  } else {
-    ret <- process_lm(
-      ret,
-      x,
-      conf.int = conf.int,
-      conf.level = conf.level,
-      exponentiate = exponentiate
-    )
+    
+    return(ret)
   }
+
+  # case 2: user asks for instruments
   
-  ret
+  end_vars <- names(coef(x))[-1]  # subtract off the intercept
+  d <- summary(x, diagnostics = TRUE)$diagnostics
+  
+  # drop last two rows, the Wu-Hausman and Sargan diagnostics
+  last_two_rows <- c(nrow(d) - 1, nrow(d))
+  d <- as_tibble(d)[-last_two_rows, ]
+  tibble::add_column(d, term = end_vars, .before = TRUE) %>% 
+    rename2("p.value" = "p-value", "num.df" = "df1", "den.df" = "df2")
 }
 
 #' @templateVar class ivreg
 #' @template title_desc_augment
-#' 
+#'
 #' @inherit tidy.ivreg params examples
 #' @template param_data
 #' @template param_newdata
 #' @template param_unused_dots
-#' 
+#'
 #' @evalRd return_augment()
 #'
 #' @export
@@ -112,17 +99,17 @@ augment.ivreg <- function(x, data = model.frame(x), newdata = NULL, ...) {
 
 #' @templateVar class ivreg
 #' @template title_desc_glance
-#' 
+#'
 #' @inherit tidy.ivreg params examples
 #' @param diagnostics Logical indicating whether or not to return the
 #'   Wu-Hausman and Sargan diagnostic information.
-#' 
-#' @note Beginning 0.7.0, `glance.ivreg` returns statistics for the 
-#' Wu-Hausman test for endogeneity and the Sargan test of 
+#'
+#' @note Beginning 0.7.0, `glance.ivreg` returns statistics for the
+#' Wu-Hausman test for endogeneity and the Sargan test of
 #' overidentifying restrictions. Sargan test values are returned as `NA`
-#' if the number of instruments is not greater than the number of 
-#' endogenous regressors. 
-#' 
+#' if the number of instruments is not greater than the number of
+#' endogenous regressors.
+#'
 #' @evalRd return_glance(
 #'   "r.squared",
 #'   "adj.r.squared",
@@ -138,10 +125,10 @@ augment.ivreg <- function(x, data = model.frame(x), newdata = NULL, ...) {
 #' @seealso [glance()], [AER::ivreg()]
 #' @family ivreg tidiers
 glance.ivreg <- function(x, diagnostics = FALSE, ...) {
-  
   s <- summary(x, diagnostics = FALSE)
-  
-  ret <- with(s, 
+
+  ret <- with(
+    s,
     tibble(
       r.squared = r.squared,
       adj.r.squared = adj.r.squared,
@@ -153,18 +140,22 @@ glance.ivreg <- function(x, diagnostics = FALSE, ...) {
   )
   ret$df.residual <- df.residual(x)
   ret$nobs <- stats::nobs(x)
-  
+
   if (diagnostics) {
-    ret <- with(summary(x, diagnostics = TRUE),
-                tibble(
-                  statistic.Sargan = diagnostics["Sargan", "statistic"],
-                  p.value.Sargan = diagnostics["Sargan", "p-value"],
-                  statistic.Wu.Hausman = diagnostics["Wu-Hausman", "statistic"],
-                  p.value.Wu.Hausman = diagnostics["Wu-Hausman", "p-value"]
-                )
+    ret <- with(
+      summary(x, diagnostics = TRUE),
+      tibble(
+        statistic.Sargan = diagnostics["Sargan", "statistic"],
+        p.value.Sargan = diagnostics["Sargan", "p-value"],
+        statistic.Wu.Hausman = diagnostics["Wu-Hausman", "statistic"],
+        p.value.Wu.Hausman = diagnostics["Wu-Hausman", "p-value"]
+      )
     )
   }
 
   as_tibble(ret, rownames = NULL)
-  
 }
+
+#' @include null-and-default-tidiers.R
+#' @export
+tidy.tobit <- tidy.default

@@ -4,8 +4,7 @@
 \alias{augment.lm}
 \title{Augment data with information from a(n) lm object}
 \usage{
-\method{augment}{lm}(x, data = model.frame(x), newdata = NULL,
-  se_fit = FALSE, ...)
+\method{augment}{lm}(x, data = model.frame(x), newdata = NULL, se_fit = FALSE, ...)
 }
 \arguments{
 \item{x}{An \code{lm} object created by \code{\link[stats:lm]{stats::lm()}}.}
@@ -140,17 +139,22 @@ a <- matrix(rnorm(20), nrow = 10)
 b <- a + rnorm(length(a))
 result <- lm(b ~ a)
 tidy(result)
+
 }
 \seealso{
 \link{na.action}
 
 \code{\link[=augment]{augment()}}, \code{\link[stats:predict.lm]{stats::predict.lm()}}
 
-Other lm tidiers: \code{\link{augment.glm}},
-  \code{\link{glance.glm}}, \code{\link{glance.lm}},
-  \code{\link{glance.svyglm}}, \code{\link{tidy.glm}},
-  \code{\link{tidy.lm.beta}}, \code{\link{tidy.lm}},
-  \code{\link{tidy.mlm}}, \code{\link{tidy.svyglm}}
+Other lm tidiers: 
+\code{\link{augment.glm}()},
+\code{\link{glance.glm}()},
+\code{\link{glance.lm}()},
+\code{\link{glance.svyglm}()},
+\code{\link{tidy.glm}()},
+\code{\link{tidy.lm.beta}()},
+\code{\link{tidy.lm}()},
+\code{\link{tidy.mlm}()}
 }
 \concept{lm tidiers}
 \value{

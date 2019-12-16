@@ -4,9 +4,15 @@
 \alias{tidy.rma}
 \title{Tidy a(n) rma object}
 \usage{
-\method{tidy}{rma}(x, conf.int = FALSE, conf.level = 0.95,
-  exponentiate = FALSE, include_studies = FALSE, measure = "GEN",
-  ...)
+\method{tidy}{rma}(
+  x,
+  conf.int = FALSE,
+  conf.level = 0.95,
+  exponentiate = FALSE,
+  include_studies = FALSE,
+  measure = "GEN",
+  ...
+)
 }
 \arguments{
 \item{x}{An \code{rma} object such as those created by \code{\link[metafor:rma]{metafor::rma()}},

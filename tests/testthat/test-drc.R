@@ -20,13 +20,13 @@ test_that("drc tidier arguments", {
 test_that("tidy.drc", {
 
   td1 <- tidy(mod)
-  td3 <- tidy(mod, robust = TRUE)
+  td3 <- tidy(mod, conf.int = TRUE)
 
   check_tidy_output(td1, strict = FALSE)
   check_tidy_output(td3, strict = FALSE)
   
   td1 <- tidy(mod2)
-  td3 <- tidy(mod2, robust = TRUE)
+  td3 <- tidy(mod2, conf.int = TRUE)
   
   check_tidy_output(td1, strict = FALSE)
   check_tidy_output(td3, strict = FALSE)
@@ -65,4 +65,12 @@ test_that("augment.drc", {
     data = ryegrass,
     newdata = ryegrass
   )
+})
+
+test_that("confidence merge issue regression test (#798)", {
+  
+  td <- tidy(mod, conf.int = TRUE)
+  
+  expect_false(any(is.na(td$conf.low)))
+  expect_false(any(is.na(td$conf.high)))
 })

@@ -4,8 +4,7 @@
 \alias{tidy.biglm}
 \title{Tidy a(n) biglm object}
 \usage{
-\method{tidy}{biglm}(x, conf.int = FALSE, conf.level = 0.95,
-  exponentiate = FALSE, ...)
+\method{tidy}{biglm}(x, conf.int = FALSE, conf.level = 0.95, exponentiate = FALSE, ...)
 }
 \arguments{
 \item{x}{A \code{biglm} object created by a call to \code{\link[biglm:biglm]{biglm::biglm()}} or
@@ -54,6 +53,7 @@ glance(bfit)
 
 # bigglm: logistic regression
 bgfit <- bigglm(am ~ mpg, mtcars, family = binomial())
+
 tidy(bgfit)
 tidy(bgfit, exponentiate = TRUE)
 tidy(bgfit, conf.int = TRUE)
@@ -66,7 +66,8 @@ glance(bgfit)
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[biglm:biglm]{biglm::biglm()}}, \code{\link[biglm:bigglm]{biglm::bigglm()}}
 
-Other biglm tidiers: \code{\link{glance.biglm}}
+Other biglm tidiers: 
+\code{\link{glance.biglm}()}
 }
 \concept{biglm tidiers}
 \value{

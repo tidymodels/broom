@@ -62,9 +62,11 @@ augment(Rfit)
 \seealso{
 \code{\link[robustbase:glmrob]{robustbase::glmrob()}}
 
-Other robustbase tidiers: \code{\link{augment.glmrob}},
-  \code{\link{augment.lmrob}}, \code{\link{glance.lmrob}},
-  \code{\link{tidy.lmrob}}
+Other robustbase tidiers: 
+\code{\link{augment.glmrob}()},
+\code{\link{augment.lmrob}()},
+\code{\link{glance.lmrob}()},
+\code{\link{tidy.lmrob}()}
 }
 \concept{robustbase tidiers}
 \value{

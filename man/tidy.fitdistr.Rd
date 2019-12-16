@@ -43,7 +43,8 @@ glance(fit)
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[MASS:fitdistr]{MASS::fitdistr()}}
 
-Other fitdistr tidiers: \code{\link{glance.fitdistr}}
+Other fitdistr tidiers: 
+\code{\link{glance.fitdistr}()}
 }
 \concept{fitdistr tidiers}
 \value{
