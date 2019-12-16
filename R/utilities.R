@@ -443,6 +443,7 @@ col_name <- function(x, default = stop("Please supply column name", call. = FALS
 }
 
 
+#' @importFrom utils globalVariables
 globalVariables(
   c(
     ".",
