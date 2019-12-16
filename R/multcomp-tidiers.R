@@ -41,7 +41,7 @@ tidy.glht <- function(x, conf.int = FALSE, conf.level = .95, ...) {
   
   tidy_glht_summary <- tidy.summary.glht(glht_summary, ...)
   
-  if(isTRUE(conf.int)) {
+  if (conf.int) {
     tidy_glht_confint <- tidy.confint.glht(confint(x, level = conf.level, ...))
     
     tidy_glht_summary <- dplyr::select(tidy_glht_summary, -std.error) %>% 
