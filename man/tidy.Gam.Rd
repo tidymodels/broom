@@ -44,7 +44,8 @@ glance(g)
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[gam:gam]{gam::gam()}}, \code{\link[=tidy.anova]{tidy.anova()}}, \code{\link[=tidy.gam]{tidy.gam()}}
 
-Other gam tidiers: \code{\link{glance.Gam}}
+Other gam tidiers: 
+\code{\link{glance.Gam}()}
 }
 \concept{gam tidiers}
 \value{

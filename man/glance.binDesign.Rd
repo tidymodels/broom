@@ -52,8 +52,9 @@ ggplot(tidy(des), aes(n, power)) +
 \seealso{
 \code{\link[=glance]{glance()}}, \code{\link[binGroup:binDesign]{binGroup::binDesign()}}
 
-Other bingroup tidiers: \code{\link{tidy.binDesign}},
-  \code{\link{tidy.binWidth}}
+Other bingroup tidiers: 
+\code{\link{tidy.binDesign}()},
+\code{\link{tidy.binWidth}()}
 }
 \concept{bingroup tidiers}
 \value{

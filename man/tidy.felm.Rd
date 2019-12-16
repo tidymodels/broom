@@ -6,8 +6,7 @@
 \alias{lfe_tidiers}
 \title{Tidy a(n) felm object}
 \usage{
-\method{tidy}{felm}(x, conf.int = FALSE, conf.level = 0.95,
-  fe = FALSE, robust = FALSE, ...)
+\method{tidy}{felm}(x, conf.int = FALSE, conf.level = 0.95, fe = FALSE, robust = FALSE, ...)
 }
 \arguments{
 \item{x}{A \code{felm} object returned from \code{\link[lfe:felm]{lfe::felm()}}.}
@@ -79,7 +78,8 @@ glance(result_felm)
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[lfe:felm]{lfe::felm()}}
 
-Other felm tidiers: \code{\link{augment.felm}}
+Other felm tidiers: 
+\code{\link{augment.felm}()}
 }
 \concept{felm tidiers}
 \value{

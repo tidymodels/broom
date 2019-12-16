@@ -78,8 +78,9 @@ dim(au2)
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[poLCA:poLCA]{poLCA::poLCA()}}
 
-Other poLCA tidiers: \code{\link{augment.poLCA}},
-  \code{\link{glance.poLCA}}
+Other poLCA tidiers: 
+\code{\link{augment.poLCA}()},
+\code{\link{glance.poLCA}()}
 }
 \concept{poLCA tidiers}
 \value{

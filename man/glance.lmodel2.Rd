@@ -56,7 +56,8 @@ ggplot(tidy(Ex2.res), aes(estimate, term, color = method)) +
 \seealso{
 \code{\link[=glance]{glance()}}, \code{\link[lmodel2:lmodel2]{lmodel2::lmodel2()}}
 
-Other lmodel2 tidiers: \code{\link{tidy.lmodel2}}
+Other lmodel2 tidiers: 
+\code{\link{tidy.lmodel2}()}
 }
 \concept{lmodel2 tidiers}
 \value{

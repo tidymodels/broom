@@ -4,8 +4,14 @@
 \alias{augment.betareg}
 \title{Augment data with information from a(n) betareg object}
 \usage{
-\method{augment}{betareg}(x, data = model.frame(x), newdata = NULL,
-  type.predict, type.residuals, ...)
+\method{augment}{betareg}(
+  x,
+  data = model.frame(x),
+  newdata = NULL,
+  type.predict,
+  type.residuals,
+  ...
+)
 }
 \arguments{
 \item{x}{A \code{betareg} object produced by a call to \code{\link[betareg:betareg]{betareg::betareg()}}.}

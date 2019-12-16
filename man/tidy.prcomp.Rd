@@ -60,8 +60,9 @@ If \code{matrix} is \code{"d"}, \code{"eigenvalues"} or \code{"pcs"}, the column
 
 \item{\code{PC}}{An integer vector indicating the principal component}
 \item{\code{std.dev}}{Standard deviation explained by this PC}
-\item{\code{percent}}{Percentage of variation explained}
-\item{\code{cumulative}}{Cumulative percentage of variation explained}
+\item{\code{percent}}{Fraction of variation explained by this component}
+\item{\code{cumulative}}{Cumulative fraction of variation explained by
+principle components up to this component.}
 }
 \description{
 Tidy summarizes information about the components of a model.
@@ -114,7 +115,9 @@ ggplot(au, aes(.fittedPC1, .fittedPC2)) +
 \seealso{
 \code{\link[stats:prcomp]{stats::prcomp()}}, \link{svd_tidiers}
 
-Other svd tidiers: \code{\link{augment.prcomp}},
-  \code{\link{tidy_irlba}}, \code{\link{tidy_svd}}
+Other svd tidiers: 
+\code{\link{augment.prcomp}()},
+\code{\link{tidy_irlba}()},
+\code{\link{tidy_svd}()}
 }
 \concept{svd tidiers}
