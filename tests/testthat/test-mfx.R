@@ -79,15 +79,12 @@ test_that("glance.mfx", {
 
 test_that("augment.mfx", {
   ## beta
-  ## Commenting out for now as I get the following :
-  ## Error in data.frame(..., check.names = FALSE) : 
-  ##  arguments imply differing number of rows: 6, 1000 
-  # check_augment_function(
-  #   aug = augment.betamfx,
-  #   model = fit_betamfx,
-  #   data = df,
-  #   newdata = df
-  # )
+  check_augment_function(
+    aug = augment.betamfx,
+    model = fit_betamfx,
+    data = df,
+    newdata = df
+  )
   ## logit
   check_augment_function(
     aug = augment.logitmfx,
