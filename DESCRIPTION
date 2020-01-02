@@ -270,7 +270,12 @@ Authors@R:
       person(given = "Kevin",
              family = "Zarca",
              role = "ctb",
-             email = "kevin.zarca@gmail.com")
+             email = "kevin.zarca@gmail.com"),
+      person(given = "Jacob C.",
+             family = "Fisher",
+             role = "ctb",
+             email = "fisher.jake@gmail.com",
+             comment = c(ORCID = "0000-0003-0299-0346"))
    )
 Description: Summarizes key information about statistical
     objects in tidy tibbles. This makes it easy to report results, create

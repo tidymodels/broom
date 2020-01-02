@@ -135,6 +135,8 @@ TODO: sort out what happens to `glance.aov()`
 special characters (previously they were converted to data.frame friendly
 column names by `make.names`)
 
+- `tidy.survfit()` now parses predictor variables into separate columns (#765 by @jcfisher)
+
 ### Name changes for consistency
 
 - `augment.htest()`:
