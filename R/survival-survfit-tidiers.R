@@ -80,31 +80,59 @@ tidy.survfit <- function(x, ...) {
   if (!is.null(x$strata)) {
     ret$strata <- rep(names(x$strata), x$strata)
     
-    # Get text strings for each term in the equation
-    rhs_names <- attr(terms(as.formula(x$call)), "term.labels")
-    
-    # Find those terms in the "strata" string
-    name_locs <- lapply(ret$strata, stringr::str_locate_all, 
-                        pattern = stringr::fixed(paste0(rhs_names, "=")))
-    name_locs <- lapply(name_locs, do.call, what = c)
-    
-    # Get starting and ending values for the space between those terms
-    rhs_value_locs <- lapply(
-      name_locs, 
-      function(x) c(x[-1] + rep(c(1, -3), length.out = length(x) - 1), -1)
+    # Pull out strata names
+    # Finds one of three possible patterns:
+    # 1. Beginning of the string until an equals sign (first stratum)
+    # 2. From a ", " string to an equals sign (middle strata)
+    # 3. From a ", " string to the end of the string (last stratum)
+    strata_names <- stringr::str_extract_all(
+      ret$strata,
+      pattern = "^[^\\=]*(?=\\=)|(?<=, )[^\\=]*(?=\\=)|(?<= ,)[^\\=]$"
     )
     
-    odd_nums <- seq(from = 1, to = 2 * length(rhs_names), by = 2)
-    starts <- lapply(rhs_value_locs, `[`, odd_nums)
-    ends <- lapply(rhs_value_locs, `[`, -odd_nums)
+    # A series of tests makes sure that the parser will work correctly.  If any
+    # of them fail, the function gives a warning and does not create any parsed
+    # columns in ret.
     
-    # Pull out the space between those terms -- the values of rhs -- and save
-    # them to the output dataset
-    ret[, rhs_names] <- stringr::str_trim(do.call(
-      rbind, 
-      mapply(stringr::str_sub, string = ret$strata, start = starts, end = ends,
-             USE.NAMES = F, SIMPLIFY = F)
-      ))
+    # Test that all strata names are the same
+    if (all(duplicated.default(strata_names)[-1])) {
+      
+      # Test that there are the appropriate number of "="
+      n_strata <- as.integer(length(strata_names[[1]]))
+      if (all(stringr::str_count(ret$strata, stringr::fixed("=")) == n_strata)) {
+        
+        # Test that there are the appropriate number of ","
+        if (all(stringr::str_count(ret$strata, stringr::fixed(",")) == n_strata - 1L)) {
+          
+          # Extract values into the return dataset.
+          # Finds two possible patterns:
+          # 1. From an equals sign to a comma (i.e., when this isn't the last stratum)
+          # 2. From an equals sign to the end of the string (i.e., when this is the last stratum)
+          # Also trims any whitespace
+          ret[, strata_names[[1]]] <- as.data.frame(
+            apply(
+              stringr::str_extract_all(
+                ret$strata,
+                pattern = "(?<=\\=)[^,]*(?=,)|(?<=\\=)[^,]*$",
+                simplify = TRUE
+              ),
+              MARGIN = 2,
+              FUN = stringr::str_trim
+              ),
+            stringsAsFactors = FALSE
+            )
+          
+        } else {
+          warning("Could not automatically detect strata names.  Found a \",\" in a strata name or value.")
+        }
+        
+      } else {
+        warning("Could not automatically detect strata names.  Found an \"=\" in a strata name or value.")
+      }
+      
+    } else {
+      warning("Could not automatically detect strata names.  Please parse manually.")
+    }
   }
   as_tibble(ret, validate = FALSE)
 }
