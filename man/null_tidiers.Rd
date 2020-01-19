@@ -7,11 +7,11 @@
 \alias{augment.NULL}
 \title{Tidiers for NULL inputs}
 \usage{
-\method{tidy}{NULL}(x, ...)
+\method{tidy}{`NULL`}(x, ...)
 
-\method{glance}{NULL}(x, ...)
+\method{glance}{`NULL`}(x, ...)
 
-\method{augment}{NULL}(x, ...)
+\method{augment}{`NULL`}(x, ...)
 }
 \arguments{
 \item{x}{The value \code{NULL}.}

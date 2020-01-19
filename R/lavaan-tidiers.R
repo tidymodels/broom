@@ -9,7 +9,7 @@
 #' @param ... Additional arguments passed to [lavaan::parameterEstimates()].
 #'   **Cautionary note**: Misspecified arguments may be silently ignored.
 #'
-#' @return A [tibble::tibble] with one row for each estimated parameter and
+#' @return A [tibble::tibble()] with one row for each estimated parameter and
 #'   columns:
 #'  
 #'   \item{term}{The result of paste(lhs, op, rhs)}

@@ -37,7 +37,8 @@ This function is deprecated. Please use \code{\link[tibble:as_tibble]{tibble::as
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[stats:ftable]{stats::ftable()}}
 
-Other stats tidiers: \code{\link{tidy.density}},
-  \code{\link{tidy.dist}}
+Other stats tidiers: 
+\code{\link{tidy.density}()},
+\code{\link{tidy.dist}()}
 }
 \concept{stats tidiers}

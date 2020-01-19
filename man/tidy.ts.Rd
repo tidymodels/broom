@@ -44,8 +44,10 @@ tidy(z)
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[stats:ts]{stats::ts()}}
 
-Other time series tidiers: \code{\link{tidy.acf}},
-  \code{\link{tidy.spec}}, \code{\link{tidy.zoo}}
+Other time series tidiers: 
+\code{\link{tidy.acf}()},
+\code{\link{tidy.spec}()},
+\code{\link{tidy.zoo}()}
 }
 \concept{time series tidiers}
 \value{

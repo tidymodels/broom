@@ -73,8 +73,10 @@ tidy(joint_tests(oranges_lm1))
 \code{\link[=tidy]{tidy()}}, \code{\link[emmeans:ref_grid]{emmeans::ref_grid()}}, \code{\link[emmeans:emmeans]{emmeans::emmeans()}},
 \code{\link[emmeans:contrast]{emmeans::contrast()}}
 
-Other emmeans tidiers: \code{\link{tidy.emmGrid}},
-  \code{\link{tidy.lsmobj}}, \code{\link{tidy.ref.grid}}
+Other emmeans tidiers: 
+\code{\link{tidy.emmGrid}()},
+\code{\link{tidy.lsmobj}()},
+\code{\link{tidy.ref.grid}()}
 }
 \concept{emmeans tidiers}
 \value{

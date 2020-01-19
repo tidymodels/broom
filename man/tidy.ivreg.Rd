@@ -6,8 +6,7 @@
 \alias{aer_tidiers}
 \title{Tidy a(n) ivreg object}
 \usage{
-\method{tidy}{ivreg}(x, conf.int = FALSE, conf.level = 0.95,
-  exponentiate = FALSE, instruments = FALSE, ...)
+\method{tidy}{ivreg}(x, conf.int = FALSE, conf.level = 0.95, instruments = FALSE, ...)
 }
 \arguments{
 \item{x}{An \code{ivreg} object created by a call to \code{\link[AER:ivreg]{AER::ivreg()}}.}
@@ -18,11 +17,6 @@ interval in the tidied output. Defaults to \code{FALSE}.}
 \item{conf.level}{The confidence level to use for the confidence interval
 if \code{conf.int = TRUE}. Must be strictly greater than 0 and less than 1.
 Defaults to 0.95, which corresponds to a 95 percent confidence interval.}
-
-\item{exponentiate}{Logical indicating whether or not to exponentiate the
-the coefficient estimates. This is typical for logistic and multinomial
-regressions, but a bad idea if there is no log or logit link. Defaults
-to \code{FALSE}.}
 
 \item{instruments}{Logical indicating whether to return
 coefficients from the second-stage or diagnostics tests for
@@ -51,6 +45,7 @@ specify which components to return.
 library(AER)
 
 data("CigarettesSW", package = "AER")
+
 ivr <- ivreg(
   log(packs) ~ income | population,
   data = CigarettesSW,
@@ -61,20 +56,20 @@ summary(ivr)
 
 tidy(ivr)
 tidy(ivr, conf.int = TRUE)
-tidy(ivr, conf.int = TRUE, exponentiate = TRUE)
+tidy(ivr, conf.int = TRUE, instruments = TRUE)
 
 augment(ivr)
 augment(ivr, data = CigarettesSW)
 augment(ivr, newdata = CigarettesSW)
 
 glance(ivr)
-
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[AER:ivreg]{AER::ivreg()}}
 
-Other ivreg tidiers: \code{\link{augment.ivreg}},
-  \code{\link{glance.ivreg}}
+Other ivreg tidiers: 
+\code{\link{augment.ivreg}()},
+\code{\link{glance.ivreg}()}
 }
 \concept{ivreg tidiers}
 \value{

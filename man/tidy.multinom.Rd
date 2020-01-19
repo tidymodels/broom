@@ -6,8 +6,7 @@
 \alias{nnet_tidiers}
 \title{Tidying methods for multinomial logistic regression models}
 \usage{
-\method{tidy}{multinom}(x, conf.int = FALSE, conf.level = 0.95,
-  exponentiate = FALSE, ...)
+\method{tidy}{multinom}(x, conf.int = FALSE, conf.level = 0.95, exponentiate = FALSE, ...)
 }
 \arguments{
 \item{x}{A \code{multinom} object returned from \code{\link[nnet:multinom]{nnet::multinom()}}.}
@@ -60,7 +59,8 @@ glance(fit.gear)
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[nnet:multinom]{nnet::multinom()}}
 
-Other multinom tidiers: \code{\link{glance.multinom}}
+Other multinom tidiers: 
+\code{\link{glance.multinom}()}
 }
 \concept{multinom tidiers}
 \value{
