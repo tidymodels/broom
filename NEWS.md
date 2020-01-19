@@ -368,6 +368,7 @@ supportive and insightful and I look forward to working you all again!
 [@IndrajeetPatil](https://github.com/IndrajeetPatil),
 [@jacob-long](https://github.com/jacob-long),
 [@jarvisc1](https://github.com/jarvisc1),
+[@jcfisher](https://github.com/jcfisher),
 [@jenzopr](https://github.com/jenzopr), [@jgabry](https://github.com/jgabry),
 [@jimhester](https://github.com/jimhester),
 [@josue-rodriguez](https://github.com/josue-rodriguez),
