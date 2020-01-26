@@ -1,8 +1,6 @@
 # release summary
 
-broom 0.5.3 is a minor release for compatibility with the new classing for matrix objects in R 4.0.0
-
-this is a resubmission that fixes a URL from the previous attempt
+broom 0.5.4 is a minor release that removes support for the joineRML, which is no longer on CRAN
 
 ## Test environments
 

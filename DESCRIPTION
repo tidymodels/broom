@@ -170,7 +170,6 @@ Suggests:
     gmm,
     Hmisc,
     irlba,
-    joineRML,
     Kendall,
     knitr,
     ks,
