@@ -381,6 +381,7 @@ Suggests:
     testthat (>= 2.1.0),
     tseries,
     xergm,
+    xgboost,
     zoo,
     glmnetUtils,
     lme4,
@@ -495,5 +496,6 @@ Collate:
     'systemfit-tidiers.R'
     'tseries-tidiers.R'
     'utilities.R'
+    'xgboost-tidiers.R'
     'zoo-tidiers.R'
     'zzz.R'
