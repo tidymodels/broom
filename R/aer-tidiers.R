@@ -155,3 +155,7 @@ glance.ivreg <- function(x, diagnostics = FALSE, ...) {
 
   as_tibble(ret, rownames = NULL)
 }
+
+#' @include null-and-default-tidiers.R
+#' @export
+tidy.tobit <- tidy.default

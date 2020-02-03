@@ -6,7 +6,7 @@
 #' @template param_unused_dots
 #'
 #' @evalRd return_tidy(   
-#'   curveid = "Id of the curve",
+#'   curve = "Index identifying the curve.",
 #'   regression = TRUE
 #' )
 #' 

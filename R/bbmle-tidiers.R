@@ -29,8 +29,24 @@ tidy.mle2 <- function(x, conf.int = FALSE, conf.level = .95, ...) {
   ret <- fix_data_frame(co, nn)
 
   if (conf.int) {
-    CI <- confint_tidy(x, conf.level = conf.level, func = bbmle::confint)
-    ret <- cbind(ret, CI)
+    
+    # can't use broom_confint / broom_confint_terms due to 
+    # some sort of S4 object dispatch thing
+    
+    ci <- bbmle::confint(x, level = conf.level)
+    
+    # confint called on models with a single predictor
+    # often returns a named vector rather than a matrix :(
+    
+    if (is.null(dim(ci))) {
+      ci <- matrix(ci, nrow = 1)
+    }
+    
+    colnames(ci) <- c("conf.low", "conf.high")
+    ci <- as_tibble(ci)
+    
+    ret <- dplyr::bind_cols(ret, ci)
   }
+  
   as_tibble(ret)
 }
