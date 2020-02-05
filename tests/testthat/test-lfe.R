@@ -15,8 +15,12 @@ df <- data.frame(
   v4 = sample(round(runif(100, max = 100), 4), n, TRUE)
 )
 
+# no FE or clus
 fit <- lfe::felm(v2 ~ v3, df)
+# with FE
 fit2 <- lfe::felm(v2 ~ v3 | id + v1, df, na.action = na.exclude)
+# with clus
+fit3 <- lfe::felm(v2 ~ v3 | 0 | 0 | id + v1, df, na.action = na.exclude)
 fit_multi <- lfe::felm(v1 + v2 ~ v3 , df)
 
 
@@ -37,6 +41,8 @@ test_that("tidy.felm", {
   td5 <- tidy(fit, robust = TRUE)
   td6 <- tidy(fit2, robust = TRUE)
   td7 <- tidy(fit2, robust = TRUE, fe = TRUE)
+  td8 <- tidy(fit3)
+  td9 <- tidy(fit3, robust = FALSE)
   
   td_multi <- tidy(fit_multi)
 
@@ -47,6 +53,8 @@ test_that("tidy.felm", {
   check_tidy_output(td5)
   check_tidy_output(td6)
   check_tidy_output(td7)
+  check_tidy_output(td8)
+  check_tidy_output(td9)
   check_tidy_output(td_multi)
 
   check_dims(td1, 2, 5)
@@ -56,6 +64,8 @@ test_that("tidy.felm", {
                as.numeric(lfe:::summary.felm(fit, robust = TRUE)$coef[, "Robust s.e"]))
   expect_equal(dplyr::pull(td6, std.error), 
                as.numeric(lfe:::summary.felm(fit2, robust = TRUE)$coef[, "Robust s.e"]))
+  expect_equal(dplyr::pull(td8, std.error), 
+               as.numeric(lfe:::summary.felm(fit3)$coef[, "Cluster s.e"]))
 })
 
 test_that("glance.felm", {
