@@ -53,8 +53,9 @@ augment(mod, selenium)
 \seealso{
 \code{\link[=glance]{glance()}}, \code{\link[drc:drm]{drc::drm()}}
 
-Other drc tidiers: \code{\link{augment.drc}},
-  \code{\link{tidy.drc}}
+Other drc tidiers: 
+\code{\link{augment.drc}()},
+\code{\link{tidy.drc}()}
 }
 \concept{drc tidiers}
 \value{

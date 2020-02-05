@@ -42,7 +42,8 @@ glance(co)
 
 \code{\link[orcutt:cochrane.orcutt]{orcutt::cochrane.orcutt()}}
 
-Other orcutt tidiers: \code{\link{glance.orcutt}}
+Other orcutt tidiers: 
+\code{\link{glance.orcutt}()}
 }
 \concept{orcutt tidiers}
 \value{

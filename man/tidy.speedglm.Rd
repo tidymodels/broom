@@ -5,8 +5,7 @@
 \alias{speedglm_tidiers}
 \title{Tidy a(n) speedglm object}
 \usage{
-\method{tidy}{speedglm}(x, conf.int = FALSE, conf.level = 0.95,
-  exponentiate = FALSE, ...)
+\method{tidy}{speedglm}(x, conf.int = FALSE, conf.level = 0.95, exponentiate = FALSE, ...)
 }
 \arguments{
 \item{x}{A \code{speedglm} object returned from \code{\link[speedglm:speedglm]{speedglm::speedglm()}}.}
@@ -59,9 +58,11 @@ glance(fit)
 \seealso{
 \code{\link[speedglm:speedglm]{speedglm::speedglm()}}
 
-Other speedlm tidiers: \code{\link{augment.speedlm}},
-  \code{\link{glance.speedglm}},
-  \code{\link{glance.speedlm}}, \code{\link{tidy.speedlm}}
+Other speedlm tidiers: 
+\code{\link{augment.speedlm}()},
+\code{\link{glance.speedglm}()},
+\code{\link{glance.speedlm}()},
+\code{\link{tidy.speedlm}()}
 }
 \concept{speedlm tidiers}
 \value{

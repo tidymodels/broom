@@ -70,8 +70,9 @@ augment(fit2, data = m2)
 \seealso{
 \code{\link[=glance]{glance()}}, \code{\link[stats:factanal]{stats::factanal()}}
 
-Other factanal tidiers: \code{\link{augment.factanal}},
-  \code{\link{tidy.factanal}}
+Other factanal tidiers: 
+\code{\link{augment.factanal}()},
+\code{\link{tidy.factanal}()}
 }
 \concept{factanal tidiers}
 \value{

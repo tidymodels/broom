@@ -103,7 +103,8 @@ td2 \%>\%
 \seealso{
 \code{\link[=glance]{glance()}}, \code{\link[gmm:gmm]{gmm::gmm()}}
 
-Other gmm tidiers: \code{\link{tidy.gmm}}
+Other gmm tidiers: 
+\code{\link{tidy.gmm}()}
 }
 \concept{gmm tidiers}
 \value{

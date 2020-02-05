@@ -4,8 +4,7 @@
 \alias{tidy.svyglm}
 \title{Tidy a(n) svyglm object}
 \usage{
-\method{tidy}{svyglm}(x, conf.int = FALSE, conf.level = 0.95,
-  exponentiate = FALSE, ...)
+\method{tidy}{svyglm}(x, conf.int = FALSE, conf.level = 0.95, exponentiate = FALSE, ...)
 }
 \arguments{
 \item{x}{A \code{svyglm} object returned from \code{\link[survey:svyglm]{survey::svyglm()}}.}
@@ -40,10 +39,15 @@ This method wraps \code{\link[=tidy.lm]{tidy.lm()}}.
 
 \code{\link[survey:svyglm]{survey::svyglm()}}, \code{\link[stats:glm]{stats::glm()}}
 
-Other lm tidiers: \code{\link{augment.glm}},
-  \code{\link{augment.lm}}, \code{\link{glance.glm}},
-  \code{\link{glance.lm}}, \code{\link{glance.svyglm}},
-  \code{\link{tidy.glm}}, \code{\link{tidy.lm.beta}},
-  \code{\link{tidy.lm}}, \code{\link{tidy.mlm}}
+Other lm tidiers: 
+\code{\link{augment.glm}()},
+\code{\link{augment.lm}()},
+\code{\link{glance.glm}()},
+\code{\link{glance.lm}()},
+\code{\link{glance.svyglm}()},
+\code{\link{tidy.glm}()},
+\code{\link{tidy.lm.beta}()},
+\code{\link{tidy.lm}()},
+\code{\link{tidy.mlm}()}
 }
 \concept{lm tidiers}

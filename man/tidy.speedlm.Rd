@@ -5,8 +5,7 @@
 \alias{speedlm_tidiers}
 \title{Tidy a(n) speedlm object}
 \usage{
-\method{tidy}{speedlm}(x, conf.int = FALSE, conf.level = 0.95,
-  exponentiate = FALSE, ...)
+\method{tidy}{speedlm}(x, conf.int = FALSE, conf.level = 0.95, exponentiate = FALSE, ...)
 }
 \arguments{
 \item{x}{A \code{speedlm} object returned from \code{\link[speedglm:speedlm]{speedglm::speedlm()}}.}
@@ -50,8 +49,10 @@ augment(mod)
 
 \code{\link[speedglm:speedlm]{speedglm::speedlm()}}
 
-Other speedlm tidiers: \code{\link{augment.speedlm}},
-  \code{\link{glance.speedglm}},
-  \code{\link{glance.speedlm}}, \code{\link{tidy.speedglm}}
+Other speedlm tidiers: 
+\code{\link{augment.speedlm}()},
+\code{\link{glance.speedglm}()},
+\code{\link{glance.speedlm}()},
+\code{\link{tidy.speedglm}()}
 }
 \concept{speedlm tidiers}

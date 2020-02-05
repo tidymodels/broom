@@ -58,8 +58,10 @@ ggplot(tidy(Zrolled), aes(index, value, color = series)) +
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[zoo:zoo]{zoo::zoo()}}
 
-Other time series tidiers: \code{\link{tidy.acf}},
-  \code{\link{tidy.spec}}, \code{\link{tidy.ts}}
+Other time series tidiers: 
+\code{\link{tidy.acf}()},
+\code{\link{tidy.spec}()},
+\code{\link{tidy.ts}()}
 }
 \concept{time series tidiers}
 \value{

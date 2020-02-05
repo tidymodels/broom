@@ -87,8 +87,9 @@ glance(zz)
 \seealso{
 \code{\link[=augment]{augment()}}, \code{\link[plm:plm]{plm::plm()}}
 
-Other plm tidiers: \code{\link{glance.plm}},
-  \code{\link{tidy.plm}}
+Other plm tidiers: 
+\code{\link{glance.plm}()},
+\code{\link{tidy.plm}()}
 }
 \concept{plm tidiers}
 \value{

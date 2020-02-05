@@ -52,9 +52,11 @@ glance(fit)
 \seealso{
 \code{\link[speedglm:speedlm]{speedglm::speedlm()}}
 
-Other speedlm tidiers: \code{\link{augment.speedlm}},
-  \code{\link{glance.speedlm}},
-  \code{\link{tidy.speedglm}}, \code{\link{tidy.speedlm}}
+Other speedlm tidiers: 
+\code{\link{augment.speedlm}()},
+\code{\link{glance.speedlm}()},
+\code{\link{tidy.speedglm}()},
+\code{\link{tidy.speedlm}()}
 }
 \concept{speedlm tidiers}
 \value{
