@@ -5,19 +5,19 @@
 #'
 #' @return tibble::tibble() containing gain, cover, frequency for each feature.
 xgb_feature_importance <- function(model, ...) {
+  statistics <- xgboost::xgb.importance(model = model, ...) %>%
+    tibble::as_tibble() %>% 
+    dplyr::rename_all(tolower)
+  
   if ("feature_names" %in% names(model)) {
     base_table <- tibble::tibble(feature = model[["feature_names"]])
-    statistics <- xgboost::xgb.importance(model = model, ...)
-    names(statistics) <- tolower(names(statistics))
     
     ret <- base_table %>% 
       dplyr::left_join(y = statistics, by = "feature") %>% 
       dplyr::mutate_if(is.numeric, function(x) tidyr::replace_na(x, replace = 0))
   } else {
-    ret <- xgboost::xgb.importance(model = model, ...) %>% 
-      tibble::as_tibble() %>% 
-      dplyr::rename_all(tolower)
-  }
+    ret <- statistics
+  } 
   
   ret
 }
