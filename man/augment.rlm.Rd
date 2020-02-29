@@ -56,10 +56,6 @@ three columns added to the new data:
 \description{
 This augment method wraps \code{\link[=augment.lm]{augment.lm()}}.
 }
-\details{
-For tidiers for models from the \pkg{robust} package see
-\code{\link[=tidy.lmRob]{tidy.lmRob()}} and \code{\link[=tidy.glmRob]{tidy.glmRob()}}.
-}
 \seealso{
 \code{\link[=augment]{augment()}}, \code{\link[=augment.lm]{augment.lm()}}
 

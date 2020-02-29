@@ -1,6 +1,7 @@
 # broom 0.5.4
 
 - Fixes failing CRAN checks as the joineRML package has been removed from CRAN
+- Remove tidiers for robust package and drop robust dependency
 
 # broom 0.5.3
 

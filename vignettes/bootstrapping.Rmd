@@ -81,7 +81,7 @@ The unnested coefficient information contains a summary of each replication comb
 boot_coefs
 ```
 
-We can then calculate confidence intervals (using what is called the [percentile method](https://www.uvm.edu/~dhowell/StatPages/Randomization%20Tests/ResamplingWithR/BootstMeans/bootstrapping_means.html)):
+We can then calculate confidence intervals (using what is called the percentile method):
 
 ```{r}
 alpha <- .05

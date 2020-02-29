@@ -45,10 +45,6 @@ computations to appropriate methods and gathers the results together.
 Sometimes a goodness of fit measure will be undefined. In these cases
 the measure will be reported as \code{NA}.
 }
-\details{
-For tidiers for models from the \pkg{robust} package see
-\code{\link[=tidy.lmRob]{tidy.lmRob()}} and \code{\link[=tidy.glmRob]{tidy.glmRob()}}.
-}
 \examples{
 
 library(MASS)

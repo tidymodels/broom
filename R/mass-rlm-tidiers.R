@@ -13,9 +13,6 @@
 #'   \item{BIC}{the Bayesian Information Criterion}
 #'   \item{deviance}{deviance}
 #'
-#' @details For tidiers for models from the \pkg{robust} package see
-#'   [tidy.lmRob()] and [tidy.glmRob()].
-#'
 #' @examples
 #'
 #' library(MASS)
@@ -42,9 +39,6 @@ glance.rlm <- function(x, ...) {
 #' 
 #' @param x An `rlm` object returned by [MASS::rlm()].
 #' 
-#' @details For tidiers for models from the \pkg{robust} package see
-#'   [tidy.lmRob()] and [tidy.glmRob()].
-#' 
 #' @family rlm tidiers
 #' @seealso [MASS::rlm()]
 #' @export
@@ -56,9 +50,6 @@ tidy.rlm <- function(x, ...) {
 #' @template title_desc_augment_lm_wrapper
 #' 
 #' @param x An `rlm` object returned by [MASS::rlm()].
-#' 
-#' @details For tidiers for models from the \pkg{robust} package see
-#'   [tidy.lmRob()] and [tidy.glmRob()].
 #' 
 #' @family rlm tidiers
 #' @seealso [MASS::rlm()]

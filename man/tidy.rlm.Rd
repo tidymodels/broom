@@ -51,10 +51,6 @@ there is an additional column:
 \description{
 This method wraps \code{\link[=tidy.lm]{tidy.lm()}}.
 }
-\details{
-For tidiers for models from the \pkg{robust} package see
-\code{\link[=tidy.lmRob]{tidy.lmRob()}} and \code{\link[=tidy.glmRob]{tidy.glmRob()}}.
-}
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[=tidy.lm]{tidy.lm()}}
 
