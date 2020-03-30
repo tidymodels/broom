@@ -329,7 +329,7 @@ augment_newdata <- function(x, data, newdata, .se_fit, ...) {
   
   resp <- safe_response(x, df)
   if (!is.null(resp) && is.numeric(resp))
-    df$.resid <- df$.fitted - resp
+    df$.resid <- resp - df$.fitted
   df
 }
 
