@@ -1,6 +1,6 @@
 # release summary
 
-broom 0.5.5 is a minor release that removes support for robust, which is now orphaned
+broom 0.5.6 is a minor release that fixes failing checks due to changes to the `tibble` package
 
 ## Test environments
 

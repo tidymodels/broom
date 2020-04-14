@@ -1,7 +1,7 @@
 Type: Package
 Package: broom
 Title: Convert Statistical Analysis Objects into Tidy Tibbles
-Version: 0.5.5
+Version: 0.5.6
 Authors@R: 
     c(person(given = "David",
              family = "Robinson",
@@ -140,7 +140,7 @@ Imports:
     purrr,
     reshape2,
     stringr,
-    tibble,
+    tibble (>= 3.0.0),
     tidyr
 Suggests:
     AER,
@@ -216,4 +216,4 @@ VignetteBuilder:
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.0.2
+RoxygenNote: 7.1.0
