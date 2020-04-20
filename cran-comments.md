@@ -1,6 +1,6 @@
 # release summary
 
-broom 0.5.6 is a minor release that fixes failing checks due to changes to the `tibble` package
+broom 0.5.6 is a minor release that fixes failing checks due to changes to the `tibble` package. this is a resubmission that also removes the `xergm` dependency.
 
 ## Test environments
 

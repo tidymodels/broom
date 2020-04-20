@@ -209,7 +209,6 @@ Suggests:
     survival,
     testthat,
     tseries,
-    xergm,
     zoo
 VignetteBuilder: 
     knitr
