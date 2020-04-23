@@ -260,8 +260,7 @@ response <- function(object, newdata = NULL) {
 
 data_error <- function(cnd) {
   stop(
-    "Can't augment data with observation level measures.\n",
-    "Did you provide `data` with the exact data used for model fitting?",
+    "Must specify either `data` or `newdata` argument.",
     call. = FALSE
   )
 }

@@ -52,6 +52,8 @@ We regret that we were unable to provide warnings for some of these changes.
 
 - `tidy.ridgelm()` now always return a `GCV` column and never returns an `xm` column (#532)
 
+- `tidy.dist()` no longer supports the `upper` argument
+
 ## An incomplete overhaul of `augment()`
 
 - Added `data` argument to `augment()` generic (did this happen?)
