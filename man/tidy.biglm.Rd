@@ -4,18 +4,7 @@
 \alias{tidy.biglm}
 \title{Tidy a(n) biglm object}
 \usage{
-<<<<<<< HEAD
-\method{tidy}{biglm}(
-  x,
-  conf.int = FALSE,
-  conf.level = 0.95,
-  exponentiate = FALSE,
-  quick = FALSE,
-  ...
-)
-=======
 \method{tidy}{biglm}(x, conf.int = FALSE, conf.level = 0.95, exponentiate = FALSE, ...)
->>>>>>> 3c922d507f7cc758a987a9ef44ae4267ac6ed583
 }
 \arguments{
 \item{x}{A \code{biglm} object created by a call to \code{\link[biglm:biglm]{biglm::biglm()}} or

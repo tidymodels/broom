@@ -5,11 +5,7 @@
 \alias{nls_tidiers}
 \title{Tidy a(n) nls object}
 \usage{
-<<<<<<< HEAD
-\method{tidy}{nls}(x, conf.int = FALSE, conf.level = 0.95, quick = FALSE, ...)
-=======
 \method{tidy}{nls}(x, conf.int = FALSE, conf.level = 0.95, ...)
->>>>>>> 3c922d507f7cc758a987a9ef44ae4267ac6ed583
 }
 \arguments{
 \item{x}{An \code{nls} object returned from \code{\link[stats:nls]{stats::nls()}}.}

@@ -15,7 +15,6 @@
 #'   
 #' @examples
 #' 
-<<<<<<< HEAD
 #' library(btergm)
 #' set.seed(1)
 #' 
@@ -23,58 +22,32 @@
 #' 
 #' networks <- list()
 #' 
-=======
-#' \dontrun{
-#' library(xergm)
-#' 
-#' set.seed(1)
-#' # Using the same simulated example as the xergm package
-#' # Create 10 random networks with 10 actors
-#' networks <- list()
->>>>>>> 3c922d507f7cc758a987a9ef44ae4267ac6ed583
 #' for(i in 1:10){
 #'     mat <- matrix(rbinom(100, 1, .25), nrow = 10, ncol = 10)
 #'     diag(mat) <- 0
 #'     nw <- network::network(mat)
 #'     networks[[i]] <- nw
 #' }
-<<<<<<< HEAD
 #' 
 #' # Create 10 matrices as covariates
 #' 
 #' covariates <- list()
 #' 
-=======
-#' # Create 10 matrices as covariates
-#' covariates <- list()
->>>>>>> 3c922d507f7cc758a987a9ef44ae4267ac6ed583
 #' for (i in 1:10) {
 #'     mat <- matrix(rnorm(100), nrow = 10, ncol = 10)
 #'     covariates[[i]] <- mat
 #' }
-<<<<<<< HEAD
 #' 
 #' # Fit a model where the propensity to form ties depends
 #' # on the edge covariates, controlling for the number of
 #' # in-stars
 #' btfit <- btergm(networks ~ edges + istar(2) + edgecov(covariates), R = 100)
-=======
-#' # Fit a model where the propensity to form ties depends
-#' # on the edge covariates, controlling for the number of
-#' # in-stars
-#' suppressWarnings(btfit <- btergm(networks ~ edges + istar(2) +
-#'                    edgecov(covariates), R = 100))
->>>>>>> 3c922d507f7cc758a987a9ef44ae4267ac6ed583
 #'
 #' # Show terms, coefficient estimates and errors
 #' tidy(btfit)
 #'
 #' # Show coefficients as odds ratios with a 99% CI
 #' tidy(btfit, exponentiate = TRUE, conf.level = 0.99)
-<<<<<<< HEAD
-=======
-#' }
->>>>>>> 3c922d507f7cc758a987a9ef44ae4267ac6ed583
 #'
 #' @export
 #' @aliases btergm_tidiers

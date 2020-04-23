@@ -6,11 +6,7 @@
 \alias{nnet_tidiers}
 \title{Tidying methods for multinomial logistic regression models}
 \usage{
-<<<<<<< HEAD
-\method{tidy}{multinom}(x, conf.int = FALSE, conf.level = 0.95, exponentiate = TRUE, ...)
-=======
 \method{tidy}{multinom}(x, conf.int = FALSE, conf.level = 0.95, exponentiate = FALSE, ...)
->>>>>>> 3c922d507f7cc758a987a9ef44ae4267ac6ed583
 }
 \arguments{
 \item{x}{A \code{multinom} object returned from \code{\link[nnet:multinom]{nnet::multinom()}}.}

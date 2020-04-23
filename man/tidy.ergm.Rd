@@ -48,10 +48,6 @@ the \pkg{ergm} class, such as those produced from weighted networks by the
 }
 \examples{
 
-<<<<<<< HEAD
-=======
-\dontrun{
->>>>>>> 3c922d507f7cc758a987a9ef44ae4267ac6ed583
 library(ergm)
 # Using the same example as the ergm package
 # Load the Florentine marriage network data
@@ -72,10 +68,6 @@ tidy(gest, exponentiate = TRUE, conf.int = TRUE, conf.level = 0.99)
 glance(gest)
 glance(gest, deviance = TRUE)
 glance(gest, mcmc = TRUE)
-<<<<<<< HEAD
-=======
-}
->>>>>>> 3c922d507f7cc758a987a9ef44ae4267ac6ed583
 
 }
 \references{

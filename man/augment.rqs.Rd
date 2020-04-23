@@ -47,25 +47,6 @@ the \code{data} argument will be ignored.}
     \item{\code{na.action}}{ function determining what should be done with missing values
     in 'newdata'.  The default is to predict 'NA'.}
   }}
-<<<<<<< HEAD
-}
-\value{
-A \link[tibble:tibble]{tibble::tibble} with one row per obseration and columns:
-
-\item{.resid}{Residuals}
-\item{.fitted}{Fitted quantiles of the model}
-\item{.tau}{Quantile estimated}
-
-Depending on the arguments passed on to \code{predict.rqs} via \code{...},
-a confidence interval is also calculated on the fitted values resulting in
-columns:
-\item{.conf.low}{Lower confidence interval value}
-\item{.conf.high}{Upper confidence interval value}
-
-\code{predict.rqs} does not provide confidence intervals when \code{newdata}
-is provided.
-=======
->>>>>>> 3c922d507f7cc758a987a9ef44ae4267ac6ed583
 }
 \description{
 Augment accepts a model object and a dataset and adds

@@ -9,37 +9,18 @@
 \arguments{
 \item{x}{A \code{nlrq} object returned from \code{\link[quantreg:nlrq]{quantreg::nlrq()}}.}
 
-<<<<<<< HEAD
-\item{...}{
-  Arguments passed on to \code{\link[=augment.nls]{augment.nls}}
-  \describe{
-    \item{\code{data}}{A \code{\link[=data.frame]{data.frame()}} or \code{\link[tibble:tibble]{tibble::tibble()}} containing the original
-=======
 \item{data}{A \code{\link[=data.frame]{data.frame()}} or \code{\link[tibble:tibble]{tibble::tibble()}} containing the original
->>>>>>> 3c922d507f7cc758a987a9ef44ae4267ac6ed583
 data that was used to produce the object \code{x}. Defaults to
 \code{stats::model.frame(x)} so that \code{augment(my_fit)} returns the augmented
 original data. \strong{Do not} pass new data to the \code{data} argument.
 Augment will report information such as influence and cooks distance for
 data passed to the \code{data} argument. These measures are only defined for
 the original training data.}
-<<<<<<< HEAD
-    \item{\code{newdata}}{A \code{\link[=data.frame]{data.frame()}} or \code{\link[tibble:tibble]{tibble::tibble()}} containing all
-the original predictors used to create \code{x}. Defaults to \code{NULL}, indicating
-that nothing has been passed to \code{newdata}. If \code{newdata} is specified,
-the \code{data} argument will be ignored.}
-  }}
-}
-\value{
-A \code{\link[tibble:tibble]{tibble::tibble()}} containing the data passed to \code{augment},
-and \strong{additional} columns:
-=======
 
 \item{newdata}{A \code{\link[=data.frame]{data.frame()}} or \code{\link[tibble:tibble]{tibble::tibble()}} containing all
 the original predictors used to create \code{x}. Defaults to \code{NULL}, indicating
 that nothing has been passed to \code{newdata}. If \code{newdata} is specified,
 the \code{data} argument will be ignored.}
->>>>>>> 3c922d507f7cc758a987a9ef44ae4267ac6ed583
 
 \item{...}{Additional arguments. Not used. Needed to match generic
 signature only. \strong{Cautionary note:} Misspelled arguments will be

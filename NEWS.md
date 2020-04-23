@@ -1,37 +1,5 @@
-<<<<<<< HEAD
-# broom 0.5.6
-
-- Fix failing CRAN checks to due `tibble 3.0.0` release. Removed `xergm` dependency.
-
-# broom 0.5.5
-
-- Remove tidiers for robust package and drop robust dependency (temporarily)
-
-# broom 0.5.4
-
-- Fixes failing CRAN checks as the joineRML package has been removed from CRAN
-
-# broom 0.5.3
-
-- Fixes failing CRAN checks due to new matrix classing in R 4.0.0
-
-# broom 0.5.2
-
-- Fixes failing CRAN checks
-
-- Changes to accomodate ergm 3.10 release. `tidy.ergm()` no longer
-  has a `quick` argument. The old default of `quick = FALSE` is
-  now the only option.
-
-# broom 0.5.1
-
-- `tidy()`, `glance()` and `augment()` are now re-exported from the [generics](https://github.com/r-lib/generics) package.
-
-# broom 0.5.0
-=======
-# broom 0.5.3.9000
+# broom 0.5.6.9000
 (To be released as 0.7.0)
->>>>>>> 3c922d507f7cc758a987a9ef44ae4267ac6ed583
 
 ## Breaking changes
 
@@ -195,6 +163,30 @@ column names by `make.names`)
 - Bug fix to allow `tidy.htest()` to supports equal variances (#608)
 - Bug fix for `tidy.polr()` when passed `conf.int = TRUE` (#498)
 - Bug fix in `glance.lavaan()` (#577)
+
+# broom 0.5.6
+
+- Fix failing CRAN checks to due `tibble 3.0.0` release. Removed `xergm` dependency.
+
+# broom 0.5.5
+
+- Remove tidiers for robust package and drop robust dependency (temporarily)
+
+# broom 0.5.4
+
+- Fixes failing CRAN checks as the joineRML package has been removed from CRAN
+
+# broom 0.5.3
+
+- Fixes failing CRAN checks due to new matrix classing in R 4.0.0
+
+# broom 0.5.2
+
+- Fixes failing CRAN checks
+
+- Changes to accomodate ergm 3.10 release. `tidy.ergm()` no longer
+  has a `quick` argument. The old default of `quick = FALSE` is
+  now the only option.
 
 # broom 0.5.1
 

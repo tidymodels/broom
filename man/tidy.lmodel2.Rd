@@ -20,20 +20,6 @@ proceed using \code{conf.level = 0.95}. Additionally, if you pass
 accept a \code{newdata} argument, it will use the default value for
 the \code{data} argument.}
 }
-<<<<<<< HEAD
-\value{
-A \link[tibble:tibble]{tibble::tibble} within eight rows (one for each term estimated
-with each method) and columns:
-\itemize{
-\item \code{method}: Either OLS/MA/SMA/RMA
-\item \code{term}: Either "Intercept" or "Slope"
-\item \code{estimate}: Estimated coefficient
-\item \code{conf.low}: Lower bound of 95\\% confidence interval
-\item \code{conf.high}: Upper bound of 95\\% confidence interval
-}
-}
-=======
->>>>>>> 3c922d507f7cc758a987a9ef44ae4267ac6ed583
 \description{
 Tidy summarizes information about the components of a model.
 A model component might be a single term in a regression, a single

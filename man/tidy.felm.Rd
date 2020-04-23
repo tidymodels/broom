@@ -6,11 +6,7 @@
 \alias{lfe_tidiers}
 \title{Tidy a(n) felm object}
 \usage{
-<<<<<<< HEAD
-\method{tidy}{felm}(x, conf.int = FALSE, conf.level = 0.95, fe = FALSE, ...)
-=======
 \method{tidy}{felm}(x, conf.int = FALSE, conf.level = 0.95, fe = FALSE, robust = FALSE, ...)
->>>>>>> 3c922d507f7cc758a987a9ef44ae4267ac6ed583
 }
 \arguments{
 \item{x}{A \code{felm} object returned from \code{\link[lfe:felm]{lfe::felm()}}.}

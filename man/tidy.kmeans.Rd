@@ -10,11 +10,7 @@
 \arguments{
 \item{x}{A \code{kmeans} object created by \code{\link[stats:kmeans]{stats::kmeans()}}.}
 
-<<<<<<< HEAD
-\item{col.names}{Dimension names. Defaults to \verb{x1, x2, ...}}
-=======
 \item{col.names}{Dimension names. Defaults to the names of the variables in x.  Set to NULL to get names \verb{x1, x2, ...}.}
->>>>>>> 3c922d507f7cc758a987a9ef44ae4267ac6ed583
 
 \item{...}{Additional arguments. Not used. Needed to match generic
 signature only. \strong{Cautionary note:} Misspelled arguments will be

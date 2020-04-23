@@ -39,15 +39,6 @@ Directly calls \code{\link[tibble:as_tibble]{tibble::as_tibble()}} on a \link{ta
 does the same things as \code{\link[=as.data.frame.table]{as.data.frame.table()}} but also gives the
 returned object \link[tibble:tibble]{tibble::tibble} class.
 }
-<<<<<<< HEAD
-\examples{
-
-tab <- with(airquality, table(Temp = cut(Temp, quantile(Temp)), Month))
-tidy(tab)
-
-}
-=======
->>>>>>> 3c922d507f7cc758a987a9ef44ae4267ac6ed583
 \seealso{
 \code{\link[=as_tibble.table]{as_tibble.table()}}
 }

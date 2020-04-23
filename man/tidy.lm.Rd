@@ -5,20 +5,7 @@
 \alias{lm_tidiers}
 \title{Tidy a(n) lm object}
 \usage{
-<<<<<<< HEAD
-\method{tidy}{lm}(
-  x,
-  conf.int = FALSE,
-  conf.level = 0.95,
-  exponentiate = FALSE,
-  quick = FALSE,
-  ...
-)
-
-\method{tidy}{summary.lm}(x, ...)
-=======
 \method{tidy}{lm}(x, conf.int = FALSE, conf.level = 0.95, ...)
->>>>>>> 3c922d507f7cc758a987a9ef44ae4267ac6ed583
 }
 \arguments{
 \item{x}{An \code{lm} object created by \code{\link[stats:lm]{stats::lm()}}.}
@@ -110,14 +97,10 @@ Other lm tidiers:
 \code{\link{augment.lm}()},
 \code{\link{glance.glm}()},
 \code{\link{glance.lm}()},
-<<<<<<< HEAD
-\code{\link{tidy.glm}()}
-=======
 \code{\link{glance.svyglm}()},
 \code{\link{tidy.glm}()},
 \code{\link{tidy.lm.beta}()},
 \code{\link{tidy.mlm}()}
->>>>>>> 3c922d507f7cc758a987a9ef44ae4267ac6ed583
 }
 \concept{lm tidiers}
 \value{

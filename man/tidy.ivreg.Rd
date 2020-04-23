@@ -6,11 +6,7 @@
 \alias{aer_tidiers}
 \title{Tidy a(n) ivreg object}
 \usage{
-<<<<<<< HEAD
-\method{tidy}{ivreg}(x, conf.int = FALSE, conf.level = 0.95, exponentiate = FALSE, ...)
-=======
 \method{tidy}{ivreg}(x, conf.int = FALSE, conf.level = 0.95, instruments = FALSE, ...)
->>>>>>> 3c922d507f7cc758a987a9ef44ae4267ac6ed583
 }
 \arguments{
 \item{x}{An \code{ivreg} object created by a call to \code{\link[AER:ivreg]{AER::ivreg()}}.}

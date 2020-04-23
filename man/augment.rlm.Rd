@@ -9,31 +9,13 @@
 \arguments{
 \item{x}{An \code{rlm} object returned by \code{\link[MASS:rlm]{MASS::rlm()}}.}
 
-<<<<<<< HEAD
-\item{...}{
-  Arguments passed on to \code{\link[=augment.lm]{augment.lm}}
-  \describe{
-    \item{\code{data}}{A \code{\link[=data.frame]{data.frame()}} or \code{\link[tibble:tibble]{tibble::tibble()}} containing the original
-=======
 \item{data}{A \code{\link[=data.frame]{data.frame()}} or \code{\link[tibble:tibble]{tibble::tibble()}} containing the original
->>>>>>> 3c922d507f7cc758a987a9ef44ae4267ac6ed583
 data that was used to produce the object \code{x}. Defaults to
 \code{stats::model.frame(x)} so that \code{augment(my_fit)} returns the augmented
 original data. \strong{Do not} pass new data to the \code{data} argument.
 Augment will report information such as influence and cooks distance for
 data passed to the \code{data} argument. These measures are only defined for
 the original training data.}
-<<<<<<< HEAD
-    \item{\code{newdata}}{A \code{\link[=data.frame]{data.frame()}} or \code{\link[tibble:tibble]{tibble::tibble()}} containing all
-the original predictors used to create \code{x}. Defaults to \code{NULL}, indicating
-that nothing has been passed to \code{newdata}. If \code{newdata} is specified,
-the \code{data} argument will be ignored.}
-    \item{\code{type.predict}}{Type of predictions to use when \code{x} is a \code{glm} object.
-Passed to \code{\link[stats:predict.glm]{stats::predict.glm()}}.}
-    \item{\code{type.residuals}}{Type of residuals to use when \code{x} is a \code{glm} object.
-Passed to \code{\link[stats:residuals.glm]{stats::residuals.glm()}}.}
-  }}
-=======
 
 \item{newdata}{A \code{\link[=data.frame]{data.frame()}} or \code{\link[tibble:tibble]{tibble::tibble()}} containing all
 the original predictors used to create \code{x}. Defaults to \code{NULL}, indicating
@@ -53,7 +35,6 @@ proceed using \code{conf.level = 0.95}. Additionally, if you pass
 \code{newdata = my_tibble} to an \code{\link[=augment]{augment()}} method that does not
 accept a \code{newdata} argument, it will use the default value for
 the \code{data} argument.}
->>>>>>> 3c922d507f7cc758a987a9ef44ae4267ac6ed583
 }
 \description{
 Augment accepts a model object and a dataset and adds
@@ -94,16 +75,7 @@ We are in the process of defining behaviors for models fit with various
 \link{na.action} arguments, but make no guarantees about behavior when data is
 missing at this time.
 }
-<<<<<<< HEAD
-\seealso{
-\code{\link[=augment]{augment()}}, \code{\link[=augment.lm]{augment.lm()}}
-=======
-\details{
-For tidiers for models from the \pkg{robust} package see
-\code{\link[=tidy.lmRob]{tidy.lmRob()}} and \code{\link[=tidy.glmRob]{tidy.glmRob()}}.
-}
 \examples{
->>>>>>> 3c922d507f7cc758a987a9ef44ae4267ac6ed583
 
 library(MASS)
 

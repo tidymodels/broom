@@ -42,19 +42,12 @@ tidy(TukeyHSD(fm2))
 \code{\link[=tidy]{tidy()}}, \code{\link[stats:TukeyHSD]{stats::TukeyHSD()}}
 
 Other anova tidiers: 
-<<<<<<< HEAD
-\code{\link{tidy.anova}()},
-\code{\link{tidy.aovlist}()},
-\code{\link{tidy.aov}()},
-\code{\link{tidy.manova}()}
-=======
 \code{\link{glance.aov}()},
 \code{\link{tidy.anova}()},
 \code{\link{tidy.aovlist}()},
 \code{\link{tidy.aov}()},
 \code{\link{tidy.manova}()},
 \code{\link{tidy.summary.manova}()}
->>>>>>> 3c922d507f7cc758a987a9ef44ae4267ac6ed583
 }
 \concept{anova tidiers}
 \value{

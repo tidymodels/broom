@@ -11,22 +11,6 @@ tidy_irlba(x, ...)
 \arguments{
 \item{x}{A list returned from \code{\link[irlba:irlba]{irlba::irlba()}}.}
 
-<<<<<<< HEAD
-\item{...}{
-  Arguments passed on to \code{\link[=tidy_svd]{tidy_svd}}
-  \describe{
-    \item{\code{matrix}}{Character specifying which component of the PCA should be
-tidied.
-\itemize{
-\item \code{"u"}, \code{"samples"}, or \code{"x"}: returns information about the map from
-the original space into principle components space.
-\item \code{"v"}, \code{"rotation"}, or \code{"variables"}: returns information about the
-map from principle components space back into the original space.
-\item \code{"d"} or \code{"pcs"}: returns information about the eigenvalues
-will return information about
-}}
-  }}
-=======
 \item{...}{Additional arguments. Not used. Needed to match generic
 signature only. \strong{Cautionary note:} Misspelled arguments will be
 absorbed in \code{...}, where they will be ignored. If the misspelled
@@ -36,7 +20,6 @@ proceed using \code{conf.level = 0.95}. Additionally, if you pass
 \code{newdata = my_tibble} to an \code{\link[=augment]{augment()}} method that does not
 accept a \code{newdata} argument, it will use the default value for
 the \code{data} argument.}
->>>>>>> 3c922d507f7cc758a987a9ef44ae4267ac6ed583
 }
 \value{
 A \link[tibble:tibble]{tibble::tibble} with columns depending on the component of

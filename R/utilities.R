@@ -11,52 +11,6 @@ rename2 <- function(.data, ...) {
   present <- purrr::keep(dots, ~quo_name(.x) %in% colnames(.data))
   rename(.data, !!!present)
 }
-<<<<<<< HEAD
-
-validate_augment_input <- function(model, data = NULL, newdata = NULL) {
-  
-  # careful: `data` may be non-null due to default argument such as
-  # `data = stats::model.frame(x)`
-  # newdata argument default *should* always `NULL`
-  
-  data_passed <- !is.null(data)
-  newdata_passed <- !is.null(newdata)
-  
-  # TODO: the following is bad if someone maps over models to augment
-  
-  # if (data_passed && newdata_passed) {
-  #   warning(
-  #     "Both `data` and `newdata` have been specified. Ignoring `data`.",
-  #     call. = FALSE
-  #   )
-  # }
-  
-  # this test means that for `augment(fit)` to work, `augment.my_model`
-  # must have a non-null default value for either `data` or `newdata`.
-  
-  # if (!data_passed && !newdata_passed) {
-  #   message(
-  #     "Neither `data` nor `newdata` has been specified.\n",
-  #     "Attempting to reconstruct original data."
-  #   )
-  # }
-  
-  if (data_passed) {
-    
-    if (!inherits(data, "data.frame")) {
-      stop("`data` argument must be a tibble or dataframe.", call. = FALSE)
-    }
-    
-    tryCatch(
-      as_tibble(data),
-      error = function(e) {
-        stop(
-          "`data` is malformed: must be coercable to a tibble.\n",
-          "Did you pass `data` the data originally used to fit your model?")
-      }
-    )
-=======
->>>>>>> 3c922d507f7cc758a987a9ef44ae4267ac6ed583
 
 exponentiate <- function(data) {
   

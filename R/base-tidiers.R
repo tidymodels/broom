@@ -13,14 +13,6 @@
 #' @details Directly calls [tibble::as_tibble()] on a [table] object, which
 #'   does the same things as [as.data.frame.table()] but also gives the
 #'   returned object [tibble::tibble] class.
-<<<<<<< HEAD
-#' 
-#' @examples
-#'
-#' tab <- with(airquality, table(Temp = cut(Temp, quantile(Temp)), Month))
-#' tidy(tab)
-=======
->>>>>>> 3c922d507f7cc758a987a9ef44ae4267ac6ed583
 #'
 #' @seealso [as_tibble.table()]
 #' @export

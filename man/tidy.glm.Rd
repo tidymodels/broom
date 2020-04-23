@@ -9,28 +9,6 @@
 \arguments{
 \item{x}{A \code{glm} object returned from \code{\link[stats:glm]{stats::glm()}}.}
 
-<<<<<<< HEAD
-\item{...}{
-  Arguments passed on to \code{\link[=tidy.lm]{tidy.lm}}
-  \describe{
-    \item{\code{conf.int}}{Logical indicating whether or not to include a confidence
-interval in the tidied output. Defaults to \code{FALSE}.}
-    \item{\code{conf.level}}{The confidence level to use for the confidence interval
-if \code{conf.int = TRUE}. Must be strictly greater than 0 and less than 1.
-Defaults to 0.95, which corresponds to a 95 percent confidence interval.}
-    \item{\code{quick}}{Logical indiciating if the only the \code{term} and \code{estimate}
-columns should be returned. Often useful to avoid time consuming
-covariance and standard error calculations. Defaults to \code{FALSE}.}
-    \item{\code{exponentiate}}{Logical indicating whether or not to exponentiate the
-the coefficient estimates. This is typical for logistic and multinomial
-regressions, but a bad idea if there is no log or logit link. Defaults
-to \code{FALSE}.}
-  }}
-}
-\value{
-A \code{\link[tibble:tibble]{tibble::tibble()}} with one row for each term in the
-regression. The tibble has columns:
-=======
 \item{conf.int}{Logical indicating whether or not to include a confidence
 interval in the tidied output. Defaults to \code{FALSE}.}
 
@@ -42,7 +20,6 @@ Defaults to 0.95, which corresponds to a 95 percent confidence interval.}
 the coefficient estimates. This is typical for logistic and multinomial
 regressions, but a bad idea if there is no log or logit link. Defaults
 to \code{FALSE}.}
->>>>>>> 3c922d507f7cc758a987a9ef44ae4267ac6ed583
 
 \item{...}{Additional arguments. Not used. Needed to match generic
 signature only. \strong{Cautionary note:} Misspelled arguments will be
@@ -70,13 +47,9 @@ Other lm tidiers:
 \code{\link{augment.lm}()},
 \code{\link{glance.glm}()},
 \code{\link{glance.lm}()},
-<<<<<<< HEAD
-\code{\link{tidy.lm}()}
-=======
 \code{\link{glance.svyglm}()},
 \code{\link{tidy.lm.beta}()},
 \code{\link{tidy.lm}()},
 \code{\link{tidy.mlm}()}
->>>>>>> 3c922d507f7cc758a987a9ef44ae4267ac6ed583
 }
 \concept{lm tidiers}

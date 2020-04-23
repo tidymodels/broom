@@ -6,18 +6,7 @@
 \alias{geepack_tidiers}
 \title{Tidy a(n) geeglm object}
 \usage{
-<<<<<<< HEAD:man/geeglm_tidiers.Rd
-\method{tidy}{geeglm}(
-  x,
-  conf.int = FALSE,
-  conf.level = 0.95,
-  exponentiate = FALSE,
-  quick = FALSE,
-  ...
-)
-=======
 \method{tidy}{geeglm}(x, conf.int = FALSE, conf.level = 0.95, exponentiate = FALSE, ...)
->>>>>>> 3c922d507f7cc758a987a9ef44ae4267ac6ed583:man/tidy.geeglm.Rd
 }
 \arguments{
 \item{x}{A \code{geeglm} object returned from a call to \code{\link[geepack:geeglm]{geepack::geeglm()}}.}

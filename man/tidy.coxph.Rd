@@ -5,11 +5,7 @@
 \alias{coxph_tidiers}
 \title{Tidy a(n) coxph object}
 \usage{
-<<<<<<< HEAD
-\method{tidy}{coxph}(x, exponentiate = FALSE, conf.int = TRUE, conf.level = 0.95, ...)
-=======
 \method{tidy}{coxph}(x, exponentiate = FALSE, conf.int = FALSE, conf.level = 0.95, ...)
->>>>>>> 3c922d507f7cc758a987a9ef44ae4267ac6ed583
 }
 \arguments{
 \item{x}{A \code{coxph} object returned from \code{\link[survival:coxph]{survival::coxph()}}.}

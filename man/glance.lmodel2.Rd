@@ -19,18 +19,6 @@ proceed using \code{conf.level = 0.95}. Additionally, if you pass
 accept a \code{newdata} argument, it will use the default value for
 the \code{data} argument.}
 }
-<<<<<<< HEAD
-\value{
-A one-row \link[tibble:tibble]{tibble::tibble} with columns:
-\itemize{
-\item \code{r.squared}: OLS R-squared
-\item \code{p.value}: OLS parametric p-value
-\item \code{theta}: Angle between OLS lines \code{lm(y ~ x)} and \code{lm(x ~ y)}
-\item \code{H}: H statistic for computing confidence interval of major axis slope
-}
-}
-=======
->>>>>>> 3c922d507f7cc758a987a9ef44ae4267ac6ed583
 \description{
 Glance accepts a model object and returns a \code{\link[tibble:tibble]{tibble::tibble()}}
 with exactly one row of model summaries. The summaries are typically

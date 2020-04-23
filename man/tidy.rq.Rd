@@ -6,11 +6,7 @@
 \alias{quantreg_tidiers}
 \title{Tidy a(n) rq object}
 \usage{
-<<<<<<< HEAD
-\method{tidy}{rq}(x, se.type = "rank", conf.int = TRUE, conf.level = 0.95, ...)
-=======
 \method{tidy}{rq}(x, se.type = NULL, conf.int = FALSE, conf.level = 0.95, ...)
->>>>>>> 3c922d507f7cc758a987a9ef44ae4267ac6ed583
 }
 \arguments{
 \item{x}{An \code{rq} object returned from \code{\link[quantreg:rq]{quantreg::rq()}}.}

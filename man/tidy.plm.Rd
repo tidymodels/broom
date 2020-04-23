@@ -5,11 +5,7 @@
 \alias{plm_tidiers}
 \title{Tidy a(n) plm object}
 \usage{
-<<<<<<< HEAD
-\method{tidy}{plm}(x, conf.int = FALSE, conf.level = 0.95, exponentiate = FALSE, ...)
-=======
 \method{tidy}{plm}(x, conf.int = FALSE, conf.level = 0.95, ...)
->>>>>>> 3c922d507f7cc758a987a9ef44ae4267ac6ed583
 }
 \arguments{
 \item{x}{A \code{plm} objected returned by \code{\link[plm:plm]{plm::plm()}}.}

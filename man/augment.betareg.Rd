@@ -6,11 +6,7 @@
 \usage{
 \method{augment}{betareg}(
   x,
-<<<<<<< HEAD
-  data = stats::model.frame(x),
-=======
   data = model.frame(x),
->>>>>>> 3c922d507f7cc758a987a9ef44ae4267ac6ed583
   newdata = NULL,
   type.predict,
   type.residuals,

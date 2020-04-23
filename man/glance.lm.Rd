@@ -91,16 +91,11 @@ Other lm tidiers:
 \code{\link{augment.glm}()},
 \code{\link{augment.lm}()},
 \code{\link{glance.glm}()},
-<<<<<<< HEAD
-\code{\link{tidy.glm}()},
-\code{\link{tidy.lm}()}
-=======
 \code{\link{glance.svyglm}()},
 \code{\link{tidy.glm}()},
 \code{\link{tidy.lm.beta}()},
 \code{\link{tidy.lm}()},
 \code{\link{tidy.mlm}()}
->>>>>>> 3c922d507f7cc758a987a9ef44ae4267ac6ed583
 }
 \concept{lm tidiers}
 \value{

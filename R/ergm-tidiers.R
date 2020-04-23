@@ -22,10 +22,6 @@
 #'
 #' @examples
 #' 
-<<<<<<< HEAD
-=======
-#' \dontrun{
->>>>>>> 3c922d507f7cc758a987a9ef44ae4267ac6ed583
 #' library(ergm)
 #' # Using the same example as the ergm package
 #' # Load the Florentine marriage network data
@@ -46,10 +42,6 @@
 #' glance(gest)
 #' glance(gest, deviance = TRUE)
 #' glance(gest, mcmc = TRUE)
-<<<<<<< HEAD
-=======
-#' }
->>>>>>> 3c922d507f7cc758a987a9ef44ae4267ac6ed583
 #' 
 #' @references Hunter DR, Handcock MS, Butts CT, Goodreau SM, Morris M (2008b).
 #'   \pkg{ergm}: A Package to Fit, Simulate and Diagnose Exponential-Family
@@ -64,7 +56,6 @@
 tidy.ergm <- function(x, conf.int = FALSE, conf.level = 0.95,
                       exponentiate = FALSE,  ...) {
   
-<<<<<<< HEAD
   # in ergm 3.9 summary(x, ...)$coefs has columns:
   #   Estimate, Std. Error, MCMC %, Pr(>|Z|)
   
@@ -72,13 +63,9 @@ tidy.ergm <- function(x, conf.int = FALSE, conf.level = 0.95,
   #   Estimate, Std. Error, MCMC %, z value, Pr(>|Z|)
   
   ret <- summary(x, ...)$coefs %>% 
-    rename2(
-=======
-  ret <- summary(x, ...)$coefs %>% 
     tibble::rownames_to_column() %>% 
     rename2(
       term = "rowname",
->>>>>>> 3c922d507f7cc758a987a9ef44ae4267ac6ed583
       estimate = "Estimate", 
       std.error = "Std. Error",
       mcmc.error = "MCMC %",

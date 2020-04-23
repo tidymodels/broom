@@ -14,12 +14,8 @@
 #' @seealso [tidy()], [stats::ftable()]
 #' @family stats tidiers
 tidy.ftable <- function(x, ...) {
-<<<<<<< HEAD
-  as_tibble(as.table(x))
-=======
   .Deprecated()
   as_tibble(x)
->>>>>>> 3c922d507f7cc758a987a9ef44ae4267ac6ed583
 }
 
 #' @templateVar class density

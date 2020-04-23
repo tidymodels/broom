@@ -17,42 +17,18 @@
 \arguments{
 \item{x}{A \code{glm} object returned from \code{\link[stats:glm]{stats::glm()}}.}
 
-<<<<<<< HEAD
-\item{...}{
-  Arguments passed on to \code{\link[=augment.lm]{augment.lm}}
-  \describe{
-    \item{\code{data}}{A \code{\link[=data.frame]{data.frame()}} or \code{\link[tibble:tibble]{tibble::tibble()}} containing the original
-=======
 \item{data}{A \code{\link[=data.frame]{data.frame()}} or \code{\link[tibble:tibble]{tibble::tibble()}} containing the original
->>>>>>> 3c922d507f7cc758a987a9ef44ae4267ac6ed583
 data that was used to produce the object \code{x}. Defaults to
 \code{stats::model.frame(x)} so that \code{augment(my_fit)} returns the augmented
 original data. \strong{Do not} pass new data to the \code{data} argument.
 Augment will report information such as influence and cooks distance for
 data passed to the \code{data} argument. These measures are only defined for
 the original training data.}
-<<<<<<< HEAD
-    \item{\code{newdata}}{A \code{\link[=data.frame]{data.frame()}} or \code{\link[tibble:tibble]{tibble::tibble()}} containing all
-the original predictors used to create \code{x}. Defaults to \code{NULL}, indicating
-that nothing has been passed to \code{newdata}. If \code{newdata} is specified,
-the \code{data} argument will be ignored.}
-    \item{\code{type.predict}}{Type of predictions to use when \code{x} is a \code{glm} object.
-Passed to \code{\link[stats:predict.glm]{stats::predict.glm()}}.}
-    \item{\code{type.residuals}}{Type of residuals to use when \code{x} is a \code{glm} object.
-Passed to \code{\link[stats:residuals.glm]{stats::residuals.glm()}}.}
-  }}
-}
-\value{
-When \code{newdata} is not supplied \code{augment.lm} returns
-one row for each observation, with seven columns added to the original
-data:
-=======
 
 \item{newdata}{A \code{\link[=data.frame]{data.frame()}} or \code{\link[tibble:tibble]{tibble::tibble()}} containing all
 the original predictors used to create \code{x}. Defaults to \code{NULL}, indicating
 that nothing has been passed to \code{newdata}. If \code{newdata} is specified,
 the \code{data} argument will be ignored.}
->>>>>>> 3c922d507f7cc758a987a9ef44ae4267ac6ed583
 
 \item{type.predict}{Passed to \code{\link[stats:predict.glm]{stats::predict.glm()}} \code{type}
 argument. Defaults to \code{"link"}.}
@@ -128,16 +104,11 @@ Other lm tidiers:
 \code{\link{augment.lm}()},
 \code{\link{glance.glm}()},
 \code{\link{glance.lm}()},
-<<<<<<< HEAD
-\code{\link{tidy.glm}()},
-\code{\link{tidy.lm}()}
-=======
 \code{\link{glance.svyglm}()},
 \code{\link{tidy.glm}()},
 \code{\link{tidy.lm.beta}()},
 \code{\link{tidy.lm}()},
 \code{\link{tidy.mlm}()}
->>>>>>> 3c922d507f7cc758a987a9ef44ae4267ac6ed583
 }
 \concept{lm tidiers}
 \value{

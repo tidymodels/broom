@@ -23,22 +23,9 @@ the original predictors used to create \code{x}. Defaults to \code{NULL}, indica
 that nothing has been passed to \code{newdata}. If \code{newdata} is specified,
 the \code{data} argument will be ignored.}
 
-<<<<<<< HEAD
-\item{...}{Arguments passed on the loess predict method.}
-}
-\value{
-When \code{newdata} is not supplied \code{augment.loess}
-returns one row for each observation with three columns added
-to the original data:
-
-\item{.fitted}{Fitted values of model}
-\item{.se.fit}{Standard errors of the fitted values}
-\item{.resid}{Residuals of the fitted values}
-=======
 \item{se_fit}{Logical indicating whether or not a \code{.se.fit} column should be
 added to the augmented output. For some models, this calculation can be
 somwhat time-consuming. Defaults to \code{FALSE}.}
->>>>>>> 3c922d507f7cc758a987a9ef44ae4267ac6ed583
 
 \item{...}{Additional arguments. Not used. Needed to match generic
 signature only. \strong{Cautionary note:} Misspelled arguments will be
@@ -94,7 +81,7 @@ augment(lo, newdata = head(mtcars))
 \seealso{
 \link{na.action}
 
-\code{\link[=augment]{augment()}}, \code{\link[stats:loess]{stats::loess()}}
+\code{\link[=augment]{augment()}}, \code{\link[stats:loess]{stats::loess()}}, \code{\link[stats:predict.loess]{stats::predict.loess()}}
 }
 \value{
 A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:

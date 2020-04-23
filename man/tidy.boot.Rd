@@ -5,9 +5,6 @@
 \alias{boot_tidiers}
 \title{Tidy a(n) boot object}
 \usage{
-<<<<<<< HEAD
-\method{tidy}{boot}(x, conf.int = FALSE, conf.level = 0.95, conf.method = "perc", ...)
-=======
 \method{tidy}{boot}(
   x,
   conf.int = FALSE,
@@ -15,7 +12,6 @@
   conf.method = c("perc", "bca", "basic", "norm"),
   ...
 )
->>>>>>> 3c922d507f7cc758a987a9ef44ae4267ac6ed583
 }
 \arguments{
 \item{x}{A \code{\link[boot:boot]{boot::boot()}} object.}

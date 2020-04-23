@@ -1,12 +1,7 @@
 Type: Package
 Package: broom
-<<<<<<< HEAD
-Title: Convert Statistical Analysis Objects into Tidy Tibbles
-Version: 0.5.6
-=======
 Title: Convert Statistical Objects into Tidy Tibbles
-Version: 0.5.3.9000
->>>>>>> 3c922d507f7cc758a987a9ef44ae4267ac6ed583
+Version: 0.5.6.9000
 Authors@R: 
     c(person(given = "David",
              family = "Robinson",
@@ -17,8 +12,6 @@ Authors@R:
              role = c("aut", "cre"),
              email = "alexpghayes@gmail.com",
              comment = c(ORCID = "0000-0002-4985-5160")),
-<<<<<<< HEAD
-=======
       person(given = "Indrajeet",
              family = "Patil",
              role = "ctb",
@@ -28,7 +21,6 @@ Authors@R:
              family = "Chiu",
              role = "ctb",
              email = "dchiu@bccrc.ca"),
->>>>>>> 3c922d507f7cc758a987a9ef44ae4267ac6ed583
       person(given = "Matthieu",
              family = "Gomez",
              role = "ctb",
@@ -118,13 +110,10 @@ Authors@R:
              family = "Whalley",
              role = "ctb",
              email = "ben.whalley@plymouth.ac.uk"),
-<<<<<<< HEAD
-=======
       person(given = "Karissa",
              family = "Whiting",
              role = "ctb",
              email = "karissa.whiting@gmail.com"),
->>>>>>> 3c922d507f7cc758a987a9ef44ae4267ac6ed583
       person(given = "Michael",
              family = "Kuehn",
              role = "ctb",
@@ -139,9 +128,6 @@ Authors@R:
              email = "erle.holgersen@gmail.com"),
       person(given = "Karl",
              family = "Dunkle Werner",
-<<<<<<< HEAD
-             role = "ctb"))
-=======
              role = "ctb"),
       person(given = "Ethan",
              family = "Christensen",
@@ -290,7 +276,6 @@ Authors@R:
              role = "ctb",
              email = "shirokuriwaki@gmail.com",
              comment = c(ORCID = "0000-0002-5687-2647")))
->>>>>>> 3c922d507f7cc758a987a9ef44ae4267ac6ed583
 Description: Summarizes key information about statistical
     objects in tidy tibbles. This makes it easy to report results, create
     plots and consistently work with large numbers of models at once.
@@ -310,13 +295,9 @@ Depends:
 Imports:
     backports,
     dplyr,
-<<<<<<< HEAD
-    generics (>= 0.0.2),
-=======
     ellipsis,
     generics (>= 0.0.2),
     glue,
->>>>>>> 3c922d507f7cc758a987a9ef44ae4267ac6ed583
     methods,
     purrr,
     reshape2,
@@ -386,11 +367,8 @@ Suggests:
     quantreg,
     rgeos,
     rmarkdown,
-<<<<<<< HEAD
-=======
     robust,
     robustbase,
->>>>>>> 3c922d507f7cc758a987a9ef44ae4267ac6ed583
     rsample,
     sp,
     speedglm,
@@ -401,7 +379,6 @@ Suggests:
     systemfit,
     testthat (>= 2.1.0),
     tseries,
-<<<<<<< HEAD
     zoo
 VignetteBuilder: 
     knitr
@@ -409,21 +386,6 @@ Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.0
-=======
-    xergm,
-    zoo,
-    glmnetUtils,
-    lme4,
-    gee,
-    mclogit
-Remotes:
-    alexpghayes/modeltests
-Encoding: UTF-8
-VignetteBuilder: knitr
-Language: en-US
-LazyData: true
-Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.0.2
 Collate:
     'aaa-documentation-helper.R'
     'null-and-default-tidiers.R'
@@ -527,4 +489,3 @@ Collate:
     'utilities.R'
     'zoo-tidiers.R'
     'zzz.R'
->>>>>>> 3c922d507f7cc758a987a9ef44ae4267ac6ed583

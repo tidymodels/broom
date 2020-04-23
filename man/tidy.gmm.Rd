@@ -5,18 +5,7 @@
 \alias{gmm_tidiers}
 \title{Tidy a(n) gmm object}
 \usage{
-<<<<<<< HEAD
-\method{tidy}{gmm}(
-  x,
-  conf.int = FALSE,
-  conf.level = 0.95,
-  exponentiate = FALSE,
-  quick = FALSE,
-  ...
-)
-=======
 \method{tidy}{gmm}(x, conf.int = FALSE, conf.level = 0.95, exponentiate = FALSE, ...)
->>>>>>> 3c922d507f7cc758a987a9ef44ae4267ac6ed583
 }
 \arguments{
 \item{x}{A \code{gmm} object returned from \code{\link[gmm:gmm]{gmm::gmm()}}.}

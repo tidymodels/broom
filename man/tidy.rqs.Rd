@@ -5,11 +5,7 @@
 \alias{rqs_tidiers}
 \title{Tidy a(n) rqs object}
 \usage{
-<<<<<<< HEAD
-\method{tidy}{rqs}(x, se.type = "rank", conf.int = TRUE, conf.level = 0.95, ...)
-=======
 \method{tidy}{rqs}(x, se.type = "rank", conf.int = FALSE, conf.level = 0.95, ...)
->>>>>>> 3c922d507f7cc758a987a9ef44ae4267ac6ed583
 }
 \arguments{
 \item{x}{An \code{rqs} object returned from \code{\link[quantreg:rq]{quantreg::rq()}}.}

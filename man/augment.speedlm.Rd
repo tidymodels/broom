@@ -4,11 +4,7 @@
 \alias{augment.speedlm}
 \title{Augment data with information from a(n) speedlm object}
 \usage{
-<<<<<<< HEAD
-\method{augment}{speedlm}(x, data = model.frame(x), newdata = data, ...)
-=======
 \method{augment}{speedlm}(x, data = model.frame(x), newdata = NULL, ...)
->>>>>>> 3c922d507f7cc758a987a9ef44ae4267ac6ed583
 }
 \arguments{
 \item{x}{A \code{speedlm} object returned from \code{\link[speedglm:speedlm]{speedglm::speedlm()}}.}
@@ -88,13 +84,9 @@ augment(mod)
 \code{\link[speedglm:speedlm]{speedglm::speedlm()}}
 
 Other speedlm tidiers: 
-<<<<<<< HEAD
-\code{\link{glance.speedlm}()},
-=======
 \code{\link{glance.speedglm}()},
 \code{\link{glance.speedlm}()},
 \code{\link{tidy.speedglm}()},
->>>>>>> 3c922d507f7cc758a987a9ef44ae4267ac6ed583
 \code{\link{tidy.speedlm}()}
 }
 \concept{speedlm tidiers}

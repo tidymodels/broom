@@ -63,13 +63,10 @@ test_that("glance.felm", {
   gl2 <- glance(fit2)
   
   check_glance_outputs(gl, gl2)
-<<<<<<< HEAD
-  # check_dims(gl, expected_cols = 7)
-=======
   check_dims(gl, expected_cols = 8)
   
   expect_error(glance(fit_multi), "Glance does not support linear models with multiple responses.")
->>>>>>> 3c922d507f7cc758a987a9ef44ae4267ac6ed583
+  
 })
 
 test_that("augment.felm", {

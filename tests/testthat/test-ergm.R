@@ -21,12 +21,9 @@ test_that("tidy.ergm", {
 
   check_tidy_output(tde)
   
-<<<<<<< HEAD
-=======
   # regression test for #688
   expect_true("term" %in% colnames(tde))
   
->>>>>>> 3c922d507f7cc758a987a9ef44ae4267ac6ed583
   # number of columns in output varies with ergm version
   # so this test is temporarily deactivated
   # check_dims(tde, 2, 7)

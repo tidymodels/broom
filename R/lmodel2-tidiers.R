@@ -4,16 +4,6 @@
 #' @param x A `lmodel2` object returned by [lmodel2::lmodel2()].
 #' @template param_unused_dots
 #'
-<<<<<<< HEAD
-#' @return A [tibble::tibble] within eight rows (one for each term estimated 
-#'   with each method) and columns:
-#'   
-#'   - `method`: Either OLS/MA/SMA/RMA
-#'   - `term`: Either "Intercept" or "Slope"
-#'   - `estimate`: Estimated coefficient
-#'   - `conf.low`: Lower bound of 95\% confidence interval
-#'   - `conf.high`: Upper bound of 95\% confidence interval
-=======
 #' @evalRd return_tidy(
 #'   "term",
 #'   "estimate",
@@ -22,7 +12,6 @@
 #'   "conf.high",
 #'   method = "Either OLS/MA/SMA/RMA"
 #' )
->>>>>>> 3c922d507f7cc758a987a9ef44ae4267ac6ed583
 #'
 #' @details There are always only two terms in an `lmodel2`: `"Intercept"`
 #'   and `"Slope"`. These are computed by four methods: OLS
@@ -87,14 +76,6 @@ tidy.lmodel2 <- function(x, ...) {
 #' 
 #' @inherit tidy.lmodel2 params examples
 #' 
-<<<<<<< HEAD
-#' @return A one-row [tibble::tibble] with columns:
-#' 
-#'   - `r.squared`: OLS R-squared
-#'   - `p.value`: OLS parametric p-value
-#'   - `theta`: Angle between OLS lines `lm(y ~ x)` and `lm(x ~ y)`
-#'   - `H`: H statistic for computing confidence interval of major axis slope
-=======
 #' @evalRd return_glance(
 #'   "r.squared",
 #'   "p.value",
@@ -102,7 +83,6 @@ tidy.lmodel2 <- function(x, ...) {
 #'   H = "H statistic for computing confidence interval of major axis slope",
 #'   "nobs"
 #' )
->>>>>>> 3c922d507f7cc758a987a9ef44ae4267ac6ed583
 #'
 #' @export
 #' @seealso [glance()], [lmodel2::lmodel2()]

@@ -48,11 +48,8 @@ augment(mod)
 
 Other speedlm tidiers: 
 \code{\link{augment.speedlm}()},
-<<<<<<< HEAD
-=======
 \code{\link{glance.speedglm}()},
 \code{\link{tidy.speedglm}()},
->>>>>>> 3c922d507f7cc758a987a9ef44ae4267ac6ed583
 \code{\link{tidy.speedlm}()}
 }
 \concept{speedlm tidiers}
