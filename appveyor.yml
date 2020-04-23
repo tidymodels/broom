@@ -10,6 +10,7 @@ init:
 install:
   ps: Bootstrap
 
+<<<<<<< HEAD
 environment:
   global:
     USE_RTOOLS: true
@@ -17,6 +18,18 @@ environment:
 cache:
   - C:\RLibrary
 
+=======
+cache:
+  - C:\RLibrary
+
+environment:
+  NOT_CRAN: true
+  # env vars that may need to be set, at least temporarily, from time to time
+  # see https://github.com/krlmlr/r-appveyor#readme for details
+  # USE_RTOOLS: true
+  # R_REMOTES_STANDALONE: true
+
+>>>>>>> 3c922d507f7cc758a987a9ef44ae4267ac6ed583
 # Adapt as necessary starting from here
 
 build_script:

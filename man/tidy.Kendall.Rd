@@ -22,15 +22,6 @@ proceed using \code{conf.level = 0.95}. Additionally, if you pass
 accept a \code{newdata} argument, it will use the default value for
 the \code{data} argument.}
 }
-\value{
-A \link[tibble:tibble]{tibble::tibble} with one row and columns:
-
-\item{statistic}{Kendall's tau statistic.}
-\item{p.value}{two-sided p-value.}
-\item{kendall_score}{Kendall score.}
-\item{denominator}{The denominator, which is tau=kendall_score/denominator.}
-\item{var_kendall_score}{Variance of the kendall_score.}
-}
 \description{
 Tidy summarizes information about the components of a model.
 A model component might be a single term in a regression, a single
@@ -58,4 +49,13 @@ tidy(t_res)
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[Kendall:Kendall]{Kendall::Kendall()}}, \code{\link[Kendall:MannKendall]{Kendall::MannKendall()}},
 \code{\link[Kendall:SeasonalMannKendall]{Kendall::SeasonalMannKendall()}}
+}
+\value{
+A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
+  \item{kendall_score}{Kendall score.}
+  \item{p.value}{The two-sided p-value associated with the observed statistic.}
+  \item{var_kendall_score}{Variance of the kendall_score.}
+  \item{statistic}{Kendall's tau statistic}
+  \item{denominator}{The denominator, which is tau=kendall_score/denominator.}
+
 }

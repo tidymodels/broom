@@ -1,5 +1,8 @@
 context("stats-anova")
 
+skip_if_not_installed("modeltests")
+library(modeltests)
+
 test_that("tidy.aov", {
   check_arguments(tidy.aov)
   
@@ -15,7 +18,7 @@ test_that("tidy.aov", {
 test_that("tidy.anova", {
   check_arguments(tidy.anova)
   
-  anovafit <- anova(lm(mpg ~ wt + disp, mtcars))
+  anovafit <- stats::anova(lm(mpg ~ wt + disp, mtcars))
   td <- tidy(anovafit)
   
   check_tidy_output(td)
@@ -23,18 +26,17 @@ test_that("tidy.anova", {
              
   expect_true("Residuals" %in% td$term)
   
-  loess_anova <- anova(
+  loess_anova <- stats::anova(
     loess(dist ~ speed, cars),
     loess(dist ~ speed, cars, control = loess.control(surface = "direct"))
   )
   
-  # TODO: can we throw a more informative error here
   expect_warning(tidy(loess_anova))
 })
 
 
 test_that("tidy.aovlist", {
-  check_arguments("tidy.aovlist")
+  check_arguments(tidy.aovlist)
   
   aovlist <- aov(mpg ~ wt + disp + Error(drat), mtcars)
   aovlist2 <- aov(mpg ~ wt + qsec + Error(cyl / (wt * qsec)), data = mtcars)
@@ -58,12 +60,24 @@ test_that("tidy.manova", {
   check_arguments(tidy.manova)
   
   df <- within(npk, foo <- rnorm(24))
-  fit <- manova(cbind(yield, foo) ~ block + N * P * K, df)
+  fit <- stats::manova(cbind(yield, foo) ~ block + N * P * K, df)
   
   td <- tidy(fit)
   
-  check_tidy_output(td)
+  check_tidy_output(td, strict = FALSE)
   check_dims(td, 8, 7)
+})
+
+test_that("tidy.summary.manova", {
+  check_arguments(tidy.summary.manova)
+  
+  df <- within(npk, foo <- rnorm(24))
+  fit <- stats::manova(cbind(yield, foo) ~ block + N * P * K, df)
+  
+  td <- tidy(fit)
+  td2 <- tidy(summary(fit))
+  
+  expect_equal(td, td2)
 })
 
 test_that("tidy.TukeyHSD", {

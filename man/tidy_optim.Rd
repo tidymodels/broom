@@ -21,14 +21,6 @@ proceed using \code{conf.level = 0.95}. Additionally, if you pass
 accept a \code{newdata} argument, it will use the default value for
 the \code{data} argument.}
 }
-\value{
-A \link[tibble:tibble]{tibble::tibble} with one row per parameter estimated by \code{optim}
-and columns:
-
-\item{parameter}{name of the parameter, or \code{parameter1},
-\code{parameter2}... if the input vector is not named}
-\item{value}{parameter value that minimizes or maximizes the output}
-}
 \description{
 Broom tidies a number of lists that are effectively S3
 objects without a class attribute. For example, \code{\link[stats:optim]{stats::optim()}},
@@ -44,11 +36,8 @@ If no appropriate tidying method is found, throws an error.
 }
 \examples{
 
-func <- function(x) {
-    (x[1] - 2)^2 + (x[2] - 3)^2 + (x[3] - 8)^2
-}
-
-o <- optim(c(1, 1, 1), func)
+f <- function(x) (x[1] - 2)^2 + (x[2] - 3)^2 + (x[3] - 8)^2
+o <- optim(c(1, 1, 1), f)
 
 tidy(o)
 glance(o)
@@ -65,3 +54,10 @@ Other list tidiers:
 \code{\link{tidy_xyz}()}
 }
 \concept{list tidiers}
+\value{
+A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
+  \item{parameter}{The parameter being modeled.}
+  \item{std.error}{The standard error of the regression term.}
+  \item{value}{TODO. needs better documentation.}
+\code{std.error} is only provided as a column if the Hessian is calculated.
+}

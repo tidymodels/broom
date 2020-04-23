@@ -1,14 +1,15 @@
 #' @templateVar class lavaan
 #' @template title_desc_tidy
 #' 
-#' @param x A `lavaan` object, such as those return from [lavaan::cfa()],
+#' @param x A `lavaan` object, such as those returned from [lavaan::cfa()],
 #'   and [lavaan::sem()].
 #' 
 #' @template param_confint
+#' 
 #' @param ... Additional arguments passed to [lavaan::parameterEstimates()].
 #'   **Cautionary note**: Misspecified arguments may be silently ignored.
 #'
-#' @return A [tibble::tibble] with one row for each estimated parameter and
+#' @return A [tibble::tibble()] with one row for each estimated parameter and
 #'   columns:
 #'  
 #'   \item{term}{The result of paste(lhs, op, rhs)}
@@ -31,21 +32,20 @@
 #'   
 #' @examples
 #' 
-#' if (require("lavaan")) {
-#' 
-#'  library(lavaan)
+#' library(lavaan)
 #'  
-#'  cfa.fit <- cfa('F =~ x1 + x2 + x3 + x4 + x5 + x6 + x7 + x8 + x9',
-#'                 data = HolzingerSwineford1939, group = "school")
-#'  tidy(cfa.fit)
-#' }
+#' cfa.fit <- cfa('F =~ x1 + x2 + x3 + x4 + x5 + x6 + x7 + x8 + x9',
+#'                data = HolzingerSwineford1939, group = "school")
+#'                
+#' tidy(cfa.fit)
 #' 
 #' @export
 #' @aliases lavaan_tidiers sem_tidiers cfa_tidiers
 #' @family lavaan tidiers
 #' @seealso [tidy()], [lavaan::cfa()], [lavaan::sem()], 
 #'   [lavaan::parameterEstimates()]
-tidy.lavaan <- function(x, conf.int = TRUE, conf.level = 0.95, ...) {
+tidy.lavaan <- function(x, conf.int = FALSE, conf.level = 0.95, ...) {
+  
   lavaan::parameterEstimates(x,
     ci = conf.int,
     level = conf.level,
@@ -55,7 +55,7 @@ tidy.lavaan <- function(x, conf.int = TRUE, conf.level = 0.95, ...) {
     as_tibble() %>%
     tibble::rownames_to_column() %>%
     mutate(term = paste(lhs, op, rhs)) %>%
-    rename(
+    rename2(
       estimate = est,
       std.error = se,
       p.value = pvalue,
@@ -84,8 +84,8 @@ tidy.lavaan <- function(x, conf.int = TRUE, conf.level = 0.95, ...) {
 #'   \item{agfi}{Adjusted goodness of fit}
 #'   \item{cfi}{Comparative fit index}
 #'   \item{tli}{Tucker Lewis index}
-#'   \item{aic}{Akaike information criterion}
-#'   \item{bic}{Bayesian information criterion}
+#'   \item{AIC}{Akaike information criterion}
+#'   \item{BIC}{Bayesian information criterion}
 #'   \item{ngroups}{Number of groups in model}
 #'   \item{nobs}{Number of observations included}
 #'   \item{norig}{Number of observation in the original dataset}
@@ -98,17 +98,13 @@ tidy.lavaan <- function(x, conf.int = TRUE, conf.level = 0.95, ...) {
 #'   
 #' @examples
 #'
-#' if (require("lavaan", quietly = TRUE)) {
-#' 
-#'  library(lavaan)
+#' library(lavaan)
 #'
-#'  cfa.fit <- cfa(
-#'    'F =~ x1 + x2 + x3 + x4 + x5',
-#'    data = HolzingerSwineford1939, group = "school"
-#'  )
-#'  glance(cfa.fit)
-#'
-#' }
+#' cfa.fit <- cfa(
+#'   'F =~ x1 + x2 + x3 + x4 + x5',
+#'   data = HolzingerSwineford1939, group = "school"
+#' )
+#' glance(cfa.fit)
 #'
 #' @export
 #' @family lavaan tidiers
@@ -132,8 +128,14 @@ glance.lavaan <- function(x, ...) {
           "cfi"
         )
     ) %>%
+<<<<<<< HEAD
     tibble::enframe(name = "term") %>%
     spread(term, value) %>%
+=======
+    as_tibble(rownames = NA) %>%
+    tibble::rownames_to_column(var = "term") %>%
+    spread(., term, value) %>%
+>>>>>>> 3c922d507f7cc758a987a9ef44ae4267ac6ed583
     bind_cols(
       tibble(
         converged = x@Fit@converged,
@@ -145,5 +147,5 @@ glance.lavaan <- function(x, ...) {
         nexcluded = norig - nobs
       )
     ) %>%
-    rename(rmsea.conf.high = rmsea.ci.upper)
+    rename(rmsea.conf.high = rmsea.ci.upper, AIC = aic, BIC = bic)
 }

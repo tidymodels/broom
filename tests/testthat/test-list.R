@@ -1,5 +1,8 @@
 context("list")
 
+skip_if_not_installed("modeltests")
+library(modeltests)
+
 test_that("not all lists can be tidied", {
   nl <- list(a = NULL)
   

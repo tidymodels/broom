@@ -20,11 +20,6 @@ proceed using \code{conf.level = 0.95}. Additionally, if you pass
 accept a \code{newdata} argument, it will use the default value for
 the \code{data} argument.}
 }
-\value{
-A one-row \link[tibble:tibble]{tibble::tibble} with columns:
-\item{n}{Number of trials in given iteration.}
-\item{power}{Power achieved for given value of n.}
-}
 \description{
 Tidy summarizes information about the components of a model.
 A model component might be a single term in a regression, a single
@@ -35,18 +30,18 @@ specify which components to return.
 }
 \examples{
 
-if (require("binGroup", quietly = TRUE)) {
-    des <- binDesign(nmax = 300, delta = 0.06,
-                     p.hyp = 0.1, power = .8)
+library(binGroup)
+des <- binDesign(nmax = 300, delta = 0.06,
+                 p.hyp = 0.1, power = .8)
 
-    glance(des)
-    tidy(des)
+glance(des)
+tidy(des)
 
-    # the ggplot2 equivalent of plot(des)
-    library(ggplot2)
-    ggplot(tidy(des), aes(n, power)) +
-        geom_line()
-}
+# the ggplot2 equivalent of plot(des)
+library(ggplot2)
+ggplot(tidy(des), aes(n, power)) +
+    geom_line()
+
 
 }
 \seealso{
@@ -57,3 +52,9 @@ Other bingroup tidiers:
 \code{\link{tidy.binWidth}()}
 }
 \concept{bingroup tidiers}
+\value{
+A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
+  \item{n}{Number of trials in given iteration.}
+  \item{power}{Power achieved for given value of n.}
+
+}

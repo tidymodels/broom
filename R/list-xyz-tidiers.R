@@ -1,7 +1,7 @@
 #' @templateVar class xyz
 #' @template title_desc_tidy_list
 #' 
-#' @description xyz lists (lists where `x` and `y` are vector of coordinates
+#' @description xyz lists (lists where `x` and `y` are vectors of coordinates
 #'   and `z` is a matrix of values) are typically used by functions such as
 #'   [graphics::persp()] or [graphics::image()] and returned
 #'   by interpolation functions such as [akima::interp()].
@@ -39,10 +39,9 @@ tidy_xyz <- function(x, ...) {
     )
   }
   
-  d <- reshape2::melt(x$z)
-  names(d) <- c("x", "y", "z")
-  # get coordinates
-  d$x <- x$x[d$x]
-  d$y <- x$y[d$y]
-  as_tibble(d)
+  d <- as_tibble(x$z)
+  names(d) <- x$y
+  d$x <- x$x
+  tidyr::gather(d, y, z, -x)
+
 }

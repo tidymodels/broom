@@ -3,57 +3,39 @@
 #'
 #' @param x A `geeglm` object returned from a call to [geepack::geeglm()].
 #' @template param_confint
-#' @template param_quick
 #' @template param_exponentiate
 #' @template param_unused_dots
 #'
 #' @details If `conf.int = TRUE`, the confidence interval is computed with
-#' the an internal `confint.geeglm()` function.
+#'   the an internal `confint.geeglm()` function.
 #'
-#' If you have missing values in your model data, you may need to
-#' refit the model with `na.action = na.exclude` or deal with the
-#' missingness in the data beforehand.
+#'   If you have missing values in your model data, you may need to
+#'   refit the model with `na.action = na.exclude` or deal with the
+#'   missingness in the data beforehand.
 #'
 #' @examples
 #'
-#' if (requireNamespace("geepack", quietly = TRUE)) {
-#'   library(geepack)
-#'   data(state)
-#'     
-#'   ds <- data.frame(state.region, state.x77)
+#' library(geepack)
+#' data(state)
+#'   
+#' ds <- data.frame(state.region, state.x77)
 #'
-#'   geefit <- geeglm(Income ~ Frost + Murder, id = state.region,
-#'                    data = ds, family = gaussian,
-#'                    corstr = "exchangeable")
+#' geefit <- geeglm(Income ~ Frost + Murder, id = state.region,
+#'                  data = ds, family = gaussian,
+#'                  corstr = "exchangeable")
 #'
-#'   tidy(geefit)
-#'   tidy(geefit, quick = TRUE)
-#'   tidy(geefit, conf.int = TRUE)
-#' }
+#' tidy(geefit)
+#' tidy(geefit, conf.int = TRUE)
 #'
-#' @rdname geeglm_tidiers
-#' @return A [tibble::tibble] with one row for each coefficient, with five
-#'   columns:
-#'   \item{term}{The term in the linear model being estimated and tested}
-#'   \item{estimate}{The estimated coefficient}
-#'   \item{std.error}{The standard error from the GEE model}
-#'   \item{statistic}{Wald statistic}
-#'   \item{p.value}{two-sided p-value}
-#'
-#' If `conf.int = TRUE`, includes includes columns `conf.low` and `conf.high`,
-#' which are computed internally.
+#' @evalRd return_tidy(regresion = TRUE)
 #'
 #' @export
 #' @aliases geeglm_tidiers geepack_tidiers
 #' @seealso [tidy()], [geepack::geeglm()]
 #' 
 tidy.geeglm <- function(x, conf.int = FALSE, conf.level = .95,
-                        exponentiate = FALSE, quick = FALSE, ...) {
-  if (quick) {
-    co <- stats::coef(x)
-    ret <- tibble(term = names(co), estimate = unname(co))
-    return(ret)
-  }
+                        exponentiate = FALSE, ...) {
+  
   co <- stats::coef(summary(x))
 
   nn <- c("estimate", "std.error", "statistic", "p.value")
@@ -96,8 +78,8 @@ process_geeglm <- function(ret, x, conf.int = FALSE, conf.level = .95,
 #'
 #' @param object A `geeglm` object.
 #' @param parm The parameter to calculate the confidence interval
-#'   for. If not specified, the default is to calculate a confidence
-#'   interval on all parameters (all variables in the model).
+#' for. If not specified, the default is to calculate a confidence
+#' interval on all parameters (all variables in the model).
 #' @param level Confidence level of the interval.
 #' @param ... Additional parameters (ignored).
 #' 
@@ -118,4 +100,25 @@ confint.geeglm <- function(object, parm, level = 0.95, ...) {
   )
   rownames(citab) <- rownames(cc)
   citab[parm, ]
+}
+
+#' @templateVar class geeglm
+#' @template title_desc_glance
+#' 
+#' @inherit tidy.geeglm params examples
+#'
+#' @evalRd return_glance("df.residual", "n_clusters", "max_cluster_size", "alpha", "gamma")
+#'
+#' @export
+#' @seealso [glance()], [geepack::geeglm()]
+#' @family geepack tidiers
+glance.geeglm  <- function(x, ...) {
+  s <- summary(x)
+  tibble(
+    df.residual = x$df.residual,
+    n.clusters = length(s$clusz),
+    max.cluster.size = max(s$clusz),
+    alpha = x$geese$alpha,
+    gamma = x$geese$gamma
+  )
 }

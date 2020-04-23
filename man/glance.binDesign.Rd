@@ -19,13 +19,6 @@ proceed using \code{conf.level = 0.95}. Additionally, if you pass
 accept a \code{newdata} argument, it will use the default value for
 the \code{data} argument.}
 }
-\value{
-A one-row \link[tibble:tibble]{tibble::tibble} with columns:
-\item{power}{Power achieved by the analysis.}
-\item{n}{Sample size uzed to achieve this power.}
-\item{power.reached}{Whether the desired power was reached.}
-\item{maxit}{Number of iterations performed.}
-}
 \description{
 Glance accepts a model object and returns a \code{\link[tibble:tibble]{tibble::tibble()}}
 with exactly one row of model summaries. The summaries are typically
@@ -43,18 +36,17 @@ the measure will be reported as \code{NA}.
 }
 \examples{
 
-if (require("binGroup", quietly = TRUE)) {
-    des <- binDesign(nmax = 300, delta = 0.06,
-                     p.hyp = 0.1, power = .8)
+library(binGroup)
+des <- binDesign(nmax = 300, delta = 0.06,
+                 p.hyp = 0.1, power = .8)
 
-    glance(des)
-    tidy(des)
+glance(des)
+tidy(des)
 
-    # the ggplot2 equivalent of plot(des)
-    library(ggplot2)
-    ggplot(tidy(des), aes(n, power)) +
-        geom_line()
-}
+library(ggplot2)
+ggplot(tidy(des), aes(n, power)) +
+    geom_line()
+
 
 }
 \seealso{
@@ -65,3 +57,11 @@ Other bingroup tidiers:
 \code{\link{tidy.binWidth}()}
 }
 \concept{bingroup tidiers}
+\value{
+A \code{\link[tibble:tibble]{tibble::tibble()}} with exactly one row and columns:
+  \item{power}{Power achieved by the analysis.}
+  \item{n}{Sample size uzed to achieve this power.}
+  \item{power.reached}{Whether the desired power was reached.}
+  \item{maxit}{Number of iterations performed.}
+
+}

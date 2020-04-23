@@ -19,18 +19,6 @@ proceed using \code{conf.level = 0.95}. Additionally, if you pass
 accept a \code{newdata} argument, it will use the default value for
 the \code{data} argument.}
 }
-\value{
-A one-row \link[tibble:tibble]{tibble::tibble} with columns:
-\item{model}{A character string denoting the model at which the optimal
-BIC occurs}
-\item{n}{The number of observations in the data}
-\item{G}{The optimal number of mixture components}
-\item{BIC}{The optimal BIC value}
-\item{logLik}{The log-likelihood corresponding to the optimal BIC}
-\item{df}{The number of estimated parameters}
-\item{hypvol}{If the other model contains a noise component, the
-value of the hypervolume parameter. Otherwise \code{NA}.}
-}
 \description{
 Glance accepts a model object and returns a \code{\link[tibble:tibble]{tibble::tibble()}}
 with exactly one row of model summaries. The summaries are typically
@@ -45,4 +33,44 @@ Glance does not calculate summary measures. Rather, it farms out these
 computations to appropriate methods and gathers the results together.
 Sometimes a goodness of fit measure will be undefined. In these cases
 the measure will be reported as \code{NA}.
+}
+\examples{
+
+library(dplyr) 
+library(mclust)
+set.seed(27)
+
+centers <- tibble::tibble(
+  cluster = factor(1:3), 
+  num_points = c(100, 150, 50),  # number points in each cluster
+  x1 = c(5, 0, -3),              # x1 coordinate of cluster center
+  x2 = c(-1, 1, -2)              # x2 coordinate of cluster center
+)
+
+points <- centers \%>\%
+  mutate(
+    x1 = purrr::map2(num_points, x1, rnorm),
+    x2 = purrr::map2(num_points, x2, rnorm)
+  ) \%>\% 
+  dplyr::select(-num_points, -cluster) \%>\%
+  tidyr::unnest(x1, x2)
+
+m <- mclust::Mclust(points)
+
+tidy(m)
+augment(m, points)
+glance(m)
+
+}
+\value{
+A \code{\link[tibble:tibble]{tibble::tibble()}} with exactly one row and columns:
+  \item{BIC}{Bayesian Information Criterion for the model.}
+  \item{df}{Degrees of freedom used by the model.}
+  \item{logLik}{The log-likelihood of the model. [stats::logLik()] may be a useful reference.}
+  \item{nobs}{Number of observations used.}
+  \item{model}{A string denoting the model type with optimal BIC}
+  \item{G}{Number mixture components in optimal model}
+  \item{hypvol}{If the other model contains a noise component, the 
+    value of the hypervolume parameter. Otherwise `NA`.}
+
 }

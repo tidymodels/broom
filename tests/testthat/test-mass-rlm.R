@@ -1,5 +1,8 @@
 context("mass-rlm")
 
+skip_if_not_installed("modeltests")
+library(modeltests)
+
 skip_if_not_installed("MASS")
 library(MASS)
 
@@ -13,23 +16,22 @@ test_that("MASS::rlm tidier arguments", {
 
 test_that("tidy.rlm", {
   
-  td <- tidy(fit, quick = TRUE)
   td2 <- tidy(fit, conf.int = TRUE)
   
-  check_tidy_output(td)
   check_tidy_output(td2)
+  
+  # regression test for #380
+  expect_false(NA %in% td2$conf.low)
+  expect_false(NA %in% td2$conf.high)
 })
 
 test_that("glance.rlm", {
   gl <- glance(fit)
   check_glance_outputs(gl)
-  check_dims(gl, 1, 6)
+  check_dims(gl, 1, 7)
 })
 
 test_that("augment.rlm", {
-  
-  au <- augment(fit)
-  check_tibble(au, method = "augment")
   
   check_augment_function(
     aug = augment.rlm,

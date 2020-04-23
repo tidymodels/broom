@@ -5,6 +5,7 @@
 \alias{gmm_tidiers}
 \title{Tidy a(n) gmm object}
 \usage{
+<<<<<<< HEAD
 \method{tidy}{gmm}(
   x,
   conf.int = FALSE,
@@ -13,6 +14,9 @@
   quick = FALSE,
   ...
 )
+=======
+\method{tidy}{gmm}(x, conf.int = FALSE, conf.level = 0.95, exponentiate = FALSE, ...)
+>>>>>>> 3c922d507f7cc758a987a9ef44ae4267ac6ed583
 }
 \arguments{
 \item{x}{A \code{gmm} object returned from \code{\link[gmm:gmm]{gmm::gmm()}}.}
@@ -29,10 +33,6 @@ the coefficient estimates. This is typical for logistic and multinomial
 regressions, but a bad idea if there is no log or logit link. Defaults
 to \code{FALSE}.}
 
-\item{quick}{Logical indiciating if the only the \code{term} and \code{estimate}
-columns should be returned. Often useful to avoid time consuming
-covariance and standard error calculations. Defaults to \code{FALSE}.}
-
 \item{...}{Additional arguments. Not used. Needed to match generic
 signature only. \strong{Cautionary note:} Misspelled arguments will be
 absorbed in \code{...}, where they will be ignored. If the misspelled
@@ -42,22 +42,6 @@ proceed using \code{conf.level = 0.95}. Additionally, if you pass
 \code{newdata = my_tibble} to an \code{\link[=augment]{augment()}} method that does not
 accept a \code{newdata} argument, it will use the default value for
 the \code{data} argument.}
-}
-\value{
-A \code{\link[tibble:tibble]{tibble::tibble()}} with one row for each term in the
-regression. The tibble has columns:
-
-\item{term}{The name of the regression term.}
-\item{estimate}{The estimated value of the regression term.}
-\item{std.error}{The standard error of the regression term.}
-\item{statistic}{The value of a statistic, almost always a T-statistic,
-to use in a hypothesis that the regression term is non-zero.}
-\item{p.value}{The two-sided p-value associated with the observed
-statistic.}
-\item{conf.low}{The low end of a confidence interval for the regression
-term. Included only if \code{conf.int = TRUE}.}
-\item{conf.high}{The high end of a confidence interval for the regression
-term. Included only if \code{conf.int = TRUE}.}
 }
 \description{
 Tidy summarizes information about the components of a model.
@@ -69,71 +53,67 @@ specify which components to return.
 }
 \examples{
 
-if (requireNamespace("gmm", quietly = TRUE)) {
+library(gmm)
 
-  library(gmm)
-  
-  # examples come from the "gmm" package
-  ## CAPM test with GMM
-  data(Finance)
-  r <- Finance[1:300, 1:10]
-  rm <- Finance[1:300, "rm"]
-  rf <- Finance[1:300, "rf"]
+# examples come from the "gmm" package
+## CAPM test with GMM
+data(Finance)
+r <- Finance[1:300, 1:10]
+rm <- Finance[1:300, "rm"]
+rf <- Finance[1:300, "rf"]
 
-  z <- as.matrix(r-rf)
-  t <- nrow(z)
-  zm <- rm-rf
-  h <- matrix(zm, t, 1)
-  res <- gmm(z ~ zm, x = h)
+z <- as.matrix(r-rf)
+t <- nrow(z)
+zm <- rm-rf
+h <- matrix(zm, t, 1)
+res <- gmm(z ~ zm, x = h)
 
-  # tidy result
-  tidy(res)
-  tidy(res, conf.int = TRUE)
-  tidy(res, conf.int = TRUE, conf.level = .99)
+# tidy result
+tidy(res)
+tidy(res, conf.int = TRUE)
+tidy(res, conf.int = TRUE, conf.level = .99)
 
-  # coefficient plot
-  library(ggplot2)
-  library(dplyr)
-  tidy(res, conf.int = TRUE) \%>\%
-    mutate(variable = reorder(variable, estimate)) \%>\%
-    ggplot(aes(estimate, variable)) +
-    geom_point() +
-    geom_errorbarh(aes(xmin = conf.low, xmax = conf.high)) +
-    facet_wrap(~ term) +
-    geom_vline(xintercept = 0, color = "red", lty = 2)
+# coefficient plot
+library(ggplot2)
+library(dplyr)
 
-  # from a function instead of a matrix
-  g <- function(theta, x) {
-  	e <- x[,2:11] - theta[1] - (x[,1] - theta[1]) \%*\% matrix(theta[2:11], 1, 10)
-  	gmat <- cbind(e, e*c(x[,1]))
-  	return(gmat) }
+tidy(res, conf.int = TRUE) \%>\%
+  mutate(variable = reorder(term, estimate)) \%>\%
+  ggplot(aes(estimate, variable)) +
+  geom_point() +
+  geom_errorbarh(aes(xmin = conf.low, xmax = conf.high)) +
+  geom_vline(xintercept = 0, color = "red", lty = 2)
 
-  x <- as.matrix(cbind(rm, r))
-  res_black <- gmm(g, x = x, t0 = rep(0, 11))
+# from a function instead of a matrix
+g <- function(theta, x) {
+	e <- x[,2:11] - theta[1] - (x[,1] - theta[1]) \%*\% matrix(theta[2:11], 1, 10)
+	gmat <- cbind(e, e*c(x[,1]))
+	return(gmat) }
 
-  tidy(res_black)
-  tidy(res_black, conf.int = TRUE)
+x <- as.matrix(cbind(rm, r))
+res_black <- gmm(g, x = x, t0 = rep(0, 11))
 
-  ## APT test with Fama-French factors and GMM
+tidy(res_black)
+tidy(res_black, conf.int = TRUE)
 
-  f1 <- zm
-  f2 <- Finance[1:300, "hml"] - rf
-  f3 <- Finance[1:300, "smb"] - rf
-  h <- cbind(f1, f2, f3)
-  res2 <- gmm(z ~ f1 + f2 + f3, x = h)
+## APT test with Fama-French factors and GMM
 
-  td2 <- tidy(res2, conf.int = TRUE)
-  td2
+f1 <- zm
+f2 <- Finance[1:300, "hml"] - rf
+f3 <- Finance[1:300, "smb"] - rf
+h <- cbind(f1, f2, f3)
+res2 <- gmm(z ~ f1 + f2 + f3, x = h)
 
-  # coefficient plot
-  td2 \%>\%
-    mutate(variable = reorder(variable, estimate)) \%>\%
-    ggplot(aes(estimate, variable)) +
-    geom_point() +
-    geom_errorbarh(aes(xmin = conf.low, xmax = conf.high)) +
-    facet_wrap(~ term) +
-    geom_vline(xintercept = 0, color = "red", lty = 2)
-}
+td2 <- tidy(res2, conf.int = TRUE)
+td2
+
+# coefficient plot
+td2 \%>\%
+  mutate(variable = reorder(term, estimate)) \%>\%
+  ggplot(aes(estimate, variable)) +
+  geom_point() +
+  geom_errorbarh(aes(xmin = conf.low, xmax = conf.high)) +
+  geom_vline(xintercept = 0, color = "red", lty = 2)
 
 }
 \seealso{
@@ -143,3 +123,14 @@ Other gmm tidiers:
 \code{\link{glance.gmm}()}
 }
 \concept{gmm tidiers}
+\value{
+A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
+  \item{conf.high}{Upper bound on the confidence interval for the estimate.}
+  \item{conf.low}{Lower bound on the confidence interval for the estimate.}
+  \item{estimate}{The estimated value of the regression term.}
+  \item{p.value}{The two-sided p-value associated with the observed statistic.}
+  \item{statistic}{The value of a T-statistic to use in a hypothesis that the regression term is non-zero.}
+  \item{std.error}{The standard error of the regression term.}
+  \item{term}{The name of the regression term.}
+
+}

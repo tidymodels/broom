@@ -5,12 +5,10 @@
 #'   [car::durbinWatsonTest()].
 #' @template param_unused_dots
 #' 
-#' @return A one-row [tibble::tibble] with columns:
-#'   \item{statistic}{Test statistic for Durbin-Watson test.}
-#'   \item{p.value}{P-value of test statistic.}
-#'   \item{autocorrelation}{Residual autocorrelations.}
-#'   \item{method}{Always `"Durbin-Watson Test"`.}
-#'   \item{alternative}{Alternative hypothesis (character).}
+#' @evalRd return_tidy("p.value", "autocorrelation", "alternative",
+#'   statistic = "Test statistic for Durbin-Watson test.",
+#'   method = "Always `Durbin-Watson Test`."
+#' )
 #'
 #' @examples
 #'

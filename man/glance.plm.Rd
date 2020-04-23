@@ -19,17 +19,6 @@ proceed using \code{conf.level = 0.95}. Additionally, if you pass
 accept a \code{newdata} argument, it will use the default value for
 the \code{data} argument.}
 }
-\value{
-A one-row \link[tibble:tibble]{tibble::tibble} with columns:
-
-\item{r.squared}{The percent of variance explained by the model}
-\item{adj.r.squared}{r.squared adjusted based on the degrees of freedom}
-\item{statistic}{F-statistic}
-\item{p.value}{p-value from the F test, describing whether the full
-regression is significant}
-\item{deviance}{deviance}
-\item{df.residual}{residual degrees of freedom}
-}
 \description{
 Glance accepts a model object and returns a \code{\link[tibble:tibble]{tibble::tibble()}}
 with exactly one row of model summaries. The summaries are typically
@@ -45,6 +34,24 @@ computations to appropriate methods and gathers the results together.
 Sometimes a goodness of fit measure will be undefined. In these cases
 the measure will be reported as \code{NA}.
 }
+\examples{
+
+library(plm)
+
+data("Produc", package = "plm")
+zz <- plm(log(gsp) ~ log(pcap) + log(pc) + log(emp) + unemp,
+          data = Produc, index = c("state","year"))
+
+summary(zz)
+
+tidy(zz)
+tidy(zz, conf.int = TRUE)
+tidy(zz, conf.int = TRUE, conf.level = 0.9)
+
+augment(zz)
+glance(zz)
+
+}
 \seealso{
 \code{\link[=glance]{glance()}}, \code{\link[plm:plm]{plm::plm()}}
 
@@ -53,3 +60,14 @@ Other plm tidiers:
 \code{\link{tidy.plm}()}
 }
 \concept{plm tidiers}
+\value{
+A \code{\link[tibble:tibble]{tibble::tibble()}} with exactly one row and columns:
+  \item{adj.r.squared}{Adjusted R squared statistic, which is like the R squared statistic except taking degrees of freedom into account.}
+  \item{deviance}{Deviance of the model.}
+  \item{df.residual}{Residual degrees of freedom.}
+  \item{nobs}{Number of observations used.}
+  \item{p.value}{P-value corresponding to the test statistic.}
+  \item{r.squared}{R squared statistic, or the percent of variation explained by the model. Also known as the coefficient of determination.}
+  \item{statistic}{F-statistic}
+
+}

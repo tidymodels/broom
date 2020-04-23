@@ -1,5 +1,8 @@
 context("lavaan")
 
+skip_if_not_installed("modeltests")
+library(modeltests)
+
 skip_if_not_installed("lavaan")
 library(lavaan)
 
@@ -14,9 +17,9 @@ test_that("lavaan tidier arguments", {
 
 test_that("tidy.lavaan", {
   
-  td <- tidy(fit)
-  td2 <- tidy(fit2)
-  tdc <- tidy(fit2, conf.level = .999)
+  td <- tidy(fit, conf.int = TRUE)
+  td2 <- tidy(fit2, conf.int = TRUE)
+  tdc <- tidy(fit2, conf.int = TRUE, conf.level = .999)
   tdr <- tidy(fit2, rsquare = TRUE)
   
   check_tidy_output(td)
@@ -38,7 +41,6 @@ test_that("tidy.lavaan", {
   # passing arguments via ...
   check_dims(filter(tdr, op == "r2"), expected_rows = 9)
 })
-
 
 
 test_that("glance.lavaan", {

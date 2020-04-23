@@ -1,5 +1,8 @@
 context("survival-pyears")
 
+skip_if_not_installed("modeltests")
+library(modeltests)
+
 skip_if_not_installed("survival")
 library(survival)
 
@@ -27,8 +30,8 @@ test_that("tidy.pyears", {
   td <- tidy(fit)
   td2 <- tidy(fit2)
   
-  check_tidy_output(td)
-  check_tidy_output(td2)
+  check_tidy_output(td, strict = FALSE)
+  check_tidy_output(td2, strict = FALSE)
 })
 
 test_that("glance.pyears", {

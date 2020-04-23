@@ -23,6 +23,7 @@ indicating which test statistic should be used. Defaults to "Pillai".}
     \item{\code{tol}}{tolerance to be used in deciding if the residuals are
     rank-deficient: see \code{\link{qr}}.}
   }}
+<<<<<<< HEAD
 }
 \value{
 A \link[tibble:tibble]{tibble::tibble} with columns:\preformatted{\\item\{term\}\{Term in design\}
@@ -37,6 +38,8 @@ columns is also included:\preformatted{\\item\{pillai\}\{Pillai's trace\}
 \\item\{hl\}\{Hotelling-Lawley trace\}
 \\item\{roy\}\{Roy's greatest root\}
 }
+=======
+>>>>>>> 3c922d507f7cc758a987a9ef44ae4267ac6ed583
 }
 \description{
 Tidy summarizes information about the components of a model.
@@ -46,20 +49,46 @@ model component varies cross models but is usually self-evident.
 If a model has several distinct types of components, you will need to
 specify which components to return.
 }
+\details{
+Depending on which test statistic is specified only one of \code{pillai},
+\code{wilks}, \code{hl} or \code{roy} is included.
+}
 \examples{
 
 npk2 <- within(npk, foo <- rnorm(24))
 m <- manova(cbind(yield, foo) ~ block + N * P * K, npk2)
-tidy(m) 
+tidy(m)
 
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[stats:summary.manova]{stats::summary.manova()}}
 
 Other anova tidiers: 
+<<<<<<< HEAD
 \code{\link{tidy.TukeyHSD}()},
 \code{\link{tidy.anova}()},
 \code{\link{tidy.aovlist}()},
 \code{\link{tidy.aov}()}
+=======
+\code{\link{glance.aov}()},
+\code{\link{tidy.TukeyHSD}()},
+\code{\link{tidy.anova}()},
+\code{\link{tidy.aovlist}()},
+\code{\link{tidy.aov}()},
+\code{\link{tidy.summary.manova}()}
+>>>>>>> 3c922d507f7cc758a987a9ef44ae4267ac6ed583
 }
 \concept{anova tidiers}
+\value{
+A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
+  \item{den.df}{Degrees of freedom of the denominator}
+  \item{num.df}{Degrees of freedom}
+  \item{p.value}{The two-sided p-value associated with the observed statistic.}
+  \item{statistic}{The value of a T-statistic to use in a hypothesis that the regression term is non-zero.}
+  \item{term}{The name of the regression term.}
+  \item{pillai}{Pillai's trace.}
+  \item{wilks}{Wilk's lambda.}
+  \item{hl}{Hotelling-Lawley trace.}
+  \item{roy}{Roy's greatest root.}
+
+}

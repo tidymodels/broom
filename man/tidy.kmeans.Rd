@@ -5,12 +5,16 @@
 \alias{kmeans_tidiers}
 \title{Tidy a(n) kmeans object}
 \usage{
-\method{tidy}{kmeans}(x, col.names = paste0("x", 1:ncol(x$centers)), ...)
+\method{tidy}{kmeans}(x, col.names = colnames(x$centers), ...)
 }
 \arguments{
 \item{x}{A \code{kmeans} object created by \code{\link[stats:kmeans]{stats::kmeans()}}.}
 
+<<<<<<< HEAD
 \item{col.names}{Dimension names. Defaults to \verb{x1, x2, ...}}
+=======
+\item{col.names}{Dimension names. Defaults to the names of the variables in x.  Set to NULL to get names \verb{x1, x2, ...}.}
+>>>>>>> 3c922d507f7cc758a987a9ef44ae4267ac6ed583
 
 \item{...}{Additional arguments. Not used. Needed to match generic
 signature only. \strong{Cautionary note:} Misspelled arguments will be
@@ -21,13 +25,6 @@ proceed using \code{conf.level = 0.95}. Additionally, if you pass
 \code{newdata = my_tibble} to an \code{\link[=augment]{augment()}} method that does not
 accept a \code{newdata} argument, it will use the default value for
 the \code{data} argument.}
-}
-\value{
-A \link[tibble:tibble]{tibble::tibble} with one row per cluster, and columns:
-
-\item{size}{Number of points in cluster}
-\item{withinss}{The within-cluster sum of squares}
-\item{cluster}{A factor describing the cluster from 1:k}
 }
 \description{
 Tidy summarizes information about the components of a model.
@@ -40,6 +37,23 @@ specify which components to return.
 \details{
 For examples, see the kmeans vignette.
 }
+\examples{
+
+library(cluster)
+library(dplyr)
+
+x <- iris \%>\% 
+  select(-Species)
+  
+fit <- pam(x, k = 3)
+
+tidy(fit)
+glance(fit)
+augment(fit, x)
+
+
+
+}
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[stats:kmeans]{stats::kmeans()}}
 
@@ -48,3 +62,10 @@ Other kmeans tidiers:
 \code{\link{glance.kmeans}()}
 }
 \concept{kmeans tidiers}
+\value{
+A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
+  \item{cluster}{A factor describing the cluster from 1:k}
+  \item{size}{Number of points assigned to cluster.}
+  \item{withinss}{The within-cluster sum of squares}
+
+}

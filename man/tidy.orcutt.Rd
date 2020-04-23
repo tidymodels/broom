@@ -10,6 +10,7 @@
 \arguments{
 \item{x}{An \code{orcutt} object returned from \code{\link[orcutt:cochrane.orcutt]{orcutt::cochrane.orcutt()}}.}
 
+<<<<<<< HEAD
 \item{...}{
   Arguments passed on to \code{\link[=tidy.lm]{tidy.lm}}
   \describe{
@@ -30,30 +31,53 @@ to \code{FALSE}.}
 \value{
 \code{tidy} returns the same information as \code{\link[=tidy.lm]{tidy.lm()}},
 though without confidence interval options.
+=======
+\item{...}{Additional arguments. Not used. Needed to match generic
+signature only. \strong{Cautionary note:} Misspelled arguments will be
+absorbed in \code{...}, where they will be ignored. If the misspelled
+argument has a default value, the default value will be used.
+For example, if you pass \code{conf.lvel = 0.9}, all computation will
+proceed using \code{conf.level = 0.95}. Additionally, if you pass
+\code{newdata = my_tibble} to an \code{\link[=augment]{augment()}} method that does not
+accept a \code{newdata} argument, it will use the default value for
+the \code{data} argument.}
+>>>>>>> 3c922d507f7cc758a987a9ef44ae4267ac6ed583
 }
 \description{
-This method wraps \code{\link[=tidy.lm]{tidy.lm()}}.
+Tidy summarizes information about the components of a model.
+A model component might be a single term in a regression, a single
+hypothesis, a cluster, or a class. Exactly what tidy considers to be a
+model component varies cross models but is usually self-evident.
+If a model has several distinct types of components, you will need to
+specify which components to return.
 }
 \examples{
+
+library(orcutt)
 
 reg <- lm(mpg ~ wt + qsec + disp, mtcars)
 tidy(reg)
 
-if (require("orcutt", quietly = TRUE)) {
-  co <- cochrane.orcutt(reg)
-  co
+co <- cochrane.orcutt(reg)
+co
 
-  tidy(co)
-  glance(co)
-}
+tidy(co)
+glance(co)
 
 }
 \seealso{
-\code{\link[=tidy]{tidy()}}, \code{\link[=tidy.lm]{tidy.lm()}}
-
 \code{\link[orcutt:cochrane.orcutt]{orcutt::cochrane.orcutt()}}
 
 Other orcutt tidiers: 
 \code{\link{glance.orcutt}()}
 }
 \concept{orcutt tidiers}
+\value{
+A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
+  \item{estimate}{The estimated value of the regression term.}
+  \item{p.value}{The two-sided p-value associated with the observed statistic.}
+  \item{statistic}{The value of a T-statistic to use in a hypothesis that the regression term is non-zero.}
+  \item{std.error}{The standard error of the regression term.}
+  \item{term}{The name of the regression term.}
+
+}

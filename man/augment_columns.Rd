@@ -8,7 +8,11 @@ an augment call}
 augment_columns(
   x,
   data,
+<<<<<<< HEAD
   newdata,
+=======
+  newdata = NULL,
+>>>>>>> 3c922d507f7cc758a987a9ef44ae4267ac6ed583
   type,
   type.predict = type,
   type.residuals = type,

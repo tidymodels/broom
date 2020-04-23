@@ -2,12 +2,9 @@
 % Please edit documentation in R/stats-lm-tidiers.R
 \name{glance.lm}
 \alias{glance.lm}
-\alias{glance.summary.lm}
 \title{Glance at a(n) lm object}
 \usage{
 \method{glance}{lm}(x, ...)
-
-\method{glance}{summary.lm}(x, ...)
 }
 \arguments{
 \item{x}{An \code{lm} object created by \code{\link[stats:lm]{stats::lm()}}.}
@@ -21,22 +18,6 @@ proceed using \code{conf.level = 0.95}. Additionally, if you pass
 \code{newdata = my_tibble} to an \code{\link[=augment]{augment()}} method that does not
 accept a \code{newdata} argument, it will use the default value for
 the \code{data} argument.}
-}
-\value{
-A one-row \link[tibble:tibble]{tibble::tibble} with columns:
-
-\item{r.squared}{The percent of variance explained by the model}
-\item{adj.r.squared}{r.squared adjusted based on the degrees of freedom}
-\item{sigma}{The square root of the estimated residual variance}
-\item{statistic}{F-statistic}
-\item{p.value}{p-value from the F test, describing whether the full
-regression is significant}
-\item{df}{Degrees of freedom used by the coefficients}
-\item{logLik}{the data's log-likelihood under the model}
-\item{AIC}{the Akaike Information Criterion}
-\item{BIC}{the Bayesian Information Criterion}
-\item{deviance}{deviance}
-\item{df.residual}{residual degrees of freedom}
 }
 \description{
 Glance accepts a model object and returns a \code{\link[tibble:tibble]{tibble::tibble()}}
@@ -53,6 +34,56 @@ computations to appropriate methods and gathers the results together.
 Sometimes a goodness of fit measure will be undefined. In these cases
 the measure will be reported as \code{NA}.
 }
+\examples{
+
+library(ggplot2)
+library(dplyr)
+
+mod <- lm(mpg ~ wt + qsec, data = mtcars)
+
+tidy(mod)
+glance(mod)
+
+# coefficient plot
+d <- tidy(mod) \%>\%
+  mutate(
+    low = estimate - std.error,
+    high = estimate + std.error
+  )
+
+ggplot(d, aes(estimate, term, xmin = low, xmax = high, height = 0)) +
+  geom_point() +
+  geom_vline(xintercept = 0) +
+  geom_errorbarh()
+
+augment(mod)
+augment(mod, mtcars)
+
+# predict on new data
+newdata <- mtcars \%>\% head(6) \%>\% mutate(wt = wt + 1)
+augment(mod, newdata = newdata)
+
+au <- augment(mod, data = mtcars)
+
+ggplot(au, aes(.hat, .std.resid)) +
+  geom_vline(size = 2, colour = "white", xintercept = 0) +
+  geom_hline(size = 2, colour = "white", yintercept = 0) +
+  geom_point() + geom_smooth(se = FALSE)
+
+plot(mod, which = 6)
+ggplot(au, aes(.hat, .cooksd)) +
+  geom_vline(xintercept = 0, colour = NA) +
+  geom_abline(slope = seq(0, 3, by = 0.5), colour = "white") +
+  geom_smooth(se = FALSE) +
+  geom_point()
+
+# column-wise models
+a <- matrix(rnorm(20), nrow = 10)
+b <- a + rnorm(length(a))
+result <- lm(b ~ a)
+tidy(result)
+
+}
 \seealso{
 \code{\link[=glance]{glance()}}
 
@@ -60,7 +91,31 @@ Other lm tidiers:
 \code{\link{augment.glm}()},
 \code{\link{augment.lm}()},
 \code{\link{glance.glm}()},
+<<<<<<< HEAD
 \code{\link{tidy.glm}()},
 \code{\link{tidy.lm}()}
+=======
+\code{\link{glance.svyglm}()},
+\code{\link{tidy.glm}()},
+\code{\link{tidy.lm.beta}()},
+\code{\link{tidy.lm}()},
+\code{\link{tidy.mlm}()}
+>>>>>>> 3c922d507f7cc758a987a9ef44ae4267ac6ed583
 }
 \concept{lm tidiers}
+\value{
+A \code{\link[tibble:tibble]{tibble::tibble()}} with exactly one row and columns:
+  \item{adj.r.squared}{Adjusted R squared statistic, which is like the R squared statistic except taking degrees of freedom into account.}
+  \item{AIC}{Akaike's Information Criterion for the model.}
+  \item{BIC}{Bayesian Information Criterion for the model.}
+  \item{deviance}{Deviance of the model.}
+  \item{df.residual}{Residual degrees of freedom.}
+  \item{logLik}{The log-likelihood of the model. [stats::logLik()] may be a useful reference.}
+  \item{nobs}{Number of observations used.}
+  \item{p.value}{P-value corresponding to the test statistic.}
+  \item{r.squared}{R squared statistic, or the percent of variation explained by the model. Also known as the coefficient of determination.}
+  \item{sigma}{Estimated standard error of the residuals.}
+  \item{statistic}{Test statistic.}
+  \item{df}{The degrees for freedom from the numerator of the overall F-statistic. This is new in broom 0.7.0. Previously, this reported the rank of the design matrix, which is one more than the numerator degrees of freedom of the overall F-statistic.}
+
+}

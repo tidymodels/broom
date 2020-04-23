@@ -20,15 +20,6 @@ proceed using \code{conf.level = 0.95}. Additionally, if you pass
 accept a \code{newdata} argument, it will use the default value for
 the \code{data} argument.}
 }
-\value{
-A \link[tibble:tibble]{tibble::tibble} with one row for each time point and columns:
-
-\item{...}{The initial columns correspond to the grouping factors
-on the right hand side of the model formula.}
-\item{obs}{weighted observed number of events in each group}
-\item{exp}{weighted expected number of events in each group}
-\item{N}{number of subjects in each group}
-}
 \description{
 Tidy summarizes information about the components of a model.
 A model component might be a single term in a regression, a single
@@ -77,3 +68,10 @@ Other survival tidiers:
 }
 \concept{survdiff tidiers}
 \concept{survival tidiers}
+\value{
+A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
+  \item{exp}{weighted expected number of events in each group}
+  \item{N}{number of subjects in each group}
+  \item{obs}{weighted observed number of events in each group}
+
+}

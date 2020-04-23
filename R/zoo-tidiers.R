@@ -4,12 +4,7 @@
 #' @param x A `zoo` object such as those created by [zoo::zoo()].
 #' @template param_unused_dots
 #' 
-#' @return A [tibble::tibble] with one row for each observation in the `zoo`
-#'   time series and columns:
-#'   
-#'   \item{index}{Index (usually date) for the zoo object}
-#'   \item{series}{Name of the series}
-#'   \item{value}{Value of the observation}
+#' @evalRd return_tidy("index", "series", "value")
 #'
 #' @examples
 #'
@@ -43,6 +38,7 @@
 #' @family time series tidiers
 tidy.zoo <- function(x, ...) {
   ret <- data.frame(as.matrix(x), index = zoo::index(x))
-  ret <- tidyr::gather(ret, series, value, -index)
-  as_tibble(ret)
+  ret <- tibble::as_tibble(ret)
+  colnames(ret)[1:ncol(x)] <- colnames(x)
+  tidyr::gather(ret, series, value, -index)
 }

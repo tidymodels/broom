@@ -31,18 +31,23 @@ hypothesis, a cluster, or a class. Exactly what tidy considers to be a
 model component varies cross models but is usually self-evident.
 If a model has several distinct types of components, you will need to
 specify which components to return.
+
+Deprecated. Please use \code{\link[tibble:as_tibble]{tibble::as_tibble()}} instead.
 }
 \details{
 Directly calls \code{\link[tibble:as_tibble]{tibble::as_tibble()}} on a \link{table} object, which
 does the same things as \code{\link[=as.data.frame.table]{as.data.frame.table()}} but also gives the
 returned object \link[tibble:tibble]{tibble::tibble} class.
 }
+<<<<<<< HEAD
 \examples{
 
 tab <- with(airquality, table(Temp = cut(Temp, quantile(Temp)), Month))
 tidy(tab)
 
 }
+=======
+>>>>>>> 3c922d507f7cc758a987a9ef44ae4267ac6ed583
 \seealso{
 \code{\link[=as_tibble.table]{as_tibble.table()}}
 }

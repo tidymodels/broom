@@ -1,5 +1,8 @@
 context("null-and-default")
 
+skip_if_not_installed("modeltests")
+library(modeltests)
+
 test_that("tidy.NULL", {
   expect_equal(tidy(NULL), tibble())
 })

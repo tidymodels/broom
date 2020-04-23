@@ -7,7 +7,7 @@
 \method{tidy}{aov}(x, ...)
 }
 \arguments{
-\item{x}{An \code{aov} objects, such as those created by \code{\link[stats:aov]{stats::aov()}}.}
+\item{x}{An \code{aov} object, such as those created by \code{\link[stats:aov]{stats::aov()}}.}
 
 \item{...}{Additional arguments. Not used. Needed to match generic
 signature only. \strong{Cautionary note:} Misspelled arguments will be
@@ -18,16 +18,6 @@ proceed using \code{conf.level = 0.95}. Additionally, if you pass
 \code{newdata = my_tibble} to an \code{\link[=augment]{augment()}} method that does not
 accept a \code{newdata} argument, it will use the default value for
 the \code{data} argument.}
-}
-\value{
-A \link[tibble:tibble]{tibble::tibble} with columns
-
-\item{term}{Term within the model, or "Residuals"}
-\item{df}{Degrees of freedom used by this term in the model}
-\item{sumsq}{Sum of squares explained by this term}
-\item{meansq}{Mean of sum of squares among degrees of freedom}
-\item{statistic}{F statistic}
-\item{p.value}{P-value from F test}
 }
 \description{
 Tidy summarizes information about the components of a model.
@@ -51,9 +41,18 @@ tidy(a)
 \code{\link[=tidy]{tidy()}}, \code{\link[stats:aov]{stats::aov()}}
 
 Other anova tidiers: 
+<<<<<<< HEAD
 \code{\link{tidy.TukeyHSD}()},
 \code{\link{tidy.anova}()},
 \code{\link{tidy.aovlist}()},
 \code{\link{tidy.manova}()}
+=======
+\code{\link{glance.aov}()},
+\code{\link{tidy.TukeyHSD}()},
+\code{\link{tidy.anova}()},
+\code{\link{tidy.aovlist}()},
+\code{\link{tidy.manova}()},
+\code{\link{tidy.summary.manova}()}
+>>>>>>> 3c922d507f7cc758a987a9ef44ae4267ac6ed583
 }
 \concept{anova tidiers}

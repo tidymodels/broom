@@ -1,5 +1,8 @@
 context("stats-arima")
 
+skip_if_not_installed("modeltests")
+library(modeltests)
+
 fit1 <- arima(lh, order = c(1, 0, 0))
 
 fit2 <- arima(
@@ -29,5 +32,5 @@ test_that("glance.Arima", {
   gl1 <- glance(fit1)
   gl2 <- glance(fit2)
   
-  check_glance_outputs(gl1, gl2)
+  check_glance_outputs(gl1, gl2, strict = FALSE)
 })

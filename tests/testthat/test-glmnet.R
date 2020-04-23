@@ -1,9 +1,10 @@
 context("glmnet")
 
+skip_if_not_installed("modeltests")
+library(modeltests)
+
 skip_if_not_installed("glmnet")
 library(glmnet)
-
-# TODO: tests for glmnetUtils wrappers
 
 set.seed(27)
 
@@ -23,9 +24,6 @@ test_that("glmnet tidier arguments", {
   
   check_arguments(tidy.cv.glmnet)
   check_arguments(glance.cv.glmnet)
-  
-  # no augment because no formula/dataframe interface is my guess?
-  # TODO: sanity check if the glance methods are sensical
 })
 
 test_that("tidy.glmnet", {

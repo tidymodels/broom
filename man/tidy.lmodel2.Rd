@@ -20,6 +20,7 @@ proceed using \code{conf.level = 0.95}. Additionally, if you pass
 accept a \code{newdata} argument, it will use the default value for
 the \code{data} argument.}
 }
+<<<<<<< HEAD
 \value{
 A \link[tibble:tibble]{tibble::tibble} within eight rows (one for each term estimated
 with each method) and columns:
@@ -31,6 +32,8 @@ with each method) and columns:
 \item \code{conf.high}: Upper bound of 95\\% confidence interval
 }
 }
+=======
+>>>>>>> 3c922d507f7cc758a987a9ef44ae4267ac6ed583
 \description{
 Tidy summarizes information about the components of a model.
 A model component might be a single term in a regression, a single
@@ -44,27 +47,29 @@ There are always only two terms in an \code{lmodel2}: \code{"Intercept"}
 and \code{"Slope"}. These are computed by four methods: OLS
 (ordinary least squares), MA (major axis), SMA (standard major
 axis), and RMA (ranged major axis).
+
+The returned p-value is one-tailed and calculated via a permutation test.
+A permutational test is used because distributional assumptions may not not
+be valid. More information can be found in
+\code{vignette("mod2user", package = "lmodel2")}.
 }
 \examples{
 
-if (require("lmodel2", quietly = TRUE)) {
+library(lmodel2)
 
-  library(lmodel2)
-  
-  data(mod2ex2)
-  Ex2.res <- lmodel2(Prey ~ Predators, data=mod2ex2, "relative", "relative", 99)
-  Ex2.res
+data(mod2ex2)
+Ex2.res <- lmodel2(Prey ~ Predators, data=mod2ex2, "relative", "relative", 99)
+Ex2.res
 
-  tidy(Ex2.res)
-  glance(Ex2.res)
+tidy(Ex2.res)
+glance(Ex2.res)
 
-  # this allows coefficient plots with ggplot2
-  library(ggplot2)
-  ggplot(tidy(Ex2.res), aes(estimate, term, color = method)) +
-    geom_point() +
-    geom_errorbarh(aes(xmin = conf.low, xmax = conf.high)) +
-    geom_errorbarh(aes(xmin = conf.low, xmax = conf.high))
-}
+# this allows coefficient plots with ggplot2
+library(ggplot2)
+ggplot(tidy(Ex2.res), aes(estimate, term, color = method)) +
+  geom_point() +
+  geom_errorbarh(aes(xmin = conf.low, xmax = conf.high)) +
+  geom_errorbarh(aes(xmin = conf.low, xmax = conf.high))
 
 }
 \seealso{
@@ -74,3 +79,13 @@ Other lmodel2 tidiers:
 \code{\link{glance.lmodel2}()}
 }
 \concept{lmodel2 tidiers}
+\value{
+A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
+  \item{conf.high}{Upper bound on the confidence interval for the estimate.}
+  \item{conf.low}{Lower bound on the confidence interval for the estimate.}
+  \item{estimate}{The estimated value of the regression term.}
+  \item{p.value}{The two-sided p-value associated with the observed statistic.}
+  \item{term}{The name of the regression term.}
+  \item{method}{Either OLS/MA/SMA/RMA}
+
+}

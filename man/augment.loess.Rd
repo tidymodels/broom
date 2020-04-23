@@ -5,7 +5,7 @@
 \alias{loess_tidiers}
 \title{Tidy a(n) loess object}
 \usage{
-\method{augment}{loess}(x, data = stats::model.frame(x), newdata, ...)
+\method{augment}{loess}(x, data = model.frame(x), newdata = NULL, se_fit = FALSE, ...)
 }
 \arguments{
 \item{x}{A \code{loess} objects returned by \code{\link[stats:loess]{stats::loess()}}.}
@@ -23,6 +23,7 @@ the original predictors used to create \code{x}. Defaults to \code{NULL}, indica
 that nothing has been passed to \code{newdata}. If \code{newdata} is specified,
 the \code{data} argument will be ignored.}
 
+<<<<<<< HEAD
 \item{...}{Arguments passed on the loess predict method.}
 }
 \value{
@@ -33,12 +34,21 @@ to the original data:
 \item{.fitted}{Fitted values of model}
 \item{.se.fit}{Standard errors of the fitted values}
 \item{.resid}{Residuals of the fitted values}
+=======
+\item{se_fit}{Logical indicating whether or not a \code{.se.fit} column should be
+added to the augmented output. For some models, this calculation can be
+somwhat time-consuming. Defaults to \code{FALSE}.}
+>>>>>>> 3c922d507f7cc758a987a9ef44ae4267ac6ed583
 
-When \code{newdata} is supplied \code{augment.loess} returns
-one row for each observation with one additional column:
-
-\item{.fitted}{Fitted values of model}
-\item{.se.fit}{Standard errors of the fitted values}
+\item{...}{Additional arguments. Not used. Needed to match generic
+signature only. \strong{Cautionary note:} Misspelled arguments will be
+absorbed in \code{...}, where they will be ignored. If the misspelled
+argument has a default value, the default value will be used.
+For example, if you pass \code{conf.lvel = 0.9}, all computation will
+proceed using \code{conf.level = 0.95}. Additionally, if you pass
+\code{newdata = my_tibble} to an \code{\link[=augment]{augment()}} method that does not
+accept a \code{newdata} argument, it will use the default value for
+the \code{data} argument.}
 }
 \description{
 Tidy summarizes information about the components of a model.
@@ -57,10 +67,21 @@ as a second argument, at which point the augmented data will contain those
 rows (typically with NAs in place of the new columns). If the original data
 is not provided to \code{\link[=augment]{augment()}} and \code{na.action = "na.exclude"}, a
 warning is raised and the incomplete rows are dropped.
+
+Note that \code{loess} objects by default will not predict on data
+outside of a bounding hypercube defined by the training data unless the
+original \code{loess} object was fit with
+\verb{control = loess.control(surface = \\"direct\\"))}. See
+\code{\link[stats:predict.loess]{stats::predict.loess()}} for details.
 }
 \examples{
 
-lo <- loess(mpg ~ wt, mtcars)
+lo <- loess(
+  mpg ~ hp + wt, 
+  mtcars, 
+  control = loess.control(surface = "direct")
+)
+
 augment(lo)
 
 # with all columns of original data
@@ -74,4 +95,11 @@ augment(lo, newdata = head(mtcars))
 \link{na.action}
 
 \code{\link[=augment]{augment()}}, \code{\link[stats:loess]{stats::loess()}}
+}
+\value{
+A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
+  \item{.fitted}{Fitted or predicted value.}
+  \item{.resid}{The difference between fitted and observed values.}
+  \item{.se.fit}{Standard errors of fitted values.}
+
 }

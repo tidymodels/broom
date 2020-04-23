@@ -49,13 +49,6 @@ proceed using \code{conf.level = 0.95}. Additionally, if you pass
 accept a \code{newdata} argument, it will use the default value for
 the \code{data} argument.}
 }
-\value{
-A \link[tibble:tibble]{tibble::tibble} with the passed data and additional columns:
-
-\item{.fitted}{Fitted values of model}
-\item{.se.fit}{Standard errors of fitted values}
-\item{.resid}{Residuals (not present if \code{newdata} specified.)}
-}
 \description{
 Augment accepts a model object and a dataset and adds
 information about each observation in the dataset. Most commonly, this
@@ -105,6 +98,50 @@ rows (typically with NAs in place of the new columns). If the original data
 is not provided to \code{\link[=augment]{augment()}} and \code{na.action = "na.exclude"}, a
 warning is raised and the incomplete rows are dropped.
 }
+\examples{
+
+library(survival)
+
+cfit <- coxph(Surv(time, status) ~ age + sex, lung)
+
+tidy(cfit)
+tidy(cfit, exponentiate = TRUE)
+
+lp <- augment(cfit, lung)
+risks <- augment(cfit, lung, type.predict = "risk")
+expected <- augment(cfit, lung, type.predict = "expected")
+
+glance(cfit)
+
+# also works on clogit models
+resp <- levels(logan$occupation)
+n <- nrow(logan)
+indx <- rep(1:n, length(resp))
+logan2 <- data.frame(
+  logan[indx,],
+  id = indx,
+  tocc = factor(rep(resp, each=n))
+)
+
+logan2$case <- (logan2$occupation == logan2$tocc)
+
+cl <- clogit(case ~ tocc + tocc:education + strata(id), logan2)
+tidy(cl)
+glance(cl)
+
+library(ggplot2)
+
+ggplot(lp, aes(age, .fitted, color = sex)) +
+  geom_point()
+
+ggplot(risks, aes(age, .fitted, color = sex)) + 
+  geom_point()
+  
+ggplot(expected, aes(time, .fitted, color = sex)) + 
+  geom_point()
+
+
+}
 \seealso{
 \link{na.action}
 
@@ -135,3 +172,10 @@ Other survival tidiers:
 }
 \concept{coxph tidiers}
 \concept{survival tidiers}
+\value{
+A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
+  \item{.fitted}{Fitted or predicted value.}
+  \item{.resid}{The difference between fitted and observed values.}
+  \item{.se.fit}{Standard errors of fitted values.}
+
+}

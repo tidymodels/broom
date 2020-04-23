@@ -4,6 +4,7 @@
 \alias{tidy.biglm}
 \title{Tidy a(n) biglm object}
 \usage{
+<<<<<<< HEAD
 \method{tidy}{biglm}(
   x,
   conf.int = FALSE,
@@ -12,6 +13,9 @@
   quick = FALSE,
   ...
 )
+=======
+\method{tidy}{biglm}(x, conf.int = FALSE, conf.level = 0.95, exponentiate = FALSE, ...)
+>>>>>>> 3c922d507f7cc758a987a9ef44ae4267ac6ed583
 }
 \arguments{
 \item{x}{A \code{biglm} object created by a call to \code{\link[biglm:biglm]{biglm::biglm()}} or
@@ -29,10 +33,6 @@ the coefficient estimates. This is typical for logistic and multinomial
 regressions, but a bad idea if there is no log or logit link. Defaults
 to \code{FALSE}.}
 
-\item{quick}{Logical indiciating if the only the \code{term} and \code{estimate}
-columns should be returned. Often useful to avoid time consuming
-covariance and standard error calculations. Defaults to \code{FALSE}.}
-
 \item{...}{Additional arguments. Not used. Needed to match generic
 signature only. \strong{Cautionary note:} Misspelled arguments will be
 absorbed in \code{...}, where they will be ignored. If the misspelled
@@ -42,22 +42,6 @@ proceed using \code{conf.level = 0.95}. Additionally, if you pass
 \code{newdata = my_tibble} to an \code{\link[=augment]{augment()}} method that does not
 accept a \code{newdata} argument, it will use the default value for
 the \code{data} argument.}
-}
-\value{
-A \code{\link[tibble:tibble]{tibble::tibble()}} with one row for each term in the
-regression. The tibble has columns:
-
-\item{term}{The name of the regression term.}
-\item{estimate}{The estimated value of the regression term.}
-\item{std.error}{The standard error of the regression term.}
-\item{statistic}{The value of a statistic, almost always a T-statistic,
-to use in a hypothesis that the regression term is non-zero.}
-\item{p.value}{The two-sided p-value associated with the observed
-statistic.}
-\item{conf.low}{The low end of a confidence interval for the regression
-term. Included only if \code{conf.int = TRUE}.}
-\item{conf.high}{The high end of a confidence interval for the regression
-term. Included only if \code{conf.int = TRUE}.}
 }
 \description{
 Tidy summarizes information about the components of a model.
@@ -69,24 +53,25 @@ specify which components to return.
 }
 \examples{
 
-if (require("biglm", quietly = TRUE)) {
-    bfit <- biglm(mpg ~ wt + disp, mtcars)
-    tidy(bfit)
-    tidy(bfit, conf.int = TRUE)
-    tidy(bfit, conf.int = TRUE, conf.level = .9)
+library(biglm)
 
-    glance(bfit)
+bfit <- biglm(mpg ~ wt + disp, mtcars)
+tidy(bfit)
+tidy(bfit, conf.int = TRUE)
+tidy(bfit, conf.int = TRUE, conf.level = .9)
 
-    # bigglm: logistic regression
-    bgfit <- bigglm(am ~ mpg, mtcars, family = binomial())
-    tidy(bgfit)
-    tidy(bgfit, exponentiate = TRUE)
-    tidy(bgfit, conf.int = TRUE)
-    tidy(bgfit, conf.int = TRUE, conf.level = .9)
-    tidy(bgfit, conf.int = TRUE, conf.level = .9, exponentiate = TRUE)
+glance(bfit)
 
-    glance(bgfit)
-}
+# bigglm: logistic regression
+bgfit <- bigglm(am ~ mpg, mtcars, family = binomial())
+
+tidy(bgfit)
+tidy(bgfit, exponentiate = TRUE)
+tidy(bgfit, conf.int = TRUE)
+tidy(bgfit, conf.int = TRUE, conf.level = .9)
+tidy(bgfit, conf.int = TRUE, conf.level = .9, exponentiate = TRUE)
+
+glance(bgfit)
 
 }
 \seealso{
@@ -96,3 +81,14 @@ Other biglm tidiers:
 \code{\link{glance.biglm}()}
 }
 \concept{biglm tidiers}
+\value{
+A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
+  \item{conf.high}{Upper bound on the confidence interval for the estimate.}
+  \item{conf.low}{Lower bound on the confidence interval for the estimate.}
+  \item{estimate}{The estimated value of the regression term.}
+  \item{p.value}{The two-sided p-value associated with the observed statistic.}
+  \item{statistic}{The value of a T-statistic to use in a hypothesis that the regression term is non-zero.}
+  \item{std.error}{The standard error of the regression term.}
+  \item{term}{The name of the regression term.}
+
+}

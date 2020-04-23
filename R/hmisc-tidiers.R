@@ -8,13 +8,13 @@
 #'   `NA`. Defaults to `FALSE`.
 #' @template param_unused_dots
 #' 
-#' @return A [tibble::tibble] with one row for each unique pair of columns
-#'   in the correlatin matrix and columns:
-#'   \item{column1}{Name or index of the first column being described}
-#'   \item{column2}{Name or index of the second column being described}
-#'   \item{estimate}{Estimate of Pearson's r or Spearman's rho}
-#'   \item{n}{Number of observations used to compute the correlation}
-#'   \item{p.value}{P-value of correlation}
+#' @evalRd return_tidy(
+#'   "column1",
+#'   "column2",
+#'   "estimate",
+#'   "p.value",
+#'   n = "Number of observations used to compute the correlation"
+#' )
 #'
 #' @details Suppose the original data has columns A and B. In the correlation
 #'   matrix from `rcorr` there may be entries for both the `cor(A, B)` and 
@@ -22,30 +22,27 @@
 #'   output.
 #'
 #' @examples
-#'
-#' if (requireNamespace("Hmisc", quietly = TRUE)) {
 #' 
-#'     library(Hmisc)
-#'     
-#'     mat <- replicate(52, rnorm(100))
-#'     # add some NAs
-#'     mat[sample(length(mat), 2000)] <- NA
-#'     # also column names
-#'     colnames(mat) <- c(LETTERS, letters)
+#' library(Hmisc)
+#' 
+#' mat <- replicate(52, rnorm(100))
+#' # add some NAs
+#' mat[sample(length(mat), 2000)] <- NA
+#' # also column names
+#' colnames(mat) <- c(LETTERS, letters)
 #'
-#'     rc <- rcorr(mat)
+#' rc <- rcorr(mat)
 #'
-#'     td <- tidy(rc)
-#'     td
+#' td <- tidy(rc)
+#' td
 #'
-#'     library(ggplot2)
-#'     ggplot(td, aes(p.value)) +
-#'         geom_histogram(binwidth = .1)
+#' library(ggplot2)
+#' ggplot(td, aes(p.value)) +
+#'   geom_histogram(binwidth = .1)
 #'
-#'     ggplot(td, aes(estimate, p.value)) +
-#'         geom_point() +
-#'         scale_y_log10()
-#' }
+#' ggplot(td, aes(estimate, p.value)) +
+#'   geom_point() +
+#'   scale_y_log10()
 #'
 #' @export
 #' @aliases rcorr_tidiers Hmisc_tidiers

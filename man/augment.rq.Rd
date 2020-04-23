@@ -46,6 +46,7 @@ the \code{data} argument will be ignored.}
     \item{\code{na.action}}{ function determining what should be done with missing values
     in 'newdata'.  The default is to predict 'NA'.}
   }}
+<<<<<<< HEAD
 }
 \value{
 A \link[tibble:tibble]{tibble::tibble} with one row per obseration and columns:
@@ -62,6 +63,8 @@ columns:
 
 \code{predict.rq} does not provide confidence intervals when \code{newdata}
 is provided.
+=======
+>>>>>>> 3c922d507f7cc758a987a9ef44ae4267ac6ed583
 }
 \description{
 Augment accepts a model object and a dataset and adds
@@ -102,6 +105,12 @@ We are in the process of defining behaviors for models fit with various
 \link{na.action} arguments, but make no guarantees about behavior when data is
 missing at this time.
 }
+\details{
+Depending on the arguments passed on to \code{predict.rq} via \code{...},
+a confidence interval is also calculated on the fitted values resulting in
+columns \code{.conf.low} and \code{.conf.high}. Does not provide confidence
+intervals when data is specified via the \code{newdata} argument.
+}
 \seealso{
 \link{augment}, \code{\link[quantreg:rq]{quantreg::rq()}}, \code{\link[quantreg:predict.rq]{quantreg::predict.rq()}}
 
@@ -115,3 +124,10 @@ Other quantreg tidiers:
 \code{\link{tidy.rq}()}
 }
 \concept{quantreg tidiers}
+\value{
+A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
+  \item{.fitted}{Fitted or predicted value.}
+  \item{.resid}{The difference between fitted and observed values.}
+  \item{.tau}{Quantile.}
+
+}

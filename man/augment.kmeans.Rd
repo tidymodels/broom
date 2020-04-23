@@ -27,11 +27,6 @@ proceed using \code{conf.level = 0.95}. Additionally, if you pass
 accept a \code{newdata} argument, it will use the default value for
 the \code{data} argument.}
 }
-\value{
-The original data as a \link[tibble:tibble]{tibble::tibble} with one extra column:
-
-\item{.cluster}{The cluster assigned by the k-means algorithm}
-}
 \description{
 Augment accepts a model object and a dataset and adds
 information about each observation in the dataset. Most commonly, this
@@ -71,6 +66,23 @@ We are in the process of defining behaviors for models fit with various
 \link{na.action} arguments, but make no guarantees about behavior when data is
 missing at this time.
 }
+\examples{
+
+library(cluster)
+library(dplyr)
+
+x <- iris \%>\% 
+  select(-Species)
+  
+fit <- pam(x, k = 3)
+
+tidy(fit)
+glance(fit)
+augment(fit, x)
+
+
+
+}
 \seealso{
 \code{\link[=augment]{augment()}}, \code{\link[stats:kmeans]{stats::kmeans()}}
 
@@ -79,3 +91,8 @@ Other kmeans tidiers:
 \code{\link{tidy.kmeans}()}
 }
 \concept{kmeans tidiers}
+\value{
+A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
+  \item{.cluster}{Cluster assignment.}
+
+}

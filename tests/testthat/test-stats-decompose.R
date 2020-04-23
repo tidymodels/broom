@@ -1,7 +1,10 @@
 context("stats-decompose")
 
+skip_if_not_installed("modeltests")
+library(modeltests)
+
 test_that("augment.decomposed.ts", {
-  check_arguments(augment.decomposed.ts)
+  check_arguments(augment.decomposed.ts, strict = FALSE)
   
   d1a <- stats::decompose(nottem, type = "additive")
   d1b <- stats::decompose(nottem, type = "multiplicative")
@@ -10,8 +13,6 @@ test_that("augment.decomposed.ts", {
   a1a <- augment(d1a)
   a1b <- augment(d1b)
   a2 <- augment(d2)
-  
-  # TODO: think about data types and what broom guarantees
   
   check_tibble(a1a, method = "augment")
   check_tibble(a1b, method = "augment")

@@ -11,6 +11,7 @@ tidy_irlba(x, ...)
 \arguments{
 \item{x}{A list returned from \code{\link[irlba:irlba]{irlba::irlba()}}.}
 
+<<<<<<< HEAD
 \item{...}{
   Arguments passed on to \code{\link[=tidy_svd]{tidy_svd}}
   \describe{
@@ -25,23 +26,35 @@ map from principle components space back into the original space.
 will return information about
 }}
   }}
+=======
+\item{...}{Additional arguments. Not used. Needed to match generic
+signature only. \strong{Cautionary note:} Misspelled arguments will be
+absorbed in \code{...}, where they will be ignored. If the misspelled
+argument has a default value, the default value will be used.
+For example, if you pass \code{conf.lvel = 0.9}, all computation will
+proceed using \code{conf.level = 0.95}. Additionally, if you pass
+\code{newdata = my_tibble} to an \code{\link[=augment]{augment()}} method that does not
+accept a \code{newdata} argument, it will use the default value for
+the \code{data} argument.}
+>>>>>>> 3c922d507f7cc758a987a9ef44ae4267ac6ed583
 }
 \value{
 A \link[tibble:tibble]{tibble::tibble} with columns depending on the component of
 PCA being tidied.
 
-If \code{matrix} is \code{"u"}, \code{"samples"}, or \code{"x"} each row in the tidied
-output corresponds to the original data in PCA space. The columns are:
+If \code{matrix} is \code{"u"}, \code{"samples"}, \code{"scores"}, or \code{"x"} each row in the
+tidied output corresponds to the original data in PCA space. The columns
+are:
 
 \item{\code{row}}{ID of the original observation (i.e. rowname from original
 data).}
-\item{\code{PC}}{Integer indicating a principle component.}
-\item{\code{value}}{The score of the observation for that particular principle
+\item{\code{PC}}{Integer indicating a principal component.}
+\item{\code{value}}{The score of the observation for that particular principal
 component. That is, the location of the observation in PCA space.}
 
-If \code{matrix} is \code{"v"}, \code{"rotation"}, or \code{"variables"}, each row in the
-tidied ouput corresponds to information about the principle components
-in the original space. The columns are:
+If \code{matrix} is \code{"v"}, \code{"rotation"}, \code{"loadings"} or \code{"variables"}, each
+row in the tidied ouput corresponds to information about the principle
+components in the original space. The columns are:
 
 \item{\code{row}}{The variable labels (colnames) of the data set on
 which PCA was performed}
@@ -49,12 +62,13 @@ which PCA was performed}
 \item{\code{value}}{The value of the eigenvector (axis score) on the
 indicated principal component}
 
-If \code{matrix} is \code{"d"} or \code{"pcs"}, the columns are:
+If \code{matrix} is \code{"d"}, \code{"eigenvalues"} or \code{"pcs"}, the columns are:
 
 \item{\code{PC}}{An integer vector indicating the principal component}
 \item{\code{std.dev}}{Standard deviation explained by this PC}
-\item{\code{percent}}{Percentage of variation explained}
-\item{\code{cumulative}}{Cumulative percentage of variation explained}
+\item{\code{percent}}{Fraction of variation explained by this component}
+\item{\code{cumulative}}{Cumulative fraction of variation explained by
+principle components up to this component.}
 }
 \description{
 Broom tidies a number of lists that are effectively S3
@@ -71,6 +85,35 @@ If no appropriate tidying method is found, throws an error.
 }
 \details{
 A very thin wrapper around \code{\link[=tidy_svd]{tidy_svd()}}.
+}
+\examples{
+
+mat <- scale(as.matrix(iris[, 1:4]))
+s <- svd(mat)
+
+tidy_u <- tidy(s, matrix = "u")
+tidy_u
+
+tidy_d <- tidy(s, matrix = "d")
+tidy_d
+
+tidy_v <- tidy(s, matrix = "v")
+tidy_v
+
+library(ggplot2)
+library(dplyr)
+
+ggplot(tidy_d, aes(PC, percent)) +
+    geom_point() +
+    ylab("\% of variance explained")
+
+tidy_u \%>\%
+    mutate(Species = iris$Species[row]) \%>\%
+    ggplot(aes(Species, value)) +
+    geom_boxplot() +
+    facet_wrap(~ PC, scale = "free_y")
+
+
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[irlba:irlba]{irlba::irlba()}}

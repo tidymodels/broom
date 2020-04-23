@@ -4,13 +4,10 @@
 #' @param x A `ridgelm` object returned from [MASS::lm.ridge()].
 #' @template param_unused_dots
 #' 
-#' @return A [tibble::tibble] with one row for each combination of lambda and
-#'   a term in the formula, with columns:
-#'   \item{lambda}{choice of lambda}
-#'   \item{GCV}{generalized cross validation value for this lambda}
-#'   \item{term}{the term in the ridge regression model being estimated}
-#'   \item{estimate}{estimate of scaled coefficient using this lambda}
-#'   \item{scale}{Scaling factor of estimated coefficient}
+#' @evalRd return_tidy("lambda", "GCV", "term",
+#'   estimate = "estimate of scaled coefficient using this lambda",
+#'   scale = "Scaling factor of estimated coefficient"
+#' )
 #'
 #' @examples
 #'
@@ -45,10 +42,10 @@ tidy.ridgelm <- function(x, ...) {
     # only one choice of lambda
     ret <- tibble(
       lambda = x$lambda,
+      GCV = unname(x$GCV),
       term = names(x$coef),
       estimate = x$coef,
-      scale = x$scales,
-      xm = x$xm
+      scale = x$scales
     )
     return(ret)
   }
@@ -69,12 +66,13 @@ tidy.ridgelm <- function(x, ...) {
 #' @templateVar class ridgelm
 #' @template title_desc_glance
 #' 
-#' @inheritParams tidy.ridgelm
+#' @inherit tidy.ridgelm params examples
 #'
-#' @return A one-row [tibble::tibble] with columns:
-#'   \item{kHKB}{modified HKB estimate of the ridge constant}
-#'   \item{kLW}{modified L-W estimate of the ridge constant}
-#'   \item{lambdaGCV}{choice of lambda that minimizes GCV}
+#' @evalRd return_glance(
+#'   kHKB = "modified HKB estimate of the ridge constant",
+#'   kLW = "modified L-W estimate of the ridge constant",
+#'   lambdaGCV = "choice of lambda that minimizes GCV"
+#' )
 #'
 #' @details This is similar to the output of `select.ridgelm`, but it is
 #'   returned rather than printed.

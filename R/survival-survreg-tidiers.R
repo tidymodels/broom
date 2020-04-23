@@ -2,10 +2,10 @@
 #' @template title_desc_tidy
 #'
 #' @param x An `survreg` object returned from [survival::survreg()].
-#' @param conf.level confidence level for CI
+#' @template param_confint
 #' @template param_unused_dots
 #' 
-#' @template return_tidy_regression
+#' @evalRd return_tidy(regression = TRUE)
 #'
 #' @examples
 #'
@@ -17,11 +17,12 @@
 #'   dist = "exponential"
 #' )
 #'
-#' td <- tidy(sr)
+#' tidy(sr)
 #' augment(sr, ovarian)
 #' glance(sr)
 #'
 #' # coefficient plot
+#' td <- tidy(sr, conf.int = TRUE)
 #' library(ggplot2)
 #' ggplot(td, aes(estimate, term)) + 
 #'   geom_point() +
@@ -34,37 +35,34 @@
 #' @family survreg tidiers
 #' @family survival tidiers
 #' 
-tidy.survreg <- function(x, conf.level = .95, ...) {
+tidy.survreg <- function(x, conf.level = .95, conf.int = FALSE, ...) {
   s <- summary(x)
   nn <- c("estimate", "std.error", "statistic", "p.value")
   ret <- fix_data_frame(s$table, newnames = nn)
-  ret
   
-  # add confidence interval
-  ci <- stats::confint(x, level = conf.level)
-  colnames(ci) <- c("conf.low", "conf.high")
-  ci <- fix_data_frame(ci)
-  as_tibble(merge(ret, ci, all.x = TRUE, sort = FALSE))
+  if(conf.int){
+    # add confidence interval
+    ci <- stats::confint(x, level = conf.level)
+    colnames(ci) <- c("conf.low", "conf.high")
+    ci <- fix_data_frame(ci)
+    ret <- as_tibble(merge(ret, ci, all.x = TRUE, sort = FALSE))
+  }
+  
+  ret
 }
 
 
 #' @templateVar class survreg
 #' @template title_desc_augment
 #' 
-#' @param x An `survreg` object returned from [survival::survreg()].
+#' @inherit tidy.survreg params examples
 #' @template param_data
 #' @template param_newdata
 #' @template param_type_residuals
 #' @template param_type_predict
 #' @template param_unused_dots
 #'
-#' @template augment_NAs
-#'
-#' @return A [tibble::tibble] with the passed data and additional columns:
-#' 
-#'   \item{.fitted}{Fitted values of model}
-#'   \item{.se.fit}{Standard errors of fitted values}
-#'   \item{.resid}{Residuals}
+#' @evalRd return_augment(".se.fit")
 #'
 #' @export
 #' @seealso [augment()], [survival::survreg()]
@@ -87,26 +85,32 @@ augment.survreg <- function(x, data = NULL, newdata = NULL,
 #' @templateVar class survreg
 #' @template title_desc_glance
 #' 
-#' @inheritParams tidy.survreg
+#' @inherit tidy.survreg params examples
 #' 
-#' @return A one-row [tibble::tibble] with columns:
+#' @evalRd return_glance(
+#'   "iter",
+#'   "df",
+#'   "p.value",
+#'   "logLik",
+#'   "AIC",
+#'   "BIC",
+#'   "df.residual",
+#'   statistic = "Chi-squared statistic.",
+#'   "nobs"
+#' )
 #' 
-#'   \item{iter}{number of iterations}
-#'   \item{df}{degrees of freedom}
-#'   \item{statistic}{chi-squared statistic}
-#'   \item{p.value}{p-value from chi-squared test}
-#'   \item{logLik}{log likelihood}
-#'   \item{AIC}{Akaike information criterion}
-#'   \item{BIC}{Bayesian information criterion}
-#'   \item{df.residual}{residual degrees of freedom}
-#'
 #' @export
 #' @seealso [glance()], [survival::survreg()]
 #' @family survreg tidiers
 #' @family survival tidiers
 glance.survreg <- function(x, ...) {
-  ret <- tibble(iter = x$iter, df = sum(x$df))
-  ret$statistic <- 2 * diff(x$loglik)
+  ret <- tibble(iter = x$iter, df = sum(x$df),
+                statistic = 2 * diff(x$loglik),
+                logLik = as.numeric(stats::logLik(x)),
+                AIC = stats::AIC(x),
+                BIC = stats::BIC(x),
+                df.residual = stats::df.residual(x),
+                nobs = stats::nobs(x))
   ret$p.value <- 1 - stats::pchisq(ret$statistic, sum(x$df) - x$idf)
-  finish_glance(ret, x)
+  ret
 }

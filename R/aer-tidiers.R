@@ -1,17 +1,29 @@
 #' @templateVar class ivreg
 #' @template title_desc_tidy
-#' 
+#'
 #' @param x An `ivreg` object created by a call to [AER::ivreg()].
 #' @template param_confint
-#' @template param_exponentiate
+#' @param instruments Logical indicating whether to return
+#'   coefficients from the second-stage or diagnostics tests for
+#'   each endogenous regressor (F-statistics). Defaults to `FALSE`.
 #' @template param_unused_dots
-#' 
-#' @template return_tidy_regression
+#'
+#' @evalRd return_tidy(
+#'   "statistic.Sargan",
+#'   "p.value.Sargan",
+#'   "statistic.Wu.Hausman",
+#'   "p.value.Wu.Hausman",
+#'   "statistic.weakinst",
+#'   "p.value.weakinst",
+#'   regression = TRUE
+#' )
+#'
 #' @examples
-#' 
+#'
 #' library(AER)
 #'
 #' data("CigarettesSW", package = "AER")
+#'
 #' ivr <- ivreg(
 #'   log(packs) ~ income | population,
 #'   data = CigarettesSW,
@@ -22,86 +34,101 @@
 #'
 #' tidy(ivr)
 #' tidy(ivr, conf.int = TRUE)
-#' tidy(ivr, conf.int = TRUE, exponentiate = TRUE)
+#' tidy(ivr, conf.int = TRUE, instruments = TRUE)
 #'
 #' augment(ivr)
+#' augment(ivr, data = CigarettesSW)
+#' augment(ivr, newdata = CigarettesSW)
 #'
 #' glance(ivr)
-#' 
 #' @export
 #' @seealso [tidy()], [AER::ivreg()]
 #' @family ivreg tidiers
 #' @aliases ivreg_tidiers aer_tidiers
 tidy.ivreg <- function(x,
-  conf.int = FALSE,
-  conf.level = .95, 
-  exponentiate = FALSE,
-  ...) {
-  
-  co <- stats::coef(summary(x))
-  nn <- c("estimate", "std.error", "statistic", "p.value")
-  ret <- fix_data_frame(co, nn[1:ncol(co)])
+                       conf.int = FALSE,
+                       conf.level = 0.95,
+                       instruments = FALSE,
+                       ...) {
 
-  process_lm(
-    ret,
-    x,
-    conf.int = conf.int,
-    conf.level = conf.level,
-    exponentiate = exponentiate
-  )
+  # TODO: documentation on when you get what needs to be updated !!!
+
+  # case 1: user does not ask for instruments
+  
+  if (!instruments) {
+    
+    ret <- as_tibble(summary(x)$coefficients, rownames = "term")
+    colnames(ret) <- c("term", "estimate", "std.error", "statistic", "p.value")
+    
+    if (conf.int) {
+      ci <- broom_confint_terms(x, level = conf.level)
+      ret <- dplyr::left_join(ret, ci, by = "term")
+    }
+    
+    return(ret)
+  }
+
+  # case 2: user asks for instruments
+  
+  end_vars <- names(coef(x))[-1]  # subtract off the intercept
+  d <- summary(x, diagnostics = TRUE)$diagnostics
+  
+  # drop last two rows, the Wu-Hausman and Sargan diagnostics
+  last_two_rows <- c(nrow(d) - 1, nrow(d))
+  d <- as_tibble(d)[-last_two_rows, ]
+  tibble::add_column(d, term = end_vars, .before = TRUE) %>% 
+    rename2("p.value" = "p-value", "num.df" = "df1", "den.df" = "df2")
 }
 
 #' @templateVar class ivreg
 #' @template title_desc_augment
-#' 
+#'
 #' @inherit tidy.ivreg params examples
 #' @template param_data
 #' @template param_newdata
 #' @template param_unused_dots
-#' 
-#' @template return_augment_columns
+#'
+#' @evalRd return_augment()
 #'
 #' @export
 #' @seealso [augment()], [AER::ivreg()]
 #' @family ivreg tidiers
-augment.ivreg <- function(x, data = model.frame(x), newdata, ...) {
+augment.ivreg <- function(x, data = model.frame(x), newdata = NULL, ...) {
   augment_columns(x, data, newdata)
 }
 
 #' @templateVar class ivreg
 #' @template title_desc_glance
-#' 
-#' @inherit tidy.ivreg params examples
-#' @param diagnostics Logical indicating whether to include statistics and
-#'   p-values for Sargan, Wu-Hausman and weak instrument tests. Defaults to
-#'   `FALSE`.
-#' @template param_unused_dots
 #'
-#' @return A one-row tibble with columns
-#'   \item{r.squared}{The percent of variance explained by the model}
-#'   \item{adj.r.squared}{r.squared adjusted based on the degrees of freedom}
-#'   \item{sigma}{The square root of the estimated residual variance}
-#'   \item{statistic}{Wald test statistic}
-#'   \item{p.value}{p-value from the Wald test}
-#'   \item{df}{Degrees of freedom used by the coefficients}
-#'   \item{df.residual}{residual degrees of freedom}
-#'   
-#' If `diagnostics = TRUE`, will also return the following columns:
-#'   \item{statistic.Sargan}{Statistic for Sargan test}
-#'   \item{p.value.Sargan}{P-value for Sargan test}
-#'   \item{statistic.Wu.Hausman}{Statistic for Wu-Hausman test}
-#'   \item{p.value.Wu.Hausman}{P-value for Wu-Hausman test}
-#'   \item{statistic.weakinst}{Statistic for Wu-Hausman test}
-#'   \item{p.value.weakinst}{P-value for weak instruments test}
+#' @inherit tidy.ivreg params examples
+#' @param diagnostics Logical indicating whether or not to return the
+#'   Wu-Hausman and Sargan diagnostic information.
+#'
+#' @note Beginning 0.7.0, `glance.ivreg` returns statistics for the
+#' Wu-Hausman test for endogeneity and the Sargan test of
+#' overidentifying restrictions. Sargan test values are returned as `NA`
+#' if the number of instruments is not greater than the number of
+#' endogenous regressors.
+#'
+#' @evalRd return_glance(
+#'   "r.squared",
+#'   "adj.r.squared",
+#'   "sigma",
+#'   "df",
+#'   "df.residual",
+#'   "nobs",
+#'   statistic = "Wald test statistic.",
+#'   p.value = "P-value for the Wald test."
+#' )
 #'
 #' @export
 #' @seealso [glance()], [AER::ivreg()]
 #' @family ivreg tidiers
 glance.ivreg <- function(x, diagnostics = FALSE, ...) {
-  
-  s <- summary(x, diagnostics = diagnostics)
-  
-  ret <- with(s, 
+  s <- summary(x, diagnostics = FALSE)
+
+  ret <- with(
+    s,
     tibble(
       r.squared = r.squared,
       adj.r.squared = adj.r.squared,
@@ -111,20 +138,24 @@ glance.ivreg <- function(x, diagnostics = FALSE, ...) {
       df = df[1]
     )
   )
-  
+  ret$df.residual <- df.residual(x)
+  ret$nobs <- stats::nobs(x)
+
   if (diagnostics) {
-    diag <- with(s,
+    ret <- with(
+      summary(x, diagnostics = TRUE),
       tibble(
         statistic.Sargan = diagnostics["Sargan", "statistic"],
         p.value.Sargan = diagnostics["Sargan", "p-value"],
         statistic.Wu.Hausman = diagnostics["Wu-Hausman", "statistic"],
-        p.value.Wu.Hausman = diagnostics["Wu-Hausman", "p-value"],
-        statistic.weakinst = diagnostics["Weak instruments", "statistic"],
-        p.value.weakinst = diagnostics["Weak instruments", "p-value"]
+        p.value.Wu.Hausman = diagnostics["Wu-Hausman", "p-value"]
       )
     )
-    ret <- bind_cols(ret, diag)
   }
-  
-  finish_glance(ret, x)
+
+  as_tibble(ret, rownames = NULL)
 }
+
+#' @include null-and-default-tidiers.R
+#' @export
+tidy.tobit <- tidy.default

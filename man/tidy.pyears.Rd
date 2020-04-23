@@ -20,18 +20,6 @@ proceed using \code{conf.level = 0.95}. Additionally, if you pass
 accept a \code{newdata} argument, it will use the default value for
 the \code{data} argument.}
 }
-\value{
-A \link[tibble:tibble]{tibble::tibble} with one row for each time point and columns:
-
-\item{pyears}{person-years of exposure}
-\item{n}{number of subjects contributing time}
-\item{event}{observed number of events}
-\item{expected}{expected number of events (present only if a
-\code{ratetable} term is present)}
-
-If the \code{data.frame = TRUE} argument is supplied to \code{pyears},
-this is simply the contents of \code{x$data}.
-}
 \description{
 Tidy summarizes information about the components of a model.
 A model component might be a single term in a regression, a single
@@ -39,6 +27,13 @@ hypothesis, a cluster, or a class. Exactly what tidy considers to be a
 model component varies cross models but is usually self-evident.
 If a model has several distinct types of components, you will need to
 specify which components to return.
+}
+\details{
+\code{expected} is only present in the output when if a \code{ratetable}
+term is present.
+
+If the \code{data.frame = TRUE} argument is supplied to \code{pyears},
+this is simply the contents of \code{x$data}.
 }
 \examples{
 
@@ -87,3 +82,11 @@ Other survival tidiers:
 }
 \concept{pyears tidiers}
 \concept{survival tidiers}
+\value{
+A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
+  \item{expected}{expected number of events.}
+  \item{pyears}{person-years of exposure}
+  \item{n}{number of subjects contributing time}
+  \item{event}{observed number of events}
+
+}

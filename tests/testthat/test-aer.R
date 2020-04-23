@@ -1,8 +1,12 @@
 context("aer")
 
+skip_if_not_installed("modeltests")
+library(modeltests)
+
 skip_if_not_installed("AER")
 library(AER)
 library(dplyr)
+library(modeltests)
 
 data("CigarettesSW")
 df <- CigarettesSW %>% 
@@ -17,18 +21,30 @@ fit <- ivreg(
   data = df, subset = year == "1995"
 )
 
+ivfit1 <- ivreg(mpg ~ hp | qsec + am, data = mtcars)
+ivfit2 <- ivreg(mpg ~ cyl + wt | qsec + am, data = mtcars)
+
 test_that("ivreg tidier arguments", {
   check_arguments(tidy.ivreg)
   check_arguments(glance.ivreg)
-  check_arguments(augment.ivreg)
+  check_arguments(augment.ivreg, strict = FALSE)
 })
 
 test_that("tidy.ivreg", {
   td <- tidy(fit)
   td2 <- tidy(fit, conf.int = TRUE)
   
+  tdiv1 <- tidy(ivfit1, instruments = FALSE)
+  tdiv1_fstat <- tidy(ivfit1, instruments = TRUE)
+  tdiv2 <- tidy(ivfit2, instruments = FALSE)
+  tdiv2_fstat <- tidy(ivfit2, instruments = TRUE)
+  
   check_tidy_output(td)
   check_tidy_output(td2)
+  check_tidy_output(tdiv1)
+  check_tidy_output(tdiv1_fstat)
+  check_tidy_output(tdiv2)
+  check_tidy_output(tdiv2_fstat)
 })
 
 test_that("glance.ivreg", {
@@ -45,7 +61,8 @@ test_that("augment.ivreg", {
     aug = augment.ivreg,
     model = fit,
     data = df,
-    newdata = df
+    newdata = df,
+    strict = FALSE
   )
   
   au <- augment(fit)

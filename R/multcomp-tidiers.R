@@ -3,34 +3,33 @@
 #' 
 #' @param x A `glht` object returned by [multcomp::glht()].
 #' @template param_unused_dots
+#' 
+#' @evalRd return_tidy("lhs", "rhs", "estimate")
 #'
 #' @examples
-#'
-#' if (require("multcomp") && require("ggplot2")) {
 #' 
-#'     library(multcomp)
-#'     library(ggplot2)
-#'     
-#'     amod <- aov(breaks ~ wool + tension, data = warpbreaks)
-#'     wht <- glht(amod, linfct = mcp(tension = "Tukey"))
+#' library(multcomp)
+#' library(ggplot2)
+#' 
+#' amod <- aov(breaks ~ wool + tension, data = warpbreaks)
+#' wht <- glht(amod, linfct = mcp(tension = "Tukey"))
 #'
-#'     tidy(wht)
-#'     ggplot(wht, aes(lhs, estimate)) + geom_point()
+#' tidy(wht)
+#' ggplot(wht, aes(lhs, estimate)) + geom_point()
 #'
-#'     CI <- confint(wht)
-#'     tidy(CI)
-#'     ggplot(CI, aes(lhs, estimate, ymin = lwr, ymax = upr)) +
-#'        geom_pointrange()
+#' CI <- confint(wht)
+#' tidy(CI)
+#' ggplot(CI, aes(lhs, estimate, ymin = lwr, ymax = upr)) +
+#'    geom_pointrange()
 #'
-#'     tidy(summary(wht))
-#'     ggplot(mapping = aes(lhs, estimate)) +
-#'        geom_linerange(aes(ymin = lwr, ymax = upr), data = CI) +
-#'        geom_point(aes(size = p), data = summary(wht)) +
-#'        scale_size(trans = "reverse")
+#' tidy(summary(wht))
+#' ggplot(mapping = aes(lhs, estimate)) +
+#'    geom_linerange(aes(ymin = lwr, ymax = upr), data = CI) +
+#'    geom_point(aes(size = p), data = summary(wht)) +
+#'    scale_size(trans = "reverse")
 #'
-#'     cld <- cld(wht)
-#'     tidy(cld)
-#' }
+#' cld <- cld(wht)
+#' tidy(cld)
 #' 
 #' @aliases multcomp_tidiers
 #' @export
@@ -52,6 +51,9 @@ tidy.glht <- function(x, ...) {
 #'   [multcomp::confint.glht()] on a `glht` object created with
 #'   [multcomp::glht()].
 #' @template param_unused_dots
+#' 
+#' @inherit tidy.glht examples
+#' @evalRd return_tidy("lhs", "rhs", "estimate", "conf.low", "conf.high")
 #' 
 #' @export
 #' @family multcomp tidiers
@@ -76,6 +78,16 @@ tidy.confint.glht <- function(x, ...) {
 #'   [multcomp::summary.glht()] on a `glht` object created with
 #'   [multcomp::glht()].
 #' @template param_unused_dots
+#' 
+#' @inherit tidy.glht examples
+#' @evalRd return_tidy(
+#'   "lhs", 
+#'   "rhs", 
+#'   "estimate",
+#'   "std.error",
+#'   "statistic",
+#'   "p.value"
+#' )
 #' 
 #' @export
 #' @family multcomp tidiers
@@ -102,6 +114,9 @@ tidy.summary.glht <- function(x, ...) {
 #' @param x A `cld` object created by calling [multcomp::cld()] on a 
 #'   `glht`, `confint.glht()` or `summary.glht()` object.
 #' @template param_unused_dots
+#' 
+#' @inherit tidy.glht examples
+#' @evalRd return_tidy("lhs", "letters")
 #' 
 #' @export
 #' @family multcomp tidiers

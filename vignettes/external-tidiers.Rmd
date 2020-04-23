@@ -1,0 +1,101 @@
+---
+title: "Exporting tidying methods from a package"
+author: "Alex Hayes"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Exporting tidying methods from a package}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  eval = FALSE,
+  comment = "#>"
+)
+```
+
+NOTE: This vignette describes how extend the broom generics in an external package. To *use* the broom generics in an external you can `Import` broom as you would normally.
+
+This guide describes how to extend the `tidy()`, `glance()` and `augment()` generics. broom recently started re-exporting these generics from the `modelgenerics` package. `modelgenerics` is not yet on CRAN, nor is the version of broom that uses `modelgenerics`. You'll need to wait for these CRAN releases (timeline TBD at the moment) before release your package to CRAN if you extend broom in the manner described here.
+
+If you are a package developer, the best place to include `tidy()`, `glance()` or `augment()` methods is in your own package. To do this, you'll need to:
+
+1. Re-export the `tidy()`, `glance()` and `augment()` generics from the `modelgenerics` package.
+2. Implement appropriate tidying methods.
+3. Test the tidying methods
+
+You can re-export generics from broom itself, but `modelgenerics` is a much lighter dependency.
+
+The [dustpan](https://github.com/alexpghayes/dustpan) package demonstrates use of `modelgenerics` and `modeltests`, and you may find it helpful to browse.
+
+## Re-exporting `tidy()`, `glance()` and `augment()` generics
+
+First you'll need to add the [modelgenerics](https://github.com/tidymodels/modelgenerics) package to `Imports`. We recommend using the [usethis](https://github.com/r-lib/usethis) package for this:
+
+```{r}
+usethis::use_package("modelgenerics", "Imports")
+```
+
+Next you'll need to re-export the appropriate tidying methods. If you plan to implement a `glance()` method, for example, you can re-export the glance generic by adding the following somewhere in your package
+
+```{r}
+#' @importFrom modelgenerics glance
+#' @export
+modelgenerics::glance
+```
+
+Run `devtools::document()` for these changes to take effect. 
+
+Note: please do not define `tidy()`, `glance()` or `augment()` generics in your package. This will result in namespace conflicts whenever your package is used along other packages that also export tidying methods.
+
+## Implement appropriate tidying methods
+
+This part is mostly up to you, although there's lots of advice in `vignette("adding-tidiers")`.
+
+## Testing
+
+Now that you have a tidying method, you'll want to test it. In addition to testing the specific functionality of your tidying methods, you should also pass the standardized tests exported from [modeltests](https://github.com/alexpghayes/modeltests).
+
+To import these tests you'll need to add `modeltests` to `Suggests`, which you can accomplish with:
+
+```{r}
+# once modeltests makes its way onto CRAN:
+# usethis::use_package("modeltests", "Suggests")
+
+# until then:
+remotes::install_github("alexpghayes/modeltests")
+usethis::use_dev_package("modeltests")
+```
+
+You can then write tests for your tidiers following the advice in `vignette("adding-tidiers")`.
+
+If you're run `devtools::test()` and `devtools::check()` and didn't fail any tests or set off R CMD Check ERRORS, WARNINGS or NOTES, you're done!
+
+## F.A.Q.
+
+### Should I `Import` or `Suggest` `broom` or `broom.mixed`?
+
+If you are using tidiers from broom, such as `tidy.lm()`, then you will need to depend on `broom`, probably via `Imports`:
+
+```{r}
+use_package("broom", "Imports")
+```
+
+Similarly, if you are using tidiers from `broom.mixed`, you'll need to `Import` `broom.mixed`.
+
+You can import `broom.mixed` separately from `broom`, or you can mix and match them however you want.
+
+### I don't want to depend on `modelgenerics`. Can I re-export `tidy()`, `glance()` and `augment()` from `broom`?
+
+Yes, this is fine.
+
+### What do I do if my tidiers don't pass the tests?
+
+If you are introducing new arguments or column names in output, you'll need to make a pull request to `modeltests` to add the new argument/column names to the glossary of allowed names.
+
+If you'd like to change the test specifications, or if you find a bug in the tests, open an issue in `modeltests`.
+
+As a last resort, you can set `strict = FALSE` to run only a bare minimum of tests. This is not recommended.

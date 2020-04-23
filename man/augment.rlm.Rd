@@ -2,23 +2,28 @@
 % Please edit documentation in R/mass-rlm-tidiers.R
 \name{augment.rlm}
 \alias{augment.rlm}
-\title{Augment a(n) rlm object}
+\title{Augment data with information from a(n) rlm object}
 \usage{
-\method{augment}{rlm}(x, ...)
+\method{augment}{rlm}(x, data = model.frame(x), newdata = NULL, se_fit = FALSE, ...)
 }
 \arguments{
 \item{x}{An \code{rlm} object returned by \code{\link[MASS:rlm]{MASS::rlm()}}.}
 
+<<<<<<< HEAD
 \item{...}{
   Arguments passed on to \code{\link[=augment.lm]{augment.lm}}
   \describe{
     \item{\code{data}}{A \code{\link[=data.frame]{data.frame()}} or \code{\link[tibble:tibble]{tibble::tibble()}} containing the original
+=======
+\item{data}{A \code{\link[=data.frame]{data.frame()}} or \code{\link[tibble:tibble]{tibble::tibble()}} containing the original
+>>>>>>> 3c922d507f7cc758a987a9ef44ae4267ac6ed583
 data that was used to produce the object \code{x}. Defaults to
 \code{stats::model.frame(x)} so that \code{augment(my_fit)} returns the augmented
 original data. \strong{Do not} pass new data to the \code{data} argument.
 Augment will report information such as influence and cooks distance for
 data passed to the \code{data} argument. These measures are only defined for
 the original training data.}
+<<<<<<< HEAD
     \item{\code{newdata}}{A \code{\link[=data.frame]{data.frame()}} or \code{\link[tibble:tibble]{tibble::tibble()}} containing all
 the original predictors used to create \code{x}. Defaults to \code{NULL}, indicating
 that nothing has been passed to \code{newdata}. If \code{newdata} is specified,
@@ -28,37 +33,88 @@ Passed to \code{\link[stats:predict.glm]{stats::predict.glm()}}.}
     \item{\code{type.residuals}}{Type of residuals to use when \code{x} is a \code{glm} object.
 Passed to \code{\link[stats:residuals.glm]{stats::residuals.glm()}}.}
   }}
-}
-\value{
-When \code{newdata} is not supplied \code{augment.lm} returns
-one row for each observation, with seven columns added to the original
-data:
+=======
 
-\item{.hat}{Diagonal of the hat matrix}
-\item{.sigma}{Estimate of residual standard deviation when
-corresponding observation is dropped from model}
-\item{.cooksd}{Cooks distance, \code{\link[=cooks.distance]{cooks.distance()}}}
-\item{.fitted}{Fitted values of model}
-\item{.se.fit}{Standard errors of fitted values}
-\item{.resid}{Residuals}
-\item{.std.resid}{Standardised residuals}
+\item{newdata}{A \code{\link[=data.frame]{data.frame()}} or \code{\link[tibble:tibble]{tibble::tibble()}} containing all
+the original predictors used to create \code{x}. Defaults to \code{NULL}, indicating
+that nothing has been passed to \code{newdata}. If \code{newdata} is specified,
+the \code{data} argument will be ignored.}
 
-Some unusual \code{lm} objects, such as \code{rlm} from MASS, may omit \code{.cooksd}
-and \code{.std.resid}. \code{gam} from mgcv omits \code{.sigma}.
+\item{se_fit}{Logical indicating whether or not a \code{.se.fit} column should be
+added to the augmented output. For some models, this calculation can be
+somwhat time-consuming. Defaults to \code{FALSE}.}
 
-When \code{newdata} is supplied, returns one row for each observation, with
-three columns added to the new data:
-
-\item{.fitted}{Fitted values of model}
-\item{.se.fit}{Standard errors of fitted values}
-\item{.resid}{Residuals of fitted values on the new data}
+\item{...}{Additional arguments. Not used. Needed to match generic
+signature only. \strong{Cautionary note:} Misspelled arguments will be
+absorbed in \code{...}, where they will be ignored. If the misspelled
+argument has a default value, the default value will be used.
+For example, if you pass \code{conf.lvel = 0.9}, all computation will
+proceed using \code{conf.level = 0.95}. Additionally, if you pass
+\code{newdata = my_tibble} to an \code{\link[=augment]{augment()}} method that does not
+accept a \code{newdata} argument, it will use the default value for
+the \code{data} argument.}
+>>>>>>> 3c922d507f7cc758a987a9ef44ae4267ac6ed583
 }
 \description{
-This augment method wraps \code{\link[=augment.lm]{augment.lm()}}.
+Augment accepts a model object and a dataset and adds
+information about each observation in the dataset. Most commonly, this
+includes predicted values in the \code{.fitted} column, residuals in the
+\code{.resid} column, and standard errors for the fitted values in a \code{.se.fit}
+column. New columns always begin with a \code{.} prefix to avoid overwriting
+columns in the original dataset.
+
+Users may pass data to augment via either the \code{data} argument or the
+\code{newdata} argument. If the user passes data to the \code{data} argument,
+it \strong{must} be exactly the data that was used to fit the model
+object. Pass datasets to \code{newdata} to augment data that was not used
+during model fitting. This still requires that all columns used to fit
+the model are present.
+
+Augment will often behavior different depending on whether \code{data} or
+\code{newdata} is specified. This is because there is often information
+associated with training observations (such as influences or related)
+measures that is not meaningfully defined for new observations.
+
+For convenience, many augment methods provide default \code{data} arguments,
+so that \code{augment(fit)} will return the augmented training data. In these
+cases augment tries to reconstruct the original data based on the model
+object, with some varying degrees of success.
+
+The augmented dataset is always returned as a \link[tibble:tibble]{tibble::tibble} with the
+\strong{same number of rows} as the passed dataset. This means that the
+passed data must be coercible to a tibble. At this time, tibbles do not
+support matrix-columns. This means you should not specify a matrix
+of covariates in a model formula during the original model fitting
+process, and that \code{\link[splines:ns]{splines::ns()}}, \code{\link[stats:poly]{stats::poly()}} and
+\code{\link[survival:Surv]{survival::Surv()}} objects are not supported in input data. If you
+encounter errors, try explicitly passing a tibble, or fitting the original
+model on data in a tibble.
+
+We are in the process of defining behaviors for models fit with various
+\link{na.action} arguments, but make no guarantees about behavior when data is
+missing at this time.
 }
+<<<<<<< HEAD
 \seealso{
 \code{\link[=augment]{augment()}}, \code{\link[=augment.lm]{augment.lm()}}
+=======
+\details{
+For tidiers for models from the \pkg{robust} package see
+\code{\link[=tidy.lmRob]{tidy.lmRob()}} and \code{\link[=tidy.glmRob]{tidy.glmRob()}}.
+}
+\examples{
+>>>>>>> 3c922d507f7cc758a987a9ef44ae4267ac6ed583
 
+library(MASS)
+
+r <- rlm(stack.loss ~ ., stackloss)
+
+tidy(r)
+augment(r)
+glance(r)
+
+}
+\seealso{
 \code{\link[MASS:rlm]{MASS::rlm()}}
 
 Other rlm tidiers: 
@@ -66,3 +122,12 @@ Other rlm tidiers:
 \code{\link{tidy.rlm}()}
 }
 \concept{rlm tidiers}
+\value{
+A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
+  \item{.fitted}{Fitted or predicted value.}
+  \item{.hat}{Diagonal of the hat matrix.}
+  \item{.resid}{The difference between fitted and observed values.}
+  \item{.se.fit}{Standard errors of fitted values.}
+  \item{.sigma}{Estimated residual standard deviation when corresponding observation is dropped from model.}
+
+}

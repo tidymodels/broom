@@ -32,14 +32,6 @@ proceed using \code{conf.level = 0.95}. Additionally, if you pass
 accept a \code{newdata} argument, it will use the default value for
 the \code{data} argument.}
 }
-\value{
-A \code{\link[tibble:tibble]{tibble::tibble()}} containing the data passed to \code{augment},
-and \strong{additional} columns:
-
-\item{.fitted}{The predicted response for that observation.}
-\item{.resid}{The residual for a particular point. Present only when
-data has been passed to \code{augment} via the \code{data} argument.}
-}
 \description{
 Augment accepts a model object and a dataset and adds
 information about each observation in the dataset. Most commonly, this
@@ -79,6 +71,28 @@ We are in the process of defining behaviors for models fit with various
 \link{na.action} arguments, but make no guarantees about behavior when data is
 missing at this time.
 }
+\details{
+augment.nls does not currently support confidence intervals due to
+a lack of support in stats::predict.nls().
+}
+\examples{
+
+n <- nls(mpg ~ k * e ^ wt, data = mtcars, start = list(k = 1, e = 2))
+
+tidy(n)
+augment(n)
+glance(n)
+
+library(ggplot2)
+ggplot(augment(n), aes(wt, mpg)) +
+  geom_point() +
+  geom_line(aes(y = .fitted))
+
+newdata <- head(mtcars)
+newdata$wt <- newdata$wt + 1
+augment(n, newdata = newdata)
+
+}
 \seealso{
 \link{tidy}, \code{\link[stats:nls]{stats::nls()}}, \code{\link[stats:predict.nls]{stats::predict.nls()}}
 
@@ -87,3 +101,9 @@ Other nls tidiers:
 \code{\link{tidy.nls}()}
 }
 \concept{nls tidiers}
+\value{
+A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
+  \item{.fitted}{Fitted or predicted value.}
+  \item{.resid}{The difference between fitted and observed values.}
+
+}

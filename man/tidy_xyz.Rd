@@ -38,7 +38,7 @@ or \verb{glance_<function>} and are not exported (but they are documented!).
 
 If no appropriate tidying method is found, throws an error.
 
-xyz lists (lists where \code{x} and \code{y} are vector of coordinates
+xyz lists (lists where \code{x} and \code{y} are vectors of coordinates
 and \code{z} is a matrix of values) are typically used by functions such as
 \code{\link[graphics:persp]{graphics::persp()}} or \code{\link[graphics:image]{graphics::image()}} and returned
 by interpolation functions such as \code{\link[akima:interp]{akima::interp()}}.

@@ -19,21 +19,6 @@ proceed using \code{conf.level = 0.95}. Additionally, if you pass
 accept a \code{newdata} argument, it will use the default value for
 the \code{data} argument.}
 }
-\value{
-A one-row \link[tibble:tibble]{tibble::tibble} with columns:
-
-\item{n.factors}{The number of fitted factors}
-\item{total.variance}{Total cumulative proportion of variance accounted
-for by all factors}
-\item{statistic}{Significance-test statistic}
-\item{p.value}{p-value from the significance test, describing whether the
-covariance matrix estimated from the factors is significantly different
-from the observed covariance matrix}
-\item{df}{Degrees of freedom used by the factor analysis}
-\item{n}{Sample size used in the analysis}
-\item{method}{The estimation method; always Maximum Likelihood, "mle"}
-\item{converged}{Whether the factor analysis converged}
-}
 \description{
 Glance accepts a model object and returns a \code{\link[tibble:tibble]{tibble::tibble()}}
 with exactly one row of model summaries. The summaries are typically
@@ -49,6 +34,39 @@ computations to appropriate methods and gathers the results together.
 Sometimes a goodness of fit measure will be undefined. In these cases
 the measure will be reported as \code{NA}.
 }
+\examples{
+
+set.seed(123)
+
+# data
+m1 <- dplyr::tibble(
+  v1 = c(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 3, 3, 3, 3, 3, 4, 5, 6),
+  v2 = c(1, 2, 1, 1, 1, 1, 2, 1, 2, 1, 3, 4, 3, 3, 3, 4, 6, 5),
+  v3 = c(3, 3, 3, 3, 3, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 5, 4, 6),
+  v4 = c(3, 3, 4, 3, 3, 1, 1, 2, 1, 1, 1, 1, 2, 1, 1, 5, 6, 4),
+  v5 = c(1, 1, 1, 1, 1, 3, 3, 3, 3, 3, 1, 1, 1, 1, 1, 6, 4, 5),
+  v6 = c(1, 1, 1, 2, 1, 3, 3, 3, 4, 3, 1, 1, 1, 2, 1, 6, 5, 4)
+)
+
+# new data
+m2 <- purrr::map_dfr(m1, rev)
+
+# factor analysis objects
+fit1 <- stats::factanal(m1, factors = 3, scores = "Bartlett")
+fit2 <- stats::factanal(m1, factors = 3, scores = "regression")
+
+# tidying the object
+tidy(fit1)
+tidy(fit2)
+
+# augmented dataframe
+augment(fit1)
+augment(fit2)
+
+# augmented dataframe (with new data)
+augment(fit1, data = m2)
+augment(fit2, data = m2)
+}
 \seealso{
 \code{\link[=glance]{glance()}}, \code{\link[stats:factanal]{stats::factanal()}}
 
@@ -57,3 +75,15 @@ Other factanal tidiers:
 \code{\link{tidy.factanal}()}
 }
 \concept{factanal tidiers}
+\value{
+A \code{\link[tibble:tibble]{tibble::tibble()}} with exactly one row and columns:
+  \item{converged}{Logical indicating if the model fitting procedure was succesful and converged.}
+  \item{df}{Degrees of freedom used by the model.}
+  \item{method}{Which method was used.}
+  \item{n}{The number of TODO.}
+  \item{n.factors}{The number of fitted factors}
+  \item{nobs}{Number of observations used.}
+  \item{statistic}{Test statistic.}
+  \item{total.variance}{Total cumulative proportion of variance accounted for by all factors}
+
+}

@@ -2,9 +2,8 @@
 #' @template title_desc_tidy_list
 #'
 #' @param x A list returned from [irlba::irlba()].
-#' @inheritDotParams tidy_svd
 #' 
-#' @inherit tidy_svd return
+#' @inherit tidy_svd return params examples
 #' 
 #' @details A very thin wrapper around [tidy_svd()].
 #'

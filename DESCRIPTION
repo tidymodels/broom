@@ -1,7 +1,12 @@
 Type: Package
 Package: broom
+<<<<<<< HEAD
 Title: Convert Statistical Analysis Objects into Tidy Tibbles
 Version: 0.5.6
+=======
+Title: Convert Statistical Objects into Tidy Tibbles
+Version: 0.5.3.9000
+>>>>>>> 3c922d507f7cc758a987a9ef44ae4267ac6ed583
 Authors@R: 
     c(person(given = "David",
              family = "Robinson",
@@ -12,6 +17,18 @@ Authors@R:
              role = c("aut", "cre"),
              email = "alexpghayes@gmail.com",
              comment = c(ORCID = "0000-0002-4985-5160")),
+<<<<<<< HEAD
+=======
+      person(given = "Indrajeet",
+             family = "Patil",
+             role = "ctb",
+             email = "patilindrajeet.science@gmail.com",
+             comment = c(ORCID = "0000-0003-1995-6531")),
+      person(given = "Derek",
+             family = "Chiu",
+             role = "ctb",
+             email = "dchiu@bccrc.ca"),
+>>>>>>> 3c922d507f7cc758a987a9ef44ae4267ac6ed583
       person(given = "Matthieu",
              family = "Gomez",
              role = "ctb",
@@ -101,6 +118,13 @@ Authors@R:
              family = "Whalley",
              role = "ctb",
              email = "ben.whalley@plymouth.ac.uk"),
+<<<<<<< HEAD
+=======
+      person(given = "Karissa",
+             family = "Whiting",
+             role = "ctb",
+             email = "karissa.whiting@gmail.com"),
+>>>>>>> 3c922d507f7cc758a987a9ef44ae4267ac6ed583
       person(given = "Michael",
              family = "Kuehn",
              role = "ctb",
@@ -115,7 +139,158 @@ Authors@R:
              email = "erle.holgersen@gmail.com"),
       person(given = "Karl",
              family = "Dunkle Werner",
+<<<<<<< HEAD
              role = "ctb"))
+=======
+             role = "ctb"),
+      person(given = "Ethan",
+             family = "Christensen",
+             role = "ctb",
+             email = "christensen.ej@gmail.com"),
+      person(given = "Steven",
+             family = "Pav",
+             role = "ctb",
+             email = "shabbychef@gmail.com"),
+      person(given = "Paul",
+             family = "PJ",
+             role = "ctb",
+             email = "pjpaul.stephens@gmail.com"),
+      person(given = "Ben",
+             family = "Schneider",
+             role = "ctb",
+             email = "benjamin.julius.schneider@gmail.com"),
+      person(given = "Patrick",
+             family = "Kennedy",
+             role = "ctb",
+             email = "pkqstr@protonmail.com"),
+      person(given = "Lily",
+             family = "Medina",
+             role = "ctb",
+             email = "lilymiru@gmail.com"),
+      person(given = "Brian",
+             family = "Fannin",
+             role = "ctb",
+             email = "captain@pirategrunt.com"),
+      person(given = "Jason",
+             family = "Muhlenkamp",
+             role = "ctb",
+             email = "jason.muhlenkamp@gmail.com"),
+      person(given = "Matt",
+             family = "Lehman",
+             role = "ctb"),
+      person(given = "Bill",
+             family = "Denney",
+             role = "ctb",
+             email = "wdenney@humanpredictions.com",
+             comment = c(ORCID = "0000-0002-5759-428X")),
+      person(given = "Nic",
+             family = "Crane",
+             role = "ctb"),
+      person(given = "Andrew",
+             family = "Bates",
+             role = "ctb"),
+      person(given = "Vincent",
+             family = "Arel-Bundock",
+             role = "ctb",
+             email = "vincent.arel-bundock@umontreal.ca",
+             comment = c(ORCID = "0000-0003-2042-7063")),
+      person(given = "Hideaki",
+             family = "Hayashi",
+             role = "ctb"),
+      person(given = "Luis",
+             family = "Tobalina",
+             role = "ctb"),
+      person(given = "Annie",
+             family = "Wang",
+             role = "ctb",
+             email = "anniewang.uc@gmail.com"),
+      person(given = "Wei Yang",
+             family = "Tham",
+             role = "ctb",
+             email = "weiyang.tham@gmail.com"),
+      person(given = "Clara",
+             family = "Wang",
+             role = "ctb",
+             email = "clara.wang.94@gmail.com"),
+      person(given = "Abby",
+             family = "Smith",
+             role = "ctb",
+             email = "als1@u.northwestern.edu",
+             comment = c(ORCID = "0000-0002-3207-0375")),
+      person(given = "Jasper",
+             family = "Cooper",
+             role = "ctb",
+             email = "jaspercooper@gmail.com",
+             comment = c(ORCID = "0000-0002-8639-3188")),
+      person(given = "E Auden",
+             family = "Krauska",
+             role = "ctb",
+             email = "krauskae@gmail.com",
+             comment = c(ORCID = "0000-0002-1466-5850")),
+      person(given = "Alex",
+             family = "Wang",
+             role = "ctb",
+             email = "x249wang@uwaterloo.ca"),
+      person(given = "Malcolm",
+             family = "Barrett",
+             role = "ctb",
+             email = "malcolmbarrett@gmail.com",
+             comment = c(ORCID = "0000-0003-0299-5825")),
+      person(given = "Charles",
+             family = "Gray",
+             role = "ctb",
+             email = "charlestigray@gmail.com",
+             comment = c(ORCID = "0000-0002-9978-011X")),
+      person(given = "Jared",
+             family = "Wilber",
+             role = "ctb"),
+      person(given = "Vilmantas",
+             family = "Gegzna",
+             role = "ctb",
+             email = "GegznaV@gmail.com",
+             comment = c(ORCID = "0000-0002-9500-5167")),
+      person(given = "Eduard",
+             family = "Szoecs",
+             role = "ctb",
+             email = "eduardszoecs@gmail.com"),
+      person(given = "Frederik",
+             family = "Aust",
+             role = "ctb",
+             email = "frederik.aust@uni-koeln.de",
+             comment = c(ORCID = "0000-0003-4900-788X")),
+      person(given = "Angus",
+             family = "Moore",
+             role = "ctb",
+             email = "angusmoore9@gmail.com"),
+      person(given = "Nick",
+             family = "Williams",
+             role = "ctb",
+             email = "ntwilliams.personal@gmail.com"),
+      person(given = "Marius",
+             family = "Barth",
+             role = "ctb",
+             email = "marius.barth.uni.koeln@gmail.com",
+             comment = c(ORCID = "0000-0002-3421-6665")),
+      person(given = "Bruna",
+             family = "Wundervald",
+             role = "ctb",
+             email = "brunadaviesw@gmail.com",
+             comment = c(ORCID = "0000-0001-8163-220X")),
+      person(given = "Joyce",
+             family = "Cahoon",
+             role = "ctb",
+             email = "joyceyu48@gmail.com",
+             comment = c(ORCID = "0000-0001-7217-4702")),
+      person(given = "Kevin",
+             family = "Zarca",
+             role = "ctb",
+             email = "kevin.zarca@gmail.com"),
+      person(given = "Shiro",
+             family = "Kuriwaki",
+             role = "ctb",
+             email = "shirokuriwaki@gmail.com",
+             comment = c(ORCID = "0000-0002-5687-2647")))
+>>>>>>> 3c922d507f7cc758a987a9ef44ae4267ac6ed583
 Description: Summarizes key information about statistical
     objects in tidy tibbles. This makes it easy to report results, create
     plots and consistently work with large numbers of models at once.
@@ -127,18 +302,25 @@ Description: Summarizes key information about statistical
     observations to a dataset, such as fitted values or influence
     measures.
 License: MIT + file LICENSE
-URL: http://github.com/tidyverse/broom
-BugReports: http://github.com/tidyverse/broom/issues
+URL: https://broom.tidyverse.org/,
+    http://github.com/tidymodels/broom
+BugReports: http://github.com/tidymodels/broom/issues
 Depends:
     R (>= 3.1)
 Imports:
     backports,
     dplyr,
+<<<<<<< HEAD
     generics (>= 0.0.2),
+=======
+    ellipsis,
+    generics (>= 0.0.2),
+    glue,
+>>>>>>> 3c922d507f7cc758a987a9ef44ae4267ac6ed583
     methods,
-    nlme,
     purrr,
     reshape2,
+    rlang,
     stringr,
     tibble (>= 3.0.0),
     tidyr
@@ -151,14 +333,16 @@ Suggests:
     biglm,
     binGroup,
     boot,
-    brms,
     btergm,
     car,
     caret,
+    cluster,
     coda,
     covr,
+    drc,
     e1071,
     emmeans,
+    epiR,
     ergm,
     gam (>= 1.15),
     gamlss,
@@ -175,8 +359,9 @@ Suggests:
     ks,
     Lahman,
     lavaan,
+    leaps,
     lfe,
-    lme4,
+    lm.beta,
     lmodel2,
     lmtest,
     lsmeans,
@@ -185,7 +370,10 @@ Suggests:
     MASS,
     Matrix,
     mclust,
+    mediation,
+    metafor,
     mgcv,
+    modeltests,
     muhaz,
     multcomp,
     network,
@@ -193,22 +381,27 @@ Suggests:
     orcutt (>= 2.2),
     ordinal,
     plm,
-    plyr,
     poLCA,
     psych,
     quantreg,
     rgeos,
     rmarkdown,
+<<<<<<< HEAD
+=======
+    robust,
+    robustbase,
+>>>>>>> 3c922d507f7cc758a987a9ef44ae4267ac6ed583
     rsample,
-    rstan,
-    rstanarm,
     sp,
     speedglm,
+    spelling,
     statnet.common,
     survey,
     survival,
-    testthat,
+    systemfit,
+    testthat (>= 2.1.0),
     tseries,
+<<<<<<< HEAD
     zoo
 VignetteBuilder: 
     knitr
@@ -216,3 +409,122 @@ Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.0
+=======
+    xergm,
+    zoo,
+    glmnetUtils,
+    lme4,
+    gee,
+    mclogit
+Remotes:
+    alexpghayes/modeltests
+Encoding: UTF-8
+VignetteBuilder: knitr
+Language: en-US
+LazyData: true
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.0.2
+Collate:
+    'aaa-documentation-helper.R'
+    'null-and-default-tidiers.R'
+    'aer-tidiers.R'
+    'auc-tidiers.R'
+    'base-tidiers.R'
+    'bbmle-tidiers.R'
+    'betareg-tidiers.R'
+    'biglm-tidiers.R'
+    'bingroup-tidiers.R'
+    'boot-tidiers.R'
+    'broom-package.R'
+    'broom.R'
+    'btergm-tidiers.R'
+    'car-tidiers.R'
+    'caret-tidiers.R'
+    'data-frame-tidiers.R'
+    'drc-tidiers.R'
+    'emmeans-tidiers.R'
+    'epiR-tidiers.R'
+    'ergm-tidiers.R'
+    'gam-tidiers.R'
+    'gamlss-tidiers.R'
+    'gee.R'
+    'geepack-tidiers.R'
+    'glmnet-cv-glmnet-tidiers.R'
+    'glmnet-glmnet-tidiers.R'
+    'gmm-tidiers.R'
+    'hmisc-tidiers.R'
+    'joinerml-tidiers.R'
+    'kendall-tidiers.R'
+    'ks-tidiers.R'
+    'lavaan-tidiers.R'
+    'leaps.R'
+    'lfe-tidiers.R'
+    'list-irlba.R'
+    'list-optim-tidiers.R'
+    'list-svd-tidiers.R'
+    'list-tidiers.R'
+    'list-xyz-tidiers.R'
+    'lm-beta-tidiers.R'
+    'lmodel2-tidiers.R'
+    'lmtest-tidiers.R'
+    'maps-tidiers.R'
+    'mass-fitdistr-tidiers.R'
+    'mass-polr-tidiers.R'
+    'mass-ridgelm-tidiers.R'
+    'stats-lm-tidiers.R'
+    'mass-rlm-tidiers.R'
+    'mclogit.R'
+    'mclust-tidiers.R'
+    'mediate-tidiers.R'
+    'mgcv-tidiers.R'
+    'muhaz-tidiers.R'
+    'multcomp-tidiers.R'
+    'nnet-tidiers.R'
+    'nobs.R'
+    'orcutt-tidiers.R'
+    'ordinal-clm-tidiers.R'
+    'ordinal-clmm-tidiers.R'
+    'pam-tidiers.R'
+    'plm-tidiers.R'
+    'polca-tidiers.R'
+    'psych-tidiers.R'
+    'stats-nls-tidiers.R'
+    'quantreg-nlrq-tidiers.R'
+    'quantreg-rq-tidiers.R'
+    'quantreg-rqs-tidiers.R'
+    'rma-tidiers.R'
+    'robust-glmrob-tidiers.R'
+    'robust-lmrob-tidiers.R'
+    'robustbase-glmrob-tidiers.R'
+    'robustbase-lmrob-tidiers.R'
+    'sp-tidiers.R'
+    'speedglm-speedglm-tidiers.R'
+    'speedglm-speedlm-tidiers.R'
+    'stats-anova-tidiers.R'
+    'stats-arima-tidiers.R'
+    'stats-decompose-tidiers.R'
+    'stats-factanal-tidiers.R'
+    'stats-glm-tidiers.R'
+    'stats-htest-tidiers.R'
+    'stats-kmeans-tidiers.R'
+    'stats-loess-tidiers.R'
+    'stats-mlm-tidiers.R'
+    'stats-prcomp-tidiers.R'
+    'stats-smooth.spline-tidiers.R'
+    'stats-tidiers.R'
+    'stats-time-series-tidiers.R'
+    'survey-tidiers.R'
+    'survival-aareg-tidiers.R'
+    'survival-cch-tidiers.R'
+    'survival-coxph-tidiers.R'
+    'survival-pyears-tidiers.R'
+    'survival-survdiff-tidiers.R'
+    'survival-survexp-tidiers.R'
+    'survival-survfit-tidiers.R'
+    'survival-survreg-tidiers.R'
+    'systemfit-tidiers.R'
+    'tseries-tidiers.R'
+    'utilities.R'
+    'zoo-tidiers.R'
+    'zzz.R'
+>>>>>>> 3c922d507f7cc758a987a9ef44ae4267ac6ed583

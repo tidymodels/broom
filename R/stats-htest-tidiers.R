@@ -5,22 +5,18 @@
 #'   [stats::t.test()], [stats::wilcox.test()], [stats::chisq.test()], etc.
 #' @template param_unused_dots
 #' 
-#' @return A one-row [tibble::tibble] with one or more of the following
-#'   columns, depending on which hypothesis test was used.
-#'   
-#'   \item{estimate}{Estimate of the effect size}
-#'   \item{statistic}{Test statistic used to compute the p-value}
-#'   \item{p.value}{P-value}
-#'   \item{parameter}{Parameter field in the htest, typically degrees of
-#'   freedom}
-#'   \item{conf.low}{Lower bound on a confidence interval}
-#'   \item{conf.high}{Upper bound on a confidence interval}
-#'   \item{estimate1}{Sometimes two estimates are computed, such as in a
-#'   two-sample t-test}
-#'   \item{estimate2}{Sometimes two estimates are computed, such as in a
-#'   two-sample t-test}
-#'   \item{method}{Method used to compute the statistic as a string}
-#'   \item{alternative}{Alternative hypothesis as a string}
+#' @evalRd  return_tidy(
+#'   "estimate",
+#'   "statistic",
+#'   "p.value",
+#'   "parameter",
+#'   "conf.low",
+#'   "conf.high",
+#'   "estimate1",
+#'   "estimate2",
+#'   "method",
+#'   "alternative"
+#' )
 #'
 #' @examples
 #'
@@ -56,7 +52,7 @@ tidy.htest <- function(x, ...) {
     ret$estimate <- NULL
 
     # special case: in a t-test, estimate = estimate1 - estimate2
-    if (x$method == "Welch Two Sample t-test") {
+    if (x$method %in% c("Welch Two Sample t-test", " Two Sample t-test")) {
       ret <- c(estimate = ret$estimate1 - ret$estimate2, ret)
     }
   }
@@ -71,11 +67,16 @@ tidy.htest <- function(x, ...) {
         "Multiple parameters; naming those columns ",
         paste(make.names(names(x$parameter)), collapse = ", ")
       )
+      # rename num df to num.df and denom df to denom.df
+      np <- names(x$parameter)
+      np <- stringr::str_replace(np, "num df", "num.df")
+      np <- stringr::str_replace(np, "denom df", "den.df")
+      names(x$parameter) <- np
       ret <- append(ret, x$parameter, after = 1)
     }
   }
 
-  ret <- compact(ret)
+  ret <- purrr::compact(ret)
   if (!is.null(x$conf.int)) {
     ret <- c(ret, conf.low = x$conf.int[1], conf.high = x$conf.int[2])
   }
@@ -96,18 +97,17 @@ glance.htest <- function(x, ...) tidy(x)
 #' @templateVar class htest
 #' @template title_desc_augment
 #' 
-#' @inheritParams tidy.htest
+#' @inherit tidy.htest params examples
 #' 
-#' @return Errors unless `x` is a chi-squared test. If `x` is a chi-squared
-#'   test, for each cell of the tested table returns columns:
-#'   
-#'   \item{.observed}{Observed count}
-#'   \item{.prop}{Proportion of the total}
-#'   \item{.row.prop}{Row proportion (2 dimensions table only)}
-#'   \item{.col.prop}{Column proportion (2 dimensions table only)}
-#'   \item{.expected}{Expected count under the null hypothesis}
-#'   \item{.residuals}{Pearson residual}
-#'   \item{.stdres}{Standardized residual}
+#' @evalRd return_glance(
+#'   .observed = "Observed count.",
+#'   .prop = "Proportion of the total.",
+#'   .row.prop = "Row proportion (2 dimensions table only).",
+#'   .col.prop = "Column proportion (2 dimensions table only).",
+#'   .expected = "Expected count under the null hypothesis.",
+#'   .resid = "Pearson residuals.",
+#'   .std.resid = "Standardized residual."
+#' )
 #'
 #' @details See [stats::chisq.test()] for more details on
 #' how residuals are computed.
@@ -147,8 +147,8 @@ augment_chisq_test <- function(x, ...) {
   }
 
   ret <- cbind(ret, .expected = as.data.frame(as.table(x$expected))[[d + 1]])
-  ret <- cbind(ret, .residuals = as.data.frame(as.table(x$residuals))[[d + 1]])
-  ret <- cbind(ret, .stdres = as.data.frame(as.table(x$stdres))[[d + 1]])
+  ret <- cbind(ret, .resid = as.data.frame(as.table(x$residuals))[[d + 1]])
+  ret <- cbind(ret, .std.resid = as.data.frame(as.table(x$stdres))[[d + 1]])
   as_tibble(ret)
 }
 
@@ -161,15 +161,10 @@ augment_chisq_test <- function(x, ...) {
 #'   [stats::pairwise.t.test()] or [stats::pairwise.wilcox.test()].
 #' @template param_unused_dots
 #'
-#' @return A [tibble::tibble] with one row per group/group comparison and
-#'   columns:
-#'   
-#'   \item{group1}{First group being compared}
-#'   \item{group2}{Second group being compared}
-#'   \item{p.value}{(Adjusted) p-value of comparison}
-#'
+#' @evalRd return_tidy("group1", "group2", "p.value")
+#' 
 #' @details Note that in one-sided tests, the alternative hypothesis of each
-#' test can be stated as "group1 is greater/less than group2".
+#'   test can be stated as "group1 is greater/less than group2".
 #'
 #' Note also that the columns of group1 and group2 will always be a factor,
 #' even if the original input is (e.g.) numeric.
@@ -210,8 +205,7 @@ tidy.pairwise.htest <- function(x, ...) {
 #'   [stats::power.t.test()].
 #' @template param_unused_dots
 #'
-#' @return A data frame with one row per parameter passed in, with
-#' columns `n`, `delta`, `sd`, `sig.level`, and `power`.
+#' @evalRd return_tidy("n", "delta", "sd", "sig.level", "power")
 #' 
 #' @examples
 #'
@@ -227,6 +221,6 @@ tidy.pairwise.htest <- function(x, ...) {
 #' @family htest tidiers
 #' @seealso [stats::power.t.test()]
 tidy.power.htest <- function(x, ...) {
-  cols <- compact(x[c("n", "delta", "sd", "sig.level", "power", "p1", "p2")])
+  cols <- purrr::compact(x[c("n", "delta", "sd", "sig.level", "power", "p1", "p2")])
   as_tibble(cols)
 }

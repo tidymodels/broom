@@ -1,5 +1,8 @@
 context("polca")
 
+skip_if_not_installed("modeltests")
+library(modeltests)
+
 skip_if_not_installed("poLCA")
 library(poLCA)
 
@@ -21,18 +24,19 @@ test_that("tidy.poLCA", {
 test_that("glance.poLCA", {
   gl <- glance(fit)
   check_glance_outputs(gl)
-  check_dims(gl, expected_cols = 7)
+  check_dims(gl, expected_cols = 8)
 })
 
 test_that("augment.poLCA", {
   
   au <- augment(fit)
-  check_tibble(au, method = "augment")
   
   check_augment_function(
     aug = augment.poLCA,
     model = fit,
-    data = values
+    data = values,
+    newdata = values,
+    strict = FALSE
   )
 })
 

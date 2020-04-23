@@ -1,120 +1,200 @@
-#' Tidy estimated marginal means (least-squares means) objects from the emmeans and lsmeans packages
+#' @templateVar class lsmobj
+#' @template title_desc_tidy
 #'
-#' Tidiers for estimated marginal means objects, which report the predicted
-#' means for factors or factor combinations in a linear model. This
-#' covers three classes:
-#' `emmGrid`, `lsmobj`, and `ref.grid`. (The first class is from the `emmeans`
-#' package, and is the successor to the latter two classes, which have slightly different
-#' purposes within the `lsmeans` package but have similar output).
-#'
-#' @param x "emmGrid", lsmobj", or "ref.grid" object
-#' @param conf.level Level of confidence interval, used only for
-#' `emmGrid` and `lsmobj` objects
+#' @param x An `lsmobj` object.
+#' @template param_confint
 #' @param ... Additional arguments passed to [emmeans::summary.emmGrid()] or
-#'   [lsmeans::summary.ref.grid()]. **Cautionary note**: mispecified arguments
+#'   [lsmeans::summary.ref.grid()]. **Cautionary note**: misspecified arguments
 #'   may be silently ignored!
+#'   
+#' @evalRd return_tidy(
+#'   "std.error", 
+#'   "df", 
+#'   "conf.low", 
+#'   "conf.high",
+#'   level1 = "One level of the factor being contrasted",
+#'   level2 = "The other level of the factor being contrasted",
+#'   "contrast",
+#'   "p.value",
+#'   statistic = "T-ratio statistic",
+#'   estimate = "Estimated least-squares mean."
+#' )
 #'
-#' @return A data frame with one observation for each estimated
-#' mean, and one column for each combination of factors, along with
-#' the following variables:
-#'   \item{estimate}{Estimated least-squares mean}
-#'   \item{std.error}{Standard error of estimate}
-#'   \item{df}{Degrees of freedom}
-#'   \item{conf.low}{Lower bound of confidence interval}
-#'   \item{conf.high}{Upper bound of confidence interval}
+#' @details Returns a data frame with one observation for each estimated
+#'   mean, and one column for each combination of factors. When the input is a
+#'   contrast, each row will contain one estimated contrast.
 #'
-#' When the input is a contrast, each row will contain one estimated
-#' contrast, along with some of the following columns:
-#'   \item{level1}{One level of the factor being contrasted}
-#'   \item{level2}{Second level}
-#'   \item{contrast}{In cases where the contrast is not made up of
-#'   two levels, describes each}
-#'   \item{statistic}{T-ratio statistic}
-#'   \item{p.value}{P-value}
-#'
-#' @details There are a large number of arguments that can be
-#' passed on to [emmeans::summary.emmGrid()] or [lsmeans::summary.ref.grid()].
-#' By broom convention, we use `conf.level` to pass the `level` argument.
+#'   There are a large number of arguments that can be
+#'   passed on to [emmeans::summary.emmGrid()] or [lsmeans::summary.ref.grid()].
 #'
 #' @examples
 #'
-#' if (require("emmeans", quietly = TRUE)) {
-#'   # linear model for sales of oranges per day
-#'   oranges_lm1 <- lm(sales1 ~ price1 + price2 + day + store, data = oranges)
+#' library(emmeans)
+#' # linear model for sales of oranges per day
+#' oranges_lm1 <- lm(sales1 ~ price1 + price2 + day + store, data = oranges)
 #'
-#'   # reference grid; see vignette("basics", package = "emmeans")
-#'   oranges_rg1 <- ref_grid(oranges_lm1)
-#'   td <- tidy(oranges_rg1)
-#'   td
+#' # reference grid; see vignette("basics", package = "emmeans")
+#' oranges_rg1 <- ref_grid(oranges_lm1)
+#' td <- tidy(oranges_rg1)
+#' td
 #'
-#'   # marginal averages
-#'   marginal <- emmeans(oranges_rg1, "day")
-#'   tidy(marginal)
+#' # marginal averages
+#' marginal <- emmeans(oranges_rg1, "day")
+#' tidy(marginal)
 #'
-#'   # contrasts
-#'   tidy(contrast(marginal))
-#'   tidy(contrast(marginal, method = "pairwise"))
+#' # contrasts
+#' tidy(contrast(marginal))
+#' tidy(contrast(marginal, method = "pairwise"))
 #'
-#'   # plot confidence intervals
-#'   library(ggplot2)
-#'   ggplot(tidy(marginal), aes(day, estimate)) +
-#'     geom_point() +
-#'     geom_errorbar(aes(ymin = conf.low, ymax = conf.high))
+#' # plot confidence intervals
+#' library(ggplot2)
+#' ggplot(tidy(marginal), aes(day, estimate)) +
+#'   geom_point() +
+#'   geom_errorbar(aes(ymin = conf.low, ymax = conf.high))
 #'
-#'   # by multiple prices
-#'   by_price <- emmeans(oranges_lm1, "day", by = "price2",
-#'                       at = list(price1 = 50, price2 = c(40, 60, 80),
-#'                       day = c("2", "3", "4")) )
-#'   by_price
-#'   tidy(by_price)
+#' # by multiple prices
+#' by_price <- emmeans(oranges_lm1, "day", by = "price2",
+#'                     at = list(price1 = 50, price2 = c(40, 60, 80),
+#'                     day = c("2", "3", "4")) )
+#' by_price
+#' tidy(by_price)
 #'
-#'   ggplot(tidy(by_price), aes(price2, estimate, color = day)) +
-#'     geom_line() +
-#'     geom_errorbar(aes(ymin = conf.low, ymax = conf.high))
-#' }
+#' ggplot(tidy(by_price), aes(price2, estimate, color = day)) +
+#'   geom_line() +
+#'   geom_errorbar(aes(ymin = conf.low, ymax = conf.high))
+#'   
+#' # joint_tests
+#' tidy(joint_tests(oranges_lm1))
 #'
-#' @name emmeans_tidiers
+#' @aliases emmeans_tidiers
 #' @export
-tidy.lsmobj <- function(x, conf.level = .95, ...) {
-  tidy_emmeans(x, level = conf.level, ...)
+#' @family emmeans tidiers
+#' @seealso [tidy()], [emmeans::ref_grid()], [emmeans::emmeans()],
+#'   [emmeans::contrast()]
+tidy.lsmobj <- function(x, conf.int = FALSE, conf.level = .95, ...) {
+  tidy_emmeans(x, infer = c(conf.int, TRUE), level = conf.level, ...)
 }
 
-
-#' @rdname emmeans_tidiers
+#' @templateVar class ref.grid
+#' @template title_desc_tidy
+#' 
+#' @param x A `ref.grid` object created by [emmeans::ref_grid()].
+#' @inherit tidy.lsmobj params examples details 
+#'   
+#' @evalRd return_tidy(
+#'   "std.error", 
+#'   "df", 
+#'   "conf.low", 
+#'   "conf.high",
+#'   level1 = "One level of the factor being contrasted",
+#'   level2 = "The other level of the factor being contrasted",
+#'   "contrast",
+#'   "p.value",
+#'   statistic = "T-ratio statistic",
+#'   estimate = "Estimated least-squares mean."
+#' )
+#'
 #' @export
+#' @family emmeans tidiers
+#' @seealso [tidy()], [emmeans::ref_grid()], [emmeans::emmeans()],
+#'   [emmeans::contrast()]
 tidy.ref.grid <- function(x, ...) {
   tidy_emmeans(x, ...)
 }
 
-
-#' @rdname emmeans_tidiers
+#' @templateVar class emmGrid
+#' @template title_desc_tidy
+#' 
+#' @param x An `emmGrid` object.
+#' @inherit tidy.lsmobj params examples details 
+#'   
+#' @evalRd return_tidy(
+#'   "std.error", 
+#'   "df", 
+#'   "conf.low", 
+#'   "conf.high",
+#'   level1 = "One level of the factor being contrasted",
+#'   level2 = "The other level of the factor being contrasted",
+#'   "contrast",
+#'   "p.value",
+#'   statistic = "T-ratio statistic",
+#'   estimate = "Estimated least-squares mean."
+#' )
+#'
 #' @export
+#' @family emmeans tidiers
+#' @seealso [tidy()], [emmeans::ref_grid()], [emmeans::emmeans()],
+#'   [emmeans::contrast()]
 tidy.emmGrid <- function(x, ...) {
   tidy_emmeans(x, ...)
 }
 
+#' @templateVar class summary_emm
+#' @template title_desc_tidy
+#' 
+#' @param x An `summary_emm` object.
+#' @inherit tidy.lsmobj params examples details 
+#'   
+#' @evalRd return_tidy(
+#'   "std.error", 
+#'   "df", 
+#'   "num.df",
+#'   "den.df",
+#'   "conf.low", 
+#'   "conf.high",
+#'   level1 = "One level of the factor being contrasted",
+#'   level2 = "The other level of the factor being contrasted",
+#'   "contrast",
+#'   term = "Model term in joint tests",
+#'   "p.value",
+#'   statistic = "T-ratio statistic or F-ratio statistic",
+#'   estimate = "Estimated least-squares mean."
+#' )
+#'
+#' @export
+#' @family emmeans tidiers
+#' @seealso [tidy()], [emmeans::ref_grid()], [emmeans::emmeans()],
+#'   [emmeans::contrast()]
+tidy.summary_emm <- function(x, ...) {
+  tidy_emmeans_summary(x, ...)
+}
+
 tidy_emmeans <- function(x, ...) {
   s <- summary(x, ...)
-  ret <- as.data.frame(s)
-  repl <- c(
-    lsmean = "estimate",
-    emmean = "estimate",
-    pmmean = "estimate",
-    prediction = "estimate",
-    SE = "std.error",
-    lower.CL = "conf.low",
-    upper.CL = "conf.high",
-    t.ratio = "statistic"
-  )
+  tidy_emmeans_summary(s)
+}
 
+tidy_emmeans_summary <- function(x) {
+  ret <- as.data.frame(x)
+  repl <- list(
+    "lsmean" = "estimate",
+    "emmean" = "estimate",
+    "pmmean" = "estimate",
+    "prediction" = "estimate",
+    "SE" = "std.error",
+    "lower.CL" = "conf.low",
+    "upper.CL" = "conf.high",
+    "t.ratio" = "statistic",
+    "F.ratio" = "statistic",
+    "df1" = "num.df",
+    "df2" = "den.df",
+    "model term" = "term"
+  )
+  
   if ("contrast" %in% colnames(ret) &&
-    all(stringr::str_detect(ret$contrast, " - "))) {
+      all(stringr::str_detect(ret$contrast, " - "))) {
     ret <- tidyr::separate_(ret, "contrast",
-      c("level1", "level2"),
-      sep = " - "
+                            c("level1", "level2"),
+                            sep = " - "
     )
   }
-
-  colnames(ret) <- plyr::revalue(colnames(ret), repl, warn_missing = FALSE)
+  
+  colnames(ret) <- dplyr::recode(colnames(ret), !!!(repl))
+  
+  if("term" %in% colnames(ret)) {
+    ret <- ret %>%
+      mutate(term = stringr::str_trim(term))
+  }
+  
   as_tibble(ret)
 }

@@ -4,7 +4,7 @@
 \alias{augment.felm}
 \title{Augment data with information from a(n) felm object}
 \usage{
-\method{augment}{felm}(x, data = NULL, ...)
+\method{augment}{felm}(x, data = model.frame(x), ...)
 }
 \arguments{
 \item{x}{A \code{felm} object returned from \code{\link[lfe:felm]{lfe::felm()}}.}
@@ -26,14 +26,6 @@ proceed using \code{conf.level = 0.95}. Additionally, if you pass
 \code{newdata = my_tibble} to an \code{\link[=augment]{augment()}} method that does not
 accept a \code{newdata} argument, it will use the default value for
 the \code{data} argument.}
-}
-\value{
-A \code{\link[tibble:tibble]{tibble::tibble()}} containing the data passed to \code{augment},
-and \strong{additional} columns:
-
-\item{.fitted}{The predicted response for that observation.}
-\item{.resid}{The residual for a particular point. Present only when
-data has been passed to \code{augment} via the \code{data} argument.}
 }
 \description{
 Augment accepts a model object and a dataset and adds
@@ -74,6 +66,39 @@ We are in the process of defining behaviors for models fit with various
 \link{na.action} arguments, but make no guarantees about behavior when data is
 missing at this time.
 }
+\examples{
+
+library(lfe)
+
+N=1e2
+DT <- data.frame(
+  id = sample(5, N, TRUE),
+  v1 =  sample(5, N, TRUE),
+  v2 =  sample(1e6, N, TRUE),
+  v3 =  sample(round(runif(100,max=100),4), N, TRUE),
+  v4 =  sample(round(runif(100,max=100),4), N, TRUE)
+)
+
+result_felm <- felm(v2~v3, DT)
+tidy(result_felm)
+augment(result_felm)
+
+result_felm <- felm(v2~v3|id+v1, DT)
+tidy(result_felm, fe = TRUE)
+tidy(result_felm, robust = TRUE)
+augment(result_felm)
+
+v1 <- DT$v1
+v2 <- DT$v2
+v3 <- DT$v3
+id <- DT$id
+result_felm <- felm(v2~v3|id+v1)
+
+tidy(result_felm)
+augment(result_felm)
+glance(result_felm)
+
+}
 \seealso{
 \code{\link[=augment]{augment()}}, \code{\link[lfe:felm]{lfe::felm()}}
 
@@ -81,3 +106,9 @@ Other felm tidiers:
 \code{\link{tidy.felm}()}
 }
 \concept{felm tidiers}
+\value{
+A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
+  \item{.fitted}{Fitted or predicted value.}
+  \item{.resid}{The difference between fitted and observed values.}
+
+}

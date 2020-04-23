@@ -21,13 +21,6 @@ proceed using \code{conf.level = 0.95}. Additionally, if you pass
 accept a \code{newdata} argument, it will use the default value for
 the \code{data} argument.}
 }
-\value{
-A \link[tibble:tibble]{tibble::tibble} with one row for each time point and columns:
-
-\item{time}{time point}
-\item{estimate}{estimated survival}
-\item{n.risk}{number of individuals at risk}
-}
 \description{
 Tidy summarizes information about the components of a model.
 A model component might be a single term in a regression, a single
@@ -81,3 +74,10 @@ Other survival tidiers:
 }
 \concept{survexp tidiers}
 \concept{survival tidiers}
+\value{
+A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
+  \item{n.risk}{Number of individuals at risk at time zero.}
+  \item{time}{Point in time.}
+  \item{estimate}{Estimate survival}
+
+}

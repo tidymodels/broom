@@ -3,9 +3,9 @@
 \name{tidy.lm}
 \alias{tidy.lm}
 \alias{lm_tidiers}
-\alias{tidy.summary.lm}
 \title{Tidy a(n) lm object}
 \usage{
+<<<<<<< HEAD
 \method{tidy}{lm}(
   x,
   conf.int = FALSE,
@@ -16,6 +16,9 @@
 )
 
 \method{tidy}{summary.lm}(x, ...)
+=======
+\method{tidy}{lm}(x, conf.int = FALSE, conf.level = 0.95, ...)
+>>>>>>> 3c922d507f7cc758a987a9ef44ae4267ac6ed583
 }
 \arguments{
 \item{x}{An \code{lm} object created by \code{\link[stats:lm]{stats::lm()}}.}
@@ -27,15 +30,6 @@ interval in the tidied output. Defaults to \code{FALSE}.}
 if \code{conf.int = TRUE}. Must be strictly greater than 0 and less than 1.
 Defaults to 0.95, which corresponds to a 95 percent confidence interval.}
 
-\item{exponentiate}{Logical indicating whether or not to exponentiate the
-the coefficient estimates. This is typical for logistic and multinomial
-regressions, but a bad idea if there is no log or logit link. Defaults
-to \code{FALSE}.}
-
-\item{quick}{Logical indiciating if the only the \code{term} and \code{estimate}
-columns should be returned. Often useful to avoid time consuming
-covariance and standard error calculations. Defaults to \code{FALSE}.}
-
 \item{...}{Additional arguments. Not used. Needed to match generic
 signature only. \strong{Cautionary note:} Misspelled arguments will be
 absorbed in \code{...}, where they will be ignored. If the misspelled
@@ -46,28 +40,6 @@ proceed using \code{conf.level = 0.95}. Additionally, if you pass
 accept a \code{newdata} argument, it will use the default value for
 the \code{data} argument.}
 }
-\value{
-A \code{\link[tibble:tibble]{tibble::tibble()}} with one row for each term in the
-regression. The tibble has columns:
-
-\item{term}{The name of the regression term.}
-\item{estimate}{The estimated value of the regression term.}
-\item{std.error}{The standard error of the regression term.}
-\item{statistic}{The value of a statistic, almost always a T-statistic,
-to use in a hypothesis that the regression term is non-zero.}
-\item{p.value}{The two-sided p-value associated with the observed
-statistic.}
-\item{conf.low}{The low end of a confidence interval for the regression
-term. Included only if \code{conf.int = TRUE}.}
-\item{conf.high}{The high end of a confidence interval for the regression
-term. Included only if \code{conf.int = TRUE}.}
-
-If the linear model is an \code{mlm} object (multiple linear model),
-there is an additional column:
-
-\item{response}{Which response column the coefficients correspond to
-(typically Y1, Y2, etc)}
-}
 \description{
 Tidy summarizes information about the components of a model.
 A model component might be a single term in a regression, a single
@@ -77,8 +49,8 @@ If a model has several distinct types of components, you will need to
 specify which components to return.
 }
 \details{
-If you have missing values in your model data, you may need to refit
-the model with \code{na.action = na.exclude}.
+If the linear model is an \code{mlm} object (multiple linear model),
+there is an additional column \code{response}. See \code{\link[=tidy.mlm]{tidy.mlm()}}.
 }
 \examples{
 
@@ -91,16 +63,16 @@ tidy(mod)
 glance(mod)
 
 # coefficient plot
-d <- tidy(mod) \%>\% 
+d <- tidy(mod) \%>\%
   mutate(
     low = estimate - std.error,
     high = estimate + std.error
   )
-  
+
 ggplot(d, aes(estimate, term, xmin = low, xmax = high, height = 0)) +
-     geom_point() +
-     geom_vline(xintercept = 0) +
-     geom_errorbarh()
+  geom_point() +
+  geom_vline(xintercept = 0) +
+  geom_errorbarh()
 
 augment(mod)
 augment(mod, mtcars)
@@ -138,6 +110,24 @@ Other lm tidiers:
 \code{\link{augment.lm}()},
 \code{\link{glance.glm}()},
 \code{\link{glance.lm}()},
+<<<<<<< HEAD
 \code{\link{tidy.glm}()}
+=======
+\code{\link{glance.svyglm}()},
+\code{\link{tidy.glm}()},
+\code{\link{tidy.lm.beta}()},
+\code{\link{tidy.mlm}()}
+>>>>>>> 3c922d507f7cc758a987a9ef44ae4267ac6ed583
 }
 \concept{lm tidiers}
+\value{
+A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
+  \item{conf.high}{Upper bound on the confidence interval for the estimate.}
+  \item{conf.low}{Lower bound on the confidence interval for the estimate.}
+  \item{estimate}{The estimated value of the regression term.}
+  \item{p.value}{The two-sided p-value associated with the observed statistic.}
+  \item{statistic}{The value of a T-statistic to use in a hypothesis that the regression term is non-zero.}
+  \item{std.error}{The standard error of the regression term.}
+  \item{term}{The name of the regression term.}
+
+}

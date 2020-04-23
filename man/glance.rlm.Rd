@@ -20,16 +20,6 @@ proceed using \code{conf.level = 0.95}. Additionally, if you pass
 accept a \code{newdata} argument, it will use the default value for
 the \code{data} argument.}
 }
-\value{
-A one-row \link[tibble:tibble]{tibble::tibble} with columns:
-
-\item{sigma}{The square root of the estimated residual variance}
-\item{converged}{whether the IWLS converged}
-\item{logLik}{the data's log-likelihood under the model}
-\item{AIC}{the Akaike Information Criterion}
-\item{BIC}{the Bayesian Information Criterion}
-\item{deviance}{deviance}
-}
 \description{
 Glance accepts a model object and returns a \code{\link[tibble:tibble]{tibble::tibble()}}
 with exactly one row of model summaries. The summaries are typically
@@ -50,6 +40,7 @@ the measure will be reported as \code{NA}.
 library(MASS)
 
 r <- rlm(stack.loss ~ ., stackloss)
+
 tidy(r)
 augment(r)
 glance(r)
@@ -63,3 +54,14 @@ Other rlm tidiers:
 \code{\link{tidy.rlm}()}
 }
 \concept{rlm tidiers}
+\value{
+A \code{\link[tibble:tibble]{tibble::tibble()}} with exactly one row and columns:
+  \item{AIC}{Akaike's Information Criterion for the model.}
+  \item{BIC}{Bayesian Information Criterion for the model.}
+  \item{converged}{Logical indicating if the model fitting procedure was succesful and converged.}
+  \item{deviance}{Deviance of the model.}
+  \item{logLik}{The log-likelihood of the model. [stats::logLik()] may be a useful reference.}
+  \item{nobs}{Number of observations used.}
+  \item{sigma}{Estimated standard error of the residuals.}
+
+}

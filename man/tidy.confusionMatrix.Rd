@@ -14,7 +14,7 @@
 
 \item{by_class}{Logical indicating whether or not to show performance
 measures broken down by class. Defaults to \code{TRUE}. When \code{by_class = FALSE}
-only returns a tibble with accuracy and kappa statistics.}
+only returns a tibble with accuracy, kappa, and McNemar statistics.}
 
 \item{...}{Additional arguments. Not used. Needed to match generic
 signature only. \strong{Cautionary note:} Misspelled arguments will be
@@ -26,15 +26,6 @@ proceed using \code{conf.level = 0.95}. Additionally, if you pass
 accept a \code{newdata} argument, it will use the default value for
 the \code{data} argument.}
 }
-\value{
-A \link[tibble:tibble]{tibble::tibble} with one or more of the following columns:
-\item{term}{The name of a statistic from the confusion matrix}
-\item{class}{Which class the term is a measurement of}
-\item{estimate}{The value of the statistic}
-\item{conf.low}{Low end of 95 percent CI only applicable to accuracy}
-\item{conf.high}{High end of 95 percent CI only applicable to accuracy}
-\item{p.value}{P-value for accuracy and kappa statistics}
-}
 \description{
 Tidy summarizes information about the components of a model.
 A model component might be a single term in a regression, a single
@@ -45,36 +36,45 @@ specify which components to return.
 }
 \examples{
 
-if (requireNamespace("caret", quietly = TRUE)) {
+library(caret)
 
-  set.seed(27)
-  
-  two_class_sample1 <- as.factor(sample(letters[1:2], 100, TRUE))
-  two_class_sample2 <- as.factor(sample(letters[1:2], 100, TRUE))
-  
-  two_class_cm <- caret::confusionMatrix(
-    two_class_sample1,
-    two_class_sample2
-  )
-  
-  tidy(two_class_cm)
-  tidy(two_class_cm, by_class = FALSE)
-  
-  # multiclass example
-  
-  six_class_sample1 <- as.factor(sample(letters[1:6], 100, TRUE))
-  six_class_sample2 <- as.factor(sample(letters[1:6], 100, TRUE))
-  
-  six_class_cm <- caret::confusionMatrix(
-    six_class_sample1,
-    six_class_sample2
-  )
-  
-  tidy(six_class_cm)
-  tidy(six_class_cm, by_class = FALSE)
-}
+set.seed(27)
+
+two_class_sample1 <- as.factor(sample(letters[1:2], 100, TRUE))
+two_class_sample2 <- as.factor(sample(letters[1:2], 100, TRUE))
+
+two_class_cm <- caret::confusionMatrix(
+  two_class_sample1,
+  two_class_sample2
+)
+
+tidy(two_class_cm)
+tidy(two_class_cm, by_class = FALSE)
+
+# multiclass example
+
+six_class_sample1 <- as.factor(sample(letters[1:6], 100, TRUE))
+six_class_sample2 <- as.factor(sample(letters[1:6], 100, TRUE))
+
+six_class_cm <- caret::confusionMatrix(
+  six_class_sample1,
+  six_class_sample2
+)
+
+tidy(six_class_cm)
+tidy(six_class_cm, by_class = FALSE)
 
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[caret:confusionMatrix]{caret::confusionMatrix()}}
+}
+\value{
+A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
+  \item{class}{The class under consideration.}
+  \item{conf.high}{Upper bound on the confidence interval for the estimate.}
+  \item{conf.low}{Lower bound on the confidence interval for the estimate.}
+  \item{estimate}{The estimated value of the regression term.}
+  \item{term}{The name of the regression term.}
+  \item{p.value}{P-value for accuracy and kappa statistics.}
+
 }

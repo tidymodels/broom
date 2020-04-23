@@ -7,10 +7,10 @@
 \alias{cfa_tidiers}
 \title{Tidy a(n) lavaan object}
 \usage{
-\method{tidy}{lavaan}(x, conf.int = TRUE, conf.level = 0.95, ...)
+\method{tidy}{lavaan}(x, conf.int = FALSE, conf.level = 0.95, ...)
 }
 \arguments{
-\item{x}{A \code{lavaan} object, such as those return from \code{\link[lavaan:cfa]{lavaan::cfa()}},
+\item{x}{A \code{lavaan} object, such as those returned from \code{\link[lavaan:cfa]{lavaan::cfa()}},
 and \code{\link[lavaan:sem]{lavaan::sem()}}.}
 
 \item{conf.int}{Logical indicating whether or not to include a confidence
@@ -24,7 +24,7 @@ Defaults to 0.95, which corresponds to a 95 percent confidence interval.}
 \strong{Cautionary note}: Misspecified arguments may be silently ignored.}
 }
 \value{
-A \link[tibble:tibble]{tibble::tibble} with one row for each estimated parameter and
+A \code{\link[tibble:tibble]{tibble::tibble()}} with one row for each estimated parameter and
 columns:
 
 \item{term}{The result of paste(lhs, op, rhs)}
@@ -55,14 +55,12 @@ specify which components to return.
 }
 \examples{
 
-if (require("lavaan")) {
-
- library(lavaan)
+library(lavaan)
  
- cfa.fit <- cfa('F =~ x1 + x2 + x3 + x4 + x5 + x6 + x7 + x8 + x9',
-                data = HolzingerSwineford1939, group = "school")
- tidy(cfa.fit)
-}
+cfa.fit <- cfa('F =~ x1 + x2 + x3 + x4 + x5 + x6 + x7 + x8 + x9',
+               data = HolzingerSwineford1939, group = "school")
+               
+tidy(cfa.fit)
 
 }
 \seealso{

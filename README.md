@@ -1,11 +1,16 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
+<<<<<<< HEAD
 # broom <img src="man/figures/logo.png" align="right" width="100" height="100" />
+=======
+# broom <img src="man/figures/logo.png" align="right" width="100" />
+>>>>>>> 3c922d507f7cc758a987a9ef44ae4267ac6ed583
 
 [![CRAN
 status](https://www.r-pkg.org/badges/version/broom)](https://cran.r-project.org/package=broom)
 [![Travis-CI Build
+<<<<<<< HEAD
 Status](https://travis-ci.org/tidyverse/broom.svg?branch=master)](https://travis-ci.org/tidyverse/broom)
 [![AppVeyor Build
 Status](https://ci.appveyor.com/api/projects/status/github/tidyverse/broom?branch=master&svg=true)](https://ci.appveyor.com/project/tidyverse/broom)
@@ -15,6 +20,19 @@ Status](https://ci.appveyor.com/api/projects/status/github/tidyverse/broom?branc
 broom summarizes key information about models in tidy `tibble()`s. broom
 provides three verbs to make it convenient to interact with model
 objects:
+=======
+Status](https://travis-ci.org/tidymodels/broom.svg?branch=master)](https://travis-ci.org/tidymodels/broom)
+[![AppVeyor build
+status](https://ci.appveyor.com/api/projects/status/github/tidymodels/broom?branch=master&svg=true)](https://ci.appveyor.com/project/tidymodels/broom)
+[![Coverage
+Status](https://img.shields.io/codecov/c/github/tidymodels/broom/master.svg)](https://codecov.io/github/tidymodels/broom?branch=master)
+
+## Overview
+
+`broom` summarizes key information about models in tidy `tibble()`s.
+`broom` provides three verbs to make it convenient to interact with
+model objects:
+>>>>>>> 3c922d507f7cc758a987a9ef44ae4267ac6ed583
 
   - `tidy()` summarizes information about model components
   - `glance()` reports information about the entire model
@@ -22,9 +40,15 @@ objects:
 
 For a detailed introduction, please see `vignette("broom")`.
 
+<<<<<<< HEAD
 broom tidies 100+ models from popular modelling packages and almost all
 of the model objects in the `stats` package that comes with base R.
 `vignette("available-methods")` lists method availabilty.
+=======
+`broom` tidies 100+ models from popular modelling packages and almost
+all of the model objects in the `stats` package that comes with base R.
+`vignette("available-methods")` lists method availability.
+>>>>>>> 3c922d507f7cc758a987a9ef44ae4267ac6ed583
 
 If you aren’t familiar with tidy data structures and want to know how
 they can make your life easier, we highly recommend reading Hadley
@@ -33,19 +57,23 @@ Wickham’s [Tidy Data](http://www.jstatsoft.org/v59/i10).
 ## Installation
 
 ``` r
-# we recommend installing the entire tidyverse, which includes broom:
-install.packages("tidyverse")
+# we recommend installing the entire tidyverse modeling set, which includes broom:
+install.packages("tidymodels")
 
 # alternatively, to install just broom:
 install.packages("broom")
 
 # to get the development version from GitHub:
 install.packages("devtools")
-devtools::install_github("tidyverse/broom")
+devtools::install_github("tidymodels/broom")
 ```
 
 If you find a bug, please file a minimal reproducible example in the
+<<<<<<< HEAD
 [issues](https://github.com/tidyverse/broom/issues).
+=======
+[issues](https://github.com/tidymodels/broom/issues).
+>>>>>>> 3c922d507f7cc758a987a9ef44ae4267ac6ed583
 
 ## Usage
 
@@ -77,7 +105,11 @@ glance(fit)
 #>   r.squared adj.r.squared sigma statistic p.value    df logLik   AIC   BIC
 #>       <dbl>         <dbl> <dbl>     <dbl>   <dbl> <dbl>  <dbl> <dbl> <dbl>
 #> 1     0.213         0.202 0.389      19.9 2.24e-8     2  -69.8  148.  160.
+<<<<<<< HEAD
 #> # … with 3 more variables: deviance <dbl>, df.residual <int>, nobs <int>
+=======
+#> # ... with 3 more variables: deviance <dbl>, df.residual <int>, nobs <int>
+>>>>>>> 3c922d507f7cc758a987a9ef44ae4267ac6ed583
 ```
 
 `augment` adds columns to a dataset, containing information such as
@@ -88,6 +120,7 @@ overwritten.
 ``` r
 augment(fit, data = iris)
 #> # A tibble: 150 x 11
+<<<<<<< HEAD
 #>    Sepal.Length Sepal.Width Petal.Length Petal.Width Species .fitted  .resid
 #>           <dbl>       <dbl>        <dbl>       <dbl> <fct>     <dbl>   <dbl>
 #>  1          5.1         3.5          1.4         0.2 setosa     3.30 -0.200 
@@ -102,15 +135,37 @@ augment(fit, data = iris)
 #> 10          4.9         3.1          1.5         0.1 setosa     3.24  0.138 
 #> # … with 140 more rows, and 4 more variables: .std.resid <dbl>, .hat <dbl>,
 #> #   .sigma <dbl>, .cooksd <dbl>
+=======
+#>    Sepal.Length Sepal.Width Petal.Length Petal.Width Species .fitted
+#>           <dbl>       <dbl>        <dbl>       <dbl> <fct>     <dbl>
+#>  1          5.1         3.5          1.4         0.2 setosa     3.30
+#>  2          4.9         3            1.4         0.2 setosa     3.30
+#>  3          4.7         3.2          1.3         0.2 setosa     3.33
+#>  4          4.6         3.1          1.5         0.2 setosa     3.27
+#>  5          5           3.6          1.4         0.2 setosa     3.30
+#>  6          5.4         3.9          1.7         0.4 setosa     3.30
+#>  7          4.6         3.4          1.4         0.3 setosa     3.34
+#>  8          5           3.4          1.5         0.2 setosa     3.27
+#>  9          4.4         2.9          1.4         0.2 setosa     3.30
+#> 10          4.9         3.1          1.5         0.1 setosa     3.24
+#> # ... with 140 more rows, and 5 more variables: .resid <dbl>,
+#> #   .std.resid <dbl>, .hat <dbl>, .sigma <dbl>, .cooksd <dbl>
+>>>>>>> 3c922d507f7cc758a987a9ef44ae4267ac6ed583
 ```
 
 ### Contributing
 
 We welcome contributions of all types\!
 
+<<<<<<< HEAD
 If you have never made a pull request to an R package before, broom is
 an excellent place to start. Find an
 [issue](https://github.com/tidyverse/broom/issues/) with the **Beginner
+=======
+If you have never made a pull request to an R package before, `broom` is
+an excellent place to start. Find an
+[issue](https://github.com/tidymodels/broom/issues/) with the **Beginner
+>>>>>>> 3c922d507f7cc758a987a9ef44ae4267ac6ed583
 Friendly** tag and comment that you’d like to take it on and we’ll help
 you get started.
 
@@ -118,9 +173,17 @@ We encourage typo corrections, bug reports, bug fixes and feature
 requests. Feedback on the clarity of the documentation is especially
 valuable.
 
+<<<<<<< HEAD
 If you are interested in adding new tidiers methods to broom, please
 read `vignette("adding-tidiers")`.
 
 We have a [Contributor Code of
 Conduct](https://github.com/tidymodels/broom/blob/master/.github/CODE_OF_CONDUCT.md).
 By participating in broom you agree to abide by its terms.
+=======
+If you are interested in adding new tidiers methods to `broom`, please
+read `vignette("adding-tidiers")`.
+
+We have a [Contributor Code of Conduct](CODE_OF_CONDUCT.md). By
+participating in `broom` you agree to abide by its terms.
+>>>>>>> 3c922d507f7cc758a987a9ef44ae4267ac6ed583

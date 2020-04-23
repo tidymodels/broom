@@ -20,16 +20,6 @@ proceed using \code{conf.level = 0.95}. Additionally, if you pass
 accept a \code{newdata} argument, it will use the default value for
 the \code{data} argument.}
 }
-\value{
-A \link[tibble:tibble]{tibble::tibble} with one row per variable-class-outcome
-combination, with columns:
-
-\item{variable}{Manifest variable}
-\item{class}{Latent class ID, an integer}
-\item{outcome}{Outcome of manifest variable}
-\item{estimate}{Estimated class-conditional response probability}
-\item{std.error}{Standard error of estimated probability}
-}
 \description{
 Tidy summarizes information about the components of a model.
 A model component might be a single term in a regression, a single
@@ -40,63 +30,49 @@ specify which components to return.
 }
 \examples{
 
-if (require("poLCA", quietly = TRUE)) {
-  library(poLCA)
-  library(dplyr)
+library(poLCA)
+library(dplyr)
 
-  data(values)
-  f <- cbind(A, B, C, D)~1
-  M1 <- poLCA(f, values, nclass = 2, verbose = FALSE)
+data(values)
+f <- cbind(A, B, C, D)~1
+M1 <- poLCA(f, values, nclass = 2, verbose = FALSE)
 
-  M1
-  tidy(M1)
-  augment(M1)
-  glance(M1)
+M1
+tidy(M1)
+augment(M1)
+glance(M1)
 
-  library(ggplot2)
+library(ggplot2)
 
-  ggplot(tidy(M1), aes(factor(class), estimate, fill = factor(outcome))) +
-    geom_bar(stat = "identity", width = 1) +
-    facet_wrap(~ variable)
+ggplot(tidy(M1), aes(factor(class), estimate, fill = factor(outcome))) +
+  geom_bar(stat = "identity", width = 1) +
+  facet_wrap(~ variable)
+## Three-class model with a single covariate.
 
-  set.seed(2016)
-  # compare multiple
-  mods <- tibble(nclass = 1:3) \%>\%
-    group_by(nclass) \%>\%
-    do(mod = poLCA(f, values, nclass = .$nclass, verbose = FALSE))
+data(election)
+f2a <- cbind(MORALG,CARESG,KNOWG,LEADG,DISHONG,INTELG,
+             MORALB,CARESB,KNOWB,LEADB,DISHONB,INTELB)~PARTY
+nes2a <- poLCA(f2a, election, nclass = 3, nrep = 5, verbose = FALSE)
 
-  # compare log-likelihood and/or AIC, BIC
-  mods \%>\%
-    glance(mod)
+td <- tidy(nes2a)
+td
 
-  ## Three-class model with a single covariate.
+# show
 
-  data(election)
-  f2a <- cbind(MORALG,CARESG,KNOWG,LEADG,DISHONG,INTELG,
-               MORALB,CARESB,KNOWB,LEADB,DISHONB,INTELB)~PARTY
-  nes2a <- poLCA(f2a, election, nclass = 3, nrep = 5, verbose = FALSE)
+ggplot(td, aes(outcome, estimate, color = factor(class), group = class)) +
+  geom_line() +
+  facet_wrap(~ variable, nrow = 2) +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1))
 
-  td <- tidy(nes2a)
-  td
+au <- augment(nes2a)
+au
+count(au, .class)
 
-  # show
-
-  ggplot(td, aes(outcome, estimate, color = factor(class), group = class)) +
-    geom_line() +
-    facet_wrap(~ variable, nrow = 2) +
-    theme(axis.text.x = element_text(angle = 90, hjust = 1))
-
-  au <- augment(nes2a)
-  au
-  au \%>\%
-    count(.class)
-
-  # if the original data is provided, it leads to NAs in new columns
-  # for rows that weren't predicted
-  au2 <- augment(nes2a, data = election)
-  au2
-  dim(au2)
-}
+# if the original data is provided, it leads to NAs in new columns
+# for rows that weren't predicted
+au2 <- augment(nes2a, data = election)
+au2
+dim(au2)
 
 }
 \seealso{
@@ -107,3 +83,12 @@ Other poLCA tidiers:
 \code{\link{glance.poLCA}()}
 }
 \concept{poLCA tidiers}
+\value{
+A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
+  \item{class}{The class under consideration.}
+  \item{outcome}{Outcome of manifest variable}
+  \item{std.error}{The standard error of the regression term.}
+  \item{variable}{Manifest variable}
+  \item{estimate}{Estimated class-conditional response probability}
+
+}

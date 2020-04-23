@@ -4,14 +4,10 @@
 \alias{tidy.gamlss}
 \title{Tidy a(n) gamlss object}
 \usage{
-\method{tidy}{gamlss}(x, quick = FALSE, ...)
+\method{tidy}{gamlss}(x, ...)
 }
 \arguments{
 \item{x}{A \code{gamlss} object returned from \code{\link[gamlss:gamlss]{gamlss::gamlss()}}.}
-
-\item{quick}{Logical indiciating if the only the \code{term} and \code{estimate}
-columns should be returned. Often useful to avoid time consuming
-covariance and standard error calculations. Defaults to \code{FALSE}.}
 
 \item{...}{Additional arguments. Not used. Needed to match generic
 signature only. \strong{Cautionary note:} Misspelled arguments will be
@@ -22,18 +18,6 @@ proceed using \code{conf.level = 0.95}. Additionally, if you pass
 \code{newdata = my_tibble} to an \code{\link[=augment]{augment()}} method that does not
 accept a \code{newdata} argument, it will use the default value for
 the \code{data} argument.}
-}
-\value{
-A \link[tibble:tibble]{tibble::tibble} with one row for each coefficient, containing columns
-\item{parameter}{Type of coefficient being estimated: \code{mu}, \code{sigma},
-\code{nu}, or \code{tau}.}
-\item{term}{Name of term in the model.}
-\item{estimate}{Estimate coefficient of given term.}
-\item{std.error}{Standard error of given term.}
-\item{statistic}{T-statistic used to test hypothesis that coefficien
-equals zero.}
-\item{p.value}{Two sided p-value based on null hypothesis of coefficient
-equaling zero.}
 }
 \description{
 Tidy summarizes information about the components of a model.
@@ -56,5 +40,16 @@ g <- gamlss(
 )
 
 tidy(g)
+
+}
+\value{
+A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
+  \item{estimate}{The estimated value of the regression term.}
+  \item{p.value}{The two-sided p-value associated with the observed statistic.}
+  \item{statistic}{The value of a T-statistic to use in a hypothesis that the regression term is non-zero.}
+  \item{std.error}{The standard error of the regression term.}
+  \item{term}{The name of the regression term.}
+  \item{parameter}{Type of coefficient being estimated: `mu`, `sigma`,
+    `nu`, or `tau`.}
 
 }

@@ -1,5 +1,8 @@
 context("list-svd")
 
+skip_if_not_installed("modeltests")
+library(modeltests)
+
 mat <- scale(as.matrix(USJudgeRatings))
 s <- svd(mat)
 p <- prcomp(mat)
@@ -14,7 +17,7 @@ test_that("tidy_svd", {
   
   check_tidy_output(tdu)
   check_tidy_output(tdd)
-  check_tidy_output(tdv)
+  check_tidy_output(tdv, strict = FALSE)
   
   check_dims(tdu, 516, 3)
   check_dims(tdd, 12, 4)

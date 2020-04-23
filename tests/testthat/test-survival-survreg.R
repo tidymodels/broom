@@ -1,5 +1,8 @@
 context("survival-survreg")
 
+skip_if_not_installed("modeltests")
+library(modeltests)
+
 skip_if_not_installed("survival")
 library(survival)
 
@@ -13,12 +16,19 @@ test_that("survreg tidier arguments", {
   check_arguments(augment.survreg)
 })
 
-
 test_that("tidy.survreg", {
   td <- tidy(sr)
+  td2 <- tidy(sr, conf.int = TRUE)
+  
   check_tidy_output(td)
-  check_dims(td, 3, 7)
+  check_tidy_output(td2)
+  
+  check_dims(td, 3, 5)
+  check_dims(td2, 3, 7)
+  
   expect_equal(td$term, c("(Intercept)", "ecog.ps", "rx"))
+  expect_equal(td2$term, c("(Intercept)", "ecog.ps", "rx"))
+  
 })
 
 test_that("glance.survreg", {

@@ -6,7 +6,11 @@
 \usage{
 \method{augment}{betareg}(
   x,
+<<<<<<< HEAD
   data = stats::model.frame(x),
+=======
+  data = model.frame(x),
+>>>>>>> 3c922d507f7cc758a987a9ef44ae4267ac6ed583
   newdata = NULL,
   type.predict,
   type.residuals,
@@ -49,13 +53,6 @@ proceed using \code{conf.level = 0.95}. Additionally, if you pass
 accept a \code{newdata} argument, it will use the default value for
 the \code{data} argument.}
 }
-\value{
-augment returns the original data, along with new columns describing
-each observation:
-\item{.fitted}{Fitted values of model}
-\item{.resid}{Residuals}
-\item{.cooksd}{Cooks distance, \code{\link[=cooks.distance]{cooks.distance()}}}
-}
 \description{
 Augment accepts a model object and a dataset and adds
 information about each observation in the dataset. Most commonly, this
@@ -95,6 +92,34 @@ We are in the process of defining behaviors for models fit with various
 \link{na.action} arguments, but make no guarantees about behavior when data is
 missing at this time.
 }
+\details{
+For additional details on Cook's distance, see
+\code{\link[stats:cooks.distance]{stats::cooks.distance()}}.
+}
+\examples{
+
+library(betareg)
+data("GasolineYield", package = "betareg")
+
+mod <- betareg(yield ~ batch + temp, data = GasolineYield)
+
+mod
+tidy(mod)
+tidy(mod, conf.int = TRUE)
+tidy(mod, conf.int = TRUE, conf.level = .99)
+
+augment(mod)
+
+glance(mod)
+
+}
 \seealso{
 \code{\link[=augment]{augment()}}, \code{\link[betareg:betareg]{betareg::betareg()}}
+}
+\value{
+A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
+  \item{.cooksd}{Cooks distance.}
+  \item{.fitted}{Fitted or predicted value.}
+  \item{.resid}{The difference between fitted and observed values.}
+
 }
