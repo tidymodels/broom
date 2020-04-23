@@ -4,10 +4,17 @@
 \alias{tidy.emmGrid}
 \title{Tidy a(n) emmGrid object}
 \usage{
-\method{tidy}{emmGrid}(x, ...)
+\method{tidy}{emmGrid}(x, conf.int = FALSE, conf.level = 0.95, ...)
 }
 \arguments{
 \item{x}{An \code{emmGrid} object.}
+
+\item{conf.int}{Logical indicating whether or not to include a confidence
+interval in the tidied output. Defaults to \code{FALSE}.}
+
+\item{conf.level}{The confidence level to use for the confidence interval
+if \code{conf.int = TRUE}. Must be strictly greater than 0 and less than 1.
+Defaults to 0.95, which corresponds to a 95 percent confidence interval.}
 
 \item{...}{Additional arguments passed to \code{\link[emmeans:summary.emmGrid]{emmeans::summary.emmGrid()}} or
 \code{\link[lsmeans:summary.ref.grid]{lsmeans::summary.ref.grid()}}. \strong{Cautionary note}: misspecified arguments
@@ -22,7 +29,7 @@ If a model has several distinct types of components, you will need to
 specify which components to return.
 }
 \details{
-Returns a data frame with one observation for each estimated
+Returns a data frame with one observation for each estimated marginal
 mean, and one column for each combination of factors. When the input is a
 contrast, each row will contain one estimated contrast.
 
@@ -50,7 +57,7 @@ tidy(contrast(marginal, method = "pairwise"))
 
 # plot confidence intervals
 library(ggplot2)
-ggplot(tidy(marginal), aes(day, estimate)) +
+ggplot(tidy(marginal, conf.int = TRUE), aes(day, estimate)) +
   geom_point() +
   geom_errorbar(aes(ymin = conf.low, ymax = conf.high))
 
@@ -61,7 +68,7 @@ by_price <- emmeans(oranges_lm1, "day", by = "price2",
 by_price
 tidy(by_price)
 
-ggplot(tidy(by_price), aes(price2, estimate, color = day)) +
+ggplot(tidy(by_price, conf.int = TRUE), aes(price2, estimate, color = day)) +
   geom_line() +
   geom_errorbar(aes(ymin = conf.low, ymax = conf.high))
   
@@ -83,13 +90,10 @@ Other emmeans tidiers:
 A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
   \item{conf.high}{Upper bound on the confidence interval for the estimate.}
   \item{conf.low}{Lower bound on the confidence interval for the estimate.}
-  \item{contrast}{Levels being compared.}
   \item{df}{Degrees of freedom used by this term in the model.}
   \item{p.value}{The two-sided p-value associated with the observed statistic.}
   \item{std.error}{The standard error of the regression term.}
-  \item{level1}{One level of the factor being contrasted}
-  \item{level2}{The other level of the factor being contrasted}
+  \item{estimate}{Expected marginal mean}
   \item{statistic}{T-ratio statistic}
-  \item{estimate}{Estimated least-squares mean.}
 
 }
