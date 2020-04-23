@@ -66,6 +66,6 @@ Other multcomp tidiers:
 \concept{multcomp tidiers}
 \value{
 A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
-  \item{lhs}{Left hand side.}
+  \item{contrast}{Levels being compared.}
 
 }

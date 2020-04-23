@@ -21,6 +21,9 @@ This release features a number of unannounced hard-deprecations. I am sorry that
 
 - All `conf.int` arguments now default to `FALSE`, and all `conf.level` arguments now default to `0.95`. This should primarily affect `tidy.survreg()`, which previously always returned confidence intervals, although there are some others.
 
+- Tidiers for `emmeans`-objects use the arguments `conf.int` and `conf.level` instead of relying on the argument names native to the `emmeans::summary()`-methods (i.e., `infer` and `level`). Similarly, `multcomp`-tidiers now include a call to `summary()` as previous behavior was akin to setting the now removed argument `quick = TRUE`. Both families of tidiers now use the `adj.p.value` column name when appropriate. Finally, `emmeans`-, `multcomp`-, and `TukeyHSD`-tidiers now consistently use the column names `contrast` and `null.value` instead of `comparison`, `level1` and `level2`, or `lhs` and `rhs` (see #692).
+
+
 ### Deprecations
 
 This release of `broom` hard-deprecates the following functions and tidiers:
