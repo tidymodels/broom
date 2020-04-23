@@ -33,6 +33,13 @@ hypothesis, a cluster, or a class. Exactly what tidy considers to be a
 model component varies cross models but is usually self-evident.
 If a model has several distinct types of components, you will need to
 specify which components to return.
+<<<<<<< HEAD
+=======
+}
+\details{
+For tidiers for models from the \pkg{robust} package see
+\code{\link[=tidy.lmRob]{tidy.lmRob()}} and \code{\link[=tidy.glmRob]{tidy.glmRob()}}.
+>>>>>>> master
 }
 \seealso{
 \code{\link[MASS:rlm]{MASS::rlm()}}

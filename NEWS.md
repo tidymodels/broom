@@ -1,4 +1,4 @@
-# broom 0.5.6.9000
+# broom 0.7.0.9000
 (To be released as 0.7.0)
 
 ## Breaking changes
@@ -120,7 +120,6 @@ pending getting `safepredict()` going urgh)
 - Added tidiers for `drc::drm` models (#574 by @edild)
 
 - Added `tidy.summary_emm()` (#691 by @crsh)
-
 
 ## Improvements to existing tidiers
 

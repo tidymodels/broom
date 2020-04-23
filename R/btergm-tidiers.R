@@ -33,10 +33,8 @@
 #' 
 #' covariates <- list()
 #' 
-#' for (i in 1:10) {
-#'     mat <- matrix(rnorm(100), nrow = 10, ncol = 10)
-#'     covariates[[i]] <- mat
-#' }
+#' # Create 10 matrices as covariates
+#' covariates <- list()
 #' 
 #' # Fit a model where the propensity to form ties depends
 #' # on the edge covariates, controlling for the number of
