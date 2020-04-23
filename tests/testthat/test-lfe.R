@@ -66,6 +66,7 @@ test_that("glance.felm", {
   check_dims(gl, expected_cols = 8)
   
   expect_error(glance(fit_multi), "Glance does not support linear models with multiple responses.")
+
 })
 
 test_that("augment.felm", {

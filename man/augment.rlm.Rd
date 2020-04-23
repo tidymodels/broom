@@ -75,10 +75,6 @@ We are in the process of defining behaviors for models fit with various
 \link{na.action} arguments, but make no guarantees about behavior when data is
 missing at this time.
 }
-\details{
-For tidiers for models from the \pkg{robust} package see
-\code{\link[=tidy.lmRob]{tidy.lmRob()}} and \code{\link[=tidy.glmRob]{tidy.glmRob()}}.
-}
 \examples{
 
 library(MASS)
@@ -90,6 +86,20 @@ augment(r)
 glance(r)
 
 }
+<<<<<<< HEAD
+=======
+\examples{
+
+library(MASS)
+
+r <- rlm(stack.loss ~ ., stackloss)
+
+tidy(r)
+augment(r)
+glance(r)
+
+}
+>>>>>>> master
 \seealso{
 \code{\link[MASS:rlm]{MASS::rlm()}}
 
