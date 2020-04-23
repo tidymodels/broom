@@ -86,20 +86,6 @@ augment(r)
 glance(r)
 
 }
-<<<<<<< HEAD
-=======
-\examples{
-
-library(MASS)
-
-r <- rlm(stack.loss ~ ., stackloss)
-
-tidy(r)
-augment(r)
-glance(r)
-
-}
->>>>>>> master
 \seealso{
 \code{\link[MASS:rlm]{MASS::rlm()}}
 

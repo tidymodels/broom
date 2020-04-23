@@ -22,19 +22,21 @@
 #' 
 #' networks <- list()
 #' 
-#' for(i in 1:10){
-#'     mat <- matrix(rbinom(100, 1, .25), nrow = 10, ncol = 10)
-#'     diag(mat) <- 0
-#'     nw <- network::network(mat)
-#'     networks[[i]] <- nw
+#' for (i in 1:10) {
+#'   mat <- matrix(rbinom(100, 1, .25), nrow = 10, ncol = 10)
+#'   diag(mat) <- 0
+#'   nw <- network::network(mat)
+#'   networks[[i]] <- nw
 #' }
 #' 
 #' # Create 10 matrices as covariates
 #' 
 #' covariates <- list()
 #' 
-#' # Create 10 matrices as covariates
-#' covariates <- list()
+#' for (i in 1:10) {
+#'   mat <- matrix(rnorm(100), nrow = 10, ncol = 10)
+#'   covariates[[i]] <- mat
+#' }
 #' 
 #' # Fit a model where the propensity to form ties depends
 #' # on the edge covariates, controlling for the number of

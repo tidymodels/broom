@@ -329,12 +329,15 @@ Suggests:
     gamlss,
     gamlss.data,
     gamlss.dist,
+    gee,
     geepack,
     ggplot2,
     glmnet,
+    glmnetUtils,
     gmm,
     Hmisc,
     irlba,
+    joineRML,
     Kendall,
     knitr,
     ks,
@@ -343,6 +346,7 @@ Suggests:
     leaps,
     lfe,
     lm.beta,
+    lme4,
     lmodel2,
     lmtest,
     lsmeans,
@@ -350,6 +354,7 @@ Suggests:
     maptools,
     MASS,
     Matrix,
+    mclogit,
     mclust,
     mediation,
     metafor,
@@ -379,11 +384,7 @@ Suggests:
     systemfit,
     testthat (>= 2.1.0),
     tseries,
-    zoo,
-    glmnetUtils,
-    lme4,
-    gee,
-    mclogit
+    zoo
 VignetteBuilder: 
     knitr
 Encoding: UTF-8

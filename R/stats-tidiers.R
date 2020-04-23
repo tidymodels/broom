@@ -40,12 +40,11 @@ tidy.density <- function(x, ...) {
 #' @template title_desc_tidy
 #' 
 #' @param x A `dist` object returned from [stats::dist()].
+#' 
 #' @param diagonal Logical indicating whether or not to tidy the diagonal 
 #'   elements of the distance matrix. Defaults to whatever was based to the
 #'   `diag` argument of [stats::dist()].
-#' @param upper Logical indicating whether or not to tidy the upper half of
-#'   the distance matrix. Defaults to whatever was based to the
-#'   `upper` argument of [stats::dist()].
+#'   
 #' @template param_unused_dots
 #'
 #' @evalRd return_tidy("item1", "item2", "distance")
