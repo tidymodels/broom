@@ -34,6 +34,11 @@ jobs:
           saveRDS(remotes::dev_package_deps(dependencies = TRUE), ".github/depends.Rds", version = 2)
         shell: Rscript {0}
 
+      - name: Install libomp-dev
+        if: runner.os != 'Linux'
+        run: |
+          sudo apt-get install libomp-dev
+
       - name: Cache R packages
         if: runner.os != 'Windows'
         uses: actions/cache@v1
