@@ -150,6 +150,8 @@ pending getting `safepredict()` going urgh)
 
 - `tidy.lsmobj()` gained a `conf.int` argument for consistency with other tidiers.
 
+- `tidy.polr()` now returns p-values if  `p.values` is set to TRUE and the model does not contain factors with more than two levels.
+
 - `tidy.zoo()` now doesn't change column names that have spaces or other
 special characters (previously they were converted to data.frame friendly
 column names by `make.names`)
