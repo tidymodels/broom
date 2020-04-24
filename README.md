@@ -4,7 +4,7 @@
 # broom <img src="man/figures/logo.png" align="right" width="100" />
 
 [![CRAN status](https://www.r-pkg.org/badges/version/broom)](https://cran.r-project.org/package=broom)
-[![R build status](https://github.com/tidymodels/broom/workflows/R-CMD-check/badge.svg)](https://github.com/tidymodels/broom/actions)[[![Codecov test coverage](https://codecov.io/gh/topepo/broom/branch/master/graph/badge.svg)](https://codecov.io/gh/topepo/broom?branch=master)
+[![R build status](https://github.com/tidymodels/broom/workflows/R-CMD-check/badge.svg)](https://github.com/tidymodels/broom/actions)[[![Codecov test coverage](https://codecov.io/gh/topepo/broom/branch/master/graph/badge.svg)](https://codecov.io/gh/topepo/broom?branch=master) 
 
 ## Overview
 
