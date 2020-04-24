@@ -35,7 +35,7 @@ jobs:
         shell: Rscript {0}
 
       - name: Install libomp-dev
-        if: runner.os != 'Linux'
+        if: runner.os == 'Linux'
         run: |
           sudo apt-get install libomp-dev
 
