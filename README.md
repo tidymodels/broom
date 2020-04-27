@@ -3,14 +3,8 @@
 
 # broom <img src="man/figures/logo.png" align="right" width="100" />
 
-[![CRAN
-status](https://www.r-pkg.org/badges/version/broom)](https://cran.r-project.org/package=broom)
-[![Travis-CI Build
-Status](https://travis-ci.org/tidymodels/broom.svg?branch=master)](https://travis-ci.org/tidymodels/broom)
-[![AppVeyor build
-status](https://ci.appveyor.com/api/projects/status/github/tidymodels/broom?branch=master&svg=true)](https://ci.appveyor.com/project/tidymodels/broom)
-[![Coverage
-Status](https://img.shields.io/codecov/c/github/tidymodels/broom/master.svg)](https://codecov.io/github/tidymodels/broom?branch=master)
+[![CRAN status](https://www.r-pkg.org/badges/version/broom)](https://cran.r-project.org/package=broom)
+[![R build status](https://github.com/tidymodels/broom/workflows/R-CMD-check/badge.svg)](https://github.com/tidymodels/broom/actions)[[![Codecov test coverage](https://codecov.io/gh/topepo/broom/branch/master/graph/badge.svg)](https://codecov.io/gh/topepo/broom?branch=master) 
 
 ## Overview
 
