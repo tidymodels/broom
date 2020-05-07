@@ -89,4 +89,10 @@ test_that("augment.felm", {
     data = df
   )
   expect_error(augment(fit_multi), "Augment does not support linear models with multiple responses.")
+
+  # Ensure that the .resid and .fitted columns are basic columns, not matrix
+  aug <- augment(fit)
+  expect_false(inherits(aug$.resid, "matrix"))
+  expect_false(inherits(aug$.fitted, "matrix"))
+  expect_null(c(colnames(aug$.resid), colnames(aug$.fitted)))
 })

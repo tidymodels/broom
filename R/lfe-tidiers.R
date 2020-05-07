@@ -130,9 +130,7 @@ augment.felm <- function(x, data = model.frame(x), ...) {
     )
   }
   df <- as_broom_tibble(data)
-  mutate(df, .fitted = x$fitted.values, .resid = x$residuals)
-
-
+  mutate(df, .fitted = as.vector(x$fitted.values), .resid = as.vector(x$residuals))
 }
 
 #' @templateVar class felm
