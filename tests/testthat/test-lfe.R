@@ -37,7 +37,7 @@ test_that("tidy.felm", {
   td5 <- tidy(fit, robust = TRUE)
   td6 <- tidy(fit2, robust = TRUE)
   td7 <- tidy(fit2, robust = TRUE, fe = TRUE)
-  
+
   td_multi <- tidy(fit_multi)
 
   check_tidy_output(td1)
@@ -50,39 +50,39 @@ test_that("tidy.felm", {
   check_tidy_output(td_multi)
 
   check_dims(td1, 2, 5)
-  
+
   expect_equal(tidy(fit_multi)[3:4, -1], tidy(fit))
-  expect_equal(dplyr::pull(td5, std.error), 
+  expect_equal(dplyr::pull(td5, std.error),
                as.numeric(lfe:::summary.felm(fit, robust = TRUE)$coef[, "Robust s.e"]))
-  expect_equal(dplyr::pull(td6, std.error), 
+  expect_equal(dplyr::pull(td6, std.error),
                as.numeric(lfe:::summary.felm(fit2, robust = TRUE)$coef[, "Robust s.e"]))
 })
 
 test_that("glance.felm", {
   gl <- glance(fit)
   gl2 <- glance(fit2)
-  
+
   check_glance_outputs(gl, gl2)
   check_dims(gl, expected_cols = 8)
-  
+
   expect_error(glance(fit_multi), "Glance does not support linear models with multiple responses.")
 
 })
 
 test_that("augment.felm", {
-  
+
   check_augment_function(
     aug = augment.felm,
     model = fit,
     data = df
   )
-  
+
   check_augment_function(
     aug = augment.felm,
     model = fit2,
     data = df
   )
-  
+
   check_augment_function(
     aug = augment.felm,
     model = fit_form,
