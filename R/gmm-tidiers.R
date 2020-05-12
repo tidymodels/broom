@@ -33,12 +33,12 @@
 #' # coefficient plot
 #' library(ggplot2)
 #' library(dplyr)
+#' 
 #' tidy(res, conf.int = TRUE) %>%
-#'   mutate(variable = reorder(variable, estimate)) %>%
+#'   mutate(variable = reorder(term, estimate)) %>%
 #'   ggplot(aes(estimate, variable)) +
 #'   geom_point() +
 #'   geom_errorbarh(aes(xmin = conf.low, xmax = conf.high)) +
-#'   facet_wrap(~ term) +
 #'   geom_vline(xintercept = 0, color = "red", lty = 2)
 #'
 #' # from a function instead of a matrix
@@ -66,11 +66,10 @@
 #'
 #' # coefficient plot
 #' td2 %>%
-#'   mutate(variable = reorder(variable, estimate)) %>%
+#'   mutate(variable = reorder(term, estimate)) %>%
 #'   ggplot(aes(estimate, variable)) +
 #'   geom_point() +
 #'   geom_errorbarh(aes(xmin = conf.low, xmax = conf.high)) +
-#'   facet_wrap(~ term) +
 #'   geom_vline(xintercept = 0, color = "red", lty = 2)
 #'
 #' @export
@@ -80,32 +79,25 @@
 tidy.gmm <- function(x, conf.int = FALSE, conf.level = .95,
                      exponentiate = FALSE, ...) {
   
-  co <- stats::coef(summary(x))
-  nn <- c("estimate", "std.error", "statistic", "p.value")
-  ret <- fix_data_frame(co, nn[1:ncol(co)])
-
-  # TODO: bump version requirement and use current returned object
+  coef <- summary(x)$coefficients
+  ret <- as_tibble(coef, rownames = "term")
+  colnames(ret) <- c("term", "estimate", "std.error", "statistic", "p.value")
   
-  # newer versions of GMM create a 'confint' object, so we can't use process_lm
-  ret <- process_lm(ret, x,
-    conf.int = FALSE, conf.level = conf.level,
-    exponentiate = exponentiate
-  )
   if (conf.int) {
-    CI <- suppressMessages(stats::confint(x, level = conf.level))
-    if (!is.matrix(CI)) CI <- CI$test
-    colnames(CI) <- c("conf.low", "conf.high")
-    trans <- if (exponentiate) exp else identity
-    ret <- cbind(ret, trans(unrowname(CI)))
+    # non-standard confint return object, so can't use
+    # broom_confint_terms() like we'd hope
+    
+    ci <- confint(x, level = conf.level)$test
+    ci <- as_tibble(ci, rownames = "term")
+    colnames(ci) <- c("term", "conf.low", "conf.high")
+    ret <- dplyr::left_join(ret, ci, by = "term")
   }
-  if (all(grepl("_", ret$term))) {
-    # separate the variable and term
-    ret <- tidyr::separate(ret, term, c("variable", "term"), sep = "_", extra = "merge")
-  }
-
-  as_tibble(ret)
+  
+  if (exponentiate)
+    ret <- exponentiate(ret)
+  
+  ret
 }
-
 
 #' @templateVar class gmm
 #' @template title_desc_glance
@@ -122,12 +114,15 @@ tidy.gmm <- function(x, conf.int = FALSE, conf.level = .95,
 #' @family gmm tidiers
 #' @seealso [glance()], [gmm::gmm()]
 glance.gmm <- function(x, ...) {
-  s <- gmm::summary.gmm(x)
+  s <- summary(x)
+  
+  # TODO: why do we suppress warnings here?
   st <- suppressWarnings(as.numeric(s$stest$test))
-  ret <- tibble(df = x$df, 
-                statistic = st[1], 
-                p.value = st[2],
-                df.residual = stats::df.residual(x),
-                nobs = stats::nobs(x))
-  ret
+  tibble(
+    df = x$df, 
+    statistic = st[1], 
+    p.value = st[2],
+    df.residual = stats::df.residual(x),
+    nobs = stats::nobs(x)
+  )
 }

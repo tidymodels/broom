@@ -48,6 +48,7 @@ glance(bfit)
 
 # bigglm: logistic regression
 bgfit <- bigglm(am ~ mpg, mtcars, family = binomial())
+
 tidy(bgfit)
 tidy(bgfit, exponentiate = TRUE)
 tidy(bgfit, conf.int = TRUE)
@@ -60,7 +61,8 @@ glance(bgfit)
 \seealso{
 \code{\link[=glance]{glance()}}, \code{\link[biglm:biglm]{biglm::biglm()}}, \code{\link[biglm:bigglm]{biglm::bigglm()}}
 
-Other biglm tidiers: \code{\link{tidy.biglm}}
+Other biglm tidiers: 
+\code{\link{tidy.biglm}()}
 }
 \concept{biglm tidiers}
 \value{

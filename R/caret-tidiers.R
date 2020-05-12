@@ -57,7 +57,7 @@ tidy.confusionMatrix <- function(x, by_class = TRUE, ...) {
 
   if (by_class) {
     # case when only 2 classes
-    if (class(x$byClass) != "matrix") {
+    if (!inherits(x$byClass, "matrix")) {
       classes <-
         x$byClass %>%
         as.data.frame() %>%

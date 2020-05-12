@@ -9,7 +9,7 @@
 #' @param ... Additional arguments passed to [lavaan::parameterEstimates()].
 #'   **Cautionary note**: Misspecified arguments may be silently ignored.
 #'
-#' @return A [tibble::tibble] with one row for each estimated parameter and
+#' @return A [tibble::tibble()] with one row for each estimated parameter and
 #'   columns:
 #'  
 #'   \item{term}{The result of paste(lhs, op, rhs)}
@@ -128,9 +128,8 @@ glance.lavaan <- function(x, ...) {
           "cfi"
         )
     ) %>%
-    as_tibble(rownames = NA) %>%
-    tibble::rownames_to_column(var = "term") %>%
-    spread(., term, value) %>%
+    tibble::enframe(name = "term") %>%
+    spread(term, value) %>%
     bind_cols(
       tibble(
         converged = x@Fit@converged,

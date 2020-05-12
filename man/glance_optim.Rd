@@ -28,8 +28,8 @@ they do not have a class attribute, they cannot be handled by S3 dispatch.
 
 These functions look at the elements of a list and determine if there is
 an appropriate tidying method to apply to the list. Those tidiers are
-themselves are implemented as functions of the form \code{tidy_<function>}
-or \code{glance_<function>} and are not exported (but they are documented!).
+themselves are implemented as functions of the form \verb{tidy_<function>}
+or \verb{glance_<function>} and are not exported (but they are documented!).
 
 If no appropriate tidying method is found, throws an error.
 }
@@ -45,9 +45,12 @@ glance(o)
 \seealso{
 \code{\link[=glance]{glance()}}, \code{\link[=optim]{optim()}}
 
-Other list tidiers: \code{\link{list_tidiers}},
-  \code{\link{tidy_irlba}}, \code{\link{tidy_optim}},
-  \code{\link{tidy_svd}}, \code{\link{tidy_xyz}}
+Other list tidiers: 
+\code{\link{list_tidiers}},
+\code{\link{tidy_irlba}()},
+\code{\link{tidy_optim}()},
+\code{\link{tidy_svd}()},
+\code{\link{tidy_xyz}()}
 }
 \concept{list tidiers}
 \value{

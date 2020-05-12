@@ -46,7 +46,7 @@ summary(zz)
 
 tidy(zz)
 tidy(zz, conf.int = TRUE)
-tidy(zz, conf.int = TRUE, conf.level = .9)
+tidy(zz, conf.int = TRUE, conf.level = 0.9)
 
 augment(zz)
 glance(zz)
@@ -55,8 +55,9 @@ glance(zz)
 \seealso{
 \code{\link[=glance]{glance()}}, \code{\link[plm:plm]{plm::plm()}}
 
-Other plm tidiers: \code{\link{augment.plm}},
-  \code{\link{tidy.plm}}
+Other plm tidiers: 
+\code{\link{augment.plm}()},
+\code{\link{tidy.plm}()}
 }
 \concept{plm tidiers}
 \value{

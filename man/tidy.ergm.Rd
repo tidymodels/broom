@@ -5,8 +5,7 @@
 \alias{ergm_tidiers}
 \title{Tidy a(n) ergm object}
 \usage{
-\method{tidy}{ergm}(x, conf.int = FALSE, conf.level = 0.95,
-  exponentiate = FALSE, ...)
+\method{tidy}{ergm}(x, conf.int = FALSE, conf.level = 0.95, exponentiate = FALSE, ...)
 }
 \arguments{
 \item{x}{An \code{ergm} object returned from a call to \code{\link[ergm:ergm]{ergm::ergm()}}.}
@@ -49,7 +48,6 @@ the \pkg{ergm} class, such as those produced from weighted networks by the
 }
 \examples{
 
-\dontrun{
 library(ergm)
 # Using the same example as the ergm package
 # Load the Florentine marriage network data
@@ -70,7 +68,6 @@ tidy(gest, exponentiate = TRUE, conf.int = TRUE, conf.level = 0.99)
 glance(gest)
 glance(gest, deviance = TRUE)
 glance(gest, mcmc = TRUE)
-}
 
 }
 \references{
@@ -83,6 +80,7 @@ Models for Networks. \emph{Journal of Statistical Software}, 24(3).
 \code{\link[=tidy]{tidy()}}, \code{\link[ergm:ergm]{ergm::ergm()}}, \code{\link[ergm:control.ergm]{ergm::control.ergm()}},
 \code{\link[ergm:summary]{ergm::summary()}}
 
-Other ergm tidiers: \code{\link{glance.ergm}}
+Other ergm tidiers: 
+\code{\link{glance.ergm}()}
 }
 \concept{ergm tidiers}

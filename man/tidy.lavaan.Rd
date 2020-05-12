@@ -24,11 +24,11 @@ Defaults to 0.95, which corresponds to a 95 percent confidence interval.}
 \strong{Cautionary note}: Misspecified arguments may be silently ignored.}
 }
 \value{
-A \link[tibble:tibble]{tibble::tibble} with one row for each estimated parameter and
+A \code{\link[tibble:tibble]{tibble::tibble()}} with one row for each estimated parameter and
 columns:
 
 \item{term}{The result of paste(lhs, op, rhs)}
-\item{op}{The operator in the model syntax (e.g. \code{~~} for covariances, or
+\item{op}{The operator in the model syntax (e.g. \verb{~~} for covariances, or
 \code{~} for regression parameters)}
 \item{group}{The group (if specified) in the lavaan model}
 \item{estimate}{The parameter estimate (may be standardized)}
@@ -67,6 +67,7 @@ tidy(cfa.fit)
 \code{\link[=tidy]{tidy()}}, \code{\link[lavaan:cfa]{lavaan::cfa()}}, \code{\link[lavaan:sem]{lavaan::sem()}},
 \code{\link[lavaan:parameterEstimates]{lavaan::parameterEstimates()}}
 
-Other lavaan tidiers: \code{\link{glance.lavaan}}
+Other lavaan tidiers: 
+\code{\link{glance.lavaan}()}
 }
 \concept{lavaan tidiers}

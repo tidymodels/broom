@@ -73,6 +73,7 @@ glance(cfa.fit)
 \code{\link[=glance]{glance()}}, \code{\link[lavaan:cfa]{lavaan::cfa()}}, \code{\link[lavaan:sem]{lavaan::sem()}},
 \code{\link[lavaan:fitmeasures]{lavaan::fitmeasures()}}
 
-Other lavaan tidiers: \code{\link{tidy.lavaan}}
+Other lavaan tidiers: 
+\code{\link{tidy.lavaan}()}
 }
 \concept{lavaan tidiers}

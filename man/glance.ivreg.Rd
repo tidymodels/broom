@@ -49,6 +49,7 @@ endogenous regressors.
 library(AER)
 
 data("CigarettesSW", package = "AER")
+
 ivr <- ivreg(
   log(packs) ~ income | population,
   data = CigarettesSW,
@@ -59,20 +60,20 @@ summary(ivr)
 
 tidy(ivr)
 tidy(ivr, conf.int = TRUE)
-tidy(ivr, conf.int = TRUE, exponentiate = TRUE)
+tidy(ivr, conf.int = TRUE, instruments = TRUE)
 
 augment(ivr)
 augment(ivr, data = CigarettesSW)
 augment(ivr, newdata = CigarettesSW)
 
 glance(ivr)
-
 }
 \seealso{
 \code{\link[=glance]{glance()}}, \code{\link[AER:ivreg]{AER::ivreg()}}
 
-Other ivreg tidiers: \code{\link{augment.ivreg}},
-  \code{\link{tidy.ivreg}}
+Other ivreg tidiers: 
+\code{\link{augment.ivreg}()},
+\code{\link{tidy.ivreg}()}
 }
 \concept{ivreg tidiers}
 \value{

@@ -21,13 +21,13 @@ test_that("tidy.dist", {
   
   check_arguments(tidy.dist)
   check_tidy_output(td)
-  check_dims(td, 6, 3)
+  check_dims(td, 12, 3)
   
   check_tidy_output(td_upper)
   check_dims(td_upper, 12, 3)
   
   check_tidy_output(td_diag)
-  check_dims(td_diag, 10, 3)
+  check_dims(td_diag, 16, 3)
   
   check_tidy_output(td_all)
   check_dims(td_all, 16, 3)

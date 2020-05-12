@@ -4,8 +4,7 @@
 \alias{tidy.glm}
 \title{Tidy a(n) glm object}
 \usage{
-\method{tidy}{glm}(x, conf.int = FALSE, conf.level = 0.95,
-  exponentiate = FALSE, ...)
+\method{tidy}{glm}(x, conf.int = FALSE, conf.level = 0.95, exponentiate = FALSE, ...)
 }
 \arguments{
 \item{x}{A \code{glm} object returned from \code{\link[stats:glm]{stats::glm()}}.}
@@ -33,17 +32,24 @@ accept a \code{newdata} argument, it will use the default value for
 the \code{data} argument.}
 }
 \description{
-This method wraps \code{\link[=tidy.lm]{tidy.lm()}}.
+Tidy summarizes information about the components of a model.
+A model component might be a single term in a regression, a single
+hypothesis, a cluster, or a class. Exactly what tidy considers to be a
+model component varies cross models but is usually self-evident.
+If a model has several distinct types of components, you will need to
+specify which components to return.
 }
 \seealso{
-\code{\link[=tidy]{tidy()}}, \code{\link[=tidy.lm]{tidy.lm()}}
-
 \code{\link[stats:glm]{stats::glm()}}
 
-Other lm tidiers: \code{\link{augment.glm}},
-  \code{\link{augment.lm}}, \code{\link{glance.glm}},
-  \code{\link{glance.lm}}, \code{\link{glance.svyglm}},
-  \code{\link{tidy.lm.beta}}, \code{\link{tidy.lm}},
-  \code{\link{tidy.mlm}}, \code{\link{tidy.svyglm}}
+Other lm tidiers: 
+\code{\link{augment.glm}()},
+\code{\link{augment.lm}()},
+\code{\link{glance.glm}()},
+\code{\link{glance.lm}()},
+\code{\link{glance.svyglm}()},
+\code{\link{tidy.lm.beta}()},
+\code{\link{tidy.lm}()},
+\code{\link{tidy.mlm}()}
 }
 \concept{lm tidiers}

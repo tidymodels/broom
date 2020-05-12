@@ -38,10 +38,14 @@ specify which components to return.
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[quantreg:nlrq]{quantreg::nlrq()}}
 
-Other quantreg tidiers: \code{\link{augment.nlrq}},
-  \code{\link{augment.rqs}}, \code{\link{augment.rq}},
-  \code{\link{glance.nlrq}}, \code{\link{glance.rq}},
-  \code{\link{tidy.rqs}}, \code{\link{tidy.rq}}
+Other quantreg tidiers: 
+\code{\link{augment.nlrq}()},
+\code{\link{augment.rqs}()},
+\code{\link{augment.rq}()},
+\code{\link{glance.nlrq}()},
+\code{\link{glance.rq}()},
+\code{\link{tidy.rqs}()},
+\code{\link{tidy.rq}()}
 }
 \concept{quantreg tidiers}
 \value{

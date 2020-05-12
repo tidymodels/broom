@@ -30,7 +30,7 @@ If a model has several distinct types of components, you will need to
 specify which components to return.
 }
 \details{
-Returns a data frame with one observation for each estimated
+Returns a data frame with one observation for each estimated marginal
 mean, and one column for each combination of factors. When the input is a
 contrast, each row will contain one estimated contrast.
 
@@ -58,7 +58,7 @@ tidy(contrast(marginal, method = "pairwise"))
 
 # plot confidence intervals
 library(ggplot2)
-ggplot(tidy(marginal), aes(day, estimate)) +
+ggplot(tidy(marginal, conf.int = TRUE), aes(day, estimate)) +
   geom_point() +
   geom_errorbar(aes(ymin = conf.low, ymax = conf.high))
 
@@ -69,7 +69,7 @@ by_price <- emmeans(oranges_lm1, "day", by = "price2",
 by_price
 tidy(by_price)
 
-ggplot(tidy(by_price), aes(price2, estimate, color = day)) +
+ggplot(tidy(by_price, conf.int = TRUE), aes(price2, estimate, color = day)) +
   geom_line() +
   geom_errorbar(aes(ymin = conf.low, ymax = conf.high))
   
@@ -81,9 +81,10 @@ tidy(joint_tests(oranges_lm1))
 \code{\link[=tidy]{tidy()}}, \code{\link[emmeans:ref_grid]{emmeans::ref_grid()}}, \code{\link[emmeans:emmeans]{emmeans::emmeans()}},
 \code{\link[emmeans:contrast]{emmeans::contrast()}}
 
-Other emmeans tidiers: \code{\link{tidy.emmGrid}},
-  \code{\link{tidy.ref.grid}},
-  \code{\link{tidy.summary_emm}}
+Other emmeans tidiers: 
+\code{\link{tidy.emmGrid}()},
+\code{\link{tidy.ref.grid}()},
+\code{\link{tidy.summary_emm}()}
 }
 \concept{emmeans tidiers}
 \value{
@@ -94,9 +95,8 @@ A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
   \item{df}{Degrees of freedom used by this term in the model.}
   \item{p.value}{The two-sided p-value associated with the observed statistic.}
   \item{std.error}{The standard error of the regression term.}
-  \item{level1}{One level of the factor being contrasted}
-  \item{level2}{The other level of the factor being contrasted}
+  \item{null.value}{Value to which estimate is compared}
+  \item{estimate}{Expected marginal mean}
   \item{statistic}{T-ratio statistic}
-  \item{estimate}{Estimated least-squares mean.}
 
 }

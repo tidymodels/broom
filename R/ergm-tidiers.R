@@ -22,7 +22,6 @@
 #'
 #' @examples
 #' 
-#' \dontrun{
 #' library(ergm)
 #' # Using the same example as the ergm package
 #' # Load the Florentine marriage network data
@@ -43,7 +42,6 @@
 #' glance(gest)
 #' glance(gest, deviance = TRUE)
 #' glance(gest, mcmc = TRUE)
-#' }
 #' 
 #' @references Hunter DR, Handcock MS, Butts CT, Goodreau SM, Morris M (2008b).
 #'   \pkg{ergm}: A Package to Fit, Simulate and Diagnose Exponential-Family
@@ -57,6 +55,12 @@
 #' @family ergm tidiers
 tidy.ergm <- function(x, conf.int = FALSE, conf.level = 0.95,
                       exponentiate = FALSE,  ...) {
+  
+  # in ergm 3.9 summary(x, ...)$coefs has columns:
+  #   Estimate, Std. Error, MCMC %, Pr(>|Z|)
+  
+  # in ergm 3.10 summary(x, ...)$coefs has columns:
+  #   Estimate, Std. Error, MCMC %, z value, Pr(>|Z|)
   
   ret <- summary(x, ...)$coefs %>% 
     tibble::rownames_to_column() %>% 

@@ -4,8 +4,7 @@
 \alias{augment.rlm}
 \title{Augment data with information from a(n) rlm object}
 \usage{
-\method{augment}{rlm}(x, data = model.frame(x), newdata = NULL,
-  se_fit = FALSE, ...)
+\method{augment}{rlm}(x, data = model.frame(x), newdata = NULL, se_fit = FALSE, ...)
 }
 \arguments{
 \item{x}{An \code{rlm} object returned by \code{\link[MASS:rlm]{MASS::rlm()}}.}
@@ -76,15 +75,12 @@ We are in the process of defining behaviors for models fit with various
 \link{na.action} arguments, but make no guarantees about behavior when data is
 missing at this time.
 }
-\details{
-For tidiers for models from the \pkg{robust} package see
-\code{\link[=tidy.lmRob]{tidy.lmRob()}} and \code{\link[=tidy.glmRob]{tidy.glmRob()}}.
-}
 \examples{
 
 library(MASS)
 
 r <- rlm(stack.loss ~ ., stackloss)
+
 tidy(r)
 augment(r)
 glance(r)
@@ -93,8 +89,9 @@ glance(r)
 \seealso{
 \code{\link[MASS:rlm]{MASS::rlm()}}
 
-Other rlm tidiers: \code{\link{glance.rlm}},
-  \code{\link{tidy.rlm}}
+Other rlm tidiers: 
+\code{\link{glance.rlm}()},
+\code{\link{tidy.rlm}()}
 }
 \concept{rlm tidiers}
 \value{

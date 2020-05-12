@@ -5,7 +5,7 @@
 \alias{multcomp_tidiers}
 \title{Tidy a(n) glht object}
 \usage{
-\method{tidy}{glht}(x, ...)
+\method{tidy}{glht}(x, conf.int = FALSE, conf.level = 0.95, ...)
 }
 \arguments{
 \item{x}{A \code{glht} object returned by \code{\link[multcomp:glht]{multcomp::glht()}}.}
@@ -57,15 +57,15 @@ tidy(cld)
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[multcomp:glht]{multcomp::glht()}}
 
-Other multcomp tidiers: \code{\link{tidy.cld}},
-  \code{\link{tidy.confint.glht}},
-  \code{\link{tidy.summary.glht}}
+Other multcomp tidiers: 
+\code{\link{tidy.cld}()},
+\code{\link{tidy.confint.glht}()},
+\code{\link{tidy.summary.glht}()}
 }
 \concept{multcomp tidiers}
 \value{
 A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
+  \item{contrast}{Levels being compared.}
   \item{estimate}{The estimated value of the regression term.}
-  \item{lhs}{Left hand side.}
-  \item{rhs}{Right hand side.}
 
 }

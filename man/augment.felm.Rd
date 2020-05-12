@@ -85,9 +85,10 @@ augment(result_felm)
 
 result_felm <- felm(v2~v3|id+v1, DT)
 tidy(result_felm, fe = TRUE)
+tidy(result_felm, robust = TRUE)
 augment(result_felm)
 
-v1<-DT$v1
+v1 <- DT$v1
 v2 <- DT$v2
 v3 <- DT$v3
 id <- DT$id
@@ -101,7 +102,8 @@ glance(result_felm)
 \seealso{
 \code{\link[=augment]{augment()}}, \code{\link[lfe:felm]{lfe::felm()}}
 
-Other felm tidiers: \code{\link{tidy.felm}}
+Other felm tidiers: 
+\code{\link{tidy.felm}()}
 }
 \concept{felm tidiers}
 \value{

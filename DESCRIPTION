@@ -1,8 +1,8 @@
 Type: Package
 Package: broom
 Title: Convert Statistical Objects into Tidy Tibbles
-Version: 0.5.2.9002
-Authors@R: 
+Version: 0.7.0.9000
+Authors@R:
     c(person(given = "David",
              family = "Robinson",
              role = "aut",
@@ -275,7 +275,12 @@ Authors@R:
              family = "Macfarlane",
              role = "ctb",
              email = "gregmacfarlane@gmail.com",
-             comment = c(ORCID = "0000-0003-3999-7584"))       
+             comment = c(ORCID = "0000-0003-3999-7584")),
+      person(given = "Shiro",
+             family = "Kuriwaki",
+             role = "ctb",
+             email = "shirokuriwaki@gmail.com",
+             comment = c(ORCID = "0000-0002-5687-2647")))
    )
 Description: Summarizes key information about statistical
     objects in tidy tibbles. This makes it easy to report results, create
@@ -304,7 +309,7 @@ Imports:
     reshape2,
     rlang,
     stringr,
-    tibble,
+    tibble (>= 3.0.0),
     tidyr
 Suggests:
     AER,
@@ -330,9 +335,11 @@ Suggests:
     gamlss,
     gamlss.data,
     gamlss.dist,
+    gee,
     geepack,
     ggplot2,
     glmnet,
+    glmnetUtils,
     gmm,
     Hmisc,
     irlba,
@@ -345,6 +352,7 @@ Suggests:
     leaps,
     lfe,
     lm.beta,
+    lme4,
     lmodel2,
     lmtest,
     lsmeans,
@@ -352,6 +360,7 @@ Suggests:
     maptools,
     MASS,
     Matrix,
+    mclogit,
     mclust,
     mediation,
     metafor,
@@ -380,19 +389,18 @@ Suggests:
     survey,
     survival,
     systemfit,
-    testthat,
+    testthat (>= 2.1.0),
     tseries,
-    xergm,
     zoo
-Remotes:
-    alexpghayes/modeltests
+VignetteBuilder:
+    knitr
 Encoding: UTF-8
-Language: en-US
 LazyData: true
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 6.1.1
+RoxygenNote: 7.1.0
 Collate:
     'aaa-documentation-helper.R'
+    'null-and-default-tidiers.R'
     'aer-tidiers.R'
     'auc-tidiers.R'
     'base-tidiers.R'
@@ -413,6 +421,7 @@ Collate:
     'ergm-tidiers.R'
     'gam-tidiers.R'
     'gamlss-tidiers.R'
+    'gee.R'
     'geepack-tidiers.R'
     'glmnet-cv-glmnet-tidiers.R'
     'glmnet-glmnet-tidiers.R'
@@ -438,6 +447,7 @@ Collate:
     'mass-ridgelm-tidiers.R'
     'stats-lm-tidiers.R'
     'mass-rlm-tidiers.R'
+    'mclogit.R'
     'mclust-tidiers.R'
     'mediate-tidiers.R'
     'mgcv-tidiers.R'
@@ -446,7 +456,6 @@ Collate:
     'multcomp-tidiers.R'
     'nnet-tidiers.R'
     'nobs.R'
-    'null-and-default-tidiers.R'
     'orcutt-tidiers.R'
     'ordinal-clm-tidiers.R'
     'ordinal-clmm-tidiers.R'

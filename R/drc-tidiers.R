@@ -6,17 +6,12 @@
 #' @template param_unused_dots
 #'
 #' @evalRd return_tidy(   
-#'       curveid = "Id of the curve",   
-#'       "term",
-#'       "estimate",
-#'       "std.error",
-#'       "statistic",
-#'       "p.value",
-#'       "conf.low",
-#'       "conf.high"
+#'   curve = "Index identifying the curve.",
+#'   regression = TRUE
 #' )
-#' @details The tibble has one row for each curve and term in the regression. The
-#'   `curveid` column indicates the curve.
+#' 
+#' @details The tibble has one row for each curve and term in the regression.
+#'   The `curveid` column indicates the curve.
 #'  
 #' @examples 
 #' 
@@ -41,16 +36,14 @@ tidy.drc <- function(x, conf.int = FALSE, conf.level = 0.95, ...) {
   
   ret <- coef(summary(x))
   ret <- as_tibble(ret, rownames = "term")
-  ret <- tidyr::separate(ret, term, c("term", "curve"))
-  
-  names(ret) <- c("term", "curve", "estimate", "std.error", "statistic", "p.value")
+  names(ret) <- c("term", "estimate", "std.error", "statistic", "p.value")
 
   if (conf.int) {
     ci <- broom_confint_terms(x, level = conf.level)
     ret <- dplyr::left_join(ret, ci, by = "term")
   }
   
-  ret
+  tidyr::separate(ret, term, c("term", "curve"))
 }
 
 #' @templateVar class drc

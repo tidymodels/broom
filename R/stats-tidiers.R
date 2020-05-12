@@ -40,18 +40,17 @@ tidy.density <- function(x, ...) {
 #' @template title_desc_tidy
 #' 
 #' @param x A `dist` object returned from [stats::dist()].
+#' 
 #' @param diagonal Logical indicating whether or not to tidy the diagonal 
 #'   elements of the distance matrix. Defaults to whatever was based to the
 #'   `diag` argument of [stats::dist()].
-#' @param upper Logical indicating whether or not to tidy the upper half of
-#'   the distance matrix. Defaults to whatever was based to the
-#'   `upper` argument of [stats::dist()].
+#'   
 #' @template param_unused_dots
 #'
 #' @evalRd return_tidy("item1", "item2", "distance")
 #' 
-#' @details If the distance matrix does not include an upper triangle and/or
-#'   diagonal, the tidied version will not either.
+#' @details If the distance matrix does not include the diagonal,
+#'   the tidied version will not either.
 #' 
 #' @examples
 #'
@@ -66,16 +65,11 @@ tidy.density <- function(x, ...) {
 #' @seealso [tidy()], [stats::dist()]
 #' @family stats tidiers
 #' 
-tidy.dist <- function(x, diagonal = attr(x, "Diag"),
-                      upper = attr(x, "Upper"), ...) {
+tidy.dist <- function(x, diagonal = attr(x, "Diag"), ...) {
   m <- as.matrix(x)
 
   ret <- as_tibble(m, rownames = 'item1')
   ret <- tidyr::gather(ret, item2, distance, -item1)
-  
-  if (!upper) {
-    ret <- ret[!upper.tri(m), ]
-  }
 
   if (!diagonal) {
     ret <- dplyr::filter(ret, item1 != item2)

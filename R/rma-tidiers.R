@@ -4,7 +4,8 @@
 #' @param x An `rma` object such as those created by [metafor::rma()],
 #'   [metafor::rma.uni()], [metafor::rma.glmm()], [metafor::rma.mh()],
 #'   [metafor::rma.mv()], or [metafor::rma.peto()].
-#' @inheritParams tidy.lm
+#' @template param_confint
+#' @template param_exponentiate
 #' @param include_studies Logical. Should individual studies be included in the
 #'    output? Defaults to `FALSE`.
 #' @template param_unused_dots
@@ -42,8 +43,9 @@
 #'
 #' @rdname metafor_tidiers
 #' 
-tidy.rma <- function(x, conf.int = FALSE, conf.level = 0.95, exponentiate = FALSE,
-                     include_studies = FALSE, measure = "GEN", ...) {
+tidy.rma <- function(x, conf.int = FALSE, conf.level = 0.95,
+                     exponentiate = FALSE, include_studies = FALSE,
+                     measure = "GEN", ...) {
   # tidy summary estimates
   betas <- x$beta
   if (!is.null(nrow(betas)) && nrow(betas) > 1) {
