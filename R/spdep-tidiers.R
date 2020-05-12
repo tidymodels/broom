@@ -17,17 +17,21 @@
 #'   
 #' tidy(crime_sar)
 #' tidy(crime_sar, conf.int = TRUE)
+#' glance(crime_sar)
+#' augment(crime_sar)
 #' 
 #' crime_sem <- errorsarlm(CRIME ~ INC + HOVAL, data=COL.OLD, listw)
 #' 
 #' tidy(crime_sem)
 #' tidy(crime_sem, conf.int = TRUE)
+#' glance(crime_sem)
+#' augment(crime_sem)
 #'
 #' 
-#' @aliases spdep_tidiers
+#' @aliases spatialreg_tidiers
 #' @export
-#' @family spdep tidiers
-#' @seealso [tidy()], [spatialreg::lagsarlm()]
+#' @family spatialreg tidiers
+#' @seealso [tidy()], [spatialreg::lagsarlm()], [spatialreg::errorsarlm()]
 tidy.sarlm <- function(x, conf.int = FALSE, conf.level = .95, ...) {
   # construct parameter table
   s <- summary(x)
@@ -67,9 +71,56 @@ tidy.sarlm <- function(x, conf.int = FALSE, conf.level = .95, ...) {
     ret <- dplyr::left_join(ret, ci, by = "term")
   }
   
-  
-  
   ret
+}
+
+#' @templateVar class spatialreg
+#' @template title_desc_augment
+#'
+#' @template augment_NAs
+#'
+#' @inherit tidy.sarlm params examples
+#'
+#' @export
+#' @seealso [augment()],[mlogit::miscmethods.mlogit()]
+#' @family spatialreg tidiers
+augment.sarlm <- function(x) {
+  
+  reg <- as_tibble(x$X) %>%
+    select(-1) %>%
+    dplyr::mutate(
+      y = x$y,
+      .fitted = x$fitted.values, 
+      .resid = x$residuals
+    )
+  
+  #TODO: Extend for spatial lags of variables
+  
+  reg
   
 }
 
+
+#' @templateVar class spatialreg
+#' @template title_desc_glance
+#' 
+#' @inherit tidy.sarlm params examples
+#' 
+#' @evalRd return_glance("logLik", "AIC", "BIC", "deviance", "logLik", "nobs")
+#' @export
+#' @family spatialreg tidiers
+#' @seealso [glance()], [spatialreg::lagsarlm()], [spatialreg::errorsarlm()]
+glance.sarlm <- function(x) {
+  
+  res <- tibble(
+      # Using Pseudo R squared.
+      r.squared = cor(x$fitted.values, x$y)^2,
+      AIC = stats::AIC(x),
+      BIC = stats::BIC(x),
+      deviance = stats::deviance(x),
+      logLik = as.numeric(x$LL),
+      nobs = length(x$fitted.values)
+    )
+  
+  res
+}
