@@ -4,27 +4,12 @@
 \alias{tidy.summary_emm}
 \title{Tidy a(n) summary_emm object}
 \usage{
-\method{tidy}{summary_emm}(x, ...)
-
-\method{tidy}{summary_emm}(x, ...)
+\method{tidy}{summary_emm}(x, null.value = NULL)
 }
 \arguments{
-\item{x}{An \code{summary_emm} object.}
-
-\item{...}{Additional arguments passed to \code{\link[emmeans:summary.emmGrid]{emmeans::summary.emmGrid()}} or
-\code{\link[lsmeans:summary.ref.grid]{lsmeans::summary.ref.grid()}}. \strong{Cautionary note}: misspecified arguments
-may be silently ignored!}
-
-\item{x}{An \code{summary_emm} object.}
+\item{x}{A \code{summary_emm} object.}
 }
 \description{
-Tidy summarizes information about the components of a model.
-A model component might be a single term in a regression, a single
-hypothesis, a cluster, or a class. Exactly what tidy considers to be a
-model component varies cross models but is usually self-evident.
-If a model has several distinct types of components, you will need to
-specify which components to return.
-
 Tidy summarizes information about the components of a model.
 A model component might be a single term in a regression, a single
 hypothesis, a cluster, or a class. Exactly what tidy considers to be a
@@ -84,31 +69,12 @@ tidy(joint_tests(oranges_lm1))
 \code{\link[=tidy]{tidy()}}, \code{\link[emmeans:ref_grid]{emmeans::ref_grid()}}, \code{\link[emmeans:emmeans]{emmeans::emmeans()}},
 \code{\link[emmeans:contrast]{emmeans::contrast()}}
 
-\code{\link[=tidy]{tidy()}}, \code{\link[emmeans:ref_grid]{emmeans::ref_grid()}}, \code{\link[emmeans:emmeans]{emmeans::emmeans()}},
-\code{\link[emmeans:contrast]{emmeans::contrast()}}
-
-Other emmeans tidiers: \code{\link{tidy.emmGrid}},
-  \code{\link{tidy.lsmobj}}, \code{\link{tidy.ref.grid}}
-
-Other emmeans tidiers: \code{\link{tidy.emmGrid}},
-  \code{\link{tidy.lsmobj}}, \code{\link{tidy.ref.grid}}
+Other emmeans tidiers: 
+\code{\link{tidy.emmGrid}()},
+\code{\link{tidy.lsmobj}()},
+\code{\link{tidy.ref.grid}()}
 }
 \concept{emmeans tidiers}
-\value{
-A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
-  \item{conf.high}{Upper bound on the confidence interval for the estimate.}
-  \item{conf.low}{Lower bound on the confidence interval for the estimate.}
-  \item{contrast}{Levels being compared.}
-  \item{den.df}{Degrees of freedom of the denominator}
-  \item{df}{Degrees of freedom used by this term in the model.}
-  \item{num.df}{Degrees of freedom}
-  \item{p.value}{The two-sided p-value associated with the observed statistic.}
-  \item{std.error}{The standard error of the regression term.}
-  \item{null.value}{Value to which estimate is compared}
-  \item{estimate}{Expected marginal mean}
-  \item{statistic}{T-ratio statistic}
-
-}
 \value{
 A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
   \item{conf.high}{Upper bound on the confidence interval for the estimate.}
@@ -122,7 +88,8 @@ A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
   \item{level1}{One level of the factor being contrasted}
   \item{level2}{The other level of the factor being contrasted}
   \item{term}{Model term in joint tests}
+  \item{null.value}{Value to which estimate is compared}
+  \item{estimate}{Expected marginal mean}
   \item{statistic}{T-ratio statistic or F-ratio statistic}
-  \item{estimate}{Estimated least-squares mean.}
 
 }
