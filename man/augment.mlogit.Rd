@@ -4,8 +4,7 @@
 \alias{augment.mlogit}
 \title{Augment data with information from a(n) mlogit object}
 \usage{
-\method{augment}{mlogit}(x, data = model.frame(x), newdata = NULL,
-  se_fit = FALSE, ...)
+\method{augment}{mlogit}(x, data = model.frame(x), ...)
 }
 \arguments{
 \item{x}{A \code{mlogit} object returned from \code{\link[mlogit:mlogit]{mlogit::mlogit()}}.}
@@ -18,15 +17,6 @@ Augment will report information such as influence and cooks distance for
 data passed to the \code{data} argument. These measures are only defined for
 the original training data.}
 
-\item{newdata}{A \code{\link[=data.frame]{data.frame()}} or \code{\link[tibble:tibble]{tibble::tibble()}} containing all
-the original predictors used to create \code{x}. Defaults to \code{NULL}, indicating
-that nothing has been passed to \code{newdata}. If \code{newdata} is specified,
-the \code{data} argument will be ignored.}
-
-\item{se_fit}{Logical indicating whether or not a \code{.se.fit} column should be
-added to the augmented output. For some models, this calculation can be
-somwhat time-consuming. Defaults to \code{FALSE}.}
-
 \item{...}{Additional arguments. Not used. Needed to match generic
 signature only. \strong{Cautionary note:} Misspelled arguments will be
 absorbed in \code{...}, where they will be ignored. If the misspelled
@@ -36,6 +26,15 @@ proceed using \code{conf.level = 0.95}. Additionally, if you pass
 \code{newdata = my_tibble} to an \code{\link[=augment]{augment()}} method that does not
 accept a \code{newdata} argument, it will use the default value for
 the \code{data} argument.}
+
+\item{newdata}{A \code{\link[=data.frame]{data.frame()}} or \code{\link[tibble:tibble]{tibble::tibble()}} containing all
+the original predictors used to create \code{x}. Defaults to \code{NULL}, indicating
+that nothing has been passed to \code{newdata}. If \code{newdata} is specified,
+the \code{data} argument will be ignored.}
+
+\item{se_fit}{Logical indicating whether or not a \code{.se.fit} column should be
+added to the augmented output. For some models, this calculation can be
+somwhat time-consuming. Defaults to \code{FALSE}.}
 }
 \description{
 Augment accepts a model object and a dataset and adds
@@ -95,6 +94,7 @@ Fish <- mlogit.data(Fishing, varying = c(2:9), shape = "wide", choice = "mode")
 fish.mnl <- mlogit(mode ~ price + catch, data = Fish)
 
 tidy(fish.mnl)
+tidy(fish.mnl, conf.int = 0.9)
 glance(fish.mnl)
 augment(fish.mnl)
 
@@ -105,8 +105,9 @@ augment(fish.mnl)
 
 \code{\link[=augment]{augment()}},\code{\link[mlogit:miscmethods.mlogit]{mlogit::miscmethods.mlogit()}}
 
-Other mlogit tidiers: \code{\link{glance.mlogit}},
-  \code{\link{tidy.mlogit}}
+Other mlogit tidiers: 
+\code{\link{glance.mlogit}()},
+\code{\link{tidy.mlogit}()}
 }
 \concept{mlogit tidiers}
 \value{

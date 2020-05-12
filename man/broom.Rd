@@ -102,11 +102,11 @@ Other contributors:
   \item Frederik Aust \email{frederik.aust@uni-koeln.de} (\href{https://orcid.org/0000-0003-4900-788X}{ORCID}) [contributor]
   \item Angus Moore \email{angusmoore9@gmail.com} [contributor]
   \item Nick Williams \email{ntwilliams.personal@gmail.com} [contributor]
-  \item Greg Macfarlane \email{gregmacfarlane@gmail.com} (0000-0003-3999-7584) [contributor]
   \item Marius Barth \email{marius.barth.uni.koeln@gmail.com} (\href{https://orcid.org/0000-0002-3421-6665}{ORCID}) [contributor]
   \item Bruna Wundervald \email{brunadaviesw@gmail.com} (\href{https://orcid.org/0000-0001-8163-220X}{ORCID}) [contributor]
   \item Joyce Cahoon \email{joyceyu48@gmail.com} (\href{https://orcid.org/0000-0001-7217-4702}{ORCID}) [contributor]
   \item Kevin Zarca \email{kevin.zarca@gmail.com} [contributor]
+  \item Greg Macfarlane \email{gregmacfarlane@gmail.com} (\href{https://orcid.org/0000-0003-3999-7584}{ORCID}) [contributor]
   \item Shiro Kuriwaki \email{shirokuriwaki@gmail.com} (\href{https://orcid.org/0000-0002-5687-2647}{ORCID}) [contributor]
 }
 

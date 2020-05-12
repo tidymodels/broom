@@ -5,8 +5,7 @@
 \alias{mlogit_tidiers}
 \title{Tidying methods for multinomial logistic regression models}
 \usage{
-\method{tidy}{mlogit}(x, conf.int = FALSE, conf.level = 0.95,
-  exponentiate = FALSE, ...)
+\method{tidy}{mlogit}(x, conf.int = FALSE, conf.level = 0.95, exponentiate = FALSE, ...)
 }
 \arguments{
 \item{x}{A \code{mlogit} object returned from \code{\link[mlogit:mlogit]{mlogit::mlogit()}}.}
@@ -46,6 +45,7 @@ Fish <- mlogit.data(Fishing, varying = c(2:9), shape = "wide", choice = "mode")
 fish.mnl <- mlogit(mode ~ price + catch, data = Fish)
 
 tidy(fish.mnl)
+tidy(fish.mnl, conf.int = 0.9)
 glance(fish.mnl)
 augment(fish.mnl)
 
@@ -54,8 +54,9 @@ augment(fish.mnl)
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[mlogit:mlogit]{mlogit::mlogit()}}
 
-Other mlogit tidiers: \code{\link{augment.mlogit}},
-  \code{\link{glance.mlogit}}
+Other mlogit tidiers: 
+\code{\link{augment.mlogit}()},
+\code{\link{glance.mlogit}()}
 }
 \concept{mlogit tidiers}
 \value{

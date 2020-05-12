@@ -43,6 +43,7 @@ Fish <- mlogit.data(Fishing, varying = c(2:9), shape = "wide", choice = "mode")
 fish.mnl <- mlogit(mode ~ price + catch, data = Fish)
 
 tidy(fish.mnl)
+tidy(fish.mnl, conf.int = 0.9)
 glance(fish.mnl)
 augment(fish.mnl)
 
@@ -51,8 +52,9 @@ augment(fish.mnl)
 \seealso{
 \code{\link[=glance]{glance()}}, \code{\link[mlogit:mlogit]{mlogit::mlogit()}}
 
-Other mlogit tidiers: \code{\link{augment.mlogit}},
-  \code{\link{tidy.mlogit}}
+Other mlogit tidiers: 
+\code{\link{augment.mlogit}()},
+\code{\link{tidy.mlogit}()}
 }
 \concept{mlogit tidiers}
 \value{
