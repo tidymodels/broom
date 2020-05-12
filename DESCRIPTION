@@ -280,7 +280,7 @@ Authors@R:
              family = "Kuriwaki",
              role = "ctb",
              email = "shirokuriwaki@gmail.com",
-             comment = c(ORCID = "0000-0002-5687-2647")))
+             comment = c(ORCID = "0000-0002-5687-2647"))
    )
 Description: Summarizes key information about statistical
     objects in tidy tibbles. This makes it easy to report results, create
