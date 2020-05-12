@@ -64,13 +64,11 @@ tidy.mlogit <- function(x, conf.int = FALSE, conf.level = .95,
 #' @export
 #' @seealso [augment()],[mlogit::miscmethods.mlogit()]
 #' @family mlogit tidiers
-augment.mlogit <- function(x, data = model.frame(x), newdata = NULL,
-                       se_fit = FALSE, ...) {
-  augment_newdata(x, data, newdata, se_fit) %>%
-    tidyr::separate(.rownames, into = c("id", "alternative")) %>%
-    dplyr::rename(.probability = probabilities, .utility = linpred,
-                  .fitted = .fitted)
-  
+augment.mlogit <- function(x, data = model.frame(x), ...) {
+  data %>%
+    as_tibble(rownames = "id.alt") %>%
+    tidyr::separate("id.alt", c("id", "alt")) %>%
+    dplyr::rename(.probability = probabilities, .utility = linpred)
 }
 
 
