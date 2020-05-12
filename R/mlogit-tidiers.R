@@ -19,6 +19,7 @@
 #' fish.mnl <- mlogit(mode ~ price + catch, data = Fish)
 #' 
 #' tidy(fish.mnl)
+#' tidy(fish.mnl, conf.int = 0.9)
 #' glance(fish.mnl)
 #' augment(fish.mnl)
 #' 
@@ -30,9 +31,20 @@
 tidy.mlogit <- function(x, conf.int = FALSE, conf.level = .95,
                           exponentiate = FALSE, ...) {
   s <- summary(x)
-  ret <- tidy.summary.lm(s)
-  process_lm(ret, x, conf.int = conf.int, conf.level = conf.level, 
-             exponentiate = exponentiate)
+  ret <- as_tibble(s$CoefTable, rownames = "term")
+  colnames(ret) <- c("term", "estimate", "std.error", "statistic", "p.value")
+  
+  if (conf.int) {
+    ci <- confint(x, level = conf.level)
+    ci <- as_tibble(ci, rownames = "term")
+    colnames(ci) <- c("term", "conf.low", "conf.high")
+    ret <- dplyr::left_join(ret, ci, by = "term")
+  }
+  
+  if (exponentiate) 
+    ret <- exponentiate(ret)
+  
+  ret
 }
 
 #' @templateVar class mlogit
