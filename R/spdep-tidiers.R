@@ -26,6 +26,15 @@
 #' tidy(crime_sem, conf.int = TRUE)
 #' glance(crime_sem)
 #' augment(crime_sem)
+#' 
+#' model with both paramets - rho, lambda    
+#' crime_SAC <- sacsarlm(CRIME ~ INC + HOVAL, data=COL.OLD, listw)
+#' 
+#' tidy.sarlm(crime_SAC)
+#' tidy.sarlm(crime_SAC, conf.int = T)
+#' glance.sarlm(crime_SAC)
+#' augment.sarlm(crime_SAC)
+#' 
 #'
 #' 
 #' @aliases spatialreg_tidiers
@@ -39,7 +48,7 @@ tidy.sarlm <- function(x, conf.int = FALSE, conf.level = .95, ...) {
   colnames(ret) <- c("term", "estimate", "std.error", "statistic", "p.value")
   
   # append spatial autoregression coefficient to parameter table
-  if (!is.null(s$rho) == T) {
+  if (!is.null(s$rho) == T & !is.null(s$lambda) == F) {
     # if SAR model, get rho and append to table
     ret2 <- tibble(
         term = "rho",
@@ -49,7 +58,7 @@ tidy.sarlm <- function(x, conf.int = FALSE, conf.level = .95, ...) {
         p.value = as.numeric(2 * (1 - pnorm( abs(statistic) ) ) )
       )
     ret = rbind(ret, ret2)
-  } else if (!is.null(s$lambda))  {
+  } else if (!is.null(s$lambda) & !is.null(s$rho) == F)  {
     # if SEM model, get lambda and append to table
     ret2 <- tibble(
       term = "lambda",
@@ -61,6 +70,21 @@ tidy.sarlm <- function(x, conf.int = FALSE, conf.level = .95, ...) {
     colnames(ret2) <- c("term", "estimate", "std.error", "statistic", "p.value")
     ret = rbind(ret, ret2)
   }
+  # Accounting if Model has BOTH parametrs lambda and rho
+  else if (!is.null(s$lambda) & !is.null(s$rho) == T)  {
+    # If model has both parametrs, appends them and return
+    ret2 <- tibble(
+      term = c("lambda", "rho"),
+      estimate = c(as.numeric(s$lambda), as.numeric(s$rho)),
+      std.error = c(as.numeric(s$lambda.se), as.numeric(s$rho.se)),
+      statistic = c((as.numeric(estimate / std.error))),
+      p.value = as.numeric(2 * (1 - pnorm( abs(statistic) ) ) )
+    )
+    colnames(ret2) <- c("term", "estimate", "std.error", "statistic", "p.value")
+    ret = rbind(ret, ret2)
+  }
+  
+  
   
   
   # Calculate confidence interval
@@ -73,7 +97,6 @@ tidy.sarlm <- function(x, conf.int = FALSE, conf.level = .95, ...) {
   
   ret
 }
-
 #' @templateVar class spatialreg
 #' @template title_desc_augment
 #'
