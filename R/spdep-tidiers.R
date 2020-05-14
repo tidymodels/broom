@@ -40,7 +40,7 @@
 #' @aliases spatialreg_tidiers
 #' @export
 #' @family spatialreg tidiers
-#' @seealso [tidy()], [spatialreg::lagsarlm()], [spatialreg::errorsarlm()]
+#' @seealso [tidy()], [spatialreg::lagsarlm()], [spatialreg::errorsarlm()], [spatialreg::sacsarlm()]
 tidy.sarlm <- function(x, conf.int = FALSE, conf.level = .95, ...) {
   # construct parameter table
   s <- summary(x)
