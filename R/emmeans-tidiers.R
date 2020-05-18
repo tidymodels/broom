@@ -150,7 +150,7 @@ tidy.emmGrid <- function(x, conf.int = FALSE, conf.level = .95, ...) {
 #' @seealso [tidy()], [emmeans::ref_grid()], [emmeans::emmeans()],
 #'   [emmeans::contrast()]
 
-tidy.summary_emm <- function(x, null.value = NULL) {
+tidy.summary_emm <- function(x, null.value = NULL, ...) {
   tidy_emmeans_summary(x, null.value = null.value)
 }
 
