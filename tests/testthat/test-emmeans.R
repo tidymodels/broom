@@ -116,7 +116,7 @@ test_that("tidy.ref.grid consistency with tidy.glht", {
   
   expect_equal(
     as.data.frame(td_emm)
-    , as.data.frame(tidy_glht)
+    , as.data.frame(purrr::map_dfr(tidy_glht, unname))
     , tolerance = 0.000001
   )
 })
