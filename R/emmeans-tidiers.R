@@ -126,6 +126,7 @@ tidy.emmGrid <- function(x, conf.int = FALSE, conf.level = .95, ...) {
 #' @template title_desc_tidy
 #' 
 #' @param x A `summary_emm` object.
+#' @param null.value Value to which estimate is compared.
 #' @inherit tidy.lsmobj params examples details 
 #'   
 #' @evalRd return_tidy(
