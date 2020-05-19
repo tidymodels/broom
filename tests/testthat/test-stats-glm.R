@@ -44,7 +44,7 @@ test_that("glance.glm works", {
 
 
 test_that("augment.glm", {
-  skip()
+  skip("come back to glm augment checks")
   
   check_augment_function(
     aug = augment.glm,
