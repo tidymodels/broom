@@ -25,14 +25,14 @@ the \code{data} argument.}
 Tidy summarizes information about the components of a model.
 A model component might be a single term in a regression, a single
 hypothesis, a cluster, or a class. Exactly what tidy considers to be a
-model component varies cross models but is usually self-evident.
+model component varies across models but is usually self-evident.
 If a model has several distinct types of components, you will need to
 specify which components to return.
 }
 \details{
 Returns a data frame in long format with four columns. Use
-\code{tidyr::spread(..., variable, value)} on the output to return to a
-wide format.
+\code{tidyr::pivot_wider(..., names_from = variable, values_from = value)}
+on the output to return to a wide format.
 }
 \examples{
 
@@ -49,7 +49,9 @@ library(dplyr)
 library(tidyr)
 
 td \%>\% 
-  spread(variable, value) \%>\% 
+  pivot_wider(c(obs, estimate), 
+              names_from = variable, 
+              values_from = value) \%>\% 
   ggplot(aes(x1, x2, fill = estimate)) +
   geom_tile() +
   theme_void()
