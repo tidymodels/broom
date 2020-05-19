@@ -60,7 +60,11 @@ tidy.lmodel2 <- function(x, ...) {
     tidyr::gather(key, value, -Method) %>%
     tidyr::separate(key, c("level", "term"), "-") %>%
     mutate(level = ifelse(level == "2.5%", "conf.low", "conf.high")) %>%
-    tidyr::spread(level, value) %>%
+    tidyr::pivot_wider(c(Method, term), 
+                       names_from = level, 
+                       values_from = value) %>%
+    dplyr::arrange(Method) %>%
+    as.data.frame() %>%
     select(method = Method, term, conf.low, conf.high)
 
   ret %>%

@@ -30,9 +30,9 @@ General guidelines:
 - Follow the [tidyverse style conventions](http://style.tidyverse.org/). You can use the [`styler`](https://github.com/r-lib/styler) package to reformat your code according to these conventions, and the [`lintr`](https://github.com/jimhester/lintr) package to check that your code meets the conventions.
 - Use new tidyverse packages such as `dplyr` and `tidyr` over older packages such as `plyr` and `reshape2`.
 - It's better to have a predictable number of columns and unknown number rows than an unknown number of columns and a predictable number of rows.
-- It's better for users to need to `tidyr::spread`than `tidyr::gather` data after it's been tidied.
+- It's better for users to need to `tidyr::pivot_wider`than `tidyr::pivot_longer` data after it's been tidied.
 - Add yourself as a contributor to `DESCRIPTION`.
-- Pull requests must pass the AppVeyor and Travis CI builds to be merged.
+- Pull requests must pass the GitHub builds to be merged.
 - When in doubt, please reach out to the maintainers. We are happy to help with any questions.
 
 If you are just getting into open source development, `broom` is an excellent place to get started and we are more than happy to help. We recommend you start contributing by improving the documentation, writing issues with reproducible errors, or taking on issues tagged `beginner-friendly`.

@@ -81,10 +81,17 @@ tidy.felm <- function(x, conf.int = FALSE, conf.level = .95, fe = FALSE, robust 
 
     if(has_multi_response) {
       ret_fe_prep <-  ret_fe_prep  %>%
-        tidyr::gather(key = "stat_resp", value, starts_with("effect."), starts_with("se.")) %>%
-        tidyr::separate(col = "stat_resp", c("stat", "response"), sep="\\.") %>%
-        tidyr::spread(key = "stat", value)
-      # nn <-  c("response", nn)
+        tidyr::gather(key = "stat_resp", 
+                      value, 
+                      starts_with("effect."), starts_with("se.")) %>%
+        tidyr::separate(col = "stat_resp", 
+                        c("stat", "response"), 
+                        sep="\\.") %>%
+        tidyr::pivot_wider(id_cols = c(term, N, comp, response), 
+                           names_from = stat, 
+                           values_from = value) %>%
+        dplyr::arrange(term) %>%
+        as.data.frame()
     }
     ret_fe <-  ret_fe_prep %>%
       rename(estimate = effect, std.error = se) %>%

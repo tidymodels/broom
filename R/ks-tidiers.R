@@ -7,8 +7,8 @@
 #' @evalRd return_tidy("obs", "variable", "value", "estimate")
 #' 
 #' @details Returns a data frame in long format with four columns. Use
-#'   `tidyr::spread(..., variable, value)` on the output to return to a 
-#'   wide format.
+#'   \code{tidyr::pivot_wider(..., names_from = variable, values_from = value)} 
+#'   on the output to return to a wide format.
 #'
 #' @examples
 #'
@@ -25,7 +25,9 @@
 #' library(tidyr)
 #' 
 #' td %>% 
-#'   spread(variable, value) %>% 
+#'   pivot_wider(c(obs, estimate), 
+#'               names_from = variable, 
+#'               values_from = value) %>% 
 #'   ggplot(aes(x1, x2, fill = estimate)) +
 #'   geom_tile() +
 #'   theme_void()

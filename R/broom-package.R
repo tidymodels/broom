@@ -15,7 +15,7 @@
 #' 
 #' @importFrom purrr map_df set_names possibly
 #' @importFrom tibble tibble as_tibble
-#' @importFrom tidyr gather spread
+#' @importFrom tidyr gather pivot_wider
 #' @importFrom dplyr select filter mutate mutate_at
 #' 
 #' @importFrom utils head
