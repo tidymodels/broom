@@ -34,7 +34,7 @@ tidy.speedglm <- function(x, conf.int = FALSE, conf.level = 0.95,
   
   # for some reason the p.value column is a factor, so
   # undo that nonsense
-  ret$p.value <- as.numeric(levels(ret$p.value))
+  ret$p.value <- as.numeric(levels(ret$p.value))[ret$p.value]
   
   if (conf.int) {
     ci <- broom_confint_terms(x, level = conf.level)

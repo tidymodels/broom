@@ -149,7 +149,6 @@ augment_columns <- function(x, data, newdata = NULL, type, type.predict = type,
   args <- c(args, list(...))
 
 
-
   if ("panelmodel" %in% class(x)) {
     # work around for panel models (plm)
     # stat::predict() returns wrong fitted values when applied to random or

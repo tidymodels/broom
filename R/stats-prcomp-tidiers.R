@@ -31,7 +31,7 @@
 #'     component. That is, the location of the observation in PCA space.}
 #'     
 #'   If `matrix` is `"v"`, `"rotation"`, `"loadings"` or `"variables"`, each 
-#'   row in the tidied ouput corresponds to information about the principle 
+#'   row in the tidied output corresponds to information about the principle 
 #'   components in the original space. The columns are:
 #'   
 #'   \item{`row`}{The variable labels (colnames) of the data set on

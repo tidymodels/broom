@@ -23,9 +23,7 @@ Bojanowski
 brms
 btergm
 Buerkner
-bugfixes
 Bundock
-calcalutes
 cch
 CFA
 Chiu
@@ -36,7 +34,6 @@ clmm
 CMD
 codecov
 coeftest
-coercable
 coercible
 confint
 confusionMatrix
@@ -175,7 +172,6 @@ Portnoy
 prcomp
 predict's
 PRs
-punctation
 pyears
 Qhat
 quantreg
@@ -217,13 +213,12 @@ stepfunctions
 stl
 succesful
 summaryDefault
-supportted
 survdiff
 survexp
 survfit
 survreg
 svd
-syvglm
+svyglm
 svyolr
 systemfit
 TBD

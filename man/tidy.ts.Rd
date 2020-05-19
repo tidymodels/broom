@@ -28,7 +28,7 @@ If a model has several distinct types of components, you will need to
 specify which components to return.
 }
 \details{
-\code{series} column is only present for multivairate \code{ts} objects.
+\code{series} column is only present for multivariate \code{ts} objects.
 }
 \examples{
 

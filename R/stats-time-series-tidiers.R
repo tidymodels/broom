@@ -6,7 +6,7 @@
 #' 
 #' @evalRd return_tidy("index", "series", "value")
 #' 
-#' @details `series` column is only present for multivairate `ts` objects.
+#' @details `series` column is only present for multivariate `ts` objects.
 #' 
 #' @examples
 #'

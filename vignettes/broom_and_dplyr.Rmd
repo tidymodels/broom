@@ -107,7 +107,7 @@ Orange %>%
 
 Note that the `.drop` argument to `tidyr::unnest` is often useful.
 
-This workflow becomes even more useful when applied to regressions. Untidy ouput for a regression looks like:
+This workflow becomes even more useful when applied to regressions. Untidy output for a regression looks like:
 
 ```{r}
 lm_fit <- lm(age ~ circumference, data = Orange)
