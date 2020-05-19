@@ -11,6 +11,8 @@ ct <- lmtest::coeftest(fit)
 
 test_that("tidy.coeftest", {
   
+  skip_on_os("linux")
+  
   check_arguments(tidy.coeftest)
   
   td <- tidy(ct)
