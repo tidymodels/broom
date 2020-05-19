@@ -24,7 +24,7 @@ interval in the tidied output. Defaults to \code{FALSE}.}
 if \code{conf.int = TRUE}. Must be strictly greater than 0 and less than 1.
 Defaults to 0.95, which corresponds to a 95 percent confidence interval.}
 
-\item{conf.type}{Whether to use \code{"profile"} or \code{"Wald"} confidendence
+\item{conf.type}{Whether to use \code{"profile"} or \code{"Wald"} confidence
 intervals, passed to the \code{type} argument of \code{\link[ordinal:confint.clm]{ordinal::confint.clm()}}.
 Defaults to \code{"profile"}.}
 

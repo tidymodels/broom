@@ -4,7 +4,7 @@
 #' @param x A `clm` object returned from [ordinal::clm()].
 #' @template param_confint
 #' @template param_exponentiate
-#' @param conf.type Whether to use `"profile"` or `"Wald"` confidendence
+#' @param conf.type Whether to use `"profile"` or `"Wald"` confidence
 #'   intervals, passed to the `type` argument of [ordinal::confint.clm()].
 #'   Defaults to `"profile"`.
 #' @template param_unused_dots

@@ -188,7 +188,7 @@ column names by `make.names`)
 
 - Fixes failing CRAN checks
 
-- Changes to accomodate ergm 3.10 release. `tidy.ergm()` no longer
+- Changes to accommodate ergm 3.10 release. `tidy.ergm()` no longer
   has a `quick` argument. The old default of `quick = FALSE` is
   now the only option.
 

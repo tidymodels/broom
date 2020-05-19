@@ -71,7 +71,7 @@ All new tidiers should be fully documented following the [tidyverse code documen
 
 Documentation should be written in R markdown as much as possible.
 
-There'll be a major overhaul of documentation later this summer, at which point this portion of the vignette will also get some major updates.
+There will be a major overhaul of documentation later this summer, at which point this portion of the vignette will also get some major updates.
 
 # Testing new tidiers
 

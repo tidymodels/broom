@@ -21,8 +21,8 @@ Defaults to 0.95, which corresponds to a 95 percent confidence interval.}
 \item{fe}{Logical indicating whether or not to include estimates of
 fixed effects. Defaults to \code{FALSE}.}
 
-\item{robust}{Logical indicating robust or clustered SEs should be used.
-See lfe::summary.felm for details. Defaults to \code{FALSE}.}
+\item{robust}{Logical indicating robust or clustered standard errors should
+be used. See lfe::summary.felm for details. Defaults to \code{FALSE}.}
 
 \item{...}{Additional arguments. Not used. Needed to match generic
 signature only. \strong{Cautionary note:} Misspelled arguments will be

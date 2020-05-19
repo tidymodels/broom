@@ -5,8 +5,8 @@
 #' @template param_confint
 #' @param fe Logical indicating whether or not to include estimates of
 #'   fixed effects. Defaults to `FALSE`.
-#' @param robust Logical indicating robust or clustered SEs should be used.
-#'   See lfe::summary.felm for details. Defaults to `FALSE`.
+#' @param robust Logical indicating robust or clustered standard errors should 
+#'   be used. See lfe::summary.felm for details. Defaults to `FALSE`.
 #' @template param_unused_dots
 #'
 #' @evalRd return_tidy(regression = TRUE)
