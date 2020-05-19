@@ -10,7 +10,8 @@
 #' @param ... Additional arguments passed to [quantreg::summary.rq()].
 #'
 #' @details If `se.type = "rank"` confidence intervals are calculated by 
-#'   `summary.rq` and `statistic` and `p.value` values are not returned. When only a single predictor is included in the model, 
+#'   `summary.rq` and `statistic` and `p.value` values are not returned. 
+#'   When only a single predictor is included in the model, 
 #'   no confidence intervals are calculated and the confidence limits are
 #'   set to NA. 
 #' 

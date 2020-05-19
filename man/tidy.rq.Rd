@@ -35,7 +35,8 @@ specify which components to return.
 }
 \details{
 If \code{se.type = "rank"} confidence intervals are calculated by
-\code{summary.rq} and \code{statistic} and \code{p.value} values are not returned. When only a single predictor is included in the model,
+\code{summary.rq} and \code{statistic} and \code{p.value} values are not returned.
+When only a single predictor is included in the model,
 no confidence intervals are calculated and the confidence limits are
 set to NA.
 }
