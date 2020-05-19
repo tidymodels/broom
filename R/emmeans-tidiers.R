@@ -126,6 +126,7 @@ tidy.emmGrid <- function(x, conf.int = FALSE, conf.level = .95, ...) {
 #' @template title_desc_tidy
 #' 
 #' @param x A `summary_emm` object.
+#' @param null.value Value to which estimate is compared.
 #' @inherit tidy.lsmobj params examples details 
 #'   
 #' @evalRd return_tidy(
@@ -150,7 +151,7 @@ tidy.emmGrid <- function(x, conf.int = FALSE, conf.level = .95, ...) {
 #' @seealso [tidy()], [emmeans::ref_grid()], [emmeans::emmeans()],
 #'   [emmeans::contrast()]
 
-tidy.summary_emm <- function(x, null.value = NULL) {
+tidy.summary_emm <- function(x, null.value = NULL, ...) {
   tidy_emmeans_summary(x, null.value = null.value)
 }
 

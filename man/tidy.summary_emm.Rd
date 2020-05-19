@@ -4,10 +4,16 @@
 \alias{tidy.summary_emm}
 \title{Tidy a(n) summary_emm object}
 \usage{
-\method{tidy}{summary_emm}(x, null.value = NULL)
+\method{tidy}{summary_emm}(x, null.value = NULL, ...)
 }
 \arguments{
 \item{x}{A \code{summary_emm} object.}
+
+\item{null.value}{Value to which estimate is compared.}
+
+\item{...}{Additional arguments passed to \code{\link[emmeans:summary.emmGrid]{emmeans::summary.emmGrid()}} or
+\code{\link[lsmeans:summary.ref.grid]{lsmeans::summary.ref.grid()}}. \strong{Cautionary note}: misspecified arguments
+may be silently ignored!}
 }
 \description{
 Tidy summarizes information about the components of a model.

@@ -2,6 +2,7 @@
 #' @template title_desc_tidy
 #' 
 #' @param x A `glht` object returned by [multcomp::glht()].
+#' @template param_confint
 #' @template param_unused_dots
 #' 
 #' @evalRd return_tidy("contrast", "null.value", "estimate")
