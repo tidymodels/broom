@@ -52,12 +52,16 @@ tidy.lmodel2 <- function(x, ...) {
       Intercept,
       Slope,
       p.value = `P-perm (1-tailed)`) %>%
-    tidyr::gather(term, estimate, -method, -p.value) %>%
+    pivot_longer(cols = c(dplyr::everything(), -method, -p.value),
+                 names_to = "term",
+                 values_to = "estimate") %>%
     arrange(method, term)
 
   # add confidence intervals
   confints <- x$confidence.intervals %>%
-    tidyr::gather(key, value, -Method) %>%
+    pivot_longer(cols = c(dplyr::everything(), -Method),
+                 names_to = "key",
+                 values_to = "value")
     tidyr::separate(key, c("level", "term"), "-") %>%
     mutate(level = ifelse(level == "2.5%", "conf.low", "conf.high")) %>%
     tidyr::pivot_wider(c(Method, term), 

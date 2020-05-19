@@ -193,7 +193,9 @@ augment_chisq_test <- function(x, ...) {
 tidy.pairwise.htest <- function(x, ...) {
   tibble(group1 = rownames(x$p.value)) %>%
     cbind(x$p.value) %>%
-    tidyr::gather(group2, p.value, -group1) %>%
+    pivot_longer(cols = c(dplyr::everything(), -group1),
+                 names_to = "group2",
+                 values_to = "p.value") %>%
     stats::na.omit() %>% 
     as_tibble()
 }

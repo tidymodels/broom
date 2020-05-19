@@ -40,5 +40,7 @@ tidy.zoo <- function(x, ...) {
   ret <- data.frame(as.matrix(x), index = zoo::index(x))
   ret <- tibble::as_tibble(ret)
   colnames(ret)[1:ncol(x)] <- colnames(x)
-  tidyr::gather(ret, series, value, -index)
+  pivot_longer(ret, cols = c(dplyr::everything(), -index), 
+               names_to = "series", 
+               values_to = "value")
 }

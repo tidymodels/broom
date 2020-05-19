@@ -8,7 +8,7 @@
 #' 
 #' @return A [tibble::tibble] in long-form containing frequency information
 #'   for the table in a `Freq` column. The result is much like what you get
-#'   from [tidyr::gather()].
+#'   from [tidyr::pivot_longer()].
 #'   
 #' @details Directly calls [tibble::as_tibble()] on a [table] object, which
 #'   does the same things as [as.data.frame.table()] but also gives the

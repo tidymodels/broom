@@ -63,7 +63,7 @@ tidy.lavaan <- function(x, conf.int = FALSE, conf.level = 0.95, ...) {
       conf.low = ci.lower,
       conf.high = ci.upper
     ) %>%
-    select(term, op, everything(), -rowname, -lhs, -rhs) %>%
+    select(term, op, dplyr::everything(), -rowname, -lhs, -rhs) %>%
     as_tibble()
 }
 

@@ -64,14 +64,20 @@ tidy.glmnet <- function(x, return_zeros = FALSE, ...) {
       fix_data_frame(as.matrix(b), newnames = 1:ncol(b), newcol = "term")
     }, .id = "class")
     ret <- beta_d %>% 
-      tidyr::gather(step, estimate, -term, -class)
+      pivot_longer(cols = c(everything(), -term, -class),
+                   names_to = "step",
+                   values_to = "estimate")
   } else {
     beta_d <- fix_data_frame(
       as.matrix(beta),
       newnames = 1:ncol(beta),
       newcol = "term"
     )
-    ret <- tidyr::gather(beta_d, step, estimate, -term)
+    ret <- pivot_longer(beta_d,
+                        cols = c(dplyr::everything(), -term),
+                        names_to = "step",
+                        values_to = "estimate")
+    
   }
   # add values specific to each step
   ret <- ret %>%

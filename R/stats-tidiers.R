@@ -68,8 +68,10 @@ tidy.density <- function(x, ...) {
 tidy.dist <- function(x, diagonal = attr(x, "Diag"), ...) {
   m <- as.matrix(x)
 
-  ret <- as_tibble(m, rownames = 'item1')
-  ret <- tidyr::gather(ret, item2, distance, -item1)
+  ret <- as_tibble(m, rownames = 'item1') %>%
+    pivot_longer(cols = c(dplyr::everything(), -item1),
+               names_to = "item2",
+               values_to = "distance")
 
   if (!diagonal) {
     ret <- dplyr::filter(ret, item1 != item2)

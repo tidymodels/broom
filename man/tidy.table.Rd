@@ -22,7 +22,7 @@ the \code{data} argument.}
 \value{
 A \link[tibble:tibble]{tibble::tibble} in long-form containing frequency information
 for the table in a \code{Freq} column. The result is much like what you get
-from \code{\link[tidyr:gather]{tidyr::gather()}}.
+from \code{\link[tidyr:pivot_longer]{tidyr::pivot_longer()}}.
 }
 \description{
 Tidy summarizes information about the components of a model.

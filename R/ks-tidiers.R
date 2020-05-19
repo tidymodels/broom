@@ -56,6 +56,9 @@ tidy.kde <- function(x, ...) {
     as_tibble() %>% 
     mutate(estimate = estimate$value,
            obs = row_number()) %>% 
-    tidyr::gather(variable, value, -estimate, -obs) %>% 
+    pivot_longer(cols = c(dplyr::everything(), -estimate, -obs),
+                 names_to = "variable",
+                 values_to = "value") %>%
+    arrange(variable, obs) %>%
     select(obs, variable, value, estimate)
 }
