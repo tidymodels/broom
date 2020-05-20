@@ -299,7 +299,6 @@ Imports:
     glue,
     methods,
     purrr,
-    reshape2,
     rlang,
     stringr,
     tibble (>= 3.0.0),

@@ -43,8 +43,11 @@
 #' @aliases kde_tidiers ks_tidiers
 #' @seealso [tidy()], [ks::kde()]
 tidy.kde <- function(x, ...) {
-  
-  estimate <- reshape2::melt(x$estimate)
+
+  x$estimate %>%
+    as.data.frame.table(responseName = "value") %>%
+    dplyr::mutate_if(is.factor, as.integer)
+
   dims <- seq_len(length(x$eval.points))
   
   purrr::map2(
