@@ -61,7 +61,7 @@ tidy.lmodel2 <- function(x, ...) {
   confints <- x$confidence.intervals %>%
     pivot_longer(cols = c(dplyr::everything(), -Method),
                  names_to = "key",
-                 values_to = "value")
+                 values_to = "value") %>%
     tidyr::separate(key, c("level", "term"), "-") %>%
     mutate(level = ifelse(level == "2.5%", "conf.low", "conf.high")) %>%
     tidyr::pivot_wider(c(Method, term), 

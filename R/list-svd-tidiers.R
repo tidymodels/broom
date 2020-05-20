@@ -61,7 +61,7 @@ tidy_svd <- function(x, matrix = "u", ...) {
     ret <- x$v %>%
       as_tibble() %>%
       tibble::rowid_to_column("column") %>%
-      pivot_longer(cols = c(dplyr::everything(), -row), 
+      pivot_longer(cols = c(dplyr::everything(), -column), 
                    names_to = "PC",
                    values_to = "value") %>%
       dplyr::mutate(PC = stringr::str_remove(PC, "V") %>% as.numeric()) %>%

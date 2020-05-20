@@ -100,10 +100,10 @@ tidy.lavaan <- function(x, conf.int = FALSE, conf.level = 0.95, ...) {
 #'
 #' library(lavaan)
 #'
-# cfa.fit <- cfa(
-#   'F =~ x1 + x2 + x3 + x4 + x5',
-#   data = HolzingerSwineford1939, group = "school"
-# )
+#' cfa.fit <- cfa(
+#'   'F =~ x1 + x2 + x3 + x4 + x5',
+#'   data = HolzingerSwineford1939, group = "school"
+#' )
 #' glance(cfa.fit)
 #'
 #' @export

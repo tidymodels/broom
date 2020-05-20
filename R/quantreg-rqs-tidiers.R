@@ -78,10 +78,7 @@ augment.rqs <- function(x, data = model.frame(x), newdata, ...) {
                           names_to = ".tau", 
                           values_to = ".fitted") %>%
       as.data.frame()    
-    ret <- unrowname(cbind(original, pred[, -1, drop = FALSE])) %>%
-      select(-.resid, dplyr::everything()) %>%
-      select(-.fitted, dplyr::everything()) %>%
-      select(-.tau, dplyr::everything())
+    ret <- unrowname(cbind(original, pred[, -1, drop = FALSE]))
   } else {
     original <- newdata[rep(seq_len(nrow(newdata)), n_tau), ]
     pred <- predict(x, newdata = newdata, stepfun = FALSE, ...)
@@ -90,9 +87,6 @@ augment.rqs <- function(x, data = model.frame(x), newdata, ...) {
                          cols = dplyr::everything(), 
                          names_to = ".tau", 
                          values_to = ".fitted") %>%
-      select(-.resid, dplyr::everything()) %>%
-      select(-.fitted, dplyr::everything()) %>%
-      select(-.tau, dplyr::everything()) %>%
       as.data.frame() 
     ret <- unrowname(cbind(original, pred))
   }

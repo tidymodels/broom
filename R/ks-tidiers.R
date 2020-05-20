@@ -44,7 +44,7 @@
 #' @seealso [tidy()], [ks::kde()]
 tidy.kde <- function(x, ...) {
 
-  x$estimate %>%
+  estimate <- x$estimate %>%
     as.data.frame.table(responseName = "value") %>%
     dplyr::mutate_if(is.factor, as.integer)
 
