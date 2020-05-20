@@ -43,12 +43,12 @@ tidy_svd <- function(x, matrix = "u", ...) {
 
   if (matrix == "u") {
     ret <- x$u %>%
-      as_tibble() %>%
+      as_tibble(.name_repair = "unique") %>%
       tibble::rowid_to_column("row") %>%
       pivot_longer(cols = c(dplyr::everything(), -row), 
                    names_to = "PC",
                    values_to = "value") %>%
-      dplyr::mutate(PC = stringr::str_remove(PC, "V") %>% as.numeric()) %>%
+      dplyr::mutate(PC = stringr::str_remove(PC, "...") %>% as.numeric()) %>%
       arrange(PC, row) %>%
       as.data.frame()
   } else if (matrix == "d") {
@@ -59,13 +59,13 @@ tidy_svd <- function(x, matrix = "u", ...) {
       )
   } else if (matrix == "v") {
     ret <- x$v %>%
-      as_tibble() %>%
+      as_tibble(.name_repair = "unique") %>%
       tibble::rowid_to_column("column") %>%
       pivot_longer(cols = c(dplyr::everything(), -column), 
                    names_to = "PC",
                    values_to = "value") %>%
-      dplyr::mutate(PC = stringr::str_remove(PC, "V") %>% as.numeric()) %>%
-      arrange(PC, row) %>%
+      dplyr::mutate(PC = stringr::str_remove(PC, "...") %>% as.numeric()) %>%
+      arrange(PC, column) %>%
       as.data.frame()
   }
   as_tibble(ret)
