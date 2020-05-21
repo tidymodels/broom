@@ -66,16 +66,28 @@ augment.rqs <- function(x, data = model.frame(x), newdata, ...) {
     pred <- predict(x, stepfun = FALSE, ...)
     resid <- residuals(x)
     resid <- setNames(as.data.frame(resid), x[["tau"]])
-    resid <- tidyr::gather(data = resid, key = ".tau", value = ".resid")
+    resid <- pivot_longer(resid, 
+                          cols = dplyr::everything(), 
+                          names_to = ".tau", 
+                          values_to = ".resid") %>%
+      as.data.frame()
     original <- cbind(original, resid)
     pred <- setNames(as.data.frame(pred), x[["tau"]])
-    pred <- tidyr::gather(data = pred, key = ".tau", value = ".fitted")
+    pred <- pivot_longer(pred, 
+                          cols = dplyr::everything(), 
+                          names_to = ".tau", 
+                          values_to = ".fitted") %>%
+      as.data.frame()    
     ret <- unrowname(cbind(original, pred[, -1, drop = FALSE]))
   } else {
     original <- newdata[rep(seq_len(nrow(newdata)), n_tau), ]
     pred <- predict(x, newdata = newdata, stepfun = FALSE, ...)
     pred <- setNames(as.data.frame(pred), x[["tau"]])
-    pred <- tidyr::gather(data = pred, key = ".tau", value = ".fitted")
+    pred <- pivot_longer(pred, 
+                         cols = dplyr::everything(), 
+                         names_to = ".tau", 
+                         values_to = ".fitted") %>%
+      as.data.frame() 
     ret <- unrowname(cbind(original, pred))
   }
   as_tibble(ret)

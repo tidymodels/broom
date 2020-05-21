@@ -42,6 +42,9 @@ tidy_xyz <- function(x, ...) {
   d <- as_tibble(x$z)
   names(d) <- x$y
   d$x <- x$x
-  tidyr::gather(d, y, z, -x)
+  pivot_longer(d,
+               cols = c(dplyr::everything(), -x),
+               names_to = "y",
+               values_to = "z")
 
 }

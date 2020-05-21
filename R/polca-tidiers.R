@@ -64,12 +64,15 @@
 #' @family poLCA tidiers 
 #'
 tidy.poLCA <- function(x, ...) {
-  probs <- purrr::map_df(x$probs, reshape2::melt, .id = "variable") %>%
+
+  probs <- purrr::map2_df(x$probs, names(x$probs), reshape_probs) %>%
+    mutate(variable = as.character(variable)) %>%
     transmute(variable,
       class = stringr::str_match(Var1, "class (.*):")[, 2],
       outcome = Var2,
       estimate = value
     )
+  
   if (all(stringr::str_detect(probs$outcome, "^Pr\\(\\d*\\)$"))) {
     probs$outcome <- as.numeric(stringr::str_match(
       probs$outcome,
@@ -80,7 +83,9 @@ tidy.poLCA <- function(x, ...) {
   probs <- probs %>%
     mutate(class = utils::type.convert(class))
 
-  probs_se <- purrr::map_df(x$probs.se, reshape2::melt, .id = "variable")
+  probs_se <- purrr::map2_df(x$probs.se, names(x$probs.se), reshape_probs) %>%
+    mutate(variable = as.character(variable)) %>%
+    mutate_if(is.factor, as.integer)
   probs$std.error <- probs_se$value
 
   as_tibble(probs)
@@ -167,4 +172,12 @@ glance.poLCA <- function(x, ...) {
   )
   ret$nobs <- stats::nobs(x)
   ret
+}
+
+
+# a function to reshape each element of the probs and probs.se lists
+reshape_probs <- function(x_, x_name) {
+  x_ %>%
+    as.data.frame.table(responseName = "value") %>%
+    cbind(variable = x_name, .)
 }

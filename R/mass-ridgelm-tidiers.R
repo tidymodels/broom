@@ -55,7 +55,10 @@ tidy.ridgelm <- function(x, ...) {
     lambda = x$lambda,
     GCV = unname(x$GCV)
   ) %>%
-    tidyr::gather(term, estimate, -lambda, -GCV) %>%
+    pivot_longer(cols = c(dplyr::everything(), -lambda, -GCV),
+                 names_to = "term",
+                 values_to = "estimate") %>%
+    as.data.frame() %>%
     mutate(term = as.character(term)) %>%
     mutate(scale = x$scales[term])
 

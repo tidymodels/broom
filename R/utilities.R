@@ -375,8 +375,11 @@ broom_confint_terms <- function(x, ...) {
 globalVariables(
   c(
     ".",
+    ".fitted",
     ".id",
+    ".resid",
     ".rownames",
+    ".tau",
     "aic",
     "bic",
     "ci.lower",
@@ -438,6 +441,7 @@ globalVariables(
     "se", 
     "series",
     "Slope",
+    "stat",
     "statistic", 
     "std.dev",
     "std.error", 

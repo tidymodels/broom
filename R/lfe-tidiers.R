@@ -56,7 +56,7 @@ tidy.felm <- function(x, conf.int = FALSE, conf.level = .95, fe = FALSE, robust 
     ret <-  map_df(x$lhs, function(y) stats::coef(summary(x, lhs = y, robust = robust)) %>%
                      fix_data_frame(nn) %>%
                      mutate(response = y)) %>%
-      select(response, everything())
+      select(response, dplyr::everything())
 
   } else {
     ret <- fix_data_frame(stats::coef(summary(x, robust = robust)), nn)
@@ -81,14 +81,22 @@ tidy.felm <- function(x, conf.int = FALSE, conf.level = .95, fe = FALSE, robust 
 
     if(has_multi_response) {
       ret_fe_prep <-  ret_fe_prep  %>%
-        tidyr::gather(key = "stat_resp", value, starts_with("effect."), starts_with("se.")) %>%
-        tidyr::separate(col = "stat_resp", c("stat", "response"), sep="\\.") %>%
-        tidyr::spread(key = "stat", value)
-      # nn <-  c("response", nn)
+        tidyr::pivot_longer(cols = c(starts_with("effect."), 
+                                     starts_with("se.")),
+                            names_to = "stat_resp",
+                            values_to = "value") %>%
+        tidyr::separate(col = "stat_resp", 
+                        c("stat", "response"), 
+                        sep="\\.") %>%
+        tidyr::pivot_wider(id_cols = c(term, N, comp, response), 
+                           names_from = stat, 
+                           values_from = value) %>%
+        dplyr::arrange(term) %>%
+        as.data.frame()
     }
     ret_fe <-  ret_fe_prep %>%
       rename(estimate = effect, std.error = se) %>%
-      select(contains("response"), everything()) %>%
+      select(contains("response"), dplyr::everything()) %>%
       # fix_data_frame(nn) %>%
       mutate(statistic = estimate / std.error) %>%
       mutate(p.value = 2 * (1 - stats::pt(statistic, df = N)))

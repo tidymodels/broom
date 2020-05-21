@@ -81,7 +81,9 @@ tidy.confusionMatrix <- function(x, by_class = TRUE, ...) {
         x$byClass %>%
         as.data.frame() %>%
         tibble::rownames_to_column("class") %>%
-        gather(var, value, -class) %>%
+        pivot_longer(cols = c(dplyr::everything(), -class),
+                     names_to = "var",
+                     values_to = "value") %>%
         mutate(
           var = stringr::str_to_lower(gsub(" ", "_", var)),
           class = gsub("Class: ", "", class)

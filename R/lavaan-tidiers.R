@@ -63,7 +63,7 @@ tidy.lavaan <- function(x, conf.int = FALSE, conf.level = 0.95, ...) {
       conf.low = ci.lower,
       conf.high = ci.upper
     ) %>%
-    select(term, op, everything(), -rowname, -lhs, -rhs) %>%
+    select(term, op, dplyr::everything(), -rowname, -lhs, -rhs) %>%
     as_tibble()
 }
 
@@ -129,7 +129,9 @@ glance.lavaan <- function(x, ...) {
         )
     ) %>%
     tibble::enframe(name = "term") %>%
-    spread(term, value) %>%
+    pivot_wider(id_cols = term, names_from = term, values_from = value) %>%
+    select(order(colnames(.))) %>%
+    map_df(as.numeric) %>%
     bind_cols(
       tibble(
         converged = x@Fit@converged,
