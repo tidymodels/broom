@@ -167,6 +167,8 @@ column names by `make.names`)
 - Bug fix to allow `tidy.htest()` to supports equal variances (#608)
 - Bug fix for `tidy.polr()` when passed `conf.int = TRUE` (#498)
 - Bug fix in `glance.lavaan()` (#577)
+- Bug fix for `tidy.survreg()` when `robust` is set to `TRUE` in model
+fitting (#842, #728)
 
 # broom 0.5.6
 
