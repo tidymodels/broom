@@ -46,13 +46,11 @@ navbar:
     - text: Available methods
       href: articles/available-methods.html
     - text: Bootstrapping
-      href: articles/bootstrapping.html
+      href: https://www.tidymodels.org/learn/statistics/bootstrap/
     - text: Broom and dplyr
       href: articles/broom_and_dplyr.html
-    - text: Tidiers in external packages
-      href: articles/external-tidiers.html
     - text: K-means
-      href: articles/kmeans.html
+      href: https://www.tidymodels.org/learn/statistics/k-means/
   - text: News
     href: news/index.html
   right:
