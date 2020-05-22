@@ -1,5 +1,4 @@
 .Rproj.user
-*.Rproj
 .Rhistory
 .RData
 vignettes/*cache
