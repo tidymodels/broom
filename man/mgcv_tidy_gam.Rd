@@ -71,5 +71,9 @@ A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
   \item{statistic}{The value of a T-statistic to use in a hypothesis that the regression term is non-zero.}
   \item{std.error}{The standard error of the regression term.}
   \item{term}{The name of the regression term.}
+  \item{edf}{The effective degrees of freedom. Only reported when 
+    `parametric = FALSE`}
+  \item{ref.df}{The reference degrees of freedom. Only reported when 
+    `parametric = FALSE`}
 
 }

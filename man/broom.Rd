@@ -107,6 +107,7 @@ Other contributors:
   \item Joyce Cahoon \email{joyceyu48@gmail.com} (\href{https://orcid.org/0000-0001-7217-4702}{ORCID}) [contributor]
   \item Kevin Zarca \email{kevin.zarca@gmail.com} [contributor]
   \item Shiro Kuriwaki \email{shirokuriwaki@gmail.com} (\href{https://orcid.org/0000-0002-5687-2647}{ORCID}) [contributor]
+  \item Chuliang Xiao \email{cxiao@umich.edu} (\href{https://orcid.org/0000-0002-8466-9398}{ORCID}) [contributor]
 }
 
 }

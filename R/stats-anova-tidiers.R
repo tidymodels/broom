@@ -295,8 +295,9 @@ tidy.summary.manova <- function(x, ...) {
 #' @template param_unused_dots
 #'
 #' @evalRd return_tidy(
-#'   "tidy",
-#'   "comparison",
+#'   "term",
+#'   "contrast",
+#'   "null.value",
 #'   "estimate",
 #'   "conf.low",
 #'   "conf.high",

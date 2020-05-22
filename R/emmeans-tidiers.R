@@ -9,7 +9,7 @@
 #'   
 #' @evalRd return_tidy(
 #'   "contrast",
-#'   null.value = "Value to which estimate is compared",
+#'   "null.value",
 #'   estimate = "Expected marginal mean",
 #'   "std.error", 
 #'   "df", 
@@ -134,7 +134,7 @@ tidy.emmGrid <- function(x, conf.int = FALSE, conf.level = .95, ...) {
 #'   level1 = "One level of the factor being contrasted",
 #'   level2 = "The other level of the factor being contrasted",
 #'   term = "Model term in joint tests",
-#'   null.value = "Value to which estimate is compared",
+#'   "null.value",
 #'   estimate = "Expected marginal mean",
 #'   "std.error", 
 #'   "df", 
