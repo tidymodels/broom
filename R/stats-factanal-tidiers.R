@@ -141,7 +141,7 @@ augment.factanal <- function(x, data, ...) {
 #'   "n.factors",
 #'   "total.variance",
 #'   "statistic",
-#'   "p-value",
+#'   "p.value",
 #'   "df",
 #'   "n",
 #'   "method",

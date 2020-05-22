@@ -144,23 +144,11 @@ augment.coxph <- function(x, data = NULL, newdata = NULL,
 #' 
 #' @evalRd return_glance(
 #'    "nevent",
-#'    "statistic.log",
-#'    "p.value.log",
-#'    "statistic.sc",
-#'    "p.value.sc",
-#'    "statistic.wald",
-#'    "p.value.wald",
-#'    "statistic.robust",
-#'    "p.value.robust",
-#'    "r.squared",
-#'    "r.squared.max",
-#'    "concordance",
-#'    "std.error.concordance",
 #'    "logLik",
 #'    "AIC",
 #'    "BIC",
-#'    "nobs"
-#'    )
+#'    "nobs",
+#'    .post = "See survival::coxph.object for additional column descriptions.")
 #'
 #' @export
 #' @seealso [glance()], [survival::coxph()]

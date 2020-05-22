@@ -4,10 +4,12 @@
 #' @param x A `regsubsets` object created by [leaps::regsubsets()].
 #' @template param_unused_dots
 #' 
+#  # define the documentation manually since r-squared and BIC are unusual
+#  # elements of a tidy method output
 #' @evalRd return_tidy(
-#'   "r.squared",
-#'   "adj.r.squared",
-#'   "BIC",
+#'   r.squared = "R squared statistic, or the percent of variation explained by the model.",
+#'   adj.r.squared = "Adjusted R squared statistic",
+#'   BIC = "Bayesian information criterion for the component.",
 #'   mallows_cp = "Mallow's Cp statistic."
 #' )
 #' 

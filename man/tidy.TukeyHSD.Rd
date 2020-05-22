@@ -53,9 +53,10 @@ Other anova tidiers:
 \value{
 A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
   \item{adj.p.value}{P-value adjusted for multiple comparisons.}
-  \item{comparison}{Levels being compared.}
   \item{conf.high}{Upper bound on the confidence interval for the estimate.}
   \item{conf.low}{Lower bound on the confidence interval for the estimate.}
+  \item{contrast}{Levels being compared.}
   \item{estimate}{The estimated value of the regression term.}
+  \item{term}{The name of the regression term.}
 
 }

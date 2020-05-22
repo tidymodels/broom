@@ -87,16 +87,3 @@ Other emmeans tidiers:
 \code{\link{tidy.summary_emm}()}
 }
 \concept{emmeans tidiers}
-\value{
-A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
-  \item{conf.high}{Upper bound on the confidence interval for the estimate.}
-  \item{conf.low}{Lower bound on the confidence interval for the estimate.}
-  \item{contrast}{Levels being compared.}
-  \item{df}{Degrees of freedom used by this term in the model.}
-  \item{p.value}{The two-sided p-value associated with the observed statistic.}
-  \item{std.error}{The standard error of the regression term.}
-  \item{null.value}{Value to which estimate is compared}
-  \item{estimate}{Expected marginal mean}
-  \item{statistic}{T-ratio statistic}
-
-}

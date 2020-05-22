@@ -83,6 +83,7 @@ A \code{\link[tibble:tibble]{tibble::tibble()}} with exactly one row and columns
   \item{n}{The number of TODO.}
   \item{n.factors}{The number of fitted factors}
   \item{nobs}{Number of observations used.}
+  \item{p.value}{P-value corresponding to the test statistic.}
   \item{statistic}{Test statistic.}
   \item{total.variance}{Total cumulative proportion of variance accounted for by all factors}
 

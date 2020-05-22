@@ -8,7 +8,8 @@
 #' @template param_confint
 #' @param ... Additional arguments passed to [quantreg::summary.rqs()]
 #' 
-#' @evalRd return_tidy(regression = TRUE, "quantile")
+#' @evalRd return_tidy(regression = TRUE, 
+#'   quantile = "Linear conditional quantile.")
 #' 
 #' @details If `se.type = "rank"` confidence intervals are calculated by 
 #'   `summary.rq`. When only a single predictor is included in the model, 
