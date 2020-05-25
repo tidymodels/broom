@@ -172,6 +172,7 @@ subsetting the fit object manually. (#835)
 - Bug fix in `glance.lavaan()` (#577)
 - Bug fix for `tidy.survreg()` when `robust` is set to `TRUE` in model
 fitting (#842, #728)
+- Bug fix in muhaz tidiers to ensure output is always a `tibble` (#824)
 
 # broom 0.5.6
 
