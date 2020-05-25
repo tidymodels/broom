@@ -4,11 +4,6 @@
 #' @inherit tidy.prcomp return details params
 #' @param x A list with components `u`, `d`, `v` returned by [svd()].
 #'
-#' @evalRd return_tidy(
-#'   "row",
-#'   "PC",
-#'   value = "Optimized parameter value relative to the given function.")
-#'
 #' @examples
 #'
 #' mat <- scale(as.matrix(iris[, 1:4]))

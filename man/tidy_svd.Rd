@@ -128,10 +128,3 @@ Other list tidiers:
 }
 \concept{list tidiers}
 \concept{svd tidiers}
-\value{
-A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
-  \item{PC}{An integer vector indicating the principal component.}
-  \item{row}{Needs better doc. TODO.}
-  \item{value}{Optimized parameter value relative to the given function.}
-
-}
