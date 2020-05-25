@@ -174,6 +174,11 @@ subsetting the fit object manually. (#835)
 fitting (#842, #728)
 - Bug fix in muhaz tidiers to ensure output is always a `tibble` (#824)
 
+### Other changes
+
+- The package's site has moved from https://broom.tidyverse.org/ to
+https://broom.tidymodels.org/
+
 # broom 0.5.6
 
 - Fix failing CRAN checks to due `tibble 3.0.0` release. Removed `xergm` dependency.
