@@ -17,22 +17,26 @@
 <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png" />
 
 <!-- jquery -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 
 <!-- Bootstrap -->
 <link href="../tidyverse.css" rel="stylesheet">
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
+
+<!-- bootstrap-toc -->
+<link rel="stylesheet" href="../bootstrap-toc.css">
+<script src="../bootstrap-toc.js"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
 
 <!-- headroom.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -74,7 +78,7 @@ model on data in a tibble.
 We are in the process of defining behaviors for models fit with various
 na.action arguments, but make no guarantees about behavior when data is
 missing at this time." />
-<meta property="og:image" content="http://broom.tidyverse.org/logo.png" />
+<meta property="og:image" content="https://broom.tidymodels.org/logo.png" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -101,7 +105,7 @@ missing at this time." />
 
   </head>
 
-  <body>
+  <body data-spy="scroll" data-target="#toc">
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -116,9 +120,9 @@ missing at this time." />
 
       <div class="navbar-brand-container">
         <a class="navbar-brand" href="../index.html">broom</a>
-        <div class="info">
-          <span class="partof">part of the <a href="https://tidyverse.org">tidyverse</a></span>
-          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.2.9003</span>
+        <div class="info hidden-xs hidden-sm">
+          <span class="partof">part of <a href="https://tidymodels.org">tidymodels</a></span>
+          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.7.0.9000</span>
         </div>
       </div>
     </div>
@@ -144,16 +148,13 @@ missing at this time." />
       <a href="../articles/available-methods.html">Available methods</a>
     </li>
     <li>
-      <a href="../articles/bootstrapping.html">Bootstrapping</a>
+      <a href="https://www.tidymodels.org/learn/statistics/bootstrap/">Bootstrapping</a>
     </li>
     <li>
       <a href="../articles/broom_and_dplyr.html">Broom and dplyr</a>
     </li>
     <li>
-      <a href="../articles/external-tidiers.html">Tidiers in external packages</a>
-    </li>
-    <li>
-      <a href="../articles/kmeans.html">K-means</a>
+      <a href="https://www.tidymodels.org/learn/statistics/k-means/">K-means</a>
     </li>
   </ul>
 </li>
@@ -180,7 +181,7 @@ missing at this time." />
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Augment data with information from a(n) htest object</h1>
-    <small class="dont-index">Source: <a href='https://github.com/tidymodels/broom/blob/master/R/stats-htest-tidiers.R'><code>R/stats-htest-tidiers.R</code></a></small>
+    <small class="dont-index">Source: <a href='http://github.com/tidymodels/broom/blob/master/R/stats-htest-tidiers.R'><code>R/stats-htest-tidiers.R</code></a></small>
     <div class="hidden name"><code>augment.htest.Rd</code></div>
     </div>
 
@@ -271,63 +272,57 @@ how residuals are computed.</p>
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
 <span class='no'>tt</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/t.test.html'>t.test</a></span>(<span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span>(<span class='fl'>10</span>))
-<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>tt</span>)</div><div class='output co'>#&gt; # A tibble: 1 x 8
+<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>tt</span>)</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 1 x 8</span><span>
 #&gt;   estimate statistic p.value parameter conf.low conf.high method     alternative
-#&gt;      &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      
-#&gt; 1   -0.240    -0.704   0.499         9    -1.01     0.531 One Sampl… two.sided  </div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/generics/man/glance.html'>glance</a></span>(<span class='no'>tt</span>)  <span class='co'># same output for all htests</span></div><div class='output co'>#&gt; # A tibble: 1 x 8
+#&gt;      </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>      </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>      
+#&gt; </span><span style='color: #555555;'>1</span><span>    0.154     0.573   0.580         9   -</span><span style='color: #BB0000;'>0.452</span><span>     0.760 One Sampl… two.sided  </div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/generics/man/glance.html'>glance</a></span>(<span class='no'>tt</span>)  <span class='co'># same output for all htests</span></div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 1 x 8</span><span>
 #&gt;   estimate statistic p.value parameter conf.low conf.high method     alternative
-#&gt;      &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      
-#&gt; 1   -0.240    -0.704   0.499         9    -1.01     0.531 One Sampl… two.sided  </div><div class='input'>
+#&gt;      </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>      </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>      
+#&gt; </span><span style='color: #555555;'>1</span><span>    0.154     0.573   0.580         9   -</span><span style='color: #BB0000;'>0.452</span><span>     0.760 One Sampl… two.sided  </div><div class='input'>
 <span class='no'>tt</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/t.test.html'>t.test</a></span>(<span class='no'>mpg</span> ~ <span class='no'>am</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>mtcars</span>)
-<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>tt</span>)</div><div class='output co'>#&gt; # A tibble: 1 x 10
+<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>tt</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 1 x 10</span><span>
 #&gt;   estimate estimate1 estimate2 statistic p.value parameter conf.low conf.high
-#&gt;      &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;
-#&gt; 1    -7.24      17.1      24.4     -3.77 0.00137      18.3    -11.3     -3.21
-#&gt; # … with 2 more variables: method &lt;chr&gt;, alternative &lt;chr&gt;</div><div class='input'>
+#&gt;      </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #555555;'>1</span><span>    -</span><span style='color: #BB0000;'>7.24</span><span>      17.1      24.4     -</span><span style='color: #BB0000;'>3.77</span><span> 0.001</span><span style='text-decoration: underline;'>37</span><span>      18.3    -</span><span style='color: #BB0000;'>11.3</span><span>     -</span><span style='color: #BB0000;'>3.21</span><span>
+#&gt; </span><span style='color: #555555;'># … with 2 more variables: method </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, alternative </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span></div><div class='input'>
 <span class='no'>wt</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/wilcox.test.html'>wilcox.test</a></span>(<span class='no'>mpg</span> ~ <span class='no'>am</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>mtcars</span>, <span class='kw'>conf.int</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>exact</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
-<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>wt</span>)</div><div class='output co'>#&gt; # A tibble: 1 x 7
+<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>wt</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 1 x 7</span><span>
 #&gt;   estimate statistic p.value conf.low conf.high method               alternative
-#&gt;      &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;                &lt;chr&gt;      
-#&gt; 1    -6.80        42 0.00187    -11.7     -2.90 Wilcoxon rank sum t… two.sided  </div><div class='input'>
+#&gt;      </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>                </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>      
+#&gt; </span><span style='color: #555555;'>1</span><span>    -</span><span style='color: #BB0000;'>6.80</span><span>        42 0.001</span><span style='text-decoration: underline;'>87</span><span>    -</span><span style='color: #BB0000;'>11.7</span><span>     -</span><span style='color: #BB0000;'>2.90</span><span> Wilcoxon rank sum t… two.sided  </div><div class='input'>
 <span class='no'>ct</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/cor.test.html'>cor.test</a></span>(<span class='no'>mtcars</span>$<span class='no'>wt</span>, <span class='no'>mtcars</span>$<span class='no'>mpg</span>)
-<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>ct</span>)</div><div class='output co'>#&gt; # A tibble: 1 x 8
+<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>ct</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 1 x 8</span><span>
 #&gt;   estimate statistic  p.value parameter conf.low conf.high method    alternative
-#&gt;      &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;     &lt;int&gt;    &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;     &lt;chr&gt;      
-#&gt; 1   -0.868     -9.56 1.29e-10        30   -0.934    -0.744 Pearson'… two.sided  </div><div class='input'>
+#&gt;      </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>      
+#&gt; </span><span style='color: #555555;'>1</span><span>   -</span><span style='color: #BB0000;'>0.868</span><span>     -</span><span style='color: #BB0000;'>9.56</span><span> 1.29</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-10</span><span>        30   -</span><span style='color: #BB0000;'>0.934</span><span>    -</span><span style='color: #BB0000;'>0.744</span><span> Pearson'… two.sided  </div><div class='input'>
 <span class='no'>chit</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/chisq.test.html'>chisq.test</a></span>(<span class='fu'><a href='https://rdrr.io/r/stats/xtabs.html'>xtabs</a></span>(<span class='no'>Freq</span> ~ <span class='no'>Sex</span> + <span class='no'>Class</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/as.data.frame.html'>as.data.frame</a></span>(<span class='no'>Titanic</span>)))
-<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>chit</span>)</div><div class='output co'>#&gt; # A tibble: 1 x 4
+<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>chit</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 1 x 4</span><span>
 #&gt;   statistic  p.value parameter method                    
-#&gt;       &lt;dbl&gt;    &lt;dbl&gt;     &lt;int&gt; &lt;chr&gt;                     
-#&gt; 1      350. 1.56e-75         3 Pearson's Chi-squared test</div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/generics/man/augment.html'>augment</a></span>(<span class='no'>chit</span>)</div><div class='output co'>#&gt; # A tibble: 8 x 9
+#&gt;       </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>                     
+#&gt; </span><span style='color: #555555;'>1</span><span>      350. 1.56</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-75</span><span>         3 Pearson's Chi-squared test</div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/generics/man/augment.html'>augment</a></span>(<span class='no'>chit</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 8 x 9</span><span>
 #&gt;   Sex    Class .observed  .prop .row.prop .col.prop .expected .resid .std.resid
-#&gt;   &lt;fct&gt;  &lt;fct&gt;     &lt;dbl&gt;  &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;  &lt;dbl&gt;      &lt;dbl&gt;
-#&gt; 1 Male   1st         180 0.0818    0.104     0.554      256.   -4.73     -11.1 
-#&gt; 2 Female 1st         145 0.0659    0.309     0.446       69.4   9.07      11.1 
-#&gt; 3 Male   2nd         179 0.0813    0.103     0.628      224.   -3.02      -6.99
-#&gt; 4 Female 2nd         106 0.0482    0.226     0.372       60.9   5.79       6.99
-#&gt; 5 Male   3rd         510 0.232     0.295     0.722      555.   -1.92      -5.04
-#&gt; 6 Female 3rd         196 0.0891    0.417     0.278      151.    3.68       5.04
-#&gt; 7 Male   Crew        862 0.392     0.498     0.974      696.    6.29      17.6 
-#&gt; 8 Female Crew         23 0.0104    0.0489    0.0260     189.  -12.1      -17.6 </div><div class='input'>
-</div></pre>
+#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;fct&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;fct&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>      </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #555555;'>1</span><span> Male   1st         180 0.081</span><span style='text-decoration: underline;'>8</span><span>    0.104     0.554      256.   -</span><span style='color: #BB0000;'>4.73</span><span>     -</span><span style='color: #BB0000;'>11.1</span><span> 
+#&gt; </span><span style='color: #555555;'>2</span><span> Female 1st         145 0.065</span><span style='text-decoration: underline;'>9</span><span>    0.309     0.446       69.4   9.07      11.1 
+#&gt; </span><span style='color: #555555;'>3</span><span> Male   2nd         179 0.081</span><span style='text-decoration: underline;'>3</span><span>    0.103     0.628      224.   -</span><span style='color: #BB0000;'>3.02</span><span>      -</span><span style='color: #BB0000;'>6.99</span><span>
+#&gt; </span><span style='color: #555555;'>4</span><span> Female 2nd         106 0.048</span><span style='text-decoration: underline;'>2</span><span>    0.226     0.372       60.9   5.79       6.99
+#&gt; </span><span style='color: #555555;'>5</span><span> Male   3rd         510 0.232     0.295     0.722      555.   -</span><span style='color: #BB0000;'>1.92</span><span>      -</span><span style='color: #BB0000;'>5.04</span><span>
+#&gt; </span><span style='color: #555555;'>6</span><span> Female 3rd         196 0.089</span><span style='text-decoration: underline;'>1</span><span>    0.417     0.278      151.    3.68       5.04
+#&gt; </span><span style='color: #555555;'>7</span><span> Male   Crew        862 0.392     0.498     0.974      696.    6.29      17.6 
+#&gt; </span><span style='color: #555555;'>8</span><span> Female Crew         23 0.010</span><span style='text-decoration: underline;'>4</span><span>    0.048</span><span style='text-decoration: underline;'>9</span><span>    0.026</span><span style='text-decoration: underline;'>0</span><span>     189.  -</span><span style='color: #BB0000;'>12.1</span><span>      -</span><span style='color: #BB0000;'>17.6</span><span> </div><div class='input'>
+</div></span></pre>
   </div>
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <h2>Contents</h2>
-    <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
-      <li><a href="#details">Details</a></li>
-      <li><a href="#see-also">See also</a></li>
-      <li><a href="#value">Value</a></li>
-      <li><a href="#examples">Examples</a></li>
-    </ul>
-
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
+    <nav id="toc" data-toggle="toc" class="sticky-top">
+      <h2 data-toc-skip>Contents</h2>
+    </nav>
   </div>
 </div>
 
 
       <footer>
       <div class="tidyverse">
-  <p>broom is a part of the <strong>tidyverse</strong>, an ecosystem of packages designed with common APIs and a shared philosophy. Learn more at <a href="https://tidyverse.org">tidyverse.org</a>.</p>
+  <p>broom is a part of the <strong>tidymodels</strong> ecosystem, a collection of modeling packages designed with common APIs and a shared philosophy.</p>
 </div>
 
 <div class="author">

@@ -17,22 +17,26 @@
 <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png" />
 
 <!-- jquery -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 
 <!-- Bootstrap -->
 <link href="../tidyverse.css" rel="stylesheet">
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
+
+<!-- bootstrap-toc -->
+<link rel="stylesheet" href="../bootstrap-toc.css">
+<script src="../bootstrap-toc.js"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
 
 <!-- headroom.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -45,10 +49,10 @@
 <meta property="og:description" content="Tidy summarizes information about the components of a model.
 A model component might be a single term in a regression, a single
 hypothesis, a cluster, or a class. Exactly what tidy considers to be a
-model component varies cross models but is usually self-evident.
+model component varies across models but is usually self-evident.
 If a model has several distinct types of components, you will need to
 specify which components to return." />
-<meta property="og:image" content="http://broom.tidyverse.org/logo.png" />
+<meta property="og:image" content="https://broom.tidymodels.org/logo.png" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -75,7 +79,7 @@ specify which components to return." />
 
   </head>
 
-  <body>
+  <body data-spy="scroll" data-target="#toc">
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -90,9 +94,9 @@ specify which components to return." />
 
       <div class="navbar-brand-container">
         <a class="navbar-brand" href="../index.html">broom</a>
-        <div class="info">
-          <span class="partof">part of the <a href="https://tidyverse.org">tidyverse</a></span>
-          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.2.9003</span>
+        <div class="info hidden-xs hidden-sm">
+          <span class="partof">part of <a href="https://tidymodels.org">tidymodels</a></span>
+          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.7.0.9000</span>
         </div>
       </div>
     </div>
@@ -118,16 +122,13 @@ specify which components to return." />
       <a href="../articles/available-methods.html">Available methods</a>
     </li>
     <li>
-      <a href="../articles/bootstrapping.html">Bootstrapping</a>
+      <a href="https://www.tidymodels.org/learn/statistics/bootstrap/">Bootstrapping</a>
     </li>
     <li>
       <a href="../articles/broom_and_dplyr.html">Broom and dplyr</a>
     </li>
     <li>
-      <a href="../articles/external-tidiers.html">Tidiers in external packages</a>
-    </li>
-    <li>
-      <a href="../articles/kmeans.html">K-means</a>
+      <a href="https://www.tidymodels.org/learn/statistics/k-means/">K-means</a>
     </li>
   </ul>
 </li>
@@ -154,7 +155,7 @@ specify which components to return." />
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Tidy a(n) plm object</h1>
-    <small class="dont-index">Source: <a href='https://github.com/tidymodels/broom/blob/master/R/plm-tidiers.R'><code>R/plm-tidiers.R</code></a></small>
+    <small class="dont-index">Source: <a href='http://github.com/tidymodels/broom/blob/master/R/plm-tidiers.R'><code>R/plm-tidiers.R</code></a></small>
     <div class="hidden name"><code>tidy.plm.Rd</code></div>
     </div>
 
@@ -162,7 +163,7 @@ specify which components to return." />
     <p>Tidy summarizes information about the components of a model.
 A model component might be a single term in a regression, a single
 hypothesis, a cluster, or a class. Exactly what tidy considers to be a
-model component varies cross models but is usually self-evident.
+model component varies across models but is usually self-evident.
 If a model has several distinct types of components, you will need to
 specify which components to return.</p>
     </div>
@@ -255,60 +256,55 @@ the <code>data</code> argument.</p></td>
 #&gt; R-Squared:      0.94134
 #&gt; Adj. R-Squared: 0.93742
 #&gt; F-statistic: 3064.81 on 4 and 764 DF, p-value: &lt; 2.22e-16</div><div class='input'>
-<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>zz</span>)</div><div class='output co'>#&gt; # A tibble: 4 x 5
+<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>zz</span>)</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 4 x 5</span><span>
 #&gt;   term      estimate std.error statistic   p.value
-#&gt;   &lt;chr&gt;        &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;
-#&gt; 1 log(pcap) -0.0261   0.0290      -0.902 3.68e-  1
-#&gt; 2 log(pc)    0.292    0.0251      11.6   7.08e- 29
-#&gt; 3 log(emp)   0.768    0.0301      25.5   2.02e-104
-#&gt; 4 unemp     -0.00530  0.000989    -5.36  1.11e-  7</div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>zz</span>, <span class='kw'>conf.int</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; # A tibble: 4 x 7
+#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>        </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #555555;'>1</span><span> log(pcap) -</span><span style='color: #BB0000;'>0.026</span><span style='color: #BB0000;text-decoration: underline;'>1</span><span>   0.029</span><span style='text-decoration: underline;'>0</span><span>      -</span><span style='color: #BB0000;'>0.902</span><span> 3.68</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-  1</span><span>
+#&gt; </span><span style='color: #555555;'>2</span><span> log(pc)    0.292    0.025</span><span style='text-decoration: underline;'>1</span><span>      11.6   7.08</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>- 29</span><span>
+#&gt; </span><span style='color: #555555;'>3</span><span> log(emp)   0.768    0.030</span><span style='text-decoration: underline;'>1</span><span>      25.5   2.02</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-104</span><span>
+#&gt; </span><span style='color: #555555;'>4</span><span> unemp     -</span><span style='color: #BB0000;'>0.005</span><span style='color: #BB0000;text-decoration: underline;'>30</span><span>  0.000</span><span style='text-decoration: underline;'>989</span><span>    -</span><span style='color: #BB0000;'>5.36</span><span>  1.11</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-  7</span><span></div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>zz</span>, <span class='kw'>conf.int</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 4 x 7</span><span>
 #&gt;   term      estimate std.error statistic   p.value conf.low conf.high
-#&gt;   &lt;chr&gt;        &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;
-#&gt; 1 log(pcap) -0.0261   0.0290      -0.902 3.68e-  1 -0.0830    0.0307 
-#&gt; 2 log(pc)    0.292    0.0251      11.6   7.08e- 29  0.243     0.341  
-#&gt; 3 log(emp)   0.768    0.0301      25.5   2.02e-104  0.709     0.827  
-#&gt; 4 unemp     -0.00530  0.000989    -5.36  1.11e-  7 -0.00724  -0.00336</div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>zz</span>, <span class='kw'>conf.int</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>conf.level</span> <span class='kw'>=</span> <span class='fl'>0.9</span>)</div><div class='output co'>#&gt; # A tibble: 4 x 7
+#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>        </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #555555;'>1</span><span> log(pcap) -</span><span style='color: #BB0000;'>0.026</span><span style='color: #BB0000;text-decoration: underline;'>1</span><span>   0.029</span><span style='text-decoration: underline;'>0</span><span>      -</span><span style='color: #BB0000;'>0.902</span><span> 3.68</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-  1</span><span> -</span><span style='color: #BB0000;'>0.083</span><span style='color: #BB0000;text-decoration: underline;'>0</span><span>    0.030</span><span style='text-decoration: underline;'>7</span><span> 
+#&gt; </span><span style='color: #555555;'>2</span><span> log(pc)    0.292    0.025</span><span style='text-decoration: underline;'>1</span><span>      11.6   7.08</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>- 29</span><span>  0.243     0.341  
+#&gt; </span><span style='color: #555555;'>3</span><span> log(emp)   0.768    0.030</span><span style='text-decoration: underline;'>1</span><span>      25.5   2.02</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-104</span><span>  0.709     0.827  
+#&gt; </span><span style='color: #555555;'>4</span><span> unemp     -</span><span style='color: #BB0000;'>0.005</span><span style='color: #BB0000;text-decoration: underline;'>30</span><span>  0.000</span><span style='text-decoration: underline;'>989</span><span>    -</span><span style='color: #BB0000;'>5.36</span><span>  1.11</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-  7</span><span> -</span><span style='color: #BB0000;'>0.007</span><span style='color: #BB0000;text-decoration: underline;'>24</span><span>  -</span><span style='color: #BB0000;'>0.003</span><span style='color: #BB0000;text-decoration: underline;'>36</span><span></div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>zz</span>, <span class='kw'>conf.int</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>conf.level</span> <span class='kw'>=</span> <span class='fl'>0.9</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 4 x 7</span><span>
 #&gt;   term      estimate std.error statistic   p.value conf.low conf.high
-#&gt;   &lt;chr&gt;        &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;
-#&gt; 1 log(pcap) -0.0261   0.0290      -0.902 3.68e-  1 -0.0739    0.0216 
-#&gt; 2 log(pc)    0.292    0.0251      11.6   7.08e- 29  0.251     0.333  
-#&gt; 3 log(emp)   0.768    0.0301      25.5   2.02e-104  0.719     0.818  
-#&gt; 4 unemp     -0.00530  0.000989    -5.36  1.11e-  7 -0.00692  -0.00367</div><div class='input'>
-<span class='fu'><a href='https://rdrr.io/pkg/generics/man/augment.html'>augment</a></span>(<span class='no'>zz</span>)</div><div class='output co'>#&gt; # A tibble: 816 x 7
-#&gt;    log.gsp. log.pcap. log.pc. log.emp. unemp .fitted   .resid
-#&gt;       &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;
-#&gt;  1     10.3      9.62    10.5     6.92   4.7    10.3 -0.0466 
-#&gt;  2     10.3      9.65    10.5     6.93   5.2    10.3 -0.0306 
-#&gt;  3     10.4      9.68    10.6     6.98   4.7    10.4 -0.0165 
-#&gt;  4     10.4      9.71    10.6     7.03   3.9    10.4 -0.00873
-#&gt;  5     10.4      9.73    10.6     7.06   5.5    10.5 -0.0271 
-#&gt;  6     10.4      9.76    10.7     7.05   7.7    10.4 -0.0224 
-#&gt;  7     10.5      9.78    10.8     7.10   6.8    10.5 -0.0366 
-#&gt;  8     10.5      9.80    10.8     7.15   7.4    10.6 -0.0300 
-#&gt;  9     10.6      9.82    10.9     7.20   6.3    10.6 -0.0189 
-#&gt; 10     10.6      9.85    10.9     7.22   7.1    10.6 -0.0141 
-#&gt; # … with 806 more rows</div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/generics/man/glance.html'>glance</a></span>(<span class='no'>zz</span>)</div><div class='output co'>#&gt; # A tibble: 1 x 7
+#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>        </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #555555;'>1</span><span> log(pcap) -</span><span style='color: #BB0000;'>0.026</span><span style='color: #BB0000;text-decoration: underline;'>1</span><span>   0.029</span><span style='text-decoration: underline;'>0</span><span>      -</span><span style='color: #BB0000;'>0.902</span><span> 3.68</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-  1</span><span> -</span><span style='color: #BB0000;'>0.073</span><span style='color: #BB0000;text-decoration: underline;'>9</span><span>    0.021</span><span style='text-decoration: underline;'>6</span><span> 
+#&gt; </span><span style='color: #555555;'>2</span><span> log(pc)    0.292    0.025</span><span style='text-decoration: underline;'>1</span><span>      11.6   7.08</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>- 29</span><span>  0.251     0.333  
+#&gt; </span><span style='color: #555555;'>3</span><span> log(emp)   0.768    0.030</span><span style='text-decoration: underline;'>1</span><span>      25.5   2.02</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-104</span><span>  0.719     0.818  
+#&gt; </span><span style='color: #555555;'>4</span><span> unemp     -</span><span style='color: #BB0000;'>0.005</span><span style='color: #BB0000;text-decoration: underline;'>30</span><span>  0.000</span><span style='text-decoration: underline;'>989</span><span>    -</span><span style='color: #BB0000;'>5.36</span><span>  1.11</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-  7</span><span> -</span><span style='color: #BB0000;'>0.006</span><span style='color: #BB0000;text-decoration: underline;'>92</span><span>  -</span><span style='color: #BB0000;'>0.003</span><span style='color: #BB0000;text-decoration: underline;'>67</span><span></div><div class='input'>
+<span class='fu'><a href='https://rdrr.io/pkg/generics/man/augment.html'>augment</a></span>(<span class='no'>zz</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 816 x 7</span><span>
+#&gt;    log.gsp.  log.pcap. log.pc.   log.emp.  unemp     .fitted .resid      
+#&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;pseries&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;pseries&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;pseries&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;pseries&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;pseries&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;pseries&gt;</span><span>   
+#&gt; </span><span style='color: #555555;'> 1</span><span> 10.25478  9.617981  10.48553  6.918201  4.7          10.3 -0.046561413
+#&gt; </span><span style='color: #555555;'> 2</span><span> 10.28790  9.648720  10.52675  6.929419  5.2          10.3 -0.030640422
+#&gt; </span><span style='color: #555555;'> 3</span><span> 10.35147  9.678618  10.56283  6.977561  4.7          10.4 -0.016454312
+#&gt; </span><span style='color: #555555;'> 4</span><span> 10.41721  9.705418  10.59873  7.034828  3.9          10.4 -0.008726974
+#&gt; </span><span style='color: #555555;'> 5</span><span> 10.42671  9.726910  10.64679  7.064588  5.5          10.5 -0.027084312
+#&gt; </span><span style='color: #555555;'> 6</span><span> 10.42240  9.759401  10.69130  7.052202  7.7          10.4 -0.022368930
+#&gt; </span><span style='color: #555555;'> 7</span><span> 10.48470  9.783175  10.82420  7.095893  6.8          10.5 -0.036587629
+#&gt; </span><span style='color: #555555;'> 8</span><span> 10.53111  9.804326  10.84125  7.146142  7.4          10.6 -0.030020604
+#&gt; </span><span style='color: #555555;'> 9</span><span> 10.59573  9.824430  10.87055  7.197810  6.3          10.6 -0.018942497
+#&gt; </span><span style='color: #555555;'>10</span><span> 10.62082  9.845937  10.90643  7.216709  7.1          10.6 -0.014057170
+#&gt; </span><span style='color: #555555;'># … with 806 more rows</span><span></div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/generics/man/glance.html'>glance</a></span>(<span class='no'>zz</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 1 x 7</span><span>
 #&gt;   r.squared adj.r.squared statistic p.value deviance df.residual  nobs
-#&gt;       &lt;dbl&gt;         &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;       &lt;int&gt; &lt;int&gt;
-#&gt; 1     0.941         0.937     3065.       0     1.11         764   816</div><div class='input'>
-</div></pre>
+#&gt;       </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>         </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>       </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>
+#&gt; </span><span style='color: #555555;'>1</span><span>     0.941         0.937     </span><span style='text-decoration: underline;'>3</span><span>065.       0     1.11         764   816</div><div class='input'>
+</div></span></pre>
   </div>
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <h2>Contents</h2>
-    <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
-      <li><a href="#see-also">See also</a></li>
-      <li><a href="#value">Value</a></li>
-      <li><a href="#examples">Examples</a></li>
-    </ul>
-
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
+    <nav id="toc" data-toggle="toc" class="sticky-top">
+      <h2 data-toc-skip>Contents</h2>
+    </nav>
   </div>
 </div>
 
 
       <footer>
       <div class="tidyverse">
-  <p>broom is a part of the <strong>tidyverse</strong>, an ecosystem of packages designed with common APIs and a shared philosophy. Learn more at <a href="https://tidyverse.org">tidyverse.org</a>.</p>
+  <p>broom is a part of the <strong>tidymodels</strong> ecosystem, a collection of modeling packages designed with common APIs and a shared philosophy.</p>
 </div>
 
 <div class="author">

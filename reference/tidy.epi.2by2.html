@@ -17,22 +17,26 @@
 <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png" />
 
 <!-- jquery -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 
 <!-- Bootstrap -->
 <link href="../tidyverse.css" rel="stylesheet">
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
+
+<!-- bootstrap-toc -->
+<link rel="stylesheet" href="../bootstrap-toc.css">
+<script src="../bootstrap-toc.js"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
 
 <!-- headroom.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -45,10 +49,10 @@
 <meta property="og:description" content="Tidy summarizes information about the components of a model.
 A model component might be a single term in a regression, a single
 hypothesis, a cluster, or a class. Exactly what tidy considers to be a
-model component varies cross models but is usually self-evident.
+model component varies across models but is usually self-evident.
 If a model has several distinct types of components, you will need to
 specify which components to return." />
-<meta property="og:image" content="http://broom.tidyverse.org/logo.png" />
+<meta property="og:image" content="https://broom.tidymodels.org/logo.png" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -75,7 +79,7 @@ specify which components to return." />
 
   </head>
 
-  <body>
+  <body data-spy="scroll" data-target="#toc">
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -90,9 +94,9 @@ specify which components to return." />
 
       <div class="navbar-brand-container">
         <a class="navbar-brand" href="../index.html">broom</a>
-        <div class="info">
-          <span class="partof">part of the <a href="https://tidyverse.org">tidyverse</a></span>
-          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.2.9003</span>
+        <div class="info hidden-xs hidden-sm">
+          <span class="partof">part of <a href="https://tidymodels.org">tidymodels</a></span>
+          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.7.0.9000</span>
         </div>
       </div>
     </div>
@@ -118,16 +122,13 @@ specify which components to return." />
       <a href="../articles/available-methods.html">Available methods</a>
     </li>
     <li>
-      <a href="../articles/bootstrapping.html">Bootstrapping</a>
+      <a href="https://www.tidymodels.org/learn/statistics/bootstrap/">Bootstrapping</a>
     </li>
     <li>
       <a href="../articles/broom_and_dplyr.html">Broom and dplyr</a>
     </li>
     <li>
-      <a href="../articles/external-tidiers.html">Tidiers in external packages</a>
-    </li>
-    <li>
-      <a href="../articles/kmeans.html">K-means</a>
+      <a href="https://www.tidymodels.org/learn/statistics/k-means/">K-means</a>
     </li>
   </ul>
 </li>
@@ -154,7 +155,7 @@ specify which components to return." />
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Tidy a(n) epi.2by2 object</h1>
-    <small class="dont-index">Source: <a href='https://github.com/tidymodels/broom/blob/master/R/epiR-tidiers.R'><code>R/epiR-tidiers.R</code></a></small>
+    <small class="dont-index">Source: <a href='http://github.com/tidymodels/broom/blob/master/R/epiR-tidiers.R'><code>R/epiR-tidiers.R</code></a></small>
     <div class="hidden name"><code>tidy.epi.2by2.Rd</code></div>
     </div>
 
@@ -162,7 +163,7 @@ specify which components to return." />
     <p>Tidy summarizes information about the components of a model.
 A model component might be a single term in a regression, a single
 hypothesis, a cluster, or a class. Exactly what tidy considers to be a
-model component varies cross models but is usually self-evident.
+model component varies across models but is usually self-evident.
 If a model has several distinct types of components, you will need to
 specify which components to return.</p>
     </div>
@@ -217,46 +218,40 @@ the <code>data</code> argument.</p></td>
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>epiR</span>)</div><div class='output co'>#&gt; <span class='message'>Package epiR 1.0-10 is loaded</span></div><div class='output co'>#&gt; <span class='message'>Type help(epi.about) for summary information</span></div><div class='output co'>#&gt; <span class='message'></span></div><div class='input'><span class='no'>dat</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>13</span>,<span class='fl'>2163</span>,<span class='fl'>5</span>,<span class='fl'>3349</span>), <span class='kw'>nrow</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>byrow</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>epiR</span>)</div><div class='output co'>#&gt; <span class='message'>Package epiR 1.0-14 is loaded</span></div><div class='output co'>#&gt; <span class='message'>Type help(epi.about) for summary information</span></div><div class='output co'>#&gt; <span class='message'>Type browseVignettes(package = 'epiR') to learn how to use epiR for applied epidemiological analyses</span></div><div class='output co'>#&gt; <span class='message'></span></div><div class='input'><span class='no'>dat</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>13</span>,<span class='fl'>2163</span>,<span class='fl'>5</span>,<span class='fl'>3349</span>), <span class='kw'>nrow</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>byrow</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
 <span class='fu'><a href='https://rdrr.io/r/base/colnames.html'>rownames</a></span>(<span class='no'>dat</span>) <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"DF+"</span>, <span class='st'>"DF-"</span>)
 <span class='fu'><a href='https://rdrr.io/r/base/colnames.html'>colnames</a></span>(<span class='no'>dat</span>) <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"FUS+"</span>, <span class='st'>"FUS-"</span>)
 <span class='no'>fit</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/epiR/man/epi.2by2.html'>epi.2by2</a></span>(<span class='kw'>dat</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/table.html'>as.table</a></span>(<span class='no'>dat</span>), <span class='kw'>method</span> <span class='kw'>=</span> <span class='st'>"cross.sectional"</span>,
                 <span class='kw'>conf.level</span> <span class='kw'>=</span> <span class='fl'>0.95</span>, <span class='kw'>units</span> <span class='kw'>=</span> <span class='fl'>100</span>, <span class='kw'>outcome</span> <span class='kw'>=</span> <span class='st'>"as.columns"</span>)
 
-<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>fit</span>, <span class='kw'>parameters</span> <span class='kw'>=</span> <span class='st'>"moa"</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: `cols` is now required.</span>
-#&gt; <span class='warning'>Please use `cols = c(s)`</span></div><div class='output co'>#&gt; # A tibble: 12 x 4
+<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>fit</span>, <span class='kw'>parameters</span> <span class='kw'>=</span> <span class='st'>"moa"</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: `cols` is now required when using unnest().</span>
+#&gt; <span class='warning'>Please use `cols = c(s)`</span></div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 12 x 4</span><span>
 #&gt;    term                estimate conf.low conf.high
-#&gt;    &lt;chr&gt;                  &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;
-#&gt;  1 PR.strata.wald         4.01    1.43      11.2  
-#&gt;  2 PR.strata.score        4.01    1.49      10.8  
-#&gt;  3 OR.strata.wald         4.03    1.43      11.3  
-#&gt;  4 OR.strata.score        4.03    1.49      10.9  
-#&gt;  5 OR.strata.cfield       4.03    1.47      12.6  
-#&gt;  6 OR.strata.mle          4.02    1.34      14.4  
-#&gt;  7 ARisk.strata.wald      0.448   0.0992     0.797
-#&gt;  8 ARisk.strata.score     0.448   0.142      0.882
-#&gt;  9 PARisk.strata.wald     0.176  -0.0225     0.375
-#&gt; 10 PARisk.strata.piri     0.176   0.0389     0.314
-#&gt; 11 AFRisk.strata.wald     0.750   0.301      0.911
-#&gt; 12 PAFRisk.strata.wald    0.542   0.0361     0.782</div></pre>
+#&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>                  </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #555555;'> 1</span><span> PR.strata.wald         4.01    1.43      11.2  
+#&gt; </span><span style='color: #555555;'> 2</span><span> PR.strata.score        4.01    1.49      10.8  
+#&gt; </span><span style='color: #555555;'> 3</span><span> OR.strata.wald         4.03    1.43      11.3  
+#&gt; </span><span style='color: #555555;'> 4</span><span> OR.strata.cfield       4.03   </span><span style='color: #BB0000;'>NA</span><span>         </span><span style='color: #BB0000;'>NA</span><span>    
+#&gt; </span><span style='color: #555555;'> 5</span><span> OR.strata.score        4.03    1.49      10.9  
+#&gt; </span><span style='color: #555555;'> 6</span><span> OR.strata.mle          4.02    1.34      14.4  
+#&gt; </span><span style='color: #555555;'> 7</span><span> ARisk.strata.wald      0.448   0.099</span><span style='text-decoration: underline;'>2</span><span>     0.797
+#&gt; </span><span style='color: #555555;'> 8</span><span> ARisk.strata.score     0.448   0.142      0.882
+#&gt; </span><span style='color: #555555;'> 9</span><span> PARisk.strata.wald     0.176  -</span><span style='color: #BB0000;'>0.022</span><span style='color: #BB0000;text-decoration: underline;'>5</span><span>     0.375
+#&gt; </span><span style='color: #555555;'>10</span><span> PARisk.strata.piri     0.176   0.038</span><span style='text-decoration: underline;'>9</span><span>     0.314
+#&gt; </span><span style='color: #555555;'>11</span><span> AFRisk.strata.wald     0.750   0.301      0.911
+#&gt; </span><span style='color: #555555;'>12</span><span> PAFRisk.strata.wald    0.542   0.036</span><span style='text-decoration: underline;'>1</span><span>     0.782</div></span></pre>
   </div>
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <h2>Contents</h2>
-    <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
-      <li><a href="#details">Details</a></li>
-      <li><a href="#see-also">See also</a></li>
-      <li><a href="#value">Value</a></li>
-      <li><a href="#examples">Examples</a></li>
-    </ul>
-
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
+    <nav id="toc" data-toggle="toc" class="sticky-top">
+      <h2 data-toc-skip>Contents</h2>
+    </nav>
   </div>
 </div>
 
 
       <footer>
       <div class="tidyverse">
-  <p>broom is a part of the <strong>tidyverse</strong>, an ecosystem of packages designed with common APIs and a shared philosophy. Learn more at <a href="https://tidyverse.org">tidyverse.org</a>.</p>
+  <p>broom is a part of the <strong>tidymodels</strong> ecosystem, a collection of modeling packages designed with common APIs and a shared philosophy.</p>
 </div>
 
 <div class="author">

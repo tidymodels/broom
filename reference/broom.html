@@ -17,22 +17,26 @@
 <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png" />
 
 <!-- jquery -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 
 <!-- Bootstrap -->
 <link href="../tidyverse.css" rel="stylesheet">
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
+
+<!-- bootstrap-toc -->
+<link rel="stylesheet" href="../bootstrap-toc.css">
+<script src="../bootstrap-toc.js"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
 
 <!-- headroom.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -56,7 +60,7 @@ generics: tidy, which summarizes a model's statistical findings such as
 coefficients of a regression; augment, which adds columns to the original
 data such as predictions, residuals and cluster assignments; and glance,
 which provides a one-row summary of model-level statistics." />
-<meta property="og:image" content="http://broom.tidyverse.org/logo.png" />
+<meta property="og:image" content="https://broom.tidymodels.org/logo.png" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -83,7 +87,7 @@ which provides a one-row summary of model-level statistics." />
 
   </head>
 
-  <body>
+  <body data-spy="scroll" data-target="#toc">
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -98,9 +102,9 @@ which provides a one-row summary of model-level statistics." />
 
       <div class="navbar-brand-container">
         <a class="navbar-brand" href="../index.html">broom</a>
-        <div class="info">
-          <span class="partof">part of the <a href="https://tidyverse.org">tidyverse</a></span>
-          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.2.9003</span>
+        <div class="info hidden-xs hidden-sm">
+          <span class="partof">part of <a href="https://tidymodels.org">tidymodels</a></span>
+          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.7.0.9000</span>
         </div>
       </div>
     </div>
@@ -126,16 +130,13 @@ which provides a one-row summary of model-level statistics." />
       <a href="../articles/available-methods.html">Available methods</a>
     </li>
     <li>
-      <a href="../articles/bootstrapping.html">Bootstrapping</a>
+      <a href="https://www.tidymodels.org/learn/statistics/bootstrap/">Bootstrapping</a>
     </li>
     <li>
       <a href="../articles/broom_and_dplyr.html">Broom and dplyr</a>
     </li>
     <li>
-      <a href="../articles/external-tidiers.html">Tidiers in external packages</a>
-    </li>
-    <li>
-      <a href="../articles/kmeans.html">K-means</a>
+      <a href="https://www.tidymodels.org/learn/statistics/k-means/">K-means</a>
     </li>
   </ul>
 </li>
@@ -162,7 +163,7 @@ which provides a one-row summary of model-level statistics." />
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Convert Statistical Objects into Tidy Tibbles</h1>
-    <small class="dont-index">Source: <a href='https://github.com/tidymodels/broom/blob/master/R/broom-package.R'><code>R/broom-package.R</code></a>, <a href='https://github.com/tidymodels/broom/blob/master/R/broom.R'><code>R/broom.R</code></a></small>
+    <small class="dont-index">Source: <a href='http://github.com/tidymodels/broom/blob/master/R/broom-package.R'><code>R/broom-package.R</code></a>, <a href='http://github.com/tidymodels/broom/blob/master/R/broom.R'><code>R/broom.R</code></a></small>
     <div class="hidden name"><code>broom.Rd</code></div>
     </div>
 
@@ -188,7 +189,7 @@ which provides a one-row summary of model-level statistics.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p>Useful links:</p><ul>
-<li><p><a href='https://broom.tidyverse.org/'>https://broom.tidyverse.org/</a></p></li>
+<li><p><a href='https://broom.tidymodels.org/'>https://broom.tidymodels.org/</a></p></li>
 <li><p><a href='http://github.com/tidymodels/broom'>http://github.com/tidymodels/broom</a></p></li>
 <li><p>Report bugs at <a href='http://github.com/tidymodels/broom/issues'>http://github.com/tidymodels/broom/issues</a></p></li>
 </ul>
@@ -196,94 +197,17 @@ which provides a one-row summary of model-level statistics.</p>
 </div>
 
   </div>
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <h2>Contents</h2>
-    <ul class="nav nav-pills nav-stacked">
-      <li><a href="#see-also">See also</a></li>
-    </ul>
-
-    <h2>Author</h2>
-    <p><strong>Maintainer</strong>: Alex Hayes <a href='mailto:alexpghayes@gmail.com'>alexpghayes@gmail.com</a> (<a href='https://orcid.org/0000-0002-4985-5160'>ORCID</a>)</p>
-<p>Authors:</p><ul>
-<li><p>David Robinson <a href='mailto:admiral.david@gmail.com'>admiral.david@gmail.com</a></p></li>
-</ul>
-
-<p>Other contributors:</p><ul>
-<li><p>Indrajeet Patil <a href='mailto:patilindrajeet.science@gmail.com'>patilindrajeet.science@gmail.com</a> (<a href='https://orcid.org/0000-0003-1995-6531'>ORCID</a>) [contributor]</p></li>
-<li><p>Derek Chiu <a href='mailto:dchiu@bccrc.ca'>dchiu@bccrc.ca</a> [contributor]</p></li>
-<li><p>Matthieu Gomez <a href='mailto:mattg@princeton.edu'>mattg@princeton.edu</a> [contributor]</p></li>
-<li><p>Boris Demeshev <a href='mailto:boris.demeshev@gmail.com'>boris.demeshev@gmail.com</a> [contributor]</p></li>
-<li><p>Dieter Menne <a href='mailto:dieter.menne@menne-biomed.de'>dieter.menne@menne-biomed.de</a> [contributor]</p></li>
-<li><p>Benjamin Nutter <a href='mailto:nutter@battelle.org'>nutter@battelle.org</a> [contributor]</p></li>
-<li><p>Luke Johnston <a href='mailto:luke.johnston@mail.utoronto.ca'>luke.johnston@mail.utoronto.ca</a> [contributor]</p></li>
-<li><p>Ben Bolker <a href='mailto:bolker@mcmaster.ca'>bolker@mcmaster.ca</a> [contributor]</p></li>
-<li><p>Francois Briatte <a href='mailto:f.briatte@gmail.com'>f.briatte@gmail.com</a> [contributor]</p></li>
-<li><p>Jeffrey Arnold <a href='mailto:jeffrey.arnold@gmail.com'>jeffrey.arnold@gmail.com</a> [contributor]</p></li>
-<li><p>Jonah Gabry <a href='mailto:jsg2201@columbia.edu'>jsg2201@columbia.edu</a> [contributor]</p></li>
-<li><p>Luciano Selzer <a href='mailto:luciano.selzer@gmail.com'>luciano.selzer@gmail.com</a> [contributor]</p></li>
-<li><p>Gavin Simpson <a href='mailto:ucfagls@gmail.com'>ucfagls@gmail.com</a> [contributor]</p></li>
-<li><p>Jens Preussner <a href='mailto: jens.preussner@mpi-bn.mpg.de'> jens.preussner@mpi-bn.mpg.de</a> [contributor]</p></li>
-<li><p>Jay Hesselberth <a href='mailto:jay.hesselberth@gmail.com'>jay.hesselberth@gmail.com</a> [contributor]</p></li>
-<li><p>Hadley Wickham <a href='mailto:hadley@rstudio.com'>hadley@rstudio.com</a> [contributor]</p></li>
-<li><p>Matthew Lincoln <a href='mailto:matthew.d.lincoln@gmail.com'>matthew.d.lincoln@gmail.com</a> [contributor]</p></li>
-<li><p>Alessandro Gasparini <a href='mailto:ag475@leicester.ac.uk'>ag475@leicester.ac.uk</a> [contributor]</p></li>
-<li><p>Lukasz Komsta <a href='mailto:lukasz.komsta@umlub.pl'>lukasz.komsta@umlub.pl</a> [contributor]</p></li>
-<li><p>Frederick Novometsky [contributor]</p></li>
-<li><p>Wilson Freitas [contributor]</p></li>
-<li><p>Michelle Evans [contributor]</p></li>
-<li><p>Jason Cory Brunson <a href='mailto:cornelioid@gmail.com'>cornelioid@gmail.com</a> [contributor]</p></li>
-<li><p>Simon Jackson <a href='mailto:drsimonjackson@gmail.com'>drsimonjackson@gmail.com</a> [contributor]</p></li>
-<li><p>Ben Whalley <a href='mailto:ben.whalley@plymouth.ac.uk'>ben.whalley@plymouth.ac.uk</a> [contributor]</p></li>
-<li><p>Karissa Whiting <a href='mailto:karissa.whiting@gmail.com'>karissa.whiting@gmail.com</a> [contributor]</p></li>
-<li><p>Michael Kuehn <a href='mailto:mkuehn10@gmail.com'>mkuehn10@gmail.com</a> [contributor]</p></li>
-<li><p>Jorge Cimentada <a href='mailto:cimentadaj@gmail.com'>cimentadaj@gmail.com</a> [contributor]</p></li>
-<li><p>Erle Holgersen <a href='mailto:erle.holgersen@gmail.com'>erle.holgersen@gmail.com</a> [contributor]</p></li>
-<li><p>Karl Dunkle Werner [contributor]</p></li>
-<li><p>Ethan Christensen <a href='mailto:christensen.ej@gmail.com'>christensen.ej@gmail.com</a> [contributor]</p></li>
-<li><p>Steven Pav <a href='mailto:shabbychef@gmail.com'>shabbychef@gmail.com</a> [contributor]</p></li>
-<li><p>Paul PJ <a href='mailto:pjpaul.stephens@gmail.com'>pjpaul.stephens@gmail.com</a> [contributor]</p></li>
-<li><p>Ben Schneider <a href='mailto:benjamin.julius.schneider@gmail.com'>benjamin.julius.schneider@gmail.com</a> [contributor]</p></li>
-<li><p>Patrick Kennedy <a href='mailto:pkqstr@protonmail.com'>pkqstr@protonmail.com</a> [contributor]</p></li>
-<li><p>Lily Medina <a href='mailto:lilymiru@gmail.com'>lilymiru@gmail.com</a> [contributor]</p></li>
-<li><p>Brian Fannin <a href='mailto:captain@pirategrunt.com'>captain@pirategrunt.com</a> [contributor]</p></li>
-<li><p>Jason Muhlenkamp <a href='mailto:jason.muhlenkamp@gmail.com'>jason.muhlenkamp@gmail.com</a> [contributor]</p></li>
-<li><p>Matt Lehman [contributor]</p></li>
-<li><p>Bill Denney <a href='mailto:wdenney@humanpredictions.com'>wdenney@humanpredictions.com</a> (<a href='https://orcid.org/0000-0002-5759-428X'>ORCID</a>) [contributor]</p></li>
-<li><p>Nic Crane [contributor]</p></li>
-<li><p>Andrew Bates [contributor]</p></li>
-<li><p>Vincent Arel-Bundock <a href='mailto:vincent.arel-bundock@umontreal.ca'>vincent.arel-bundock@umontreal.ca</a> (<a href='https://orcid.org/0000-0003-2042-7063'>ORCID</a>) [contributor]</p></li>
-<li><p>Hideaki Hayashi [contributor]</p></li>
-<li><p>Luis Tobalina [contributor]</p></li>
-<li><p>Annie Wang <a href='mailto:anniewang.uc@gmail.com'>anniewang.uc@gmail.com</a> [contributor]</p></li>
-<li><p>Wei Yang Tham <a href='mailto:weiyang.tham@gmail.com'>weiyang.tham@gmail.com</a> [contributor]</p></li>
-<li><p>Clara Wang <a href='mailto:clara.wang.94@gmail.com'>clara.wang.94@gmail.com</a> [contributor]</p></li>
-<li><p>Abby Smith <a href='mailto:als1@u.northwestern.edu'>als1@u.northwestern.edu</a> (<a href='https://orcid.org/0000-0002-3207-0375'>ORCID</a>) [contributor]</p></li>
-<li><p>Jasper Cooper <a href='mailto:jaspercooper@gmail.com'>jaspercooper@gmail.com</a> (<a href='https://orcid.org/0000-0002-8639-3188'>ORCID</a>) [contributor]</p></li>
-<li><p>E Auden Krauska <a href='mailto:krauskae@gmail.com'>krauskae@gmail.com</a> (<a href='https://orcid.org/0000-0002-1466-5850'>ORCID</a>) [contributor]</p></li>
-<li><p>Alex Wang <a href='mailto:x249wang@uwaterloo.ca'>x249wang@uwaterloo.ca</a> [contributor]</p></li>
-<li><p>Malcolm Barrett <a href='mailto:malcolmbarrett@gmail.com'>malcolmbarrett@gmail.com</a> (<a href='https://orcid.org/0000-0003-0299-5825'>ORCID</a>) [contributor]</p></li>
-<li><p>Charles Gray <a href='mailto:charlestigray@gmail.com'>charlestigray@gmail.com</a> (<a href='https://orcid.org/0000-0002-9978-011X'>ORCID</a>) [contributor]</p></li>
-<li><p>Jared Wilber [contributor]</p></li>
-<li><p>Vilmantas Gegzna <a href='mailto:GegznaV@gmail.com'>GegznaV@gmail.com</a> (<a href='https://orcid.org/0000-0002-9500-5167'>ORCID</a>) [contributor]</p></li>
-<li><p>Eduard Szoecs <a href='mailto:eduardszoecs@gmail.com'>eduardszoecs@gmail.com</a> [contributor]</p></li>
-<li><p>Frederik Aust <a href='mailto:frederik.aust@uni-koeln.de'>frederik.aust@uni-koeln.de</a> (<a href='https://orcid.org/0000-0003-4900-788X'>ORCID</a>) [contributor]</p></li>
-<li><p>Angus Moore <a href='mailto:angusmoore9@gmail.com'>angusmoore9@gmail.com</a> [contributor]</p></li>
-<li><p>Nick Williams <a href='mailto:ntwilliams.personal@gmail.com'>ntwilliams.personal@gmail.com</a> [contributor]</p></li>
-<li><p>Marius Barth <a href='mailto:marius.barth.uni.koeln@gmail.com'>marius.barth.uni.koeln@gmail.com</a> (<a href='https://orcid.org/0000-0002-3421-6665'>ORCID</a>) [contributor]</p></li>
-<li><p>Bruna Wundervald <a href='mailto:brunadaviesw@gmail.com'>brunadaviesw@gmail.com</a> (<a href='https://orcid.org/0000-0001-8163-220X'>ORCID</a>) [contributor]</p></li>
-<li><p>Joyce Cahoon <a href='mailto:joyceyu48@gmail.com'>joyceyu48@gmail.com</a> (<a href='https://orcid.org/0000-0001-7217-4702'>ORCID</a>) [contributor]</p></li>
-<li><p>Kevin Zarca <a href='mailto:kevin.zarca@gmail.com'>kevin.zarca@gmail.com</a> [contributor]</p></li>
-<li><p>Shiro Kuriwaki <a href='mailto:shirokuriwaki@gmail.com'>shirokuriwaki@gmail.com</a> (<a href='https://orcid.org/0000-0002-5687-2647'>ORCID</a>) [contributor]</p></li>
-</ul>
-
-
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
+    <nav id="toc" data-toggle="toc" class="sticky-top">
+      <h2 data-toc-skip>Contents</h2>
+    </nav>
   </div>
 </div>
 
 
       <footer>
       <div class="tidyverse">
-  <p>broom is a part of the <strong>tidyverse</strong>, an ecosystem of packages designed with common APIs and a shared philosophy. Learn more at <a href="https://tidyverse.org">tidyverse.org</a>.</p>
+  <p>broom is a part of the <strong>tidymodels</strong> ecosystem, a collection of modeling packages designed with common APIs and a shared philosophy.</p>
 </div>
 
 <div class="author">

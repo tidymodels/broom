@@ -17,22 +17,26 @@
 <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png" />
 
 <!-- jquery -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 
 <!-- Bootstrap -->
 <link href="../tidyverse.css" rel="stylesheet">
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
+
+<!-- bootstrap-toc -->
+<link rel="stylesheet" href="../bootstrap-toc.css">
+<script src="../bootstrap-toc.js"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
 
 <!-- headroom.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -45,10 +49,10 @@
 <meta property="og:description" content="Tidy summarizes information about the components of a model.
 A model component might be a single term in a regression, a single
 hypothesis, a cluster, or a class. Exactly what tidy considers to be a
-model component varies cross models but is usually self-evident.
+model component varies across models but is usually self-evident.
 If a model has several distinct types of components, you will need to
 specify which components to return." />
-<meta property="og:image" content="http://broom.tidyverse.org/logo.png" />
+<meta property="og:image" content="https://broom.tidymodels.org/logo.png" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -75,7 +79,7 @@ specify which components to return." />
 
   </head>
 
-  <body>
+  <body data-spy="scroll" data-target="#toc">
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -90,9 +94,9 @@ specify which components to return." />
 
       <div class="navbar-brand-container">
         <a class="navbar-brand" href="../index.html">broom</a>
-        <div class="info">
-          <span class="partof">part of the <a href="https://tidyverse.org">tidyverse</a></span>
-          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.2.9003</span>
+        <div class="info hidden-xs hidden-sm">
+          <span class="partof">part of <a href="https://tidymodels.org">tidymodels</a></span>
+          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.7.0.9000</span>
         </div>
       </div>
     </div>
@@ -118,16 +122,13 @@ specify which components to return." />
       <a href="../articles/available-methods.html">Available methods</a>
     </li>
     <li>
-      <a href="../articles/bootstrapping.html">Bootstrapping</a>
+      <a href="https://www.tidymodels.org/learn/statistics/bootstrap/">Bootstrapping</a>
     </li>
     <li>
       <a href="../articles/broom_and_dplyr.html">Broom and dplyr</a>
     </li>
     <li>
-      <a href="../articles/external-tidiers.html">Tidiers in external packages</a>
-    </li>
-    <li>
-      <a href="../articles/kmeans.html">K-means</a>
+      <a href="https://www.tidymodels.org/learn/statistics/k-means/">K-means</a>
     </li>
   </ul>
 </li>
@@ -154,7 +155,7 @@ specify which components to return." />
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Tidy a(n) loess object</h1>
-    <small class="dont-index">Source: <a href='https://github.com/tidymodels/broom/blob/master/R/stats-loess-tidiers.R'><code>R/stats-loess-tidiers.R</code></a></small>
+    <small class="dont-index">Source: <a href='http://github.com/tidymodels/broom/blob/master/R/stats-loess-tidiers.R'><code>R/stats-loess-tidiers.R</code></a></small>
     <div class="hidden name"><code>augment.loess.Rd</code></div>
     </div>
 
@@ -162,7 +163,7 @@ specify which components to return." />
     <p>Tidy summarizes information about the components of a model.
 A model component might be a single term in a regression, a single
 hypothesis, a cluster, or a class. Exactly what tidy considers to be a
-model component varies cross models but is usually self-evident.
+model component varies across models but is usually self-evident.
 If a model has several distinct types of components, you will need to
 specify which components to return.</p>
     </div>
@@ -250,65 +251,59 @@ original <code>loess</code> object was fit with
   <span class='kw'>control</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/loess.control.html'>loess.control</a></span>(<span class='kw'>surface</span> <span class='kw'>=</span> <span class='st'>"direct"</span>)
 )
 
-<span class='fu'><a href='https://rdrr.io/pkg/generics/man/augment.html'>augment</a></span>(<span class='no'>lo</span>)</div><div class='output co'>#&gt; # A tibble: 32 x 6
+<span class='fu'><a href='https://rdrr.io/pkg/generics/man/augment.html'>augment</a></span>(<span class='no'>lo</span>)</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 32 x 6</span><span>
 #&gt;    .rownames           mpg    hp    wt .fitted  .resid
-#&gt;    &lt;chr&gt;             &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;
-#&gt;  1 Mazda RX4          21     110  2.62    21.4  0.435 
-#&gt;  2 Mazda RX4 Wag      21     110  2.88    20.9 -0.0976
-#&gt;  3 Datsun 710         22.8    93  2.32    24.7  1.88  
-#&gt;  4 Hornet 4 Drive     21.4   110  3.22    19.6 -1.76  
-#&gt;  5 Hornet Sportabout  18.7   175  3.44    16.7 -2.02  
-#&gt;  6 Valiant            18.1   105  3.46    18.9  0.833 
-#&gt;  7 Duster 360         14.3   245  3.57    14.9  0.641 
-#&gt;  8 Merc 240D          24.4    62  3.19    25.1  0.695 
-#&gt;  9 Merc 230           22.8    95  3.15    21.4 -1.43  
-#&gt; 10 Merc 280           19.2   123  3.44    18.4 -0.801 
-#&gt; # … with 22 more rows</div><div class='input'>
+#&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>             </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #555555;'> 1</span><span> Mazda RX4          21     110  2.62    21.4  0.435 
+#&gt; </span><span style='color: #555555;'> 2</span><span> Mazda RX4 Wag      21     110  2.88    20.9 -</span><span style='color: #BB0000;'>0.097</span><span style='color: #BB0000;text-decoration: underline;'>6</span><span>
+#&gt; </span><span style='color: #555555;'> 3</span><span> Datsun 710         22.8    93  2.32    24.7  1.88  
+#&gt; </span><span style='color: #555555;'> 4</span><span> Hornet 4 Drive     21.4   110  3.22    19.6 -</span><span style='color: #BB0000;'>1.76</span><span>  
+#&gt; </span><span style='color: #555555;'> 5</span><span> Hornet Sportabout  18.7   175  3.44    16.7 -</span><span style='color: #BB0000;'>2.02</span><span>  
+#&gt; </span><span style='color: #555555;'> 6</span><span> Valiant            18.1   105  3.46    18.9  0.833 
+#&gt; </span><span style='color: #555555;'> 7</span><span> Duster 360         14.3   245  3.57    14.9  0.641 
+#&gt; </span><span style='color: #555555;'> 8</span><span> Merc 240D          24.4    62  3.19    25.1  0.695 
+#&gt; </span><span style='color: #555555;'> 9</span><span> Merc 230           22.8    95  3.15    21.4 -</span><span style='color: #BB0000;'>1.43</span><span>  
+#&gt; </span><span style='color: #555555;'>10</span><span> Merc 280           19.2   123  3.44    18.4 -</span><span style='color: #BB0000;'>0.801</span><span> 
+#&gt; </span><span style='color: #555555;'># … with 22 more rows</span><span></div><div class='input'>
 <span class='co'># with all columns of original data</span>
-<span class='fu'><a href='https://rdrr.io/pkg/generics/man/augment.html'>augment</a></span>(<span class='no'>lo</span>, <span class='no'>mtcars</span>)</div><div class='output co'>#&gt; # A tibble: 32 x 14
+<span class='fu'><a href='https://rdrr.io/pkg/generics/man/augment.html'>augment</a></span>(<span class='no'>lo</span>, <span class='no'>mtcars</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 32 x 14</span><span>
 #&gt;    .rownames   mpg   cyl  disp    hp  drat    wt  qsec    vs    am  gear  carb
-#&gt;    &lt;chr&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
-#&gt;  1 Mazda RX4  21       6  160    110  3.9   2.62  16.5     0     1     4     4
-#&gt;  2 Mazda RX…  21       6  160    110  3.9   2.88  17.0     0     1     4     4
-#&gt;  3 Datsun 7…  22.8     4  108     93  3.85  2.32  18.6     1     1     4     1
-#&gt;  4 Hornet 4…  21.4     6  258    110  3.08  3.22  19.4     1     0     3     1
-#&gt;  5 Hornet S…  18.7     8  360    175  3.15  3.44  17.0     0     0     3     2
-#&gt;  6 Valiant    18.1     6  225    105  2.76  3.46  20.2     1     0     3     1
-#&gt;  7 Duster 3…  14.3     8  360    245  3.21  3.57  15.8     0     0     3     4
-#&gt;  8 Merc 240D  24.4     4  147.    62  3.69  3.19  20       1     0     4     2
-#&gt;  9 Merc 230   22.8     4  141.    95  3.92  3.15  22.9     1     0     4     2
-#&gt; 10 Merc 280   19.2     6  168.   123  3.92  3.44  18.3     1     0     4     4
-#&gt; # … with 22 more rows, and 2 more variables: .fitted &lt;dbl&gt;, .resid &lt;dbl&gt;</div><div class='input'>
+#&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #555555;'> 1</span><span> Mazda RX4  21       6  160    110  3.9   2.62  16.5     0     1     4     4
+#&gt; </span><span style='color: #555555;'> 2</span><span> Mazda RX…  21       6  160    110  3.9   2.88  17.0     0     1     4     4
+#&gt; </span><span style='color: #555555;'> 3</span><span> Datsun 7…  22.8     4  108     93  3.85  2.32  18.6     1     1     4     1
+#&gt; </span><span style='color: #555555;'> 4</span><span> Hornet 4…  21.4     6  258    110  3.08  3.22  19.4     1     0     3     1
+#&gt; </span><span style='color: #555555;'> 5</span><span> Hornet S…  18.7     8  360    175  3.15  3.44  17.0     0     0     3     2
+#&gt; </span><span style='color: #555555;'> 6</span><span> Valiant    18.1     6  225    105  2.76  3.46  20.2     1     0     3     1
+#&gt; </span><span style='color: #555555;'> 7</span><span> Duster 3…  14.3     8  360    245  3.21  3.57  15.8     0     0     3     4
+#&gt; </span><span style='color: #555555;'> 8</span><span> Merc 240D  24.4     4  147.    62  3.69  3.19  20       1     0     4     2
+#&gt; </span><span style='color: #555555;'> 9</span><span> Merc 230   22.8     4  141.    95  3.92  3.15  22.9     1     0     4     2
+#&gt; </span><span style='color: #555555;'>10</span><span> Merc 280   19.2     6  168.   123  3.92  3.44  18.3     1     0     4     4
+#&gt; </span><span style='color: #555555;'># … with 22 more rows, and 2 more variables: .fitted </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, .resid </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span></div><div class='input'>
 <span class='co'># with a new dataset</span>
-<span class='fu'><a href='https://rdrr.io/pkg/generics/man/augment.html'>augment</a></span>(<span class='no'>lo</span>, <span class='kw'>newdata</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>(<span class='no'>mtcars</span>))</div><div class='output co'>#&gt; # A tibble: 6 x 14
+<span class='fu'><a href='https://rdrr.io/pkg/generics/man/augment.html'>augment</a></span>(<span class='no'>lo</span>, <span class='kw'>newdata</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>(<span class='no'>mtcars</span>))</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 6 x 14</span><span>
 #&gt;   .rownames   mpg   cyl  disp    hp  drat    wt  qsec    vs    am  gear  carb
-#&gt;   &lt;chr&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
-#&gt; 1 Mazda RX4  21       6   160   110  3.9   2.62  16.5     0     1     4     4
-#&gt; 2 Mazda RX…  21       6   160   110  3.9   2.88  17.0     0     1     4     4
-#&gt; 3 Datsun 7…  22.8     4   108    93  3.85  2.32  18.6     1     1     4     1
-#&gt; 4 Hornet 4…  21.4     6   258   110  3.08  3.22  19.4     1     0     3     1
-#&gt; 5 Hornet S…  18.7     8   360   175  3.15  3.44  17.0     0     0     3     2
-#&gt; 6 Valiant    18.1     6   225   105  2.76  3.46  20.2     1     0     3     1
-#&gt; # … with 2 more variables: .fitted &lt;dbl&gt;, .resid &lt;dbl&gt;</div><div class='input'>
-</div></pre>
+#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #555555;'>1</span><span> Mazda RX4  21       6   160   110  3.9   2.62  16.5     0     1     4     4
+#&gt; </span><span style='color: #555555;'>2</span><span> Mazda RX…  21       6   160   110  3.9   2.88  17.0     0     1     4     4
+#&gt; </span><span style='color: #555555;'>3</span><span> Datsun 7…  22.8     4   108    93  3.85  2.32  18.6     1     1     4     1
+#&gt; </span><span style='color: #555555;'>4</span><span> Hornet 4…  21.4     6   258   110  3.08  3.22  19.4     1     0     3     1
+#&gt; </span><span style='color: #555555;'>5</span><span> Hornet S…  18.7     8   360   175  3.15  3.44  17.0     0     0     3     2
+#&gt; </span><span style='color: #555555;'>6</span><span> Valiant    18.1     6   225   105  2.76  3.46  20.2     1     0     3     1
+#&gt; </span><span style='color: #555555;'># … with 2 more variables: .fitted </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, .resid </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span></div><div class='input'>
+</div></span></pre>
   </div>
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <h2>Contents</h2>
-    <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
-      <li><a href="#details">Details</a></li>
-      <li><a href="#see-also">See also</a></li>
-      <li><a href="#value">Value</a></li>
-      <li><a href="#examples">Examples</a></li>
-    </ul>
-
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
+    <nav id="toc" data-toggle="toc" class="sticky-top">
+      <h2 data-toc-skip>Contents</h2>
+    </nav>
   </div>
 </div>
 
 
       <footer>
       <div class="tidyverse">
-  <p>broom is a part of the <strong>tidyverse</strong>, an ecosystem of packages designed with common APIs and a shared philosophy. Learn more at <a href="https://tidyverse.org">tidyverse.org</a>.</p>
+  <p>broom is a part of the <strong>tidymodels</strong> ecosystem, a collection of modeling packages designed with common APIs and a shared philosophy.</p>
 </div>
 
 <div class="author">

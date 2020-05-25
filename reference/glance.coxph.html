@@ -17,22 +17,26 @@
 <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png" />
 
 <!-- jquery -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 
 <!-- Bootstrap -->
 <link href="../tidyverse.css" rel="stylesheet">
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
+
+<!-- bootstrap-toc -->
+<link rel="stylesheet" href="../bootstrap-toc.css">
+<script src="../bootstrap-toc.js"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
 
 <!-- headroom.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -53,7 +57,7 @@ Glance does not calculate summary measures. Rather, it farms out these
 computations to appropriate methods and gathers the results together.
 Sometimes a goodness of fit measure will be undefined. In these cases
 the measure will be reported as NA." />
-<meta property="og:image" content="http://broom.tidyverse.org/logo.png" />
+<meta property="og:image" content="https://broom.tidymodels.org/logo.png" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -80,7 +84,7 @@ the measure will be reported as NA." />
 
   </head>
 
-  <body>
+  <body data-spy="scroll" data-target="#toc">
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -95,9 +99,9 @@ the measure will be reported as NA." />
 
       <div class="navbar-brand-container">
         <a class="navbar-brand" href="../index.html">broom</a>
-        <div class="info">
-          <span class="partof">part of the <a href="https://tidyverse.org">tidyverse</a></span>
-          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.2.9003</span>
+        <div class="info hidden-xs hidden-sm">
+          <span class="partof">part of <a href="https://tidymodels.org">tidymodels</a></span>
+          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.7.0.9000</span>
         </div>
       </div>
     </div>
@@ -123,16 +127,13 @@ the measure will be reported as NA." />
       <a href="../articles/available-methods.html">Available methods</a>
     </li>
     <li>
-      <a href="../articles/bootstrapping.html">Bootstrapping</a>
+      <a href="https://www.tidymodels.org/learn/statistics/bootstrap/">Bootstrapping</a>
     </li>
     <li>
       <a href="../articles/broom_and_dplyr.html">Broom and dplyr</a>
     </li>
     <li>
-      <a href="../articles/external-tidiers.html">Tidiers in external packages</a>
-    </li>
-    <li>
-      <a href="../articles/kmeans.html">K-means</a>
+      <a href="https://www.tidymodels.org/learn/statistics/k-means/">K-means</a>
     </li>
   </ul>
 </li>
@@ -159,7 +160,7 @@ the measure will be reported as NA." />
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Glance at a(n) coxph object</h1>
-    <small class="dont-index">Source: <a href='https://github.com/tidymodels/broom/blob/master/R/survival-coxph-tidiers.R'><code>R/survival-coxph-tidiers.R</code></a></small>
+    <small class="dont-index">Source: <a href='http://github.com/tidymodels/broom/blob/master/R/survival-coxph-tidiers.R'><code>R/survival-coxph-tidiers.R</code></a></small>
     <div class="hidden name"><code>glance.coxph.Rd</code></div>
     </div>
 
@@ -233,8 +234,7 @@ the <code>data</code> argument.</p></td>
   <dt>logLik</dt><dd><p>The log-likelihood of the model. [stats::logLik()] may be a useful reference.</p></dd>
   <dt>nevent</dt><dd><p>number of events</p></dd>
   <dt>nobs</dt><dd><p>Number of observations used.</p></dd>
-  <dt>r.squared</dt><dd><p>R squared statistic, or the percent of variation explained by the model. Also known as the coefficient of determination.</p></dd>
-
+See survival::coxph.object for additional column descriptions.
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
@@ -243,26 +243,26 @@ the <code>data</code> argument.</p></td>
 
 <span class='no'>cfit</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/survival/man/coxph.html'>coxph</a></span>(<span class='fu'><a href='https://rdrr.io/pkg/survival/man/Surv.html'>Surv</a></span>(<span class='no'>time</span>, <span class='no'>status</span>) ~ <span class='no'>age</span> + <span class='no'>sex</span>, <span class='no'>lung</span>)
 
-<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>cfit</span>)</div><div class='output co'>#&gt; # A tibble: 2 x 5
+<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>cfit</span>)</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 2 x 5</span><span>
 #&gt;   term  estimate std.error statistic p.value
-#&gt;   &lt;chr&gt;    &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;
-#&gt; 1 age     0.0170   0.00922      1.85 0.0646 
-#&gt; 2 sex    -0.513    0.167       -3.06 0.00218</div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>cfit</span>, <span class='kw'>exponentiate</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; # A tibble: 2 x 5
+#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #555555;'>1</span><span> age     0.017</span><span style='text-decoration: underline;'>0</span><span>   0.009</span><span style='text-decoration: underline;'>22</span><span>      1.85 0.064</span><span style='text-decoration: underline;'>6</span><span> 
+#&gt; </span><span style='color: #555555;'>2</span><span> sex    -</span><span style='color: #BB0000;'>0.513</span><span>    0.167       -</span><span style='color: #BB0000;'>3.06</span><span> 0.002</span><span style='text-decoration: underline;'>18</span><span></div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>cfit</span>, <span class='kw'>exponentiate</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 2 x 5</span><span>
 #&gt;   term  estimate std.error statistic p.value
-#&gt;   &lt;chr&gt;    &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;
-#&gt; 1 age      1.02    0.00922      1.85 0.0646 
-#&gt; 2 sex      0.599   0.167       -3.06 0.00218</div><div class='input'>
+#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #555555;'>1</span><span> age      1.02    0.009</span><span style='text-decoration: underline;'>22</span><span>      1.85 0.064</span><span style='text-decoration: underline;'>6</span><span> 
+#&gt; </span><span style='color: #555555;'>2</span><span> sex      0.599   0.167       -</span><span style='color: #BB0000;'>3.06</span><span> 0.002</span><span style='text-decoration: underline;'>18</span><span></div><div class='input'>
 <span class='no'>lp</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/generics/man/augment.html'>augment</a></span>(<span class='no'>cfit</span>, <span class='no'>lung</span>)
 <span class='no'>risks</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/generics/man/augment.html'>augment</a></span>(<span class='no'>cfit</span>, <span class='no'>lung</span>, <span class='kw'>type.predict</span> <span class='kw'>=</span> <span class='st'>"risk"</span>)
 <span class='no'>expected</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/generics/man/augment.html'>augment</a></span>(<span class='no'>cfit</span>, <span class='no'>lung</span>, <span class='kw'>type.predict</span> <span class='kw'>=</span> <span class='st'>"expected"</span>)
 
-<span class='fu'><a href='https://rdrr.io/pkg/generics/man/glance.html'>glance</a></span>(<span class='no'>cfit</span>)</div><div class='output co'>#&gt; # A tibble: 1 x 15
+<span class='fu'><a href='https://rdrr.io/pkg/generics/man/glance.html'>glance</a></span>(<span class='no'>cfit</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 1 x 15</span><span>
 #&gt;   nevent statistic.log p.value.log statistic.sc p.value.sc statistic.wald
-#&gt;    &lt;dbl&gt;         &lt;dbl&gt;       &lt;dbl&gt;        &lt;dbl&gt;      &lt;dbl&gt;          &lt;dbl&gt;
-#&gt; 1    165          14.1    0.000857         13.7    0.00105           13.5
-#&gt; # … with 9 more variables: p.value.wald &lt;dbl&gt;, r.squared &lt;dbl&gt;,
-#&gt; #   r.squared.max &lt;dbl&gt;, concordance &lt;dbl&gt;, std.error.concordance &lt;dbl&gt;,
-#&gt; #   logLik &lt;dbl&gt;, AIC &lt;dbl&gt;, BIC &lt;dbl&gt;, nobs &lt;int&gt;</div><div class='input'>
+#&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>         </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>       </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>        </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>      </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>          </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #555555;'>1</span><span>    165          14.1    0.000</span><span style='text-decoration: underline;'>857</span><span>         13.7    0.001</span><span style='text-decoration: underline;'>05</span><span>           13.5
+#&gt; </span><span style='color: #555555;'># … with 9 more variables: p.value.wald </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, r.squared </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,</span><span>
+#&gt; </span><span style='color: #555555;'>#   r.squared.max </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, concordance </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, std.error.concordance </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,</span><span>
+#&gt; </span><span style='color: #555555;'>#   logLik </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, AIC </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, BIC </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, nobs </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span></div><div class='input'>
 <span class='co'># also works on clogit models</span>
 <span class='no'>resp</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/levels.html'>levels</a></span>(<span class='no'>logan</span>$<span class='no'>occupation</span>)
 <span class='no'>n</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>nrow</a></span>(<span class='no'>logan</span>)
@@ -276,24 +276,24 @@ the <code>data</code> argument.</p></td>
 <span class='no'>logan2</span>$<span class='no'>case</span> <span class='kw'>&lt;-</span> (<span class='no'>logan2</span>$<span class='no'>occupation</span> <span class='kw'>==</span> <span class='no'>logan2</span>$<span class='no'>tocc</span>)
 
 <span class='no'>cl</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/survival/man/clogit.html'>clogit</a></span>(<span class='no'>case</span> ~ <span class='no'>tocc</span> + <span class='no'>tocc</span>:<span class='no'>education</span> + <span class='fu'><a href='https://rdrr.io/pkg/survival/man/strata.html'>strata</a></span>(<span class='no'>id</span>), <span class='no'>logan2</span>)
-<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>cl</span>)</div><div class='output co'>#&gt; # A tibble: 9 x 5
+<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>cl</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 9 x 5</span><span>
 #&gt;   term                       estimate std.error statistic   p.value
-#&gt;   &lt;chr&gt;                         &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;
-#&gt; 1 toccfarm                     -1.90     1.38       -1.37  1.70e- 1
-#&gt; 2 toccoperatives                1.17     0.566       2.06  3.91e- 2
-#&gt; 3 toccprofessional             -8.10     0.699     -11.6   4.45e-31
-#&gt; 4 toccsales                    -5.03     0.770      -6.53  6.54e-11
-#&gt; 5 tocccraftsmen:education      -0.332    0.0569     -5.84  5.13e- 9
-#&gt; 6 toccfarm:education           -0.370    0.116      -3.18  1.47e- 3
-#&gt; 7 toccoperatives:education     -0.422    0.0584     -7.23  4.98e-13
-#&gt; 8 toccprofessional:education    0.278    0.0510      5.45  4.94e- 8
-#&gt; 9 toccsales:education          NA        0          NA    NA       </div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/generics/man/glance.html'>glance</a></span>(<span class='no'>cl</span>)</div><div class='output co'>#&gt; # A tibble: 1 x 15
+#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>                         </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #555555;'>1</span><span> toccfarm                     -</span><span style='color: #BB0000;'>1.90</span><span>     1.38       -</span><span style='color: #BB0000;'>1.37</span><span>  1.70</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>- 1</span><span>
+#&gt; </span><span style='color: #555555;'>2</span><span> toccoperatives                1.17     0.566       2.06  3.91</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>- 2</span><span>
+#&gt; </span><span style='color: #555555;'>3</span><span> toccprofessional             -</span><span style='color: #BB0000;'>8.10</span><span>     0.699     -</span><span style='color: #BB0000;'>11.6</span><span>   4.45</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-31</span><span>
+#&gt; </span><span style='color: #555555;'>4</span><span> toccsales                    -</span><span style='color: #BB0000;'>5.03</span><span>     0.770      -</span><span style='color: #BB0000;'>6.53</span><span>  6.54</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-11</span><span>
+#&gt; </span><span style='color: #555555;'>5</span><span> tocccraftsmen:education      -</span><span style='color: #BB0000;'>0.332</span><span>    0.056</span><span style='text-decoration: underline;'>9</span><span>     -</span><span style='color: #BB0000;'>5.84</span><span>  5.13</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>- 9</span><span>
+#&gt; </span><span style='color: #555555;'>6</span><span> toccfarm:education           -</span><span style='color: #BB0000;'>0.370</span><span>    0.116      -</span><span style='color: #BB0000;'>3.18</span><span>  1.47</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>- 3</span><span>
+#&gt; </span><span style='color: #555555;'>7</span><span> toccoperatives:education     -</span><span style='color: #BB0000;'>0.422</span><span>    0.058</span><span style='text-decoration: underline;'>4</span><span>     -</span><span style='color: #BB0000;'>7.23</span><span>  4.98</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-13</span><span>
+#&gt; </span><span style='color: #555555;'>8</span><span> toccprofessional:education    0.278    0.051</span><span style='text-decoration: underline;'>0</span><span>      5.45  4.94</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>- 8</span><span>
+#&gt; </span><span style='color: #555555;'>9</span><span> toccsales:education          </span><span style='color: #BB0000;'>NA</span><span>        0          </span><span style='color: #BB0000;'>NA</span><span>    </span><span style='color: #BB0000;'>NA</span><span>   </span><span style='color: #555555;'> </span><span>   </div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/generics/man/glance.html'>glance</a></span>(<span class='no'>cl</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 1 x 15</span><span>
 #&gt;   nevent statistic.log p.value.log statistic.sc p.value.sc statistic.wald
-#&gt;    &lt;dbl&gt;         &lt;dbl&gt;       &lt;dbl&gt;        &lt;dbl&gt;      &lt;dbl&gt;          &lt;dbl&gt;
-#&gt; 1    838          666.   1.90e-138         682.  5.01e-142           414.
-#&gt; # … with 9 more variables: p.value.wald &lt;dbl&gt;, r.squared &lt;dbl&gt;,
-#&gt; #   r.squared.max &lt;dbl&gt;, concordance &lt;dbl&gt;, std.error.concordance &lt;dbl&gt;,
-#&gt; #   logLik &lt;dbl&gt;, AIC &lt;dbl&gt;, BIC &lt;dbl&gt;, nobs &lt;int&gt;</div><div class='input'>
+#&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>         </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>       </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>        </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>      </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>          </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #555555;'>1</span><span>    838          666.   1.90</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-138</span><span>         682.  5.01</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-142</span><span>           414.
+#&gt; </span><span style='color: #555555;'># … with 9 more variables: p.value.wald </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, r.squared </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,</span><span>
+#&gt; </span><span style='color: #555555;'>#   r.squared.max </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, concordance </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, std.error.concordance </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,</span><span>
+#&gt; </span><span style='color: #555555;'>#   logLik </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, AIC </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, BIC </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, nobs </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span></div><div class='input'>
 <span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>ggplot2</span>)
 
 <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span>(<span class='no'>lp</span>, <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='no'>age</span>, <span class='no'>.fitted</span>, <span class='kw'>color</span> <span class='kw'>=</span> <span class='no'>sex</span>)) +
@@ -303,24 +303,19 @@ the <code>data</code> argument.</p></td>
 <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span>(<span class='no'>expected</span>, <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='no'>time</span>, <span class='no'>.fitted</span>, <span class='kw'>color</span> <span class='kw'>=</span> <span class='no'>sex</span>)) +
   <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_point.html'>geom_point</a></span>()</div><div class='img'><img src='glance.coxph-3.png' alt='' width='700' height='433' /></div><div class='input'>
 
-</div></pre>
+</div></span></pre>
   </div>
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <h2>Contents</h2>
-    <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
-      <li><a href="#see-also">See also</a></li>
-      <li><a href="#value">Value</a></li>
-      <li><a href="#examples">Examples</a></li>
-    </ul>
-
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
+    <nav id="toc" data-toggle="toc" class="sticky-top">
+      <h2 data-toc-skip>Contents</h2>
+    </nav>
   </div>
 </div>
 
 
       <footer>
       <div class="tidyverse">
-  <p>broom is a part of the <strong>tidyverse</strong>, an ecosystem of packages designed with common APIs and a shared philosophy. Learn more at <a href="https://tidyverse.org">tidyverse.org</a>.</p>
+  <p>broom is a part of the <strong>tidymodels</strong> ecosystem, a collection of modeling packages designed with common APIs and a shared philosophy.</p>
 </div>
 
 <div class="author">

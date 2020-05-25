@@ -17,22 +17,26 @@
 <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png" />
 
 <!-- jquery -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 
 <!-- Bootstrap -->
 <link href="../tidyverse.css" rel="stylesheet">
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
+
+<!-- bootstrap-toc -->
+<link rel="stylesheet" href="../bootstrap-toc.css">
+<script src="../bootstrap-toc.js"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
 
 <!-- headroom.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -53,7 +57,7 @@ Glance does not calculate summary measures. Rather, it farms out these
 computations to appropriate methods and gathers the results together.
 Sometimes a goodness of fit measure will be undefined. In these cases
 the measure will be reported as NA." />
-<meta property="og:image" content="http://broom.tidyverse.org/logo.png" />
+<meta property="og:image" content="https://broom.tidymodels.org/logo.png" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -80,7 +84,7 @@ the measure will be reported as NA." />
 
   </head>
 
-  <body>
+  <body data-spy="scroll" data-target="#toc">
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -95,9 +99,9 @@ the measure will be reported as NA." />
 
       <div class="navbar-brand-container">
         <a class="navbar-brand" href="../index.html">broom</a>
-        <div class="info">
-          <span class="partof">part of the <a href="https://tidyverse.org">tidyverse</a></span>
-          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.2.9003</span>
+        <div class="info hidden-xs hidden-sm">
+          <span class="partof">part of <a href="https://tidymodels.org">tidymodels</a></span>
+          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.7.0.9000</span>
         </div>
       </div>
     </div>
@@ -123,16 +127,13 @@ the measure will be reported as NA." />
       <a href="../articles/available-methods.html">Available methods</a>
     </li>
     <li>
-      <a href="../articles/bootstrapping.html">Bootstrapping</a>
+      <a href="https://www.tidymodels.org/learn/statistics/bootstrap/">Bootstrapping</a>
     </li>
     <li>
       <a href="../articles/broom_and_dplyr.html">Broom and dplyr</a>
     </li>
     <li>
-      <a href="../articles/external-tidiers.html">Tidiers in external packages</a>
-    </li>
-    <li>
-      <a href="../articles/kmeans.html">K-means</a>
+      <a href="https://www.tidymodels.org/learn/statistics/k-means/">K-means</a>
     </li>
   </ul>
 </li>
@@ -159,7 +160,7 @@ the measure will be reported as NA." />
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Glance at a(n) pyears object</h1>
-    <small class="dont-index">Source: <a href='https://github.com/tidymodels/broom/blob/master/R/survival-pyears-tidiers.R'><code>R/survival-pyears-tidiers.R</code></a></small>
+    <small class="dont-index">Source: <a href='http://github.com/tidymodels/broom/blob/master/R/survival-pyears-tidiers.R'><code>R/survival-pyears-tidiers.R</code></a></small>
     <div class="hidden name"><code>glance.pyears.Rd</code></div>
     </div>
 
@@ -243,94 +244,89 @@ the <code>data</code> argument.</p></td>
 <span class='no'>pstat</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/ifelse.html'>ifelse</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/NA.html'>is.na</a></span>(<span class='no'>mgus</span>$<span class='no'>pctime</span>), <span class='fl'>0</span>, <span class='fl'>1</span>)
 <span class='no'>pfit</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/survival/man/pyears.html'>pyears</a></span>(<span class='fu'><a href='https://rdrr.io/pkg/survival/man/Surv.html'>Surv</a></span>(<span class='no'>ptime</span>/<span class='fl'>365.25</span>, <span class='no'>pstat</span>) ~ <span class='no'>temp.yr</span> + <span class='no'>temp.age</span> + <span class='no'>sex</span>,  <span class='no'>mgus</span>,
                <span class='kw'>data.frame</span><span class='kw'>=</span><span class='fl'>TRUE</span>)
-<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>pfit</span>)</div><div class='output co'>#&gt; # A tibble: 1,752 x 6
+<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>pfit</span>)</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 1,752 x 6</span><span>
 #&gt;    temp.yr temp.age sex     pyears     n event
-#&gt;    &lt;fct&gt;   &lt;fct&gt;    &lt;fct&gt;    &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
-#&gt;  1 71      34       female 0.00274     1     0
-#&gt;  2 68      35       female 0.00274     1     0
-#&gt;  3 72      35       female 0.00274     1     0
-#&gt;  4 69      36       female 0.00274     1     0
-#&gt;  5 73      36       female 0.00274     1     0
-#&gt;  6 69      37       female 0.00274     1     0
-#&gt;  7 70      37       female 0.00274     1     0
-#&gt;  8 74      37       female 0.00274     1     0
-#&gt;  9 70      38       female 0.00274     1     0
-#&gt; 10 71      38       female 0.00274     1     0
-#&gt; # … with 1,742 more rows</div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/generics/man/glance.html'>glance</a></span>(<span class='no'>pfit</span>)</div><div class='output co'>#&gt; # A tibble: 1 x 3
+#&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;fct&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;fct&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;fct&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #555555;'> 1</span><span> 71      34       female 0.002</span><span style='text-decoration: underline;'>74</span><span>     1     0
+#&gt; </span><span style='color: #555555;'> 2</span><span> 68      35       female 0.002</span><span style='text-decoration: underline;'>74</span><span>     1     0
+#&gt; </span><span style='color: #555555;'> 3</span><span> 72      35       female 0.002</span><span style='text-decoration: underline;'>74</span><span>     1     0
+#&gt; </span><span style='color: #555555;'> 4</span><span> 69      36       female 0.002</span><span style='text-decoration: underline;'>74</span><span>     1     0
+#&gt; </span><span style='color: #555555;'> 5</span><span> 73      36       female 0.002</span><span style='text-decoration: underline;'>74</span><span>     1     0
+#&gt; </span><span style='color: #555555;'> 6</span><span> 69      37       female 0.002</span><span style='text-decoration: underline;'>74</span><span>     1     0
+#&gt; </span><span style='color: #555555;'> 7</span><span> 70      37       female 0.002</span><span style='text-decoration: underline;'>74</span><span>     1     0
+#&gt; </span><span style='color: #555555;'> 8</span><span> 74      37       female 0.002</span><span style='text-decoration: underline;'>74</span><span>     1     0
+#&gt; </span><span style='color: #555555;'> 9</span><span> 70      38       female 0.002</span><span style='text-decoration: underline;'>74</span><span>     1     0
+#&gt; </span><span style='color: #555555;'>10</span><span> 71      38       female 0.002</span><span style='text-decoration: underline;'>74</span><span>     1     0
+#&gt; </span><span style='color: #555555;'># … with 1,742 more rows</span><span></div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/generics/man/glance.html'>glance</a></span>(<span class='no'>pfit</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 1 x 3</span><span>
 #&gt;   total offtable  nobs
-#&gt;   &lt;dbl&gt;    &lt;dbl&gt; &lt;int&gt;
-#&gt; 1  8.32    0.727   241</div><div class='input'>
+#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>
+#&gt; </span><span style='color: #555555;'>1</span><span>  8.32    0.727   241</div><div class='input'>
 <span class='co'># if data.frame argument is not given, different information is present in</span>
 <span class='co'># output</span>
 <span class='no'>pfit2</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/survival/man/pyears.html'>pyears</a></span>(<span class='fu'><a href='https://rdrr.io/pkg/survival/man/Surv.html'>Surv</a></span>(<span class='no'>ptime</span>/<span class='fl'>365.25</span>, <span class='no'>pstat</span>) ~ <span class='no'>temp.yr</span> + <span class='no'>temp.age</span> + <span class='no'>sex</span>,  <span class='no'>mgus</span>)
-<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>pfit2</span>)</div><div class='output co'>#&gt; # A tibble: 37 x 402
+<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>pfit2</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 37 x 402</span><span>
 #&gt;    pyears.34.female pyears.35.female pyears.36.female pyears.37.female
-#&gt;               &lt;dbl&gt;            &lt;dbl&gt;            &lt;dbl&gt;            &lt;dbl&gt;
-#&gt;  1                0                0                0                0
-#&gt;  2                0                0                0                0
-#&gt;  3                0                0                0                0
-#&gt;  4                0                0                0                0
-#&gt;  5                0                0                0                0
-#&gt;  6                0                0                0                0
-#&gt;  7                0                0                0                0
-#&gt;  8                0                0                0                0
-#&gt;  9                0                0                0                0
-#&gt; 10                0                0                0                0
-#&gt; # … with 27 more rows, and 398 more variables: pyears.38.female &lt;dbl&gt;,
-#&gt; #   pyears.39.female &lt;dbl&gt;, pyears.40.female &lt;dbl&gt;, pyears.41.female &lt;dbl&gt;,
-#&gt; #   pyears.42.female &lt;dbl&gt;, pyears.43.female &lt;dbl&gt;, pyears.44.female &lt;dbl&gt;,
-#&gt; #   pyears.45.female &lt;dbl&gt;, pyears.46.female &lt;dbl&gt;, pyears.47.female &lt;dbl&gt;,
-#&gt; #   pyears.48.female &lt;dbl&gt;, pyears.49.female &lt;dbl&gt;, pyears.50.female &lt;dbl&gt;,
-#&gt; #   pyears.51.female &lt;dbl&gt;, pyears.52.female &lt;dbl&gt;, pyears.53.female &lt;dbl&gt;,
-#&gt; #   pyears.54.female &lt;dbl&gt;, pyears.55.female &lt;dbl&gt;, pyears.56.female &lt;dbl&gt;,
-#&gt; #   pyears.57.female &lt;dbl&gt;, pyears.58.female &lt;dbl&gt;, pyears.59.female &lt;dbl&gt;,
-#&gt; #   pyears.60.female &lt;dbl&gt;, pyears.61.female &lt;dbl&gt;, pyears.62.female &lt;dbl&gt;,
-#&gt; #   pyears.63.female &lt;dbl&gt;, pyears.64.female &lt;dbl&gt;, pyears.65.female &lt;dbl&gt;,
-#&gt; #   pyears.66.female &lt;dbl&gt;, pyears.67.female &lt;dbl&gt;, pyears.68.female &lt;dbl&gt;,
-#&gt; #   pyears.69.female &lt;dbl&gt;, pyears.70.female &lt;dbl&gt;, pyears.71.female &lt;dbl&gt;,
-#&gt; #   pyears.72.female &lt;dbl&gt;, pyears.73.female &lt;dbl&gt;, pyears.74.female &lt;dbl&gt;,
-#&gt; #   pyears.75.female &lt;dbl&gt;, pyears.76.female &lt;dbl&gt;, pyears.77.female &lt;dbl&gt;,
-#&gt; #   pyears.78.female &lt;dbl&gt;, pyears.79.female &lt;dbl&gt;, pyears.80.female &lt;dbl&gt;,
-#&gt; #   pyears.81.female &lt;dbl&gt;, pyears.82.female &lt;dbl&gt;, pyears.83.female &lt;dbl&gt;,
-#&gt; #   pyears.84.female &lt;dbl&gt;, pyears.85.female &lt;dbl&gt;, pyears.86.female &lt;dbl&gt;,
-#&gt; #   pyears.87.female &lt;dbl&gt;, pyears.88.female &lt;dbl&gt;, pyears.89.female &lt;dbl&gt;,
-#&gt; #   pyears.90.female &lt;dbl&gt;, pyears.91.female &lt;dbl&gt;, pyears.92.female &lt;dbl&gt;,
-#&gt; #   pyears.93.female &lt;dbl&gt;, pyears.94.female &lt;dbl&gt;, pyears.95.female &lt;dbl&gt;,
-#&gt; #   pyears.96.female &lt;dbl&gt;, pyears.97.female &lt;dbl&gt;, pyears.98.female &lt;dbl&gt;,
-#&gt; #   pyears.99.female &lt;dbl&gt;, pyears.100.female &lt;dbl&gt;, pyears.34.male &lt;dbl&gt;,
-#&gt; #   pyears.35.male &lt;dbl&gt;, pyears.36.male &lt;dbl&gt;, pyears.37.male &lt;dbl&gt;,
-#&gt; #   pyears.38.male &lt;dbl&gt;, pyears.39.male &lt;dbl&gt;, pyears.40.male &lt;dbl&gt;,
-#&gt; #   pyears.41.male &lt;dbl&gt;, pyears.42.male &lt;dbl&gt;, pyears.43.male &lt;dbl&gt;,
-#&gt; #   pyears.44.male &lt;dbl&gt;, pyears.45.male &lt;dbl&gt;, pyears.46.male &lt;dbl&gt;,
-#&gt; #   pyears.47.male &lt;dbl&gt;, pyears.48.male &lt;dbl&gt;, pyears.49.male &lt;dbl&gt;,
-#&gt; #   pyears.50.male &lt;dbl&gt;, pyears.51.male &lt;dbl&gt;, pyears.52.male &lt;dbl&gt;,
-#&gt; #   pyears.53.male &lt;dbl&gt;, pyears.54.male &lt;dbl&gt;, pyears.55.male &lt;dbl&gt;,
-#&gt; #   pyears.56.male &lt;dbl&gt;, pyears.57.male &lt;dbl&gt;, pyears.58.male &lt;dbl&gt;,
-#&gt; #   pyears.59.male &lt;dbl&gt;, pyears.60.male &lt;dbl&gt;, pyears.61.male &lt;dbl&gt;,
-#&gt; #   pyears.62.male &lt;dbl&gt;, pyears.63.male &lt;dbl&gt;, pyears.64.male &lt;dbl&gt;,
-#&gt; #   pyears.65.male &lt;dbl&gt;, pyears.66.male &lt;dbl&gt;, pyears.67.male &lt;dbl&gt;,
-#&gt; #   pyears.68.male &lt;dbl&gt;, pyears.69.male &lt;dbl&gt;, pyears.70.male &lt;dbl&gt;, …</div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/generics/man/glance.html'>glance</a></span>(<span class='no'>pfit2</span>)</div><div class='output co'>#&gt; # A tibble: 1 x 3
+#&gt;               </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>            </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>            </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>            </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #555555;'> 1</span><span>                0                0                0                0
+#&gt; </span><span style='color: #555555;'> 2</span><span>                0                0                0                0
+#&gt; </span><span style='color: #555555;'> 3</span><span>                0                0                0                0
+#&gt; </span><span style='color: #555555;'> 4</span><span>                0                0                0                0
+#&gt; </span><span style='color: #555555;'> 5</span><span>                0                0                0                0
+#&gt; </span><span style='color: #555555;'> 6</span><span>                0                0                0                0
+#&gt; </span><span style='color: #555555;'> 7</span><span>                0                0                0                0
+#&gt; </span><span style='color: #555555;'> 8</span><span>                0                0                0                0
+#&gt; </span><span style='color: #555555;'> 9</span><span>                0                0                0                0
+#&gt; </span><span style='color: #555555;'>10</span><span>                0                0                0                0
+#&gt; </span><span style='color: #555555;'># … with 27 more rows, and 398 more variables: pyears.38.female </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,</span><span>
+#&gt; </span><span style='color: #555555;'>#   pyears.39.female </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, pyears.40.female </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, pyears.41.female </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,</span><span>
+#&gt; </span><span style='color: #555555;'>#   pyears.42.female </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, pyears.43.female </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, pyears.44.female </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,</span><span>
+#&gt; </span><span style='color: #555555;'>#   pyears.45.female </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, pyears.46.female </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, pyears.47.female </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,</span><span>
+#&gt; </span><span style='color: #555555;'>#   pyears.48.female </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, pyears.49.female </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, pyears.50.female </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,</span><span>
+#&gt; </span><span style='color: #555555;'>#   pyears.51.female </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, pyears.52.female </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, pyears.53.female </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,</span><span>
+#&gt; </span><span style='color: #555555;'>#   pyears.54.female </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, pyears.55.female </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, pyears.56.female </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,</span><span>
+#&gt; </span><span style='color: #555555;'>#   pyears.57.female </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, pyears.58.female </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, pyears.59.female </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,</span><span>
+#&gt; </span><span style='color: #555555;'>#   pyears.60.female </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, pyears.61.female </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, pyears.62.female </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,</span><span>
+#&gt; </span><span style='color: #555555;'>#   pyears.63.female </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, pyears.64.female </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, pyears.65.female </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,</span><span>
+#&gt; </span><span style='color: #555555;'>#   pyears.66.female </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, pyears.67.female </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, pyears.68.female </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,</span><span>
+#&gt; </span><span style='color: #555555;'>#   pyears.69.female </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, pyears.70.female </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, pyears.71.female </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,</span><span>
+#&gt; </span><span style='color: #555555;'>#   pyears.72.female </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, pyears.73.female </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, pyears.74.female </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,</span><span>
+#&gt; </span><span style='color: #555555;'>#   pyears.75.female </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, pyears.76.female </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, pyears.77.female </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,</span><span>
+#&gt; </span><span style='color: #555555;'>#   pyears.78.female </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, pyears.79.female </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, pyears.80.female </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,</span><span>
+#&gt; </span><span style='color: #555555;'>#   pyears.81.female </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, pyears.82.female </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, pyears.83.female </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,</span><span>
+#&gt; </span><span style='color: #555555;'>#   pyears.84.female </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, pyears.85.female </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, pyears.86.female </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,</span><span>
+#&gt; </span><span style='color: #555555;'>#   pyears.87.female </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, pyears.88.female </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, pyears.89.female </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,</span><span>
+#&gt; </span><span style='color: #555555;'>#   pyears.90.female </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, pyears.91.female </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, pyears.92.female </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,</span><span>
+#&gt; </span><span style='color: #555555;'>#   pyears.93.female </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, pyears.94.female </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, pyears.95.female </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,</span><span>
+#&gt; </span><span style='color: #555555;'>#   pyears.96.female </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, pyears.97.female </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, pyears.98.female </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,</span><span>
+#&gt; </span><span style='color: #555555;'>#   pyears.99.female </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, pyears.100.female </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, pyears.34.male </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,</span><span>
+#&gt; </span><span style='color: #555555;'>#   pyears.35.male </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, pyears.36.male </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, pyears.37.male </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,</span><span>
+#&gt; </span><span style='color: #555555;'>#   pyears.38.male </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, pyears.39.male </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, pyears.40.male </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,</span><span>
+#&gt; </span><span style='color: #555555;'>#   pyears.41.male </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, pyears.42.male </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, pyears.43.male </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,</span><span>
+#&gt; </span><span style='color: #555555;'>#   pyears.44.male </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, pyears.45.male </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, pyears.46.male </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,</span><span>
+#&gt; </span><span style='color: #555555;'>#   pyears.47.male </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, pyears.48.male </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, pyears.49.male </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,</span><span>
+#&gt; </span><span style='color: #555555;'>#   pyears.50.male </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, pyears.51.male </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, pyears.52.male </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,</span><span>
+#&gt; </span><span style='color: #555555;'>#   pyears.53.male </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, pyears.54.male </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, pyears.55.male </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,</span><span>
+#&gt; </span><span style='color: #555555;'>#   pyears.56.male </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, pyears.57.male </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, pyears.58.male </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,</span><span>
+#&gt; </span><span style='color: #555555;'>#   pyears.59.male </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, pyears.60.male </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, pyears.61.male </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,</span><span>
+#&gt; </span><span style='color: #555555;'>#   pyears.62.male </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, pyears.63.male </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, pyears.64.male </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,</span><span>
+#&gt; </span><span style='color: #555555;'>#   pyears.65.male </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, pyears.66.male </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, pyears.67.male </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,</span><span>
+#&gt; </span><span style='color: #555555;'>#   pyears.68.male </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, pyears.69.male </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, pyears.70.male </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, …</span><span></div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/generics/man/glance.html'>glance</a></span>(<span class='no'>pfit2</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 1 x 3</span><span>
 #&gt;   total offtable  nobs
-#&gt;   &lt;dbl&gt;    &lt;dbl&gt; &lt;int&gt;
-#&gt; 1  8.32    0.727   241</div><div class='input'>
-</div></pre>
+#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>
+#&gt; </span><span style='color: #555555;'>1</span><span>  8.32    0.727   241</div><div class='input'>
+</div></span></pre>
   </div>
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <h2>Contents</h2>
-    <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
-      <li><a href="#see-also">See also</a></li>
-      <li><a href="#value">Value</a></li>
-      <li><a href="#examples">Examples</a></li>
-    </ul>
-
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
+    <nav id="toc" data-toggle="toc" class="sticky-top">
+      <h2 data-toc-skip>Contents</h2>
+    </nav>
   </div>
 </div>
 
 
       <footer>
       <div class="tidyverse">
-  <p>broom is a part of the <strong>tidyverse</strong>, an ecosystem of packages designed with common APIs and a shared philosophy. Learn more at <a href="https://tidyverse.org">tidyverse.org</a>.</p>
+  <p>broom is a part of the <strong>tidymodels</strong> ecosystem, a collection of modeling packages designed with common APIs and a shared philosophy.</p>
 </div>
 
 <div class="author">

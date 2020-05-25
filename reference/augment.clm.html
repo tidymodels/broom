@@ -17,22 +17,26 @@
 <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png" />
 
 <!-- jquery -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 
 <!-- Bootstrap -->
 <link href="../tidyverse.css" rel="stylesheet">
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
+
+<!-- bootstrap-toc -->
+<link rel="stylesheet" href="../bootstrap-toc.css">
+<script src="../bootstrap-toc.js"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
 
 <!-- headroom.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -74,7 +78,7 @@ model on data in a tibble.
 We are in the process of defining behaviors for models fit with various
 na.action arguments, but make no guarantees about behavior when data is
 missing at this time." />
-<meta property="og:image" content="http://broom.tidyverse.org/logo.png" />
+<meta property="og:image" content="https://broom.tidymodels.org/logo.png" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -101,7 +105,7 @@ missing at this time." />
 
   </head>
 
-  <body>
+  <body data-spy="scroll" data-target="#toc">
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -116,9 +120,9 @@ missing at this time." />
 
       <div class="navbar-brand-container">
         <a class="navbar-brand" href="../index.html">broom</a>
-        <div class="info">
-          <span class="partof">part of the <a href="https://tidyverse.org">tidyverse</a></span>
-          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.2.9003</span>
+        <div class="info hidden-xs hidden-sm">
+          <span class="partof">part of <a href="https://tidymodels.org">tidymodels</a></span>
+          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.7.0.9000</span>
         </div>
       </div>
     </div>
@@ -144,16 +148,13 @@ missing at this time." />
       <a href="../articles/available-methods.html">Available methods</a>
     </li>
     <li>
-      <a href="../articles/bootstrapping.html">Bootstrapping</a>
+      <a href="https://www.tidymodels.org/learn/statistics/bootstrap/">Bootstrapping</a>
     </li>
     <li>
       <a href="../articles/broom_and_dplyr.html">Broom and dplyr</a>
     </li>
     <li>
-      <a href="../articles/external-tidiers.html">Tidiers in external packages</a>
-    </li>
-    <li>
-      <a href="../articles/kmeans.html">K-means</a>
+      <a href="https://www.tidymodels.org/learn/statistics/k-means/">K-means</a>
     </li>
   </ul>
 </li>
@@ -180,7 +181,7 @@ missing at this time." />
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Augment data with information from a(n) clm object</h1>
-    <small class="dont-index">Source: <a href='https://github.com/tidymodels/broom/blob/master/R/ordinal-clm-tidiers.R'><code>R/ordinal-clm-tidiers.R</code></a></small>
+    <small class="dont-index">Source: <a href='http://github.com/tidymodels/broom/blob/master/R/ordinal-clm-tidiers.R'><code>R/ordinal-clm-tidiers.R</code></a></small>
     <div class="hidden name"><code>augment.clm.Rd</code></div>
     </div>
 
@@ -293,97 +294,93 @@ the <code>data</code> argument.</p></td>
 #&gt; <span class='message'>    slice</span></div><div class='input'>
 <span class='no'>fit</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/ordinal/man/clm.html'>clm</a></span>(<span class='no'>rating</span> ~ <span class='no'>temp</span> * <span class='no'>contact</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>wine</span>)
 
-<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>fit</span>)</div><div class='output co'>#&gt; # A tibble: 7 x 6
+<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>fit</span>)</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 7 x 6</span><span>
 #&gt;   term                estimate std.error statistic  p.value coef.type
-#&gt;   &lt;chr&gt;                  &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt; &lt;chr&gt;    
-#&gt; 1 1|2                   -1.41      0.545    -2.59  9.66e- 3 intercept
-#&gt; 2 2|3                    1.14      0.510     2.24  2.48e- 2 intercept
-#&gt; 3 3|4                    3.38      0.638     5.29  1.21e- 7 intercept
-#&gt; 4 4|5                    4.94      0.751     6.58  4.66e-11 intercept
-#&gt; 5 tempwarm               2.32      0.701     3.31  9.28e- 4 location 
-#&gt; 6 contactyes             1.35      0.660     2.04  4.13e- 2 location 
-#&gt; 7 tempwarm:contactyes    0.360     0.924     0.389 6.97e- 1 location </div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>fit</span>, <span class='kw'>conf.int</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>conf.level</span> <span class='kw'>=</span> <span class='fl'>0.9</span>)</div><div class='output co'>#&gt; # A tibble: 7 x 8
+#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>                  </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>    
+#&gt; </span><span style='color: #555555;'>1</span><span> 1|2                   -</span><span style='color: #BB0000;'>1.41</span><span>      0.545    -</span><span style='color: #BB0000;'>2.59</span><span>  9.66</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>- 3</span><span> intercept
+#&gt; </span><span style='color: #555555;'>2</span><span> 2|3                    1.14      0.510     2.24  2.48</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>- 2</span><span> intercept
+#&gt; </span><span style='color: #555555;'>3</span><span> 3|4                    3.38      0.638     5.29  1.21</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>- 7</span><span> intercept
+#&gt; </span><span style='color: #555555;'>4</span><span> 4|5                    4.94      0.751     6.58  4.66</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-11</span><span> intercept
+#&gt; </span><span style='color: #555555;'>5</span><span> tempwarm               2.32      0.701     3.31  9.28</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>- 4</span><span> location 
+#&gt; </span><span style='color: #555555;'>6</span><span> contactyes             1.35      0.660     2.04  4.13</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>- 2</span><span> location 
+#&gt; </span><span style='color: #555555;'>7</span><span> tempwarm:contactyes    0.360     0.924     0.389 6.97</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>- 1</span><span> location </div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>fit</span>, <span class='kw'>conf.int</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>conf.level</span> <span class='kw'>=</span> <span class='fl'>0.9</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 7 x 8</span><span>
 #&gt;   term        estimate std.error statistic  p.value conf.low conf.high coef.type
-#&gt;   &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;    
-#&gt; 1 1|2           -1.41      0.545    -2.59  9.66e- 3   NA         NA    intercept
-#&gt; 2 2|3            1.14      0.510     2.24  2.48e- 2   NA         NA    intercept
-#&gt; 3 3|4            3.38      0.638     5.29  1.21e- 7   NA         NA    intercept
-#&gt; 4 4|5            4.94      0.751     6.58  4.66e-11   NA         NA    intercept
-#&gt; 5 tempwarm       2.32      0.701     3.31  9.28e- 4    1.20       3.52 location 
-#&gt; 6 contactyes     1.35      0.660     2.04  4.13e- 2    0.284      2.47 location 
-#&gt; 7 tempwarm:c…    0.360     0.924     0.389 6.97e- 1   -1.17       1.89 location </div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>fit</span>, <span class='kw'>conf.int</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>conf.type</span> <span class='kw'>=</span> <span class='st'>"Wald"</span>, <span class='kw'>exponentiate</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; # A tibble: 7 x 8
+#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>          </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>    
+#&gt; </span><span style='color: #555555;'>1</span><span> 1|2           -</span><span style='color: #BB0000;'>1.41</span><span>      0.545    -</span><span style='color: #BB0000;'>2.59</span><span>  9.66</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>- 3</span><span>   </span><span style='color: #BB0000;'>NA</span><span>         </span><span style='color: #BB0000;'>NA</span><span>    intercept
+#&gt; </span><span style='color: #555555;'>2</span><span> 2|3            1.14      0.510     2.24  2.48</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>- 2</span><span>   </span><span style='color: #BB0000;'>NA</span><span>         </span><span style='color: #BB0000;'>NA</span><span>    intercept
+#&gt; </span><span style='color: #555555;'>3</span><span> 3|4            3.38      0.638     5.29  1.21</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>- 7</span><span>   </span><span style='color: #BB0000;'>NA</span><span>         </span><span style='color: #BB0000;'>NA</span><span>    intercept
+#&gt; </span><span style='color: #555555;'>4</span><span> 4|5            4.94      0.751     6.58  4.66</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-11</span><span>   </span><span style='color: #BB0000;'>NA</span><span>         </span><span style='color: #BB0000;'>NA</span><span>    intercept
+#&gt; </span><span style='color: #555555;'>5</span><span> tempwarm       2.32      0.701     3.31  9.28</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>- 4</span><span>    1.20       3.52 location 
+#&gt; </span><span style='color: #555555;'>6</span><span> contactyes     1.35      0.660     2.04  4.13</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>- 2</span><span>    0.284      2.47 location 
+#&gt; </span><span style='color: #555555;'>7</span><span> tempwarm:c…    0.360     0.924     0.389 6.97</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>- 1</span><span>   -</span><span style='color: #BB0000;'>1.17</span><span>       1.89 location </div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>fit</span>, <span class='kw'>conf.int</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>conf.type</span> <span class='kw'>=</span> <span class='st'>"Wald"</span>, <span class='kw'>exponentiate</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 7 x 8</span><span>
 #&gt;   term        estimate std.error statistic  p.value conf.low conf.high coef.type
-#&gt;   &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;    
-#&gt; 1 1|2            0.244     0.545    -2.59  9.66e- 3   0.0837     0.710 intercept
-#&gt; 2 2|3            3.14      0.510     2.24  2.48e- 2   1.16       8.52  intercept
-#&gt; 3 3|4           29.3       0.638     5.29  1.21e- 7   8.38     102.    intercept
-#&gt; 4 4|5          140.        0.751     6.58  4.66e-11  32.1      610.    intercept
-#&gt; 5 tempwarm      10.2       0.701     3.31  9.28e- 4   2.58      40.2   location 
-#&gt; 6 contactyes     3.85      0.660     2.04  4.13e- 2   1.05      14.0   location 
-#&gt; 7 tempwarm:c…    1.43      0.924     0.389 6.97e- 1   0.234      8.76  location </div><div class='input'>
-<span class='fu'><a href='https://rdrr.io/pkg/generics/man/glance.html'>glance</a></span>(<span class='no'>fit</span>)</div><div class='output co'>#&gt; # A tibble: 1 x 6
-#&gt;     edf   AIC   BIC logLik df.residual  nobs
-#&gt;   &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;       &lt;dbl&gt; &lt;dbl&gt;
-#&gt; 1     7  187.  203.  -86.4          65    72</div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/generics/man/augment.html'>augment</a></span>(<span class='no'>fit</span>, <span class='kw'>type.predict</span> <span class='kw'>=</span> <span class='st'>"prob"</span>)</div><div class='output co'>#&gt; # A tibble: 72 x 4
+#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>          </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>    
+#&gt; </span><span style='color: #555555;'>1</span><span> 1|2            0.244     0.545    -</span><span style='color: #BB0000;'>2.59</span><span>  9.66</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>- 3</span><span>   0.083</span><span style='text-decoration: underline;'>7</span><span>     0.710 intercept
+#&gt; </span><span style='color: #555555;'>2</span><span> 2|3            3.14      0.510     2.24  2.48</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>- 2</span><span>   1.16       8.52  intercept
+#&gt; </span><span style='color: #555555;'>3</span><span> 3|4           29.3       0.638     5.29  1.21</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>- 7</span><span>   8.38     102.    intercept
+#&gt; </span><span style='color: #555555;'>4</span><span> 4|5          140.        0.751     6.58  4.66</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-11</span><span>  32.1      610.    intercept
+#&gt; </span><span style='color: #555555;'>5</span><span> tempwarm      10.2       0.701     3.31  9.28</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>- 4</span><span>   2.58      40.2   location 
+#&gt; </span><span style='color: #555555;'>6</span><span> contactyes     3.85      0.660     2.04  4.13</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>- 2</span><span>   1.05      14.0   location 
+#&gt; </span><span style='color: #555555;'>7</span><span> tempwarm:c…    1.43      0.924     0.389 6.97</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>- 1</span><span>   0.234      8.76  location </div><div class='input'>
+<span class='fu'><a href='https://rdrr.io/pkg/generics/man/glance.html'>glance</a></span>(<span class='no'>fit</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 1 x 6</span><span>
+#&gt;     edf   AIC   BIC logLik   df.residual  nobs
+#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;logLik&gt;</span><span>       </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #555555;'>1</span><span>     7  187.  203. -86.4162          65    72</div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/generics/man/augment.html'>augment</a></span>(<span class='no'>fit</span>, <span class='kw'>type.predict</span> <span class='kw'>=</span> <span class='st'>"prob"</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 72 x 4</span><span>
 #&gt;    rating temp  contact .fitted
-#&gt;    &lt;ord&gt;  &lt;fct&gt; &lt;fct&gt;     &lt;dbl&gt;
-#&gt;  1 2      cold  no       0.562 
-#&gt;  2 3      cold  no       0.209 
-#&gt;  3 3      cold  yes      0.435 
-#&gt;  4 4      cold  yes      0.0894
-#&gt;  5 4      warm  no       0.190 
-#&gt;  6 4      warm  no       0.190 
-#&gt;  7 5      warm  yes      0.286 
-#&gt;  8 5      warm  yes      0.286 
-#&gt;  9 1      cold  no       0.196 
-#&gt; 10 2      cold  no       0.562 
-#&gt; # … with 62 more rows</div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/generics/man/augment.html'>augment</a></span>(<span class='no'>fit</span>, <span class='kw'>type.predict</span> <span class='kw'>=</span> <span class='st'>"class"</span>)</div><div class='output co'>#&gt; # A tibble: 72 x 4
+#&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;ord&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;fct&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;fct&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #555555;'> 1</span><span> 2      cold  no       0.562 
+#&gt; </span><span style='color: #555555;'> 2</span><span> 3      cold  no       0.209 
+#&gt; </span><span style='color: #555555;'> 3</span><span> 3      cold  yes      0.435 
+#&gt; </span><span style='color: #555555;'> 4</span><span> 4      cold  yes      0.089</span><span style='text-decoration: underline;'>4</span><span>
+#&gt; </span><span style='color: #555555;'> 5</span><span> 4      warm  no       0.190 
+#&gt; </span><span style='color: #555555;'> 6</span><span> 4      warm  no       0.190 
+#&gt; </span><span style='color: #555555;'> 7</span><span> 5      warm  yes      0.286 
+#&gt; </span><span style='color: #555555;'> 8</span><span> 5      warm  yes      0.286 
+#&gt; </span><span style='color: #555555;'> 9</span><span> 1      cold  no       0.196 
+#&gt; </span><span style='color: #555555;'>10</span><span> 2      cold  no       0.562 
+#&gt; </span><span style='color: #555555;'># … with 62 more rows</span><span></div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/generics/man/augment.html'>augment</a></span>(<span class='no'>fit</span>, <span class='kw'>type.predict</span> <span class='kw'>=</span> <span class='st'>"class"</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 72 x 4</span><span>
 #&gt;    rating temp  contact .fitted
-#&gt;    &lt;ord&gt;  &lt;fct&gt; &lt;fct&gt;   &lt;fct&gt;  
-#&gt;  1 2      cold  no      2      
-#&gt;  2 3      cold  no      2      
-#&gt;  3 3      cold  yes     3      
-#&gt;  4 4      cold  yes     3      
-#&gt;  5 4      warm  no      3      
-#&gt;  6 4      warm  no      3      
-#&gt;  7 5      warm  yes     4      
-#&gt;  8 5      warm  yes     4      
-#&gt;  9 1      cold  no      2      
-#&gt; 10 2      cold  no      2      
-#&gt; # … with 62 more rows</div><div class='input'>
+#&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;ord&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;fct&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;fct&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;fct&gt;</span><span>  
+#&gt; </span><span style='color: #555555;'> 1</span><span> 2      cold  no      2      
+#&gt; </span><span style='color: #555555;'> 2</span><span> 3      cold  no      2      
+#&gt; </span><span style='color: #555555;'> 3</span><span> 3      cold  yes     3      
+#&gt; </span><span style='color: #555555;'> 4</span><span> 4      cold  yes     3      
+#&gt; </span><span style='color: #555555;'> 5</span><span> 4      warm  no      3      
+#&gt; </span><span style='color: #555555;'> 6</span><span> 4      warm  no      3      
+#&gt; </span><span style='color: #555555;'> 7</span><span> 5      warm  yes     4      
+#&gt; </span><span style='color: #555555;'> 8</span><span> 5      warm  yes     4      
+#&gt; </span><span style='color: #555555;'> 9</span><span> 1      cold  no      2      
+#&gt; </span><span style='color: #555555;'>10</span><span> 2      cold  no      2      
+#&gt; </span><span style='color: #555555;'># … with 62 more rows</span><span></div><div class='input'>
 <span class='no'>fit2</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/ordinal/man/clm.html'>clm</a></span>(<span class='no'>rating</span> ~ <span class='no'>temp</span>, <span class='kw'>nominal</span> <span class='kw'>=</span> ~ <span class='no'>contact</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>wine</span>)
-<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>fit2</span>)</div><div class='output co'>#&gt; # A tibble: 9 x 6
+<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>fit2</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 9 x 6</span><span>
 #&gt;   term            estimate std.error statistic      p.value coef.type
-#&gt;   &lt;chr&gt;              &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;        &lt;dbl&gt; &lt;chr&gt;    
-#&gt; 1 1|2.(Intercept)    -1.32     0.562     -2.35 0.0186       intercept
-#&gt; 2 2|3.(Intercept)     1.25     0.475      2.63 0.00866      intercept
-#&gt; 3 3|4.(Intercept)     3.55     0.656      5.41 0.0000000625 intercept
-#&gt; 4 4|5.(Intercept)     4.66     0.860      5.42 0.0000000608 intercept
-#&gt; 5 1|2.contactyes     -1.62     1.16      -1.39 0.164        intercept
-#&gt; 6 2|3.contactyes     -1.51     0.591     -2.56 0.0105       intercept
-#&gt; 7 3|4.contactyes     -1.67     0.649     -2.58 0.00985      intercept
-#&gt; 8 4|5.contactyes     -1.05     0.897     -1.17 0.241        intercept
-#&gt; 9 tempwarm            2.52     0.535      4.71 0.00000250   location </div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/generics/man/glance.html'>glance</a></span>(<span class='no'>fit2</span>)</div><div class='output co'>#&gt; # A tibble: 1 x 6
-#&gt;     edf   AIC   BIC logLik df.residual  nobs
-#&gt;   &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;       &lt;dbl&gt; &lt;dbl&gt;
-#&gt; 1     9  190.  211.  -86.2          63    72</div><div class='input'>
-</div></pre>
+#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>              </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>        </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>    
+#&gt; </span><span style='color: #555555;'>1</span><span> 1|2.(Intercept)    -</span><span style='color: #BB0000;'>1.32</span><span>     0.562     -</span><span style='color: #BB0000;'>2.35</span><span> 0.018</span><span style='text-decoration: underline;'>6</span><span>       intercept
+#&gt; </span><span style='color: #555555;'>2</span><span> 2|3.(Intercept)     1.25     0.475      2.63 0.008</span><span style='text-decoration: underline;'>66</span><span>      intercept
+#&gt; </span><span style='color: #555555;'>3</span><span> 3|4.(Intercept)     3.55     0.656      5.41 0.000</span><span style='text-decoration: underline;'>000</span><span>062</span><span style='text-decoration: underline;'>5</span><span> intercept
+#&gt; </span><span style='color: #555555;'>4</span><span> 4|5.(Intercept)     4.66     0.860      5.42 0.000</span><span style='text-decoration: underline;'>000</span><span>060</span><span style='text-decoration: underline;'>8</span><span> intercept
+#&gt; </span><span style='color: #555555;'>5</span><span> 1|2.contactyes     -</span><span style='color: #BB0000;'>1.62</span><span>     1.16      -</span><span style='color: #BB0000;'>1.39</span><span> 0.164        intercept
+#&gt; </span><span style='color: #555555;'>6</span><span> 2|3.contactyes     -</span><span style='color: #BB0000;'>1.51</span><span>     0.591     -</span><span style='color: #BB0000;'>2.56</span><span> 0.010</span><span style='text-decoration: underline;'>5</span><span>       intercept
+#&gt; </span><span style='color: #555555;'>7</span><span> 3|4.contactyes     -</span><span style='color: #BB0000;'>1.67</span><span>     0.649     -</span><span style='color: #BB0000;'>2.58</span><span> 0.009</span><span style='text-decoration: underline;'>85</span><span>      intercept
+#&gt; </span><span style='color: #555555;'>8</span><span> 4|5.contactyes     -</span><span style='color: #BB0000;'>1.05</span><span>     0.897     -</span><span style='color: #BB0000;'>1.17</span><span> 0.241        intercept
+#&gt; </span><span style='color: #555555;'>9</span><span> tempwarm            2.52     0.535      4.71 0.000</span><span style='text-decoration: underline;'>002</span><span>50   location </div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/generics/man/glance.html'>glance</a></span>(<span class='no'>fit2</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 1 x 6</span><span>
+#&gt;     edf   AIC   BIC logLik    df.residual  nobs
+#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;logLik&gt;</span><span>        </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #555555;'>1</span><span>     9  190.  211. -86.20855          63    72</div><div class='input'>
+</div></span></pre>
   </div>
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <h2>Contents</h2>
-    <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
-      <li><a href="#see-also">See also</a></li>
-      <li><a href="#examples">Examples</a></li>
-    </ul>
-
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
+    <nav id="toc" data-toggle="toc" class="sticky-top">
+      <h2 data-toc-skip>Contents</h2>
+    </nav>
   </div>
 </div>
 
 
       <footer>
       <div class="tidyverse">
-  <p>broom is a part of the <strong>tidyverse</strong>, an ecosystem of packages designed with common APIs and a shared philosophy. Learn more at <a href="https://tidyverse.org">tidyverse.org</a>.</p>
+  <p>broom is a part of the <strong>tidymodels</strong> ecosystem, a collection of modeling packages designed with common APIs and a shared philosophy.</p>
 </div>
 
 <div class="author">

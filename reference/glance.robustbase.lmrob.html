@@ -17,22 +17,26 @@
 <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png" />
 
 <!-- jquery -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 
 <!-- Bootstrap -->
 <link href="../tidyverse.css" rel="stylesheet">
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
+
+<!-- bootstrap-toc -->
+<link rel="stylesheet" href="../bootstrap-toc.css">
+<script src="../bootstrap-toc.js"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
 
 <!-- headroom.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -53,7 +57,7 @@ Glance does not calculate summary measures. Rather, it farms out these
 computations to appropriate methods and gathers the results together.
 Sometimes a goodness of fit measure will be undefined. In these cases
 the measure will be reported as NA." />
-<meta property="og:image" content="http://broom.tidyverse.org/logo.png" />
+<meta property="og:image" content="https://broom.tidymodels.org/logo.png" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -80,7 +84,7 @@ the measure will be reported as NA." />
 
   </head>
 
-  <body>
+  <body data-spy="scroll" data-target="#toc">
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -95,9 +99,9 @@ the measure will be reported as NA." />
 
       <div class="navbar-brand-container">
         <a class="navbar-brand" href="../index.html">broom</a>
-        <div class="info">
-          <span class="partof">part of the <a href="https://tidyverse.org">tidyverse</a></span>
-          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.2.9003</span>
+        <div class="info hidden-xs hidden-sm">
+          <span class="partof">part of <a href="https://tidymodels.org">tidymodels</a></span>
+          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.7.0.9000</span>
         </div>
       </div>
     </div>
@@ -123,16 +127,13 @@ the measure will be reported as NA." />
       <a href="../articles/available-methods.html">Available methods</a>
     </li>
     <li>
-      <a href="../articles/bootstrapping.html">Bootstrapping</a>
+      <a href="https://www.tidymodels.org/learn/statistics/bootstrap/">Bootstrapping</a>
     </li>
     <li>
       <a href="../articles/broom_and_dplyr.html">Broom and dplyr</a>
     </li>
     <li>
-      <a href="../articles/external-tidiers.html">Tidiers in external packages</a>
-    </li>
-    <li>
-      <a href="../articles/kmeans.html">K-means</a>
+      <a href="https://www.tidymodels.org/learn/statistics/k-means/">K-means</a>
     </li>
   </ul>
 </li>
@@ -159,7 +160,7 @@ the measure will be reported as NA." />
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Glance at a(n) lmrob object</h1>
-    <small class="dont-index">Source: <a href='https://github.com/tidymodels/broom/blob/master/R/robustbase-lmrob-tidiers.R'><code>R/robustbase-lmrob-tidiers.R</code></a></small>
+    <small class="dont-index">Source: <a href='http://github.com/tidymodels/broom/blob/master/R/robustbase-lmrob-tidiers.R'><code>R/robustbase-lmrob-tidiers.R</code></a></small>
     <div class="hidden name"><code>glance.robustbase.lmrob.Rd</code></div>
     </div>
 
@@ -230,84 +231,78 @@ the <code>data</code> argument.</p></td>
 <span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span>(<span class='fl'>0</span>)
 
 <span class='no'>m</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>robustbase</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/robustbase/man/lmrob.html'>lmrob</a></span>(<span class='no'>Y</span> ~ <span class='no'>.</span>, <span class='kw'>data</span><span class='kw'>=</span><span class='no'>coleman</span>)
-<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>m</span>)</div><div class='output co'>#&gt; # A tibble: 6 x 5
+<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>m</span>)</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 6 x 5</span><span>
 #&gt;   term        estimate std.error statistic  p.value
-#&gt;   &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
-#&gt; 1 (Intercept)  30.5       6.71        4.54 4.59e- 4
-#&gt; 2 salaryP      -1.67      0.431      -3.86 1.72e- 3
-#&gt; 3 fatherWc      0.0843    0.0147      5.74 5.10e- 5
-#&gt; 4 sstatus       0.668     0.0339     19.7  1.30e-11
-#&gt; 5 teacherSc     1.17      0.110      10.6  4.35e- 8
-#&gt; 6 motherLev    -4.14      0.921      -4.49 5.07e- 4</div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/generics/man/augment.html'>augment</a></span>(<span class='no'>m</span>)</div><div class='output co'>#&gt; # A tibble: 20 x 8
+#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>          </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #555555;'>1</span><span> (Intercept)  30.5       6.71        4.54 4.59</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>- 4</span><span>
+#&gt; </span><span style='color: #555555;'>2</span><span> salaryP      -</span><span style='color: #BB0000;'>1.67</span><span>      0.431      -</span><span style='color: #BB0000;'>3.86</span><span> 1.72</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>- 3</span><span>
+#&gt; </span><span style='color: #555555;'>3</span><span> fatherWc      0.084</span><span style='text-decoration: underline;'>3</span><span>    0.014</span><span style='text-decoration: underline;'>7</span><span>      5.74 5.10</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>- 5</span><span>
+#&gt; </span><span style='color: #555555;'>4</span><span> sstatus       0.668     0.033</span><span style='text-decoration: underline;'>9</span><span>     19.7  1.30</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-11</span><span>
+#&gt; </span><span style='color: #555555;'>5</span><span> teacherSc     1.17      0.110      10.6  4.35</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>- 8</span><span>
+#&gt; </span><span style='color: #555555;'>6</span><span> motherLev    -</span><span style='color: #BB0000;'>4.14</span><span>      0.921      -</span><span style='color: #BB0000;'>4.49</span><span> 5.07</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>- 4</span><span></div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/generics/man/augment.html'>augment</a></span>(<span class='no'>m</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 20 x 8</span><span>
 #&gt;        Y salaryP fatherWc sstatus teacherSc motherLev .fitted .resid
-#&gt;    &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;   &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;
-#&gt;  1  37.0    3.83    28.9     7.2       26.6      6.19    36.8 -0.191
-#&gt;  2  26.5    2.89    20.1   -11.7       24.4      5.17    26.7  0.159
-#&gt;  3  36.5    2.86    69.0    12.3       25.7      7.04    40.7  4.16 
-#&gt;  4  40.7    2.92    65.4    14.3       25.7      7.1     41.3  0.625
-#&gt;  5  37.1    3.06    29.6     6.31      25.4      6.15    36.3 -0.768
-#&gt;  6  33.9    2.07    44.8     6.16      21.6      6.41    33.7 -0.249
-#&gt;  7  41.8    2.52    77.4    12.7       24.9      6.86    42.0  0.203
-#&gt;  8  33.4    2.45    24.7    -0.17      25.0      5.78    33.7  0.282
-#&gt;  9  41.0    3.13    65.0     9.85      26.6      6.51    41.5  0.466
-#&gt; 10  37.2    2.44     9.99   -0.05      28.0      5.57    36.9 -0.286
-#&gt; 11  23.3    2.09    12.2   -12.9       23.5      5.62    23.7  0.368
-#&gt; 12  35.2    2.52    22.6     0.92      23.6      5.34    34.3 -0.912
-#&gt; 13  34.9    2.22    14.3     4.77      24.5      5.8     35.8  0.924
-#&gt; 14  33.1    2.67    31.8    -0.96      25.8      6.19    32.6 -0.486
-#&gt; 15  22.7    2.71    11.6   -16.0       25.2      5.62    22.4 -0.266
-#&gt; 16  39.7    3.14    68.5    10.6       25.0      6.94    38.6 -1.07 
-#&gt; 17  31.8    3.54    42.6     2.66      25.0      6.33    33.0  1.19 
-#&gt; 18  31.7    2.52    16.7   -11.0       24.8      6.01    24.5 -7.23 
-#&gt; 19  43.1    2.68    86.3    15.0       25.5      7.51    42.1 -1.03 
-#&gt; 20  41.0    2.37    76.7    12.8       24.5      6.96    41.4  0.367</div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/generics/man/glance.html'>glance</a></span>(<span class='no'>m</span>)</div><div class='output co'>#&gt; # A tibble: 1 x 3
+#&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #555555;'> 1</span><span>  37.0    3.83    28.9     7.2       26.6      6.19    36.8 -</span><span style='color: #BB0000;'>0.191</span><span>
+#&gt; </span><span style='color: #555555;'> 2</span><span>  26.5    2.89    20.1   -</span><span style='color: #BB0000;'>11.7</span><span>       24.4      5.17    26.7  0.159
+#&gt; </span><span style='color: #555555;'> 3</span><span>  36.5    2.86    69.0    12.3       25.7      7.04    40.7  4.16 
+#&gt; </span><span style='color: #555555;'> 4</span><span>  40.7    2.92    65.4    14.3       25.7      7.1     41.3  0.625
+#&gt; </span><span style='color: #555555;'> 5</span><span>  37.1    3.06    29.6     6.31      25.4      6.15    36.3 -</span><span style='color: #BB0000;'>0.768</span><span>
+#&gt; </span><span style='color: #555555;'> 6</span><span>  33.9    2.07    44.8     6.16      21.6      6.41    33.7 -</span><span style='color: #BB0000;'>0.249</span><span>
+#&gt; </span><span style='color: #555555;'> 7</span><span>  41.8    2.52    77.4    12.7       24.9      6.86    42.0  0.203
+#&gt; </span><span style='color: #555555;'> 8</span><span>  33.4    2.45    24.7    -</span><span style='color: #BB0000;'>0.17</span><span>      25.0      5.78    33.7  0.282
+#&gt; </span><span style='color: #555555;'> 9</span><span>  41.0    3.13    65.0     9.85      26.6      6.51    41.5  0.466
+#&gt; </span><span style='color: #555555;'>10</span><span>  37.2    2.44     9.99   -</span><span style='color: #BB0000;'>0.05</span><span>      28.0      5.57    36.9 -</span><span style='color: #BB0000;'>0.286</span><span>
+#&gt; </span><span style='color: #555555;'>11</span><span>  23.3    2.09    12.2   -</span><span style='color: #BB0000;'>12.9</span><span>       23.5      5.62    23.7  0.368
+#&gt; </span><span style='color: #555555;'>12</span><span>  35.2    2.52    22.6     0.92      23.6      5.34    34.3 -</span><span style='color: #BB0000;'>0.912</span><span>
+#&gt; </span><span style='color: #555555;'>13</span><span>  34.9    2.22    14.3     4.77      24.5      5.8     35.8  0.924
+#&gt; </span><span style='color: #555555;'>14</span><span>  33.1    2.67    31.8    -</span><span style='color: #BB0000;'>0.96</span><span>      25.8      6.19    32.6 -</span><span style='color: #BB0000;'>0.486</span><span>
+#&gt; </span><span style='color: #555555;'>15</span><span>  22.7    2.71    11.6   -</span><span style='color: #BB0000;'>16.0</span><span>       25.2      5.62    22.4 -</span><span style='color: #BB0000;'>0.266</span><span>
+#&gt; </span><span style='color: #555555;'>16</span><span>  39.7    3.14    68.5    10.6       25.0      6.94    38.6 -</span><span style='color: #BB0000;'>1.07</span><span> 
+#&gt; </span><span style='color: #555555;'>17</span><span>  31.8    3.54    42.6     2.66      25.0      6.33    33.0  1.19 
+#&gt; </span><span style='color: #555555;'>18</span><span>  31.7    2.52    16.7   -</span><span style='color: #BB0000;'>11.0</span><span>       24.8      6.01    24.5 -</span><span style='color: #BB0000;'>7.23</span><span> 
+#&gt; </span><span style='color: #555555;'>19</span><span>  43.1    2.68    86.3    15.0       25.5      7.51    42.1 -</span><span style='color: #BB0000;'>1.03</span><span> 
+#&gt; </span><span style='color: #555555;'>20</span><span>  41.0    2.37    76.7    12.8       24.5      6.96    41.4  0.367</div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/generics/man/glance.html'>glance</a></span>(<span class='no'>m</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 1 x 3</span><span>
 #&gt;   r.squared sigma df.residual
-#&gt;       &lt;dbl&gt; &lt;dbl&gt;       &lt;int&gt;
-#&gt; 1     0.981  1.13          14</div><div class='input'>
+#&gt;       </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>       </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>
+#&gt; </span><span style='color: #555555;'>1</span><span>     0.981  1.13          14</div><div class='input'>
 <span class='co'># From the robustbase::glmrob examples:</span>
 <span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>carrots</span>)
 <span class='no'>Rfit</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/robustbase/man/glmrob.html'>glmrob</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/cbind.html'>cbind</a></span>(<span class='no'>success</span>, <span class='no'>total</span>-<span class='no'>success</span>) ~ <span class='no'>logdose</span> + <span class='no'>block</span>,
                 <span class='kw'>family</span> <span class='kw'>=</span> <span class='no'>binomial</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>carrots</span>, <span class='kw'>method</span><span class='kw'>=</span> <span class='st'>"Mqle"</span>,
                 <span class='kw'>control</span><span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/pkg/robustbase/man/glmrob.control.html'>glmrobMqle.control</a></span>(<span class='kw'>tcc</span><span class='kw'>=</span><span class='fl'>1.2</span>))
-<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>Rfit</span>)</div><div class='output co'>#&gt; # A tibble: 4 x 5
+<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>Rfit</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 4 x 5</span><span>
 #&gt;   term        estimate std.error statistic      p.value
-#&gt;   &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;        &lt;dbl&gt;
-#&gt; 1 (Intercept)    2.39      0.692      3.45 0.000561    
-#&gt; 2 logdose       -2.05      0.368     -5.56 0.0000000268
-#&gt; 3 blockB2        0.235     0.212      1.11 0.268       
-#&gt; 4 blockB3       -0.450     0.241     -1.87 0.0620      </div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/generics/man/augment.html'>augment</a></span>(<span class='no'>Rfit</span>)</div><div class='output co'>#&gt; # A tibble: 24 x 4
+#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>          </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>        </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #555555;'>1</span><span> (Intercept)    2.39      0.692      3.45 0.000</span><span style='text-decoration: underline;'>561</span><span>    
+#&gt; </span><span style='color: #555555;'>2</span><span> logdose       -</span><span style='color: #BB0000;'>2.05</span><span>      0.368     -</span><span style='color: #BB0000;'>5.56</span><span> 0.000</span><span style='text-decoration: underline;'>000</span><span>026</span><span style='text-decoration: underline;'>8</span><span>
+#&gt; </span><span style='color: #555555;'>3</span><span> blockB2        0.235     0.212      1.11 0.268       
+#&gt; </span><span style='color: #555555;'>4</span><span> blockB3       -</span><span style='color: #BB0000;'>0.450</span><span>     0.241     -</span><span style='color: #BB0000;'>1.87</span><span> 0.062</span><span style='text-decoration: underline;'>0</span><span>      </div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/generics/man/augment.html'>augment</a></span>(<span class='no'>Rfit</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 24 x 4</span><span>
 #&gt;    `cbind(success, total - success)`[,"success"] [,""] logdose block .fitted
-#&gt;                                            &lt;int&gt; &lt;int&gt;   &lt;dbl&gt; &lt;fct&gt;   &lt;dbl&gt;
-#&gt;  1                                            10    25    1.52 B1     -0.726
-#&gt;  2                                            16    26    1.64 B1     -0.972
-#&gt;  3                                             8    42    1.76 B1     -1.22 
-#&gt;  4                                             6    36    1.88 B1     -1.46 
-#&gt;  5                                             9    26    2    B1     -1.71 
-#&gt;  6                                             9    33    2.12 B1     -1.96 
-#&gt;  7                                             1    31    2.24 B1     -2.20 
-#&gt;  8                                             2    26    2.36 B1     -2.45 
-#&gt;  9                                            17    21    1.52 B2     -0.491
-#&gt; 10                                            10    30    1.64 B2     -0.737
-#&gt; # … with 14 more rows</div><div class='input'>
-</div></pre>
+#&gt;                                            </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;fct&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #555555;'> 1</span><span>                                            10    25    1.52 B1     -</span><span style='color: #BB0000;'>0.726</span><span>
+#&gt; </span><span style='color: #555555;'> 2</span><span>                                            16    26    1.64 B1     -</span><span style='color: #BB0000;'>0.972</span><span>
+#&gt; </span><span style='color: #555555;'> 3</span><span>                                             8    42    1.76 B1     -</span><span style='color: #BB0000;'>1.22</span><span> 
+#&gt; </span><span style='color: #555555;'> 4</span><span>                                             6    36    1.88 B1     -</span><span style='color: #BB0000;'>1.46</span><span> 
+#&gt; </span><span style='color: #555555;'> 5</span><span>                                             9    26    2    B1     -</span><span style='color: #BB0000;'>1.71</span><span> 
+#&gt; </span><span style='color: #555555;'> 6</span><span>                                             9    33    2.12 B1     -</span><span style='color: #BB0000;'>1.96</span><span> 
+#&gt; </span><span style='color: #555555;'> 7</span><span>                                             1    31    2.24 B1     -</span><span style='color: #BB0000;'>2.20</span><span> 
+#&gt; </span><span style='color: #555555;'> 8</span><span>                                             2    26    2.36 B1     -</span><span style='color: #BB0000;'>2.45</span><span> 
+#&gt; </span><span style='color: #555555;'> 9</span><span>                                            17    21    1.52 B2     -</span><span style='color: #BB0000;'>0.491</span><span>
+#&gt; </span><span style='color: #555555;'>10</span><span>                                            10    30    1.64 B2     -</span><span style='color: #BB0000;'>0.737</span><span>
+#&gt; </span><span style='color: #555555;'># … with 14 more rows</span><span></div><div class='input'>
+</div></span></pre>
   </div>
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <h2>Contents</h2>
-    <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
-      <li><a href="#details">Details</a></li>
-      <li><a href="#see-also">See also</a></li>
-      <li><a href="#value">Value</a></li>
-      <li><a href="#examples">Examples</a></li>
-    </ul>
-
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
+    <nav id="toc" data-toggle="toc" class="sticky-top">
+      <h2 data-toc-skip>Contents</h2>
+    </nav>
   </div>
 </div>
 
 
       <footer>
       <div class="tidyverse">
-  <p>broom is a part of the <strong>tidyverse</strong>, an ecosystem of packages designed with common APIs and a shared philosophy. Learn more at <a href="https://tidyverse.org">tidyverse.org</a>.</p>
+  <p>broom is a part of the <strong>tidymodels</strong> ecosystem, a collection of modeling packages designed with common APIs and a shared philosophy.</p>
 </div>
 
 <div class="author">

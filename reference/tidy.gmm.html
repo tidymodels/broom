@@ -17,22 +17,26 @@
 <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png" />
 
 <!-- jquery -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 
 <!-- Bootstrap -->
 <link href="../tidyverse.css" rel="stylesheet">
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
+
+<!-- bootstrap-toc -->
+<link rel="stylesheet" href="../bootstrap-toc.css">
+<script src="../bootstrap-toc.js"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
 
 <!-- headroom.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -45,10 +49,10 @@
 <meta property="og:description" content="Tidy summarizes information about the components of a model.
 A model component might be a single term in a regression, a single
 hypothesis, a cluster, or a class. Exactly what tidy considers to be a
-model component varies cross models but is usually self-evident.
+model component varies across models but is usually self-evident.
 If a model has several distinct types of components, you will need to
 specify which components to return." />
-<meta property="og:image" content="http://broom.tidyverse.org/logo.png" />
+<meta property="og:image" content="https://broom.tidymodels.org/logo.png" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -75,7 +79,7 @@ specify which components to return." />
 
   </head>
 
-  <body>
+  <body data-spy="scroll" data-target="#toc">
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -90,9 +94,9 @@ specify which components to return." />
 
       <div class="navbar-brand-container">
         <a class="navbar-brand" href="../index.html">broom</a>
-        <div class="info">
-          <span class="partof">part of the <a href="https://tidyverse.org">tidyverse</a></span>
-          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.2.9003</span>
+        <div class="info hidden-xs hidden-sm">
+          <span class="partof">part of <a href="https://tidymodels.org">tidymodels</a></span>
+          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.7.0.9000</span>
         </div>
       </div>
     </div>
@@ -118,16 +122,13 @@ specify which components to return." />
       <a href="../articles/available-methods.html">Available methods</a>
     </li>
     <li>
-      <a href="../articles/bootstrapping.html">Bootstrapping</a>
+      <a href="https://www.tidymodels.org/learn/statistics/bootstrap/">Bootstrapping</a>
     </li>
     <li>
       <a href="../articles/broom_and_dplyr.html">Broom and dplyr</a>
     </li>
     <li>
-      <a href="../articles/external-tidiers.html">Tidiers in external packages</a>
-    </li>
-    <li>
-      <a href="../articles/kmeans.html">K-means</a>
+      <a href="https://www.tidymodels.org/learn/statistics/k-means/">K-means</a>
     </li>
   </ul>
 </li>
@@ -154,7 +155,7 @@ specify which components to return." />
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Tidy a(n) gmm object</h1>
-    <small class="dont-index">Source: <a href='https://github.com/tidymodels/broom/blob/master/R/gmm-tidiers.R'><code>R/gmm-tidiers.R</code></a></small>
+    <small class="dont-index">Source: <a href='http://github.com/tidymodels/broom/blob/master/R/gmm-tidiers.R'><code>R/gmm-tidiers.R</code></a></small>
     <div class="hidden name"><code>tidy.gmm.Rd</code></div>
     </div>
 
@@ -162,7 +163,7 @@ specify which components to return." />
     <p>Tidy summarizes information about the components of a model.
 A model component might be a single term in a regression, a single
 hypothesis, a cluster, or a class. Exactly what tidy considers to be a
-model component varies cross models but is usually self-evident.
+model component varies across models but is usually self-evident.
 If a model has several distinct types of components, you will need to
 specify which components to return.</p>
     </div>
@@ -245,73 +246,73 @@ the <code>data</code> argument.</p></td>
 <span class='no'>res</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/gmm/man/gmm.html'>gmm</a></span>(<span class='no'>z</span> ~ <span class='no'>zm</span>, <span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>h</span>)
 
 <span class='co'># tidy result</span>
-<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>res</span>)</div><div class='output co'>#&gt; # A tibble: 20 x 5
+<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>res</span>)</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 20 x 5</span><span>
 #&gt;    term             estimate std.error statistic  p.value
-#&gt;    &lt;chr&gt;               &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
-#&gt;  1 WMK_(Intercept)  -0.00467    0.0566   -0.0824 9.34e- 1
-#&gt;  2 UIS_(Intercept)   0.102      0.126     0.816  4.15e- 1
-#&gt;  3 ORB_(Intercept)   0.146      0.203     0.718  4.73e- 1
-#&gt;  4 MAT_(Intercept)   0.0359     0.110     0.326  7.45e- 1
-#&gt;  5 ABAX_(Intercept)  0.0917     0.288     0.318  7.50e- 1
-#&gt;  6 T_(Intercept)     0.0231     0.0774    0.298  7.65e- 1
-#&gt;  7 EMR_(Intercept)   0.0299     0.0552    0.542  5.88e- 1
-#&gt;  8 JCS_(Intercept)   0.117      0.155     0.756  4.50e- 1
-#&gt;  9 VOXX_(Intercept)  0.0209     0.182     0.115  9.09e- 1
-#&gt; 10 ZOOM_(Intercept) -0.219      0.202    -1.08   2.79e- 1
-#&gt; 11 WMK_zm            0.317      0.126     2.52   1.16e- 2
-#&gt; 12 UIS_zm            1.26       0.230     5.49   3.94e- 8
-#&gt; 13 ORB_zm            1.49       0.428     3.49   4.87e- 4
-#&gt; 14 MAT_zm            1.01       0.218     4.66   3.09e- 6
-#&gt; 15 ABAX_zm           1.09       0.579     1.88   5.98e- 2
-#&gt; 16 T_zm              0.849      0.154     5.52   3.41e- 8
-#&gt; 17 EMR_zm            0.741      0.0998    7.43   1.13e-13
-#&gt; 18 JCS_zm            0.959      0.348     2.76   5.85e- 3
-#&gt; 19 VOXX_zm           1.48       0.369     4.01   6.04e- 5
-#&gt; 20 ZOOM_zm           2.08       0.321     6.46   1.02e-10</div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>res</span>, <span class='kw'>conf.int</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; # A tibble: 20 x 7
+#&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>               </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #555555;'> 1</span><span> WMK_(Intercept)  -</span><span style='color: #BB0000;'>0.004</span><span style='color: #BB0000;text-decoration: underline;'>67</span><span>    0.056</span><span style='text-decoration: underline;'>6</span><span>   -</span><span style='color: #BB0000;'>0.082</span><span style='color: #BB0000;text-decoration: underline;'>4</span><span> 9.34</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>- 1</span><span>
+#&gt; </span><span style='color: #555555;'> 2</span><span> UIS_(Intercept)   0.102      0.126     0.816  4.15</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>- 1</span><span>
+#&gt; </span><span style='color: #555555;'> 3</span><span> ORB_(Intercept)   0.146      0.203     0.718  4.73</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>- 1</span><span>
+#&gt; </span><span style='color: #555555;'> 4</span><span> MAT_(Intercept)   0.035</span><span style='text-decoration: underline;'>9</span><span>     0.110     0.326  7.45</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>- 1</span><span>
+#&gt; </span><span style='color: #555555;'> 5</span><span> ABAX_(Intercept)  0.091</span><span style='text-decoration: underline;'>7</span><span>     0.288     0.318  7.50</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>- 1</span><span>
+#&gt; </span><span style='color: #555555;'> 6</span><span> T_(Intercept)     0.023</span><span style='text-decoration: underline;'>1</span><span>     0.077</span><span style='text-decoration: underline;'>4</span><span>    0.298  7.65</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>- 1</span><span>
+#&gt; </span><span style='color: #555555;'> 7</span><span> EMR_(Intercept)   0.029</span><span style='text-decoration: underline;'>9</span><span>     0.055</span><span style='text-decoration: underline;'>2</span><span>    0.542  5.88</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>- 1</span><span>
+#&gt; </span><span style='color: #555555;'> 8</span><span> JCS_(Intercept)   0.117      0.155     0.756  4.50</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>- 1</span><span>
+#&gt; </span><span style='color: #555555;'> 9</span><span> VOXX_(Intercept)  0.020</span><span style='text-decoration: underline;'>9</span><span>     0.182     0.115  9.09</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>- 1</span><span>
+#&gt; </span><span style='color: #555555;'>10</span><span> ZOOM_(Intercept) -</span><span style='color: #BB0000;'>0.219</span><span>      0.202    -</span><span style='color: #BB0000;'>1.08</span><span>   2.79</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>- 1</span><span>
+#&gt; </span><span style='color: #555555;'>11</span><span> WMK_zm            0.317      0.126     2.52   1.16</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>- 2</span><span>
+#&gt; </span><span style='color: #555555;'>12</span><span> UIS_zm            1.26       0.230     5.49   3.94</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>- 8</span><span>
+#&gt; </span><span style='color: #555555;'>13</span><span> ORB_zm            1.49       0.428     3.49   4.87</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>- 4</span><span>
+#&gt; </span><span style='color: #555555;'>14</span><span> MAT_zm            1.01       0.218     4.66   3.09</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>- 6</span><span>
+#&gt; </span><span style='color: #555555;'>15</span><span> ABAX_zm           1.09       0.579     1.88   5.98</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>- 2</span><span>
+#&gt; </span><span style='color: #555555;'>16</span><span> T_zm              0.849      0.154     5.52   3.41</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>- 8</span><span>
+#&gt; </span><span style='color: #555555;'>17</span><span> EMR_zm            0.741      0.099</span><span style='text-decoration: underline;'>8</span><span>    7.43   1.13</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-13</span><span>
+#&gt; </span><span style='color: #555555;'>18</span><span> JCS_zm            0.959      0.348     2.76   5.85</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>- 3</span><span>
+#&gt; </span><span style='color: #555555;'>19</span><span> VOXX_zm           1.48       0.369     4.01   6.04</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>- 5</span><span>
+#&gt; </span><span style='color: #555555;'>20</span><span> ZOOM_zm           2.08       0.321     6.46   1.02</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-10</span><span></div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>res</span>, <span class='kw'>conf.int</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 20 x 7</span><span>
 #&gt;    term             estimate std.error statistic  p.value conf.low conf.high
-#&gt;    &lt;chr&gt;               &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;
-#&gt;  1 WMK_(Intercept)  -0.00467    0.0566   -0.0824 9.34e- 1  -0.116      0.106
-#&gt;  2 UIS_(Intercept)   0.102      0.126     0.816  4.15e- 1  -0.144      0.348
-#&gt;  3 ORB_(Intercept)   0.146      0.203     0.718  4.73e- 1  -0.252      0.544
-#&gt;  4 MAT_(Intercept)   0.0359     0.110     0.326  7.45e- 1  -0.180      0.252
-#&gt;  5 ABAX_(Intercept)  0.0917     0.288     0.318  7.50e- 1  -0.473      0.656
-#&gt;  6 T_(Intercept)     0.0231     0.0774    0.298  7.65e- 1  -0.129      0.175
-#&gt;  7 EMR_(Intercept)   0.0299     0.0552    0.542  5.88e- 1  -0.0782     0.138
-#&gt;  8 JCS_(Intercept)   0.117      0.155     0.756  4.50e- 1  -0.186      0.420
-#&gt;  9 VOXX_(Intercept)  0.0209     0.182     0.115  9.09e- 1  -0.335      0.377
-#&gt; 10 ZOOM_(Intercept) -0.219      0.202    -1.08   2.79e- 1  -0.616      0.177
-#&gt; 11 WMK_zm            0.317      0.126     2.52   1.16e- 2   0.0708     0.564
-#&gt; 12 UIS_zm            1.26       0.230     5.49   3.94e- 8   0.812      1.71 
-#&gt; 13 ORB_zm            1.49       0.428     3.49   4.87e- 4   0.654      2.33 
-#&gt; 14 MAT_zm            1.01       0.218     4.66   3.09e- 6   0.588      1.44 
-#&gt; 15 ABAX_zm           1.09       0.579     1.88   5.98e- 2  -0.0451     2.22 
-#&gt; 16 T_zm              0.849      0.154     5.52   3.41e- 8   0.547      1.15 
-#&gt; 17 EMR_zm            0.741      0.0998    7.43   1.13e-13   0.545      0.936
-#&gt; 18 JCS_zm            0.959      0.348     2.76   5.85e- 3   0.277      1.64 
-#&gt; 19 VOXX_zm           1.48       0.369     4.01   6.04e- 5   0.758      2.21 
-#&gt; 20 ZOOM_zm           2.08       0.321     6.46   1.02e-10   1.45       2.71 </div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>res</span>, <span class='kw'>conf.int</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>conf.level</span> <span class='kw'>=</span> <span class='fl'>.99</span>)</div><div class='output co'>#&gt; # A tibble: 20 x 7
+#&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>               </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #555555;'> 1</span><span> WMK_(Intercept)  -</span><span style='color: #BB0000;'>0.004</span><span style='color: #BB0000;text-decoration: underline;'>67</span><span>    0.056</span><span style='text-decoration: underline;'>6</span><span>   -</span><span style='color: #BB0000;'>0.082</span><span style='color: #BB0000;text-decoration: underline;'>4</span><span> 9.34</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>- 1</span><span>  -</span><span style='color: #BB0000;'>0.116</span><span>      0.106
+#&gt; </span><span style='color: #555555;'> 2</span><span> UIS_(Intercept)   0.102      0.126     0.816  4.15</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>- 1</span><span>  -</span><span style='color: #BB0000;'>0.144</span><span>      0.348
+#&gt; </span><span style='color: #555555;'> 3</span><span> ORB_(Intercept)   0.146      0.203     0.718  4.73</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>- 1</span><span>  -</span><span style='color: #BB0000;'>0.252</span><span>      0.544
+#&gt; </span><span style='color: #555555;'> 4</span><span> MAT_(Intercept)   0.035</span><span style='text-decoration: underline;'>9</span><span>     0.110     0.326  7.45</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>- 1</span><span>  -</span><span style='color: #BB0000;'>0.180</span><span>      0.252
+#&gt; </span><span style='color: #555555;'> 5</span><span> ABAX_(Intercept)  0.091</span><span style='text-decoration: underline;'>7</span><span>     0.288     0.318  7.50</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>- 1</span><span>  -</span><span style='color: #BB0000;'>0.473</span><span>      0.656
+#&gt; </span><span style='color: #555555;'> 6</span><span> T_(Intercept)     0.023</span><span style='text-decoration: underline;'>1</span><span>     0.077</span><span style='text-decoration: underline;'>4</span><span>    0.298  7.65</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>- 1</span><span>  -</span><span style='color: #BB0000;'>0.129</span><span>      0.175
+#&gt; </span><span style='color: #555555;'> 7</span><span> EMR_(Intercept)   0.029</span><span style='text-decoration: underline;'>9</span><span>     0.055</span><span style='text-decoration: underline;'>2</span><span>    0.542  5.88</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>- 1</span><span>  -</span><span style='color: #BB0000;'>0.078</span><span style='color: #BB0000;text-decoration: underline;'>2</span><span>     0.138
+#&gt; </span><span style='color: #555555;'> 8</span><span> JCS_(Intercept)   0.117      0.155     0.756  4.50</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>- 1</span><span>  -</span><span style='color: #BB0000;'>0.186</span><span>      0.420
+#&gt; </span><span style='color: #555555;'> 9</span><span> VOXX_(Intercept)  0.020</span><span style='text-decoration: underline;'>9</span><span>     0.182     0.115  9.09</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>- 1</span><span>  -</span><span style='color: #BB0000;'>0.335</span><span>      0.377
+#&gt; </span><span style='color: #555555;'>10</span><span> ZOOM_(Intercept) -</span><span style='color: #BB0000;'>0.219</span><span>      0.202    -</span><span style='color: #BB0000;'>1.08</span><span>   2.79</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>- 1</span><span>  -</span><span style='color: #BB0000;'>0.616</span><span>      0.177
+#&gt; </span><span style='color: #555555;'>11</span><span> WMK_zm            0.317      0.126     2.52   1.16</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>- 2</span><span>   0.070</span><span style='text-decoration: underline;'>8</span><span>     0.564
+#&gt; </span><span style='color: #555555;'>12</span><span> UIS_zm            1.26       0.230     5.49   3.94</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>- 8</span><span>   0.812      1.71 
+#&gt; </span><span style='color: #555555;'>13</span><span> ORB_zm            1.49       0.428     3.49   4.87</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>- 4</span><span>   0.654      2.33 
+#&gt; </span><span style='color: #555555;'>14</span><span> MAT_zm            1.01       0.218     4.66   3.09</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>- 6</span><span>   0.588      1.44 
+#&gt; </span><span style='color: #555555;'>15</span><span> ABAX_zm           1.09       0.579     1.88   5.98</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>- 2</span><span>  -</span><span style='color: #BB0000;'>0.045</span><span style='color: #BB0000;text-decoration: underline;'>1</span><span>     2.22 
+#&gt; </span><span style='color: #555555;'>16</span><span> T_zm              0.849      0.154     5.52   3.41</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>- 8</span><span>   0.547      1.15 
+#&gt; </span><span style='color: #555555;'>17</span><span> EMR_zm            0.741      0.099</span><span style='text-decoration: underline;'>8</span><span>    7.43   1.13</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-13</span><span>   0.545      0.936
+#&gt; </span><span style='color: #555555;'>18</span><span> JCS_zm            0.959      0.348     2.76   5.85</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>- 3</span><span>   0.277      1.64 
+#&gt; </span><span style='color: #555555;'>19</span><span> VOXX_zm           1.48       0.369     4.01   6.04</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>- 5</span><span>   0.758      2.21 
+#&gt; </span><span style='color: #555555;'>20</span><span> ZOOM_zm           2.08       0.321     6.46   1.02</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-10</span><span>   1.45       2.71 </div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>res</span>, <span class='kw'>conf.int</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>conf.level</span> <span class='kw'>=</span> <span class='fl'>.99</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 20 x 7</span><span>
 #&gt;    term             estimate std.error statistic  p.value conf.low conf.high
-#&gt;    &lt;chr&gt;               &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;
-#&gt;  1 WMK_(Intercept)  -0.00467    0.0566   -0.0824 9.34e- 1 -0.151       0.141
-#&gt;  2 UIS_(Intercept)   0.102      0.126     0.816  4.15e- 1 -0.221       0.426
-#&gt;  3 ORB_(Intercept)   0.146      0.203     0.718  4.73e- 1 -0.377       0.669
-#&gt;  4 MAT_(Intercept)   0.0359     0.110     0.326  7.45e- 1 -0.248       0.320
-#&gt;  5 ABAX_(Intercept)  0.0917     0.288     0.318  7.50e- 1 -0.650       0.834
-#&gt;  6 T_(Intercept)     0.0231     0.0774    0.298  7.65e- 1 -0.176       0.223
-#&gt;  7 EMR_(Intercept)   0.0299     0.0552    0.542  5.88e- 1 -0.112       0.172
-#&gt;  8 JCS_(Intercept)   0.117      0.155     0.756  4.50e- 1 -0.281       0.515
-#&gt;  9 VOXX_(Intercept)  0.0209     0.182     0.115  9.09e- 1 -0.447       0.489
-#&gt; 10 ZOOM_(Intercept) -0.219      0.202    -1.08   2.79e- 1 -0.740       0.302
-#&gt; 11 WMK_zm            0.317      0.126     2.52   1.16e- 2 -0.00656     0.641
-#&gt; 12 UIS_zm            1.26       0.230     5.49   3.94e- 8  0.671       1.85 
-#&gt; 13 ORB_zm            1.49       0.428     3.49   4.87e- 4  0.391       2.60 
-#&gt; 14 MAT_zm            1.01       0.218     4.66   3.09e- 6  0.454       1.58 
-#&gt; 15 ABAX_zm           1.09       0.579     1.88   5.98e- 2 -0.401       2.58 
-#&gt; 16 T_zm              0.849      0.154     5.52   3.41e- 8  0.453       1.25 
-#&gt; 17 EMR_zm            0.741      0.0998    7.43   1.13e-13  0.484       0.998
-#&gt; 18 JCS_zm            0.959      0.348     2.76   5.85e- 3  0.0627      1.85 
-#&gt; 19 VOXX_zm           1.48       0.369     4.01   6.04e- 5  0.530       2.43 
-#&gt; 20 ZOOM_zm           2.08       0.321     6.46   1.02e-10  1.25        2.91 </div><div class='input'>
+#&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>               </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #555555;'> 1</span><span> WMK_(Intercept)  -</span><span style='color: #BB0000;'>0.004</span><span style='color: #BB0000;text-decoration: underline;'>67</span><span>    0.056</span><span style='text-decoration: underline;'>6</span><span>   -</span><span style='color: #BB0000;'>0.082</span><span style='color: #BB0000;text-decoration: underline;'>4</span><span> 9.34</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>- 1</span><span> -</span><span style='color: #BB0000;'>0.151</span><span>       0.141
+#&gt; </span><span style='color: #555555;'> 2</span><span> UIS_(Intercept)   0.102      0.126     0.816  4.15</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>- 1</span><span> -</span><span style='color: #BB0000;'>0.221</span><span>       0.426
+#&gt; </span><span style='color: #555555;'> 3</span><span> ORB_(Intercept)   0.146      0.203     0.718  4.73</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>- 1</span><span> -</span><span style='color: #BB0000;'>0.377</span><span>       0.669
+#&gt; </span><span style='color: #555555;'> 4</span><span> MAT_(Intercept)   0.035</span><span style='text-decoration: underline;'>9</span><span>     0.110     0.326  7.45</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>- 1</span><span> -</span><span style='color: #BB0000;'>0.248</span><span>       0.320
+#&gt; </span><span style='color: #555555;'> 5</span><span> ABAX_(Intercept)  0.091</span><span style='text-decoration: underline;'>7</span><span>     0.288     0.318  7.50</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>- 1</span><span> -</span><span style='color: #BB0000;'>0.650</span><span>       0.834
+#&gt; </span><span style='color: #555555;'> 6</span><span> T_(Intercept)     0.023</span><span style='text-decoration: underline;'>1</span><span>     0.077</span><span style='text-decoration: underline;'>4</span><span>    0.298  7.65</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>- 1</span><span> -</span><span style='color: #BB0000;'>0.176</span><span>       0.223
+#&gt; </span><span style='color: #555555;'> 7</span><span> EMR_(Intercept)   0.029</span><span style='text-decoration: underline;'>9</span><span>     0.055</span><span style='text-decoration: underline;'>2</span><span>    0.542  5.88</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>- 1</span><span> -</span><span style='color: #BB0000;'>0.112</span><span>       0.172
+#&gt; </span><span style='color: #555555;'> 8</span><span> JCS_(Intercept)   0.117      0.155     0.756  4.50</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>- 1</span><span> -</span><span style='color: #BB0000;'>0.281</span><span>       0.515
+#&gt; </span><span style='color: #555555;'> 9</span><span> VOXX_(Intercept)  0.020</span><span style='text-decoration: underline;'>9</span><span>     0.182     0.115  9.09</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>- 1</span><span> -</span><span style='color: #BB0000;'>0.447</span><span>       0.489
+#&gt; </span><span style='color: #555555;'>10</span><span> ZOOM_(Intercept) -</span><span style='color: #BB0000;'>0.219</span><span>      0.202    -</span><span style='color: #BB0000;'>1.08</span><span>   2.79</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>- 1</span><span> -</span><span style='color: #BB0000;'>0.740</span><span>       0.302
+#&gt; </span><span style='color: #555555;'>11</span><span> WMK_zm            0.317      0.126     2.52   1.16</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>- 2</span><span> -</span><span style='color: #BB0000;'>0.006</span><span style='color: #BB0000;text-decoration: underline;'>56</span><span>     0.641
+#&gt; </span><span style='color: #555555;'>12</span><span> UIS_zm            1.26       0.230     5.49   3.94</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>- 8</span><span>  0.671       1.85 
+#&gt; </span><span style='color: #555555;'>13</span><span> ORB_zm            1.49       0.428     3.49   4.87</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>- 4</span><span>  0.391       2.60 
+#&gt; </span><span style='color: #555555;'>14</span><span> MAT_zm            1.01       0.218     4.66   3.09</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>- 6</span><span>  0.454       1.58 
+#&gt; </span><span style='color: #555555;'>15</span><span> ABAX_zm           1.09       0.579     1.88   5.98</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>- 2</span><span> -</span><span style='color: #BB0000;'>0.401</span><span>       2.58 
+#&gt; </span><span style='color: #555555;'>16</span><span> T_zm              0.849      0.154     5.52   3.41</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>- 8</span><span>  0.453       1.25 
+#&gt; </span><span style='color: #555555;'>17</span><span> EMR_zm            0.741      0.099</span><span style='text-decoration: underline;'>8</span><span>    7.43   1.13</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-13</span><span>  0.484       0.998
+#&gt; </span><span style='color: #555555;'>18</span><span> JCS_zm            0.959      0.348     2.76   5.85</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>- 3</span><span>  0.062</span><span style='text-decoration: underline;'>7</span><span>      1.85 
+#&gt; </span><span style='color: #555555;'>19</span><span> VOXX_zm           1.48       0.369     4.01   6.04</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>- 5</span><span>  0.530       2.43 
+#&gt; </span><span style='color: #555555;'>20</span><span> ZOOM_zm           2.08       0.321     6.46   1.02</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-10</span><span>  1.25        2.91 </div><div class='input'>
 <span class='co'># coefficient plot</span>
 <span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>ggplot2</span>)
 <span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>dplyr</span>)
@@ -331,33 +332,33 @@ the <code>data</code> argument.</p></td>
 <span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>as.matrix</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/cbind.html'>cbind</a></span>(<span class='no'>rm</span>, <span class='no'>r</span>))
 <span class='no'>res_black</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/gmm/man/gmm.html'>gmm</a></span>(<span class='no'>g</span>, <span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>x</span>, <span class='kw'>t0</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='fl'>0</span>, <span class='fl'>11</span>))
 
-<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>res_black</span>)</div><div class='output co'>#&gt; # A tibble: 11 x 5
+<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>res_black</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 11 x 5</span><span>
 #&gt;    term      estimate std.error statistic  p.value
-#&gt;    &lt;chr&gt;        &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
-#&gt;  1 Theta[1]    0.516     0.172     3.00   2.72e- 3
-#&gt;  2 Theta[2]    1.12      0.116     9.65   5.02e-22
-#&gt;  3 Theta[3]    0.680     0.197     3.45   5.65e- 4
-#&gt;  4 Theta[4]   -0.0322    0.424    -0.0761 9.39e- 1
-#&gt;  5 Theta[5]    0.850     0.155     5.49   4.05e- 8
-#&gt;  6 Theta[6]   -0.205     0.479    -0.429  6.68e- 1
-#&gt;  7 Theta[7]    0.625     0.122     5.14   2.73e- 7
-#&gt;  8 Theta[8]    1.05      0.0687   15.3    5.03e-53
-#&gt;  9 Theta[9]    0.640     0.233     2.75   5.92e- 3
-#&gt; 10 Theta[10]   0.596     0.295     2.02   4.36e- 2
-#&gt; 11 Theta[11]   1.16      0.240     4.82   1.45e- 6</div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>res_black</span>, <span class='kw'>conf.int</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; # A tibble: 11 x 7
+#&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>        </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #555555;'> 1</span><span> Theta[1]    0.516     0.172     3.00   2.72</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>- 3</span><span>
+#&gt; </span><span style='color: #555555;'> 2</span><span> Theta[2]    1.12      0.116     9.65   5.02</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-22</span><span>
+#&gt; </span><span style='color: #555555;'> 3</span><span> Theta[3]    0.680     0.197     3.45   5.65</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>- 4</span><span>
+#&gt; </span><span style='color: #555555;'> 4</span><span> Theta[4]   -</span><span style='color: #BB0000;'>0.032</span><span style='color: #BB0000;text-decoration: underline;'>2</span><span>    0.424    -</span><span style='color: #BB0000;'>0.076</span><span style='color: #BB0000;text-decoration: underline;'>1</span><span> 9.39</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>- 1</span><span>
+#&gt; </span><span style='color: #555555;'> 5</span><span> Theta[5]    0.850     0.155     5.49   4.05</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>- 8</span><span>
+#&gt; </span><span style='color: #555555;'> 6</span><span> Theta[6]   -</span><span style='color: #BB0000;'>0.205</span><span>     0.479    -</span><span style='color: #BB0000;'>0.429</span><span>  6.68</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>- 1</span><span>
+#&gt; </span><span style='color: #555555;'> 7</span><span> Theta[7]    0.625     0.122     5.14   2.73</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>- 7</span><span>
+#&gt; </span><span style='color: #555555;'> 8</span><span> Theta[8]    1.05      0.068</span><span style='text-decoration: underline;'>7</span><span>   15.3    5.03</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-53</span><span>
+#&gt; </span><span style='color: #555555;'> 9</span><span> Theta[9]    0.640     0.233     2.75   5.92</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>- 3</span><span>
+#&gt; </span><span style='color: #555555;'>10</span><span> Theta[10]   0.596     0.295     2.02   4.36</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>- 2</span><span>
+#&gt; </span><span style='color: #555555;'>11</span><span> Theta[11]   1.16      0.240     4.82   1.45</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>- 6</span><span></div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>res_black</span>, <span class='kw'>conf.int</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 11 x 7</span><span>
 #&gt;    term      estimate std.error statistic  p.value conf.low conf.high
-#&gt;    &lt;chr&gt;        &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;
-#&gt;  1 Theta[1]    0.516     0.172     3.00   2.72e- 3   0.178      0.853
-#&gt;  2 Theta[2]    1.12      0.116     9.65   5.02e-22   0.889      1.34 
-#&gt;  3 Theta[3]    0.680     0.197     3.45   5.65e- 4   0.293      1.07 
-#&gt;  4 Theta[4]   -0.0322    0.424    -0.0761 9.39e- 1  -0.862      0.798
-#&gt;  5 Theta[5]    0.850     0.155     5.49   4.05e- 8   0.546      1.15 
-#&gt;  6 Theta[6]   -0.205     0.479    -0.429  6.68e- 1  -1.14       0.733
-#&gt;  7 Theta[7]    0.625     0.122     5.14   2.73e- 7   0.387      0.864
-#&gt;  8 Theta[8]    1.05      0.0687   15.3    5.03e-53   0.919      1.19 
-#&gt;  9 Theta[9]    0.640     0.233     2.75   5.92e- 3   0.184      1.10 
-#&gt; 10 Theta[10]   0.596     0.295     2.02   4.36e- 2   0.0171     1.17 
-#&gt; 11 Theta[11]   1.16      0.240     4.82   1.45e- 6   0.686      1.63 </div><div class='input'>
+#&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>        </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #555555;'> 1</span><span> Theta[1]    0.516     0.172     3.00   2.72</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>- 3</span><span>   0.178      0.853
+#&gt; </span><span style='color: #555555;'> 2</span><span> Theta[2]    1.12      0.116     9.65   5.02</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-22</span><span>   0.889      1.34 
+#&gt; </span><span style='color: #555555;'> 3</span><span> Theta[3]    0.680     0.197     3.45   5.65</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>- 4</span><span>   0.293      1.07 
+#&gt; </span><span style='color: #555555;'> 4</span><span> Theta[4]   -</span><span style='color: #BB0000;'>0.032</span><span style='color: #BB0000;text-decoration: underline;'>2</span><span>    0.424    -</span><span style='color: #BB0000;'>0.076</span><span style='color: #BB0000;text-decoration: underline;'>1</span><span> 9.39</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>- 1</span><span>  -</span><span style='color: #BB0000;'>0.862</span><span>      0.798
+#&gt; </span><span style='color: #555555;'> 5</span><span> Theta[5]    0.850     0.155     5.49   4.05</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>- 8</span><span>   0.546      1.15 
+#&gt; </span><span style='color: #555555;'> 6</span><span> Theta[6]   -</span><span style='color: #BB0000;'>0.205</span><span>     0.479    -</span><span style='color: #BB0000;'>0.429</span><span>  6.68</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>- 1</span><span>  -</span><span style='color: #BB0000;'>1.14</span><span>       0.733
+#&gt; </span><span style='color: #555555;'> 7</span><span> Theta[7]    0.625     0.122     5.14   2.73</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>- 7</span><span>   0.387      0.864
+#&gt; </span><span style='color: #555555;'> 8</span><span> Theta[8]    1.05      0.068</span><span style='text-decoration: underline;'>7</span><span>   15.3    5.03</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-53</span><span>   0.919      1.19 
+#&gt; </span><span style='color: #555555;'> 9</span><span> Theta[9]    0.640     0.233     2.75   5.92</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>- 3</span><span>   0.184      1.10 
+#&gt; </span><span style='color: #555555;'>10</span><span> Theta[10]   0.596     0.295     2.02   4.36</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>- 2</span><span>   0.017</span><span style='text-decoration: underline;'>1</span><span>     1.17 
+#&gt; </span><span style='color: #555555;'>11</span><span> Theta[11]   1.16      0.240     4.82   1.45</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>- 6</span><span>   0.686      1.63 </div><div class='input'>
 <span class='co'>## APT test with Fama-French factors and GMM</span>
 
 <span class='no'>f1</span> <span class='kw'>&lt;-</span> <span class='no'>zm</span>
@@ -367,20 +368,20 @@ the <code>data</code> argument.</p></td>
 <span class='no'>res2</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/gmm/man/gmm.html'>gmm</a></span>(<span class='no'>z</span> ~ <span class='no'>f1</span> + <span class='no'>f2</span> + <span class='no'>f3</span>, <span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>h</span>)
 
 <span class='no'>td2</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>res2</span>, <span class='kw'>conf.int</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
-<span class='no'>td2</span></div><div class='output co'>#&gt; # A tibble: 40 x 7
+<span class='no'>td2</span></div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 40 x 7</span><span>
 #&gt;    term             estimate std.error statistic p.value conf.low conf.high
-#&gt;    &lt;chr&gt;               &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;
-#&gt;  1 WMK_(Intercept)  -0.0240     0.0548   -0.438    0.662  -0.131     0.0834
-#&gt;  2 UIS_(Intercept)   0.0723     0.127     0.567    0.570  -0.177     0.322 
-#&gt;  3 ORB_(Intercept)   0.114      0.212     0.534    0.593  -0.303     0.530 
-#&gt;  4 MAT_(Intercept)   0.0694     0.0979    0.709    0.478  -0.122     0.261 
-#&gt;  5 ABAX_(Intercept)  0.0668     0.275     0.242    0.808  -0.473     0.606 
-#&gt;  6 T_(Intercept)     0.0195     0.0745    0.262    0.793  -0.126     0.165 
-#&gt;  7 EMR_(Intercept)   0.0217     0.0538    0.404    0.687  -0.0837    0.127 
-#&gt;  8 JCS_(Intercept)   0.0904     0.154     0.586    0.558  -0.212     0.393 
-#&gt;  9 VOXX_(Intercept) -0.00706    0.179    -0.0394   0.969  -0.359     0.344 
-#&gt; 10 ZOOM_(Intercept) -0.189      0.215    -0.878    0.380  -0.610     0.233 
-#&gt; # … with 30 more rows</div><div class='input'>
+#&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>               </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #555555;'> 1</span><span> WMK_(Intercept)  -</span><span style='color: #BB0000;'>0.024</span><span style='color: #BB0000;text-decoration: underline;'>0</span><span>     0.054</span><span style='text-decoration: underline;'>8</span><span>   -</span><span style='color: #BB0000;'>0.438</span><span>    0.662  -</span><span style='color: #BB0000;'>0.131</span><span>     0.083</span><span style='text-decoration: underline;'>4</span><span>
+#&gt; </span><span style='color: #555555;'> 2</span><span> UIS_(Intercept)   0.072</span><span style='text-decoration: underline;'>3</span><span>     0.127     0.567    0.570  -</span><span style='color: #BB0000;'>0.177</span><span>     0.322 
+#&gt; </span><span style='color: #555555;'> 3</span><span> ORB_(Intercept)   0.114      0.212     0.534    0.593  -</span><span style='color: #BB0000;'>0.303</span><span>     0.530 
+#&gt; </span><span style='color: #555555;'> 4</span><span> MAT_(Intercept)   0.069</span><span style='text-decoration: underline;'>4</span><span>     0.097</span><span style='text-decoration: underline;'>9</span><span>    0.709    0.478  -</span><span style='color: #BB0000;'>0.122</span><span>     0.261 
+#&gt; </span><span style='color: #555555;'> 5</span><span> ABAX_(Intercept)  0.066</span><span style='text-decoration: underline;'>8</span><span>     0.275     0.242    0.808  -</span><span style='color: #BB0000;'>0.473</span><span>     0.606 
+#&gt; </span><span style='color: #555555;'> 6</span><span> T_(Intercept)     0.019</span><span style='text-decoration: underline;'>5</span><span>     0.074</span><span style='text-decoration: underline;'>5</span><span>    0.262    0.793  -</span><span style='color: #BB0000;'>0.126</span><span>     0.165 
+#&gt; </span><span style='color: #555555;'> 7</span><span> EMR_(Intercept)   0.021</span><span style='text-decoration: underline;'>7</span><span>     0.053</span><span style='text-decoration: underline;'>8</span><span>    0.404    0.687  -</span><span style='color: #BB0000;'>0.083</span><span style='color: #BB0000;text-decoration: underline;'>7</span><span>    0.127 
+#&gt; </span><span style='color: #555555;'> 8</span><span> JCS_(Intercept)   0.090</span><span style='text-decoration: underline;'>4</span><span>     0.154     0.586    0.558  -</span><span style='color: #BB0000;'>0.212</span><span>     0.393 
+#&gt; </span><span style='color: #555555;'> 9</span><span> VOXX_(Intercept) -</span><span style='color: #BB0000;'>0.007</span><span style='color: #BB0000;text-decoration: underline;'>06</span><span>    0.179    -</span><span style='color: #BB0000;'>0.039</span><span style='color: #BB0000;text-decoration: underline;'>4</span><span>   0.969  -</span><span style='color: #BB0000;'>0.359</span><span>     0.344 
+#&gt; </span><span style='color: #555555;'>10</span><span> ZOOM_(Intercept) -</span><span style='color: #BB0000;'>0.189</span><span>      0.215    -</span><span style='color: #BB0000;'>0.878</span><span>    0.380  -</span><span style='color: #BB0000;'>0.610</span><span>     0.233 
+#&gt; </span><span style='color: #555555;'># … with 30 more rows</span><span></div><div class='input'>
 <span class='co'># coefficient plot</span>
 <span class='no'>td2</span> <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span>(<span class='kw'>variable</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/reorder.factor.html'>reorder</a></span>(<span class='no'>term</span>, <span class='no'>estimate</span>)) <span class='kw'>%&gt;%</span>
@@ -388,24 +389,19 @@ the <code>data</code> argument.</p></td>
   <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_point.html'>geom_point</a></span>() +
   <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_errorbarh.html'>geom_errorbarh</a></span>(<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='kw'>xmin</span> <span class='kw'>=</span> <span class='no'>conf.low</span>, <span class='kw'>xmax</span> <span class='kw'>=</span> <span class='no'>conf.high</span>)) +
   <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_abline.html'>geom_vline</a></span>(<span class='kw'>xintercept</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"red"</span>, <span class='kw'>lty</span> <span class='kw'>=</span> <span class='fl'>2</span>)</div><div class='img'><img src='tidy.gmm-2.png' alt='' width='700' height='433' /></div><div class='input'>
-</div></pre>
+</div></span></pre>
   </div>
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <h2>Contents</h2>
-    <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
-      <li><a href="#see-also">See also</a></li>
-      <li><a href="#value">Value</a></li>
-      <li><a href="#examples">Examples</a></li>
-    </ul>
-
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
+    <nav id="toc" data-toggle="toc" class="sticky-top">
+      <h2 data-toc-skip>Contents</h2>
+    </nav>
   </div>
 </div>
 
 
       <footer>
       <div class="tidyverse">
-  <p>broom is a part of the <strong>tidyverse</strong>, an ecosystem of packages designed with common APIs and a shared philosophy. Learn more at <a href="https://tidyverse.org">tidyverse.org</a>.</p>
+  <p>broom is a part of the <strong>tidymodels</strong> ecosystem, a collection of modeling packages designed with common APIs and a shared philosophy.</p>
 </div>
 
 <div class="author">

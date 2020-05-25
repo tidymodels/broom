@@ -17,22 +17,26 @@
 <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png" />
 
 <!-- jquery -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 
 <!-- Bootstrap -->
 <link href="../tidyverse.css" rel="stylesheet">
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
+
+<!-- bootstrap-toc -->
+<link rel="stylesheet" href="../bootstrap-toc.css">
+<script src="../bootstrap-toc.js"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
 
 <!-- headroom.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -51,7 +55,7 @@ an appropriate tidying method to apply to the list. Those tidiers are
 themselves are implemented as functions of the form tidy_&amp;lt;function&amp;gt;
 or glance_&amp;lt;function&amp;gt; and are not exported (but they are documented!).
 If no appropriate tidying method is found, throws an error." />
-<meta property="og:image" content="http://broom.tidyverse.org/logo.png" />
+<meta property="og:image" content="https://broom.tidymodels.org/logo.png" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -78,7 +82,7 @@ If no appropriate tidying method is found, throws an error." />
 
   </head>
 
-  <body>
+  <body data-spy="scroll" data-target="#toc">
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -93,9 +97,9 @@ If no appropriate tidying method is found, throws an error." />
 
       <div class="navbar-brand-container">
         <a class="navbar-brand" href="../index.html">broom</a>
-        <div class="info">
-          <span class="partof">part of the <a href="https://tidyverse.org">tidyverse</a></span>
-          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.2.9003</span>
+        <div class="info hidden-xs hidden-sm">
+          <span class="partof">part of <a href="https://tidymodels.org">tidymodels</a></span>
+          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.7.0.9000</span>
         </div>
       </div>
     </div>
@@ -121,16 +125,13 @@ If no appropriate tidying method is found, throws an error." />
       <a href="../articles/available-methods.html">Available methods</a>
     </li>
     <li>
-      <a href="../articles/bootstrapping.html">Bootstrapping</a>
+      <a href="https://www.tidymodels.org/learn/statistics/bootstrap/">Bootstrapping</a>
     </li>
     <li>
       <a href="../articles/broom_and_dplyr.html">Broom and dplyr</a>
     </li>
     <li>
-      <a href="../articles/external-tidiers.html">Tidiers in external packages</a>
-    </li>
-    <li>
-      <a href="../articles/kmeans.html">K-means</a>
+      <a href="https://www.tidymodels.org/learn/statistics/k-means/">K-means</a>
     </li>
   </ul>
 </li>
@@ -157,7 +158,7 @@ If no appropriate tidying method is found, throws an error." />
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Tidy a(n) svd object masquerading as list</h1>
-    <small class="dont-index">Source: <a href='https://github.com/tidymodels/broom/blob/master/R/list-svd-tidiers.R'><code>R/list-svd-tidiers.R</code></a></small>
+    <small class="dont-index">Source: <a href='http://github.com/tidymodels/broom/blob/master/R/list-svd-tidiers.R'><code>R/list-svd-tidiers.R</code></a></small>
     <div class="hidden name"><code>tidy_svd.Rd</code></div>
     </div>
 
@@ -223,7 +224,7 @@ data).</p></dd>
 component. That is, the location of the observation in PCA space.</p></dd>
 
 If matrix is "v", "rotation", "loadings" or "variables", each
-row in the tidied ouput corresponds to information about the principle
+row in the tidied output corresponds to information about the principle
 components in the original space. The columns are:
 
 <dt><code>row</code></dt><dd><p>The variable labels (colnames) of the data set on
@@ -264,49 +265,55 @@ that SVD is only equivalent to PCA on centered data.</p>
 <span class='no'>mat</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/scale.html'>scale</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>as.matrix</a></span>(<span class='no'>iris</span>[, <span class='fl'>1</span>:<span class='fl'>4</span>]))
 <span class='no'>s</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/svd.html'>svd</a></span>(<span class='no'>mat</span>)
 
-<span class='no'>tidy_u</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>s</span>, <span class='kw'>matrix</span> <span class='kw'>=</span> <span class='st'>"u"</span>)
-<span class='no'>tidy_u</span></div><div class='output co'>#&gt; # A tibble: 600 x 3
+<span class='no'>tidy_u</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>s</span>, <span class='kw'>matrix</span> <span class='kw'>=</span> <span class='st'>"u"</span>)</div><div class='output co'>#&gt; <span class='message'>New names:</span>
+#&gt; <span class='message'>* `` -&gt; ...1</span>
+#&gt; <span class='message'>* `` -&gt; ...2</span>
+#&gt; <span class='message'>* `` -&gt; ...3</span>
+#&gt; <span class='message'>* `` -&gt; ...4</span></div><div class='input'><span class='no'>tidy_u</span></div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 600 x 3</span><span>
 #&gt;      row    PC   value
-#&gt;    &lt;int&gt; &lt;int&gt;   &lt;dbl&gt;
-#&gt;  1     1     1 -0.108 
-#&gt;  2     2     1 -0.0995
-#&gt;  3     3     1 -0.113 
-#&gt;  4     4     1 -0.110 
-#&gt;  5     5     1 -0.114 
-#&gt;  6     6     1 -0.0992
-#&gt;  7     7     1 -0.117 
-#&gt;  8     8     1 -0.107 
-#&gt;  9     9     1 -0.112 
-#&gt; 10    10     1 -0.104 
-#&gt; # … with 590 more rows</div><div class='input'>
+#&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #555555;'> 1</span><span>     1     1 -</span><span style='color: #BB0000;'>0.108</span><span> 
+#&gt; </span><span style='color: #555555;'> 2</span><span>     2     1 -</span><span style='color: #BB0000;'>0.099</span><span style='color: #BB0000;text-decoration: underline;'>5</span><span>
+#&gt; </span><span style='color: #555555;'> 3</span><span>     3     1 -</span><span style='color: #BB0000;'>0.113</span><span> 
+#&gt; </span><span style='color: #555555;'> 4</span><span>     4     1 -</span><span style='color: #BB0000;'>0.110</span><span> 
+#&gt; </span><span style='color: #555555;'> 5</span><span>     5     1 -</span><span style='color: #BB0000;'>0.114</span><span> 
+#&gt; </span><span style='color: #555555;'> 6</span><span>     6     1 -</span><span style='color: #BB0000;'>0.099</span><span style='color: #BB0000;text-decoration: underline;'>2</span><span>
+#&gt; </span><span style='color: #555555;'> 7</span><span>     7     1 -</span><span style='color: #BB0000;'>0.117</span><span> 
+#&gt; </span><span style='color: #555555;'> 8</span><span>     8     1 -</span><span style='color: #BB0000;'>0.107</span><span> 
+#&gt; </span><span style='color: #555555;'> 9</span><span>     9     1 -</span><span style='color: #BB0000;'>0.112</span><span> 
+#&gt; </span><span style='color: #555555;'>10</span><span>    10     1 -</span><span style='color: #BB0000;'>0.104</span><span> 
+#&gt; </span><span style='color: #555555;'># … with 590 more rows</span><span></div><div class='input'>
 <span class='no'>tidy_d</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>s</span>, <span class='kw'>matrix</span> <span class='kw'>=</span> <span class='st'>"d"</span>)
-<span class='no'>tidy_d</span></div><div class='output co'>#&gt; # A tibble: 4 x 4
+<span class='no'>tidy_d</span></div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 4 x 4</span><span>
 #&gt;      PC std.dev percent cumulative
-#&gt;   &lt;int&gt;   &lt;dbl&gt;   &lt;dbl&gt;      &lt;dbl&gt;
-#&gt; 1     1   20.9  0.730        0.730
-#&gt; 2     2   11.7  0.229        0.958
-#&gt; 3     3    4.68 0.0367       0.995
-#&gt; 4     4    1.76 0.00518      1    </div><div class='input'>
-<span class='no'>tidy_v</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>s</span>, <span class='kw'>matrix</span> <span class='kw'>=</span> <span class='st'>"v"</span>)
-<span class='no'>tidy_v</span></div><div class='output co'>#&gt; # A tibble: 16 x 3
+#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>      </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #555555;'>1</span><span>     1   20.9  0.730        0.730
+#&gt; </span><span style='color: #555555;'>2</span><span>     2   11.7  0.229        0.958
+#&gt; </span><span style='color: #555555;'>3</span><span>     3    4.68 0.036</span><span style='text-decoration: underline;'>7</span><span>       0.995
+#&gt; </span><span style='color: #555555;'>4</span><span>     4    1.76 0.005</span><span style='text-decoration: underline;'>18</span><span>      1    </div><div class='input'>
+<span class='no'>tidy_v</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>s</span>, <span class='kw'>matrix</span> <span class='kw'>=</span> <span class='st'>"v"</span>)</div><div class='output co'>#&gt; <span class='message'>New names:</span>
+#&gt; <span class='message'>* `` -&gt; ...1</span>
+#&gt; <span class='message'>* `` -&gt; ...2</span>
+#&gt; <span class='message'>* `` -&gt; ...3</span>
+#&gt; <span class='message'>* `` -&gt; ...4</span></div><div class='input'><span class='no'>tidy_v</span></div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 16 x 3</span><span>
 #&gt;    column    PC   value
-#&gt;     &lt;int&gt; &lt;int&gt;   &lt;dbl&gt;
-#&gt;  1      1     1  0.521 
-#&gt;  2      2     1 -0.269 
-#&gt;  3      3     1  0.580 
-#&gt;  4      4     1  0.565 
-#&gt;  5      1     2 -0.377 
-#&gt;  6      2     2 -0.923 
-#&gt;  7      3     2 -0.0245
-#&gt;  8      4     2 -0.0669
-#&gt;  9      1     3  0.720 
-#&gt; 10      2     3 -0.244 
-#&gt; 11      3     3 -0.142 
-#&gt; 12      4     3 -0.634 
-#&gt; 13      1     4  0.261 
-#&gt; 14      2     4 -0.124 
-#&gt; 15      3     4 -0.801 
-#&gt; 16      4     4  0.524 </div><div class='input'>
+#&gt;     </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #555555;'> 1</span><span>      1     1  0.521 
+#&gt; </span><span style='color: #555555;'> 2</span><span>      2     1 -</span><span style='color: #BB0000;'>0.269</span><span> 
+#&gt; </span><span style='color: #555555;'> 3</span><span>      3     1  0.580 
+#&gt; </span><span style='color: #555555;'> 4</span><span>      4     1  0.565 
+#&gt; </span><span style='color: #555555;'> 5</span><span>      1     2 -</span><span style='color: #BB0000;'>0.377</span><span> 
+#&gt; </span><span style='color: #555555;'> 6</span><span>      2     2 -</span><span style='color: #BB0000;'>0.923</span><span> 
+#&gt; </span><span style='color: #555555;'> 7</span><span>      3     2 -</span><span style='color: #BB0000;'>0.024</span><span style='color: #BB0000;text-decoration: underline;'>5</span><span>
+#&gt; </span><span style='color: #555555;'> 8</span><span>      4     2 -</span><span style='color: #BB0000;'>0.066</span><span style='color: #BB0000;text-decoration: underline;'>9</span><span>
+#&gt; </span><span style='color: #555555;'> 9</span><span>      1     3  0.720 
+#&gt; </span><span style='color: #555555;'>10</span><span>      2     3 -</span><span style='color: #BB0000;'>0.244</span><span> 
+#&gt; </span><span style='color: #555555;'>11</span><span>      3     3 -</span><span style='color: #BB0000;'>0.142</span><span> 
+#&gt; </span><span style='color: #555555;'>12</span><span>      4     3 -</span><span style='color: #BB0000;'>0.634</span><span> 
+#&gt; </span><span style='color: #555555;'>13</span><span>      1     4  0.261 
+#&gt; </span><span style='color: #555555;'>14</span><span>      2     4 -</span><span style='color: #BB0000;'>0.124</span><span> 
+#&gt; </span><span style='color: #555555;'>15</span><span>      3     4 -</span><span style='color: #BB0000;'>0.801</span><span> 
+#&gt; </span><span style='color: #555555;'>16</span><span>      4     4  0.524 </div><div class='input'>
 <span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>ggplot2</span>)
 <span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>dplyr</span>)
 
@@ -319,25 +326,19 @@ that SVD is only equivalent to PCA on centered data.</p>
     <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_boxplot.html'>geom_boxplot</a></span>() +
     <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/facet_wrap.html'>facet_wrap</a></span>(~ <span class='no'>PC</span>, <span class='kw'>scale</span> <span class='kw'>=</span> <span class='st'>"free_y"</span>)</div><div class='img'><img src='tidy_svd-2.png' alt='' width='700' height='433' /></div><div class='input'>
 
-</div></pre>
+</div></span></pre>
   </div>
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <h2>Contents</h2>
-    <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
-      <li><a href="#value">Value</a></li>
-      <li><a href="#details">Details</a></li>
-      <li><a href="#see-also">See also</a></li>
-      <li><a href="#examples">Examples</a></li>
-    </ul>
-
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
+    <nav id="toc" data-toggle="toc" class="sticky-top">
+      <h2 data-toc-skip>Contents</h2>
+    </nav>
   </div>
 </div>
 
 
       <footer>
       <div class="tidyverse">
-  <p>broom is a part of the <strong>tidyverse</strong>, an ecosystem of packages designed with common APIs and a shared philosophy. Learn more at <a href="https://tidyverse.org">tidyverse.org</a>.</p>
+  <p>broom is a part of the <strong>tidymodels</strong> ecosystem, a collection of modeling packages designed with common APIs and a shared philosophy.</p>
 </div>
 
 <div class="author">

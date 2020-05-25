@@ -17,22 +17,26 @@
 <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png" />
 
 <!-- jquery -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 
 <!-- Bootstrap -->
 <link href="../tidyverse.css" rel="stylesheet">
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
+
+<!-- bootstrap-toc -->
+<link rel="stylesheet" href="../bootstrap-toc.css">
+<script src="../bootstrap-toc.js"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
 
 <!-- headroom.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -45,13 +49,13 @@
 <meta property="og:description" content="Tidy summarizes information about the components of a model.
 A model component might be a single term in a regression, a single
 hypothesis, a cluster, or a class. Exactly what tidy considers to be a
-model component varies cross models but is usually self-evident.
+model component varies across models but is usually self-evident.
 If a model has several distinct types of components, you will need to
 specify which components to return.
 This method tidies the coefficients of a bootstrapped
 temporal exponential random graph model estimated with the xergm.
 It simply returns the coefficients and their confidence intervals." />
-<meta property="og:image" content="http://broom.tidyverse.org/logo.png" />
+<meta property="og:image" content="https://broom.tidymodels.org/logo.png" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -78,7 +82,7 @@ It simply returns the coefficients and their confidence intervals." />
 
   </head>
 
-  <body>
+  <body data-spy="scroll" data-target="#toc">
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -93,9 +97,9 @@ It simply returns the coefficients and their confidence intervals." />
 
       <div class="navbar-brand-container">
         <a class="navbar-brand" href="../index.html">broom</a>
-        <div class="info">
-          <span class="partof">part of the <a href="https://tidyverse.org">tidyverse</a></span>
-          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.2.9003</span>
+        <div class="info hidden-xs hidden-sm">
+          <span class="partof">part of <a href="https://tidymodels.org">tidymodels</a></span>
+          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.7.0.9000</span>
         </div>
       </div>
     </div>
@@ -121,16 +125,13 @@ It simply returns the coefficients and their confidence intervals." />
       <a href="../articles/available-methods.html">Available methods</a>
     </li>
     <li>
-      <a href="../articles/bootstrapping.html">Bootstrapping</a>
+      <a href="https://www.tidymodels.org/learn/statistics/bootstrap/">Bootstrapping</a>
     </li>
     <li>
       <a href="../articles/broom_and_dplyr.html">Broom and dplyr</a>
     </li>
     <li>
-      <a href="../articles/external-tidiers.html">Tidiers in external packages</a>
-    </li>
-    <li>
-      <a href="../articles/kmeans.html">K-means</a>
+      <a href="https://www.tidymodels.org/learn/statistics/k-means/">K-means</a>
     </li>
   </ul>
 </li>
@@ -157,7 +158,7 @@ It simply returns the coefficients and their confidence intervals." />
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Tidy a(n) btergm object</h1>
-    <small class="dont-index">Source: <a href='https://github.com/tidymodels/broom/blob/master/R/btergm-tidiers.R'><code>R/btergm-tidiers.R</code></a></small>
+    <small class="dont-index">Source: <a href='http://github.com/tidymodels/broom/blob/master/R/btergm-tidiers.R'><code>R/btergm-tidiers.R</code></a></small>
     <div class="hidden name"><code>tidy.btergm.Rd</code></div>
     </div>
 
@@ -165,7 +166,7 @@ It simply returns the coefficients and their confidence intervals." />
     <p>Tidy summarizes information about the components of a model.
 A model component might be a single term in a regression, a single
 hypothesis, a cluster, or a class. Exactly what tidy considers to be a
-model component varies cross models but is usually self-evident.
+model component varies across models but is usually self-evident.
 If a model has several distinct types of components, you will need to
 specify which components to return.</p>
 <p>This method tidies the coefficients of a bootstrapped
@@ -224,54 +225,84 @@ the <code>data</code> argument.</p></td>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
-<span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
-<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>xergm</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>btergm</span>)</div><div class='output co'>#&gt; <span class='message'>Loading required package: xergm.common</span></div><div class='output co'>#&gt; <span class='message'>Loading required package: ergm</span></div><div class='output co'>#&gt; <span class='message'>Loading required package: network</span></div><div class='output co'>#&gt; <span class='message'>network: Classes for Relational Data</span>
+#&gt; <span class='message'>Version 1.16.0 created on 2019-11-30.</span>
+#&gt; <span class='message'>copyright (c) 2005, Carter T. Butts, University of California-Irvine</span>
+#&gt; <span class='message'>                    Mark S. Handcock, University of California -- Los Angeles</span>
+#&gt; <span class='message'>                    David R. Hunter, Penn State University</span>
+#&gt; <span class='message'>                    Martina Morris, University of Washington</span>
+#&gt; <span class='message'>                    Skye Bender-deMoll, University of Washington</span>
+#&gt; <span class='message'> For citation information, type citation("network").</span>
+#&gt; <span class='message'> Type help("network-package") to get started.</span></div><div class='output co'>#&gt; <span class='message'></span>
+#&gt; <span class='message'>ergm: version 3.10.4, created on 2019-06-10</span>
+#&gt; <span class='message'>Copyright (c) 2019, Mark S. Handcock, University of California -- Los Angeles</span>
+#&gt; <span class='message'>                    David R. Hunter, Penn State University</span>
+#&gt; <span class='message'>                    Carter T. Butts, University of California -- Irvine</span>
+#&gt; <span class='message'>                    Steven M. Goodreau, University of Washington</span>
+#&gt; <span class='message'>                    Pavel N. Krivitsky, University of Wollongong</span>
+#&gt; <span class='message'>                    Martina Morris, University of Washington</span>
+#&gt; <span class='message'>                    with contributions from</span>
+#&gt; <span class='message'>                    Li Wang</span>
+#&gt; <span class='message'>                    Kirk Li, University of Washington</span>
+#&gt; <span class='message'>                    Skye Bender-deMoll, University of Washington</span>
+#&gt; <span class='message'>                    Chad Klumb</span>
+#&gt; <span class='message'>Based on "statnet" project software (statnet.org).</span>
+#&gt; <span class='message'>For license and citation information see statnet.org/attribution</span>
+#&gt; <span class='message'>or type citation("ergm").</span></div><div class='output co'>#&gt; <span class='message'>NOTE: Versions before 3.6.1 had a bug in the implementation of the bd()</span>
+#&gt; <span class='message'>constriant which distorted the sampled distribution somewhat. In</span>
+#&gt; <span class='message'>addition, Sampson's Monks datasets had mislabeled vertices. See the</span>
+#&gt; <span class='message'>NEWS and the documentation for more details.</span></div><div class='output co'>#&gt; <span class='message'>NOTE: Some common term arguments pertaining to vertex attribute and</span>
+#&gt; <span class='message'>level selection have changed in 3.10.0. See terms help for more</span>
+#&gt; <span class='message'>details. Use ‘options(ergm.term=list(version="3.9.4"))’ to use old</span>
+#&gt; <span class='message'>behavior.</span></div><div class='output co'>#&gt; <span class='message'></span>
+#&gt; <span class='message'>Attaching package: ‘xergm.common’</span></div><div class='output co'>#&gt; <span class='message'>The following object is masked from ‘package:ergm’:</span>
+#&gt; <span class='message'></span>
+#&gt; <span class='message'>    gof</span></div><div class='output co'>#&gt; <span class='error'>Error: package or namespace load failed for ‘btergm’:</span>
+#&gt; <span class='error'> .onLoad failed in loadNamespace() for 'tcltk', details:</span>
+#&gt; <span class='error'>  call: fun(libname, pkgname)</span>
+#&gt; <span class='error'>  error: X11 library is missing: install XQuartz from xquartz.macosforge.org</span></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span>(<span class='fl'>1</span>)
 
-<span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span>(<span class='fl'>1</span>)
-<span class='co'># Using the same simulated example as the xergm package</span>
 <span class='co'># Create 10 random networks with 10 actors</span>
+
 <span class='no'>networks</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>()
-<span class='kw'>for</span>(<span class='no'>i</span> <span class='kw'>in</span> <span class='fl'>1</span>:<span class='fl'>10</span>){
-    <span class='no'>mat</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></span>(<span class='fu'><a href='https://rdrr.io/r/stats/Binomial.html'>rbinom</a></span>(<span class='fl'>100</span>, <span class='fl'>1</span>, <span class='fl'>.25</span>), <span class='kw'>nrow</span> <span class='kw'>=</span> <span class='fl'>10</span>, <span class='kw'>ncol</span> <span class='kw'>=</span> <span class='fl'>10</span>)
-    <span class='fu'><a href='https://rdrr.io/r/base/diag.html'>diag</a></span>(<span class='no'>mat</span>) <span class='kw'>&lt;-</span> <span class='fl'>0</span>
-    <span class='no'>nw</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>network</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/network/man/network.html'>network</a></span>(<span class='no'>mat</span>)
-    <span class='no'>networks</span><span class='kw'>[[</span><span class='no'>i</span>]] <span class='kw'>&lt;-</span> <span class='no'>nw</span>
-}
-<span class='co'># Create 10 matrices as covariates</span>
-<span class='no'>covariates</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>()
+
 <span class='kw'>for</span> (<span class='no'>i</span> <span class='kw'>in</span> <span class='fl'>1</span>:<span class='fl'>10</span>) {
-    <span class='no'>mat</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></span>(<span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span>(<span class='fl'>100</span>), <span class='kw'>nrow</span> <span class='kw'>=</span> <span class='fl'>10</span>, <span class='kw'>ncol</span> <span class='kw'>=</span> <span class='fl'>10</span>)
-    <span class='no'>covariates</span><span class='kw'>[[</span><span class='no'>i</span>]] <span class='kw'>&lt;-</span> <span class='no'>mat</span>
+  <span class='no'>mat</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></span>(<span class='fu'><a href='https://rdrr.io/r/stats/Binomial.html'>rbinom</a></span>(<span class='fl'>100</span>, <span class='fl'>1</span>, <span class='fl'>.25</span>), <span class='kw'>nrow</span> <span class='kw'>=</span> <span class='fl'>10</span>, <span class='kw'>ncol</span> <span class='kw'>=</span> <span class='fl'>10</span>)
+  <span class='fu'><a href='https://rdrr.io/r/base/diag.html'>diag</a></span>(<span class='no'>mat</span>) <span class='kw'>&lt;-</span> <span class='fl'>0</span>
+  <span class='no'>nw</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>network</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/network/man/network.html'>network</a></span>(<span class='no'>mat</span>)
+  <span class='no'>networks</span><span class='kw'>[[</span><span class='no'>i</span>]] <span class='kw'>&lt;-</span> <span class='no'>nw</span>
 }
+
+<span class='co'># Create 10 matrices as covariates</span>
+
+<span class='no'>covariates</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>()
+
+<span class='kw'>for</span> (<span class='no'>i</span> <span class='kw'>in</span> <span class='fl'>1</span>:<span class='fl'>10</span>) {
+  <span class='no'>mat</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></span>(<span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span>(<span class='fl'>100</span>), <span class='kw'>nrow</span> <span class='kw'>=</span> <span class='fl'>10</span>, <span class='kw'>ncol</span> <span class='kw'>=</span> <span class='fl'>10</span>)
+  <span class='no'>covariates</span><span class='kw'>[[</span><span class='no'>i</span>]] <span class='kw'>&lt;-</span> <span class='no'>mat</span>
+}
+
 <span class='co'># Fit a model where the propensity to form ties depends</span>
 <span class='co'># on the edge covariates, controlling for the number of</span>
 <span class='co'># in-stars</span>
-<span class='fu'><a href='https://rdrr.io/r/base/warning.html'>suppressWarnings</a></span>(<span class='no'>btfit</span> <span class='kw'>&lt;-</span> <span class='fu'>btergm</span>(<span class='no'>networks</span> ~ <span class='no'>edges</span> + <span class='fu'>istar</span>(<span class='fl'>2</span>) +
-                   <span class='fu'>edgecov</span>(<span class='no'>covariates</span>), <span class='kw'>R</span> <span class='kw'>=</span> <span class='fl'>100</span>))
-
+<span class='no'>btfit</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/btergm/man/btergm.html'>btergm</a></span>(<span class='no'>networks</span> ~ <span class='no'>edges</span> + <span class='fu'><a href='https://rdrr.io/pkg/btergm/man/gofstatistics.html'>istar</a></span>(<span class='fl'>2</span>) + <span class='fu'>edgecov</span>(<span class='no'>covariates</span>), <span class='kw'>R</span> <span class='kw'>=</span> <span class='fl'>100</span>)</div><div class='output co'>#&gt; <span class='error'>Error in btergm(networks ~ edges + istar(2) + edgecov(covariates), R = 100): could not find function "btergm"</span></div><div class='input'>
 <span class='co'># Show terms, coefficient estimates and errors</span>
-<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>btfit</span>)
-
+<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>btfit</span>)</div><div class='output co'>#&gt; <span class='error'>Error in tidy(btfit): object 'btfit' not found</span></div><div class='input'>
 <span class='co'># Show coefficients as odds ratios with a 99% CI</span>
-<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>btfit</span>, <span class='kw'>exponentiate</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>conf.level</span> <span class='kw'>=</span> <span class='fl'>0.99</span>)
-}</div></pre>
+<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>btfit</span>, <span class='kw'>exponentiate</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>conf.level</span> <span class='kw'>=</span> <span class='fl'>0.99</span>)</div><div class='output co'>#&gt; <span class='error'>Error in tidy(btfit, exponentiate = TRUE, conf.level = 0.99): object 'btfit' not found</span></div><div class='input'>
+</div></pre>
   </div>
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <h2>Contents</h2>
-    <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
-      <li><a href="#see-also">See also</a></li>
-      <li><a href="#value">Value</a></li>
-      <li><a href="#examples">Examples</a></li>
-    </ul>
-
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
+    <nav id="toc" data-toggle="toc" class="sticky-top">
+      <h2 data-toc-skip>Contents</h2>
+    </nav>
   </div>
 </div>
 
 
       <footer>
       <div class="tidyverse">
-  <p>broom is a part of the <strong>tidyverse</strong>, an ecosystem of packages designed with common APIs and a shared philosophy. Learn more at <a href="https://tidyverse.org">tidyverse.org</a>.</p>
+  <p>broom is a part of the <strong>tidymodels</strong> ecosystem, a collection of modeling packages designed with common APIs and a shared philosophy.</p>
 </div>
 
 <div class="author">

@@ -17,22 +17,26 @@
 <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png" />
 
 <!-- jquery -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 
 <!-- Bootstrap -->
 <link href="../tidyverse.css" rel="stylesheet">
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
+
+<!-- bootstrap-toc -->
+<link rel="stylesheet" href="../bootstrap-toc.css">
+<script src="../bootstrap-toc.js"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
 
 <!-- headroom.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -45,10 +49,10 @@
 <meta property="og:description" content="Tidy summarizes information about the components of a model.
 A model component might be a single term in a regression, a single
 hypothesis, a cluster, or a class. Exactly what tidy considers to be a
-model component varies cross models but is usually self-evident.
+model component varies across models but is usually self-evident.
 If a model has several distinct types of components, you will need to
 specify which components to return." />
-<meta property="og:image" content="http://broom.tidyverse.org/logo.png" />
+<meta property="og:image" content="https://broom.tidymodels.org/logo.png" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -75,7 +79,7 @@ specify which components to return." />
 
   </head>
 
-  <body>
+  <body data-spy="scroll" data-target="#toc">
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -90,9 +94,9 @@ specify which components to return." />
 
       <div class="navbar-brand-container">
         <a class="navbar-brand" href="../index.html">broom</a>
-        <div class="info">
-          <span class="partof">part of the <a href="https://tidyverse.org">tidyverse</a></span>
-          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.2.9003</span>
+        <div class="info hidden-xs hidden-sm">
+          <span class="partof">part of <a href="https://tidymodels.org">tidymodels</a></span>
+          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.7.0.9000</span>
         </div>
       </div>
     </div>
@@ -118,16 +122,13 @@ specify which components to return." />
       <a href="../articles/available-methods.html">Available methods</a>
     </li>
     <li>
-      <a href="../articles/bootstrapping.html">Bootstrapping</a>
+      <a href="https://www.tidymodels.org/learn/statistics/bootstrap/">Bootstrapping</a>
     </li>
     <li>
       <a href="../articles/broom_and_dplyr.html">Broom and dplyr</a>
     </li>
     <li>
-      <a href="../articles/external-tidiers.html">Tidiers in external packages</a>
-    </li>
-    <li>
-      <a href="../articles/kmeans.html">K-means</a>
+      <a href="https://www.tidymodels.org/learn/statistics/k-means/">K-means</a>
     </li>
   </ul>
 </li>
@@ -154,7 +155,7 @@ specify which components to return." />
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Tidy a(n) betareg object</h1>
-    <small class="dont-index">Source: <a href='https://github.com/tidymodels/broom/blob/master/R/betareg-tidiers.R'><code>R/betareg-tidiers.R</code></a></small>
+    <small class="dont-index">Source: <a href='http://github.com/tidymodels/broom/blob/master/R/betareg-tidiers.R'><code>R/betareg-tidiers.R</code></a></small>
     <div class="hidden name"><code>tidy.betareg.Rd</code></div>
     </div>
 
@@ -162,7 +163,7 @@ specify which components to return." />
     <p>Tidy summarizes information about the components of a model.
 A model component might be a single term in a regression, a single
 hypothesis, a cluster, or a class. Exactly what tidy considers to be a
-model component varies cross models but is usually self-evident.
+model component varies across models but is usually self-evident.
 If a model has several distinct types of components, you will need to
 specify which components to return.</p>
     </div>
@@ -247,86 +248,80 @@ At least one term will have been used to model the precision <code>phi</code>.</
 #&gt; Phi coefficients (precision model with identity link):
 #&gt; (phi)  
 #&gt; 440.3  
-#&gt; </div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>mod</span>)</div><div class='output co'>#&gt; # A tibble: 12 x 6
+#&gt; </div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>mod</span>)</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 12 x 6</span><span>
 #&gt;    component term        estimate  std.error statistic   p.value
-#&gt;    &lt;chr&gt;     &lt;chr&gt;          &lt;dbl&gt;      &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;
-#&gt;  1 mean      (Intercept)  -6.16     0.182       -33.8  3.44e-250
-#&gt;  2 mean      batch1        1.73     0.101        17.1  2.59e- 65
-#&gt;  3 mean      batch2        1.32     0.118        11.2  3.34e- 29
-#&gt;  4 mean      batch3        1.57     0.116        13.5  8.81e- 42
-#&gt;  5 mean      batch4        1.06     0.102        10.4  4.06e- 25
-#&gt;  6 mean      batch5        1.13     0.104        11.0  6.52e- 28
-#&gt;  7 mean      batch6        1.04     0.106         9.81 1.03e- 22
-#&gt;  8 mean      batch7        0.544    0.109         4.98 6.29e-  7
-#&gt;  9 mean      batch8        0.496    0.109         4.55 5.30e-  6
-#&gt; 10 mean      batch9        0.386    0.119         3.25 1.14e-  3
-#&gt; 11 mean      temp          0.0110   0.000413     26.6  1.26e-155
-#&gt; 12 precision (phi)       440.     110.            4.00 6.29e-  5</div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>mod</span>, <span class='kw'>conf.int</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; # A tibble: 12 x 8
+#&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>          </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>      </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #555555;'> 1</span><span> mean      (Intercept)  -</span><span style='color: #BB0000;'>6.16</span><span>     0.182       -</span><span style='color: #BB0000;'>33.8</span><span>  3.44</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-250</span><span>
+#&gt; </span><span style='color: #555555;'> 2</span><span> mean      batch1        1.73     0.101        17.1  2.59</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>- 65</span><span>
+#&gt; </span><span style='color: #555555;'> 3</span><span> mean      batch2        1.32     0.118        11.2  3.34</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>- 29</span><span>
+#&gt; </span><span style='color: #555555;'> 4</span><span> mean      batch3        1.57     0.116        13.5  8.81</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>- 42</span><span>
+#&gt; </span><span style='color: #555555;'> 5</span><span> mean      batch4        1.06     0.102        10.4  4.06</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>- 25</span><span>
+#&gt; </span><span style='color: #555555;'> 6</span><span> mean      batch5        1.13     0.104        11.0  6.52</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>- 28</span><span>
+#&gt; </span><span style='color: #555555;'> 7</span><span> mean      batch6        1.04     0.106         9.81 1.03</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>- 22</span><span>
+#&gt; </span><span style='color: #555555;'> 8</span><span> mean      batch7        0.544    0.109         4.98 6.29</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-  7</span><span>
+#&gt; </span><span style='color: #555555;'> 9</span><span> mean      batch8        0.496    0.109         4.55 5.30</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-  6</span><span>
+#&gt; </span><span style='color: #555555;'>10</span><span> mean      batch9        0.386    0.119         3.25 1.14</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-  3</span><span>
+#&gt; </span><span style='color: #555555;'>11</span><span> mean      temp          0.011</span><span style='text-decoration: underline;'>0</span><span>   0.000</span><span style='text-decoration: underline;'>413</span><span>     26.6  1.26</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-155</span><span>
+#&gt; </span><span style='color: #555555;'>12</span><span> precision (phi)       440.     110.            4.00 6.29</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-  5</span><span></div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>mod</span>, <span class='kw'>conf.int</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 12 x 8</span><span>
 #&gt;    component term      estimate std.error statistic   p.value conf.low conf.high
-#&gt;    &lt;chr&gt;     &lt;chr&gt;        &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;
-#&gt;  1 mean      (Interce…  -6.16     1.82e-1    -33.8  3.44e-250  -6.52     -5.80  
-#&gt;  2 mean      batch1      1.73     1.01e-1     17.1  2.59e- 65   1.53      1.93  
-#&gt;  3 mean      batch2      1.32     1.18e-1     11.2  3.34e- 29   1.09      1.55  
-#&gt;  4 mean      batch3      1.57     1.16e-1     13.5  8.81e- 42   1.34      1.80  
-#&gt;  5 mean      batch4      1.06     1.02e-1     10.4  4.06e- 25   0.859     1.26  
-#&gt;  6 mean      batch5      1.13     1.04e-1     11.0  6.52e- 28   0.931     1.34  
-#&gt;  7 mean      batch6      1.04     1.06e-1      9.81 1.03e- 22   0.832     1.25  
-#&gt;  8 mean      batch7      0.544    1.09e-1      4.98 6.29e-  7   0.330     0.758 
-#&gt;  9 mean      batch8      0.496    1.09e-1      4.55 5.30e-  6   0.282     0.709 
-#&gt; 10 mean      batch9      0.386    1.19e-1      3.25 1.14e-  3   0.153     0.618 
-#&gt; 11 mean      temp        0.0110   4.13e-4     26.6  1.26e-155   0.0102    0.0118
-#&gt; 12 precision (phi)     440.       1.10e+2      4.00 6.29e-  5 225.      656.    </div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>mod</span>, <span class='kw'>conf.int</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>conf.level</span> <span class='kw'>=</span> <span class='fl'>.99</span>)</div><div class='output co'>#&gt; # A tibble: 12 x 8
+#&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>        </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #555555;'> 1</span><span> mean      (Interce…  -</span><span style='color: #BB0000;'>6.16</span><span>     1.82</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-1</span><span>    -</span><span style='color: #BB0000;'>33.8</span><span>  3.44</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-250</span><span>  -</span><span style='color: #BB0000;'>6.52</span><span>     -</span><span style='color: #BB0000;'>5.80</span><span>  
+#&gt; </span><span style='color: #555555;'> 2</span><span> mean      batch1      1.73     1.01</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-1</span><span>     17.1  2.59</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>- 65</span><span>   1.53      1.93  
+#&gt; </span><span style='color: #555555;'> 3</span><span> mean      batch2      1.32     1.18</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-1</span><span>     11.2  3.34</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>- 29</span><span>   1.09      1.55  
+#&gt; </span><span style='color: #555555;'> 4</span><span> mean      batch3      1.57     1.16</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-1</span><span>     13.5  8.81</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>- 42</span><span>   1.34      1.80  
+#&gt; </span><span style='color: #555555;'> 5</span><span> mean      batch4      1.06     1.02</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-1</span><span>     10.4  4.06</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>- 25</span><span>   0.859     1.26  
+#&gt; </span><span style='color: #555555;'> 6</span><span> mean      batch5      1.13     1.04</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-1</span><span>     11.0  6.52</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>- 28</span><span>   0.931     1.34  
+#&gt; </span><span style='color: #555555;'> 7</span><span> mean      batch6      1.04     1.06</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-1</span><span>      9.81 1.03</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>- 22</span><span>   0.832     1.25  
+#&gt; </span><span style='color: #555555;'> 8</span><span> mean      batch7      0.544    1.09</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-1</span><span>      4.98 6.29</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-  7</span><span>   0.330     0.758 
+#&gt; </span><span style='color: #555555;'> 9</span><span> mean      batch8      0.496    1.09</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-1</span><span>      4.55 5.30</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-  6</span><span>   0.282     0.709 
+#&gt; </span><span style='color: #555555;'>10</span><span> mean      batch9      0.386    1.19</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-1</span><span>      3.25 1.14</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-  3</span><span>   0.153     0.618 
+#&gt; </span><span style='color: #555555;'>11</span><span> mean      temp        0.011</span><span style='text-decoration: underline;'>0</span><span>   4.13</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-4</span><span>     26.6  1.26</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-155</span><span>   0.010</span><span style='text-decoration: underline;'>2</span><span>    0.011</span><span style='text-decoration: underline;'>8</span><span>
+#&gt; </span><span style='color: #555555;'>12</span><span> precision (phi)     440.       1.10</span><span style='color: #555555;'>e</span><span>+2      4.00 6.29</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-  5</span><span> 225.      656.    </div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>mod</span>, <span class='kw'>conf.int</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>conf.level</span> <span class='kw'>=</span> <span class='fl'>.99</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 12 x 8</span><span>
 #&gt;    component term     estimate  std.error statistic   p.value conf.low conf.high
-#&gt;    &lt;chr&gt;     &lt;chr&gt;       &lt;dbl&gt;      &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;
-#&gt;  1 mean      (Interc…  -6.16     0.182       -33.8  3.44e-250 -6.63e+0   -5.69  
-#&gt;  2 mean      batch1     1.73     0.101        17.1  2.59e- 65  1.47e+0    1.99  
-#&gt;  3 mean      batch2     1.32     0.118        11.2  3.34e- 29  1.02e+0    1.63  
-#&gt;  4 mean      batch3     1.57     0.116        13.5  8.81e- 42  1.27e+0    1.87  
-#&gt;  5 mean      batch4     1.06     0.102        10.4  4.06e- 25  7.96e-1    1.32  
-#&gt;  6 mean      batch5     1.13     0.104        11.0  6.52e- 28  8.67e-1    1.40  
-#&gt;  7 mean      batch6     1.04     0.106         9.81 1.03e- 22  7.67e-1    1.31  
-#&gt;  8 mean      batch7     0.544    0.109         4.98 6.29e-  7  2.63e-1    0.825 
-#&gt;  9 mean      batch8     0.496    0.109         4.55 5.30e-  6  2.15e-1    0.776 
-#&gt; 10 mean      batch9     0.386    0.119         3.25 1.14e-  3  8.03e-2    0.691 
-#&gt; 11 mean      temp       0.0110   0.000413     26.6  1.26e-155  9.90e-3    0.0120
-#&gt; 12 precision (phi)    440.     110.            4.00 6.29e-  5  1.57e+2  724.    </div><div class='input'>
-<span class='fu'><a href='https://rdrr.io/pkg/generics/man/augment.html'>augment</a></span>(<span class='no'>mod</span>)</div><div class='output co'>#&gt; # A tibble: 32 x 6
+#&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>       </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>      </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #555555;'> 1</span><span> mean      (Interc…  -</span><span style='color: #BB0000;'>6.16</span><span>     0.182       -</span><span style='color: #BB0000;'>33.8</span><span>  3.44</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-250</span><span> -</span><span style='color: #BB0000;'>6.63</span><span style='color: #555555;'>e</span><span>+0   -</span><span style='color: #BB0000;'>5.69</span><span>  
+#&gt; </span><span style='color: #555555;'> 2</span><span> mean      batch1     1.73     0.101        17.1  2.59</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>- 65</span><span>  1.47</span><span style='color: #555555;'>e</span><span>+0    1.99  
+#&gt; </span><span style='color: #555555;'> 3</span><span> mean      batch2     1.32     0.118        11.2  3.34</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>- 29</span><span>  1.02</span><span style='color: #555555;'>e</span><span>+0    1.63  
+#&gt; </span><span style='color: #555555;'> 4</span><span> mean      batch3     1.57     0.116        13.5  8.81</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>- 42</span><span>  1.27</span><span style='color: #555555;'>e</span><span>+0    1.87  
+#&gt; </span><span style='color: #555555;'> 5</span><span> mean      batch4     1.06     0.102        10.4  4.06</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>- 25</span><span>  7.96</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-1</span><span>    1.32  
+#&gt; </span><span style='color: #555555;'> 6</span><span> mean      batch5     1.13     0.104        11.0  6.52</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>- 28</span><span>  8.67</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-1</span><span>    1.40  
+#&gt; </span><span style='color: #555555;'> 7</span><span> mean      batch6     1.04     0.106         9.81 1.03</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>- 22</span><span>  7.67</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-1</span><span>    1.31  
+#&gt; </span><span style='color: #555555;'> 8</span><span> mean      batch7     0.544    0.109         4.98 6.29</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-  7</span><span>  2.63</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-1</span><span>    0.825 
+#&gt; </span><span style='color: #555555;'> 9</span><span> mean      batch8     0.496    0.109         4.55 5.30</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-  6</span><span>  2.15</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-1</span><span>    0.776 
+#&gt; </span><span style='color: #555555;'>10</span><span> mean      batch9     0.386    0.119         3.25 1.14</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-  3</span><span>  8.03</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-2</span><span>    0.691 
+#&gt; </span><span style='color: #555555;'>11</span><span> mean      temp       0.011</span><span style='text-decoration: underline;'>0</span><span>   0.000</span><span style='text-decoration: underline;'>413</span><span>     26.6  1.26</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-155</span><span>  9.90</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-3</span><span>    0.012</span><span style='text-decoration: underline;'>0</span><span>
+#&gt; </span><span style='color: #555555;'>12</span><span> precision (phi)    440.     110.            4.00 6.29</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-  5</span><span>  1.57</span><span style='color: #555555;'>e</span><span>+2  724.    </div><div class='input'>
+<span class='fu'><a href='https://rdrr.io/pkg/generics/man/augment.html'>augment</a></span>(<span class='no'>mod</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 32 x 6</span><span>
 #&gt;    yield batch  temp .fitted .resid   .cooksd
-#&gt;    &lt;dbl&gt; &lt;fct&gt; &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;     &lt;dbl&gt;
-#&gt;  1 0.122 1       205  0.101   1.59  0.0791   
-#&gt;  2 0.223 1       275  0.195   1.66  0.0917   
-#&gt;  3 0.347 1       345  0.343   0.211 0.00155  
-#&gt;  4 0.457 1       407  0.508  -2.88  0.606    
-#&gt;  5 0.08  2       218  0.0797  0.109 0.0000168
-#&gt;  6 0.131 2       273  0.137  -0.365 0.00731  
-#&gt;  7 0.266 2       347  0.263   0.260 0.00523  
-#&gt;  8 0.074 3       212  0.0943 -1.77  0.0805   
-#&gt;  9 0.182 3       272  0.167   1.02  0.0441   
-#&gt; 10 0.304 3       340  0.298   0.446 0.0170   
-#&gt; # … with 22 more rows</div><div class='input'>
-<span class='fu'><a href='https://rdrr.io/pkg/generics/man/glance.html'>glance</a></span>(<span class='no'>mod</span>)</div><div class='output co'>#&gt; # A tibble: 1 x 7
+#&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;fct&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #555555;'> 1</span><span> 0.122 1       205  0.101   1.59  0.079</span><span style='text-decoration: underline;'>1</span><span>   
+#&gt; </span><span style='color: #555555;'> 2</span><span> 0.223 1       275  0.195   1.66  0.091</span><span style='text-decoration: underline;'>7</span><span>   
+#&gt; </span><span style='color: #555555;'> 3</span><span> 0.347 1       345  0.343   0.211 0.001</span><span style='text-decoration: underline;'>55</span><span>  
+#&gt; </span><span style='color: #555555;'> 4</span><span> 0.457 1       407  0.508  -</span><span style='color: #BB0000;'>2.88</span><span>  0.606    
+#&gt; </span><span style='color: #555555;'> 5</span><span> 0.08  2       218  0.079</span><span style='text-decoration: underline;'>7</span><span>  0.109 0.000</span><span style='text-decoration: underline;'>016</span><span>8
+#&gt; </span><span style='color: #555555;'> 6</span><span> 0.131 2       273  0.137  -</span><span style='color: #BB0000;'>0.365</span><span> 0.007</span><span style='text-decoration: underline;'>31</span><span>  
+#&gt; </span><span style='color: #555555;'> 7</span><span> 0.266 2       347  0.263   0.260 0.005</span><span style='text-decoration: underline;'>23</span><span>  
+#&gt; </span><span style='color: #555555;'> 8</span><span> 0.074 3       212  0.094</span><span style='text-decoration: underline;'>3</span><span> -</span><span style='color: #BB0000;'>1.77</span><span>  0.080</span><span style='text-decoration: underline;'>5</span><span>   
+#&gt; </span><span style='color: #555555;'> 9</span><span> 0.182 3       272  0.167   1.02  0.044</span><span style='text-decoration: underline;'>1</span><span>   
+#&gt; </span><span style='color: #555555;'>10</span><span> 0.304 3       340  0.298   0.446 0.017</span><span style='text-decoration: underline;'>0</span><span>   
+#&gt; </span><span style='color: #555555;'># … with 22 more rows</span><span></div><div class='input'>
+<span class='fu'><a href='https://rdrr.io/pkg/generics/man/glance.html'>glance</a></span>(<span class='no'>mod</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 1 x 7</span><span>
 #&gt;   pseudo.r.squared df.null logLik   AIC   BIC df.residual  nobs
-#&gt;              &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;       &lt;int&gt; &lt;int&gt;
-#&gt; 1            0.962      30   84.8 -146. -128.          20    32</div><div class='input'>
-</div></pre>
+#&gt;              </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>       </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>
+#&gt; </span><span style='color: #555555;'>1</span><span>            0.962      30   84.8 -</span><span style='color: #BB0000;'>146.</span><span> -</span><span style='color: #BB0000;'>128.</span><span>          20    32</div><div class='input'>
+</div></span></pre>
   </div>
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <h2>Contents</h2>
-    <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
-      <li><a href="#details">Details</a></li>
-      <li><a href="#see-also">See also</a></li>
-      <li><a href="#value">Value</a></li>
-      <li><a href="#examples">Examples</a></li>
-    </ul>
-
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
+    <nav id="toc" data-toggle="toc" class="sticky-top">
+      <h2 data-toc-skip>Contents</h2>
+    </nav>
   </div>
 </div>
 
 
       <footer>
       <div class="tidyverse">
-  <p>broom is a part of the <strong>tidyverse</strong>, an ecosystem of packages designed with common APIs and a shared philosophy. Learn more at <a href="https://tidyverse.org">tidyverse.org</a>.</p>
+  <p>broom is a part of the <strong>tidymodels</strong> ecosystem, a collection of modeling packages designed with common APIs and a shared philosophy.</p>
 </div>
 
 <div class="author">

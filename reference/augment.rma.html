@@ -17,22 +17,26 @@
 <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png" />
 
 <!-- jquery -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 
 <!-- Bootstrap -->
 <link href="../tidyverse.css" rel="stylesheet">
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
+
+<!-- bootstrap-toc -->
+<link rel="stylesheet" href="../bootstrap-toc.css">
+<script src="../bootstrap-toc.js"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
 
 <!-- headroom.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -74,7 +78,7 @@ model on data in a tibble.
 We are in the process of defining behaviors for models fit with various
 na.action arguments, but make no guarantees about behavior when data is
 missing at this time." />
-<meta property="og:image" content="http://broom.tidyverse.org/logo.png" />
+<meta property="og:image" content="https://broom.tidymodels.org/logo.png" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -101,7 +105,7 @@ missing at this time." />
 
   </head>
 
-  <body>
+  <body data-spy="scroll" data-target="#toc">
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -116,9 +120,9 @@ missing at this time." />
 
       <div class="navbar-brand-container">
         <a class="navbar-brand" href="../index.html">broom</a>
-        <div class="info">
-          <span class="partof">part of the <a href="https://tidyverse.org">tidyverse</a></span>
-          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.2.9003</span>
+        <div class="info hidden-xs hidden-sm">
+          <span class="partof">part of <a href="https://tidymodels.org">tidymodels</a></span>
+          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.7.0.9000</span>
         </div>
       </div>
     </div>
@@ -144,16 +148,13 @@ missing at this time." />
       <a href="../articles/available-methods.html">Available methods</a>
     </li>
     <li>
-      <a href="../articles/bootstrapping.html">Bootstrapping</a>
+      <a href="https://www.tidymodels.org/learn/statistics/bootstrap/">Bootstrapping</a>
     </li>
     <li>
       <a href="../articles/broom_and_dplyr.html">Broom and dplyr</a>
     </li>
     <li>
-      <a href="../articles/external-tidiers.html">Tidiers in external packages</a>
-    </li>
-    <li>
-      <a href="../articles/kmeans.html">K-means</a>
+      <a href="https://www.tidymodels.org/learn/statistics/k-means/">K-means</a>
     </li>
   </ul>
 </li>
@@ -180,7 +181,7 @@ missing at this time." />
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Augment data with information from a(n) rma object</h1>
-    <small class="dont-index">Source: <a href='https://github.com/tidymodels/broom/blob/master/R/rma-tidiers.R'><code>R/rma-tidiers.R</code></a></small>
+    <small class="dont-index">Source: <a href='http://github.com/tidymodels/broom/blob/master/R/rma-tidiers.R'><code>R/rma-tidiers.R</code></a></small>
     <div class="hidden name"><code>augment.rma.Rd</code></div>
     </div>
 
@@ -263,7 +264,7 @@ the <code>data</code> argument.</p></td>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
-<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>metafor</span>)</div><div class='output co'>#&gt; <span class='message'>Loading 'metafor' package (version 2.1-0). For an overview </span>
+<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>metafor</span>)</div><div class='output co'>#&gt; <span class='message'>Loading 'metafor' package (version 2.4-0). For an overview </span>
 #&gt; <span class='message'>and introduction to the package please type: help(metafor).</span></div><div class='output co'>#&gt; <span class='message'></span>
 #&gt; <span class='message'>Attaching package: ‘metafor’</span></div><div class='output co'>#&gt; <span class='message'>The following object is masked from ‘package:car’:</span>
 #&gt; <span class='message'></span>
@@ -284,39 +285,35 @@ the <code>data</code> argument.</p></td>
 
 <span class='no'>meta_analysis</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/metafor/man/rma.uni.html'>rma</a></span>(<span class='no'>yi</span>, <span class='no'>vi</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>df</span>, <span class='kw'>method</span> <span class='kw'>=</span> <span class='st'>"EB"</span>)
 
-<span class='fu'><a href='https://rdrr.io/pkg/generics/man/augment.html'>augment</a></span>(<span class='no'>meta_analysis</span>)</div><div class='output co'>#&gt; # A tibble: 13 x 6
+<span class='fu'><a href='https://rdrr.io/pkg/generics/man/augment.html'>augment</a></span>(<span class='no'>meta_analysis</span>)</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 13 x 6</span><span>
 #&gt;    .observed  .fitted .se.fit .conf.low .conf.high  .resid
-#&gt;        &lt;dbl&gt;    &lt;dbl&gt;   &lt;dbl&gt;     &lt;dbl&gt;      &lt;dbl&gt;   &lt;dbl&gt;
-#&gt;  1   -0.889  -0.801    0.411     -1.61     0.00524 -0.174 
-#&gt;  2   -1.59   -1.26     0.354     -1.95    -0.561   -0.870 
-#&gt;  3   -1.35   -0.990    0.437     -1.85    -0.134   -0.633 
-#&gt;  4   -1.44   -1.40     0.138     -1.67    -1.13    -0.727 
-#&gt;  5   -0.218  -0.287    0.212     -0.701    0.128    0.497 
-#&gt;  6   -0.786  -0.785    0.0823    -0.946   -0.623   -0.0711
-#&gt;  7   -1.62   -1.25     0.370     -1.97    -0.523   -0.906 
-#&gt;  8    0.0120  0.00301  0.0626    -0.120    0.126    0.727 
-#&gt;  9   -0.469  -0.506    0.221     -0.939   -0.0740   0.246 
-#&gt; 10   -1.37   -1.25     0.246     -1.73    -0.767   -0.656 
-#&gt; 11   -0.339  -0.353    0.110     -0.568   -0.139    0.376 
-#&gt; 12    0.446  -0.281    0.460     -1.18     0.621    1.16  
-#&gt; 13   -0.0173 -0.145    0.244     -0.623    0.333    0.698 </div><div class='input'>
-</div></pre>
+#&gt;        </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>      </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #555555;'> 1</span><span>   -</span><span style='color: #BB0000;'>0.889</span><span>  -</span><span style='color: #BB0000;'>0.801</span><span>    0.411     -</span><span style='color: #BB0000;'>1.61</span><span>     0.005</span><span style='text-decoration: underline;'>24</span><span> -</span><span style='color: #BB0000;'>0.174</span><span> 
+#&gt; </span><span style='color: #555555;'> 2</span><span>   -</span><span style='color: #BB0000;'>1.59</span><span>   -</span><span style='color: #BB0000;'>1.26</span><span>     0.354     -</span><span style='color: #BB0000;'>1.95</span><span>    -</span><span style='color: #BB0000;'>0.561</span><span>   -</span><span style='color: #BB0000;'>0.870</span><span> 
+#&gt; </span><span style='color: #555555;'> 3</span><span>   -</span><span style='color: #BB0000;'>1.35</span><span>   -</span><span style='color: #BB0000;'>0.990</span><span>    0.437     -</span><span style='color: #BB0000;'>1.85</span><span>    -</span><span style='color: #BB0000;'>0.134</span><span>   -</span><span style='color: #BB0000;'>0.633</span><span> 
+#&gt; </span><span style='color: #555555;'> 4</span><span>   -</span><span style='color: #BB0000;'>1.44</span><span>   -</span><span style='color: #BB0000;'>1.40</span><span>     0.138     -</span><span style='color: #BB0000;'>1.67</span><span>    -</span><span style='color: #BB0000;'>1.13</span><span>    -</span><span style='color: #BB0000;'>0.727</span><span> 
+#&gt; </span><span style='color: #555555;'> 5</span><span>   -</span><span style='color: #BB0000;'>0.218</span><span>  -</span><span style='color: #BB0000;'>0.287</span><span>    0.212     -</span><span style='color: #BB0000;'>0.701</span><span>    0.128    0.497 
+#&gt; </span><span style='color: #555555;'> 6</span><span>   -</span><span style='color: #BB0000;'>0.786</span><span>  -</span><span style='color: #BB0000;'>0.785</span><span>    0.082</span><span style='text-decoration: underline;'>3</span><span>    -</span><span style='color: #BB0000;'>0.946</span><span>   -</span><span style='color: #BB0000;'>0.623</span><span>   -</span><span style='color: #BB0000;'>0.071</span><span style='color: #BB0000;text-decoration: underline;'>1</span><span>
+#&gt; </span><span style='color: #555555;'> 7</span><span>   -</span><span style='color: #BB0000;'>1.62</span><span>   -</span><span style='color: #BB0000;'>1.25</span><span>     0.370     -</span><span style='color: #BB0000;'>1.97</span><span>    -</span><span style='color: #BB0000;'>0.523</span><span>   -</span><span style='color: #BB0000;'>0.906</span><span> 
+#&gt; </span><span style='color: #555555;'> 8</span><span>    0.012</span><span style='text-decoration: underline;'>0</span><span>  0.003</span><span style='text-decoration: underline;'>01</span><span>  0.062</span><span style='text-decoration: underline;'>6</span><span>    -</span><span style='color: #BB0000;'>0.120</span><span>    0.126    0.727 
+#&gt; </span><span style='color: #555555;'> 9</span><span>   -</span><span style='color: #BB0000;'>0.469</span><span>  -</span><span style='color: #BB0000;'>0.506</span><span>    0.221     -</span><span style='color: #BB0000;'>0.939</span><span>   -</span><span style='color: #BB0000;'>0.074</span><span style='color: #BB0000;text-decoration: underline;'>0</span><span>   0.246 
+#&gt; </span><span style='color: #555555;'>10</span><span>   -</span><span style='color: #BB0000;'>1.37</span><span>   -</span><span style='color: #BB0000;'>1.25</span><span>     0.246     -</span><span style='color: #BB0000;'>1.73</span><span>    -</span><span style='color: #BB0000;'>0.767</span><span>   -</span><span style='color: #BB0000;'>0.656</span><span> 
+#&gt; </span><span style='color: #555555;'>11</span><span>   -</span><span style='color: #BB0000;'>0.339</span><span>  -</span><span style='color: #BB0000;'>0.353</span><span>    0.110     -</span><span style='color: #BB0000;'>0.568</span><span>   -</span><span style='color: #BB0000;'>0.139</span><span>    0.376 
+#&gt; </span><span style='color: #555555;'>12</span><span>    0.446  -</span><span style='color: #BB0000;'>0.281</span><span>    0.460     -</span><span style='color: #BB0000;'>1.18</span><span>     0.621    1.16  
+#&gt; </span><span style='color: #555555;'>13</span><span>   -</span><span style='color: #BB0000;'>0.017</span><span style='color: #BB0000;text-decoration: underline;'>3</span><span> -</span><span style='color: #BB0000;'>0.145</span><span>    0.244     -</span><span style='color: #BB0000;'>0.623</span><span>    0.333    0.698 </div><div class='input'>
+</div></span></pre>
   </div>
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <h2>Contents</h2>
-    <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
-      <li><a href="#value">Value</a></li>
-      <li><a href="#examples">Examples</a></li>
-    </ul>
-
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
+    <nav id="toc" data-toggle="toc" class="sticky-top">
+      <h2 data-toc-skip>Contents</h2>
+    </nav>
   </div>
 </div>
 
 
       <footer>
       <div class="tidyverse">
-  <p>broom is a part of the <strong>tidyverse</strong>, an ecosystem of packages designed with common APIs and a shared philosophy. Learn more at <a href="https://tidyverse.org">tidyverse.org</a>.</p>
+  <p>broom is a part of the <strong>tidymodels</strong> ecosystem, a collection of modeling packages designed with common APIs and a shared philosophy.</p>
 </div>
 
 <div class="author">

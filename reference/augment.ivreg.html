@@ -17,22 +17,26 @@
 <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png" />
 
 <!-- jquery -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 
 <!-- Bootstrap -->
 <link href="../tidyverse.css" rel="stylesheet">
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
+
+<!-- bootstrap-toc -->
+<link rel="stylesheet" href="../bootstrap-toc.css">
+<script src="../bootstrap-toc.js"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
 
 <!-- headroom.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -74,7 +78,7 @@ model on data in a tibble.
 We are in the process of defining behaviors for models fit with various
 na.action arguments, but make no guarantees about behavior when data is
 missing at this time." />
-<meta property="og:image" content="http://broom.tidyverse.org/logo.png" />
+<meta property="og:image" content="https://broom.tidymodels.org/logo.png" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -101,7 +105,7 @@ missing at this time." />
 
   </head>
 
-  <body>
+  <body data-spy="scroll" data-target="#toc">
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -116,9 +120,9 @@ missing at this time." />
 
       <div class="navbar-brand-container">
         <a class="navbar-brand" href="../index.html">broom</a>
-        <div class="info">
-          <span class="partof">part of the <a href="https://tidyverse.org">tidyverse</a></span>
-          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.2.9003</span>
+        <div class="info hidden-xs hidden-sm">
+          <span class="partof">part of <a href="https://tidymodels.org">tidymodels</a></span>
+          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.7.0.9000</span>
         </div>
       </div>
     </div>
@@ -144,16 +148,13 @@ missing at this time." />
       <a href="../articles/available-methods.html">Available methods</a>
     </li>
     <li>
-      <a href="../articles/bootstrapping.html">Bootstrapping</a>
+      <a href="https://www.tidymodels.org/learn/statistics/bootstrap/">Bootstrapping</a>
     </li>
     <li>
       <a href="../articles/broom_and_dplyr.html">Broom and dplyr</a>
     </li>
     <li>
-      <a href="../articles/external-tidiers.html">Tidiers in external packages</a>
-    </li>
-    <li>
-      <a href="../articles/kmeans.html">K-means</a>
+      <a href="https://www.tidymodels.org/learn/statistics/k-means/">K-means</a>
     </li>
   </ul>
 </li>
@@ -180,7 +181,7 @@ missing at this time." />
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Augment data with information from a(n) ivreg object</h1>
-    <small class="dont-index">Source: <a href='https://github.com/tidymodels/broom/blob/master/R/aer-tidiers.R'><code>R/aer-tidiers.R</code></a></small>
+    <small class="dont-index">Source: <a href='http://github.com/tidymodels/broom/blob/master/R/aer-tidiers.R'><code>R/aer-tidiers.R</code></a></small>
     <div class="hidden name"><code>augment.ivreg.Rd</code></div>
     </div>
 
@@ -314,79 +315,74 @@ the <code>data</code> argument.</p></td>
 #&gt; Multiple R-Squared: 0.1308,	Adjusted R-squared: 0.1119 
 #&gt; Wald test: 5.976 on 1 and 46 DF,  p-value: 0.01839 
 #&gt; </div><div class='input'>
-<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>ivr</span>)</div><div class='output co'>#&gt; # A tibble: 2 x 5
+<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>ivr</span>)</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 2 x 5</span><span>
 #&gt;   term         estimate std.error statistic  p.value
-#&gt;   &lt;chr&gt;           &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
-#&gt; 1 (Intercept)  4.61e+ 0  4.45e- 2    104.   3.74e-56
-#&gt; 2 income      -5.71e-10  2.33e-10     -2.44 1.84e- 2</div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>ivr</span>, <span class='kw'>conf.int</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; # A tibble: 2 x 7
+#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>           </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #555555;'>1</span><span> (Intercept)  4.61</span><span style='color: #555555;'>e</span><span>+ 0  4.45</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>- 2</span><span>    104.   3.74</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-56</span><span>
+#&gt; </span><span style='color: #555555;'>2</span><span> income      -</span><span style='color: #BB0000;'>5.71</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-10</span><span>  2.33</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-10</span><span>     -</span><span style='color: #BB0000;'>2.44</span><span> 1.84</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>- 2</span><span></div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>ivr</span>, <span class='kw'>conf.int</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 2 x 7</span><span>
 #&gt;   term         estimate std.error statistic  p.value conf.low conf.high
-#&gt;   &lt;chr&gt;           &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;
-#&gt; 1 (Intercept)  4.61e+ 0  4.45e- 2    104.   3.74e-56  4.52e+0  4.70e+ 0
-#&gt; 2 income      -5.71e-10  2.33e-10     -2.44 1.84e- 2 -1.03e-9 -1.13e-10</div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>ivr</span>, <span class='kw'>conf.int</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>instruments</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; # A tibble: 1 x 5
+#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>           </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #555555;'>1</span><span> (Intercept)  4.61</span><span style='color: #555555;'>e</span><span>+ 0  4.45</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>- 2</span><span>    104.   3.74</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-56</span><span>  4.52</span><span style='color: #555555;'>e</span><span>+0  4.70</span><span style='color: #555555;'>e</span><span>+ 0
+#&gt; </span><span style='color: #555555;'>2</span><span> income      -</span><span style='color: #BB0000;'>5.71</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-10</span><span>  2.33</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-10</span><span>     -</span><span style='color: #BB0000;'>2.44</span><span> 1.84</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>- 2</span><span> -</span><span style='color: #BB0000;'>1.03</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-9</span><span> -</span><span style='color: #BB0000;'>1.13</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-10</span><span></div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>ivr</span>, <span class='kw'>conf.int</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>instruments</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 1 x 5</span><span>
 #&gt;   term   num.df den.df statistic  p.value
-#&gt;   &lt;chr&gt;   &lt;dbl&gt;  &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
-#&gt; 1 income      1     46     3329. 1.46e-44</div><div class='input'>
-<span class='fu'><a href='https://rdrr.io/pkg/generics/man/augment.html'>augment</a></span>(<span class='no'>ivr</span>)</div><div class='output co'>#&gt; # A tibble: 48 x 6
+#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #555555;'>1</span><span> income      1     46     </span><span style='text-decoration: underline;'>3</span><span>329. 1.46</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-44</span><span></div><div class='input'>
+<span class='fu'><a href='https://rdrr.io/pkg/generics/man/augment.html'>augment</a></span>(<span class='no'>ivr</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 48 x 6</span><span>
 #&gt;    .rownames log.packs.    income population .fitted  .resid
-#&gt;    &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;      &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;
-#&gt;  1 49              4.62  83903280    4262731    4.56  0.0522
-#&gt;  2 50              4.71  45995496    2480121    4.59  0.124 
-#&gt;  3 51              4.28  88870496    4306908    4.56 -0.285 
-#&gt;  4 52              4.04 771470144   31493524    4.17 -0.131 
-#&gt;  5 53              4.41  92946544    3738061    4.56 -0.145 
-#&gt;  6 54              4.38 104315120    3265293    4.55 -0.177 
-#&gt;  7 55              4.82  18237436     718265    4.60  0.223 
-#&gt;  8 56              4.53 333525344   14185403    4.42  0.112 
-#&gt;  9 57              4.58 159800448    7188538    4.52  0.0591
-#&gt; 10 58              4.53  60170928    2840860    4.58 -0.0512
-#&gt; # … with 38 more rows</div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/generics/man/augment.html'>augment</a></span>(<span class='no'>ivr</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>CigarettesSW</span>)</div><div class='output co'>#&gt; # A tibble: 96 x 11
+#&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>          </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>      </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #555555;'> 1</span><span> 49              4.62  83</span><span style='text-decoration: underline;'>903</span><span>280    4</span><span style='text-decoration: underline;'>262</span><span>731    4.56  0.052</span><span style='text-decoration: underline;'>2</span><span>
+#&gt; </span><span style='color: #555555;'> 2</span><span> 50              4.71  45</span><span style='text-decoration: underline;'>995</span><span>496    2</span><span style='text-decoration: underline;'>480</span><span>121    4.59  0.124 
+#&gt; </span><span style='color: #555555;'> 3</span><span> 51              4.28  88</span><span style='text-decoration: underline;'>870</span><span>496    4</span><span style='text-decoration: underline;'>306</span><span>908    4.56 -</span><span style='color: #BB0000;'>0.285</span><span> 
+#&gt; </span><span style='color: #555555;'> 4</span><span> 52              4.04 771</span><span style='text-decoration: underline;'>470</span><span>144   31</span><span style='text-decoration: underline;'>493</span><span>524    4.17 -</span><span style='color: #BB0000;'>0.131</span><span> 
+#&gt; </span><span style='color: #555555;'> 5</span><span> 53              4.41  92</span><span style='text-decoration: underline;'>946</span><span>544    3</span><span style='text-decoration: underline;'>738</span><span>061    4.56 -</span><span style='color: #BB0000;'>0.145</span><span> 
+#&gt; </span><span style='color: #555555;'> 6</span><span> 54              4.38 104</span><span style='text-decoration: underline;'>315</span><span>120    3</span><span style='text-decoration: underline;'>265</span><span>293    4.55 -</span><span style='color: #BB0000;'>0.177</span><span> 
+#&gt; </span><span style='color: #555555;'> 7</span><span> 55              4.82  18</span><span style='text-decoration: underline;'>237</span><span>436     </span><span style='text-decoration: underline;'>718</span><span>265    4.60  0.223 
+#&gt; </span><span style='color: #555555;'> 8</span><span> 56              4.53 333</span><span style='text-decoration: underline;'>525</span><span>344   14</span><span style='text-decoration: underline;'>185</span><span>403    4.42  0.112 
+#&gt; </span><span style='color: #555555;'> 9</span><span> 57              4.58 159</span><span style='text-decoration: underline;'>800</span><span>448    7</span><span style='text-decoration: underline;'>188</span><span>538    4.52  0.059</span><span style='text-decoration: underline;'>1</span><span>
+#&gt; </span><span style='color: #555555;'>10</span><span> 58              4.53  60</span><span style='text-decoration: underline;'>170</span><span>928    2</span><span style='text-decoration: underline;'>840</span><span>860    4.58 -</span><span style='color: #BB0000;'>0.051</span><span style='color: #BB0000;text-decoration: underline;'>2</span><span>
+#&gt; </span><span style='color: #555555;'># … with 38 more rows</span><span></div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/generics/man/augment.html'>augment</a></span>(<span class='no'>ivr</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>CigarettesSW</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 96 x 11</span><span>
 #&gt;    state year    cpi population packs   income   tax price  taxs .fitted  .resid
-#&gt;    &lt;fct&gt; &lt;fct&gt; &lt;dbl&gt;      &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;
-#&gt;  1 AL    1985   1.08    3973000  116.   4.60e7  32.5 102.   33.3    4.56  0.0522
-#&gt;  2 AR    1985   1.08    2327000  129.   2.62e7  37   101.   37      4.59  0.124 
-#&gt;  3 AZ    1985   1.08    3184000  105.   4.40e7  31   109.   36.2    4.56 -0.285 
-#&gt;  4 CA    1985   1.08   26444000  100.   4.47e8  26   108.   32.1    4.17 -0.131 
-#&gt;  5 CO    1985   1.08    3209000  113.   4.95e7  31    94.3  31      4.56 -0.145 
-#&gt;  6 CT    1985   1.08    3201000  109.   6.01e7  42   128.   51.5    4.55 -0.177 
-#&gt;  7 DE    1985   1.08     618000  144.   9.93e6  30   102.   30      4.60  0.223 
-#&gt;  8 FL    1985   1.08   11352000  122.   1.67e8  37   115.   42.5    4.42  0.112 
-#&gt;  9 GA    1985   1.08    5963000  127.   7.84e7  28    97.0  28.8    4.52  0.0591
-#&gt; 10 IA    1985   1.08    2830000  114.   3.79e7  34   102.   37.9    4.58 -0.0512
-#&gt; # … with 86 more rows</div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/generics/man/augment.html'>augment</a></span>(<span class='no'>ivr</span>, <span class='kw'>newdata</span> <span class='kw'>=</span> <span class='no'>CigarettesSW</span>)</div><div class='output co'>#&gt; # A tibble: 96 x 10
+#&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;fct&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;fct&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>      </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #555555;'> 1</span><span> AL    1985   1.08    3</span><span style='text-decoration: underline;'>973</span><span>000  116.   4.60</span><span style='color: #555555;'>e</span><span>7  32.5 102.   33.3    4.56  0.052</span><span style='text-decoration: underline;'>2</span><span>
+#&gt; </span><span style='color: #555555;'> 2</span><span> AR    1985   1.08    2</span><span style='text-decoration: underline;'>327</span><span>000  129.   2.62</span><span style='color: #555555;'>e</span><span>7  37   101.   37      4.59  0.124 
+#&gt; </span><span style='color: #555555;'> 3</span><span> AZ    1985   1.08    3</span><span style='text-decoration: underline;'>184</span><span>000  105.   4.40</span><span style='color: #555555;'>e</span><span>7  31   109.   36.2    4.56 -</span><span style='color: #BB0000;'>0.285</span><span> 
+#&gt; </span><span style='color: #555555;'> 4</span><span> CA    1985   1.08   26</span><span style='text-decoration: underline;'>444</span><span>000  100.   4.47</span><span style='color: #555555;'>e</span><span>8  26   108.   32.1    4.17 -</span><span style='color: #BB0000;'>0.131</span><span> 
+#&gt; </span><span style='color: #555555;'> 5</span><span> CO    1985   1.08    3</span><span style='text-decoration: underline;'>209</span><span>000  113.   4.95</span><span style='color: #555555;'>e</span><span>7  31    94.3  31      4.56 -</span><span style='color: #BB0000;'>0.145</span><span> 
+#&gt; </span><span style='color: #555555;'> 6</span><span> CT    1985   1.08    3</span><span style='text-decoration: underline;'>201</span><span>000  109.   6.01</span><span style='color: #555555;'>e</span><span>7  42   128.   51.5    4.55 -</span><span style='color: #BB0000;'>0.177</span><span> 
+#&gt; </span><span style='color: #555555;'> 7</span><span> DE    1985   1.08     </span><span style='text-decoration: underline;'>618</span><span>000  144.   9.93</span><span style='color: #555555;'>e</span><span>6  30   102.   30      4.60  0.223 
+#&gt; </span><span style='color: #555555;'> 8</span><span> FL    1985   1.08   11</span><span style='text-decoration: underline;'>352</span><span>000  122.   1.67</span><span style='color: #555555;'>e</span><span>8  37   115.   42.5    4.42  0.112 
+#&gt; </span><span style='color: #555555;'> 9</span><span> GA    1985   1.08    5</span><span style='text-decoration: underline;'>963</span><span>000  127.   7.84</span><span style='color: #555555;'>e</span><span>7  28    97.0  28.8    4.52  0.059</span><span style='text-decoration: underline;'>1</span><span>
+#&gt; </span><span style='color: #555555;'>10</span><span> IA    1985   1.08    2</span><span style='text-decoration: underline;'>830</span><span>000  114.   3.79</span><span style='color: #555555;'>e</span><span>7  34   102.   37.9    4.58 -</span><span style='color: #BB0000;'>0.051</span><span style='color: #BB0000;text-decoration: underline;'>2</span><span>
+#&gt; </span><span style='color: #555555;'># … with 86 more rows</span><span></div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/generics/man/augment.html'>augment</a></span>(<span class='no'>ivr</span>, <span class='kw'>newdata</span> <span class='kw'>=</span> <span class='no'>CigarettesSW</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 96 x 10</span><span>
 #&gt;    state year    cpi population packs    income   tax price  taxs .fitted
-#&gt;    &lt;fct&gt; &lt;fct&gt; &lt;dbl&gt;      &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;
-#&gt;  1 AL    1985   1.08    3973000  116.  46014968  32.5 102.   33.3    4.59
-#&gt;  2 AR    1985   1.08    2327000  129.  26210736  37   101.   37      4.60
-#&gt;  3 AZ    1985   1.08    3184000  105.  43956936  31   109.   36.2    4.59
-#&gt;  4 CA    1985   1.08   26444000  100. 447102816  26   108.   32.1    4.36
-#&gt;  5 CO    1985   1.08    3209000  113.  49466672  31    94.3  31      4.58
-#&gt;  6 CT    1985   1.08    3201000  109.  60063368  42   128.   51.5    4.58
-#&gt;  7 DE    1985   1.08     618000  144.   9927301  30   102.   30      4.61
-#&gt;  8 FL    1985   1.08   11352000  122. 166919248  37   115.   42.5    4.52
-#&gt;  9 GA    1985   1.08    5963000  127.  78364336  28    97.0  28.8    4.57
-#&gt; 10 IA    1985   1.08    2830000  114.  37902896  34   102.   37.9    4.59
-#&gt; # … with 86 more rows</div><div class='input'>
-<span class='fu'><a href='https://rdrr.io/pkg/generics/man/glance.html'>glance</a></span>(<span class='no'>ivr</span>)</div><div class='output co'>#&gt; # A tibble: 1 x 8
+#&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;fct&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;fct&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>      </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #555555;'> 1</span><span> AL    1985   1.08    3</span><span style='text-decoration: underline;'>973</span><span>000  116.  46</span><span style='text-decoration: underline;'>014</span><span>968  32.5 102.   33.3    4.59
+#&gt; </span><span style='color: #555555;'> 2</span><span> AR    1985   1.08    2</span><span style='text-decoration: underline;'>327</span><span>000  129.  26</span><span style='text-decoration: underline;'>210</span><span>736  37   101.   37      4.60
+#&gt; </span><span style='color: #555555;'> 3</span><span> AZ    1985   1.08    3</span><span style='text-decoration: underline;'>184</span><span>000  105.  43</span><span style='text-decoration: underline;'>956</span><span>936  31   109.   36.2    4.59
+#&gt; </span><span style='color: #555555;'> 4</span><span> CA    1985   1.08   26</span><span style='text-decoration: underline;'>444</span><span>000  100. 447</span><span style='text-decoration: underline;'>102</span><span>816  26   108.   32.1    4.36
+#&gt; </span><span style='color: #555555;'> 5</span><span> CO    1985   1.08    3</span><span style='text-decoration: underline;'>209</span><span>000  113.  49</span><span style='text-decoration: underline;'>466</span><span>672  31    94.3  31      4.58
+#&gt; </span><span style='color: #555555;'> 6</span><span> CT    1985   1.08    3</span><span style='text-decoration: underline;'>201</span><span>000  109.  60</span><span style='text-decoration: underline;'>063</span><span>368  42   128.   51.5    4.58
+#&gt; </span><span style='color: #555555;'> 7</span><span> DE    1985   1.08     </span><span style='text-decoration: underline;'>618</span><span>000  144.   9</span><span style='text-decoration: underline;'>927</span><span>301  30   102.   30      4.61
+#&gt; </span><span style='color: #555555;'> 8</span><span> FL    1985   1.08   11</span><span style='text-decoration: underline;'>352</span><span>000  122. 166</span><span style='text-decoration: underline;'>919</span><span>248  37   115.   42.5    4.52
+#&gt; </span><span style='color: #555555;'> 9</span><span> GA    1985   1.08    5</span><span style='text-decoration: underline;'>963</span><span>000  127.  78</span><span style='text-decoration: underline;'>364</span><span>336  28    97.0  28.8    4.57
+#&gt; </span><span style='color: #555555;'>10</span><span> IA    1985   1.08    2</span><span style='text-decoration: underline;'>830</span><span>000  114.  37</span><span style='text-decoration: underline;'>902</span><span>896  34   102.   37.9    4.59
+#&gt; </span><span style='color: #555555;'># … with 86 more rows</span><span></div><div class='input'>
+<span class='fu'><a href='https://rdrr.io/pkg/generics/man/glance.html'>glance</a></span>(<span class='no'>ivr</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 1 x 8</span><span>
 #&gt;   r.squared adj.r.squared sigma statistic p.value    df df.residual  nobs
-#&gt;       &lt;dbl&gt;         &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt; &lt;int&gt;       &lt;int&gt; &lt;int&gt;
-#&gt; 1     0.131         0.112 0.229      5.98  0.0184     2          46    48</div></pre>
+#&gt;       </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>         </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>       </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>
+#&gt; </span><span style='color: #555555;'>1</span><span>     0.131         0.112 0.229      5.98  0.018</span><span style='text-decoration: underline;'>4</span><span>     2          46    48</div></span></pre>
   </div>
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <h2>Contents</h2>
-    <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
-      <li><a href="#see-also">See also</a></li>
-      <li><a href="#value">Value</a></li>
-      <li><a href="#examples">Examples</a></li>
-    </ul>
-
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
+    <nav id="toc" data-toggle="toc" class="sticky-top">
+      <h2 data-toc-skip>Contents</h2>
+    </nav>
   </div>
 </div>
 
 
       <footer>
       <div class="tidyverse">
-  <p>broom is a part of the <strong>tidyverse</strong>, an ecosystem of packages designed with common APIs and a shared philosophy. Learn more at <a href="https://tidyverse.org">tidyverse.org</a>.</p>
+  <p>broom is a part of the <strong>tidymodels</strong> ecosystem, a collection of modeling packages designed with common APIs and a shared philosophy.</p>
 </div>
 
 <div class="author">
