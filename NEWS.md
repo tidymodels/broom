@@ -158,6 +158,9 @@ pending getting `safepredict()` going urgh)
 special characters (previously they were converted to data.frame friendly
 column names by `make.names`)
 
+- `glance.lavaan()` now uses lavaan extractor functions instead of
+subsetting the fit object manually. (#835)
+
 ### Bug fixes
 
 - Bug fix to return confidence intervals correct in tidy.drc() (#798)

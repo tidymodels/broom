@@ -134,12 +134,12 @@ glance.lavaan <- function(x, ...) {
     map_df(as.numeric) %>%
     bind_cols(
       tibble(
-        converged = x@Fit@converged,
-        estimator = x@Options$estimator,
-        ngroups = x@Data@ngroups,
-        missing_method = x@Data@missing,
-        nobs = sum(purrr::accumulate(x@Data@nobs, sum)),
-        norig = sum(purrr::accumulate(x@Data@norig, sum)),
+        converged = lavInspect(x, "converged"),
+        estimator = lavInspect(x, "options")$estimator,
+        ngroups = lavInspect(x, "ngroups"),
+        missing_method = lavInspect(x, "options")$missing,
+        nobs = sum(purrr::accumulate(lavInspect(x, "nobs"), sum)),
+        norig = sum(purrr::accumulate(lavInspect(x, "norig"), sum)),
         nexcluded = norig - nobs
       )
     ) %>%
