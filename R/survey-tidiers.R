@@ -69,7 +69,7 @@ tidy.svyglm <- function(x, conf.int = FALSE, conf.level = 0.95,
   ret <- left_join(coefs, ret, by = c("term", "estimate"))
   
   if (conf.int) {
-    ci <- broom_confint_terms(x, level = conf.level)
+    ci <- broom_confint_terms(x, level = conf.level, ...)
     ret <- dplyr::left_join(ret, ci, by = "term")
   }
   

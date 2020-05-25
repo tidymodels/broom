@@ -158,6 +158,9 @@ pending getting `safepredict()` going urgh)
 special characters (previously they were converted to data.frame friendly
 column names by `make.names`)
 
+- `glance.lavaan()` now uses lavaan extractor functions instead of
+subsetting the fit object manually. (#835)
+
 ### Bug fixes
 
 - Bug fix to return confidence intervals correct in tidy.drc() (#798)
@@ -169,6 +172,12 @@ column names by `make.names`)
 - Bug fix in `glance.lavaan()` (#577)
 - Bug fix for `tidy.survreg()` when `robust` is set to `TRUE` in model
 fitting (#842, #728)
+- Bug fix in muhaz tidiers to ensure output is always a `tibble` (#824)
+
+### Other changes
+
+- The package's site has moved from https://broom.tidyverse.org/ to
+https://broom.tidymodels.org/
 
 # broom 0.5.6
 
