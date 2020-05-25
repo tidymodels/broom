@@ -33,9 +33,8 @@ jobs:
 
       - name: Install dependencies
         run: |
-          install.packages(c("remotes", "rlang"))
+          install.packages(c("remotes", "rlang", "covr"))
           remotes::install_deps(dependencies = TRUE)
-          remotes::install_cran("covr")
         shell: Rscript {0}
 
       - name: Test coverage
