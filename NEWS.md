@@ -36,6 +36,7 @@ This release of `broom` hard-deprecates the following functions and tidiers:
 - `tidy.table()` and `tidy.ftable()` have been deprecated in favor of
   `tibble::as_tibble()`
 - `tidy.summaryDefault()` and `glance.summaryDefault()` have been deprecated in favor of `skimr::skim()`
+- `fix_data_frame()`
 
 We regret that we were unable to provide warnings for some of these changes.
 
