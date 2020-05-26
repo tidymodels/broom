@@ -44,10 +44,18 @@ tidy(crime_sem, conf.int = TRUE)
 glance(crime_sem)
 augment(crime_sem)
 
+crime_sac <- sacsarlm(CRIME ~ INC + HOVAL, data=COL.OLD, listw)
+
+tidy.sarlm(crime_sac)
+tidy.sarlm(crime_sac, conf.int = T)
+glance.sarlm(crime_sac)
+augment.sarlm(crime_sac)
+
+
 
 }
 \seealso{
-\code{\link[=glance]{glance()}}, \code{\link[spatialreg:lagsarlm]{spatialreg::lagsarlm()}}, \code{\link[spatialreg:errorsarlm]{spatialreg::errorsarlm()}}
+\code{\link[=glance]{glance()}}, \code{\link[spatialreg:lagsarlm]{spatialreg::lagsarlm()}}, \code{\link[spatialreg:errorsarlm]{spatialreg::errorsarlm()}}, \code{\link[spatialreg:sacsarlm]{spatialreg::sacsarlm()}}
 
 Other spatialreg tidiers: 
 \code{\link{augment.sarlm}()},

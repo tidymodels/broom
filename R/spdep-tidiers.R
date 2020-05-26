@@ -27,13 +27,12 @@
 #' glance(crime_sem)
 #' augment(crime_sem)
 #' 
-#' model with both paramets - rho, lambda    
-#' crime_SAC <- sacsarlm(CRIME ~ INC + HOVAL, data=COL.OLD, listw)
+#' crime_sac <- sacsarlm(CRIME ~ INC + HOVAL, data=COL.OLD, listw)
 #' 
-#' tidy.sarlm(crime_SAC)
-#' tidy.sarlm(crime_SAC, conf.int = T)
-#' glance.sarlm(crime_SAC)
-#' augment.sarlm(crime_SAC)
+#' tidy.sarlm(crime_sac)
+#' tidy.sarlm(crime_sac, conf.int = T)
+#' glance.sarlm(crime_sac)
+#' augment.sarlm(crime_sac)
 #' 
 #'
 #' 
@@ -47,43 +46,29 @@ tidy.sarlm <- function(x, conf.int = FALSE, conf.level = .95, ...) {
   ret <- as_tibble(s$Coef, rownames = 'term')
   colnames(ret) <- c("term", "estimate", "std.error", "statistic", "p.value")
   
-  # append spatial autoregression coefficient to parameter table
-  if (!is.null(s$rho) == T & !is.null(s$lambda) == F) {
-    # if SAR model, get rho and append to table
-    ret2 <- tibble(
+  # append spatial autoregression coefficient to parameter table if it exists
+  if (!is.null(s$rho)) {
+    rho <- tibble(
         term = "rho",
         estimate = as.numeric(s$rho),
         std.error = as.numeric(s$rho.se),
         statistic = as.numeric(estimate / std.error),
         p.value = as.numeric(2 * (1 - pnorm( abs(statistic) ) ) )
       )
-    ret = rbind(ret, ret2)
-  } else if (!is.null(s$lambda) & !is.null(s$rho) == F)  {
-    # if SEM model, get lambda and append to table
-    ret2 <- tibble(
+    ret <- bind_rows(rho, ret)
+  }
+  
+  # append spatial error coefficient to parameter table if it exists
+  if (!is.null(s$lambda))  {
+    lambda <- tibble(
       term = "lambda",
       estimate = as.numeric(s$lambda),
       std.error = as.numeric(s$lambda.se),
       statistic = as.numeric(estimate / std.error),
       p.value = as.numeric(2 * (1 - pnorm( abs(statistic) ) ) )
     )
-    colnames(ret2) <- c("term", "estimate", "std.error", "statistic", "p.value")
-    ret = rbind(ret, ret2)
+    ret <- bind_rows(ret, lambda)
   }
-  # Accounting if Model has BOTH parametrs lambda and rho
-  else if (!is.null(s$lambda) & !is.null(s$rho) == T)  {
-    # If model has both parametrs, appends them and return
-    ret2 <- tibble(
-      term = c("lambda", "rho"),
-      estimate = c(as.numeric(s$lambda), as.numeric(s$rho)),
-      std.error = c(as.numeric(s$lambda.se), as.numeric(s$rho.se)),
-      statistic = c((as.numeric(estimate / std.error))),
-      p.value = as.numeric(2 * (1 - pnorm( abs(statistic) ) ) )
-    )
-    colnames(ret2) <- c("term", "estimate", "std.error", "statistic", "p.value")
-    ret = rbind(ret, ret2)
-  }
-  
   
   
   
@@ -105,7 +90,7 @@ tidy.sarlm <- function(x, conf.int = FALSE, conf.level = .95, ...) {
 #' @inherit tidy.sarlm params examples
 #'
 #' @export
-#' @seealso [augment()],[mlogit::miscmethods.mlogit()]
+#' @seealso [augment()]
 #' @family spatialreg tidiers
 augment.sarlm <- function(x) {
   
@@ -132,7 +117,7 @@ augment.sarlm <- function(x) {
 #' @evalRd return_glance("logLik", "AIC", "BIC", "deviance", "logLik", "nobs")
 #' @export
 #' @family spatialreg tidiers
-#' @seealso [glance()], [spatialreg::lagsarlm()], [spatialreg::errorsarlm()]
+#' @seealso [glance()], [spatialreg::lagsarlm()], [spatialreg::errorsarlm()], [spatialreg::sacsarlm()]
 glance.sarlm <- function(x) {
   
   res <- tibble(
