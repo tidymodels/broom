@@ -138,8 +138,8 @@ glance.lavaan <- function(x, ...) {
         estimator = lavInspect(x, "options")$estimator,
         ngroups = lavInspect(x, "ngroups"),
         missing_method = lavInspect(x, "options")$missing,
-        nobs = sum(purrr::accumulate(lavInspect(x, "nobs"), sum)),
-        norig = sum(purrr::accumulate(lavInspect(x, "norig"), sum)),
+        nobs = sum(lavInspect(x, "nobs")),
+        norig = sum(lavInspect(x, "norig")),
         nexcluded = norig - nobs
       )
     ) %>%

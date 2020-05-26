@@ -169,7 +169,9 @@ subsetting the fit object manually. (#835)
 - Bug fix to allow `augment.Mclust()` to work on univariate data (#490)
 - Bug fix to allow `tidy.htest()` to supports equal variances (#608)
 - Bug fix for `tidy.polr()` when passed `conf.int = TRUE` (#498)
-- Bug fix in `glance.lavaan()` (#577)
+- Bug fixes in `glance.lavaan()`: address confidence interval error
+(#577) and correct reported `nobs` and `norig` (#835)
+
 - Bug fix for `tidy.survreg()` when `robust` is set to `TRUE` in model
 fitting (#842, #728)
 - Bug fix in muhaz tidiers to ensure output is always a `tibble` (#824)
