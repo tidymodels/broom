@@ -111,7 +111,8 @@ A \code{\link[tibble:tibble]{tibble::tibble()}} with exactly one row and columns
   \item{AIC}{Akaike's Information Criterion for the model.}
   \item{BIC}{Bayesian Information Criterion for the model.}
   \item{logLik}{The log-likelihood of the model. [stats::logLik()] may be a useful reference.}
-  \item{nevent}{number of events}
+  \item{n}{The total number of observations.}
+  \item{nevent}{Number of events.}
   \item{nobs}{Number of observations used.}
 See survival::coxph.object for additional column descriptions.
 }
