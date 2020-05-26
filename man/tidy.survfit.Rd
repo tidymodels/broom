@@ -80,8 +80,8 @@ Other survival tidiers:
 A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
   \item{conf.high}{Upper bound on the confidence interval for the estimate.}
   \item{conf.low}{Lower bound on the confidence interval for the estimate.}
-  \item{n.censor}{number of censored events}
-  \item{n.event}{number of events at time t}
+  \item{n.censor}{Number of censored events.}
+  \item{n.event}{Number of events at time t.}
   \item{n.risk}{Number of individuals at risk at time zero.}
   \item{std.error}{The standard error of the regression term.}
   \item{time}{Point in time.}

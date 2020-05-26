@@ -67,7 +67,7 @@ A \code{\link[tibble:tibble]{tibble::tibble()}} with exactly one row and columns
   \item{BIC}{Bayesian Information Criterion for the model.}
   \item{deviance}{Deviance of the model.}
   \item{df.residual}{Residual degrees of freedom.}
-  \item{edf}{The effective degrees of freedom}
+  \item{edf}{The effective degrees of freedom.}
   \item{logLik}{The log-likelihood of the model. [stats::logLik()] may be a useful reference.}
   \item{nobs}{Number of observations used.}
 

@@ -94,8 +94,8 @@ Other survival tidiers:
 A \code{\link[tibble:tibble]{tibble::tibble()}} with exactly one row and columns:
   \item{iter}{Iterations of algorithm/fitting procedure completed.}
   \item{p.value}{P-value corresponding to the test statistic.}
-  \item{rscore}{rscore}
-  \item{score}{score}
+  \item{rscore}{Robust log-rank statistic}
+  \item{score}{Score.}
   \item{n}{number of predictions}
   \item{nevent}{number of events}
 

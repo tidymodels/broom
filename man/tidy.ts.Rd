@@ -54,6 +54,6 @@ Other time series tidiers:
 A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
   \item{index}{Index (i.e. date or time) for a `ts` or `zoo` object.}
   \item{series}{Name of the series (present only for multivariate time series).}
-  \item{value}{TODO. needs better documentation.}
+  \item{value}{The value/estimate of the component. Results from data reshaping.}
 
 }

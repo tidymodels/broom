@@ -66,8 +66,8 @@ A \code{\link[tibble:tibble]{tibble::tibble()}} with exactly one row and columns
   \item{BIC}{Bayesian Information Criterion for the model.}
   \item{deviance}{Deviance of the model.}
   \item{df.residual}{Residual degrees of freedom.}
-  \item{finTol}{the achieved convergence tolerance}
-  \item{isConv}{whether the fit successfully converged}
+  \item{finTol}{The achieved convergence tolerance.}
+  \item{isConv}{Whether the fit successfully converged.}
   \item{logLik}{The log-likelihood of the model. [stats::logLik()] may be a useful reference.}
   \item{nobs}{Number of observations used.}
   \item{sigma}{Estimated standard error of the residuals.}

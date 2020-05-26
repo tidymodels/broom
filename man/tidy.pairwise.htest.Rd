@@ -64,8 +64,8 @@ Other htest tidiers:
 \concept{htest tidiers}
 \value{
 A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
-  \item{group1}{First group being compared}
-  \item{group2}{Second group being compared}
+  \item{group1}{First group being compared.}
+  \item{group2}{Second group being compared.}
   \item{p.value}{The two-sided p-value associated with the observed statistic.}
 
 }

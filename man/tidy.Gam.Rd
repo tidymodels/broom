@@ -54,7 +54,7 @@ A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
   \item{meansq}{Mean sum of squares. Equal to total sum of squares divided by degrees of freedom.}
   \item{p.value}{The two-sided p-value associated with the observed statistic.}
   \item{statistic}{The value of a T-statistic to use in a hypothesis that the regression term is non-zero.}
-  \item{sumsq}{Sum of squares explained by this term}
+  \item{sumsq}{Sum of squares explained by this term.}
   \item{term}{The name of the regression term.}
 
 }

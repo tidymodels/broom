@@ -88,13 +88,13 @@ Other survival tidiers:
 \concept{survival tidiers}
 \value{
 A \code{\link[tibble:tibble]{tibble::tibble()}} with exactly one row and columns:
-  \item{events}{number of events}
+  \item{events}{Number of events.}
   \item{n.max}{Maximum number of subjects at risk.}
   \item{n.start}{Initial number of subjects at risk.}
   \item{nobs}{Number of observations used.}
-  \item{records}{number of observations}
+  \item{records}{Number of observations}
   \item{rmean}{Restricted mean (see [survival::print.survfit()]).}
-  \item{rmean.std.error}{Restricted mean standard error}
+  \item{rmean.std.error}{Restricted mean standard error.}
   \item{conf.low}{lower end of confidence interval on median}
   \item{conf.high}{upper end of confidence interval on median}
   \item{median}{median survival}

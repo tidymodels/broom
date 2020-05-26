@@ -62,7 +62,7 @@ Other ordinal tidiers:
 \value{
 A \code{\link[tibble:tibble]{tibble::tibble()}} with exactly one row and columns:
   \item{df.residual}{Residual degrees of freedom.}
-  \item{edf}{The effective degrees of freedom}
+  \item{edf}{The effective degrees of freedom.}
   \item{nobs}{Number of observations used.}
 
 }
