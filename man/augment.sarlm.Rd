@@ -78,12 +78,20 @@ tidy(crime_sem, conf.int = TRUE)
 glance(crime_sem)
 augment(crime_sem)
 
+crime_sac <- sacsarlm(CRIME ~ INC + HOVAL, data=COL.OLD, listw)
+
+tidy.sarlm(crime_sac)
+tidy.sarlm(crime_sac, conf.int = T)
+glance.sarlm(crime_sac)
+augment.sarlm(crime_sac)
+
+
 
 }
 \seealso{
 \link{na.action}
 
-\code{\link[=augment]{augment()}},\code{\link[mlogit:miscmethods.mlogit]{mlogit::miscmethods.mlogit()}}
+\code{\link[=augment]{augment()}}
 
 Other spatialreg tidiers: 
 \code{\link{glance.sarlm}()},
