@@ -82,10 +82,10 @@ Other glmnet tidiers:
 \concept{glmnet tidiers}
 \value{
 A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
-  \item{dev.ratio}{fraction of null deviance explained at each value of lambda}
+  \item{dev.ratio}{Fraction of null deviance explained at each value of lambda.}
   \item{estimate}{The estimated value of the regression term.}
   \item{lambda}{Value of penalty parameter lambda.}
-  \item{step}{which step of lambda choices was used}
+  \item{step}{Which step of lambda choices was used.}
   \item{term}{The name of the regression term.}
 
 }

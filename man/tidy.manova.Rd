@@ -57,8 +57,8 @@ Other anova tidiers:
 \concept{anova tidiers}
 \value{
 A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
-  \item{den.df}{Degrees of freedom of the denominator}
-  \item{num.df}{Degrees of freedom}
+  \item{den.df}{Degrees of freedom of the denominator.}
+  \item{num.df}{Degrees of freedom.}
   \item{p.value}{The two-sided p-value associated with the observed statistic.}
   \item{statistic}{The value of a T-statistic to use in a hypothesis that the regression term is non-zero.}
   \item{term}{The name of the regression term.}

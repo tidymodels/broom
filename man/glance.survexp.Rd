@@ -83,6 +83,6 @@ Other survival tidiers:
 A \code{\link[tibble:tibble]{tibble::tibble()}} with exactly one row and columns:
   \item{n.max}{Maximum number of subjects at risk.}
   \item{n.start}{Initial number of subjects at risk.}
-  \item{timepoints}{number of timepoints}
+  \item{timepoints}{Number of timepoints.}
 
 }

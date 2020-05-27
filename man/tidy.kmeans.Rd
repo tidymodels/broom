@@ -60,8 +60,8 @@ Other kmeans tidiers:
 \concept{kmeans tidiers}
 \value{
 A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
-  \item{cluster}{A factor describing the cluster from 1:k}
+  \item{cluster}{A factor describing the cluster from 1:k.}
   \item{size}{Number of points assigned to cluster.}
-  \item{withinss}{The within-cluster sum of squares}
+  \item{withinss}{The within-cluster sum of squares.}
 
 }

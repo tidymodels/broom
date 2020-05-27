@@ -47,12 +47,12 @@ Other smoothing spline tidiers:
 \concept{smoothing spline tidiers}
 \value{
 A \code{\link[tibble:tibble]{tibble::tibble()}} with exactly one row and columns:
-  \item{crit}{minimized criterion}
-  \item{cv.crit}{cross-validation score}
+  \item{crit}{Minimized criterion}
+  \item{cv.crit}{Cross-validation score}
   \item{df}{Degrees of freedom used by the model.}
-  \item{lambda}{choice of lambda corresponding to `spar`}
+  \item{lambda}{Choice of lambda corresponding to `spar`.}
   \item{nobs}{Number of observations used.}
-  \item{pen.crit}{penalized criterion}
-  \item{spar}{smoothing parameter}
+  \item{pen.crit}{Penalized criterion.}
+  \item{spar}{Smoothing parameter.}
 
 }

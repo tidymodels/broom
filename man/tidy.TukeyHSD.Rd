@@ -57,6 +57,7 @@ A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
   \item{conf.low}{Lower bound on the confidence interval for the estimate.}
   \item{contrast}{Levels being compared.}
   \item{estimate}{The estimated value of the regression term.}
+  \item{null.value}{Value to which the estimate is compared.}
   \item{term}{The name of the regression term.}
 
 }

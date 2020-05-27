@@ -143,6 +143,7 @@ augment.coxph <- function(x, data = NULL, newdata = NULL,
 #' @inherit tidy.coxph params examples
 #' 
 #' @evalRd return_glance(
+#'    "n",
 #'    "nevent",
 #'    "logLik",
 #'    "AIC",
@@ -159,6 +160,7 @@ glance.coxph <- function(x, ...) {
   # including all the test statistics and p-values as separate
   # columns. Admittedly not perfect but does capture most use cases.
   ret <- list(
+    n = s$n,
     nevent = s$nevent,
     statistic.log = s$logtest[1],
     p.value.log = s$logtest[3],

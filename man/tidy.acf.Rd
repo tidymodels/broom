@@ -47,6 +47,6 @@ Other time series tidiers:
 \value{
 A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
   \item{acf}{Autocorrelation.}
-  \item{lag}{lag values}
+  \item{lag}{Lag values.}
 
 }

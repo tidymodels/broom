@@ -67,5 +67,6 @@ Other multcomp tidiers:
 \value{
 A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
   \item{contrast}{Levels being compared.}
+  \item{letters}{Compact letter display denoting all pair-wise comparisons.}
 
 }

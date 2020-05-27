@@ -56,8 +56,8 @@ Other list tidiers:
 \value{
 A \code{\link[tibble:tibble]{tibble::tibble()}} with exactly one row and columns:
   \item{convergence}{Convergence code.}
-  \item{function.count}{number of calls to `fn`}
-  \item{gradient.count}{number of calls to `gr`}
-  \item{value}{minimized or maximized output value}
+  \item{function.count}{Number of calls to `fn`.}
+  \item{gradient.count}{Number of calls to `gr`.}
+  \item{value}{Minimized or maximized output value.}
 
 }
