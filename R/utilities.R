@@ -414,6 +414,7 @@ globalVariables(
     "item1", 
     "item2",
     "key",
+    "lavInspect",
     "lambda",
     "level", 
     "lhs",

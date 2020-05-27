@@ -203,6 +203,7 @@ SMA
 somwhat
 Sostero
 sp
+sparseMatrix
 SpatialPolygonsDataFrame
 speedglm
 speedlm
@@ -229,6 +230,7 @@ Tibbles
 tiders
 tidiers
 Tidiers
+tidymodels
 tidyr
 tidyverse
 TukeyHSD
