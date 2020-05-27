@@ -109,7 +109,7 @@
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Introduction to broom</h1>
             
-            <h4 class="date">2020-05-26</h4>
+            <h4 class="date">2020-05-27</h4>
       
       <small class="dont-index">Source: <a href="http://github.com/tidymodels/broom/blob/master/vignettes/broom.Rmd"><code>vignettes/broom.Rmd</code></a></small>
       <div class="hidden name"><code>broom.Rmd</code></div>
@@ -251,7 +251,7 @@
 ## 1 k        45.8       4.25     10.8  7.64e-12
 ## 2 b         4.39      1.54      2.85 7.74e- 3</code></pre>
 <div class="sourceCode" id="cb19"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/pkg/generics/man/augment.html">augment</a></span>(<span class="no">nlsfit</span>, <span class="no">mtcars</span>)</pre></body></html></div>
-<pre><code>## # A tibble: 32 x 13
+<pre><code>## # A tibble: 32 x 14
 ##    .rownames   mpg   cyl  disp    hp  drat    wt  qsec    vs    am  gear  carb
 ##    &lt;chr&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
 ##  1 Mazda RX4  21       6  160    110  3.9   2.62  16.5     0     1     4     4
@@ -264,7 +264,7 @@
 ##  8 Merc 240D  24.4     4  147.    62  3.69  3.19  20       1     0     4     2
 ##  9 Merc 230   22.8     4  141.    95  3.92  3.15  22.9     1     0     4     2
 ## 10 Merc 280   19.2     6  168.   123  3.92  3.44  18.3     1     0     4     4
-## # … with 22 more rows, and 1 more variable: .fitted &lt;dbl&gt;</code></pre>
+## # … with 22 more rows, and 2 more variables: .fitted &lt;dbl&gt;, .resid &lt;dbl&gt;</code></pre>
 <div class="sourceCode" id="cb21"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/pkg/generics/man/glance.html">glance</a></span>(<span class="no">nlsfit</span>)</pre></body></html></div>
 <pre><code>## # A tibble: 1 x 9
 ##   sigma isConv       finTol logLik   AIC   BIC deviance df.residual  nobs

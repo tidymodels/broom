@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Tidy a(n) aovlist object — tidy.aovlist • broom</title>
+<title>Tidy a sparseMatrix object from the Matrix package — sparse_tidiers • broom</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -45,13 +45,11 @@
 
 
 
-<meta property="og:title" content="Tidy a(n) aovlist object — tidy.aovlist" />
-<meta property="og:description" content="Tidy summarizes information about the components of a model.
-A model component might be a single term in a regression, a single
-hypothesis, a cluster, or a class. Exactly what tidy considers to be a
-model component varies across models but is usually self-evident.
-If a model has several distinct types of components, you will need to
-specify which components to return." />
+<meta property="og:title" content="Tidy a sparseMatrix object from the Matrix package — sparse_tidiers" />
+<meta property="og:description" content="Tidy a sparseMatrix object from the Matrix package into
+a three-column data frame, row, column, and value (with
+zeros missing). If there are row names or column names,
+use those, otherwise use indices" />
 <meta property="og:image" content="https://broom.tidymodels.org/logo.png" />
 <meta name="twitter:card" content="summary" />
 
@@ -154,21 +152,25 @@ specify which components to return." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Tidy a(n) aovlist object</h1>
-    <small class="dont-index">Source: <a href='http://github.com/tidymodels/broom/blob/master/R/stats-anova-tidiers.R'><code>R/stats-anova-tidiers.R</code></a></small>
-    <div class="hidden name"><code>tidy.aovlist.Rd</code></div>
+    <h1>Tidy a sparseMatrix object from the Matrix package</h1>
+    <small class="dont-index">Source: <a href='http://github.com/tidymodels/broom/blob/master/R/matrix-tidiers.R'><code>R/matrix-tidiers.R</code></a></small>
+    <div class="hidden name"><code>sparse_tidiers.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Tidy summarizes information about the components of a model.
-A model component might be a single term in a regression, a single
-hypothesis, a cluster, or a class. Exactly what tidy considers to be a
-model component varies across models but is usually self-evident.
-If a model has several distinct types of components, you will need to
-specify which components to return.</p>
+    <p>Tidy a sparseMatrix object from the Matrix package into
+a three-column data frame, row, column, and value (with
+zeros missing). If there are row names or column names,
+use those, otherwise use indices</p>
     </div>
 
-    <pre class="usage"><span class='co'># S3 method for aovlist</span>
+    <pre class="usage"><span class='co'># S3 method for dgTMatrix</span>
+<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>x</span>, <span class='no'>...</span>)
+
+<span class='co'># S3 method for dgCMatrix</span>
+<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>x</span>, <span class='no'>...</span>)
+
+<span class='co'># S3 method for sparseMatrix</span>
 <span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>x</span>, <span class='no'>...</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -176,7 +178,7 @@ specify which components to return.</p>
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>x</th>
-      <td><p>An <code>aovlist</code> objects, such as those created by <code><a href='https://rdrr.io/r/stats/aov.html'>stats::aov()</a></code>.</p></td>
+      <td><p>A Matrix object</p></td>
     </tr>
     <tr>
       <th>...</th>
@@ -192,45 +194,15 @@ the <code>data</code> argument.</p></td>
     </tr>
     </table>
 
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
-
-    <p>The <code>term</code> column of an ANOVA table can come with leading or
-trailing whitespace, which this tidying method trims.</p>
-    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
-
-    <div class='dont-index'><p><code><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy()</a></code>, <code><a href='https://rdrr.io/r/stats/aov.html'>stats::aov()</a></code></p>
-<p>Other anova tidiers: 
-<code><a href='glance.aov.html'>glance.aov</a>()</code>,
-<code><a href='tidy.TukeyHSD.html'>tidy.TukeyHSD</a>()</code>,
-<code><a href='tidy.anova.html'>tidy.anova</a>()</code>,
-<code><a href='tidy.aov.html'>tidy.aov</a>()</code>,
-<code><a href='tidy.manova.html'>tidy.manova</a>()</code>,
-<code><a href='tidy.summary.manova.html'>tidy.summary.manova</a>()</code></p></div>
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>A <code><a href='https://tibble.tidyverse.org/reference/tibble.html'>tibble::tibble()</a></code> with columns:</p>
-<dt>df</dt><dd><p>Degrees of freedom used by this term in the model.</p></dd>
-  <dt>meansq</dt><dd><p>Mean sum of squares. Equal to total sum of squares divided by degrees of freedom.</p></dd>
-  <dt>p.value</dt><dd><p>The two-sided p-value associated with the observed statistic.</p></dd>
-  <dt>statistic</dt><dd><p>The value of a T-statistic to use in a hypothesis that the regression term is non-zero.</p></dd>
-  <dt>stratum</dt><dd><p>The error stratum.</p></dd>
-  <dt>sumsq</dt><dd><p>Sum of squares explained by this term.</p></dd>
-  <dt>term</dt><dd><p>The name of the regression term.</p></dd>
+<dt>row</dt><dd><p>Row ID of the original observation.</p></dd>
+  <dt>value</dt><dd><p>The value/estimate of the component. Results from data reshaping.</p></dd>
+  <dt>column</dt><dd><p>Column name in the original matrix.</p></dd>
 
 
 
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'>
-<span class='no'>a</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/aov.html'>aov</a></span>(<span class='no'>mpg</span> ~ <span class='no'>wt</span> + <span class='no'>qsec</span> + <span class='fu'><a href='https://rdrr.io/r/stats/aov.html'>Error</a></span>(<span class='no'>disp</span> / <span class='no'>am</span>), <span class='no'>mtcars</span>)
-<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>a</span>)</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 5 x 7</span><span>
-#&gt;   stratum term         df   sumsq  meansq statistic  p.value
-#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span> disp    wt            1 809.    809.        </span><span style='color: #BB0000;'>NA</span><span>    </span><span style='color: #BB0000;'>NA</span><span>      
-#&gt; </span><span style='color: #555555;'>2</span><span> disp:am wt            1   0.389   0.389     </span><span style='color: #BB0000;'>NA</span><span>    </span><span style='color: #BB0000;'>NA</span><span>      
-#&gt; </span><span style='color: #555555;'>3</span><span> Within  wt            1  87.2    87.2       12.0   0.001</span><span style='text-decoration: underline;'>76</span><span>
-#&gt; </span><span style='color: #555555;'>4</span><span> Within  qsec          1  34.2    34.2        4.72  0.038</span><span style='text-decoration: underline;'>7</span><span> 
-#&gt; </span><span style='color: #555555;'>5</span><span> Within  Residuals    27 195.      7.24      </span><span style='color: #BB0000;'>NA</span><span>    </span><span style='color: #BB0000;'>NA</span><span>      </div><div class='input'>
-</div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
