@@ -444,6 +444,7 @@ Collate:
     'mass-ridgelm-tidiers.R'
     'stats-lm-tidiers.R'
     'mass-rlm-tidiers.R'
+    'matrix-tidiers.R'
     'mclogit.R'
     'mclust-tidiers.R'
     'mediate-tidiers.R'
