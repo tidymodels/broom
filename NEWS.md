@@ -52,6 +52,8 @@ We regret that we were unable to provide warnings for some of these changes.
 
 - `tidy.ridgelm()` now always return a `GCV` column and never returns an `xm` column (#532)
 
+- The .resid column in the output of `augment.lm()` is now defined as `y - y_hat` rather than `y_hat - y`, consistent with other augment methods. 
+
 ## An incomplete overhaul of `augment()`
 
 - Added `data` argument to `augment()` generic (did this happen?)
