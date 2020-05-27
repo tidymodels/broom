@@ -31,7 +31,7 @@
 #'     component. That is, the location of the observation in PCA space.}
 #'     
 #'   If `matrix` is `"v"`, `"rotation"`, `"loadings"` or `"variables"`, each 
-#'   row in the tidied ouput corresponds to information about the principle 
+#'   row in the tidied output corresponds to information about the principle 
 #'   components in the original space. The columns are:
 #'   
 #'   \item{`row`}{The variable labels (colnames) of the data set on
@@ -112,7 +112,12 @@ tidy.prcomp <- function(x, matrix = "u", ...) {
     } else {
       rownames(x$rotation)
     }
-    variables <- tidyr::gather(as.data.frame(x$rotation))
+    variables <- tidyr::pivot_longer(as.data.frame(x$rotation),
+                                     cols = dplyr::everything(),
+                                     names_to = "key",
+                                     values_to = "value") %>%
+      tibble::remove_rownames() %>%
+      as.data.frame()
     ret <- data.frame(
       label = rep(labels, times = ncomp),
       variables,
@@ -121,7 +126,12 @@ tidy.prcomp <- function(x, matrix = "u", ...) {
     names(ret) <- c("column", "PC", "value")
   } else if (matrix %in% c("x", "samples", "u", "scores")) {
     labels <- if (is.null(rownames(x$x))) 1:nrow(x$x) else rownames(x$x)
-    samples <- tidyr::gather(as.data.frame(x$x))
+    samples <- tidyr::pivot_longer(as.data.frame(x$x),
+                                   cols = dplyr::everything(),
+                                   names_to = "key",
+                                   values_to = "value") %>%
+      tibble::remove_rownames() %>%
+      as.data.frame()
     ret <- data.frame(
       label = rep(labels, times = ncomp),
       samples

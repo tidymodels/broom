@@ -33,6 +33,8 @@ test_that("glance.rlm", {
 
 test_that("augment.rlm", {
   
+  skip_on_os("linux")
+  
   check_augment_function(
     aug = augment.rlm,
     model = fit,

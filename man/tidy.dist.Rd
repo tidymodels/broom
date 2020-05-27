@@ -4,7 +4,7 @@
 \alias{tidy.dist}
 \title{Tidy a(n) dist object}
 \usage{
-\method{tidy}{dist}(x, diagonal = attr(x, "Diag"), upper = attr(x, "Upper"), ...)
+\method{tidy}{dist}(x, diagonal = attr(x, "Diag"), ...)
 }
 \arguments{
 \item{x}{A \code{dist} object returned from \code{\link[stats:dist]{stats::dist()}}.}
@@ -12,10 +12,6 @@
 \item{diagonal}{Logical indicating whether or not to tidy the diagonal
 elements of the distance matrix. Defaults to whatever was based to the
 \code{diag} argument of \code{\link[stats:dist]{stats::dist()}}.}
-
-\item{upper}{Logical indicating whether or not to tidy the upper half of
-the distance matrix. Defaults to whatever was based to the
-\code{upper} argument of \code{\link[stats:dist]{stats::dist()}}.}
 
 \item{...}{Additional arguments. Not used. Needed to match generic
 signature only. \strong{Cautionary note:} Misspelled arguments will be
@@ -31,13 +27,13 @@ the \code{data} argument.}
 Tidy summarizes information about the components of a model.
 A model component might be a single term in a regression, a single
 hypothesis, a cluster, or a class. Exactly what tidy considers to be a
-model component varies cross models but is usually self-evident.
+model component varies across models but is usually self-evident.
 If a model has several distinct types of components, you will need to
 specify which components to return.
 }
 \details{
-If the distance matrix does not include an upper triangle and/or
-diagonal, the tidied version will not either.
+If the distance matrix does not include the diagonal,
+the tidied version will not either.
 }
 \examples{
 

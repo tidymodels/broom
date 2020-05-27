@@ -47,7 +47,7 @@ data).}
 component. That is, the location of the observation in PCA space.}
 
 If \code{matrix} is \code{"v"}, \code{"rotation"}, \code{"loadings"} or \code{"variables"}, each
-row in the tidied ouput corresponds to information about the principle
+row in the tidied output corresponds to information about the principle
 components in the original space. The columns are:
 
 \item{\code{row}}{The variable labels (colnames) of the data set on
@@ -68,7 +68,7 @@ principle components up to this component.}
 Tidy summarizes information about the components of a model.
 A model component might be a single term in a regression, a single
 hypothesis, a cluster, or a class. Exactly what tidy considers to be a
-model component varies cross models but is usually self-evident.
+model component varies across models but is usually self-evident.
 If a model has several distinct types of components, you will need to
 specify which components to return.
 }

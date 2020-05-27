@@ -1,7 +1,7 @@
 Type: Package
 Package: broom
 Title: Convert Statistical Objects into Tidy Tibbles
-Version: 0.5.3.9000
+Version: 0.7.0.9000
 Authors@R: 
     c(person(given = "David",
              family = "Robinson",
@@ -114,6 +114,10 @@ Authors@R:
              family = "Whiting",
              role = "ctb",
              email = "karissa.whiting@gmail.com"),
+      person(given = "Yves",
+             family = "Rosseel",
+             role = "ctb",
+             email = "yrosseel@gmail.com"),
       person(given = "Michael",
              family = "Kuehn",
              role = "ctb",
@@ -280,7 +284,13 @@ Authors@R:
              family = "Martherus",
              role = "ctb",
              email = "james@martherus.com",
-             comment = c(ORCID = "0000-0002-8285-3300")))
+             comment = c(ORCID = "0000-0002-8285-3300"))),
+      person(given = "Chuliang",
+             family = "Xiao",
+             role = "ctb",
+             email = "cxiao@umich.edu",
+             comment = c(ORCID = "0000-0002-8466-9398")))
+             
 Description: Summarizes key information about statistical
     objects in tidy tibbles. This makes it easy to report results, create
     plots and consistently work with large numbers of models at once.
@@ -292,8 +302,7 @@ Description: Summarizes key information about statistical
     observations to a dataset, such as fitted values or influence
     measures.
 License: MIT + file LICENSE
-URL: https://broom.tidyverse.org/,
-    http://github.com/tidymodels/broom
+URL: https://broom.tidymodels.org/, http://github.com/tidymodels/broom
 BugReports: http://github.com/tidymodels/broom/issues
 Depends:
     R (>= 3.1)
@@ -305,10 +314,9 @@ Imports:
     glue,
     methods,
     purrr,
-    reshape2,
     rlang,
     stringr,
-    tibble,
+    tibble (>= 3.0.0),
     tidyr
 Suggests:
     AER,
@@ -334,9 +342,11 @@ Suggests:
     gamlss,
     gamlss.data,
     gamlss.dist,
+    gee,
     geepack,
     ggplot2,
     glmnet,
+    glmnetUtils,
     gmm,
     Hmisc,
     irlba,
@@ -349,6 +359,7 @@ Suggests:
     leaps,
     lfe,
     lm.beta,
+    lme4,
     lmodel2,
     lmtest,
     lsmeans,
@@ -356,6 +367,7 @@ Suggests:
     maptools,
     MASS,
     Matrix,
+    mclogit,
     mclust,
     mediation,
     metafor,
@@ -385,20 +397,14 @@ Suggests:
     systemfit,
     testthat (>= 2.1.0),
     tseries,
-    xergm,
-    zoo,
-    glmnetUtils,
-    lme4,
-    gee,
-    mclogit
-Remotes:
-    alexpghayes/modeltests
+    zoo
+VignetteBuilder: 
+    knitr
 Encoding: UTF-8
-VignetteBuilder: knitr
-Language: en-US
 LazyData: true
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.0.2
+RoxygenNote: 7.1.0
+Language: en-US
 Collate:
     'aaa-documentation-helper.R'
     'null-and-default-tidiers.R'

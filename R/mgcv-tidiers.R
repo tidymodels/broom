@@ -14,8 +14,10 @@
 #'   "std.error",
 #'   "statistic",
 #'   "p.value",
-#'   "edf",
-#'   "ref.df"
+#'   edf = "The effective degrees of freedom. Only reported when 
+#'     `parametric = FALSE`",
+#'   ref.df = "The reference degrees of freedom. Only reported when 
+#'     `parametric = FALSE`"
 #' )
 #'
 #' @details When `parametric = FALSE` return columns `edf` and `ref.df` rather

@@ -69,7 +69,7 @@ augment.kmeans <- function(x, data, ...) {
 #' 
 #' @inherit tidy.kmeans params examples
 #'
-#' @evalRd return_glance("totts","tot.withinss", "betweenss", "iter")
+#' @evalRd return_glance("totss","tot.withinss", "betweenss", "iter")
 #'
 #' @export
 #' @seealso [glance()], [stats::kmeans()]

@@ -38,7 +38,7 @@ exponential random graph model, with columns:
 Tidy summarizes information about the components of a model.
 A model component might be a single term in a regression, a single
 hypothesis, a cluster, or a class. Exactly what tidy considers to be a
-model component varies cross models but is usually self-evident.
+model component varies across models but is usually self-evident.
 If a model has several distinct types of components, you will need to
 specify which components to return.
 
@@ -48,7 +48,6 @@ the \pkg{ergm} class, such as those produced from weighted networks by the
 }
 \examples{
 
-\dontrun{
 library(ergm)
 # Using the same example as the ergm package
 # Load the Florentine marriage network data
@@ -69,7 +68,6 @@ tidy(gest, exponentiate = TRUE, conf.int = TRUE, conf.level = 0.99)
 glance(gest)
 glance(gest, deviance = TRUE)
 glance(gest, mcmc = TRUE)
-}
 
 }
 \references{

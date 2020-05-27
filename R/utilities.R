@@ -149,7 +149,6 @@ augment_columns <- function(x, data, newdata = NULL, type, type.predict = type,
   args <- c(args, list(...))
 
 
-
   if ("panelmodel" %in% class(x)) {
     # work around for panel models (plm)
     # stat::predict() returns wrong fitted values when applied to random or
@@ -260,8 +259,7 @@ response <- function(object, newdata = NULL) {
 
 data_error <- function(cnd) {
   stop(
-    "Can't augment data with observation level measures.\n",
-    "Did you provide `data` with the exact data used for model fitting?",
+    "Must specify either `data` or `newdata` argument.",
     call. = FALSE
   )
 }
@@ -377,8 +375,11 @@ broom_confint_terms <- function(x, ...) {
 globalVariables(
   c(
     ".",
+    ".fitted",
     ".id",
+    ".resid",
     ".rownames",
+    ".tau",
     "aic",
     "bic",
     "ci.lower",
@@ -389,7 +390,8 @@ globalVariables(
     "comp",
     "comparison",
     "conf.high",
-    "conf.low", 
+    "conf.low",
+    "contrast",
     "cook.d",
     "cov.r",
     "cutoffs",
@@ -421,6 +423,7 @@ globalVariables(
     "N", 
     "nobs", 
     "norig",
+    "null.value",
     "objs",
     "obs",
     "op",
@@ -438,6 +441,7 @@ globalVariables(
     "se", 
     "series",
     "Slope",
+    "stat",
     "statistic", 
     "std.dev",
     "std.error", 

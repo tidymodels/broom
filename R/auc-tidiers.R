@@ -26,7 +26,9 @@
 #' library(tidyr)
 #'
 #' rocs <- churn %>%
-#'   gather(algorithm, value, -labels) %>%
+#'   pivot_longer(contains("predictions"), 
+#'                names_to = "algorithm", 
+#'                values_to = "value") %>%
 #'   nest(-algorithm) %>% 
 #'   mutate(tidy_roc = purrr::map(data, ~tidy(roc(.x$value, .x$labels)))) %>% 
 #'   unnest(tidy_roc)

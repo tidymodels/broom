@@ -113,6 +113,5 @@ A \code{\link[tibble:tibble]{tibble::tibble()}} with exactly one row and columns
   \item{logLik}{The log-likelihood of the model. [stats::logLik()] may be a useful reference.}
   \item{nevent}{number of events}
   \item{nobs}{Number of observations used.}
-  \item{r.squared}{R squared statistic, or the percent of variation explained by the model. Also known as the coefficient of determination.}
-
+See survival::coxph.object for additional column descriptions.
 }

@@ -6,7 +6,7 @@
 #' 
 #' @evalRd return_tidy("index", "series", "value")
 #' 
-#' @details `series` column is only present for multivairate `ts` objects.
+#' @details `series` column is only present for multivariate `ts` objects.
 #' 
 #' @examples
 #'
@@ -31,7 +31,10 @@ tidy.ts <- function(x, ...) {
   if (is.matrix(x)) {
     res <- as_tibble(as.data.frame(x))
     res <- tibble::add_column(res, index = index, .before = 1)
-    tidyr::gather(res, series, value, -index)
+    res %>%
+      pivot_longer(cols = c(dplyr::everything(), -index),
+                 names_to = "series",
+                 values_to = "value")
   } else {
     tibble(index = index, value = as.vector(x))
   }

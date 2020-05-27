@@ -7,8 +7,8 @@
 #' @evalRd return_tidy("obs", "variable", "value", "estimate")
 #' 
 #' @details Returns a data frame in long format with four columns. Use
-#'   `tidyr::spread(..., variable, value)` on the output to return to a 
-#'   wide format.
+#'   \code{tidyr::pivot_wider(..., names_from = variable, values_from = value)} 
+#'   on the output to return to a wide format.
 #'
 #' @examples
 #'
@@ -25,7 +25,9 @@
 #' library(tidyr)
 #' 
 #' td %>% 
-#'   spread(variable, value) %>% 
+#'   pivot_wider(c(obs, estimate), 
+#'               names_from = variable, 
+#'               values_from = value) %>% 
 #'   ggplot(aes(x1, x2, fill = estimate)) +
 #'   geom_tile() +
 #'   theme_void()
@@ -41,8 +43,11 @@
 #' @aliases kde_tidiers ks_tidiers
 #' @seealso [tidy()], [ks::kde()]
 tidy.kde <- function(x, ...) {
-  
-  estimate <- reshape2::melt(x$estimate)
+
+  estimate <- x$estimate %>%
+    as.data.frame.table(responseName = "value") %>%
+    dplyr::mutate_if(is.factor, as.integer)
+
   dims <- seq_len(length(x$eval.points))
   
   purrr::map2(
@@ -54,6 +59,9 @@ tidy.kde <- function(x, ...) {
     as_tibble() %>% 
     mutate(estimate = estimate$value,
            obs = row_number()) %>% 
-    tidyr::gather(variable, value, -estimate, -obs) %>% 
+    pivot_longer(cols = c(dplyr::everything(), -estimate, -obs),
+                 names_to = "variable",
+                 values_to = "value") %>%
+    arrange(variable, obs) %>%
     select(obs, variable, value, estimate)
 }

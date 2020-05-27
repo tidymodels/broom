@@ -14,9 +14,6 @@
 #'   "nobs"
 #' )
 #'
-#' @details For tidiers for models from the \pkg{robust} package see
-#'   [tidy.lmRob()] and [tidy.glmRob()].
-#'
 #' @examples
 #'
 #' library(MASS)
@@ -54,9 +51,6 @@ confint.rlm <- confint.default
 #' @template param_confint
 #' @template param_unused_dots
 #' 
-#' @details For tidiers for models from the \pkg{robust} package see
-#'   [tidy.lmRob()] and [tidy.glmRob()].
-#' 
 #' @family rlm tidiers
 #' @seealso [MASS::rlm()]
 #' @export
@@ -85,9 +79,6 @@ tidy.rlm <- function(x, conf.int = FALSE, conf.level = .95, ...) {
 #'
 #' @evalRd return_augment(".se.fit", ".hat", ".sigma")
 #' @inherit glance.rlm examples
-#' 
-#' @details For tidiers for models from the \pkg{robust} package see
-#'   [tidy.lmRob()] and [tidy.glmRob()].
 #' 
 #' @family rlm tidiers
 #' @seealso [MASS::rlm()]

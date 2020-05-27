@@ -25,12 +25,12 @@ may be silently ignored!}
 Tidy summarizes information about the components of a model.
 A model component might be a single term in a regression, a single
 hypothesis, a cluster, or a class. Exactly what tidy considers to be a
-model component varies cross models but is usually self-evident.
+model component varies across models but is usually self-evident.
 If a model has several distinct types of components, you will need to
 specify which components to return.
 }
 \details{
-Returns a data frame with one observation for each estimated
+Returns a data frame with one observation for each estimated marginal
 mean, and one column for each combination of factors. When the input is a
 contrast, each row will contain one estimated contrast.
 
@@ -58,7 +58,7 @@ tidy(contrast(marginal, method = "pairwise"))
 
 # plot confidence intervals
 library(ggplot2)
-ggplot(tidy(marginal), aes(day, estimate)) +
+ggplot(tidy(marginal, conf.int = TRUE), aes(day, estimate)) +
   geom_point() +
   geom_errorbar(aes(ymin = conf.low, ymax = conf.high))
 
@@ -69,7 +69,7 @@ by_price <- emmeans(oranges_lm1, "day", by = "price2",
 by_price
 tidy(by_price)
 
-ggplot(tidy(by_price), aes(price2, estimate, color = day)) +
+ggplot(tidy(by_price, conf.int = TRUE), aes(price2, estimate, color = day)) +
   geom_line() +
   geom_errorbar(aes(ymin = conf.low, ymax = conf.high))
   
@@ -87,17 +87,3 @@ Other emmeans tidiers:
 \code{\link{tidy.summary_emm}()}
 }
 \concept{emmeans tidiers}
-\value{
-A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
-  \item{conf.high}{Upper bound on the confidence interval for the estimate.}
-  \item{conf.low}{Lower bound on the confidence interval for the estimate.}
-  \item{contrast}{Levels being compared.}
-  \item{df}{Degrees of freedom used by this term in the model.}
-  \item{p.value}{The two-sided p-value associated with the observed statistic.}
-  \item{std.error}{The standard error of the regression term.}
-  \item{level1}{One level of the factor being contrasted}
-  \item{level2}{The other level of the factor being contrasted}
-  \item{statistic}{T-ratio statistic}
-  \item{estimate}{Estimated least-squares mean.}
-
-}

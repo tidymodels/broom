@@ -25,7 +25,7 @@ the \code{data} argument.}
 Tidy summarizes information about the components of a model.
 A model component might be a single term in a regression, a single
 hypothesis, a cluster, or a class. Exactly what tidy considers to be a
-model component varies cross models but is usually self-evident.
+model component varies across models but is usually self-evident.
 If a model has several distinct types of components, you will need to
 specify which components to return.
 }
@@ -49,7 +49,9 @@ library(dplyr)
 library(tidyr)
 
 rocs <- churn \%>\%
-  gather(algorithm, value, -labels) \%>\%
+  pivot_longer(contains("predictions"), 
+               names_to = "algorithm", 
+               values_to = "value") \%>\%
   nest(-algorithm) \%>\% 
   mutate(tidy_roc = purrr::map(data, ~tidy(roc(.x$value, .x$labels)))) \%>\% 
   unnest(tidy_roc)

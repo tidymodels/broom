@@ -21,8 +21,8 @@ Defaults to 0.95, which corresponds to a 95 percent confidence interval.}
 \item{fe}{Logical indicating whether or not to include estimates of
 fixed effects. Defaults to \code{FALSE}.}
 
-\item{robust}{Logical indicating robust or clustered SEs should be used.
-See lfe::summary.felm for details. Defaults to \code{FALSE}.}
+\item{robust}{Logical indicating robust or clustered standard errors should
+be used. See lfe::summary.felm for details. Defaults to \code{FALSE}.}
 
 \item{...}{Additional arguments. Not used. Needed to match generic
 signature only. \strong{Cautionary note:} Misspelled arguments will be
@@ -38,7 +38,7 @@ the \code{data} argument.}
 Tidy summarizes information about the components of a model.
 A model component might be a single term in a regression, a single
 hypothesis, a cluster, or a class. Exactly what tidy considers to be a
-model component varies cross models but is usually self-evident.
+model component varies across models but is usually self-evident.
 If a model has several distinct types of components, you will need to
 specify which components to return.
 }

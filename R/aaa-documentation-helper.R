@@ -1,8 +1,6 @@
 
 # TODO:
 #  - catch errors and throw a warning visible to the user
-#  - check that all arguments result in some documentation being produced
-#    - i.e. "cooooooksd" should error informatively
 #  - warn when custom arg is taking precedence over something well-defined
 
 # starter boiler plate like: returns a one-row data.frame with the columns
@@ -74,7 +72,25 @@ return_evalrd <- function(..., .method, .pre = NULL, .post = NULL) {
   items <- with(glos, purrr::map2_chr(column, description, row_to_item))
   items <- paste(items, collapse = "\n")
   
-  paste("\\value{", .pre, items, .post, "}", sep = "\n", collapse = "\n")
+  result <- paste("\\value{", .pre, items, .post, "}", 
+                  sep = "\n", collapse = "\n")
+  
+  # check that all arguments resulted in some form of documentation
+  standard_cols <- if (is.null(names(cols))) {
+    unlist(cols)
+  } else {
+    unlist(cols[names(cols) == ""])
+  }
+  cols_exps <- paste0("\\item\\{", standard_cols)
+  written <- purrr::map_lgl(cols_exps, stringr::str_detect, string = result)
+  missing_cols <- standard_cols[!written]
+  if (length(missing_cols) != 0) {
+    cols_message <- glue('The return_{.method} input "{missing_cols}" did not ',
+                         "result in any documentation being written. \n")
+    message(cols_message)
+  }
+  
+  result
 }
 
 return_glance <- function(..., .pre = NULL, .post = NULL) {

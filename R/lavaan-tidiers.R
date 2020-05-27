@@ -63,7 +63,7 @@ tidy.lavaan <- function(x, conf.int = FALSE, conf.level = 0.95, ...) {
       conf.low = ci.lower,
       conf.high = ci.upper
     ) %>%
-    select(term, op, everything(), -rowname, -lhs, -rhs) %>%
+    select(term, op, dplyr::everything(), -rowname, -lhs, -rhs) %>%
     as_tibble()
 }
 
@@ -128,17 +128,18 @@ glance.lavaan <- function(x, ...) {
           "cfi"
         )
     ) %>%
-    as_tibble(rownames = NA) %>%
-    tibble::rownames_to_column(var = "term") %>%
-    spread(., term, value) %>%
+    tibble::enframe(name = "term") %>%
+    pivot_wider(id_cols = term, names_from = term, values_from = value) %>%
+    select(order(colnames(.))) %>%
+    map_df(as.numeric) %>%
     bind_cols(
       tibble(
-        converged = x@Fit@converged,
-        estimator = x@Options$estimator,
-        ngroups = x@Data@ngroups,
-        missing_method = x@Data@missing,
-        nobs = sum(purrr::accumulate(x@Data@nobs, sum)),
-        norig = sum(purrr::accumulate(x@Data@norig, sum)),
+        converged = lavInspect(x, "converged"),
+        estimator = lavInspect(x, "options")$estimator,
+        ngroups = lavInspect(x, "ngroups"),
+        missing_method = lavInspect(x, "options")$missing,
+        nobs = sum(lavInspect(x, "nobs")),
+        norig = sum(lavInspect(x, "norig")),
         nexcluded = norig - nobs
       )
     ) %>%
