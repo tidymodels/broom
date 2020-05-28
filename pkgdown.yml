@@ -1,6 +1,6 @@
 pandoc: 2.7.3
 pkgdown: 1.5.1.9000
-pkgdown_sha: af8262bd26e7029886e0f260470061353ad08d94
+pkgdown_sha: d68907726c41b8f6595dd440e1a573db08d0ae72
 articles:
   adding-tidiers: adding-tidiers.html
   available-methods: available-methods.html
@@ -8,7 +8,7 @@ articles:
   broom: broom.html
   broom_and_dplyr: broom_and_dplyr.html
   kmeans: kmeans.html
-last_built: 2020-05-28T15:10Z
+last_built: 2020-05-28T19:31Z
 urls:
   reference: https://broom.tidymodels.org/reference
   article: https://broom.tidymodels.org/articles
