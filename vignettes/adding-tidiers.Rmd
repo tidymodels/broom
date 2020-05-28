@@ -62,7 +62,6 @@ You should also be aware of the following helper functions:
 
 - `finish_glance()`
 - `augment_columns()`
-- `fix_data_frame()`
 - `validate_augment_input()`
 
 # Documenting new tidiers

@@ -29,7 +29,8 @@
 #' @family nls tidiers
 tidy.nls <- function(x, conf.int = FALSE, conf.level = .95, ...) {
   nn <- c("estimate", "std.error", "statistic", "p.value")
-  ret <- fix_data_frame(stats::coef(summary(x)), nn)
+  ret <- as_broom_tibble(stats::coef(summary(x))) %>%
+    setNames(c("term", nn))
 
   if (conf.int) {
     # avoid "Waiting for profiling to be done..." message

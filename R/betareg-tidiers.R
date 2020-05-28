@@ -36,12 +36,14 @@
 #' @family betareg tidiers
 #' @aliases betareg_tidiers
 tidy.betareg <- function(x, conf.int = FALSE, conf.level = .95, ...) {
+  
   ret <- purrr::map_df(
     coef(summary(x)),
-    fix_data_frame,
-    newnames = c("estimate", "std.error", "statistic", "p.value"),
-    .id = "component"
-  )
+    function(x_) {
+      as_broom_tibble(as.matrix(x_)) %>%
+        setNames(c("term", "estimate", "std.error", "statistic", "p.value"))
+      },
+    .id = "component")
 
   if (conf.int) {
     conf <- unrowname(confint(x, level = conf.level))

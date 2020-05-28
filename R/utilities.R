@@ -22,13 +22,11 @@ exponentiate <- function(data) {
   data
 }
 
-#' Coerce a data frame to a tibble, preserving rownames
+#' Coerce a data frame to a tibble
 #'
 #' A thin wrapper around [tibble::as_tibble()], except checks for
 #' rownames and adds them to a new column `.rownames` if they are
 #' interesting (i.e. more than `1, 2, 3, ...`).
-#'
-#' Replacement for `fix_data_frame()`.
 #'
 #' @param data A [data.frame()] or [tibble::tibble()].
 #'
@@ -37,7 +35,10 @@ exponentiate <- function(data) {
 #'
 as_broom_tibble <- function(data) {
 
-  # TODO: error when there aren't column names?
+  if (inherits(data, "matrix") & is.null(colnames(data))) {
+    stop("The supplied `data`/`newdata` argument was an unnamed matrix. ",
+         "Please supply a matrix or dataframe with column names.")
+  }
 
   tryCatch(
     df <- as_tibble(data),
@@ -62,41 +63,6 @@ has_rownames <- function(df) {
     return(FALSE)
   }
   any(rownames(df) != as.character(1:nrow(df)))
-}
-
-
-#' Ensure an object is a data frame, with rownames moved into a column
-#'
-#' @param x a data.frame or matrix
-#' @param newnames new column names, not including the rownames
-#' @param newcol the name of the new rownames column
-#'
-#' @return a data.frame, with rownames moved into a column and new column
-#' names assigned
-fix_data_frame <- function(x, newnames = NULL, newcol = "term") {
-  if (!is.null(newnames) && length(newnames) != ncol(x)) {
-    stop("newnames must be NULL or have length equal to number of columns")
-  }
-
-  if (all(rownames(x) == seq_len(nrow(x)))) {
-    # don't need to move rownames into a new column
-    ret <- data.frame(x, stringsAsFactors = FALSE)
-    if (!is.null(newnames)) {
-      colnames(ret) <- newnames
-    }
-  }
-  else {
-    ret <- data.frame(
-      ...new.col... = rownames(x),
-      unrowname(x),
-      stringsAsFactors = FALSE
-    )
-    colnames(ret)[1] <- newcol
-    if (!is.null(newnames)) {
-      colnames(ret)[-1] <- newnames
-    }
-  }
-  as_tibble(ret)
 }
 
 
@@ -230,11 +196,11 @@ augment_columns <- function(x, data, newdata = NULL, type, type.predict = type,
 
   if (is.null(na_action) || nrow(original) == nrow(ret)) {
     # no NAs were left out; we can simply recombine
-    original <- fix_data_frame(original, newcol = ".rownames")
+    original <- as_broom_tibble(original)
     return(as_tibble(cbind(original, ret)))
   } else if (class(na_action) == "omit") {
     # if the option is "omit", drop those rows from the data
-    original <- fix_data_frame(original, newcol = ".rownames")
+    original <- as_broom_tibble(original)
     original <- original[-na_action, ]
     return(as_tibble(cbind(original, ret)))
   }

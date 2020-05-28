@@ -75,9 +75,7 @@ tidy.mediate <- function(x, conf.int = FALSE, conf.level = .95, ...) {
 
     co <- cbind(co, t(ci))
   }
-
-  ret <- fix_data_frame(co, nn[1:ncol(co)])
-
-
-  as_tibble(ret)
+  
+  as_broom_tibble(co) %>%
+    setNames(nn[1:ncol(co)])
 }

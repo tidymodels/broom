@@ -103,10 +103,8 @@ tidy.prcomp <- function(x, matrix = "u", ...) {
   ncomp <- NCOL(x$rotation)
   if (matrix %in% c("pcs", "d", "eigenvalues")) {
     nn <- c("std.dev", "percent", "cumulative")
-    ret <- fix_data_frame(t(summary(x)$importance),
-      newnames = nn,
-      newcol = "PC"
-    )
+    ret <- as_broom_tibble(t(summary(x)$importance)) %>%
+      setNames(c("PC", nn))
   } else if (matrix %in% c("rotation", "variables", "v", "loadings")) {
     labels <- if (is.null(rownames(x$rotation))) {
       1:nrow(x$rotation)

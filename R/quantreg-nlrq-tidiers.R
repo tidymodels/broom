@@ -13,7 +13,8 @@
 #' @family quantreg tidiers
 tidy.nlrq <- function(x, conf.int = FALSE, conf.level = 0.95, ...) {
   nn <- c("estimate", "std.error", "statistic", "p.value")
-  ret <- fix_data_frame(coef(summary(x)), nn)
+  ret <- as_broom_tibble(coef(summary(x))) %>%
+    setNames(c("term", nn))
 
   if (conf.int) {
     x_summary <- summary(x)

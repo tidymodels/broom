@@ -83,9 +83,11 @@ tidy.coxph <- function(x, exponentiate = FALSE, conf.int = FALSE,
   }
 
   if (is.null(x$frail)) {
-    ret <- fix_data_frame(co[, -2, drop = FALSE], nn)
+    ret <- as_broom_tibble(co[, -2, drop = FALSE]) %>%
+      setNames(c("term", nn))
   } else {
-    ret <- fix_data_frame(co[, -c(3, 5), drop = FALSE], nn)
+    ret <- as_broom_tibble(co[, -c(3, 5), drop = FALSE]) %>%
+      setNames(c("term", nn))
   }
 
   if (exponentiate) {

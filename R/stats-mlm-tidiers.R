@@ -31,13 +31,14 @@ tidy.mlm <- function(x,
 
   # adding other details from summary object
   s <- summary(x)
-  # ret <- tidy.summary.mlm(s)
 
   co <- stats::coef(s)
   nn <- c("estimate", "std.error", "statistic", "p.value")
 
   # multiple response variables
-  ret <- purrr::map_df(co, fix_data_frame, nn[1:ncol(co[[1]])], .id = "response")
+  ret <- purrr::map_df(co, as_broom_tibble, .id = "response") %>%
+    setNames(c("response", "term", nn[1:ncol(co[[1]])]))
+  
   ret$response <- stringr::str_replace(ret$response, "Response ", "")
 
   ret <- as_tibble(ret)

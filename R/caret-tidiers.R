@@ -125,5 +125,5 @@ tidy.confusionMatrix <- function(x, by_class = TRUE, ...) {
     )
   }
 
-  fix_data_frame(df)
+  df
 }

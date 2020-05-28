@@ -53,12 +53,14 @@ tidy.felm <- function(x, conf.int = FALSE, conf.level = .95, fe = FALSE, robust 
   if (has_multi_response) {
     ret <- map_df(x$lhs, function(y) {
       stats::coef(summary(x, lhs = y, robust = robust)) %>%
-        fix_data_frame(nn) %>%
+        as_broom_tibble() %>%
+        setNames(c("term", nn)) %>%
         mutate(response = y)
     }) %>%
       select(response, dplyr::everything())
   } else {
-    ret <- fix_data_frame(stats::coef(summary(x, robust = robust)), nn)
+    ret <- as_broom_tibble(stats::coef(summary(x, robust = robust))) %>%
+      setNames(c("term", nn))
   }
 
 
@@ -104,7 +106,6 @@ tidy.felm <- function(x, conf.int = FALSE, conf.level = .95, fe = FALSE, robust 
     ret_fe <- ret_fe_prep %>%
       rename(estimate = effect, std.error = se) %>%
       select(contains("response"), dplyr::everything()) %>%
-      # fix_data_frame(nn) %>%
       mutate(statistic = estimate / std.error) %>%
       mutate(p.value = 2 * (1 - stats::pt(statistic, df = N)))
 

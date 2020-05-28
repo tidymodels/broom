@@ -31,5 +31,6 @@ tidy.map <- function(x, ...) {
   names <- do.call("rbind", lapply(strsplit(x$names, "[:,]"), "[", 1:2))
   df$region <- names[df$group, 1]
   df$subregion <- names[df$group, 2]
-  fix_data_frame(df[stats::complete.cases(df$lat, df$long), ])
+  as_broom_tibble(df[stats::complete.cases(df$lat, df$long), ]) %>%
+    dplyr::rename(term = .rownames)
 }

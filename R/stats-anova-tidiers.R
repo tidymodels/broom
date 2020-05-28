@@ -54,12 +54,15 @@ tidy.anova <- function(x, ...) {
     "LR Chisq" = "statistic",
     "edf" = "edf",
     "Ref.df" = "ref.df",
-    "loglik" = "logLik"
+    "loglik" = "logLik",
+    ".rownames" = "term"
   )
 
   names(renamers) <- make.names(names(renamers))
 
-  ret <- fix_data_frame(x)
+  ret <- as_broom_tibble(x)
+  colnames(ret) <- make.names(names(ret))
+
   unknown_cols <- setdiff(colnames(ret), c("term", names(renamers)))
   if (length(unknown_cols) > 0) {
     warning(
@@ -230,7 +233,8 @@ tidy.manova <- function(x, test = "Pillai", ...) {
   test.name <- c("pillai", "wilks", "hl", "roy")[test.pos]
 
   nn <- c("df", test.name, "statistic", "num.df", "den.df", "p.value")
-  fix_data_frame(summary(x, test = test, ...)$stats, nn)
+  as_broom_tibble(summary(x, test = test, ...)$stats) %>%
+    setNames(c("term", nn))
 }
 
 
@@ -280,7 +284,9 @@ tidy.summary.manova <- function(x, ...) {
   test.name <- manova_tests[[intersect(colnames(x$stats), names(manova_tests))[[1]]]]
 
   nn <- c("df", test.name, "statistic", "num.df", "den.df", "p.value")
-  fix_data_frame(x$stats, nn)
+  as_broom_tibble(x$stats) %>%
+    setNames(c("term", nn))
+  
 }
 
 #' @templateVar class TukeyHSD
@@ -317,7 +323,8 @@ tidy.TukeyHSD <- function(x, ...) {
       null.value <- rep(0, nrow(e))
       e <- cbind(null.value, e)
       nn <- c("null.value", "estimate", "conf.low", "conf.high", "adj.p.value")
-      fix_data_frame(e, nn, "contrast")
+      as_broom_tibble(e) %>%
+        setNames(c("contrast", nn))
     },
     .id = "term"
   )

@@ -101,7 +101,11 @@ tidy.boot <- function(x,
   }
 
   # bring in rownames as "term" column, and turn into a data.frame
-  ret <- fix_data_frame(op)
+  ret <- as_broom_tibble(op)
+  
+  if (".rownames" %in% colnames(ret)) {
+    ret <- ret %>% dplyr::rename(term = .rownames)
+  }
 
   if (conf.int) {
     ci.list <- lapply(seq_along(x$t0),

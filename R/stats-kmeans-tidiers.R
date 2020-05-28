@@ -55,7 +55,14 @@ tidy.kmeans <- function(x, col.names = colnames(x$centers), ...) {
 #' @seealso [augment()], [stats::kmeans()]
 #' @family kmeans tidiers
 augment.kmeans <- function(x, data, ...) {
-  fix_data_frame(data, newcol = ".rownames") %>%
+  
+  # kmeans allows for input matrices without column names,
+  # so add them in the same way that fix_data_frame() would have
+  if (inherits(data, "matrix") & is.null(colnames(data))) {
+    colnames(data) <- paste0("X", 1:ncol(data))
+  }
+  
+  as_broom_tibble(data) %>%
     mutate(.cluster = as.factor(!!x$cluster))
 }
 

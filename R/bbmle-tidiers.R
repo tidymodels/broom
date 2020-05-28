@@ -26,7 +26,8 @@
 tidy.mle2 <- function(x, conf.int = FALSE, conf.level = .95, ...) {
   co <- bbmle::coef(bbmle::summary(x))
   nn <- c("estimate", "std.error", "statistic", "p.value")
-  ret <- fix_data_frame(co, nn)
+  ret <- as_broom_tibble(co) %>%
+    setNames(c("term", nn))
 
   if (conf.int) {
 

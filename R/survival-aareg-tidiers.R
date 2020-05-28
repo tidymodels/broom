@@ -43,7 +43,10 @@ tidy.aareg <- function(x, ...) {
       "statistic.z", "p.value"
     )
   }
-  fix_data_frame(summary(x)$table, nn)
+  ret <- summary(x)$table
+  colnames(ret) <- nn
+  as_broom_tibble(ret) %>%
+    dplyr::rename(term = .rownames)
 }
 
 #' @templateVar class aareg
