@@ -212,6 +212,7 @@ the <code>data</code> argument.</p></td>
   <dt>df.residual</dt><dd><p>Residual degrees of freedom.</p></dd>
   <dt>gamma</dt><dd><p>Estimated scale parameter for geepack::geeglm.</p></dd>
   <dt>max.cluster.size</dt><dd><p>Max number of elements in clusters.</p></dd>
+  <dt>n.clusters</dt><dd><p>Number of clusters.</p></dd>
 
 
 
@@ -234,8 +235,8 @@ the <code>data</code> argument.</p></td>
 #&gt;     fd(dose, parmMat[, 1], parmMat[, 2], parmMat[, 3], parmMat[, 
 #&gt;         4], parmMat[, 5])
 #&gt; }
-#&gt; &lt;bytecode: 0x7f9fed85e7b8&gt;
-#&gt; &lt;environment: 0x7f9ff4dd9c18&gt;
+#&gt; &lt;bytecode: 0x7fa41139e468&gt;
+#&gt; &lt;environment: 0x7fa3fb5a7798&gt;
 #&gt; 
 #&gt; $ssfct
 #&gt; function (dframe) 
@@ -254,8 +255,8 @@ the <code>data</code> argument.</p></td>
 #&gt;     befVal &lt;- c(bVal, x[which.max(y)], 1)
 #&gt;     return(c(befVal[1], cdVal, befVal[2:3])[is.na(fixed)])
 #&gt; }
-#&gt; &lt;bytecode: 0x7f9ff4dbeb40&gt;
-#&gt; &lt;environment: 0x7f9ff4dbc9b8&gt;
+#&gt; &lt;bytecode: 0x7fa3fb5a6560&gt;
+#&gt; &lt;environment: 0x7fa3fb5963d8&gt;
 #&gt; 
 #&gt; $names
 #&gt; [1] "b" "c" "d" "e" "f"
@@ -268,8 +269,8 @@ the <code>data</code> argument.</p></td>
 #&gt;     attr(fd(dose, parmMat[, 1], parmMat[, 2], parmMat[, 3], parmMat[, 
 #&gt;         4], parmMat[, 5]), "gradient")[, notFixed]
 #&gt; }
-#&gt; &lt;bytecode: 0x7f9fed85fcf0&gt;
-#&gt; &lt;environment: 0x7f9ff4dd9c18&gt;
+#&gt; &lt;bytecode: 0x7fa41139fd90&gt;
+#&gt; &lt;environment: 0x7fa3fb5a7798&gt;
 #&gt; 
 #&gt; $deriv2
 #&gt; NULL
@@ -295,8 +296,8 @@ the <code>data</code> argument.</p></td>
 #&gt;     attr(dFct(dose, parmMat[, 1], parmMat[, 2], parmMat[, 3], 
 #&gt;         parmMat[, 4], parmMat[, 5]), "gradient")
 #&gt; }
-#&gt; &lt;bytecode: 0x7f9fed859900&gt;
-#&gt; &lt;environment: 0x7f9ff4dd9c18&gt;
+#&gt; &lt;bytecode: 0x7fa411395c08&gt;
+#&gt; &lt;environment: 0x7fa3fb5a7798&gt;
 #&gt; 
 #&gt; $edfct
 #&gt; function (parm, respl, reference, type, ...) 
@@ -331,8 +332,8 @@ the <code>data</code> argument.</p></td>
 #&gt;         parmVec[5]), "gradient")
 #&gt;     return(list(EDp, EDder[notFixed]))
 #&gt; }
-#&gt; &lt;bytecode: 0x7f9fed84deb0&gt;
-#&gt; &lt;environment: 0x7f9ff4dd9c18&gt;
+#&gt; &lt;bytecode: 0x7fa41138d380&gt;
+#&gt; &lt;environment: 0x7fa3fb5a7798&gt;
 #&gt; 
 #&gt; $name
 #&gt; [1] "family"
@@ -349,8 +350,8 @@ the <code>data</code> argument.</p></td>
 #&gt;     parmVec[indexVec] &lt;- parm
 #&gt;     parmVec[parmNo]
 #&gt; }
-#&gt; &lt;bytecode: 0x7f9fea729da0&gt;
-#&gt; &lt;environment: 0x7f9ff4dbdef0&gt;
+#&gt; &lt;bytecode: 0x7fa4111fc900&gt;
+#&gt; &lt;environment: 0x7fa3fb593920&gt;
 #&gt; 
 #&gt; $upperAs
 #&gt; function (parm) 
@@ -358,8 +359,8 @@ the <code>data</code> argument.</p></td>
 #&gt;     parmVec[indexVec] &lt;- parm
 #&gt;     parmVec[parmNo]
 #&gt; }
-#&gt; &lt;bytecode: 0x7f9fea729da0&gt;
-#&gt; &lt;environment: 0x7f9fdb056a48&gt;
+#&gt; &lt;bytecode: 0x7fa4111fc900&gt;
+#&gt; &lt;environment: 0x7fa3fb593b88&gt;
 #&gt; 
 #&gt; $monoton
 #&gt; [1] NA
