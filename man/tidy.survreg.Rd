@@ -56,7 +56,6 @@ ggplot(td, aes(estimate, term)) +
   geom_point() +
   geom_errorbarh(aes(xmin = conf.low, xmax = conf.high), height = 0) +
   geom_vline(xintercept = 0)
-
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[survival:survreg]{survival::survreg()}}

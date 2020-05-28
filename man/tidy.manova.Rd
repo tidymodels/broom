@@ -41,7 +41,6 @@ Depending on which test statistic is specified only one of \code{pillai},
 npk2 <- within(npk, foo <- rnorm(24))
 m <- manova(cbind(yield, foo) ~ block + N * P * K, npk2)
 tidy(m)
-
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[stats:summary.manova]{stats::summary.manova()}}

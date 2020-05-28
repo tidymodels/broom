@@ -38,17 +38,14 @@ For examples, see the kmeans vignette.
 library(cluster)
 library(dplyr)
 
-x <- iris \%>\% 
+x <- iris \%>\%
   select(-Species)
-  
+
 fit <- pam(x, k = 3)
 
 tidy(fit)
 glance(fit)
 augment(fit, x)
-
-
-
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[stats:kmeans]{stats::kmeans()}}

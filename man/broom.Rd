@@ -68,6 +68,7 @@ Other contributors:
   \item Simon Jackson \email{drsimonjackson@gmail.com} [contributor]
   \item Ben Whalley \email{ben.whalley@plymouth.ac.uk} [contributor]
   \item Karissa Whiting \email{karissa.whiting@gmail.com} [contributor]
+  \item Yves Rosseel \email{yrosseel@gmail.com} [contributor]
   \item Michael Kuehn \email{mkuehn10@gmail.com} [contributor]
   \item Jorge Cimentada \email{cimentadaj@gmail.com} [contributor]
   \item Erle Holgersen \email{erle.holgersen@gmail.com} [contributor]

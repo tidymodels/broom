@@ -37,11 +37,13 @@ The tibble has a column for each of the measures of association or tests contain
 }
 \examples{
 library(epiR)
-dat <- matrix(c(13,2163,5,3349), nrow = 2, byrow = TRUE)
+dat <- matrix(c(13, 2163, 5, 3349), nrow = 2, byrow = TRUE)
 rownames(dat) <- c("DF+", "DF-")
 colnames(dat) <- c("FUS+", "FUS-")
-fit <- epi.2by2(dat = as.table(dat), method = "cross.sectional", 
-                conf.level = 0.95, units = 100, outcome = "as.columns")
+fit <- epi.2by2(
+  dat = as.table(dat), method = "cross.sectional",
+  conf.level = 0.95, units = 100, outcome = "as.columns"
+)
 
 tidy(fit, parameters = "moa")
 }

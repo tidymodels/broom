@@ -38,16 +38,17 @@ the measure will be reported as \code{NA}.
 
 library(geepack)
 data(state)
-  
+
 ds <- data.frame(state.region, state.x77)
 
-geefit <- geeglm(Income ~ Frost + Murder, id = state.region,
-                 data = ds, family = gaussian,
-                 corstr = "exchangeable")
+geefit <- geeglm(Income ~ Frost + Murder,
+  id = state.region,
+  data = ds, family = gaussian,
+  corstr = "exchangeable"
+)
 
 tidy(geefit)
 tidy(geefit, conf.int = TRUE)
-
 }
 \seealso{
 \code{\link[=glance]{glance()}}, \code{\link[geepack:geeglm]{geepack::geeglm()}}

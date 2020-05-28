@@ -37,7 +37,7 @@ specify which components to return.
 }
 \examples{
 
-n <- nls(mpg ~ k * e ^ wt, data = mtcars, start = list(k = 1, e = 2))
+n <- nls(mpg ~ k * e^wt, data = mtcars, start = list(k = 1, e = 2))
 
 tidy(n)
 augment(n)
@@ -51,7 +51,6 @@ ggplot(augment(n), aes(wt, mpg)) +
 newdata <- head(mtcars)
 newdata$wt <- newdata$wt + 1
 augment(n, newdata = newdata)
-
 }
 \seealso{
 \link{tidy}, \code{\link[stats:nls]{stats::nls()}}, \code{\link[stats:summary.nls]{stats::summary.nls()}}

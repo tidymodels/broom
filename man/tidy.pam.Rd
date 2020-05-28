@@ -48,10 +48,10 @@ tidy(p)
 glance(p)
 augment(p, x)
 
-augment(p, x) \%>\% 
+augment(p, x) \%>\%
   ggplot(aes(Sepal.Length, Sepal.Width)) +
-    geom_point(aes(color = .cluster)) +
-    geom_text(aes(label = cluster), data = tidy(p), size = 10)
+  geom_point(aes(color = .cluster)) +
+  geom_text(aes(label = cluster), data = tidy(p), size = 10)
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[cluster:pam]{cluster::pam()}}

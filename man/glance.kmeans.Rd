@@ -39,17 +39,14 @@ the measure will be reported as \code{NA}.
 library(cluster)
 library(dplyr)
 
-x <- iris \%>\% 
+x <- iris \%>\%
   select(-Species)
-  
+
 fit <- pam(x, k = 3)
 
 tidy(fit)
 glance(fit)
 augment(fit, x)
-
-
-
 }
 \seealso{
 \code{\link[=glance]{glance()}}, \code{\link[stats:kmeans]{stats::kmeans()}}

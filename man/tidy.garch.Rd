@@ -33,13 +33,12 @@ specify which components to return.
 library(tseries)
 
 data(EuStockMarkets)
-dax <- diff(log(EuStockMarkets))[,"DAX"]
+dax <- diff(log(EuStockMarkets))[, "DAX"]
 dax.garch <- garch(dax)
 dax.garch
 
 tidy(dax.garch)
 glance(dax.garch)
-
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[tseries:garch]{tseries::garch()}}

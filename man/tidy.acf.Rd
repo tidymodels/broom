@@ -33,7 +33,6 @@ specify which components to return.
 tidy(acf(lh, plot = FALSE))
 tidy(ccf(mdeaths, fdeaths, plot = FALSE))
 tidy(pacf(lh, plot = FALSE))
-
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[stats:acf]{stats::acf()}}, \code{\link[stats:pacf]{stats::pacf()}}, \code{\link[stats:ccf]{stats::ccf()}}

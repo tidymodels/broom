@@ -33,7 +33,7 @@ of those methods.
 
 tt <- t.test(rnorm(10))
 tidy(tt)
-glance(tt)  # same output for all htests
+glance(tt) # same output for all htests
 
 tt <- t.test(mpg ~ am, data = mtcars)
 tidy(tt)
@@ -47,7 +47,6 @@ tidy(ct)
 chit <- chisq.test(xtabs(Freq ~ Sex + Class, data = as.data.frame(Titanic)))
 tidy(chit)
 augment(chit)
-
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[stats:cor.test]{stats::cor.test()}}, \code{\link[stats:t.test]{stats::t.test()}},

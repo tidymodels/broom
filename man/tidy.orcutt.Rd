@@ -40,7 +40,6 @@ co
 
 tidy(co)
 glance(co)
-
 }
 \seealso{
 \code{\link[orcutt:cochrane.orcutt]{orcutt::cochrane.orcutt()}}

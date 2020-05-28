@@ -77,7 +77,6 @@ df <-
 meta_analysis <- rma(yi, vi, data = df, method = "EB")
 
 augment(meta_analysis)
-
 }
 \value{
 A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:

@@ -75,7 +75,6 @@ tidy(btfit)
 
 # Show coefficients as odds ratios with a 99\% CI
 tidy(btfit, exponentiate = TRUE, conf.level = 0.99)
-
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[btergm:btergm]{btergm::btergm()}}

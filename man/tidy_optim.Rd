@@ -41,7 +41,6 @@ o <- optim(c(1, 1, 1), f)
 
 tidy(o)
 glance(o)
-
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[stats:optim]{stats::optim()}}

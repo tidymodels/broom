@@ -38,7 +38,7 @@ the measure will be reported as \code{NA}.
 
 library(ordinal)
 
-fit <- clmm(rating ~ temp + contact + (1|judge), data = wine)
+fit <- clmm(rating ~ temp + contact + (1 | judge), data = wine)
 
 tidy(fit)
 tidy(fit, conf.int = TRUE, conf.level = 0.9)
@@ -46,10 +46,9 @@ tidy(fit, conf.int = TRUE, exponentiate = TRUE)
 
 glance(fit)
 
-fit2 <- clmm(rating ~ temp + (1|judge), nominal = ~ contact, data = wine)
+fit2 <- clmm(rating ~ temp + (1 | judge), nominal = ~contact, data = wine)
 tidy(fit2)
 glance(fit2)
-
 }
 \seealso{
 \link{tidy}, \code{\link[ordinal:clmm]{ordinal::clmm()}}

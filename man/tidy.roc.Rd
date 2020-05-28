@@ -33,7 +33,7 @@ specify which components to return.
 
 library(AUC)
 data(churn)
-r <- roc(churn$predictions,churn$labels)
+r <- roc(churn$predictions, churn$labels)
 
 td <- tidy(r)
 td
@@ -49,16 +49,16 @@ library(dplyr)
 library(tidyr)
 
 rocs <- churn \%>\%
-  pivot_longer(contains("predictions"), 
-               names_to = "algorithm", 
-               values_to = "value") \%>\%
-  nest(-algorithm) \%>\% 
-  mutate(tidy_roc = purrr::map(data, ~tidy(roc(.x$value, .x$labels)))) \%>\% 
+  pivot_longer(contains("predictions"),
+    names_to = "algorithm",
+    values_to = "value"
+  ) \%>\%
+  nest(-algorithm) \%>\%
+  mutate(tidy_roc = purrr::map(data, ~ tidy(roc(.x$value, .x$labels)))) \%>\%
   unnest(tidy_roc)
 
 ggplot(rocs, aes(fpr, tpr, color = algorithm)) +
   geom_line()
-
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[AUC:roc]{AUC::roc()}}

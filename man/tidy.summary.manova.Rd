@@ -41,7 +41,6 @@ m <- summary(
 )
 
 tidy(m)
-
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[stats:summary.manova]{stats::summary.manova()}}

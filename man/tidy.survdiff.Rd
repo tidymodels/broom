@@ -39,7 +39,6 @@ s <- survdiff(
 
 tidy(s)
 glance(s)
-
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[survival:survdiff]{survival::survdiff()}}

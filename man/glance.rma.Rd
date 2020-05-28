@@ -53,7 +53,6 @@ df <-
 meta_analysis <- rma(yi, vi, data = df, method = "EB")
 
 glance(meta_analysis)
-
 }
 \value{
 A \code{\link[tibble:tibble]{tibble::tibble()}} with exactly one row and columns:

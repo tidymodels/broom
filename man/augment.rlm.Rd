@@ -84,7 +84,6 @@ r <- rlm(stack.loss ~ ., stackloss)
 tidy(r)
 augment(r)
 glance(r)
-
 }
 \seealso{
 \code{\link[MASS:rlm]{MASS::rlm()}}

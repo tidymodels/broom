@@ -41,7 +41,8 @@ library(plm)
 
 data("Produc", package = "plm")
 zz <- plm(log(gsp) ~ log(pcap) + log(pc) + log(emp) + unemp,
-          data = Produc, index = c("state","year"))
+  data = Produc, index = c("state", "year")
+)
 
 summary(zz)
 
@@ -51,7 +52,6 @@ tidy(zz, conf.int = TRUE, conf.level = 0.9)
 
 augment(zz)
 glance(zz)
-
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[plm:plm]{plm::plm()}}, \code{\link[=tidy.lm]{tidy.lm()}}

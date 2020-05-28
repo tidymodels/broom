@@ -51,9 +51,9 @@ r <- Finance[1:300, 1:10]
 rm <- Finance[1:300, "rm"]
 rf <- Finance[1:300, "rf"]
 
-z <- as.matrix(r-rf)
+z <- as.matrix(r - rf)
 t <- nrow(z)
-zm <- rm-rf
+zm <- rm - rf
 h <- matrix(zm, t, 1)
 res <- gmm(z ~ zm, x = h)
 
@@ -75,9 +75,10 @@ tidy(res, conf.int = TRUE) \%>\%
 
 # from a function instead of a matrix
 g <- function(theta, x) {
-	e <- x[,2:11] - theta[1] - (x[,1] - theta[1]) \%*\% matrix(theta[2:11], 1, 10)
-	gmat <- cbind(e, e*c(x[,1]))
-	return(gmat) }
+  e <- x[, 2:11] - theta[1] - (x[, 1] - theta[1]) \%*\% matrix(theta[2:11], 1, 10)
+  gmat <- cbind(e, e * c(x[, 1]))
+  return(gmat)
+}
 
 x <- as.matrix(cbind(rm, r))
 res_black <- gmm(g, x = x, t0 = rep(0, 11))
@@ -103,7 +104,6 @@ td2 \%>\%
   geom_point() +
   geom_errorbarh(aes(xmin = conf.low, xmax = conf.high)) +
   geom_vline(xintercept = 0, color = "red", lty = 2)
-
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[gmm:gmm]{gmm::gmm()}}

@@ -46,7 +46,6 @@ co
 
 tidy(co)
 glance(co)
-
 }
 \seealso{
 \code{\link[=glance]{glance()}}, \code{\link[orcutt:cochrane.orcutt]{orcutt::cochrane.orcutt()}}

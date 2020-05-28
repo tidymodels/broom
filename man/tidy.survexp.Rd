@@ -39,13 +39,12 @@ sexpfit <- survexp(
     year = accept.dt,
     age = (accept.dt - birth.dt)
   ),
-  method = 'conditional',
+  method = "conditional",
   data = jasa
 )
 
 tidy(sexpfit)
 glance(sexpfit)
-
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[survival:survexp]{survival::survexp()}}

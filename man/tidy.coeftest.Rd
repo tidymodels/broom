@@ -45,7 +45,6 @@ fm <- lm(length ~ age, data = Mandible, subset = (age <= 28))
 
 lmtest::coeftest(fm)
 tidy(coeftest(fm))
-
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[lmtest:coeftest]{lmtest::coeftest()}}

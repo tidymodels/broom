@@ -46,19 +46,19 @@ library(robustbase)
 data(coleman)
 set.seed(0)
 
-m <- robustbase::lmrob(Y ~ ., data=coleman)
+m <- robustbase::lmrob(Y ~ ., data = coleman)
 tidy(m)
 augment(m)
 glance(m)
 
 # From the robustbase::glmrob examples:
 data(carrots)
-Rfit <- glmrob(cbind(success, total-success) ~ logdose + block,
-                family = binomial, data = carrots, method= "Mqle",
-                control= glmrobMqle.control(tcc=1.2))
+Rfit <- glmrob(cbind(success, total - success) ~ logdose + block,
+  family = binomial, data = carrots, method = "Mqle",
+  control = glmrobMqle.control(tcc = 1.2)
+)
 tidy(Rfit)
 augment(Rfit)
-
 }
 \seealso{
 \code{\link[robustbase:lmrob]{robustbase::lmrob()}}

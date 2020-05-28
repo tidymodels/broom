@@ -36,7 +36,6 @@ tidy(thsd)
 # may include comparisons on multiple terms
 fm2 <- aov(mpg ~ as.factor(gear) * as.factor(cyl), data = mtcars)
 tidy(TukeyHSD(fm2))
-
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[stats:TukeyHSD]{stats::TukeyHSD()}}

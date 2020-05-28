@@ -31,12 +31,12 @@ specify which components to return.
 
 spl <- smooth.spline(mtcars$wt, mtcars$mpg, df = 4)
 augment(spl, mtcars)
-augment(spl)  # calls original columns x and y
+augment(spl) # calls original columns x and y
 
 library(ggplot2)
 ggplot(augment(spl, mtcars), aes(wt, mpg)) +
-    geom_point() + geom_line(aes(y = .fitted))
-
+  geom_point() +
+  geom_line(aes(y = .fitted))
 }
 \seealso{
 \code{\link[=augment]{augment()}}, \code{\link[stats:smooth.spline]{stats::smooth.spline()}}

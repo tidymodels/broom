@@ -50,12 +50,10 @@ see \code{\link[=tidy.Gam]{tidy.Gam()}}.
 \examples{
 
 g <- mgcv::gam(mpg ~ s(hp) + am + qsec, data = mtcars)
-  
+
 tidy(g)
 tidy(g, parametric = TRUE)
 glance(g)
-
-
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[mgcv:gam]{mgcv::gam()}}, \code{\link[=tidy.Gam]{tidy.Gam()}}
@@ -71,9 +69,9 @@ A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
   \item{statistic}{The value of a T-statistic to use in a hypothesis that the regression term is non-zero.}
   \item{std.error}{The standard error of the regression term.}
   \item{term}{The name of the regression term.}
-  \item{edf}{The effective degrees of freedom. Only reported when 
+  \item{edf}{The effective degrees of freedom. Only reported when
     `parametric = FALSE`}
-  \item{ref.df}{The reference degrees of freedom. Only reported when 
+  \item{ref.df}{The reference degrees of freedom. Only reported when
     `parametric = FALSE`}
 
 }

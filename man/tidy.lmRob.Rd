@@ -40,7 +40,6 @@ m <- lmRob(mpg ~ wt, data = mtcars)
 tidy(m)
 augment(m)
 glance(m)
-
 }
 \seealso{
 \code{\link[robust:lmRob]{robust::lmRob()}}

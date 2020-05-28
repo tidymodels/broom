@@ -68,7 +68,6 @@ tidy(gest, exponentiate = TRUE, conf.int = TRUE, conf.level = 0.99)
 glance(gest)
 glance(gest, deviance = TRUE)
 glance(gest, mcmc = TRUE)
-
 }
 \references{
 Hunter DR, Handcock MS, Butts CT, Goodreau SM, Morris M (2008b).

@@ -56,7 +56,6 @@ fit <- systemfit(formula = list(Y ~ Z, W ~ X), data = df, method = "SUR")
 tidy(fit)
 
 tidy(fit, conf.int = TRUE)
-
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[systemfit:systemfit]{systemfit::systemfit()}}

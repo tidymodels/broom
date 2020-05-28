@@ -48,10 +48,11 @@ library(ggplot2)
 library(dplyr)
 library(tidyr)
 
-td \%>\% 
-  pivot_wider(c(obs, estimate), 
-              names_from = variable, 
-              values_from = value) \%>\% 
+td \%>\%
+  pivot_wider(c(obs, estimate),
+    names_from = variable,
+    values_from = value
+  ) \%>\%
   ggplot(aes(x1, x2, fill = estimate)) +
   geom_tile() +
   theme_void()
@@ -62,7 +63,6 @@ k3 <- kde(dat3)
 
 td3 <- tidy(k3)
 td3
-
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[ks:kde]{ks::kde()}}

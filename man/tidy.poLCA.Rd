@@ -34,7 +34,7 @@ library(poLCA)
 library(dplyr)
 
 data(values)
-f <- cbind(A, B, C, D)~1
+f <- cbind(A, B, C, D) ~ 1
 M1 <- poLCA(f, values, nclass = 2, verbose = FALSE)
 
 M1
@@ -46,12 +46,14 @@ library(ggplot2)
 
 ggplot(tidy(M1), aes(factor(class), estimate, fill = factor(outcome))) +
   geom_bar(stat = "identity", width = 1) +
-  facet_wrap(~ variable)
+  facet_wrap(~variable)
 ## Three-class model with a single covariate.
 
 data(election)
-f2a <- cbind(MORALG,CARESG,KNOWG,LEADG,DISHONG,INTELG,
-             MORALB,CARESB,KNOWB,LEADB,DISHONB,INTELB)~PARTY
+f2a <- cbind(
+  MORALG, CARESG, KNOWG, LEADG, DISHONG, INTELG,
+  MORALB, CARESB, KNOWB, LEADB, DISHONB, INTELB
+) ~ PARTY
 nes2a <- poLCA(f2a, election, nclass = 3, nrep = 5, verbose = FALSE)
 
 td <- tidy(nes2a)
@@ -61,7 +63,7 @@ td
 
 ggplot(td, aes(outcome, estimate, color = factor(class), group = class)) +
   geom_line() +
-  facet_wrap(~ variable, nrow = 2) +
+  facet_wrap(~variable, nrow = 2) +
   theme(axis.text.x = element_text(angle = 90, hjust = 1))
 
 au <- augment(nes2a)
@@ -73,7 +75,6 @@ count(au, .class)
 au2 <- augment(nes2a, data = election)
 au2
 dim(au2)
-
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[poLCA:poLCA]{poLCA::poLCA()}}

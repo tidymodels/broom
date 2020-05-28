@@ -62,7 +62,6 @@ ggplot(td, aes(p.value)) +
 ggplot(td, aes(estimate, p.value)) +
   geom_point() +
   scale_y_log10()
-
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[Hmisc:rcorr]{Hmisc::rcorr()}}

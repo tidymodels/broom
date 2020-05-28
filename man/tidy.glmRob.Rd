@@ -39,7 +39,6 @@ gm <- glmRob(am ~ wt, data = mtcars, family = "binomial")
 
 tidy(gm)
 glance(gm)
-
 }
 \seealso{
 \code{\link[robust:glmRob]{robust::glmRob()}}

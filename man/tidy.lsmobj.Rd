@@ -63,19 +63,22 @@ ggplot(tidy(marginal, conf.int = TRUE), aes(day, estimate)) +
   geom_errorbar(aes(ymin = conf.low, ymax = conf.high))
 
 # by multiple prices
-by_price <- emmeans(oranges_lm1, "day", by = "price2",
-                    at = list(price1 = 50, price2 = c(40, 60, 80),
-                    day = c("2", "3", "4")) )
+by_price <- emmeans(oranges_lm1, "day",
+  by = "price2",
+  at = list(
+    price1 = 50, price2 = c(40, 60, 80),
+    day = c("2", "3", "4")
+  )
+)
 by_price
 tidy(by_price)
 
 ggplot(tidy(by_price, conf.int = TRUE), aes(price2, estimate, color = day)) +
   geom_line() +
   geom_errorbar(aes(ymin = conf.low, ymax = conf.high))
-  
+
 # joint_tests
 tidy(joint_tests(oranges_lm1))
-
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[emmeans:ref_grid]{emmeans::ref_grid()}}, \code{\link[emmeans:emmeans]{emmeans::emmeans()}},

@@ -43,7 +43,6 @@ iris_dist
 tidy(iris_dist)
 tidy(iris_dist, upper = TRUE)
 tidy(iris_dist, diagonal = TRUE)
-
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[stats:dist]{stats::dist()}}
