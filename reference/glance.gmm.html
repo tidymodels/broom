@@ -229,9 +229,9 @@ the <code>data</code> argument.</p></td>
 <span class='no'>rm</span> <span class='kw'>&lt;-</span> <span class='no'>Finance</span>[<span class='fl'>1</span>:<span class='fl'>300</span>, <span class='st'>"rm"</span>]
 <span class='no'>rf</span> <span class='kw'>&lt;-</span> <span class='no'>Finance</span>[<span class='fl'>1</span>:<span class='fl'>300</span>, <span class='st'>"rf"</span>]
 
-<span class='no'>z</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>as.matrix</a></span>(<span class='no'>r</span>-<span class='no'>rf</span>)
+<span class='no'>z</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>as.matrix</a></span>(<span class='no'>r</span> - <span class='no'>rf</span>)
 <span class='no'>t</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>nrow</a></span>(<span class='no'>z</span>)
-<span class='no'>zm</span> <span class='kw'>&lt;-</span> <span class='no'>rm</span>-<span class='no'>rf</span>
+<span class='no'>zm</span> <span class='kw'>&lt;-</span> <span class='no'>rm</span> - <span class='no'>rf</span>
 <span class='no'>h</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></span>(<span class='no'>zm</span>, <span class='no'>t</span>, <span class='fl'>1</span>)
 <span class='no'>res</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/gmm/man/gmm.html'>gmm</a></span>(<span class='no'>z</span> ~ <span class='no'>zm</span>, <span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>h</span>)
 
@@ -315,9 +315,10 @@ the <code>data</code> argument.</p></td>
   <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_abline.html'>geom_vline</a></span>(<span class='kw'>xintercept</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"red"</span>, <span class='kw'>lty</span> <span class='kw'>=</span> <span class='fl'>2</span>)</div><div class='img'><img src='glance.gmm-1.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'># from a function instead of a matrix</span>
 <span class='no'>g</span> <span class='kw'>&lt;-</span> <span class='kw'>function</span>(<span class='no'>theta</span>, <span class='no'>x</span>) {
-        <span class='no'>e</span> <span class='kw'>&lt;-</span> <span class='no'>x</span>[,<span class='fl'>2</span>:<span class='fl'>11</span>] - <span class='no'>theta</span>[<span class='fl'>1</span>] - (<span class='no'>x</span>[,<span class='fl'>1</span>] - <span class='no'>theta</span>[<span class='fl'>1</span>]) <span class='kw'>%*%</span> <span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></span>(<span class='no'>theta</span>[<span class='fl'>2</span>:<span class='fl'>11</span>], <span class='fl'>1</span>, <span class='fl'>10</span>)
-        <span class='no'>gmat</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/cbind.html'>cbind</a></span>(<span class='no'>e</span>, <span class='no'>e</span>*<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='no'>x</span>[,<span class='fl'>1</span>]))
-        <span class='fu'><a href='https://rdrr.io/r/base/function.html'>return</a></span>(<span class='no'>gmat</span>) }
+  <span class='no'>e</span> <span class='kw'>&lt;-</span> <span class='no'>x</span>[, <span class='fl'>2</span>:<span class='fl'>11</span>] - <span class='no'>theta</span>[<span class='fl'>1</span>] - (<span class='no'>x</span>[, <span class='fl'>1</span>] - <span class='no'>theta</span>[<span class='fl'>1</span>]) <span class='kw'>%*%</span> <span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></span>(<span class='no'>theta</span>[<span class='fl'>2</span>:<span class='fl'>11</span>], <span class='fl'>1</span>, <span class='fl'>10</span>)
+  <span class='no'>gmat</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/cbind.html'>cbind</a></span>(<span class='no'>e</span>, <span class='no'>e</span> * <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='no'>x</span>[, <span class='fl'>1</span>]))
+  <span class='fu'><a href='https://rdrr.io/r/base/function.html'>return</a></span>(<span class='no'>gmat</span>)
+}
 
 <span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>as.matrix</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/cbind.html'>cbind</a></span>(<span class='no'>rm</span>, <span class='no'>r</span>))
 <span class='no'>res_black</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/gmm/man/gmm.html'>gmm</a></span>(<span class='no'>g</span>, <span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>x</span>, <span class='kw'>t0</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='fl'>0</span>, <span class='fl'>11</span>))
@@ -378,8 +379,7 @@ the <code>data</code> argument.</p></td>
   <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span>(<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='no'>estimate</span>, <span class='no'>variable</span>)) +
   <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_point.html'>geom_point</a></span>() +
   <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_errorbarh.html'>geom_errorbarh</a></span>(<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='kw'>xmin</span> <span class='kw'>=</span> <span class='no'>conf.low</span>, <span class='kw'>xmax</span> <span class='kw'>=</span> <span class='no'>conf.high</span>)) +
-  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_abline.html'>geom_vline</a></span>(<span class='kw'>xintercept</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"red"</span>, <span class='kw'>lty</span> <span class='kw'>=</span> <span class='fl'>2</span>)</div><div class='img'><img src='glance.gmm-2.png' alt='' width='700' height='433' /></div><div class='input'>
-</div></span></pre>
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_abline.html'>geom_vline</a></span>(<span class='kw'>xintercept</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"red"</span>, <span class='kw'>lty</span> <span class='kw'>=</span> <span class='fl'>2</span>)</div><div class='img'><img src='glance.gmm-2.png' alt='' width='700' height='433' /></div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

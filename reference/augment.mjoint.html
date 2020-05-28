@@ -282,21 +282,21 @@ for the fixed and random effects of the longitudinal submodel.</p>
 <span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>joineRML</span>)
 <span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>heart.valve</span>)
 <span class='no'>hvd</span> <span class='kw'>&lt;-</span> <span class='no'>heart.valve</span>[!<span class='fu'><a href='https://rdrr.io/r/base/NA.html'>is.na</a></span>(<span class='no'>heart.valve</span>$<span class='no'>log.grad</span>) <span class='kw'>&amp;</span>
-                       !<span class='fu'><a href='https://rdrr.io/r/base/NA.html'>is.na</a></span>(<span class='no'>heart.valve</span>$<span class='no'>log.lvmi</span>) <span class='kw'>&amp;</span>
-                       <span class='no'>heart.valve</span>$<span class='no'>num</span> <span class='kw'>&lt;=</span> <span class='fl'>50</span>, ]
+  !<span class='fu'><a href='https://rdrr.io/r/base/NA.html'>is.na</a></span>(<span class='no'>heart.valve</span>$<span class='no'>log.lvmi</span>) <span class='kw'>&amp;</span>
+  <span class='no'>heart.valve</span>$<span class='no'>num</span> <span class='kw'>&lt;=</span> <span class='fl'>50</span>, ]
 <span class='no'>fit</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/joineRML/man/mjoint.html'>mjoint</a></span>(
-    <span class='kw'>formLongFixed</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(
-        <span class='st'>"grad"</span> <span class='kw'>=</span> <span class='no'>log.grad</span> ~ <span class='no'>time</span> + <span class='no'>sex</span> + <span class='no'>hs</span>,
-        <span class='st'>"lvmi"</span> <span class='kw'>=</span> <span class='no'>log.lvmi</span> ~ <span class='no'>time</span> + <span class='no'>sex</span>
-    ),
-    <span class='kw'>formLongRandom</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(
-        <span class='st'>"grad"</span> <span class='kw'>=</span> ~ <span class='fl'>1</span> <span class='kw'>|</span> <span class='no'>num</span>,
-        <span class='st'>"lvmi"</span> <span class='kw'>=</span> ~ <span class='no'>time</span> <span class='kw'>|</span> <span class='no'>num</span>
-    ),
-    <span class='kw'>formSurv</span> <span class='kw'>=</span> <span class='fu'>Surv</span>(<span class='no'>fuyrs</span>, <span class='no'>status</span>) ~ <span class='no'>age</span>,
-    <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>hvd</span>,
-    <span class='kw'>inits</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='st'>"gamma"</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0.11</span>, <span class='fl'>1.51</span>, <span class='fl'>0.80</span>)),
-    <span class='kw'>timeVar</span> <span class='kw'>=</span> <span class='st'>"time"</span>
+  <span class='kw'>formLongFixed</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(
+    <span class='st'>"grad"</span> <span class='kw'>=</span> <span class='no'>log.grad</span> ~ <span class='no'>time</span> + <span class='no'>sex</span> + <span class='no'>hs</span>,
+    <span class='st'>"lvmi"</span> <span class='kw'>=</span> <span class='no'>log.lvmi</span> ~ <span class='no'>time</span> + <span class='no'>sex</span>
+  ),
+  <span class='kw'>formLongRandom</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(
+    <span class='st'>"grad"</span> <span class='kw'>=</span> ~ <span class='fl'>1</span> <span class='kw'>|</span> <span class='no'>num</span>,
+    <span class='st'>"lvmi"</span> <span class='kw'>=</span> ~ <span class='no'>time</span> <span class='kw'>|</span> <span class='no'>num</span>
+  ),
+  <span class='kw'>formSurv</span> <span class='kw'>=</span> <span class='fu'>Surv</span>(<span class='no'>fuyrs</span>, <span class='no'>status</span>) ~ <span class='no'>age</span>,
+  <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>hvd</span>,
+  <span class='kw'>inits</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='st'>"gamma"</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0.11</span>, <span class='fl'>1.51</span>, <span class='fl'>0.80</span>)),
+  <span class='kw'>timeVar</span> <span class='kw'>=</span> <span class='st'>"time"</span>
 )
 
 <span class='co'># Extract the survival fixed effects</span>

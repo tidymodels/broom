@@ -292,9 +292,13 @@ passed on to <code><a href='https://rdrr.io/pkg/emmeans/man/summary.emmGrid.html
   <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_point.html'>geom_point</a></span>() +
   <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_linerange.html'>geom_errorbar</a></span>(<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='kw'>ymin</span> <span class='kw'>=</span> <span class='no'>conf.low</span>, <span class='kw'>ymax</span> <span class='kw'>=</span> <span class='no'>conf.high</span>))</div><div class='img'><img src='tidy.summary_emm-1.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'># by multiple prices</span>
-<span class='no'>by_price</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/emmeans/man/emmeans.html'>emmeans</a></span>(<span class='no'>oranges_lm1</span>, <span class='st'>"day"</span>, <span class='kw'>by</span> <span class='kw'>=</span> <span class='st'>"price2"</span>,
-                    <span class='kw'>at</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>price1</span> <span class='kw'>=</span> <span class='fl'>50</span>, <span class='kw'>price2</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>40</span>, <span class='fl'>60</span>, <span class='fl'>80</span>),
-                    <span class='kw'>day</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"2"</span>, <span class='st'>"3"</span>, <span class='st'>"4"</span>)) )
+<span class='no'>by_price</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/emmeans/man/emmeans.html'>emmeans</a></span>(<span class='no'>oranges_lm1</span>, <span class='st'>"day"</span>,
+  <span class='kw'>by</span> <span class='kw'>=</span> <span class='st'>"price2"</span>,
+  <span class='kw'>at</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(
+    <span class='kw'>price1</span> <span class='kw'>=</span> <span class='fl'>50</span>, <span class='kw'>price2</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>40</span>, <span class='fl'>60</span>, <span class='fl'>80</span>),
+    <span class='kw'>day</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"2"</span>, <span class='st'>"3"</span>, <span class='st'>"4"</span>)
+  )
+)
 <span class='no'>by_price</span></div><div class='output co'>#&gt; price2 = 40:
 #&gt;  day emmean   SE df lower.CL upper.CL
 #&gt;  2     6.24 1.89 23     2.33     10.1
@@ -334,8 +338,7 @@ passed on to <code><a href='https://rdrr.io/pkg/emmeans/man/summary.emmGrid.html
 #&gt;   term  num.df den.df statistic p.value
 #&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
 #&gt; </span><span style='color: #555555;'>1</span><span> day        5     23      4.88 0.003</span><span style='text-decoration: underline;'>46</span><span>
-#&gt; </span><span style='color: #555555;'>2</span><span> store      5     23      2.52 0.058</span><span style='text-decoration: underline;'>3</span><span> </div><div class='input'>
-</div></span></pre>
+#&gt; </span><span style='color: #555555;'>2</span><span> store      5     23      2.52 0.058</span><span style='text-decoration: underline;'>3</span><span> </div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

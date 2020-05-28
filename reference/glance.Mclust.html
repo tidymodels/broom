@@ -211,7 +211,7 @@ the <code>data</code> argument.</p></td>
   <dt>nobs</dt><dd><p>Number of observations used.</p></dd>
   <dt>model</dt><dd><p>A string denoting the model type with optimal BIC</p></dd>
   <dt>G</dt><dd><p>Number mixture components in optimal model</p></dd>
-  <dt>hypvol</dt><dd><p>If the other model contains a noise component, the 
+  <dt>hypvol</dt><dd><p>If the other model contains a noise component, the
     value of the hypervolume parameter. Otherwise `NA`.</p></dd>
 
 
@@ -224,9 +224,9 @@ the <code>data</code> argument.</p></td>
 
 <span class='no'>centers</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>tibble</span><span class='kw ns'>::</span><span class='fu'><a href='https://tibble.tidyverse.org/reference/tibble.html'>tibble</a></span>(
   <span class='kw'>cluster</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>factor</a></span>(<span class='fl'>1</span>:<span class='fl'>3</span>),
-  <span class='kw'>num_points</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>100</span>, <span class='fl'>150</span>, <span class='fl'>50</span>),  <span class='co'># number points in each cluster</span>
-  <span class='kw'>x1</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>5</span>, <span class='fl'>0</span>, -<span class='fl'>3</span>),              <span class='co'># x1 coordinate of cluster center</span>
-  <span class='kw'>x2</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(-<span class='fl'>1</span>, <span class='fl'>1</span>, -<span class='fl'>2</span>)              <span class='co'># x2 coordinate of cluster center</span>
+  <span class='kw'>num_points</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>100</span>, <span class='fl'>150</span>, <span class='fl'>50</span>), <span class='co'># number points in each cluster</span>
+  <span class='kw'>x1</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>5</span>, <span class='fl'>0</span>, -<span class='fl'>3</span>), <span class='co'># x1 coordinate of cluster center</span>
+  <span class='kw'>x2</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(-<span class='fl'>1</span>, <span class='fl'>1</span>, -<span class='fl'>2</span>) <span class='co'># x2 coordinate of cluster center</span>
 )
 
 <span class='no'>points</span> <span class='kw'>&lt;-</span> <span class='no'>centers</span> <span class='kw'>%&gt;%</span>
@@ -260,8 +260,7 @@ the <code>data</code> argument.</p></td>
 #&gt; </span><span style='color: #555555;'># … with 290 more rows</span><span></div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/generics/man/glance.html'>glance</a></span>(<span class='no'>m</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 1 x 7</span><span>
 #&gt;   model     G    BIC logLik    df hypvol  nobs
 #&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span> EII       3 -</span><span style='color: #BB0000;text-decoration: underline;'>2</span><span style='color: #BB0000;'>402.</span><span> -</span><span style='color: #BB0000;text-decoration: underline;'>1</span><span style='color: #BB0000;'>175.</span><span>     9     </span><span style='color: #BB0000;'>NA</span><span>   300</div><div class='input'>
-</div></span></pre>
+#&gt; </span><span style='color: #555555;'>1</span><span> EII       3 -</span><span style='color: #BB0000;text-decoration: underline;'>2</span><span style='color: #BB0000;'>402.</span><span> -</span><span style='color: #BB0000;text-decoration: underline;'>1</span><span style='color: #BB0000;'>175.</span><span>     9     </span><span style='color: #BB0000;'>NA</span><span>   300</div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

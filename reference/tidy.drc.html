@@ -231,8 +231,9 @@ The <code>curveid</code> column indicates the curve.</p>
     <pre class="examples"><div class='input'>
 <span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>drc</span>)
 
-<span class='no'>mod</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/drc/man/drm.html'>drm</a></span>(<span class='no'>dead</span>/<span class='no'>total</span>~<span class='no'>conc</span>, <span class='no'>type</span>,
-   <span class='kw'>weights</span> <span class='kw'>=</span> <span class='no'>total</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>selenium</span>, <span class='kw'>fct</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/pkg/drc/man/LL.2.html'>LL.2</a></span>(), <span class='kw'>type</span> <span class='kw'>=</span> <span class='st'>"binomial"</span>)
+<span class='no'>mod</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/drc/man/drm.html'>drm</a></span>(<span class='no'>dead</span> / <span class='no'>total</span> ~ <span class='no'>conc</span>, <span class='no'>type</span>,
+  <span class='kw'>weights</span> <span class='kw'>=</span> <span class='no'>total</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>selenium</span>, <span class='kw'>fct</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/pkg/drc/man/LL.2.html'>LL.2</a></span>(), <span class='kw'>type</span> <span class='kw'>=</span> <span class='st'>"binomial"</span>
+)
 
 <span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>mod</span>)</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 8 x 6</span><span>
 #&gt;   term  curve estimate std.error statistic  p.value
@@ -272,9 +273,7 @@ The <code>curveid</code> column indicates the curve.</p>
 #&gt; </span><span style='color: #555555;'> 8</span><span>     2   100   153    30   0.246 -</span><span style='color: #BB0000;'>0.049</span><span style='color: #BB0000;text-decoration: underline;'>5</span><span> 0.000</span><span style='text-decoration: underline;'>168</span><span>  
 #&gt; </span><span style='color: #555555;'> 9</span><span>     2   200   142    59   0.369  0.046</span><span style='text-decoration: underline;'>8</span><span> 0.000</span><span style='text-decoration: underline;'>034</span><span>7 
 #&gt; </span><span style='color: #555555;'>10</span><span>     2   300   139    82   0.451  0.139  0.000</span><span style='text-decoration: underline;'>043</span><span>0 
-#&gt; </span><span style='color: #555555;'># … with 15 more rows</span><span></div><div class='input'>
-
-</div></span></pre>
+#&gt; </span><span style='color: #555555;'># … with 15 more rows</span><span></div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

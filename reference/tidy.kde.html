@@ -240,8 +240,9 @@ on the output to return to a wide format.</p>
 
 <span class='no'>td</span> <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='https://tidyr.tidyverse.org/reference/pivot_wider.html'>pivot_wider</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='no'>obs</span>, <span class='no'>estimate</span>),
-              <span class='kw'>names_from</span> <span class='kw'>=</span> <span class='no'>variable</span>,
-              <span class='kw'>values_from</span> <span class='kw'>=</span> <span class='no'>value</span>) <span class='kw'>%&gt;%</span>
+    <span class='kw'>names_from</span> <span class='kw'>=</span> <span class='no'>variable</span>,
+    <span class='kw'>values_from</span> <span class='kw'>=</span> <span class='no'>value</span>
+  ) <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span>(<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='no'>x1</span>, <span class='no'>x2</span>, <span class='kw'>fill</span> <span class='kw'>=</span> <span class='no'>estimate</span>)) +
   <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_tile.html'>geom_tile</a></span>() +
   <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggtheme.html'>theme_void</a></span>()</div><div class='img'><img src='tidy.kde-1.png' alt='' width='700' height='433' /></div><div class='input'>
@@ -263,8 +264,7 @@ on the output to return to a wide format.</p>
 #&gt; </span><span style='color: #555555;'> 8</span><span>     8 x1       -</span><span style='color: #BB0000;'>3.52</span><span>        0
 #&gt; </span><span style='color: #555555;'> 9</span><span>     9 x1       -</span><span style='color: #BB0000;'>3.34</span><span>        0
 #&gt; </span><span style='color: #555555;'>10</span><span>    10 x1       -</span><span style='color: #BB0000;'>3.16</span><span>        0
-#&gt; </span><span style='color: #555555;'># … with 397,943 more rows</span><span></div><div class='input'>
-</div></span></pre>
+#&gt; </span><span style='color: #555555;'># … with 397,943 more rows</span><span></div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

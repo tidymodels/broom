@@ -230,7 +230,7 @@ the <code>data</code> argument.</p></td>
 <span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>coleman</span>)
 <span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span>(<span class='fl'>0</span>)
 
-<span class='no'>m</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>robustbase</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/robustbase/man/lmrob.html'>lmrob</a></span>(<span class='no'>Y</span> ~ <span class='no'>.</span>, <span class='kw'>data</span><span class='kw'>=</span><span class='no'>coleman</span>)
+<span class='no'>m</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>robustbase</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/robustbase/man/lmrob.html'>lmrob</a></span>(<span class='no'>Y</span> ~ <span class='no'>.</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>coleman</span>)
 <span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>m</span>)</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 6 x 5</span><span>
 #&gt;   term        estimate std.error statistic  p.value
 #&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>          </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
@@ -267,9 +267,10 @@ the <code>data</code> argument.</p></td>
 #&gt; </span><span style='color: #555555;'>1</span><span>     0.981  1.13          14</div><div class='input'>
 <span class='co'># From the robustbase::glmrob examples:</span>
 <span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>carrots</span>)
-<span class='no'>Rfit</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/robustbase/man/glmrob.html'>glmrob</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/cbind.html'>cbind</a></span>(<span class='no'>success</span>, <span class='no'>total</span>-<span class='no'>success</span>) ~ <span class='no'>logdose</span> + <span class='no'>block</span>,
-                <span class='kw'>family</span> <span class='kw'>=</span> <span class='no'>binomial</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>carrots</span>, <span class='kw'>method</span><span class='kw'>=</span> <span class='st'>"Mqle"</span>,
-                <span class='kw'>control</span><span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/pkg/robustbase/man/glmrob.control.html'>glmrobMqle.control</a></span>(<span class='kw'>tcc</span><span class='kw'>=</span><span class='fl'>1.2</span>))
+<span class='no'>Rfit</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/robustbase/man/glmrob.html'>glmrob</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/cbind.html'>cbind</a></span>(<span class='no'>success</span>, <span class='no'>total</span> - <span class='no'>success</span>) ~ <span class='no'>logdose</span> + <span class='no'>block</span>,
+  <span class='kw'>family</span> <span class='kw'>=</span> <span class='no'>binomial</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>carrots</span>, <span class='kw'>method</span> <span class='kw'>=</span> <span class='st'>"Mqle"</span>,
+  <span class='kw'>control</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/pkg/robustbase/man/glmrob.control.html'>glmrobMqle.control</a></span>(<span class='kw'>tcc</span> <span class='kw'>=</span> <span class='fl'>1.2</span>)
+)
 <span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>Rfit</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 4 x 5</span><span>
 #&gt;   term        estimate std.error statistic      p.value
 #&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>          </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>        </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
@@ -289,8 +290,7 @@ the <code>data</code> argument.</p></td>
 #&gt; </span><span style='color: #555555;'> 8</span><span>                                             2    26    2.36 B1     -</span><span style='color: #BB0000;'>2.45</span><span> 
 #&gt; </span><span style='color: #555555;'> 9</span><span>                                            17    21    1.52 B2     -</span><span style='color: #BB0000;'>0.491</span><span>
 #&gt; </span><span style='color: #555555;'>10</span><span>                                            10    30    1.64 B2     -</span><span style='color: #BB0000;'>0.737</span><span>
-#&gt; </span><span style='color: #555555;'># … with 14 more rows</span><span></div><div class='input'>
-</div></span></pre>
+#&gt; </span><span style='color: #555555;'># … with 14 more rows</span><span></div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

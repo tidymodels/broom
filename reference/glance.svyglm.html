@@ -252,11 +252,11 @@ survey data. <em>Journal of Survey Statistics and Methodology</em>, 3(1).
 <span class='co'># survey design</span>
 <span class='no'>dstrat</span> <span class='kw'>&lt;-</span>
   <span class='fu'><a href='https://rdrr.io/pkg/survey/man/svydesign.html'>svydesign</a></span>(
-    <span class='kw'>id</span> <span class='kw'>=</span>  ~ <span class='fl'>1</span>,
-    <span class='kw'>strata</span> <span class='kw'>=</span>  ~ <span class='no'>stype</span>,
-    <span class='kw'>weights</span> <span class='kw'>=</span>  ~ <span class='no'>pw</span>,
+    <span class='kw'>id</span> <span class='kw'>=</span> ~<span class='fl'>1</span>,
+    <span class='kw'>strata</span> <span class='kw'>=</span> ~<span class='no'>stype</span>,
+    <span class='kw'>weights</span> <span class='kw'>=</span> ~<span class='no'>pw</span>,
     <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>apistrat</span>,
-    <span class='kw'>fpc</span> <span class='kw'>=</span>  ~ <span class='no'>fpc</span>
+    <span class='kw'>fpc</span> <span class='kw'>=</span> ~<span class='no'>fpc</span>
   )
 
 <span class='co'># model</span>
@@ -266,8 +266,7 @@ survey data. <em>Journal of Survey Statistics and Methodology</em>, 3(1).
   <span class='kw'>family</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/family.html'>quasibinomial</a></span>()
 )
 
-<span class='fu'><a href='https://rdrr.io/pkg/generics/man/glance.html'>glance</a></span>(<span class='no'>m</span>)</div><div class='output co'>#&gt; <span class='error'>Error in .svycheck(design): object 'dstrat' not found</span></div><div class='input'>
-</div></pre>
+<span class='fu'><a href='https://rdrr.io/pkg/generics/man/glance.html'>glance</a></span>(<span class='no'>m</span>)</div><div class='output co'>#&gt; <span class='error'>Error in .svycheck(design): object 'dstrat' not found</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
