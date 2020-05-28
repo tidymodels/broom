@@ -107,7 +107,7 @@ confint.geeglm <- function(object, parm, level = 0.95, ...) {
 #'
 #' @inherit tidy.geeglm params examples
 #'
-#' @evalRd return_glance("df.residual", "n_clusters", "max.cluster.size", "alpha", "gamma")
+#' @evalRd return_glance("df.residual", "n.clusters", "max.cluster.size", "alpha", "gamma")
 #'
 #' @export
 #' @seealso [glance()], [geepack::geeglm()]

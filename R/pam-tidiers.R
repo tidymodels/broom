@@ -80,7 +80,7 @@ augment.pam <- function(x, data = NULL, ...) {
 #'
 #' @inherit tidy.pam params examples
 #'
-#' @evalRd return_glance("avg.silhoutte.width")
+#' @evalRd return_glance("avg.silhouette.width")
 #'
 #' @export
 #' @seealso [glance()], [cluster::pam()]

@@ -60,5 +60,6 @@ A \code{\link[tibble:tibble]{tibble::tibble()}} with exactly one row and columns
   \item{df.residual}{Residual degrees of freedom.}
   \item{gamma}{Estimated scale parameter for geepack::geeglm.}
   \item{max.cluster.size}{Max number of elements in clusters.}
+  \item{n.clusters}{Number of clusters.}
 
 }

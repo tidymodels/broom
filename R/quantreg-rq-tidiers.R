@@ -57,7 +57,7 @@ tidy.rq <- function(x, se.type = NULL, conf.int = FALSE,
 #'   "logLik",
 #'   "AIC",
 #'   "BIC",
-#'   "df.residuals"
+#'   "df.residual"
 #' )
 #'
 #' @details Only models with a single `tau` value may be passed.
