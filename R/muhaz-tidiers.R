@@ -10,14 +10,13 @@
 #' )
 #'
 #' @examples
-#' 
+#'
 #' library(muhaz)
-#' 
-#' data(ovarian, package="survival")
+#'
+#' data(ovarian, package = "survival")
 #' x <- muhaz::muhaz(ovarian$futime, ovarian$fustat)
 #' tidy(x)
 #' glance(x)
-#'
 #' @aliases muhaz_tidiers
 #' @export
 #' @seealso [tidy()], [muhaz::muhaz()]
@@ -34,13 +33,13 @@ tidy.muhaz <- function(x, ...) {
 #' @inherit tidy.muhaz params examples
 #'
 #' @evalRd return_glance(
-#'   "nobs", 
-#'   "min.time", 
-#'   "max.time", 
+#'   "nobs",
+#'   "min.time",
+#'   "max.time",
 #'   "min.hazard",
 #'   "max.hazard"
 #' )
-#' 
+#'
 #' @export
 #' @seealso [glance()], [muhaz::muhaz()]
 #' @family muhaz tidiers
@@ -52,4 +51,3 @@ glance.muhaz <- function(x, ...) {
     ) %>%
     as_tibble()
 }
-

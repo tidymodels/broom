@@ -31,4 +31,3 @@ test_that("glance.survexp", {
   gl <- glance(fit)
   check_glance_outputs(gl)
 })
-

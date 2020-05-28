@@ -22,16 +22,14 @@
 #' library(dplyr)
 #'
 #' ggplot(tidy_d, aes(PC, percent)) +
-#'     geom_point() +
-#'     ylab("% of variance explained")
+#'   geom_point() +
+#'   ylab("% of variance explained")
 #'
 #' tidy_u %>%
-#'     mutate(Species = iris$Species[row]) %>%
-#'     ggplot(aes(Species, value)) +
-#'     geom_boxplot() +
-#'     facet_wrap(~ PC, scale = "free_y")
-#' 
-#' 
+#'   mutate(Species = iris$Species[row]) %>%
+#'   ggplot(aes(Species, value)) +
+#'   geom_boxplot() +
+#'   facet_wrap(~PC, scale = "free_y")
 #' @seealso [svd()]
 #' @aliases svd_tidiers
 #' @family svd tidiers
@@ -45,9 +43,11 @@ tidy_svd <- function(x, matrix = "u", ...) {
     ret <- x$u %>%
       as_tibble(.name_repair = "unique") %>%
       tibble::rowid_to_column("row") %>%
-      pivot_longer(cols = c(dplyr::everything(), -row), 
-                   names_to = "PC",
-                   values_to = "value") %>%
+      pivot_longer(
+        cols = c(dplyr::everything(), -row),
+        names_to = "PC",
+        values_to = "value"
+      ) %>%
       dplyr::mutate(PC = stringr::str_remove(PC, "...") %>% as.numeric()) %>%
       arrange(PC, row) %>%
       as.data.frame()
@@ -61,9 +61,11 @@ tidy_svd <- function(x, matrix = "u", ...) {
     ret <- x$v %>%
       as_tibble(.name_repair = "unique") %>%
       tibble::rowid_to_column("column") %>%
-      pivot_longer(cols = c(dplyr::everything(), -column), 
-                   names_to = "PC",
-                   values_to = "value") %>%
+      pivot_longer(
+        cols = c(dplyr::everything(), -column),
+        names_to = "PC",
+        values_to = "value"
+      ) %>%
       dplyr::mutate(PC = stringr::str_remove(PC, "...") %>% as.numeric()) %>%
       arrange(PC, column) %>%
       as.data.frame()

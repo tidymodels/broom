@@ -32,13 +32,12 @@ test_that("tidy.summary.glht works", {
   td <- tidy(summary(wht, test = adjusted("bonferroni")))
   check_tidy_output(td, strict = FALSE)
   check_dims(td, 3, 7)
-  
+
   expect_true("adj.p.value" %in% colnames(td))
   expect_identical(td, tidy(wht, test = adjusted("bonferroni")))
-  
+
   td <- tidy(summary(wht, test = adjusted("none")))
   expect_true("p.value" %in% colnames(td))
-  
 })
 
 test_that("tidy.cld works", {
@@ -50,10 +49,10 @@ test_that("tidy.cld works", {
 test_that("tidy.glht consistency with tidy.TukeyHSD", {
   set.seed(13986)
   td_hsd <- tidy(TukeyHSD(amod, "tension"))
-  td_glht <- tidy(wht, conf.int = TRUE) %>% 
-    dplyr::select(-statistic) %>% 
+  td_glht <- tidy(wht, conf.int = TRUE) %>%
+    dplyr::select(-statistic) %>%
     mutate(contrast = gsub(" ", "", contrast))
-  
+
   expect_equal(
     as.data.frame(td_hsd),
     as.data.frame(td_glht),

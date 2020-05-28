@@ -9,7 +9,7 @@
 #'
 #' @examples
 #'
-#' n <- nls(mpg ~ k * e ^ wt, data = mtcars, start = list(k = 1, e = 2))
+#' n <- nls(mpg ~ k * e^wt, data = mtcars, start = list(k = 1, e = 2))
 #'
 #' tidy(n)
 #' augment(n)
@@ -23,13 +23,11 @@
 #' newdata <- head(mtcars)
 #' newdata$wt <- newdata$wt + 1
 #' augment(n, newdata = newdata)
-#'
 #' @aliases  nls_tidiers
 #' @export
 #' @seealso [tidy], [stats::nls()], [stats::summary.nls()]
 #' @family nls tidiers
 tidy.nls <- function(x, conf.int = FALSE, conf.level = .95, ...) {
-
   nn <- c("estimate", "std.error", "statistic", "p.value")
   ret <- fix_data_frame(stats::coef(summary(x)), nn)
 
@@ -62,7 +60,6 @@ tidy.nls <- function(x, conf.int = FALSE, conf.level = .95, ...) {
 #' @family nls tidiers
 #'
 augment.nls <- function(x, data = NULL, newdata = NULL, ...) {
-
   if (is.null(data) && is.null(newdata)) {
     pars <- names(x$m$getPars())
     env <- as.list(x$m$getEnv())
@@ -97,7 +94,7 @@ glance.nls <- function(x, ...) {
   s <- summary(x)
 
   tibble(
-    sigma = s$sigma, 
+    sigma = s$sigma,
     isConv = s$convInfo$isConv,
     finTol = s$convInfo$finTol,
     logLik = as.numeric(stats::logLik(x)),

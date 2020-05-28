@@ -9,20 +9,19 @@
 #' @template param_unused_dots
 #'
 #' @name sparse_tidiers
-#' 
+#'
 #' @evalRd return_tidy(
 #'   "row",
 #'   column = "Column name in the original matrix.",
 #'   "value"
 #' )
-#' 
+#'
 #'
 #' @export
 tidy.dgTMatrix <- function(x, ...) {
-  
   .Deprecated()
   s <- Matrix::summary(x)
-  
+
   row <- s$i
   if (!is.null(rownames(x))) {
     row <- rownames(x)[row]
@@ -31,7 +30,7 @@ tidy.dgTMatrix <- function(x, ...) {
   if (!is.null(colnames(x))) {
     col <- colnames(x)[col]
   }
-  
+
   ret <- data.frame(
     row = row, column = col, value = s$x,
     stringsAsFactors = FALSE

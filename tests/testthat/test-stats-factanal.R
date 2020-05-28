@@ -75,7 +75,7 @@ test_that("augment.factanal works with matrix", {
   v5 <- c(1, 1, 1, 1, 1, 3, 3, 3, 3, 3, 1, 1, 1, 1, 1, 6, 4, 5)
   v6 <- c(1, 1, 1, 2, 1, 3, 3, 3, 4, 3, 1, 1, 1, 2, 1, 6, 5, 4)
   m1 <- cbind(v1, v2, v3, v4, v5, v6)
-  
+
   # new data
   m2 <-
     cbind(
@@ -106,17 +106,19 @@ test_that("augment.factanal works with matrix", {
   modeltests::check_dims(df3, 18L, 10L)
   modeltests::check_dims(df4, 18L, 10L)
   expect_identical(names(df1), c(".rownames", ".fs1", ".fs2", ".fs3"))
-  expect_identical(names(df3),
-                             c(
-                               ".rownames",
-                               "x1",
-                               "x2",
-                               "x3",
-                               "x4",
-                               "x5",
-                               "x6",
-                               ".fs1",
-                               ".fs2",
-                               ".fs3"
-                             ))
+  expect_identical(
+    names(df3),
+    c(
+      ".rownames",
+      "x1",
+      "x2",
+      "x3",
+      "x4",
+      "x5",
+      "x6",
+      ".fs1",
+      ".fs2",
+      ".fs3"
+    )
+  )
 })

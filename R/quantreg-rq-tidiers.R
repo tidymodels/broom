@@ -1,6 +1,6 @@
 #' @templateVar class rq
 #' @template title_desc_tidy
-#' 
+#'
 #' @param x An `rq` object returned from [quantreg::rq()].
 #' @param se.type Character specifying the method to use to calculate
 #'   standard errors. Passed to [quantreg::summary.rq()] `se` argument.
@@ -9,12 +9,12 @@
 #' @template param_confint
 #' @param ... Additional arguments passed to [quantreg::summary.rq()].
 #'
-#' @details If `se.type = "rank"` confidence intervals are calculated by 
-#'   `summary.rq` and `statistic` and `p.value` values are not returned. 
-#'   When only a single predictor is included in the model, 
+#' @details If `se.type = "rank"` confidence intervals are calculated by
+#'   `summary.rq` and `statistic` and `p.value` values are not returned.
+#'   When only a single predictor is included in the model,
 #'   no confidence intervals are calculated and the confidence limits are
-#'   set to NA. 
-#' 
+#'   set to NA.
+#'
 #' @evalRd return_tidy(regression = TRUE)
 #'
 #' @aliases rq_tidiers quantreg_tidiers
@@ -23,20 +23,21 @@
 #' @family quantreg tidiers
 tidy.rq <- function(x, se.type = NULL, conf.int = FALSE,
                     conf.level = 0.95, ...) {
-  
+
   # specification for confidence level inverted for summary.rq
   alpha <- 1 - conf.level
-  
-  #se.type default contingent on sample size
+
+  # se.type default contingent on sample size
   n <- length(x$residuals)
-  if (is.null(se.type))
+  if (is.null(se.type)) {
     se.type <- if (n < 1001) "rank" else "nid"
-  
+  }
+
   # summary.rq often issues warnings when computing standard error
   rq_summary <- suppressWarnings(
     quantreg::summary.rq(x, se = se.type, alpha = alpha, ...)
   )
-  
+
   process_rq(
     rq_obj = rq_summary,
     se.type = se.type,
@@ -47,7 +48,7 @@ tidy.rq <- function(x, se.type = NULL, conf.int = FALSE,
 
 #' @templateVar class rq
 #' @template title_desc_glance
-#' 
+#'
 #' @inherit tidy.rq examples params
 #' @template param_unused_dots
 #'
@@ -58,7 +59,7 @@ tidy.rq <- function(x, se.type = NULL, conf.int = FALSE,
 #'   "BIC",
 #'   "df.residuals"
 #' )
-#' 
+#'
 #' @details Only models with a single `tau` value may be passed.
 #'  For multiple values, please use a [purrr::map()] workflow instead, e.g.
 #'  ```
@@ -73,7 +74,7 @@ tidy.rq <- function(x, se.type = NULL, conf.int = FALSE,
 glance.rq <- function(x, ...) {
   n <- length(fitted(x))
   s <- summary(x)
-  
+
   tibble(
     tau = x[["tau"]],
     logLik = logLik(x),
@@ -90,9 +91,9 @@ glance.rq <- function(x, ...) {
 #' @template param_data
 #' @template param_newdata
 #' @inheritDotParams quantreg::predict.rq
-#' 
+#'
 #' @inherit tidy.rq examples
-#' 
+#'
 #' @evalRd return_augment(".tau")
 #'
 #' @details Depending on the arguments passed on to `predict.rq` via `...`,
@@ -121,7 +122,7 @@ augment.rq <- function(x, data = model.frame(x), newdata = NULL, ...) {
     original <- newdata
     pred <- predict(x, newdata = newdata, ...)
   }
-  
+
   if (NCOL(pred) == 1) {
     original[[".fitted"]] <- pred
     original[[".tau"]] <- x[["tau"]]
@@ -143,7 +144,7 @@ process_rq <- function(rq_obj, se.type = NULL,
     # set to NA to preserve dimensions of object
     if (1 == ncol(co)) {
       co <- cbind(co, NA, NA)
-    } 
+    }
     co <- setNames(co, c("estimate", "conf.low", "conf.high"))
     conf.int <- FALSE
   } else {

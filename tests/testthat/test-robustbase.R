@@ -13,7 +13,7 @@ test_that("robustbase tidier arguments", {
   check_arguments(tidy.lmrob)
   check_arguments(glance.lmrob)
   check_arguments(augment.lmrob)
-  
+
   check_arguments(tidy.glmrob)
   # check_arguments(glance.glmrob)
   check_arguments(augment.glmrob)
@@ -61,7 +61,7 @@ test_that("augment.glmrob", {
     data = mtcars,
     newdata = mtcars
   )
-  
+
   # check that .se.fit column is included
   check_dims(augment(fit2, se_fit = TRUE), 32, 6)
 })

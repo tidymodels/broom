@@ -6,14 +6,14 @@
 #' @param ... Additional arguments passed to [emmeans::summary.emmGrid()] or
 #'   [lsmeans::summary.ref.grid()]. **Cautionary note**: misspecified arguments
 #'   may be silently ignored!
-#'   
+#'
 #' @evalRd return_tidy(
 #'   "contrast",
 #'   "null.value",
 #'   estimate = "Expected marginal mean",
-#'   "std.error", 
-#'   "df", 
-#'   "conf.low", 
+#'   "std.error",
+#'   "df",
+#'   "conf.low",
 #'   "conf.high",
 #'   statistic = "T-ratio statistic",
 #'   "p.value"
@@ -52,19 +52,22 @@
 #'   geom_errorbar(aes(ymin = conf.low, ymax = conf.high))
 #'
 #' # by multiple prices
-#' by_price <- emmeans(oranges_lm1, "day", by = "price2",
-#'                     at = list(price1 = 50, price2 = c(40, 60, 80),
-#'                     day = c("2", "3", "4")) )
+#' by_price <- emmeans(oranges_lm1, "day",
+#'   by = "price2",
+#'   at = list(
+#'     price1 = 50, price2 = c(40, 60, 80),
+#'     day = c("2", "3", "4")
+#'   )
+#' )
 #' by_price
 #' tidy(by_price)
 #'
 #' ggplot(tidy(by_price, conf.int = TRUE), aes(price2, estimate, color = day)) +
 #'   geom_line() +
 #'   geom_errorbar(aes(ymin = conf.low, ymax = conf.high))
-#'   
+#'
 #' # joint_tests
 #' tidy(joint_tests(oranges_lm1))
-#'
 #' @aliases emmeans_tidiers
 #' @export
 #' @family emmeans tidiers
@@ -76,15 +79,15 @@ tidy.lsmobj <- function(x, conf.int = FALSE, conf.level = .95, ...) {
 
 #' @templateVar class ref.grid
 #' @template title_desc_tidy
-#' 
+#'
 #' @param x A `ref.grid` object created by [emmeans::ref_grid()].
-#' @inherit tidy.lsmobj params examples details 
-#'   
+#' @inherit tidy.lsmobj params examples details
+#'
 #' @evalRd return_tidy(
 #'   estimate = "Expected marginal mean",
-#'   "std.error", 
-#'   "df", 
-#'   "conf.low", 
+#'   "std.error",
+#'   "df",
+#'   "conf.low",
 #'   "conf.high",
 #'   statistic = "T-ratio statistic",
 #'   "p.value"
@@ -100,15 +103,15 @@ tidy.ref.grid <- function(x, conf.int = FALSE, conf.level = .95, ...) {
 
 #' @templateVar class emmGrid
 #' @template title_desc_tidy
-#' 
+#'
 #' @param x An `emmGrid` object.
-#' @inherit tidy.lsmobj params examples details 
-#'   
+#' @inherit tidy.lsmobj params examples details
+#'
 #' @evalRd return_tidy(
 #'   estimate = "Expected marginal mean",
-#'   "std.error", 
-#'   "df", 
-#'   "conf.low", 
+#'   "std.error",
+#'   "df",
+#'   "conf.low",
 #'   "conf.high",
 #'   statistic = "T-ratio statistic",
 #'   "p.value"
@@ -124,11 +127,11 @@ tidy.emmGrid <- function(x, conf.int = FALSE, conf.level = .95, ...) {
 
 #' @templateVar class summary_emm
 #' @template title_desc_tidy
-#' 
+#'
 #' @param x A `summary_emm` object.
 #' @param null.value Value to which estimate is compared.
-#' @inherit tidy.lsmobj params examples details 
-#'   
+#' @inherit tidy.lsmobj params examples details
+#'
 #' @evalRd return_tidy(
 #'   "contrast",
 #'   level1 = "One level of the factor being contrasted",
@@ -136,11 +139,11 @@ tidy.emmGrid <- function(x, conf.int = FALSE, conf.level = .95, ...) {
 #'   term = "Model term in joint tests",
 #'   "null.value",
 #'   estimate = "Expected marginal mean",
-#'   "std.error", 
-#'   "df", 
+#'   "std.error",
+#'   "df",
 #'   "num.df",
 #'   "den.df",
-#'   "conf.low", 
+#'   "conf.low",
 #'   "conf.high",
 #'   statistic = "T-ratio statistic or F-ratio statistic",
 #'   "p.value"
@@ -159,17 +162,17 @@ tidy.summary_emm <- function(x, null.value = NULL, ...) {
 
 tidy_emmeans <- function(x, ...) {
   s <- summary(x, ...)
-  
+
   # Get null.value
-  if(".offset." %in% colnames(x@grid)) {
+  if (".offset." %in% colnames(x@grid)) {
     null.value <- x@grid[, ".offset."]
   } else {
     null.value <- 0
   }
-  
+
   # Get term names
   term_names <- names(x@misc$orig.grid)
-  
+
   tidy_emmeans_summary(s, null.value = null.value, term_names = term_names)
 }
 
@@ -190,7 +193,7 @@ tidy_emmeans_summary <- function(x, null.value = NULL, term_names = NULL) {
     "model term" = "term"
     # "contrast" = "lhs"
   )
-  
+
   mc_adjusted <- any(
     grepl(
       "conf-level adjustment|p value adjustment",
@@ -198,41 +201,41 @@ tidy_emmeans_summary <- function(x, null.value = NULL, term_names = NULL) {
       ignore.case = TRUE
     )
   )
-  
-  if(mc_adjusted) {
+
+  if (mc_adjusted) {
     repl <- c(repl, "p.value" = "adj.p.value")
   }
-  
+
   colnames(ret) <- dplyr::recode(colnames(ret), !!!(repl))
-  
+
   # Remove std.error if conf.low/high exist
-  if(any(c("conf.low", "conf.high") %in% colnames(ret))) {
+  if (any(c("conf.low", "conf.high") %in% colnames(ret))) {
     ret <- select(ret, -std.error)
   }
-  
+
   # If contrast column exists, add null.value column
-  if("contrast" %in% colnames(ret)) {
-    if(length(null.value) < nrow(ret)) null.value <- rep_len(null.value, nrow(ret))
+  if ("contrast" %in% colnames(ret)) {
+    if (length(null.value) < nrow(ret)) null.value <- rep_len(null.value, nrow(ret))
     ret <- bind_cols(contrast = ret[, "contrast"], null.value = null.value, select(ret, -contrast))
   }
-  
+
   # Add term column, if appropriate, unless it exists
-  if("term" %in% colnames(ret)) {
+  if ("term" %in% colnames(ret)) {
     ret <- ret %>%
       mutate(term = stringr::str_trim(term))
-  } else if(!is.null(term_names)) {
+  } else if (!is.null(term_names)) {
     term <- term_names[!term_names %in% colnames(ret)]
-    
-    if(length(term) != 0) {
-      term <- paste(term_names[!term_names %in% colnames(ret)], collapse = "*") %>% 
+
+    if (length(term) != 0) {
+      term <- paste(term_names[!term_names %in% colnames(ret)], collapse = "*") %>%
         rep_len(nrow(ret))
     } else { # No missing term names, because combine = TRUE?
       term <- apply(ret, 1, function(x) colnames(ret)[which(x == ".")])
     }
-    
+
     ret <- bind_cols(ret[, colnames(ret) %in% term_names, drop = FALSE], term = term, ret[, !colnames(ret) %in% term_names, drop = FALSE])
   }
-  
-  as_tibble(ret) %>% 
+
+  as_tibble(ret) %>%
     mutate_if(is.factor, as.character)
 }

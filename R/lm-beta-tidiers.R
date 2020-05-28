@@ -25,24 +25,24 @@
 #' trt <- c(4.81, 4.17, 4.41, 3.59, 5.87, 3.83, 6.03, 4.89, 4.32, 4.69)
 #' group <- gl(2, 10, 20, labels = c("Ctl", "Trt"))
 #' weight <- c(ctl, trt)
-#' 
+#'
 #' mod2 <- lm(weight ~ group)
 #'
 #' std2 <- lm.beta(mod2)
 #' tidy(std2, conf.int = TRUE)
-#' 
 #' @export
 #' @family lm tidiers
 tidy.lm.beta <- function(x, conf.int = FALSE, conf.level = 0.95, ...) {
-  
   ret <- as_tibble(summary(x)$coefficients, rownames = "term")
-  colnames(ret) <- c("term", "estimate", "std_estimate",
-                     "std.error", "statistic", "p.value")
-  
+  colnames(ret) <- c(
+    "term", "estimate", "std_estimate",
+    "std.error", "statistic", "p.value"
+  )
+
   if (conf.int) {
     ci <- broom_confint_terms(x, level = conf.level)
     ret <- dplyr::left_join(ret, ci, by = "term")
   }
-  
+
   ret
 }

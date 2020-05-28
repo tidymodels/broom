@@ -29,7 +29,7 @@ test_that("pyears tidier arguments", {
 test_that("tidy.pyears", {
   td <- tidy(fit)
   td2 <- tidy(fit2)
-  
+
   check_tidy_output(td, strict = FALSE)
   check_tidy_output(td2, strict = FALSE)
 })
@@ -37,6 +37,6 @@ test_that("tidy.pyears", {
 test_that("glance.pyears", {
   gl <- glance(fit)
   gl2 <- glance(fit2)
-  
+
   check_glance_outputs(gl, gl2)
 })

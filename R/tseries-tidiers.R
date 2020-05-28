@@ -15,15 +15,14 @@
 #' @examples
 #'
 #' library(tseries)
-#' 
+#'
 #' data(EuStockMarkets)
-#' dax <- diff(log(EuStockMarkets))[,"DAX"]
+#' dax <- diff(log(EuStockMarkets))[, "DAX"]
 #' dax.garch <- garch(dax)
 #' dax.garch
-#' 
+#'
 #' tidy(dax.garch)
 #' glance(dax.garch)
-#' 
 #' @aliases garch_tidiers
 #' @export
 #' @family garch tidiers

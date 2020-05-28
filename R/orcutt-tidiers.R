@@ -1,6 +1,6 @@
 #' @templateVar class orcutt
 #' @template title_desc_tidy
-#' 
+#'
 #' @param x An `orcutt` object returned from [orcutt::cochrane.orcutt()].
 #' @template param_unused_dots
 #'
@@ -13,7 +13,7 @@
 #' )
 #'
 #' @examples
-#' 
+#'
 #' library(orcutt)
 #'
 #' reg <- lm(mpg ~ wt + qsec + disp, mtcars)
@@ -24,7 +24,6 @@
 #'
 #' tidy(co)
 #' glance(co)
-#' 
 #' @aliases orcutt_tidiers
 #' @export
 #' @family orcutt tidiers
@@ -39,7 +38,7 @@ tidy.orcutt <- function(x, ...) {
 
 #' @templateVar class orcutt
 #' @template title_desc_glance
-#' 
+#'
 #' @inherit tidy.orcutt params examples
 #' @template param_unused_dots
 #'

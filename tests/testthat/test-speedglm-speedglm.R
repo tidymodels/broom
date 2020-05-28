@@ -21,10 +21,10 @@ test_that("speedglm tidiers arguments", {
 test_that("tidy.speedglm", {
   td <- tidy(fit, conf.int = TRUE, exponentiate = TRUE)
   check_tidy_output(td)
-  
+
   # watch out for the bizarro factor p-values reported in #660
   expect_type(td$p.value, "double")
-  
+
   check_dims(td, 2, 7)
 })
 
@@ -34,9 +34,9 @@ test_that("glance.speedglm", {
 })
 
 test_that("augment.speedglm errors", {
-  
+
   # speedglm sub-classes speedlm, and there's an augment.speedlm()
   # method we want to make sure isn't accidentally invoked
-  
+
   expect_error(augment(fit))
 })

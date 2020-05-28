@@ -1,6 +1,6 @@
 #' @templateVar class lmodel2
 #' @template title_desc_tidy
-#' 
+#'
 #' @param x A `lmodel2` object returned by [lmodel2::lmodel2()].
 #' @template param_unused_dots
 #'
@@ -24,11 +24,11 @@
 #'   `vignette("mod2user", package = "lmodel2")`.
 #'
 #' @examples
-#' 
+#'
 #' library(lmodel2)
-#' 
+#'
 #' data(mod2ex2)
-#' Ex2.res <- lmodel2(Prey ~ Predators, data=mod2ex2, "relative", "relative", 99)
+#' Ex2.res <- lmodel2(Prey ~ Predators, data = mod2ex2, "relative", "relative", 99)
 #' Ex2.res
 #'
 #' tidy(Ex2.res)
@@ -40,7 +40,6 @@
 #'   geom_point() +
 #'   geom_errorbarh(aes(xmin = conf.low, xmax = conf.high)) +
 #'   geom_errorbarh(aes(xmin = conf.low, xmax = conf.high))
-#'
 #' @export
 #' @seealso [tidy()], [lmodel2::lmodel2()]
 #' @aliases lmodel2_tidiers
@@ -51,22 +50,28 @@ tidy.lmodel2 <- function(x, ...) {
       method = Method,
       Intercept,
       Slope,
-      p.value = `P-perm (1-tailed)`) %>%
-    pivot_longer(cols = c(dplyr::everything(), -method, -p.value),
-                 names_to = "term",
-                 values_to = "estimate") %>%
+      p.value = `P-perm (1-tailed)`
+    ) %>%
+    pivot_longer(
+      cols = c(dplyr::everything(), -method, -p.value),
+      names_to = "term",
+      values_to = "estimate"
+    ) %>%
     arrange(method, term)
 
   # add confidence intervals
   confints <- x$confidence.intervals %>%
-    pivot_longer(cols = c(dplyr::everything(), -Method),
-                 names_to = "key",
-                 values_to = "value") %>%
+    pivot_longer(
+      cols = c(dplyr::everything(), -Method),
+      names_to = "key",
+      values_to = "value"
+    ) %>%
     tidyr::separate(key, c("level", "term"), "-") %>%
     mutate(level = ifelse(level == "2.5%", "conf.low", "conf.high")) %>%
-    tidyr::pivot_wider(c(Method, term), 
-                       names_from = level, 
-                       values_from = value) %>%
+    tidyr::pivot_wider(c(Method, term),
+      names_from = level,
+      values_from = value
+    ) %>%
     dplyr::arrange(Method) %>%
     as.data.frame() %>%
     select(method = Method, term, conf.low, conf.high)
@@ -74,16 +79,16 @@ tidy.lmodel2 <- function(x, ...) {
   ret %>%
     inner_join(confints, by = c("method", "term")) %>%
     # change column order so `p.value` is at the end
-    select(-p.value, dplyr::everything()) %>% 
+    select(-p.value, dplyr::everything()) %>%
     as_tibble()
 }
 
 
 #' @templateVar class lmodel2
 #' @template title_desc_glance
-#' 
+#'
 #' @inherit tidy.lmodel2 params examples
-#' 
+#'
 #' @evalRd return_glance(
 #'   "r.squared",
 #'   "p.value",
@@ -95,7 +100,7 @@ tidy.lmodel2 <- function(x, ...) {
 #' @export
 #' @seealso [glance()], [lmodel2::lmodel2()]
 #' @family lmodel2 tidiers
-#' 
+#'
 glance.lmodel2 <- function(x, ...) {
   tibble(
     r.squared = x$rsquare,

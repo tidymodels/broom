@@ -17,11 +17,11 @@ df <- data.frame(
 
 fit <- lfe::felm(v2 ~ v3, df)
 fit2 <- lfe::felm(v2 ~ v3 | id + v1, df, na.action = na.exclude)
-fit_multi <- lfe::felm(v1 + v2 ~ v3 , df)
+fit_multi <- lfe::felm(v1 + v2 ~ v3, df)
 
 
 form <- v2 ~ v4
-fit_form <- lfe::felm(form, df)  # part of a regression test
+fit_form <- lfe::felm(form, df) # part of a regression test
 
 test_that("felm tidier arguments", {
   check_arguments(tidy.felm)
@@ -52,10 +52,14 @@ test_that("tidy.felm", {
   check_dims(td1, 2, 5)
 
   expect_equal(tidy(fit_multi)[3:4, -1], tidy(fit))
-  expect_equal(dplyr::pull(td5, std.error),
-               as.numeric(lfe:::summary.felm(fit, robust = TRUE)$coef[, "Robust s.e"]))
-  expect_equal(dplyr::pull(td6, std.error),
-               as.numeric(lfe:::summary.felm(fit2, robust = TRUE)$coef[, "Robust s.e"]))
+  expect_equal(
+    dplyr::pull(td5, std.error),
+    as.numeric(lfe:::summary.felm(fit, robust = TRUE)$coef[, "Robust s.e"])
+  )
+  expect_equal(
+    dplyr::pull(td6, std.error),
+    as.numeric(lfe:::summary.felm(fit2, robust = TRUE)$coef[, "Robust s.e"])
+  )
 })
 
 test_that("glance.felm", {
@@ -66,11 +70,9 @@ test_that("glance.felm", {
   check_dims(gl, expected_cols = 8)
 
   expect_error(glance(fit_multi), "Glance does not support linear models with multiple responses.")
-
 })
 
 test_that("augment.felm", {
-
   check_augment_function(
     aug = augment.felm,
     model = fit,
