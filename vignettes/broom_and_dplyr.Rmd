@@ -35,6 +35,8 @@ cor(Orange$age, Orange$circumference)
 
 library(ggplot2)
 
+theme_set(theme_minimal())
+
 ggplot(Orange, aes(age, circumference, color = Tree)) +
   geom_line()
 ```
@@ -71,7 +73,7 @@ library(tidyr)
 library(purrr)
 
 nested <- Orange %>% 
-  nest(-Tree)
+  nest(data = -Tree)
 ```
 
 Then we run a correlation test for each nested tibble using `purrr::map`:
@@ -95,7 +97,7 @@ Finally, we want to unnest the tidied data frames so we can see the results in a
 
 ```{r}
 Orange %>% 
-  nest(-Tree) %>% 
+  nest(data = -Tree) %>% 
   mutate(
     test = map(data, ~ cor.test(.x$age, .x$circumference)), # S3 list-col
     tidied = map(test, tidy)
@@ -105,7 +107,7 @@ Orange %>%
 
 Note that the `.drop` argument to `tidyr::unnest` is often useful.
 
-This workflow becomes even more useful when applied to regressions. Untidy ouput for a regression looks like:
+This workflow becomes even more useful when applied to regressions. Untidy output for a regression looks like:
 
 ```{r}
 lm_fit <- lm(age ~ circumference, data = Orange)
@@ -122,7 +124,7 @@ Now we can handle multiple regressions at once using exactly the same workflow a
 
 ```{r}
 Orange %>%
-  nest(-Tree) %>% 
+  nest(data = -Tree) %>% 
   mutate(
     fit = map(data, ~ lm(age ~ circumference, data = .x)),
     tidied = map(fit, tidy)
@@ -138,7 +140,7 @@ mtcars <- as_tibble(mtcars)  # to play nicely with list-cols
 mtcars
 
 mtcars %>%
-  nest(-am) %>% 
+  nest(data = -am) %>% 
   mutate(
     fit = map(data, ~ lm(wt ~ mpg + qsec + gear, data = .x)),  # S3 list-col
     tidied = map(fit, tidy)
@@ -150,7 +152,7 @@ What if you want not just the `tidy` output, but the `augment` and `glance` outp
 
 ```{r}
 regressions <- mtcars %>%
-  nest(-am) %>% 
+  nest(data = -am) %>% 
   mutate(
     fit = map(data, ~ lm(wt ~ mpg + qsec + gear, data = .x)),
     tidied = map(fit, tidy),
@@ -162,7 +164,7 @@ regressions %>%
   unnest(tidied)
 
 regressions %>% 
-  unnest(glanced, .drop = TRUE)
+  unnest(glanced)
 
 regressions %>% 
   unnest(augmented)

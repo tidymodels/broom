@@ -5,7 +5,7 @@
 #' @template param_confint
 #' @template param_exponentiate
 #' @template param_unused_dots
-#' 
+#'
 #' @evalRd return_tidy(
 #'   "estimate",
 #'   "std.error",
@@ -13,10 +13,10 @@
 #'   "p.value"
 #' )
 #'
-#' @examples 
-#' 
+#' @examples
+#'
 #' library(survival)
-#' 
+#'
 #' cfit <- coxph(Surv(time, status) ~ age + sex, lung)
 #'
 #' tidy(cfit)
@@ -33,11 +33,11 @@
 #' n <- nrow(logan)
 #' indx <- rep(1:n, length(resp))
 #' logan2 <- data.frame(
-#'   logan[indx,],
+#'   logan[indx, ],
 #'   id = indx,
-#'   tocc = factor(rep(resp, each=n))
+#'   tocc = factor(rep(resp, each = n))
 #' )
-#' 
+#'
 #' logan2$case <- (logan2$occupation == logan2$tocc)
 #'
 #' cl <- clogit(case ~ tocc + tocc:education + strata(id), logan2)
@@ -45,17 +45,15 @@
 #' glance(cl)
 #'
 #' library(ggplot2)
-#' 
+#'
 #' ggplot(lp, aes(age, .fitted, color = sex)) +
 #'   geom_point()
-#' 
-#' ggplot(risks, aes(age, .fitted, color = sex)) + 
+#'
+#' ggplot(risks, aes(age, .fitted, color = sex)) +
 #'   geom_point()
-#'   
-#' ggplot(expected, aes(time, .fitted, color = sex)) + 
+#'
+#' ggplot(expected, aes(time, .fitted, color = sex)) +
 #'   geom_point()
-#' 
-#' 
 #' @aliases coxph_tidiers
 #' @export
 #' @seealso [tidy()], [survival::coxph()]
@@ -68,28 +66,30 @@ tidy.coxph <- function(x, exponentiate = FALSE, conf.int = FALSE,
     conf.level <- conf.int
     conf.int <- TRUE
   }
-  
+
   if (conf.int) {
     s <- summary(x, conf.int = conf.level)
   } else {
     s <- summary(x, conf.int = FALSE)
   }
   co <- stats::coef(s)
-  
-  if (! is.null(x$frail)){
+
+  if (!is.null(x$frail)) {
     nn <- c("estimate", "std.error", "statistic", "p.value")
-  }else if (s$used.robust) {
+  } else if (s$used.robust) {
     nn <- c("estimate", "std.error", "robust.se", "statistic", "p.value")
   } else {
     nn <- c("estimate", "std.error", "statistic", "p.value")
   }
-  
-  if (is.null(x$frail)){
-    ret <- fix_data_frame(co[, -2, drop = FALSE], nn)
-  } else{
-    ret <- fix_data_frame(co[, -c(3, 5), drop = FALSE], nn)
+
+  if (is.null(x$frail)) {
+    ret <- as_broom_tibble(co[, -2, drop = FALSE]) %>%
+      setNames(c("term", nn))
+  } else {
+    ret <- as_broom_tibble(co[, -c(3, 5), drop = FALSE]) %>%
+      setNames(c("term", nn))
   }
-  
+
   if (exponentiate) {
     ret$estimate <- exp(ret$estimate)
   }
@@ -101,14 +101,14 @@ tidy.coxph <- function(x, exponentiate = FALSE, conf.int = FALSE,
     }
     ret <- cbind(ret, CI)
   }
-  
+
   as_tibble(ret)
 }
 
 
 #' @templateVar class coxph
 #' @template title_desc_augment
-#' 
+#'
 #' @inherit tidy.coxph params examples
 #' @template param_data
 #' @template param_newdata
@@ -130,37 +130,26 @@ augment.coxph <- function(x, data = NULL, newdata = NULL,
   if (is.null(data) && is.null(newdata)) {
     stop("Must specify either `data` or `newdata` argument.", call. = FALSE)
   }
-  
+
   augment_columns(x, data, newdata,
-                  type.predict = type.predict,
-                  type.residuals = type.residuals
+    type.predict = type.predict,
+    type.residuals = type.residuals
   )
 }
 
 #' @templateVar class coxph
 #' @template title_desc_glance
-#' 
+#'
 #' @inherit tidy.coxph params examples
-#' 
+#'
 #' @evalRd return_glance(
+#'    "n",
 #'    "nevent",
-#'    "statistic.log",
-#'    "p.value.log",
-#'    "statistic.sc",
-#'    "p.value.sc",
-#'    "statistic.wald",
-#'    "p.value.wald",
-#'    "statistic.robust",
-#'    "p.value.robust",
-#'    "r.squared",
-#'    "r.squared.max",
-#'    "concordance",
-#'    "std.error.concordance",
 #'    "logLik",
 #'    "AIC",
 #'    "BIC",
-#'    "nobs"
-#'    )
+#'    "nobs",
+#'    .post = "See survival::coxph.object for additional column descriptions.")
 #'
 #' @export
 #' @seealso [glance()], [survival::coxph()]
@@ -171,6 +160,7 @@ glance.coxph <- function(x, ...) {
   # including all the test statistics and p-values as separate
   # columns. Admittedly not perfect but does capture most use cases.
   ret <- list(
+    n = s$n,
     nevent = s$nevent,
     statistic.log = s$logtest[1],
     p.value.log = s$logtest[3],

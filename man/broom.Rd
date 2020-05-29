@@ -26,7 +26,7 @@ which provides a one-row summary of model-level statistics.
 \seealso{
 Useful links:
 \itemize{
-  \item \url{https://broom.tidyverse.org/}
+  \item \url{https://broom.tidymodels.org/}
   \item \url{http://github.com/tidymodels/broom}
   \item Report bugs at \url{http://github.com/tidymodels/broom/issues}
 }
@@ -68,6 +68,7 @@ Other contributors:
   \item Simon Jackson \email{drsimonjackson@gmail.com} [contributor]
   \item Ben Whalley \email{ben.whalley@plymouth.ac.uk} [contributor]
   \item Karissa Whiting \email{karissa.whiting@gmail.com} [contributor]
+  \item Yves Rosseel \email{yrosseel@gmail.com} [contributor]
   \item Michael Kuehn \email{mkuehn10@gmail.com} [contributor]
   \item Jorge Cimentada \email{cimentadaj@gmail.com} [contributor]
   \item Erle Holgersen \email{erle.holgersen@gmail.com} [contributor]
@@ -108,6 +109,52 @@ Other contributors:
   \item Kevin Zarca \email{kevin.zarca@gmail.com} [contributor]
   \item Shiro Kuriwaki \email{shirokuriwaki@gmail.com} (\href{https://orcid.org/0000-0002-5687-2647}{ORCID}) [contributor]
   \item Grant McDermott \email{grantmcd@uoregon.edu} (0000-0001-7883-8573) [contributor]
+  \item Chuliang Xiao \email{cxiao@umich.edu} (\href{https://orcid.org/0000-0002-8466-9398}{ORCID}) [contributor]
+  \item Joseph Larmarange \email{joseph@larmarange.net} [contributor]
+  \item Max Kuhn \email{max@rstudio.com} [contributor]
+  \item Michal Bojanowski \email{michal2992@gmail.com} [contributor]
+  \item Hakon Malmedal \email{hmalmedal@gmail.com} [contributor]
+  \item Clara Wang [contributor]
+  \item Sergio Oller \email{sergioller@gmail.com} [contributor]
+  \item Luke Sonnet \email{luke.sonnet@gmail.com} [contributor]
+  \item Jim Hester \email{jim.hester@rstudio.com} [contributor]
+  \item Cory Brunson \email{cornelioid@gmail.com} [contributor]
+  \item Ben Schneider \email{benjamin.julius.schneider@gmail.com} [contributor]
+  \item Bernie Gray \email{bfgray3@gmail.com} (\href{https://orcid.org/0000-0001-9190-6032}{ORCID}) [contributor]
+  \item Mara Averick \email{mara@rstudio.com} [contributor]
+  \item Aaron Jacobs \email{atheriel@gmail.com} [contributor]
+  \item Andreas Bender \email{bender.at.R@gmail.com} [contributor]
+  \item Sven Templer \email{sven.templer@gmail.com} [contributor]
+  \item Paul-Christian Buerkner \email{paul.buerkner@gmail.com} [contributor]
+  \item Matthew Kay \email{mjskay@umich.edu} [contributor]
+  \item Erwan Le Pennec \email{lepennec@gmail.com} [contributor]
+  \item Johan Junkka \email{johan.junkka@umu.se} [contributor]
+  \item Hao Zhu \email{haozhu233@gmail.com} [contributor]
+  \item Benjamin Soltoff \email{soltoffbc@uchicago.edu} [contributor]
+  \item Zoe Wilkinson Saldana \email{zoewsaldana@gmail.com} [contributor]
+  \item Tyler Littlefield \email{tylurp1@gmail.com} [contributor]
+  \item Charles T. Gray \email{charlestigray@gmail.com} [contributor]
+  \item Shabbh E. Banks [contributor]
+  \item Serina Robinson \email{robi0916@umn.edu} [contributor]
+  \item Roger Bivand \email{Roger.Bivand@nhh.no} [contributor]
+  \item Riinu Ots \email{riinuots@gmail.com} [contributor]
+  \item Nicholas Williams \email{ntwilliams.personal@gmail.com} [contributor]
+  \item Nina Jakobsen [contributor]
+  \item Michael Weylandt \email{michael.weylandt@gmail.com} [contributor]
+  \item Lisa Lendway \email{llendway@macalester.edu} [contributor]
+  \item Karl Hailperin \email{khailper@gmail.com} [contributor]
+  \item Josue Rodriguez \email{jerrodriguez@ucdavis.edu} [contributor]
+  \item Jenny Bryan \email{jenny@rstudio.com} [contributor]
+  \item Chris Jarvis \email{Christopher1.jarvis@gmail.com} [contributor]
+  \item Brian Mannakee \email{bmannakee@gmail.com} [contributor]
+  \item Drew Tyre \email{atyre2@unl.edu} [contributor]
+  \item Shreyas Singh \email{shreyas.singh.298@gmail.com} [contributor]
+  \item Laurens Geffert \email{laurensgeffert@gmail.com} [contributor]
+  \item Hong Ooi \email{hongooi@microsoft.com} [contributor]
+  \item Henrik Bengtsson \email{henrikb@braju.com} [contributor]
+  \item Eduard Szocs \email{eduardszoecs@gmail.com} [contributor]
+  \item David Hugh-Jones \email{davidhughjones@gmail.com} [contributor]
+  \item Matthieu Stigler \email{Matthieu.Stigler@gmail.com} [contributor]
 }
 
 }

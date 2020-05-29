@@ -9,7 +9,7 @@ library(survey)
 skip_if_not_installed("MASS")
 
 data("housing", package = "MASS")
-design <- svydesign(ids = ~ 1, weights = ~ Freq, data = housing)
+design <- svydesign(ids = ~1, weights = ~Freq, data = housing)
 fit <- svyolr(Sat ~ Infl + Type + Cont, design = design)
 
 test_that("survey tidier arguments", {
@@ -29,9 +29,8 @@ test_that("glance.svyolr", {
 })
 
 test_that("conf.int merging regression test (#804)", {
-  
   data(api)
-  
+
   dstrat <- svydesign(
     id = ~1,
     strata = ~stype,
@@ -39,13 +38,13 @@ test_that("conf.int merging regression test (#804)", {
     data = apistrat,
     fpc = ~fpc
   )
-  
+
   mod <- svyglm(
     formula = sch.wide ~ ell + meals + mobility,
     design = dstrat,
     family = quasibinomial()
   )
-  
+
   expect_error(
     tidy(mod, conf.int = TRUE),
     NA

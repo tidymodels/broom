@@ -44,7 +44,6 @@ fit <- fitdistr(x, dnorm, list(mean = 3, sd = 1))
 
 tidy(fit)
 glance(fit)
-
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[MASS:fitdistr]{MASS::fitdistr()}}

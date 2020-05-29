@@ -41,7 +41,6 @@ o <- optim(c(1, 1, 1), f)
 
 tidy(o)
 glance(o)
-
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[stats:optim]{stats::optim()}}
@@ -58,6 +57,6 @@ Other list tidiers:
 A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
   \item{parameter}{The parameter being modeled.}
   \item{std.error}{The standard error of the regression term.}
-  \item{value}{TODO. needs better documentation.}
+  \item{value}{The value/estimate of the component. Results from data reshaping.}
 \code{std.error} is only provided as a column if the Hessian is calculated.
 }

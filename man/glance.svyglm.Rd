@@ -49,11 +49,11 @@ data(api)
 # survey design
 dstrat <-
   svydesign(
-    id =  ~ 1,
-    strata =  ~ stype,
-    weights =  ~ pw,
+    id = ~1,
+    strata = ~stype,
+    weights = ~pw,
     data = apistrat,
-    fpc =  ~ fpc
+    fpc = ~fpc
   )
 
 # model
@@ -64,7 +64,6 @@ m <- survey::svyglm(
 )
 
 glance(m)
-
 }
 \references{
 Lumley T, Scott A (2015). AIC and BIC for modelling with complex

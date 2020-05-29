@@ -46,7 +46,6 @@ co
 
 tidy(co)
 glance(co)
-
 }
 \seealso{
 \code{\link[=glance]{glance()}}, \code{\link[orcutt:cochrane.orcutt]{orcutt::cochrane.orcutt()}}
@@ -58,12 +57,12 @@ Other orcutt tidiers:
 \value{
 A \code{\link[tibble:tibble]{tibble::tibble()}} with exactly one row and columns:
   \item{adj.r.squared}{Adjusted R squared statistic, which is like the R squared statistic except taking degrees of freedom into account.}
-  \item{dw.original}{Durbin-Watson statistic of original fit}
-  \item{dw.transformed}{Durbin-Watson statistic of transformed fit}
+  \item{dw.original}{Durbin-Watson statistic of original fit.}
+  \item{dw.transformed}{Durbin-Watson statistic of transformed fit.}
   \item{nobs}{Number of observations used.}
-  \item{number.interaction}{Number of interactions}
-  \item{p.value.original}{P-value of original Durbin-Watson statistic}
-  \item{p.value.transformed}{P-value of autocorrelation after transformation}
+  \item{number.interaction}{Number of interactions.}
+  \item{p.value.original}{P-value of original Durbin-Watson statistic.}
+  \item{p.value.transformed}{P-value of autocorrelation after transformation.}
   \item{r.squared}{R squared statistic, or the percent of variation explained by the model. Also known as the coefficient of determination.}
   \item{rho}{Spearman's rho autocorrelation}
 

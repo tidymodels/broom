@@ -23,7 +23,7 @@ the \code{data} argument.}
 Tidy summarizes information about the components of a model.
 A model component might be a single term in a regression, a single
 hypothesis, a cluster, or a class. Exactly what tidy considers to be a
-model component varies cross models but is usually self-evident.
+model component varies across models but is usually self-evident.
 If a model has several distinct types of components, you will need to
 specify which components to return.
 }
@@ -31,12 +31,12 @@ specify which components to return.
 
 spl <- smooth.spline(mtcars$wt, mtcars$mpg, df = 4)
 augment(spl, mtcars)
-augment(spl)  # calls original columns x and y
+augment(spl) # calls original columns x and y
 
 library(ggplot2)
 ggplot(augment(spl, mtcars), aes(wt, mpg)) +
-    geom_point() + geom_line(aes(y = .fitted))
-
+  geom_point() +
+  geom_line(aes(y = .fitted))
 }
 \seealso{
 \code{\link[=augment]{augment()}}, \code{\link[stats:smooth.spline]{stats::smooth.spline()}}
@@ -47,12 +47,12 @@ Other smoothing spline tidiers:
 \concept{smoothing spline tidiers}
 \value{
 A \code{\link[tibble:tibble]{tibble::tibble()}} with exactly one row and columns:
-  \item{crit}{minimized criterion}
-  \item{cv.crit}{cross-validation score}
+  \item{crit}{Minimized criterion}
+  \item{cv.crit}{Cross-validation score}
   \item{df}{Degrees of freedom used by the model.}
-  \item{lambda}{choice of lambda corresponding to `spar`}
+  \item{lambda}{Choice of lambda corresponding to `spar`.}
   \item{nobs}{Number of observations used.}
-  \item{pen.crit}{penalized criterion}
-  \item{spar}{smoothing parameter}
+  \item{pen.crit}{Penalized criterion.}
+  \item{spar}{Smoothing parameter.}
 
 }

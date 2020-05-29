@@ -47,7 +47,7 @@ data).}
 component. That is, the location of the observation in PCA space.}
 
 If \code{matrix} is \code{"v"}, \code{"rotation"}, \code{"loadings"} or \code{"variables"}, each
-row in the tidied ouput corresponds to information about the principle
+row in the tidied output corresponds to information about the principle
 components in the original space. The columns are:
 
 \item{\code{row}}{The variable labels (colnames) of the data set on
@@ -100,16 +100,14 @@ library(ggplot2)
 library(dplyr)
 
 ggplot(tidy_d, aes(PC, percent)) +
-    geom_point() +
-    ylab("\% of variance explained")
+  geom_point() +
+  ylab("\% of variance explained")
 
 tidy_u \%>\%
-    mutate(Species = iris$Species[row]) \%>\%
-    ggplot(aes(Species, value)) +
-    geom_boxplot() +
-    facet_wrap(~ PC, scale = "free_y")
-
-
+  mutate(Species = iris$Species[row]) \%>\%
+  ggplot(aes(Species, value)) +
+  geom_boxplot() +
+  facet_wrap(~PC, scale = "free_y")
 }
 \seealso{
 \code{\link[=svd]{svd()}}

@@ -38,11 +38,10 @@ the measure will be reported as \code{NA}.
 
 library(muhaz)
 
-data(ovarian, package="survival")
+data(ovarian, package = "survival")
 x <- muhaz::muhaz(ovarian$futime, ovarian$fustat)
 tidy(x)
 glance(x)
-
 }
 \seealso{
 \code{\link[=glance]{glance()}}, \code{\link[muhaz:muhaz]{muhaz::muhaz()}}
@@ -53,9 +52,10 @@ Other muhaz tidiers:
 \concept{muhaz tidiers}
 \value{
 A \code{\link[tibble:tibble]{tibble::tibble()}} with exactly one row and columns:
-  \item{max.hazard}{Maximal estimated hazard}
-  \item{max.time}{The maximum observed event or censoring time}
-  \item{min.time}{The minimum observed event or censoring time}
+  \item{max.hazard}{Maximal estimated hazard.}
+  \item{max.time}{The maximum observed event or censoring time.}
+  \item{min.hazard}{Minimal estimated hazard.}
+  \item{min.time}{The minimum observed event or censoring time.}
   \item{nobs}{Number of observations used.}
 
 }

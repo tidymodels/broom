@@ -27,7 +27,7 @@ test_that("gmm tidier arguments", {
 test_that("tidy.gmm", {
   td <- tidy(fit)
   td2 <- tidy(fit, conf.int = TRUE)
-  
+
   check_tidy_output(td)
   check_tidy_output(td2)
 })

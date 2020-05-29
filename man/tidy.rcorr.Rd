@@ -30,7 +30,7 @@ the \code{data} argument.}
 Tidy summarizes information about the components of a model.
 A model component might be a single term in a regression, a single
 hypothesis, a cluster, or a class. Exactly what tidy considers to be a
-model component varies cross models but is usually self-evident.
+model component varies across models but is usually self-evident.
 If a model has several distinct types of components, you will need to
 specify which components to return.
 }
@@ -62,15 +62,14 @@ ggplot(td, aes(p.value)) +
 ggplot(td, aes(estimate, p.value)) +
   geom_point() +
   scale_y_log10()
-
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[Hmisc:rcorr]{Hmisc::rcorr()}}
 }
 \value{
 A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
-  \item{column1}{Name or index of the first column being described}
-  \item{column2}{Name or index of the second column being described}
+  \item{column1}{Name or index of the first column being described.}
+  \item{column2}{Name or index of the second column being described.}
   \item{estimate}{The estimated value of the regression term.}
   \item{p.value}{The two-sided p-value associated with the observed statistic.}
   \item{n}{Number of observations used to compute the correlation}

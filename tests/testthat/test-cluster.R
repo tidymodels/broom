@@ -19,7 +19,7 @@ test_that("pam tidier arguments", {
 
 test_that("tidy.pam", {
   td <- tidy(fit)
-  
+
   # includes names of input data columns, so strict = FALSE
   check_tidy_output(td, strict = FALSE)
   check_dims(td, 3, 11)
@@ -32,7 +32,6 @@ test_that("glance.pam", {
 })
 
 test_that("augment.pam", {
-  
   check_augment_function(
     aug = augment.pam,
     model = fit,

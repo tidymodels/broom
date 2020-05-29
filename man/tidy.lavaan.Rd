@@ -49,19 +49,19 @@ variances of exogenous covariates.}
 Tidy summarizes information about the components of a model.
 A model component might be a single term in a regression, a single
 hypothesis, a cluster, or a class. Exactly what tidy considers to be a
-model component varies cross models but is usually self-evident.
+model component varies across models but is usually self-evident.
 If a model has several distinct types of components, you will need to
 specify which components to return.
 }
 \examples{
 
 library(lavaan)
- 
-cfa.fit <- cfa('F =~ x1 + x2 + x3 + x4 + x5 + x6 + x7 + x8 + x9',
-               data = HolzingerSwineford1939, group = "school")
-               
-tidy(cfa.fit)
 
+cfa.fit <- cfa("F =~ x1 + x2 + x3 + x4 + x5 + x6 + x7 + x8 + x9",
+  data = HolzingerSwineford1939, group = "school"
+)
+
+tidy(cfa.fit)
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[lavaan:cfa]{lavaan::cfa()}}, \code{\link[lavaan:sem]{lavaan::sem()}},

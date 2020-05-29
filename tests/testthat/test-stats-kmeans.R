@@ -20,7 +20,7 @@ test_that("kmeans tidier arguments", {
   check_arguments(augment.kmeans, strict = FALSE)
 })
 
-# tidy.kmeans uses the orginal column names to name columns in output.  
+# tidy.kmeans uses the orginal column names to name columns in output.
 # Therefore, strict must be set to FALSE for this test to pass.
 test_that("tidy.kmeans", {
   td <- tidy(fit)
@@ -33,13 +33,13 @@ test_that("tidy.kmeans", {
 })
 
 test_that("augment.kmeans", {
-  
+
   # data argument cannot be empty
   expect_error(
     augment(fit),
     regexp = "argument \"data\" is missing, with no default"
   )
-  
+
   check_augment_function(
     aug = augment.kmeans,
     model = fit,
@@ -47,7 +47,7 @@ test_that("augment.kmeans", {
     newdata = x,
     strict = FALSE
   )
-  
+
   check_augment_function(
     aug = augment.kmeans,
     model = fit2,
