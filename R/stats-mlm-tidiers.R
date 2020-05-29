@@ -36,8 +36,11 @@ tidy.mlm <- function(x,
   nn <- c("estimate", "std.error", "statistic", "p.value")
 
   # multiple response variables
-  ret <- purrr::map_df(co, as_broom_tibble, .id = "response") %>%
-    setNames(c("response", "term", nn[1:ncol(co[[1]])]))
+  ret <- map_as_broom_tidy_tibble(
+    co,
+    new_names = nn[1:ncol(co[[1]])],
+    id_column = "response"
+  )
   
   ret$response <- stringr::str_replace(ret$response, "Response ", "")
 

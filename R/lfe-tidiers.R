@@ -53,14 +53,15 @@ tidy.felm <- function(x, conf.int = FALSE, conf.level = .95, fe = FALSE, robust 
   if (has_multi_response) {
     ret <- map_df(x$lhs, function(y) {
       stats::coef(summary(x, lhs = y, robust = robust)) %>%
-        as_broom_tibble() %>%
-        setNames(c("term", nn)) %>%
+        as_broom_tidy_tibble(new_names = nn) %>%
         mutate(response = y)
     }) %>%
       select(response, dplyr::everything())
   } else {
-    ret <- as_broom_tibble(stats::coef(summary(x, robust = robust))) %>%
-      setNames(c("term", nn))
+    ret <- ret <- as_broom_tidy_tibble(
+      stats::coef(summary(x, robust = robust)), 
+      new_names = nn
+    )
   }
 
 

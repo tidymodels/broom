@@ -45,8 +45,10 @@ tidy.gam <- function(x, parametric = FALSE, conf.int = FALSE,
   }
   if (parametric) {
     px <- summary(x)$p.table
-    ret <- as_broom_tibble(px) %>%
-      setNames(c("term", "estimate", "std.error", "statistic", "p.value"))
+    ret <- as_broom_tidy_tibble(
+      px, 
+      new_names = c("estimate", "std.error", "statistic", "p.value")
+    )
     if (conf.int) {
       # avoid "Waiting for profiling to be done..." message
       # This message doesn't seem to happen with confint.default

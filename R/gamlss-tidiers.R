@@ -34,9 +34,10 @@ tidy.gamlss <- function(x, ...) {
   utils::capture.output(s <- summary(x, type = "qr"))
 
   # tidy the coefficients much as would be done for a linear model
-  nn <- c("estimate", "std.error", "statistic", "p.value")
-  ret <- as_broom_tibble(s) %>%
-    setNames(c("term", nn))
+  ret <- as_broom_tidy_tibble(
+    s, 
+    new_names = c("estimate", "std.error", "statistic", "p.value")
+  )
 
   # add parameter types. This assumes each coefficient table starts
   # with "(Intercept)": unclear if this is guaranteed

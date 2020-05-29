@@ -157,10 +157,5 @@ process_rq <- function(rq_obj, se.type = NULL,
     co[["conf.high"]] <- co[["estimate"]] + (cv[2] * co[["std.error"]])
   }
   co[["tau"]] <- rq_obj[["tau"]]
-  co <- as_broom_tibble(co)
-  if (".rownames" %in% colnames(co)) {
-    co %>% dplyr::rename(term = .rownames)
-  } else {
-    co
-  }
+  as_broom_tidy_tibble(co)
 }

@@ -37,13 +37,10 @@
 #' @aliases betareg_tidiers
 tidy.betareg <- function(x, conf.int = FALSE, conf.level = .95, ...) {
   
-  ret <- purrr::map_df(
-    coef(summary(x)),
-    function(x_) {
-      as_broom_tibble(as.matrix(x_)) %>%
-        setNames(c("term", "estimate", "std.error", "statistic", "p.value"))
-      },
-    .id = "component")
+  ret <- map_as_broom_tidy_tibble(
+    purrr::map(coef(summary(x)), as.matrix),
+    new_names = c("estimate", "std.error", "statistic", "p.value")
+  )
 
   if (conf.int) {
     conf <- unrowname(confint(x, level = conf.level))

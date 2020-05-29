@@ -26,7 +26,8 @@ exponentiate <- function(data) {
 #'
 #' A thin wrapper around [tibble::as_tibble()], except checks for
 #' rownames and adds them to a new column `.rownames` if they are
-#' interesting (i.e. more than `1, 2, 3, ...`).
+#' interesting (i.e. more than `1, 2, 3, ...`). This function is
+#' meant for use inside of `augment.*` methods.
 #'
 #' @param data A [data.frame()] or [tibble::tibble()].
 #'
@@ -51,9 +52,64 @@ as_broom_tibble <- function(data) {
   )
 
   if (has_rownames(data)) {
-    df <- tibble::add_column(df, .rownames = rownames(data), .before = TRUE)
+    df <- tibble::add_column(df, 
+                             .rownames = rownames(data), 
+                             .before = TRUE)
   }
   df
+}
+
+#' Convert a data.frame or matrix to a tibble
+#' 
+#' This function is meant for use inside `tidy.*` methods.
+#'
+#' @param x a data.frame or matrix
+#' @param new_names new column names, not including the rownames
+#' @param new_col the name of the new rownames column
+#'
+#' @return a tibble with rownames moved into a column and new column
+#' names assigned
+#' @noRd
+as_broom_tidy_tibble <- function(x, new_names = NULL, new_column = "term") {
+  
+  if (!is.null(new_names) && length(new_names) != ncol(x)) {
+    stop("newnames must be NULL or have length equal to number of columns")
+  }
+
+  ret <- x
+  
+  # matrices will take setNames by element, so rename conditionally
+  if (!is.null(new_names)) {
+    if (inherits(x, "data.frame")) {
+      ret <- setNames(x, new_names)
+    } else {
+      colnames(ret) <- new_names
+    }
+  }
+  
+  if (all(rownames(x) == seq_len(nrow(x)))) {
+    # don't need to move rownames into a new column
+    tibble::as_tibble(ret)
+  } else {
+    # don't use tibble rownames to col because of name repairing
+    dplyr::bind_cols(!!new_column := rownames(x), 
+                     tibble::as_tibble(ret))
+  }
+}
+
+#' @param x A list of data.frames or matrices
+#' @param ... Extra arguments to pass to as_broom_tidy_tibble
+#' @param id_column The name of the column giving the name of each 
+#' element in `x`
+map_as_broom_tidy_tibble <- function(x, 
+                                     ..., 
+                                     id_column = "component") {
+  
+  purrr::map_df(x, 
+                as_broom_tidy_tibble, 
+                ...,
+                .id = id_column)
+  
 }
 
 # copied from modeltests. re-export if at some we Import modeltests rather
@@ -343,6 +399,7 @@ broom_confint_terms <- function(x, ...) {
 #' @importFrom utils globalVariables
 globalVariables(
   c(
+    ":=",
     ".",
     ".fitted",
     ".id",

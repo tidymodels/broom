@@ -125,5 +125,5 @@ tidy.confusionMatrix <- function(x, by_class = TRUE, ...) {
     )
   }
 
-  df
+  as_broom_tidy_tibble(df)
 }

@@ -30,9 +30,8 @@
 tidy.garch <- function(x, ...) {
   s <- summary(x)
   co <- s$coef
-  nn <- c("term", "estimate", "std.error", "statistic", "p.value")
-  as_broom_tibble(co) %>% 
-    setNames(nn)
+  nn <- c("estimate", "std.error", "statistic", "p.value")
+  as_broom_tidy_tibble(co, new_names = nn[1:ncol(co)])
 }
 
 #' @templateVar class garch

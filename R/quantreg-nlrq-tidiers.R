@@ -12,9 +12,11 @@
 #' @seealso [tidy()], [quantreg::nlrq()]
 #' @family quantreg tidiers
 tidy.nlrq <- function(x, conf.int = FALSE, conf.level = 0.95, ...) {
-  nn <- c("estimate", "std.error", "statistic", "p.value")
-  ret <- as_broom_tibble(coef(summary(x))) %>%
-    setNames(c("term", nn))
+  
+  ret <- as_broom_tidy_tibble(
+    coef(summary(x)), 
+    new_names = c("estimate", "std.error", "statistic", "p.value")
+  )
 
   if (conf.int) {
     x_summary <- summary(x)

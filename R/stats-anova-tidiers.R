@@ -232,9 +232,10 @@ tidy.manova <- function(x, test = "Pillai", ...) {
   ))
   test.name <- c("pillai", "wilks", "hl", "roy")[test.pos]
 
-  nn <- c("df", test.name, "statistic", "num.df", "den.df", "p.value")
-  as_broom_tibble(summary(x, test = test, ...)$stats) %>%
-    setNames(c("term", nn))
+  as_broom_tidy_tibble(
+    summary(x, test = test, ...)$stats, 
+    new_names = c("df", test.name, "statistic", "num.df", "den.df", "p.value")
+  )
 }
 
 
@@ -322,9 +323,12 @@ tidy.TukeyHSD <- function(x, ...) {
     function(e) {
       null.value <- rep(0, nrow(e))
       e <- cbind(null.value, e)
-      nn <- c("null.value", "estimate", "conf.low", "conf.high", "adj.p.value")
-      as_broom_tibble(e) %>%
-        setNames(c("contrast", nn))
+      as_broom_tidy_tibble(
+        e, 
+        new_names = c("null.value", "estimate", "conf.low", 
+                      "conf.high", "adj.p.value"), 
+        new_column = "contrast"
+      )
     },
     .id = "term"
   )

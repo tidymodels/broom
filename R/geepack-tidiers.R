@@ -38,9 +38,10 @@ tidy.geeglm <- function(x, conf.int = FALSE, conf.level = .95,
                         exponentiate = FALSE, ...) {
   co <- stats::coef(summary(x))
 
-  nn <- c("estimate", "std.error", "statistic", "p.value")
-  ret <- as_broom_tibble(co) %>%
-    setNames(c("term", nn[1:ncol(co)]))
+  ret <- as_broom_tidy_tibble(
+    co, 
+    c("estimate", "std.error", "statistic", "p.value")[1:ncol(co)]
+  )
 
   process_geeglm(ret, x,
     conf.int = conf.int, conf.level = conf.level,

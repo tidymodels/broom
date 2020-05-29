@@ -21,9 +21,10 @@
 #' @aliases lmtest_tidiers coeftest_tidiers
 tidy.coeftest <- function(x, conf.int = FALSE, conf.level = .95, ...) {
   co <- as.data.frame(unclass(x))
-  nn <- c("estimate", "std.error", "statistic", "p.value")[1:ncol(co)]
-  ret <- as_broom_tibble(co) %>%
-    setNames(c("term", nn))
+  ret <- as_broom_tidy_tibble(
+    co, 
+    new_names = c("estimate", "std.error", "statistic", "p.value")[1:ncol(co)]
+  )
   
   if (conf.int) {
     if (utils::packageVersion("lmtest") < "0.9.37") {

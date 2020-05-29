@@ -40,14 +40,13 @@ tidy.survreg <- function(x, conf.level = .95, conf.int = FALSE, ...) {
   # (The column is not present if robust=FALSE)
   s <- s[, colnames(s) != "(Naive SE)", drop = FALSE]
   nn <- c("estimate", "std.error", "statistic", "p.value")
-  ret <- as_broom_tibble(s) %>%
-    setNames(c("term", nn))
+  ret <- as_broom_tidy_tibble(s, new_names = nn)
   
   if (conf.int) {
     # add confidence interval
     ci <- stats::confint(x, level = conf.level)
     colnames(ci) <- c("conf.low", "conf.high")
-    ci <- as_broom_tibble(ci) %>% dplyr::rename(term = .rownames)
+    ci <- as_broom_tidy_tibble(ci)
     ret <- as_tibble(merge(ret, ci, all.x = TRUE, sort = FALSE))
   }
 

@@ -35,8 +35,11 @@
 #' @seealso [tidy()], [psych::cohen.kappa()]
 #'
 tidy.kappa <- function(x, ...) {
-  ret <- as_broom_tibble(x$confid) %>%
-    setNames(c("type", "conf.low", "estimate", "conf.high")) %>%
+  ret <- as_broom_tidy_tibble(
+    x$confid, 
+    new_names = c("conf.low", "estimate", "conf.high"), 
+    new_column = "type"
+  ) %>%
     dplyr::select(type, estimate, conf.low, conf.high) %>%
     mutate(type = gsub(" kappa", "", type))
 

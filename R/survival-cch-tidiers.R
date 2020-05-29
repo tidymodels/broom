@@ -43,8 +43,11 @@
 tidy.cch <- function(x, conf.level = .95, ...) {
   s <- summary(x)
   co <- stats::coefficients(s)
-  ret <- as_broom_tibble(co) %>%
-    setNames(c("term", "estimate", "std.error", "statistic", "p.value"))
+
+  ret <- as_broom_tidy_tibble(
+    co, 
+    new_names = c("estimate", "std.error", "statistic", "p.value")
+  )
 
   # add confidence interval
   ci <- unrowname(stats::confint(x, level = conf.level))

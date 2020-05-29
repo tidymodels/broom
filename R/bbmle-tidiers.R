@@ -25,9 +25,10 @@
 #' @aliases mle2_tidiers bbmle_tidiers
 tidy.mle2 <- function(x, conf.int = FALSE, conf.level = .95, ...) {
   co <- bbmle::coef(bbmle::summary(x))
-  nn <- c("estimate", "std.error", "statistic", "p.value")
-  ret <- as_broom_tibble(co) %>%
-    setNames(c("term", nn))
+  ret <- ret <- as_broom_tidy_tibble(
+    co,
+    new_names = c("estimate", "std.error", "statistic", "p.value")
+  )
 
   if (conf.int) {
 
