@@ -55,8 +55,8 @@
 tidy.mfx <-
   function(x, conf.int = FALSE, conf.level = 0.95, ...) {
     
-    nn <- c("estimate", "std.error", "statistic", "p.value")
-    x_tidy <- fix_data_frame(x$mfxest, nn)
+    x_tidy <- as_tibble(x$mfxest, rownames = "term")
+    colnames(x_tidy) <- c("term", "estimate", "std.error", "statistic", "p.value")
     
     ## Optional: Add "atmean" column
     ## If no "atmean" argument is specified in the model call, then will default to TRUE
