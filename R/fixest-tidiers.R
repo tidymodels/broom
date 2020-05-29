@@ -91,8 +91,9 @@ tidy_summary_fixest <- function(x, conf.int = conf.int, conf.level = conf.level,
     )
   }
   coeftable <- x$coeftable
-  nn <- c("estimate", "std.error", "statistic", "p.value")
-  ret <- fix_data_frame(coeftable, nn)
+  ret <- as_tibble(coeftable, rownames = "term")
+  colnames(ret) <- c("term", "estimate", "std.error", "statistic", "p.value")
+
   if (conf.int) {
     # It's possible we were passed a summary of a fixest object. If no `...`
     # arguments were specified, then we want to use the std error that `x`
@@ -109,13 +110,13 @@ tidy_summary_fixest <- function(x, conf.int = conf.int, conf.level = conf.level,
 
 tidy_fixest <- function(x, conf.int = conf.int, conf.level = conf.level, ...) {
   coeftable <- summary(x, ...)$coeftable
-  nn <- c("estimate", "std.error", "statistic", "p.value")
-  ret <- fix_data_frame(coeftable, nn)
+  ret <- as_tibble(coeftable, rownames = "term")
+  colnames(ret) <- c("term", "estimate", "std.error", "statistic", "p.value")
   if (conf.int) {
     CI <- stats::confint(x, level = conf.level, ...)
     # Bind to rest of tibble
     colnames(CI) <- c("conf.low", "conf.high")
-    ret <- cbind(ret, unrowname(CI))
+    ret <- bind_cols(ret, unrowname(CI))
   }
   ret
 }

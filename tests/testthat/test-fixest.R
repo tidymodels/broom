@@ -144,8 +144,8 @@ test_that("tidiers work with model results or summary of model results", {
   res_glm_summ <- summary(fixest::feglm(v2 ~ v4 | id, data=df), se="white")
   expect_equal(tidy(res_glm, se="white"), tidy(res_glm_summ))
   expect_equal(
-    tidy(res_glm, se="white", conf.int = TRUE),
-    tidy(res_glm_summ, conf.int = TRUE)
+    as.data.frame(tidy(res_glm, se="white", conf.int = TRUE)),
+    as.data.frame(tidy(res_glm_summ, conf.int = TRUE))
   )
   expect_equal(glance(res_glm, se="white"), glance(res_glm_summ))
   expect_equal(augment(res_glm, df, se="white"), augment(res_glm_summ, df))
