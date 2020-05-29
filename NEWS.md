@@ -99,7 +99,7 @@ pending getting `safepredict()` going urgh)
 
 - Added tidier for `car::Anova` (#754)
 
-- Tidy methods for `car::Anova` (#754)
+- Added tidiers for objects from the `mfx` package (#700 by @grantmcdermott)
 
 - Added `tidy()` and `glance()` methods for `speedglm` objects from the `speedglm` package
 
