@@ -8,8 +8,10 @@ aovlist
 AppVeyor
 Arel
 Arima
+atmean
 availabilty
 Bera
+betamfx
 betareg
 bgterm
 Biesanz
@@ -124,6 +126,7 @@ Mclust
 MCMLE
 McNemar
 medoid
+mfx
 mgcv
 Michał
 miscellenea
@@ -162,6 +165,7 @@ overidentifying
 packge
 pam
 pca
+Pennec
 permutational
 Pillai
 Pillai's
@@ -193,11 +197,13 @@ rq
 rqs
 rsample
 rscore
+Saldana
 sapharm
 Sargan
 Schreiber
 se
 SEM
+Shabbh
 Silverman's
 SMA
 somwhat

@@ -19,7 +19,8 @@
 \method{tidy}{probitmfx}(x, conf.int = FALSE, conf.level = 0.95, ...)
 }
 \arguments{
-\item{x}{A \code{logitmfx}, \code{negbinmfx}, \code{poissonmfx}, or \code{probitmfx}  object. (Note that \code{betamfx} objects receive their own set of tidiers.)}
+\item{x}{A \code{logitmfx}, \code{negbinmfx}, \code{poissonmfx}, or \code{probitmfx}  object.
+(Note that \code{betamfx} objects receive their own set of tidiers.)}
 
 \item{conf.int}{Logical indicating whether or not to include a confidence
 interval in the tidied output. Defaults to \code{FALSE}.}
@@ -42,7 +43,7 @@ the \code{data} argument.}
 Tidy summarizes information about the components of a model.
 A model component might be a single term in a regression, a single
 hypothesis, a cluster, or a class. Exactly what tidy considers to be a
-model component varies cross models but is usually self-evident.
+model component varies across models but is usually self-evident.
 If a model has several distinct types of components, you will need to
 specify which components to return.
 
@@ -54,7 +55,7 @@ effects were originally calculated (see Details below).
 }
 \details{
 The \code{mfx} package provides methods for calculating marginal effects
-for various generalised linear models (GLMs). Unlike standard linear
+for various generalized linear models (GLMs). Unlike standard linear
 models, estimated model coefficients in a GLM cannot be directly
 interpreted as marginal effects (i.e., the change in the response variable
 predicted after a one unit change in one of the regressors). This is
@@ -106,6 +107,8 @@ A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
   \item{statistic}{The value of a T-statistic to use in a hypothesis that the regression term is non-zero.}
   \item{std.error}{The standard error of the regression term.}
   \item{term}{The name of the regression term.}
-  \item{atmean}{TRUE if the marginal effects were originally calculated as the partial effects for the average observation. If FALSE, then these were instead calculated as average partial effects.}
+  \item{atmean}{TRUE if the marginal effects were originally calculated as 
+  the partial effects for the average observation. If FALSE, then these 
+  were instead calculated as average partial effects.}
 
 }

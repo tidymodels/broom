@@ -5,12 +5,15 @@
 #'   effects instead of the naive model coefficients. The returned tidy tibble 
 #'   will also include an additional "atmean" column indicating how the marginal 
 #'   effects were originally calculated (see Details below).
-#' @param x A `logitmfx`, `negbinmfx`, `poissonmfx`, or `probitmfx`  object. (Note that `betamfx` objects receive their own set of tidiers.)
+#' @param x A `logitmfx`, `negbinmfx`, `poissonmfx`, or `probitmfx`  object. 
+#' (Note that `betamfx` objects receive their own set of tidiers.)
 #' @template param_confint
 #' @template param_unused_dots
 #' @evalRd return_tidy(
 #'   "term",
-#'   atmean = "TRUE if the marginal effects were originally calculated as the partial effects for the average observation. If FALSE, then these were instead calculated as average partial effects.",
+#'   atmean = "TRUE if the marginal effects were originally calculated as 
+#'   the partial effects for the average observation. If FALSE, then these 
+#'   were instead calculated as average partial effects.",
 #'   "estimate",
 #'   "std.error",
 #'   "statistic",
@@ -19,7 +22,7 @@
 #'   "conf.high"
 #' )
 #' @details The `mfx` package provides methods for calculating marginal effects
-#'   for various generalised linear models (GLMs). Unlike standard linear 
+#'   for various generalized linear models (GLMs). Unlike standard linear 
 #'   models, estimated model coefficients in a GLM cannot be directly 
 #'   interpreted as marginal effects (i.e., the change in the response variable
 #'   predicted after a one unit change in one of the regressors). This is 

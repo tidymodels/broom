@@ -30,13 +30,13 @@ the \code{data} argument.}
 Tidy summarizes information about the components of a model.
 A model component might be a single term in a regression, a single
 hypothesis, a cluster, or a class. Exactly what tidy considers to be a
-model component varies cross models but is usually self-evident.
+model component varies across models but is usually self-evident.
 If a model has several distinct types of components, you will need to
 specify which components to return.
 }
 \details{
 The \code{mfx} package provides methods for calculating marginal effects
-for various generalised linear models (GLMs). Unlike standard linear
+for various generalized linear models (GLMs). Unlike standard linear
 models, estimated model coefficients in a GLM cannot be directly
 interpreted as marginal effects (i.e., the change in the response variable
 predicted after a one unit change in one of the regressors). This is
