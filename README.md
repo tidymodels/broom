@@ -3,14 +3,8 @@
 
 # broom <img src="man/figures/logo.png" align="right" width="100" />
 
-[![CRAN
-status](https://www.r-pkg.org/badges/version/broom)](https://cran.r-project.org/package=broom)
-[![Travis-CI Build
-Status](https://travis-ci.org/tidymodels/broom.svg?branch=master)](https://travis-ci.org/tidymodels/broom)
-[![AppVeyor build
-status](https://ci.appveyor.com/api/projects/status/github/tidymodels/broom?branch=master&svg=true)](https://ci.appveyor.com/project/tidymodels/broom)
-[![Coverage
-Status](https://img.shields.io/codecov/c/github/tidymodels/broom/master.svg)](https://codecov.io/github/tidymodels/broom?branch=master)
+[![CRAN status](https://www.r-pkg.org/badges/version/broom)](https://cran.r-project.org/package=broom)
+[![R build status](https://github.com/tidymodels/broom/workflows/R-CMD-check/badge.svg)](https://github.com/tidymodels/broom/actions)[[![Codecov test coverage](https://codecov.io/gh/topepo/broom/branch/master/graph/badge.svg)](https://codecov.io/gh/topepo/broom?branch=master) 
 
 ## Overview
 
@@ -75,11 +69,11 @@ misspecification and to compare many models.
 
 ``` r
 glance(fit)
-#> # A tibble: 1 x 12
+#> # A tibble: 1 x 11
 #>   r.squared adj.r.squared sigma statistic p.value    df logLik   AIC   BIC
-#>       <dbl>         <dbl> <dbl>     <dbl>   <dbl> <dbl>  <dbl> <dbl> <dbl>
-#> 1     0.213         0.202 0.389      19.9 2.24e-8     2  -69.8  148.  160.
-#> # ... with 3 more variables: deviance <dbl>, df.residual <int>, nobs <int>
+#>       <dbl>         <dbl> <dbl>     <dbl>   <dbl> <int>  <dbl> <dbl> <dbl>
+#> 1     0.213         0.202 0.389      19.9 2.24e-8     3  -69.8  148.  160.
+#> # ... with 2 more variables: deviance <dbl>, df.residual <int>
 ```
 
 `augment` adds columns to a dataset, containing information such as
@@ -89,21 +83,21 @@ overwritten.
 
 ``` r
 augment(fit, data = iris)
-#> # A tibble: 150 x 11
-#>    Sepal.Length Sepal.Width Petal.Length Petal.Width Species .fitted
-#>           <dbl>       <dbl>        <dbl>       <dbl> <fct>     <dbl>
-#>  1          5.1         3.5          1.4         0.2 setosa     3.30
-#>  2          4.9         3            1.4         0.2 setosa     3.30
-#>  3          4.7         3.2          1.3         0.2 setosa     3.33
-#>  4          4.6         3.1          1.5         0.2 setosa     3.27
-#>  5          5           3.6          1.4         0.2 setosa     3.30
-#>  6          5.4         3.9          1.7         0.4 setosa     3.30
-#>  7          4.6         3.4          1.4         0.3 setosa     3.34
-#>  8          5           3.4          1.5         0.2 setosa     3.27
-#>  9          4.4         2.9          1.4         0.2 setosa     3.30
-#> 10          4.9         3.1          1.5         0.1 setosa     3.24
-#> # ... with 140 more rows, and 5 more variables: .resid <dbl>,
-#> #   .std.resid <dbl>, .hat <dbl>, .sigma <dbl>, .cooksd <dbl>
+#> # A tibble: 150 x 12
+#>    Sepal.Length Sepal.Width Petal.Length Petal.Width Species .fitted .se.fit
+#>           <dbl>       <dbl>        <dbl>       <dbl> <fct>     <dbl>   <dbl>
+#>  1          5.1         3.5          1.4         0.2 setosa     3.30  0.0532
+#>  2          4.9         3            1.4         0.2 setosa     3.30  0.0532
+#>  3          4.7         3.2          1.3         0.2 setosa     3.33  0.0547
+#>  4          4.6         3.1          1.5         0.2 setosa     3.27  0.0526
+#>  5          5           3.6          1.4         0.2 setosa     3.30  0.0532
+#>  6          5.4         3.9          1.7         0.4 setosa     3.30  0.0497
+#>  7          4.6         3.4          1.4         0.3 setosa     3.34  0.0546
+#>  8          5           3.4          1.5         0.2 setosa     3.27  0.0526
+#>  9          4.4         2.9          1.4         0.2 setosa     3.30  0.0532
+#> 10          4.9         3.1          1.5         0.1 setosa     3.24  0.0574
+#> # ... with 140 more rows, and 5 more variables: .resid <dbl>, .hat <dbl>,
+#> #   .sigma <dbl>, .cooksd <dbl>, .std.resid <dbl>
 ```
 
 ### Contributing
@@ -123,5 +117,6 @@ valuable.
 If you are interested in adding new tidiers methods to `broom`, please
 read `vignette("adding-tidiers")`.
 
-We have a [Contributor Code of Conduct](CODE_OF_CONDUCT.md). By
-participating in `broom` you agree to abide by its terms.
+We have a [Contributor Code of
+Conduct](https://github.com/tidymodels/broom/blob/master/.github/CODE_OF_CONDUCT.md).
+By participating in `broom` you agree to abide by its terms.

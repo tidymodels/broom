@@ -33,7 +33,7 @@ of those methods.
 
 tt <- t.test(rnorm(10))
 tidy(tt)
-glance(tt)  # same output for all htests
+glance(tt) # same output for all htests
 
 tt <- t.test(mpg ~ am, data = mtcars)
 tidy(tt)
@@ -47,7 +47,6 @@ tidy(ct)
 chit <- chisq.test(xtabs(Freq ~ Sex + Class, data = as.data.frame(Titanic)))
 tidy(chit)
 augment(chit)
-
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[stats:cor.test]{stats::cor.test()}}, \code{\link[stats:t.test]{stats::t.test()}},
@@ -65,8 +64,8 @@ A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
   \item{conf.high}{Upper bound on the confidence interval for the estimate.}
   \item{conf.low}{Lower bound on the confidence interval for the estimate.}
   \item{estimate}{The estimated value of the regression term.}
-  \item{estimate1}{Sometimes two estimates are computed, such as in a two-sample t-test}
-  \item{estimate2}{Sometimes two estimates are computed, such as in a two-sample t-test}
+  \item{estimate1}{Sometimes two estimates are computed, such as in a two-sample t-test.}
+  \item{estimate2}{Sometimes two estimates are computed, such as in a two-sample t-test.}
   \item{method}{Method used.}
   \item{p.value}{The two-sided p-value associated with the observed statistic.}
   \item{parameter}{The parameter being modeled.}

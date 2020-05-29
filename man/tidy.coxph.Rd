@@ -36,7 +36,7 @@ the \code{data} argument.}
 Tidy summarizes information about the components of a model.
 A model component might be a single term in a regression, a single
 hypothesis, a cluster, or a class. Exactly what tidy considers to be a
-model component varies cross models but is usually self-evident.
+model component varies across models but is usually self-evident.
 If a model has several distinct types of components, you will need to
 specify which components to return.
 }
@@ -60,9 +60,9 @@ resp <- levels(logan$occupation)
 n <- nrow(logan)
 indx <- rep(1:n, length(resp))
 logan2 <- data.frame(
-  logan[indx,],
+  logan[indx, ],
   id = indx,
-  tocc = factor(rep(resp, each=n))
+  tocc = factor(rep(resp, each = n))
 )
 
 logan2$case <- (logan2$occupation == logan2$tocc)
@@ -76,13 +76,11 @@ library(ggplot2)
 ggplot(lp, aes(age, .fitted, color = sex)) +
   geom_point()
 
-ggplot(risks, aes(age, .fitted, color = sex)) + 
-  geom_point()
-  
-ggplot(expected, aes(time, .fitted, color = sex)) + 
+ggplot(risks, aes(age, .fitted, color = sex)) +
   geom_point()
 
-
+ggplot(expected, aes(time, .fitted, color = sex)) +
+  geom_point()
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[survival:coxph]{survival::coxph()}}

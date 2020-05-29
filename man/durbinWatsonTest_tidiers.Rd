@@ -33,8 +33,7 @@ of those methods.
 
 dw <- car::durbinWatsonTest(lm(mpg ~ wt, data = mtcars))
 tidy(dw)
-glance(dw)  # same output for all durbinWatsonTests
-
+glance(dw) # same output for all durbinWatsonTests
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[=glance]{glance()}}, \code{\link[car:durbinWatsonTest]{car::durbinWatsonTest()}}

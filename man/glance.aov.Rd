@@ -45,7 +45,6 @@ summary.
 
 a <- aov(mpg ~ wt + qsec + disp, mtcars)
 tidy(a)
-
 }
 \seealso{
 \code{\link[=glance]{glance()}}

@@ -107,7 +107,6 @@ tidy(mod, conf.int = TRUE, conf.level = .99)
 augment(mod)
 
 glance(mod)
-
 }
 \seealso{
 \code{\link[=augment]{augment()}}, \code{\link[betareg:betareg]{betareg::betareg()}}

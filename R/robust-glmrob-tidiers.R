@@ -3,7 +3,7 @@
 #'
 #' @param x A `glmRob` object returned from [robust::glmRob()].
 #' @template param_unused_dots
-#' 
+#'
 #' @details For tidiers for robust models from the \pkg{MASS} package see
 #'   [tidy.rlm()].
 #'
@@ -12,14 +12,13 @@
 #' library(robust)
 #'
 #' gm <- glmRob(am ~ wt, data = mtcars, family = "binomial")
-#' 
+#'
 #' tidy(gm)
 #' glance(gm)
-#'
 #' @export
 #' @family robust tidiers
 #' @seealso [robust::glmRob()]
-tidy.glmRob <- function (x, ...){
+tidy.glmRob <- function(x, ...) {
   co <- stats::coef(summary(x))
   ret <- as_tibble(co, rownames = "term")
   names(ret) <- c("term", "estimate", "std.error", "statistic", "p.value")
@@ -28,10 +27,10 @@ tidy.glmRob <- function (x, ...){
 
 #' @templateVar class glmRob
 #' @template title_desc_augment
-#' 
+#'
 #' @param x Unused.
 #' @param ... Unused.
-#' 
+#'
 #' @description `augment.glmRob()` has been removed from broom. We regret
 #'   that we were unable to provide any warning for this change. The
 #'   \pkg{robust} package does not provide the functionality necessary
@@ -48,10 +47,10 @@ augment.glmRob <- function(x, ...) {
 
 #' @templateVar class glmRob
 #' @template title_desc_glance
-#' 
+#'
 #' @inherit tidy.glmRob params examples
 #' @template param_unused_dots
-#' 
+#'
 #' @evalRd return_glance(
 #'   "deviance",
 #'   "sigma",
@@ -59,11 +58,11 @@ augment.glmRob <- function(x, ...) {
 #'   "df.residual",
 #'   "nobs"
 #' )
-#' 
+#'
 #' @export
 #' @family robust tidiers
 #' @seealso [robust::glmRob()]
-#' 
+#'
 glance.glmRob <- function(x, ...) {
   s <- summary(x)
   ret <- tibble(

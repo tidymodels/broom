@@ -1,12 +1,6 @@
 # release summary
 
-broom 0.5.1 is a minor release featuring a single change to clean up CRAN check warnings:
-
-- `tidy()`, `glance()` and `augment()` are now re-exported from the [generics](https://github.com/r-lib/generics) package
-
-This may result in some breakages in packages due to minor changes in the generics signature, but these should be easy to fix.
-
-Additionally, Alex Hayes will take over maintaining the package from David Robinson.
+broom 0.5.6 is a minor release that fixes failing checks due to changes to the `tibble` package. this is a resubmission that also removes the `xergm` dependency.
 
 ## Test environments
 
@@ -17,4 +11,4 @@ Additionally, Alex Hayes will take over maintaining the package from David Robin
 
 ## R CMD check results
 
-There was 1 NOTE due to a change in maintainership.
+0 NOTES, 0 WARNINGS, 0 ERRORS

@@ -17,9 +17,9 @@ fit <- geeglm(
 
 test_that("tidy.geeglm", {
   check_arguments(tidy.geeglm)
-  
+
   td <- tidy(fit, conf.int = TRUE)
-  
+
   expect_warning(
     td2 <- tidy(fit, conf.int = FALSE, exponentiate = TRUE),
     regexp = paste(
@@ -27,7 +27,7 @@ test_that("tidy.geeglm", {
       "or logit link function"
     )
   )
-  
+
   check_tidy_output(td)
   check_tidy_output(td2)
 })

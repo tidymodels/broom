@@ -65,7 +65,7 @@ dat2 <- data.frame(
   intensity = c(7, 3, 7, 5, 7, 7, 4, 4, 5, 6)
 )
 
-res.WFE <- rma(yi, vi, mods = ~random + intensity, data = dat2, method = "FE")
+res.WFE <- rma(yi, vi, mods = ~ random + intensity, data = dat2, method = "FE")
 
 # multivariate models -----------------------------------------------------
 dat.long <-
@@ -168,7 +168,7 @@ test_that(("tidy.rma"), {
 test_that(("glance.rma"), {
   # save this one for other test
   re.glance <- glance(res.RE)
-  
+
   check_glance_outputs(re.glance)
   check_glance_outputs(glance(res.ME))
   check_glance_outputs(glance(res.FE))
@@ -177,7 +177,7 @@ test_that(("glance.rma"), {
   check_glance_outputs(glance(res.GLMM))
   check_glance_outputs(glance(res.peto))
   check_glance_outputs(glance(res.MH))
-  
+
   # check that fit statistics are not being dropped
   fit.stats <- c("logLik", "deviance", "AIC", "BIC", "AICc")
   expect_true(all(fit.stats %in% names(re.glance)))

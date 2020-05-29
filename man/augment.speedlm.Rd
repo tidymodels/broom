@@ -78,7 +78,6 @@ mod <- speedglm::speedlm(mpg ~ wt + qsec, data = mtcars, fitted = TRUE)
 tidy(mod)
 glance(mod)
 augment(mod)
-
 }
 \seealso{
 \code{\link[speedglm:speedlm]{speedglm::speedlm()}}

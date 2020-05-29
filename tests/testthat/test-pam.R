@@ -8,7 +8,7 @@ library(cluster)
 
 x <- iris %>% select(-Species)
 p <- pam(x, k = 3)
-  
+
 test_that("pam tidier arguments", {
   check_arguments(tidy.pam)
   check_arguments(glance.pam)
@@ -18,7 +18,7 @@ test_that("pam tidier arguments", {
 test_that("tidy.pam", {
   td <- tidy(p)
   td2 <- tidy(p, conf.int = TRUE)
-  
+
   expect_error(check_tidy_output(td))
   expect_error(check_tidy_output(td2))
 })
@@ -36,4 +36,3 @@ test_that("augment.pam", {
     newdata = iris
   )
 })
-

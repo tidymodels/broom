@@ -54,29 +54,28 @@ tidy.ivreg <- function(x,
   # TODO: documentation on when you get what needs to be updated !!!
 
   # case 1: user does not ask for instruments
-  
+
   if (!instruments) {
-    
     ret <- as_tibble(summary(x)$coefficients, rownames = "term")
     colnames(ret) <- c("term", "estimate", "std.error", "statistic", "p.value")
-    
+
     if (conf.int) {
       ci <- broom_confint_terms(x, level = conf.level)
       ret <- dplyr::left_join(ret, ci, by = "term")
     }
-    
+
     return(ret)
   }
 
   # case 2: user asks for instruments
-  
-  end_vars <- names(coef(x))[-1]  # subtract off the intercept
+
+  end_vars <- names(coef(x))[-1] # subtract off the intercept
   d <- summary(x, diagnostics = TRUE)$diagnostics
-  
+
   # drop last two rows, the Wu-Hausman and Sargan diagnostics
   last_two_rows <- c(nrow(d) - 1, nrow(d))
   d <- as_tibble(d)[-last_two_rows, ]
-  tibble::add_column(d, term = end_vars, .before = TRUE) %>% 
+  tibble::add_column(d, term = end_vars, .before = TRUE) %>%
     rename2("p.value" = "p-value", "num.df" = "df1", "den.df" = "df2")
 }
 

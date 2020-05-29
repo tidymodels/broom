@@ -24,7 +24,7 @@ the \code{data} argument.}
 Tidy summarizes information about the components of a model.
 A model component might be a single term in a regression, a single
 hypothesis, a cluster, or a class. Exactly what tidy considers to be a
-model component varies cross models but is usually self-evident.
+model component varies across models but is usually self-evident.
 If a model has several distinct types of components, you will need to
 specify which components to return.
 }
@@ -38,19 +38,20 @@ tidy(sfit)
 glance(sfit)
 
 library(ggplot2)
-ggplot(tidy(sfit), aes(time, estimate)) + geom_line() +
-    geom_ribbon(aes(ymin=conf.low, ymax=conf.high), alpha=.25)
+ggplot(tidy(sfit), aes(time, estimate)) +
+  geom_line() +
+  geom_ribbon(aes(ymin = conf.low, ymax = conf.high), alpha = .25)
 
 # multi-state
 fitCI <- survfit(Surv(stop, status * as.numeric(event), type = "mstate") ~ 1,
-              data = mgus1, subset = (start == 0))
+  data = mgus1, subset = (start == 0)
+)
 td_multi <- tidy(fitCI)
 td_multi
 
 ggplot(td_multi, aes(time, estimate, group = state)) +
-    geom_line(aes(color = state)) +
-    geom_ribbon(aes(ymin = conf.low, ymax = conf.high), alpha = .25)
-
+  geom_line(aes(color = state)) +
+  geom_ribbon(aes(ymin = conf.low, ymax = conf.high), alpha = .25)
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[survival:survfit]{survival::survfit()}}
@@ -80,8 +81,8 @@ Other survival tidiers:
 A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
   \item{conf.high}{Upper bound on the confidence interval for the estimate.}
   \item{conf.low}{Lower bound on the confidence interval for the estimate.}
-  \item{n.censor}{number of censored events}
-  \item{n.event}{number of events at time t}
+  \item{n.censor}{Number of censored events.}
+  \item{n.event}{Number of events at time t.}
   \item{n.risk}{Number of individuals at risk at time zero.}
   \item{std.error}{The standard error of the regression term.}
   \item{time}{Point in time.}

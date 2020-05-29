@@ -28,7 +28,7 @@ indicating which test statistic should be used. Defaults to "Pillai".}
 Tidy summarizes information about the components of a model.
 A model component might be a single term in a regression, a single
 hypothesis, a cluster, or a class. Exactly what tidy considers to be a
-model component varies cross models but is usually self-evident.
+model component varies across models but is usually self-evident.
 If a model has several distinct types of components, you will need to
 specify which components to return.
 }
@@ -41,7 +41,6 @@ Depending on which test statistic is specified only one of \code{pillai},
 npk2 <- within(npk, foo <- rnorm(24))
 m <- manova(cbind(yield, foo) ~ block + N * P * K, npk2)
 tidy(m)
-
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[stats:summary.manova]{stats::summary.manova()}}
@@ -57,8 +56,8 @@ Other anova tidiers:
 \concept{anova tidiers}
 \value{
 A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
-  \item{den.df}{Degrees of freedom of the denominator}
-  \item{num.df}{Degrees of freedom}
+  \item{den.df}{Degrees of freedom of the denominator.}
+  \item{num.df}{Degrees of freedom.}
   \item{p.value}{The two-sided p-value associated with the observed statistic.}
   \item{statistic}{The value of a T-statistic to use in a hypothesis that the regression term is non-zero.}
   \item{term}{The name of the regression term.}

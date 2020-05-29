@@ -44,8 +44,7 @@ afit <- aareg(
   dfbeta = TRUE
 )
 
-tidy(afit) 
-
+tidy(afit)
 }
 \seealso{
 \code{\link[=glance]{glance()}}, \code{\link[survival:aareg]{survival::aareg()}}

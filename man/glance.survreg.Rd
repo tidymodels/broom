@@ -51,11 +51,10 @@ glance(sr)
 # coefficient plot
 td <- tidy(sr, conf.int = TRUE)
 library(ggplot2)
-ggplot(td, aes(estimate, term)) + 
+ggplot(td, aes(estimate, term)) +
   geom_point() +
   geom_errorbarh(aes(xmin = conf.low, xmax = conf.high), height = 0) +
   geom_vline(xintercept = 0)
-
 }
 \seealso{
 \code{\link[=glance]{glance()}}, \code{\link[survival:survreg]{survival::survreg()}}

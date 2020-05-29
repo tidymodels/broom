@@ -94,8 +94,9 @@ missing at this time.
 
 library(drc)
 
-mod <- drm(dead/total~conc, type, 
-   weights = total, data = selenium, fct = LL.2(), type = "binomial")
+mod <- drm(dead / total ~ conc, type,
+  weights = total, data = selenium, fct = LL.2(), type = "binomial"
+)
 
 tidy(mod)
 tidy(mod, conf.int = TRUE)
@@ -103,8 +104,6 @@ tidy(mod, conf.int = TRUE)
 glance(mod)
 
 augment(mod, selenium)
-
-
 }
 \seealso{
 \code{\link[=augment]{augment()}}, \code{\link[drc:drm]{drc::drm()}}

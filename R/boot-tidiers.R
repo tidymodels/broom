@@ -3,11 +3,11 @@
 #'
 #' @param x A [boot::boot()] object.
 #' @template param_confint
-#' @param conf.method Passed to the `type` argument of [boot::boot.ci()]. 
-#'   Defaults to `"perc"`. The allowed types are `"perc"`, `"basic"`, 
+#' @param conf.method Passed to the `type` argument of [boot::boot.ci()].
+#'   Defaults to `"perc"`. The allowed types are `"perc"`, `"basic"`,
 #'   `"bca"`, and `"norm"`. Does not support `"stud"` or `"all"`.
 #' @template param_unused_dots
-#' 
+#'
 #' @evalRd return_tidy("bias", "std.error", "term",
 #'   statistic = "Original value of the statistic."
 #' )
@@ -19,28 +19,27 @@
 #' If there are no original statistics in the "boot" object, such as with a
 #' call to `tsboot` with `orig.t = FALSE`, the `original`
 #' and `statistic` columns are omitted, and only `estimate` and
-#' `std.error` columns shown. 
+#' `std.error` columns shown.
 #'
 #' @examples
-#' 
+#'
 #' library(boot)
-#' 
+#'
 #' clotting <- data.frame(
-#'   u = c(5,10,15,20,30,40,60,80,100),
-#'   lot1 = c(118,58,42,35,27,25,21,19,18),
-#'   lot2 = c(69,35,26,21,18,16,13,12,12)
+#'   u = c(5, 10, 15, 20, 30, 40, 60, 80, 100),
+#'   lot1 = c(118, 58, 42, 35, 27, 25, 21, 19, 18),
+#'   lot2 = c(69, 35, 26, 21, 18, 16, 13, 12, 12)
 #' )
 #'
 #' g1 <- glm(lot2 ~ log(u), data = clotting, family = Gamma)
 #'
 #' bootfun <- function(d, i) {
-#'    coef(update(g1, data = d[i, ]))
+#'   coef(update(g1, data = d[i, ]))
 #' }
-#' 
+#'
 #' bootres <- boot(clotting, bootfun, R = 999)
 #' tidy(g1, conf.int = TRUE)
 #' tidy(bootres, conf.int = TRUE)
-#'
 #' @export
 #' @aliases boot_tidiers
 #' @seealso [tidy()], [boot::boot()], [boot::tsboot()], [boot::boot.ci()],
@@ -52,9 +51,8 @@ tidy.boot <- function(x,
                       conf.level = 0.95,
                       conf.method = c("perc", "bca", "basic", "norm"),
                       ...) {
-  
   conf.method <- rlang::arg_match(conf.method)
-  
+
   # calculate the bias and standard error
   # this is an adapted version of the code in print.boot, where the bias
   # and standard error are calculated
@@ -67,7 +65,7 @@ tidy.boot <- function(x,
   index <- index[!allNA]
   t <- matrix(t[, !allNA], nrow = nrow(t))
   rn <- paste("t", index, "*", sep = "")
-  
+
   if (is.null(t0 <- boot.out$t0)) {
     if (is.null(boot.out$call$weights)) {
       op <- cbind(
@@ -89,9 +87,11 @@ tidy.boot <- function(x,
     }
     else {
       op <- NULL
-      for (i in index) op <- rbind(op, boot::imp.moments(boot.out,
+      for (i in index) {
+        op <- rbind(op, boot::imp.moments(boot.out,
           index = i
         )$rat)
+      }
       op <- cbind(t0, op[, 1L] - t0, sqrt(op[, 2L]), apply(t,
         2L, mean,
         na.rm = TRUE
@@ -101,20 +101,24 @@ tidy.boot <- function(x,
   }
 
   # bring in rownames as "term" column, and turn into a data.frame
-  ret <- fix_data_frame(op)
+  ret <- as_broom_tibble(op)
+  
+  if (".rownames" %in% colnames(ret)) {
+    ret <- ret %>% dplyr::rename(term = .rownames)
+  }
 
   if (conf.int) {
-      ci.list <- lapply(seq_along(x$t0),
-        boot::boot.ci,
-        boot.out = x,
-        conf = conf.level, type = conf.method
-        )
-    
+    ci.list <- lapply(seq_along(x$t0),
+      boot::boot.ci,
+      boot.out = x,
+      conf = conf.level, type = conf.method
+    )
+
     ## boot.ci uses c("norm", "basic", "perc", "stud") for types
     ## stores them with longer names
     ci.pos <- pmatch(conf.method, names(ci.list[[1]]))
-    
-    if(conf.method == "norm"){
+
+    if (conf.method == "norm") {
       ci.tab <- cbind(ci.list[[1]][ci.pos][[1]][2:3], ci.list[[2]][ci.pos][[1]][2:3])
     } else {
       ci.tab <- t(sapply(ci.list, function(x) x[[ci.pos]][4:5]))

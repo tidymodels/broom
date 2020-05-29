@@ -47,7 +47,6 @@ fit <- speedglm(lot1 ~ log(u), data = clotting, family = Gamma(log))
 
 tidy(fit)
 glance(fit)
-
 }
 \seealso{
 \code{\link[speedglm:speedlm]{speedglm::speedlm()}}

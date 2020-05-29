@@ -38,8 +38,9 @@ the measure will be reported as \code{NA}.
 
 library(drc)
 
-mod <- drm(dead/total~conc, type, 
-   weights = total, data = selenium, fct = LL.2(), type = "binomial")
+mod <- drm(dead / total ~ conc, type,
+  weights = total, data = selenium, fct = LL.2(), type = "binomial"
+)
 
 tidy(mod)
 tidy(mod, conf.int = TRUE)
@@ -47,8 +48,6 @@ tidy(mod, conf.int = TRUE)
 glance(mod)
 
 augment(mod, selenium)
-
-
 }
 \seealso{
 \code{\link[=glance]{glance()}}, \code{\link[drc:drm]{drc::drm()}}

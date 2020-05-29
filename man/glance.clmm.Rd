@@ -38,7 +38,7 @@ the measure will be reported as \code{NA}.
 
 library(ordinal)
 
-fit <- clmm(rating ~ temp + contact + (1|judge), data = wine)
+fit <- clmm(rating ~ temp + contact + (1 | judge), data = wine)
 
 tidy(fit)
 tidy(fit, conf.int = TRUE, conf.level = 0.9)
@@ -46,10 +46,9 @@ tidy(fit, conf.int = TRUE, exponentiate = TRUE)
 
 glance(fit)
 
-fit2 <- clmm(rating ~ temp + (1|judge), nominal = ~ contact, data = wine)
+fit2 <- clmm(rating ~ temp + (1 | judge), nominal = ~contact, data = wine)
 tidy(fit2)
 glance(fit2)
-
 }
 \seealso{
 \link{tidy}, \code{\link[ordinal:clmm]{ordinal::clmm()}}
@@ -70,7 +69,7 @@ Other ordinal tidiers:
 A \code{\link[tibble:tibble]{tibble::tibble()}} with exactly one row and columns:
   \item{AIC}{Akaike's Information Criterion for the model.}
   \item{BIC}{Bayesian Information Criterion for the model.}
-  \item{edf}{The effective degrees of freedom}
+  \item{edf}{The effective degrees of freedom.}
   \item{logLik}{The log-likelihood of the model. [stats::logLik()] may be a useful reference.}
   \item{nobs}{Number of observations used.}
 
