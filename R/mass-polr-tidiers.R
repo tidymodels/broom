@@ -1,24 +1,23 @@
 #' @templateVar class polr
 #' @template title_desc_tidy
-#' 
+#'
 #' @param x A `polr` object returned from [MASS::polr()].
 #' @template param_confint
 #' @template param_exponentiate
 #' @template param_unused_dots
-#'   
+#'
 #' @examples
-#' 
+#'
 #' library(MASS)
-#' 
+#'
 #' fit <- polr(Sat ~ Infl + Type + Cont, weights = Freq, data = housing)
-#' 
+#'
 #' tidy(fit, exponentiate = TRUE, conf.int = TRUE)
-#' 
+#'
 #' glance(fit)
 #' augment(fit, type.predict = "class")
-#' 
 #' @evalRd return_tidy(regression = TRUE)
-#' 
+#'
 #' @details In `broom 0.7.0` the `coefficient_type` column was renamed to
 #'   `coef.type`, and the contents were changed as well. Now the contents
 #'   are `coefficient` and `scale`, rather than `coefficient` and `zeta`.
@@ -29,27 +28,27 @@
 #' @family ordinal tidiers
 tidy.polr <- function(x, conf.int = FALSE, conf.level = 0.95,
                       exponentiate = FALSE, ...) {
-  
   ret <- as_tibble(coef(summary(x)), rownames = "term")
   colnames(ret) <- c("term", "estimate", "std.error", "statistic")
-  
+
   if (conf.int) {
     ci <- broom_confint_terms(x, level = conf.level)
     ret <- dplyr::left_join(ret, ci, by = "term")
   }
-  
-  if (exponentiate)
+
+  if (exponentiate) {
     ret <- exponentiate(ret)
-  
+  }
+
   mutate(
-    ret, 
+    ret,
     coef.type = if_else(term %in% names(x$zeta), "scale", "coefficient")
   )
 }
 
 #' @templateVar class polr
 #' @template title_desc_glance
-#' 
+#'
 #' @inherit tidy.polr params examples
 #'
 #' @evalRd return_glance(
@@ -79,29 +78,27 @@ glance.polr <- function(x, ...) {
 
 #' @templateVar class polr
 #' @template title_desc_augment
-#' 
+#'
 #' @inherit tidy.polr params examples
 #' @template param_data
 #' @template param_newdata
-#' 
+#'
 #' @param type.predict Which type of prediction to compute,
 #'  passed to `MASS:::predict.polr()`. Only supports `"class"` at
 #'  the moment.
-#' 
+#'
 #' @export
 #' @seealso [tidy()], [MASS::polr()]
 #' @family ordinal tidiers
-#' 
+#'
 augment.polr <- function(x, data = model.frame(x), newdata = NULL,
                          type.predict = c("class"), ...) {
-  
   type <- rlang::arg_match(type.predict)
-  
+
   df <- if (is.null(newdata)) data else newdata
   df <- as_broom_tibble(df)
-  
+
   df$.fitted <- predict(object = x, newdata = df, type = type)
-  
+
   df
-  
 }

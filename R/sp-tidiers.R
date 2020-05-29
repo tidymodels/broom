@@ -1,18 +1,18 @@
 #' @templateVar class SpatialPolygonsDataFrame
 #' @template title_desc_tidy
-#' 
+#'
 #' @description Note that the `sf` package now defines tidy spatial objects
 #'   and is the recommend approach to spatial data. `sp` tidiers are likely
 #'   to be deprecated in the near future in favor of `sf::st_as_sf()`.
 #'   Development of `sp` tidiers has halted in `broom`.
-#' 
+#'
 #' @param x A `SpatialPolygonsDataFrame`, `SpatialPolygons`, `Polygons`,
 #'   `Polygon`, `SpatialLinesDataFrame`, `Lines` or `Line` object.
 #' @param region name of variable used to split up regions
 #' @param ... not used by this method
 #'
 #' @name sp_tidiers
-#' 
+#'
 NULL
 
 #' @rdname sp_tidiers

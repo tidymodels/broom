@@ -3,21 +3,20 @@
 #'
 #' @param x A [binGroup::binWidth()] object.
 #' @template param_unused_dots
-#' 
+#'
 #' @evalRd return_tidy("ci.width", "alternative", "p",
 #'   n = "Total sample size"
 #' )
 #'
 #' @examples
-#' 
+#'
 #' library(binGroup)
 #' library(dplyr)
 #' library(ggplot2)
-#' 
+#'
 #' bw <- binWidth(100, .1)
 #' bw
 #' tidy(bw)
-#'
 #' @export
 #' @family bingroup tidiers
 #' @aliases binwidth_tidiers
@@ -42,8 +41,10 @@ tidy.binWidth <- function(x, ...) {
 #' @examples
 #'
 #' library(binGroup)
-#' des <- binDesign(nmax = 300, delta = 0.06,
-#'                  p.hyp = 0.1, power = .8)
+#' des <- binDesign(
+#'   nmax = 300, delta = 0.06,
+#'   p.hyp = 0.1, power = .8
+#' )
 #'
 #' glance(des)
 #' tidy(des)
@@ -51,9 +52,7 @@ tidy.binWidth <- function(x, ...) {
 #' # the ggplot2 equivalent of plot(des)
 #' library(ggplot2)
 #' ggplot(tidy(des), aes(n, power)) +
-#'     geom_line()
-#' 
-#'
+#'   geom_line()
 #' @export
 #' @family bingroup tidiers
 #' @aliases bindesign_tidiers
@@ -69,7 +68,7 @@ tidy.binDesign <- function(x, ...) {
 #'
 #' @param x A [binGroup::binDesign] object.
 #' @template param_unused_dots
-#' 
+#'
 #' @evalRd return_glance(
 #'   power = "Power achieved by the analysis.",
 #'   n = "Sample size uzed to achieve this power.",
@@ -80,17 +79,17 @@ tidy.binDesign <- function(x, ...) {
 #' @examples
 #'
 #' library(binGroup)
-#' des <- binDesign(nmax = 300, delta = 0.06,
-#'                  p.hyp = 0.1, power = .8)
+#' des <- binDesign(
+#'   nmax = 300, delta = 0.06,
+#'   p.hyp = 0.1, power = .8
+#' )
 #'
 #' glance(des)
 #' tidy(des)
 #'
 #' library(ggplot2)
 #' ggplot(tidy(des), aes(n, power)) +
-#'     geom_line()
-#' 
-#'
+#'   geom_line()
 #' @export
 #' @family bingroup tidiers
 #' @seealso [glance()], [binGroup::binDesign()]

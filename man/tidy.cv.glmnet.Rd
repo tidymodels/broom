@@ -23,7 +23,7 @@ the \code{data} argument.}
 Tidy summarizes information about the components of a model.
 A model component might be a single term in a regression, a single
 hypothesis, a cluster, or a class. Exactly what tidy considers to be a
-model component varies cross models but is usually self-evident.
+model component varies across models but is usually self-evident.
 If a model has several distinct types of components, you will need to
 specify which components to return.
 }
@@ -40,7 +40,7 @@ x <- matrix(rnorm(nobs * nvar), nobs, nvar)
 beta <- c(rnorm(real, 0, 1), rep(0, nvar - real))
 y <- c(t(beta) \%*\% t(x)) + rnorm(nvar, sd = 3)
 
-cvfit1 <- cv.glmnet(x,y)
+cvfit1 <- cv.glmnet(x, y)
 
 tidy(cvfit1)
 glance(cvfit1)
@@ -61,25 +61,24 @@ g
 
 # plot of MSE as a function of lambda with confidence ribbon and choices
 # of minimum lambda marked
-g <- g + 
+g <- g +
   geom_vline(xintercept = glance_cv$lambda.min) +
   geom_vline(xintercept = glance_cv$lambda.1se, lty = 2)
 g
 
 # plot of number of zeros for each choice of lambda
-ggplot(tidied_cv, aes(lambda, nzero)) + 
-  geom_line() + 
+ggplot(tidied_cv, aes(lambda, nzero)) +
+  geom_line() +
   scale_x_log10()
 
 # coefficient plot with min lambda shown
 tidied <- tidy(cvfit1$glmnet.fit)
 
-ggplot(tidied, aes(lambda, estimate, group = term)) + 
+ggplot(tidied, aes(lambda, estimate, group = term)) +
   scale_x_log10() +
   geom_line() +
   geom_vline(xintercept = glance_cv$lambda.min) +
   geom_vline(xintercept = glance_cv$lambda.1se, lty = 2)
-
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[glmnet:cv.glmnet]{glmnet::cv.glmnet()}}

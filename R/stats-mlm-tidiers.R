@@ -19,7 +19,6 @@
 #'
 #' mod <- lm(cbind(mpg, disp) ~ wt, mtcars)
 #' tidy(mod, conf.int = TRUE)
-#' 
 #' @importFrom dplyr bind_cols
 #' @export
 #' @seealso [tidy()]
@@ -32,17 +31,21 @@ tidy.mlm <- function(x,
 
   # adding other details from summary object
   s <- summary(x)
-  #ret <- tidy.summary.mlm(s)
 
   co <- stats::coef(s)
   nn <- c("estimate", "std.error", "statistic", "p.value")
-  
+
   # multiple response variables
-  ret <- purrr::map_df(co, fix_data_frame, nn[1:ncol(co[[1]])], .id = "response")
+  ret <- map_as_broom_tidy_tibble(
+    co,
+    new_names = nn[1:ncol(co[[1]])],
+    id_column = "response"
+  )
+  
   ret$response <- stringr::str_replace(ret$response, "Response ", "")
-  
+
   ret <- as_tibble(ret)
-  
+
   if (conf.int) {
 
     # S3 method for computing confidence intervals for `mlm` objects was

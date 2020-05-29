@@ -6,23 +6,20 @@
 #' @template param_unused_dots
 #'
 #' @evalRd return_tidy("size", "withinss", "cluster")
-#' 
-#' @examples 
-#' 
+#'
+#' @examples
+#'
 #' library(cluster)
 #' library(dplyr)
-#' 
-#' x <- iris %>% 
+#'
+#' x <- iris %>%
 #'   select(-Species)
-#'   
+#'
 #' fit <- pam(x, k = 3)
-#' 
+#'
 #' tidy(fit)
 #' glance(fit)
 #' augment(fit, x)
-#'
-#' 
-#' 
 #' @details For examples, see the kmeans vignette.
 #'
 #' @aliases kmeans_tidiers
@@ -30,8 +27,7 @@
 #' @seealso [tidy()], [stats::kmeans()]
 #' @family kmeans tidiers
 tidy.kmeans <- function(x, col.names = colnames(x$centers), ...) {
-  
-  if(is.null(col.names)){
+  if (is.null(col.names)) {
     col.names <- paste0("x", 1:ncol(x$centers))
   }
   ret <- as.data.frame(x$centers)
@@ -45,7 +41,7 @@ tidy.kmeans <- function(x, col.names = colnames(x$centers), ...) {
 
 #' @templateVar class kmeans
 #' @template title_desc_augment
-#' 
+#'
 #' @inherit tidy.kmeans params examples
 #' @template param_data
 #'
@@ -59,17 +55,24 @@ tidy.kmeans <- function(x, col.names = colnames(x$centers), ...) {
 #' @seealso [augment()], [stats::kmeans()]
 #' @family kmeans tidiers
 augment.kmeans <- function(x, data, ...) {
-  fix_data_frame(data, newcol = ".rownames") %>% 
+  
+  # kmeans allows for input matrices without column names,
+  # so add them in the same way that fix_data_frame() would have
+  if (inherits(data, "matrix") & is.null(colnames(data))) {
+    colnames(data) <- paste0("X", 1:ncol(data))
+  }
+  
+  as_broom_tibble(data) %>%
     mutate(.cluster = as.factor(!!x$cluster))
 }
 
 
 #' @templateVar class kmeans
 #' @template title_desc_glance
-#' 
+#'
 #' @inherit tidy.kmeans params examples
 #'
-#' @evalRd return_glance("totts","tot.withinss", "betweenss", "iter")
+#' @evalRd return_glance("totss","tot.withinss", "betweenss", "iter")
 #'
 #' @export
 #' @seealso [glance()], [stats::kmeans()]

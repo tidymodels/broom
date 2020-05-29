@@ -17,29 +17,31 @@
 #'
 #' library(geepack)
 #' data(state)
-#'   
+#'
 #' ds <- data.frame(state.region, state.x77)
 #'
-#' geefit <- geeglm(Income ~ Frost + Murder, id = state.region,
-#'                  data = ds, family = gaussian,
-#'                  corstr = "exchangeable")
+#' geefit <- geeglm(Income ~ Frost + Murder,
+#'   id = state.region,
+#'   data = ds, family = gaussian,
+#'   corstr = "exchangeable"
+#' )
 #'
 #' tidy(geefit)
 #' tidy(geefit, conf.int = TRUE)
-#'
 #' @evalRd return_tidy(regresion = TRUE)
 #'
 #' @export
 #' @aliases geeglm_tidiers geepack_tidiers
 #' @seealso [tidy()], [geepack::geeglm()]
-#' 
+#'
 tidy.geeglm <- function(x, conf.int = FALSE, conf.level = .95,
                         exponentiate = FALSE, ...) {
-  
   co <- stats::coef(summary(x))
 
-  nn <- c("estimate", "std.error", "statistic", "p.value")
-  ret <- fix_data_frame(co, nn[1:ncol(co)])
+  ret <- as_broom_tidy_tibble(
+    co, 
+    c("estimate", "std.error", "statistic", "p.value")[1:ncol(co)]
+  )
 
   process_geeglm(ret, x,
     conf.int = conf.int, conf.level = conf.level,
@@ -82,11 +84,11 @@ process_geeglm <- function(ret, x, conf.int = FALSE, conf.level = .95,
 #' interval on all parameters (all variables in the model).
 #' @param level Confidence level of the interval.
 #' @param ... Additional parameters (ignored).
-#' 
+#'
 #' @details From http://stackoverflow.com/a/21221995/2632184.
-#' 
+#'
 #' @return Lower and upper confidence bounds in a data.frame(?).
-#' 
+#'
 #' @noRd
 confint.geeglm <- function(object, parm, level = 0.95, ...) {
   cc <- stats::coef(summary(object))
@@ -104,15 +106,15 @@ confint.geeglm <- function(object, parm, level = 0.95, ...) {
 
 #' @templateVar class geeglm
 #' @template title_desc_glance
-#' 
+#'
 #' @inherit tidy.geeglm params examples
 #'
-#' @evalRd return_glance("df.residual", "n_clusters", "max_cluster_size", "alpha", "gamma")
+#' @evalRd return_glance("df.residual", "n.clusters", "max.cluster.size", "alpha", "gamma")
 #'
 #' @export
 #' @seealso [glance()], [geepack::geeglm()]
 #' @family geepack tidiers
-glance.geeglm  <- function(x, ...) {
+glance.geeglm <- function(x, ...) {
   s <- summary(x)
   tibble(
     df.residual = x$df.residual,

@@ -58,10 +58,9 @@ ggplot(td2, aes(lambda, GCV)) +
   geom_line()
 
 # add line for the GCV minimizing estimate
-ggplot(td2, aes(lambda, GCV)) + 
+ggplot(td2, aes(lambda, GCV)) +
   geom_line() +
   geom_vline(xintercept = g2$lambdaGCV, col = "red", lty = 2)
-
 }
 \seealso{
 \code{\link[=glance]{glance()}}, \code{\link[MASS:select.ridgelm]{MASS::select.ridgelm()}}, \code{\link[MASS:lm.ridge]{MASS::lm.ridge()}}

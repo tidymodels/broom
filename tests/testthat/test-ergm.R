@@ -20,27 +20,26 @@ test_that("tidy.ergm", {
   tde <- tidy(gest, conf.int = TRUE, exponentiate = TRUE)
 
   check_tidy_output(tde)
-  
+
   # regression test for #688
   expect_true("term" %in% colnames(tde))
-  
+
   # number of columns in output varies with ergm version
   # so this test is temporarily deactivated
   # check_dims(tde, 2, 7)
-  
+
   # tidy.ergm warns when exponentiating w/o link
   expect_warning(td2 <- tidy(gest2, conf.int = TRUE, exponentiate = TRUE))
-  
+
   check_tidy_output(td2)
-  
+
   # see comment above:
   # check_dims(td2, 2, 7)
 })
 
 test_that("glance.ergm", {
-  
   gl <- glance(gest, deviance = TRUE, mcmc = TRUE)
-  
+
   check_glance_outputs(gl)
   check_dims(gl, expected_cols = 12)
 })

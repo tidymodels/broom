@@ -25,7 +25,7 @@ the \code{data} argument.}
 Tidy summarizes information about the components of a model.
 A model component might be a single term in a regression, a single
 hypothesis, a cluster, or a class. Exactly what tidy considers to be a
-model component varies cross models but is usually self-evident.
+model component varies across models but is usually self-evident.
 If a model has several distinct types of components, you will need to
 specify which components to return.
 }
@@ -38,8 +38,8 @@ to \code{\link[psych:cohen.kappa]{psych::cohen.kappa()}} when creating the \code
 
 library(psych)
 
-rater1 = 1:9
-rater2 = c(1, 3, 1, 6, 1, 5, 5, 6, 7)
+rater1 <- 1:9
+rater2 <- c(1, 3, 1, 6, 1, 5, 5, 6, 7)
 ck <- cohen.kappa(cbind(rater1, rater2))
 
 tidy(ck)
@@ -49,7 +49,6 @@ library(ggplot2)
 ggplot(tidy(ck), aes(estimate, type)) +
   geom_point() +
   geom_errorbarh(aes(xmin = conf.low, xmax = conf.high))
-
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[psych:cohen.kappa]{psych::cohen.kappa()}}

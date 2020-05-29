@@ -91,7 +91,6 @@ tidy(fit, exponentiate = TRUE, conf.int = TRUE)
 
 glance(fit)
 augment(fit, type.predict = "class")
-
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[MASS:polr]{MASS::polr()}}

@@ -31,7 +31,7 @@ the \code{data} argument.}
 Tidy summarizes information about the components of a model.
 A model component might be a single term in a regression, a single
 hypothesis, a cluster, or a class. Exactly what tidy considers to be a
-model component varies cross models but is usually self-evident.
+model component varies across models but is usually self-evident.
 If a model has several distinct types of components, you will need to
 specify which components to return.
 }
@@ -41,7 +41,8 @@ library(plm)
 
 data("Produc", package = "plm")
 zz <- plm(log(gsp) ~ log(pcap) + log(pc) + log(emp) + unemp,
-          data = Produc, index = c("state","year"))
+  data = Produc, index = c("state", "year")
+)
 
 summary(zz)
 
@@ -51,7 +52,6 @@ tidy(zz, conf.int = TRUE, conf.level = 0.9)
 
 augment(zz)
 glance(zz)
-
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[plm:plm]{plm::plm()}}, \code{\link[=tidy.lm]{tidy.lm()}}

@@ -26,7 +26,7 @@ the \code{data} argument.}
 Tidy summarizes information about the components of a model.
 A model component might be a single term in a regression, a single
 hypothesis, a cluster, or a class. Exactly what tidy considers to be a
-model component varies cross models but is usually self-evident.
+model component varies across models but is usually self-evident.
 If a model has several distinct types of components, you will need to
 specify which components to return.
 }
@@ -38,17 +38,14 @@ For examples, see the kmeans vignette.
 library(cluster)
 library(dplyr)
 
-x <- iris \%>\% 
+x <- iris \%>\%
   select(-Species)
-  
+
 fit <- pam(x, k = 3)
 
 tidy(fit)
 glance(fit)
 augment(fit, x)
-
-
-
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[stats:kmeans]{stats::kmeans()}}
@@ -60,8 +57,8 @@ Other kmeans tidiers:
 \concept{kmeans tidiers}
 \value{
 A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
-  \item{cluster}{A factor describing the cluster from 1:k}
+  \item{cluster}{A factor describing the cluster from 1:k.}
   \item{size}{Number of points assigned to cluster.}
-  \item{withinss}{The within-cluster sum of squares}
+  \item{withinss}{The within-cluster sum of squares.}
 
 }

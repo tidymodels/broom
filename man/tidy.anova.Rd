@@ -24,7 +24,7 @@ the \code{data} argument.}
 Tidy summarizes information about the components of a model.
 A model component might be a single term in a regression, a single
 hypothesis, a cluster, or a class. Exactly what tidy considers to be a
-model component varies cross models but is usually self-evident.
+model component varies across models but is usually self-evident.
 If a model has several distinct types of components, you will need to
 specify which components to return.
 }
@@ -37,7 +37,6 @@ trailing whitespace, which this tidying method trims.
 a <- lm(mpg ~ wt + qsec + disp, mtcars)
 b <- lm(mpg ~ wt + qsec, mtcars)
 tidy(anova(a, b))
-
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[stats:anova]{stats::anova()}}, \code{\link[car:Anova]{car::Anova()}}
@@ -57,7 +56,7 @@ A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
   \item{meansq}{Mean sum of squares. Equal to total sum of squares divided by degrees of freedom.}
   \item{p.value}{The two-sided p-value associated with the observed statistic.}
   \item{statistic}{The value of a T-statistic to use in a hypothesis that the regression term is non-zero.}
-  \item{sumsq}{Sum of squares explained by this term}
+  \item{sumsq}{Sum of squares explained by this term.}
   \item{term}{The name of the regression term.}
 
 }

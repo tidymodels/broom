@@ -3,16 +3,16 @@
 #'
 #' @param x An object of class `confusionMatrix` created by a call to
 #' [caret::confusionMatrix()].
-#' @param by_class Logical indicating whether or not to show performance 
+#' @param by_class Logical indicating whether or not to show performance
 #' measures broken down by class. Defaults to `TRUE`. When `by_class = FALSE`
 #' only returns a tibble with accuracy, kappa, and McNemar statistics.
 #' @template param_unused_dots
-#' 
+#'
 #' @evalRd return_tidy(
-#'   "term", 
-#'   "estimate", 
-#'   "conf.low", 
-#'   "conf.high", 
+#'   "term",
+#'   "estimate",
+#'   "conf.low",
+#'   "conf.high",
 #'   "class",
 #'   p.value = "P-value for accuracy and kappa statistics."
 #' )
@@ -20,33 +20,32 @@
 #' @examples
 #'
 #' library(caret)
-#' 
+#'
 #' set.seed(27)
-#' 
+#'
 #' two_class_sample1 <- as.factor(sample(letters[1:2], 100, TRUE))
 #' two_class_sample2 <- as.factor(sample(letters[1:2], 100, TRUE))
-#' 
+#'
 #' two_class_cm <- caret::confusionMatrix(
 #'   two_class_sample1,
 #'   two_class_sample2
 #' )
-#' 
+#'
 #' tidy(two_class_cm)
 #' tidy(two_class_cm, by_class = FALSE)
-#' 
+#'
 #' # multiclass example
-#' 
+#'
 #' six_class_sample1 <- as.factor(sample(letters[1:6], 100, TRUE))
 #' six_class_sample2 <- as.factor(sample(letters[1:6], 100, TRUE))
-#' 
+#'
 #' six_class_cm <- caret::confusionMatrix(
 #'   six_class_sample1,
 #'   six_class_sample2
 #' )
-#' 
+#'
 #' tidy(six_class_cm)
 #' tidy(six_class_cm, by_class = FALSE)
-#' 
 #' @aliases caret_tidiers confusionMatrix_tidiers
 #' @export
 #' @seealso [tidy()], [caret::confusionMatrix()]
@@ -57,11 +56,11 @@ tidy.confusionMatrix <- function(x, by_class = TRUE, ...) {
 
   if (by_class) {
     # case when only 2 classes
-    if (class(x$byClass) != "matrix") {
+    if (!inherits(x$byClass, "matrix")) {
       classes <-
         x$byClass %>%
         as.data.frame() %>%
-        rename_at(1, ~ "value") %>%
+        rename_at(1, ~"value") %>%
         tibble::rownames_to_column("var") %>%
         mutate(var = stringr::str_to_lower(gsub(" ", "_", var)))
 
@@ -81,7 +80,11 @@ tidy.confusionMatrix <- function(x, by_class = TRUE, ...) {
         x$byClass %>%
         as.data.frame() %>%
         tibble::rownames_to_column("class") %>%
-        gather(var, value, -class) %>%
+        pivot_longer(
+          cols = c(dplyr::everything(), -class),
+          names_to = "var",
+          values_to = "value"
+        ) %>%
         mutate(
           var = stringr::str_to_lower(gsub(" ", "_", var)),
           class = gsub("Class: ", "", class)
@@ -122,5 +125,5 @@ tidy.confusionMatrix <- function(x, by_class = TRUE, ...) {
     )
   }
 
-  fix_data_frame(df)
+  as_broom_tidy_tibble(df)
 }

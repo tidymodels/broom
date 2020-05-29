@@ -24,7 +24,7 @@ the \code{data} argument.}
 Tidy summarizes information about the components of a model.
 A model component might be a single term in a regression, a single
 hypothesis, a cluster, or a class. Exactly what tidy considers to be a
-model component varies cross models but is usually self-evident.
+model component varies across models but is usually self-evident.
 If a model has several distinct types of components, you will need to
 specify which components to return.
 }
@@ -36,10 +36,9 @@ Tidy \code{gam} objects created by calls to \code{\link[mgcv:gam]{mgcv::gam()}} 
 
 library(gam)
 g <- gam(mpg ~ s(hp, 4) + am + qsec, data = mtcars)
-  
+
 tidy(g)
 glance(g)
-
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[gam:gam]{gam::gam()}}, \code{\link[=tidy.anova]{tidy.anova()}}, \code{\link[=tidy.gam]{tidy.gam()}}
@@ -54,7 +53,7 @@ A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
   \item{meansq}{Mean sum of squares. Equal to total sum of squares divided by degrees of freedom.}
   \item{p.value}{The two-sided p-value associated with the observed statistic.}
   \item{statistic}{The value of a T-statistic to use in a hypothesis that the regression term is non-zero.}
-  \item{sumsq}{Sum of squares explained by this term}
+  \item{sumsq}{Sum of squares explained by this term.}
   \item{term}{The name of the regression term.}
 
 }
