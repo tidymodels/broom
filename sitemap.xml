@@ -7,6 +7,9 @@
     <loc>https://broom.tidymodels.org/reference/augment.Mclust.html</loc>
   </url>
   <url>
+    <loc>https://broom.tidymodels.org/reference/augment.betamfx.html</loc>
+  </url>
+  <url>
     <loc>https://broom.tidymodels.org/reference/augment.betareg.html</loc>
   </url>
   <url>
@@ -50,6 +53,9 @@
   </url>
   <url>
     <loc>https://broom.tidymodels.org/reference/augment.loess.html</loc>
+  </url>
+  <url>
+    <loc>https://broom.tidymodels.org/reference/augment.mfx.html</loc>
   </url>
   <url>
     <loc>https://broom.tidymodels.org/reference/augment.mjoint.html</loc>
@@ -130,6 +136,9 @@
     <loc>https://broom.tidymodels.org/reference/glance.aov.html</loc>
   </url>
   <url>
+    <loc>https://broom.tidymodels.org/reference/glance.betamfx.html</loc>
+  </url>
+  <url>
     <loc>https://broom.tidymodels.org/reference/glance.betareg.html</loc>
   </url>
   <url>
@@ -203,6 +212,9 @@
   </url>
   <url>
     <loc>https://broom.tidymodels.org/reference/glance.lmodel2.html</loc>
+  </url>
+  <url>
+    <loc>https://broom.tidymodels.org/reference/glance.mfx.html</loc>
   </url>
   <url>
     <loc>https://broom.tidymodels.org/reference/glance.mjoint.html</loc>
@@ -335,6 +347,9 @@
   </url>
   <url>
     <loc>https://broom.tidymodels.org/reference/tidy.aovlist.html</loc>
+  </url>
+  <url>
+    <loc>https://broom.tidymodels.org/reference/tidy.betamfx.html</loc>
   </url>
   <url>
     <loc>https://broom.tidymodels.org/reference/tidy.betareg.html</loc>
@@ -476,6 +491,9 @@
   </url>
   <url>
     <loc>https://broom.tidymodels.org/reference/tidy.mediate.html</loc>
+  </url>
+  <url>
+    <loc>https://broom.tidymodels.org/reference/tidy.mfx.html</loc>
   </url>
   <url>
     <loc>https://broom.tidymodels.org/reference/tidy.mjoint.html</loc>

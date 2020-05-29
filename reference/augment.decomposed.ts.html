@@ -801,7 +801,7 @@ series.</p></dd>
   <span class='co'># by the method (stl or decompose).</span>
   <span class='fu'><a href='https://dplyr.tidyverse.org/reference/group_by.html'>group_by</a></span>(<span class='no'>decomp</span>) <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='https://tidyr.tidyverse.org/reference/nest.html'>unnest</a></span>(<span class='no'>series</span>, <span class='no'>augment</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span>(<span class='kw'>index</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fu'><a href='https://dplyr.tidyverse.org/reference/n.html'>n</a></span>()) <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span>(<span class='kw'>index</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fu'><a href='https://dplyr.tidyverse.org/reference/context.html'>n</a></span>()) <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='https://dplyr.tidyverse.org/reference/group_by.html'>ungroup</a></span>() <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='https://dplyr.tidyverse.org/reference/select.html'>select</a></span>(<span class='no'>decomp</span>, <span class='no'>index</span>, <span class='no'>x</span>, <span class='kw'>adjusted</span> <span class='kw'>=</span> <span class='no'>.seasadj</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: unnest() has a new interface. See ?unnest for details.</span>
 #&gt; <span class='warning'>Try `df %&gt;% unnest(c(series, augment))`, with `mutate()` if needed</span></div><div class='input'>

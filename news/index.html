@@ -260,7 +260,7 @@
 <ul>
 <li><p>Add option to <code><a href="https://rdrr.io/pkg/lfe/man/felm.html">lfe::felm</a></code> for robust and cluster standard errors (<a href='http://github.com/tidymodels/broom/issues/772'>#772</a>)</p></li>
 <li><p>Added tidier for <code><a href="https://rdrr.io/pkg/car/man/Anova.html">car::Anova</a></code> (<a href='http://github.com/tidymodels/broom/issues/754'>#754</a>)</p></li>
-<li><p>Tidy methods for <code><a href="https://rdrr.io/pkg/car/man/Anova.html">car::Anova</a></code> (<a href='http://github.com/tidymodels/broom/issues/754'>#754</a>)</p></li>
+<li><p>Added tidiers for objects from the <code>mfx</code> package (<a href='http://github.com/tidymodels/broom/issues/700'>#700</a> by <a href='http://github.com/grantmcdermott'>@grantmcdermott</a>)</p></li>
 <li><p>Added <code><a href="https://rdrr.io/pkg/generics/man/tidy.html">tidy()</a></code> and <code><a href="https://rdrr.io/pkg/generics/man/glance.html">glance()</a></code> methods for <code>speedglm</code> objects from the <code>speedglm</code> package</p></li>
 <li><p>Added tidier for <code>summary.manova</code> (<a href='http://github.com/tidymodels/broom/issues/729'>#729</a>) - TODO // remove as <code>summary.*</code> is forbidden</p></li>
 <li><p>Added tidier for <code><a href="https://rdrr.io/pkg/epiR/man/epi.2by2.html">epiR::epi.2by2</a></code> (<a href='http://github.com/tidymodels/broom/issues/711'>#711</a>)</p></li>
@@ -487,7 +487,7 @@
 <a href="#broom-043" class="anchor"></a>broom 0.4.3<small> 2017-11-20 </small>
 </h1>
 <ul>
-<li><p>Changed the deprecated <code><a href="https://dplyr.tidyverse.org/reference/failwith.html">dplyr::failwith</a></code> to <code><a href="https://purrr.tidyverse.org/reference/safely.html">purrr::possibly</a></code></p></li>
+<li><p>Changed the deprecated <code><a href="https://dplyr.tidyverse.org/reference/defunct.html">dplyr::failwith</a></code> to <code><a href="https://purrr.tidyverse.org/reference/safely.html">purrr::possibly</a></code></p></li>
 <li><p><code>augment</code> and <code>glance</code> on NULLs now return an empty data frame</p></li>
 <li><p>Deprecated the <code>inflate()</code> function in favor of <code><a href="https://tidyr.tidyverse.org/reference/expand.html">tidyr::crossing</a></code></p></li>
 <li><p>Fixed confidence intervals in the gmm tidier (thanks to <a href='http://github.com/tidymodels/broom/issues/242'>#242</a> from David Hugh-Jones)</p></li>
