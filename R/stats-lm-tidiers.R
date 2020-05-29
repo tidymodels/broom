@@ -161,20 +161,26 @@ augment.lm <- function(x, data = model.frame(x), newdata = NULL,
 #' @seealso [glance()]
 #' @family lm tidiers
 glance.lm <- function(x, ...) {
+  # check whether the model was fitted with only an intercept, in which
+  # case drop the fstatistic related columns
+  int_only <- nrow(summary(x)$coefficients) == 1
+  
   with(
     summary(x),
     tibble(
       r.squared = r.squared,
       adj.r.squared = adj.r.squared,
       sigma = sigma,
-      statistic = fstatistic["value"],
-      p.value = pf(
-        fstatistic["value"],
-        fstatistic["numdf"],
-        fstatistic["dendf"],
-        lower.tail = FALSE
-      ),
-      df = fstatistic["numdf"],
+      statistic = if (!int_only) {fstatistic["value"]} else {NA_real_},
+      p.value = if (!int_only) {
+        pf(
+          fstatistic["value"],
+          fstatistic["numdf"],
+          fstatistic["dendf"],
+          lower.tail = FALSE
+          )
+        } else {NA_real_},
+      df = if (!int_only) {fstatistic["numdf"]} else {NA_real_},
       logLik = as.numeric(stats::logLik(x)),
       AIC = stats::AIC(x),
       BIC = stats::BIC(x),

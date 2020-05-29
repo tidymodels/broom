@@ -11,6 +11,7 @@ test_that("lm tidier arguments", {
 
 fit <- lm(mpg ~ wt, mtcars)
 fit2 <- lm(mpg ~ wt + log(disp), mtcars)
+fit3 <- lm(mpg ~ 1, mtcars)
 
 # the cyl:qsec term isn't defined for this fit
 na_row_data <- mtcars[c(6, 9, 13:15, 22), ]
@@ -23,6 +24,7 @@ fit_rd <- lm(y ~ x - 1, data = rd_data)
 test_that("tidy.lm works", {
   td <- tidy(fit)
   td2 <- tidy(fit2)
+  td3 <- tidy(fit3)
 
   # conf.int = TRUE works for rank deficient fits
   # should get a "NaNs produced" warning
@@ -30,13 +32,16 @@ test_that("tidy.lm works", {
 
   check_tidy_output(td)
   check_tidy_output(td2)
+  check_tidy_output(td3)
   check_tidy_output(td_rd)
 
   check_dims(td, expected_rows = 2)
   check_dims(td2, expected_rows = 3)
+  check_dims(td3, expected_rows = 1)
 
   expect_equal(td$term, c("(Intercept)", "wt"))
   expect_equal(td2$term, c("(Intercept)", "wt", "log(disp)"))
+  expect_equal(td3$term, c("(Intercept)"))
 
 
   # shouldn't error. regression test for issues 166, 241
@@ -47,8 +52,9 @@ test_that("tidy.lm works", {
 test_that("glance.lm", {
   gl <- glance(fit)
   gl2 <- glance(fit2)
+  gl3 <- glance(fit3)
 
-  check_glance_outputs(gl, gl2)
+  check_glance_outputs(gl, gl2, gl3)
 })
 
 test_that("augment.lm", {
@@ -62,6 +68,13 @@ test_that("augment.lm", {
   check_augment_function(
     aug = augment.lm,
     model = fit2,
+    data = mtcars,
+    newdata = mtcars
+  )
+  
+  check_augment_function(
+    aug = augment.lm,
+    model = fit3,
     data = mtcars,
     newdata = mtcars
   )
