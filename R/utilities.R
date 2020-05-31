@@ -301,8 +301,8 @@ add_hat_sigma_cols <- function(df, x, infl) {
   w <- x$weights
   nonzero_idx <- if (is.null(w)) seq_along(df$.hat) else which(w != 0)
 
-  df$.hat[nonzero_idx] <- infl$hat
-  df$.sigma[nonzero_idx] <- infl$sigma
+  df$.hat[nonzero_idx] <- infl$hat %>% unname()
+  df$.sigma[nonzero_idx] <- infl$sigma %>% unname()
   df
 }
 
@@ -333,10 +333,10 @@ augment_newdata <- function(x, data, newdata, .se_fit, ...) {
 
   # This helper *should not* be used for predict methods that do not have
   # an na.pass argument
-
+  
   if (.se_fit) {
     pred_obj <- predict(x, newdata = newdata, na.action = na.pass, se.fit = TRUE, ...)
-    df$.fitted <- pred_obj$fit
+    df$.fitted <- pred_obj$fit %>% unname()
 
     # a couple possible names for the standard error element of the list
     # se.fit: lm, glm
@@ -344,14 +344,16 @@ augment_newdata <- function(x, data, newdata, .se_fit, ...) {
     se_idx <- which(names(pred_obj) %in% c("se.fit", "se"))
     df$.se.fit <- pred_obj[[se_idx]]
   } else if (passed_newdata) {
-    df$.fitted <- predict(x, newdata = newdata, na.action = na.pass, ...)
+    df$.fitted <- predict(x, newdata = newdata, na.action = na.pass, ...) %>% 
+      unname()
   } else {
-    df$.fitted <- predict(x, na.action = na.pass, ...)
+    df$.fitted <- predict(x, na.action = na.pass, ...) %>% 
+      unname()
   }
 
   resp <- safe_response(x, df)
   if (!is.null(resp) && is.numeric(resp)) {
-    df$.resid <- df$.fitted - resp
+    df$.resid <- (df$.fitted - resp) %>% unname() 
   }
   df
 }

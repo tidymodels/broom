@@ -30,13 +30,6 @@ Orange
 
 This contains 35 observations of three variables: `Tree`, `age`, and `circumference`. `Tree` is a factor with five levels describing five trees. As might be expected, age and circumference are correlated:
 
-```{r, include = FALSE}
-# ggplot2 not required by the package
-if(!require(ggplot2)){
-    install.packages("ggplot2")
-}
-```
-
 ```{r}
 cor(Orange$age, Orange$circumference)
 

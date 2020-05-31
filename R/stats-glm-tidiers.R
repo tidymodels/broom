@@ -79,20 +79,21 @@ augment.glm <- function(x,
   # don't use augment_newdata here; don't want raw/response residuals in .resid
   if (se_fit) {
     pred_obj <- predict(x, newdata, type = type.predict, se.fit = TRUE)
-    df$.fitted <- pred_obj$fit
-    df$.se.fit <- pred_obj$se.fit
+    df$.fitted <- pred_obj$fit %>% unname()
+    df$.se.fit <- pred_obj$se.fit %>% unname()
   } else {
-    df$.fitted <- predict(x, newdata, type = type.predict)
+    df$.fitted <- predict(x, newdata, type = type.predict) %>% unname()
   }
 
   if (is.null(newdata)) {
     tryCatch(
       {
         infl <- influence(x, do.coef = FALSE)
-        df$.resid <- residuals(x, type = type.residuals)
-        df$.std.resid <- rstandard(x, infl = infl, type = type.residuals)
+        df$.resid <- residuals(x, type = type.residuals) %>% unname()
+        df$.std.resid <- rstandard(x, infl = infl, type = type.residuals) %>% 
+          unname()
         df <- add_hat_sigma_cols(df, x, infl)
-        df$.cooksd <- cooks.distance(x, infl = infl)
+        df$.cooksd <- cooks.distance(x, infl = infl) %>% unname()
       },
       error = data_error
     )
