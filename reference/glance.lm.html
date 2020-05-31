@@ -319,14 +319,14 @@ the <code>data</code> argument.</p></td>
 <span class='no'>b</span> <span class='kw'>&lt;-</span> <span class='no'>a</span> + <span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/length.html'>length</a></span>(<span class='no'>a</span>))
 <span class='no'>result</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span>(<span class='no'>b</span> ~ <span class='no'>a</span>)
 <span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>result</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 6 x 6</span><span>
-#&gt;   response term        estimate std.error statistic p.value
-#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>          </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span> Y1       (Intercept)  0.591       0.359    1.64   0.144  
-#&gt; </span><span style='color: #555555;'>2</span><span> Y1       a1           0.971       0.284    3.42   0.011</span><span style='text-decoration: underline;'>1</span><span> 
-#&gt; </span><span style='color: #555555;'>3</span><span> Y1       a2          -</span><span style='color: #BB0000;'>0.090</span><span style='color: #BB0000;text-decoration: underline;'>5</span><span>      0.414   -</span><span style='color: #BB0000;'>0.219</span><span>  0.833  
-#&gt; </span><span style='color: #555555;'>4</span><span> Y2       (Intercept)  0.010</span><span style='text-decoration: underline;'>5</span><span>      0.350    0.029</span><span style='text-decoration: underline;'>9</span><span> 0.977  
-#&gt; </span><span style='color: #555555;'>5</span><span> Y2       a1           0.007</span><span style='text-decoration: underline;'>89</span><span>     0.277    0.028</span><span style='text-decoration: underline;'>5</span><span> 0.978  
-#&gt; </span><span style='color: #555555;'>6</span><span> Y2       a2           1.90        0.403    4.72   0.002</span><span style='text-decoration: underline;'>16</span><span></div></span></pre>
+#&gt;   response term        estimate std.error statistic  p.value
+#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>          </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #555555;'>1</span><span> Y1       (Intercept)   0.368      0.479     0.769 0.467   
+#&gt; </span><span style='color: #555555;'>2</span><span> Y1       a1            0.949      0.386     2.46  0.043</span><span style='text-decoration: underline;'>5</span><span>  
+#&gt; </span><span style='color: #555555;'>3</span><span> Y1       a2            0.197      0.542     0.363 0.727   
+#&gt; </span><span style='color: #555555;'>4</span><span> Y2       (Intercept)   0.373      0.233     1.60  0.153   
+#&gt; </span><span style='color: #555555;'>5</span><span> Y2       a1           -</span><span style='color: #BB0000;'>0.058</span><span style='color: #BB0000;text-decoration: underline;'>2</span><span>     0.187    -</span><span style='color: #BB0000;'>0.311</span><span> 0.765   
+#&gt; </span><span style='color: #555555;'>6</span><span> Y2       a2            1.52       0.263     5.76  0.000</span><span style='text-decoration: underline;'>688</span><span></div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
