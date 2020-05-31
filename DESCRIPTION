@@ -550,6 +550,7 @@ Suggests:
     metafor,
     mfx,
     mgcv,
+    modeltests,
     muhaz,
     multcomp,
     network,
@@ -576,8 +577,6 @@ Suggests:
     testthat (>= 2.1.0),
     tseries,
     zoo
-Remotes: 
-    alexpghayes/modeltests
 VignetteBuilder: 
     knitr
 Encoding: UTF-8
