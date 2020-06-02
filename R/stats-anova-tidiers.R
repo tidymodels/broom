@@ -117,11 +117,9 @@ tidy.aov <- function(x, ...) {
 #' @inherit tidy.aov params examples
 #'
 #' @note
-#' From `0.7.0`, `broom` has changed the return summary and the new model
-#' summary dataframe contains only the following information- `logLik`, `IC`,
-#' `BIC`, `deviance`, `nobs`. Note that `tidy.aov` contains the numerator and
-#' denominator degrees of freedom, which were previously included in the glance
-#' summary.
+#' Note that `tidy.aov()` now contains the numerator and denominator degrees of 
+#' freedom, which were included in the output of `glance.aov()` in some
+#' previous versions of the package.
 #'
 #' @evalRd return_glance(
 #'   "logLik",

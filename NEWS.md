@@ -13,7 +13,7 @@ This release features a number of unannounced hard-deprecations. I am sorry that
 
 - `tidy()` no longer checks for a log or logit link when `exponentiate = TRUE`, and we have refactored to remove extraneous `exponentiate` arguments. If you set `exponentiate = TRUE`, we assume you know what you are doing and that you want exponentiated coefficients (and confidence intervals if `conf.int = TRUE`) regardless of link function.
 
-- We have simplified `glance.aov()`, which now contains only the following columns: `logLik`, `AIC`, `BIC, deviance`, `df.residual`, `nobs` (see #212). Note that `tidy.aov()` gives more complete information about degrees of freedom in an `aov` object.
+- We have restored a simplified version of `glance.aov()`, which now contains only the following columns: `logLik`, `AIC`, `BIC, deviance`, `df.residual`, `nobs` (see #212). Note that `tidy.aov()` gives more complete information about degrees of freedom in an `aov` object.
 
 - We are moving away from supporting `summary.*()` objects. In particular, we have removed `tidy.summary.lm()` as part of a major overhaul of internals. Instead of calling `tidy()` on `summary`-like objects, please call `tidy()` directly on model objects moving forward.
 
