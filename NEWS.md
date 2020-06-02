@@ -3,67 +3,102 @@
 
 ## Breaking changes
 
-`broom 0.7.0` is a major release with a large number of breaking changes. Most of these breaking changes are meant to improve maintainability and internal consistency, which have posed long-standing difficulties.
+`broom 0.7.0` is a major release with a large number of breaking changes. Most 
+of these breaking changes are meant to improve maintainability and internal 
+consistency, which have posed long-standing difficulties.
 
-This release features a number of unannounced hard-deprecations. I am sorry that I did not have the time to ease these transitions, and am actively looking for assistance maintaining `broom`.
+This release features a number of unannounced hard-deprecations. I am sorry 
+that I did not have the time to ease these transitions, and am actively 
+looking for assistance maintaining `broom`.
 
 ### Big picture breaking changes
 
-- We have changed how we report degrees of freedom for `lm` objects (#212, #273). This is especially important for instructors in statistics courses. Previously the `df` column in `glance.lm()` reported the rank of the design matrix. Now it reports degrees of freedom of the numerator for the overall F-statistic. This is equal to the rank of the model matrix minus one (unless you omit an intercept column), so the new `df` should be the old `df` minus one.
+- We have changed how we report degrees of freedom for `lm` objects 
+(#212, #273). This is especially important for instructors in statistics 
+courses. Previously the `df` column in `glance.lm()` reported the rank of the 
+design matrix. Now it reports degrees of freedom of the numerator for the 
+overall F-statistic. This is equal to the rank of the model matrix minus one 
+(unless you omit an intercept column), so the new `df` should be the old 
+`df` minus one.
 
-- `tidy()` no longer checks for a log or logit link when `exponentiate = TRUE`, and we have refactored to remove extraneous `exponentiate` arguments. If you set `exponentiate = TRUE`, we assume you know what you are doing and that you want exponentiated coefficients (and confidence intervals if `conf.int = TRUE`) regardless of link function.
+- `tidy()` no longer checks for a log or logit link when `exponentiate = TRUE`,
+and we have refactored to remove extraneous `exponentiate` arguments. If you 
+set `exponentiate = TRUE`, we assume you know what you are doing and that you 
+want exponentiated coefficients (and confidence intervals if `conf.int = TRUE`) 
+regardless of link function.
 
-- We have restored a simplified version of `glance.aov()`, which now contains only the following columns: `logLik`, `AIC`, `BIC, deviance`, `df.residual`, `nobs` (see #212). Note that `tidy.aov()` gives more complete information about degrees of freedom in an `aov` object.
+- We are moving away from supporting `summary.*()` objects. In particular, we 
+have removed `tidy.summary.lm()` as part of a major overhaul of internals. 
+Instead of calling `tidy()` on `summary`-like objects, please call `tidy()` 
+directly on model objects moving forward.
 
-- We are moving away from supporting `summary.*()` objects. In particular, we have removed `tidy.summary.lm()` as part of a major overhaul of internals. Instead of calling `tidy()` on `summary`-like objects, please call `tidy()` directly on model objects moving forward.
+- We have removed all support for the `quick` argument in `tidy()` methods. 
+This is to simplify internals and is for maintainability purposes. We anticipate
+this will not influence many users as few people seemed to use it. If this 
+majorly cramps your style, let us know, as we are considering a new verb to 
+return only model parameters. In the meantime, `stats::coef()` together with 
+`tibble::enframe()` provides most of the functionality 
+of `tidy(..., quick = TRUE)`.
 
-- We have removed all support for the `quick` argument in `tidy()` methods. This is to simplify internals and is for maintainability purposes. We anticipate this will not influence many users as few people seemed to use it. If this majorly cramps your style, let us know, as we are considering a new verb to return only model parameters. In the meantime, `stats::coef()` together with `tibble::enframe()` provides most of the functionality of `tidy(..., quick = TRUE)`.
+- All `conf.int` arguments now default to `FALSE`, and all `conf.level` 
+arguments now default to `0.95`. This should primarily affect `tidy.survreg()`, 
+which previously always returned confidence intervals, although there are 
+some others.
 
-- All `conf.int` arguments now default to `FALSE`, and all `conf.level` arguments now default to `0.95`. This should primarily affect `tidy.survreg()`, which previously always returned confidence intervals, although there are some others.
-
-- Tidiers for `emmeans`-objects use the arguments `conf.int` and `conf.level` instead of relying on the argument names native to the `emmeans::summary()`-methods (i.e., `infer` and `level`). Similarly, `multcomp`-tidiers now include a call to `summary()` as previous behavior was akin to setting the now removed argument `quick = TRUE`. Both families of tidiers now use the `adj.p.value` column name when appropriate. Finally, `emmeans`-, `multcomp`-, and `TukeyHSD`-tidiers now consistently use the column names `contrast` and `null.value` instead of `comparison`, `level1` and `level2`, or `lhs` and `rhs` (see #692).
+- Tidiers for `emmeans`-objects use the arguments `conf.int` and `conf.level` 
+instead of relying on the argument names native to 
+the `emmeans::summary()`-methods (i.e., `infer` and `level`). 
+Similarly, `multcomp`-tidiers now include a call to `summary()` as previous 
+behavior was akin to setting the now removed argument `quick = TRUE`. Both 
+families of tidiers now use the `adj.p.value` column name when appropriate. 
+Finally, `emmeans`-, `multcomp`-, and `TukeyHSD`-tidiers now consistently 
+use the column names `contrast` and `null.value` instead 
+of `comparison`, `level1` and `level2`, or `lhs` and `rhs` (see #692).
 
 
 ### Deprecations
 
-This release of `broom` hard-deprecates the following functions and tidiers:
+This release of `broom` hard-deprecates the following functions and tidier methods:
 
-- Data frame, rowwise data frame, vector and matrix tidiers have been removed from `broom`
+- Tidier methods for data frames, rowwise data frames, vectors and matrices
 - `bootstrap()`
 - `confint_tidy()`
-- `glance.summary.lm()`
 - `augment.glmRob()`
 - `tidy.table()` and `tidy.ftable()` have been deprecated in favor of
-  `tibble::as_tibble()`
-- `tidy.summaryDefault()` and `glance.summaryDefault()` have been deprecated in favor of `skimr::skim()`
+`tibble::as_tibble()`
+- `tidy.summaryDefault()` and `glance.summaryDefault()` have been deprecated in 
+favor of `skimr::skim()`
 - `fix_data_frame()`
 
 We regret that we were unable to provide warnings for some of these changes.
 
-**Mixed models**: we have also gone forward with our planned mixed model deprecations, and have removed the following methods, which now live in `broom.mixed`:
+**Mixed models**: We have also gone forward with our planned mixed model 
+deprecations, and have removed the following methods, which now live 
+in `broom.mixed`:
 
 - `tidy.brmsfit()`
 - `tidy.merMod()`, `glance.merMod()`, `augment.merMod()`
-- `tidyMCMC()`, `tidy.rjags()`, `tidy.stanfit()`
 - `tidy.lme()`, `glance.lme()`, `augment.lme()`
 - `tidy.stanreg()`, `glance.stanreg()`
+- `tidyMCMC()`, `tidy.rjags()`, `tidy.stanfit()`
 
 ### Minor breaking changes
 
-- `augment.factanal()` now returns a tibble with columns names `.fs1`, `.fs2`, ..., instead of `factor1`, `factor2`, ... (#650).
+- `augment.factanal()` now returns a tibble with columns names `.fs1`, `.fs2`, 
+  ..., instead of `factor1`, `factor2`, ... (#650).
 
-- We have renamed the output of `augment.htest()`. In particular, we have renamed the `.residuals` column to `.resid` and the `.stdres` to `.std.resid` for consistency. These changes will only affect chi-squared tests.
+- We have renamed the output of `augment.htest()`. In particular, we have 
+  renamed the `.residuals` column to `.resid` and the `.stdres` to `.std.resid`
+  for consistency. These changes will only affect chi-squared tests.
 
-- `tidy.ridgelm()` now always return a `GCV` column and never returns an `xm` column (#532)
+- `tidy.ridgelm()` now always return a `GCV` column and never returns an 
+  `xm` column (#532).
 
-- `tidy.dist()` no longer supports the `upper` argument
+- `tidy.dist()` no longer supports the `upper` argument.
 
-## An incomplete overhaul of `augment()`
+## A refactoring of `augment()` methods
 
-- Added `data` argument to `augment()` generic (did this happen?)
-
-have overhauled `augment()` for general consistency improvements (hopefully,
-pending getting `safepredict()` going urgh)
+The internals of `augment.*()` methods have largely been overhauled.
 
 - If you pass a dataset to `augment()` via the `data` or `newdata` arguments,
   you are now guaranteed that the augmented dataset will have exactly the same
@@ -71,24 +106,32 @@ pending getting `safepredict()` going urgh)
   primarily when there are missing values. Previously `augment()` would drop
   rows containing `NA`. This should no longer be the case.
 
-- `augment()` no longer accepts an `na.action` argument
+- `augment.*()` methods no longer accept an `na.action` argument.
 
-- We no longer cram everything through `augment.lm()` and it has subsequently
-  losts a lot of arguments that were needed when it was a frankenstein do
-  everything function
+- In previous versions, several `augment.*()` methods inherited the 
+  `augment.lm()` method, but required additions to the `augment.lm()` method
+  itself. We have shifted away from this approach in favor of re-implementing
+  many `augment.*()` methods as standalone methods making use of internal 
+  helper functions. As a result, `augment.lm()` and some related methods have
+  deprecated (previously unused) arguments.
 
 - `augment()` tries to give an informative error when `data` isn't the original
-  training data
+  training data.
 
 ## For developers and contributors
 
-- Added new vignette detailing use of `modelgenerics` and `modeltests` packages
+- Moved core tests to the `modeltests` package.
 
-- Moved core tests to the `modeltests` package
+- Revised several vignettes and moved them to the tidymodels.org website. The
+  existing vignettes will now simply link to the revised versions.
+  
+- Added a new vignette discussing how to implement new tidier methods in 
+  non-broom packages.
 
 ## Non-breaking changes
 
-- Many `glance()` methods now return a `nobs` column, which contains the number of data points used to fit the model! (#597 by @vincentarelbundock)
+- Many `glance()` methods now return a `nobs` column, which contains the 
+number of data points used to fit the model! (#597 by @vincentarelbundock)
 
 - We now use `rlang::arg_match()` when possible instead of `arg.match()` to give
   more informative errors on argument mismatches.
@@ -101,72 +144,90 @@ pending getting `safepredict()` going urgh)
 
 - Added tidiers for objects from the `mfx` package (#700 by @grantmcdermott)
 
-- Added `tidy()` and `glance()` methods for `speedglm` objects from the `speedglm` package
-
-- Added tidier for `summary.manova` (#729) - TODO // remove as `summary.*` is forbidden
+- Added `tidy()` and `glance()` methods for `speedglm` objects from the 
+  `speedglm` package
 
 - Added tidier for `epiR::epi.2by2` (#711)
 
-- Added tidiers for `rma` objects from the `metafor` package (#674, @malcolmbarrett, @softloud)
+- Added tidiers for `rma` objects from the `metafor` package 
+  (#674, @malcolmbarrett, @softloud)
 
 - Added tidiers for `pam` objects from the `cluster` package. (#637)
 
 - Added `tidy.svyglm()` and `glance.svyglm()` (#611)
 
-- Added `tidy.regsubsets()` for best subsets linear regression from the `leaps` package
+- Added `tidy.regsubsets()` for best subsets linear regression from the 
+  `leaps` package
 
-- Added method `tidy.lm.beta()` to tidy `lm.beta` class models (#545 by @mattle24)
+- Added method `tidy.lm.beta()` to tidy `lm.beta` class models 
+  (#545 by @mattle24)
 
-- Added tidiers for `lmrob` and `glmrob` objects from the `robustbase` package (#205, #505).
+- Added tidiers for `lmrob` and `glmrob` objects from the `robustbase` package 
+  (#205, #505).
 
-- Added method `tidy.systemfit()` to tidy `systemfit` class models (by @jaspercooper)
+- Added method `tidy.systemfit()` to tidy `systemfit` class models (by 
+  @jaspercooper)
 
-- Added tidiers for `lmrob` and `glmrob` objects from the `robustbase` package (#205, #505).
+- Added tidiers for `lmrob` and `glmrob` objects from the `robustbase` package
+  (#205, #505).
 
 - Added tidiers for `drc::drm` models (#574 by @edild)
 
 - Added `tidy.summary_emm()` (#691 by @crsh)
 
+- We have restored a simplified version of `glance.aov()`, which now contains 
+  only the following columns: `logLik`, `AIC`, `BIC, deviance`, `df.residual`, 
+  `nobs` (see #212). Note that `tidy.aov()` gives more complete information about 
+  degrees of freedom in an `aov` object.
+
 ## Improvements to existing tidiers
 
-- `tidy.felm()` now has a `robust = TRUE/FALSE` option that supports robust and cluster standard errors (#772)
+- `tidy.felm()` now has a `robust = TRUE/FALSE` option that supports robust 
+  and cluster standard errors (#772)
 
-- Make `.fitted` values respect `type.predict` argument of `augment.clm()`. (#617)
+- Make `.fitted` values respect `type.predict` argument of `augment.clm()`. 
+  (#617)
 
-- Return factor rather than numeric class predictions in `.fitted` of `augment.polr()`. (#619)
+- Return factor rather than numeric class predictions in `.fitted` of 
+  `augment.polr()`. (#619)
 
 - `tidy.kmeans()` now uses the names of the input variables in the output by
   default. Set `col.names = NULL` to recover the old behavior.
 
-- Previously, F-statistics for weak instruments were returned through `glance.ivreg()`. F-statistics are now returned through `tidy.ivreg(instruments = TRUE)`. Default is `tidy.ivreg(instruments = FALSE)`. `glance.ivreg()` still returns Wu-Hausman and Sargan test statistics.
+- Previously, F-statistics for weak instruments were returned through 
+  `glance.ivreg()`. F-statistics are now returned through 
+  `tidy.ivreg(instruments = TRUE)`. Default is `tidy.ivreg(instruments = FALSE)`.
+  `glance.ivreg()` still returns Wu-Hausman and Sargan test statistics.
 
 - `glance.biglm()` now returns a `df.residual` column
 
-- `tidy.prcomp()` parameter `matrix` gained new options `"scores"`, `"loadings"`, and `"eigenvalues"` (#557 by @GegznaV)
+- `tidy.prcomp()` argument `matrix` gained new options `"scores"`, 
+  `"loadings"`, and `"eigenvalues"` (#557 by @GegznaV)
 
-- `tidy_optim()` now returns the standard error provides the standard error if
-  the Hessian is present. (#529 by @billdenney) (TODO: think about this)
+- `tidy_optim()` now provides the standard error if the Hessian is present. 
+  (#529 by @billdenney)
 
 - `tidy.htest()` column names are now run through `make.names()` to ensure
-  syntactic correctness (#549 by @karissawhiting) (TODO: use tidyverse name
-  repair?)
+  syntactic correctness (#549 by @karissawhiting)
 
 - `tidy.lmodel2()` now returns a `p.value` column (#570)
 
-- `tidy.lsmobj()` gained a `conf.int` argument for consistency with other tidiers.
+- `tidy.lsmobj()` gained a `conf.int` argument for consistency with other 
+  tidiers.
 
-- `tidy.polr()` now returns p-values if  `p.values` is set to TRUE and the model does not contain factors with more than two levels.
+- `tidy.polr()` now returns p-values if `p.values` is set to TRUE and the 
+  model does not contain factors with more than two levels.
 
 - `tidy.zoo()` now doesn't change column names that have spaces or other
-special characters (previously they were converted to data.frame friendly
-column names by `make.names`)
+  special characters (previously they were converted to `data.frame` friendly
+  column names by `make.names`)
 
 - `glance.lavaan()` now uses lavaan extractor functions instead of
-subsetting the fit object manually. (#835)
+  subsetting the fit object manually. (#835)
 
 ### Bug fixes
 
-- Bug fix to return confidence intervals correct in tidy.drc() (#798)
+- Bug fix to return confidence intervals correct in `tidy.drc()` (#798)
 - Bug fix to better allow `tidy.boot()` to support confidence intervals (#581)
 - Bug fix to allow `augment.kmeans()` to work with masked data (#609)
 - Bug fix to allow `augment.Mclust()` to work on univariate data (#490)
@@ -174,7 +235,6 @@ subsetting the fit object manually. (#835)
 - Bug fix for `tidy.polr()` when passed `conf.int = TRUE` (#498)
 - Bug fixes in `glance.lavaan()`: address confidence interval error
 (#577) and correct reported `nobs` and `norig` (#835)
-
 - Bug fix for `tidy.survreg()` when `robust` is set to `TRUE` in model
 fitting (#842, #728)
 - Bug fix in muhaz tidiers to ensure output is always a `tibble` (#824)
@@ -184,9 +244,12 @@ fitting (#842, #728)
 - The package's site has moved from https://broom.tidyverse.org/ to
 https://broom.tidymodels.org/
 
+- Removed dependencies on reshape2 and superseded functions in dplyr.
+
 # broom 0.5.6
 
-- Fix failing CRAN checks to due `tibble 3.0.0` release. Removed `xergm` dependency.
+- Fix failing CRAN checks to due `tibble 3.0.0` release. Removed 
+`xergm` dependency.
 
 # broom 0.5.5
 
