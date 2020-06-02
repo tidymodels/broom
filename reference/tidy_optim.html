@@ -43,6 +43,10 @@
 <script src="../pkgdown.js"></script>
 <link href="../tidyverse-2.css" rel="stylesheet">
 
+<!--optional theme-->
+<link href="../.css" rel="stylesheet">
+
+
 
 
 <meta property="og:title" content="Tidy a(n) optim object masquerading as list — tidy_optim" />
@@ -197,6 +201,13 @@ the <code>data</code> argument.</p></td>
     </tr>
     </table>
 
+    <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
+
+    <p>This function assumes that the provided objective function is a negative
+log-likelihood function. Results will be invalid if an incorrect
+function is supplied.</p>
+<p>tidy(o)
+glance(o)</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p><code><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy()</a></code>, <code><a href='https://rdrr.io/r/stats/optim.html'>stats::optim()</a></code></p>
@@ -218,17 +229,7 @@ std.error is only provided as a column if the Hessian is calculated.
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
 <span class='no'>f</span> <span class='kw'>&lt;-</span> <span class='kw'>function</span>(<span class='no'>x</span>) (<span class='no'>x</span>[<span class='fl'>1</span>] - <span class='fl'>2</span>)^<span class='fl'>2</span> + (<span class='no'>x</span>[<span class='fl'>2</span>] - <span class='fl'>3</span>)^<span class='fl'>2</span> + (<span class='no'>x</span>[<span class='fl'>3</span>] - <span class='fl'>8</span>)^<span class='fl'>2</span>
-<span class='no'>o</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/optim.html'>optim</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>1</span>), <span class='no'>f</span>)
-
-<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>o</span>)</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 3 x 2</span><span>
-#&gt;   parameter  value
-#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>      </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span> parameter1  2.00
-#&gt; </span><span style='color: #555555;'>2</span><span> parameter2  3.00
-#&gt; </span><span style='color: #555555;'>3</span><span> parameter3  8.00</div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/generics/man/glance.html'>glance</a></span>(<span class='no'>o</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 1 x 4</span><span>
-#&gt;         value function.count gradient.count convergence
-#&gt;         </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>          </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>          </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>       </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span> 0.000</span><span style='text-decoration: underline;'>000</span><span>368            144             </span><span style='color: #BB0000;'>NA</span><span>           0</div></span></pre>
+<span class='no'>o</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/optim.html'>optim</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>1</span>), <span class='no'>f</span>)</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
