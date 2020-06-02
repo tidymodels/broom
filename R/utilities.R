@@ -460,6 +460,7 @@ globalVariables(
     "PC",
     "percent",
     "P-perm (1-tailed)",
+    "Pr(Chi)",
     "pvalue",
     "QE.del",
     "rd_roclet",
