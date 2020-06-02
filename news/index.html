@@ -291,6 +291,7 @@
 <li><p><code><a href="../reference/tidy.htest.html">tidy.htest()</a></code> column names are now run through <code><a href="https://rdrr.io/r/base/make.names.html">make.names()</a></code> to ensure syntactic correctness (<a href='http://github.com/tidymodels/broom/issues/549'>#549</a> by <a href='http://github.com/karissawhiting'>@karissawhiting</a>) (TODO: use tidyverse name repair?)</p></li>
 <li><p><code><a href="../reference/tidy.lmodel2.html">tidy.lmodel2()</a></code> now returns a <code>p.value</code> column (<a href='http://github.com/tidymodels/broom/issues/570'>#570</a>)</p></li>
 <li><p><code><a href="../reference/tidy.lsmobj.html">tidy.lsmobj()</a></code> gained a <code>conf.int</code> argument for consistency with other tidiers.</p></li>
+<li><p><code><a href="../reference/tidy.polr.html">tidy.polr()</a></code> now returns p-values if <code>p.values</code> is set to TRUE and the model does not contain factors with more than two levels.</p></li>
 <li><p><code><a href="../reference/tidy.zoo.html">tidy.zoo()</a></code> now doesn’t change column names that have spaces or other special characters (previously they were converted to data.frame friendly column names by <code>make.names</code>)</p></li>
 <li><p><code><a href="../reference/glance.lavaan.html">glance.lavaan()</a></code> now uses lavaan extractor functions instead of subsetting the fit object manually. (<a href='http://github.com/tidymodels/broom/issues/835'>#835</a>)</p></li>
 </ul>
