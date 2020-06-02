@@ -169,7 +169,14 @@ specify which components to return.</p>
     </div>
 
     <pre class="usage"><span class='co'># S3 method for polr</span>
-<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>x</span>, <span class='kw'>conf.int</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>conf.level</span> <span class='kw'>=</span> <span class='fl'>0.95</span>, <span class='kw'>exponentiate</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='no'>...</span>)</pre>
+<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(
+  <span class='no'>x</span>,
+  <span class='kw'>conf.int</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>conf.level</span> <span class='kw'>=</span> <span class='fl'>0.95</span>,
+  <span class='kw'>exponentiate</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>p.values</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='no'>...</span>
+)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -197,6 +204,11 @@ regressions, but a bad idea if there is no log or logit link. Defaults
 to <code>FALSE</code>.</p></td>
     </tr>
     <tr>
+      <th>p.values</th>
+      <td><p>Logical. Should p-values be returned,
+based on chi-squared tests from <code><a href='https://rdrr.io/pkg/MASS/man/dropterm.html'>MASS::dropterm()</a></code>. Defaults to FAlSE</p></td>
+    </tr>
+    <tr>
       <th>...</th>
       <td><p>Additional arguments. Not used. Needed to match generic
 signature only. <strong>Cautionary note:</strong> Misspelled arguments will be
@@ -215,6 +227,14 @@ the <code>data</code> argument.</p></td>
     <p>In <code>broom 0.7.0</code> the <code>coefficient_type</code> column was renamed to
 <code>coef.type</code>, and the contents were changed as well. Now the contents
 are <code>coefficient</code> and <code>scale</code>, rather than <code>coefficient</code> and <code>zeta</code>.</p>
+<p>Calculating p.values with the <code><a href='https://rdrr.io/pkg/MASS/man/dropterm.html'>dropterm()</a></code> function is the approach
+suggested by the MASS package author
+(https://r.789695.n4.nabble.com/p-values-of-plor-td4668100.html). This
+approach is computationally intensive, so that p.values are only
+returned if requested explicitly. Additionally, it only works for
+models containing no variables with more than two categories. If this
+condition is not met, a message is shown and NA is returned instead of
+p-values.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a>, <code><a href='https://rdrr.io/pkg/MASS/man/polr.html'>MASS::polr()</a></code></p>
@@ -275,7 +295,21 @@ are <code>coefficient</code> and <code>scale</code>, rather than <code>coefficie
 #&gt; </span><span style='color: #555555;'> 8</span><span> Medium High   Tower     Low            11 High   
 #&gt; </span><span style='color: #555555;'> 9</span><span> High   High   Tower     Low            36 High   
 #&gt; </span><span style='color: #555555;'>10</span><span> Low    Low    Apartment Low            61 Low    
-#&gt; </span><span style='color: #555555;'># … with 62 more rows</span><span></div></span></pre>
+#&gt; </span><span style='color: #555555;'># … with 62 more rows</span><span></div><div class='input'>
+<span class='no'>fit2</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/MASS/man/polr.html'>polr</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/factor.html'>factor</a></span>(<span class='no'>gear</span>) ~ <span class='no'>am</span> + <span class='no'>mpg</span> + <span class='no'>qsec</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>mtcars</span>)
+<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>fit</span>, <span class='kw'>p.values</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; <span class='message'></span>
+#&gt; <span class='message'>Re-fitting to get Hessian</span></div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 8 x 5</span><span>
+#&gt;   term          estimate std.error statistic coef.type  
+#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>            </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>      
+#&gt; </span><span style='color: #555555;'>1</span><span> InflMedium       0.566    0.105       5.41 coefficient
+#&gt; </span><span style='color: #555555;'>2</span><span> InflHigh         1.29     0.127      10.1  coefficient
+#&gt; </span><span style='color: #555555;'>3</span><span> TypeApartment   -</span><span style='color: #BB0000;'>0.572</span><span>    0.119      -</span><span style='color: #BB0000;'>4.80</span><span> coefficient
+#&gt; </span><span style='color: #555555;'>4</span><span> TypeAtrium      -</span><span style='color: #BB0000;'>0.366</span><span>    0.155      -</span><span style='color: #BB0000;'>2.36</span><span> coefficient
+#&gt; </span><span style='color: #555555;'>5</span><span> TypeTerrace     -</span><span style='color: #BB0000;'>1.09</span><span>     0.151      -</span><span style='color: #BB0000;'>7.20</span><span> coefficient
+#&gt; </span><span style='color: #555555;'>6</span><span> ContHigh         0.360    0.095</span><span style='text-decoration: underline;'>5</span><span>      3.77 coefficient
+#&gt; </span><span style='color: #555555;'>7</span><span> Low|Medium      -</span><span style='color: #BB0000;'>0.496</span><span>    0.125      -</span><span style='color: #BB0000;'>3.97</span><span> scale      
+#&gt; </span><span style='color: #555555;'>8</span><span> Medium|High      0.691    0.125       5.50 scale      </div><div class='input'>
+</div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

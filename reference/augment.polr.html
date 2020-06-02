@@ -321,7 +321,21 @@ the <code>data</code> argument.</p></td>
 #&gt; </span><span style='color: #555555;'> 8</span><span> Medium High   Tower     Low            11 High   
 #&gt; </span><span style='color: #555555;'> 9</span><span> High   High   Tower     Low            36 High   
 #&gt; </span><span style='color: #555555;'>10</span><span> Low    Low    Apartment Low            61 Low    
-#&gt; </span><span style='color: #555555;'># … with 62 more rows</span><span></div></span></pre>
+#&gt; </span><span style='color: #555555;'># … with 62 more rows</span><span></div><div class='input'>
+<span class='no'>fit2</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/MASS/man/polr.html'>polr</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/factor.html'>factor</a></span>(<span class='no'>gear</span>) ~ <span class='no'>am</span> + <span class='no'>mpg</span> + <span class='no'>qsec</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>mtcars</span>)
+<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>fit</span>, <span class='kw'>p.values</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; <span class='message'></span>
+#&gt; <span class='message'>Re-fitting to get Hessian</span></div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 8 x 5</span><span>
+#&gt;   term          estimate std.error statistic coef.type  
+#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>            </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>      
+#&gt; </span><span style='color: #555555;'>1</span><span> InflMedium       0.566    0.105       5.41 coefficient
+#&gt; </span><span style='color: #555555;'>2</span><span> InflHigh         1.29     0.127      10.1  coefficient
+#&gt; </span><span style='color: #555555;'>3</span><span> TypeApartment   -</span><span style='color: #BB0000;'>0.572</span><span>    0.119      -</span><span style='color: #BB0000;'>4.80</span><span> coefficient
+#&gt; </span><span style='color: #555555;'>4</span><span> TypeAtrium      -</span><span style='color: #BB0000;'>0.366</span><span>    0.155      -</span><span style='color: #BB0000;'>2.36</span><span> coefficient
+#&gt; </span><span style='color: #555555;'>5</span><span> TypeTerrace     -</span><span style='color: #BB0000;'>1.09</span><span>     0.151      -</span><span style='color: #BB0000;'>7.20</span><span> coefficient
+#&gt; </span><span style='color: #555555;'>6</span><span> ContHigh         0.360    0.095</span><span style='text-decoration: underline;'>5</span><span>      3.77 coefficient
+#&gt; </span><span style='color: #555555;'>7</span><span> Low|Medium      -</span><span style='color: #BB0000;'>0.496</span><span>    0.125      -</span><span style='color: #BB0000;'>3.97</span><span> scale      
+#&gt; </span><span style='color: #555555;'>8</span><span> Medium|High      0.691    0.125       5.50 scale      </div><div class='input'>
+</div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

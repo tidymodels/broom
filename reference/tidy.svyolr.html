@@ -169,7 +169,14 @@ specify which components to return.</p>
     </div>
 
     <pre class="usage"><span class='co'># S3 method for svyolr</span>
-<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>x</span>, <span class='kw'>conf.int</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>conf.level</span> <span class='kw'>=</span> <span class='fl'>0.95</span>, <span class='kw'>exponentiate</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='no'>...</span>)</pre>
+<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(
+  <span class='no'>x</span>,
+  <span class='kw'>conf.int</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>conf.level</span> <span class='kw'>=</span> <span class='fl'>0.95</span>,
+  <span class='kw'>exponentiate</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>p.values</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='no'>...</span>
+)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -197,6 +204,11 @@ regressions, but a bad idea if there is no log or logit link. Defaults
 to <code>FALSE</code>.</p></td>
     </tr>
     <tr>
+      <th>p.values</th>
+      <td><p>Logical. Should p-values be returned,
+based on chi-squared tests from <code><a href='https://rdrr.io/pkg/MASS/man/dropterm.html'>MASS::dropterm()</a></code>. Defaults to FAlSE</p></td>
+    </tr>
+    <tr>
       <th>...</th>
       <td><p>Additional arguments. Not used. Needed to match generic
 signature only. <strong>Cautionary note:</strong> Misspelled arguments will be
@@ -215,6 +227,14 @@ the <code>data</code> argument.</p></td>
     <p>In <code>broom 0.7.0</code> the <code>coefficient_type</code> column was renamed to
 <code>coef.type</code>, and the contents were changed as well. Now the contents
 are <code>coefficient</code> and <code>scale</code>, rather than <code>coefficient</code> and <code>zeta</code>.</p>
+<p>Calculating p.values with the <code><a href='https://rdrr.io/pkg/MASS/man/dropterm.html'>dropterm()</a></code> function is the approach
+suggested by the MASS package author
+(https://r.789695.n4.nabble.com/p-values-of-plor-td4668100.html). This
+approach is computationally intensive, so that p.values are only
+returned if requested explicitly. Additionally, it only works for
+models containing no variables with more than two categories. If this
+condition is not met, a message is shown and NA is returned instead of
+p-values.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a>, <code><a href='https://rdrr.io/pkg/survey/man/svyolr.html'>survey::svyolr()</a></code></p>
