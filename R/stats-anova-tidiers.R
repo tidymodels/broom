@@ -236,58 +236,6 @@ tidy.manova <- function(x, test = "Pillai", ...) {
   )
 }
 
-
-#' @templateVar class summary.manova
-#' @template title_desc_tidy
-#'
-#' @param x A `summary.manova` object return from [stats::summary.manova()].
-#' @template param_unused_dots
-#'
-#' @evalRd return_tidy(
-#'   "term",
-#'   "num.df",
-#'   "den.df",
-#'   "statistic",
-#'   "p.value",
-#'   pillai = "Pillai's trace.",
-#'   wilks = "Wilk's lambda.",
-#'   hl = "Hotelling-Lawley trace.",
-#'   roy = "Roy's greatest root."
-#' )
-#'
-#'
-#' @details Depending on which test statistic was calculated when the object
-#'   was created, only one of `pillai`, `wilks`, `hl` or `roy` is included.
-#'
-#' @examples
-#'
-#' npk2 <- within(npk, foo <- rnorm(24))
-#'
-#' m <- summary(
-#'   manova(cbind(yield, foo) ~ block + N * P * K, npk2),
-#'   test = "Wilks"
-#' )
-#'
-#' tidy(m)
-#' @export
-#' @seealso [tidy()], [stats::summary.manova()]
-#' @family anova tidiers
-tidy.summary.manova <- function(x, ...) {
-  manova_tests <- c(
-    "Pillai" = "pillai",
-    "Wilks" = "wilks",
-    "Hotelling-Lawley" = "hl",
-    "Roy" = "roy"
-  )
-
-  test.name <- manova_tests[[intersect(colnames(x$stats), names(manova_tests))[[1]]]]
-
-  nn <- c("df", test.name, "statistic", "num.df", "den.df", "p.value")
-  as_broom_tibble(x$stats) %>%
-    setNames(c("term", nn))
-  
-}
-
 #' @templateVar class TukeyHSD
 #' @template title_desc_tidy
 #'

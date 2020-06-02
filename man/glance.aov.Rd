@@ -52,8 +52,7 @@ Other anova tidiers:
 \code{\link{tidy.anova}()},
 \code{\link{tidy.aovlist}()},
 \code{\link{tidy.aov}()},
-\code{\link{tidy.manova}()},
-\code{\link{tidy.summary.manova}()}
+\code{\link{tidy.manova}()}
 }
 \concept{anova tidiers}
 \value{

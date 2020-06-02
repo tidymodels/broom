@@ -68,18 +68,6 @@ test_that("tidy.manova", {
   check_dims(td, 8, 7)
 })
 
-test_that("tidy.summary.manova", {
-  check_arguments(tidy.summary.manova)
-
-  df <- within(npk, foo <- rnorm(24))
-  fit <- stats::manova(cbind(yield, foo) ~ block + N * P * K, df)
-
-  td <- tidy(fit)
-  td2 <- tidy(summary(fit))
-
-  expect_equal(td, td2)
-})
-
 test_that("tidy.TukeyHSD", {
   check_arguments(tidy.TukeyHSD)
 
