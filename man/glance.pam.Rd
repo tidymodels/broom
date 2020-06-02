@@ -48,10 +48,10 @@ tidy(p)
 glance(p)
 augment(p, x)
 
-augment(p, x) \%>\% 
+augment(p, x) \%>\%
   ggplot(aes(Sepal.Length, Sepal.Width)) +
-    geom_point(aes(color = .cluster)) +
-    geom_text(aes(label = cluster), data = tidy(p), size = 10)
+  geom_point(aes(color = .cluster)) +
+  geom_text(aes(label = cluster), data = tidy(p), size = 10)
 }
 \seealso{
 \code{\link[=glance]{glance()}}, \code{\link[cluster:pam]{cluster::pam()}}
@@ -63,6 +63,6 @@ Other pam tidiers:
 \concept{pam tidiers}
 \value{
 A \code{\link[tibble:tibble]{tibble::tibble()}} with exactly one row and columns:
-
+  \item{avg.silhouette.width}{The average silhouette width for the dataset.}
 
 }

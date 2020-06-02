@@ -44,19 +44,20 @@ tidy(sfit)
 glance(sfit)
 
 library(ggplot2)
-ggplot(tidy(sfit), aes(time, estimate)) + geom_line() +
-    geom_ribbon(aes(ymin=conf.low, ymax=conf.high), alpha=.25)
+ggplot(tidy(sfit), aes(time, estimate)) +
+  geom_line() +
+  geom_ribbon(aes(ymin = conf.low, ymax = conf.high), alpha = .25)
 
 # multi-state
 fitCI <- survfit(Surv(stop, status * as.numeric(event), type = "mstate") ~ 1,
-              data = mgus1, subset = (start == 0))
+  data = mgus1, subset = (start == 0)
+)
 td_multi <- tidy(fitCI)
 td_multi
 
 ggplot(td_multi, aes(time, estimate, group = state)) +
-    geom_line(aes(color = state)) +
-    geom_ribbon(aes(ymin = conf.low, ymax = conf.high), alpha = .25)
-
+  geom_line(aes(color = state)) +
+  geom_ribbon(aes(ymin = conf.low, ymax = conf.high), alpha = .25)
 }
 \seealso{
 \code{\link[=glance]{glance()}}, \code{\link[survival:survfit]{survival::survfit()}}
@@ -88,13 +89,13 @@ Other survival tidiers:
 \concept{survival tidiers}
 \value{
 A \code{\link[tibble:tibble]{tibble::tibble()}} with exactly one row and columns:
-  \item{events}{number of events}
+  \item{events}{Number of events.}
   \item{n.max}{Maximum number of subjects at risk.}
   \item{n.start}{Initial number of subjects at risk.}
   \item{nobs}{Number of observations used.}
-  \item{records}{number of observations}
+  \item{records}{Number of observations}
   \item{rmean}{Restricted mean (see [survival::print.survfit()]).}
-  \item{rmean.std.error}{Restricted mean standard error}
+  \item{rmean.std.error}{Restricted mean standard error.}
   \item{conf.low}{lower end of confidence interval on median}
   \item{conf.high}{upper end of confidence interval on median}
   \item{median}{median survival}

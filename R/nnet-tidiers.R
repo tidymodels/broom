@@ -7,14 +7,14 @@
 #' @template param_confint
 #' @template param_exponentiate
 #' @template param_unused_dots
-#' 
+#'
 #' @evalRd return_tidy("y.value", regression = TRUE)
 #'
 #' @examples
 #'
 #' library(nnet)
 #' library(MASS)
-#' 
+#'
 #' example(birthwt)
 #' bwt.mu <- multinom(low ~ ., bwt)
 #' tidy(bwt.mu)
@@ -27,7 +27,6 @@
 #' fit.gear <- multinom(gear ~ mpg + factor(am), data = mtcars)
 #' tidy(fit.gear)
 #' glance(fit.gear)
-#'
 #' @aliases multinom_tidiers nnet_tidiers
 #' @export
 #' @family multinom tidiers
@@ -36,24 +35,24 @@ tidy.multinom <- function(x, conf.int = FALSE, conf.level = .95,
                           exponentiate = FALSE, ...) {
   col_names <- if (length(x$lev) > 2) colnames(coef(x)) else names(coef(x))
   s <- summary(x)
-  
+
   coef <- matrix(coef(s),
-                 byrow = FALSE,
-                 nrow = length(x$lev) - 1,
-                 dimnames = list(
-                   x$lev[-1],
-                   col_names
-                 )
+    byrow = FALSE,
+    nrow = length(x$lev) - 1,
+    dimnames = list(
+      x$lev[-1],
+      col_names
+    )
   )
   se <- matrix(s$standard.errors,
-               byrow = FALSE,
-               nrow = length(x$lev) - 1,
-               dimnames = list(
-                 x$lev[-1],
-                 col_names
-               )
+    byrow = FALSE,
+    nrow = length(x$lev) - 1,
+    dimnames = list(
+      x$lev[-1],
+      col_names
+    )
   )
-  
+
   multinomRowToDf <- function(r, coef, se, col_names) {
     unrowname(data.frame(
       y.level = rep(r, length(col_names)),
@@ -63,39 +62,38 @@ tidy.multinom <- function(x, conf.int = FALSE, conf.level = .95,
       stringsAsFactors = FALSE
     ))
   }
-  
+
   ret <- lapply(rownames(coef), multinomRowToDf, coef, se, col_names)
   ret <- do.call("rbind", ret)
-  
+
   ret$statistic <- ret$estimate / ret$std.error
   ret$p.value <- stats::pnorm(abs(ret$statistic), 0, 1, lower.tail = FALSE) * 2
-  
+
   if (conf.int) {
     ci <- apply(stats::confint(x), 2, function(a) unlist(as.data.frame(a)))
     ci <- as.data.frame(ci)
     names(ci) <- c("conf.low", "conf.high")
     ret <- cbind(ret, ci)
   }
-  
+
   if (exponentiate) {
-    
     to_exp <- "estimate"
-    
+
     if (conf.int) {
       to_exp <- c(to_exp, "conf.low", "conf.high")
     }
-    
+
     ret[, to_exp] <- lapply(ret[, to_exp, drop = FALSE], exp)
   }
-  
+
   as_tibble(ret)
 }
 
 #' @templateVar class multinom
 #' @template title_desc_glance
-#' 
+#'
 #' @inherit tidy.multinom params examples
-#' 
+#'
 #' @evalRd return_glance("edf", "deviance", "AIC", "nobs")
 #' @export
 #' @family multinom tidiers

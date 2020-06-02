@@ -42,7 +42,6 @@ fit <- polr(Sat ~ Infl + Type + Cont, weights = Freq, data = housing)
 
 tidy(fit, exponentiate = TRUE, conf.int = TRUE)
 glance(fit)
-
 }
 \seealso{
 \link{tidy}, \code{\link[survey:svyolr]{survey::svyolr()}}
@@ -62,7 +61,7 @@ Other ordinal tidiers:
 \value{
 A \code{\link[tibble:tibble]{tibble::tibble()}} with exactly one row and columns:
   \item{df.residual}{Residual degrees of freedom.}
-  \item{edf}{The effective degrees of freedom}
+  \item{edf}{The effective degrees of freedom.}
   \item{nobs}{Number of observations used.}
 
 }

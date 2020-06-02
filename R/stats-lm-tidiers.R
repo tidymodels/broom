@@ -36,7 +36,9 @@
 #' augment(mod, mtcars)
 #'
 #' # predict on new data
-#' newdata <- mtcars %>% head(6) %>% mutate(wt = wt + 1)
+#' newdata <- mtcars %>%
+#'   head(6) %>%
+#'   mutate(wt = wt + 1)
 #' augment(mod, newdata = newdata)
 #'
 #' au <- augment(mod, data = mtcars)
@@ -44,7 +46,8 @@
 #' ggplot(au, aes(.hat, .std.resid)) +
 #'   geom_vline(size = 2, colour = "white", xintercept = 0) +
 #'   geom_hline(size = 2, colour = "white", yintercept = 0) +
-#'   geom_point() + geom_smooth(se = FALSE)
+#'   geom_point() +
+#'   geom_smooth(se = FALSE)
 #'
 #' plot(mod, which = 6)
 #' ggplot(au, aes(.hat, .cooksd)) +
@@ -58,31 +61,31 @@
 #' b <- a + rnorm(length(a))
 #' result <- lm(b ~ a)
 #' tidy(result)
-#' 
 #' @aliases lm_tidiers
 #' @export
 #' @seealso [tidy()], [stats::summary.lm()]
 #' @family lm tidiers
 tidy.lm <- function(x, conf.int = FALSE, conf.level = 0.95, ...) {
-  
+
   # error on inappropriate subclassing
   # TODO: undo gee / mclogit and other catches
-  if (length(class(x)) > 1)
+  if (length(class(x)) > 1) {
     stop("No tidy method for objects of class ", class(x)[1], call. = FALSE)
-  
+  }
+
   ret <- as_tibble(summary(x)$coefficients, rownames = "term")
   colnames(ret) <- c("term", "estimate", "std.error", "statistic", "p.value")
-  
+
   # summary(x)$coefficients misses rank deficient rows (i.e. coefs that
   # summary.lm() sets to NA), catch them here and add them back
   coefs <- tibble::enframe(stats::coef(x), name = "term", value = "estimate")
   ret <- left_join(coefs, ret, by = c("term", "estimate"))
-  
+
   if (conf.int) {
     ci <- broom_confint_terms(x, level = conf.level)
     ret <- dplyr::left_join(ret, ci, by = "term")
   }
-  
+
   ret
 }
 
@@ -118,12 +121,15 @@ augment.lm <- function(x, data = model.frame(x), newdata = NULL,
   df <- augment_newdata(x, data, newdata, se_fit)
 
   if (is.null(newdata)) {
-    tryCatch({
-      infl <- influence(x, do.coef = FALSE)
-      df$.std.resid <- rstandard(x, infl = infl)
-      df <- add_hat_sigma_cols(df, x, infl)
-      df$.cooksd <- cooks.distance(x, infl = infl)
-    }, error = data_error)
+    tryCatch(
+      {
+        infl <- influence(x, do.coef = FALSE)
+        df$.std.resid <- rstandard(x, infl = infl) %>% unname()
+        df <- add_hat_sigma_cols(df, x, infl)
+        df$.cooksd <- cooks.distance(x, infl = infl) %>% unname()
+      },
+      error = data_error
+    )
   }
 
   df
@@ -155,20 +161,26 @@ augment.lm <- function(x, data = model.frame(x), newdata = NULL,
 #' @seealso [glance()]
 #' @family lm tidiers
 glance.lm <- function(x, ...) {
+  # check whether the model was fitted with only an intercept, in which
+  # case drop the fstatistic related columns
+  int_only <- nrow(summary(x)$coefficients) == 1
+  
   with(
     summary(x),
     tibble(
       r.squared = r.squared,
       adj.r.squared = adj.r.squared,
       sigma = sigma,
-      statistic = fstatistic["value"],
-      p.value = pf(
-        fstatistic["value"],
-        fstatistic["numdf"],
-        fstatistic["dendf"],
-        lower.tail = FALSE
-      ),
-      df = fstatistic["numdf"],
+      statistic = if (!int_only) {fstatistic["value"]} else {NA_real_},
+      p.value = if (!int_only) {
+        pf(
+          fstatistic["value"],
+          fstatistic["numdf"],
+          fstatistic["dendf"],
+          lower.tail = FALSE
+          )
+        } else {NA_real_},
+      df = if (!int_only) {fstatistic["numdf"]} else {NA_real_},
       logLik = as.numeric(stats::logLik(x)),
       AIC = stats::AIC(x),
       BIC = stats::BIC(x),

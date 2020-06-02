@@ -36,7 +36,7 @@ the measure will be reported as \code{NA}.
 }
 \examples{
 
-n <- nls(mpg ~ k * e ^ wt, data = mtcars, start = list(k = 1, e = 2))
+n <- nls(mpg ~ k * e^wt, data = mtcars, start = list(k = 1, e = 2))
 
 tidy(n)
 augment(n)
@@ -50,7 +50,6 @@ ggplot(augment(n), aes(wt, mpg)) +
 newdata <- head(mtcars)
 newdata$wt <- newdata$wt + 1
 augment(n, newdata = newdata)
-
 }
 \seealso{
 \link{tidy}, \code{\link[stats:nls]{stats::nls()}}
@@ -66,8 +65,8 @@ A \code{\link[tibble:tibble]{tibble::tibble()}} with exactly one row and columns
   \item{BIC}{Bayesian Information Criterion for the model.}
   \item{deviance}{Deviance of the model.}
   \item{df.residual}{Residual degrees of freedom.}
-  \item{finTol}{the achieved convergence tolerance}
-  \item{isConv}{whether the fit successfully converged}
+  \item{finTol}{The achieved convergence tolerance.}
+  \item{isConv}{Whether the fit successfully converged.}
   \item{logLik}{The log-likelihood of the model. [stats::logLik()] may be a useful reference.}
   \item{nobs}{Number of observations used.}
   \item{sigma}{Estimated standard error of the residuals.}

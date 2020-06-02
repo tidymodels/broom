@@ -71,17 +71,14 @@ missing at this time.
 library(cluster)
 library(dplyr)
 
-x <- iris \%>\% 
+x <- iris \%>\%
   select(-Species)
-  
+
 fit <- pam(x, k = 3)
 
 tidy(fit)
 glance(fit)
 augment(fit, x)
-
-
-
 }
 \seealso{
 \code{\link[=augment]{augment()}}, \code{\link[stats:kmeans]{stats::kmeans()}}

@@ -24,7 +24,7 @@ the \code{data} argument.}
 Tidy summarizes information about the components of a model.
 A model component might be a single term in a regression, a single
 hypothesis, a cluster, or a class. Exactly what tidy considers to be a
-model component varies cross models but is usually self-evident.
+model component varies across models but is usually self-evident.
 If a model has several distinct types of components, you will need to
 specify which components to return.
 }
@@ -44,7 +44,7 @@ be valid. More information can be found in
 library(lmodel2)
 
 data(mod2ex2)
-Ex2.res <- lmodel2(Prey ~ Predators, data=mod2ex2, "relative", "relative", 99)
+Ex2.res <- lmodel2(Prey ~ Predators, data = mod2ex2, "relative", "relative", 99)
 Ex2.res
 
 tidy(Ex2.res)
@@ -56,7 +56,6 @@ ggplot(tidy(Ex2.res), aes(estimate, term, color = method)) +
   geom_point() +
   geom_errorbarh(aes(xmin = conf.low, xmax = conf.high)) +
   geom_errorbarh(aes(xmin = conf.low, xmax = conf.high))
-
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[lmodel2:lmodel2]{lmodel2::lmodel2()}}

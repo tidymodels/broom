@@ -44,13 +44,12 @@ sexpfit <- survexp(
     year = accept.dt,
     age = (accept.dt - birth.dt)
   ),
-  method = 'conditional',
+  method = "conditional",
   data = jasa
 )
 
 tidy(sexpfit)
 glance(sexpfit)
-
 }
 \seealso{
 \code{\link[=glance]{glance()}}, \code{\link[survival:survexp]{survival::survexp()}}
@@ -83,6 +82,6 @@ Other survival tidiers:
 A \code{\link[tibble:tibble]{tibble::tibble()}} with exactly one row and columns:
   \item{n.max}{Maximum number of subjects at risk.}
   \item{n.start}{Initial number of subjects at risk.}
-  \item{timepoints}{number of timepoints}
+  \item{timepoints}{Number of timepoints.}
 
 }

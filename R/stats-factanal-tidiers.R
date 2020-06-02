@@ -23,7 +23,7 @@
 #'   v5 = c(1, 1, 1, 1, 1, 3, 3, 3, 3, 3, 1, 1, 1, 1, 1, 6, 4, 5),
 #'   v6 = c(1, 1, 1, 2, 1, 3, 3, 3, 4, 3, 1, 1, 1, 2, 1, 6, 5, 4)
 #' )
-#' 
+#'
 #' # new data
 #' m2 <- purrr::map_dfr(m1, rev)
 #'
@@ -141,7 +141,7 @@ augment.factanal <- function(x, data, ...) {
 #'   "n.factors",
 #'   "total.variance",
 #'   "statistic",
-#'   "p-value",
+#'   "p.value",
 #'   "df",
 #'   "n",
 #'   "method",

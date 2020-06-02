@@ -3,51 +3,51 @@
 #'
 #' @param x A `prcomp` object returned by [stats::prcomp()].
 #' @param matrix Character specifying which component of the PCA should be
-#'   tidied. 
-#'   
-#'   - `"u"`, `"samples"`, `"scores"`, or `"x"`: returns information about 
+#'   tidied.
+#'
+#'   - `"u"`, `"samples"`, `"scores"`, or `"x"`: returns information about
 #'     the map from the original space into principle components space.
-#'   
-#'   - `"v"`, `"rotation"`, `"loadings"` or `"variables"`: returns information 
-#'     about the map from principle components space back into the original 
+#'
+#'   - `"v"`, `"rotation"`, `"loadings"` or `"variables"`: returns information
+#'     about the map from principle components space back into the original
 #'     space.
-#'   
-#'   - `"d"`, `"eigenvalues"` or `"pcs"`: returns information about the 
+#'
+#'   - `"d"`, `"eigenvalues"` or `"pcs"`: returns information about the
 #'     eigenvalues.
-#'        
+#'
 #' @template param_unused_dots
 #'
-#' @return A [tibble::tibble] with columns depending on the component of 
+#' @return A [tibble::tibble] with columns depending on the component of
 #'   PCA being tidied.
-#'   
-#'   If `matrix` is `"u"`, `"samples"`, `"scores"`, or `"x"` each row in the 
-#'   tidied output corresponds to the original data in PCA space. The columns 
+#'
+#'   If `matrix` is `"u"`, `"samples"`, `"scores"`, or `"x"` each row in the
+#'   tidied output corresponds to the original data in PCA space. The columns
 #'   are:
-#'   
+#'
 #'   \item{`row`}{ID of the original observation (i.e. rowname from original
 #'     data).}
 #'   \item{`PC`}{Integer indicating a principal component.}
 #'   \item{`value`}{The score of the observation for that particular principal
 #'     component. That is, the location of the observation in PCA space.}
-#'     
-#'   If `matrix` is `"v"`, `"rotation"`, `"loadings"` or `"variables"`, each 
-#'   row in the tidied ouput corresponds to information about the principle 
+#'
+#'   If `matrix` is `"v"`, `"rotation"`, `"loadings"` or `"variables"`, each
+#'   row in the tidied output corresponds to information about the principle
 #'   components in the original space. The columns are:
-#'   
+#'
 #'   \item{`row`}{The variable labels (colnames) of the data set on
 #'   which PCA was performed}
 #'   \item{`PC`}{An integer vector indicating the principal component}
 #'   \item{`value`}{The value of the eigenvector (axis score) on the
 #'   indicated principal component}
-#'   
+#'
 #'   If `matrix` is `"d"`, `"eigenvalues"` or `"pcs"`, the columns are:
-#'   
+#'
 #'   \item{`PC`}{An integer vector indicating the principal component}
 #'   \item{`std.dev`}{Standard deviation explained by this PC}
 #'   \item{`percent`}{Fraction of variation explained by this component}
 #'   \item{`cumulative`}{Cumulative fraction of variation explained by
 #'     principle components up to this component.}
-#' 
+#'
 #' @details See https://stats.stackexchange.com/questions/134282/relationship-between-svd-and-pca-how-to-use-svd-to-perform-pca
 #'   for information on how to interpret the various tidied matrices. Note
 #'   that SVD is only equivalent to PCA on centered data.
@@ -75,7 +75,7 @@
 #'   inner_join(map_data("state"), by = "region") %>%
 #'   ggplot(aes(long, lat, group = group, fill = value)) +
 #'   geom_polygon() +
-#'   facet_wrap(~ PC) +
+#'   facet_wrap(~PC) +
 #'   theme_void() +
 #'   ggtitle("Principal components of arrest data")
 #'
@@ -85,7 +85,6 @@
 #' ggplot(au, aes(.fittedPC1, .fittedPC2)) +
 #'   geom_point() +
 #'   geom_text(aes(label = .rownames), vjust = 1, hjust = 1)
-#'
 #' @aliases prcomp_tidiers
 #' @export
 #' @seealso [stats::prcomp()], [svd_tidiers]
@@ -95,16 +94,18 @@ tidy.prcomp <- function(x, matrix = "u", ...) {
     stop("Must select a single matrix to tidy.", call. = FALSE)
   }
 
-  MATRIX <- c("rotation", "x", "variables", "samples", "v", "u", "pcs", "d",
-              "scores", "loadings", "eigenvalues")
+  MATRIX <- c(
+    "rotation", "x", "variables", "samples", "v", "u", "pcs", "d",
+    "scores", "loadings", "eigenvalues"
+  )
   matrix <- rlang::arg_match(matrix, MATRIX)
 
   ncomp <- NCOL(x$rotation)
   if (matrix %in% c("pcs", "d", "eigenvalues")) {
-    nn <- c("std.dev", "percent", "cumulative")
-    ret <- fix_data_frame(t(summary(x)$importance),
-      newnames = nn,
-      newcol = "PC"
+    ret <- as_broom_tidy_tibble(
+      t(summary(x)$importance),
+      new_names = c("std.dev", "percent", "cumulative"),
+      new_column = "PC"
     )
   } else if (matrix %in% c("rotation", "variables", "v", "loadings")) {
     labels <- if (is.null(rownames(x$rotation))) {
@@ -112,7 +113,13 @@ tidy.prcomp <- function(x, matrix = "u", ...) {
     } else {
       rownames(x$rotation)
     }
-    variables <- tidyr::gather(as.data.frame(x$rotation))
+    variables <- tidyr::pivot_longer(as.data.frame(x$rotation),
+      cols = dplyr::everything(),
+      names_to = "key",
+      values_to = "value"
+    ) %>%
+      tibble::remove_rownames() %>%
+      as.data.frame()
     ret <- data.frame(
       label = rep(labels, times = ncomp),
       variables,
@@ -121,7 +128,13 @@ tidy.prcomp <- function(x, matrix = "u", ...) {
     names(ret) <- c("column", "PC", "value")
   } else if (matrix %in% c("x", "samples", "u", "scores")) {
     labels <- if (is.null(rownames(x$x))) 1:nrow(x$x) else rownames(x$x)
-    samples <- tidyr::gather(as.data.frame(x$x))
+    samples <- tidyr::pivot_longer(as.data.frame(x$x),
+      cols = dplyr::everything(),
+      names_to = "key",
+      values_to = "value"
+    ) %>%
+      tibble::remove_rownames() %>%
+      as.data.frame()
     ret <- data.frame(
       label = rep(labels, times = ncomp),
       samples
@@ -137,19 +150,19 @@ tidy.prcomp <- function(x, matrix = "u", ...) {
 
 #' @templateVar class prcomp
 #' @template title_desc_augment
-#' 
+#'
 #' @inheritParams tidy.prcomp
 #' @template param_data
 #' @template param_newdata
 #'
-#' @return A [tibble::tibble] containing the original data along with 
+#' @return A [tibble::tibble] containing the original data along with
 #'   additional columns containing each observation's projection into
 #'   PCA space.
 #'
 #' @export
 #' @seealso [stats::prcomp()], [svd_tidiers]
 #' @family svd tidiers
-#' 
+#'
 augment.prcomp <- function(x, data = NULL, newdata, ...) {
   ret <- if (!missing(newdata)) {
     ret <- data.frame(.rownames = rownames(newdata))

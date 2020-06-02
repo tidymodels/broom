@@ -9,26 +9,26 @@
 #' @export
 #' @family lm tidiers
 #' @seealso [stats::glm()]
-tidy.glm <- function(x, conf.int = FALSE, conf.level = .95, 
+tidy.glm <- function(x, conf.int = FALSE, conf.level = .95,
                      exponentiate = FALSE, ...) {
-  
   ret <- as_tibble(summary(x)$coefficients, rownames = "term")
   colnames(ret) <- c("term", "estimate", "std.error", "statistic", "p.value")
-  
+
   # summary(x)$coefficients misses rank deficient rows (i.e. coefs that
   # summary.lm() sets to NA), catch them here and add them back
-  
+
   coefs <- tibble::enframe(stats::coef(x), name = "term", value = "estimate")
   ret <- left_join(coefs, ret, by = c("term", "estimate"))
-  
+
   if (conf.int) {
     ci <- broom_confint_terms(x, level = conf.level)
     ret <- dplyr::left_join(ret, ci, by = "term")
   }
-  
-  if (exponentiate)
+
+  if (exponentiate) {
     ret <- exponentiate(ret)
-  
+  }
+
   ret
 }
 
@@ -44,7 +44,7 @@ tidy.glm <- function(x, conf.int = FALSE, conf.level = .95,
 #'   to [stats::rstandard.glm()] `type` arguments. Defaults to `"deviance"`.
 #' @template param_se_fit
 #' @template param_unused_dots
-#' 
+#'
 #' @evalRd return_augment(
 #'   ".se.fit",
 #'   ".hat",
@@ -56,7 +56,7 @@ tidy.glm <- function(x, conf.int = FALSE, conf.level = .95,
 #' @details If the weights for any of the observations in the model
 #'   are 0, then columns ".infl" and ".hat" in the result will be 0
 #'   for those observations.
-#'   
+#'
 #'   A `.resid` column is not calculated when data is specified via
 #'   the `newdata` argument.
 #'
@@ -64,39 +64,41 @@ tidy.glm <- function(x, conf.int = FALSE, conf.level = .95,
 #' @family lm tidiers
 #' @seealso [stats::glm()]
 #' @include stats-lm-tidiers.R
-augment.glm <- function(x, 
-  data = model.frame(x),
-  newdata = NULL,
-  type.predict = c("link", "response", "terms"),
-  type.residuals = c("deviance", "pearson"),
-  se_fit = FALSE, ...) {
-  
+augment.glm <- function(x,
+                        data = model.frame(x),
+                        newdata = NULL,
+                        type.predict = c("link", "response", "terms"),
+                        type.residuals = c("deviance", "pearson"),
+                        se_fit = FALSE, ...) {
   type.predict <- rlang::arg_match(type.predict)
   type.residuals <- rlang::arg_match(type.residuals)
-  
+
   df <- if (is.null(newdata)) data else newdata
   df <- as_broom_tibble(df)
-  
+
   # don't use augment_newdata here; don't want raw/response residuals in .resid
   if (se_fit) {
     pred_obj <- predict(x, newdata, type = type.predict, se.fit = TRUE)
-    df$.fitted <- pred_obj$fit
-    df$.se.fit <- pred_obj$se.fit
+    df$.fitted <- pred_obj$fit %>% unname()
+    df$.se.fit <- pred_obj$se.fit %>% unname()
   } else {
-    df$.fitted <- predict(x, newdata, type = type.predict)
+    df$.fitted <- predict(x, newdata, type = type.predict) %>% unname()
   }
-  
+
   if (is.null(newdata)) {
-    
-    tryCatch({
-      infl <- influence(x, do.coef = FALSE)
-      df$.resid <- residuals(x, type = type.residuals)
-      df$.std.resid <- rstandard(x, infl = infl, type = type.residuals)
-      df <- add_hat_sigma_cols(df, x, infl)
-      df$.cooksd <- cooks.distance(x, infl = infl)
-    }, error = data_error)
+    tryCatch(
+      {
+        infl <- influence(x, do.coef = FALSE)
+        df$.resid <- residuals(x, type = type.residuals) %>% unname()
+        df$.std.resid <- rstandard(x, infl = infl, type = type.residuals) %>% 
+          unname()
+        df <- add_hat_sigma_cols(df, x, infl)
+        df$.cooksd <- cooks.distance(x, infl = infl) %>% unname()
+      },
+      error = data_error
+    )
   }
-  
+
   df
 }
 
@@ -123,7 +125,6 @@ augment.glm <- function(x,
 #'
 #' g <- glm(am ~ mpg, mtcars, family = "binomial")
 #' glance(g)
-#'
 #' @export
 #' @family lm tidiers
 #' @seealso [stats::glm()]

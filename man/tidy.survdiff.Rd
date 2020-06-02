@@ -24,7 +24,7 @@ the \code{data} argument.}
 Tidy summarizes information about the components of a model.
 A model component might be a single term in a regression, a single
 hypothesis, a cluster, or a class. Exactly what tidy considers to be a
-model component varies cross models but is usually self-evident.
+model component varies across models but is usually self-evident.
 If a model has several distinct types of components, you will need to
 specify which components to return.
 }
@@ -39,7 +39,6 @@ s <- survdiff(
 
 tidy(s)
 glance(s)
-
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[survival:survdiff]{survival::survdiff()}}
@@ -70,8 +69,8 @@ Other survival tidiers:
 \concept{survival tidiers}
 \value{
 A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
-  \item{exp}{weighted expected number of events in each group}
-  \item{N}{number of subjects in each group}
-  \item{obs}{weighted observed number of events in each group}
+  \item{exp}{Weighted expected number of events in each group.}
+  \item{N}{Number of subjects in each group.}
+  \item{obs}{weighted observed number of events in each group.}
 
 }

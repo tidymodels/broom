@@ -67,7 +67,7 @@ how residuals are computed.
 
 tt <- t.test(rnorm(10))
 tidy(tt)
-glance(tt)  # same output for all htests
+glance(tt) # same output for all htests
 
 tt <- t.test(mpg ~ am, data = mtcars)
 tidy(tt)
@@ -81,7 +81,6 @@ tidy(ct)
 chit <- chisq.test(xtabs(Freq ~ Sex + Class, data = as.data.frame(Titanic)))
 tidy(chit)
 augment(chit)
-
 }
 \seealso{
 \code{\link[=augment]{augment()}}, \code{\link[stats:chisq.test]{stats::chisq.test()}}

@@ -22,7 +22,7 @@ test_that("tidy.Arima", {
   force(td1)
   check_tidy_output(td1)
   check_dims(td1, 2, 5)
-  
+
   td2 <- tidy(fit2)
   check_tidy_output(td2)
   check_dims(td2, 2, 3)
@@ -31,6 +31,6 @@ test_that("tidy.Arima", {
 test_that("glance.Arima", {
   gl1 <- glance(fit1)
   gl2 <- glance(fit2)
-  
+
   check_glance_outputs(gl1, gl2, strict = FALSE)
 })

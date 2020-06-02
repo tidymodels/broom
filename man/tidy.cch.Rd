@@ -26,7 +26,7 @@ the \code{data} argument.}
 Tidy summarizes information about the components of a model.
 A model component might be a single term in a regression, a single
 hypothesis, a cluster, or a class. Exactly what tidy considers to be a
-model component varies cross models but is usually self-evident.
+model component varies across models but is usually self-evident.
 If a model has several distinct types of components, you will need to
 specify which components to return.
 }
@@ -36,17 +36,19 @@ library(survival)
 
 # examples come from cch documentation
 subcoh <- nwtco$in.subcohort
-selccoh <- with(nwtco, rel==1|subcoh==1)
-ccoh.data <- nwtco[selccoh,]
+selccoh <- with(nwtco, rel == 1 | subcoh == 1)
+ccoh.data <- nwtco[selccoh, ]
 ccoh.data$subcohort <- subcoh[selccoh]
 ## central-lab histology
-ccoh.data$histol <- factor(ccoh.data$histol,labels=c("FH","UH"))
+ccoh.data$histol <- factor(ccoh.data$histol, labels = c("FH", "UH"))
 ## tumour stage
-ccoh.data$stage <- factor(ccoh.data$stage,labels=c("I","II","III" ,"IV"))
-ccoh.data$age <- ccoh.data$age/12 # Age in years
+ccoh.data$stage <- factor(ccoh.data$stage, labels = c("I", "II", "III", "IV"))
+ccoh.data$age <- ccoh.data$age / 12 # Age in years
 
-fit.ccP <- cch(Surv(edrel, rel) ~ stage + histol + age, data = ccoh.data,
-               subcoh = ~subcohort, id= ~seqno, cohort.size = 4028)
+fit.ccP <- cch(Surv(edrel, rel) ~ stage + histol + age,
+  data = ccoh.data,
+  subcoh = ~subcohort, id = ~seqno, cohort.size = 4028
+)
 
 tidy(fit.ccP)
 
@@ -56,7 +58,6 @@ ggplot(tidy(fit.ccP), aes(x = estimate, y = term)) +
   geom_point() +
   geom_errorbarh(aes(xmin = conf.low, xmax = conf.high), height = 0) +
   geom_vline(xintercept = 0)
-
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[survival:cch]{survival::cch()}}
