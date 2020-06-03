@@ -61,11 +61,12 @@ tidy.drc <- function(x, conf.int = FALSE, conf.level = 0.95, ...) {
 #' @export
 #' @family drc tidiers
 glance.drc <- function(x, ...) {
-  tibble(
+  as_glance_tibble(
     AIC = stats::AIC(x),
     BIC = stats::BIC(x),
     logLik = stats::logLik(x),
-    df.residual = x$df.residual
+    df.residual = x$df.residual,
+    na_types = "rrri"
   )
 }
 

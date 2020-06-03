@@ -53,15 +53,18 @@ tidy.Gam <- function(x, ...) {
 #' @export
 #' @seealso [glance()], [gam::gam()]
 glance.Gam <- function(x, ...) {
+  
   s <- summary(x)
-  ret <- tibble(
+  
+  as_glance_tibble(
     df = s$df[1],
     logLik = as.numeric(stats::logLik(x)),
     AIC = stats::AIC(x),
     BIC = stats::BIC(x),
     deviance = stats::deviance(x),
     df.residual = stats::df.residual(x),
-    nobs = stats::nobs(x)
+    nobs = stats::nobs(x),
+    na_types = "irrrrii"
   )
-  ret
+
 }

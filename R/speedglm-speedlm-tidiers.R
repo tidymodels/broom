@@ -61,7 +61,7 @@ tidy.speedlm <- function(x, conf.int = FALSE, conf.level = 0.95, ...) {
 #' @seealso [speedglm::speedlm()]
 glance.speedlm <- function(x, ...) {
   s <- summary(x)
-  tibble(
+  as_glance_tibble(
     r.squared = s$r.squared,
     adj.r.squared = s$adj.r.squared,
     statistic = s$fstatistic[1],
@@ -72,7 +72,8 @@ glance.speedlm <- function(x, ...) {
     BIC = stats::BIC(x),
     deviance = x$RSS,
     df.residual = stats::df.residual(x),
-    nobs = stats::nobs(x)
+    nobs = stats::nobs(x),
+    na_types = "rrrrirrrrii"
   )
 }
 

@@ -101,6 +101,6 @@ glance.lmrob <- function(x, ...) {
     r.squared = s$r.squared,
     sigma = s$sigma,
     df.residual = x$df.residual,
-    na_types = c(NA_real_, NA_real_, NA_integer_)
+    na_types = "rri"
   )
 }

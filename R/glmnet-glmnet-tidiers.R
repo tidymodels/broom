@@ -111,9 +111,10 @@ tidy.glmnet <- function(x, return_zeros = FALSE, ...) {
 #' @family glmnet tidiers
 #' @seealso [glance()], [glmnet::glmnet()]
 glance.glmnet <- function(x, ...) {
-  tibble(
+  as_glance_tibble(
     nulldev = x$nulldev,
     npasses = x$npasses,
-    nobs = stats::nobs(x)
+    nobs = stats::nobs(x),
+    na_types = "rii"
   )
 }

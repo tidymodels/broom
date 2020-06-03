@@ -67,7 +67,7 @@ tidy.speedglm <- function(x, conf.int = FALSE, conf.level = 0.95,
 #' @family speedlm tidiers
 #' @seealso [speedglm::speedlm()]
 glance.speedglm <- function(x, ...) {
-  tibble(
+  as_glance_tibble(
     null.deviance = x$nulldev,
     df.null = x$nulldf,
     logLik = as.numeric(stats::logLik(x)),
@@ -75,7 +75,8 @@ glance.speedglm <- function(x, ...) {
     BIC = stats::BIC(x),
     deviance = x$deviance,
     df.residual = x$df,
-    nobs = stats::nobs(x)
+    nobs = stats::nobs(x),
+    na_types = "rirrrrii"
   )
 }
 

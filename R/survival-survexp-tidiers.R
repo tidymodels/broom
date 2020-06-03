@@ -47,9 +47,10 @@ tidy.survexp <- function(x, ...) {
 #' @family survexp tidiers
 #' @family survival tidiers
 glance.survexp <- function(x, ...) {
-  tibble(
+  as_glance_tibble(
     n.max = max(x$n.risk),
     n.start = x$n.risk[1],
-    timepoints = length(x$n.risk)
+    timepoints = length(x$n.risk),
+    na_types = "iii"
   )
 }

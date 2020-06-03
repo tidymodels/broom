@@ -53,10 +53,11 @@ tidy_optim <- function(x, ...) {
 #' @family list tidiers
 #' @seealso [glance()], [optim()]
 glance_optim <- function(x, ...) {
-  tibble(
+  as_glance_tibble(
     value = x$value,
-    function.count = x$counts["function"],
-    gradient.count = x$counts["gradient"],
-    convergence = x$convergence
+    function.count = unname(x$counts["function"]),
+    gradient.count = unname(x$counts["gradient"]),
+    convergence = x$convergence,
+    na_types = "riii"
   )
 }

@@ -106,15 +106,16 @@ augment.survreg <- function(x, data = NULL, newdata = NULL,
 #' @family survreg tidiers
 #' @family survival tidiers
 glance.survreg <- function(x, ...) {
-  ret <- tibble(
-    iter = x$iter, df = sum(x$df),
+  as_glance_tibble(
+    iter = x$iter, 
+    df = sum(x$df),
     statistic = 2 * diff(x$loglik),
     logLik = as.numeric(stats::logLik(x)),
     AIC = stats::AIC(x),
     BIC = stats::BIC(x),
     df.residual = stats::df.residual(x),
-    nobs = stats::nobs(x)
+    nobs = stats::nobs(x),
+    p.value = 1 - stats::pchisq(2 * diff(x$loglik), sum(x$df) - x$idf),
+    na_types = "iirrrriir"
   )
-  ret$p.value <- 1 - stats::pchisq(ret$statistic, sum(x$df) - x$idf)
-  ret
 }

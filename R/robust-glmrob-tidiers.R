@@ -72,6 +72,6 @@ glance.glmRob <- function(x, ...) {
     null.deviance = x$null.deviance,
     df.residual = stats::df.residual(x),
     nobs = stats::nobs(x),
-    na_types = c(rep(NA_real_, 3), rep(NA_integer_, 2))
+    na_types = "rrrii"
   )
 }

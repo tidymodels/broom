@@ -161,7 +161,7 @@ glance.factanal <- function(x, ...) {
   total.variance <- sum(apply(loadings, 2, function(i) sum(i^2) / length(i)))
 
   # Results as single-row data frame
-  tibble(
+  as_glance_tibble(
     n.factors = x$factors,
     total.variance = total.variance,
     statistic = unname(x$STATISTIC),
@@ -170,6 +170,7 @@ glance.factanal <- function(x, ...) {
     n = x$n.obs,
     method = x$method,
     converged = x$converged,
-    nobs = stats::nobs(x)
+    nobs = stats::nobs(x),
+    na_types = "irrriicli"
   )
 }

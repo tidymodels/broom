@@ -80,13 +80,14 @@ tidy.clm <- function(x, conf.int = FALSE, conf.level = 0.95,
 #' @seealso [tidy], [ordinal::clm()]
 #' @family ordinal tidiers
 glance.clm <- function(x, ...) {
-  tibble(
+  as_glance_tibble(
     edf = x$edf,
     AIC = stats::AIC(x),
     BIC = stats::BIC(x),
     logLik = stats::logLik(x),
     df.residual = stats::df.residual(x),
-    nobs = stats::nobs(x)
+    nobs = stats::nobs(x),
+    na_types = "irrrii"
   )
 }
 

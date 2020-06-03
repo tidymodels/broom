@@ -95,7 +95,7 @@ augment.nls <- function(x, data = NULL, newdata = NULL, ...) {
 glance.nls <- function(x, ...) {
   s <- summary(x)
 
-  tibble(
+  as_glance_tibble(
     sigma = s$sigma,
     isConv = s$convInfo$isConv,
     finTol = s$convInfo$finTol,
@@ -104,6 +104,7 @@ glance.nls <- function(x, ...) {
     BIC = stats::BIC(x),
     deviance = stats::deviance(x),
     df.residual = stats::df.residual(x),
-    nobs = stats::nobs(x)
+    nobs = stats::nobs(x),
+    na_types = "rlrrrrrii"
   )
 }

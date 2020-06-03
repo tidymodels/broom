@@ -85,11 +85,12 @@ augment.lmRob <- function(x, data = model.frame(x), newdata = NULL, ...) {
 #' @seealso [robust::lmRob()]
 #'
 glance.lmRob <- function(x, ...) {
-  tibble(
+  as_glance_tibble(
     r.squared = x$r.squared,
     deviance = x$dev,
     sigma = summary(x)$sigma,
     df.residual = x$df.residual,
-    nobs = stats::nobs(x)
+    nobs = stats::nobs(x),
+    na_types = "rrrii"
   )
 }

@@ -130,7 +130,7 @@ augment.glm <- function(x,
 #' @seealso [stats::glm()]
 glance.glm <- function(x, ...) {
   s <- summary(x)
-  tibble(
+  as_glance_tibble(
     null.deviance = x$null.deviance,
     df.null = x$df.null,
     logLik = as.numeric(stats::logLik(x)),
@@ -138,6 +138,7 @@ glance.glm <- function(x, ...) {
     BIC = stats::BIC(x),
     deviance = stats::deviance(x),
     df.residual = stats::df.residual(x),
-    nobs = stats::nobs(x)
+    nobs = stats::nobs(x),
+    na_types = "rirrrrii"
   )
 }

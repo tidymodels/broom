@@ -90,14 +90,14 @@ tidy.gam <- function(x, parametric = FALSE, conf.int = FALSE,
 #' @family mgcv tidiers
 #' @seealso [glance()], [mgcv::gam()], [glance.Gam()]
 glance.gam <- function(x, ...) {
-  ret <- tibble(
+  as_glance_tibble(
     df = sum(x$edf),
     logLik = as.numeric(stats::logLik(x)),
     AIC = stats::AIC(x),
     BIC = stats::BIC(x),
     deviance = stats::deviance(x),
     df.residual = stats::df.residual(x),
-    nobs = stats::nobs(x)
+    nobs = stats::nobs(x),
+    na_types = "irrrrii"
   )
-  ret
 }

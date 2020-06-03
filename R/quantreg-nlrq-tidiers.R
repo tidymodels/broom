@@ -45,16 +45,17 @@ tidy.nlrq <- function(x, conf.int = FALSE, conf.level = 0.95, ...) {
 #' @seealso [glance()], [quantreg::nlrq()]
 #' @family quantreg tidiers
 glance.nlrq <- function(x, ...) {
-  warning("can glance.nlrq return multiple rows?")
 
   n <- length(x[["m"]]$fitted())
   s <- summary(x)
-  tibble(
+  
+  as_glance_tibble(
     tau = x[["m"]]$tau(),
     logLik = logLik(x),
     AIC = AIC(x),
     BIC = AIC(x, k = log(n)),
-    df.residual = s[["rdf"]]
+    df.residual = s[["rdf"]],
+    na_types = "rrrri"
   )
 }
 

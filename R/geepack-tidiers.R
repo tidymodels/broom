@@ -116,11 +116,12 @@ confint.geeglm <- function(object, parm, level = 0.95, ...) {
 #' @family geepack tidiers
 glance.geeglm <- function(x, ...) {
   s <- summary(x)
-  tibble(
+  as_glance_tibble(
     df.residual = x$df.residual,
     n.clusters = length(s$clusz),
     max.cluster.size = max(s$clusz),
     alpha = x$geese$alpha,
-    gamma = x$geese$gamma
+    gamma = x$geese$gamma,
+    na_types = "iiirr"
   )
 }

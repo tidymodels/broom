@@ -75,12 +75,13 @@ glance.rq <- function(x, ...) {
   n <- length(fitted(x))
   s <- summary(x)
 
-  tibble(
+  as_glance_tibble(
     tau = x[["tau"]],
     logLik = logLik(x),
     AIC = AIC(x),
     BIC = AIC(x, k = log(n)),
-    df.residual = rep(s[["rdf"]], times = length(x[["tau"]]))
+    df.residual = rep(s[["rdf"]], times = length(x[["tau"]])),
+    na_types = "rrrri"
   )
 }
 

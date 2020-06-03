@@ -133,16 +133,15 @@ tidy.aov <- function(x, ...) {
 #' @seealso [glance()]
 #' @family anova tidiers
 glance.aov <- function(x, ...) {
-  with(
-    summary(x),
-    tibble(
-      logLik = as.numeric(stats::logLik(x)),
-      AIC = stats::AIC(x),
-      BIC = stats::BIC(x),
-      deviance = stats::deviance(x),
-      nobs = stats::nobs(x)
-    )
+  as_glance_tibble(
+    logLik = as.numeric(stats::logLik(x)),
+    AIC = stats::AIC(x),
+    BIC = stats::BIC(x),
+    deviance = stats::deviance(x),
+    nobs = stats::nobs(x),
+    na_types = "rrrri"
   )
+  
 }
 
 #' @templateVar class aovlist

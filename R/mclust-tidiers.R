@@ -120,17 +120,14 @@ augment.Mclust <- function(x, data = NULL, ...) {
 #'
 #' @export
 glance.Mclust <- function(x, ...) {
-  ret <- with(
-    x,
-    tibble(
-      model = modelName,
-      G,
-      BIC = bic,
-      logLik = loglik,
-      df,
-      hypvol
-    )
+  as_glance_tibble(
+    model = unname(x$modelName),
+    G = unname(x$G),
+    BIC = unname(x$bic),
+    logLik = unname(x$loglik),
+    df = unname(x$df),
+    hypvol = unname(x$hypvol),
+    nobs = stats::nobs(x),
+    na_types = "cirriri"
   )
-  ret$nobs <- stats::nobs(x)
-  ret
 }

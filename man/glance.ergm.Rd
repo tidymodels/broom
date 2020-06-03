@@ -20,7 +20,7 @@ burn-in and sample size used to estimate the model. Defaults to \code{FALSE}.}
 \strong{Cautionary note}: Mispecified arguments may be silently ignored.}
 }
 \value{
-\code{glance.ergm} returns a one-row data.frame with the columns
+\code{glance.ergm} returns a one-row tibble with the columns
 \item{independence}{Whether the model assumed dyadic independence}
 \item{iterations}{The number of MCMLE iterations performed before convergence}
 \item{logLik}{If applicable, the log-likelihood associated with the model}
@@ -28,7 +28,7 @@ burn-in and sample size used to estimate the model. Defaults to \code{FALSE}.}
 \item{BIC}{The Bayesian Information Criterion}
 
 If \code{deviance = TRUE}, and if the model supports it, the
-data frame will also contain the columns
+tibble will also contain the columns
 \item{null.deviance}{The null deviance of the model}
 \item{df.null}{The degrees of freedom of the null deviance}
 \item{residual.deviance}{The residual deviance of the model}

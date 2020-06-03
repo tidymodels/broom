@@ -158,20 +158,17 @@ augment.poLCA <- function(x, data = NULL, ...) {
 #' @seealso [glance()], [poLCA::poLCA()]
 #' @family poLCA tidiers
 glance.poLCA <- function(x, ...) {
-  ret <- with(
-    x,
-    tibble(
-      logLik = llik,
-      AIC = aic,
-      BIC = bic,
-      g.squared = Gsq,
-      chi.squared = Chisq,
-      df = npar,
-      df.residual = resid.df
-    )
+  as_glance_tibble(
+    logLik = x$llik,
+    AIC = x$aic,
+    BIC = x$bic,
+    g.squared = x$Gsq,
+    chi.squared = x$Chisq,
+    df = x$npar,
+    df.residual = x$resid.df,
+    nobs = stats::nobs(x),
+    na_types = "rrrrriii"
   )
-  ret$nobs <- stats::nobs(x)
-  ret
 }
 
 

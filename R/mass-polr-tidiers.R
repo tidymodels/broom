@@ -94,14 +94,15 @@ tidy.polr <- function(x, conf.int = FALSE, conf.level = 0.95,
 #' @seealso [tidy], [MASS::polr()]
 #' @family ordinal tidiers
 glance.polr <- function(x, ...) {
-  tibble(
+  as_glance_tibble(
     edf = x$edf,
     logLik = as.numeric(stats::logLik(x)),
     AIC = stats::AIC(x),
     BIC = stats::BIC(x),
     deviance = stats::deviance(x),
     df.residual = stats::df.residual(x),
-    nobs = stats::nobs(x)
+    nobs = stats::nobs(x),
+    na_types = "irrrrii"
   )
 }
 

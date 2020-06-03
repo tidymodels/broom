@@ -175,18 +175,18 @@ glance.felm <- function(x, ...) {
       call. = FALSE
     )
   }
-  ret <- with(
-    summary(x),
-    tibble(
-      r.squared = r2,
-      adj.r.squared = r2adj,
-      sigma = rse,
-      statistic = fstat,
-      p.value = pval,
-      df = df[1],
-      df.residual = rdf,
-      nobs = stats::nobs(x)
-    )
+  
+  s <- summary(x)
+  
+  as_glance_tibble(
+    r.squared = s$r2,
+    adj.r.squared = s$r2adj,
+    sigma = s$rse,
+    statistic = s$fstat,
+    p.value = unname(s$pval),
+    df = s$df[1],
+    df.residual = s$rdf,
+    nobs = stats::nobs(x),
+    na_types = "rrrrriii"
   )
-  ret
 }

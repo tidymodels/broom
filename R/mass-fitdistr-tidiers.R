@@ -40,11 +40,12 @@ tidy.fitdistr <- function(x, ...) {
 #' @family fitdistr tidiers
 #' @seealso [tidy()], [MASS::fitdistr()]
 glance.fitdistr <- function(x, ...) {
-  ret <- tibble(
+  as_glance_tibble(
     logLik = stats::logLik(x),
     AIC = stats::AIC(x),
     BIC = stats::BIC(x),
-    nobs = stats::nobs(x)
+    nobs = stats::nobs(x),
+    na_types = "rrri"
   )
-  ret
+  
 }

@@ -86,7 +86,8 @@ augment.pam <- function(x, data = NULL, ...) {
 #' @seealso [glance()], [cluster::pam()]
 #' @family pam tidiers
 glance.pam <- function(x, ...) {
-  tibble(
-    avg.silhouette.width = x$silinfo$avg.width
+  as_glance_tibble(
+    avg.silhouette.width = x$silinfo$avg.width,
+    na_types = "r"
   )
 }

@@ -121,22 +121,45 @@ has_rownames <- function(df) {
   any(rownames(df) != as.character(1:nrow(df)))
 }
 
+na_types_dict <- list("r" = NA_real_,
+                      "i" = rlang::na_int,
+                      "c" = NA_character_,
+                      "l" = rlang::na_lgl)
+
+# A function that converts a string to a vector of NA types.
+# e.g. "rri" -> c(NA_real_, NA_real_, NA_integer)
+parse_na_types <- function(s) {
+  
+  positions <- purrr::map(
+    stringr::str_split(s, pattern = ""), 
+    match,
+    table = names(na_types_dict)
+  ) %>%
+    unlist()
+  
+  na_types_dict[positions] %>%
+    unlist() %>%
+    unname()
+}
+
 # A function that, given named arguments, will make a one-row
-# tibble, switching out NULLs for the appropriate NA type
+# tibble, switching out NULLs for the appropriate NA type.
 as_glance_tibble <- function(..., na_types) {
   
   cols <- list(...)
   
-  if (length(cols) != length(na_types)) {
+  if (length(cols) != stringr::str_length(na_types)) {
     stop(
       "The number of columns provided does not match the number of ",
       "column types provided."
     )
   }
   
+  na_types_long <- parse_na_types(na_types)
+  
   entries <- purrr::map2(cols, 
-                         na_types, 
-                         function(.x, .y) {if (is.null(.x)) .y else .x})
+                         na_types_long, 
+                         function(.x, .y) {if (length(.x) == 0) .y else .x})
   
   tibble::as_tibble_row(entries)
   
