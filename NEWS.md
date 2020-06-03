@@ -121,10 +121,12 @@ The internals of `augment.*()` methods have largely been overhauled.
 ## For developers and contributors
 
 - Moved core tests to the `modeltests` package.
-
-- Revised several vignettes and moved them to the tidymodels.org website. The
-  existing vignettes will now simply link to the revised versions.
   
+- In general, after this release, the broom dev team will no longer add new
+  tidiers to the package, in favor of adding tidier methods to the model-owning
+  package. An article describing best practices in doing so can be found
+  on the {tidymodels} website at \url{https://www.tidymodels.org/learn/develop/broom/}
+
 - Added a new vignette discussing how to implement new tidier methods in 
   non-broom packages.
 
@@ -189,7 +191,8 @@ number of data points used to fit the model! (#597 by @vincentarelbundock)
   (#617)
 
 - Return factor rather than numeric class predictions in `.fitted` of 
-  `augment.polr()`. (#619)
+  `augment.polr()`. (#619) Add an option to return `p.values` in `tidy.polr()` 
+  (#833 by @LukasWallrich).
 
 - `tidy.kmeans()` now uses the names of the input variables in the output by
   default. Set `col.names = NULL` to recover the old behavior.
@@ -224,9 +227,19 @@ number of data points used to fit the model! (#597 by @vincentarelbundock)
 
 - `glance.lavaan()` now uses lavaan extractor functions instead of
   subsetting the fit object manually. (#835)
+  
+- `glance.lm()` no longer errors when only an intercept is provided
+  as an explanatory variable. (#865)
+  
+- Various warnings resulting from changes to the tidyr API in v1.0.0 have
+  been fixed. (#870)
+  
+- Removed dependencies on reshape2 and superseded functions in dplyr.
 
 ### Bug fixes
 
+- Several `glance.*()` methods have been refactored in order to return 
+a one-row tibble even when the model matrix is rank-deficient
 - Bug fix to return confidence intervals correct in `tidy.drc()` (#798)
 - Bug fix to better allow `tidy.boot()` to support confidence intervals (#581)
 - Bug fix to allow `augment.kmeans()` to work with masked data (#609)
@@ -241,10 +254,13 @@ fitting (#842, #728)
 
 ### Other changes
 
-- The package's site has moved from https://broom.tidyverse.org/ to
-https://broom.tidymodels.org/
+- The package's site has moved from \url{https://broom.tidyverse.org/} to
+\url{https://broom.tidymodels.org/}.
 
-- Removed dependencies on reshape2 and superseded functions in dplyr.
+- Revised several vignettes and moved them to the tidymodels.org website. The
+  existing vignettes will now simply link to the revised versions.
+
+- Many improvements to consistency and clarity of documentation.
 
 # broom 0.5.6
 
@@ -526,8 +542,8 @@ supportive and insightful and I look forward to working you all again!
 * Added tidiers for `emmeans` from the emmeans package (thanks to #252 from
   Matthew Kay)
 
-* Added tidiers for `speedlm` and `speedglm` from the speedglm package (thanks
-  to #248 from David Hugh-Jones)
+* Added tidiers for `speedlm` and `speedglm` from the speedglm package (#685,
+  thanks to #248 from David Hugh-Jones)
 
 * Added tidiers for `muhaz` objects from the muhaz package (thanks to #251 from
   Andreas Bender)

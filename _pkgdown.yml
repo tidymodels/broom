@@ -42,7 +42,7 @@ navbar:
   - text: Articles
     menu:
     - text: Adding new tidiers
-      href: articles/adding-tidiers.html
+      href: https://www.tidymodels.org/learn/develop/broom/
     - text: Available methods
       href: articles/available-methods.html
     - text: Bootstrapping
