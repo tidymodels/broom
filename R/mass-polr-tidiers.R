@@ -5,7 +5,7 @@
 #' @template param_confint
 #' @template param_exponentiate
 #' @param p.values Logical. Should p-values be returned, 
-#' based on chi-squared tests from [MASS::dropterm()]. Defaults to FAlSE
+#' based on chi-squared tests from [MASS::dropterm()]. Defaults to FALSE.
 #' @template param_unused_dots
 #'
 #' @examples
@@ -30,7 +30,7 @@
 #'   
 #'   Calculating p.values with the `dropterm()` function is the approach
 #'   suggested by the MASS package author 
-#'   (https://r.789695.n4.nabble.com/p-values-of-plor-td4668100.html). This
+#'   \url{https://r.789695.n4.nabble.com/p-values-of-plor-td4668100.html}. This
 #'   approach is computationally intensive, so that p.values are only
 #'   returned if requested explicitly. Additionally, it only works for 
 #'   models containing no variables with more than two categories. If this
