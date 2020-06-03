@@ -212,7 +212,7 @@ burn-in and sample size used to estimate the model. Defaults to <code>FALSE</cod
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p><code>glance.ergm</code> returns a one-row data.frame with the columns</p>
+    <p><code>glance.ergm</code> returns a one-row tibble with the columns</p>
 <dt>independence</dt><dd><p>Whether the model assumed dyadic independence</p></dd>
 <dt>iterations</dt><dd><p>The number of MCMLE iterations performed before convergence</p></dd>
 <dt>logLik</dt><dd><p>If applicable, the log-likelihood associated with the model</p></dd>
@@ -220,7 +220,7 @@ burn-in and sample size used to estimate the model. Defaults to <code>FALSE</cod
 <dt>BIC</dt><dd><p>The Bayesian Information Criterion</p></dd>
 
 If deviance = TRUE, and if the model supports it, the
-data frame will also contain the columns
+tibble will also contain the columns
 <dt>null.deviance</dt><dd><p>The null deviance of the model</p></dd>
 <dt>df.null</dt><dd><p>The degrees of freedom of the null deviance</p></dd>
 <dt>residual.deviance</dt><dd><p>The residual deviance of the model</p></dd>
