@@ -804,11 +804,11 @@ series.</p></dd>
   <span class='co'># the series next to its seasonal decomposition, grouped</span>
   <span class='co'># by the method (stl or decompose).</span>
   <span class='fu'><a href='https://dplyr.tidyverse.org/reference/group_by.html'>group_by</a></span>(<span class='no'>decomp</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='https://tidyr.tidyverse.org/reference/nest.html'>unnest</a></span>(<span class='no'>series</span>, <span class='no'>augment</span>) <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='https://tidyr.tidyverse.org/reference/nest.html'>unnest</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='no'>series</span>, <span class='no'>augment</span>)) <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span>(<span class='kw'>index</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fu'><a href='https://dplyr.tidyverse.org/reference/context.html'>n</a></span>()) <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='https://dplyr.tidyverse.org/reference/group_by.html'>ungroup</a></span>() <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/select.html'>select</a></span>(<span class='no'>decomp</span>, <span class='no'>index</span>, <span class='no'>x</span>, <span class='kw'>adjusted</span> <span class='kw'>=</span> <span class='no'>.seasadj</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: unnest() has a new interface. See ?unnest for details.</span>
-#&gt; <span class='warning'>Try `df %&gt;% unnest(c(series, augment))`, with `mutate()` if needed</span></div><div class='input'>
+  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/select.html'>select</a></span>(<span class='no'>decomp</span>, <span class='no'>index</span>, <span class='no'>x</span>, <span class='kw'>adjusted</span> <span class='kw'>=</span> <span class='no'>.seasadj</span>)
+
 <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span>(<span class='no'>decomps</span>) +
   <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_path.html'>geom_line</a></span>(<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>index</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>x</span>), <span class='kw'>colour</span> <span class='kw'>=</span> <span class='st'>"black"</span>) +
   <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_path.html'>geom_line</a></span>(<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(
