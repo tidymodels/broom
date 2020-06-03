@@ -119,7 +119,7 @@ A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
   \item{.conf.low}{Lower bound on confidence interval for fitted values.}
   \item{.cooksd}{Cooks distance.}
   \item{.fitted}{Fitted or predicted value.}
-  \item{.resid}{The difference between fitted and observed values.}
+  \item{.resid}{The difference between observed and fitted values.}
   \item{.se.fit}{Standard errors of fitted values.}
 
 }
