@@ -65,12 +65,13 @@ augment.glmRob <- function(x, ...) {
 #'
 glance.glmRob <- function(x, ...) {
   s <- summary(x)
-  ret <- tibble(
+  
+  as_glance_tibble(
     deviance = x$deviance,
     sigma = stats::sigma(x),
     null.deviance = x$null.deviance,
     df.residual = stats::df.residual(x),
-    nobs = stats::nobs(x)
+    nobs = stats::nobs(x),
+    na_types = c(rep(NA_real_, 3), rep(NA_integer_, 2))
   )
-  ret
 }

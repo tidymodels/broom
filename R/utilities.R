@@ -121,6 +121,26 @@ has_rownames <- function(df) {
   any(rownames(df) != as.character(1:nrow(df)))
 }
 
+# A function that, given named arguments, will make a one-row
+# tibble, switching out NULLs for the appropriate NA type
+as_glance_tibble <- function(..., na_types) {
+  
+  cols <- list(...)
+  
+  if (length(cols) != length(na_types)) {
+    stop(
+      "The number of columns provided does not match the number of ",
+      "column types provided."
+    )
+  }
+  
+  entries <- purrr::map2(cols, 
+                         na_types, 
+                         function(.x, .y) {if (is.null(.x)) .y else .x})
+  
+  tibble::as_tibble_row(entries)
+  
+}
 
 # strip rownames from a data frame
 unrowname <- function(x) {
