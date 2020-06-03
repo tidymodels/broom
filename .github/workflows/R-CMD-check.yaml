@@ -30,8 +30,14 @@ jobs:
 
       - name: Query dependencies
         run: |
-          install.packages('remotes', 'mnormt')
+          install.packages('remotes')
           saveRDS(remotes::dev_package_deps(dependencies = TRUE), ".github/depends.Rds", version = 2)
+        shell: Rscript {0}
+        
+      - name: Install mnormt on Windows
+        if: runner.os == 'Windows'
+        run: |
+          install.packages('mnormt')
         shell: Rscript {0}
 
       - name: Install libomp
