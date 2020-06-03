@@ -114,7 +114,7 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/adding-tidiers.html">Adding new tidiers</a>
+      <a href="https://www.tidymodels.org/learn/develop/broom/">Adding new tidiers</a>
     </li>
     <li>
       <a href="../articles/available-methods.html">Available methods</a>
@@ -240,7 +240,7 @@
 <a href="#for-developers-and-contributors" class="anchor"></a>For developers and contributors</h2>
 <ul>
 <li><p>Moved core tests to the <code>modeltests</code> package.</p></li>
-<li><p>Revised several vignettes and moved them to the tidymodels.org website. The existing vignettes will now simply link to the revised versions.</p></li>
+<li><p>In general, after this release, the broom dev team will no longer add new tidiers to the package, in favor of adding tidier methods to the model-owning package. An article describing best practices in doing so can be found on the {tidymodels} website at \url{<a href="https://www.tidymodels.org/learn/develop/broom/" class="uri">https://www.tidymodels.org/learn/develop/broom/</a>}</p></li>
 <li><p>Added a new vignette discussing how to implement new tidier methods in non-broom packages.</p></li>
 </ul>
 </div>
@@ -283,7 +283,7 @@
 <ul>
 <li><p><code><a href="../reference/tidy.felm.html">tidy.felm()</a></code> now has a <code>robust = TRUE/FALSE</code> option that supports robust and cluster standard errors (<a href='http://github.com/tidymodels/broom/issues/772'>#772</a>)</p></li>
 <li><p>Make <code>.fitted</code> values respect <code>type.predict</code> argument of <code><a href="../reference/augment.clm.html">augment.clm()</a></code>. (<a href='http://github.com/tidymodels/broom/issues/617'>#617</a>)</p></li>
-<li><p>Return factor rather than numeric class predictions in <code>.fitted</code> of <code><a href="../reference/augment.polr.html">augment.polr()</a></code>. (<a href='http://github.com/tidymodels/broom/issues/619'>#619</a>)</p></li>
+<li><p>Return factor rather than numeric class predictions in <code>.fitted</code> of <code><a href="../reference/augment.polr.html">augment.polr()</a></code>. (<a href='http://github.com/tidymodels/broom/issues/619'>#619</a>) Add an option to return <code>p.values</code> in <code><a href="../reference/tidy.polr.html">tidy.polr()</a></code> (<a href='http://github.com/tidymodels/broom/issues/833'>#833</a> by <a href='http://github.com/LukasWallrich'>@LukasWallrich</a>).</p></li>
 <li><p><code><a href="../reference/tidy.kmeans.html">tidy.kmeans()</a></code> now uses the names of the input variables in the output by default. Set <code>col.names = NULL</code> to recover the old behavior.</p></li>
 <li><p>Previously, F-statistics for weak instruments were returned through <code><a href="../reference/glance.ivreg.html">glance.ivreg()</a></code>. F-statistics are now returned through <code><a href="../reference/tidy.ivreg.html">tidy.ivreg(instruments = TRUE)</a></code>. Default is <code><a href="../reference/tidy.ivreg.html">tidy.ivreg(instruments = FALSE)</a></code>. <code><a href="../reference/glance.ivreg.html">glance.ivreg()</a></code> still returns Wu-Hausman and Sargan test statistics.</p></li>
 <li><p><code><a href="../reference/glance.biglm.html">glance.biglm()</a></code> now returns a <code>df.residual</code> column</p></li>
@@ -295,11 +295,15 @@
 <li><p><code><a href="../reference/tidy.polr.html">tidy.polr()</a></code> now returns p-values if <code>p.values</code> is set to TRUE and the model does not contain factors with more than two levels.</p></li>
 <li><p><code><a href="../reference/tidy.zoo.html">tidy.zoo()</a></code> now doesn’t change column names that have spaces or other special characters (previously they were converted to <code>data.frame</code> friendly column names by <code>make.names</code>)</p></li>
 <li><p><code><a href="../reference/glance.lavaan.html">glance.lavaan()</a></code> now uses lavaan extractor functions instead of subsetting the fit object manually. (<a href='http://github.com/tidymodels/broom/issues/835'>#835</a>)</p></li>
+<li><p><code><a href="../reference/glance.lm.html">glance.lm()</a></code> no longer errors when only an intercept is provided as an explanatory variable. (<a href='http://github.com/tidymodels/broom/issues/865'>#865</a>)</p></li>
+<li><p>Various warnings resulting from changes to the tidyr API in v1.0.0 have been fixed. (<a href='http://github.com/tidymodels/broom/issues/870'>#870</a>)</p></li>
+<li><p>Removed dependencies on reshape2 and superseded functions in dplyr.</p></li>
 </ul>
 <div id="bug-fixes" class="section level3">
 <h3 class="hasAnchor">
 <a href="#bug-fixes" class="anchor"></a>Bug fixes</h3>
 <ul>
+<li>Several <code>glance.*()</code> methods have been refactored in order to return a one-row tibble even when the model matrix is rank-deficient</li>
 <li>Bug fix to return confidence intervals correct in <code><a href="../reference/tidy.drc.html">tidy.drc()</a></code> (<a href='http://github.com/tidymodels/broom/issues/798'>#798</a>)</li>
 <li>Bug fix to better allow <code><a href="../reference/tidy.boot.html">tidy.boot()</a></code> to support confidence intervals (<a href='http://github.com/tidymodels/broom/issues/581'>#581</a>)</li>
 <li>Bug fix to allow <code><a href="../reference/augment.kmeans.html">augment.kmeans()</a></code> to work with masked data (<a href='http://github.com/tidymodels/broom/issues/609'>#609</a>)</li>
@@ -315,8 +319,9 @@
 <h3 class="hasAnchor">
 <a href="#other-changes" class="anchor"></a>Other changes</h3>
 <ul>
-<li><p>The package’s site has moved from <a href="https://broom.tidyverse.org/" class="uri">https://broom.tidyverse.org/</a> to <a href="https://broom.tidymodels.org/" class="uri">https://broom.tidymodels.org/</a></p></li>
-<li><p>Removed dependencies on reshape2 and superseded functions in dplyr.</p></li>
+<li><p>The package’s site has moved from \url{<a href="https://broom.tidyverse.org/" class="uri">https://broom.tidyverse.org/</a>} to \url{<a href="https://broom.tidymodels.org/" class="uri">https://broom.tidymodels.org/</a>}.</p></li>
+<li><p>Revised several vignettes and moved them to the tidymodels.org website. The existing vignettes will now simply link to the revised versions.</p></li>
+<li><p>Many improvements to consistency and clarity of documentation.</p></li>
 </ul>
 </div>
 </div>
@@ -498,7 +503,7 @@
 <li><p>Added tidiers for <code>ivreg</code> objects from the AER package (thanks to <a href='http://github.com/tidymodels/broom/issues/245'>#245</a> from David Hugh-Jones)</p></li>
 <li><p>Added tidiers for <code>survdiff</code> objects from the survival package (thanks to <a href='http://github.com/tidymodels/broom/issues/147'>#147</a> from Michał Bojanowski)</p></li>
 <li><p>Added tidiers for <code>emmeans</code> from the emmeans package (thanks to <a href='http://github.com/tidymodels/broom/issues/252'>#252</a> from Matthew Kay)</p></li>
-<li><p>Added tidiers for <code>speedlm</code> and <code>speedglm</code> from the speedglm package (thanks to <a href='http://github.com/tidymodels/broom/issues/248'>#248</a> from David Hugh-Jones)</p></li>
+<li><p>Added tidiers for <code>speedlm</code> and <code>speedglm</code> from the speedglm package (<a href='http://github.com/tidymodels/broom/issues/685'>#685</a>, thanks to <a href='http://github.com/tidymodels/broom/issues/248'>#248</a> from David Hugh-Jones)</p></li>
 <li><p>Added tidiers for <code>muhaz</code> objects from the muhaz package (thanks to <a href='http://github.com/tidymodels/broom/issues/251'>#251</a> from Andreas Bender)</p></li>
 <li><p>Added tidiers for <code>decompose</code> and <code>stl</code> objects from stats (thanks to <a href='http://github.com/tidymodels/broom/issues/165'>#165</a> from Aaron Jacobs)</p></li>
 </ul>
