@@ -47,7 +47,7 @@ points <- centers \%>\%
     x2 = purrr::map2(num_points, x2, rnorm)
   ) \%>\%
   dplyr::select(-num_points, -cluster) \%>\%
-  tidyr::unnest(x1, x2)
+  tidyr::unnest(c(x1, x2))
 
 m <- mclust::Mclust(points)
 

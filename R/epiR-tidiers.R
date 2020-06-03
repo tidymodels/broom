@@ -34,14 +34,14 @@ tidy.epi.2by2 <- function(x, parameters = c("moa", "stat"), ...) {
   if (method == "moa") {
     keep <- c("measure", "est", "lower", "upper")
     tibble::tibble(s, measure = nm) %>%
-      tidyr::unnest() %>%
+      tidyr::unnest(cols = s) %>%
       dplyr::filter(!is.na(.$est)) %>%
       dplyr::select(keep) %>%
       dplyr::rename_all(~ c("term", "estimate", "conf.low", "conf.high"))
   } else if (method == "stat") {
     keep <- c("measure", "test.statistic", "df", "p.value")
     tibble::tibble(s, measure = nm) %>%
-      tidyr::unnest() %>%
+      tidyr::unnest(cols = s) %>%
       dplyr::filter(!is.na(.$test.statistic)) %>%
       dplyr::select(keep) %>%
       dplyr::rename_all(~ c("term", "statistic", "df", "p.value"))

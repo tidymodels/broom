@@ -53,7 +53,7 @@ rocs <- churn \%>\%
     names_to = "algorithm",
     values_to = "value"
   ) \%>\%
-  nest(-algorithm) \%>\%
+  nest(data = -algorithm) \%>\%
   mutate(tidy_roc = purrr::map(data, ~ tidy(roc(.x$value, .x$labels)))) \%>\%
   unnest(tidy_roc)
 

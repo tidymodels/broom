@@ -43,7 +43,7 @@ ggplot(Orange, aes(age, circumference, color = Tree)) +
 
 Suppose you want to test for correlations individually *within* each tree. You can do this with dplyr's `group_by`:
 
-```{r}
+```{r, message = FALSE, warning = FALSE}
 library(dplyr)
 
 Orange %>% 
@@ -102,10 +102,8 @@ Orange %>%
     test = map(data, ~ cor.test(.x$age, .x$circumference)), # S3 list-col
     tidied = map(test, tidy)
   ) %>% 
-  unnest(tidied, .drop = TRUE)
+  unnest(tidied)
 ```
-
-Note that the `.drop` argument to `tidyr::unnest` is often useful.
 
 This workflow becomes even more useful when applied to regressions. Untidy output for a regression looks like:
 
