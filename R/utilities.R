@@ -101,6 +101,7 @@ as_tidy_tibble <- function(x, new_names = NULL, new_column = "term") {
 #' @param ... Extra arguments to pass to as_tidy_tibble
 #' @param id_column The name of the column giving the name of each 
 #' element in `x`
+#' @noRd
 map_as_tidy_tibble <- function(x, 
                                      ..., 
                                      id_column = "component") {
@@ -127,7 +128,7 @@ na_types_dict <- list("r" = NA_real_,
                       "l" = rlang::na_lgl)
 
 # A function that converts a string to a vector of NA types.
-# e.g. "rri" -> c(NA_real_, NA_real_, NA_integer)
+# e.g. "rri" -> c(NA_real_, NA_real_, rlang::na_int)
 parse_na_types <- function(s) {
   
   positions <- purrr::map(
