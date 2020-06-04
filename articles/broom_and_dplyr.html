@@ -122,12 +122,17 @@
 <div id="broom-and-dplyr" class="section level1">
 <h1 class="hasAnchor">
 <a href="#broom-and-dplyr" class="anchor"></a>broom and dplyr</h1>
-<p>While broom is useful for summarizing the result of a single analysis in a consistent format, it is really designed for high-throughput applications, where you must combine results from multiple analyses. These could be subgroups of data, analyses using different models, bootstrap replicates, permutations, and so on. In particular, it plays well with the <code>nest/unnest</code> functions in <code>tidyr</code> and the <code>map</code> function in <code>purrr</code>.</p>
-<p>Let’s try this on a simple dataset, the built-in <code>Orange</code>. We start by coercing <code>Orange</code> to a <code>tibble</code>. This gives a nicer print method that will especially useful later on when we start working with list-columns.</p>
+<p>While broom is useful for summarizing the result of a single analysis in a consistent format, it is really designed for high-throughput applications, where you must combine results from multiple analyses. These could be subgroups of data, analyses using different models, bootstrap replicates, permutations, and so on. In particular, it plays well with the <code>nest/unnest</code> functions in <code>tidyr</code> and the <code>map</code> function in <code>purrr</code>. First, loading necessary packages and setting some defaults:</p>
 <div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">broom</span>)
 <span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">tibble</span>)
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">ggplot2</span>)
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">dplyr</span>)
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">tidyr</span>)
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">purrr</span>)
 
-<span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(<span class="no">Orange</span>)
+<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme_get.html">theme_set</a></span>(<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_minimal</a></span>())</pre></body></html></div>
+<p>Let’s try this on a simple dataset, the built-in <code>Orange</code>. We start by coercing <code>Orange</code> to a <code>tibble</code>. This gives a nicer print method that will especially useful later on when we start working with list-columns.</p>
+<div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(<span class="no">Orange</span>)
 
 <span class="no">Orange</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/as_tibble.html">as_tibble</a></span>(<span class="no">Orange</span>)
 <span class="no">Orange</span></pre></body></html></div>
@@ -146,19 +151,13 @@
 ## 10 2       664           111
 ## # … with 25 more rows</code></pre>
 <p>This contains 35 observations of three variables: <code>Tree</code>, <code>age</code>, and <code>circumference</code>. <code>Tree</code> is a factor with five levels describing five trees. As might be expected, age and circumference are correlated:</p>
-<div class="sourceCode" id="cb3"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/stats/cor.html">cor</a></span>(<span class="no">Orange</span>$<span class="no">age</span>, <span class="no">Orange</span>$<span class="no">circumference</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb4"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/stats/cor.html">cor</a></span>(<span class="no">Orange</span>$<span class="no">age</span>, <span class="no">Orange</span>$<span class="no">circumference</span>)</pre></body></html></div>
 <pre><code>## [1] 0.9135189</code></pre>
-<div class="sourceCode" id="cb5"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">ggplot2</span>)
-
-<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme_get.html">theme_set</a></span>(<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_minimal</a></span>())
-
-<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="no">Orange</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="no">age</span>, <span class="no">circumference</span>, <span class="kw">color</span> <span class="kw">=</span> <span class="no">Tree</span>)) +
+<div class="sourceCode" id="cb6"><html><body><pre class="r"><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="no">Orange</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="no">age</span>, <span class="no">circumference</span>, <span class="kw">color</span> <span class="kw">=</span> <span class="no">Tree</span>)) +
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span>()</pre></body></html></div>
-<p><img src="broom_and_dplyr_files/figure-html/unnamed-chunk-2-1.png" width="700"></p>
+<p><img src="broom_and_dplyr_files/figure-html/unnamed-chunk-3-1.png" width="700"></p>
 <p>Suppose you want to test for correlations individually <em>within</em> each tree. You can do this with dplyr’s <code>group_by</code>:</p>
-<div class="sourceCode" id="cb6"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">dplyr</span>)
-
-<span class="no">Orange</span> <span class="kw">%&gt;%</span>
+<div class="sourceCode" id="cb7"><html><body><pre class="r"><span class="no">Orange</span> <span class="kw">%&gt;%</span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span>(<span class="no">Tree</span>) <span class="kw">%&gt;%</span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarize</a></span>(<span class="kw">correlation</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/cor.html">cor</a></span>(<span class="no">age</span>, <span class="no">circumference</span>))</pre></body></html></div>
 <pre><code>## # A tibble: 5 x 2
@@ -171,7 +170,7 @@
 ## 5 4           0.984</code></pre>
 <p>(Note that the correlations are much higher than the aggregated one, and furthermore we can now see it is similar across trees).</p>
 <p>Suppose that instead of simply estimating a correlation, we want to perform a hypothesis test with <code>cor.test</code>:</p>
-<div class="sourceCode" id="cb8"><html><body><pre class="r"><span class="no">ct</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/cor.test.html">cor.test</a></span>(<span class="no">Orange</span>$<span class="no">age</span>, <span class="no">Orange</span>$<span class="no">circumference</span>)
+<div class="sourceCode" id="cb9"><html><body><pre class="r"><span class="no">ct</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/cor.test.html">cor.test</a></span>(<span class="no">Orange</span>$<span class="no">age</span>, <span class="no">Orange</span>$<span class="no">circumference</span>)
 <span class="no">ct</span></pre></body></html></div>
 <pre><code>## 
 ##  Pearson's product-moment correlation
@@ -185,19 +184,16 @@
 ##       cor 
 ## 0.9135189</code></pre>
 <p>This contains multiple values we could want in our output. Some are vectors of length 1, such as the p-value and the estimate, and some are longer, such as the confidence interval. We can get this into a nicely organized tibble using the <code>tidy</code> function:</p>
-<div class="sourceCode" id="cb10"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/pkg/generics/man/tidy.html">tidy</a></span>(<span class="no">ct</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb11"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/pkg/generics/man/tidy.html">tidy</a></span>(<span class="no">ct</span>)</pre></body></html></div>
 <pre><code>## # A tibble: 1 x 8
 ##   estimate statistic  p.value parameter conf.low conf.high method    alternative
 ##      &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;     &lt;int&gt;    &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;     &lt;chr&gt;      
 ## 1    0.914      12.9 1.93e-14        33    0.834     0.956 Pearson'… two.sided</code></pre>
 <p>Often, we want to perform multiple tests or fit multiple models, each on a different part of the data. In this case, we recommend a <code>nest-map-unnest</code> workflow. For example, suppose we want to perform correlation tests for each different tree. We start by <code>nest</code>ing our data based on the group of interest:</p>
-<div class="sourceCode" id="cb12"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">tidyr</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">purrr</span>)
-
-<span class="no">nested</span> <span class="kw">&lt;-</span> <span class="no">Orange</span> <span class="kw">%&gt;%</span>
+<div class="sourceCode" id="cb13"><html><body><pre class="r"><span class="no">nested</span> <span class="kw">&lt;-</span> <span class="no">Orange</span> <span class="kw">%&gt;%</span>
   <span class="fu"><a href="https://tidyr.tidyverse.org/reference/nest.html">nest</a></span>(<span class="kw">data</span> <span class="kw">=</span> -<span class="no">Tree</span>)</pre></body></html></div>
 <p>Then we run a correlation test for each nested tibble using <code><a href="https://purrr.tidyverse.org/reference/map.html">purrr::map</a></code>:</p>
-<div class="sourceCode" id="cb13"><html><body><pre class="r"><span class="no">nested</span> <span class="kw">%&gt;%</span>
+<div class="sourceCode" id="cb14"><html><body><pre class="r"><span class="no">nested</span> <span class="kw">%&gt;%</span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(<span class="kw">test</span> <span class="kw">=</span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span>(<span class="no">data</span>, ~ <span class="fu"><a href="https://rdrr.io/r/stats/cor.test.html">cor.test</a></span>(<span class="no">.x</span>$<span class="no">age</span>, <span class="no">.x</span>$<span class="no">circumference</span>)))</pre></body></html></div>
 <pre><code>## # A tibble: 5 x 3
 ##   Tree  data             test   
@@ -208,7 +204,7 @@
 ## 4 4     &lt;tibble [7 × 2]&gt; &lt;htest&gt;
 ## 5 5     &lt;tibble [7 × 2]&gt; &lt;htest&gt;</code></pre>
 <p>This results in a list-column of S3 objects. We want to tidy each of the objects, which we can also do with <code>map</code>.</p>
-<div class="sourceCode" id="cb15"><html><body><pre class="r"><span class="no">nested</span> <span class="kw">%&gt;%</span>
+<div class="sourceCode" id="cb16"><html><body><pre class="r"><span class="no">nested</span> <span class="kw">%&gt;%</span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(
     <span class="kw">test</span> <span class="kw">=</span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span>(<span class="no">data</span>, ~ <span class="fu"><a href="https://rdrr.io/r/stats/cor.test.html">cor.test</a></span>(<span class="no">.x</span>$<span class="no">age</span>, <span class="no">.x</span>$<span class="no">circumference</span>)), <span class="co"># S3 list-col</span>
     <span class="kw">tidied</span> <span class="kw">=</span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span>(<span class="no">test</span>, <span class="no">tidy</span>)
@@ -222,7 +218,7 @@
 ## 4 4     &lt;tibble [7 × 2]&gt; &lt;htest&gt; &lt;tibble [1 × 8]&gt;
 ## 5 5     &lt;tibble [7 × 2]&gt; &lt;htest&gt; &lt;tibble [1 × 8]&gt;</code></pre>
 <p>Finally, we want to unnest the tidied data frames so we can see the results in a flat tibble. All together, this looks like:</p>
-<div class="sourceCode" id="cb17"><html><body><pre class="r"><span class="no">Orange</span> <span class="kw">%&gt;%</span>
+<div class="sourceCode" id="cb18"><html><body><pre class="r"><span class="no">Orange</span> <span class="kw">%&gt;%</span>
   <span class="fu"><a href="https://tidyr.tidyverse.org/reference/nest.html">nest</a></span>(<span class="kw">data</span> <span class="kw">=</span> -<span class="no">Tree</span>) <span class="kw">%&gt;%</span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(
     <span class="kw">test</span> <span class="kw">=</span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span>(<span class="no">data</span>, ~ <span class="fu"><a href="https://rdrr.io/r/stats/cor.test.html">cor.test</a></span>(<span class="no">.x</span>$<span class="no">age</span>, <span class="no">.x</span>$<span class="no">circumference</span>)), <span class="co"># S3 list-col</span>
@@ -239,7 +235,7 @@
 ## 5 5     &lt;tib… &lt;hte…    0.988      14.1 3.18e-5         5    0.916     0.998
 ## # … with 2 more variables: method &lt;chr&gt;, alternative &lt;chr&gt;</code></pre>
 <p>This workflow becomes even more useful when applied to regressions. Untidy output for a regression looks like:</p>
-<div class="sourceCode" id="cb19"><html><body><pre class="r"><span class="no">lm_fit</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span>(<span class="no">age</span> ~ <span class="no">circumference</span>, <span class="kw">data</span> <span class="kw">=</span> <span class="no">Orange</span>)
+<div class="sourceCode" id="cb20"><html><body><pre class="r"><span class="no">lm_fit</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span>(<span class="no">age</span> ~ <span class="no">circumference</span>, <span class="kw">data</span> <span class="kw">=</span> <span class="no">Orange</span>)
 <span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span>(<span class="no">lm_fit</span>)</pre></body></html></div>
 <pre><code>## 
 ## Call:
@@ -260,14 +256,14 @@
 ## Multiple R-squared:  0.8345, Adjusted R-squared:  0.8295 
 ## F-statistic: 166.4 on 1 and 33 DF,  p-value: 1.931e-14</code></pre>
 <p>where we tidy these results, we get multiple rows of output for each model:</p>
-<div class="sourceCode" id="cb21"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/pkg/generics/man/tidy.html">tidy</a></span>(<span class="no">lm_fit</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb22"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/pkg/generics/man/tidy.html">tidy</a></span>(<span class="no">lm_fit</span>)</pre></body></html></div>
 <pre><code>## # A tibble: 2 x 5
 ##   term          estimate std.error statistic  p.value
 ##   &lt;chr&gt;            &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
 ## 1 (Intercept)      16.6     78.1       0.212 8.33e- 1
 ## 2 circumference     7.82     0.606    12.9   1.93e-14</code></pre>
 <p>Now we can handle multiple regressions at once using exactly the same workflow as before:</p>
-<div class="sourceCode" id="cb23"><html><body><pre class="r"><span class="no">Orange</span> <span class="kw">%&gt;%</span>
+<div class="sourceCode" id="cb24"><html><body><pre class="r"><span class="no">Orange</span> <span class="kw">%&gt;%</span>
   <span class="fu"><a href="https://tidyr.tidyverse.org/reference/nest.html">nest</a></span>(<span class="kw">data</span> <span class="kw">=</span> -<span class="no">Tree</span>) <span class="kw">%&gt;%</span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(
     <span class="kw">fit</span> <span class="kw">=</span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span>(<span class="no">data</span>, ~ <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span>(<span class="no">age</span> ~ <span class="no">circumference</span>, <span class="kw">data</span> <span class="kw">=</span> <span class="no">.x</span>)),
@@ -288,8 +284,8 @@
 ##  9 5     &lt;tibble [7 × … &lt;lm&gt;   (Intercept)   -54.5     76.9      -0.709  5.10e-1
 ## 10 5     &lt;tibble [7 × … &lt;lm&gt;   circumfere…     8.79     0.621    14.1    3.18e-5</code></pre>
 <p>You can just as easily use multiple predictors in the regressions, as shown here on the <code>mtcars</code> dataset. We nest the data into automatic and manual cars (the <code>am</code> column), then perform the regression within each nested tibble.</p>
-<div class="sourceCode" id="cb25"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(<span class="no">mtcars</span>)
-<span class="no">mtcars</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://tidyr.tidyverse.org/reference/reexports.html">as_tibble</a></span>(<span class="no">mtcars</span>)  <span class="co"># to play nicely with list-cols</span>
+<div class="sourceCode" id="cb26"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(<span class="no">mtcars</span>)
+<span class="no">mtcars</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/as_tibble.html">as_tibble</a></span>(<span class="no">mtcars</span>)  <span class="co"># to play nicely with list-cols</span>
 <span class="no">mtcars</span></pre></body></html></div>
 <pre><code>## # A tibble: 32 x 11
 ##      mpg   cyl  disp    hp  drat    wt  qsec    vs    am  gear  carb
@@ -305,7 +301,7 @@
 ##  9  22.8     4  141.    95  3.92  3.15  22.9     1     0     4     2
 ## 10  19.2     6  168.   123  3.92  3.44  18.3     1     0     4     4
 ## # … with 22 more rows</code></pre>
-<div class="sourceCode" id="cb27"><html><body><pre class="r"><span class="no">mtcars</span> <span class="kw">%&gt;%</span>
+<div class="sourceCode" id="cb28"><html><body><pre class="r"><span class="no">mtcars</span> <span class="kw">%&gt;%</span>
   <span class="fu"><a href="https://tidyr.tidyverse.org/reference/nest.html">nest</a></span>(<span class="kw">data</span> <span class="kw">=</span> -<span class="no">am</span>) <span class="kw">%&gt;%</span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(
     <span class="kw">fit</span> <span class="kw">=</span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span>(<span class="no">data</span>, ~ <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span>(<span class="no">wt</span> ~ <span class="no">mpg</span> + <span class="no">qsec</span> + <span class="no">gear</span>, <span class="kw">data</span> <span class="kw">=</span> <span class="no">.x</span>)),  <span class="co"># S3 list-col</span>
@@ -324,7 +320,7 @@
 ## 7     0 &lt;tibble [19 × 10… &lt;lm&gt;   qsec         0.0919    0.0983    0.935  3.65e-1
 ## 8     0 &lt;tibble [19 × 10… &lt;lm&gt;   gear         0.147     0.368     0.398  6.96e-1</code></pre>
 <p>What if you want not just the <code>tidy</code> output, but the <code>augment</code> and <code>glance</code> outputs as well, while still performing each regression only once? Since we’re using list-columns, we can just fit the model once and use multiple list-columns to store the tidied, glanced and augmented outputs.</p>
-<div class="sourceCode" id="cb29"><html><body><pre class="r"><span class="no">regressions</span> <span class="kw">&lt;-</span> <span class="no">mtcars</span> <span class="kw">%&gt;%</span>
+<div class="sourceCode" id="cb30"><html><body><pre class="r"><span class="no">regressions</span> <span class="kw">&lt;-</span> <span class="no">mtcars</span> <span class="kw">%&gt;%</span>
   <span class="fu"><a href="https://tidyr.tidyverse.org/reference/nest.html">nest</a></span>(<span class="kw">data</span> <span class="kw">=</span> -<span class="no">am</span>) <span class="kw">%&gt;%</span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(
     <span class="kw">fit</span> <span class="kw">=</span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span>(<span class="no">data</span>, ~ <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span>(<span class="no">wt</span> ~ <span class="no">mpg</span> + <span class="no">qsec</span> + <span class="no">gear</span>, <span class="kw">data</span> <span class="kw">=</span> <span class="no">.x</span>)),
@@ -346,7 +342,7 @@
 ## 6     0 &lt;tib… &lt;lm&gt;  mpg    -0.192     0.0443   -4.33   5.91e-4 &lt;tibbl… &lt;tibble …
 ## 7     0 &lt;tib… &lt;lm&gt;  qsec    0.0919    0.0983    0.935  3.65e-1 &lt;tibbl… &lt;tibble …
 ## 8     0 &lt;tib… &lt;lm&gt;  gear    0.147     0.368     0.398  6.96e-1 &lt;tibbl… &lt;tibble …</code></pre>
-<div class="sourceCode" id="cb31"><html><body><pre class="r"><span class="no">regressions</span> <span class="kw">%&gt;%</span>
+<div class="sourceCode" id="cb32"><html><body><pre class="r"><span class="no">regressions</span> <span class="kw">%&gt;%</span>
   <span class="fu"><a href="https://tidyr.tidyverse.org/reference/nest.html">unnest</a></span>(<span class="no">glanced</span>)</pre></body></html></div>
 <pre><code>## # A tibble: 2 x 17
 ##      am data  fit   tidied r.squared adj.r.squared sigma statistic p.value    df
@@ -355,7 +351,7 @@
 ## 2     0 &lt;tib… &lt;lm&gt;  &lt;tibb…     0.625         0.550 0.522      8.32 1.70e-3     3
 ## # … with 7 more variables: logLik &lt;dbl&gt;, AIC &lt;dbl&gt;, BIC &lt;dbl&gt;, deviance &lt;dbl&gt;,
 ## #   df.residual &lt;int&gt;, nobs &lt;int&gt;, augmented &lt;list&gt;</code></pre>
-<div class="sourceCode" id="cb33"><html><body><pre class="r"><span class="no">regressions</span> <span class="kw">%&gt;%</span>
+<div class="sourceCode" id="cb34"><html><body><pre class="r"><span class="no">regressions</span> <span class="kw">%&gt;%</span>
   <span class="fu"><a href="https://tidyr.tidyverse.org/reference/nest.html">unnest</a></span>(<span class="no">augmented</span>)</pre></body></html></div>
 <pre><code>## # A tibble: 32 x 15
 ##       am data  fit   tidied glanced    wt   mpg  qsec  gear .fitted  .resid

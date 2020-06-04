@@ -303,7 +303,8 @@
 ##       &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;                                          &lt;chr&gt;      
 ## 1      230. 0.0000435 Wilcoxon rank sum test with continuity correc… two.sided</code></pre>
 <p><code>augment</code> method is defined only for chi-squared tests, since there is no meaningful sense, for other tests, in which a hypothesis test produces output about each initial data point.</p>
-<div class="sourceCode" id="cb31"><html><body><pre class="r"><span class="no">chit</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/chisq.test.html">chisq.test</a></span>(<span class="fu"><a href="https://rdrr.io/r/stats/xtabs.html">xtabs</a></span>(<span class="no">Freq</span> ~ <span class="no">Sex</span> + <span class="no">Class</span>, <span class="kw">data</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span>(<span class="no">Titanic</span>)))
+<div class="sourceCode" id="cb31"><html><body><pre class="r"><span class="no">chit</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/chisq.test.html">chisq.test</a></span>(<span class="fu"><a href="https://rdrr.io/r/stats/xtabs.html">xtabs</a></span>(<span class="no">Freq</span> ~ <span class="no">Sex</span> + <span class="no">Class</span>,
+                         <span class="kw">data</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span>(<span class="no">Titanic</span>)))
 <span class="fu"><a href="https://rdrr.io/pkg/generics/man/tidy.html">tidy</a></span>(<span class="no">chit</span>)</pre></body></html></div>
 <pre><code>## # A tibble: 1 x 4
 ##   statistic  p.value parameter method                    
