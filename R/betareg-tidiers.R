@@ -37,7 +37,7 @@
 #' @aliases betareg_tidiers
 tidy.betareg <- function(x, conf.int = FALSE, conf.level = .95, ...) {
   
-  ret <- map_as_broom_tidy_tibble(
+  ret <- map_as_tidy_tibble(
     purrr::map(coef(summary(x)), as.matrix),
     new_names = c("estimate", "std.error", "statistic", "p.value")
   )

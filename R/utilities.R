@@ -34,7 +34,7 @@ exponentiate <- function(data) {
 #' @return A `tibble` potentially with a `.rownames` column
 #' @noRd
 #'
-as_broom_tibble <- function(data) {
+as_augment_tibble <- function(data) {
 
   if (inherits(data, "matrix") & is.null(colnames(data))) {
     stop("The supplied `data`/`newdata` argument was an unnamed matrix. ",
@@ -70,7 +70,7 @@ as_broom_tibble <- function(data) {
 #' @return a tibble with rownames moved into a column and new column
 #' names assigned
 #' @noRd
-as_broom_tidy_tibble <- function(x, new_names = NULL, new_column = "term") {
+as_tidy_tibble <- function(x, new_names = NULL, new_column = "term") {
   
   if (!is.null(new_names) && length(new_names) != ncol(x)) {
     stop("newnames must be NULL or have length equal to number of columns")
@@ -98,15 +98,15 @@ as_broom_tidy_tibble <- function(x, new_names = NULL, new_column = "term") {
 }
 
 #' @param x A list of data.frames or matrices
-#' @param ... Extra arguments to pass to as_broom_tidy_tibble
+#' @param ... Extra arguments to pass to as_tidy_tibble
 #' @param id_column The name of the column giving the name of each 
 #' element in `x`
-map_as_broom_tidy_tibble <- function(x, 
+map_as_tidy_tibble <- function(x, 
                                      ..., 
                                      id_column = "component") {
   
   purrr::map_df(x, 
-                as_broom_tidy_tibble, 
+                as_tidy_tibble, 
                 ...,
                 .id = id_column)
   
@@ -295,11 +295,11 @@ augment_columns <- function(x, data, newdata = NULL, type, type.predict = type,
 
   if (is.null(na_action) || nrow(original) == nrow(ret)) {
     # no NAs were left out; we can simply recombine
-    original <- as_broom_tibble(original)
+    original <- as_augment_tibble(original)
     return(as_tibble(cbind(original, ret)))
   } else if (class(na_action) == "omit") {
     # if the option is "omit", drop those rows from the data
-    original <- as_broom_tibble(original)
+    original <- as_augment_tibble(original)
     original <- original[-na_action, ]
     return(as_tibble(cbind(original, ret)))
   }
@@ -360,7 +360,7 @@ add_hat_sigma_cols <- function(df, x, infl) {
 augment_newdata <- function(x, data, newdata, .se_fit, ...) {
   passed_newdata <- !is.null(newdata)
   df <- if (passed_newdata) newdata else data
-  df <- as_broom_tibble(df)
+  df <- as_augment_tibble(df)
 
   # NOTE: It is important use predict(x, newdata = newdata) rather than
   # predict(x, newdata = df). This is to avoid an edge case breakage

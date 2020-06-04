@@ -101,7 +101,7 @@ tidy.boot <- function(x,
   }
 
   # bring in rownames as "term" column, and turn into a data.frame
-  ret <- as_broom_tidy_tibble(op)
+  ret <- as_tidy_tibble(op)
 
   if (conf.int) {
     ci.list <- lapply(seq_along(x$t0),

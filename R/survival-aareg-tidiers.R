@@ -44,7 +44,7 @@ tidy.aareg <- function(x, ...) {
     )
   }
   
-  as_broom_tidy_tibble(
+  as_tidy_tibble(
     summary(x)$table, 
     new_names = nn
   )

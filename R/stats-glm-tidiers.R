@@ -74,7 +74,7 @@ augment.glm <- function(x,
   type.residuals <- rlang::arg_match(type.residuals)
 
   df <- if (is.null(newdata)) data else newdata
-  df <- as_broom_tibble(df)
+  df <- as_augment_tibble(df)
 
   # don't use augment_newdata here; don't want raw/response residuals in .resid
   if (se_fit) {

@@ -21,7 +21,7 @@
 #' @aliases lmtest_tidiers coeftest_tidiers
 tidy.coeftest <- function(x, conf.int = FALSE, conf.level = .95, ...) {
   co <- as.data.frame(unclass(x))
-  ret <- as_broom_tidy_tibble(
+  ret <- as_tidy_tibble(
     co, 
     new_names = c("estimate", "std.error", "statistic", "p.value")[1:ncol(co)]
   )

@@ -49,7 +49,7 @@ augment.lmRob <- function(x, data = model.frame(x), newdata = NULL, ...) {
 
   passed_newdata <- !is.null(newdata)
   df <- if (passed_newdata) newdata else data
-  df <- as_broom_tibble(df)
+  df <- as_augment_tibble(df)
 
   # this is a really ugly way to recover NA predictions
   rows <- split(df, 1:nrow(df))

@@ -35,7 +35,7 @@
 #' @seealso [tidy()], [psych::cohen.kappa()]
 #'
 tidy.kappa <- function(x, ...) {
-  ret <- as_broom_tidy_tibble(
+  ret <- as_tidy_tibble(
     x$confid, 
     new_names = c("conf.low", "estimate", "conf.high"), 
     new_column = "type"

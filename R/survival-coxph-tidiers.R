@@ -83,9 +83,9 @@ tidy.coxph <- function(x, exponentiate = FALSE, conf.int = FALSE,
   }
 
   if (is.null(x$frail)) {
-    ret <- as_broom_tidy_tibble(co[, -2, drop = FALSE], new_names = nn)
+    ret <- as_tidy_tibble(co[, -2, drop = FALSE], new_names = nn)
   } else {
-    ret <- as_broom_tidy_tibble(co[, -c(3, 5), drop = FALSE], new_names = nn)
+    ret <- as_tidy_tibble(co[, -c(3, 5), drop = FALSE], new_names = nn)
   }
 
   if (exponentiate) {

@@ -63,7 +63,7 @@ tidy.glmnet <- function(x, return_zeros = FALSE, ...) {
 
   if (inherits(x, "multnet")) {
     beta_d <- purrr::map_df(beta, function(b) {
-      as_broom_tidy_tibble(as.matrix(b), 
+      as_tidy_tibble(as.matrix(b), 
                            new_names = 1:ncol(b))
     }, .id = "class")
     ret <- beta_d %>%
@@ -73,7 +73,7 @@ tidy.glmnet <- function(x, return_zeros = FALSE, ...) {
         values_to = "estimate"
       )
   } else {
-    beta_d <- as_broom_tidy_tibble(
+    beta_d <- as_tidy_tibble(
       as.matrix(beta),
       new_names = 1:ncol(beta)
     )

@@ -95,7 +95,7 @@ augment.Mclust <- function(x, data = NULL, ...) {
     stop("`data` must be a data frame or matrix.", call. = FALSE)
   }
 
-  as_broom_tibble(data) %>%
+  as_augment_tibble(data) %>%
     mutate(
       .class = as.factor(!!x$classification),
       .uncertainty = !!x$uncertainty

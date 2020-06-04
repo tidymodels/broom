@@ -126,7 +126,7 @@ augment.polr <- function(x, data = model.frame(x), newdata = NULL,
   type <- rlang::arg_match(type.predict)
 
   df <- if (is.null(newdata)) data else newdata
-  df <- as_broom_tibble(df)
+  df <- as_augment_tibble(df)
 
   df$.fitted <- predict(object = x, newdata = df, type = type)
 

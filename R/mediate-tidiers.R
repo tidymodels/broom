@@ -76,7 +76,7 @@ tidy.mediate <- function(x, conf.int = FALSE, conf.level = .95, ...) {
     co <- cbind(co, t(ci))
   }
   
-  as_broom_tidy_tibble(
+  as_tidy_tibble(
     co, 
     new_names = nn[1:ncol(co)]
   )

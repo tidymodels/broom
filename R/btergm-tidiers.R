@@ -60,7 +60,7 @@ tidy.btergm <- function(x, conf.level = .95, exponentiate = FALSE, ...) {
 
   co <- btergm::confint(x, level = conf.level)
 
-  ret <- as_broom_tidy_tibble(
+  ret <- as_tidy_tibble(
     co, 
     new_names = c("estimate", "conf.low", "conf.high")[1:ncol(co)]
   )

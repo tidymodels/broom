@@ -158,5 +158,5 @@ process_rq <- function(rq_obj, se.type = NULL,
     co[["conf.high"]] <- co[["estimate"]] + (cv[2] * co[["std.error"]])
   }
   co[["tau"]] <- rq_obj[["tau"]]
-  as_broom_tidy_tibble(co)
+  as_tidy_tibble(co)
 }

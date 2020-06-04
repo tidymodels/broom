@@ -53,12 +53,12 @@ tidy.felm <- function(x, conf.int = FALSE, conf.level = .95, fe = FALSE, robust 
   if (has_multi_response) {
     ret <- map_df(x$lhs, function(y) {
       stats::coef(summary(x, lhs = y, robust = robust)) %>%
-        as_broom_tidy_tibble(new_names = nn) %>%
+        as_tidy_tibble(new_names = nn) %>%
         mutate(response = y)
     }) %>%
       select(response, dplyr::everything())
   } else {
-    ret <- ret <- as_broom_tidy_tibble(
+    ret <- ret <- as_tidy_tibble(
       stats::coef(summary(x, robust = robust)), 
       new_names = nn
     )
@@ -145,7 +145,7 @@ augment.felm <- function(x, data = model.frame(x), ...) {
       call. = FALSE
     )
   }
-  df <- as_broom_tibble(data)
+  df <- as_augment_tibble(data)
   mutate(df, .fitted = as.vector(x$fitted.values), .resid = as.vector(x$residuals))
 }
 

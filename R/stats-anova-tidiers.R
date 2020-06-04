@@ -60,7 +60,7 @@ tidy.anova <- function(x, ...) {
 
   names(renamers) <- make.names(names(renamers))
 
-  ret <- as_broom_tibble(x)
+  ret <- as_augment_tibble(x)
   colnames(ret) <- make.names(names(ret))
 
   unknown_cols <- setdiff(colnames(ret), c("term", names(renamers)))
@@ -229,7 +229,7 @@ tidy.manova <- function(x, test = "Pillai", ...) {
   ))
   test.name <- c("pillai", "wilks", "hl", "roy")[test.pos]
 
-  as_broom_tidy_tibble(
+  as_tidy_tibble(
     summary(x, test = test, ...)$stats, 
     new_names = c("df", test.name, "statistic", "num.df", "den.df", "p.value")
   )
@@ -268,7 +268,7 @@ tidy.TukeyHSD <- function(x, ...) {
     function(e) {
       null.value <- rep(0, nrow(e))
       e <- cbind(null.value, e)
-      as_broom_tidy_tibble(
+      as_tidy_tibble(
         e, 
         new_names = c("null.value", "estimate", "conf.low", 
                       "conf.high", "adj.p.value"), 

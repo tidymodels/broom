@@ -28,7 +28,7 @@
 #' @seealso [tidy], [stats::nls()], [stats::summary.nls()]
 #' @family nls tidiers
 tidy.nls <- function(x, conf.int = FALSE, conf.level = .95, ...) {
-  ret <- as_broom_tidy_tibble(
+  ret <- as_tidy_tibble(
     stats::coef(summary(x)), 
     new_names = c("estimate", "std.error", "statistic", "p.value")
   )

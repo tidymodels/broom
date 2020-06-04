@@ -38,7 +38,7 @@ tidy.geeglm <- function(x, conf.int = FALSE, conf.level = .95,
                         exponentiate = FALSE, ...) {
   co <- stats::coef(summary(x))
 
-  ret <- as_broom_tidy_tibble(
+  ret <- as_tidy_tibble(
     co, 
     c("estimate", "std.error", "statistic", "p.value")[1:ncol(co)]
   )

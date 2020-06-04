@@ -70,7 +70,7 @@ augment.pam <- function(x, data = NULL, ...) {
     data <- x$data
   }
 
-  as_broom_tibble(data) %>%
+  as_augment_tibble(data) %>%
     mutate(.cluster = as.factor(!!x$clustering))
 }
 
