@@ -10,7 +10,7 @@ vignette: >
 
 ```{r setup, echo=FALSE}
 library(knitr)
-opts_chunk$set(warning=FALSE, message=FALSE)
+opts_chunk$set(warning = FALSE, message = FALSE)
 ```
 
 broom: let's tidy up a bit
@@ -125,7 +125,8 @@ glance(wt)
 `augment` method is defined only for chi-squared tests,  since there is no meaningful sense, for other tests, in which a hypothesis test produces output about each initial data point.
 
 ```{r}
-chit <- chisq.test(xtabs(Freq ~ Sex + Class, data = as.data.frame(Titanic)))
+chit <- chisq.test(xtabs(Freq ~ Sex + Class, 
+                         data = as.data.frame(Titanic)))
 tidy(chit)
 augment(chit)
 ```
