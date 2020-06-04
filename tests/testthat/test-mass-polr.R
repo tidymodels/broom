@@ -16,7 +16,7 @@ fit <- polr(
 fit2 <- polr(Sat ~ Freq, data = housing)
 
 test_that("MASS::polr tidier arguments", {
-  #check_arguments(tidy.polr)
+  check_arguments(tidy.polr)
   check_arguments(glance.polr)
   check_arguments(augment.polr)
 })

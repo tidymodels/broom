@@ -29,8 +29,8 @@ test_that("tidy car::Anova glm", {
   td <- tidy(car_anova)
   td2 <- tidy(car_anova2)
 
-  #check_tidy_output(td)
-  #check_tidy_output(td2)
+  check_tidy_output(td)
+  check_tidy_output(td2)
   
   check_dims(td, expected_rows = 1, expected_cols = 4)
   check_dims(td2, expected_rows = 2, expected_cols = 4)
@@ -49,9 +49,9 @@ test_that("tidy car::Anova coxph", {
   td2 <- tidy(car_anova_coxph2)
   td3 <- tidy(car_anova_coxph3)
   
-  #check_tidy_output(td)
-  #check_tidy_output(td2)
-  #check_tidy_output(td3)
+  check_tidy_output(td)
+  check_tidy_output(td2)
+  check_tidy_output(td3)
     
   check_dims(td, expected_rows = 2, expected_cols = 5)
   check_dims(td2, expected_rows = 2, expected_cols = 5)
