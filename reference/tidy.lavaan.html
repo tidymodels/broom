@@ -232,26 +232,17 @@ variances of exogenous covariates.</p></dd>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
-<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>lavaan</span>)
-
+<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>lavaan</span>)</div><div class='output co'>#&gt; <span class='error'>Error: package or namespace load failed for ‘lavaan’:</span>
+#&gt; <span class='error'> .onLoad failed in loadNamespace() for 'mnormt', details:</span>
+#&gt; <span class='error'>  call: dyn.load(file, DLLpath = DLLpath, ...)</span>
+#&gt; <span class='error'>  error: unable to load shared object '/Users/runner/runners/2.263.0/work/_temp/Library/mnormt/libs/mnormt.so':</span>
+#&gt; <span class='error'>  dlopen(/Users/runner/runners/2.263.0/work/_temp/Library/mnormt/libs/mnormt.so, 6): Library not loaded: /usr/local/gfortran/lib/libgfortran.3.dylib</span>
+#&gt; <span class='error'>  Referenced from: /Users/runner/runners/2.263.0/work/_temp/Library/mnormt/libs/mnormt.so</span>
+#&gt; <span class='error'>  Reason: image not found</span></div><div class='input'>
 <span class='no'>cfa.fit</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/lavaan/man/cfa.html'>cfa</a></span>(<span class='st'>"F =~ x1 + x2 + x3 + x4 + x5 + x6 + x7 + x8 + x9"</span>,
   <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>HolzingerSwineford1939</span>, <span class='kw'>group</span> <span class='kw'>=</span> <span class='st'>"school"</span>
-)
-
-<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>cfa.fit</span>)</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 58 x 11</span><span>
-#&gt;    term  op    block group estimate std.error statistic  p.value std.lv std.all
-#&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #555555;'> 1</span><span> F =~… =~        1     1    1         0         </span><span style='color: #BB0000;'>NA</span><span>    </span><span style='color: #BB0000;'>NA</span><span>   </span><span style='color: #555555;'> </span><span>    0.567   0.480
-#&gt; </span><span style='color: #555555;'> 2</span><span> F =~… =~        1     1    0.333     0.190      1.76  7.89</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-2</span><span>  0.189   0.154
-#&gt; </span><span style='color: #555555;'> 3</span><span> F =~… =~        1     1    0.400     0.182      2.20  2.80</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-2</span><span>  0.227   0.196
-#&gt; </span><span style='color: #555555;'> 4</span><span> F =~… =~        1     1    1.66      0.280      5.92  3.28</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-9</span><span>  0.941   0.819
-#&gt; </span><span style='color: #555555;'> 5</span><span> F =~… =~        1     1    1.92      0.323      5.95  2.60</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-9</span><span>  1.09    0.835
-#&gt; </span><span style='color: #555555;'> 6</span><span> F =~… =~        1     1    1.48      0.247      5.98  2.23</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-9</span><span>  0.837   0.848
-#&gt; </span><span style='color: #555555;'> 7</span><span> F =~… =~        1     1    0.453     0.173      2.61  8.96</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-3</span><span>  0.257   0.238
-#&gt; </span><span style='color: #555555;'> 8</span><span> F =~… =~        1     1    0.376     0.155      2.43  1.51</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-2</span><span>  0.213   0.219
-#&gt; </span><span style='color: #555555;'> 9</span><span> F =~… =~        1     1    0.422     0.159      2.66  7.80</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-3</span><span>  0.240   0.242
-#&gt; </span><span style='color: #555555;'>10</span><span> x1 ~… ~~        1     1    1.07      0.127      8.47  0.  </span><span style='color: #555555;'> </span><span>    1.07    0.769
-#&gt; </span><span style='color: #555555;'># … with 48 more rows, and 1 more variable: std.nox </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span></div></span></pre>
+)</div><div class='output co'>#&gt; <span class='error'>Error in cfa("F =~ x1 + x2 + x3 + x4 + x5 + x6 + x7 + x8 + x9", data = HolzingerSwineford1939,     group = "school"): could not find function "cfa"</span></div><div class='input'>
+<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>cfa.fit</span>)</div><div class='output co'>#&gt; <span class='error'>Error in tidy(cfa.fit): object 'cfa.fit' not found</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

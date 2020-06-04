@@ -216,10 +216,8 @@ on the output to return to a wide format.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
-<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>ks</span>)</div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Attaching package: ‘ks’</span></div><div class='output co'>#&gt; <span class='message'>The following object is masked from ‘package:lavaan’:</span>
-#&gt; <span class='message'></span>
-#&gt; <span class='message'>    vech</span></div><div class='input'>
+<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>ks</span>)
+
 <span class='no'>dat</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/lapply.html'>replicate</a></span>(<span class='fl'>2</span>, <span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span>(<span class='fl'>100</span>))
 <span class='no'>k</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/ks/man/kde.html'>kde</a></span>(<span class='no'>dat</span>)
 

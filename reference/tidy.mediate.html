@@ -236,10 +236,7 @@ the <code>data</code> argument.</p></td>
 #&gt; <span class='message'>  simulate.formula                ergm</span>
 #&gt; <span class='message'>  dfbeta.influence.merMod         car </span>
 #&gt; <span class='message'>  dfbetas.influence.merMod        car </span></div><div class='output co'>#&gt; <span class='message'>mediation: Causal Mediation Analysis</span>
-#&gt; <span class='message'>Version: 4.5.0</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Attaching package: ‘mediation’</span></div><div class='output co'>#&gt; <span class='message'>The following object is masked from ‘package:psych’:</span>
-#&gt; <span class='message'></span>
-#&gt; <span class='message'>    mediate</span></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>jobs</span>)
+#&gt; <span class='message'>Version: 4.5.0</span></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>jobs</span>)
 
 <span class='no'>b</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span>(<span class='no'>job_seek</span> ~ <span class='no'>treat</span> + <span class='no'>econ_hard</span> + <span class='no'>sex</span> + <span class='no'>age</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>jobs</span>)
 <span class='no'>c</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span>(<span class='no'>depress2</span> ~ <span class='no'>treat</span> + <span class='no'>job_seek</span> + <span class='no'>econ_hard</span> + <span class='no'>sex</span> + <span class='no'>age</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>jobs</span>)
