@@ -44,7 +44,7 @@ tidy.aareg <- function(x, ...) {
     )
   }
   
-  as_broom_tidy_tibble(
+  as_tidy_tibble(
     summary(x)$table, 
     new_names = nn
   )
@@ -66,10 +66,11 @@ glance.aareg <- function(x, ...) {
   chi <- as.numeric(s$chisq)
   df <- length(s$test.statistic) - 1
 
-  tibble(
+  as_glance_tibble(
     statistic = chi,
     p.value = as.numeric(1 - stats::pchisq(chi, df)),
     df = df,
-    nobs = stats::nobs(x)
+    nobs = stats::nobs(x),
+    na_types = "rrii"
   )
 }

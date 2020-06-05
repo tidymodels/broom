@@ -38,7 +38,7 @@ tidy.geeglm <- function(x, conf.int = FALSE, conf.level = .95,
                         exponentiate = FALSE, ...) {
   co <- stats::coef(summary(x))
 
-  ret <- as_broom_tidy_tibble(
+  ret <- as_tidy_tibble(
     co, 
     c("estimate", "std.error", "statistic", "p.value")[1:ncol(co)]
   )
@@ -116,11 +116,12 @@ confint.geeglm <- function(object, parm, level = 0.95, ...) {
 #' @family geepack tidiers
 glance.geeglm <- function(x, ...) {
   s <- summary(x)
-  tibble(
+  as_glance_tibble(
     df.residual = x$df.residual,
     n.clusters = length(s$clusz),
     max.cluster.size = max(s$clusz),
     alpha = x$geese$alpha,
-    gamma = x$geese$gamma
+    gamma = x$geese$gamma,
+    na_types = "iiirr"
   )
 }

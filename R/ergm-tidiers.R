@@ -105,7 +105,7 @@ tidy.ergm <- function(x, conf.int = FALSE, conf.level = 0.95,
 #' @param mcmc Logical indicating whether or not to report MCMC interval,
 #'   burn-in and sample size used to estimate the model. Defaults to `FALSE`.
 #'
-#' @return `glance.ergm` returns a one-row data.frame with the columns
+#' @return `glance.ergm` returns a one-row tibble with the columns
 #'   \item{independence}{Whether the model assumed dyadic independence}
 #'   \item{iterations}{The number of MCMLE iterations performed before convergence}
 #'   \item{logLik}{If applicable, the log-likelihood associated with the model}
@@ -113,7 +113,7 @@ tidy.ergm <- function(x, conf.int = FALSE, conf.level = 0.95,
 #'   \item{BIC}{The Bayesian Information Criterion}
 #'
 #' If `deviance = TRUE`, and if the model supports it, the
-#' data frame will also contain the columns
+#' tibble will also contain the columns
 #'   \item{null.deviance}{The null deviance of the model}
 #'   \item{df.null}{The degrees of freedom of the null deviance}
 #'   \item{residual.deviance}{The residual deviance of the model}
@@ -125,10 +125,11 @@ tidy.ergm <- function(x, conf.int = FALSE, conf.level = 0.95,
 glance.ergm <- function(x, deviance = FALSE, mcmc = FALSE, ...) {
   s <- summary(x, ...) # produces lots of messages
 
-  ret <- tibble(
+  ret <- as_glance_tibble(
     independence = s$independence,
     iterations = x$iterations,
-    logLik = as.numeric(logLik(x))
+    logLik = as.numeric(logLik(x)),
+    na_types = "lir"
   )
 
   if (deviance & !is.null(ret$logLik)) {

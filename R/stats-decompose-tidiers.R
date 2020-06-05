@@ -54,7 +54,7 @@
 #'   # the series next to its seasonal decomposition, grouped
 #'   # by the method (stl or decompose).
 #'   group_by(decomp) %>%
-#'   unnest(series, augment) %>%
+#'   unnest(c(series, augment)) %>%
 #'   mutate(index = 1:n()) %>%
 #'   ungroup() %>%
 #'   select(decomp, index, x, adjusted = .seasadj)

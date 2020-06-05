@@ -36,7 +36,7 @@ tidy.mlm <- function(x,
   nn <- c("estimate", "std.error", "statistic", "p.value")
 
   # multiple response variables
-  ret <- map_as_broom_tidy_tibble(
+  ret <- map_as_tidy_tibble(
     co,
     new_names = nn[1:ncol(co[[1]])],
     id_column = "response"

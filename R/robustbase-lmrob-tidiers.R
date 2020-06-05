@@ -96,9 +96,11 @@ augment.lmrob <- function(x, data = model.frame(x), newdata = NULL, se_fit = FAL
 #' @seealso [robustbase::lmrob()]
 glance.lmrob <- function(x, ...) {
   s <- summary(x)
-  tibble(
+  
+  as_glance_tibble(
     r.squared = s$r.squared,
     sigma = s$sigma,
-    df.residual = x$df.residual
+    df.residual = x$df.residual,
+    na_types = "rri"
   )
 }

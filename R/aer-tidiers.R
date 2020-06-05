@@ -124,35 +124,36 @@ augment.ivreg <- function(x, data = model.frame(x), newdata = NULL, ...) {
 #' @seealso [glance()], [AER::ivreg()]
 #' @family ivreg tidiers
 glance.ivreg <- function(x, diagnostics = FALSE, ...) {
-  s <- summary(x, diagnostics = FALSE)
 
-  ret <- with(
-    s,
-    tibble(
-      r.squared = r.squared,
-      adj.r.squared = adj.r.squared,
-      sigma = sigma,
-      statistic = waldtest[1],
-      p.value = waldtest[2],
-      df = df[1]
-    )
+  s <- summary(x, diagnostics = FALSE)
+  
+  ret <- as_glance_tibble(
+    r.squared = s$r.squared,
+    adj.r.squared = s$adj.r.squared,
+    sigma = s$sigma,
+    statistic = s$waldtest[1],
+    p.value = s$waldtest[2],
+    df = s$df[1],
+    df.residual = df.residual(x),
+    nobs = stats::nobs(x),
+    na_types = "rrrrriii"
   )
-  ret$df.residual <- df.residual(x)
-  ret$nobs <- stats::nobs(x)
 
   if (diagnostics) {
-    ret <- with(
-      summary(x, diagnostics = TRUE),
-      tibble(
-        statistic.Sargan = diagnostics["Sargan", "statistic"],
-        p.value.Sargan = diagnostics["Sargan", "p-value"],
-        statistic.Wu.Hausman = diagnostics["Wu-Hausman", "statistic"],
-        p.value.Wu.Hausman = diagnostics["Wu-Hausman", "p-value"]
-      )
+    s_ <- summary(x, diagnostics = TRUE)
+    
+    diags <- as_glance_tibble(
+      statistic.Sargan = s_$diagnostics["Sargan", "statistic"],
+      p.value.Sargan = s_$diagnostics["Sargan", "p-value"],
+      statistic.Wu.Hausman = s_$diagnostics["Wu-Hausman", "statistic"],
+      p.value.Wu.Hausman = s_$diagnostics["Wu-Hausman", "p-value"],
+      na_types = "rrrr"
     )
+    
+    return(bind_cols(ret, diags))
   }
 
-  as_tibble(ret, rownames = NULL)
+  ret
 }
 
 #' @include null-and-default-tidiers.R

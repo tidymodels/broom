@@ -118,11 +118,13 @@ glance.gmm <- function(x, ...) {
 
   # TODO: why do we suppress warnings here?
   st <- suppressWarnings(as.numeric(s$stest$test))
-  tibble(
+  
+  as_glance_tibble(
     df = x$df,
     statistic = st[1],
     p.value = st[2],
     df.residual = stats::df.residual(x),
-    nobs = stats::nobs(x)
+    nobs = stats::nobs(x),
+    na_types = "irrii"
   )
 }

@@ -35,11 +35,9 @@ Sometimes a goodness of fit measure will be undefined. In these cases
 the measure will be reported as \code{NA}.
 }
 \note{
-From \verb{0.7.0}, \code{broom} has changed the return summary and the new model
-summary dataframe contains only the following information- \code{logLik}, \code{IC},
-\code{BIC}, \code{deviance}, \code{nobs}. Note that \code{tidy.aov} contains the numerator and
-denominator degrees of freedom, which were previously included in the glance
-summary.
+Note that \code{tidy.aov()} now contains the numerator and denominator degrees of
+freedom, which were included in the output of \code{glance.aov()} in some
+previous versions of the package.
 }
 \examples{
 
@@ -54,8 +52,7 @@ Other anova tidiers:
 \code{\link{tidy.anova}()},
 \code{\link{tidy.aovlist}()},
 \code{\link{tidy.aov}()},
-\code{\link{tidy.manova}()},
-\code{\link{tidy.summary.manova}()}
+\code{\link{tidy.manova}()}
 }
 \concept{anova tidiers}
 \value{

@@ -102,11 +102,12 @@ tidy.lmodel2 <- function(x, ...) {
 #' @family lmodel2 tidiers
 #'
 glance.lmodel2 <- function(x, ...) {
-  tibble(
+  as_glance_tibble(
     r.squared = x$rsquare,
     theta = x$theta,
     p.value = x$P.param,
     H = x$H,
-    nobs = stats::nobs(x)
+    nobs = stats::nobs(x),
+    na_types = "rrrri"
   )
 }

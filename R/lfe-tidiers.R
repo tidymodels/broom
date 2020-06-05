@@ -53,12 +53,12 @@ tidy.felm <- function(x, conf.int = FALSE, conf.level = .95, fe = FALSE, robust 
   if (has_multi_response) {
     ret <- map_df(x$lhs, function(y) {
       stats::coef(summary(x, lhs = y, robust = robust)) %>%
-        as_broom_tidy_tibble(new_names = nn) %>%
+        as_tidy_tibble(new_names = nn) %>%
         mutate(response = y)
     }) %>%
       select(response, dplyr::everything())
   } else {
-    ret <- ret <- as_broom_tidy_tibble(
+    ret <- ret <- as_tidy_tibble(
       stats::coef(summary(x, robust = robust)), 
       new_names = nn
     )
@@ -145,7 +145,7 @@ augment.felm <- function(x, data = model.frame(x), ...) {
       call. = FALSE
     )
   }
-  df <- as_broom_tibble(data)
+  df <- as_augment_tibble(data)
   mutate(df, .fitted = as.vector(x$fitted.values), .resid = as.vector(x$residuals))
 }
 
@@ -175,18 +175,18 @@ glance.felm <- function(x, ...) {
       call. = FALSE
     )
   }
-  ret <- with(
-    summary(x),
-    tibble(
-      r.squared = r2,
-      adj.r.squared = r2adj,
-      sigma = rse,
-      statistic = fstat,
-      p.value = pval,
-      df = df[1],
-      df.residual = rdf,
-      nobs = stats::nobs(x)
-    )
+  
+  s <- summary(x)
+  
+  as_glance_tibble(
+    r.squared = s$r2,
+    adj.r.squared = s$r2adj,
+    sigma = s$rse,
+    statistic = s$fstat,
+    p.value = unname(s$pval),
+    df = s$df[1],
+    df.residual = s$rdf,
+    nobs = stats::nobs(x),
+    na_types = "rrrrriii"
   )
-  ret
 }

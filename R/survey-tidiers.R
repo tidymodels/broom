@@ -142,12 +142,13 @@ glance.svyglm <- function(x, maximal = x, ...) {
   # (2) AIC is not always directly computed by svyglm,
   #   e.g. if family = quasibinomial()
 
-  tibble(
+  as_glance_tibble(
     null.deviance = x$null.deviance,
     df.null = x$df.null,
     AIC = stats::AIC(x)["AIC"],
     BIC = stats::BIC(x, maximal = maximal)["BIC"],
     deviance = x$deviance,
-    df.residual = x$df.residual
+    df.residual = x$df.residual,
+    na_types = "rirrri"
   )
 }

@@ -92,13 +92,14 @@ augment.plm <- function(x, data = model.frame(x), ...) {
 #' @family plm tidiers
 glance.plm <- function(x, ...) {
   s <- summary(x)
-  tibble(
-    r.squared = s$r.squared["rsq"],
-    adj.r.squared = s$r.squared["adjrsq"],
-    statistic = s$fstatistic$statistic,
-    p.value = s$fstatistic$p.value,
-    deviance = stats::deviance(x),
+  as_glance_tibble(
+    r.squared = unname(s$r.squared["rsq"]),
+    adj.r.squared = unname(s$r.squared["adjrsq"]),
+    statistic = unname(s$fstatistic$statistic),
+    p.value = unname(s$fstatistic$p.value),
+    deviance = unname(stats::deviance(x)),
     df.residual = stats::df.residual(x),
-    nobs = stats::nobs(x)
+    nobs = stats::nobs(x),
+    na_types = "rrrrrii"
   )
 }

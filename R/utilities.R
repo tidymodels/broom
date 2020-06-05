@@ -34,7 +34,7 @@ exponentiate <- function(data) {
 #' @return A `tibble` potentially with a `.rownames` column
 #' @noRd
 #'
-as_broom_tibble <- function(data) {
+as_augment_tibble <- function(data) {
 
   if (inherits(data, "matrix") & is.null(colnames(data))) {
     stop("The supplied `data`/`newdata` argument was an unnamed matrix. ",
@@ -70,7 +70,7 @@ as_broom_tibble <- function(data) {
 #' @return a tibble with rownames moved into a column and new column
 #' names assigned
 #' @noRd
-as_broom_tidy_tibble <- function(x, new_names = NULL, new_column = "term") {
+as_tidy_tibble <- function(x, new_names = NULL, new_column = "term") {
   
   if (!is.null(new_names) && length(new_names) != ncol(x)) {
     stop("newnames must be NULL or have length equal to number of columns")
@@ -98,15 +98,16 @@ as_broom_tidy_tibble <- function(x, new_names = NULL, new_column = "term") {
 }
 
 #' @param x A list of data.frames or matrices
-#' @param ... Extra arguments to pass to as_broom_tidy_tibble
+#' @param ... Extra arguments to pass to as_tidy_tibble
 #' @param id_column The name of the column giving the name of each 
 #' element in `x`
-map_as_broom_tidy_tibble <- function(x, 
+#' @noRd
+map_as_tidy_tibble <- function(x, 
                                      ..., 
                                      id_column = "component") {
   
   purrr::map_df(x, 
-                as_broom_tidy_tibble, 
+                as_tidy_tibble, 
                 ...,
                 .id = id_column)
   
@@ -121,6 +122,49 @@ has_rownames <- function(df) {
   any(rownames(df) != as.character(1:nrow(df)))
 }
 
+na_types_dict <- list("r" = NA_real_,
+                      "i" = rlang::na_int,
+                      "c" = NA_character_,
+                      "l" = rlang::na_lgl)
+
+# A function that converts a string to a vector of NA types.
+# e.g. "rri" -> c(NA_real_, NA_real_, rlang::na_int)
+parse_na_types <- function(s) {
+  
+  positions <- purrr::map(
+    stringr::str_split(s, pattern = ""), 
+    match,
+    table = names(na_types_dict)
+  ) %>%
+    unlist()
+  
+  na_types_dict[positions] %>%
+    unlist() %>%
+    unname()
+}
+
+# A function that, given named arguments, will make a one-row
+# tibble, switching out NULLs for the appropriate NA type.
+as_glance_tibble <- function(..., na_types) {
+  
+  cols <- list(...)
+  
+  if (length(cols) != stringr::str_length(na_types)) {
+    stop(
+      "The number of columns provided does not match the number of ",
+      "column types provided."
+    )
+  }
+  
+  na_types_long <- parse_na_types(na_types)
+  
+  entries <- purrr::map2(cols, 
+                         na_types_long, 
+                         function(.x, .y) {if (length(.x) == 0) .y else .x})
+  
+  tibble::as_tibble_row(entries)
+  
+}
 
 # strip rownames from a data frame
 unrowname <- function(x) {
@@ -252,11 +296,11 @@ augment_columns <- function(x, data, newdata = NULL, type, type.predict = type,
 
   if (is.null(na_action) || nrow(original) == nrow(ret)) {
     # no NAs were left out; we can simply recombine
-    original <- as_broom_tibble(original)
+    original <- as_augment_tibble(original)
     return(as_tibble(cbind(original, ret)))
   } else if (class(na_action) == "omit") {
     # if the option is "omit", drop those rows from the data
-    original <- as_broom_tibble(original)
+    original <- as_augment_tibble(original)
     original <- original[-na_action, ]
     return(as_tibble(cbind(original, ret)))
   }
@@ -301,8 +345,8 @@ add_hat_sigma_cols <- function(df, x, infl) {
   w <- x$weights
   nonzero_idx <- if (is.null(w)) seq_along(df$.hat) else which(w != 0)
 
-  df$.hat[nonzero_idx] <- infl$hat
-  df$.sigma[nonzero_idx] <- infl$sigma
+  df$.hat[nonzero_idx] <- infl$hat %>% unname()
+  df$.sigma[nonzero_idx] <- infl$sigma %>% unname()
   df
 }
 
@@ -317,7 +361,7 @@ add_hat_sigma_cols <- function(df, x, infl) {
 augment_newdata <- function(x, data, newdata, .se_fit, ...) {
   passed_newdata <- !is.null(newdata)
   df <- if (passed_newdata) newdata else data
-  df <- as_broom_tibble(df)
+  df <- as_augment_tibble(df)
 
   # NOTE: It is important use predict(x, newdata = newdata) rather than
   # predict(x, newdata = df). This is to avoid an edge case breakage
@@ -333,10 +377,10 @@ augment_newdata <- function(x, data, newdata, .se_fit, ...) {
 
   # This helper *should not* be used for predict methods that do not have
   # an na.pass argument
-
+  
   if (.se_fit) {
     pred_obj <- predict(x, newdata = newdata, na.action = na.pass, se.fit = TRUE, ...)
-    df$.fitted <- pred_obj$fit
+    df$.fitted <- pred_obj$fit %>% unname()
 
     # a couple possible names for the standard error element of the list
     # se.fit: lm, glm
@@ -344,14 +388,16 @@ augment_newdata <- function(x, data, newdata, .se_fit, ...) {
     se_idx <- which(names(pred_obj) %in% c("se.fit", "se"))
     df$.se.fit <- pred_obj[[se_idx]]
   } else if (passed_newdata) {
-    df$.fitted <- predict(x, newdata = newdata, na.action = na.pass, ...)
+    df$.fitted <- predict(x, newdata = newdata, na.action = na.pass, ...) %>% 
+      unname()
   } else {
-    df$.fitted <- predict(x, na.action = na.pass, ...)
+    df$.fitted <- predict(x, na.action = na.pass, ...) %>% 
+      unname()
   }
 
   resp <- safe_response(x, df)
   if (!is.null(resp) && is.numeric(resp)) {
-    df$.resid <- df$.fitted - resp
+    df$.resid <- (df$.fitted - resp) %>% unname() 
   }
   df
 }
@@ -458,6 +504,7 @@ globalVariables(
     "PC",
     "percent",
     "P-perm (1-tailed)",
+    "Pr(Chi)",
     "pvalue",
     "QE.del",
     "rd_roclet",

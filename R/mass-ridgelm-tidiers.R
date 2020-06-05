@@ -85,9 +85,10 @@ tidy.ridgelm <- function(x, ...) {
 #' @family ridgelm tidiers
 #' @seealso [glance()], [MASS::select.ridgelm()], [MASS::lm.ridge()]
 glance.ridgelm <- function(x, ...) {
-  tibble(
+  as_glance_tibble(
     kHKB = x$kHKB,
     kLW = x$kLW,
-    lambdaGCV = x$lambda[which.min(x$GCV)]
+    lambdaGCV = x$lambda[which.min(x$GCV)],
+    na_types = "rrr"
   )
 }

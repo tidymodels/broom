@@ -5,7 +5,14 @@
 \alias{polr_tidiers}
 \title{Tidy a(n) polr object}
 \usage{
-\method{tidy}{polr}(x, conf.int = FALSE, conf.level = 0.95, exponentiate = FALSE, ...)
+\method{tidy}{polr}(
+  x,
+  conf.int = FALSE,
+  conf.level = 0.95,
+  exponentiate = FALSE,
+  p.values = FALSE,
+  ...
+)
 }
 \arguments{
 \item{x}{A \code{polr} object returned from \code{\link[MASS:polr]{MASS::polr()}}.}
@@ -21,6 +28,9 @@ Defaults to 0.95, which corresponds to a 95 percent confidence interval.}
 the coefficient estimates. This is typical for logistic and multinomial
 regressions, but a bad idea if there is no log or logit link. Defaults
 to \code{FALSE}.}
+
+\item{p.values}{Logical. Should p-values be returned,
+based on chi-squared tests from \code{\link[MASS:dropterm]{MASS::dropterm()}}. Defaults to FALSE.}
 
 \item{...}{Additional arguments. Not used. Needed to match generic
 signature only. \strong{Cautionary note:} Misspelled arguments will be
@@ -44,6 +54,15 @@ specify which components to return.
 In \verb{broom 0.7.0} the \code{coefficient_type} column was renamed to
 \code{coef.type}, and the contents were changed as well. Now the contents
 are \code{coefficient} and \code{scale}, rather than \code{coefficient} and \code{zeta}.
+
+Calculating p.values with the \code{dropterm()} function is the approach
+suggested by the MASS package author
+\url{https://r.789695.n4.nabble.com/p-values-of-plor-td4668100.html}. This
+approach is computationally intensive, so that p.values are only
+returned if requested explicitly. Additionally, it only works for
+models containing no variables with more than two categories. If this
+condition is not met, a message is shown and NA is returned instead of
+p-values.
 }
 \examples{
 
@@ -55,6 +74,10 @@ tidy(fit, exponentiate = TRUE, conf.int = TRUE)
 
 glance(fit)
 augment(fit, type.predict = "class")
+
+fit2 <- polr(factor(gear) ~ am + mpg + qsec, data = mtcars)
+tidy(fit, p.values = TRUE)
+
 }
 \seealso{
 \link{tidy}, \code{\link[MASS:polr]{MASS::polr()}}

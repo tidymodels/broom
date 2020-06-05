@@ -34,7 +34,7 @@ tidy.gamlss <- function(x, ...) {
   utils::capture.output(s <- summary(x, type = "qr"))
 
   # tidy the coefficients much as would be done for a linear model
-  ret <- as_broom_tidy_tibble(
+  ret <- as_tidy_tibble(
     s, 
     new_names = c("estimate", "std.error", "statistic", "p.value")
   )

@@ -28,7 +28,7 @@
 #' @seealso [tidy], [stats::nls()], [stats::summary.nls()]
 #' @family nls tidiers
 tidy.nls <- function(x, conf.int = FALSE, conf.level = .95, ...) {
-  ret <- as_broom_tidy_tibble(
+  ret <- as_tidy_tibble(
     stats::coef(summary(x)), 
     new_names = c("estimate", "std.error", "statistic", "p.value")
   )
@@ -95,7 +95,7 @@ augment.nls <- function(x, data = NULL, newdata = NULL, ...) {
 glance.nls <- function(x, ...) {
   s <- summary(x)
 
-  tibble(
+  as_glance_tibble(
     sigma = s$sigma,
     isConv = s$convInfo$isConv,
     finTol = s$convInfo$finTol,
@@ -104,6 +104,7 @@ glance.nls <- function(x, ...) {
     BIC = stats::BIC(x),
     deviance = stats::deviance(x),
     df.residual = stats::df.residual(x),
-    nobs = stats::nobs(x)
+    nobs = stats::nobs(x),
+    na_types = "rlrrrrrii"
   )
 }

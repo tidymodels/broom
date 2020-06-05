@@ -76,11 +76,12 @@ tidy.biglm <- function(x, conf.int = FALSE, conf.level = .95,
 #' @seealso [glance()], [biglm::biglm()], [biglm::bigglm()]
 glance.biglm <- function(x, ...) {
   s <- summary(x)
-  tibble(
+  as_glance_tibble(
     r.squared = s$rsq,
     AIC = stats::AIC(x),
     deviance = stats::deviance(x),
     df.residual = x$df.resid,
-    nobs = stats::nobs(x)
+    nobs = stats::nobs(x),
+    na_types = "rrrii"
   )
 }

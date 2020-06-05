@@ -35,7 +35,7 @@
 #'     x2 = purrr::map2(num_points, x2, rnorm)
 #'   ) %>%
 #'   dplyr::select(-num_points, -cluster) %>%
-#'   tidyr::unnest(x1, x2)
+#'   tidyr::unnest(c(x1, x2))
 #'
 #' m <- mclust::Mclust(points)
 #'
@@ -95,7 +95,7 @@ augment.Mclust <- function(x, data = NULL, ...) {
     stop("`data` must be a data frame or matrix.", call. = FALSE)
   }
 
-  as_broom_tibble(data) %>%
+  as_augment_tibble(data) %>%
     mutate(
       .class = as.factor(!!x$classification),
       .uncertainty = !!x$uncertainty
@@ -120,17 +120,14 @@ augment.Mclust <- function(x, data = NULL, ...) {
 #'
 #' @export
 glance.Mclust <- function(x, ...) {
-  ret <- with(
-    x,
-    tibble(
-      model = modelName,
-      G,
-      BIC = bic,
-      logLik = loglik,
-      df,
-      hypvol
-    )
+  as_glance_tibble(
+    model = unname(x$modelName),
+    G = unname(x$G),
+    BIC = unname(x$bic),
+    logLik = unname(x$loglik),
+    df = unname(x$df),
+    hypvol = unname(x$hypvol),
+    nobs = stats::nobs(x),
+    na_types = "cirriri"
   )
-  ret$nobs <- stats::nobs(x)
-  ret
 }

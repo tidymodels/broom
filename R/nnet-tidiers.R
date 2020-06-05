@@ -99,14 +99,11 @@ tidy.multinom <- function(x, conf.int = FALSE, conf.level = .95,
 #' @family multinom tidiers
 #' @seealso [glance()], [nnet::multinom()]
 glance.multinom <- function(x, ...) {
-  ret <- with(
-    x,
-    tibble(
-      edf = edf,
-      deviance = deviance,
-      AIC = AIC
-    )
+  as_glance_tibble(
+    edf = x$edf,
+    deviance = x$deviance,
+    AIC = x$AIC,
+    nobs = stats::nobs(x),
+    na_types = "irri"
   )
-  ret$nobs <- stats::nobs(x)
-  ret
 }

@@ -83,9 +83,9 @@ tidy.coxph <- function(x, exponentiate = FALSE, conf.int = FALSE,
   }
 
   if (is.null(x$frail)) {
-    ret <- as_broom_tidy_tibble(co[, -2, drop = FALSE], new_names = nn)
+    ret <- as_tidy_tibble(co[, -2, drop = FALSE], new_names = nn)
   } else {
-    ret <- as_broom_tidy_tibble(co[, -c(3, 5), drop = FALSE], new_names = nn)
+    ret <- as_tidy_tibble(co[, -c(3, 5), drop = FALSE], new_names = nn)
   }
 
   if (exponentiate) {
@@ -157,7 +157,7 @@ glance.coxph <- function(x, ...) {
   s <- summary(x)
   # including all the test statistics and p-values as separate
   # columns. Admittedly not perfect but does capture most use cases.
-  ret <- list(
+  as_glance_tibble(
     n = s$n,
     nevent = s$nevent,
     statistic.log = s$logtest[1],
@@ -175,8 +175,7 @@ glance.coxph <- function(x, ...) {
     logLik = as.numeric(stats::logLik(x)),
     AIC = stats::AIC(x),
     BIC = stats::BIC(x),
-    nobs = stats::nobs(x)
+    nobs = stats::nobs(x),
+    na_types = "iirrrrrrrrrrrrrrri"
   )
-  ret <- as_tibble(purrr::compact(ret))
-  ret
 }

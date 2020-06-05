@@ -94,10 +94,14 @@ tidy.binDesign <- function(x, ...) {
 #' @family bingroup tidiers
 #' @seealso [glance()], [binGroup::binDesign()]
 glance.binDesign <- function(x, ...) {
-  with(unclass(x), tibble(
-    power = powerout,
-    n = nout,
-    power.reached,
-    maxit = maxit
-  ))
+  
+  ux <- unclass(x)
+  
+  as_glance_tibble(
+    power = ux$powerout,
+    n = ux$nout,
+    power.reached = ux$power.reached,
+    maxit = ux$maxit,
+    na_types = "riri"
+  )
 }

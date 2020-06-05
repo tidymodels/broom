@@ -87,7 +87,7 @@ A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
   \item{.fitted}{Fitted or predicted value.}
   \item{.moderator}{In meta-analysis, the moderators used to calculate the predicted values.}
   \item{.moderator.level}{In meta-analysis, the level of the moderators used to calculate the predicted values.}
-  \item{.resid}{The difference between fitted and observed values.}
+  \item{.resid}{The difference between observed and fitted values.}
   \item{.se.fit}{Standard errors of fitted values.}
   \item{.observed}{The observed values for the individual studies}
 

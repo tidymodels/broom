@@ -34,13 +34,19 @@ or \verb{glance_<function>} and are not exported (but they are documented!).
 
 If no appropriate tidying method is found, throws an error.
 }
+\note{
+This function assumes that the provided objective function is a negative
+log-likelihood function. Results will be invalid if an incorrect
+function is supplied.
+
+tidy(o)
+glance(o)
+}
 \examples{
 
 f <- function(x) (x[1] - 2)^2 + (x[2] - 3)^2 + (x[3] - 8)^2
 o <- optim(c(1, 1, 1), f)
 
-tidy(o)
-glance(o)
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[stats:optim]{stats::optim()}}

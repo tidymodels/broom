@@ -75,12 +75,13 @@ glance.rq <- function(x, ...) {
   n <- length(fitted(x))
   s <- summary(x)
 
-  tibble(
+  as_glance_tibble(
     tau = x[["tau"]],
     logLik = logLik(x),
     AIC = AIC(x),
     BIC = AIC(x, k = log(n)),
-    df.residual = rep(s[["rdf"]], times = length(x[["tau"]]))
+    df.residual = rep(s[["rdf"]], times = length(x[["tau"]])),
+    na_types = "rrrri"
   )
 }
 
@@ -157,5 +158,5 @@ process_rq <- function(rq_obj, se.type = NULL,
     co[["conf.high"]] <- co[["estimate"]] + (cv[2] * co[["std.error"]])
   }
   co[["tau"]] <- rq_obj[["tau"]]
-  as_broom_tidy_tibble(co)
+  as_tidy_tibble(co)
 }

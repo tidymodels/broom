@@ -60,7 +60,7 @@ tidy.anova <- function(x, ...) {
 
   names(renamers) <- make.names(names(renamers))
 
-  ret <- as_broom_tibble(x)
+  ret <- as_augment_tibble(x)
   colnames(ret) <- make.names(names(ret))
 
   unknown_cols <- setdiff(colnames(ret), c("term", names(renamers)))
@@ -117,11 +117,9 @@ tidy.aov <- function(x, ...) {
 #' @inherit tidy.aov params examples
 #'
 #' @note
-#' From `0.7.0`, `broom` has changed the return summary and the new model
-#' summary dataframe contains only the following information- `logLik`, `IC`,
-#' `BIC`, `deviance`, `nobs`. Note that `tidy.aov` contains the numerator and
-#' denominator degrees of freedom, which were previously included in the glance
-#' summary.
+#' Note that `tidy.aov()` now contains the numerator and denominator degrees of 
+#' freedom, which were included in the output of `glance.aov()` in some
+#' previous versions of the package.
 #'
 #' @evalRd return_glance(
 #'   "logLik",
@@ -135,16 +133,15 @@ tidy.aov <- function(x, ...) {
 #' @seealso [glance()]
 #' @family anova tidiers
 glance.aov <- function(x, ...) {
-  with(
-    summary(x),
-    tibble(
-      logLik = as.numeric(stats::logLik(x)),
-      AIC = stats::AIC(x),
-      BIC = stats::BIC(x),
-      deviance = stats::deviance(x),
-      nobs = stats::nobs(x)
-    )
+  as_glance_tibble(
+    logLik = as.numeric(stats::logLik(x)),
+    AIC = stats::AIC(x),
+    BIC = stats::BIC(x),
+    deviance = stats::deviance(x),
+    nobs = stats::nobs(x),
+    na_types = "rrrri"
   )
+  
 }
 
 #' @templateVar class aovlist
@@ -232,62 +229,10 @@ tidy.manova <- function(x, test = "Pillai", ...) {
   ))
   test.name <- c("pillai", "wilks", "hl", "roy")[test.pos]
 
-  as_broom_tidy_tibble(
+  as_tidy_tibble(
     summary(x, test = test, ...)$stats, 
     new_names = c("df", test.name, "statistic", "num.df", "den.df", "p.value")
   )
-}
-
-
-#' @templateVar class summary.manova
-#' @template title_desc_tidy
-#'
-#' @param x A `summary.manova` object return from [stats::summary.manova()].
-#' @template param_unused_dots
-#'
-#' @evalRd return_tidy(
-#'   "term",
-#'   "num.df",
-#'   "den.df",
-#'   "statistic",
-#'   "p.value",
-#'   pillai = "Pillai's trace.",
-#'   wilks = "Wilk's lambda.",
-#'   hl = "Hotelling-Lawley trace.",
-#'   roy = "Roy's greatest root."
-#' )
-#'
-#'
-#' @details Depending on which test statistic was calculated when the object
-#'   was created, only one of `pillai`, `wilks`, `hl` or `roy` is included.
-#'
-#' @examples
-#'
-#' npk2 <- within(npk, foo <- rnorm(24))
-#'
-#' m <- summary(
-#'   manova(cbind(yield, foo) ~ block + N * P * K, npk2),
-#'   test = "Wilks"
-#' )
-#'
-#' tidy(m)
-#' @export
-#' @seealso [tidy()], [stats::summary.manova()]
-#' @family anova tidiers
-tidy.summary.manova <- function(x, ...) {
-  manova_tests <- c(
-    "Pillai" = "pillai",
-    "Wilks" = "wilks",
-    "Hotelling-Lawley" = "hl",
-    "Roy" = "roy"
-  )
-
-  test.name <- manova_tests[[intersect(colnames(x$stats), names(manova_tests))[[1]]]]
-
-  nn <- c("df", test.name, "statistic", "num.df", "den.df", "p.value")
-  as_broom_tibble(x$stats) %>%
-    setNames(c("term", nn))
-  
 }
 
 #' @templateVar class TukeyHSD
@@ -323,7 +268,7 @@ tidy.TukeyHSD <- function(x, ...) {
     function(e) {
       null.value <- rep(0, nrow(e))
       e <- cbind(null.value, e)
-      as_broom_tidy_tibble(
+      as_tidy_tibble(
         e, 
         new_names = c("null.value", "estimate", "conf.low", 
                       "conf.high", "adj.p.value"), 

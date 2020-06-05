@@ -102,7 +102,7 @@ tidy.prcomp <- function(x, matrix = "u", ...) {
 
   ncomp <- NCOL(x$rotation)
   if (matrix %in% c("pcs", "d", "eigenvalues")) {
-    ret <- as_broom_tidy_tibble(
+    ret <- as_tidy_tibble(
       t(summary(x)$importance),
       new_names = c("std.dev", "percent", "cumulative"),
       new_column = "PC"

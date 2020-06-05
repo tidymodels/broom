@@ -74,25 +74,26 @@ augment.glm <- function(x,
   type.residuals <- rlang::arg_match(type.residuals)
 
   df <- if (is.null(newdata)) data else newdata
-  df <- as_broom_tibble(df)
+  df <- as_augment_tibble(df)
 
   # don't use augment_newdata here; don't want raw/response residuals in .resid
   if (se_fit) {
     pred_obj <- predict(x, newdata, type = type.predict, se.fit = TRUE)
-    df$.fitted <- pred_obj$fit
-    df$.se.fit <- pred_obj$se.fit
+    df$.fitted <- pred_obj$fit %>% unname()
+    df$.se.fit <- pred_obj$se.fit %>% unname()
   } else {
-    df$.fitted <- predict(x, newdata, type = type.predict)
+    df$.fitted <- predict(x, newdata, type = type.predict) %>% unname()
   }
 
   if (is.null(newdata)) {
     tryCatch(
       {
         infl <- influence(x, do.coef = FALSE)
-        df$.resid <- residuals(x, type = type.residuals)
-        df$.std.resid <- rstandard(x, infl = infl, type = type.residuals)
+        df$.resid <- residuals(x, type = type.residuals) %>% unname()
+        df$.std.resid <- rstandard(x, infl = infl, type = type.residuals) %>% 
+          unname()
         df <- add_hat_sigma_cols(df, x, infl)
-        df$.cooksd <- cooks.distance(x, infl = infl)
+        df$.cooksd <- cooks.distance(x, infl = infl) %>% unname()
       },
       error = data_error
     )
@@ -129,7 +130,7 @@ augment.glm <- function(x,
 #' @seealso [stats::glm()]
 glance.glm <- function(x, ...) {
   s <- summary(x)
-  tibble(
+  as_glance_tibble(
     null.deviance = x$null.deviance,
     df.null = x$df.null,
     logLik = as.numeric(stats::logLik(x)),
@@ -137,6 +138,7 @@ glance.glm <- function(x, ...) {
     BIC = stats::BIC(x),
     deviance = stats::deviance(x),
     df.residual = stats::df.residual(x),
-    nobs = stats::nobs(x)
+    nobs = stats::nobs(x),
+    na_types = "rirrrrii"
   )
 }

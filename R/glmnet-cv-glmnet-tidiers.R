@@ -96,9 +96,10 @@ tidy.cv.glmnet <- function(x, ...) {
 #' @seealso [glance()], [glmnet::cv.glmnet()]
 #' @family glmnet tidiers
 glance.cv.glmnet <- function(x, ...) {
-  tibble(
+  as_glance_tibble(
     lambda.min = x$lambda.min,
     lambda.1se = x$lambda.1se,
-    nobs = stats::nobs(x)
+    nobs = stats::nobs(x),
+    na_types = "rri"
   )
 }

@@ -37,7 +37,7 @@
 #' @aliases betareg_tidiers
 tidy.betareg <- function(x, conf.int = FALSE, conf.level = .95, ...) {
   
-  ret <- map_as_broom_tidy_tibble(
+  ret <- map_as_tidy_tibble(
     purrr::map(coef(summary(x)), as.matrix),
     new_names = c("estimate", "std.error", "statistic", "p.value")
   )
@@ -98,13 +98,14 @@ augment.betareg <- function(x, data = model.frame(x), newdata = NULL,
 #' @export
 glance.betareg <- function(x, ...) {
   s <- summary(x)
-  tibble(
+  as_glance_tibble(
     pseudo.r.squared = s$pseudo.r.squared,
     df.null = s$df.null,
     logLik = as.numeric(stats::logLik(x)),
     AIC = stats::AIC(x),
     BIC = stats::BIC(x),
     df.residual = stats::df.residual(x),
-    nobs = stats::nobs(x)
+    nobs = stats::nobs(x),
+    na_types = "rirrrii"
   )
 }

@@ -75,11 +75,12 @@ tidy.clmm <- function(x, conf.int = FALSE, conf.level = 0.95,
 #' @seealso [tidy], [ordinal::clmm()]
 #' @family ordinal tidiers
 glance.clmm <- function(x, ...) {
-  tibble(
+  as_glance_tibble(
     edf = x$edf,
     AIC = stats::AIC(x),
     BIC = stats::BIC(x),
     logLik = stats::logLik(x),
-    nobs = stats::nobs(x)
+    nobs = stats::nobs(x),
+    na_types = "irrri"
   )
 }

@@ -40,13 +40,13 @@ tidy.survreg <- function(x, conf.level = .95, conf.int = FALSE, ...) {
   # (The column is not present if robust=FALSE)
   s <- s[, colnames(s) != "(Naive SE)", drop = FALSE]
   nn <- c("estimate", "std.error", "statistic", "p.value")
-  ret <- as_broom_tidy_tibble(s, new_names = nn)
+  ret <- as_tidy_tibble(s, new_names = nn)
   
   if (conf.int) {
     # add confidence interval
     ci <- stats::confint(x, level = conf.level)
     colnames(ci) <- c("conf.low", "conf.high")
-    ci <- as_broom_tidy_tibble(ci)
+    ci <- as_tidy_tibble(ci)
     ret <- as_tibble(merge(ret, ci, all.x = TRUE, sort = FALSE))
   }
 
@@ -106,15 +106,16 @@ augment.survreg <- function(x, data = NULL, newdata = NULL,
 #' @family survreg tidiers
 #' @family survival tidiers
 glance.survreg <- function(x, ...) {
-  ret <- tibble(
-    iter = x$iter, df = sum(x$df),
+  as_glance_tibble(
+    iter = x$iter, 
+    df = sum(x$df),
     statistic = 2 * diff(x$loglik),
     logLik = as.numeric(stats::logLik(x)),
     AIC = stats::AIC(x),
     BIC = stats::BIC(x),
     df.residual = stats::df.residual(x),
-    nobs = stats::nobs(x)
+    nobs = stats::nobs(x),
+    p.value = 1 - stats::pchisq(2 * diff(x$loglik), sum(x$df) - x$idf),
+    na_types = "iirrrriir"
   )
-  ret$p.value <- 1 - stats::pchisq(ret$statistic, sum(x$df) - x$idf)
-  ret
 }
