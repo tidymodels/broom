@@ -72,7 +72,7 @@ Other contributors:
   \item Michael Kuehn \email{mkuehn10@gmail.com} [contributor]
   \item Jorge Cimentada \email{cimentadaj@gmail.com} [contributor]
   \item Erle Holgersen \email{erle.holgersen@gmail.com} [contributor]
-  \item Karl Dunkle Werner [contributor]
+  \item Karl Dunkle Werner (\href{https://orcid.org/0000-0003-0523-7309}{ORCID}) [contributor]
   \item Ethan Christensen \email{christensen.ej@gmail.com} [contributor]
   \item Steven Pav \email{shabbychef@gmail.com} [contributor]
   \item Paul PJ \email{pjpaul.stephens@gmail.com} [contributor]

@@ -18,7 +18,7 @@
 #'   fixest object, or 2) explicitly as part of the tidy call. See examples
 #'   below.
 #'
-#'   Note that fixest confindence intervals are calculated assuming a normal
+#'   Note that fixest confidence intervals are calculated assuming a normal
 #'   distribution -- this assumes infinite degrees of freedom for the CI.
 #'   (This assumption is distinct from the degrees of freedom used to calculate
 #'   the standard errors. For more on degrees of freedom with clusters and
@@ -159,7 +159,7 @@ augment.fixest <- function(x, data = NULL, newdata = NULL, type.predict="link", 
   if (is.null(df)) {
     stop("Must specify either `data` or `newdata` argument.", call. = FALSE)
   }
-  df <- as_broom_tibble(df)
+  df <- as_augment_tibble(df)
   if (is.null(newdata)) {
     # use existing data
     df <- mutate(df,
@@ -198,11 +198,12 @@ augment.fixest <- function(x, data = NULL, newdata = NULL, type.predict="link", 
 glance.fixest <- function(x, ...) {
   stopifnot(length(x$method) == 1)
   # results that are common to all models:
-  res_common <- tibble(
+  res_common <- as_glance_tibble(
     logLik = logLik(x),
     AIC = AIC(x),
     BIC = BIC(x),
     nobs = nobs(x),
+    na_types = "rrri"
   )
 
   if (identical(x$method, "feols")) {

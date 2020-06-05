@@ -72,6 +72,6 @@ A \code{\link[tibble:tibble]{tibble::tibble()}} with exactly one row and columns
   \item{pseudo.r.squared}{Like the R squared statistic, but for situations when the R squared statistic isn't defined.}
   \item{r.squared}{R squared statistic, or the percent of variation explained by the model. Also known as the coefficient of determination.}
   \item{sigma}{Estimated standard error of the residuals.}
-  \item{within.r.squared}{R squared within fixed-effect groups}
+  \item{within.r.squared}{R squared within fixed-effect groups.}
 
 }

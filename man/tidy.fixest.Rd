@@ -25,7 +25,7 @@ See \code{\link[fixest:summary.fixest]{summary.fixest}}.}
 Tidy summarizes information about the components of a model.
 A model component might be a single term in a regression, a single
 hypothesis, a cluster, or a class. Exactly what tidy considers to be a
-model component varies cross models but is usually self-evident.
+model component varies across models but is usually self-evident.
 If a model has several distinct types of components, you will need to
 specify which components to return.
 }
@@ -39,7 +39,7 @@ a desired standard error correction either 1) implicitly via the supplied
 fixest object, or 2) explicitly as part of the tidy call. See examples
 below.
 
-Note that fixest confindence intervals are calculated assuming a normal
+Note that fixest confidence intervals are calculated assuming a normal
 distribution -- this assumes infinite degrees of freedom for the CI.
 (This assumption is distinct from the degrees of freedom used to calculate
 the standard errors. For more on degrees of freedom with clusters and

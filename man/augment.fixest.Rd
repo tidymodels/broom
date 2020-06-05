@@ -112,6 +112,6 @@ Other fixest tidiers:
 \value{
 A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
   \item{.fitted}{Fitted or predicted value.}
-  \item{.resid}{The difference between fitted and observed values.}
+  \item{.resid}{The difference between observed and fitted values.}
 
 }
