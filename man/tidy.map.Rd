@@ -33,6 +33,7 @@ specify which components to return.
 library(maps)
 library(ggplot2)
 
+
 ca <- map("county", "ca", plot = FALSE, fill = TRUE)
 tidy(ca)
 qplot(long, lat, data = ca, geom = "polygon", group = group)
@@ -46,4 +47,11 @@ qplot(long, lat,
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[maps:map]{maps::map()}}
+}
+\value{
+A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
+  \item{term}{The name of the regression term.}
+  \item{long}{Longitude.}
+  \item{lat}{Latitude.}
+Remaining columns give information on geographic attributes and depend on the inputted map object. See ?maps::map for more information.
 }

@@ -4,10 +4,18 @@
 #' @param x A `map` object returned from [maps::map()].
 #' @template param_unused_dots
 #'
+#' @evalRd return_tidy(
+#'   "term",
+#'   long = "Longitude.",
+#'   lat = "Latitude.",
+#'   .post = "Remaining columns give information on geographic attributes and depend on the inputted map object. See ?maps::map for more information."
+#' )
+#'
 #' @examples
 #'
 #' library(maps)
 #' library(ggplot2)
+#' 
 #'
 #' ca <- map("county", "ca", plot = FALSE, fill = TRUE)
 #' tidy(ca)
