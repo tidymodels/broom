@@ -43,8 +43,8 @@ Note that fixest confidence intervals are calculated assuming a normal
 distribution -- this assumes infinite degrees of freedom for the CI.
 (This assumption is distinct from the degrees of freedom used to calculate
 the standard errors. For more on degrees of freedom with clusters and
-fixed effects, see https://github.com/lrberge/fixest/issues/6 and
-https://github.com/sgaure/lfe/issues/1#issuecomment-530646990)
+fixed effects, see \url{https://github.com/lrberge/fixest/issues/6} and
+\url{https://github.com/sgaure/lfe/issues/1#issuecomment-530646990})
 }
 \examples{
 \donttest{

@@ -22,8 +22,8 @@
 #'   distribution -- this assumes infinite degrees of freedom for the CI.
 #'   (This assumption is distinct from the degrees of freedom used to calculate
 #'   the standard errors. For more on degrees of freedom with clusters and
-#'   fixed effects, see https://github.com/lrberge/fixest/issues/6 and
-#'   https://github.com/sgaure/lfe/issues/1#issuecomment-530646990)
+#'   fixed effects, see \url{https://github.com/lrberge/fixest/issues/6} and
+#'   \url{https://github.com/sgaure/lfe/issues/1#issuecomment-530646990})
 #'
 #' @examples
 #' \donttest{
@@ -180,9 +180,6 @@ augment.fixest <- function(x, data = NULL, newdata = NULL, type.predict="link", 
 #'
 #' @note The columns of the result depend on the type of model estimated.
 #'
-#' @return A one-row [tibble::tibble()] with exactly one row and columns:
-#' Note that `sigma`, `r.squared`, `adj.r.squared`, and `within.r.squared` will
-#' be NA for any model other than `feols`. `pseudo.r.squared` is NA for feols.
 #' @evalRd return_glance(
 #'   "r.squared",
 #'   "adj.r.squared",

@@ -64,9 +64,11 @@ ergm
 exponentiate
 factanal
 felm
+feols
 fhat
 Fhat
 fitdistr
+fixest
 fn
 frankenstein
 ftable

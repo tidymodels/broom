@@ -14,11 +14,6 @@ arguments are \code{se} and \code{cluster}. Other arguments are \code{dof}, \cod
 \code{forceCovariance}, and \code{keepBounded}.
 See \code{\link[fixest:summary.fixest]{summary.fixest}}.}
 }
-\value{
-A one-row \code{\link[tibble:tibble]{tibble::tibble()}} with exactly one row and columns:
-Note that \code{sigma}, \code{r.squared}, \code{adj.r.squared}, and \code{within.r.squared} will
-be NA for any model other than \code{feols}. \code{pseudo.r.squared} is NA for feols.
-}
 \description{
 Glance accepts a model object and returns a \code{\link[tibble:tibble]{tibble::tibble()}}
 with exactly one row of model summaries. The summaries are typically
