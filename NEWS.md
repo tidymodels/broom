@@ -140,8 +140,6 @@ number of data points used to fit the model! (#597 by @vincentarelbundock)
 
 ## New tidiers
 
-- Add option to `lfe::felm` for robust and cluster standard errors (#772)
-
 - Added tidier for `car::Anova` (#754)
 
 - Added tidiers for objects from the `mfx` package (#700 by @grantmcdermott)
