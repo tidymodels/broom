@@ -2,7 +2,7 @@ Type: Package
 Package: broom
 Title: Convert Statistical Objects into Tidy Tibbles
 Version: 0.7.0.9000
-Authors@R: 
+Authors@R:
     c(person(given = "David",
              family = "Robinson",
              role = "aut",
@@ -132,7 +132,8 @@ Authors@R:
              email = "erle.holgersen@gmail.com"),
       person(given = "Karl",
              family = "Dunkle Werner",
-             role = "ctb"),
+             role = "ctb",
+             comment = c(ORCID = "0000-0003-0523-7309")),
       person(given = "Ethan",
              family = "Christensen",
              role = "ctb",
@@ -436,27 +437,27 @@ Authors@R:
       person(given = "Chris",
              family = "Jarvis",
              role = "ctb",
-             email = "Christopher1.jarvis@gmail.com"), 
+             email = "Christopher1.jarvis@gmail.com"),
       person(given = "Brian",
              family = "Mannakee",
              role = "ctb",
-             email = "bmannakee@gmail.com"), 
+             email = "bmannakee@gmail.com"),
       person(given = "Drew",
              family = "Tyre",
              role = "ctb",
-             email = "atyre2@unl.edu"), 
+             email = "atyre2@unl.edu"),
       person(given = "Shreyas",
              family = "Singh",
              role = "ctb",
-             email = "shreyas.singh.298@gmail.com"), 
+             email = "shreyas.singh.298@gmail.com"),
       person(given = "Laurens",
              family = "Geffert",
              role = "ctb",
-             email = "laurensgeffert@gmail.com"), 
+             email = "laurensgeffert@gmail.com"),
       person(given = "Hong",
              family = "Ooi",
              role = "ctb",
-             email = "hongooi@microsoft.com"), 
+             email = "hongooi@microsoft.com"),
       person(given = "Henrik",
              family = "Bengtsson",
              role = "ctb",
@@ -520,6 +521,7 @@ Suggests:
     emmeans,
     epiR,
     ergm,
+    fixest (>= 0.3.1),
     gam (>= 1.15),
     gamlss,
     gamlss.data,
@@ -582,7 +584,7 @@ Suggests:
     testthat (>= 2.1.0),
     tseries,
     zoo
-VignetteBuilder: 
+VignetteBuilder:
     knitr
 Encoding: UTF-8
 LazyData: true
@@ -610,6 +612,7 @@ Collate:
     'emmeans-tidiers.R'
     'epiR-tidiers.R'
     'ergm-tidiers.R'
+    'fixest-tidiers.R'
     'gam-tidiers.R'
     'gamlss-tidiers.R'
     'gee.R'

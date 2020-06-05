@@ -177,10 +177,15 @@ number of data points used to fit the model! (#597 by @vincentarelbundock)
 
 - Added `tidy.summary_emm()` (#691 by @crsh)
 
+
+- Added `tidy.fixest()`, `glance.fixest()`, and `augment.fixest()` methods 
+  to support the `fixest` package. (#785 by @karldw)
+
 - We have restored a simplified version of `glance.aov()`, which now contains 
   only the following columns: `logLik`, `AIC`, `BIC, deviance`, `df.residual`, 
   `nobs` (see #212). Note that `tidy.aov()` gives more complete information about 
   degrees of freedom in an `aov` object.
+  
 
 ## Improvements to existing tidiers
 
@@ -761,4 +766,3 @@ See `?rowwise_df_tidiers` for more.
 
 * Because this integrates substantial amounts of ggplot2 code (with permission),
   added Hadley Wickham as an author in DESCRIPTION.
-
