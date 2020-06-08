@@ -91,7 +91,7 @@ augment(crime_sem)
 crime_sac <- sacsarlm(CRIME ~ INC + HOVAL, data=COL.OLD, listw)
 
 tidy(crime_sac)
-tidy(crime_sac, conf.int = T)
+tidy(crime_sac, conf.int = TRUE)
 glance(crime_sac)
 augment(crime_sac)
 
