@@ -217,11 +217,8 @@ S3method(tidy,rma)
 S3method(tidy,roc)
 S3method(tidy,rq)
 S3method(tidy,rqs)
-<<<<<<< HEAD
-S3method(tidy,sparseMatrix)
-=======
->>>>>>> spatialreg
 S3method(tidy,sarlm)
+S3method(tidy,sparseMatrix)
 S3method(tidy,spec)
 S3method(tidy,speedglm)
 S3method(tidy,speedlm)

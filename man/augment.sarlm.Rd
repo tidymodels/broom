@@ -4,10 +4,21 @@
 \alias{augment.sarlm}
 \title{Augment data with information from a(n) spatialreg object}
 \usage{
-\method{augment}{sarlm}(x)
+\method{augment}{sarlm}(x, ...)
 }
 \arguments{
-\item{x}{An object of object returned from \code{\link[spatialreg:lagsarlm]{spatialreg::lagsarlm()}} or \code{\link[spatialreg:errorsarlm]{spatialreg::errorsarlm()}}.}
+\item{x}{An object of object returned from \code{\link[spatialreg:lagsarlm]{spatialreg::lagsarlm()}}
+or \code{\link[spatialreg:errorsarlm]{spatialreg::errorsarlm()}}.}
+
+\item{...}{Additional arguments. Not used. Needed to match generic
+signature only. \strong{Cautionary note:} Misspelled arguments will be
+absorbed in \code{...}, where they will be ignored. If the misspelled
+argument has a default value, the default value will be used.
+For example, if you pass \code{conf.lvel = 0.9}, all computation will
+proceed using \code{conf.level = 0.95}. Additionally, if you pass
+\code{newdata = my_tibble} to an \code{\link[=augment]{augment()}} method that does not
+accept a \code{newdata} argument, it will use the default value for
+the \code{data} argument.}
 }
 \description{
 Augment accepts a model object and a dataset and adds
@@ -84,7 +95,6 @@ tidy.sarlm(crime_sac)
 tidy.sarlm(crime_sac, conf.int = T)
 glance.sarlm(crime_sac)
 augment.sarlm(crime_sac)
-
 
 
 }
