@@ -109,6 +109,9 @@ The internals of `augment.*()` methods have largely been overhauled.
 
 - `augment()` tries to give an informative error when `data` isn't the original
   training data.
+  
+- The `.resid` column in the output of `augment().*` methods is now consistently 
+  defined as `y - y_hat`
 
 ## New tidiers
 

@@ -291,6 +291,11 @@ Authors@R:
              role = "ctb",
              email = "lukas.wallrich@gmail.com",
              comment = c(ORCID = "0000-0003-2121-5177")),
+      person(given = "James",
+             family = "Martherus",
+             role = "ctb",
+             email = "james@martherus.com",
+             comment = c(ORCID = "0000-0002-8285-3300")),
       person(given = "Chuliang",
              family = "Xiao",
              role = "ctb",
@@ -474,6 +479,7 @@ Authors@R:
              family = "Stigler",
              role = "ctb",
              email = "Matthieu.Stigler@gmail.com"))
+            
 Description: Summarizes key information about statistical
     objects in tidy tibbles. This makes it easy to report results, create
     plots and consistently work with large numbers of models at once.
