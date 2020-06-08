@@ -140,7 +140,7 @@ glance.sarlm <- function(x, ...) {
   
   res <- as_glance_tibble(
       # Using Pseudo R squared.
-      r.squared = cor(x$fitted.values, x$y)^2,
+      r.squared = stats::cor(x$fitted.values, x$y)^2,
       AIC = stats::AIC(x),
       BIC = stats::BIC(x),
       deviance = stats::deviance(x),

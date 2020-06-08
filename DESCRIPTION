@@ -584,6 +584,8 @@ Suggests:
     rsample,
     sandwich,
     sp,
+    spdep,
+    spatialreg,
     speedglm,
     spelling,
     statnet.common,

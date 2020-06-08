@@ -37,6 +37,7 @@ CMD
 codecov
 coeftest
 coercible
+cor
 confint
 confusionMatrix
 converage
@@ -201,6 +202,7 @@ rsample
 rscore
 Saldana
 sapharm
+sarlm
 Sargan
 Schreiber
 se
@@ -213,6 +215,7 @@ Sostero
 sp
 sparseMatrix
 SpatialPolygonsDataFrame
+spatialreg
 speedglm
 speedlm
 stackexchange
