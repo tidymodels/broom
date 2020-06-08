@@ -60,14 +60,10 @@ We are in the process of defining behaviors for models fit with various
 missing at this time.
 }
 \details{
-When the modeling was performed with \code{na.action = "na.omit"}
-(as is the typical default), rows with NA in the initial data are omitted
-entirely from the augmented data frame. When the modeling was performed
-with \code{na.action = "na.exclude"}, one should provide the original data
-as a second argument, at which point the augmented data will contain those
-rows (typically with NAs in place of the new columns). If the original data
-is not provided to \code{\link[=augment]{augment()}} and \code{na.action = "na.exclude"}, a
-warning is raised and the incomplete rows are dropped.
+The predict method for sarlm objects assumes that the response is
+known. See ?predict.sarlm for more discussion. As a result, since the
+original data can be recovered from the fit object, this method
+currently does not take in \code{data} or \code{newdata} arguments.
 }
 \examples{
 library(spatialreg)
@@ -99,8 +95,6 @@ augment.sarlm(crime_sac)
 
 }
 \seealso{
-\link{na.action}
-
 \code{\link[=augment]{augment()}}
 
 Other spatialreg tidiers: 
@@ -108,3 +102,9 @@ Other spatialreg tidiers:
 \code{\link{tidy.sarlm}()}
 }
 \concept{spatialreg tidiers}
+\value{
+A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
+  \item{.fitted}{Fitted or predicted value.}
+  \item{.resid}{The difference between observed and fitted values.}
+
+}

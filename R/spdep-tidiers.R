@@ -88,26 +88,34 @@ tidy.sarlm <- function(x, conf.int = FALSE, conf.level = .95, ...) {
 #' @templateVar class spatialreg
 #' @template title_desc_augment
 #'
-#' @template augment_NAs
+#' @evalRd return_augment(".fitted", ".resid")
 #'
 #' @inherit tidy.sarlm params examples
+#'
+#' @details 
+#' The predict method for sarlm objects assumes that the response is 
+#' known. See ?predict.sarlm for more discussion. As a result, since the
+#' original data can be recovered from the fit object, this method
+#' currently does not take in `data` or `newdata` arguments.
 #'
 #' @export
 #' @seealso [augment()]
 #' @family spatialreg tidiers
 augment.sarlm <- function(x, ...) {
   
+  observed_name <- all.vars(x$call$formula)[1]
+  
   reg <- x$X %>%
     as_augment_tibble() %>%
-    dplyr::select(-1) %>%
+    dplyr::select(-.rownames) %>%
     dplyr::mutate(
-      y = x$y,
+      !!observed_name := x$y,
       .fitted = x$fitted.values,
       .resid = x$residuals
     )
 
   reg
-  
+
 }
 
 
