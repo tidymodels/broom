@@ -214,8 +214,8 @@ regardless of link function.
 - We now use `rlang::arg_match()` when possible instead of `arg.match()` to give
   more informative errors on argument mismatches.
 
-- The package's site has moved from \url{https://broom.tidyverse.org/} to
-\url{https://broom.tidymodels.org/}.
+- The package's site has moved from https://broom.tidyverse.org/ to
+  https://broom.tidymodels.org/.
 
 - Revised several vignettes and moved them to the tidymodels.org website. The
   existing vignettes will now simply link to the revised versions.
@@ -235,7 +235,7 @@ regardless of link function.
   tidiers to the package, in favor of adding tidier methods to the model-owning
   package. An article describing best practices in doing so can be found
   on the {tidymodels} website at 
-  \url{https://www.tidymodels.org/learn/develop/broom/}, and we will continue
+  https://www.tidymodels.org/learn/develop/broom/, and we will continue
   adding additional resources to that article as we develop them.
 
 - Added a new vignette discussing how to implement new tidier methods in 
