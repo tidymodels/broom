@@ -127,6 +127,8 @@ The internals of `augment.*()` methods have largely been overhauled.
 * `mfx`, `logitmfx`, `negbinmfx`, `poissonmfx`, `probitmfx`, and `betamfx` 
 objects from the`mfx` package (#700 by @grantmcdermott)
 * `lmrob` and `glmrob` objects from the `robustbase` package (#205, #505)
+* `sarlm` objects from the `spatialreg` package (#847 by @gregmacfarlane 
+and @petrhrobar)
 * `speedglm` objects from the `speedglm` package (#685)
 * `svyglm` objects from the `survey` package (#611)
 * `systemfit` objects from the `systemfit` package (by @jaspercooper)
