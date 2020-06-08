@@ -674,6 +674,7 @@ Collate:
     'robustbase-glmrob-tidiers.R'
     'robustbase-lmrob-tidiers.R'
     'sp-tidiers.R'
+    'spdep-tidiers.R'
     'speedglm-speedglm-tidiers.R'
     'speedglm-speedlm-tidiers.R'
     'stats-anova-tidiers.R'
