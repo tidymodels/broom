@@ -103,6 +103,9 @@
     <loc>https://broom.tidymodels.org/reference/augment.rqs.html</loc>
   </url>
   <url>
+    <loc>https://broom.tidymodels.org/reference/augment.sarlm.html</loc>
+  </url>
+  <url>
     <loc>https://broom.tidymodels.org/reference/augment.smooth.spline.html</loc>
   </url>
   <url>
@@ -269,6 +272,9 @@
   </url>
   <url>
     <loc>https://broom.tidymodels.org/reference/glance.rq.html</loc>
+  </url>
+  <url>
+    <loc>https://broom.tidymodels.org/reference/glance.sarlm.html</loc>
   </url>
   <url>
     <loc>https://broom.tidymodels.org/reference/glance.smooth.spline.html</loc>
@@ -581,6 +587,9 @@
   </url>
   <url>
     <loc>https://broom.tidymodels.org/reference/tidy.rqs.html</loc>
+  </url>
+  <url>
+    <loc>https://broom.tidymodels.org/reference/tidy.sarlm.html</loc>
   </url>
   <url>
     <loc>https://broom.tidymodels.org/reference/tidy.spec.html</loc>

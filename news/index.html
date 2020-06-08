@@ -194,7 +194,7 @@
 </li>
 </ul>
 <p>We regret that we were unable to provide warnings for some of these changes. Affected maintainers were notified two weeks before the planned release.</p>
-<p><strong>Mixed models</strong>: We have also gone forward with our planned mixed model deprecations, and have removed the following methods, which now live in <code>broom.mixed</code>:</p>
+<p>We have also gone forward with our planned mixed model deprecations, and have removed the following methods, which now live in <code>broom.mixed</code>:</p>
 <ul>
 <li><code>tidy.brmsfit()</code></li>
 <li>
@@ -231,6 +231,7 @@
 <li><p><code>augment.*()</code> methods no longer accept an <code>na.action</code> argument.</p></li>
 <li><p>In previous versions, several <code>augment.*()</code> methods inherited the <code><a href="../reference/augment.lm.html">augment.lm()</a></code> method, but required additions to the <code><a href="../reference/augment.lm.html">augment.lm()</a></code> method itself. We have shifted away from this approach in favor of re-implementing many <code>augment.*()</code> methods as standalone methods making use of internal helper functions. As a result, <code><a href="../reference/augment.lm.html">augment.lm()</a></code> and some related methods have deprecated (previously unused) arguments.</p></li>
 <li><p><code><a href="https://rdrr.io/pkg/generics/man/augment.html">augment()</a></code> tries to give an informative error when <code>data</code> isn’t the original training data.</p></li>
+<li><p>The <code>.resid</code> column in the output of <code>augment().*</code> methods is now consistently defined as <code>y - y_hat</code></p></li>
 </ul>
 </div>
 <div id="new-tidiers" class="section level2">
@@ -240,7 +241,7 @@
 <li>
 <code>anova</code> objects from the <code>car</code> package (<a href='http://github.com/tidymodels/broom/issues/754'>#754</a>)</li>
 <li>
-<code>pam</code> objects from the <code>cluster</code> package (<a href='http://github.com/tidymodels/broom/issues/637'>#637</a> <a href='http://github.com/abbylsmith'>@abbylsmith</a>)</li>
+<code>pam</code> objects from the <code>cluster</code> package (<a href='http://github.com/tidymodels/broom/issues/637'>#637</a> by <a href='http://github.com/abbylsmith'>@abbylsmith</a>)</li>
 <li>
 <code>drm</code> objects from the <code>drc</code> package (<a href='http://github.com/tidymodels/broom/issues/574'>#574</a> by <a href='http://github.com/edild'>@edild</a>)</li>
 <li>
@@ -311,7 +312,7 @@
 <li><p>Many <code><a href="https://rdrr.io/pkg/generics/man/glance.html">glance()</a></code> methods now return a <code>nobs</code> column, which contains the number of data points used to fit the model! (<a href='http://github.com/tidymodels/broom/issues/597'>#597</a> by <a href='http://github.com/vincentarelbundock'>@vincentarelbundock</a>)</p></li>
 <li><p><code><a href="https://rdrr.io/pkg/generics/man/tidy.html">tidy()</a></code> no longer checks for a log or logit link when <code>exponentiate = TRUE</code>, and we have refactored to remove extraneous <code>exponentiate</code> arguments. If you set <code>exponentiate = TRUE</code>, we assume you know what you are doing and that you want exponentiated coefficients (and confidence intervals if <code>conf.int = TRUE</code>) regardless of link function.</p></li>
 <li><p>We now use <code><a href="https://rlang.r-lib.org/reference/arg_match.html">rlang::arg_match()</a></code> when possible instead of <code>arg.match()</code> to give more informative errors on argument mismatches.</p></li>
-<li><p>The package’s site has moved from \url{<a href="https://broom.tidyverse.org/" class="uri">https://broom.tidyverse.org/</a>} to \url{<a href="https://broom.tidymodels.org/" class="uri">https://broom.tidymodels.org/</a>}.</p></li>
+<li><p>The package’s site has moved from <a href="https://broom.tidyverse.org/" class="uri">https://broom.tidyverse.org/</a> to <a href="https://broom.tidymodels.org/" class="uri">https://broom.tidymodels.org/</a>.</p></li>
 <li><p>Revised several vignettes and moved them to the tidymodels.org website. The existing vignettes will now simply link to the revised versions.</p></li>
 <li><p>Many improvements to consistency and clarity of documentation.</p></li>
 <li><p>Various warnings resulting from changes to the tidyr API in v1.0.0 have been fixed. (<a href='http://github.com/tidymodels/broom/issues/870'>#870</a>)</p></li>
@@ -324,7 +325,7 @@
 <a href="#for-developers-and-contributors" class="anchor"></a>For developers and contributors</h2>
 <ul>
 <li><p>Moved core tests to the <code>modeltests</code> package.</p></li>
-<li><p>In general, after this release, the broom dev team will no longer add new tidiers to the package, in favor of adding tidier methods to the model-owning package. An article describing best practices in doing so can be found on the {tidymodels} website at \url{<a href="https://www.tidymodels.org/learn/develop/broom/" class="uri">https://www.tidymodels.org/learn/develop/broom/</a>}, and we will continue adding additional resources to that article as we develop them.</p></li>
+<li><p>In general, after this release, the broom dev team will no longer add new tidiers to the package, in favor of adding tidier methods to the model-owning package. An article describing best practices in doing so can be found on the {tidymodels} website at <a href="https://www.tidymodels.org/learn/develop/broom/" class="uri">https://www.tidymodels.org/learn/develop/broom/</a>, and we will continue adding additional resources to that article as we develop them.</p></li>
 <li><p>Added a new vignette discussing how to implement new tidier methods in non-broom packages.</p></li>
 </ul>
 </div>

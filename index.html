@@ -118,7 +118,7 @@
   <div class="contents col-md-9">
 <div id="broom-" class="section level1">
 
-<p><a href="https://cran.r-project.org/package=broom"><img src="https://www.r-pkg.org/badges/version/broom" alt="CRAN status"></a> <a href="https://github.com/tidymodels/broom/actions"><img src="https://github.com/tidymodels/broom/workflows/R-CMD-check/badge.svg" alt="R build status"></a>[<a href="https://codecov.io/gh/topepo/broom?branch=master"><img src="https://codecov.io/gh/topepo/broom/branch/master/graph/badge.svg" alt="Codecov test coverage"></a></p>
+
 <div id="overview" class="section level2">
 <h2 class="hasAnchor">
 <a href="#overview" class="anchor"></a>Overview</h2>
@@ -138,7 +138,8 @@
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
-<div class="sourceCode" id="cb1"><pre class="r"><span class="co"># we recommend installing the entire tidyverse modeling set, which includes broom:</span>
+<div class="sourceCode" id="cb1"><pre class="r"><span class="co"># we recommend installing the entire tidyverse </span>
+<span class="co"># modeling set, which includes broom:</span>
 <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">"tidymodels"</span>)
 
 <span class="co"># alternatively, to install just broom:</span>
@@ -155,45 +156,44 @@
 <p><code><a href="https://rdrr.io/pkg/generics/man/tidy.html">tidy()</a></code> produces a <code>tibble()</code> where each row contains information about an important component of the model. For regression models, this often corresponds to regression coefficients. This is can be useful if you want to inspect a model or create custom visualizations.</p>
 <div class="sourceCode" id="cb2"><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">broom</span>)
 
-<span class="no">fit</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span>(<span class="no">Sepal.Width</span> ~ <span class="no">Petal.Length</span> + <span class="no">Petal.Width</span>, <span class="no">iris</span>)
+<span class="no">fit</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span>(<span class="no">Volume</span> ~ <span class="no">Girth</span> + <span class="no">Height</span>, <span class="no">trees</span>)
 <span class="fu"><a href="https://rdrr.io/pkg/generics/man/tidy.html">tidy</a></span>(<span class="no">fit</span>)
 <span class="co">#&gt; # A tibble: 3 x 5</span>
-<span class="co">#&gt;   term         estimate std.error statistic  p.value</span>
-<span class="co">#&gt;   &lt;chr&gt;           &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;</span>
-<span class="co">#&gt; 1 (Intercept)     3.59     0.0937     38.3  2.51e-78</span>
-<span class="co">#&gt; 2 Petal.Length   -0.257    0.0669     -3.84 1.80e- 4</span>
-<span class="co">#&gt; 3 Petal.Width     0.364    0.155       2.35 2.01e- 2</span></pre></div>
+<span class="co">#&gt;   term        estimate std.error statistic  p.value</span>
+<span class="co">#&gt;   &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;</span>
+<span class="co">#&gt; 1 (Intercept)  -58.0       8.64      -6.71 2.75e- 7</span>
+<span class="co">#&gt; 2 Girth          4.71      0.264     17.8  8.22e-17</span>
+<span class="co">#&gt; 3 Height         0.339     0.130      2.61 1.45e- 2</span></pre></div>
 <p><code><a href="https://rdrr.io/pkg/generics/man/glance.html">glance()</a></code> returns a tibble with exactly one row of goodness of fitness measures and related statistics. This is useful to check for model misspecification and to compare many models.</p>
 <div class="sourceCode" id="cb3"><pre class="r"><span class="fu"><a href="https://rdrr.io/pkg/generics/man/glance.html">glance</a></span>(<span class="no">fit</span>)
-<span class="co">#&gt; # A tibble: 1 x 11</span>
-<span class="co">#&gt;   r.squared adj.r.squared sigma statistic p.value    df logLik   AIC   BIC</span>
-<span class="co">#&gt;       &lt;dbl&gt;         &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt; &lt;int&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;</span>
-<span class="co">#&gt; 1     0.213         0.202 0.389      19.9 2.24e-8     3  -69.8  148.  160.</span>
-<span class="co">#&gt; # ... with 2 more variables: deviance &lt;dbl&gt;, df.residual &lt;int&gt;</span></pre></div>
+<span class="co">#&gt; # A tibble: 1 x 12</span>
+<span class="co">#&gt;   r.squared adj.r.squared sigma statistic  p.value    df logLik   AIC   BIC</span>
+<span class="co">#&gt;       &lt;dbl&gt;         &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;</span>
+<span class="co">#&gt; 1     0.948         0.944  3.88      255. 1.07e-18     2  -84.5  177.  183.</span>
+<span class="co">#&gt; # … with 3 more variables: deviance &lt;dbl&gt;, df.residual &lt;int&gt;, nobs &lt;int&gt;</span></pre></div>
 <p><code>augment</code> adds columns to a dataset, containing information such as fitted values, residuals or cluster assignments. All columns added to a dataset have <code>.</code> prefix to prevent existing columns from being overwritten.</p>
-<div class="sourceCode" id="cb4"><pre class="r"><span class="fu"><a href="https://rdrr.io/pkg/generics/man/augment.html">augment</a></span>(<span class="no">fit</span>, <span class="kw">data</span> <span class="kw">=</span> <span class="no">iris</span>)
-<span class="co">#&gt; # A tibble: 150 x 12</span>
-<span class="co">#&gt;    Sepal.Length Sepal.Width Petal.Length Petal.Width Species .fitted .se.fit</span>
-<span class="co">#&gt;           &lt;dbl&gt;       &lt;dbl&gt;        &lt;dbl&gt;       &lt;dbl&gt; &lt;fct&gt;     &lt;dbl&gt;   &lt;dbl&gt;</span>
-<span class="co">#&gt;  1          5.1         3.5          1.4         0.2 setosa     3.30  0.0532</span>
-<span class="co">#&gt;  2          4.9         3            1.4         0.2 setosa     3.30  0.0532</span>
-<span class="co">#&gt;  3          4.7         3.2          1.3         0.2 setosa     3.33  0.0547</span>
-<span class="co">#&gt;  4          4.6         3.1          1.5         0.2 setosa     3.27  0.0526</span>
-<span class="co">#&gt;  5          5           3.6          1.4         0.2 setosa     3.30  0.0532</span>
-<span class="co">#&gt;  6          5.4         3.9          1.7         0.4 setosa     3.30  0.0497</span>
-<span class="co">#&gt;  7          4.6         3.4          1.4         0.3 setosa     3.34  0.0546</span>
-<span class="co">#&gt;  8          5           3.4          1.5         0.2 setosa     3.27  0.0526</span>
-<span class="co">#&gt;  9          4.4         2.9          1.4         0.2 setosa     3.30  0.0532</span>
-<span class="co">#&gt; 10          4.9         3.1          1.5         0.1 setosa     3.24  0.0574</span>
-<span class="co">#&gt; # ... with 140 more rows, and 5 more variables: .resid &lt;dbl&gt;, .hat &lt;dbl&gt;,</span>
-<span class="co">#&gt; #   .sigma &lt;dbl&gt;, .cooksd &lt;dbl&gt;, .std.resid &lt;dbl&gt;</span></pre></div>
+<div class="sourceCode" id="cb4"><pre class="r"><span class="fu"><a href="https://rdrr.io/pkg/generics/man/augment.html">augment</a></span>(<span class="no">fit</span>, <span class="kw">data</span> <span class="kw">=</span> <span class="no">trees</span>)
+<span class="co">#&gt; # A tibble: 31 x 9</span>
+<span class="co">#&gt;    Girth Height Volume .fitted .resid .std.resid   .hat .sigma   .cooksd</span>
+<span class="co">#&gt;    &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;      &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;     &lt;dbl&gt;</span>
+<span class="co">#&gt;  1   8.3     70   10.3    4.84 -5.46      1.50   0.116    3.79 0.0978   </span>
+<span class="co">#&gt;  2   8.6     65   10.3    4.55 -5.75      1.60   0.147    3.77 0.148    </span>
+<span class="co">#&gt;  3   8.8     63   10.2    4.82 -5.38      1.53   0.177    3.78 0.167    </span>
+<span class="co">#&gt;  4  10.5     72   16.4   15.9  -0.526     0.140  0.0592   3.95 0.000409 </span>
+<span class="co">#&gt;  5  10.7     81   18.8   19.9   1.07     -0.294  0.121    3.95 0.00394  </span>
+<span class="co">#&gt;  6  10.8     83   19.7   21.0   1.32     -0.370  0.156    3.94 0.00840  </span>
+<span class="co">#&gt;  7  11       66   15.6   16.2   0.593    -0.162  0.115    3.95 0.00114  </span>
+<span class="co">#&gt;  8  11       75   18.2   19.2   1.05     -0.277  0.0515   3.95 0.00138  </span>
+<span class="co">#&gt;  9  11.1     80   22.6   21.4  -1.19      0.321  0.0920   3.95 0.00348  </span>
+<span class="co">#&gt; 10  11.2     75   19.9   20.2   0.288    -0.0759 0.0480   3.95 0.0000968</span>
+<span class="co">#&gt; # … with 21 more rows</span></pre></div>
 <div id="contributing" class="section level3">
 <h3 class="hasAnchor">
 <a href="#contributing" class="anchor"></a>Contributing</h3>
 <p>We welcome contributions of all types!</p>
 <p>If you have never made a pull request to an R package before, <code>broom</code> is an excellent place to start. Find an <a href="https://github.com/tidymodels/broom/issues/">issue</a> with the <strong>Beginner Friendly</strong> tag and comment that you’d like to take it on and we’ll help you get started.</p>
 <p>We encourage typo corrections, bug reports, bug fixes and feature requests. Feedback on the clarity of the documentation is especially valuable.</p>
-<p>If you are interested in adding new tidiers methods to <code>broom</code>, please read <code><a href="articles/adding-tidiers.html">vignette("adding-tidiers")</a></code>.</p>
+<p>If you are interested in adding tidier methods for new model objects, please read <a href="https://www.tidymodels.org/learn/develop/broom/">this article</a> on the tidymodels website.</p>
 <p>We have a <a href="https://github.com/tidymodels/broom/blob/master/.github/CODE_OF_CONDUCT.md">Contributor Code of Conduct</a>. By participating in <code>broom</code> you agree to abide by its terms.</p>
 </div>
 </div>
@@ -236,7 +236,15 @@
 </ul>
 </div>
 
-  </div>
+  <div class="dev-status">
+<h2>Dev status</h2>
+<ul class="list-unstyled">
+<li><a href="https://cran.r-project.org/package=broom"><img src="https://www.r-pkg.org/badges/version/broom" alt="CRAN status"></a></li>
+<li><a href="https://github.com/tidymodels/broom/actions"><img src="https://github.com/tidymodels/broom/workflows/.github/workflows/R-CMD-check.yaml/badge.svg" alt="R build status"></a></li>
+<li><a href="https://codecov.io/gh/tidymodels/broom?branch=master"><img src="https://codecov.io/gh/tidymodels/broom/branch/master/graph/badge.svg" alt="Codecov test coverage"></a></li>
+</ul>
+</div>
+</div>
 </div>
 
 

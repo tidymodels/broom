@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Glance at a(n) speedlm object — glance.speedlm • broom</title>
+<title>Glance at a(n) spatialreg object — glance.sarlm • broom</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -49,7 +49,7 @@
 
 
 
-<meta property="og:title" content="Glance at a(n) speedlm object — glance.speedlm" />
+<meta property="og:title" content="Glance at a(n) spatialreg object — glance.sarlm" />
 <meta property="og:description" content="Glance accepts a model object and returns a tibble::tibble()
 with exactly one row of model summaries. The summaries are typically
 goodness of fit measures, p-values for hypothesis tests on residuals,
@@ -163,9 +163,9 @@ the measure will be reported as NA." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Glance at a(n) speedlm object</h1>
-    <small class="dont-index">Source: <a href='http://github.com/tidymodels/broom/blob/master/R/speedglm-speedlm-tidiers.R'><code>R/speedglm-speedlm-tidiers.R</code></a></small>
-    <div class="hidden name"><code>glance.speedlm.Rd</code></div>
+    <h1>Glance at a(n) spatialreg object</h1>
+    <small class="dont-index">Source: <a href='http://github.com/tidymodels/broom/blob/master/R/spdep-tidiers.R'><code>R/spdep-tidiers.R</code></a></small>
+    <div class="hidden name"><code>glance.sarlm.Rd</code></div>
     </div>
 
     <div class="ref-description">
@@ -182,7 +182,7 @@ Sometimes a goodness of fit measure will be undefined. In these cases
 the measure will be reported as <code>NA</code>.</p>
     </div>
 
-    <pre class="usage"><span class='co'># S3 method for speedlm</span>
+    <pre class="usage"><span class='co'># S3 method for sarlm</span>
 <span class='fu'><a href='https://rdrr.io/pkg/generics/man/glance.html'>glance</a></span>(<span class='no'>x</span>, <span class='no'>...</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -190,7 +190,8 @@ the measure will be reported as <code>NA</code>.</p>
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>x</th>
-      <td><p>A <code>speedlm</code> object returned from <code><a href='https://rdrr.io/pkg/speedglm/man/speedlm.html'>speedglm::speedlm()</a></code>.</p></td>
+      <td><p>An object of object returned from <code>spatialreg::lagsarlm()</code>
+or <code>spatialreg::errorsarlm()</code>.</p></td>
     </tr>
     <tr>
       <th>...</th>
@@ -208,56 +209,33 @@ the <code>data</code> argument.</p></td>
 
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='https://rdrr.io/pkg/speedglm/man/speedlm.html'>speedglm::speedlm()</a></code></p>
-<p>Other speedlm tidiers: 
-<code><a href='augment.speedlm.html'>augment.speedlm</a>()</code>,
-<code><a href='glance.speedglm.html'>glance.speedglm</a>()</code>,
-<code><a href='tidy.speedglm.html'>tidy.speedglm</a>()</code>,
-<code><a href='tidy.speedlm.html'>tidy.speedlm</a>()</code></p></div>
+    <div class='dont-index'><p><code><a href='https://rdrr.io/pkg/generics/man/glance.html'>glance()</a></code>, <code>spatialreg::lagsarlm()</code>, <code>spatialreg::errorsarlm()</code>,
+<code>spatialreg::sacsarlm()</code></p>
+<p>Other spatialreg tidiers: 
+<code><a href='augment.sarlm.html'>augment.sarlm</a>()</code>,
+<code><a href='tidy.sarlm.html'>tidy.sarlm</a>()</code></p></div>
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>A <code><a href='https://tibble.tidyverse.org/reference/tibble.html'>tibble::tibble()</a></code> with exactly one row and columns:</p>
-<dt>adj.r.squared</dt><dd><p>Adjusted R squared statistic, which is like the R squared statistic except taking degrees of freedom into account.</p></dd>
-  <dt>AIC</dt><dd><p>Akaike's Information Criterion for the model.</p></dd>
+<dt>AIC</dt><dd><p>Akaike's Information Criterion for the model.</p></dd>
   <dt>BIC</dt><dd><p>Bayesian Information Criterion for the model.</p></dd>
   <dt>deviance</dt><dd><p>Deviance of the model.</p></dd>
-  <dt>df</dt><dd><p>Degrees of freedom used by the model.</p></dd>
-  <dt>df.residual</dt><dd><p>Residual degrees of freedom.</p></dd>
   <dt>logLik</dt><dd><p>The log-likelihood of the model. [stats::logLik()] may be a useful reference.</p></dd>
   <dt>nobs</dt><dd><p>Number of observations used.</p></dd>
-  <dt>p.value</dt><dd><p>P-value corresponding to the test statistic.</p></dd>
-  <dt>r.squared</dt><dd><p>R squared statistic, or the percent of variation explained by the model. Also known as the coefficient of determination.</p></dd>
-  <dt>statistic</dt><dd><p>F-statistic.</p></dd>
 
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'>
-<span class='no'>mod</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>speedglm</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/speedglm/man/speedlm.html'>speedlm</a></span>(<span class='no'>mpg</span> ~ <span class='no'>wt</span> + <span class='no'>qsec</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>mtcars</span>, <span class='kw'>fitted</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>spatialreg</span>)</div><div class='output co'>#&gt; <span class='error'>Error in library(spatialreg): there is no package called ‘spatialreg’</span></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>oldcol</span>, <span class='kw'>package</span><span class='kw'>=</span><span class='st'>"spdep"</span>)</div><div class='output co'>#&gt; <span class='error'>Error in find.package(package, lib.loc, verbose = verbose): there is no package called ‘spdep’</span></div><div class='input'><span class='no'>listw</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>spdep</span><span class='kw ns'>::</span><span class='fu'>nb2listw</span>(<span class='no'>COL.nb</span>, <span class='kw'>style</span><span class='kw'>=</span><span class='st'>"W"</span>)</div><div class='output co'>#&gt; <span class='error'>Error in loadNamespace(name): there is no package called ‘spdep’</span></div><div class='input'>
+<span class='no'>crime_sar</span> <span class='kw'>&lt;-</span> <span class='fu'>lagsarlm</span>(<span class='no'>CRIME</span> ~ <span class='no'>INC</span> + <span class='no'>HOVAL</span>, <span class='kw'>data</span><span class='kw'>=</span><span class='no'>COL.OLD</span>,
+  <span class='kw'>listw</span><span class='kw'>=</span><span class='no'>listw</span>, <span class='kw'>method</span><span class='kw'>=</span><span class='st'>"eigen"</span>)</div><div class='output co'>#&gt; <span class='error'>Error in lagsarlm(CRIME ~ INC + HOVAL, data = COL.OLD, listw = listw,     method = "eigen"): could not find function "lagsarlm"</span></div><div class='input'>
+<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>crime_sar</span>)</div><div class='output co'>#&gt; <span class='error'>Error in tidy(crime_sar): object 'crime_sar' not found</span></div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>crime_sar</span>, <span class='kw'>conf.int</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; <span class='error'>Error in tidy(crime_sar, conf.int = TRUE): object 'crime_sar' not found</span></div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/generics/man/glance.html'>glance</a></span>(<span class='no'>crime_sar</span>)</div><div class='output co'>#&gt; <span class='error'>Error in glance(crime_sar): object 'crime_sar' not found</span></div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/generics/man/augment.html'>augment</a></span>(<span class='no'>crime_sar</span>)</div><div class='output co'>#&gt; <span class='error'>Error in augment(crime_sar): object 'crime_sar' not found</span></div><div class='input'>
+<span class='no'>crime_sem</span> <span class='kw'>&lt;-</span> <span class='fu'>errorsarlm</span>(<span class='no'>CRIME</span> ~ <span class='no'>INC</span> + <span class='no'>HOVAL</span>, <span class='kw'>data</span><span class='kw'>=</span><span class='no'>COL.OLD</span>, <span class='no'>listw</span>)</div><div class='output co'>#&gt; <span class='error'>Error in errorsarlm(CRIME ~ INC + HOVAL, data = COL.OLD, listw): could not find function "errorsarlm"</span></div><div class='input'>
+<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>crime_sem</span>)</div><div class='output co'>#&gt; <span class='error'>Error in tidy(crime_sem): object 'crime_sem' not found</span></div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>crime_sem</span>, <span class='kw'>conf.int</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; <span class='error'>Error in tidy(crime_sem, conf.int = TRUE): object 'crime_sem' not found</span></div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/generics/man/glance.html'>glance</a></span>(<span class='no'>crime_sem</span>)</div><div class='output co'>#&gt; <span class='error'>Error in glance(crime_sem): object 'crime_sem' not found</span></div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/generics/man/augment.html'>augment</a></span>(<span class='no'>crime_sem</span>)</div><div class='output co'>#&gt; <span class='error'>Error in augment(crime_sem): object 'crime_sem' not found</span></div><div class='input'>
+<span class='no'>crime_sac</span> <span class='kw'>&lt;-</span> <span class='fu'>sacsarlm</span>(<span class='no'>CRIME</span> ~ <span class='no'>INC</span> + <span class='no'>HOVAL</span>, <span class='kw'>data</span><span class='kw'>=</span><span class='no'>COL.OLD</span>, <span class='no'>listw</span>)</div><div class='output co'>#&gt; <span class='error'>Error in sacsarlm(CRIME ~ INC + HOVAL, data = COL.OLD, listw): could not find function "sacsarlm"</span></div><div class='input'>
+<span class='fu'><a href='tidy.sarlm.html'>tidy.sarlm</a></span>(<span class='no'>crime_sac</span>)</div><div class='output co'>#&gt; <span class='error'>Error in tidy.sarlm(crime_sac): could not find function "tidy.sarlm"</span></div><div class='input'><span class='fu'><a href='tidy.sarlm.html'>tidy.sarlm</a></span>(<span class='no'>crime_sac</span>, <span class='kw'>conf.int</span> <span class='kw'>=</span> <span class='no'>T</span>)</div><div class='output co'>#&gt; <span class='error'>Error in tidy.sarlm(crime_sac, conf.int = T): could not find function "tidy.sarlm"</span></div><div class='input'><span class='fu'>glance.sarlm</span>(<span class='no'>crime_sac</span>)</div><div class='output co'>#&gt; <span class='error'>Error in glance.sarlm(crime_sac): could not find function "glance.sarlm"</span></div><div class='input'><span class='fu'><a href='augment.sarlm.html'>augment.sarlm</a></span>(<span class='no'>crime_sac</span>)</div><div class='output co'>#&gt; <span class='error'>Error in augment.sarlm(crime_sac): could not find function "augment.sarlm"</span></div><div class='input'>
 
-<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>mod</span>)</div><div class='output co'>#&gt; <span class='message'>Joining, by = c("term", "estimate")</span></div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 3 x 5</span><span>
-#&gt;   term        estimate std.error statistic  p.value
-#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>          </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span> (Intercept)   19.7       5.25       3.76 7.65</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>- 4</span><span>
-#&gt; </span><span style='color: #555555;'>2</span><span> wt            -</span><span style='color: #BB0000;'>5.05</span><span>      0.484    -</span><span style='color: #BB0000;'>10.4</span><span>  2.52</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-11</span><span>
-#&gt; </span><span style='color: #555555;'>3</span><span> qsec           0.929     0.265      3.51 1.50</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>- 3</span><span></div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/generics/man/glance.html'>glance</a></span>(<span class='no'>mod</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 1 x 11</span><span>
-#&gt;   r.squared adj.r.squared statistic  p.value    df logLik   AIC   BIC deviance
-#&gt;       </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>         </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span>     0.826         0.814      69.0 9.39</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-12</span><span>     3  -</span><span style='color: #BB0000;'>74.4</span><span>  157.  163.     195.
-#&gt; </span><span style='color: #555555;'># … with 2 more variables: df.residual </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span style='color: #555555;'>, nobs </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span></div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/generics/man/augment.html'>augment</a></span>(<span class='no'>mod</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 32 x 6</span><span>
-#&gt;    .rownames           mpg    wt  qsec .fitted  .resid
-#&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>             </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #555555;'> 1</span><span> Mazda RX4          21    2.62  16.5    21.8 -</span><span style='color: #BB0000;'>0.815</span><span> 
-#&gt; </span><span style='color: #555555;'> 2</span><span> Mazda RX4 Wag      21    2.88  17.0    21.0 -</span><span style='color: #BB0000;'>0.048</span><span style='color: #BB0000;text-decoration: underline;'>2</span><span>
-#&gt; </span><span style='color: #555555;'> 3</span><span> Datsun 710         22.8  2.32  18.6    25.3 -</span><span style='color: #BB0000;'>2.53</span><span>  
-#&gt; </span><span style='color: #555555;'> 4</span><span> Hornet 4 Drive     21.4  3.22  19.4    21.6 -</span><span style='color: #BB0000;'>0.181</span><span> 
-#&gt; </span><span style='color: #555555;'> 5</span><span> Hornet Sportabout  18.7  3.44  17.0    18.2  0.504 
-#&gt; </span><span style='color: #555555;'> 6</span><span> Valiant            18.1  3.46  20.2    21.1 -</span><span style='color: #BB0000;'>2.97</span><span>  
-#&gt; </span><span style='color: #555555;'> 7</span><span> Duster 360         14.3  3.57  15.8    16.4 -</span><span style='color: #BB0000;'>2.14</span><span>  
-#&gt; </span><span style='color: #555555;'> 8</span><span> Merc 240D          24.4  3.19  20      22.2  2.17  
-#&gt; </span><span style='color: #555555;'> 9</span><span> Merc 230           22.8  3.15  22.9    25.1 -</span><span style='color: #BB0000;'>2.32</span><span>  
-#&gt; </span><span style='color: #555555;'>10</span><span> Merc 280           19.2  3.44  18.3    19.4 -</span><span style='color: #BB0000;'>0.185</span><span> 
-#&gt; </span><span style='color: #555555;'># … with 22 more rows</span><span></div></span></pre>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
