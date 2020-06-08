@@ -4,11 +4,14 @@
 \alias{augment.sarlm}
 \title{Augment data with information from a(n) spatialreg object}
 \usage{
-\method{augment}{sarlm}(x, ...)
+\method{augment}{sarlm}(x, data = x$X, ...)
 }
 \arguments{
 \item{x}{An object of object returned from \code{\link[spatialreg:lagsarlm]{spatialreg::lagsarlm()}}
 or \code{\link[spatialreg:errorsarlm]{spatialreg::errorsarlm()}}.}
+
+\item{data}{Ignored, but included for internal consistency. See the details
+below.}
 
 \item{...}{Additional arguments. Not used. Needed to match generic
 signature only. \strong{Cautionary note:} Misspelled arguments will be
@@ -87,10 +90,10 @@ augment(crime_sem)
 
 crime_sac <- sacsarlm(CRIME ~ INC + HOVAL, data=COL.OLD, listw)
 
-tidy.sarlm(crime_sac)
-tidy.sarlm(crime_sac, conf.int = T)
-glance.sarlm(crime_sac)
-augment.sarlm(crime_sac)
+tidy(crime_sac)
+tidy(crime_sac, conf.int = T)
+glance(crime_sac)
+augment(crime_sac)
 
 
 }

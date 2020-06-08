@@ -32,10 +32,10 @@
 #' 
 #' crime_sac <- sacsarlm(CRIME ~ INC + HOVAL, data=COL.OLD, listw)
 #' 
-#' tidy.sarlm(crime_sac)
-#' tidy.sarlm(crime_sac, conf.int = T)
-#' glance.sarlm(crime_sac)
-#' augment.sarlm(crime_sac)
+#' tidy(crime_sac)
+#' tidy(crime_sac, conf.int = T)
+#' glance(crime_sac)
+#' augment(crime_sac)
 #' 
 #' 
 #' @aliases spatialreg_tidiers
@@ -91,6 +91,8 @@ tidy.sarlm <- function(x, conf.int = FALSE, conf.level = .95, ...) {
 #' @evalRd return_augment(".fitted", ".resid")
 #'
 #' @inherit tidy.sarlm params examples
+#' @param data Ignored, but included for internal consistency. See the details
+#' below.
 #'
 #' @details 
 #' The predict method for sarlm objects assumes that the response is 
@@ -101,7 +103,7 @@ tidy.sarlm <- function(x, conf.int = FALSE, conf.level = .95, ...) {
 #' @export
 #' @seealso [augment()]
 #' @family spatialreg tidiers
-augment.sarlm <- function(x, ...) {
+augment.sarlm <- function(x, data = x$X, ...) {
   
   observed_name <- all.vars(x$call$formula)[1]
   

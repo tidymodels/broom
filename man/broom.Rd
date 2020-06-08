@@ -148,6 +148,7 @@ Other contributors:
   \item Josue Rodriguez \email{jerrodriguez@ucdavis.edu} [contributor]
   \item Jenny Bryan \email{jenny@rstudio.com} [contributor]
   \item Chris Jarvis \email{Christopher1.jarvis@gmail.com} [contributor]
+  \item Greg Macfarlane \email{gregmacfarlane@gmail.com} [contributor]
   \item Brian Mannakee \email{bmannakee@gmail.com} [contributor]
   \item Drew Tyre \email{atyre2@unl.edu} [contributor]
   \item Shreyas Singh \email{shreyas.singh.298@gmail.com} [contributor]
