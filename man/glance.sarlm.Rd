@@ -41,6 +41,7 @@ that no longer have a well-defined value are filled in with an \code{NA}
 of the appropriate type.
 }
 \examples{
+\dontrun{ 
 library(spatialreg)
 data(oldcol, package="spdep")
 listw <- spdep::nb2listw(COL.nb, style="W")
@@ -66,7 +67,7 @@ tidy(crime_sac)
 tidy(crime_sac, conf.int = TRUE)
 glance(crime_sac)
 augment(crime_sac)
-
+}
 
 }
 \seealso{
