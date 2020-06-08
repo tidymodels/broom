@@ -3,8 +3,12 @@
 
 # broom <img src="man/figures/logo.png" align="right" width="100" />
 
-[![CRAN status](https://www.r-pkg.org/badges/version/broom)](https://cran.r-project.org/package=broom)
-[![R build status](https://github.com/tidymodels/broom/workflows/R-CMD-check/badge.svg)](https://github.com/tidymodels/broom/actions)[[![Codecov test coverage](https://codecov.io/gh/topepo/broom/branch/master/graph/badge.svg)](https://codecov.io/gh/topepo/broom?branch=master) 
+[![CRAN
+status](https://www.r-pkg.org/badges/version/broom)](https://cran.r-project.org/package=broom)
+[![R build
+status](https://github.com/tidymodels/broom/workflows/.github/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/tidymodels/broom/actions)
+[![Codecov test
+coverage](https://codecov.io/gh/tidymodels/broom/branch/master/graph/badge.svg)](https://codecov.io/gh/tidymodels/broom?branch=master)
 
 ## Overview
 
@@ -29,7 +33,8 @@ Wickham’s [Tidy Data](http://www.jstatsoft.org/v59/i10).
 ## Installation
 
 ``` r
-# we recommend installing the entire tidyverse modeling set, which includes broom:
+# we recommend installing the entire tidyverse 
+# modeling set, which includes broom:
 install.packages("tidymodels")
 
 # alternatively, to install just broom:
@@ -53,14 +58,14 @@ want to inspect a model or create custom visualizations.
 ``` r
 library(broom)
 
-fit <- lm(Sepal.Width ~ Petal.Length + Petal.Width, iris)
+fit <- lm(Volume ~ Girth + Height, trees)
 tidy(fit)
 #> # A tibble: 3 x 5
-#>   term         estimate std.error statistic  p.value
-#>   <chr>           <dbl>     <dbl>     <dbl>    <dbl>
-#> 1 (Intercept)     3.59     0.0937     38.3  2.51e-78
-#> 2 Petal.Length   -0.257    0.0669     -3.84 1.80e- 4
-#> 3 Petal.Width     0.364    0.155       2.35 2.01e- 2
+#>   term        estimate std.error statistic  p.value
+#>   <chr>          <dbl>     <dbl>     <dbl>    <dbl>
+#> 1 (Intercept)  -58.0       8.64      -6.71 2.75e- 7
+#> 2 Girth          4.71      0.264     17.8  8.22e-17
+#> 3 Height         0.339     0.130      2.61 1.45e- 2
 ```
 
 `glance()` returns a tibble with exactly one row of goodness of fitness
@@ -69,11 +74,11 @@ misspecification and to compare many models.
 
 ``` r
 glance(fit)
-#> # A tibble: 1 x 11
-#>   r.squared adj.r.squared sigma statistic p.value    df logLik   AIC   BIC
-#>       <dbl>         <dbl> <dbl>     <dbl>   <dbl> <int>  <dbl> <dbl> <dbl>
-#> 1     0.213         0.202 0.389      19.9 2.24e-8     3  -69.8  148.  160.
-#> # ... with 2 more variables: deviance <dbl>, df.residual <int>
+#> # A tibble: 1 x 12
+#>   r.squared adj.r.squared sigma statistic  p.value    df logLik   AIC   BIC
+#>       <dbl>         <dbl> <dbl>     <dbl>    <dbl> <dbl>  <dbl> <dbl> <dbl>
+#> 1     0.948         0.944  3.88      255. 1.07e-18     2  -84.5  177.  183.
+#> # … with 3 more variables: deviance <dbl>, df.residual <int>, nobs <int>
 ```
 
 `augment` adds columns to a dataset, containing information such as
@@ -82,22 +87,21 @@ dataset have `.` prefix to prevent existing columns from being
 overwritten.
 
 ``` r
-augment(fit, data = iris)
-#> # A tibble: 150 x 12
-#>    Sepal.Length Sepal.Width Petal.Length Petal.Width Species .fitted .se.fit
-#>           <dbl>       <dbl>        <dbl>       <dbl> <fct>     <dbl>   <dbl>
-#>  1          5.1         3.5          1.4         0.2 setosa     3.30  0.0532
-#>  2          4.9         3            1.4         0.2 setosa     3.30  0.0532
-#>  3          4.7         3.2          1.3         0.2 setosa     3.33  0.0547
-#>  4          4.6         3.1          1.5         0.2 setosa     3.27  0.0526
-#>  5          5           3.6          1.4         0.2 setosa     3.30  0.0532
-#>  6          5.4         3.9          1.7         0.4 setosa     3.30  0.0497
-#>  7          4.6         3.4          1.4         0.3 setosa     3.34  0.0546
-#>  8          5           3.4          1.5         0.2 setosa     3.27  0.0526
-#>  9          4.4         2.9          1.4         0.2 setosa     3.30  0.0532
-#> 10          4.9         3.1          1.5         0.1 setosa     3.24  0.0574
-#> # ... with 140 more rows, and 5 more variables: .resid <dbl>, .hat <dbl>,
-#> #   .sigma <dbl>, .cooksd <dbl>, .std.resid <dbl>
+augment(fit, data = trees)
+#> # A tibble: 31 x 9
+#>    Girth Height Volume .fitted .resid .std.resid   .hat .sigma   .cooksd
+#>    <dbl>  <dbl>  <dbl>   <dbl>  <dbl>      <dbl>  <dbl>  <dbl>     <dbl>
+#>  1   8.3     70   10.3    4.84 -5.46      1.50   0.116    3.79 0.0978   
+#>  2   8.6     65   10.3    4.55 -5.75      1.60   0.147    3.77 0.148    
+#>  3   8.8     63   10.2    4.82 -5.38      1.53   0.177    3.78 0.167    
+#>  4  10.5     72   16.4   15.9  -0.526     0.140  0.0592   3.95 0.000409 
+#>  5  10.7     81   18.8   19.9   1.07     -0.294  0.121    3.95 0.00394  
+#>  6  10.8     83   19.7   21.0   1.32     -0.370  0.156    3.94 0.00840  
+#>  7  11       66   15.6   16.2   0.593    -0.162  0.115    3.95 0.00114  
+#>  8  11       75   18.2   19.2   1.05     -0.277  0.0515   3.95 0.00138  
+#>  9  11.1     80   22.6   21.4  -1.19      0.321  0.0920   3.95 0.00348  
+#> 10  11.2     75   19.9   20.2   0.288    -0.0759 0.0480   3.95 0.0000968
+#> # … with 21 more rows
 ```
 
 ### Contributing
@@ -114,8 +118,10 @@ We encourage typo corrections, bug reports, bug fixes and feature
 requests. Feedback on the clarity of the documentation is especially
 valuable.
 
-If you are interested in adding new tidiers methods to `broom`, please
-read `vignette("adding-tidiers")`.
+If you are interested in adding tidier methods for new model objects,
+please read [this
+article](https://www.tidymodels.org/learn/develop/broom/) on the
+tidymodels website.
 
 We have a [Contributor Code of
 Conduct](https://github.com/tidymodels/broom/blob/master/.github/CODE_OF_CONDUCT.md).
