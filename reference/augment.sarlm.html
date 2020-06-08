@@ -251,21 +251,23 @@ the <code>data</code> argument.</p></td>
 
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>When the modeling was performed with <code>na.action = "na.omit"</code>
-(as is the typical default), rows with NA in the initial data are omitted
-entirely from the augmented data frame. When the modeling was performed
-with <code>na.action = "na.exclude"</code>, one should provide the original data
-as a second argument, at which point the augmented data will contain those
-rows (typically with NAs in place of the new columns). If the original data
-is not provided to <code><a href='https://rdrr.io/pkg/generics/man/augment.html'>augment()</a></code> and <code>na.action = "na.exclude"</code>, a
-warning is raised and the incomplete rows are dropped.</p>
+    <p>The predict method for sarlm objects assumes that the response is
+known. See ?predict.sarlm for more discussion. As a result, since the
+original data can be recovered from the fit object, this method
+currently does not take in <code>data</code> or <code>newdata</code> arguments.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><a href='https://rdrr.io/r/stats/na.action.html'>na.action</a></p>
-<p><code><a href='https://rdrr.io/pkg/generics/man/augment.html'>augment()</a></code></p>
+    <div class='dont-index'><p><code><a href='https://rdrr.io/pkg/generics/man/augment.html'>augment()</a></code></p>
 <p>Other spatialreg tidiers: 
 <code><a href='glance.sarlm.html'>glance.sarlm</a>()</code>,
 <code><a href='tidy.sarlm.html'>tidy.sarlm</a>()</code></p></div>
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>A <code><a href='https://tibble.tidyverse.org/reference/tibble.html'>tibble::tibble()</a></code> with columns:</p>
+<dt>.fitted</dt><dd><p>Fitted or predicted value.</p></dd>
+  <dt>.resid</dt><dd><p>The difference between observed and fitted values.</p></dd>
+
+
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>spatialreg</span>)</div><div class='output co'>#&gt; <span class='error'>Error in library(spatialreg): there is no package called ‘spatialreg’</span></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>oldcol</span>, <span class='kw'>package</span><span class='kw'>=</span><span class='st'>"spdep"</span>)</div><div class='output co'>#&gt; <span class='error'>Error in find.package(package, lib.loc, verbose = verbose): there is no package called ‘spdep’</span></div><div class='input'><span class='no'>listw</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>spdep</span><span class='kw ns'>::</span><span class='fu'>nb2listw</span>(<span class='no'>COL.nb</span>, <span class='kw'>style</span><span class='kw'>=</span><span class='st'>"W"</span>)</div><div class='output co'>#&gt; <span class='error'>Error in loadNamespace(name): there is no package called ‘spdep’</span></div><div class='input'>
