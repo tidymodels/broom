@@ -64,7 +64,7 @@ favor of `skimr::skim()`
 We regret that we were unable to provide warnings for some of these
 changes. Affected maintainers were notified two weeks before the planned release.
 
-**Mixed models**: We have also gone forward with our planned mixed model 
+We have also gone forward with our planned mixed model 
 deprecations, and have removed the following methods, which now live 
 in `broom.mixed`:
 
@@ -116,7 +116,7 @@ The internals of `augment.*()` methods have largely been overhauled.
 ## New tidiers
 
 * `anova` objects from the `car` package (#754)
-* `pam` objects from the `cluster` package (#637 @abbylsmith)
+* `pam` objects from the `cluster` package (#637 by @abbylsmith)
 * `drm` objects from the `drc` package (#574 by @edild)
 * `summary_emm` objects from the `emmeans` package (#691 by @crsh)
 * `epi.2by2` objects from the `epiR` package (#711)
