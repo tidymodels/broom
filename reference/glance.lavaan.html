@@ -247,17 +247,15 @@ For further recommendations on reporting SEM and CFA models see Schreiber, J. B.
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
-<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>lavaan</span>)</div><div class='output co'>#&gt; <span class='error'>Error: package or namespace load failed for ‘lavaan’:</span>
-#&gt; <span class='error'> .onLoad failed in loadNamespace() for 'mnormt', details:</span>
-#&gt; <span class='error'>  call: dyn.load(file, DLLpath = DLLpath, ...)</span>
-#&gt; <span class='error'>  error: unable to load shared object '/Users/runner/runners/2.263.0/work/_temp/Library/mnormt/libs/mnormt.so':</span>
-#&gt; <span class='error'>  dlopen(/Users/runner/runners/2.263.0/work/_temp/Library/mnormt/libs/mnormt.so, 6): Library not loaded: /usr/local/gfortran/lib/libgfortran.3.dylib</span>
-#&gt; <span class='error'>  Referenced from: /Users/runner/runners/2.263.0/work/_temp/Library/mnormt/libs/mnormt.so</span>
-#&gt; <span class='error'>  Reason: image not found</span></div><div class='input'>
+<span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
+<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>lavaan</span>)
+
 <span class='no'>cfa.fit</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/lavaan/man/cfa.html'>cfa</a></span>(
   <span class='st'>"F =~ x1 + x2 + x3 + x4 + x5"</span>,
   <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>HolzingerSwineford1939</span>, <span class='kw'>group</span> <span class='kw'>=</span> <span class='st'>"school"</span>
-)</div><div class='output co'>#&gt; <span class='error'>Error in cfa("F =~ x1 + x2 + x3 + x4 + x5", data = HolzingerSwineford1939,     group = "school"): could not find function "cfa"</span></div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/generics/man/glance.html'>glance</a></span>(<span class='no'>cfa.fit</span>)</div><div class='output co'>#&gt; <span class='error'>Error in glance(cfa.fit): object 'cfa.fit' not found</span></div></pre>
+)
+<span class='fu'><a href='https://rdrr.io/pkg/generics/man/glance.html'>glance</a></span>(<span class='no'>cfa.fit</span>)
+}</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
