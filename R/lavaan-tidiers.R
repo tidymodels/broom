@@ -31,7 +31,7 @@
 #'     variances of exogenous covariates.}
 #'
 #' @examples
-#'
+#' \dontrun{
 #' library(lavaan)
 #'
 #' cfa.fit <- cfa("F =~ x1 + x2 + x3 + x4 + x5 + x6 + x7 + x8 + x9",
@@ -39,6 +39,8 @@
 #' )
 #'
 #' tidy(cfa.fit)
+#' }
+#' 
 #' @export
 #' @aliases lavaan_tidiers sem_tidiers cfa_tidiers
 #' @family lavaan tidiers
@@ -97,6 +99,7 @@ tidy.lavaan <- function(x, conf.int = FALSE, conf.level = 0.95, ...) {
 #'
 #' @examples
 #'
+#' \dontrun{
 #' library(lavaan)
 #'
 #' cfa.fit <- cfa(
@@ -104,6 +107,8 @@ tidy.lavaan <- function(x, conf.int = FALSE, conf.level = 0.95, ...) {
 #'   data = HolzingerSwineford1939, group = "school"
 #' )
 #' glance(cfa.fit)
+#' }
+#' 
 #' @export
 #' @family lavaan tidiers
 #' @seealso [glance()], [lavaan::cfa()], [lavaan::sem()],

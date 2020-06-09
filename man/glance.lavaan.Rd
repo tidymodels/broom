@@ -65,6 +65,7 @@ of the appropriate type.
 }
 \examples{
 
+\dontrun{
 library(lavaan)
 
 cfa.fit <- cfa(
@@ -72,6 +73,8 @@ cfa.fit <- cfa(
   data = HolzingerSwineford1939, group = "school"
 )
 glance(cfa.fit)
+}
+
 }
 \seealso{
 \code{\link[=glance]{glance()}}, \code{\link[lavaan:cfa]{lavaan::cfa()}}, \code{\link[lavaan:sem]{lavaan::sem()}},

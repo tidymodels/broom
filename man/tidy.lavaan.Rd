@@ -54,7 +54,7 @@ If a model has several distinct types of components, you will need to
 specify which components to return.
 }
 \examples{
-
+\dontrun{
 library(lavaan)
 
 cfa.fit <- cfa("F =~ x1 + x2 + x3 + x4 + x5 + x6 + x7 + x8 + x9",
@@ -62,6 +62,8 @@ cfa.fit <- cfa("F =~ x1 + x2 + x3 + x4 + x5 + x6 + x7 + x8 + x9",
 )
 
 tidy(cfa.fit)
+}
+
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[lavaan:cfa]{lavaan::cfa()}}, \code{\link[lavaan:sem]{lavaan::sem()}},

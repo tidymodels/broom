@@ -11,6 +11,7 @@
 #'
 #' @examples
 #'
+#' \dontrun{
 #' library(biglm)
 #'
 #' bfit <- biglm(mpg ~ wt + disp, mtcars)
@@ -30,6 +31,8 @@
 #' tidy(bgfit, conf.int = TRUE, conf.level = .9, exponentiate = TRUE)
 #'
 #' glance(bgfit)
+#' }
+#' 
 #' @export
 #' @family biglm tidiers
 #' @seealso [tidy()], [biglm::biglm()], [biglm::bigglm()]
