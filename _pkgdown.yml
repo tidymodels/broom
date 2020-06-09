@@ -28,9 +28,6 @@ reference:
 - title: Miscellaneous
   contents:
   - broom
-  - starts_with("confint")
-  - finish_glance
-  - starts_with("process")
   
 navbar:
   type: default
@@ -56,4 +53,3 @@ navbar:
   right:
   - icon: fa-github fa-lg
     href: https://github.com/tidymodels/broom
- 
