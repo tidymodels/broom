@@ -300,6 +300,7 @@
 <li>Bug fix in muhaz tidiers to ensure output is always a <code>tibble</code> (<a href='http://github.com/tidymodels/broom/issues/824'>#824</a>)</li>
 <li>Several <code>glance.*()</code> methods have been refactored in order to return a one-row tibble even when the model matrix is rank-deficient (<a href='http://github.com/tidymodels/broom/issues/823'>#823</a>)</li>
 <li>Bug fix to return confidence intervals correct in <code><a href="../reference/tidy.drc.html">tidy.drc()</a></code> (<a href='http://github.com/tidymodels/broom/issues/798'>#798</a>)</li>
+<li>Added default methods for objects that subclass <code>glm</code> and <code>lm</code> in order to error more informatively. (<a href='http://github.com/tidymodels/broom/issues/749'>#749</a>, <a href='http://github.com/tidymodels/broom/issues/736'>#736</a>, <a href='http://github.com/tidymodels/broom/issues/708'>#708</a>, <a href='http://github.com/tidymodels/broom/issues/186'>#186</a>)</li>
 <li>Bug fix to allow <code><a href="../reference/augment.kmeans.html">augment.kmeans()</a></code> to work with masked data (<a href='http://github.com/tidymodels/broom/issues/609'>#609</a>)</li>
 <li>Bug fix to allow <code><a href="../reference/augment.Mclust.html">augment.Mclust()</a></code> to work on univariate data (<a href='http://github.com/tidymodels/broom/issues/490'>#490</a>)</li>
 <li>Bug fix to allow <code><a href="../reference/tidy.htest.html">tidy.htest()</a></code> to supports equal variances (<a href='http://github.com/tidymodels/broom/issues/608'>#608</a>)</li>
