@@ -88,7 +88,8 @@ We are in the process of defining behaviors for models fit with various
 missing at this time.
 }
 \details{
-This augment method wraps \code{\link[=augment.betareg]{augment.betareg()}} for \code{\link[mfx:betamfx]{mfx::betamfx()}} objects.
+This augment method wraps \code{\link[=augment.betareg]{augment.betareg()}} for
+\code{\link[mfx:betamfx]{mfx::betamfx()}} objects.
 }
 \examples{
 \dontrun{ 

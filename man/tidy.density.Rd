@@ -21,8 +21,9 @@ the \code{data} argument.}
 }
 \value{
 A \link[tibble:tibble]{tibble::tibble} with two columns: points \code{x} where the density
-is estimated, and estimated density \code{y}. When the input to the \code{\link[stats:density]{stats::density()}}
-function is an \code{nXm} matrix, as opposed to a \verb{1Xm} vector, the input matrix is first flattened into a \verb{1X(m*n)} vector
+is estimated, and estimated density \code{y}. When the input to the
+\code{\link[stats:density]{stats::density()}} function is an \code{nXm} matrix, as opposed to
+a \verb{1Xm} vector, the input matrix is first flattened into a \verb{1X(m*n)} vector
 and then the density function is applied as usual.
 }
 \description{

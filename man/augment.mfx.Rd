@@ -59,7 +59,8 @@
 )
 }
 \arguments{
-\item{x}{A \code{logitmfx}, \code{negbinmfx}, \code{poissonmfx}, or \code{probitmfx}  object. (Note that \code{betamfx} objects receive their own set of tidiers.)}
+\item{x}{A \code{logitmfx}, \code{negbinmfx}, \code{poissonmfx}, or \code{probitmfx}  object.
+(Note that \code{betamfx} objects receive their own set of tidiers.)}
 
 \item{data}{A \code{\link[=data.frame]{data.frame()}} or \code{\link[tibble:tibble]{tibble::tibble()}} containing the original
 data that was used to produce the object \code{x}. Defaults to
@@ -159,7 +160,8 @@ glance(mod_probmfx)
 }
 }
 \seealso{
-\code{\link[=augment.glm]{augment.glm()}}, \code{\link[mfx:logitmfx]{mfx::logitmfx()}}, \code{\link[mfx:negbinmfx]{mfx::negbinmfx()}}, \code{\link[mfx:poissonmfx]{mfx::poissonmfx()}}, \code{\link[mfx:probitmfx]{mfx::probitmfx()}}
+\code{\link[=augment.glm]{augment.glm()}}, \code{\link[mfx:logitmfx]{mfx::logitmfx()}}, \code{\link[mfx:negbinmfx]{mfx::negbinmfx()}},
+\code{\link[mfx:poissonmfx]{mfx::poissonmfx()}}, \code{\link[mfx:probitmfx]{mfx::probitmfx()}}
 
 Other mfx tidiers: 
 \code{\link{augment.betamfx}()},

@@ -41,7 +41,10 @@ A one-row \link[tibble:tibble]{tibble::tibble} with columns:
 \item{estimator}{Estimator used}
 \item{missing_method}{Method for eliminating missing data}
 
-For further recommendations on reporting SEM and CFA models see Schreiber, J. B. (2017). Update to core reporting practices in structural equation modeling. Research in Social and Administrative Pharmacy, 13(3), 634-643. https://doi.org/10.1016/j.sapharm.2016.06.006
+For further recommendations on reporting SEM and CFA models see
+Schreiber, J. B. (2017). Update to core reporting practices in
+structural equation modeling. Research in Social and Administrative
+Pharmacy, 13(3), 634-643. https://doi.org/10.1016/j.sapharm.2016.06.006
 }
 \description{
 Glance accepts a model object and returns a \code{\link[tibble:tibble]{tibble::tibble()}}

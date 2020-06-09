@@ -77,7 +77,8 @@ glance(mod_probmfx)
 }
 }
 \seealso{
-\code{\link[=glance.glm]{glance.glm()}}, \code{\link[mfx:logitmfx]{mfx::logitmfx()}}, \code{\link[mfx:negbinmfx]{mfx::negbinmfx()}}, \code{\link[mfx:poissonmfx]{mfx::poissonmfx()}}, \code{\link[mfx:probitmfx]{mfx::probitmfx()}}
+\code{\link[=glance.glm]{glance.glm()}}, \code{\link[mfx:logitmfx]{mfx::logitmfx()}}, \code{\link[mfx:negbinmfx]{mfx::negbinmfx()}},
+\code{\link[mfx:poissonmfx]{mfx::poissonmfx()}}, \code{\link[mfx:probitmfx]{mfx::probitmfx()}}
 
 Other mfx tidiers: 
 \code{\link{augment.betamfx}()},
