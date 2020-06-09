@@ -678,6 +678,7 @@ Collate:
     'robust-lmrob-tidiers.R'
     'robustbase-glmrob-tidiers.R'
     'robustbase-lmrob-tidiers.R'
+    'scam-tidiers.R'
     'sp-tidiers.R'
     'spdep-tidiers.R'
     'speedglm-speedglm-tidiers.R'

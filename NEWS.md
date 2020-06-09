@@ -196,6 +196,8 @@ fitting (#842, #728)
 - Several `glance.*()` methods have been refactored in order to return 
 a one-row tibble even when the model matrix is rank-deficient (#823)
 - Bug fix to return confidence intervals correct in `tidy.drc()` (#798)
+- Added default methods for objects that subclass `glm` and `lm` in order to
+error more informatively. (#749, #736, #708, #186)
 - Bug fix to allow `augment.kmeans()` to work with masked data (#609)
 - Bug fix to allow `augment.Mclust()` to work on univariate data (#490)
 - Bug fix to allow `tidy.htest()` to supports equal variances (#608)
