@@ -58,13 +58,10 @@ tidy.boot <- function(x,
   # and standard error are calculated
   boot.out <- x
   index <- 1:ncol(boot.out$t)
-  sim <- boot.out$sim
-  cl <- boot.out$call
   t <- matrix(boot.out$t[, index], nrow = nrow(boot.out$t))
   allNA <- apply(t, 2L, function(t) all(is.na(t)))
   index <- index[!allNA]
   t <- matrix(t[, !allNA], nrow = nrow(t))
-  rn <- paste("t", index, "*", sep = "")
 
   if (is.null(t0 <- boot.out$t0)) {
     if (is.null(boot.out$call$weights)) {

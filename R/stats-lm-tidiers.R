@@ -121,8 +121,7 @@ augment.lm <- function(x, data = model.frame(x), newdata = NULL,
   df <- augment_newdata(x, data, newdata, se_fit)
 
   if (is.null(newdata)) {
-    tryCatch(
-      {
+    tryCatch({
         infl <- influence(x, do.coef = FALSE)
         df$.std.resid <- rstandard(x, infl = infl) %>% unname()
         df <- add_hat_sigma_cols(df, x, infl)
@@ -147,7 +146,10 @@ augment.lm <- function(x, data = model.frame(x), newdata = NULL,
 #'   "sigma",
 #'   "statistic",
 #'   "p.value",
-#'   df = "The degrees for freedom from the numerator of the overall F-statistic. This is new in broom 0.7.0. Previously, this reported the rank of the design matrix, which is one more than the numerator degrees of freedom of the overall F-statistic.",
+#'   df = "The degrees for freedom from the numerator of the overall 
+#'     F-statistic. This is new in broom 0.7.0. Previously, this reported 
+#'     the rank of the design matrix, which is one more than the numerator 
+#'     degrees of freedom of the overall F-statistic.",
 #'   "logLik",
 #'   "AIC",
 #'   "BIC",

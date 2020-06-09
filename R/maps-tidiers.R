@@ -8,7 +8,8 @@
 #'   "term",
 #'   long = "Longitude.",
 #'   lat = "Latitude.",
-#'   .post = "Remaining columns give information on geographic attributes and depend on the inputted map object. See ?maps::map for more information."
+#'   .post = "Remaining columns give information on geographic attributes 
+#'     and depend on the inputted map object. See ?maps::map for more information."
 #' )
 #'
 #' @examples

@@ -25,9 +25,10 @@ tidy.ftable <- function(x, ...) {
 #' @template param_unused_dots
 #'
 #' @return A [tibble::tibble] with two columns: points `x` where the density
-#'   is estimated, and estimated density `y`. When the input to the [stats::density()]
-#' function is an `nXm` matrix, as opposed to a `1Xm` vector, the input matrix is first flattened into a `1X(m*n)` vector
-#' and then the density function is applied as usual.
+#'   is estimated, and estimated density `y`. When the input to the 
+#'   [stats::density()] function is an `nXm` matrix, as opposed to 
+#'   a `1Xm` vector, the input matrix is first flattened into a `1X(m*n)` vector
+#'   and then the density function is applied as usual.
 
 #' @export
 #' @seealso [tidy()], [stats::density()]

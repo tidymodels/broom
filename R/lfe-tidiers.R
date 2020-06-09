@@ -76,7 +76,8 @@ tidy.felm <- function(x, conf.int = FALSE, conf.level = .95, fe = FALSE, robust 
     nn <- c("estimate", "std.error", "N", "comp")
     ret_fe_prep <- lfe::getfe(x, se = TRUE, bN = 100) %>%
       tibble::rownames_to_column(var = "term") %>%
-      select(term, contains("effect"), contains("se"), obs, comp) %>% # effect and se are multiple if multiple y
+      # effect and se are multiple if multiple y
+      select(term, contains("effect"), contains("se"), obs, comp) %>%
       rename(N = obs)
 
     if (has_multi_response) {

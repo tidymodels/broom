@@ -126,7 +126,11 @@ test_that("tidy.ref.grid consistency with tidy.glht", {
 test_that("tidy.emmGrid for combined contrasts", {
   noise.lm <- lm(noise ~ size * type * side, data = auto.noise)
   noise.emm <- emmeans(noise.lm, ~ size * side * type)
-  noise_c.s <- contrast(noise.emm, method = "consec", simple = "each", combine = TRUE, adjust = "mvt")
+  noise_c.s <- contrast(noise.emm,
+                        method = "consec", 
+                        simple = "each", 
+                        combine = TRUE, 
+                        adjust = "mvt")
   td_noise <- tidy(noise_c.s)
 
   # strict = FALSE needed becasue of factor names and "null.value" column

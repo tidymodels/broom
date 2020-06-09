@@ -191,7 +191,6 @@ tidy_emmeans_summary <- function(x, null.value = NULL, term_names = NULL) {
     "df1" = "num.df",
     "df2" = "den.df",
     "model term" = "term"
-    # "contrast" = "lhs"
   )
 
   mc_adjusted <- any(
@@ -233,7 +232,9 @@ tidy_emmeans_summary <- function(x, null.value = NULL, term_names = NULL) {
       term <- apply(ret, 1, function(x) colnames(ret)[which(x == ".")])
     }
 
-    ret <- bind_cols(ret[, colnames(ret) %in% term_names, drop = FALSE], term = term, ret[, !colnames(ret) %in% term_names, drop = FALSE])
+    ret <- bind_cols(ret[, colnames(ret) %in% term_names, drop = FALSE], 
+                     term = term, 
+                     ret[, !colnames(ret) %in% term_names, drop = FALSE])
   }
 
   as_tibble(ret) %>%

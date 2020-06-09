@@ -6,10 +6,18 @@
 #'    default is `moa` (measures of association)
 #' @template param_unused_dots
 #'
-#' @evalRd return_tidy("term", estimate = "Estimated measure of association", "conf.low", "conf.high", "statistic", "df", "p.value")
+#' @evalRd return_tidy(
+#'   "term", 
+#'   estimate = "Estimated measure of association", 
+#'   "conf.low", 
+#'   "conf.high", 
+#'   "statistic", 
+#'   "df", 
+#'   "p.value"
+#' )
 #'
-#' @details The tibble has a column for each of the measures of association or tests contained in `massoc` when
-#'    [epiR::epi.2by2()] is called.
+#' @details The tibble has a column for each of the measures of association 
+#'   or tests contained in `massoc` when [epiR::epi.2by2()] is called.
 #'
 #' @examples
 #' library(epiR)

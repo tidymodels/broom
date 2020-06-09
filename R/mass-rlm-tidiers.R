@@ -86,8 +86,7 @@ augment.rlm <- function(x, data = model.frame(x), newdata = NULL,
   df <- augment_newdata(x, data, newdata, se_fit)
 
   if (is.null(newdata)) {
-    tryCatch(
-      {
+    tryCatch({
         infl <- influence(x, do.coef = FALSE)
         df <- add_hat_sigma_cols(df, x, infl)
       },

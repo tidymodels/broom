@@ -44,10 +44,9 @@ tidy.plm <- function(x, conf.int = FALSE, conf.level = 0.95, ...) {
 
 # summary(plm) creates an object with class
 #
-#   c("summary.plm", "plm", "panelmodel")
+# "summary.plm" "plm" "panelmodel"
 #
 # and we want to avoid these because they *aren't* plm objects
-# *SCREAMS INTO VOID*
 
 #' @export
 tidy.summary.plm <- tidy.default

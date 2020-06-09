@@ -31,7 +31,7 @@ test_that("fixest tidier arguments", {
 test_that("tidy.fixest", {
   td <- tidy(fit)
   td2 <- tidy(fit2, conf.int = TRUE)
-  td3 <- tidy(fit2, conf.int = TRUE, se="white")
+  td3 <- tidy(fit2, conf.int = TRUE, se = "white")
   td4 <- tidy(fit_form)
 
   check_tidy_output(td)
@@ -79,11 +79,11 @@ test_that("augment.fixest", {
 
 test_that("all other fixest estimators run", {
   form <- v2 ~ v4 | id
-  res_feglm    <- fixest::feglm(form,    data=df)
-  res_fenegbin <- fixest::fenegbin(form, data=df)
-  res_feNmlm   <- fixest::feNmlm(form,   data=df)
-  res_femlm    <- fixest::femlm(form,    data=df)
-  res_fepois   <- fixest::fepois(form,   data=df)
+  res_feglm    <- fixest::feglm(form,    data = df)
+  res_fenegbin <- fixest::fenegbin(form, data = df)
+  res_feNmlm   <- fixest::feNmlm(form,   data = df)
+  res_femlm    <- fixest::femlm(form,    data = df)
+  res_fepois   <- fixest::fepois(form,   data = df)
 
   # Tidy
   check_tidy_output(tidy(res_feglm))
@@ -130,23 +130,23 @@ test_that("all other fixest estimators run", {
 test_that("tidiers work with model results or summary of model results", {
   # Default standard errors are clustered by `id`. Test against non-default
   # independent, heteroskedastic (aka White) standard errors.
-  fit2_summ <- summary(fit2, se="white")
-  expect_equal(tidy(fit2, se="white"), tidy(fit2_summ))
+  fit2_summ <- summary(fit2, se = "white")
+  expect_equal(tidy(fit2, se = "white"), tidy(fit2_summ))
   expect_equal(
-    tidy(fit2, se="white", conf.int = TRUE),
+    tidy(fit2, se = "white", conf.int = TRUE),
     tidy(fit2_summ, conf.int = TRUE)
   )
-  expect_equal(glance(fit2, se="white"), glance(fit2_summ))
-  expect_equal(augment(fit2, df, se="white"), augment(fit2_summ, df))
+  expect_equal(glance(fit2, se = "white"), glance(fit2_summ))
+  expect_equal(augment(fit2, df, se = "white"), augment(fit2_summ, df))
 
   # Repeat for feglm
-  res_glm <- fixest::feglm(v2 ~ v4 | id, data=df)
-  res_glm_summ <- summary(fixest::feglm(v2 ~ v4 | id, data=df), se="white")
-  expect_equal(tidy(res_glm, se="white"), tidy(res_glm_summ))
+  res_glm <- fixest::feglm(v2 ~ v4 | id, data = df)
+  res_glm_summ <- summary(fixest::feglm(v2 ~ v4 | id, data = df), se = "white")
+  expect_equal(tidy(res_glm, se = "white"), tidy(res_glm_summ))
   expect_equal(
-    as.data.frame(tidy(res_glm, se="white", conf.int = TRUE)),
+    as.data.frame(tidy(res_glm, se = "white", conf.int = TRUE)),
     as.data.frame(tidy(res_glm_summ, conf.int = TRUE))
   )
-  expect_equal(glance(res_glm, se="white"), glance(res_glm_summ))
-  expect_equal(augment(res_glm, df, se="white"), augment(res_glm_summ, df))
+  expect_equal(glance(res_glm, se = "white"), glance(res_glm_summ))
+  expect_equal(augment(res_glm, df, se = "white"), augment(res_glm_summ, df))
 })

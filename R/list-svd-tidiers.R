@@ -48,7 +48,10 @@ tidy_svd <- function(x, matrix = "u", ...) {
         names_to = "PC",
         values_to = "value"
       ) %>%
-      dplyr::mutate(PC = stringr::str_remove(PC, "...") %>% as.numeric()) %>%
+      dplyr::mutate(
+        PC = stringr::str_remove(PC, "...") %>% 
+          as.numeric()
+      ) %>%
       arrange(PC, row) %>%
       as.data.frame()
   } else if (matrix == "d") {
@@ -66,7 +69,10 @@ tidy_svd <- function(x, matrix = "u", ...) {
         names_to = "PC",
         values_to = "value"
       ) %>%
-      dplyr::mutate(PC = stringr::str_remove(PC, "...") %>% as.numeric()) %>%
+      dplyr::mutate(
+        PC = stringr::str_remove(PC, "...") %>% 
+          as.numeric()
+      ) %>%
       arrange(PC, column) %>%
       as.data.frame()
   }

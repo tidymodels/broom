@@ -7,7 +7,9 @@
 #'
 #' @evalRd return_tidy(regression = TRUE)
 #'
-#' @details The tibble has four rows. The first two indicate the mediated effect in the control and treatment group, respectively. And the last two the direct effect in each group.
+#' @details The tibble has four rows. The first two indicate the mediated 
+#'   effect in the control and treatment group, respectively. And the last 
+#'   two the direct effect in each group.
 #' @importFrom stats pnorm quantile
 #' @examples
 #' library(mediation)
@@ -25,7 +27,8 @@
 #' @family mediate tidiers
 #' @aliases mediate_tidiers
 tidy.mediate <- function(x, conf.int = FALSE, conf.level = .95, ...) {
-  d0 <- d1 <- z0 <- z1 <- d0.sims <- d1.sims <- z0.sims <- z1.sims <- d0.p <- d1.p <- z0.p <- z1.p <- NULL
+  d0 <- d1 <- z0 <- z1 <- d0.sims <- d1.sims <- z0.sims <- NULL
+  z1.sims <- d0.p <- d1.p <- z0.p <- z1.p <- NULL
   s <- base::summary(x)
   nn <- c("term", "estimate", "std.error", "p.value", "conf.low", "conf.high")
   sims <- s$sims

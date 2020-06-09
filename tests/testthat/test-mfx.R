@@ -8,23 +8,23 @@ library(mfx)
 
 ## simulate data
 set.seed(12345)
-n = 1000
-x = rnorm(n)
+n <- 1000
+x <- rnorm(n)
 ## beta outcome
-y_beta = rbeta(n, shape1 = plogis(1 + 0.5 * x), shape2 = (abs(0.2*x)))
-y_beta = (y_beta*(n-1)+0.5)/n ## Smithson and Verkuilen correction
+y_beta <- rbeta(n, shape1 = plogis(1 + 0.5 * x), shape2 = (abs(0.2 * x)))
+y_beta <- (y_beta * (n - 1) + 0.5) / n ## Smithson and Verkuilen correction
 ## binary outcome (logit and probit)
-y_bin = ifelse(pnorm(1 + 0.5*x + rnorm(n))>0.5, 1, 0)
+y_bin <- ifelse(pnorm(1 + 0.5 * x + rnorm(n)) > 0.5, 1, 0)
 ## negative binomial outcome (negative binomial and poisson)
-y_negbin = rnegbin(n, mu = exp(1 + 0.5 * x), theta = 0.5)
-df = data.frame(y_beta, y_bin, y_negbin, x)
+y_negbin <- rnegbin(n, mu = exp(1 + 0.5 * x), theta = 0.5)
+df <- data.frame(y_beta, y_bin, y_negbin, x)
 
 ## fit the different models
-fit_betamfx <- betamfx(y_beta~x|x, data=df)
-fit_logitmfx <- logitmfx(y_bin~x, data=df)
-fit_negbinmfx <- negbinmfx(y_negbin~x, data=df)
-fit_poissonmfx <- poissonmfx(y_negbin~x,data=df)
-fit_probitmfx <- logitmfx(y_bin~x, data=df)
+fit_betamfx <- betamfx(y_beta ~ x | x, data = df)
+fit_logitmfx <- logitmfx(y_bin ~ x, data = df)
+fit_negbinmfx <- negbinmfx(y_negbin ~ x, data = df)
+fit_poissonmfx <- poissonmfx(y_negbin ~ x,data = df)
+fit_probitmfx <- logitmfx(y_bin ~ x, data = df)
 
 
 ## Now run the tests

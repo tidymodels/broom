@@ -9,8 +9,8 @@ library(spdep)
 skip_if_not_installed("spatialreg")
 library(spatialreg)
 
-data(oldcol, package="spdep")
-listw <- spdep::nb2listw(COL.nb, style="W")
+data(oldcol, package = "spdep")
+listw <- spdep::nb2listw(COL.nb, style = "W")
 
 fit_lag <- lagsarlm(CRIME ~ INC + HOVAL, 
                     data = COL.OLD,  
@@ -68,4 +68,3 @@ test_that("augment.sarlm", {
     strict = FALSE
   )
 })
-

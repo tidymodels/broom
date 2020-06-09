@@ -6,7 +6,8 @@ library(MASS)
 
 data(OME)
 
-capture.output( # hack to prevent C level printing that can't be turned off
+capture.output( 
+  # hack to prevent C level printing that can't be turned off
   mod <- gee(
     cbind(Correct, Trials - Correct) ~ Loud + Age + OME,
     id = ID,

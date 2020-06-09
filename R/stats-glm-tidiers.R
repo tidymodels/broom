@@ -86,8 +86,7 @@ augment.glm <- function(x,
   }
 
   if (is.null(newdata)) {
-    tryCatch(
-      {
+    tryCatch({
         infl <- influence(x, do.coef = FALSE)
         df$.resid <- residuals(x, type = type.residuals) %>% unname()
         df$.std.resid <- rstandard(x, infl = infl, type = type.residuals) %>% 
@@ -129,7 +128,6 @@ augment.glm <- function(x,
 #' @family lm tidiers
 #' @seealso [stats::glm()]
 glance.glm <- function(x, ...) {
-  s <- summary(x)
   as_glance_tibble(
     null.deviance = x$null.deviance,
     df.null = x$df.null,

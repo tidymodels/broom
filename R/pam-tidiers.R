@@ -8,8 +8,10 @@
 #'
 #' @evalRd return_tidy(
 #'   size = "Size of each cluster.",
-#'   max.diss = "Maximal dissimilarity between the observations in the cluster and that cluster's medoid.",
-#'   avg.diss = "Average dissimilarity between the observations in the cluster and that cluster's medoid.",
+#'   max.diss = "Maximal dissimilarity between the observations in the 
+#'     cluster and that cluster's medoid.",
+#'   avg.diss = "Average dissimilarity between the observations in the 
+#'     cluster and that cluster's medoid.",
 #'   diameter = "Diameter of the cluster.",
 #'   separation = "Separation of the cluster.",
 #'   avg.width = "Average silhouette width of the cluster.",

@@ -74,8 +74,10 @@ tidy.mfx <-
       x_tidy <-
         x_tidy %>%
         dplyr::mutate(
-          conf.low = estimate - qt(1-(1-conf.level)/2, df=x$fit$df.residual)*std.error,
-          conf.high = estimate + qt(1-(1-conf.level)/2, df=x$fit$df.residual)*std.error
+          conf.low = estimate - qt(1 - (1 - conf.level) / 2, 
+                                   df = x$fit$df.residual) * std.error,
+          conf.high = estimate + qt(1 - (1 - conf.level) / 2, 
+                                    df = x$fit$df.residual) * std.error
         )
     }
     
@@ -98,7 +100,8 @@ tidy.probitmfx <- tidy.mfx
 #' @templateVar class mfx
 #' @template title_desc_augment
 #' @inherit tidy.mfx examples
-#' @param x A `logitmfx`, `negbinmfx`, `poissonmfx`, or `probitmfx`  object. (Note that `betamfx` objects receive their own set of tidiers.)
+#' @param x A `logitmfx`, `negbinmfx`, `poissonmfx`, or `probitmfx`  object. 
+#'   (Note that `betamfx` objects receive their own set of tidiers.)
 #' @template param_data
 #' @template param_newdata
 #' @param type.predict Passed to [stats::predict.glm()] `type` argument. 
@@ -117,7 +120,8 @@ tidy.probitmfx <- tidy.mfx
 #' @details This generic augment method wraps [augment.glm()] for applicable
 #'   objects from the `mfx` package.
 #' @family mfx tidiers
-#' @seealso [augment.glm()], [mfx::logitmfx()], [mfx::negbinmfx()], [mfx::poissonmfx()], [mfx::probitmfx()]
+#' @seealso [augment.glm()], [mfx::logitmfx()], [mfx::negbinmfx()], 
+#'   [mfx::poissonmfx()], [mfx::probitmfx()]
 #' @export
 augment.mfx <- function(x, 
                         data = model.frame(x$fit),
@@ -165,7 +169,8 @@ augment.probitmfx <- augment.mfx
 #' @details This generic glance method wraps [glance.glm()] for applicable 
 #'   objects from the `mfx` package.   
 #' @family mfx tidiers
-#' @seealso [glance.glm()], [mfx::logitmfx()], [mfx::negbinmfx()], [mfx::poissonmfx()], [mfx::probitmfx()]
+#' @seealso [glance.glm()], [mfx::logitmfx()], [mfx::negbinmfx()], 
+#'   [mfx::poissonmfx()], [mfx::probitmfx()]
 #' @export
 glance.mfx <- function(x, ...) {
   ## Use glance.glm() method on internal fit object
@@ -194,7 +199,9 @@ glance.probitmfx <- glance.mfx
 #' @template param_unused_dots
 #' @evalRd return_tidy(
 #'   "term",
-#'   atmean = "TRUE if the marginal effects were originally calculated as the partial effects for the average observation. If FALSE, then these were instead calculated as average partial effects.",
+#'   atmean = "TRUE if the marginal effects were originally calculated as the 
+#'     partial effects for the average observation. If FALSE, then these were 
+#'     instead calculated as average partial effects.",
 #'   "estimate",
 #'   "std.error",
 #'   "statistic",
@@ -247,7 +254,8 @@ tidy.betamfx <- tidy.mfx
 #'  `"sweighted2`.
 #' @template param_unused_dots
 #' @evalRd return_augment(".cooksd")
-#' @details This augment method wraps [augment.betareg()] for [mfx::betamfx()] objects.
+#' @details This augment method wraps [augment.betareg()] for 
+#'   [mfx::betamfx()] objects.
 #' @family mfx tidiers
 #' @seealso [augment.betareg()], [mfx::betamfx()]
 #' @export

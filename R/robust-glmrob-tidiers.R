@@ -64,7 +64,6 @@ augment.glmRob <- function(x, ...) {
 #' @seealso [robust::glmRob()]
 #'
 glance.glmRob <- function(x, ...) {
-  s <- summary(x)
   
   as_glance_tibble(
     deviance = x$deviance,
