@@ -43,11 +43,8 @@ tidy.survreg <- function(x, conf.level = .95, conf.int = FALSE, ...) {
   ret <- as_tidy_tibble(s, new_names = nn)
   
   if (conf.int) {
-    # add confidence interval
-    ci <- stats::confint(x, level = conf.level)
-    colnames(ci) <- c("conf.low", "conf.high")
-    ci <- as_tidy_tibble(ci)
-    ret <- as_tibble(merge(ret, ci, all.x = TRUE, sort = FALSE))
+    ci <- broom_confint_terms(x, level = conf.level)
+    ret <- dplyr::left_join(ret, ci, by = "term")
   }
 
   ret

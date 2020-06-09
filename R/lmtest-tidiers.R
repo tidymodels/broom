@@ -31,9 +31,8 @@ tidy.coeftest <- function(x, conf.int = FALSE, conf.level = .95, ...) {
       warning("Needs lmtest version >=0.9.37 for conf.int = TRUE")
       return(ret)
     }
-    CI <- as.data.frame(confint(x, level = conf.level))
-    colnames(CI) <- c("conf.low", "conf.high")
-    ret <- bind_cols(ret, CI)
+    ci <- broom_confint_terms(x, level = conf.level)
+    ret <- dplyr::left_join(ret, ci, by = "term")
   }
   ret
 }

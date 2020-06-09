@@ -52,7 +52,9 @@ tidy.gam <- function(x, parametric = FALSE, conf.int = FALSE,
     if (conf.int) {
       # avoid "Waiting for profiling to be done..." message
       # This message doesn't seem to happen with confint.default
-      CI <- suppressMessages(stats::confint.default(x, level = conf.level)[rownames(px), , drop = FALSE])
+      CI <- suppressMessages(
+        stats::confint.default(x, level = conf.level)[rownames(px), , drop = FALSE]
+      )
       # Think about rank deficiency
       colnames(CI) <- c("conf.low", "conf.high")
       ret <- cbind(ret, unrowname(CI))

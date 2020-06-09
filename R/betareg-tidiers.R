@@ -43,9 +43,8 @@ tidy.betareg <- function(x, conf.int = FALSE, conf.level = .95, ...) {
   )
 
   if (conf.int) {
-    conf <- unrowname(confint(x, level = conf.level))
-    colnames(conf) <- c("conf.low", "conf.high")
-    ret <- cbind(ret, conf)
+    ci <- broom_confint_terms(x, level = conf.level)
+    ret <- dplyr::left_join(ret, ci, by = "term")
   }
 
   as_tibble(ret)

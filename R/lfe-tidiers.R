@@ -66,10 +66,8 @@ tidy.felm <- function(x, conf.int = FALSE, conf.level = .95, fe = FALSE, robust 
 
 
   if (conf.int) {
-    # avoid "Waiting for profiling to be done..." message
-    CI <- suppressMessages(stats::confint(x, level = conf.level))
-    colnames(CI) <- c("conf.low", "conf.high")
-    ret <- cbind(ret, unrowname(CI))
+    ci <- broom_confint_terms(x, level = conf.level)
+    ret <- dplyr::left_join(ret, ci, by = "term")
   }
 
   if (fe) {
