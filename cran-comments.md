@@ -1,5 +1,9 @@
 # Release summary
 
+This is a resubmission following an automated pretest failure. The failure
+was due to breaking changes in the `residuals.fixest()` S3 method from
+the `fixest` package, a new version of which was released on CRAN earlier today.
+
 broom 0.7.0 is a major release featuring a number of new S3 methods,
 bug fixes, and improvements to internal consistency and performance.
 This release also carries out a planned deprecation of a number of

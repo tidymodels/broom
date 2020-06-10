@@ -4,7 +4,7 @@
 \alias{augment.fixest}
 \title{Augment data with information from a(n) fixest object}
 \usage{
-\method{augment}{fixest}(x, data = NULL, newdata = NULL, type.predict = "link", ...)
+\method{augment}{fixest}(x, data = NULL, newdata = NULL, type.predict = "response", ...)
 }
 \arguments{
 \item{x}{A \code{fixest} object returned from any of the \code{fixest} estimators}
