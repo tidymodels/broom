@@ -35,7 +35,10 @@ that no longer have a well-defined value are filled in with an \code{NA}
 of the appropriate type.
 }
 \note{
-The columns of the result depend on the type of model estimated.
+All columns listed below will be returned, but some will be \code{NA},
+depending on the type of model estimated. \code{sigma}, \code{r.squared},
+\code{adj.r.squared}, and \code{within.r.squared} will be NA for any model other than
+\code{feols}. \code{pseudo.r.squared} will be NA for \code{feols}.
 }
 \examples{
 \donttest{
