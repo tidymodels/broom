@@ -90,7 +90,7 @@ missing at this time.
 }
 \details{
 For additional details on Cook's distance, see
-\code{\link[stats:cooks.distance]{stats::cooks.distance()}}.
+\code{\link[stats:influence.measures]{stats::cooks.distance()}}.
 }
 \examples{
 

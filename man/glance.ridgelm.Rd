@@ -68,7 +68,7 @@ ggplot(td2, aes(lambda, GCV)) +
   geom_vline(xintercept = g2$lambdaGCV, col = "red", lty = 2)
 }
 \seealso{
-\code{\link[=glance]{glance()}}, \code{\link[MASS:select.ridgelm]{MASS::select.ridgelm()}}, \code{\link[MASS:lm.ridge]{MASS::lm.ridge()}}
+\code{\link[=glance]{glance()}}, \code{\link[MASS:lm.ridge]{MASS::select.ridgelm()}}, \code{\link[MASS:lm.ridge]{MASS::lm.ridge()}}
 
 Other ridgelm tidiers: 
 \code{\link{tidy.ridgelm}()}

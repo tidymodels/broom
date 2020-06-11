@@ -8,8 +8,8 @@
 \method{tidy}{sarlm}(x, conf.int = FALSE, conf.level = 0.95, ...)
 }
 \arguments{
-\item{x}{An object of object returned from \code{\link[spatialreg:lagsarlm]{spatialreg::lagsarlm()}}
-or \code{\link[spatialreg:errorsarlm]{spatialreg::errorsarlm()}}.}
+\item{x}{An object of object returned from \code{\link[spatialreg:ML_models]{spatialreg::lagsarlm()}}
+or \code{\link[spatialreg:ML_models]{spatialreg::errorsarlm()}}.}
 
 \item{conf.int}{Logical indicating whether or not to include a confidence
 interval in the tidied output. Defaults to \code{FALSE}.}
@@ -63,8 +63,8 @@ augment(crime_sac)
 
 }
 \seealso{
-\code{\link[=tidy]{tidy()}}, \code{\link[spatialreg:lagsarlm]{spatialreg::lagsarlm()}}, \code{\link[spatialreg:errorsarlm]{spatialreg::errorsarlm()}},
-\code{\link[spatialreg:sacsarlm]{spatialreg::sacsarlm()}}
+\code{\link[=tidy]{tidy()}}, \code{\link[spatialreg:ML_models]{spatialreg::lagsarlm()}}, \code{\link[spatialreg:ML_models]{spatialreg::errorsarlm()}},
+\code{\link[spatialreg:ML_models]{spatialreg::sacsarlm()}}
 
 Other spatialreg tidiers: 
 \code{\link{augment.sarlm}()},

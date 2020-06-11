@@ -75,7 +75,7 @@ data, so you must provide it manually.
 
 augment.fixest only works for \code{\link[fixest:feols]{fixest::feols()}}, \code{\link[fixest:feglm]{fixest::feglm()}}, and
 \code{\link[fixest:femlm]{fixest::femlm()}} models. It does not work with results from
-\code{\link[fixest:fenegbin]{fixest::fenegbin()}}, \code{\link[fixest:feNmlm]{fixest::feNmlm()}}, or \code{\link[fixest:fepois]{fixest::fepois()}}.
+\code{\link[fixest:femlm]{fixest::fenegbin()}}, \code{\link[fixest:feNmlm]{fixest::feNmlm()}}, or \code{\link[fixest:feglm]{fixest::fepois()}}.
 }
 \examples{
 \donttest{

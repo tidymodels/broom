@@ -29,7 +29,7 @@ that nothing has been passed to \code{newdata}. If \code{newdata} is specified,
 the \code{data} argument will be ignored.}
 
 \item{type.predict}{Which type of prediction to compute, either \code{"prob"}
-or \code{"class"}, passed to \code{\link[ordinal:predict.clm]{ordinal::predict.clm()}}. Defaults to \code{"prob"}.}
+or \code{"class"}, passed to \code{\link[ordinal:predict]{ordinal::predict.clm()}}. Defaults to \code{"prob"}.}
 
 \item{...}{Additional arguments. Not used. Needed to match generic
 signature only. \strong{Cautionary note:} Misspelled arguments will be
@@ -99,7 +99,7 @@ tidy(fit2)
 glance(fit2)
 }
 \seealso{
-\link{tidy}, \code{\link[ordinal:clm]{ordinal::clm()}}, \code{\link[ordinal:predict.clm]{ordinal::predict.clm()}}
+\link{tidy}, \code{\link[ordinal:clm]{ordinal::clm()}}, \code{\link[ordinal:predict]{ordinal::predict.clm()}}
 
 Other ordinal tidiers: 
 \code{\link{augment.polr}()},

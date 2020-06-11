@@ -78,8 +78,8 @@ the \code{data} argument will be ignored.}
 \item{type.predict}{Passed to \code{\link[stats:predict.glm]{stats::predict.glm()}} \code{type} argument.
 Defaults to \code{"link"}.}
 
-\item{type.residuals}{Passed to \code{\link[stats:residuals.glm]{stats::residuals.glm()}} and
-to \code{\link[stats:rstandard.glm]{stats::rstandard.glm()}} \code{type} arguments. Defaults to \code{"deviance"}.}
+\item{type.residuals}{Passed to \code{\link[stats:glm.summaries]{stats::residuals.glm()}} and
+to \code{\link[stats:influence.measures]{stats::rstandard.glm()}} \code{type} arguments. Defaults to \code{"deviance"}.}
 
 \item{se_fit}{Logical indicating whether or not a \code{.se.fit} column should be
 added to the augmented output. For some models, this calculation can be
