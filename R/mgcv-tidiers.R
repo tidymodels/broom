@@ -36,7 +36,7 @@
 #' @export
 #' @aliases mgcv_tidiers gam_tidiers tidy.gam
 #' @family mgcv tidiers
-#' @seealso [tidy()], [mgcv::gam()], [tidy.Gam()]
+#' @seealso [tidy()], [mgcv::gam()]
 tidy.gam <- function(x, parametric = FALSE, conf.int = FALSE,
                      conf.level = 0.95, ...) {
   if (!parametric && conf.int) {
@@ -88,7 +88,7 @@ tidy.gam <- function(x, parametric = FALSE, conf.int = FALSE,
 #'
 #' @export
 #' @family mgcv tidiers
-#' @seealso [glance()], [mgcv::gam()], [glance.Gam()]
+#' @seealso [glance()], [mgcv::gam()]
 glance.gam <- function(x, ...) {
   as_glance_tibble(
     df = sum(x$edf),

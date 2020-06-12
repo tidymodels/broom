@@ -52,7 +52,7 @@ tidy(g, parametric = TRUE)
 glance(g)
 }
 \seealso{
-\code{\link[=reexports]{glance()}}, \code{\link[mgcv:gam]{mgcv::gam()}}, \code{\link[=glance.Gam]{glance.Gam()}}
+\code{\link[=reexports]{glance()}}, \code{\link[mgcv:gam]{mgcv::gam()}}
 
 Other mgcv tidiers: 
 \code{\link{tidy.gam}()}
