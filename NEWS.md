@@ -1,5 +1,4 @@
-# broom 0.7.0.9000
-(To be released as 0.7.0)
+# broom 0.7.0
 
 ## Breaking changes
 
@@ -230,6 +229,8 @@ regardless of link function.
   been fixed. (#870)
   
 - Removed dependencies on reshape2 and superseded functions in dplyr.
+
+- All documentation now links to help files rather than topics.
 
 ## For developers and contributors
 
