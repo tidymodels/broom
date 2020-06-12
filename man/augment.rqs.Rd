@@ -23,9 +23,13 @@ that nothing has been passed to \code{newdata}. If \code{newdata} is specified,
 the \code{data} argument will be ignored.}
 
 \item{...}{
-  Arguments passed on to \code{\link[quantreg:predict.rqs]{quantreg::predict.rqs}}
+  Arguments passed on to \code{\link[quantreg:predict.rq]{quantreg::predict.rq}}
   \describe{
     \item{\code{object}}{ object of class rq or rqs or rq.process produced by \code{rq} }
+    \item{\code{interval}}{type of interval desired:  default is  'none', when set to
+    'confidence' the function returns a matrix predictions with point predictions
+    for each of the 'newdata' points as well as lower and upper confidence limits.}
+    \item{\code{level}}{converage probability for the 'confidence' intervals.}
     \item{\code{type}}{For \code{predict.rq}, the  method for 'confidence' intervals, if desired. 
     If 'percentile' then one of the bootstrap methods is used to generate percentile 
     intervals for each prediction, if 'direct' then a version of the Portnoy and Zhou 
@@ -39,11 +43,6 @@ the \code{data} argument will be ignored.}
     function \code{rearrange}.  When the "fhat" option is invoked, a list of conditional
     density functions is returned based on Silverman's adaptive kernel method as
     implemented in \code{akj} and \code{approxfun}.}
-    \item{\code{stepfun}}{If 'TRUE' return stepfunctions otherwise return matrix of predictions.
-    these functions can be estimates of either the conditional quantile or distribution
-    functions depending upon the \code{type} argument.  When \code{stepfun = FALSE}
-    a matrix of point estimates of the conditional quantile function at the points
-    specified by the \code{newdata} argument. }
     \item{\code{na.action}}{ function determining what should be done with missing values
     in 'newdata'.  The default is to predict 'NA'.}
   }}
