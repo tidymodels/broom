@@ -7,7 +7,7 @@
 \method{tidy}{table}(x, ...)
 }
 \arguments{
-\item{x}{A \link{table} object.}
+\item{x}{A \link[=table]{table} object.}
 
 \item{...}{Additional arguments. Not used. Needed to match generic
 signature only. \strong{Cautionary note:} Misspelled arguments will be
@@ -15,7 +15,7 @@ absorbed in \code{...}, where they will be ignored. If the misspelled
 argument has a default value, the default value will be used.
 For example, if you pass \code{conf.lvel = 0.9}, all computation will
 proceed using \code{conf.level = 0.95}. Additionally, if you pass
-\code{newdata = my_tibble} to an \code{\link[=augment]{augment()}} method that does not
+\code{newdata = my_tibble} to an \code{\link[=reexports]{augment()}} method that does not
 accept a \code{newdata} argument, it will use the default value for
 the \code{data} argument.}
 }
@@ -35,7 +35,7 @@ specify which components to return.
 Deprecated. Please use \code{\link[tibble:as_tibble]{tibble::as_tibble()}} instead.
 }
 \details{
-Directly calls \code{\link[tibble:as_tibble]{tibble::as_tibble()}} on a \link{table} object, which
+Directly calls \code{\link[tibble:as_tibble]{tibble::as_tibble()}} on a \link[=table]{table} object, which
 does the same things as \code{\link[=as.data.frame.table]{as.data.frame.table()}} but also gives the
 returned object \link[tibble:tibble]{tibble::tibble} class.
 }

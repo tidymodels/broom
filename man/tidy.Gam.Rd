@@ -16,7 +16,7 @@ absorbed in \code{...}, where they will be ignored. If the misspelled
 argument has a default value, the default value will be used.
 For example, if you pass \code{conf.lvel = 0.9}, all computation will
 proceed using \code{conf.level = 0.95}. Additionally, if you pass
-\code{newdata = my_tibble} to an \code{\link[=augment]{augment()}} method that does not
+\code{newdata = my_tibble} to an \code{\link[=reexports]{augment()}} method that does not
 accept a \code{newdata} argument, it will use the default value for
 the \code{data} argument.}
 }
@@ -30,7 +30,7 @@ specify which components to return.
 }
 \details{
 Tidy \code{gam} objects created by calls to \code{\link[mgcv:gam]{mgcv::gam()}} with
-\code{\link[=tidy.gam]{tidy.gam()}}.
+\code{\link[=mgcv_tidy_gam]{tidy.gam()}}.
 }
 \examples{
 
@@ -41,7 +41,7 @@ tidy(g)
 glance(g)
 }
 \seealso{
-\code{\link[=tidy]{tidy()}}, \code{\link[gam:gam]{gam::gam()}}, \code{\link[=tidy.anova]{tidy.anova()}}, \code{\link[=tidy.gam]{tidy.gam()}}
+\code{\link[=reexports]{tidy()}}, \code{\link[gam:gam]{gam::gam()}}, \code{\link[=tidy.anova]{tidy.anova()}}, \code{\link[=mgcv_tidy_gam]{tidy.gam()}}
 
 Other gam tidiers: 
 \code{\link{glance.Gam}()}

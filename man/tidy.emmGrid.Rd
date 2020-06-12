@@ -80,7 +80,7 @@ ggplot(tidy(by_price, conf.int = TRUE), aes(price2, estimate, color = day)) +
 tidy(joint_tests(oranges_lm1))
 }
 \seealso{
-\code{\link[=tidy]{tidy()}}, \code{\link[emmeans:ref_grid]{emmeans::ref_grid()}}, \code{\link[emmeans:emmeans]{emmeans::emmeans()}},
+\code{\link[=reexports]{tidy()}}, \code{\link[emmeans:ref_grid]{emmeans::ref_grid()}}, \code{\link[emmeans:emmeans]{emmeans::emmeans()}},
 \code{\link[emmeans:contrast]{emmeans::contrast()}}
 
 Other emmeans tidiers: 

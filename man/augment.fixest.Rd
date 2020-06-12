@@ -66,7 +66,7 @@ encounter errors, try explicitly passing a tibble, or fitting the original
 model on data in a tibble.
 
 We are in the process of defining behaviors for models fit with various
-\link{na.action} arguments, but make no guarantees about behavior when data is
+\link[=na.action]{na.action} arguments, but make no guarantees about behavior when data is
 missing at this time.
 }
 \note{
@@ -103,7 +103,7 @@ augment(gravity_pois, trade)
 
 }
 \seealso{
-\code{\link[=augment]{augment()}}, \code{\link[fixest:feglm]{fixest::feglm()}}, \code{\link[fixest:femlm]{fixest::femlm()}}, \code{\link[fixest:feols]{fixest::feols()}}
+\code{\link[=reexports]{augment()}}, \code{\link[fixest:feglm]{fixest::feglm()}}, \code{\link[fixest:femlm]{fixest::femlm()}}, \code{\link[fixest:feols]{fixest::feols()}}
 
 Other fixest tidiers: 
 \code{\link{tidy.fixest}()}

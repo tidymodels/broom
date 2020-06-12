@@ -38,7 +38,7 @@ no confidence intervals are calculated and the confidence limits are
 set to NA.
 }
 \seealso{
-\code{\link[=tidy]{tidy()}}, \code{\link[quantreg:rq]{quantreg::rq()}}
+\code{\link[=reexports]{tidy()}}, \code{\link[quantreg:rq]{quantreg::rq()}}
 
 Other quantreg tidiers: 
 \code{\link{augment.nlrq}()},

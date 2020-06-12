@@ -43,7 +43,7 @@ m <- manova(cbind(yield, foo) ~ block + N * P * K, npk2)
 tidy(m)
 }
 \seealso{
-\code{\link[=tidy]{tidy()}}, \code{\link[stats:summary.manova]{stats::summary.manova()}}
+\code{\link[=reexports]{tidy()}}, \code{\link[stats:summary.manova]{stats::summary.manova()}}
 
 Other anova tidiers: 
 \code{\link{glance.aov}()},

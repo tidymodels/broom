@@ -23,7 +23,7 @@ that nothing has been passed to \code{newdata}. If \code{newdata} is specified,
 the \code{data} argument will be ignored.}
 
 \item{...}{
-  Arguments passed on to \code{\link[quantreg:predict.rqs]{quantreg::predict.rqs}}
+  Arguments passed on to quantreg's predict method
   \describe{
     \item{\code{object}}{ object of class rq or rqs or rq.process produced by \code{rq} }
     \item{\code{type}}{For \code{predict.rq}, the  method for 'confidence' intervals, if desired. 
@@ -84,7 +84,7 @@ encounter errors, try explicitly passing a tibble, or fitting the original
 model on data in a tibble.
 
 We are in the process of defining behaviors for models fit with various
-\link{na.action} arguments, but make no guarantees about behavior when data is
+\link[=na.action]{na.action} arguments, but make no guarantees about behavior when data is
 missing at this time.
 }
 \details{
@@ -94,7 +94,7 @@ columns \code{.conf.low} and \code{.conf.high}. Does not provide confidence
 intervals when data is specified via the \code{newdata} argument.
 }
 \seealso{
-\link{augment}, \code{\link[quantreg:rq]{quantreg::rq()}}, \code{\link[quantreg:predict.rq]{quantreg::predict.rqs()}}
+\link[=reexports]{augment}, \code{\link[quantreg:rq]{quantreg::rq()}}, \code{\link[quantreg:predict.rq]{quantreg::predict.rqs()}}
 
 Other quantreg tidiers: 
 \code{\link{augment.nlrq}()},

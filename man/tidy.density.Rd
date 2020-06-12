@@ -15,7 +15,7 @@ absorbed in \code{...}, where they will be ignored. If the misspelled
 argument has a default value, the default value will be used.
 For example, if you pass \code{conf.lvel = 0.9}, all computation will
 proceed using \code{conf.level = 0.95}. Additionally, if you pass
-\code{newdata = my_tibble} to an \code{\link[=augment]{augment()}} method that does not
+\code{newdata = my_tibble} to an \code{\link[=reexports]{augment()}} method that does not
 accept a \code{newdata} argument, it will use the default value for
 the \code{data} argument.}
 }
@@ -35,7 +35,7 @@ If a model has several distinct types of components, you will need to
 specify which components to return.
 }
 \seealso{
-\code{\link[=tidy]{tidy()}}, \code{\link[stats:density]{stats::density()}}
+\code{\link[=reexports]{tidy()}}, \code{\link[stats:density]{stats::density()}}
 
 Other stats tidiers: 
 \code{\link{tidy.dist}()},

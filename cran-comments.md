@@ -1,9 +1,9 @@
 # Release summary
 
-This is a second resubmission following an automated pretest failure due to
+This is a resubmission following an automated pretest failure due to
 "[n]on-file package-anchored link(s) in documentation object[s]." This seems
-to be a new test as of yesterday, and has been addressed by linking to
-documentation files rather than topics.
+to be a new test as of our previous submission, and has been addressed by 
+linking to documentation files rather than topics.
 
 The previous submission was also a resubmission following an automated pretest 
 failure. The failure was due to breaking changes in the `residuals.fixest()` 

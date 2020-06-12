@@ -15,7 +15,7 @@ absorbed in \code{...}, where they will be ignored. If the misspelled
 argument has a default value, the default value will be used.
 For example, if you pass \code{conf.lvel = 0.9}, all computation will
 proceed using \code{conf.level = 0.95}. Additionally, if you pass
-\code{newdata = my_tibble} to an \code{\link[=augment]{augment()}} method that does not
+\code{newdata = my_tibble} to an \code{\link[=reexports]{augment()}} method that does not
 accept a \code{newdata} argument, it will use the default value for
 the \code{data} argument.}
 }
@@ -47,7 +47,7 @@ For multiple values, please use a \code{\link[purrr:map]{purrr::map()}} workflow
 }
 }
 \seealso{
-\code{\link[=glance]{glance()}}, \code{\link[quantreg:rq]{quantreg::rq()}}
+\code{\link[=reexports]{glance()}}, \code{\link[quantreg:rq]{quantreg::rq()}}
 
 Other quantreg tidiers: 
 \code{\link{augment.nlrq}()},

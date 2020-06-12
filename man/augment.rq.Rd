@@ -83,7 +83,7 @@ encounter errors, try explicitly passing a tibble, or fitting the original
 model on data in a tibble.
 
 We are in the process of defining behaviors for models fit with various
-\link{na.action} arguments, but make no guarantees about behavior when data is
+\link[=na.action]{na.action} arguments, but make no guarantees about behavior when data is
 missing at this time.
 }
 \details{
@@ -93,7 +93,7 @@ columns \code{.conf.low} and \code{.conf.high}. Does not provide confidence
 intervals when data is specified via the \code{newdata} argument.
 }
 \seealso{
-\link{augment}, \code{\link[quantreg:rq]{quantreg::rq()}}, \code{\link[quantreg:predict.rq]{quantreg::predict.rq()}}
+\link[=reexports]{augment}, \code{\link[quantreg:rq]{quantreg::rq()}}, \code{\link[quantreg:predict.rq]{quantreg::predict.rq()}}
 
 Other quantreg tidiers: 
 \code{\link{augment.nlrq}()},

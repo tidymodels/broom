@@ -23,7 +23,7 @@ absorbed in \code{...}, where they will be ignored. If the misspelled
 argument has a default value, the default value will be used.
 For example, if you pass \code{conf.lvel = 0.9}, all computation will
 proceed using \code{conf.level = 0.95}. Additionally, if you pass
-\code{newdata = my_tibble} to an \code{\link[=augment]{augment()}} method that does not
+\code{newdata = my_tibble} to an \code{\link[=reexports]{augment()}} method that does not
 accept a \code{newdata} argument, it will use the default value for
 the \code{data} argument.}
 }
@@ -63,7 +63,7 @@ encounter errors, try explicitly passing a tibble, or fitting the original
 model on data in a tibble.
 
 We are in the process of defining behaviors for models fit with various
-\link{na.action} arguments, but make no guarantees about behavior when data is
+\link[=na.action]{na.action} arguments, but make no guarantees about behavior when data is
 missing at this time.
 }
 \examples{
@@ -85,7 +85,7 @@ augment(zz)
 glance(zz)
 }
 \seealso{
-\code{\link[=augment]{augment()}}, \code{\link[plm:plm]{plm::plm()}}
+\code{\link[=reexports]{augment()}}, \code{\link[plm:plm]{plm::plm()}}
 
 Other plm tidiers: 
 \code{\link{glance.plm}()},

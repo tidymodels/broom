@@ -20,13 +20,13 @@ absorbed in \code{...}, where they will be ignored. If the misspelled
 argument has a default value, the default value will be used.
 For example, if you pass \code{conf.lvel = 0.9}, all computation will
 proceed using \code{conf.level = 0.95}. Additionally, if you pass
-\code{newdata = my_tibble} to an \code{\link[=augment]{augment()}} method that does not
+\code{newdata = my_tibble} to an \code{\link[=reexports]{augment()}} method that does not
 accept a \code{newdata} argument, it will use the default value for
 the \code{data} argument.}
 }
 \description{
-For models that have only a single component, the \code{\link[=tidy]{tidy()}} and
-\code{\link[=glance]{glance()}} methods are identical. Please see the documentation for both
+For models that have only a single component, the \code{\link[=reexports]{tidy()}} and
+\code{\link[=reexports]{glance()}} methods are identical. Please see the documentation for both
 of those methods.
 }
 \examples{
@@ -49,7 +49,7 @@ tidy(chit)
 augment(chit)
 }
 \seealso{
-\code{\link[=tidy]{tidy()}}, \code{\link[stats:cor.test]{stats::cor.test()}}, \code{\link[stats:t.test]{stats::t.test()}},
+\code{\link[=reexports]{tidy()}}, \code{\link[stats:cor.test]{stats::cor.test()}}, \code{\link[stats:t.test]{stats::t.test()}},
 \code{\link[stats:wilcox.test]{stats::wilcox.test()}}, \code{\link[stats:chisq.test]{stats::chisq.test()}}
 
 Other htest tidiers: 

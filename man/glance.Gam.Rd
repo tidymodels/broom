@@ -15,7 +15,7 @@ absorbed in \code{...}, where they will be ignored. If the misspelled
 argument has a default value, the default value will be used.
 For example, if you pass \code{conf.lvel = 0.9}, all computation will
 proceed using \code{conf.level = 0.95}. Additionally, if you pass
-\code{newdata = my_tibble} to an \code{\link[=augment]{augment()}} method that does not
+\code{newdata = my_tibble} to an \code{\link[=reexports]{augment()}} method that does not
 accept a \code{newdata} argument, it will use the default value for
 the \code{data} argument.}
 }
@@ -41,10 +41,10 @@ of the appropriate type.
 }
 \details{
 Glance at \code{gam} objects created by calls to \code{\link[mgcv:gam]{mgcv::gam()}} with
-\code{\link[=glance.gam]{glance.gam()}}.
+\code{\link[=mgcv_glance_gam]{glance.gam()}}.
 }
 \seealso{
-\code{\link[=glance]{glance()}}, \code{\link[gam:gam]{gam::gam()}}
+\code{\link[=reexports]{glance()}}, \code{\link[gam:gam]{gam::gam()}}
 
 Other gam tidiers: 
 \code{\link{tidy.Gam}()}
