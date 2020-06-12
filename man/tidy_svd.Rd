@@ -8,7 +8,7 @@
 tidy_svd(x, matrix = "u", ...)
 }
 \arguments{
-\item{x}{A list with components \code{u}, \code{d}, \code{v} returned by \code{\link[=svd]{svd()}}.}
+\item{x}{A list with components \code{u}, \code{d}, \code{v} returned by \code{\link[base:svd]{base::svd()}}.}
 
 \item{matrix}{Character specifying which component of the PCA should be
 tidied.
@@ -67,8 +67,9 @@ principle components up to this component.}
 \description{
 Broom tidies a number of lists that are effectively S3
 objects without a class attribute. For example, \code{\link[stats:optim]{stats::optim()}},
-\code{\link[=svd]{svd()}} and \code{\link[akima:interp]{akima::interp()}} produce consistent output, but because
-they do not have a class attribute, they cannot be handled by S3 dispatch.
+\link[base:svd]{svd()} and \code{\link[akima:interp]{akima::interp()}} produce consistent output, but
+because they do not have a class attribute, they cannot be handled by S3
+dispatch.
 
 These functions look at the elements of a list and determine if there is
 an appropriate tidying method to apply to the list. Those tidiers are
@@ -110,7 +111,7 @@ tidy_u \%>\%
   facet_wrap(~PC, scale = "free_y")
 }
 \seealso{
-\code{\link[=svd]{svd()}}
+\code{\link[base:svd]{base::svd()}}
 
 Other svd tidiers: 
 \code{\link{augment.prcomp}()},

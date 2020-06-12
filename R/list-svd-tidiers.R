@@ -2,7 +2,7 @@
 #' @template title_desc_tidy_list
 #'
 #' @inherit tidy.prcomp return details params
-#' @param x A list with components `u`, `d`, `v` returned by [svd()].
+#' @param x A list with components `u`, `d`, `v` returned by [base::svd()].
 #'
 #' @examples
 #'
@@ -30,7 +30,7 @@
 #'   ggplot(aes(Species, value)) +
 #'   geom_boxplot() +
 #'   facet_wrap(~PC, scale = "free_y")
-#' @seealso [svd()]
+#' @seealso [base::svd()]
 #' @aliases svd_tidiers
 #' @family svd tidiers
 #' @family list tidiers

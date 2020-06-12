@@ -51,7 +51,7 @@ tidy_optim <- function(x, ...) {
 #'
 #' @aliases glance.optim
 #' @family list tidiers
-#' @seealso [glance()], [optim()]
+#' @seealso [glance()], [stats::optim()]
 glance_optim <- function(x, ...) {
   as_glance_tibble(
     value = x$value,

@@ -33,7 +33,6 @@
 #' tidy(g)
 #' tidy(g, parametric = TRUE)
 #' glance(g)
-#' @rdname mgcv_tidy_gam
 #' @export
 #' @aliases mgcv_tidiers gam_tidiers tidy.gam
 #' @family mgcv tidiers
@@ -87,7 +86,6 @@ tidy.gam <- function(x, parametric = FALSE, conf.int = FALSE,
 #' @details To glance `Gam` objects created by calls to [gam::gam()], see
 #'   [glance.Gam()].
 #'
-#' @rdname mgcv_glance_gam
 #' @export
 #' @family mgcv tidiers
 #' @seealso [glance()], [mgcv::gam()], [glance.Gam()]

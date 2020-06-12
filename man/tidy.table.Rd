@@ -7,7 +7,7 @@
 \method{tidy}{table}(x, ...)
 }
 \arguments{
-\item{x}{A \link[=table]{table} object.}
+\item{x}{A \link[base:table]{base::table} object.}
 
 \item{...}{Additional arguments. Not used. Needed to match generic
 signature only. \strong{Cautionary note:} Misspelled arguments will be
@@ -35,10 +35,10 @@ specify which components to return.
 Deprecated. Please use \code{\link[tibble:as_tibble]{tibble::as_tibble()}} instead.
 }
 \details{
-Directly calls \code{\link[tibble:as_tibble]{tibble::as_tibble()}} on a \link[=table]{table} object, which
-does the same things as \code{\link[=as.data.frame.table]{as.data.frame.table()}} but also gives the
+Directly calls \code{\link[tibble:as_tibble]{tibble::as_tibble()}} on a \link[base:table]{base::table} object, which
+does the same things as \code{\link[base:table]{base::as.data.frame.table()}} but also gives the
 returned object \link[tibble:tibble]{tibble::tibble} class.
 }
 \seealso{
-\code{\link[=as_tibble.table]{as_tibble.table()}}
+\code{\link[tibble:as_tibble]{tibble::as_tibble.table()}}
 }

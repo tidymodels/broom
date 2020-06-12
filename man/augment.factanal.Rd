@@ -9,7 +9,7 @@
 \arguments{
 \item{x}{A \code{factanal} object created by \code{\link[stats:factanal]{stats::factanal()}}.}
 
-\item{data}{A \code{\link[=data.frame]{data.frame()}} or \code{\link[tibble:tibble]{tibble::tibble()}} containing the original
+\item{data}{A \link[base:data.frame]{base::data.frame} or \code{\link[tibble:tibble]{tibble::tibble()}} containing the original
 data that was used to produce the object \code{x}. Defaults to
 \code{stats::model.frame(x)} so that \code{augment(my_fit)} returns the augmented
 original data. \strong{Do not} pass new data to the \code{data} argument.
@@ -30,8 +30,8 @@ the \code{data} argument.}
 \value{
 When \code{data} is not supplied \code{augment.factanal} returns one
 row for each observation, with a factor score column added for each factor
-X, (\code{.fsX}). This is because \code{\link[=factanal]{factanal()}}, unlike other
-stats methods like \code{\link[=lm]{lm()}}, does not retain the original data.
+X, (\code{.fsX}). This is because \code{\link[stats:factanal]{stats::factanal()}}, unlike other
+stats methods like \code{\link[stats:lm]{stats::lm()}}, does not retain the original data.
 
 When \code{data} is supplied, \code{augment.factanal} returns one row for
 each observation, with a factor score column added for each factor X,
@@ -73,7 +73,7 @@ encounter errors, try explicitly passing a tibble, or fitting the original
 model on data in a tibble.
 
 We are in the process of defining behaviors for models fit with various
-\link[=na.action]{na.action} arguments, but make no guarantees about behavior when data is
+\code{na.action} arguments, but make no guarantees about behavior when data is
 missing at this time.
 }
 \seealso{
