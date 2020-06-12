@@ -115,7 +115,7 @@ glance.survfit <- function(x, ...) {
     stop("Cannot construct a glance of a multi-strata survfit object.")
   }
 
-  s <- summary(x)
+  s <- summary(x, ...)
   ret <- unrowname(as.data.frame(t(s$table)))
 
   colnames(ret) <- dplyr::recode(
