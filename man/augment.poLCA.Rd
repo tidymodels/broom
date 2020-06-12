@@ -42,15 +42,15 @@ object. Pass datasets to \code{newdata} to augment data that was not used
 during model fitting. This still requires that all columns used to fit
 the model are present.
 
-Augment will often behavior different depending on whether \code{data} or
-\code{newdata} is specified. This is because there is often information
+Augment will often behave differently depending on whether \code{data} or
+\code{newdata} is given. This is because there is often information
 associated with training observations (such as influences or related)
 measures that is not meaningfully defined for new observations.
 
 For convenience, many augment methods provide default \code{data} arguments,
 so that \code{augment(fit)} will return the augmented training data. In these
-cases augment tries to reconstruct the original data based on the model
-object, with some varying degrees of success.
+cases, augment tries to reconstruct the original data based on the model
+object with varying degrees of success.
 
 The augmented dataset is always returned as a \link[tibble:tibble]{tibble::tibble} with the
 \strong{same number of rows} as the passed dataset. This means that the
@@ -83,7 +83,7 @@ library(poLCA)
 library(dplyr)
 
 data(values)
-f <- cbind(A, B, C, D)~1
+f <- cbind(A, B, C, D) ~ 1
 M1 <- poLCA(f, values, nclass = 2, verbose = FALSE)
 
 M1
@@ -95,12 +95,14 @@ library(ggplot2)
 
 ggplot(tidy(M1), aes(factor(class), estimate, fill = factor(outcome))) +
   geom_bar(stat = "identity", width = 1) +
-  facet_wrap(~ variable)
+  facet_wrap(~variable)
 ## Three-class model with a single covariate.
 
 data(election)
-f2a <- cbind(MORALG,CARESG,KNOWG,LEADG,DISHONG,INTELG,
-             MORALB,CARESB,KNOWB,LEADB,DISHONB,INTELB)~PARTY
+f2a <- cbind(
+  MORALG, CARESG, KNOWG, LEADG, DISHONG, INTELG,
+  MORALB, CARESB, KNOWB, LEADB, DISHONB, INTELB
+) ~ PARTY
 nes2a <- poLCA(f2a, election, nclass = 3, nrep = 5, verbose = FALSE)
 
 td <- tidy(nes2a)
@@ -110,7 +112,7 @@ td
 
 ggplot(td, aes(outcome, estimate, color = factor(class), group = class)) +
   geom_line() +
-  facet_wrap(~ variable, nrow = 2) +
+  facet_wrap(~variable, nrow = 2) +
   theme(axis.text.x = element_text(angle = 90, hjust = 1))
 
 au <- augment(nes2a)
@@ -122,7 +124,6 @@ count(au, .class)
 au2 <- augment(nes2a, data = election)
 au2
 dim(au2)
-
 }
 \seealso{
 \code{\link[=augment]{augment()}}, \code{\link[poLCA:poLCA]{poLCA::poLCA()}}

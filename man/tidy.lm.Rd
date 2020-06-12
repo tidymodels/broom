@@ -3,12 +3,9 @@
 \name{tidy.lm}
 \alias{tidy.lm}
 \alias{lm_tidiers}
-\alias{tidy.summary.lm}
 \title{Tidy a(n) lm object}
 \usage{
-\method{tidy}{lm}(x, conf.int = FALSE, conf.level = 0.95, exponentiate = FALSE, ...)
-
-\method{tidy}{summary.lm}(x, ...)
+\method{tidy}{lm}(x, conf.int = FALSE, conf.level = 0.95, ...)
 }
 \arguments{
 \item{x}{An \code{lm} object created by \code{\link[stats:lm]{stats::lm()}}.}
@@ -19,11 +16,6 @@ interval in the tidied output. Defaults to \code{FALSE}.}
 \item{conf.level}{The confidence level to use for the confidence interval
 if \code{conf.int = TRUE}. Must be strictly greater than 0 and less than 1.
 Defaults to 0.95, which corresponds to a 95 percent confidence interval.}
-
-\item{exponentiate}{Logical indicating whether or not to exponentiate the
-the coefficient estimates. This is typical for logistic and multinomial
-regressions, but a bad idea if there is no log or logit link. Defaults
-to \code{FALSE}.}
 
 \item{...}{Additional arguments. Not used. Needed to match generic
 signature only. \strong{Cautionary note:} Misspelled arguments will be
@@ -39,16 +31,13 @@ the \code{data} argument.}
 Tidy summarizes information about the components of a model.
 A model component might be a single term in a regression, a single
 hypothesis, a cluster, or a class. Exactly what tidy considers to be a
-model component varies cross models but is usually self-evident.
+model component varies across models but is usually self-evident.
 If a model has several distinct types of components, you will need to
 specify which components to return.
 }
 \details{
 If the linear model is an \code{mlm} object (multiple linear model),
-there is an additional column \code{response}.
-
-If you have missing values in your model data, you may need to refit
-the model with \code{na.action = na.exclude}.
+there is an additional column \code{response}. See \code{\link[=tidy.mlm]{tidy.mlm()}}.
 }
 \examples{
 
@@ -76,7 +65,9 @@ augment(mod)
 augment(mod, mtcars)
 
 # predict on new data
-newdata <- mtcars \%>\% head(6) \%>\% mutate(wt = wt + 1)
+newdata <- mtcars \%>\%
+  head(6) \%>\%
+  mutate(wt = wt + 1)
 augment(mod, newdata = newdata)
 
 au <- augment(mod, data = mtcars)
@@ -84,7 +75,8 @@ au <- augment(mod, data = mtcars)
 ggplot(au, aes(.hat, .std.resid)) +
   geom_vline(size = 2, colour = "white", xintercept = 0) +
   geom_hline(size = 2, colour = "white", yintercept = 0) +
-  geom_point() + geom_smooth(se = FALSE)
+  geom_point() +
+  geom_smooth(se = FALSE)
 
 plot(mod, which = 6)
 ggplot(au, aes(.hat, .cooksd)) +
@@ -110,8 +102,7 @@ Other lm tidiers:
 \code{\link{glance.svyglm}()},
 \code{\link{tidy.glm}()},
 \code{\link{tidy.lm.beta}()},
-\code{\link{tidy.mlm}()},
-\code{\link{tidy.svyglm}()}
+\code{\link{tidy.mlm}()}
 }
 \concept{lm tidiers}
 \value{

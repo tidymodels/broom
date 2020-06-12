@@ -20,7 +20,7 @@ burn-in and sample size used to estimate the model. Defaults to \code{FALSE}.}
 \strong{Cautionary note}: Mispecified arguments may be silently ignored.}
 }
 \value{
-\code{glance.ergm} returns a one-row data.frame with the columns
+\code{glance.ergm} returns a one-row tibble with the columns
 \item{independence}{Whether the model assumed dyadic independence}
 \item{iterations}{The number of MCMLE iterations performed before convergence}
 \item{logLik}{If applicable, the log-likelihood associated with the model}
@@ -28,7 +28,7 @@ burn-in and sample size used to estimate the model. Defaults to \code{FALSE}.}
 \item{BIC}{The Bayesian Information Criterion}
 
 If \code{deviance = TRUE}, and if the model supports it, the
-data frame will also contain the columns
+tibble will also contain the columns
 \item{null.deviance}{The null deviance of the model}
 \item{df.null}{The degrees of freedom of the null deviance}
 \item{residual.deviance}{The residual deviance of the model}
@@ -40,14 +40,19 @@ with exactly one row of model summaries. The summaries are typically
 goodness of fit measures, p-values for hypothesis tests on residuals,
 or model convergence information.
 
-Glance never returns information from the original call to the modelling
-function. This includes the name of the modelling function or any
-arguments passed to the modelling function.
+Glance never returns information from the original call to the modeling
+function. This includes the name of the modeling function or any
+arguments passed to the modeling function.
 
 Glance does not calculate summary measures. Rather, it farms out these
 computations to appropriate methods and gathers the results together.
 Sometimes a goodness of fit measure will be undefined. In these cases
 the measure will be reported as \code{NA}.
+
+Glance returns the same number of columns regardless of whether the
+model matrix is rank-deficient or not. If so, entries in columns
+that no longer have a well-defined value are filled in with an \code{NA}
+of the appropriate type.
 }
 \seealso{
 \code{\link[=glance]{glance()}}, \code{\link[ergm:ergm]{ergm::ergm()}}, \code{\link[ergm:summary.ergm]{ergm::summary.ergm()}}

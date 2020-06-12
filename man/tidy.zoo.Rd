@@ -24,7 +24,7 @@ the \code{data} argument.}
 Tidy summarizes information about the components of a model.
 A model component might be a single term in a regression, a single
 hypothesis, a cluster, or a class. Exactly what tidy considers to be a
-model component varies cross models but is usually self-evident.
+model component varies across models but is usually self-evident.
 If a model has several distinct types of components, you will need to
 specify which components to return.
 }
@@ -45,15 +45,14 @@ tidy(Z)
 
 ggplot(tidy(Z), aes(index, value, color = series)) +
   geom_line()
-  
+
 ggplot(tidy(Z), aes(index, value)) +
   geom_line() +
-  facet_wrap(~ series, ncol = 1)
+  facet_wrap(~series, ncol = 1)
 
 Zrolled <- rollmean(Z, 5)
 ggplot(tidy(Zrolled), aes(index, value, color = series)) +
   geom_line()
-
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[zoo:zoo]{zoo::zoo()}}
@@ -68,6 +67,6 @@ Other time series tidiers:
 A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
   \item{index}{Index (i.e. date or time) for a `ts` or `zoo` object.}
   \item{series}{Name of the series (present only for multivariate time series).}
-  \item{value}{TODO. needs better documentation.}
+  \item{value}{The value/estimate of the component. Results from data reshaping.}
 
 }

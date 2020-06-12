@@ -14,15 +14,15 @@
 #'   during model fitting. This still requires that all columns used to fit
 #'   the model are present.
 #'   
-#'   Augment will often behavior different depending on whether `data` or 
-#'   `newdata` is specified. This is because there is often information
+#'   Augment will often behave differently depending on whether `data` or 
+#'   `newdata` is given. This is because there is often information
 #'   associated with training observations (such as influences or related)
 #'   measures that is not meaningfully defined for new observations.
 #'   
 #'   For convenience, many augment methods provide default `data` arguments,
 #'   so that `augment(fit)` will return the augmented training data. In these
-#'   cases augment tries to reconstruct the original data based on the model
-#'   object, with some varying degrees of success.
+#'   cases, augment tries to reconstruct the original data based on the model
+#'   object with varying degrees of success.
 #'   
 #'   The augmented dataset is always returned as a [tibble::tibble] with the
 #'   **same number of rows** as the passed dataset. This means that the

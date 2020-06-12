@@ -32,7 +32,6 @@ test_that("glance.plm", {
 })
 
 test_that("augment.plm", {
-  
   check_augment_function(
     aug = augment.plm,
     model = fit,
@@ -40,4 +39,3 @@ test_that("augment.plm", {
     newdata = Produc
   )
 })
-

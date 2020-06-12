@@ -25,42 +25,46 @@ with exactly one row of model summaries. The summaries are typically
 goodness of fit measures, p-values for hypothesis tests on residuals,
 or model convergence information.
 
-Glance never returns information from the original call to the modelling
-function. This includes the name of the modelling function or any
-arguments passed to the modelling function.
+Glance never returns information from the original call to the modeling
+function. This includes the name of the modeling function or any
+arguments passed to the modeling function.
 
 Glance does not calculate summary measures. Rather, it farms out these
 computations to appropriate methods and gathers the results together.
 Sometimes a goodness of fit measure will be undefined. In these cases
 the measure will be reported as \code{NA}.
+
+Glance returns the same number of columns regardless of whether the
+model matrix is rank-deficient or not. If so, entries in columns
+that no longer have a well-defined value are filled in with an \code{NA}
+of the appropriate type.
 }
 \examples{
 
-library(dplyr) 
+library(dplyr)
 library(mclust)
 set.seed(27)
 
 centers <- tibble::tibble(
-  cluster = factor(1:3), 
-  num_points = c(100, 150, 50),  # number points in each cluster
-  x1 = c(5, 0, -3),              # x1 coordinate of cluster center
-  x2 = c(-1, 1, -2)              # x2 coordinate of cluster center
+  cluster = factor(1:3),
+  num_points = c(100, 150, 50), # number points in each cluster
+  x1 = c(5, 0, -3), # x1 coordinate of cluster center
+  x2 = c(-1, 1, -2) # x2 coordinate of cluster center
 )
 
 points <- centers \%>\%
   mutate(
     x1 = purrr::map2(num_points, x1, rnorm),
     x2 = purrr::map2(num_points, x2, rnorm)
-  ) \%>\% 
+  ) \%>\%
   dplyr::select(-num_points, -cluster) \%>\%
-  tidyr::unnest(x1, x2)
+  tidyr::unnest(c(x1, x2))
 
 m <- mclust::Mclust(points)
 
 tidy(m)
 augment(m, points)
 glance(m)
-
 }
 \value{
 A \code{\link[tibble:tibble]{tibble::tibble()}} with exactly one row and columns:
@@ -70,7 +74,7 @@ A \code{\link[tibble:tibble]{tibble::tibble()}} with exactly one row and columns
   \item{nobs}{Number of observations used.}
   \item{model}{A string denoting the model type with optimal BIC}
   \item{G}{Number mixture components in optimal model}
-  \item{hypvol}{If the other model contains a noise component, the 
+  \item{hypvol}{If the other model contains a noise component, the
     value of the hypervolume parameter. Otherwise `NA`.}
 
 }

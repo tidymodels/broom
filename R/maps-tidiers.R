@@ -4,20 +4,30 @@
 #' @param x A `map` object returned from [maps::map()].
 #' @template param_unused_dots
 #'
+#' @evalRd return_tidy(
+#'   "term",
+#'   long = "Longitude.",
+#'   lat = "Latitude.",
+#'   .post = "Remaining columns give information on geographic attributes 
+#'     and depend on the inputted map object. See ?maps::map for more information."
+#' )
+#'
 #' @examples
-#'     
+#'
 #' library(maps)
 #' library(ggplot2)
 #' 
+#'
 #' ca <- map("county", "ca", plot = FALSE, fill = TRUE)
 #' tidy(ca)
 #' qplot(long, lat, data = ca, geom = "polygon", group = group)
 #'
 #' tx <- map("county", "texas", plot = FALSE, fill = TRUE)
 #' tidy(tx)
-#' qplot(long, lat, data = tx, geom = "polygon", group = group,
-#'       colour = I("white"))
-#'
+#' qplot(long, lat,
+#'   data = tx, geom = "polygon", group = group,
+#'   colour = I("white")
+#' )
 #' @export
 #' @seealso [tidy()], [maps::map()]
 #' @aliases maps_tidiers
@@ -30,5 +40,5 @@ tidy.map <- function(x, ...) {
   names <- do.call("rbind", lapply(strsplit(x$names, "[:,]"), "[", 1:2))
   df$region <- names[df$group, 1]
   df$subregion <- names[df$group, 2]
-  fix_data_frame(df[stats::complete.cases(df$lat, df$long), ])
+  as_tidy_tibble(df[stats::complete.cases(df$lat, df$long), ])
 }

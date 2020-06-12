@@ -5,7 +5,7 @@
 \alias{plm_tidiers}
 \title{Tidy a(n) plm object}
 \usage{
-\method{tidy}{plm}(x, conf.int = FALSE, conf.level = 0.95, exponentiate = FALSE, ...)
+\method{tidy}{plm}(x, conf.int = FALSE, conf.level = 0.95, ...)
 }
 \arguments{
 \item{x}{A \code{plm} objected returned by \code{\link[plm:plm]{plm::plm()}}.}
@@ -16,11 +16,6 @@ interval in the tidied output. Defaults to \code{FALSE}.}
 \item{conf.level}{The confidence level to use for the confidence interval
 if \code{conf.int = TRUE}. Must be strictly greater than 0 and less than 1.
 Defaults to 0.95, which corresponds to a 95 percent confidence interval.}
-
-\item{exponentiate}{Logical indicating whether or not to exponentiate the
-the coefficient estimates. This is typical for logistic and multinomial
-regressions, but a bad idea if there is no log or logit link. Defaults
-to \code{FALSE}.}
 
 \item{...}{Additional arguments. Not used. Needed to match generic
 signature only. \strong{Cautionary note:} Misspelled arguments will be
@@ -36,7 +31,7 @@ the \code{data} argument.}
 Tidy summarizes information about the components of a model.
 A model component might be a single term in a regression, a single
 hypothesis, a cluster, or a class. Exactly what tidy considers to be a
-model component varies cross models but is usually self-evident.
+model component varies across models but is usually self-evident.
 If a model has several distinct types of components, you will need to
 specify which components to return.
 }
@@ -46,17 +41,17 @@ library(plm)
 
 data("Produc", package = "plm")
 zz <- plm(log(gsp) ~ log(pcap) + log(pc) + log(emp) + unemp,
-          data = Produc, index = c("state","year"))
+  data = Produc, index = c("state", "year")
+)
 
 summary(zz)
 
 tidy(zz)
 tidy(zz, conf.int = TRUE)
-tidy(zz, conf.int = TRUE, conf.level = .9)
+tidy(zz, conf.int = TRUE, conf.level = 0.9)
 
 augment(zz)
 glance(zz)
-
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[plm:plm]{plm::plm()}}, \code{\link[=tidy.lm]{tidy.lm()}}

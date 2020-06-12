@@ -25,31 +25,33 @@ with exactly one row of model summaries. The summaries are typically
 goodness of fit measures, p-values for hypothesis tests on residuals,
 or model convergence information.
 
-Glance never returns information from the original call to the modelling
-function. This includes the name of the modelling function or any
-arguments passed to the modelling function.
+Glance never returns information from the original call to the modeling
+function. This includes the name of the modeling function or any
+arguments passed to the modeling function.
 
 Glance does not calculate summary measures. Rather, it farms out these
 computations to appropriate methods and gathers the results together.
 Sometimes a goodness of fit measure will be undefined. In these cases
 the measure will be reported as \code{NA}.
+
+Glance returns the same number of columns regardless of whether the
+model matrix is rank-deficient or not. If so, entries in columns
+that no longer have a well-defined value are filled in with an \code{NA}
+of the appropriate type.
 }
 \examples{
 
 library(cluster)
 library(dplyr)
 
-x <- iris \%>\% 
+x <- iris \%>\%
   select(-Species)
-  
+
 fit <- pam(x, k = 3)
 
 tidy(fit)
 glance(fit)
 augment(fit, x)
-
-
-
 }
 \seealso{
 \code{\link[=glance]{glance()}}, \code{\link[stats:kmeans]{stats::kmeans()}}
@@ -63,6 +65,7 @@ Other kmeans tidiers:
 A \code{\link[tibble:tibble]{tibble::tibble()}} with exactly one row and columns:
   \item{betweenss}{The total between-cluster sum of squares.}
   \item{iter}{Iterations of algorithm/fitting procedure completed.}
-  \item{tot.withinss}{The total within-cluster sum of squares}
+  \item{tot.withinss}{The total within-cluster sum of squares.}
+  \item{totss}{The total sum of squares.}
 
 }

@@ -25,34 +25,39 @@ with exactly one row of model summaries. The summaries are typically
 goodness of fit measures, p-values for hypothesis tests on residuals,
 or model convergence information.
 
-Glance never returns information from the original call to the modelling
-function. This includes the name of the modelling function or any
-arguments passed to the modelling function.
+Glance never returns information from the original call to the modeling
+function. This includes the name of the modeling function or any
+arguments passed to the modeling function.
 
 Glance does not calculate summary measures. Rather, it farms out these
 computations to appropriate methods and gathers the results together.
 Sometimes a goodness of fit measure will be undefined. In these cases
 the measure will be reported as \code{NA}.
+
+Glance returns the same number of columns regardless of whether the
+model matrix is rank-deficient or not. If so, entries in columns
+that no longer have a well-defined value are filled in with an \code{NA}
+of the appropriate type.
 }
 \examples{
 
 library(survival)
 
-temp.yr  <- tcut(mgus$dxyr, 55:92, labels=as.character(55:91))
-temp.age <- tcut(mgus$age, 34:101, labels=as.character(34:100))
+temp.yr <- tcut(mgus$dxyr, 55:92, labels = as.character(55:91))
+temp.age <- tcut(mgus$age, 34:101, labels = as.character(34:100))
 ptime <- ifelse(is.na(mgus$pctime), mgus$futime, mgus$pctime)
 pstat <- ifelse(is.na(mgus$pctime), 0, 1)
-pfit <- pyears(Surv(ptime/365.25, pstat) ~ temp.yr + temp.age + sex,  mgus,
-               data.frame=TRUE)
+pfit <- pyears(Surv(ptime / 365.25, pstat) ~ temp.yr + temp.age + sex, mgus,
+  data.frame = TRUE
+)
 tidy(pfit)
 glance(pfit)
 
 # if data.frame argument is not given, different information is present in
 # output
-pfit2 <- pyears(Surv(ptime/365.25, pstat) ~ temp.yr + temp.age + sex,  mgus)
+pfit2 <- pyears(Surv(ptime / 365.25, pstat) ~ temp.yr + temp.age + sex, mgus)
 tidy(pfit2)
 glance(pfit2)
-
 }
 \seealso{
 \code{\link[=glance]{glance()}}, \code{\link[survival:pyears]{survival::pyears()}}

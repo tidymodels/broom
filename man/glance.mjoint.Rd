@@ -25,14 +25,19 @@ with exactly one row of model summaries. The summaries are typically
 goodness of fit measures, p-values for hypothesis tests on residuals,
 or model convergence information.
 
-Glance never returns information from the original call to the modelling
-function. This includes the name of the modelling function or any
-arguments passed to the modelling function.
+Glance never returns information from the original call to the modeling
+function. This includes the name of the modeling function or any
+arguments passed to the modeling function.
 
 Glance does not calculate summary measures. Rather, it farms out these
 computations to appropriate methods and gathers the results together.
 Sometimes a goodness of fit measure will be undefined. In these cases
 the measure will be reported as \code{NA}.
+
+Glance returns the same number of columns regardless of whether the
+model matrix is rank-deficient or not. If so, entries in columns
+that no longer have a well-defined value are filled in with an \code{NA}
+of the appropriate type.
 }
 \examples{
 \dontrun{
@@ -40,21 +45,21 @@ the measure will be reported as \code{NA}.
 library(joineRML)
 data(heart.valve)
 hvd <- heart.valve[!is.na(heart.valve$log.grad) &
-                       !is.na(heart.valve$log.lvmi) &
-                       heart.valve$num <= 50, ]
+  !is.na(heart.valve$log.lvmi) &
+  heart.valve$num <= 50, ]
 fit <- mjoint(
-    formLongFixed = list(
-        "grad" = log.grad ~ time + sex + hs,
-        "lvmi" = log.lvmi ~ time + sex
-    ),
-    formLongRandom = list(
-        "grad" = ~ 1 | num,
-        "lvmi" = ~ time | num
-    ),
-    formSurv = Surv(fuyrs, status) ~ age,
-    data = hvd,
-    inits = list("gamma" = c(0.11, 1.51, 0.80)),
-    timeVar = "time"
+  formLongFixed = list(
+    "grad" = log.grad ~ time + sex + hs,
+    "lvmi" = log.lvmi ~ time + sex
+  ),
+  formLongRandom = list(
+    "grad" = ~ 1 | num,
+    "lvmi" = ~ time | num
+  ),
+  formSurv = Surv(fuyrs, status) ~ age,
+  data = hvd,
+  inits = list("gamma" = c(0.11, 1.51, 0.80)),
+  timeVar = "time"
 )
 
 # Extract the survival fixed effects

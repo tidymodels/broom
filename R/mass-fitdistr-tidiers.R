@@ -5,7 +5,7 @@
 #' @template param_unused_dots
 #'
 #' @evalRd return_tidy("term", "estimate", "std.error")
-#' 
+#'
 #' @examples
 #'
 #' set.seed(2015)
@@ -16,7 +16,6 @@
 #'
 #' tidy(fit)
 #' glance(fit)
-#'
 #' @export
 #' @family fitdistr tidiers
 #' @aliases fitdistr_tidiers
@@ -32,7 +31,7 @@ tidy.fitdistr <- function(x, ...) {
 
 #' @templateVar class fitdistr
 #' @template title_desc_glance
-#' 
+#'
 #' @inherit tidy.fitdistr params examples
 #'
 #' @evalRd return_glance("logLik", "AIC", "BIC", "nobs")
@@ -41,10 +40,12 @@ tidy.fitdistr <- function(x, ...) {
 #' @family fitdistr tidiers
 #' @seealso [tidy()], [MASS::fitdistr()]
 glance.fitdistr <- function(x, ...) {
-  ret <- tibble(logLik = stats::logLik(x),
-                AIC = stats::AIC(x),
-                BIC = stats::BIC(x),
-                nobs = stats::nobs(x)
-                )
-  ret
+  as_glance_tibble(
+    logLik = stats::logLik(x),
+    AIC = stats::AIC(x),
+    BIC = stats::BIC(x),
+    nobs = stats::nobs(x),
+    na_types = "rrri"
+  )
+  
 }

@@ -24,14 +24,15 @@ the \code{data} argument.}
 Tidy summarizes information about the components of a model.
 A model component might be a single term in a regression, a single
 hypothesis, a cluster, or a class. Exactly what tidy considers to be a
-model component varies cross models but is usually self-evident.
+model component varies across models but is usually self-evident.
 If a model has several distinct types of components, you will need to
 specify which components to return.
 }
 \examples{
-    
+
 library(maps)
 library(ggplot2)
+
 
 ca <- map("county", "ca", plot = FALSE, fill = TRUE)
 tidy(ca)
@@ -39,10 +40,19 @@ qplot(long, lat, data = ca, geom = "polygon", group = group)
 
 tx <- map("county", "texas", plot = FALSE, fill = TRUE)
 tidy(tx)
-qplot(long, lat, data = tx, geom = "polygon", group = group,
-      colour = I("white"))
-
+qplot(long, lat,
+  data = tx, geom = "polygon", group = group,
+  colour = I("white")
+)
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[maps:map]{maps::map()}}
+}
+\value{
+A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
+  \item{term}{The name of the regression term.}
+  \item{long}{Longitude.}
+  \item{lat}{Latitude.}
+Remaining columns give information on geographic attributes 
+    and depend on the inputted map object. See ?maps::map for more information.
 }

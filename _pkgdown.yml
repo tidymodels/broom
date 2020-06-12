@@ -1,7 +1,11 @@
-url: http://broom.tidyverse.org
+url: https://broom.tidymodels.org
 
 template:
   package: tidytemplate
+  params:
+    part_of: <a href="https://tidymodels.org">tidymodels</a>
+    footer: broom is a part of the <strong>tidymodels</strong> ecosystem, a collection of modeling packages designed with common APIs and a shared philosophy.
+
 default_assets: false
 
 home:
@@ -38,17 +42,15 @@ navbar:
   - text: Articles
     menu:
     - text: Adding new tidiers
-      href: articles/adding-tidiers.html
+      href: https://www.tidymodels.org/learn/develop/broom/
     - text: Available methods
       href: articles/available-methods.html
     - text: Bootstrapping
-      href: articles/bootstrapping.html
+      href: https://www.tidymodels.org/learn/statistics/bootstrap/
     - text: Broom and dplyr
       href: articles/broom_and_dplyr.html
-    - text: Tidiers in external packages
-      href: articles/external-tidiers.html
     - text: K-means
-      href: articles/kmeans.html
+      href: https://www.tidymodels.org/learn/statistics/k-means/
   - text: News
     href: news/index.html
   right:

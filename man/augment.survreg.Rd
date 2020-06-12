@@ -64,15 +64,15 @@ object. Pass datasets to \code{newdata} to augment data that was not used
 during model fitting. This still requires that all columns used to fit
 the model are present.
 
-Augment will often behavior different depending on whether \code{data} or
-\code{newdata} is specified. This is because there is often information
+Augment will often behave differently depending on whether \code{data} or
+\code{newdata} is given. This is because there is often information
 associated with training observations (such as influences or related)
 measures that is not meaningfully defined for new observations.
 
 For convenience, many augment methods provide default \code{data} arguments,
 so that \code{augment(fit)} will return the augmented training data. In these
-cases augment tries to reconstruct the original data based on the model
-object, with some varying degrees of success.
+cases, augment tries to reconstruct the original data based on the model
+object with varying degrees of success.
 
 The augmented dataset is always returned as a \link[tibble:tibble]{tibble::tibble} with the
 \strong{same number of rows} as the passed dataset. This means that the
@@ -105,11 +105,10 @@ glance(sr)
 # coefficient plot
 td <- tidy(sr, conf.int = TRUE)
 library(ggplot2)
-ggplot(td, aes(estimate, term)) + 
+ggplot(td, aes(estimate, term)) +
   geom_point() +
   geom_errorbarh(aes(xmin = conf.low, xmax = conf.high), height = 0) +
   geom_vline(xintercept = 0)
-
 }
 \seealso{
 \code{\link[=augment]{augment()}}, \code{\link[survival:survreg]{survival::survreg()}}
@@ -142,7 +141,7 @@ Other survival tidiers:
 \value{
 A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
   \item{.fitted}{Fitted or predicted value.}
-  \item{.resid}{The difference between fitted and observed values.}
+  \item{.resid}{The difference between observed and fitted values.}
   \item{.se.fit}{Standard errors of fitted values.}
 
 }

@@ -3,7 +3,7 @@
 #'
 #' @param x A `gamlss` object returned from [gamlss::gamlss()].
 #' @template param_unused_dots
-#' 
+#'
 #' @evalRd return_tidy(
 #'   parameter = "Type of coefficient being estimated: `mu`, `sigma`,
 #'     `nu`, or `tau`.",
@@ -13,11 +13,11 @@
 #'   "statistic",
 #'   "p.value"
 #' )
-#' 
+#'
 #' @examples
-#' 
+#'
 #' library(gamlss)
-#' 
+#'
 #' g <- gamlss(
 #'   y ~ pb(x),
 #'   sigma.fo = ~ pb(x),
@@ -27,7 +27,6 @@
 #' )
 #'
 #' tidy(g)
-#'
 #' @export
 tidy.gamlss <- function(x, ...) {
 
@@ -35,8 +34,10 @@ tidy.gamlss <- function(x, ...) {
   utils::capture.output(s <- summary(x, type = "qr"))
 
   # tidy the coefficients much as would be done for a linear model
-  nn <- c("estimate", "std.error", "statistic", "p.value")
-  ret <- fix_data_frame(s, nn)
+  ret <- as_tidy_tibble(
+    s, 
+    new_names = c("estimate", "std.error", "statistic", "p.value")
+  )
 
   # add parameter types. This assumes each coefficient table starts
   # with "(Intercept)": unclear if this is guaranteed

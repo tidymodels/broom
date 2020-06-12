@@ -9,7 +9,7 @@
 #'
 #' @examples
 #'
-#' n <- nls(mpg ~ k * e ^ wt, data = mtcars, start = list(k = 1, e = 2))
+#' n <- nls(mpg ~ k * e^wt, data = mtcars, start = list(k = 1, e = 2))
 #'
 #' tidy(n)
 #' augment(n)
@@ -23,15 +23,15 @@
 #' newdata <- head(mtcars)
 #' newdata$wt <- newdata$wt + 1
 #' augment(n, newdata = newdata)
-#'
 #' @aliases  nls_tidiers
 #' @export
 #' @seealso [tidy], [stats::nls()], [stats::summary.nls()]
 #' @family nls tidiers
 tidy.nls <- function(x, conf.int = FALSE, conf.level = .95, ...) {
-
-  nn <- c("estimate", "std.error", "statistic", "p.value")
-  ret <- fix_data_frame(stats::coef(summary(x)), nn)
+  ret <- as_tidy_tibble(
+    stats::coef(summary(x)), 
+    new_names = c("estimate", "std.error", "statistic", "p.value")
+  )
 
   if (conf.int) {
     # avoid "Waiting for profiling to be done..." message
@@ -62,14 +62,13 @@ tidy.nls <- function(x, conf.int = FALSE, conf.level = .95, ...) {
 #' @family nls tidiers
 #'
 augment.nls <- function(x, data = NULL, newdata = NULL, ...) {
-
   if (is.null(data) && is.null(newdata)) {
     pars <- names(x$m$getPars())
     env <- as.list(x$m$getEnv())
     data <- as_tibble(env[!(names(env) %in% pars)])
   }
 
-  augment_newdata(x, data, newdata, .se_fit = FALSE)
+  augment_columns(x, data, newdata, .se_fit = FALSE)
 }
 
 
@@ -96,8 +95,8 @@ augment.nls <- function(x, data = NULL, newdata = NULL, ...) {
 glance.nls <- function(x, ...) {
   s <- summary(x)
 
-  tibble(
-    sigma = s$sigma, 
+  as_glance_tibble(
+    sigma = s$sigma,
     isConv = s$convInfo$isConv,
     finTol = s$convInfo$finTol,
     logLik = as.numeric(stats::logLik(x)),
@@ -105,6 +104,7 @@ glance.nls <- function(x, ...) {
     BIC = stats::BIC(x),
     deviance = stats::deviance(x),
     df.residual = stats::df.residual(x),
-    nobs = stats::nobs(x)
+    nobs = stats::nobs(x),
+    na_types = "rlrrrrrii"
   )
 }

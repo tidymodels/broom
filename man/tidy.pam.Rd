@@ -27,7 +27,7 @@ the \code{data} argument.}
 Tidy summarizes information about the components of a model.
 A model component might be a single term in a regression, a single
 hypothesis, a cluster, or a class. Exactly what tidy considers to be a
-model component varies cross models but is usually self-evident.
+model component varies across models but is usually self-evident.
 If a model has several distinct types of components, you will need to
 specify which components to return.
 }
@@ -48,10 +48,10 @@ tidy(p)
 glance(p)
 augment(p, x)
 
-augment(p, x) \%>\% 
+augment(p, x) \%>\%
   ggplot(aes(Sepal.Length, Sepal.Width)) +
-    geom_point(aes(color = .cluster)) +
-    geom_text(aes(label = cluster), data = tidy(p), size = 10)
+  geom_point(aes(color = .cluster)) +
+  geom_text(aes(label = cluster), data = tidy(p), size = 10)
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[cluster:pam]{cluster::pam()}}
@@ -64,8 +64,10 @@ Other pam tidiers:
 \value{
 A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
   \item{size}{Size of each cluster.}
-  \item{max.diss}{Maximal dissimilarity between the observations in the cluster and that cluster's medoid.}
-  \item{avg.diss}{Average dissimilarity between the observations in the cluster and that cluster's medoid.}
+  \item{max.diss}{Maximal dissimilarity between the observations in the 
+    cluster and that cluster's medoid.}
+  \item{avg.diss}{Average dissimilarity between the observations in the 
+    cluster and that cluster's medoid.}
   \item{diameter}{Diameter of the cluster.}
   \item{separation}{Separation of the cluster.}
   \item{avg.width}{Average silhouette width of the cluster.}

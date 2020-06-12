@@ -41,7 +41,7 @@ the \code{data} argument.}
 Tidy summarizes information about the components of a model.
 A model component might be a single term in a regression, a single
 hypothesis, a cluster, or a class. Exactly what tidy considers to be a
-model component varies cross models but is usually self-evident.
+model component varies across models but is usually self-evident.
 If a model has several distinct types of components, you will need to
 specify which components to return.
 }
@@ -64,8 +64,8 @@ original \code{loess} object was fit with
 \examples{
 
 lo <- loess(
-  mpg ~ hp + wt, 
-  mtcars, 
+  mpg ~ hp + wt,
+  mtcars,
   control = loess.control(surface = "direct")
 )
 
@@ -76,7 +76,6 @@ augment(lo, mtcars)
 
 # with a new dataset
 augment(lo, newdata = head(mtcars))
-
 }
 \seealso{
 \link{na.action}
@@ -86,7 +85,7 @@ augment(lo, newdata = head(mtcars))
 \value{
 A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
   \item{.fitted}{Fitted or predicted value.}
-  \item{.resid}{The difference between fitted and observed values.}
+  \item{.resid}{The difference between observed and fitted values.}
   \item{.se.fit}{Standard errors of fitted values.}
 
 }

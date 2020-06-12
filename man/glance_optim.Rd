@@ -38,9 +38,6 @@ If no appropriate tidying method is found, throws an error.
 f <- function(x) (x[1] - 2)^2 + (x[2] - 3)^2 + (x[3] - 8)^2
 o <- optim(c(1, 1, 1), f)
 
-tidy(o)
-glance(o)
-
 }
 \seealso{
 \code{\link[=glance]{glance()}}, \code{\link[=optim]{optim()}}
@@ -56,8 +53,8 @@ Other list tidiers:
 \value{
 A \code{\link[tibble:tibble]{tibble::tibble()}} with exactly one row and columns:
   \item{convergence}{Convergence code.}
-  \item{function.count}{number of calls to `fn`}
-  \item{gradient.count}{number of calls to `gr`}
-  \item{value}{minimized or maximized output value}
+  \item{function.count}{Number of calls to `fn`.}
+  \item{gradient.count}{Number of calls to `gr`.}
+  \item{value}{Minimized or maximized output value.}
 
 }

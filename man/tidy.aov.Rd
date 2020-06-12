@@ -23,7 +23,7 @@ the \code{data} argument.}
 Tidy summarizes information about the components of a model.
 A model component might be a single term in a regression, a single
 hypothesis, a cluster, or a class. Exactly what tidy considers to be a
-model component varies cross models but is usually self-evident.
+model component varies across models but is usually self-evident.
 If a model has several distinct types of components, you will need to
 specify which components to return.
 }
@@ -35,7 +35,6 @@ trailing whitespace, which this tidying method trims.
 
 a <- aov(mpg ~ wt + qsec + disp, mtcars)
 tidy(a)
-
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[stats:aov]{stats::aov()}}
@@ -45,7 +44,6 @@ Other anova tidiers:
 \code{\link{tidy.TukeyHSD}()},
 \code{\link{tidy.anova}()},
 \code{\link{tidy.aovlist}()},
-\code{\link{tidy.manova}()},
-\code{\link{tidy.summary.manova}()}
+\code{\link{tidy.manova}()}
 }
 \concept{anova tidiers}

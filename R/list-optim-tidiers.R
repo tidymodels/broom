@@ -5,8 +5,8 @@
 #' @template param_unused_dots
 #'
 #' @evalRd return_tidy(
-#'   "parameter", 
-#'   "value", 
+#'   "parameter",
+#'   "value",
 #'   "std.error",
 #'   .post = "\\code{std.error} is only provided as a column if the Hessian is calculated."
 #' )
@@ -16,9 +16,13 @@
 #' f <- function(x) (x[1] - 2)^2 + (x[2] - 3)^2 + (x[3] - 8)^2
 #' o <- optim(c(1, 1, 1), f)
 #'
+#' @note 
+#' This function assumes that the provided objective function is a negative 
+#' log-likelihood function. Results will be invalid if an incorrect
+#' function is supplied.
+#'
 #' tidy(o)
 #' glance(o)
-#'
 #' @aliases optim_tidiers tidy.optim
 #' @family list tidiers
 #' @seealso [tidy()], [stats::optim()]
@@ -49,10 +53,11 @@ tidy_optim <- function(x, ...) {
 #' @family list tidiers
 #' @seealso [glance()], [optim()]
 glance_optim <- function(x, ...) {
-  tibble(
+  as_glance_tibble(
     value = x$value,
-    function.count = x$counts["function"],
-    gradient.count = x$counts["gradient"],
-    convergence = x$convergence
+    function.count = unname(x$counts["function"]),
+    gradient.count = unname(x$counts["gradient"]),
+    convergence = x$convergence,
+    na_types = "riii"
   )
 }

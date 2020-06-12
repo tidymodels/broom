@@ -18,11 +18,10 @@ test_that("quantreg::rqs tidier arguments", {
 })
 
 test_that("tidy.rqs", {
-  
   td <- tidy(fit)
   td2 <- tidy(fit2)
   td_iid <- tidy(fit, se.type = "iid")
-  
+
   check_tidy_output(td)
   check_tidy_output(td2)
   check_tidy_output(td_iid)
@@ -30,7 +29,7 @@ test_that("tidy.rqs", {
 
 test_that("glance.rqs", {
   expect_error(
-    glance(fit), 
+    glance(fit),
     regexp = paste(
       "`glance` cannot handle objects of class 'rqs',",
       "i.e. models with more than one tau value. Please",
@@ -47,7 +46,7 @@ test_that("augment.rqs", {
     newdata = airquality,
     strict = FALSE
   )
-  
+
   check_augment_function(
     aug = augment.rqs,
     model = fit2,

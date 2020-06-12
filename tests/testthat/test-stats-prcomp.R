@@ -18,7 +18,7 @@ test_that("tidy.prcomp", {
   check_dims(td, 4, 4)
   expect_identical(tidy(pc, matrix = "pcs"), td)
   expect_identical(tidy(pc, matrix = "eigenvalues"), td)
-  
+
   td2 <- tidy(pc, matrix = "v")
 
   check_tidy_output(td2, strict = FALSE)
@@ -31,7 +31,7 @@ test_that("tidy.prcomp", {
   expect_identical(tidy(pc, matrix = "rotation"), td2)
   expect_identical(tidy(pc, matrix = "variables"), td2)
   expect_identical(tidy(pc, matrix = "loadings"), td2)
-  
+
   td3 <- tidy(pc, matrix = "u")
 
   check_tidy_output(td3)
@@ -40,7 +40,7 @@ test_that("tidy.prcomp", {
   expect_identical(tidy(pc, matrix = "x"), td3)
   expect_identical(tidy(pc, matrix = "samples"), td3)
   expect_identical(tidy(pc, matrix = "scores"), td3)
-  
+
   expect_error(
     tidy(pc, matrix = c("d", "u")),
     regexp = "Must select a single matrix to tidy."
@@ -72,17 +72,17 @@ test_that("augment.prcomp works with matrix objects", {
 
   # model
   pZ <- stats::prcomp(Z, tol = 0.1)
-  
+
   # using stats predict method
   pred <- as.data.frame(predict(pZ))
   names(pred) <- paste0(".fitted", names(pred))
-  
+
   # with data
   df1 <- broom::augment(pZ)
-  
+
   # without data
   df2 <- broom::augment(pZ, data = Z)
-  
+
   expect_equal(dim(df1), c(1000L, 15L))
   expect_equal(dim(df2), c(1000L, 47L))
   testthat::expect_equal(tibble::as_tibble(pred), df1[, -1])

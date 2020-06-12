@@ -24,15 +24,17 @@ the \code{data} argument.}
 Tidy summarizes information about the components of a model.
 A model component might be a single term in a regression, a single
 hypothesis, a cluster, or a class. Exactly what tidy considers to be a
-model component varies cross models but is usually self-evident.
+model component varies across models but is usually self-evident.
 If a model has several distinct types of components, you will need to
 specify which components to return.
 }
 \examples{
 
 library(binGroup)
-des <- binDesign(nmax = 300, delta = 0.06,
-                 p.hyp = 0.1, power = .8)
+des <- binDesign(
+  nmax = 300, delta = 0.06,
+  p.hyp = 0.1, power = .8
+)
 
 glance(des)
 tidy(des)
@@ -40,9 +42,7 @@ tidy(des)
 # the ggplot2 equivalent of plot(des)
 library(ggplot2)
 ggplot(tidy(des), aes(n, power)) +
-    geom_line()
-
-
+  geom_line()
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[binGroup:binDesign]{binGroup::binDesign()}}

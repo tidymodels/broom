@@ -35,7 +35,7 @@ the \code{data} argument.}
 Tidy summarizes information about the components of a model.
 A model component might be a single term in a regression, a single
 hypothesis, a cluster, or a class. Exactly what tidy considers to be a
-model component varies cross models but is usually self-evident.
+model component varies across models but is usually self-evident.
 If a model has several distinct types of components, you will need to
 specify which components to return.
 }
@@ -52,7 +52,7 @@ parameters.
 
 library(ordinal)
 
-fit <- clmm(rating ~ temp + contact + (1|judge), data = wine)
+fit <- clmm(rating ~ temp + contact + (1 | judge), data = wine)
 
 tidy(fit)
 tidy(fit, conf.int = TRUE, conf.level = 0.9)
@@ -60,10 +60,9 @@ tidy(fit, conf.int = TRUE, exponentiate = TRUE)
 
 glance(fit)
 
-fit2 <- clmm(rating ~ temp + (1|judge), nominal = ~ contact, data = wine)
+fit2 <- clmm(rating ~ temp + (1 | judge), nominal = ~contact, data = wine)
 tidy(fit2)
 glance(fit2)
-
 }
 \seealso{
 \link{tidy}, \code{\link[ordinal:clmm]{ordinal::clmm()}}, \code{\link[ordinal:confint.clm]{ordinal::confint.clm()}}

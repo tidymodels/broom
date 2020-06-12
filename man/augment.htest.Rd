@@ -35,15 +35,15 @@ object. Pass datasets to \code{newdata} to augment data that was not used
 during model fitting. This still requires that all columns used to fit
 the model are present.
 
-Augment will often behavior different depending on whether \code{data} or
-\code{newdata} is specified. This is because there is often information
+Augment will often behave differently depending on whether \code{data} or
+\code{newdata} is given. This is because there is often information
 associated with training observations (such as influences or related)
 measures that is not meaningfully defined for new observations.
 
 For convenience, many augment methods provide default \code{data} arguments,
 so that \code{augment(fit)} will return the augmented training data. In these
-cases augment tries to reconstruct the original data based on the model
-object, with some varying degrees of success.
+cases, augment tries to reconstruct the original data based on the model
+object with varying degrees of success.
 
 The augmented dataset is always returned as a \link[tibble:tibble]{tibble::tibble} with the
 \strong{same number of rows} as the passed dataset. This means that the
@@ -67,7 +67,7 @@ how residuals are computed.
 
 tt <- t.test(rnorm(10))
 tidy(tt)
-glance(tt)  # same output for all htests
+glance(tt) # same output for all htests
 
 tt <- t.test(mpg ~ am, data = mtcars)
 tidy(tt)
@@ -81,7 +81,6 @@ tidy(ct)
 chit <- chisq.test(xtabs(Freq ~ Sex + Class, data = as.data.frame(Titanic)))
 tidy(chit)
 augment(chit)
-
 }
 \seealso{
 \code{\link[=augment]{augment()}}, \code{\link[stats:chisq.test]{stats::chisq.test()}}

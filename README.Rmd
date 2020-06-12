@@ -17,9 +17,8 @@ knitr::opts_chunk$set(
 # broom  <img src="man/figures/logo.png" align="right" width="100" />
 
 [![CRAN status](https://www.r-pkg.org/badges/version/broom)](https://cran.r-project.org/package=broom)
-[![Travis-CI Build Status](https://travis-ci.org/tidymodels/broom.svg?branch=master)](https://travis-ci.org/tidymodels/broom)
-[![AppVeyor build status](https://ci.appveyor.com/api/projects/status/github/tidymodels/broom?branch=master&svg=true)](https://ci.appveyor.com/project/tidymodels/broom)
-[![Coverage Status](https://img.shields.io/codecov/c/github/tidymodels/broom/master.svg)](https://codecov.io/github/tidymodels/broom?branch=master)
+[![R build status](https://github.com/tidymodels/broom/workflows/.github/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/tidymodels/broom/actions)
+[![Codecov test coverage](https://codecov.io/gh/tidymodels/broom/branch/master/graph/badge.svg)](https://codecov.io/gh/tidymodels/broom?branch=master)
 
 ## Overview
 
@@ -38,7 +37,8 @@ If you aren't familiar with tidy data structures and want to know how they can m
 ## Installation
 
 ```{r, eval = FALSE}
-# we recommend installing the entire tidyverse modeling set, which includes broom:
+# we recommend installing the entire tidyverse 
+# modeling set, which includes broom:
 install.packages("tidymodels")
 
 # alternatively, to install just broom:
@@ -58,7 +58,7 @@ If you find a bug, please file a minimal reproducible example in the [issues](ht
 ```{r}
 library(broom)
 
-fit <- lm(Sepal.Width ~ Petal.Length + Petal.Width, iris)
+fit <- lm(Volume ~ Girth + Height, trees)
 tidy(fit)
 ```
 
@@ -71,7 +71,7 @@ glance(fit)
 `augment` adds columns to a dataset, containing information such as fitted values, residuals or cluster assignments. All columns added to a dataset have `.` prefix to prevent existing columns from being overwritten.
 
 ```{r}
-augment(fit, data = iris)
+augment(fit, data = trees)
 ```
 
 ### Contributing
@@ -82,6 +82,6 @@ If you have never made a pull request to an R package before, `broom` is an exce
 
 We encourage typo corrections, bug reports, bug fixes and feature requests. Feedback on the clarity of the documentation is especially valuable.
 
-If you are interested in adding new tidiers methods to `broom`, please read `vignette("adding-tidiers")`.
+If you are interested in adding tidier methods for new model objects, please read [this article](https://www.tidymodels.org/learn/develop/broom/) on the tidymodels website.
 
-We have a [Contributor Code of Conduct](CODE_OF_CONDUCT.md). By participating in `broom` you agree to abide by its terms.
+We have a [Contributor Code of Conduct](https://github.com/tidymodels/broom/blob/master/.github/CODE_OF_CONDUCT.md). By participating in `broom` you agree to abide by its terms.

@@ -25,14 +25,19 @@ with exactly one row of model summaries. The summaries are typically
 goodness of fit measures, p-values for hypothesis tests on residuals,
 or model convergence information.
 
-Glance never returns information from the original call to the modelling
-function. This includes the name of the modelling function or any
-arguments passed to the modelling function.
+Glance never returns information from the original call to the modeling
+function. This includes the name of the modeling function or any
+arguments passed to the modeling function.
 
 Glance does not calculate summary measures. Rather, it farms out these
 computations to appropriate methods and gathers the results together.
 Sometimes a goodness of fit measure will be undefined. In these cases
 the measure will be reported as \code{NA}.
+
+Glance returns the same number of columns regardless of whether the
+model matrix is rank-deficient or not. If so, entries in columns
+that no longer have a well-defined value are filled in with an \code{NA}
+of the appropriate type.
 }
 \examples{
 
@@ -45,9 +50,9 @@ r <- Finance[1:300, 1:10]
 rm <- Finance[1:300, "rm"]
 rf <- Finance[1:300, "rf"]
 
-z <- as.matrix(r-rf)
+z <- as.matrix(r - rf)
 t <- nrow(z)
-zm <- rm-rf
+zm <- rm - rf
 h <- matrix(zm, t, 1)
 res <- gmm(z ~ zm, x = h)
 
@@ -59,19 +64,20 @@ tidy(res, conf.int = TRUE, conf.level = .99)
 # coefficient plot
 library(ggplot2)
 library(dplyr)
+
 tidy(res, conf.int = TRUE) \%>\%
-  mutate(variable = reorder(variable, estimate)) \%>\%
+  mutate(variable = reorder(term, estimate)) \%>\%
   ggplot(aes(estimate, variable)) +
   geom_point() +
   geom_errorbarh(aes(xmin = conf.low, xmax = conf.high)) +
-  facet_wrap(~ term) +
   geom_vline(xintercept = 0, color = "red", lty = 2)
 
 # from a function instead of a matrix
 g <- function(theta, x) {
-	e <- x[,2:11] - theta[1] - (x[,1] - theta[1]) \%*\% matrix(theta[2:11], 1, 10)
-	gmat <- cbind(e, e*c(x[,1]))
-	return(gmat) }
+  e <- x[, 2:11] - theta[1] - (x[, 1] - theta[1]) \%*\% matrix(theta[2:11], 1, 10)
+  gmat <- cbind(e, e * c(x[, 1]))
+  return(gmat)
+}
 
 x <- as.matrix(cbind(rm, r))
 res_black <- gmm(g, x = x, t0 = rep(0, 11))
@@ -92,13 +98,11 @@ td2
 
 # coefficient plot
 td2 \%>\%
-  mutate(variable = reorder(variable, estimate)) \%>\%
+  mutate(variable = reorder(term, estimate)) \%>\%
   ggplot(aes(estimate, variable)) +
   geom_point() +
   geom_errorbarh(aes(xmin = conf.low, xmax = conf.high)) +
-  facet_wrap(~ term) +
   geom_vline(xintercept = 0, color = "red", lty = 2)
-
 }
 \seealso{
 \code{\link[=glance]{glance()}}, \code{\link[gmm:gmm]{gmm::gmm()}}

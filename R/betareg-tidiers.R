@@ -1,10 +1,10 @@
 #' @templateVar class betareg
 #' @template title_desc_tidy
-#' 
+#'
 #' @param x A `betareg` object produced by a call to [betareg::betareg()].
 #' @template param_confint
 #' @template param_unused_dots
-#' 
+#'
 #' @evalRd return_tidy(regression = TRUE,
 #'   component = "Whether a particular term was used to model the mean or the
 #'     precision in the regression. See details."
@@ -31,24 +31,22 @@
 #' augment(mod)
 #'
 #' glance(mod)
-#'
 #' @export
 #' @seealso [tidy()], [betareg::betareg()]
 #' @family betareg tidiers
 #' @aliases betareg_tidiers
 tidy.betareg <- function(x, conf.int = FALSE, conf.level = .95, ...) {
-  ret <- purrr::map_df(
-    coef(summary(x)),
-    fix_data_frame,
-    newnames = c("estimate", "std.error", "statistic", "p.value"),
-    .id = "component")
+  
+  ret <- map_as_tidy_tibble(
+    purrr::map(coef(summary(x)), as.matrix),
+    new_names = c("estimate", "std.error", "statistic", "p.value")
+  )
 
   if (conf.int) {
-    conf <- unrowname(confint(x, level = conf.level))
-    colnames(conf) <- c("conf.low", "conf.high")
-    ret <- cbind(ret, conf)
+    ci <- broom_confint_terms(x, level = conf.level)
+    ret <- dplyr::left_join(ret, ci, by = "term")
   }
-  
+
   as_tibble(ret)
 }
 
@@ -61,12 +59,12 @@ tidy.betareg <- function(x, conf.int = FALSE, conf.level = .95, ...) {
 #' @template param_newdata
 #' @template param_type_predict
 #' @template param_type_residuals
-#' 
+#'
 #' @evalRd return_augment(".cooksd")
 #'
-#' @details For additional details on Cook's distance, see 
+#' @details For additional details on Cook's distance, see
 #'   [stats::cooks.distance()].
-#' 
+#'
 #' @seealso [augment()], [betareg::betareg()]
 #' @export
 augment.betareg <- function(x, data = model.frame(x), newdata = NULL,
@@ -81,31 +79,32 @@ augment.betareg <- function(x, data = model.frame(x), newdata = NULL,
 
 #' @templateVar class betareg
 #' @template title_desc_glance
-#' 
+#'
 #' @inherit tidy.betareg params examples
 #' @template param_unused_dots
-#' 
+#'
 #' @evalRd return_glance(
 #'   "pseudo.r.squared",
-#'   "df.null", 
-#'   "logLik", 
+#'   "df.null",
+#'   "logLik",
 #'   "AIC",
 #'   "BIC",
 #'   "df.residual",
 #'   "nobs"
 #' )
-#' 
+#'
 #' @seealso [glance()], [betareg::betareg()]
 #' @export
 glance.betareg <- function(x, ...) {
   s <- summary(x)
-  tibble(
+  as_glance_tibble(
     pseudo.r.squared = s$pseudo.r.squared,
     df.null = s$df.null,
     logLik = as.numeric(stats::logLik(x)),
     AIC = stats::AIC(x),
     BIC = stats::BIC(x),
     df.residual = stats::df.residual(x),
-    nobs = stats::nobs(x)
+    nobs = stats::nobs(x),
+    na_types = "rirrrii"
   )
 }

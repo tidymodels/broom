@@ -36,13 +36,13 @@ the \code{data} argument.}
 Tidy summarizes information about the components of a model.
 A model component might be a single term in a regression, a single
 hypothesis, a cluster, or a class. Exactly what tidy considers to be a
-model component varies cross models but is usually self-evident.
+model component varies across models but is usually self-evident.
 If a model has several distinct types of components, you will need to
 specify which components to return.
 }
 \examples{
 
-n <- nls(mpg ~ k * e ^ wt, data = mtcars, start = list(k = 1, e = 2))
+n <- nls(mpg ~ k * e^wt, data = mtcars, start = list(k = 1, e = 2))
 
 tidy(n)
 augment(n)
@@ -56,7 +56,6 @@ ggplot(augment(n), aes(wt, mpg)) +
 newdata <- head(mtcars)
 newdata$wt <- newdata$wt + 1
 augment(n, newdata = newdata)
-
 }
 \seealso{
 \code{\link[=augment]{augment()}}, \code{\link[quantreg:nlrq]{quantreg::nlrq()}}

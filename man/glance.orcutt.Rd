@@ -25,14 +25,19 @@ with exactly one row of model summaries. The summaries are typically
 goodness of fit measures, p-values for hypothesis tests on residuals,
 or model convergence information.
 
-Glance never returns information from the original call to the modelling
-function. This includes the name of the modelling function or any
-arguments passed to the modelling function.
+Glance never returns information from the original call to the modeling
+function. This includes the name of the modeling function or any
+arguments passed to the modeling function.
 
 Glance does not calculate summary measures. Rather, it farms out these
 computations to appropriate methods and gathers the results together.
 Sometimes a goodness of fit measure will be undefined. In these cases
 the measure will be reported as \code{NA}.
+
+Glance returns the same number of columns regardless of whether the
+model matrix is rank-deficient or not. If so, entries in columns
+that no longer have a well-defined value are filled in with an \code{NA}
+of the appropriate type.
 }
 \examples{
 
@@ -46,7 +51,6 @@ co
 
 tidy(co)
 glance(co)
-
 }
 \seealso{
 \code{\link[=glance]{glance()}}, \code{\link[orcutt:cochrane.orcutt]{orcutt::cochrane.orcutt()}}
@@ -58,12 +62,12 @@ Other orcutt tidiers:
 \value{
 A \code{\link[tibble:tibble]{tibble::tibble()}} with exactly one row and columns:
   \item{adj.r.squared}{Adjusted R squared statistic, which is like the R squared statistic except taking degrees of freedom into account.}
-  \item{dw.original}{Durbin-Watson statistic of original fit}
-  \item{dw.transformed}{Durbin-Watson statistic of transformed fit}
+  \item{dw.original}{Durbin-Watson statistic of original fit.}
+  \item{dw.transformed}{Durbin-Watson statistic of transformed fit.}
   \item{nobs}{Number of observations used.}
-  \item{number.interaction}{Number of interactions}
-  \item{p.value.original}{P-value of original Durbin-Watson statistic}
-  \item{p.value.transformed}{P-value of autocorrelation after transformation}
+  \item{number.interaction}{Number of interactions.}
+  \item{p.value.original}{P-value of original Durbin-Watson statistic.}
+  \item{p.value.transformed}{P-value of autocorrelation after transformation.}
   \item{r.squared}{R squared statistic, or the percent of variation explained by the model. Also known as the coefficient of determination.}
   \item{rho}{Spearman's rho autocorrelation}
 

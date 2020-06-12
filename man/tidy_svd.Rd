@@ -47,7 +47,7 @@ data).}
 component. That is, the location of the observation in PCA space.}
 
 If \code{matrix} is \code{"v"}, \code{"rotation"}, \code{"loadings"} or \code{"variables"}, each
-row in the tidied ouput corresponds to information about the principle
+row in the tidied output corresponds to information about the principle
 components in the original space. The columns are:
 
 \item{\code{row}}{The variable labels (colnames) of the data set on
@@ -60,8 +60,9 @@ If \code{matrix} is \code{"d"}, \code{"eigenvalues"} or \code{"pcs"}, the column
 
 \item{\code{PC}}{An integer vector indicating the principal component}
 \item{\code{std.dev}}{Standard deviation explained by this PC}
-\item{\code{percent}}{Percentage of variation explained}
-\item{\code{cumulative}}{Cumulative percentage of variation explained}
+\item{\code{percent}}{Fraction of variation explained by this component}
+\item{\code{cumulative}}{Cumulative fraction of variation explained by
+principle components up to this component.}
 }
 \description{
 Broom tidies a number of lists that are effectively S3
@@ -99,16 +100,14 @@ library(ggplot2)
 library(dplyr)
 
 ggplot(tidy_d, aes(PC, percent)) +
-    geom_point() +
-    ylab("\% of variance explained")
+  geom_point() +
+  ylab("\% of variance explained")
 
 tidy_u \%>\%
-    mutate(Species = iris$Species[row]) \%>\%
-    ggplot(aes(Species, value)) +
-    geom_boxplot() +
-    facet_wrap(~ PC, scale = "free_y")
-
-
+  mutate(Species = iris$Species[row]) \%>\%
+  ggplot(aes(Species, value)) +
+  geom_boxplot() +
+  facet_wrap(~PC, scale = "free_y")
 }
 \seealso{
 \code{\link[=svd]{svd()}}

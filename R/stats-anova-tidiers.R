@@ -22,17 +22,16 @@
 #' a <- lm(mpg ~ wt + qsec + disp, mtcars)
 #' b <- lm(mpg ~ wt + qsec, mtcars)
 #' tidy(anova(a, b))
-#'
 #' @export
 #' @family anova tidiers
 #' @seealso [tidy()], [stats::anova()], [car::Anova()]
 tidy.anova <- function(x, ...) {
   # there are many possible column names that need to be transformed
   renamers <- c(
-    "AIC" = "AIC",              # merMod
-    "BIC" = "BIC",              # merMod
-    "deviance" = "deviance",    # merMod
-    "logLik" = "logLik",        # merMod
+    "AIC" = "AIC", # merMod
+    "BIC" = "BIC", # merMod
+    "deviance" = "deviance", # merMod
+    "logLik" = "logLik", # merMod
     "Df" = "df",
     "Chi.Df" = "df",
     "Sum Sq" = "sumsq",
@@ -55,12 +54,15 @@ tidy.anova <- function(x, ...) {
     "LR Chisq" = "statistic",
     "edf" = "edf",
     "Ref.df" = "ref.df",
-    "loglik" = "logLik"
+    "loglik" = "logLik",
+    ".rownames" = "term"
   )
 
   names(renamers) <- make.names(names(renamers))
 
-  ret <- fix_data_frame(x)
+  ret <- as_augment_tibble(x)
+  colnames(ret) <- make.names(names(ret))
+
   unknown_cols <- setdiff(colnames(ret), c("term", names(renamers)))
   if (length(unknown_cols) > 0) {
     warning(
@@ -72,7 +74,7 @@ tidy.anova <- function(x, ...) {
 
   colnames(ret) <- dplyr::recode(colnames(ret), !!!renamers)
 
-  if("term" %in% names(ret)){
+  if ("term" %in% names(ret)) {
     # if rows had names, strip whitespace in them
     ret <- mutate(ret, term = stringr::str_trim(term))
   }
@@ -92,7 +94,6 @@ tidy.anova <- function(x, ...) {
 #'
 #' a <- aov(mpg ~ wt + qsec + disp, mtcars)
 #' tidy(a)
-#'
 #' @export
 #' @family anova tidiers
 #' @seealso [tidy()], [stats::aov()]
@@ -100,11 +101,13 @@ tidy.aov <- function(x, ...) {
   summary(x)[[1]] %>%
     tibble::as_tibble(rownames = "term") %>%
     dplyr::mutate("term" = stringr::str_trim(term)) %>%
-    rename2("df" = "Df",
-            "sumsq" = "Sum Sq",
-            "meansq" = "Mean Sq",
-            "statistic" = "F value",
-            "p.value" = "Pr(>F)")
+    rename2(
+      "df" = "Df",
+      "sumsq" = "Sum Sq",
+      "meansq" = "Mean Sq",
+      "statistic" = "F value",
+      "p.value" = "Pr(>F)"
+    )
 }
 
 
@@ -114,11 +117,9 @@ tidy.aov <- function(x, ...) {
 #' @inherit tidy.aov params examples
 #'
 #' @note
-#' From `0.7.0`, `broom` has changed the return summary and the new model
-#' summary dataframe contains only the following information- `logLik`, `IC`,
-#' `BIC`, `deviance`, `nobs`. Note that `tidy.aov` contains the numerator and
-#' denominator degrees of freedom, which were previously included in the glance
-#' summary.
+#' Note that `tidy.aov()` now contains the numerator and denominator degrees of 
+#' freedom, which were included in the output of `glance.aov()` in some
+#' previous versions of the package.
 #'
 #' @evalRd return_glance(
 #'   "logLik",
@@ -132,16 +133,15 @@ tidy.aov <- function(x, ...) {
 #' @seealso [glance()]
 #' @family anova tidiers
 glance.aov <- function(x, ...) {
-  with(
-    summary(x),
-    tibble(
-      logLik = as.numeric(stats::logLik(x)),
-      AIC = stats::AIC(x),
-      BIC = stats::BIC(x),
-      deviance = stats::deviance(x),
-      nobs = stats::nobs(x)
-    )
+  as_glance_tibble(
+    logLik = as.numeric(stats::logLik(x)),
+    AIC = stats::AIC(x),
+    BIC = stats::BIC(x),
+    deviance = stats::deviance(x),
+    nobs = stats::nobs(x),
+    na_types = "rrrri"
   )
+  
 }
 
 #' @templateVar class aovlist
@@ -166,7 +166,6 @@ glance.aov <- function(x, ...) {
 #'
 #' a <- aov(mpg ~ wt + qsec + Error(disp / am), mtcars)
 #' tidy(a)
-#'
 #' @export
 #' @family anova tidiers
 #' @seealso [tidy()], [stats::aov()]
@@ -220,72 +219,20 @@ tidy.aovlist <- function(x, ...) {
 #' npk2 <- within(npk, foo <- rnorm(24))
 #' m <- manova(cbind(yield, foo) ~ block + N * P * K, npk2)
 #' tidy(m)
-#'
 #' @export
 #' @seealso [tidy()], [stats::summary.manova()]
 #' @family anova tidiers
 tidy.manova <- function(x, test = "Pillai", ...) {
-
   test.pos <- pmatch(test, c(
     "Pillai", "Wilks",
     "Hotelling-Lawley", "Roy"
   ))
   test.name <- c("pillai", "wilks", "hl", "roy")[test.pos]
 
-  nn <- c("df", test.name, "statistic", "num.df", "den.df", "p.value")
-  fix_data_frame(summary(x, test = test, ...)$stats, nn)
-}
-
-
-#' @templateVar class summary.manova
-#' @template title_desc_tidy
-#'
-#' @param x A `summary.manova` object return from [stats::summary.manova()].
-#' @template param_unused_dots
-#'
-#' @evalRd return_tidy(
-#'   "term",
-#'   "num.df",
-#'   "den.df",
-#'   "statistic",
-#'   "p.value",
-#'   pillai = "Pillai's trace.",
-#'   wilks = "Wilk's lambda.",
-#'   hl = "Hotelling-Lawley trace.",
-#'   roy = "Roy's greatest root."
-#' )
-#'
-#'
-#' @details Depending on which test statistic was calculated when the object
-#'   was created, only one of `pillai`, `wilks`, `hl` or `roy` is included.
-#'
-#' @examples
-#'
-#' npk2 <- within(npk, foo <- rnorm(24))
-#' 
-#' m <- summary(
-#'   manova(cbind(yield, foo) ~ block + N * P * K, npk2),
-#'   test = "Wilks"
-#' )
-#' 
-#' tidy(m)
-#'
-#' @export
-#' @seealso [tidy()], [stats::summary.manova()]
-#' @family anova tidiers
-tidy.summary.manova <- function(x, ...) {
-  
-  manova_tests <- c(
-    "Pillai" = "pillai",
-    "Wilks" = "wilks",
-    "Hotelling-Lawley" = "hl",
-    "Roy" = "roy"
+  as_tidy_tibble(
+    summary(x, test = test, ...)$stats, 
+    new_names = c("df", test.name, "statistic", "num.df", "den.df", "p.value")
   )
-  
-  test.name <- manova_tests[[intersect(colnames(x$stats), names(manova_tests))[[1]]]]
-  
-  nn <- c("df", test.name, "statistic", "num.df", "den.df", "p.value")
-  fix_data_frame(x$stats, nn)
 }
 
 #' @templateVar class TukeyHSD
@@ -295,8 +242,9 @@ tidy.summary.manova <- function(x, ...) {
 #' @template param_unused_dots
 #'
 #' @evalRd return_tidy(
-#'   "tidy",
-#'   "comparison",
+#'   "term",
+#'   "contrast",
+#'   "null.value",
 #'   "estimate",
 #'   "conf.low",
 #'   "conf.high",
@@ -312,15 +260,21 @@ tidy.summary.manova <- function(x, ...) {
 #' # may include comparisons on multiple terms
 #' fm2 <- aov(mpg ~ as.factor(gear) * as.factor(cyl), data = mtcars)
 #' tidy(TukeyHSD(fm2))
-#'
 #' @export
 #' @seealso [tidy()], [stats::TukeyHSD()]
 #' @family anova tidiers
 tidy.TukeyHSD <- function(x, ...) {
   purrr::map_df(x,
     function(e) {
-      nn <- c("estimate", "conf.low", "conf.high", "adj.p.value")
-      fix_data_frame(e, nn, "comparison")
-    }, .id = "term"
+      null.value <- rep(0, nrow(e))
+      e <- cbind(null.value, e)
+      as_tidy_tibble(
+        e, 
+        new_names = c("null.value", "estimate", "conf.low", 
+                      "conf.high", "adj.p.value"), 
+        new_column = "contrast"
+      )
+    },
+    .id = "term"
   )
 }

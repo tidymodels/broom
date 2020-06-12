@@ -25,14 +25,19 @@ with exactly one row of model summaries. The summaries are typically
 goodness of fit measures, p-values for hypothesis tests on residuals,
 or model convergence information.
 
-Glance never returns information from the original call to the modelling
-function. This includes the name of the modelling function or any
-arguments passed to the modelling function.
+Glance never returns information from the original call to the modeling
+function. This includes the name of the modeling function or any
+arguments passed to the modeling function.
 
 Glance does not calculate summary measures. Rather, it farms out these
 computations to appropriate methods and gathers the results together.
 Sometimes a goodness of fit measure will be undefined. In these cases
 the measure will be reported as \code{NA}.
+
+Glance returns the same number of columns regardless of whether the
+model matrix is rank-deficient or not. If so, entries in columns
+that no longer have a well-defined value are filled in with an \code{NA}
+of the appropriate type.
 }
 \examples{
 
@@ -47,7 +52,7 @@ x <- matrix(rnorm(nobs * nvar), nobs, nvar)
 beta <- c(rnorm(real, 0, 1), rep(0, nvar - real))
 y <- c(t(beta) \%*\% t(x)) + rnorm(nvar, sd = 3)
 
-cvfit1 <- cv.glmnet(x,y)
+cvfit1 <- cv.glmnet(x, y)
 
 tidy(cvfit1)
 glance(cvfit1)
@@ -68,25 +73,24 @@ g
 
 # plot of MSE as a function of lambda with confidence ribbon and choices
 # of minimum lambda marked
-g <- g + 
+g <- g +
   geom_vline(xintercept = glance_cv$lambda.min) +
   geom_vline(xintercept = glance_cv$lambda.1se, lty = 2)
 g
 
 # plot of number of zeros for each choice of lambda
-ggplot(tidied_cv, aes(lambda, nzero)) + 
-  geom_line() + 
+ggplot(tidied_cv, aes(lambda, nzero)) +
+  geom_line() +
   scale_x_log10()
 
 # coefficient plot with min lambda shown
 tidied <- tidy(cvfit1$glmnet.fit)
 
-ggplot(tidied, aes(lambda, estimate, group = term)) + 
+ggplot(tidied, aes(lambda, estimate, group = term)) +
   scale_x_log10() +
   geom_line() +
   geom_vline(xintercept = glance_cv$lambda.min) +
   geom_vline(xintercept = glance_cv$lambda.1se, lty = 2)
-
 }
 \seealso{
 \code{\link[=glance]{glance()}}, \code{\link[glmnet:cv.glmnet]{glmnet::cv.glmnet()}}

@@ -25,23 +25,28 @@ with exactly one row of model summaries. The summaries are typically
 goodness of fit measures, p-values for hypothesis tests on residuals,
 or model convergence information.
 
-Glance never returns information from the original call to the modelling
-function. This includes the name of the modelling function or any
-arguments passed to the modelling function.
+Glance never returns information from the original call to the modeling
+function. This includes the name of the modeling function or any
+arguments passed to the modeling function.
 
 Glance does not calculate summary measures. Rather, it farms out these
 computations to appropriate methods and gathers the results together.
 Sometimes a goodness of fit measure will be undefined. In these cases
 the measure will be reported as \code{NA}.
+
+Glance returns the same number of columns regardless of whether the
+model matrix is rank-deficient or not. If so, entries in columns
+that no longer have a well-defined value are filled in with an \code{NA}
+of the appropriate type.
 }
 \examples{
 
 library(glmnet)
 
 set.seed(2014)
-x <- matrix(rnorm(100*20),100,20)
+x <- matrix(rnorm(100 * 20), 100, 20)
 y <- rnorm(100)
-fit1 <- glmnet(x,y)
+fit1 <- glmnet(x, y)
 
 tidy(fit1)
 glance(fit1)
@@ -51,17 +56,19 @@ library(ggplot2)
 
 tidied <- tidy(fit1) \%>\% filter(term != "(Intercept)")
 
-ggplot(tidied, aes(step, estimate, group = term)) + geom_line()
+ggplot(tidied, aes(step, estimate, group = term)) +
+  geom_line()
 ggplot(tidied, aes(lambda, estimate, group = term)) +
-    geom_line() + scale_x_log10()
+  geom_line() +
+  scale_x_log10()
 
-ggplot(tidied, aes(lambda, dev.ratio)) + geom_line()
+ggplot(tidied, aes(lambda, dev.ratio)) +
+  geom_line()
 
 # works for other types of regressions as well, such as logistic
-g2 <- sample(1:2, 100, replace=TRUE)
-fit2 <- glmnet(x, g2, family="binomial")
+g2 <- sample(1:2, 100, replace = TRUE)
+fit2 <- glmnet(x, g2, family = "binomial")
 tidy(fit2)
-
 }
 \seealso{
 \code{\link[=glance]{glance()}}, \code{\link[glmnet:glmnet]{glmnet::glmnet()}}
@@ -75,7 +82,7 @@ Other glmnet tidiers:
 \value{
 A \code{\link[tibble:tibble]{tibble::tibble()}} with exactly one row and columns:
   \item{nobs}{Number of observations used.}
-  \item{npasses}{total passes over the data across all lambda values}
-  \item{nulldev}{null deviance}
+  \item{npasses}{Total passes over the data across all lambda values.}
+  \item{nulldev}{Null deviance.}
 
 }

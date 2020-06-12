@@ -1,20 +1,19 @@
 #' @templateVar class svyolr
 #' @template title_desc_tidy
-#' 
+#'
 #' @param x A `svyolr` object returned from [survey::svyolr()].
 #' @inherit tidy.polr params details
-#' 
+#'
 #' @export
-#' 
+#'
 #' @examples
-#' 
+#'
 #' library(MASS)
-#' 
+#'
 #' fit <- polr(Sat ~ Infl + Type + Cont, weights = Freq, data = housing)
-#' 
+#'
 #' tidy(fit, exponentiate = TRUE, conf.int = TRUE)
 #' glance(fit)
-#' 
 #' @evalRd return_tidy(regression = TRUE)
 #'
 #' @aliases svyolr_tidiers
@@ -25,7 +24,7 @@ tidy.svyolr <- tidy.polr
 
 #' @templateVar class svyolr
 #' @template title_desc_glance
-#' 
+#'
 #' @inherit tidy.svyolr params examples
 #'
 #' @evalRd return_glance(
@@ -46,26 +45,37 @@ glance.svyolr <- function(x, ...) {
 }
 
 #' @templateVar class svyglm
-#' @template title_desc_tidy_lm_wrapper
+#' @template title_desc_tidy
 #'
 #' @param x A `svyglm` object returned from [survey::svyglm()].
+#' @template param_confint
+#' @template param_exponentiate
+#' @template param_unused_dots
 #'
 #' @export
-#' @family lm tidiers
+#' @family survey tidiers
 #' @seealso [survey::svyglm()], [stats::glm()]
-#' 
-tidy.svyglm <- function(x, conf.int = FALSE, conf.level = .95,
+tidy.svyglm <- function(x, conf.int = FALSE, conf.level = 0.95,
                         exponentiate = FALSE, ...) {
-  
-  s <- summary(x)
-  ret <- tidy.summary.lm(s)
-  
-  # TODO: drop process_lm() dependence
-  process_lm(ret, x,
-             conf.int = conf.int, conf.level = conf.level,
-             exponentiate = exponentiate
-  )
-  
+  ret <- as_tibble(summary(x)$coefficients, rownames = "term")
+  colnames(ret) <- c("term", "estimate", "std.error", "statistic", "p.value")
+
+  # summary(x)$coefficients misses rank deficient rows (i.e. coefs that
+  # summary.lm() sets to NA), catch them here and add them back
+
+  coefs <- tibble::enframe(stats::coef(x), name = "term", value = "estimate")
+  ret <- left_join(coefs, ret, by = c("term", "estimate"))
+
+  if (conf.int) {
+    ci <- broom_confint_terms(x, level = conf.level, ...)
+    ret <- dplyr::left_join(ret, ci, by = "term")
+  }
+
+  if (exponentiate) {
+    ret <- exponentiate(ret)
+  }
+
+  ret
 }
 
 #' @templateVar class svyglm
@@ -76,7 +86,7 @@ tidy.svyglm <- function(x, conf.int = FALSE, conf.level = .95,
 #'   model against which to compute the BIC. See Lumley and Scott
 #'   (2015) for details. Defaults to `x`, which is equivalent
 #'   to not using a maximal model.
-#'   
+#'
 #' @template param_unused_dots
 #'
 #' @evalRd return_glance(
@@ -91,33 +101,32 @@ tidy.svyglm <- function(x, conf.int = FALSE, conf.level = .95,
 #' @examples
 #'
 #' library(survey)
-#' 
+#'
 #' set.seed(123)
 #' data(api)
-#' 
+#'
 #' # survey design
 #' dstrat <-
 #'   svydesign(
-#'     id =  ~ 1,
-#'     strata =  ~ stype,
-#'     weights =  ~ pw,
+#'     id = ~1,
+#'     strata = ~stype,
+#'     weights = ~pw,
 #'     data = apistrat,
-#'     fpc =  ~ fpc
+#'     fpc = ~fpc
 #'   )
-#' 
+#'
 #' # model
 #' m <- survey::svyglm(
 #'   formula = sch.wide ~ ell + meals + mobility,
 #'   design = dstrat,
 #'   family = quasibinomial()
 #' )
-#' 
-#' glance(m)
 #'
-#' @references Lumley T, Scott A (2015). AIC and BIC for modelling with complex 
+#' glance(m)
+#' @references Lumley T, Scott A (2015). AIC and BIC for modelling with complex
 #'   survey data. *Journal of Survey Statistics and Methodology*, 3(1).
 #'   <https://doi.org/10.1093/jssam/smu021>.
-#' 
+#'
 #' @export
 #' @family lm tidiers
 #' @seealso [survey::svyglm()], [stats::glm()], [survey::anova.svyglm]
@@ -132,13 +141,14 @@ glance.svyglm <- function(x, maximal = x, ...) {
   #
   # (2) AIC is not always directly computed by svyglm,
   #   e.g. if family = quasibinomial()
-  
-  tibble(
+
+  as_glance_tibble(
     null.deviance = x$null.deviance,
     df.null = x$df.null,
     AIC = stats::AIC(x)["AIC"],
     BIC = stats::BIC(x, maximal = maximal)["BIC"],
     deviance = x$deviance,
-    df.residual = x$df.residual
+    df.residual = x$df.residual,
+    na_types = "rirrri"
   )
 }

@@ -34,13 +34,18 @@ or \verb{glance_<function>} and are not exported (but they are documented!).
 
 If no appropriate tidying method is found, throws an error.
 }
+\note{
+This function assumes that the provided objective function is a negative
+log-likelihood function. Results will be invalid if an incorrect
+function is supplied.
+
+tidy(o)
+glance(o)
+}
 \examples{
 
 f <- function(x) (x[1] - 2)^2 + (x[2] - 3)^2 + (x[3] - 8)^2
 o <- optim(c(1, 1, 1), f)
-
-tidy(o)
-glance(o)
 
 }
 \seealso{
@@ -58,6 +63,6 @@ Other list tidiers:
 A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
   \item{parameter}{The parameter being modeled.}
   \item{std.error}{The standard error of the regression term.}
-  \item{value}{TODO. needs better documentation.}
+  \item{value}{The value/estimate of the component. Results from data reshaping.}
 \code{std.error} is only provided as a column if the Hessian is calculated.
 }

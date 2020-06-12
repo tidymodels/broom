@@ -47,7 +47,7 @@ data).}
 component. That is, the location of the observation in PCA space.}
 
 If \code{matrix} is \code{"v"}, \code{"rotation"}, \code{"loadings"} or \code{"variables"}, each
-row in the tidied ouput corresponds to information about the principle
+row in the tidied output corresponds to information about the principle
 components in the original space. The columns are:
 
 \item{\code{row}}{The variable labels (colnames) of the data set on
@@ -60,14 +60,15 @@ If \code{matrix} is \code{"d"}, \code{"eigenvalues"} or \code{"pcs"}, the column
 
 \item{\code{PC}}{An integer vector indicating the principal component}
 \item{\code{std.dev}}{Standard deviation explained by this PC}
-\item{\code{percent}}{Percentage of variation explained}
-\item{\code{cumulative}}{Cumulative percentage of variation explained}
+\item{\code{percent}}{Fraction of variation explained by this component}
+\item{\code{cumulative}}{Cumulative fraction of variation explained by
+principle components up to this component.}
 }
 \description{
 Tidy summarizes information about the components of a model.
 A model component might be a single term in a regression, a single
 hypothesis, a cluster, or a class. Exactly what tidy considers to be a
-model component varies cross models but is usually self-evident.
+model component varies across models but is usually self-evident.
 If a model has several distinct types of components, you will need to
 specify which components to return.
 }
@@ -99,7 +100,7 @@ pc \%>\%
   inner_join(map_data("state"), by = "region") \%>\%
   ggplot(aes(long, lat, group = group, fill = value)) +
   geom_polygon() +
-  facet_wrap(~ PC) +
+  facet_wrap(~PC) +
   theme_void() +
   ggtitle("Principal components of arrest data")
 
@@ -109,7 +110,6 @@ au
 ggplot(au, aes(.fittedPC1, .fittedPC2)) +
   geom_point() +
   geom_text(aes(label = .rownames), vjust = 1, hjust = 1)
-
 }
 \seealso{
 \code{\link[stats:prcomp]{stats::prcomp()}}, \link{svd_tidiers}

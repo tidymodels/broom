@@ -32,11 +32,14 @@ accept a \code{newdata} argument, it will use the default value for
 the \code{data} argument.}
 }
 \description{
-This method wraps \code{\link[=tidy.lm]{tidy.lm()}}.
+Tidy summarizes information about the components of a model.
+A model component might be a single term in a regression, a single
+hypothesis, a cluster, or a class. Exactly what tidy considers to be a
+model component varies across models but is usually self-evident.
+If a model has several distinct types of components, you will need to
+specify which components to return.
 }
 \seealso{
-\code{\link[=tidy]{tidy()}}, \code{\link[=tidy.lm]{tidy.lm()}}
-
 \code{\link[stats:glm]{stats::glm()}}
 
 Other lm tidiers: 
@@ -47,7 +50,6 @@ Other lm tidiers:
 \code{\link{glance.svyglm}()},
 \code{\link{tidy.lm.beta}()},
 \code{\link{tidy.lm}()},
-\code{\link{tidy.mlm}()},
-\code{\link{tidy.svyglm}()}
+\code{\link{tidy.mlm}()}
 }
 \concept{lm tidiers}

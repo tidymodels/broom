@@ -36,12 +36,13 @@ the \code{data} argument.}
 Tidy summarizes information about the components of a model.
 A model component might be a single term in a regression, a single
 hypothesis, a cluster, or a class. Exactly what tidy considers to be a
-model component varies cross models but is usually self-evident.
+model component varies across models but is usually self-evident.
 If a model has several distinct types of components, you will need to
 specify which components to return.
 }
 \examples{
 
+\dontrun{
 library(biglm)
 
 bfit <- biglm(mpg ~ wt + disp, mtcars)
@@ -53,6 +54,7 @@ glance(bfit)
 
 # bigglm: logistic regression
 bgfit <- bigglm(am ~ mpg, mtcars, family = binomial())
+
 tidy(bgfit)
 tidy(bgfit, exponentiate = TRUE)
 tidy(bgfit, conf.int = TRUE)
@@ -60,6 +62,7 @@ tidy(bgfit, conf.int = TRUE, conf.level = .9)
 tidy(bgfit, conf.int = TRUE, conf.level = .9, exponentiate = TRUE)
 
 glance(bgfit)
+}
 
 }
 \seealso{

@@ -48,7 +48,7 @@ the \code{data} argument.}
 Tidy summarizes information about the components of a model.
 A model component might be a single term in a regression, a single
 hypothesis, a cluster, or a class. Exactly what tidy considers to be a
-model component varies cross models but is usually self-evident.
+model component varies across models but is usually self-evident.
 If a model has several distinct types of components, you will need to
 specify which components to return.
 }
@@ -58,21 +58,21 @@ specify which components to return.
 library(joineRML)
 data(heart.valve)
 hvd <- heart.valve[!is.na(heart.valve$log.grad) &
-                       !is.na(heart.valve$log.lvmi) &
-                       heart.valve$num <= 50, ]
+  !is.na(heart.valve$log.lvmi) &
+  heart.valve$num <= 50, ]
 fit <- mjoint(
-    formLongFixed = list(
-        "grad" = log.grad ~ time + sex + hs,
-        "lvmi" = log.lvmi ~ time + sex
-    ),
-    formLongRandom = list(
-        "grad" = ~ 1 | num,
-        "lvmi" = ~ time | num
-    ),
-    formSurv = Surv(fuyrs, status) ~ age,
-    data = hvd,
-    inits = list("gamma" = c(0.11, 1.51, 0.80)),
-    timeVar = "time"
+  formLongFixed = list(
+    "grad" = log.grad ~ time + sex + hs,
+    "lvmi" = log.lvmi ~ time + sex
+  ),
+  formLongRandom = list(
+    "grad" = ~ 1 | num,
+    "lvmi" = ~ time | num
+  ),
+  formSurv = Surv(fuyrs, status) ~ age,
+  data = hvd,
+  inits = list("gamma" = c(0.11, 1.51, 0.80)),
+  timeVar = "time"
 )
 
 # Extract the survival fixed effects

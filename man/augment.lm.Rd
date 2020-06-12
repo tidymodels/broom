@@ -51,15 +51,15 @@ object. Pass datasets to \code{newdata} to augment data that was not used
 during model fitting. This still requires that all columns used to fit
 the model are present.
 
-Augment will often behavior different depending on whether \code{data} or
-\code{newdata} is specified. This is because there is often information
+Augment will often behave differently depending on whether \code{data} or
+\code{newdata} is given. This is because there is often information
 associated with training observations (such as influences or related)
 measures that is not meaningfully defined for new observations.
 
 For convenience, many augment methods provide default \code{data} arguments,
 so that \code{augment(fit)} will return the augmented training data. In these
-cases augment tries to reconstruct the original data based on the model
-object, with some varying degrees of success.
+cases, augment tries to reconstruct the original data based on the model
+object with varying degrees of success.
 
 The augmented dataset is always returned as a \link[tibble:tibble]{tibble::tibble} with the
 \strong{same number of rows} as the passed dataset. This means that the
@@ -117,7 +117,9 @@ augment(mod)
 augment(mod, mtcars)
 
 # predict on new data
-newdata <- mtcars \%>\% head(6) \%>\% mutate(wt = wt + 1)
+newdata <- mtcars \%>\%
+  head(6) \%>\%
+  mutate(wt = wt + 1)
 augment(mod, newdata = newdata)
 
 au <- augment(mod, data = mtcars)
@@ -125,7 +127,8 @@ au <- augment(mod, data = mtcars)
 ggplot(au, aes(.hat, .std.resid)) +
   geom_vline(size = 2, colour = "white", xintercept = 0) +
   geom_hline(size = 2, colour = "white", yintercept = 0) +
-  geom_point() + geom_smooth(se = FALSE)
+  geom_point() +
+  geom_smooth(se = FALSE)
 
 plot(mod, which = 6)
 ggplot(au, aes(.hat, .cooksd)) +
@@ -153,8 +156,7 @@ Other lm tidiers:
 \code{\link{tidy.glm}()},
 \code{\link{tidy.lm.beta}()},
 \code{\link{tidy.lm}()},
-\code{\link{tidy.mlm}()},
-\code{\link{tidy.svyglm}()}
+\code{\link{tidy.mlm}()}
 }
 \concept{lm tidiers}
 \value{
@@ -162,7 +164,7 @@ A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
   \item{.cooksd}{Cooks distance.}
   \item{.fitted}{Fitted or predicted value.}
   \item{.hat}{Diagonal of the hat matrix.}
-  \item{.resid}{The difference between fitted and observed values.}
+  \item{.resid}{The difference between observed and fitted values.}
   \item{.se.fit}{Standard errors of fitted values.}
   \item{.sigma}{Estimated residual standard deviation when corresponding observation is dropped from model.}
   \item{.std.resid}{Standardised residuals.}

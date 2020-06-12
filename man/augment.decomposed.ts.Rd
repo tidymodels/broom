@@ -47,15 +47,15 @@ object. Pass datasets to \code{newdata} to augment data that was not used
 during model fitting. This still requires that all columns used to fit
 the model are present.
 
-Augment will often behavior different depending on whether \code{data} or
-\code{newdata} is specified. This is because there is often information
+Augment will often behave differently depending on whether \code{data} or
+\code{newdata} is given. This is because there is often information
 associated with training observations (such as influences or related)
 measures that is not meaningfully defined for new observations.
 
 For convenience, many augment methods provide default \code{data} arguments,
 so that \code{augment(fit)} will return the augmented training data. In these
-cases augment tries to reconstruct the original data based on the model
-object, with some varying degrees of success.
+cases, augment tries to reconstruct the original data based on the model
+object with varying degrees of success.
 
 The augmented dataset is always returned as a \link[tibble:tibble]{tibble::tibble} with the
 \strong{same number of rows} as the passed dataset. This means that the
@@ -83,8 +83,10 @@ d2 <- stats::stl(nottem, s.window = "periodic", robust = TRUE)
 
 # Compare the original series to its decompositions.
 
-cbind(broom::tidy(nottem), broom::augment(d1),
-      broom::augment(d2))
+cbind(
+  broom::tidy(nottem), broom::augment(d1),
+  broom::augment(d2)
+)
 
 # Visually compare seasonal decompositions in tidy data frames.
 
@@ -94,30 +96,31 @@ library(tidyr)
 library(ggplot2)
 
 decomps <- tibble(
-    # Turn the ts objects into data frames.
-    series = list(as.data.frame(nottem), as.data.frame(nottem)),
-    # Add the models in, one for each row.
-    decomp = c("decompose", "stl"),
-    model = list(d1, d2)
+  # Turn the ts objects into data frames.
+  series = list(as.data.frame(nottem), as.data.frame(nottem)),
+  # Add the models in, one for each row.
+  decomp = c("decompose", "stl"),
+  model = list(d1, d2)
 ) \%>\%
-    rowwise() \%>\%
-    # Pull out the fitted data using broom::augment.
-    mutate(augment = list(broom::augment(model))) \%>\%
-    ungroup() \%>\%
-    # Unnest the data frames into a tidy arrangement of
-    # the series next to its seasonal decomposition, grouped
-    # by the method (stl or decompose).
-    group_by(decomp) \%>\%
-    unnest(series, augment) \%>\%
-    mutate(index = 1:n()) \%>\%
-    ungroup() \%>\%
-    select(decomp, index, x, adjusted = .seasadj)
+  rowwise() \%>\%
+  # Pull out the fitted data using broom::augment.
+  mutate(augment = list(broom::augment(model))) \%>\%
+  ungroup() \%>\%
+  # Unnest the data frames into a tidy arrangement of
+  # the series next to its seasonal decomposition, grouped
+  # by the method (stl or decompose).
+  group_by(decomp) \%>\%
+  unnest(c(series, augment)) \%>\%
+  mutate(index = 1:n()) \%>\%
+  ungroup() \%>\%
+  select(decomp, index, x, adjusted = .seasadj)
 
 ggplot(decomps) +
-    geom_line(aes(x = index, y = x), colour = "black") +
-    geom_line(aes(x = index, y = adjusted, colour = decomp,
-                  group = decomp))
-
+  geom_line(aes(x = index, y = x), colour = "black") +
+  geom_line(aes(
+    x = index, y = adjusted, colour = decomp,
+    group = decomp
+  ))
 }
 \seealso{
 \code{\link[=augment]{augment()}}, \code{\link[stats:decompose]{stats::decompose()}}

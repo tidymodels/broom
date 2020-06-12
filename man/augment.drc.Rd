@@ -66,15 +66,15 @@ object. Pass datasets to \code{newdata} to augment data that was not used
 during model fitting. This still requires that all columns used to fit
 the model are present.
 
-Augment will often behavior different depending on whether \code{data} or
-\code{newdata} is specified. This is because there is often information
+Augment will often behave differently depending on whether \code{data} or
+\code{newdata} is given. This is because there is often information
 associated with training observations (such as influences or related)
 measures that is not meaningfully defined for new observations.
 
 For convenience, many augment methods provide default \code{data} arguments,
 so that \code{augment(fit)} will return the augmented training data. In these
-cases augment tries to reconstruct the original data based on the model
-object, with some varying degrees of success.
+cases, augment tries to reconstruct the original data based on the model
+object with varying degrees of success.
 
 The augmented dataset is always returned as a \link[tibble:tibble]{tibble::tibble} with the
 \strong{same number of rows} as the passed dataset. This means that the
@@ -94,8 +94,9 @@ missing at this time.
 
 library(drc)
 
-mod <- drm(dead/total~conc, type, 
-   weights = total, data = selenium, fct = LL.2(), type = "binomial")
+mod <- drm(dead / total ~ conc, type,
+  weights = total, data = selenium, fct = LL.2(), type = "binomial"
+)
 
 tidy(mod)
 tidy(mod, conf.int = TRUE)
@@ -103,8 +104,6 @@ tidy(mod, conf.int = TRUE)
 glance(mod)
 
 augment(mod, selenium)
-
-
 }
 \seealso{
 \code{\link[=augment]{augment()}}, \code{\link[drc:drm]{drc::drm()}}
@@ -120,7 +119,7 @@ A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
   \item{.conf.low}{Lower bound on confidence interval for fitted values.}
   \item{.cooksd}{Cooks distance.}
   \item{.fitted}{Fitted or predicted value.}
-  \item{.resid}{The difference between fitted and observed values.}
+  \item{.resid}{The difference between observed and fitted values.}
   \item{.se.fit}{Standard errors of fitted values.}
 
 }

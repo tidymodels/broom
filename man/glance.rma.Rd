@@ -27,14 +27,19 @@ with exactly one row of model summaries. The summaries are typically
 goodness of fit measures, p-values for hypothesis tests on residuals,
 or model convergence information.
 
-Glance never returns information from the original call to the modelling
-function. This includes the name of the modelling function or any
-arguments passed to the modelling function.
+Glance never returns information from the original call to the modeling
+function. This includes the name of the modeling function or any
+arguments passed to the modeling function.
 
 Glance does not calculate summary measures. Rather, it farms out these
 computations to appropriate methods and gathers the results together.
 Sometimes a goodness of fit measure will be undefined. In these cases
 the measure will be reported as \code{NA}.
+
+Glance returns the same number of columns regardless of whether the
+model matrix is rank-deficient or not. If so, entries in columns
+that no longer have a well-defined value are filled in with an \code{NA}
+of the appropriate type.
 }
 \examples{
 
@@ -53,16 +58,15 @@ df <-
 meta_analysis <- rma(yi, vi, data = df, method = "EB")
 
 glance(meta_analysis)
-
 }
 \value{
 A \code{\link[tibble:tibble]{tibble::tibble()}} with exactly one row and columns:
   \item{cochran.qe}{In meta-analysis, test statistic for the Cochran's Q_e test of residual heterogeneity.}
   \item{cochran.qm}{In meta-analysis, test statistic for the Cochran's Q_m omnibus test of coefficients.}
   \item{df.residual}{Residual degrees of freedom.}
-  \item{h.squared}{Value of the H-Squared statistic}
-  \item{i.squared}{Value of the I-Squared statistic}
-  \item{measure}{the measure used in the meta-analysis}
+  \item{h.squared}{Value of the H-Squared statistic.}
+  \item{i.squared}{Value of the I-Squared statistic.}
+  \item{measure}{The measure used in the meta-analysis.}
   \item{method}{Which method was used.}
   \item{nobs}{Number of observations used.}
   \item{p.value.cochran.qe}{In meta-analysis, p-value for the Cochran's Q_e test of residual heterogeneity.}

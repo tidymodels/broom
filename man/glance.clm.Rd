@@ -25,14 +25,19 @@ with exactly one row of model summaries. The summaries are typically
 goodness of fit measures, p-values for hypothesis tests on residuals,
 or model convergence information.
 
-Glance never returns information from the original call to the modelling
-function. This includes the name of the modelling function or any
-arguments passed to the modelling function.
+Glance never returns information from the original call to the modeling
+function. This includes the name of the modeling function or any
+arguments passed to the modeling function.
 
 Glance does not calculate summary measures. Rather, it farms out these
 computations to appropriate methods and gathers the results together.
 Sometimes a goodness of fit measure will be undefined. In these cases
 the measure will be reported as \code{NA}.
+
+Glance returns the same number of columns regardless of whether the
+model matrix is rank-deficient or not. If so, entries in columns
+that no longer have a well-defined value are filled in with an \code{NA}
+of the appropriate type.
 }
 \examples{
 
@@ -48,10 +53,9 @@ glance(fit)
 augment(fit, type.predict = "prob")
 augment(fit, type.predict = "class")
 
-fit2 <- clm(rating ~ temp, nominal = ~ contact, data = wine)
+fit2 <- clm(rating ~ temp, nominal = ~contact, data = wine)
 tidy(fit2)
 glance(fit2)
-
 }
 \seealso{
 \link{tidy}, \code{\link[ordinal:clm]{ordinal::clm()}}
@@ -73,7 +77,7 @@ A \code{\link[tibble:tibble]{tibble::tibble()}} with exactly one row and columns
   \item{AIC}{Akaike's Information Criterion for the model.}
   \item{BIC}{Bayesian Information Criterion for the model.}
   \item{df.residual}{Residual degrees of freedom.}
-  \item{edf}{The effective degrees of freedom}
+  \item{edf}{The effective degrees of freedom.}
   \item{logLik}{The log-likelihood of the model. [stats::logLik()] may be a useful reference.}
   \item{nobs}{Number of observations used.}
 

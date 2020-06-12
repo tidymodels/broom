@@ -5,62 +5,53 @@
 #' @template param_confint
 #' @template param_unused_dots
 #'
-#' @evalRd return_tidy(   
-#'       curveid = "Id of the curve",   
-#'       "term",
-#'       "estimate",
-#'       "std.error",
-#'       "statistic",
-#'       "p.value",
-#'       "conf.low",
-#'       "conf.high"
+#' @evalRd return_tidy(
+#'   curve = "Index identifying the curve.",
+#'   regression = TRUE
 #' )
-#' @details The tibble has one row for each curve and term in the regression. The
-#'   `curveid` column indicates the curve.
-#'  
-#' @examples 
-#' 
+#'
+#' @details The tibble has one row for each curve and term in the regression.
+#'   The `curveid` column indicates the curve.
+#'
+#' @examples
+#'
 #' library(drc)
-#' 
-#' mod <- drm(dead/total~conc, type, 
-#'    weights = total, data = selenium, fct = LL.2(), type = "binomial")
-#' 
+#'
+#' mod <- drm(dead / total ~ conc, type,
+#'   weights = total, data = selenium, fct = LL.2(), type = "binomial"
+#' )
+#'
 #' tidy(mod)
 #' tidy(mod, conf.int = TRUE)
-#' 
+#'
 #' glance(mod)
-#' 
+#'
 #' augment(mod, selenium)
-#' 
-#' 
 #' @export
 #' @seealso [tidy()], [drc::drm()]
 #' @family drc tidiers
 #' @aliases drc_tidiers
 tidy.drc <- function(x, conf.int = FALSE, conf.level = 0.95, ...) {
-  
   ret <- coef(summary(x))
   ret <- as_tibble(ret, rownames = "term")
-  ret <- tidyr::separate(ret, term, c("term", "curve"))
-  
-  names(ret) <- c("term", "curve", "estimate", "std.error", "statistic", "p.value")
+  names(ret) <- c("term", "estimate", "std.error", "statistic", "p.value")
 
   if (conf.int) {
     ci <- broom_confint_terms(x, level = conf.level)
     ret <- dplyr::left_join(ret, ci, by = "term")
   }
-  
-  ret
+
+  tidyr::separate(ret, term, c("term", "curve"))
 }
 
 #' @templateVar class drc
 #' @template title_desc_glance
-#' 
+#'
 #' @inherit tidy.drc params examples
 #' @template param_unused_dots
-#' 
+#'
 #' @evalRd return_glance(
-#'   "logLik", 
+#'   "logLik",
 #'   "AIC",
 #'   "AICc" = "AIC corrected for small samples",
 #'   "BIC",
@@ -70,11 +61,12 @@ tidy.drc <- function(x, conf.int = FALSE, conf.level = 0.95, ...) {
 #' @export
 #' @family drc tidiers
 glance.drc <- function(x, ...) {
-  tibble(
+  as_glance_tibble(
     AIC = stats::AIC(x),
     BIC = stats::BIC(x),
     logLik = stats::logLik(x),
-    df.residual =  x$df.residual
+    df.residual = x$df.residual,
+    na_types = "rrri"
   )
 }
 
@@ -96,14 +88,13 @@ glance.drc <- function(x, ...) {
 #'   ".resid",
 #'   ".cooksd"
 #' )
-#' 
+#'
 #' @seealso [augment()], [drc::drm()]
 #' @export
-#' 
+#'
 #' @family drc tidiers
 augment.drc <- function(x, data = NULL, newdata = NULL,
-  se_fit = FALSE,  conf.int = FALSE, conf.level = 0.95, ...) {
-
+                        se_fit = FALSE, conf.int = FALSE, conf.level = 0.95, ...) {
   if (is.null(data) && is.null(newdata)) {
     stop("Must specify either `data` or `newdata` argument.", call. = FALSE)
   }
@@ -119,17 +110,19 @@ augment.drc <- function(x, data = NULL, newdata = NULL,
     original$.rownames <- rownames(original)
   }
 
-  if (!missing(newdata) && x$curveVarNam %in% names(newdata) && 
+  if (!missing(newdata) && x$curveVarNam %in% names(newdata) &&
     any(is.na(newdata[[x$curveVarNam]]))) {
-      newdata <- newdata[!is.na(newdata[[x$curveVarNam]]), ]
+    newdata <- newdata[!is.na(newdata[[x$curveVarNam]]), ]
   }
 
   ret <- augment_columns(x, data, newdata, se.fit = FALSE)
 
   if (!is.null(newdata)) {
     if (conf.int) {
-      preds <- data.frame(predict(x, newdata = newdata, interval = "confidence",
-        level = conf.level))
+      preds <- data.frame(predict(x,
+        newdata = newdata, interval = "confidence",
+        level = conf.level
+      ))
       ret[[".conf.low"]] <- preds[["Lower"]]
       ret[[".conf.high"]] <- preds[["Upper"]]
     }

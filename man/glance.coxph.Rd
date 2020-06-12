@@ -25,14 +25,19 @@ with exactly one row of model summaries. The summaries are typically
 goodness of fit measures, p-values for hypothesis tests on residuals,
 or model convergence information.
 
-Glance never returns information from the original call to the modelling
-function. This includes the name of the modelling function or any
-arguments passed to the modelling function.
+Glance never returns information from the original call to the modeling
+function. This includes the name of the modeling function or any
+arguments passed to the modeling function.
 
 Glance does not calculate summary measures. Rather, it farms out these
 computations to appropriate methods and gathers the results together.
 Sometimes a goodness of fit measure will be undefined. In these cases
 the measure will be reported as \code{NA}.
+
+Glance returns the same number of columns regardless of whether the
+model matrix is rank-deficient or not. If so, entries in columns
+that no longer have a well-defined value are filled in with an \code{NA}
+of the appropriate type.
 }
 \examples{
 
@@ -54,9 +59,9 @@ resp <- levels(logan$occupation)
 n <- nrow(logan)
 indx <- rep(1:n, length(resp))
 logan2 <- data.frame(
-  logan[indx,],
+  logan[indx, ],
   id = indx,
-  tocc = factor(rep(resp, each=n))
+  tocc = factor(rep(resp, each = n))
 )
 
 logan2$case <- (logan2$occupation == logan2$tocc)
@@ -70,13 +75,11 @@ library(ggplot2)
 ggplot(lp, aes(age, .fitted, color = sex)) +
   geom_point()
 
-ggplot(risks, aes(age, .fitted, color = sex)) + 
-  geom_point()
-  
-ggplot(expected, aes(time, .fitted, color = sex)) + 
+ggplot(risks, aes(age, .fitted, color = sex)) +
   geom_point()
 
-
+ggplot(expected, aes(time, .fitted, color = sex)) +
+  geom_point()
 }
 \seealso{
 \code{\link[=glance]{glance()}}, \code{\link[survival:coxph]{survival::coxph()}}
@@ -111,8 +114,8 @@ A \code{\link[tibble:tibble]{tibble::tibble()}} with exactly one row and columns
   \item{AIC}{Akaike's Information Criterion for the model.}
   \item{BIC}{Bayesian Information Criterion for the model.}
   \item{logLik}{The log-likelihood of the model. [stats::logLik()] may be a useful reference.}
-  \item{nevent}{number of events}
+  \item{n}{The total number of observations.}
+  \item{nevent}{Number of events.}
   \item{nobs}{Number of observations used.}
-  \item{r.squared}{R squared statistic, or the percent of variation explained by the model. Also known as the coefficient of determination.}
-
+See survival::coxph.object for additional column descriptions.
 }

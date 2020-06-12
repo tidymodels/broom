@@ -25,14 +25,19 @@ with exactly one row of model summaries. The summaries are typically
 goodness of fit measures, p-values for hypothesis tests on residuals,
 or model convergence information.
 
-Glance never returns information from the original call to the modelling
-function. This includes the name of the modelling function or any
-arguments passed to the modelling function.
+Glance never returns information from the original call to the modeling
+function. This includes the name of the modeling function or any
+arguments passed to the modeling function.
 
 Glance does not calculate summary measures. Rather, it farms out these
 computations to appropriate methods and gathers the results together.
 Sometimes a goodness of fit measure will be undefined. In these cases
 the measure will be reported as \code{NA}.
+
+Glance returns the same number of columns regardless of whether the
+model matrix is rank-deficient or not. If so, entries in columns
+that no longer have a well-defined value are filled in with an \code{NA}
+of the appropriate type.
 }
 \examples{
 
@@ -60,7 +65,9 @@ augment(mod)
 augment(mod, mtcars)
 
 # predict on new data
-newdata <- mtcars \%>\% head(6) \%>\% mutate(wt = wt + 1)
+newdata <- mtcars \%>\%
+  head(6) \%>\%
+  mutate(wt = wt + 1)
 augment(mod, newdata = newdata)
 
 au <- augment(mod, data = mtcars)
@@ -68,7 +75,8 @@ au <- augment(mod, data = mtcars)
 ggplot(au, aes(.hat, .std.resid)) +
   geom_vline(size = 2, colour = "white", xintercept = 0) +
   geom_hline(size = 2, colour = "white", yintercept = 0) +
-  geom_point() + geom_smooth(se = FALSE)
+  geom_point() +
+  geom_smooth(se = FALSE)
 
 plot(mod, which = 6)
 ggplot(au, aes(.hat, .cooksd)) +
@@ -94,8 +102,7 @@ Other lm tidiers:
 \code{\link{tidy.glm}()},
 \code{\link{tidy.lm.beta}()},
 \code{\link{tidy.lm}()},
-\code{\link{tidy.mlm}()},
-\code{\link{tidy.svyglm}()}
+\code{\link{tidy.mlm}()}
 }
 \concept{lm tidiers}
 \value{
@@ -111,6 +118,9 @@ A \code{\link[tibble:tibble]{tibble::tibble()}} with exactly one row and columns
   \item{r.squared}{R squared statistic, or the percent of variation explained by the model. Also known as the coefficient of determination.}
   \item{sigma}{Estimated standard error of the residuals.}
   \item{statistic}{Test statistic.}
-  \item{df}{The degrees for freedom from the numerator of the overall F-statistic. This is new in broom 0.7.0. Previously, this reported the rank of the design matrix, which is one more than the numerator degrees of freedom of the overall F-statistic.}
+  \item{df}{The degrees for freedom from the numerator of the overall 
+    F-statistic. This is new in broom 0.7.0. Previously, this reported 
+    the rank of the design matrix, which is one more than the numerator 
+    degrees of freedom of the overall F-statistic.}
 
 }

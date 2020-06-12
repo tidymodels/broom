@@ -1,3 +1,4 @@
+^CRAN-RELEASE$
 ^.*\.Rproj$
 ^\.Rproj\.user$
 ^man-roxygen$
@@ -16,3 +17,4 @@
 ^\.httr-oauth$
 ^\.lintr$
 ^pkgdown$
+^CRAN-RELEASE$

@@ -25,14 +25,19 @@ with exactly one row of model summaries. The summaries are typically
 goodness of fit measures, p-values for hypothesis tests on residuals,
 or model convergence information.
 
-Glance never returns information from the original call to the modelling
-function. This includes the name of the modelling function or any
-arguments passed to the modelling function.
+Glance never returns information from the original call to the modeling
+function. This includes the name of the modeling function or any
+arguments passed to the modeling function.
 
 Glance does not calculate summary measures. Rather, it farms out these
 computations to appropriate methods and gathers the results together.
 Sometimes a goodness of fit measure will be undefined. In these cases
 the measure will be reported as \code{NA}.
+
+Glance returns the same number of columns regardless of whether the
+model matrix is rank-deficient or not. If so, entries in columns
+that no longer have a well-defined value are filled in with an \code{NA}
+of the appropriate type.
 }
 \examples{
 
@@ -44,19 +49,20 @@ tidy(sfit)
 glance(sfit)
 
 library(ggplot2)
-ggplot(tidy(sfit), aes(time, estimate)) + geom_line() +
-    geom_ribbon(aes(ymin=conf.low, ymax=conf.high), alpha=.25)
+ggplot(tidy(sfit), aes(time, estimate)) +
+  geom_line() +
+  geom_ribbon(aes(ymin = conf.low, ymax = conf.high), alpha = .25)
 
 # multi-state
 fitCI <- survfit(Surv(stop, status * as.numeric(event), type = "mstate") ~ 1,
-              data = mgus1, subset = (start == 0))
+  data = mgus1, subset = (start == 0)
+)
 td_multi <- tidy(fitCI)
 td_multi
 
 ggplot(td_multi, aes(time, estimate, group = state)) +
-    geom_line(aes(color = state)) +
-    geom_ribbon(aes(ymin = conf.low, ymax = conf.high), alpha = .25)
-
+  geom_line(aes(color = state)) +
+  geom_ribbon(aes(ymin = conf.low, ymax = conf.high), alpha = .25)
 }
 \seealso{
 \code{\link[=glance]{glance()}}, \code{\link[survival:survfit]{survival::survfit()}}
@@ -88,13 +94,13 @@ Other survival tidiers:
 \concept{survival tidiers}
 \value{
 A \code{\link[tibble:tibble]{tibble::tibble()}} with exactly one row and columns:
-  \item{events}{number of events}
+  \item{events}{Number of events.}
   \item{n.max}{Maximum number of subjects at risk.}
   \item{n.start}{Initial number of subjects at risk.}
   \item{nobs}{Number of observations used.}
-  \item{records}{number of observations}
+  \item{records}{Number of observations}
   \item{rmean}{Restricted mean (see [survival::print.survfit()]).}
-  \item{rmean.std.error}{Restricted mean standard error}
+  \item{rmean.std.error}{Restricted mean standard error.}
   \item{conf.low}{lower end of confidence interval on median}
   \item{conf.high}{upper end of confidence interval on median}
   \item{median}{median survival}

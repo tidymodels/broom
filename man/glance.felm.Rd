@@ -25,33 +25,38 @@ with exactly one row of model summaries. The summaries are typically
 goodness of fit measures, p-values for hypothesis tests on residuals,
 or model convergence information.
 
-Glance never returns information from the original call to the modelling
-function. This includes the name of the modelling function or any
-arguments passed to the modelling function.
+Glance never returns information from the original call to the modeling
+function. This includes the name of the modeling function or any
+arguments passed to the modeling function.
 
 Glance does not calculate summary measures. Rather, it farms out these
 computations to appropriate methods and gathers the results together.
 Sometimes a goodness of fit measure will be undefined. In these cases
 the measure will be reported as \code{NA}.
+
+Glance returns the same number of columns regardless of whether the
+model matrix is rank-deficient or not. If so, entries in columns
+that no longer have a well-defined value are filled in with an \code{NA}
+of the appropriate type.
 }
 \examples{
 
 library(lfe)
 
-N=1e2
+N <- 1e2
 DT <- data.frame(
   id = sample(5, N, TRUE),
-  v1 =  sample(5, N, TRUE),
-  v2 =  sample(1e6, N, TRUE),
-  v3 =  sample(round(runif(100,max=100),4), N, TRUE),
-  v4 =  sample(round(runif(100,max=100),4), N, TRUE)
+  v1 = sample(5, N, TRUE),
+  v2 = sample(1e6, N, TRUE),
+  v3 = sample(round(runif(100, max = 100), 4), N, TRUE),
+  v4 = sample(round(runif(100, max = 100), 4), N, TRUE)
 )
 
-result_felm <- felm(v2~v3, DT)
+result_felm <- felm(v2 ~ v3, DT)
 tidy(result_felm)
 augment(result_felm)
 
-result_felm <- felm(v2~v3|id+v1, DT)
+result_felm <- felm(v2 ~ v3 | id + v1, DT)
 tidy(result_felm, fe = TRUE)
 tidy(result_felm, robust = TRUE)
 augment(result_felm)
@@ -60,12 +65,11 @@ v1 <- DT$v1
 v2 <- DT$v2
 v3 <- DT$v3
 id <- DT$id
-result_felm <- felm(v2~v3|id+v1)
+result_felm <- felm(v2 ~ v3 | id + v1)
 
 tidy(result_felm)
 augment(result_felm)
 glance(result_felm)
-
 }
 \value{
 A \code{\link[tibble:tibble]{tibble::tibble()}} with exactly one row and columns:

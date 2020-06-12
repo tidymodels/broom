@@ -25,14 +25,19 @@ with exactly one row of model summaries. The summaries are typically
 goodness of fit measures, p-values for hypothesis tests on residuals,
 or model convergence information.
 
-Glance never returns information from the original call to the modelling
-function. This includes the name of the modelling function or any
-arguments passed to the modelling function.
+Glance never returns information from the original call to the modeling
+function. This includes the name of the modeling function or any
+arguments passed to the modeling function.
 
 Glance does not calculate summary measures. Rather, it farms out these
 computations to appropriate methods and gathers the results together.
 Sometimes a goodness of fit measure will be undefined. In these cases
 the measure will be reported as \code{NA}.
+
+Glance returns the same number of columns regardless of whether the
+model matrix is rank-deficient or not. If so, entries in columns
+that no longer have a well-defined value are filled in with an \code{NA}
+of the appropriate type.
 }
 \examples{
 
@@ -40,17 +45,19 @@ library(survival)
 
 # examples come from cch documentation
 subcoh <- nwtco$in.subcohort
-selccoh <- with(nwtco, rel==1|subcoh==1)
-ccoh.data <- nwtco[selccoh,]
+selccoh <- with(nwtco, rel == 1 | subcoh == 1)
+ccoh.data <- nwtco[selccoh, ]
 ccoh.data$subcohort <- subcoh[selccoh]
 ## central-lab histology
-ccoh.data$histol <- factor(ccoh.data$histol,labels=c("FH","UH"))
+ccoh.data$histol <- factor(ccoh.data$histol, labels = c("FH", "UH"))
 ## tumour stage
-ccoh.data$stage <- factor(ccoh.data$stage,labels=c("I","II","III" ,"IV"))
-ccoh.data$age <- ccoh.data$age/12 # Age in years
+ccoh.data$stage <- factor(ccoh.data$stage, labels = c("I", "II", "III", "IV"))
+ccoh.data$age <- ccoh.data$age / 12 # Age in years
 
-fit.ccP <- cch(Surv(edrel, rel) ~ stage + histol + age, data = ccoh.data,
-               subcoh = ~subcohort, id= ~seqno, cohort.size = 4028)
+fit.ccP <- cch(Surv(edrel, rel) ~ stage + histol + age,
+  data = ccoh.data,
+  subcoh = ~subcohort, id = ~seqno, cohort.size = 4028
+)
 
 tidy(fit.ccP)
 
@@ -60,7 +67,6 @@ ggplot(tidy(fit.ccP), aes(x = estimate, y = term)) +
   geom_point() +
   geom_errorbarh(aes(xmin = conf.low, xmax = conf.high), height = 0) +
   geom_vline(xintercept = 0)
-
 }
 \seealso{
 \code{\link[=glance]{glance()}}, \code{\link[survival:cch]{survival::cch()}}
@@ -94,8 +100,8 @@ Other survival tidiers:
 A \code{\link[tibble:tibble]{tibble::tibble()}} with exactly one row and columns:
   \item{iter}{Iterations of algorithm/fitting procedure completed.}
   \item{p.value}{P-value corresponding to the test statistic.}
-  \item{rscore}{rscore}
-  \item{score}{score}
+  \item{rscore}{Robust log-rank statistic}
+  \item{score}{Score.}
   \item{n}{number of predictions}
   \item{nevent}{number of events}
 
