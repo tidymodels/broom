@@ -43,9 +43,6 @@ specify which components to return.
 \details{
 When \code{parametric = FALSE} return columns \code{edf} and \code{ref.df} rather
 than \code{estimate} and \code{std.error}.
-
-To tidy \code{Gam} objects created by calls to \code{\link[gam:gam]{gam::gam()}},
-see \code{\link[=tidy.Gam]{tidy.Gam()}}.
 }
 \examples{
 

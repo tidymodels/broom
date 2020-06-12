@@ -39,10 +39,6 @@ model matrix is rank-deficient or not. If so, entries in columns
 that no longer have a well-defined value are filled in with an \code{NA}
 of the appropriate type.
 }
-\details{
-To glance \code{Gam} objects created by calls to \code{\link[gam:gam]{gam::gam()}}, see
-\code{\link[=glance.Gam]{glance.Gam()}}.
-}
 \examples{
 
 g <- mgcv::gam(mpg ~ s(hp) + am + qsec, data = mtcars)

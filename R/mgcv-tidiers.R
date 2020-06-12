@@ -23,8 +23,6 @@
 #' @details When `parametric = FALSE` return columns `edf` and `ref.df` rather
 #'   than `estimate` and `std.error`.
 #'
-#'   To tidy `Gam` objects created by calls to [gam::gam()],
-#'   see [tidy.Gam()].
 #'
 #' @examples
 #'
@@ -83,8 +81,6 @@ tidy.gam <- function(x, parametric = FALSE, conf.int = FALSE,
 #'   "nobs"
 #' )
 #'
-#' @details To glance `Gam` objects created by calls to [gam::gam()], see
-#'   [glance.Gam()].
 #'
 #' @export
 #' @family mgcv tidiers
