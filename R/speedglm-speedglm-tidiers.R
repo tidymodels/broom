@@ -27,12 +27,19 @@
 #' @seealso [speedglm::speedglm()]
 tidy.speedglm <- function(x, conf.int = FALSE, conf.level = 0.95,
                           exponentiate = FALSE, ...) {
+
   ret <- as_tibble(coef(summary(x)), rownames = "term")
   colnames(ret) <- c("term", "estimate", "std.error", "statistic", "p.value")
 
-  # for some reason the p.value column is a factor, so
-  # undo that nonsense
-  ret$p.value <- as.numeric(levels(ret$p.value))[ret$p.value]
+  # for some reason the p.value column is character, so we calculate it
+  # manually
+  if (x$family$family %in% c("binomial", "poisson")) {
+      zstat <- ret$estimate / ret$std.error
+      ret$p.value <- 2 * pnorm(abs(z), lower.tail = FALSE)
+  } else {
+      tstat <- ret$estimate / ret$std.error
+      ret$p.value <- 2 * pt(abs(tstat), df = x$df, lower.tail = FALSE)
+  }
 
   if (conf.int) {
     ci <- broom_confint_terms(x, level = conf.level)
