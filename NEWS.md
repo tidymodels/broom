@@ -236,12 +236,14 @@ regardless of link function.
 
 - Moved core tests to the `modeltests` package.
   
-- In general, after this release, the broom dev team will no longer add new
-  tidiers to the package, in favor of adding tidier methods to the model-owning
-  package. An article describing best practices in doing so can be found
-  on the {tidymodels} website at 
+- Generally, after this release, the broom dev team will first ask that
+  attempts to add tidier methods supporting a model object are first
+  directed to the model-owning package. An article describing best practices 
+  in doing so can be found on the {tidymodels} website at 
   https://www.tidymodels.org/learn/develop/broom/, and we will continue
-  adding additional resources to that article as we develop them.
+  adding additional resources to that article as we develop them. In the case
+  that the maintainer is uninterested in taking on the tidier methods, please
+  note this in your issue or PR.
 
 - Added a new vignette discussing how to implement new tidier methods in 
   non-broom packages.
