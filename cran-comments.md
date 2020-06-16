@@ -1,9 +1,13 @@
 # Release summary
 
-This is a resubmission following an erroniously included Remotes section in the
-package DESCRIPTION.
+This is a resubmission following an automated pretest failure due to
+breaking changes in the `epi.2by2` function from the `epiR` package, a new
+version of which was released on CRAN since our previous submission.
 
-The previous release was also a resubmission following an automated pretest 
+The previous submission was also a resubmission following an erroniously 
+included Remotes section in the package DESCRIPTION.
+
+The previous submission was also a resubmission following an automated pretest 
 failure due to "[n]on-file package-anchored link(s) in documentation 
 object[s]." This seemed to be a new test as of our previous submission, 
 and has been addressed by linking to documentation files rather than topics.
