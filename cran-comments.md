@@ -1,9 +1,12 @@
 # Release summary
 
-This is a resubmission following an automated pretest failure due to
-"[n]on-file package-anchored link(s) in documentation object[s]." This seems
-to be a new test as of our previous submission, and has been addressed by 
-linking to documentation files rather than topics.
+This is a resubmission following an erroniously included Remotes section in the
+package DESCRIPTION.
+
+The previous release was also a resubmission following an automated pretest 
+failure due to "[n]on-file package-anchored link(s) in documentation 
+object[s]." This seemed to be a new test as of our previous submission, 
+and has been addressed by linking to documentation files rather than topics.
 
 The previous submission was also a resubmission following an automated pretest 
 failure. The failure was due to breaking changes in the `residuals.fixest()` 
