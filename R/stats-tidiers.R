@@ -55,12 +55,15 @@ tidy.density <- function(x, ...) {
 #'
 #' @examples
 #'
-#' iris_dist <- dist(t(iris[, 1:4]))
-#' iris_dist
+#' library(modeldata)
+#' data(hpc_data)
 #'
-#' tidy(iris_dist)
-#' tidy(iris_dist, upper = TRUE)
-#' tidy(iris_dist, diagonal = TRUE)
+#' hpc <- hpc_data[, 2:5]
+#' hpc_dist <- dist(t(hpc))
+#'
+#' tidy(hpc_dist)
+#' tidy(hpc_dist, upper = TRUE)
+#' tidy(hpc_dist, diagonal = TRUE)
 #' @export
 #' @seealso [tidy()], [stats::dist()]
 #' @family stats tidiers

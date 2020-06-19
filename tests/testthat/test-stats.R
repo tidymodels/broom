@@ -3,6 +3,12 @@ context("stats")
 skip_if_not_installed("modeltests")
 library(modeltests)
 
+skip_if_not_installed("modeldata")
+library(modeldata)
+data(hpc_data)
+
+hpc <- hpc_data[, 2:5]
+
 test_that("tidy.density", {
   den <- density(faithful$eruptions, bw = "sj")
   td <- tidy(den)
@@ -13,11 +19,11 @@ test_that("tidy.density", {
 })
 
 test_that("tidy.dist", {
-  iris_dist <- dist(t(iris[, 1:4]))
-  td <- tidy(iris_dist)
-  td_upper <- tidy(iris_dist, upper = TRUE)
-  td_diag <- tidy(iris_dist, diagonal = TRUE)
-  td_all <- tidy(iris_dist, upper = TRUE, diagonal = TRUE)
+  hpc_dist <- dist(t(hpc))
+  td <- tidy(hpc_dist)
+  td_upper <- tidy(hpc_dist, upper = TRUE)
+  td_diag <- tidy(hpc_dist, diagonal = TRUE)
+  td_all <- tidy(hpc_dist, upper = TRUE, diagonal = TRUE)
 
   check_arguments(tidy.dist)
   check_tidy_output(td)

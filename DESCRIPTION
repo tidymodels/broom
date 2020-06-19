@@ -570,6 +570,7 @@ Suggests:
     metafor,
     mfx,
     mgcv,
+    modeldata,
     modeltests,
     muhaz,
     multcomp,

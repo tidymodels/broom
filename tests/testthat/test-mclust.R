@@ -6,9 +6,14 @@ library(modeltests)
 
 skip_if_not_installed("mclust")
 library(mclust)
-dat <- iris[, 1:4]
-dat3 <- iris[, 1, drop = FALSE]
-dat4 <- iris[, 1]
+
+skip_if_not_installed("modeldata")
+library(modeldata)
+data(hpc_data)
+
+dat <- hpc_data[, 2:5]
+dat3 <- hpc_data[, 2, drop = FALSE]
+dat4 <- hpc_data[, 2]
 
 fit <- Mclust(dat, G = 7, modelNames = "EII", verbose = FALSE)
 fit2 <- Mclust(dat, G = 1, verbose = FALSE)
