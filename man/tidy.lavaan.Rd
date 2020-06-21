@@ -66,7 +66,7 @@ tidy(cfa.fit)
 
 }
 \seealso{
-\code{\link[=reexports]{tidy()}}, \code{\link[lavaan:cfa]{lavaan::cfa()}}, \code{\link[lavaan:sem]{lavaan::sem()}},
+\code{\link[=tidy]{tidy()}}, \code{\link[lavaan:cfa]{lavaan::cfa()}}, \code{\link[lavaan:sem]{lavaan::sem()}},
 \code{\link[lavaan:parameterEstimates]{lavaan::parameterEstimates()}}
 
 Other lavaan tidiers: 

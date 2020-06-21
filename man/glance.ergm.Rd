@@ -55,7 +55,7 @@ that no longer have a well-defined value are filled in with an \code{NA}
 of the appropriate type.
 }
 \seealso{
-\code{\link[=reexports]{glance()}}, \code{\link[ergm:ergm]{ergm::ergm()}}, \code{\link[ergm:summary.ergm]{ergm::summary.ergm()}}
+\code{\link[=glance]{glance()}}, \code{\link[ergm:ergm]{ergm::ergm()}}, \code{\link[ergm:summary.ergm]{ergm::summary.ergm()}}
 
 Other ergm tidiers: 
 \code{\link{tidy.ergm}()}

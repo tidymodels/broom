@@ -24,7 +24,7 @@ absorbed in \code{...}, where they will be ignored. If the misspelled
 argument has a default value, the default value will be used.
 For example, if you pass \code{conf.lvel = 0.9}, all computation will
 proceed using \code{conf.level = 0.95}. Additionally, if you pass
-\code{newdata = my_tibble} to an \code{\link[=reexports]{augment()}} method that does not
+\code{newdata = my_tibble} to an \code{\link[=augment]{augment()}} method that does not
 accept a \code{newdata} argument, it will use the default value for
 the \code{data} argument.}
 }
@@ -48,7 +48,7 @@ ggplot(augment(spl, mtcars), aes(wt, mpg)) +
   geom_line(aes(y = .fitted))
 }
 \seealso{
-\code{\link[=reexports]{augment()}}, \code{\link[stats:smooth.spline]{stats::smooth.spline()}},
+\code{\link[=augment]{augment()}}, \code{\link[stats:smooth.spline]{stats::smooth.spline()}},
 \code{\link[stats:predict.smooth.spline]{stats::predict.smooth.spline()}}
 
 Other smoothing spline tidiers: 

@@ -33,7 +33,7 @@ absorbed in \code{...}, where they will be ignored. If the misspelled
 argument has a default value, the default value will be used.
 For example, if you pass \code{conf.lvel = 0.9}, all computation will
 proceed using \code{conf.level = 0.95}. Additionally, if you pass
-\code{newdata = my_tibble} to an \code{\link[=reexports]{augment()}} method that does not
+\code{newdata = my_tibble} to an \code{\link[=augment]{augment()}} method that does not
 accept a \code{newdata} argument, it will use the default value for
 the \code{data} argument.}
 }
@@ -52,7 +52,7 @@ entirely from the augmented data frame. When the modeling was performed
 with \code{na.action = "na.exclude"}, one should provide the original data
 as a second argument, at which point the augmented data will contain those
 rows (typically with NAs in place of the new columns). If the original data
-is not provided to \code{\link[=reexports]{augment()}} and \code{na.action = "na.exclude"}, a
+is not provided to \code{\link[=augment]{augment()}} and \code{na.action = "na.exclude"}, a
 warning is raised and the incomplete rows are dropped.
 
 Note that \code{loess} objects by default will not predict on data
@@ -80,7 +80,7 @@ augment(lo, newdata = head(mtcars))
 \seealso{
 \link[stats:na.action]{stats::na.action}
 
-\code{\link[=reexports]{augment()}}, \code{\link[stats:loess]{stats::loess()}}, \code{\link[stats:predict.loess]{stats::predict.loess()}}
+\code{\link[=augment]{augment()}}, \code{\link[stats:loess]{stats::loess()}}, \code{\link[stats:predict.loess]{stats::predict.loess()}}
 }
 \value{
 A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:

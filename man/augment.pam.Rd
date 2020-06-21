@@ -23,7 +23,7 @@ absorbed in \code{...}, where they will be ignored. If the misspelled
 argument has a default value, the default value will be used.
 For example, if you pass \code{conf.lvel = 0.9}, all computation will
 proceed using \code{conf.level = 0.95}. Additionally, if you pass
-\code{newdata = my_tibble} to an \code{\link[=reexports]{augment()}} method that does not
+\code{newdata = my_tibble} to an \code{\link[=augment]{augment()}} method that does not
 accept a \code{newdata} argument, it will use the default value for
 the \code{data} argument.}
 }
@@ -71,22 +71,23 @@ missing at this time.
 library(dplyr)
 library(ggplot2)
 library(cluster)
+library(modeldata)
+data(hpc_data)
 
-x <- iris \%>\%
-  select(-Species)
-p <- pam(x, k = 3)
+x <- hpc_data[, 2:5]
+p <- pam(x, k = 4)
 
 tidy(p)
 glance(p)
 augment(p, x)
 
 augment(p, x) \%>\%
-  ggplot(aes(Sepal.Length, Sepal.Width)) +
+  ggplot(aes(compounds, input_fields)) +
   geom_point(aes(color = .cluster)) +
   geom_text(aes(label = cluster), data = tidy(p), size = 10)
 }
 \seealso{
-\code{\link[=reexports]{augment()}}, \code{\link[cluster:pam]{cluster::pam()}}
+\code{\link[=augment]{augment()}}, \code{\link[cluster:pam]{cluster::pam()}}
 
 Other pam tidiers: 
 \code{\link{glance.pam}()},
