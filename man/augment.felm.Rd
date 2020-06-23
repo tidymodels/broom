@@ -102,13 +102,6 @@ glance(result_felm)
 \seealso{
 \code{\link[=augment]{augment()}}, \code{\link[lfe:felm]{lfe::felm()}}
 
-Other felm tidiers: 
-\code{\link{tidy.felm}()}
+Other felm tidiers: \code{\link{tidy.felm}}
 }
 \concept{felm tidiers}
-\value{
-A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
-  \item{.fitted}{Fitted or predicted value.}
-  \item{.resid}{The difference between fitted and observed values.}
-
-}

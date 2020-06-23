@@ -5,7 +5,8 @@
 \alias{mlogit_tidiers}
 \title{Tidying methods for multinomial logistic regression models}
 \usage{
-\method{tidy}{mlogit}(x, conf.int = FALSE, conf.level = 0.95, exponentiate = FALSE, ...)
+tidy.mlogit(x, conf.int = FALSE, conf.level = 0.95,
+  exponentiate = FALSE, ...)
 }
 \arguments{
 \item{x}{A \code{mlogit} object returned from \code{\link[mlogit:mlogit]{mlogit::mlogit()}}.}
@@ -54,20 +55,7 @@ augment(fish.mnl)
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[mlogit:mlogit]{mlogit::mlogit()}}
 
-Other mlogit tidiers: 
-\code{\link{augment.mlogit}()},
-\code{\link{glance.mlogit}()}
+Other mlogit tidiers: \code{\link{augment.mlogit}},
+  \code{\link{glance.mlogit}}
 }
 \concept{mlogit tidiers}
-\value{
-A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
-  \item{conf.high}{Upper bound on the confidence interval for the estimate.}
-  \item{conf.low}{Lower bound on the confidence interval for the estimate.}
-  \item{estimate}{The estimated value of the regression term.}
-  \item{p.value}{The two-sided p-value associated with the observed statistic.}
-  \item{statistic}{The value of a T-statistic to use in a hypothesis that the regression term is non-zero.}
-  \item{std.error}{The standard error of the regression term.}
-  \item{term}{The name of the regression term.}
-  \item{y.value}{The response level}
-
-}

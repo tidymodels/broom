@@ -5,7 +5,7 @@
 \alias{nls_tidiers}
 \title{Tidy a(n) nls object}
 \usage{
-\method{tidy}{nls}(x, conf.int = FALSE, conf.level = 0.95, ...)
+tidy.nls(x, conf.int = FALSE, conf.level = 0.95, ...)
 }
 \arguments{
 \item{x}{An \code{nls} object returned from \code{\link[stats:nls]{stats::nls()}}.}
@@ -56,19 +56,7 @@ augment(n, newdata = newdata)
 \seealso{
 \link{tidy}, \code{\link[stats:nls]{stats::nls()}}, \code{\link[stats:summary.nls]{stats::summary.nls()}}
 
-Other nls tidiers: 
-\code{\link{augment.nls}()},
-\code{\link{glance.nls}()}
+Other nls tidiers: \code{\link{augment.nls}},
+  \code{\link{glance.nls}}
 }
 \concept{nls tidiers}
-\value{
-A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
-  \item{conf.high}{Upper bound on the confidence interval for the estimate.}
-  \item{conf.low}{Lower bound on the confidence interval for the estimate.}
-  \item{estimate}{The estimated value of the regression term.}
-  \item{p.value}{The two-sided p-value associated with the observed statistic.}
-  \item{statistic}{The value of a T-statistic to use in a hypothesis that the regression term is non-zero.}
-  \item{std.error}{The standard error of the regression term.}
-  \item{term}{The name of the regression term.}
-
-}

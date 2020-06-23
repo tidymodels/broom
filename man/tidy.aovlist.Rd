@@ -4,7 +4,7 @@
 \alias{tidy.aovlist}
 \title{Tidy a(n) aovlist object}
 \usage{
-\method{tidy}{aovlist}(x, ...)
+tidy.aovlist(x, ...)
 }
 \arguments{
 \item{x}{An \code{aovlist} objects, such as those created by \code{\link[stats:aov]{stats::aov()}}.}
@@ -40,23 +40,9 @@ tidy(a)
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[stats:aov]{stats::aov()}}
 
-Other anova tidiers: 
-\code{\link{glance.aov}()},
-\code{\link{tidy.TukeyHSD}()},
-\code{\link{tidy.anova}()},
-\code{\link{tidy.aov}()},
-\code{\link{tidy.manova}()},
-\code{\link{tidy.summary.manova}()}
+Other anova tidiers: \code{\link{glance.aov}},
+  \code{\link{tidy.TukeyHSD}}, \code{\link{tidy.anova}},
+  \code{\link{tidy.aov}}, \code{\link{tidy.manova}},
+  \code{\link{tidy.summary.manova}}
 }
 \concept{anova tidiers}
-\value{
-A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
-  \item{df}{Degrees of freedom used by this term in the model.}
-  \item{meansq}{Mean sum of squares. Equal to total sum of squares divided by degrees of freedom.}
-  \item{p.value}{The two-sided p-value associated with the observed statistic.}
-  \item{statistic}{The value of a T-statistic to use in a hypothesis that the regression term is non-zero.}
-  \item{stratum}{The error stratum}
-  \item{sumsq}{Sum of squares explained by this term}
-  \item{term}{The name of the regression term.}
-
-}

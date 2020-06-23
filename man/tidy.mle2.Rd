@@ -6,7 +6,7 @@
 \alias{bbmle_tidiers}
 \title{Tidy a(n) mle2 object}
 \usage{
-\method{tidy}{mle2}(x, conf.int = FALSE, conf.level = 0.95, ...)
+tidy.mle2(x, conf.int = FALSE, conf.level = 0.95, ...)
 }
 \arguments{
 \item{x}{An \code{mle2} object created by a call to \code{\link[bbmle:mle2]{bbmle::mle2()}}.}
@@ -52,15 +52,4 @@ tidy(fit)
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[bbmle:mle2]{bbmle::mle2()}}, \code{\link[=tidy_optim]{tidy_optim()}}
-}
-\value{
-A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
-  \item{conf.high}{Upper bound on the confidence interval for the estimate.}
-  \item{conf.low}{Lower bound on the confidence interval for the estimate.}
-  \item{estimate}{The estimated value of the regression term.}
-  \item{p.value}{The two-sided p-value associated with the observed statistic.}
-  \item{statistic}{The value of a T-statistic to use in a hypothesis that the regression term is non-zero.}
-  \item{std.error}{The standard error of the regression term.}
-  \item{term}{The name of the regression term.}
-
 }

@@ -5,7 +5,7 @@
 \alias{prcomp_tidiers}
 \title{Tidy a(n) prcomp object}
 \usage{
-\method{tidy}{prcomp}(x, matrix = "u", ...)
+tidy.prcomp(x, matrix = "u", ...)
 }
 \arguments{
 \item{x}{A \code{prcomp} object returned by \code{\link[stats:prcomp]{stats::prcomp()}}.}
@@ -115,9 +115,7 @@ ggplot(au, aes(.fittedPC1, .fittedPC2)) +
 \seealso{
 \code{\link[stats:prcomp]{stats::prcomp()}}, \link{svd_tidiers}
 
-Other svd tidiers: 
-\code{\link{augment.prcomp}()},
-\code{\link{tidy_irlba}()},
-\code{\link{tidy_svd}()}
+Other svd tidiers: \code{\link{augment.prcomp}},
+  \code{\link{tidy_irlba}}, \code{\link{tidy_svd}}
 }
 \concept{svd tidiers}

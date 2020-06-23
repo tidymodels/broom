@@ -5,7 +5,7 @@
 \alias{pyears_tidiers}
 \title{Tidy a(n) pyears object}
 \usage{
-\method{tidy}{pyears}(x, ...)
+tidy.pyears(x, ...)
 }
 \arguments{
 \item{x}{A \code{pyears} object returned from \code{\link[survival:pyears]{survival::pyears()}}.}
@@ -58,35 +58,19 @@ glance(pfit2)
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[survival:pyears]{survival::pyears()}}
 
-Other pyears tidiers: 
-\code{\link{glance.pyears}()}
+Other pyears tidiers: \code{\link{glance.pyears}}
 
-Other survival tidiers: 
-\code{\link{augment.coxph}()},
-\code{\link{augment.survreg}()},
-\code{\link{glance.aareg}()},
-\code{\link{glance.cch}()},
-\code{\link{glance.coxph}()},
-\code{\link{glance.pyears}()},
-\code{\link{glance.survdiff}()},
-\code{\link{glance.survexp}()},
-\code{\link{glance.survfit}()},
-\code{\link{glance.survreg}()},
-\code{\link{tidy.aareg}()},
-\code{\link{tidy.cch}()},
-\code{\link{tidy.coxph}()},
-\code{\link{tidy.survdiff}()},
-\code{\link{tidy.survexp}()},
-\code{\link{tidy.survfit}()},
-\code{\link{tidy.survreg}()}
+Other survival tidiers: \code{\link{augment.coxph}},
+  \code{\link{augment.survreg}},
+  \code{\link{glance.aareg}}, \code{\link{glance.cch}},
+  \code{\link{glance.coxph}}, \code{\link{glance.pyears}},
+  \code{\link{glance.survdiff}},
+  \code{\link{glance.survexp}},
+  \code{\link{glance.survfit}},
+  \code{\link{glance.survreg}}, \code{\link{tidy.aareg}},
+  \code{\link{tidy.cch}}, \code{\link{tidy.coxph}},
+  \code{\link{tidy.survdiff}}, \code{\link{tidy.survexp}},
+  \code{\link{tidy.survfit}}, \code{\link{tidy.survreg}}
 }
 \concept{pyears tidiers}
 \concept{survival tidiers}
-\value{
-A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
-  \item{expected}{expected number of events.}
-  \item{pyears}{person-years of exposure}
-  \item{n}{number of subjects contributing time}
-  \item{event}{observed number of events}
-
-}

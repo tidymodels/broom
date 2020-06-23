@@ -96,14 +96,7 @@ augment(n, newdata = newdata)
 \seealso{
 \link{tidy}, \code{\link[stats:nls]{stats::nls()}}, \code{\link[stats:predict.nls]{stats::predict.nls()}}
 
-Other nls tidiers: 
-\code{\link{glance.nls}()},
-\code{\link{tidy.nls}()}
+Other nls tidiers: \code{\link{glance.nls}},
+  \code{\link{tidy.nls}}
 }
 \concept{nls tidiers}
-\value{
-A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
-  \item{.fitted}{Fitted or predicted value.}
-  \item{.resid}{The difference between fitted and observed values.}
-
-}

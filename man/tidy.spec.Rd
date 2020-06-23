@@ -4,7 +4,7 @@
 \alias{tidy.spec}
 \title{Tidy a(n) spec object}
 \usage{
-\method{tidy}{spec}(x, ...)
+tidy.spec(x, ...)
 }
 \arguments{
 \item{x}{A \code{spec} object created by \code{\link[stats:spectrum]{stats::spectrum()}}.}
@@ -40,14 +40,7 @@ ggplot(tidy(spc), aes(freq, spec)) +
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[stats:spectrum]{stats::spectrum()}}
 
-Other time series tidiers: 
-\code{\link{tidy.acf}()},
-\code{\link{tidy.ts}()},
-\code{\link{tidy.zoo}()}
+Other time series tidiers: \code{\link{tidy.acf}},
+  \code{\link{tidy.ts}}, \code{\link{tidy.zoo}}
 }
 \concept{time series tidiers}
-\value{
-A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
-
-
-}

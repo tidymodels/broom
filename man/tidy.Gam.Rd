@@ -5,7 +5,7 @@
 \alias{Gam_tidiers}
 \title{Tidy a(n) Gam object}
 \usage{
-\method{tidy}{Gam}(x, ...)
+tidy.Gam(x, ...)
 }
 \arguments{
 \item{x}{A \code{Gam} object returned from a call to \code{\link[gam:gam]{gam::gam()}}.}
@@ -44,17 +44,6 @@ glance(g)
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[gam:gam]{gam::gam()}}, \code{\link[=tidy.anova]{tidy.anova()}}, \code{\link[=tidy.gam]{tidy.gam()}}
 
-Other gam tidiers: 
-\code{\link{glance.Gam}()}
+Other gam tidiers: \code{\link{glance.Gam}}
 }
 \concept{gam tidiers}
-\value{
-A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
-  \item{df}{Degrees of freedom used by this term in the model.}
-  \item{meansq}{Mean sum of squares. Equal to total sum of squares divided by degrees of freedom.}
-  \item{p.value}{The two-sided p-value associated with the observed statistic.}
-  \item{statistic}{The value of a T-statistic to use in a hypothesis that the regression term is non-zero.}
-  \item{sumsq}{Sum of squares explained by this term}
-  \item{term}{The name of the regression term.}
-
-}

@@ -4,7 +4,7 @@
 \alias{tidy.acf}
 \title{Tidy a(n) acf object}
 \usage{
-\method{tidy}{acf}(x, ...)
+tidy.acf(x, ...)
 }
 \arguments{
 \item{x}{An \code{acf} object created by \code{\link[stats:acf]{stats::acf()}}, \code{\link[stats:pacf]{stats::pacf()}} or
@@ -38,15 +38,7 @@ tidy(pacf(lh, plot = FALSE))
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[stats:acf]{stats::acf()}}, \code{\link[stats:pacf]{stats::pacf()}}, \code{\link[stats:ccf]{stats::ccf()}}
 
-Other time series tidiers: 
-\code{\link{tidy.spec}()},
-\code{\link{tidy.ts}()},
-\code{\link{tidy.zoo}()}
+Other time series tidiers: \code{\link{tidy.spec}},
+  \code{\link{tidy.ts}}, \code{\link{tidy.zoo}}
 }
 \concept{time series tidiers}
-\value{
-A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
-  \item{acf}{Autocorrelation.}
-  \item{lag}{lag values}
-
-}

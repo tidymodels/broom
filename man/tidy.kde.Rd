@@ -6,7 +6,7 @@
 \alias{ks_tidiers}
 \title{Tidy a(n) kde object}
 \usage{
-\method{tidy}{kde}(x, ...)
+tidy.kde(x, ...)
 }
 \arguments{
 \item{x}{A \code{kde} object returned from \code{\link[ks:kde]{ks::kde()}}.}
@@ -64,12 +64,4 @@ td3
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[ks:kde]{ks::kde()}}
-}
-\value{
-A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
-  \item{estimate}{The estimated value of the regression term.}
-  \item{obs}{weighted observed number of events in each group}
-  \item{value}{TODO. needs better documentation.}
-  \item{variable}{Variable under consideration.}
-
 }

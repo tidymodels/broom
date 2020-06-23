@@ -6,7 +6,8 @@
 \alias{aer_tidiers}
 \title{Tidy a(n) ivreg object}
 \usage{
-\method{tidy}{ivreg}(x, conf.int = FALSE, conf.level = 0.95, instruments = FALSE, ...)
+tidy.ivreg(x, conf.int = FALSE, conf.level = 0.95,
+  instruments = FALSE, ...)
 }
 \arguments{
 \item{x}{An \code{ivreg} object created by a call to \code{\link[AER:ivreg]{AER::ivreg()}}.}
@@ -67,21 +68,7 @@ glance(ivr)
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[AER:ivreg]{AER::ivreg()}}
 
-Other ivreg tidiers: 
-\code{\link{augment.ivreg}()},
-\code{\link{glance.ivreg}()}
+Other ivreg tidiers: \code{\link{augment.ivreg}},
+  \code{\link{glance.ivreg}}
 }
 \concept{ivreg tidiers}
-\value{
-A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
-  \item{conf.high}{Upper bound on the confidence interval for the estimate.}
-  \item{conf.low}{Lower bound on the confidence interval for the estimate.}
-  \item{estimate}{The estimated value of the regression term.}
-  \item{p.value}{The two-sided p-value associated with the observed statistic.}
-  \item{p.value.weakinst}{P-value for weak instruments test.}
-  \item{statistic}{The value of a T-statistic to use in a hypothesis that the regression term is non-zero.}
-  \item{statistic.weakinst}{Statistic for Wu-Hausman test.}
-  \item{std.error}{The standard error of the regression term.}
-  \item{term}{The name of the regression term.}
-
-}

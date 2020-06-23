@@ -5,7 +5,7 @@
 \alias{muhaz_tidiers}
 \title{Tidy a(n) muhaz object}
 \usage{
-\method{tidy}{muhaz}(x, ...)
+tidy.muhaz(x, ...)
 }
 \arguments{
 \item{x}{A \code{muhaz} object returned by \code{\link[muhaz:muhaz]{muhaz::muhaz()}}.}
@@ -41,13 +41,6 @@ glance(x)
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[muhaz:muhaz]{muhaz::muhaz()}}
 
-Other muhaz tidiers: 
-\code{\link{glance.muhaz}()}
+Other muhaz tidiers: \code{\link{glance.muhaz}}
 }
 \concept{muhaz tidiers}
-\value{
-A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
-  \item{time}{Point in time.}
-  \item{estimate}{Estimated hazard rate.}
-
-}

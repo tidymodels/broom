@@ -4,7 +4,7 @@
 \alias{tidy.table}
 \title{Tidy a(n) table object}
 \usage{
-\method{tidy}{table}(x, ...)
+tidy.table(x, ...)
 }
 \arguments{
 \item{x}{A \link{table} object.}

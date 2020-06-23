@@ -5,7 +5,7 @@
 \alias{poLCA_tidiers}
 \title{Tidy a(n) poLCA object}
 \usage{
-\method{tidy}{poLCA}(x, ...)
+tidy.poLCA(x, ...)
 }
 \arguments{
 \item{x}{A \code{poLCA} object returned from \code{\link[poLCA:poLCA]{poLCA::poLCA()}}.}
@@ -78,17 +78,7 @@ dim(au2)
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[poLCA:poLCA]{poLCA::poLCA()}}
 
-Other poLCA tidiers: 
-\code{\link{augment.poLCA}()},
-\code{\link{glance.poLCA}()}
+Other poLCA tidiers: \code{\link{augment.poLCA}},
+  \code{\link{glance.poLCA}}
 }
 \concept{poLCA tidiers}
-\value{
-A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
-  \item{class}{The class under consideration.}
-  \item{outcome}{Outcome of manifest variable}
-  \item{std.error}{The standard error of the regression term.}
-  \item{variable}{Manifest variable}
-  \item{estimate}{Estimated class-conditional response probability}
-
-}

@@ -4,7 +4,8 @@
 \alias{augment.rlm}
 \title{Augment data with information from a(n) rlm object}
 \usage{
-\method{augment}{rlm}(x, data = model.frame(x), newdata = NULL, se_fit = FALSE, ...)
+\method{augment}{rlm}(x, data = model.frame(x), newdata = NULL,
+  se_fit = FALSE, ...)
 }
 \arguments{
 \item{x}{An \code{rlm} object returned by \code{\link[MASS:rlm]{MASS::rlm()}}.}
@@ -89,17 +90,7 @@ glance(r)
 \seealso{
 \code{\link[MASS:rlm]{MASS::rlm()}}
 
-Other rlm tidiers: 
-\code{\link{glance.rlm}()},
-\code{\link{tidy.rlm}()}
+Other rlm tidiers: \code{\link{glance.rlm}},
+  \code{\link{tidy.rlm}}
 }
 \concept{rlm tidiers}
-\value{
-A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
-  \item{.fitted}{Fitted or predicted value.}
-  \item{.hat}{Diagonal of the hat matrix.}
-  \item{.resid}{The difference between fitted and observed values.}
-  \item{.se.fit}{Standard errors of fitted values.}
-  \item{.sigma}{Estimated residual standard deviation when corresponding observation is dropped from model.}
-
-}

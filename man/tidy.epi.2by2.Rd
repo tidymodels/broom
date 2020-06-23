@@ -5,7 +5,7 @@
 \alias{epiR_tidiers}
 \title{Tidy a(n) epi.2by2 object}
 \usage{
-\method{tidy}{epi.2by2}(x, parameters = c("moa", "stat"), ...)
+tidy.epi.2by2(x, parameters = c("moa", "stat"), ...)
 }
 \arguments{
 \item{x}{A \code{epi.2by2} object produced by a call to \code{\link[epiR:epi.2by2]{epiR::epi.2by2()}}}
@@ -49,14 +49,3 @@ tidy(fit, parameters = "moa")
 \code{\link[=tidy]{tidy()}}, \code{\link[epiR:epi.2by2]{epiR::epi.2by2()}}
 }
 \concept{epiR tidiers}
-\value{
-A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
-  \item{conf.high}{Upper bound on the confidence interval for the estimate.}
-  \item{conf.low}{Lower bound on the confidence interval for the estimate.}
-  \item{df}{Degrees of freedom used by this term in the model.}
-  \item{p.value}{The two-sided p-value associated with the observed statistic.}
-  \item{statistic}{The value of a T-statistic to use in a hypothesis that the regression term is non-zero.}
-  \item{term}{The name of the regression term.}
-  \item{estimate}{Estimated measure of association}
-
-}

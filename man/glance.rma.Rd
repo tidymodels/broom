@@ -55,19 +55,3 @@ meta_analysis <- rma(yi, vi, data = df, method = "EB")
 glance(meta_analysis)
 
 }
-\value{
-A \code{\link[tibble:tibble]{tibble::tibble()}} with exactly one row and columns:
-  \item{cochran.qe}{In meta-analysis, test statistic for the Cochran's Q_e test of residual heterogeneity.}
-  \item{cochran.qm}{In meta-analysis, test statistic for the Cochran's Q_m omnibus test of coefficients.}
-  \item{df.residual}{Residual degrees of freedom.}
-  \item{h.squared}{Value of the H-Squared statistic}
-  \item{i.squared}{Value of the I-Squared statistic}
-  \item{measure}{the measure used in the meta-analysis}
-  \item{method}{Which method was used.}
-  \item{nobs}{Number of observations used.}
-  \item{p.value.cochran.qe}{In meta-analysis, p-value for the Cochran's Q_e test of residual heterogeneity.}
-  \item{p.value.cochran.qm}{In meta-analysis, p-value for the Cochran's Q_m omnibus test of coefficients.}
-  \item{tau.squared}{In meta-analysis, estimated amount of residual heterogeneity.}
-  \item{tau.squared.se}{In meta-analysis, standard error of residual heterogeneity.}
-
-}

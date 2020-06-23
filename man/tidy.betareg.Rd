@@ -5,7 +5,7 @@
 \alias{betareg_tidiers}
 \title{Tidy a(n) betareg object}
 \usage{
-\method{tidy}{betareg}(x, conf.int = FALSE, conf.level = 0.95, ...)
+tidy.betareg(x, conf.int = FALSE, conf.level = 0.95, ...)
 }
 \arguments{
 \item{x}{A \code{betareg} object produced by a call to \code{\link[betareg:betareg]{betareg::betareg()}}.}
@@ -63,16 +63,3 @@ glance(mod)
 \code{\link[=tidy]{tidy()}}, \code{\link[betareg:betareg]{betareg::betareg()}}
 }
 \concept{betareg tidiers}
-\value{
-A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
-  \item{conf.high}{Upper bound on the confidence interval for the estimate.}
-  \item{conf.low}{Lower bound on the confidence interval for the estimate.}
-  \item{estimate}{The estimated value of the regression term.}
-  \item{p.value}{The two-sided p-value associated with the observed statistic.}
-  \item{statistic}{The value of a T-statistic to use in a hypothesis that the regression term is non-zero.}
-  \item{std.error}{The standard error of the regression term.}
-  \item{term}{The name of the regression term.}
-  \item{component}{Whether a particular term was used to model the mean or the
-    precision in the regression. See details.}
-
-}

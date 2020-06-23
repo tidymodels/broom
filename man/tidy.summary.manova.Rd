@@ -4,7 +4,7 @@
 \alias{tidy.summary.manova}
 \title{Tidy a(n) summary.manova object}
 \usage{
-\method{tidy}{summary.manova}(x, ...)
+tidy.summary.manova(x, ...)
 }
 \arguments{
 \item{x}{A \code{summary.manova} object return from \code{\link[stats:summary.manova]{stats::summary.manova()}}.}
@@ -46,25 +46,9 @@ tidy(m)
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[stats:summary.manova]{stats::summary.manova()}}
 
-Other anova tidiers: 
-\code{\link{glance.aov}()},
-\code{\link{tidy.TukeyHSD}()},
-\code{\link{tidy.anova}()},
-\code{\link{tidy.aovlist}()},
-\code{\link{tidy.aov}()},
-\code{\link{tidy.manova}()}
+Other anova tidiers: \code{\link{glance.aov}},
+  \code{\link{tidy.TukeyHSD}}, \code{\link{tidy.anova}},
+  \code{\link{tidy.aovlist}}, \code{\link{tidy.aov}},
+  \code{\link{tidy.manova}}
 }
 \concept{anova tidiers}
-\value{
-A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
-  \item{den.df}{Degrees of freedom of the denominator}
-  \item{num.df}{Degrees of freedom}
-  \item{p.value}{The two-sided p-value associated with the observed statistic.}
-  \item{statistic}{The value of a T-statistic to use in a hypothesis that the regression term is non-zero.}
-  \item{term}{The name of the regression term.}
-  \item{pillai}{Pillai's trace.}
-  \item{wilks}{Wilk's lambda.}
-  \item{hl}{Hotelling-Lawley trace.}
-  \item{roy}{Roy's greatest root.}
-
-}

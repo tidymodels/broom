@@ -4,7 +4,7 @@
 \alias{tidy.power.htest}
 \title{Tidy a(n) power.htest object}
 \usage{
-\method{tidy}{power.htest}(x, ...)
+tidy.power.htest(x, ...)
 }
 \arguments{
 \item{x}{A \code{power.htest} object such as those returned from
@@ -42,15 +42,8 @@ ggplot(tidy(ptt), aes(n, power)) +
 \seealso{
 \code{\link[stats:power.t.test]{stats::power.t.test()}}
 
-Other htest tidiers: 
-\code{\link{augment.htest}()},
-\code{\link{tidy.htest}()},
-\code{\link{tidy.pairwise.htest}()}
+Other htest tidiers: \code{\link{augment.htest}},
+  \code{\link{tidy.htest}},
+  \code{\link{tidy.pairwise.htest}}
 }
 \concept{htest tidiers}
-\value{
-A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
-  \item{n}{Number of TODO}
-  \item{power}{Power achieved for given value of n.}
-
-}

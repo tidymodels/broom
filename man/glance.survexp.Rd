@@ -55,34 +55,19 @@ glance(sexpfit)
 \seealso{
 \code{\link[=glance]{glance()}}, \code{\link[survival:survexp]{survival::survexp()}}
 
-Other survexp tidiers: 
-\code{\link{tidy.survexp}()}
+Other survexp tidiers: \code{\link{tidy.survexp}}
 
-Other survival tidiers: 
-\code{\link{augment.coxph}()},
-\code{\link{augment.survreg}()},
-\code{\link{glance.aareg}()},
-\code{\link{glance.cch}()},
-\code{\link{glance.coxph}()},
-\code{\link{glance.pyears}()},
-\code{\link{glance.survdiff}()},
-\code{\link{glance.survfit}()},
-\code{\link{glance.survreg}()},
-\code{\link{tidy.aareg}()},
-\code{\link{tidy.cch}()},
-\code{\link{tidy.coxph}()},
-\code{\link{tidy.pyears}()},
-\code{\link{tidy.survdiff}()},
-\code{\link{tidy.survexp}()},
-\code{\link{tidy.survfit}()},
-\code{\link{tidy.survreg}()}
+Other survival tidiers: \code{\link{augment.coxph}},
+  \code{\link{augment.survreg}},
+  \code{\link{glance.aareg}}, \code{\link{glance.cch}},
+  \code{\link{glance.coxph}}, \code{\link{glance.pyears}},
+  \code{\link{glance.survdiff}},
+  \code{\link{glance.survfit}},
+  \code{\link{glance.survreg}}, \code{\link{tidy.aareg}},
+  \code{\link{tidy.cch}}, \code{\link{tidy.coxph}},
+  \code{\link{tidy.pyears}}, \code{\link{tidy.survdiff}},
+  \code{\link{tidy.survexp}}, \code{\link{tidy.survfit}},
+  \code{\link{tidy.survreg}}
 }
 \concept{survexp tidiers}
 \concept{survival tidiers}
-\value{
-A \code{\link[tibble:tibble]{tibble::tibble()}} with exactly one row and columns:
-  \item{n.max}{Maximum number of subjects at risk.}
-  \item{n.start}{Initial number of subjects at risk.}
-  \item{timepoints}{number of timepoints}
-
-}

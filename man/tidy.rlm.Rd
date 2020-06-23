@@ -4,7 +4,7 @@
 \alias{tidy.rlm}
 \title{Tidy a(n) rlm object}
 \usage{
-\method{tidy}{rlm}(x, conf.int = FALSE, conf.level = 0.95, ...)
+tidy.rlm(x, conf.int = FALSE, conf.level = 0.95, ...)
 }
 \arguments{
 \item{x}{An \code{rlm} object returned by \code{\link[MASS:rlm]{MASS::rlm()}}.}
@@ -37,8 +37,7 @@ specify which components to return.
 \seealso{
 \code{\link[MASS:rlm]{MASS::rlm()}}
 
-Other rlm tidiers: 
-\code{\link{augment.rlm}()},
-\code{\link{glance.rlm}()}
+Other rlm tidiers: \code{\link{augment.rlm}},
+  \code{\link{glance.rlm}}
 }
 \concept{rlm tidiers}

@@ -81,38 +81,21 @@ ggplot(expected, aes(time, .fitted, color = sex)) +
 \seealso{
 \code{\link[=glance]{glance()}}, \code{\link[survival:coxph]{survival::coxph()}}
 
-Other coxph tidiers: 
-\code{\link{augment.coxph}()},
-\code{\link{tidy.coxph}()}
+Other coxph tidiers: \code{\link{augment.coxph}},
+  \code{\link{tidy.coxph}}
 
-Other survival tidiers: 
-\code{\link{augment.coxph}()},
-\code{\link{augment.survreg}()},
-\code{\link{glance.aareg}()},
-\code{\link{glance.cch}()},
-\code{\link{glance.pyears}()},
-\code{\link{glance.survdiff}()},
-\code{\link{glance.survexp}()},
-\code{\link{glance.survfit}()},
-\code{\link{glance.survreg}()},
-\code{\link{tidy.aareg}()},
-\code{\link{tidy.cch}()},
-\code{\link{tidy.coxph}()},
-\code{\link{tidy.pyears}()},
-\code{\link{tidy.survdiff}()},
-\code{\link{tidy.survexp}()},
-\code{\link{tidy.survfit}()},
-\code{\link{tidy.survreg}()}
+Other survival tidiers: \code{\link{augment.coxph}},
+  \code{\link{augment.survreg}},
+  \code{\link{glance.aareg}}, \code{\link{glance.cch}},
+  \code{\link{glance.pyears}},
+  \code{\link{glance.survdiff}},
+  \code{\link{glance.survexp}},
+  \code{\link{glance.survfit}},
+  \code{\link{glance.survreg}}, \code{\link{tidy.aareg}},
+  \code{\link{tidy.cch}}, \code{\link{tidy.coxph}},
+  \code{\link{tidy.pyears}}, \code{\link{tidy.survdiff}},
+  \code{\link{tidy.survexp}}, \code{\link{tidy.survfit}},
+  \code{\link{tidy.survreg}}
 }
 \concept{coxph tidiers}
 \concept{survival tidiers}
-\value{
-A \code{\link[tibble:tibble]{tibble::tibble()}} with exactly one row and columns:
-  \item{AIC}{Akaike's Information Criterion for the model.}
-  \item{BIC}{Bayesian Information Criterion for the model.}
-  \item{logLik}{The log-likelihood of the model. [stats::logLik()] may be a useful reference.}
-  \item{nevent}{number of events}
-  \item{nobs}{Number of observations used.}
-  \item{r.squared}{R squared statistic, or the percent of variation explained by the model. Also known as the coefficient of determination.}
-
-}

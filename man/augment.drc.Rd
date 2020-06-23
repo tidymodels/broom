@@ -4,15 +4,8 @@
 \alias{augment.drc}
 \title{Augment data with information from a(n) drc object}
 \usage{
-\method{augment}{drc}(
-  x,
-  data = NULL,
-  newdata = NULL,
-  se_fit = FALSE,
-  conf.int = FALSE,
-  conf.level = 0.95,
-  ...
-)
+\method{augment}{drc}(x, data = NULL, newdata = NULL, se_fit = FALSE,
+  conf.int = FALSE, conf.level = 0.95, ...)
 }
 \arguments{
 \item{x}{A \code{drc} object produced by a call to \code{\link[drc:drm]{drc::drm()}}.}
@@ -109,18 +102,7 @@ augment(mod, selenium)
 \seealso{
 \code{\link[=augment]{augment()}}, \code{\link[drc:drm]{drc::drm()}}
 
-Other drc tidiers: 
-\code{\link{glance.drc}()},
-\code{\link{tidy.drc}()}
+Other drc tidiers: \code{\link{glance.drc}},
+  \code{\link{tidy.drc}}
 }
 \concept{drc tidiers}
-\value{
-A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
-  \item{.conf.high}{Upper bound on confidence interval for fitted values.}
-  \item{.conf.low}{Lower bound on confidence interval for fitted values.}
-  \item{.cooksd}{Cooks distance.}
-  \item{.fitted}{Fitted or predicted value.}
-  \item{.resid}{The difference between fitted and observed values.}
-  \item{.se.fit}{Standard errors of fitted values.}
-
-}

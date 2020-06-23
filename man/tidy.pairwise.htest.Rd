@@ -4,7 +4,7 @@
 \alias{tidy.pairwise.htest}
 \title{Tidy a(n) pairwise.htest object}
 \usage{
-\method{tidy}{pairwise.htest}(x, ...)
+tidy.pairwise.htest(x, ...)
 }
 \arguments{
 \item{x}{A \code{pairwise.htest} object such as those returned from
@@ -56,16 +56,7 @@ tidy(pairwise.wilcox.test(Petal.Length, Species))
 \code{\link[stats:pairwise.t.test]{stats::pairwise.t.test()}}, \code{\link[stats:pairwise.wilcox.test]{stats::pairwise.wilcox.test()}},
 \code{\link[=tidy]{tidy()}}
 
-Other htest tidiers: 
-\code{\link{augment.htest}()},
-\code{\link{tidy.htest}()},
-\code{\link{tidy.power.htest}()}
+Other htest tidiers: \code{\link{augment.htest}},
+  \code{\link{tidy.htest}}, \code{\link{tidy.power.htest}}
 }
 \concept{htest tidiers}
-\value{
-A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
-  \item{group1}{First group being compared}
-  \item{group2}{Second group being compared}
-  \item{p.value}{The two-sided p-value associated with the observed statistic.}
-
-}

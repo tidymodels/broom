@@ -86,13 +86,7 @@ augment(fit, x)
 \seealso{
 \code{\link[=augment]{augment()}}, \code{\link[stats:kmeans]{stats::kmeans()}}
 
-Other kmeans tidiers: 
-\code{\link{glance.kmeans}()},
-\code{\link{tidy.kmeans}()}
+Other kmeans tidiers: \code{\link{glance.kmeans}},
+  \code{\link{tidy.kmeans}}
 }
 \concept{kmeans tidiers}
-\value{
-A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
-  \item{.cluster}{Cluster assignment.}
-
-}

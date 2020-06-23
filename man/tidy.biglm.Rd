@@ -4,7 +4,8 @@
 \alias{tidy.biglm}
 \title{Tidy a(n) biglm object}
 \usage{
-\method{tidy}{biglm}(x, conf.int = FALSE, conf.level = 0.95, exponentiate = FALSE, ...)
+tidy.biglm(x, conf.int = FALSE, conf.level = 0.95,
+  exponentiate = FALSE, ...)
 }
 \arguments{
 \item{x}{A \code{biglm} object created by a call to \code{\link[biglm:biglm]{biglm::biglm()}} or
@@ -66,18 +67,6 @@ glance(bgfit)
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[biglm:biglm]{biglm::biglm()}}, \code{\link[biglm:bigglm]{biglm::bigglm()}}
 
-Other biglm tidiers: 
-\code{\link{glance.biglm}()}
+Other biglm tidiers: \code{\link{glance.biglm}}
 }
 \concept{biglm tidiers}
-\value{
-A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
-  \item{conf.high}{Upper bound on the confidence interval for the estimate.}
-  \item{conf.low}{Lower bound on the confidence interval for the estimate.}
-  \item{estimate}{The estimated value of the regression term.}
-  \item{p.value}{The two-sided p-value associated with the observed statistic.}
-  \item{statistic}{The value of a T-statistic to use in a hypothesis that the regression term is non-zero.}
-  \item{std.error}{The standard error of the regression term.}
-  \item{term}{The name of the regression term.}
-
-}

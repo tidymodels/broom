@@ -56,13 +56,7 @@ augment(p, x) \%>\%
 \seealso{
 \code{\link[=glance]{glance()}}, \code{\link[cluster:pam]{cluster::pam()}}
 
-Other pam tidiers: 
-\code{\link{augment.pam}()},
-\code{\link{tidy.pam}()}
+Other pam tidiers: \code{\link{augment.pam}},
+  \code{\link{tidy.pam}}
 }
 \concept{pam tidiers}
-\value{
-A \code{\link[tibble:tibble]{tibble::tibble()}} with exactly one row and columns:
-
-
-}

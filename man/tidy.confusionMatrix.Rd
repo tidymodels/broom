@@ -6,7 +6,7 @@
 \alias{confusionMatrix_tidiers}
 \title{Tidy a(n) confusionMatrix object}
 \usage{
-\method{tidy}{confusionMatrix}(x, by_class = TRUE, ...)
+tidy.confusionMatrix(x, by_class = TRUE, ...)
 }
 \arguments{
 \item{x}{An object of class \code{confusionMatrix} created by a call to
@@ -67,14 +67,4 @@ tidy(six_class_cm, by_class = FALSE)
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[caret:confusionMatrix]{caret::confusionMatrix()}}
-}
-\value{
-A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
-  \item{class}{The class under consideration.}
-  \item{conf.high}{Upper bound on the confidence interval for the estimate.}
-  \item{conf.low}{Lower bound on the confidence interval for the estimate.}
-  \item{estimate}{The estimated value of the regression term.}
-  \item{term}{The name of the regression term.}
-  \item{p.value}{P-value for accuracy and kappa statistics.}
-
 }

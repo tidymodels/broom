@@ -5,7 +5,7 @@
 \alias{maps_tidiers}
 \title{Tidy a(n) map object}
 \usage{
-\method{tidy}{map}(x, ...)
+tidy.map(x, ...)
 }
 \arguments{
 \item{x}{A \code{map} object returned from \code{\link[maps:map]{maps::map()}}.}

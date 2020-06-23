@@ -6,7 +6,7 @@
 \alias{kendall_tidiers}
 \title{Tidy a(n) Kendall object}
 \usage{
-\method{tidy}{Kendall}(x, ...)
+tidy.Kendall(x, ...)
 }
 \arguments{
 \item{x}{A \code{Kendall} object returned from a call to \code{\link[Kendall:Kendall]{Kendall::Kendall()}},
@@ -49,13 +49,4 @@ tidy(t_res)
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[Kendall:Kendall]{Kendall::Kendall()}}, \code{\link[Kendall:MannKendall]{Kendall::MannKendall()}},
 \code{\link[Kendall:SeasonalMannKendall]{Kendall::SeasonalMannKendall()}}
-}
-\value{
-A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
-  \item{kendall_score}{Kendall score.}
-  \item{p.value}{The two-sided p-value associated with the observed statistic.}
-  \item{var_kendall_score}{Variance of the kendall_score.}
-  \item{statistic}{Kendall's tau statistic}
-  \item{denominator}{The denominator, which is tau=kendall_score/denominator.}
-
 }

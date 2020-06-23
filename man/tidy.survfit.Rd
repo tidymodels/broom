@@ -5,7 +5,7 @@
 \alias{survfit_tidiers}
 \title{Tidy a(n) survfit object}
 \usage{
-\method{tidy}{survfit}(x, ...)
+tidy.survfit(x, ...)
 }
 \arguments{
 \item{x}{An \code{survfit} object returned from \code{\link[survival:survfit]{survival::survfit()}}.}
@@ -55,39 +55,17 @@ ggplot(td_multi, aes(time, estimate, group = state)) +
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[survival:survfit]{survival::survfit()}}
 
-Other survival tidiers: 
-\code{\link{augment.coxph}()},
-\code{\link{augment.survreg}()},
-\code{\link{glance.aareg}()},
-\code{\link{glance.cch}()},
-\code{\link{glance.coxph}()},
-\code{\link{glance.pyears}()},
-\code{\link{glance.survdiff}()},
-\code{\link{glance.survexp}()},
-\code{\link{glance.survfit}()},
-\code{\link{glance.survreg}()},
-\code{\link{tidy.aareg}()},
-\code{\link{tidy.cch}()},
-\code{\link{tidy.coxph}()},
-\code{\link{tidy.pyears}()},
-\code{\link{tidy.survdiff}()},
-\code{\link{tidy.survexp}()},
-\code{\link{tidy.survreg}()}
+Other survival tidiers: \code{\link{augment.coxph}},
+  \code{\link{augment.survreg}},
+  \code{\link{glance.aareg}}, \code{\link{glance.cch}},
+  \code{\link{glance.coxph}}, \code{\link{glance.pyears}},
+  \code{\link{glance.survdiff}},
+  \code{\link{glance.survexp}},
+  \code{\link{glance.survfit}},
+  \code{\link{glance.survreg}}, \code{\link{tidy.aareg}},
+  \code{\link{tidy.cch}}, \code{\link{tidy.coxph}},
+  \code{\link{tidy.pyears}}, \code{\link{tidy.survdiff}},
+  \code{\link{tidy.survexp}}, \code{\link{tidy.survreg}}
 }
 \concept{survfit tidiers}
 \concept{survival tidiers}
-\value{
-A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
-  \item{conf.high}{Upper bound on the confidence interval for the estimate.}
-  \item{conf.low}{Lower bound on the confidence interval for the estimate.}
-  \item{n.censor}{number of censored events}
-  \item{n.event}{number of events at time t}
-  \item{n.risk}{Number of individuals at risk at time zero.}
-  \item{std.error}{The standard error of the regression term.}
-  \item{time}{Point in time.}
-  \item{estimate}{estimate of survival or cumulative incidence rate when
-    multistate}
-  \item{state}{state if multistate survfit object input}
-  \item{strata}{strata if stratified survfit object input}
-
-}

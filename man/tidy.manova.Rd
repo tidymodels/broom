@@ -4,7 +4,7 @@
 \alias{tidy.manova}
 \title{Tidy a(n) manova object}
 \usage{
-\method{tidy}{manova}(x, test = "Pillai", ...)
+tidy.manova(x, test = "Pillai", ...)
 }
 \arguments{
 \item{x}{A \code{manova} object return from \code{\link[stats:manova]{stats::manova()}}.}
@@ -13,16 +13,17 @@
 "Hotelling-Lawley" (Hotelling-Lawley trace) or "Roy" (Roy's greatest root)
 indicating which test statistic should be used. Defaults to "Pillai".}
 
-\item{...}{
-  Arguments passed on to \code{\link[stats:summary.manova]{stats::summary.manova}}
-  \describe{
-    \item{\code{object}}{An object of class \code{"manova"} or an \code{aov}
+\item{...}{Arguments passed on to \code{stats::summary.manova}
+\describe{
+  \item{object}{An object of class \code{"manova"} or an \code{aov}
     object with multiple responses.}
-    \item{\code{intercept}}{logical.  If \code{TRUE}, the intercept term is
+  \item{test}{The name of the test statistic to be used.  Partial
+    matching is used so the name can be abbreviated.}
+  \item{intercept}{logical.  If \code{TRUE}, the intercept term is
     included in the table.}
-    \item{\code{tol}}{tolerance to be used in deciding if the residuals are
+  \item{tol}{tolerance to be used in deciding if the residuals are
     rank-deficient: see \code{\link{qr}}.}
-  }}
+}}
 }
 \description{
 Tidy summarizes information about the components of a model.
@@ -46,25 +47,9 @@ tidy(m)
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[stats:summary.manova]{stats::summary.manova()}}
 
-Other anova tidiers: 
-\code{\link{glance.aov}()},
-\code{\link{tidy.TukeyHSD}()},
-\code{\link{tidy.anova}()},
-\code{\link{tidy.aovlist}()},
-\code{\link{tidy.aov}()},
-\code{\link{tidy.summary.manova}()}
+Other anova tidiers: \code{\link{glance.aov}},
+  \code{\link{tidy.TukeyHSD}}, \code{\link{tidy.anova}},
+  \code{\link{tidy.aovlist}}, \code{\link{tidy.aov}},
+  \code{\link{tidy.summary.manova}}
 }
 \concept{anova tidiers}
-\value{
-A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
-  \item{den.df}{Degrees of freedom of the denominator}
-  \item{num.df}{Degrees of freedom}
-  \item{p.value}{The two-sided p-value associated with the observed statistic.}
-  \item{statistic}{The value of a T-statistic to use in a hypothesis that the regression term is non-zero.}
-  \item{term}{The name of the regression term.}
-  \item{pillai}{Pillai's trace.}
-  \item{wilks}{Wilk's lambda.}
-  \item{hl}{Hotelling-Lawley trace.}
-  \item{roy}{Roy's greatest root.}
-
-}

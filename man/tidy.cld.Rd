@@ -4,7 +4,7 @@
 \alias{tidy.cld}
 \title{Tidy a(n) cld object}
 \usage{
-\method{tidy}{cld}(x, ...)
+tidy.cld(x, ...)
 }
 \arguments{
 \item{x}{A \code{cld} object created by calling \code{\link[multcomp:cld]{multcomp::cld()}} on a
@@ -58,14 +58,7 @@ tidy(cld)
 \code{\link[=tidy]{tidy()}}, \code{\link[multcomp:cld]{multcomp::cld()}}, \code{\link[multcomp:summary.glht]{multcomp::summary.glht()}},
 \code{\link[multcomp:confint.glht]{multcomp::confint.glht()}}, \code{\link[multcomp:glht]{multcomp::glht()}}
 
-Other multcomp tidiers: 
-\code{\link{tidy.confint.glht}()},
-\code{\link{tidy.glht}()},
-\code{\link{tidy.summary.glht}()}
+Other multcomp tidiers: \code{\link{tidy.confint.glht}},
+  \code{\link{tidy.glht}}, \code{\link{tidy.summary.glht}}
 }
 \concept{multcomp tidiers}
-\value{
-A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
-  \item{contrast}{Levels being compared.}
-
-}

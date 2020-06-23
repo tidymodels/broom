@@ -4,7 +4,7 @@
 \alias{tidy.glmRob}
 \title{Tidy a(n) glmRob object}
 \usage{
-\method{tidy}{glmRob}(x, ...)
+tidy.glmRob(x, ...)
 }
 \arguments{
 \item{x}{A \code{glmRob} object returned from \code{\link[robust:glmRob]{robust::glmRob()}}.}
@@ -44,10 +44,8 @@ glance(gm)
 \seealso{
 \code{\link[robust:glmRob]{robust::glmRob()}}
 
-Other robust tidiers: 
-\code{\link{augment.lmRob}()},
-\code{\link{glance.glmRob}()},
-\code{\link{glance.lmRob}()},
-\code{\link{tidy.lmRob}()}
+Other robust tidiers: \code{\link{augment.lmRob}},
+  \code{\link{glance.glmRob}}, \code{\link{glance.lmRob}},
+  \code{\link{tidy.lmRob}}
 }
 \concept{robust tidiers}

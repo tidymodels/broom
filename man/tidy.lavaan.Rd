@@ -7,7 +7,7 @@
 \alias{cfa_tidiers}
 \title{Tidy a(n) lavaan object}
 \usage{
-\method{tidy}{lavaan}(x, conf.int = FALSE, conf.level = 0.95, ...)
+tidy.lavaan(x, conf.int = FALSE, conf.level = 0.95, ...)
 }
 \arguments{
 \item{x}{A \code{lavaan} object, such as those returned from \code{\link[lavaan:cfa]{lavaan::cfa()}},
@@ -28,7 +28,7 @@ A \code{\link[tibble:tibble]{tibble::tibble()}} with one row for each estimated 
 columns:
 
 \item{term}{The result of paste(lhs, op, rhs)}
-\item{op}{The operator in the model syntax (e.g. \verb{~~} for covariances, or
+\item{op}{The operator in the model syntax (e.g. \code{~~} for covariances, or
 \code{~} for regression parameters)}
 \item{group}{The group (if specified) in the lavaan model}
 \item{estimate}{The parameter estimate (may be standardized)}
@@ -67,7 +67,6 @@ tidy(cfa.fit)
 \code{\link[=tidy]{tidy()}}, \code{\link[lavaan:cfa]{lavaan::cfa()}}, \code{\link[lavaan:sem]{lavaan::sem()}},
 \code{\link[lavaan:parameterEstimates]{lavaan::parameterEstimates()}}
 
-Other lavaan tidiers: 
-\code{\link{glance.lavaan}()}
+Other lavaan tidiers: \code{\link{glance.lavaan}}
 }
 \concept{lavaan tidiers}

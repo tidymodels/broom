@@ -74,24 +74,10 @@ survey data. \emph{Journal of Survey Statistics and Methodology}, 3(1).
 \seealso{
 \code{\link[survey:svyglm]{survey::svyglm()}}, \code{\link[stats:glm]{stats::glm()}}, \link[survey:anova.svyglm]{survey::anova.svyglm}
 
-Other lm tidiers: 
-\code{\link{augment.glm}()},
-\code{\link{augment.lm}()},
-\code{\link{glance.glm}()},
-\code{\link{glance.lm}()},
-\code{\link{tidy.glm}()},
-\code{\link{tidy.lm.beta}()},
-\code{\link{tidy.lm}()},
-\code{\link{tidy.mlm}()}
+Other lm tidiers: \code{\link{augment.glm}},
+  \code{\link{augment.lm}}, \code{\link{glance.glm}},
+  \code{\link{glance.lm}}, \code{\link{tidy.glm}},
+  \code{\link{tidy.lm.beta}}, \code{\link{tidy.lm}},
+  \code{\link{tidy.mlm}}
 }
 \concept{lm tidiers}
-\value{
-A \code{\link[tibble:tibble]{tibble::tibble()}} with exactly one row and columns:
-  \item{AIC}{Akaike's Information Criterion for the model.}
-  \item{BIC}{Bayesian Information Criterion for the model.}
-  \item{deviance}{Deviance of the model.}
-  \item{df.null}{Degrees of freedom used by the null model.}
-  \item{df.residual}{Residual degrees of freedom.}
-  \item{null.deviance}{Deviance of the null model.}
-
-}

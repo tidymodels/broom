@@ -5,7 +5,7 @@
 \alias{garch_tidiers}
 \title{Tidy a(n) garch object}
 \usage{
-\method{tidy}{garch}(x, ...)
+tidy.garch(x, conf.int = FALSE, conf.level = 0.95, ...)
 }
 \arguments{
 \item{x}{A \code{garch} object returned by \code{\link[tseries:garch]{tseries::garch()}}.}
@@ -31,29 +31,21 @@ specify which components to return.
 \examples{
 
 library(tseries)
+library(broom)
+library(tidyverse)
 
 data(EuStockMarkets)
 dax <- diff(log(EuStockMarkets))[,"DAX"]
 dax.garch <- garch(dax)
-dax.garch
 
-tidy(dax.garch)
+
+tidy(dax.garch, conf.int = F)
 glance(dax.garch)
-
+tidy.garch(dax.garch)
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[tseries:garch]{tseries::garch()}}
 
-Other garch tidiers: 
-\code{\link{glance.garch}()}
+Other garch tidiers: \code{\link{glance.garch}}
 }
 \concept{garch tidiers}
-\value{
-A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
-  \item{estimate}{The estimated value of the regression term.}
-  \item{p.value}{The two-sided p-value associated with the observed statistic.}
-  \item{statistic}{The value of a T-statistic to use in a hypothesis that the regression term is non-zero.}
-  \item{std.error}{The standard error of the regression term.}
-  \item{term}{The name of the regression term.}
-
-}

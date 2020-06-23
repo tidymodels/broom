@@ -29,8 +29,8 @@ they do not have a class attribute, they cannot be handled by S3 dispatch.
 
 These functions look at the elements of a list and determine if there is
 an appropriate tidying method to apply to the list. Those tidiers are
-themselves are implemented as functions of the form \verb{tidy_<function>}
-or \verb{glance_<function>} and are not exported (but they are documented!).
+themselves are implemented as functions of the form \code{tidy_<function>}
+or \code{glance_<function>} and are not exported (but they are documented!).
 
 If no appropriate tidying method is found, throws an error.
 }
@@ -46,18 +46,8 @@ glance(o)
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[stats:optim]{stats::optim()}}
 
-Other list tidiers: 
-\code{\link{glance_optim}()},
-\code{\link{list_tidiers}},
-\code{\link{tidy_irlba}()},
-\code{\link{tidy_svd}()},
-\code{\link{tidy_xyz}()}
+Other list tidiers: \code{\link{glance_optim}},
+  \code{\link{list_tidiers}}, \code{\link{tidy_irlba}},
+  \code{\link{tidy_svd}}, \code{\link{tidy_xyz}}
 }
 \concept{list tidiers}
-\value{
-A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
-  \item{parameter}{The parameter being modeled.}
-  \item{std.error}{The standard error of the regression term.}
-  \item{value}{TODO. needs better documentation.}
-\code{std.error} is only provided as a column if the Hessian is calculated.
-}

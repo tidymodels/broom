@@ -5,7 +5,7 @@
 \alias{robustbase_tidiers}
 \title{Tidy a(n) lmrob object}
 \usage{
-\method{tidy}{lmrob}(x, conf.int = FALSE, conf.level = 0.95, ...)
+tidy.lmrob(x, conf.int = FALSE, conf.level = 0.95, ...)
 }
 \arguments{
 \item{x}{A \code{lmrob} object returned from \code{\link[robustbase:lmrob]{robustbase::lmrob()}}.}
@@ -63,10 +63,8 @@ augment(Rfit)
 \seealso{
 \code{\link[robustbase:lmrob]{robustbase::lmrob()}}
 
-Other robustbase tidiers: 
-\code{\link{augment.glmrob}()},
-\code{\link{augment.lmrob}()},
-\code{\link{glance.lmrob}()},
-\code{\link{tidy.glmrob}()}
+Other robustbase tidiers: \code{\link{augment.glmrob}},
+  \code{\link{augment.lmrob}}, \code{\link{glance.lmrob}},
+  \code{\link{tidy.glmrob}}
 }
 \concept{robustbase tidiers}

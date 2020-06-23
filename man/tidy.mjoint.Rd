@@ -6,14 +6,8 @@
 \alias{joinerml_tidiers}
 \title{Tidy a(n) mjoint object}
 \usage{
-\method{tidy}{mjoint}(
-  x,
-  component = "survival",
-  conf.int = FALSE,
-  conf.level = 0.95,
-  boot_se = NULL,
-  ...
-)
+tidy.mjoint(x, component = "survival", conf.int = FALSE,
+  conf.level = 0.95, boot_se = NULL, ...)
 }
 \arguments{
 \item{x}{An \code{mjoint} object returned from \code{\link[joineRML:mjoint]{joineRML::mjoint()}}.}
@@ -100,18 +94,6 @@ glance(fit)
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[joineRML:mjoint]{joineRML::mjoint()}}, \code{\link[joineRML:bootSE]{joineRML::bootSE()}}
 
-Other mjoint tidiers: 
-\code{\link{glance.mjoint}()}
+Other mjoint tidiers: \code{\link{glance.mjoint}}
 }
 \concept{mjoint tidiers}
-\value{
-A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
-  \item{conf.high}{Upper bound on the confidence interval for the estimate.}
-  \item{conf.low}{Lower bound on the confidence interval for the estimate.}
-  \item{estimate}{The estimated value of the regression term.}
-  \item{p.value}{The two-sided p-value associated with the observed statistic.}
-  \item{statistic}{The value of a T-statistic to use in a hypothesis that the regression term is non-zero.}
-  \item{std.error}{The standard error of the regression term.}
-  \item{term}{The name of the regression term.}
-
-}

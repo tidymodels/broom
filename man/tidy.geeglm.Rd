@@ -6,7 +6,8 @@
 \alias{geepack_tidiers}
 \title{Tidy a(n) geeglm object}
 \usage{
-\method{tidy}{geeglm}(x, conf.int = FALSE, conf.level = 0.95, exponentiate = FALSE, ...)
+tidy.geeglm(x, conf.int = FALSE, conf.level = 0.95,
+  exponentiate = FALSE, ...)
 }
 \arguments{
 \item{x}{A \code{geeglm} object returned from a call to \code{\link[geepack:geeglm]{geepack::geeglm()}}.}
@@ -66,9 +67,4 @@ tidy(geefit, conf.int = TRUE)
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[geepack:geeglm]{geepack::geeglm()}}
-}
-\value{
-A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
-  \item{regresion}{TRUE}
-
 }

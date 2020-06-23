@@ -5,7 +5,7 @@
 \alias{lm_tidiers}
 \title{Tidy a(n) lm object}
 \usage{
-\method{tidy}{lm}(x, conf.int = FALSE, conf.level = 0.95, ...)
+tidy.lm(x, conf.int = FALSE, conf.level = 0.95, ...)
 }
 \arguments{
 \item{x}{An \code{lm} object created by \code{\link[stats:lm]{stats::lm()}}.}
@@ -92,25 +92,10 @@ tidy(result)
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[stats:summary.lm]{stats::summary.lm()}}
 
-Other lm tidiers: 
-\code{\link{augment.glm}()},
-\code{\link{augment.lm}()},
-\code{\link{glance.glm}()},
-\code{\link{glance.lm}()},
-\code{\link{glance.svyglm}()},
-\code{\link{tidy.glm}()},
-\code{\link{tidy.lm.beta}()},
-\code{\link{tidy.mlm}()}
+Other lm tidiers: \code{\link{augment.glm}},
+  \code{\link{augment.lm}}, \code{\link{glance.glm}},
+  \code{\link{glance.lm}}, \code{\link{glance.svyglm}},
+  \code{\link{tidy.glm}}, \code{\link{tidy.lm.beta}},
+  \code{\link{tidy.mlm}}
 }
 \concept{lm tidiers}
-\value{
-A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
-  \item{conf.high}{Upper bound on the confidence interval for the estimate.}
-  \item{conf.low}{Lower bound on the confidence interval for the estimate.}
-  \item{estimate}{The estimated value of the regression term.}
-  \item{p.value}{The two-sided p-value associated with the observed statistic.}
-  \item{statistic}{The value of a T-statistic to use in a hypothesis that the regression term is non-zero.}
-  \item{std.error}{The standard error of the regression term.}
-  \item{term}{The name of the regression term.}
-
-}

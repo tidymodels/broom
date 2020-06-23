@@ -5,7 +5,8 @@
 \alias{polr_tidiers}
 \title{Tidy a(n) polr object}
 \usage{
-\method{tidy}{polr}(x, conf.int = FALSE, conf.level = 0.95, exponentiate = FALSE, ...)
+tidy.polr(x, conf.int = FALSE, conf.level = 0.95,
+  exponentiate = FALSE, ...)
 }
 \arguments{
 \item{x}{A \code{polr} object returned from \code{\link[MASS:polr]{MASS::polr()}}.}
@@ -41,7 +42,7 @@ If a model has several distinct types of components, you will need to
 specify which components to return.
 }
 \details{
-In \verb{broom 0.7.0} the \code{coefficient_type} column was renamed to
+In \code{broom 0.7.0} the \code{coefficient_type} column was renamed to
 \code{coef.type}, and the contents were changed as well. Now the contents
 are \code{coefficient} and \code{scale}, rather than \code{coefficient} and \code{zeta}.
 }
@@ -60,26 +61,10 @@ augment(fit, type.predict = "class")
 \seealso{
 \link{tidy}, \code{\link[MASS:polr]{MASS::polr()}}
 
-Other ordinal tidiers: 
-\code{\link{augment.clm}()},
-\code{\link{augment.polr}()},
-\code{\link{glance.clmm}()},
-\code{\link{glance.clm}()},
-\code{\link{glance.polr}()},
-\code{\link{glance.svyolr}()},
-\code{\link{tidy.clmm}()},
-\code{\link{tidy.clm}()},
-\code{\link{tidy.svyolr}()}
+Other ordinal tidiers: \code{\link{augment.clm}},
+  \code{\link{augment.polr}}, \code{\link{glance.clmm}},
+  \code{\link{glance.clm}}, \code{\link{glance.polr}},
+  \code{\link{glance.svyolr}}, \code{\link{tidy.clmm}},
+  \code{\link{tidy.clm}}, \code{\link{tidy.svyolr}}
 }
 \concept{ordinal tidiers}
-\value{
-A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
-  \item{conf.high}{Upper bound on the confidence interval for the estimate.}
-  \item{conf.low}{Lower bound on the confidence interval for the estimate.}
-  \item{estimate}{The estimated value of the regression term.}
-  \item{p.value}{The two-sided p-value associated with the observed statistic.}
-  \item{statistic}{The value of a T-statistic to use in a hypothesis that the regression term is non-zero.}
-  \item{std.error}{The standard error of the regression term.}
-  \item{term}{The name of the regression term.}
-
-}

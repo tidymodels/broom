@@ -6,7 +6,7 @@
 \alias{quantreg_tidiers}
 \title{Tidy a(n) rq object}
 \usage{
-\method{tidy}{rq}(x, se.type = NULL, conf.int = FALSE, conf.level = 0.95, ...)
+tidy.rq(x, se.type = NULL, conf.int = FALSE, conf.level = 0.95, ...)
 }
 \arguments{
 \item{x}{An \code{rq} object returned from \code{\link[quantreg:rq]{quantreg::rq()}}.}
@@ -42,24 +42,9 @@ set to NA.
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[quantreg:rq]{quantreg::rq()}}
 
-Other quantreg tidiers: 
-\code{\link{augment.nlrq}()},
-\code{\link{augment.rqs}()},
-\code{\link{augment.rq}()},
-\code{\link{glance.nlrq}()},
-\code{\link{glance.rq}()},
-\code{\link{tidy.nlrq}()},
-\code{\link{tidy.rqs}()}
+Other quantreg tidiers: \code{\link{augment.nlrq}},
+  \code{\link{augment.rqs}}, \code{\link{augment.rq}},
+  \code{\link{glance.nlrq}}, \code{\link{glance.rq}},
+  \code{\link{tidy.nlrq}}, \code{\link{tidy.rqs}}
 }
 \concept{quantreg tidiers}
-\value{
-A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
-  \item{conf.high}{Upper bound on the confidence interval for the estimate.}
-  \item{conf.low}{Lower bound on the confidence interval for the estimate.}
-  \item{estimate}{The estimated value of the regression term.}
-  \item{p.value}{The two-sided p-value associated with the observed statistic.}
-  \item{statistic}{The value of a T-statistic to use in a hypothesis that the regression term is non-zero.}
-  \item{std.error}{The standard error of the regression term.}
-  \item{term}{The name of the regression term.}
-
-}

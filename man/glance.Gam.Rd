@@ -41,18 +41,6 @@ Glance at \code{gam} objects created by calls to \code{\link[mgcv:gam]{mgcv::gam
 \seealso{
 \code{\link[=glance]{glance()}}, \code{\link[gam:gam]{gam::gam()}}
 
-Other gam tidiers: 
-\code{\link{tidy.Gam}()}
+Other gam tidiers: \code{\link{tidy.Gam}}
 }
 \concept{gam tidiers}
-\value{
-A \code{\link[tibble:tibble]{tibble::tibble()}} with exactly one row and columns:
-  \item{AIC}{Akaike's Information Criterion for the model.}
-  \item{BIC}{Bayesian Information Criterion for the model.}
-  \item{deviance}{Deviance of the model.}
-  \item{df}{Degrees of freedom used by the model.}
-  \item{df.residual}{Residual degrees of freedom.}
-  \item{logLik}{The log-likelihood of the model. [stats::logLik()] may be a useful reference.}
-  \item{nobs}{Number of observations used.}
-
-}

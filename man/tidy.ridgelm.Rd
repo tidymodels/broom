@@ -5,7 +5,7 @@
 \alias{ridgelm_tidiers}
 \title{Tidy a(n) ridgelm object}
 \usage{
-\method{tidy}{ridgelm}(x, ...)
+tidy.ridgelm(x, ...)
 }
 \arguments{
 \item{x}{A \code{ridgelm} object returned from \code{\link[MASS:lm.ridge]{MASS::lm.ridge()}}.}
@@ -56,16 +56,6 @@ ggplot(td2, aes(lambda, GCV)) +
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[MASS:lm.ridge]{MASS::lm.ridge()}}
 
-Other ridgelm tidiers: 
-\code{\link{glance.ridgelm}()}
+Other ridgelm tidiers: \code{\link{glance.ridgelm}}
 }
 \concept{ridgelm tidiers}
-\value{
-A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
-  \item{GCV}{Generalized cross validation error estimate.}
-  \item{lambda}{Value of penalty parameter lambda.}
-  \item{term}{The name of the regression term.}
-  \item{estimate}{estimate of scaled coefficient using this lambda}
-  \item{scale}{Scaling factor of estimated coefficient}
-
-}

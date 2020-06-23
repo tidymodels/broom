@@ -5,7 +5,7 @@
 \alias{aareg_tidiers}
 \title{Tidy a(n) aareg object}
 \usage{
-\method{tidy}{aareg}(x, ...)
+tidy.aareg(x, ...)
 }
 \arguments{
 \item{x}{An \code{aareg} object returned from \code{\link[survival:aareg]{survival::aareg()}}.}
@@ -48,38 +48,19 @@ tidy(afit)
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[survival:aareg]{survival::aareg()}}
 
-Other aareg tidiers: 
-\code{\link{glance.aareg}()}
+Other aareg tidiers: \code{\link{glance.aareg}}
 
-Other survival tidiers: 
-\code{\link{augment.coxph}()},
-\code{\link{augment.survreg}()},
-\code{\link{glance.aareg}()},
-\code{\link{glance.cch}()},
-\code{\link{glance.coxph}()},
-\code{\link{glance.pyears}()},
-\code{\link{glance.survdiff}()},
-\code{\link{glance.survexp}()},
-\code{\link{glance.survfit}()},
-\code{\link{glance.survreg}()},
-\code{\link{tidy.cch}()},
-\code{\link{tidy.coxph}()},
-\code{\link{tidy.pyears}()},
-\code{\link{tidy.survdiff}()},
-\code{\link{tidy.survexp}()},
-\code{\link{tidy.survfit}()},
-\code{\link{tidy.survreg}()}
+Other survival tidiers: \code{\link{augment.coxph}},
+  \code{\link{augment.survreg}},
+  \code{\link{glance.aareg}}, \code{\link{glance.cch}},
+  \code{\link{glance.coxph}}, \code{\link{glance.pyears}},
+  \code{\link{glance.survdiff}},
+  \code{\link{glance.survexp}},
+  \code{\link{glance.survfit}},
+  \code{\link{glance.survreg}}, \code{\link{tidy.cch}},
+  \code{\link{tidy.coxph}}, \code{\link{tidy.pyears}},
+  \code{\link{tidy.survdiff}}, \code{\link{tidy.survexp}},
+  \code{\link{tidy.survfit}}, \code{\link{tidy.survreg}}
 }
 \concept{aareg tidiers}
 \concept{survival tidiers}
-\value{
-A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
-  \item{estimate}{The estimated value of the regression term.}
-  \item{p.value}{The two-sided p-value associated with the observed statistic.}
-  \item{robust.se}{robust version of standard error estimate.}
-  \item{statistic}{The value of a T-statistic to use in a hypothesis that the regression term is non-zero.}
-  \item{std.error}{The standard error of the regression term.}
-  \item{term}{The name of the regression term.}
-  \item{z}{z score}
-
-}

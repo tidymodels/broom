@@ -79,8 +79,7 @@ missing at this time.
 \seealso{
 \code{\link[=augment]{augment()}}, \code{\link[stats:factanal]{stats::factanal()}}
 
-Other factanal tidiers: 
-\code{\link{glance.factanal}()},
-\code{\link{tidy.factanal}()}
+Other factanal tidiers: \code{\link{glance.factanal}},
+  \code{\link{tidy.factanal}}
 }
 \concept{factanal tidiers}

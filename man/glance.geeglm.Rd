@@ -53,10 +53,3 @@ tidy(geefit, conf.int = TRUE)
 \code{\link[=glance]{glance()}}, \code{\link[geepack:geeglm]{geepack::geeglm()}}
 }
 \concept{geepack tidiers}
-\value{
-A \code{\link[tibble:tibble]{tibble::tibble()}} with exactly one row and columns:
-  \item{alpha}{Estimated correlation parameter for geepack::geeglm.}
-  \item{df.residual}{Residual degrees of freedom.}
-  \item{gamma}{Estimated scale parameter for geepack::geeglm.}
-
-}

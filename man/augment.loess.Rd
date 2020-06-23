@@ -5,7 +5,8 @@
 \alias{loess_tidiers}
 \title{Tidy a(n) loess object}
 \usage{
-\method{augment}{loess}(x, data = model.frame(x), newdata = NULL, se_fit = FALSE, ...)
+\method{augment}{loess}(x, data = model.frame(x), newdata = NULL,
+  se_fit = FALSE, ...)
 }
 \arguments{
 \item{x}{A \code{loess} objects returned by \code{\link[stats:loess]{stats::loess()}}.}
@@ -58,7 +59,7 @@ warning is raised and the incomplete rows are dropped.
 Note that \code{loess} objects by default will not predict on data
 outside of a bounding hypercube defined by the training data unless the
 original \code{loess} object was fit with
-\verb{control = loess.control(surface = \\"direct\\"))}. See
+\code{control = loess.control(surface = \"direct\"))}. See
 \code{\link[stats:predict.loess]{stats::predict.loess()}} for details.
 }
 \examples{
@@ -82,11 +83,4 @@ augment(lo, newdata = head(mtcars))
 \link{na.action}
 
 \code{\link[=augment]{augment()}}, \code{\link[stats:loess]{stats::loess()}}, \code{\link[stats:predict.loess]{stats::predict.loess()}}
-}
-\value{
-A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
-  \item{.fitted}{Fitted or predicted value.}
-  \item{.resid}{The difference between fitted and observed values.}
-  \item{.se.fit}{Standard errors of fitted values.}
-
 }

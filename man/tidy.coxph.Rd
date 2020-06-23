@@ -5,7 +5,8 @@
 \alias{coxph_tidiers}
 \title{Tidy a(n) coxph object}
 \usage{
-\method{tidy}{coxph}(x, exponentiate = FALSE, conf.int = FALSE, conf.level = 0.95, ...)
+tidy.coxph(x, exponentiate = FALSE, conf.int = FALSE,
+  conf.level = 0.95, ...)
 }
 \arguments{
 \item{x}{A \code{coxph} object returned from \code{\link[survival:coxph]{survival::coxph()}}.}
@@ -87,36 +88,20 @@ ggplot(expected, aes(time, .fitted, color = sex)) +
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[survival:coxph]{survival::coxph()}}
 
-Other coxph tidiers: 
-\code{\link{augment.coxph}()},
-\code{\link{glance.coxph}()}
+Other coxph tidiers: \code{\link{augment.coxph}},
+  \code{\link{glance.coxph}}
 
-Other survival tidiers: 
-\code{\link{augment.coxph}()},
-\code{\link{augment.survreg}()},
-\code{\link{glance.aareg}()},
-\code{\link{glance.cch}()},
-\code{\link{glance.coxph}()},
-\code{\link{glance.pyears}()},
-\code{\link{glance.survdiff}()},
-\code{\link{glance.survexp}()},
-\code{\link{glance.survfit}()},
-\code{\link{glance.survreg}()},
-\code{\link{tidy.aareg}()},
-\code{\link{tidy.cch}()},
-\code{\link{tidy.pyears}()},
-\code{\link{tidy.survdiff}()},
-\code{\link{tidy.survexp}()},
-\code{\link{tidy.survfit}()},
-\code{\link{tidy.survreg}()}
+Other survival tidiers: \code{\link{augment.coxph}},
+  \code{\link{augment.survreg}},
+  \code{\link{glance.aareg}}, \code{\link{glance.cch}},
+  \code{\link{glance.coxph}}, \code{\link{glance.pyears}},
+  \code{\link{glance.survdiff}},
+  \code{\link{glance.survexp}},
+  \code{\link{glance.survfit}},
+  \code{\link{glance.survreg}}, \code{\link{tidy.aareg}},
+  \code{\link{tidy.cch}}, \code{\link{tidy.pyears}},
+  \code{\link{tidy.survdiff}}, \code{\link{tidy.survexp}},
+  \code{\link{tidy.survfit}}, \code{\link{tidy.survreg}}
 }
 \concept{coxph tidiers}
 \concept{survival tidiers}
-\value{
-A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
-  \item{estimate}{The estimated value of the regression term.}
-  \item{p.value}{The two-sided p-value associated with the observed statistic.}
-  \item{statistic}{The value of a T-statistic to use in a hypothesis that the regression term is non-zero.}
-  \item{std.error}{The standard error of the regression term.}
-
-}

@@ -88,15 +88,7 @@ augment(p, x) \%>\%
 \seealso{
 \code{\link[=augment]{augment()}}, \code{\link[cluster:pam]{cluster::pam()}}
 
-Other pam tidiers: 
-\code{\link{glance.pam}()},
-\code{\link{tidy.pam}()}
+Other pam tidiers: \code{\link{glance.pam}},
+  \code{\link{tidy.pam}}
 }
 \concept{pam tidiers}
-\value{
-A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
-  \item{.cluster}{Cluster assignment.}
-  \item{.fitted}{Fitted or predicted value.}
-  \item{.resid}{The difference between fitted and observed values.}
-
-}

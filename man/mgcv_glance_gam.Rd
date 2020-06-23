@@ -51,18 +51,6 @@ glance(g)
 \seealso{
 \code{\link[=glance]{glance()}}, \code{\link[mgcv:gam]{mgcv::gam()}}, \code{\link[=glance.Gam]{glance.Gam()}}
 
-Other mgcv tidiers: 
-\code{\link{tidy.gam}()}
+Other mgcv tidiers: \code{\link{tidy.gam}}
 }
 \concept{mgcv tidiers}
-\value{
-A \code{\link[tibble:tibble]{tibble::tibble()}} with exactly one row and columns:
-  \item{AIC}{Akaike's Information Criterion for the model.}
-  \item{BIC}{Bayesian Information Criterion for the model.}
-  \item{deviance}{Deviance of the model.}
-  \item{df}{Degrees of freedom used by the model.}
-  \item{df.residual}{Residual degrees of freedom.}
-  \item{logLik}{The log-likelihood of the model. [stats::logLik()] may be a useful reference.}
-  \item{nobs}{Number of observations used.}
-
-}

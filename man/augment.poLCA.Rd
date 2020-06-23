@@ -127,14 +127,7 @@ dim(au2)
 \seealso{
 \code{\link[=augment]{augment()}}, \code{\link[poLCA:poLCA]{poLCA::poLCA()}}
 
-Other poLCA tidiers: 
-\code{\link{glance.poLCA}()},
-\code{\link{tidy.poLCA}()}
+Other poLCA tidiers: \code{\link{glance.poLCA}},
+  \code{\link{tidy.poLCA}}
 }
 \concept{poLCA tidiers}
-\value{
-A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
-  \item{.class}{Predicted class.}
-  \item{.probability}{Class probability of modal class.}
-
-}

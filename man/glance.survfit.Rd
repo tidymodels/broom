@@ -61,42 +61,20 @@ ggplot(td_multi, aes(time, estimate, group = state)) +
 \seealso{
 \code{\link[=glance]{glance()}}, \code{\link[survival:survfit]{survival::survfit()}}
 
-Other cch tidiers: 
-\code{\link{glance.cch}()},
-\code{\link{tidy.cch}()}
+Other cch tidiers: \code{\link{glance.cch}},
+  \code{\link{tidy.cch}}
 
-Other survival tidiers: 
-\code{\link{augment.coxph}()},
-\code{\link{augment.survreg}()},
-\code{\link{glance.aareg}()},
-\code{\link{glance.cch}()},
-\code{\link{glance.coxph}()},
-\code{\link{glance.pyears}()},
-\code{\link{glance.survdiff}()},
-\code{\link{glance.survexp}()},
-\code{\link{glance.survreg}()},
-\code{\link{tidy.aareg}()},
-\code{\link{tidy.cch}()},
-\code{\link{tidy.coxph}()},
-\code{\link{tidy.pyears}()},
-\code{\link{tidy.survdiff}()},
-\code{\link{tidy.survexp}()},
-\code{\link{tidy.survfit}()},
-\code{\link{tidy.survreg}()}
+Other survival tidiers: \code{\link{augment.coxph}},
+  \code{\link{augment.survreg}},
+  \code{\link{glance.aareg}}, \code{\link{glance.cch}},
+  \code{\link{glance.coxph}}, \code{\link{glance.pyears}},
+  \code{\link{glance.survdiff}},
+  \code{\link{glance.survexp}},
+  \code{\link{glance.survreg}}, \code{\link{tidy.aareg}},
+  \code{\link{tidy.cch}}, \code{\link{tidy.coxph}},
+  \code{\link{tidy.pyears}}, \code{\link{tidy.survdiff}},
+  \code{\link{tidy.survexp}}, \code{\link{tidy.survfit}},
+  \code{\link{tidy.survreg}}
 }
 \concept{cch tidiers}
 \concept{survival tidiers}
-\value{
-A \code{\link[tibble:tibble]{tibble::tibble()}} with exactly one row and columns:
-  \item{events}{number of events}
-  \item{n.max}{Maximum number of subjects at risk.}
-  \item{n.start}{Initial number of subjects at risk.}
-  \item{nobs}{Number of observations used.}
-  \item{records}{number of observations}
-  \item{rmean}{Restricted mean (see [survival::print.survfit()]).}
-  \item{rmean.std.error}{Restricted mean standard error}
-  \item{conf.low}{lower end of confidence interval on median}
-  \item{conf.high}{upper end of confidence interval on median}
-  \item{median}{median survival}
-
-}

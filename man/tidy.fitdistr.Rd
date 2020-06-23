@@ -5,7 +5,7 @@
 \alias{fitdistr_tidiers}
 \title{Tidy a(n) fitdistr object}
 \usage{
-\method{tidy}{fitdistr}(x, ...)
+tidy.fitdistr(x, ...)
 }
 \arguments{
 \item{x}{A \code{fitdistr} object returned by \code{\link[MASS:fitdistr]{MASS::fitdistr()}}.}
@@ -43,14 +43,6 @@ glance(fit)
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[MASS:fitdistr]{MASS::fitdistr()}}
 
-Other fitdistr tidiers: 
-\code{\link{glance.fitdistr}()}
+Other fitdistr tidiers: \code{\link{glance.fitdistr}}
 }
 \concept{fitdistr tidiers}
-\value{
-A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
-  \item{estimate}{The estimated value of the regression term.}
-  \item{std.error}{The standard error of the regression term.}
-  \item{term}{The name of the regression term.}
-
-}

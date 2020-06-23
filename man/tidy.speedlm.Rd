@@ -5,7 +5,7 @@
 \alias{speedlm_tidiers}
 \title{Tidy a(n) speedlm object}
 \usage{
-\method{tidy}{speedlm}(x, conf.int = FALSE, conf.level = 0.95, ...)
+tidy.speedlm(x, conf.int = FALSE, conf.level = 0.95, ...)
 }
 \arguments{
 \item{x}{A \code{speedlm} object returned from \code{\link[speedglm:speedlm]{speedglm::speedlm()}}.}
@@ -47,21 +47,8 @@ augment(mod)
 \seealso{
 \code{\link[speedglm:speedlm]{speedglm::speedlm()}}, \code{\link[=tidy.lm]{tidy.lm()}}
 
-Other speedlm tidiers: 
-\code{\link{augment.speedlm}()},
-\code{\link{glance.speedglm}()},
-\code{\link{glance.speedlm}()},
-\code{\link{tidy.speedglm}()}
+Other speedlm tidiers: \code{\link{augment.speedlm}},
+  \code{\link{glance.speedglm}},
+  \code{\link{glance.speedlm}}, \code{\link{tidy.speedglm}}
 }
 \concept{speedlm tidiers}
-\value{
-A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
-  \item{conf.high}{Upper bound on the confidence interval for the estimate.}
-  \item{conf.low}{Lower bound on the confidence interval for the estimate.}
-  \item{estimate}{The estimated value of the regression term.}
-  \item{p.value}{The two-sided p-value associated with the observed statistic.}
-  \item{statistic}{The value of a T-statistic to use in a hypothesis that the regression term is non-zero.}
-  \item{std.error}{The standard error of the regression term.}
-  \item{term}{The name of the regression term.}
-
-}

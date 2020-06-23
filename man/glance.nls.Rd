@@ -55,21 +55,7 @@ augment(n, newdata = newdata)
 \seealso{
 \link{tidy}, \code{\link[stats:nls]{stats::nls()}}
 
-Other nls tidiers: 
-\code{\link{augment.nls}()},
-\code{\link{tidy.nls}()}
+Other nls tidiers: \code{\link{augment.nls}},
+  \code{\link{tidy.nls}}
 }
 \concept{nls tidiers}
-\value{
-A \code{\link[tibble:tibble]{tibble::tibble()}} with exactly one row and columns:
-  \item{AIC}{Akaike's Information Criterion for the model.}
-  \item{BIC}{Bayesian Information Criterion for the model.}
-  \item{deviance}{Deviance of the model.}
-  \item{df.residual}{Residual degrees of freedom.}
-  \item{finTol}{the achieved convergence tolerance}
-  \item{isConv}{whether the fit successfully converged}
-  \item{logLik}{The log-likelihood of the model. [stats::logLik()] may be a useful reference.}
-  \item{nobs}{Number of observations used.}
-  \item{sigma}{Estimated standard error of the residuals.}
-
-}

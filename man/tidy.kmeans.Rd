@@ -5,12 +5,12 @@
 \alias{kmeans_tidiers}
 \title{Tidy a(n) kmeans object}
 \usage{
-\method{tidy}{kmeans}(x, col.names = colnames(x$centers), ...)
+tidy.kmeans(x, col.names = colnames(x$centers), ...)
 }
 \arguments{
 \item{x}{A \code{kmeans} object created by \code{\link[stats:kmeans]{stats::kmeans()}}.}
 
-\item{col.names}{Dimension names. Defaults to the names of the variables in x.  Set to NULL to get names \verb{x1, x2, ...}.}
+\item{col.names}{Dimension names. Defaults to the names of the variables in x.  Set to NULL to get names \code{x1, x2, ...}.}
 
 \item{...}{Additional arguments. Not used. Needed to match generic
 signature only. \strong{Cautionary note:} Misspelled arguments will be
@@ -53,15 +53,7 @@ augment(fit, x)
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[stats:kmeans]{stats::kmeans()}}
 
-Other kmeans tidiers: 
-\code{\link{augment.kmeans}()},
-\code{\link{glance.kmeans}()}
+Other kmeans tidiers: \code{\link{augment.kmeans}},
+  \code{\link{glance.kmeans}}
 }
 \concept{kmeans tidiers}
-\value{
-A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
-  \item{cluster}{A factor describing the cluster from 1:k}
-  \item{size}{Number of points assigned to cluster.}
-  \item{withinss}{The within-cluster sum of squares}
-
-}

@@ -5,7 +5,7 @@
 \alias{lmodel2_tidiers}
 \title{Tidy a(n) lmodel2 object}
 \usage{
-\method{tidy}{lmodel2}(x, ...)
+tidy.lmodel2(x, ...)
 }
 \arguments{
 \item{x}{A \code{lmodel2} object returned by \code{\link[lmodel2:lmodel2]{lmodel2::lmodel2()}}.}
@@ -61,17 +61,6 @@ ggplot(tidy(Ex2.res), aes(estimate, term, color = method)) +
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[lmodel2:lmodel2]{lmodel2::lmodel2()}}
 
-Other lmodel2 tidiers: 
-\code{\link{glance.lmodel2}()}
+Other lmodel2 tidiers: \code{\link{glance.lmodel2}}
 }
 \concept{lmodel2 tidiers}
-\value{
-A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
-  \item{conf.high}{Upper bound on the confidence interval for the estimate.}
-  \item{conf.low}{Lower bound on the confidence interval for the estimate.}
-  \item{estimate}{The estimated value of the regression term.}
-  \item{p.value}{The two-sided p-value associated with the observed statistic.}
-  \item{term}{The name of the regression term.}
-  \item{method}{Either OLS/MA/SMA/RMA}
-
-}

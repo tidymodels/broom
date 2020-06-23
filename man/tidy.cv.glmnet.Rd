@@ -4,7 +4,7 @@
 \alias{tidy.cv.glmnet}
 \title{Tidy a(n) cv.glmnet object}
 \usage{
-\method{tidy}{cv.glmnet}(x, ...)
+tidy.cv.glmnet(x, ...)
 }
 \arguments{
 \item{x}{A \code{cv.glmnet} object returned from \code{\link[glmnet:cv.glmnet]{glmnet::cv.glmnet()}}.}
@@ -84,22 +84,7 @@ ggplot(tidied, aes(lambda, estimate, group = term)) +
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[glmnet:cv.glmnet]{glmnet::cv.glmnet()}}
 
-Other glmnet tidiers: 
-\code{\link{glance.cv.glmnet}()},
-\code{\link{glance.glmnet}()},
-\code{\link{tidy.glmnet}()}
+Other glmnet tidiers: \code{\link{glance.cv.glmnet}},
+  \code{\link{glance.glmnet}}, \code{\link{tidy.glmnet}}
 }
 \concept{glmnet tidiers}
-\value{
-A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
-  \item{lambda}{Value of penalty parameter lambda.}
-  \item{nzero}{Number of non-zero coefficients for the given lambda.}
-  \item{std.error}{The standard error of the regression term.}
-  \item{conf.low}{lower bound on confidence interval for cross-validation
-    estimated loss.}
-  \item{conf.high}{upper bound on confidence interval for cross-validation
-    estimated loss.}
-  \item{estimate}{Median loss across all cross-validation folds for a given
-    lamdba}
-
-}

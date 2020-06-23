@@ -5,7 +5,7 @@
 \alias{binwidth_tidiers}
 \title{Tidy a(n) binWidth object}
 \usage{
-\method{tidy}{binWidth}(x, ...)
+tidy.binWidth(x, ...)
 }
 \arguments{
 \item{x}{A \code{\link[binGroup:binWidth]{binGroup::binWidth()}} object.}
@@ -42,16 +42,7 @@ tidy(bw)
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[binGroup:binWidth]{binGroup::binWidth()}}
 
-Other bingroup tidiers: 
-\code{\link{glance.binDesign}()},
-\code{\link{tidy.binDesign}()}
+Other bingroup tidiers: \code{\link{glance.binDesign}},
+  \code{\link{tidy.binDesign}}
 }
 \concept{bingroup tidiers}
-\value{
-A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
-  \item{alternative}{Alternative hypothesis (character).}
-  \item{ci.width}{Expected width of confidence interval.}
-  \item{p}{True proportion.}
-  \item{n}{Total sample size}
-
-}

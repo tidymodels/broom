@@ -6,7 +6,8 @@
 \alias{gam_tidiers}
 \title{Tidy a(n) gam object}
 \usage{
-\method{tidy}{gam}(x, parametric = FALSE, conf.int = FALSE, conf.level = 0.95, ...)
+tidy.gam(x, parametric = FALSE, conf.int = FALSE, conf.level = 0.95,
+  ...)
 }
 \arguments{
 \item{x}{A \code{gam} object returned from a call to \code{\link[mgcv:gam]{mgcv::gam()}}.}
@@ -60,16 +61,6 @@ glance(g)
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[mgcv:gam]{mgcv::gam()}}, \code{\link[=tidy.Gam]{tidy.Gam()}}
 
-Other mgcv tidiers: 
-\code{\link{glance.gam}()}
+Other mgcv tidiers: \code{\link{glance.gam}}
 }
 \concept{mgcv tidiers}
-\value{
-A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
-  \item{estimate}{The estimated value of the regression term.}
-  \item{p.value}{The two-sided p-value associated with the observed statistic.}
-  \item{statistic}{The value of a T-statistic to use in a hypothesis that the regression term is non-zero.}
-  \item{std.error}{The standard error of the regression term.}
-  \item{term}{The name of the regression term.}
-
-}

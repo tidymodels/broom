@@ -44,21 +44,9 @@ For multiple values, please use a \code{\link[purrr:map]{purrr::map()}} workflow
 \seealso{
 \code{\link[=glance]{glance()}}, \code{\link[quantreg:rq]{quantreg::rq()}}
 
-Other quantreg tidiers: 
-\code{\link{augment.nlrq}()},
-\code{\link{augment.rqs}()},
-\code{\link{augment.rq}()},
-\code{\link{glance.nlrq}()},
-\code{\link{tidy.nlrq}()},
-\code{\link{tidy.rqs}()},
-\code{\link{tidy.rq}()}
+Other quantreg tidiers: \code{\link{augment.nlrq}},
+  \code{\link{augment.rqs}}, \code{\link{augment.rq}},
+  \code{\link{glance.nlrq}}, \code{\link{tidy.nlrq}},
+  \code{\link{tidy.rqs}}, \code{\link{tidy.rq}}
 }
 \concept{quantreg tidiers}
-\value{
-A \code{\link[tibble:tibble]{tibble::tibble()}} with exactly one row and columns:
-  \item{AIC}{Akaike's Information Criterion for the model.}
-  \item{BIC}{Bayesian Information Criterion for the model.}
-  \item{logLik}{The log-likelihood of the model. [stats::logLik()] may be a useful reference.}
-  \item{tau}{Quantile.}
-
-}

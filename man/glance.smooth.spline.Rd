@@ -41,18 +41,6 @@ ggplot(augment(spl, mtcars), aes(wt, mpg)) +
 \seealso{
 \code{\link[=augment]{augment()}}, \code{\link[stats:smooth.spline]{stats::smooth.spline()}}
 
-Other smoothing spline tidiers: 
-\code{\link{augment.smooth.spline}()}
+Other smoothing spline tidiers: \code{\link{augment.smooth.spline}}
 }
 \concept{smoothing spline tidiers}
-\value{
-A \code{\link[tibble:tibble]{tibble::tibble()}} with exactly one row and columns:
-  \item{crit}{minimized criterion}
-  \item{cv.crit}{cross-validation score}
-  \item{df}{Degrees of freedom used by the model.}
-  \item{lambda}{choice of lambda corresponding to `spar`}
-  \item{nobs}{Number of observations used.}
-  \item{pen.crit}{penalized criterion}
-  \item{spar}{smoothing parameter}
-
-}

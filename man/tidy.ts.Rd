@@ -4,7 +4,7 @@
 \alias{tidy.ts}
 \title{Tidy a(n) ts object}
 \usage{
-\method{tidy}{ts}(x, ...)
+tidy.ts(x, ...)
 }
 \arguments{
 \item{x}{A univariate or multivariate \code{ts} times series object.}
@@ -44,16 +44,7 @@ tidy(z)
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[stats:ts]{stats::ts()}}
 
-Other time series tidiers: 
-\code{\link{tidy.acf}()},
-\code{\link{tidy.spec}()},
-\code{\link{tidy.zoo}()}
+Other time series tidiers: \code{\link{tidy.acf}},
+  \code{\link{tidy.spec}}, \code{\link{tidy.zoo}}
 }
 \concept{time series tidiers}
-\value{
-A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
-  \item{index}{Index (i.e. date or time) for a `ts` or `zoo` object.}
-  \item{series}{Name of the series (present only for multivariate time series).}
-  \item{value}{TODO. needs better documentation.}
-
-}

@@ -6,7 +6,7 @@
 \alias{roc_tidiers}
 \title{Tidy a(n) roc object}
 \usage{
-\method{tidy}{roc}(x, ...)
+tidy.roc(x, ...)
 }
 \arguments{
 \item{x}{An \code{roc} object returned from a call to \code{\link[AUC:roc]{AUC::roc()}}.}
@@ -60,11 +60,4 @@ ggplot(rocs, aes(fpr, tpr, color = algorithm)) +
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[AUC:roc]{AUC::roc()}}
-}
-\value{
-A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
-  \item{cutoff}{The cutoff used for classification. Observations with predicted probabilities above this value were assigned class 1, and observations with predicted probabilities below this value were assigned class 0.}
-  \item{fpr}{False positive rate.}
-  \item{tpr}{The true positive rate at the given cutoff.}
-
 }

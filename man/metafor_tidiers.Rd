@@ -4,15 +4,9 @@
 \alias{tidy.rma}
 \title{Tidy a(n) rma object}
 \usage{
-\method{tidy}{rma}(
-  x,
-  conf.int = FALSE,
-  conf.level = 0.95,
-  exponentiate = FALSE,
-  include_studies = FALSE,
-  measure = "GEN",
-  ...
-)
+tidy.rma(x, conf.int = FALSE, conf.level = 0.95,
+  exponentiate = FALSE, include_studies = FALSE, measure = "GEN",
+  ...)
 }
 \arguments{
 \item{x}{An \code{rma} object such as those created by \code{\link[metafor:rma]{metafor::rma()}},
@@ -71,17 +65,5 @@ df <-
 meta_analysis <- rma(yi, vi, data = df, method = "EB")
 
 tidy(meta_analysis)
-
-}
-\value{
-A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
-  \item{conf.high}{Upper bound on the confidence interval for the estimate.}
-  \item{conf.low}{Lower bound on the confidence interval for the estimate.}
-  \item{estimate}{The estimated value of the regression term.}
-  \item{p.value}{The two-sided p-value associated with the observed statistic.}
-  \item{statistic}{The value of a T-statistic to use in a hypothesis that the regression term is non-zero.}
-  \item{std.error}{The standard error of the regression term.}
-  \item{term}{The name of the individual study}
-  \item{type}{The estimate type  (summary vs individual study)}
 
 }

@@ -4,7 +4,7 @@
 \alias{tidy.ftable}
 \title{Tidy a(n) ftable object}
 \usage{
-\method{tidy}{ftable}(x, ...)
+tidy.ftable(x, ...)
 }
 \arguments{
 \item{x}{An \code{ftable} object returned from \code{\link[stats:ftable]{stats::ftable()}}.}
@@ -37,8 +37,7 @@ This function is deprecated. Please use \code{\link[tibble:as_tibble]{tibble::as
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[stats:ftable]{stats::ftable()}}
 
-Other stats tidiers: 
-\code{\link{tidy.density}()},
-\code{\link{tidy.dist}()}
+Other stats tidiers: \code{\link{tidy.density}},
+  \code{\link{tidy.dist}}
 }
 \concept{stats tidiers}

@@ -5,7 +5,7 @@
 \alias{survreg_tidiers}
 \title{Tidy a(n) survreg object}
 \usage{
-\method{tidy}{survreg}(x, conf.level = 0.95, conf.int = FALSE, ...)
+tidy.survreg(x, conf.level = 0.95, conf.int = FALSE, ...)
 }
 \arguments{
 \item{x}{An \code{survreg} object returned from \code{\link[survival:survreg]{survival::survreg()}}.}
@@ -61,39 +61,20 @@ ggplot(td, aes(estimate, term)) +
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[survival:survreg]{survival::survreg()}}
 
-Other survreg tidiers: 
-\code{\link{augment.survreg}()},
-\code{\link{glance.survreg}()}
+Other survreg tidiers: \code{\link{augment.survreg}},
+  \code{\link{glance.survreg}}
 
-Other survival tidiers: 
-\code{\link{augment.coxph}()},
-\code{\link{augment.survreg}()},
-\code{\link{glance.aareg}()},
-\code{\link{glance.cch}()},
-\code{\link{glance.coxph}()},
-\code{\link{glance.pyears}()},
-\code{\link{glance.survdiff}()},
-\code{\link{glance.survexp}()},
-\code{\link{glance.survfit}()},
-\code{\link{glance.survreg}()},
-\code{\link{tidy.aareg}()},
-\code{\link{tidy.cch}()},
-\code{\link{tidy.coxph}()},
-\code{\link{tidy.pyears}()},
-\code{\link{tidy.survdiff}()},
-\code{\link{tidy.survexp}()},
-\code{\link{tidy.survfit}()}
+Other survival tidiers: \code{\link{augment.coxph}},
+  \code{\link{augment.survreg}},
+  \code{\link{glance.aareg}}, \code{\link{glance.cch}},
+  \code{\link{glance.coxph}}, \code{\link{glance.pyears}},
+  \code{\link{glance.survdiff}},
+  \code{\link{glance.survexp}},
+  \code{\link{glance.survfit}},
+  \code{\link{glance.survreg}}, \code{\link{tidy.aareg}},
+  \code{\link{tidy.cch}}, \code{\link{tidy.coxph}},
+  \code{\link{tidy.pyears}}, \code{\link{tidy.survdiff}},
+  \code{\link{tidy.survexp}}, \code{\link{tidy.survfit}}
 }
 \concept{survival tidiers}
 \concept{survreg tidiers}
-\value{
-A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
-  \item{conf.high}{Upper bound on the confidence interval for the estimate.}
-  \item{conf.low}{Lower bound on the confidence interval for the estimate.}
-  \item{estimate}{The estimated value of the regression term.}
-  \item{p.value}{The two-sided p-value associated with the observed statistic.}
-  \item{statistic}{The value of a T-statistic to use in a hypothesis that the regression term is non-zero.}
-  \item{std.error}{The standard error of the regression term.}
-  \item{term}{The name of the regression term.}
-
-}

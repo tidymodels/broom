@@ -6,7 +6,8 @@
 \alias{nnet_tidiers}
 \title{Tidying methods for multinomial logistic regression models}
 \usage{
-\method{tidy}{multinom}(x, conf.int = FALSE, conf.level = 0.95, exponentiate = FALSE, ...)
+tidy.multinom(x, conf.int = FALSE, conf.level = 0.95,
+  exponentiate = FALSE, ...)
 }
 \arguments{
 \item{x}{A \code{multinom} object returned from \code{\link[nnet:multinom]{nnet::multinom()}}.}
@@ -59,19 +60,6 @@ glance(fit.gear)
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[nnet:multinom]{nnet::multinom()}}
 
-Other multinom tidiers: 
-\code{\link{glance.multinom}()}
+Other multinom tidiers: \code{\link{glance.multinom}}
 }
 \concept{multinom tidiers}
-\value{
-A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
-  \item{conf.high}{Upper bound on the confidence interval for the estimate.}
-  \item{conf.low}{Lower bound on the confidence interval for the estimate.}
-  \item{estimate}{The estimated value of the regression term.}
-  \item{p.value}{The two-sided p-value associated with the observed statistic.}
-  \item{statistic}{The value of a T-statistic to use in a hypothesis that the regression term is non-zero.}
-  \item{std.error}{The standard error of the regression term.}
-  \item{term}{The name of the regression term.}
-  \item{y.value}{The response level}
-
-}

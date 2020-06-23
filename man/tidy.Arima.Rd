@@ -5,7 +5,7 @@
 \alias{Arima_tidiers}
 \title{Tidy a(n) Arima object}
 \usage{
-\method{tidy}{Arima}(x, conf.int = FALSE, conf.level = 0.95, ...)
+tidy.Arima(x, conf.int = FALSE, conf.level = 0.95, ...)
 }
 \arguments{
 \item{x}{An object of class \code{Arima} created by \code{\link[stats:arima]{stats::arima()}}.}
@@ -46,16 +46,6 @@ glance(fit)
 \seealso{
 \code{\link[stats:arima]{stats::arima()}}
 
-Other Arima tidiers: 
-\code{\link{glance.Arima}()}
+Other Arima tidiers: \code{\link{glance.Arima}}
 }
 \concept{Arima tidiers}
-\value{
-A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
-  \item{conf.high}{Upper bound on the confidence interval for the estimate.}
-  \item{conf.low}{Lower bound on the confidence interval for the estimate.}
-  \item{estimate}{The estimated value of the regression term.}
-  \item{std.error}{The standard error of the regression term.}
-  \item{term}{The name of the regression term.}
-
-}

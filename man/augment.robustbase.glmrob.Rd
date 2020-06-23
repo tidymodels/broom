@@ -4,15 +4,9 @@
 \alias{augment.glmrob}
 \title{Augment data with information from a(n) glmrob object}
 \usage{
-\method{augment}{glmrob}(
-  x,
-  data = model.frame(x),
-  newdata = NULL,
-  type.predict = c("link", "response"),
-  type.residuals = c("deviance", "pearson"),
-  se_fit = FALSE,
-  ...
-)
+\method{augment}{glmrob}(x, data = model.frame(x), newdata = NULL,
+  type.predict = c("link", "response"), type.residuals = c("deviance",
+  "pearson"), se_fit = FALSE, ...)
 }
 \arguments{
 \item{x}{A \code{glmrob} object returned from \code{\link[robustbase:glmrob]{robustbase::glmrob()}}.}
@@ -100,16 +94,8 @@ For tidiers for robust models from the \pkg{MASS} package see
 \seealso{
 \code{\link[robustbase:glmrob]{robustbase::glmrob()}}
 
-Other robustbase tidiers: 
-\code{\link{augment.lmrob}()},
-\code{\link{glance.lmrob}()},
-\code{\link{tidy.glmrob}()},
-\code{\link{tidy.lmrob}()}
+Other robustbase tidiers: \code{\link{augment.lmrob}},
+  \code{\link{glance.lmrob}}, \code{\link{tidy.glmrob}},
+  \code{\link{tidy.lmrob}}
 }
 \concept{robustbase tidiers}
-\value{
-A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
-  \item{.fitted}{Fitted or predicted value.}
-  \item{.resid}{The difference between fitted and observed values.}
-
-}

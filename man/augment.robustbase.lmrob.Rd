@@ -4,7 +4,8 @@
 \alias{augment.lmrob}
 \title{Augment data with information from a(n) lmrob object}
 \usage{
-\method{augment}{lmrob}(x, data = model.frame(x), newdata = NULL, se_fit = FALSE, ...)
+\method{augment}{lmrob}(x, data = model.frame(x), newdata = NULL,
+  se_fit = FALSE, ...)
 }
 \arguments{
 \item{x}{A \code{lmrob} object returned from \code{\link[robustbase:lmrob]{robustbase::lmrob()}}.}
@@ -103,16 +104,8 @@ augment(Rfit)
 \seealso{
 \code{\link[robustbase:lmrob]{robustbase::lmrob()}}
 
-Other robustbase tidiers: 
-\code{\link{augment.glmrob}()},
-\code{\link{glance.lmrob}()},
-\code{\link{tidy.glmrob}()},
-\code{\link{tidy.lmrob}()}
+Other robustbase tidiers: \code{\link{augment.glmrob}},
+  \code{\link{glance.lmrob}}, \code{\link{tidy.glmrob}},
+  \code{\link{tidy.lmrob}}
 }
 \concept{robustbase tidiers}
-\value{
-A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
-  \item{.fitted}{Fitted or predicted value.}
-  \item{.resid}{The difference between fitted and observed values.}
-
-}

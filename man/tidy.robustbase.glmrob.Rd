@@ -4,7 +4,7 @@
 \alias{tidy.glmrob}
 \title{Tidy a(n) glmrob object}
 \usage{
-\method{tidy}{glmrob}(x, conf.int = FALSE, conf.level = 0.95, ...)
+tidy.glmrob(x, conf.int = FALSE, conf.level = 0.95, ...)
 }
 \arguments{
 \item{x}{A \code{glmrob} object returned from \code{\link[robustbase:glmrob]{robustbase::glmrob()}}.}
@@ -62,21 +62,8 @@ augment(Rfit)
 \seealso{
 \code{\link[robustbase:glmrob]{robustbase::glmrob()}}
 
-Other robustbase tidiers: 
-\code{\link{augment.glmrob}()},
-\code{\link{augment.lmrob}()},
-\code{\link{glance.lmrob}()},
-\code{\link{tidy.lmrob}()}
+Other robustbase tidiers: \code{\link{augment.glmrob}},
+  \code{\link{augment.lmrob}}, \code{\link{glance.lmrob}},
+  \code{\link{tidy.lmrob}}
 }
 \concept{robustbase tidiers}
-\value{
-A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
-  \item{conf.high}{Upper bound on the confidence interval for the estimate.}
-  \item{conf.low}{Lower bound on the confidence interval for the estimate.}
-  \item{estimate}{The estimated value of the regression term.}
-  \item{p.value}{The two-sided p-value associated with the observed statistic.}
-  \item{statistic}{The value of a T-statistic to use in a hypothesis that the regression term is non-zero.}
-  \item{std.error}{The standard error of the regression term.}
-  \item{term}{The name of the regression term.}
-
-}

@@ -4,14 +4,8 @@
 \alias{augment.survreg}
 \title{Augment data with information from a(n) survreg object}
 \usage{
-\method{augment}{survreg}(
-  x,
-  data = NULL,
-  newdata = NULL,
-  type.predict = "response",
-  type.residuals = "response",
-  ...
-)
+\method{augment}{survreg}(x, data = NULL, newdata = NULL,
+  type.predict = "response", type.residuals = "response", ...)
 }
 \arguments{
 \item{x}{An \code{survreg} object returned from \code{\link[survival:survreg]{survival::survreg()}}.}
@@ -114,35 +108,20 @@ ggplot(td, aes(estimate, term)) +
 \seealso{
 \code{\link[=augment]{augment()}}, \code{\link[survival:survreg]{survival::survreg()}}
 
-Other survreg tidiers: 
-\code{\link{glance.survreg}()},
-\code{\link{tidy.survreg}()}
+Other survreg tidiers: \code{\link{glance.survreg}},
+  \code{\link{tidy.survreg}}
 
-Other survival tidiers: 
-\code{\link{augment.coxph}()},
-\code{\link{glance.aareg}()},
-\code{\link{glance.cch}()},
-\code{\link{glance.coxph}()},
-\code{\link{glance.pyears}()},
-\code{\link{glance.survdiff}()},
-\code{\link{glance.survexp}()},
-\code{\link{glance.survfit}()},
-\code{\link{glance.survreg}()},
-\code{\link{tidy.aareg}()},
-\code{\link{tidy.cch}()},
-\code{\link{tidy.coxph}()},
-\code{\link{tidy.pyears}()},
-\code{\link{tidy.survdiff}()},
-\code{\link{tidy.survexp}()},
-\code{\link{tidy.survfit}()},
-\code{\link{tidy.survreg}()}
+Other survival tidiers: \code{\link{augment.coxph}},
+  \code{\link{glance.aareg}}, \code{\link{glance.cch}},
+  \code{\link{glance.coxph}}, \code{\link{glance.pyears}},
+  \code{\link{glance.survdiff}},
+  \code{\link{glance.survexp}},
+  \code{\link{glance.survfit}},
+  \code{\link{glance.survreg}}, \code{\link{tidy.aareg}},
+  \code{\link{tidy.cch}}, \code{\link{tidy.coxph}},
+  \code{\link{tidy.pyears}}, \code{\link{tidy.survdiff}},
+  \code{\link{tidy.survexp}}, \code{\link{tidy.survfit}},
+  \code{\link{tidy.survreg}}
 }
 \concept{survival tidiers}
 \concept{survreg tidiers}
-\value{
-A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
-  \item{.fitted}{Fitted or predicted value.}
-  \item{.resid}{The difference between fitted and observed values.}
-  \item{.se.fit}{Standard errors of fitted values.}
-
-}

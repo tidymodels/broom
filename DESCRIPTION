@@ -281,6 +281,10 @@ Authors@R:
              role = "ctb",
              email = "shirokuriwaki@gmail.com",
              comment = c(ORCID = "0000-0002-5687-2647"))
+      person(given = "Petr",
+             family = "Hrobar",
+             role = "ctb",
+             email = "petr102030@gmail.com")
    )
 Description: Summarizes key information about statistical
     objects in tidy tibbles. This makes it easy to report results, create
@@ -399,6 +403,7 @@ LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.0
 Collate:
+    'aTSA.tidiers.R'
     'aaa-documentation-helper.R'
     'null-and-default-tidiers.R'
     'aer-tidiers.R'

@@ -4,7 +4,7 @@
 \alias{tidy.emmGrid}
 \title{Tidy a(n) emmGrid object}
 \usage{
-\method{tidy}{emmGrid}(x, conf.int = FALSE, conf.level = 0.95, ...)
+tidy.emmGrid(x, conf.int = FALSE, conf.level = 0.95, ...)
 }
 \arguments{
 \item{x}{An \code{emmGrid} object.}
@@ -80,20 +80,8 @@ tidy(joint_tests(oranges_lm1))
 \code{\link[=tidy]{tidy()}}, \code{\link[emmeans:ref_grid]{emmeans::ref_grid()}}, \code{\link[emmeans:emmeans]{emmeans::emmeans()}},
 \code{\link[emmeans:contrast]{emmeans::contrast()}}
 
-Other emmeans tidiers: 
-\code{\link{tidy.lsmobj}()},
-\code{\link{tidy.ref.grid}()},
-\code{\link{tidy.summary_emm}()}
+Other emmeans tidiers: \code{\link{tidy.lsmobj}},
+  \code{\link{tidy.ref.grid}},
+  \code{\link{tidy.summary_emm}}
 }
 \concept{emmeans tidiers}
-\value{
-A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
-  \item{conf.high}{Upper bound on the confidence interval for the estimate.}
-  \item{conf.low}{Lower bound on the confidence interval for the estimate.}
-  \item{df}{Degrees of freedom used by this term in the model.}
-  \item{p.value}{The two-sided p-value associated with the observed statistic.}
-  \item{std.error}{The standard error of the regression term.}
-  \item{estimate}{Expected marginal mean}
-  \item{statistic}{T-ratio statistic}
-
-}

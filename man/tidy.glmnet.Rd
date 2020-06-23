@@ -5,7 +5,7 @@
 \alias{glmnet_tidiers}
 \title{Tidy a(n) glmnet object}
 \usage{
-\method{tidy}{glmnet}(x, return_zeros = FALSE, ...)
+tidy.glmnet(x, return_zeros = FALSE, ...)
 }
 \arguments{
 \item{x}{A \code{glmnet} object returned from \code{\link[glmnet:glmnet]{glmnet::glmnet()}}.}
@@ -74,18 +74,7 @@ tidy(fit2)
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[glmnet:glmnet]{glmnet::glmnet()}}
 
-Other glmnet tidiers: 
-\code{\link{glance.cv.glmnet}()},
-\code{\link{glance.glmnet}()},
-\code{\link{tidy.cv.glmnet}()}
+Other glmnet tidiers: \code{\link{glance.cv.glmnet}},
+  \code{\link{glance.glmnet}}, \code{\link{tidy.cv.glmnet}}
 }
 \concept{glmnet tidiers}
-\value{
-A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
-  \item{dev.ratio}{fraction of null deviance explained at each value of lambda}
-  \item{estimate}{The estimated value of the regression term.}
-  \item{lambda}{Value of penalty parameter lambda.}
-  \item{step}{which step of lambda choices was used}
-  \item{term}{The name of the regression term.}
-
-}

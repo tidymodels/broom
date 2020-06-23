@@ -4,7 +4,8 @@
 \alias{tidy.svyglm}
 \title{Tidy a(n) svyglm object}
 \usage{
-\method{tidy}{svyglm}(x, conf.int = FALSE, conf.level = 0.95, exponentiate = FALSE, ...)
+tidy.svyglm(x, conf.int = FALSE, conf.level = 0.95,
+  exponentiate = FALSE, ...)
 }
 \arguments{
 \item{x}{A \code{svyglm} object returned from \code{\link[survey:svyglm]{survey::svyglm()}}.}

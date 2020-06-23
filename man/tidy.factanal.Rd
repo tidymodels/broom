@@ -5,7 +5,7 @@
 \alias{factanal_tidiers}
 \title{Tidy a(n) factanal object}
 \usage{
-\method{tidy}{factanal}(x, ...)
+tidy.factanal(x, ...)
 }
 \arguments{
 \item{x}{A \code{factanal} object created by \code{\link[stats:factanal]{stats::factanal()}}.}
@@ -64,15 +64,7 @@ augment(fit2, data = m2)
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[stats:factanal]{stats::factanal()}}
 
-Other factanal tidiers: 
-\code{\link{augment.factanal}()},
-\code{\link{glance.factanal}()}
+Other factanal tidiers: \code{\link{augment.factanal}},
+  \code{\link{glance.factanal}}
 }
 \concept{factanal tidiers}
-\value{
-A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
-  \item{variable}{Variable under consideration.}
-  \item{uniqueness}{Proportion of residual, or unexplained variance}
-  \item{flX}{Factor loading for level X.}
-
-}

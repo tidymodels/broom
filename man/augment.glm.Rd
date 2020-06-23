@@ -4,15 +4,9 @@
 \alias{augment.glm}
 \title{Augment data with information from a(n) glm object}
 \usage{
-\method{augment}{glm}(
-  x,
-  data = model.frame(x),
-  newdata = NULL,
+\method{augment}{glm}(x, data = model.frame(x), newdata = NULL,
   type.predict = c("link", "response", "terms"),
-  type.residuals = c("deviance", "pearson"),
-  se_fit = FALSE,
-  ...
-)
+  type.residuals = c("deviance", "pearson"), se_fit = FALSE, ...)
 }
 \arguments{
 \item{x}{A \code{glm} object returned from \code{\link[stats:glm]{stats::glm()}}.}
@@ -100,25 +94,10 @@ the \code{newdata} argument.
 \seealso{
 \code{\link[stats:glm]{stats::glm()}}
 
-Other lm tidiers: 
-\code{\link{augment.lm}()},
-\code{\link{glance.glm}()},
-\code{\link{glance.lm}()},
-\code{\link{glance.svyglm}()},
-\code{\link{tidy.glm}()},
-\code{\link{tidy.lm.beta}()},
-\code{\link{tidy.lm}()},
-\code{\link{tidy.mlm}()}
+Other lm tidiers: \code{\link{augment.lm}},
+  \code{\link{glance.glm}}, \code{\link{glance.lm}},
+  \code{\link{glance.svyglm}}, \code{\link{tidy.glm}},
+  \code{\link{tidy.lm.beta}}, \code{\link{tidy.lm}},
+  \code{\link{tidy.mlm}}
 }
 \concept{lm tidiers}
-\value{
-A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
-  \item{.cooksd}{Cooks distance.}
-  \item{.fitted}{Fitted or predicted value.}
-  \item{.hat}{Diagonal of the hat matrix.}
-  \item{.resid}{The difference between fitted and observed values.}
-  \item{.se.fit}{Standard errors of fitted values.}
-  \item{.sigma}{Estimated residual standard deviation when corresponding observation is dropped from model.}
-  \item{.std.resid}{Standardised residuals.}
-
-}

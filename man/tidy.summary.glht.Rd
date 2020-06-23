@@ -4,7 +4,7 @@
 \alias{tidy.summary.glht}
 \title{Tidy a(n) summary.glht object}
 \usage{
-\method{tidy}{summary.glht}(x, ...)
+tidy.summary.glht(x, ...)
 }
 \arguments{
 \item{x}{A \code{summary.glht} object created by calling
@@ -58,18 +58,7 @@ tidy(cld)
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[multcomp:summary.glht]{multcomp::summary.glht()}}, \code{\link[multcomp:glht]{multcomp::glht()}}
 
-Other multcomp tidiers: 
-\code{\link{tidy.cld}()},
-\code{\link{tidy.confint.glht}()},
-\code{\link{tidy.glht}()}
+Other multcomp tidiers: \code{\link{tidy.cld}},
+  \code{\link{tidy.confint.glht}}, \code{\link{tidy.glht}}
 }
 \concept{multcomp tidiers}
-\value{
-A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
-  \item{contrast}{Levels being compared.}
-  \item{estimate}{The estimated value of the regression term.}
-  \item{p.value}{The two-sided p-value associated with the observed statistic.}
-  \item{statistic}{The value of a T-statistic to use in a hypothesis that the regression term is non-zero.}
-  \item{std.error}{The standard error of the regression term.}
-
-}

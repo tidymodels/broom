@@ -35,7 +35,7 @@ Sometimes a goodness of fit measure will be undefined. In these cases
 the measure will be reported as \code{NA}.
 }
 \note{
-From \verb{0.7.0}, \code{broom} has changed the return summary and the new model
+From \code{0.7.0}, \code{broom} has changed the return summary and the new model
 summary dataframe contains only the following information- \code{logLik}, \code{IC},
 \code{BIC}, \code{deviance}, \code{nobs}. Note that \code{tidy.aov} contains the numerator and
 denominator degrees of freedom, which were previously included in the glance
@@ -50,21 +50,9 @@ tidy(a)
 \seealso{
 \code{\link[=glance]{glance()}}
 
-Other anova tidiers: 
-\code{\link{tidy.TukeyHSD}()},
-\code{\link{tidy.anova}()},
-\code{\link{tidy.aovlist}()},
-\code{\link{tidy.aov}()},
-\code{\link{tidy.manova}()},
-\code{\link{tidy.summary.manova}()}
+Other anova tidiers: \code{\link{tidy.TukeyHSD}},
+  \code{\link{tidy.anova}}, \code{\link{tidy.aovlist}},
+  \code{\link{tidy.aov}}, \code{\link{tidy.manova}},
+  \code{\link{tidy.summary.manova}}
 }
 \concept{anova tidiers}
-\value{
-A \code{\link[tibble:tibble]{tibble::tibble()}} with exactly one row and columns:
-  \item{AIC}{Akaike's Information Criterion for the model.}
-  \item{BIC}{Bayesian Information Criterion for the model.}
-  \item{deviance}{Deviance of the model.}
-  \item{logLik}{The log-likelihood of the model. [stats::logLik()] may be a useful reference.}
-  \item{nobs}{Number of observations used.}
-
-}

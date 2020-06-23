@@ -5,7 +5,7 @@
 \alias{cch_tidiers}
 \title{Tidy a(n) cch object}
 \usage{
-\method{tidy}{cch}(x, conf.level = 0.95, ...)
+tidy.cch(x, conf.level = 0.95, ...)
 }
 \arguments{
 \item{x}{An \code{cch} object returned from \code{\link[survival:cch]{survival::cch()}}.}
@@ -61,39 +61,20 @@ ggplot(tidy(fit.ccP), aes(x = estimate, y = term)) +
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[survival:cch]{survival::cch()}}
 
-Other cch tidiers: 
-\code{\link{glance.cch}()},
-\code{\link{glance.survfit}()}
+Other cch tidiers: \code{\link{glance.cch}},
+  \code{\link{glance.survfit}}
 
-Other survival tidiers: 
-\code{\link{augment.coxph}()},
-\code{\link{augment.survreg}()},
-\code{\link{glance.aareg}()},
-\code{\link{glance.cch}()},
-\code{\link{glance.coxph}()},
-\code{\link{glance.pyears}()},
-\code{\link{glance.survdiff}()},
-\code{\link{glance.survexp}()},
-\code{\link{glance.survfit}()},
-\code{\link{glance.survreg}()},
-\code{\link{tidy.aareg}()},
-\code{\link{tidy.coxph}()},
-\code{\link{tidy.pyears}()},
-\code{\link{tidy.survdiff}()},
-\code{\link{tidy.survexp}()},
-\code{\link{tidy.survfit}()},
-\code{\link{tidy.survreg}()}
+Other survival tidiers: \code{\link{augment.coxph}},
+  \code{\link{augment.survreg}},
+  \code{\link{glance.aareg}}, \code{\link{glance.cch}},
+  \code{\link{glance.coxph}}, \code{\link{glance.pyears}},
+  \code{\link{glance.survdiff}},
+  \code{\link{glance.survexp}},
+  \code{\link{glance.survfit}},
+  \code{\link{glance.survreg}}, \code{\link{tidy.aareg}},
+  \code{\link{tidy.coxph}}, \code{\link{tidy.pyears}},
+  \code{\link{tidy.survdiff}}, \code{\link{tidy.survexp}},
+  \code{\link{tidy.survfit}}, \code{\link{tidy.survreg}}
 }
 \concept{cch tidiers}
 \concept{survival tidiers}
-\value{
-A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
-  \item{conf.high}{Upper bound on the confidence interval for the estimate.}
-  \item{conf.low}{Lower bound on the confidence interval for the estimate.}
-  \item{estimate}{The estimated value of the regression term.}
-  \item{p.value}{The two-sided p-value associated with the observed statistic.}
-  \item{statistic}{The value of a T-statistic to use in a hypothesis that the regression term is non-zero.}
-  \item{std.error}{The standard error of the regression term.}
-  \item{term}{The name of the regression term.}
-
-}

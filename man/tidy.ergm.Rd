@@ -5,7 +5,8 @@
 \alias{ergm_tidiers}
 \title{Tidy a(n) ergm object}
 \usage{
-\method{tidy}{ergm}(x, conf.int = FALSE, conf.level = 0.95, exponentiate = FALSE, ...)
+tidy.ergm(x, conf.int = FALSE, conf.level = 0.95,
+  exponentiate = FALSE, ...)
 }
 \arguments{
 \item{x}{An \code{ergm} object returned from a call to \code{\link[ergm:ergm]{ergm::ergm()}}.}
@@ -80,7 +81,6 @@ Models for Networks. \emph{Journal of Statistical Software}, 24(3).
 \code{\link[=tidy]{tidy()}}, \code{\link[ergm:ergm]{ergm::ergm()}}, \code{\link[ergm:control.ergm]{ergm::control.ergm()}},
 \code{\link[ergm:summary]{ergm::summary()}}
 
-Other ergm tidiers: 
-\code{\link{glance.ergm}()}
+Other ergm tidiers: \code{\link{glance.ergm}}
 }
 \concept{ergm tidiers}

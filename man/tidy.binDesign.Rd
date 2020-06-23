@@ -5,7 +5,7 @@
 \alias{bindesign_tidiers}
 \title{Tidy a(n) binDesign object}
 \usage{
-\method{tidy}{binDesign}(x, ...)
+tidy.binDesign(x, ...)
 }
 \arguments{
 \item{x}{A \code{\link[binGroup:binDesign]{binGroup::binDesign()}} object.}
@@ -47,14 +47,7 @@ ggplot(tidy(des), aes(n, power)) +
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[binGroup:binDesign]{binGroup::binDesign()}}
 
-Other bingroup tidiers: 
-\code{\link{glance.binDesign}()},
-\code{\link{tidy.binWidth}()}
+Other bingroup tidiers: \code{\link{glance.binDesign}},
+  \code{\link{tidy.binWidth}}
 }
 \concept{bingroup tidiers}
-\value{
-A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
-  \item{n}{Number of trials in given iteration.}
-  \item{power}{Power achieved for given value of n.}
-
-}

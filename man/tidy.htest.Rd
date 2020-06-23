@@ -6,7 +6,7 @@
 \alias{glance.htest}
 \title{Tidy/glance a(n) htest object}
 \usage{
-\method{tidy}{htest}(x, ...)
+tidy.htest(x, ...)
 
 \method{glance}{htest}(x, ...)
 }
@@ -53,23 +53,8 @@ augment(chit)
 \code{\link[=tidy]{tidy()}}, \code{\link[stats:cor.test]{stats::cor.test()}}, \code{\link[stats:t.test]{stats::t.test()}},
 \code{\link[stats:wilcox.test]{stats::wilcox.test()}}, \code{\link[stats:chisq.test]{stats::chisq.test()}}
 
-Other htest tidiers: 
-\code{\link{augment.htest}()},
-\code{\link{tidy.pairwise.htest}()},
-\code{\link{tidy.power.htest}()}
+Other htest tidiers: \code{\link{augment.htest}},
+  \code{\link{tidy.pairwise.htest}},
+  \code{\link{tidy.power.htest}}
 }
 \concept{htest tidiers}
-\value{
-A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
-  \item{alternative}{Alternative hypothesis (character).}
-  \item{conf.high}{Upper bound on the confidence interval for the estimate.}
-  \item{conf.low}{Lower bound on the confidence interval for the estimate.}
-  \item{estimate}{The estimated value of the regression term.}
-  \item{estimate1}{Sometimes two estimates are computed, such as in a two-sample t-test}
-  \item{estimate2}{Sometimes two estimates are computed, such as in a two-sample t-test}
-  \item{method}{Method used.}
-  \item{p.value}{The two-sided p-value associated with the observed statistic.}
-  \item{parameter}{The parameter being modeled.}
-  \item{statistic}{The value of a T-statistic to use in a hypothesis that the regression term is non-zero.}
-
-}

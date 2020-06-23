@@ -105,15 +105,7 @@ augment(fish.mnl)
 
 \code{\link[=augment]{augment()}},\code{\link[mlogit:miscmethods.mlogit]{mlogit::miscmethods.mlogit()}}
 
-Other mlogit tidiers: 
-\code{\link{glance.mlogit}()},
-\code{\link{tidy.mlogit}()}
+Other mlogit tidiers: \code{\link{glance.mlogit}},
+  \code{\link{tidy.mlogit}}
 }
 \concept{mlogit tidiers}
-\value{
-\item{.probability}{Logit probability.} 
- \item{.utility}{Estimated utility.}
-  \item{.fitted}{Fitted or predicted value.}
-  \item{.resid}{The difference between fitted and observed values.}
-
-}

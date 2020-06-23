@@ -5,7 +5,7 @@
 \alias{leaps_tidiers}
 \title{Tidy a(n) regsubsets object}
 \usage{
-\method{tidy}{regsubsets}(x, ...)
+tidy.regsubsets(x, ...)
 }
 \arguments{
 \item{x}{A \code{regsubsets} object created by \code{\link[leaps:regsubsets]{leaps::regsubsets()}}.}
@@ -36,9 +36,4 @@ tidy(all_fits)
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[leaps:regsubsets]{leaps::regsubsets()}}
-}
-\value{
-A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
-  \item{mallows_cp}{Mallow's Cp statistic.}
-
 }

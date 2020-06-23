@@ -52,16 +52,7 @@ augment(fish.mnl)
 \seealso{
 \code{\link[=glance]{glance()}}, \code{\link[mlogit:mlogit]{mlogit::mlogit()}}
 
-Other mlogit tidiers: 
-\code{\link{augment.mlogit}()},
-\code{\link{tidy.mlogit}()}
+Other mlogit tidiers: \code{\link{augment.mlogit}},
+  \code{\link{tidy.mlogit}}
 }
 \concept{mlogit tidiers}
-\value{
-A \code{\link[tibble:tibble]{tibble::tibble()}} with exactly one row and columns:
-  \item{AIC}{Akaike's Information Criterion for the model.}
-  \item{logLik}{The log-likelihood of the model. [stats::logLik()] may be a useful reference.}
-  \item{nobs}{Number of observations used.}
-  \item{statistic}{Test statistic.}
-
-}

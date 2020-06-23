@@ -47,19 +47,8 @@ glance(gm)
 \seealso{
 \code{\link[robust:glmRob]{robust::glmRob()}}
 
-Other robust tidiers: 
-\code{\link{augment.lmRob}()},
-\code{\link{glance.lmRob}()},
-\code{\link{tidy.glmRob}()},
-\code{\link{tidy.lmRob}()}
+Other robust tidiers: \code{\link{augment.lmRob}},
+  \code{\link{glance.lmRob}}, \code{\link{tidy.glmRob}},
+  \code{\link{tidy.lmRob}}
 }
 \concept{robust tidiers}
-\value{
-A \code{\link[tibble:tibble]{tibble::tibble()}} with exactly one row and columns:
-  \item{deviance}{Deviance of the model.}
-  \item{df.residual}{Residual degrees of freedom.}
-  \item{nobs}{Number of observations used.}
-  \item{null.deviance}{Deviance of the null model.}
-  \item{sigma}{Estimated standard error of the residuals.}
-
-}

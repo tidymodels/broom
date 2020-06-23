@@ -98,14 +98,7 @@ glance(ivr)
 \seealso{
 \code{\link[=augment]{augment()}}, \code{\link[AER:ivreg]{AER::ivreg()}}
 
-Other ivreg tidiers: 
-\code{\link{glance.ivreg}()},
-\code{\link{tidy.ivreg}()}
+Other ivreg tidiers: \code{\link{glance.ivreg}},
+  \code{\link{tidy.ivreg}}
 }
 \concept{ivreg tidiers}
-\value{
-A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
-  \item{.fitted}{Fitted or predicted value.}
-  \item{.resid}{The difference between fitted and observed values.}
-
-}

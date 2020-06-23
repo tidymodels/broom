@@ -52,16 +52,7 @@ ggplot(tidy(des), aes(n, power)) +
 \seealso{
 \code{\link[=glance]{glance()}}, \code{\link[binGroup:binDesign]{binGroup::binDesign()}}
 
-Other bingroup tidiers: 
-\code{\link{tidy.binDesign}()},
-\code{\link{tidy.binWidth}()}
+Other bingroup tidiers: \code{\link{tidy.binDesign}},
+  \code{\link{tidy.binWidth}}
 }
 \concept{bingroup tidiers}
-\value{
-A \code{\link[tibble:tibble]{tibble::tibble()}} with exactly one row and columns:
-  \item{power}{Power achieved by the analysis.}
-  \item{n}{Sample size uzed to achieve this power.}
-  \item{power.reached}{Whether the desired power was reached.}
-  \item{maxit}{Number of iterations performed.}
-
-}

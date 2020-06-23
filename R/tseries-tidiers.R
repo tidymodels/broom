@@ -15,25 +15,36 @@
 #' @examples
 #'
 #' library(tseries)
+#' library(broom)
+#' library(tidyverse)
 #' 
 #' data(EuStockMarkets)
 #' dax <- diff(log(EuStockMarkets))[,"DAX"]
 #' dax.garch <- garch(dax)
-#' dax.garch
 #' 
-#' tidy(dax.garch)
+#'
+#'
 #' glance(dax.garch)
-#' 
+#' tidy.garch(dax.garch, conf.int = T)
 #' @aliases garch_tidiers
 #' @export
 #' @family garch tidiers
 #' @seealso [tidy()], [tseries::garch()]
-tidy.garch <- function(x, ...) {
+tidy.garch <- function(x, conf.int = FALSE, conf.level = .95, ...) {
   s <- summary(x)
   co <- s$coef
   nn <- c("estimate", "std.error", "statistic", "p.value")
   ret <- fix_data_frame(co, nn[1:ncol(co)])
   as_tibble(ret)
+
+  if (conf.int){
+      ci <- confint(x, level = conf.level)
+      ci <- as_tibble(ci, rownames = "term")
+      colnames(ci) <- c("term", "conf.low", "conf.high")
+      ret <- dplyr::left_join(ret, ci, by = "term")
+    }
+  ret
+  
 }
 
 #' @templateVar class garch
@@ -79,3 +90,4 @@ garch_glance_helper <- function(x, test, ...) {
   }
   as_tibble(ret)
 }
+

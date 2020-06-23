@@ -5,7 +5,7 @@
 \alias{systemfit_tidiers}
 \title{Tidy a(n) systemfit object}
 \usage{
-\method{tidy}{systemfit}(x, conf.int = TRUE, conf.level = 0.95, ...)
+tidy.systemfit(x, conf.int = TRUE, conf.level = 0.95, ...)
 }
 \arguments{
 \item{x}{A \code{systemfit} object produced by a call to \code{\link[systemfit:systemfit]{systemfit::systemfit()}}.}
@@ -62,13 +62,3 @@ tidy(fit, conf.int = TRUE)
 \code{\link[=tidy]{tidy()}}, \code{\link[systemfit:systemfit]{systemfit::systemfit()}}
 }
 \concept{systemfit tidiers}
-\value{
-A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
-  \item{conf.high}{Upper bound on the confidence interval for the estimate.}
-  \item{conf.low}{Lower bound on the confidence interval for the estimate.}
-  \item{estimate}{The estimated value of the regression term.}
-  \item{p.value}{The two-sided p-value associated with the observed statistic.}
-  \item{std.error}{The standard error of the regression term.}
-  \item{term}{The name of the regression term.}
-
-}

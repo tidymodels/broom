@@ -54,24 +54,10 @@ glance(fit2)
 \seealso{
 \link{tidy}, \code{\link[ordinal:clmm]{ordinal::clmm()}}
 
-Other ordinal tidiers: 
-\code{\link{augment.clm}()},
-\code{\link{augment.polr}()},
-\code{\link{glance.clm}()},
-\code{\link{glance.polr}()},
-\code{\link{glance.svyolr}()},
-\code{\link{tidy.clmm}()},
-\code{\link{tidy.clm}()},
-\code{\link{tidy.polr}()},
-\code{\link{tidy.svyolr}()}
+Other ordinal tidiers: \code{\link{augment.clm}},
+  \code{\link{augment.polr}}, \code{\link{glance.clm}},
+  \code{\link{glance.polr}}, \code{\link{glance.svyolr}},
+  \code{\link{tidy.clmm}}, \code{\link{tidy.clm}},
+  \code{\link{tidy.polr}}, \code{\link{tidy.svyolr}}
 }
 \concept{ordinal tidiers}
-\value{
-A \code{\link[tibble:tibble]{tibble::tibble()}} with exactly one row and columns:
-  \item{AIC}{Akaike's Information Criterion for the model.}
-  \item{BIC}{Bayesian Information Criterion for the model.}
-  \item{edf}{The effective degrees of freedom}
-  \item{logLik}{The log-likelihood of the model. [stats::logLik()] may be a useful reference.}
-  \item{nobs}{Number of observations used.}
-
-}

@@ -4,7 +4,7 @@
 \alias{tidy.TukeyHSD}
 \title{Tidy a(n) TukeyHSD object}
 \usage{
-\method{tidy}{TukeyHSD}(x, ...)
+tidy.TukeyHSD(x, ...)
 }
 \arguments{
 \item{x}{A \code{TukeyHSD} object return from \code{\link[stats:TukeyHSD]{stats::TukeyHSD()}}.}
@@ -41,21 +41,9 @@ tidy(TukeyHSD(fm2))
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[stats:TukeyHSD]{stats::TukeyHSD()}}
 
-Other anova tidiers: 
-\code{\link{glance.aov}()},
-\code{\link{tidy.anova}()},
-\code{\link{tidy.aovlist}()},
-\code{\link{tidy.aov}()},
-\code{\link{tidy.manova}()},
-\code{\link{tidy.summary.manova}()}
+Other anova tidiers: \code{\link{glance.aov}},
+  \code{\link{tidy.anova}}, \code{\link{tidy.aovlist}},
+  \code{\link{tidy.aov}}, \code{\link{tidy.manova}},
+  \code{\link{tidy.summary.manova}}
 }
 \concept{anova tidiers}
-\value{
-A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
-  \item{adj.p.value}{P-value adjusted for multiple comparisons.}
-  \item{comparison}{Levels being compared.}
-  \item{conf.high}{Upper bound on the confidence interval for the estimate.}
-  \item{conf.low}{Lower bound on the confidence interval for the estimate.}
-  \item{estimate}{The estimated value of the regression term.}
-
-}

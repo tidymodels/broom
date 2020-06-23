@@ -4,7 +4,7 @@
 \alias{tidy.gamlss}
 \title{Tidy a(n) gamlss object}
 \usage{
-\method{tidy}{gamlss}(x, ...)
+tidy.gamlss(x, ...)
 }
 \arguments{
 \item{x}{A \code{gamlss} object returned from \code{\link[gamlss:gamlss]{gamlss::gamlss()}}.}
@@ -40,16 +40,5 @@ g <- gamlss(
 )
 
 tidy(g)
-
-}
-\value{
-A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
-  \item{estimate}{The estimated value of the regression term.}
-  \item{p.value}{The two-sided p-value associated with the observed statistic.}
-  \item{statistic}{The value of a T-statistic to use in a hypothesis that the regression term is non-zero.}
-  \item{std.error}{The standard error of the regression term.}
-  \item{term}{The name of the regression term.}
-  \item{parameter}{Type of coefficient being estimated: `mu`, `sigma`,
-    `nu`, or `tau`.}
 
 }

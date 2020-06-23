@@ -112,6 +112,8 @@ pending getting `safepredict()` going urgh)
 
 - Added `tidy.svyglm()` and `glance.svyglm()` (#611)
 
+- Added `tidy.garch()` now supports confidence intervals (#568 by @petr102030)
+
 - Added `tidy.regsubsets()` for best subsets linear regression from the `leaps` package
 
 - Added method `tidy.lm.beta()` to tidy `lm.beta` class models (#545 by @mattle24)

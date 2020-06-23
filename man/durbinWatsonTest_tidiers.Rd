@@ -6,7 +6,7 @@
 \alias{glance.durbinWatsonTest}
 \title{Tidy/glance a(n) durbinWatsonTest object}
 \usage{
-\method{tidy}{durbinWatsonTest}(x, ...)
+tidy.durbinWatsonTest(x, ...)
 
 \method{glance}{durbinWatsonTest}(x, ...)
 }
@@ -40,12 +40,3 @@ glance(dw)  # same output for all durbinWatsonTests
 \code{\link[=tidy]{tidy()}}, \code{\link[=glance]{glance()}}, \code{\link[car:durbinWatsonTest]{car::durbinWatsonTest()}}
 }
 \concept{car tidiers}
-\value{
-A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
-  \item{alternative}{Alternative hypothesis (character).}
-  \item{autocorrelation}{Autocorrelation.}
-  \item{p.value}{The two-sided p-value associated with the observed statistic.}
-  \item{statistic}{Test statistic for Durbin-Watson test.}
-  \item{method}{Always `Durbin-Watson Test`.}
-
-}

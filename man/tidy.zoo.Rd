@@ -5,7 +5,7 @@
 \alias{zoo_tidiers}
 \title{Tidy a(n) zoo object}
 \usage{
-\method{tidy}{zoo}(x, ...)
+tidy.zoo(x, ...)
 }
 \arguments{
 \item{x}{A \code{zoo} object such as those created by \code{\link[zoo:zoo]{zoo::zoo()}}.}
@@ -58,16 +58,7 @@ ggplot(tidy(Zrolled), aes(index, value, color = series)) +
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[zoo:zoo]{zoo::zoo()}}
 
-Other time series tidiers: 
-\code{\link{tidy.acf}()},
-\code{\link{tidy.spec}()},
-\code{\link{tidy.ts}()}
+Other time series tidiers: \code{\link{tidy.acf}},
+  \code{\link{tidy.spec}}, \code{\link{tidy.ts}}
 }
 \concept{time series tidiers}
-\value{
-A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
-  \item{index}{Index (i.e. date or time) for a `ts` or `zoo` object.}
-  \item{series}{Name of the series (present only for multivariate time series).}
-  \item{value}{TODO. needs better documentation.}
-
-}
