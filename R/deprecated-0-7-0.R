@@ -209,26 +209,16 @@ median_abs_dev <- function(x, na.rm = FALSE) {
 #'
 #' The \code{bootstrap()} function is deprecated and will be removed from
 #' an upcoming release of broom. For tidy resampling, please use the rsample
-#' package instead.
+#' package instead. Functionality is no longer supported for this method.
 #'
 #' @param df a data frame
 #' @param m number of bootstrap replicates to perform
 #' @param by_group If \code{TRUE}, then bootstrap within each group if \code{df} is
-#'    a grouped tbl.
+#'    a grouped tibble.
 #'
 #' @details This code originates from Hadley Wickham (with a few small
 #' corrections) here:
-#'
-#' https://github.com/hadley/dplyr/issues/269
-#'
-#' Some examples can be found at
-#'
-#' https://github.com/dgrtwo/broom/blob/master/vignettes/bootstrapping.Rmd
-#'
-#' @examples
-#'
-#' library(dplyr)
-#' mtcars %>% bootstrap(10) %>% do(tidy(lm(mpg ~ wt, .)))
+#' \url{https://github.com/hadley/dplyr/issues/269}
 #'
 #' @export
 #' @family deprecated
@@ -405,7 +395,7 @@ tidy.density <- function(x, ...) {
 #'   `upper` argument of [stats::dist()].
 #' @template param_unused_dots
 #'
-#' @return A [tibble::tibble] with one row for each pair of items in the 
+#' @return A [tibble::tibble] with one row for each pair of items in the
 #'   distance matrix, with columns:
 #' 
 #'   \item{item1}{First item}

@@ -12,28 +12,17 @@ bootstrap(df, m, by_group = FALSE)
 \item{m}{number of bootstrap replicates to perform}
 
 \item{by_group}{If \code{TRUE}, then bootstrap within each group if \code{df} is
-a grouped tbl.}
+a grouped tibble.}
 }
 \description{
 The \code{bootstrap()} function is deprecated and will be removed from
 an upcoming release of broom. For tidy resampling, please use the rsample
-package instead.
+package instead. Functionality is no longer supported for this method.
 }
 \details{
 This code originates from Hadley Wickham (with a few small
 corrections) here:
-
-https://github.com/hadley/dplyr/issues/269
-
-Some examples can be found at
-
-https://github.com/dgrtwo/broom/blob/master/vignettes/bootstrapping.Rmd
-}
-\examples{
-
-library(dplyr)
-mtcars \%>\% bootstrap(10) \%>\% do(tidy(lm(mpg ~ wt, .)))
-
+\url{https://github.com/hadley/dplyr/issues/269}
 }
 \seealso{
 Other deprecated: 

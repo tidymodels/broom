@@ -53,13 +53,6 @@ test_that("glance.glmRob", {
   check_glance_outputs(gl)
 })
 
-test_that("augment.glmRob", {
-  expect_error(
-    augment.glmRob(),
-    "`augment.glmRob` has been removed from broom. See the documentation."
-  )
-})
-
 test_that("no more rlang issues with model objects from robust", { # from issue 720
 
   expect_equal(

@@ -605,7 +605,7 @@ VignetteBuilder:
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.1.0
+RoxygenNote: 7.1.0.9000
 Language: en-US
 Collate:
     'aaa-documentation-helper.R'
@@ -700,7 +700,6 @@ Collate:
     'stats-mlm-tidiers.R'
     'stats-prcomp-tidiers.R'
     'stats-smooth.spline-tidiers.R'
-    'stats-tidiers.R'
     'stats-time-series-tidiers.R'
     'survey-tidiers.R'
     'survival-aareg-tidiers.R'
