@@ -407,26 +407,26 @@ tidy.density <- function(x, ...) {
 #' 
 #' @examples
 #'
-#' iris_dist <- dist(t(iris[, 1:4]))
-#' iris_dist
+#' cars_dist <- dist(t(mtcars[, 1:4]))
+#' cars_dist
 #'
-#' tidy(iris_dist)
-#' tidy(iris_dist, upper = TRUE)
-#' tidy(iris_dist, diagonal = TRUE)
+#' tidy(cars_dist)
+#' tidy(cars_dist, upper = TRUE)
+#' tidy(cars_dist, diagonal = TRUE)
 #'
 #' @export
 #' @family deprecated
 tidy.dist <- function(x, diagonal = attr(x, "Diag"),
                       upper = attr(x, "Upper"), ...) {
-  m <- as.matrix(x)
   
-  ret <- reshape2::melt(m,
-                        varnames = c("item1", "item2"),
-                        value.name = "distance"
-  )
+  ret <- as.matrix(x) %>%
+    tibble::as_tibble(rownames = "item1") %>%
+    tidyr::pivot_longer(cols = c(dplyr::everything(), -1)) %>%
+    dplyr::rename(item2 = 2, distance = 3) %>%
+    dplyr::mutate(item1 = as.factor(item1), item2 = as.factor(item2))
   
   if (!upper) {
-    ret <- ret[!upper.tri(m), ]
+    ret <- as.data.frame(ret)[!upper.tri(as.matrix(x)), ]
   }
   
   if (!diagonal) {
