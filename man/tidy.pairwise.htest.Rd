@@ -16,7 +16,7 @@ absorbed in \code{...}, where they will be ignored. If the misspelled
 argument has a default value, the default value will be used.
 For example, if you pass \code{conf.lvel = 0.9}, all computation will
 proceed using \code{conf.level = 0.95}. Additionally, if you pass
-\code{newdata = my_tibble} to an \code{\link[=reexports]{augment()}} method that does not
+\code{newdata = my_tibble} to an \code{\link[=augment]{augment()}} method that does not
 accept a \code{newdata} argument, it will use the default value for
 the \code{data} argument.}
 }
@@ -42,18 +42,20 @@ Month <- factor(Month, labels = month.abb[5:9])
 ptt <- pairwise.t.test(Ozone, Month)
 tidy(ptt)
 
-attach(iris)
-ptt2 <- pairwise.t.test(Petal.Length, Species)
+library(modeldata)
+data(hpc_data)
+attach(hpc_data)
+ptt2 <- pairwise.t.test(compounds, class)
 tidy(ptt2)
 
-tidy(pairwise.t.test(Petal.Length, Species, alternative = "greater"))
-tidy(pairwise.t.test(Petal.Length, Species, alternative = "less"))
+tidy(pairwise.t.test(compounds, class, alternative = "greater"))
+tidy(pairwise.t.test(compounds, class, alternative = "less"))
 
-tidy(pairwise.wilcox.test(Petal.Length, Species))
+tidy(pairwise.wilcox.test(compounds, class))
 }
 \seealso{
 \code{\link[stats:pairwise.t.test]{stats::pairwise.t.test()}}, \code{\link[stats:pairwise.wilcox.test]{stats::pairwise.wilcox.test()}},
-\code{\link[=reexports]{tidy()}}
+\code{\link[=tidy]{tidy()}}
 
 Other htest tidiers: 
 \code{\link{augment.htest}()},

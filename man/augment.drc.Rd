@@ -47,7 +47,7 @@ absorbed in \code{...}, where they will be ignored. If the misspelled
 argument has a default value, the default value will be used.
 For example, if you pass \code{conf.lvel = 0.9}, all computation will
 proceed using \code{conf.level = 0.95}. Additionally, if you pass
-\code{newdata = my_tibble} to an \code{\link[=reexports]{augment()}} method that does not
+\code{newdata = my_tibble} to an \code{\link[=augment]{augment()}} method that does not
 accept a \code{newdata} argument, it will use the default value for
 the \code{data} argument.}
 }
@@ -106,7 +106,7 @@ glance(mod)
 augment(mod, selenium)
 }
 \seealso{
-\code{\link[=reexports]{augment()}}, \code{\link[drc:drm]{drc::drm()}}
+\code{\link[=augment]{augment()}}, \code{\link[drc:drm]{drc::drm()}}
 
 Other drc tidiers: 
 \code{\link{glance.drc}()},

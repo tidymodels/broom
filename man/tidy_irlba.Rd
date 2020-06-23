@@ -17,7 +17,7 @@ absorbed in \code{...}, where they will be ignored. If the misspelled
 argument has a default value, the default value will be used.
 For example, if you pass \code{conf.lvel = 0.9}, all computation will
 proceed using \code{conf.level = 0.95}. Additionally, if you pass
-\code{newdata = my_tibble} to an \code{\link[=reexports]{augment()}} method that does not
+\code{newdata = my_tibble} to an \code{\link[=augment]{augment()}} method that does not
 accept a \code{newdata} argument, it will use the default value for
 the \code{data} argument.}
 }
@@ -72,7 +72,10 @@ A very thin wrapper around \code{\link[=tidy_svd]{tidy_svd()}}.
 }
 \examples{
 
-mat <- scale(as.matrix(iris[, 1:4]))
+library(modeldata)
+data(hpc_data)
+
+mat <- scale(as.matrix(hpc_data[, 2:5]))
 s <- svd(mat)
 
 tidy_u <- tidy(s, matrix = "u")
@@ -92,13 +95,13 @@ ggplot(tidy_d, aes(PC, percent)) +
   ylab("\% of variance explained")
 
 tidy_u \%>\%
-  mutate(Species = iris$Species[row]) \%>\%
-  ggplot(aes(Species, value)) +
+  mutate(class = hpc_data$class[row]) \%>\%
+  ggplot(aes(class, value)) +
   geom_boxplot() +
   facet_wrap(~PC, scale = "free_y")
 }
 \seealso{
-\code{\link[=reexports]{tidy()}}, \code{\link[irlba:irlba]{irlba::irlba()}}
+\code{\link[=tidy]{tidy()}}, \code{\link[irlba:irlba]{irlba::irlba()}}
 
 Other list tidiers: 
 \code{\link{glance_optim}()},

@@ -42,6 +42,7 @@ confint
 confusionMatrix
 converage
 coxph
+cumulants
 cv
 cyl
 deprecations
@@ -157,6 +158,7 @@ newdata
 nlme
 nlrq
 nls
+Novomestky
 nnet
 NULLs
 NUM
@@ -191,6 +193,7 @@ rjags
 rlm
 rma
 RMA
+Rmd
 RMSEA
 robustbase
 roc

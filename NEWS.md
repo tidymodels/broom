@@ -1,13 +1,9 @@
 # broom 0.7.0
 
-## Breaking changes
+`broom 0.7.0` is a major release with a large number of new tidiers,
+soft-deprecations, and carrying out of planned breaking changes.
 
-`broom 0.7.0` is a major release with a large number of breaking changes and
-deprecations. Most of these breaking changes are meant to improve 
-maintainability and internal consistency, which have posed long-standing 
-difficulties.
-
-### Big picture breaking changes
+### Big picture changes
 
 - We have changed how we report degrees of freedom for `lm` objects 
 (#212, #273). This is especially important for instructors in statistics 
@@ -47,7 +43,7 @@ of `comparison`, `level1` and `level2`, or `lhs` and `rhs` (see #692).
 
 ### Deprecations
 
-This release of `broom` hard-deprecates the following functions and tidier 
+This release of `broom` soft-deprecates the following functions and tidier 
 methods:
 
 - Tidier methods for data frames, rowwise data frames, vectors and matrices
@@ -60,12 +56,8 @@ methods:
 - `tidy.summaryDefault()` and `glance.summaryDefault()` have been deprecated in 
 favor of `skimr::skim()`
 
-We regret that we were unable to provide warnings for some of these
-changes. Affected maintainers were notified two weeks before the planned release.
-
-We have also gone forward with our planned mixed model 
-deprecations, and have removed the following methods, which now live 
-in `broom.mixed`:
+We have also gone forward with our planned mixed model  deprecations, and have 
+removed the following methods, which now live in `broom.mixed`:
 
 - `tidy.brmsfit()`
 - `tidy.merMod()`, `glance.merMod()`, `augment.merMod()`

@@ -570,6 +570,7 @@ Suggests:
     metafor,
     mfx,
     mgcv,
+    modeldata,
     modeltests,
     muhaz,
     multcomp,
@@ -604,7 +605,7 @@ VignetteBuilder:
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.1.0
+RoxygenNote: 7.1.0.9000
 Language: en-US
 Collate:
     'aaa-documentation-helper.R'
@@ -623,6 +624,7 @@ Collate:
     'car-tidiers.R'
     'caret-tidiers.R'
     'data-frame-tidiers.R'
+    'deprecated-0-7-0.R'
     'drc-tidiers.R'
     'emmeans-tidiers.R'
     'epiR-tidiers.R'
@@ -698,7 +700,6 @@ Collate:
     'stats-mlm-tidiers.R'
     'stats-prcomp-tidiers.R'
     'stats-smooth.spline-tidiers.R'
-    'stats-tidiers.R'
     'stats-time-series-tidiers.R'
     'survey-tidiers.R'
     'survival-aareg-tidiers.R'

@@ -72,7 +72,7 @@ augment(gravity_pois, trade)
 
 }
 \seealso{
-\code{\link[=reexports]{tidy()}}, \code{\link[fixest:feglm]{fixest::feglm()}}, \code{\link[fixest:femlm]{fixest::fenegbin()}},
+\code{\link[=tidy]{tidy()}}, \code{\link[fixest:feglm]{fixest::feglm()}}, \code{\link[fixest:femlm]{fixest::fenegbin()}},
 \code{\link[fixest:feNmlm]{fixest::feNmlm()}}, \code{\link[fixest:femlm]{fixest::femlm()}}, \code{\link[fixest:feols]{fixest::feols()}}, \code{\link[fixest:feglm]{fixest::fepois()}}
 
 Other fixest tidiers: 

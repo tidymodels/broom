@@ -20,13 +20,13 @@ absorbed in \code{...}, where they will be ignored. If the misspelled
 argument has a default value, the default value will be used.
 For example, if you pass \code{conf.lvel = 0.9}, all computation will
 proceed using \code{conf.level = 0.95}. Additionally, if you pass
-\code{newdata = my_tibble} to an \code{\link[=reexports]{augment()}} method that does not
+\code{newdata = my_tibble} to an \code{\link[=augment]{augment()}} method that does not
 accept a \code{newdata} argument, it will use the default value for
 the \code{data} argument.}
 }
 \description{
-For models that have only a single component, the \code{\link[=reexports]{tidy()}} and
-\code{\link[=reexports]{glance()}} methods are identical. Please see the documentation for both
+For models that have only a single component, the \code{\link[=tidy]{tidy()}} and
+\code{\link[=glance]{glance()}} methods are identical. Please see the documentation for both
 of those methods.
 }
 \examples{
@@ -36,7 +36,7 @@ tidy(dw)
 glance(dw) # same output for all durbinWatsonTests
 }
 \seealso{
-\code{\link[=reexports]{tidy()}}, \code{\link[=reexports]{glance()}}, \code{\link[car:durbinWatsonTest]{car::durbinWatsonTest()}}
+\code{\link[=tidy]{tidy()}}, \code{\link[=glance]{glance()}}, \code{\link[car:durbinWatsonTest]{car::durbinWatsonTest()}}
 }
 \concept{car tidiers}
 \value{
