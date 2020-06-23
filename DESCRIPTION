@@ -624,6 +624,7 @@ Collate:
     'car-tidiers.R'
     'caret-tidiers.R'
     'data-frame-tidiers.R'
+    'deprecated-0-7-0.R'
     'drc-tidiers.R'
     'emmeans-tidiers.R'
     'epiR-tidiers.R'
