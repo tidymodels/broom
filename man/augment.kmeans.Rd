@@ -68,6 +68,7 @@ missing at this time.
 }
 \examples{
 
+\dontrun{
 library(cluster)
 library(dplyr)
 
@@ -81,6 +82,7 @@ fit <- pam(x, k = 4)
 tidy(fit)
 glance(fit)
 augment(fit, x)
+}
 }
 \seealso{
 \code{\link[=augment]{augment()}}, \code{\link[stats:kmeans]{stats::kmeans()}}

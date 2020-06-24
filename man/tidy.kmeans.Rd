@@ -36,6 +36,7 @@ For examples, see the kmeans vignette.
 }
 \examples{
 
+\dontrun{
 library(cluster)
 library(dplyr)
 
@@ -49,6 +50,7 @@ fit <- pam(x, k = 4)
 tidy(fit)
 glance(fit)
 augment(fit, x)
+}
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[stats:kmeans]{stats::kmeans()}}

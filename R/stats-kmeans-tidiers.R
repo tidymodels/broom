@@ -10,6 +10,7 @@
 #'
 #' @examples
 #'
+#' \dontrun{
 #' library(cluster)
 #' library(dplyr)
 #'
@@ -23,6 +24,7 @@
 #' tidy(fit)
 #' glance(fit)
 #' augment(fit, x)
+#' }
 #' @details For examples, see the kmeans vignette.
 #'
 #' @aliases kmeans_tidiers

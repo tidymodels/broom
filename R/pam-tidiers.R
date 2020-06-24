@@ -26,6 +26,7 @@
 #' @family pam tidiers
 #' @examples
 #'
+#' \dontrun{
 #' library(dplyr)
 #' library(ggplot2)
 #' library(cluster)
@@ -43,6 +44,8 @@
 #'   ggplot(aes(compounds, input_fields)) +
 #'   geom_point(aes(color = .cluster)) +
 #'   geom_text(aes(label = cluster), data = tidy(p), size = 10)
+#' }   
+#'   
 tidy.pam <- function(x, col.names = paste0("x", 1:ncol(x$medoids)), ...) {
   as_tibble(x$clusinfo) %>%
     mutate(

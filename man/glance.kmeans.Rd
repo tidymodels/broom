@@ -41,6 +41,7 @@ of the appropriate type.
 }
 \examples{
 
+\dontrun{
 library(cluster)
 library(dplyr)
 
@@ -54,6 +55,7 @@ fit <- pam(x, k = 4)
 tidy(fit)
 glance(fit)
 augment(fit, x)
+}
 }
 \seealso{
 \code{\link[=glance]{glance()}}, \code{\link[stats:kmeans]{stats::kmeans()}}

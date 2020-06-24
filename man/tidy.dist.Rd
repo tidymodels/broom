@@ -44,12 +44,12 @@ diagonal, the tidied version will not either.
 }
 \examples{
 
-iris_dist <- dist(t(iris[, 1:4]))
-iris_dist
+cars_dist <- dist(t(mtcars[, 1:4]))
+cars_dist
 
-tidy(iris_dist)
-tidy(iris_dist, upper = TRUE)
-tidy(iris_dist, diagonal = TRUE)
+tidy(cars_dist)
+tidy(cars_dist, upper = TRUE)
+tidy(cars_dist, diagonal = TRUE)
 
 }
 \seealso{
