@@ -1,7 +1,7 @@
 # broom 0.7.0
 
 `broom 0.7.0` is a major release with a large number of new tidiers,
-soft-deprecations, and carrying out of planned breaking changes.
+soft-deprecations, and planned hard-deprecations of functions and arguments.
 
 ### Big picture changes
 
@@ -57,7 +57,7 @@ methods:
 - `tidy.summaryDefault()` and `glance.summaryDefault()` have been deprecated in 
 favor of `skimr::skim()`
 
-We have also gone forward with our planned mixed model  deprecations, and have 
+We have also gone forward with our planned mixed model deprecations, and have 
 removed the following methods, which now live in `broom.mixed`:
 
 - `tidy.brmsfit()`

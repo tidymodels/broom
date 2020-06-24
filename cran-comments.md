@@ -1,7 +1,7 @@
 # Release summary
 
-This is a resubmission following a request to first deprecate breaking
-changes and send another reminder to maintainers. We have made the requested
+This is a resubmission following a request to first deprecate removed methods
+and send another reminder to maintainers. We have made the requested
 changes and carried out another round of reverse dependency checks, notifying
 maintainers with unfixed breakages. We note that several remaining breakages
 are due to removal of mixed-model tidiers that have been deprecated since broom
@@ -53,7 +53,7 @@ the following message:
 
 In the initial round of revdepchecks, we checked 149 reverse dependencies, 
 comparing R CMD check results across CRAN and dev versions of this package. 
-We saw 37 new problems and failed to  check one package.
+We saw 37 new problems and failed to check one package.
 
 We first notified affected maintainers three weeks prior to our initial
 submission, and checked in with maintainers again a week and a half prior. 
@@ -62,8 +62,8 @@ Records of our initial outreach attempts can be found on this issue:
 https://github.com/tidymodels/broom/issues/862
 
 Since being asked to revert removals to soft-deprecations by the CRAN team on
-23 June 2020, we 
-have ran revdepchecks again. 20 issues remained, and after fixing 3 of them by 
+23 June 2020, we have ran revdepchecks again. 
+20 issues remained, and after fixing 3 of them by 
 reverting removals to soft-deprecations, 17 remain. Of the 17 remaining issues, 
 9 of them have been fixed in development versions and are waiting on the release 
 of `broom` 0.7.0 to submit. I've reached out to maintainers for all remaining issues, 
