@@ -42,7 +42,10 @@ methods to the `broom.mixed` package.
 
 ## R CMD check results
 
-0 NOTES, 0 WARNINGS, 0 ERRORS
+0 NOTES, 0 WARNINGS, 0 ERRORS, aside from a Note_to_CRAN_Maintainers with
+the following message:
+
+> Maintainer: 'Alex Hayes <alexpghayes@gmail.com>'
 
 ## revdepcheck results
 
@@ -51,17 +54,22 @@ comparing R CMD check results across CRAN and dev versions of this package.
 We saw 37 new problems and failed to  check one package.
 
 We first notified affected maintainers three weeks prior to our initial
-submission, and checked in with maintainers again a week and a half ago. 
+submission, and checked in with maintainers again a week and a half prior. 
 Records of our initial outreach attempts can be found on this issue:
 
 https://github.com/tidymodels/broom/issues/862
 
-Since reverting removals to soft-deprecations, we have ran revdepchecks again.
-Records of our outreach with maintainers of packages that are still newly
-broken (since 0.5.6) can be found on this issue:
+Since being asked to revert removals to soft-deprecations by the CRAN team on
+23 June 2020, we 
+have ran revdepchecks again. 20 issues remained, and after fixing 3 of them by 
+reverting removals to soft-deprecations, 17 remain. Of the 17 remaining issues, 
+9 of them have been fixed in development versions and are waiting on the release 
+of `broom` 0.7.0 to submit. I've reached out to maintainers for all remaining issues, 
+besides `eyetrackingR`, which currently does not have a maintainer. The majority of
+remaining issues are due to the planned deprecation of mixed model tidiers to 
+`broom.mixed`, initially announced with the release of broom 0.5.0 two years ago.
+Records of our most recent revdepchecks, and attempts to reach out to maintainers,
+can be found on this issue:
 
-
-
-
-
+https://github.com/tidymodels/broom/issues/885
 
