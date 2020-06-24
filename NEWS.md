@@ -50,6 +50,7 @@ methods:
 - `bootstrap()`
 - `confint_tidy()`
 - `fix_data_frame()`
+- `finish_glance()`
 - `augment.glmRob()`
 - `tidy.table()` and `tidy.ftable()` have been deprecated in favor of
 `tibble::as_tibble()`

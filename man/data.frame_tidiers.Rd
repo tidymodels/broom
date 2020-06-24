@@ -85,6 +85,7 @@ ggplot(td, aes(mean, sd)) + geom_point() +
 Other deprecated: 
 \code{\link{bootstrap}()},
 \code{\link{confint_tidy}()},
+\code{\link{finish_glance}()},
 \code{\link{fix_data_frame}()},
 \code{\link{summary_tidiers}},
 \code{\link{tidy.density}()},
@@ -95,6 +96,7 @@ Other deprecated:
 Other deprecated: 
 \code{\link{bootstrap}()},
 \code{\link{confint_tidy}()},
+\code{\link{finish_glance}()},
 \code{\link{fix_data_frame}()},
 \code{\link{summary_tidiers}},
 \code{\link{tidy.density}()},
@@ -105,6 +107,7 @@ Other deprecated:
 Other deprecated: 
 \code{\link{bootstrap}()},
 \code{\link{confint_tidy}()},
+\code{\link{finish_glance}()},
 \code{\link{fix_data_frame}()},
 \code{\link{summary_tidiers}},
 \code{\link{tidy.density}()},

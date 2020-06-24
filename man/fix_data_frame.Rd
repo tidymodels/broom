@@ -26,6 +26,7 @@ Other deprecated:
 \code{\link{bootstrap}()},
 \code{\link{confint_tidy}()},
 \code{\link{data.frame_tidiers}},
+\code{\link{finish_glance}()},
 \code{\link{summary_tidiers}},
 \code{\link{tidy.density}()},
 \code{\link{tidy.dist}()},

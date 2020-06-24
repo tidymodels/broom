@@ -537,3 +537,43 @@ confint_tidy <- function(x, conf.level = .95, func = stats::confint, ...) {
   colnames(ci) <- c("conf.low", "conf.high")
   as_tibble(ci)
 }
+
+# finish_glance -------------------------------------------------------
+#' (Deprecated) Add logLik, AIC, BIC, and other common measurements to a 
+#' glance of a prediction
+#' 
+#' This function is now deprecated in favor of using custom logic and
+#' the appropriate \code{nobs()} method.
+#'
+#'
+#' @param ret a one-row data frame (a partially complete glance)
+#' @param x the prediction model
+#'
+#' @return a one-row data frame with additional columns added, such as
+#'   \item{logLik}{log likelihoods}
+#'   \item{AIC}{Akaike Information Criterion}
+#'   \item{BIC}{Bayesian Information Criterion}
+#'   \item{deviance}{deviance}
+#'   \item{df.residual}{residual degrees of freedom}
+#'
+#' Each of these are produced by the corresponding generics
+#'
+#' @export
+#' @family deprecated
+finish_glance <- function(ret, x) {
+  ret$logLik <- tryCatch(as.numeric(stats::logLik(x)), error = function(e) NULL)
+  ret$AIC <- tryCatch(stats::AIC(x), error = function(e) NULL)
+  ret$BIC <- tryCatch(stats::BIC(x), error = function(e) NULL)
+  
+  # special case for REML objects (better way?)
+  if (inherits(x, "lmerMod")) {
+    ret$deviance <- tryCatch(stats::deviance(x, REML = FALSE),
+                             error = function(e) NULL
+    )
+  } else {
+    ret$deviance <- tryCatch(stats::deviance(x), error = function(e) NULL)
+  }
+  ret$df.residual <- tryCatch(df.residual(x), error = function(e) NULL)
+  
+  as_tibble(ret, rownames = NULL)
+}

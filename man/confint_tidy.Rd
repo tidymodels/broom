@@ -36,6 +36,7 @@ column names of \code{conf.low} and \code{conf.high}, and no row names.
 Other deprecated: 
 \code{\link{bootstrap}()},
 \code{\link{data.frame_tidiers}},
+\code{\link{finish_glance}()},
 \code{\link{fix_data_frame}()},
 \code{\link{summary_tidiers}},
 \code{\link{tidy.density}()},

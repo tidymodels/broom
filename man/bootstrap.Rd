@@ -28,6 +28,7 @@ corrections) here:
 Other deprecated: 
 \code{\link{confint_tidy}()},
 \code{\link{data.frame_tidiers}},
+\code{\link{finish_glance}()},
 \code{\link{fix_data_frame}()},
 \code{\link{summary_tidiers}},
 \code{\link{tidy.density}()},
