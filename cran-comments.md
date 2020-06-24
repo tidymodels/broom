@@ -4,10 +4,12 @@ This is a resubmission following a request to first deprecate breaking
 changes and send another reminder to maintainers. We have made the requested
 changes and carried out another round of reverse dependency checks, notifying
 maintainers with unfixed breakages. We note that several remaining breakages
-are due to removal of mixed-model tidiers that were deprecated in previous
-releases--we have not reverted these methods back to soft-deprecations as
-their namespace conflicts with the broom.mixed package, which provides a
-consistent interface to mixed model tidiers, have caused user confusion.
+are due to removal of mixed-model tidiers that have been deprecated since broom
+0.5.0's release two years ago--we have not reverted these methods back to 
+soft-deprecations as their namespace conflicts with the `broom.mixed` package, 
+which provides a consistent interface to mixed model tidiers, have caused user 
+confusion. More notes on our most recent round of reverse dependency checks
+can be found at the bottom of this document.
 
 The previous submission was also  a resubmission following an automated 
 pretest failure due to breaking changes in the `epi.2by2` function from 
