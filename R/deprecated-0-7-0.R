@@ -556,11 +556,12 @@ confint_tidy <- function(x, conf.level = .95, func = stats::confint, ...) {
 #'   \item{deviance}{deviance}
 #'   \item{df.residual}{residual degrees of freedom}
 #'
-#' Each of these are produced by the corresponding generics
-#'
 #' @export
 #' @family deprecated
 finish_glance <- function(ret, x) {
+  .Deprecated(
+    msg = "finish_glance is now deprecated and will be removed from a future release of broom. Please only use the relevant `stats` functions for the given model type as needed."
+  )
   ret$logLik <- tryCatch(as.numeric(stats::logLik(x)), error = function(e) NULL)
   ret$AIC <- tryCatch(stats::AIC(x), error = function(e) NULL)
   ret$BIC <- tryCatch(stats::BIC(x), error = function(e) NULL)
