@@ -1,3 +1,7 @@
+context("mclogit")
+
+skip_on_cran()
+
 skip_if_not_installed("mclogit")
 library(mclogit)
 

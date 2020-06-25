@@ -1,5 +1,7 @@
 context("epiR")
 
+skip_on_cran()
+
 skip_if_not_installed("epiR")
 
 dat <- matrix(c(13, 2163, 5, 3349), nrow = 2, byrow = TRUE)

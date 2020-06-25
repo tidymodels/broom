@@ -1,6 +1,10 @@
 # Release summary
 
-This is a resubmission following a request to first deprecate removed methods
+This submission is a resubmission following a request to further cut down on
+check time. We've now skipped most all unit tests except for core functionality.
+
+The previous submission was also a resubmission 
+following a request to first deprecate removed methods
 and send another reminder to maintainers. We have made the requested
 changes and carried out another round of reverse dependency checks, notifying
 maintainers with unfixed breakages. We note that several remaining breakages
@@ -23,6 +27,7 @@ The previous submission was also a resubmission following an automated pretest
 failure due to "[n]on-file package-anchored link(s) in documentation 
 object[s]." This seemed to be a new test as of our previous submission, 
 and has been addressed by linking to documentation files rather than topics.
+Check times were also too long for this submission.
 
 The previous submission was also a resubmission following an automated pretest 
 failure. The failure was due to breaking changes in the `residuals.fixest()` 

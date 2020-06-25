@@ -1,5 +1,7 @@
 context("stats-mlm")
 
+skip_on_cran()
+
 fit_mlm <- lm(cbind(mpg, disp) ~ wt, mtcars)
 df_tidy <- tidy(fit_mlm, conf.int = TRUE)
 
