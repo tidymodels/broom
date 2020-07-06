@@ -5,27 +5,27 @@
 |version  |R version 4.0.0 (2020-04-24) |
 |os       |macOS Catalina 10.15.5       |
 |system   |x86_64, darwin17.0           |
-|ui       |RStudio                      |
+|ui       |X11                          |
 |language |(EN)                         |
 |collate  |en_US.UTF-8                  |
 |ctype    |en_US.UTF-8                  |
 |tz       |America/New_York             |
-|date     |2020-06-23                   |
+|date     |2020-07-06                   |
 
 # Dependencies
 
 |package |old   |new   |Δ  |
 |:-------|:-----|:-----|:--|
 |broom   |0.5.6 |0.7.0 |*  |
+|Rcpp    |NA    |1.0.5 |*  |
 
 # Revdeps
 
-## Failed to check (2)
+## Failed to check (1)
 
 |package                          |version |error  |warning |note |
 |:--------------------------------|:-------|:------|:-------|:----|
 |[DeLorean](failures.md#delorean) |1.5.0   |__+1__ |        |-3   |
-|RBesT                            |1.6-1   |1      |        |     |
 
 ## New problems (20)
 
@@ -45,10 +45,10 @@
 |[mice](problems.md#mice)                  |3.9.0   |__+1__ |        |         |
 |[moderndive](problems.md#moderndive)      |0.4.0   |__+1__ |        |1        |
 |[nlstimedist](problems.md#nlstimedist)    |1.1.4   |__+1__ |        |         |
-|[qgcomp](problems.md#qgcomp)              |2.3.0   |       |        |__+1__   |
 |[radiant.model](problems.md#radiantmodel) |1.3.10  |__+1__ |        |         |
 |[RCT](problems.md#rct)                    |1.0.2   |__+2__ |        |         |
+|[simts](problems.md#simts)                |0.1.1   |       |        |__+1__   |
 |[survminer](problems.md#survminer)        |0.4.7   |__+1__ |        |1        |
 |[survutils](problems.md#survutils)        |1.0.2   |__+1__ |        |         |
-|[sweep](problems.md#sweep)                |0.2.2   |__+2__ |__+1__  |1        |
+|[sweep](problems.md#sweep)                |0.2.2   |1      |__+1__  |2        |
 

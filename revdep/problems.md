@@ -229,605 +229,27 @@ Run `revdep_details(,"DeLorean")` for more info
 "/Library/Frameworks/R.framework/Resources/bin/Rscript" -e "source(file.path('..', 'tools', 'make_cc.R')); make_cc(commandArgs(TRUE))" stan_files/exactsizes.stan
 "/Library/Frameworks/R.framework/Resources/bin/Rscript" -e "source(file.path('..', 'tools', 'make_cc.R')); make_cc(commandArgs(TRUE))" stan_files/lowrank.stan
 "/Library/Frameworks/R.framework/Resources/bin/Rscript" -e "source(file.path('..', 'tools', 'make_cc.R')); make_cc(commandArgs(TRUE))" stan_files/lowranksizes.stan
-clang++ -mmacosx-version-min=10.13 -std=gnu++14 -I"/Library/Frameworks/R.framework/Resources/include" -DNDEBUG -I"../inst/include" -I"`"/Library/Frameworks/R.framework/Resources/bin/Rscript" --vanilla -e "cat(system.file('include', 'src', package = 'StanHeaders'))"`" -DBOOST_DISABLE_ASSERTS -DEIGEN_NO_DEBUG -DBOOST_MATH_OVERFLOW_ERROR_POLICY=errno_on_error -I'/Users/max/github/broom/revdep/library.noindex/DeLorean/BH/include' -I'/Users/max/github/broom/revdep/library.noindex/DeLorean/Rcpp/include' -I'/Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include' -I'/Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include' -I'/Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include' -I/usr/local/include   -fPIC  -Wall -g -O2  -c init.cpp -o init.o
+clang++ -mmacosx-version-min=10.13 -std=gnu++14 -I"/Library/Frameworks/R.framework/Resources/include" -DNDEBUG -I"../inst/include" -I"`"/Library/Frameworks/R.framework/Resources/bin/Rscript" --vanilla -e "cat(system.file('include', 'src', package = 'StanHeaders'))"`" -DBOOST_DISABLE_ASSERTS -DEIGEN_NO_DEBUG -DBOOST_MATH_OVERFLOW_ERROR_POLICY=errno_on_error -I'/Users/max/github/broom/revdep/library.noindex/DeLorean/BH/include' -I'/Users/max/github/broom/revdep/library.noindex/broom/new/Rcpp/include' -I'/Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include' -I'/Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include' -I'/Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include' -I/usr/local/include   -fPIC  -Wall -g -O2  -c init.cpp -o init.o
 Wrote C++ file "stan_files/lowrank.cc"
-Wrote C++ file "stan_files/exact.cc"
 Wrote C++ file "stan_files/exactsizes.cc"
 Wrote C++ file "stan_files/lowranksizes.cc"
-clang++ -mmacosx-version-min=10.13 -std=gnu++14 -I"/Library/Frameworks/R.framework/Resources/include" -DNDEBUG -I"../inst/include" -I"`"/Library/Frameworks/R.framework/Resources/bin/Rscript" --vanilla -e "cat(system.file('include', 'src', package = 'StanHeaders'))"`" -DBOOST_DISABLE_ASSERTS -DEIGEN_NO_DEBUG -DBOOST_MATH_OVERFLOW_ERROR_POLICY=errno_on_error -I'/Users/max/github/broom/revdep/library.noindex/DeLorean/BH/include' -I'/Users/max/github/broom/revdep/library.noindex/DeLorean/Rcpp/include' -I'/Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include' -I'/Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include' -I'/Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include' -I/usr/local/include   -fPIC  -Wall -g -O2  -c stan_files/lowrank.cc -o stan_files/lowrank.o
-Error in readRDS("/var/folders/zh/nd9kmnyd2_d_xbwvbx5_7k_00000gn/T//RtmphfjD41/file91ed4d1f0548") : 
+Wrote C++ file "stan_files/exact.cc"
+Error in readRDS("/var/folders/zh/nd9kmnyd2_d_xbwvbx5_7k_00000gn/T//RtmpxKgfbo/file105b37af16b48") : 
+  error reading from connection
+Calls: .Last -> readRDS
+Error in readRDS("/var/folders/zh/nd9kmnyd2_d_xbwvbx5_7k_00000gn/T//RtmpxKgfbo/file105b37af16b48") : 
   error reading from connection
 Calls: .Last -> readRDS
 Execution halted
-clang++ -mmacosx-version-min=10.13 -std=gnu++14 -I"/Library/Frameworks/R.framework/Resources/include" -DNDEBUG -I"../inst/include" -I"`"/Library/Frameworks/R.framework/Resources/bin/Rscript" --vanilla -e "cat(system.file('include', 'src', package = 'StanHeaders'))"`" -DBOOST_DISABLE_ASSERTS -DEIGEN_NO_DEBUG -DBOOST_MATH_OVERFLOW_ERROR_POLICY=errno_on_error -I'/Users/max/github/broom/revdep/library.noindex/DeLorean/BH/include' -I'/Users/max/github/broom/revdep/library.noindex/DeLorean/Rcpp/include' -I'/Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include' -I'/Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include' -I'/Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include' -I/usr/local/include   -fPIC  -Wall -g -O2  -c stan_files/exact.cc -o stan_files/exact.o
+Execution halted
+Error in readRDS("/var/folders/zh/nd9kmnyd2_d_xbwvbx5_7k_00000gn/T//RtmpxKgfbo/file105b37af16b48") : 
+  error reading from connection
+Calls: .Last -> readRDS
+Execution halted
 make: *** [stan_files/lowranksizes.cc] Error 1
 make: *** Waiting for unfinished jobs....
-In file included from stan_files/lowrank.cc:3:
-In file included from stan_files/lowrank.hpp:25:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/rstaninc.hpp:3:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/stan_fit.hpp:11:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/src/stan/version.hpp:4:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/stan/math/prim/mat/fun/Eigen.hpp:13:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/Dense:1:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/Core:535:
-/Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/src/Core/util/ReenableStupidWarnings.h:10:30: warning: pragma diagnostic pop could not pop, no matching push [-Wunknown-pragmas]
-    #pragma clang diagnostic pop
-                             ^
-In file included from stan_files/lowrank.cc:3:
-In file included from stan_files/lowrank.hpp:25:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/rstaninc.hpp:3:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/stan_fit.hpp:11:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/src/stan/version.hpp:4:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/stan/math/prim/mat/fun/Eigen.hpp:13:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/Dense:2:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/LU:47:
-/Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/src/Core/util/ReenableStupidWarnings.h:10:30: warning: pragma diagnostic pop could not pop, no matching push [-Wunknown-pragmas]
-    #pragma clang diagnostic pop
-                             ^
-In file included from stan_files/lowrank.cc:3:
-In file included from stan_files/lowrank.hpp:25:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/rstaninc.hpp:3:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/stan_fit.hpp:11:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/src/stan/version.hpp:4:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/stan/math/prim/mat/fun/Eigen.hpp:13:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/Dense:3:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/Cholesky:12:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/Jacobi:29:
-/Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/src/Core/util/ReenableStupidWarnings.h:10:30: warning: pragma diagnostic pop could not pop, no matching push [-Wunknown-pragmas]
-    #pragma clang diagnostic pop
-                             ^
-In file included from stan_files/lowrank.cc:3:
-In file included from stan_files/lowrank.hpp:25:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/rstaninc.hpp:3:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/stan_fit.hpp:11:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/src/stan/version.hpp:4:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/stan/math/prim/mat/fun/Eigen.hpp:13:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/Dense:3:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/Cholesky:43:
-/Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/src/Core/util/ReenableStupidWarnings.h:10:30: warning: pragma diagnostic pop could not pop, no matching push [-Wunknown-pragmas]
-    #pragma clang diagnostic pop
-                             ^
-In file included from stan_files/lowrank.cc:3:
-In file included from stan_files/lowrank.hpp:25:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/rstaninc.hpp:3:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/stan_fit.hpp:11:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/src/stan/version.hpp:4:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/stan/math/prim/mat/fun/Eigen.hpp:13:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/Dense:4:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/QR:17:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/Householder:27:
-/Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/src/Core/util/ReenableStupidWarnings.h:10:30: warning: pragma diagnostic pop could not pop, no matching push [-Wunknown-pragmas]
-    #pragma clang diagnostic pop
-                             ^
-In file included from stan_files/exact.cc:3:
-In file included from stan_files/exact.hpp:25:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/rstaninc.hpp:3:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/stan_fit.hpp:11:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/src/stan/version.hpp:4:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/stan/math/prim/mat/fun/Eigen.hpp:13:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/Dense:1:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/Core:535:
-/Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/src/Core/util/ReenableStupidWarnings.h:10:30: warning: pragma diagnostic pop could not pop, no matching push [-Wunknown-pragmas]
-    #pragma clang diagnostic pop
-                             ^
-In file included from stan_files/exact.cc:3:
-In file included from stan_files/exact.hpp:25:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/rstaninc.hpp:3:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/stan_fit.hpp:11:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/src/stan/version.hpp:4:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/stan/math/prim/mat/fun/Eigen.hpp:13:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/Dense:2:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/LU:47:
-/Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/src/Core/util/ReenableStupidWarnings.h:10:30: warning: pragma diagnostic pop could not pop, no matching push [-Wunknown-pragmas]
-    #pragma clang diagnostic pop
-                             ^
-In file included from stan_files/exact.cc:3:
-In file included from stan_files/exact.hpp:25:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/rstaninc.hpp:3:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/stan_fit.hpp:11:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/src/stan/version.hpp:4:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/stan/math/prim/mat/fun/Eigen.hpp:13:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/Dense:3:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/Cholesky:12:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/Jacobi:29:
-/Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/src/Core/util/ReenableStupidWarnings.h:10:30: warning: pragma diagnostic pop could not pop, no matching push [-Wunknown-pragmas]
-    #pragma clang diagnostic pop
-                             ^
-In file included from stan_files/exact.cc:3:
-In file included from stan_files/exact.hpp:25:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/rstaninc.hpp:3:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/stan_fit.hpp:11:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/src/stan/version.hpp:4:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/stan/math/prim/mat/fun/Eigen.hpp:13:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/Dense:3:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/Cholesky:43:
-/Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/src/Core/util/ReenableStupidWarnings.h:10:30: warning: pragma diagnostic pop could not pop, no matching push [-Wunknown-pragmas]
-    #pragma clang diagnostic pop
-                             ^
-In file included from stan_files/exact.cc:3:
-In file included from stan_files/exact.hpp:25:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/rstaninc.hpp:3:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/stan_fit.hpp:11:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/src/stan/version.hpp:4:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/stan/math/prim/mat/fun/Eigen.hpp:13:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/Dense:4:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/QR:17:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/Householder:27:
-/Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/src/Core/util/ReenableStupidWarnings.h:10:30: warning: pragma diagnostic pop could not pop, no matching push [-Wunknown-pragmas]
-    #pragma clang diagnostic pop
-                             ^
-In file included from stan_files/lowrank.cc:3:
-In file included from stan_files/lowrank.hpp:25:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/rstaninc.hpp:3:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/stan_fit.hpp:11:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/src/stan/version.hpp:4:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/stan/math/prim/mat/fun/Eigen.hpp:13:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/Dense:5:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/SVD:48:
-/Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/src/Core/util/ReenableStupidWarnings.h:10:30: warning: pragma diagnostic pop could not pop, no matching push [-Wunknown-pragmas]
-    #pragma clang diagnostic pop
-                             ^
-In file included from stan_files/exact.cc:3:
-In file included from stan_files/exact.hpp:25:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/rstaninc.hpp:3:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/stan_fit.hpp:11:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/src/stan/version.hpp:4:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/stan/math/prim/mat/fun/Eigen.hpp:13:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/Dense:5:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/SVD:48:
-/Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/src/Core/util/ReenableStupidWarnings.h:10:30: warning: pragma diagnostic pop could not pop, no matching push [-Wunknown-pragmas]
-    #pragma clang diagnostic pop
-                             ^
-In file included from stan_files/lowrank.cc:3:
-In file included from stan_files/lowrank.hpp:25:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/rstaninc.hpp:3:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/stan_fit.hpp:11:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/src/stan/version.hpp:4:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/stan/math/prim/mat/fun/Eigen.hpp:13:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/Dense:6:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/Geometry:58:
-/Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/src/Core/util/ReenableStupidWarnings.h:10:30: warning: pragma diagnostic pop could not pop, no matching push [-Wunknown-pragmas]
-    #pragma clang diagnostic pop
-                             ^
-In file included from stan_files/lowrank.cc:3:
-In file included from stan_files/lowrank.hpp:25:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/rstaninc.hpp:3:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/stan_fit.hpp:11:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/src/stan/version.hpp:4:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/stan/math/prim/mat/fun/Eigen.hpp:13:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/Dense:7:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/Eigenvalues:58:
-/Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/src/Core/util/ReenableStupidWarnings.h:10:30: warning: pragma diagnostic pop could not pop, no matching push [-Wunknown-pragmas]
-    #pragma clang diagnostic pop
-                             ^
-In file included from stan_files/exact.cc:3:
-In file included from stan_files/exact.hpp:25:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/rstaninc.hpp:3:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/stan_fit.hpp:11:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/src/stan/version.hpp:4:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/stan/math/prim/mat/fun/Eigen.hpp:13:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/Dense:6:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/Geometry:58:
-/Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/src/Core/util/ReenableStupidWarnings.h:10:30: warning: pragma diagnostic pop could not pop, no matching push [-Wunknown-pragmas]
-    #pragma clang diagnostic pop
-                             ^
-In file included from stan_files/exact.cc:3:
-In file included from stan_files/exact.hpp:25:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/rstaninc.hpp:3:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/stan_fit.hpp:11:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/src/stan/version.hpp:4:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/stan/math/prim/mat/fun/Eigen.hpp:13:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/Dense:7:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/Eigenvalues:58:
-/Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/src/Core/util/ReenableStupidWarnings.h:10:30: warning: pragma diagnostic pop could not pop, no matching push [-Wunknown-pragmas]
-    #pragma clang diagnostic pop
-                             ^
-In file included from stan_files/lowrank.cc:3:
-In file included from stan_files/lowrank.hpp:25:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/rstaninc.hpp:3:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/stan_fit.hpp:11:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/src/stan/version.hpp:4:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/stan/math/prim/mat/fun/Eigen.hpp:14:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/Sparse:26:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/SparseCore:66:
-/Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/src/Core/util/ReenableStupidWarnings.h:10:30: warning: pragma diagnostic pop could not pop, no matching push [-Wunknown-pragmas]
-    #pragma clang diagnostic pop
-                             ^
-In file included from stan_files/lowrank.cc:3:
-In file included from stan_files/lowrank.hpp:25:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/rstaninc.hpp:3:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/stan_fit.hpp:11:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/src/stan/version.hpp:4:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/stan/math/prim/mat/fun/Eigen.hpp:14:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/Sparse:27:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/OrderingMethods:71:
-/Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/src/Core/util/ReenableStupidWarnings.h:10:30: warning: pragma diagnostic pop could not pop, no matching push [-Wunknown-pragmas]
-    #pragma clang diagnostic pop
-                             ^
-In file included from stan_files/lowrank.cc:3:
-In file included from stan_files/lowrank.hpp:25:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/rstaninc.hpp:3:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/stan_fit.hpp:11:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/src/stan/version.hpp:4:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/stan/math/prim/mat/fun/Eigen.hpp:14:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/Sparse:29:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/SparseCholesky:43:
-/Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/src/Core/util/ReenableStupidWarnings.h:10:30: warning: pragma diagnostic pop could not pop, no matching push [-Wunknown-pragmas]
-    #pragma clang diagnostic pop
-                             ^
-In file included from stan_files/lowrank.cc:3:
-In file included from stan_files/lowrank.hpp:25:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/rstaninc.hpp:3:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/stan_fit.hpp:11:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/src/stan/version.hpp:4:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/stan/math/prim/mat/fun/Eigen.hpp:14:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/Sparse:32:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/SparseQR:35:
-/Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/src/Core/util/ReenableStupidWarnings.h:10:30: warning: pragma diagnostic pop could not pop, no matching push [-Wunknown-pragmas]
-    #pragma clang diagnostic pop
-                             ^
-In file included from stan_files/lowrank.cc:3:
-In file included from stan_files/lowrank.hpp:25:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/rstaninc.hpp:3:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/stan_fit.hpp:11:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/src/stan/version.hpp:4:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/stan/math/prim/mat/fun/Eigen.hpp:14:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/Sparse:33:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/IterativeLinearSolvers:46:
-/Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/src/Core/util/ReenableStupidWarnings.h:10:30: warning: pragma diagnostic pop could not pop, no matching push [-Wunknown-pragmas]
-    #pragma clang diagnostic pop
-                             ^
-In file included from stan_files/exact.cc:3:
-In file included from stan_files/exact.hpp:25:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/rstaninc.hpp:3:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/stan_fit.hpp:11:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/src/stan/version.hpp:4:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/stan/math/prim/mat/fun/Eigen.hpp:14:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/Sparse:26:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/SparseCore:66:
-/Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/src/Core/util/ReenableStupidWarnings.h:10:30: warning: pragma diagnostic pop could not pop, no matching push [-Wunknown-pragmas]
-    #pragma clang diagnostic pop
-                             ^
-In file included from stan_files/exact.cc:3:
-In file included from stan_files/exact.hpp:25:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/rstaninc.hpp:3:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/stan_fit.hpp:11:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/src/stan/version.hpp:4:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/stan/math/prim/mat/fun/Eigen.hpp:14:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/Sparse:27:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/OrderingMethods:71:
-/Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/src/Core/util/ReenableStupidWarnings.h:10:30: warning: pragma diagnostic pop could not pop, no matching push [-Wunknown-pragmas]
-    #pragma clang diagnostic pop
-                             ^
-In file included from stan_files/exact.cc:3:
-In file included from stan_files/exact.hpp:25:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/rstaninc.hpp:3:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/stan_fit.hpp:11:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/src/stan/version.hpp:4:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/stan/math/prim/mat/fun/Eigen.hpp:14:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/Sparse:29:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/SparseCholesky:43:
-/Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/src/Core/util/ReenableStupidWarnings.h:10:30: warning: pragma diagnostic pop could not pop, no matching push [-Wunknown-pragmas]
-    #pragma clang diagnostic pop
-                             ^
-In file included from stan_files/exact.cc:3:
-In file included from stan_files/exact.hpp:25:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/rstaninc.hpp:3:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/stan_fit.hpp:11:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/src/stan/version.hpp:4:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/stan/math/prim/mat/fun/Eigen.hpp:14:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/Sparse:32:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/SparseQR:35:
-/Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/src/Core/util/ReenableStupidWarnings.h:10:30: warning: pragma diagnostic pop could not pop, no matching push [-Wunknown-pragmas]
-    #pragma clang diagnostic pop
-                             ^
-In file included from stan_files/exact.cc:3:
-In file included from stan_files/exact.hpp:25:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/rstaninc.hpp:3:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/stan_fit.hpp:11:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/src/stan/version.hpp:4:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/stan/math/prim/mat/fun/Eigen.hpp:14:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/Sparse:33:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/IterativeLinearSolvers:46:
-/Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/src/Core/util/ReenableStupidWarnings.h:10:30: warning: pragma diagnostic pop could not pop, no matching push [-Wunknown-pragmas]
-    #pragma clang diagnostic pop
-                             ^
-In file included from stan_files/lowrank.cc:3:
-In file included from stan_files/lowrank.hpp:25:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/rstaninc.hpp:3:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/stan_fit.hpp:22:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/RcppEigen.h:25:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/RcppEigenForward.h:32:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/CholmodSupport:45:
-/Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/src/Core/util/ReenableStupidWarnings.h:10:30: warning: pragma diagnostic pop could not pop, no matching push [-Wunknown-pragmas]
-    #pragma clang diagnostic pop
-                             ^
-In file included from stan_files/exact.cc:3:
-In file included from stan_files/exact.hpp:25:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/rstaninc.hpp:3:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/stan_fit.hpp:22:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/RcppEigen.h:25:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/RcppEigenForward.h:32:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/CholmodSupport:45:
-/Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/src/Core/util/ReenableStupidWarnings.h:10:30: warning: pragma diagnostic pop could not pop, no matching push [-Wunknown-pragmas]
-    #pragma clang diagnostic pop
-                             ^
-In file included from stan_files/lowrank.cc:3:
-In file included from stan_files/lowrank.hpp:25:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/rstaninc.hpp:3:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/stan_fit.hpp:22:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/RcppEigen.h:25:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/RcppEigenForward.h:35:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/unsupported/Eigen/KroneckerProduct:34:
-/Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/unsupported/Eigen/../../Eigen/src/Core/util/ReenableStupidWarnings.h:10:30: warning: pragma diagnostic pop could not pop, no matching push [-Wunknown-pragmas]
-    #pragma clang diagnostic pop
-                             ^
-In file included from stan_files/lowrank.cc:3:
-In file included from stan_files/lowrank.hpp:25:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/rstaninc.hpp:3:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/stan_fit.hpp:22:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/RcppEigen.h:25:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/RcppEigenForward.h:39:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/unsupported/Eigen/Polynomials:135:
-/Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/unsupported/Eigen/../../Eigen/src/Core/util/ReenableStupidWarnings.h:10:30: warning: pragma diagnostic pop could not pop, no matching push [-Wunknown-pragmas]
-    #pragma clang diagnostic pop
-                             ^
-In file included from stan_files/exact.cc:3:
-In file included from stan_files/exact.hpp:25:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/rstaninc.hpp:3:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/stan_fit.hpp:22:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/RcppEigen.h:25:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/RcppEigenForward.h:35:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/unsupported/Eigen/KroneckerProduct:34:
-/Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/unsupported/Eigen/../../Eigen/src/Core/util/ReenableStupidWarnings.h:10:30: warning: pragma diagnostic pop could not pop, no matching push [-Wunknown-pragmas]
-    #pragma clang diagnostic pop
-                             ^
-In file included from stan_files/lowrank.cc:3:
-In file included from stan_files/lowrank.hpp:25:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/rstaninc.hpp:3:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/stan_fit.hpp:22:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/RcppEigen.h:25:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/RcppEigenForward.h:40:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/unsupported/Eigen/SparseExtra:51:
-/Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/unsupported/Eigen/../../Eigen/src/Core/util/ReenableStupidWarnings.h:10:30: warning: pragma diagnostic pop could not pop, no matching push [-Wunknown-pragmas]
-    #pragma clang diagnostic pop
-                             ^
-In file included from stan_files/exact.cc:3:
-In file included from stan_files/exact.hpp:25:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/rstaninc.hpp:3:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/stan_fit.hpp:22:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/RcppEigen.h:25:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/RcppEigenForward.h:39:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/unsupported/Eigen/Polynomials:135:
-/Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/unsupported/Eigen/../../Eigen/src/Core/util/ReenableStupidWarnings.h:10:30: warning: pragma diagnostic pop could not pop, no matching push [-Wunknown-pragmas]
-    #pragma clang diagnostic pop
-                             ^
-In file included from stan_files/exact.cc:3:
-In file included from stan_files/exact.hpp:25:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/rstaninc.hpp:3:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/stan_fit.hpp:22:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/RcppEigen.h:25:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/RcppEigenForward.h:40:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/unsupported/Eigen/SparseExtra:51:
-/Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/unsupported/Eigen/../../Eigen/src/Core/util/ReenableStupidWarnings.h:10:30: warning: pragma diagnostic pop could not pop, no matching push [-Wunknown-pragmas]
-    #pragma clang diagnostic pop
-                             ^
-In file included from stan_files/lowrank.cc:3:
-In file included from stan_files/lowrank.hpp:25:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/rstaninc.hpp:3:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/stan_fit.hpp:35:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/src/stan/services/diagnose/diagnose.hpp:10:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/src/stan/model/test_gradients.hpp:7:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/src/stan/model/log_prob_grad.hpp:4:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/stan/math/rev/mat.hpp:12:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/stan/math/prim/mat.hpp:283:
-/Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/stan/math/prim/mat/prob/gaussian_dlm_obs_rng.hpp:138:7: warning: unused variable 'n' [-Wunused-variable]
-  int n = G.rows();  // number of states
-      ^
-In file included from stan_files/exact.cc:3:
-In file included from stan_files/exact.hpp:25:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/rstaninc.hpp:3:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/stan_fit.hpp:35:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/src/stan/services/diagnose/diagnose.hpp:10:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/src/stan/model/test_gradients.hpp:7:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/src/stan/model/log_prob_grad.hpp:4:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/stan/math/rev/mat.hpp:12:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/stan/math/prim/mat.hpp:283:
-/Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/stan/math/prim/mat/prob/gaussian_dlm_obs_rng.hpp:138:7: warning: unused variable 'n' [-Wunused-variable]
-  int n = G.rows();  // number of states
-      ^
-In file included from stan_files/lowrank.cc:3:
-In file included from stan_files/lowrank.hpp:25:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/rstaninc.hpp:3:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/stan_fit.hpp:35:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/src/stan/services/diagnose/diagnose.hpp:10:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/src/stan/model/test_gradients.hpp:7:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/src/stan/model/log_prob_grad.hpp:4:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/stan/math/rev/mat.hpp:17:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/stan/math/rev/mat/fun/columns_dot_self.hpp:8:
-/Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/stan/math/rev/mat/fun/dot_self.hpp:38:41: warning: all paths through this function will call itself [-Winfinite-recursion]
-  inline static double square(double x) { return square(x); }
-                                        ^
-In file included from stan_files/exact.cc:3:
-In file included from stan_files/exact.hpp:25:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/rstaninc.hpp:3:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/stan_fit.hpp:35:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/src/stan/services/diagnose/diagnose.hpp:10:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/src/stan/model/test_gradients.hpp:7:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/src/stan/model/log_prob_grad.hpp:4:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/stan/math/rev/mat.hpp:17:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/stan/math/rev/mat/fun/columns_dot_self.hpp:8:
-/Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/stan/math/rev/mat/fun/dot_self.hpp:38:41: warning: all paths through this function will call itself [-Winfinite-recursion]
-  inline static double square(double x) { return square(x); }
-                                        ^
-In file included from stan_files/lowrank.cc:3:
-In file included from stan_files/lowrank.hpp:25:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/rstaninc.hpp:3:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/stan_fit.hpp:35:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/src/stan/services/diagnose/diagnose.hpp:10:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/src/stan/model/test_gradients.hpp:7:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/src/stan/model/log_prob_grad.hpp:4:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/stan/math/rev/mat.hpp:70:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/stan/math/rev/mat/functor/integrate_ode_adams.hpp:5:
-/Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/stan/math/rev/mat/functor/cvodes_integrator.hpp:126:18: warning: unused variable 'coupled_size' [-Wunused-variable]
-    const size_t coupled_size = cvodes_data.coupled_ode_.size();
-                 ^
-In file included from stan_files/exact.cc:3:
-In file included from stan_files/exact.hpp:25:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/rstaninc.hpp:3:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/stan_fit.hpp:35:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/src/stan/services/diagnose/diagnose.hpp:10:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/src/stan/model/test_gradients.hpp:7:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/src/stan/model/log_prob_grad.hpp:4:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/stan/math/rev/mat.hpp:70:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/stan/math/rev/mat/functor/integrate_ode_adams.hpp:5:
-/Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/stan/math/rev/mat/functor/cvodes_integrator.hpp:126:18: warning: unused variable 'coupled_size' [-Wunused-variable]
-    const size_t coupled_size = cvodes_data.coupled_ode_.size();
-                 ^
-In file included from stan_files/exact.cc:3:
-In file included from stan_files/exact.hpp:25:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/rstaninc.hpp:3:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/stan_fit.hpp:35:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/src/stan/services/diagnose/diagnose.hpp:10:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/src/stan/model/test_gradients.hpp:7:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/src/stan/model/log_prob_grad.hpp:4:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/stan/math/rev/mat.hpp:6:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/stan/math/rev/core.hpp:46:
-/Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/stan/math/rev/core/set_zero_all_adjoints.hpp:14:13: warning: unused function 'set_zero_all_adjoints' [-Wunused-function]
-static void set_zero_all_adjoints() {
-            ^
-In file included from stan_files/exact.cc:3:
-In file included from stan_files/exact.hpp:25:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/rstaninc.hpp:3:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/stan_fit.hpp:35:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/src/stan/services/diagnose/diagnose.hpp:10:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/src/stan/model/test_gradients.hpp:7:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/src/stan/model/log_prob_grad.hpp:4:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/stan/math/rev/mat.hpp:6:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/stan/math/rev/core.hpp:47:
-/Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/stan/math/rev/core/set_zero_all_adjoints_nested.hpp:17:13: warning: 'static' function 'set_zero_all_adjoints_nested' declared in header file should be declared 'static inline' [-Wunneeded-internal-declaration]
-static void set_zero_all_adjoints_nested() {
-            ^
-In file included from stan_files/exact.cc:3:
-In file included from stan_files/exact.hpp:25:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/rstaninc.hpp:3:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/stan_fit.hpp:35:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/src/stan/services/diagnose/diagnose.hpp:10:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/src/stan/model/test_gradients.hpp:7:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/src/stan/model/log_prob_grad.hpp:4:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/stan/math/rev/mat.hpp:12:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/stan/math/prim/mat.hpp:278:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/stan/math/prim/mat/prob/dirichlet_log.hpp:5:
-/Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/stan/math/prim/mat/prob/dirichlet_lpmf.hpp:60:9: warning: unused type alias 'T_partials_vec' [-Wunused-local-typedef]
-  using T_partials_vec = typename Eigen::Matrix<T_partials_return, -1, 1>;
-        ^
-In file included from stan_files/exact.cc:3:
-In file included from stan_files/exact.hpp:25:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/rstaninc.hpp:3:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/stan_fit.hpp:35:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/src/stan/services/diagnose/diagnose.hpp:10:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/src/stan/model/test_gradients.hpp:7:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/src/stan/model/log_prob_grad.hpp:4:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/stan/math/rev/mat.hpp:12:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/stan/math/prim/mat.hpp:328:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/stan/math/prim/mat/prob/poisson_log_glm_log.hpp:5:
-/Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/stan/math/prim/mat/prob/poisson_log_glm_lpmf.hpp:52:9: warning: unused type alias 'T_alpha_val' [-Wunused-local-typedef]
-  using T_alpha_val = typename std::conditional_t<
-        ^
-In file included from stan_files/exact.cc:3:
-In file included from stan_files/exact.hpp:25:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/rstaninc.hpp:3:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/stan_fit.hpp:35:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/src/stan/services/diagnose/diagnose.hpp:10:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/src/stan/model/test_gradients.hpp:7:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/src/stan/model/log_prob_grad.hpp:4:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/stan/math/rev/mat.hpp:51:
-/Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/stan/math/rev/mat/fun/squared_distance.hpp:27:11: warning: unused type alias 'idx_t' [-Wunused-local-typedef]
-    using idx_t = typename index_type<matrix_v>::type;
-          ^
-/Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/stan/math/rev/mat/fun/squared_distance.hpp:64:11: warning: unused type alias 'idx_t' [-Wunused-local-typedef]
-    using idx_t = typename index_type<matrix_d>::type;
-          ^
-In file included from stan_files/exact.cc:3:
-stan_files/exact.hpp:390:30: warning: unused typedef 'fun_return_scalar_t__' [-Wunused-local-typedef]
-    typedef local_scalar_t__ fun_return_scalar_t__;
-                             ^
-stan_files/exact.hpp:714:24: warning: unused typedef 'local_scalar_t__' [-Wunused-local-typedef]
-        typedef double local_scalar_t__;
-                       ^
-In file included from stan_files/lowrank.cc:3:
-In file included from stan_files/lowrank.hpp:25:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/rstaninc.hpp:3:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/stan_fit.hpp:35:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/src/stan/services/diagnose/diagnose.hpp:10:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/src/stan/model/test_gradients.hpp:7:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/src/stan/model/log_prob_grad.hpp:4:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/stan/math/rev/mat.hpp:6:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/stan/math/rev/core.hpp:46:
-/Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/stan/math/rev/core/set_zero_all_adjoints.hpp:14:13: warning: unused function 'set_zero_all_adjoints' [-Wunused-function]
-static void set_zero_all_adjoints() {
-            ^
-In file included from stan_files/lowrank.cc:3:
-In file included from stan_files/lowrank.hpp:25:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/rstaninc.hpp:3:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/stan_fit.hpp:35:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/src/stan/services/diagnose/diagnose.hpp:10:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/src/stan/model/test_gradients.hpp:7:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/src/stan/model/log_prob_grad.hpp:4:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/stan/math/rev/mat.hpp:6:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/stan/math/rev/core.hpp:47:
-/Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/stan/math/rev/core/set_zero_all_adjoints_nested.hpp:17:13: warning: 'static' function 'set_zero_all_adjoints_nested' declared in header file should be declared 'static inline' [-Wunneeded-internal-declaration]
-static void set_zero_all_adjoints_nested() {
-            ^
-In file included from stan_files/lowrank.cc:3:
-In file included from stan_files/lowrank.hpp:25:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/rstaninc.hpp:3:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/stan_fit.hpp:35:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/src/stan/services/diagnose/diagnose.hpp:10:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/src/stan/model/test_gradients.hpp:7:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/src/stan/model/log_prob_grad.hpp:4:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/stan/math/rev/mat.hpp:12:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/stan/math/prim/mat.hpp:278:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/stan/math/prim/mat/prob/dirichlet_log.hpp:5:
-/Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/stan/math/prim/mat/prob/dirichlet_lpmf.hpp:60:9: warning: unused type alias 'T_partials_vec' [-Wunused-local-typedef]
-  using T_partials_vec = typename Eigen::Matrix<T_partials_return, -1, 1>;
-        ^
-In file included from stan_files/lowrank.cc:3:
-In file included from stan_files/lowrank.hpp:25:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/rstaninc.hpp:3:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/stan_fit.hpp:35:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/src/stan/services/diagnose/diagnose.hpp:10:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/src/stan/model/test_gradients.hpp:7:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/src/stan/model/log_prob_grad.hpp:4:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/stan/math/rev/mat.hpp:12:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/stan/math/prim/mat.hpp:328:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/stan/math/prim/mat/prob/poisson_log_glm_log.hpp:5:
-/Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/stan/math/prim/mat/prob/poisson_log_glm_lpmf.hpp:52:9: warning: unused type alias 'T_alpha_val' [-Wunused-local-typedef]
-  using T_alpha_val = typename std::conditional_t<
-        ^
-In file included from stan_files/lowrank.cc:3:
-In file included from stan_files/lowrank.hpp:25:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/rstaninc.hpp:3:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/stan_fit.hpp:35:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/src/stan/services/diagnose/diagnose.hpp:10:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/src/stan/model/test_gradients.hpp:7:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/src/stan/model/log_prob_grad.hpp:4:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/stan/math/rev/mat.hpp:51:
-/Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/stan/math/rev/mat/fun/squared_distance.hpp:27:11: warning: unused type alias 'idx_t' [-Wunused-local-typedef]
-    using idx_t = typename index_type<matrix_v>::type;
-          ^
-/Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/stan/math/rev/mat/fun/squared_distance.hpp:64:11: warning: unused type alias 'idx_t' [-Wunused-local-typedef]
-    using idx_t = typename index_type<matrix_d>::type;
-          ^
-In file included from stan_files/lowrank.cc:3:
-stan_files/lowrank.hpp:485:30: warning: unused typedef 'fun_return_scalar_t__' [-Wunused-local-typedef]
-    typedef local_scalar_t__ fun_return_scalar_t__;
-                             ^
-stan_files/lowrank.hpp:864:24: warning: unused typedef 'local_scalar_t__' [-Wunused-local-typedef]
-        typedef double local_scalar_t__;
-                       ^
-28 warnings generated.
-28 warnings generated.
+make: *** [stan_files/lowrank.cc] Error 1
+make: *** [stan_files/exactsizes.cc] Error 1
 rm stan_files/exact.cc stan_files/exactsizes.cc stan_files/lowranksizes.cc stan_files/lowrank.cc
 ERROR: compilation failed for package ‘DeLorean’
 * removing ‘/Users/max/github/broom/revdep/checks.noindex/DeLorean/new/DeLorean.Rcheck/DeLorean’
@@ -845,16 +267,16 @@ ERROR: compilation failed for package ‘DeLorean’
 "/Library/Frameworks/R.framework/Resources/bin/Rscript" -e "source(file.path('..', 'tools', 'make_cc.R')); make_cc(commandArgs(TRUE))" stan_files/lowrank.stan
 "/Library/Frameworks/R.framework/Resources/bin/Rscript" -e "source(file.path('..', 'tools', 'make_cc.R')); make_cc(commandArgs(TRUE))" stan_files/lowranksizes.stan
 clang++ -mmacosx-version-min=10.13 -std=gnu++14 -I"/Library/Frameworks/R.framework/Resources/include" -DNDEBUG -I"../inst/include" -I"`"/Library/Frameworks/R.framework/Resources/bin/Rscript" --vanilla -e "cat(system.file('include', 'src', package = 'StanHeaders'))"`" -DBOOST_DISABLE_ASSERTS -DEIGEN_NO_DEBUG -DBOOST_MATH_OVERFLOW_ERROR_POLICY=errno_on_error -I'/Users/max/github/broom/revdep/library.noindex/DeLorean/BH/include' -I'/Users/max/github/broom/revdep/library.noindex/DeLorean/Rcpp/include' -I'/Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include' -I'/Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include' -I'/Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include' -I/usr/local/include   -fPIC  -Wall -g -O2  -c init.cpp -o init.o
-Wrote C++ file "stan_files/exactsizes.cc"
 Wrote C++ file "stan_files/exact.cc"
+Wrote C++ file "stan_files/exactsizes.cc"
 Wrote C++ file "stan_files/lowranksizes.cc"
 Wrote C++ file "stan_files/lowrank.cc"
-clang++ -mmacosx-version-min=10.13 -std=gnu++14 -I"/Library/Frameworks/R.framework/Resources/include" -DNDEBUG -I"../inst/include" -I"`"/Library/Frameworks/R.framework/Resources/bin/Rscript" --vanilla -e "cat(system.file('include', 'src', package = 'StanHeaders'))"`" -DBOOST_DISABLE_ASSERTS -DEIGEN_NO_DEBUG -DBOOST_MATH_OVERFLOW_ERROR_POLICY=errno_on_error -I'/Users/max/github/broom/revdep/library.noindex/DeLorean/BH/include' -I'/Users/max/github/broom/revdep/library.noindex/DeLorean/Rcpp/include' -I'/Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include' -I'/Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include' -I'/Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include' -I/usr/local/include   -fPIC  -Wall -g -O2  -c stan_files/exactsizes.cc -o stan_files/exactsizes.o
 clang++ -mmacosx-version-min=10.13 -std=gnu++14 -I"/Library/Frameworks/R.framework/Resources/include" -DNDEBUG -I"../inst/include" -I"`"/Library/Frameworks/R.framework/Resources/bin/Rscript" --vanilla -e "cat(system.file('include', 'src', package = 'StanHeaders'))"`" -DBOOST_DISABLE_ASSERTS -DEIGEN_NO_DEBUG -DBOOST_MATH_OVERFLOW_ERROR_POLICY=errno_on_error -I'/Users/max/github/broom/revdep/library.noindex/DeLorean/BH/include' -I'/Users/max/github/broom/revdep/library.noindex/DeLorean/Rcpp/include' -I'/Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include' -I'/Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include' -I'/Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include' -I/usr/local/include   -fPIC  -Wall -g -O2  -c stan_files/exact.cc -o stan_files/exact.o
+clang++ -mmacosx-version-min=10.13 -std=gnu++14 -I"/Library/Frameworks/R.framework/Resources/include" -DNDEBUG -I"../inst/include" -I"`"/Library/Frameworks/R.framework/Resources/bin/Rscript" --vanilla -e "cat(system.file('include', 'src', package = 'StanHeaders'))"`" -DBOOST_DISABLE_ASSERTS -DEIGEN_NO_DEBUG -DBOOST_MATH_OVERFLOW_ERROR_POLICY=errno_on_error -I'/Users/max/github/broom/revdep/library.noindex/DeLorean/BH/include' -I'/Users/max/github/broom/revdep/library.noindex/DeLorean/Rcpp/include' -I'/Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include' -I'/Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include' -I'/Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include' -I/usr/local/include   -fPIC  -Wall -g -O2  -c stan_files/exactsizes.cc -o stan_files/exactsizes.o
 clang++ -mmacosx-version-min=10.13 -std=gnu++14 -I"/Library/Frameworks/R.framework/Resources/include" -DNDEBUG -I"../inst/include" -I"`"/Library/Frameworks/R.framework/Resources/bin/Rscript" --vanilla -e "cat(system.file('include', 'src', package = 'StanHeaders'))"`" -DBOOST_DISABLE_ASSERTS -DEIGEN_NO_DEBUG -DBOOST_MATH_OVERFLOW_ERROR_POLICY=errno_on_error -I'/Users/max/github/broom/revdep/library.noindex/DeLorean/BH/include' -I'/Users/max/github/broom/revdep/library.noindex/DeLorean/Rcpp/include' -I'/Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include' -I'/Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include' -I'/Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include' -I/usr/local/include   -fPIC  -Wall -g -O2  -c stan_files/lowranksizes.cc -o stan_files/lowranksizes.o
 clang++ -mmacosx-version-min=10.13 -std=gnu++14 -I"/Library/Frameworks/R.framework/Resources/include" -DNDEBUG -I"../inst/include" -I"`"/Library/Frameworks/R.framework/Resources/bin/Rscript" --vanilla -e "cat(system.file('include', 'src', package = 'StanHeaders'))"`" -DBOOST_DISABLE_ASSERTS -DEIGEN_NO_DEBUG -DBOOST_MATH_OVERFLOW_ERROR_POLICY=errno_on_error -I'/Users/max/github/broom/revdep/library.noindex/DeLorean/BH/include' -I'/Users/max/github/broom/revdep/library.noindex/DeLorean/Rcpp/include' -I'/Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include' -I'/Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include' -I'/Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include' -I/usr/local/include   -fPIC  -Wall -g -O2  -c stan_files/lowrank.cc -o stan_files/lowrank.o
-In file included from stan_files/exact.cc:3:
-In file included from stan_files/exact.hpp:25:
+In file included from stan_files/lowranksizes.cc:3:
+In file included from stan_files/lowranksizes.hpp:25:
 In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/rstaninc.hpp:3:
 In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/stan_fit.hpp:11:
 In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/src/stan/version.hpp:4:
@@ -870,8 +292,53 @@ In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rs
 In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/stan_fit.hpp:11:
 In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/src/stan/version.hpp:4:
 In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/stan/math/prim/mat/fun/Eigen.hpp:13:
+In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/Dense:1:
+In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/Core:535:
+/Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/src/Core/util/ReenableStupidWarnings.h:10:30: warning: pragma diagnostic pop could not pop, no matching push [-Wunknown-pragmas]
+    #pragma clang diagnostic pop
+                             ^
+In file included from stan_files/lowranksizes.cc:3:
+In file included from stan_files/lowranksizes.hpp:25:
+In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/rstaninc.hpp:3:
+In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/stan_fit.hpp:11:
+In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/src/stan/version.hpp:4:
+In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/stan/math/prim/mat/fun/Eigen.hpp:13:
 In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/Dense:2:
 In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/LU:47:
+/Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/src/Core/util/ReenableStupidWarnings.h:10:30: warning: pragma diagnostic pop could not pop, no matching push [-Wunknown-pragmas]
+    #pragma clang diagnostic pop
+                             ^
+In file included from stan_files/lowranksizes.cc:3:
+In file included from stan_files/lowranksizes.hpp:25:
+In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/rstaninc.hpp:3:
+In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/stan_fit.hpp:11:
+In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/src/stan/version.hpp:4:
+In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/stan/math/prim/mat/fun/Eigen.hpp:13:
+In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/Dense:3:
+In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/Cholesky:12:
+In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/Jacobi:29:
+/Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/src/Core/util/ReenableStupidWarnings.h:10:30: warning: pragma diagnostic pop could not pop, no matching push [-Wunknown-pragmas]
+    #pragma clang diagnostic pop
+                             ^
+In file included from stan_files/exact.cc:3:
+In file included from stan_files/exact.hpp:25:
+In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/rstaninc.hpp:3:
+In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/stan_fit.hpp:11:
+In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/src/stan/version.hpp:4:
+In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/stan/math/prim/mat/fun/Eigen.hpp:13:
+In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/Dense:2:
+In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/LU:47:
+/Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/src/Core/util/ReenableStupidWarnings.h:10:30: warning: pragma diagnostic pop could not pop, no matching push [-Wunknown-pragmas]
+    #pragma clang diagnostic pop
+                             ^
+In file included from stan_files/exactsizes.cc:3:
+In file included from stan_files/exactsizes.hpp:25:
+In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/rstaninc.hpp:3:
+In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/stan_fit.hpp:11:
+In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/src/stan/version.hpp:4:
+In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/stan/math/prim/mat/fun/Eigen.hpp:13:
+In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/Dense:1:
+In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/Core:535:
 /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/src/Core/util/ReenableStupidWarnings.h:10:30: warning: pragma diagnostic pop could not pop, no matching push [-Wunknown-pragmas]
     #pragma clang diagnostic pop
                              ^
@@ -884,6 +351,29 @@ In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/St
 In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/Dense:3:
 In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/Cholesky:12:
 In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/Jacobi:29:
+/Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/src/Core/util/ReenableStupidWarnings.h:10:30: warning: pragma diagnostic pop could not pop, no matching push [-Wunknown-pragmas]
+    #pragma clang diagnostic pop
+                             ^
+In file included from stan_files/lowranksizes.cc:3:
+In file included from stan_files/lowranksizes.hpp:25:
+In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/rstaninc.hpp:3:
+In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/stan_fit.hpp:11:
+In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/src/stan/version.hpp:4:
+In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/stan/math/prim/mat/fun/Eigen.hpp:13:
+In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/Dense:3:
+In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/Cholesky:43:
+/Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/src/Core/util/ReenableStupidWarnings.h:10:30: warning: pragma diagnostic pop could not pop, no matching push [-Wunknown-pragmas]
+    #pragma clang diagnostic pop
+                             ^
+In file included from stan_files/lowranksizes.cc:3:
+In file included from stan_files/lowranksizes.hpp:25:
+In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/rstaninc.hpp:3:
+In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/stan_fit.hpp:11:
+In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/src/stan/version.hpp:4:
+In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/stan/math/prim/mat/fun/Eigen.hpp:13:
+In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/Dense:4:
+In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/QR:17:
+In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/Householder:27:
 /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/src/Core/util/ReenableStupidWarnings.h:10:30: warning: pragma diagnostic pop could not pop, no matching push [-Wunknown-pragmas]
     #pragma clang diagnostic pop
                              ^
@@ -916,17 +406,6 @@ In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rs
 In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/stan_fit.hpp:11:
 In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/src/stan/version.hpp:4:
 In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/stan/math/prim/mat/fun/Eigen.hpp:13:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/Dense:1:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/Core:535:
-/Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/src/Core/util/ReenableStupidWarnings.h:10:30: warning: pragma diagnostic pop could not pop, no matching push [-Wunknown-pragmas]
-    #pragma clang diagnostic pop
-                             ^
-In file included from stan_files/exactsizes.cc:3:
-In file included from stan_files/exactsizes.hpp:25:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/rstaninc.hpp:3:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/stan_fit.hpp:11:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/src/stan/version.hpp:4:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/stan/math/prim/mat/fun/Eigen.hpp:13:
 In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/Dense:2:
 In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/LU:47:
 /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/src/Core/util/ReenableStupidWarnings.h:10:30: warning: pragma diagnostic pop could not pop, no matching push [-Wunknown-pragmas]
@@ -941,17 +420,6 @@ In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/St
 In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/Dense:3:
 In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/Cholesky:12:
 In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/Jacobi:29:
-/Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/src/Core/util/ReenableStupidWarnings.h:10:30: warning: pragma diagnostic pop could not pop, no matching push [-Wunknown-pragmas]
-    #pragma clang diagnostic pop
-                             ^
-In file included from stan_files/lowranksizes.cc:3:
-In file included from stan_files/lowranksizes.hpp:25:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/rstaninc.hpp:3:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/stan_fit.hpp:11:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/src/stan/version.hpp:4:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/stan/math/prim/mat/fun/Eigen.hpp:13:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/Dense:1:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/Core:535:
 /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/src/Core/util/ReenableStupidWarnings.h:10:30: warning: pragma diagnostic pop could not pop, no matching push [-Wunknown-pragmas]
     #pragma clang diagnostic pop
                              ^
@@ -975,29 +443,6 @@ In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/St
 In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/Dense:4:
 In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/QR:17:
 In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/Householder:27:
-/Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/src/Core/util/ReenableStupidWarnings.h:10:30: warning: pragma diagnostic pop could not pop, no matching push [-Wunknown-pragmas]
-    #pragma clang diagnostic pop
-                             ^
-In file included from stan_files/lowranksizes.cc:3:
-In file included from stan_files/lowranksizes.hpp:25:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/rstaninc.hpp:3:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/stan_fit.hpp:11:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/src/stan/version.hpp:4:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/stan/math/prim/mat/fun/Eigen.hpp:13:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/Dense:2:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/LU:47:
-/Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/src/Core/util/ReenableStupidWarnings.h:10:30: warning: pragma diagnostic pop could not pop, no matching push [-Wunknown-pragmas]
-    #pragma clang diagnostic pop
-                             ^
-In file included from stan_files/lowranksizes.cc:3:
-In file included from stan_files/lowranksizes.hpp:25:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/rstaninc.hpp:3:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/stan_fit.hpp:11:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/src/stan/version.hpp:4:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/stan/math/prim/mat/fun/Eigen.hpp:13:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/Dense:3:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/Cholesky:12:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/Jacobi:29:
 /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/src/Core/util/ReenableStupidWarnings.h:10:30: warning: pragma diagnostic pop could not pop, no matching push [-Wunknown-pragmas]
     #pragma clang diagnostic pop
                              ^
@@ -1009,40 +454,6 @@ In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/St
 In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/stan/math/prim/mat/fun/Eigen.hpp:13:
 In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/Dense:1:
 In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/Core:535:
-/Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/src/Core/util/ReenableStupidWarnings.h:10:30: warning: pragma diagnostic pop could not pop, no matching push [-Wunknown-pragmas]
-    #pragma clang diagnostic pop
-                             ^
-In file included from stan_files/exact.cc:3:
-In file included from stan_files/exact.hpp:25:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/rstaninc.hpp:3:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/stan_fit.hpp:11:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/src/stan/version.hpp:4:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/stan/math/prim/mat/fun/Eigen.hpp:13:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/Dense:5:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/SVD:48:
-/Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/src/Core/util/ReenableStupidWarnings.h:10:30: warning: pragma diagnostic pop could not pop, no matching push [-Wunknown-pragmas]
-    #pragma clang diagnostic pop
-                             ^
-In file included from stan_files/lowranksizes.cc:3:
-In file included from stan_files/lowranksizes.hpp:25:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/rstaninc.hpp:3:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/stan_fit.hpp:11:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/src/stan/version.hpp:4:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/stan/math/prim/mat/fun/Eigen.hpp:13:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/Dense:3:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/Cholesky:43:
-/Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/src/Core/util/ReenableStupidWarnings.h:10:30: warning: pragma diagnostic pop could not pop, no matching push [-Wunknown-pragmas]
-    #pragma clang diagnostic pop
-                             ^
-In file included from stan_files/lowranksizes.cc:3:
-In file included from stan_files/lowranksizes.hpp:25:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/rstaninc.hpp:3:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/stan_fit.hpp:11:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/src/stan/version.hpp:4:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/stan/math/prim/mat/fun/Eigen.hpp:13:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/Dense:4:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/QR:17:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/Householder:27:
 /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/src/Core/util/ReenableStupidWarnings.h:10:30: warning: pragma diagnostic pop could not pop, no matching push [-Wunknown-pragmas]
     #pragma clang diagnostic pop
                              ^
@@ -1080,6 +491,17 @@ In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/Rc
 /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/src/Core/util/ReenableStupidWarnings.h:10:30: warning: pragma diagnostic pop could not pop, no matching push [-Wunknown-pragmas]
     #pragma clang diagnostic pop
                              ^
+In file included from stan_files/lowranksizes.cc:3:
+In file included from stan_files/lowranksizes.hpp:25:
+In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/rstaninc.hpp:3:
+In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/stan_fit.hpp:11:
+In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/src/stan/version.hpp:4:
+In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/stan/math/prim/mat/fun/Eigen.hpp:13:
+In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/Dense:5:
+In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/SVD:48:
+/Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/src/Core/util/ReenableStupidWarnings.h:10:30: warning: pragma diagnostic pop could not pop, no matching push [-Wunknown-pragmas]
+    #pragma clang diagnostic pop
+                             ^
 In file included from stan_files/lowrank.cc:3:
 In file included from stan_files/lowrank.hpp:25:
 In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/rstaninc.hpp:3:
@@ -1092,52 +514,8 @@ In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/Rc
 /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/src/Core/util/ReenableStupidWarnings.h:10:30: warning: pragma diagnostic pop could not pop, no matching push [-Wunknown-pragmas]
     #pragma clang diagnostic pop
                              ^
-In file included from stan_files/exactsizes.cc:3:
-In file included from stan_files/exactsizes.hpp:25:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/rstaninc.hpp:3:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/stan_fit.hpp:11:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/src/stan/version.hpp:4:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/stan/math/prim/mat/fun/Eigen.hpp:13:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/Dense:5:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/SVD:48:
-/Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/src/Core/util/ReenableStupidWarnings.h:10:30: warning: pragma diagnostic pop could not pop, no matching push [-Wunknown-pragmas]
-    #pragma clang diagnostic pop
-                             ^
 In file included from stan_files/exact.cc:3:
 In file included from stan_files/exact.hpp:25:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/rstaninc.hpp:3:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/stan_fit.hpp:11:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/src/stan/version.hpp:4:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/stan/math/prim/mat/fun/Eigen.hpp:13:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/Dense:6:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/Geometry:58:
-/Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/src/Core/util/ReenableStupidWarnings.h:10:30: warning: pragma diagnostic pop could not pop, no matching push [-Wunknown-pragmas]
-    #pragma clang diagnostic pop
-                             ^
-In file included from stan_files/lowranksizes.cc:3:
-In file included from stan_files/lowranksizes.hpp:25:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/rstaninc.hpp:3:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/stan_fit.hpp:11:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/src/stan/version.hpp:4:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/stan/math/prim/mat/fun/Eigen.hpp:13:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/Dense:5:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/SVD:48:
-/Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/src/Core/util/ReenableStupidWarnings.h:10:30: warning: pragma diagnostic pop could not pop, no matching push [-Wunknown-pragmas]
-    #pragma clang diagnostic pop
-                             ^
-In file included from stan_files/exact.cc:3:
-In file included from stan_files/exact.hpp:25:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/rstaninc.hpp:3:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/stan_fit.hpp:11:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/src/stan/version.hpp:4:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/stan/math/prim/mat/fun/Eigen.hpp:13:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/Dense:7:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/Eigenvalues:58:
-/Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/src/Core/util/ReenableStupidWarnings.h:10:30: warning: pragma diagnostic pop could not pop, no matching push [-Wunknown-pragmas]
-    #pragma clang diagnostic pop
-                             ^
-In file included from stan_files/lowrank.cc:3:
-In file included from stan_files/lowrank.hpp:25:
 In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/rstaninc.hpp:3:
 In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/stan_fit.hpp:11:
 In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/src/stan/version.hpp:4:
@@ -1153,6 +531,72 @@ In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rs
 In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/stan_fit.hpp:11:
 In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/src/stan/version.hpp:4:
 In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/stan/math/prim/mat/fun/Eigen.hpp:13:
+In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/Dense:5:
+In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/SVD:48:
+/Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/src/Core/util/ReenableStupidWarnings.h:10:30: warning: pragma diagnostic pop could not pop, no matching push [-Wunknown-pragmas]
+    #pragma clang diagnostic pop
+                             ^
+In file included from stan_files/lowrank.cc:3:
+In file included from stan_files/lowrank.hpp:25:
+In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/rstaninc.hpp:3:
+In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/stan_fit.hpp:11:
+In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/src/stan/version.hpp:4:
+In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/stan/math/prim/mat/fun/Eigen.hpp:13:
+In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/Dense:5:
+In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/SVD:48:
+/Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/src/Core/util/ReenableStupidWarnings.h:10:30: warning: pragma diagnostic pop could not pop, no matching push [-Wunknown-pragmas]
+    #pragma clang diagnostic pop
+                             ^
+In file included from stan_files/lowranksizes.cc:3:
+In file included from stan_files/lowranksizes.hpp:25:
+In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/rstaninc.hpp:3:
+In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/stan_fit.hpp:11:
+In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/src/stan/version.hpp:4:
+In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/stan/math/prim/mat/fun/Eigen.hpp:13:
+In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/Dense:6:
+In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/Geometry:58:
+/Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/src/Core/util/ReenableStupidWarnings.h:10:30: warning: pragma diagnostic pop could not pop, no matching push [-Wunknown-pragmas]
+    #pragma clang diagnostic pop
+                             ^
+In file included from stan_files/exact.cc:3:
+In file included from stan_files/exact.hpp:25:
+In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/rstaninc.hpp:3:
+In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/stan_fit.hpp:11:
+In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/src/stan/version.hpp:4:
+In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/stan/math/prim/mat/fun/Eigen.hpp:13:
+In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/Dense:6:
+In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/Geometry:58:
+/Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/src/Core/util/ReenableStupidWarnings.h:10:30: warning: pragma diagnostic pop could not pop, no matching push [-Wunknown-pragmas]
+    #pragma clang diagnostic pop
+                             ^
+In file included from stan_files/lowranksizes.cc:3:
+In file included from stan_files/lowranksizes.hpp:25:
+In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/rstaninc.hpp:3:
+In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/stan_fit.hpp:11:
+In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/src/stan/version.hpp:4:
+In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/stan/math/prim/mat/fun/Eigen.hpp:13:
+In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/Dense:7:
+In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/Eigenvalues:58:
+/Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/src/Core/util/ReenableStupidWarnings.h:10:30: warning: pragma diagnostic pop could not pop, no matching push [-Wunknown-pragmas]
+    #pragma clang diagnostic pop
+                             ^
+In file included from stan_files/exact.cc:3:
+In file included from stan_files/exact.hpp:25:
+In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/rstaninc.hpp:3:
+In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/stan_fit.hpp:11:
+In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/src/stan/version.hpp:4:
+In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/stan/math/prim/mat/fun/Eigen.hpp:13:
+In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/Dense:7:
+In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/Eigenvalues:58:
+/Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/src/Core/util/ReenableStupidWarnings.h:10:30: warning: pragma diagnostic pop could not pop, no matching push [-Wunknown-pragmas]
+    #pragma clang diagnostic pop
+                             ^
+In file included from stan_files/exactsizes.cc:3:
+In file included from stan_files/exactsizes.hpp:25:
+In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/rstaninc.hpp:3:
+In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/stan_fit.hpp:11:
+In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/src/stan/version.hpp:4:
+In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/stan/math/prim/mat/fun/Eigen.hpp:13:
 In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/Dense:6:
 In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/Geometry:58:
 /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/src/Core/util/ReenableStupidWarnings.h:10:30: warning: pragma diagnostic pop could not pop, no matching push [-Wunknown-pragmas]
@@ -1167,20 +611,9 @@ In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/St
 In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/Dense:7:
 In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/Eigenvalues:58:
 /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/src/Core/util/ReenableStupidWarnings.h:10:30: warning: pragma diagnostic pop could not pop, no matching push [-Wunknown-pragmas]
-    #pragma clang diagnostic pop
-                             ^
-In file included from stan_files/lowranksizes.cc:3:
-In file included from stan_files/lowranksizes.hpp:25:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/rstaninc.hpp:3:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/stan_fit.hpp:11:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/src/stan/version.hpp:4:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/stan/math/prim/mat/fun/Eigen.hpp:13:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/Dense:6:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/Geometry:58:
-/Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/src/Core/util/ReenableStupidWarnings.h:10:30: warning: pragma diagnostic pop could not pop, no matching push [-Wunknown-pragmas]
-    #pragma clang diagnostic pop
-                             ^
 In file included from stan_files/lowrank.cc:3:
+    #pragma clang diagnostic pop
+                             ^
 In file included from stan_files/lowrank.hpp:25:
 In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/rstaninc.hpp:3:
 In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/stan_fit.hpp:11:
@@ -1188,39 +621,6 @@ In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/St
 In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/stan/math/prim/mat/fun/Eigen.hpp:13:
 In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/Dense:6:
 In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/Geometry:58:
-/Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/src/Core/util/ReenableStupidWarnings.h:10:30: warning: pragma diagnostic pop could not pop, no matching push [-Wunknown-pragmas]
-    #pragma clang diagnostic pop
-                             ^
-In file included from stan_files/lowranksizes.cc:3:
-In file included from stan_files/lowranksizes.hpp:25:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/rstaninc.hpp:3:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/stan_fit.hpp:11:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/src/stan/version.hpp:4:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/stan/math/prim/mat/fun/Eigen.hpp:13:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/Dense:7:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/Eigenvalues:58:
-/Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/src/Core/util/ReenableStupidWarnings.h:10:30: warning: pragma diagnostic pop could not pop, no matching push [-Wunknown-pragmas]
-    #pragma clang diagnostic pop
-                             ^
-In file included from stan_files/exact.cc:3:
-In file included from stan_files/exact.hpp:25:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/rstaninc.hpp:3:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/stan_fit.hpp:11:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/src/stan/version.hpp:4:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/stan/math/prim/mat/fun/Eigen.hpp:14:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/Sparse:26:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/SparseCore:66:
-/Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/src/Core/util/ReenableStupidWarnings.h:10:30: warning: pragma diagnostic pop could not pop, no matching push [-Wunknown-pragmas]
-    #pragma clang diagnostic pop
-                             ^
-In file included from stan_files/exact.cc:3:
-In file included from stan_files/exact.hpp:25:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/rstaninc.hpp:3:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/stan_fit.hpp:11:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/src/stan/version.hpp:4:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/stan/math/prim/mat/fun/Eigen.hpp:14:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/Sparse:27:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/OrderingMethods:71:
 /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/src/Core/util/ReenableStupidWarnings.h:10:30: warning: pragma diagnostic pop could not pop, no matching push [-Wunknown-pragmas]
     #pragma clang diagnostic pop
                              ^
@@ -1233,6 +633,63 @@ In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/St
 In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/Dense:7:
 In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/Eigenvalues:58:
 /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/src/Core/util/ReenableStupidWarnings.h:10:30: warning: pragma diagnostic pop could not pop, no matching push [-Wunknown-pragmas]
+    #pragma clang diagnostic pop
+                             ^
+In file included from stan_files/lowranksizes.cc:3:
+In file included from stan_files/lowranksizes.hpp:25:
+In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/rstaninc.hpp:3:
+In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/stan_fit.hpp:11:
+In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/src/stan/version.hpp:4:
+In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/stan/math/prim/mat/fun/Eigen.hpp:14:
+In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/Sparse:26:
+In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/SparseCore:66:
+/Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/src/Core/util/ReenableStupidWarnings.h:10:30: warning: pragma diagnostic pop could not pop, no matching push [-Wunknown-pragmas]
+    #pragma clang diagnostic pop
+                             ^
+In file included from stan_files/lowranksizes.cc:3:
+In file included from stan_files/lowranksizes.hpp:25:
+In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/rstaninc.hpp:3:
+In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/stan_fit.hpp:11:
+In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/src/stan/version.hpp:4:
+In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/stan/math/prim/mat/fun/Eigen.hpp:14:
+In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/Sparse:27:
+In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/OrderingMethods:71:
+/Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/src/Core/util/ReenableStupidWarnings.h:10:30: warning: pragma diagnostic pop could not pop, no matching push [-Wunknown-pragmas]
+    #pragma clang diagnostic pop
+                             ^
+In file included from stan_files/exact.cc:3:
+In file included from stan_files/exact.hpp:25:
+In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/rstaninc.hpp:3:
+In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/stan_fit.hpp:11:
+In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/src/stan/version.hpp:4:
+In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/stan/math/prim/mat/fun/Eigen.hpp:14:
+In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/Sparse:26:
+In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/SparseCore:66:
+/Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/src/Core/util/ReenableStupidWarnings.h:10:30: warning: pragma diagnostic pop could not pop, no matching push [-Wunknown-pragmas]
+    #pragma clang diagnostic pop
+                             ^
+In file included from stan_files/lowranksizes.cc:3:
+In file included from stan_files/lowranksizes.hpp:25:
+In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/rstaninc.hpp:3:
+In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/stan_fit.hpp:11:
+In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/src/stan/version.hpp:4:
+In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/stan/math/prim/mat/fun/Eigen.hpp:14:
+In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/Sparse:29:
+In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/SparseCholesky:43:
+/Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/src/Core/util/ReenableStupidWarnings.h:10:30: warning: pragma diagnostic pop could not pop, no matching push [-Wunknown-pragmas]
+    #pragma clang diagnostic pop
+                             ^
+In file included from stan_files/exact.cc:3:
+In file included from stan_files/exact.hpp:25:
+In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/rstaninc.hpp:3:
+In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/stan_fit.hpp:11:
+In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/src/stan/version.hpp:4:
+In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/stan/math/prim/mat/fun/Eigen.hpp:14:
+In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/Sparse:27:
+In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/OrderingMethods:71:
+/Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/src/Core/util/ReenableStupidWarnings.h:10:30: warning: pragma diagnostic pop could not pop, no matching push [-Wunknown-pragmas]
+    #pragma clang diagnostic pop
+                             ^
 In file included from stan_files/exact.cc:3:
 In file included from stan_files/exact.hpp:25:
 In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/rstaninc.hpp:3:
@@ -1243,8 +700,17 @@ In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/Rc
 In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/SparseCholesky:43:
 /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/src/Core/util/ReenableStupidWarnings.h:10:30: warning: pragma diagnostic pop could not pop, no matching push [-Wunknown-pragmas]
     #pragma clang diagnostic pop
-    #pragma clang diagnostic pop
                              ^
+In file included from stan_files/lowranksizes.cc:3:
+In file included from stan_files/lowranksizes.hpp:25:
+In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/rstaninc.hpp:3:
+In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/stan_fit.hpp:11:
+In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/src/stan/version.hpp:4:
+In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/stan/math/prim/mat/fun/Eigen.hpp:14:
+In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/Sparse:32:
+In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/SparseQR:35:
+/Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/src/Core/util/ReenableStupidWarnings.h:10:30: warning: pragma diagnostic pop could not pop, no matching push [-Wunknown-pragmas]
+    #pragma clang diagnostic pop
                              ^
 In file included from stan_files/exactsizes.cc:3:
 In file included from stan_files/exactsizes.hpp:25:
@@ -1279,19 +745,8 @@ In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/Rc
 /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/src/Core/util/ReenableStupidWarnings.h:10:30: warning: pragma diagnostic pop could not pop, no matching push [-Wunknown-pragmas]
     #pragma clang diagnostic pop
                              ^
-In file included from stan_files/exactsizes.cc:3:
-In file included from stan_files/exactsizes.hpp:25:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/rstaninc.hpp:3:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/stan_fit.hpp:11:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/src/stan/version.hpp:4:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/stan/math/prim/mat/fun/Eigen.hpp:14:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/Sparse:29:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/SparseCholesky:43:
-/Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/src/Core/util/ReenableStupidWarnings.h:10:30: warning: pragma diagnostic pop could not pop, no matching push [-Wunknown-pragmas]
-    #pragma clang diagnostic pop
-                             ^
-In file included from stan_files/exact.cc:3:
-In file included from stan_files/exact.hpp:25:
+In file included from stan_files/lowranksizes.cc:3:
+In file included from stan_files/lowranksizes.hpp:25:
 In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/rstaninc.hpp:3:
 In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/stan_fit.hpp:11:
 In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/src/stan/version.hpp:4:
@@ -1301,41 +756,8 @@ In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/Rc
 /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/src/Core/util/ReenableStupidWarnings.h:10:30: warning: pragma diagnostic pop could not pop, no matching push [-Wunknown-pragmas]
     #pragma clang diagnostic pop
                              ^
-In file included from stan_files/lowranksizes.cc:3:
-In file included from stan_files/lowranksizes.hpp:25:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/rstaninc.hpp:3:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/stan_fit.hpp:11:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/src/stan/version.hpp:4:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/stan/math/prim/mat/fun/Eigen.hpp:14:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/Sparse:26:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/SparseCore:66:
-/Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/src/Core/util/ReenableStupidWarnings.h:10:30: warning: pragma diagnostic pop could not pop, no matching push [-Wunknown-pragmas]
-    #pragma clang diagnostic pop
-                             ^
-In file included from stan_files/lowranksizes.cc:3:
-In file included from stan_files/lowranksizes.hpp:25:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/rstaninc.hpp:3:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/stan_fit.hpp:11:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/src/stan/version.hpp:4:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/stan/math/prim/mat/fun/Eigen.hpp:14:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/Sparse:27:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/OrderingMethods:71:
-/Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/src/Core/util/ReenableStupidWarnings.h:10:30: warning: pragma diagnostic pop could not pop, no matching push [-Wunknown-pragmas]
-    #pragma clang diagnostic pop
-                             ^
 In file included from stan_files/exactsizes.cc:3:
 In file included from stan_files/exactsizes.hpp:25:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/rstaninc.hpp:3:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/stan_fit.hpp:11:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/src/stan/version.hpp:4:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/stan/math/prim/mat/fun/Eigen.hpp:14:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/Sparse:32:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/SparseQR:35:
-/Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/src/Core/util/ReenableStupidWarnings.h:10:30: warning: pragma diagnostic pop could not pop, no matching push [-Wunknown-pragmas]
-    #pragma clang diagnostic pop
-                             ^
-In file included from stan_files/lowranksizes.cc:3:
-In file included from stan_files/lowranksizes.hpp:25:
 In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/rstaninc.hpp:3:
 In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/stan_fit.hpp:11:
 In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/src/stan/version.hpp:4:
@@ -1356,8 +778,8 @@ In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/Rc
 /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/src/Core/util/ReenableStupidWarnings.h:10:30: warning: pragma diagnostic pop could not pop, no matching push [-Wunknown-pragmas]
     #pragma clang diagnostic pop
                              ^
-In file included from stan_files/exactsizes.cc:3:
-In file included from stan_files/exactsizes.hpp:25:
+In file included from stan_files/exact.cc:3:
+In file included from stan_files/exact.hpp:25:
 In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/rstaninc.hpp:3:
 In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/stan_fit.hpp:11:
 In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/src/stan/version.hpp:4:
@@ -1389,8 +811,8 @@ In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/Rc
 /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/src/Core/util/ReenableStupidWarnings.h:10:30: warning: pragma diagnostic pop could not pop, no matching push [-Wunknown-pragmas]
     #pragma clang diagnostic pop
                              ^
-In file included from stan_files/lowranksizes.cc:3:
-In file included from stan_files/lowranksizes.hpp:25:
+In file included from stan_files/exactsizes.cc:3:
+In file included from stan_files/exactsizes.hpp:25:
 In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/rstaninc.hpp:3:
 In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/stan_fit.hpp:11:
 In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/src/stan/version.hpp:4:
@@ -1400,8 +822,8 @@ In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/Rc
 /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/src/Core/util/ReenableStupidWarnings.h:10:30: warning: pragma diagnostic pop could not pop, no matching push [-Wunknown-pragmas]
     #pragma clang diagnostic pop
                              ^
-In file included from stan_files/lowranksizes.cc:3:
-In file included from stan_files/lowranksizes.hpp:25:
+In file included from stan_files/exactsizes.cc:3:
+In file included from stan_files/exactsizes.hpp:25:
 In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/rstaninc.hpp:3:
 In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/stan_fit.hpp:11:
 In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/src/stan/version.hpp:4:
@@ -1433,8 +855,8 @@ In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/Rc
 /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/src/Core/util/ReenableStupidWarnings.h:10:30: warning: pragma diagnostic pop could not pop, no matching push [-Wunknown-pragmas]
     #pragma clang diagnostic pop
                              ^
-In file included from stan_files/exactsizes.cc:3:
-In file included from stan_files/exactsizes.hpp:25:
+In file included from stan_files/lowranksizes.cc:3:
+In file included from stan_files/lowranksizes.hpp:25:
 In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/rstaninc.hpp:3:
 In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/stan_fit.hpp:22:
 In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/RcppEigen.h:25:
@@ -1445,16 +867,6 @@ In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/Rc
                              ^
 In file included from stan_files/exact.cc:3:
 In file included from stan_files/exact.hpp:25:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/rstaninc.hpp:3:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/stan_fit.hpp:22:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/RcppEigen.h:25:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/RcppEigenForward.h:32:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/CholmodSupport:45:
-/Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/src/Core/util/ReenableStupidWarnings.h:10:30: warning: pragma diagnostic pop could not pop, no matching push [-Wunknown-pragmas]
-    #pragma clang diagnostic pop
-                             ^
-In file included from stan_files/lowranksizes.cc:3:
-In file included from stan_files/lowranksizes.hpp:25:
 In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/rstaninc.hpp:3:
 In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/stan_fit.hpp:22:
 In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/RcppEigen.h:25:
@@ -1473,8 +885,28 @@ In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/Rc
 /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/src/Core/util/ReenableStupidWarnings.h:10:30: warning: pragma diagnostic pop could not pop, no matching push [-Wunknown-pragmas]
     #pragma clang diagnostic pop
                              ^
+In file included from stan_files/exactsizes.cc:3:
+In file included from stan_files/exactsizes.hpp:25:
+In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/rstaninc.hpp:3:
+In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/stan_fit.hpp:22:
+In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/RcppEigen.h:25:
+In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/RcppEigenForward.h:32:
+In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/CholmodSupport:45:
+/Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/Eigen/src/Core/util/ReenableStupidWarnings.h:10:30: warning: pragma diagnostic pop could not pop, no matching push [-Wunknown-pragmas]
+    #pragma clang diagnostic pop
+                             ^
 In file included from stan_files/exact.cc:3:
 In file included from stan_files/exact.hpp:25:
+In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/rstaninc.hpp:3:
+In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/stan_fit.hpp:22:
+In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/RcppEigen.h:25:
+In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/RcppEigenForward.h:35:
+In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/unsupported/Eigen/KroneckerProduct:34:
+/Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/unsupported/Eigen/../../Eigen/src/Core/util/ReenableStupidWarnings.h:10:30: warning: pragma diagnostic pop could not pop, no matching push [-Wunknown-pragmas]
+    #pragma clang diagnostic pop
+                             ^
+In file included from stan_files/lowranksizes.cc:3:
+In file included from stan_files/lowranksizes.hpp:25:
 In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/rstaninc.hpp:3:
 In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/stan_fit.hpp:22:
 In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/RcppEigen.h:25:
@@ -1503,28 +935,8 @@ In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/Rc
 /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/unsupported/Eigen/../../Eigen/src/Core/util/ReenableStupidWarnings.h:10:30: warning: pragma diagnostic pop could not pop, no matching push [-Wunknown-pragmas]
     #pragma clang diagnostic pop
                              ^
-In file included from stan_files/lowranksizes.cc:3:
-In file included from stan_files/lowranksizes.hpp:25:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/rstaninc.hpp:3:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/stan_fit.hpp:22:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/RcppEigen.h:25:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/RcppEigenForward.h:35:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/unsupported/Eigen/KroneckerProduct:34:
-/Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/unsupported/Eigen/../../Eigen/src/Core/util/ReenableStupidWarnings.h:10:30: warning: pragma diagnostic pop could not pop, no matching push [-Wunknown-pragmas]
-    #pragma clang diagnostic pop
-                             ^
 In file included from stan_files/exact.cc:3:
 In file included from stan_files/exact.hpp:25:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/rstaninc.hpp:3:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/stan_fit.hpp:22:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/RcppEigen.h:25:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/RcppEigenForward.h:39:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/unsupported/Eigen/Polynomials:135:
-/Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/unsupported/Eigen/../../Eigen/src/Core/util/ReenableStupidWarnings.h:10:30: warning: pragma diagnostic pop could not pop, no matching push [-Wunknown-pragmas]
-    #pragma clang diagnostic pop
-                             ^
-In file included from stan_files/exactsizes.cc:3:
-In file included from stan_files/exactsizes.hpp:25:
 In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/rstaninc.hpp:3:
 In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/stan_fit.hpp:22:
 In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/RcppEigen.h:25:
@@ -1543,16 +955,6 @@ In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/Rc
 /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/unsupported/Eigen/../../Eigen/src/Core/util/ReenableStupidWarnings.h:10:30: warning: pragma diagnostic pop could not pop, no matching push [-Wunknown-pragmas]
     #pragma clang diagnostic pop
                              ^
-In file included from stan_files/exactsizes.cc:3:
-In file included from stan_files/exactsizes.hpp:25:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/rstaninc.hpp:3:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/stan_fit.hpp:22:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/RcppEigen.h:25:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/RcppEigenForward.h:40:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/unsupported/Eigen/SparseExtra:51:
-/Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/unsupported/Eigen/../../Eigen/src/Core/util/ReenableStupidWarnings.h:10:30: warning: pragma diagnostic pop could not pop, no matching push [-Wunknown-pragmas]
-    #pragma clang diagnostic pop
-                             ^
 In file included from stan_files/exact.cc:3:
 In file included from stan_files/exact.hpp:25:
 In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/rstaninc.hpp:3:
@@ -1560,6 +962,26 @@ In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rs
 In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/RcppEigen.h:25:
 In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/RcppEigenForward.h:40:
 In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/unsupported/Eigen/SparseExtra:51:
+/Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/unsupported/Eigen/../../Eigen/src/Core/util/ReenableStupidWarnings.h:10:30: warning: pragma diagnostic pop could not pop, no matching push [-Wunknown-pragmas]
+In file included from stan_files/lowranksizes.cc:3:
+In file included from stan_files/lowranksizes.hpp:25:
+In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/rstaninc.hpp:3:
+In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/stan_fit.hpp:22:
+In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/RcppEigen.h:25:
+In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/RcppEigenForward.h:40:
+In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/unsupported/Eigen/SparseExtra:51:
+/Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/unsupported/Eigen/../../Eigen/src/Core/util/ReenableStupidWarnings.h:10:30    #pragma clang diagnostic pop
+                             ^
+: warning: pragma diagnostic pop could not pop, no matching push [-Wunknown-pragmas]
+    #pragma clang diagnostic pop
+                             ^
+In file included from stan_files/exactsizes.cc:3:
+In file included from stan_files/exactsizes.hpp:25:
+In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/rstaninc.hpp:3:
+In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/stan_fit.hpp:22:
+In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/RcppEigen.h:25:
+In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/RcppEigenForward.h:39:
+In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/unsupported/Eigen/Polynomials:135:
 /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/unsupported/Eigen/../../Eigen/src/Core/util/ReenableStupidWarnings.h:10:30: warning: pragma diagnostic pop could not pop, no matching push [-Wunknown-pragmas]
     #pragma clang diagnostic pop
                              ^
@@ -1573,16 +995,6 @@ In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/Rc
 /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/unsupported/Eigen/../../Eigen/src/Core/util/ReenableStupidWarnings.h:10:30: warning: pragma diagnostic pop could not pop, no matching push [-Wunknown-pragmas]
     #pragma clang diagnostic pop
                              ^
-In file included from stan_files/lowranksizes.cc:3:
-In file included from stan_files/lowranksizes.hpp:25:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/rstaninc.hpp:3:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/stan_fit.hpp:22:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/RcppEigen.h:25:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/RcppEigenForward.h:40:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/unsupported/Eigen/SparseExtra:51:
-/Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/unsupported/Eigen/../../Eigen/src/Core/util/ReenableStupidWarnings.h:10:30: warning: pragma diagnostic pop could not pop, no matching push [-Wunknown-pragmas]
-    #pragma clang diagnostic pop
-                             ^
 In file included from stan_files/lowrank.cc:3:
 In file included from stan_files/lowrank.hpp:25:
 In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/rstaninc.hpp:3:
@@ -1593,20 +1005,18 @@ In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/Rc
 /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/unsupported/Eigen/../../Eigen/src/Core/util/ReenableStupidWarnings.h:10:30: warning: pragma diagnostic pop could not pop, no matching push [-Wunknown-pragmas]
     #pragma clang diagnostic pop
                              ^
-In file included from stan_files/exact.cc:3:
-In file included from stan_files/exact.hpp:25:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/rstaninc.hpp:3:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/stan_fit.hpp:35:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/src/stan/services/diagnose/diagnose.hpp:10:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/src/stan/model/test_gradients.hpp:7:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/src/stan/model/log_prob_grad.hpp:4:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/stan/math/rev/mat.hpp:12:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/stan/math/prim/mat.hpp:283:
-/Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/stan/math/prim/mat/prob/gaussian_dlm_obs_rng.hpp:138:7: warning: unused variable 'n' [-Wunused-variable]
-  int n = G.rows();  // number of states
-      ^
 In file included from stan_files/exactsizes.cc:3:
 In file included from stan_files/exactsizes.hpp:25:
+In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/rstaninc.hpp:3:
+In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/stan_fit.hpp:22:
+In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/RcppEigen.h:25:
+In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/RcppEigenForward.h:40:
+In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/unsupported/Eigen/SparseExtra:51:
+/Users/max/github/broom/revdep/library.noindex/DeLorean/RcppEigen/include/unsupported/Eigen/../../Eigen/src/Core/util/ReenableStupidWarnings.h:10:30: warning: pragma diagnostic pop could not pop, no matching push [-Wunknown-pragmas]
+    #pragma clang diagnostic pop
+                             ^
+In file included from stan_files/exact.cc:3:
+In file included from stan_files/exact.hpp:25:
 In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/rstaninc.hpp:3:
 In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/stan_fit.hpp:35:
 In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/src/stan/services/diagnose/diagnose.hpp:10:
@@ -1648,11 +1058,11 @@ In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rs
 In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/src/stan/services/diagnose/diagnose.hpp:10:
 In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/src/stan/model/test_gradients.hpp:7:
 In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/src/stan/model/log_prob_grad.hpp:4:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/stan/math/rev/mat.hpp:17:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/stan/math/rev/mat/fun/columns_dot_self.hpp:8:
-/Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/stan/math/rev/mat/fun/dot_self.hpp:38:41: warning: all paths through this function will call itself [-Winfinite-recursion]
-  inline static double square(double x) { return square(x); }
-                                        ^
+In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/stan/math/rev/mat.hpp:12:
+In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/stan/math/prim/mat.hpp:283:
+/Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/stan/math/prim/mat/prob/gaussian_dlm_obs_rng.hpp:138:7: warning: unused variable 'n' [-Wunused-variable]
+  int n = G.rows();  // number of states
+      ^
 In file included from stan_files/exact.cc:3:
 In file included from stan_files/exact.hpp:25:
 In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/rstaninc.hpp:3:
@@ -1677,6 +1087,18 @@ In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/St
 /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/stan/math/rev/mat/fun/dot_self.hpp:38:41: warning: all paths through this function will call itself [-Winfinite-recursion]
   inline static double square(double x) { return square(x); }
                                         ^
+In file included from stan_files/exactsizes.cc:3:
+In file included from stan_files/exactsizes.hpp:25:
+In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/rstaninc.hpp:3:
+In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/stan_fit.hpp:35:
+In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/src/stan/services/diagnose/diagnose.hpp:10:
+In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/src/stan/model/test_gradients.hpp:7:
+In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/src/stan/model/log_prob_grad.hpp:4:
+In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/stan/math/rev/mat.hpp:17:
+In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/stan/math/rev/mat/fun/columns_dot_self.hpp:8:
+/Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/stan/math/rev/mat/fun/dot_self.hpp:38:41: warning: all paths through this function will call itself [-Winfinite-recursion]
+  inline static double square(double x) { return square(x); }
+                                        ^
 In file included from stan_files/lowranksizes.cc:3:
 In file included from stan_files/lowranksizes.hpp:25:
 In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/rstaninc.hpp:3:
@@ -1689,8 +1111,8 @@ In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/St
 /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/stan/math/rev/mat/fun/dot_self.hpp:38:41: warning: all paths through this function will call itself [-Winfinite-recursion]
   inline static double square(double x) { return square(x); }
                                         ^
-In file included from stan_files/exactsizes.cc:3:
-In file included from stan_files/exactsizes.hpp:25:
+In file included from stan_files/exact.cc:3:
+In file included from stan_files/exact.hpp:25:
 In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/rstaninc.hpp:3:
 In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/stan_fit.hpp:35:
 In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/src/stan/services/diagnose/diagnose.hpp:10:
@@ -1710,8 +1132,11 @@ In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/St
 In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/src/stan/model/log_prob_grad.hpp:4:
 In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/stan/math/rev/mat.hpp:70:
 In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/stan/math/rev/mat/functor/integrate_ode_adams.hpp:5:
-/Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/stan/math/rev/mat/functor/cvodes_integrator.hpp:In file included from 126stan_files/exact.cc::3:
-In file included from stan_files/exact.hpp:25:
+/Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/stan/math/rev/mat/functor/cvodes_integrator.hpp:126:18: warning: unused variable 'coupled_size' [-Wunused-variable]
+    const size_t coupled_size = cvodes_data.coupled_ode_.size();
+                 ^
+In file included from stan_files/exactsizes.cc:3:
+In file included from stan_files/exactsizes.hpp:25:
 In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/rstaninc.hpp:3:
 In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/stan_fit.hpp:35:
 In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/src/stan/services/diagnose/diagnose.hpp:10:
@@ -1720,9 +1145,6 @@ In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/St
 In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/stan/math/rev/mat.hpp:70:
 In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/stan/math/rev/mat/functor/integrate_ode_adams.hpp:5:
 /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/stan/math/rev/mat/functor/cvodes_integrator.hpp:126:18: warning: unused variable 'coupled_size' [-Wunused-variable]
-18: warning: unused variable 'coupled_size' [-Wunused-variable]
-    const size_t coupled_size = cvodes_data.coupled_ode_.size();
-                 ^
     const size_t coupled_size = cvodes_data.coupled_ode_.size();
                  ^
 In file included from stan_files/lowranksizes.cc:3:
@@ -1879,77 +1301,6 @@ stan_files/exactsizes.hpp:390:30: warning: unused typedef 'fun_return_scalar_t__
 stan_files/exactsizes.hpp:734:24: warning: unused typedef 'local_scalar_t__' [-Wunused-local-typedef]
         typedef double local_scalar_t__;
                        ^
-In file included from stan_files/lowranksizes.cc:3:
-In file included from stan_files/lowranksizes.hpp:25:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/rstaninc.hpp:3:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/stan_fit.hpp:35:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/src/stan/services/diagnose/diagnose.hpp:10:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/src/stan/model/test_gradients.hpp:7:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/src/stan/model/log_prob_grad.hpp:4:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/stan/math/rev/mat.hpp:6:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/stan/math/rev/core.hpp:46:
-/Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/stan/math/rev/core/set_zero_all_adjoints.hpp:14:13: warning: unused function 'set_zero_all_adjoints' [-Wunused-function]
-static void set_zero_all_adjoints() {
-            ^
-In file included from stan_files/lowranksizes.cc:3:
-In file included from stan_files/lowranksizes.hpp:25:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/rstaninc.hpp:3:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/stan_fit.hpp:35:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/src/stan/services/diagnose/diagnose.hpp:10:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/src/stan/model/test_gradients.hpp:7:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/src/stan/model/log_prob_grad.hpp:4:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/stan/math/rev/mat.hpp:6:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/stan/math/rev/core.hpp:47:
-/Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/stan/math/rev/core/set_zero_all_adjoints_nested.hpp:17:13: warning: 'static' function 'set_zero_all_adjoints_nested' declared in header file should be declared 'static inline' [-Wunneeded-internal-declaration]
-static void set_zero_all_adjoints_nested() {
-            ^
-In file included from stan_files/lowranksizes.cc:3:
-In file included from stan_files/lowranksizes.hpp:25:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/rstaninc.hpp:3:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/stan_fit.hpp:35:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/src/stan/services/diagnose/diagnose.hpp:10:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/src/stan/model/test_gradients.hpp:7:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/src/stan/model/log_prob_grad.hpp:4:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/stan/math/rev/mat.hpp:12:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/stan/math/prim/mat.hpp:278:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/stan/math/prim/mat/prob/dirichlet_log.hpp:5:
-/Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/stan/math/prim/mat/prob/dirichlet_lpmf.hpp:60:9: warning: unused type alias 'T_partials_vec' [-Wunused-local-typedef]
-  using T_partials_vec = typename Eigen::Matrix<T_partials_return, -1, 1>;
-        ^
-In file included from stan_files/lowranksizes.cc:3:
-In file included from stan_files/lowranksizes.hpp:25:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/rstaninc.hpp:3:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/stan_fit.hpp:35:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/src/stan/services/diagnose/diagnose.hpp:10:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/src/stan/model/test_gradients.hpp:7:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/src/stan/model/log_prob_grad.hpp:4:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/stan/math/rev/mat.hpp:12:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/stan/math/prim/mat.hpp:328:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/stan/math/prim/mat/prob/poisson_log_glm_log.hpp:5:
-/Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/stan/math/prim/mat/prob/poisson_log_glm_lpmf.hpp:52:9: warning: unused type alias 'T_alpha_val' [-Wunused-local-typedef]
-  using T_alpha_val = typename std::conditional_t<
-        ^
-In file included from stan_files/lowranksizes.cc:3:
-In file included from stan_files/lowranksizes.hpp:25:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/rstaninc.hpp:3:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/stan_fit.hpp:35:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/src/stan/services/diagnose/diagnose.hpp:10:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/src/stan/model/test_gradients.hpp:7:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/src/stan/model/log_prob_grad.hpp:4:
-In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/stan/math/rev/mat.hpp:51:
-/Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/stan/math/rev/mat/fun/squared_distance.hpp:27:11: warning: unused type alias 'idx_t' [-Wunused-local-typedef]
-    using idx_t = typename index_type<matrix_v>::type;
-          ^
-/Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/stan/math/rev/mat/fun/squared_distance.hpp:64:11: warning: unused type alias 'idx_t' [-Wunused-local-typedef]
-    using idx_t = typename index_type<matrix_d>::type;
-          ^
-In file included from stan_files/lowranksizes.cc:3:
-stan_files/lowranksizes.hpp:485:30: warning: unused typedef 'fun_return_scalar_t__' [-Wunused-local-typedef]
-    typedef local_scalar_t__ fun_return_scalar_t__;
-                             ^
-stan_files/lowranksizes.hpp:901:24: warning: unused typedef 'local_scalar_t__' [-Wunused-local-typedef]
-        typedef double local_scalar_t__;
-                       ^
 In file included from stan_files/lowrank.cc:3:
 In file included from stan_files/lowrank.hpp:25:
 In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/rstaninc.hpp:3:
@@ -2019,6 +1370,77 @@ stan_files/lowrank.hpp:485:30: warning: unused typedef 'fun_return_scalar_t__' [
     typedef local_scalar_t__ fun_return_scalar_t__;
                              ^
 stan_files/lowrank.hpp:864:24: warning: unused typedef 'local_scalar_t__' [-Wunused-local-typedef]
+        typedef double local_scalar_t__;
+                       ^
+In file included from stan_files/lowranksizes.cc:3:
+In file included from stan_files/lowranksizes.hpp:25:
+In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/rstaninc.hpp:3:
+In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/stan_fit.hpp:35:
+In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/src/stan/services/diagnose/diagnose.hpp:10:
+In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/src/stan/model/test_gradients.hpp:7:
+In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/src/stan/model/log_prob_grad.hpp:4:
+In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/stan/math/rev/mat.hpp:6:
+In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/stan/math/rev/core.hpp:46:
+/Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/stan/math/rev/core/set_zero_all_adjoints.hpp:14:13: warning: unused function 'set_zero_all_adjoints' [-Wunused-function]
+static void set_zero_all_adjoints() {
+            ^
+In file included from stan_files/lowranksizes.cc:3:
+In file included from stan_files/lowranksizes.hpp:25:
+In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/rstaninc.hpp:3:
+In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/stan_fit.hpp:35:
+In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/src/stan/services/diagnose/diagnose.hpp:10:
+In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/src/stan/model/test_gradients.hpp:7:
+In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/src/stan/model/log_prob_grad.hpp:4:
+In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/stan/math/rev/mat.hpp:6:
+In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/stan/math/rev/core.hpp:47:
+/Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/stan/math/rev/core/set_zero_all_adjoints_nested.hpp:17:13: warning: 'static' function 'set_zero_all_adjoints_nested' declared in header file should be declared 'static inline' [-Wunneeded-internal-declaration]
+static void set_zero_all_adjoints_nested() {
+            ^
+In file included from stan_files/lowranksizes.cc:3:
+In file included from stan_files/lowranksizes.hpp:25:
+In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/rstaninc.hpp:3:
+In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/stan_fit.hpp:35:
+In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/src/stan/services/diagnose/diagnose.hpp:10:
+In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/src/stan/model/test_gradients.hpp:7:
+In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/src/stan/model/log_prob_grad.hpp:4:
+In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/stan/math/rev/mat.hpp:12:
+In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/stan/math/prim/mat.hpp:278:
+In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/stan/math/prim/mat/prob/dirichlet_log.hpp:5:
+/Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/stan/math/prim/mat/prob/dirichlet_lpmf.hpp:60:9: warning: unused type alias 'T_partials_vec' [-Wunused-local-typedef]
+  using T_partials_vec = typename Eigen::Matrix<T_partials_return, -1, 1>;
+        ^
+In file included from stan_files/lowranksizes.cc:3:
+In file included from stan_files/lowranksizes.hpp:25:
+In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/rstaninc.hpp:3:
+In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/stan_fit.hpp:35:
+In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/src/stan/services/diagnose/diagnose.hpp:10:
+In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/src/stan/model/test_gradients.hpp:7:
+In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/src/stan/model/log_prob_grad.hpp:4:
+In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/stan/math/rev/mat.hpp:12:
+In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/stan/math/prim/mat.hpp:328:
+In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/stan/math/prim/mat/prob/poisson_log_glm_log.hpp:5:
+/Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/stan/math/prim/mat/prob/poisson_log_glm_lpmf.hpp:52:9: warning: unused type alias 'T_alpha_val' [-Wunused-local-typedef]
+  using T_alpha_val = typename std::conditional_t<
+        ^
+In file included from stan_files/lowranksizes.cc:3:
+In file included from stan_files/lowranksizes.hpp:25:
+In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/rstaninc.hpp:3:
+In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/rstan/include/rstan/stan_fit.hpp:35:
+In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/src/stan/services/diagnose/diagnose.hpp:10:
+In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/src/stan/model/test_gradients.hpp:7:
+In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/src/stan/model/log_prob_grad.hpp:4:
+In file included from /Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/stan/math/rev/mat.hpp:51:
+/Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/stan/math/rev/mat/fun/squared_distance.hpp:27:11: warning: unused type alias 'idx_t' [-Wunused-local-typedef]
+    using idx_t = typename index_type<matrix_v>::type;
+          ^
+/Users/max/github/broom/revdep/library.noindex/DeLorean/StanHeaders/include/stan/math/rev/mat/fun/squared_distance.hpp:64:11: warning: unused type alias 'idx_t' [-Wunused-local-typedef]
+    using idx_t = typename index_type<matrix_d>::type;
+          ^
+In file included from stan_files/lowranksizes.cc:3:
+stan_files/lowranksizes.hpp:485:30: warning: unused typedef 'fun_return_scalar_t__' [-Wunused-local-typedef]
+    typedef local_scalar_t__ fun_return_scalar_t__;
+                             ^
+stan_files/lowranksizes.hpp:901:24: warning: unused typedef 'local_scalar_t__' [-Wunused-local-typedef]
         typedef double local_scalar_t__;
                        ^
 28 warnings generated.
@@ -2125,12 +1547,12 @@ Run `revdep_details(,"eyetrackingR")` for more info
     Running the tests in ‘tests/testthat.R’ failed.
     Last 13 lines of output:
       
-      [31m──[39m [31m2. Error: (unknown) (@test_cluster_analysis.R#88) [39m [31m──────────────────────────[39m
+      ── 2. Error: (unknown) (@test_cluster_analysis.R#88)  ──────────────────────────
       No tidy method for objects of class lmerMod
-      [1mBacktrace:[22m
-      [90m  1. [39meyetrackingR::make_time_cluster_data(...)
-      [90m 16. [39meyetrackingR:::the_test(...)
-      [90m 18. [39mbroom:::tidy.default(res_err_warn$res, effects = "fixed")
+      Backtrace:
+        1. eyetrackingR::make_time_cluster_data(...)
+       16. eyetrackingR:::the_test(...)
+       18. broom:::tidy.default(res_err_warn$res, effects = "fixed")
       
       ══ testthat results  ═══════════════════════════════════════════════════════════
       [ OK: 27 | SKIPPED: 0 | WARNINGS: 4 | FAILED: 2 ]
@@ -2208,7 +1630,7 @@ Run `revdep_details(,"ggasym")` for more info
       > library(ggasym)
       > 
       > test_check("ggasym")
-      [31m──[39m [31m1. Failure: stats asymmetrization works (@test-asymmetrise_stats.R#13) [39m [31m─────[39m
+      ── 1. Failure: stats asymmetrization works (@test-asymmetrise_stats.R#13)  ─────
       `prepare_data(grps)` did not throw an error.
       
       ══ testthat results  ═══════════════════════════════════════════════════════════
@@ -2268,15 +1690,15 @@ Run `revdep_details(,"konfound")` for more info
 *   checking examples ... ERROR
     ```
     ...
-    [22mTo sustain an inference, 80.978% of the estimate would have to be due to bias. This is based on a threshold of 0.013 for statistical significance (alpha = 0.05).
+    To sustain an inference, 80.978% of the estimate would have to be due to bias. This is based on a threshold of 0.013 for statistical significance (alpha = 0.05).
     To sustain an inference, 17334 of the cases with 0 effect would have to be replaced with cases at the threshold of inference.
     See Frank et al. (2013) for a description of the method
-    [4mCitation:[24m Frank, K.A., Maroulis, S., Duong, M., and Kelcey, B. 2013. What would it take to change an inference? Using Rubin's causal model to interpret the robustness of causal inferences. [3mEducation, Evaluation and Policy Analysis, 35[23m 437-460.
-    [1mImpact Threshold for a Confounding Variable:
-    [22mThe minimum impact to invalidate an inference for a null hypothesis of 0 effect is based on a correlation of 5.535 with the outcome and at 5.535 with the predictor of interest (conditioning on observed covariates) based on a threshold of 1.003 for statistical significance (alpha = 0.05).
+    Citation: Frank, K.A., Maroulis, S., Duong, M., and Kelcey, B. 2013. What would it take to change an inference? Using Rubin's causal model to interpret the robustness of causal inferences. Education, Evaluation and Policy Analysis, 35 437-460.
+    Impact Threshold for a Confounding Variable:
+    The minimum impact to invalidate an inference for a null hypothesis of 0 effect is based on a correlation of 5.535 with the outcome and at 5.535 with the predictor of interest (conditioning on observed covariates) based on a threshold of 1.003 for statistical significance (alpha = 0.05).
     Correspondingly the impact of an omitted variable (as defined in Frank 2000) must be 5.535 X 5.535 = 30.636 to invalidate an inference for a null hypothesis of 0 effect.
     See Frank (2000) for a description of the method
-    [4mCitation:[24m Frank, K. 2000. Impact of a confounding variable on the inference of a regression coefficient. [3mSociological Methods and Research, 29[23m (2), 147-194
+    Citation: Frank, K. 2000. Impact of a confounding variable on the inference of a regression coefficient. Sociological Methods and Research, 29 (2), 147-194
     NULL
     > 
     > # using lme4 for mixed effects (or multi-level) models
@@ -2297,12 +1719,12 @@ Run `revdep_details(,"konfound")` for more info
     Running the tests in ‘tests/testthat.R’ failed.
     Last 13 lines of output:
       
-      [31m──[39m [31m2. Error: (unknown) (@test-pkonfound.R#11) [39m [31m─────────────────────────────────[39m
+      ── 2. Error: (unknown) (@test-pkonfound.R#11)  ─────────────────────────────────
       No tidy method for objects of class lmerMod
-      [1mBacktrace:[22m
-      [90m 1. [39mkonfound::konfound(testmod2, texp, test_all = TRUE, to_return = "raw_output")
-      [90m 2. [39mkonfound:::konfound_lmer(...)
-      [90m 4. [39mbroom:::tidy.default(model_object)
+      Backtrace:
+       1. konfound::konfound(testmod2, texp, test_all = TRUE, to_return = "raw_output")
+       2. konfound:::konfound_lmer(...)
+       4. broom:::tidy.default(model_object)
       
       ══ testthat results  ═══════════════════════════════════════════════════════════
       [ OK: 0 | SKIPPED: 0 | WARNINGS: 2 | FAILED: 2 ]
@@ -2386,18 +1808,18 @@ Run `revdep_details(,"mice")` for more info
      ERROR
     Running the tests in ‘tests/testthat.R’ failed.
     Last 13 lines of output:
-      [1mBacktrace:[22m
-      [90m 1. [39mmice::parlmice(nhanes, n.core = 2, n.imp.core = 4)
-      [90m 2. [39mparallel::makeCluster(n.core, type = cl.type)
-      [90m 3. [39mparallel::makePSOCKcluster(names = spec, ...)
-      [90m 4. [39mbase::serverSocket(port = port)
+      No tidy method for objects of class lmerMod
+      Backtrace:
+        1. mice::D3(fit1, fit0)
+        2. mice::pool(fit1)
+        3. mice:::pool.fitlist(getfit(object), dfcom = dfcom)
+        5. mice:::summary.mira(fitlist, type = "tidy", exponentiate = FALSE)
+        9. base::lapply(...)
+       11. broom:::tidy.default(X[[i]], ...)
       
       ══ testthat results  ═══════════════════════════════════════════════════════════
-      [ OK: 277 | SKIPPED: 0 | WARNINGS: 0 | FAILED: 4 ]
+      [ OK: 286 | SKIPPED: 0 | WARNINGS: 0 | FAILED: 1 ]
       1. Error: (unknown) (@test-D3.R#58) 
-      2. Error: Warning and Imputations between mice and parlmice are unequal (@test-parlmice.R#5) 
-      3. Error: Imputations are equal between mice and parlmice (@test-parlmice.R#13) 
-      4. Error: (unknown) (@test-parlmice.R#19) 
       
       Error: testthat unit tests failed
       Execution halted
@@ -2429,7 +1851,7 @@ Run `revdep_details(,"moderndive")` for more info
       > library(moderndive)
       > 
       > test_check("moderndive")
-      [31m──[39m [31m1. Failure: README code works (@test-get_regression_functions.R#91) [39m [31m────────[39m
+      ── 1. Failure: README code works (@test-get_regression_functions.R#91)  ────────
       `get_regression_points(mpg_mlr_model2, newdata = newcars)` produced warnings.
       
       ══ testthat results  ═══════════════════════════════════════════════════════════
@@ -2472,7 +1894,7 @@ Run `revdep_details(,"nlstimedist")` for more info
       > library(nlstimedist)
       > 
       > test_check("nlstimedist")
-      [31m──[39m [31m1. Failure: Ensure the glance method is returning expected values (@test-glan[39m
+      ── 1. Failure: Ensure the glance method is returning expected values (@test-glan
       `out` not equal to `expect`.
       Names: 1 string mismatch
       Length mismatch: comparison on first 9 components
@@ -2484,26 +1906,6 @@ Run `revdep_details(,"nlstimedist")` for more info
       
       Error: testthat unit tests failed
       Execution halted
-    ```
-
-# qgcomp
-
-<details>
-
-* Version: 2.3.0
-* Source code: https://github.com/cran/qgcomp
-* Date/Publication: 2020-04-08 05:50:02 UTC
-* Number of recursive dependencies: 116
-
-Run `revdep_details(,"qgcomp")` for more info
-
-</details>
-
-## Newly broken
-
-*   checking dependencies in R code ... NOTE
-    ```
-    Missing or unexported object: ‘broom::finish_glance’
     ```
 
 # radiant.model
@@ -2572,8 +1974,8 @@ Run `revdep_details(,"RCT")` for more info
     Warning: Data frame tidiers are deprecated and will be removed in an upcoming release of broom.
     Warning: `data_frame()` is deprecated as of tibble 1.1.0.
     Please use `tibble()` instead.
-    [90mThis warning is displayed once every 8 hours.[39m
-    [90mCall `lifecycle::last_warnings()` to see where this warning was generated.[39m
+    This warning is displayed once every 8 hours.
+    Call `lifecycle::last_warnings()` to see where this warning was generated.
     Warning in mean.default(X[[i]], ...) :
       argument is not numeric or logical: returning NA
     Warning in mean.default(X[[i]], ...) :
@@ -2591,14 +1993,14 @@ Run `revdep_details(,"RCT")` for more info
      ERROR
     Running the tests in ‘tests/testthat.R’ failed.
     Last 13 lines of output:
-      [31m──[39m [31m1. Error: (unknown) (@test_impact_eval.R#64) [39m [31m───────────────────────────────[39m
+      ── 1. Error: (unknown) (@test_impact_eval.R#64)  ───────────────────────────────
       is.atomic(x) is not TRUE
-      [1mBacktrace:[22m
-      [90m  1. [39mRCT::impact_eval(...)
-      [90m 18. [39mbase::vapply(...)
-      [90m 19. [39mstats:::FUN(X[[i]], ...)
-      [90m 20. [39mstats::var(...)
-      [90m 21. [39mbase::stopifnot(is.atomic(x))
+      Backtrace:
+        1. RCT::impact_eval(...)
+       18. base::vapply(...)
+       19. stats:::FUN(X[[i]], ...)
+       20. stats::var(...)
+       21. base::stopifnot(is.atomic(x))
       
       ══ testthat results  ═══════════════════════════════════════════════════════════
       [ OK: 79 | SKIPPED: 0 | WARNINGS: 5 | FAILED: 1 ]
@@ -2606,6 +2008,31 @@ Run `revdep_details(,"RCT")` for more info
       
       Error: testthat unit tests failed
       Execution halted
+    ```
+
+# simts
+
+<details>
+
+* Version: 0.1.1
+* Source code: https://github.com/cran/simts
+* URL: https://github.com/SMAC-Group/simts, https://arxiv.org/pdf/1607.04543.pdf
+* BugReports: https://github.com/SMAC-Group/simts/issues
+* Date/Publication: 2019-07-21 22:20:02 UTC
+* Number of recursive dependencies: 51
+
+Run `revdep_details(,"simts")` for more info
+
+</details>
+
+## Newly broken
+
+*   checking installed package size ... NOTE
+    ```
+      installed size is  5.0Mb
+      sub-directories of 1Mb or more:
+        doc    2.1Mb
+        libs   1.9Mb
     ```
 
 # survminer
@@ -2653,7 +2080,7 @@ Run `revdep_details(,"survminer")` for more info
 
 *   checking installed package size ... NOTE
     ```
-      installed size is  5.3Mb
+      installed size is  5.2Mb
       sub-directories of 1Mb or more:
         doc   4.8Mb
     ```
@@ -2682,7 +2109,7 @@ Run `revdep_details(,"survutils")` for more info
     Last 13 lines of output:
       > 
       > test_check("survutils")
-      [31m──[39m [31m1. Failure: get_cox_res runs univariate Cox regression on a single feature (@[39m
+      ── 1. Failure: get_cox_res runs univariate Cox regression on a single feature (@
       as.data.frame(out_df) not equal to as.data.frame(expected_out_df).
       Names: 1 string mismatch
       Length mismatch: comparison on first 6 components
@@ -2714,54 +2141,6 @@ Run `revdep_details(,"sweep")` for more info
 
 ## Newly broken
 
-*   checking examples ... ERROR
-    ```
-    ...
-        filter, lag
-    
-    The following objects are masked from ‘package:base’:
-    
-        intersect, setdiff, setequal, union
-    
-    > library(forecast)
-    > library(sweep)
-    > 
-    > fit_arima <- WWWusage %>%
-    +     auto.arima()
-    > 
-    > sw_tidy(fit_arima)
-    [90m# A tibble: 2 x 2[39m
-      term  estimate
-      [3m[90m<chr>[39m[23m    [3m[90m<dbl>[39m[23m
-    [90m1[39m ar1      0.650
-    [90m2[39m ma1      0.526
-    > sw_glance(fit_arima)
-    Error: 'finish_glance' is not an exported object from 'namespace:broom'
-    Execution halted
-    ```
-
-*   checking tests ...
-    ```
-     ERROR
-    Running the tests in ‘tests/testthat.R’ failed.
-    Last 13 lines of output:
-      [90m 1. [39msweep::sw_glance(fit_robets)
-      [90m 2. [39msweep:::sw_glance.robets(fit_robets)
-      [90m 6. [39mbroom::finish_glance
-      [90m 7. [39mbase::getExportedValue(pkg, name)
-      
-      ══ testthat results  ═══════════════════════════════════════════════════════════
-      [ OK: 146 | SKIPPED: 0 | WARNINGS: 4 | FAILED: 5 ]
-      1. Error: sw_*.Arima test returns tibble with correct rows and columns. (@test_tidiers_arima.R#19) 
-      2. Error: sw_*.ets test returns tibble with correct rows and columns. (@test_tidiers_ets.R#19) 
-      3. Failure: sw_*.default test returns tibble with correct rows and columns. (@test_tidiers_lm.R#22) 
-      4. Failure: sw_*.default test returns tibble with correct rows and columns. (@test_tidiers_lm.R#32) 
-      5. Error: sw_*.robets test returns tibble with correct rows and columns. (@test_tidiers_robets.R#19) 
-      
-      Error: testthat unit tests failed
-      Execution halted
-    ```
-
 *   checking Rd cross-references ... WARNING
     ```
     Missing link or links in documentation object 'sw_augment.Rd':
@@ -2772,11 +2151,37 @@ Run `revdep_details(,"sweep")` for more info
 
 ## In both
 
+*   checking tests ...
+    ```
+     ERROR
+    Running the tests in ‘tests/testthat.R’ failed.
+    Last 13 lines of output:
+      ✖ purrr::is_null() masks testthat::is_null()
+      ✖ dplyr::lag()     masks stats::lag()
+      ✖ dplyr::matches() masks tidyr::matches(), testthat::matches()
+      > library(robets)
+      > library(lubridate)
+      
+      Attaching package: 'lubridate'
+      
+      The following objects are masked from 'package:base':
+      
+          date, intersect, setdiff, union
+      
+      > library(tidyquant)
+      Error in library(tidyquant) : there is no package called 'tidyquant'
+      Execution halted
+    ```
+
+*   checking package dependencies ... NOTE
+    ```
+    Package suggested but not available for checking: ‘tidyquant’
+    ```
+
 *   checking dependencies in R code ... NOTE
     ```
     Namespaces in Imports field not imported from:
       ‘lazyeval’ ‘lubridate’ ‘tidyr’
       All declared Imports should be used.
-    Missing or unexported object: ‘broom::finish_glance’
     ```
 
