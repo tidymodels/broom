@@ -124,9 +124,10 @@ and @petrhrobar)
 * `speedglm` objects from the `speedglm` package (#685)
 * `svyglm` objects from the `survey` package (#611)
 * `systemfit` objects from the `systemfit` package (by @jaspercooper)
-* We have restored a simplified version of `glance.aov()`, which now contains 
-  only the following columns: `logLik`, `AIC`, `BIC, deviance`, `df.residual`, 
-  `nobs` (see #212). Note that `tidy.aov()` gives more complete information about 
+* We have restored a simplified version of `glance.aov()`, which used to inherit
+  from the `glance.lm()` method and now contains only the following columns: 
+  `logLik`, `AIC`, `BIC, deviance`, `df.residual`, `nobs`, and `r.squared`
+  (see #212). Note that `tidy.aov()` gives more complete information about 
   degrees of freedom in an `aov` object.
 
 ## Improvements to existing tidiers
