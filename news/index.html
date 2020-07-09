@@ -156,6 +156,15 @@
       <small>Source: <a href='http://github.com/tidymodels/broom/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
+    <div id="broom-0709001" class="section level1">
+<h1 class="page-header" data-toc-text="0.7.0.9001">
+<a href="#broom-0709001" class="anchor"></a>broom 0.7.0.9001<small> Unreleased </small>
+</h1>
+<p>To be released as broom 0.7.1.</p>
+<ul>
+<li>Extended the <code><a href="https://broom.tidymodels.org/reference/glance.aov.html">glance.aov()</a></code> method to include an <code>r.squared</code> column!</li>
+</ul>
+</div>
     <div id="broom-070" class="section level1">
 <h1 class="page-header" data-toc-text="0.7.0">
 <a href="#broom-070" class="anchor"></a>broom 0.7.0<small> 2020-07-09 </small>
@@ -263,7 +272,7 @@
 <code>svyglm</code> objects from the <code>survey</code> package (<a href='http://github.com/tidymodels/broom/issues/611'>#611</a>)</li>
 <li>
 <code>systemfit</code> objects from the <code>systemfit</code> package (by <a href='http://github.com/jaspercooper'>@jaspercooper</a>)</li>
-<li>We have restored a simplified version of <code><a href="https://broom.tidymodels.org/reference/glance.aov.html">glance.aov()</a></code>, which now contains only the following columns: <code>logLik</code>, <code>AIC</code>, <code>BIC, deviance</code>, <code>df.residual</code>, <code>nobs</code> (see <a href='http://github.com/tidymodels/broom/issues/212'>#212</a>). Note that <code><a href="https://broom.tidymodels.org/reference/tidy.aov.html">tidy.aov()</a></code> gives more complete information about degrees of freedom in an <code>aov</code> object.</li>
+<li>We have restored a simplified version of <code><a href="https://broom.tidymodels.org/reference/glance.aov.html">glance.aov()</a></code>, which used to inherit from the <code><a href="https://broom.tidymodels.org/reference/glance.lm.html">glance.lm()</a></code> method and now contains only the following columns: <code>logLik</code>, <code>AIC</code>, <code>BIC, deviance</code>, <code>df.residual</code>, and <code>nobs</code> (see <a href='http://github.com/tidymodels/broom/issues/212'>#212</a>). Note that <code><a href="https://broom.tidymodels.org/reference/tidy.aov.html">tidy.aov()</a></code> gives more complete information about degrees of freedom in an <code>aov</code> object.</li>
 </ul>
 </div>
 <div id="improvements-to-existing-tidiers" class="section level2">
