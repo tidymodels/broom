@@ -1,3 +1,9 @@
+# broom 0.7.0.9001
+
+To be released as broom 0.7.1.
+
+* Extended the `glance.aov()` method to include an `r.squared` column!
+
 # broom 0.7.0
 
 `broom 0.7.0` is a major release with a large number of new tidiers,
@@ -124,9 +130,10 @@ and @petrhrobar)
 * `speedglm` objects from the `speedglm` package (#685)
 * `svyglm` objects from the `survey` package (#611)
 * `systemfit` objects from the `systemfit` package (by @jaspercooper)
-* We have restored a simplified version of `glance.aov()`, which now contains 
-  only the following columns: `logLik`, `AIC`, `BIC, deviance`, `df.residual`, 
-  `nobs` (see #212). Note that `tidy.aov()` gives more complete information about 
+* We have restored a simplified version of `glance.aov()`, which used to inherit
+  from the `glance.lm()` method and now contains only the following columns: 
+  `logLik`, `AIC`, `BIC, deviance`, `df.residual`, and `nobs`
+  (see #212). Note that `tidy.aov()` gives more complete information about 
   degrees of freedom in an `aov` object.
 
 ## Improvements to existing tidiers

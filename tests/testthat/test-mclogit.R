@@ -10,8 +10,7 @@ data(electors)
 mod <- mclogit(
   cbind(Freq, interaction(time, class)) ~ econ.left / class + welfare / class + auth / class,
   random = ~ 1 | party.time,
-  data = within(electors, party.time <- interaction(party, time)),
-  control = mclogit.control(trace = FALSE)
+  data = within(electors, party.time <- interaction(party, time))
 )
 
 test_that("tidy.lm() isn't invoked", {
