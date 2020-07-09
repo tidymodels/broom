@@ -100,7 +100,7 @@ specify which components to return." />
         <a class="navbar-brand" href="../index.html">broom</a>
         <div class="info hidden-xs hidden-sm">
           <span class="partof">part of <a href="https://tidymodels.org">tidymodels</a></span>
-          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.7.0.9000</span>
+          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.7.0</span>
         </div>
       </div>
     </div>
@@ -173,7 +173,7 @@ specify which components to return.</p>
     </div>
 
     <pre class="usage"><span class='co'># S3 method for rcorr</span>
-<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>x</span>, <span class='kw'>diagonal</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='no'>...</span>)</pre>
+<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='kw'>x</span>, diagonal = <span class='fl'>FALSE</span>, <span class='kw'>...</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -225,8 +225,10 @@ output.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
-<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>Hmisc</span>)</div><div class='output co'>#&gt; <span class='message'>Loading required package: Formula</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Attaching package: ‘Hmisc’</span></div><div class='output co'>#&gt; <span class='message'>The following object is masked from ‘package:network’:</span>
+<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='kw'><a href='http://biostat.mc.vanderbilt.edu/Hmisc'>Hmisc</a></span>)</div><div class='output co'>#&gt; <span class='message'>Loading required package: Formula</span></div><div class='output co'>#&gt; <span class='message'></span>
+#&gt; <span class='message'>Attaching package: ‘Hmisc’</span></div><div class='output co'>#&gt; <span class='message'>The following object is masked from ‘package:psych’:</span>
+#&gt; <span class='message'></span>
+#&gt; <span class='message'>    describe</span></div><div class='output co'>#&gt; <span class='message'>The following object is masked from ‘package:network’:</span>
 #&gt; <span class='message'></span>
 #&gt; <span class='message'>    is.discrete</span></div><div class='output co'>#&gt; <span class='message'>The following object is masked from ‘package:survey’:</span>
 #&gt; <span class='message'></span>
@@ -237,34 +239,34 @@ output.</p>
 #&gt; <span class='message'>    src, summarize</span></div><div class='output co'>#&gt; <span class='message'>The following objects are masked from ‘package:base’:</span>
 #&gt; <span class='message'></span>
 #&gt; <span class='message'>    format.pval, units</span></div><div class='input'>
-<span class='no'>mat</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/lapply.html'>replicate</a></span>(<span class='fl'>52</span>, <span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span>(<span class='fl'>100</span>))
+<span class='kw'>mat</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/lapply.html'>replicate</a></span>(<span class='fl'>52</span>, <span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span>(<span class='fl'>100</span>))
 <span class='co'># add some NAs</span>
-<span class='no'>mat</span>[<span class='fu'><a href='https://rdrr.io/r/base/sample.html'>sample</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/length.html'>length</a></span>(<span class='no'>mat</span>), <span class='fl'>2000</span>)] <span class='kw'>&lt;-</span> <span class='fl'>NA</span>
+<span class='kw'>mat</span>[<span class='fu'><a href='https://rdrr.io/r/base/sample.html'>sample</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/length.html'>length</a></span>(<span class='kw'>mat</span>), <span class='fl'>2000</span>)] <span class='op'>&lt;-</span> <span class='fl'>NA</span>
 <span class='co'># also column names</span>
-<span class='fu'><a href='https://rdrr.io/r/base/colnames.html'>colnames</a></span>(<span class='no'>mat</span>) <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='no'>LETTERS</span>, <span class='no'>letters</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/colnames.html'>colnames</a></span>(<span class='kw'>mat</span>) <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='kw'>LETTERS</span>, <span class='kw'>letters</span>)
 
-<span class='no'>rc</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/Hmisc/man/rcorr.html'>rcorr</a></span>(<span class='no'>mat</span>)
+<span class='kw'>rc</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/Hmisc/man/rcorr.html'>rcorr</a></span>(<span class='kw'>mat</span>)
 
-<span class='no'>td</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>rc</span>)
-<span class='no'>td</span></div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 1,326 x 5</span><span>
+<span class='kw'>td</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='kw'>rc</span>)
+<span class='kw'>td</span></div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 1,326 x 5</span><span>
 #&gt;    column1 column2 estimate     n p.value
 #&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>      </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #555555;'> 1</span><span> B       A        0.141      37  0.405 
-#&gt; </span><span style='color: #555555;'> 2</span><span> C       A        0.042</span><span style='text-decoration: underline;'>7</span><span>     39  0.796 
-#&gt; </span><span style='color: #555555;'> 3</span><span> C       B        0.032</span><span style='text-decoration: underline;'>2</span><span>     37  0.850 
-#&gt; </span><span style='color: #555555;'> 4</span><span> D       A        0.009</span><span style='text-decoration: underline;'>73</span><span>    36  0.955 
-#&gt; </span><span style='color: #555555;'> 5</span><span> D       B        0.131      31  0.482 
-#&gt; </span><span style='color: #555555;'> 6</span><span> D       C        0.345      42  0.025</span><span style='text-decoration: underline;'>1</span><span>
-#&gt; </span><span style='color: #555555;'> 7</span><span> E       A       -</span><span style='color: #BB0000;'>0.219</span><span>      36  0.199 
-#&gt; </span><span style='color: #555555;'> 8</span><span> E       B       -</span><span style='color: #BB0000;'>0.007</span><span style='color: #BB0000;text-decoration: underline;'>51</span><span>    35  0.966 
-#&gt; </span><span style='color: #555555;'> 9</span><span> E       C        0.185      46  0.218 
-#&gt; </span><span style='color: #555555;'>10</span><span> E       D       -</span><span style='color: #BB0000;'>0.046</span><span style='color: #BB0000;text-decoration: underline;'>7</span><span>     40  0.775 
+#&gt; </span><span style='color: #555555;'> 1</span><span> B       A        0.067</span><span style='text-decoration: underline;'>0</span><span>     36   0.698
+#&gt; </span><span style='color: #555555;'> 2</span><span> C       A        0.196      38   0.239
+#&gt; </span><span style='color: #555555;'> 3</span><span> C       B        0.172      37   0.309
+#&gt; </span><span style='color: #555555;'> 4</span><span> D       A       -</span><span style='color: #BB0000;'>0.039</span><span style='color: #BB0000;text-decoration: underline;'>7</span><span>     36   0.818
+#&gt; </span><span style='color: #555555;'> 5</span><span> D       B       -</span><span style='color: #BB0000;'>0.007</span><span style='color: #BB0000;text-decoration: underline;'>62</span><span>    31   0.968
+#&gt; </span><span style='color: #555555;'> 6</span><span> D       C        0.250      42   0.110
+#&gt; </span><span style='color: #555555;'> 7</span><span> E       A        0.224      36   0.189
+#&gt; </span><span style='color: #555555;'> 8</span><span> E       B        0.070</span><span style='text-decoration: underline;'>0</span><span>     35   0.690
+#&gt; </span><span style='color: #555555;'> 9</span><span> E       C        0.211      46   0.159
+#&gt; </span><span style='color: #555555;'>10</span><span> E       D        0.147      40   0.364
 #&gt; </span><span style='color: #555555;'># … with 1,316 more rows</span><span></div><div class='input'>
-<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>ggplot2</span>)
-<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span>(<span class='no'>td</span>, <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='no'>p.value</span>)) +
-  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_histogram.html'>geom_histogram</a></span>(<span class='kw'>binwidth</span> <span class='kw'>=</span> <span class='fl'>.1</span>)</div><div class='img'><img src='tidy.rcorr-1.png' alt='' width='700' height='433' /></div><div class='input'>
-<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span>(<span class='no'>td</span>, <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='no'>estimate</span>, <span class='no'>p.value</span>)) +
-  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_point.html'>geom_point</a></span>() +
+<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='kw'><a href='http://ggplot2.tidyverse.org'>ggplot2</a></span>)
+<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span>(<span class='kw'>td</span>, <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='kw'>p.value</span>)) <span class='op'>+</span>
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_histogram.html'>geom_histogram</a></span>(binwidth = <span class='fl'>.1</span>)</div><div class='img'><img src='tidy.rcorr-1.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span>(<span class='kw'>td</span>, <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='kw'>estimate</span>, <span class='kw'>p.value</span>)) <span class='op'>+</span>
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_point.html'>geom_point</a></span>() <span class='op'>+</span>
   <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/scale_continuous.html'>scale_y_log10</a></span>()</div><div class='img'><img src='tidy.rcorr-2.png' alt='' width='700' height='433' /></div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -282,7 +284,7 @@ output.</p>
 
 <div class="author">
   <p>
-    Developed by David Robinson, Alex Hayes.
+    Developed by David Robinson, Alex Hayes, Simon Couch.
     Site built by <a href="https://pkgdown.r-lib.org">pkgdown</a>.
   </p>
 </div>

@@ -126,7 +126,7 @@ missing at this time." />
         <a class="navbar-brand" href="../index.html">broom</a>
         <div class="info hidden-xs hidden-sm">
           <span class="partof">part of <a href="https://tidymodels.org">tidymodels</a></span>
-          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.7.0.9000</span>
+          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.7.0</span>
         </div>
       </div>
     </div>
@@ -220,12 +220,12 @@ process, and that <code><a href='https://rdrr.io/r/splines/ns.html'>splines::ns(
 encounter errors, try explicitly passing a tibble, or fitting the original
 model on data in a tibble.</p>
 <p>We are in the process of defining behaviors for models fit with various
-<a href='https://rdrr.io/r/stats/na.action.html'>na.action</a> arguments, but make no guarantees about behavior when data is
+<code>na.action</code> arguments, but make no guarantees about behavior when data is
 missing at this time.</p>
     </div>
 
     <pre class="usage"><span class='co'># S3 method for factanal</span>
-<span class='fu'><a href='https://rdrr.io/pkg/generics/man/augment.html'>augment</a></span>(<span class='no'>x</span>, <span class='no'>data</span>, <span class='no'>...</span>)</pre>
+<span class='fu'><a href='https://rdrr.io/pkg/generics/man/augment.html'>augment</a></span>(<span class='kw'>x</span>, <span class='kw'>data</span>, <span class='kw'>...</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -236,7 +236,7 @@ missing at this time.</p>
     </tr>
     <tr>
       <th>data</th>
-      <td><p>A <code><a href='https://rdrr.io/r/base/data.frame.html'>data.frame()</a></code> or <code><a href='https://tibble.tidyverse.org/reference/tibble.html'>tibble::tibble()</a></code> containing the original
+      <td><p>A <a href='https://rdrr.io/r/base/data.frame.html'>base::data.frame</a> or <code><a href='https://tibble.tidyverse.org/reference/tibble.html'>tibble::tibble()</a></code> containing the original
 data that was used to produce the object <code>x</code>. Defaults to
 <code><a href='https://rdrr.io/r/stats/model.frame.html'>stats::model.frame(x)</a></code> so that <code><a href='https://rdrr.io/pkg/generics/man/augment.html'>augment(my_fit)</a></code> returns the augmented
 original data. <strong>Do not</strong> pass new data to the <code>data</code> argument.
@@ -262,8 +262,8 @@ the <code>data</code> argument.</p></td>
 
     <p>When <code>data</code> is not supplied <code>augment.factanal</code> returns one
 row for each observation, with a factor score column added for each factor
-X, (<code>.fsX</code>). This is because <code><a href='https://rdrr.io/r/stats/factanal.html'>factanal()</a></code>, unlike other
-stats methods like <code><a href='https://rdrr.io/r/stats/lm.html'>lm()</a></code>, does not retain the original data.</p>
+X, (<code>.fsX</code>). This is because <code><a href='https://rdrr.io/r/stats/factanal.html'>stats::factanal()</a></code>, unlike other
+stats methods like <code><a href='https://rdrr.io/r/stats/lm.html'>stats::lm()</a></code>, does not retain the original data.</p>
 <p>When <code>data</code> is supplied, <code>augment.factanal</code> returns one row for
 each observation, with a factor score column added for each factor X,
 (<code>.fsX</code>).</p>
@@ -271,8 +271,8 @@ each observation, with a factor score column added for each factor X,
 
     <div class='dont-index'><p><code><a href='https://rdrr.io/pkg/generics/man/augment.html'>augment()</a></code>, <code><a href='https://rdrr.io/r/stats/factanal.html'>stats::factanal()</a></code></p>
 <p>Other factanal tidiers: 
-<code><a href='glance.factanal.html'>glance.factanal</a>()</code>,
-<code><a href='tidy.factanal.html'>tidy.factanal</a>()</code></p></div>
+<code><a href='https://broom.tidymodels.org/reference/glance.factanal.html'>glance.factanal</a>()</code>,
+<code><a href='https://broom.tidymodels.org/reference/tidy.factanal.html'>tidy.factanal</a>()</code></p></div>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -290,7 +290,7 @@ each observation, with a factor score column added for each factor X,
 
 <div class="author">
   <p>
-    Developed by David Robinson, Alex Hayes.
+    Developed by David Robinson, Alex Hayes, Simon Couch.
     Site built by <a href="https://pkgdown.r-lib.org">pkgdown</a>.
   </p>
 </div>

@@ -101,7 +101,7 @@ Deprecated. Please use tibble::as_tibble() instead." />
         <a class="navbar-brand" href="../index.html">broom</a>
         <div class="info hidden-xs hidden-sm">
           <span class="partof">part of <a href="https://tidymodels.org">tidymodels</a></span>
-          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.7.0.9000</span>
+          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.7.0</span>
         </div>
       </div>
     </div>
@@ -175,14 +175,14 @@ specify which components to return.</p>
     </div>
 
     <pre class="usage"><span class='co'># S3 method for table</span>
-<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>x</span>, <span class='no'>...</span>)</pre>
+<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='kw'>x</span>, <span class='kw'>...</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>x</th>
-      <td><p>A <a href='https://rdrr.io/r/base/table.html'>table</a> object.</p></td>
+      <td><p>A <a href='https://rdrr.io/r/base/table.html'>base::table</a> object.</p></td>
     </tr>
     <tr>
       <th>...</th>
@@ -205,12 +205,12 @@ for the table in a <code>Freq</code> column. The result is much like what you ge
 from <code><a href='https://tidyr.tidyverse.org/reference/pivot_longer.html'>tidyr::pivot_longer()</a></code>.</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>Directly calls <code><a href='https://tibble.tidyverse.org/reference/as_tibble.html'>tibble::as_tibble()</a></code> on a <a href='https://rdrr.io/r/base/table.html'>table</a> object, which
-does the same things as <code><a href='https://rdrr.io/r/base/table.html'>as.data.frame.table()</a></code> but also gives the
+    <p>Directly calls <code><a href='https://tibble.tidyverse.org/reference/as_tibble.html'>tibble::as_tibble()</a></code> on a <a href='https://rdrr.io/r/base/table.html'>base::table</a> object, which
+does the same things as <code><a href='https://rdrr.io/r/base/table.html'>base::as.data.frame.table()</a></code> but also gives the
 returned object <a href='https://tibble.tidyverse.org/reference/tibble.html'>tibble::tibble</a> class.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code>as_tibble.table()</code></p></div>
+    <div class='dont-index'><p><code><a href='https://tibble.tidyverse.org/reference/as_tibble.html'>tibble::as_tibble.table()</a></code></p></div>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -228,7 +228,7 @@ returned object <a href='https://tibble.tidyverse.org/reference/tibble.html'>tib
 
 <div class="author">
   <p>
-    Developed by David Robinson, Alex Hayes.
+    Developed by David Robinson, Alex Hayes, Simon Couch.
     Site built by <a href="https://pkgdown.r-lib.org">pkgdown</a>.
   </p>
 </div>

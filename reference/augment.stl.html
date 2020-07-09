@@ -126,7 +126,7 @@ missing at this time." />
         <a class="navbar-brand" href="../index.html">broom</a>
         <div class="info hidden-xs hidden-sm">
           <span class="partof">part of <a href="https://tidymodels.org">tidymodels</a></span>
-          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.7.0.9000</span>
+          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.7.0</span>
         </div>
       </div>
     </div>
@@ -220,12 +220,12 @@ process, and that <code><a href='https://rdrr.io/r/splines/ns.html'>splines::ns(
 encounter errors, try explicitly passing a tibble, or fitting the original
 model on data in a tibble.</p>
 <p>We are in the process of defining behaviors for models fit with various
-<a href='https://rdrr.io/r/stats/na.action.html'>na.action</a> arguments, but make no guarantees about behavior when data is
+<code>na.action</code> arguments, but make no guarantees about behavior when data is
 missing at this time.</p>
     </div>
 
     <pre class="usage"><span class='co'># S3 method for stl</span>
-<span class='fu'><a href='https://rdrr.io/pkg/generics/man/augment.html'>augment</a></span>(<span class='no'>x</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>weights</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='no'>...</span>)</pre>
+<span class='fu'><a href='https://rdrr.io/pkg/generics/man/augment.html'>augment</a></span>(<span class='kw'>x</span>, data = <span class='kw'>NULL</span>, weights = <span class='fl'>TRUE</span>, <span class='kw'>...</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -273,7 +273,7 @@ series.</p></dd>
 
     <div class='dont-index'><p><code><a href='https://rdrr.io/pkg/generics/man/augment.html'>augment()</a></code>, <code><a href='https://rdrr.io/r/stats/stl.html'>stats::stl()</a></code></p>
 <p>Other decompose tidiers: 
-<code><a href='augment.decomposed.ts.html'>augment.decomposed.ts</a>()</code></p></div>
+<code><a href='https://broom.tidymodels.org/reference/augment.decomposed.ts.html'>augment.decomposed.ts</a>()</code></p></div>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -291,7 +291,7 @@ series.</p></dd>
 
 <div class="author">
   <p>
-    Developed by David Robinson, Alex Hayes.
+    Developed by David Robinson, Alex Hayes, Simon Couch.
     Site built by <a href="https://pkgdown.r-lib.org">pkgdown</a>.
   </p>
 </div>

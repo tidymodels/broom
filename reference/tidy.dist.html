@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Tidy a(n) dist object — tidy.dist • broom</title>
+<title>(Deprecated) Tidy dist objects — tidy.dist • broom</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -49,13 +49,8 @@
 
 
 
-<meta property="og:title" content="Tidy a(n) dist object — tidy.dist" />
-<meta property="og:description" content="Tidy summarizes information about the components of a model.
-A model component might be a single term in a regression, a single
-hypothesis, a cluster, or a class. Exactly what tidy considers to be a
-model component varies across models but is usually self-evident.
-If a model has several distinct types of components, you will need to
-specify which components to return." />
+<meta property="og:title" content="(Deprecated) Tidy dist objects — tidy.dist" />
+<meta property="og:description" content="(Deprecated) Tidy dist objects" />
 <meta property="og:image" content="https://broom.tidymodels.org/logo.png" />
 <meta name="twitter:card" content="summary" />
 
@@ -100,7 +95,7 @@ specify which components to return." />
         <a class="navbar-brand" href="../index.html">broom</a>
         <div class="info hidden-xs hidden-sm">
           <span class="partof">part of <a href="https://tidymodels.org">tidymodels</a></span>
-          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.7.0.9000</span>
+          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.7.0</span>
         </div>
       </div>
     </div>
@@ -158,22 +153,17 @@ specify which components to return." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Tidy a(n) dist object</h1>
-    <small class="dont-index">Source: <a href='http://github.com/tidymodels/broom/blob/master/R/stats-tidiers.R'><code>R/stats-tidiers.R</code></a></small>
+    <h1>(Deprecated) Tidy dist objects</h1>
+    <small class="dont-index">Source: <a href='http://github.com/tidymodels/broom/blob/master/R/deprecated-0-7-0.R'><code>R/deprecated-0-7-0.R</code></a></small>
     <div class="hidden name"><code>tidy.dist.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Tidy summarizes information about the components of a model.
-A model component might be a single term in a regression, a single
-hypothesis, a cluster, or a class. Exactly what tidy considers to be a
-model component varies across models but is usually self-evident.
-If a model has several distinct types of components, you will need to
-specify which components to return.</p>
+    <p>(Deprecated) Tidy dist objects</p>
     </div>
 
     <pre class="usage"><span class='co'># S3 method for dist</span>
-<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>x</span>, <span class='kw'>diagonal</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/attr.html'>attr</a></span>(<span class='no'>x</span>, <span class='st'>"Diag"</span>), <span class='no'>...</span>)</pre>
+<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='kw'>x</span>, diagonal = <span class='fu'><a href='https://rdrr.io/r/base/attr.html'>attr</a></span>(<span class='kw'>x</span>, <span class='st'>"Diag"</span>), upper = <span class='fu'><a href='https://rdrr.io/r/base/attr.html'>attr</a></span>(<span class='kw'>x</span>, <span class='st'>"Upper"</span>), <span class='kw'>...</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -189,6 +179,12 @@ elements of the distance matrix. Defaults to whatever was based to the
 <code>diag</code> argument of <code><a href='https://rdrr.io/r/stats/dist.html'>stats::dist()</a></code>.</p></td>
     </tr>
     <tr>
+      <th>upper</th>
+      <td><p>Logical indicating whether or not to tidy the upper half of
+the distance matrix. Defaults to whatever was based to the
+<code>upper</code> argument of <code><a href='https://rdrr.io/r/stats/dist.html'>stats::dist()</a></code>.</p></td>
+    </tr>
+    <tr>
       <th>...</th>
       <td><p>Additional arguments. Not used. Needed to match generic
 signature only. <strong>Cautionary note:</strong> Misspelled arguments will be
@@ -202,79 +198,73 @@ the <code>data</code> argument.</p></td>
     </tr>
     </table>
 
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
-
-    <p>If the distance matrix does not include the diagonal,
-the tidied version will not either.</p>
-    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
-
-    <div class='dont-index'><p><code><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy()</a></code>, <code><a href='https://rdrr.io/r/stats/dist.html'>stats::dist()</a></code></p>
-<p>Other stats tidiers: 
-<code><a href='tidy.density.html'>tidy.density</a>()</code>,
-<code><a href='tidy.ftable.html'>tidy.ftable</a>()</code></p></div>
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A <code><a href='https://tibble.tidyverse.org/reference/tibble.html'>tibble::tibble()</a></code> with columns:</p>
-<dt>distance</dt><dd><p>Distance between items.</p></dd>
-  <dt>item1</dt><dd><p>First item.</p></dd>
-  <dt>item2</dt><dd><p>Second item.</p></dd>
+    <p>A <a href='https://tibble.tidyverse.org/reference/tibble.html'>tibble::tibble</a> with one row for each pair of items in the
+distance matrix, with columns:</p>
+<dt>item1</dt><dd><p>First item</p></dd>
+<dt>item2</dt><dd><p>Second item</p></dd>
+<dt>distance</dt><dd><p>Distance between items</p></dd>
 
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
+    <p>If the distance matrix does not include an upper triangle and/or
+diagonal, the tidied version will not either.</p>
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p>Other deprecated: 
+<code><a href='https://broom.tidymodels.org/reference/bootstrap.html'>bootstrap</a>()</code>,
+<code><a href='https://broom.tidymodels.org/reference/confint_tidy.html'>confint_tidy</a>()</code>,
+<code><a href='https://broom.tidymodels.org/reference/data.frame_tidiers.html'>data.frame_tidiers</a></code>,
+<code><a href='https://broom.tidymodels.org/reference/finish_glance.html'>finish_glance</a>()</code>,
+<code><a href='https://broom.tidymodels.org/reference/fix_data_frame.html'>fix_data_frame</a>()</code>,
+<code><a href='https://broom.tidymodels.org/reference/summary_tidiers.html'>summary_tidiers</a></code>,
+<code><a href='https://broom.tidymodels.org/reference/tidy.density.html'>tidy.density</a>()</code>,
+<code><a href='https://broom.tidymodels.org/reference/tidy.ftable.html'>tidy.ftable</a>()</code>,
+<code><a href='https://broom.tidymodels.org/reference/vector_tidiers.html'>tidy.numeric</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
-<span class='no'>iris_dist</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/dist.html'>dist</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/t.html'>t</a></span>(<span class='no'>iris</span>[, <span class='fl'>1</span>:<span class='fl'>4</span>]))
-<span class='no'>iris_dist</span></div><div class='output co'>#&gt;              Sepal.Length Sepal.Width Petal.Length
-#&gt; Sepal.Width      36.15785                         
-#&gt; Petal.Length     28.96619    25.77809             
-#&gt; Petal.Width      57.18304    25.86407     33.86473</div><div class='input'>
-<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>iris_dist</span>)</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 12 x 3</span><span>
-#&gt;    item1        item2        distance
-#&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>        </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>           </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #555555;'> 1</span><span> Sepal.Length Sepal.Width      36.2
-#&gt; </span><span style='color: #555555;'> 2</span><span> Sepal.Length Petal.Length     29.0
-#&gt; </span><span style='color: #555555;'> 3</span><span> Sepal.Length Petal.Width      57.2
-#&gt; </span><span style='color: #555555;'> 4</span><span> Sepal.Width  Sepal.Length     36.2
-#&gt; </span><span style='color: #555555;'> 5</span><span> Sepal.Width  Petal.Length     25.8
-#&gt; </span><span style='color: #555555;'> 6</span><span> Sepal.Width  Petal.Width      25.9
-#&gt; </span><span style='color: #555555;'> 7</span><span> Petal.Length Sepal.Length     29.0
-#&gt; </span><span style='color: #555555;'> 8</span><span> Petal.Length Sepal.Width      25.8
-#&gt; </span><span style='color: #555555;'> 9</span><span> Petal.Length Petal.Width      33.9
-#&gt; </span><span style='color: #555555;'>10</span><span> Petal.Width  Sepal.Length     57.2
-#&gt; </span><span style='color: #555555;'>11</span><span> Petal.Width  Sepal.Width      25.9
-#&gt; </span><span style='color: #555555;'>12</span><span> Petal.Width  Petal.Length     33.9</div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>iris_dist</span>, <span class='kw'>upper</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 12 x 3</span><span>
-#&gt;    item1        item2        distance
-#&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>        </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>           </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #555555;'> 1</span><span> Sepal.Length Sepal.Width      36.2
-#&gt; </span><span style='color: #555555;'> 2</span><span> Sepal.Length Petal.Length     29.0
-#&gt; </span><span style='color: #555555;'> 3</span><span> Sepal.Length Petal.Width      57.2
-#&gt; </span><span style='color: #555555;'> 4</span><span> Sepal.Width  Sepal.Length     36.2
-#&gt; </span><span style='color: #555555;'> 5</span><span> Sepal.Width  Petal.Length     25.8
-#&gt; </span><span style='color: #555555;'> 6</span><span> Sepal.Width  Petal.Width      25.9
-#&gt; </span><span style='color: #555555;'> 7</span><span> Petal.Length Sepal.Length     29.0
-#&gt; </span><span style='color: #555555;'> 8</span><span> Petal.Length Sepal.Width      25.8
-#&gt; </span><span style='color: #555555;'> 9</span><span> Petal.Length Petal.Width      33.9
-#&gt; </span><span style='color: #555555;'>10</span><span> Petal.Width  Sepal.Length     57.2
-#&gt; </span><span style='color: #555555;'>11</span><span> Petal.Width  Sepal.Width      25.9
-#&gt; </span><span style='color: #555555;'>12</span><span> Petal.Width  Petal.Length     33.9</div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>iris_dist</span>, <span class='kw'>diagonal</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 16 x 3</span><span>
-#&gt;    item1        item2        distance
-#&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>        </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>           </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #555555;'> 1</span><span> Sepal.Length Sepal.Length      0  
-#&gt; </span><span style='color: #555555;'> 2</span><span> Sepal.Length Sepal.Width      36.2
-#&gt; </span><span style='color: #555555;'> 3</span><span> Sepal.Length Petal.Length     29.0
-#&gt; </span><span style='color: #555555;'> 4</span><span> Sepal.Length Petal.Width      57.2
-#&gt; </span><span style='color: #555555;'> 5</span><span> Sepal.Width  Sepal.Length     36.2
-#&gt; </span><span style='color: #555555;'> 6</span><span> Sepal.Width  Sepal.Width       0  
-#&gt; </span><span style='color: #555555;'> 7</span><span> Sepal.Width  Petal.Length     25.8
-#&gt; </span><span style='color: #555555;'> 8</span><span> Sepal.Width  Petal.Width      25.9
-#&gt; </span><span style='color: #555555;'> 9</span><span> Petal.Length Sepal.Length     29.0
-#&gt; </span><span style='color: #555555;'>10</span><span> Petal.Length Sepal.Width      25.8
-#&gt; </span><span style='color: #555555;'>11</span><span> Petal.Length Petal.Length      0  
-#&gt; </span><span style='color: #555555;'>12</span><span> Petal.Length Petal.Width      33.9
-#&gt; </span><span style='color: #555555;'>13</span><span> Petal.Width  Sepal.Length     57.2
-#&gt; </span><span style='color: #555555;'>14</span><span> Petal.Width  Sepal.Width      25.9
-#&gt; </span><span style='color: #555555;'>15</span><span> Petal.Width  Petal.Length     33.9
-#&gt; </span><span style='color: #555555;'>16</span><span> Petal.Width  Petal.Width       0  </div></span></pre>
+<span class='kw'>cars_dist</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/dist.html'>dist</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/t.html'>t</a></span>(<span class='kw'>mtcars</span>[, <span class='fl'>1</span><span class='op'>:</span><span class='fl'>4</span>]))
+<span class='kw'>cars_dist</span></div><div class='output co'>#&gt;             mpg        cyl       disp
+#&gt; cyl    89.32586                      
+#&gt; disp 1391.49546 1441.25177           
+#&gt; hp    824.37547  878.17652  656.64044</div><div class='input'>
+<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='kw'>cars_dist</span>)</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 6 x 3</span><span>
+#&gt;   item1 item2 distance
+#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;fct&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;fct&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #555555;'>1</span><span> mpg   cyl       89.3
+#&gt; </span><span style='color: #555555;'>2</span><span> mpg   disp    </span><span style='text-decoration: underline;'>1</span><span>391. 
+#&gt; </span><span style='color: #555555;'>3</span><span> mpg   hp       824. 
+#&gt; </span><span style='color: #555555;'>4</span><span> cyl   disp    </span><span style='text-decoration: underline;'>1</span><span>441. 
+#&gt; </span><span style='color: #555555;'>5</span><span> cyl   hp       878. 
+#&gt; </span><span style='color: #555555;'>6</span><span> disp  hp       657. </div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='kw'>cars_dist</span>, upper = <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 12 x 3</span><span>
+#&gt;    item1 item2 distance
+#&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;fct&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;fct&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #555555;'> 1</span><span> mpg   cyl       89.3
+#&gt; </span><span style='color: #555555;'> 2</span><span> mpg   disp    </span><span style='text-decoration: underline;'>1</span><span>391. 
+#&gt; </span><span style='color: #555555;'> 3</span><span> mpg   hp       824. 
+#&gt; </span><span style='color: #555555;'> 4</span><span> cyl   mpg       89.3
+#&gt; </span><span style='color: #555555;'> 5</span><span> cyl   disp    </span><span style='text-decoration: underline;'>1</span><span>441. 
+#&gt; </span><span style='color: #555555;'> 6</span><span> cyl   hp       878. 
+#&gt; </span><span style='color: #555555;'> 7</span><span> disp  mpg     </span><span style='text-decoration: underline;'>1</span><span>391. 
+#&gt; </span><span style='color: #555555;'> 8</span><span> disp  cyl     </span><span style='text-decoration: underline;'>1</span><span>441. 
+#&gt; </span><span style='color: #555555;'> 9</span><span> disp  hp       657. 
+#&gt; </span><span style='color: #555555;'>10</span><span> hp    mpg      824. 
+#&gt; </span><span style='color: #555555;'>11</span><span> hp    cyl      878. 
+#&gt; </span><span style='color: #555555;'>12</span><span> hp    disp     657. </div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='kw'>cars_dist</span>, diagonal = <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 10 x 3</span><span>
+#&gt;    item1 item2 distance
+#&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;fct&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;fct&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #555555;'> 1</span><span> mpg   mpg        0  
+#&gt; </span><span style='color: #555555;'> 2</span><span> mpg   cyl       89.3
+#&gt; </span><span style='color: #555555;'> 3</span><span> mpg   disp    </span><span style='text-decoration: underline;'>1</span><span>391. 
+#&gt; </span><span style='color: #555555;'> 4</span><span> mpg   hp       824. 
+#&gt; </span><span style='color: #555555;'> 5</span><span> cyl   cyl        0  
+#&gt; </span><span style='color: #555555;'> 6</span><span> cyl   disp    </span><span style='text-decoration: underline;'>1</span><span>441. 
+#&gt; </span><span style='color: #555555;'> 7</span><span> cyl   hp       878. 
+#&gt; </span><span style='color: #555555;'> 8</span><span> disp  disp       0  
+#&gt; </span><span style='color: #555555;'> 9</span><span> disp  hp       657. 
+#&gt; </span><span style='color: #555555;'>10</span><span> hp    hp         0  </div><div class='input'></div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -291,7 +281,7 @@ the tidied version will not either.</p>
 
 <div class="author">
   <p>
-    Developed by David Robinson, Alex Hayes.
+    Developed by David Robinson, Alex Hayes, Simon Couch.
     Site built by <a href="https://pkgdown.r-lib.org">pkgdown</a>.
   </p>
 </div>

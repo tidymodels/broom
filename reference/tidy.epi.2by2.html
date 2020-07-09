@@ -100,7 +100,7 @@ specify which components to return." />
         <a class="navbar-brand" href="../index.html">broom</a>
         <div class="info hidden-xs hidden-sm">
           <span class="partof">part of <a href="https://tidymodels.org">tidymodels</a></span>
-          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.7.0.9000</span>
+          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.7.0</span>
         </div>
       </div>
     </div>
@@ -173,7 +173,7 @@ specify which components to return.</p>
     </div>
 
     <pre class="usage"><span class='co'># S3 method for epi.2by2</span>
-<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>x</span>, <span class='kw'>parameters</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"moa"</span>, <span class='st'>"stat"</span>), <span class='no'>...</span>)</pre>
+<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='kw'>x</span>, parameters = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"moa"</span>, <span class='st'>"stat"</span>), <span class='kw'>...</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -203,8 +203,8 @@ the <code>data</code> argument.</p></td>
 
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>The tibble has a column for each of the measures of association or tests contained in <code>massoc</code> when
-<code><a href='https://rdrr.io/pkg/epiR/man/epi.2by2.html'>epiR::epi.2by2()</a></code> is called.</p>
+    <p>The tibble has a column for each of the measures of association
+or tests contained in <code>massoc</code> when <code><a href='https://rdrr.io/pkg/epiR/man/epi.2by2.html'>epiR::epi.2by2()</a></code> is called.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p><code><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy()</a></code>, <code><a href='https://rdrr.io/pkg/epiR/man/epi.2by2.html'>epiR::epi.2by2()</a></code></p></div>
@@ -222,29 +222,30 @@ the <code>data</code> argument.</p></td>
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>epiR</span>)</div><div class='output co'>#&gt; <span class='message'>Package epiR 1.0-14 is loaded</span></div><div class='output co'>#&gt; <span class='message'>Type help(epi.about) for summary information</span></div><div class='output co'>#&gt; <span class='message'>Type browseVignettes(package = 'epiR') to learn how to use epiR for applied epidemiological analyses</span></div><div class='output co'>#&gt; <span class='message'></span></div><div class='input'><span class='no'>dat</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>13</span>, <span class='fl'>2163</span>, <span class='fl'>5</span>, <span class='fl'>3349</span>), <span class='kw'>nrow</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>byrow</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/colnames.html'>rownames</a></span>(<span class='no'>dat</span>) <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"DF+"</span>, <span class='st'>"DF-"</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/colnames.html'>colnames</a></span>(<span class='no'>dat</span>) <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"FUS+"</span>, <span class='st'>"FUS-"</span>)
-<span class='no'>fit</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/epiR/man/epi.2by2.html'>epi.2by2</a></span>(
-  <span class='kw'>dat</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/table.html'>as.table</a></span>(<span class='no'>dat</span>), <span class='kw'>method</span> <span class='kw'>=</span> <span class='st'>"cross.sectional"</span>,
-  <span class='kw'>conf.level</span> <span class='kw'>=</span> <span class='fl'>0.95</span>, <span class='kw'>units</span> <span class='kw'>=</span> <span class='fl'>100</span>, <span class='kw'>outcome</span> <span class='kw'>=</span> <span class='st'>"as.columns"</span>
+    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='kw'><a href='https://fvas.unimelb.edu.au/research/groups/veterinary-epidemiology-melbourne'>epiR</a></span>)</div><div class='output co'>#&gt; <span class='message'>Package epiR 1.0-15 is loaded</span></div><div class='output co'>#&gt; <span class='message'>Type help(epi.about) for summary information</span></div><div class='output co'>#&gt; <span class='message'>Type browseVignettes(package = 'epiR') to learn how to use epiR for applied epidemiological analyses</span></div><div class='output co'>#&gt; <span class='message'></span></div><div class='input'><span class='kw'>dat</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>13</span>, <span class='fl'>2163</span>, <span class='fl'>5</span>, <span class='fl'>3349</span>), nrow = <span class='fl'>2</span>, byrow = <span class='fl'>TRUE</span>)
+<span class='fu'><a href='https://tibble.tidyverse.org/reference/rownames.html'>rownames</a></span>(<span class='kw'>dat</span>) <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"DF+"</span>, <span class='st'>"DF-"</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/colnames.html'>colnames</a></span>(<span class='kw'>dat</span>) <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"FUS+"</span>, <span class='st'>"FUS-"</span>)
+<span class='kw'>fit</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/epiR/man/epi.2by2.html'>epi.2by2</a></span>(
+  dat = <span class='fu'><a href='https://rdrr.io/r/base/table.html'>as.table</a></span>(<span class='kw'>dat</span>), method = <span class='st'>"cross.sectional"</span>,
+  conf.level = <span class='fl'>0.95</span>, units = <span class='fl'>100</span>, outcome = <span class='st'>"as.columns"</span>
 )
 
-<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>fit</span>, <span class='kw'>parameters</span> <span class='kw'>=</span> <span class='st'>"moa"</span>)</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 12 x 4</span><span>
+<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='kw'>fit</span>, parameters = <span class='st'>"moa"</span>)</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 13 x 4</span><span>
 #&gt;    term                estimate conf.low conf.high
 #&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>                  </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
 #&gt; </span><span style='color: #555555;'> 1</span><span> PR.strata.wald         4.01    1.43      11.2  
-#&gt; </span><span style='color: #555555;'> 2</span><span> PR.strata.score        4.01    1.49      10.8  
-#&gt; </span><span style='color: #555555;'> 3</span><span> OR.strata.wald         4.03    1.43      11.3  
-#&gt; </span><span style='color: #555555;'> 4</span><span> OR.strata.cfield       4.03   </span><span style='color: #BB0000;'>NA</span><span>         </span><span style='color: #BB0000;'>NA</span><span>    
-#&gt; </span><span style='color: #555555;'> 5</span><span> OR.strata.score        4.03    1.49      10.9  
-#&gt; </span><span style='color: #555555;'> 6</span><span> OR.strata.mle          4.02    1.34      14.4  
-#&gt; </span><span style='color: #555555;'> 7</span><span> ARisk.strata.wald      0.448   0.099</span><span style='text-decoration: underline;'>2</span><span>     0.797
-#&gt; </span><span style='color: #555555;'> 8</span><span> ARisk.strata.score     0.448   0.142      0.882
-#&gt; </span><span style='color: #555555;'> 9</span><span> PARisk.strata.wald     0.176  -</span><span style='color: #BB0000;'>0.022</span><span style='color: #BB0000;text-decoration: underline;'>5</span><span>     0.375
-#&gt; </span><span style='color: #555555;'>10</span><span> PARisk.strata.piri     0.176   0.038</span><span style='text-decoration: underline;'>9</span><span>     0.314
-#&gt; </span><span style='color: #555555;'>11</span><span> AFRisk.strata.wald     0.750   0.301      0.911
-#&gt; </span><span style='color: #555555;'>12</span><span> PAFRisk.strata.wald    0.542   0.036</span><span style='text-decoration: underline;'>1</span><span>     0.782</div></span></pre>
+#&gt; </span><span style='color: #555555;'> 2</span><span> PR.strata.taylor       4.01    1.43      11.2  
+#&gt; </span><span style='color: #555555;'> 3</span><span> PR.strata.score        4.01    1.49      10.8  
+#&gt; </span><span style='color: #555555;'> 4</span><span> OR.strata.wald         4.03    1.43      11.3  
+#&gt; </span><span style='color: #555555;'> 5</span><span> OR.strata.cfield       4.03   </span><span style='color: #BB0000;'>NA</span><span>         </span><span style='color: #BB0000;'>NA</span><span>    
+#&gt; </span><span style='color: #555555;'> 6</span><span> OR.strata.score        4.03    1.49      10.9  
+#&gt; </span><span style='color: #555555;'> 7</span><span> OR.strata.mle          4.02    1.34      14.4  
+#&gt; </span><span style='color: #555555;'> 8</span><span> ARisk.strata.wald      0.448   0.099</span><span style='text-decoration: underline;'>2</span><span>     0.797
+#&gt; </span><span style='color: #555555;'> 9</span><span> ARisk.strata.score     0.448   0.142      0.882
+#&gt; </span><span style='color: #555555;'>10</span><span> PARisk.strata.wald     0.176  -</span><span style='color: #BB0000;'>0.022</span><span style='color: #BB0000;text-decoration: underline;'>5</span><span>     0.375
+#&gt; </span><span style='color: #555555;'>11</span><span> PARisk.strata.piri     0.176   0.038</span><span style='text-decoration: underline;'>9</span><span>     0.314
+#&gt; </span><span style='color: #555555;'>12</span><span> AFRisk.strata.wald     0.750   0.301      0.911
+#&gt; </span><span style='color: #555555;'>13</span><span> PAFRisk.strata.wald    0.542   0.036</span><span style='text-decoration: underline;'>1</span><span>     0.782</div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -261,7 +262,7 @@ the <code>data</code> argument.</p></td>
 
 <div class="author">
   <p>
-    Developed by David Robinson, Alex Hayes.
+    Developed by David Robinson, Alex Hayes, Simon Couch.
     Site built by <a href="https://pkgdown.r-lib.org">pkgdown</a>.
   </p>
 </div>

@@ -50,7 +50,7 @@
         <a class="navbar-brand" href="../index.html">broom</a>
         <div class="info hidden-xs hidden-sm">
           <span class="partof">part of <a href="https://tidymodels.org">tidymodels</a></span>
-          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.7.0.9000</span>
+          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.7.0</span>
         </div>
       </div>
     </div>
@@ -105,12 +105,12 @@
 
       
 
-      </header><div class="row">
+      </header><script src="adding-tidiers_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Adding tidiers to broom</h1>
             
-            <h4 class="date">2020-06-09</h4>
+            <h4 class="date">2020-07-09</h4>
       
       <small class="dont-index">Source: <a href="http://github.com/tidymodels/broom/blob/master/vignettes/adding-tidiers.Rmd"><code>vignettes/adding-tidiers.Rmd</code></a></small>
       <div class="hidden name"><code>adding-tidiers.Rmd</code></div>
@@ -122,7 +122,7 @@
 <div id="adding-tidiers-to-broom" class="section level1">
 <h1 class="hasAnchor">
 <a href="#adding-tidiers-to-broom" class="anchor"></a>Adding tidiers to broom</h1>
-<p>In general, the broom dev team will no longer integrate new tidiers into the broom package. We now ask that tidiers be provided in the model-owning package rather than broom itself, except in some circumstances:</p>
+<p>Generally, after this release, the broom dev team will first ask that attempts to add tidier methods supporting a model object are first directed to the model-owning package. An article describing best practices in doing so can be found on the {tidymodels} website at <a href="https://www.tidymodels.org/learn/develop/broom/" class="uri">https://www.tidymodels.org/learn/develop/broom/</a>, and we will continue adding additional resources to that article as we develop them. Some additional packages that supply themed tidiers are:</p>
 <ul>
 <li>Mixed model tidiers belong in <a href="https://github.com/bbolker/broom.mixed"><code>broom.mixed</code></a>
 </li>
@@ -134,6 +134,7 @@
 </li>
 </ul>
 <p>To aid in the process of writing new tidiers, we have provided <a href="https://www.tidymodels.org/learn/develop/broom">learning resources</a> as well as lightweight dependencies to re-export tidier generics on the {tidymodels} website.</p>
+<p>In the case that the maintainer is uninterested in taking on the tidier methods, please note this in your issue or PR.</p>
 </div>
   </div>
 
@@ -153,7 +154,7 @@
 
 <div class="author">
   <p>
-    Developed by David Robinson, Alex Hayes.
+    Developed by David Robinson, Alex Hayes, Simon Couch.
     Site built by <a href="https://pkgdown.r-lib.org">pkgdown</a>.
   </p>
 </div>

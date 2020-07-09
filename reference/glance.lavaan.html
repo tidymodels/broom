@@ -109,7 +109,7 @@ of the appropriate type." />
         <a class="navbar-brand" href="../index.html">broom</a>
         <div class="info hidden-xs hidden-sm">
           <span class="partof">part of <a href="https://tidymodels.org">tidymodels</a></span>
-          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.7.0.9000</span>
+          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.7.0</span>
         </div>
       </div>
     </div>
@@ -191,7 +191,7 @@ of the appropriate type.</p>
     </div>
 
     <pre class="usage"><span class='co'># S3 method for lavaan</span>
-<span class='fu'><a href='https://rdrr.io/pkg/generics/man/glance.html'>glance</a></span>(<span class='no'>x</span>, <span class='no'>...</span>)</pre>
+<span class='fu'><a href='https://rdrr.io/pkg/generics/man/glance.html'>glance</a></span>(<span class='kw'>x</span>, <span class='kw'>...</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -236,26 +236,30 @@ the <code>data</code> argument.</p></td>
 <dt>estimator</dt><dd><p>Estimator used</p></dd>
 <dt>missing_method</dt><dd><p>Method for eliminating missing data</p></dd>
 
-For further recommendations on reporting SEM and CFA models see Schreiber, J. B. (2017). Update to core reporting practices in structural equation modeling. Research in Social and Administrative Pharmacy, 13(3), 634-643. https://doi.org/10.1016/j.sapharm.2016.06.006
+For further recommendations on reporting SEM and CFA models see
+Schreiber, J. B. (2017). Update to core reporting practices in
+structural equation modeling. Research in Social and Administrative
+Pharmacy, 13(3), 634-643. https://doi.org/10.1016/j.sapharm.2016.06.006
 
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p><code><a href='https://rdrr.io/pkg/generics/man/glance.html'>glance()</a></code>, <code><a href='https://rdrr.io/pkg/lavaan/man/cfa.html'>lavaan::cfa()</a></code>, <code><a href='https://rdrr.io/pkg/lavaan/man/sem.html'>lavaan::sem()</a></code>,
 <code><a href='https://rdrr.io/pkg/lavaan/man/fitMeasures.html'>lavaan::fitmeasures()</a></code></p>
 <p>Other lavaan tidiers: 
-<code><a href='tidy.lavaan.html'>tidy.lavaan</a>()</code></p></div>
+<code><a href='https://broom.tidymodels.org/reference/tidy.lavaan.html'>tidy.lavaan</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
-<span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
-<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>lavaan</span>)
+<span class='co'>if</span> (<span class='fl'>FALSE</span>) {
+<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='kw'><a href='http://lavaan.org'>lavaan</a></span>)
 
-<span class='no'>cfa.fit</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/lavaan/man/cfa.html'>cfa</a></span>(
+<span class='kw'>cfa.fit</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/lavaan/man/cfa.html'>cfa</a></span>(
   <span class='st'>"F =~ x1 + x2 + x3 + x4 + x5"</span>,
-  <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>HolzingerSwineford1939</span>, <span class='kw'>group</span> <span class='kw'>=</span> <span class='st'>"school"</span>
+  data = <span class='kw'>HolzingerSwineford1939</span>, group = <span class='st'>"school"</span>
 )
-<span class='fu'><a href='https://rdrr.io/pkg/generics/man/glance.html'>glance</a></span>(<span class='no'>cfa.fit</span>)
-}</div></pre>
+<span class='fu'><a href='https://rdrr.io/pkg/generics/man/glance.html'>glance</a></span>(<span class='kw'>cfa.fit</span>)
+}
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -272,7 +276,7 @@ For further recommendations on reporting SEM and CFA models see Schreiber, J. B.
 
 <div class="author">
   <p>
-    Developed by David Robinson, Alex Hayes.
+    Developed by David Robinson, Alex Hayes, Simon Couch.
     Site built by <a href="https://pkgdown.r-lib.org">pkgdown</a>.
   </p>
 </div>

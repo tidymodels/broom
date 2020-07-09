@@ -100,7 +100,7 @@ specify which components to return." />
         <a class="navbar-brand" href="../index.html">broom</a>
         <div class="info hidden-xs hidden-sm">
           <span class="partof">part of <a href="https://tidymodels.org">tidymodels</a></span>
-          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.7.0.9000</span>
+          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.7.0</span>
         </div>
       </div>
     </div>
@@ -173,7 +173,7 @@ specify which components to return.</p>
     </div>
 
     <pre class="usage"><span class='co'># S3 method for map</span>
-<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>x</span>, <span class='no'>...</span>)</pre>
+<span class='fu'><a href='https://rdrr.io/pkg/geepack/man/geepack-internal.html'>tidy</a></span>(<span class='kw'>x</span>, <span class='kw'>...</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -198,28 +198,27 @@ the <code>data</code> argument.</p></td>
 
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy()</a></code>, <code><a href='https://rdrr.io/pkg/maps/man/map.html'>maps::map()</a></code></p></div>
+    <div class='dont-index'><p><code><a href='https://rdrr.io/pkg/geepack/man/geepack-internal.html'>tidy()</a></code>, <code><a href='https://rdrr.io/pkg/maps/man/map.html'>maps::map()</a></code></p></div>
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>A <code><a href='https://tibble.tidyverse.org/reference/tibble.html'>tibble::tibble()</a></code> with columns:</p>
 <dt>term</dt><dd><p>The name of the regression term.</p></dd>
   <dt>long</dt><dd><p>Longitude.</p></dd>
   <dt>lat</dt><dd><p>Latitude.</p></dd>
-Remaining columns give information on geographic attributes and depend on the inputted map object. See ?maps::map for more information.
+Remaining columns give information on geographic attributes 
+    and depend on the inputted map object. See ?maps::map for more information.
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
-<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>maps</span>)</div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Attaching package: ‘maps’</span></div><div class='output co'>#&gt; <span class='message'>The following object is masked from ‘package:cluster’:</span>
+<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='kw'>maps</span>)</div><div class='output co'>#&gt; <span class='message'></span>
+#&gt; <span class='message'>Attaching package: ‘maps’</span></div><div class='output co'>#&gt; <span class='message'>The following object is masked from ‘package:mclust’:</span>
 #&gt; <span class='message'></span>
-#&gt; <span class='message'>    votes.repub</span></div><div class='output co'>#&gt; <span class='message'>The following object is masked from ‘package:mclust’:</span>
-#&gt; <span class='message'></span>
-#&gt; <span class='message'>    map</span></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>ggplot2</span>)
+#&gt; <span class='message'>    map</span></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='kw'><a href='http://ggplot2.tidyverse.org'>ggplot2</a></span>)
 
 
-<span class='no'>ca</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/maps/man/map.html'>map</a></span>(<span class='st'>"county"</span>, <span class='st'>"ca"</span>, <span class='kw'>plot</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>fill</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
-<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>ca</span>)</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 2,977 x 7</span><span>
+<span class='kw'>ca</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/maps/man/map.html'>map</a></span>(<span class='st'>"county"</span>, <span class='st'>"ca"</span>, plot = <span class='fl'>FALSE</span>, fill = <span class='fl'>TRUE</span>)
+<span class='fu'><a href='https://rdrr.io/pkg/geepack/man/geepack-internal.html'>tidy</a></span>(<span class='kw'>ca</span>)</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 2,977 x 7</span><span>
 #&gt;    term   long   lat group order region     subregion
 #&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>      </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>    
 #&gt; </span><span style='color: #555555;'> 1</span><span> 1     -</span><span style='color: #BB0000;'>121.</span><span>  37.5     1     1 california alameda  
@@ -232,9 +231,9 @@ Remaining columns give information on geographic attributes and depend on the in
 #&gt; </span><span style='color: #555555;'> 8</span><span> 8     -</span><span style='color: #BB0000;'>122.</span><span>  37.5     1     8 california alameda  
 #&gt; </span><span style='color: #555555;'> 9</span><span> 9     -</span><span style='color: #BB0000;'>122.</span><span>  37.5     1     9 california alameda  
 #&gt; </span><span style='color: #555555;'>10</span><span> 10    -</span><span style='color: #BB0000;'>122.</span><span>  37.5     1    10 california alameda  
-#&gt; </span><span style='color: #555555;'># … with 2,967 more rows</span><span></div><div class='input'><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/qplot.html'>qplot</a></span>(<span class='no'>long</span>, <span class='no'>lat</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>ca</span>, <span class='kw'>geom</span> <span class='kw'>=</span> <span class='st'>"polygon"</span>, <span class='kw'>group</span> <span class='kw'>=</span> <span class='no'>group</span>)</div><div class='img'><img src='tidy.map-1.png' alt='' width='700' height='433' /></div><div class='input'>
-<span class='no'>tx</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/maps/man/map.html'>map</a></span>(<span class='st'>"county"</span>, <span class='st'>"texas"</span>, <span class='kw'>plot</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>fill</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
-<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>tx</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 4,488 x 7</span><span>
+#&gt; </span><span style='color: #555555;'># … with 2,967 more rows</span><span></div><div class='input'><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/qplot.html'>qplot</a></span>(<span class='kw'>long</span>, <span class='kw'>lat</span>, data = <span class='kw'>ca</span>, geom = <span class='st'>"polygon"</span>, group = <span class='kw'>group</span>)</div><div class='img'><img src='tidy.map-1.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='kw'>tx</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/maps/man/map.html'>map</a></span>(<span class='st'>"county"</span>, <span class='st'>"texas"</span>, plot = <span class='fl'>FALSE</span>, fill = <span class='fl'>TRUE</span>)
+<span class='fu'><a href='https://rdrr.io/pkg/geepack/man/geepack-internal.html'>tidy</a></span>(<span class='kw'>tx</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 4,488 x 7</span><span>
 #&gt;    term   long   lat group order region subregion
 #&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>    
 #&gt; </span><span style='color: #555555;'> 1</span><span> 1     -</span><span style='color: #BB0000;'>95.8</span><span>  31.5     1     1 texas  anderson 
@@ -247,9 +246,9 @@ Remaining columns give information on geographic attributes and depend on the in
 #&gt; </span><span style='color: #555555;'> 8</span><span> 8     -</span><span style='color: #BB0000;'>95.8</span><span>  31.7     1     8 texas  anderson 
 #&gt; </span><span style='color: #555555;'> 9</span><span> 9     -</span><span style='color: #BB0000;'>95.8</span><span>  31.6     1     9 texas  anderson 
 #&gt; </span><span style='color: #555555;'>10</span><span> 10    -</span><span style='color: #BB0000;'>95.8</span><span>  31.6     1    10 texas  anderson 
-#&gt; </span><span style='color: #555555;'># … with 4,478 more rows</span><span></div><div class='input'><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/qplot.html'>qplot</a></span>(<span class='no'>long</span>, <span class='no'>lat</span>,
-  <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>tx</span>, <span class='kw'>geom</span> <span class='kw'>=</span> <span class='st'>"polygon"</span>, <span class='kw'>group</span> <span class='kw'>=</span> <span class='no'>group</span>,
-  <span class='kw'>colour</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/AsIs.html'>I</a></span>(<span class='st'>"white"</span>)
+#&gt; </span><span style='color: #555555;'># … with 4,478 more rows</span><span></div><div class='input'><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/qplot.html'>qplot</a></span>(<span class='kw'>long</span>, <span class='kw'>lat</span>,
+  data = <span class='kw'>tx</span>, geom = <span class='st'>"polygon"</span>, group = <span class='kw'>group</span>,
+  colour = <span class='fu'><a href='https://rdrr.io/r/base/AsIs.html'>I</a></span>(<span class='st'>"white"</span>)
 )</div><div class='img'><img src='tidy.map-2.png' alt='' width='700' height='433' /></div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -267,7 +266,7 @@ Remaining columns give information on geographic attributes and depend on the in
 
 <div class="author">
   <p>
-    Developed by David Robinson, Alex Hayes.
+    Developed by David Robinson, Alex Hayes, Simon Couch.
     Site built by <a href="https://pkgdown.r-lib.org">pkgdown</a>.
   </p>
 </div>

@@ -59,7 +59,7 @@
         <a class="navbar-brand" href="index.html">broom</a>
         <div class="info hidden-xs hidden-sm">
           <span class="partof">part of <a href="https://tidymodels.org">tidymodels</a></span>
-          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.7.0.9000</span>
+          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.7.0</span>
         </div>
       </div>
     </div>
@@ -138,7 +138,8 @@
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
-<div class="sourceCode" id="cb1"><pre class="r"><span class="co"># we recommend installing the entire tidyverse </span>
+<div class="sourceCode" id="cb1"><pre class="downlit">
+<span class="co"># we recommend installing the entire tidyverse </span>
 <span class="co"># modeling set, which includes broom:</span>
 <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">"tidymodels"</span>)
 
@@ -147,32 +148,38 @@
 
 <span class="co"># to get the development version from GitHub:</span>
 <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">"devtools"</span>)
-<span class="kw pkg">devtools</span><span class="kw ns">::</span><span class="fu">install_github</span>(<span class="st">"tidymodels/broom"</span>)</pre></div>
+<span class="kw">devtools</span>::<span class="fu">install_github</span>(<span class="st">"tidymodels/broom"</span>)
+</pre></div>
 <p>If you find a bug, please file a minimal reproducible example in the <a href="https://github.com/tidymodels/broom/issues">issues</a>.</p>
 </div>
 <div id="usage" class="section level2">
 <h2 class="hasAnchor">
 <a href="#usage" class="anchor"></a>Usage</h2>
 <p><code><a href="https://rdrr.io/pkg/generics/man/tidy.html">tidy()</a></code> produces a <code>tibble()</code> where each row contains information about an important component of the model. For regression models, this often corresponds to regression coefficients. This is can be useful if you want to inspect a model or create custom visualizations.</p>
-<div class="sourceCode" id="cb2"><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">broom</span>)
+<div class="sourceCode" id="cb2"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="https://broom.tidymodels.org">broom</a></span>)
 
-<span class="no">fit</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span>(<span class="no">Volume</span> ~ <span class="no">Girth</span> + <span class="no">Height</span>, <span class="no">trees</span>)
-<span class="fu"><a href="https://rdrr.io/pkg/generics/man/tidy.html">tidy</a></span>(<span class="no">fit</span>)
+<span class="kw">fit</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span>(<span class="kw">Volume</span> <span class="op">~</span> <span class="kw">Girth</span> <span class="op">+</span> <span class="kw">Height</span>, <span class="kw">trees</span>)
+<span class="fu"><a href="https://rdrr.io/pkg/generics/man/tidy.html">tidy</a></span>(<span class="kw">fit</span>)
 <span class="co">#&gt; # A tibble: 3 x 5</span>
 <span class="co">#&gt;   term        estimate std.error statistic  p.value</span>
 <span class="co">#&gt;   &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;</span>
 <span class="co">#&gt; 1 (Intercept)  -58.0       8.64      -6.71 2.75e- 7</span>
 <span class="co">#&gt; 2 Girth          4.71      0.264     17.8  8.22e-17</span>
-<span class="co">#&gt; 3 Height         0.339     0.130      2.61 1.45e- 2</span></pre></div>
+<span class="co">#&gt; 3 Height         0.339     0.130      2.61 1.45e- 2</span>
+</pre></div>
 <p><code><a href="https://rdrr.io/pkg/generics/man/glance.html">glance()</a></code> returns a tibble with exactly one row of goodness of fitness measures and related statistics. This is useful to check for model misspecification and to compare many models.</p>
-<div class="sourceCode" id="cb3"><pre class="r"><span class="fu"><a href="https://rdrr.io/pkg/generics/man/glance.html">glance</a></span>(<span class="no">fit</span>)
+<div class="sourceCode" id="cb3"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/pkg/generics/man/glance.html">glance</a></span>(<span class="kw">fit</span>)
 <span class="co">#&gt; # A tibble: 1 x 12</span>
 <span class="co">#&gt;   r.squared adj.r.squared sigma statistic  p.value    df logLik   AIC   BIC</span>
 <span class="co">#&gt;       &lt;dbl&gt;         &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;</span>
 <span class="co">#&gt; 1     0.948         0.944  3.88      255. 1.07e-18     2  -84.5  177.  183.</span>
-<span class="co">#&gt; # … with 3 more variables: deviance &lt;dbl&gt;, df.residual &lt;int&gt;, nobs &lt;int&gt;</span></pre></div>
+<span class="co">#&gt; # … with 3 more variables: deviance &lt;dbl&gt;, df.residual &lt;int&gt;, nobs &lt;int&gt;</span>
+</pre></div>
 <p><code>augment</code> adds columns to a dataset, containing information such as fitted values, residuals or cluster assignments. All columns added to a dataset have <code>.</code> prefix to prevent existing columns from being overwritten.</p>
-<div class="sourceCode" id="cb4"><pre class="r"><span class="fu"><a href="https://rdrr.io/pkg/generics/man/augment.html">augment</a></span>(<span class="no">fit</span>, <span class="kw">data</span> <span class="kw">=</span> <span class="no">trees</span>)
+<div class="sourceCode" id="cb4"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/pkg/generics/man/augment.html">augment</a></span>(<span class="kw">fit</span>, data = <span class="kw">trees</span>)
 <span class="co">#&gt; # A tibble: 31 x 9</span>
 <span class="co">#&gt;    Girth Height Volume .fitted .resid .std.resid   .hat .sigma   .cooksd</span>
 <span class="co">#&gt;    &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;      &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;     &lt;dbl&gt;</span>
@@ -186,7 +193,8 @@
 <span class="co">#&gt;  8  11       75   18.2   19.2   1.05     -0.277  0.0515   3.95 0.00138  </span>
 <span class="co">#&gt;  9  11.1     80   22.6   21.4  -1.19      0.321  0.0920   3.95 0.00348  </span>
 <span class="co">#&gt; 10  11.2     75   19.9   20.2   0.288    -0.0759 0.0480   3.95 0.0000968</span>
-<span class="co">#&gt; # … with 21 more rows</span></pre></div>
+<span class="co">#&gt; # … with 21 more rows</span>
+</pre></div>
 <div id="contributing" class="section level3">
 <h3 class="hasAnchor">
 <a href="#contributing" class="anchor"></a>Contributing</h3>
@@ -232,6 +240,7 @@
 <ul class="list-unstyled">
 <li>David Robinson <br><small class="roles"> Author </small>  </li>
 <li>Alex Hayes <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0000-0002-4985-5160" target="orcid.widget" aria-label="ORCID"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
+<li>Simon Couch <br><small class="roles"> Author </small>  </li>
 <li><a href="authors.html">All authors...</a></li>
 </ul>
 </div>
@@ -254,7 +263,7 @@
 
 <div class="author">
   <p>
-    Developed by David Robinson, Alex Hayes.
+    Developed by David Robinson, Alex Hayes, Simon Couch.
     Site built by <a href="https://pkgdown.r-lib.org">pkgdown</a>.
   </p>
 </div>

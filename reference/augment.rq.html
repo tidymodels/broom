@@ -126,7 +126,7 @@ missing at this time." />
         <a class="navbar-brand" href="../index.html">broom</a>
         <div class="info hidden-xs hidden-sm">
           <span class="partof">part of <a href="https://tidymodels.org">tidymodels</a></span>
-          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.7.0.9000</span>
+          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.7.0</span>
         </div>
       </div>
     </div>
@@ -220,12 +220,12 @@ process, and that <code><a href='https://rdrr.io/r/splines/ns.html'>splines::ns(
 encounter errors, try explicitly passing a tibble, or fitting the original
 model on data in a tibble.</p>
 <p>We are in the process of defining behaviors for models fit with various
-<a href='https://rdrr.io/r/stats/na.action.html'>na.action</a> arguments, but make no guarantees about behavior when data is
+<code>na.action</code> arguments, but make no guarantees about behavior when data is
 missing at this time.</p>
     </div>
 
     <pre class="usage"><span class='co'># S3 method for rq</span>
-<span class='fu'><a href='https://rdrr.io/pkg/generics/man/augment.html'>augment</a></span>(<span class='no'>x</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/model.frame.html'>model.frame</a></span>(<span class='no'>x</span>), <span class='kw'>newdata</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>...</span>)</pre>
+<span class='fu'><a href='https://rdrr.io/pkg/generics/man/augment.html'>augment</a></span>(<span class='kw'>x</span>, data = <span class='fu'><a href='https://rdrr.io/r/stats/model.frame.html'>model.frame</a></span>(<span class='kw'>x</span>), newdata = <span class='kw'>NULL</span>, <span class='kw'>...</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -236,7 +236,7 @@ missing at this time.</p>
     </tr>
     <tr>
       <th>data</th>
-      <td><p>A <code><a href='https://rdrr.io/r/base/data.frame.html'>data.frame()</a></code> or <code><a href='https://tibble.tidyverse.org/reference/tibble.html'>tibble::tibble()</a></code> containing the original
+      <td><p>A <a href='https://rdrr.io/r/base/data.frame.html'>base::data.frame</a> or <code><a href='https://tibble.tidyverse.org/reference/tibble.html'>tibble::tibble()</a></code> containing the original
 data that was used to produce the object <code>x</code>. Defaults to
 <code><a href='https://rdrr.io/r/stats/model.frame.html'>stats::model.frame(x)</a></code> so that <code><a href='https://rdrr.io/pkg/generics/man/augment.html'>augment(my_fit)</a></code> returns the augmented
 original data. <strong>Do not</strong> pass new data to the <code>data</code> argument.
@@ -246,7 +246,7 @@ the original training data.</p></td>
     </tr>
     <tr>
       <th>newdata</th>
-      <td><p>A <code><a href='https://rdrr.io/r/base/data.frame.html'>data.frame()</a></code> or <code><a href='https://tibble.tidyverse.org/reference/tibble.html'>tibble::tibble()</a></code> containing all
+      <td><p>A <code><a href='https://rdrr.io/r/base/data.frame.html'>base::data.frame()</a></code> or <code><a href='https://tibble.tidyverse.org/reference/tibble.html'>tibble::tibble()</a></code> containing all
 the original predictors used to create <code>x</code>. Defaults to <code>NULL</code>, indicating
 that nothing has been passed to <code>newdata</code>. If <code>newdata</code> is specified,
 the <code>data</code> argument will be ignored.</p></td>
@@ -289,13 +289,13 @@ intervals when data is specified via the <code>newdata</code> argument.</p>
 
     <div class='dont-index'><p><a href='https://rdrr.io/pkg/generics/man/augment.html'>augment</a>, <code><a href='https://rdrr.io/pkg/quantreg/man/rq.html'>quantreg::rq()</a></code>, <code><a href='https://rdrr.io/pkg/quantreg/man/predict.rq.html'>quantreg::predict.rq()</a></code></p>
 <p>Other quantreg tidiers: 
-<code><a href='augment.nlrq.html'>augment.nlrq</a>()</code>,
-<code><a href='augment.rqs.html'>augment.rqs</a>()</code>,
-<code><a href='glance.nlrq.html'>glance.nlrq</a>()</code>,
-<code><a href='glance.rq.html'>glance.rq</a>()</code>,
-<code><a href='tidy.nlrq.html'>tidy.nlrq</a>()</code>,
-<code><a href='tidy.rqs.html'>tidy.rqs</a>()</code>,
-<code><a href='tidy.rq.html'>tidy.rq</a>()</code></p></div>
+<code><a href='https://broom.tidymodels.org/reference/augment.nlrq.html'>augment.nlrq</a>()</code>,
+<code><a href='https://broom.tidymodels.org/reference/augment.rqs.html'>augment.rqs</a>()</code>,
+<code><a href='https://broom.tidymodels.org/reference/glance.nlrq.html'>glance.nlrq</a>()</code>,
+<code><a href='https://broom.tidymodels.org/reference/glance.rq.html'>glance.rq</a>()</code>,
+<code><a href='https://broom.tidymodels.org/reference/tidy.nlrq.html'>tidy.nlrq</a>()</code>,
+<code><a href='https://broom.tidymodels.org/reference/tidy.rqs.html'>tidy.rqs</a>()</code>,
+<code><a href='https://broom.tidymodels.org/reference/tidy.rq.html'>tidy.rq</a>()</code></p></div>
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>A <code><a href='https://tibble.tidyverse.org/reference/tibble.html'>tibble::tibble()</a></code> with columns:</p>
@@ -321,7 +321,7 @@ intervals when data is specified via the <code>newdata</code> argument.</p>
 
 <div class="author">
   <p>
-    Developed by David Robinson, Alex Hayes.
+    Developed by David Robinson, Alex Hayes, Simon Couch.
     Site built by <a href="https://pkgdown.r-lib.org">pkgdown</a>.
   </p>
 </div>

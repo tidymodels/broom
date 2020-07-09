@@ -126,7 +126,7 @@ missing at this time." />
         <a class="navbar-brand" href="../index.html">broom</a>
         <div class="info hidden-xs hidden-sm">
           <span class="partof">part of <a href="https://tidymodels.org">tidymodels</a></span>
-          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.7.0.9000</span>
+          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.7.0</span>
         </div>
       </div>
     </div>
@@ -220,12 +220,12 @@ process, and that <code><a href='https://rdrr.io/r/splines/ns.html'>splines::ns(
 encounter errors, try explicitly passing a tibble, or fitting the original
 model on data in a tibble.</p>
 <p>We are in the process of defining behaviors for models fit with various
-<a href='https://rdrr.io/r/stats/na.action.html'>na.action</a> arguments, but make no guarantees about behavior when data is
+<code>na.action</code> arguments, but make no guarantees about behavior when data is
 missing at this time.</p>
     </div>
 
     <pre class="usage"><span class='co'># S3 method for kmeans</span>
-<span class='fu'><a href='https://rdrr.io/pkg/generics/man/augment.html'>augment</a></span>(<span class='no'>x</span>, <span class='no'>data</span>, <span class='no'>...</span>)</pre>
+<span class='fu'><a href='https://rdrr.io/pkg/generics/man/augment.html'>augment</a></span>(<span class='kw'>x</span>, <span class='kw'>data</span>, <span class='kw'>...</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -236,7 +236,7 @@ missing at this time.</p>
     </tr>
     <tr>
       <th>data</th>
-      <td><p>A <code><a href='https://rdrr.io/r/base/data.frame.html'>data.frame()</a></code> or <code><a href='https://tibble.tidyverse.org/reference/tibble.html'>tibble::tibble()</a></code> containing the original
+      <td><p>A <a href='https://rdrr.io/r/base/data.frame.html'>base::data.frame</a> or <code><a href='https://tibble.tidyverse.org/reference/tibble.html'>tibble::tibble()</a></code> containing the original
 data that was used to produce the object <code>x</code>. Defaults to
 <code><a href='https://rdrr.io/r/stats/model.frame.html'>stats::model.frame(x)</a></code> so that <code><a href='https://rdrr.io/pkg/generics/man/augment.html'>augment(my_fit)</a></code> returns the augmented
 original data. <strong>Do not</strong> pass new data to the <code>data</code> argument.
@@ -262,8 +262,8 @@ the <code>data</code> argument.</p></td>
 
     <div class='dont-index'><p><code><a href='https://rdrr.io/pkg/generics/man/augment.html'>augment()</a></code>, <code><a href='https://rdrr.io/r/stats/kmeans.html'>stats::kmeans()</a></code></p>
 <p>Other kmeans tidiers: 
-<code><a href='glance.kmeans.html'>glance.kmeans</a>()</code>,
-<code><a href='tidy.kmeans.html'>tidy.kmeans</a>()</code></p></div>
+<code><a href='https://broom.tidymodels.org/reference/glance.kmeans.html'>glance.kmeans</a>()</code>,
+<code><a href='https://broom.tidymodels.org/reference/tidy.kmeans.html'>tidy.kmeans</a>()</code></p></div>
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>A <code><a href='https://tibble.tidyverse.org/reference/tibble.html'>tibble::tibble()</a></code> with columns:</p>
@@ -273,13 +273,21 @@ the <code>data</code> argument.</p></td>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
-<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>cluster</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>dplyr</span>)
+<span class='co'>if</span> (<span class='fl'>FALSE</span>) {
+<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='kw'><a href='https://svn.r-project.org/R-packages/trunk/cluster'>cluster</a></span>)
+<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='kw'><a href='https://dplyr.tidyverse.org'>dplyr</a></span>)
 
-<span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='no'>iris</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/select.html'>select</a></span>(-<span class='no'>Species</span>)</div><div class='output co'>#&gt; <span class='error'>Error in select(., -Species): unused argument (-Species)</span></div><div class='input'>
-<span class='no'>fit</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/cluster/man/pam.html'>pam</a></span>(<span class='no'>x</span>, <span class='kw'>k</span> <span class='kw'>=</span> <span class='fl'>3</span>)</div><div class='output co'>#&gt; <span class='error'>Error in inherits(x, "dist"): object 'x' not found</span></div><div class='input'>
-<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>fit</span>)</div><div class='output co'>#&gt; <span class='error'>Error in tidy(fit): object 'fit' not found</span></div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/generics/man/glance.html'>glance</a></span>(<span class='no'>fit</span>)</div><div class='output co'>#&gt; <span class='error'>Error in glance(fit): object 'fit' not found</span></div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/generics/man/augment.html'>augment</a></span>(<span class='no'>fit</span>, <span class='no'>x</span>)</div><div class='output co'>#&gt; <span class='error'>Error in augment(fit, x): object 'fit' not found</span></div></pre>
+<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='kw'><a href='https://modeldata.tidymodels.org'>modeldata</a></span>)
+<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='kw'>hpc_data</span>)
+
+<span class='kw'>x</span> <span class='op'>&lt;-</span> <span class='kw'>hpc_data</span>[, <span class='fl'>2</span><span class='op'>:</span><span class='fl'>5</span>]
+
+<span class='kw'>fit</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/cluster/man/pam.html'>pam</a></span>(<span class='kw'>x</span>, k = <span class='fl'>4</span>)
+
+<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='kw'>fit</span>)
+<span class='fu'><a href='https://rdrr.io/pkg/generics/man/glance.html'>glance</a></span>(<span class='kw'>fit</span>)
+<span class='fu'><a href='https://rdrr.io/pkg/generics/man/augment.html'>augment</a></span>(<span class='kw'>fit</span>, <span class='kw'>x</span>)
+}</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -296,7 +304,7 @@ the <code>data</code> argument.</p></td>
 
 <div class="author">
   <p>
-    Developed by David Robinson, Alex Hayes.
+    Developed by David Robinson, Alex Hayes, Simon Couch.
     Site built by <a href="https://pkgdown.r-lib.org">pkgdown</a>.
   </p>
 </div>

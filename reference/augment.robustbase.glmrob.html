@@ -126,7 +126,7 @@ missing at this time." />
         <a class="navbar-brand" href="../index.html">broom</a>
         <div class="info hidden-xs hidden-sm">
           <span class="partof">part of <a href="https://tidymodels.org">tidymodels</a></span>
-          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.7.0.9000</span>
+          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.7.0</span>
         </div>
       </div>
     </div>
@@ -220,19 +220,19 @@ process, and that <code><a href='https://rdrr.io/r/splines/ns.html'>splines::ns(
 encounter errors, try explicitly passing a tibble, or fitting the original
 model on data in a tibble.</p>
 <p>We are in the process of defining behaviors for models fit with various
-<a href='https://rdrr.io/r/stats/na.action.html'>na.action</a> arguments, but make no guarantees about behavior when data is
+<code>na.action</code> arguments, but make no guarantees about behavior when data is
 missing at this time.</p>
     </div>
 
     <pre class="usage"><span class='co'># S3 method for glmrob</span>
 <span class='fu'><a href='https://rdrr.io/pkg/generics/man/augment.html'>augment</a></span>(
-  <span class='no'>x</span>,
-  <span class='kw'>data</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/model.frame.html'>model.frame</a></span>(<span class='no'>x</span>),
-  <span class='kw'>newdata</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>type.predict</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"link"</span>, <span class='st'>"response"</span>),
-  <span class='kw'>type.residuals</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"deviance"</span>, <span class='st'>"pearson"</span>),
-  <span class='kw'>se_fit</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='no'>...</span>
+  <span class='kw'>x</span>,
+  data = <span class='fu'><a href='https://rdrr.io/r/stats/model.frame.html'>model.frame</a></span>(<span class='kw'>x</span>),
+  newdata = <span class='kw'>NULL</span>,
+  type.predict = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"link"</span>, <span class='st'>"response"</span>),
+  type.residuals = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"deviance"</span>, <span class='st'>"pearson"</span>),
+  se_fit = <span class='fl'>FALSE</span>,
+  <span class='kw'>...</span>
 )</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -244,7 +244,7 @@ missing at this time.</p>
     </tr>
     <tr>
       <th>data</th>
-      <td><p>A <code><a href='https://rdrr.io/r/base/data.frame.html'>data.frame()</a></code> or <code><a href='https://tibble.tidyverse.org/reference/tibble.html'>tibble::tibble()</a></code> containing the original
+      <td><p>A <a href='https://rdrr.io/r/base/data.frame.html'>base::data.frame</a> or <code><a href='https://tibble.tidyverse.org/reference/tibble.html'>tibble::tibble()</a></code> containing the original
 data that was used to produce the object <code>x</code>. Defaults to
 <code><a href='https://rdrr.io/r/stats/model.frame.html'>stats::model.frame(x)</a></code> so that <code><a href='https://rdrr.io/pkg/generics/man/augment.html'>augment(my_fit)</a></code> returns the augmented
 original data. <strong>Do not</strong> pass new data to the <code>data</code> argument.
@@ -254,7 +254,7 @@ the original training data.</p></td>
     </tr>
     <tr>
       <th>newdata</th>
-      <td><p>A <code><a href='https://rdrr.io/r/base/data.frame.html'>data.frame()</a></code> or <code><a href='https://tibble.tidyverse.org/reference/tibble.html'>tibble::tibble()</a></code> containing all
+      <td><p>A <code><a href='https://rdrr.io/r/base/data.frame.html'>base::data.frame()</a></code> or <code><a href='https://tibble.tidyverse.org/reference/tibble.html'>tibble::tibble()</a></code> containing all
 the original predictors used to create <code>x</code>. Defaults to <code>NULL</code>, indicating
 that nothing has been passed to <code>newdata</code>. If <code>newdata</code> is specified,
 the <code>data</code> argument will be ignored.</p></td>
@@ -296,15 +296,15 @@ the <code>data</code> argument.</p></td>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>For tidiers for robust models from the <span class="pkg">MASS</span> package see
-<code><a href='tidy.rlm.html'>tidy.rlm()</a></code>.</p>
+<code><a href='https://broom.tidymodels.org/reference/tidy.rlm.html'>tidy.rlm()</a></code>.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p><code><a href='https://rdrr.io/pkg/robustbase/man/glmrob.html'>robustbase::glmrob()</a></code></p>
 <p>Other robustbase tidiers: 
-<code><a href='augment.robustbase.lmrob.html'>augment.lmrob</a>()</code>,
-<code><a href='glance.robustbase.lmrob.html'>glance.lmrob</a>()</code>,
-<code><a href='tidy.robustbase.glmrob.html'>tidy.glmrob</a>()</code>,
-<code><a href='tidy.robustbase.lmrob.html'>tidy.lmrob</a>()</code></p></div>
+<code><a href='https://broom.tidymodels.org/reference/augment.robustbase.lmrob.html'>augment.lmrob</a>()</code>,
+<code><a href='https://broom.tidymodels.org/reference/glance.robustbase.lmrob.html'>glance.lmrob</a>()</code>,
+<code><a href='https://broom.tidymodels.org/reference/tidy.robustbase.glmrob.html'>tidy.glmrob</a>()</code>,
+<code><a href='https://broom.tidymodels.org/reference/tidy.robustbase.lmrob.html'>tidy.lmrob</a>()</code></p></div>
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>A <code><a href='https://tibble.tidyverse.org/reference/tibble.html'>tibble::tibble()</a></code> with columns:</p>
@@ -329,7 +329,7 @@ the <code>data</code> argument.</p></td>
 
 <div class="author">
   <p>
-    Developed by David Robinson, Alex Hayes.
+    Developed by David Robinson, Alex Hayes, Simon Couch.
     Site built by <a href="https://pkgdown.r-lib.org">pkgdown</a>.
   </p>
 </div>

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Tidy a(n) Gam object — tidy.Gam • broom</title>
+<title>Tidy a(n) gam object — tidy.gam • broom</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -49,7 +49,7 @@
 
 
 
-<meta property="og:title" content="Tidy a(n) Gam object — tidy.Gam" />
+<meta property="og:title" content="Tidy a(n) gam object — tidy.gam" />
 <meta property="og:description" content="Tidy summarizes information about the components of a model.
 A model component might be a single term in a regression, a single
 hypothesis, a cluster, or a class. Exactly what tidy considers to be a
@@ -100,7 +100,7 @@ specify which components to return." />
         <a class="navbar-brand" href="../index.html">broom</a>
         <div class="info hidden-xs hidden-sm">
           <span class="partof">part of <a href="https://tidymodels.org">tidymodels</a></span>
-          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.7.0.9000</span>
+          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.7.0</span>
         </div>
       </div>
     </div>
@@ -158,8 +158,8 @@ specify which components to return." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Tidy a(n) Gam object</h1>
-    <small class="dont-index">Source: <a href='http://github.com/tidymodels/broom/blob/master/R/gam-tidiers.R'><code>R/gam-tidiers.R</code></a></small>
+    <h1>Tidy a(n) gam object</h1>
+    <small class="dont-index">Source: <a href='http://github.com/tidymodels/broom/blob/master/R/mgcv-tidiers.R'><code>R/mgcv-tidiers.R</code></a></small>
     <div class="hidden name"><code>tidy.Gam.Rd</code></div>
     </div>
 
@@ -172,15 +172,32 @@ If a model has several distinct types of components, you will need to
 specify which components to return.</p>
     </div>
 
-    <pre class="usage"><span class='co'># S3 method for Gam</span>
-<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>x</span>, <span class='no'>...</span>)</pre>
+    <pre class="usage"><span class='co'># S3 method for gam</span>
+<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='kw'>x</span>, parametric = <span class='fl'>FALSE</span>, conf.int = <span class='fl'>FALSE</span>, conf.level = <span class='fl'>0.95</span>, <span class='kw'>...</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>x</th>
-      <td><p>A <code>Gam</code> object returned from a call to <code><a href='https://rdrr.io/pkg/gam/man/gam.html'>gam::gam()</a></code>.</p></td>
+      <td><p>A <code>gam</code> object returned from a call to <code><a href='https://rdrr.io/pkg/mgcv/man/gam.html'>mgcv::gam()</a></code>.</p></td>
+    </tr>
+    <tr>
+      <th>parametric</th>
+      <td><p>Logical indicating if parametric or smooth terms should
+be tidied. Defaults to <code>FALSE</code>, meaning that smooth terms are tidied
+by default.</p></td>
+    </tr>
+    <tr>
+      <th>conf.int</th>
+      <td><p>Logical indicating whether or not to include a confidence
+interval in the tidied output. Defaults to <code>FALSE</code>.</p></td>
+    </tr>
+    <tr>
+      <th>conf.level</th>
+      <td><p>The confidence level to use for the confidence interval
+if <code>conf.int = TRUE</code>. Must be strictly greater than 0 and less than 1.
+Defaults to 0.95, which corresponds to a 95 percent confidence interval.</p></td>
     </tr>
     <tr>
       <th>...</th>
@@ -198,38 +215,44 @@ the <code>data</code> argument.</p></td>
 
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>Tidy <code>gam</code> objects created by calls to <code><a href='https://rdrr.io/pkg/mgcv/man/gam.html'>mgcv::gam()</a></code> with
-<code><a href='mgcv_tidy_gam.html'>tidy.gam()</a></code>.</p>
+    <p>When <code>parametric = FALSE</code> return columns <code>edf</code> and <code>ref.df</code> rather
+than <code>estimate</code> and <code>std.error</code>.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy()</a></code>, <code><a href='https://rdrr.io/pkg/gam/man/gam.html'>gam::gam()</a></code>, <code><a href='tidy.anova.html'>tidy.anova()</a></code>, <code><a href='mgcv_tidy_gam.html'>tidy.gam()</a></code></p>
-<p>Other gam tidiers: 
-<code><a href='glance.Gam.html'>glance.Gam</a>()</code></p></div>
+    <div class='dont-index'><p><code><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy()</a></code>, <code><a href='https://rdrr.io/pkg/mgcv/man/gam.html'>mgcv::gam()</a></code></p>
+<p>Other mgcv tidiers: 
+<code><a href='https://broom.tidymodels.org/reference/glance.Gam.html'>glance.gam</a>()</code></p></div>
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>A <code><a href='https://tibble.tidyverse.org/reference/tibble.html'>tibble::tibble()</a></code> with columns:</p>
-<dt>df</dt><dd><p>Degrees of freedom used by this term in the model.</p></dd>
-  <dt>meansq</dt><dd><p>Mean sum of squares. Equal to total sum of squares divided by degrees of freedom.</p></dd>
+<dt>estimate</dt><dd><p>The estimated value of the regression term.</p></dd>
   <dt>p.value</dt><dd><p>The two-sided p-value associated with the observed statistic.</p></dd>
   <dt>statistic</dt><dd><p>The value of a T-statistic to use in a hypothesis that the regression term is non-zero.</p></dd>
-  <dt>sumsq</dt><dd><p>Sum of squares explained by this term.</p></dd>
+  <dt>std.error</dt><dd><p>The standard error of the regression term.</p></dd>
   <dt>term</dt><dd><p>The name of the regression term.</p></dd>
+  <dt>edf</dt><dd><p>The effective degrees of freedom. Only reported when
+    `parametric = FALSE`</p></dd>
+  <dt>ref.df</dt><dd><p>The reference degrees of freedom. Only reported when
+    `parametric = FALSE`</p></dd>
 
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
-<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>gam</span>)</div><div class='output co'>#&gt; <span class='message'>Loading required package: splines</span></div><div class='output co'>#&gt; <span class='message'>Loading required package: foreach</span></div><div class='output co'>#&gt; <span class='message'>Loaded gam 1.16.1</span></div><div class='input'><span class='no'>g</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/gam/man/gam.html'>gam</a></span>(<span class='no'>mpg</span> ~ <span class='fu'><a href='https://rdrr.io/pkg/gam/man/s.html'>s</a></span>(<span class='no'>hp</span>, <span class='fl'>4</span>) + <span class='no'>am</span> + <span class='no'>qsec</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>mtcars</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: non-list contrasts argument ignored</span></div><div class='input'>
-<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>g</span>)</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 4 x 6</span><span>
-#&gt;   term         df    sumsq   meansq statistic   p.value
-#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span> s(hp, 4)    1   678.     678.      94.4      5.73</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-10</span><span>
-#&gt; </span><span style='color: #555555;'>2</span><span> am          1   113.     113.      15.7      5.52</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>- 4</span><span>
-#&gt; </span><span style='color: #555555;'>3</span><span> qsec        1     0.026</span><span style='text-decoration: underline;'>3</span><span>   0.026</span><span style='text-decoration: underline;'>3</span><span>   0.003</span><span style='text-decoration: underline;'>66</span><span>  9.52</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>- 1</span><span>
-#&gt; </span><span style='color: #555555;'>4</span><span> Residuals  25.0 180.       7.19    </span><span style='color: #BB0000;'>NA</span><span>       </span><span style='color: #BB0000;'>NA</span><span>   </span><span style='color: #555555;'> </span><span>   </div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/generics/man/glance.html'>glance</a></span>(<span class='no'>g</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 1 x 7</span><span>
+<span class='kw'>g</span> <span class='op'>&lt;-</span> <span class='kw'>mgcv</span>::<span class='fu'><a href='https://rdrr.io/pkg/mgcv/man/gam.html'>gam</a></span>(<span class='kw'>mpg</span> <span class='op'>~</span> <span class='fu'>s</span>(<span class='kw'>hp</span>) <span class='op'>+</span> <span class='kw'>am</span> <span class='op'>+</span> <span class='kw'>qsec</span>, data = <span class='kw'>mtcars</span>)
+
+<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='kw'>g</span>)</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 1 x 5</span><span>
+#&gt;   term    edf ref.df statistic p.value
+#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #555555;'>1</span><span> s(hp)  2.36   3.02      6.34 0.002</span><span style='text-decoration: underline;'>07</span><span></div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='kw'>g</span>, parametric = <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 3 x 5</span><span>
+#&gt;   term        estimate std.error statistic p.value
+#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>          </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #555555;'>1</span><span> (Intercept)  16.7        9.83      1.70  0.101  
+#&gt; </span><span style='color: #555555;'>2</span><span> am            4.37       1.56      2.81  0.009</span><span style='text-decoration: underline;'>18</span><span>
+#&gt; </span><span style='color: #555555;'>3</span><span> qsec          0.090</span><span style='text-decoration: underline;'>4</span><span>     0.525     0.172 0.865  </div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/generics/man/glance.html'>glance</a></span>(<span class='kw'>g</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 1 x 7</span><span>
 #&gt;      df logLik   AIC   BIC deviance df.residual  nobs
 #&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>       </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span>  7.00  -</span><span style='color: #BB0000;'>76.0</span><span>  162.  169.     180.        25.0    32</div></span></pre>
+#&gt; </span><span style='color: #555555;'>1</span><span>  5.36  -</span><span style='color: #BB0000;'>74.4</span><span>  162.  171.     196.        26.6    32</div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -246,7 +269,7 @@ the <code>data</code> argument.</p></td>
 
 <div class="author">
   <p>
-    Developed by David Robinson, Alex Hayes.
+    Developed by David Robinson, Alex Hayes, Simon Couch.
     Site built by <a href="https://pkgdown.r-lib.org">pkgdown</a>.
   </p>
 </div>

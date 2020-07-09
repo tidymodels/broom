@@ -43,10 +43,15 @@
 <script src="../pkgdown.js"></script>
 <link href="../tidyverse-2.css" rel="stylesheet">
 
+<!--optional theme-->
+<link href="../.css" rel="stylesheet">
+
+
 
 
 <meta property="og:title" content="Ensure an object is a data frame, with rownames moved into a column — fix_data_frame" />
-<meta property="og:description" content="Ensure an object is a data frame, with rownames moved into a column" />
+<meta property="og:description" content="This function is deprecated as of broom 0.7.0 and will be removed from
+a future release. Please see tibble::as_tibble." />
 <meta property="og:image" content="https://broom.tidymodels.org/logo.png" />
 <meta name="twitter:card" content="summary" />
 
@@ -91,7 +96,7 @@
         <a class="navbar-brand" href="../index.html">broom</a>
         <div class="info hidden-xs hidden-sm">
           <span class="partof">part of <a href="https://tidymodels.org">tidymodels</a></span>
-          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.7.0.9000</span>
+          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.7.0</span>
         </div>
       </div>
     </div>
@@ -111,7 +116,7 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/adding-tidiers.html">Adding new tidiers</a>
+      <a href="https://www.tidymodels.org/learn/develop/broom/">Adding new tidiers</a>
     </li>
     <li>
       <a href="../articles/available-methods.html">Available methods</a>
@@ -150,15 +155,16 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Ensure an object is a data frame, with rownames moved into a column</h1>
-    <small class="dont-index">Source: <a href='http://github.com/tidymodels/broom/blob/master/R/utilities.R'><code>R/utilities.R</code></a></small>
+    <small class="dont-index">Source: <a href='http://github.com/tidymodels/broom/blob/master/R/deprecated-0-7-0.R'><code>R/deprecated-0-7-0.R</code></a></small>
     <div class="hidden name"><code>fix_data_frame.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Ensure an object is a data frame, with rownames moved into a column</p>
+    <p>This function is deprecated as of broom 0.7.0 and will be removed from
+a future release. Please see <code><a href='https://tibble.tidyverse.org/reference/as_tibble.html'>tibble::as_tibble</a></code>.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>fix_data_frame</span>(<span class='no'>x</span>, <span class='kw'>newnames</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>newcol</span> <span class='kw'>=</span> <span class='st'>"term"</span>)</pre>
+    <pre class="usage"><span class='fu'><a href='https://broom.tidymodels.org/reference/fix_data_frame.html'>fix_data_frame</a></span>(<span class='kw'>x</span>, newnames = <span class='kw'>NULL</span>, newcol = <span class='st'>"term"</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -181,6 +187,18 @@
 
     <p>a data.frame, with rownames moved into a column and new column
 names assigned</p>
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p>Other deprecated: 
+<code><a href='https://broom.tidymodels.org/reference/bootstrap.html'>bootstrap</a>()</code>,
+<code><a href='https://broom.tidymodels.org/reference/confint_tidy.html'>confint_tidy</a>()</code>,
+<code><a href='https://broom.tidymodels.org/reference/data.frame_tidiers.html'>data.frame_tidiers</a></code>,
+<code><a href='https://broom.tidymodels.org/reference/finish_glance.html'>finish_glance</a>()</code>,
+<code><a href='https://broom.tidymodels.org/reference/summary_tidiers.html'>summary_tidiers</a></code>,
+<code><a href='https://broom.tidymodels.org/reference/tidy.density.html'>tidy.density</a>()</code>,
+<code><a href='https://broom.tidymodels.org/reference/tidy.dist.html'>tidy.dist</a>()</code>,
+<code><a href='https://broom.tidymodels.org/reference/tidy.ftable.html'>tidy.ftable</a>()</code>,
+<code><a href='https://broom.tidymodels.org/reference/vector_tidiers.html'>tidy.numeric</a>()</code></p></div>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -198,7 +216,7 @@ names assigned</p>
 
 <div class="author">
   <p>
-    Developed by David Robinson, Alex Hayes.
+    Developed by David Robinson, Alex Hayes, Simon Couch.
     Site built by <a href="https://pkgdown.r-lib.org">pkgdown</a>.
   </p>
 </div>

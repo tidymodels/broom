@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Tidy a(n) ftable object — tidy.ftable • broom</title>
+<title>(Deprecated) Tidy ftable objects — tidy.ftable • broom</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -49,14 +49,8 @@
 
 
 
-<meta property="og:title" content="Tidy a(n) ftable object — tidy.ftable" />
-<meta property="og:description" content="Tidy summarizes information about the components of a model.
-A model component might be a single term in a regression, a single
-hypothesis, a cluster, or a class. Exactly what tidy considers to be a
-model component varies across models but is usually self-evident.
-If a model has several distinct types of components, you will need to
-specify which components to return.
-This function is deprecated. Please use tibble::as_tibble() instead." />
+<meta property="og:title" content="(Deprecated) Tidy ftable objects — tidy.ftable" />
+<meta property="og:description" content="This function is deprecated. Please use tibble::as_tibble() instead." />
 <meta property="og:image" content="https://broom.tidymodels.org/logo.png" />
 <meta name="twitter:card" content="summary" />
 
@@ -101,7 +95,7 @@ This function is deprecated. Please use tibble::as_tibble() instead." />
         <a class="navbar-brand" href="../index.html">broom</a>
         <div class="info hidden-xs hidden-sm">
           <span class="partof">part of <a href="https://tidymodels.org">tidymodels</a></span>
-          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.7.0.9000</span>
+          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.7.0</span>
         </div>
       </div>
     </div>
@@ -159,23 +153,17 @@ This function is deprecated. Please use tibble::as_tibble() instead." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Tidy a(n) ftable object</h1>
-    <small class="dont-index">Source: <a href='http://github.com/tidymodels/broom/blob/master/R/stats-tidiers.R'><code>R/stats-tidiers.R</code></a></small>
+    <h1>(Deprecated) Tidy ftable objects</h1>
+    <small class="dont-index">Source: <a href='http://github.com/tidymodels/broom/blob/master/R/deprecated-0-7-0.R'><code>R/deprecated-0-7-0.R</code></a></small>
     <div class="hidden name"><code>tidy.ftable.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Tidy summarizes information about the components of a model.
-A model component might be a single term in a regression, a single
-hypothesis, a cluster, or a class. Exactly what tidy considers to be a
-model component varies across models but is usually self-evident.
-If a model has several distinct types of components, you will need to
-specify which components to return.</p>
-<p>This function is deprecated. Please use <code><a href='https://tibble.tidyverse.org/reference/as_tibble.html'>tibble::as_tibble()</a></code> instead.</p>
+    <p>This function is deprecated. Please use <code><a href='https://tibble.tidyverse.org/reference/as_tibble.html'>tibble::as_tibble()</a></code> instead.</p>
     </div>
 
     <pre class="usage"><span class='co'># S3 method for ftable</span>
-<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>x</span>, <span class='no'>...</span>)</pre>
+<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='kw'>x</span>, <span class='kw'>...</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -205,10 +193,16 @@ the <code>data</code> argument.</p></td>
 column.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy()</a></code>, <code><a href='https://rdrr.io/r/stats/ftable.html'>stats::ftable()</a></code></p>
-<p>Other stats tidiers: 
-<code><a href='tidy.density.html'>tidy.density</a>()</code>,
-<code><a href='tidy.dist.html'>tidy.dist</a>()</code></p></div>
+    <div class='dont-index'><p>Other deprecated: 
+<code><a href='https://broom.tidymodels.org/reference/bootstrap.html'>bootstrap</a>()</code>,
+<code><a href='https://broom.tidymodels.org/reference/confint_tidy.html'>confint_tidy</a>()</code>,
+<code><a href='https://broom.tidymodels.org/reference/data.frame_tidiers.html'>data.frame_tidiers</a></code>,
+<code><a href='https://broom.tidymodels.org/reference/finish_glance.html'>finish_glance</a>()</code>,
+<code><a href='https://broom.tidymodels.org/reference/fix_data_frame.html'>fix_data_frame</a>()</code>,
+<code><a href='https://broom.tidymodels.org/reference/summary_tidiers.html'>summary_tidiers</a></code>,
+<code><a href='https://broom.tidymodels.org/reference/tidy.density.html'>tidy.density</a>()</code>,
+<code><a href='https://broom.tidymodels.org/reference/tidy.dist.html'>tidy.dist</a>()</code>,
+<code><a href='https://broom.tidymodels.org/reference/vector_tidiers.html'>tidy.numeric</a>()</code></p></div>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -226,7 +220,7 @@ column.</p>
 
 <div class="author">
   <p>
-    Developed by David Robinson, Alex Hayes.
+    Developed by David Robinson, Alex Hayes, Simon Couch.
     Site built by <a href="https://pkgdown.r-lib.org">pkgdown</a>.
   </p>
 </div>

@@ -109,7 +109,7 @@ of the appropriate type." />
         <a class="navbar-brand" href="../index.html">broom</a>
         <div class="info hidden-xs hidden-sm">
           <span class="partof">part of <a href="https://tidymodels.org">tidymodels</a></span>
-          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.7.0.9000</span>
+          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.7.0</span>
         </div>
       </div>
     </div>
@@ -191,7 +191,7 @@ of the appropriate type.</p>
     </div>
 
     <pre class="usage"><span class='co'># S3 method for geeglm</span>
-<span class='fu'><a href='https://rdrr.io/pkg/generics/man/glance.html'>glance</a></span>(<span class='no'>x</span>, <span class='no'>...</span>)</pre>
+<span class='fu'><a href='https://rdrr.io/pkg/generics/man/glance.html'>glance</a></span>(<span class='kw'>x</span>, <span class='kw'>...</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -230,15 +230,15 @@ the <code>data</code> argument.</p></td>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
-<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>geepack</span>)
-<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>state</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='kw'>geepack</span>)
+<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='kw'>state</span>)
 
-<span class='no'>ds</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>(<span class='no'>state.region</span>, <span class='no'>state.x77</span>)
+<span class='kw'>ds</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>(<span class='kw'>state.region</span>, <span class='kw'>state.x77</span>)
 
-<span class='no'>geefit</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/geepack/man/geeglm.html'>geeglm</a></span>(<span class='no'>Income</span> ~ <span class='no'>Frost</span> + <span class='no'>Murder</span>,
-  <span class='kw'>id</span> <span class='kw'>=</span> <span class='no'>state.region</span>,
-  <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>ds</span>, <span class='kw'>family</span> <span class='kw'>=</span> <span class='no'>gaussian</span>,
-  <span class='kw'>corstr</span> <span class='kw'>=</span> <span class='st'>"exchangeable"</span>
+<span class='kw'>geefit</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/geepack/man/geeglm.html'>geeglm</a></span>(<span class='kw'>Income</span> <span class='op'>~</span> <span class='kw'>Frost</span> <span class='op'>+</span> <span class='kw'>Murder</span>,
+  id = <span class='kw'>state.region</span>,
+  data = <span class='kw'>ds</span>, family = <span class='kw'>gaussian</span>,
+  corstr = <span class='st'>"exchangeable"</span>
 )</div><div class='output co'>#&gt; $fct
 #&gt; function (dose, parm) 
 #&gt; {
@@ -247,8 +247,8 @@ the <code>data</code> argument.</p></td>
 #&gt;     fd(dose, parmMat[, 1], parmMat[, 2], parmMat[, 3], parmMat[, 
 #&gt;         4], parmMat[, 5])
 #&gt; }
-#&gt; &lt;bytecode: 0x7f811d416650&gt;
-#&gt; &lt;environment: 0x7f810f1067c8&gt;
+#&gt; &lt;bytecode: 0x7fbd69afae80&gt;
+#&gt; &lt;environment: 0x7fbd5e914240&gt;
 #&gt; 
 #&gt; $ssfct
 #&gt; function (dframe) 
@@ -267,8 +267,8 @@ the <code>data</code> argument.</p></td>
 #&gt;     befVal &lt;- c(bVal, x[which.max(y)], 1)
 #&gt;     return(c(befVal[1], cdVal, befVal[2:3])[is.na(fixed)])
 #&gt; }
-#&gt; &lt;bytecode: 0x7f810f105590&gt;
-#&gt; &lt;environment: 0x7f810f103408&gt;
+#&gt; &lt;bytecode: 0x7fbd5e927350&gt;
+#&gt; &lt;environment: 0x7fbd5e9194d8&gt;
 #&gt; 
 #&gt; $names
 #&gt; [1] "b" "c" "d" "e" "f"
@@ -281,8 +281,8 @@ the <code>data</code> argument.</p></td>
 #&gt;     attr(fd(dose, parmMat[, 1], parmMat[, 2], parmMat[, 3], parmMat[, 
 #&gt;         4], parmMat[, 5]), "gradient")[, notFixed]
 #&gt; }
-#&gt; &lt;bytecode: 0x7f811d419290&gt;
-#&gt; &lt;environment: 0x7f810f1067c8&gt;
+#&gt; &lt;bytecode: 0x7fbd69afda88&gt;
+#&gt; &lt;environment: 0x7fbd5e914240&gt;
 #&gt; 
 #&gt; $deriv2
 #&gt; NULL
@@ -308,8 +308,8 @@ the <code>data</code> argument.</p></td>
 #&gt;     attr(dFct(dose, parmMat[, 1], parmMat[, 2], parmMat[, 3], 
 #&gt;         parmMat[, 4], parmMat[, 5]), "gradient")
 #&gt; }
-#&gt; &lt;bytecode: 0x7f811d417f18&gt;
-#&gt; &lt;environment: 0x7f810f1067c8&gt;
+#&gt; &lt;bytecode: 0x7fbd69afc710&gt;
+#&gt; &lt;environment: 0x7fbd5e914240&gt;
 #&gt; 
 #&gt; $edfct
 #&gt; function (parm, respl, reference, type, ...) 
@@ -344,8 +344,8 @@ the <code>data</code> argument.</p></td>
 #&gt;         parmVec[5]), "gradient")
 #&gt;     return(list(EDp, EDder[notFixed]))
 #&gt; }
-#&gt; &lt;bytecode: 0x7f811d41dc78&gt;
-#&gt; &lt;environment: 0x7f810f1067c8&gt;
+#&gt; &lt;bytecode: 0x7fbd69b02400&gt;
+#&gt; &lt;environment: 0x7fbd5e914240&gt;
 #&gt; 
 #&gt; $name
 #&gt; [1] "family"
@@ -362,8 +362,8 @@ the <code>data</code> argument.</p></td>
 #&gt;     parmVec[indexVec] &lt;- parm
 #&gt;     parmVec[parmNo]
 #&gt; }
-#&gt; &lt;bytecode: 0x7f811d4ae6b8&gt;
-#&gt; &lt;environment: 0x7f810f100950&gt;
+#&gt; &lt;bytecode: 0x7fbd69c616d0&gt;
+#&gt; &lt;environment: 0x7fbd5e91bf90&gt;
 #&gt; 
 #&gt; $upperAs
 #&gt; function (parm) 
@@ -371,8 +371,8 @@ the <code>data</code> argument.</p></td>
 #&gt;     parmVec[indexVec] &lt;- parm
 #&gt;     parmVec[parmNo]
 #&gt; }
-#&gt; &lt;bytecode: 0x7f811d4ae6b8&gt;
-#&gt; &lt;environment: 0x7f810f100bb8&gt;
+#&gt; &lt;bytecode: 0x7fbd69c616d0&gt;
+#&gt; &lt;environment: 0x7fbd5e91bd28&gt;
 #&gt; 
 #&gt; $monoton
 #&gt; [1] NA
@@ -382,7 +382,7 @@ the <code>data</code> argument.</p></td>
 #&gt; 
 #&gt; attr(,"class")
 #&gt; [1] "gaussian"</div><div class='output co'>#&gt; <span class='error'>Error in glm(formula = Income ~ Frost + Murder, family = gaussian, data = ds): 'family' not recognized</span></div><div class='input'>
-<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>geefit</span>)</div><div class='output co'>#&gt; <span class='error'>Error in tidy(geefit): object 'geefit' not found</span></div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>geefit</span>, <span class='kw'>conf.int</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; <span class='error'>Error in tidy(geefit, conf.int = TRUE): object 'geefit' not found</span></div></pre>
+<span class='fu'><a href='https://rdrr.io/pkg/geepack/man/geepack-internal.html'>tidy</a></span>(<span class='kw'>geefit</span>)</div><div class='output co'>#&gt; <span class='error'>Error in tidy(geefit): object 'geefit' not found</span></div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/geepack/man/geepack-internal.html'>tidy</a></span>(<span class='kw'>geefit</span>, conf.int = <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; <span class='error'>Error in tidy(geefit, conf.int = TRUE): object 'geefit' not found</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -399,7 +399,7 @@ the <code>data</code> argument.</p></td>
 
 <div class="author">
   <p>
-    Developed by David Robinson, Alex Hayes.
+    Developed by David Robinson, Alex Hayes, Simon Couch.
     Site built by <a href="https://pkgdown.r-lib.org">pkgdown</a>.
   </p>
 </div>

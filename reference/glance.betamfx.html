@@ -109,7 +109,7 @@ of the appropriate type." />
         <a class="navbar-brand" href="../index.html">broom</a>
         <div class="info hidden-xs hidden-sm">
           <span class="partof">part of <a href="https://tidymodels.org">tidymodels</a></span>
-          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.7.0.9000</span>
+          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.7.0</span>
         </div>
       </div>
     </div>
@@ -191,7 +191,7 @@ of the appropriate type.</p>
     </div>
 
     <pre class="usage"><span class='co'># S3 method for betamfx</span>
-<span class='fu'><a href='https://rdrr.io/pkg/generics/man/glance.html'>glance</a></span>(<span class='no'>x</span>, <span class='no'>...</span>)</pre>
+<span class='fu'><a href='https://rdrr.io/pkg/generics/man/glance.html'>glance</a></span>(<span class='kw'>x</span>, <span class='kw'>...</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -216,16 +216,16 @@ the <code>data</code> argument.</p></td>
 
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>This glance method wraps <code><a href='glance.betareg.html'>glance.betareg()</a></code> for <code><a href='https://rdrr.io/pkg/mfx/man/betamfx.html'>mfx::betamfx()</a></code> objects.</p>
+    <p>This glance method wraps <code><a href='https://broom.tidymodels.org/reference/glance.betareg.html'>glance.betareg()</a></code> for <code><a href='https://rdrr.io/pkg/mfx/man/betamfx.html'>mfx::betamfx()</a></code> objects.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='glance.betareg.html'>glance.betareg()</a></code>, <code><a href='https://rdrr.io/pkg/mfx/man/betamfx.html'>mfx::betamfx()</a></code></p>
+    <div class='dont-index'><p><code><a href='https://broom.tidymodels.org/reference/glance.betareg.html'>glance.betareg()</a></code>, <code><a href='https://rdrr.io/pkg/mfx/man/betamfx.html'>mfx::betamfx()</a></code></p>
 <p>Other mfx tidiers: 
-<code><a href='augment.betamfx.html'>augment.betamfx</a>()</code>,
-<code><a href='augment.mfx.html'>augment.mfx</a>()</code>,
-<code><a href='glance.mfx.html'>glance.mfx</a>()</code>,
-<code><a href='tidy.betamfx.html'>tidy.betamfx</a>()</code>,
-<code><a href='tidy.mfx.html'>tidy.mfx</a>()</code></p></div>
+<code><a href='https://broom.tidymodels.org/reference/augment.betamfx.html'>augment.betamfx</a>()</code>,
+<code><a href='https://broom.tidymodels.org/reference/augment.mfx.html'>augment.mfx</a>()</code>,
+<code><a href='https://broom.tidymodels.org/reference/glance.mfx.html'>glance.mfx</a>()</code>,
+<code><a href='https://broom.tidymodels.org/reference/tidy.betamfx.html'>tidy.betamfx</a>()</code>,
+<code><a href='https://broom.tidymodels.org/reference/tidy.mfx.html'>tidy.mfx</a>()</code></p></div>
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>A <code><a href='https://tibble.tidyverse.org/reference/tibble.html'>tibble::tibble()</a></code> with exactly one row and columns:</p>
@@ -240,29 +240,29 @@ the <code>data</code> argument.</p></td>
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
-<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>mfx</span>)
+    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fl'>FALSE</span>) { 
+<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='kw'>mfx</span>)
 
 <span class='co'>## Simulate some data</span>
 <span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span>(<span class='fl'>12345</span>)
-<span class='no'>n</span> <span class='kw'>=</span> <span class='fl'>1000</span>
-<span class='no'>x</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span>(<span class='no'>n</span>)
+<span class='kw'>n</span> <span class='op'>=</span> <span class='fl'>1000</span>
+<span class='kw'>x</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span>(<span class='kw'>n</span>)
 
 <span class='co'>## Beta outcome</span>
-<span class='no'>y</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/Beta.html'>rbeta</a></span>(<span class='no'>n</span>, <span class='kw'>shape1</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/Logistic.html'>plogis</a></span>(<span class='fl'>1</span> + <span class='fl'>0.5</span> * <span class='no'>x</span>), <span class='kw'>shape2</span> <span class='kw'>=</span> (<span class='fu'><a href='https://rdrr.io/r/base/MathFun.html'>abs</a></span>(<span class='fl'>0.2</span>*<span class='no'>x</span>)))
+<span class='kw'>y</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/Beta.html'>rbeta</a></span>(<span class='kw'>n</span>, shape1 = <span class='fu'><a href='https://rdrr.io/r/stats/Logistic.html'>plogis</a></span>(<span class='fl'>1</span> <span class='op'>+</span> <span class='fl'>0.5</span> <span class='op'>*</span> <span class='kw'>x</span>), shape2 = (<span class='fu'><a href='https://rdrr.io/r/base/MathFun.html'>abs</a></span>(<span class='fl'>0.2</span><span class='op'>*</span><span class='kw'>x</span>)))
 <span class='co'>## Use Smithson and Verkuilen correction</span>
-<span class='no'>y</span> <span class='kw'>=</span> (<span class='no'>y</span>*(<span class='no'>n</span>-<span class='fl'>1</span>)+<span class='fl'>0.5</span>)/<span class='no'>n</span>
+<span class='kw'>y</span> <span class='op'>=</span> (<span class='kw'>y</span><span class='op'>*</span>(<span class='kw'>n</span><span class='op'>-</span><span class='fl'>1</span>)<span class='op'>+</span><span class='fl'>0.5</span>)<span class='op'>/</span><span class='kw'>n</span>
 
-<span class='no'>d</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>(<span class='no'>y</span>,<span class='no'>x</span>)
-<span class='no'>mod_betamfx</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/pkg/mfx/man/betamfx.html'>betamfx</a></span>(<span class='no'>y</span> ~ <span class='no'>x</span> <span class='kw'>|</span> <span class='no'>x</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>d</span>)
+<span class='kw'>d</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>(<span class='kw'>y</span>,<span class='kw'>x</span>)
+<span class='kw'>mod_betamfx</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/pkg/mfx/man/betamfx.html'>betamfx</a></span>(<span class='kw'>y</span> <span class='op'>~</span> <span class='kw'>x</span> <span class='op'>|</span> <span class='kw'>x</span>, data = <span class='kw'>d</span>)
 
-<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>mod_betamfx</span>, <span class='kw'>conf.int</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='kw'>mod_betamfx</span>, conf.int = <span class='fl'>TRUE</span>)
 
 <span class='co'>## Compare with the naive model coefficients of the equivalent betareg call (not run)</span>
 <span class='co'># tidy(betamfx(y ~ x | x, data = d), conf.int = TRUE)</span>
 
-<span class='fu'><a href='https://rdrr.io/pkg/generics/man/augment.html'>augment</a></span>(<span class='no'>mod_betamfx</span>)
-<span class='fu'><a href='https://rdrr.io/pkg/generics/man/glance.html'>glance</a></span>(<span class='no'>mod_betamfx</span>)
+<span class='fu'><a href='https://rdrr.io/pkg/generics/man/augment.html'>augment</a></span>(<span class='kw'>mod_betamfx</span>)
+<span class='fu'><a href='https://rdrr.io/pkg/generics/man/glance.html'>glance</a></span>(<span class='kw'>mod_betamfx</span>)
 }</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -280,7 +280,7 @@ the <code>data</code> argument.</p></td>
 
 <div class="author">
   <p>
-    Developed by David Robinson, Alex Hayes.
+    Developed by David Robinson, Alex Hayes, Simon Couch.
     Site built by <a href="https://pkgdown.r-lib.org">pkgdown</a>.
   </p>
 </div>

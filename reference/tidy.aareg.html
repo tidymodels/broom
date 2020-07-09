@@ -100,7 +100,7 @@ specify which components to return." />
         <a class="navbar-brand" href="../index.html">broom</a>
         <div class="info hidden-xs hidden-sm">
           <span class="partof">part of <a href="https://tidymodels.org">tidymodels</a></span>
-          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.7.0.9000</span>
+          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.7.0</span>
         </div>
       </div>
     </div>
@@ -173,7 +173,7 @@ specify which components to return.</p>
     </div>
 
     <pre class="usage"><span class='co'># S3 method for aareg</span>
-<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>x</span>, <span class='no'>...</span>)</pre>
+<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='kw'>x</span>, <span class='kw'>...</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -204,25 +204,25 @@ the <code>data</code> argument.</p></td>
 
     <div class='dont-index'><p><code><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy()</a></code>, <code><a href='https://rdrr.io/pkg/survival/man/aareg.html'>survival::aareg()</a></code></p>
 <p>Other aareg tidiers: 
-<code><a href='glance.aareg.html'>glance.aareg</a>()</code></p>
+<code><a href='https://broom.tidymodels.org/reference/glance.aareg.html'>glance.aareg</a>()</code></p>
 <p>Other survival tidiers: 
-<code><a href='augment.coxph.html'>augment.coxph</a>()</code>,
-<code><a href='augment.survreg.html'>augment.survreg</a>()</code>,
-<code><a href='glance.aareg.html'>glance.aareg</a>()</code>,
-<code><a href='glance.cch.html'>glance.cch</a>()</code>,
-<code><a href='glance.coxph.html'>glance.coxph</a>()</code>,
-<code><a href='glance.pyears.html'>glance.pyears</a>()</code>,
-<code><a href='glance.survdiff.html'>glance.survdiff</a>()</code>,
-<code><a href='glance.survexp.html'>glance.survexp</a>()</code>,
-<code><a href='glance.survfit.html'>glance.survfit</a>()</code>,
-<code><a href='glance.survreg.html'>glance.survreg</a>()</code>,
-<code><a href='tidy.cch.html'>tidy.cch</a>()</code>,
-<code><a href='tidy.coxph.html'>tidy.coxph</a>()</code>,
-<code><a href='tidy.pyears.html'>tidy.pyears</a>()</code>,
-<code><a href='tidy.survdiff.html'>tidy.survdiff</a>()</code>,
-<code><a href='tidy.survexp.html'>tidy.survexp</a>()</code>,
-<code><a href='tidy.survfit.html'>tidy.survfit</a>()</code>,
-<code><a href='tidy.survreg.html'>tidy.survreg</a>()</code></p></div>
+<code><a href='https://broom.tidymodels.org/reference/augment.coxph.html'>augment.coxph</a>()</code>,
+<code><a href='https://broom.tidymodels.org/reference/augment.survreg.html'>augment.survreg</a>()</code>,
+<code><a href='https://broom.tidymodels.org/reference/glance.aareg.html'>glance.aareg</a>()</code>,
+<code><a href='https://broom.tidymodels.org/reference/glance.cch.html'>glance.cch</a>()</code>,
+<code><a href='https://broom.tidymodels.org/reference/glance.coxph.html'>glance.coxph</a>()</code>,
+<code><a href='https://broom.tidymodels.org/reference/glance.pyears.html'>glance.pyears</a>()</code>,
+<code><a href='https://broom.tidymodels.org/reference/glance.survdiff.html'>glance.survdiff</a>()</code>,
+<code><a href='https://broom.tidymodels.org/reference/glance.survexp.html'>glance.survexp</a>()</code>,
+<code><a href='https://broom.tidymodels.org/reference/glance.survfit.html'>glance.survfit</a>()</code>,
+<code><a href='https://broom.tidymodels.org/reference/glance.survreg.html'>glance.survreg</a>()</code>,
+<code><a href='https://broom.tidymodels.org/reference/tidy.cch.html'>tidy.cch</a>()</code>,
+<code><a href='https://broom.tidymodels.org/reference/tidy.coxph.html'>tidy.coxph</a>()</code>,
+<code><a href='https://broom.tidymodels.org/reference/tidy.pyears.html'>tidy.pyears</a>()</code>,
+<code><a href='https://broom.tidymodels.org/reference/tidy.survdiff.html'>tidy.survdiff</a>()</code>,
+<code><a href='https://broom.tidymodels.org/reference/tidy.survexp.html'>tidy.survexp</a>()</code>,
+<code><a href='https://broom.tidymodels.org/reference/tidy.survfit.html'>tidy.survfit</a>()</code>,
+<code><a href='https://broom.tidymodels.org/reference/tidy.survreg.html'>tidy.survreg</a>()</code></p></div>
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>A <code><a href='https://tibble.tidyverse.org/reference/tibble.html'>tibble::tibble()</a></code> with columns:</p>
@@ -238,15 +238,15 @@ the <code>data</code> argument.</p></td>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
-<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>survival</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='kw'><a href='https://github.com/therneau/survival'>survival</a></span>)
 
-<span class='no'>afit</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/survival/man/aareg.html'>aareg</a></span>(
-  <span class='fu'><a href='https://rdrr.io/pkg/survival/man/Surv.html'>Surv</a></span>(<span class='no'>time</span>, <span class='no'>status</span>) ~ <span class='no'>age</span> + <span class='no'>sex</span> + <span class='no'>ph.ecog</span>,
-  <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>lung</span>,
-  <span class='kw'>dfbeta</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>
+<span class='kw'>afit</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/survival/man/aareg.html'>aareg</a></span>(
+  <span class='fu'><a href='https://rdrr.io/pkg/survival/man/Surv.html'>Surv</a></span>(<span class='kw'>time</span>, <span class='kw'>status</span>) <span class='op'>~</span> <span class='kw'>age</span> <span class='op'>+</span> <span class='kw'>sex</span> <span class='op'>+</span> <span class='kw'>ph.ecog</span>,
+  data = <span class='kw'>lung</span>,
+  dfbeta = <span class='fl'>TRUE</span>
 )
 
-<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>afit</span>)</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 4 x 7</span><span>
+<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='kw'>afit</span>)</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 4 x 7</span><span>
 #&gt;   term        estimate  statistic std.error robust.se statistic.z  p.value
 #&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>          </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>      </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>       </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
 #&gt; </span><span style='color: #555555;'>1</span><span> Intercept  0.005</span><span style='text-decoration: underline;'>05</span><span>    0.005</span><span style='text-decoration: underline;'>87</span><span>   0.004</span><span style='text-decoration: underline;'>74</span><span>   0.004</span><span style='text-decoration: underline;'>77</span><span>          1.23 0.219   
@@ -269,7 +269,7 @@ the <code>data</code> argument.</p></td>
 
 <div class="author">
   <p>
-    Developed by David Robinson, Alex Hayes.
+    Developed by David Robinson, Alex Hayes, Simon Couch.
     Site built by <a href="https://pkgdown.r-lib.org">pkgdown</a>.
   </p>
 </div>

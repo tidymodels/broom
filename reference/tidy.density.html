@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Tidy a(n) density object — tidy.density • broom</title>
+<title>(Deprecated) Tidy density objects — tidy.density • broom</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -49,13 +49,8 @@
 
 
 
-<meta property="og:title" content="Tidy a(n) density object — tidy.density" />
-<meta property="og:description" content="Tidy summarizes information about the components of a model.
-A model component might be a single term in a regression, a single
-hypothesis, a cluster, or a class. Exactly what tidy considers to be a
-model component varies across models but is usually self-evident.
-If a model has several distinct types of components, you will need to
-specify which components to return." />
+<meta property="og:title" content="(Deprecated) Tidy density objects — tidy.density" />
+<meta property="og:description" content="(Deprecated) Tidy density objects" />
 <meta property="og:image" content="https://broom.tidymodels.org/logo.png" />
 <meta name="twitter:card" content="summary" />
 
@@ -100,7 +95,7 @@ specify which components to return." />
         <a class="navbar-brand" href="../index.html">broom</a>
         <div class="info hidden-xs hidden-sm">
           <span class="partof">part of <a href="https://tidymodels.org">tidymodels</a></span>
-          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.7.0.9000</span>
+          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.7.0</span>
         </div>
       </div>
     </div>
@@ -158,22 +153,17 @@ specify which components to return." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Tidy a(n) density object</h1>
-    <small class="dont-index">Source: <a href='http://github.com/tidymodels/broom/blob/master/R/stats-tidiers.R'><code>R/stats-tidiers.R</code></a></small>
+    <h1>(Deprecated) Tidy density objects</h1>
+    <small class="dont-index">Source: <a href='http://github.com/tidymodels/broom/blob/master/R/deprecated-0-7-0.R'><code>R/deprecated-0-7-0.R</code></a></small>
     <div class="hidden name"><code>tidy.density.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Tidy summarizes information about the components of a model.
-A model component might be a single term in a regression, a single
-hypothesis, a cluster, or a class. Exactly what tidy considers to be a
-model component varies across models but is usually self-evident.
-If a model has several distinct types of components, you will need to
-specify which components to return.</p>
+    <p>(Deprecated) Tidy density objects</p>
     </div>
 
     <pre class="usage"><span class='co'># S3 method for density</span>
-<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>x</span>, <span class='no'>...</span>)</pre>
+<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='kw'>x</span>, <span class='kw'>...</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -199,15 +189,19 @@ the <code>data</code> argument.</p></td>
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>A <a href='https://tibble.tidyverse.org/reference/tibble.html'>tibble::tibble</a> with two columns: points <code>x</code> where the density
-is estimated, and estimated density <code>y</code>. When the input to the <code><a href='https://rdrr.io/r/stats/density.html'>stats::density()</a></code>
-function is an <code>nXm</code> matrix, as opposed to a <code>1Xm</code> vector, the input matrix is first flattened into a <code>1X(m*n)</code> vector
-and then the density function is applied as usual.</p>
+is estimated, and estimated density <code>y</code>.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy()</a></code>, <code><a href='https://rdrr.io/r/stats/density.html'>stats::density()</a></code></p>
-<p>Other stats tidiers: 
-<code><a href='tidy.dist.html'>tidy.dist</a>()</code>,
-<code><a href='tidy.ftable.html'>tidy.ftable</a>()</code></p></div>
+    <div class='dont-index'><p>Other deprecated: 
+<code><a href='https://broom.tidymodels.org/reference/bootstrap.html'>bootstrap</a>()</code>,
+<code><a href='https://broom.tidymodels.org/reference/confint_tidy.html'>confint_tidy</a>()</code>,
+<code><a href='https://broom.tidymodels.org/reference/data.frame_tidiers.html'>data.frame_tidiers</a></code>,
+<code><a href='https://broom.tidymodels.org/reference/finish_glance.html'>finish_glance</a>()</code>,
+<code><a href='https://broom.tidymodels.org/reference/fix_data_frame.html'>fix_data_frame</a>()</code>,
+<code><a href='https://broom.tidymodels.org/reference/summary_tidiers.html'>summary_tidiers</a></code>,
+<code><a href='https://broom.tidymodels.org/reference/tidy.dist.html'>tidy.dist</a>()</code>,
+<code><a href='https://broom.tidymodels.org/reference/tidy.ftable.html'>tidy.ftable</a>()</code>,
+<code><a href='https://broom.tidymodels.org/reference/vector_tidiers.html'>tidy.numeric</a>()</code></p></div>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -225,7 +219,7 @@ and then the density function is applied as usual.</p>
 
 <div class="author">
   <p>
-    Developed by David Robinson, Alex Hayes.
+    Developed by David Robinson, Alex Hayes, Simon Couch.
     Site built by <a href="https://pkgdown.r-lib.org">pkgdown</a>.
   </p>
 </div>

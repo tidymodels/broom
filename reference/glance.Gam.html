@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Glance at a(n) Gam object — glance.Gam • broom</title>
+<title>Glance at a(n) gam object — glance.gam • broom</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -49,7 +49,7 @@
 
 
 
-<meta property="og:title" content="Glance at a(n) Gam object — glance.Gam" />
+<meta property="og:title" content="Glance at a(n) gam object — glance.gam" />
 <meta property="og:description" content="Glance accepts a model object and returns a tibble::tibble()
 with exactly one row of model summaries. The summaries are typically
 goodness of fit measures, p-values for hypothesis tests on residuals,
@@ -109,7 +109,7 @@ of the appropriate type." />
         <a class="navbar-brand" href="../index.html">broom</a>
         <div class="info hidden-xs hidden-sm">
           <span class="partof">part of <a href="https://tidymodels.org">tidymodels</a></span>
-          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.7.0.9000</span>
+          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.7.0</span>
         </div>
       </div>
     </div>
@@ -167,8 +167,8 @@ of the appropriate type." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Glance at a(n) Gam object</h1>
-    <small class="dont-index">Source: <a href='http://github.com/tidymodels/broom/blob/master/R/gam-tidiers.R'><code>R/gam-tidiers.R</code></a></small>
+    <h1>Glance at a(n) gam object</h1>
+    <small class="dont-index">Source: <a href='http://github.com/tidymodels/broom/blob/master/R/mgcv-tidiers.R'><code>R/mgcv-tidiers.R</code></a></small>
     <div class="hidden name"><code>glance.Gam.Rd</code></div>
     </div>
 
@@ -190,15 +190,15 @@ that no longer have a well-defined value are filled in with an <code>NA</code>
 of the appropriate type.</p>
     </div>
 
-    <pre class="usage"><span class='co'># S3 method for Gam</span>
-<span class='fu'><a href='https://rdrr.io/pkg/generics/man/glance.html'>glance</a></span>(<span class='no'>x</span>, <span class='no'>...</span>)</pre>
+    <pre class="usage"><span class='co'># S3 method for gam</span>
+<span class='fu'><a href='https://rdrr.io/pkg/generics/man/glance.html'>glance</a></span>(<span class='kw'>x</span>, <span class='kw'>...</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>x</th>
-      <td><p>A <code>Gam</code> object returned from a call to <code><a href='https://rdrr.io/pkg/gam/man/gam.html'>gam::gam()</a></code>.</p></td>
+      <td><p>A <code>gam</code> object returned from a call to <code><a href='https://rdrr.io/pkg/mgcv/man/gam.html'>mgcv::gam()</a></code>.</p></td>
     </tr>
     <tr>
       <th>...</th>
@@ -214,15 +214,11 @@ the <code>data</code> argument.</p></td>
     </tr>
     </table>
 
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
-
-    <p>Glance at <code>gam</code> objects created by calls to <code><a href='https://rdrr.io/pkg/mgcv/man/gam.html'>mgcv::gam()</a></code> with
-<code><a href='mgcv_glance_gam.html'>glance.gam()</a></code>.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='https://rdrr.io/pkg/generics/man/glance.html'>glance()</a></code>, <code><a href='https://rdrr.io/pkg/gam/man/gam.html'>gam::gam()</a></code></p>
-<p>Other gam tidiers: 
-<code><a href='tidy.Gam.html'>tidy.Gam</a>()</code></p></div>
+    <div class='dont-index'><p><code><a href='https://rdrr.io/pkg/generics/man/glance.html'>glance()</a></code>, <code><a href='https://rdrr.io/pkg/mgcv/man/gam.html'>mgcv::gam()</a></code></p>
+<p>Other mgcv tidiers: 
+<code><a href='https://broom.tidymodels.org/reference/tidy.Gam.html'>tidy.gam</a>()</code></p></div>
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>A <code><a href='https://tibble.tidyverse.org/reference/tibble.html'>tibble::tibble()</a></code> with exactly one row and columns:</p>
@@ -236,6 +232,22 @@ the <code>data</code> argument.</p></td>
 
 
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'>
+<span class='kw'>g</span> <span class='op'>&lt;-</span> <span class='kw'>mgcv</span>::<span class='fu'><a href='https://rdrr.io/pkg/mgcv/man/gam.html'>gam</a></span>(<span class='kw'>mpg</span> <span class='op'>~</span> <span class='fu'>s</span>(<span class='kw'>hp</span>) <span class='op'>+</span> <span class='kw'>am</span> <span class='op'>+</span> <span class='kw'>qsec</span>, data = <span class='kw'>mtcars</span>)
+
+<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='kw'>g</span>)</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 1 x 5</span><span>
+#&gt;   term    edf ref.df statistic p.value
+#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #555555;'>1</span><span> s(hp)  2.36   3.02      6.34 0.002</span><span style='text-decoration: underline;'>07</span><span></div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='kw'>g</span>, parametric = <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 3 x 5</span><span>
+#&gt;   term        estimate std.error statistic p.value
+#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>          </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #555555;'>1</span><span> (Intercept)  16.7        9.83      1.70  0.101  
+#&gt; </span><span style='color: #555555;'>2</span><span> am            4.37       1.56      2.81  0.009</span><span style='text-decoration: underline;'>18</span><span>
+#&gt; </span><span style='color: #555555;'>3</span><span> qsec          0.090</span><span style='text-decoration: underline;'>4</span><span>     0.525     0.172 0.865  </div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/generics/man/glance.html'>glance</a></span>(<span class='kw'>g</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 1 x 7</span><span>
+#&gt;      df logLik   AIC   BIC deviance df.residual  nobs
+#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>       </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>
+#&gt; </span><span style='color: #555555;'>1</span><span>  5.36  -</span><span style='color: #BB0000;'>74.4</span><span>  162.  171.     196.        26.6    32</div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -252,7 +264,7 @@ the <code>data</code> argument.</p></td>
 
 <div class="author">
   <p>
-    Developed by David Robinson, Alex Hayes.
+    Developed by David Robinson, Alex Hayes, Simon Couch.
     Site built by <a href="https://pkgdown.r-lib.org">pkgdown</a>.
   </p>
 </div>

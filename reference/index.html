@@ -94,7 +94,7 @@
         <a class="navbar-brand" href="../index.html">broom</a>
         <div class="info hidden-xs hidden-sm">
           <span class="partof">part of <a href="https://tidymodels.org">tidymodels</a></span>
-          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.7.0.9000</span>
+          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.7.0</span>
         </div>
       </div>
     </div>
@@ -197,6 +197,12 @@
       <tr>
         
         <td>
+          <p><code><a href="data.frame_tidiers.html">tidy(<i>&lt;data.frame&gt;</i>)</a></code> <code><a href="data.frame_tidiers.html">augment(<i>&lt;data.frame&gt;</i>)</a></code> <code><a href="data.frame_tidiers.html">glance(<i>&lt;data.frame&gt;</i>)</a></code> </p>
+        </td>
+        <td><p>Tidiers for data.frame objects</p></td>
+      </tr><tr>
+        
+        <td>
           <p><code><a href="durbinWatsonTest_tidiers.html">tidy(<i>&lt;durbinWatsonTest&gt;</i>)</a></code> <code><a href="durbinWatsonTest_tidiers.html">glance(<i>&lt;durbinWatsonTest&gt;</i>)</a></code> </p>
         </td>
         <td><p>Tidy/glance a(n) durbinWatsonTest object</p></td>
@@ -212,12 +218,6 @@
           <p><code><a href="metafor_tidiers.html">tidy(<i>&lt;rma&gt;</i>)</a></code> </p>
         </td>
         <td><p>Tidy a(n) rma object</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="mgcv_tidy_gam.html">tidy(<i>&lt;gam&gt;</i>)</a></code> </p>
-        </td>
-        <td><p>Tidy a(n) gam object</p></td>
       </tr><tr>
         
         <td>
@@ -239,15 +239,21 @@
       </tr><tr>
         
         <td>
+          <p><code><a href="summary_tidiers.html">tidy(<i>&lt;summaryDefault&gt;</i>)</a></code> <code><a href="summary_tidiers.html">glance(<i>&lt;summaryDefault&gt;</i>)</a></code> </p>
+        </td>
+        <td><p>(Deprecated) Tidy summaryDefault objects</p></td>
+      </tr><tr>
+        
+        <td>
           <p><code><a href="tidy.Arima.html">tidy(<i>&lt;Arima&gt;</i>)</a></code> </p>
         </td>
         <td><p>Tidy a(n) Arima object</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="tidy.Gam.html">tidy(<i>&lt;Gam&gt;</i>)</a></code> </p>
+          <p><code><a href="tidy.Gam.html">tidy(<i>&lt;gam&gt;</i>)</a></code> </p>
         </td>
-        <td><p>Tidy a(n) Gam object</p></td>
+        <td><p>Tidy a(n) gam object</p></td>
       </tr><tr>
         
         <td>
@@ -397,13 +403,13 @@
         <td>
           <p><code><a href="tidy.density.html">tidy(<i>&lt;density&gt;</i>)</a></code> </p>
         </td>
-        <td><p>Tidy a(n) density object</p></td>
+        <td><p>(Deprecated) Tidy density objects</p></td>
       </tr><tr>
         
         <td>
           <p><code><a href="tidy.dist.html">tidy(<i>&lt;dist&gt;</i>)</a></code> </p>
         </td>
-        <td><p>Tidy a(n) dist object</p></td>
+        <td><p>(Deprecated) Tidy dist objects</p></td>
       </tr><tr>
         
         <td>
@@ -457,7 +463,7 @@
         <td>
           <p><code><a href="tidy.ftable.html">tidy(<i>&lt;ftable&gt;</i>)</a></code> </p>
         </td>
-        <td><p>Tidy a(n) ftable object</p></td>
+        <td><p>(Deprecated) Tidy ftable objects</p></td>
       </tr><tr>
         
         <td>
@@ -875,15 +881,21 @@
       </tr><tr>
         
         <td>
+          <p><code><a href="vector_tidiers.html">tidy(<i>&lt;numeric&gt;</i>)</a></code> <code><a href="vector_tidiers.html">tidy(<i>&lt;character&gt;</i>)</a></code> <code><a href="vector_tidiers.html">tidy(<i>&lt;logical&gt;</i>)</a></code> </p>
+        </td>
+        <td><p>Tidy atomic vectors</p></td>
+      </tr><tr>
+        
+        <td>
           <p><code><a href="glance.Arima.html">glance(<i>&lt;Arima&gt;</i>)</a></code> </p>
         </td>
         <td><p>Glance at a(n) Arima object</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="glance.Gam.html">glance(<i>&lt;Gam&gt;</i>)</a></code> </p>
+          <p><code><a href="glance.Gam.html">glance(<i>&lt;gam&gt;</i>)</a></code> </p>
         </td>
-        <td><p>Glance at a(n) Gam object</p></td>
+        <td><p>Glance at a(n) gam object</p></td>
       </tr><tr>
         
         <td>
@@ -1235,12 +1247,6 @@
       </tr><tr>
         
         <td>
-          <p><code><a href="mgcv_glance_gam.html">glance(<i>&lt;gam&gt;</i>)</a></code> </p>
-        </td>
-        <td><p>Glance at a(n) gam object</p></td>
-      </tr><tr>
-        
-        <td>
           <p><code><a href="augment.Mclust.html">augment(<i>&lt;Mclust&gt;</i>)</a></code> </p>
         </td>
         <td><p>Augment data with information from a(n) Mclust object</p></td>
@@ -1512,7 +1518,7 @@ an augment call</p></td>
 
 <div class="author">
   <p>
-    Developed by David Robinson, Alex Hayes.
+    Developed by David Robinson, Alex Hayes, Simon Couch.
     Site built by <a href="https://pkgdown.r-lib.org">pkgdown</a>.
   </p>
 </div>

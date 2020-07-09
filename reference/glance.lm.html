@@ -109,7 +109,7 @@ of the appropriate type." />
         <a class="navbar-brand" href="../index.html">broom</a>
         <div class="info hidden-xs hidden-sm">
           <span class="partof">part of <a href="https://tidymodels.org">tidymodels</a></span>
-          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.7.0.9000</span>
+          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.7.0</span>
         </div>
       </div>
     </div>
@@ -191,7 +191,7 @@ of the appropriate type.</p>
     </div>
 
     <pre class="usage"><span class='co'># S3 method for lm</span>
-<span class='fu'><a href='https://rdrr.io/pkg/generics/man/glance.html'>glance</a></span>(<span class='no'>x</span>, <span class='no'>...</span>)</pre>
+<span class='fu'><a href='https://rdrr.io/pkg/generics/man/glance.html'>glance</a></span>(<span class='kw'>x</span>, <span class='kw'>...</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -218,14 +218,14 @@ the <code>data</code> argument.</p></td>
 
     <div class='dont-index'><p><code><a href='https://rdrr.io/pkg/generics/man/glance.html'>glance()</a></code></p>
 <p>Other lm tidiers: 
-<code><a href='augment.glm.html'>augment.glm</a>()</code>,
-<code><a href='augment.lm.html'>augment.lm</a>()</code>,
-<code><a href='glance.glm.html'>glance.glm</a>()</code>,
-<code><a href='glance.svyglm.html'>glance.svyglm</a>()</code>,
-<code><a href='tidy.glm.html'>tidy.glm</a>()</code>,
-<code><a href='tidy.lm.beta.html'>tidy.lm.beta</a>()</code>,
-<code><a href='tidy.lm.html'>tidy.lm</a>()</code>,
-<code><a href='tidy.mlm.html'>tidy.mlm</a>()</code></p></div>
+<code><a href='https://broom.tidymodels.org/reference/augment.glm.html'>augment.glm</a>()</code>,
+<code><a href='https://broom.tidymodels.org/reference/augment.lm.html'>augment.lm</a>()</code>,
+<code><a href='https://broom.tidymodels.org/reference/glance.glm.html'>glance.glm</a>()</code>,
+<code><a href='https://broom.tidymodels.org/reference/glance.svyglm.html'>glance.svyglm</a>()</code>,
+<code><a href='https://broom.tidymodels.org/reference/tidy.glm.html'>tidy.glm</a>()</code>,
+<code><a href='https://broom.tidymodels.org/reference/tidy.lm.beta.html'>tidy.lm.beta</a>()</code>,
+<code><a href='https://broom.tidymodels.org/reference/tidy.lm.html'>tidy.lm</a>()</code>,
+<code><a href='https://broom.tidymodels.org/reference/tidy.mlm.html'>tidy.mlm</a>()</code></p></div>
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>A <code><a href='https://tibble.tidyverse.org/reference/tibble.html'>tibble::tibble()</a></code> with exactly one row and columns:</p>
@@ -240,39 +240,42 @@ the <code>data</code> argument.</p></td>
   <dt>r.squared</dt><dd><p>R squared statistic, or the percent of variation explained by the model. Also known as the coefficient of determination.</p></dd>
   <dt>sigma</dt><dd><p>Estimated standard error of the residuals.</p></dd>
   <dt>statistic</dt><dd><p>Test statistic.</p></dd>
-  <dt>df</dt><dd><p>The degrees for freedom from the numerator of the overall F-statistic. This is new in broom 0.7.0. Previously, this reported the rank of the design matrix, which is one more than the numerator degrees of freedom of the overall F-statistic.</p></dd>
+  <dt>df</dt><dd><p>The degrees for freedom from the numerator of the overall 
+    F-statistic. This is new in broom 0.7.0. Previously, this reported 
+    the rank of the design matrix, which is one more than the numerator 
+    degrees of freedom of the overall F-statistic.</p></dd>
 
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
-<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>ggplot2</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>dplyr</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='kw'><a href='http://ggplot2.tidyverse.org'>ggplot2</a></span>)
+<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='kw'><a href='https://dplyr.tidyverse.org'>dplyr</a></span>)
 
-<span class='no'>mod</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span>(<span class='no'>mpg</span> ~ <span class='no'>wt</span> + <span class='no'>qsec</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>mtcars</span>)
+<span class='kw'>mod</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span>(<span class='kw'>mpg</span> <span class='op'>~</span> <span class='kw'>wt</span> <span class='op'>+</span> <span class='kw'>qsec</span>, data = <span class='kw'>mtcars</span>)
 
-<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>mod</span>)</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 3 x 5</span><span>
+<span class='fu'><a href='https://rdrr.io/pkg/geepack/man/geepack-internal.html'>tidy</a></span>(<span class='kw'>mod</span>)</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 3 x 5</span><span>
 #&gt;   term        estimate std.error statistic  p.value
 #&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>          </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
 #&gt; </span><span style='color: #555555;'>1</span><span> (Intercept)   19.7       5.25       3.76 7.65</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>- 4</span><span>
 #&gt; </span><span style='color: #555555;'>2</span><span> wt            -</span><span style='color: #BB0000;'>5.05</span><span>      0.484    -</span><span style='color: #BB0000;'>10.4</span><span>  2.52</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-11</span><span>
-#&gt; </span><span style='color: #555555;'>3</span><span> qsec           0.929     0.265      3.51 1.50</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>- 3</span><span></div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/generics/man/glance.html'>glance</a></span>(<span class='no'>mod</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 1 x 12</span><span>
+#&gt; </span><span style='color: #555555;'>3</span><span> qsec           0.929     0.265      3.51 1.50</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>- 3</span><span></div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/generics/man/glance.html'>glance</a></span>(<span class='kw'>mod</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 1 x 12</span><span>
 #&gt;   r.squared adj.r.squared sigma statistic  p.value    df logLik   AIC   BIC
 #&gt;       </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>         </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
 #&gt; </span><span style='color: #555555;'>1</span><span>     0.826         0.814  2.60      69.0 9.39</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-12</span><span>     2  -</span><span style='color: #BB0000;'>74.4</span><span>  157.  163.
 #&gt; </span><span style='color: #555555;'># … with 3 more variables: deviance </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, df.residual </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span style='color: #555555;'>, nobs </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span></div><div class='input'>
 <span class='co'># coefficient plot</span>
-<span class='no'>d</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>mod</span>) <span class='kw'>%&gt;%</span>
+<span class='kw'>d</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/geepack/man/geepack-internal.html'>tidy</a></span>(<span class='kw'>mod</span>) <span class='op'>%&gt;%</span>
   <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span>(
-    <span class='kw'>low</span> <span class='kw'>=</span> <span class='no'>estimate</span> - <span class='no'>std.error</span>,
-    <span class='kw'>high</span> <span class='kw'>=</span> <span class='no'>estimate</span> + <span class='no'>std.error</span>
+    low = <span class='kw'>estimate</span> <span class='op'>-</span> <span class='kw'>std.error</span>,
+    high = <span class='kw'>estimate</span> <span class='op'>+</span> <span class='kw'>std.error</span>
   )
 
-<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span>(<span class='no'>d</span>, <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='no'>estimate</span>, <span class='no'>term</span>, <span class='kw'>xmin</span> <span class='kw'>=</span> <span class='no'>low</span>, <span class='kw'>xmax</span> <span class='kw'>=</span> <span class='no'>high</span>, <span class='kw'>height</span> <span class='kw'>=</span> <span class='fl'>0</span>)) +
-  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_point.html'>geom_point</a></span>() +
-  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_abline.html'>geom_vline</a></span>(<span class='kw'>xintercept</span> <span class='kw'>=</span> <span class='fl'>0</span>) +
+<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span>(<span class='kw'>d</span>, <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='kw'>estimate</span>, <span class='kw'>term</span>, xmin = <span class='kw'>low</span>, xmax = <span class='kw'>high</span>, height = <span class='fl'>0</span>)) <span class='op'>+</span>
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_point.html'>geom_point</a></span>() <span class='op'>+</span>
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_abline.html'>geom_vline</a></span>(xintercept = <span class='fl'>0</span>) <span class='op'>+</span>
   <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_errorbarh.html'>geom_errorbarh</a></span>()</div><div class='img'><img src='glance.lm-1.png' alt='' width='700' height='433' /></div><div class='input'>
-<span class='fu'><a href='https://rdrr.io/pkg/generics/man/augment.html'>augment</a></span>(<span class='no'>mod</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 32 x 10</span><span>
+<span class='fu'><a href='https://rdrr.io/pkg/generics/man/augment.html'>augment</a></span>(<span class='kw'>mod</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 32 x 10</span><span>
 #&gt;    .rownames    mpg    wt  qsec .fitted  .resid .std.resid   .hat .sigma .cooksd
 #&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>      </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>      </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
 #&gt; </span><span style='color: #555555;'> 1</span><span> Mazda RX4   21    2.62  16.5    21.8 -</span><span style='color: #BB0000;'>0.815</span><span>     -</span><span style='color: #BB0000;'>0.325</span><span>  0.069</span><span style='text-decoration: underline;'>3</span><span>   2.64 2.63</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-3</span><span>
@@ -285,7 +288,7 @@ the <code>data</code> argument.</p></td>
 #&gt; </span><span style='color: #555555;'> 8</span><span> Merc 240D   24.4  3.19  20      22.2  2.17       0.872  0.079</span><span style='text-decoration: underline;'>1</span><span>   2.61 2.18</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-2</span><span>
 #&gt; </span><span style='color: #555555;'> 9</span><span> Merc 230    22.8  3.15  22.9    25.1 -</span><span style='color: #BB0000;'>2.32</span><span>      -</span><span style='color: #BB0000;'>1.07</span><span>   0.295    2.59 1.59</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-1</span><span>
 #&gt; </span><span style='color: #555555;'>10</span><span> Merc 280    19.2  3.44  18.3    19.4 -</span><span style='color: #BB0000;'>0.185</span><span>     -</span><span style='color: #BB0000;'>0.072</span><span style='color: #BB0000;text-decoration: underline;'>8</span><span> 0.035</span><span style='text-decoration: underline;'>8</span><span>   2.64 6.55</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-5</span><span>
-#&gt; </span><span style='color: #555555;'># … with 22 more rows</span><span></div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/generics/man/augment.html'>augment</a></span>(<span class='no'>mod</span>, <span class='no'>mtcars</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 32 x 18</span><span>
+#&gt; </span><span style='color: #555555;'># … with 22 more rows</span><span></div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/generics/man/augment.html'>augment</a></span>(<span class='kw'>mod</span>, <span class='kw'>mtcars</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 32 x 18</span><span>
 #&gt;    .rownames   mpg   cyl  disp    hp  drat    wt  qsec    vs    am  gear  carb
 #&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
 #&gt; </span><span style='color: #555555;'> 1</span><span> Mazda RX4  21       6  160    110  3.9   2.62  16.5     0     1     4     4
@@ -301,10 +304,10 @@ the <code>data</code> argument.</p></td>
 #&gt; </span><span style='color: #555555;'># … with 22 more rows, and 6 more variables: .fitted </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, .resid </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,</span><span>
 #&gt; </span><span style='color: #555555;'>#   .std.resid </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, .hat </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, .sigma </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, .cooksd </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span></div><div class='input'>
 <span class='co'># predict on new data</span>
-<span class='no'>newdata</span> <span class='kw'>&lt;-</span> <span class='no'>mtcars</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>(<span class='fl'>6</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span>(<span class='kw'>wt</span> <span class='kw'>=</span> <span class='no'>wt</span> + <span class='fl'>1</span>)
-<span class='fu'><a href='https://rdrr.io/pkg/generics/man/augment.html'>augment</a></span>(<span class='no'>mod</span>, <span class='kw'>newdata</span> <span class='kw'>=</span> <span class='no'>newdata</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 6 x 13</span><span>
+<span class='kw'>newdata</span> <span class='op'>&lt;-</span> <span class='kw'>mtcars</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>(<span class='fl'>6</span>) <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span>(wt = <span class='kw'>wt</span> <span class='op'>+</span> <span class='fl'>1</span>)
+<span class='fu'><a href='https://rdrr.io/pkg/generics/man/augment.html'>augment</a></span>(<span class='kw'>mod</span>, newdata = <span class='kw'>newdata</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 6 x 13</span><span>
 #&gt;     mpg   cyl  disp    hp  drat    wt  qsec    vs    am  gear  carb .fitted
 #&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
 #&gt; </span><span style='color: #555555;'>1</span><span>  21       6   160   110  3.9   3.62  16.5     0     1     4     4    16.8
@@ -314,31 +317,31 @@ the <code>data</code> argument.</p></td>
 #&gt; </span><span style='color: #555555;'>5</span><span>  18.7     8   360   175  3.15  4.44  17.0     0     0     3     2    13.1
 #&gt; </span><span style='color: #555555;'>6</span><span>  18.1     6   225   105  2.76  4.46  20.2     1     0     3     1    16.0
 #&gt; </span><span style='color: #555555;'># … with 1 more variable: .resid </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span></div><div class='input'>
-<span class='no'>au</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/generics/man/augment.html'>augment</a></span>(<span class='no'>mod</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>mtcars</span>)
+<span class='kw'>au</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/generics/man/augment.html'>augment</a></span>(<span class='kw'>mod</span>, data = <span class='kw'>mtcars</span>)
 
-<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span>(<span class='no'>au</span>, <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='no'>.hat</span>, <span class='no'>.std.resid</span>)) +
-  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_abline.html'>geom_vline</a></span>(<span class='kw'>size</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>colour</span> <span class='kw'>=</span> <span class='st'>"white"</span>, <span class='kw'>xintercept</span> <span class='kw'>=</span> <span class='fl'>0</span>) +
-  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_abline.html'>geom_hline</a></span>(<span class='kw'>size</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>colour</span> <span class='kw'>=</span> <span class='st'>"white"</span>, <span class='kw'>yintercept</span> <span class='kw'>=</span> <span class='fl'>0</span>) +
-  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_point.html'>geom_point</a></span>() +
-  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_smooth.html'>geom_smooth</a></span>(<span class='kw'>se</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</div><div class='output co'>#&gt; <span class='message'>`geom_smooth()` using method = 'loess' and formula 'y ~ x'</span></div><div class='img'><img src='glance.lm-2.png' alt='' width='700' height='433' /></div><div class='input'>
-<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>mod</span>, <span class='kw'>which</span> <span class='kw'>=</span> <span class='fl'>6</span>)</div><div class='img'><img src='glance.lm-3.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span>(<span class='no'>au</span>, <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='no'>.hat</span>, <span class='no'>.cooksd</span>)) +
-  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_abline.html'>geom_vline</a></span>(<span class='kw'>xintercept</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>colour</span> <span class='kw'>=</span> <span class='fl'>NA</span>) +
-  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_abline.html'>geom_abline</a></span>(<span class='kw'>slope</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span>(<span class='fl'>0</span>, <span class='fl'>3</span>, <span class='kw'>by</span> <span class='kw'>=</span> <span class='fl'>0.5</span>), <span class='kw'>colour</span> <span class='kw'>=</span> <span class='st'>"white"</span>) +
-  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_smooth.html'>geom_smooth</a></span>(<span class='kw'>se</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>) +
+<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span>(<span class='kw'>au</span>, <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='kw'>.hat</span>, <span class='kw'>.std.resid</span>)) <span class='op'>+</span>
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_abline.html'>geom_vline</a></span>(size = <span class='fl'>2</span>, colour = <span class='st'>"white"</span>, xintercept = <span class='fl'>0</span>) <span class='op'>+</span>
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_abline.html'>geom_hline</a></span>(size = <span class='fl'>2</span>, colour = <span class='st'>"white"</span>, yintercept = <span class='fl'>0</span>) <span class='op'>+</span>
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_point.html'>geom_point</a></span>() <span class='op'>+</span>
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_smooth.html'>geom_smooth</a></span>(se = <span class='fl'>FALSE</span>)</div><div class='output co'>#&gt; <span class='message'>`geom_smooth()` using method = 'loess' and formula 'y ~ x'</span></div><div class='img'><img src='glance.lm-2.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span>(<span class='kw'>mod</span>, which = <span class='fl'>6</span>)</div><div class='img'><img src='glance.lm-3.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span>(<span class='kw'>au</span>, <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='kw'>.hat</span>, <span class='kw'>.cooksd</span>)) <span class='op'>+</span>
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_abline.html'>geom_vline</a></span>(xintercept = <span class='fl'>0</span>, colour = <span class='fl'>NA</span>) <span class='op'>+</span>
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_abline.html'>geom_abline</a></span>(slope = <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span>(<span class='fl'>0</span>, <span class='fl'>3</span>, by = <span class='fl'>0.5</span>), colour = <span class='st'>"white"</span>) <span class='op'>+</span>
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_smooth.html'>geom_smooth</a></span>(se = <span class='fl'>FALSE</span>) <span class='op'>+</span>
   <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_point.html'>geom_point</a></span>()</div><div class='output co'>#&gt; <span class='message'>`geom_smooth()` using method = 'loess' and formula 'y ~ x'</span></div><div class='img'><img src='glance.lm-4.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'># column-wise models</span>
-<span class='no'>a</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></span>(<span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span>(<span class='fl'>20</span>), <span class='kw'>nrow</span> <span class='kw'>=</span> <span class='fl'>10</span>)
-<span class='no'>b</span> <span class='kw'>&lt;-</span> <span class='no'>a</span> + <span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/length.html'>length</a></span>(<span class='no'>a</span>))
-<span class='no'>result</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span>(<span class='no'>b</span> ~ <span class='no'>a</span>)
-<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>result</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 6 x 6</span><span>
-#&gt;   response term        estimate std.error statistic  p.value
-#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>          </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span> Y1       (Intercept)   0.368      0.479     0.769 0.467   
-#&gt; </span><span style='color: #555555;'>2</span><span> Y1       a1            0.949      0.386     2.46  0.043</span><span style='text-decoration: underline;'>5</span><span>  
-#&gt; </span><span style='color: #555555;'>3</span><span> Y1       a2            0.197      0.542     0.363 0.727   
-#&gt; </span><span style='color: #555555;'>4</span><span> Y2       (Intercept)   0.373      0.233     1.60  0.153   
-#&gt; </span><span style='color: #555555;'>5</span><span> Y2       a1           -</span><span style='color: #BB0000;'>0.058</span><span style='color: #BB0000;text-decoration: underline;'>2</span><span>     0.187    -</span><span style='color: #BB0000;'>0.311</span><span> 0.765   
-#&gt; </span><span style='color: #555555;'>6</span><span> Y2       a2            1.52       0.263     5.76  0.000</span><span style='text-decoration: underline;'>688</span><span></div></span></pre>
+<span class='kw'>a</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></span>(<span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span>(<span class='fl'>20</span>), nrow = <span class='fl'>10</span>)
+<span class='kw'>b</span> <span class='op'>&lt;-</span> <span class='kw'>a</span> <span class='op'>+</span> <span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/length.html'>length</a></span>(<span class='kw'>a</span>))
+<span class='kw'>result</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span>(<span class='kw'>b</span> <span class='op'>~</span> <span class='kw'>a</span>)
+<span class='fu'><a href='https://rdrr.io/pkg/geepack/man/geepack-internal.html'>tidy</a></span>(<span class='kw'>result</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 6 x 6</span><span>
+#&gt;   response term        estimate std.error statistic p.value
+#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>          </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #555555;'>1</span><span> Y1       (Intercept)  0.591       0.359    1.64   0.144  
+#&gt; </span><span style='color: #555555;'>2</span><span> Y1       a1           0.971       0.284    3.42   0.011</span><span style='text-decoration: underline;'>1</span><span> 
+#&gt; </span><span style='color: #555555;'>3</span><span> Y1       a2          -</span><span style='color: #BB0000;'>0.090</span><span style='color: #BB0000;text-decoration: underline;'>5</span><span>      0.414   -</span><span style='color: #BB0000;'>0.219</span><span>  0.833  
+#&gt; </span><span style='color: #555555;'>4</span><span> Y2       (Intercept)  0.010</span><span style='text-decoration: underline;'>5</span><span>      0.350    0.029</span><span style='text-decoration: underline;'>9</span><span> 0.977  
+#&gt; </span><span style='color: #555555;'>5</span><span> Y2       a1           0.007</span><span style='text-decoration: underline;'>89</span><span>     0.277    0.028</span><span style='text-decoration: underline;'>5</span><span> 0.978  
+#&gt; </span><span style='color: #555555;'>6</span><span> Y2       a2           1.90        0.403    4.72   0.002</span><span style='text-decoration: underline;'>16</span><span></div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -355,7 +358,7 @@ the <code>data</code> argument.</p></td>
 
 <div class="author">
   <p>
-    Developed by David Robinson, Alex Hayes.
+    Developed by David Robinson, Alex Hayes, Simon Couch.
     Site built by <a href="https://pkgdown.r-lib.org">pkgdown</a>.
   </p>
 </div>
