@@ -187,6 +187,7 @@ quantreg
 quartile
 rcorr
 README
+reprex
 regsubsets
 ridgelm
 rjags
@@ -203,6 +204,7 @@ rq
 rqs
 rsample
 rscore
+RStudio
 Saldana
 sapharm
 sarlm
