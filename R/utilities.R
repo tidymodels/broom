@@ -492,6 +492,7 @@ globalVariables(
     "lambda",
     "level",
     "lhs",
+    "lm",
     "loading",
     "method",
     "Method",
