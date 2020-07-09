@@ -15,7 +15,7 @@
 \arguments{
 \item{x}{A \code{clm} object returned from \code{\link[ordinal:clm]{ordinal::clm()}}.}
 
-\item{data}{A \code{\link[=data.frame]{data.frame()}} or \code{\link[tibble:tibble]{tibble::tibble()}} containing the original
+\item{data}{A \link[base:data.frame]{base::data.frame} or \code{\link[tibble:tibble]{tibble::tibble()}} containing the original
 data that was used to produce the object \code{x}. Defaults to
 \code{stats::model.frame(x)} so that \code{augment(my_fit)} returns the augmented
 original data. \strong{Do not} pass new data to the \code{data} argument.
@@ -23,13 +23,13 @@ Augment will report information such as influence and cooks distance for
 data passed to the \code{data} argument. These measures are only defined for
 the original training data.}
 
-\item{newdata}{A \code{\link[=data.frame]{data.frame()}} or \code{\link[tibble:tibble]{tibble::tibble()}} containing all
+\item{newdata}{A \code{\link[base:data.frame]{base::data.frame()}} or \code{\link[tibble:tibble]{tibble::tibble()}} containing all
 the original predictors used to create \code{x}. Defaults to \code{NULL}, indicating
 that nothing has been passed to \code{newdata}. If \code{newdata} is specified,
 the \code{data} argument will be ignored.}
 
 \item{type.predict}{Which type of prediction to compute, either \code{"prob"}
-or \code{"class"}, passed to \code{\link[ordinal:predict.clm]{ordinal::predict.clm()}}. Defaults to \code{"prob"}.}
+or \code{"class"}, passed to \code{\link[ordinal:predict]{ordinal::predict.clm()}}. Defaults to \code{"prob"}.}
 
 \item{...}{Additional arguments. Not used. Needed to match generic
 signature only. \strong{Cautionary note:} Misspelled arguments will be
@@ -77,7 +77,7 @@ encounter errors, try explicitly passing a tibble, or fitting the original
 model on data in a tibble.
 
 We are in the process of defining behaviors for models fit with various
-\link{na.action} arguments, but make no guarantees about behavior when data is
+\code{na.action} arguments, but make no guarantees about behavior when data is
 missing at this time.
 }
 \examples{
@@ -99,7 +99,7 @@ tidy(fit2)
 glance(fit2)
 }
 \seealso{
-\link{tidy}, \code{\link[ordinal:clm]{ordinal::clm()}}, \code{\link[ordinal:predict.clm]{ordinal::predict.clm()}}
+\link{tidy}, \code{\link[ordinal:clm]{ordinal::clm()}}, \code{\link[ordinal:predict]{ordinal::predict.clm()}}
 
 Other ordinal tidiers: 
 \code{\link{augment.polr}()},

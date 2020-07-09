@@ -175,14 +175,16 @@ augment_chisq_test <- function(x, ...) {
 #' ptt <- pairwise.t.test(Ozone, Month)
 #' tidy(ptt)
 #'
-#' attach(iris)
-#' ptt2 <- pairwise.t.test(Petal.Length, Species)
+#' library(modeldata)
+#' data(hpc_data)
+#' attach(hpc_data)
+#' ptt2 <- pairwise.t.test(compounds, class)
 #' tidy(ptt2)
 #'
-#' tidy(pairwise.t.test(Petal.Length, Species, alternative = "greater"))
-#' tidy(pairwise.t.test(Petal.Length, Species, alternative = "less"))
+#' tidy(pairwise.t.test(compounds, class, alternative = "greater"))
+#' tidy(pairwise.t.test(compounds, class, alternative = "less"))
 #'
-#' tidy(pairwise.wilcox.test(Petal.Length, Species))
+#' tidy(pairwise.wilcox.test(compounds, class))
 #' @export
 #' @seealso [stats::pairwise.t.test()], [stats::pairwise.wilcox.test()],
 #'   [tidy()]

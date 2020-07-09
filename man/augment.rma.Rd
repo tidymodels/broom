@@ -7,7 +7,7 @@
 \method{augment}{rma}(x, ...)
 }
 \arguments{
-\item{x}{An \code{rma} object such as those created by \code{\link[metafor:rma]{metafor::rma()}},
+\item{x}{An \code{rma} object such as those created by \code{\link[metafor:rma.uni]{metafor::rma()}},
 \code{\link[metafor:rma.uni]{metafor::rma.uni()}}, \code{\link[metafor:rma.glmm]{metafor::rma.glmm()}}, \code{\link[metafor:rma.mh]{metafor::rma.mh()}},
 \code{\link[metafor:rma.mv]{metafor::rma.mv()}}, or \code{\link[metafor:rma.peto]{metafor::rma.peto()}}.}
 
@@ -57,7 +57,7 @@ encounter errors, try explicitly passing a tibble, or fitting the original
 model on data in a tibble.
 
 We are in the process of defining behaviors for models fit with various
-\link{na.action} arguments, but make no guarantees about behavior when data is
+\code{na.action} arguments, but make no guarantees about behavior when data is
 missing at this time.
 }
 \examples{

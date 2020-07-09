@@ -1,12 +1,18 @@
 context("pam")
 
+skip_on_cran()
+
 skip_if_not_installed("modeltests")
 library(modeltests)
 
 skip_if_not_installed("cluster")
 library(cluster)
 
-x <- iris %>% select(-Species)
+skip_if_not_installed("modeldata")
+library(modeldata)
+data(hpc_data)
+
+x <- hpc_data[, 2:5]
 p <- pam(x, k = 3)
 
 test_that("pam tidier arguments", {
@@ -32,7 +38,7 @@ test_that("augment.pam", {
   check_augment_function(
     aug = augment.pam,
     model = p,
-    data = iris,
-    newdata = iris
+    data = x,
+    newdata = x
   )
 })

@@ -1,5 +1,6 @@
 context("mediate")
 
+skip_on_cran()
 
 skip_if_not_installed("modeltests")
 library(modeltests)

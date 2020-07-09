@@ -35,7 +35,7 @@
 #'   model on data in a tibble.
 #'   
 #'   We are in the process of defining behaviors for models fit with various 
-#'   [na.action] arguments, but make no guarantees about behavior when data is
+#'   `na.action` arguments, but make no guarantees about behavior when data is
 #'   missing at this time.
 #' 
 #' @md

@@ -3,6 +3,10 @@ context("stats-htest")
 skip_if_not_installed("modeltests")
 library(modeltests)
 
+skip_if_not_installed("modeldata")
+library(modeldata)
+data(hpc_data)
+
 test_that("htest tidier arguments", {
   check_arguments(tidy.htest)
   check_arguments(glance.htest)
@@ -59,7 +63,7 @@ test_that("tidy.htest/wilcox.test", {
 })
 
 test_that("tidy.pairwise.htest", {
-  pht <- with(iris, pairwise.t.test(Petal.Length, Species))
+  pht <- with(hpc_data, pairwise.t.test(compounds, class))
   td <- tidy(pht)
   # gl <- glance(pht)
 

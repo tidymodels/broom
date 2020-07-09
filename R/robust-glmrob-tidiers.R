@@ -31,18 +31,16 @@ tidy.glmRob <- function(x, ...) {
 #' @param x Unused.
 #' @param ... Unused.
 #'
-#' @description `augment.glmRob()` has been removed from broom. We regret
-#'   that we were unable to provide any warning for this change. The
-#'   \pkg{robust} package does not provide the functionality necessary
-#'   to implement an augment method. We are looking into supporting the
-#'   \pkg{robustbase} package in the future.
-#'
 #' @export
 augment.glmRob <- function(x, ...) {
   stop(
-    "`augment.glmRob` has been removed from broom. See the documentation.",
+    paste0("`augment.glmRob` has been deprecated as the robust package",
+           "doesn't provide the functionality necessary to implement ",
+           "an augment method. Please see the augment method for ",
+           "glmrob objects from robustbase."),
     call. = FALSE
   )
+  invisible(TRUE)
 }
 
 #' @templateVar class glmRob

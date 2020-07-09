@@ -76,8 +76,8 @@ tidy.factanal <- function(x, ...) {
 #'
 #' @return When `data` is not supplied `augment.factanal` returns one
 #'   row for each observation, with a factor score column added for each factor
-#'   X, (`.fsX`). This is because [factanal()], unlike other
-#'   stats methods like [lm()], does not retain the original data.
+#'   X, (`.fsX`). This is because [stats::factanal()], unlike other
+#'   stats methods like [stats::lm()], does not retain the original data.
 #'
 #' When `data` is supplied, `augment.factanal` returns one row for
 #' each observation, with a factor score column added for each factor X,

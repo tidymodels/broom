@@ -17,7 +17,7 @@
 }
 \description{
 Broom tidies a number of lists that are effectively S3 objects without
-a class attribute. For example, \code{\link[stats:optim]{stats::optim()}}, \code{\link[=svd]{svd()}} and
+a class attribute. For example, \code{\link[stats:optim]{stats::optim()}}, \code{\link[base:svd]{base::svd()}} and
 \code{\link[akima:interp]{akima::interp()}} produce consistent output, but because they do not
 have a class attribute, they cannot be handled by S3 dispatch.
 }

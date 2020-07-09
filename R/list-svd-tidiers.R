@@ -2,11 +2,14 @@
 #' @template title_desc_tidy_list
 #'
 #' @inherit tidy.prcomp return details params
-#' @param x A list with components `u`, `d`, `v` returned by [svd()].
+#' @param x A list with components `u`, `d`, `v` returned by [base::svd()].
 #'
 #' @examples
 #'
-#' mat <- scale(as.matrix(iris[, 1:4]))
+#' library(modeldata)
+#' data(hpc_data)
+#'
+#' mat <- scale(as.matrix(hpc_data[, 2:5]))
 #' s <- svd(mat)
 #'
 #' tidy_u <- tidy(s, matrix = "u")
@@ -26,11 +29,11 @@
 #'   ylab("% of variance explained")
 #'
 #' tidy_u %>%
-#'   mutate(Species = iris$Species[row]) %>%
-#'   ggplot(aes(Species, value)) +
+#'   mutate(class = hpc_data$class[row]) %>%
+#'   ggplot(aes(class, value)) +
 #'   geom_boxplot() +
 #'   facet_wrap(~PC, scale = "free_y")
-#' @seealso [svd()]
+#' @seealso [base::svd()]
 #' @aliases svd_tidiers
 #' @family svd tidiers
 #' @family list tidiers
