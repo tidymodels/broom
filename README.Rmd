@@ -78,10 +78,13 @@ augment(fit, data = trees)
 
 We welcome contributions of all types!
 
-If you have never made a pull request to an R package before, `broom` is an excellent place to start. Find an [issue](https://github.com/tidymodels/broom/issues/) with the **Beginner Friendly** tag and comment that you'd like to take it on and we'll help you get started.
+For questions and discussions about tidymodels packages, modeling, and machine learning, please [post on RStudio Community](https://rstd.io/tidymodels-community). If you think you have encountered a bug, please [submit an issue](https://github.com/tidymodels/broom/issues). Either way, learn how to create and share a [reprex](https://rstd.io/reprex) (a minimal, reproducible example), to clearly communicate about your code. Check out further details on [contributing guidelines for tidymodels packages](https://www.tidymodels.org/contribute/) and [how to get help](https://www.tidymodels.org/help/).
 
-We encourage typo corrections, bug reports, bug fixes and feature requests. Feedback on the clarity of the documentation is especially valuable.
+If you have never directly contributed to an R package before, `broom` is an excellent place to start. Find an [issue](https://github.com/tidymodels/broom/issues/) with the **Beginner Friendly** tag and comment that you'd like to take it on and we'll help you get started.
+
+Generally, too, we encourage typo corrections, bug reports, bug fixes and feature requests. Feedback on the clarity of the documentation is especially valuable!
 
 If you are interested in adding tidier methods for new model objects, please read [this article](https://www.tidymodels.org/learn/develop/broom/) on the tidymodels website.
 
 We have a [Contributor Code of Conduct](https://github.com/tidymodels/broom/blob/master/.github/CODE_OF_CONDUCT.md). By participating in `broom` you agree to abide by its terms.
+
