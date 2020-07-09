@@ -289,7 +289,13 @@ the <code>data</code> argument.</p></td>
 
 <span class='kw'>meta_analysis</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/metafor/man/rma.uni.html'>rma</a></span>(<span class='kw'>yi</span>, <span class='kw'>vi</span>, data = <span class='kw'>df</span>, method = <span class='st'>"EB"</span>)
 
-<span class='fu'><a href='https://rdrr.io/pkg/generics/man/augment.html'>augment</a></span>(<span class='kw'>meta_analysis</span>)</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 13 x 6</span><span>
+<span class='fu'><a href='https://rdrr.io/pkg/generics/man/augment.html'>augment</a></span>(<span class='kw'>meta_analysis</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: `...` is not empty.</span>
+#&gt; <span class='warning'></span>
+#&gt; <span class='warning'>We detected these problematic arguments:</span>
+#&gt; <span class='warning'>* `needs_dots`</span>
+#&gt; <span class='warning'></span>
+#&gt; <span class='warning'>These dots only exist to allow future extensions and should be empty.</span>
+#&gt; <span class='warning'>Did you misspecify an argument?</span></div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 13 x 6</span><span>
 #&gt;    .observed  .fitted .se.fit .conf.low .conf.high  .resid
 #&gt;        </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>      </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
 #&gt; </span><span style='color: #555555;'> 1</span><span>   -</span><span style='color: #BB0000;'>0.889</span><span>  -</span><span style='color: #BB0000;'>0.801</span><span>    0.411     -</span><span style='color: #BB0000;'>1.61</span><span>     0.005</span><span style='text-decoration: underline;'>24</span><span> -</span><span style='color: #BB0000;'>0.174</span><span> 

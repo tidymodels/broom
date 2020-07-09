@@ -250,7 +250,13 @@ the <code>data</code> argument.</p></td>
 <span class='kw'>res</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/gmm/man/gmm.html'>gmm</a></span>(<span class='kw'>z</span> <span class='op'>~</span> <span class='kw'>zm</span>, x = <span class='kw'>h</span>)
 
 <span class='co'># tidy result</span>
-<span class='fu'><a href='https://rdrr.io/pkg/geepack/man/geepack-internal.html'>tidy</a></span>(<span class='kw'>res</span>)</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 20 x 5</span><span>
+<span class='fu'><a href='https://rdrr.io/pkg/geepack/man/geepack-internal.html'>tidy</a></span>(<span class='kw'>res</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: `...` is not empty.</span>
+#&gt; <span class='warning'></span>
+#&gt; <span class='warning'>We detected these problematic arguments:</span>
+#&gt; <span class='warning'>* `needs_dots`</span>
+#&gt; <span class='warning'></span>
+#&gt; <span class='warning'>These dots only exist to allow future extensions and should be empty.</span>
+#&gt; <span class='warning'>Did you misspecify an argument?</span></div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 20 x 5</span><span>
 #&gt;    term             estimate std.error statistic  p.value
 #&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>               </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
 #&gt; </span><span style='color: #555555;'> 1</span><span> WMK_(Intercept)  -</span><span style='color: #BB0000;'>0.004</span><span style='color: #BB0000;text-decoration: underline;'>67</span><span>    0.056</span><span style='text-decoration: underline;'>6</span><span>   -</span><span style='color: #BB0000;'>0.082</span><span style='color: #BB0000;text-decoration: underline;'>4</span><span> 9.34</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>- 1</span><span>
@@ -272,7 +278,13 @@ the <code>data</code> argument.</p></td>
 #&gt; </span><span style='color: #555555;'>17</span><span> EMR_zm            0.741      0.099</span><span style='text-decoration: underline;'>8</span><span>    7.43   1.13</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-13</span><span>
 #&gt; </span><span style='color: #555555;'>18</span><span> JCS_zm            0.959      0.348     2.76   5.85</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>- 3</span><span>
 #&gt; </span><span style='color: #555555;'>19</span><span> VOXX_zm           1.48       0.369     4.01   6.04</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>- 5</span><span>
-#&gt; </span><span style='color: #555555;'>20</span><span> ZOOM_zm           2.08       0.321     6.46   1.02</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-10</span><span></div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/geepack/man/geepack-internal.html'>tidy</a></span>(<span class='kw'>res</span>, conf.int = <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 20 x 7</span><span>
+#&gt; </span><span style='color: #555555;'>20</span><span> ZOOM_zm           2.08       0.321     6.46   1.02</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-10</span><span></div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/geepack/man/geepack-internal.html'>tidy</a></span>(<span class='kw'>res</span>, conf.int = <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: `...` is not empty.</span>
+#&gt; <span class='warning'></span>
+#&gt; <span class='warning'>We detected these problematic arguments:</span>
+#&gt; <span class='warning'>* `needs_dots`</span>
+#&gt; <span class='warning'></span>
+#&gt; <span class='warning'>These dots only exist to allow future extensions and should be empty.</span>
+#&gt; <span class='warning'>Did you misspecify an argument?</span></div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 20 x 7</span><span>
 #&gt;    term             estimate std.error statistic  p.value conf.low conf.high
 #&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>               </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
 #&gt; </span><span style='color: #555555;'> 1</span><span> WMK_(Intercept)  -</span><span style='color: #BB0000;'>0.004</span><span style='color: #BB0000;text-decoration: underline;'>67</span><span>    0.056</span><span style='text-decoration: underline;'>6</span><span>   -</span><span style='color: #BB0000;'>0.082</span><span style='color: #BB0000;text-decoration: underline;'>4</span><span> 9.34</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>- 1</span><span>  -</span><span style='color: #BB0000;'>0.116</span><span>      0.106
@@ -294,7 +306,13 @@ the <code>data</code> argument.</p></td>
 #&gt; </span><span style='color: #555555;'>17</span><span> EMR_zm            0.741      0.099</span><span style='text-decoration: underline;'>8</span><span>    7.43   1.13</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-13</span><span>   0.545      0.936
 #&gt; </span><span style='color: #555555;'>18</span><span> JCS_zm            0.959      0.348     2.76   5.85</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>- 3</span><span>   0.277      1.64 
 #&gt; </span><span style='color: #555555;'>19</span><span> VOXX_zm           1.48       0.369     4.01   6.04</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>- 5</span><span>   0.758      2.21 
-#&gt; </span><span style='color: #555555;'>20</span><span> ZOOM_zm           2.08       0.321     6.46   1.02</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-10</span><span>   1.45       2.71 </div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/geepack/man/geepack-internal.html'>tidy</a></span>(<span class='kw'>res</span>, conf.int = <span class='fl'>TRUE</span>, conf.level = <span class='fl'>.99</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 20 x 7</span><span>
+#&gt; </span><span style='color: #555555;'>20</span><span> ZOOM_zm           2.08       0.321     6.46   1.02</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-10</span><span>   1.45       2.71 </div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/geepack/man/geepack-internal.html'>tidy</a></span>(<span class='kw'>res</span>, conf.int = <span class='fl'>TRUE</span>, conf.level = <span class='fl'>.99</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: `...` is not empty.</span>
+#&gt; <span class='warning'></span>
+#&gt; <span class='warning'>We detected these problematic arguments:</span>
+#&gt; <span class='warning'>* `needs_dots`</span>
+#&gt; <span class='warning'></span>
+#&gt; <span class='warning'>These dots only exist to allow future extensions and should be empty.</span>
+#&gt; <span class='warning'>Did you misspecify an argument?</span></div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 20 x 7</span><span>
 #&gt;    term             estimate std.error statistic  p.value conf.low conf.high
 #&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>               </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
 #&gt; </span><span style='color: #555555;'> 1</span><span> WMK_(Intercept)  -</span><span style='color: #BB0000;'>0.004</span><span style='color: #BB0000;text-decoration: underline;'>67</span><span>    0.056</span><span style='text-decoration: underline;'>6</span><span>   -</span><span style='color: #BB0000;'>0.082</span><span style='color: #BB0000;text-decoration: underline;'>4</span><span> 9.34</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>- 1</span><span> -</span><span style='color: #BB0000;'>0.151</span><span>       0.141
@@ -337,7 +355,13 @@ the <code>data</code> argument.</p></td>
 <span class='kw'>x</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>as.matrix</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/cbind.html'>cbind</a></span>(<span class='kw'>rm</span>, <span class='kw'>r</span>))
 <span class='kw'>res_black</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/gmm/man/gmm.html'>gmm</a></span>(<span class='kw'>g</span>, x = <span class='kw'>x</span>, t0 = <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='fl'>0</span>, <span class='fl'>11</span>))
 
-<span class='fu'><a href='https://rdrr.io/pkg/geepack/man/geepack-internal.html'>tidy</a></span>(<span class='kw'>res_black</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 11 x 5</span><span>
+<span class='fu'><a href='https://rdrr.io/pkg/geepack/man/geepack-internal.html'>tidy</a></span>(<span class='kw'>res_black</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: `...` is not empty.</span>
+#&gt; <span class='warning'></span>
+#&gt; <span class='warning'>We detected these problematic arguments:</span>
+#&gt; <span class='warning'>* `needs_dots`</span>
+#&gt; <span class='warning'></span>
+#&gt; <span class='warning'>These dots only exist to allow future extensions and should be empty.</span>
+#&gt; <span class='warning'>Did you misspecify an argument?</span></div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 11 x 5</span><span>
 #&gt;    term      estimate std.error statistic  p.value
 #&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>        </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
 #&gt; </span><span style='color: #555555;'> 1</span><span> Theta[1]    0.516     0.172     3.00   2.72</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>- 3</span><span>
@@ -350,7 +374,13 @@ the <code>data</code> argument.</p></td>
 #&gt; </span><span style='color: #555555;'> 8</span><span> Theta[8]    1.05      0.068</span><span style='text-decoration: underline;'>7</span><span>   15.3    5.03</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-53</span><span>
 #&gt; </span><span style='color: #555555;'> 9</span><span> Theta[9]    0.640     0.233     2.75   5.92</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>- 3</span><span>
 #&gt; </span><span style='color: #555555;'>10</span><span> Theta[10]   0.596     0.295     2.02   4.36</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>- 2</span><span>
-#&gt; </span><span style='color: #555555;'>11</span><span> Theta[11]   1.16      0.240     4.82   1.45</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>- 6</span><span></div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/geepack/man/geepack-internal.html'>tidy</a></span>(<span class='kw'>res_black</span>, conf.int = <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 11 x 7</span><span>
+#&gt; </span><span style='color: #555555;'>11</span><span> Theta[11]   1.16      0.240     4.82   1.45</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>- 6</span><span></div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/geepack/man/geepack-internal.html'>tidy</a></span>(<span class='kw'>res_black</span>, conf.int = <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: `...` is not empty.</span>
+#&gt; <span class='warning'></span>
+#&gt; <span class='warning'>We detected these problematic arguments:</span>
+#&gt; <span class='warning'>* `needs_dots`</span>
+#&gt; <span class='warning'></span>
+#&gt; <span class='warning'>These dots only exist to allow future extensions and should be empty.</span>
+#&gt; <span class='warning'>Did you misspecify an argument?</span></div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 11 x 7</span><span>
 #&gt;    term      estimate std.error statistic  p.value conf.low conf.high
 #&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>        </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
 #&gt; </span><span style='color: #555555;'> 1</span><span> Theta[1]    0.516     0.172     3.00   2.72</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>- 3</span><span>   0.178      0.853
@@ -373,7 +403,13 @@ the <code>data</code> argument.</p></td>
 <span class='kw'>res2</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/gmm/man/gmm.html'>gmm</a></span>(<span class='kw'>z</span> <span class='op'>~</span> <span class='kw'>f1</span> <span class='op'>+</span> <span class='kw'>f2</span> <span class='op'>+</span> <span class='kw'>f3</span>, x = <span class='kw'>h</span>)
 
 <span class='kw'>td2</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/geepack/man/geepack-internal.html'>tidy</a></span>(<span class='kw'>res2</span>, conf.int = <span class='fl'>TRUE</span>)
-<span class='kw'>td2</span></div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 40 x 7</span><span>
+<span class='kw'>td2</span></div><div class='output co'>#&gt; <span class='warning'>Warning: `...` is not empty.</span>
+#&gt; <span class='warning'></span>
+#&gt; <span class='warning'>We detected these problematic arguments:</span>
+#&gt; <span class='warning'>* `needs_dots`</span>
+#&gt; <span class='warning'></span>
+#&gt; <span class='warning'>These dots only exist to allow future extensions and should be empty.</span>
+#&gt; <span class='warning'>Did you misspecify an argument?</span></div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 40 x 7</span><span>
 #&gt;    term             estimate std.error statistic p.value conf.low conf.high
 #&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>               </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
 #&gt; </span><span style='color: #555555;'> 1</span><span> WMK_(Intercept)  -</span><span style='color: #BB0000;'>0.024</span><span style='color: #BB0000;text-decoration: underline;'>0</span><span>     0.054</span><span style='text-decoration: underline;'>8</span><span>   -</span><span style='color: #BB0000;'>0.438</span><span>    0.662  -</span><span style='color: #BB0000;'>0.131</span><span>     0.083</span><span style='text-decoration: underline;'>4</span><span>
