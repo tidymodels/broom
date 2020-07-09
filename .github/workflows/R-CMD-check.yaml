@@ -71,7 +71,7 @@ jobs:
         run: |
           remotes::install_deps(dependencies = TRUE)
           remotes::install_cran("rcmdcheck")
-          install.packages('btergm', 'quantreg')
+          install.packages(c('btergm', 'quantreg'))
         shell: Rscript {0}
 
       - name: Session info
