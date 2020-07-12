@@ -7,8 +7,8 @@
 \method{tidy}{acf}(x, ...)
 }
 \arguments{
-\item{x}{An \code{acf} object created by \code{\link[stats:acf]{stats::acf()}}, \code{\link[stats:pacf]{stats::pacf()}} or
-\code{\link[stats:ccf]{stats::ccf()}}.}
+\item{x}{An \code{acf} object created by \code{\link[stats:acf]{stats::acf()}}, \code{\link[stats:acf]{stats::pacf()}} or
+\code{\link[stats:acf]{stats::ccf()}}.}
 
 \item{...}{Additional arguments. Not used. Needed to match generic
 signature only. \strong{Cautionary note:} Misspelled arguments will be
@@ -35,7 +35,7 @@ tidy(ccf(mdeaths, fdeaths, plot = FALSE))
 tidy(pacf(lh, plot = FALSE))
 }
 \seealso{
-\code{\link[=tidy]{tidy()}}, \code{\link[stats:acf]{stats::acf()}}, \code{\link[stats:pacf]{stats::pacf()}}, \code{\link[stats:ccf]{stats::ccf()}}
+\code{\link[=tidy]{tidy()}}, \code{\link[stats:acf]{stats::acf()}}, \code{\link[stats:acf]{stats::pacf()}}, \code{\link[stats:acf]{stats::ccf()}}
 
 Other time series tidiers: 
 \code{\link{tidy.spec}()},

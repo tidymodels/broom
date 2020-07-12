@@ -17,7 +17,7 @@
 \arguments{
 \item{x}{A \code{glm} object returned from \code{\link[stats:glm]{stats::glm()}}.}
 
-\item{data}{A \code{\link[=data.frame]{data.frame()}} or \code{\link[tibble:tibble]{tibble::tibble()}} containing the original
+\item{data}{A \link[base:data.frame]{base::data.frame} or \code{\link[tibble:tibble]{tibble::tibble()}} containing the original
 data that was used to produce the object \code{x}. Defaults to
 \code{stats::model.frame(x)} so that \code{augment(my_fit)} returns the augmented
 original data. \strong{Do not} pass new data to the \code{data} argument.
@@ -25,7 +25,7 @@ Augment will report information such as influence and cooks distance for
 data passed to the \code{data} argument. These measures are only defined for
 the original training data.}
 
-\item{newdata}{A \code{\link[=data.frame]{data.frame()}} or \code{\link[tibble:tibble]{tibble::tibble()}} containing all
+\item{newdata}{A \code{\link[base:data.frame]{base::data.frame()}} or \code{\link[tibble:tibble]{tibble::tibble()}} containing all
 the original predictors used to create \code{x}. Defaults to \code{NULL}, indicating
 that nothing has been passed to \code{newdata}. If \code{newdata} is specified,
 the \code{data} argument will be ignored.}
@@ -33,8 +33,8 @@ the \code{data} argument will be ignored.}
 \item{type.predict}{Passed to \code{\link[stats:predict.glm]{stats::predict.glm()}} \code{type}
 argument. Defaults to \code{"link"}.}
 
-\item{type.residuals}{Passed to \code{\link[stats:residuals.glm]{stats::residuals.glm()}} and
-to \code{\link[stats:rstandard.glm]{stats::rstandard.glm()}} \code{type} arguments. Defaults to \code{"deviance"}.}
+\item{type.residuals}{Passed to \code{\link[stats:glm.summaries]{stats::residuals.glm()}} and
+to \code{\link[stats:influence.measures]{stats::rstandard.glm()}} \code{type} arguments. Defaults to \code{"deviance"}.}
 
 \item{se_fit}{Logical indicating whether or not a \code{.se.fit} column should be
 added to the augmented output. For some models, this calculation can be
@@ -86,7 +86,7 @@ encounter errors, try explicitly passing a tibble, or fitting the original
 model on data in a tibble.
 
 We are in the process of defining behaviors for models fit with various
-\link{na.action} arguments, but make no guarantees about behavior when data is
+\code{na.action} arguments, but make no guarantees about behavior when data is
 missing at this time.
 }
 \details{

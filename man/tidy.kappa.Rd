@@ -9,7 +9,7 @@
 \method{tidy}{kappa}(x, ...)
 }
 \arguments{
-\item{x}{A \code{kappa} object returned from \code{\link[psych:cohen.kappa]{psych::cohen.kappa()}}.}
+\item{x}{A \code{kappa} object returned from \code{\link[psych:kappa]{psych::cohen.kappa()}}.}
 
 \item{...}{Additional arguments. Not used. Needed to match generic
 signature only. \strong{Cautionary note:} Misspelled arguments will be
@@ -32,7 +32,7 @@ specify which components to return.
 \details{
 Note that confidence level (alpha) for the confidence interval
 cannot be set in \code{tidy}. Instead you must set the \code{alpha} argument
-to \code{\link[psych:cohen.kappa]{psych::cohen.kappa()}} when creating the \code{kappa} object.
+to \code{\link[psych:kappa]{psych::cohen.kappa()}} when creating the \code{kappa} object.
 }
 \examples{
 
@@ -51,7 +51,7 @@ ggplot(tidy(ck), aes(estimate, type)) +
   geom_errorbarh(aes(xmin = conf.low, xmax = conf.high))
 }
 \seealso{
-\code{\link[=tidy]{tidy()}}, \code{\link[psych:cohen.kappa]{psych::cohen.kappa()}}
+\code{\link[=tidy]{tidy()}}, \code{\link[psych:kappa]{psych::cohen.kappa()}}
 }
 \value{
 A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:

@@ -10,17 +10,21 @@
 #'
 #' @examples
 #'
+#' \dontrun{
 #' library(cluster)
 #' library(dplyr)
 #'
-#' x <- iris %>%
-#'   select(-Species)
+#' library(modeldata)
+#' data(hpc_data)
+#' 
+#' x <- hpc_data[, 2:5]
 #'
-#' fit <- pam(x, k = 3)
+#' fit <- pam(x, k = 4)
 #'
 #' tidy(fit)
 #' glance(fit)
 #' augment(fit, x)
+#' }
 #' @details For examples, see the kmeans vignette.
 #'
 #' @aliases kmeans_tidiers

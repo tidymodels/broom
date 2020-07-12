@@ -26,22 +26,26 @@
 #' @family pam tidiers
 #' @examples
 #'
+#' \dontrun{
 #' library(dplyr)
 #' library(ggplot2)
 #' library(cluster)
-#'
-#' x <- iris %>%
-#'   select(-Species)
-#' p <- pam(x, k = 3)
+#' library(modeldata)
+#' data(hpc_data)
+#' 
+#' x <- hpc_data[, 2:5]
+#' p <- pam(x, k = 4)
 #'
 #' tidy(p)
 #' glance(p)
 #' augment(p, x)
 #'
 #' augment(p, x) %>%
-#'   ggplot(aes(Sepal.Length, Sepal.Width)) +
+#'   ggplot(aes(compounds, input_fields)) +
 #'   geom_point(aes(color = .cluster)) +
 #'   geom_text(aes(label = cluster), data = tidy(p), size = 10)
+#' }   
+#'   
 tidy.pam <- function(x, col.names = paste0("x", 1:ncol(x$medoids)), ...) {
   as_tibble(x$clusinfo) %>%
     mutate(

@@ -29,7 +29,7 @@ exponentiate <- function(data) {
 #' interesting (i.e. more than `1, 2, 3, ...`). This function is
 #' meant for use inside of `augment.*` methods.
 #'
-#' @param data A [data.frame()] or [tibble::tibble()].
+#' @param data A [base::data.frame()] or [tibble::tibble()].
 #'
 #' @return A `tibble` potentially with a `.rownames` column
 #' @noRd
@@ -492,6 +492,7 @@ globalVariables(
     "lambda",
     "level",
     "lhs",
+    "lm",
     "loading",
     "method",
     "Method",

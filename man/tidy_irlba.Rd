@@ -56,8 +56,9 @@ principle components up to this component.}
 \description{
 Broom tidies a number of lists that are effectively S3
 objects without a class attribute. For example, \code{\link[stats:optim]{stats::optim()}},
-\code{\link[=svd]{svd()}} and \code{\link[akima:interp]{akima::interp()}} produce consistent output, but because
-they do not have a class attribute, they cannot be handled by S3 dispatch.
+\link[base:svd]{svd()} and \code{\link[akima:interp]{akima::interp()}} produce consistent output, but
+because they do not have a class attribute, they cannot be handled by S3
+dispatch.
 
 These functions look at the elements of a list and determine if there is
 an appropriate tidying method to apply to the list. Those tidiers are
@@ -71,7 +72,10 @@ A very thin wrapper around \code{\link[=tidy_svd]{tidy_svd()}}.
 }
 \examples{
 
-mat <- scale(as.matrix(iris[, 1:4]))
+library(modeldata)
+data(hpc_data)
+
+mat <- scale(as.matrix(hpc_data[, 2:5]))
 s <- svd(mat)
 
 tidy_u <- tidy(s, matrix = "u")
@@ -91,8 +95,8 @@ ggplot(tidy_d, aes(PC, percent)) +
   ylab("\% of variance explained")
 
 tidy_u \%>\%
-  mutate(Species = iris$Species[row]) \%>\%
-  ggplot(aes(Species, value)) +
+  mutate(class = hpc_data$class[row]) \%>\%
+  ggplot(aes(class, value)) +
   geom_boxplot() +
   facet_wrap(~PC, scale = "free_y")
 }

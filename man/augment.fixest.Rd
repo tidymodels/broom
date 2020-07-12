@@ -4,12 +4,12 @@
 \alias{augment.fixest}
 \title{Augment data with information from a(n) fixest object}
 \usage{
-\method{augment}{fixest}(x, data = NULL, newdata = NULL, type.predict = "link", ...)
+\method{augment}{fixest}(x, data = NULL, newdata = NULL, type.predict = "response", ...)
 }
 \arguments{
 \item{x}{A \code{fixest} object returned from any of the \code{fixest} estimators}
 
-\item{data}{A \code{\link[=data.frame]{data.frame()}} or \code{\link[tibble:tibble]{tibble::tibble()}} containing the original
+\item{data}{A \link[base:data.frame]{base::data.frame} or \code{\link[tibble:tibble]{tibble::tibble()}} containing the original
 data that was used to produce the object \code{x}. Defaults to
 \code{stats::model.frame(x)} so that \code{augment(my_fit)} returns the augmented
 original data. \strong{Do not} pass new data to the \code{data} argument.
@@ -17,7 +17,7 @@ Augment will report information such as influence and cooks distance for
 data passed to the \code{data} argument. These measures are only defined for
 the original training data.}
 
-\item{newdata}{A \code{\link[=data.frame]{data.frame()}} or \code{\link[tibble:tibble]{tibble::tibble()}} containing all
+\item{newdata}{A \code{\link[base:data.frame]{base::data.frame()}} or \code{\link[tibble:tibble]{tibble::tibble()}} containing all
 the original predictors used to create \code{x}. Defaults to \code{NULL}, indicating
 that nothing has been passed to \code{newdata}. If \code{newdata} is specified,
 the \code{data} argument will be ignored.}
@@ -66,7 +66,7 @@ encounter errors, try explicitly passing a tibble, or fitting the original
 model on data in a tibble.
 
 We are in the process of defining behaviors for models fit with various
-\link{na.action} arguments, but make no guarantees about behavior when data is
+\code{na.action} arguments, but make no guarantees about behavior when data is
 missing at this time.
 }
 \note{
@@ -75,7 +75,7 @@ data, so you must provide it manually.
 
 augment.fixest only works for \code{\link[fixest:feols]{fixest::feols()}}, \code{\link[fixest:feglm]{fixest::feglm()}}, and
 \code{\link[fixest:femlm]{fixest::femlm()}} models. It does not work with results from
-\code{\link[fixest:fenegbin]{fixest::fenegbin()}}, \code{\link[fixest:feNmlm]{fixest::feNmlm()}}, or \code{\link[fixest:fepois]{fixest::fepois()}}.
+\code{\link[fixest:femlm]{fixest::fenegbin()}}, \code{\link[fixest:feNmlm]{fixest::feNmlm()}}, or \code{\link[fixest:feglm]{fixest::fepois()}}.
 }
 \examples{
 \donttest{

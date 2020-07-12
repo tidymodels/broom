@@ -143,7 +143,8 @@ tidy_fixest <- function(x, conf.int = conf.int, conf.level = conf.level, ...) {
 #' @export
 #' @family fixest tidiers
 #' @seealso [augment()], [fixest::feglm()], [fixest::femlm()], [fixest::feols()]
-augment.fixest <- function(x, data = NULL, newdata = NULL, type.predict="link", ...) {
+augment.fixest <- function(x, data = NULL, newdata = NULL, 
+                           type.predict = "response", ...) {
   if (!x$method %in% c("feols", "feglm", "femlm")) {
     stop("augment is only supported for fixest models estimated with ",
       "feols, feglm, or femlm\n",

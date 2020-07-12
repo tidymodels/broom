@@ -7,8 +7,8 @@
 \method{augment}{sarlm}(x, data = x$X, ...)
 }
 \arguments{
-\item{x}{An object of object returned from \code{\link[spatialreg:lagsarlm]{spatialreg::lagsarlm()}}
-or \code{\link[spatialreg:errorsarlm]{spatialreg::errorsarlm()}}.}
+\item{x}{An object of object returned from \code{\link[spatialreg:ML_models]{spatialreg::lagsarlm()}}
+or \code{\link[spatialreg:ML_models]{spatialreg::errorsarlm()}}.}
 
 \item{data}{Ignored, but included for internal consistency. See the details
 below.}
@@ -59,7 +59,7 @@ encounter errors, try explicitly passing a tibble, or fitting the original
 model on data in a tibble.
 
 We are in the process of defining behaviors for models fit with various
-\link{na.action} arguments, but make no guarantees about behavior when data is
+\code{na.action} arguments, but make no guarantees about behavior when data is
 missing at this time.
 }
 \details{

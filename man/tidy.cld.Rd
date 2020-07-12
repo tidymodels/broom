@@ -55,8 +55,8 @@ cld <- cld(wht)
 tidy(cld)
 }
 \seealso{
-\code{\link[=tidy]{tidy()}}, \code{\link[multcomp:cld]{multcomp::cld()}}, \code{\link[multcomp:summary.glht]{multcomp::summary.glht()}},
-\code{\link[multcomp:confint.glht]{multcomp::confint.glht()}}, \code{\link[multcomp:glht]{multcomp::glht()}}
+\code{\link[=tidy]{tidy()}}, \code{\link[multcomp:cld]{multcomp::cld()}}, \code{\link[multcomp:methods]{multcomp::summary.glht()}},
+\code{\link[multcomp:methods]{multcomp::confint.glht()}}, \code{\link[multcomp:glht]{multcomp::glht()}}
 
 Other multcomp tidiers: 
 \code{\link{tidy.confint.glht}()},

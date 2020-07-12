@@ -2,8 +2,9 @@
 #' 
 #' @description Broom tidies a number of lists that are effectively S3
 #'   objects without a class attribute. For example, [stats::optim()],
-#'   [svd()] and [akima::interp()] produce consistent output, but because
-#'   they do not have a class attribute, they cannot be handled by S3 dispatch.
+#'   [svd()][base::svd()] and [akima::interp()] produce consistent output, but 
+#'   because they do not have a class attribute, they cannot be handled by S3 
+#'   dispatch.
 #' 
 #'   These functions look at the elements of a list and determine if there is
 #'   an appropriate tidying method to apply to the list. Those tidiers are

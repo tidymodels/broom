@@ -47,12 +47,6 @@ encounter errors, try explicitly passing a tibble, or fitting the original
 model on data in a tibble.
 
 We are in the process of defining behaviors for models fit with various
-\link{na.action} arguments, but make no guarantees about behavior when data is
+\code{na.action} arguments, but make no guarantees about behavior when data is
 missing at this time.
-
-\code{augment.glmRob()} has been removed from broom. We regret
-that we were unable to provide any warning for this change. The
-\pkg{robust} package does not provide the functionality necessary
-to implement an augment method. We are looking into supporting the
-\pkg{robustbase} package in the future.
 }

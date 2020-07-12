@@ -32,8 +32,8 @@ If a model has several distinct types of components, you will need to
 specify which components to return.
 }
 \details{
-The tibble has a column for each of the measures of association or tests contained in \code{massoc} when
-\code{\link[epiR:epi.2by2]{epiR::epi.2by2()}} is called.
+The tibble has a column for each of the measures of association
+or tests contained in \code{massoc} when \code{\link[epiR:epi.2by2]{epiR::epi.2by2()}} is called.
 }
 \examples{
 library(epiR)
