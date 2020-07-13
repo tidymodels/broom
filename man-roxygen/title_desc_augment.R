@@ -11,8 +11,10 @@
 #'   `newdata` argument. If the user passes data to the `data` argument,
 #'   it **must** be exactly the data that was used to fit the model
 #'   object. Pass datasets to `newdata` to augment data that was not used
-#'   during model fitting. This still requires that all columns used to fit
-#'   the model are present.
+#'   during model fitting. This still requires that at least all predictor 
+#'   variable columns used to fit the model are present. If the original outcome
+#'   variable used to fit the model is not included in `newdata`, then no
+#'   `.resid` column will be included in the output.
 #'   
 #'   Augment will often behave differently depending on whether `data` or 
 #'   `newdata` is given. This is because there is often information
