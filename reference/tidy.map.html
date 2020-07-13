@@ -218,13 +218,7 @@ Remaining columns give information on geographic attributes
 
 
 <span class='kw'>ca</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/maps/man/map.html'>map</a></span>(<span class='st'>"county"</span>, <span class='st'>"ca"</span>, plot = <span class='fl'>FALSE</span>, fill = <span class='fl'>TRUE</span>)
-<span class='fu'><a href='https://rdrr.io/pkg/geepack/man/geepack-internal.html'>tidy</a></span>(<span class='kw'>ca</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: `...` is not empty.</span>
-#&gt; <span class='warning'></span>
-#&gt; <span class='warning'>We detected these problematic arguments:</span>
-#&gt; <span class='warning'>* `needs_dots`</span>
-#&gt; <span class='warning'></span>
-#&gt; <span class='warning'>These dots only exist to allow future extensions and should be empty.</span>
-#&gt; <span class='warning'>Did you misspecify an argument?</span></div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 2,977 x 7</span><span>
+<span class='fu'><a href='https://rdrr.io/pkg/geepack/man/geepack-internal.html'>tidy</a></span>(<span class='kw'>ca</span>)</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 2,977 x 7</span><span>
 #&gt;    term   long   lat group order region     subregion
 #&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>      </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>    
 #&gt; </span><span style='color: #555555;'> 1</span><span> 1     -</span><span style='color: #BB0000;'>121.</span><span>  37.5     1     1 california alameda  
@@ -239,13 +233,7 @@ Remaining columns give information on geographic attributes
 #&gt; </span><span style='color: #555555;'>10</span><span> 10    -</span><span style='color: #BB0000;'>122.</span><span>  37.5     1    10 california alameda  
 #&gt; </span><span style='color: #555555;'># … with 2,967 more rows</span><span></div><div class='input'><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/qplot.html'>qplot</a></span>(<span class='kw'>long</span>, <span class='kw'>lat</span>, data = <span class='kw'>ca</span>, geom = <span class='st'>"polygon"</span>, group = <span class='kw'>group</span>)</div><div class='img'><img src='tidy.map-1.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='kw'>tx</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/maps/man/map.html'>map</a></span>(<span class='st'>"county"</span>, <span class='st'>"texas"</span>, plot = <span class='fl'>FALSE</span>, fill = <span class='fl'>TRUE</span>)
-<span class='fu'><a href='https://rdrr.io/pkg/geepack/man/geepack-internal.html'>tidy</a></span>(<span class='kw'>tx</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: `...` is not empty.</span>
-#&gt; <span class='warning'></span>
-#&gt; <span class='warning'>We detected these problematic arguments:</span>
-#&gt; <span class='warning'>* `needs_dots`</span>
-#&gt; <span class='warning'></span>
-#&gt; <span class='warning'>These dots only exist to allow future extensions and should be empty.</span>
-#&gt; <span class='warning'>Did you misspecify an argument?</span></div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 4,488 x 7</span><span>
+<span class='fu'><a href='https://rdrr.io/pkg/geepack/man/geepack-internal.html'>tidy</a></span>(<span class='kw'>tx</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 4,488 x 7</span><span>
 #&gt;    term   long   lat group order region subregion
 #&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>    
 #&gt; </span><span style='color: #555555;'> 1</span><span> 1     -</span><span style='color: #BB0000;'>95.8</span><span>  31.5     1     1 texas  anderson 

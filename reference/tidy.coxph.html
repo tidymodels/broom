@@ -254,23 +254,11 @@ the <code>data</code> argument.</p></td>
 
 <span class='kw'>cfit</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/survival/man/coxph.html'>coxph</a></span>(<span class='fu'><a href='https://rdrr.io/pkg/survival/man/Surv.html'>Surv</a></span>(<span class='kw'>time</span>, <span class='kw'>status</span>) <span class='op'>~</span> <span class='kw'>age</span> <span class='op'>+</span> <span class='kw'>sex</span>, <span class='kw'>lung</span>)
 
-<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='kw'>cfit</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: `...` is not empty.</span>
-#&gt; <span class='warning'></span>
-#&gt; <span class='warning'>We detected these problematic arguments:</span>
-#&gt; <span class='warning'>* `needs_dots`</span>
-#&gt; <span class='warning'></span>
-#&gt; <span class='warning'>These dots only exist to allow future extensions and should be empty.</span>
-#&gt; <span class='warning'>Did you misspecify an argument?</span></div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 2 x 5</span><span>
+<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='kw'>cfit</span>)</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 2 x 5</span><span>
 #&gt;   term  estimate std.error statistic p.value
 #&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
 #&gt; </span><span style='color: #555555;'>1</span><span> age     0.017</span><span style='text-decoration: underline;'>0</span><span>   0.009</span><span style='text-decoration: underline;'>22</span><span>      1.85 0.064</span><span style='text-decoration: underline;'>6</span><span> 
-#&gt; </span><span style='color: #555555;'>2</span><span> sex    -</span><span style='color: #BB0000;'>0.513</span><span>    0.167       -</span><span style='color: #BB0000;'>3.06</span><span> 0.002</span><span style='text-decoration: underline;'>18</span><span></div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='kw'>cfit</span>, exponentiate = <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: `...` is not empty.</span>
-#&gt; <span class='warning'></span>
-#&gt; <span class='warning'>We detected these problematic arguments:</span>
-#&gt; <span class='warning'>* `needs_dots`</span>
-#&gt; <span class='warning'></span>
-#&gt; <span class='warning'>These dots only exist to allow future extensions and should be empty.</span>
-#&gt; <span class='warning'>Did you misspecify an argument?</span></div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 2 x 5</span><span>
+#&gt; </span><span style='color: #555555;'>2</span><span> sex    -</span><span style='color: #BB0000;'>0.513</span><span>    0.167       -</span><span style='color: #BB0000;'>3.06</span><span> 0.002</span><span style='text-decoration: underline;'>18</span><span></div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='kw'>cfit</span>, exponentiate = <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 2 x 5</span><span>
 #&gt;   term  estimate std.error statistic p.value
 #&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
 #&gt; </span><span style='color: #555555;'>1</span><span> age      1.02    0.009</span><span style='text-decoration: underline;'>22</span><span>      1.85 0.064</span><span style='text-decoration: underline;'>6</span><span> 
@@ -279,13 +267,7 @@ the <code>data</code> argument.</p></td>
 <span class='kw'>risks</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/generics/man/augment.html'>augment</a></span>(<span class='kw'>cfit</span>, <span class='kw'>lung</span>, type.predict = <span class='st'>"risk"</span>)
 <span class='kw'>expected</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/generics/man/augment.html'>augment</a></span>(<span class='kw'>cfit</span>, <span class='kw'>lung</span>, type.predict = <span class='st'>"expected"</span>)
 
-<span class='fu'><a href='https://rdrr.io/pkg/generics/man/glance.html'>glance</a></span>(<span class='kw'>cfit</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: `...` is not empty.</span>
-#&gt; <span class='warning'></span>
-#&gt; <span class='warning'>We detected these problematic arguments:</span>
-#&gt; <span class='warning'>* `needs_dots`</span>
-#&gt; <span class='warning'></span>
-#&gt; <span class='warning'>These dots only exist to allow future extensions and should be empty.</span>
-#&gt; <span class='warning'>Did you misspecify an argument?</span></div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 1 x 18</span><span>
+<span class='fu'><a href='https://rdrr.io/pkg/generics/man/glance.html'>glance</a></span>(<span class='kw'>cfit</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 1 x 18</span><span>
 #&gt;       n nevent statistic.log p.value.log statistic.sc p.value.sc statistic.wald
 #&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>         </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>       </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>        </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>      </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>          </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
 #&gt; </span><span style='color: #555555;'>1</span><span>   228    165          14.1    0.000</span><span style='text-decoration: underline;'>857</span><span>         13.7    0.001</span><span style='text-decoration: underline;'>05</span><span>           13.5
@@ -306,13 +288,7 @@ the <code>data</code> argument.</p></td>
 <span class='kw'>logan2</span><span class='op'>$</span><span class='kw'>case</span> <span class='op'>&lt;-</span> (<span class='kw'>logan2</span><span class='op'>$</span><span class='kw'>occupation</span> <span class='op'>==</span> <span class='kw'>logan2</span><span class='op'>$</span><span class='kw'>tocc</span>)
 
 <span class='kw'>cl</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/survival/man/clogit.html'>clogit</a></span>(<span class='kw'>case</span> <span class='op'>~</span> <span class='kw'>tocc</span> <span class='op'>+</span> <span class='kw'>tocc</span><span class='op'>:</span><span class='kw'>education</span> <span class='op'>+</span> <span class='fu'><a href='https://rdrr.io/pkg/survival/man/strata.html'>strata</a></span>(<span class='kw'>id</span>), <span class='kw'>logan2</span>)
-<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='kw'>cl</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: `...` is not empty.</span>
-#&gt; <span class='warning'></span>
-#&gt; <span class='warning'>We detected these problematic arguments:</span>
-#&gt; <span class='warning'>* `needs_dots`</span>
-#&gt; <span class='warning'></span>
-#&gt; <span class='warning'>These dots only exist to allow future extensions and should be empty.</span>
-#&gt; <span class='warning'>Did you misspecify an argument?</span></div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 9 x 5</span><span>
+<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='kw'>cl</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 9 x 5</span><span>
 #&gt;   term                       estimate std.error statistic   p.value
 #&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>                         </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
 #&gt; </span><span style='color: #555555;'>1</span><span> toccfarm                     -</span><span style='color: #BB0000;'>1.90</span><span>     1.38       -</span><span style='color: #BB0000;'>1.37</span><span>  1.70</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>- 1</span><span>
@@ -323,13 +299,7 @@ the <code>data</code> argument.</p></td>
 #&gt; </span><span style='color: #555555;'>6</span><span> toccfarm:education           -</span><span style='color: #BB0000;'>0.370</span><span>    0.116      -</span><span style='color: #BB0000;'>3.18</span><span>  1.47</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>- 3</span><span>
 #&gt; </span><span style='color: #555555;'>7</span><span> toccoperatives:education     -</span><span style='color: #BB0000;'>0.422</span><span>    0.058</span><span style='text-decoration: underline;'>4</span><span>     -</span><span style='color: #BB0000;'>7.23</span><span>  4.98</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-13</span><span>
 #&gt; </span><span style='color: #555555;'>8</span><span> toccprofessional:education    0.278    0.051</span><span style='text-decoration: underline;'>0</span><span>      5.45  4.94</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>- 8</span><span>
-#&gt; </span><span style='color: #555555;'>9</span><span> toccsales:education          </span><span style='color: #BB0000;'>NA</span><span>        0          </span><span style='color: #BB0000;'>NA</span><span>    </span><span style='color: #BB0000;'>NA</span><span>   </span><span style='color: #555555;'> </span><span>   </div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/generics/man/glance.html'>glance</a></span>(<span class='kw'>cl</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: `...` is not empty.</span>
-#&gt; <span class='warning'></span>
-#&gt; <span class='warning'>We detected these problematic arguments:</span>
-#&gt; <span class='warning'>* `needs_dots`</span>
-#&gt; <span class='warning'></span>
-#&gt; <span class='warning'>These dots only exist to allow future extensions and should be empty.</span>
-#&gt; <span class='warning'>Did you misspecify an argument?</span></div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 1 x 18</span><span>
+#&gt; </span><span style='color: #555555;'>9</span><span> toccsales:education          </span><span style='color: #BB0000;'>NA</span><span>        0          </span><span style='color: #BB0000;'>NA</span><span>    </span><span style='color: #BB0000;'>NA</span><span>   </span><span style='color: #555555;'> </span><span>   </div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/generics/man/glance.html'>glance</a></span>(<span class='kw'>cl</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 1 x 18</span><span>
 #&gt;       n nevent statistic.log p.value.log statistic.sc p.value.sc statistic.wald
 #&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>         </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>       </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>        </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>      </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>          </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
 #&gt; </span><span style='color: #555555;'>1</span><span>  </span><span style='text-decoration: underline;'>4</span><span>190    838          666.   1.90</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-138</span><span>         682.  5.01</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-142</span><span>           414.

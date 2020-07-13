@@ -225,13 +225,7 @@ even if the original input is (e.g.) numeric.</p>
 <span class='fu'><a href='https://rdrr.io/r/base/attach.html'>attach</a></span>(<span class='kw'>airquality</span>)
 <span class='kw'>Month</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>factor</a></span>(<span class='kw'>Month</span>, labels = <span class='kw'>month.abb</span>[<span class='fl'>5</span><span class='op'>:</span><span class='fl'>9</span>])
 <span class='kw'>ptt</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/pairwise.t.test.html'>pairwise.t.test</a></span>(<span class='kw'>Ozone</span>, <span class='kw'>Month</span>)
-<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='kw'>ptt</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: `...` is not empty.</span>
-#&gt; <span class='warning'></span>
-#&gt; <span class='warning'>We detected these problematic arguments:</span>
-#&gt; <span class='warning'>* `needs_dots`</span>
-#&gt; <span class='warning'></span>
-#&gt; <span class='warning'>These dots only exist to allow future extensions and should be empty.</span>
-#&gt; <span class='warning'>Did you misspecify an argument?</span></div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 10 x 3</span><span>
+<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='kw'>ptt</span>)</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 10 x 3</span><span>
 #&gt;    group1 group2  p.value
 #&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
 #&gt; </span><span style='color: #555555;'> 1</span><span> Jun    May    1       
@@ -248,13 +242,7 @@ even if the original input is (e.g.) numeric.</p>
 <span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='kw'>hpc_data</span>)
 <span class='fu'><a href='https://rdrr.io/r/base/attach.html'>attach</a></span>(<span class='kw'>hpc_data</span>)
 <span class='kw'>ptt2</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/pairwise.t.test.html'>pairwise.t.test</a></span>(<span class='kw'>compounds</span>, <span class='kw'>class</span>)
-<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='kw'>ptt2</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: `...` is not empty.</span>
-#&gt; <span class='warning'></span>
-#&gt; <span class='warning'>We detected these problematic arguments:</span>
-#&gt; <span class='warning'>* `needs_dots`</span>
-#&gt; <span class='warning'></span>
-#&gt; <span class='warning'>These dots only exist to allow future extensions and should be empty.</span>
-#&gt; <span class='warning'>Did you misspecify an argument?</span></div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 6 x 3</span><span>
+<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='kw'>ptt2</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 6 x 3</span><span>
 #&gt;   group1 group2   p.value
 #&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>      </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
 #&gt; </span><span style='color: #555555;'>1</span><span> F      VF     9.28</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-  8</span><span>
@@ -263,13 +251,7 @@ even if the original input is (e.g.) numeric.</p>
 #&gt; </span><span style='color: #555555;'>4</span><span> L      VF     2.52</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-126</span><span>
 #&gt; </span><span style='color: #555555;'>5</span><span> L      F      5.44</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>- 95</span><span>
 #&gt; </span><span style='color: #555555;'>6</span><span> L      M      2.45</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>- 25</span><span></div><div class='input'>
-<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='fu'><a href='https://rdrr.io/r/stats/pairwise.t.test.html'>pairwise.t.test</a></span>(<span class='kw'>compounds</span>, <span class='kw'>class</span>, alternative = <span class='st'>"greater"</span>))</div><div class='output co'>#&gt; <span class='warning'>Warning: `...` is not empty.</span>
-#&gt; <span class='warning'></span>
-#&gt; <span class='warning'>We detected these problematic arguments:</span>
-#&gt; <span class='warning'>* `needs_dots`</span>
-#&gt; <span class='warning'></span>
-#&gt; <span class='warning'>These dots only exist to allow future extensions and should be empty.</span>
-#&gt; <span class='warning'>Did you misspecify an argument?</span></div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 6 x 3</span><span>
+<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='fu'><a href='https://rdrr.io/r/stats/pairwise.t.test.html'>pairwise.t.test</a></span>(<span class='kw'>compounds</span>, <span class='kw'>class</span>, alternative = <span class='st'>"greater"</span>))</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 6 x 3</span><span>
 #&gt;   group1 group2   p.value
 #&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>      </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
 #&gt; </span><span style='color: #555555;'>1</span><span> F      VF     4.64</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-  8</span><span>
@@ -277,13 +259,7 @@ even if the original input is (e.g.) numeric.</p>
 #&gt; </span><span style='color: #555555;'>3</span><span> M      F      2.13</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>- 34</span><span>
 #&gt; </span><span style='color: #555555;'>4</span><span> L      VF     1.26</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-126</span><span>
 #&gt; </span><span style='color: #555555;'>5</span><span> L      F      2.72</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>- 95</span><span>
-#&gt; </span><span style='color: #555555;'>6</span><span> L      M      1.22</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>- 25</span><span></div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='fu'><a href='https://rdrr.io/r/stats/pairwise.t.test.html'>pairwise.t.test</a></span>(<span class='kw'>compounds</span>, <span class='kw'>class</span>, alternative = <span class='st'>"less"</span>))</div><div class='output co'>#&gt; <span class='warning'>Warning: `...` is not empty.</span>
-#&gt; <span class='warning'></span>
-#&gt; <span class='warning'>We detected these problematic arguments:</span>
-#&gt; <span class='warning'>* `needs_dots`</span>
-#&gt; <span class='warning'></span>
-#&gt; <span class='warning'>These dots only exist to allow future extensions and should be empty.</span>
-#&gt; <span class='warning'>Did you misspecify an argument?</span></div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 6 x 3</span><span>
+#&gt; </span><span style='color: #555555;'>6</span><span> L      M      1.22</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>- 25</span><span></div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='fu'><a href='https://rdrr.io/r/stats/pairwise.t.test.html'>pairwise.t.test</a></span>(<span class='kw'>compounds</span>, <span class='kw'>class</span>, alternative = <span class='st'>"less"</span>))</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 6 x 3</span><span>
 #&gt;   group1 group2 p.value
 #&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
 #&gt; </span><span style='color: #555555;'>1</span><span> F      VF           1
@@ -292,13 +268,7 @@ even if the original input is (e.g.) numeric.</p>
 #&gt; </span><span style='color: #555555;'>4</span><span> L      VF           1
 #&gt; </span><span style='color: #555555;'>5</span><span> L      F            1
 #&gt; </span><span style='color: #555555;'>6</span><span> L      M            1</div><div class='input'>
-<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='fu'><a href='https://rdrr.io/r/stats/pairwise.wilcox.test.html'>pairwise.wilcox.test</a></span>(<span class='kw'>compounds</span>, <span class='kw'>class</span>))</div><div class='output co'>#&gt; <span class='warning'>Warning: `...` is not empty.</span>
-#&gt; <span class='warning'></span>
-#&gt; <span class='warning'>We detected these problematic arguments:</span>
-#&gt; <span class='warning'>* `needs_dots`</span>
-#&gt; <span class='warning'></span>
-#&gt; <span class='warning'>These dots only exist to allow future extensions and should be empty.</span>
-#&gt; <span class='warning'>Did you misspecify an argument?</span></div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 6 x 3</span><span>
+<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='fu'><a href='https://rdrr.io/r/stats/pairwise.wilcox.test.html'>pairwise.wilcox.test</a></span>(<span class='kw'>compounds</span>, <span class='kw'>class</span>))</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 6 x 3</span><span>
 #&gt;   group1 group2  p.value
 #&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
 #&gt; </span><span style='color: #555555;'>1</span><span> F      VF     4.85</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-32</span><span>

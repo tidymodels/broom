@@ -242,23 +242,11 @@ the <code>data</code> argument.</p></td>
 )
 
 <span class='kw'>result_felm</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/lfe/man/felm.html'>felm</a></span>(<span class='kw'>v2</span> <span class='op'>~</span> <span class='kw'>v3</span>, <span class='kw'>DT</span>)
-<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='kw'>result_felm</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: `...` is not empty.</span>
-#&gt; <span class='warning'></span>
-#&gt; <span class='warning'>We detected these problematic arguments:</span>
-#&gt; <span class='warning'>* `needs_dots`</span>
-#&gt; <span class='warning'></span>
-#&gt; <span class='warning'>These dots only exist to allow future extensions and should be empty.</span>
-#&gt; <span class='warning'>Did you misspecify an argument?</span></div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 2 x 5</span><span>
+<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='kw'>result_felm</span>)</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 2 x 5</span><span>
 #&gt;   term        estimate std.error statistic  p.value
 #&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>          </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
 #&gt; </span><span style='color: #555555;'>1</span><span> (Intercept) </span><span style='text-decoration: underline;'>467</span><span>859.     </span><span style='text-decoration: underline;'>61</span><span>258.    7.64   1.49</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-11</span><span>
-#&gt; </span><span style='color: #555555;'>2</span><span> v3              98.7     </span><span style='text-decoration: underline;'>1</span><span>035.    0.095</span><span style='text-decoration: underline;'>4</span><span> 9.24</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>- 1</span><span></div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/generics/man/augment.html'>augment</a></span>(<span class='kw'>result_felm</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: `...` is not empty.</span>
-#&gt; <span class='warning'></span>
-#&gt; <span class='warning'>We detected these problematic arguments:</span>
-#&gt; <span class='warning'>* `needs_dots`</span>
-#&gt; <span class='warning'></span>
-#&gt; <span class='warning'>These dots only exist to allow future extensions and should be empty.</span>
-#&gt; <span class='warning'>Did you misspecify an argument?</span></div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 100 x 4</span><span>
+#&gt; </span><span style='color: #555555;'>2</span><span> v3              98.7     </span><span style='text-decoration: underline;'>1</span><span>035.    0.095</span><span style='text-decoration: underline;'>4</span><span> 9.24</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>- 1</span><span></div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/generics/man/augment.html'>augment</a></span>(<span class='kw'>result_felm</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 100 x 4</span><span>
 #&gt;        v2    v3 .fitted   .resid
 #&gt;     </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
 #&gt; </span><span style='color: #555555;'> 1</span><span> </span><span style='text-decoration: underline;'>638</span><span>177 54.7  </span><span style='text-decoration: underline;'>473</span><span>257.  </span><span style='text-decoration: underline;'>164</span><span>920.
@@ -273,13 +261,7 @@ the <code>data</code> argument.</p></td>
 #&gt; </span><span style='color: #555555;'>10</span><span>   </span><span style='text-decoration: underline;'>8</span><span>949 66.7  </span><span style='text-decoration: underline;'>474</span><span>438. -</span><span style='color: #BB0000;text-decoration: underline;'>465</span><span style='color: #BB0000;'>489.</span><span>
 #&gt; </span><span style='color: #555555;'># … with 90 more rows</span><span></div><div class='input'>
 <span class='kw'>result_felm</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/lfe/man/felm.html'>felm</a></span>(<span class='kw'>v2</span> <span class='op'>~</span> <span class='kw'>v3</span> <span class='op'>|</span> <span class='kw'>id</span> <span class='op'>+</span> <span class='kw'>v1</span>, <span class='kw'>DT</span>)
-<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='kw'>result_felm</span>, fe = <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: `...` is not empty.</span>
-#&gt; <span class='warning'></span>
-#&gt; <span class='warning'>We detected these problematic arguments:</span>
-#&gt; <span class='warning'>* `needs_dots`</span>
-#&gt; <span class='warning'></span>
-#&gt; <span class='warning'>These dots only exist to allow future extensions and should be empty.</span>
-#&gt; <span class='warning'>Did you misspecify an argument?</span></div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 11 x 7</span><span>
+<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='kw'>result_felm</span>, fe = <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 11 x 7</span><span>
 #&gt;    term  estimate std.error statistic    p.value     N  comp
 #&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>      </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
 #&gt; </span><span style='color: #555555;'> 1</span><span> v3        849.     </span><span style='text-decoration: underline;'>1</span><span>124.     0.755   0.452       </span><span style='color: #BB0000;'>NA</span><span>    </span><span style='color: #BB0000;'>NA</span><span>
@@ -292,22 +274,10 @@ the <code>data</code> argument.</p></td>
 #&gt; </span><span style='color: #555555;'> 8</span><span> v1.2    </span><span style='text-decoration: underline;'>28</span><span>466.    </span><span style='text-decoration: underline;'>81</span><span>280.     0.350   0.730       20     1
 #&gt; </span><span style='color: #555555;'> 9</span><span> v1.3    </span><span style='text-decoration: underline;'>61</span><span>511.   </span><span style='text-decoration: underline;'>105</span><span>015.     0.586   0.567       14     1
 #&gt; </span><span style='color: #555555;'>10</span><span> v1.4  -</span><span style='color: #BB0000;text-decoration: underline;'>134</span><span style='color: #BB0000;'>391.</span><span>    </span><span style='text-decoration: underline;'>88</span><span>261.    -</span><span style='color: #BB0000;'>1.52</span><span>    1.85        17     1
-#&gt; </span><span style='color: #555555;'>11</span><span> v1.5    </span><span style='text-decoration: underline;'>36</span><span>990.    </span><span style='text-decoration: underline;'>88</span><span>533.     0.418   0.680       24     1</div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='kw'>result_felm</span>, robust = <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: `...` is not empty.</span>
-#&gt; <span class='warning'></span>
-#&gt; <span class='warning'>We detected these problematic arguments:</span>
-#&gt; <span class='warning'>* `needs_dots`</span>
-#&gt; <span class='warning'></span>
-#&gt; <span class='warning'>These dots only exist to allow future extensions and should be empty.</span>
-#&gt; <span class='warning'>Did you misspecify an argument?</span></div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 1 x 5</span><span>
+#&gt; </span><span style='color: #555555;'>11</span><span> v1.5    </span><span style='text-decoration: underline;'>36</span><span>990.    </span><span style='text-decoration: underline;'>88</span><span>533.     0.418   0.680       24     1</div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='kw'>result_felm</span>, robust = <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 1 x 5</span><span>
 #&gt;   term  estimate std.error statistic p.value
 #&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span> v3        849.     </span><span style='text-decoration: underline;'>1</span><span>131.     0.750   0.455</div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/generics/man/augment.html'>augment</a></span>(<span class='kw'>result_felm</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: `...` is not empty.</span>
-#&gt; <span class='warning'></span>
-#&gt; <span class='warning'>We detected these problematic arguments:</span>
-#&gt; <span class='warning'>* `needs_dots`</span>
-#&gt; <span class='warning'></span>
-#&gt; <span class='warning'>These dots only exist to allow future extensions and should be empty.</span>
-#&gt; <span class='warning'>Did you misspecify an argument?</span></div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 100 x 6</span><span>
+#&gt; </span><span style='color: #555555;'>1</span><span> v3        849.     </span><span style='text-decoration: underline;'>1</span><span>131.     0.750   0.455</div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/generics/man/augment.html'>augment</a></span>(<span class='kw'>result_felm</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 100 x 6</span><span>
 #&gt;        v2    v3    id    v1 .fitted   .resid
 #&gt;     </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
 #&gt; </span><span style='color: #555555;'> 1</span><span> </span><span style='text-decoration: underline;'>638</span><span>177 54.7      3     5 </span><span style='text-decoration: underline;'>559</span><span>497.   </span><span style='text-decoration: underline;'>78</span><span>680.
@@ -327,22 +297,10 @@ the <code>data</code> argument.</p></td>
 <span class='kw'>id</span> <span class='op'>&lt;-</span> <span class='kw'>DT</span><span class='op'>$</span><span class='kw'>id</span>
 <span class='kw'>result_felm</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/lfe/man/felm.html'>felm</a></span>(<span class='kw'>v2</span> <span class='op'>~</span> <span class='kw'>v3</span> <span class='op'>|</span> <span class='kw'>id</span> <span class='op'>+</span> <span class='kw'>v1</span>)
 
-<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='kw'>result_felm</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: `...` is not empty.</span>
-#&gt; <span class='warning'></span>
-#&gt; <span class='warning'>We detected these problematic arguments:</span>
-#&gt; <span class='warning'>* `needs_dots`</span>
-#&gt; <span class='warning'></span>
-#&gt; <span class='warning'>These dots only exist to allow future extensions and should be empty.</span>
-#&gt; <span class='warning'>Did you misspecify an argument?</span></div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 1 x 5</span><span>
+<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='kw'>result_felm</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 1 x 5</span><span>
 #&gt;   term  estimate std.error statistic p.value
 #&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span> v3        849.     </span><span style='text-decoration: underline;'>1</span><span>124.     0.755   0.452</div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/generics/man/augment.html'>augment</a></span>(<span class='kw'>result_felm</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: `...` is not empty.</span>
-#&gt; <span class='warning'></span>
-#&gt; <span class='warning'>We detected these problematic arguments:</span>
-#&gt; <span class='warning'>* `needs_dots`</span>
-#&gt; <span class='warning'></span>
-#&gt; <span class='warning'>These dots only exist to allow future extensions and should be empty.</span>
-#&gt; <span class='warning'>Did you misspecify an argument?</span></div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 100 x 6</span><span>
+#&gt; </span><span style='color: #555555;'>1</span><span> v3        849.     </span><span style='text-decoration: underline;'>1</span><span>124.     0.755   0.452</div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/generics/man/augment.html'>augment</a></span>(<span class='kw'>result_felm</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 100 x 6</span><span>
 #&gt;        v2    v3    id    v1 .fitted   .resid
 #&gt;     </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
 #&gt; </span><span style='color: #555555;'> 1</span><span> </span><span style='text-decoration: underline;'>638</span><span>177 54.7      3     5 </span><span style='text-decoration: underline;'>559</span><span>497.   </span><span style='text-decoration: underline;'>78</span><span>680.
@@ -355,13 +313,7 @@ the <code>data</code> argument.</p></td>
 #&gt; </span><span style='color: #555555;'> 8</span><span> </span><span style='text-decoration: underline;'>457</span><span>661 37.4      1     3 </span><span style='text-decoration: underline;'>537</span><span>826.  -</span><span style='color: #BB0000;text-decoration: underline;'>80</span><span style='color: #BB0000;'>165.</span><span>
 #&gt; </span><span style='color: #555555;'> 9</span><span> </span><span style='text-decoration: underline;'>539</span><span>312 78.2      2     4 </span><span style='text-decoration: underline;'>348</span><span>000.  </span><span style='text-decoration: underline;'>191</span><span>312.
 #&gt; </span><span style='color: #555555;'>10</span><span>   </span><span style='text-decoration: underline;'>8</span><span>949 66.7      3     4 </span><span style='text-decoration: underline;'>398</span><span>271. -</span><span style='color: #BB0000;text-decoration: underline;'>389</span><span style='color: #BB0000;'>322.</span><span>
-#&gt; </span><span style='color: #555555;'># … with 90 more rows</span><span></div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/generics/man/glance.html'>glance</a></span>(<span class='kw'>result_felm</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: `...` is not empty.</span>
-#&gt; <span class='warning'></span>
-#&gt; <span class='warning'>We detected these problematic arguments:</span>
-#&gt; <span class='warning'>* `needs_dots`</span>
-#&gt; <span class='warning'></span>
-#&gt; <span class='warning'>These dots only exist to allow future extensions and should be empty.</span>
-#&gt; <span class='warning'>Did you misspecify an argument?</span></div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 1 x 8</span><span>
+#&gt; </span><span style='color: #555555;'># … with 90 more rows</span><span></div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/generics/man/glance.html'>glance</a></span>(<span class='kw'>result_felm</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 1 x 8</span><span>
 #&gt;   r.squared adj.r.squared   sigma statistic p.value    df df.residual  nobs
 #&gt;       </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>         </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>       </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>
 #&gt; </span><span style='color: #555555;'>1</span><span>    0.052</span><span style='text-decoration: underline;'>7</span><span>       -</span><span style='color: #BB0000;'>0.042</span><span style='color: #BB0000;text-decoration: underline;'>1</span><span> </span><span style='text-decoration: underline;'>314</span><span>086.     0.556   0.829    90          90   100</div></span></pre>
