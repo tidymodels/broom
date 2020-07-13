@@ -3,12 +3,16 @@
 
 # broom <img src="man/figures/logo.png" align="right" width="100" />
 
-[![CRAN
-status](https://www.r-pkg.org/badges/version/broom)](https://cran.r-project.org/package=broom)
+<!-- badges: start -->
+
 [![R build
-status](https://github.com/tidymodels/broom/workflows/.github/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/tidymodels/broom/actions)
-[![Codecov test
-coverage](https://codecov.io/gh/tidymodels/broom/branch/master/graph/badge.svg)](https://codecov.io/gh/tidymodels/broom?branch=master)
+status](https://github.com/tidymodels/broom/workflows/R-CMD-check/badge.svg)](https://github.com/tidymodels/broom)
+[![Coverage
+status](https://codecov.io/gh/tidymodels/broom/branch/master/graph/badge.svg)](https://codecov.io/github/tidymodels/broom?branch=master)
+[![CRAN
+status](https://www.r-pkg.org/badges/version/broom)](https://CRAN.R-project.org/package=broom)
+[![Downloads](http://cranlogs.r-pkg.org/badges/broom)](https://cran.rstudio.com/package=broom)
+<!-- badges: end -->
 
 ## Overview
 
