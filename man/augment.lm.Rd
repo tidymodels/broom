@@ -48,8 +48,10 @@ Users may pass data to augment via either the \code{data} argument or the
 \code{newdata} argument. If the user passes data to the \code{data} argument,
 it \strong{must} be exactly the data that was used to fit the model
 object. Pass datasets to \code{newdata} to augment data that was not used
-during model fitting. This still requires that all columns used to fit
-the model are present.
+during model fitting. This still requires that at least all predictor
+variable columns used to fit the model are present. If the original outcome
+variable used to fit the model is not included in \code{newdata}, then no
+\code{.resid} column will be included in the output.
 
 Augment will often behave differently depending on whether \code{data} or
 \code{newdata} is given. This is because there is often information
@@ -120,6 +122,11 @@ augment(mod, mtcars)
 newdata <- mtcars \%>\%
   head(6) \%>\%
   mutate(wt = wt + 1)
+augment(mod, newdata = newdata)
+
+# predict on new data without outcome variable. Output does not include .resid
+newdata <- newdata \%>\%
+  select(-mpg)
 augment(mod, newdata = newdata)
 
 au <- augment(mod, data = mtcars)

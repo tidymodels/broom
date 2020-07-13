@@ -3,6 +3,9 @@
 To be released as broom 0.7.1.
 
 * Extended the `glance.aov()` method to include an `r.squared` column!
+* Fixed `newdata` warning message in `augment.*()` output when the `newdata`
+didn't contain the response variable—augment methods no longer expect the 
+response variable in the supplied `newdata` argument. (#897 by @rudeboybert)
 
 # broom 0.7.0
 
