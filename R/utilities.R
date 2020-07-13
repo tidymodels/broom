@@ -362,7 +362,7 @@ augment_newdata <- function(x, data, newdata, .se_fit, ...) {
   passed_newdata <- !is.null(newdata)
   df <- if (passed_newdata) newdata else data
   df <- as_augment_tibble(df)
-  # Check if response variable in newdata:
+  # Check if response variable is in newdata:
   response_var_in_newdata <- x$call %>%
     all.vars() %>%
     .[[1]] %>%
@@ -400,8 +400,8 @@ augment_newdata <- function(x, data, newdata, .se_fit, ...) {
       unname()
   }
 
-  # If response variable not included in newdata, remove response variable
-  # attribute from x
+  # If response variable is not included in newdata, remove response variable
+  # attribute from model object
   if (!response_var_in_newdata) {
     x <- x %>%
       terms() %>%
