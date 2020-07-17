@@ -58,7 +58,10 @@ tidy.survfit <- function(x, ...) {
       n.event = c(x$n.event),
       n.censor = c(x$n.censor),
       estimate = c(x$pstate),
-      std.error = c(x$std.err),
+      # standard error obtained from summary(x)$std.err seems 
+      # the correct one, which is different than standard error
+      # of x$std.err
+      std.error = c(summary(x)$std.err),
       conf.high = c(x$upper),
       conf.low = c(x$lower),
       state = rep(x$states, each = nrow(x$pstate))
@@ -72,7 +75,10 @@ tidy.survfit <- function(x, ...) {
       n.event = x$n.event,
       n.censor = x$n.censor,
       estimate = x$surv,
-      std.error = x$std.err,
+      # standard error obtained from summary(x)$std.err seems 
+      # the correct one, which is different than standard error
+      # of x$std.err
+      std.error = summary(x)$std.err,
       conf.high = x$upper,
       conf.low = x$lower
     )
