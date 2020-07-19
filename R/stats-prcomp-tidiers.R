@@ -106,7 +106,8 @@ tidy.prcomp <- function(x, matrix = "u", ...) {
       t(summary(x)$importance),
       new_names = c("std.dev", "percent", "cumulative"),
       new_column = "PC"
-    )
+    ) %>% 
+      mutate(percent = percent * 100)
   } else if (matrix %in% c("rotation", "variables", "v", "loadings")) {
     labels <- if (is.null(rownames(x$rotation))) {
       1:nrow(x$rotation)
