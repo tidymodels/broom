@@ -6,6 +6,8 @@ To be released as broom 0.7.1.
 * Fixed `newdata` warning message in `augment.*()` output when the `newdata`
 didn't contain the response variable—augment methods no longer expect the 
 response variable in the supplied `newdata` argument. (#897 by @rudeboybert)
+* Multiplied the `tidy.prcomp()` method by 100 so percentages are shown as
+whole numbers instead of decimals (#578 by GegznaV)
 
 # broom 0.7.0
 

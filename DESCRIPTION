@@ -486,7 +486,11 @@ Authors@R:
       person(given = "Matthieu",
              family = "Stigler",
              role = "ctb",
-             email = "Matthieu.Stigler@gmail.com"))
+             email = "Matthieu.Stigler@gmail.com"),
+      person(given = "Deblina",
+             family = "Mukherjee",
+             role = "ctb", 
+             email = "deblina@uchicago.edu"))
 Description: Summarizes key information about statistical
     objects in tidy tibbles. This makes it easy to report results, create
     plots and consistently work with large numbers of models at once.
