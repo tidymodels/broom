@@ -44,7 +44,7 @@
 <link href="../tidyverse-2.css" rel="stylesheet">
 
 <!--optional theme-->
-<link href="../.css" rel="stylesheet">
+<link href="../tidymodels.css" rel="stylesheet">
 
 
 
@@ -60,8 +60,10 @@ Users may pass data to augment via either the data argument or the
 newdata argument. If the user passes data to the data argument,
 it must be exactly the data that was used to fit the model
 object. Pass datasets to newdata to augment data that was not used
-during model fitting. This still requires that all columns used to fit
-the model are present.
+during model fitting. This still requires that at least all predictor
+variable columns used to fit the model are present. If the original outcome
+variable used to fit the model is not included in newdata, then no
+.resid column will be included in the output.
 Augment will often behave differently depending on whether data or
 newdata is given. This is because there is often information
 associated with training observations (such as influences or related)
@@ -200,8 +202,10 @@ columns in the original dataset.</p>
 <code>newdata</code> argument. If the user passes data to the <code>data</code> argument,
 it <strong>must</strong> be exactly the data that was used to fit the model
 object. Pass datasets to <code>newdata</code> to augment data that was not used
-during model fitting. This still requires that all columns used to fit
-the model are present.</p>
+during model fitting. This still requires that at least all predictor
+variable columns used to fit the model are present. If the original outcome
+variable used to fit the model is not included in <code>newdata</code>, then no
+<code>.resid</code> column will be included in the output.</p>
 <p>Augment will often behave differently depending on whether <code>data</code> or
 <code>newdata</code> is given. This is because there is often information
 associated with training observations (such as influences or related)
@@ -225,7 +229,7 @@ missing at this time.</p>
     </div>
 
     <pre class="usage"><span class='co'># S3 method for decomposed.ts</span>
-<span class='fu'><a href='https://rdrr.io/pkg/generics/man/augment.html'>augment</a></span>(<span class='kw'>x</span>, <span class='kw'>...</span>)</pre>
+<span class='fu'><a href='https://rdrr.io/pkg/generics/man/augment.html'>augment</a></span>(<span class='no'>x</span>, <span class='no'>...</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -264,12 +268,12 @@ series.</p></dd>
 
     <div class='dont-index'><p><code><a href='https://rdrr.io/pkg/generics/man/augment.html'>augment()</a></code>, <code><a href='https://rdrr.io/r/stats/decompose.html'>stats::decompose()</a></code></p>
 <p>Other decompose tidiers: 
-<code><a href='https://broom.tidymodels.org/reference/augment.stl.html'>augment.stl</a>()</code></p></div>
+<code><a href='augment.stl.html'>augment.stl</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
 <span class='co'># Time series of temperatures in Nottingham, 1920-1939:</span>
-<span class='kw'>nottem</span></div><div class='output co'>#&gt;       Jan  Feb  Mar  Apr  May  Jun  Jul  Aug  Sep  Oct  Nov  Dec
+<span class='no'>nottem</span></div><div class='output co'>#&gt;       Jan  Feb  Mar  Apr  May  Jun  Jul  Aug  Sep  Oct  Nov  Dec
 #&gt; 1920 40.6 40.8 44.4 46.7 54.1 58.5 57.7 56.4 54.3 50.5 42.9 39.8
 #&gt; 1921 44.2 39.8 45.1 47.0 54.1 58.7 66.3 59.9 57.0 54.2 39.7 42.8
 #&gt; 1922 37.5 38.7 39.5 42.1 55.7 57.8 56.8 54.3 54.3 47.1 41.8 41.7
@@ -292,14 +296,14 @@ series.</p></dd>
 #&gt; 1939 39.4 40.9 42.4 47.8 52.4 58.0 60.7 61.8 58.2 46.7 46.6 37.8</div><div class='input'>
 <span class='co'># Perform seasonal decomposition on the data with both decompose</span>
 <span class='co'># and stl:</span>
-<span class='kw'>d1</span> <span class='op'>&lt;-</span> <span class='kw'>stats</span>::<span class='fu'><a href='https://rdrr.io/r/stats/decompose.html'>decompose</a></span>(<span class='kw'>nottem</span>)
-<span class='kw'>d2</span> <span class='op'>&lt;-</span> <span class='kw'>stats</span>::<span class='fu'><a href='https://rdrr.io/r/stats/stl.html'>stl</a></span>(<span class='kw'>nottem</span>, s.window = <span class='st'>"periodic"</span>, robust = <span class='fl'>TRUE</span>)
+<span class='no'>d1</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>stats</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/r/stats/decompose.html'>decompose</a></span>(<span class='no'>nottem</span>)
+<span class='no'>d2</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>stats</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/r/stats/stl.html'>stl</a></span>(<span class='no'>nottem</span>, <span class='kw'>s.window</span> <span class='kw'>=</span> <span class='st'>"periodic"</span>, <span class='kw'>robust</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
 
 <span class='co'># Compare the original series to its decompositions.</span>
 
 <span class='fu'><a href='https://rdrr.io/r/base/cbind.html'>cbind</a></span>(
-  <span class='kw'>broom</span>::<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='kw'>nottem</span>), <span class='kw'>broom</span>::<span class='fu'><a href='https://rdrr.io/pkg/generics/man/augment.html'>augment</a></span>(<span class='kw'>d1</span>),
-  <span class='kw'>broom</span>::<span class='fu'><a href='https://rdrr.io/pkg/generics/man/augment.html'>augment</a></span>(<span class='kw'>d2</span>)
+  <span class='kw pkg'>broom</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>nottem</span>), <span class='kw pkg'>broom</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/generics/man/augment.html'>augment</a></span>(<span class='no'>d1</span>),
+  <span class='kw pkg'>broom</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/generics/man/augment.html'>augment</a></span>(<span class='no'>d2</span>)
 )</div><div class='output co'>#&gt;        index value  .seasonal   .trend   .remainder .seasadj  .seasonal
 #&gt; 1   1920.000  40.6 -9.3393640       NA           NA 49.93936 -9.3419811
 #&gt; 2   1920.083  40.8 -9.8998904       NA           NA 50.69989 -9.5256227
@@ -784,36 +788,36 @@ series.</p></dd>
 #&gt; 240 48.65426 -1.27547980 0.9420313503 47.37878</div><div class='input'>
 <span class='co'># Visually compare seasonal decompositions in tidy data frames.</span>
 
-<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='kw'><a href='https://tibble.tidyverse.org'>tibble</a></span>)
-<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='kw'><a href='https://dplyr.tidyverse.org'>dplyr</a></span>)
-<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='kw'><a href='https://tidyr.tidyverse.org'>tidyr</a></span>)
-<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='kw'><a href='http://ggplot2.tidyverse.org'>ggplot2</a></span>)
+<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>tibble</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>dplyr</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>tidyr</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>ggplot2</span>)
 
-<span class='kw'>decomps</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://tibble.tidyverse.org/reference/tibble.html'>tibble</a></span>(
+<span class='no'>decomps</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://tibble.tidyverse.org/reference/tibble.html'>tibble</a></span>(
   <span class='co'># Turn the ts objects into data frames.</span>
-  series = <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/as.data.frame.html'>as.data.frame</a></span>(<span class='kw'>nottem</span>), <span class='fu'><a href='https://rdrr.io/r/base/as.data.frame.html'>as.data.frame</a></span>(<span class='kw'>nottem</span>)),
+  <span class='kw'>series</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/as.data.frame.html'>as.data.frame</a></span>(<span class='no'>nottem</span>), <span class='fu'><a href='https://rdrr.io/r/base/as.data.frame.html'>as.data.frame</a></span>(<span class='no'>nottem</span>)),
   <span class='co'># Add the models in, one for each row.</span>
-  decomp = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"decompose"</span>, <span class='st'>"stl"</span>),
-  model = <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>d1</span>, <span class='kw'>d2</span>)
-) <span class='op'>%&gt;%</span>
-  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/rowwise.html'>rowwise</a></span>() <span class='op'>%&gt;%</span>
+  <span class='kw'>decomp</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"decompose"</span>, <span class='st'>"stl"</span>),
+  <span class='kw'>model</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='no'>d1</span>, <span class='no'>d2</span>)
+) <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/rowwise.html'>rowwise</a></span>() <span class='kw'>%&gt;%</span>
   <span class='co'># Pull out the fitted data using broom::augment.</span>
-  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span>(augment = <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>broom</span>::<span class='fu'><a href='https://rdrr.io/pkg/generics/man/augment.html'>augment</a></span>(<span class='kw'>model</span>))) <span class='op'>%&gt;%</span>
-  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/group_by.html'>ungroup</a></span>() <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span>(<span class='kw'>augment</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw pkg'>broom</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/generics/man/augment.html'>augment</a></span>(<span class='no'>model</span>))) <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/group_by.html'>ungroup</a></span>() <span class='kw'>%&gt;%</span>
   <span class='co'># Unnest the data frames into a tidy arrangement of</span>
   <span class='co'># the series next to its seasonal decomposition, grouped</span>
   <span class='co'># by the method (stl or decompose).</span>
-  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/group_by.html'>group_by</a></span>(<span class='kw'>decomp</span>) <span class='op'>%&gt;%</span>
-  <span class='fu'><a href='https://tidyr.tidyverse.org/reference/nest.html'>unnest</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='kw'>series</span>, <span class='kw'>augment</span>)) <span class='op'>%&gt;%</span>
-  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span>(index = <span class='fl'>1</span><span class='op'>:</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/context.html'>n</a></span>()) <span class='op'>%&gt;%</span>
-  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/group_by.html'>ungroup</a></span>() <span class='op'>%&gt;%</span>
-  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/select.html'>select</a></span>(<span class='kw'>decomp</span>, <span class='kw'>index</span>, <span class='kw'>x</span>, adjusted = <span class='kw'>.seasadj</span>)
+  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/group_by.html'>group_by</a></span>(<span class='no'>decomp</span>) <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='https://tidyr.tidyverse.org/reference/nest.html'>unnest</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='no'>series</span>, <span class='no'>augment</span>)) <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span>(<span class='kw'>index</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fu'><a href='https://dplyr.tidyverse.org/reference/context.html'>n</a></span>()) <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/group_by.html'>ungroup</a></span>() <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/select.html'>select</a></span>(<span class='no'>decomp</span>, <span class='no'>index</span>, <span class='no'>x</span>, <span class='kw'>adjusted</span> <span class='kw'>=</span> <span class='no'>.seasadj</span>)
 
-<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span>(<span class='kw'>decomps</span>) <span class='op'>+</span>
-  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_path.html'>geom_line</a></span>(<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(x = <span class='kw'>index</span>, y = <span class='kw'>x</span>), colour = <span class='st'>"black"</span>) <span class='op'>+</span>
+<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span>(<span class='no'>decomps</span>) +
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_path.html'>geom_line</a></span>(<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>index</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>x</span>), <span class='kw'>colour</span> <span class='kw'>=</span> <span class='st'>"black"</span>) +
   <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_path.html'>geom_line</a></span>(<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(
-    x = <span class='kw'>index</span>, y = <span class='kw'>adjusted</span>, colour = <span class='kw'>decomp</span>,
-    group = <span class='kw'>decomp</span>
+    <span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>index</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>adjusted</span>, <span class='kw'>colour</span> <span class='kw'>=</span> <span class='no'>decomp</span>,
+    <span class='kw'>group</span> <span class='kw'>=</span> <span class='no'>decomp</span>
   ))</div><div class='img'><img src='augment.decomposed.ts-1.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

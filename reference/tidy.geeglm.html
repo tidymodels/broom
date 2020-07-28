@@ -44,7 +44,7 @@
 <link href="../tidyverse-2.css" rel="stylesheet">
 
 <!--optional theme-->
-<link href="../.css" rel="stylesheet">
+<link href="../tidymodels.css" rel="stylesheet">
 
 
 
@@ -173,7 +173,7 @@ specify which components to return.</p>
     </div>
 
     <pre class="usage"><span class='co'># S3 method for geeglm</span>
-<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='kw'>x</span>, conf.int = <span class='fl'>FALSE</span>, conf.level = <span class='fl'>0.95</span>, exponentiate = <span class='fl'>FALSE</span>, <span class='kw'>...</span>)</pre>
+<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>x</span>, <span class='kw'>conf.int</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>conf.level</span> <span class='kw'>=</span> <span class='fl'>0.95</span>, <span class='kw'>exponentiate</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='no'>...</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -223,7 +223,7 @@ refit the model with <code>na.action = na.exclude</code> or deal with the
 missingness in the data beforehand.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='https://rdrr.io/pkg/geepack/man/geepack-internal.html'>tidy()</a></code>, <code><a href='https://rdrr.io/pkg/geepack/man/geeglm.html'>geepack::geeglm()</a></code></p></div>
+    <div class='dont-index'><p><code><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy()</a></code>, <code><a href='https://rdrr.io/pkg/geepack/man/geeglm.html'>geepack::geeglm()</a></code></p></div>
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>A <code><a href='https://tibble.tidyverse.org/reference/tibble.html'>tibble::tibble()</a></code> with columns:</p>
@@ -233,15 +233,15 @@ missingness in the data beforehand.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
-<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='kw'>geepack</span>)
-<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='kw'>state</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>geepack</span>)
+<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>state</span>)
 
-<span class='kw'>ds</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>(<span class='kw'>state.region</span>, <span class='kw'>state.x77</span>)
+<span class='no'>ds</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>(<span class='no'>state.region</span>, <span class='no'>state.x77</span>)
 
-<span class='kw'>geefit</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/geepack/man/geeglm.html'>geeglm</a></span>(<span class='kw'>Income</span> <span class='op'>~</span> <span class='kw'>Frost</span> <span class='op'>+</span> <span class='kw'>Murder</span>,
-  id = <span class='kw'>state.region</span>,
-  data = <span class='kw'>ds</span>, family = <span class='kw'>gaussian</span>,
-  corstr = <span class='st'>"exchangeable"</span>
+<span class='no'>geefit</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/geepack/man/geeglm.html'>geeglm</a></span>(<span class='no'>Income</span> ~ <span class='no'>Frost</span> + <span class='no'>Murder</span>,
+  <span class='kw'>id</span> <span class='kw'>=</span> <span class='no'>state.region</span>,
+  <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>ds</span>, <span class='kw'>family</span> <span class='kw'>=</span> <span class='no'>gaussian</span>,
+  <span class='kw'>corstr</span> <span class='kw'>=</span> <span class='st'>"exchangeable"</span>
 )</div><div class='output co'>#&gt; $fct
 #&gt; function (dose, parm) 
 #&gt; {
@@ -250,8 +250,8 @@ missingness in the data beforehand.</p>
 #&gt;     fd(dose, parmMat[, 1], parmMat[, 2], parmMat[, 3], parmMat[, 
 #&gt;         4], parmMat[, 5])
 #&gt; }
-#&gt; &lt;bytecode: 0x7fc9a353b8a8&gt;
-#&gt; &lt;environment: 0x7fc9945225a8&gt;
+#&gt; &lt;bytecode: 0x7fc7c67e54d0&gt;
+#&gt; &lt;environment: 0x7fc7b6ed92e0&gt;
 #&gt; 
 #&gt; $ssfct
 #&gt; function (dframe) 
@@ -270,8 +270,8 @@ missingness in the data beforehand.</p>
 #&gt;     befVal &lt;- c(bVal, x[which.max(y)], 1)
 #&gt;     return(c(befVal[1], cdVal, befVal[2:3])[is.na(fixed)])
 #&gt; }
-#&gt; &lt;bytecode: 0x7fc9a8fbcbc0&gt;
-#&gt; &lt;environment: 0x7fc9945192d8&gt;
+#&gt; &lt;bytecode: 0x7fc7c5068ef0&gt;
+#&gt; &lt;environment: 0x7fc7b6ed9ee8&gt;
 #&gt; 
 #&gt; $names
 #&gt; [1] "b" "c" "d" "e" "f"
@@ -284,8 +284,8 @@ missingness in the data beforehand.</p>
 #&gt;     attr(fd(dose, parmMat[, 1], parmMat[, 2], parmMat[, 3], parmMat[, 
 #&gt;         4], parmMat[, 5]), "gradient")[, notFixed]
 #&gt; }
-#&gt; &lt;bytecode: 0x7fc9a353e4b0&gt;
-#&gt; &lt;environment: 0x7fc9945225a8&gt;
+#&gt; &lt;bytecode: 0x7fc7c67e4200&gt;
+#&gt; &lt;environment: 0x7fc7b6ed92e0&gt;
 #&gt; 
 #&gt; $deriv2
 #&gt; NULL
@@ -311,8 +311,8 @@ missingness in the data beforehand.</p>
 #&gt;     attr(dFct(dose, parmMat[, 1], parmMat[, 2], parmMat[, 3], 
 #&gt;         parmMat[, 4], parmMat[, 5]), "gradient")
 #&gt; }
-#&gt; &lt;bytecode: 0x7fc9a353d138&gt;
-#&gt; &lt;environment: 0x7fc9945225a8&gt;
+#&gt; &lt;bytecode: 0x7fc7c67e9850&gt;
+#&gt; &lt;environment: 0x7fc7b6ed92e0&gt;
 #&gt; 
 #&gt; $edfct
 #&gt; function (parm, respl, reference, type, ...) 
@@ -347,8 +347,8 @@ missingness in the data beforehand.</p>
 #&gt;         parmVec[5]), "gradient")
 #&gt;     return(list(EDp, EDder[notFixed]))
 #&gt; }
-#&gt; &lt;bytecode: 0x7fc9a3542e98&gt;
-#&gt; &lt;environment: 0x7fc9945225a8&gt;
+#&gt; &lt;bytecode: 0x7fc7c67f38d0&gt;
+#&gt; &lt;environment: 0x7fc7b6ed92e0&gt;
 #&gt; 
 #&gt; $name
 #&gt; [1] "family"
@@ -365,8 +365,8 @@ missingness in the data beforehand.</p>
 #&gt;     parmVec[indexVec] &lt;- parm
 #&gt;     parmVec[parmNo]
 #&gt; }
-#&gt; &lt;bytecode: 0x7fc9a36704e8&gt;
-#&gt; &lt;environment: 0x7fc99451a8b8&gt;
+#&gt; &lt;bytecode: 0x7fc7c69c54d8&gt;
+#&gt; &lt;environment: 0x7fc7b6fad4a0&gt;
 #&gt; 
 #&gt; $upperAs
 #&gt; function (parm) 
@@ -374,8 +374,8 @@ missingness in the data beforehand.</p>
 #&gt;     parmVec[indexVec] &lt;- parm
 #&gt;     parmVec[parmNo]
 #&gt; }
-#&gt; &lt;bytecode: 0x7fc9a36704e8&gt;
-#&gt; &lt;environment: 0x7fc99451ab90&gt;
+#&gt; &lt;bytecode: 0x7fc7c69c54d8&gt;
+#&gt; &lt;environment: 0x7fc7b6fad708&gt;
 #&gt; 
 #&gt; $monoton
 #&gt; [1] NA
@@ -385,7 +385,7 @@ missingness in the data beforehand.</p>
 #&gt; 
 #&gt; attr(,"class")
 #&gt; [1] "gaussian"</div><div class='output co'>#&gt; <span class='error'>Error in glm(formula = Income ~ Frost + Murder, family = gaussian, data = ds): 'family' not recognized</span></div><div class='input'>
-<span class='fu'><a href='https://rdrr.io/pkg/geepack/man/geepack-internal.html'>tidy</a></span>(<span class='kw'>geefit</span>)</div><div class='output co'>#&gt; <span class='error'>Error in tidy(geefit): object 'geefit' not found</span></div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/geepack/man/geepack-internal.html'>tidy</a></span>(<span class='kw'>geefit</span>, conf.int = <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; <span class='error'>Error in tidy(geefit, conf.int = TRUE): object 'geefit' not found</span></div></pre>
+<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>geefit</span>)</div><div class='output co'>#&gt; <span class='error'>Error in tidy(geefit): object 'geefit' not found</span></div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>geefit</span>, <span class='kw'>conf.int</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; <span class='error'>Error in tidy(geefit, conf.int = TRUE): object 'geefit' not found</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

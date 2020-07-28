@@ -44,7 +44,7 @@
 <link href="../tidyverse-2.css" rel="stylesheet">
 
 <!--optional theme-->
-<link href="../.css" rel="stylesheet">
+<link href="../tidymodels.css" rel="stylesheet">
 
 
 
@@ -173,7 +173,7 @@ specify which components to return.</p>
     </div>
 
     <pre class="usage"><span class='co'># S3 method for acf</span>
-<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='kw'>x</span>, <span class='kw'>...</span>)</pre>
+<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>x</span>, <span class='no'>...</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -201,9 +201,9 @@ the <code>data</code> argument.</p></td>
 
     <div class='dont-index'><p><code><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy()</a></code>, <code><a href='https://rdrr.io/r/stats/acf.html'>stats::acf()</a></code>, <code><a href='https://rdrr.io/r/stats/acf.html'>stats::pacf()</a></code>, <code><a href='https://rdrr.io/r/stats/acf.html'>stats::ccf()</a></code></p>
 <p>Other time series tidiers: 
-<code><a href='https://broom.tidymodels.org/reference/tidy.spec.html'>tidy.spec</a>()</code>,
-<code><a href='https://broom.tidymodels.org/reference/tidy.ts.html'>tidy.ts</a>()</code>,
-<code><a href='https://broom.tidymodels.org/reference/tidy.zoo.html'>tidy.zoo</a>()</code></p></div>
+<code><a href='tidy.spec.html'>tidy.spec</a>()</code>,
+<code><a href='tidy.ts.html'>tidy.ts</a>()</code>,
+<code><a href='tidy.zoo.html'>tidy.zoo</a>()</code></p></div>
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>A <code><a href='https://tibble.tidyverse.org/reference/tibble.html'>tibble::tibble()</a></code> with columns:</p>
@@ -214,7 +214,7 @@ the <code>data</code> argument.</p></td>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
-<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='fu'><a href='https://rdrr.io/r/stats/acf.html'>acf</a></span>(<span class='kw'>lh</span>, plot = <span class='fl'>FALSE</span>))</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 17 x 2</span><span>
+<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='fu'><a href='https://rdrr.io/r/stats/acf.html'>acf</a></span>(<span class='no'>lh</span>, <span class='kw'>plot</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>))</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 17 x 2</span><span>
 #&gt;      lag      acf
 #&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
 #&gt; </span><span style='color: #555555;'> 1</span><span>     0  1.00   
@@ -233,7 +233,7 @@ the <code>data</code> argument.</p></td>
 #&gt; </span><span style='color: #555555;'>14</span><span>    13  0.120  
 #&gt; </span><span style='color: #555555;'>15</span><span>    14  0.086</span><span style='text-decoration: underline;'>7</span><span> 
 #&gt; </span><span style='color: #555555;'>16</span><span>    15  0.119  
-#&gt; </span><span style='color: #555555;'>17</span><span>    16  0.151  </div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='fu'><a href='https://rdrr.io/r/stats/acf.html'>ccf</a></span>(<span class='kw'>mdeaths</span>, <span class='kw'>fdeaths</span>, plot = <span class='fl'>FALSE</span>))</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 31 x 2</span><span>
+#&gt; </span><span style='color: #555555;'>17</span><span>    16  0.151  </div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='fu'><a href='https://rdrr.io/r/stats/acf.html'>ccf</a></span>(<span class='no'>mdeaths</span>, <span class='no'>fdeaths</span>, <span class='kw'>plot</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>))</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 31 x 2</span><span>
 #&gt;       lag     acf
 #&gt;     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
 #&gt; </span><span style='color: #555555;'> 1</span><span> -</span><span style='color: #BB0000;'>1.25</span><span>   0.015</span><span style='text-decoration: underline;'>1</span><span>
@@ -246,7 +246,7 @@ the <code>data</code> argument.</p></td>
 #&gt; </span><span style='color: #555555;'> 8</span><span> -</span><span style='color: #BB0000;'>0.667</span><span> -</span><span style='color: #BB0000;'>0.382</span><span> 
 #&gt; </span><span style='color: #555555;'> 9</span><span> -</span><span style='color: #BB0000;'>0.583</span><span> -</span><span style='color: #BB0000;'>0.612</span><span> 
 #&gt; </span><span style='color: #555555;'>10</span><span> -</span><span style='color: #BB0000;'>0.5</span><span>   -</span><span style='color: #BB0000;'>0.678</span><span> 
-#&gt; </span><span style='color: #555555;'># … with 21 more rows</span><span></div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='fu'><a href='https://rdrr.io/r/stats/acf.html'>pacf</a></span>(<span class='kw'>lh</span>, plot = <span class='fl'>FALSE</span>))</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 16 x 2</span><span>
+#&gt; </span><span style='color: #555555;'># … with 21 more rows</span><span></div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='fu'><a href='https://rdrr.io/r/stats/acf.html'>pacf</a></span>(<span class='no'>lh</span>, <span class='kw'>plot</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>))</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 16 x 2</span><span>
 #&gt;      lag      acf
 #&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
 #&gt; </span><span style='color: #555555;'> 1</span><span>     1  0.576  

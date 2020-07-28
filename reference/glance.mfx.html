@@ -44,7 +44,7 @@
 <link href="../tidyverse-2.css" rel="stylesheet">
 
 <!--optional theme-->
-<link href="../.css" rel="stylesheet">
+<link href="../tidymodels.css" rel="stylesheet">
 
 
 
@@ -191,19 +191,19 @@ of the appropriate type.</p>
     </div>
 
     <pre class="usage"><span class='co'># S3 method for mfx</span>
-<span class='fu'><a href='https://rdrr.io/pkg/generics/man/glance.html'>glance</a></span>(<span class='kw'>x</span>, <span class='kw'>...</span>)
+<span class='fu'><a href='https://rdrr.io/pkg/generics/man/glance.html'>glance</a></span>(<span class='no'>x</span>, <span class='no'>...</span>)
 
 <span class='co'># S3 method for logitmfx</span>
-<span class='fu'><a href='https://rdrr.io/pkg/generics/man/glance.html'>glance</a></span>(<span class='kw'>x</span>, <span class='kw'>...</span>)
+<span class='fu'><a href='https://rdrr.io/pkg/generics/man/glance.html'>glance</a></span>(<span class='no'>x</span>, <span class='no'>...</span>)
 
 <span class='co'># S3 method for negbinmfx</span>
-<span class='fu'><a href='https://rdrr.io/pkg/generics/man/glance.html'>glance</a></span>(<span class='kw'>x</span>, <span class='kw'>...</span>)
+<span class='fu'><a href='https://rdrr.io/pkg/generics/man/glance.html'>glance</a></span>(<span class='no'>x</span>, <span class='no'>...</span>)
 
 <span class='co'># S3 method for poissonmfx</span>
-<span class='fu'><a href='https://rdrr.io/pkg/generics/man/glance.html'>glance</a></span>(<span class='kw'>x</span>, <span class='kw'>...</span>)
+<span class='fu'><a href='https://rdrr.io/pkg/generics/man/glance.html'>glance</a></span>(<span class='no'>x</span>, <span class='no'>...</span>)
 
 <span class='co'># S3 method for probitmfx</span>
-<span class='fu'><a href='https://rdrr.io/pkg/generics/man/glance.html'>glance</a></span>(<span class='kw'>x</span>, <span class='kw'>...</span>)</pre>
+<span class='fu'><a href='https://rdrr.io/pkg/generics/man/glance.html'>glance</a></span>(<span class='no'>x</span>, <span class='no'>...</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -228,18 +228,18 @@ the <code>data</code> argument.</p></td>
 
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>This generic glance method wraps <code><a href='https://broom.tidymodels.org/reference/glance.glm.html'>glance.glm()</a></code> for applicable
+    <p>This generic glance method wraps <code><a href='glance.glm.html'>glance.glm()</a></code> for applicable
 objects from the <code>mfx</code> package.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='https://broom.tidymodels.org/reference/glance.glm.html'>glance.glm()</a></code>, <code><a href='https://rdrr.io/pkg/mfx/man/logitmfx.html'>mfx::logitmfx()</a></code>, <code><a href='https://rdrr.io/pkg/mfx/man/negbinmfx.html'>mfx::negbinmfx()</a></code>,
+    <div class='dont-index'><p><code><a href='glance.glm.html'>glance.glm()</a></code>, <code><a href='https://rdrr.io/pkg/mfx/man/logitmfx.html'>mfx::logitmfx()</a></code>, <code><a href='https://rdrr.io/pkg/mfx/man/negbinmfx.html'>mfx::negbinmfx()</a></code>,
 <code><a href='https://rdrr.io/pkg/mfx/man/poissonmfx.html'>mfx::poissonmfx()</a></code>, <code><a href='https://rdrr.io/pkg/mfx/man/probitmfx.html'>mfx::probitmfx()</a></code></p>
 <p>Other mfx tidiers: 
-<code><a href='https://broom.tidymodels.org/reference/augment.betamfx.html'>augment.betamfx</a>()</code>,
-<code><a href='https://broom.tidymodels.org/reference/augment.mfx.html'>augment.mfx</a>()</code>,
-<code><a href='https://broom.tidymodels.org/reference/glance.betamfx.html'>glance.betamfx</a>()</code>,
-<code><a href='https://broom.tidymodels.org/reference/tidy.betamfx.html'>tidy.betamfx</a>()</code>,
-<code><a href='https://broom.tidymodels.org/reference/tidy.mfx.html'>tidy.mfx</a>()</code></p></div>
+<code><a href='augment.betamfx.html'>augment.betamfx</a>()</code>,
+<code><a href='augment.mfx.html'>augment.mfx</a>()</code>,
+<code><a href='glance.betamfx.html'>glance.betamfx</a>()</code>,
+<code><a href='tidy.betamfx.html'>tidy.betamfx</a>()</code>,
+<code><a href='tidy.mfx.html'>tidy.mfx</a>()</code></p></div>
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>A <code><a href='https://tibble.tidyverse.org/reference/tibble.html'>tibble::tibble()</a></code> with exactly one row and columns:</p>
@@ -255,24 +255,24 @@ objects from the <code>mfx</code> package.</p>
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fl'>FALSE</span>) { 
-<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='kw'>mfx</span>)
+    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
+<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>mfx</span>)
 
 <span class='co'>## Get the marginal effects from a logit regression</span>
-<span class='kw'>mod_logmfx</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/mfx/man/logitmfx.html'>logitmfx</a></span>(<span class='kw'>am</span> <span class='op'>~</span> <span class='kw'>cyl</span> <span class='op'>+</span> <span class='kw'>hp</span> <span class='op'>+</span> <span class='kw'>wt</span>, atmean = <span class='fl'>TRUE</span>, data = <span class='kw'>mtcars</span>)
-<span class='fu'><a href='https://rdrr.io/pkg/geepack/man/geepack-internal.html'>tidy</a></span>(<span class='kw'>mod_logmfx</span>, conf.int = <span class='fl'>TRUE</span>)
+<span class='no'>mod_logmfx</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/mfx/man/logitmfx.html'>logitmfx</a></span>(<span class='no'>am</span> ~ <span class='no'>cyl</span> + <span class='no'>hp</span> + <span class='no'>wt</span>, <span class='kw'>atmean</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>mtcars</span>)
+<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>mod_logmfx</span>, <span class='kw'>conf.int</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
 
 <span class='co'>## Compare with the naive model coefficients of the same logit call (not run)</span>
 <span class='co'># tidy(glm(am ~ cyl + hp + wt, family = binomial, data = mtcars), conf.int = TRUE)</span>
 
-<span class='fu'><a href='https://rdrr.io/pkg/generics/man/augment.html'>augment</a></span>(<span class='kw'>mod_logmfx</span>)
-<span class='fu'><a href='https://rdrr.io/pkg/generics/man/glance.html'>glance</a></span>(<span class='kw'>mod_logmfx</span>)
+<span class='fu'><a href='https://rdrr.io/pkg/generics/man/augment.html'>augment</a></span>(<span class='no'>mod_logmfx</span>)
+<span class='fu'><a href='https://rdrr.io/pkg/generics/man/glance.html'>glance</a></span>(<span class='no'>mod_logmfx</span>)
 
 <span class='co'>## Another example, this time using probit regression</span>
-<span class='kw'>mod_probmfx</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/mfx/man/probitmfx.html'>probitmfx</a></span>(<span class='kw'>am</span> <span class='op'>~</span> <span class='kw'>cyl</span> <span class='op'>+</span> <span class='kw'>hp</span> <span class='op'>+</span> <span class='kw'>wt</span>, atmean = <span class='fl'>TRUE</span>, data = <span class='kw'>mtcars</span>)
-<span class='fu'><a href='https://rdrr.io/pkg/geepack/man/geepack-internal.html'>tidy</a></span>(<span class='kw'>mod_probmfx</span>, conf.int = <span class='fl'>TRUE</span>)
-<span class='fu'><a href='https://rdrr.io/pkg/generics/man/augment.html'>augment</a></span>(<span class='kw'>mod_probmfx</span>)
-<span class='fu'><a href='https://rdrr.io/pkg/generics/man/glance.html'>glance</a></span>(<span class='kw'>mod_probmfx</span>)
+<span class='no'>mod_probmfx</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/mfx/man/probitmfx.html'>probitmfx</a></span>(<span class='no'>am</span> ~ <span class='no'>cyl</span> + <span class='no'>hp</span> + <span class='no'>wt</span>, <span class='kw'>atmean</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>mtcars</span>)
+<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>mod_probmfx</span>, <span class='kw'>conf.int</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+<span class='fu'><a href='https://rdrr.io/pkg/generics/man/augment.html'>augment</a></span>(<span class='no'>mod_probmfx</span>)
+<span class='fu'><a href='https://rdrr.io/pkg/generics/man/glance.html'>glance</a></span>(<span class='no'>mod_probmfx</span>)
 }</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

@@ -44,7 +44,7 @@
 <link href="../tidyverse-2.css" rel="stylesheet">
 
 <!--optional theme-->
-<link href="../.css" rel="stylesheet">
+<link href="../tidymodels.css" rel="stylesheet">
 
 
 
@@ -180,7 +180,7 @@ or <code>glance_&lt;function&gt;</code> and are not exported (but they are docum
 <p>If no appropriate tidying method is found, throws an error.</p>
     </div>
 
-    <pre class="usage"><span class='fu'><a href='https://broom.tidymodels.org/reference/tidy_optim.html'>tidy_optim</a></span>(<span class='kw'>x</span>, <span class='kw'>...</span>)</pre>
+    <pre class="usage"><span class='fu'>tidy_optim</span>(<span class='no'>x</span>, <span class='no'>...</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -214,11 +214,11 @@ glance(o)</p>
 
     <div class='dont-index'><p><code><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy()</a></code>, <code><a href='https://rdrr.io/r/stats/optim.html'>stats::optim()</a></code></p>
 <p>Other list tidiers: 
-<code><a href='https://broom.tidymodels.org/reference/glance_optim.html'>glance_optim</a>()</code>,
-<code><a href='https://broom.tidymodels.org/reference/list_tidiers.html'>list_tidiers</a></code>,
-<code><a href='https://broom.tidymodels.org/reference/tidy_irlba.html'>tidy_irlba</a>()</code>,
-<code><a href='https://broom.tidymodels.org/reference/tidy_svd.html'>tidy_svd</a>()</code>,
-<code><a href='https://broom.tidymodels.org/reference/tidy_xyz.html'>tidy_xyz</a>()</code></p></div>
+<code><a href='glance_optim.html'>glance_optim</a>()</code>,
+<code><a href='list_tidiers.html'>list_tidiers</a></code>,
+<code><a href='tidy_irlba.html'>tidy_irlba</a>()</code>,
+<code><a href='tidy_svd.html'>tidy_svd</a>()</code>,
+<code><a href='tidy_xyz.html'>tidy_xyz</a>()</code></p></div>
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>A <code><a href='https://tibble.tidyverse.org/reference/tibble.html'>tibble::tibble()</a></code> with columns:</p>
@@ -230,9 +230,8 @@ std.error is only provided as a column if the Hessian is calculated.
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
-<span class='kw'>f</span> <span class='op'>&lt;-</span> <span class='fu'>function</span>(<span class='kw'>x</span>) (<span class='kw'>x</span>[<span class='fl'>1</span>] <span class='op'>-</span> <span class='fl'>2</span>)<span class='op'>^</span><span class='fl'>2</span> <span class='op'>+</span> (<span class='kw'>x</span>[<span class='fl'>2</span>] <span class='op'>-</span> <span class='fl'>3</span>)<span class='op'>^</span><span class='fl'>2</span> <span class='op'>+</span> (<span class='kw'>x</span>[<span class='fl'>3</span>] <span class='op'>-</span> <span class='fl'>8</span>)<span class='op'>^</span><span class='fl'>2</span>
-<span class='kw'>o</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/optim.html'>optim</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>1</span>), <span class='kw'>f</span>)
-</div></pre>
+<span class='no'>f</span> <span class='kw'>&lt;-</span> <span class='kw'>function</span>(<span class='no'>x</span>) (<span class='no'>x</span>[<span class='fl'>1</span>] - <span class='fl'>2</span>)^<span class='fl'>2</span> + (<span class='no'>x</span>[<span class='fl'>2</span>] - <span class='fl'>3</span>)^<span class='fl'>2</span> + (<span class='no'>x</span>[<span class='fl'>3</span>] - <span class='fl'>8</span>)^<span class='fl'>2</span>
+<span class='no'>o</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/optim.html'>optim</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>1</span>), <span class='no'>f</span>)</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

@@ -44,7 +44,7 @@
 <link href="../tidyverse-2.css" rel="stylesheet">
 
 <!--optional theme-->
-<link href="../.css" rel="stylesheet">
+<link href="../tidymodels.css" rel="stylesheet">
 
 
 
@@ -180,7 +180,7 @@ or <code>glance_&lt;function&gt;</code> and are not exported (but they are docum
 <p>If no appropriate tidying method is found, throws an error.</p>
     </div>
 
-    <pre class="usage"><span class='fu'><a href='https://broom.tidymodels.org/reference/tidy_irlba.html'>tidy_irlba</a></span>(<span class='kw'>x</span>, <span class='kw'>...</span>)</pre>
+    <pre class="usage"><span class='fu'>tidy_irlba</span>(<span class='no'>x</span>, <span class='no'>...</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -236,34 +236,34 @@ principle components up to this component.</p></dd>
 
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>A very thin wrapper around <code><a href='https://broom.tidymodels.org/reference/tidy_svd.html'>tidy_svd()</a></code>.</p>
+    <p>A very thin wrapper around <code><a href='tidy_svd.html'>tidy_svd()</a></code>.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p><code><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy()</a></code>, <code><a href='https://rdrr.io/pkg/irlba/man/irlba.html'>irlba::irlba()</a></code></p>
 <p>Other list tidiers: 
-<code><a href='https://broom.tidymodels.org/reference/glance_optim.html'>glance_optim</a>()</code>,
-<code><a href='https://broom.tidymodels.org/reference/list_tidiers.html'>list_tidiers</a></code>,
-<code><a href='https://broom.tidymodels.org/reference/tidy_optim.html'>tidy_optim</a>()</code>,
-<code><a href='https://broom.tidymodels.org/reference/tidy_svd.html'>tidy_svd</a>()</code>,
-<code><a href='https://broom.tidymodels.org/reference/tidy_xyz.html'>tidy_xyz</a>()</code></p>
+<code><a href='glance_optim.html'>glance_optim</a>()</code>,
+<code><a href='list_tidiers.html'>list_tidiers</a></code>,
+<code><a href='tidy_optim.html'>tidy_optim</a>()</code>,
+<code><a href='tidy_svd.html'>tidy_svd</a>()</code>,
+<code><a href='tidy_xyz.html'>tidy_xyz</a>()</code></p>
 <p>Other svd tidiers: 
-<code><a href='https://broom.tidymodels.org/reference/augment.prcomp.html'>augment.prcomp</a>()</code>,
-<code><a href='https://broom.tidymodels.org/reference/tidy.prcomp.html'>tidy.prcomp</a>()</code>,
-<code><a href='https://broom.tidymodels.org/reference/tidy_svd.html'>tidy_svd</a>()</code></p></div>
+<code><a href='augment.prcomp.html'>augment.prcomp</a>()</code>,
+<code><a href='tidy.prcomp.html'>tidy.prcomp</a>()</code>,
+<code><a href='tidy_svd.html'>tidy_svd</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
-<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='kw'><a href='https://modeldata.tidymodels.org'>modeldata</a></span>)
-<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='kw'>hpc_data</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>modeldata</span>)
+<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>hpc_data</span>)
 
-<span class='kw'>mat</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/scale.html'>scale</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>as.matrix</a></span>(<span class='kw'>hpc_data</span>[, <span class='fl'>2</span><span class='op'>:</span><span class='fl'>5</span>]))
-<span class='kw'>s</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/svd.html'>svd</a></span>(<span class='kw'>mat</span>)
+<span class='no'>mat</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/scale.html'>scale</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>as.matrix</a></span>(<span class='no'>hpc_data</span>[, <span class='fl'>2</span>:<span class='fl'>5</span>]))
+<span class='no'>s</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/svd.html'>svd</a></span>(<span class='no'>mat</span>)
 
-<span class='kw'>tidy_u</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='kw'>s</span>, matrix = <span class='st'>"u"</span>)</div><div class='output co'>#&gt; <span class='message'>New names:</span>
+<span class='no'>tidy_u</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>s</span>, <span class='kw'>matrix</span> <span class='kw'>=</span> <span class='st'>"u"</span>)</div><div class='output co'>#&gt; <span class='message'>New names:</span>
 #&gt; <span class='message'>* `` -&gt; ...1</span>
 #&gt; <span class='message'>* `` -&gt; ...2</span>
 #&gt; <span class='message'>* `` -&gt; ...3</span>
-#&gt; <span class='message'>* `` -&gt; ...4</span></div><div class='input'><span class='kw'>tidy_u</span></div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 17,324 x 3</span><span>
+#&gt; <span class='message'>* `` -&gt; ...4</span></div><div class='input'><span class='no'>tidy_u</span></div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 17,324 x 3</span><span>
 #&gt;      row    PC    value
 #&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
 #&gt; </span><span style='color: #555555;'> 1</span><span>     1     1  0.004</span><span style='text-decoration: underline;'>03</span><span>
@@ -277,19 +277,19 @@ principle components up to this component.</p></dd>
 #&gt; </span><span style='color: #555555;'> 9</span><span>     9     1 -</span><span style='color: #BB0000;'>0.004</span><span style='color: #BB0000;text-decoration: underline;'>34</span><span>
 #&gt; </span><span style='color: #555555;'>10</span><span>    10     1 -</span><span style='color: #BB0000;'>0.004</span><span style='color: #BB0000;text-decoration: underline;'>40</span><span>
 #&gt; </span><span style='color: #555555;'># … with 17,314 more rows</span><span></div><div class='input'>
-<span class='kw'>tidy_d</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='kw'>s</span>, matrix = <span class='st'>"d"</span>)
-<span class='kw'>tidy_d</span></div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 4 x 4</span><span>
+<span class='no'>tidy_d</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>s</span>, <span class='kw'>matrix</span> <span class='kw'>=</span> <span class='st'>"d"</span>)
+<span class='no'>tidy_d</span></div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 4 x 4</span><span>
 #&gt;      PC std.dev percent cumulative
 #&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>      </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
 #&gt; </span><span style='color: #555555;'>1</span><span>     1    69.5   0.279      0.279
 #&gt; </span><span style='color: #555555;'>2</span><span>     2    67.0   0.259      0.538
 #&gt; </span><span style='color: #555555;'>3</span><span>     3    63.9   0.235      0.774
 #&gt; </span><span style='color: #555555;'>4</span><span>     4    62.6   0.226      1    </div><div class='input'>
-<span class='kw'>tidy_v</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='kw'>s</span>, matrix = <span class='st'>"v"</span>)</div><div class='output co'>#&gt; <span class='message'>New names:</span>
+<span class='no'>tidy_v</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>s</span>, <span class='kw'>matrix</span> <span class='kw'>=</span> <span class='st'>"v"</span>)</div><div class='output co'>#&gt; <span class='message'>New names:</span>
 #&gt; <span class='message'>* `` -&gt; ...1</span>
 #&gt; <span class='message'>* `` -&gt; ...2</span>
 #&gt; <span class='message'>* `` -&gt; ...3</span>
-#&gt; <span class='message'>* `` -&gt; ...4</span></div><div class='input'><span class='kw'>tidy_v</span></div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 16 x 3</span><span>
+#&gt; <span class='message'>* `` -&gt; ...4</span></div><div class='input'><span class='no'>tidy_v</span></div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 16 x 3</span><span>
 #&gt;    column    PC   value
 #&gt;     </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
 #&gt; </span><span style='color: #555555;'> 1</span><span>      1     1  0.657 
@@ -308,17 +308,17 @@ principle components up to this component.</p></dd>
 #&gt; </span><span style='color: #555555;'>14</span><span>      2     4 -</span><span style='color: #BB0000;'>0.548</span><span> 
 #&gt; </span><span style='color: #555555;'>15</span><span>      3     4  0.205 
 #&gt; </span><span style='color: #555555;'>16</span><span>      4     4 -</span><span style='color: #BB0000;'>0.426</span><span> </div><div class='input'>
-<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='kw'><a href='http://ggplot2.tidyverse.org'>ggplot2</a></span>)
-<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='kw'><a href='https://dplyr.tidyverse.org'>dplyr</a></span>)
+<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>ggplot2</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>dplyr</span>)
 
-<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span>(<span class='kw'>tidy_d</span>, <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='kw'>PC</span>, <span class='kw'>percent</span>)) <span class='op'>+</span>
-  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_point.html'>geom_point</a></span>() <span class='op'>+</span>
+<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span>(<span class='no'>tidy_d</span>, <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='no'>PC</span>, <span class='no'>percent</span>)) +
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_point.html'>geom_point</a></span>() +
   <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/labs.html'>ylab</a></span>(<span class='st'>"% of variance explained"</span>)</div><div class='img'><img src='tidy_irlba-1.png' alt='' width='700' height='433' /></div><div class='input'>
-<span class='kw'>tidy_u</span> <span class='op'>%&gt;%</span>
-  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span>(class = <span class='kw'>hpc_data</span><span class='op'>$</span><span class='kw'>class</span>[<span class='kw'>row</span>]) <span class='op'>%&gt;%</span>
-  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span>(<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='kw'>class</span>, <span class='kw'>value</span>)) <span class='op'>+</span>
-  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_boxplot.html'>geom_boxplot</a></span>() <span class='op'>+</span>
-  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/facet_wrap.html'>facet_wrap</a></span>(<span class='op'>~</span><span class='kw'>PC</span>, scale = <span class='st'>"free_y"</span>)</div><div class='img'><img src='tidy_irlba-2.png' alt='' width='700' height='433' /></div></span></pre>
+<span class='no'>tidy_u</span> <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span>(<span class='kw'>class</span> <span class='kw'>=</span> <span class='no'>hpc_data</span>$<span class='no'>class</span>[<span class='no'>row</span>]) <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span>(<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='no'>class</span>, <span class='no'>value</span>)) +
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_boxplot.html'>geom_boxplot</a></span>() +
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/facet_wrap.html'>facet_wrap</a></span>(~<span class='no'>PC</span>, <span class='kw'>scale</span> <span class='kw'>=</span> <span class='st'>"free_y"</span>)</div><div class='img'><img src='tidy_irlba-2.png' alt='' width='700' height='433' /></div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

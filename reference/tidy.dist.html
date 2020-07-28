@@ -44,7 +44,7 @@
 <link href="../tidyverse-2.css" rel="stylesheet">
 
 <!--optional theme-->
-<link href="../.css" rel="stylesheet">
+<link href="../tidymodels.css" rel="stylesheet">
 
 
 
@@ -163,7 +163,7 @@
     </div>
 
     <pre class="usage"><span class='co'># S3 method for dist</span>
-<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='kw'>x</span>, diagonal = <span class='fu'><a href='https://rdrr.io/r/base/attr.html'>attr</a></span>(<span class='kw'>x</span>, <span class='st'>"Diag"</span>), upper = <span class='fu'><a href='https://rdrr.io/r/base/attr.html'>attr</a></span>(<span class='kw'>x</span>, <span class='st'>"Upper"</span>), <span class='kw'>...</span>)</pre>
+<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>x</span>, <span class='kw'>diagonal</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/attr.html'>attr</a></span>(<span class='no'>x</span>, <span class='st'>"Diag"</span>), <span class='kw'>upper</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/attr.html'>attr</a></span>(<span class='no'>x</span>, <span class='st'>"Upper"</span>), <span class='no'>...</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -213,24 +213,24 @@ diagonal, the tidied version will not either.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p>Other deprecated: 
-<code><a href='https://broom.tidymodels.org/reference/bootstrap.html'>bootstrap</a>()</code>,
-<code><a href='https://broom.tidymodels.org/reference/confint_tidy.html'>confint_tidy</a>()</code>,
-<code><a href='https://broom.tidymodels.org/reference/data.frame_tidiers.html'>data.frame_tidiers</a></code>,
-<code><a href='https://broom.tidymodels.org/reference/finish_glance.html'>finish_glance</a>()</code>,
-<code><a href='https://broom.tidymodels.org/reference/fix_data_frame.html'>fix_data_frame</a>()</code>,
-<code><a href='https://broom.tidymodels.org/reference/summary_tidiers.html'>summary_tidiers</a></code>,
-<code><a href='https://broom.tidymodels.org/reference/tidy.density.html'>tidy.density</a>()</code>,
-<code><a href='https://broom.tidymodels.org/reference/tidy.ftable.html'>tidy.ftable</a>()</code>,
-<code><a href='https://broom.tidymodels.org/reference/vector_tidiers.html'>tidy.numeric</a>()</code></p></div>
+<code><a href='bootstrap.html'>bootstrap</a>()</code>,
+<code><a href='confint_tidy.html'>confint_tidy</a>()</code>,
+<code><a href='data.frame_tidiers.html'>data.frame_tidiers</a></code>,
+<code><a href='finish_glance.html'>finish_glance</a>()</code>,
+<code><a href='fix_data_frame.html'>fix_data_frame</a>()</code>,
+<code><a href='summary_tidiers.html'>summary_tidiers</a></code>,
+<code><a href='tidy.density.html'>tidy.density</a>()</code>,
+<code><a href='tidy.ftable.html'>tidy.ftable</a>()</code>,
+<code><a href='vector_tidiers.html'>tidy.numeric</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
-<span class='kw'>cars_dist</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/dist.html'>dist</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/t.html'>t</a></span>(<span class='kw'>mtcars</span>[, <span class='fl'>1</span><span class='op'>:</span><span class='fl'>4</span>]))
-<span class='kw'>cars_dist</span></div><div class='output co'>#&gt;             mpg        cyl       disp
+<span class='no'>cars_dist</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/dist.html'>dist</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/t.html'>t</a></span>(<span class='no'>mtcars</span>[, <span class='fl'>1</span>:<span class='fl'>4</span>]))
+<span class='no'>cars_dist</span></div><div class='output co'>#&gt;             mpg        cyl       disp
 #&gt; cyl    89.32586                      
 #&gt; disp 1391.49546 1441.25177           
 #&gt; hp    824.37547  878.17652  656.64044</div><div class='input'>
-<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='kw'>cars_dist</span>)</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 6 x 3</span><span>
+<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>cars_dist</span>)</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 6 x 3</span><span>
 #&gt;   item1 item2 distance
 #&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;fct&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;fct&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
 #&gt; </span><span style='color: #555555;'>1</span><span> mpg   cyl       89.3
@@ -238,7 +238,7 @@ diagonal, the tidied version will not either.</p>
 #&gt; </span><span style='color: #555555;'>3</span><span> mpg   hp       824. 
 #&gt; </span><span style='color: #555555;'>4</span><span> cyl   disp    </span><span style='text-decoration: underline;'>1</span><span>441. 
 #&gt; </span><span style='color: #555555;'>5</span><span> cyl   hp       878. 
-#&gt; </span><span style='color: #555555;'>6</span><span> disp  hp       657. </div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='kw'>cars_dist</span>, upper = <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 12 x 3</span><span>
+#&gt; </span><span style='color: #555555;'>6</span><span> disp  hp       657. </div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>cars_dist</span>, <span class='kw'>upper</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 12 x 3</span><span>
 #&gt;    item1 item2 distance
 #&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;fct&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;fct&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
 #&gt; </span><span style='color: #555555;'> 1</span><span> mpg   cyl       89.3
@@ -252,7 +252,7 @@ diagonal, the tidied version will not either.</p>
 #&gt; </span><span style='color: #555555;'> 9</span><span> disp  hp       657. 
 #&gt; </span><span style='color: #555555;'>10</span><span> hp    mpg      824. 
 #&gt; </span><span style='color: #555555;'>11</span><span> hp    cyl      878. 
-#&gt; </span><span style='color: #555555;'>12</span><span> hp    disp     657. </div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='kw'>cars_dist</span>, diagonal = <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 10 x 3</span><span>
+#&gt; </span><span style='color: #555555;'>12</span><span> hp    disp     657. </div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>cars_dist</span>, <span class='kw'>diagonal</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 10 x 3</span><span>
 #&gt;    item1 item2 distance
 #&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;fct&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;fct&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
 #&gt; </span><span style='color: #555555;'> 1</span><span> mpg   mpg        0  
@@ -264,7 +264,8 @@ diagonal, the tidied version will not either.</p>
 #&gt; </span><span style='color: #555555;'> 7</span><span> cyl   hp       878. 
 #&gt; </span><span style='color: #555555;'> 8</span><span> disp  disp       0  
 #&gt; </span><span style='color: #555555;'> 9</span><span> disp  hp       657. 
-#&gt; </span><span style='color: #555555;'>10</span><span> hp    hp         0  </div><div class='input'></div></span></pre>
+#&gt; </span><span style='color: #555555;'>10</span><span> hp    hp         0  </div><div class='input'>
+</div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

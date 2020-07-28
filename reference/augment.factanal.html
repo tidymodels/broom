@@ -44,7 +44,7 @@
 <link href="../tidyverse-2.css" rel="stylesheet">
 
 <!--optional theme-->
-<link href="../.css" rel="stylesheet">
+<link href="../tidymodels.css" rel="stylesheet">
 
 
 
@@ -60,8 +60,10 @@ Users may pass data to augment via either the data argument or the
 newdata argument. If the user passes data to the data argument,
 it must be exactly the data that was used to fit the model
 object. Pass datasets to newdata to augment data that was not used
-during model fitting. This still requires that all columns used to fit
-the model are present.
+during model fitting. This still requires that at least all predictor
+variable columns used to fit the model are present. If the original outcome
+variable used to fit the model is not included in newdata, then no
+.resid column will be included in the output.
 Augment will often behave differently depending on whether data or
 newdata is given. This is because there is often information
 associated with training observations (such as influences or related)
@@ -200,8 +202,10 @@ columns in the original dataset.</p>
 <code>newdata</code> argument. If the user passes data to the <code>data</code> argument,
 it <strong>must</strong> be exactly the data that was used to fit the model
 object. Pass datasets to <code>newdata</code> to augment data that was not used
-during model fitting. This still requires that all columns used to fit
-the model are present.</p>
+during model fitting. This still requires that at least all predictor
+variable columns used to fit the model are present. If the original outcome
+variable used to fit the model is not included in <code>newdata</code>, then no
+<code>.resid</code> column will be included in the output.</p>
 <p>Augment will often behave differently depending on whether <code>data</code> or
 <code>newdata</code> is given. This is because there is often information
 associated with training observations (such as influences or related)
@@ -225,7 +229,7 @@ missing at this time.</p>
     </div>
 
     <pre class="usage"><span class='co'># S3 method for factanal</span>
-<span class='fu'><a href='https://rdrr.io/pkg/generics/man/augment.html'>augment</a></span>(<span class='kw'>x</span>, <span class='kw'>data</span>, <span class='kw'>...</span>)</pre>
+<span class='fu'><a href='https://rdrr.io/pkg/generics/man/augment.html'>augment</a></span>(<span class='no'>x</span>, <span class='no'>data</span>, <span class='no'>...</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -271,8 +275,8 @@ each observation, with a factor score column added for each factor X,
 
     <div class='dont-index'><p><code><a href='https://rdrr.io/pkg/generics/man/augment.html'>augment()</a></code>, <code><a href='https://rdrr.io/r/stats/factanal.html'>stats::factanal()</a></code></p>
 <p>Other factanal tidiers: 
-<code><a href='https://broom.tidymodels.org/reference/glance.factanal.html'>glance.factanal</a>()</code>,
-<code><a href='https://broom.tidymodels.org/reference/tidy.factanal.html'>tidy.factanal</a>()</code></p></div>
+<code><a href='glance.factanal.html'>glance.factanal</a>()</code>,
+<code><a href='tidy.factanal.html'>tidy.factanal</a>()</code></p></div>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

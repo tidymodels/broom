@@ -44,7 +44,7 @@
 <link href="../tidyverse-2.css" rel="stylesheet">
 
 <!--optional theme-->
-<link href="../.css" rel="stylesheet">
+<link href="../tidymodels.css" rel="stylesheet">
 
 
 
@@ -60,8 +60,10 @@ Users may pass data to augment via either the data argument or the
 newdata argument. If the user passes data to the data argument,
 it must be exactly the data that was used to fit the model
 object. Pass datasets to newdata to augment data that was not used
-during model fitting. This still requires that all columns used to fit
-the model are present.
+during model fitting. This still requires that at least all predictor
+variable columns used to fit the model are present. If the original outcome
+variable used to fit the model is not included in newdata, then no
+.resid column will be included in the output.
 Augment will often behave differently depending on whether data or
 newdata is given. This is because there is often information
 associated with training observations (such as influences or related)
@@ -200,8 +202,10 @@ columns in the original dataset.</p>
 <code>newdata</code> argument. If the user passes data to the <code>data</code> argument,
 it <strong>must</strong> be exactly the data that was used to fit the model
 object. Pass datasets to <code>newdata</code> to augment data that was not used
-during model fitting. This still requires that all columns used to fit
-the model are present.</p>
+during model fitting. This still requires that at least all predictor
+variable columns used to fit the model are present. If the original outcome
+variable used to fit the model is not included in <code>newdata</code>, then no
+<code>.resid</code> column will be included in the output.</p>
 <p>Augment will often behave differently depending on whether <code>data</code> or
 <code>newdata</code> is given. This is because there is often information
 associated with training observations (such as influences or related)
@@ -225,7 +229,7 @@ missing at this time.</p>
     </div>
 
     <pre class="usage"><span class='co'># S3 method for felm</span>
-<span class='fu'><a href='https://rdrr.io/pkg/generics/man/augment.html'>augment</a></span>(<span class='kw'>x</span>, data = <span class='fu'><a href='https://rdrr.io/r/stats/model.frame.html'>model.frame</a></span>(<span class='kw'>x</span>), <span class='kw'>...</span>)</pre>
+<span class='fu'><a href='https://rdrr.io/pkg/generics/man/augment.html'>augment</a></span>(<span class='no'>x</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/model.frame.html'>model.frame</a></span>(<span class='no'>x</span>), <span class='no'>...</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -262,7 +266,7 @@ the <code>data</code> argument.</p></td>
 
     <div class='dont-index'><p><code><a href='https://rdrr.io/pkg/generics/man/augment.html'>augment()</a></code>, <code><a href='https://rdrr.io/pkg/lfe/man/felm.html'>lfe::felm()</a></code></p>
 <p>Other felm tidiers: 
-<code><a href='https://broom.tidymodels.org/reference/tidy.felm.html'>tidy.felm</a>()</code></p></div>
+<code><a href='tidy.felm.html'>tidy.felm</a>()</code></p></div>
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>A <code><a href='https://tibble.tidyverse.org/reference/tibble.html'>tibble::tibble()</a></code> with columns:</p>
@@ -273,25 +277,25 @@ the <code>data</code> argument.</p></td>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
-<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='kw'><a href='https://github.com/sgaure/lfe'>lfe</a></span>)</div><div class='output co'>#&gt; <span class='message'>Loading required package: Matrix</span></div><div class='output co'>#&gt; <span class='message'></span>
+<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>lfe</span>)</div><div class='output co'>#&gt; <span class='message'>Loading required package: Matrix</span></div><div class='output co'>#&gt; <span class='message'></span>
 #&gt; <span class='message'>Attaching package: ‘Matrix’</span></div><div class='output co'>#&gt; <span class='message'>The following objects are masked from ‘package:tidyr’:</span>
 #&gt; <span class='message'></span>
 #&gt; <span class='message'>    expand, pack, unpack</span></div><div class='input'>
-<span class='kw'>N</span> <span class='op'>&lt;-</span> <span class='fl'>1e2</span>
-<span class='kw'>DT</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>(
-  id = <span class='fu'><a href='https://rdrr.io/r/base/sample.html'>sample</a></span>(<span class='fl'>5</span>, <span class='kw'>N</span>, <span class='fl'>TRUE</span>),
-  v1 = <span class='fu'><a href='https://rdrr.io/r/base/sample.html'>sample</a></span>(<span class='fl'>5</span>, <span class='kw'>N</span>, <span class='fl'>TRUE</span>),
-  v2 = <span class='fu'><a href='https://rdrr.io/r/base/sample.html'>sample</a></span>(<span class='fl'>1e6</span>, <span class='kw'>N</span>, <span class='fl'>TRUE</span>),
-  v3 = <span class='fu'><a href='https://rdrr.io/r/base/sample.html'>sample</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/Round.html'>round</a></span>(<span class='fu'><a href='https://rdrr.io/r/stats/Uniform.html'>runif</a></span>(<span class='fl'>100</span>, max = <span class='fl'>100</span>), <span class='fl'>4</span>), <span class='kw'>N</span>, <span class='fl'>TRUE</span>),
-  v4 = <span class='fu'><a href='https://rdrr.io/r/base/sample.html'>sample</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/Round.html'>round</a></span>(<span class='fu'><a href='https://rdrr.io/r/stats/Uniform.html'>runif</a></span>(<span class='fl'>100</span>, max = <span class='fl'>100</span>), <span class='fl'>4</span>), <span class='kw'>N</span>, <span class='fl'>TRUE</span>)
+<span class='no'>N</span> <span class='kw'>&lt;-</span> <span class='fl'>1e2</span>
+<span class='no'>DT</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>(
+  <span class='kw'>id</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/sample.html'>sample</a></span>(<span class='fl'>5</span>, <span class='no'>N</span>, <span class='fl'>TRUE</span>),
+  <span class='kw'>v1</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/sample.html'>sample</a></span>(<span class='fl'>5</span>, <span class='no'>N</span>, <span class='fl'>TRUE</span>),
+  <span class='kw'>v2</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/sample.html'>sample</a></span>(<span class='fl'>1e6</span>, <span class='no'>N</span>, <span class='fl'>TRUE</span>),
+  <span class='kw'>v3</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/sample.html'>sample</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/Round.html'>round</a></span>(<span class='fu'><a href='https://rdrr.io/r/stats/Uniform.html'>runif</a></span>(<span class='fl'>100</span>, <span class='kw'>max</span> <span class='kw'>=</span> <span class='fl'>100</span>), <span class='fl'>4</span>), <span class='no'>N</span>, <span class='fl'>TRUE</span>),
+  <span class='kw'>v4</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/sample.html'>sample</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/Round.html'>round</a></span>(<span class='fu'><a href='https://rdrr.io/r/stats/Uniform.html'>runif</a></span>(<span class='fl'>100</span>, <span class='kw'>max</span> <span class='kw'>=</span> <span class='fl'>100</span>), <span class='fl'>4</span>), <span class='no'>N</span>, <span class='fl'>TRUE</span>)
 )
 
-<span class='kw'>result_felm</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/lfe/man/felm.html'>felm</a></span>(<span class='kw'>v2</span> <span class='op'>~</span> <span class='kw'>v3</span>, <span class='kw'>DT</span>)
-<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='kw'>result_felm</span>)</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 2 x 5</span><span>
+<span class='no'>result_felm</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/lfe/man/felm.html'>felm</a></span>(<span class='no'>v2</span> ~ <span class='no'>v3</span>, <span class='no'>DT</span>)
+<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>result_felm</span>)</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 2 x 5</span><span>
 #&gt;   term        estimate std.error statistic  p.value
 #&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>          </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
 #&gt; </span><span style='color: #555555;'>1</span><span> (Intercept)  </span><span style='text-decoration: underline;'>367</span><span>902.    </span><span style='text-decoration: underline;'>53</span><span>533.      6.87 5.89</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-10</span><span>
-#&gt; </span><span style='color: #555555;'>2</span><span> v3             </span><span style='text-decoration: underline;'>1</span><span>681.      930.      1.81 7.38</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>- 2</span><span></div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/generics/man/augment.html'>augment</a></span>(<span class='kw'>result_felm</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 100 x 4</span><span>
+#&gt; </span><span style='color: #555555;'>2</span><span> v3             </span><span style='text-decoration: underline;'>1</span><span>681.      930.      1.81 7.38</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>- 2</span><span></div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/generics/man/augment.html'>augment</a></span>(<span class='no'>result_felm</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 100 x 4</span><span>
 #&gt;        v2     v3 .fitted   .resid
 #&gt;     </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
 #&gt; </span><span style='color: #555555;'> 1</span><span> </span><span style='text-decoration: underline;'>954</span><span>279 92.8   </span><span style='text-decoration: underline;'>523</span><span>955.  </span><span style='text-decoration: underline;'>430</span><span>324.
@@ -305,8 +309,8 @@ the <code>data</code> argument.</p></td>
 #&gt; </span><span style='color: #555555;'> 9</span><span> </span><span style='text-decoration: underline;'>360</span><span>434  0.404 </span><span style='text-decoration: underline;'>368</span><span>582.   -</span><span style='color: #BB0000;text-decoration: underline;'>8</span><span style='color: #BB0000;'>148.</span><span>
 #&gt; </span><span style='color: #555555;'>10</span><span> </span><span style='text-decoration: underline;'>884</span><span>671 91.9   </span><span style='text-decoration: underline;'>522</span><span>427.  </span><span style='text-decoration: underline;'>362</span><span>244.
 #&gt; </span><span style='color: #555555;'># … with 90 more rows</span><span></div><div class='input'>
-<span class='kw'>result_felm</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/lfe/man/felm.html'>felm</a></span>(<span class='kw'>v2</span> <span class='op'>~</span> <span class='kw'>v3</span> <span class='op'>|</span> <span class='kw'>id</span> <span class='op'>+</span> <span class='kw'>v1</span>, <span class='kw'>DT</span>)
-<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='kw'>result_felm</span>, fe = <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 11 x 7</span><span>
+<span class='no'>result_felm</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/lfe/man/felm.html'>felm</a></span>(<span class='no'>v2</span> ~ <span class='no'>v3</span> <span class='kw'>|</span> <span class='no'>id</span> + <span class='no'>v1</span>, <span class='no'>DT</span>)
+<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>result_felm</span>, <span class='kw'>fe</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 11 x 7</span><span>
 #&gt;    term  estimate std.error statistic       p.value     N  comp
 #&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>         </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
 #&gt; </span><span style='color: #555555;'> 1</span><span> v3       </span><span style='text-decoration: underline;'>1</span><span>514.      923.     1.64    0.104          </span><span style='color: #BB0000;'>NA</span><span>    </span><span style='color: #BB0000;'>NA</span><span>
@@ -319,10 +323,10 @@ the <code>data</code> argument.</p></td>
 #&gt; </span><span style='color: #555555;'> 8</span><span> v1.2   -</span><span style='color: #BB0000;text-decoration: underline;'>81</span><span style='color: #BB0000;'>178.</span><span>    </span><span style='text-decoration: underline;'>79</span><span>232.    -</span><span style='color: #BB0000;'>1.02</span><span>    1.68           15     1
 #&gt; </span><span style='color: #555555;'> 9</span><span> v1.3        0         0    </span><span style='color: #BB0000;'>NaN</span><span>     </span><span style='color: #BB0000;'>NaN</span><span>              31     1
 #&gt; </span><span style='color: #555555;'>10</span><span> v1.4   -</span><span style='color: #BB0000;text-decoration: underline;'>10</span><span style='color: #BB0000;'>660.</span><span>    </span><span style='text-decoration: underline;'>90</span><span>314.    -</span><span style='color: #BB0000;'>0.118</span><span>   1.09           15     1
-#&gt; </span><span style='color: #555555;'>11</span><span> v1.5    -</span><span style='color: #BB0000;text-decoration: underline;'>7</span><span style='color: #BB0000;'>811.</span><span>    </span><span style='text-decoration: underline;'>66</span><span>144.    -</span><span style='color: #BB0000;'>0.118</span><span>   1.09           23     1</div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='kw'>result_felm</span>, robust = <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 1 x 5</span><span>
+#&gt; </span><span style='color: #555555;'>11</span><span> v1.5    -</span><span style='color: #BB0000;text-decoration: underline;'>7</span><span style='color: #BB0000;'>811.</span><span>    </span><span style='text-decoration: underline;'>66</span><span>144.    -</span><span style='color: #BB0000;'>0.118</span><span>   1.09           23     1</div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>result_felm</span>, <span class='kw'>robust</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 1 x 5</span><span>
 #&gt;   term  estimate std.error statistic p.value
 #&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span> v3       </span><span style='text-decoration: underline;'>1</span><span>514.      959.      1.58   0.118</div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/generics/man/augment.html'>augment</a></span>(<span class='kw'>result_felm</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 100 x 6</span><span>
+#&gt; </span><span style='color: #555555;'>1</span><span> v3       </span><span style='text-decoration: underline;'>1</span><span>514.      959.      1.58   0.118</div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/generics/man/augment.html'>augment</a></span>(<span class='no'>result_felm</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 100 x 6</span><span>
 #&gt;        v2     v3    id    v1 .fitted   .resid
 #&gt;     </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
 #&gt; </span><span style='color: #555555;'> 1</span><span> </span><span style='text-decoration: underline;'>954</span><span>279 92.8       4     3 </span><span style='text-decoration: underline;'>516</span><span>568.  </span><span style='text-decoration: underline;'>437</span><span>711.
@@ -336,16 +340,16 @@ the <code>data</code> argument.</p></td>
 #&gt; </span><span style='color: #555555;'> 9</span><span> </span><span style='text-decoration: underline;'>360</span><span>434  0.404     3     4 </span><span style='text-decoration: underline;'>547</span><span>728. -</span><span style='color: #BB0000;text-decoration: underline;'>187</span><span style='color: #BB0000;'>294.</span><span>
 #&gt; </span><span style='color: #555555;'>10</span><span> </span><span style='text-decoration: underline;'>884</span><span>671 91.9       1     5 </span><span style='text-decoration: underline;'>571</span><span>240.  </span><span style='text-decoration: underline;'>313</span><span>431.
 #&gt; </span><span style='color: #555555;'># … with 90 more rows</span><span></div><div class='input'>
-<span class='kw'>v1</span> <span class='op'>&lt;-</span> <span class='kw'>DT</span><span class='op'>$</span><span class='kw'>v1</span>
-<span class='kw'>v2</span> <span class='op'>&lt;-</span> <span class='kw'>DT</span><span class='op'>$</span><span class='kw'>v2</span>
-<span class='kw'>v3</span> <span class='op'>&lt;-</span> <span class='kw'>DT</span><span class='op'>$</span><span class='kw'>v3</span>
-<span class='kw'>id</span> <span class='op'>&lt;-</span> <span class='kw'>DT</span><span class='op'>$</span><span class='kw'>id</span>
-<span class='kw'>result_felm</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/lfe/man/felm.html'>felm</a></span>(<span class='kw'>v2</span> <span class='op'>~</span> <span class='kw'>v3</span> <span class='op'>|</span> <span class='kw'>id</span> <span class='op'>+</span> <span class='kw'>v1</span>)
+<span class='no'>v1</span> <span class='kw'>&lt;-</span> <span class='no'>DT</span>$<span class='no'>v1</span>
+<span class='no'>v2</span> <span class='kw'>&lt;-</span> <span class='no'>DT</span>$<span class='no'>v2</span>
+<span class='no'>v3</span> <span class='kw'>&lt;-</span> <span class='no'>DT</span>$<span class='no'>v3</span>
+<span class='no'>id</span> <span class='kw'>&lt;-</span> <span class='no'>DT</span>$<span class='no'>id</span>
+<span class='no'>result_felm</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/lfe/man/felm.html'>felm</a></span>(<span class='no'>v2</span> ~ <span class='no'>v3</span> <span class='kw'>|</span> <span class='no'>id</span> + <span class='no'>v1</span>)
 
-<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='kw'>result_felm</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 1 x 5</span><span>
+<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>result_felm</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 1 x 5</span><span>
 #&gt;   term  estimate std.error statistic p.value
 #&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span> v3       </span><span style='text-decoration: underline;'>1</span><span>514.      923.      1.64   0.104</div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/generics/man/augment.html'>augment</a></span>(<span class='kw'>result_felm</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 100 x 6</span><span>
+#&gt; </span><span style='color: #555555;'>1</span><span> v3       </span><span style='text-decoration: underline;'>1</span><span>514.      923.      1.64   0.104</div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/generics/man/augment.html'>augment</a></span>(<span class='no'>result_felm</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 100 x 6</span><span>
 #&gt;        v2     v3    id    v1 .fitted   .resid
 #&gt;     </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
 #&gt; </span><span style='color: #555555;'> 1</span><span> </span><span style='text-decoration: underline;'>954</span><span>279 92.8       4     3 </span><span style='text-decoration: underline;'>516</span><span>568.  </span><span style='text-decoration: underline;'>437</span><span>711.
@@ -358,7 +362,7 @@ the <code>data</code> argument.</p></td>
 #&gt; </span><span style='color: #555555;'> 8</span><span> </span><span style='text-decoration: underline;'>148</span><span>408 33.6       1     3 </span><span style='text-decoration: underline;'>490</span><span>694. -</span><span style='color: #BB0000;text-decoration: underline;'>342</span><span style='color: #BB0000;'>286.</span><span>
 #&gt; </span><span style='color: #555555;'> 9</span><span> </span><span style='text-decoration: underline;'>360</span><span>434  0.404     3     4 </span><span style='text-decoration: underline;'>547</span><span>728. -</span><span style='color: #BB0000;text-decoration: underline;'>187</span><span style='color: #BB0000;'>294.</span><span>
 #&gt; </span><span style='color: #555555;'>10</span><span> </span><span style='text-decoration: underline;'>884</span><span>671 91.9       1     5 </span><span style='text-decoration: underline;'>571</span><span>240.  </span><span style='text-decoration: underline;'>313</span><span>431.
-#&gt; </span><span style='color: #555555;'># … with 90 more rows</span><span></div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/generics/man/glance.html'>glance</a></span>(<span class='kw'>result_felm</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 1 x 8</span><span>
+#&gt; </span><span style='color: #555555;'># … with 90 more rows</span><span></div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/generics/man/glance.html'>glance</a></span>(<span class='no'>result_felm</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 1 x 8</span><span>
 #&gt;   r.squared adj.r.squared   sigma statistic p.value    df df.residual  nobs
 #&gt;       </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>         </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>       </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>
 #&gt; </span><span style='color: #555555;'>1</span><span>     0.155        0.070</span><span style='text-decoration: underline;'>2</span><span> </span><span style='text-decoration: underline;'>262</span><span>924.      1.83  0.073</span><span style='text-decoration: underline;'>4</span><span>    90          90   100</div></span></pre>

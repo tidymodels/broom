@@ -44,7 +44,7 @@
 <link href="../tidyverse-2.css" rel="stylesheet">
 
 <!--optional theme-->
-<link href="../.css" rel="stylesheet">
+<link href="../tidymodels.css" rel="stylesheet">
 
 
 
@@ -191,7 +191,7 @@ of the appropriate type.</p>
     </div>
 
     <pre class="usage"><span class='co'># S3 method for rq</span>
-<span class='fu'><a href='https://rdrr.io/pkg/generics/man/glance.html'>glance</a></span>(<span class='kw'>x</span>, <span class='kw'>...</span>)</pre>
+<span class='fu'><a href='https://rdrr.io/pkg/generics/man/glance.html'>glance</a></span>(<span class='no'>x</span>, <span class='no'>...</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -217,21 +217,21 @@ the <code>data</code> argument.</p></td>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>Only models with a single <code>tau</code> value may be passed.
-For multiple values, please use a <code><a href='https://purrr.tidyverse.org/reference/map.html'>purrr::map()</a></code> workflow instead, e.g.</p><pre><span class='kw'>taus</span> <span class='op'>%&gt;%</span>
-  <span class='fu'><a href='https://mclust-org.github.io/mclust/reference/map.html'>map</a></span>(<span class='fu'>function</span>(<span class='kw'>tau_val</span>) <span class='fu'>rq</span>(<span class='kw'>y</span> <span class='op'>~</span> <span class='kw'>x</span>, tau = <span class='kw'>tau_val</span>)) <span class='op'>%&gt;%</span>
-  <span class='fu'>map_dfr</span>(<span class='kw'>glance</span>)</pre>
+For multiple values, please use a <code><a href='https://purrr.tidyverse.org/reference/map.html'>purrr::map()</a></code> workflow instead, e.g.</p><pre><span class='no'>taus</span> <span class='kw'>%&amp;gt;%</span>
+  <span class='fu'>map</span>(<span class='kw'>function</span>(<span class='no'>tau_val</span>) <span class='fu'>rq</span>(<span class='no'>y</span> ~ <span class='no'>x</span>, <span class='kw'>tau</span> <span class='kw'>=</span> <span class='no'>tau_val</span>)) <span class='kw'>%&amp;gt;%</span>
+  <span class='fu'>map_dfr</span>(<span class='no'>glance</span>)</pre>
 
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p><code><a href='https://rdrr.io/pkg/generics/man/glance.html'>glance()</a></code>, <code><a href='https://rdrr.io/pkg/quantreg/man/rq.html'>quantreg::rq()</a></code></p>
 <p>Other quantreg tidiers: 
-<code><a href='https://broom.tidymodels.org/reference/augment.nlrq.html'>augment.nlrq</a>()</code>,
-<code><a href='https://broom.tidymodels.org/reference/augment.rqs.html'>augment.rqs</a>()</code>,
-<code><a href='https://broom.tidymodels.org/reference/augment.rq.html'>augment.rq</a>()</code>,
-<code><a href='https://broom.tidymodels.org/reference/glance.nlrq.html'>glance.nlrq</a>()</code>,
-<code><a href='https://broom.tidymodels.org/reference/tidy.nlrq.html'>tidy.nlrq</a>()</code>,
-<code><a href='https://broom.tidymodels.org/reference/tidy.rqs.html'>tidy.rqs</a>()</code>,
-<code><a href='https://broom.tidymodels.org/reference/tidy.rq.html'>tidy.rq</a>()</code></p></div>
+<code><a href='augment.nlrq.html'>augment.nlrq</a>()</code>,
+<code><a href='augment.rqs.html'>augment.rqs</a>()</code>,
+<code><a href='augment.rq.html'>augment.rq</a>()</code>,
+<code><a href='glance.nlrq.html'>glance.nlrq</a>()</code>,
+<code><a href='tidy.nlrq.html'>tidy.nlrq</a>()</code>,
+<code><a href='tidy.rqs.html'>tidy.rqs</a>()</code>,
+<code><a href='tidy.rq.html'>tidy.rq</a>()</code></p></div>
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>A <code><a href='https://tibble.tidyverse.org/reference/tibble.html'>tibble::tibble()</a></code> with exactly one row and columns:</p>

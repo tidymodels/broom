@@ -44,7 +44,7 @@
 <link href="../tidyverse-2.css" rel="stylesheet">
 
 <!--optional theme-->
-<link href="../.css" rel="stylesheet">
+<link href="../tidymodels.css" rel="stylesheet">
 
 
 
@@ -173,7 +173,7 @@ specify which components to return.</p>
     </div>
 
     <pre class="usage"><span class='co'># S3 method for ivreg</span>
-<span class='fu'><a href='https://rdrr.io/pkg/geepack/man/geepack-internal.html'>tidy</a></span>(<span class='kw'>x</span>, conf.int = <span class='fl'>FALSE</span>, conf.level = <span class='fl'>0.95</span>, instruments = <span class='fl'>FALSE</span>, <span class='kw'>...</span>)</pre>
+<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>x</span>, <span class='kw'>conf.int</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>conf.level</span> <span class='kw'>=</span> <span class='fl'>0.95</span>, <span class='kw'>instruments</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='no'>...</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -215,10 +215,10 @@ the <code>data</code> argument.</p></td>
 
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='https://rdrr.io/pkg/geepack/man/geepack-internal.html'>tidy()</a></code>, <code><a href='https://rdrr.io/pkg/AER/man/ivreg.html'>AER::ivreg()</a></code></p>
+    <div class='dont-index'><p><code><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy()</a></code>, <code><a href='https://rdrr.io/pkg/AER/man/ivreg.html'>AER::ivreg()</a></code></p>
 <p>Other ivreg tidiers: 
-<code><a href='https://broom.tidymodels.org/reference/augment.ivreg.html'>augment.ivreg</a>()</code>,
-<code><a href='https://broom.tidymodels.org/reference/glance.ivreg.html'>glance.ivreg</a>()</code></p></div>
+<code><a href='augment.ivreg.html'>augment.ivreg</a>()</code>,
+<code><a href='glance.ivreg.html'>glance.ivreg</a>()</code></p></div>
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>A <code><a href='https://tibble.tidyverse.org/reference/tibble.html'>tibble::tibble()</a></code> with columns:</p>
@@ -240,17 +240,17 @@ the <code>data</code> argument.</p></td>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
-<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='kw'>AER</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>AER</span>)
 
-<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='st'>"CigarettesSW"</span>, package = <span class='st'>"AER"</span>)
+<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='st'>"CigarettesSW"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"AER"</span>)
 
-<span class='kw'>ivr</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/AER/man/ivreg.html'>ivreg</a></span>(
-  <span class='fu'><a href='https://rdrr.io/r/base/Log.html'>log</a></span>(<span class='kw'>packs</span>) <span class='op'>~</span> <span class='kw'>income</span> <span class='op'>|</span> <span class='kw'>population</span>,
-  data = <span class='kw'>CigarettesSW</span>,
-  subset = <span class='kw'>year</span> <span class='op'>==</span> <span class='st'>"1995"</span>
+<span class='no'>ivr</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/AER/man/ivreg.html'>ivreg</a></span>(
+  <span class='fu'><a href='https://rdrr.io/r/base/Log.html'>log</a></span>(<span class='no'>packs</span>) ~ <span class='no'>income</span> <span class='kw'>|</span> <span class='no'>population</span>,
+  <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>CigarettesSW</span>,
+  <span class='kw'>subset</span> <span class='kw'>=</span> <span class='no'>year</span> <span class='kw'>==</span> <span class='st'>"1995"</span>
 )
 
-<span class='fu'><a href='https://rdrr.io/pkg/ergm/man/summary.formula.html'>summary</a></span>(<span class='kw'>ivr</span>)</div><div class='output co'>#&gt; 
+<span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>ivr</span>)</div><div class='output co'>#&gt; 
 #&gt; Call:
 #&gt; ivreg(formula = log(packs) ~ income | population, data = CigarettesSW, 
 #&gt;     subset = year == "1995")
@@ -270,19 +270,19 @@ the <code>data</code> argument.</p></td>
 #&gt; Multiple R-Squared: 0.1308,	Adjusted R-squared: 0.1119 
 #&gt; Wald test: 5.976 on 1 and 46 DF,  p-value: 0.01839 
 #&gt; </div><div class='input'>
-<span class='fu'><a href='https://rdrr.io/pkg/geepack/man/geepack-internal.html'>tidy</a></span>(<span class='kw'>ivr</span>)</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 2 x 5</span><span>
+<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>ivr</span>)</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 2 x 5</span><span>
 #&gt;   term         estimate std.error statistic  p.value
 #&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>           </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
 #&gt; </span><span style='color: #555555;'>1</span><span> (Intercept)  4.61</span><span style='color: #555555;'>e</span><span>+ 0  4.45</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>- 2</span><span>    104.   3.74</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-56</span><span>
-#&gt; </span><span style='color: #555555;'>2</span><span> income      -</span><span style='color: #BB0000;'>5.71</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-10</span><span>  2.33</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-10</span><span>     -</span><span style='color: #BB0000;'>2.44</span><span> 1.84</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>- 2</span><span></div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/geepack/man/geepack-internal.html'>tidy</a></span>(<span class='kw'>ivr</span>, conf.int = <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 2 x 7</span><span>
+#&gt; </span><span style='color: #555555;'>2</span><span> income      -</span><span style='color: #BB0000;'>5.71</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-10</span><span>  2.33</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-10</span><span>     -</span><span style='color: #BB0000;'>2.44</span><span> 1.84</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>- 2</span><span></div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>ivr</span>, <span class='kw'>conf.int</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 2 x 7</span><span>
 #&gt;   term         estimate std.error statistic  p.value conf.low conf.high
 #&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>           </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
 #&gt; </span><span style='color: #555555;'>1</span><span> (Intercept)  4.61</span><span style='color: #555555;'>e</span><span>+ 0  4.45</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>- 2</span><span>    104.   3.74</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-56</span><span>  4.52</span><span style='color: #555555;'>e</span><span>+0  4.70</span><span style='color: #555555;'>e</span><span>+ 0
-#&gt; </span><span style='color: #555555;'>2</span><span> income      -</span><span style='color: #BB0000;'>5.71</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-10</span><span>  2.33</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-10</span><span>     -</span><span style='color: #BB0000;'>2.44</span><span> 1.84</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>- 2</span><span> -</span><span style='color: #BB0000;'>1.03</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-9</span><span> -</span><span style='color: #BB0000;'>1.13</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-10</span><span></div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/geepack/man/geepack-internal.html'>tidy</a></span>(<span class='kw'>ivr</span>, conf.int = <span class='fl'>TRUE</span>, instruments = <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 1 x 5</span><span>
+#&gt; </span><span style='color: #555555;'>2</span><span> income      -</span><span style='color: #BB0000;'>5.71</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-10</span><span>  2.33</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-10</span><span>     -</span><span style='color: #BB0000;'>2.44</span><span> 1.84</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>- 2</span><span> -</span><span style='color: #BB0000;'>1.03</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-9</span><span> -</span><span style='color: #BB0000;'>1.13</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-10</span><span></div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>ivr</span>, <span class='kw'>conf.int</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>instruments</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 1 x 5</span><span>
 #&gt;   term   num.df den.df statistic  p.value
 #&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
 #&gt; </span><span style='color: #555555;'>1</span><span> income      1     46     </span><span style='text-decoration: underline;'>3</span><span>329. 1.46</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-44</span><span></div><div class='input'>
-<span class='fu'><a href='https://rdrr.io/pkg/generics/man/augment.html'>augment</a></span>(<span class='kw'>ivr</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 48 x 6</span><span>
+<span class='fu'><a href='https://rdrr.io/pkg/generics/man/augment.html'>augment</a></span>(<span class='no'>ivr</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 48 x 6</span><span>
 #&gt;    .rownames `log(packs)`    income population .fitted  .resid
 #&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>            </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>      </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
 #&gt; </span><span style='color: #555555;'> 1</span><span> 49                4.62  83</span><span style='text-decoration: underline;'>903</span><span>280    4</span><span style='text-decoration: underline;'>262</span><span>731    4.56  0.052</span><span style='text-decoration: underline;'>2</span><span>
@@ -295,7 +295,7 @@ the <code>data</code> argument.</p></td>
 #&gt; </span><span style='color: #555555;'> 8</span><span> 56                4.53 333</span><span style='text-decoration: underline;'>525</span><span>344   14</span><span style='text-decoration: underline;'>185</span><span>403    4.42  0.112 
 #&gt; </span><span style='color: #555555;'> 9</span><span> 57                4.58 159</span><span style='text-decoration: underline;'>800</span><span>448    7</span><span style='text-decoration: underline;'>188</span><span>538    4.52  0.059</span><span style='text-decoration: underline;'>1</span><span>
 #&gt; </span><span style='color: #555555;'>10</span><span> 58                4.53  60</span><span style='text-decoration: underline;'>170</span><span>928    2</span><span style='text-decoration: underline;'>840</span><span>860    4.58 -</span><span style='color: #BB0000;'>0.051</span><span style='color: #BB0000;text-decoration: underline;'>2</span><span>
-#&gt; </span><span style='color: #555555;'># … with 38 more rows</span><span></div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/generics/man/augment.html'>augment</a></span>(<span class='kw'>ivr</span>, data = <span class='kw'>CigarettesSW</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 96 x 11</span><span>
+#&gt; </span><span style='color: #555555;'># … with 38 more rows</span><span></div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/generics/man/augment.html'>augment</a></span>(<span class='no'>ivr</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>CigarettesSW</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 96 x 11</span><span>
 #&gt;    state year    cpi population packs   income   tax price  taxs .fitted  .resid
 #&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;fct&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;fct&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>      </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
 #&gt; </span><span style='color: #555555;'> 1</span><span> AL    1985   1.08    3</span><span style='text-decoration: underline;'>973</span><span>000  116.   4.60</span><span style='color: #555555;'>e</span><span>7  32.5 102.   33.3    4.56  0.052</span><span style='text-decoration: underline;'>2</span><span>
@@ -308,7 +308,7 @@ the <code>data</code> argument.</p></td>
 #&gt; </span><span style='color: #555555;'> 8</span><span> FL    1985   1.08   11</span><span style='text-decoration: underline;'>352</span><span>000  122.   1.67</span><span style='color: #555555;'>e</span><span>8  37   115.   42.5    4.42  0.112 
 #&gt; </span><span style='color: #555555;'> 9</span><span> GA    1985   1.08    5</span><span style='text-decoration: underline;'>963</span><span>000  127.   7.84</span><span style='color: #555555;'>e</span><span>7  28    97.0  28.8    4.52  0.059</span><span style='text-decoration: underline;'>1</span><span>
 #&gt; </span><span style='color: #555555;'>10</span><span> IA    1985   1.08    2</span><span style='text-decoration: underline;'>830</span><span>000  114.   3.79</span><span style='color: #555555;'>e</span><span>7  34   102.   37.9    4.58 -</span><span style='color: #BB0000;'>0.051</span><span style='color: #BB0000;text-decoration: underline;'>2</span><span>
-#&gt; </span><span style='color: #555555;'># … with 86 more rows</span><span></div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/generics/man/augment.html'>augment</a></span>(<span class='kw'>ivr</span>, newdata = <span class='kw'>CigarettesSW</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 96 x 10</span><span>
+#&gt; </span><span style='color: #555555;'># … with 86 more rows</span><span></div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/generics/man/augment.html'>augment</a></span>(<span class='no'>ivr</span>, <span class='kw'>newdata</span> <span class='kw'>=</span> <span class='no'>CigarettesSW</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 96 x 10</span><span>
 #&gt;    state year    cpi population packs    income   tax price  taxs .fitted
 #&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;fct&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;fct&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>      </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
 #&gt; </span><span style='color: #555555;'> 1</span><span> AL    1985   1.08    3</span><span style='text-decoration: underline;'>973</span><span>000  116.  46</span><span style='text-decoration: underline;'>014</span><span>968  32.5 102.   33.3    4.59
@@ -322,7 +322,7 @@ the <code>data</code> argument.</p></td>
 #&gt; </span><span style='color: #555555;'> 9</span><span> GA    1985   1.08    5</span><span style='text-decoration: underline;'>963</span><span>000  127.  78</span><span style='text-decoration: underline;'>364</span><span>336  28    97.0  28.8    4.57
 #&gt; </span><span style='color: #555555;'>10</span><span> IA    1985   1.08    2</span><span style='text-decoration: underline;'>830</span><span>000  114.  37</span><span style='text-decoration: underline;'>902</span><span>896  34   102.   37.9    4.59
 #&gt; </span><span style='color: #555555;'># … with 86 more rows</span><span></div><div class='input'>
-<span class='fu'><a href='https://rdrr.io/pkg/generics/man/glance.html'>glance</a></span>(<span class='kw'>ivr</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 1 x 8</span><span>
+<span class='fu'><a href='https://rdrr.io/pkg/generics/man/glance.html'>glance</a></span>(<span class='no'>ivr</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 1 x 8</span><span>
 #&gt;   r.squared adj.r.squared sigma statistic p.value    df df.residual  nobs
 #&gt;       </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>         </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>       </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>
 #&gt; </span><span style='color: #555555;'>1</span><span>     0.131         0.112 0.229      5.98  0.018</span><span style='text-decoration: underline;'>4</span><span>     2          46    48</div></span></pre>

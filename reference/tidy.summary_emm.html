@@ -44,7 +44,7 @@
 <link href="../tidyverse-2.css" rel="stylesheet">
 
 <!--optional theme-->
-<link href="../.css" rel="stylesheet">
+<link href="../tidymodels.css" rel="stylesheet">
 
 
 
@@ -173,7 +173,7 @@ specify which components to return.</p>
     </div>
 
     <pre class="usage"><span class='co'># S3 method for summary_emm</span>
-<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='kw'>x</span>, null.value = <span class='kw'>NULL</span>, <span class='kw'>...</span>)</pre>
+<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>x</span>, <span class='kw'>null.value</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>...</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -206,9 +206,9 @@ passed on to <code><a href='https://rdrr.io/pkg/emmeans/man/summary.emmGrid.html
     <div class='dont-index'><p><code><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy()</a></code>, <code><a href='https://rdrr.io/pkg/emmeans/man/ref_grid.html'>emmeans::ref_grid()</a></code>, <code><a href='https://rdrr.io/pkg/emmeans/man/emmeans.html'>emmeans::emmeans()</a></code>,
 <code><a href='https://rdrr.io/pkg/emmeans/man/contrast.html'>emmeans::contrast()</a></code></p>
 <p>Other emmeans tidiers: 
-<code><a href='https://broom.tidymodels.org/reference/tidy.emmGrid.html'>tidy.emmGrid</a>()</code>,
-<code><a href='https://broom.tidymodels.org/reference/tidy.lsmobj.html'>tidy.lsmobj</a>()</code>,
-<code><a href='https://broom.tidymodels.org/reference/tidy.ref.grid.html'>tidy.ref.grid</a>()</code></p></div>
+<code><a href='tidy.emmGrid.html'>tidy.emmGrid</a>()</code>,
+<code><a href='tidy.lsmobj.html'>tidy.lsmobj</a>()</code>,
+<code><a href='tidy.ref.grid.html'>tidy.ref.grid</a>()</code></p></div>
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>A <code><a href='https://tibble.tidyverse.org/reference/tibble.html'>tibble::tibble()</a></code> with columns:</p>
@@ -231,14 +231,14 @@ passed on to <code><a href='https://rdrr.io/pkg/emmeans/man/summary.emmGrid.html
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
-<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='kw'><a href='https://github.com/rvlenth/emmeans'>emmeans</a></span>)
+<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>emmeans</span>)
 <span class='co'># linear model for sales of oranges per day</span>
-<span class='kw'>oranges_lm1</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span>(<span class='kw'>sales1</span> <span class='op'>~</span> <span class='kw'>price1</span> <span class='op'>+</span> <span class='kw'>price2</span> <span class='op'>+</span> <span class='kw'>day</span> <span class='op'>+</span> <span class='kw'>store</span>, data = <span class='kw'>oranges</span>)
+<span class='no'>oranges_lm1</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span>(<span class='no'>sales1</span> ~ <span class='no'>price1</span> + <span class='no'>price2</span> + <span class='no'>day</span> + <span class='no'>store</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>oranges</span>)
 
 <span class='co'># reference grid; see vignette("basics", package = "emmeans")</span>
-<span class='kw'>oranges_rg1</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/emmeans/man/ref_grid.html'>ref_grid</a></span>(<span class='kw'>oranges_lm1</span>)
-<span class='kw'>td</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='kw'>oranges_rg1</span>)
-<span class='kw'>td</span></div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 36 x 9</span><span>
+<span class='no'>oranges_rg1</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/emmeans/man/ref_grid.html'>ref_grid</a></span>(<span class='no'>oranges_lm1</span>)
+<span class='no'>td</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>oranges_rg1</span>)
+<span class='no'>td</span></div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 36 x 9</span><span>
 #&gt;    price1 price2 day   store estimate std.error    df statistic   p.value
 #&gt;     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
 #&gt; </span><span style='color: #555555;'> 1</span><span>   51.2   48.6 1     1         2.92      2.72    23      1.07 0.294    
@@ -253,8 +253,8 @@ passed on to <code><a href='https://rdrr.io/pkg/emmeans/man/summary.emmGrid.html
 #&gt; </span><span style='color: #555555;'>10</span><span>   51.2   48.6 4     2         8.14      2.35    23      3.46 0.002</span><span style='text-decoration: underline;'>12</span><span>  
 #&gt; </span><span style='color: #555555;'># … with 26 more rows</span><span></div><div class='input'>
 <span class='co'># marginal averages</span>
-<span class='kw'>marginal</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/emmeans/man/emmeans.html'>emmeans</a></span>(<span class='kw'>oranges_rg1</span>, <span class='st'>"day"</span>)
-<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='kw'>marginal</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 6 x 6</span><span>
+<span class='no'>marginal</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/emmeans/man/emmeans.html'>emmeans</a></span>(<span class='no'>oranges_rg1</span>, <span class='st'>"day"</span>)
+<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>marginal</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 6 x 6</span><span>
 #&gt;   day   estimate std.error    df statistic      p.value
 #&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>        </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
 #&gt; </span><span style='color: #555555;'>1</span><span> 1         5.56      1.77    23      3.15 0.004</span><span style='text-decoration: underline;'>51</span><span>     
@@ -264,7 +264,7 @@ passed on to <code><a href='https://rdrr.io/pkg/emmeans/man/summary.emmGrid.html
 #&gt; </span><span style='color: #555555;'>5</span><span> 5        15.4       1.79    23      8.65 0.000</span><span style='text-decoration: underline;'>000</span><span>011</span><span style='text-decoration: underline;'>0</span><span>
 #&gt; </span><span style='color: #555555;'>6</span><span> 6        11.4       1.77    23      6.45 0.000</span><span style='text-decoration: underline;'>001</span><span>40  </div><div class='input'>
 <span class='co'># contrasts</span>
-<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='fu'><a href='https://rdrr.io/pkg/emmeans/man/contrast.html'>contrast</a></span>(<span class='kw'>marginal</span>))</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 6 x 8</span><span>
+<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='fu'><a href='https://rdrr.io/pkg/emmeans/man/contrast.html'>contrast</a></span>(<span class='no'>marginal</span>))</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 6 x 8</span><span>
 #&gt;   term  contrast null.value estimate std.error    df statistic adj.p.value
 #&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>         </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>       </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
 #&gt; </span><span style='color: #555555;'>1</span><span> day   1 effect          0    -</span><span style='color: #BB0000;'>4.65</span><span>      1.62    23    -</span><span style='color: #BB0000;'>2.87</span><span>       0.026</span><span style='text-decoration: underline;'>1</span><span>
@@ -272,7 +272,7 @@ passed on to <code><a href='https://rdrr.io/pkg/emmeans/man/summary.emmGrid.html
 #&gt; </span><span style='color: #555555;'>3</span><span> day   3 effect          0     3.45      1.60    23     2.15       0.063</span><span style='text-decoration: underline;'>7</span><span>
 #&gt; </span><span style='color: #555555;'>4</span><span> day   4 effect          0    -</span><span style='color: #BB0000;'>1.47</span><span>      1.59    23    -</span><span style='color: #BB0000;'>0.930</span><span>      0.434 
 #&gt; </span><span style='color: #555555;'>5</span><span> day   5 effect          0     5.22      1.64    23     3.18       0.024</span><span style='text-decoration: underline;'>9</span><span>
-#&gt; </span><span style='color: #555555;'>6</span><span> day   6 effect          0     1.18      1.62    23     0.726      0.475 </div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='fu'><a href='https://rdrr.io/pkg/emmeans/man/contrast.html'>contrast</a></span>(<span class='kw'>marginal</span>, method = <span class='st'>"pairwise"</span>))</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 15 x 8</span><span>
+#&gt; </span><span style='color: #555555;'>6</span><span> day   6 effect          0     1.18      1.62    23     0.726      0.475 </div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='fu'><a href='https://rdrr.io/pkg/emmeans/man/contrast.html'>contrast</a></span>(<span class='no'>marginal</span>, <span class='kw'>method</span> <span class='kw'>=</span> <span class='st'>"pairwise"</span>))</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 15 x 8</span><span>
 #&gt;    term  contrast null.value estimate std.error    df statistic adj.p.value
 #&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>         </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>       </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
 #&gt; </span><span style='color: #555555;'> 1</span><span> day   1 - 2             0   -</span><span style='color: #BB0000;'>0.930</span><span>      2.47    23    -</span><span style='color: #BB0000;'>0.377</span><span>     0.999  
@@ -291,19 +291,19 @@ passed on to <code><a href='https://rdrr.io/pkg/emmeans/man/summary.emmGrid.html
 #&gt; </span><span style='color: #555555;'>14</span><span> day   4 - 6             0   -</span><span style='color: #BB0000;'>2.65</span><span>       2.45    23    -</span><span style='color: #BB0000;'>1.08</span><span>      0.883  
 #&gt; </span><span style='color: #555555;'>15</span><span> day   5 - 6             0    4.05       2.56    23     1.58      0.617  </div><div class='input'>
 <span class='co'># plot confidence intervals</span>
-<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='kw'><a href='http://ggplot2.tidyverse.org'>ggplot2</a></span>)
-<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span>(<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='kw'>marginal</span>, conf.int = <span class='fl'>TRUE</span>), <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='kw'>day</span>, <span class='kw'>estimate</span>)) <span class='op'>+</span>
-  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_point.html'>geom_point</a></span>() <span class='op'>+</span>
-  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_linerange.html'>geom_errorbar</a></span>(<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(ymin = <span class='kw'>conf.low</span>, ymax = <span class='kw'>conf.high</span>))</div><div class='img'><img src='tidy.summary_emm-1.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>ggplot2</span>)
+<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span>(<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>marginal</span>, <span class='kw'>conf.int</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>), <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='no'>day</span>, <span class='no'>estimate</span>)) +
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_point.html'>geom_point</a></span>() +
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_linerange.html'>geom_errorbar</a></span>(<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='kw'>ymin</span> <span class='kw'>=</span> <span class='no'>conf.low</span>, <span class='kw'>ymax</span> <span class='kw'>=</span> <span class='no'>conf.high</span>))</div><div class='img'><img src='tidy.summary_emm-1.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'># by multiple prices</span>
-<span class='kw'>by_price</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/emmeans/man/emmeans.html'>emmeans</a></span>(<span class='kw'>oranges_lm1</span>, <span class='st'>"day"</span>,
-  by = <span class='st'>"price2"</span>,
-  at = <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(
-    price1 = <span class='fl'>50</span>, price2 = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>40</span>, <span class='fl'>60</span>, <span class='fl'>80</span>),
-    day = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"2"</span>, <span class='st'>"3"</span>, <span class='st'>"4"</span>)
+<span class='no'>by_price</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/emmeans/man/emmeans.html'>emmeans</a></span>(<span class='no'>oranges_lm1</span>, <span class='st'>"day"</span>,
+  <span class='kw'>by</span> <span class='kw'>=</span> <span class='st'>"price2"</span>,
+  <span class='kw'>at</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(
+    <span class='kw'>price1</span> <span class='kw'>=</span> <span class='fl'>50</span>, <span class='kw'>price2</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>40</span>, <span class='fl'>60</span>, <span class='fl'>80</span>),
+    <span class='kw'>day</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"2"</span>, <span class='st'>"3"</span>, <span class='st'>"4"</span>)
   )
 )
-<span class='kw'>by_price</span></div><div class='output co'>#&gt; price2 = 40:
+<span class='no'>by_price</span></div><div class='output co'>#&gt; price2 = 40:
 #&gt;  day emmean   SE df lower.CL upper.CL
 #&gt;  2     6.24 1.89 23     2.33     10.1
 #&gt;  3    13.41 2.12 23     9.02     17.8
@@ -322,7 +322,7 @@ passed on to <code><a href='https://rdrr.io/pkg/emmeans/man/summary.emmGrid.html
 #&gt;  4    14.44 3.74 23     6.71     22.2
 #&gt; 
 #&gt; Results are averaged over the levels of: store 
-#&gt; Confidence level used: 0.95 </div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='kw'>by_price</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 9 x 7</span><span>
+#&gt; Confidence level used: 0.95 </div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>by_price</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 9 x 7</span><span>
 #&gt;   day   price2 estimate std.error    df statistic      p.value
 #&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>        </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
 #&gt; </span><span style='color: #555555;'>1</span><span> 2         40     6.24      1.89    23      3.30 0.003</span><span style='text-decoration: underline;'>10</span><span>     
@@ -334,11 +334,11 @@ passed on to <code><a href='https://rdrr.io/pkg/emmeans/man/summary.emmGrid.html
 #&gt; </span><span style='color: #555555;'>7</span><span> 2         80    12.2       3.65    23      3.34 0.002</span><span style='text-decoration: underline;'>82</span><span>     
 #&gt; </span><span style='color: #555555;'>8</span><span> 3         80    19.4       3.27    23      5.91 0.000</span><span style='text-decoration: underline;'>005</span><span>02  
 #&gt; </span><span style='color: #555555;'>9</span><span> 4         80    14.4       3.74    23      3.86 0.000</span><span style='text-decoration: underline;'>788</span><span>    </div><div class='input'>
-<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span>(<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='kw'>by_price</span>, conf.int = <span class='fl'>TRUE</span>), <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='kw'>price2</span>, <span class='kw'>estimate</span>, color = <span class='kw'>day</span>)) <span class='op'>+</span>
-  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_path.html'>geom_line</a></span>() <span class='op'>+</span>
-  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_linerange.html'>geom_errorbar</a></span>(<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(ymin = <span class='kw'>conf.low</span>, ymax = <span class='kw'>conf.high</span>))</div><div class='img'><img src='tidy.summary_emm-2.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span>(<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>by_price</span>, <span class='kw'>conf.int</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>), <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='no'>price2</span>, <span class='no'>estimate</span>, <span class='kw'>color</span> <span class='kw'>=</span> <span class='no'>day</span>)) +
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_path.html'>geom_line</a></span>() +
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_linerange.html'>geom_errorbar</a></span>(<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='kw'>ymin</span> <span class='kw'>=</span> <span class='no'>conf.low</span>, <span class='kw'>ymax</span> <span class='kw'>=</span> <span class='no'>conf.high</span>))</div><div class='img'><img src='tidy.summary_emm-2.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'># joint_tests</span>
-<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='fu'><a href='https://rdrr.io/pkg/emmeans/man/joint_tests.html'>joint_tests</a></span>(<span class='kw'>oranges_lm1</span>))</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 2 x 5</span><span>
+<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='fu'><a href='https://rdrr.io/pkg/emmeans/man/joint_tests.html'>joint_tests</a></span>(<span class='no'>oranges_lm1</span>))</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 2 x 5</span><span>
 #&gt;   term  num.df den.df statistic p.value
 #&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
 #&gt; </span><span style='color: #555555;'>1</span><span> day        5     23      4.88 0.003</span><span style='text-decoration: underline;'>46</span><span>
