@@ -40,6 +40,11 @@
 #'   head(6) %>%
 #'   mutate(wt = wt + 1)
 #' augment(mod, newdata = newdata)
+#' 
+#' # predict on new data without outcome variable. Output does not include .resid
+#' newdata <- newdata %>%
+#'   select(-mpg)
+#' augment(mod, newdata = newdata)
 #'
 #' au <- augment(mod, data = mtcars)
 #'

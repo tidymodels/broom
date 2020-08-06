@@ -83,19 +83,26 @@ tidy.mfx <-
     
     dplyr::select(x_tidy, term, contains("atmean"), everything())
   }
+
 #' @rdname tidy.mfx
 #' @method tidy logitmfx
+#' @export
 tidy.logitmfx <- tidy.mfx
+
 #' @rdname tidy.mfx
 #' @method tidy negbinmfx
+#' @export
 tidy.negbinmfx <- tidy.mfx
+
 #' @rdname tidy.mfx
 #' @method tidy poissonmfx
+#' @export
 tidy.poissonmfx <- tidy.mfx
+
 #' @rdname tidy.mfx
 #' @method tidy probitmfx
+#' @export
 tidy.probitmfx <- tidy.mfx
-
 
 #' @templateVar class mfx
 #' @template title_desc_augment
@@ -139,15 +146,22 @@ augment.mfx <- function(x,
 }
 #' @rdname augment.mfx
 #' @method augment logitmfx
+#' @export
 augment.logitmfx <- augment.mfx
+
 #' @rdname augment.mfx
 #' @method augment negbinmfx
+#' @export
 augment.negbinmfx <- augment.mfx
+
 #' @rdname augment.mfx
 #' @method augment poissonmfx
+#' @export
 augment.poissonmfx <- augment.mfx
+
 #' @rdname augment.mfx
 #' @method augment probitmfx
+#' @export
 augment.probitmfx <- augment.mfx
 
 
@@ -178,18 +192,23 @@ glance.mfx <- function(x, ...) {
 }
 #' @rdname glance.mfx
 #' @method glance logitmfx
+#' @export
 glance.logitmfx <- glance.mfx
+
 #' @rdname glance.mfx
 #' @method glance negbinmfx
+#' @export
 glance.negbinmfx <- glance.mfx
+
 #' @rdname glance.mfx
 #' @method glance poissonmfx
+#' @export
 glance.poissonmfx <- glance.mfx
+
 #' @rdname glance.mfx
 #' @method glance probitmfx
+#' @export
 glance.probitmfx <- glance.mfx
-
-
 
 #' @templateVar class betamfx
 #' @template title_desc_tidy

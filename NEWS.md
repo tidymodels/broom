@@ -1,14 +1,18 @@
-# broom 0.7.0.9000
-(To be released as 0.7.0)
+# broom 0.7.0.9001
 
-## Breaking changes
+To be released as broom 0.7.1.
 
-`broom 0.7.0` is a major release with a large number of breaking changes and
-deprecations. Most of these breaking changes are meant to improve 
-maintainability and internal consistency, which have posed long-standing 
-difficulties.
+* Extended the `glance.aov()` method to include an `r.squared` column!
+* Fixed `newdata` warning message in `augment.*()` output when the `newdata`
+didn't contain the response variable—augment methods no longer expect the 
+response variable in the supplied `newdata` argument. (#897 by @rudeboybert)
 
-### Big picture breaking changes
+# broom 0.7.0
+
+`broom 0.7.0` is a major release with a large number of new tidiers,
+soft-deprecations, and planned hard-deprecations of functions and arguments.
+
+### Big picture changes
 
 - We have changed how we report degrees of freedom for `lm` objects 
 (#212, #273). This is especially important for instructors in statistics 
@@ -48,25 +52,22 @@ of `comparison`, `level1` and `level2`, or `lhs` and `rhs` (see #692).
 
 ### Deprecations
 
-This release of `broom` hard-deprecates the following functions and tidier 
+This release of `broom` soft-deprecates the following functions and tidier 
 methods:
 
 - Tidier methods for data frames, rowwise data frames, vectors and matrices
 - `bootstrap()`
 - `confint_tidy()`
 - `fix_data_frame()`
+- `finish_glance()`
 - `augment.glmRob()`
 - `tidy.table()` and `tidy.ftable()` have been deprecated in favor of
 `tibble::as_tibble()`
 - `tidy.summaryDefault()` and `glance.summaryDefault()` have been deprecated in 
 favor of `skimr::skim()`
 
-We regret that we were unable to provide warnings for some of these
-changes. Affected maintainers were notified two weeks before the planned release.
-
-We have also gone forward with our planned mixed model 
-deprecations, and have removed the following methods, which now live 
-in `broom.mixed`:
+We have also gone forward with our planned mixed model deprecations, and have 
+removed the following methods, which now live in `broom.mixed`:
 
 - `tidy.brmsfit()`
 - `tidy.merMod()`, `glance.merMod()`, `augment.merMod()`
@@ -132,9 +133,10 @@ and @petrhrobar)
 * `speedglm` objects from the `speedglm` package (#685)
 * `svyglm` objects from the `survey` package (#611)
 * `systemfit` objects from the `systemfit` package (by @jaspercooper)
-* We have restored a simplified version of `glance.aov()`, which now contains 
-  only the following columns: `logLik`, `AIC`, `BIC, deviance`, `df.residual`, 
-  `nobs` (see #212). Note that `tidy.aov()` gives more complete information about 
+* We have restored a simplified version of `glance.aov()`, which used to inherit
+  from the `glance.lm()` method and now contains only the following columns: 
+  `logLik`, `AIC`, `BIC, deviance`, `df.residual`, and `nobs`
+  (see #212). Note that `tidy.aov()` gives more complete information about 
   degrees of freedom in an `aov` object.
 
 ## Improvements to existing tidiers
@@ -231,16 +233,20 @@ regardless of link function.
   
 - Removed dependencies on reshape2 and superseded functions in dplyr.
 
+- All documentation now links to help files rather than topics.
+
 ## For developers and contributors
 
 - Moved core tests to the `modeltests` package.
   
-- In general, after this release, the broom dev team will no longer add new
-  tidiers to the package, in favor of adding tidier methods to the model-owning
-  package. An article describing best practices in doing so can be found
-  on the {tidymodels} website at 
+- Generally, after this release, the broom dev team will first ask that
+  attempts to add tidier methods supporting a model object are first
+  directed to the model-owning package. An article describing best practices 
+  in doing so can be found on the {tidymodels} website at 
   https://www.tidymodels.org/learn/develop/broom/, and we will continue
-  adding additional resources to that article as we develop them.
+  adding additional resources to that article as we develop them. In the case
+  that the maintainer is uninterested in taking on the tidier methods, please
+  note this in your issue or PR.
 
 - Added a new vignette discussing how to implement new tidier methods in 
   non-broom packages.

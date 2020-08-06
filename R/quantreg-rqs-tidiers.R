@@ -54,7 +54,7 @@ glance.rqs <- function(x, ...) {
 #' @param x An `rqs` object returned from [quantreg::rq()].
 #' @template param_data
 #' @template param_newdata
-#' @inheritDotParams quantreg::predict.rqs
+#' @inheritDotParams quantreg::predict.rq
 #'
 #' @export
 #' @seealso [augment], [quantreg::rq()], [quantreg::predict.rqs()]

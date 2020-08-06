@@ -36,22 +36,26 @@ For examples, see the pam vignette.
 }
 \examples{
 
+\dontrun{
 library(dplyr)
 library(ggplot2)
 library(cluster)
+library(modeldata)
+data(hpc_data)
 
-x <- iris \%>\%
-  select(-Species)
-p <- pam(x, k = 3)
+x <- hpc_data[, 2:5]
+p <- pam(x, k = 4)
 
 tidy(p)
 glance(p)
 augment(p, x)
 
 augment(p, x) \%>\%
-  ggplot(aes(Sepal.Length, Sepal.Width)) +
+  ggplot(aes(compounds, input_fields)) +
   geom_point(aes(color = .cluster)) +
   geom_text(aes(label = cluster), data = tidy(p), size = 10)
+}   
+  
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[cluster:pam]{cluster::pam()}}
@@ -64,8 +68,10 @@ Other pam tidiers:
 \value{
 A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
   \item{size}{Size of each cluster.}
-  \item{max.diss}{Maximal dissimilarity between the observations in the cluster and that cluster's medoid.}
-  \item{avg.diss}{Average dissimilarity between the observations in the cluster and that cluster's medoid.}
+  \item{max.diss}{Maximal dissimilarity between the observations in the 
+    cluster and that cluster's medoid.}
+  \item{avg.diss}{Average dissimilarity between the observations in the 
+    cluster and that cluster's medoid.}
   \item{diameter}{Diameter of the cluster.}
   \item{separation}{Separation of the cluster.}
   \item{avg.width}{Average silhouette width of the cluster.}

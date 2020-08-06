@@ -133,13 +133,16 @@ tidy.aov <- function(x, ...) {
 #' @seealso [glance()]
 #' @family anova tidiers
 glance.aov <- function(x, ...) {
+  lm_sum <- summary(lm(x))
+  
   as_glance_tibble(
     logLik = as.numeric(stats::logLik(x)),
     AIC = stats::AIC(x),
     BIC = stats::BIC(x),
     deviance = stats::deviance(x),
     nobs = stats::nobs(x),
-    na_types = "rrrri"
+    r.squared = lm_sum$r.squared,
+    na_types = "rrrrir"
   )
   
 }

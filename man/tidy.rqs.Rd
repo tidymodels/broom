@@ -21,7 +21,7 @@ interval in the tidied output. Defaults to \code{FALSE}.}
 if \code{conf.int = TRUE}. Must be strictly greater than 0 and less than 1.
 Defaults to 0.95, which corresponds to a 95 percent confidence interval.}
 
-\item{...}{Additional arguments passed to \code{\link[quantreg:summary.rqs]{quantreg::summary.rqs()}}}
+\item{...}{Additional arguments passed to \code{\link[quantreg:summary.rq]{quantreg::summary.rqs()}}}
 }
 \description{
 Tidy summarizes information about the components of a model.

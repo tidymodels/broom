@@ -42,6 +42,7 @@ confint
 confusionMatrix
 converage
 coxph
+cumulants
 cv
 cyl
 deprecations
@@ -157,6 +158,7 @@ newdata
 nlme
 nlrq
 nls
+Novomestky
 nnet
 NULLs
 NUM
@@ -185,12 +187,14 @@ quantreg
 quartile
 rcorr
 README
+reprex
 regsubsets
 ridgelm
 rjags
 rlm
 rma
 RMA
+Rmd
 RMSEA
 robustbase
 roc
@@ -200,6 +204,7 @@ rq
 rqs
 rsample
 rscore
+RStudio
 Saldana
 sapharm
 sarlm

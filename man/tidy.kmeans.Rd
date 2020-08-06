@@ -10,7 +10,8 @@
 \arguments{
 \item{x}{A \code{kmeans} object created by \code{\link[stats:kmeans]{stats::kmeans()}}.}
 
-\item{col.names}{Dimension names. Defaults to the names of the variables in x.  Set to NULL to get names \verb{x1, x2, ...}.}
+\item{col.names}{Dimension names. Defaults to the names of the variables
+in x.  Set to NULL to get names \verb{x1, x2, ...}.}
 
 \item{...}{Additional arguments. Not used. Needed to match generic
 signature only. \strong{Cautionary note:} Misspelled arguments will be
@@ -35,17 +36,21 @@ For examples, see the kmeans vignette.
 }
 \examples{
 
+\dontrun{
 library(cluster)
 library(dplyr)
 
-x <- iris \%>\%
-  select(-Species)
+library(modeldata)
+data(hpc_data)
 
-fit <- pam(x, k = 3)
+x <- hpc_data[, 2:5]
+
+fit <- pam(x, k = 4)
 
 tidy(fit)
 glance(fit)
 augment(fit, x)
+}
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[stats:kmeans]{stats::kmeans()}}

@@ -1,14 +1,18 @@
 context("cluster")
 
+skip_on_cran()
+
 skip_if_not_installed("modeltests")
 library(modeltests)
 
 skip_if_not_installed("cluster")
 library(cluster)
 
-x <- iris %>%
-  select(-Species)
+skip_if_not_installed("modeldata")
+library(modeldata)
+data(hpc_data)
 
+x <- hpc_data[, 2:5]
 fit <- pam(x, k = 3)
 
 test_that("pam tidier arguments", {

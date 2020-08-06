@@ -41,22 +41,26 @@ of the appropriate type.
 }
 \examples{
 
+\dontrun{
 library(dplyr)
 library(ggplot2)
 library(cluster)
+library(modeldata)
+data(hpc_data)
 
-x <- iris \%>\%
-  select(-Species)
-p <- pam(x, k = 3)
+x <- hpc_data[, 2:5]
+p <- pam(x, k = 4)
 
 tidy(p)
 glance(p)
 augment(p, x)
 
 augment(p, x) \%>\%
-  ggplot(aes(Sepal.Length, Sepal.Width)) +
+  ggplot(aes(compounds, input_fields)) +
   geom_point(aes(color = .cluster)) +
   geom_text(aes(label = cluster), data = tidy(p), size = 10)
+}   
+  
 }
 \seealso{
 \code{\link[=glance]{glance()}}, \code{\link[cluster:pam]{cluster::pam()}}

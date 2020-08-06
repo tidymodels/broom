@@ -1,7 +1,7 @@
 Type: Package
 Package: broom
 Title: Convert Statistical Objects into Tidy Tibbles
-Version: 0.7.0.9000
+Version: 0.7.0.9001
 Authors@R:
     c(person(given = "David",
              family = "Robinson",
@@ -12,6 +12,10 @@ Authors@R:
              role = c("aut", "cre"),
              email = "alexpghayes@gmail.com",
              comment = c(ORCID = "0000-0002-4985-5160")),
+      person(given = "Simon",
+             family = "Couch",
+             role = "aut",
+             email = "simonpatrickcouch@gmail.com"),
       person(given = "Indrajeet",
              family = "Patil",
              role = "ctb",
@@ -567,6 +571,7 @@ Suggests:
     mfx,
     mgcv,
     mlogit,
+    modeldata,
     modeltests,
     muhaz,
     multcomp,
@@ -601,7 +606,7 @@ VignetteBuilder:
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.1.0
+RoxygenNote: 7.1.1
 Language: en-US
 Collate:
     'aaa-documentation-helper.R'
@@ -620,6 +625,7 @@ Collate:
     'car-tidiers.R'
     'caret-tidiers.R'
     'data-frame-tidiers.R'
+    'deprecated-0-7-0.R'
     'drc-tidiers.R'
     'emmeans-tidiers.R'
     'epiR-tidiers.R'
@@ -696,7 +702,6 @@ Collate:
     'stats-mlm-tidiers.R'
     'stats-prcomp-tidiers.R'
     'stats-smooth.spline-tidiers.R'
-    'stats-tidiers.R'
     'stats-time-series-tidiers.R'
     'survey-tidiers.R'
     'survival-aareg-tidiers.R'

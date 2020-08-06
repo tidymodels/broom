@@ -1,5 +1,7 @@
 context("glmnetUtils")
 
+skip_on_cran()
+
 skip_if_not_installed("modeltests")
 library(modeltests)
 
@@ -8,11 +10,21 @@ library(glmnetUtils)
 
 set.seed(27)
 
+skip_if_not_installed("modeldata")
+library(modeldata)
+data(hpc_data)
+
 fit <- glmnet(formula = mpg ~ ., data = mtcars)
-fit2 <- glmnet(formula = Species ~ ., data = iris, family = "multinomial")
+fit2 <- glmnet(
+  formula = class ~ compounds + input_fields + iterations + num_pending, 
+  data = hpc_data, family = "multinomial"
+)
 
 cv_fit <- cv.glmnet(formula = mpg ~ ., data = mtcars)
-cv_fit2 <- cv.glmnet(formula = Species ~ ., data = iris, family = "multinomial")
+cv_fit2 <- cv.glmnet(
+  formula = class ~ compounds + input_fields + iterations + num_pending, 
+  data = hpc_data, family = "multinomial"
+)
 
 
 test_that("glmnet.formula tidier arguments", {
@@ -46,8 +58,8 @@ test_that("tidy.glmnet.formula", {
 
   expect_is(td2, "tbl_df")
 
-  expect_equal(dim(td2), c(839L, 6L))
-  expect_equal(dim(td2z), c(1500L, 6L))
+  expect_equal(dim(td2), c(983L, 6L))
+  expect_equal(dim(td2z), c(1240L, 6L))
 
   expect_true(all(td2$estimate != 0))
   expect_true(any(td2z$estimate == 0))

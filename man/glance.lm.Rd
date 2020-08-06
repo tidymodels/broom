@@ -70,6 +70,11 @@ newdata <- mtcars \%>\%
   mutate(wt = wt + 1)
 augment(mod, newdata = newdata)
 
+# predict on new data without outcome variable. Output does not include .resid
+newdata <- newdata \%>\%
+  select(-mpg)
+augment(mod, newdata = newdata)
+
 au <- augment(mod, data = mtcars)
 
 ggplot(au, aes(.hat, .std.resid)) +
@@ -118,6 +123,9 @@ A \code{\link[tibble:tibble]{tibble::tibble()}} with exactly one row and columns
   \item{r.squared}{R squared statistic, or the percent of variation explained by the model. Also known as the coefficient of determination.}
   \item{sigma}{Estimated standard error of the residuals.}
   \item{statistic}{Test statistic.}
-  \item{df}{The degrees for freedom from the numerator of the overall F-statistic. This is new in broom 0.7.0. Previously, this reported the rank of the design matrix, which is one more than the numerator degrees of freedom of the overall F-statistic.}
+  \item{df}{The degrees for freedom from the numerator of the overall 
+    F-statistic. This is new in broom 0.7.0. Previously, this reported 
+    the rank of the design matrix, which is one more than the numerator 
+    degrees of freedom of the overall F-statistic.}
 
 }

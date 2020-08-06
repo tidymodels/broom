@@ -23,8 +23,6 @@
 #' @details When `parametric = FALSE` return columns `edf` and `ref.df` rather
 #'   than `estimate` and `std.error`.
 #'
-#'   To tidy `Gam` objects created by calls to [gam::gam()],
-#'   see [tidy.Gam()].
 #'
 #' @examples
 #'
@@ -33,11 +31,10 @@
 #' tidy(g)
 #' tidy(g, parametric = TRUE)
 #' glance(g)
-#' @rdname mgcv_tidy_gam
 #' @export
 #' @aliases mgcv_tidiers gam_tidiers tidy.gam
 #' @family mgcv tidiers
-#' @seealso [tidy()], [mgcv::gam()], [tidy.Gam()]
+#' @seealso [tidy()], [mgcv::gam()]
 tidy.gam <- function(x, parametric = FALSE, conf.int = FALSE,
                      conf.level = 0.95, ...) {
   if (!parametric && conf.int) {
@@ -84,13 +81,10 @@ tidy.gam <- function(x, parametric = FALSE, conf.int = FALSE,
 #'   "nobs"
 #' )
 #'
-#' @details To glance `Gam` objects created by calls to [gam::gam()], see
-#'   [glance.Gam()].
 #'
-#' @rdname mgcv_glance_gam
 #' @export
 #' @family mgcv tidiers
-#' @seealso [glance()], [mgcv::gam()], [glance.Gam()]
+#' @seealso [glance()], [mgcv::gam()]
 glance.gam <- function(x, ...) {
   as_glance_tibble(
     df = sum(x$edf),

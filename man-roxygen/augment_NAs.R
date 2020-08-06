@@ -7,5 +7,5 @@
 #'   is not provided to [augment()] and `na.action = "na.exclude"`, a
 #'   warning is raised and the incomplete rows are dropped.
 #' 
-#' @seealso [na.action]
+#' @seealso [stats::na.action]
 #' @md

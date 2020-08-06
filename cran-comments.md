@@ -1,14 +1,21 @@
-# release summary
+# Release summary
 
-broom 0.5.6 is a minor release that fixes failing checks due to changes to the `tibble` package. this is a resubmission that also removes the `xergm` dependency.
+broom 0.7.0 is a major release featuring a number of new S3 methods,
+bug fixes, and improvements to internal consistency and performance.
+This release also carries out a planned deprecation of a number of
+methods to the `broom.mixed` package.
 
 ## Test environments
 
-- local windows 8 install: release
-- travis-ci ubuntu 14.04: devel, release, oldrel
-- appveyor windows server 2012: release 
-- win-builder: devel, release
+- local mac OS  install: R 4.0.0
+- mac OS (on github actions): R 3.6.3
+- ubuntu 16.04 (on github actions), R 3.6.3
+- Microsoft Windows Server 2019 10.0.17763 (on github actions) devel, release
+- win-builder (devel)
 
 ## R CMD check results
 
-0 NOTES, 0 WARNINGS, 0 ERRORS
+0 NOTES, 0 WARNINGS, 0 ERRORS, aside from a Note_to_CRAN_Maintainers with
+the following message:
+
+> Maintainer: 'Alex Hayes <alexpghayes@gmail.com>'

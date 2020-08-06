@@ -36,7 +36,9 @@ If a model has several distinct types of components, you will need to
 specify which components to return.
 }
 \details{
-The tibble has four rows. The first two indicate the mediated effect in the control and treatment group, respectively. And the last two the direct effect in each group.
+The tibble has four rows. The first two indicate the mediated
+effect in the control and treatment group, respectively. And the last
+two the direct effect in each group.
 }
 \examples{
 library(mediation)

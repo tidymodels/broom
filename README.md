@@ -3,12 +3,16 @@
 
 # broom <img src="man/figures/logo.png" align="right" width="100" />
 
-[![CRAN
-status](https://www.r-pkg.org/badges/version/broom)](https://cran.r-project.org/package=broom)
+<!-- badges: start -->
+
 [![R build
-status](https://github.com/tidymodels/broom/workflows/.github/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/tidymodels/broom/actions)
-[![Codecov test
-coverage](https://codecov.io/gh/tidymodels/broom/branch/master/graph/badge.svg)](https://codecov.io/gh/tidymodels/broom?branch=master)
+status](https://github.com/tidymodels/broom/workflows/R-CMD-check/badge.svg)](https://github.com/tidymodels/broom)
+[![Coverage
+status](https://codecov.io/gh/tidymodels/broom/branch/master/graph/badge.svg)](https://codecov.io/github/tidymodels/broom?branch=master)
+[![CRAN
+status](https://www.r-pkg.org/badges/version/broom)](https://CRAN.R-project.org/package=broom)
+[![Downloads](http://cranlogs.r-pkg.org/badges/broom)](https://cran.rstudio.com/package=broom)
+<!-- badges: end -->
 
 ## Overview
 
@@ -91,16 +95,16 @@ augment(fit, data = trees)
 #> # A tibble: 31 x 9
 #>    Girth Height Volume .fitted .resid .std.resid   .hat .sigma   .cooksd
 #>    <dbl>  <dbl>  <dbl>   <dbl>  <dbl>      <dbl>  <dbl>  <dbl>     <dbl>
-#>  1   8.3     70   10.3    4.84 -5.46      1.50   0.116    3.79 0.0978   
-#>  2   8.6     65   10.3    4.55 -5.75      1.60   0.147    3.77 0.148    
-#>  3   8.8     63   10.2    4.82 -5.38      1.53   0.177    3.78 0.167    
-#>  4  10.5     72   16.4   15.9  -0.526     0.140  0.0592   3.95 0.000409 
-#>  5  10.7     81   18.8   19.9   1.07     -0.294  0.121    3.95 0.00394  
-#>  6  10.8     83   19.7   21.0   1.32     -0.370  0.156    3.94 0.00840  
-#>  7  11       66   15.6   16.2   0.593    -0.162  0.115    3.95 0.00114  
-#>  8  11       75   18.2   19.2   1.05     -0.277  0.0515   3.95 0.00138  
-#>  9  11.1     80   22.6   21.4  -1.19      0.321  0.0920   3.95 0.00348  
-#> 10  11.2     75   19.9   20.2   0.288    -0.0759 0.0480   3.95 0.0000968
+#>  1   8.3     70   10.3    4.84  5.46      1.50   0.116    3.79 0.0978   
+#>  2   8.6     65   10.3    4.55  5.75      1.60   0.147    3.77 0.148    
+#>  3   8.8     63   10.2    4.82  5.38      1.53   0.177    3.78 0.167    
+#>  4  10.5     72   16.4   15.9   0.526     0.140  0.0592   3.95 0.000409 
+#>  5  10.7     81   18.8   19.9  -1.07     -0.294  0.121    3.95 0.00394  
+#>  6  10.8     83   19.7   21.0  -1.32     -0.370  0.156    3.94 0.00840  
+#>  7  11       66   15.6   16.2  -0.593    -0.162  0.115    3.95 0.00114  
+#>  8  11       75   18.2   19.2  -1.05     -0.277  0.0515   3.95 0.00138  
+#>  9  11.1     80   22.6   21.4   1.19      0.321  0.0920   3.95 0.00348  
+#> 10  11.2     75   19.9   20.2  -0.288    -0.0759 0.0480   3.95 0.0000968
 #> # … with 21 more rows
 ```
 
@@ -108,15 +112,26 @@ augment(fit, data = trees)
 
 We welcome contributions of all types\!
 
-If you have never made a pull request to an R package before, `broom` is
-an excellent place to start. Find an
+For questions and discussions about tidymodels packages, modeling, and
+machine learning, please [post on RStudio
+Community](https://rstd.io/tidymodels-community). If you think you have
+encountered a bug, please [submit an
+issue](https://github.com/tidymodels/broom/issues). Either way, learn
+how to create and share a [reprex](https://rstd.io/reprex) (a minimal,
+reproducible example), to clearly communicate about your code. Check out
+further details on [contributing guidelines for tidymodels
+packages](https://www.tidymodels.org/contribute/) and [how to get
+help](https://www.tidymodels.org/help/).
+
+If you have never directly contributed to an R package before, `broom`
+is an excellent place to start. Find an
 [issue](https://github.com/tidymodels/broom/issues/) with the **Beginner
 Friendly** tag and comment that you’d like to take it on and we’ll help
 you get started.
 
-We encourage typo corrections, bug reports, bug fixes and feature
-requests. Feedback on the clarity of the documentation is especially
-valuable.
+Generally, too, we encourage typo corrections, bug reports, bug fixes
+and feature requests. Feedback on the clarity of the documentation is
+especially valuable\!
 
 If you are interested in adding tidier methods for new model objects,
 please read [this

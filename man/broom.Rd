@@ -38,6 +38,7 @@ Useful links:
 Authors:
 \itemize{
   \item David Robinson \email{admiral.david@gmail.com}
+  \item Simon Couch \email{simonpatrickcouch@gmail.com}
 }
 
 Other contributors:

@@ -17,7 +17,7 @@
 \arguments{
 \item{x}{A \code{glmrob} object returned from \code{\link[robustbase:glmrob]{robustbase::glmrob()}}.}
 
-\item{data}{A \code{\link[=data.frame]{data.frame()}} or \code{\link[tibble:tibble]{tibble::tibble()}} containing the original
+\item{data}{A \link[base:data.frame]{base::data.frame} or \code{\link[tibble:tibble]{tibble::tibble()}} containing the original
 data that was used to produce the object \code{x}. Defaults to
 \code{stats::model.frame(x)} so that \code{augment(my_fit)} returns the augmented
 original data. \strong{Do not} pass new data to the \code{data} argument.
@@ -25,7 +25,7 @@ Augment will report information such as influence and cooks distance for
 data passed to the \code{data} argument. These measures are only defined for
 the original training data.}
 
-\item{newdata}{A \code{\link[=data.frame]{data.frame()}} or \code{\link[tibble:tibble]{tibble::tibble()}} containing all
+\item{newdata}{A \code{\link[base:data.frame]{base::data.frame()}} or \code{\link[tibble:tibble]{tibble::tibble()}} containing all
 the original predictors used to create \code{x}. Defaults to \code{NULL}, indicating
 that nothing has been passed to \code{newdata}. If \code{newdata} is specified,
 the \code{data} argument will be ignored.}
@@ -66,8 +66,10 @@ Users may pass data to augment via either the \code{data} argument or the
 \code{newdata} argument. If the user passes data to the \code{data} argument,
 it \strong{must} be exactly the data that was used to fit the model
 object. Pass datasets to \code{newdata} to augment data that was not used
-during model fitting. This still requires that all columns used to fit
-the model are present.
+during model fitting. This still requires that at least all predictor
+variable columns used to fit the model are present. If the original outcome
+variable used to fit the model is not included in \code{newdata}, then no
+\code{.resid} column will be included in the output.
 
 Augment will often behave differently depending on whether \code{data} or
 \code{newdata} is given. This is because there is often information
@@ -90,7 +92,7 @@ encounter errors, try explicitly passing a tibble, or fitting the original
 model on data in a tibble.
 
 We are in the process of defining behaviors for models fit with various
-\link{na.action} arguments, but make no guarantees about behavior when data is
+\code{na.action} arguments, but make no guarantees about behavior when data is
 missing at this time.
 }
 \details{
