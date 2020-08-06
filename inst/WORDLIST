@@ -141,6 +141,8 @@ Misspecified
 mjoint
 mle
 mlm
+mlogit
+mnl
 modelgenerics
 modelling
 modeltests
@@ -155,6 +157,7 @@ multiway
 na
 NA's
 newdata
+nl
 nlme
 nlrq
 nls
