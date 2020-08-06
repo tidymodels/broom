@@ -37,11 +37,19 @@ library(mlogit)
 data("Fishing", package = "mlogit")
 Fish <- dfidx(Fishing, varying = 2:9, shape = "wide", choice = "mode")
 m <- mlogit(mode ~ price + catch | income, data = Fish)
+
+tidy(m)
+augment(m)
+glance(m)
 }
 
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[mlogit:mlogit]{mlogit::mlogit()}}
+
+Other mlogit tidiers: 
+\code{\link{augment.mlogit}()},
+\code{\link{glance.mlogit}()}
 }
 \concept{mlogit tidiers}
 \value{
