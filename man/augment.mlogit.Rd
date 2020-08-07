@@ -4,12 +4,22 @@
 \alias{augment.mlogit}
 \title{Augment data with information from a(n) mlogit object}
 \usage{
-\method{augment}{mlogit}(x, data = x$model)
+\method{augment}{mlogit}(x, data = x$model, ...)
 }
 \arguments{
 \item{x}{an object returned from \code{\link[mlogit:mlogit]{mlogit::mlogit()}}.}
 
 \item{data}{Not currently used}
+
+\item{...}{Additional arguments. Not used. Needed to match generic
+signature only. \strong{Cautionary note:} Misspelled arguments will be
+absorbed in \code{...}, where they will be ignored. If the misspelled
+argument has a default value, the default value will be used.
+For example, if you pass \code{conf.lvel = 0.9}, all computation will
+proceed using \code{conf.level = 0.95}. Additionally, if you pass
+\code{newdata = my_tibble} to an \code{\link[=augment]{augment()}} method that does not
+accept a \code{newdata} argument, it will use the default value for
+the \code{data} argument.}
 }
 \description{
 Augment accepts a model object and a dataset and adds

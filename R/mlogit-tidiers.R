@@ -60,7 +60,7 @@ tidy.mlogit <- function(x, conf.int = FALSE, conf.level = 0.95, ...) {
 #' @family mlogit tidiers
 #' 
 #' 
-augment.mlogit <- function(x, data = x$model) {
+augment.mlogit <- function(x, data = x$model, ...) {
   
   # the ID variables are really messed up, so we're going to do some 
   # retrofitting because this ends up being a pretty important element of
@@ -106,7 +106,7 @@ augment.mlogit <- function(x, data = x$model) {
 #' @seealso [glance()], [mlogit::mlogit()]
 #' 
 #' 
-glance.mlogit <- function(x) {
+glance.mlogit <- function(x, ...) {
   
   # compute mcfadden r2
   # model log likelihood
