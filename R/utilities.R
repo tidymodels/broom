@@ -485,6 +485,7 @@ globalVariables(
     "cov.r",
     "cutoffs",
     "data",
+    "delete.response",
     "dffits",
     "dfbetas",
     "df.residual",
