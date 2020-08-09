@@ -64,6 +64,9 @@
     <loc>https://broom.tidymodels.org/reference/augment.mjoint.html</loc>
   </url>
   <url>
+    <loc>https://broom.tidymodels.org/reference/augment.mlogit.html</loc>
+  </url>
+  <url>
     <loc>https://broom.tidymodels.org/reference/augment.nlrq.html</loc>
   </url>
   <url>
@@ -242,6 +245,9 @@
   </url>
   <url>
     <loc>https://broom.tidymodels.org/reference/glance.mjoint.html</loc>
+  </url>
+  <url>
+    <loc>https://broom.tidymodels.org/reference/glance.mlogit.html</loc>
   </url>
   <url>
     <loc>https://broom.tidymodels.org/reference/glance.muhaz.html</loc>
@@ -530,6 +536,9 @@
   </url>
   <url>
     <loc>https://broom.tidymodels.org/reference/tidy.mlm.html</loc>
+  </url>
+  <url>
+    <loc>https://broom.tidymodels.org/reference/tidy.mlogit.html</loc>
   </url>
   <url>
     <loc>https://broom.tidymodels.org/reference/tidy.muhaz.html</loc>

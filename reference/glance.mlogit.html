@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Glance at a(n) geeglm object — glance.geeglm • broom</title>
+<title>Glance at a(n) mlogit object — glance.mlogit • broom</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -49,7 +49,7 @@
 
 
 
-<meta property="og:title" content="Glance at a(n) geeglm object — glance.geeglm" />
+<meta property="og:title" content="Glance at a(n) mlogit object — glance.mlogit" />
 <meta property="og:description" content="Glance accepts a model object and returns a tibble::tibble()
 with exactly one row of model summaries. The summaries are typically
 goodness of fit measures, p-values for hypothesis tests on residuals,
@@ -167,9 +167,9 @@ of the appropriate type." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Glance at a(n) geeglm object</h1>
-    <small class="dont-index">Source: <a href='http://github.com/tidymodels/broom/blob/master/R/geepack-tidiers.R'><code>R/geepack-tidiers.R</code></a></small>
-    <div class="hidden name"><code>glance.geeglm.Rd</code></div>
+    <h1>Glance at a(n) mlogit object</h1>
+    <small class="dont-index">Source: <a href='http://github.com/tidymodels/broom/blob/master/R/mlogit-tidiers.R'><code>R/mlogit-tidiers.R</code></a></small>
+    <div class="hidden name"><code>glance.mlogit.Rd</code></div>
     </div>
 
     <div class="ref-description">
@@ -190,7 +190,7 @@ that no longer have a well-defined value are filled in with an <code>NA</code>
 of the appropriate type.</p>
     </div>
 
-    <pre class="usage"><span class='co'># S3 method for geeglm</span>
+    <pre class="usage"><span class='co'># S3 method for mlogit</span>
 <span class='fu'><a href='https://rdrr.io/pkg/generics/man/glance.html'>glance</a></span>(<span class='no'>x</span>, <span class='no'>...</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -198,7 +198,7 @@ of the appropriate type.</p>
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>x</th>
-      <td><p>A <code>geeglm</code> object returned from a call to <code><a href='https://rdrr.io/pkg/geepack/man/geeglm.html'>geepack::geeglm()</a></code>.</p></td>
+      <td><p>an object returned from <code><a href='https://rdrr.io/pkg/mlogit/man/mlogit.html'>mlogit::mlogit()</a></code>.</p></td>
     </tr>
     <tr>
       <th>...</th>
@@ -216,173 +216,33 @@ the <code>data</code> argument.</p></td>
 
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='https://rdrr.io/pkg/generics/man/glance.html'>glance()</a></code>, <code><a href='https://rdrr.io/pkg/geepack/man/geeglm.html'>geepack::geeglm()</a></code></p></div>
+    <div class='dont-index'><p><code><a href='https://rdrr.io/pkg/generics/man/glance.html'>glance()</a></code>, <code><a href='https://rdrr.io/pkg/mlogit/man/mlogit.html'>mlogit::mlogit()</a></code></p>
+<p>Other mlogit tidiers: 
+<code><a href='augment.mlogit.html'>augment.mlogit</a>()</code>,
+<code><a href='tidy.mlogit.html'>tidy.mlogit</a>()</code></p></div>
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>A <code><a href='https://tibble.tidyverse.org/reference/tibble.html'>tibble::tibble()</a></code> with exactly one row and columns:</p>
-<dt>alpha</dt><dd><p>Estimated correlation parameter for geepack::geeglm.</p></dd>
-  <dt>df.residual</dt><dd><p>Residual degrees of freedom.</p></dd>
-  <dt>gamma</dt><dd><p>Estimated scale parameter for geepack::geeglm.</p></dd>
-  <dt>max.cluster.size</dt><dd><p>Max number of elements in clusters.</p></dd>
-  <dt>n.clusters</dt><dd><p>Number of clusters.</p></dd>
+<dt>AIC</dt><dd><p>Akaike's Information Criterion for the model.</p></dd>
+  <dt>BIC</dt><dd><p>Bayesian Information Criterion for the model.</p></dd>
+  <dt>logLik</dt><dd><p>The log-likelihood of the model. [stats::logLik()] may be a useful reference.</p></dd>
+  <dt>nobs</dt><dd><p>Number of observations used.</p></dd>
+  <dt>rho2</dt><dd><p>McFadden's rho squared with respect to a market shares (constants-only) model.</p></dd>
+  <dt>rho20</dt><dd><p>McFadden's rho squared with respect to an equal shares (no information) model.</p></dd>
 
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'>
-<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>geepack</span>)
-<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>state</span>)
+    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
+<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>mlogit</span>)
+<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='st'>"Fishing"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"mlogit"</span>)
+<span class='no'>Fish</span> <span class='kw'>&lt;-</span> <span class='fu'>dfidx</span>(<span class='no'>Fishing</span>, <span class='kw'>varying</span> <span class='kw'>=</span> <span class='fl'>2</span>:<span class='fl'>9</span>, <span class='kw'>shape</span> <span class='kw'>=</span> <span class='st'>"wide"</span>, <span class='kw'>choice</span> <span class='kw'>=</span> <span class='st'>"mode"</span>)
+<span class='no'>m</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/mlogit/man/mlogit.html'>mlogit</a></span>(<span class='no'>mode</span> ~ <span class='no'>price</span> + <span class='no'>catch</span> <span class='kw'>|</span> <span class='no'>income</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>Fish</span>)
 
-<span class='no'>ds</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>(<span class='no'>state.region</span>, <span class='no'>state.x77</span>)
-
-<span class='no'>geefit</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/geepack/man/geeglm.html'>geeglm</a></span>(<span class='no'>Income</span> ~ <span class='no'>Frost</span> + <span class='no'>Murder</span>,
-  <span class='kw'>id</span> <span class='kw'>=</span> <span class='no'>state.region</span>,
-  <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>ds</span>, <span class='kw'>family</span> <span class='kw'>=</span> <span class='no'>gaussian</span>,
-  <span class='kw'>corstr</span> <span class='kw'>=</span> <span class='st'>"exchangeable"</span>
-)</div><div class='output co'>#&gt; $fct
-#&gt; function (dose, parm) 
-#&gt; {
-#&gt;     parmMat &lt;- matrix(parmVec, nrow(parm), numParm, byrow = TRUE)
-#&gt;     parmMat[, notFixed] &lt;- parm
-#&gt;     fd(dose, parmMat[, 1], parmMat[, 2], parmMat[, 3], parmMat[, 
-#&gt;         4], parmMat[, 5])
-#&gt; }
-#&gt; &lt;bytecode: 0x7f8f6ba7f2a8&gt;
-#&gt; &lt;environment: 0x7f8f742c6f60&gt;
-#&gt; 
-#&gt; $ssfct
-#&gt; function (dframe) 
-#&gt; {
-#&gt;     x &lt;- dframe[, 1]
-#&gt;     y &lt;- dframe[, 2]
-#&gt;     cdVal &lt;- findcd(x, y)
-#&gt;     if (useFixed) {
-#&gt;     }
-#&gt;     if (logg) {
-#&gt;         bVal &lt;- 0.75 * sd(log(x[y &gt; quantile(y, 0.75)]))
-#&gt;     }
-#&gt;     else {
-#&gt;         bVal &lt;- 0.75 * sd(x[y &gt; quantile(y, 0.75)])
-#&gt;     }
-#&gt;     befVal &lt;- c(bVal, x[which.max(y)], 1)
-#&gt;     return(c(befVal[1], cdVal, befVal[2:3])[is.na(fixed)])
-#&gt; }
-#&gt; &lt;bytecode: 0x7f8f742c1e18&gt;
-#&gt; &lt;environment: 0x7f8f742bfc90&gt;
-#&gt; 
-#&gt; $names
-#&gt; [1] "b" "c" "d" "e" "f"
-#&gt; 
-#&gt; $deriv1
-#&gt; function (dose, parm) 
-#&gt; {
-#&gt;     parmMat &lt;- matrix(parmVec, nrow(parm), numParm, byrow = TRUE)
-#&gt;     parmMat[, notFixed] &lt;- parm
-#&gt;     attr(fd(dose, parmMat[, 1], parmMat[, 2], parmMat[, 3], parmMat[, 
-#&gt;         4], parmMat[, 5]), "gradient")[, notFixed]
-#&gt; }
-#&gt; &lt;bytecode: 0x7f8f6ba7dfd8&gt;
-#&gt; &lt;environment: 0x7f8f742c6f60&gt;
-#&gt; 
-#&gt; $deriv2
-#&gt; NULL
-#&gt; 
-#&gt; $derivx
-#&gt; function (dose, parm) 
-#&gt; {
-#&gt;     parmMat &lt;- matrix(parmVec, nrow(parm), numParm, byrow = TRUE)
-#&gt;     parmMat[, notFixed] &lt;- parm
-#&gt;     dFct &lt;- function(dose, b, c, d, e, f) {
-#&gt;         .expr1 &lt;- d - c
-#&gt;         .expr4 &lt;- (dose - e)/b
-#&gt;         .expr5 &lt;- .expr4^2
-#&gt;         .expr6 &lt;- sqrt(.expr5)
-#&gt;         .expr9 &lt;- exp(-0.5 * .expr6^f)
-#&gt;         .value &lt;- c + .expr1 * .expr9
-#&gt;         .grad &lt;- array(0, c(length(.value), 1L), list(NULL, c("dose")))
-#&gt;         .grad[, "dose"] &lt;- -(.expr1 * (.expr9 * (0.5 * (.expr6^(f - 
-#&gt;             1) * (f * (0.5 * (2 * (1/b * .expr4) * .expr5^-0.5)))))))
-#&gt;         attr(.value, "gradient") &lt;- .grad
-#&gt;         .value
-#&gt;     }
-#&gt;     attr(dFct(dose, parmMat[, 1], parmMat[, 2], parmMat[, 3], 
-#&gt;         parmMat[, 4], parmMat[, 5]), "gradient")
-#&gt; }
-#&gt; &lt;bytecode: 0x7f8f6ba80b70&gt;
-#&gt; &lt;environment: 0x7f8f742c6f60&gt;
-#&gt; 
-#&gt; $edfct
-#&gt; function (parm, respl, reference, type, ...) 
-#&gt; {
-#&gt;     parmVec[notFixed] &lt;- parm
-#&gt;     p &lt;- absToRel(parmVec, abs(respl), type)
-#&gt;     if (identical(type, "absolute")) {
-#&gt;         p &lt;- 100 - p
-#&gt;     }
-#&gt;     if (identical(type, "relative") &amp;&amp; (parmVec[1] &lt; 0) &amp;&amp; (reference == 
-#&gt;         "control")) {
-#&gt;         p &lt;- 100 - p
-#&gt;     }
-#&gt;     pProp &lt;- 1 - (100 - p)/100
-#&gt;     EDfct &lt;- function(b, c, d, e, f) {
-#&gt;         .expr2 &lt;- -2 * log(pProp)
-#&gt;         .expr4 &lt;- sign(respl) * .expr2^(1/f)
-#&gt;         .value &lt;- b * .expr4 + e
-#&gt;         .grad &lt;- array(0, c(length(.value), 5L), list(NULL, c("b", 
-#&gt;             "c", "d", "e", "f")))
-#&gt;         .grad[, "b"] &lt;- .expr4
-#&gt;         .grad[, "c"] &lt;- 0
-#&gt;         .grad[, "d"] &lt;- 0
-#&gt;         .grad[, "e"] &lt;- 1
-#&gt;         .grad[, "f"] &lt;- -(b * (.expr4 * (log(.expr2) * (1/f^2))))
-#&gt;         attr(.value, "gradient") &lt;- .grad
-#&gt;         .value
-#&gt;     }
-#&gt;     EDp &lt;- EDfct(parmVec[1], parmVec[2], parmVec[3], parmVec[4], 
-#&gt;         parmVec[5])
-#&gt;     EDder &lt;- attr(EDfct(parmVec[1], parmVec[2], parmVec[3], parmVec[4], 
-#&gt;         parmVec[5]), "gradient")
-#&gt;     return(list(EDp, EDder[notFixed]))
-#&gt; }
-#&gt; &lt;bytecode: 0x7f8f6ba86898&gt;
-#&gt; &lt;environment: 0x7f8f742c6f60&gt;
-#&gt; 
-#&gt; $name
-#&gt; [1] "family"
-#&gt; 
-#&gt; $text
-#&gt; [1] "Gaussian"
-#&gt; 
-#&gt; $noParm
-#&gt; [1] 5
-#&gt; 
-#&gt; $lowerAs
-#&gt; function (parm) 
-#&gt; {
-#&gt;     parmVec[indexVec] &lt;- parm
-#&gt;     parmVec[parmNo]
-#&gt; }
-#&gt; &lt;bytecode: 0x7f8f6bbf70d0&gt;
-#&gt; &lt;environment: 0x7f8f742c10e8&gt;
-#&gt; 
-#&gt; $upperAs
-#&gt; function (parm) 
-#&gt; {
-#&gt;     parmVec[indexVec] &lt;- parm
-#&gt;     parmVec[parmNo]
-#&gt; }
-#&gt; &lt;bytecode: 0x7f8f6bbf70d0&gt;
-#&gt; &lt;environment: 0x7f8f742bd440&gt;
-#&gt; 
-#&gt; $monoton
-#&gt; [1] NA
-#&gt; 
-#&gt; $fixed
-#&gt; [1] NA NA NA NA NA
-#&gt; 
-#&gt; attr(,"class")
-#&gt; [1] "gaussian"</div><div class='output co'>#&gt; <span class='error'>Error in glm(formula = Income ~ Frost + Murder, family = gaussian, data = ds): 'family' not recognized</span></div><div class='input'>
-<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>geefit</span>)</div><div class='output co'>#&gt; <span class='error'>Error in tidy(geefit): object 'geefit' not found</span></div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>geefit</span>, <span class='kw'>conf.int</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; <span class='error'>Error in tidy(geefit, conf.int = TRUE): object 'geefit' not found</span></div></pre>
+<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>m</span>)
+<span class='fu'><a href='https://rdrr.io/pkg/generics/man/augment.html'>augment</a></span>(<span class='no'>m</span>)
+<span class='fu'><a href='https://rdrr.io/pkg/generics/man/glance.html'>glance</a></span>(<span class='no'>m</span>)
+}</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
