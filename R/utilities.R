@@ -358,10 +358,11 @@ add_hat_sigma_cols <- function(df, x, infl) {
 # deal with rownames and convert to tibble as necessary
 # add .se.fit column if present
 # be *incredibly* careful that the ... are passed correctly
-augment_newdata <- function(x, data, newdata, .se_fit, interval, ...) {
+augment_newdata <- function(x, data, newdata, .se_fit, interval = NULL, ...) {
   passed_newdata <- !is.null(newdata)
   df <- if (passed_newdata) newdata else data
   df <- as_augment_tibble(df)
+  # interval <- match.arg(interval)
   # Check if response variable is in newdata:
   response_var_in_newdata <- x$call %>%
     all.vars() %>%
@@ -385,7 +386,7 @@ augment_newdata <- function(x, data, newdata, .se_fit, interval, ...) {
   
   if (.se_fit) {
     pred_obj <- predict(x, newdata = newdata, na.action = na.pass, se.fit = .se_fit, interval = interval, ...)
-    if (interval=="none") {
+    if (is.null(interval) || interval=="none") {
       df$.fitted <- pred_obj$fit %>% unname()
     } else {
       df$.fitted <- pred_obj$fit[, "fit"]
@@ -399,13 +400,13 @@ augment_newdata <- function(x, data, newdata, .se_fit, interval, ...) {
     se_idx <- which(names(pred_obj) %in% c("se.fit", "se"))
     df$.se.fit <- pred_obj[[se_idx]]
     
-  } else if (interval!="none") {
+  } else if (!is.null(interval) && interval!="none") {
     pred_obj <- predict(x, newdata = newdata, na.action = na.pass, se.fit = FALSE, interval = interval, ...)
     df$.fitted <- pred_obj[, "fit"]
     df$.conf.low <- pred_obj[, "lwr"]
     df$.conf.high <- pred_obj[, "upr"]
   } else if (passed_newdata) {
-    if (interval=="none") {
+    if (is.null(interval) || interval=="none") {
       df$.fitted <- predict(x, newdata = newdata, na.action = na.pass, ...) %>% 
         unname()
     } else {
@@ -415,7 +416,7 @@ augment_newdata <- function(x, data, newdata, .se_fit, interval, ...) {
       df$.conf.high <- pred_obj$fit[, "upr"]
     }
   } else {
-    if (interval=="none") {
+    if (is.null(interval) || interval=="none") {
       df$.fitted <- predict(x, na.action = na.pass, ...) %>% 
         unname()
     } else {
