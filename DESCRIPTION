@@ -653,6 +653,7 @@ Collate:
     'lmodel2-tidiers.R'
     'lmtest-tidiers.R'
     'maps-tidiers.R'
+    'margins-tidiers.R'
     'mass-fitdistr-tidiers.R'
     'mass-polr-tidiers.R'
     'mass-ridgelm-tidiers.R'
