@@ -362,11 +362,6 @@ augment_newdata <- function(x, data, newdata, .se_fit, ...) {
   passed_newdata <- !is.null(newdata)
   df <- if (passed_newdata) newdata else data
   df <- as_augment_tibble(df)
-  # Check if response variable is in newdata:
-  response_var_in_newdata <- x$call %>%
-    all.vars() %>%
-    .[[1]] %>%
-    is.element(names(df))
 
   # NOTE: It is important use predict(x, newdata = newdata) rather than
   # predict(x, newdata = df). This is to avoid an edge case breakage
@@ -393,21 +388,11 @@ augment_newdata <- function(x, data, newdata, .se_fit, ...) {
     se_idx <- which(names(pred_obj) %in% c("se.fit", "se"))
     df$.se.fit <- pred_obj[[se_idx]]
   } else if (passed_newdata) {
-    df$.fitted <- predict(x, newdata = newdata, na.action = na.pass, ...) %>% 
-      unname()
+    df$.fitted <- unname(predict(x, newdata = newdata, na.action = na.pass, ...))
   } else {
-    df$.fitted <- predict(x, na.action = na.pass, ...) %>% 
-      unname()
+    df$.fitted <- unname(predict(x, na.action = na.pass, ...))
   }
 
-  # If response variable is not included in newdata, remove response variable
-  # attribute from model object
-  if (!response_var_in_newdata) {
-    x <- x %>%
-      terms() %>%
-      delete.response()
-  }
-  
   resp <- safe_response(x, df)
 
   if (!is.null(resp) && is.numeric(resp)) {
