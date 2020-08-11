@@ -562,6 +562,7 @@ Suggests:
     lsmeans,
     maps,
     maptools,
+    margins,
     MASS,
     Matrix,
     mclogit,
