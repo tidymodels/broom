@@ -6,7 +6,8 @@ To be released as broom 0.7.1.
 * Fixed `newdata` warning message in `augment.*()` output when the `newdata`
 didn't contain the response variable—augment methods no longer expect the 
 response variable in the supplied `newdata` argument. (#897 by @rudeboybert)
-* Add tidiers for `margins`-objects. (#700 by @grantmcdermott)
+* Add tidiers for `margins` objects. (#700 by @grantmcdermott)
+* Added tidier methods for `mlogit` objects (#887 by @gregmacfarlane)
 
 # broom 0.7.0
 

@@ -571,6 +571,7 @@ Suggests:
     metafor,
     mfx,
     mgcv,
+    mlogit,
     modeldata,
     modeltests,
     muhaz,
@@ -666,6 +667,7 @@ Collate:
     'mediate-tidiers.R'
     'mfx-tidiers.R'
     'mgcv-tidiers.R'
+    'mlogit-tidiers.R'
     'muhaz-tidiers.R'
     'multcomp-tidiers.R'
     'nnet-tidiers.R'

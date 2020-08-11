@@ -66,7 +66,7 @@ tidy.margins <- function(x, conf.int = FALSE, conf.level = 0.95, ...) {
             tidyr::pivot_longer(., at_vars, names_to = "at.variable", values_to = "at.value"),
             error = function(e) {
               mutate_at(
-                ., setdiff(colnames(x_summ), std_cols), as.character,
+                ., setdiff(colnames(ret), std_cols), as.character,
                 message("Warning: Mismatched types; `at.value` column coerced to character.")
                 ) %>%
                 tidyr::pivot_longer(at_vars, names_to = "at.variable", values_to = "at.value")
