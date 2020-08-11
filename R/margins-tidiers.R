@@ -16,37 +16,48 @@
 #'
 #' @examples
 #' library(margins)
-#'
+#' 
+#' ## Example 1: Logit model ##
+#' 
 #' mod_log <- glm(am ~ cyl + hp + wt, data = mtcars, family = binomial)
+#' 
+#' # Get tidied "naive" model coefficients
+#' tidy(mod_log)
+#' 
+#' # Convert to marginal effects with margins::margins()
 #' marg_log <- margins(mod_log)
-#'
+#' 
+#' # Get tidied marginal effects
 #' tidy(marg_log)
 #' tidy(marg_log, conf.int = TRUE)
 #' glance(marg_log) ## Requires running the underlying model again. Quick for this example.
 #' # augment(marg_log) ## Not supported.
 #' augment(mod_log) ## But can get the same info by running on the underlying model.
 #'
-#' ## Threeway interaction effect example
+#' ## Example 2: Threeway interaction terms ##
+#' 
 #' mod_ie <- lm(mpg ~ wt * cyl * disp, data = mtcars)
 #' 
+#' # Get tidied "naive" model coefficients
+#' tidy(mod_ie)
+#' 
+#' # Convert to marginal effects with margins::margins()
 #' marg_ie0 <- margins(mod_ie)
+
+#' # Get tidied marginal effects 
 #' tidy(marg_ie0)
 #' glance(marg_ie0)
 #' 
-#' marg_ie1 <- margins(mod_ie, variable = "wt")
+#' # Marginal effects evaluated at specific values of a variable (here: cyl)
+#' marg_ie1 <- margins(mod_ie, at = list(cyl = c(4,6,8)))
 #' tidy(marg_ie1)
 #' 
-#' ## Marginal effect of one interaction variable, modulated at specific values
-#' ## of another interaction variable
-#' marg_ie2 <- margins(mod_ie, at = list(cyl = c(4,6,8)))
-#' tidy(marg_ie2)
-#' 
-#' ## As above, but this time modulated at specific values of two other 
-#' ## interaction variables
-#' marg_ie3 <- margins(mod_ie,
+#' # Marginal effects of one interaction variable (here: wt), modulated at 
+#' # specific values of the two other interaction variables (here: cyl and drat)
+#' marg_ie2 <- margins(mod_ie,
 #'                     variables = "wt", ## Main var
 #'                     at = list(cyl = c(4,6,8), drat = c(3, 3.5, 4))) ## Modulating vars
-#' tidy(marg_ie3)
+#' tidy(marg_ie2)
 #' @export
 #' @aliases margins_tidiers
 #' @family margins tidiers
@@ -56,20 +67,20 @@ tidy.margins <- function(x, conf.int = FALSE, conf.level = 0.95, ...) {
     ret <- as_tibble(summary(x, level = conf.level))
     
     ## IF statement for tidying any "at" variables.
-    if (TRUE %in% grepl("at", names(attributes(x)))) {
+    if ("at" %in% names(attributes(x))) {
       at_vars <- setdiff(names(attributes(x)$at), "index")
       std_cols <- c("factor", "AME", "SE", "z", "p", "lower", "upper")
       ret <-
         ret %>%
         {
           tryCatch(
-            tidyr::pivot_longer(., at_vars, names_to = "at.variable", values_to = "at.value"),
+            tidyr::pivot_longer(., all_of(at_vars), names_to = "at.variable", values_to = "at.value"),
             error = function(e) {
-              mutate_at(
-                ., setdiff(colnames(ret), std_cols), as.character,
-                message("Warning: Mismatched types; `at.value` column coerced to character.")
+              mutate(
+                ., across(all_of(at_vars), as.character),
+                message("Warning: `at.value` column coerced to character.")
                 ) %>%
-                tidyr::pivot_longer(at_vars, names_to = "at.variable", values_to = "at.value")
+                tidyr::pivot_longer(all_of(at_vars), names_to = "at.variable", values_to = "at.value")
               }
             )
           }
