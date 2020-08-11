@@ -427,14 +427,6 @@ augment_newdata <- function(x, data, newdata, .se_fit, interval = NULL, ...) {
     }
   }
 
-  # If response variable is not included in newdata, remove response variable
-  # attribute from model object
-  if (!response_var_in_newdata) {
-    x <- x %>%
-      terms() %>%
-      delete.response()
-  }
-  
   resp <- safe_response(x, df)
 
   if (!is.null(resp) && is.numeric(resp)) {
