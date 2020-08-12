@@ -24,7 +24,7 @@ the \code{data} argument will be ignored.}
 
 \item{se_fit}{Logical indicating whether or not a \code{.se.fit} column should be
 added to the augmented output. For some models, this calculation can be
-somwhat time-consuming. Defaults to \code{FALSE}.}
+somewhat time-consuming. Defaults to \code{FALSE}.}
 
 \item{...}{Additional arguments. Not used. Needed to match generic
 signature only. \strong{Cautionary note:} Misspelled arguments will be
