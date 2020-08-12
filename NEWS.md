@@ -9,6 +9,8 @@ response variable in the supplied `newdata` argument. (#897 by @rudeboybert)
 * Add "interval" argument to `augment.lm()` for confidence and prediction bands. 
 (#908 by @grantmcdermott)
 * Added tidier methods for `mlogit` objects (#887 by @gregmacfarlane)
+* Fixed a bug related to `tidy.geeglm()` not being sensitive to the
+`exponentiate` argument (#867)
 
 # broom 0.7.0
 

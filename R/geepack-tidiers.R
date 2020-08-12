@@ -28,7 +28,7 @@
 #'
 #' tidy(geefit)
 #' tidy(geefit, conf.int = TRUE)
-#' @evalRd return_tidy(regresion = TRUE)
+#' @evalRd return_tidy(regression = TRUE)
 #'
 #' @export
 #' @aliases geeglm_tidiers geepack_tidiers
@@ -42,36 +42,17 @@ tidy.geeglm <- function(x, conf.int = FALSE, conf.level = .95,
     co, 
     c("estimate", "std.error", "statistic", "p.value")[1:ncol(co)]
   )
-
-  process_geeglm(ret, x,
-    conf.int = conf.int, conf.level = conf.level,
-    exponentiate = exponentiate
-  )
-}
-
-process_geeglm <- function(ret, x, conf.int = FALSE, conf.level = .95,
-                           exponentiate = FALSE) {
-  if (exponentiate) {
-    # save transformation function for use on confidence interval
-    if (is.null(x$family) ||
-      (x$family$link != "logit" && x$family$link != "log")) {
-      warning(paste(
-        "Exponentiating coefficients, but model did not use",
-        "a log or logit link function"
-      ))
-    }
-    trans <- exp
-  } else {
-    trans <- identity
-  }
-
+  
   if (conf.int) {
     ci <- broom_confint_terms(x, level = conf.level)
     ret <- dplyr::left_join(ret, ci, by = "term")
   }
-  ret$estimate <- trans(ret$estimate)
-
-  as_tibble(ret)
+  
+  if (exponentiate) {
+    ret <- exponentiate(ret)
+  }
+  
+  ret
 }
 
 #' Generate confidence intervals for geeglm objects
