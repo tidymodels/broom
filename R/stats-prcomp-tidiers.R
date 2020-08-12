@@ -109,8 +109,8 @@ tidy.prcomp <- function(x, matrix = "u", ...) {
     )
   } else if (matrix %in% c("rotation", "variables", "v", "loadings")) {
     ret <- x$rotation %>% 
-      tibble::as_tibble(rownames = "labels") %>% 
-      tidyr::pivot_longer(cols = -"labels", 
+      tibble::as_tibble(rownames = "column") %>% 
+      tidyr::pivot_longer(cols = -"column", 
                           names_to = "PC", 
                           values_to = "value")
   } else if (matrix %in% c("x", "samples", "u", "scores")) {
