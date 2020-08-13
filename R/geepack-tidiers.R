@@ -49,6 +49,14 @@ tidy.geeglm <- function(x, conf.int = FALSE, conf.level = .95,
   }
   
   if (exponentiate) {
+    if (is.null(x$family) ||
+        (x$family$link != "logit" && x$family$link != "log")) {
+      warning(paste(
+        "Exponentiating coefficients, but model did not use",
+        "a log or logit link function"
+      ))
+    }
+    
     ret <- exponentiate(ret)
   }
   
