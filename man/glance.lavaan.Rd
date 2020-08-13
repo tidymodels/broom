@@ -14,7 +14,7 @@ and \code{\link[lavaan:sem]{lavaan::sem()}}.}
 signature only. \strong{Cautionary note:} Misspelled arguments will be
 absorbed in \code{...}, where they will be ignored. If the misspelled
 argument has a default value, the default value will be used.
-For example, if you pass \code{conf.lvel = 0.9}, all computation will
+For example, if you pass \code{conf.level = 0.9}, all computation will
 proceed using \code{conf.level = 0.95}. Additionally, if you pass
 \code{newdata = my_tibble} to an \code{\link[=augment]{augment()}} method that does not
 accept a \code{newdata} argument, it will use the default value for
@@ -81,7 +81,7 @@ glance(cfa.fit)
 }
 \seealso{
 \code{\link[=glance]{glance()}}, \code{\link[lavaan:cfa]{lavaan::cfa()}}, \code{\link[lavaan:sem]{lavaan::sem()}},
-\code{\link[lavaan:fitMeasures]{lavaan::fitmeasures()}}
+\code{\link[lavaan:fitmeasures]{lavaan::fitmeasures()}}
 
 Other lavaan tidiers: 
 \code{\link{tidy.lavaan}()}

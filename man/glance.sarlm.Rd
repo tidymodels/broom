@@ -7,14 +7,14 @@
 \method{glance}{sarlm}(x, ...)
 }
 \arguments{
-\item{x}{An object of object returned from \code{\link[spatialreg:ML_models]{spatialreg::lagsarlm()}}
-or \code{\link[spatialreg:ML_models]{spatialreg::errorsarlm()}}.}
+\item{x}{An object of object returned from \code{\link[spatialreg:lagsarlm]{spatialreg::lagsarlm()}}
+or \code{\link[spatialreg:errorsarlm]{spatialreg::errorsarlm()}}.}
 
 \item{...}{Additional arguments. Not used. Needed to match generic
 signature only. \strong{Cautionary note:} Misspelled arguments will be
 absorbed in \code{...}, where they will be ignored. If the misspelled
 argument has a default value, the default value will be used.
-For example, if you pass \code{conf.lvel = 0.9}, all computation will
+For example, if you pass \code{conf.level = 0.9}, all computation will
 proceed using \code{conf.level = 0.95}. Additionally, if you pass
 \code{newdata = my_tibble} to an \code{\link[=augment]{augment()}} method that does not
 accept a \code{newdata} argument, it will use the default value for
@@ -71,8 +71,8 @@ augment(crime_sac)
 
 }
 \seealso{
-\code{\link[=glance]{glance()}}, \code{\link[spatialreg:ML_models]{spatialreg::lagsarlm()}}, \code{\link[spatialreg:ML_models]{spatialreg::errorsarlm()}},
-\code{\link[spatialreg:ML_models]{spatialreg::sacsarlm()}}
+\code{\link[=glance]{glance()}}, \code{\link[spatialreg:lagsarlm]{spatialreg::lagsarlm()}}, \code{\link[spatialreg:errorsarlm]{spatialreg::errorsarlm()}},
+\code{\link[spatialreg:sacsarlm]{spatialreg::sacsarlm()}}
 
 Other spatialreg tidiers: 
 \code{\link{augment.sarlm}()},

@@ -504,7 +504,7 @@ Depends:
     R (>= 3.1)
 Imports:
     backports,
-    dplyr,
+    dplyr (>= 1.0.0),
     ellipsis,
     generics (>= 0.0.2),
     glue,
@@ -513,7 +513,7 @@ Imports:
     rlang,
     stringr,
     tibble (>= 3.0.0),
-    tidyr
+    tidyr (>= 1.0.0)
 Suggests:
     AER,
     akima,
@@ -562,6 +562,7 @@ Suggests:
     lsmeans,
     maps,
     maptools,
+    margins,
     MASS,
     Matrix,
     mclogit,
@@ -656,6 +657,7 @@ Collate:
     'lmodel2-tidiers.R'
     'lmtest-tidiers.R'
     'maps-tidiers.R'
+    'margins-tidiers.R'
     'mass-fitdistr-tidiers.R'
     'mass-polr-tidiers.R'
     'mass-ridgelm-tidiers.R'
