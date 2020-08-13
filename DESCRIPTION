@@ -504,7 +504,7 @@ Depends:
     R (>= 3.1)
 Imports:
     backports,
-    dplyr,
+    dplyr (>= 1.0.0),
     ellipsis,
     generics (>= 0.0.2),
     glue,
