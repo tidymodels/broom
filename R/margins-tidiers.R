@@ -74,13 +74,13 @@ tidy.margins <- function(x, conf.int = FALSE, conf.level = 0.95, ...) {
         ret %>%
         {
           tryCatch(
-            tidyr::pivot_longer(., all_of(at_vars), names_to = "at.variable", values_to = "at.value"),
+            tidyr::pivot_longer(., dplyr::all_of(at_vars), names_to = "at.variable", values_to = "at.value"),
             error = function(e) {
               mutate(
-                ., across(all_of(at_vars), as.character),
+                ., dplyr::across(dplyr::all_of(at_vars), as.character),
                 message("Warning: `at.value` column coerced to character.")
                 ) %>%
-                tidyr::pivot_longer(all_of(at_vars), names_to = "at.variable", values_to = "at.value")
+                tidyr::pivot_longer(dplyr::all_of(at_vars), names_to = "at.variable", values_to = "at.value")
               }
             )
           }
@@ -93,7 +93,7 @@ tidy.margins <- function(x, conf.int = FALSE, conf.level = 0.95, ...) {
       ret %>%
       dplyr::select(
         term = .data$factor, 
-        contains("at."), 
+        dplyr::contains("at."), 
         estimate = .data$AME, 
         std.error = .data$SE, 
         statistic = .data$z, 
