@@ -31,7 +31,7 @@
 #' tidy(marg_log)
 #' tidy(marg_log, conf.int = TRUE)
 #' glance(marg_log) ## Requires running the underlying model again. Quick for this example.
-#' # augment(marg_log) ## Not supported.
+#' \dontrun{augment(marg_log) ## Not supported.}
 #' augment(mod_log) ## But can get the same info by running on the underlying model.
 #'
 #' ## Example 2: Threeway interaction terms ##
