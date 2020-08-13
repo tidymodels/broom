@@ -1,4 +1,4 @@
-context("fixest")
+context("margins")
 
 skip_on_cran()
 
