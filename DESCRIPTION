@@ -513,7 +513,7 @@ Imports:
     rlang,
     stringr,
     tibble (>= 3.0.0),
-    tidyr
+    tidyr (>= 1.0.0)
 Suggests:
     AER,
     akima,
