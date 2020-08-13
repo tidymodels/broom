@@ -133,3 +133,7 @@ glance.margins <- function(x, ...) {
   ret <- broom::glance(eval(orig_mod_call), ...)
   return(ret)
 }
+
+#' @include null-and-default-tidiers.R
+#' @export
+augment.margins <- augment.default
