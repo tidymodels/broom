@@ -50,25 +50,31 @@ tidy(mod)
 glance(mod)
 
 # coefficient plot
-d <- tidy(mod) \%>\%
-  mutate(
-    low = estimate - std.error,
-    high = estimate + std.error
-  )
+d <- tidy(mod, conf.int = TRUE)
 
-ggplot(d, aes(estimate, term, xmin = low, xmax = high, height = 0)) +
+ggplot(d, aes(estimate, term, xmin = conf.low, xmax = conf.high, height = 0)) +
   geom_point() +
-  geom_vline(xintercept = 0) +
+  geom_vline(xintercept = 0, lty = 4) +
   geom_errorbarh()
 
 augment(mod)
-augment(mod, mtcars)
+augment(mod, mtcars, interval = "confidence")
 
 # predict on new data
 newdata <- mtcars \%>\%
   head(6) \%>\%
   mutate(wt = wt + 1)
 augment(mod, newdata = newdata)
+
+# ggplot2 example where we also construct 95\% prediction interval
+mod2 <- lm(mpg ~ wt, data = mtcars) ## simpler bivariate model since we're plotting in 2D
+
+au <- augment(mod2, newdata = newdata, interval = "prediction")
+
+ggplot(au, aes(wt, mpg)) + 
+  geom_point() +
+  geom_line(aes(y = .fitted)) + 
+  geom_ribbon(aes(ymin = .conf.low, ymax = .conf.high), col = NA, alpha = 0.3)
 
 # predict on new data without outcome variable. Output does not include .resid
 newdata <- newdata \%>\%
