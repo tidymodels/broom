@@ -164,6 +164,7 @@
 <ul>
 <li>Extended the <code><a href="../reference/glance.aov.html">glance.aov()</a></code> method to include an <code>r.squared</code> column!</li>
 <li>Fixed <code>newdata</code> warning message in <code>augment.*()</code> output when the <code>newdata</code> didn’t contain the response variable—augment methods no longer expect the response variable in the supplied <code>newdata</code> argument. (<a href='http://github.com/tidymodels/broom/issues/897'>#897</a> by <a href='http://github.com/rudeboybert'>@rudeboybert</a>)</li>
+<li>Add tidiers for <code>margins</code> objects. (<a href='http://github.com/tidymodels/broom/issues/700'>#700</a> by <a href='http://github.com/grantmcdermott'>@grantmcdermott</a>)</li>
 <li>Add “interval” argument to <code><a href="../reference/augment.lm.html">augment.lm()</a></code> for confidence and prediction bands. (<a href='http://github.com/tidymodels/broom/issues/908'>#908</a> by <a href='http://github.com/grantmcdermott'>@grantmcdermott</a>)</li>
 <li>Added tidier methods for <code>mlogit</code> objects (<a href='http://github.com/tidymodels/broom/issues/887'>#887</a> by <a href='http://github.com/gregmacfarlane'>@gregmacfarlane</a>)</li>
 <li>Fixed a bug related to <code><a href="../reference/tidy.geeglm.html">tidy.geeglm()</a></code> not being sensitive to the <code>exponentiate</code> argument (<a href='http://github.com/tidymodels/broom/issues/867'>#867</a>)</li>
@@ -608,7 +609,7 @@
 </h1>
 <ul>
 <li><p>Fixed small bug in <code>felm</code> where the <code>.fitted</code> and <code>.resid</code> columns were matrices rather than vectors.</p></li>
-<li><p>Added tidiers for <code>rlm</code> (robust linear model) and <code>gam</code> (generalized additive model) objects, including adjustments to “lm” tidiers in order to handle them. See <code><a href="../reference/glance.rlm.html">?rlm_tidiers</a></code> and <code><a href="../reference/tidy.Gam.html">?gam_tidiers</a></code> for more.</p></li>
+<li><p>Added tidiers for <code>rlm</code> (robust linear model) and <code>gam</code> (generalized additive model) objects, including adjustments to “lm” tidiers in order to handle them. See <code><a href="../reference/glance.rlm.html">?rlm_tidiers</a></code> and <code><a href="../reference/tidy.gam.html">?gam_tidiers</a></code> for more.</p></li>
 <li><p>Removed rownames from <code>tidy.cv.glmnet</code> output</p></li>
 </ul>
 </div>

@@ -160,7 +160,7 @@ specify which components to return." />
     <div class="page-header">
     <h1>Tidy a(n) gam object</h1>
     <small class="dont-index">Source: <a href='http://github.com/tidymodels/broom/blob/master/R/mgcv-tidiers.R'><code>R/mgcv-tidiers.R</code></a></small>
-    <div class="hidden name"><code>tidy.Gam.Rd</code></div>
+    <div class="hidden name"><code>tidy.gam.Rd</code></div>
     </div>
 
     <div class="ref-description">
@@ -205,7 +205,7 @@ Defaults to 0.95, which corresponds to a 95 percent confidence interval.</p></td
 signature only. <strong>Cautionary note:</strong> Misspelled arguments will be
 absorbed in <code>...</code>, where they will be ignored. If the misspelled
 argument has a default value, the default value will be used.
-For example, if you pass <code>conf.lvel = 0.9</code>, all computation will
+For example, if you pass <code>conf.level = 0.9</code>, all computation will
 proceed using <code>conf.level = 0.95</code>. Additionally, if you pass
 <code>newdata = my_tibble</code> to an <code><a href='https://rdrr.io/pkg/generics/man/augment.html'>augment()</a></code> method that does not
 accept a <code>newdata</code> argument, it will use the default value for
@@ -221,7 +221,7 @@ than <code>estimate</code> and <code>std.error</code>.</p>
 
     <div class='dont-index'><p><code><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy()</a></code>, <code><a href='https://rdrr.io/pkg/mgcv/man/gam.html'>mgcv::gam()</a></code></p>
 <p>Other mgcv tidiers: 
-<code><a href='glance.Gam.html'>glance.gam</a>()</code></p></div>
+<code><a href='glance.gam.html'>glance.gam</a>()</code></p></div>
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>A <code><a href='https://tibble.tidyverse.org/reference/tibble.html'>tibble::tibble()</a></code> with columns:</p>

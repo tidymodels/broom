@@ -206,7 +206,7 @@ to <code>FALSE</code>.</p></td>
 signature only. <strong>Cautionary note:</strong> Misspelled arguments will be
 absorbed in <code>...</code>, where they will be ignored. If the misspelled
 argument has a default value, the default value will be used.
-For example, if you pass <code>conf.lvel = 0.9</code>, all computation will
+For example, if you pass <code>conf.level = 0.9</code>, all computation will
 proceed using <code>conf.level = 0.95</code>. Additionally, if you pass
 <code>newdata = my_tibble</code> to an <code><a href='https://rdrr.io/pkg/generics/man/augment.html'>augment()</a></code> method that does not
 accept a <code>newdata</code> argument, it will use the default value for
@@ -256,8 +256,8 @@ missingness in the data beforehand.</p>
 #&gt;     fd(dose, parmMat[, 1], parmMat[, 2], parmMat[, 3], parmMat[, 
 #&gt;         4], parmMat[, 5])
 #&gt; }
-#&gt; &lt;bytecode: 0x7fd402f8daa0&gt;
-#&gt; &lt;environment: 0x7fd40c23c410&gt;
+#&gt; &lt;bytecode: 0x7f9b20d5cf30&gt;
+#&gt; &lt;environment: 0x7f9b25c5dc80&gt;
 #&gt; 
 #&gt; $ssfct
 #&gt; function (dframe) 
@@ -276,8 +276,8 @@ missingness in the data beforehand.</p>
 #&gt;     befVal &lt;- c(bVal, x[which.max(y)], 1)
 #&gt;     return(c(befVal[1], cdVal, befVal[2:3])[is.na(fixed)])
 #&gt; }
-#&gt; &lt;bytecode: 0x7fd409745da0&gt;
-#&gt; &lt;environment: 0x7fd40c23d018&gt;
+#&gt; &lt;bytecode: 0x7f9aff1ede08&gt;
+#&gt; &lt;environment: 0x7f9b25c5b040&gt;
 #&gt; 
 #&gt; $names
 #&gt; [1] "b" "c" "d" "e" "f"
@@ -290,8 +290,8 @@ missingness in the data beforehand.</p>
 #&gt;     attr(fd(dose, parmMat[, 1], parmMat[, 2], parmMat[, 3], parmMat[, 
 #&gt;         4], parmMat[, 5]), "gradient")[, notFixed]
 #&gt; }
-#&gt; &lt;bytecode: 0x7fd402f934e0&gt;
-#&gt; &lt;environment: 0x7fd40c23c410&gt;
+#&gt; &lt;bytecode: 0x7f9b20d5e200&gt;
+#&gt; &lt;environment: 0x7f9b25c5dc80&gt;
 #&gt; 
 #&gt; $deriv2
 #&gt; NULL
@@ -317,8 +317,8 @@ missingness in the data beforehand.</p>
 #&gt;     attr(dFct(dose, parmMat[, 1], parmMat[, 2], parmMat[, 3], 
 #&gt;         parmMat[, 4], parmMat[, 5]), "gradient")
 #&gt; }
-#&gt; &lt;bytecode: 0x7fd402f92168&gt;
-#&gt; &lt;environment: 0x7fd40c23c410&gt;
+#&gt; &lt;bytecode: 0x7f9b20d59668&gt;
+#&gt; &lt;environment: 0x7f9b25c5dc80&gt;
 #&gt; 
 #&gt; $edfct
 #&gt; function (parm, respl, reference, type, ...) 
@@ -353,8 +353,8 @@ missingness in the data beforehand.</p>
 #&gt;         parmVec[5]), "gradient")
 #&gt;     return(list(EDp, EDder[notFixed]))
 #&gt; }
-#&gt; &lt;bytecode: 0x7fd402f97ec8&gt;
-#&gt; &lt;environment: 0x7fd40c23c410&gt;
+#&gt; &lt;bytecode: 0x7f9b20d53e48&gt;
+#&gt; &lt;environment: 0x7f9b25c5dc80&gt;
 #&gt; 
 #&gt; $name
 #&gt; [1] "family"
@@ -371,8 +371,8 @@ missingness in the data beforehand.</p>
 #&gt;     parmVec[indexVec] &lt;- parm
 #&gt;     parmVec[parmNo]
 #&gt; }
-#&gt; &lt;bytecode: 0x7fd404c022c8&gt;
-#&gt; &lt;environment: 0x7fd40c279f60&gt;
+#&gt; &lt;bytecode: 0x7f9b23e8e000&gt;
+#&gt; &lt;environment: 0x7f9b25c585f8&gt;
 #&gt; 
 #&gt; $upperAs
 #&gt; function (parm) 
@@ -380,8 +380,8 @@ missingness in the data beforehand.</p>
 #&gt;     parmVec[indexVec] &lt;- parm
 #&gt;     parmVec[parmNo]
 #&gt; }
-#&gt; &lt;bytecode: 0x7fd404c022c8&gt;
-#&gt; &lt;environment: 0x7fd40c27a1c8&gt;
+#&gt; &lt;bytecode: 0x7f9b23e8e000&gt;
+#&gt; &lt;environment: 0x7f9b25c58860&gt;
 #&gt; 
 #&gt; $monoton
 #&gt; [1] NA
