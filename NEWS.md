@@ -12,6 +12,8 @@ response variable in the supplied `newdata` argument. (#897 by @rudeboybert)
 * Added tidier methods for `mlogit` objects (#887 by @gregmacfarlane)
 * Fixed a bug related to `tidy.geeglm()` not being sensitive to the
 `exponentiate` argument (#867)
+* `glance.survfit()` now passes `...` to `summary.survfit()` to allow for
+adjustment of RMST and other measures (#880 by @vincentarelbundock)
 
 # broom 0.7.0
 
