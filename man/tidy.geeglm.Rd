@@ -27,7 +27,7 @@ to \code{FALSE}.}
 signature only. \strong{Cautionary note:} Misspelled arguments will be
 absorbed in \code{...}, where they will be ignored. If the misspelled
 argument has a default value, the default value will be used.
-For example, if you pass \code{conf.lvel = 0.9}, all computation will
+For example, if you pass \code{conf.level = 0.9}, all computation will
 proceed using \code{conf.level = 0.95}. Additionally, if you pass
 \code{newdata = my_tibble} to an \code{\link[=augment]{augment()}} method that does not
 accept a \code{newdata} argument, it will use the default value for
@@ -70,6 +70,12 @@ tidy(geefit, conf.int = TRUE)
 }
 \value{
 A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
-  \item{regresion}{TRUE}
+  \item{conf.high}{Upper bound on the confidence interval for the estimate.}
+  \item{conf.low}{Lower bound on the confidence interval for the estimate.}
+  \item{estimate}{The estimated value of the regression term.}
+  \item{p.value}{The two-sided p-value associated with the observed statistic.}
+  \item{statistic}{The value of a T-statistic to use in a hypothesis that the regression term is non-zero.}
+  \item{std.error}{The standard error of the regression term.}
+  \item{term}{The name of the regression term.}
 
 }

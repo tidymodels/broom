@@ -504,7 +504,7 @@ Depends:
     R (>= 3.1)
 Imports:
     backports,
-    dplyr,
+    dplyr (>= 1.0.0),
     ellipsis,
     generics (>= 0.0.2),
     glue,
@@ -513,7 +513,7 @@ Imports:
     rlang,
     stringr,
     tibble (>= 3.0.0),
-    tidyr
+    tidyr (>= 1.0.0)
 Suggests:
     AER,
     akima,
@@ -562,6 +562,7 @@ Suggests:
     lsmeans,
     maps,
     maptools,
+    margins,
     MASS,
     Matrix,
     mclogit,
@@ -570,6 +571,7 @@ Suggests:
     metafor,
     mfx,
     mgcv,
+    mlogit,
     modeldata,
     modeltests,
     muhaz,
@@ -600,12 +602,14 @@ Suggests:
     testthat (>= 2.1.0),
     tseries,
     zoo
+Remotes:
+  alexpghayes/modeltests
 VignetteBuilder:
     knitr
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.1.0.9000
+RoxygenNote: 7.1.1
 Language: en-US
 Collate:
     'aaa-documentation-helper.R'
@@ -653,6 +657,7 @@ Collate:
     'lmodel2-tidiers.R'
     'lmtest-tidiers.R'
     'maps-tidiers.R'
+    'margins-tidiers.R'
     'mass-fitdistr-tidiers.R'
     'mass-polr-tidiers.R'
     'mass-ridgelm-tidiers.R'
@@ -664,6 +669,7 @@ Collate:
     'mediate-tidiers.R'
     'mfx-tidiers.R'
     'mgcv-tidiers.R'
+    'mlogit-tidiers.R'
     'muhaz-tidiers.R'
     'multcomp-tidiers.R'
     'nnet-tidiers.R'

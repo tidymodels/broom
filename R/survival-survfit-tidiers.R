@@ -87,6 +87,9 @@ tidy.survfit <- function(x, ...) {
 #' @templateVar class survfit
 #' @template title_desc_glance
 #'
+#' @param ... Additional arguments passed to [survival::summary()]. Important
+#'   arguments include `rmean`.
+#' 
 #' @inherit tidy.survfit params examples
 #'
 #' @evalRd return_glance(

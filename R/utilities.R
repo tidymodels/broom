@@ -358,10 +358,16 @@ add_hat_sigma_cols <- function(df, x, infl) {
 # deal with rownames and convert to tibble as necessary
 # add .se.fit column if present
 # be *incredibly* careful that the ... are passed correctly
-augment_newdata <- function(x, data, newdata, .se_fit, ...) {
+augment_newdata <- function(x, data, newdata, .se_fit, interval = NULL, ...) {
   passed_newdata <- !is.null(newdata)
   df <- if (passed_newdata) newdata else data
   df <- as_augment_tibble(df)
+  # interval <- match.arg(interval)
+  # Check if response variable is in newdata:
+  response_var_in_newdata <- x$call %>%
+    all.vars() %>%
+    .[[1]] %>%
+    is.element(names(df))
 
   # NOTE: It is important use predict(x, newdata = newdata) rather than
   # predict(x, newdata = df). This is to avoid an edge case breakage
@@ -379,20 +385,46 @@ augment_newdata <- function(x, data, newdata, .se_fit, ...) {
   # an na.pass argument
   
   if (.se_fit) {
-    pred_obj <- predict(x, newdata = newdata, na.action = na.pass, se.fit = TRUE, ...)
-    df$.fitted <- pred_obj$fit %>% unname()
-
+    pred_obj <- predict(x, newdata = newdata, na.action = na.pass, se.fit = .se_fit, interval = interval, ...)
+    if (is.null(interval) || interval=="none") {
+      df$.fitted <- pred_obj$fit %>% unname()
+    } else {
+      df$.fitted <- pred_obj$fit[, "fit"]
+      df$.conf.low <- pred_obj$fit[, "lwr"]
+      df$.conf.high <- pred_obj$fit[, "upr"]
+    }
+    
     # a couple possible names for the standard error element of the list
     # se.fit: lm, glm
     # se: loess
     se_idx <- which(names(pred_obj) %in% c("se.fit", "se"))
     df$.se.fit <- pred_obj[[se_idx]]
+    
+  } else if (!is.null(interval) && interval!="none") {
+    pred_obj <- predict(x, newdata = newdata, na.action = na.pass, se.fit = FALSE, interval = interval, ...)
+    df$.fitted <- pred_obj[, "fit"]
+    df$.conf.low <- pred_obj[, "lwr"]
+    df$.conf.high <- pred_obj[, "upr"]
   } else if (passed_newdata) {
-    df$.fitted <- predict(x, newdata = newdata, na.action = na.pass, ...) %>% 
-      unname()
+    if (is.null(interval) || interval=="none") {
+      df$.fitted <- predict(x, newdata = newdata, na.action = na.pass, ...) %>% 
+        unname()
+    } else {
+      pred_obj <- predict(x, newdata = newdata, na.action = na.pass, interval = interval, ...)
+      df$.fitted <- pred_obj$fit[, "fit"]
+      df$.conf.low <- pred_obj$fit[, "lwr"]
+      df$.conf.high <- pred_obj$fit[, "upr"]
+    }
   } else {
-    df$.fitted <- predict(x, na.action = na.pass, ...) %>% 
-      unname()
+    if (is.null(interval) || interval=="none") {
+      df$.fitted <- predict(x, na.action = na.pass, ...) %>% 
+        unname()
+    } else {
+      pred_obj <- predict(x, newdata = newdata, na.action = na.pass, interval = interval, ...)
+      df$.fitted <- pred_obj$fit[, "fit"]
+      df$.conf.low <- pred_obj$fit[, "lwr"]
+      df$.conf.high <- pred_obj$fit[, "upr"]
+    }
   }
 
   resp <- safe_response(x, df)
@@ -455,7 +487,9 @@ globalVariables(
     ".rownames",
     ".tau",
     "aic",
+    "alternative",
     "bic",
+    "chosen",
     "ci.lower",
     "ci.upper",
     "column",
@@ -470,6 +504,7 @@ globalVariables(
     "cov.r",
     "cutoffs",
     "data",
+    "delete.response",
     "dffits",
     "dfbetas",
     "df.residual",
@@ -483,6 +518,7 @@ globalVariables(
     "group1",
     "group2",
     "hat",
+    "idx",
     "index",
     "Intercept",
     "item1",
@@ -491,6 +527,7 @@ globalVariables(
     "lavInspect",
     "lambda",
     "level",
+    "linpred",
     "lhs",
     "lm",
     "loading",
@@ -508,6 +545,7 @@ globalVariables(
     "percent",
     "P-perm (1-tailed)",
     "Pr(Chi)",
+    "probabilities",
     "pvalue",
     "QE.del",
     "rd_roclet",
