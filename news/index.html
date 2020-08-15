@@ -168,6 +168,8 @@
 <li>Add “interval” argument to <code><a href="../reference/augment.lm.html">augment.lm()</a></code> for confidence and prediction bands. (<a href='http://github.com/tidymodels/broom/issues/908'>#908</a> by <a href='http://github.com/grantmcdermott'>@grantmcdermott</a>)</li>
 <li>Added tidier methods for <code>mlogit</code> objects (<a href='http://github.com/tidymodels/broom/issues/887'>#887</a> by <a href='http://github.com/gregmacfarlane'>@gregmacfarlane</a>)</li>
 <li>Fixed a bug related to <code><a href="../reference/tidy.geeglm.html">tidy.geeglm()</a></code> not being sensitive to the <code>exponentiate</code> argument (<a href='http://github.com/tidymodels/broom/issues/867'>#867</a>)</li>
+<li>
+<code><a href="../reference/glance.survfit.html">glance.survfit()</a></code> now passes <code>...</code> to <code>summary.survfit()</code> to allow for adjustment of RMST and other measures (<a href='http://github.com/tidymodels/broom/issues/880'>#880</a> by <a href='http://github.com/vincentarelbundock'>@vincentarelbundock</a>)</li>
 </ul>
 </div>
     <div id="broom-070" class="section level1">
