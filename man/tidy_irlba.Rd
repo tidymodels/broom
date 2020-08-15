@@ -49,9 +49,11 @@ If \code{matrix} is \code{"d"}, \code{"eigenvalues"} or \code{"pcs"}, the column
 
 \item{\code{PC}}{An integer vector indicating the principal component}
 \item{\code{std.dev}}{Standard deviation explained by this PC}
-\item{\code{percent}}{Fraction of variation explained by this component}
+\item{\code{percent}}{Fraction of variation explained by this component
+(a numeric value between 0 and 1).}
 \item{\code{cumulative}}{Cumulative fraction of variation explained by
-principle components up to this component.}
+principle components up to this component (a numeric value between 0 and
+1).}
 }
 \description{
 Broom tidies a number of lists that are effectively S3
