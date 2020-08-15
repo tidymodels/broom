@@ -44,9 +44,11 @@
 #'
 #'   \item{`PC`}{An integer vector indicating the principal component}
 #'   \item{`std.dev`}{Standard deviation explained by this PC}
-#'   \item{`percent`}{Fraction of variation explained by this component}
+#'   \item{`percent`}{Fraction of variation explained by this component
+#'     (a numeric value between 0 and 1).}
 #'   \item{`cumulative`}{Cumulative fraction of variation explained by
-#'     principle components up to this component.}
+#'     principle components up to this component (a numeric value between 0 and
+#'     1).}
 #'
 #' @details See https://stats.stackexchange.com/questions/134282/relationship-between-svd-and-pca-how-to-use-svd-to-perform-pca
 #'   for information on how to interpret the various tidied matrices. Note
