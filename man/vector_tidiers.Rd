@@ -45,7 +45,8 @@ Other deprecated:
 \code{\link{summary_tidiers}},
 \code{\link{tidy.density}()},
 \code{\link{tidy.dist}()},
-\code{\link{tidy.ftable}()}
+\code{\link{tidy.ftable}()},
+\code{\link{tidy.gamlss}()}
 
 Other deprecated: 
 \code{\link{bootstrap}()},
@@ -56,7 +57,8 @@ Other deprecated:
 \code{\link{summary_tidiers}},
 \code{\link{tidy.density}()},
 \code{\link{tidy.dist}()},
-\code{\link{tidy.ftable}()}
+\code{\link{tidy.ftable}()},
+\code{\link{tidy.gamlss}()}
 
 Other deprecated: 
 \code{\link{bootstrap}()},
@@ -67,6 +69,7 @@ Other deprecated:
 \code{\link{summary_tidiers}},
 \code{\link{tidy.density}()},
 \code{\link{tidy.dist}()},
-\code{\link{tidy.ftable}()}
+\code{\link{tidy.ftable}()},
+\code{\link{tidy.gamlss}()}
 }
 \concept{deprecated}

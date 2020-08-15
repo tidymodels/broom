@@ -27,8 +27,12 @@
 #' )
 #'
 #' tidy(g)
+#' @family deprecated
 #' @export
 tidy.gamlss <- function(x, ...) {
+  .Deprecated(
+    msg = "gamlss tidiers are deprecated and will be removed in an upcoming release of broom. These tidiers are now maintained in the broom.mixed package."
+  )
 
   # use capture.output to prevent summary from being printed to screen
   utils::capture.output(s <- summary(x, type = "qr"))

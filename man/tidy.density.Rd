@@ -36,6 +36,7 @@ Other deprecated:
 \code{\link{summary_tidiers}},
 \code{\link{tidy.dist}()},
 \code{\link{tidy.ftable}()},
+\code{\link{tidy.gamlss}()},
 \code{\link{tidy.numeric}()}
 }
 \concept{deprecated}
