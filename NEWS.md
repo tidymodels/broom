@@ -7,6 +7,7 @@ To be released as broom 0.7.1.
 didn't contain the response variable—augment methods no longer expect the 
 response variable in the supplied `newdata` argument. (#897 by @rudeboybert)
 * Added tidier methods for `mlogit` objects (#887 by @gregmacfarlane)
+* Fixed a bug related to `tidy.prcomp()` assigning the wrong PC labels from "loadings" and "scores" matrices (#910 by @tavareshugo)
 
 # broom 0.7.0
 
