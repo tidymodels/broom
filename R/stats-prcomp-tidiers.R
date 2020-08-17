@@ -113,12 +113,14 @@ tidy.prcomp <- function(x, matrix = "u", ...) {
       tidyr::pivot_longer(cols = -"column", 
                           names_to = "PC", 
                           values_to = "value")
+    if (is.null(rownames(x$rotation))) ret$column <- as.integer(ret$column)
   } else if (matrix %in% c("x", "samples", "u", "scores")) {
     ret <- x$x %>% 
       tibble::as_tibble(rownames = "row") %>% 
       tidyr::pivot_longer(cols = -"row", 
                           names_to = "PC", 
                           values_to = "value")
+    if (is.null(rownames(x$x))) ret$row <- as.integer(ret$row)
   }
 
   ## change the PC to a numeric
