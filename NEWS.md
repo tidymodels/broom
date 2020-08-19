@@ -14,6 +14,9 @@ response variable in the supplied `newdata` argument. (#897 by @rudeboybert)
 `exponentiate` argument (#867)
 * `glance.survfit()` now passes `...` to `summary.survfit()` to allow for
 adjustment of RMST and other measures (#880 by @vincentarelbundock)
+* Fixed `augment.fixest()` returning residuals in the `.fitted` column. The
+method also now takes a `type.residuals` argument and defaults to the same 
+`type.predict` argument as the `fixest` `predict()` method. (#877 by @karldw)
 
 # broom 0.7.0
 
