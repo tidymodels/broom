@@ -340,11 +340,13 @@ passed on to <code><a href='https://rdrr.io/pkg/emmeans/man/summary.emmGrid.html
   <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_path.html'>geom_line</a></span>() +
   <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_linerange.html'>geom_errorbar</a></span>(<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='kw'>ymin</span> <span class='kw'>=</span> <span class='no'>conf.low</span>, <span class='kw'>ymax</span> <span class='kw'>=</span> <span class='no'>conf.high</span>))</div><div class='img'><img src='tidy.lsmobj-2.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'># joint_tests</span>
-<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='fu'><a href='https://rdrr.io/pkg/emmeans/man/joint_tests.html'>joint_tests</a></span>(<span class='no'>oranges_lm1</span>))</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 2 x 5</span><span>
-#&gt;   term  num.df den.df statistic p.value
-#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span> day        5     23      4.88 0.003</span><span style='text-decoration: underline;'>46</span><span>
-#&gt; </span><span style='color: #555555;'>2</span><span> store      5     23      2.52 0.058</span><span style='text-decoration: underline;'>3</span><span> </div></span></pre>
+<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='fu'><a href='https://rdrr.io/pkg/emmeans/man/joint_tests.html'>joint_tests</a></span>(<span class='no'>oranges_lm1</span>))</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 4 x 5</span><span>
+#&gt;   term   num.df den.df statistic   p.value
+#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #555555;'>1</span><span> price1      1     23     30.3  0.000</span><span style='text-decoration: underline;'>013</span><span>4
+#&gt; </span><span style='color: #555555;'>2</span><span> price2      1     23      2.23 0.149    
+#&gt; </span><span style='color: #555555;'>3</span><span> day         5     23      4.88 0.003</span><span style='text-decoration: underline;'>46</span><span>  
+#&gt; </span><span style='color: #555555;'>4</span><span> store       5     23      2.52 0.058</span><span style='text-decoration: underline;'>3</span><span>   </div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
