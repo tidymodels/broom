@@ -130,8 +130,10 @@ tidy_fixest <- function(x, conf.int = conf.int, conf.level = conf.level, ...) {
 #' @template param_data
 #' @template param_newdata
 #' @param type.predict Passed to [`predict.fixest`][fixest::predict.fixest()]
-#'   `type` argument. Defaults to `"link"` (like `glm.predict`).
-#'
+#'   `type` argument. Defaults to `"link"` (like `predict.glm`).
+#' @param type.residuals Passed to [`predict.fixest`][fixest::residuals.fixest()]
+#'   `type` argument. Defaults to `"response"` (like `residuals.lm`, but unlike
+#'   `residuals.glm`).
 #' @evalRd return_augment()
 #'
 #' @note Important note: `fixest` models do not include a copy of the input
@@ -143,14 +145,18 @@ tidy_fixest <- function(x, conf.int = conf.int, conf.level = conf.level, ...) {
 #' @export
 #' @family fixest tidiers
 #' @seealso [augment()], [fixest::feglm()], [fixest::femlm()], [fixest::feols()]
-augment.fixest <- function(x, data = NULL, newdata = NULL, 
-                           type.predict = "response", ...) {
+augment.fixest <- function(x, data = NULL, newdata = NULL,
+    type.predict = c("link", "response"),
+    type.residuals = c("response", "deviance", "pearson", "working"),
+    ...) {
   if (!x$method %in% c("feols", "feglm", "femlm")) {
     stop("augment is only supported for fixest models estimated with ",
       "feols, feglm, or femlm\n",
       "  (supplied model used ", x$method, ")"
     )
   }
+  type.predict <- match.arg(type.predict)
+  type.residuals <- match.arg(type.residuals)
 
   if (is.null(newdata)) {
     df <- data
@@ -165,11 +171,11 @@ augment.fixest <- function(x, data = NULL, newdata = NULL,
     # use existing data
     df <- mutate(df,
       .fitted = predict(x, type = type.predict),
-      .resid = residuals(x)
+      .resid = residuals(x, type = type.residuals)
     )
   } else {
-    #
-    df$.fitted <- residuals(x, type = type.predict, newdata = newdata)
+    # With new data, only provide predictions
+    df$.fitted <- predict(x, type = type.predict, newdata = newdata)
   }
   df
 }
@@ -179,8 +185,10 @@ augment.fixest <- function(x, data = NULL, newdata = NULL,
 #'
 #' @inherit tidy.fixest params examples
 #'
-#' @note The columns of the result depend on the type of model estimated.
-#'
+#' @note All columns listed below will be returned, but some will be `NA`,
+#' depending on the type of model estimated. `sigma`, `r.squared`,
+#' `adj.r.squared`, and `within.r.squared` will be NA for any model other than
+#' `feols`. `pseudo.r.squared` will be NA for `feols`.
 #' @evalRd return_glance(
 #'   "r.squared",
 #'   "adj.r.squared",
