@@ -72,20 +72,3 @@ Other ivreg tidiers:
 \code{\link{glance.ivreg}()}
 }
 \concept{ivreg tidiers}
-\value{
-A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
-  \item{conf.high}{Upper bound on the confidence interval for the estimate.}
-  \item{conf.low}{Lower bound on the confidence interval for the estimate.}
-  \item{estimate}{The estimated value of the regression term.}
-  \item{p.value}{The two-sided p-value associated with the observed statistic.}
-  \item{p.value.Sargan}{p-value for Sargan test of overidentifying restrictions.}
-  \item{p.value.weakinst}{p-value for weak instruments test.}
-  \item{p.value.Wu.Hausman}{p-value for Wu-Hausman weak instruments test for endogeneity.}
-  \item{statistic}{The value of a T-statistic to use in a hypothesis that the regression term is non-zero.}
-  \item{statistic.Sargan}{Statistic for Sargan test of overidentifying restrictions.}
-  \item{statistic.weakinst}{Statistic for Wu-Hausman test.}
-  \item{statistic.Wu.Hausman}{Statistic for Wu-Hausman weak instruments test for endogeneity.}
-  \item{std.error}{The standard error of the regression term.}
-  \item{term}{The name of the regression term.}
-
-}

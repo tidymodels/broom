@@ -17,7 +17,7 @@ if \code{conf.int = TRUE}. Must be strictly greater than 0 and less than 1.
 Defaults to 0.95, which corresponds to a 95 percent confidence interval.}
 
 \item{...}{Additional arguments passed to \code{\link[emmeans:summary.emmGrid]{emmeans::summary.emmGrid()}} or
-\code{\link[lsmeans:ref.grid]{lsmeans::summary.ref.grid()}}. \strong{Cautionary note}: misspecified arguments
+\code{\link[lsmeans:summary.ref.grid]{lsmeans::summary.ref.grid()}}. \strong{Cautionary note}: misspecified arguments
 may be silently ignored!}
 }
 \description{
@@ -34,7 +34,7 @@ mean, and one column for each combination of factors. When the input is a
 contrast, each row will contain one estimated contrast.
 
 There are a large number of arguments that can be
-passed on to \code{\link[emmeans:summary.emmGrid]{emmeans::summary.emmGrid()}} or \code{\link[lsmeans:ref.grid]{lsmeans::summary.ref.grid()}}.
+passed on to \code{\link[emmeans:summary.emmGrid]{emmeans::summary.emmGrid()}} or \code{\link[lsmeans:summary.ref.grid]{lsmeans::summary.ref.grid()}}.
 }
 \examples{
 
@@ -89,14 +89,3 @@ Other emmeans tidiers:
 \code{\link{tidy.summary_emm}()}
 }
 \concept{emmeans tidiers}
-\value{
-A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
-  \item{conf.high}{Upper bound on the confidence interval for the estimate.}
-  \item{conf.low}{Lower bound on the confidence interval for the estimate.}
-  \item{df}{Degrees of freedom used by this term in the model.}
-  \item{p.value}{The two-sided p-value associated with the observed statistic.}
-  \item{std.error}{The standard error of the regression term.}
-  \item{estimate}{Expected marginal mean}
-  \item{statistic}{T-ratio statistic}
-
-}

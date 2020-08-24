@@ -7,7 +7,7 @@
 \method{augment}{rma}(x, ...)
 }
 \arguments{
-\item{x}{An \code{rma} object such as those created by \code{\link[metafor:rma.uni]{metafor::rma()}},
+\item{x}{An \code{rma} object such as those created by \code{\link[metafor:rma]{metafor::rma()}},
 \code{\link[metafor:rma.uni]{metafor::rma.uni()}}, \code{\link[metafor:rma.glmm]{metafor::rma.glmm()}}, \code{\link[metafor:rma.mh]{metafor::rma.mh()}},
 \code{\link[metafor:rma.mv]{metafor::rma.mv()}}, or \code{\link[metafor:rma.peto]{metafor::rma.peto()}}.}
 
@@ -79,18 +79,4 @@ df <-
 meta_analysis <- rma(yi, vi, data = df, method = "EB")
 
 augment(meta_analysis)
-}
-\value{
-A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
-  \item{.conf.high}{Upper bound on confidence interval for fitted values.}
-  \item{.conf.low}{Lower bound on confidence interval for fitted values.}
-  \item{.cred.high}{Upper bound on credible interval for fitted values.}
-  \item{.cred.low}{Lower bound on credible interval for fitted values.}
-  \item{.fitted}{Fitted or predicted value.}
-  \item{.moderator}{In meta-analysis, the moderators used to calculate the predicted values.}
-  \item{.moderator.level}{In meta-analysis, the level of the moderators used to calculate the predicted values.}
-  \item{.resid}{The difference between observed and fitted values.}
-  \item{.se.fit}{Standard errors of fitted values.}
-  \item{.observed}{The observed values for the individual studies}
-
 }

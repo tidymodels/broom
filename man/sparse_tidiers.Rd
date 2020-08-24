@@ -32,10 +32,3 @@ a three-column data frame, row, column, and value (with
 zeros missing). If there are row names or column names,
 use those, otherwise use indices
 }
-\value{
-A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
-  \item{row}{Row ID of the original observation.}
-  \item{value}{The value/estimate of the component. Results from data reshaping.}
-  \item{column}{Column name in the original matrix.}
-
-}

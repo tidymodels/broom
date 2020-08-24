@@ -80,16 +80,3 @@ Other factanal tidiers:
 \code{\link{tidy.factanal}()}
 }
 \concept{factanal tidiers}
-\value{
-A \code{\link[tibble:tibble]{tibble::tibble()}} with exactly one row and columns:
-  \item{converged}{Logical indicating if the model fitting procedure was succesful and converged.}
-  \item{df}{Degrees of freedom used by the model.}
-  \item{method}{Which method was used.}
-  \item{n}{The total number of observations.}
-  \item{n.factors}{The number of fitted factors.}
-  \item{nobs}{Number of observations used.}
-  \item{p.value}{P-value corresponding to the test statistic.}
-  \item{statistic}{Test statistic.}
-  \item{total.variance}{Total cumulative proportion of variance accounted for by all factors.}
-
-}

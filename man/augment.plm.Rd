@@ -94,9 +94,3 @@ Other plm tidiers:
 \code{\link{tidy.plm}()}
 }
 \concept{plm tidiers}
-\value{
-A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
-  \item{.fitted}{Fitted or predicted value.}
-  \item{.resid}{The difference between observed and fitted values.}
-
-}

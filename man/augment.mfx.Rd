@@ -78,8 +78,8 @@ the \code{data} argument will be ignored.}
 \item{type.predict}{Passed to \code{\link[stats:predict.glm]{stats::predict.glm()}} \code{type} argument.
 Defaults to \code{"link"}.}
 
-\item{type.residuals}{Passed to \code{\link[stats:glm.summaries]{stats::residuals.glm()}} and
-to \code{\link[stats:influence.measures]{stats::rstandard.glm()}} \code{type} arguments. Defaults to \code{"deviance"}.}
+\item{type.residuals}{Passed to \code{\link[stats:residuals.glm]{stats::residuals.glm()}} and
+to \code{\link[stats:rstandard.glm]{stats::rstandard.glm()}} \code{type} arguments. Defaults to \code{"deviance"}.}
 
 \item{se_fit}{Logical indicating whether or not a \code{.se.fit} column should be
 added to the augmented output. For some models, this calculation can be
@@ -173,14 +173,3 @@ Other mfx tidiers:
 \code{\link{tidy.mfx}()}
 }
 \concept{mfx tidiers}
-\value{
-A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
-  \item{.cooksd}{Cooks distance.}
-  \item{.fitted}{Fitted or predicted value.}
-  \item{.hat}{Diagonal of the hat matrix.}
-  \item{.resid}{The difference between observed and fitted values.}
-  \item{.se.fit}{Standard errors of fitted values.}
-  \item{.sigma}{Estimated residual standard deviation when corresponding observation is dropped from model.}
-  \item{.std.resid}{Standardised residuals.}
-
-}

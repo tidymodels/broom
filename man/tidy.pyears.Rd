@@ -82,11 +82,3 @@ Other survival tidiers:
 }
 \concept{pyears tidiers}
 \concept{survival tidiers}
-\value{
-A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
-  \item{expected}{Expected number of events.}
-  \item{pyears}{Person-years of exposure.}
-  \item{n}{number of subjects contributing time}
-  \item{event}{observed number of events}
-
-}

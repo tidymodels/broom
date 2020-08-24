@@ -7,8 +7,8 @@
 \method{augment}{sarlm}(x, data = x$X, ...)
 }
 \arguments{
-\item{x}{An object of object returned from \code{\link[spatialreg:ML_models]{spatialreg::lagsarlm()}}
-or \code{\link[spatialreg:ML_models]{spatialreg::errorsarlm()}}.}
+\item{x}{An object of object returned from \code{\link[spatialreg:lagsarlm]{spatialreg::lagsarlm()}}
+or \code{\link[spatialreg:errorsarlm]{spatialreg::errorsarlm()}}.}
 
 \item{data}{Ignored, but included for internal consistency. See the details
 below.}
@@ -108,9 +108,3 @@ Other spatialreg tidiers:
 \code{\link{tidy.sarlm}()}
 }
 \concept{spatialreg tidiers}
-\value{
-A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
-  \item{.fitted}{Fitted or predicted value.}
-  \item{.resid}{The difference between observed and fitted values.}
-
-}

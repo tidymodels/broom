@@ -111,12 +111,3 @@ Other gmm tidiers:
 \code{\link{tidy.gmm}()}
 }
 \concept{gmm tidiers}
-\value{
-A \code{\link[tibble:tibble]{tibble::tibble()}} with exactly one row and columns:
-  \item{df}{Degrees of freedom used by the model.}
-  \item{df.residual}{Residual degrees of freedom.}
-  \item{nobs}{Number of observations used.}
-  \item{p.value}{P-value corresponding to the test statistic.}
-  \item{statistic}{Test statistic.}
-
-}

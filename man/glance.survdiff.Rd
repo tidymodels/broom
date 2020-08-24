@@ -78,10 +78,3 @@ Other survival tidiers:
 }
 \concept{survdiff tidiers}
 \concept{survival tidiers}
-\value{
-A \code{\link[tibble:tibble]{tibble::tibble()}} with exactly one row and columns:
-  \item{df}{Degrees of freedom used by the model.}
-  \item{p.value}{P-value corresponding to the test statistic.}
-  \item{statistic}{Test statistic.}
-
-}

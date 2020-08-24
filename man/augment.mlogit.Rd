@@ -87,10 +87,3 @@ Other mlogit tidiers:
 \code{\link{tidy.mlogit}()}
 }
 \concept{mlogit tidiers}
-\value{
-A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
-  \item{.fitted}{Fitted or predicted value.}
-  \item{.probability}{Class probability of modal class.}
-  \item{.resid}{The difference between observed and fitted values.}
-
-}

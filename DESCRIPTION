@@ -486,7 +486,7 @@ Authors@R:
       person(given = "Matthieu",
              family = "Stigler",
              role = "ctb",
-             email = "Matthieu.Stigler@gmail.com"))
+             email = "Matthieu.Stigler@gmail.com"),
 	  person(given = "R. Willem",
              family = "Vervoort",
              role = "ctb",

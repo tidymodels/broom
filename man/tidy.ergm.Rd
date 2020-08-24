@@ -22,7 +22,7 @@ the coefficient estimates. This is typical for logistic and multinomial
 regressions, but a bad idea if there is no log or logit link. Defaults
 to \code{FALSE}.}
 
-\item{...}{Additional arguments to pass to \code{\link[ergm:summary.formula]{ergm::summary()}}.
+\item{...}{Additional arguments to pass to \code{\link[ergm:summary]{ergm::summary()}}.
 \strong{Cautionary note}: Mispecified arguments may be silently ignored.}
 }
 \value{
@@ -77,7 +77,7 @@ Models for Networks. \emph{Journal of Statistical Software}, 24(3).
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[ergm:ergm]{ergm::ergm()}}, \code{\link[ergm:control.ergm]{ergm::control.ergm()}},
-\code{\link[ergm:summary.formula]{ergm::summary()}}
+\code{\link[ergm:summary]{ergm::summary()}}
 
 Other ergm tidiers: 
 \code{\link{glance.ergm}()}

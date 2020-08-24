@@ -88,7 +88,7 @@ data, so you must provide it manually.
 
 augment.fixest only works for \code{\link[fixest:feols]{fixest::feols()}}, \code{\link[fixest:feglm]{fixest::feglm()}}, and
 \code{\link[fixest:femlm]{fixest::femlm()}} models. It does not work with results from
-\code{\link[fixest:femlm]{fixest::fenegbin()}}, \code{\link[fixest:feNmlm]{fixest::feNmlm()}}, or \code{\link[fixest:feglm]{fixest::fepois()}}.
+\code{\link[fixest:fenegbin]{fixest::fenegbin()}}, \code{\link[fixest:feNmlm]{fixest::feNmlm()}}, or \code{\link[fixest:fepois]{fixest::fepois()}}.
 }
 \examples{
 \donttest{
@@ -118,13 +118,7 @@ augment(gravity_pois, trade)
 \seealso{
 \code{\link[=augment]{augment()}}, \code{\link[fixest:feglm]{fixest::feglm()}}, \code{\link[fixest:femlm]{fixest::femlm()}}, \code{\link[fixest:feols]{fixest::feols()}}
 
-Other fixest tidiers:
+Other fixest tidiers: 
 \code{\link{tidy.fixest}()}
 }
 \concept{fixest tidiers}
-\value{
-A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
-  \item{.fitted}{Fitted or predicted value.}
-  \item{.resid}{The difference between observed and fitted values.}
-
-}

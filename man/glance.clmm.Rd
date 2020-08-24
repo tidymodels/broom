@@ -70,12 +70,3 @@ Other ordinal tidiers:
 \code{\link{tidy.svyolr}()}
 }
 \concept{ordinal tidiers}
-\value{
-A \code{\link[tibble:tibble]{tibble::tibble()}} with exactly one row and columns:
-  \item{AIC}{Akaike's Information Criterion for the model.}
-  \item{BIC}{Bayesian Information Criterion for the model.}
-  \item{edf}{The effective degrees of freedom.}
-  \item{logLik}{The log-likelihood of the model. [stats::logLik()] may be a useful reference.}
-  \item{nobs}{Number of observations used.}
-
-}

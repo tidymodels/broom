@@ -21,7 +21,7 @@ interval in the tidied output. Defaults to \code{FALSE}.}
 if \code{conf.int = TRUE}. Must be strictly greater than 0 and less than 1.
 Defaults to 0.95, which corresponds to a 95 percent confidence interval.}
 
-\item{...}{Additional arguments passed to \code{\link[quantreg:summary.rq]{quantreg::summary.rqs()}}}
+\item{...}{Additional arguments passed to \code{\link[quantreg:summary.rqs]{quantreg::summary.rqs()}}}
 }
 \description{
 Tidy summarizes information about the components of a model.
@@ -50,15 +50,3 @@ Other quantreg tidiers:
 \code{\link{tidy.rq}()}
 }
 \concept{quantreg tidiers}
-\value{
-A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
-  \item{conf.high}{Upper bound on the confidence interval for the estimate.}
-  \item{conf.low}{Lower bound on the confidence interval for the estimate.}
-  \item{estimate}{The estimated value of the regression term.}
-  \item{p.value}{The two-sided p-value associated with the observed statistic.}
-  \item{statistic}{The value of a T-statistic to use in a hypothesis that the regression term is non-zero.}
-  \item{std.error}{The standard error of the regression term.}
-  \item{term}{The name of the regression term.}
-  \item{quantile}{Linear conditional quantile.}
-
-}

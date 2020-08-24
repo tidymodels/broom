@@ -8,8 +8,8 @@
 \method{tidy}{sarlm}(x, conf.int = FALSE, conf.level = 0.95, ...)
 }
 \arguments{
-\item{x}{An object of object returned from \code{\link[spatialreg:ML_models]{spatialreg::lagsarlm()}}
-or \code{\link[spatialreg:ML_models]{spatialreg::errorsarlm()}}.}
+\item{x}{An object of object returned from \code{\link[spatialreg:lagsarlm]{spatialreg::lagsarlm()}}
+or \code{\link[spatialreg:errorsarlm]{spatialreg::errorsarlm()}}.}
 
 \item{conf.int}{Logical indicating whether or not to include a confidence
 interval in the tidied output. Defaults to \code{FALSE}.}
@@ -63,22 +63,11 @@ augment(crime_sac)
 
 }
 \seealso{
-\code{\link[=tidy]{tidy()}}, \code{\link[spatialreg:ML_models]{spatialreg::lagsarlm()}}, \code{\link[spatialreg:ML_models]{spatialreg::errorsarlm()}},
-\code{\link[spatialreg:ML_models]{spatialreg::sacsarlm()}}
+\code{\link[=tidy]{tidy()}}, \code{\link[spatialreg:lagsarlm]{spatialreg::lagsarlm()}}, \code{\link[spatialreg:errorsarlm]{spatialreg::errorsarlm()}},
+\code{\link[spatialreg:sacsarlm]{spatialreg::sacsarlm()}}
 
 Other spatialreg tidiers: 
 \code{\link{augment.sarlm}()},
 \code{\link{glance.sarlm}()}
 }
 \concept{spatialreg tidiers}
-\value{
-A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
-  \item{conf.high}{Upper bound on the confidence interval for the estimate.}
-  \item{conf.low}{Lower bound on the confidence interval for the estimate.}
-  \item{estimate}{The estimated value of the regression term.}
-  \item{p.value}{The two-sided p-value associated with the observed statistic.}
-  \item{statistic}{The value of a T-statistic to use in a hypothesis that the regression term is non-zero.}
-  \item{std.error}{The standard error of the regression term.}
-  \item{term}{The name of the regression term.}
-
-}

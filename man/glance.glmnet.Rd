@@ -79,10 +79,3 @@ Other glmnet tidiers:
 \code{\link{tidy.glmnet}()}
 }
 \concept{glmnet tidiers}
-\value{
-A \code{\link[tibble:tibble]{tibble::tibble()}} with exactly one row and columns:
-  \item{nobs}{Number of observations used.}
-  \item{npasses}{Total passes over the data across all lambda values.}
-  \item{nulldev}{Null deviance.}
-
-}
