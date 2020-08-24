@@ -1,6 +1,7 @@
 # broom 0.7.0.9001
 
 To be released as broom 0.7.1.
+* Added univariate zoo series capability back into `tidy.zoo()` bugfix for #915
 
 * Extended the `glance.aov()` method to include an `r.squared` column!
 * Fixed `newdata` warning message in `augment.*()` output when the `newdata`
