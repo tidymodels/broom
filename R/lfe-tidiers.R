@@ -5,8 +5,9 @@
 #' @template param_confint
 #' @param fe Logical indicating whether or not to include estimates of
 #'   fixed effects. Defaults to `FALSE`.
-#' @param robust Logical indicating robust or clustered standard errors should
-#'   be used. See lfe::summary.felm for details. Defaults to `FALSE`.
+#' @param robust Logical indicating robust or clustered SEs should be used.
+#'   Following lfe::summary.felm, it defaults to `FALSE` when there is no
+#'   clustering variable, and defaults to `TRUE` when there is one. 
 #' @template param_unused_dots
 #'
 #' @evalRd return_tidy(regression = TRUE)
@@ -46,7 +47,7 @@
 #' @aliases felm_tidiers lfe_tidiers
 #' @family felm tidiers
 #' @seealso [tidy()], [lfe::felm()]
-tidy.felm <- function(x, conf.int = FALSE, conf.level = .95, fe = FALSE, robust = FALSE, ...) {
+tidy.felm <- function(x, conf.int = FALSE, conf.level = .95, fe = FALSE, robust = !is.null(x$clustervar), ...) {
   has_multi_response <- length(x$lhs) > 1
 
   nn <- c("estimate", "std.error", "statistic", "p.value")
@@ -58,7 +59,7 @@ tidy.felm <- function(x, conf.int = FALSE, conf.level = .95, fe = FALSE, robust 
     }) %>%
       select(response, dplyr::everything())
   } else {
-    ret <- ret <- as_tidy_tibble(
+    ret <- as_tidy_tibble(
       stats::coef(summary(x, robust = robust)), 
       new_names = nn
     )

@@ -32,7 +32,7 @@ the \code{data} argument will be ignored.}
 \item{type.predict}{Passed to \code{\link[fixest:predict.fixest]{predict.fixest}}
 \code{type} argument. Defaults to \code{"link"} (like \code{predict.glm}).}
 
-\item{type.residuals}{Passed to \code{\link[fixest:residuals.fixest]{predict.fixest}}
+\item{type.residuals}{Passed to \code{\link[fixest:resid.fixest]{predict.fixest}}
 \code{type} argument. Defaults to \code{"response"} (like \code{residuals.lm}, but unlike
 \code{residuals.glm}).}
 
@@ -118,7 +118,7 @@ augment(gravity_pois, trade)
 \seealso{
 \code{\link[=augment]{augment()}}, \code{\link[fixest:feglm]{fixest::feglm()}}, \code{\link[fixest:femlm]{fixest::femlm()}}, \code{\link[fixest:feols]{fixest::feols()}}
 
-Other fixest tidiers:
+Other fixest tidiers: 
 \code{\link{tidy.fixest}()}
 }
 \concept{fixest tidiers}

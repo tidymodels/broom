@@ -17,6 +17,8 @@ adjustment of RMST and other measures (#880 by @vincentarelbundock)
 * Fixed `augment.fixest()` returning residuals in the `.fitted` column. The
 method also now takes a `type.residuals` argument and defaults to the same 
 `type.predict` argument as the `fixest` `predict()` method. (#877 by @karldw)
+* Adjusted the default `robust` argument in `tidy.felm()` to mirror the default
+in `lfe::summary.felm()`. (#818 by @kuriwaki)
 
 # broom 0.7.0
 
