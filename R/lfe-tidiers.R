@@ -59,7 +59,7 @@ tidy.felm <- function(x, conf.int = FALSE, conf.level = .95, fe = FALSE, robust 
     }) %>%
       select(response, dplyr::everything())
   } else {
-    ret <- ret <- as_tidy_tibble(
+    ret <- as_tidy_tibble(
       stats::coef(summary(x, robust = robust)),
       new_names = nn
     )
