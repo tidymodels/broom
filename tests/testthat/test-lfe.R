@@ -40,11 +40,11 @@ test_that("tidy.felm", {
   td2 <- tidy(fit2, conf.int = TRUE, fe = TRUE, fe.error = FALSE)
   td3 <- tidy(fit2, conf.int = TRUE, fe = TRUE)
   td4 <- tidy(fit_form)
-  td5 <- tidy(fit, robust = TRUE)
-  td6 <- tidy(fit2, robust = TRUE)
-  td7 <- tidy(fit2, robust = TRUE, fe = TRUE)
+  td5 <- tidy(fit, se = "robust")
+  td6 <- tidy(fit2, se = "robust")
+  td7 <- tidy(fit2, se = "robust", fe = TRUE)
   td8 <- tidy(fit3)
-  td9 <- tidy(fit3, robust = FALSE)
+  td9 <- tidy(fit3, se = "iid")
   
   
   td_multi <- tidy(fit_multi)

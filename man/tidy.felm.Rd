@@ -11,7 +11,7 @@
   conf.int = FALSE,
   conf.level = 0.95,
   fe = FALSE,
-  robust = !is.null(x$clustervar),
+  se.type = c("default", "iid", "robust", "cluster"),
   ...
 )
 }
@@ -28,9 +28,11 @@ Defaults to 0.95, which corresponds to a 95 percent confidence interval.}
 \item{fe}{Logical indicating whether or not to include estimates of
 fixed effects. Defaults to \code{FALSE}.}
 
-\item{robust}{Logical indicating robust or clustered SEs should be used.
-Following lfe::summary.felm, it defaults to \code{FALSE} when there is no
-clustering variable, and defaults to \code{TRUE} when there is one.}
+\item{se.type}{Character indicating the type of standard errors. Defaults to
+using those of the underlying felm() model object, e.g. clustered errors
+for models that were provided a cluster specification. Users can override
+these defaults (say, to explore the effect of different error structures
+on model inference) by specifying an appropriate alternative.}
 
 \item{...}{Additional arguments. Not used. Needed to match generic
 signature only. \strong{Cautionary note:} Misspelled arguments will be
@@ -69,8 +71,16 @@ augment(result_felm)
 
 result_felm <- felm(v2 ~ v3 | id + v1, DT)
 tidy(result_felm, fe = TRUE)
-tidy(result_felm, robust = TRUE)
+tidy(result_felm, se.type = "robust") ## Same as default above
+tidy(result_felm, se.type = "iid") ## Non-robust SEs
 augment(result_felm)
+
+## The "se.type" argument is useful for comparing SEs on the fly.
+result_felm <- felm(v2 ~ v3 | id + v1 | 0 | id, DT) ## Cluster by id
+tidy(result_felm, conf.int = TRUE) 
+tidy(result_felm, conf.int = TRUE, se.type = "cluster") ## Same as default above
+tidy(result_felm, conf.int = TRUE, se.type = "robust") ## HC SEs
+tidy(result_felm, se.type = "iid") ## Vanilla SEs
 
 v1 <- DT$v1
 v2 <- DT$v2
