@@ -69,6 +69,8 @@ test_that("tidy.felm", {
                as.numeric(lfe:::summary.felm(fit2, robust = TRUE)$coef[, "Robust s.e"]))
   expect_equal(dplyr::pull(td8, std.error),
                as.numeric(lfe:::summary.felm(fit3)$coef[, "Cluster s.e."]))
+  expect_equal(dplyr::pull(td9, std.error),
+               as.numeric(lfe:::summary.felm(fit3, robust = FALSE)$coef[, "Std. Error"]))
 })
 
 test_that("glance.felm", {
