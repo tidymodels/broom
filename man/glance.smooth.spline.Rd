@@ -45,3 +45,14 @@ Other smoothing spline tidiers:
 \code{\link{augment.smooth.spline}()}
 }
 \concept{smoothing spline tidiers}
+\value{
+A \code{\link[tibble:tibble]{tibble::tibble()}} with exactly one row and columns:
+  \item{crit}{Minimized criterion}
+  \item{cv.crit}{Cross-validation score}
+  \item{df}{Degrees of freedom used by the model.}
+  \item{lambda}{Choice of lambda corresponding to `spar`.}
+  \item{nobs}{Number of observations used.}
+  \item{pen.crit}{Penalized criterion.}
+  \item{spar}{Smoothing parameter.}
+
+}

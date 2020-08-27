@@ -53,3 +53,12 @@ Other Arima tidiers:
 \code{\link{tidy.Arima}()}
 }
 \concept{Arima tidiers}
+\value{
+A \code{\link[tibble:tibble]{tibble::tibble()}} with exactly one row and columns:
+  \item{AIC}{Akaike's Information Criterion for the model.}
+  \item{BIC}{Bayesian Information Criterion for the model.}
+  \item{logLik}{The log-likelihood of the model. [stats::logLik()] may be a useful reference.}
+  \item{nobs}{Number of observations used.}
+  \item{sigma}{Estimated standard error of the residuals.}
+
+}

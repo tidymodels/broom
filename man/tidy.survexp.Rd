@@ -73,3 +73,10 @@ Other survival tidiers:
 }
 \concept{survexp tidiers}
 \concept{survival tidiers}
+\value{
+A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
+  \item{n.risk}{Number of individuals at risk at time zero.}
+  \item{time}{Point in time.}
+  \item{estimate}{Estimate survival}
+
+}

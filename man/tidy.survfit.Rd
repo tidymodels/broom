@@ -77,3 +77,18 @@ Other survival tidiers:
 }
 \concept{survfit tidiers}
 \concept{survival tidiers}
+\value{
+A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
+  \item{conf.high}{Upper bound on the confidence interval for the estimate.}
+  \item{conf.low}{Lower bound on the confidence interval for the estimate.}
+  \item{n.censor}{Number of censored events.}
+  \item{n.event}{Number of events at time t.}
+  \item{n.risk}{Number of individuals at risk at time zero.}
+  \item{std.error}{The standard error of the regression term.}
+  \item{time}{Point in time.}
+  \item{estimate}{estimate of survival or cumulative incidence rate when
+    multistate}
+  \item{state}{state if multistate survfit object input}
+  \item{strata}{strata if stratified survfit object input}
+
+}

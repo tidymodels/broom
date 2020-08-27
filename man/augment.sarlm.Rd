@@ -108,3 +108,9 @@ Other spatialreg tidiers:
 \code{\link{tidy.sarlm}()}
 }
 \concept{spatialreg tidiers}
+\value{
+A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
+  \item{.fitted}{Fitted or predicted value.}
+  \item{.resid}{The difference between observed and fitted values.}
+
+}

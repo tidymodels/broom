@@ -36,9 +36,9 @@ Deprecated. Please use \code{\link[tibble:as_tibble]{tibble::as_tibble()}} inste
 }
 \details{
 Directly calls \code{\link[tibble:as_tibble]{tibble::as_tibble()}} on a \link[base:table]{base::table} object, which
-does the same things as \code{\link[base:as.data.frame.table]{base::as.data.frame.table()}} but also gives the
+does the same things as \code{\link[base:table]{base::as.data.frame.table()}} but also gives the
 returned object \link[tibble:tibble]{tibble::tibble} class.
 }
 \seealso{
-\code{\link[tibble:as_tibble.table]{tibble::as_tibble.table()}}
+\code{\link[tibble:as_tibble]{tibble::as_tibble.table()}}
 }

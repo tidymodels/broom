@@ -95,3 +95,12 @@ Other rlm tidiers:
 \code{\link{tidy.rlm}()}
 }
 \concept{rlm tidiers}
+\value{
+A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
+  \item{.fitted}{Fitted or predicted value.}
+  \item{.hat}{Diagonal of the hat matrix.}
+  \item{.resid}{The difference between observed and fitted values.}
+  \item{.se.fit}{Standard errors of fitted values.}
+  \item{.sigma}{Estimated residual standard deviation when corresponding observation is dropped from model.}
+
+}

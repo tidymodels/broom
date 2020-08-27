@@ -48,3 +48,11 @@ qplot(long, lat,
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[maps:map]{maps::map()}}
 }
+\value{
+A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
+  \item{term}{The name of the regression term.}
+  \item{long}{Longitude.}
+  \item{lat}{Latitude.}
+Remaining columns give information on geographic attributes 
+    and depend on the inputted map object. See ?maps::map for more information.
+}

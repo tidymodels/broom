@@ -95,7 +95,7 @@ columns \code{.conf.low} and \code{.conf.high}. Does not provide confidence
 intervals when data is specified via the \code{newdata} argument.
 }
 \seealso{
-\link{augment}, \code{\link[quantreg:rq]{quantreg::rq()}}, \code{\link[quantreg:predict.rqs]{quantreg::predict.rqs()}}
+\link{augment}, \code{\link[quantreg:rq]{quantreg::rq()}}, \code{\link[quantreg:predict.rq]{quantreg::predict.rqs()}}
 
 Other quantreg tidiers: 
 \code{\link{augment.nlrq}()},

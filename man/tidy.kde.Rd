@@ -67,3 +67,11 @@ td3
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[ks:kde]{ks::kde()}}
 }
+\value{
+A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
+  \item{estimate}{The estimated value of the regression term.}
+  \item{obs}{weighted observed number of events in each group.}
+  \item{value}{The value/estimate of the component. Results from data reshaping.}
+  \item{variable}{Variable under consideration.}
+
+}

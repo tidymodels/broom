@@ -83,3 +83,15 @@ marg_ie2 <- margins(mod_ie,
                     at = list(cyl = c(4,6,8), drat = c(3, 3.5, 4))) ## Modulating vars
 tidy(marg_ie2)
 }
+\value{
+A \code{\link[tibble:tibble]{tibble::tibble()}} with exactly one row and columns:
+  \item{adj.r.squared}{Adjusted R squared statistic, which is like the R squared statistic except taking degrees of freedom into account.}
+  \item{df}{Degrees of freedom used by the model.}
+  \item{df.residual}{Residual degrees of freedom.}
+  \item{nobs}{Number of observations used.}
+  \item{p.value}{P-value corresponding to the test statistic.}
+  \item{r.squared}{R squared statistic, or the percent of variation explained by the model. Also known as the coefficient of determination.}
+  \item{sigma}{Estimated standard error of the residuals.}
+  \item{statistic}{Test statistic.}
+
+}

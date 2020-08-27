@@ -65,3 +65,16 @@ Other pam tidiers:
 \code{\link{glance.pam}()}
 }
 \concept{pam tidiers}
+\value{
+A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
+  \item{size}{Size of each cluster.}
+  \item{max.diss}{Maximal dissimilarity between the observations in the 
+    cluster and that cluster's medoid.}
+  \item{avg.diss}{Average dissimilarity between the observations in the 
+    cluster and that cluster's medoid.}
+  \item{diameter}{Diameter of the cluster.}
+  \item{separation}{Separation of the cluster.}
+  \item{avg.width}{Average silhouette width of the cluster.}
+  \item{cluster}{A factor describing the cluster from 1:k.}
+
+}

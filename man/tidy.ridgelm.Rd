@@ -59,3 +59,12 @@ Other ridgelm tidiers:
 \code{\link{glance.ridgelm}()}
 }
 \concept{ridgelm tidiers}
+\value{
+A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
+  \item{GCV}{Generalized cross validation error estimate.}
+  \item{lambda}{Value of penalty parameter lambda.}
+  \item{term}{The name of the regression term.}
+  \item{estimate}{estimate of scaled coefficient using this lambda}
+  \item{scale}{Scaling factor of estimated coefficient}
+
+}

@@ -86,3 +86,10 @@ Other survival tidiers:
 }
 \concept{pyears tidiers}
 \concept{survival tidiers}
+\value{
+A \code{\link[tibble:tibble]{tibble::tibble()}} with exactly one row and columns:
+  \item{nobs}{Number of observations used.}
+  \item{total}{total number of person-years tabulated}
+  \item{offtable}{total number of person-years off table}
+
+}

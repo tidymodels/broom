@@ -83,3 +83,10 @@ Other survival tidiers:
 }
 \concept{survexp tidiers}
 \concept{survival tidiers}
+\value{
+A \code{\link[tibble:tibble]{tibble::tibble()}} with exactly one row and columns:
+  \item{n.max}{Maximum number of subjects at risk.}
+  \item{n.start}{Initial number of subjects at risk.}
+  \item{timepoints}{Number of timepoints.}
+
+}

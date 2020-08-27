@@ -79,3 +79,11 @@ tidy(bootres, conf.int = TRUE)
 \code{\link[=tidy]{tidy()}}, \code{\link[boot:boot]{boot::boot()}}, \code{\link[boot:tsboot]{boot::tsboot()}}, \code{\link[boot:boot.ci]{boot::boot.ci()}},
 \code{\link[rsample:bootstraps]{rsample::bootstraps()}}
 }
+\value{
+A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
+  \item{bias}{Bias of the statistic.}
+  \item{std.error}{The standard error of the regression term.}
+  \item{term}{The name of the regression term.}
+  \item{statistic}{Original value of the statistic.}
+
+}

@@ -36,3 +36,11 @@ tidy(all_fits)
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[leaps:regsubsets]{leaps::regsubsets()}}
 }
+\value{
+A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
+  \item{r.squared}{R squared statistic, or the percent of variation explained by the model.}
+  \item{adj.r.squared}{Adjusted R squared statistic}
+  \item{BIC}{Bayesian information criterion for the component.}
+  \item{mallows_cp}{Mallow's Cp statistic.}
+
+}

@@ -38,3 +38,16 @@ Other garch tidiers:
 \code{\link{tidy.garch}()}
 }
 \concept{garch tidiers}
+\value{
+A \code{\link[tibble:tibble]{tibble::tibble()}} with exactly one row and columns:
+  \item{AIC}{Akaike's Information Criterion for the model.}
+  \item{BIC}{Bayesian Information Criterion for the model.}
+  \item{logLik}{The log-likelihood of the model. [stats::logLik()] may be a useful reference.}
+  \item{method}{Which method was used.}
+  \item{nobs}{Number of observations used.}
+  \item{p.value}{P-value corresponding to the test statistic.}
+  \item{statistic}{Test statistic.}
+  \item{parameter}{Parameter field in the htest, typically degrees of
+    freedom.}
+
+}

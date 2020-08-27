@@ -74,3 +74,10 @@ Other robustbase tidiers:
 \code{\link{tidy.lmrob}()}
 }
 \concept{robustbase tidiers}
+\value{
+A \code{\link[tibble:tibble]{tibble::tibble()}} with exactly one row and columns:
+  \item{df.residual}{Residual degrees of freedom.}
+  \item{r.squared}{R squared statistic, or the percent of variation explained by the model. Also known as the coefficient of determination.}
+  \item{sigma}{Estimated standard error of the residuals.}
+
+}

@@ -94,3 +94,8 @@ Other kmeans tidiers:
 \code{\link{tidy.kmeans}()}
 }
 \concept{kmeans tidiers}
+\value{
+A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
+  \item{.cluster}{Cluster assignment.}
+
+}

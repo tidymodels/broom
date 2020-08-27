@@ -63,3 +63,15 @@ Other speedlm tidiers:
 \code{\link{tidy.speedlm}()}
 }
 \concept{speedlm tidiers}
+\value{
+A \code{\link[tibble:tibble]{tibble::tibble()}} with exactly one row and columns:
+  \item{AIC}{Akaike's Information Criterion for the model.}
+  \item{BIC}{Bayesian Information Criterion for the model.}
+  \item{deviance}{Deviance of the model.}
+  \item{df.null}{Degrees of freedom used by the null model.}
+  \item{df.residual}{Residual degrees of freedom.}
+  \item{logLik}{The log-likelihood of the model. [stats::logLik()] may be a useful reference.}
+  \item{nobs}{Number of observations used.}
+  \item{null.deviance}{Deviance of the null model.}
+
+}

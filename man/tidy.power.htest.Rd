@@ -47,3 +47,12 @@ Other htest tidiers:
 \code{\link{tidy.pairwise.htest}()}
 }
 \concept{htest tidiers}
+\value{
+A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
+  \item{delta}{True difference in means.}
+  \item{n}{Number of observations by component.}
+  \item{power}{Power achieved for given value of n.}
+  \item{sd}{Standard deviation.}
+  \item{sig.level}{Significance level (Type I error probability).}
+
+}

@@ -62,3 +62,16 @@ Other mclust tidiers:
 \code{\link{augment.Mclust}()}
 }
 \concept{mclust tidiers}
+\value{
+A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
+  \item{proportion}{The mixing proportion of each component}
+  \item{size}{Number of points assigned to cluster.}
+  \item{mean}{The mean for each component. In case of 2+ dimensional models,
+    a column with the mean is added for each dimension. NA for noise
+    component}
+  \item{variance}{In case of one-dimensional and spherical models,
+    the variance for each component, omitted otherwise. NA for noise
+    component}
+  \item{component}{Cluster id as a factor.}
+
+}

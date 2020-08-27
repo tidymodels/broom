@@ -60,3 +60,13 @@ Other mlogit tidiers:
 \code{\link{tidy.mlogit}()}
 }
 \concept{mlogit tidiers}
+\value{
+A \code{\link[tibble:tibble]{tibble::tibble()}} with exactly one row and columns:
+  \item{AIC}{Akaike's Information Criterion for the model.}
+  \item{BIC}{Bayesian Information Criterion for the model.}
+  \item{logLik}{The log-likelihood of the model. [stats::logLik()] may be a useful reference.}
+  \item{nobs}{Number of observations used.}
+  \item{rho2}{McFadden's rho squared with respect to a market shares (constants-only) model.}
+  \item{rho20}{McFadden's rho squared with respect to an equal shares (no information) model.}
+
+}

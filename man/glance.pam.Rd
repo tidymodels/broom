@@ -70,3 +70,8 @@ Other pam tidiers:
 \code{\link{tidy.pam}()}
 }
 \concept{pam tidiers}
+\value{
+A \code{\link[tibble:tibble]{tibble::tibble()}} with exactly one row and columns:
+  \item{avg.silhouette.width}{The average silhouette width for the dataset.}
+
+}
