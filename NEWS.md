@@ -19,6 +19,7 @@ method also now takes a `type.residuals` argument and defaults to the same
 `type.predict` argument as the `fixest` `predict()` method. (#877 by @karldw)
 * Adjusted the default `robust` argument in `tidy.felm()` to mirror the default
 in `lfe::summary.felm()`. (#818 by @kuriwaki)
+* Fixed bug related to univariate zoo series in `tidy.zoo()` (#916 by @WillemVervoort)
 
 # broom 0.7.0
 

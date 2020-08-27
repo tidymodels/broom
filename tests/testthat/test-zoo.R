@@ -25,4 +25,11 @@ test_that("tidy.zoo", {
   z <- zoo::zoo(z.data, z.index)
   td <- tidy(z)
   expect_true(all(unique(td$series) %in% colnames(z.data)))
+  
+  # test for univariate functionality
+  z2 <- zoo::zoo(rnorm(30), z.index)
+  td2 <- tidy(z2)
+  
+  check_tidy_output(td2)
+  check_dims(td2, 10, 2)
 })
