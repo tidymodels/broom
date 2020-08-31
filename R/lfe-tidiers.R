@@ -8,8 +8,9 @@
 #' @param se.type Character indicating the type of standard errors. Defaults to
 #'   using those of the underlying felm() model object, e.g. clustered errors
 #'   for models that were provided a cluster specification. Users can override
-#'   these defaults (say, to explore the effect of different error structures
-#'   on model inference) by specifying an appropriate alternative. 
+#'   these defaults by specifying an appropriate alternative: "iid" (for 
+#'   homoskedastic errors), "robust" (for Eicker-Huber-White robust errors), or
+#'   "cluster" (for clustered standard errors; if the model object supports it).
 #' @template param_unused_dots
 #'
 #' @evalRd return_tidy(regression = TRUE)
@@ -18,46 +19,43 @@
 #'
 #' library(lfe)
 #'
-#' N <- 1e2
-#' DT <- data.frame(
-#'   id = sample(5, N, TRUE),
-#'   v1 = sample(5, N, TRUE),
-#'   v2 = sample(1e6, N, TRUE),
-#'   v3 = sample(round(runif(100, max = 100), 4), N, TRUE),
-#'   v4 = sample(round(runif(100, max = 100), 4), N, TRUE)
-#' )
+#' ## Use built-in "airquality" dataset
+#' head(airquality)
 #'
-#' result_felm <- felm(v2 ~ v3, DT)
-#' tidy(result_felm)
-#' augment(result_felm)
+#' ## No FEs; same as lm()
+#' est0 <- felm(Ozone ~ Temp + Wind + Solar.R, airquality)
+#' tidy(est0)
+#' augment(est0)
+#' 
+#' ## Add month fixed effects
+#' est1 <- felm(Ozone ~ Temp + Wind + Solar.R  | Month, airquality)
+#' tidy(est1)
+#' tidy(est1, fe = TRUE)
+#' augment(est1)
+#' glance(est1)
 #'
-#' result_felm <- felm(v2 ~ v3 | id + v1, DT)
-#' tidy(result_felm, fe = TRUE)
-#' tidy(result_felm, se.type = "robust") ## Same as default above
-#' tidy(result_felm, se.type = "iid") ## Non-robust SEs
-#' augment(result_felm)
-#'
-#' ## The "se.type" argument is useful for comparing SEs on the fly.
-#' result_felm <- felm(v2 ~ v3 | id + v1 | 0 | id, DT) ## Cluster by id
-#' tidy(result_felm, conf.int = TRUE) 
-#' tidy(result_felm, conf.int = TRUE, se.type = "cluster") ## Same as default above
-#' tidy(result_felm, conf.int = TRUE, se.type = "robust") ## HC SEs
-#' tidy(result_felm, se.type = "iid") ## Vanilla SEs
-#'
-#' v1 <- DT$v1
-#' v2 <- DT$v2
-#' v3 <- DT$v3
-#' id <- DT$id
-#' result_felm <- felm(v2 ~ v3 | id + v1)
-#'
-#' tidy(result_felm)
-#' augment(result_felm)
-#' glance(result_felm)
+#' ## The "se.type" argument can be used to switch out different standard errors 
+#' ## types on the fly. In turn, this can be useful exploring the effect of 
+#' ## different error structures on model inference.
+#' tidy(est1, se.type = "robust") ## Same as default above
+#' tidy(est1, se.type = "iid") ## Non-robust SEs
+#' 
+#' ## Add clustered SEs (also by month)
+#' est2 <- felm(Ozone ~ Temp + Wind + Solar.R  | Month | 0 | Month, airquality)
+#' tidy(est2, conf.int = TRUE) 
+#' tidy(est2, conf.int = TRUE, se.type = "cluster") ## Same as default above
+#' tidy(est2, conf.int = TRUE, se.type = "robust") ## HC SEs
+#' tidy(est2, conf.int = TRUE, se.type = "iid") ## Vanilla SEs
 #' @export
 #' @aliases felm_tidiers lfe_tidiers
 #' @family felm tidiers
 #' @seealso [tidy()], [lfe::felm()]
 tidy.felm <- function(x, conf.int = FALSE, conf.level = .95, fe = FALSE, se.type = c("default", "iid", "robust", "cluster"), ...) {
+  dots <- list(...)
+  ## Warn users about deprecated "robust" argument.
+  if (!is.null(dots$robust)) {
+    warning('\nThe "robust" argument has been deprecated for tidy.felm and will be ignored. Please use the "se.type" argument instead.\n')
+  }
   has_multi_response <- length(x$lhs) > 1
   
   se.type = match.arg(se.type)

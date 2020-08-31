@@ -43,41 +43,33 @@ of the appropriate type.
 
 library(lfe)
 
-N <- 1e2
-DT <- data.frame(
-  id = sample(5, N, TRUE),
-  v1 = sample(5, N, TRUE),
-  v2 = sample(1e6, N, TRUE),
-  v3 = sample(round(runif(100, max = 100), 4), N, TRUE),
-  v4 = sample(round(runif(100, max = 100), 4), N, TRUE)
-)
+## Use built-in "airquality" dataset
+head(airquality)
 
-result_felm <- felm(v2 ~ v3, DT)
-tidy(result_felm)
-augment(result_felm)
+## No FEs; same as lm()
+est0 <- felm(Ozone ~ Temp + Wind + Solar.R, airquality)
+tidy(est0)
+augment(est0)
 
-result_felm <- felm(v2 ~ v3 | id + v1, DT)
-tidy(result_felm, fe = TRUE)
-tidy(result_felm, se.type = "robust") ## Same as default above
-tidy(result_felm, se.type = "iid") ## Non-robust SEs
-augment(result_felm)
+## Add month fixed effects
+est1 <- felm(Ozone ~ Temp + Wind + Solar.R  | Month, airquality)
+tidy(est1)
+tidy(est1, fe = TRUE)
+augment(est1)
+glance(est1)
 
-## The "se.type" argument is useful for comparing SEs on the fly.
-result_felm <- felm(v2 ~ v3 | id + v1 | 0 | id, DT) ## Cluster by id
-tidy(result_felm, conf.int = TRUE) 
-tidy(result_felm, conf.int = TRUE, se.type = "cluster") ## Same as default above
-tidy(result_felm, conf.int = TRUE, se.type = "robust") ## HC SEs
-tidy(result_felm, se.type = "iid") ## Vanilla SEs
+## The "se.type" argument can be used to switch out different standard errors 
+## types on the fly. In turn, this can be useful exploring the effect of 
+## different error structures on model inference.
+tidy(est1, se.type = "robust") ## Same as default above
+tidy(est1, se.type = "iid") ## Non-robust SEs
 
-v1 <- DT$v1
-v2 <- DT$v2
-v3 <- DT$v3
-id <- DT$id
-result_felm <- felm(v2 ~ v3 | id + v1)
-
-tidy(result_felm)
-augment(result_felm)
-glance(result_felm)
+## Add clustered SEs (also by month)
+est2 <- felm(Ozone ~ Temp + Wind + Solar.R  | Month | 0 | Month, airquality)
+tidy(est2, conf.int = TRUE) 
+tidy(est2, conf.int = TRUE, se.type = "cluster") ## Same as default above
+tidy(est2, conf.int = TRUE, se.type = "robust") ## HC SEs
+tidy(est2, conf.int = TRUE, se.type = "iid") ## Vanilla SEs
 }
 \value{
 A \code{\link[tibble:tibble]{tibble::tibble()}} with exactly one row and columns:
