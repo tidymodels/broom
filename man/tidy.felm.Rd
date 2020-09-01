@@ -75,15 +75,15 @@ glance(est1)
 ## The "se.type" argument can be used to switch out different standard errors 
 ## types on the fly. In turn, this can be useful exploring the effect of 
 ## different error structures on model inference.
-tidy(est1, se.type = "robust") ## Same as default above
-tidy(est1, se.type = "iid") ## Non-robust SEs
+tidy(est1, se.type = "iid")
+tidy(est1, se.type = "robust")
 
 ## Add clustered SEs (also by month)
 est2 <- felm(Ozone ~ Temp + Wind + Solar.R  | Month | 0 | Month, airquality)
 tidy(est2, conf.int = TRUE) 
-tidy(est2, conf.int = TRUE, se.type = "cluster") ## Same as default above
-tidy(est2, conf.int = TRUE, se.type = "robust") ## HC SEs
-tidy(est2, conf.int = TRUE, se.type = "iid") ## Vanilla SEs
+tidy(est2, conf.int = TRUE, se.type = "cluster")
+tidy(est2, conf.int = TRUE, se.type = "robust")
+tidy(est2, conf.int = TRUE, se.type = "iid")
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[lfe:felm]{lfe::felm()}}

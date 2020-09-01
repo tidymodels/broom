@@ -37,27 +37,29 @@
 #' ## The "se.type" argument can be used to switch out different standard errors 
 #' ## types on the fly. In turn, this can be useful exploring the effect of 
 #' ## different error structures on model inference.
-#' tidy(est1, se.type = "robust") ## Same as default above
-#' tidy(est1, se.type = "iid") ## Non-robust SEs
+#' tidy(est1, se.type = "iid")
+#' tidy(est1, se.type = "robust")
 #' 
 #' ## Add clustered SEs (also by month)
 #' est2 <- felm(Ozone ~ Temp + Wind + Solar.R  | Month | 0 | Month, airquality)
 #' tidy(est2, conf.int = TRUE) 
-#' tidy(est2, conf.int = TRUE, se.type = "cluster") ## Same as default above
-#' tidy(est2, conf.int = TRUE, se.type = "robust") ## HC SEs
-#' tidy(est2, conf.int = TRUE, se.type = "iid") ## Vanilla SEs
+#' tidy(est2, conf.int = TRUE, se.type = "cluster")
+#' tidy(est2, conf.int = TRUE, se.type = "robust")
+#' tidy(est2, conf.int = TRUE, se.type = "iid")
 #' @export
 #' @aliases felm_tidiers lfe_tidiers
 #' @family felm tidiers
 #' @seealso [tidy()], [lfe::felm()]
 tidy.felm <- function(x, conf.int = FALSE, conf.level = .95, fe = FALSE, se.type = c("default", "iid", "robust", "cluster"), ...) {
-  dots <- list(...)
+  has_multi_response <- length(x$lhs) > 1
+  
   ## Warn users about deprecated "robust" argument.
+  dots <- list(...)
   if (!is.null(dots$robust)) {
     warning('\nThe "robust" argument has been deprecated for tidy.felm and will be ignored. Please use the "se.type" argument instead.\n')
   }
-  has_multi_response <- length(x$lhs) > 1
   
+  ## Match SE args
   se.type = match.arg(se.type)
   if (se.type=="default") se.type = NULL
   ## Get "robust" logical to pass on to summary.lfe
@@ -78,7 +80,6 @@ tidy.felm <- function(x, conf.int = FALSE, conf.level = .95, fe = FALSE, se.type
     }
   }
   
-  
   nn <- c("estimate", "std.error", "statistic", "p.value")
   if (has_multi_response) {
     ret <- map_df(x$lhs, function(y) {
@@ -92,6 +93,19 @@ tidy.felm <- function(x, conf.int = FALSE, conf.level = .95, fe = FALSE, se.type
       stats::coef(summary(x, robust = robust)),
       new_names = nn
     )
+  }
+  
+  ## Catch edge case where users specify "robust" SEs on felm() object that
+  ## contains clusters. Reason: Somewhat confusingly, summary.felm(robust = TRUE) 
+  ## reports clustered SEs even though robust SEs are available. In contrast,
+  ## confint.felm distinguishes between robust and clustered SEs regardless
+  ## of the underlying model. See also: https://github.com/sgaure/lfe/pull/17/files
+  if (!is.null(se.type)) {
+    if (se.type == "robust" && !is.null(x$clustervar)) {
+      ret$std.error <- x$rse
+      ret$statistic <- x$rtval
+      ret$p.value <- x$rpval
+    }
   }
   
   
