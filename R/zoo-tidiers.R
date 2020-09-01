@@ -36,12 +36,19 @@
 #' @seealso [tidy()], [zoo::zoo()]
 #' @family time series tidiers
 tidy.zoo <- function(x, ...) {
-  ret <- data.frame(as.matrix(x), index = zoo::index(x))
-  ret <- tibble::as_tibble(ret)
-  colnames(ret)[1:ncol(x)] <- colnames(x)
-  pivot_longer(ret,
-    cols = c(dplyr::everything(), -index),
-    names_to = "series",
-    values_to = "value"
-  )
+  # check for univariate zoo series
+  if (length(dim(x)) > 0) {
+    ret <- data.frame(as.matrix(x), index = zoo::index(x))
+    ret <- tibble::as_tibble(ret)
+    colnames(ret)[1:ncol(x)] <- colnames(x)
+    out <- pivot_longer(ret,
+                        cols = c(dplyr::everything(), -index),
+                        names_to = "series",
+                        values_to = "value"
+    )
+  } else {
+    out <- tibble::tibble(index = zoo::index(x),
+                          value = zoo::coredata(x))
+  }
+  return(out)
 }
