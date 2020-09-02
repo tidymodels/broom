@@ -19,28 +19,28 @@
 #'
 #' library(lfe)
 #'
-#' ## Use built-in "airquality" dataset
+#' # Use built-in "airquality" dataset
 #' head(airquality)
 #'
-#' ## No FEs; same as lm()
+#' # No FEs; same as lm()
 #' est0 <- felm(Ozone ~ Temp + Wind + Solar.R, airquality)
 #' tidy(est0)
 #' augment(est0)
 #' 
-#' ## Add month fixed effects
+#' # Add month fixed effects
 #' est1 <- felm(Ozone ~ Temp + Wind + Solar.R  | Month, airquality)
 #' tidy(est1)
 #' tidy(est1, fe = TRUE)
 #' augment(est1)
 #' glance(est1)
 #'
-#' ## The "se.type" argument can be used to switch out different standard errors 
-#' ## types on the fly. In turn, this can be useful exploring the effect of 
-#' ## different error structures on model inference.
+#' # The "se.type" argument can be used to switch out different standard errors 
+#' # types on the fly. In turn, this can be useful exploring the effect of 
+#' # different error structures on model inference.
 #' tidy(est1, se.type = "iid")
 #' tidy(est1, se.type = "robust")
 #' 
-#' ## Add clustered SEs (also by month)
+#' # Add clustered SEs (also by month)
 #' est2 <- felm(Ozone ~ Temp + Wind + Solar.R  | Month | 0 | Month, airquality)
 #' tidy(est2, conf.int = TRUE) 
 #' tidy(est2, conf.int = TRUE, se.type = "cluster")
@@ -53,31 +53,31 @@
 tidy.felm <- function(x, conf.int = FALSE, conf.level = .95, fe = FALSE, se.type = c("default", "iid", "robust", "cluster"), ...) {
   has_multi_response <- length(x$lhs) > 1
   
-  ## Warn users about deprecated "robust" argument.
+  # warn users about deprecated "robust" argument
   dots <- list(...)
   if (!is.null(dots$robust)) {
-    warning('\nThe "robust" argument has been deprecated for tidy.felm and will be ignored. Please use the "se.type" argument instead.\n')
+    warning('\nThe "robust" argument has been deprecated in tidy.felm and will be ignored. Please use the "se.type" argument instead.\n')
   }
   
-  ## Match SE args
-  se.type = match.arg(se.type)
-  if (se.type=="default") se.type = NULL
-  ## Get "robust" logical to pass on to summary.lfe
+  # match SE args
+  se.type <- match.arg(se.type)
+  if (se.type == "default") {
+    se.type <- NULL
+  }
+  
+  # get "robust" logical to pass on to summary.lfe
   if (is.null(se.type)) {
     robust <- !is.null(x$clustervar) 
-  } 
-  else {
-    if (se.type!='iid') {
-      ## Catch potential user error, asking for clusters where none exist
-      if (se.type == "cluster" && is.null(x$clustervar)) {
-        warning("Clustered SEs requested, but weren't calculated in underlying model object. Reverting to default SEs.\n")
-        se.type <- NULL
-      }
-      robust <- TRUE
+  } else if (se.type == 'iid') {
+    robust <- FALSE
+  } else {
+    # catch potential user error, asking for clusters where none exist
+    if (se.type == "cluster" && is.null(x$clustervar)) {
+       warning("Clustered SEs requested, but weren't calculated in underlying model object. Reverting to default SEs.\n")
+       se.type <- NULL
     }
-    else {
-      robust <- FALSE
-    }
+    
+    robust <- TRUE
   }
   
   nn <- c("estimate", "std.error", "statistic", "p.value")
@@ -95,11 +95,11 @@ tidy.felm <- function(x, conf.int = FALSE, conf.level = .95, fe = FALSE, se.type
     )
   }
   
-  ## Catch edge case where users specify "robust" SEs on felm() object that
-  ## contains clusters. Reason: Somewhat confusingly, summary.felm(robust = TRUE) 
-  ## reports clustered SEs even though robust SEs are available. In contrast,
-  ## confint.felm distinguishes between robust and clustered SEs regardless
-  ## of the underlying model. See also: https://github.com/sgaure/lfe/pull/17/files
+  # Catch edge case where users specify "robust" SEs on felm() object that
+  # contains clusters. Reason: Somewhat confusingly, summary.felm(robust = TRUE) 
+  # reports clustered SEs even though robust SEs are available. In contrast,
+  # confint.felm distinguishes between robust and clustered SEs regardless
+  # of the underlying model. See also: https://github.com/sgaure/lfe/pull/17/files
   if (!is.null(se.type)) {
     if (se.type == "robust" && !is.null(x$clustervar)) {
       ret$std.error <- x$rse

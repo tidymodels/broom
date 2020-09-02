@@ -71,6 +71,12 @@ test_that("tidy.felm", {
                as.numeric(lfe:::summary.felm(fit3)$coef[, "Cluster s.e."]))
   expect_equal(dplyr::pull(td9, std.error),
                as.numeric(lfe:::summary.felm(fit3, robust = FALSE)$coef[, "Std. Error"]))
+
+  # check for deprecation warning from 0.7.0.9001
+  expect_warning(
+    tidy(fit, robust = TRUE),
+    '"robust" argument has been deprecated'
+  )
 })
 
 test_that("glance.felm", {
