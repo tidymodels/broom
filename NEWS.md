@@ -20,6 +20,8 @@ method also now takes a `type.residuals` argument and defaults to the same
 * Fix `tidy.felm` confidence interval bug. Replaces "robust" argument with 
 "se.type". (#919 by @grantmcdermott; supersedes #818 by @kuriwaki)
 * Fixed bug related to univariate zoo series in `tidy.zoo()` (#916 by @WillemVervoort)
+* Fixed a bug related to `tidy.prcomp()` assigning the wrong PC labels from "loadings" 
+and "scores" matrices (#910 by @tavareshugo)
 
 # broom 0.7.0
 
