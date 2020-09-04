@@ -2,6 +2,8 @@
 
 To be released as broom 0.7.1.
 
+* Fixed a bug related to `tidy.prcomp()` returning incorrect output
+for `matrix = "v"`. (#923 by @clauswilke)
 * Extended the `glance.aov()` method to include an `r.squared` column!
 * Fixed `newdata` warning message in `augment.*()` output when the `newdata`
 didn't contain the response variable—augment methods no longer expect the 
