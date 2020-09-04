@@ -491,7 +491,11 @@ Authors@R:
              family = "Tavares",
              role = "ctb",
              email = "hm533@cam.ac.uk",
-             comment = c(ORCID = "0000-0001-9373-2726")))
+             comment = c(ORCID = "0000-0001-9373-2726")),
+	    person(given = "R. Willem",
+             family = "Vervoort",
+             role = "ctb",
+             email = "Willemvervoort@gmail.com"))
 Description: Summarizes key information about statistical
     objects in tidy tibbles. This makes it easy to report results, create
     plots and consistently work with large numbers of models at once.
@@ -509,7 +513,7 @@ Depends:
     R (>= 3.1)
 Imports:
     backports,
-    dplyr,
+    dplyr (>= 1.0.0),
     ellipsis,
     generics (>= 0.0.2),
     glue,
@@ -518,7 +522,7 @@ Imports:
     rlang,
     stringr,
     tibble (>= 3.0.0),
-    tidyr
+    tidyr (>= 1.0.0)
 Suggests:
     AER,
     akima,
@@ -539,7 +543,7 @@ Suggests:
     emmeans,
     epiR,
     ergm,
-    fixest (>= 0.3.1),
+    fixest (>= 0.5.0),
     gam (>= 1.15),
     gamlss,
     gamlss.data,
@@ -567,6 +571,7 @@ Suggests:
     lsmeans,
     maps,
     maptools,
+    margins,
     MASS,
     Matrix,
     mclogit,
@@ -606,6 +611,8 @@ Suggests:
     testthat (>= 2.1.0),
     tseries,
     zoo
+Remotes:
+  alexpghayes/modeltests
 VignetteBuilder:
     knitr
 Encoding: UTF-8
@@ -631,13 +638,13 @@ Collate:
     'caret-tidiers.R'
     'data-frame-tidiers.R'
     'deprecated-0-7-0.R'
+    'deprecated-0-7-1.R'
     'drc-tidiers.R'
     'emmeans-tidiers.R'
     'epiR-tidiers.R'
     'ergm-tidiers.R'
     'fixest-tidiers.R'
     'gam-tidiers.R'
-    'gamlss-tidiers.R'
     'gee.R'
     'geepack-tidiers.R'
     'glmnet-cv-glmnet-tidiers.R'
@@ -659,6 +666,7 @@ Collate:
     'lmodel2-tidiers.R'
     'lmtest-tidiers.R'
     'maps-tidiers.R'
+    'margins-tidiers.R'
     'mass-fitdistr-tidiers.R'
     'mass-polr-tidiers.R'
     'mass-ridgelm-tidiers.R'

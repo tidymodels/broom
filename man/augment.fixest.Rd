@@ -4,7 +4,14 @@
 \alias{augment.fixest}
 \title{Augment data with information from a(n) fixest object}
 \usage{
-\method{augment}{fixest}(x, data = NULL, newdata = NULL, type.predict = "response", ...)
+\method{augment}{fixest}(
+  x,
+  data = NULL,
+  newdata = NULL,
+  type.predict = c("link", "response"),
+  type.residuals = c("response", "deviance", "pearson", "working"),
+  ...
+)
 }
 \arguments{
 \item{x}{A \code{fixest} object returned from any of the \code{fixest} estimators}
@@ -23,7 +30,11 @@ that nothing has been passed to \code{newdata}. If \code{newdata} is specified,
 the \code{data} argument will be ignored.}
 
 \item{type.predict}{Passed to \code{\link[fixest:predict.fixest]{predict.fixest}}
-\code{type} argument. Defaults to \code{"link"} (like \code{glm.predict}).}
+\code{type} argument. Defaults to \code{"link"} (like \code{predict.glm}).}
+
+\item{type.residuals}{Passed to \code{\link[fixest:resid.fixest]{predict.fixest}}
+\code{type} argument. Defaults to \code{"response"} (like \code{residuals.lm}, but unlike
+\code{residuals.glm}).}
 
 \item{...}{Additional arguments passed to \code{summary} and \code{confint}. Important
 arguments are \code{se} and \code{cluster}. Other arguments are \code{dof}, \code{exact_dof},

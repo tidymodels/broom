@@ -6,7 +6,14 @@
 \alias{lfe_tidiers}
 \title{Tidy a(n) felm object}
 \usage{
-\method{tidy}{felm}(x, conf.int = FALSE, conf.level = 0.95, fe = FALSE, robust = FALSE, ...)
+\method{tidy}{felm}(
+  x,
+  conf.int = FALSE,
+  conf.level = 0.95,
+  fe = FALSE,
+  se.type = c("default", "iid", "robust", "cluster"),
+  ...
+)
 }
 \arguments{
 \item{x}{A \code{felm} object returned from \code{\link[lfe:felm]{lfe::felm()}}.}
@@ -21,14 +28,18 @@ Defaults to 0.95, which corresponds to a 95 percent confidence interval.}
 \item{fe}{Logical indicating whether or not to include estimates of
 fixed effects. Defaults to \code{FALSE}.}
 
-\item{robust}{Logical indicating robust or clustered standard errors should
-be used. See lfe::summary.felm for details. Defaults to \code{FALSE}.}
+\item{se.type}{Character indicating the type of standard errors. Defaults to
+using those of the underlying felm() model object, e.g. clustered errors
+for models that were provided a cluster specification. Users can override
+these defaults by specifying an appropriate alternative: "iid" (for
+homoskedastic errors), "robust" (for Eicker-Huber-White robust errors), or
+"cluster" (for clustered standard errors; if the model object supports it).}
 
 \item{...}{Additional arguments. Not used. Needed to match generic
 signature only. \strong{Cautionary note:} Misspelled arguments will be
 absorbed in \code{...}, where they will be ignored. If the misspelled
 argument has a default value, the default value will be used.
-For example, if you pass \code{conf.lvel = 0.9}, all computation will
+For example, if you pass \code{conf.level = 0.9}, all computation will
 proceed using \code{conf.level = 0.95}. Additionally, if you pass
 \code{newdata = my_tibble} to an \code{\link[=augment]{augment()}} method that does not
 accept a \code{newdata} argument, it will use the default value for
@@ -46,33 +57,33 @@ specify which components to return.
 
 library(lfe)
 
-N <- 1e2
-DT <- data.frame(
-  id = sample(5, N, TRUE),
-  v1 = sample(5, N, TRUE),
-  v2 = sample(1e6, N, TRUE),
-  v3 = sample(round(runif(100, max = 100), 4), N, TRUE),
-  v4 = sample(round(runif(100, max = 100), 4), N, TRUE)
-)
+## Use built-in "airquality" dataset
+head(airquality)
 
-result_felm <- felm(v2 ~ v3, DT)
-tidy(result_felm)
-augment(result_felm)
+## No FEs; same as lm()
+est0 <- felm(Ozone ~ Temp + Wind + Solar.R, airquality)
+tidy(est0)
+augment(est0)
 
-result_felm <- felm(v2 ~ v3 | id + v1, DT)
-tidy(result_felm, fe = TRUE)
-tidy(result_felm, robust = TRUE)
-augment(result_felm)
+## Add month fixed effects
+est1 <- felm(Ozone ~ Temp + Wind + Solar.R  | Month, airquality)
+tidy(est1)
+tidy(est1, fe = TRUE)
+augment(est1)
+glance(est1)
 
-v1 <- DT$v1
-v2 <- DT$v2
-v3 <- DT$v3
-id <- DT$id
-result_felm <- felm(v2 ~ v3 | id + v1)
+## The "se.type" argument can be used to switch out different standard errors 
+## types on the fly. In turn, this can be useful exploring the effect of 
+## different error structures on model inference.
+tidy(est1, se.type = "iid")
+tidy(est1, se.type = "robust")
 
-tidy(result_felm)
-augment(result_felm)
-glance(result_felm)
+## Add clustered SEs (also by month)
+est2 <- felm(Ozone ~ Temp + Wind + Solar.R  | Month | 0 | Month, airquality)
+tidy(est2, conf.int = TRUE) 
+tidy(est2, conf.int = TRUE, se.type = "cluster")
+tidy(est2, conf.int = TRUE, se.type = "robust")
+tidy(est2, conf.int = TRUE, se.type = "iid")
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[lfe:felm]{lfe::felm()}}

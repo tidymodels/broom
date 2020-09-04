@@ -5,8 +5,12 @@
 #' @template param_confint
 #' @param fe Logical indicating whether or not to include estimates of
 #'   fixed effects. Defaults to `FALSE`.
-#' @param robust Logical indicating robust or clustered standard errors should
-#'   be used. See lfe::summary.felm for details. Defaults to `FALSE`.
+#' @param se.type Character indicating the type of standard errors. Defaults to
+#'   using those of the underlying felm() model object, e.g. clustered errors
+#'   for models that were provided a cluster specification. Users can override
+#'   these defaults by specifying an appropriate alternative: "iid" (for 
+#'   homoskedastic errors), "robust" (for Eicker-Huber-White robust errors), or
+#'   "cluster" (for clustered standard errors; if the model object supports it).
 #' @template param_unused_dots
 #'
 #' @evalRd return_tidy(regression = TRUE)
@@ -15,40 +19,67 @@
 #'
 #' library(lfe)
 #'
-#' N <- 1e2
-#' DT <- data.frame(
-#'   id = sample(5, N, TRUE),
-#'   v1 = sample(5, N, TRUE),
-#'   v2 = sample(1e6, N, TRUE),
-#'   v3 = sample(round(runif(100, max = 100), 4), N, TRUE),
-#'   v4 = sample(round(runif(100, max = 100), 4), N, TRUE)
-#' )
+#' # Use built-in "airquality" dataset
+#' head(airquality)
 #'
-#' result_felm <- felm(v2 ~ v3, DT)
-#' tidy(result_felm)
-#' augment(result_felm)
+#' # No FEs; same as lm()
+#' est0 <- felm(Ozone ~ Temp + Wind + Solar.R, airquality)
+#' tidy(est0)
+#' augment(est0)
+#' 
+#' # Add month fixed effects
+#' est1 <- felm(Ozone ~ Temp + Wind + Solar.R  | Month, airquality)
+#' tidy(est1)
+#' tidy(est1, fe = TRUE)
+#' augment(est1)
+#' glance(est1)
 #'
-#' result_felm <- felm(v2 ~ v3 | id + v1, DT)
-#' tidy(result_felm, fe = TRUE)
-#' tidy(result_felm, robust = TRUE)
-#' augment(result_felm)
-#'
-#' v1 <- DT$v1
-#' v2 <- DT$v2
-#' v3 <- DT$v3
-#' id <- DT$id
-#' result_felm <- felm(v2 ~ v3 | id + v1)
-#'
-#' tidy(result_felm)
-#' augment(result_felm)
-#' glance(result_felm)
+#' # The "se.type" argument can be used to switch out different standard errors 
+#' # types on the fly. In turn, this can be useful exploring the effect of 
+#' # different error structures on model inference.
+#' tidy(est1, se.type = "iid")
+#' tidy(est1, se.type = "robust")
+#' 
+#' # Add clustered SEs (also by month)
+#' est2 <- felm(Ozone ~ Temp + Wind + Solar.R  | Month | 0 | Month, airquality)
+#' tidy(est2, conf.int = TRUE) 
+#' tidy(est2, conf.int = TRUE, se.type = "cluster")
+#' tidy(est2, conf.int = TRUE, se.type = "robust")
+#' tidy(est2, conf.int = TRUE, se.type = "iid")
 #' @export
 #' @aliases felm_tidiers lfe_tidiers
 #' @family felm tidiers
 #' @seealso [tidy()], [lfe::felm()]
-tidy.felm <- function(x, conf.int = FALSE, conf.level = .95, fe = FALSE, robust = FALSE, ...) {
+tidy.felm <- function(x, conf.int = FALSE, conf.level = .95, fe = FALSE, se.type = c("default", "iid", "robust", "cluster"), ...) {
   has_multi_response <- length(x$lhs) > 1
-
+  
+  # warn users about deprecated "robust" argument
+  dots <- list(...)
+  if (!is.null(dots$robust)) {
+    warning('\nThe "robust" argument has been deprecated in tidy.felm and will be ignored. Please use the "se.type" argument instead.\n')
+  }
+  
+  # match SE args
+  se.type <- match.arg(se.type)
+  if (se.type == "default") {
+    se.type <- NULL
+  }
+  
+  # get "robust" logical to pass on to summary.lfe
+  if (is.null(se.type)) {
+    robust <- !is.null(x$clustervar) 
+  } else if (se.type == 'iid') {
+    robust <- FALSE
+  } else {
+    # catch potential user error, asking for clusters where none exist
+    if (se.type == "cluster" && is.null(x$clustervar)) {
+       warning("Clustered SEs requested, but weren't calculated in underlying model object. Reverting to default SEs.\n")
+       se.type <- NULL
+    }
+    
+    robust <- TRUE
+  }
+  
   nn <- c("estimate", "std.error", "statistic", "p.value")
   if (has_multi_response) {
     ret <- map_df(x$lhs, function(y) {
@@ -58,28 +89,47 @@ tidy.felm <- function(x, conf.int = FALSE, conf.level = .95, fe = FALSE, robust 
     }) %>%
       select(response, dplyr::everything())
   } else {
-    ret <- ret <- as_tidy_tibble(
-      stats::coef(summary(x, robust = robust)), 
+    ret <- as_tidy_tibble(
+      stats::coef(summary(x, robust = robust)),
       new_names = nn
     )
   }
-
-
+  
+  # Catch edge case where users specify "robust" SEs on felm() object that
+  # contains clusters. Reason: Somewhat confusingly, summary.felm(robust = TRUE) 
+  # reports clustered SEs even though robust SEs are available. In contrast,
+  # confint.felm distinguishes between robust and clustered SEs regardless
+  # of the underlying model. See also: https://github.com/sgaure/lfe/pull/17/files
+  if (!is.null(se.type)) {
+    if (se.type == "robust" && !is.null(x$clustervar)) {
+      ret$std.error <- x$rse
+      ret$statistic <- x$rtval
+      ret$p.value <- x$rpval
+    }
+  }
+  
+  
   if (conf.int) {
-    ci <- broom_confint_terms(x, level = conf.level)
+    if (has_multi_response) {
+      ci <- map_df(x$lhs, function(y) {
+        broom_confint_terms(x, level = conf.level, type = NULL, lhs = y)
+      })
+    } else {
+      ci <- broom_confint_terms(x, level = conf.level, type = se.type)
+    }
     ret <- dplyr::left_join(ret, ci, by = "term")
   }
-
+  
   if (fe) {
     ret <- mutate(ret, N = NA, comp = NA)
-
+    
     nn <- c("estimate", "std.error", "N", "comp")
     ret_fe_prep <- lfe::getfe(x, se = TRUE, bN = 100) %>%
       tibble::rownames_to_column(var = "term") %>%
       # effect and se are multiple if multiple y
       select(term, contains("effect"), contains("se"), obs, comp) %>%
       rename(N = obs)
-
+    
     if (has_multi_response) {
       ret_fe_prep <- ret_fe_prep %>%
         tidyr::pivot_longer(
@@ -108,11 +158,11 @@ tidy.felm <- function(x, conf.int = FALSE, conf.level = .95, fe = FALSE, robust 
       select(contains("response"), dplyr::everything()) %>%
       mutate(statistic = estimate / std.error) %>%
       mutate(p.value = 2 * (1 - stats::pt(statistic, df = N)))
-
+    
     if (conf.int) {
       crit_val_low <- stats::qnorm(1 - (1 - conf.level) / 2)
       crit_val_high <- stats::qnorm(1 - (1 - conf.level) / 2)
-
+      
       ret_fe <- ret_fe %>%
         mutate(
           conf.low = estimate - crit_val_low * std.error,

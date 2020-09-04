@@ -87,6 +87,9 @@ tidy.survfit <- function(x, ...) {
 #' @templateVar class survfit
 #' @template title_desc_glance
 #'
+#' @param ... Additional arguments passed to [summary.survfit()]. Important
+#'   arguments include `rmean`.
+#' 
 #' @inherit tidy.survfit params examples
 #'
 #' @evalRd return_glance(
@@ -115,7 +118,7 @@ glance.survfit <- function(x, ...) {
     stop("Cannot construct a glance of a multi-strata survfit object.")
   }
 
-  s <- summary(x)
+  s <- summary(x, ...)
   ret <- unrowname(as.data.frame(t(s$table)))
 
   colnames(ret) <- dplyr::recode(

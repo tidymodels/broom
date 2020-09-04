@@ -6,8 +6,22 @@ To be released as broom 0.7.1.
 * Fixed `newdata` warning message in `augment.*()` output when the `newdata`
 didn't contain the response variable—augment methods no longer expect the 
 response variable in the supplied `newdata` argument. (#897 by @rudeboybert)
+* Add tidiers for `margins` objects. (#700 by @grantmcdermott)
+* Add "interval" argument to `augment.lm()` for confidence and prediction bands. 
+(#908 by @grantmcdermott)
 * Added tidier methods for `mlogit` objects (#887 by @gregmacfarlane)
-* Fixed a bug related to `tidy.prcomp()` assigning the wrong PC labels from "loadings" and "scores" matrices (#910 by @tavareshugo)
+* Fixed a bug related to `tidy.geeglm()` not being sensitive to the
+`exponentiate` argument (#867)
+* `glance.survfit()` now passes `...` to `summary.survfit()` to allow for
+adjustment of RMST and other measures (#880 by @vincentarelbundock)
+* Fixed `augment.fixest()` returning residuals in the `.fitted` column. The
+method also now takes a `type.residuals` argument and defaults to the same 
+`type.predict` argument as the `fixest` `predict()` method. (#877 by @karldw)
+* Fix `tidy.felm` confidence interval bug. Replaces "robust" argument with 
+"se.type". (#919 by @grantmcdermott; supersedes #818 by @kuriwaki)
+* Fixed bug related to univariate zoo series in `tidy.zoo()` (#916 by @WillemVervoort)
+* Fixed a bug related to `tidy.prcomp()` assigning the wrong PC labels from "loadings" 
+and "scores" matrices (#910 by @tavareshugo)
 
 # broom 0.7.0
 
