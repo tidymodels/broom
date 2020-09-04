@@ -20,7 +20,9 @@ method also now takes a `type.residuals` argument and defaults to the same
 * Fix `tidy.felm` confidence interval bug. Replaces "robust" argument with 
 "se.type". (#919 by @grantmcdermott; supersedes #818 by @kuriwaki)
 * Fixed bug related to univariate zoo series in `tidy.zoo()` (#916 by @WillemVervoort)
-* Consistently label interval columns `.lower` and `.upper` in `augment()` methods (by @bwiernik)
+* Fixed a bug related to `tidy.prcomp()` assigning the wrong PC labels from "loadings" 
+and "scores" matrices (#910 by @tavareshugo)
+* Consistently label interval columns `.lower` and `.upper` in `augment()` methods (#925 by @bwiernik)
 
 # broom 0.7.0
 
