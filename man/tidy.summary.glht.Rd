@@ -8,7 +8,7 @@
 }
 \arguments{
 \item{x}{A \code{summary.glht} object created by calling
-\code{\link[multcomp:methods]{multcomp::summary.glht()}} on a \code{glht} object created with
+\code{\link[multcomp:summary.glht]{multcomp::summary.glht()}} on a \code{glht} object created with
 \code{\link[multcomp:glht]{multcomp::glht()}}.}
 
 \item{...}{Additional arguments. Not used. Needed to match generic
@@ -56,7 +56,7 @@ cld <- cld(wht)
 tidy(cld)
 }
 \seealso{
-\code{\link[=tidy]{tidy()}}, \code{\link[multcomp:methods]{multcomp::summary.glht()}}, \code{\link[multcomp:glht]{multcomp::glht()}}
+\code{\link[=tidy]{tidy()}}, \code{\link[multcomp:summary.glht]{multcomp::summary.glht()}}, \code{\link[multcomp:glht]{multcomp::glht()}}
 
 Other multcomp tidiers: 
 \code{\link{tidy.cld}()},

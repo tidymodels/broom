@@ -160,6 +160,7 @@ Other contributors:
   \item David Hugh-Jones \email{davidhughjones@gmail.com} [contributor]
   \item Matthieu Stigler \email{Matthieu.Stigler@gmail.com} [contributor]
   \item R. Willem Vervoort \email{Willemvervoort@gmail.com} [contributor]
+  \item Brenton M. Wiernik \email{brenton@wiernik.org} [contributor]
 }
 
 }

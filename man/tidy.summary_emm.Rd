@@ -12,7 +12,7 @@
 \item{null.value}{Value to which estimate is compared.}
 
 \item{...}{Additional arguments passed to \code{\link[emmeans:summary.emmGrid]{emmeans::summary.emmGrid()}} or
-\code{\link[lsmeans:ref.grid]{lsmeans::summary.ref.grid()}}. \strong{Cautionary note}: misspecified arguments
+\code{\link[lsmeans:summary.ref.grid]{lsmeans::summary.ref.grid()}}. \strong{Cautionary note}: misspecified arguments
 may be silently ignored!}
 }
 \description{
@@ -29,7 +29,7 @@ mean, and one column for each combination of factors. When the input is a
 contrast, each row will contain one estimated contrast.
 
 There are a large number of arguments that can be
-passed on to \code{\link[emmeans:summary.emmGrid]{emmeans::summary.emmGrid()}} or \code{\link[lsmeans:ref.grid]{lsmeans::summary.ref.grid()}}.
+passed on to \code{\link[emmeans:summary.emmGrid]{emmeans::summary.emmGrid()}} or \code{\link[lsmeans:summary.ref.grid]{lsmeans::summary.ref.grid()}}.
 }
 \examples{
 

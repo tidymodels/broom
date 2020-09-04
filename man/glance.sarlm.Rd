@@ -7,8 +7,8 @@
 \method{glance}{sarlm}(x, ...)
 }
 \arguments{
-\item{x}{An object of object returned from \code{\link[spatialreg:ML_models]{spatialreg::lagsarlm()}}
-or \code{\link[spatialreg:ML_models]{spatialreg::errorsarlm()}}.}
+\item{x}{An object of object returned from \code{\link[spatialreg:lagsarlm]{spatialreg::lagsarlm()}}
+or \code{\link[spatialreg:errorsarlm]{spatialreg::errorsarlm()}}.}
 
 \item{...}{Additional arguments. Not used. Needed to match generic
 signature only. \strong{Cautionary note:} Misspelled arguments will be
@@ -71,8 +71,8 @@ augment(crime_sac)
 
 }
 \seealso{
-\code{\link[=glance]{glance()}}, \code{\link[spatialreg:ML_models]{spatialreg::lagsarlm()}}, \code{\link[spatialreg:ML_models]{spatialreg::errorsarlm()}},
-\code{\link[spatialreg:ML_models]{spatialreg::sacsarlm()}}
+\code{\link[=glance]{glance()}}, \code{\link[spatialreg:lagsarlm]{spatialreg::lagsarlm()}}, \code{\link[spatialreg:errorsarlm]{spatialreg::errorsarlm()}},
+\code{\link[spatialreg:sacsarlm]{spatialreg::sacsarlm()}}
 
 Other spatialreg tidiers: 
 \code{\link{augment.sarlm}()},

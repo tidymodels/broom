@@ -139,7 +139,7 @@ au <- augment(mod2, newdata = newdata, interval = "prediction")
 ggplot(au, aes(wt, mpg)) + 
   geom_point() +
   geom_line(aes(y = .fitted)) + 
-  geom_ribbon(aes(ymin = .conf.low, ymax = .conf.high), col = NA, alpha = 0.3)
+  geom_ribbon(aes(ymin = .lower, ymax = .upper), col = NA, alpha = 0.3)
 
 # predict on new data without outcome variable. Output does not include .resid
 newdata <- newdata \%>\%
@@ -185,8 +185,6 @@ Other lm tidiers:
 \concept{lm tidiers}
 \value{
 A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
-  \item{.conf.high}{Upper bound on confidence interval for fitted values.}
-  \item{.conf.low}{Lower bound on confidence interval for fitted values.}
   \item{.cooksd}{Cooks distance.}
   \item{.fitted}{Fitted or predicted value.}
   \item{.hat}{Diagonal of the hat matrix.}

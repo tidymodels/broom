@@ -32,7 +32,7 @@ the \code{data} argument will be ignored.}
 \item{type.predict}{Passed to \code{\link[fixest:predict.fixest]{predict.fixest}}
 \code{type} argument. Defaults to \code{"link"} (like \code{predict.glm}).}
 
-\item{type.residuals}{Passed to \code{\link[fixest:resid.fixest]{predict.fixest}}
+\item{type.residuals}{Passed to \code{\link[fixest:residuals.fixest]{predict.fixest}}
 \code{type} argument. Defaults to \code{"response"} (like \code{residuals.lm}, but unlike
 \code{residuals.glm}).}
 
@@ -88,7 +88,7 @@ data, so you must provide it manually.
 
 augment.fixest only works for \code{\link[fixest:feols]{fixest::feols()}}, \code{\link[fixest:feglm]{fixest::feglm()}}, and
 \code{\link[fixest:femlm]{fixest::femlm()}} models. It does not work with results from
-\code{\link[fixest:femlm]{fixest::fenegbin()}}, \code{\link[fixest:feNmlm]{fixest::feNmlm()}}, or \code{\link[fixest:feglm]{fixest::fepois()}}.
+\code{\link[fixest:fenegbin]{fixest::fenegbin()}}, \code{\link[fixest:feNmlm]{fixest::feNmlm()}}, or \code{\link[fixest:fepois]{fixest::fepois()}}.
 }
 \examples{
 \donttest{
