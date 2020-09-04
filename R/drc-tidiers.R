@@ -81,8 +81,8 @@ glance.drc <- function(x, ...) {
 #' @template param_unused_dots
 #'
 #' @evalRd return_augment(
-#'   ".conf.low",
-#'   ".conf.high",
+#'   ".lower",
+#'   ".upper",
 #'   ".se.fit",
 #'   ".fitted",
 #'   ".resid",
@@ -123,8 +123,8 @@ augment.drc <- function(x, data = NULL, newdata = NULL,
         newdata = newdata, interval = "confidence",
         level = conf.level
       ))
-      ret[[".conf.low"]] <- preds[["Lower"]]
-      ret[[".conf.high"]] <- preds[["Upper"]]
+      ret[[".lower"]] <- preds[["Lower"]]
+      ret[[".upper"]] <- preds[["Upper"]]
     }
     if (se_fit) {
       preds <- data.frame(predict(x, newdata = newdata, se.fit = TRUE))
