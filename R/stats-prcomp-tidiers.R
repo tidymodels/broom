@@ -123,7 +123,7 @@ tidy.prcomp <- function(x, matrix = "u", ...) {
       tibble::remove_rownames() %>%
       as.data.frame()
     ret <- data.frame(
-      label = rep(labels, times = ncomp),
+      label = rep(labels, each = ncomp),
       variables,
       stringsAsFactors = FALSE
     )

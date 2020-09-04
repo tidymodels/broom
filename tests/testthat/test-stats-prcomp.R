@@ -20,6 +20,13 @@ test_that("tidy.prcomp", {
   expect_identical(tidy(pc, matrix = "eigenvalues"), td)
 
   td2 <- tidy(pc, matrix = "v")
+  
+  # columns `column` and `PC` form all
+  # possible unique combinations
+  expect_identical(
+    length(unique(paste(td2$column, td2$PC))),
+    length(unique(td2$column)) * length(unique(td2$PC))
+  )
 
   check_tidy_output(td2, strict = FALSE)
   check_dims(td2, 16, 3)
