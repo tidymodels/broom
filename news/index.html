@@ -173,6 +173,7 @@
 <li>Fixed <code><a href="../reference/augment.fixest.html">augment.fixest()</a></code> returning residuals in the <code>.fitted</code> column. The method also now takes a <code>type.residuals</code> argument and defaults to the same <code>type.predict</code> argument as the <code>fixest</code> <code><a href="https://rdrr.io/r/stats/predict.html">predict()</a></code> method. (<a href='http://github.com/tidymodels/broom/issues/877'>#877</a> by <a href='http://github.com/karldw'>@karldw</a>)</li>
 <li>Fix <code>tidy.felm</code> confidence interval bug. Replaces “robust” argument with “se.type”. (<a href='http://github.com/tidymodels/broom/issues/919'>#919</a> by <a href='http://github.com/grantmcdermott'>@grantmcdermott</a>; supersedes <a href='http://github.com/tidymodels/broom/issues/818'>#818</a> by <a href='http://github.com/kuriwaki'>@kuriwaki</a>)</li>
 <li>Fixed bug related to univariate zoo series in <code><a href="../reference/tidy.zoo.html">tidy.zoo()</a></code> (<a href='http://github.com/tidymodels/broom/issues/916'>#916</a> by <a href='http://github.com/WillemVervoort'>@WillemVervoort</a>)</li>
+<li>Fixed a bug related to <code><a href="../reference/tidy.prcomp.html">tidy.prcomp()</a></code> assigning the wrong PC labels from “loadings” and “scores” matrices (<a href='http://github.com/tidymodels/broom/issues/910'>#910</a> by <a href='http://github.com/tavareshugo'>@tavareshugo</a>)</li>
 </ul>
 </div>
     <div id="broom-070" class="section level1">
