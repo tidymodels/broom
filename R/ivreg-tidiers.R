@@ -41,9 +41,28 @@
 #' # supplementary information for a regression table.
 #' tidy(m, component = "instruments")
 #' 
-#' augment(m)  ##NOT WORKING!!!
-#' augment(m, data = CigaretteDemand) ##NOT WORKING!!!
-#' augment(m, newdata = CigaretteDemand) ##NOT WORKING!!!
+#' augment(m)
+#' augment(m, se_fit = TRUE)
+#' augment(m, se_fit = TRUE, interval = "confidence")
+#' augment(m, newdata = CigaretteDemand[1:10, ], interval = "prediction")
+#' 
+#' # As with tidy.ivreg, we can specify alternate error structures by passing
+#' # on a "vcov" argument from the sandwich package that ivreg objects 
+#' # understand.
+#' augment(m, se_fit = TRUE, vcov = sandwich::vcovHC)
+#' 
+#' # The "interval" and "vcov" arguments above can be combined. Among other
+#' # things, this can be useful for visually inspecting the impact of different 
+#' # standard errors on our model predictions.
+#' library(ggplot2)
+#' augment(m, interval = 'confidence') %>% 
+#'   ggplot(aes(x=.rownames, y=.fitted, ymin=.lower, ymax=.upper)) + 
+#'   geom_pointrange() +
+#'   labs(title = "Predicted values; regular standard errors")
+#' augment(m, interval = 'confidence', vcov = sandwich::vcovHC) %>% 
+#'   ggplot(aes(x=.rownames, y=.fitted, ymin=.lower, ymax=.upper)) + 
+#'   geom_pointrange() +
+#'   labs(title = "Predicted values; robust standard errors")
 #'
 #' glance(m)
 #' # Include stage-1 diagnostics tests
@@ -57,7 +76,7 @@
 tidy.ivreg <- function(x,
                        conf.int = FALSE,
                        conf.level = 0.95,
-                       component = c("stage2", "stage1", "instuments"),
+                       component = c("stage2", "stage1", "instruments"),
                        ...) {
   
   ## Warn users about deprecated "instruments" argument.
@@ -79,7 +98,7 @@ tidy.ivreg <- function(x,
     # put into tibble
     ret <- tibble::tibble(term = names(c1), estimate = c1, std.error = se1,
                           statistic = t1, p.value = p1)
-    if (confint) {
+    if (conf.int) {
       # currently no confint method for first stage. but easy to calc manually.
       # https://github.com/john-d-fox/ivreg/issues/1#issuecomment-687686364
       ret <- ret %>%
@@ -118,9 +137,53 @@ tidy.ivreg <- function(x,
 #' @export
 #' @seealso [augment()], [ivreg::ivreg()]
 #' @family ivreg tidiers
-augment.ivreg <- function(x, data = model.frame(x), newdata = NULL, ...) {
-  # se_fit and interval are not supported for predict.ivreg and, thus, augment.ivreg
-  augment_newdata(x, data, newdata, .se_fit = FALSE, interval = "none")
+augment.ivreg <- function(x, data = model.frame(x), newdata = NULL,
+                          se_fit = FALSE, conf.int = 0.95,
+                          interval =  c("none", "confidence", "prediction"), ...) {
+  # set .se_fit and interval off since not supported out of the box...
+  ret <- augment_newdata(x, data, newdata, .se_fit = FALSE, interval = "none")
+  # ... while predict.ivreg doesn't support interval or se.fit arguments, we can 
+  # roll our own.
+  interval = match.arg (interval)
+  if (se_fit || interval!="none") {
+    s <- summary(x, ...)
+    # Use ... to pass through potential vcov arguments in summary.ivreg
+    v <- s$vcov
+    # get design matrix
+    if (is.null(newdata)) {
+      xmat <- model.matrix(x) 
+    } else {
+      # requires a bit more legwork if user passes newdata
+      tt <- terms(x)
+      Terms <- delete.response(tt)
+      d <- model.frame(Terms, newdata, na.action = na.pass, xlev = x$xlevels)
+      if ("(Intercept)" %in% names(x$coefficients)) {
+        d <- cbind(rep(1, times = nrow(d)), d)
+        colnames(d)[1] <- "(Intercept)"
+      }
+      xmat <- as.matrix(d)
+    }
+    # calc fitted point variance and se values
+    v_pt <- rowSums((xmat %*% v) * xmat)
+    se_pt <- sqrt(v_pt)
+    # add residual variance if prediction interval is desired
+    if (interval=="prediction") {
+      se_pt <- sqrt(v_pt + s$sigma^2)
+    }
+    # add values to return object
+    if (se_fit) {
+      ret$.se_fit = se_pt
+    }
+    if (interval!="none") {
+      dots = list(...)
+      if (is.null(dots$level)) {
+        level <- 0.95
+      }
+      ret$.lower = ret$.fitted - qt(1-(1-level)/2, df=x$df.residual)*se_pt
+      ret$.upper = ret$.fitted + qt(1-(1-level)/2, df=x$df.residual)*se_pt
+    }
+  }
+  ret
 }
 
 #' @templateVar class ivreg
