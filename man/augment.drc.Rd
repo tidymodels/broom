@@ -117,6 +117,8 @@ Other drc tidiers:
 \concept{drc tidiers}
 \value{
 A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
+  \item{.conf.high}{Upper bound on confidence interval for fitted values.}
+  \item{.conf.low}{Lower bound on confidence interval for fitted values.}
   \item{.cooksd}{Cooks distance.}
   \item{.fitted}{Fitted or predicted value.}
   \item{.resid}{The difference between observed and fitted values.}
