@@ -191,10 +191,10 @@ glance.rma <- function(x, ...) {
 #'   .observed = "The observed values for the individual studies",
 #'   ".fitted",
 #'   ".se.fit",
-#'   ".conf.lower",
-#'   ".conf.upper",
-#'   ".pred.lower",
-#'   ".pred.upper",
+#'   ".conf.low",
+#'   ".conf.high",
+#'   ".pred.low",
+#'   ".pred.high",
 #'   ".resid",
 #'   ".moderator",
 #'   ".moderator.level"
@@ -235,9 +235,9 @@ augment.rma <- function(x, ...) {
   pred <- as.data.frame(pred)
 
   # fix names
-  names(pred)[1:4] <- c(".fitted", ".se.fit", ".conf.lower", ".conf.upper")
-  credible_intervals <- names(pred) %in% c("cr.lb", "cr.ub", "pi.lb", "pi.ub")
-  names(pred)[credible_intervals] <- c(".pred.lower", ".pred.upper")
+  names(pred)[1:4] <- c(".fitted", ".se.fit", ".conf.low", ".conf.high")
+  prediction_intervals <- names(pred) %in% c("cr.lb", "cr.ub", "pi.lb", "pi.ub")
+  names(pred)[prediction_intervals] <- c(".pred.low", ".pred.high")
   moderator <- names(pred) == "X"
   names(pred)[moderator] <- ".moderator"
   moderator_level <- names(pred) == "tau2.level"
