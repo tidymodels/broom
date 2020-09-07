@@ -515,7 +515,6 @@ Imports:
     tibble (>= 3.0.0),
     tidyr (>= 1.0.0)
 Suggests:
-    AER,
     akima,
     AUC,
     bbmle,
@@ -547,6 +546,7 @@ Suggests:
     gmm,
     Hmisc,
     irlba,
+    ivreg,
     joineRML,
     Kendall,
     knitr,
@@ -614,7 +614,6 @@ Language: en-US
 Collate:
     'aaa-documentation-helper.R'
     'null-and-default-tidiers.R'
-    'aer-tidiers.R'
     'auc-tidiers.R'
     'base-tidiers.R'
     'bbmle-tidiers.R'
@@ -642,6 +641,7 @@ Collate:
     'glmnet-glmnet-tidiers.R'
     'gmm-tidiers.R'
     'hmisc-tidiers.R'
+    'ivreg-tidiers.R'
     'joinerml-tidiers.R'
     'kendall-tidiers.R'
     'ks-tidiers.R'
