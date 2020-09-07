@@ -56,6 +56,7 @@ drc
 Dunkle
 Durbin
 durbinWatsonTest
+Eicker
 emm
 emmeans
 emmGrid
@@ -92,6 +93,7 @@ Hadley's
 Handcock
 Hausman
 HKB
+homoskedastic
 Hotelling
 htest
 https
@@ -117,6 +119,7 @@ lmodel
 lmrob
 lmRob
 lmtest
+loadings 
 loess
 logLik
 losts
@@ -199,6 +202,7 @@ rma
 RMA
 Rmd
 RMSEA
+RMST
 robustbase
 roc
 rowname
@@ -263,6 +267,7 @@ Walz
 Werner
 Wickham's
 Wickham’s
+Willem
 Wilk's
 Wilks
 xyz
