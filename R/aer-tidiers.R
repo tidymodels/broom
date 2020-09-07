@@ -7,6 +7,10 @@
 #'   coefficients from the second-stage or diagnostics tests for
 #'   each endogenous regressor (F-statistics). Defaults to `FALSE`.
 #' @template param_unused_dots
+#' 
+#' @details This tidier currently only supports `ivreg`-classed objects
+#' outputted by the `AER` package. The `ivreg` package also outputs
+#' objects of class `ivreg`, and will be supported in a later release.
 #'
 #' @evalRd return_tidy(
 #'   "statistic.Sargan",
@@ -87,6 +91,10 @@ tidy.ivreg <- function(x,
 #' @template param_newdata
 #' @template param_unused_dots
 #'
+#' @details This tidier currently only supports `ivreg`-classed objects
+#' outputted by the `AER` package. The `ivreg` package also outputs
+#' objects of class `ivreg`, and will be supported in a later release.
+#'
 #' @evalRd return_augment()
 #'
 #' @export
@@ -108,6 +116,10 @@ augment.ivreg <- function(x, data = model.frame(x), newdata = NULL, ...) {
 #' overidentifying restrictions. Sargan test values are returned as `NA`
 #' if the number of instruments is not greater than the number of
 #' endogenous regressors.
+#' 
+#' @details This tidier currently only supports `ivreg`-classed objects
+#' outputted by the `AER` package. The `ivreg` package also outputs
+#' objects of class `ivreg`, and will be supported in a later release.
 #'
 #' @evalRd return_glance(
 #'   "r.squared",
