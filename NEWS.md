@@ -19,6 +19,8 @@ method also now takes a `type.residuals` argument and defaults to the same
 `type.predict` argument as the `fixest` `predict()` method. (#877 by @karldw)
 * Fix `tidy.felm` confidence interval bug. Replaces "robust" argument with 
 "se.type". (#919 by @grantmcdermott; supersedes #818 by @kuriwaki)
+* Fix a bug in `tidy.drc()` where some term labels would result
+in the overwriting of entries in the `curve` column (#914)
 * Fixed bug related to univariate zoo series in `tidy.zoo()` (#916 by @WillemVervoort)
 * Fixed a bug related to `tidy.prcomp()` assigning the wrong PC labels from "loadings" 
 and "scores" matrices (#910 by @tavareshugo)
