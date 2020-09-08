@@ -134,17 +134,23 @@ tidy.ivreg <- function(x,
 #' @template param_newdata
 #' @template param_unused_dots
 #'
-#' @evalRd return_augment()
-#'
+#' @evalRd return_augment(
+#'   ".lower",
+#'   ".upper", 
+#'   ".se.fit"
+#' )
+#' @note Unlike other `augment()` methods, `augment.ivreg()` only returns a
+#'   `.resid` column if no `newdata` is supplied.
 #' @export
 #' @seealso [augment()], [ivreg::ivreg()]
 #' @family ivreg tidiers
 augment.ivreg <- function(x, data = model.frame(x), newdata = NULL,
                           se_fit = FALSE, conf.int = 0.95,
                           interval =  c("none", "confidence", "prediction"), ...) {
-  # set .se_fit and interval off since not supported out of the box...
+  # Turn off .se_fit and interval args at first, since not supported out of the 
+  # box.
   ret <- augment_newdata(x, data, newdata, .se_fit = FALSE, interval = "none")
-  # ... while predict.ivreg doesn't support interval or se.fit arguments, we can 
+  # ... while predict.ivreg doesn't support se.fit or interval arguments, we can 
   # roll our own.
   interval = match.arg (interval)
   if (se_fit || interval!="none") {
@@ -174,7 +180,7 @@ augment.ivreg <- function(x, data = model.frame(x), newdata = NULL,
     }
     # add values to return object
     if (se_fit) {
-      ret$.se_fit = se_pt
+      ret$.se.fit = se_pt
     }
     if (interval!="none") {
       dots = list(...)
