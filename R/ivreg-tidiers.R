@@ -123,8 +123,15 @@ tidy.ivreg <- function(x,
     ret <- as_tibble(summary(x, ...)$coefficients, rownames = "term")
     colnames(ret) <- c("term", "estimate", "std.error", "statistic", "p.value")
     if (conf.int) {
-      ci <- broom_confint_terms(x, level = conf.level)
-      ret <- dplyr::left_join(ret, ci, by = "term")
+      # Rather use the below since confint doesn't support alternate vcov
+      # methods yet...
+      # ci <- broom_confint_terms(x, level = conf.level)
+      # ret <- dplyr::left_join(ret, ci, by = "term")
+      ret <- ret %>%
+        mutate(
+          conf.low = estimate - stats::qt(1-(1-conf.level)/2, df=x$df.residual)*std.error,
+          conf.high = estimate + stats::qt(1-(1-conf.level)/2, df=x$df.residual)*std.error
+        )
     }
   }
   ret
