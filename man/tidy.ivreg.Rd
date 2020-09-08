@@ -39,11 +39,6 @@ model component varies across models but is usually self-evident.
 If a model has several distinct types of components, you will need to
 specify which components to return.
 }
-\details{
-This tidier currently only supports \code{ivreg}-classed objects
-outputted by the \code{AER} package. The \code{ivreg} package also outputs
-objects of class \code{ivreg}, and will be supported in a later release.
-}
 \examples{
 
 library(ivreg)
@@ -85,13 +80,17 @@ augment(m, se_fit = TRUE, vcov = sandwich::vcovHC)
 # things, this can be useful for visually inspecting the impact of different 
 # standard errors on our model predictions.
 library(ggplot2)
-augment(m, interval = 'confidence') \%>\% 
-  ggplot(aes(x=.rownames, y=.fitted, ymin=.lower, ymax=.upper)) + 
+ggplot(
+  data = augment(m, interval = 'confidence'), 
+  aes(x=.rownames, y=.fitted, ymin=.lower, ymax=.upper)
+  ) + 
   geom_pointrange() +
   ylim(4, 5) +
   labs(title = "Predicted values; regular standard errors")
-augment(m, interval = 'confidence', vcov = sandwich::vcovHC) \%>\% 
-  ggplot(aes(x=.rownames, y=.fitted, ymin=.lower, ymax=.upper)) + 
+ggplot(
+  data = augment(m, interval = 'confidence', vcov = sandwich::vcovHC),
+  aes(x=.rownames, y=.fitted, ymin=.lower, ymax=.upper)
+  ) + 
   geom_pointrange() +
   ylim(4, 5) +
   labs(title = "Predicted values; robust standard errors")
