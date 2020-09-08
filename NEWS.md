@@ -26,8 +26,8 @@ in the overwriting of entries in the `curve` column (#914)
 and "scores" matrices (#910 by @tavareshugo)
 * Update ivreg tidiers after upstream split from AER package. Includes support
 for stage-1 regression components and alternative VCOV error matrices, as well
-as "interval" argument for `augment.ivreg`. (#912 by @grantmcdermott)
-* Added `tidy` method for `AER:tobit`. (#912 by @grantmcdermott above)
+as "interval" argument for `augment.ivreg`. (#922 by @grantmcdermott)
+* Added `tidy` method for `AER:tobit`. (#922 by @grantmcdermott above)
 
 
 # broom 0.7.0
