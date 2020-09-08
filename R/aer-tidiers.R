@@ -4,6 +4,10 @@
 #' @param x A `tobit` object created by a call to [AER::tobit()].
 #' @template param_confint
 #' @template param_unused_dots
+#' 
+#' @details This tidier currently only supports `ivreg`-classed objects
+#' outputted by the `AER` package. The `ivreg` package also outputs
+#' objects of class `ivreg`, and will be supported in a later release.
 #'
 #' @evalRd return_tidy(regression = TRUE)
 #'

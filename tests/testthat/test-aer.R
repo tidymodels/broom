@@ -1,8 +1,3 @@
-
-
-tidy(tob)
-tidy(tob, conf.int = TRUE)
-
 context("aer")
 
 skip_on_cran()

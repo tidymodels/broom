@@ -41,7 +41,7 @@ tidy.drc <- function(x, conf.int = FALSE, conf.level = 0.95, ...) {
     ret <- dplyr::left_join(ret, ci, by = "term")
   }
 
-  tidyr::separate(ret, term, c("term", "curve"))
+  tidyr::separate(ret, term, c("term", "curve"), sep = ":")
 }
 
 #' @templateVar class drc

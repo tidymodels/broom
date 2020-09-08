@@ -39,6 +39,11 @@ model component varies across models but is usually self-evident.
 If a model has several distinct types of components, you will need to
 specify which components to return.
 }
+\details{
+This tidier currently only supports \code{ivreg}-classed objects
+outputted by the \code{AER} package. The \code{ivreg} package also outputs
+objects of class \code{ivreg}, and will be supported in a later release.
+}
 \examples{
 
 library(ivreg)

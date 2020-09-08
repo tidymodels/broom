@@ -55,13 +55,17 @@
 #' # things, this can be useful for visually inspecting the impact of different 
 #' # standard errors on our model predictions.
 #' library(ggplot2)
-#' augment(m, interval = 'confidence') %>% 
-#'   ggplot(aes(x=.rownames, y=.fitted, ymin=.lower, ymax=.upper)) + 
+#' ggplot(
+#'   data = augment(m, interval = 'confidence'), 
+#'   aes(x=.rownames, y=.fitted, ymin=.lower, ymax=.upper)
+#'   ) + 
 #'   geom_pointrange() +
 #'   ylim(4, 5) +
 #'   labs(title = "Predicted values; regular standard errors")
-#' augment(m, interval = 'confidence', vcov = sandwich::vcovHC) %>% 
-#'   ggplot(aes(x=.rownames, y=.fitted, ymin=.lower, ymax=.upper)) + 
+#' ggplot(
+#'   data = augment(m, interval = 'confidence', vcov = sandwich::vcovHC),
+#'   aes(x=.rownames, y=.fitted, ymin=.lower, ymax=.upper)
+#'   ) + 
 #'   geom_pointrange() +
 #'   ylim(4, 5) +
 #'   labs(title = "Predicted values; robust standard errors")
@@ -93,10 +97,10 @@ tidy.ivreg <- function(x,
   if (component %in% c("stage1", "instruments")) {
     # extract components from ivreg stage 1 and calc stats
     c1 <- coef(x, component = 'stage1')
-    v1 <- vcov(x, component = 'stage1')
+    v1 <- stats::vcov(x, component = 'stage1')
     se1 <- sqrt(diag(v1))
     t1 <- c1/se1
-    p1 <- 2*pt(-abs(t1),df=x$df.residual1)
+    p1 <- 2*stats::pt(-abs(t1),df=x$df.residual1)
     # put into tibble
     ret <- tibble::tibble(term = names(c1), estimate = c1, std.error = se1,
                           statistic = t1, p.value = p1)
@@ -105,8 +109,8 @@ tidy.ivreg <- function(x,
       # https://github.com/john-d-fox/ivreg/issues/1#issuecomment-687686364
       ret <- ret %>%
         mutate(
-          conf.low = estimate - qt(1-(1-conf.level)/2, df=x$df.residual1)*std.error,
-          conf.high = estimate + qt(1-(1-conf.level)/2, df=x$df.residual1)*std.error
+          conf.low = estimate - stats::qt(1-(1-conf.level)/2, df=x$df.residual1)*std.error,
+          conf.high = estimate + stats::qt(1-(1-conf.level)/2, df=x$df.residual1)*std.error
         )
     }
     # Special case: Only want to tidy the IVs
@@ -132,7 +136,10 @@ tidy.ivreg <- function(x,
 #' @inherit tidy.ivreg params examples
 #' @template param_data
 #' @template param_newdata
-#' @template param_unused_dots
+#' @template param_se_fit
+#' @template param_interval
+#' @param ... Further arguments to be passed to [ivreg::ivreg.fit()], e.g.
+#'   specifying an alternate variance-covariance structure. See examples
 #'
 #' @evalRd return_augment(
 #'   ".lower",
@@ -159,7 +166,7 @@ augment.ivreg <- function(x, data = model.frame(x), newdata = NULL,
     v <- s$vcov
     # get design matrix
     if (is.null(newdata)) {
-      xmat <- model.matrix(x) 
+      xmat <- stats::model.matrix(x) 
     } else {
       # requires a bit more legwork if user passes newdata
       tt <- terms(x)

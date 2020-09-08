@@ -40,11 +40,11 @@ test_that("tidy.felm", {
   td2 <- tidy(fit2, conf.int = TRUE, fe = TRUE, fe.error = FALSE)
   td3 <- tidy(fit2, conf.int = TRUE, fe = TRUE)
   td4 <- tidy(fit_form)
-  td5 <- tidy(fit, robust = TRUE)
-  td6 <- tidy(fit2, robust = TRUE)
-  td7 <- tidy(fit2, robust = TRUE, fe = TRUE)
+  td5 <- tidy(fit, se = "robust")
+  td6 <- tidy(fit2, se = "robust")
+  td7 <- tidy(fit2, se = "robust", fe = TRUE)
   td8 <- tidy(fit3)
-  td9 <- tidy(fit3, robust = FALSE)
+  td9 <- tidy(fit3, se = "iid")
   
   
   td_multi <- tidy(fit_multi)
@@ -71,6 +71,12 @@ test_that("tidy.felm", {
                as.numeric(lfe:::summary.felm(fit3)$coef[, "Cluster s.e."]))
   expect_equal(dplyr::pull(td9, std.error),
                as.numeric(lfe:::summary.felm(fit3, robust = FALSE)$coef[, "Std. Error"]))
+
+  # check for deprecation warning from 0.7.0.9001
+  expect_warning(
+    tidy(fit, robust = TRUE),
+    '"robust" argument has been deprecated'
+  )
 })
 
 test_that("glance.felm", {

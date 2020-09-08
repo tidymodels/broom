@@ -110,38 +110,19 @@ tidy.prcomp <- function(x, matrix = "u", ...) {
       new_column = "PC"
     )
   } else if (matrix %in% c("rotation", "variables", "v", "loadings")) {
-    labels <- if (is.null(rownames(x$rotation))) {
-      1:nrow(x$rotation)
-    } else {
-      rownames(x$rotation)
-    }
-    variables <- tidyr::pivot_longer(as.data.frame(x$rotation),
-      cols = dplyr::everything(),
-      names_to = "key",
-      values_to = "value"
-    ) %>%
-      tibble::remove_rownames() %>%
-      as.data.frame()
-    ret <- data.frame(
-      label = rep(labels, times = ncomp),
-      variables,
-      stringsAsFactors = FALSE
-    )
-    names(ret) <- c("column", "PC", "value")
+    ret <- x$rotation %>% 
+      tibble::as_tibble(rownames = "column") %>% 
+      tidyr::pivot_longer(cols = -"column", 
+                          names_to = "PC", 
+                          values_to = "value")
+    if (is.null(rownames(x$rotation))) ret$column <- as.integer(ret$column)
   } else if (matrix %in% c("x", "samples", "u", "scores")) {
-    labels <- if (is.null(rownames(x$x))) 1:nrow(x$x) else rownames(x$x)
-    samples <- tidyr::pivot_longer(as.data.frame(x$x),
-      cols = dplyr::everything(),
-      names_to = "key",
-      values_to = "value"
-    ) %>%
-      tibble::remove_rownames() %>%
-      as.data.frame()
-    ret <- data.frame(
-      label = rep(labels, times = ncomp),
-      samples
-    )
-    names(ret) <- c("row", "PC", "value")
+    ret <- x$x %>% 
+      tibble::as_tibble(rownames = "row") %>% 
+      tidyr::pivot_longer(cols = -"row", 
+                          names_to = "PC", 
+                          values_to = "value")
+    if (is.null(rownames(x$x))) ret$row <- as.integer(ret$row)
   }
 
   ## change the PC to a numeric
