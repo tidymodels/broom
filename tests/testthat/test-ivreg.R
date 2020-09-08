@@ -1,30 +1,22 @@
-context("aer")
+context("ivreg")
 
 skip_on_cran()
 
 skip_if_not_installed("modeltests")
 library(modeltests)
 
-skip_if_not_installed("AER")
-library(AER)
+skip_if_not_installed("ivreg")
+library(ivreg)
 library(dplyr)
 library(modeltests)
 
-data("CigarettesSW")
-df <- CigarettesSW %>%
-  mutate(
-    rprice = price / cpi,
-    rincome = income / population / cpi,
-    tdiff = (taxs - tax) / cpi
-  )
+skip_if_not_installed("sandwich")
+library(sandwich)
 
-fit <- ivreg(
-  log(packs) ~ log(rprice) + log(rincome) | log(rincome) + tdiff + I(tax / cpi),
-  data = df, subset = year == "1995"
-)
+data("CigaretteDemand", package = "ivreg")
 
-ivfit1 <- ivreg(mpg ~ hp | qsec + am, data = mtcars)
-ivfit2 <- ivreg(mpg ~ cyl + wt | qsec + am, data = mtcars)
+fit <- ivreg(log(packs) ~ log(rprice) + log(rincome) | salestax + log(rincome),
+             data = CigaretteDemand)
 
 test_that("ivreg tidier arguments", {
   check_arguments(tidy.ivreg)
@@ -33,27 +25,24 @@ test_that("ivreg tidier arguments", {
 })
 
 test_that("tidy.ivreg", {
-  td <- tidy(fit)
+  td1 <- tidy(fit)
   td2 <- tidy(fit, conf.int = TRUE)
+  td3 <- tidy(fit, conf.int = TRUE, vcov = sandwich::vcovHC)
+  td4 <- tidy(fit, component = "stage1")
+  td5 <- tidy(fit, component = "instruments")
 
-  tdiv1 <- tidy(ivfit1, instruments = FALSE)
-  tdiv1_fstat <- tidy(ivfit1, instruments = TRUE)
-  tdiv2 <- tidy(ivfit2, instruments = FALSE)
-  tdiv2_fstat <- tidy(ivfit2, instruments = TRUE)
-
-  check_tidy_output(td)
+  check_tidy_output(td1)
   check_tidy_output(td2)
-  check_tidy_output(tdiv1)
-  check_tidy_output(tdiv1_fstat)
-  check_tidy_output(tdiv2)
-  check_tidy_output(tdiv2_fstat)
+  check_tidy_output(td3)
+  check_tidy_output(td4)
+  check_tidy_output(td5)
 })
 
 test_that("glance.ivreg", {
-  gl <- glance(fit)
+  gl1 <- glance(fit)
   gl2 <- glance(fit, diagnostics = TRUE)
 
-  check_glance_outputs(gl) # separately because diagnostics = TRUE adds cols
+  check_glance_outputs(gl1) # separately because diagnostics = TRUE adds cols
   check_glance_outputs(gl2)
 })
 
@@ -61,11 +50,15 @@ test_that("augment.ivreg", {
   check_augment_function(
     aug = augment.ivreg,
     model = fit,
-    data = df,
-    newdata = df,
+    data = CigaretteDemand,
+    newdata = CigaretteDemand,
     strict = FALSE
   )
 
-  au <- augment(fit)
-  expect_true(all(c(".resid", ".fitted") %in% names(au)))
+  au1 <- augment(fit, CigaretteDemand)
+  expect_true(all(c(".resid", ".fitted") %in% names(au1)))
+  au2 <- augment(fit, se_fit = TRUE, interval = "confidence")
+  expect_true(all(c(".se.fit", ".lower", ".upper") %in% names(au2)))
+  au3 <- augment(fit, se_fit = TRUE, interval = "prediction")
+  expect_true(all(c(".se.fit", ".lower", ".upper") %in% names(au3)))
 })
