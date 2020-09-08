@@ -11,7 +11,7 @@
 #'
 #' library(AER)
 #'
-#' data("Affairs", package = "survival")
+#' data("Affairs", package = "AER")
 #'
 #' tob <- tobit(affairs ~ age + yearsmarried + religiousness + occupation + rating,
 #'              data = Affairs)
