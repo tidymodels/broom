@@ -58,10 +58,12 @@
 #' augment(m, interval = 'confidence') %>% 
 #'   ggplot(aes(x=.rownames, y=.fitted, ymin=.lower, ymax=.upper)) + 
 #'   geom_pointrange() +
+#'   ylim(4, 5) +
 #'   labs(title = "Predicted values; regular standard errors")
 #' augment(m, interval = 'confidence', vcov = sandwich::vcovHC) %>% 
 #'   ggplot(aes(x=.rownames, y=.fitted, ymin=.lower, ymax=.upper)) + 
 #'   geom_pointrange() +
+#'   ylim(4, 5) +
 #'   labs(title = "Predicted values; robust standard errors")
 #'
 #' glance(m)
@@ -251,7 +253,3 @@ glance.ivreg <- function(x, diagnostics = FALSE, ...) {
 
   ret
 }
-
-#' @include null-and-default-tidiers.R
-#' @export
-tidy.tobit <- tidy.default
