@@ -12,7 +12,7 @@
 #'   multiway interaction terms. Note that the `glance.margins()` method
 #'   requires rerunning the underlying model again, which can take some time. 
 #'   Similarly, an `augment.margins()` method is not currently supported, but
-#'   users can simply can the underlying model to  obtain the same information.
+#'   users can simply run the underlying model to obtain the same information.
 #'
 #' @examples
 #' library(margins)

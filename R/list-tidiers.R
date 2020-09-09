@@ -13,7 +13,7 @@
 #' If no appropriate tidying method is found, throws an error.
 #'
 #' @param x A list, potentially representing an object that can be tidied.
-#' @param ... Additionally arguments passed to the tidying function.
+#' @param ... Additionally, arguments passed to the tidying function.
 #'
 #' @name list_tidiers
 #' @export
