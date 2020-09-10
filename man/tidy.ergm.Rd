@@ -23,7 +23,7 @@ regressions, but a bad idea if there is no log or logit link. Defaults
 to \code{FALSE}.}
 
 \item{...}{Additional arguments to pass to \code{\link[ergm:summary.formula]{ergm::summary()}}.
-\strong{Cautionary note}: Mispecified arguments may be silently ignored.}
+\strong{Cautionary note}: Misspecified arguments may be silently ignored.}
 }
 \value{
 A \link[tibble:tibble]{tibble::tibble} with one row for each coefficient in the
