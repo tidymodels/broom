@@ -11,6 +11,8 @@
 #' @seealso [stats::glm()]
 tidy.glm <- function(x, conf.int = FALSE, conf.level = .95,
                      exponentiate = FALSE, ...) {
+  warn_on_glm2(x)
+  
   ret <- as_tibble(summary(x)$coefficients, rownames = "term")
   colnames(ret) <- c("term", "estimate", "std.error", "statistic", "p.value")
 
@@ -70,6 +72,8 @@ augment.glm <- function(x,
                         type.predict = c("link", "response", "terms"),
                         type.residuals = c("deviance", "pearson"),
                         se_fit = FALSE, ...) {
+  warn_on_glm2(x)
+  
   type.predict <- rlang::arg_match(type.predict)
   type.residuals <- rlang::arg_match(type.residuals)
 
@@ -128,6 +132,8 @@ augment.glm <- function(x,
 #' @family lm tidiers
 #' @seealso [stats::glm()]
 glance.glm <- function(x, ...) {
+  warn_on_glm2(x)
+  
   as_glance_tibble(
     null.deviance = x$null.deviance,
     df.null = x$df.null,
@@ -139,4 +145,15 @@ glance.glm <- function(x, ...) {
     nobs = stats::nobs(x),
     na_types = "rirrrrii"
   )
+}
+
+# the output of glm2::glm2 has the same class as objects outputted
+# by stats::glm2. glm2 outputs are currently not supported (intentionally)
+# so warn that output is not maintained.
+warn_on_glm2 <- function(x) {
+  if (x$method == "glm.fit2") {
+    warning("The supplied model object seems to be outputted from the glm2 ",
+            "package. Tidiers for glm2 output are currently not ",
+            "maintained—please use caution in interpreting broom output.")
+  }
 }
