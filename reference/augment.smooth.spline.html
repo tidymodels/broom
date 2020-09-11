@@ -173,7 +173,7 @@ specify which components to return.</p>
     </div>
 
     <pre class="usage"><span class='co'># S3 method for smooth.spline</span>
-<span class='fu'><a href='https://rdrr.io/pkg/generics/man/augment.html'>augment</a></span>(<span class='no'>x</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>x</span>$<span class='no'>data</span>, <span class='no'>...</span>)</pre>
+<span class='fu'><a href='https://rdrr.io/pkg/generics/man/augment.html'>augment</a></span>(<span class='kw'>x</span>, data = <span class='kw'>x</span><span class='op'>$</span><span class='kw'>data</span>, <span class='kw'>...</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -222,8 +222,9 @@ the <code>data</code> argument.</p></td>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
-<span class='no'>spl</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/smooth.spline.html'>smooth.spline</a></span>(<span class='no'>mtcars</span>$<span class='no'>wt</span>, <span class='no'>mtcars</span>$<span class='no'>mpg</span>, <span class='kw'>df</span> <span class='kw'>=</span> <span class='fl'>4</span>)
-<span class='fu'><a href='https://rdrr.io/pkg/generics/man/augment.html'>augment</a></span>(<span class='no'>spl</span>, <span class='no'>mtcars</span>)</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 32 x 13</span><span>
+<span class='kw'>spl</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/smooth.spline.html'>smooth.spline</a></span>(<span class='kw'>mtcars</span><span class='op'>$</span><span class='kw'>wt</span>, <span class='kw'>mtcars</span><span class='op'>$</span><span class='kw'>mpg</span>, df = <span class='fl'>4</span>)
+<span class='fu'><a href='https://rdrr.io/pkg/generics/man/augment.html'>augment</a></span>(<span class='kw'>spl</span>, <span class='kw'>mtcars</span>)
+</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 32 x 13</span><span>
 #&gt;      mpg   cyl  disp    hp  drat    wt  qsec    vs    am  gear  carb .fitted
 #&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
 #&gt; </span><span style='color: #555555;'> 1</span><span>  21       6  160    110  3.9   2.62  16.5     0     1     4     4    22.9
@@ -236,7 +237,8 @@ the <code>data</code> argument.</p></td>
 #&gt; </span><span style='color: #555555;'> 8</span><span>  24.4     4  147.    62  3.69  3.19  20       1     0     4     2    19.2
 #&gt; </span><span style='color: #555555;'> 9</span><span>  22.8     4  141.    95  3.92  3.15  22.9     1     0     4     2    19.5
 #&gt; </span><span style='color: #555555;'>10</span><span>  19.2     6  168.   123  3.92  3.44  18.3     1     0     4     4    17.8
-#&gt; </span><span style='color: #555555;'># … with 22 more rows, and 1 more variable: .resid </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span></div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/generics/man/augment.html'>augment</a></span>(<span class='no'>spl</span>) <span class='co'># calls original columns x and y</span></div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 32 x 5</span><span>
+#&gt; </span><span style='color: #555555;'># … with 22 more rows, and 1 more variable: .resid </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span></div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/generics/man/augment.html'>augment</a></span>(<span class='kw'>spl</span>) <span class='co'># calls original columns x and y</span>
+</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 32 x 5</span><span>
 #&gt;        x     y     w .fitted .resid
 #&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
 #&gt; </span><span style='color: #555555;'> 1</span><span>  2.62  21       1    22.9 -</span><span style='color: #BB0000;'>1.87</span><span> 
@@ -250,10 +252,11 @@ the <code>data</code> argument.</p></td>
 #&gt; </span><span style='color: #555555;'> 9</span><span>  3.15  22.8     1    19.5  3.35 
 #&gt; </span><span style='color: #555555;'>10</span><span>  3.44  19.2     1    17.8  1.43 
 #&gt; </span><span style='color: #555555;'># … with 22 more rows</span><span></div><div class='input'>
-<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>ggplot2</span>)
-<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span>(<span class='fu'><a href='https://rdrr.io/pkg/generics/man/augment.html'>augment</a></span>(<span class='no'>spl</span>, <span class='no'>mtcars</span>), <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='no'>wt</span>, <span class='no'>mpg</span>)) +
-  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_point.html'>geom_point</a></span>() +
-  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_path.html'>geom_line</a></span>(<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>.fitted</span>))</div><div class='img'><img src='augment.smooth.spline-1.png' alt='' width='700' height='433' /></div></span></pre>
+<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='kw'><a href='http://ggplot2.tidyverse.org'>ggplot2</a></span>)
+<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span>(<span class='fu'><a href='https://rdrr.io/pkg/generics/man/augment.html'>augment</a></span>(<span class='kw'>spl</span>, <span class='kw'>mtcars</span>), <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='kw'>wt</span>, <span class='kw'>mpg</span>)) <span class='op'>+</span>
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_point.html'>geom_point</a></span>() <span class='op'>+</span>
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_path.html'>geom_line</a></span>(<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(y = <span class='kw'>.fitted</span>))
+</div><div class='img'><img src='augment.smooth.spline-1.png' alt='' width='700' height='433' /></div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

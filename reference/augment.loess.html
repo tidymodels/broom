@@ -173,7 +173,7 @@ specify which components to return.</p>
     </div>
 
     <pre class="usage"><span class='co'># S3 method for loess</span>
-<span class='fu'><a href='https://rdrr.io/pkg/generics/man/augment.html'>augment</a></span>(<span class='no'>x</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/model.frame.html'>model.frame</a></span>(<span class='no'>x</span>), <span class='kw'>newdata</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>se_fit</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='no'>...</span>)</pre>
+<span class='fu'><a href='https://rdrr.io/pkg/generics/man/augment.html'>augment</a></span>(<span class='kw'>x</span>, data = <span class='fu'><a href='https://rdrr.io/r/stats/model.frame.html'>model.frame</a></span>(<span class='kw'>x</span>), newdata = <span class='kw'>NULL</span>, se_fit = <span class='fl'>FALSE</span>, <span class='kw'>...</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -249,13 +249,14 @@ original <code>loess</code> object was fit with
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
-<span class='no'>lo</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/loess.html'>loess</a></span>(
-  <span class='no'>mpg</span> ~ <span class='no'>hp</span> + <span class='no'>wt</span>,
-  <span class='no'>mtcars</span>,
-  <span class='kw'>control</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/loess.control.html'>loess.control</a></span>(<span class='kw'>surface</span> <span class='kw'>=</span> <span class='st'>"direct"</span>)
+<span class='kw'>lo</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/loess.html'>loess</a></span>(
+  <span class='kw'>mpg</span> <span class='op'>~</span> <span class='kw'>hp</span> <span class='op'>+</span> <span class='kw'>wt</span>,
+  <span class='kw'>mtcars</span>,
+  control = <span class='fu'><a href='https://rdrr.io/r/stats/loess.control.html'>loess.control</a></span>(surface = <span class='st'>"direct"</span>)
 )
 
-<span class='fu'><a href='https://rdrr.io/pkg/generics/man/augment.html'>augment</a></span>(<span class='no'>lo</span>)</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 32 x 6</span><span>
+<span class='fu'><a href='https://rdrr.io/pkg/generics/man/augment.html'>augment</a></span>(<span class='kw'>lo</span>)
+</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 32 x 6</span><span>
 #&gt;    .rownames           mpg    hp    wt .fitted  .resid
 #&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>             </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
 #&gt; </span><span style='color: #555555;'> 1</span><span> Mazda RX4          21     110  2.62    21.4 -</span><span style='color: #BB0000;'>0.435</span><span> 
@@ -270,7 +271,8 @@ original <code>loess</code> object was fit with
 #&gt; </span><span style='color: #555555;'>10</span><span> Merc 280           19.2   123  3.44    18.4  0.801 
 #&gt; </span><span style='color: #555555;'># … with 22 more rows</span><span></div><div class='input'>
 <span class='co'># with all columns of original data</span>
-<span class='fu'><a href='https://rdrr.io/pkg/generics/man/augment.html'>augment</a></span>(<span class='no'>lo</span>, <span class='no'>mtcars</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 32 x 14</span><span>
+<span class='fu'><a href='https://rdrr.io/pkg/generics/man/augment.html'>augment</a></span>(<span class='kw'>lo</span>, <span class='kw'>mtcars</span>)
+</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 32 x 14</span><span>
 #&gt;    .rownames   mpg   cyl  disp    hp  drat    wt  qsec    vs    am  gear  carb
 #&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
 #&gt; </span><span style='color: #555555;'> 1</span><span> Mazda RX4  21       6  160    110  3.9   2.62  16.5     0     1     4     4
@@ -285,7 +287,8 @@ original <code>loess</code> object was fit with
 #&gt; </span><span style='color: #555555;'>10</span><span> Merc 280   19.2     6  168.   123  3.92  3.44  18.3     1     0     4     4
 #&gt; </span><span style='color: #555555;'># … with 22 more rows, and 2 more variables: .fitted </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, .resid </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span></div><div class='input'>
 <span class='co'># with a new dataset</span>
-<span class='fu'><a href='https://rdrr.io/pkg/generics/man/augment.html'>augment</a></span>(<span class='no'>lo</span>, <span class='kw'>newdata</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>(<span class='no'>mtcars</span>))</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 6 x 14</span><span>
+<span class='fu'><a href='https://rdrr.io/pkg/generics/man/augment.html'>augment</a></span>(<span class='kw'>lo</span>, newdata = <span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>(<span class='kw'>mtcars</span>))
+</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 6 x 14</span><span>
 #&gt;   .rownames   mpg   cyl  disp    hp  drat    wt  qsec    vs    am  gear  carb
 #&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
 #&gt; </span><span style='color: #555555;'>1</span><span> Mazda RX4  21       6   160   110  3.9   2.62  16.5     0     1     4     4

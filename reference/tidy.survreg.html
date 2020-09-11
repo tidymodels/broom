@@ -173,7 +173,7 @@ specify which components to return.</p>
     </div>
 
     <pre class="usage"><span class='co'># S3 method for survreg</span>
-<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>x</span>, <span class='kw'>conf.level</span> <span class='kw'>=</span> <span class='fl'>0.95</span>, <span class='kw'>conf.int</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='no'>...</span>)</pre>
+<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='kw'>x</span>, conf.level = <span class='fl'>0.95</span>, conf.int = <span class='fl'>FALSE</span>, <span class='kw'>...</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -246,20 +246,22 @@ the <code>data</code> argument.</p></td>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
-<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>survival</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='kw'><a href='https://github.com/therneau/survival'>survival</a></span>)
 
-<span class='no'>sr</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/survival/man/survreg.html'>survreg</a></span>(
-  <span class='fu'><a href='https://rdrr.io/pkg/survival/man/Surv.html'>Surv</a></span>(<span class='no'>futime</span>, <span class='no'>fustat</span>) ~ <span class='no'>ecog.ps</span> + <span class='no'>rx</span>,
-  <span class='no'>ovarian</span>,
-  <span class='kw'>dist</span> <span class='kw'>=</span> <span class='st'>"exponential"</span>
+<span class='kw'>sr</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/survival/man/survreg.html'>survreg</a></span>(
+  <span class='fu'><a href='https://rdrr.io/pkg/survival/man/Surv.html'>Surv</a></span>(<span class='kw'>futime</span>, <span class='kw'>fustat</span>) <span class='op'>~</span> <span class='kw'>ecog.ps</span> <span class='op'>+</span> <span class='kw'>rx</span>,
+  <span class='kw'>ovarian</span>,
+  dist = <span class='st'>"exponential"</span>
 )
 
-<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>sr</span>)</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 3 x 5</span><span>
+<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='kw'>sr</span>)
+</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 3 x 5</span><span>
 #&gt;   term        estimate std.error statistic     p.value
 #&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>          </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>       </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
 #&gt; </span><span style='color: #555555;'>1</span><span> (Intercept)    6.96      1.32      5.27  0.000</span><span style='text-decoration: underline;'>000</span><span>139
 #&gt; </span><span style='color: #555555;'>2</span><span> ecog.ps       -</span><span style='color: #BB0000;'>0.433</span><span>     0.587    -</span><span style='color: #BB0000;'>0.738</span><span> 0.461      
-#&gt; </span><span style='color: #555555;'>3</span><span> rx             0.582     0.587     0.991 0.322      </div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/generics/man/augment.html'>augment</a></span>(<span class='no'>sr</span>, <span class='no'>ovarian</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 26 x 9</span><span>
+#&gt; </span><span style='color: #555555;'>3</span><span> rx             0.582     0.587     0.991 0.322      </div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/generics/man/augment.html'>augment</a></span>(<span class='kw'>sr</span>, <span class='kw'>ovarian</span>)
+</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 26 x 9</span><span>
 #&gt;    futime fustat   age resid.ds    rx ecog.ps .fitted .se.fit .resid
 #&gt;     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
 #&gt; </span><span style='color: #555555;'> 1</span><span>     59      1  72.3        2     1       1   </span><span style='text-decoration: underline;'>1</span><span>224.    639. -</span><span style='color: #BB0000;text-decoration: underline;'>1</span><span style='color: #BB0000;'>165.</span><span>
@@ -272,17 +274,19 @@ the <code>data</code> argument.</p></td>
 #&gt; </span><span style='color: #555555;'> 8</span><span>    475      1  59.9        2     2       2   </span><span style='text-decoration: underline;'>1</span><span>420.    741.  -</span><span style='color: #BB0000;'>945.</span><span>
 #&gt; </span><span style='color: #555555;'> 9</span><span>    477      0  64.2        2     1       1   </span><span style='text-decoration: underline;'>1</span><span>224.    639.  -</span><span style='color: #BB0000;'>747.</span><span>
 #&gt; </span><span style='color: #555555;'>10</span><span>    563      1  55.2        1     2       2   </span><span style='text-decoration: underline;'>1</span><span>420.    741.  -</span><span style='color: #BB0000;'>857.</span><span>
-#&gt; </span><span style='color: #555555;'># … with 16 more rows</span><span></div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/generics/man/glance.html'>glance</a></span>(<span class='no'>sr</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 1 x 9</span><span>
+#&gt; </span><span style='color: #555555;'># … with 16 more rows</span><span></div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/generics/man/glance.html'>glance</a></span>(<span class='kw'>sr</span>)
+</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 1 x 9</span><span>
 #&gt;    iter    df statistic logLik   AIC   BIC df.residual  nobs p.value
 #&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>       </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
 #&gt; </span><span style='color: #555555;'>1</span><span>     4     3      1.67  -</span><span style='color: #BB0000;'>97.2</span><span>  200.  204.          23    26   0.434</div><div class='input'>
 <span class='co'># coefficient plot</span>
-<span class='no'>td</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>sr</span>, <span class='kw'>conf.int</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>ggplot2</span>)
-<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span>(<span class='no'>td</span>, <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='no'>estimate</span>, <span class='no'>term</span>)) +
-  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_point.html'>geom_point</a></span>() +
-  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_errorbarh.html'>geom_errorbarh</a></span>(<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='kw'>xmin</span> <span class='kw'>=</span> <span class='no'>conf.low</span>, <span class='kw'>xmax</span> <span class='kw'>=</span> <span class='no'>conf.high</span>), <span class='kw'>height</span> <span class='kw'>=</span> <span class='fl'>0</span>) +
-  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_abline.html'>geom_vline</a></span>(<span class='kw'>xintercept</span> <span class='kw'>=</span> <span class='fl'>0</span>)</div><div class='img'><img src='tidy.survreg-1.png' alt='' width='700' height='433' /></div></span></pre>
+<span class='kw'>td</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='kw'>sr</span>, conf.int = <span class='fl'>TRUE</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='kw'><a href='http://ggplot2.tidyverse.org'>ggplot2</a></span>)
+<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span>(<span class='kw'>td</span>, <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='kw'>estimate</span>, <span class='kw'>term</span>)) <span class='op'>+</span>
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_point.html'>geom_point</a></span>() <span class='op'>+</span>
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_errorbarh.html'>geom_errorbarh</a></span>(<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(xmin = <span class='kw'>conf.low</span>, xmax = <span class='kw'>conf.high</span>), height = <span class='fl'>0</span>) <span class='op'>+</span>
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_abline.html'>geom_vline</a></span>(xintercept = <span class='fl'>0</span>)
+</div><div class='img'><img src='tidy.survreg-1.png' alt='' width='700' height='433' /></div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

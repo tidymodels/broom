@@ -173,7 +173,7 @@ specify which components to return.</p>
     </div>
 
     <pre class="usage"><span class='co'># S3 method for survfit</span>
-<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>x</span>, <span class='no'>...</span>)</pre>
+<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='kw'>x</span>, <span class='kw'>...</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -236,11 +236,12 @@ the <code>data</code> argument.</p></td>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
-<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>survival</span>)
-<span class='no'>cfit</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/survival/man/coxph.html'>coxph</a></span>(<span class='fu'><a href='https://rdrr.io/pkg/survival/man/Surv.html'>Surv</a></span>(<span class='no'>time</span>, <span class='no'>status</span>) ~ <span class='no'>age</span> + <span class='no'>sex</span>, <span class='no'>lung</span>)
-<span class='no'>sfit</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/survival/man/survfit.html'>survfit</a></span>(<span class='no'>cfit</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='kw'><a href='https://github.com/therneau/survival'>survival</a></span>)
+<span class='kw'>cfit</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/survival/man/coxph.html'>coxph</a></span>(<span class='fu'><a href='https://rdrr.io/pkg/survival/man/Surv.html'>Surv</a></span>(<span class='kw'>time</span>, <span class='kw'>status</span>) <span class='op'>~</span> <span class='kw'>age</span> <span class='op'>+</span> <span class='kw'>sex</span>, <span class='kw'>lung</span>)
+<span class='kw'>sfit</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/survival/man/survfit.html'>survfit</a></span>(<span class='kw'>cfit</span>)
 
-<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>sfit</span>)</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 186 x 8</span><span>
+<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='kw'>sfit</span>)
+</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 186 x 8</span><span>
 #&gt;     time n.risk n.event n.censor estimate std.error conf.high conf.low
 #&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
 #&gt; </span><span style='color: #555555;'> 1</span><span>     5    228       1        0    0.996   0.004</span><span style='text-decoration: underline;'>19</span><span>     1        0.988
@@ -253,21 +254,24 @@ the <code>data</code> argument.</p></td>
 #&gt; </span><span style='color: #555555;'> 8</span><span>    31    218       1        0    0.954   0.014</span><span style='text-decoration: underline;'>3</span><span>      0.981    0.927
 #&gt; </span><span style='color: #555555;'> 9</span><span>    53    217       2        0    0.945   0.015</span><span style='text-decoration: underline;'>7</span><span>      0.975    0.917
 #&gt; </span><span style='color: #555555;'>10</span><span>    54    215       1        0    0.941   0.016</span><span style='text-decoration: underline;'>3</span><span>      0.972    0.911
-#&gt; </span><span style='color: #555555;'># … with 176 more rows</span><span></div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/generics/man/glance.html'>glance</a></span>(<span class='no'>sfit</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 1 x 10</span><span>
+#&gt; </span><span style='color: #555555;'># … with 176 more rows</span><span></div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/generics/man/glance.html'>glance</a></span>(<span class='kw'>sfit</span>)
+</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 1 x 10</span><span>
 #&gt;   records n.max n.start events rmean rmean.std.error median conf.low conf.high
 #&gt;     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>           </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
 #&gt; </span><span style='color: #555555;'>1</span><span>     228   228     228    165  381.            20.3    320      285       363
 #&gt; </span><span style='color: #555555;'># … with 1 more variable: nobs </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span></div><div class='input'>
-<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>ggplot2</span>)
-<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span>(<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>sfit</span>), <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='no'>time</span>, <span class='no'>estimate</span>)) +
-  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_path.html'>geom_line</a></span>() +
-  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_ribbon.html'>geom_ribbon</a></span>(<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='kw'>ymin</span> <span class='kw'>=</span> <span class='no'>conf.low</span>, <span class='kw'>ymax</span> <span class='kw'>=</span> <span class='no'>conf.high</span>), <span class='kw'>alpha</span> <span class='kw'>=</span> <span class='fl'>.25</span>)</div><div class='img'><img src='tidy.survfit-1.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='kw'><a href='http://ggplot2.tidyverse.org'>ggplot2</a></span>)
+<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span>(<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='kw'>sfit</span>), <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='kw'>time</span>, <span class='kw'>estimate</span>)) <span class='op'>+</span>
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_path.html'>geom_line</a></span>() <span class='op'>+</span>
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_ribbon.html'>geom_ribbon</a></span>(<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(ymin = <span class='kw'>conf.low</span>, ymax = <span class='kw'>conf.high</span>), alpha = <span class='fl'>.25</span>)
+</div><div class='img'><img src='tidy.survfit-1.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'># multi-state</span>
-<span class='no'>fitCI</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/survival/man/survfit.html'>survfit</a></span>(<span class='fu'><a href='https://rdrr.io/pkg/survival/man/Surv.html'>Surv</a></span>(<span class='no'>stop</span>, <span class='no'>status</span> * <span class='fu'><a href='https://rdrr.io/r/base/numeric.html'>as.numeric</a></span>(<span class='no'>event</span>), <span class='kw'>type</span> <span class='kw'>=</span> <span class='st'>"mstate"</span>) ~ <span class='fl'>1</span>,
-  <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>mgus1</span>, <span class='kw'>subset</span> <span class='kw'>=</span> (<span class='no'>start</span> <span class='kw'>==</span> <span class='fl'>0</span>)
+<span class='kw'>fitCI</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/survival/man/survfit.html'>survfit</a></span>(<span class='fu'><a href='https://rdrr.io/pkg/survival/man/Surv.html'>Surv</a></span>(<span class='kw'>stop</span>, <span class='kw'>status</span> <span class='op'>*</span> <span class='fu'><a href='https://rdrr.io/r/base/numeric.html'>as.numeric</a></span>(<span class='kw'>event</span>), type = <span class='st'>"mstate"</span>) <span class='op'>~</span> <span class='fl'>1</span>,
+  data = <span class='kw'>mgus1</span>, subset = (<span class='kw'>start</span> <span class='op'>==</span> <span class='fl'>0</span>)
 )
-<span class='no'>td_multi</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>fitCI</span>)
-<span class='no'>td_multi</span></div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 711 x 9</span><span>
+<span class='kw'>td_multi</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='kw'>fitCI</span>)
+<span class='kw'>td_multi</span>
+</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 711 x 9</span><span>
 #&gt;     time n.risk n.event n.censor estimate std.error conf.high conf.low state
 #&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>
 #&gt; </span><span style='color: #555555;'> 1</span><span>     6    241       0        0    0.996   0.004</span><span style='text-decoration: underline;'>14</span><span>     1        0.988 (s0) 
@@ -281,9 +285,10 @@ the <code>data</code> argument.</p></td>
 #&gt; </span><span style='color: #555555;'> 9</span><span>   153    232       0        0    0.959   0.012</span><span style='text-decoration: underline;'>8</span><span>      0.984    0.934 (s0) 
 #&gt; </span><span style='color: #555555;'>10</span><span>   174    231       0        0    0.954   0.013</span><span style='text-decoration: underline;'>4</span><span>      0.981    0.928 (s0) 
 #&gt; </span><span style='color: #555555;'># … with 701 more rows</span><span></div><div class='input'>
-<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span>(<span class='no'>td_multi</span>, <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='no'>time</span>, <span class='no'>estimate</span>, <span class='kw'>group</span> <span class='kw'>=</span> <span class='no'>state</span>)) +
-  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_path.html'>geom_line</a></span>(<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='kw'>color</span> <span class='kw'>=</span> <span class='no'>state</span>)) +
-  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_ribbon.html'>geom_ribbon</a></span>(<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='kw'>ymin</span> <span class='kw'>=</span> <span class='no'>conf.low</span>, <span class='kw'>ymax</span> <span class='kw'>=</span> <span class='no'>conf.high</span>), <span class='kw'>alpha</span> <span class='kw'>=</span> <span class='fl'>.25</span>)</div><div class='img'><img src='tidy.survfit-2.png' alt='' width='700' height='433' /></div></span></pre>
+<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span>(<span class='kw'>td_multi</span>, <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='kw'>time</span>, <span class='kw'>estimate</span>, group = <span class='kw'>state</span>)) <span class='op'>+</span>
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_path.html'>geom_line</a></span>(<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(color = <span class='kw'>state</span>)) <span class='op'>+</span>
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_ribbon.html'>geom_ribbon</a></span>(<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(ymin = <span class='kw'>conf.low</span>, ymax = <span class='kw'>conf.high</span>), alpha = <span class='fl'>.25</span>)
+</div><div class='img'><img src='tidy.survfit-2.png' alt='' width='700' height='433' /></div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

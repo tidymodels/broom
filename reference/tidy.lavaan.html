@@ -173,7 +173,7 @@ specify which components to return.</p>
     </div>
 
     <pre class="usage"><span class='co'># S3 method for lavaan</span>
-<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>x</span>, <span class='kw'>conf.int</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>conf.level</span> <span class='kw'>=</span> <span class='fl'>0.95</span>, <span class='no'>...</span>)</pre>
+<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='kw'>x</span>, conf.int = <span class='fl'>FALSE</span>, conf.level = <span class='fl'>0.95</span>, <span class='kw'>...</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -207,7 +207,7 @@ Defaults to 0.95, which corresponds to a 95 percent confidence interval.</p></td
 columns:</p>
 <dt>term</dt><dd><p>The result of paste(lhs, op, rhs)</p></dd>
 <dt>op</dt><dd><p>The operator in the model syntax (e.g. <code>~~</code> for covariances, or
-<code>~</code> for regression parameters)</p></dd>
+<code><a href='https://rdrr.io/r/base/tilde.html'>~</a></code> for regression parameters)</p></dd>
 <dt>group</dt><dd><p>The group (if specified) in the lavaan model</p></dd>
 <dt>estimate</dt><dd><p>The parameter estimate (may be standardized)</p></dd>
 <dt>std.error</dt><dd><p></p></dd>
@@ -231,15 +231,17 @@ variances of exogenous covariates.</p></dd>
 <code><a href='glance.lavaan.html'>glance.lavaan</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
-<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>lavaan</span>)
+    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fl'>FALSE</span>) {
+<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='kw'><a href='http://lavaan.org'>lavaan</a></span>)
 
-<span class='no'>cfa.fit</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/lavaan/man/cfa.html'>cfa</a></span>(<span class='st'>"F =~ x1 + x2 + x3 + x4 + x5 + x6 + x7 + x8 + x9"</span>,
-  <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>HolzingerSwineford1939</span>, <span class='kw'>group</span> <span class='kw'>=</span> <span class='st'>"school"</span>
+<span class='kw'>cfa.fit</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/lavaan/man/cfa.html'>cfa</a></span>(<span class='st'>"F =~ x1 + x2 + x3 + x4 + x5 + x6 + x7 + x8 + x9"</span>,
+  data = <span class='kw'>HolzingerSwineford1939</span>, group = <span class='st'>"school"</span>
 )
 
-<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>cfa.fit</span>)
-}</div></pre>
+<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='kw'>cfa.fit</span>)
+}
+
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

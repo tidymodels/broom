@@ -191,7 +191,7 @@ of the appropriate type.</p>
     </div>
 
     <pre class="usage"><span class='co'># S3 method for rlm</span>
-<span class='fu'><a href='https://rdrr.io/pkg/generics/man/glance.html'>glance</a></span>(<span class='no'>x</span>, <span class='no'>...</span>)</pre>
+<span class='fu'><a href='https://rdrr.io/pkg/generics/man/glance.html'>glance</a></span>(<span class='kw'>x</span>, <span class='kw'>...</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -235,17 +235,19 @@ the <code>data</code> argument.</p></td>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
-<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>MASS</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='kw'><a href='http://www.stats.ox.ac.uk/pub/MASS4'>MASS</a></span>)
 
-<span class='no'>r</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/MASS/man/rlm.html'>rlm</a></span>(<span class='no'>stack.loss</span> ~ <span class='no'>.</span>, <span class='no'>stackloss</span>)
+<span class='kw'>r</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/MASS/man/rlm.html'>rlm</a></span>(<span class='kw'>stack.loss</span> <span class='op'>~</span> <span class='kw'>.</span>, <span class='kw'>stackloss</span>)
 
-<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>r</span>)</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 4 x 4</span><span>
+<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='kw'>r</span>)
+</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 4 x 4</span><span>
 #&gt;   term        estimate std.error statistic
 #&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>          </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
 #&gt; </span><span style='color: #555555;'>1</span><span> (Intercept)  -</span><span style='color: #BB0000;'>41.0</span><span>       9.81     -</span><span style='color: #BB0000;'>4.18</span><span> 
 #&gt; </span><span style='color: #555555;'>2</span><span> Air.Flow       0.829     0.111     7.46 
 #&gt; </span><span style='color: #555555;'>3</span><span> Water.Temp     0.926     0.303     3.05 
-#&gt; </span><span style='color: #555555;'>4</span><span> Acid.Conc.    -</span><span style='color: #BB0000;'>0.128</span><span>     0.129    -</span><span style='color: #BB0000;'>0.992</span><span></div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/generics/man/augment.html'>augment</a></span>(<span class='no'>r</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 21 x 8</span><span>
+#&gt; </span><span style='color: #555555;'>4</span><span> Acid.Conc.    -</span><span style='color: #BB0000;'>0.128</span><span>     0.129    -</span><span style='color: #BB0000;'>0.992</span><span></div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/generics/man/augment.html'>augment</a></span>(<span class='kw'>r</span>)
+</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 21 x 8</span><span>
 #&gt;    stack.loss Air.Flow Water.Temp Acid.Conc. .fitted .resid   .hat .sigma
 #&gt;         </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>      </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>      </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
 #&gt; </span><span style='color: #555555;'> 1</span><span>         42       80         27         89    38.9  3.05  0.327    3.32
@@ -258,7 +260,8 @@ the <code>data</code> argument.</p></td>
 #&gt; </span><span style='color: #555555;'> 8</span><span>         20       62         24         93    20.7 -</span><span style='color: #BB0000;'>0.731</span><span> 0.230    3.44
 #&gt; </span><span style='color: #555555;'> 9</span><span>         15       58         23         87    17.3 -</span><span style='color: #BB0000;'>2.25</span><span>  0.155    3.40
 #&gt; </span><span style='color: #555555;'>10</span><span>         14       58         18         80    13.5  0.481 0.213    3.45
-#&gt; </span><span style='color: #555555;'># … with 11 more rows</span><span></div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/generics/man/glance.html'>glance</a></span>(<span class='no'>r</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 1 x 7</span><span>
+#&gt; </span><span style='color: #555555;'># … with 11 more rows</span><span></div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/generics/man/glance.html'>glance</a></span>(<span class='kw'>r</span>)
+</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 1 x 7</span><span>
 #&gt;   sigma converged logLik     AIC   BIC deviance  nobs
 #&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;lgl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;logLik&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>
 #&gt; </span><span style='color: #555555;'>1</span><span>  2.44 TRUE      -52.954   116.  121.     191.    21</div></span></pre>

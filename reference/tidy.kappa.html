@@ -173,7 +173,7 @@ specify which components to return.</p>
     </div>
 
     <pre class="usage"><span class='co'># S3 method for kappa</span>
-<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>x</span>, <span class='no'>...</span>)</pre>
+<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='kw'>x</span>, <span class='kw'>...</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -216,7 +216,8 @@ to <code><a href='https://rdrr.io/pkg/psych/man/kappa.html'>psych::cohen.kappa()
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
-<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>psych</span>)</div><div class='output co'>#&gt; <span class='message'></span>
+<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='kw'><a href='https://personality-project.org/r/psych'>psych</a></span>)
+</div><div class='output co'>#&gt; <span class='message'></span>
 #&gt; <span class='message'>Attaching package: ‘psych’</span></div><div class='output co'>#&gt; <span class='message'>The following object is masked from ‘package:gamlss’:</span>
 #&gt; <span class='message'></span>
 #&gt; <span class='message'>    cs</span></div><div class='output co'>#&gt; <span class='message'>The following object is masked from ‘package:boot’:</span>
@@ -230,20 +231,22 @@ to <code><a href='https://rdrr.io/pkg/psych/man/kappa.html'>psych::cohen.kappa()
 #&gt; <span class='message'>    %+%, alpha</span></div><div class='output co'>#&gt; <span class='message'>The following object is masked from ‘package:mclust’:</span>
 #&gt; <span class='message'></span>
 #&gt; <span class='message'>    sim</span></div><div class='input'>
-<span class='no'>rater1</span> <span class='kw'>&lt;-</span> <span class='fl'>1</span>:<span class='fl'>9</span>
-<span class='no'>rater2</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>, <span class='fl'>3</span>, <span class='fl'>1</span>, <span class='fl'>6</span>, <span class='fl'>1</span>, <span class='fl'>5</span>, <span class='fl'>5</span>, <span class='fl'>6</span>, <span class='fl'>7</span>)
-<span class='no'>ck</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/psych/man/kappa.html'>cohen.kappa</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/cbind.html'>cbind</a></span>(<span class='no'>rater1</span>, <span class='no'>rater2</span>))
+<span class='kw'>rater1</span> <span class='op'>&lt;-</span> <span class='fl'>1</span><span class='op'>:</span><span class='fl'>9</span>
+<span class='kw'>rater2</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>, <span class='fl'>3</span>, <span class='fl'>1</span>, <span class='fl'>6</span>, <span class='fl'>1</span>, <span class='fl'>5</span>, <span class='fl'>5</span>, <span class='fl'>6</span>, <span class='fl'>7</span>)
+<span class='kw'>ck</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/psych/man/kappa.html'>cohen.kappa</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/cbind.html'>cbind</a></span>(<span class='kw'>rater1</span>, <span class='kw'>rater2</span>))
 
-<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>ck</span>)</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 2 x 4</span><span>
+<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='kw'>ck</span>)
+</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 2 x 4</span><span>
 #&gt;   type       estimate conf.low conf.high
 #&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>         </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
 #&gt; </span><span style='color: #555555;'>1</span><span> unweighted    0       -</span><span style='color: #BB0000;'>0.185</span><span>     0.185
 #&gt; </span><span style='color: #555555;'>2</span><span> weighted      0.678    0.430     0.926</div><div class='input'>
 <span class='co'># graph the confidence intervals</span>
-<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>ggplot2</span>)
-<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span>(<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>ck</span>), <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='no'>estimate</span>, <span class='no'>type</span>)) +
-  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_point.html'>geom_point</a></span>() +
-  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_errorbarh.html'>geom_errorbarh</a></span>(<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='kw'>xmin</span> <span class='kw'>=</span> <span class='no'>conf.low</span>, <span class='kw'>xmax</span> <span class='kw'>=</span> <span class='no'>conf.high</span>))</div><div class='img'><img src='tidy.kappa-1.png' alt='' width='700' height='433' /></div></span></pre>
+<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='kw'><a href='http://ggplot2.tidyverse.org'>ggplot2</a></span>)
+<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span>(<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='kw'>ck</span>), <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='kw'>estimate</span>, <span class='kw'>type</span>)) <span class='op'>+</span>
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_point.html'>geom_point</a></span>() <span class='op'>+</span>
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_errorbarh.html'>geom_errorbarh</a></span>(<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(xmin = <span class='kw'>conf.low</span>, xmax = <span class='kw'>conf.high</span>))
+</div><div class='img'><img src='tidy.kappa-1.png' alt='' width='700' height='433' /></div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

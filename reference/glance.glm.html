@@ -191,7 +191,7 @@ of the appropriate type.</p>
     </div>
 
     <pre class="usage"><span class='co'># S3 method for glm</span>
-<span class='fu'><a href='https://rdrr.io/pkg/generics/man/glance.html'>glance</a></span>(<span class='no'>x</span>, <span class='no'>...</span>)</pre>
+<span class='fu'><a href='https://rdrr.io/pkg/generics/man/glance.html'>glance</a></span>(<span class='kw'>x</span>, <span class='kw'>...</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -242,8 +242,9 @@ the <code>data</code> argument.</p></td>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
-<span class='no'>g</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/glm.html'>glm</a></span>(<span class='no'>am</span> ~ <span class='no'>mpg</span>, <span class='no'>mtcars</span>, <span class='kw'>family</span> <span class='kw'>=</span> <span class='st'>"binomial"</span>)
-<span class='fu'><a href='https://rdrr.io/pkg/generics/man/glance.html'>glance</a></span>(<span class='no'>g</span>)</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 1 x 8</span><span>
+<span class='kw'>g</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/glm.html'>glm</a></span>(<span class='kw'>am</span> <span class='op'>~</span> <span class='kw'>mpg</span>, <span class='kw'>mtcars</span>, family = <span class='st'>"binomial"</span>)
+<span class='fu'><a href='https://rdrr.io/pkg/generics/man/glance.html'>glance</a></span>(<span class='kw'>g</span>)
+</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 1 x 8</span><span>
 #&gt;   null.deviance df.null logLik   AIC   BIC deviance df.residual  nobs
 #&gt;           </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>       </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>
 #&gt; </span><span style='color: #555555;'>1</span><span>          43.2      31  -</span><span style='color: #BB0000;'>14.8</span><span>  33.7  36.6     29.7          30    32</div></span></pre>

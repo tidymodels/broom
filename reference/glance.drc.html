@@ -191,7 +191,7 @@ of the appropriate type.</p>
     </div>
 
     <pre class="usage"><span class='co'># S3 method for drc</span>
-<span class='fu'><a href='https://rdrr.io/pkg/generics/man/glance.html'>glance</a></span>(<span class='no'>x</span>, <span class='no'>...</span>)</pre>
+<span class='fu'><a href='https://rdrr.io/pkg/generics/man/glance.html'>glance</a></span>(<span class='kw'>x</span>, <span class='kw'>...</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -233,13 +233,14 @@ the <code>data</code> argument.</p></td>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
-<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>drc</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='kw'><a href='http://www.r-project.org'>drc</a></span>)
 
-<span class='no'>mod</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/drc/man/drm.html'>drm</a></span>(<span class='no'>dead</span> / <span class='no'>total</span> ~ <span class='no'>conc</span>, <span class='no'>type</span>,
-  <span class='kw'>weights</span> <span class='kw'>=</span> <span class='no'>total</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>selenium</span>, <span class='kw'>fct</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/pkg/drc/man/LL.2.html'>LL.2</a></span>(), <span class='kw'>type</span> <span class='kw'>=</span> <span class='st'>"binomial"</span>
+<span class='kw'>mod</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/drc/man/drm.html'>drm</a></span>(<span class='kw'>dead</span> <span class='op'>/</span> <span class='kw'>total</span> <span class='op'>~</span> <span class='kw'>conc</span>, <span class='kw'>type</span>,
+  weights = <span class='kw'>total</span>, data = <span class='kw'>selenium</span>, fct = <span class='fu'><a href='https://rdrr.io/pkg/drc/man/LL.2.html'>LL.2</a></span>(), type = <span class='st'>"binomial"</span>
 )
 
-<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>mod</span>)</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 8 x 6</span><span>
+<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='kw'>mod</span>)
+</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 8 x 6</span><span>
 #&gt;   term  curve estimate std.error statistic  p.value
 #&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
 #&gt; </span><span style='color: #555555;'>1</span><span> b     1       -</span><span style='color: #BB0000;'>1.50</span><span>      0.155     -</span><span style='color: #BB0000;'>9.67</span><span> 2.01</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-22</span><span>
@@ -249,7 +250,8 @@ the <code>data</code> argument.</p></td>
 #&gt; </span><span style='color: #555555;'>5</span><span> e     1      252.       13.8       18.2  1.16</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-74</span><span>
 #&gt; </span><span style='color: #555555;'>6</span><span> e     2      378.       39.4        9.61 3.53</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-22</span><span>
 #&gt; </span><span style='color: #555555;'>7</span><span> e     3      120.        5.91      20.3  1.14</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-91</span><span>
-#&gt; </span><span style='color: #555555;'>8</span><span> e     4       88.8       8.62      10.3  3.28</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-25</span><span></div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>mod</span>, <span class='kw'>conf.int</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 8 x 8</span><span>
+#&gt; </span><span style='color: #555555;'>8</span><span> e     4       88.8       8.62      10.3  3.28</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-25</span><span></div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='kw'>mod</span>, conf.int = <span class='fl'>TRUE</span>)
+</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 8 x 8</span><span>
 #&gt;   term  curve estimate std.error statistic  p.value conf.low conf.high
 #&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
 #&gt; </span><span style='color: #555555;'>1</span><span> b     1       -</span><span style='color: #BB0000;'>1.50</span><span>      0.155     -</span><span style='color: #BB0000;'>9.67</span><span> 2.01</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-22</span><span>    -</span><span style='color: #BB0000;'>1.81</span><span>    -</span><span style='color: #BB0000;'>1.20</span><span> 
@@ -260,11 +262,13 @@ the <code>data</code> argument.</p></td>
 #&gt; </span><span style='color: #555555;'>6</span><span> e     2      378.       39.4        9.61 3.53</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-22</span><span>   301.     456.   
 #&gt; </span><span style='color: #555555;'>7</span><span> e     3      120.        5.91      20.3  1.14</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-91</span><span>   108.     131.   
 #&gt; </span><span style='color: #555555;'>8</span><span> e     4       88.8       8.62      10.3  3.28</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-25</span><span>    71.9    106.   </div><div class='input'>
-<span class='fu'><a href='https://rdrr.io/pkg/generics/man/glance.html'>glance</a></span>(<span class='no'>mod</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 1 x 4</span><span>
+<span class='fu'><a href='https://rdrr.io/pkg/generics/man/glance.html'>glance</a></span>(<span class='kw'>mod</span>)
+</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 1 x 4</span><span>
 #&gt;     AIC   BIC logLik    df.residual
 #&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;logLik&gt;</span><span>        </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>
 #&gt; </span><span style='color: #555555;'>1</span><span>  768.  778. -376.2099          17</div><div class='input'>
-<span class='fu'><a href='https://rdrr.io/pkg/generics/man/augment.html'>augment</a></span>(<span class='no'>mod</span>, <span class='no'>selenium</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 25 x 7</span><span>
+<span class='fu'><a href='https://rdrr.io/pkg/generics/man/augment.html'>augment</a></span>(<span class='kw'>mod</span>, <span class='kw'>selenium</span>)
+</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 25 x 7</span><span>
 #&gt;     type  conc total  dead .fitted  .resid    .cooksd
 #&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>      </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
 #&gt; </span><span style='color: #555555;'> 1</span><span>     1     0   151     3   0      0.019</span><span style='text-decoration: underline;'>9</span><span> 0         

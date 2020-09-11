@@ -173,7 +173,7 @@ specify which components to return.</p>
     </div>
 
     <pre class="usage"><span class='co'># S3 method for glmrob</span>
-<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>x</span>, <span class='kw'>conf.int</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>conf.level</span> <span class='kw'>=</span> <span class='fl'>0.95</span>, <span class='no'>...</span>)</pre>
+<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='kw'>x</span>, conf.int = <span class='fl'>FALSE</span>, conf.level = <span class='fl'>0.95</span>, <span class='kw'>...</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -215,10 +215,10 @@ the <code>data</code> argument.</p></td>
 
     <div class='dont-index'><p><code><a href='https://rdrr.io/pkg/robustbase/man/glmrob.html'>robustbase::glmrob()</a></code></p>
 <p>Other robustbase tidiers: 
-<code><a href='augment.robustbase.glmrob.html'>augment.glmrob</a>()</code>,
-<code><a href='augment.robustbase.lmrob.html'>augment.lmrob</a>()</code>,
-<code><a href='glance.robustbase.lmrob.html'>glance.lmrob</a>()</code>,
-<code><a href='tidy.robustbase.lmrob.html'>tidy.lmrob</a>()</code></p></div>
+<code><a href='augment.glmrob.html'>augment.glmrob</a>()</code>,
+<code><a href='augment.lmrob.html'>augment.lmrob</a>()</code>,
+<code><a href='glance.lmrob.html'>glance.lmrob</a>()</code>,
+<code><a href='tidy.lmrob.html'>tidy.lmrob</a>()</code></p></div>
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>A <code><a href='https://tibble.tidyverse.org/reference/tibble.html'>tibble::tibble()</a></code> with columns:</p>
@@ -234,13 +234,14 @@ the <code>data</code> argument.</p></td>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
-<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>robustbase</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='kw'><a href='http://robustbase.r-forge.r-project.org'>robustbase</a></span>)
 <span class='co'># From the robustbase::lmrob examples:</span>
-<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>coleman</span>)
+<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='kw'>coleman</span>)
 <span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span>(<span class='fl'>0</span>)
 
-<span class='no'>m</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>robustbase</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/robustbase/man/lmrob.html'>lmrob</a></span>(<span class='no'>Y</span> ~ <span class='no'>.</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>coleman</span>)
-<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>m</span>)</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 6 x 5</span><span>
+<span class='kw'>m</span> <span class='op'>&lt;-</span> <span class='kw'>robustbase</span>::<span class='fu'><a href='https://rdrr.io/pkg/robustbase/man/lmrob.html'>lmrob</a></span>(<span class='kw'>Y</span> <span class='op'>~</span> <span class='kw'>.</span>, data = <span class='kw'>coleman</span>)
+<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='kw'>m</span>)
+</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 6 x 5</span><span>
 #&gt;   term        estimate std.error statistic  p.value
 #&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>          </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
 #&gt; </span><span style='color: #555555;'>1</span><span> (Intercept)  30.5       6.71        4.54 4.59</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>- 4</span><span>
@@ -248,7 +249,8 @@ the <code>data</code> argument.</p></td>
 #&gt; </span><span style='color: #555555;'>3</span><span> fatherWc      0.084</span><span style='text-decoration: underline;'>3</span><span>    0.014</span><span style='text-decoration: underline;'>7</span><span>      5.74 5.10</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>- 5</span><span>
 #&gt; </span><span style='color: #555555;'>4</span><span> sstatus       0.668     0.033</span><span style='text-decoration: underline;'>9</span><span>     19.7  1.30</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-11</span><span>
 #&gt; </span><span style='color: #555555;'>5</span><span> teacherSc     1.17      0.110      10.6  4.35</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>- 8</span><span>
-#&gt; </span><span style='color: #555555;'>6</span><span> motherLev    -</span><span style='color: #BB0000;'>4.14</span><span>      0.921      -</span><span style='color: #BB0000;'>4.49</span><span> 5.07</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>- 4</span><span></div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/generics/man/augment.html'>augment</a></span>(<span class='no'>m</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 20 x 8</span><span>
+#&gt; </span><span style='color: #555555;'>6</span><span> motherLev    -</span><span style='color: #BB0000;'>4.14</span><span>      0.921      -</span><span style='color: #BB0000;'>4.49</span><span> 5.07</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>- 4</span><span></div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/generics/man/augment.html'>augment</a></span>(<span class='kw'>m</span>)
+</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 20 x 8</span><span>
 #&gt;        Y salaryP fatherWc sstatus teacherSc motherLev .fitted .resid
 #&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
 #&gt; </span><span style='color: #555555;'> 1</span><span>  37.0    3.83    28.9     7.2       26.6      6.19    36.8  0.191
@@ -270,23 +272,26 @@ the <code>data</code> argument.</p></td>
 #&gt; </span><span style='color: #555555;'>17</span><span>  31.8    3.54    42.6     2.66      25.0      6.33    33.0 -</span><span style='color: #BB0000;'>1.19</span><span> 
 #&gt; </span><span style='color: #555555;'>18</span><span>  31.7    2.52    16.7   -</span><span style='color: #BB0000;'>11.0</span><span>       24.8      6.01    24.5  7.23 
 #&gt; </span><span style='color: #555555;'>19</span><span>  43.1    2.68    86.3    15.0       25.5      7.51    42.1  1.03 
-#&gt; </span><span style='color: #555555;'>20</span><span>  41.0    2.37    76.7    12.8       24.5      6.96    41.4 -</span><span style='color: #BB0000;'>0.367</span><span></div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/generics/man/glance.html'>glance</a></span>(<span class='no'>m</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 1 x 3</span><span>
+#&gt; </span><span style='color: #555555;'>20</span><span>  41.0    2.37    76.7    12.8       24.5      6.96    41.4 -</span><span style='color: #BB0000;'>0.367</span><span></div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/generics/man/glance.html'>glance</a></span>(<span class='kw'>m</span>)
+</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 1 x 3</span><span>
 #&gt;   r.squared sigma df.residual
 #&gt;       </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>       </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>
 #&gt; </span><span style='color: #555555;'>1</span><span>     0.981  1.13          14</div><div class='input'>
 <span class='co'># From the robustbase::glmrob examples:</span>
-<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>carrots</span>)
-<span class='no'>Rfit</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/robustbase/man/glmrob.html'>glmrob</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/cbind.html'>cbind</a></span>(<span class='no'>success</span>, <span class='no'>total</span> - <span class='no'>success</span>) ~ <span class='no'>logdose</span> + <span class='no'>block</span>,
-  <span class='kw'>family</span> <span class='kw'>=</span> <span class='no'>binomial</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>carrots</span>, <span class='kw'>method</span> <span class='kw'>=</span> <span class='st'>"Mqle"</span>,
-  <span class='kw'>control</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/pkg/robustbase/man/glmrob.control.html'>glmrobMqle.control</a></span>(<span class='kw'>tcc</span> <span class='kw'>=</span> <span class='fl'>1.2</span>)
+<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='kw'>carrots</span>)
+<span class='kw'>Rfit</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/robustbase/man/glmrob.html'>glmrob</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/cbind.html'>cbind</a></span>(<span class='kw'>success</span>, <span class='kw'>total</span> <span class='op'>-</span> <span class='kw'>success</span>) <span class='op'>~</span> <span class='kw'>logdose</span> <span class='op'>+</span> <span class='kw'>block</span>,
+  family = <span class='kw'>binomial</span>, data = <span class='kw'>carrots</span>, method = <span class='st'>"Mqle"</span>,
+  control = <span class='fu'><a href='https://rdrr.io/pkg/robustbase/man/glmrob.control.html'>glmrobMqle.control</a></span>(tcc = <span class='fl'>1.2</span>)
 )
-<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>Rfit</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 4 x 5</span><span>
+<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='kw'>Rfit</span>)
+</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 4 x 5</span><span>
 #&gt;   term        estimate std.error statistic      p.value
 #&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>          </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>        </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
 #&gt; </span><span style='color: #555555;'>1</span><span> (Intercept)    2.39      0.692      3.45 0.000</span><span style='text-decoration: underline;'>561</span><span>    
 #&gt; </span><span style='color: #555555;'>2</span><span> logdose       -</span><span style='color: #BB0000;'>2.05</span><span>      0.368     -</span><span style='color: #BB0000;'>5.56</span><span> 0.000</span><span style='text-decoration: underline;'>000</span><span>026</span><span style='text-decoration: underline;'>8</span><span>
 #&gt; </span><span style='color: #555555;'>3</span><span> blockB2        0.235     0.212      1.11 0.268       
-#&gt; </span><span style='color: #555555;'>4</span><span> blockB3       -</span><span style='color: #BB0000;'>0.450</span><span>     0.241     -</span><span style='color: #BB0000;'>1.87</span><span> 0.062</span><span style='text-decoration: underline;'>0</span><span>      </div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/generics/man/augment.html'>augment</a></span>(<span class='no'>Rfit</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 24 x 4</span><span>
+#&gt; </span><span style='color: #555555;'>4</span><span> blockB3       -</span><span style='color: #BB0000;'>0.450</span><span>     0.241     -</span><span style='color: #BB0000;'>1.87</span><span> 0.062</span><span style='text-decoration: underline;'>0</span><span>      </div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/generics/man/augment.html'>augment</a></span>(<span class='kw'>Rfit</span>)
+</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 24 x 4</span><span>
 #&gt;    `cbind(success, total - success)`[,"success"] [,""] logdose block .fitted
 #&gt;                                            </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;fct&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
 #&gt; </span><span style='color: #555555;'> 1</span><span>                                            10    25    1.52 B1     -</span><span style='color: #BB0000;'>0.726</span><span>

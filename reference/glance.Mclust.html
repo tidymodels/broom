@@ -191,7 +191,7 @@ of the appropriate type.</p>
     </div>
 
     <pre class="usage"><span class='co'># S3 method for Mclust</span>
-<span class='fu'><a href='https://rdrr.io/pkg/generics/man/glance.html'>glance</a></span>(<span class='no'>x</span>, <span class='no'>...</span>)</pre>
+<span class='fu'><a href='https://rdrr.io/pkg/generics/man/glance.html'>glance</a></span>(<span class='kw'>x</span>, <span class='kw'>...</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -230,33 +230,35 @@ the <code>data</code> argument.</p></td>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
-<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>dplyr</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>mclust</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='kw'><a href='https://dplyr.tidyverse.org'>dplyr</a></span>)
+<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='kw'><a href='https://mclust-org.github.io/mclust'>mclust</a></span>)
 <span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span>(<span class='fl'>27</span>)
 
-<span class='no'>centers</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>tibble</span><span class='kw ns'>::</span><span class='fu'><a href='https://tibble.tidyverse.org/reference/tibble.html'>tibble</a></span>(
-  <span class='kw'>cluster</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>factor</a></span>(<span class='fl'>1</span>:<span class='fl'>3</span>),
-  <span class='kw'>num_points</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>100</span>, <span class='fl'>150</span>, <span class='fl'>50</span>), <span class='co'># number points in each cluster</span>
-  <span class='kw'>x1</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>5</span>, <span class='fl'>0</span>, -<span class='fl'>3</span>), <span class='co'># x1 coordinate of cluster center</span>
-  <span class='kw'>x2</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(-<span class='fl'>1</span>, <span class='fl'>1</span>, -<span class='fl'>2</span>) <span class='co'># x2 coordinate of cluster center</span>
+<span class='kw'>centers</span> <span class='op'>&lt;-</span> <span class='kw'>tibble</span>::<span class='fu'><a href='https://tibble.tidyverse.org/reference/tibble.html'>tibble</a></span>(
+  cluster = <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>factor</a></span>(<span class='fl'>1</span><span class='op'>:</span><span class='fl'>3</span>),
+  num_points = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>100</span>, <span class='fl'>150</span>, <span class='fl'>50</span>), <span class='co'># number points in each cluster</span>
+  x1 = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>5</span>, <span class='fl'>0</span>, <span class='op'>-</span><span class='fl'>3</span>), <span class='co'># x1 coordinate of cluster center</span>
+  x2 = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='op'>-</span><span class='fl'>1</span>, <span class='fl'>1</span>, <span class='op'>-</span><span class='fl'>2</span>) <span class='co'># x2 coordinate of cluster center</span>
 )
 
-<span class='no'>points</span> <span class='kw'>&lt;-</span> <span class='no'>centers</span> <span class='kw'>%&gt;%</span>
+<span class='kw'>points</span> <span class='op'>&lt;-</span> <span class='kw'>centers</span> <span class='op'>%&gt;%</span>
   <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span>(
-    <span class='kw'>x1</span> <span class='kw'>=</span> <span class='kw pkg'>purrr</span><span class='kw ns'>::</span><span class='fu'><a href='https://purrr.tidyverse.org/reference/map2.html'>map2</a></span>(<span class='no'>num_points</span>, <span class='no'>x1</span>, <span class='no'>rnorm</span>),
-    <span class='kw'>x2</span> <span class='kw'>=</span> <span class='kw pkg'>purrr</span><span class='kw ns'>::</span><span class='fu'><a href='https://purrr.tidyverse.org/reference/map2.html'>map2</a></span>(<span class='no'>num_points</span>, <span class='no'>x2</span>, <span class='no'>rnorm</span>)
-  ) <span class='kw'>%&gt;%</span>
-  <span class='kw pkg'>dplyr</span><span class='kw ns'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/select.html'>select</a></span>(-<span class='no'>num_points</span>, -<span class='no'>cluster</span>) <span class='kw'>%&gt;%</span>
-  <span class='kw pkg'>tidyr</span><span class='kw ns'>::</span><span class='fu'><a href='https://tidyr.tidyverse.org/reference/nest.html'>unnest</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='no'>x1</span>, <span class='no'>x2</span>))
+    x1 = <span class='kw'>purrr</span>::<span class='fu'><a href='https://purrr.tidyverse.org/reference/map2.html'>map2</a></span>(<span class='kw'>num_points</span>, <span class='kw'>x1</span>, <span class='kw'>rnorm</span>),
+    x2 = <span class='kw'>purrr</span>::<span class='fu'><a href='https://purrr.tidyverse.org/reference/map2.html'>map2</a></span>(<span class='kw'>num_points</span>, <span class='kw'>x2</span>, <span class='kw'>rnorm</span>)
+  ) <span class='op'>%&gt;%</span>
+  <span class='kw'>dplyr</span>::<span class='fu'><a href='https://dplyr.tidyverse.org/reference/select.html'>select</a></span>(<span class='op'>-</span><span class='kw'>num_points</span>, <span class='op'>-</span><span class='kw'>cluster</span>) <span class='op'>%&gt;%</span>
+  <span class='kw'>tidyr</span>::<span class='fu'><a href='https://tidyr.tidyverse.org/reference/nest.html'>unnest</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='kw'>x1</span>, <span class='kw'>x2</span>))
 
-<span class='no'>m</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>mclust</span><span class='kw ns'>::</span><span class='fu'><a href='https://mclust-org.github.io/mclust/reference/Mclust.html'>Mclust</a></span>(<span class='no'>points</span>)
+<span class='kw'>m</span> <span class='op'>&lt;-</span> <span class='kw'>mclust</span>::<span class='fu'><a href='https://mclust-org.github.io/mclust/reference/Mclust.html'>Mclust</a></span>(<span class='kw'>points</span>)
 
-<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>m</span>)</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 3 x 6</span><span>
+<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='kw'>m</span>)
+</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 3 x 6</span><span>
 #&gt;   component  size proportion variance mean.x1 mean.x2
 #&gt;       </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>      </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
 #&gt; </span><span style='color: #555555;'>1</span><span>         1   101      0.335     1.12  5.01     -</span><span style='color: #BB0000;'>1.04</span><span>
 #&gt; </span><span style='color: #555555;'>2</span><span>         2   150      0.503     1.12  0.059</span><span style='text-decoration: underline;'>4</span><span>    1.00
-#&gt; </span><span style='color: #555555;'>3</span><span>         3    49      0.161     1.12 -</span><span style='color: #BB0000;'>3.20</span><span>     -</span><span style='color: #BB0000;'>2.06</span><span></div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/generics/man/augment.html'>augment</a></span>(<span class='no'>m</span>, <span class='no'>points</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 300 x 4</span><span>
+#&gt; </span><span style='color: #555555;'>3</span><span>         3    49      0.161     1.12 -</span><span style='color: #BB0000;'>3.20</span><span>     -</span><span style='color: #BB0000;'>2.06</span><span></div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/generics/man/augment.html'>augment</a></span>(<span class='kw'>m</span>, <span class='kw'>points</span>)
+</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 300 x 4</span><span>
 #&gt;       x1     x2 .class .uncertainty
 #&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;fct&gt;</span><span>         </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
 #&gt; </span><span style='color: #555555;'> 1</span><span>  6.91 -</span><span style='color: #BB0000;'>2.74</span><span>  1          3.98</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-11</span><span>
@@ -269,7 +271,8 @@ the <code>data</code> argument.</p></td>
 #&gt; </span><span style='color: #555555;'> 8</span><span>  6.16 -</span><span style='color: #BB0000;'>1.68</span><span>  1          7.64</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>- 9</span><span>
 #&gt; </span><span style='color: #555555;'> 9</span><span>  7.13 -</span><span style='color: #BB0000;'>2.17</span><span>  1          4.16</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-11</span><span>
 #&gt; </span><span style='color: #555555;'>10</span><span>  5.24 -</span><span style='color: #BB0000;'>2.42</span><span>  1          1.16</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>- 7</span><span>
-#&gt; </span><span style='color: #555555;'># … with 290 more rows</span><span></div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/generics/man/glance.html'>glance</a></span>(<span class='no'>m</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 1 x 7</span><span>
+#&gt; </span><span style='color: #555555;'># … with 290 more rows</span><span></div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/generics/man/glance.html'>glance</a></span>(<span class='kw'>m</span>)
+</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 1 x 7</span><span>
 #&gt;   model     G    BIC logLik    df hypvol  nobs
 #&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>
 #&gt; </span><span style='color: #555555;'>1</span><span> EII       3 -</span><span style='color: #BB0000;text-decoration: underline;'>2</span><span style='color: #BB0000;'>402.</span><span> -</span><span style='color: #BB0000;text-decoration: underline;'>1</span><span style='color: #BB0000;'>175.</span><span>     9     </span><span style='color: #BB0000;'>NA</span><span>   300</div></span></pre>

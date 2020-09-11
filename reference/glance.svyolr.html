@@ -191,7 +191,7 @@ of the appropriate type.</p>
     </div>
 
     <pre class="usage"><span class='co'># S3 method for svyolr</span>
-<span class='fu'><a href='https://rdrr.io/pkg/generics/man/glance.html'>glance</a></span>(<span class='no'>x</span>, <span class='no'>...</span>)</pre>
+<span class='fu'><a href='https://rdrr.io/pkg/generics/man/glance.html'>glance</a></span>(<span class='kw'>x</span>, <span class='kw'>...</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -238,11 +238,12 @@ the <code>data</code> argument.</p></td>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
-<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>MASS</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='kw'><a href='http://www.stats.ox.ac.uk/pub/MASS4'>MASS</a></span>)
 
-<span class='no'>fit</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/MASS/man/polr.html'>polr</a></span>(<span class='no'>Sat</span> ~ <span class='no'>Infl</span> + <span class='no'>Type</span> + <span class='no'>Cont</span>, <span class='kw'>weights</span> <span class='kw'>=</span> <span class='no'>Freq</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>housing</span>)
+<span class='kw'>fit</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/MASS/man/polr.html'>polr</a></span>(<span class='kw'>Sat</span> <span class='op'>~</span> <span class='kw'>Infl</span> <span class='op'>+</span> <span class='kw'>Type</span> <span class='op'>+</span> <span class='kw'>Cont</span>, weights = <span class='kw'>Freq</span>, data = <span class='kw'>housing</span>)
 
-<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>fit</span>, <span class='kw'>exponentiate</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>conf.int</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; <span class='message'></span>
+<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='kw'>fit</span>, exponentiate = <span class='fl'>TRUE</span>, conf.int = <span class='fl'>TRUE</span>)
+</div><div class='output co'>#&gt; <span class='message'></span>
 #&gt; <span class='message'>Re-fitting to get Hessian</span></div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 8 x 7</span><span>
 #&gt;   term          estimate std.error statistic conf.low conf.high coef.type  
 #&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>            </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>      
@@ -253,7 +254,8 @@ the <code>data</code> argument.</p></td>
 #&gt; </span><span style='color: #555555;'>5</span><span> TypeTerrace      0.336    0.151      -</span><span style='color: #BB0000;'>7.20</span><span>    0.249     0.451 coefficient
 #&gt; </span><span style='color: #555555;'>6</span><span> ContHigh         1.43     0.095</span><span style='text-decoration: underline;'>5</span><span>      3.77    1.19      1.73  coefficient
 #&gt; </span><span style='color: #555555;'>7</span><span> Low|Medium       0.609    0.125      -</span><span style='color: #BB0000;'>3.97</span><span>   </span><span style='color: #BB0000;'>NA</span><span>        </span><span style='color: #BB0000;'>NA</span><span>     scale      
-#&gt; </span><span style='color: #555555;'>8</span><span> Medium|High      2.00     0.125       5.50   </span><span style='color: #BB0000;'>NA</span><span>        </span><span style='color: #BB0000;'>NA</span><span>     scale      </div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/generics/man/glance.html'>glance</a></span>(<span class='no'>fit</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 1 x 7</span><span>
+#&gt; </span><span style='color: #555555;'>8</span><span> Medium|High      2.00     0.125       5.50   </span><span style='color: #BB0000;'>NA</span><span>        </span><span style='color: #BB0000;'>NA</span><span>     scale      </div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/generics/man/glance.html'>glance</a></span>(<span class='kw'>fit</span>)
+</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 1 x 7</span><span>
 #&gt;     edf logLik   AIC   BIC deviance df.residual  nobs
 #&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>       </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>
 #&gt; </span><span style='color: #555555;'>1</span><span>     8 -</span><span style='color: #BB0000;text-decoration: underline;'>1</span><span style='color: #BB0000;'>740.</span><span> </span><span style='text-decoration: underline;'>3</span><span>495. </span><span style='text-decoration: underline;'>3</span><span>539.    </span><span style='text-decoration: underline;'>3</span><span>479.        </span><span style='text-decoration: underline;'>1</span><span>673  </span><span style='text-decoration: underline;'>1</span><span>681</div></span></pre>

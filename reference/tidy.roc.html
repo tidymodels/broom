@@ -173,7 +173,7 @@ specify which components to return.</p>
     </div>
 
     <pre class="usage"><span class='co'># S3 method for roc</span>
-<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>x</span>, <span class='no'>...</span>)</pre>
+<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='kw'>x</span>, <span class='kw'>...</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -210,14 +210,16 @@ the <code>data</code> argument.</p></td>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
-<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>AUC</span>)</div><div class='output co'>#&gt; <span class='message'>AUC 0.3.0</span></div><div class='output co'>#&gt; <span class='message'>Type AUCNews() to see the change log and ?AUC to get an overview.</span></div><div class='output co'>#&gt; <span class='message'></span>
+<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='kw'>AUC</span>)
+</div><div class='output co'>#&gt; <span class='message'>AUC 0.3.0</span></div><div class='output co'>#&gt; <span class='message'>Type AUCNews() to see the change log and ?AUC to get an overview.</span></div><div class='output co'>#&gt; <span class='message'></span>
 #&gt; <span class='message'>Attaching package: ‘AUC’</span></div><div class='output co'>#&gt; <span class='message'>The following objects are masked from ‘package:caret’:</span>
 #&gt; <span class='message'></span>
-#&gt; <span class='message'>    sensitivity, specificity</span></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>churn</span>)
-<span class='no'>r</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/AUC/man/roc.html'>roc</a></span>(<span class='no'>churn</span>$<span class='no'>predictions</span>, <span class='no'>churn</span>$<span class='no'>labels</span>)
+#&gt; <span class='message'>    sensitivity, specificity</span></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='kw'>churn</span>)
+<span class='kw'>r</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/AUC/man/roc.html'>roc</a></span>(<span class='kw'>churn</span><span class='op'>$</span><span class='kw'>predictions</span>, <span class='kw'>churn</span><span class='op'>$</span><span class='kw'>labels</span>)
 
-<span class='no'>td</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>r</span>)
-<span class='no'>td</span></div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 220 x 3</span><span>
+<span class='kw'>td</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='kw'>r</span>)
+<span class='kw'>td</span>
+</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 220 x 3</span><span>
 #&gt;    cutoff     fpr   tpr
 #&gt;     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
 #&gt; </span><span style='color: #555555;'> 1</span><span>  1     0       0    
@@ -231,26 +233,28 @@ the <code>data</code> argument.</p></td>
 #&gt; </span><span style='color: #555555;'> 9</span><span>  0.908 0.005</span><span style='text-decoration: underline;'>25</span><span> 0.208
 #&gt; </span><span style='color: #555555;'>10</span><span>  0.902 0.005</span><span style='text-decoration: underline;'>25</span><span> 0.214
 #&gt; </span><span style='color: #555555;'># … with 210 more rows</span><span></div><div class='input'>
-<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>ggplot2</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='kw'><a href='http://ggplot2.tidyverse.org'>ggplot2</a></span>)
 
-<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span>(<span class='no'>td</span>, <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='no'>fpr</span>, <span class='no'>tpr</span>)) +
-  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_path.html'>geom_line</a></span>()</div><div class='img'><img src='tidy.roc-1.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span>(<span class='kw'>td</span>, <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='kw'>fpr</span>, <span class='kw'>tpr</span>)) <span class='op'>+</span>
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_path.html'>geom_line</a></span>()
+</div><div class='img'><img src='tidy.roc-1.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'># compare the ROC curves for two prediction algorithms</span>
 
-<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>dplyr</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>tidyr</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='kw'><a href='https://dplyr.tidyverse.org'>dplyr</a></span>)
+<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='kw'><a href='https://tidyr.tidyverse.org'>tidyr</a></span>)
 
-<span class='no'>rocs</span> <span class='kw'>&lt;-</span> <span class='no'>churn</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='https://tidyr.tidyverse.org/reference/pivot_longer.html'>pivot_longer</a></span>(<span class='fu'><a href='https://dplyr.tidyverse.org/reference/reexports.html'>contains</a></span>(<span class='st'>"predictions"</span>),
-    <span class='kw'>names_to</span> <span class='kw'>=</span> <span class='st'>"algorithm"</span>,
-    <span class='kw'>values_to</span> <span class='kw'>=</span> <span class='st'>"value"</span>
-  ) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='https://tidyr.tidyverse.org/reference/nest.html'>nest</a></span>(<span class='kw'>data</span> <span class='kw'>=</span> -<span class='no'>algorithm</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span>(<span class='kw'>tidy_roc</span> <span class='kw'>=</span> <span class='kw pkg'>purrr</span><span class='kw ns'>::</span><span class='fu'><a href='https://purrr.tidyverse.org/reference/map.html'>map</a></span>(<span class='no'>data</span>, ~ <span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='fu'><a href='https://rdrr.io/pkg/AUC/man/roc.html'>roc</a></span>(<span class='no'>.x</span>$<span class='no'>value</span>, <span class='no'>.x</span>$<span class='no'>labels</span>)))) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='https://tidyr.tidyverse.org/reference/nest.html'>unnest</a></span>(<span class='no'>tidy_roc</span>)
+<span class='kw'>rocs</span> <span class='op'>&lt;-</span> <span class='kw'>churn</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://tidyr.tidyverse.org/reference/pivot_longer.html'>pivot_longer</a></span>(<span class='fu'><a href='https://tidyselect.r-lib.org/reference/starts_with.html'>contains</a></span>(<span class='st'>"predictions"</span>),
+    names_to = <span class='st'>"algorithm"</span>,
+    values_to = <span class='st'>"value"</span>
+  ) <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://tidyr.tidyverse.org/reference/nest.html'>nest</a></span>(data = <span class='op'>-</span><span class='kw'>algorithm</span>) <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span>(tidy_roc = <span class='kw'>purrr</span>::<span class='fu'><a href='https://purrr.tidyverse.org/reference/map.html'>map</a></span>(<span class='kw'>data</span>, <span class='op'>~</span> <span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='fu'><a href='https://rdrr.io/pkg/AUC/man/roc.html'>roc</a></span>(<span class='kw'>.x</span><span class='op'>$</span><span class='kw'>value</span>, <span class='kw'>.x</span><span class='op'>$</span><span class='kw'>labels</span>)))) <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://tidyr.tidyverse.org/reference/nest.html'>unnest</a></span>(<span class='kw'>tidy_roc</span>)
 
-<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span>(<span class='no'>rocs</span>, <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='no'>fpr</span>, <span class='no'>tpr</span>, <span class='kw'>color</span> <span class='kw'>=</span> <span class='no'>algorithm</span>)) +
-  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_path.html'>geom_line</a></span>()</div><div class='img'><img src='tidy.roc-2.png' alt='' width='700' height='433' /></div></span></pre>
+<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span>(<span class='kw'>rocs</span>, <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='kw'>fpr</span>, <span class='kw'>tpr</span>, color = <span class='kw'>algorithm</span>)) <span class='op'>+</span>
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_path.html'>geom_line</a></span>()
+</div><div class='img'><img src='tidy.roc-2.png' alt='' width='700' height='433' /></div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

@@ -180,7 +180,7 @@ or <code>glance_&lt;function&gt;</code> and are not exported (but they are docum
 <p>If no appropriate tidying method is found, throws an error.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>glance_optim</span>(<span class='no'>x</span>, <span class='no'>...</span>)</pre>
+    <pre class="usage"><span class='fu'>glance_optim</span>(<span class='kw'>x</span>, <span class='kw'>...</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -224,8 +224,10 @@ the <code>data</code> argument.</p></td>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
-<span class='no'>f</span> <span class='kw'>&lt;-</span> <span class='kw'>function</span>(<span class='no'>x</span>) (<span class='no'>x</span>[<span class='fl'>1</span>] - <span class='fl'>2</span>)^<span class='fl'>2</span> + (<span class='no'>x</span>[<span class='fl'>2</span>] - <span class='fl'>3</span>)^<span class='fl'>2</span> + (<span class='no'>x</span>[<span class='fl'>3</span>] - <span class='fl'>8</span>)^<span class='fl'>2</span>
-<span class='no'>o</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/optim.html'>optim</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>1</span>), <span class='no'>f</span>)</div></pre>
+<span class='kw'>f</span> <span class='op'>&lt;-</span> <span class='fu'>function</span>(<span class='kw'>x</span>) (<span class='kw'>x</span>[<span class='fl'>1</span>] <span class='op'>-</span> <span class='fl'>2</span>)<span class='op'>^</span><span class='fl'>2</span> <span class='op'>+</span> (<span class='kw'>x</span>[<span class='fl'>2</span>] <span class='op'>-</span> <span class='fl'>3</span>)<span class='op'>^</span><span class='fl'>2</span> <span class='op'>+</span> (<span class='kw'>x</span>[<span class='fl'>3</span>] <span class='op'>-</span> <span class='fl'>8</span>)<span class='op'>^</span><span class='fl'>2</span>
+<span class='kw'>o</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/optim.html'>optim</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>1</span>), <span class='kw'>f</span>)
+
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

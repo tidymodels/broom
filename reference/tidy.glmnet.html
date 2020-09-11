@@ -173,7 +173,7 @@ specify which components to return.</p>
     </div>
 
     <pre class="usage"><span class='co'># S3 method for glmnet</span>
-<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>x</span>, <span class='kw'>return_zeros</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='no'>...</span>)</pre>
+<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='kw'>x</span>, return_zeros = <span class='fl'>FALSE</span>, <span class='kw'>...</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -231,14 +231,15 @@ choice of lambda.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
-<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>glmnet</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='kw'><a href='https://glmnet.stanford.edu'>glmnet</a></span>)
 
 <span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span>(<span class='fl'>2014</span>)
-<span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></span>(<span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span>(<span class='fl'>100</span> * <span class='fl'>20</span>), <span class='fl'>100</span>, <span class='fl'>20</span>)
-<span class='no'>y</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span>(<span class='fl'>100</span>)
-<span class='no'>fit1</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/glmnet/man/glmnet.html'>glmnet</a></span>(<span class='no'>x</span>, <span class='no'>y</span>)
+<span class='kw'>x</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></span>(<span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span>(<span class='fl'>100</span> <span class='op'>*</span> <span class='fl'>20</span>), <span class='fl'>100</span>, <span class='fl'>20</span>)
+<span class='kw'>y</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span>(<span class='fl'>100</span>)
+<span class='kw'>fit1</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/glmnet/man/glmnet.html'>glmnet</a></span>(<span class='kw'>x</span>, <span class='kw'>y</span>)
 
-<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>fit1</span>)</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 1,086 x 5</span><span>
+<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='kw'>fit1</span>)
+</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 1,086 x 5</span><span>
 #&gt;    term         step estimate lambda dev.ratio
 #&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>       </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
 #&gt; </span><span style='color: #555555;'> 1</span><span> (Intercept)     1   -</span><span style='color: #BB0000;'>0.207</span><span> 0.152    0      
@@ -251,25 +252,30 @@ choice of lambda.</p>
 #&gt; </span><span style='color: #555555;'> 8</span><span> (Intercept)     8   -</span><span style='color: #BB0000;'>0.210</span><span> 0.079</span><span style='text-decoration: underline;'>5</span><span>   0.049</span><span style='text-decoration: underline;'>7</span><span> 
 #&gt; </span><span style='color: #555555;'> 9</span><span> (Intercept)     9   -</span><span style='color: #BB0000;'>0.209</span><span> 0.072</span><span style='text-decoration: underline;'>4</span><span>   0.059</span><span style='text-decoration: underline;'>3</span><span> 
 #&gt; </span><span style='color: #555555;'>10</span><span> (Intercept)    10   -</span><span style='color: #BB0000;'>0.208</span><span> 0.066</span><span style='text-decoration: underline;'>0</span><span>   0.068</span><span style='text-decoration: underline;'>2</span><span> 
-#&gt; </span><span style='color: #555555;'># … with 1,076 more rows</span><span></div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/generics/man/glance.html'>glance</a></span>(<span class='no'>fit1</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 1 x 3</span><span>
+#&gt; </span><span style='color: #555555;'># … with 1,076 more rows</span><span></div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/generics/man/glance.html'>glance</a></span>(<span class='kw'>fit1</span>)
+</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 1 x 3</span><span>
 #&gt;   nulldev npasses  nobs
 #&gt;     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>
 #&gt; </span><span style='color: #555555;'>1</span><span>    104.     255   100</div><div class='input'>
-<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>dplyr</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>ggplot2</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='kw'><a href='https://dplyr.tidyverse.org'>dplyr</a></span>)
+<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='kw'><a href='http://ggplot2.tidyverse.org'>ggplot2</a></span>)
 
-<span class='no'>tidied</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>fit1</span>) <span class='kw'>%&gt;%</span> <span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span>(<span class='no'>term</span> <span class='kw'>!=</span> <span class='st'>"(Intercept)"</span>)
+<span class='kw'>tidied</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='kw'>fit1</span>) <span class='op'>%&gt;%</span> <span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span>(<span class='kw'>term</span> != <span class='st'>"(Intercept)"</span>)
 
-<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span>(<span class='no'>tidied</span>, <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='no'>step</span>, <span class='no'>estimate</span>, <span class='kw'>group</span> <span class='kw'>=</span> <span class='no'>term</span>)) +
-  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_path.html'>geom_line</a></span>()</div><div class='img'><img src='tidy.glmnet-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span>(<span class='no'>tidied</span>, <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='no'>lambda</span>, <span class='no'>estimate</span>, <span class='kw'>group</span> <span class='kw'>=</span> <span class='no'>term</span>)) +
-  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_path.html'>geom_line</a></span>() +
-  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/scale_continuous.html'>scale_x_log10</a></span>()</div><div class='img'><img src='tidy.glmnet-2.png' alt='' width='700' height='433' /></div><div class='input'>
-<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span>(<span class='no'>tidied</span>, <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='no'>lambda</span>, <span class='no'>dev.ratio</span>)) +
-  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_path.html'>geom_line</a></span>()</div><div class='img'><img src='tidy.glmnet-3.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span>(<span class='kw'>tidied</span>, <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='kw'>step</span>, <span class='kw'>estimate</span>, group = <span class='kw'>term</span>)) <span class='op'>+</span>
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_path.html'>geom_line</a></span>()
+</div><div class='img'><img src='tidy.glmnet-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span>(<span class='kw'>tidied</span>, <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='kw'>lambda</span>, <span class='kw'>estimate</span>, group = <span class='kw'>term</span>)) <span class='op'>+</span>
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_path.html'>geom_line</a></span>() <span class='op'>+</span>
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/scale_continuous.html'>scale_x_log10</a></span>()
+</div><div class='img'><img src='tidy.glmnet-2.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span>(<span class='kw'>tidied</span>, <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='kw'>lambda</span>, <span class='kw'>dev.ratio</span>)) <span class='op'>+</span>
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_path.html'>geom_line</a></span>()
+</div><div class='img'><img src='tidy.glmnet-3.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'># works for other types of regressions as well, such as logistic</span>
-<span class='no'>g2</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/sample.html'>sample</a></span>(<span class='fl'>1</span>:<span class='fl'>2</span>, <span class='fl'>100</span>, <span class='kw'>replace</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
-<span class='no'>fit2</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/glmnet/man/glmnet.html'>glmnet</a></span>(<span class='no'>x</span>, <span class='no'>g2</span>, <span class='kw'>family</span> <span class='kw'>=</span> <span class='st'>"binomial"</span>)
-<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>fit2</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 947 x 5</span><span>
+<span class='kw'>g2</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/sample.html'>sample</a></span>(<span class='fl'>1</span><span class='op'>:</span><span class='fl'>2</span>, <span class='fl'>100</span>, replace = <span class='fl'>TRUE</span>)
+<span class='kw'>fit2</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/glmnet/man/glmnet.html'>glmnet</a></span>(<span class='kw'>x</span>, <span class='kw'>g2</span>, family = <span class='st'>"binomial"</span>)
+<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='kw'>fit2</span>)
+</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 947 x 5</span><span>
 #&gt;    term         step estimate lambda dev.ratio
 #&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>       </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
 #&gt; </span><span style='color: #555555;'> 1</span><span> (Intercept)     1    0.282 0.090</span><span style='text-decoration: underline;'>6</span><span> -</span><span style='color: #BB0000;'>1.46</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-15</span><span>

@@ -173,7 +173,7 @@ specify which components to return.</p>
     </div>
 
     <pre class="usage"><span class='co'># S3 method for betareg</span>
-<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>x</span>, <span class='kw'>conf.int</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>conf.level</span> <span class='kw'>=</span> <span class='fl'>0.95</span>, <span class='no'>...</span>)</pre>
+<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='kw'>x</span>, conf.int = <span class='fl'>FALSE</span>, conf.level = <span class='fl'>0.95</span>, <span class='kw'>...</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -234,12 +234,13 @@ At least one term will have been used to model the precision <code>phi</code>.</
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
-<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>betareg</span>)
-<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='st'>"GasolineYield"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"betareg"</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='kw'>betareg</span>)
+<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='st'>"GasolineYield"</span>, package = <span class='st'>"betareg"</span>)
 
-<span class='no'>mod</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/betareg/man/betareg.html'>betareg</a></span>(<span class='no'>yield</span> ~ <span class='no'>batch</span> + <span class='no'>temp</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>GasolineYield</span>)
+<span class='kw'>mod</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/betareg/man/betareg.html'>betareg</a></span>(<span class='kw'>yield</span> <span class='op'>~</span> <span class='kw'>batch</span> <span class='op'>+</span> <span class='kw'>temp</span>, data = <span class='kw'>GasolineYield</span>)
 
-<span class='no'>mod</span></div><div class='output co'>#&gt; 
+<span class='kw'>mod</span>
+</div><div class='output co'>#&gt; 
 #&gt; Call:
 #&gt; betareg(formula = yield ~ batch + temp, data = GasolineYield)
 #&gt; 
@@ -252,7 +253,8 @@ At least one term will have been used to model the precision <code>phi</code>.</
 #&gt; Phi coefficients (precision model with identity link):
 #&gt; (phi)  
 #&gt; 440.3  
-#&gt; </div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>mod</span>)</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 12 x 6</span><span>
+#&gt; </div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='kw'>mod</span>)
+</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 12 x 6</span><span>
 #&gt;    component term        estimate  std.error statistic   p.value
 #&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>          </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>      </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
 #&gt; </span><span style='color: #555555;'> 1</span><span> mean      (Intercept)  -</span><span style='color: #BB0000;'>6.16</span><span>     0.182       -</span><span style='color: #BB0000;'>33.8</span><span>  3.44</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-250</span><span>
@@ -266,7 +268,8 @@ At least one term will have been used to model the precision <code>phi</code>.</
 #&gt; </span><span style='color: #555555;'> 9</span><span> mean      batch8        0.496    0.109         4.55 5.30</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-  6</span><span>
 #&gt; </span><span style='color: #555555;'>10</span><span> mean      batch9        0.386    0.119         3.25 1.14</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-  3</span><span>
 #&gt; </span><span style='color: #555555;'>11</span><span> mean      temp          0.011</span><span style='text-decoration: underline;'>0</span><span>   0.000</span><span style='text-decoration: underline;'>413</span><span>     26.6  1.26</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-155</span><span>
-#&gt; </span><span style='color: #555555;'>12</span><span> precision (phi)       440.     110.            4.00 6.29</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-  5</span><span></div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>mod</span>, <span class='kw'>conf.int</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 12 x 8</span><span>
+#&gt; </span><span style='color: #555555;'>12</span><span> precision (phi)       440.     110.            4.00 6.29</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-  5</span><span></div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='kw'>mod</span>, conf.int = <span class='fl'>TRUE</span>)
+</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 12 x 8</span><span>
 #&gt;    component term      estimate std.error statistic   p.value conf.low conf.high
 #&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>        </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
 #&gt; </span><span style='color: #555555;'> 1</span><span> mean      (Interce…  -</span><span style='color: #BB0000;'>6.16</span><span>     1.82</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-1</span><span>    -</span><span style='color: #BB0000;'>33.8</span><span>  3.44</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-250</span><span>  -</span><span style='color: #BB0000;'>6.52</span><span>     -</span><span style='color: #BB0000;'>5.80</span><span>  
@@ -280,7 +283,8 @@ At least one term will have been used to model the precision <code>phi</code>.</
 #&gt; </span><span style='color: #555555;'> 9</span><span> mean      batch8      0.496    1.09</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-1</span><span>      4.55 5.30</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-  6</span><span>   0.282     0.709 
 #&gt; </span><span style='color: #555555;'>10</span><span> mean      batch9      0.386    1.19</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-1</span><span>      3.25 1.14</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-  3</span><span>   0.153     0.618 
 #&gt; </span><span style='color: #555555;'>11</span><span> mean      temp        0.011</span><span style='text-decoration: underline;'>0</span><span>   4.13</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-4</span><span>     26.6  1.26</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-155</span><span>   0.010</span><span style='text-decoration: underline;'>2</span><span>    0.011</span><span style='text-decoration: underline;'>8</span><span>
-#&gt; </span><span style='color: #555555;'>12</span><span> precision (phi)     440.       1.10</span><span style='color: #555555;'>e</span><span>+2      4.00 6.29</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-  5</span><span> 225.      656.    </div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>mod</span>, <span class='kw'>conf.int</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>conf.level</span> <span class='kw'>=</span> <span class='fl'>.99</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 12 x 8</span><span>
+#&gt; </span><span style='color: #555555;'>12</span><span> precision (phi)     440.       1.10</span><span style='color: #555555;'>e</span><span>+2      4.00 6.29</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-  5</span><span> 225.      656.    </div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='kw'>mod</span>, conf.int = <span class='fl'>TRUE</span>, conf.level = <span class='fl'>.99</span>)
+</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 12 x 8</span><span>
 #&gt;    component term     estimate  std.error statistic   p.value conf.low conf.high
 #&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>       </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>      </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
 #&gt; </span><span style='color: #555555;'> 1</span><span> mean      (Interc…  -</span><span style='color: #BB0000;'>6.16</span><span>     0.182       -</span><span style='color: #BB0000;'>33.8</span><span>  3.44</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-250</span><span> -</span><span style='color: #BB0000;'>6.63</span><span style='color: #555555;'>e</span><span>+0   -</span><span style='color: #BB0000;'>5.69</span><span>  
@@ -295,7 +299,8 @@ At least one term will have been used to model the precision <code>phi</code>.</
 #&gt; </span><span style='color: #555555;'>10</span><span> mean      batch9     0.386    0.119         3.25 1.14</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-  3</span><span>  8.03</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-2</span><span>    0.691 
 #&gt; </span><span style='color: #555555;'>11</span><span> mean      temp       0.011</span><span style='text-decoration: underline;'>0</span><span>   0.000</span><span style='text-decoration: underline;'>413</span><span>     26.6  1.26</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-155</span><span>  9.90</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-3</span><span>    0.012</span><span style='text-decoration: underline;'>0</span><span>
 #&gt; </span><span style='color: #555555;'>12</span><span> precision (phi)    440.     110.            4.00 6.29</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-  5</span><span>  1.57</span><span style='color: #555555;'>e</span><span>+2  724.    </div><div class='input'>
-<span class='fu'><a href='https://rdrr.io/pkg/generics/man/augment.html'>augment</a></span>(<span class='no'>mod</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 32 x 6</span><span>
+<span class='fu'><a href='https://rdrr.io/pkg/generics/man/augment.html'>augment</a></span>(<span class='kw'>mod</span>)
+</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 32 x 6</span><span>
 #&gt;    yield batch  temp .fitted .resid   .cooksd
 #&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;fct&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
 #&gt; </span><span style='color: #555555;'> 1</span><span> 0.122 1       205  0.101   1.59  0.079</span><span style='text-decoration: underline;'>1</span><span>   
@@ -309,7 +314,8 @@ At least one term will have been used to model the precision <code>phi</code>.</
 #&gt; </span><span style='color: #555555;'> 9</span><span> 0.182 3       272  0.167   1.02  0.044</span><span style='text-decoration: underline;'>1</span><span>   
 #&gt; </span><span style='color: #555555;'>10</span><span> 0.304 3       340  0.298   0.446 0.017</span><span style='text-decoration: underline;'>0</span><span>   
 #&gt; </span><span style='color: #555555;'># … with 22 more rows</span><span></div><div class='input'>
-<span class='fu'><a href='https://rdrr.io/pkg/generics/man/glance.html'>glance</a></span>(<span class='no'>mod</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 1 x 7</span><span>
+<span class='fu'><a href='https://rdrr.io/pkg/generics/man/glance.html'>glance</a></span>(<span class='kw'>mod</span>)
+</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 1 x 7</span><span>
 #&gt;   pseudo.r.squared df.null logLik   AIC   BIC df.residual  nobs
 #&gt;              </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>       </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>
 #&gt; </span><span style='color: #555555;'>1</span><span>            0.962      30   84.8 -</span><span style='color: #BB0000;'>146.</span><span> -</span><span style='color: #BB0000;'>128.</span><span>          20    32</div></span></pre>

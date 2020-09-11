@@ -229,7 +229,7 @@ missing at this time.</p>
     </div>
 
     <pre class="usage"><span class='co'># S3 method for rq</span>
-<span class='fu'><a href='https://rdrr.io/pkg/generics/man/augment.html'>augment</a></span>(<span class='no'>x</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/model.frame.html'>model.frame</a></span>(<span class='no'>x</span>), <span class='kw'>newdata</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>...</span>)</pre>
+<span class='fu'><a href='https://rdrr.io/pkg/generics/man/augment.html'>augment</a></span>(<span class='kw'>x</span>, data = <span class='fu'><a href='https://rdrr.io/r/stats/model.frame.html'>model.frame</a></span>(<span class='kw'>x</span>), newdata = <span class='kw'>NULL</span>, <span class='kw'>...</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -257,7 +257,7 @@ the <code>data</code> argument will be ignored.</p></td>
     </tr>
     <tr>
       <th>...</th>
-      <td><p>Arguments passed on to <code><a href='https://rdrr.io/pkg/quantreg/man/predict.rq.html'>quantreg::predict.rq</a></code></p><dl'>
+      <td><p>Arguments passed on to <code><a href='https://rdrr.io/pkg/quantreg/man/predict.rq.html'>quantreg::predict.rq</a></code></p><dl>
     <dt><code>object</code></dt><dd><p>object of class rq or rqs or rq.process produced by <code>rq</code></p></dd>
     <dt><code>interval</code></dt><dd><p>type of interval desired:  default is  'none', when set to
     'confidence' the function returns a matrix predictions with point predictions

@@ -173,7 +173,7 @@ specify which components to return.</p>
     </div>
 
     <pre class="usage"><span class='co'># S3 method for systemfit</span>
-<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>x</span>, <span class='kw'>conf.int</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>conf.level</span> <span class='kw'>=</span> <span class='fl'>0.95</span>, <span class='no'>...</span>)</pre>
+<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='kw'>x</span>, conf.int = <span class='fl'>TRUE</span>, conf.level = <span class='fl'>0.95</span>, <span class='kw'>...</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -230,28 +230,31 @@ Default returns a tibble of six columns.</p>
     <pre class="examples"><div class='input'>
 <span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span>(<span class='fl'>27</span>)
 
-<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>systemfit</span>)</div><div class='output co'>#&gt; <span class='message'></span>
+<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='kw'><a href='http://www.systemfit.org'>systemfit</a></span>)
+</div><div class='output co'>#&gt; <span class='message'></span>
 #&gt; <span class='message'>Please cite the 'systemfit' package as:</span>
 #&gt; <span class='message'>Arne Henningsen and Jeff D. Hamann (2007). systemfit: A Package for Estimating Systems of Simultaneous Equations in R. Journal of Statistical Software 23(4), 1-40. http://www.jstatsoft.org/v23/i04/.</span>
 #&gt; <span class='message'></span>
 #&gt; <span class='message'>If you have questions, suggestions, or comments regarding the 'systemfit' package, please use a forum or 'tracker' at systemfit's R-Forge site:</span>
 #&gt; <span class='message'>https://r-forge.r-project.org/projects/systemfit/</span></div><div class='input'>
-<span class='no'>df</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>(
-  <span class='kw'>X</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span>(<span class='fl'>100</span>),
-  <span class='kw'>Y</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span>(<span class='fl'>100</span>),
-  <span class='kw'>Z</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span>(<span class='fl'>100</span>),
-  <span class='kw'>W</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span>(<span class='fl'>100</span>)
+<span class='kw'>df</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>(
+  X = <span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span>(<span class='fl'>100</span>),
+  Y = <span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span>(<span class='fl'>100</span>),
+  Z = <span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span>(<span class='fl'>100</span>),
+  W = <span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span>(<span class='fl'>100</span>)
 )
 
-<span class='no'>fit</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/systemfit/man/systemfit.html'>systemfit</a></span>(<span class='kw'>formula</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='no'>Y</span> ~ <span class='no'>Z</span>, <span class='no'>W</span> ~ <span class='no'>X</span>), <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>df</span>, <span class='kw'>method</span> <span class='kw'>=</span> <span class='st'>"SUR"</span>)
-<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>fit</span>)</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 4 x 7</span><span>
+<span class='kw'>fit</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/systemfit/man/systemfit.html'>systemfit</a></span>(formula = <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>Y</span> <span class='op'>~</span> <span class='kw'>Z</span>, <span class='kw'>W</span> <span class='op'>~</span> <span class='kw'>X</span>), data = <span class='kw'>df</span>, method = <span class='st'>"SUR"</span>)
+<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='kw'>fit</span>)
+</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 4 x 7</span><span>
 #&gt;   term            estimate std.error statistic p.value conf.low conf.high
 #&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>              </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
 #&gt; </span><span style='color: #555555;'>1</span><span> eq1_(Intercept)   0.109     0.098</span><span style='text-decoration: underline;'>1</span><span>     1.11    0.269  -</span><span style='color: #BB0000;'>0.085</span><span style='color: #BB0000;text-decoration: underline;'>7</span><span>    0.304 
 #&gt; </span><span style='color: #555555;'>2</span><span> eq1_Z            -</span><span style='color: #BB0000;'>0.080</span><span style='color: #BB0000;text-decoration: underline;'>8</span><span>    0.093</span><span style='text-decoration: underline;'>4</span><span>    -</span><span style='color: #BB0000;'>0.865</span><span>   0.389  -</span><span style='color: #BB0000;'>0.266</span><span>     0.105 
 #&gt; </span><span style='color: #555555;'>3</span><span> eq2_(Intercept)  -</span><span style='color: #BB0000;'>0.049</span><span style='color: #BB0000;text-decoration: underline;'>5</span><span>    0.110     -</span><span style='color: #BB0000;'>0.449</span><span>   0.655  -</span><span style='color: #BB0000;'>0.269</span><span>     0.170 
 #&gt; </span><span style='color: #555555;'>4</span><span> eq2_X            -</span><span style='color: #BB0000;'>0.133</span><span>     0.103     -</span><span style='color: #BB0000;'>1.30</span><span>    0.198  -</span><span style='color: #BB0000;'>0.337</span><span>     0.070</span><span style='text-decoration: underline;'>7</span><span></div><div class='input'>
-<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>fit</span>, <span class='kw'>conf.int</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 4 x 7</span><span>
+<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='kw'>fit</span>, conf.int = <span class='fl'>TRUE</span>)
+</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 4 x 7</span><span>
 #&gt;   term            estimate std.error statistic p.value conf.low conf.high
 #&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>              </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
 #&gt; </span><span style='color: #555555;'>1</span><span> eq1_(Intercept)   0.109     0.098</span><span style='text-decoration: underline;'>1</span><span>     1.11    0.269  -</span><span style='color: #BB0000;'>0.085</span><span style='color: #BB0000;text-decoration: underline;'>7</span><span>    0.304 

@@ -229,7 +229,7 @@ missing at this time.</p>
     </div>
 
     <pre class="usage"><span class='co'># S3 method for mlogit</span>
-<span class='fu'><a href='https://rdrr.io/pkg/generics/man/augment.html'>augment</a></span>(<span class='no'>x</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>x</span>$<span class='no'>model</span>, <span class='no'>...</span>)</pre>
+<span class='fu'><a href='https://rdrr.io/pkg/generics/man/augment.html'>augment</a></span>(<span class='kw'>x</span>, data = <span class='kw'>x</span><span class='op'>$</span><span class='kw'>model</span>, <span class='kw'>...</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -276,16 +276,18 @@ it up to predict on another dataset.</p>
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
-<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>mlogit</span>)
-<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='st'>"Fishing"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"mlogit"</span>)
-<span class='no'>Fish</span> <span class='kw'>&lt;-</span> <span class='fu'>dfidx</span>(<span class='no'>Fishing</span>, <span class='kw'>varying</span> <span class='kw'>=</span> <span class='fl'>2</span>:<span class='fl'>9</span>, <span class='kw'>shape</span> <span class='kw'>=</span> <span class='st'>"wide"</span>, <span class='kw'>choice</span> <span class='kw'>=</span> <span class='st'>"mode"</span>)
-<span class='no'>m</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/mlogit/man/mlogit.html'>mlogit</a></span>(<span class='no'>mode</span> ~ <span class='no'>price</span> + <span class='no'>catch</span> <span class='kw'>|</span> <span class='no'>income</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>Fish</span>)
+    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fl'>FALSE</span>) {
+<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='kw'><a href='https://cran.r-project.org/package=mlogit'>mlogit</a></span>)
+<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='st'>"Fishing"</span>, package = <span class='st'>"mlogit"</span>)
+<span class='kw'>Fish</span> <span class='op'>&lt;-</span> <span class='fu'>dfidx</span>(<span class='kw'>Fishing</span>, varying = <span class='fl'>2</span><span class='op'>:</span><span class='fl'>9</span>, shape = <span class='st'>"wide"</span>, choice = <span class='st'>"mode"</span>)
+<span class='kw'>m</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/mlogit/man/mlogit.html'>mlogit</a></span>(<span class='kw'>mode</span> <span class='op'>~</span> <span class='kw'>price</span> <span class='op'>+</span> <span class='kw'>catch</span> <span class='op'>|</span> <span class='kw'>income</span>, data = <span class='kw'>Fish</span>)
 
-<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>m</span>)
-<span class='fu'><a href='https://rdrr.io/pkg/generics/man/augment.html'>augment</a></span>(<span class='no'>m</span>)
-<span class='fu'><a href='https://rdrr.io/pkg/generics/man/glance.html'>glance</a></span>(<span class='no'>m</span>)
-}</div></pre>
+<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='kw'>m</span>)
+<span class='fu'><a href='https://rdrr.io/pkg/generics/man/augment.html'>augment</a></span>(<span class='kw'>m</span>)
+<span class='fu'><a href='https://rdrr.io/pkg/generics/man/glance.html'>glance</a></span>(<span class='kw'>m</span>)
+}
+
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

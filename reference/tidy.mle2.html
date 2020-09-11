@@ -173,7 +173,7 @@ specify which components to return.</p>
     </div>
 
     <pre class="usage"><span class='co'># S3 method for mle2</span>
-<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>x</span>, <span class='kw'>conf.int</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>conf.level</span> <span class='kw'>=</span> <span class='fl'>0.95</span>, <span class='no'>...</span>)</pre>
+<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='kw'>x</span>, conf.int = <span class='fl'>FALSE</span>, conf.level = <span class='fl'>0.95</span>, <span class='kw'>...</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -225,21 +225,23 @@ the <code>data</code> argument.</p></td>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
-<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>bbmle</span>)</div><div class='output co'>#&gt; <span class='message'>Loading required package: stats4</span></div><div class='output co'>#&gt; <span class='message'></span>
+<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='kw'><a href='https://github.com/bbolker/bbmle'>bbmle</a></span>)
+</div><div class='output co'>#&gt; <span class='message'>Loading required package: stats4</span></div><div class='output co'>#&gt; <span class='message'></span>
 #&gt; <span class='message'>Attaching package: ‘bbmle’</span></div><div class='output co'>#&gt; <span class='message'>The following object is masked from ‘package:ordinal’:</span>
 #&gt; <span class='message'></span>
 #&gt; <span class='message'>    slice</span></div><div class='output co'>#&gt; <span class='message'>The following object is masked from ‘package:dplyr’:</span>
 #&gt; <span class='message'></span>
 #&gt; <span class='message'>    slice</span></div><div class='input'>
-<span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fl'>0</span>:<span class='fl'>10</span>
-<span class='no'>y</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>26</span>, <span class='fl'>17</span>, <span class='fl'>13</span>, <span class='fl'>12</span>, <span class='fl'>20</span>, <span class='fl'>5</span>, <span class='fl'>9</span>, <span class='fl'>8</span>, <span class='fl'>5</span>, <span class='fl'>4</span>, <span class='fl'>8</span>)
-<span class='no'>d</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>(<span class='no'>x</span>, <span class='no'>y</span>)
+<span class='kw'>x</span> <span class='op'>&lt;-</span> <span class='fl'>0</span><span class='op'>:</span><span class='fl'>10</span>
+<span class='kw'>y</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>26</span>, <span class='fl'>17</span>, <span class='fl'>13</span>, <span class='fl'>12</span>, <span class='fl'>20</span>, <span class='fl'>5</span>, <span class='fl'>9</span>, <span class='fl'>8</span>, <span class='fl'>5</span>, <span class='fl'>4</span>, <span class='fl'>8</span>)
+<span class='kw'>d</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>(<span class='kw'>x</span>, <span class='kw'>y</span>)
 
-<span class='no'>fit</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/bbmle/man/mle2.html'>mle2</a></span>(<span class='no'>y</span> ~ <span class='fu'><a href='https://rdrr.io/r/stats/Poisson.html'>dpois</a></span>(<span class='kw'>lambda</span> <span class='kw'>=</span> <span class='no'>ymean</span>),
-  <span class='kw'>start</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>ymean</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/mean.html'>mean</a></span>(<span class='no'>y</span>)), <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>d</span>
+<span class='kw'>fit</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/bbmle/man/mle2.html'>mle2</a></span>(<span class='kw'>y</span> <span class='op'>~</span> <span class='fu'><a href='https://rdrr.io/r/stats/Poisson.html'>dpois</a></span>(lambda = <span class='kw'>ymean</span>),
+  start = <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(ymean = <span class='fu'><a href='https://rdrr.io/r/base/mean.html'>mean</a></span>(<span class='kw'>y</span>)), data = <span class='kw'>d</span>
 )
 
-<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>fit</span>)</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 1 x 5</span><span>
+<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='kw'>fit</span>)
+</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 1 x 5</span><span>
 #&gt;   term  estimate std.error statistic  p.value
 #&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
 #&gt; </span><span style='color: #555555;'>1</span><span> ymean     11.5      1.02      11.3 1.86</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-29</span><span></div></span></pre>

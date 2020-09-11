@@ -173,7 +173,7 @@ specify which components to return.</p>
     </div>
 
     <pre class="usage"><span class='co'># S3 method for kde</span>
-<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>x</span>, <span class='no'>...</span>)</pre>
+<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='kw'>x</span>, <span class='kw'>...</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -216,13 +216,14 @@ on the output to return to a wide format.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
-<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>ks</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='kw'><a href='http://www.mvstat.net/mvksa'>ks</a></span>)
 
-<span class='no'>dat</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/lapply.html'>replicate</a></span>(<span class='fl'>2</span>, <span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span>(<span class='fl'>100</span>))
-<span class='no'>k</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/ks/man/kde.html'>kde</a></span>(<span class='no'>dat</span>)
+<span class='kw'>dat</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/lapply.html'>replicate</a></span>(<span class='fl'>2</span>, <span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span>(<span class='fl'>100</span>))
+<span class='kw'>k</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/ks/man/kde.html'>kde</a></span>(<span class='kw'>dat</span>)
 
-<span class='no'>td</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>k</span>)
-<span class='no'>td</span></div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 45,602 x 4</span><span>
+<span class='kw'>td</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='kw'>k</span>)
+<span class='kw'>td</span>
+</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 45,602 x 4</span><span>
 #&gt;      obs variable value estimate
 #&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
 #&gt; </span><span style='color: #555555;'> 1</span><span>     1 x1       -</span><span style='color: #BB0000;'>5.41</span><span>        0
@@ -236,24 +237,26 @@ on the output to return to a wide format.</p>
 #&gt; </span><span style='color: #555555;'> 9</span><span>     9 x1       -</span><span style='color: #BB0000;'>4.90</span><span>        0
 #&gt; </span><span style='color: #555555;'>10</span><span>    10 x1       -</span><span style='color: #BB0000;'>4.84</span><span>        0
 #&gt; </span><span style='color: #555555;'># … with 45,592 more rows</span><span></div><div class='input'>
-<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>ggplot2</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>dplyr</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>tidyr</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='kw'><a href='http://ggplot2.tidyverse.org'>ggplot2</a></span>)
+<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='kw'><a href='https://dplyr.tidyverse.org'>dplyr</a></span>)
+<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='kw'><a href='https://tidyr.tidyverse.org'>tidyr</a></span>)
 
-<span class='no'>td</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='https://tidyr.tidyverse.org/reference/pivot_wider.html'>pivot_wider</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='no'>obs</span>, <span class='no'>estimate</span>),
-    <span class='kw'>names_from</span> <span class='kw'>=</span> <span class='no'>variable</span>,
-    <span class='kw'>values_from</span> <span class='kw'>=</span> <span class='no'>value</span>
-  ) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span>(<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='no'>x1</span>, <span class='no'>x2</span>, <span class='kw'>fill</span> <span class='kw'>=</span> <span class='no'>estimate</span>)) +
-  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_tile.html'>geom_tile</a></span>() +
-  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggtheme.html'>theme_void</a></span>()</div><div class='img'><img src='tidy.kde-1.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='kw'>td</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://tidyr.tidyverse.org/reference/pivot_wider.html'>pivot_wider</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='kw'>obs</span>, <span class='kw'>estimate</span>),
+    names_from = <span class='kw'>variable</span>,
+    values_from = <span class='kw'>value</span>
+  ) <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span>(<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='kw'>x1</span>, <span class='kw'>x2</span>, fill = <span class='kw'>estimate</span>)) <span class='op'>+</span>
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_tile.html'>geom_tile</a></span>() <span class='op'>+</span>
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggtheme.html'>theme_void</a></span>()
+</div><div class='img'><img src='tidy.kde-1.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'># also works with 3 dimensions</span>
-<span class='no'>dat3</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/lapply.html'>replicate</a></span>(<span class='fl'>3</span>, <span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span>(<span class='fl'>100</span>))
-<span class='no'>k3</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/ks/man/kde.html'>kde</a></span>(<span class='no'>dat3</span>)
+<span class='kw'>dat3</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/lapply.html'>replicate</a></span>(<span class='fl'>3</span>, <span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span>(<span class='fl'>100</span>))
+<span class='kw'>k3</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/ks/man/kde.html'>kde</a></span>(<span class='kw'>dat3</span>)
 
-<span class='no'>td3</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>k3</span>)
-<span class='no'>td3</span></div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 397,953 x 4</span><span>
+<span class='kw'>td3</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='kw'>k3</span>)
+<span class='kw'>td3</span>
+</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 397,953 x 4</span><span>
 #&gt;      obs variable value estimate
 #&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
 #&gt; </span><span style='color: #555555;'> 1</span><span>     1 x1       -</span><span style='color: #BB0000;'>4.77</span><span>        0

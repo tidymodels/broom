@@ -191,7 +191,7 @@ of the appropriate type.</p>
     </div>
 
     <pre class="usage"><span class='co'># S3 method for mjoint</span>
-<span class='fu'><a href='https://rdrr.io/pkg/generics/man/glance.html'>glance</a></span>(<span class='no'>x</span>, <span class='no'>...</span>)</pre>
+<span class='fu'><a href='https://rdrr.io/pkg/generics/man/glance.html'>glance</a></span>(<span class='kw'>x</span>, <span class='kw'>...</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -231,48 +231,50 @@ the <code>data</code> argument.</p></td>
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
+    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fl'>FALSE</span>) {
 <span class='co'># Fit a joint model with bivariate longitudinal outcomes</span>
-<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>joineRML</span>)
-<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>heart.valve</span>)
-<span class='no'>hvd</span> <span class='kw'>&lt;-</span> <span class='no'>heart.valve</span>[!<span class='fu'><a href='https://rdrr.io/r/base/NA.html'>is.na</a></span>(<span class='no'>heart.valve</span>$<span class='no'>log.grad</span>) <span class='kw'>&amp;</span>
-  !<span class='fu'><a href='https://rdrr.io/r/base/NA.html'>is.na</a></span>(<span class='no'>heart.valve</span>$<span class='no'>log.lvmi</span>) <span class='kw'>&amp;</span>
-  <span class='no'>heart.valve</span>$<span class='no'>num</span> <span class='kw'>&lt;=</span> <span class='fl'>50</span>, ]
-<span class='no'>fit</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/joineRML/man/mjoint.html'>mjoint</a></span>(
-  <span class='kw'>formLongFixed</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(
-    <span class='st'>"grad"</span> <span class='kw'>=</span> <span class='no'>log.grad</span> ~ <span class='no'>time</span> + <span class='no'>sex</span> + <span class='no'>hs</span>,
-    <span class='st'>"lvmi"</span> <span class='kw'>=</span> <span class='no'>log.lvmi</span> ~ <span class='no'>time</span> + <span class='no'>sex</span>
+<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='kw'><a href='https://github.com/petephilipson/joineRML'>joineRML</a></span>)
+<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='kw'>heart.valve</span>)
+<span class='kw'>hvd</span> <span class='op'>&lt;-</span> <span class='kw'>heart.valve</span>[<span class='op'>!</span><span class='fu'><a href='https://rdrr.io/r/base/NA.html'>is.na</a></span>(<span class='kw'>heart.valve</span><span class='op'>$</span><span class='kw'>log.grad</span>) <span class='op'>&amp;</span>
+  <span class='op'>!</span><span class='fu'><a href='https://rdrr.io/r/base/NA.html'>is.na</a></span>(<span class='kw'>heart.valve</span><span class='op'>$</span><span class='kw'>log.lvmi</span>) <span class='op'>&amp;</span>
+  <span class='kw'>heart.valve</span><span class='op'>$</span><span class='kw'>num</span> <span class='op'>&lt;=</span> <span class='fl'>50</span>, ]
+<span class='kw'>fit</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/joineRML/man/mjoint.html'>mjoint</a></span>(
+  formLongFixed = <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(
+    <span class='st'>"grad"</span> = <span class='kw'>log.grad</span> <span class='op'>~</span> <span class='kw'>time</span> <span class='op'>+</span> <span class='kw'>sex</span> <span class='op'>+</span> <span class='kw'>hs</span>,
+    <span class='st'>"lvmi"</span> = <span class='kw'>log.lvmi</span> <span class='op'>~</span> <span class='kw'>time</span> <span class='op'>+</span> <span class='kw'>sex</span>
   ),
-  <span class='kw'>formLongRandom</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(
-    <span class='st'>"grad"</span> <span class='kw'>=</span> ~ <span class='fl'>1</span> <span class='kw'>|</span> <span class='no'>num</span>,
-    <span class='st'>"lvmi"</span> <span class='kw'>=</span> ~ <span class='no'>time</span> <span class='kw'>|</span> <span class='no'>num</span>
+  formLongRandom = <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(
+    <span class='st'>"grad"</span> = <span class='op'>~</span> <span class='fl'>1</span> <span class='op'>|</span> <span class='kw'>num</span>,
+    <span class='st'>"lvmi"</span> = <span class='op'>~</span> <span class='kw'>time</span> <span class='op'>|</span> <span class='kw'>num</span>
   ),
-  <span class='kw'>formSurv</span> <span class='kw'>=</span> <span class='fu'>Surv</span>(<span class='no'>fuyrs</span>, <span class='no'>status</span>) ~ <span class='no'>age</span>,
-  <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>hvd</span>,
-  <span class='kw'>inits</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='st'>"gamma"</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0.11</span>, <span class='fl'>1.51</span>, <span class='fl'>0.80</span>)),
-  <span class='kw'>timeVar</span> <span class='kw'>=</span> <span class='st'>"time"</span>
+  formSurv = <span class='fu'><a href='https://rdrr.io/pkg/survival/man/Surv.html'>Surv</a></span>(<span class='kw'>fuyrs</span>, <span class='kw'>status</span>) <span class='op'>~</span> <span class='kw'>age</span>,
+  data = <span class='kw'>hvd</span>,
+  inits = <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='st'>"gamma"</span> = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0.11</span>, <span class='fl'>1.51</span>, <span class='fl'>0.80</span>)),
+  timeVar = <span class='st'>"time"</span>
 )
 
 <span class='co'># Extract the survival fixed effects</span>
-<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>fit</span>)
+<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='kw'>fit</span>)
 
 <span class='co'># Extract the longitudinal fixed effects</span>
-<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>fit</span>, <span class='kw'>component</span> <span class='kw'>=</span> <span class='st'>"longitudinal"</span>)
+<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='kw'>fit</span>, component = <span class='st'>"longitudinal"</span>)
 
 <span class='co'># Extract the survival fixed effects with confidence intervals</span>
-<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>fit</span>, <span class='kw'>ci</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='kw'>fit</span>, ci = <span class='fl'>TRUE</span>)
 
 <span class='co'># Extract the survival fixed effects with confidence intervals based</span>
 <span class='co'># on bootstrapped standard errors</span>
-<span class='no'>bSE</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/joineRML/man/bootSE.html'>bootSE</a></span>(<span class='no'>fit</span>, <span class='kw'>nboot</span> <span class='kw'>=</span> <span class='fl'>5</span>, <span class='kw'>safe.boot</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
-<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='no'>fit</span>, <span class='kw'>boot_se</span> <span class='kw'>=</span> <span class='no'>bSE</span>, <span class='kw'>ci</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+<span class='kw'>bSE</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/joineRML/man/bootSE.html'>bootSE</a></span>(<span class='kw'>fit</span>, nboot = <span class='fl'>5</span>, safe.boot = <span class='fl'>TRUE</span>)
+<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='kw'>fit</span>, boot_se = <span class='kw'>bSE</span>, ci = <span class='fl'>TRUE</span>)
 
 <span class='co'># Augment original data with fitted longitudinal values and residuals</span>
-<span class='no'>hvd2</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/generics/man/augment.html'>augment</a></span>(<span class='no'>fit</span>)
+<span class='kw'>hvd2</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/generics/man/augment.html'>augment</a></span>(<span class='kw'>fit</span>)
 
 <span class='co'># Extract model statistics</span>
-<span class='fu'><a href='https://rdrr.io/pkg/generics/man/glance.html'>glance</a></span>(<span class='no'>fit</span>)
-}</div></pre>
+<span class='fu'><a href='https://rdrr.io/pkg/generics/man/glance.html'>glance</a></span>(<span class='kw'>fit</span>)
+}
+
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
