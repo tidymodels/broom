@@ -41,7 +41,7 @@ effects for a variety of (non-linear) models, such as logit or models with
 multiway interaction terms. Note that the \code{glance.margins()} method
 requires rerunning the underlying model again, which can take some time.
 Similarly, an \code{augment.margins()} method is not currently supported, but
-users can simply can the underlying model to  obtain the same information.
+users can simply run the underlying model to obtain the same information.
 }
 \examples{
 library(margins)

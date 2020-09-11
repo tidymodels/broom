@@ -69,7 +69,7 @@ tidy.biglm <- function(x, conf.int = FALSE, conf.level = .95,
 #' @template param_unused_dots
 #'
 #' @evalRd return_glance("r.squared",
-#                        "AIC",
+#'                       "AIC",
 #'                       "deviance",
 #'                       "df.residual",
 #'                       "nobs")

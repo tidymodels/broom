@@ -13,7 +13,7 @@
 \arguments{
 \item{x}{A list, potentially representing an object that can be tidied.}
 
-\item{...}{Additionally arguments passed to the tidying function.}
+\item{...}{Additionally, arguments passed to the tidying function.}
 }
 \description{
 Broom tidies a number of lists that are effectively S3 objects without

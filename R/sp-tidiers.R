@@ -2,7 +2,7 @@
 #' @template title_desc_tidy
 #'
 #' @description Note that the `sf` package now defines tidy spatial objects
-#'   and is the recommend approach to spatial data. `sp` tidiers are likely
+#'   and is the recommended approach to spatial data. `sp` tidiers are likely
 #'   to be deprecated in the near future in favor of `sf::st_as_sf()`.
 #'   Development of `sp` tidiers has halted in `broom`.
 #'

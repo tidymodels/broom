@@ -71,7 +71,7 @@ tidy.binDesign <- function(x, ...) {
 #'
 #' @evalRd return_glance(
 #'   power = "Power achieved by the analysis.",
-#'   n = "Sample size uzed to achieve this power.",
+#'   n = "Sample size used to achieve this power.",
 #'   power.reached = "Whether the desired power was reached.",
 #'   maxit = "Number of iterations performed."
 #' )
