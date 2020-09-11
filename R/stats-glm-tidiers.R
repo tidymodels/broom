@@ -154,6 +154,6 @@ warn_on_glm2 <- function(x) {
   if (x$method == "glm.fit2") {
     warning("The supplied model object seems to be outputted from the glm2 ",
             "package. Tidiers for glm2 output are currently not ",
-            "maintained—please use caution in interpreting broom output.")
+            "maintained; please use caution in interpreting broom output.")
   }
 }
