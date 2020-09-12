@@ -40,11 +40,26 @@ specify which components to return.
 
 library(lmtest)
 
-data(Mandible)
-fm <- lm(length ~ age, data = Mandible, subset = (age <= 28))
+m <- lm(dist ~ speed, data = cars)
 
-lmtest::coeftest(fm)
-tidy(coeftest(fm))
+coeftest(m) 
+tidy(coeftest(m))
+tidy(coeftest(m, conf.int = TRUE))
+
+# A very common workflow is to combine lmtest::coeftest with alternate
+# variance-covariance matrices via the sandwich package. The lmtest
+# tidiers support this workflow too, enabling you to adjust the standard
+# errors of your tidied models on the fly.
+library(sandwich)
+tidy(coeftest(m, vcov = vcovHC))               # "HC3" (default) robust SEs
+tidy(coeftest(m, vcov = vcovHC, type = "HC2")) # "HC2" robust SEs
+tidy(coeftest(m, vcov = NeweyWest))            # N-W HAC robust SEs
+
+# The columns of the returned tibble for glance.coeftest() will vary 
+# depending on whether the coeftest object retains the underlying model.
+# Users can control this with the "save = TRUE" argument of coeftest().
+glance(coeftest(m))
+glance(coeftest(m, save = TRUE)) # More columns
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[lmtest:coeftest]{lmtest::coeftest()}}
