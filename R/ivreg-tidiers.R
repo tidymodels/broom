@@ -123,10 +123,9 @@ tidy.ivreg <- function(x,
     ret <- as_tibble(summary(x, ...)$coefficients, rownames = "term")
     colnames(ret) <- c("term", "estimate", "std.error", "statistic", "p.value")
     if (conf.int) {
-      # Rather use the below since confint doesn't support alternate vcov
-      # methods yet...
-      # ci <- broom_confint_terms(x, level = conf.level)
-      # ret <- dplyr::left_join(ret, ci, by = "term")
+      # Default confint method doesn't support alternate vcov matrices, so we'll
+      # calculate manually. Alternatively, could use lmtest::coefci(x, ...),
+      # coerce to tibble and join, but that ends up being more work.
       ret <- ret %>%
         mutate(
           conf.low = estimate - stats::qt(1-(1-conf.level)/2, df=x$df.residual)*std.error,
@@ -164,7 +163,7 @@ augment.ivreg <- function(x, data = model.frame(x), newdata = NULL,
   # Turn off .se_fit and interval args at first, since not supported out of the 
   # box.
   ret <- augment_newdata(x, data, newdata, .se_fit = FALSE, interval = "none")
-  # ... while predict.ivreg doesn't support se.fit or interval arguments, we can 
+  # While predict.ivreg doesn't support se.fit or interval arguments, we can 
   # roll our own.
   interval = match.arg (interval)
   if (se_fit || interval!="none") {
