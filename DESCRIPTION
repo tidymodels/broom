@@ -567,7 +567,7 @@ Suggests:
     lm.beta,
     lme4,
     lmodel2,
-    lmtest,
+    lmtest (>= 0.9.38),
     lsmeans,
     maps,
     maptools,
