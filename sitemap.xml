@@ -178,6 +178,9 @@
     <loc>https://broom.tidymodels.org/reference/glance.clmm.html</loc>
   </url>
   <url>
+    <loc>https://broom.tidymodels.org/reference/glance.coeftest.html</loc>
+  </url>
+  <url>
     <loc>https://broom.tidymodels.org/reference/glance.coxph.html</loc>
   </url>
   <url>

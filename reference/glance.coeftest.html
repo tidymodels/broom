@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Tidy a(n) coeftest object — tidy.coeftest • broom</title>
+<title>Glance at a(n) coeftest object — glance.coeftest • broom</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -49,13 +49,22 @@
 
 
 
-<meta property="og:title" content="Tidy a(n) coeftest object — tidy.coeftest" />
-<meta property="og:description" content="Tidy summarizes information about the components of a model.
-A model component might be a single term in a regression, a single
-hypothesis, a cluster, or a class. Exactly what tidy considers to be a
-model component varies across models but is usually self-evident.
-If a model has several distinct types of components, you will need to
-specify which components to return." />
+<meta property="og:title" content="Glance at a(n) coeftest object — glance.coeftest" />
+<meta property="og:description" content="Glance accepts a model object and returns a tibble::tibble()
+with exactly one row of model summaries. The summaries are typically
+goodness of fit measures, p-values for hypothesis tests on residuals,
+or model convergence information.
+Glance never returns information from the original call to the modeling
+function. This includes the name of the modeling function or any
+arguments passed to the modeling function.
+Glance does not calculate summary measures. Rather, it farms out these
+computations to appropriate methods and gathers the results together.
+Sometimes a goodness of fit measure will be undefined. In these cases
+the measure will be reported as NA.
+Glance returns the same number of columns regardless of whether the
+model matrix is rank-deficient or not. If so, entries in columns
+that no longer have a well-defined value are filled in with an NA
+of the appropriate type." />
 <meta property="og:image" content="https://broom.tidymodels.org/logo.png" />
 <meta name="twitter:card" content="summary" />
 
@@ -158,22 +167,31 @@ specify which components to return." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Tidy a(n) coeftest object</h1>
+    <h1>Glance at a(n) coeftest object</h1>
     <small class="dont-index">Source: <a href='http://github.com/tidymodels/broom/blob/master/R/lmtest-tidiers.R'><code>R/lmtest-tidiers.R</code></a></small>
-    <div class="hidden name"><code>tidy.coeftest.Rd</code></div>
+    <div class="hidden name"><code>glance.coeftest.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Tidy summarizes information about the components of a model.
-A model component might be a single term in a regression, a single
-hypothesis, a cluster, or a class. Exactly what tidy considers to be a
-model component varies across models but is usually self-evident.
-If a model has several distinct types of components, you will need to
-specify which components to return.</p>
+    <p>Glance accepts a model object and returns a <code><a href='https://tibble.tidyverse.org/reference/tibble.html'>tibble::tibble()</a></code>
+with exactly one row of model summaries. The summaries are typically
+goodness of fit measures, p-values for hypothesis tests on residuals,
+or model convergence information.</p>
+<p>Glance never returns information from the original call to the modeling
+function. This includes the name of the modeling function or any
+arguments passed to the modeling function.</p>
+<p>Glance does not calculate summary measures. Rather, it farms out these
+computations to appropriate methods and gathers the results together.
+Sometimes a goodness of fit measure will be undefined. In these cases
+the measure will be reported as <code>NA</code>.</p>
+<p>Glance returns the same number of columns regardless of whether the
+model matrix is rank-deficient or not. If so, entries in columns
+that no longer have a well-defined value are filled in with an <code>NA</code>
+of the appropriate type.</p>
     </div>
 
     <pre class="usage"><span class='co'># S3 method for coeftest</span>
-<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='kw'>x</span>, conf.int = <span class='fl'>FALSE</span>, conf.level = <span class='fl'>0.95</span>, <span class='kw'>...</span>)</pre>
+<span class='fu'><a href='https://rdrr.io/pkg/generics/man/glance.html'>glance</a></span>(<span class='kw'>x</span>, <span class='kw'>...</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -181,17 +199,6 @@ specify which components to return.</p>
     <tr>
       <th>x</th>
       <td><p>A <code>coeftest</code> object returned from <code><a href='https://rdrr.io/pkg/lmtest/man/coeftest.html'>lmtest::coeftest()</a></code>.</p></td>
-    </tr>
-    <tr>
-      <th>conf.int</th>
-      <td><p>Logical indicating whether or not to include a confidence
-interval in the tidied output. Defaults to <code>FALSE</code>.</p></td>
-    </tr>
-    <tr>
-      <th>conf.level</th>
-      <td><p>The confidence level to use for the confidence interval
-if <code>conf.int = TRUE</code>. Must be strictly greater than 0 and less than 1.
-Defaults to 0.95, which corresponds to a 95 percent confidence interval.</p></td>
     </tr>
     <tr>
       <th>...</th>
@@ -207,19 +214,39 @@ the <code>data</code> argument.</p></td>
     </tr>
     </table>
 
+    <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
+
+    <p>Because of the way that lmtest::coeftest() retains information about
+the underlying model object, the returned columns for glance.coeftest() will
+vary depending on the arguments. Specifically, four columns are returned
+regardless: "Loglik", "AIC", "BIC", and "nobs". Users can obtain additional
+columns (e.g. "r.squared", "df") by invoking the "save = TRUE" argument as
+part of lmtest::coeftest(). See examples.</p>
+<p>As an aside, goodness-of-fit measures such as R-squared are unaffected by the
+presence of heteroskedasticity. For further discussion see, e.g. chapter 8.1
+of Wooldridge (2016).</p>
+    <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
+
+    <p>Wooldridge, Jeffrey M. (2016) <cite>Introductory econometrics: A
+modern approach.</cite> (6th edition). Nelson Education.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy()</a></code>, <code><a href='https://rdrr.io/pkg/lmtest/man/coeftest.html'>lmtest::coeftest()</a></code></p></div>
+    <div class='dont-index'><p><code><a href='https://rdrr.io/pkg/generics/man/glance.html'>glance()</a></code>, <code><a href='https://rdrr.io/pkg/lmtest/man/coeftest.html'>lmtest::coeftest()</a></code></p></div>
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A <code><a href='https://tibble.tidyverse.org/reference/tibble.html'>tibble::tibble()</a></code> with columns:</p>
-<dt>conf.high</dt><dd><p>Upper bound on the confidence interval for the estimate.</p></dd>
-  <dt>conf.low</dt><dd><p>Lower bound on the confidence interval for the estimate.</p></dd>
-  <dt>estimate</dt><dd><p>The estimated value of the regression term.</p></dd>
-  <dt>p.value</dt><dd><p>The two-sided p-value associated with the observed statistic.</p></dd>
-  <dt>statistic</dt><dd><p>The value of a T-statistic to use in a hypothesis that the regression term is non-zero.</p></dd>
-  <dt>std.error</dt><dd><p>The standard error of the regression term.</p></dd>
-  <dt>term</dt><dd><p>The name of the regression term.</p></dd>
+    <p>A <code><a href='https://tibble.tidyverse.org/reference/tibble.html'>tibble::tibble()</a></code> with exactly one row and columns:</p>
+<dt>adj.r.squared</dt><dd><p>Adjusted R squared statistic, which is like the R squared statistic except taking degrees of freedom into account.</p></dd>
+  <dt>AIC</dt><dd><p>Akaike's Information Criterion for the model.</p></dd>
+  <dt>BIC</dt><dd><p>Bayesian Information Criterion for the model.</p></dd>
+  <dt>deviance</dt><dd><p>Deviance of the model.</p></dd>
+  <dt>df</dt><dd><p>Degrees of freedom used by the model.</p></dd>
+  <dt>df.residual</dt><dd><p>Residual degrees of freedom.</p></dd>
+  <dt>logLik</dt><dd><p>The log-likelihood of the model. [stats::logLik()] may be a useful reference.</p></dd>
+  <dt>nobs</dt><dd><p>Number of observations used.</p></dd>
+  <dt>p.value</dt><dd><p>P-value corresponding to the test statistic.</p></dd>
+  <dt>r.squared</dt><dd><p>R squared statistic, or the percent of variation explained by the model. Also known as the coefficient of determination.</p></dd>
+  <dt>sigma</dt><dd><p>Estimated standard error of the residuals.</p></dd>
+  <dt>statistic</dt><dd><p>Test statistic.</p></dd>
 
 
 
@@ -274,7 +301,9 @@ the <code>data</code> argument.</p></td>
 <span class='co'># depending on whether the coeftest object retains the underlying model.</span>
 <span class='co'># Users can control this with the "save = TRUE" argument of coeftest().</span>
 <span class='fu'><a href='https://rdrr.io/pkg/generics/man/glance.html'>glance</a></span>(<span class='fu'><a href='https://rdrr.io/pkg/lmtest/man/coeftest.html'>coeftest</a></span>(<span class='kw'>m</span>))
-</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 1 x 4</span><span>
+</div><div class='output co'>#&gt; <span class='message'>Original model not retained as part of coeftest object. For additional model summary information (r.squared, df, etc.), consider passing `glance.coeftest()` an object where the underlying model has been saved, i.e.`lmtest::coeftest(..., save = TRUE)`.</span>
+#&gt; <span class='message'></span>
+#&gt; <span class='message'></span><span style='color: #555555;'>This message is displayed once per session.</span><span></span></div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 1 x 4</span><span>
 #&gt;   logLik     AIC   BIC  nobs
 #&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>
 #&gt; </span><span style='color: #555555;'>1</span><span> -206.578  419.  425.    50</div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/generics/man/glance.html'>glance</a></span>(<span class='fu'><a href='https://rdrr.io/pkg/lmtest/man/coeftest.html'>coeftest</a></span>(<span class='kw'>m</span>, save = <span class='fl'>TRUE</span>)) <span class='co'># More columns</span>
