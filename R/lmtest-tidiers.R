@@ -34,6 +34,7 @@
 #' @export
 #' @seealso [tidy()], [lmtest::coeftest()]
 #' @aliases lmtest_tidiers coeftest_tidiers
+#' @family coeftest tidiers
 tidy.coeftest <- function(x, conf.int = FALSE, conf.level = .95, ...) {
   co <- as.data.frame(unclass(x))
   ret <- as_tidy_tibble(
@@ -84,7 +85,7 @@ tidy.coeftest <- function(x, conf.int = FALSE, conf.level = .95, ...) {
 #'
 #' @export
 #' @seealso [glance()], [lmtest::coeftest()]
-#' @aliases lmtest_tidiers coeftest_tidiers
+#' @family coeftest_tidiers
 glance.coeftest <- function(x, ...) {
   # check whether the underlying model object was saved as an attribute of the
   # coeftest object; i.e. with coeftest(x, save = TRUE). If so, we'll use that

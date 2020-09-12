@@ -2,8 +2,6 @@
 % Please edit documentation in R/lmtest-tidiers.R
 \name{glance.coeftest}
 \alias{glance.coeftest}
-\alias{lmtest_tidiers}
-\alias{coeftest_tidiers}
 \title{Glance at a(n) coeftest object}
 \usage{
 \method{glance}{coeftest}(x, ...)
@@ -85,6 +83,7 @@ modern approach.} (6th edition). Nelson Education.
 \seealso{
 \code{\link[=glance]{glance()}}, \code{\link[lmtest:coeftest]{lmtest::coeftest()}}
 }
+\concept{coeftest_tidiers}
 \value{
 A \code{\link[tibble:tibble]{tibble::tibble()}} with exactly one row and columns:
   \item{adj.r.squared}{Adjusted R squared statistic, which is like the R squared statistic except taking degrees of freedom into account.}
