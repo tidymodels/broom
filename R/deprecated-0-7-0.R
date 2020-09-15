@@ -471,14 +471,7 @@ tidy.numeric <- function(x, ...) {
 #' @export
 #' @rdname vector_tidiers
 #' @family deprecated
-tidy.character <- function(x, ...) {
-  .Deprecated()
-  if (!is.null(names(x))) {
-    dplyr::data_frame(names = names(x), x = unname(x))
-  } else {
-    dplyr::data_frame(x = x)
-  }
-}
+tidy.character <- tidy.default
 
 #' @export
 #' @rdname vector_tidiers
