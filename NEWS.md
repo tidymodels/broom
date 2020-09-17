@@ -24,6 +24,8 @@ in the overwriting of entries in the `curve` column (#914)
 * Fixed bug related to univariate zoo series in `tidy.zoo()` (#916 by @WillemVervoort)
 * Fixed a bug related to `tidy.prcomp()` assigning the wrong PC labels from "loadings" 
 and "scores" matrices (#910 by @tavareshugo)
+* Add `glance.coeftest()` method (#932 by @grantmcdermott)
+* Followed through with the planned deprecation of character vector tidiers
 
 # broom 0.7.0
 
