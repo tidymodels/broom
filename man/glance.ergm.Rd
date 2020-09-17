@@ -17,7 +17,7 @@ to \code{FALSE}.}
 burn-in and sample size used to estimate the model. Defaults to \code{FALSE}.}
 
 \item{...}{Additional arguments to pass to \code{\link[ergm:summary.formula]{ergm::summary()}}.
-\strong{Cautionary note}: Mispecified arguments may be silently ignored.}
+\strong{Cautionary note}: Misspecified arguments may be silently ignored.}
 }
 \value{
 \code{glance.ergm} returns a one-row tibble with the columns

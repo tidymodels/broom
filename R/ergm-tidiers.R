@@ -9,7 +9,7 @@
 #' @template param_confint
 #' @template param_exponentiate
 #' @param ... Additional arguments to pass to [ergm::summary()].
-#'   **Cautionary note**: Mispecified arguments may be silently ignored.
+#'   **Cautionary note**: Misspecified arguments may be silently ignored.
 #'
 #'
 #' @return A [tibble::tibble] with one row for each coefficient in the
