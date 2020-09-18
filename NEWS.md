@@ -1,35 +1,47 @@
-# broom 0.7.0.9001
+# broom 0.7.1
 
-To be released as broom 0.7.1.
+While broom 0.7.1 is a minor release, it includes a number of exciting new features and bug fixes!
+
+#### New tidiers
+
+* Add tidiers for `margins` objects. (`#700` by `@grantmcdermott`)
+* Added tidier methods for `mlogit` objects (`#887` by `@gregmacfarlane`)
+* Add `glance.coeftest()` method (`#932` by `@grantmcdermott`)
+
+#### Improvements to existing tidiers
+
+One of the more major improvements in this release is the addition of the `interval` argument to some `augment` methods for confidence, prediction, and credible intervals. These columns will be consistently labeled `.lower` and `.upper`! (`#908` by `@grantmcdermott`, `#925` by `@bwiernik`)
+
+In addition...
 
 * Extended the `glance.aov()` method to include an `r.squared` column!
+* `glance.survfit()` now passes `...` to `summary.survfit()` to allow for
+adjustment of RMST and other measures (`#880` by `@vincentarelbundock`)
+* Several unsupported model objects that subclass `glm` and `lm` now error more 
+informatively.
+* A number of improvements to documentation throughout the package.
+
+####  Bug fixes
+
 * Fixed `newdata` warning message in `augment.*()` output when the `newdata`
 didn't contain the response variable—augment methods no longer expect the 
-response variable in the supplied `newdata` argument. (#897 by @rudeboybert)
-* Add tidiers for `margins` objects. (#700 by @grantmcdermott)
-* Add "interval" argument to `augment.lm()` for confidence and prediction bands. 
-(#908 by @grantmcdermott)
-* Added tidier methods for `mlogit` objects (#887 by @gregmacfarlane)
+response variable in the supplied `newdata` argument. (`#897` by `@rudeboybert`)
 * Fixed a bug related to `tidy.geeglm()` not being sensitive to the
-`exponentiate` argument (#867)
-* `glance.survfit()` now passes `...` to `summary.survfit()` to allow for
-adjustment of RMST and other measures (#880 by @vincentarelbundock)
+`exponentiate` argument (`#867`)
 * Fixed `augment.fixest()` returning residuals in the `.fitted` column. The
 method also now takes a `type.residuals` argument and defaults to the same 
-`type.predict` argument as the `fixest` `predict()` method. (#877 by @karldw)
+`type.predict` argument as the `fixest` `predict()` method. (`#877` by `@karldw`)
 * Fix `tidy.felm` confidence interval bug. Replaces "robust" argument with 
-"se.type". (#919 by @grantmcdermott; supersedes #818 by @kuriwaki)
+"se.type". (`#919` by `@grantmcdermott`; supersedes `#818` by `@kuriwaki`)
 * Fix a bug in `tidy.drc()` where some term labels would result
-in the overwriting of entries in the `curve` column (#914)
-* Fixed bug related to univariate zoo series in `tidy.zoo()` (#916 by @WillemVervoort)
+in the overwriting of entries in the `curve` column (`#914`)
+* Fixed bug related to univariate zoo series in `tidy.zoo()` (`#916` by `@WillemVervoort`)
 * Fixed a bug related to `tidy.prcomp()` assigning the wrong PC labels from "loadings" 
-and "scores" matrices (#910 by @tavareshugo)
-* Consistently label interval columns `.lower` and `.upper` in `augment()` 
-methods (#925 by @bwiernik)
-* Add `glance.coeftest()` method (#932 by @grantmcdermott)
-* Followed through with the planned deprecation of character vector tidiers
-* Several unsupported model objects that subclass `glm` and `lm` now error more 
-informatively
+and "scores" matrices (`#910` by `@tavareshugo`)
+
+#### Deprecations
+
+We followed through with the planned deprecation of character vector tidiers in this release. Tidiers that were soft-deprecated in 0.7.0 will be fully deprecated in a later release.
 
 # broom 0.7.0
 
