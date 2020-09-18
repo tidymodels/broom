@@ -45,7 +45,7 @@
 #' ggplot(au, aes(wt, mpg)) + 
 #'   geom_point() +
 #'   geom_line(aes(y = .fitted)) + 
-#'   geom_ribbon(aes(ymin = .conf.low, ymax = .conf.high), col = NA, alpha = 0.3)
+#'   geom_ribbon(aes(ymin = .lower, ymax = .upper), col = NA, alpha = 0.3)
 #' 
 #' # predict on new data without outcome variable. Output does not include .resid
 #' newdata <- newdata %>%
@@ -113,8 +113,8 @@ tidy.lm <- function(x, conf.int = FALSE, conf.level = 0.95, ...) {
 #'
 #' @evalRd return_augment(
 #'   ".hat",
-#'   ".conf.low",
-#'   ".conf.high", 
+#'   ".lower",
+#'   ".upper", 
 #'   ".sigma",
 #'   ".cooksd",
 #'   ".se.fit",

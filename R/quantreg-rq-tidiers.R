@@ -99,7 +99,7 @@ glance.rq <- function(x, ...) {
 #'
 #' @details Depending on the arguments passed on to `predict.rq` via `...`,
 #'   a confidence interval is also calculated on the fitted values resulting in
-#'   columns `.conf.low` and `.conf.high`. Does not provide confidence
+#'   columns `.lower` and `.upper`. Does not provide confidence
 #'   intervals when data is specified via the `newdata` argument.
 #'
 #' @export
@@ -129,7 +129,7 @@ augment.rq <- function(x, data = model.frame(x), newdata = NULL, ...) {
     original[[".tau"]] <- x[["tau"]]
     return(as_tibble(original))
   } else {
-    colnames(pred) <- c(".fitted", ".conf.low", ".conf.high")
+    colnames(pred) <- c(".fitted", ".lower", ".upper")
     original[[".tau"]] <- x[["tau"]]
     return(as_tibble(cbind(original, pred)))
   }

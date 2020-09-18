@@ -390,8 +390,8 @@ augment_newdata <- function(x, data, newdata, .se_fit, interval = NULL, ...) {
       df$.fitted <- pred_obj$fit %>% unname()
     } else {
       df$.fitted <- pred_obj$fit[, "fit"]
-      df$.conf.low <- pred_obj$fit[, "lwr"]
-      df$.conf.high <- pred_obj$fit[, "upr"]
+      df$.lower <- pred_obj$fit[, "lwr"]
+      df$.upper <- pred_obj$fit[, "upr"]
     }
     
     # a couple possible names for the standard error element of the list
@@ -403,8 +403,8 @@ augment_newdata <- function(x, data, newdata, .se_fit, interval = NULL, ...) {
   } else if (!is.null(interval) && interval!="none") {
     pred_obj <- predict(x, newdata = newdata, na.action = na.pass, se.fit = FALSE, interval = interval, ...)
     df$.fitted <- pred_obj[, "fit"]
-    df$.conf.low <- pred_obj[, "lwr"]
-    df$.conf.high <- pred_obj[, "upr"]
+    df$.lower <- pred_obj[, "lwr"]
+    df$.upper <- pred_obj[, "upr"]
   } else if (passed_newdata) {
     if (is.null(interval) || interval=="none") {
       df$.fitted <- predict(x, newdata = newdata, na.action = na.pass, ...) %>% 
@@ -412,8 +412,8 @@ augment_newdata <- function(x, data, newdata, .se_fit, interval = NULL, ...) {
     } else {
       pred_obj <- predict(x, newdata = newdata, na.action = na.pass, interval = interval, ...)
       df$.fitted <- pred_obj$fit[, "fit"]
-      df$.conf.low <- pred_obj$fit[, "lwr"]
-      df$.conf.high <- pred_obj$fit[, "upr"]
+      df$.lower <- pred_obj$fit[, "lwr"]
+      df$.upper <- pred_obj$fit[, "upr"]
     }
   } else {
     if (is.null(interval) || interval=="none") {
@@ -422,8 +422,8 @@ augment_newdata <- function(x, data, newdata, .se_fit, interval = NULL, ...) {
     } else {
       pred_obj <- predict(x, newdata = newdata, na.action = na.pass, interval = interval, ...)
       df$.fitted <- pred_obj$fit[, "fit"]
-      df$.conf.low <- pred_obj$fit[, "lwr"]
-      df$.conf.high <- pred_obj$fit[, "upr"]
+      df$.lower <- pred_obj$fit[, "lwr"]
+      df$.upper <- pred_obj$fit[, "upr"]
     }
   }
 

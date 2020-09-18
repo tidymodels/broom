@@ -24,6 +24,8 @@ in the overwriting of entries in the `curve` column (#914)
 * Fixed bug related to univariate zoo series in `tidy.zoo()` (#916 by @WillemVervoort)
 * Fixed a bug related to `tidy.prcomp()` assigning the wrong PC labels from "loadings" 
 and "scores" matrices (#910 by @tavareshugo)
+* Consistently label interval columns `.lower` and `.upper` in `augment()` 
+methods (#925 by @bwiernik)
 * Add `glance.coeftest()` method (#932 by @grantmcdermott)
 * Followed through with the planned deprecation of character vector tidiers
 * Several unsupported model objects that subclass `glm` and `lm` now error more 

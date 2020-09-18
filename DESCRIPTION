@@ -495,7 +495,11 @@ Authors@R:
 	    person(given = "R. Willem",
              family = "Vervoort",
              role = "ctb",
-             email = "Willemvervoort@gmail.com"))
+             email = "Willemvervoort@gmail.com"),
+         person(given = "Brenton M.",
+             family = "Wiernik",
+             role = "ctb",
+             email = "brenton@wiernik.org"))
 Description: Summarizes key information about statistical
     objects in tidy tibbles. This makes it easy to report results, create
     plots and consistently work with large numbers of models at once.

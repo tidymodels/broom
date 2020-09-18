@@ -186,15 +186,18 @@ glance.rma <- function(x, ...) {
 #' @template title_desc_augment
 #'
 #' @inheritParams tidy.rma
+#' @param interval For `rma.mv` models, should prediction intervals 
+#'    (`"prediction"`, default) or confidence intervals (`"confidence"`) 
+#'    intervals be returned? For `rma.uni` models, prediction intervals are 
+#'    always returned. For `rma.mh` and `rma.peto` models, confidence intervals
+#'    are always returned. 
 #'
 #' @evalRd return_augment(
 #'   .observed = "The observed values for the individual studies",
 #'   ".fitted",
 #'   ".se.fit",
-#'   ".conf.low",
-#'   ".conf.high",
-#'   ".cred.low",
-#'   ".cred.high",
+#'   ".lower",
+#'   ".upper",
 #'   ".resid",
 #'   ".moderator",
 #'   ".moderator.level"
@@ -219,7 +222,7 @@ glance.rma <- function(x, ...) {
 #' meta_analysis <- rma(yi, vi, data = df, method = "EB")
 #'
 #' augment(meta_analysis)
-augment.rma <- function(x, ...) {
+augment.rma <- function(x, interval = c("prediction", "confidence"), ...) {
   # metafor generally handles these for different models through the monolith
   # `rma` class; using `purrr::possibly` primarily helps discard unused
   # components but also helps get the right component for each model
@@ -235,9 +238,16 @@ augment.rma <- function(x, ...) {
   pred <- as.data.frame(pred)
 
   # fix names
-  names(pred)[1:4] <- c(".fitted", ".se.fit", ".conf.low", ".conf.high")
-  credible_intervals <- names(pred) %in% c("cr.lb", "cr.ub")
-  names(pred)[credible_intervals] <- c(".cred.low", ".cred.high")
+  interval <- match.arg(interval, c("prediction", "confidence"))
+  if (interval == "prediction" & any(names(pred) %in% c("cr.lb", "cr.ub", "pi.lb", "pi.ub"))) {
+    confidence_intervals <- names(pred) %in% c("ci.lb", "ci.ub")
+    pred <- pred[, !confidence_intervals]
+    names(pred)[1:4] <- c(".fitted", ".se.fit", ".lower", ".upper")
+  } else {
+    prediction_intervals <- names(pred) %in% c("cr.lb", "cr.ub", "pi.lb", "pi.ub")
+    pred <- pred[, !prediction_intervals]
+    names(pred)[1:4] <- c(".fitted", ".se.fit", ".lower", ".upper")
+  }
   moderator <- names(pred) == "X"
   names(pred)[moderator] <- ".moderator"
   moderator_level <- names(pred) == "tau2.level"
