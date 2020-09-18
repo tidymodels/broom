@@ -156,30 +156,51 @@
       <small>Source: <a href='http://github.com/tidymodels/broom/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
-    <div id="broom-0709001" class="section level1">
-<h1 class="page-header" data-toc-text="0.7.0.9001">
-<a href="#broom-0709001" class="anchor"></a>broom 0.7.0.9001<small> Unreleased </small>
+    <div id="broom-071" class="section level1">
+<h1 class="page-header" data-toc-text="0.7.1">
+<a href="#broom-071" class="anchor"></a>broom 0.7.1<small> Unreleased </small>
 </h1>
-<p>To be released as broom 0.7.1.</p>
+<p>While broom 0.7.1 is a minor release, it includes a number of exciting new features and bug fixes!</p>
+<div id="new-tidiers" class="section level4">
+<h4 class="hasAnchor">
+<a href="#new-tidiers" class="anchor"></a>New tidiers</h4>
+<ul>
+<li>Add tidiers for <code>margins</code> objects. (<code><a href='http://github.com/tidymodels/broom/issues/700'>#700</a></code> by <code>@grantmcdermott</code>)</li>
+<li>Added tidier methods for <code>mlogit</code> objects (<code><a href='http://github.com/tidymodels/broom/issues/887'>#887</a></code> by <code>@gregmacfarlane</code>)</li>
+<li>Add <code><a href="../reference/glance.coeftest.html">glance.coeftest()</a></code> method (<code><a href='http://github.com/tidymodels/broom/issues/932'>#932</a></code> by <code>@grantmcdermott</code>)</li>
+</ul>
+</div>
+<div id="improvements-to-existing-tidiers" class="section level4">
+<h4 class="hasAnchor">
+<a href="#improvements-to-existing-tidiers" class="anchor"></a>Improvements to existing tidiers</h4>
+<p>One of the more major improvements in this release is the addition of the <code>interval</code> argument to some <code>augment</code> methods for confidence, prediction, and credible intervals. These columns will be consistently labeled <code>.lower</code> and <code>.upper</code>! (<code><a href='http://github.com/tidymodels/broom/issues/908'>#908</a></code> by <code>@grantmcdermott</code>, <code><a href='http://github.com/tidymodels/broom/issues/925'>#925</a></code> by <code>@bwiernik</code>)</p>
+<p>In addition…</p>
 <ul>
 <li>Extended the <code><a href="../reference/glance.aov.html">glance.aov()</a></code> method to include an <code>r.squared</code> column!</li>
-<li>Fixed <code>newdata</code> warning message in <code>augment.*()</code> output when the <code>newdata</code> didn’t contain the response variable—augment methods no longer expect the response variable in the supplied <code>newdata</code> argument. (<a href='http://github.com/tidymodels/broom/issues/897'>#897</a> by <a href='http://github.com/rudeboybert'>@rudeboybert</a>)</li>
-<li>Add tidiers for <code>margins</code> objects. (<a href='http://github.com/tidymodels/broom/issues/700'>#700</a> by <a href='http://github.com/grantmcdermott'>@grantmcdermott</a>)</li>
-<li>Add “interval” argument to <code><a href="../reference/augment.lm.html">augment.lm()</a></code> for confidence and prediction bands. (<a href='http://github.com/tidymodels/broom/issues/908'>#908</a> by <a href='http://github.com/grantmcdermott'>@grantmcdermott</a>)</li>
-<li>Added tidier methods for <code>mlogit</code> objects (<a href='http://github.com/tidymodels/broom/issues/887'>#887</a> by <a href='http://github.com/gregmacfarlane'>@gregmacfarlane</a>)</li>
-<li>Fixed a bug related to <code><a href="../reference/tidy.geeglm.html">tidy.geeglm()</a></code> not being sensitive to the <code>exponentiate</code> argument (<a href='http://github.com/tidymodels/broom/issues/867'>#867</a>)</li>
 <li>
-<code><a href="../reference/glance.survfit.html">glance.survfit()</a></code> now passes <code>...</code> to <code><a href="https://rdrr.io/pkg/survival/man/summary.survfit.html">summary.survfit()</a></code> to allow for adjustment of RMST and other measures (<a href='http://github.com/tidymodels/broom/issues/880'>#880</a> by <a href='http://github.com/vincentarelbundock'>@vincentarelbundock</a>)</li>
-<li>Fixed <code><a href="../reference/augment.fixest.html">augment.fixest()</a></code> returning residuals in the <code>.fitted</code> column. The method also now takes a <code>type.residuals</code> argument and defaults to the same <code>type.predict</code> argument as the <code>fixest</code> <code><a href="https://rdrr.io/r/stats/predict.html">predict()</a></code> method. (<a href='http://github.com/tidymodels/broom/issues/877'>#877</a> by <a href='http://github.com/karldw'>@karldw</a>)</li>
-<li>Fix <code>tidy.felm</code> confidence interval bug. Replaces “robust” argument with “se.type”. (<a href='http://github.com/tidymodels/broom/issues/919'>#919</a> by <a href='http://github.com/grantmcdermott'>@grantmcdermott</a>; supersedes <a href='http://github.com/tidymodels/broom/issues/818'>#818</a> by <a href='http://github.com/kuriwaki'>@kuriwaki</a>)</li>
-<li>Fix a bug in <code><a href="../reference/tidy.drc.html">tidy.drc()</a></code> where some term labels would result in the overwriting of entries in the <code>curve</code> column (<a href='http://github.com/tidymodels/broom/issues/914'>#914</a>)</li>
-<li>Fixed bug related to univariate zoo series in <code><a href="../reference/tidy.zoo.html">tidy.zoo()</a></code> (<a href='http://github.com/tidymodels/broom/issues/916'>#916</a> by <a href='http://github.com/WillemVervoort'>@WillemVervoort</a>)</li>
-<li>Fixed a bug related to <code><a href="../reference/tidy.prcomp.html">tidy.prcomp()</a></code> assigning the wrong PC labels from “loadings” and “scores” matrices (<a href='http://github.com/tidymodels/broom/issues/910'>#910</a> by <a href='http://github.com/tavareshugo'>@tavareshugo</a>)</li>
-<li>Consistently label interval columns <code>.lower</code> and <code>.upper</code> in <code><a href="https://rdrr.io/pkg/generics/man/augment.html">augment()</a></code> methods (<a href='http://github.com/tidymodels/broom/issues/925'>#925</a> by <a href='http://github.com/bwiernik'>@bwiernik</a>)</li>
-<li>Add <code><a href="../reference/glance.coeftest.html">glance.coeftest()</a></code> method (<a href='http://github.com/tidymodels/broom/issues/932'>#932</a> by <a href='http://github.com/grantmcdermott'>@grantmcdermott</a>)</li>
-<li>Followed through with the planned deprecation of character vector tidiers</li>
-<li>Several unsupported model objects that subclass <code>glm</code> and <code>lm</code> now error more informatively</li>
+<code><a href="../reference/glance.survfit.html">glance.survfit()</a></code> now passes <code>...</code> to <code><a href="https://rdrr.io/pkg/survival/man/summary.survfit.html">summary.survfit()</a></code> to allow for adjustment of RMST and other measures (<code><a href='http://github.com/tidymodels/broom/issues/880'>#880</a></code> by <code>@vincentarelbundock</code>)</li>
+<li>Several unsupported model objects that subclass <code>glm</code> and <code>lm</code> now error more informatively.</li>
+<li>A number of improvements to documentation throughout the package.</li>
 </ul>
+</div>
+<div id="bug-fixes" class="section level4">
+<h4 class="hasAnchor">
+<a href="#bug-fixes" class="anchor"></a>Bug fixes</h4>
+<ul>
+<li>Fixed <code>newdata</code> warning message in <code>augment.*()</code> output when the <code>newdata</code> didn’t contain the response variable—augment methods no longer expect the response variable in the supplied <code>newdata</code> argument. (<code><a href='http://github.com/tidymodels/broom/issues/897'>#897</a></code> by <code>@rudeboybert</code>)</li>
+<li>Fixed a bug related to <code><a href="../reference/tidy.geeglm.html">tidy.geeglm()</a></code> not being sensitive to the <code>exponentiate</code> argument (<code><a href='http://github.com/tidymodels/broom/issues/867'>#867</a></code>)</li>
+<li>Fixed <code><a href="../reference/augment.fixest.html">augment.fixest()</a></code> returning residuals in the <code>.fitted</code> column. The method also now takes a <code>type.residuals</code> argument and defaults to the same <code>type.predict</code> argument as the <code>fixest</code> <code><a href="https://rdrr.io/r/stats/predict.html">predict()</a></code> method. (<code><a href='http://github.com/tidymodels/broom/issues/877'>#877</a></code> by <code>@karldw</code>)</li>
+<li>Fix <code>tidy.felm</code> confidence interval bug. Replaces “robust” argument with “se.type”. (<code><a href='http://github.com/tidymodels/broom/issues/919'>#919</a></code> by <code>@grantmcdermott</code>; supersedes <code><a href='http://github.com/tidymodels/broom/issues/818'>#818</a></code> by <code>@kuriwaki</code>)</li>
+<li>Fix a bug in <code><a href="../reference/tidy.drc.html">tidy.drc()</a></code> where some term labels would result in the overwriting of entries in the <code>curve</code> column (<code><a href='http://github.com/tidymodels/broom/issues/914'>#914</a></code>)</li>
+<li>Fixed bug related to univariate zoo series in <code><a href="../reference/tidy.zoo.html">tidy.zoo()</a></code> (<code><a href='http://github.com/tidymodels/broom/issues/916'>#916</a></code> by <code>@WillemVervoort</code>)</li>
+<li>Fixed a bug related to <code><a href="../reference/tidy.prcomp.html">tidy.prcomp()</a></code> assigning the wrong PC labels from “loadings” and “scores” matrices (<code><a href='http://github.com/tidymodels/broom/issues/910'>#910</a></code> by <code>@tavareshugo</code>)</li>
+</ul>
+</div>
+<div id="deprecations" class="section level4">
+<h4 class="hasAnchor">
+<a href="#deprecations" class="anchor"></a>Deprecations</h4>
+<p>We followed through with the planned deprecation of character vector tidiers in this release. Tidiers that were soft-deprecated in 0.7.0 will be fully deprecated in a later release.</p>
+</div>
 </div>
     <div id="broom-070" class="section level1">
 <h1 class="page-header" data-toc-text="0.7.0">
@@ -197,9 +218,9 @@
 <li><p>Tidiers for <code>emmeans</code>-objects use the arguments <code>conf.int</code> and <code>conf.level</code> instead of relying on the argument names native to the <code>emmeans::summary()</code>-methods (i.e., <code>infer</code> and <code>level</code>). Similarly, <code>multcomp</code>-tidiers now include a call to <code><a href="https://rdrr.io/pkg/ergm/man/summary.formula.html">summary()</a></code> as previous behavior was akin to setting the now removed argument <code>quick = TRUE</code>. Both families of tidiers now use the <code>adj.p.value</code> column name when appropriate. Finally, <code>emmeans</code>-, <code>multcomp</code>-, and <code>TukeyHSD</code>-tidiers now consistently use the column names <code>contrast</code> and <code>null.value</code> instead of <code>comparison</code>, <code>level1</code> and <code>level2</code>, or <code>lhs</code> and <code>rhs</code> (see <a href='http://github.com/tidymodels/broom/issues/692'>#692</a>).</p></li>
 </ul>
 </div>
-<div id="deprecations" class="section level3">
+<div id="deprecations-1" class="section level3">
 <h3 class="hasAnchor">
-<a href="#deprecations" class="anchor"></a>Deprecations</h3>
+<a href="#deprecations-1" class="anchor"></a>Deprecations</h3>
 <p>This release of <code>broom</code> soft-deprecates the following functions and tidier methods:</p>
 <ul>
 <li>Tidier methods for data frames, rowwise data frames, vectors and matrices</li>
@@ -254,9 +275,9 @@
 <li><p>The <code>.resid</code> column in the output of <code>augment().*</code> methods is now consistently defined as <code>y - y_hat</code></p></li>
 </ul>
 </div>
-<div id="new-tidiers" class="section level2">
+<div id="new-tidiers-1" class="section level2">
 <h2 class="hasAnchor">
-<a href="#new-tidiers" class="anchor"></a>New tidiers</h2>
+<a href="#new-tidiers-1" class="anchor"></a>New tidiers</h2>
 <ul>
 <li>
 <code>anova</code> objects from the <code>car</code> package (<a href='http://github.com/tidymodels/broom/issues/754'>#754</a>)</li>
@@ -291,9 +312,9 @@
 <li>We have restored a simplified version of <code><a href="../reference/glance.aov.html">glance.aov()</a></code>, which used to inherit from the <code><a href="../reference/glance.lm.html">glance.lm()</a></code> method and now contains only the following columns: <code>logLik</code>, <code>AIC</code>, <code>BIC, deviance</code>, <code>df.residual</code>, and <code>nobs</code> (see <a href='http://github.com/tidymodels/broom/issues/212'>#212</a>). Note that <code><a href="../reference/tidy.aov.html">tidy.aov()</a></code> gives more complete information about degrees of freedom in an <code>aov</code> object.</li>
 </ul>
 </div>
-<div id="improvements-to-existing-tidiers" class="section level2">
+<div id="improvements-to-existing-tidiers-1" class="section level2">
 <h2 class="hasAnchor">
-<a href="#improvements-to-existing-tidiers" class="anchor"></a>Improvements to existing tidiers</h2>
+<a href="#improvements-to-existing-tidiers-1" class="anchor"></a>Improvements to existing tidiers</h2>
 <ul>
 <li><p><code><a href="../reference/tidy.felm.html">tidy.felm()</a></code> now has a <code>robust = TRUE/FALSE</code> option that supports robust and cluster standard errors. (<a href='http://github.com/tidymodels/broom/issues/781'>#781</a> by <a href='http://github.com/kuriwaki'>@kuriwaki</a>)</p></li>
 <li><p>Make <code>.fitted</code> values respect <code>type.predict</code> argument of <code><a href="../reference/augment.clm.html">augment.clm()</a></code>. (<a href='http://github.com/tidymodels/broom/issues/617'>#617</a>)</p></li>
@@ -311,9 +332,9 @@
 <li><p><code><a href="../reference/glance.lavaan.html">glance.lavaan()</a></code> now uses lavaan extractor functions instead of subsetting the fit object manually. (<a href='http://github.com/tidymodels/broom/issues/835'>#835</a>)</p></li>
 <li><p><code><a href="../reference/glance.lm.html">glance.lm()</a></code> no longer errors when only an intercept is provided as an explanatory variable. (<a href='http://github.com/tidymodels/broom/issues/865'>#865</a>)</p></li>
 </ul>
-<div id="bug-fixes" class="section level3">
+<div id="bug-fixes-1" class="section level3">
 <h3 class="hasAnchor">
-<a href="#bug-fixes" class="anchor"></a>Bug fixes</h3>
+<a href="#bug-fixes-1" class="anchor"></a>Bug fixes</h3>
 <ul>
 <li>Bug fix for <code><a href="../reference/tidy.survreg.html">tidy.survreg()</a></code> when <code>robust</code> is set to <code>TRUE</code> in model fitting (<a href='http://github.com/tidymodels/broom/issues/842'>#842</a>, <a href='http://github.com/tidymodels/broom/issues/728'>#728</a>)</li>
 <li>Bug fixes in <code><a href="../reference/glance.lavaan.html">glance.lavaan()</a></code>: address confidence interval error (<a href='http://github.com/tidymodels/broom/issues/577'>#577</a>) and correct reported <code>nobs</code> and <code>norig</code> (<a href='http://github.com/tidymodels/broom/issues/835'>#835</a>)</li>
@@ -450,9 +471,9 @@
 <code><a href="../articles/bootstrapping.html">vignette("bootstrapping", package = "broom")</a></code> now relies on the <code>rsample</code> package and a <code><a href="https://tidyr.tidyverse.org/reference/nest.html">tidyr::nest</a></code>-<code><a href="https://purrr.tidyverse.org/reference/map.html">purrr::map</a></code>-<code><a href="https://tidyr.tidyverse.org/reference/nest.html">tidyr::unnest</a></code> workflow. This is now the recommended workflow for working with multiple models, as opposed to the old <code><a href="https://dplyr.tidyverse.org/reference/rowwise.html">dplyr::rowwise</a></code>-<code><a href="https://dplyr.tidyverse.org/reference/do.html">dplyr::do</a></code> based workflow.</li>
 </ul>
 </div>
-<div id="deprecations-1" class="section level2">
+<div id="deprecations-2" class="section level2">
 <h2 class="hasAnchor">
-<a href="#deprecations-1" class="anchor"></a>Deprecations</h2>
+<a href="#deprecations-2" class="anchor"></a>Deprecations</h2>
 <ul>
 <li><p>Matrix and vector tidiers have been deprecated in favor of <code><a href="https://tibble.tidyverse.org/reference/as_tibble.html">tibble::as_tibble</a></code> and <code><a href="https://tibble.tidyverse.org/reference/enframe.html">tibble::enframe</a></code></p></li>
 <li><p>Dataframe tidiers and rowwise dataframe tidiers have been deprecated</p></li>
