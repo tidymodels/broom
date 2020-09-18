@@ -11,7 +11,7 @@
 #' @seealso [stats::glm()]
 tidy.glm <- function(x, conf.int = FALSE, conf.level = .95,
                      exponentiate = FALSE, ...) {
-  warn_on_glm2(x)
+  check_for_subclasses(x)
   
   ret <- as_tibble(summary(x)$coefficients, rownames = "term")
   colnames(ret) <- c("term", "estimate", "std.error", "statistic", "p.value")
@@ -72,7 +72,7 @@ augment.glm <- function(x,
                         type.predict = c("link", "response", "terms"),
                         type.residuals = c("deviance", "pearson"),
                         se_fit = FALSE, ...) {
-  warn_on_glm2(x)
+  check_for_subclasses(x)
   
   type.predict <- rlang::arg_match(type.predict)
   type.residuals <- rlang::arg_match(type.residuals)
@@ -132,7 +132,7 @@ augment.glm <- function(x,
 #' @family lm tidiers
 #' @seealso [stats::glm()]
 glance.glm <- function(x, ...) {
-  warn_on_glm2(x)
+  check_for_subclasses(x)
   
   as_glance_tibble(
     null.deviance = x$null.deviance,
@@ -147,13 +147,35 @@ glance.glm <- function(x, ...) {
   )
 }
 
+check_for_subclasses <- function(x) {
+  warn_on_glm2(x)
+  warn_on_stanreg(x)
+  
+  invisible(TRUE)
+}
+
 # the output of glm2::glm2 has the same class as objects outputted
 # by stats::glm2. glm2 outputs are currently not supported (intentionally)
 # so warn that output is not maintained.
 warn_on_glm2 <- function(x) {
-  if (x$method == "glm.fit2") {
-    warning("The supplied model object seems to be outputted from the glm2 ",
-            "package. Tidiers for glm2 output are currently not ",
-            "maintained; please use caution in interpreting broom output.")
+  if (!is.null(x$method)) {
+    if (x$method == "glm.fit2") {
+      warning("The supplied model object seems to be outputted from the glm2 ",
+              "package. Tidiers for glm2 output are currently not ",
+              "maintained; please use caution in interpreting broom output.")
+    }
   }
+  
+  invisible(TRUE)
+}
+
+# stanreg objects subclass glm, glm tidiers error out (uninformatively), 
+# and the maintained stanreg tidiers live in broom.mixed.
+warn_on_stanreg <- function(x) {
+  if (!is.null(x$stan_function)) {
+    stop("The supplied model object seems to be outputted from the rstanarm ",
+         "package. Tidiers for mixed model output now live in the broom.mixed package.")
+  }
+  
+  invisible(TRUE)
 }

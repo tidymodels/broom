@@ -26,6 +26,8 @@ in the overwriting of entries in the `curve` column (#914)
 and "scores" matrices (#910 by @tavareshugo)
 * Add `glance.coeftest()` method (#932 by @grantmcdermott)
 * Followed through with the planned deprecation of character vector tidiers
+* Several unsupported model objects that subclass `glm` and `lm` now error more 
+informatively
 
 # broom 0.7.0
 
