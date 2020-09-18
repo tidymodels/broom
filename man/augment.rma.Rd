@@ -4,12 +4,18 @@
 \alias{augment.rma}
 \title{Augment data with information from a(n) rma object}
 \usage{
-\method{augment}{rma}(x, ...)
+\method{augment}{rma}(x, interval = c("prediction", "confidence"), ...)
 }
 \arguments{
 \item{x}{An \code{rma} object such as those created by \code{\link[metafor:rma.uni]{metafor::rma()}},
 \code{\link[metafor:rma.uni]{metafor::rma.uni()}}, \code{\link[metafor:rma.glmm]{metafor::rma.glmm()}}, \code{\link[metafor:rma.mh]{metafor::rma.mh()}},
 \code{\link[metafor:rma.mv]{metafor::rma.mv()}}, or \code{\link[metafor:rma.peto]{metafor::rma.peto()}}.}
+
+\item{interval}{For \code{rma.mv} models, should prediction intervals
+(\code{"prediction"}, default) or confidence intervals (\code{"confidence"})
+intervals be returned? For \code{rma.uni} models, prediction intervals are
+always returned. For \code{rma.mh} and \code{rma.peto} models, confidence intervals
+are always returned.}
 
 \item{...}{Additional arguments. Not used. Needed to match generic
 signature only. \strong{Cautionary note:} Misspelled arguments will be
@@ -82,15 +88,13 @@ augment(meta_analysis)
 }
 \value{
 A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
-  \item{.conf.high}{Upper bound on confidence interval for fitted values.}
-  \item{.conf.low}{Lower bound on confidence interval for fitted values.}
-  \item{.cred.high}{Upper bound on credible interval for fitted values.}
-  \item{.cred.low}{Lower bound on credible interval for fitted values.}
   \item{.fitted}{Fitted or predicted value.}
+  \item{.lower}{Lower bound on interval for fitted values.}
   \item{.moderator}{In meta-analysis, the moderators used to calculate the predicted values.}
   \item{.moderator.level}{In meta-analysis, the level of the moderators used to calculate the predicted values.}
   \item{.resid}{The difference between observed and fitted values.}
   \item{.se.fit}{Standard errors of fitted values.}
+  \item{.upper}{Upper bound on interval for fitted values.}
   \item{.observed}{The observed values for the individual studies}
 
 }
