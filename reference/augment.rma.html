@@ -229,7 +229,7 @@ missing at this time.</p>
     </div>
 
     <pre class="usage"><span class='co'># S3 method for rma</span>
-<span class='fu'><a href='https://rdrr.io/pkg/generics/man/augment.html'>augment</a></span>(<span class='kw'>x</span>, <span class='kw'>...</span>)</pre>
+<span class='fu'><a href='https://rdrr.io/pkg/generics/man/augment.html'>augment</a></span>(<span class='kw'>x</span>, interval = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"prediction"</span>, <span class='st'>"confidence"</span>), <span class='kw'>...</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -239,6 +239,14 @@ missing at this time.</p>
       <td><p>An <code>rma</code> object such as those created by <code><a href='https://rdrr.io/pkg/metafor/man/rma.uni.html'>metafor::rma()</a></code>,
 <code><a href='https://rdrr.io/pkg/metafor/man/rma.uni.html'>metafor::rma.uni()</a></code>, <code><a href='https://rdrr.io/pkg/metafor/man/rma.glmm.html'>metafor::rma.glmm()</a></code>, <code><a href='https://rdrr.io/pkg/metafor/man/rma.mh.html'>metafor::rma.mh()</a></code>,
 <code><a href='https://rdrr.io/pkg/metafor/man/rma.mv.html'>metafor::rma.mv()</a></code>, or <code><a href='https://rdrr.io/pkg/metafor/man/rma.peto.html'>metafor::rma.peto()</a></code>.</p></td>
+    </tr>
+    <tr>
+      <th>interval</th>
+      <td><p>For <code>rma.mv</code> models, should prediction intervals
+(<code>"prediction"</code>, default) or confidence intervals (<code>"confidence"</code>)
+intervals be returned? For <code>rma.uni</code> models, prediction intervals are
+always returned. For <code>rma.mh</code> and <code>rma.peto</code> models, confidence intervals
+are always returned.</p></td>
     </tr>
     <tr>
       <th>...</th>
@@ -257,15 +265,13 @@ the <code>data</code> argument.</p></td>
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>A <code><a href='https://tibble.tidyverse.org/reference/tibble.html'>tibble::tibble()</a></code> with columns:</p>
-<dt>.conf.high</dt><dd><p>Upper bound on confidence interval for fitted values.</p></dd>
-  <dt>.conf.low</dt><dd><p>Lower bound on confidence interval for fitted values.</p></dd>
-  <dt>.cred.high</dt><dd><p>Upper bound on credible interval for fitted values.</p></dd>
-  <dt>.cred.low</dt><dd><p>Lower bound on credible interval for fitted values.</p></dd>
-  <dt>.fitted</dt><dd><p>Fitted or predicted value.</p></dd>
+<dt>.fitted</dt><dd><p>Fitted or predicted value.</p></dd>
+  <dt>.lower</dt><dd><p>Lower bound on interval for fitted values.</p></dd>
   <dt>.moderator</dt><dd><p>In meta-analysis, the moderators used to calculate the predicted values.</p></dd>
   <dt>.moderator.level</dt><dd><p>In meta-analysis, the level of the moderators used to calculate the predicted values.</p></dd>
   <dt>.resid</dt><dd><p>The difference between observed and fitted values.</p></dd>
   <dt>.se.fit</dt><dd><p>Standard errors of fitted values.</p></dd>
+  <dt>.upper</dt><dd><p>Upper bound on interval for fitted values.</p></dd>
   <dt>.observed</dt><dd><p>The observed values for the individual studies</p></dd>
 
 

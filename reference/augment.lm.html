@@ -318,15 +318,15 @@ warning is raised and the incomplete rows are dropped.</p>
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>A <code><a href='https://tibble.tidyverse.org/reference/tibble.html'>tibble::tibble()</a></code> with columns:</p>
-<dt>.conf.high</dt><dd><p>Upper bound on confidence interval for fitted values.</p></dd>
-  <dt>.conf.low</dt><dd><p>Lower bound on confidence interval for fitted values.</p></dd>
-  <dt>.cooksd</dt><dd><p>Cooks distance.</p></dd>
+<dt>.cooksd</dt><dd><p>Cooks distance.</p></dd>
   <dt>.fitted</dt><dd><p>Fitted or predicted value.</p></dd>
   <dt>.hat</dt><dd><p>Diagonal of the hat matrix.</p></dd>
+  <dt>.lower</dt><dd><p>Lower bound on interval for fitted values.</p></dd>
   <dt>.resid</dt><dd><p>The difference between observed and fitted values.</p></dd>
   <dt>.se.fit</dt><dd><p>Standard errors of fitted values.</p></dd>
   <dt>.sigma</dt><dd><p>Estimated residual standard deviation when corresponding observation is dropped from model.</p></dd>
   <dt>.std.resid</dt><dd><p>Standardised residuals.</p></dd>
+  <dt>.upper</dt><dd><p>Upper bound on interval for fitted values.</p></dd>
 
 
 
@@ -411,8 +411,8 @@ warning is raised and the incomplete rows are dropped.</p>
 <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span>(<span class='kw'>au</span>, <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='kw'>wt</span>, <span class='kw'>mpg</span>)) <span class='op'>+</span> 
   <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_point.html'>geom_point</a></span>() <span class='op'>+</span>
   <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_path.html'>geom_line</a></span>(<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(y = <span class='kw'>.fitted</span>)) <span class='op'>+</span> 
-  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_ribbon.html'>geom_ribbon</a></span>(<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(ymin = <span class='kw'>.conf.low</span>, ymax = <span class='kw'>.conf.high</span>), col = <span class='fl'>NA</span>, alpha = <span class='fl'>0.3</span>)
-</div><div class='output co'>#&gt; <span class='error'>Error in FUN(X[[i]], ...): object '.conf.low' not found</span></div><div class='input'>
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_ribbon.html'>geom_ribbon</a></span>(<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(ymin = <span class='kw'>.lower</span>, ymax = <span class='kw'>.upper</span>), col = <span class='fl'>NA</span>, alpha = <span class='fl'>0.3</span>)
+</div><div class='img'><img src='augment.lm-2.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'># predict on new data without outcome variable. Output does not include .resid</span>
 <span class='kw'>newdata</span> <span class='op'>&lt;-</span> <span class='kw'>newdata</span> <span class='op'>%&gt;%</span>
   <span class='fu'><a href='https://dplyr.tidyverse.org/reference/select.html'>select</a></span>(<span class='op'>-</span><span class='kw'>mpg</span>)
@@ -434,14 +434,14 @@ warning is raised and the incomplete rows are dropped.</p>
   <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_abline.html'>geom_hline</a></span>(size = <span class='fl'>2</span>, colour = <span class='st'>"white"</span>, yintercept = <span class='fl'>0</span>) <span class='op'>+</span>
   <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_point.html'>geom_point</a></span>() <span class='op'>+</span>
   <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_smooth.html'>geom_smooth</a></span>(se = <span class='fl'>FALSE</span>)
-</div><div class='output co'>#&gt; <span class='message'>`geom_smooth()` using method = 'loess' and formula 'y ~ x'</span></div><div class='img'><img src='augment.lm-2.png' alt='' width='700' height='433' /></div><div class='input'>
+</div><div class='output co'>#&gt; <span class='message'>`geom_smooth()` using method = 'loess' and formula 'y ~ x'</span></div><div class='img'><img src='augment.lm-3.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span>(<span class='kw'>mod</span>, which = <span class='fl'>6</span>)
-</div><div class='img'><img src='augment.lm-3.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span>(<span class='kw'>au</span>, <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='kw'>.hat</span>, <span class='kw'>.cooksd</span>)) <span class='op'>+</span>
+</div><div class='img'><img src='augment.lm-4.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span>(<span class='kw'>au</span>, <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='kw'>.hat</span>, <span class='kw'>.cooksd</span>)) <span class='op'>+</span>
   <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_abline.html'>geom_vline</a></span>(xintercept = <span class='fl'>0</span>, colour = <span class='fl'>NA</span>) <span class='op'>+</span>
   <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_abline.html'>geom_abline</a></span>(slope = <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span>(<span class='fl'>0</span>, <span class='fl'>3</span>, by = <span class='fl'>0.5</span>), colour = <span class='st'>"white"</span>) <span class='op'>+</span>
   <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_smooth.html'>geom_smooth</a></span>(se = <span class='fl'>FALSE</span>) <span class='op'>+</span>
   <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_point.html'>geom_point</a></span>()
-</div><div class='output co'>#&gt; <span class='message'>`geom_smooth()` using method = 'loess' and formula 'y ~ x'</span></div><div class='img'><img src='augment.lm-4.png' alt='' width='700' height='433' /></div><div class='input'>
+</div><div class='output co'>#&gt; <span class='message'>`geom_smooth()` using method = 'loess' and formula 'y ~ x'</span></div><div class='img'><img src='augment.lm-5.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'># column-wise models</span>
 <span class='kw'>a</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></span>(<span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span>(<span class='fl'>20</span>), nrow = <span class='fl'>10</span>)
 <span class='kw'>b</span> <span class='op'>&lt;-</span> <span class='kw'>a</span> <span class='op'>+</span> <span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/length.html'>length</a></span>(<span class='kw'>a</span>))
