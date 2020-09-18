@@ -172,7 +172,7 @@ unrowname <- function(x) {
   x
 }
 
-#' add fitted values, residuals, and other common outputs to
+#' Add fitted values, residuals, and other common outputs to
 #' an augment call
 #'
 #' Add fitted values, residuals, and other common outputs to

@@ -65,7 +65,7 @@ Other bingroup tidiers:
 \value{
 A \code{\link[tibble:tibble]{tibble::tibble()}} with exactly one row and columns:
   \item{power}{Power achieved by the analysis.}
-  \item{n}{Sample size uzed to achieve this power.}
+  \item{n}{Sample size used to achieve this power.}
   \item{power.reached}{Whether the desired power was reached.}
   \item{maxit}{Number of iterations performed.}
 

@@ -2,7 +2,7 @@
 % Please edit documentation in R/utilities.R
 \name{augment_columns}
 \alias{augment_columns}
-\title{add fitted values, residuals, and other common outputs to
+\title{Add fitted values, residuals, and other common outputs to
 an augment call}
 \usage{
 augment_columns(

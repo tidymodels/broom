@@ -73,6 +73,11 @@ We are in the process of defining behaviors for models fit with various
 \code{na.action} arguments, but make no guarantees about behavior when data is
 missing at this time.
 }
+\details{
+This tidier currently only supports \code{ivreg}-classed objects
+outputted by the \code{AER} package. The \code{ivreg} package also outputs
+objects of class \code{ivreg}, and will be supported in a later release.
+}
 \examples{
 
 library(AER)

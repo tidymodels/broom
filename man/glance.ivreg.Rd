@@ -42,6 +42,11 @@ model matrix is rank-deficient or not. If so, entries in columns
 that no longer have a well-defined value are filled in with an \code{NA}
 of the appropriate type.
 }
+\details{
+This tidier currently only supports \code{ivreg}-classed objects
+outputted by the \code{AER} package. The \code{ivreg} package also outputs
+objects of class \code{ivreg}, and will be supported in a later release.
+}
 \note{
 Beginning 0.7.0, \code{glance.ivreg} returns statistics for the
 Wu-Hausman test for endogeneity and the Sargan test of

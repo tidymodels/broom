@@ -70,7 +70,7 @@ test_that("summary_emm tidiers work", {
 
   tdjt <- tidy(joint_tests_summary)
   check_tidy_output(tdjt)
-  check_dims(tdjt, 2, 5)
+  check_dims(tdjt, 4, 5)
 })
 
 test_that("tidy.ref.grid consistency with tidy.TukeyHSD", {

@@ -58,7 +58,7 @@ are \code{coefficient} and \code{scale}, rather than \code{coefficient} and \cod
 Calculating p.values with the \code{dropterm()} function is the approach
 suggested by the MASS package author
 \url{https://r.789695.n4.nabble.com/p-values-of-plor-td4668100.html}. This
-approach is computationally intensive, so that p.values are only
+approach is computationally intensive so that p.values are only
 returned if requested explicitly. Additionally, it only works for
 models containing no variables with more than two categories. If this
 condition is not met, a message is shown and NA is returned instead of

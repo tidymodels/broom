@@ -8,7 +8,7 @@
 #' @evalRd return_tidy(regression = TRUE)
 #'
 #' @details The tibble has four rows. The first two indicate the mediated 
-#'   effect in the control and treatment group, respectively. And the last 
+#'   effect in the control and treatment groups, respectively. And the last 
 #'   two the direct effect in each group.
 #' @importFrom stats pnorm quantile
 #' @examples
