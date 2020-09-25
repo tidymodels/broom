@@ -38,6 +38,8 @@ in the overwriting of entries in the `curve` column (`#914`)
 * Fixed bug related to univariate zoo series in `tidy.zoo()` (`#916` by `@WillemVervoort`)
 * Fixed a bug related to `tidy.prcomp()` assigning the wrong PC labels from "loadings" 
 and "scores" matrices (`#910` by `@tavareshugo`)
+* Fixed `tidy.polr()` bug where p-values could only be returned if
+`exponentiate = FALSE`.
 
 #### Deprecations
 

@@ -53,6 +53,7 @@ tidy.polr <- function(x, conf.int = FALSE, conf.level = 0.95,
 
   if (exponentiate) {
     ret <- exponentiate(ret)
+  }
   
   if (p.values) {
     sig <- MASS::dropterm(x, test = "Chisq")
@@ -68,7 +69,6 @@ tidy.polr <- function(x, conf.int = FALSE, conf.level = 0.95,
     }
   }
   
-  }
   mutate(
     ret,
     coef.type = if_else(term %in% names(x$zeta), "scale", "coefficient")
