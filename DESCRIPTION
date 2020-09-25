@@ -546,7 +546,7 @@ Suggests:
     e1071,
     emmeans,
     epiR,
-    ergm,
+    ergm (>= 3.10.4),
     fixest (>= 0.5.0),
     gam (>= 1.15),
     gamlss,
