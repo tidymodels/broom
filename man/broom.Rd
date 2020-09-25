@@ -27,8 +27,8 @@ which provides a one-row summary of model-level statistics.
 Useful links:
 \itemize{
   \item \url{https://broom.tidymodels.org/}
-  \item \url{http://github.com/tidymodels/broom}
-  \item Report bugs at \url{http://github.com/tidymodels/broom/issues}
+  \item \url{https://github.com/tidymodels/broom}
+  \item Report bugs at \url{https://github.com/tidymodels/broom/issues}
 }
 
 }

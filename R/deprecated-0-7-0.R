@@ -218,7 +218,7 @@ median_abs_dev <- function(x, na.rm = FALSE) {
 #'
 #' @details This code originates from Hadley Wickham (with a few small
 #' corrections) here:
-#' \url{https://github.com/hadley/dplyr/issues/269}
+#' \url{https://github.com/tidyverse/dplyr/issues/269}
 #'
 #' @export
 #' @family deprecated

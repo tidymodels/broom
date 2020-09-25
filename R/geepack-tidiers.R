@@ -72,7 +72,7 @@ tidy.geeglm <- function(x, conf.int = FALSE, conf.level = .95,
 #' @param level Confidence level of the interval.
 #' @param ... Additional parameters (ignored).
 #'
-#' @details From http://stackoverflow.com/a/21221995/2632184.
+#' @details From https://stackoverflow.com/a/21221995/2632184.
 #'
 #' @return Lower and upper confidence bounds in a data.frame(?).
 #'

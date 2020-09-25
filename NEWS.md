@@ -405,7 +405,7 @@ Several old vignettes have also been updated:
 - Dataframe tidiers and rowwise dataframe tidiers have been deprecated
 
 - `bootstrap()` has been deprecated in favor of the
-  [`rsample`](https://tidymodels.github.io/rsample/)
+  [`rsample`](https://rsample.tidymodels.org/)
 
 - `inflate` has been removed from `broom`
 
@@ -765,7 +765,7 @@ See `?rowwise_df_tidiers` for more.
   consistent with broom's naming conventions for columns.
 
 * A function `bootstrap` has been added based on [this
-  example](https://github.com/hadley/dplyr/issues/269), to perform the common
+  example](https://github.com/tidyverse/dplyr/issues/269), to perform the common
   use case of bootstrapping models.
 
 # broom 0.2
