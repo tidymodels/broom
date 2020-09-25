@@ -194,6 +194,7 @@
 <li>Fix a bug in <code><a href="../reference/tidy.drc.html">tidy.drc()</a></code> where some term labels would result in the overwriting of entries in the <code>curve</code> column (<code><a href='http://github.com/tidymodels/broom/issues/914'>#914</a></code>)</li>
 <li>Fixed bug related to univariate zoo series in <code><a href="../reference/tidy.zoo.html">tidy.zoo()</a></code> (<code><a href='http://github.com/tidymodels/broom/issues/916'>#916</a></code> by <code>@WillemVervoort</code>)</li>
 <li>Fixed a bug related to <code><a href="../reference/tidy.prcomp.html">tidy.prcomp()</a></code> assigning the wrong PC labels from “loadings” and “scores” matrices (<code><a href='http://github.com/tidymodels/broom/issues/910'>#910</a></code> by <code>@tavareshugo</code>)</li>
+<li>Fixed <code><a href="../reference/tidy.polr.html">tidy.polr()</a></code> bug where p-values could only be returned if <code>exponentiate = FALSE</code>.</li>
 </ul>
 </div>
 <div id="deprecations" class="section level4">
