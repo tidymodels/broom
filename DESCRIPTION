@@ -608,7 +608,6 @@ Suggests:
     spatialreg,
     speedglm,
     spelling,
-    statnet.common,
     survey,
     survival,
     systemfit,
