@@ -7,8 +7,8 @@ the 0.7.0 major release.
 
 - local mac OS  install: R 3.6.3
 - mac OS (on github actions): R 4.0.2
-- ubuntu 16.04 (on github actions), R 4.0.2
-- Microsoft Windows Server 2019 10.0.17763 (on github actions), release
+- ubuntu 16.04 (on github actions): R 4.0.2
+- Microsoft Windows Server 2019 10.0.17763 (on github actions), devel, release, 3.6
 - win-builder (devel)
 
 ## R CMD check results
@@ -36,4 +36,3 @@ following response from the package maintainer on September 25th, 2020:
 "Fixed in github. I'll update after you guys release, having updated recently."
 
 More discussion here: https://github.com/hughjonesd/huxtable/issues/186
-
