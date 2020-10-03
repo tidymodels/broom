@@ -158,7 +158,7 @@
 
     <div id="broom-071" class="section level1">
 <h1 class="page-header" data-toc-text="0.7.1">
-<a href="#broom-071" class="anchor"></a>broom 0.7.1<small> Unreleased </small>
+<a href="#broom-071" class="anchor"></a>broom 0.7.1<small> 2020-10-01 </small>
 </h1>
 <p>While broom 0.7.1 is a minor release, it includes a number of exciting new features and bug fixes!</p>
 <div id="new-tidiers" class="section level4">
@@ -438,13 +438,12 @@
 <p>Almost all tidiers should now return <code>tibble</code>s rather than <code>data.frame</code>s. Deprecated tidying methods, Bayesian and mixed model tidiers still return <code>data.frame</code>s.</p>
 <p><strong>Users</strong> are mostly to experience issues when using <code>augment</code> in situations where tibbles are stricter than data frames. For example, specifying model covariates as a matrix object will now error:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="https://broom.tidymodels.org">broom</a></span>)
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="https://www.r-project.org">quantreg</a></span>)
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://broom.tidymodels.org/">broom</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://www.r-project.org">quantreg</a></span><span class="op">)</span>
 
-<span class="kw">fit</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/quantreg/man/rq.html">rq</a></span>(<span class="kw">stack.loss</span> <span class="op">~</span> <span class="kw">stack.x</span>, tau = <span class="fl">.5</span>)
-<span class="kw">broom</span>::<span class="fu"><a href="https://rdrr.io/pkg/generics/man/augment.html">augment</a></span>(<span class="kw">fit</span>)
-<span class="co">#&gt; Error: Column `stack.x` must be a 1d atomic vector or a list</span>
-</pre></div>
+<span class="va">fit</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/quantreg/man/rq.html">rq</a></span><span class="op">(</span><span class="va">stack.loss</span> <span class="op">~</span> <span class="va">stack.x</span>, tau <span class="op">=</span> <span class="fl">.5</span><span class="op">)</span>
+<span class="fu">broom</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/generics/man/augment.html">augment</a></span><span class="op">(</span><span class="va">fit</span><span class="op">)</span>
+<span class="co">#&gt; Error: Column `stack.x` must be a 1d atomic vector or a list</span></pre></div>
 <p>This is because the default <code>data</code> argument <code>data = model.frame(fit)</code> cannot be coerced to <code>tibble</code>.</p>
 <p>Another consequence of this is that <code>augment.survreg</code> and <code>augment.coxph</code> from the <code>survival</code> package now require that the user explicitly passes data to either the <code>data</code> or <code>newdata</code> arguments.</p>
 <p>These restrictions will be relaxed in an upcoming release of <code>broom</code> pending support for matrix-columns in tibbles.</p>

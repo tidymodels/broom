@@ -179,7 +179,7 @@ It simply returns the coefficients and their confidence intervals.</p>
     </div>
 
     <pre class="usage"><span class='co'># S3 method for btergm</span>
-<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='kw'>x</span>, conf.level = <span class='fl'>0.95</span>, exponentiate = <span class='fl'>FALSE</span>, <span class='kw'>...</span>)</pre>
+<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>x</span>, conf.level <span class='op'>=</span> <span class='fl'>0.95</span>, exponentiate <span class='op'>=</span> <span class='cn'>FALSE</span>, <span class='va'>...</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -229,7 +229,7 @@ the <code>data</code> argument.</p></td>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
-<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='kw'><a href='http://github.com/leifeld/btergm'>btergm</a></span>)
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='http://github.com/leifeld/btergm'>btergm</a></span><span class='op'>)</span>
 </div><div class='output co'>#&gt; <span class='message'>Loading required package: xergm.common</span></div><div class='output co'>#&gt; <span class='message'>Loading required package: ergm</span></div><div class='output co'>#&gt; <span class='message'>Loading required package: network</span></div><div class='output co'>#&gt; <span class='message'>network: Classes for Relational Data</span>
 #&gt; <span class='message'>Version 1.16.0 created on 2019-11-30.</span>
 #&gt; <span class='message'>copyright (c) 2005, Carter T. Butts, University of California-Irvine</span>
@@ -265,38 +265,38 @@ the <code>data</code> argument.</p></td>
 #&gt; <span class='message'>    gof</span></div><div class='output co'>#&gt; <span class='error'>Error: package or namespace load failed for ‘btergm’:</span>
 #&gt; <span class='error'> .onLoad failed in loadNamespace() for 'tcltk', details:</span>
 #&gt; <span class='error'>  call: fun(libname, pkgname)</span>
-#&gt; <span class='error'>  error: X11 library is missing: install XQuartz from xquartz.macosforge.org</span></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span>(<span class='fl'>1</span>)
+#&gt; <span class='error'>  error: X11 library is missing: install XQuartz from xquartz.macosforge.org</span></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span><span class='op'>(</span><span class='fl'>1</span><span class='op'>)</span>
 
 <span class='co'># Create 10 random networks with 10 actors</span>
 
-<span class='kw'>networks</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>()
+<span class='va'>networks</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='op'>)</span>
 
-<span class='co'>for</span> (<span class='kw'>i</span> <span class='co'>in</span> <span class='fl'>1</span><span class='op'>:</span><span class='fl'>10</span>) {
-  <span class='kw'>mat</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></span>(<span class='fu'><a href='https://rdrr.io/r/stats/Binomial.html'>rbinom</a></span>(<span class='fl'>100</span>, <span class='fl'>1</span>, <span class='fl'>.25</span>), nrow = <span class='fl'>10</span>, ncol = <span class='fl'>10</span>)
-  <span class='fu'><a href='https://rdrr.io/r/base/diag.html'>diag</a></span>(<span class='kw'>mat</span>) <span class='op'>&lt;-</span> <span class='fl'>0</span>
-  <span class='kw'>nw</span> <span class='op'>&lt;-</span> <span class='kw'>network</span>::<span class='fu'><a href='https://rdrr.io/pkg/network/man/network.html'>network</a></span>(<span class='kw'>mat</span>)
-  <span class='kw'>networks</span>[[<span class='kw'>i</span>]] <span class='op'>&lt;-</span> <span class='kw'>nw</span>
-}
+<span class='kw'>for</span> <span class='op'>(</span><span class='va'>i</span> <span class='kw'>in</span> <span class='fl'>1</span><span class='op'>:</span><span class='fl'>10</span><span class='op'>)</span> <span class='op'>{</span>
+  <span class='va'>mat</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/stats/Binomial.html'>rbinom</a></span><span class='op'>(</span><span class='fl'>100</span>, <span class='fl'>1</span>, <span class='fl'>.25</span><span class='op'>)</span>, nrow <span class='op'>=</span> <span class='fl'>10</span>, ncol <span class='op'>=</span> <span class='fl'>10</span><span class='op'>)</span>
+  <span class='fu'><a href='https://rdrr.io/r/base/diag.html'>diag</a></span><span class='op'>(</span><span class='va'>mat</span><span class='op'>)</span> <span class='op'>&lt;-</span> <span class='fl'>0</span>
+  <span class='va'>nw</span> <span class='op'>&lt;-</span> <span class='fu'>network</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/network/man/network.html'>network</a></span><span class='op'>(</span><span class='va'>mat</span><span class='op'>)</span>
+  <span class='va'>networks</span><span class='op'>[[</span><span class='va'>i</span><span class='op'>]</span><span class='op'>]</span> <span class='op'>&lt;-</span> <span class='va'>nw</span>
+<span class='op'>}</span>
 
 <span class='co'># Create 10 matrices as covariates</span>
 
-<span class='kw'>covariates</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>()
+<span class='va'>covariates</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='op'>)</span>
 
-<span class='co'>for</span> (<span class='kw'>i</span> <span class='co'>in</span> <span class='fl'>1</span><span class='op'>:</span><span class='fl'>10</span>) {
-  <span class='kw'>mat</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></span>(<span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span>(<span class='fl'>100</span>), nrow = <span class='fl'>10</span>, ncol = <span class='fl'>10</span>)
-  <span class='kw'>covariates</span>[[<span class='kw'>i</span>]] <span class='op'>&lt;-</span> <span class='kw'>mat</span>
-}
+<span class='kw'>for</span> <span class='op'>(</span><span class='va'>i</span> <span class='kw'>in</span> <span class='fl'>1</span><span class='op'>:</span><span class='fl'>10</span><span class='op'>)</span> <span class='op'>{</span>
+  <span class='va'>mat</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span><span class='op'>(</span><span class='fl'>100</span><span class='op'>)</span>, nrow <span class='op'>=</span> <span class='fl'>10</span>, ncol <span class='op'>=</span> <span class='fl'>10</span><span class='op'>)</span>
+  <span class='va'>covariates</span><span class='op'>[[</span><span class='va'>i</span><span class='op'>]</span><span class='op'>]</span> <span class='op'>&lt;-</span> <span class='va'>mat</span>
+<span class='op'>}</span>
 
 <span class='co'># Fit a model where the propensity to form ties depends</span>
 <span class='co'># on the edge covariates, controlling for the number of</span>
 <span class='co'># in-stars</span>
-<span class='kw'>btfit</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/btergm/man/btergm.html'>btergm</a></span>(<span class='kw'>networks</span> <span class='op'>~</span> <span class='kw'>edges</span> <span class='op'>+</span> <span class='fu'><a href='https://rdrr.io/pkg/btergm/man/gofstatistics.html'>istar</a></span>(<span class='fl'>2</span>) <span class='op'>+</span> <span class='fu'>edgecov</span>(<span class='kw'>covariates</span>), R = <span class='fl'>100</span>)
+<span class='va'>btfit</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/btergm/man/btergm.html'>btergm</a></span><span class='op'>(</span><span class='va'>networks</span> <span class='op'>~</span> <span class='va'>edges</span> <span class='op'>+</span> <span class='fu'><a href='https://rdrr.io/pkg/btergm/man/gofstatistics.html'>istar</a></span><span class='op'>(</span><span class='fl'>2</span><span class='op'>)</span> <span class='op'>+</span> <span class='fu'>edgecov</span><span class='op'>(</span><span class='va'>covariates</span><span class='op'>)</span>, R <span class='op'>=</span> <span class='fl'>100</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; <span class='error'>Error in btergm(networks ~ edges + istar(2) + edgecov(covariates), R = 100): could not find function "btergm"</span></div><div class='input'>
 <span class='co'># Show terms, coefficient estimates and errors</span>
-<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='kw'>btfit</span>)
+<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>btfit</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; <span class='error'>Error in tidy(btfit): object 'btfit' not found</span></div><div class='input'>
 <span class='co'># Show coefficients as odds ratios with a 99% CI</span>
-<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='kw'>btfit</span>, exponentiate = <span class='fl'>TRUE</span>, conf.level = <span class='fl'>0.99</span>)
+<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>btfit</span>, exponentiate <span class='op'>=</span> <span class='cn'>TRUE</span>, conf.level <span class='op'>=</span> <span class='fl'>0.99</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; <span class='error'>Error in tidy(btfit, exponentiate = TRUE, conf.level = 0.99): object 'btfit' not found</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

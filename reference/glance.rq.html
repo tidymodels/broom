@@ -191,7 +191,7 @@ of the appropriate type.</p>
     </div>
 
     <pre class="usage"><span class='co'># S3 method for rq</span>
-<span class='fu'><a href='https://rdrr.io/pkg/generics/man/glance.html'>glance</a></span>(<span class='kw'>x</span>, <span class='kw'>...</span>)</pre>
+<span class='fu'><a href='https://rdrr.io/pkg/generics/man/glance.html'>glance</a></span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>...</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -217,9 +217,9 @@ the <code>data</code> argument.</p></td>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>Only models with a single <code>tau</code> value may be passed.
-For multiple values, please use a <code><a href='https://purrr.tidyverse.org/reference/map.html'>purrr::map()</a></code> workflow instead, e.g.</p><pre><span class='kw'>taus</span> <span class='op'>%&gt;%</span>
-  <span class='fu'><a href='https://mclust-org.github.io/mclust/reference/map.html'>map</a></span>(<span class='fu'>function</span>(<span class='kw'>tau_val</span>) <span class='fu'>rq</span>(<span class='kw'>y</span> <span class='op'>~</span> <span class='kw'>x</span>, tau = <span class='kw'>tau_val</span>)) <span class='op'>%&gt;%</span>
-  <span class='fu'>map_dfr</span>(<span class='kw'>glance</span>)
+For multiple values, please use a <code><a href='https://purrr.tidyverse.org/reference/map.html'>purrr::map()</a></code> workflow instead, e.g.</p><pre><span class='va'>taus</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://mclust-org.github.io/mclust/reference/map.html'>map</a></span><span class='op'>(</span><span class='kw'>function</span><span class='op'>(</span><span class='va'>tau_val</span><span class='op'>)</span> <span class='fu'>rq</span><span class='op'>(</span><span class='va'>y</span> <span class='op'>~</span> <span class='va'>x</span>, tau <span class='op'>=</span> <span class='va'>tau_val</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>map_dfr</span><span class='op'>(</span><span class='va'>glance</span><span class='op'>)</span>
 </pre>
 
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
