@@ -22,7 +22,7 @@ package instead. Functionality is no longer supported for this method.
 \details{
 This code originates from Hadley Wickham (with a few small
 corrections) here:
-\url{https://github.com/hadley/dplyr/issues/269}
+\url{https://github.com/tidyverse/dplyr/issues/269}
 }
 \seealso{
 Other deprecated: 

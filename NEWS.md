@@ -1,6 +1,7 @@
 # broom 0.7.1
 
-While broom 0.7.1 is a minor release, it includes a number of exciting new features and bug fixes!
+While broom 0.7.1 is a minor release, it includes a number of exciting new 
+features and bug fixes!
 
 #### New tidiers
 
@@ -10,15 +11,18 @@ While broom 0.7.1 is a minor release, it includes a number of exciting new featu
 
 #### Improvements to existing tidiers
 
-One of the more major improvements in this release is the addition of the `interval` argument to some `augment` methods for confidence, prediction, and credible intervals. These columns will be consistently labeled `.lower` and `.upper`! (`#908` by `@grantmcdermott`, `#925` by `@bwiernik`)
+One of the more major improvements in this release is the addition of the 
+`interval` argument to some `augment` methods for confidence, prediction, 
+and credible intervals. These columns will be consistently labeled `.lower` 
+and `.upper`! (`#908` by `@grantmcdermott`, `#925` by `@bwiernik`)
 
 In addition...
 
 * Extended the `glance.aov()` method to include an `r.squared` column!
 * `glance.survfit()` now passes `...` to `summary.survfit()` to allow for
 adjustment of RMST and other measures (`#880` by `@vincentarelbundock`)
-* Several unsupported model objects that subclass `glm` and `lm` now error more 
-informatively.
+* Several unsupported model objects that subclass `glm` and `lm` now error 
+more informatively.
 * A number of improvements to documentation throughout the package.
 
 ####  Bug fixes
@@ -43,7 +47,9 @@ and "scores" matrices (`#910` by `@tavareshugo`)
 
 #### Deprecations
 
-We followed through with the planned deprecation of character vector tidiers in this release. Tidiers that were soft-deprecated in 0.7.0 will be fully deprecated in a later release.
+We followed through with the planned deprecation of character vector tidiers 
+in this release. Other vector tidiers that were soft-deprecated in 0.7.0 will 
+be fully deprecated in a later release.
 
 # broom 0.7.0
 
@@ -405,7 +411,7 @@ Several old vignettes have also been updated:
 - Dataframe tidiers and rowwise dataframe tidiers have been deprecated
 
 - `bootstrap()` has been deprecated in favor of the
-  [`rsample`](https://tidymodels.github.io/rsample/)
+  [`rsample`](https://rsample.tidymodels.org/)
 
 - `inflate` has been removed from `broom`
 
@@ -765,7 +771,7 @@ See `?rowwise_df_tidiers` for more.
   consistent with broom's naming conventions for columns.
 
 * A function `bootstrap` has been added based on [this
-  example](https://github.com/hadley/dplyr/issues/269), to perform the common
+  example](https://github.com/tidyverse/dplyr/issues/269), to perform the common
   use case of bootstrapping models.
 
 # broom 0.2

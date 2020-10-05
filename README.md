@@ -11,7 +11,7 @@ status](https://github.com/tidymodels/broom/workflows/R-CMD-check/badge.svg)](ht
 status](https://codecov.io/gh/tidymodels/broom/branch/master/graph/badge.svg)](https://codecov.io/github/tidymodels/broom?branch=master)
 [![CRAN
 status](https://www.r-pkg.org/badges/version/broom)](https://CRAN.R-project.org/package=broom)
-[![Downloads](http://cranlogs.r-pkg.org/badges/broom)](https://cran.rstudio.com/package=broom)
+[![Downloads](https://cranlogs.r-pkg.org/badges/broom)](https://CRAN.R-project.org/package=broom)
 <!-- badges: end -->
 
 ## Overview
@@ -32,7 +32,7 @@ all of the model objects in the `stats` package that comes with base R.
 
 If you aren’t familiar with tidy data structures and want to know how
 they can make your life easier, we highly recommend reading Hadley
-Wickham’s [Tidy Data](http://www.jstatsoft.org/v59/i10).
+Wickham’s [Tidy Data](https://www.jstatsoft.org/v59/i10).
 
 ## Installation
 

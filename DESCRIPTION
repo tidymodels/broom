@@ -1,7 +1,7 @@
 Type: Package
 Package: broom
 Title: Convert Statistical Objects into Tidy Tibbles
-Version: 0.7.0.9001
+Version: 0.7.1
 Authors@R:
     c(person(given = "David",
              family = "Robinson",
@@ -511,8 +511,8 @@ Description: Summarizes key information about statistical
     observations to a dataset, such as fitted values or influence
     measures.
 License: MIT + file LICENSE
-URL: https://broom.tidymodels.org/, http://github.com/tidymodels/broom
-BugReports: http://github.com/tidymodels/broom/issues
+URL: https://broom.tidymodels.org/, https://github.com/tidymodels/broom
+BugReports: https://github.com/tidymodels/broom/issues
 Depends:
     R (>= 3.1)
 Imports:
@@ -546,7 +546,7 @@ Suggests:
     e1071,
     emmeans,
     epiR,
-    ergm,
+    ergm (>= 3.10.4),
     fixest (>= 0.5.0),
     gam (>= 1.15),
     gamlss,
@@ -608,15 +608,12 @@ Suggests:
     spatialreg,
     speedglm,
     spelling,
-    statnet.common,
     survey,
     survival,
     systemfit,
     testthat (>= 2.1.0),
     tseries,
     zoo
-Remotes:
-  alexpghayes/modeltests
 VignetteBuilder:
     knitr
 Encoding: UTF-8

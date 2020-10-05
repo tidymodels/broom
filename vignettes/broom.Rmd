@@ -18,7 +18,7 @@ broom: let's tidy up a bit
 
 The broom package takes the messy output of built-in functions in R, such as `lm`, `nls`, or `t.test`, and turns them into tidy tibbles.
 
-The concept of "tidy data", [as introduced by Hadley Wickham](http://www.jstatsoft.org/v59/i10), offers a powerful framework for data manipulation and analysis. That paper makes a convincing statement of the problem this package tries to solve (emphasis mine):
+The concept of "tidy data", [as introduced by Hadley Wickham](https://www.jstatsoft.org/v59/i10), offers a powerful framework for data manipulation and analysis. That paper makes a convincing statement of the problem this package tries to solve (emphasis mine):
 
 > **While model inputs usually require tidy inputs, such attention to detail doesn't carry over to model outputs. Outputs such as predictions and estimated coefficients aren't always tidy. This makes it more difficult to combine results from multiple models.** For example, in R, the default representation of model coefficients is not tidy because it does not have an explicit variable that records the variable name for each estimate, they are instead recorded as row names. In R, row names must be unique, so combining coefficients from many models (e.g., from bootstrap resamples, or subgroups) requires workarounds to avoid losing important information. **This knocks you out of the flow of analysis and makes it harder to combine the results from multiple models. I'm not currently aware of any packages that resolve this problem.**
 
@@ -26,7 +26,7 @@ broom is an attempt to bridge the gap from untidy outputs of predictions and est
 
 broom should be distinguished from packages like [reshape2](https://CRAN.R-project.org/package=reshape2) and [tidyr](https://github.com/tidyverse/tidyr), which rearrange and reshape data frames into different forms. Those packages perform critical tasks in tidy data analysis but focus on manipulating data frames in one specific format into another. In contrast, broom is designed to take format that is *not* in a tabular data format (sometimes not anywhere close) and convert it to a tidy tibble.
 
-Tidying model outputs is not an exact science, and it's based on a judgment of the kinds of values a data scientist typically wants out of a tidy analysis (for instance, estimates, test statistics, and p-values). You may lose some of the information in the original object that you wanted, or keep more information than you need. If you think the tidy output for a model should be changed, or if you're missing a tidying function for an S3 class that you'd like, I strongly encourage you to [open an issue](http://github.com/tidymodels/broom/issues) or a pull request.
+Tidying model outputs is not an exact science, and it's based on a judgment of the kinds of values a data scientist typically wants out of a tidy analysis (for instance, estimates, test statistics, and p-values). You may lose some of the information in the original object that you wanted, or keep more information than you need. If you think the tidy output for a model should be changed, or if you're missing a tidying function for an S3 class that you'd like, I strongly encourage you to [open an issue](https://github.com/tidymodels/broom/issues) or a pull request.
 
 Tidying functions
 -----------------

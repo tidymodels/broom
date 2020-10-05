@@ -68,12 +68,13 @@ tidy(gest, exponentiate = TRUE, conf.int = TRUE, conf.level = 0.99)
 glance(gest)
 glance(gest, deviance = TRUE)
 glance(gest, mcmc = TRUE)
+
 }
 \references{
 Hunter DR, Handcock MS, Butts CT, Goodreau SM, Morris M (2008b).
 \pkg{ergm}: A Package to Fit, Simulate and Diagnose Exponential-Family
 Models for Networks. \emph{Journal of Statistical Software}, 24(3).
-\url{http://www.jstatsoft.org/v24/i03/}.
+\url{https://www.jstatsoft.org/v24/i03/}.
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[ergm:ergm]{ergm::ergm()}}, \code{\link[ergm:control.ergm]{ergm::control.ergm()}},

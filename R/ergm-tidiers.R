@@ -19,7 +19,6 @@
 #'   \item{std.error}{The standard error}
 #'   \item{mcmc.error}{The MCMC error}
 #'   \item{p.value}{The two-sided p-value}
-#'
 #' @examples
 #'
 #' library(ergm)
@@ -42,10 +41,11 @@
 #' glance(gest)
 #' glance(gest, deviance = TRUE)
 #' glance(gest, mcmc = TRUE)
+#' 
 #' @references Hunter DR, Handcock MS, Butts CT, Goodreau SM, Morris M (2008b).
 #'   \pkg{ergm}: A Package to Fit, Simulate and Diagnose Exponential-Family
 #'   Models for Networks. *Journal of Statistical Software*, 24(3).
-#'   <http://www.jstatsoft.org/v24/i03/>.
+#'   <https://www.jstatsoft.org/v24/i03/>.
 #'
 #' @export
 #' @aliases ergm_tidiers
