@@ -246,30 +246,17 @@ Models for Networks. <em>Journal of Statistical Software</em>, 24(3).
 <span class='co'># Fit a model where the propensity to form ties between</span>
 <span class='co'># families depends on the absolute difference in wealth</span>
 <span class='va'>gest</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/ergm/man/ergm.html'>ergm</a></span><span class='op'>(</span><span class='va'>flomarriage</span> <span class='op'>~</span> <span class='va'>edges</span> <span class='op'>+</span> <span class='fu'><a href='https://rdrr.io/pkg/ergm/man/ergm-terms.html'>absdiff</a></span><span class='op'>(</span><span class='st'>"wealth"</span><span class='op'>)</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='warning'>Warning: 'compact.rle' is deprecated.</span>
-#&gt; <span class='warning'>Use 'compress' instead.</span>
-#&gt; <span class='warning'>See help("Deprecated")</span></div><div class='output co'>#&gt; <span class='warning'>Warning: `set_attrs()` is deprecated as of rlang 0.3.0</span>
-#&gt; <span class='warning'><span style='color: #555555;'>This warning is displayed once per session.</span><span></span></div><div class='output co'>#&gt; <span class='warning'>Warning: 'compact.rle' is deprecated.</span>
-#&gt; <span class='warning'>Use 'compress' instead.</span>
-#&gt; <span class='warning'>See help("Deprecated")</span></div><div class='output co'>#&gt; <span class='warning'>Warning: 'compact.rle' is deprecated.</span>
-#&gt; <span class='warning'>Use 'compress' instead.</span>
-#&gt; <span class='warning'>See help("Deprecated")</span></div><div class='output co'>#&gt; <span class='message'>Starting maximum pseudolikelihood estimation (MPLE):</span></div><div class='output co'>#&gt; <span class='message'>Evaluating the predictor and response matrix.</span></div><div class='output co'>#&gt; <span class='message'>Maximizing the pseudolikelihood.</span></div><div class='output co'>#&gt; <span class='message'>Finished MPLE.</span></div><div class='output co'>#&gt; <span class='message'>Stopping at the initial estimate.</span></div><div class='output co'>#&gt; <span class='warning'>Warning: 'compact.rle' is deprecated.</span>
-#&gt; <span class='warning'>Use 'compress' instead.</span>
-#&gt; <span class='warning'>See help("Deprecated")</span></div><div class='output co'>#&gt; <span class='message'>Evaluating log-likelihood at the estimate. </span></div><div class='output co'>#&gt; </div><div class='input'>
+</div><div class='output co'>#&gt; <span class='message'>Starting maximum pseudolikelihood estimation (MPLE):</span></div><div class='output co'>#&gt; <span class='message'>Evaluating the predictor and response matrix.</span></div><div class='output co'>#&gt; <span class='message'>Maximizing the pseudolikelihood.</span></div><div class='output co'>#&gt; <span class='message'>Finished MPLE.</span></div><div class='output co'>#&gt; <span class='message'>Stopping at the initial estimate.</span></div><div class='output co'>#&gt; <span class='message'>Evaluating log-likelihood at the estimate. </span></div><div class='output co'>#&gt; </div><div class='input'>
 <span class='co'># Show terms, coefficient estimates and errors</span>
 <span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>gest</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='warning'>Warning: 'compact.rle' is deprecated.</span>
-#&gt; <span class='warning'>Use 'compress' instead.</span>
-#&gt; <span class='warning'>See help("Deprecated")</span></div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 2 x 5</span><span>
+</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 2 x 5</span><span>
 #&gt;   term           estimate std.error statistic      p.value
 #&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>             </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>        </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
 #&gt; </span><span style='color: #555555;'>1</span><span> edges           -</span><span style='color: #BB0000;'>2.30</span><span>     0.402       -</span><span style='color: #BB0000;'>5.73</span><span> 0.000</span><span style='text-decoration: underline;'>000</span><span>010</span><span style='text-decoration: underline;'>2</span><span>
 #&gt; </span><span style='color: #555555;'>2</span><span> absdiff.wealth   0.015</span><span style='text-decoration: underline;'>5</span><span>   0.006</span><span style='text-decoration: underline;'>16</span><span>      2.52 0.011</span><span style='text-decoration: underline;'>7</span><span>      </div><div class='input'>
 <span class='co'># Show coefficients as odds ratios with a 99% CI</span>
 <span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>gest</span>, exponentiate <span class='op'>=</span> <span class='cn'>TRUE</span>, conf.int <span class='op'>=</span> <span class='cn'>TRUE</span>, conf.level <span class='op'>=</span> <span class='fl'>0.99</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='warning'>Warning: 'compact.rle' is deprecated.</span>
-#&gt; <span class='warning'>Use 'compress' instead.</span>
-#&gt; <span class='warning'>See help("Deprecated")</span></div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 2 x 7</span><span>
+</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 2 x 7</span><span>
 #&gt;   term           estimate std.error statistic      p.value conf.low conf.high
 #&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>             </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>        </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
 #&gt; </span><span style='color: #555555;'>1</span><span> edges             0.100   0.402       -</span><span style='color: #BB0000;'>5.73</span><span> 0.000</span><span style='text-decoration: underline;'>000</span><span>010</span><span style='text-decoration: underline;'>2</span><span>   0.035</span><span style='text-decoration: underline;'>5</span><span>     0.282
@@ -277,22 +264,16 @@ Models for Networks. <em>Journal of Statistical Software</em>, 24(3).
 <span class='co'># Take a look at likelihood measures and other</span>
 <span class='co'># control parameters used during MCMC estimation</span>
 <span class='fu'><a href='https://rdrr.io/pkg/generics/man/glance.html'>glance</a></span><span class='op'>(</span><span class='va'>gest</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='warning'>Warning: 'compact.rle' is deprecated.</span>
-#&gt; <span class='warning'>Use 'compress' instead.</span>
-#&gt; <span class='warning'>See help("Deprecated")</span></div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 1 x 5</span><span>
+</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 1 x 5</span><span>
 #&gt;   independence iterations logLik   AIC   BIC
 #&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;lgl&gt;</span><span>             </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
 #&gt; </span><span style='color: #555555;'>1</span><span> TRUE                  4  -</span><span style='color: #BB0000;'>51.0</span><span>  106.  112.</div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/generics/man/glance.html'>glance</a></span><span class='op'>(</span><span class='va'>gest</span>, deviance <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='warning'>Warning: 'compact.rle' is deprecated.</span>
-#&gt; <span class='warning'>Use 'compress' instead.</span>
-#&gt; <span class='warning'>See help("Deprecated")</span></div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 1 x 9</span><span>
+</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 1 x 9</span><span>
 #&gt;   independence iterations logLik null.deviance df.null residual.devian…
 #&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;lgl&gt;</span><span>             </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;logLik&gt;</span><span>        </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>            </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
 #&gt; </span><span style='color: #555555;'>1</span><span> TRUE                  4  -</span><span style='color: #BB0000;'>51.0</span><span> 166.3553          120             102.
 #&gt; </span><span style='color: #555555;'># … with 3 more variables: df.residual </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, AIC </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, BIC </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span></div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/generics/man/glance.html'>glance</a></span><span class='op'>(</span><span class='va'>gest</span>, mcmc <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='warning'>Warning: 'compact.rle' is deprecated.</span>
-#&gt; <span class='warning'>Use 'compress' instead.</span>
-#&gt; <span class='warning'>See help("Deprecated")</span></div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 1 x 8</span><span>
+</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 1 x 8</span><span>
 #&gt;   independence iterations logLik   AIC   BIC MCMC.interval MCMC.burnin
 #&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;lgl&gt;</span><span>             </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>         </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>       </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
 #&gt; </span><span style='color: #555555;'>1</span><span> TRUE                  4  -</span><span style='color: #BB0000;'>51.0</span><span>  106.  112.          </span><span style='text-decoration: underline;'>1</span><span>024       </span><span style='text-decoration: underline;'>16</span><span>384
