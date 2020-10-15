@@ -81,7 +81,13 @@ tidy.lm <- function(x, conf.int = FALSE, conf.level = 0.95, ...) {
   # error on inappropriate subclassing
   # TODO: undo gee / mclogit and other catches
   if (length(class(x)) > 1) {
-    stop("No tidy method for objects of class ", class(x)[1], call. = FALSE)
+    warning(
+      "Tidiers for objects of class ", class(x)[1], 
+      " are not maintained by the broom team, and are only supported through ",
+      "the tidy.lm() method. Please be cautious in interpreting and reporting ",
+      "broom output.",
+      call. = FALSE
+    )
   }
 
   ret <- as_tibble(summary(x)$coefficients, rownames = "term")

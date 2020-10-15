@@ -2,6 +2,10 @@
 
 To be released as broom 0.7.2.
 
+* In broom `0.7.0`, we introduced an error for objects that subclassed
+`lm` and relied on `tidy.lm()`. We've transitioned this error to a warning.
+* Various bug fixes and improvements to documentation and errors.
+
 # broom 0.7.1
 
 While broom 0.7.1 is a minor release, it includes a number of exciting new 
