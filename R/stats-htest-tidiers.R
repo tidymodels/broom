@@ -51,7 +51,7 @@ tidy.htest <- function(x, ...) {
     ret$estimate <- NULL
 
     # special case: in a t-test, estimate = estimate1 - estimate2
-    if (x$method %in% c("Welch Two Sample t-test", "Two Sample t-test")) {
+    if (x$method %in% c("Welch Two Sample t-test", " Two Sample t-test")) {
       ret <- c(estimate = ret$estimate1 - ret$estimate2, ret)
     }
   }
@@ -80,7 +80,7 @@ tidy.htest <- function(x, ...) {
     ret <- c(ret, conf.low = x$conf.int[1], conf.high = x$conf.int[2])
   }
   if (!is.null(x$method)) {
-    ret <- c(ret, method = as.character(x$method))
+    ret <- c(ret, method = trimws(as.character(x$method)))
   }
   if (!is.null(x$alternative)) {
     ret <- c(ret, alternative = as.character(x$alternative))
