@@ -1,7 +1,7 @@
-# broom 0.7.1 
+# broom 0.7.2
 
-broom 0.7.1 is a patch release featuring a number of bug fixes following
-the 0.7.0 major release.
+broom 0.7.2 is a patch release addressing an issue with loading a
+dependency in an example.
 
 ## Test environments
 
@@ -13,26 +13,10 @@ the 0.7.0 major release.
 
 ## R CMD check results
 
-0 WARNINGS, 0 ERRORS. Some platforms give 1 NOTE:
-
-```
- checking for future file timestamps ... NOTE
-  unable to verify current time
-```
-
-This NOTE seems to be a widespread issue.
+0 WARNINGS, 0 ERRORS, 0 NOTES.
 
 # Reverse dependencies
 
 We checked 162 reverse dependencies (152 from CRAN + 10 from BioConductor), 
 comparing R CMD check results across CRAN and dev versions of this package.
-
- * We saw 1 new problem
- * We failed to check 1 package
- 
-The new problem is in the `huxtable` package. We submitted an issue on the
-package repository two weeks ago noting the needed fix, and received the 
-following response from the package maintainer on September 25th, 2020: 
-"Fixed in github. I'll update after you guys release, having updated recently."
-
-More discussion here: https://github.com/hughjonesd/huxtable/issues/186
+We saw no new problems.
