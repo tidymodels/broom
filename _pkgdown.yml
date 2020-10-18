@@ -29,6 +29,10 @@ reference:
 - title: Miscellaneous
   contents:
   - broom
+  - bootstrap
+  - confint_tidy
+  - finish_glance
+  - fix_data_frame
   
 navbar:
   type: default
