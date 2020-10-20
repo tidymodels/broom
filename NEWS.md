@@ -1,3 +1,7 @@
+# broom 0.7.2.9000
+
+To be released as 0.7.3.
+
 # broom 0.7.2
 
 * In broom `0.7.0`, we introduced an error for objects that subclassed
