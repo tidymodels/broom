@@ -119,6 +119,7 @@ tidy.lm <- function(x, conf.int = FALSE, conf.level = 0.95, ...) {
 #' @template title_desc_tidy
 #'
 #' @param x A `summary.lm` object created by [summary(stats::lm())].
+#' @template param_confint
 #' @template param_unused_dots
 #'
 #' @evalRd return_tidy(regression = TRUE)

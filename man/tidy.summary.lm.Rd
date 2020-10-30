@@ -9,6 +9,13 @@
 \arguments{
 \item{x}{A \code{summary.lm} object created by \link[summary(stats:lm())]{summary(stats::lm())}.}
 
+\item{conf.int}{Logical indicating whether or not to include a confidence
+interval in the tidied output. Defaults to \code{FALSE}.}
+
+\item{conf.level}{The confidence level to use for the confidence interval
+if \code{conf.int = TRUE}. Must be strictly greater than 0 and less than 1.
+Defaults to 0.95, which corresponds to a 95 percent confidence interval.}
+
 \item{...}{Additional arguments. Not used. Needed to match generic
 signature only. \strong{Cautionary note:} Misspelled arguments will be
 absorbed in \code{...}, where they will be ignored. If the misspelled
@@ -30,7 +37,7 @@ specify which components to return.
 \details{
 The \code{glance.summary.lm()} method is a potentially useful alternative
 to \code{\link[=glance.lm]{glance.lm()}}. For instance, if users have already converted large \code{lm}
-objects into their leaner \code{summary.lm} equivalents to conserve memory
+objects into their leaner \code{summary.lm} equivalents to conserve memory.
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[stats:summary.lm]{stats::summary.lm()}}
