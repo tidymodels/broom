@@ -27,6 +27,13 @@
 #'   geom_point() +
 #'   geom_vline(xintercept = 0, lty = 4) +
 #'   geom_errorbarh()
+#'   
+#' # Both tidy() and glance() support lm.summary objects too. This can be 
+#' # useful when you want to conserve memory by converting large lm objects into 
+#' # their leaner summary.lm equivalents.
+#' s <- summary(mod)
+#' tidy(s, conf.int = TRUE)
+#' glance(s)
 #'
 #' augment(mod)
 #' augment(mod, mtcars, interval = "confidence")
@@ -106,6 +113,44 @@ tidy.lm <- function(x, conf.int = FALSE, conf.level = 0.95, ...) {
   ret
 }
 
+
+# Additional tidy method for summary.lm objects
+#' @templateVar class summary.lm
+#' @template title_desc_tidy
+#'
+#' @param x A `summary.lm` object created by [summary(stats::lm())].
+#' @template param_unused_dots
+#'
+#' @evalRd return_tidy(regression = TRUE)
+#'
+#' @details The `glance.summary.lm()` method is a potentially useful alternative
+#'   to [glance.lm()]. For instance, if users have already converted large `lm` 
+#'   objects into their leaner `summary.lm` equivalents to conserve memory.
+#' @export
+#' @seealso [tidy()], [stats::summary.lm()]
+#' @family lm tidiers
+tidy.summary.lm <- function(x, conf.int = FALSE, conf.level = 0.95, ...) {
+  ret <- as_tibble(x$coefficients, rownames = "term")
+  colnames(ret) <- c("term", "estimate", "std.error", "statistic", "p.value")
+  # Aside: The x$coefficients will miss rank deficient rows (i.e. coefs that
+  # summary.lm() sets to NA). We can't do much about that here, though since the
+  # user has already passed the summary(x) object into the tidy call...
+  
+  # There's no confint() method for summary.lm object, but these are easy enough
+  # to calculate manually
+  if (conf.int) {
+    ret <- ret %>%
+      dplyr::mutate(
+        conf.low = estimate - stats::qt(1-(1-conf.level)/2, df=x$df[2])*std.error,
+        conf.high = estimate + stats::qt(1-(1-conf.level)/2, df=x$df[2])*std.error
+      )
+  }
+  
+  ret
+}
+
+
+
 #' @templateVar class lm
 #' @template title_desc_augment
 #'
@@ -181,7 +226,7 @@ augment.lm <- function(x, data = model.frame(x), newdata = NULL,
 #'
 #'
 #' @export
-#' @seealso [glance()]
+#' @seealso [glance()], [glance.summary.lm()]
 #' @family lm tidiers
 glance.lm <- function(x, ...) {
   # check whether the model was fitted with only an intercept, in which
@@ -210,6 +255,61 @@ glance.lm <- function(x, ...) {
       deviance = stats::deviance(x),
       df.residual = df.residual(x),
       nobs = stats::nobs(x)
+    )
+  )
+}
+
+
+# Additional glance method for summary.lm objects
+#' @templateVar class summary.lm
+#' @template title_desc_glance
+#'
+#' @inherit tidy.lm params examples
+#'
+#' @evalRd return_glance(
+#'   "r.squared",
+#'   "adj.r.squared",
+#'   "sigma",
+#'   "statistic",
+#'   "p.value",
+#'   df = "The degrees for freedom from the numerator of the overall 
+#'     F-statistic. This is new in broom 0.7.0. Previously, this reported 
+#'     the rank of the design matrix, which is one more than the numerator 
+#'     degrees of freedom of the overall F-statistic.",
+#'   "df.residual",
+#'   "nobs"
+#'   ) 
+#' @details The `glance.summary.lm()` method is a potentially useful alternative
+#'   to [glance.lm()]. For instance, if users have already converted large `lm` 
+#'   objects into their leaner `summary.lm` equivalents to conserve memory. Note
+#'   that this method doesn't return all of the columns of the non-summary 
+#'   method (e.g. AIC and BIC will be missing.)
+#' @export
+#' @seealso [glance()], [glance.summary.lm()]
+#' @family lm tidiers
+glance.summary.lm <- function(x, ...) {
+  # check whether the model was fitted with only an intercept, in which
+  # case drop the fstatistic related columns
+  int_only <- nrow(x$coefficients) == 1
+  with(
+    x,
+    tibble(
+      r.squared = r.squared,
+      adj.r.squared = adj.r.squared,
+      sigma = sigma,
+      statistic = if (!int_only) {fstatistic["value"]} else {NA_real_},
+      p.value = if (!int_only) {
+        pf(
+          fstatistic["value"],
+          fstatistic["numdf"],
+          fstatistic["dendf"],
+          lower.tail = FALSE
+        )
+      } else {NA_real_},
+      df = if (!int_only) {fstatistic["numdf"]} else {NA_real_},
+      ## We can back out one or two more stats that would normally come with tidy.lm
+      df.residual = as.integer(x$fstatistic["dendf"]),
+      nobs = sum(as.integer(x$fstatistic[c("numdf", "dendf")])) + 1
     )
   )
 }
