@@ -57,9 +57,9 @@ ggplot(d, aes(estimate, term, xmin = conf.low, xmax = conf.high, height = 0)) +
   geom_vline(xintercept = 0, lty = 4) +
   geom_errorbarh()
   
-# Both tidy() and glance() support lm.summary objects too. This can be 
-# useful when you want to conserve memory by converting large lm objects into 
-# their leaner summary.lm equivalents.
+# Aside: There are tidy() and glance() methods for lm.summary objects too. 
+# This can be useful when you want to conserve memory by converting large lm 
+# objects into their leaner summary.lm equivalents.
 s <- summary(mod)
 tidy(s, conf.int = TRUE)
 glance(s)

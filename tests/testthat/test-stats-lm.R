@@ -9,18 +9,9 @@ test_that("lm tidier arguments", {
   check_arguments(augment.lm)
 })
 
-test_that("summary.lm tidier arguments", {
-  check_arguments(tidy.summary.lm)
-  check_arguments(glance.summary.lm)
-})
-
 fit <- lm(mpg ~ wt, mtcars)
 fit2 <- lm(mpg ~ wt + log(disp), mtcars)
 fit3 <- lm(mpg ~ 1, mtcars)
-
-# summary.lm
-fit_summ <- summary(fit)
-fit2_summ <- summary(fit2)
 
 # the cyl:qsec term isn't defined for this fit
 na_row_data <- mtcars[c(6, 9, 13:15, 22), ]
@@ -52,23 +43,9 @@ test_that("tidy.lm works", {
   expect_equal(td2$term, c("(Intercept)", "wt", "log(disp)"))
   expect_equal(td3$term, c("(Intercept)"))
 
-
   # shouldn't error. regression test for issues 166, 241
   # rows for confidence intervals of undefined terms should be dropped
   expect_error(tidy(fit_na_row, conf.int = TRUE), NA)
-})
-
-test_that("tidy.summary.lm works", {
-  td <- tidy(fit)
-  td2 <- tidy(fit2, conf.int = TRUE)
-  s <- tidy(fit_summ)
-  s2 <- tidy(fit2_summ, conf.int = TRUE)
-  
-  check_tidy_output(s)
-  check_tidy_output(s2)
-  
-  expect_equal(td, s)
-  expect_equal(td2, s2)
 })
 
 test_that("glance.lm", {
@@ -77,13 +54,6 @@ test_that("glance.lm", {
   gl3 <- glance(fit3)
 
   check_glance_outputs(gl, gl2, gl3)
-})
-
-test_that("glance.summary.lm", {
-  sgl <- glance(fit_summ)
-  sgl2 <- glance(fit2_summ)
-  
-  check_glance_outputs(sgl, sgl2)
 })
 
 test_that("augment.lm", {
