@@ -42,13 +42,13 @@ objects into their leaner \code{summary.lm} equivalents to conserve memory.
 \examples{
 
 mod <- lm(mpg ~ wt + qsec, data = mtcars)
-summ <- summary(m)
+modsumm <- summary(mod)
 
 tidy(mod, conf.int = TRUE)
-tidy(summ, conf.int = TRUE) # same
+tidy(modsumm, conf.int = TRUE) # same
 
 glance(mod)
-glance(summ) # mostly the same, except for a few missing columns
+glance(modsumm) # mostly the same, except for a few missing columns
 
 }
 \seealso{
