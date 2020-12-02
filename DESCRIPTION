@@ -646,7 +646,6 @@ Collate:
     'ergm-tidiers.R'
     'fixest-tidiers.R'
     'gam-tidiers.R'
-    'gee.R'
     'geepack-tidiers.R'
     'glmnet-cv-glmnet-tidiers.R'
     'glmnet-glmnet-tidiers.R'

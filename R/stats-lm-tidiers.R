@@ -78,17 +78,7 @@
 #' @family lm tidiers
 tidy.lm <- function(x, conf.int = FALSE, conf.level = 0.95, ...) {
 
-  # error on inappropriate subclassing
-  # TODO: undo gee / mclogit and other catches
-  if (length(class(x)) > 1) {
-    warning(
-      "Tidiers for objects of class ", class(x)[1], 
-      " are not maintained by the broom team, and are only supported through ",
-      "the tidy.lm() method. Please be cautious in interpreting and reporting ",
-      "broom output.",
-      call. = FALSE
-    )
-  }
+  warn_on_subclass(x)
 
   ret <- as_tibble(summary(x)$coefficients, rownames = "term")
   colnames(ret) <- c("term", "estimate", "std.error", "statistic", "p.value")
@@ -138,6 +128,9 @@ tidy.lm <- function(x, conf.int = FALSE, conf.level = 0.95, ...) {
 #' @family lm tidiers
 augment.lm <- function(x, data = model.frame(x), newdata = NULL,
                        se_fit = FALSE, interval =  c("none", "confidence", "prediction"), ...) {
+  
+  warn_on_subclass(x)
+  
   interval <- match.arg(interval)
   df <- augment_newdata(x, data, newdata, se_fit, interval)
 
@@ -184,6 +177,9 @@ augment.lm <- function(x, data = model.frame(x), newdata = NULL,
 #' @seealso [glance()]
 #' @family lm tidiers
 glance.lm <- function(x, ...) {
+  
+  warn_on_subclass(x)
+  
   # check whether the model was fitted with only an intercept, in which
   # case drop the fstatistic related columns
   int_only <- nrow(summary(x)$coefficients) == 1

@@ -88,4 +88,12 @@ test_that("as_glance_tibble", {
   
 })
 
-
+test_that("appropriate warning on (g)lm-subclassed models", {
+  x <- 1
+  class(x) <- c("gee", "glm")
+  
+  expect_warning(
+    warn_on_subclass(x),
+    "only supported through the tidy.glm\\(\\) method."
+  )
+})
