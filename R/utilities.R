@@ -478,7 +478,7 @@ broom_confint_terms <- function(x, ...) {
 
 # warn when models subclasses glm/lm and do not have their own dedicated tidiers.
 warn_on_subclass <- function(x) {
-  if (length(class(x)) > 1) {
+  if (length(class(x)) > 1 && class(x)[1] != "glm") {
     subclass <- class(x)[1]
     dispatched_method <- class(x)[-1]
     
