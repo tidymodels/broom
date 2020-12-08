@@ -89,7 +89,7 @@ tidy.gee <- function(x, conf.int = FALSE, conf.level = .95, exponentiate = FALSE
 #'
 #' @inherit tidy.gee params examples
 #'
-#' @evalRd return_glance("nobs", "n.clusters", "iterations", "scale", "residual.sum.squares")
+#' @evalRd return_glance("nobs", "n.clusters", "iterations")
 #'
 #' @export
 #' @seealso [glance()], [gee::gee()]
@@ -98,9 +98,7 @@ glance.gee <- function(x, ...) {
   tibble::tibble(
     nobs = x$nobs,
     n.clusters = x$max.id,
-    iterations = x$iterations,
-    scale = x$scale,
-    residual.sum.squares = sum((x$y - x$fitted.values)^2)
+    iterations = x$iterations
   )
   
 }
