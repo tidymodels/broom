@@ -27,6 +27,13 @@
 #'   geom_point() +
 #'   geom_vline(xintercept = 0, lty = 4) +
 #'   geom_errorbarh()
+#'   
+#' # Aside: There are tidy() and glance() methods for lm.summary objects too. 
+#' # This can be useful when you want to conserve memory by converting large lm 
+#' # objects into their leaner summary.lm equivalents.
+#' s <- summary(mod)
+#' tidy(s, conf.int = TRUE)
+#' glance(s)
 #'
 #' augment(mod)
 #' augment(mod, mtcars, interval = "confidence")
@@ -106,6 +113,7 @@ tidy.lm <- function(x, conf.int = FALSE, conf.level = 0.95, ...) {
   ret
 }
 
+
 #' @templateVar class lm
 #' @template title_desc_augment
 #'
@@ -181,7 +189,7 @@ augment.lm <- function(x, data = model.frame(x), newdata = NULL,
 #'
 #'
 #' @export
-#' @seealso [glance()]
+#' @seealso [glance()], [glance.summary.lm()]
 #' @family lm tidiers
 glance.lm <- function(x, ...) {
   # check whether the model was fitted with only an intercept, in which

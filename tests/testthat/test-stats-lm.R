@@ -43,7 +43,6 @@ test_that("tidy.lm works", {
   expect_equal(td2$term, c("(Intercept)", "wt", "log(disp)"))
   expect_equal(td3$term, c("(Intercept)"))
 
-
   # shouldn't error. regression test for issues 166, 241
   # rows for confidence intervals of undefined terms should be dropped
   expect_error(tidy(fit_na_row, conf.int = TRUE), NA)

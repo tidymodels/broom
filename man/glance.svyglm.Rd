@@ -83,10 +83,12 @@ Other lm tidiers:
 \code{\link{augment.lm}()},
 \code{\link{glance.glm}()},
 \code{\link{glance.lm}()},
+\code{\link{glance.summary.lm}()},
 \code{\link{tidy.glm}()},
 \code{\link{tidy.lm.beta}()},
 \code{\link{tidy.lm}()},
-\code{\link{tidy.mlm}()}
+\code{\link{tidy.mlm}()},
+\code{\link{tidy.summary.lm}()}
 }
 \concept{lm tidiers}
 \value{

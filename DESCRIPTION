@@ -716,6 +716,7 @@ Collate:
     'stats-mlm-tidiers.R'
     'stats-prcomp-tidiers.R'
     'stats-smooth.spline-tidiers.R'
+    'stats-summary-lm-tidiers.R'
     'stats-time-series-tidiers.R'
     'survey-tidiers.R'
     'survival-aareg-tidiers.R'

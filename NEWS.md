@@ -2,6 +2,8 @@
 
 To be released as 0.7.3.
 
+* Add tidiers for `summary.lm` objects (`#953` by `@grantmcdermott`)
+
 # broom 0.7.2
 
 * In broom `0.7.0`, we introduced an error for objects that subclassed
