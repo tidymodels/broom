@@ -94,6 +94,6 @@ test_that("appropriate warning on (g)lm-subclassed models", {
   
   expect_warning(
     warn_on_subclass(x),
-    "only supported through the tidy.glm\\(\\) method."
+    "only supported through the glm tidier method."
   )
 })
