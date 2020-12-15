@@ -2,13 +2,24 @@
 
 To be released as 0.7.3.
 
-* Add tidiers for `summary.lm` objects (`#953` by `@grantmcdermott`)
+In broom `0.7.0`, we introduced an error for model objects that subclassed
+`lm` and relied on `tidy.lm()`, or similarly for `tidy.glm()`. Tidiers for
+these objects were supported unintentionally, and we worried that tidiers for
+these objects would silently report innaccurate results.
+
+In hindsight, this change was unnecessarily abrupt. We've decided to roll back 
+this change, instead providing the following warning before allowing such 
+objects to fall back to the `lm`/`glm` tidier methods:
+
+> Tidiers for objects of class {subclass} are not maintained by the broom team, and are only supported through the {dispatched_method} tidier method. Please be cautious in interpreting and reporting broom output."
+
+In addition,
+
+* Restores tidiers for `summary.lm` objects (`#953` by `@grantmcdermott`)
+* Various bug fixes and improvements to documentation and errors.
 
 # broom 0.7.2
 
-* In broom `0.7.0`, we introduced an error for objects that subclassed
-`lm` and relied on `tidy.lm()`, or similarly for `tidy.glm()`. 
-We've transitioned these errors to warnings.
 * Various bug fixes and improvements to documentation and errors.
 
 # broom 0.7.1
