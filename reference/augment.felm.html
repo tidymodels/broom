@@ -169,7 +169,7 @@ missing at this time." />
 </li>
         <li>
   <a href="https://github.com/tidymodels/broom">
-    <span class="fa fa-github fa-lg"></span>
+    <span class="fas fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -211,7 +211,7 @@ variable used to fit the model is not included in <code>newdata</code>, then no
 associated with training observations (such as influences or related)
 measures that is not meaningfully defined for new observations.</p>
 <p>For convenience, many augment methods provide default <code>data</code> arguments,
-so that <code><a href='https://rdrr.io/pkg/generics/man/augment.html'>augment(fit)</a></code> will return the augmented training data. In these
+so that <code><a href='https://generics.r-lib.org/reference/augment.html'>augment(fit)</a></code> will return the augmented training data. In these
 cases, augment tries to reconstruct the original data based on the model
 object with varying degrees of success.</p>
 <p>The augmented dataset is always returned as a <a href='https://tibble.tidyverse.org/reference/tibble.html'>tibble::tibble</a> with the
@@ -229,20 +229,20 @@ missing at this time.</p>
     </div>
 
     <pre class="usage"><span class='co'># S3 method for felm</span>
-<span class='fu'><a href='https://rdrr.io/pkg/generics/man/augment.html'>augment</a></span><span class='op'>(</span><span class='va'>x</span>, data <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/model.frame.html'>model.frame</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>, <span class='va'>...</span><span class='op'>)</span></pre>
+<span class='fu'><a href='https://generics.r-lib.org/reference/augment.html'>augment</a></span><span class='op'>(</span><span class='va'>x</span>, data <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/model.frame.html'>model.frame</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>, <span class='va'>...</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>x</th>
-      <td><p>A <code>felm</code> object returned from <code><a href='https://rdrr.io/pkg/lfe/man/felm.html'>lfe::felm()</a></code>.</p></td>
+      <td><p>A <code>felm</code> object returned from <code>felm()</code> from the <code>lfe</code> package.</p></td>
     </tr>
     <tr>
       <th>data</th>
       <td><p>A <a href='https://rdrr.io/r/base/data.frame.html'>base::data.frame</a> or <code><a href='https://tibble.tidyverse.org/reference/tibble.html'>tibble::tibble()</a></code> containing the original
 data that was used to produce the object <code>x</code>. Defaults to
-<code><a href='https://rdrr.io/r/stats/model.frame.html'>stats::model.frame(x)</a></code> so that <code><a href='https://rdrr.io/pkg/generics/man/augment.html'>augment(my_fit)</a></code> returns the augmented
+<code><a href='https://rdrr.io/r/stats/model.frame.html'>stats::model.frame(x)</a></code> so that <code><a href='https://generics.r-lib.org/reference/augment.html'>augment(my_fit)</a></code> returns the augmented
 original data. <strong>Do not</strong> pass new data to the <code>data</code> argument.
 Augment will report information such as influence and cooks distance for
 data passed to the <code>data</code> argument. These measures are only defined for
@@ -256,7 +256,7 @@ absorbed in <code>...</code>, where they will be ignored. If the misspelled
 argument has a default value, the default value will be used.
 For example, if you pass <code>conf.level = 0.9</code>, all computation will
 proceed using <code>conf.level = 0.95</code>. Additionally, if you pass
-<code>newdata = my_tibble</code> to an <code><a href='https://rdrr.io/pkg/generics/man/augment.html'>augment()</a></code> method that does not
+<code>newdata = my_tibble</code> to an <code><a href='https://generics.r-lib.org/reference/augment.html'>augment()</a></code> method that does not
 accept a <code>newdata</code> argument, it will use the default value for
 the <code>data</code> argument.</p></td>
     </tr>
@@ -264,7 +264,7 @@ the <code>data</code> argument.</p></td>
 
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='https://rdrr.io/pkg/generics/man/augment.html'>augment()</a></code>, <code><a href='https://rdrr.io/pkg/lfe/man/felm.html'>lfe::felm()</a></code></p>
+    <div class='dont-index'><p><code><a href='https://generics.r-lib.org/reference/augment.html'>augment()</a></code>, <code>lfe::felm()</code></p>
 <p>Other felm tidiers: 
 <code><a href='tidy.felm.html'>tidy.felm</a>()</code></p></div>
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
@@ -275,127 +275,6 @@ the <code>data</code> argument.</p></td>
 
 
 
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'>
-<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://github.com/sgaure/lfe'>lfe</a></span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='message'>Loading required package: Matrix</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Attaching package: ‘Matrix’</span></div><div class='output co'>#&gt; <span class='message'>The following objects are masked from ‘package:tidyr’:</span>
-#&gt; <span class='message'></span>
-#&gt; <span class='message'>    expand, pack, unpack</span></div><div class='input'>
-<span class='co'># Use built-in "airquality" dataset</span>
-<span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='va'>airquality</span><span class='op'>)</span>
-</div><div class='output co'>#&gt;   Ozone Solar.R Wind Temp Month Day
-#&gt; 1    41     190  7.4   67     5   1
-#&gt; 2    36     118  8.0   72     5   2
-#&gt; 3    12     149 12.6   74     5   3
-#&gt; 4    18     313 11.5   62     5   4
-#&gt; 5    NA      NA 14.3   56     5   5
-#&gt; 6    28      NA 14.9   66     5   6</div><div class='input'>
-<span class='co'># No FEs; same as lm()</span>
-<span class='va'>est0</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/lfe/man/felm.html'>felm</a></span><span class='op'>(</span><span class='va'>Ozone</span> <span class='op'>~</span> <span class='va'>Temp</span> <span class='op'>+</span> <span class='va'>Wind</span> <span class='op'>+</span> <span class='va'>Solar.R</span>, <span class='va'>airquality</span><span class='op'>)</span>
-<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>est0</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 4 x 5</span><span>
-#&gt;   term        estimate std.error statistic       p.value
-#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>          </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>         </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span> (Intercept) -</span><span style='color: #BB0000;'>64.3</span><span>      23.1        -</span><span style='color: #BB0000;'>2.79</span><span> 0.006</span><span style='text-decoration: underline;'>23</span><span>      
-#&gt; </span><span style='color: #555555;'>2</span><span> Temp          1.65      0.254       6.52 0.000</span><span style='text-decoration: underline;'>000</span><span>002</span><span style='text-decoration: underline;'>42</span><span>
-#&gt; </span><span style='color: #555555;'>3</span><span> Wind         -</span><span style='color: #BB0000;'>3.33</span><span>      0.654      -</span><span style='color: #BB0000;'>5.09</span><span> 0.000</span><span style='text-decoration: underline;'>001</span><span>52   
-#&gt; </span><span style='color: #555555;'>4</span><span> Solar.R       0.059</span><span style='text-decoration: underline;'>8</span><span>    0.023</span><span style='text-decoration: underline;'>2</span><span>      2.58 0.011</span><span style='text-decoration: underline;'>2</span><span>       </div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/generics/man/augment.html'>augment</a></span><span class='op'>(</span><span class='va'>est0</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 111 x 7</span><span>
-#&gt;    .rownames Ozone  Temp  Wind Solar.R .fitted  .resid
-#&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #555555;'> 1</span><span> 1            41    67   7.4     190   33.0    7.95 
-#&gt; </span><span style='color: #555555;'> 2</span><span> 2            36    72   8       118   35.0    1.00 
-#&gt; </span><span style='color: #555555;'> 3</span><span> 3            12    74  12.6     149   24.8  -</span><span style='color: #BB0000;'>12.8</span><span>  
-#&gt; </span><span style='color: #555555;'> 4</span><span> 4            18    62  11.5     313   18.5   -</span><span style='color: #BB0000;'>0.475</span><span>
-#&gt; </span><span style='color: #555555;'> 5</span><span> 7            23    65   8.6     299   32.3   -</span><span style='color: #BB0000;'>9.26</span><span> 
-#&gt; </span><span style='color: #555555;'> 6</span><span> 8            19    59  13.8      99   -</span><span style='color: #BB0000;'>6.95</span><span>  25.9  
-#&gt; </span><span style='color: #555555;'> 7</span><span> 9             8    61  20.1      19  -</span><span style='color: #BB0000;'>29.4</span><span>   37.4  
-#&gt; </span><span style='color: #555555;'> 8</span><span> 12           16    69   9.7     256   32.6  -</span><span style='color: #BB0000;'>16.6</span><span>  
-#&gt; </span><span style='color: #555555;'> 9</span><span> 13           11    66   9.2     290   31.4  -</span><span style='color: #BB0000;'>20.4</span><span>  
-#&gt; </span><span style='color: #555555;'>10</span><span> 14           14    68  10.9     274   28.1  -</span><span style='color: #BB0000;'>14.1</span><span>  
-#&gt; </span><span style='color: #555555;'># … with 101 more rows</span><span></div><div class='input'>
-<span class='co'># Add month fixed effects</span>
-<span class='va'>est1</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/lfe/man/felm.html'>felm</a></span><span class='op'>(</span><span class='va'>Ozone</span> <span class='op'>~</span> <span class='va'>Temp</span> <span class='op'>+</span> <span class='va'>Wind</span> <span class='op'>+</span> <span class='va'>Solar.R</span>  <span class='op'>|</span> <span class='va'>Month</span>, <span class='va'>airquality</span><span class='op'>)</span>
-<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>est1</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 3 x 5</span><span>
-#&gt;   term    estimate std.error statistic     p.value
-#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>      </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>       </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span> Temp      1.88      0.341       5.50 0.000</span><span style='text-decoration: underline;'>000</span><span>274
-#&gt; </span><span style='color: #555555;'>2</span><span> Wind     -</span><span style='color: #BB0000;'>3.11</span><span>      0.660      -</span><span style='color: #BB0000;'>4.71</span><span> 0.000</span><span style='text-decoration: underline;'>007</span><span>78 
-#&gt; </span><span style='color: #555555;'>3</span><span> Solar.R   0.052</span><span style='text-decoration: underline;'>2</span><span>    0.023</span><span style='text-decoration: underline;'>7</span><span>      2.21 0.029</span><span style='text-decoration: underline;'>6</span><span>     </div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>est1</span>, fe <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 8 x 7</span><span>
-#&gt;   term    estimate std.error statistic     p.value     N  comp
-#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>      </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>       </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span> Temp      1.88      0.341       5.50 0.000</span><span style='text-decoration: underline;'>000</span><span>274    </span><span style='color: #BB0000;'>NA</span><span>    </span><span style='color: #BB0000;'>NA</span><span>
-#&gt; </span><span style='color: #555555;'>2</span><span> Wind     -</span><span style='color: #BB0000;'>3.11</span><span>      0.660      -</span><span style='color: #BB0000;'>4.71</span><span> 0.000</span><span style='text-decoration: underline;'>007</span><span>78     </span><span style='color: #BB0000;'>NA</span><span>    </span><span style='color: #BB0000;'>NA</span><span>
-#&gt; </span><span style='color: #555555;'>3</span><span> Solar.R   0.052</span><span style='text-decoration: underline;'>2</span><span>    0.023</span><span style='text-decoration: underline;'>7</span><span>      2.21 0.029</span><span style='text-decoration: underline;'>6</span><span>         </span><span style='color: #BB0000;'>NA</span><span>    </span><span style='color: #BB0000;'>NA</span><span>
-#&gt; </span><span style='color: #555555;'>4</span><span> Month.5 -</span><span style='color: #BB0000;'>74.2</span><span>       4.23      -</span><span style='color: #BB0000;'>17.5</span><span>  2.00           24     1
-#&gt; </span><span style='color: #555555;'>5</span><span> Month.6 -</span><span style='color: #BB0000;'>89.0</span><span>       6.91      -</span><span style='color: #BB0000;'>12.9</span><span>  2.00            9     1
-#&gt; </span><span style='color: #555555;'>6</span><span> Month.7 -</span><span style='color: #BB0000;'>83.0</span><span>       4.06      -</span><span style='color: #BB0000;'>20.4</span><span>  2              26     1
-#&gt; </span><span style='color: #555555;'>7</span><span> Month.8 -</span><span style='color: #BB0000;'>78.4</span><span>       4.32      -</span><span style='color: #BB0000;'>18.2</span><span>  2.00           23     1
-#&gt; </span><span style='color: #555555;'>8</span><span> Month.9 -</span><span style='color: #BB0000;'>90.2</span><span>       3.85      -</span><span style='color: #BB0000;'>23.4</span><span>  2              29     1</div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/generics/man/augment.html'>augment</a></span><span class='op'>(</span><span class='va'>est1</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 111 x 8</span><span>
-#&gt;    .rownames Ozone  Temp  Wind Solar.R Month .fitted .resid
-#&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #555555;'> 1</span><span> 1            41    67   7.4     190     5   38.3    2.69
-#&gt; </span><span style='color: #555555;'> 2</span><span> 2            36    72   8       118     5   42.1   -</span><span style='color: #BB0000;'>6.07</span><span>
-#&gt; </span><span style='color: #555555;'> 3</span><span> 3            12    74  12.6     149     5   33.1  -</span><span style='color: #BB0000;'>21.1</span><span> 
-#&gt; </span><span style='color: #555555;'> 4</span><span> 4            18    62  11.5     313     5   22.6   -</span><span style='color: #BB0000;'>4.62</span><span>
-#&gt; </span><span style='color: #555555;'> 5</span><span> 7            23    65   8.6     299     5   36.5  -</span><span style='color: #BB0000;'>13.5</span><span> 
-#&gt; </span><span style='color: #555555;'> 6</span><span> 8            19    59  13.8      99     5   -</span><span style='color: #BB0000;'>1.33</span><span>  20.3 
-#&gt; </span><span style='color: #555555;'> 7</span><span> 9             8    61  20.1      19     5  -</span><span style='color: #BB0000;'>21.3</span><span>   29.3 
-#&gt; </span><span style='color: #555555;'> 8</span><span> 12           16    69   9.7     256     5   38.4  -</span><span style='color: #BB0000;'>22.4</span><span> 
-#&gt; </span><span style='color: #555555;'> 9</span><span> 13           11    66   9.2     290     5   36.1  -</span><span style='color: #BB0000;'>25.1</span><span> 
-#&gt; </span><span style='color: #555555;'>10</span><span> 14           14    68  10.9     274     5   33.7  -</span><span style='color: #BB0000;'>19.7</span><span> 
-#&gt; </span><span style='color: #555555;'># … with 101 more rows</span><span></div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/generics/man/glance.html'>glance</a></span><span class='op'>(</span><span class='va'>est1</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 1 x 8</span><span>
-#&gt;   r.squared adj.r.squared sigma statistic  p.value    df df.residual  nobs
-#&gt;       </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>         </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>       </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span>     0.637         0.612  20.7      25.8 4.57</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-20</span><span>   103         103   111</div><div class='input'>
-<span class='co'># The "se.type" argument can be used to switch out different standard errors </span>
-<span class='co'># types on the fly. In turn, this can be useful exploring the effect of </span>
-<span class='co'># different error structures on model inference.</span>
-<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>est1</span>, se.type <span class='op'>=</span> <span class='st'>"iid"</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 3 x 5</span><span>
-#&gt;   term    estimate std.error statistic     p.value
-#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>      </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>       </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span> Temp      1.88      0.341       5.50 0.000</span><span style='text-decoration: underline;'>000</span><span>274
-#&gt; </span><span style='color: #555555;'>2</span><span> Wind     -</span><span style='color: #BB0000;'>3.11</span><span>      0.660      -</span><span style='color: #BB0000;'>4.71</span><span> 0.000</span><span style='text-decoration: underline;'>007</span><span>78 
-#&gt; </span><span style='color: #555555;'>3</span><span> Solar.R   0.052</span><span style='text-decoration: underline;'>2</span><span>    0.023</span><span style='text-decoration: underline;'>7</span><span>      2.21 0.029</span><span style='text-decoration: underline;'>6</span><span>     </div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>est1</span>, se.type <span class='op'>=</span> <span class='st'>"robust"</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 3 x 5</span><span>
-#&gt;   term    estimate std.error statistic     p.value
-#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>      </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>       </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span> Temp      1.88      0.344       5.45 0.000</span><span style='text-decoration: underline;'>000</span><span>344
-#&gt; </span><span style='color: #555555;'>2</span><span> Wind     -</span><span style='color: #BB0000;'>3.11</span><span>      0.903      -</span><span style='color: #BB0000;'>3.44</span><span> 0.000</span><span style='text-decoration: underline;'>834</span><span>   
-#&gt; </span><span style='color: #555555;'>3</span><span> Solar.R   0.052</span><span style='text-decoration: underline;'>2</span><span>    0.022</span><span style='text-decoration: underline;'>6</span><span>      2.31 0.022</span><span style='text-decoration: underline;'>7</span><span>     </div><div class='input'>
-<span class='co'># Add clustered SEs (also by month)</span>
-<span class='va'>est2</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/lfe/man/felm.html'>felm</a></span><span class='op'>(</span><span class='va'>Ozone</span> <span class='op'>~</span> <span class='va'>Temp</span> <span class='op'>+</span> <span class='va'>Wind</span> <span class='op'>+</span> <span class='va'>Solar.R</span>  <span class='op'>|</span> <span class='va'>Month</span> <span class='op'>|</span> <span class='fl'>0</span> <span class='op'>|</span> <span class='va'>Month</span>, <span class='va'>airquality</span><span class='op'>)</span>
-<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>est2</span>, conf.int <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span> 
-</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 3 x 7</span><span>
-#&gt;   term    estimate std.error statistic  p.value conf.low conf.high
-#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>      </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span> Temp      1.88      0.182      10.3  0.000</span><span style='text-decoration: underline;'>497</span><span>   1.37       2.38 
-#&gt; </span><span style='color: #555555;'>2</span><span> Wind     -</span><span style='color: #BB0000;'>3.11</span><span>      1.31       -</span><span style='color: #BB0000;'>2.38</span><span> 0.076</span><span style='text-decoration: underline;'>0</span><span>    -</span><span style='color: #BB0000;'>6.74</span><span>       0.518
-#&gt; </span><span style='color: #555555;'>3</span><span> Solar.R   0.052</span><span style='text-decoration: underline;'>2</span><span>    0.040</span><span style='text-decoration: underline;'>8</span><span>      1.28 0.270     -</span><span style='color: #BB0000;'>0.061</span><span style='color: #BB0000;text-decoration: underline;'>1</span><span>     0.166</div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>est2</span>, conf.int <span class='op'>=</span> <span class='cn'>TRUE</span>, se.type <span class='op'>=</span> <span class='st'>"cluster"</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 3 x 7</span><span>
-#&gt;   term    estimate std.error statistic  p.value conf.low conf.high
-#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>      </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span> Temp      1.88      0.182      10.3  0.000</span><span style='text-decoration: underline;'>497</span><span>   1.37       2.38 
-#&gt; </span><span style='color: #555555;'>2</span><span> Wind     -</span><span style='color: #BB0000;'>3.11</span><span>      1.31       -</span><span style='color: #BB0000;'>2.38</span><span> 0.076</span><span style='text-decoration: underline;'>0</span><span>    -</span><span style='color: #BB0000;'>6.74</span><span>       0.518
-#&gt; </span><span style='color: #555555;'>3</span><span> Solar.R   0.052</span><span style='text-decoration: underline;'>2</span><span>    0.040</span><span style='text-decoration: underline;'>8</span><span>      1.28 0.270     -</span><span style='color: #BB0000;'>0.061</span><span style='color: #BB0000;text-decoration: underline;'>1</span><span>     0.166</div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>est2</span>, conf.int <span class='op'>=</span> <span class='cn'>TRUE</span>, se.type <span class='op'>=</span> <span class='st'>"robust"</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 3 x 7</span><span>
-#&gt;   term    estimate std.error statistic p.value conf.low conf.high
-#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>      </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span> Temp      1.88      0.344       5.45 0.005</span><span style='text-decoration: underline;'>50</span><span>   0.920      2.83 
-#&gt; </span><span style='color: #555555;'>2</span><span> Wind     -</span><span style='color: #BB0000;'>3.11</span><span>      0.903      -</span><span style='color: #BB0000;'>3.44</span><span> 0.026</span><span style='text-decoration: underline;'>2</span><span>   -</span><span style='color: #BB0000;'>5.62</span><span>      -</span><span style='color: #BB0000;'>0.602</span><span>
-#&gt; </span><span style='color: #555555;'>3</span><span> Solar.R   0.052</span><span style='text-decoration: underline;'>2</span><span>    0.022</span><span style='text-decoration: underline;'>6</span><span>      2.31 0.081</span><span style='text-decoration: underline;'>7</span><span>   -</span><span style='color: #BB0000;'>0.010</span><span style='color: #BB0000;text-decoration: underline;'>4</span><span>     0.115</div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>est2</span>, conf.int <span class='op'>=</span> <span class='cn'>TRUE</span>, se.type <span class='op'>=</span> <span class='st'>"iid"</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 3 x 7</span><span>
-#&gt;   term    estimate std.error statistic p.value conf.low conf.high
-#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>      </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span> Temp      1.88      0.341       5.50 0.005</span><span style='text-decoration: underline;'>32</span><span>   0.929      2.82 
-#&gt; </span><span style='color: #555555;'>2</span><span> Wind     -</span><span style='color: #BB0000;'>3.11</span><span>      0.660      -</span><span style='color: #BB0000;'>4.71</span><span> 0.009</span><span style='text-decoration: underline;'>24</span><span>  -</span><span style='color: #BB0000;'>4.94</span><span>      -</span><span style='color: #BB0000;'>1.28</span><span> 
-#&gt; </span><span style='color: #555555;'>3</span><span> Solar.R   0.052</span><span style='text-decoration: underline;'>2</span><span>    0.023</span><span style='text-decoration: underline;'>7</span><span>      2.21 0.092</span><span style='text-decoration: underline;'>0</span><span>   -</span><span style='color: #BB0000;'>0.013</span><span style='color: #BB0000;text-decoration: underline;'>5</span><span>     0.118</div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

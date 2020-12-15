@@ -141,7 +141,7 @@ specify which components to return." />
 </li>
         <li>
   <a href="https://github.com/tidymodels/broom">
-    <span class="fa fa-github fa-lg"></span>
+    <span class="fas fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -173,7 +173,7 @@ specify which components to return.</p>
     </div>
 
     <pre class="usage"><span class='co'># S3 method for mediate</span>
-<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>x</span>, conf.int <span class='op'>=</span> <span class='cn'>FALSE</span>, conf.level <span class='op'>=</span> <span class='fl'>0.95</span>, <span class='va'>...</span><span class='op'>)</span></pre>
+<span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>x</span>, conf.int <span class='op'>=</span> <span class='cn'>FALSE</span>, conf.level <span class='op'>=</span> <span class='fl'>0.95</span>, <span class='va'>...</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -201,7 +201,7 @@ absorbed in <code>...</code>, where they will be ignored. If the misspelled
 argument has a default value, the default value will be used.
 For example, if you pass <code>conf.level = 0.9</code>, all computation will
 proceed using <code>conf.level = 0.95</code>. Additionally, if you pass
-<code>newdata = my_tibble</code> to an <code><a href='https://rdrr.io/pkg/generics/man/augment.html'>augment()</a></code> method that does not
+<code>newdata = my_tibble</code> to an <code><a href='https://generics.r-lib.org/reference/augment.html'>augment()</a></code> method that does not
 accept a <code>newdata</code> argument, it will use the default value for
 the <code>data</code> argument.</p></td>
     </tr>
@@ -214,7 +214,7 @@ effect in the control and treatment groups, respectively. And the last
 two the direct effect in each group.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy()</a></code>, <code><a href='https://rdrr.io/pkg/mediation/man/mediate.html'>mediation::mediate()</a></code></p></div>
+    <div class='dont-index'><p><code><a href='https://generics.r-lib.org/reference/tidy.html'>tidy()</a></code>, <code><a href='https://rdrr.io/pkg/mediation/man/mediate.html'>mediation::mediate()</a></code></p></div>
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>A <code><a href='https://tibble.tidyverse.org/reference/tibble.html'>tibble::tibble()</a></code> with columns:</p>
@@ -238,6 +238,7 @@ two the direct effect in each group.</p>
 #&gt; <span class='message'>  cooks.distance.influence.merMod car </span>
 #&gt; <span class='message'>  influence.merMod                car </span>
 #&gt; <span class='message'>  simulate.formula                ergm</span>
+#&gt; <span class='message'>  simulate.formula_lhs            ergm</span>
 #&gt; <span class='message'>  dfbeta.influence.merMod         car </span>
 #&gt; <span class='message'>  dfbetas.influence.merMod        car </span></div><div class='output co'>#&gt; <span class='message'>mediation: Causal Mediation Analysis</span>
 #&gt; <span class='message'>Version: 4.5.0</span></div><div class='output co'>#&gt; <span class='message'></span>
@@ -249,21 +250,21 @@ two the direct effect in each group.</p>
 <span class='va'>c</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>depress2</span> <span class='op'>~</span> <span class='va'>treat</span> <span class='op'>+</span> <span class='va'>job_seek</span> <span class='op'>+</span> <span class='va'>econ_hard</span> <span class='op'>+</span> <span class='va'>sex</span> <span class='op'>+</span> <span class='va'>age</span>, data <span class='op'>=</span> <span class='va'>jobs</span><span class='op'>)</span>
 <span class='va'>mod</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/mediation/man/mediate.html'>mediate</a></span><span class='op'>(</span><span class='va'>b</span>, <span class='va'>c</span>, sims <span class='op'>=</span> <span class='fl'>50</span>, treat <span class='op'>=</span> <span class='st'>"treat"</span>, mediator <span class='op'>=</span> <span class='st'>"job_seek"</span><span class='op'>)</span>
 
-<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>mod</span><span class='op'>)</span>
+<span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>mod</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 4 x 4</span><span>
 #&gt;   term   estimate std.error p.value
 #&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
 #&gt; </span><span style='color: #555555;'>1</span><span> acme_0  -</span><span style='color: #BB0000;'>0.014</span><span style='color: #BB0000;text-decoration: underline;'>3</span><span>    0.012</span><span style='text-decoration: underline;'>9</span><span>    0.24
 #&gt; </span><span style='color: #555555;'>2</span><span> acme_1  -</span><span style='color: #BB0000;'>0.014</span><span style='color: #BB0000;text-decoration: underline;'>3</span><span>    0.012</span><span style='text-decoration: underline;'>9</span><span>    0.24
 #&gt; </span><span style='color: #555555;'>3</span><span> ade_0   -</span><span style='color: #BB0000;'>0.031</span><span style='color: #BB0000;text-decoration: underline;'>5</span><span>    0.037</span><span style='text-decoration: underline;'>7</span><span>    0.24
-#&gt; </span><span style='color: #555555;'>4</span><span> ade_1   -</span><span style='color: #BB0000;'>0.031</span><span style='color: #BB0000;text-decoration: underline;'>5</span><span>    0.037</span><span style='text-decoration: underline;'>7</span><span>    0.24</div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>mod</span>, conf.int <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
+#&gt; </span><span style='color: #555555;'>4</span><span> ade_1   -</span><span style='color: #BB0000;'>0.031</span><span style='color: #BB0000;text-decoration: underline;'>5</span><span>    0.037</span><span style='text-decoration: underline;'>7</span><span>    0.24</div><div class='input'><span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>mod</span>, conf.int <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 4 x 6</span><span>
 #&gt;   term   estimate std.error p.value conf.low conf.high
 #&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
 #&gt; </span><span style='color: #555555;'>1</span><span> acme_0  -</span><span style='color: #BB0000;'>0.014</span><span style='color: #BB0000;text-decoration: underline;'>3</span><span>    0.012</span><span style='text-decoration: underline;'>9</span><span>    0.24  -</span><span style='color: #BB0000;'>0.034</span><span style='color: #BB0000;text-decoration: underline;'>9</span><span>    0.010</span><span style='text-decoration: underline;'>3</span><span>
 #&gt; </span><span style='color: #555555;'>2</span><span> acme_1  -</span><span style='color: #BB0000;'>0.014</span><span style='color: #BB0000;text-decoration: underline;'>3</span><span>    0.012</span><span style='text-decoration: underline;'>9</span><span>    0.24  -</span><span style='color: #BB0000;'>0.034</span><span style='color: #BB0000;text-decoration: underline;'>9</span><span>    0.010</span><span style='text-decoration: underline;'>3</span><span>
 #&gt; </span><span style='color: #555555;'>3</span><span> ade_0   -</span><span style='color: #BB0000;'>0.031</span><span style='color: #BB0000;text-decoration: underline;'>5</span><span>    0.037</span><span style='text-decoration: underline;'>7</span><span>    0.24  -</span><span style='color: #BB0000;'>0.105</span><span>     0.058</span><span style='text-decoration: underline;'>4</span><span>
-#&gt; </span><span style='color: #555555;'>4</span><span> ade_1   -</span><span style='color: #BB0000;'>0.031</span><span style='color: #BB0000;text-decoration: underline;'>5</span><span>    0.037</span><span style='text-decoration: underline;'>7</span><span>    0.24  -</span><span style='color: #BB0000;'>0.105</span><span>     0.058</span><span style='text-decoration: underline;'>4</span><span></div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>mod</span>, conf.int <span class='op'>=</span> <span class='cn'>TRUE</span>, conf.level <span class='op'>=</span> <span class='fl'>.99</span><span class='op'>)</span>
+#&gt; </span><span style='color: #555555;'>4</span><span> ade_1   -</span><span style='color: #BB0000;'>0.031</span><span style='color: #BB0000;text-decoration: underline;'>5</span><span>    0.037</span><span style='text-decoration: underline;'>7</span><span>    0.24  -</span><span style='color: #BB0000;'>0.105</span><span>     0.058</span><span style='text-decoration: underline;'>4</span><span></div><div class='input'><span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>mod</span>, conf.int <span class='op'>=</span> <span class='cn'>TRUE</span>, conf.level <span class='op'>=</span> <span class='fl'>.99</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 4 x 6</span><span>
 #&gt;   term   estimate std.error p.value conf.low conf.high
 #&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>

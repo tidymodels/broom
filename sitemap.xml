@@ -313,6 +313,9 @@
     <loc>https://broom.tidymodels.org/reference/glance.speedlm.html</loc>
   </url>
   <url>
+    <loc>https://broom.tidymodels.org/reference/glance.summary.lm.html</loc>
+  </url>
+  <url>
     <loc>https://broom.tidymodels.org/reference/glance.survdiff.html</loc>
   </url>
   <url>
@@ -632,6 +635,9 @@
   </url>
   <url>
     <loc>https://broom.tidymodels.org/reference/tidy.summary.glht.html</loc>
+  </url>
+  <url>
+    <loc>https://broom.tidymodels.org/reference/tidy.summary.lm.html</loc>
   </url>
   <url>
     <loc>https://broom.tidymodels.org/reference/tidy.summary_emm.html</loc>

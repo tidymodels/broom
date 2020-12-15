@@ -135,7 +135,7 @@
 </li>
         <li>
   <a href="https://github.com/tidymodels/broom">
-    <span class="fa fa-github fa-lg"></span>
+    <span class="fas fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -161,13 +161,23 @@
 <a href="#broom-0729000" class="anchor"></a>broom 0.7.2.9000<small> Unreleased </small>
 </h1>
 <p>To be released as 0.7.3.</p>
+<p>In broom <code>0.7.0</code>, we introduced an error for model objects that subclassed <code>lm</code> and relied on <code><a href="../reference/tidy.lm.html">tidy.lm()</a></code>, or similarly for <code><a href="../reference/tidy.glm.html">tidy.glm()</a></code>. Tidiers for these objects were supported unintentionally, and we worried that tidiers for these objects would silently report innaccurate results.</p>
+<p>In hindsight, this change was unnecessarily abrupt. We’ve decided to roll back this change, instead providing the following warning before allowing such objects to fall back to the <code>lm</code>/<code>glm</code> tidier methods:</p>
+<blockquote>
+<p>Tidiers for objects of class {subclass} are not maintained by the broom team, and are only supported through the {dispatched_method} tidier method. Please be cautious in interpreting and reporting broom output."</p>
+</blockquote>
+<p>In addition,</p>
+<ul>
+<li>Restores tidiers for <code>summary.lm</code> objects (<code><a href='https://github.com/tidymodels/broom/issues/953'>#953</a></code> by <code>@grantmcdermott</code>)</li>
+<li>Remove nonessential documentation and tests for tidiers from the <code>lfe</code> package. The package was archived from CRAN recently, but it seems that it might make its way back to CRAN at some point, so a hard-deprecation might be short-sighted.</li>
+<li>Various bug fixes and improvements to documentation and errors.</li>
+</ul>
 </div>
     <div id="broom-072" class="section level1">
 <h1 class="page-header" data-toc-text="0.7.2">
 <a href="#broom-072" class="anchor"></a>broom 0.7.2<small> 2020-10-20 </small>
 </h1>
 <ul>
-<li>In broom <code>0.7.0</code>, we introduced an error for objects that subclassed <code>lm</code> and relied on <code><a href="../reference/tidy.lm.html">tidy.lm()</a></code>. We’ve transitioned this error to a warning.</li>
 <li>Various bug fixes and improvements to documentation and errors.</li>
 </ul>
 </div>
@@ -228,8 +238,8 @@
 <a href="#big-picture-changes" class="anchor"></a>Big picture changes</h3>
 <ul>
 <li><p>We have changed how we report degrees of freedom for <code>lm</code> objects (<a href='https://github.com/tidymodels/broom/issues/212'>#212</a>, <a href='https://github.com/tidymodels/broom/issues/273'>#273</a>). This is especially important for instructors in statistics courses. Previously the <code>df</code> column in <code><a href="../reference/glance.lm.html">glance.lm()</a></code> reported the rank of the design matrix. Now it reports degrees of freedom of the numerator for the overall F-statistic. This is equal to the rank of the model matrix minus one (unless you omit an intercept column), so the new <code>df</code> should be the old <code>df</code> minus one.</p></li>
-<li><p>We are moving away from supporting <code>summary.*()</code> objects. In particular, we have removed <code>tidy.summary.lm()</code> as part of a major overhaul of internals. Instead of calling <code><a href="https://rdrr.io/pkg/generics/man/tidy.html">tidy()</a></code> on <code>summary</code>-like objects, please call <code><a href="https://rdrr.io/pkg/generics/man/tidy.html">tidy()</a></code> directly on model objects moving forward.</p></li>
-<li><p>We have removed all support for the <code>quick</code> argument in <code><a href="https://rdrr.io/pkg/generics/man/tidy.html">tidy()</a></code> methods. This is to simplify internals and is for maintainability purposes. We anticipate this will not influence many users as few people seemed to use it. If this majorly cramps your style, let us know, as we are considering a new verb to return only model parameters. In the meantime, <code><a href="https://rdrr.io/r/stats/coef.html">stats::coef()</a></code> together with <code><a href="https://tibble.tidyverse.org/reference/enframe.html">tibble::enframe()</a></code> provides most of the functionality of <code><a href="https://rdrr.io/pkg/generics/man/tidy.html">tidy(..., quick = TRUE)</a></code>.</p></li>
+<li><p>We are moving away from supporting <code>summary.*()</code> objects. In particular, we have removed <code><a href="../reference/tidy.summary.lm.html">tidy.summary.lm()</a></code> as part of a major overhaul of internals. Instead of calling <code><a href="https://generics.r-lib.org/reference/tidy.html">tidy()</a></code> on <code>summary</code>-like objects, please call <code><a href="https://generics.r-lib.org/reference/tidy.html">tidy()</a></code> directly on model objects moving forward.</p></li>
+<li><p>We have removed all support for the <code>quick</code> argument in <code><a href="https://generics.r-lib.org/reference/tidy.html">tidy()</a></code> methods. This is to simplify internals and is for maintainability purposes. We anticipate this will not influence many users as few people seemed to use it. If this majorly cramps your style, let us know, as we are considering a new verb to return only model parameters. In the meantime, <code><a href="https://rdrr.io/r/stats/coef.html">stats::coef()</a></code> together with <code><a href="https://tibble.tidyverse.org/reference/enframe.html">tibble::enframe()</a></code> provides most of the functionality of <code><a href="https://generics.r-lib.org/reference/tidy.html">tidy(..., quick = TRUE)</a></code>.</p></li>
 <li><p>All <code>conf.int</code> arguments now default to <code>FALSE</code>, and all <code>conf.level</code> arguments now default to <code>0.95</code>. This should primarily affect <code><a href="../reference/tidy.survreg.html">tidy.survreg()</a></code>, which previously always returned confidence intervals, although there are some others.</p></li>
 <li><p>Tidiers for <code>emmeans</code>-objects use the arguments <code>conf.int</code> and <code>conf.level</code> instead of relying on the argument names native to the <code>emmeans::summary()</code>-methods (i.e., <code>infer</code> and <code>level</code>). Similarly, <code>multcomp</code>-tidiers now include a call to <code><a href="https://rdrr.io/pkg/ergm/man/summary.formula.html">summary()</a></code> as previous behavior was akin to setting the now removed argument <code>quick = TRUE</code>. Both families of tidiers now use the <code>adj.p.value</code> column name when appropriate. Finally, <code>emmeans</code>-, <code>multcomp</code>-, and <code>TukeyHSD</code>-tidiers now consistently use the column names <code>contrast</code> and <code>null.value</code> instead of <code>comparison</code>, <code>level1</code> and <code>level2</code>, or <code>lhs</code> and <code>rhs</code> (see <a href='https://github.com/tidymodels/broom/issues/692'>#692</a>).</p></li>
 </ul>
@@ -284,10 +294,10 @@
 <a href="#a-refactoring-of-augment-methods" class="anchor"></a>A refactoring of <code>augment()</code> methods</h2>
 <p>The internals of <code>augment.*()</code> methods have largely been overhauled.</p>
 <ul>
-<li><p>If you pass a dataset to <code><a href="https://rdrr.io/pkg/generics/man/augment.html">augment()</a></code> via the <code>data</code> or <code>newdata</code> arguments, you are now guaranteed that the augmented dataset will have exactly the same number of rows as the original dataset. This differs from previous behavior primarily when there are missing values. Previously <code><a href="https://rdrr.io/pkg/generics/man/augment.html">augment()</a></code> would drop rows containing <code>NA</code>. This should no longer be the case.</p></li>
+<li><p>If you pass a dataset to <code><a href="https://generics.r-lib.org/reference/augment.html">augment()</a></code> via the <code>data</code> or <code>newdata</code> arguments, you are now guaranteed that the augmented dataset will have exactly the same number of rows as the original dataset. This differs from previous behavior primarily when there are missing values. Previously <code><a href="https://generics.r-lib.org/reference/augment.html">augment()</a></code> would drop rows containing <code>NA</code>. This should no longer be the case.</p></li>
 <li><p><code>augment.*()</code> methods no longer accept an <code>na.action</code> argument.</p></li>
 <li><p>In previous versions, several <code>augment.*()</code> methods inherited the <code><a href="../reference/augment.lm.html">augment.lm()</a></code> method, but required additions to the <code><a href="../reference/augment.lm.html">augment.lm()</a></code> method itself. We have shifted away from this approach in favor of re-implementing many <code>augment.*()</code> methods as standalone methods making use of internal helper functions. As a result, <code><a href="../reference/augment.lm.html">augment.lm()</a></code> and some related methods have deprecated (previously unused) arguments.</p></li>
-<li><p><code><a href="https://rdrr.io/pkg/generics/man/augment.html">augment()</a></code> tries to give an informative error when <code>data</code> isn’t the original training data.</p></li>
+<li><p><code><a href="https://generics.r-lib.org/reference/augment.html">augment()</a></code> tries to give an informative error when <code>data</code> isn’t the original training data.</p></li>
 <li><p>The <code>.resid</code> column in the output of <code>augment().*</code> methods is now consistently defined as <code>y - y_hat</code></p></li>
 </ul>
 </div>
@@ -369,8 +379,8 @@
 <h3 class="hasAnchor">
 <a href="#other-changes" class="anchor"></a>Other changes</h3>
 <ul>
-<li><p>Many <code><a href="https://rdrr.io/pkg/generics/man/glance.html">glance()</a></code> methods now return a <code>nobs</code> column, which contains the number of data points used to fit the model! (<a href='https://github.com/tidymodels/broom/issues/597'>#597</a> by <a href='https://github.com/vincentarelbundock'>@vincentarelbundock</a>)</p></li>
-<li><p><code><a href="https://rdrr.io/pkg/generics/man/tidy.html">tidy()</a></code> no longer checks for a log or logit link when <code>exponentiate = TRUE</code>, and we have refactored to remove extraneous <code>exponentiate</code> arguments. If you set <code>exponentiate = TRUE</code>, we assume you know what you are doing and that you want exponentiated coefficients (and confidence intervals if <code>conf.int = TRUE</code>) regardless of link function.</p></li>
+<li><p>Many <code><a href="https://generics.r-lib.org/reference/glance.html">glance()</a></code> methods now return a <code>nobs</code> column, which contains the number of data points used to fit the model! (<a href='https://github.com/tidymodels/broom/issues/597'>#597</a> by <a href='https://github.com/vincentarelbundock'>@vincentarelbundock</a>)</p></li>
+<li><p><code><a href="https://generics.r-lib.org/reference/tidy.html">tidy()</a></code> no longer checks for a log or logit link when <code>exponentiate = TRUE</code>, and we have refactored to remove extraneous <code>exponentiate</code> arguments. If you set <code>exponentiate = TRUE</code>, we assume you know what you are doing and that you want exponentiated coefficients (and confidence intervals if <code>conf.int = TRUE</code>) regardless of link function.</p></li>
 <li><p>We now use <code><a href="https://rlang.r-lib.org/reference/arg_match.html">rlang::arg_match()</a></code> when possible instead of <code>arg.match()</code> to give more informative errors on argument mismatches.</p></li>
 <li><p>The package’s site has moved from <a href="https://broom.tidyverse.org/" class="uri">https://broom.tidyverse.org/</a> to <a href="https://broom.tidymodels.org/" class="uri">https://broom.tidymodels.org/</a>.</p></li>
 <li><p>Revised several vignettes and moved them to the tidymodels.org website. The existing vignettes will now simply link to the revised versions.</p></li>
@@ -438,7 +448,7 @@
 </h1>
 <ul>
 <li>
-<code><a href="https://rdrr.io/pkg/generics/man/tidy.html">tidy()</a></code>, <code><a href="https://rdrr.io/pkg/generics/man/glance.html">glance()</a></code> and <code><a href="https://rdrr.io/pkg/generics/man/augment.html">augment()</a></code> are now re-exported from the <a href="https://github.com/r-lib/generics">generics</a> package.</li>
+<code><a href="https://generics.r-lib.org/reference/tidy.html">tidy()</a></code>, <code><a href="https://generics.r-lib.org/reference/glance.html">glance()</a></code> and <code><a href="https://generics.r-lib.org/reference/augment.html">augment()</a></code> are now re-exported from the <a href="https://github.com/r-lib/generics">generics</a> package.</li>
 </ul>
 </div>
     <div id="broom-050" class="section level1">
@@ -452,13 +462,14 @@
 <a href="#breaking-changes" class="anchor"></a>Breaking changes</h2>
 <p>Almost all tidiers should now return <code>tibble</code>s rather than <code>data.frame</code>s. Deprecated tidying methods, Bayesian and mixed model tidiers still return <code>data.frame</code>s.</p>
 <p><strong>Users</strong> are mostly to experience issues when using <code>augment</code> in situations where tibbles are stricter than data frames. For example, specifying model covariates as a matrix object will now error:</p>
-<div class="sourceCode" id="cb1"><pre class="downlit">
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R">
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://broom.tidymodels.org/">broom</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://www.r-project.org">quantreg</a></span><span class="op">)</span>
 
 <span class="va">fit</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/quantreg/man/rq.html">rq</a></span><span class="op">(</span><span class="va">stack.loss</span> <span class="op">~</span> <span class="va">stack.x</span>, tau <span class="op">=</span> <span class="fl">.5</span><span class="op">)</span>
-<span class="fu">broom</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/generics/man/augment.html">augment</a></span><span class="op">(</span><span class="va">fit</span><span class="op">)</span>
-<span class="co">#&gt; Error: Column `stack.x` must be a 1d atomic vector or a list</span></pre></div>
+<span class="fu">broom</span><span class="fu">::</span><span class="fu"><a href="https://generics.r-lib.org/reference/augment.html">augment</a></span><span class="op">(</span><span class="va">fit</span><span class="op">)</span>
+<span class="co">#&gt; Error: Column `stack.x` must be a 1d atomic vector or a list</span></code></pre></div>
 <p>This is because the default <code>data</code> argument <code>data = model.frame(fit)</code> cannot be coerced to <code>tibble</code>.</p>
 <p>Another consequence of this is that <code>augment.survreg</code> and <code>augment.coxph</code> from the <code>survival</code> package now require that the user explicitly passes data to either the <code>data</code> or <code>newdata</code> arguments.</p>
 <p>These restrictions will be relaxed in an upcoming release of <code>broom</code> pending support for matrix-columns in tibbles.</p>

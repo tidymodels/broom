@@ -145,7 +145,7 @@ If no appropriate tidying method is found, throws an error." />
 </li>
         <li>
   <a href="https://github.com/tidymodels/broom">
-    <span class="fa fa-github fa-lg"></span>
+    <span class="fas fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -197,7 +197,7 @@ absorbed in <code>...</code>, where they will be ignored. If the misspelled
 argument has a default value, the default value will be used.
 For example, if you pass <code>conf.level = 0.9</code>, all computation will
 proceed using <code>conf.level = 0.95</code>. Additionally, if you pass
-<code>newdata = my_tibble</code> to an <code><a href='https://rdrr.io/pkg/generics/man/augment.html'>augment()</a></code> method that does not
+<code>newdata = my_tibble</code> to an <code><a href='https://generics.r-lib.org/reference/augment.html'>augment()</a></code> method that does not
 accept a <code>newdata</code> argument, it will use the default value for
 the <code>data</code> argument.</p></td>
     </tr>
@@ -241,7 +241,7 @@ principle components up to this component (a numeric value between 0 and
     <p>A very thin wrapper around <code><a href='tidy_svd.html'>tidy_svd()</a></code>.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy()</a></code>, <code><a href='https://rdrr.io/pkg/irlba/man/irlba.html'>irlba::irlba()</a></code></p>
+    <div class='dont-index'><p><code><a href='https://generics.r-lib.org/reference/tidy.html'>tidy()</a></code>, <code><a href='https://rdrr.io/pkg/irlba/man/irlba.html'>irlba::irlba()</a></code></p>
 <p>Other list tidiers: 
 <code><a href='glance_optim.html'>glance_optim</a>()</code>,
 <code><a href='list_tidiers.html'>list_tidiers</a></code>,
@@ -261,7 +261,7 @@ principle components up to this component (a numeric value between 0 and
 <span class='va'>mat</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/scale.html'>scale</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>as.matrix</a></span><span class='op'>(</span><span class='va'>hpc_data</span><span class='op'>[</span>, <span class='fl'>2</span><span class='op'>:</span><span class='fl'>5</span><span class='op'>]</span><span class='op'>)</span><span class='op'>)</span>
 <span class='va'>s</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/svd.html'>svd</a></span><span class='op'>(</span><span class='va'>mat</span><span class='op'>)</span>
 
-<span class='va'>tidy_u</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>s</span>, matrix <span class='op'>=</span> <span class='st'>"u"</span><span class='op'>)</span>
+<span class='va'>tidy_u</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>s</span>, matrix <span class='op'>=</span> <span class='st'>"u"</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; <span class='message'>New names:</span>
 #&gt; <span class='message'>* `` -&gt; ...1</span>
 #&gt; <span class='message'>* `` -&gt; ...2</span>
@@ -281,7 +281,7 @@ principle components up to this component (a numeric value between 0 and
 #&gt; </span><span style='color: #555555;'> 9</span><span>     9     1 -</span><span style='color: #BB0000;'>0.004</span><span style='color: #BB0000;text-decoration: underline;'>34</span><span>
 #&gt; </span><span style='color: #555555;'>10</span><span>    10     1 -</span><span style='color: #BB0000;'>0.004</span><span style='color: #BB0000;text-decoration: underline;'>40</span><span>
 #&gt; </span><span style='color: #555555;'># … with 17,314 more rows</span><span></div><div class='input'>
-<span class='va'>tidy_d</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>s</span>, matrix <span class='op'>=</span> <span class='st'>"d"</span><span class='op'>)</span>
+<span class='va'>tidy_d</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>s</span>, matrix <span class='op'>=</span> <span class='st'>"d"</span><span class='op'>)</span>
 <span class='va'>tidy_d</span>
 </div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 4 x 4</span><span>
 #&gt;      PC std.dev percent cumulative
@@ -290,7 +290,7 @@ principle components up to this component (a numeric value between 0 and
 #&gt; </span><span style='color: #555555;'>2</span><span>     2    67.0   0.259      0.538
 #&gt; </span><span style='color: #555555;'>3</span><span>     3    63.9   0.235      0.774
 #&gt; </span><span style='color: #555555;'>4</span><span>     4    62.6   0.226      1    </div><div class='input'>
-<span class='va'>tidy_v</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>s</span>, matrix <span class='op'>=</span> <span class='st'>"v"</span><span class='op'>)</span>
+<span class='va'>tidy_v</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>s</span>, matrix <span class='op'>=</span> <span class='st'>"v"</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; <span class='message'>New names:</span>
 #&gt; <span class='message'>* `` -&gt; ...1</span>
 #&gt; <span class='message'>* `` -&gt; ...2</span>

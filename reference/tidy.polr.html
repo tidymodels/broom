@@ -141,7 +141,7 @@ specify which components to return." />
 </li>
         <li>
   <a href="https://github.com/tidymodels/broom">
-    <span class="fa fa-github fa-lg"></span>
+    <span class="fas fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -173,7 +173,7 @@ specify which components to return.</p>
     </div>
 
     <pre class="usage"><span class='co'># S3 method for polr</span>
-<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span><span class='op'>(</span>
+<span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span>
   <span class='va'>x</span>,
   conf.int <span class='op'>=</span> <span class='cn'>FALSE</span>,
   conf.level <span class='op'>=</span> <span class='fl'>0.95</span>,
@@ -220,7 +220,7 @@ absorbed in <code>...</code>, where they will be ignored. If the misspelled
 argument has a default value, the default value will be used.
 For example, if you pass <code>conf.level = 0.9</code>, all computation will
 proceed using <code>conf.level = 0.95</code>. Additionally, if you pass
-<code>newdata = my_tibble</code> to an <code><a href='https://rdrr.io/pkg/generics/man/augment.html'>augment()</a></code> method that does not
+<code>newdata = my_tibble</code> to an <code><a href='https://generics.r-lib.org/reference/augment.html'>augment()</a></code> method that does not
 accept a <code>newdata</code> argument, it will use the default value for
 the <code>data</code> argument.</p></td>
     </tr>
@@ -241,7 +241,7 @@ condition is not met, a message is shown and NA is returned instead of
 p-values.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a>, <code><a href='https://rdrr.io/pkg/MASS/man/polr.html'>MASS::polr()</a></code></p>
+    <div class='dont-index'><p><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a>, <code><a href='https://rdrr.io/pkg/MASS/man/polr.html'>MASS::polr()</a></code></p>
 <p>Other ordinal tidiers: 
 <code><a href='augment.clm.html'>augment.clm</a>()</code>,
 <code><a href='augment.polr.html'>augment.polr</a>()</code>,
@@ -271,7 +271,7 @@ p-values.</p>
 
 <span class='va'>fit</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/MASS/man/polr.html'>polr</a></span><span class='op'>(</span><span class='va'>Sat</span> <span class='op'>~</span> <span class='va'>Infl</span> <span class='op'>+</span> <span class='va'>Type</span> <span class='op'>+</span> <span class='va'>Cont</span>, weights <span class='op'>=</span> <span class='va'>Freq</span>, data <span class='op'>=</span> <span class='va'>housing</span><span class='op'>)</span>
 
-<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>fit</span>, exponentiate <span class='op'>=</span> <span class='cn'>TRUE</span>, conf.int <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
+<span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>fit</span>, exponentiate <span class='op'>=</span> <span class='cn'>TRUE</span>, conf.int <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; <span class='message'></span>
 #&gt; <span class='message'>Re-fitting to get Hessian</span></div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 8 x 7</span><span>
 #&gt;   term          estimate std.error statistic conf.low conf.high coef.type  
@@ -284,11 +284,11 @@ p-values.</p>
 #&gt; </span><span style='color: #555555;'>6</span><span> ContHigh         1.43     0.095</span><span style='text-decoration: underline;'>5</span><span>      3.77    1.19      1.73  coefficient
 #&gt; </span><span style='color: #555555;'>7</span><span> Low|Medium       0.609    0.125      -</span><span style='color: #BB0000;'>3.97</span><span>   </span><span style='color: #BB0000;'>NA</span><span>        </span><span style='color: #BB0000;'>NA</span><span>     scale      
 #&gt; </span><span style='color: #555555;'>8</span><span> Medium|High      2.00     0.125       5.50   </span><span style='color: #BB0000;'>NA</span><span>        </span><span style='color: #BB0000;'>NA</span><span>     scale      </div><div class='input'>
-<span class='fu'><a href='https://rdrr.io/pkg/generics/man/glance.html'>glance</a></span><span class='op'>(</span><span class='va'>fit</span><span class='op'>)</span>
+<span class='fu'><a href='https://generics.r-lib.org/reference/glance.html'>glance</a></span><span class='op'>(</span><span class='va'>fit</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 1 x 7</span><span>
 #&gt;     edf logLik   AIC   BIC deviance df.residual  nobs
 #&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>       </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span>     8 -</span><span style='color: #BB0000;text-decoration: underline;'>1</span><span style='color: #BB0000;'>740.</span><span> </span><span style='text-decoration: underline;'>3</span><span>495. </span><span style='text-decoration: underline;'>3</span><span>539.    </span><span style='text-decoration: underline;'>3</span><span>479.        </span><span style='text-decoration: underline;'>1</span><span>673  </span><span style='text-decoration: underline;'>1</span><span>681</div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/generics/man/augment.html'>augment</a></span><span class='op'>(</span><span class='va'>fit</span>, type.predict <span class='op'>=</span> <span class='st'>"class"</span><span class='op'>)</span>
+#&gt; </span><span style='color: #555555;'>1</span><span>     8 -</span><span style='color: #BB0000;text-decoration: underline;'>1</span><span style='color: #BB0000;'>740.</span><span> </span><span style='text-decoration: underline;'>3</span><span>495. </span><span style='text-decoration: underline;'>3</span><span>539.    </span><span style='text-decoration: underline;'>3</span><span>479.        </span><span style='text-decoration: underline;'>1</span><span>673  </span><span style='text-decoration: underline;'>1</span><span>681</div><div class='input'><span class='fu'><a href='https://generics.r-lib.org/reference/augment.html'>augment</a></span><span class='op'>(</span><span class='va'>fit</span>, type.predict <span class='op'>=</span> <span class='st'>"class"</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 72 x 6</span><span>
 #&gt;    Sat    Infl   Type      Cont  `(weights)` .fitted
 #&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;ord&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;fct&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;fct&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;fct&gt;</span><span>       </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;fct&gt;</span><span>  
@@ -304,7 +304,7 @@ p-values.</p>
 #&gt; </span><span style='color: #555555;'>10</span><span> Low    Low    Apartment Low            61 Low    
 #&gt; </span><span style='color: #555555;'># … with 62 more rows</span><span></div><div class='input'>
 <span class='va'>fit2</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/MASS/man/polr.html'>polr</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/factor.html'>factor</a></span><span class='op'>(</span><span class='va'>gear</span><span class='op'>)</span> <span class='op'>~</span> <span class='va'>am</span> <span class='op'>+</span> <span class='va'>mpg</span> <span class='op'>+</span> <span class='va'>qsec</span>, data <span class='op'>=</span> <span class='va'>mtcars</span><span class='op'>)</span>
-<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>fit</span>, p.values <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
+<span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>fit</span>, p.values <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; <span class='message'></span>
 #&gt; <span class='message'>Re-fitting to get Hessian</span></div><div class='output co'>#&gt; <span class='message'>p-values can presently only be returned for models that contain </span>
 #&gt; <span class='message'>              no categorical variables with more than two levels</span></div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 8 x 6</span><span>
