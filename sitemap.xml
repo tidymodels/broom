@@ -28,9 +28,6 @@
     <loc>https://broom.tidymodels.org/reference/augment.factanal.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/augment.felm.html</loc>
-  </url>
-  <url>
     <loc>https://broom.tidymodels.org/reference/augment.fixest.html</loc>
   </url>
   <url>
@@ -194,9 +191,6 @@
   </url>
   <url>
     <loc>https://broom.tidymodels.org/reference/glance.factanal.html</loc>
-  </url>
-  <url>
-    <loc>https://broom.tidymodels.org/reference/glance.felm.html</loc>
   </url>
   <url>
     <loc>https://broom.tidymodels.org/reference/glance.fitdistr.html</loc>
@@ -452,9 +446,6 @@
   </url>
   <url>
     <loc>https://broom.tidymodels.org/reference/tidy.factanal.html</loc>
-  </url>
-  <url>
-    <loc>https://broom.tidymodels.org/reference/tidy.felm.html</loc>
   </url>
   <url>
     <loc>https://broom.tidymodels.org/reference/tidy.fitdistr.html</loc>
