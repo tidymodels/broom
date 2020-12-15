@@ -578,7 +578,6 @@ Suggests:
     margins,
     MASS,
     Matrix,
-    mclogit,
     mclust,
     mediation,
     metafor,
@@ -673,7 +672,6 @@ Collate:
     'stats-lm-tidiers.R'
     'mass-rlm-tidiers.R'
     'matrix-tidiers.R'
-    'mclogit.R'
     'mclust-tidiers.R'
     'mediate-tidiers.R'
     'mfx-tidiers.R'
@@ -699,7 +697,6 @@ Collate:
     'robust-lmrob-tidiers.R'
     'robustbase-glmrob-tidiers.R'
     'robustbase-lmrob-tidiers.R'
-    'scam-tidiers.R'
     'sp-tidiers.R'
     'spdep-tidiers.R'
     'speedglm-speedglm-tidiers.R'

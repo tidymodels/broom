@@ -69,14 +69,6 @@ tidy.mlm <- function(x,
   as_tibble(ret)
 }
 
-# mlm objects subclass lm objects so this gives a better error than
-# letting augment.lm() fail
-#' @include null-and-default-tidiers.R
-augment.mlm <- augment.default
-
-#' @export
-glance.mlm <- glance.default
-
 # compute confidence intervals for mlm object.
 confint_mlm <- function(object, level = 0.95, ...) {
   coef <- as.numeric(coef(object))
