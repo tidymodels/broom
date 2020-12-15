@@ -486,9 +486,9 @@ warn_on_subclass <- function(x) {
       "Tidiers for objects of class ", 
       subclass, 
       " are not maintained by the broom team, and are only supported through ",
-      "the tidy.", 
+      "the ", 
       dispatched_method, 
-      "() method. Please be cautious in interpreting and reporting ",
+      " tidier method. Please be cautious in interpreting and reporting ",
       "broom output.",
       call. = FALSE
     )
