@@ -1,7 +1,7 @@
 #' @templateVar class summary.lm
 #' @template title_desc_tidy
 #'
-#' @param x A `summary.lm` object created by [summary(stats::lm())].
+#' @param x A `summary.lm` object created by [stats::summary.lm()].
 #' @template param_confint
 #' @template param_unused_dots
 #'

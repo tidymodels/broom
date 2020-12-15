@@ -7,7 +7,7 @@
 \method{tidy}{summary.lm}(x, conf.int = FALSE, conf.level = 0.95, ...)
 }
 \arguments{
-\item{x}{A \code{summary.lm} object created by \link[summary(stats:lm())]{summary(stats::lm())}.}
+\item{x}{A \code{summary.lm} object created by \code{\link[stats:summary.lm]{stats::summary.lm()}}.}
 
 \item{conf.int}{Logical indicating whether or not to include a confidence
 interval in the tidied output. Defaults to \code{FALSE}.}
