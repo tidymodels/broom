@@ -16,6 +16,9 @@ objects to fall back to the `lm`/`glm` tidier methods:
 In addition,
 
 * Restores tidiers for `summary.lm` objects (`#953` by `@grantmcdermott`)
+* Remove nonessential documentation and tests for tidiers from the `lfe` package.
+The package was archived from CRAN recently, but it seems that it might make
+its way back to CRAN at some point, so a hard-deprecation might be short-sighted.
 * Various bug fixes and improvements to documentation and errors.
 
 # broom 0.7.2

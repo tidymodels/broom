@@ -7,7 +7,7 @@
 \method{glance}{felm}(x, ...)
 }
 \arguments{
-\item{x}{A \code{felm} object returned from \code{\link[lfe:felm]{lfe::felm()}}.}
+\item{x}{A \code{felm} object returned from \code{felm()} from the \code{lfe} package.}
 
 \item{...}{Additional arguments. Not used. Needed to match generic
 signature only. \strong{Cautionary note:} Misspelled arguments will be
@@ -38,38 +38,6 @@ Glance returns the same number of columns regardless of whether the
 model matrix is rank-deficient or not. If so, entries in columns
 that no longer have a well-defined value are filled in with an \code{NA}
 of the appropriate type.
-}
-\examples{
-
-library(lfe)
-
-# Use built-in "airquality" dataset
-head(airquality)
-
-# No FEs; same as lm()
-est0 <- felm(Ozone ~ Temp + Wind + Solar.R, airquality)
-tidy(est0)
-augment(est0)
-
-# Add month fixed effects
-est1 <- felm(Ozone ~ Temp + Wind + Solar.R  | Month, airquality)
-tidy(est1)
-tidy(est1, fe = TRUE)
-augment(est1)
-glance(est1)
-
-# The "se.type" argument can be used to switch out different standard errors 
-# types on the fly. In turn, this can be useful exploring the effect of 
-# different error structures on model inference.
-tidy(est1, se.type = "iid")
-tidy(est1, se.type = "robust")
-
-# Add clustered SEs (also by month)
-est2 <- felm(Ozone ~ Temp + Wind + Solar.R  | Month | 0 | Month, airquality)
-tidy(est2, conf.int = TRUE) 
-tidy(est2, conf.int = TRUE, se.type = "cluster")
-tidy(est2, conf.int = TRUE, se.type = "robust")
-tidy(est2, conf.int = TRUE, se.type = "iid")
 }
 \value{
 A \code{\link[tibble:tibble]{tibble::tibble()}} with exactly one row and columns:

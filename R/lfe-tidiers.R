@@ -1,7 +1,7 @@
 #' @templateVar class felm
 #' @template title_desc_tidy
 #'
-#' @param x A `felm` object returned from [lfe::felm()].
+#' @param x A `felm` object returned from `felm()` from the `lfe` package.
 #' @template param_confint
 #' @param fe Logical indicating whether or not to include estimates of
 #'   fixed effects. Defaults to `FALSE`.
@@ -12,44 +12,17 @@
 #'   homoskedastic errors), "robust" (for Eicker-Huber-White robust errors), or
 #'   "cluster" (for clustered standard errors; if the model object supports it).
 #' @template param_unused_dots
+#' 
+#' @details Documentation and tests for this package are currently deprecated,
+#' as the package was archived from CRAN in December 2020, though we believe
+#' the package will be restored on CRAN eventually.
 #'
 #' @evalRd return_tidy(regression = TRUE)
-#'
-#' @examples
-#'
-#' library(lfe)
-#'
-#' # Use built-in "airquality" dataset
-#' head(airquality)
-#'
-#' # No FEs; same as lm()
-#' est0 <- felm(Ozone ~ Temp + Wind + Solar.R, airquality)
-#' tidy(est0)
-#' augment(est0)
-#' 
-#' # Add month fixed effects
-#' est1 <- felm(Ozone ~ Temp + Wind + Solar.R  | Month, airquality)
-#' tidy(est1)
-#' tidy(est1, fe = TRUE)
-#' augment(est1)
-#' glance(est1)
-#'
-#' # The "se.type" argument can be used to switch out different standard errors 
-#' # types on the fly. In turn, this can be useful exploring the effect of 
-#' # different error structures on model inference.
-#' tidy(est1, se.type = "iid")
-#' tidy(est1, se.type = "robust")
-#' 
-#' # Add clustered SEs (also by month)
-#' est2 <- felm(Ozone ~ Temp + Wind + Solar.R  | Month | 0 | Month, airquality)
-#' tidy(est2, conf.int = TRUE) 
-#' tidy(est2, conf.int = TRUE, se.type = "cluster")
-#' tidy(est2, conf.int = TRUE, se.type = "robust")
-#' tidy(est2, conf.int = TRUE, se.type = "iid")
+
 #' @export
 #' @aliases felm_tidiers lfe_tidiers
 #' @family felm tidiers
-#' @seealso [tidy()], [lfe::felm()]
+#' @seealso [tidy()]
 tidy.felm <- function(x, conf.int = FALSE, conf.level = .95, fe = FALSE, se.type = c("default", "iid", "robust", "cluster"), ...) {
   has_multi_response <- length(x$lhs) > 1
   

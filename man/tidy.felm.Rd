@@ -16,7 +16,7 @@
 )
 }
 \arguments{
-\item{x}{A \code{felm} object returned from \code{\link[lfe:felm]{lfe::felm()}}.}
+\item{x}{A \code{felm} object returned from \code{felm()} from the \code{lfe} package.}
 
 \item{conf.int}{Logical indicating whether or not to include a confidence
 interval in the tidied output. Defaults to \code{FALSE}.}
@@ -53,40 +53,13 @@ model component varies across models but is usually self-evident.
 If a model has several distinct types of components, you will need to
 specify which components to return.
 }
-\examples{
-
-library(lfe)
-
-# Use built-in "airquality" dataset
-head(airquality)
-
-# No FEs; same as lm()
-est0 <- felm(Ozone ~ Temp + Wind + Solar.R, airquality)
-tidy(est0)
-augment(est0)
-
-# Add month fixed effects
-est1 <- felm(Ozone ~ Temp + Wind + Solar.R  | Month, airquality)
-tidy(est1)
-tidy(est1, fe = TRUE)
-augment(est1)
-glance(est1)
-
-# The "se.type" argument can be used to switch out different standard errors 
-# types on the fly. In turn, this can be useful exploring the effect of 
-# different error structures on model inference.
-tidy(est1, se.type = "iid")
-tidy(est1, se.type = "robust")
-
-# Add clustered SEs (also by month)
-est2 <- felm(Ozone ~ Temp + Wind + Solar.R  | Month | 0 | Month, airquality)
-tidy(est2, conf.int = TRUE) 
-tidy(est2, conf.int = TRUE, se.type = "cluster")
-tidy(est2, conf.int = TRUE, se.type = "robust")
-tidy(est2, conf.int = TRUE, se.type = "iid")
+\details{
+Documentation and tests for this package are currently deprecated,
+as the package was archived from CRAN in December 2020, though we believe
+the package will be restored on CRAN eventually.
 }
 \seealso{
-\code{\link[=tidy]{tidy()}}, \code{\link[lfe:felm]{lfe::felm()}}
+\code{\link[=tidy]{tidy()}}
 
 Other felm tidiers: 
 \code{\link{augment.felm}()}

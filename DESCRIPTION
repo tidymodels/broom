@@ -567,7 +567,6 @@ Suggests:
     Lahman,
     lavaan,
     leaps,
-    lfe,
     lm.beta,
     lme4,
     lmodel2,
