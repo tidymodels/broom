@@ -1,13 +1,8 @@
-# broom 0.7.2
-
-broom 0.7.2 is a patch release addressing an issue with loading a
-dependency in an example.
-
 ## Test environments
 
 - local mac OS  install: R 3.6.3
-- mac OS (on github actions): R 4.0.2
-- ubuntu 16.04 (on github actions): R 4.0.2
+- mac OS (on github actions): R release
+- ubuntu 16.04 (on github actions): R release
 - Microsoft Windows Server 2019 10.0.17763 (on github actions), devel, release, 3.6
 - win-builder (devel)
 
