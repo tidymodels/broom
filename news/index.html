@@ -94,7 +94,7 @@
         <a class="navbar-brand" href="../index.html">broom</a>
         <div class="info hidden-xs hidden-sm">
           <span class="partof">part of <a href="https://tidymodels.org">tidymodels</a></span>
-          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.7.2.9000</span>
+          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.7.3</span>
         </div>
       </div>
     </div>
@@ -156,11 +156,10 @@
       <small>Source: <a href='https://github.com/tidymodels/broom/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
-    <div id="broom-0729000" class="section level1">
-<h1 class="page-header" data-toc-text="0.7.2.9000">
-<a href="#broom-0729000" class="anchor"></a>broom 0.7.2.9000<small> Unreleased </small>
+    <div id="broom-073" class="section level1">
+<h1 class="page-header" data-toc-text="0.7.3">
+<a href="#broom-073" class="anchor"></a>broom 0.7.3<small> 2020-12-16 </small>
 </h1>
-<p>To be released as 0.7.3.</p>
 <p>In broom <code>0.7.0</code>, we introduced an error for model objects that subclassed <code>lm</code> and relied on <code><a href="../reference/tidy.lm.html">tidy.lm()</a></code>, or similarly for <code><a href="../reference/tidy.glm.html">tidy.glm()</a></code>. Tidiers for these objects were supported unintentionally, and we worried that tidiers for these objects would silently report innaccurate results.</p>
 <p>In hindsight, this change was unnecessarily abrupt. We’ve decided to roll back this change, instead providing the following warning before allowing such objects to fall back to the <code>lm</code>/<code>glm</code> tidier methods:</p>
 <blockquote>
