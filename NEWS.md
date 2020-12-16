@@ -1,6 +1,4 @@
-# broom 0.7.2.9000
-
-To be released as 0.7.3.
+# broom 0.7.3
 
 In broom `0.7.0`, we introduced an error for model objects that subclassed
 `lm` and relied on `tidy.lm()`, or similarly for `tidy.glm()`. Tidiers for
