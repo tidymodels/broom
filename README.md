@@ -114,10 +114,10 @@ We welcome contributions of all types\!
 
 For questions and discussions about tidymodels packages, modeling, and
 machine learning, please [post on RStudio
-Community](https://rstd.io/tidymodels-community). If you think you have
+Community](https://community.rstudio.com/new-topic?category_id=15https://rstd.io/tidymodels-communitytags=tidymodels,question). If you think you have
 encountered a bug, please [submit an
 issue](https://github.com/tidymodels/broom/issues). Either way, learn
-how to create and share a [reprex](https://rstd.io/reprex) (a minimal,
+how to create and share a [reprex](https://reprex.tidyverse.org/articles/articles/learn-reprex.html) (a minimal,
 reproducible example), to clearly communicate about your code. Check out
 further details on [contributing guidelines for tidymodels
 packages](https://www.tidymodels.org/contribute/) and [how to get
