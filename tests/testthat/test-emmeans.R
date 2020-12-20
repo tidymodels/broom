@@ -48,9 +48,9 @@ test_that("tidy.lsmobj", {
   tdmd <- tidy(marginal_dashes, conf.int = TRUE)
   tdc <- tidy(contrast(marginal, method = "pairwise"), conf.int = TRUE)
 
-  check_dims(tdm, 6, 7)
-  check_dims(tdmd, 1, 9)
-  check_dims(tdc, 15, 9)
+  check_dims(tdm, 6, 8)
+  check_dims(tdmd, 1, 10)
+  check_dims(tdc, 15, 10)
 })
 
 test_that("ref.grid tidiers work", {
@@ -59,7 +59,7 @@ test_that("ref.grid tidiers work", {
   check_dims(td, 36, 9)
 
   td <- tidy(rg, conf.int = TRUE)
-  check_dims(td, 36, 10)
+  check_dims(td, 36, 11)
 })
 
 test_that("summary_emm tidiers work", {
@@ -80,7 +80,7 @@ test_that("tidy.ref.grid consistency with tidy.TukeyHSD", {
   td_pairs <- lsmeans(amod, ~tension) %>%
     pairs(reverse = TRUE) %>%
     tidy(conf.int = TRUE) %>%
-    dplyr::select(-statistic, -df) %>%
+    dplyr::select(-statistic, -df, -std.error) %>%
     mutate(contrast = gsub(" ", "", contrast))
 
   expect_equal(
