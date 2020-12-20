@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Tidy a(n) rcorr object — tidy.rcorr • broom</title>
+<title>Tidy a(n) Rchoice object — tidy.Rchoice • broom</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -49,7 +49,7 @@
 
 
 
-<meta property="og:title" content="Tidy a(n) rcorr object — tidy.rcorr" />
+<meta property="og:title" content="Tidy a(n) Rchoice object — tidy.Rchoice" />
 <meta property="og:description" content="Tidy summarizes information about the components of a model.
 A model component might be a single term in a regression, a single
 hypothesis, a cluster, or a class. Exactly what tidy considers to be a
@@ -158,9 +158,9 @@ specify which components to return." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Tidy a(n) rcorr object</h1>
-    <small class="dont-index">Source: <a href='https://github.com/tidymodels/broom/blob/master/R/hmisc-tidiers.R'><code>R/hmisc-tidiers.R</code></a></small>
-    <div class="hidden name"><code>tidy.rcorr.Rd</code></div>
+    <h1>Tidy a(n) Rchoice object</h1>
+    <small class="dont-index">Source: <a href='https://github.com/tidymodels/broom/blob/master/R/rchoice-tidiers.R'><code>R/rchoice-tidiers.R</code></a></small>
+    <div class="hidden name"><code>tidy.Rchoice.Rd</code></div>
     </div>
 
     <div class="ref-description">
@@ -172,22 +172,26 @@ If a model has several distinct types of components, you will need to
 specify which components to return.</p>
     </div>
 
-    <pre class="usage"><span class='co'># S3 method for rcorr</span>
-<span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>x</span>, diagonal <span class='op'>=</span> <span class='cn'>FALSE</span>, <span class='va'>...</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='co'># S3 method for Rchoice</span>
+<span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>x</span>, conf.int <span class='op'>=</span> <span class='cn'>FALSE</span>, conf.level <span class='op'>=</span> <span class='fl'>0.95</span>, <span class='va'>...</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>x</th>
-      <td><p>An <code>rcorr</code> object returned from <code><a href='https://rdrr.io/pkg/Hmisc/man/rcorr.html'>Hmisc::rcorr()</a></code>.</p></td>
+      <td><p>A <code>Rchoice</code> object returned from <code><a href='https://rdrr.io/pkg/Rchoice/man/Rchoice.html'>Rchoice::Rchoice()</a></code>.</p></td>
     </tr>
     <tr>
-      <th>diagonal</th>
-      <td><p>Logical indicating whether or not to include diagonal
-elements of the correlation matrix, or the correlation of a column with
-itself. For the elements, <code>estimate</code> is always 1 and <code>p.value</code> is always
-<code>NA</code>. Defaults to <code>FALSE</code>.</p></td>
+      <th>conf.int</th>
+      <td><p>Logical indicating whether or not to include a confidence
+interval in the tidied output. Defaults to <code>FALSE</code>.</p></td>
+    </tr>
+    <tr>
+      <th>conf.level</th>
+      <td><p>The confidence level to use for the confidence interval
+if <code>conf.int = TRUE</code>. Must be strictly greater than 0 and less than 1.
+Defaults to 0.95, which corresponds to a 95 percent confidence interval.</p></td>
     </tr>
     <tr>
       <th>...</th>
@@ -205,71 +209,45 @@ the <code>data</code> argument.</p></td>
 
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>Suppose the original data has columns A and B. In the correlation
-matrix from <code>rcorr</code> there may be entries for both the <code><a href='https://rdrr.io/r/stats/cor.html'>cor(A, B)</a></code> and
-<code><a href='https://rdrr.io/r/stats/cor.html'>cor(B, A)</a></code>. Only one of these pairs will ever be present in the tidy
-output.</p>
+    <p>The <code>Rchoice</code> package provides "an implementation of simulated
+maximum likelihood method for the estimation of Binary (Probit and Logit),
+Ordered (Probit and Logit) and Poisson models with random parameters for
+cross-sectional and longitudinal data."</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='https://generics.r-lib.org/reference/tidy.html'>tidy()</a></code>, <code><a href='https://rdrr.io/pkg/Hmisc/man/rcorr.html'>Hmisc::rcorr()</a></code></p></div>
+    <div class='dont-index'><p><code><a href='https://generics.r-lib.org/reference/tidy.html'>tidy()</a></code>, <code><a href='https://rdrr.io/pkg/Rchoice/man/Rchoice.html'>Rchoice::Rchoice()</a></code></p></div>
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>A <code><a href='https://tibble.tidyverse.org/reference/tibble.html'>tibble::tibble()</a></code> with columns:</p>
-<dt>column1</dt><dd><p>Name or index of the first column being described.</p></dd>
-  <dt>column2</dt><dd><p>Name or index of the second column being described.</p></dd>
+<dt>conf.high</dt><dd><p>Upper bound on the confidence interval for the estimate.</p></dd>
+  <dt>conf.low</dt><dd><p>Lower bound on the confidence interval for the estimate.</p></dd>
   <dt>estimate</dt><dd><p>The estimated value of the regression term.</p></dd>
   <dt>p.value</dt><dd><p>The two-sided p-value associated with the observed statistic.</p></dd>
-  <dt>n</dt><dd><p>Number of observations used to compute the correlation</p></dd>
+  <dt>statistic</dt><dd><p>The value of a T-statistic to use in a hypothesis that the regression term is non-zero.</p></dd>
+  <dt>std.error</dt><dd><p>The standard error of the regression term.</p></dd>
+  <dt>term</dt><dd><p>The name of the regression term.</p></dd>
 
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'>
-<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://hbiostat.org/R/Hmisc/'>Hmisc</a></span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Attaching package: ‘Hmisc’</span></div><div class='output co'>#&gt; <span class='message'>The following object is masked from ‘package:psych’:</span>
-#&gt; <span class='message'></span>
-#&gt; <span class='message'>    describe</span></div><div class='output co'>#&gt; <span class='message'>The following object is masked from ‘package:network’:</span>
-#&gt; <span class='message'></span>
-#&gt; <span class='message'>    is.discrete</span></div><div class='output co'>#&gt; <span class='message'>The following object is masked from ‘package:survey’:</span>
-#&gt; <span class='message'></span>
-#&gt; <span class='message'>    deff</span></div><div class='output co'>#&gt; <span class='message'>The following objects are masked from ‘package:dplyr’:</span>
-#&gt; <span class='message'></span>
-#&gt; <span class='message'>    src, summarize</span></div><div class='output co'>#&gt; <span class='message'>The following objects are masked from ‘package:base’:</span>
-#&gt; <span class='message'></span>
-#&gt; <span class='message'>    format.pval, units</span></div><div class='input'>
-<span class='va'>mat</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/lapply.html'>replicate</a></span><span class='op'>(</span><span class='fl'>52</span>, <span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span><span class='op'>(</span><span class='fl'>100</span><span class='op'>)</span><span class='op'>)</span>
-<span class='co'># add some NAs</span>
-<span class='va'>mat</span><span class='op'>[</span><span class='fu'><a href='https://rdrr.io/r/base/sample.html'>sample</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/length.html'>length</a></span><span class='op'>(</span><span class='va'>mat</span><span class='op'>)</span>, <span class='fl'>2000</span><span class='op'>)</span><span class='op'>]</span> <span class='op'>&lt;-</span> <span class='cn'>NA</span>
-<span class='co'># also column names</span>
-<span class='fu'><a href='https://rdrr.io/r/base/colnames.html'>colnames</a></span><span class='op'>(</span><span class='va'>mat</span><span class='op'>)</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='va'>LETTERS</span>, <span class='va'>letters</span><span class='op'>)</span>
+    <pre class="examples"><div class='input'><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='http://msarrias.com/rchoice-package-in-r.html'>Rchoice</a></span><span class='op'>)</span>
 
-<span class='va'>rc</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/Hmisc/man/rcorr.html'>rcorr</a></span><span class='op'>(</span><span class='va'>mat</span><span class='op'>)</span>
-
-<span class='va'>td</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>rc</span><span class='op'>)</span>
-<span class='va'>td</span>
-</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 1,326 x 5</span><span>
-#&gt;    column1 column2 estimate     n p.value
-#&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>      </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #555555;'> 1</span><span> B       A        0.067</span><span style='text-decoration: underline;'>0</span><span>     36   0.698
-#&gt; </span><span style='color: #555555;'> 2</span><span> C       A        0.196      38   0.239
-#&gt; </span><span style='color: #555555;'> 3</span><span> C       B        0.172      37   0.309
-#&gt; </span><span style='color: #555555;'> 4</span><span> D       A       -</span><span style='color: #BB0000;'>0.039</span><span style='color: #BB0000;text-decoration: underline;'>7</span><span>     36   0.818
-#&gt; </span><span style='color: #555555;'> 5</span><span> D       B       -</span><span style='color: #BB0000;'>0.007</span><span style='color: #BB0000;text-decoration: underline;'>62</span><span>    31   0.968
-#&gt; </span><span style='color: #555555;'> 6</span><span> D       C        0.250      42   0.110
-#&gt; </span><span style='color: #555555;'> 7</span><span> E       A        0.224      36   0.189
-#&gt; </span><span style='color: #555555;'> 8</span><span> E       B        0.070</span><span style='text-decoration: underline;'>0</span><span>     35   0.690
-#&gt; </span><span style='color: #555555;'> 9</span><span> E       C        0.211      46   0.159
-#&gt; </span><span style='color: #555555;'>10</span><span> E       D        0.147      40   0.364
-#&gt; </span><span style='color: #555555;'># … with 1,316 more rows</span><span></div><div class='input'>
-<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='http://ggplot2.tidyverse.org'>ggplot2</a></span><span class='op'>)</span>
-<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='va'>td</span>, <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span><span class='va'>p.value</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
-  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_histogram.html'>geom_histogram</a></span><span class='op'>(</span>binwidth <span class='op'>=</span> <span class='fl'>.1</span><span class='op'>)</span>
-</div><div class='img'><img src='tidy.rcorr-1.png' alt='' width='700' height='433' /></div><div class='input'>
-<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='va'>td</span>, <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span><span class='va'>estimate</span>, <span class='va'>p.value</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
-  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_point.html'>geom_point</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span>
-  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/scale_continuous.html'>scale_y_log10</a></span><span class='op'>(</span><span class='op'>)</span>
-</div><div class='img'><img src='tidy.rcorr-2.png' alt='' width='700' height='433' /></div></span></pre>
+<span class='va'>mod</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/Rchoice/man/Rchoice.html'>Rchoice</a></span><span class='op'>(</span><span class='va'>vs</span> <span class='op'>~</span> <span class='va'>mpg</span> <span class='op'>+</span> <span class='va'>hp</span> <span class='op'>+</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>factor</a></span><span class='op'>(</span><span class='va'>cyl</span><span class='op'>)</span>,
+               data <span class='op'>=</span> <span class='va'>mtcars</span>,
+               family <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/family.html'>binomial</a></span><span class='op'>(</span><span class='st'>"probit"</span><span class='op'>)</span><span class='op'>)</span>
+<span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>mod</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 5 x 5</span><span>
+#&gt;   term         estimate std.error statistic p.value
+#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>           </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #555555;'>1</span><span> constant       6.01      4.64     1.30      0.195
+#&gt; </span><span style='color: #555555;'>2</span><span> mpg           -</span><span style='color: #BB0000;'>0.095</span><span style='color: #BB0000;text-decoration: underline;'>7</span><span>    0.134   -</span><span style='color: #BB0000;'>0.716</span><span>     0.474
+#&gt; </span><span style='color: #555555;'>3</span><span> hp            -</span><span style='color: #BB0000;'>0.024</span><span style='color: #BB0000;text-decoration: underline;'>4</span><span>    0.021</span><span style='text-decoration: underline;'>4</span><span>  -</span><span style='color: #BB0000;'>1.14</span><span>      0.253
+#&gt; </span><span style='color: #555555;'>4</span><span> factor(cyl)6  -</span><span style='color: #BB0000;'>0.980</span><span>     1.23    -</span><span style='color: #BB0000;'>0.797</span><span>     0.426
+#&gt; </span><span style='color: #555555;'>5</span><span> factor(cyl)8  -</span><span style='color: #BB0000;'>6.39</span><span>    938.      -</span><span style='color: #BB0000;'>0.006</span><span style='color: #BB0000;text-decoration: underline;'>82</span><span>   0.995</div><div class='input'><span class='fu'><a href='https://generics.r-lib.org/reference/glance.html'>glance</a></span><span class='op'>(</span><span class='va'>mod</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 1 x 5</span><span>
+#&gt;   logLik   AIC   BIC    df  nobs
+#&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #555555;'>1</span><span>  -</span><span style='color: #BB0000;'>7.30</span><span>  24.6  31.9    </span><span style='color: #BB0000;'>NA</span><span>    32</div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

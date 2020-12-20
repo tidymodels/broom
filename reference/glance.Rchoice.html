@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Glance at a(n) geeglm object — glance.geeglm • broom</title>
+<title>Glance at a(n) Rchoice object — glance.Rchoice • broom</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -49,7 +49,7 @@
 
 
 
-<meta property="og:title" content="Glance at a(n) geeglm object — glance.geeglm" />
+<meta property="og:title" content="Glance at a(n) Rchoice object — glance.Rchoice" />
 <meta property="og:description" content="Glance accepts a model object and returns a tibble::tibble()
 with exactly one row of model summaries. The summaries are typically
 goodness of fit measures, p-values for hypothesis tests on residuals,
@@ -167,9 +167,9 @@ of the appropriate type." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Glance at a(n) geeglm object</h1>
-    <small class="dont-index">Source: <a href='https://github.com/tidymodels/broom/blob/master/R/geepack-tidiers.R'><code>R/geepack-tidiers.R</code></a></small>
-    <div class="hidden name"><code>glance.geeglm.Rd</code></div>
+    <h1>Glance at a(n) Rchoice object</h1>
+    <small class="dont-index">Source: <a href='https://github.com/tidymodels/broom/blob/master/R/rchoice-tidiers.R'><code>R/rchoice-tidiers.R</code></a></small>
+    <div class="hidden name"><code>glance.Rchoice.Rd</code></div>
     </div>
 
     <div class="ref-description">
@@ -190,7 +190,7 @@ that no longer have a well-defined value are filled in with an <code>NA</code>
 of the appropriate type.</p>
     </div>
 
-    <pre class="usage"><span class='co'># S3 method for geeglm</span>
+    <pre class="usage"><span class='co'># S3 method for Rchoice</span>
 <span class='fu'><a href='https://generics.r-lib.org/reference/glance.html'>glance</a></span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>...</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -198,7 +198,7 @@ of the appropriate type.</p>
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>x</th>
-      <td><p>A <code>geeglm</code> object returned from a call to <code><a href='https://rdrr.io/pkg/geepack/man/geeglm.html'>geepack::geeglm()</a></code>.</p></td>
+      <td><p>A <code>Rchoice</code> object returned from <code><a href='https://rdrr.io/pkg/Rchoice/man/Rchoice.html'>Rchoice::Rchoice()</a></code>.</p></td>
     </tr>
     <tr>
       <th>...</th>
@@ -214,178 +214,44 @@ the <code>data</code> argument.</p></td>
     </tr>
     </table>
 
-    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
-
-    <div class='dont-index'><p><code><a href='https://generics.r-lib.org/reference/glance.html'>glance()</a></code>, <code><a href='https://rdrr.io/pkg/geepack/man/geeglm.html'>geepack::geeglm()</a></code></p></div>
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>A <code><a href='https://tibble.tidyverse.org/reference/tibble.html'>tibble::tibble()</a></code> with exactly one row and columns:</p>
-<dt>alpha</dt><dd><p>Estimated correlation parameter for geepack::geeglm.</p></dd>
-  <dt>df.residual</dt><dd><p>Residual degrees of freedom.</p></dd>
-  <dt>gamma</dt><dd><p>Estimated scale parameter for geepack::geeglm.</p></dd>
-  <dt>max.cluster.size</dt><dd><p>Max number of elements in clusters.</p></dd>
-  <dt>n.clusters</dt><dd><p>Number of clusters.</p></dd>
+<dt>AIC</dt><dd><p>Akaike's Information Criterion for the model.</p></dd>
+  <dt>BIC</dt><dd><p>Bayesian Information Criterion for the model.</p></dd>
+  <dt>df</dt><dd><p>Degrees of freedom used by the model.</p></dd>
+  <dt>logLik</dt><dd><p>The log-likelihood of the model. [stats::logLik()] may be a useful reference.</p></dd>
+  <dt>nobs</dt><dd><p>Number of observations used.</p></dd>
 
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'>
-<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'>geepack</span><span class='op'>)</span>
-<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>state</span><span class='op'>)</span>
-
-<span class='va'>ds</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span><span class='op'>(</span><span class='va'>state.region</span>, <span class='va'>state.x77</span><span class='op'>)</span>
-
-<span class='va'>geefit</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/geepack/man/geeglm.html'>geeglm</a></span><span class='op'>(</span><span class='va'>Income</span> <span class='op'>~</span> <span class='va'>Frost</span> <span class='op'>+</span> <span class='va'>Murder</span>,
-  id <span class='op'>=</span> <span class='va'>state.region</span>,
-  data <span class='op'>=</span> <span class='va'>ds</span>, family <span class='op'>=</span> <span class='va'>gaussian</span>,
-  corstr <span class='op'>=</span> <span class='st'>"exchangeable"</span>
-<span class='op'>)</span>
-</div><div class='output co'>#&gt; $fct
-#&gt; function (dose, parm) 
-#&gt; {
-#&gt;     parmMat &lt;- matrix(parmVec, nrow(parm), numParm, byrow = TRUE)
-#&gt;     parmMat[, notFixed] &lt;- parm
-#&gt;     fd(dose, parmMat[, 1], parmMat[, 2], parmMat[, 3], parmMat[, 
-#&gt;         4], parmMat[, 5])
-#&gt; }
-#&gt; &lt;bytecode: 0x7fedfc958038&gt;
-#&gt; &lt;environment: 0x7fee0ecb5fd8&gt;
-#&gt; 
-#&gt; $ssfct
-#&gt; function (dframe) 
-#&gt; {
-#&gt;     x &lt;- dframe[, 1]
-#&gt;     y &lt;- dframe[, 2]
-#&gt;     cdVal &lt;- findcd(x, y)
-#&gt;     if (useFixed) {
-#&gt;     }
-#&gt;     if (logg) {
-#&gt;         bVal &lt;- 0.75 * sd(log(x[y &gt; quantile(y, 0.75)]))
-#&gt;     }
-#&gt;     else {
-#&gt;         bVal &lt;- 0.75 * sd(x[y &gt; quantile(y, 0.75)])
-#&gt;     }
-#&gt;     befVal &lt;- c(bVal, x[which.max(y)], 1)
-#&gt;     return(c(befVal[1], cdVal, befVal[2:3])[is.na(fixed)])
-#&gt; }
-#&gt; &lt;bytecode: 0x7fee0db58558&gt;
-#&gt; &lt;environment: 0x7fee0d9cf698&gt;
-#&gt; 
-#&gt; $names
-#&gt; [1] "b" "c" "d" "e" "f"
-#&gt; 
-#&gt; $deriv1
-#&gt; function (dose, parm) 
-#&gt; {
-#&gt;     parmMat &lt;- matrix(parmVec, nrow(parm), numParm, byrow = TRUE)
-#&gt;     parmMat[, notFixed] &lt;- parm
-#&gt;     attr(fd(dose, parmMat[, 1], parmMat[, 2], parmMat[, 3], parmMat[, 
-#&gt;         4], parmMat[, 5]), "gradient")[, notFixed]
-#&gt; }
-#&gt; &lt;bytecode: 0x7fedfc956c50&gt;
-#&gt; &lt;environment: 0x7fee0ecb5fd8&gt;
-#&gt; 
-#&gt; $deriv2
-#&gt; NULL
-#&gt; 
-#&gt; $derivx
-#&gt; function (dose, parm) 
-#&gt; {
-#&gt;     parmMat &lt;- matrix(parmVec, nrow(parm), numParm, byrow = TRUE)
-#&gt;     parmMat[, notFixed] &lt;- parm
-#&gt;     dFct &lt;- function(dose, b, c, d, e, f) {
-#&gt;         .expr1 &lt;- d - c
-#&gt;         .expr4 &lt;- (dose - e)/b
-#&gt;         .expr5 &lt;- .expr4^2
-#&gt;         .expr6 &lt;- sqrt(.expr5)
-#&gt;         .expr9 &lt;- exp(-0.5 * .expr6^f)
-#&gt;         .value &lt;- c + .expr1 * .expr9
-#&gt;         .grad &lt;- array(0, c(length(.value), 1L), list(NULL, c("dose")))
-#&gt;         .grad[, "dose"] &lt;- -(.expr1 * (.expr9 * (0.5 * (.expr6^(f - 
-#&gt;             1) * (f * (0.5 * (2 * (1/b * .expr4) * .expr5^-0.5)))))))
-#&gt;         attr(.value, "gradient") &lt;- .grad
-#&gt;         .value
-#&gt;     }
-#&gt;     attr(dFct(dose, parmMat[, 1], parmMat[, 2], parmMat[, 3], 
-#&gt;         parmMat[, 4], parmMat[, 5]), "gradient")
-#&gt; }
-#&gt; &lt;bytecode: 0x7fedfc959708&gt;
-#&gt; &lt;environment: 0x7fee0ecb5fd8&gt;
-#&gt; 
-#&gt; $edfct
-#&gt; function (parm, respl, reference, type, ...) 
-#&gt; {
-#&gt;     parmVec[notFixed] &lt;- parm
-#&gt;     p &lt;- absToRel(parmVec, abs(respl), type)
-#&gt;     if (identical(type, "absolute")) {
-#&gt;         p &lt;- 100 - p
-#&gt;     }
-#&gt;     if (identical(type, "relative") &amp;&amp; (parmVec[1] &lt; 0) &amp;&amp; (reference == 
-#&gt;         "control")) {
-#&gt;         p &lt;- 100 - p
-#&gt;     }
-#&gt;     pProp &lt;- 1 - (100 - p)/100
-#&gt;     EDfct &lt;- function(b, c, d, e, f) {
-#&gt;         .expr2 &lt;- -2 * log(pProp)
-#&gt;         .expr4 &lt;- sign(respl) * .expr2^(1/f)
-#&gt;         .value &lt;- b * .expr4 + e
-#&gt;         .grad &lt;- array(0, c(length(.value), 5L), list(NULL, c("b", 
-#&gt;             "c", "d", "e", "f")))
-#&gt;         .grad[, "b"] &lt;- .expr4
-#&gt;         .grad[, "c"] &lt;- 0
-#&gt;         .grad[, "d"] &lt;- 0
-#&gt;         .grad[, "e"] &lt;- 1
-#&gt;         .grad[, "f"] &lt;- -(b * (.expr4 * (log(.expr2) * (1/f^2))))
-#&gt;         attr(.value, "gradient") &lt;- .grad
-#&gt;         .value
-#&gt;     }
-#&gt;     EDp &lt;- EDfct(parmVec[1], parmVec[2], parmVec[3], parmVec[4], 
-#&gt;         parmVec[5])
-#&gt;     EDder &lt;- attr(EDfct(parmVec[1], parmVec[2], parmVec[3], parmVec[4], 
-#&gt;         parmVec[5]), "gradient")
-#&gt;     return(list(EDp, EDder[notFixed]))
-#&gt; }
-#&gt; &lt;bytecode: 0x7fedfc95f120&gt;
-#&gt; &lt;environment: 0x7fee0ecb5fd8&gt;
-#&gt; 
-#&gt; $name
-#&gt; [1] "family"
-#&gt; 
-#&gt; $text
-#&gt; [1] "Gaussian"
-#&gt; 
-#&gt; $noParm
-#&gt; [1] 5
-#&gt; 
-#&gt; $lowerAs
-#&gt; function (parm) 
-#&gt; {
-#&gt;     parmVec[indexVec] &lt;- parm
-#&gt;     parmVec[parmNo]
-#&gt; }
-#&gt; &lt;bytecode: 0x7fedfd051368&gt;
-#&gt; &lt;environment: 0x7fee0ec6be18&gt;
-#&gt; 
-#&gt; $upperAs
-#&gt; function (parm) 
-#&gt; {
-#&gt;     parmVec[indexVec] &lt;- parm
-#&gt;     parmVec[parmNo]
-#&gt; }
-#&gt; &lt;bytecode: 0x7fedfd051368&gt;
-#&gt; &lt;environment: 0x7fee0ec6c080&gt;
-#&gt; 
-#&gt; $monoton
-#&gt; [1] NA
-#&gt; 
-#&gt; $fixed
-#&gt; [1] NA NA NA NA NA
-#&gt; 
-#&gt; attr(,"class")
-#&gt; [1] "gaussian"</div><div class='output co'>#&gt; <span class='error'>Error in glm(formula = Income ~ Frost + Murder, family = gaussian, data = ds): 'family' not recognized</span></div><div class='input'>
-<span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>geefit</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='error'>Error in tidy(geefit): object 'geefit' not found</span></div><div class='input'><span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>geefit</span>, conf.int <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='error'>Error in tidy(geefit, conf.int = TRUE): object 'geefit' not found</span></div></pre>
+    <pre class="examples"><div class='input'><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='http://msarrias.com/rchoice-package-in-r.html'>Rchoice</a></span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='message'>Loading required package: Formula</span></div><div class='output co'>#&gt; <span class='message'>Loading required package: maxLik</span></div><div class='output co'>#&gt; <span class='message'>Loading required package: miscTools</span></div><div class='output co'>#&gt; <span class='message'></span>
+#&gt; <span class='message'>Attaching package: ‘miscTools’</span></div><div class='output co'>#&gt; <span class='message'>The following objects are masked from ‘package:robustbase’:</span>
+#&gt; <span class='message'></span>
+#&gt; <span class='message'>    colMedians, rowMedians</span></div><div class='output co'>#&gt; <span class='message'></span>
+#&gt; <span class='message'>Please cite the 'maxLik' package as:</span>
+#&gt; <span class='message'>Henningsen, Arne and Toomet, Ott (2011). maxLik: A package for maximum likelihood estimation in R. Computational Statistics 26(3), 443-458. DOI 10.1007/s00180-010-0217-1.</span>
+#&gt; <span class='message'></span>
+#&gt; <span class='message'>If you have questions, suggestions, or comments regarding the 'maxLik' package, please use a forum or 'tracker' at maxLik's R-Forge site:</span>
+#&gt; <span class='message'>https://r-forge.r-project.org/projects/maxlik/</span></div><div class='input'>
+<span class='va'>mod</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/Rchoice/man/Rchoice.html'>Rchoice</a></span><span class='op'>(</span><span class='va'>vs</span> <span class='op'>~</span> <span class='va'>mpg</span> <span class='op'>+</span> <span class='va'>hp</span> <span class='op'>+</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>factor</a></span><span class='op'>(</span><span class='va'>cyl</span><span class='op'>)</span>,
+               data <span class='op'>=</span> <span class='va'>mtcars</span>,
+               family <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/family.html'>binomial</a></span><span class='op'>(</span><span class='st'>"probit"</span><span class='op'>)</span><span class='op'>)</span>
+<span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>mod</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 5 x 5</span><span>
+#&gt;   term         estimate std.error statistic p.value
+#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>           </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #555555;'>1</span><span> constant       6.01      4.64     1.30      0.195
+#&gt; </span><span style='color: #555555;'>2</span><span> mpg           -</span><span style='color: #BB0000;'>0.095</span><span style='color: #BB0000;text-decoration: underline;'>7</span><span>    0.134   -</span><span style='color: #BB0000;'>0.716</span><span>     0.474
+#&gt; </span><span style='color: #555555;'>3</span><span> hp            -</span><span style='color: #BB0000;'>0.024</span><span style='color: #BB0000;text-decoration: underline;'>4</span><span>    0.021</span><span style='text-decoration: underline;'>4</span><span>  -</span><span style='color: #BB0000;'>1.14</span><span>      0.253
+#&gt; </span><span style='color: #555555;'>4</span><span> factor(cyl)6  -</span><span style='color: #BB0000;'>0.980</span><span>     1.23    -</span><span style='color: #BB0000;'>0.797</span><span>     0.426
+#&gt; </span><span style='color: #555555;'>5</span><span> factor(cyl)8  -</span><span style='color: #BB0000;'>6.39</span><span>    938.      -</span><span style='color: #BB0000;'>0.006</span><span style='color: #BB0000;text-decoration: underline;'>82</span><span>   0.995</div><div class='input'><span class='fu'><a href='https://generics.r-lib.org/reference/glance.html'>glance</a></span><span class='op'>(</span><span class='va'>mod</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 1 x 5</span><span>
+#&gt;   logLik   AIC   BIC    df  nobs
+#&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #555555;'>1</span><span>  -</span><span style='color: #BB0000;'>7.30</span><span>  24.6  31.9    </span><span style='color: #BB0000;'>NA</span><span>    32</div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
