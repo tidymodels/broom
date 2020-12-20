@@ -571,6 +571,7 @@ Suggests:
     lme4,
     lmodel2,
     lmtest (>= 0.9.38),
+    logistf,
     lsmeans,
     maps,
     maptools,
@@ -662,6 +663,7 @@ Collate:
     'lm-beta-tidiers.R'
     'lmodel2-tidiers.R'
     'lmtest-tidiers.R'
+    'logistf-tidiers.R'
     'maps-tidiers.R'
     'margins-tidiers.R'
     'mass-fitdistr-tidiers.R'
