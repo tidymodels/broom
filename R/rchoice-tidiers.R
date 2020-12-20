@@ -26,17 +26,16 @@
 #' @seealso [tidy()], [Rchoice::Rchoice()]
 tidy.Rchoice <- function(x, conf.int = FALSE, conf.level = 0.95, ...) {
   s <- summary(x, ...)
-  ret <- tibble::tibble(
-    term      = row.names(s$CoefTable),
-    estimate  = s$CoefTable[, 1],
-    std.error = s$CoefTable[, 2],
-    statistic = s$CoefTable[, 3],
-    p.value   = s$CoefTable[,4])
 
+  ret <- 
+    as_tidy_tibble(
+      s$CoefTable, 
+      c("estimate", "std.error", "statistic", "p.value")
+    )
+  
   if (conf.int) {
-    ci <- confint(x, level = conf.level, ...)
-    ret$conf.low <- ci[, 1]
-    ret$conf.high <- ci[, 2]
+    ci <- broom_confint_terms(x, level = conf.level)
+    ret <- dplyr::left_join(ret, ci, by = "term")
   }
 
   ret
@@ -59,11 +58,13 @@ tidy.Rchoice <- function(x, conf.int = FALSE, conf.level = 0.95, ...) {
 #' @export
 glance.Rchoice <- function(x, ...) {
   s <- Rchoice::getSummary.Rchoice(x, ...)
-  ret <- tibble::tibble(
+  
+  ret <- as_glance_tibble(
     logLik = s$sumstat['logLik'],
     AIC    = s$sumstat['AIC'],
     BIC    = s$sumstat['BIC'],
     df     = s$sumstat['df'],
-    nobs   = s$sumstat['N'])
+    nobs   = s$sumstat['N'],
+    na_types = "rrrii")
   ret
 }

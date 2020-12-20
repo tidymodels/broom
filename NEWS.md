@@ -2,7 +2,7 @@
 
 To be released as 0.7.4.
 
-* Add tidiers for `Rchoice` objects (`#961` by `@vincentarelbundock`)
+* Add tidiers for `Rchoice` objects (`#961` by `@vincentarelbundock` and `@Nateme16`)
 
 # broom 0.7.3
 
