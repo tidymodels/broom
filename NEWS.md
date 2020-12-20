@@ -2,6 +2,8 @@
 
 To be released as 0.7.4.
 
+* Add tidiers for `Rchoice` objects (`#961` by `@vincentarelbundock`)
+
 # broom 0.7.3
 
 In broom `0.7.0`, we introduced an error for model objects that subclassed
