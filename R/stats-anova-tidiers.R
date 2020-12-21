@@ -26,6 +26,13 @@
 #' @family anova tidiers
 #' @seealso [tidy()], [stats::anova()], [car::Anova()]
 tidy.anova <- function(x, ...) {
+
+  # car::leveneTest returns an object of class `anova`
+  if (!is.null(attr(x, "heading")) && 
+      isTRUE(grepl("Levene's Test for Homogeneity of Variance", attr(x, "heading")))) {
+    return(tidy.leveneTest(x, ...))
+  }
+
   # there are many possible column names that need to be transformed
   renamers <- c(
     "AIC" = "AIC", # merMod
