@@ -173,7 +173,7 @@ specify which components to return.</p>
     </div>
 
     <pre class="usage"><span class='co'># S3 method for garch</span>
-<span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>...</span><span class='op'>)</span></pre>
+<span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>x</span>, conf.int <span class='op'>=</span> <span class='cn'>FALSE</span>, conf.level <span class='op'>=</span> <span class='fl'>0.95</span>, <span class='va'>...</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -181,6 +181,17 @@ specify which components to return.</p>
     <tr>
       <th>x</th>
       <td><p>A <code>garch</code> object returned by <code><a href='https://rdrr.io/pkg/tseries/man/garch.html'>tseries::garch()</a></code>.</p></td>
+    </tr>
+    <tr>
+      <th>conf.int</th>
+      <td><p>Logical indicating whether or not to include a confidence
+interval in the tidied output. Defaults to <code>FALSE</code>.</p></td>
+    </tr>
+    <tr>
+      <th>conf.level</th>
+      <td><p>The confidence level to use for the confidence interval
+if <code>conf.int = TRUE</code>. Must be strictly greater than 0 and less than 1.
+Defaults to 0.95, which corresponds to a 95 percent confidence interval.</p></td>
     </tr>
     <tr>
       <th>...</th>
@@ -204,7 +215,9 @@ the <code>data</code> argument.</p></td>
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>A <code><a href='https://tibble.tidyverse.org/reference/tibble.html'>tibble::tibble()</a></code> with columns:</p>
-<dt>estimate</dt><dd><p>The estimated value of the regression term.</p></dd>
+<dt>conf.high</dt><dd><p>Upper bound on the confidence interval for the estimate.</p></dd>
+  <dt>conf.low</dt><dd><p>Lower bound on the confidence interval for the estimate.</p></dd>
+  <dt>estimate</dt><dd><p>The estimated value of the regression term.</p></dd>
   <dt>p.value</dt><dd><p>The two-sided p-value associated with the observed statistic.</p></dd>
   <dt>statistic</dt><dd><p>The value of a T-statistic to use in a hypothesis that the regression term is non-zero.</p></dd>
   <dt>std.error</dt><dd><p>The standard error of the regression term.</p></dd>
