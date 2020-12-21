@@ -2,6 +2,7 @@
 #' @template title_desc_tidy
 #'
 #' @param x A `garch` object returned by [tseries::garch()].
+#' @template param_confint
 #' @template param_unused_dots
 #'
 #' @evalRd return_tidy(
@@ -9,7 +10,9 @@
 #'   "estimate",
 #'   "std.error",
 #'   "statistic",
-#'   "p.value"
+#'   "p.value",
+#'   "conf.low",
+#'   "conf.high"
 #' )
 #'
 #' @examples
@@ -27,11 +30,18 @@
 #' @export
 #' @family garch tidiers
 #' @seealso [tidy()], [tseries::garch()]
-tidy.garch <- function(x, ...) {
+tidy.garch <- function(x, conf.int = FALSE, conf.level = 0.95, ...) {
   s <- summary(x)
   co <- s$coef
   nn <- c("estimate", "std.error", "statistic", "p.value")
-  as_tidy_tibble(co, new_names = nn[1:ncol(co)])
+  ret <- as_tidy_tibble(co, new_names = nn[1:ncol(co)])
+
+  if (conf.int) {
+    ci <- broom_confint_terms(x, level = conf.level)
+    ret <- dplyr::left_join(ret, ci, by = "term")
+  }
+
+  ret
 }
 
 #' @templateVar class garch

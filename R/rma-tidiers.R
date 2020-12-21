@@ -96,7 +96,7 @@ tidy.rma <- function(x, conf.int = FALSE, conf.level = 0.95,
   }
 
   if (exponentiate) {
-    results <- dplyr::mutate_at(results, dplyr::vars(estimate, conf.low, conf.high), exp)
+    results <- exponentiate(results)
   }
 
   if (!conf.int) {

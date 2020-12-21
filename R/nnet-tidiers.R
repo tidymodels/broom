@@ -77,13 +77,7 @@ tidy.multinom <- function(x, conf.int = FALSE, conf.level = .95,
   }
 
   if (exponentiate) {
-    to_exp <- "estimate"
-
-    if (conf.int) {
-      to_exp <- c(to_exp, "conf.low", "conf.high")
-    }
-
-    ret[, to_exp] <- lapply(ret[, to_exp, drop = FALSE], exp)
+    ret <- exponentiate(ret)
   }
 
   as_tibble(ret)
