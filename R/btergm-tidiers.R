@@ -17,11 +17,6 @@
 #' @aliases btergm_tidiers
 #' @seealso [tidy()], [btergm::btergm()]
 tidy.btergm <- function(x, conf.level = .95, exponentiate = FALSE, ...) {
-  if (exponentiate) {
-    trans <- exp
-  } else {
-    trans <- identity
-  }
 
   co <- btergm::confint(x, level = conf.level)
 
@@ -30,8 +25,9 @@ tidy.btergm <- function(x, conf.level = .95, exponentiate = FALSE, ...) {
     new_names = c("estimate", "conf.low", "conf.high")[1:ncol(co)]
   )
 
-  ret$conf.low <- trans(ret$conf.low)
-  ret$conf.high <- trans(ret$conf.high)
-  ret$estimate <- trans(ret$estimate)
+  if (exponentiate) {
+    ret <- exponentiate(ret)
+  }
+
   as_tibble(ret)
 }

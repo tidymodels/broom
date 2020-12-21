@@ -84,12 +84,8 @@ tidy.ergm <- function(x, conf.int = FALSE, conf.level = 0.95,
       warning("Exponentiating but model didn't use log or logit link.")
     }
 
-    ret$estimate <- exp(ret$estimate)
+    ret <- exponentiate(ret)
 
-    if (conf.int) {
-      ret$conf.low <- exp(ret$conf.low)
-      ret$conf.high <- exp(ret$conf.high)
-    }
   }
 
   as_tibble(ret)
