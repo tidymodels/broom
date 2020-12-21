@@ -5,6 +5,7 @@ To be released as 0.7.4.
 * Add tidiers for `Rchoice` objects (`#961` by `@vincentarelbundock` and `@Nateme16`)
 * `tidy.emmGrid` can now return `std.error` and `conf.*` columns at the same time. (`#962` by `@vincentarelbundock` and `@jmbarbone`)
 * `tidy.garch` can now produce confidence intervals (`#964` by `@vincentarelbundock` and `@IndrajeetPatil`)
+* `augment.lm` now works when some regression weights are equal to zero (`#965` by `@vincentarelbundock` and `@vnijs`)
 * `tidy.coxph` can now report confidence intervals on models utilizing penalized/clustering terms (`#966` by `@vincentarelbundock` and `@matthieu-faron`)
 
 # broom 0.7.3

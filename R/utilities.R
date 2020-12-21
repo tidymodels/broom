@@ -335,20 +335,26 @@ data_error <- function(cnd) {
 
 safe_response <- purrr::possibly(response, NULL)
 
+
 # in weighted regressions, influence measures should be zero for
 # data points with zero weight
 # helper for augment.lm and augment.glm
 add_hat_sigma_cols <- function(df, x, infl) {
   df$.hat <- 0
   df$.sigma <- 0
+  df$.cooksd <- 0
+  df$.std.resid <- NA
 
   w <- x$weights
   nonzero_idx <- if (is.null(w)) seq_along(df$.hat) else which(w != 0)
 
   df$.hat[nonzero_idx] <- infl$hat %>% unname()
   df$.sigma[nonzero_idx] <- infl$sigma %>% unname()
+  df$.std.resid[nonzero_idx] <- rstandard(x, infl = infl) %>% unname()
+  df$.cooksd[nonzero_idx] <- cooks.distance(x, infl = infl) %>% unname()
   df
 }
+
 
 # adds only the information that can be defined for newdata. no influence
 # measure of anything fun like goes here.
