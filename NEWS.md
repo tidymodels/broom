@@ -3,6 +3,7 @@
 To be released as 0.7.4.
 
 * Add tidiers for `Rchoice` objects (`#961` by `@vincentarelbundock` and `@Nateme16`)
+* `augment.lm` now works when some regression weights are equal to zero (`#965` by `@vincentarelbundock` and `@vnijs`)
 
 # broom 0.7.3
 
