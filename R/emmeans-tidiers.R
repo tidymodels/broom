@@ -208,11 +208,6 @@ tidy_emmeans_summary <- function(x, null.value = NULL, term_names = NULL) {
 
   colnames(ret) <- dplyr::recode(colnames(ret), !!!(repl))
 
-  # Remove std.error if conf.low/high exist
-  if (any(c("conf.low", "conf.high") %in% colnames(ret))) {
-    ret <- select(ret, -std.error)
-  }
-
   # If contrast column exists, add null.value column
   if ("contrast" %in% colnames(ret)) {
     if (length(null.value) < nrow(ret)) null.value <- rep_len(null.value, nrow(ret))
