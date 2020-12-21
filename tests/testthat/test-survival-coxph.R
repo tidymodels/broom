@@ -22,12 +22,14 @@ test_that("tidy.coxph", {
   td3 <- tidy(fit2)
   td4 <- tidy(fit3)
   td5 <- tidy(fit3, exponentiate = TRUE)
+  td6 <- tidy(fit3, conf.int = TRUE)
 
   check_tidy_output(td)
   check_tidy_output(td2)
   check_tidy_output(td3)
   check_tidy_output(td4)
   check_tidy_output(td5)
+  check_tidy_output(td6)
 })
 
 test_that("glance.coxph", {

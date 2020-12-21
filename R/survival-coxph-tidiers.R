@@ -61,17 +61,8 @@
 #' @family survival tidiers
 tidy.coxph <- function(x, exponentiate = FALSE, conf.int = FALSE,
                        conf.level = .95, ...) {
-  # backward compatibility (in previous version, conf.int was used instead of conf.level)
-  if (is.numeric(conf.int)) {
-    conf.level <- conf.int
-    conf.int <- TRUE
-  }
-
-  if (conf.int) {
-    s <- summary(x, conf.int = conf.level)
-  } else {
-    s <- summary(x, conf.int = FALSE)
-  }
+ 
+  s <- summary(x)
   co <- stats::coef(s)
 
   if (!is.null(x$frail)) {
@@ -88,16 +79,13 @@ tidy.coxph <- function(x, exponentiate = FALSE, conf.int = FALSE,
     ret <- as_tidy_tibble(co[, -c(3, 5), drop = FALSE], new_names = nn)
   }
 
-  if (exponentiate) {
-    ret$estimate <- exp(ret$estimate)
+  if (conf.int) {
+    ci <- broom_confint_terms(x, level = conf.level)
+    ret <- dplyr::left_join(ret, ci, by = "term")
   }
-  if (!is.null(s$conf.int)) {
-    CI <- as.matrix(unrowname(s$conf.int[, 3:4, drop = FALSE]))
-    colnames(CI) <- c("conf.low", "conf.high")
-    if (!exponentiate) {
-      CI <- log(CI)
-    }
-    ret <- cbind(ret, CI)
+
+  if (exponentiate) {
+    ret <- exponentiate(ret)
   }
 
   as_tibble(ret)
