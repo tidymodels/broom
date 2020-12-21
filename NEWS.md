@@ -7,6 +7,7 @@ To be released as 0.7.4.
 * `tidy.garch` can now produce confidence intervals (`#964` by `@vincentarelbundock` and `@IndrajeetPatil`)
 * `augment.lm` now works when some regression weights are equal to zero (`#965` by `@vincentarelbundock` and `@vnijs`)
 * `tidy.coxph` can now report confidence intervals on models utilizing penalized/clustering terms (`#966` by `@vincentarelbundock` and `@matthieu-faron`)
+* `tidy.coxph` now works when using `pspline` (by `@vincentarelbundock` and `@KZARCA`)
 
 # broom 0.7.3
 
