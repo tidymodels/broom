@@ -145,9 +145,7 @@ augment.lm <- function(x, data = model.frame(x), newdata = NULL,
   if (is.null(newdata)) {
     tryCatch({
         infl <- influence(x, do.coef = FALSE)
-        df$.std.resid <- rstandard(x, infl = infl) %>% unname()
         df <- add_hat_sigma_cols(df, x, infl)
-        df$.cooksd <- cooks.distance(x, infl = infl) %>% unname()
       },
       error = data_error
     )
