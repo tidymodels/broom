@@ -67,13 +67,13 @@ tidy.coxph <- function(x, exponentiate = FALSE, conf.int = FALSE,
 
   if (!is.null(x$frail)) {
     nn <- c("estimate", "std.error", "statistic", "p.value")
-  } else if (s$used.robust) {
+  } else if (isTRUE(s$used.robust)) {
     nn <- c("estimate", "std.error", "robust.se", "statistic", "p.value")
   } else {
     nn <- c("estimate", "std.error", "statistic", "p.value")
   }
 
-  if (is.null(x$frail)) {
+  if (is.null(x$frail) && is.null(x$penalty)) {
     ret <- as_tidy_tibble(co[, -2, drop = FALSE], new_names = nn)
   } else {
     ret <- as_tidy_tibble(co[, -c(3, 5), drop = FALSE], new_names = nn)
