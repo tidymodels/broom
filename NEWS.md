@@ -3,6 +3,7 @@
 To be released as 0.7.4.
 
 * Add tidiers for `Rchoice` objects (`#961` by `@vincentarelbundock` and `@Nateme16`)
+* Fix bug in `tidy.coxph()` related to confidence intervals on penalized/clustered terms (`#966` by `@vincentarelbundock` and `@matthieu-faron`)
 
 # broom 0.7.3
 
