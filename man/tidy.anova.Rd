@@ -7,8 +7,8 @@
 \method{tidy}{anova}(x, ...)
 }
 \arguments{
-\item{x}{An \code{anova} objects, such as those created by \code{\link[stats:anova]{stats::anova()}} or
-\code{\link[car:Anova]{car::Anova()}}.}
+\item{x}{An \code{anova} object, such as those created by \code{\link[stats:anova]{stats::anova()}},
+\code{\link[car:Anova]{car::Anova()}}, or \code{\link[car:leveneTest]{car::leveneTest()}}.}
 
 \item{...}{Additional arguments. Not used. Needed to match generic
 signature only. \strong{Cautionary note:} Misspelled arguments will be
@@ -31,6 +31,9 @@ specify which components to return.
 \details{
 The \code{term} column of an ANOVA table can come with leading or
 trailing whitespace, which this tidying method trims.
+
+For documentation on the tidier for \code{\link[car:leveneTest]{car::leveneTest()}} output, see
+\code{\link[=tidy.leveneTest]{tidy.leveneTest()}}
 }
 \examples{
 
@@ -39,7 +42,7 @@ b <- lm(mpg ~ wt + qsec, mtcars)
 tidy(anova(a, b))
 }
 \seealso{
-\code{\link[=tidy]{tidy()}}, \code{\link[stats:anova]{stats::anova()}}, \code{\link[car:Anova]{car::Anova()}}
+\code{\link[=tidy]{tidy()}}, \code{\link[stats:anova]{stats::anova()}}, \code{\link[car:Anova]{car::Anova()}}, \code{\link[car:leveneTest]{car::leveneTest()}}
 
 Other anova tidiers: 
 \code{\link{glance.aov}()},

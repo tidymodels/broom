@@ -45,7 +45,7 @@ glance.durbinWatsonTest <- function(x, ...) tidy(x)
 #'   "statistic",
 #'   "p.value",
 #'   "df",
-#'   "df.residual"
+#'   "df.residual" = "Residual degrees of freedom."
 #' )
 #'
 #' @examples

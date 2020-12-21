@@ -24,10 +24,10 @@ test_that("tidy.durbinWatsonTest", {
 test_that("tidy.leveneTest", {
   mod1 <- with(Moore, leveneTest(conformity, fcategory))
   mod2 <- with(Moore, leveneTest(conformity, interaction(fcategory, partner.status)))
-  mod3 <- leveneTest(conformity ~ fcategory*partner.status, data=Moore)
-  mod4 <- leveneTest(lm(conformity ~ fcategory*partner.status, data=Moore))
-  mod5 <- leveneTest(conformity ~ fcategory*partner.status, data=Moore, center=mean)
-  mod6 <- leveneTest(conformity ~ fcategory*partner.status, data=Moore, center=mean, trim=0.1)
+  mod3 <- leveneTest(conformity ~ fcategory * partner.status, data = Moore)
+  mod4 <- leveneTest(lm(conformity ~ fcategory * partner.status, data = Moore))
+  mod5 <- leveneTest(conformity ~ fcategory * partner.status, data = Moore, center = mean)
+  mod6 <- leveneTest(conformity ~ fcategory * partner.status, data = Moore, center = mean, trim = 0.1)
 
   # This is a tidy method, but the model object is very simple and the output
   # is a 1-row tibble with `df` and `df.residual` columns. `tidy.htest` and
