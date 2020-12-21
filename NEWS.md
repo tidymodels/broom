@@ -2,7 +2,9 @@
 
 To be released as 0.7.4.
 
-* Add tidiers for `Rchoice` objects (`#961` by `@vincentarelbundock` and `@Nateme16`)
+* Added tidiers for `Rchoice` objects. (`#961` by `@vincentarelbundock` and `@Nateme16`)
+* `tidy.emmGrid` can now return both `std.error` and `conf.*` columns at the same time. (#962 by `@vincentarelbundock` and `@jmbarbone`)
+
 
 # broom 0.7.3
 
