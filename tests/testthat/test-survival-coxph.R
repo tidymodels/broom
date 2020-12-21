@@ -14,6 +14,9 @@ bladder1 <- bladder[bladder$enum < 5, ]
 fit4 <- coxph(Surv(stop, event) ~ (rx + size + number) * strata(enum) + 
                 cluster(id), bladder1)
 
+# this model does not have summary(x)$used.robust
+fit5 <- coxph(Surv(time, status) ~ age + pspline(nodes), data = colon)
+
 test_that("coxph tidier arguments", {
   check_arguments(tidy.coxph)
   check_arguments(glance.coxph)
@@ -30,6 +33,8 @@ test_that("tidy.coxph", {
   td7 <- tidy(fit4)
   td8 <- tidy(fit4, exponentiate = TRUE)
   td9 <- tidy(fit4, conf.int = TRUE)
+  td10 <- tidy(fit5)
+  td11 <- tidy(fit5, conf.int = TRUE)
 
   check_tidy_output(td)
   check_tidy_output(td2)
@@ -40,6 +45,8 @@ test_that("tidy.coxph", {
   check_tidy_output(td7)
   check_tidy_output(td8)
   check_tidy_output(td9)
+  check_tidy_output(td10)
+  check_tidy_output(td11)
 })
 
 test_that("glance.coxph", {

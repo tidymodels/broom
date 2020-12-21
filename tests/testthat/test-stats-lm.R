@@ -13,6 +13,10 @@ fit <- lm(mpg ~ wt, mtcars)
 fit2 <- lm(mpg ~ wt + log(disp), mtcars)
 fit3 <- lm(mpg ~ 1, mtcars)
 
+# zero weights used to break influence columns in augment.lm
+wts <- c(0, rep(1, nrow(mtcars) - 1))
+fit_0wts <- lm(mpg ~ 1, weights = wts, data = mtcars)
+
 # the cyl:qsec term isn't defined for this fit
 na_row_data <- mtcars[c(6, 9, 13:15, 22), ]
 fit_na_row <- lm(mpg ~ cyl * qsec + gear, data = na_row_data)
@@ -64,6 +68,7 @@ test_that("augment.lm", {
     newdata = mtcars
   )
 
+
   check_augment_function(
     aug = augment.lm,
     model = fit2,
@@ -93,5 +98,12 @@ test_that("augment.lm", {
     model = fit_rd,
     data = rd_data,
     newdata = rd_data
+  )
+
+  check_augment_function(
+    aug = augment.lm,
+    model = fit_0wts,
+    data = mtcars,
+    newdata = mtcars
   )
 })
