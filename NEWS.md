@@ -72,6 +72,8 @@ TODO: sort out what happens to `glance.aov()`
 
 ## New tidiers, features and bugfixes
 
+- Fix bug that made column `y` non-numeric in `tidy_xyz` (#972)
+
 - Added tidier for `summary.manova` (#729)
 
 - Added `tidy()` and `glance()` methods for `speedglm` objects from the `speedglm` package
