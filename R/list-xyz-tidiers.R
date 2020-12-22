@@ -39,9 +39,9 @@ tidy_xyz <- function(x, ...) {
     )
   }
   
-  d <- as_tibble(x$z)
-  names(d) <- x$y
-  d$x <- x$x
-  tidyr::gather(d, y, z, -x)
-
+  as_tibble(data.frame(
+    x=x$x,
+    y=rep(x$y, each=length(x$x)),
+    z=as.numeric(x$z)
+  ))
 }
