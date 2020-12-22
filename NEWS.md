@@ -9,6 +9,7 @@ To be released as 0.7.4.
 * `augment.lm` now works when some regression weights are equal to zero (`#965` by `@vincentarelbundock` and `@vnijs`)
 * `tidy.coxph` can now handle models utilizing penalized/clustering terms (`#966` and `#969` by `@vincentarelbundock`, `@matthieu-faron`, and `@KZARCA`)
 * Add tidiers for objects produced by `car::leveneTest` (`#968` by `@vincentarelbundock` and `@mkirzon`)
+* Fix bug that made column `y` non-numeric after `tidy_xyz` (`#973` by `@jiho`)
 
 # broom 0.7.3
 
