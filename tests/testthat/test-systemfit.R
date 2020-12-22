@@ -19,11 +19,11 @@ system <- list(demand = eqDemand, supply = eqSupply)
 fitols <- systemfit(system, data = Kmenta)
 
 test_that("tidy.systemfit with OLS", {
-  td <- tidy(fitols)
+  td <- tidy(fitols, conf.int = TRUE)
   check_tidy_output(td)
   check_dims(td, 7, 7)
 
-  td <- tidy(fitols, conf.level = .99)
+  td <- tidy(fitols, conf.int = TRUE, conf.level = .99)
   check_tidy_output(td)
   check_dims(td, 7, 7)
 })
@@ -43,7 +43,7 @@ fitols2 <- systemfit(system,
 )
 
 test_that("tidy.systemfit with OLS 2 restrictions", {
-  td <- tidy(fitols2)
+  td <- tidy(fitols2, conf.int = TRUE)
   check_tidy_output(td)
   check_dims(td, 7, 7)
 })
@@ -57,7 +57,7 @@ restrict <- c(
 fitols2b <- systemfit(system, data = Kmenta, restrict.matrix = restrict)
 
 test_that("tidy.systemfit with OLS 2 restrictions", {
-  td <- tidy(fitols2b)
+  td <- tidy(fitols2b, conf.int = TRUE)
   check_tidy_output(td)
   check_dims(td, 7, 7)
 })
@@ -81,7 +81,7 @@ modReg[7, "supTrend"] <- 1
 fitols3 <- systemfit(system, data = Kmenta, restrict.regMat = modReg)
 
 test_that("tidy.systemfit with OLS 2 restrictions and modifications", {
-  td <- tidy(fitols3)
+  td <- tidy(fitols3, conf.int = TRUE)
   check_tidy_output(td)
   check_dims(td, 7, 7)
 })
@@ -90,7 +90,7 @@ test_that("tidy.systemfit with OLS 2 restrictions and modifications", {
 fitsur <- systemfit(system, "SUR", data = Kmenta, maxit = 100)
 
 test_that("tidy.systemfit with SUR", {
-  td <- tidy(fitsur)
+  td <- tidy(fitsur, conf.int = TRUE)
   check_tidy_output(td)
   check_dims(td, 7, 7)
 })
@@ -100,7 +100,7 @@ test_that("tidy.systemfit with SUR", {
 inst <- ~ income + farmPrice + trend
 fit2sls <- systemfit(system, "2SLS", inst = inst, data = Kmenta)
 test_that("tidy.systemfit with 2SLS", {
-  td <- tidy(fit2sls)
+  td <- tidy(fit2sls, conf.int = TRUE)
   check_tidy_output(td)
   check_dims(td, 7, 7)
 })
@@ -115,7 +115,7 @@ instlist <- list(inst1, inst2)
 fit2sls2 <- systemfit(system, "2SLS", inst = instlist, data = Kmenta)
 
 test_that("tidy.systemfit with 2SLS with different instruments", {
-  td <- tidy(fit2sls2)
+  td <- tidy(fit2sls2, conf.int = TRUE)
   check_tidy_output(td)
   check_dims(td, 7, 7)
 })
@@ -129,7 +129,7 @@ fit3sls <- systemfit(system, "3SLS",
 )
 
 test_that("tidy.systemfit with 3SLS", {
-  td <- tidy(fit3sls)
+  td <- tidy(fit3sls, conf.int = TRUE)
   check_tidy_output(td)
   check_dims(td, 7, 7)
 })

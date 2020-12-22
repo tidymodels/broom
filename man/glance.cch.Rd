@@ -63,7 +63,7 @@ tidy(fit.ccP)
 
 # coefficient plot
 library(ggplot2)
-ggplot(tidy(fit.ccP), aes(x = estimate, y = term)) +
+ggplot(tidy(fit.ccP, conf.int = TRUE), aes(x = estimate, y = term)) +
   geom_point() +
   geom_errorbarh(aes(xmin = conf.low, xmax = conf.high), height = 0) +
   geom_vline(xintercept = 0)

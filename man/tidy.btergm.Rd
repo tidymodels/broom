@@ -5,13 +5,17 @@
 \alias{btergm_tidiers}
 \title{Tidy a(n) btergm object}
 \usage{
-\method{tidy}{btergm}(x, conf.level = 0.95, exponentiate = FALSE, ...)
+\method{tidy}{btergm}(x, conf.int = FALSE, conf.level = 0.95, exponentiate = FALSE, ...)
 }
 \arguments{
 \item{x}{A \code{\link[btergm:btergm]{btergm::btergm()}} object.}
 
-\item{conf.level}{Confidence level for confidence intervals. Defaults to
-0.95.}
+\item{conf.int}{Logical indicating whether or not to include a confidence
+interval in the tidied output. Defaults to \code{FALSE}.}
+
+\item{conf.level}{The confidence level to use for the confidence interval
+if \code{conf.int = TRUE}. Must be strictly greater than 0 and less than 1.
+Defaults to 0.95, which corresponds to a 95 percent confidence interval.}
 
 \item{exponentiate}{Logical indicating whether or not to exponentiate the
 the coefficient estimates. This is typical for logistic and multinomial

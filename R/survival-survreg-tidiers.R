@@ -34,7 +34,7 @@
 #' @family survreg tidiers
 #' @family survival tidiers
 #'
-tidy.survreg <- function(x, conf.level = .95, conf.int = FALSE, ...) {
+tidy.survreg <- function(x, conf.int = FALSE, conf.level = .95, ...) {
   s <- summary(x)$table
   # If the user requested robust SE in the survreg call, don't return naive SE
   # (The column is not present if robust=FALSE)

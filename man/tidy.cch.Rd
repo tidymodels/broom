@@ -5,12 +5,17 @@
 \alias{cch_tidiers}
 \title{Tidy a(n) cch object}
 \usage{
-\method{tidy}{cch}(x, conf.level = 0.95, ...)
+\method{tidy}{cch}(x, conf.int = FALSE, conf.level = 0.95, ...)
 }
 \arguments{
 \item{x}{An \code{cch} object returned from \code{\link[survival:cch]{survival::cch()}}.}
 
-\item{conf.level}{confidence level for CI}
+\item{conf.int}{Logical indicating whether or not to include a confidence
+interval in the tidied output. Defaults to \code{FALSE}.}
+
+\item{conf.level}{The confidence level to use for the confidence interval
+if \code{conf.int = TRUE}. Must be strictly greater than 0 and less than 1.
+Defaults to 0.95, which corresponds to a 95 percent confidence interval.}
 
 \item{...}{Additional arguments. Not used. Needed to match generic
 signature only. \strong{Cautionary note:} Misspelled arguments will be
@@ -54,7 +59,7 @@ tidy(fit.ccP)
 
 # coefficient plot
 library(ggplot2)
-ggplot(tidy(fit.ccP), aes(x = estimate, y = term)) +
+ggplot(tidy(fit.ccP, conf.int = TRUE), aes(x = estimate, y = term)) +
   geom_point() +
   geom_errorbarh(aes(xmin = conf.low, xmax = conf.high), height = 0) +
   geom_vline(xintercept = 0)

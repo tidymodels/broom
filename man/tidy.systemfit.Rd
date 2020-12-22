@@ -5,7 +5,7 @@
 \alias{systemfit_tidiers}
 \title{Tidy a(n) systemfit object}
 \usage{
-\method{tidy}{systemfit}(x, conf.int = TRUE, conf.level = 0.95, ...)
+\method{tidy}{systemfit}(x, conf.int = FALSE, conf.level = 0.95, ...)
 }
 \arguments{
 \item{x}{A \code{systemfit} object produced by a call to \code{\link[systemfit:systemfit]{systemfit::systemfit()}}.}

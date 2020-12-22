@@ -2,7 +2,7 @@
 #' @template title_desc_tidy
 #'
 #' @param x An `cch` object returned from [survival::cch()].
-#' @param conf.level confidence level for CI
+#' @template param_confint
 #' @template param_unused_dots
 #'
 #' @evalRd return_tidy(regression = TRUE)
@@ -31,7 +31,7 @@
 #'
 #' # coefficient plot
 #' library(ggplot2)
-#' ggplot(tidy(fit.ccP), aes(x = estimate, y = term)) +
+#' ggplot(tidy(fit.ccP, conf.int = TRUE), aes(x = estimate, y = term)) +
 #'   geom_point() +
 #'   geom_errorbarh(aes(xmin = conf.low, xmax = conf.high), height = 0) +
 #'   geom_vline(xintercept = 0)
@@ -40,19 +40,19 @@
 #' @seealso [tidy()], [survival::cch()]
 #' @family cch tidiers
 #' @family survival tidiers
-tidy.cch <- function(x, conf.level = .95, ...) {
-  s <- summary(x)
-  co <- stats::coefficients(s)
+tidy.cch <- function(x, conf.int = FALSE, conf.level = .95, ...) {
 
   ret <- as_tidy_tibble(
-    co, 
+    stats::coefficients(summary(x)), 
     new_names = c("estimate", "std.error", "statistic", "p.value")
   )
 
-  # add confidence interval
-  ci <- unrowname(stats::confint(x, level = conf.level))
-  colnames(ci) <- c("conf.low", "conf.high")
-  as_tibble(cbind(ret, ci))
+  if (conf.int) {
+    ci <- broom_confint_terms(x, level = conf.level)
+    ret <- dplyr::left_join(ret, ci, by = "term")
+  }
+
+  ret
 }
 
 

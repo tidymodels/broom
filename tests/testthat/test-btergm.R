@@ -35,8 +35,8 @@ test_that("tidy.btergm", {
     )
   )
 
-  td <- tidy(fit)
-  tde <- tidy(fit, exponentiate = TRUE)
+  td <- tidy(fit, conf.int = TRUE)
+  tde <- tidy(fit, conf.int = TRUE, exponentiate = TRUE)
 
   check_tidy_output(td)
   check_tidy_output(tde)

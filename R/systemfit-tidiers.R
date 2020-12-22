@@ -40,7 +40,7 @@
 #' @family systemfit tidiers
 #' @aliases systemfit_tidiers
 #'
-tidy.systemfit <- function(x, conf.int = TRUE, conf.level = 0.95, ...) {
+tidy.systemfit <- function(x, conf.int = FALSE, conf.level = 0.95, ...) {
   ret <- as_tibble(summary(x)$coefficients, rownames = "term")
   colnames(ret) <- c("term", "estimate", "std.error", "statistic", "p.value")
 

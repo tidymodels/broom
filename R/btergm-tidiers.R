@@ -8,6 +8,7 @@
 #' @param x A [btergm::btergm()] object.
 #' @param conf.level Confidence level for confidence intervals. Defaults to
 #'   0.95.
+#' @template param_confint
 #' @template param_exponentiate
 #' @template param_unused_dots
 #'
@@ -16,18 +17,23 @@
 #' @export
 #' @aliases btergm_tidiers
 #' @seealso [tidy()], [btergm::btergm()]
-tidy.btergm <- function(x, conf.level = .95, exponentiate = FALSE, ...) {
+tidy.btergm <- function(x, conf.int = FALSE, conf.level = .95, exponentiate = FALSE, ...) {
 
-  co <- btergm::confint(x, level = conf.level)
-
-  ret <- as_tidy_tibble(
-    co, 
-    new_names = c("estimate", "conf.low", "conf.high")[1:ncol(co)]
+  ret <- tibble::tibble(
+    term = names(x@coef),
+    estimate = x@coef
   )
+
+  if (conf.int) {
+    ci <- as_tidy_tibble(
+      btergm::confint(x, level = conf.level),
+      new_names = c("estimate", "conf.low", "conf.high"))[, -2]
+    ret <- dplyr::left_join(ret, ci, by = "term")
+  }
 
   if (exponentiate) {
     ret <- exponentiate(ret)
   }
 
-  as_tibble(ret)
+  ret
 }
