@@ -540,6 +540,7 @@ Suggests:
     car,
     caret,
     cluster,
+    cmprsk,
     coda,
     covr,
     drc,
@@ -636,6 +637,7 @@ Collate:
     'btergm-tidiers.R'
     'car-tidiers.R'
     'caret-tidiers.R'
+    'cmprsk-tidiers.R'
     'data-frame-tidiers.R'
     'deprecated-0-7-0.R'
     'deprecated-0-7-1.R'
