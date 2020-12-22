@@ -1,8 +1,8 @@
 #' @templateVar class anova
 #' @template title_desc_tidy
 #'
-#' @param x An `anova` objects, such as those created by [stats::anova()] or
-#'   [car::Anova()].
+#' @param x An `anova` object, such as those created by [stats::anova()],
+#'   [car::Anova()], or [car::leveneTest()].
 #' @template param_unused_dots
 #'
 #' @evalRd return_tidy(
@@ -14,8 +14,12 @@
 #'   "p.value"
 #' )
 #'
-#' @details The `term` column of an ANOVA table can come with leading or
-#'   trailing whitespace, which this tidying method trims.
+#' @details 
+#' The `term` column of an ANOVA table can come with leading or
+#' trailing whitespace, which this tidying method trims.
+#'   
+#' For documentation on the tidier for [car::leveneTest()] output, see
+#' [tidy.leveneTest()]
 #'
 #' @examples
 #'
@@ -24,8 +28,15 @@
 #' tidy(anova(a, b))
 #' @export
 #' @family anova tidiers
-#' @seealso [tidy()], [stats::anova()], [car::Anova()]
+#' @seealso [tidy()], [stats::anova()], [car::Anova()], [car::leveneTest()]
 tidy.anova <- function(x, ...) {
+
+  # car::leveneTest returns an object of class `anova`
+  if (!is.null(attr(x, "heading")) && 
+      isTRUE(grepl("Levene's Test for Homogeneity of Variance", attr(x, "heading")))) {
+    return(tidy(structure(x, class = c("leveneTest", class(x))), ...))
+  }
+
   # there are many possible column names that need to be transformed
   renamers <- c(
     "AIC" = "AIC", # merMod

@@ -21,6 +21,26 @@ test_that("tidy.durbinWatsonTest", {
   check_dims(td, 1, 5)
 })
 
+test_that("tidy.leveneTest", {
+  mod1 <- with(Moore, leveneTest(conformity, fcategory))
+  mod2 <- with(Moore, leveneTest(conformity, interaction(fcategory, partner.status)))
+  mod3 <- leveneTest(conformity ~ fcategory * partner.status, data = Moore)
+  mod4 <- leveneTest(lm(conformity ~ fcategory * partner.status, data = Moore))
+  mod5 <- leveneTest(conformity ~ fcategory * partner.status, data = Moore, center = mean)
+  mod6 <- leveneTest(conformity ~ fcategory * partner.status, data = Moore, center = mean, trim = 0.1)
+
+  # This is a tidy method, but the model object is very simple and the output
+  # is a 1-row tibble with `df` and `df.residual` columns. `tidy.htest` and
+  # `glance.htest` also return the same things.
+  check_glance_outputs(
+    tidy(mod1),
+    tidy(mod2),
+    tidy(mod3),
+    tidy(mod4),
+    tidy(mod5),
+    tidy(mod6))
+})
+
 test_that("tidy car::Anova glm", {
   fit <- glm(am ~ mpg, mtcars, family = "binomial")
   fit2 <- glm(am ~ mpg + wt, mtcars, family = "binomial")

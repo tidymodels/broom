@@ -30,6 +30,9 @@ specify which components to return.
 \details{
 The \code{term} column of an ANOVA table can come with leading or
 trailing whitespace, which this tidying method trims.
+
+For documentation on the tidier for \code{\link[car:leveneTest]{car::leveneTest()}} output, see
+\code{\link[=tidy.leveneTest]{tidy.leveneTest()}}
 }
 \examples{
 
