@@ -90,6 +90,10 @@ We are in the process of defining behaviors for models fit with various
 \code{na.action} arguments, but make no guarantees about behavior when data is
 missing at this time.
 }
+\details{
+For additional details on Cook's distance, see
+\code{\link[stats:influence.measures]{stats::cooks.distance()}}.
+}
 \examples{
 
 g <- mgcv::gam(mpg ~ s(hp) + am + qsec, data = mtcars)
@@ -97,7 +101,18 @@ g <- mgcv::gam(mpg ~ s(hp) + am + qsec, data = mtcars)
 tidy(g)
 tidy(g, parametric = TRUE)
 glance(g)
+augment(g)
 }
 \seealso{
-\code{\link[=augment]{augment()}}, \code{\link[gam:gam]{gam::gam()}}
+\code{\link[=augment]{augment()}}, \code{\link[mgcv:gam]{mgcv::gam()}}
+}
+\value{
+A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
+  \item{.cooksd}{Cooks distance.}
+  \item{.fitted}{Fitted or predicted value.}
+  \item{.hat}{Diagonal of the hat matrix.}
+  \item{.resid}{The difference between observed and fitted values.}
+  \item{.se.fit}{Standard errors of fitted values.}
+  \item{.sigma}{Estimated residual standard deviation when corresponding observation is dropped from model.}
+
 }

@@ -31,6 +31,7 @@
 #' tidy(g)
 #' tidy(g, parametric = TRUE)
 #' glance(g)
+#' augment(g)
 #' @export
 #' @aliases mgcv_tidiers gam_tidiers tidy.gam
 #' @family mgcv tidiers
@@ -108,12 +109,18 @@ glance.gam <- function(x, ...) {
 #' @template param_type_predict
 #' @template param_type_residuals
 #'
-#' @evalRd return_augment(".cooksd")
+#' @evalRd return_augment(
+#'   ".se.fit",
+#'   ".resid",
+#'   ".hat",
+#'   ".sigma",
+#'   ".cooksd"
+#' )
 #'
 #' @details For additional details on Cook's distance, see
 #'   [stats::cooks.distance()].
 #'
-#' @seealso [augment()], [gam::gam()]
+#' @seealso [augment()], [mgcv::gam()]
 #' @export
 augment.gam <- function(x, data = model.frame(x), newdata = NULL,
                         type.predict, type.residuals, ...) {
