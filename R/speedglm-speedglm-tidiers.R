@@ -32,6 +32,8 @@ tidy.speedglm <- function(x, conf.int = FALSE, conf.level = 0.95,
 
   if (is.factor(ret$p.value)) {
     ret$p.value <- as.numeric(levels(ret$p.value))[ret$p.value]
+  } else {
+    ret$p.value <- as.numeric(ret$p.value)
   }
   
   if (conf.int) {
