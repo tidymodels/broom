@@ -97,3 +97,29 @@ glance.gam <- function(x, ...) {
     na_types = "irrrrii"
   )
 }
+
+
+#' @templateVar class gam
+#' @template title_desc_augment
+#'
+#' @inherit tidy.gam params examples
+#' @template param_data
+#' @template param_newdata
+#' @template param_type_predict
+#' @template param_type_residuals
+#'
+#' @evalRd return_augment(".cooksd")
+#'
+#' @details For additional details on Cook's distance, see
+#'   [stats::cooks.distance()].
+#'
+#' @seealso [augment()], [gam::gam()]
+#' @export
+augment.gam <- function(x, data = model.frame(x), newdata = NULL,
+                        type.predict, type.residuals, ...) {
+  augment_columns(
+    x, data, newdata,
+    type.predict = type.predict,
+    type.residuals = type.residuals
+  )
+}

@@ -10,6 +10,7 @@ To be released as 0.7.4.
 * `tidy.coxph` can now handle models utilizing penalized/clustering terms (`#966` and `#969` by `@vincentarelbundock`, `@matthieu-faron`, and `@KZARCA`)
 * Add tidiers for objects produced by `car::leveneTest` (`#968` by `@vincentarelbundock` and `@mkirzon`)
 * Fix bug in `tidy.speedglm` on R 4.0.0+ (`#974` by `@uqzwang`)
+* Add `augment.gam` (`#975` and `#645` by `@vincentarelbundock` and `@alexpghayes`)
 
 # broom 0.7.3
 
