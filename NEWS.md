@@ -12,6 +12,7 @@ To be released as 0.7.4.
 * Fix bug in `tidy.speedglm` on R 4.0.0+ (`#974` by `@uqzwang`)
 * Add `augment.gam` (`#975` and `#645` by `@vincentarelbundock`)
 * Various bug fixes and improvements to documentation and errors.
+* tidy.multinom works with matrix response (`#977` and `#666` by `@vincentarelbundock` and `@atyre2`)
 
 # broom 0.7.3
 
