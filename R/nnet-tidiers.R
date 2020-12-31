@@ -33,22 +33,34 @@
 #' @seealso [tidy()], [nnet::multinom()]
 tidy.multinom <- function(x, conf.int = FALSE, conf.level = .95,
                           exponentiate = FALSE, ...) {
-  col_names <- if (length(x$lev) > 2) colnames(coef(x)) else names(coef(x))
+
+
+  # when the response is a matrix, x$lev is null
+  if (is.null(x$lev)) {
+    n_lev <- ncol(x$residuals)
+  } else {
+    n_lev <- length(x$lev) 
+  }
+
+  col_names <- if (n_lev > 2) colnames(coef(x)) else names(coef(x))
   s <- summary(x)
 
-  coef <- matrix(coef(s),
+  co <- coef(s)
+  coef <- matrix(co,
     byrow = FALSE,
-    nrow = length(x$lev) - 1,
+    nrow = n_lev - 1,
     dimnames = list(
-      x$lev[-1],
+      row.names(co),
       col_names
     )
   )
-  se <- matrix(s$standard.errors,
+
+  se <- s$standard.errors
+  se <- matrix(se,
     byrow = FALSE,
-    nrow = length(x$lev) - 1,
+    nrow = n_lev - 1,
     dimnames = list(
-      x$lev[-1],
+      row.names(se),
       col_names
     )
   )
