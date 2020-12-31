@@ -19,7 +19,6 @@
 #'
 #' mod <- lm(cbind(mpg, disp) ~ wt, mtcars)
 #' tidy(mod, conf.int = TRUE)
-#' @importFrom dplyr bind_cols
 #' @export
 #' @seealso [tidy()]
 #' @family lm tidiers
@@ -63,7 +62,7 @@ tidy.mlm <- function(x,
     }
 
     colnames(CI) <- c("conf.low", "conf.high")
-    ret <- bind_cols(ret, as_tibble(CI))
+    ret <- dplyr::bind_cols(ret, as_tibble(CI))
   }
 
   as_tibble(ret)
