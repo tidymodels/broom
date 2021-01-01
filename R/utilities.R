@@ -204,6 +204,7 @@ augment_columns <- function(x, data, newdata = NULL, type, type.predict = type,
   influence0 <- purrr::possibly(stats::influence, NULL)
   cooks.distance0 <- purrr::possibly(stats::cooks.distance, NULL)
   rstandard0 <- purrr::possibly(stats::rstandard, NULL)
+  rstudent0 <- purrr::possibly(stats::rstudent, NULL)
   predict0 <- purrr::possibly(stats::predict, NULL)
 
   # call predict with arguments
@@ -273,10 +274,11 @@ augment_columns <- function(x, data, newdata = NULL, type, type.predict = type,
       }
     }
 
-    # if cooksd and rstandard can be computed and aren't all NA
+    # if cooksd or rstandard or rstudent can be computed and aren't all NA
     # (as they are in rlm), do so
     ret$.cooksd <- notNAs(cooks.distance0(x))
     ret$.std.resid <- notNAs(rstandard0(x))
+    ret$.stu.resid <- notNAs(rstudent0(x))
 
     original <- data
 
@@ -350,8 +352,9 @@ add_hat_sigma_cols <- function(df, x, infl) {
 
   df$.hat[nonzero_idx] <- infl$hat %>% unname()
   df$.sigma[nonzero_idx] <- infl$sigma %>% unname()
-  df$.std.resid[nonzero_idx] <- rstandard(x, infl = infl) %>% unname()
-  df$.cooksd[nonzero_idx] <- cooks.distance(x, infl = infl) %>% unname()
+  df$.std.resid[nonzero_idx] <- stats::rstandard(x, infl = infl) %>% unname()
+  df$.stu.resid[nonzero_idx] <- stats::rstudent(x, infl = infl) %>% unname()
+  df$.cooksd[nonzero_idx] <- stats::cooks.distance(x, infl = infl) %>% unname()
   df
 }
 
