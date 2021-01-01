@@ -527,6 +527,7 @@ Imports:
     stringr,
     tibble (>= 3.0.0),
     tidyr (>= 1.0.0)
+Remotes: alexpghayes/modeltests
 Suggests:
     AER,
     akima,
@@ -613,6 +614,7 @@ Suggests:
     systemfit,
     testthat (>= 2.1.0),
     tseries,
+    vars,
     zoo
 VignetteBuilder:
     knitr
@@ -728,5 +730,6 @@ Collate:
     'systemfit-tidiers.R'
     'tseries-tidiers.R'
     'utilities.R'
+    'vars-tidiers.R'
     'zoo-tidiers.R'
     'zzz.R'
