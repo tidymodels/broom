@@ -9,6 +9,7 @@ To be released as 0.7.4.
 * `augment.lm` now works when some regression weights are equal to zero (`#965` by `@vincentarelbundock` and `@vnijs`)
 * `tidy.coxph` can now handle models utilizing penalized/clustering terms (`#966` and `#969` by `@vincentarelbundock`, `@matthieu-faron`, and `@KZARCA`)
 * Add tidiers for objects produced by `car::leveneTest` (`#968` by `@vincentarelbundock` and `@mkirzon`)
+* Add tidiers for objects produced by `cmprsk::crr` (`#971` and `#552` by `@vincentarelbundock` and `@margarethannum`)
 * Fix bug in `tidy.speedglm` on R 4.0.0+ (`#974` by `@uqzwang`)
 * Add `augment.gam` (`#975` and `#645` by `@vincentarelbundock`)
 * tidy.multinom works with matrix response (`#977` and `#666` by `@vincentarelbundock` and `@atyre2`)
