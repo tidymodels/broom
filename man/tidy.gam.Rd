@@ -51,6 +51,7 @@ g <- mgcv::gam(mpg ~ s(hp) + am + qsec, data = mtcars)
 tidy(g)
 tidy(g, parametric = TRUE)
 glance(g)
+augment(g)
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[mgcv:gam]{mgcv::gam()}}

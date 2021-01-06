@@ -486,7 +486,7 @@ broom_confint_terms <- function(x, ...) {
 warn_on_subclass <- function(x) {
   if (length(class(x)) > 1 && class(x)[1] != "glm") {
     subclass <- class(x)[1]
-    dispatched_method <- class(x)[-1]
+    dispatched_method <- class(x)[class(x) %in% c("glm", "lm")][1]
     
     warning(
       "Tidiers for objects of class ", 

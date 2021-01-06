@@ -10,7 +10,6 @@
 #' @details The tibble has four rows. The first two indicate the mediated 
 #'   effect in the control and treatment groups, respectively. And the last 
 #'   two the direct effect in each group.
-#' @importFrom stats pnorm quantile
 #' @examples
 #' library(mediation)
 #' data(jobs)
