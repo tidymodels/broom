@@ -34,9 +34,15 @@ jobs:
           key: ${{ runner.os }}-${{ hashFiles('.github/R-version') }}-1-${{ hashFiles('.github/depends.Rds') }}
           restore-keys: ${{ runner.os }}-${{ hashFiles('.github/R-version') }}-1-
 
+      - name: Install sf Dependencies
+        run: |
+          brew install pkg-config
+          brew install gdal
+
       - name: Install dependencies
         run: |
           install.packages(c("remotes"))
+          install.packages("sf", configure.args = "--with-proj-lib=/usr/local/lib/")
           remotes::install_deps(dependencies = TRUE)
           remotes::install_cran("covr")
         shell: Rscript {0}
