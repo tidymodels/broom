@@ -18,15 +18,13 @@
 #' 
 #'   The `vars` package does not include a `confint` method and does not report
 #'   confidence intervals for `varest` objects. Setting the `tidy` argument
-#'   `conf.int=TRUE` will only return a warning, and the `tidy` outputs will
-#'   not be affected.
+#'   `conf.int = TRUE` will return a warning.
 #'
 #' @examples
-#'
 #' library(vars)
 #' data("Canada", package = "vars")
 #' 
-#' mod <- VAR(Canada, p=1, type="both")
+#' mod <- VAR(Canada, p = 1, type = "both")
 #' 
 #' tidy(mod)
 #' glance(mod)
@@ -38,12 +36,13 @@ tidy.varest <- function(x, conf.int = FALSE, conf.level = 0.95, ...) {
 
   # `vars` does not define a `confint` method and does not calculate CIs
   if (isTRUE(conf.int)) {
-    warning("`conf.int=TRUE` is not supported for objects of class `varest`. The `conf.level` argument will not affect the output of `tidy`.")
+    warning("Confidence intervals are not supported for `varest` objects. The `conf.level` argument will be ignored.")
   }
 
   s <- summary(x)
 
   ret <- list()
+  
   for (v in names(s$varresult)) {
     ret[[v]] <- as_tidy_tibble(
       s$varresult[[1]]$coefficients,
@@ -51,6 +50,7 @@ tidy.varest <- function(x, conf.int = FALSE, conf.level = 0.95, ...) {
     )
     ret[[v]]$group <- v
   }
+  
   ret <- dplyr::bind_rows(ret) %>%
         dplyr::relocate(group, 1)
 
@@ -68,7 +68,7 @@ tidy.varest <- function(x, conf.int = FALSE, conf.level = 0.95, ...) {
 #'   "lag.order",
 #'   "logLik",
 #'   "n",
-#'   "nobs",
+#'   "nobs"
 #' )
 #'
 #' @seealso [glance()], [vars::VAR()]

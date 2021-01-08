@@ -44,15 +44,13 @@ At least one term will have been used to model the precision \code{phi}.
 
 The \code{vars} package does not include a \code{confint} method and does not report
 confidence intervals for \code{varest} objects. Setting the \code{tidy} argument
-\code{conf.int=TRUE} will only return a warning, and the \code{tidy} outputs will
-not be affected.
+\code{conf.int = TRUE} will return a warning.
 }
 \examples{
-
 library(vars)
 data("Canada", package = "vars")
 
-mod <- VAR(Canada, p=1, type="both")
+mod <- VAR(Canada, p = 1, type = "both")
 
 tidy(mod)
 glance(mod)

@@ -40,15 +40,22 @@ that no longer have a well-defined value are filled in with an \code{NA}
 of the appropriate type.
 }
 \examples{
-
 library(vars)
 data("Canada", package = "vars")
 
-mod <- VAR(Canada, p=1, type="both")
+mod <- VAR(Canada, p = 1, type = "both")
 
 tidy(mod)
 glance(mod)
 }
 \seealso{
 \code{\link[=glance]{glance()}}, \code{\link[vars:VAR]{vars::VAR()}}
+}
+\value{
+A \code{\link[tibble:tibble]{tibble::tibble()}} with exactly one row and columns:
+  \item{lag.order}{Lag order.}
+  \item{logLik}{The log-likelihood of the model. [stats::logLik()] may be a useful reference.}
+  \item{n}{The total number of observations.}
+  \item{nobs}{Number of observations used.}
+
 }
