@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Tidy a(n) geeglm object — tidy.geeglm • broom</title>
+<title>Tidy a(n) varest object — tidy.varest • broom</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -49,7 +49,7 @@
 
 
 
-<meta property="og:title" content="Tidy a(n) geeglm object — tidy.geeglm" />
+<meta property="og:title" content="Tidy a(n) varest object — tidy.varest" />
 <meta property="og:description" content="Tidy summarizes information about the components of a model.
 A model component might be a single term in a regression, a single
 hypothesis, a cluster, or a class. Exactly what tidy considers to be a
@@ -158,9 +158,9 @@ specify which components to return." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Tidy a(n) geeglm object</h1>
-    <small class="dont-index">Source: <a href='https://github.com/tidymodels/broom/blob/master/R/geepack-tidiers.R'><code>R/geepack-tidiers.R</code></a></small>
-    <div class="hidden name"><code>tidy.geeglm.Rd</code></div>
+    <h1>Tidy a(n) varest object</h1>
+    <small class="dont-index">Source: <a href='https://github.com/tidymodels/broom/blob/master/R/vars-tidiers.R'><code>R/vars-tidiers.R</code></a></small>
+    <div class="hidden name"><code>tidy.varest.Rd</code></div>
     </div>
 
     <div class="ref-description">
@@ -172,15 +172,15 @@ If a model has several distinct types of components, you will need to
 specify which components to return.</p>
     </div>
 
-    <pre class="usage"><span class='co'># S3 method for geeglm</span>
-<span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>x</span>, conf.int <span class='op'>=</span> <span class='cn'>FALSE</span>, conf.level <span class='op'>=</span> <span class='fl'>0.95</span>, exponentiate <span class='op'>=</span> <span class='cn'>FALSE</span>, <span class='va'>...</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='co'># S3 method for varest</span>
+<span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>x</span>, conf.int <span class='op'>=</span> <span class='cn'>FALSE</span>, conf.level <span class='op'>=</span> <span class='fl'>0.95</span>, <span class='va'>...</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>x</th>
-      <td><p>A <code>geeglm</code> object returned from a call to <code><a href='https://rdrr.io/pkg/geepack/man/geeglm.html'>geepack::geeglm()</a></code>.</p></td>
+      <td><p>A <code>varest</code> object produced by a call to <code><a href='https://rdrr.io/pkg/vars/man/VAR.html'>vars::VAR()</a></code>.</p></td>
     </tr>
     <tr>
       <th>conf.int</th>
@@ -192,13 +192,6 @@ interval in the tidied output. Defaults to <code>FALSE</code>.</p></td>
       <td><p>The confidence level to use for the confidence interval
 if <code>conf.int = TRUE</code>. Must be strictly greater than 0 and less than 1.
 Defaults to 0.95, which corresponds to a 95 percent confidence interval.</p></td>
-    </tr>
-    <tr>
-      <th>exponentiate</th>
-      <td><p>Logical indicating whether or not to exponentiate the
-the coefficient estimates. This is typical for logistic and multinomial
-regressions, but a bad idea if there is no log or logit link. Defaults
-to <code>FALSE</code>.</p></td>
     </tr>
     <tr>
       <th>...</th>
@@ -216,14 +209,17 @@ the <code>data</code> argument.</p></td>
 
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>If <code>conf.int = TRUE</code>, the confidence interval is computed with
-the an internal <code>confint.geeglm()</code> function.</p>
-<p>If you have missing values in your model data, you may need to
-refit the model with <code>na.action = na.exclude</code> or deal with the
-missingness in the data beforehand.</p>
+    <p>The tibble has one row for each term in the regression. The
+<code>component</code> column indicates whether a particular
+term was used to model either the <code>"mean"</code> or <code>"precision"</code>. Here the
+precision is the inverse of the variance, often referred to as <code>phi</code>.
+At least one term will have been used to model the precision <code>phi</code>.</p>
+<p>The <code>vars</code> package does not include a <code>confint</code> method and does not report
+confidence intervals for <code>varest</code> objects. Setting the <code>tidy</code> argument
+<code>conf.int = TRUE</code> will return a warning.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='https://generics.r-lib.org/reference/tidy.html'>tidy()</a></code>, <code><a href='https://rdrr.io/pkg/geepack/man/geeglm.html'>geepack::geeglm()</a></code></p></div>
+    <div class='dont-index'><p><code><a href='https://generics.r-lib.org/reference/tidy.html'>tidy()</a></code>, <code><a href='https://rdrr.io/pkg/vars/man/VAR.html'>vars::VAR()</a></code></p></div>
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>A <code><a href='https://tibble.tidyverse.org/reference/tibble.html'>tibble::tibble()</a></code> with columns:</p>
@@ -234,167 +230,36 @@ missingness in the data beforehand.</p>
   <dt>statistic</dt><dd><p>The value of a T-statistic to use in a hypothesis that the regression term is non-zero.</p></dd>
   <dt>std.error</dt><dd><p>The standard error of the regression term.</p></dd>
   <dt>term</dt><dd><p>The name of the regression term.</p></dd>
+  <dt>component</dt><dd><p>Whether a particular term was used to model the mean or the
+    precision in the regression. See details.</p></dd>
 
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'>
-<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'>geepack</span><span class='op'>)</span>
-<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>state</span><span class='op'>)</span>
+    <pre class="examples"><div class='input'><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='http://www.pfaffikus.de'>vars</a></span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='st'>"Canada"</span>, package <span class='op'>=</span> <span class='st'>"vars"</span><span class='op'>)</span>
 
-<span class='va'>ds</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span><span class='op'>(</span><span class='va'>state.region</span>, <span class='va'>state.x77</span><span class='op'>)</span>
+<span class='va'>mod</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/vars/man/VAR.html'>VAR</a></span><span class='op'>(</span><span class='va'>Canada</span>, p <span class='op'>=</span> <span class='fl'>1</span>, type <span class='op'>=</span> <span class='st'>"both"</span><span class='op'>)</span>
 
-<span class='va'>geefit</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/geepack/man/geeglm.html'>geeglm</a></span><span class='op'>(</span><span class='va'>Income</span> <span class='op'>~</span> <span class='va'>Frost</span> <span class='op'>+</span> <span class='va'>Murder</span>,
-  id <span class='op'>=</span> <span class='va'>state.region</span>,
-  data <span class='op'>=</span> <span class='va'>ds</span>, family <span class='op'>=</span> <span class='va'>gaussian</span>,
-  corstr <span class='op'>=</span> <span class='st'>"exchangeable"</span>
-<span class='op'>)</span>
-</div><div class='output co'>#&gt; $fct
-#&gt; function (dose, parm) 
-#&gt; {
-#&gt;     parmMat &lt;- matrix(parmVec, nrow(parm), numParm, byrow = TRUE)
-#&gt;     parmMat[, notFixed] &lt;- parm
-#&gt;     fd(dose, parmMat[, 1], parmMat[, 2], parmMat[, 3], parmMat[, 
-#&gt;         4], parmMat[, 5])
-#&gt; }
-#&gt; &lt;bytecode: 0x7ff319db9d08&gt;
-#&gt; &lt;environment: 0x7ff315d636c0&gt;
-#&gt; 
-#&gt; $ssfct
-#&gt; function (dframe) 
-#&gt; {
-#&gt;     x &lt;- dframe[, 1]
-#&gt;     y &lt;- dframe[, 2]
-#&gt;     cdVal &lt;- findcd(x, y)
-#&gt;     if (useFixed) {
-#&gt;     }
-#&gt;     if (logg) {
-#&gt;         bVal &lt;- 0.75 * sd(log(x[y &gt; quantile(y, 0.75)]))
-#&gt;     }
-#&gt;     else {
-#&gt;         bVal &lt;- 0.75 * sd(x[y &gt; quantile(y, 0.75)])
-#&gt;     }
-#&gt;     befVal &lt;- c(bVal, x[which.max(y)], 1)
-#&gt;     return(c(befVal[1], cdVal, befVal[2:3])[is.na(fixed)])
-#&gt; }
-#&gt; &lt;bytecode: 0x7ff31aa408d0&gt;
-#&gt; &lt;environment: 0x7ff315d60658&gt;
-#&gt; 
-#&gt; $names
-#&gt; [1] "b" "c" "d" "e" "f"
-#&gt; 
-#&gt; $deriv1
-#&gt; function (dose, parm) 
-#&gt; {
-#&gt;     parmMat &lt;- matrix(parmVec, nrow(parm), numParm, byrow = TRUE)
-#&gt;     parmMat[, notFixed] &lt;- parm
-#&gt;     attr(fd(dose, parmMat[, 1], parmMat[, 2], parmMat[, 3], parmMat[, 
-#&gt;         4], parmMat[, 5]), "gradient")[, notFixed]
-#&gt; }
-#&gt; &lt;bytecode: 0x7ff319db70c8&gt;
-#&gt; &lt;environment: 0x7ff315d636c0&gt;
-#&gt; 
-#&gt; $deriv2
-#&gt; NULL
-#&gt; 
-#&gt; $derivx
-#&gt; function (dose, parm) 
-#&gt; {
-#&gt;     parmMat &lt;- matrix(parmVec, nrow(parm), numParm, byrow = TRUE)
-#&gt;     parmMat[, notFixed] &lt;- parm
-#&gt;     dFct &lt;- function(dose, b, c, d, e, f) {
-#&gt;         .expr1 &lt;- d - c
-#&gt;         .expr4 &lt;- (dose - e)/b
-#&gt;         .expr5 &lt;- .expr4^2
-#&gt;         .expr6 &lt;- sqrt(.expr5)
-#&gt;         .expr9 &lt;- exp(-0.5 * .expr6^f)
-#&gt;         .value &lt;- c + .expr1 * .expr9
-#&gt;         .grad &lt;- array(0, c(length(.value), 1L), list(NULL, c("dose")))
-#&gt;         .grad[, "dose"] &lt;- -(.expr1 * (.expr9 * (0.5 * (.expr6^(f - 
-#&gt;             1) * (f * (0.5 * (2 * (1/b * .expr4) * .expr5^-0.5)))))))
-#&gt;         attr(.value, "gradient") &lt;- .grad
-#&gt;         .value
-#&gt;     }
-#&gt;     attr(dFct(dose, parmMat[, 1], parmMat[, 2], parmMat[, 3], 
-#&gt;         parmMat[, 4], parmMat[, 5]), "gradient")
-#&gt; }
-#&gt; &lt;bytecode: 0x7ff319db8440&gt;
-#&gt; &lt;environment: 0x7ff315d636c0&gt;
-#&gt; 
-#&gt; $edfct
-#&gt; function (parm, respl, reference, type, ...) 
-#&gt; {
-#&gt;     parmVec[notFixed] &lt;- parm
-#&gt;     p &lt;- absToRel(parmVec, abs(respl), type)
-#&gt;     if (identical(type, "absolute")) {
-#&gt;         p &lt;- 100 - p
-#&gt;     }
-#&gt;     if (identical(type, "relative") &amp;&amp; (parmVec[1] &lt; 0) &amp;&amp; (reference == 
-#&gt;         "control")) {
-#&gt;         p &lt;- 100 - p
-#&gt;     }
-#&gt;     pProp &lt;- 1 - (100 - p)/100
-#&gt;     EDfct &lt;- function(b, c, d, e, f) {
-#&gt;         .expr2 &lt;- -2 * log(pProp)
-#&gt;         .expr4 &lt;- sign(respl) * .expr2^(1/f)
-#&gt;         .value &lt;- b * .expr4 + e
-#&gt;         .grad &lt;- array(0, c(length(.value), 5L), list(NULL, c("b", 
-#&gt;             "c", "d", "e", "f")))
-#&gt;         .grad[, "b"] &lt;- .expr4
-#&gt;         .grad[, "c"] &lt;- 0
-#&gt;         .grad[, "d"] &lt;- 0
-#&gt;         .grad[, "e"] &lt;- 1
-#&gt;         .grad[, "f"] &lt;- -(b * (.expr4 * (log(.expr2) * (1/f^2))))
-#&gt;         attr(.value, "gradient") &lt;- .grad
-#&gt;         .value
-#&gt;     }
-#&gt;     EDp &lt;- EDfct(parmVec[1], parmVec[2], parmVec[3], parmVec[4], 
-#&gt;         parmVec[5])
-#&gt;     EDder &lt;- attr(EDfct(parmVec[1], parmVec[2], parmVec[3], parmVec[4], 
-#&gt;         parmVec[5]), "gradient")
-#&gt;     return(list(EDp, EDder[notFixed]))
-#&gt; }
-#&gt; &lt;bytecode: 0x7ff319dad790&gt;
-#&gt; &lt;environment: 0x7ff315d636c0&gt;
-#&gt; 
-#&gt; $name
-#&gt; [1] "family"
-#&gt; 
-#&gt; $text
-#&gt; [1] "Gaussian"
-#&gt; 
-#&gt; $noParm
-#&gt; [1] 5
-#&gt; 
-#&gt; $lowerAs
-#&gt; function (parm) 
-#&gt; {
-#&gt;     parmVec[indexVec] &lt;- parm
-#&gt;     parmVec[parmNo]
-#&gt; }
-#&gt; &lt;bytecode: 0x7ff319c06670&gt;
-#&gt; &lt;environment: 0x7ff315d61b58&gt;
-#&gt; 
-#&gt; $upperAs
-#&gt; function (parm) 
-#&gt; {
-#&gt;     parmVec[indexVec] &lt;- parm
-#&gt;     parmVec[parmNo]
-#&gt; }
-#&gt; &lt;bytecode: 0x7ff319c06670&gt;
-#&gt; &lt;environment: 0x7ff315d5deb0&gt;
-#&gt; 
-#&gt; $monoton
-#&gt; [1] NA
-#&gt; 
-#&gt; $fixed
-#&gt; [1] NA NA NA NA NA
-#&gt; 
-#&gt; attr(,"class")
-#&gt; [1] "gaussian"</div><div class='output co'>#&gt; <span class='error'>Error in glm(formula = Income ~ Frost + Murder, family = gaussian, data = ds): 'family' not recognized</span></div><div class='input'>
-<span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>geefit</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='error'>Error in tidy(geefit): object 'geefit' not found</span></div><div class='input'><span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>geefit</span>, conf.int <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='error'>Error in tidy(geefit, conf.int = TRUE): object 'geefit' not found</span></div></pre>
+<span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>mod</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 24 x 6</span><span>
+#&gt;    group term     estimate std.error statistic  p.value
+#&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>       </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #555555;'> 1</span><span> e     e.l1       1.24      0.086</span><span style='text-decoration: underline;'>3</span><span>     14.4  1.82</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-23</span><span>
+#&gt; </span><span style='color: #555555;'> 2</span><span> e     prod.l1    0.195     0.036</span><span style='text-decoration: underline;'>1</span><span>      5.39 7.49</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>- 7</span><span>
+#&gt; </span><span style='color: #555555;'> 3</span><span> e     rw.l1     -</span><span style='color: #BB0000;'>0.067</span><span style='color: #BB0000;text-decoration: underline;'>8</span><span>    0.028</span><span style='text-decoration: underline;'>3</span><span>     -</span><span style='color: #BB0000;'>2.40</span><span> 1.90</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>- 2</span><span>
+#&gt; </span><span style='color: #555555;'> 4</span><span> e     U.l1       0.623     0.169       3.68 4.30</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>- 4</span><span>
+#&gt; </span><span style='color: #555555;'> 5</span><span> e     const   -</span><span style='color: #BB0000;'>279.</span><span>       75.2        -</span><span style='color: #BB0000;'>3.71</span><span> 3.92</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>- 4</span><span>
+#&gt; </span><span style='color: #555555;'> 6</span><span> e     trend     -</span><span style='color: #BB0000;'>0.040</span><span style='color: #BB0000;text-decoration: underline;'>7</span><span>    0.019</span><span style='text-decoration: underline;'>7</span><span>     -</span><span style='color: #BB0000;'>2.06</span><span> 4.24</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>- 2</span><span>
+#&gt; </span><span style='color: #555555;'> 7</span><span> prod  e.l1       1.24      0.086</span><span style='text-decoration: underline;'>3</span><span>     14.4  1.82</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-23</span><span>
+#&gt; </span><span style='color: #555555;'> 8</span><span> prod  prod.l1    0.195     0.036</span><span style='text-decoration: underline;'>1</span><span>      5.39 7.49</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>- 7</span><span>
+#&gt; </span><span style='color: #555555;'> 9</span><span> prod  rw.l1     -</span><span style='color: #BB0000;'>0.067</span><span style='color: #BB0000;text-decoration: underline;'>8</span><span>    0.028</span><span style='text-decoration: underline;'>3</span><span>     -</span><span style='color: #BB0000;'>2.40</span><span> 1.90</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>- 2</span><span>
+#&gt; </span><span style='color: #555555;'>10</span><span> prod  U.l1       0.623     0.169       3.68 4.30</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>- 4</span><span>
+#&gt; </span><span style='color: #555555;'># … with 14 more rows</span><span></div><div class='input'><span class='fu'><a href='https://generics.r-lib.org/reference/glance.html'>glance</a></span><span class='op'>(</span><span class='va'>mod</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 1 x 4</span><span>
+#&gt;   lag.order logLik  nobs     n
+#&gt;       </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #555555;'>1</span><span>         1  -</span><span style='color: #BB0000;'>208.</span><span>    83    84</div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

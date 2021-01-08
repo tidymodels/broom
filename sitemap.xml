@@ -187,6 +187,9 @@
     <loc>https://broom.tidymodels.org/reference/glance.coxph.html</loc>
   </url>
   <url>
+    <loc>https://broom.tidymodels.org/reference/glance.crr.html</loc>
+  </url>
+  <url>
     <loc>https://broom.tidymodels.org/reference/glance.cv.glmnet.html</loc>
   </url>
   <url>
@@ -334,6 +337,9 @@
     <loc>https://broom.tidymodels.org/reference/glance.svyolr.html</loc>
   </url>
   <url>
+    <loc>https://broom.tidymodels.org/reference/glance.varest.html</loc>
+  </url>
+  <url>
     <loc>https://broom.tidymodels.org/reference/glance_optim.html</loc>
   </url>
   <url>
@@ -434,6 +440,9 @@
   </url>
   <url>
     <loc>https://broom.tidymodels.org/reference/tidy.coxph.html</loc>
+  </url>
+  <url>
+    <loc>https://broom.tidymodels.org/reference/tidy.crr.html</loc>
   </url>
   <url>
     <loc>https://broom.tidymodels.org/reference/tidy.cv.glmnet.html</loc>
@@ -671,6 +680,9 @@
   </url>
   <url>
     <loc>https://broom.tidymodels.org/reference/tidy.ts.html</loc>
+  </url>
+  <url>
+    <loc>https://broom.tidymodels.org/reference/tidy.varest.html</loc>
   </url>
   <url>
     <loc>https://broom.tidymodels.org/reference/tidy.zoo.html</loc>
