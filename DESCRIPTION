@@ -527,7 +527,6 @@ Imports:
     stringr,
     tibble (>= 3.0.0),
     tidyr (>= 1.0.0)
-Remotes: alexpghayes/modeltests
 Suggests:
     AER,
     akima,
