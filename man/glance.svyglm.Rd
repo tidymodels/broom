@@ -73,7 +73,6 @@ glance(m)
 \references{
 Lumley T, Scott A (2015). AIC and BIC for modelling with complex
 survey data. \emph{Journal of Survey Statistics and Methodology}, 3(1).
-\url{https://doi.org/10.1093/jssam/smu021}.
 }
 \seealso{
 \code{\link[survey:svyglm]{survey::svyglm()}}, \code{\link[stats:glm]{stats::glm()}}, \link[survey:anova.svyglm]{survey::anova.svyglm}

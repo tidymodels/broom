@@ -540,6 +540,7 @@ globalVariables(
     "expCIWidth",
     "fit",
     "GCV",
+    "group",
     "group1",
     "group2",
     "hat",
