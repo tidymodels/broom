@@ -11,6 +11,8 @@ improves functionality of many existing tidiers!
 * Add an `augment()` method for `gam` objects (`#975` and `#645` by `@vincentarelbundock`)
 * Add tidiers for `vars` objects (`#979` and `#161` by `@vincentarelbundock` and `@Diego-MX`)
 
+This release also restores tidiers for `felm` objects from the `lfe` package, which was recently unarchived from CRAN.
+
 #### Improvements to existing tidiers
 
 * `tidy.emmGrid` can now return `std.error` and `conf.*` columns at the same time. (`#962` by `@vincentarelbundock` and `@jmbarbone`)
