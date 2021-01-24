@@ -1,3 +1,17 @@
+# broom 0.7.4
+
+This is a resubmission following request to notify maintainers of 2 newly broken
+packages. We filed notes in the issues trackers of the two affected packages,
+rstatix and tadaatoolbox, on January 15th, with notes on the specific causes
+for breakages and proposed changes to their codebase:
+
+* https://github.com/tadaadata/tadaatoolbox/issues/33
+* https://github.com/kassambara/rstatix/issues/89
+
+While we have not received responses from maintainers of either project, we are
+resubmitting now following request on January 12th to fix package breakages 
+by January 26th.
+
 ## Test environments
 
 - local mac OS  install: R 3.6.3
@@ -14,4 +28,4 @@
 
 We checked 170 reverse dependencies (158 from CRAN + 12 from BioConductor), 
 comparing R CMD check results across CRAN and dev versions of this package.
-We saw no new problems.
+We saw new ERRORs in 2 CRAN packages, rstatix and tadaatoolbox.
