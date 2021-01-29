@@ -94,7 +94,7 @@
         <a class="navbar-brand" href="../index.html">broom</a>
         <div class="info hidden-xs hidden-sm">
           <span class="partof">part of <a href="https://tidymodels.org">tidymodels</a></span>
-          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.7.3.9000</span>
+          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.7.4.9000</span>
         </div>
       </div>
     </div>
@@ -156,13 +156,33 @@
       <small>Source: <a href='https://github.com/tidymodels/broom/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
-    <div id="broom-0739000" class="section level1">
-<h1 class="page-header" data-toc-text="0.7.3.9000">
-<a href="#broom-0739000" class="anchor"></a>broom 0.7.3.9000<small> Unreleased </small>
+    <div id="broom-0749000" class="section level1">
+<h1 class="page-header" data-toc-text="0.7.4.9000">
+<a href="#broom-0749000" class="anchor"></a>broom 0.7.4.9000<small> Unreleased </small>
 </h1>
-<p>To be released as 0.7.4.</p>
+<p>To be released as broom 0.7.5.</p>
+</div>
+    <div id="broom-074" class="section level1">
+<h1 class="page-header" data-toc-text="0.7.4">
+<a href="#broom-074" class="anchor"></a>broom 0.7.4<small> 2021-01-29 </small>
+</h1>
+<p>broom 0.7.4 introduces tidier support for a number of new model objects and improves functionality of many existing tidiers!</p>
+<div id="new-tidiers" class="section level4">
+<h4 class="hasAnchor">
+<a href="#new-tidiers" class="anchor"></a>New Tidiers</h4>
 <ul>
 <li>Add tidiers for <code>Rchoice</code> objects (<code><a href='https://github.com/tidymodels/broom/issues/961'>#961</a></code> by <code>@vincentarelbundock</code> and <code>@Nateme16</code>)</li>
+<li>Add tidiers for objects produced by <code><a href="https://rdrr.io/pkg/car/man/leveneTest.html">car::leveneTest</a></code> (<code><a href='https://github.com/tidymodels/broom/issues/968'>#968</a></code> by <code>@vincentarelbundock</code> and <code>@mkirzon</code>)</li>
+<li>Add tidiers for objects produced by <code><a href="https://rdrr.io/pkg/cmprsk/man/crr.html">cmprsk::crr</a></code> (<code><a href='https://github.com/tidymodels/broom/issues/971'>#971</a></code> and <code><a href='https://github.com/tidymodels/broom/issues/552'>#552</a></code> by <code>@vincentarelbundock</code> and <code>@margarethannum</code>)</li>
+<li>Add an <code><a href="https://generics.r-lib.org/reference/augment.html">augment()</a></code> method for <code>gam</code> objects (<code><a href='https://github.com/tidymodels/broom/issues/975'>#975</a></code> and <code><a href='https://github.com/tidymodels/broom/issues/645'>#645</a></code> by <code>@vincentarelbundock</code>)</li>
+<li>Add tidiers for <code>vars</code> objects (<code><a href='https://github.com/tidymodels/broom/issues/979'>#979</a></code> and <code><a href='https://github.com/tidymodels/broom/issues/161'>#161</a></code> by <code>@vincentarelbundock</code> and <code>@Diego-MX</code>)</li>
+</ul>
+<p>This release also restores tidiers for <code>felm</code> objects from the <code>lfe</code> package, which was recently unarchived from CRAN.</p>
+</div>
+<div id="improvements-to-existing-tidiers" class="section level4">
+<h4 class="hasAnchor">
+<a href="#improvements-to-existing-tidiers" class="anchor"></a>Improvements to existing tidiers</h4>
+<ul>
 <li>
 <code>tidy.emmGrid</code> can now return <code>std.error</code> and <code>conf.*</code> columns at the same time. (<code><a href='https://github.com/tidymodels/broom/issues/962'>#962</a></code> by <code>@vincentarelbundock</code> and <code>@jmbarbone</code>)</li>
 <li>
@@ -173,14 +193,11 @@
 <code>augment.lm</code> now works when some regression weights are equal to zero (<code><a href='https://github.com/tidymodels/broom/issues/965'>#965</a></code> by <code>@vincentarelbundock</code> and <code>@vnijs</code>)</li>
 <li>
 <code>tidy.coxph</code> can now handle models utilizing penalized/clustering terms (<code><a href='https://github.com/tidymodels/broom/issues/966'>#966</a></code> and <code><a href='https://github.com/tidymodels/broom/issues/969'>#969</a></code> by <code>@vincentarelbundock</code>, <code>@matthieu-faron</code>, and <code>@KZARCA</code>)</li>
-<li>Add tidiers for objects produced by <code><a href="https://rdrr.io/pkg/car/man/leveneTest.html">car::leveneTest</a></code> (<code><a href='https://github.com/tidymodels/broom/issues/968'>#968</a></code> by <code>@vincentarelbundock</code> and <code>@mkirzon</code>)</li>
-<li>Add tidiers for objects produced by <code><a href="https://rdrr.io/pkg/cmprsk/man/crr.html">cmprsk::crr</a></code> (<code><a href='https://github.com/tidymodels/broom/issues/971'>#971</a></code> and <code><a href='https://github.com/tidymodels/broom/issues/552'>#552</a></code> by <code>@vincentarelbundock</code> and <code>@margarethannum</code>)</li>
 <li>Fix bug in <code>tidy.speedglm</code> on R 4.0.0+ (<code><a href='https://github.com/tidymodels/broom/issues/974'>#974</a></code> by <code>@uqzwang</code>)</li>
-<li>Add <code>augment.gam</code> (<code><a href='https://github.com/tidymodels/broom/issues/975'>#975</a></code> and <code><a href='https://github.com/tidymodels/broom/issues/645'>#645</a></code> by <code>@vincentarelbundock</code>)</li>
 <li>tidy.multinom works with matrix response (<code><a href='https://github.com/tidymodels/broom/issues/977'>#977</a></code> and <code><a href='https://github.com/tidymodels/broom/issues/666'>#666</a></code> by <code>@vincentarelbundock</code> and <code>@atyre2</code>)</li>
-<li>Add tidiers for <code>vars</code> objects (<code><a href='https://github.com/tidymodels/broom/issues/979'>#979</a></code> and <code><a href='https://github.com/tidymodels/broom/issues/161'>#161</a></code> by <code>@vincentarelbundock</code> and <code>@Diego-MX</code>)</li>
 <li>Various bug fixes and improvements to documentation and errors.</li>
 </ul>
+</div>
 </div>
     <div id="broom-073" class="section level1">
 <h1 class="page-header" data-toc-text="0.7.3">
@@ -211,18 +228,18 @@
 <a href="#broom-071" class="anchor"></a>broom 0.7.1<small> 2020-10-01 </small>
 </h1>
 <p>While broom 0.7.1 is a minor release, it includes a number of exciting new features and bug fixes!</p>
-<div id="new-tidiers" class="section level4">
+<div id="new-tidiers-1" class="section level4">
 <h4 class="hasAnchor">
-<a href="#new-tidiers" class="anchor"></a>New tidiers</h4>
+<a href="#new-tidiers-1" class="anchor"></a>New tidiers</h4>
 <ul>
 <li>Add tidiers for <code>margins</code> objects. (<code><a href='https://github.com/tidymodels/broom/issues/700'>#700</a></code> by <code>@grantmcdermott</code>)</li>
 <li>Added tidier methods for <code>mlogit</code> objects (<code><a href='https://github.com/tidymodels/broom/issues/887'>#887</a></code> by <code>@gregmacfarlane</code>)</li>
 <li>Add <code><a href="../reference/glance.coeftest.html">glance.coeftest()</a></code> method (<code><a href='https://github.com/tidymodels/broom/issues/932'>#932</a></code> by <code>@grantmcdermott</code>)</li>
 </ul>
 </div>
-<div id="improvements-to-existing-tidiers" class="section level4">
+<div id="improvements-to-existing-tidiers-1" class="section level4">
 <h4 class="hasAnchor">
-<a href="#improvements-to-existing-tidiers" class="anchor"></a>Improvements to existing tidiers</h4>
+<a href="#improvements-to-existing-tidiers-1" class="anchor"></a>Improvements to existing tidiers</h4>
 <p>One of the more major improvements in this release is the addition of the <code>interval</code> argument to some <code>augment</code> methods for confidence, prediction, and credible intervals. These columns will be consistently labeled <code>.lower</code> and <code>.upper</code>! (<code><a href='https://github.com/tidymodels/broom/issues/908'>#908</a></code> by <code>@grantmcdermott</code>, <code><a href='https://github.com/tidymodels/broom/issues/925'>#925</a></code> by <code>@bwiernik</code>)</p>
 <p>In addition…</p>
 <ul>
@@ -326,9 +343,9 @@
 <li><p>The <code>.resid</code> column in the output of <code>augment().*</code> methods is now consistently defined as <code>y - y_hat</code></p></li>
 </ul>
 </div>
-<div id="new-tidiers-1" class="section level2">
+<div id="new-tidiers-2" class="section level2">
 <h2 class="hasAnchor">
-<a href="#new-tidiers-1" class="anchor"></a>New tidiers</h2>
+<a href="#new-tidiers-2" class="anchor"></a>New tidiers</h2>
 <ul>
 <li>
 <code>anova</code> objects from the <code>car</code> package (<a href='https://github.com/tidymodels/broom/issues/754'>#754</a>)</li>
@@ -363,11 +380,11 @@
 <li>We have restored a simplified version of <code><a href="../reference/glance.aov.html">glance.aov()</a></code>, which used to inherit from the <code><a href="../reference/glance.lm.html">glance.lm()</a></code> method and now contains only the following columns: <code>logLik</code>, <code>AIC</code>, <code>BIC, deviance</code>, <code>df.residual</code>, and <code>nobs</code> (see <a href='https://github.com/tidymodels/broom/issues/212'>#212</a>). Note that <code><a href="../reference/tidy.aov.html">tidy.aov()</a></code> gives more complete information about degrees of freedom in an <code>aov</code> object.</li>
 </ul>
 </div>
-<div id="improvements-to-existing-tidiers-1" class="section level2">
+<div id="improvements-to-existing-tidiers-2" class="section level2">
 <h2 class="hasAnchor">
-<a href="#improvements-to-existing-tidiers-1" class="anchor"></a>Improvements to existing tidiers</h2>
+<a href="#improvements-to-existing-tidiers-2" class="anchor"></a>Improvements to existing tidiers</h2>
 <ul>
-<li><p><code>tidy.felm()</code> now has a <code>robust = TRUE/FALSE</code> option that supports robust and cluster standard errors. (<a href='https://github.com/tidymodels/broom/issues/781'>#781</a> by <a href='https://github.com/kuriwaki'>@kuriwaki</a>)</p></li>
+<li><p><code><a href="../reference/tidy.felm.html">tidy.felm()</a></code> now has a <code>robust = TRUE/FALSE</code> option that supports robust and cluster standard errors. (<a href='https://github.com/tidymodels/broom/issues/781'>#781</a> by <a href='https://github.com/kuriwaki'>@kuriwaki</a>)</p></li>
 <li><p>Make <code>.fitted</code> values respect <code>type.predict</code> argument of <code><a href="../reference/augment.clm.html">augment.clm()</a></code>. (<a href='https://github.com/tidymodels/broom/issues/617'>#617</a>)</p></li>
 <li><p>Return factor rather than numeric class predictions in <code>.fitted</code> of <code><a href="../reference/augment.polr.html">augment.polr()</a></code>. (<a href='https://github.com/tidymodels/broom/issues/619'>#619</a>) Add an option to return <code>p.values</code> in <code><a href="../reference/tidy.polr.html">tidy.polr()</a></code>. (<a href='https://github.com/tidymodels/broom/issues/833'>#833</a> by <a href='https://github.com/LukasWallrich'>@LukasWallrich</a>)</p></li>
 <li><p><code><a href="../reference/tidy.kmeans.html">tidy.kmeans()</a></code> now uses the names of the input variables in the output by default. Set <code>col.names = NULL</code> to recover the old behavior.</p></li>

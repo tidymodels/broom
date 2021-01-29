@@ -100,7 +100,7 @@ specify which components to return." />
         <a class="navbar-brand" href="../index.html">broom</a>
         <div class="info hidden-xs hidden-sm">
           <span class="partof">part of <a href="https://tidymodels.org">tidymodels</a></span>
-          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.7.3.9000</span>
+          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.7.4.9000</span>
         </div>
       </div>
     </div>
@@ -329,7 +329,7 @@ the <code>data</code> argument.</p></td>
 <span class='va'>au</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://generics.r-lib.org/reference/augment.html'>augment</a></span><span class='op'>(</span><span class='va'>nes2a</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; <span class='error'>Error in augment(nes2a): object 'nes2a' not found</span></div><div class='input'><span class='va'>au</span>
 </div><div class='output co'>#&gt; <span class='error'>Error in eval(expr, envir, enclos): object 'au' not found</span></div><div class='input'><span class='fu'><a href='https://dplyr.tidyverse.org/reference/count.html'>count</a></span><span class='op'>(</span><span class='va'>au</span>, <span class='va'>.class</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='error'>Error in group_by(x, ..., .add = TRUE, .drop = .drop): object 'au' not found</span></div><div class='input'>
+</div><div class='output co'>#&gt; <span class='error'>Error in count(au, .class): object 'au' not found</span></div><div class='input'>
 <span class='co'># if the original data is provided, it leads to NAs in new columns</span>
 <span class='co'># for rows that weren't predicted</span>
 <span class='va'>au2</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://generics.r-lib.org/reference/augment.html'>augment</a></span><span class='op'>(</span><span class='va'>nes2a</span>, data <span class='op'>=</span> <span class='va'>election</span><span class='op'>)</span>
