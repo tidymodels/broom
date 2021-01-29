@@ -1,7 +1,7 @@
 Type: Package
 Package: broom
 Title: Convert Statistical Objects into Tidy Tibbles
-Version: 0.7.3.9000
+Version: 0.7.4
 Authors@R:
     c(person(given = "David",
              family = "Robinson",
@@ -527,7 +527,6 @@ Imports:
     stringr,
     tibble (>= 3.0.0),
     tidyr (>= 1.0.0)
-Remotes: alexpghayes/modeltests
 Suggests:
     AER,
     akima,
@@ -569,6 +568,7 @@ Suggests:
     Lahman,
     lavaan,
     leaps,
+    lfe,
     lm.beta,
     lme4,
     lmodel2,
@@ -659,6 +659,7 @@ Collate:
     'ks-tidiers.R'
     'lavaan-tidiers.R'
     'leaps.R'
+    'lfe-tidiers.R'
     'list-irlba.R'
     'list-optim-tidiers.R'
     'list-svd-tidiers.R'

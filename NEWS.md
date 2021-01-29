@@ -1,19 +1,27 @@
-# broom 0.7.3.9000
+# broom 0.7.4
 
-To be released as 0.7.4.
+broom 0.7.4 introduces tidier support for a number of new model objects and 
+improves functionality of many existing tidiers!
+
+#### New Tidiers
 
 * Add tidiers for `Rchoice` objects (`#961` by `@vincentarelbundock` and `@Nateme16`)
+* Add tidiers for objects produced by `car::leveneTest` (`#968` by `@vincentarelbundock` and `@mkirzon`)
+* Add tidiers for objects produced by `cmprsk::crr` (`#971` and `#552` by `@vincentarelbundock` and `@margarethannum`)
+* Add an `augment()` method for `gam` objects (`#975` and `#645` by `@vincentarelbundock`)
+* Add tidiers for `vars` objects (`#979` and `#161` by `@vincentarelbundock` and `@Diego-MX`)
+
+This release also restores tidiers for `felm` objects from the `lfe` package, which was recently unarchived from CRAN.
+
+#### Improvements to existing tidiers
+
 * `tidy.emmGrid` can now return `std.error` and `conf.*` columns at the same time. (`#962` by `@vincentarelbundock` and `@jmbarbone`)
 * `tidy.garch` can now produce confidence intervals (`#964` by `@vincentarelbundock` and `@IndrajeetPatil`)
 * `tidy.coxph` can now report confidence intervals on models utilizing penalized/clustering terms (`#966` by `@vincentarelbundock` and `@matthieu-faron`)
 * `augment.lm` now works when some regression weights are equal to zero (`#965` by `@vincentarelbundock` and `@vnijs`)
 * `tidy.coxph` can now handle models utilizing penalized/clustering terms (`#966` and `#969` by `@vincentarelbundock`, `@matthieu-faron`, and `@KZARCA`)
-* Add tidiers for objects produced by `car::leveneTest` (`#968` by `@vincentarelbundock` and `@mkirzon`)
-* Add tidiers for objects produced by `cmprsk::crr` (`#971` and `#552` by `@vincentarelbundock` and `@margarethannum`)
 * Fix bug in `tidy.speedglm` on R 4.0.0+ (`#974` by `@uqzwang`)
-* Add `augment.gam` (`#975` and `#645` by `@vincentarelbundock`)
 * tidy.multinom works with matrix response (`#977` and `#666` by `@vincentarelbundock` and `@atyre2`)
-* Add tidiers for `vars` objects (`#979` and `#161` by `@vincentarelbundock` and `@Diego-MX`)
 * Various bug fixes and improvements to documentation and errors.
 
 # broom 0.7.3
