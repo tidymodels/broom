@@ -1,3 +1,7 @@
+# broom 0.7.4.9000
+
+To be released as broom 0.7.5.
+
 # broom 0.7.4
 
 broom 0.7.4 introduces tidier support for a number of new model objects and 
