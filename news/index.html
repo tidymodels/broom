@@ -424,7 +424,7 @@
 <li><p>Many <code><a href="https://generics.r-lib.org/reference/glance.html">glance()</a></code> methods now return a <code>nobs</code> column, which contains the number of data points used to fit the model! (<a href='https://github.com/tidymodels/broom/issues/597'>#597</a> by <a href='https://github.com/vincentarelbundock'>@vincentarelbundock</a>)</p></li>
 <li><p><code><a href="https://generics.r-lib.org/reference/tidy.html">tidy()</a></code> no longer checks for a log or logit link when <code>exponentiate = TRUE</code>, and we have refactored to remove extraneous <code>exponentiate</code> arguments. If you set <code>exponentiate = TRUE</code>, we assume you know what you are doing and that you want exponentiated coefficients (and confidence intervals if <code>conf.int = TRUE</code>) regardless of link function.</p></li>
 <li><p>We now use <code><a href="https://rlang.r-lib.org/reference/arg_match.html">rlang::arg_match()</a></code> when possible instead of <code>arg.match()</code> to give more informative errors on argument mismatches.</p></li>
-<li><p>The package’s site has moved from <a href="https://broom.tidyverse.org/" class="uri">https://broom.tidyverse.org/</a> to <a href="https://broom.tidymodels.org/" class="uri">https://broom.tidymodels.org/</a>.</p></li>
+<li><p>The package’s site has moved from https://broom.tidyverse.org/ to https://broom.tidymodels.org/.</p></li>
 <li><p>Revised several vignettes and moved them to the tidymodels.org website. The existing vignettes will now simply link to the revised versions.</p></li>
 <li><p>Many improvements to consistency and clarity of documentation.</p></li>
 <li><p>Various warnings resulting from changes to the tidyr API in v1.0.0 have been fixed. (<a href='https://github.com/tidymodels/broom/issues/870'>#870</a>)</p></li>
@@ -438,7 +438,7 @@
 <a href="#for-developers-and-contributors" class="anchor"></a>For developers and contributors</h2>
 <ul>
 <li><p>Moved core tests to the <code>modeltests</code> package.</p></li>
-<li><p>Generally, after this release, the broom dev team will first ask that attempts to add tidier methods supporting a model object are first directed to the model-owning package. An article describing best practices in doing so can be found on the {tidymodels} website at <a href="https://www.tidymodels.org/learn/develop/broom/" class="uri">https://www.tidymodels.org/learn/develop/broom/</a>, and we will continue adding additional resources to that article as we develop them. In the case that the maintainer is uninterested in taking on the tidier methods, please note this in your issue or PR.</p></li>
+<li><p>Generally, after this release, the broom dev team will first ask that attempts to add tidier methods supporting a model object are first directed to the model-owning package. An article describing best practices in doing so can be found on the {tidymodels} website at https://www.tidymodels.org/learn/develop/broom/, and we will continue adding additional resources to that article as we develop them. In the case that the maintainer is uninterested in taking on the tidier methods, please note this in your issue or PR.</p></li>
 <li><p>Added a new vignette discussing how to implement new tidier methods in non-broom packages.</p></li>
 </ul>
 </div>
@@ -582,7 +582,7 @@
 <li><p>Support for tidying lists return by <code><a href="https://rdrr.io/pkg/irlba/man/irlba.html">irlba::irlba</a></code></p></li>
 <li><p>A truly huge increase in unit tests (<a href='https://github.com/tidymodels/broom/issues/267'>#267</a> by <a href='https://github.com/dchiu911'>@dchiu911</a>)</p></li>
 <li><p>Bug fix for <code>tidy.prcomp</code> when missing labels (<a href='https://github.com/tidymodels/broom/issues/265'>#265</a> by <a href='https://github.com/corybrunson'>@corybrunson</a>)</p></li>
-<li><p>Added a <code>pkgdown</code> site at <a href="https://broom.tidyverse.org/" class="uri">https://broom.tidyverse.org/</a> (<a href='https://github.com/tidymodels/broom/issues/260'>#260</a> by <a href='https://github.com/jayhesselberth'>@jayhesselberth</a>)</p></li>
+<li><p>Added a <code>pkgdown</code> site at https://broom.tidyverse.org/ (<a href='https://github.com/tidymodels/broom/issues/260'>#260</a> by <a href='https://github.com/jayhesselberth'>@jayhesselberth</a>)</p></li>
 <li><p>Added tidiers for <code><a href="https://rdrr.io/pkg/AER/man/ivreg.html">AER::ivreg</a></code> models (<a href='https://github.com/tidymodels/broom/issues/247'>#247</a> by <a href='https://github.com/hughjonesd'>@hughjonesd</a>)</p></li>
 <li><p>Added tidiers for the <code>lavaan</code> package (<a href='https://github.com/tidymodels/broom/issues/233'>#233</a> by <a href='https://github.com/puterleat'>@puterleat</a>)</p></li>
 <li><p>Added <code>conf.int</code> argument to <code>tidy.coxph</code> (<a href='https://github.com/tidymodels/broom/issues/220'>#220</a> by <a href='https://github.com/larmarange'>@larmarange</a>)</p></li>
@@ -702,7 +702,7 @@
 <li><p>Added <code>tidy.aovlist</code> method. This added <code>stringr</code> package to IMPORTS to trim whitespace from the beginning and end of the <code>term</code> and <code>stratum</code> columns. This also required adjusting <code>tidy.aov</code> so that it could handle strata that are missing p-values.</p></li>
 <li><p>Set up <code>glance.lm</code> to work with <code>aov</code> objects along with <code>lm</code> objects.</p></li>
 <li><p>Added <code>tidy</code> and <code>glance</code> for matrix objects, with <code>tidy.matrix</code> converting a matrix to a data frame with rownames included, and <code>glance.matrix</code> returning the same result as <code>glance.data.frame</code>.</p></li>
-<li><p>Changed DESCRIPTION <a href="mailto:Authors@R" class="email">Authors@R</a> to new format</p></li>
+<li><p>Changed DESCRIPTION Authors@R to new format</p></li>
 </ul>
 </div>
     <div id="broom-035" class="section level1">
