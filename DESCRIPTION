@@ -618,6 +618,8 @@ Suggests:
     zoo
 VignetteBuilder:
     knitr
+Remotes:
+    alexpghayes/modeltests@ci.width
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
