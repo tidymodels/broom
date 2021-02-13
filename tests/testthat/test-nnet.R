@@ -18,6 +18,15 @@ test_that("nnet tidier arguments", {
   check_arguments(glance.multinom)
 })
 
+test_that("tidy.multinom when y has only 2 levels",{
+  dfr <- data.frame(a = rnorm(100))
+  dfr$y <- dfr$a + rnorm(100)
+  twolevels <- nnet::multinom(I(y > 0) ~ a, dfr, trace = FALSE)
+  td1 <- tidy(twolevels, conf.int = TRUE)
+  check_tidy_output(td1)
+  check_dims(td1, 2, 8)
+})
+
 test_that("tidy.multinom", {
   td1 <- tidy(fit, conf.int = TRUE)
   td2 <- tidy(fit_matrix_response, conf.int = TRUE)
