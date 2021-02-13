@@ -42,7 +42,17 @@ tidy.multinom <- function(x, conf.int = FALSE, conf.level = .95,
     n_lev <- length(x$lev) 
   }
 
-  col_names <- if (n_lev > 2) colnames(coef(x)) else names(coef(x))
+  # when the dependent variable has only two levels, there is only one set of
+  # coefficients and coef returns a vector instead of a matrix. row.names is
+  # used to fetch y.level column in tidy output.
+  if (n_lev > 2) {
+    col_names <- colnames(coef(x))
+    row_names <- row.names(coef(x))
+  } else {
+    col_names <- names(coef(x))
+    row_names <- 1
+  }
+
   s <- summary(x)
 
   co <- coef(s)
@@ -50,7 +60,7 @@ tidy.multinom <- function(x, conf.int = FALSE, conf.level = .95,
     byrow = FALSE,
     nrow = n_lev - 1,
     dimnames = list(
-      row.names(co),
+      row_names,
       col_names
     )
   )
@@ -60,7 +70,7 @@ tidy.multinom <- function(x, conf.int = FALSE, conf.level = .95,
     byrow = FALSE,
     nrow = n_lev - 1,
     dimnames = list(
-      row.names(se),
+      row_names,
       col_names
     )
   )
