@@ -1,6 +1,4 @@
-# broom 0.7.4.9000
-
-To be released as broom 0.7.5.
+# broom 0.7.5
 
 * Fixed bug in the `nnet::multinom` tidier in the case that the response
 variable has only two levels (`#993` by `@vincentarelbundock` and `@hughjonesd`)
