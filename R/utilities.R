@@ -235,8 +235,8 @@ augment_columns <- function(x, data, newdata = NULL, type, type.predict = type,
   }
 
   if (is.list(pred)) {
-    ret <- data.frame(.fitted = pred$fit)
-    ret$.se.fit <- pred$se.fit
+    ret <- data.frame(.fitted = as.numeric(pred$fit))
+    ret$.se.fit <- as.numeric(pred$se.fit)
   } else {
     ret <- data.frame(.fitted = as.numeric(pred))
   }
