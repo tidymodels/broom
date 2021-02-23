@@ -2,6 +2,8 @@
 
 To be released as broom 0.7.6.
 
+* Fixed bug in `augment` tidiers resulting in `.fitted` and `.se.fit` array columns.
+
 # broom 0.7.5
 
 * Fixed bug in the `nnet::multinom` tidier in the case that the response

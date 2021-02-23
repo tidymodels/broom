@@ -235,10 +235,10 @@ augment_columns <- function(x, data, newdata = NULL, type, type.predict = type,
   }
 
   if (is.list(pred)) {
-    ret <- data.frame(.fitted = pred$fit)
-    ret$.se.fit <- pred$se.fit
+    ret <- data.frame(.fitted = as.vector(pred$fit))
+    ret$.se.fit <- as.vector(pred$se.fit)
   } else {
-    ret <- data.frame(.fitted = as.numeric(pred))
+    ret <- data.frame(.fitted = as.vector(pred))
   }
 
   na_action <- if (isS4(x)) {
