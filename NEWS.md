@@ -3,6 +3,7 @@
 To be released as broom 0.7.6.
 
 * Fixed bug in `augment` tidiers resulting in `.fitted` and `.se.fit` array columns.
+* Add tidiers for `MASS:glm.nb` (`#998` by `@joshyam-k`)
 
 # broom 0.7.5
 
