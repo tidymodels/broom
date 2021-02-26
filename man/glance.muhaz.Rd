@@ -40,11 +40,10 @@ that no longer have a well-defined value are filled in with an \code{NA}
 of the appropriate type.
 }
 \examples{
-
 library(muhaz)
+library(survival)
 
-data(ovarian, package = "survival")
-x <- muhaz::muhaz(ovarian$futime, ovarian$fustat)
+x <- muhaz(ovarian$futime, ovarian$fustat)
 tidy(x)
 glance(x)
 }
