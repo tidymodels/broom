@@ -1,7 +1,7 @@
 #' @templateVar class negbin
 #' @template title_desc_glance
 #'
-#' @param x A `glm.nb` object returned by [MASS::glm.nb()].
+#' @param x A `negbin` object returned by [MASS::glm.nb()].
 #' @template param_unused_dots
 #'
 #' @evalRd return_glance(
@@ -19,7 +19,7 @@
 #'
 #' library(MASS)
 #'
-#'r <- glm.nb(Days ~ Sex/(Age + Eth*Lrn), data = MASS::quine)
+#'r <- glm.nb(Days ~ Sex/(Age + Eth*Lrn), data = quine)
 #'
 #' tidy(r)
 #' glance(r)
@@ -27,9 +27,7 @@
 #' @aliases glm.nb_tidiers
 #' @family glm.nb tidiers
 #' @seealso [glance()], [MASS::glm.nb()]
-
 glance.negbin <- function(x, ...) {
-  
   s <- summary(x)
   
   ret <- tibble(
@@ -44,7 +42,6 @@ glance.negbin <- function(x, ...) {
   )
   
   ret
-  
 }
 
 
@@ -59,10 +56,7 @@ glance.negbin <- function(x, ...) {
 #' @family glm.nb tidiers
 #' @seealso [MASS::glm.nb()]
 #' @export
-#' @include stats-lm-tidiers.R
-
  tidy.negbin <- function(x, conf.int = FALSE, conf.level = 0.95, ...) {
-  
   s <- summary(x, ...)
   
   ret <- tibble(
@@ -79,7 +73,6 @@ glance.negbin <- function(x, ...) {
   }
   
   ret
-  
  }
  
  

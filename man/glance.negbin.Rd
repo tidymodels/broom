@@ -8,7 +8,7 @@
 \method{glance}{negbin}(x, ...)
 }
 \arguments{
-\item{x}{A \code{glm.nb} object returned by \code{\link[MASS:glm.nb]{MASS::glm.nb()}}.}
+\item{x}{A \code{negbin} object returned by \code{\link[MASS:glm.nb]{MASS::glm.nb()}}.}
 
 \item{...}{Additional arguments. Not used. Needed to match generic
 signature only. \strong{Cautionary note:} Misspelled arguments will be
@@ -44,7 +44,7 @@ of the appropriate type.
 
 library(MASS)
 
-r <- glm.nb(Days ~ Sex/(Age + Eth*Lrn), data = MASS::quine)
+r <- glm.nb(Days ~ Sex/(Age + Eth*Lrn), data = quine)
 
 tidy(r)
 glance(r)
