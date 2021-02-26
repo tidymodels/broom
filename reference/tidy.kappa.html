@@ -236,11 +236,11 @@ to <code><a href='https://rdrr.io/pkg/psych/man/kappa.html'>psych::cohen.kappa()
 <span class='va'>ck</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/psych/man/kappa.html'>cohen.kappa</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/cbind.html'>cbind</a></span><span class='op'>(</span><span class='va'>rater1</span>, <span class='va'>rater2</span><span class='op'>)</span><span class='op'>)</span>
 
 <span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>ck</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 2 x 4</span><span>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 2 x 4</span><span>
 #&gt;   type       estimate conf.low conf.high
-#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>         </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span> unweighted    0       -</span><span style='color: #BB0000;'>0.185</span><span>     0.185
-#&gt; </span><span style='color: #555555;'>2</span><span> weighted      0.678    0.430     0.926</div><div class='input'>
+#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>         </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span> unweighted    0       -</span><span style='color: #BB0000;'>0.185</span><span>     0.185
+#&gt; </span><span style='color: #BCBCBC;'>2</span><span> weighted      0.678    0.430     0.926</div><div class='input'>
 <span class='co'># graph the confidence intervals</span>
 <span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://ggplot2.tidyverse.org'>ggplot2</a></span><span class='op'>)</span>
 <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>ck</span><span class='op'>)</span>, <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span><span class='va'>estimate</span>, <span class='va'>type</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>

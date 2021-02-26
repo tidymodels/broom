@@ -233,7 +233,7 @@ the <code>data</code> argument.</p></td>
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
 <span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://glmnet.stanford.edu'>glmnet</a></span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='message'>Loaded glmnet 4.1</span></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span><span class='op'>(</span><span class='fl'>27</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='message'>Loaded glmnet 4.1-1</span></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span><span class='op'>(</span><span class='fl'>27</span><span class='op'>)</span>
 
 <span class='va'>nobs</span> <span class='op'>&lt;-</span> <span class='fl'>100</span>
 <span class='va'>nvar</span> <span class='op'>&lt;-</span> <span class='fl'>50</span>
@@ -246,24 +246,24 @@ the <code>data</code> argument.</p></td>
 <span class='va'>cvfit1</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://glmnet.stanford.edu/reference/cv.glmnet.html'>cv.glmnet</a></span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>y</span><span class='op'>)</span>
 
 <span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>cvfit1</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 74 x 6</span><span>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 74 x 6</span><span>
 #&gt;    lambda estimate std.error conf.low conf.high nzero
-#&gt;     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>
-#&gt; </span><span style='color: #555555;'> 1</span><span>  1.45      17.4      2.28     15.1      19.7     0
-#&gt; </span><span style='color: #555555;'> 2</span><span>  1.32      17.4      2.28     15.1      19.7     1
-#&gt; </span><span style='color: #555555;'> 3</span><span>  1.20      17.2      2.22     15.0      19.5     1
-#&gt; </span><span style='color: #555555;'> 4</span><span>  1.09      17.0      2.15     14.8      19.1     1
-#&gt; </span><span style='color: #555555;'> 5</span><span>  0.997     16.8      2.09     14.7      18.9     1
-#&gt; </span><span style='color: #555555;'> 6</span><span>  0.909     16.7      2.03     14.7      18.7     2
-#&gt; </span><span style='color: #555555;'> 7</span><span>  0.828     16.7      1.99     14.7      18.6     3
-#&gt; </span><span style='color: #555555;'> 8</span><span>  0.754     16.7      1.95     14.7      18.6     5
-#&gt; </span><span style='color: #555555;'> 9</span><span>  0.687     16.8      1.93     14.8      18.7     7
-#&gt; </span><span style='color: #555555;'>10</span><span>  0.626     16.9      1.91     15.0      18.8     7
-#&gt; </span><span style='color: #555555;'># … with 64 more rows</span><span></div><div class='input'><span class='fu'><a href='https://generics.r-lib.org/reference/glance.html'>glance</a></span><span class='op'>(</span><span class='va'>cvfit1</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 1 x 3</span><span>
+#&gt;     </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'> 1</span><span>  1.45      17.4      2.28     15.1      19.7     0
+#&gt; </span><span style='color: #BCBCBC;'> 2</span><span>  1.32      17.4      2.28     15.1      19.7     1
+#&gt; </span><span style='color: #BCBCBC;'> 3</span><span>  1.20      17.2      2.22     15.0      19.5     1
+#&gt; </span><span style='color: #BCBCBC;'> 4</span><span>  1.09      17.0      2.15     14.8      19.1     1
+#&gt; </span><span style='color: #BCBCBC;'> 5</span><span>  0.997     16.8      2.09     14.7      18.9     1
+#&gt; </span><span style='color: #BCBCBC;'> 6</span><span>  0.909     16.7      2.03     14.7      18.7     2
+#&gt; </span><span style='color: #BCBCBC;'> 7</span><span>  0.828     16.7      1.99     14.7      18.6     3
+#&gt; </span><span style='color: #BCBCBC;'> 8</span><span>  0.754     16.7      1.95     14.7      18.6     5
+#&gt; </span><span style='color: #BCBCBC;'> 9</span><span>  0.687     16.8      1.93     14.8      18.7     7
+#&gt; </span><span style='color: #BCBCBC;'>10</span><span>  0.626     16.9      1.91     15.0      18.8     7
+#&gt; </span><span style='color: #949494;'># … with 64 more rows</span><span></div><div class='input'><span class='fu'><a href='https://generics.r-lib.org/reference/glance.html'>glance</a></span><span class='op'>(</span><span class='va'>cvfit1</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tibble: 1 x 3</span><span>
 #&gt;   lambda.min lambda.1se  nobs
-#&gt;        </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>      </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span>      0.828       1.45   100</div><div class='input'>
+#&gt;        </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>      </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span>      0.828       1.45   100</div><div class='input'>
 <span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://ggplot2.tidyverse.org'>ggplot2</a></span><span class='op'>)</span>
 <span class='va'>tidied_cv</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>cvfit1</span><span class='op'>)</span>
 <span class='va'>glance_cv</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://generics.r-lib.org/reference/glance.html'>glance</a></span><span class='op'>(</span><span class='va'>cvfit1</span><span class='op'>)</span>

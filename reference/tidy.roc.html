@@ -219,20 +219,20 @@ the <code>data</code> argument.</p></td>
 
 <span class='va'>td</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span>
 <span class='va'>td</span>
-</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 220 x 3</span><span>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 220 x 3</span><span>
 #&gt;    cutoff     fpr   tpr
-#&gt;     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #555555;'> 1</span><span>  1     0       0    
-#&gt; </span><span style='color: #555555;'> 2</span><span>  1     0.002</span><span style='text-decoration: underline;'>62</span><span> 0.164
-#&gt; </span><span style='color: #555555;'> 3</span><span>  0.972 0.003</span><span style='text-decoration: underline;'>50</span><span> 0.164
-#&gt; </span><span style='color: #555555;'> 4</span><span>  0.968 0.003</span><span style='text-decoration: underline;'>50</span><span> 0.182
-#&gt; </span><span style='color: #555555;'> 5</span><span>  0.964 0.003</span><span style='text-decoration: underline;'>50</span><span> 0.189
-#&gt; </span><span style='color: #555555;'> 6</span><span>  0.96  0.003</span><span style='text-decoration: underline;'>50</span><span> 0.201
-#&gt; </span><span style='color: #555555;'> 7</span><span>  0.932 0.004</span><span style='text-decoration: underline;'>37</span><span> 0.201
-#&gt; </span><span style='color: #555555;'> 8</span><span>  0.91  0.004</span><span style='text-decoration: underline;'>37</span><span> 0.208
-#&gt; </span><span style='color: #555555;'> 9</span><span>  0.908 0.005</span><span style='text-decoration: underline;'>25</span><span> 0.208
-#&gt; </span><span style='color: #555555;'>10</span><span>  0.902 0.005</span><span style='text-decoration: underline;'>25</span><span> 0.214
-#&gt; </span><span style='color: #555555;'># … with 210 more rows</span><span></div><div class='input'>
+#&gt;     </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'> 1</span><span>  1     0       0    
+#&gt; </span><span style='color: #BCBCBC;'> 2</span><span>  1     0.002</span><span style='text-decoration: underline;'>62</span><span> 0.164
+#&gt; </span><span style='color: #BCBCBC;'> 3</span><span>  0.972 0.003</span><span style='text-decoration: underline;'>50</span><span> 0.164
+#&gt; </span><span style='color: #BCBCBC;'> 4</span><span>  0.968 0.003</span><span style='text-decoration: underline;'>50</span><span> 0.182
+#&gt; </span><span style='color: #BCBCBC;'> 5</span><span>  0.964 0.003</span><span style='text-decoration: underline;'>50</span><span> 0.189
+#&gt; </span><span style='color: #BCBCBC;'> 6</span><span>  0.96  0.003</span><span style='text-decoration: underline;'>50</span><span> 0.201
+#&gt; </span><span style='color: #BCBCBC;'> 7</span><span>  0.932 0.004</span><span style='text-decoration: underline;'>37</span><span> 0.201
+#&gt; </span><span style='color: #BCBCBC;'> 8</span><span>  0.91  0.004</span><span style='text-decoration: underline;'>37</span><span> 0.208
+#&gt; </span><span style='color: #BCBCBC;'> 9</span><span>  0.908 0.005</span><span style='text-decoration: underline;'>25</span><span> 0.208
+#&gt; </span><span style='color: #BCBCBC;'>10</span><span>  0.902 0.005</span><span style='text-decoration: underline;'>25</span><span> 0.214
+#&gt; </span><span style='color: #949494;'># … with 210 more rows</span><span></div><div class='input'>
 <span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://ggplot2.tidyverse.org'>ggplot2</a></span><span class='op'>)</span>
 
 <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='va'>td</span>, <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span><span class='va'>fpr</span>, <span class='va'>tpr</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>

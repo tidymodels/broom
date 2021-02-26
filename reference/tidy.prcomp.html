@@ -261,45 +261,45 @@ that SVD is only equivalent to PCA on centered data.</p>
 
 <span class='co'># information about rotation</span>
 <span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>pc</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 200 x 3</span><span>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 200 x 3</span><span>
 #&gt;    row        PC  value
-#&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #555555;'> 1</span><span> Alabama     1 -</span><span style='color: #BB0000;'>0.976</span><span>
-#&gt; </span><span style='color: #555555;'> 2</span><span> Alabama     2  1.12 
-#&gt; </span><span style='color: #555555;'> 3</span><span> Alabama     3 -</span><span style='color: #BB0000;'>0.440</span><span>
-#&gt; </span><span style='color: #555555;'> 4</span><span> Alabama     4  0.155
-#&gt; </span><span style='color: #555555;'> 5</span><span> Alaska      1 -</span><span style='color: #BB0000;'>1.93</span><span> 
-#&gt; </span><span style='color: #555555;'> 6</span><span> Alaska      2  1.06 
-#&gt; </span><span style='color: #555555;'> 7</span><span> Alaska      3  2.02 
-#&gt; </span><span style='color: #555555;'> 8</span><span> Alaska      4 -</span><span style='color: #BB0000;'>0.434</span><span>
-#&gt; </span><span style='color: #555555;'> 9</span><span> Arizona     1 -</span><span style='color: #BB0000;'>1.75</span><span> 
-#&gt; </span><span style='color: #555555;'>10</span><span> Arizona     2 -</span><span style='color: #BB0000;'>0.738</span><span>
-#&gt; </span><span style='color: #555555;'># … with 190 more rows</span><span></div><div class='input'>
+#&gt;    </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>   </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'> 1</span><span> Alabama     1 -</span><span style='color: #BB0000;'>0.976</span><span>
+#&gt; </span><span style='color: #BCBCBC;'> 2</span><span> Alabama     2  1.12 
+#&gt; </span><span style='color: #BCBCBC;'> 3</span><span> Alabama     3 -</span><span style='color: #BB0000;'>0.440</span><span>
+#&gt; </span><span style='color: #BCBCBC;'> 4</span><span> Alabama     4  0.155
+#&gt; </span><span style='color: #BCBCBC;'> 5</span><span> Alaska      1 -</span><span style='color: #BB0000;'>1.93</span><span> 
+#&gt; </span><span style='color: #BCBCBC;'> 6</span><span> Alaska      2  1.06 
+#&gt; </span><span style='color: #BCBCBC;'> 7</span><span> Alaska      3  2.02 
+#&gt; </span><span style='color: #BCBCBC;'> 8</span><span> Alaska      4 -</span><span style='color: #BB0000;'>0.434</span><span>
+#&gt; </span><span style='color: #BCBCBC;'> 9</span><span> Arizona     1 -</span><span style='color: #BB0000;'>1.75</span><span> 
+#&gt; </span><span style='color: #BCBCBC;'>10</span><span> Arizona     2 -</span><span style='color: #BB0000;'>0.738</span><span>
+#&gt; </span><span style='color: #949494;'># … with 190 more rows</span><span></div><div class='input'>
 <span class='co'># information about samples (states)</span>
 <span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>pc</span>, <span class='st'>"samples"</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 200 x 3</span><span>
+</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tibble: 200 x 3</span><span>
 #&gt;    row        PC  value
-#&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #555555;'> 1</span><span> Alabama     1 -</span><span style='color: #BB0000;'>0.976</span><span>
-#&gt; </span><span style='color: #555555;'> 2</span><span> Alabama     2  1.12 
-#&gt; </span><span style='color: #555555;'> 3</span><span> Alabama     3 -</span><span style='color: #BB0000;'>0.440</span><span>
-#&gt; </span><span style='color: #555555;'> 4</span><span> Alabama     4  0.155
-#&gt; </span><span style='color: #555555;'> 5</span><span> Alaska      1 -</span><span style='color: #BB0000;'>1.93</span><span> 
-#&gt; </span><span style='color: #555555;'> 6</span><span> Alaska      2  1.06 
-#&gt; </span><span style='color: #555555;'> 7</span><span> Alaska      3  2.02 
-#&gt; </span><span style='color: #555555;'> 8</span><span> Alaska      4 -</span><span style='color: #BB0000;'>0.434</span><span>
-#&gt; </span><span style='color: #555555;'> 9</span><span> Arizona     1 -</span><span style='color: #BB0000;'>1.75</span><span> 
-#&gt; </span><span style='color: #555555;'>10</span><span> Arizona     2 -</span><span style='color: #BB0000;'>0.738</span><span>
-#&gt; </span><span style='color: #555555;'># … with 190 more rows</span><span></div><div class='input'>
+#&gt;    </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>   </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'> 1</span><span> Alabama     1 -</span><span style='color: #BB0000;'>0.976</span><span>
+#&gt; </span><span style='color: #BCBCBC;'> 2</span><span> Alabama     2  1.12 
+#&gt; </span><span style='color: #BCBCBC;'> 3</span><span> Alabama     3 -</span><span style='color: #BB0000;'>0.440</span><span>
+#&gt; </span><span style='color: #BCBCBC;'> 4</span><span> Alabama     4  0.155
+#&gt; </span><span style='color: #BCBCBC;'> 5</span><span> Alaska      1 -</span><span style='color: #BB0000;'>1.93</span><span> 
+#&gt; </span><span style='color: #BCBCBC;'> 6</span><span> Alaska      2  1.06 
+#&gt; </span><span style='color: #BCBCBC;'> 7</span><span> Alaska      3  2.02 
+#&gt; </span><span style='color: #BCBCBC;'> 8</span><span> Alaska      4 -</span><span style='color: #BB0000;'>0.434</span><span>
+#&gt; </span><span style='color: #BCBCBC;'> 9</span><span> Arizona     1 -</span><span style='color: #BB0000;'>1.75</span><span> 
+#&gt; </span><span style='color: #BCBCBC;'>10</span><span> Arizona     2 -</span><span style='color: #BB0000;'>0.738</span><span>
+#&gt; </span><span style='color: #949494;'># … with 190 more rows</span><span></div><div class='input'>
 <span class='co'># information about PCs</span>
 <span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>pc</span>, <span class='st'>"pcs"</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 4 x 4</span><span>
+</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tibble: 4 x 4</span><span>
 #&gt;      PC std.dev percent cumulative
-#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>      </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span>     1   1.57   0.620       0.620
-#&gt; </span><span style='color: #555555;'>2</span><span>     2   0.995  0.247       0.868
-#&gt; </span><span style='color: #555555;'>3</span><span>     3   0.597  0.089</span><span style='text-decoration: underline;'>1</span><span>      0.957
-#&gt; </span><span style='color: #555555;'>4</span><span>     4   0.416  0.043</span><span style='text-decoration: underline;'>4</span><span>      1    </div><div class='input'>
+#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>      </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span>     1   1.57   0.620       0.620
+#&gt; </span><span style='color: #BCBCBC;'>2</span><span>     2   0.995  0.247       0.868
+#&gt; </span><span style='color: #BCBCBC;'>3</span><span>     3   0.597  0.089</span><span style='text-decoration: underline;'>1</span><span>      0.957
+#&gt; </span><span style='color: #BCBCBC;'>4</span><span>     4   0.416  0.043</span><span style='text-decoration: underline;'>4</span><span>      1    </div><div class='input'>
 <span class='co'># state map</span>
 <span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://dplyr.tidyverse.org'>dplyr</a></span><span class='op'>)</span>
 <span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://ggplot2.tidyverse.org'>ggplot2</a></span><span class='op'>)</span>
@@ -316,20 +316,20 @@ that SVD is only equivalent to PCA on centered data.</p>
 </div><div class='img'><img src='tidy.prcomp-1.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='va'>au</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://generics.r-lib.org/reference/augment.html'>augment</a></span><span class='op'>(</span><span class='va'>pc</span>, data <span class='op'>=</span> <span class='va'>USArrests</span><span class='op'>)</span>
 <span class='va'>au</span>
-</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 50 x 9</span><span>
-#&gt;    .rownames Murder Assault UrbanPop  Rape .fittedPC1 .fittedPC2 .fittedPC3
-#&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>      </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>      </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>      </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>      </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #555555;'> 1</span><span> Alabama     13.2     236       58  21.2    -</span><span style='color: #BB0000;'>0.976</span><span>      1.12      -</span><span style='color: #BB0000;'>0.440</span><span> 
-#&gt; </span><span style='color: #555555;'> 2</span><span> Alaska      10       263       48  44.5    -</span><span style='color: #BB0000;'>1.93</span><span>       1.06       2.02  
-#&gt; </span><span style='color: #555555;'> 3</span><span> Arizona      8.1     294       80  31      -</span><span style='color: #BB0000;'>1.75</span><span>      -</span><span style='color: #BB0000;'>0.738</span><span>      0.054</span><span style='text-decoration: underline;'>2</span><span>
-#&gt; </span><span style='color: #555555;'> 4</span><span> Arkansas     8.8     190       50  19.5     0.140      1.11       0.113 
-#&gt; </span><span style='color: #555555;'> 5</span><span> Californ…    9       276       91  40.6    -</span><span style='color: #BB0000;'>2.50</span><span>      -</span><span style='color: #BB0000;'>1.53</span><span>       0.593 
-#&gt; </span><span style='color: #555555;'> 6</span><span> Colorado     7.9     204       78  38.7    -</span><span style='color: #BB0000;'>1.50</span><span>      -</span><span style='color: #BB0000;'>0.978</span><span>      1.08  
-#&gt; </span><span style='color: #555555;'> 7</span><span> Connecti…    3.3     110       77  11.1     1.34      -</span><span style='color: #BB0000;'>1.08</span><span>      -</span><span style='color: #BB0000;'>0.637</span><span> 
-#&gt; </span><span style='color: #555555;'> 8</span><span> Delaware     5.9     238       72  15.8    -</span><span style='color: #BB0000;'>0.047</span><span style='color: #BB0000;text-decoration: underline;'>2</span><span>    -</span><span style='color: #BB0000;'>0.322</span><span>     -</span><span style='color: #BB0000;'>0.711</span><span> 
-#&gt; </span><span style='color: #555555;'> 9</span><span> Florida     15.4     335       80  31.9    -</span><span style='color: #BB0000;'>2.98</span><span>       0.038</span><span style='text-decoration: underline;'>8</span><span>    -</span><span style='color: #BB0000;'>0.571</span><span> 
-#&gt; </span><span style='color: #555555;'>10</span><span> Georgia     17.4     211       60  25.8    -</span><span style='color: #BB0000;'>1.62</span><span>       1.27      -</span><span style='color: #BB0000;'>0.339</span><span> 
-#&gt; </span><span style='color: #555555;'># … with 40 more rows, and 1 more variable: .fittedPC4 </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span></div><div class='input'>
+</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tibble: 50 x 9</span><span>
+#&gt;    .rownames   Murder Assault UrbanPop  Rape .fittedPC1 .fittedPC2 .fittedPC3
+#&gt;    </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>        </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span>    </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>      </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>      </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>      </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'> 1</span><span> Alabama       13.2     236       58  21.2    -</span><span style='color: #BB0000;'>0.976</span><span>      1.12      -</span><span style='color: #BB0000;'>0.440</span><span> 
+#&gt; </span><span style='color: #BCBCBC;'> 2</span><span> Alaska        10       263       48  44.5    -</span><span style='color: #BB0000;'>1.93</span><span>       1.06       2.02  
+#&gt; </span><span style='color: #BCBCBC;'> 3</span><span> Arizona        8.1     294       80  31      -</span><span style='color: #BB0000;'>1.75</span><span>      -</span><span style='color: #BB0000;'>0.738</span><span>      0.054</span><span style='text-decoration: underline;'>2</span><span>
+#&gt; </span><span style='color: #BCBCBC;'> 4</span><span> Arkansas       8.8     190       50  19.5     0.140      1.11       0.113 
+#&gt; </span><span style='color: #BCBCBC;'> 5</span><span> California     9       276       91  40.6    -</span><span style='color: #BB0000;'>2.50</span><span>      -</span><span style='color: #BB0000;'>1.53</span><span>       0.593 
+#&gt; </span><span style='color: #BCBCBC;'> 6</span><span> Colorado       7.9     204       78  38.7    -</span><span style='color: #BB0000;'>1.50</span><span>      -</span><span style='color: #BB0000;'>0.978</span><span>      1.08  
+#&gt; </span><span style='color: #BCBCBC;'> 7</span><span> Connecticut    3.3     110       77  11.1     1.34      -</span><span style='color: #BB0000;'>1.08</span><span>      -</span><span style='color: #BB0000;'>0.637</span><span> 
+#&gt; </span><span style='color: #BCBCBC;'> 8</span><span> Delaware       5.9     238       72  15.8    -</span><span style='color: #BB0000;'>0.047</span><span style='color: #BB0000;text-decoration: underline;'>2</span><span>    -</span><span style='color: #BB0000;'>0.322</span><span>     -</span><span style='color: #BB0000;'>0.711</span><span> 
+#&gt; </span><span style='color: #BCBCBC;'> 9</span><span> Florida       15.4     335       80  31.9    -</span><span style='color: #BB0000;'>2.98</span><span>       0.038</span><span style='text-decoration: underline;'>8</span><span>    -</span><span style='color: #BB0000;'>0.571</span><span> 
+#&gt; </span><span style='color: #BCBCBC;'>10</span><span> Georgia       17.4     211       60  25.8    -</span><span style='color: #BB0000;'>1.62</span><span>       1.27      -</span><span style='color: #BB0000;'>0.339</span><span> 
+#&gt; </span><span style='color: #949494;'># … with 40 more rows, and 1 more variable: .fittedPC4 &lt;dbl&gt;</span><span></div><div class='input'>
 <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='va'>au</span>, <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span><span class='va'>.fittedPC1</span>, <span class='va'>.fittedPC2</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
   <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_point.html'>geom_point</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span>
   <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_text.html'>geom_text</a></span><span class='op'>(</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>label <span class='op'>=</span> <span class='va'>.rownames</span><span class='op'>)</span>, vjust <span class='op'>=</span> <span class='fl'>1</span>, hjust <span class='op'>=</span> <span class='fl'>1</span><span class='op'>)</span>

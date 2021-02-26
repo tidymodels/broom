@@ -271,6 +271,9 @@
     <loc>https://broom.tidymodels.org/reference/glance.multinom.html</loc>
   </url>
   <url>
+    <loc>https://broom.tidymodels.org/reference/glance.negbin.html</loc>
+  </url>
+  <url>
     <loc>https://broom.tidymodels.org/reference/glance.nlrq.html</loc>
   </url>
   <url>
@@ -578,6 +581,9 @@
   </url>
   <url>
     <loc>https://broom.tidymodels.org/reference/tidy.multinom.html</loc>
+  </url>
+  <url>
+    <loc>https://broom.tidymodels.org/reference/tidy.negbin.html</loc>
   </url>
   <url>
     <loc>https://broom.tidymodels.org/reference/tidy.nlrq.html</loc>

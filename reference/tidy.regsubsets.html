@@ -213,19 +213,19 @@ the <code>data</code> argument.</p></td>
     <pre class="examples"><div class='input'>
 <span class='va'>all_fits</span> <span class='op'>&lt;-</span> <span class='fu'>leaps</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/leaps/man/regsubsets.html'>regsubsets</a></span><span class='op'>(</span><span class='va'>hp</span> <span class='op'>~</span> <span class='va'>.</span>, <span class='va'>mtcars</span><span class='op'>)</span>
 <span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>all_fits</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 8 x 15</span><span>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 8 x 15</span><span>
 #&gt;   `(Intercept)` mpg   cyl   disp  drat  wt    qsec  vs    am    gear  carb 
-#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;lgl&gt;</span><span>         </span><span style='color: #555555;font-style: italic;'>&lt;lgl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;lgl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;lgl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;lgl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;lgl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;lgl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;lgl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;lgl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;lgl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;lgl&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span> TRUE          FALSE TRUE  FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
-#&gt; </span><span style='color: #555555;'>2</span><span> TRUE          FALSE FALSE TRUE  FALSE FALSE FALSE FALSE FALSE FALSE TRUE 
-#&gt; </span><span style='color: #555555;'>3</span><span> TRUE          FALSE FALSE TRUE  FALSE TRUE  FALSE FALSE FALSE FALSE TRUE 
-#&gt; </span><span style='color: #555555;'>4</span><span> TRUE          TRUE  FALSE TRUE  FALSE TRUE  FALSE FALSE FALSE FALSE TRUE 
-#&gt; </span><span style='color: #555555;'>5</span><span> TRUE          TRUE  FALSE TRUE  FALSE TRUE  FALSE TRUE  FALSE FALSE TRUE 
-#&gt; </span><span style='color: #555555;'>6</span><span> TRUE          TRUE  TRUE  TRUE  FALSE TRUE  FALSE TRUE  FALSE FALSE TRUE 
-#&gt; </span><span style='color: #555555;'>7</span><span> TRUE          TRUE  TRUE  TRUE  FALSE TRUE  FALSE TRUE  TRUE  FALSE TRUE 
-#&gt; </span><span style='color: #555555;'>8</span><span> TRUE          TRUE  TRUE  TRUE  FALSE TRUE  FALSE TRUE  TRUE  TRUE  TRUE 
-#&gt; </span><span style='color: #555555;'># … with 4 more variables: r.squared </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, adj.r.squared </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, BIC </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,</span><span>
-#&gt; </span><span style='color: #555555;'>#   mallows_cp </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span></div></span></pre>
+#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;lgl&gt;</span><span>         </span><span style='color: #949494;font-style: italic;'>&lt;lgl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;lgl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;lgl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;lgl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;lgl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;lgl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;lgl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;lgl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;lgl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;lgl&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span> TRUE          FALSE TRUE  FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+#&gt; </span><span style='color: #BCBCBC;'>2</span><span> TRUE          FALSE FALSE TRUE  FALSE FALSE FALSE FALSE FALSE FALSE TRUE 
+#&gt; </span><span style='color: #BCBCBC;'>3</span><span> TRUE          FALSE FALSE TRUE  FALSE TRUE  FALSE FALSE FALSE FALSE TRUE 
+#&gt; </span><span style='color: #BCBCBC;'>4</span><span> TRUE          TRUE  FALSE TRUE  FALSE TRUE  FALSE FALSE FALSE FALSE TRUE 
+#&gt; </span><span style='color: #BCBCBC;'>5</span><span> TRUE          TRUE  FALSE TRUE  FALSE TRUE  FALSE TRUE  FALSE FALSE TRUE 
+#&gt; </span><span style='color: #BCBCBC;'>6</span><span> TRUE          TRUE  TRUE  TRUE  FALSE TRUE  FALSE TRUE  FALSE FALSE TRUE 
+#&gt; </span><span style='color: #BCBCBC;'>7</span><span> TRUE          TRUE  TRUE  TRUE  FALSE TRUE  FALSE TRUE  TRUE  FALSE TRUE 
+#&gt; </span><span style='color: #BCBCBC;'>8</span><span> TRUE          TRUE  TRUE  TRUE  FALSE TRUE  FALSE TRUE  TRUE  TRUE  TRUE 
+#&gt; </span><span style='color: #949494;'># … with 4 more variables: r.squared &lt;dbl&gt;, adj.r.squared &lt;dbl&gt;, BIC &lt;dbl&gt;,</span><span>
+#&gt; </span><span style='color: #949494;'>#   mallows_cp &lt;dbl&gt;</span><span></div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

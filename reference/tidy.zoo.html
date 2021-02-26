@@ -226,20 +226,20 @@ the <code>data</code> argument.</p></td>
 <span class='va'>Z</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/zoo/man/zoo.html'>zoo</a></span><span class='op'>(</span><span class='va'>Z.data</span>, <span class='va'>Z.index</span><span class='op'>)</span>
 
 <span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>Z</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 30 x 3</span><span>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 30 x 3</span><span>
 #&gt;    index      series   value
-#&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;date&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #555555;'> 1</span><span> 2004-02-02 Aa     -</span><span style='color: #BB0000;'>0.537</span><span> 
-#&gt; </span><span style='color: #555555;'> 2</span><span> 2004-02-02 Bb      0.746 
-#&gt; </span><span style='color: #555555;'> 3</span><span> 2004-02-02 Cc     -</span><span style='color: #BB0000;'>0.634</span><span> 
-#&gt; </span><span style='color: #555555;'> 4</span><span> 2004-02-06 Aa     -</span><span style='color: #BB0000;'>0.586</span><span> 
-#&gt; </span><span style='color: #555555;'> 5</span><span> 2004-02-06 Bb     -</span><span style='color: #BB0000;'>0.077</span><span style='color: #BB0000;text-decoration: underline;'>9</span><span>
-#&gt; </span><span style='color: #555555;'> 6</span><span> 2004-02-06 Cc      0.039</span><span style='text-decoration: underline;'>7</span><span>
-#&gt; </span><span style='color: #555555;'> 7</span><span> 2004-02-08 Aa     -</span><span style='color: #BB0000;'>0.289</span><span> 
-#&gt; </span><span style='color: #555555;'> 8</span><span> 2004-02-08 Bb     -</span><span style='color: #BB0000;'>1.11</span><span>  
-#&gt; </span><span style='color: #555555;'> 9</span><span> 2004-02-08 Cc     -</span><span style='color: #BB0000;'>0.341</span><span> 
-#&gt; </span><span style='color: #555555;'>10</span><span> 2004-02-12 Aa      1.85  
-#&gt; </span><span style='color: #555555;'># … with 20 more rows</span><span></div><div class='input'>
+#&gt;    </span><span style='color: #949494;font-style: italic;'>&lt;date&gt;</span><span>     </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'> 1</span><span> 2004-02-02 Aa     -</span><span style='color: #BB0000;'>0.537</span><span> 
+#&gt; </span><span style='color: #BCBCBC;'> 2</span><span> 2004-02-02 Bb      0.746 
+#&gt; </span><span style='color: #BCBCBC;'> 3</span><span> 2004-02-02 Cc     -</span><span style='color: #BB0000;'>0.634</span><span> 
+#&gt; </span><span style='color: #BCBCBC;'> 4</span><span> 2004-02-06 Aa     -</span><span style='color: #BB0000;'>0.586</span><span> 
+#&gt; </span><span style='color: #BCBCBC;'> 5</span><span> 2004-02-06 Bb     -</span><span style='color: #BB0000;'>0.077</span><span style='color: #BB0000;text-decoration: underline;'>9</span><span>
+#&gt; </span><span style='color: #BCBCBC;'> 6</span><span> 2004-02-06 Cc      0.039</span><span style='text-decoration: underline;'>7</span><span>
+#&gt; </span><span style='color: #BCBCBC;'> 7</span><span> 2004-02-08 Aa     -</span><span style='color: #BB0000;'>0.289</span><span> 
+#&gt; </span><span style='color: #BCBCBC;'> 8</span><span> 2004-02-08 Bb     -</span><span style='color: #BB0000;'>1.11</span><span>  
+#&gt; </span><span style='color: #BCBCBC;'> 9</span><span> 2004-02-08 Cc     -</span><span style='color: #BB0000;'>0.341</span><span> 
+#&gt; </span><span style='color: #BCBCBC;'>10</span><span> 2004-02-12 Aa      1.85  
+#&gt; </span><span style='color: #949494;'># … with 20 more rows</span><span></div><div class='input'>
 <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>Z</span><span class='op'>)</span>, <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span><span class='va'>index</span>, <span class='va'>value</span>, color <span class='op'>=</span> <span class='va'>series</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
   <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_path.html'>geom_line</a></span><span class='op'>(</span><span class='op'>)</span>
 </div><div class='img'><img src='tidy.zoo-1.png' alt='' width='700' height='433' /></div><div class='input'>

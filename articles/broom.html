@@ -110,7 +110,7 @@
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Introduction to broom</h1>
             
-            <h4 class="date">2021-02-19</h4>
+            <h4 class="date">2021-02-26</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/tidymodels/broom/blob/master/vignettes/broom.Rmd"><code>vignettes/broom.Rmd</code></a></small>
       <div class="hidden name"><code>broom.Rmd</code></div>
@@ -263,25 +263,25 @@
 <div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://generics.r-lib.org/reference/augment.html">augment</a></span><span class="op">(</span><span class="va">nlsfit</span>, <span class="va">mtcars</span><span class="op">)</span></code></pre></div>
 <pre><code>## # A tibble: 32 x 14
-##    .rownames   mpg   cyl  disp    hp  drat    wt  qsec    vs    am  gear  carb
-##    &lt;chr&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
-##  1 Mazda RX4  21       6  160    110  3.9   2.62  16.5     0     1     4     4
-##  2 Mazda RX…  21       6  160    110  3.9   2.88  17.0     0     1     4     4
-##  3 Datsun 7…  22.8     4  108     93  3.85  2.32  18.6     1     1     4     1
-##  4 Hornet 4…  21.4     6  258    110  3.08  3.22  19.4     1     0     3     1
-##  5 Hornet S…  18.7     8  360    175  3.15  3.44  17.0     0     0     3     2
-##  6 Valiant    18.1     6  225    105  2.76  3.46  20.2     1     0     3     1
-##  7 Duster 3…  14.3     8  360    245  3.21  3.57  15.8     0     0     3     4
-##  8 Merc 240D  24.4     4  147.    62  3.69  3.19  20       1     0     4     2
-##  9 Merc 230   22.8     4  141.    95  3.92  3.15  22.9     1     0     4     2
-## 10 Merc 280   19.2     6  168.   123  3.92  3.44  18.3     1     0     4     4
+##    .rownames     mpg   cyl  disp    hp  drat    wt  qsec    vs    am  gear  carb
+##    &lt;chr&gt;       &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+##  1 Mazda RX4    21       6  160    110  3.9   2.62  16.5     0     1     4     4
+##  2 Mazda RX4 …  21       6  160    110  3.9   2.88  17.0     0     1     4     4
+##  3 Datsun 710   22.8     4  108     93  3.85  2.32  18.6     1     1     4     1
+##  4 Hornet 4 D…  21.4     6  258    110  3.08  3.22  19.4     1     0     3     1
+##  5 Hornet Spo…  18.7     8  360    175  3.15  3.44  17.0     0     0     3     2
+##  6 Valiant      18.1     6  225    105  2.76  3.46  20.2     1     0     3     1
+##  7 Duster 360   14.3     8  360    245  3.21  3.57  15.8     0     0     3     4
+##  8 Merc 240D    24.4     4  147.    62  3.69  3.19  20       1     0     4     2
+##  9 Merc 230     22.8     4  141.    95  3.92  3.15  22.9     1     0     4     2
+## 10 Merc 280     19.2     6  168.   123  3.92  3.44  18.3     1     0     4     4
 ## # … with 22 more rows, and 2 more variables: .fitted &lt;dbl&gt;, .resid &lt;dbl&gt;</code></pre>
 <div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://generics.r-lib.org/reference/glance.html">glance</a></span><span class="op">(</span><span class="va">nlsfit</span><span class="op">)</span></code></pre></div>
 <pre><code>## # A tibble: 1 x 9
 ##   sigma isConv       finTol logLik   AIC   BIC deviance df.residual  nobs
 ##   &lt;dbl&gt; &lt;lgl&gt;         &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;       &lt;int&gt; &lt;int&gt;
-## 1  2.77 TRUE   0.0000000288  -77.0  160.  164.     231.          30    32</code></pre>
+## 1  2.77 TRUE   0.0000000197  -77.0  160.  164.     231.          30    32</code></pre>
 </div>
 <div id="hypothesis-testing" class="section level3">
 <h3 class="hasAnchor">
@@ -291,9 +291,9 @@
 <code class="sourceCode R"><span class="va">tt</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/t.test.html">t.test</a></span><span class="op">(</span><span class="va">wt</span> <span class="op">~</span> <span class="va">am</span>, <span class="va">mtcars</span><span class="op">)</span>
 <span class="fu"><a href="https://generics.r-lib.org/reference/tidy.html">tidy</a></span><span class="op">(</span><span class="va">tt</span><span class="op">)</span></code></pre></div>
 <pre><code>## # A tibble: 1 x 10
-##   estimate estimate1 estimate2 statistic p.value parameter conf.low conf.high
-##      &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;
-## 1     1.36      3.77      2.41      5.49 6.27e-6      29.2    0.853      1.86
+##   estimate estimate1 estimate2 statistic    p.value parameter conf.low conf.high
+##      &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;      &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;
+## 1     1.36      3.77      2.41      5.49 0.00000627      29.2    0.853      1.86
 ## # … with 2 more variables: method &lt;chr&gt;, alternative &lt;chr&gt;</code></pre>
 <p>Some cases might have fewer columns (for example, no confidence interval):</p>
 <div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
@@ -307,9 +307,9 @@
 <div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://generics.r-lib.org/reference/glance.html">glance</a></span><span class="op">(</span><span class="va">tt</span><span class="op">)</span></code></pre></div>
 <pre><code>## # A tibble: 1 x 10
-##   estimate estimate1 estimate2 statistic p.value parameter conf.low conf.high
-##      &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;
-## 1     1.36      3.77      2.41      5.49 6.27e-6      29.2    0.853      1.86
+##   estimate estimate1 estimate2 statistic    p.value parameter conf.low conf.high
+##      &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;      &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;
+## 1     1.36      3.77      2.41      5.49 0.00000627      29.2    0.853      1.86
 ## # … with 2 more variables: method &lt;chr&gt;, alternative &lt;chr&gt;</code></pre>
 <div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://generics.r-lib.org/reference/glance.html">glance</a></span><span class="op">(</span><span class="va">wt</span><span class="op">)</span></code></pre></div>
