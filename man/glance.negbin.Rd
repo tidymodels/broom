@@ -41,13 +41,13 @@ that no longer have a well-defined value are filled in with an \code{NA}
 of the appropriate type.
 }
 \examples{
-
 library(MASS)
 
 r <- glm.nb(Days ~ Sex/(Age + Eth*Lrn), data = quine)
 
 tidy(r)
 glance(r)
+
 }
 \seealso{
 \code{\link[=glance]{glance()}}, \code{\link[MASS:glm.nb]{MASS::glm.nb()}}

@@ -34,6 +34,15 @@ model component varies across models but is usually self-evident.
 If a model has several distinct types of components, you will need to
 specify which components to return.
 }
+\examples{
+library(MASS)
+
+r <- glm.nb(Days ~ Sex/(Age + Eth*Lrn), data = quine)
+
+tidy(r)
+glance(r)
+
+}
 \seealso{
 \code{\link[MASS:glm.nb]{MASS::glm.nb()}}
 

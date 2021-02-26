@@ -16,17 +16,17 @@
 #' )
 #'
 #' @examples
-#'
 #' library(MASS)
 #'
-#'r <- glm.nb(Days ~ Sex/(Age + Eth*Lrn), data = quine)
+#' r <- glm.nb(Days ~ Sex/(Age + Eth*Lrn), data = quine)
 #'
 #' tidy(r)
 #' glance(r)
-#' @export
+#' 
 #' @aliases glm.nb_tidiers
 #' @family glm.nb tidiers
 #' @seealso [glance()], [MASS::glm.nb()]
+#' @export
 glance.negbin <- function(x, ...) {
   s <- summary(x)
   
@@ -48,6 +48,8 @@ glance.negbin <- function(x, ...) {
 
 #' @templateVar class negbin
 #' @template title_desc_tidy
+#'
+#' @inherit glance.negbin examples
 #'
 #' @param x A `glm.nb` object returned by [MASS::glm.nb()].
 #' @template param_confint
