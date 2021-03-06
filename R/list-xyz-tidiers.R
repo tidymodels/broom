@@ -38,8 +38,8 @@ tidy_xyz <- function(x, ...) {
   }
 
   as_tibble(data.frame(
-    x=x$x,
-    y=rep(x$y, each=length(x$x)),
-    z=as.numeric(x$z)
+    x = x$x,
+    y = rep(x$y, each = length(x$x)),
+    z = as.numeric(x$z)
   ))
 }
