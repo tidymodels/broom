@@ -3,6 +3,7 @@
 To be released as broom 0.7.6.
 
 * Fixed bug in `augment` tidiers resulting in `.fitted` and `.se.fit` array columns.
+* Fixed bug that made column `y` non-numeric after `tidy_xyz` (`#973` by `@jiho`)
 * Add tidiers for `MASS:glm.nb` (`#998` by `@joshyam-k`)
 
 # broom 0.7.5
@@ -33,7 +34,6 @@ This release also restores tidiers for `felm` objects from the `lfe` package, wh
 * `tidy.coxph` can now report confidence intervals on models utilizing penalized/clustering terms (`#966` by `@vincentarelbundock` and `@matthieu-faron`)
 * `augment.lm` now works when some regression weights are equal to zero (`#965` by `@vincentarelbundock` and `@vnijs`)
 * `tidy.coxph` can now handle models utilizing penalized/clustering terms (`#966` and `#969` by `@vincentarelbundock`, `@matthieu-faron`, and `@KZARCA`)
-* Fix bug that made column `y` non-numeric after `tidy_xyz` (`#973` by `@jiho`)
 * Fix bug in `tidy.speedglm` on R 4.0.0+ (`#974` by `@uqzwang`)
 * tidy.multinom works with matrix response (`#977` and `#666` by `@vincentarelbundock` and `@atyre2`)
 * Various bug fixes and improvements to documentation and errors.
