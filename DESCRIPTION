@@ -1,7 +1,7 @@
 Type: Package
 Package: broom
 Title: Convert Statistical Objects into Tidy Tibbles
-Version: 0.7.3.9000
+Version: 0.7.5.9000
 Authors@R:
     c(person(given = "David",
              family = "Robinson",
@@ -496,10 +496,14 @@ Authors@R:
              family = "Vervoort",
              role = "ctb",
              email = "Willemvervoort@gmail.com"),
-         person(given = "Brenton M.",
+      person(given = "Brenton M.",
              family = "Wiernik",
              role = "ctb",
-             email = "brenton@wiernik.org"))
+             email = "brenton@wiernik.org"),
+      person(given = "Josh",
+             family = "Yamamoto",
+             role = "ctb",
+             email = "joshuayamamoto5@gmail.com"))
 Description: Summarizes key information about statistical
     objects in tidy tibbles. This makes it easy to report results, create
     plots and consistently work with large numbers of models at once.
@@ -540,6 +544,7 @@ Suggests:
     car,
     caret,
     cluster,
+    cmprsk,
     coda,
     covr,
     drc,
@@ -567,6 +572,7 @@ Suggests:
     Lahman,
     lavaan,
     leaps,
+    lfe,
     lm.beta,
     lme4,
     lmodel2,
@@ -612,6 +618,7 @@ Suggests:
     systemfit,
     testthat (>= 2.1.0),
     tseries,
+    vars,
     zoo
 VignetteBuilder:
     knitr
@@ -636,6 +643,7 @@ Collate:
     'btergm-tidiers.R'
     'car-tidiers.R'
     'caret-tidiers.R'
+    'cmprsk-tidiers.R'
     'data-frame-tidiers.R'
     'deprecated-0-7-0.R'
     'deprecated-0-7-1.R'
@@ -655,6 +663,7 @@ Collate:
     'ks-tidiers.R'
     'lavaan-tidiers.R'
     'leaps.R'
+    'lfe-tidiers.R'
     'list-irlba.R'
     'list-optim-tidiers.R'
     'list-svd-tidiers.R'
@@ -666,6 +675,7 @@ Collate:
     'maps-tidiers.R'
     'margins-tidiers.R'
     'mass-fitdistr-tidiers.R'
+    'mass-negbin-tidiers.R'
     'mass-polr-tidiers.R'
     'mass-ridgelm-tidiers.R'
     'stats-lm-tidiers.R'
@@ -726,5 +736,6 @@ Collate:
     'systemfit-tidiers.R'
     'tseries-tidiers.R'
     'utilities.R'
+    'vars-tidiers.R'
     'zoo-tidiers.R'
     'zzz.R'

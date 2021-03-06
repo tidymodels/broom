@@ -125,7 +125,6 @@ tidy.svyglm <- function(x, conf.int = FALSE, conf.level = 0.95,
 #' glance(m)
 #' @references Lumley T, Scott A (2015). AIC and BIC for modelling with complex
 #'   survey data. *Journal of Survey Statistics and Methodology*, 3(1).
-#'   <https://doi.org/10.1093/jssam/smu021>.
 #'
 #' @export
 #' @family lm tidiers

@@ -162,6 +162,7 @@ Other contributors:
   \item Hugo Tavares \email{hm533@cam.ac.uk} (\href{https://orcid.org/0000-0001-9373-2726}{ORCID}) [contributor]
   \item R. Willem Vervoort \email{Willemvervoort@gmail.com} [contributor]
   \item Brenton M. Wiernik \email{brenton@wiernik.org} [contributor]
+  \item Josh Yamamoto \email{joshuayamamoto5@gmail.com} [contributor]
 }
 
 }

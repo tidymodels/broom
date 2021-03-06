@@ -235,10 +235,10 @@ augment_columns <- function(x, data, newdata = NULL, type, type.predict = type,
   }
 
   if (is.list(pred)) {
-    ret <- data.frame(.fitted = pred$fit)
-    ret$.se.fit <- pred$se.fit
+    ret <- data.frame(.fitted = as.vector(pred$fit))
+    ret$.se.fit <- as.vector(pred$se.fit)
   } else {
-    ret <- data.frame(.fitted = as.numeric(pred))
+    ret <- data.frame(.fitted = as.vector(pred))
   }
 
   na_action <- if (isS4(x)) {
@@ -486,7 +486,7 @@ broom_confint_terms <- function(x, ...) {
 warn_on_subclass <- function(x) {
   if (length(class(x)) > 1 && class(x)[1] != "glm") {
     subclass <- class(x)[1]
-    dispatched_method <- class(x)[-1]
+    dispatched_method <- class(x)[class(x) %in% c("glm", "lm")][1]
     
     warning(
       "Tidiers for objects of class ", 
@@ -540,6 +540,7 @@ globalVariables(
     "expCIWidth",
     "fit",
     "GCV",
+    "group",
     "group1",
     "group2",
     "hat",
