@@ -33,7 +33,7 @@ test_that("fixest tidier arguments", {
 test_that("tidy.fixest", {
   td <- tidy(fit)
   td2 <- tidy(fit2, conf.int = TRUE)
-  td3 <- tidy(fit2, conf.int = TRUE, se = "white")
+  td3 <- tidy(fit2, conf.int = TRUE, se = "hetero")
   td4 <- tidy(fit_form)
 
   check_tidy_output(td)
@@ -131,24 +131,32 @@ test_that("all other fixest estimators run", {
 
 test_that("tidiers work with model results or summary of model results", {
   # Default standard errors are clustered by `id`. Test against non-default
-  # independent, heteroskedastic (aka White) standard errors.
-  fit2_summ <- summary(fit2, se = "white")
-  expect_equal(tidy(fit2, se = "white"), tidy(fit2_summ))
+  # independent, heteroskedastic ("hetero") standard errors.
+  fit2_summ <- summary(fit2, se = "hetero")
+  expect_equal(tidy(fit2, se = "hetero"), tidy(fit2_summ))
   expect_equal(
-    tidy(fit2, se = "white", conf.int = TRUE),
+    tidy(fit2, se = "hetero", conf.int = TRUE),
     tidy(fit2_summ, conf.int = TRUE)
   )
-  expect_equal(glance(fit2, se = "white"), glance(fit2_summ))
-  expect_equal(augment(fit2, df, se = "white"), augment(fit2_summ, df))
+  expect_equal(glance(fit2, se = "hetero"), glance(fit2_summ))
+  expect_equal(augment(fit2, df, se = "hetero"), augment(fit2_summ, df))
 
   # Repeat for feglm
   res_glm <- fixest::feglm(v2 ~ v4 | id, data = df)
-  res_glm_summ <- summary(fixest::feglm(v2 ~ v4 | id, data = df), se = "white")
-  expect_equal(tidy(res_glm, se = "white"), tidy(res_glm_summ))
+  res_glm_summ <- summary(fixest::feglm(v2 ~ v4 | id, data = df), se = "hetero")
+  expect_equal(tidy(res_glm, se = "hetero"), tidy(res_glm_summ))
   expect_equal(
-    as.data.frame(tidy(res_glm, se = "white", conf.int = TRUE)),
+    as.data.frame(tidy(res_glm, se = "hetero", conf.int = TRUE)),
     as.data.frame(tidy(res_glm_summ, conf.int = TRUE))
   )
-  expect_equal(glance(res_glm, se = "white"), glance(res_glm_summ))
-  expect_equal(augment(res_glm, df, se = "white"), augment(res_glm_summ, df))
+  expect_equal(glance(res_glm, se = "hetero"), glance(res_glm_summ))
+  expect_equal(augment(res_glm, df, se = "hetero"), augment(res_glm_summ, df))
+
+  # We rely on behavior from fixest where summary.fixest() doesn't change the
+  # `se` or `dof` arguments if they've already been set.
+  # Test that claim here. (Calling summary again does change other things, like
+  # the `summary_from_fit` flag, so we can't just expect_equal the whole object)
+  expect_false(is.null(fit2_summ$coeftable))
+  expect_equal(fit2_summ$coeftable, summary(fit2_summ)$coeftable)
+  expect_equal(summary(fit)$coeftable, summary(summary(fit))$coeftable)
 })

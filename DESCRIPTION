@@ -552,7 +552,7 @@ Suggests:
     emmeans,
     epiR,
     ergm (>= 3.10.4),
-    fixest (>= 0.5.0),
+    fixest (>= 0.8.1),
     gam (>= 1.15),
     gamlss,
     gamlss.data,
