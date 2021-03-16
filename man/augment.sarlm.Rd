@@ -7,7 +7,7 @@
 \method{augment}{sarlm}(x, data = x$X, ...)
 }
 \arguments{
-\item{x}{An object of object returned from \code{\link[spatialreg:ML_models]{spatialreg::lagsarlm()}}
+\item{x}{An object returned from \code{\link[spatialreg:ML_models]{spatialreg::lagsarlm()}}
 or \code{\link[spatialreg:ML_models]{spatialreg::errorsarlm()}}.}
 
 \item{data}{Ignored, but included for internal consistency. See the details
@@ -73,25 +73,28 @@ currently does not take in \code{data} or \code{newdata} arguments.
 \examples{
 \dontrun{ 
 library(spatialreg)
-data(oldcol, package="spdep")
-listw <- spdep::nb2listw(COL.nb, style="W")
+data(oldcol, package = "spdep")
+listw <- spdep::nb2listw(COL.nb, style = "W")
 
-crime_sar <- lagsarlm(CRIME ~ INC + HOVAL, data=COL.OLD,  
-  listw=listw, method="eigen")
+crime_sar <- 
+lagsarlm(CRIME ~ INC + HOVAL, 
+         data = COL.OLD,  
+         listw = listw, 
+         method = "eigen")
   
 tidy(crime_sar)
 tidy(crime_sar, conf.int = TRUE)
 glance(crime_sar)
 augment(crime_sar)
 
-crime_sem <- errorsarlm(CRIME ~ INC + HOVAL, data=COL.OLD, listw)
+crime_sem <- errorsarlm(CRIME ~ INC + HOVAL, data = COL.OLD, listw)
 
 tidy(crime_sem)
 tidy(crime_sem, conf.int = TRUE)
 glance(crime_sem)
 augment(crime_sem)
 
-crime_sac <- sacsarlm(CRIME ~ INC + HOVAL, data=COL.OLD, listw)
+crime_sac <- sacsarlm(CRIME ~ INC + HOVAL, data = COL.OLD, listw)
 
 tidy(crime_sac)
 tidy(crime_sac, conf.int = TRUE)
