@@ -33,22 +33,44 @@
 #' @seealso [tidy()], [nnet::multinom()]
 tidy.multinom <- function(x, conf.int = FALSE, conf.level = .95,
                           exponentiate = FALSE, ...) {
-  col_names <- if (length(x$lev) > 2) colnames(coef(x)) else names(coef(x))
+
+
+  # when the response is a matrix, x$lev is null
+  if (is.null(x$lev)) {
+    n_lev <- ncol(x$residuals)
+  } else {
+    n_lev <- length(x$lev) 
+  }
+
+  # when the dependent variable has only two levels, there is only one set of
+  # coefficients and coef returns a vector instead of a matrix. row.names is
+  # used to fetch y.level column in tidy output.
+  if (n_lev > 2) {
+    col_names <- colnames(coef(x))
+    row_names <- row.names(coef(x))
+  } else {
+    col_names <- names(coef(x))
+    row_names <- 1
+  }
+
   s <- summary(x)
 
-  coef <- matrix(coef(s),
+  co <- coef(s)
+  coef <- matrix(co,
     byrow = FALSE,
-    nrow = length(x$lev) - 1,
+    nrow = n_lev - 1,
     dimnames = list(
-      x$lev[-1],
+      row_names,
       col_names
     )
   )
-  se <- matrix(s$standard.errors,
+
+  se <- s$standard.errors
+  se <- matrix(se,
     byrow = FALSE,
-    nrow = length(x$lev) - 1,
+    nrow = n_lev - 1,
     dimnames = list(
-      x$lev[-1],
+      row_names,
       col_names
     )
   )
@@ -77,13 +99,7 @@ tidy.multinom <- function(x, conf.int = FALSE, conf.level = .95,
   }
 
   if (exponentiate) {
-    to_exp <- "estimate"
-
-    if (conf.int) {
-      to_exp <- c(to_exp, "conf.low", "conf.high")
-    }
-
-    ret[, to_exp] <- lapply(ret[, to_exp, drop = FALSE], exp)
+    ret <- exponentiate(ret)
   }
 
   as_tibble(ret)

@@ -1,7 +1,7 @@
 Type: Package
 Package: broom
 Title: Convert Statistical Objects into Tidy Tibbles
-Version: 0.7.2.9000
+Version: 0.7.5.9000
 Authors@R:
     c(person(given = "David",
              family = "Robinson",
@@ -496,14 +496,18 @@ Authors@R:
              family = "Vervoort",
              role = "ctb",
              email = "Willemvervoort@gmail.com"),
-     person(given = "Brenton M.",
-             family = "Wiernik",
-             role = "ctb",
-             email = "brenton@wiernik.org"),
      person(given = "Anish S.",
              family = "Shah",
              role = "ctb",
-             email = "asshah4@emory.edu"))
+             email = "asshah4@emory.edu"),
+      person(given = "Brenton M.",
+             family = "Wiernik",
+             role = "ctb",
+             email = "brenton@wiernik.org"),
+      person(given = "Josh",
+             family = "Yamamoto",
+             role = "ctb",
+             email = "joshuayamamoto5@gmail.com"))
 Description: Summarizes key information about statistical
     objects in tidy tibbles. This makes it easy to report results, create
     plots and consistently work with large numbers of models at once.
@@ -544,6 +548,7 @@ Suggests:
     car,
     caret,
     cluster,
+    cmprsk,
     coda,
     covr,
     drc,
@@ -551,7 +556,7 @@ Suggests:
     emmeans,
     epiR,
     ergm (>= 3.10.4),
-    fixest (>= 0.5.0),
+    fixest (>= 0.8.1),
     gam (>= 1.15),
     gamlss,
     gamlss.data,
@@ -582,7 +587,6 @@ Suggests:
     margins,
     MASS,
     Matrix,
-    mclogit,
     mclust,
     mediation,
     metafor,
@@ -601,6 +605,7 @@ Suggests:
     poLCA,
     psych,
     quantreg,
+    Rchoice,
     rgeos,
     rmarkdown,
     robust,
@@ -617,6 +622,7 @@ Suggests:
     systemfit,
     testthat (>= 2.1.0),
     tseries,
+    vars,
     zoo
 VignetteBuilder:
     knitr
@@ -641,6 +647,7 @@ Collate:
     'btergm-tidiers.R'
     'car-tidiers.R'
     'caret-tidiers.R'
+    'cmprsk-tidiers.R'
     'data-frame-tidiers.R'
     'deprecated-0-7-0.R'
     'deprecated-0-7-1.R'
@@ -650,7 +657,6 @@ Collate:
     'ergm-tidiers.R'
     'fixest-tidiers.R'
     'gam-tidiers.R'
-    'gee.R'
     'geepack-tidiers.R'
     'glmnet-cv-glmnet-tidiers.R'
     'glmnet-glmnet-tidiers.R'
@@ -673,12 +679,12 @@ Collate:
     'maps-tidiers.R'
     'margins-tidiers.R'
     'mass-fitdistr-tidiers.R'
+    'mass-negbin-tidiers.R'
     'mass-polr-tidiers.R'
     'mass-ridgelm-tidiers.R'
     'stats-lm-tidiers.R'
     'mass-rlm-tidiers.R'
     'matrix-tidiers.R'
-    'mclogit.R'
     'mclust-tidiers.R'
     'mediate-tidiers.R'
     'mfx-tidiers.R'
@@ -699,12 +705,12 @@ Collate:
     'quantreg-nlrq-tidiers.R'
     'quantreg-rq-tidiers.R'
     'quantreg-rqs-tidiers.R'
+    'rchoice-tidiers.R'
     'rma-tidiers.R'
     'robust-glmrob-tidiers.R'
     'robust-lmrob-tidiers.R'
     'robustbase-glmrob-tidiers.R'
     'robustbase-lmrob-tidiers.R'
-    'scam-tidiers.R'
     'sp-tidiers.R'
     'spdep-tidiers.R'
     'speedglm-speedglm-tidiers.R'
@@ -720,6 +726,7 @@ Collate:
     'stats-mlm-tidiers.R'
     'stats-prcomp-tidiers.R'
     'stats-smooth.spline-tidiers.R'
+    'stats-summary-lm-tidiers.R'
     'stats-time-series-tidiers.R'
     'survey-tidiers.R'
     'survival-aareg-tidiers.R'
@@ -733,5 +740,6 @@ Collate:
     'systemfit-tidiers.R'
     'tseries-tidiers.R'
     'utilities.R'
+    'vars-tidiers.R'
     'zoo-tidiers.R'
     'zzz.R'

@@ -29,11 +29,10 @@ If a model has several distinct types of components, you will need to
 specify which components to return.
 }
 \examples{
-
 library(muhaz)
+library(survival)
 
-data(ovarian, package = "survival")
-x <- muhaz::muhaz(ovarian$futime, ovarian$fustat)
+x <- muhaz(ovarian$futime, ovarian$fustat)
 tidy(x)
 glance(x)
 }

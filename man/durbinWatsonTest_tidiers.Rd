@@ -37,6 +37,9 @@ glance(dw) # same output for all durbinWatsonTests
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[=glance]{glance()}}, \code{\link[car:durbinWatsonTest]{car::durbinWatsonTest()}}
+
+Other car tidiers: 
+\code{\link{leveneTest_tidiers}}
 }
 \concept{car tidiers}
 \value{

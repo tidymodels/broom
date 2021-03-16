@@ -19,7 +19,6 @@
 #'
 #' mod <- lm(cbind(mpg, disp) ~ wt, mtcars)
 #' tidy(mod, conf.int = TRUE)
-#' @importFrom dplyr bind_cols
 #' @export
 #' @seealso [tidy()]
 #' @family lm tidiers
@@ -63,19 +62,11 @@ tidy.mlm <- function(x,
     }
 
     colnames(CI) <- c("conf.low", "conf.high")
-    ret <- bind_cols(ret, as_tibble(CI))
+    ret <- dplyr::bind_cols(ret, as_tibble(CI))
   }
 
   as_tibble(ret)
 }
-
-# mlm objects subclass lm objects so this gives a better error than
-# letting augment.lm() fail
-#' @include null-and-default-tidiers.R
-augment.mlm <- augment.default
-
-#' @export
-glance.mlm <- glance.default
 
 # compute confidence intervals for mlm object.
 confint_mlm <- function(object, level = 0.95, ...) {

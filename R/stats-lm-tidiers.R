@@ -27,6 +27,13 @@
 #'   geom_point() +
 #'   geom_vline(xintercept = 0, lty = 4) +
 #'   geom_errorbarh()
+#'   
+#' # Aside: There are tidy() and glance() methods for lm.summary objects too. 
+#' # This can be useful when you want to conserve memory by converting large lm 
+#' # objects into their leaner summary.lm equivalents.
+#' s <- summary(mod)
+#' tidy(s, conf.int = TRUE)
+#' glance(s)
 #'
 #' augment(mod)
 #' augment(mod, mtcars, interval = "confidence")
@@ -78,17 +85,7 @@
 #' @family lm tidiers
 tidy.lm <- function(x, conf.int = FALSE, conf.level = 0.95, ...) {
 
-  # error on inappropriate subclassing
-  # TODO: undo gee / mclogit and other catches
-  if (length(class(x)) > 1) {
-    warning(
-      "Tidiers for objects of class ", class(x)[1], 
-      " are not maintained by the broom team, and are only supported through ",
-      "the tidy.lm() method. Please be cautious in interpreting and reporting ",
-      "broom output.",
-      call. = FALSE
-    )
-  }
+  warn_on_subclass(x)
 
   ret <- as_tibble(summary(x)$coefficients, rownames = "term")
   colnames(ret) <- c("term", "estimate", "std.error", "statistic", "p.value")
@@ -105,6 +102,7 @@ tidy.lm <- function(x, conf.int = FALSE, conf.level = 0.95, ...) {
 
   ret
 }
+
 
 #' @templateVar class lm
 #' @template title_desc_augment
@@ -138,15 +136,16 @@ tidy.lm <- function(x, conf.int = FALSE, conf.level = 0.95, ...) {
 #' @family lm tidiers
 augment.lm <- function(x, data = model.frame(x), newdata = NULL,
                        se_fit = FALSE, interval =  c("none", "confidence", "prediction"), ...) {
+  
+  warn_on_subclass(x)
+  
   interval <- match.arg(interval)
   df <- augment_newdata(x, data, newdata, se_fit, interval)
 
   if (is.null(newdata)) {
     tryCatch({
         infl <- influence(x, do.coef = FALSE)
-        df$.std.resid <- rstandard(x, infl = infl) %>% unname()
         df <- add_hat_sigma_cols(df, x, infl)
-        df$.cooksd <- cooks.distance(x, infl = infl) %>% unname()
       },
       error = data_error
     )
@@ -181,9 +180,12 @@ augment.lm <- function(x, data = model.frame(x), newdata = NULL,
 #'
 #'
 #' @export
-#' @seealso [glance()]
+#' @seealso [glance()], [glance.summary.lm()]
 #' @family lm tidiers
 glance.lm <- function(x, ...) {
+  
+  warn_on_subclass(x)
+  
   # check whether the model was fitted with only an intercept, in which
   # case drop the fstatistic related columns
   int_only <- nrow(summary(x)$coefficients) == 1

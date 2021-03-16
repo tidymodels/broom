@@ -12,6 +12,7 @@ fit <- mgcv::gam(weight ~ s(Time) + factor(Diet), data = ChickWeight)
 test_that("mgcv tidier arguments", {
   check_arguments(tidy.gam)
   check_arguments(glance.gam)
+  check_arguments(augment.gam, strict = FALSE)
 })
 
 test_that("tidy.gam", {
@@ -25,4 +26,13 @@ test_that("tidy.gam", {
 test_that("glance.gam", {
   gl <- glance(fit)
   check_glance_outputs(gl)
+})
+
+test_that("augment.gam", {
+  check_augment_function(
+    augment.gam,
+    fit,
+    data = ChickWeight,
+    newdata = ChickWeight
+  )
 })

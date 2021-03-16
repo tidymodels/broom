@@ -11,7 +11,9 @@
 #' @seealso [stats::glm()]
 tidy.glm <- function(x, conf.int = FALSE, conf.level = .95,
                      exponentiate = FALSE, ...) {
-  check_for_subclasses(x)
+  
+  warn_on_appropriated_glm_class(x)
+  warn_on_subclass(x)
   
   ret <- as_tibble(summary(x)$coefficients, rownames = "term")
   colnames(ret) <- c("term", "estimate", "std.error", "statistic", "p.value")
@@ -72,7 +74,8 @@ augment.glm <- function(x,
                         type.predict = c("link", "response", "terms"),
                         type.residuals = c("deviance", "pearson"),
                         se_fit = FALSE, ...) {
-  check_for_subclasses(x)
+  warn_on_appropriated_glm_class(x)
+  warn_on_subclass(x)
   
   type.predict <- rlang::arg_match(type.predict)
   type.residuals <- rlang::arg_match(type.residuals)
@@ -132,7 +135,8 @@ augment.glm <- function(x,
 #' @family lm tidiers
 #' @seealso [stats::glm()]
 glance.glm <- function(x, ...) {
-  check_for_subclasses(x)
+  warn_on_appropriated_glm_class(x)
+  warn_on_subclass(x)
   
   as_glance_tibble(
     null.deviance = x$null.deviance,
@@ -147,7 +151,7 @@ glance.glm <- function(x, ...) {
   )
 }
 
-check_for_subclasses <- function(x) {
+warn_on_appropriated_glm_class <- function(x) {
   warn_on_glm2(x)
   warn_on_stanreg(x)
   

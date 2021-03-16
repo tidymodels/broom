@@ -10,20 +10,6 @@ test_that("tidy.mlm works", {
   expect_is(df_tidy, "tbl_df")
 })
 
-test_that("augment and glance do not support multiple responses", {
-  mfit <- lm(cbind(mpg, am) ~ wt + disp, mtcars)
-
-  expect_error(
-    augment(mfit),
-    regexp = "No augment method for objects of class mlm"
-  )
-
-  expect_error(
-    glance(mfit),
-    regexp = "No glance method for objects of class mlm"
-  )
-})
-
 #' helper function: replicate each element of x
 #' times times.
 rep_each <- function(x, times) {

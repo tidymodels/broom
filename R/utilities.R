@@ -235,10 +235,10 @@ augment_columns <- function(x, data, newdata = NULL, type, type.predict = type,
   }
 
   if (is.list(pred)) {
-    ret <- data.frame(.fitted = pred$fit)
-    ret$.se.fit <- pred$se.fit
+    ret <- data.frame(.fitted = as.vector(pred$fit))
+    ret$.se.fit <- as.vector(pred$se.fit)
   } else {
-    ret <- data.frame(.fitted = as.numeric(pred))
+    ret <- data.frame(.fitted = as.vector(pred))
   }
 
   na_action <- if (isS4(x)) {
@@ -335,20 +335,26 @@ data_error <- function(cnd) {
 
 safe_response <- purrr::possibly(response, NULL)
 
+
 # in weighted regressions, influence measures should be zero for
 # data points with zero weight
 # helper for augment.lm and augment.glm
 add_hat_sigma_cols <- function(df, x, infl) {
   df$.hat <- 0
   df$.sigma <- 0
+  df$.cooksd <- 0
+  df$.std.resid <- NA
 
   w <- x$weights
   nonzero_idx <- if (is.null(w)) seq_along(df$.hat) else which(w != 0)
 
   df$.hat[nonzero_idx] <- infl$hat %>% unname()
   df$.sigma[nonzero_idx] <- infl$sigma %>% unname()
+  df$.std.resid[nonzero_idx] <- rstandard(x, infl = infl) %>% unname()
+  df$.cooksd[nonzero_idx] <- cooks.distance(x, infl = infl) %>% unname()
   df
 }
+
 
 # adds only the information that can be defined for newdata. no influence
 # measure of anything fun like goes here.
@@ -476,6 +482,25 @@ broom_confint_terms <- function(x, ...) {
   ci
 }
 
+# warn when models subclasses glm/lm and do not have their own dedicated tidiers.
+warn_on_subclass <- function(x) {
+  if (length(class(x)) > 1 && class(x)[1] != "glm") {
+    subclass <- class(x)[1]
+    dispatched_method <- class(x)[class(x) %in% c("glm", "lm")][1]
+    
+    warning(
+      "Tidiers for objects of class ", 
+      subclass, 
+      " are not maintained by the broom team, and are only supported through ",
+      "the ", 
+      dispatched_method, 
+      " tidier method. Please be cautious in interpreting and reporting ",
+      "broom output.",
+      call. = FALSE
+    )
+  }
+}
+
 #' @importFrom utils globalVariables
 globalVariables(
   c(
@@ -515,6 +540,7 @@ globalVariables(
     "expCIWidth",
     "fit",
     "GCV",
+    "group",
     "group1",
     "group2",
     "hat",

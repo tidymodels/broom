@@ -55,60 +55,6 @@
 #' @seealso [tidy()], [fixest::feglm()], [fixest::fenegbin()],
 #' [fixest::feNmlm()], [fixest::femlm()], [fixest::feols()], [fixest::fepois()]
 tidy.fixest <- function(x, conf.int = FALSE, conf.level = 0.95, ...) {
-  not_summary <- !is_fixest_summary(x)
-  # These two options are necessary because the user might specify
-  # broom(x, cluster="something") or
-  # broom(summary(x, cluster="something"))
-  # and calling summary() again will overwrite the arguments in the second case.
-  # Note that class(summary(x)) == class(x) == "fixest".
-  if (not_summary) {
-    # Option 1) User provides a non-summary object
-    ret <- tidy_fixest(x, conf.int = conf.int, conf.level = conf.level, ...)
-  } else {
-    # Option 2) User provides a fixest summary object
-    ret <- tidy_summary_fixest(x, conf.int = conf.int, conf.level = conf.level)
-  }
-  as_tibble(ret)
-}
-
-is_fixest_summary <- function(x) {
-  # Is `x` the result of summary(some_fixest_result)?
-  # Returns TRUE/FALSE.
-  if (!inherits(x, "fixest")) {
-    stop("This is a fixest helper function only.")
-  }
-  "cov.scaled" %in% names(x)
-}
-
-tidy_summary_fixest <- function(x, conf.int = conf.int, conf.level = conf.level, ...) {
-  # If this is a summary object, assume the user has already applied whatever
-  # clustering or standard error specification they want.
-  if (length(list(...)) > 0) {
-    stop(
-      "The fixest object provided to tidy() was already a summary. ",
-      "Additional arguments were provided but can't be used. ",
-      "To specify `cluster` or `se`, call tidy() without summary()."
-    )
-  }
-  coeftable <- x$coeftable
-  ret <- as_tibble(coeftable, rownames = "term")
-  colnames(ret) <- c("term", "estimate", "std.error", "statistic", "p.value")
-
-  if (conf.int) {
-    # It's possible we were passed a summary of a fixest object. If no `...`
-    # arguments were specified, then we want to use the std error that `x`
-    # already has. That is, we don't want to call confint() because
-    # doing so throws away whatever arguments were provided to summary().
-    ci_fact <- abs(qnorm((1 - conf.level) / 2))
-    ret <- mutate(ret,
-      conf.low  = estimate - ci_fact * std.error,
-      conf.high = estimate + ci_fact * std.error
-    )
-  }
-  ret
-}
-
-tidy_fixest <- function(x, conf.int = conf.int, conf.level = conf.level, ...) {
   coeftable <- summary(x, ...)$coeftable
   ret <- as_tibble(coeftable, rownames = "term")
   colnames(ret) <- c("term", "estimate", "std.error", "statistic", "p.value")
@@ -118,9 +64,8 @@ tidy_fixest <- function(x, conf.int = conf.int, conf.level = conf.level, ...) {
     colnames(CI) <- c("conf.low", "conf.high")
     ret <- bind_cols(ret, unrowname(CI))
   }
-  ret
+  as_tibble(ret)
 }
-
 
 
 #' @templateVar class fixest

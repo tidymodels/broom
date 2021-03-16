@@ -34,6 +34,10 @@ test_that("tidy_xyz", {
 
   check_tidy_output(td, strict = FALSE)
   check_dims(td, 15, 3)
+  
+  expect_true(is.numeric(td$x))
+  expect_true(is.numeric(td$y))
+  expect_true(is.numeric(td$z))
 
   expect_error(
     tidy(b),

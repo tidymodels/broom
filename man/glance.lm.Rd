@@ -56,6 +56,13 @@ ggplot(d, aes(estimate, term, xmin = conf.low, xmax = conf.high, height = 0)) +
   geom_point() +
   geom_vline(xintercept = 0, lty = 4) +
   geom_errorbarh()
+  
+# Aside: There are tidy() and glance() methods for lm.summary objects too. 
+# This can be useful when you want to conserve memory by converting large lm 
+# objects into their leaner summary.lm equivalents.
+s <- summary(mod)
+tidy(s, conf.int = TRUE)
+glance(s)
 
 augment(mod)
 augment(mod, mtcars, interval = "confidence")
@@ -103,17 +110,19 @@ result <- lm(b ~ a)
 tidy(result)
 }
 \seealso{
-\code{\link[=glance]{glance()}}
+\code{\link[=glance]{glance()}}, \code{\link[=glance.summary.lm]{glance.summary.lm()}}
 
 Other lm tidiers: 
 \code{\link{augment.glm}()},
 \code{\link{augment.lm}()},
 \code{\link{glance.glm}()},
+\code{\link{glance.summary.lm}()},
 \code{\link{glance.svyglm}()},
 \code{\link{tidy.glm}()},
 \code{\link{tidy.lm.beta}()},
 \code{\link{tidy.lm}()},
-\code{\link{tidy.mlm}()}
+\code{\link{tidy.mlm}()},
+\code{\link{tidy.summary.lm}()}
 }
 \concept{lm tidiers}
 \value{
