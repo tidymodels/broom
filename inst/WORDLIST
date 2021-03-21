@@ -37,6 +37,7 @@ CMD
 codecov
 coeftest
 coercible
+conf.lvel
 cor
 confint
 confusionMatrix
