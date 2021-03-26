@@ -6,6 +6,8 @@ To be released as broom 0.7.6.
 * Fixed bug that made column `y` non-numeric after `tidy_xyz` (`#973` by `@jiho`)
 * Add tidiers for `MASS:glm.nb` (`#998` by `@joshyam-k`)
 * Fixed bug in `tidy.fixest` that sometimes prevented arguments like `se` from being used (`#1001` by `@karldw`)
+* Fixed bug in `tidy.fixest` that resulted in errors when columns with name
+`x` are present (`#1007` by `@grantmcdermott`)
 * Various bug fixes and improvements to documentation
 
 # broom 0.7.5
