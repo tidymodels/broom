@@ -114,10 +114,8 @@ augment.fixest <- function(x, data = NULL, newdata = NULL,
   df <- as_augment_tibble(df)
   if (is.null(newdata)) {
     # use existing data
-    df <- mutate(df,
-      .fitted = predict(x, type = type.predict),
-      .resid = residuals(x, type = type.residuals)
-    )
+    df$.fitted <- predict(x, type = type.predict)
+    df$.resid <- residuals(x, type = type.residuals)
   } else {
     # With new data, only provide predictions
     df$.fitted <- predict(x, type = type.predict, newdata = newdata)
