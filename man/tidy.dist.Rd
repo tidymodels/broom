@@ -62,7 +62,6 @@ Other deprecated:
 \code{\link{summary_tidiers}},
 \code{\link{tidy.density}()},
 \code{\link{tidy.ftable}()},
-\code{\link{tidy.gamlss}()},
 \code{\link{tidy.numeric}()}
 }
 \concept{deprecated}
