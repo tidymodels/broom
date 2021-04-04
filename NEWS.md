@@ -4,10 +4,12 @@ To be released as broom 0.7.6.
 
 * Fixed bug in `augment` tidiers resulting in `.fitted` and `.se.fit` array columns.
 * Fixed bug that made column `y` non-numeric after `tidy_xyz` (`#973` by `@jiho`)
-* Add tidiers for `MASS:glm.nb` (`#998` by `@joshyam-k`)
+* Added tidiers for `MASS:glm.nb` (`#998` by `@joshyam-k`)
 * Fixed bug in `tidy.fixest` that sometimes prevented arguments like `se` from being used (`#1001` by `@karldw`)
 * Fixed bug in `tidy.fixest` that resulted in errors when columns with name
 `x` are present (`#1007` by `@grantmcdermott`)
+* Moved forward with planned deprecation of `gamlss` tidiers in favor of
+those provided in `broom.mixed`
 * Various bug fixes and improvements to documentation
 
 # broom 0.7.5
