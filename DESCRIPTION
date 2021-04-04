@@ -554,9 +554,6 @@ Suggests:
     ergm (>= 3.10.4),
     fixest (>= 0.8.1),
     gam (>= 1.15),
-    gamlss,
-    gamlss.data,
-    gamlss.dist,
     gee,
     geepack,
     ggplot2,
@@ -646,7 +643,6 @@ Collate:
     'cmprsk-tidiers.R'
     'data-frame-tidiers.R'
     'deprecated-0-7-0.R'
-    'deprecated-0-7-1.R'
     'drc-tidiers.R'
     'emmeans-tidiers.R'
     'epiR-tidiers.R'
