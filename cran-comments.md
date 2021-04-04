@@ -1,7 +1,4 @@
-# broom 0.7.5
-
-This release of broom is submitted in anticipation of breaking changes in the 
-upcoming survival release. 
+# broom 0.7.6
 
 ## Test environments
 
