@@ -8,7 +8,7 @@ articles:
   broom: broom.html
   broom_and_dplyr: broom_and_dplyr.html
   kmeans: kmeans.html
-last_built: 2021-03-26T03:54Z
+last_built: 2021-04-04T21:49Z
 urls:
   reference: https://broom.tidymodels.org/reference
   article: https://broom.tidymodels.org/articles
