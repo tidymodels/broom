@@ -17,8 +17,8 @@ test_that("mgcv tidier arguments", {
 
 test_that("tidy.gam", {
   td <- tidy(fit)
-  tdp <- tidy(fit, parametric = TRUE)
-  tdp_exp <- tidy(fit, parametric = TRUE, exponentiate = TRUE)
+  tdp <- tidy(fit, parametric = TRUE, conf.int = TRUE)
+  tdp_exp <- tidy(fit, parametric = TRUE, conf.int = TRUE, exponentiate = TRUE)
 
   check_tidy_output(td, strict = FALSE)
   check_tidy_output(tdp)
