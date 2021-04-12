@@ -1,3 +1,7 @@
+# broom (development version)
+
+* Added `exponentiate` argument to `tidy.negbin()` tidier. (`#1011` by `@ddsjoberg`)
+
 # broom 0.7.6
 
 * Fixed bug in `augment` tidiers resulting in `.fitted` and `.se.fit` array columns.
