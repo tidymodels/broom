@@ -31,3 +31,13 @@ test_that("glance.negbin", {
 })
 
 
+test_that("tidy.negbin exponentiate arg", {
+  td3 <- tidy(fit, exponentiate = TRUE, conf.int = TRUE)
+  td4 <- tidy(fit, exponentiate = FALSE, conf.int = TRUE)
+  expect_equal(
+    as.matrix(td3[, c("estimate", "conf.low", "conf.high")]),
+    exp(as.matrix(td4[, c("estimate", "conf.low", "conf.high")]))
+  )
+})
+  
+
