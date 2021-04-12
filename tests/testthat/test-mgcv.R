@@ -25,8 +25,8 @@ test_that("tidy.gam", {
   
   # test coef exponentiated 
   expect_equal(
-    tdp_exp$estimate,
-    exp(tdp$estimate)
+    as.matrix(tdp_exp[,c("estimate", "conf.low", "conf.high")]),
+    exp(as.matrix(tdp[,c("estimate", "conf.low", "conf.high")]))
   )
 })
 
