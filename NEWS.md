@@ -1,5 +1,6 @@
 # broom (development version)
 
+* Added `exponentiate` argument to `tidy.gam()` tidier applicable for parametric terms. (`#1013` by `@ddsjoberg`)
 * Added `exponentiate` argument to `tidy.negbin()` tidier. (`#1011` by `@ddsjoberg`)
 
 # broom 0.7.6
