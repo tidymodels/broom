@@ -24,7 +24,10 @@ fit2 <- lfe::felm(v2 ~ v3 | id + v1, df, na.action = na.exclude)
 
 # with clus
 fit3 <- lfe::felm(v2 ~ v3 | 0 | 0 | id + v1, df, na.action = na.exclude)
+
+## with multiple outcomes
 fit_multi <- lfe::felm(v1 + v2 ~ v3 , df)
+fit_Y2 <- lfe::felm(v1 ~ v3 , df)
 
 form <- v2 ~ v4
 fit_form <- lfe::felm(form, df) # part of a regression test
@@ -48,6 +51,7 @@ test_that("tidy.felm", {
   
   
   td_multi <- tidy(fit_multi)
+  td_multi_CI <- tidy(fit_multi, conf.int = TRUE)
   
   check_tidy_output(td1)
   check_tidy_output(td2)
@@ -59,10 +63,18 @@ test_that("tidy.felm", {
   check_tidy_output(td8)
   check_tidy_output(td9)
   check_tidy_output(td_multi)
+  check_tidy_output(td_multi_CI)
   
   check_dims(td1, 2, 5)
+  check_dims(td_multi_CI, 4, 8)
   
-  expect_equal(tidy(fit_multi)[3:4, -1], tidy(fit))
+  expect_equal(tidy(fit_multi)[3:4, -1],
+               tidy(fit))
+  expect_equal(tidy(fit_multi, conf.int = TRUE)[3:4, -1],
+               tidy(fit, conf.int = TRUE))
+  expect_equal(tidy(fit_multi, conf.int = TRUE)[1:2, -1],
+               tidy(fit_Y2, conf.int = TRUE))
+  
   expect_equal(dplyr::pull(td5, std.error),
                as.numeric(lfe:::summary.felm(fit, robust = TRUE)$coef[, "Robust s.e"]))
   expect_equal(dplyr::pull(td6, std.error),
