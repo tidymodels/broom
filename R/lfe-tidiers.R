@@ -112,12 +112,14 @@ tidy.felm <- function(x, conf.int = FALSE, conf.level = .95, fe = FALSE, se.type
   if (conf.int) {
     if (has_multi_response) {
       ci <- map_df(x$lhs, function(y) {
-        broom_confint_terms(x, level = conf.level, type = NULL, lhs = y)
+        broom_confint_terms(x, level = conf.level, type = NULL, lhs = y) %>% 
+          mutate(response=y)
       })
+      ret <- dplyr::left_join(ret, ci, by = c("response", "term"))
     } else {
       ci <- broom_confint_terms(x, level = conf.level, type = se.type)
+      ret <- dplyr::left_join(ret, ci, by = "term")
     }
-    ret <- dplyr::left_join(ret, ci, by = "term")
   }
   
   if (fe) {
