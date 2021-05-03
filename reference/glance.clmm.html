@@ -274,9 +274,9 @@ the <code>data</code> argument.</p></td>
 #&gt; </span><span style='color: #BCBCBC;'>6</span><span> contactyes    6.26      0.513      3.58 3.44</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>- 4</span><span>   2.29      17.1   location </div><div class='input'>
 <span class='fu'><a href='https://generics.r-lib.org/reference/glance.html'>glance</a></span><span class='op'>(</span><span class='va'>fit</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tibble: 1 x 5</span><span>
-#&gt;     edf   AIC   BIC logLik     nobs
-#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;logLik&gt;</span><span>  </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span>     7  177.  193. -81.56541    72</div><div class='input'>
+#&gt;     edf   AIC   BIC logLik  nobs
+#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span>     7  177.  193.  -</span><span style='color: #BB0000;'>81.6</span><span>    72</div><div class='input'>
 <span class='va'>fit2</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/ordinal/man/clmm.html'>clmm</a></span><span class='op'>(</span><span class='va'>rating</span> <span class='op'>~</span> <span class='va'>temp</span> <span class='op'>+</span> <span class='op'>(</span><span class='fl'>1</span> <span class='op'>|</span> <span class='va'>judge</span><span class='op'>)</span>, nominal <span class='op'>=</span> <span class='op'>~</span><span class='va'>contact</span>, data <span class='op'>=</span> <span class='va'>wine</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; <span class='warning'>Warning: unrecognized control elements named ‘nominal’ ignored</span></div><div class='input'><span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>fit2</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tibble: 5 x 6</span><span>
@@ -288,9 +288,9 @@ the <code>data</code> argument.</p></td>
 #&gt; </span><span style='color: #BCBCBC;'>4</span><span> 4|5         4.48      0.751      5.96 0.000</span><span style='text-decoration: underline;'>000</span><span>002</span><span style='text-decoration: underline;'>56</span><span> intercept
 #&gt; </span><span style='color: #BCBCBC;'>5</span><span> tempwarm    2.67      0.554      4.81 0.000</span><span style='text-decoration: underline;'>001</span><span>47    location </div><div class='input'><span class='fu'><a href='https://generics.r-lib.org/reference/glance.html'>glance</a></span><span class='op'>(</span><span class='va'>fit2</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tibble: 1 x 5</span><span>
-#&gt;     edf   AIC   BIC logLik     nobs
-#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;logLik&gt;</span><span>  </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span>     6  189.  203. -88.73882    72</div></span></pre>
+#&gt;     edf   AIC   BIC logLik  nobs
+#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span>     6  189.  203.  -</span><span style='color: #BB0000;'>88.7</span><span>    72</div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
