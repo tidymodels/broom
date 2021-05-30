@@ -503,7 +503,15 @@ Authors@R:
       person(given = "Josh",
              family = "Yamamoto",
              role = "ctb",
-             email = "joshuayamamoto5@gmail.com"))
+             email = "joshuayamamoto5@gmail.com"),
+      person(given = "Rahul",
+             family = "Saxena",
+             role = "ctb",
+             email = "b417033@iiit-bh.ac.in"),
+      person(given = "Mauricio",
+             family = "Vargas",
+             role = "ctb",
+             email = "mavargas11@uc.cl"))
 Description: Summarizes key information about statistical
     objects in tidy tibbles. This makes it easy to report results, create
     plots and consistently work with large numbers of models at once.
@@ -643,6 +651,9 @@ Collate:
     'data-frame-tidiers.R'
     'deprecated-0-7-0.R'
     'drc-tidiers.R'
+    'eflm-eglm-tidiers.R'
+    'stats-lm-tidiers.R'
+    'eflm-elm-tidiers.R'
     'emmeans-tidiers.R'
     'epiR-tidiers.R'
     'ergm-tidiers.R'
@@ -673,7 +684,6 @@ Collate:
     'mass-negbin-tidiers.R'
     'mass-polr-tidiers.R'
     'mass-ridgelm-tidiers.R'
-    'stats-lm-tidiers.R'
     'mass-rlm-tidiers.R'
     'matrix-tidiers.R'
     'mclust-tidiers.R'
