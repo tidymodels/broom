@@ -1,5 +1,6 @@
 # broom (development version)
 
+* Added tidiers for `eflm` (new version coming to CRAN, I wanted to put the tidier here to keep the package lightweight) - @pachamaltese, PR #1026
 * Added `exponentiate` argument to `tidy.gam()` tidier applicable for parametric terms. (`#1013` by `@ddsjoberg`)
 * Added `exponentiate` argument to `tidy.negbin()` tidier. (`#1011` by `@ddsjoberg`)
 
