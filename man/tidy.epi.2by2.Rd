@@ -36,7 +36,9 @@ The tibble has a column for each of the measures of association
 or tests contained in \code{massoc} when \code{\link[epiR:epi.2by2]{epiR::epi.2by2()}} is called.
 }
 \examples{
+
 library(epiR)
+
 dat <- matrix(c(13, 2163, 5, 3349), nrow = 2, byrow = TRUE)
 rownames(dat) <- c("DF+", "DF-")
 colnames(dat) <- c("FUS+", "FUS-")
@@ -46,6 +48,7 @@ fit <- epi.2by2(
 )
 
 tidy(fit, parameters = "moa")
+
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[epiR:epi.2by2]{epiR::epi.2by2()}}
