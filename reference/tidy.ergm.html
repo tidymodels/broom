@@ -248,23 +248,10 @@ Models for Networks. <em>Journal of Statistical Software</em>, 24(3).
 #&gt; <span class='message'>                    Skye Bender-deMoll, University of Washington</span>
 #&gt; <span class='message'> For citation information, type citation("network").</span>
 #&gt; <span class='message'> Type help("network-package") to get started.</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>ergm: version 3.11.0, created on 2020-10-14</span>
-#&gt; <span class='message'>Copyright (c) 2020, Mark S. Handcock, University of California -- Los Angeles</span>
-#&gt; <span class='message'>                    David R. Hunter, Penn State University</span>
-#&gt; <span class='message'>                    Carter T. Butts, University of California -- Irvine</span>
-#&gt; <span class='message'>                    Steven M. Goodreau, University of Washington</span>
-#&gt; <span class='message'>                    Pavel N. Krivitsky, UNSW Sydney</span>
-#&gt; <span class='message'>                    Martina Morris, University of Washington</span>
-#&gt; <span class='message'>                    with contributions from</span>
-#&gt; <span class='message'>                    Li Wang</span>
-#&gt; <span class='message'>                    Kirk Li, University of Washington</span>
-#&gt; <span class='message'>                    Skye Bender-deMoll, University of Washington</span>
-#&gt; <span class='message'>                    Chad Klumb</span>
-#&gt; <span class='message'>                    Michał Bojanowski, Kozminski University</span>
-#&gt; <span class='message'>                    Ben Bolker</span>
-#&gt; <span class='message'>Based on "statnet" project software (statnet.org).</span>
-#&gt; <span class='message'>For license and citation information see statnet.org/attribution</span>
-#&gt; <span class='message'>or type citation("ergm").</span></div><div class='output co'>#&gt; <span class='message'>NOTE: Versions before 3.6.1 had a bug in the implementation of the bd()</span>
+#&gt; <span class='message'>‘ergm’ 3.11.0 (2020-10-14), part of the Statnet Project</span>
+#&gt; <span class='message'>* ‘news(package="ergm")’ for changes since last version</span>
+#&gt; <span class='message'>* ‘citation("ergm")’ for citation information</span>
+#&gt; <span class='message'>* ‘https://statnet.org’ for help, support, and other information</span></div><div class='output co'>#&gt; <span class='message'>NOTE: Versions before 3.6.1 had a bug in the implementation of the bd()</span>
 #&gt; <span class='message'>constraint which distorted the sampled distribution somewhat. In</span>
 #&gt; <span class='message'>addition, Sampson's Monks datasets had mislabeled vertices. See the</span>
 #&gt; <span class='message'>NEWS and the documentation for more details.</span></div><div class='output co'>#&gt; <span class='message'>NOTE: Some common term arguments pertaining to vertex attribute and</span>
@@ -280,36 +267,36 @@ Models for Networks. <em>Journal of Statistical Software</em>, 24(3).
 </div><div class='output co'>#&gt; <span class='message'>Starting maximum pseudolikelihood estimation (MPLE):</span></div><div class='output co'>#&gt; <span class='message'>Evaluating the predictor and response matrix.</span></div><div class='output co'>#&gt; <span class='message'>Maximizing the pseudolikelihood.</span></div><div class='output co'>#&gt; <span class='message'>Finished MPLE.</span></div><div class='output co'>#&gt; <span class='message'>Stopping at the initial estimate.</span></div><div class='output co'>#&gt; <span class='message'>Evaluating log-likelihood at the estimate. </span></div><div class='output co'>#&gt; </div><div class='input'>
 <span class='co'># Show terms, coefficient estimates and errors</span>
 <span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>gest</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 2 x 5</span><span>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 2 x 5</span>
 #&gt;   term           estimate std.error statistic      p.value
-#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>             </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>        </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span> edges           -</span><span style='color: #BB0000;'>2.30</span><span>     0.402       -</span><span style='color: #BB0000;'>5.73</span><span> 0.000</span><span style='text-decoration: underline;'>000</span><span>010</span><span style='text-decoration: underline;'>2</span><span>
-#&gt; </span><span style='color: #BCBCBC;'>2</span><span> absdiff.wealth   0.015</span><span style='text-decoration: underline;'>5</span><span>   0.006</span><span style='text-decoration: underline;'>16</span><span>      2.52 0.011</span><span style='text-decoration: underline;'>7</span><span>      </div><div class='input'>
+#&gt;   <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>             <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>        <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>
+#&gt; <span style='color: #BCBCBC;'>1</span> edges           -<span style='color: #BB0000;'>2.30</span>     0.402       -<span style='color: #BB0000;'>5.73</span> 0.000<span style='text-decoration: underline;'>000</span>010<span style='text-decoration: underline;'>2</span>
+#&gt; <span style='color: #BCBCBC;'>2</span> absdiff.wealth   0.015<span style='text-decoration: underline;'>5</span>   0.006<span style='text-decoration: underline;'>16</span>      2.52 0.011<span style='text-decoration: underline;'>7</span>      </div><div class='input'>
 <span class='co'># Show coefficients as odds ratios with a 99% CI</span>
 <span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>gest</span>, exponentiate <span class='op'>=</span> <span class='cn'>TRUE</span>, conf.int <span class='op'>=</span> <span class='cn'>TRUE</span>, conf.level <span class='op'>=</span> <span class='fl'>0.99</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tibble: 2 x 7</span><span>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 2 x 7</span>
 #&gt;   term           estimate std.error statistic      p.value conf.low conf.high
-#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>             </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>        </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span> edges             0.100   0.402       -</span><span style='color: #BB0000;'>5.73</span><span> 0.000</span><span style='text-decoration: underline;'>000</span><span>010</span><span style='text-decoration: underline;'>2</span><span>   0.035</span><span style='text-decoration: underline;'>5</span><span>     0.282
-#&gt; </span><span style='color: #BCBCBC;'>2</span><span> absdiff.wealth    1.02    0.006</span><span style='text-decoration: underline;'>16</span><span>      2.52 0.011</span><span style='text-decoration: underline;'>7</span><span>         1.00       1.03 </div><div class='input'>
+#&gt;   <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>             <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>        <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>    <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>
+#&gt; <span style='color: #BCBCBC;'>1</span> edges             0.100   0.402       -<span style='color: #BB0000;'>5.73</span> 0.000<span style='text-decoration: underline;'>000</span>010<span style='text-decoration: underline;'>2</span>   0.035<span style='text-decoration: underline;'>5</span>     0.282
+#&gt; <span style='color: #BCBCBC;'>2</span> absdiff.wealth    1.02    0.006<span style='text-decoration: underline;'>16</span>      2.52 0.011<span style='text-decoration: underline;'>7</span>         1.00       1.03 </div><div class='input'>
 <span class='co'># Take a look at likelihood measures and other</span>
 <span class='co'># control parameters used during MCMC estimation</span>
 <span class='fu'><a href='https://generics.r-lib.org/reference/glance.html'>glance</a></span><span class='op'>(</span><span class='va'>gest</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tibble: 1 x 5</span><span>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 1 x 5</span>
 #&gt;   independence iterations logLik   AIC   BIC
-#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;lgl&gt;</span><span>             </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span>  </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span> TRUE                  4  -</span><span style='color: #BB0000;'>51.0</span><span>  106.  112.</div><div class='input'><span class='fu'><a href='https://generics.r-lib.org/reference/glance.html'>glance</a></span><span class='op'>(</span><span class='va'>gest</span>, deviance <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tibble: 1 x 9</span><span>
+#&gt;   <span style='color: #949494; font-style: italic;'>&lt;lgl&gt;</span>             <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span>  <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>
+#&gt; <span style='color: #BCBCBC;'>1</span> TRUE                  4  -<span style='color: #BB0000;'>51.0</span>  106.  112.</div><div class='input'><span class='fu'><a href='https://generics.r-lib.org/reference/glance.html'>glance</a></span><span class='op'>(</span><span class='va'>gest</span>, deviance <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 1 x 9</span>
 #&gt;   independence iterations logLik null.deviance df.null residual.deviance
-#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;lgl&gt;</span><span>             </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span>  </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>         </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>             </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span> TRUE                  4  -</span><span style='color: #BB0000;'>51.0</span><span>          166.     120              102.
-#&gt; </span><span style='color: #949494;'># … with 3 more variables: df.residual &lt;dbl&gt;, AIC &lt;dbl&gt;, BIC &lt;dbl&gt;</span><span></div><div class='input'><span class='fu'><a href='https://generics.r-lib.org/reference/glance.html'>glance</a></span><span class='op'>(</span><span class='va'>gest</span>, mcmc <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tibble: 1 x 8</span><span>
+#&gt;   <span style='color: #949494; font-style: italic;'>&lt;lgl&gt;</span>             <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span>  <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;logLik&gt;</span>        <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>             <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>
+#&gt; <span style='color: #BCBCBC;'>1</span> TRUE                  4  -<span style='color: #BB0000;'>51.0</span> 166.3553          120              102.
+#&gt; <span style='color: #949494;'># … with 3 more variables: df.residual &lt;dbl&gt;, AIC &lt;dbl&gt;, BIC &lt;dbl&gt;</span></div><div class='input'><span class='fu'><a href='https://generics.r-lib.org/reference/glance.html'>glance</a></span><span class='op'>(</span><span class='va'>gest</span>, mcmc <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 1 x 8</span>
 #&gt;   independence iterations logLik   AIC   BIC MCMC.interval MCMC.burnin
-#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;lgl&gt;</span><span>             </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span>  </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>         </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>       </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span> TRUE                  4  -</span><span style='color: #BB0000;'>51.0</span><span>  106.  112.          </span><span style='text-decoration: underline;'>1</span><span>024       </span><span style='text-decoration: underline;'>16</span><span>384
-#&gt; </span><span style='color: #949494;'># … with 1 more variable: MCMC.samplesize &lt;dbl&gt;</span><span></div><div class='input'>
-</div></span></pre>
+#&gt;   <span style='color: #949494; font-style: italic;'>&lt;lgl&gt;</span>             <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span>  <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>         <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>       <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>
+#&gt; <span style='color: #BCBCBC;'>1</span> TRUE                  4  -<span style='color: #BB0000;'>51.0</span>  106.  112.          <span style='text-decoration: underline;'>1</span>024       <span style='text-decoration: underline;'>16</span>384
+#&gt; <span style='color: #949494;'># … with 1 more variable: MCMC.samplesize &lt;dbl&gt;</span></div><div class='input'>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

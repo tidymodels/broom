@@ -267,54 +267,54 @@ principle components up to this component (a numeric value between 0 and
 #&gt; <span class='message'>* `` -&gt; ...2</span>
 #&gt; <span class='message'>* `` -&gt; ...3</span>
 #&gt; <span class='message'>* `` -&gt; ...4</span></div><div class='input'><span class='va'>tidy_u</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 17,324 x 3</span><span>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 17,324 x 3</span>
 #&gt;      row    PC    value
-#&gt;    </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #BCBCBC;'> 1</span><span>     1     1  0.004</span><span style='text-decoration: underline;'>03</span><span>
-#&gt; </span><span style='color: #BCBCBC;'> 2</span><span>     2     1 -</span><span style='color: #BB0000;'>0.004</span><span style='color: #BB0000;text-decoration: underline;'>36</span><span>
-#&gt; </span><span style='color: #BCBCBC;'> 3</span><span>     3     1 -</span><span style='color: #BB0000;'>0.001</span><span style='color: #BB0000;text-decoration: underline;'>96</span><span>
-#&gt; </span><span style='color: #BCBCBC;'> 4</span><span>     4     1 -</span><span style='color: #BB0000;'>0.004</span><span style='color: #BB0000;text-decoration: underline;'>44</span><span>
-#&gt; </span><span style='color: #BCBCBC;'> 5</span><span>     5     1 -</span><span style='color: #BB0000;'>0.004</span><span style='color: #BB0000;text-decoration: underline;'>37</span><span>
-#&gt; </span><span style='color: #BCBCBC;'> 6</span><span>     6     1 -</span><span style='color: #BB0000;'>0.004</span><span style='color: #BB0000;text-decoration: underline;'>37</span><span>
-#&gt; </span><span style='color: #BCBCBC;'> 7</span><span>     7     1 -</span><span style='color: #BB0000;'>0.004</span><span style='color: #BB0000;text-decoration: underline;'>31</span><span>
-#&gt; </span><span style='color: #BCBCBC;'> 8</span><span>     8     1 -</span><span style='color: #BB0000;'>0.004</span><span style='color: #BB0000;text-decoration: underline;'>36</span><span>
-#&gt; </span><span style='color: #BCBCBC;'> 9</span><span>     9     1 -</span><span style='color: #BB0000;'>0.004</span><span style='color: #BB0000;text-decoration: underline;'>34</span><span>
-#&gt; </span><span style='color: #BCBCBC;'>10</span><span>    10     1 -</span><span style='color: #BB0000;'>0.004</span><span style='color: #BB0000;text-decoration: underline;'>40</span><span>
-#&gt; </span><span style='color: #949494;'># … with 17,314 more rows</span><span></div><div class='input'>
+#&gt;    <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>    <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>
+#&gt; <span style='color: #BCBCBC;'> 1</span>     1     1  0.004<span style='text-decoration: underline;'>03</span>
+#&gt; <span style='color: #BCBCBC;'> 2</span>     2     1 -<span style='color: #BB0000;'>0.004</span><span style='color: #BB0000; text-decoration: underline;'>36</span>
+#&gt; <span style='color: #BCBCBC;'> 3</span>     3     1 -<span style='color: #BB0000;'>0.001</span><span style='color: #BB0000; text-decoration: underline;'>96</span>
+#&gt; <span style='color: #BCBCBC;'> 4</span>     4     1 -<span style='color: #BB0000;'>0.004</span><span style='color: #BB0000; text-decoration: underline;'>44</span>
+#&gt; <span style='color: #BCBCBC;'> 5</span>     5     1 -<span style='color: #BB0000;'>0.004</span><span style='color: #BB0000; text-decoration: underline;'>37</span>
+#&gt; <span style='color: #BCBCBC;'> 6</span>     6     1 -<span style='color: #BB0000;'>0.004</span><span style='color: #BB0000; text-decoration: underline;'>37</span>
+#&gt; <span style='color: #BCBCBC;'> 7</span>     7     1 -<span style='color: #BB0000;'>0.004</span><span style='color: #BB0000; text-decoration: underline;'>31</span>
+#&gt; <span style='color: #BCBCBC;'> 8</span>     8     1 -<span style='color: #BB0000;'>0.004</span><span style='color: #BB0000; text-decoration: underline;'>36</span>
+#&gt; <span style='color: #BCBCBC;'> 9</span>     9     1 -<span style='color: #BB0000;'>0.004</span><span style='color: #BB0000; text-decoration: underline;'>34</span>
+#&gt; <span style='color: #BCBCBC;'>10</span>    10     1 -<span style='color: #BB0000;'>0.004</span><span style='color: #BB0000; text-decoration: underline;'>40</span>
+#&gt; <span style='color: #949494;'># … with 17,314 more rows</span></div><div class='input'>
 <span class='va'>tidy_d</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>s</span>, matrix <span class='op'>=</span> <span class='st'>"d"</span><span class='op'>)</span>
 <span class='va'>tidy_d</span>
-</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tibble: 4 x 4</span><span>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 4 x 4</span>
 #&gt;      PC std.dev percent cumulative
-#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span>   </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>      </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span>     1    69.5   0.279      0.279
-#&gt; </span><span style='color: #BCBCBC;'>2</span><span>     2    67.0   0.259      0.538
-#&gt; </span><span style='color: #BCBCBC;'>3</span><span>     3    63.9   0.235      0.774
-#&gt; </span><span style='color: #BCBCBC;'>4</span><span>     4    62.6   0.226      1    </div><div class='input'>
+#&gt;   <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>      <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>
+#&gt; <span style='color: #BCBCBC;'>1</span>     1    69.5   0.279      0.279
+#&gt; <span style='color: #BCBCBC;'>2</span>     2    67.0   0.259      0.538
+#&gt; <span style='color: #BCBCBC;'>3</span>     3    63.9   0.235      0.774
+#&gt; <span style='color: #BCBCBC;'>4</span>     4    62.6   0.226      1    </div><div class='input'>
 <span class='va'>tidy_v</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>s</span>, matrix <span class='op'>=</span> <span class='st'>"v"</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; <span class='message'>New names:</span>
 #&gt; <span class='message'>* `` -&gt; ...1</span>
 #&gt; <span class='message'>* `` -&gt; ...2</span>
 #&gt; <span class='message'>* `` -&gt; ...3</span>
 #&gt; <span class='message'>* `` -&gt; ...4</span></div><div class='input'><span class='va'>tidy_v</span>
-</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tibble: 16 x 3</span><span>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 16 x 3</span>
 #&gt;    column    PC   value
-#&gt;     </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #BCBCBC;'> 1</span><span>      1     1  0.657 
-#&gt; </span><span style='color: #BCBCBC;'> 2</span><span>      2     1  0.409 
-#&gt; </span><span style='color: #BCBCBC;'> 3</span><span>      3     1 -</span><span style='color: #BB0000;'>0.577</span><span> 
-#&gt; </span><span style='color: #BCBCBC;'> 4</span><span>      4     1  0.262 
-#&gt; </span><span style='color: #BCBCBC;'> 5</span><span>      1     2 -</span><span style='color: #BB0000;'>0.014</span><span style='color: #BB0000;text-decoration: underline;'>2</span><span>
-#&gt; </span><span style='color: #BCBCBC;'> 6</span><span>      2     2 -</span><span style='color: #BB0000;'>0.650</span><span> 
-#&gt; </span><span style='color: #BCBCBC;'> 7</span><span>      3     2 -</span><span style='color: #BB0000;'>0.137</span><span> 
-#&gt; </span><span style='color: #BCBCBC;'> 8</span><span>      4     2  0.747 
-#&gt; </span><span style='color: #BCBCBC;'> 9</span><span>      1     3  0.302 
-#&gt; </span><span style='color: #BCBCBC;'>10</span><span>      2     3  0.332 
-#&gt; </span><span style='color: #BCBCBC;'>11</span><span>      3     3  0.779 
-#&gt; </span><span style='color: #BCBCBC;'>12</span><span>      4     3  0.438 
-#&gt; </span><span style='color: #BCBCBC;'>13</span><span>      1     4  0.690 
-#&gt; </span><span style='color: #BCBCBC;'>14</span><span>      2     4 -</span><span style='color: #BB0000;'>0.548</span><span> 
-#&gt; </span><span style='color: #BCBCBC;'>15</span><span>      3     4  0.205 
-#&gt; </span><span style='color: #BCBCBC;'>16</span><span>      4     4 -</span><span style='color: #BB0000;'>0.426</span><span> </div><div class='input'>
+#&gt;     <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>
+#&gt; <span style='color: #BCBCBC;'> 1</span>      1     1  0.657 
+#&gt; <span style='color: #BCBCBC;'> 2</span>      2     1  0.409 
+#&gt; <span style='color: #BCBCBC;'> 3</span>      3     1 -<span style='color: #BB0000;'>0.577</span> 
+#&gt; <span style='color: #BCBCBC;'> 4</span>      4     1  0.262 
+#&gt; <span style='color: #BCBCBC;'> 5</span>      1     2 -<span style='color: #BB0000;'>0.014</span><span style='color: #BB0000; text-decoration: underline;'>2</span>
+#&gt; <span style='color: #BCBCBC;'> 6</span>      2     2 -<span style='color: #BB0000;'>0.650</span> 
+#&gt; <span style='color: #BCBCBC;'> 7</span>      3     2 -<span style='color: #BB0000;'>0.137</span> 
+#&gt; <span style='color: #BCBCBC;'> 8</span>      4     2  0.747 
+#&gt; <span style='color: #BCBCBC;'> 9</span>      1     3  0.302 
+#&gt; <span style='color: #BCBCBC;'>10</span>      2     3  0.332 
+#&gt; <span style='color: #BCBCBC;'>11</span>      3     3  0.779 
+#&gt; <span style='color: #BCBCBC;'>12</span>      4     3  0.438 
+#&gt; <span style='color: #BCBCBC;'>13</span>      1     4  0.690 
+#&gt; <span style='color: #BCBCBC;'>14</span>      2     4 -<span style='color: #BB0000;'>0.548</span> 
+#&gt; <span style='color: #BCBCBC;'>15</span>      3     4  0.205 
+#&gt; <span style='color: #BCBCBC;'>16</span>      4     4 -<span style='color: #BB0000;'>0.426</span> </div><div class='input'>
 <span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://ggplot2.tidyverse.org'>ggplot2</a></span><span class='op'>)</span>
 <span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://dplyr.tidyverse.org'>dplyr</a></span><span class='op'>)</span>
 
@@ -327,7 +327,7 @@ principle components up to this component (a numeric value between 0 and
   <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span><span class='va'>class</span>, <span class='va'>value</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
   <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_boxplot.html'>geom_boxplot</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span>
   <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/facet_wrap.html'>facet_wrap</a></span><span class='op'>(</span><span class='op'>~</span><span class='va'>PC</span>, scale <span class='op'>=</span> <span class='st'>"free_y"</span><span class='op'>)</span>
-</div><div class='img'><img src='tidy_irlba-2.png' alt='' width='700' height='433' /></div></span></pre>
+</div><div class='img'><img src='tidy_irlba-2.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

@@ -236,18 +236,18 @@ cross-sectional and longitudinal data."</p>
                data <span class='op'>=</span> <span class='va'>mtcars</span>,
                family <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/family.html'>binomial</a></span><span class='op'>(</span><span class='st'>"probit"</span><span class='op'>)</span><span class='op'>)</span>
 <span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>mod</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 5 x 5</span><span>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 5 x 5</span>
 #&gt;   term         estimate std.error statistic p.value
-#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>           </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span> constant       6.01      4.64     1.30      0.195
-#&gt; </span><span style='color: #BCBCBC;'>2</span><span> mpg           -</span><span style='color: #BB0000;'>0.095</span><span style='color: #BB0000;text-decoration: underline;'>7</span><span>    0.134   -</span><span style='color: #BB0000;'>0.716</span><span>     0.474
-#&gt; </span><span style='color: #BCBCBC;'>3</span><span> hp            -</span><span style='color: #BB0000;'>0.024</span><span style='color: #BB0000;text-decoration: underline;'>4</span><span>    0.021</span><span style='text-decoration: underline;'>4</span><span>  -</span><span style='color: #BB0000;'>1.14</span><span>      0.253
-#&gt; </span><span style='color: #BCBCBC;'>4</span><span> factor(cyl)6  -</span><span style='color: #BB0000;'>0.980</span><span>     1.23    -</span><span style='color: #BB0000;'>0.797</span><span>     0.426
-#&gt; </span><span style='color: #BCBCBC;'>5</span><span> factor(cyl)8  -</span><span style='color: #BB0000;'>6.39</span><span>    938.      -</span><span style='color: #BB0000;'>0.006</span><span style='color: #BB0000;text-decoration: underline;'>82</span><span>   0.995</div><div class='input'><span class='fu'><a href='https://generics.r-lib.org/reference/glance.html'>glance</a></span><span class='op'>(</span><span class='va'>mod</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tibble: 1 x 5</span><span>
+#&gt;   <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>           <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>
+#&gt; <span style='color: #BCBCBC;'>1</span> constant       6.01      4.64     1.30      0.195
+#&gt; <span style='color: #BCBCBC;'>2</span> mpg           -<span style='color: #BB0000;'>0.095</span><span style='color: #BB0000; text-decoration: underline;'>7</span>    0.134   -<span style='color: #BB0000;'>0.716</span>     0.474
+#&gt; <span style='color: #BCBCBC;'>3</span> hp            -<span style='color: #BB0000;'>0.024</span><span style='color: #BB0000; text-decoration: underline;'>4</span>    0.021<span style='text-decoration: underline;'>4</span>  -<span style='color: #BB0000;'>1.14</span>      0.253
+#&gt; <span style='color: #BCBCBC;'>4</span> factor(cyl)6  -<span style='color: #BB0000;'>0.980</span>     1.23    -<span style='color: #BB0000;'>0.797</span>     0.426
+#&gt; <span style='color: #BCBCBC;'>5</span> factor(cyl)8  -<span style='color: #BB0000;'>6.39</span>    938.      -<span style='color: #BB0000;'>0.006</span><span style='color: #BB0000; text-decoration: underline;'>82</span>   0.995</div><div class='input'><span class='fu'><a href='https://generics.r-lib.org/reference/glance.html'>glance</a></span><span class='op'>(</span><span class='va'>mod</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 1 x 5</span>
 #&gt;   logLik   AIC   BIC    df  nobs
-#&gt;    </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span>  -</span><span style='color: #BB0000;'>7.30</span><span>  24.6  31.9    </span><span style='color: #BB0000;'>NA</span><span>    32</div></span></pre>
+#&gt;    <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>
+#&gt; <span style='color: #BCBCBC;'>1</span>  -<span style='color: #BB0000;'>7.30</span>  24.6  31.9    <span style='color: #BB0000;'>NA</span>    32</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

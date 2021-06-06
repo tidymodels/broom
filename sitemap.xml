@@ -349,6 +349,9 @@
     <loc>https://broom.tidymodels.org/reference/glance.varest.html</loc>
   </url>
   <url>
+    <loc>https://broom.tidymodels.org/reference/glance_gam_hastie.html</loc>
+  </url>
+  <url>
     <loc>https://broom.tidymodels.org/reference/glance_optim.html</loc>
   </url>
   <url>
@@ -698,6 +701,9 @@
   </url>
   <url>
     <loc>https://broom.tidymodels.org/reference/tidy.zoo.html</loc>
+  </url>
+  <url>
+    <loc>https://broom.tidymodels.org/reference/tidy_gam_hastie.html</loc>
   </url>
   <url>
     <loc>https://broom.tidymodels.org/reference/tidy_irlba.html</loc>

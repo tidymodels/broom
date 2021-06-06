@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Tidy a(n) lmodel2 object — tidy.lmodel2 • broom</title>
+<title>Tidy a(n) Gam object — tidy.Gam • broom</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -49,7 +49,7 @@
 
 
 
-<meta property="og:title" content="Tidy a(n) lmodel2 object — tidy.lmodel2" />
+<meta property="og:title" content="Tidy a(n) Gam object — tidy.Gam" />
 <meta property="og:description" content="Tidy summarizes information about the components of a model.
 A model component might be a single term in a regression, a single
 hypothesis, a cluster, or a class. Exactly what tidy considers to be a
@@ -158,9 +158,9 @@ specify which components to return." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Tidy a(n) lmodel2 object</h1>
-    <small class="dont-index">Source: <a href='https://github.com/tidymodels/broom/blob/master/R/lmodel2-tidiers.R'><code>R/lmodel2-tidiers.R</code></a></small>
-    <div class="hidden name"><code>tidy.lmodel2.Rd</code></div>
+    <h1>Tidy a(n) Gam object</h1>
+    <small class="dont-index">Source: <a href='https://github.com/tidymodels/broom/blob/master/R/gam-tidiers.R'><code>R/gam-tidiers.R</code></a></small>
+    <div class="hidden name"><code>tidy_gam_hastie.Rd</code></div>
     </div>
 
     <div class="ref-description">
@@ -172,7 +172,7 @@ If a model has several distinct types of components, you will need to
 specify which components to return.</p>
     </div>
 
-    <pre class="usage"><span class='co'># S3 method for lmodel2</span>
+    <pre class="usage"><span class='co'># S3 method for Gam</span>
 <span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>...</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -180,7 +180,7 @@ specify which components to return.</p>
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>x</th>
-      <td><p>A <code>lmodel2</code> object returned by <code><a href='https://rdrr.io/pkg/lmodel2/man/lmodel2.html'>lmodel2::lmodel2()</a></code>.</p></td>
+      <td><p>A <code>Gam</code> object returned from a call to <code><a href='https://rdrr.io/pkg/gam/man/gam.html'>gam::gam()</a></code>.</p></td>
     </tr>
     <tr>
       <th>...</th>
@@ -198,93 +198,42 @@ the <code>data</code> argument.</p></td>
 
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>There are always only two terms in an <code>lmodel2</code>: <code>"Intercept"</code>
-and <code>"Slope"</code>. These are computed by four methods: OLS
-(ordinary least squares), MA (major axis), SMA (standard major
-axis), and RMA (ranged major axis).</p>
-<p>The returned p-value is one-tailed and calculated via a permutation test.
-A permutational test is used because distributional assumptions may not
-be valid. More information can be found in
-<code><a href='https://cran.rstudio.com/web/packages/lmodel2/vignettes/mod2user.pdf'>vignette("mod2user", package = "lmodel2")</a></code>.</p>
+    <p>Tidy <code>gam</code> objects created by calls to <code><a href='https://rdrr.io/pkg/mgcv/man/gam.html'>mgcv::gam()</a></code> with
+<code><a href='tidy.gam.html'>tidy.gam()</a></code>.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='https://generics.r-lib.org/reference/tidy.html'>tidy()</a></code>, <code><a href='https://rdrr.io/pkg/lmodel2/man/lmodel2.html'>lmodel2::lmodel2()</a></code></p>
-<p>Other lmodel2 tidiers: 
-<code><a href='glance.lmodel2.html'>glance.lmodel2</a>()</code></p></div>
+    <div class='dont-index'><p><code><a href='https://generics.r-lib.org/reference/tidy.html'>tidy()</a></code>, <code><a href='https://rdrr.io/pkg/gam/man/gam.html'>gam::gam()</a></code>, <code><a href='tidy.anova.html'>tidy.anova()</a></code>, <code><a href='tidy.gam.html'>tidy.gam()</a></code></p>
+<p>Other gam tidiers: 
+<code><a href='glance.Gam.html'>glance.Gam</a>()</code></p></div>
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>A <code><a href='https://tibble.tidyverse.org/reference/tibble.html'>tibble::tibble()</a></code> with columns:</p>
-<dt>conf.high</dt><dd><p>Upper bound on the confidence interval for the estimate.</p></dd>
-  <dt>conf.low</dt><dd><p>Lower bound on the confidence interval for the estimate.</p></dd>
-  <dt>estimate</dt><dd><p>The estimated value of the regression term.</p></dd>
+<dt>df</dt><dd><p>Degrees of freedom used by this term in the model.</p></dd>
+  <dt>meansq</dt><dd><p>Mean sum of squares. Equal to total sum of squares divided by degrees of freedom.</p></dd>
   <dt>p.value</dt><dd><p>The two-sided p-value associated with the observed statistic.</p></dd>
+  <dt>statistic</dt><dd><p>The value of a T-statistic to use in a hypothesis that the regression term is non-zero.</p></dd>
+  <dt>sumsq</dt><dd><p>Sum of squares explained by this term.</p></dd>
   <dt>term</dt><dd><p>The name of the regression term.</p></dd>
-  <dt>method</dt><dd><p>Either OLS/MA/SMA/RMA</p></dd>
 
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
-<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'>lmodel2</span><span class='op'>)</span>
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'>gam</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='message'>Loading required package: splines</span></div><div class='output co'>#&gt; <span class='message'>Loading required package: foreach</span></div><div class='output co'>#&gt; <span class='message'>Loaded gam 1.20</span></div><div class='input'><span class='va'>g</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/gam/man/gam.html'>gam</a></span><span class='op'>(</span><span class='va'>mpg</span> <span class='op'>~</span> <span class='fu'><a href='https://rdrr.io/pkg/gam/man/s.html'>s</a></span><span class='op'>(</span><span class='va'>hp</span>, <span class='fl'>4</span><span class='op'>)</span> <span class='op'>+</span> <span class='va'>am</span> <span class='op'>+</span> <span class='va'>qsec</span>, data <span class='op'>=</span> <span class='va'>mtcars</span><span class='op'>)</span>
 
-<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>mod2ex2</span><span class='op'>)</span>
-<span class='va'>Ex2.res</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/lmodel2/man/lmodel2.html'>lmodel2</a></span><span class='op'>(</span><span class='va'>Prey</span> <span class='op'>~</span> <span class='va'>Predators</span>, data <span class='op'>=</span> <span class='va'>mod2ex2</span>, <span class='st'>"relative"</span>, <span class='st'>"relative"</span>, <span class='fl'>99</span><span class='op'>)</span>
-<span class='va'>Ex2.res</span>
-</div><div class='output co'>#&gt; 
-#&gt; Model II regression
-#&gt; 
-#&gt; Call: lmodel2(formula = Prey ~ Predators, data = mod2ex2, range.y =
-#&gt; "relative", range.x = "relative", nperm = 99)
-#&gt; 
-#&gt; n = 20   r = 0.8600787   r-square = 0.7397354 
-#&gt; Parametric P-values:   2-tailed = 1.161748e-06    1-tailed = 5.808741e-07 
-#&gt; Angle between the two OLS regression lines = 5.106227 degrees
-#&gt; 
-#&gt; Permutation tests of OLS, MA, RMA slopes: 1-tailed, tail corresponding to sign
-#&gt; A permutation test of r is equivalent to a permutation test of the OLS slope
-#&gt; P-perm for SMA = NA because the SMA slope cannot be tested
-#&gt; 
-#&gt; Regression results
-#&gt;   Method Intercept    Slope Angle (degrees) P-perm (1-tailed)
-#&gt; 1    OLS  20.02675 2.631527        69.19283              0.01
-#&gt; 2     MA  13.05968 3.465907        73.90584              0.01
-#&gt; 3    SMA  16.45205 3.059635        71.90073                NA
-#&gt; 4    RMA  17.25651 2.963292        71.35239              0.01
-#&gt; 
-#&gt; Confidence intervals
-#&gt;   Method 2.5%-Intercept 97.5%-Intercept 2.5%-Slope 97.5%-Slope
-#&gt; 1    OLS      12.490993        27.56251   1.858578    3.404476
-#&gt; 2     MA       1.347422        19.76310   2.663101    4.868572
-#&gt; 3    SMA       9.195287        22.10353   2.382810    3.928708
-#&gt; 4    RMA       8.962997        23.84493   2.174260    3.956527
-#&gt; 
-#&gt; Eigenvalues: 269.8212 6.418234 
-#&gt; 
-#&gt; H statistic used for computing C.I. of MA: 0.006120651 
-#&gt; </div><div class='input'>
-<span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>Ex2.res</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 8 x 6</span>
-#&gt;   method term      estimate conf.low conf.high p.value
-#&gt;   <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>  <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>        <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>    <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>
-#&gt; <span style='color: #BCBCBC;'>1</span> MA     Intercept    13.1      1.35     19.8     0.01
-#&gt; <span style='color: #BCBCBC;'>2</span> MA     Slope         3.47     2.66      4.87    0.01
-#&gt; <span style='color: #BCBCBC;'>3</span> OLS    Intercept    20.0     12.5      27.6     0.01
-#&gt; <span style='color: #BCBCBC;'>4</span> OLS    Slope         2.63     1.86      3.40    0.01
-#&gt; <span style='color: #BCBCBC;'>5</span> RMA    Intercept    17.3      8.96     23.8     0.01
-#&gt; <span style='color: #BCBCBC;'>6</span> RMA    Slope         2.96     2.17      3.96    0.01
-#&gt; <span style='color: #BCBCBC;'>7</span> SMA    Intercept    16.5      9.20     22.1    <span style='color: #BB0000;'>NA</span>   
-#&gt; <span style='color: #BCBCBC;'>8</span> SMA    Slope         3.06     2.38      3.93   <span style='color: #BB0000;'>NA</span>   </div><div class='input'><span class='fu'><a href='https://generics.r-lib.org/reference/glance.html'>glance</a></span><span class='op'>(</span><span class='va'>Ex2.res</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 1 x 5</span>
-#&gt;   r.squared theta    p.value       H  nobs
-#&gt;       <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>      <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span>
-#&gt; <span style='color: #BCBCBC;'>1</span>     0.740  5.11 0.000<span style='text-decoration: underline;'>001</span>16 0.006<span style='text-decoration: underline;'>12</span>    20</div><div class='input'>
-<span class='co'># this allows coefficient plots with ggplot2</span>
-<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://ggplot2.tidyverse.org'>ggplot2</a></span><span class='op'>)</span>
-<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>Ex2.res</span><span class='op'>)</span>, <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span><span class='va'>estimate</span>, <span class='va'>term</span>, color <span class='op'>=</span> <span class='va'>method</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
-  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_point.html'>geom_point</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span>
-  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_errorbarh.html'>geom_errorbarh</a></span><span class='op'>(</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>xmin <span class='op'>=</span> <span class='va'>conf.low</span>, xmax <span class='op'>=</span> <span class='va'>conf.high</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
-  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_errorbarh.html'>geom_errorbarh</a></span><span class='op'>(</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>xmin <span class='op'>=</span> <span class='va'>conf.low</span>, xmax <span class='op'>=</span> <span class='va'>conf.high</span><span class='op'>)</span><span class='op'>)</span>
-</div><div class='img'><img src='tidy.lmodel2-1.png' alt='' width='700' height='433' /></div></pre>
+<span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>g</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 4 x 6</span>
+#&gt;   term         df    sumsq   meansq statistic   p.value
+#&gt;   <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>    <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>    <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>
+#&gt; <span style='color: #BCBCBC;'>1</span> s(hp, 4)    1   678.     678.      94.4      5.73<span style='color: #949494;'>e</span><span style='color: #BB0000;'>-10</span>
+#&gt; <span style='color: #BCBCBC;'>2</span> am          1   113.     113.      15.7      5.52<span style='color: #949494;'>e</span><span style='color: #BB0000;'>- 4</span>
+#&gt; <span style='color: #BCBCBC;'>3</span> qsec        1     0.026<span style='text-decoration: underline;'>3</span>   0.026<span style='text-decoration: underline;'>3</span>   0.003<span style='text-decoration: underline;'>66</span>  9.52<span style='color: #949494;'>e</span><span style='color: #BB0000;'>- 1</span>
+#&gt; <span style='color: #BCBCBC;'>4</span> Residuals  25.0 180.       7.19    <span style='color: #BB0000;'>NA</span>       <span style='color: #BB0000;'>NA</span>   <span style='color: #949494;'> </span>   </div><div class='input'><span class='fu'><a href='https://generics.r-lib.org/reference/glance.html'>glance</a></span><span class='op'>(</span><span class='va'>g</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 1 x 7</span>
+#&gt;      df logLik   AIC   BIC deviance df.residual  nobs
+#&gt;   <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>  <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>    <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>       <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span>
+#&gt; <span style='color: #BCBCBC;'>1</span>  7.00  -<span style='color: #BB0000;'>76.0</span>  162.  169.     180.        25.0    32</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

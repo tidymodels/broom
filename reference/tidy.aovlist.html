@@ -228,14 +228,14 @@ trailing whitespace, which this tidying method trims.</p>
     <pre class="examples"><div class='input'>
 <span class='va'>a</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/aov.html'>aov</a></span><span class='op'>(</span><span class='va'>mpg</span> <span class='op'>~</span> <span class='va'>wt</span> <span class='op'>+</span> <span class='va'>qsec</span> <span class='op'>+</span> <span class='fu'><a href='https://rdrr.io/r/stats/aov.html'>Error</a></span><span class='op'>(</span><span class='va'>disp</span> <span class='op'>/</span> <span class='va'>am</span><span class='op'>)</span>, <span class='va'>mtcars</span><span class='op'>)</span>
 <span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>a</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 5 x 7</span><span>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 5 x 7</span>
 #&gt;   stratum term         df   sumsq  meansq statistic  p.value
-#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>     </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span> disp    wt            1 809.    809.        </span><span style='color: #BB0000;'>NA</span><span>    </span><span style='color: #BB0000;'>NA</span><span>      
-#&gt; </span><span style='color: #BCBCBC;'>2</span><span> disp:am wt            1   0.389   0.389     </span><span style='color: #BB0000;'>NA</span><span>    </span><span style='color: #BB0000;'>NA</span><span>      
-#&gt; </span><span style='color: #BCBCBC;'>3</span><span> Within  wt            1  87.2    87.2       12.0   0.001</span><span style='text-decoration: underline;'>76</span><span>
-#&gt; </span><span style='color: #BCBCBC;'>4</span><span> Within  qsec          1  34.2    34.2        4.72  0.038</span><span style='text-decoration: underline;'>7</span><span> 
-#&gt; </span><span style='color: #BCBCBC;'>5</span><span> Within  Residuals    27 195.      7.24      </span><span style='color: #BB0000;'>NA</span><span>    </span><span style='color: #BB0000;'>NA</span><span>      </div></span></pre>
+#&gt;   <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>    <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>
+#&gt; <span style='color: #BCBCBC;'>1</span> disp    wt            1 809.    809.        <span style='color: #BB0000;'>NA</span>    <span style='color: #BB0000;'>NA</span>      
+#&gt; <span style='color: #BCBCBC;'>2</span> disp:am wt            1   0.389   0.389     <span style='color: #BB0000;'>NA</span>    <span style='color: #BB0000;'>NA</span>      
+#&gt; <span style='color: #BCBCBC;'>3</span> Within  wt            1  87.2    87.2       12.0   0.001<span style='text-decoration: underline;'>76</span>
+#&gt; <span style='color: #BCBCBC;'>4</span> Within  qsec          1  34.2    34.2        4.72  0.038<span style='text-decoration: underline;'>7</span> 
+#&gt; <span style='color: #BCBCBC;'>5</span> Within  Residuals    27 195.      7.24      <span style='color: #BB0000;'>NA</span>    <span style='color: #BB0000;'>NA</span>      </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

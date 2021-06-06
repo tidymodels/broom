@@ -219,25 +219,25 @@ the <code>data</code> argument.</p></td>
     <pre class="examples"><div class='input'>
 <span class='va'>ptt</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/power.t.test.html'>power.t.test</a></span><span class='op'>(</span>n <span class='op'>=</span> <span class='fl'>2</span><span class='op'>:</span><span class='fl'>30</span>, delta <span class='op'>=</span> <span class='fl'>1</span><span class='op'>)</span>
 <span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>ptt</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 29 x 5</span><span>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 29 x 5</span>
 #&gt;        n delta    sd sig.level  power
-#&gt;    </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #BCBCBC;'> 1</span><span>     2     1     1      0.05 0.091</span><span style='text-decoration: underline;'>3</span><span>
-#&gt; </span><span style='color: #BCBCBC;'> 2</span><span>     3     1     1      0.05 0.157 
-#&gt; </span><span style='color: #BCBCBC;'> 3</span><span>     4     1     1      0.05 0.222 
-#&gt; </span><span style='color: #BCBCBC;'> 4</span><span>     5     1     1      0.05 0.286 
-#&gt; </span><span style='color: #BCBCBC;'> 5</span><span>     6     1     1      0.05 0.347 
-#&gt; </span><span style='color: #BCBCBC;'> 6</span><span>     7     1     1      0.05 0.406 
-#&gt; </span><span style='color: #BCBCBC;'> 7</span><span>     8     1     1      0.05 0.461 
-#&gt; </span><span style='color: #BCBCBC;'> 8</span><span>     9     1     1      0.05 0.513 
-#&gt; </span><span style='color: #BCBCBC;'> 9</span><span>    10     1     1      0.05 0.562 
-#&gt; </span><span style='color: #BCBCBC;'>10</span><span>    11     1     1      0.05 0.607 
-#&gt; </span><span style='color: #949494;'># … with 19 more rows</span><span></div><div class='input'>
+#&gt;    <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>  <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>
+#&gt; <span style='color: #BCBCBC;'> 1</span>     2     1     1      0.05 0.091<span style='text-decoration: underline;'>3</span>
+#&gt; <span style='color: #BCBCBC;'> 2</span>     3     1     1      0.05 0.157 
+#&gt; <span style='color: #BCBCBC;'> 3</span>     4     1     1      0.05 0.222 
+#&gt; <span style='color: #BCBCBC;'> 4</span>     5     1     1      0.05 0.286 
+#&gt; <span style='color: #BCBCBC;'> 5</span>     6     1     1      0.05 0.347 
+#&gt; <span style='color: #BCBCBC;'> 6</span>     7     1     1      0.05 0.406 
+#&gt; <span style='color: #BCBCBC;'> 7</span>     8     1     1      0.05 0.461 
+#&gt; <span style='color: #BCBCBC;'> 8</span>     9     1     1      0.05 0.513 
+#&gt; <span style='color: #BCBCBC;'> 9</span>    10     1     1      0.05 0.562 
+#&gt; <span style='color: #BCBCBC;'>10</span>    11     1     1      0.05 0.607 
+#&gt; <span style='color: #949494;'># … with 19 more rows</span></div><div class='input'>
 <span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://ggplot2.tidyverse.org'>ggplot2</a></span><span class='op'>)</span>
 
 <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>ptt</span><span class='op'>)</span>, <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span><span class='va'>n</span>, <span class='va'>power</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
   <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_path.html'>geom_line</a></span><span class='op'>(</span><span class='op'>)</span>
-</div><div class='img'><img src='tidy.power.htest-1.png' alt='' width='700' height='433' /></div></span></pre>
+</div><div class='img'><img src='tidy.power.htest-1.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
