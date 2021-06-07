@@ -5,7 +5,7 @@
 
 # broom 0.7.6
 
-* Fixed bug in `tidy.epi.2by2` that resulted in errors with new version of `epiR` (`#1028` by `@alexpghayes`)
+* Fixed bug in `tidy.epi.2by2` that resulted in errors with new version of `epiR` (`#1028` by `@nt-williams`)
 * Fixed bug in `augment` tidiers resulting in `.fitted` and `.se.fit` array columns.
 * Fixed bug that made column `y` non-numeric after `tidy_xyz` (`#973` by `@jiho`)
 * Added tidiers for `MASS:glm.nb` (`#998` by `@joshyam-k`)
