@@ -17,7 +17,7 @@
 #' )
 #'
 #' @details The tibble has a column for each of the measures of association 
-#'   or tests contained in `massoc.detail` when [epiR::epi.2by2()] is called.
+#'   or tests contained in `massoc` or `massoc.detail` when [epiR::epi.2by2()] is called.
 #'
 #' @examples
 #' 
@@ -41,7 +41,13 @@
 #' @family epiR tidiers
 #' @aliases epiR_tidiers
 tidy.epi.2by2 <- function(x, parameters = c("moa", "stat"), ...) {
-  massoc <- x$massoc.detail
+  epiR_vs <- compareVersion("2.0.26", as.character(packageVersion("epiR")))
+  if (epiR_vs %in% c(0, -1)) {
+    massoc <- x$massoc.detail
+  } else {
+    massoc <- x$massoc
+  }
+
   out <- dplyr::bind_rows(massoc[names(massoc) != "chi2.correction"], .id = "term")
   if (rlang::arg_match(parameters) == "moa") {
     out <- subset(out, !is.na(est), select = c("term", "est", "lower", "upper"))
@@ -49,10 +55,15 @@ tidy.epi.2by2 <- function(x, parameters = c("moa", "stat"), ...) {
     return(tibble::as_tibble(out))
   }
   
-  if ("p.value" %in% colnames(out)) {
-    out$p.value.2s <- with(out, dplyr::coalesce(p.value.2s, p.value))
+  if (epiR_vs %in% c(0, -1)) {
+    if ("p.value" %in% colnames(out)) {
+      out$p.value <- with(out, dplyr::coalesce(p.value.2s, p.value))
+    } else {
+      out$p.value <- out[["p.value.2s"]]
+    }
   }
-  out <- subset(out, is.na(est), select = c("term", "test.statistic", "df", "p.value.2s"))
+  
+  out <- subset(out, is.na(est), select = c("term", "test.statistic", "df", "p.value"))
   colnames(out) <- c("term", "statistic", "df", "p.value")
   tibble::as_tibble(out)
 }
