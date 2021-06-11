@@ -1,5 +1,6 @@
 # broom (development version)
 
+* Fixed bug in `tidy.epi.2by2` that resulted in errors with new version of `epiR` (`#1028` by `@nt-williams`)
 * Added `exponentiate` argument to `tidy.gam()` tidier applicable for parametric terms. (`#1013` by `@ddsjoberg`)
 * Added `exponentiate` argument to `tidy.negbin()` tidier. (`#1011` by `@ddsjoberg`)
 
@@ -11,7 +12,6 @@
 * Fixed bug in `tidy.fixest` that sometimes prevented arguments like `se` from being used (`#1001` by `@karldw`)
 * Fixed bug in `tidy.fixest` that resulted in errors when columns with name
 `x` are present (`#1007` by `@grantmcdermott`)
-* Fixed bug in `tidy.epi.2by2` that resulted in errors with new version of `epiR` (`#1028` by `@nt-williams`)
 * Moved forward with planned deprecation of `gamlss` tidiers in favor of
 those provided in `broom.mixed`
 * Various bug fixes and improvements to documentation
