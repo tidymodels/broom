@@ -53,7 +53,7 @@ This release also restores tidiers for `felm` objects from the `lfe` package, wh
 In broom `0.7.0`, we introduced an error for model objects that subclassed
 `lm` and relied on `tidy.lm()`, or similarly for `tidy.glm()`. Tidiers for
 these objects were supported unintentionally, and we worried that tidiers for
-these objects would silently report innaccurate results.
+these objects would silently report inaccurate results.
 
 In hindsight, this change was unnecessarily abrupt. We've decided to roll back 
 this change, instead providing the following warning before allowing such 

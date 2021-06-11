@@ -43,6 +43,8 @@ confint
 confusionMatrix
 converage
 coxph
+cmprsk
+crr
 cumulants
 cv
 cyl
@@ -53,6 +55,7 @@ dev
 doi
 dplyr
 dplyr's
+df
 drc
 Dunkle
 Durbin
@@ -93,6 +96,7 @@ Goodreau
 Hadley's
 Handcock
 Hausman
+heteroskedasticity
 HKB
 homoskedastic
 Hotelling
@@ -112,6 +116,7 @@ kmeans
 lamdba
 lavaan
 Lawley
+leveneTest
 lfe
 Ljung
 lm
@@ -123,6 +128,7 @@ lmtest
 loadings 
 loess
 logLik
+Loglik
 losts
 lsmeans
 lsmobj
@@ -159,6 +165,8 @@ multivairate
 multiway
 na
 NA's
+nb
+negbin
 newdata
 nl
 nlme
@@ -192,6 +200,8 @@ Qhat
 quantreg
 quartile
 rcorr
+Rchoice
+rchoice
 README
 reprex
 regsubsets
@@ -235,6 +245,7 @@ Standardised
 stanfit
 stepfunctions
 stl
+subclassed
 succesful
 summaryDefault
 survdiff
@@ -257,12 +268,14 @@ tidymodels
 tidyr
 tidyverse
 TukeyHSD
+unarchived
 unnest
 unnested
 unnesting
 urgh
 usethis
 uzed
+varest
 Walz
 Werner
 Wickham's
@@ -270,5 +283,6 @@ Wickham’s
 Willem
 Wilk's
 Wilks
+Wooldridge
 xyz
 Zhou

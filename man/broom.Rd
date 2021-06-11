@@ -33,12 +33,12 @@ Useful links:
 
 }
 \author{
-\strong{Maintainer}: Alex Hayes \email{alexpghayes@gmail.com} (\href{https://orcid.org/0000-0002-4985-5160}{ORCID})
+\strong{Maintainer}: Simon Couch \email{scouch2@jhu.edu} (\href{https://orcid.org/0000-0001-5676-5107}{ORCID})
 
 Authors:
 \itemize{
   \item David Robinson \email{admiral.david@gmail.com}
-  \item Simon Couch \email{simonpatrickcouch@gmail.com}
+  \item Alex Hayes \email{alexpghayes@gmail.com} (\href{https://orcid.org/0000-0002-4985-5160}{ORCID})
 }
 
 Other contributors:
