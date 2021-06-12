@@ -204,7 +204,7 @@ the <code>data</code> argument.</p></td>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>The tibble has a column for each of the measures of association
-or tests contained in <code>massoc</code> when <code><a href='https://rdrr.io/pkg/epiR/man/epi.2by2.html'>epiR::epi.2by2()</a></code> is called.</p>
+or tests contained in <code>massoc</code> or <code>massoc.detail</code> when <code><a href='https://rdrr.io/pkg/epiR/man/epi.2by2.html'>epiR::epi.2by2()</a></code> is called.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p><code><a href='https://generics.r-lib.org/reference/tidy.html'>tidy()</a></code>, <code><a href='https://rdrr.io/pkg/epiR/man/epi.2by2.html'>epiR::epi.2by2()</a></code></p></div>
@@ -226,8 +226,10 @@ or tests contained in <code>massoc</code> when <code><a href='https://rdrr.io/pk
 <span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://fvas.unimelb.edu.au/research/groups/veterinary-epidemiology-melbourne'>epiR</a></span><span class='op'>)</span>
 </div><div class='output co'>#&gt; <span class='message'>Package epiR 2.0.26 is loaded</span></div><div class='output co'>#&gt; <span class='message'>Type help(epi.about) for summary information</span></div><div class='output co'>#&gt; <span class='message'>Type browseVignettes(package = 'epiR') to learn how to use epiR for applied epidemiological analyses</span></div><div class='output co'>#&gt; <span class='message'></span></div><div class='input'>
 <span class='va'>dat</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>13</span>, <span class='fl'>2163</span>, <span class='fl'>5</span>, <span class='fl'>3349</span><span class='op'>)</span>, nrow <span class='op'>=</span> <span class='fl'>2</span>, byrow <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
+
 <span class='fu'><a href='https://tibble.tidyverse.org/reference/rownames.html'>rownames</a></span><span class='op'>(</span><span class='va'>dat</span><span class='op'>)</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"DF+"</span>, <span class='st'>"DF-"</span><span class='op'>)</span>
 <span class='fu'><a href='https://rdrr.io/r/base/colnames.html'>colnames</a></span><span class='op'>(</span><span class='va'>dat</span><span class='op'>)</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"FUS+"</span>, <span class='st'>"FUS-"</span><span class='op'>)</span>
+
 <span class='va'>fit</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/epiR/man/epi.2by2.html'>epi.2by2</a></span><span class='op'>(</span>
   dat <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/table.html'>as.table</a></span><span class='op'>(</span><span class='va'>dat</span><span class='op'>)</span>, method <span class='op'>=</span> <span class='st'>"cross.sectional"</span>,
   conf.level <span class='op'>=</span> <span class='fl'>0.95</span>, units <span class='op'>=</span> <span class='fl'>100</span>, outcome <span class='op'>=</span> <span class='st'>"as.columns"</span>
@@ -251,7 +253,13 @@ or tests contained in <code>massoc</code> when <code><a href='https://rdrr.io/pk
 #&gt; <span style='color: #BCBCBC;'>12</span> PARisk.strata.wald     0.176  -<span style='color: #BB0000;'>0.022</span><span style='color: #BB0000; text-decoration: underline;'>5</span>     0.375
 #&gt; <span style='color: #BCBCBC;'>13</span> PARisk.strata.piri     0.176   0.038<span style='text-decoration: underline;'>9</span>     0.314
 #&gt; <span style='color: #BCBCBC;'>14</span> AFRisk.strata.wald     0.750   0.301      0.911
-#&gt; <span style='color: #BCBCBC;'>15</span> PAFRisk.strata.wald    0.542   0.036<span style='text-decoration: underline;'>1</span>     0.782</div><div class='input'>
+#&gt; <span style='color: #BCBCBC;'>15</span> PAFRisk.strata.wald    0.542   0.036<span style='text-decoration: underline;'>1</span>     0.782</div><div class='input'><span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>fit</span>, parameters <span class='op'>=</span> <span class='st'>"stat"</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 3 x 4</span>
+#&gt;   term               statistic    df p.value
+#&gt;   <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>                  <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>
+#&gt; <span style='color: #BCBCBC;'>1</span> chi2.strata.uncor       8.18     1 0.004<span style='text-decoration: underline;'>24</span>
+#&gt; <span style='color: #BCBCBC;'>2</span> chi2.strata.yates       6.85     1 0.008<span style='text-decoration: underline;'>85</span>
+#&gt; <span style='color: #BCBCBC;'>3</span> chi2.strata.fisher     <span style='color: #BB0000;'>NA</span>       <span style='color: #BB0000;'>NA</span> 0.006<span style='text-decoration: underline;'>35</span></div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
