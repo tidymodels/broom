@@ -1,8 +1,12 @@
 # broom (development version)
 
+To be released as broom 0.7.7
+
 * Fixed bug in `tidy.epi.2by2` that resulted in errors with new version of `epiR` (`#1028` by `@nt-williams`)
-* Added `exponentiate` argument to `tidy.gam()` tidier applicable for parametric terms. (`#1013` by `@ddsjoberg`)
-* Added `exponentiate` argument to `tidy.negbin()` tidier. (`#1011` by `@ddsjoberg`)
+* Added `exponentiate` argument to `tidy.gam()` tidier applicable for parametric terms (`#1013` by `@ddsjoberg`)
+* Added `exponentiate` argument to `tidy.negbin()` tidier (`#1011` by `@ddsjoberg`)
+* Fixed failures in `spdep` tidiers following breaking changes in the most recent release
+* Various bug fixes and improvements to documentation
 
 # broom 0.7.6
 

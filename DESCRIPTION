@@ -607,7 +607,7 @@ Suggests:
     rsample,
     sandwich,
     sp,
-    spdep,
+    spdep (>= 1.1),
     spatialreg,
     speedglm,
     spelling,
