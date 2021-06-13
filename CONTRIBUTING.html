@@ -179,17 +179,11 @@
 <ul>
 <li>We recommend that you create a Git branch for each pull request (PR).<br>
 </li>
-<li>Look at the Travis and AppVeyor build status before and after making changes. The <code>README</code> should contain badges for any continuous integration services used by the package.<br>
-</li>
-<li>New code should follow the tidyverse <a href="https://style.tidyverse.org">style guide</a>. You can use the <a href="https://CRAN.R-project.org/package=styler">styler</a> package to apply these styles, but please don’t restyle code that has nothing to do with your PR.<br>
+<li>New code should follow the tidyverse <a href="https://style.tidyverse.org">style guide</a>. You can use the <a href="https://CRAN.R-project.org/package=styler">styler</a> package to apply these styles, but please don’t restyle code that is not related to your PR.<br>
 </li>
 <li>We use <a href="https://cran.r-project.org/package=roxygen2">roxygen2</a>, with <a href="https://cran.r-project.org/web/packages/roxygen2/vignettes/markdown.html">Markdown syntax</a>, for documentation.<br>
 </li>
-<li>We use <a href="https://cran.r-project.org/package=testthat">testthat</a>. Contributions with test cases included are easier to accept.
-<ul>
-<li>See additional tips for testing in the <a href="https://broom.tidymodels.org/articles/adding-tidiers.html#testing-new-tidiers">vignette</a> on adding tidying methods.</li>
-</ul>
-</li>
+<li>We use <a href="https://cran.r-project.org/package=testthat">testthat</a>. Contributions with test cases included are easier to accept. See existing unit tests, like <a href="https://github.com/tidymodels/broom/blob/master/tests/testthat/test-mass-rlm.R">these</a>, for a guide on how to unit test broom tidiers.</li>
 <li>For user-facing changes, add a bullet to the top of <code>NEWS.md</code> below the current development version header describing the changes made followed by your GitHub username, and links to relevant issue(s)/PR(s).</li>
 </ul>
 </div>
