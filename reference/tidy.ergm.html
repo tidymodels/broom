@@ -240,20 +240,16 @@ Models for Networks. <em>Journal of Statistical Software</em>, 24(3).
     <pre class="examples"><div class='input'>
 <span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://statnet.org'>ergm</a></span><span class='op'>)</span>
 </div><div class='output co'>#&gt; <span class='message'>Loading required package: network</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>‘network’ 1.17.0 (2021-06-06), part of the Statnet Project</span>
+#&gt; <span class='message'>‘network’ 1.17.1 (2021-06-12), part of the Statnet Project</span>
 #&gt; <span class='message'>* ‘news(package="network")’ for changes since last version</span>
 #&gt; <span class='message'>* ‘citation("network")’ for citation information</span>
 #&gt; <span class='message'>* ‘https://statnet.org’ for help, support, and other information</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>‘ergm’ 3.11.0 (2020-10-14), part of the Statnet Project</span>
+#&gt; <span class='message'>‘ergm’ 4.0.0 (2021-06-14), part of the Statnet Project</span>
 #&gt; <span class='message'>* ‘news(package="ergm")’ for changes since last version</span>
 #&gt; <span class='message'>* ‘citation("ergm")’ for citation information</span>
-#&gt; <span class='message'>* ‘https://statnet.org’ for help, support, and other information</span></div><div class='output co'>#&gt; <span class='message'>NOTE: Versions before 3.6.1 had a bug in the implementation of the bd()</span>
-#&gt; <span class='message'>constraint which distorted the sampled distribution somewhat. In</span>
-#&gt; <span class='message'>addition, Sampson's Monks datasets had mislabeled vertices. See the</span>
-#&gt; <span class='message'>NEWS and the documentation for more details.</span></div><div class='output co'>#&gt; <span class='message'>NOTE: Some common term arguments pertaining to vertex attribute and</span>
-#&gt; <span class='message'>level selection have changed in 3.10.0. See terms help for more</span>
-#&gt; <span class='message'>details. Use ‘options(ergm.term=list(version="3.9.4"))’ to use old</span>
-#&gt; <span class='message'>behavior.</span></div><div class='input'><span class='co'># Using the same example as the ergm package</span>
+#&gt; <span class='message'>* ‘https://statnet.org’ for help, support, and other information</span></div><div class='output co'>#&gt; <span class='message'>‘ergm’ 4 is a major release that introduces a fair number of</span>
+#&gt; <span class='message'>backwards-incompatible changes. Please type ‘news(package="ergm")’ for</span>
+#&gt; <span class='message'>a list of major changes.</span></div><div class='input'><span class='co'># Using the same example as the ergm package</span>
 <span class='co'># Load the Florentine marriage network data</span>
 <span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>florentine</span><span class='op'>)</span>
 
@@ -287,11 +283,10 @@ Models for Networks. <em>Journal of Statistical Software</em>, 24(3).
 #&gt;   <span style='color: #949494; font-style: italic;'>&lt;lgl&gt;</span>             <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span>  <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;logLik&gt;</span>        <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>             <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>
 #&gt; <span style='color: #BCBCBC;'>1</span> TRUE                  4  -<span style='color: #BB0000;'>51.0</span> 166.3553          120              102.
 #&gt; <span style='color: #949494;'># … with 3 more variables: df.residual &lt;dbl&gt;, AIC &lt;dbl&gt;, BIC &lt;dbl&gt;</span></div><div class='input'><span class='fu'><a href='https://generics.r-lib.org/reference/glance.html'>glance</a></span><span class='op'>(</span><span class='va'>gest</span>, mcmc <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 1 x 8</span>
-#&gt;   independence iterations logLik   AIC   BIC MCMC.interval MCMC.burnin
-#&gt;   <span style='color: #949494; font-style: italic;'>&lt;lgl&gt;</span>             <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span>  <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>         <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>       <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>
-#&gt; <span style='color: #BCBCBC;'>1</span> TRUE                  4  -<span style='color: #BB0000;'>51.0</span>  106.  112.          <span style='text-decoration: underline;'>1</span>024       <span style='text-decoration: underline;'>16</span>384
-#&gt; <span style='color: #949494;'># … with 1 more variable: MCMC.samplesize &lt;dbl&gt;</span></div><div class='input'>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 1 x 5</span>
+#&gt;   independence iterations logLik   AIC   BIC
+#&gt;   <span style='color: #949494; font-style: italic;'>&lt;lgl&gt;</span>             <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span>  <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>
+#&gt; <span style='color: #BCBCBC;'>1</span> TRUE                  4  -<span style='color: #BB0000;'>51.0</span>  106.  112.</div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
