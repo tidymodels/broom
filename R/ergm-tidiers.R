@@ -152,6 +152,13 @@ glance.ergm <- function(x, deviance = FALSE, mcmc = FALSE, ...) {
   ret$BIC <- stats::BIC(x)
 
   if (mcmc) {
+    if (isTRUE(x$MPLE_is_MLE)) {
+      message(
+        "Though `glance` was supplied `mcmc = TRUE`, the model was not fitted",
+        "using MCMC, so the corresponding columns will be omitted."
+      )
+    }
+    
     ret$MCMC.interval <- x$control$MCMC.interval
     ret$MCMC.burnin <- x$control$MCMC.burnin
     ret$MCMC.samplesize <- x$control$MCMC.samplesize

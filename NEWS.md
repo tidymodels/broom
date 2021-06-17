@@ -2,6 +2,8 @@
 
 To be released as broom 0.7.8.
 
+* Fixed bug in `glance.ergm` related to handling of MCMC details.
+
 # broom 0.7.7
 
 * Fixed bug in `tidy.epi.2by2` that resulted in errors with new version of `epiR` (`#1028` by `@nt-williams`)
