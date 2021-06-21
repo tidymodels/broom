@@ -437,6 +437,7 @@ augment_newdata <- function(x, data, newdata, .se_fit, interval = NULL, ...) {
 
   if (!is.null(resp) && is.numeric(resp)) {
     df$.resid <- (resp - df$.fitted) %>% unname() 
+    attr(df$.resid, "label") <- NULL
   }
 
   df
