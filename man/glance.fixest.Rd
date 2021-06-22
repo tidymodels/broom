@@ -43,6 +43,7 @@ depending on the type of model estimated. \code{sigma}, \code{r.squared},
 \examples{
 \donttest{
 library(fixest)
+
 gravity <- feols(log(Euros) ~ log(dist_km) | Origin + Destination + Product + Year, trade)
 
 tidy(gravity)
@@ -51,18 +52,18 @@ augment(gravity, trade)
 
 ## To get robust or clustered SEs, users can either:
 # 1) Or, specify the arguments directly in the tidy() call
+
 tidy(gravity, conf.int = TRUE, cluster = c("Product", "Year"))
+
 tidy(gravity, conf.int = TRUE, se = "threeway")
+
 # 2) Feed tidy() a summary.fixest object that has already accepted these arguments
+
 gravity_summ <- summary(gravity, cluster = c("Product", "Year"))
 tidy(gravity_summ, conf.int = TRUE)
+
 # Approach (1) is preferred.
 
-## The other fixest methods all work similarly. For example:
-gravity_pois <- feglm(Euros ~ log(dist_km) | Origin + Destination + Product + Year, trade)
-tidy(gravity_pois)
-glance(gravity_pois)
-augment(gravity_pois, trade)
 }
 
 }
