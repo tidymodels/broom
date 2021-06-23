@@ -553,7 +553,7 @@ Suggests:
     emmeans,
     epiR,
     ergm (>= 3.10.4),
-    fixest (>= 0.8.1),
+    fixest (>= 0.9.0),
     gam (>= 1.15),
     gee,
     geepack,
