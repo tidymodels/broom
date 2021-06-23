@@ -80,6 +80,9 @@ test_that("augment.fixest", {
 })
 
 test_that("all other fixest estimators run", {
+  skip_on_cran()
+  skip_on_ci()
+  
   form <- v2 ~ v4 | id
   res_feglm    <- fixest::feglm(form,    data = df, family = 'gaussian')
   res_fenegbin <- fixest::fenegbin(form, data = df)
@@ -130,6 +133,9 @@ test_that("all other fixest estimators run", {
 
 
 test_that("tidiers work with model results or summary of model results", {
+  skip_on_cran()
+  skip_on_ci()
+  
   # Default standard errors are clustered by `id`. Test against non-default
   # independent, heteroskedastic ("hetero") standard errors.
   fit2_summ <- summary(fit2, se = "hetero")
