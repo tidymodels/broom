@@ -103,7 +103,7 @@ ergm.count package." />
         <a class="navbar-brand" href="../index.html">broom</a>
         <div class="info hidden-xs hidden-sm">
           <span class="partof">part of <a href="https://tidymodels.org">tidymodels</a></span>
-          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.7.8</span>
+          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.7.8.9000</span>
         </div>
       </div>
     </div>
@@ -236,6 +236,58 @@ Models for Networks. <em>Journal of Statistical Software</em>, 24(3).
 <p>Other ergm tidiers: 
 <code><a href='glance.ergm.html'>glance.ergm</a>()</code></p></div>
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'>
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://statnet.org'>ergm</a></span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='message'>Loading required package: network</span></div><div class='output co'>#&gt; <span class='message'></span>
+#&gt; <span class='message'>‘network’ 1.17.1 (2021-06-12), part of the Statnet Project</span>
+#&gt; <span class='message'>* ‘news(package="network")’ for changes since last version</span>
+#&gt; <span class='message'>* ‘citation("network")’ for citation information</span>
+#&gt; <span class='message'>* ‘https://statnet.org’ for help, support, and other information</span></div><div class='output co'>#&gt; <span class='message'></span>
+#&gt; <span class='message'>‘ergm’ 4.0.1 (2021-06-20), part of the Statnet Project</span>
+#&gt; <span class='message'>* ‘news(package="ergm")’ for changes since last version</span>
+#&gt; <span class='message'>* ‘citation("ergm")’ for citation information</span>
+#&gt; <span class='message'>* ‘https://statnet.org’ for help, support, and other information</span></div><div class='output co'>#&gt; <span class='message'>‘ergm’ 4 is a major update that introduces some backwards-incompatible</span>
+#&gt; <span class='message'>changes. Please type ‘news(package="ergm")’ for a list of major</span>
+#&gt; <span class='message'>changes.</span></div><div class='input'><span class='co'># Using the same example as the ergm package</span>
+<span class='co'># Load the Florentine marriage network data</span>
+<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>florentine</span><span class='op'>)</span>
+
+<span class='co'># Fit a model where the propensity to form ties between</span>
+<span class='co'># families depends on the absolute difference in wealth</span>
+<span class='va'>gest</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/ergm/man/ergm.html'>ergm</a></span><span class='op'>(</span><span class='va'>flomarriage</span> <span class='op'>~</span> <span class='va'>edges</span> <span class='op'>+</span> <span class='fu'><a href='https://rdrr.io/pkg/ergm/man/ergm-terms.html'>absdiff</a></span><span class='op'>(</span><span class='st'>"wealth"</span><span class='op'>)</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='message'>Starting maximum pseudolikelihood estimation (MPLE):</span></div><div class='output co'>#&gt; <span class='message'>Evaluating the predictor and response matrix.</span></div><div class='output co'>#&gt; <span class='message'>Maximizing the pseudolikelihood.</span></div><div class='output co'>#&gt; <span class='message'>Finished MPLE.</span></div><div class='output co'>#&gt; <span class='message'>Stopping at the initial estimate.</span></div><div class='output co'>#&gt; <span class='message'>Evaluating log-likelihood at the estimate. </span></div><div class='output co'>#&gt; </div><div class='input'>
+<span class='co'># Show terms, coefficient estimates and errors</span>
+<span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>gest</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 2 x 5</span>
+#&gt;   term           estimate std.error statistic      p.value
+#&gt;   <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>             <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>        <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>
+#&gt; <span style='color: #BCBCBC;'>1</span> edges           -<span style='color: #BB0000;'>2.30</span>     0.402       -<span style='color: #BB0000;'>5.73</span> 0.000<span style='text-decoration: underline;'>000</span>010<span style='text-decoration: underline;'>2</span>
+#&gt; <span style='color: #BCBCBC;'>2</span> absdiff.wealth   0.015<span style='text-decoration: underline;'>5</span>   0.006<span style='text-decoration: underline;'>16</span>      2.52 0.011<span style='text-decoration: underline;'>7</span>      </div><div class='input'>
+<span class='co'># Show coefficients as odds ratios with a 99% CI</span>
+<span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>gest</span>, exponentiate <span class='op'>=</span> <span class='cn'>TRUE</span>, conf.int <span class='op'>=</span> <span class='cn'>TRUE</span>, conf.level <span class='op'>=</span> <span class='fl'>0.99</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 2 x 7</span>
+#&gt;   term           estimate std.error statistic      p.value conf.low conf.high
+#&gt;   <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>             <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>        <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>    <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>
+#&gt; <span style='color: #BCBCBC;'>1</span> edges             0.100   0.402       -<span style='color: #BB0000;'>5.73</span> 0.000<span style='text-decoration: underline;'>000</span>010<span style='text-decoration: underline;'>2</span>   0.035<span style='text-decoration: underline;'>5</span>     0.282
+#&gt; <span style='color: #BCBCBC;'>2</span> absdiff.wealth    1.02    0.006<span style='text-decoration: underline;'>16</span>      2.52 0.011<span style='text-decoration: underline;'>7</span>         1.00       1.03 </div><div class='input'>
+<span class='co'># Take a look at likelihood measures and other</span>
+<span class='co'># control parameters used during MCMC estimation</span>
+<span class='fu'><a href='https://generics.r-lib.org/reference/glance.html'>glance</a></span><span class='op'>(</span><span class='va'>gest</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 1 x 5</span>
+#&gt;   independence iterations logLik   AIC   BIC
+#&gt;   <span style='color: #949494; font-style: italic;'>&lt;lgl&gt;</span>             <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span>  <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>
+#&gt; <span style='color: #BCBCBC;'>1</span> TRUE                  4  -<span style='color: #BB0000;'>51.0</span>  106.  112.</div><div class='input'><span class='fu'><a href='https://generics.r-lib.org/reference/glance.html'>glance</a></span><span class='op'>(</span><span class='va'>gest</span>, deviance <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 1 x 9</span>
+#&gt;   independence iterations logLik null.deviance df.null residual.deviance
+#&gt;   <span style='color: #949494; font-style: italic;'>&lt;lgl&gt;</span>             <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span>  <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;logLik&gt;</span>        <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>             <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>
+#&gt; <span style='color: #BCBCBC;'>1</span> TRUE                  4  -<span style='color: #BB0000;'>51.0</span> 166.3553          120              102.
+#&gt; <span style='color: #949494;'># … with 3 more variables: df.residual &lt;dbl&gt;, AIC &lt;dbl&gt;, BIC &lt;dbl&gt;</span></div><div class='input'><span class='fu'><a href='https://generics.r-lib.org/reference/glance.html'>glance</a></span><span class='op'>(</span><span class='va'>gest</span>, mcmc <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='message'>Though `glance` was supplied `mcmc = TRUE`, the model was not fittedusing MCMC, so the corresponding columns will be omitted.</span></div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 1 x 5</span>
+#&gt;   independence iterations logLik   AIC   BIC
+#&gt;   <span style='color: #949494; font-style: italic;'>&lt;lgl&gt;</span>             <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span>  <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>
+#&gt; <span style='color: #BCBCBC;'>1</span> TRUE                  4  -<span style='color: #BB0000;'>51.0</span>  106.  112.</div><div class='input'>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

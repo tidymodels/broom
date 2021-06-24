@@ -109,7 +109,7 @@ of the appropriate type." />
         <a class="navbar-brand" href="../index.html">broom</a>
         <div class="info hidden-xs hidden-sm">
           <span class="partof">part of <a href="https://tidymodels.org">tidymodels</a></span>
-          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.7.8</span>
+          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.7.8.9000</span>
         </div>
       </div>
     </div>
@@ -283,6 +283,13 @@ depending on the type of model estimated. <code>sigma</code>, <code>r.squared</c
 #&gt; <span style='color: #BCBCBC;'>1</span> log(dist_km)    -<span style='color: #BB0000;'>2.17</span>    0.076<span style='text-decoration: underline;'>0</span>     -<span style='color: #BB0000;'>28.5</span> 3.88<span style='color: #949494;'>e</span><span style='color: #BB0000;'>-10</span>    -<span style='color: #BB0000;'>2.32</span>     -<span style='color: #BB0000;'>2.02</span></div><div class='input'>
 <span class='co'># Approach (1) is preferred.</span>
 
+<span class='co'>## The other fixest methods all work similarly. For example:</span>
+<span class='va'>gravity_pois</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://lrberge.github.io/fixest/reference/feglm.html'>feglm</a></span><span class='op'>(</span><span class='va'>Euros</span> <span class='op'>~</span> <span class='fu'><a href='https://rdrr.io/r/base/Log.html'>log</a></span><span class='op'>(</span><span class='va'>dist_km</span><span class='op'>)</span> <span class='op'>|</span> <span class='va'>Origin</span> <span class='op'>+</span> <span class='va'>Destination</span> <span class='op'>+</span> <span class='va'>Product</span> <span class='op'>+</span> <span class='va'>Year</span>, <span class='va'>trade</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='error'>Error in feglm(Euros ~ log(dist_km) | Origin + Destination + Product +     Year, trade): Argument 'family': the family is not recognized.</span></div><div class='input'>
+<span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>gravity_pois</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='error'>Error in tidy(gravity_pois): object 'gravity_pois' not found</span></div><div class='input'><span class='fu'><a href='https://generics.r-lib.org/reference/glance.html'>glance</a></span><span class='op'>(</span><span class='va'>gravity_pois</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='error'>Error in glance(gravity_pois): object 'gravity_pois' not found</span></div><div class='input'><span class='fu'><a href='https://generics.r-lib.org/reference/augment.html'>augment</a></span><span class='op'>(</span><span class='va'>gravity_pois</span>, <span class='va'>trade</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='error'>Error in augment(gravity_pois, trade): object 'gravity_pois' not found</span></div><div class='input'>
 <span class='co'># }</span>
 
 </div></pre>

@@ -100,7 +100,7 @@ specify which components to return." />
         <a class="navbar-brand" href="../index.html">broom</a>
         <div class="info hidden-xs hidden-sm">
           <span class="partof">part of <a href="https://tidymodels.org">tidymodels</a></span>
-          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.7.8</span>
+          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.7.8.9000</span>
         </div>
       </div>
     </div>
@@ -268,7 +268,7 @@ there is an additional column <code>response</code>. See <code><a href='tidy.mlm
 <span class='co'># Aside: There are tidy() and glance() methods for lm.summary objects too. </span>
 <span class='co'># This can be useful when you want to conserve memory by converting large lm </span>
 <span class='co'># objects into their leaner summary.lm equivalents.</span>
-<span class='va'>s</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/vars/man/summary.html'>summary</a></span><span class='op'>(</span><span class='va'>mod</span><span class='op'>)</span>
+<span class='va'>s</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/ergm/man/summary.formula.html'>summary</a></span><span class='op'>(</span><span class='va'>mod</span><span class='op'>)</span>
 <span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>s</span>, conf.int <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 3 x 7</span>
 #&gt;   term        estimate std.error statistic  p.value conf.low conf.high
