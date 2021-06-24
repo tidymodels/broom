@@ -20,6 +20,29 @@
 #'   \item{mcmc.error}{The MCMC error}
 #'   \item{p.value}{The two-sided p-value}
 #' 
+#' @examples
+#'
+#' library(ergm)
+#' # Using the same example as the ergm package
+#' # Load the Florentine marriage network data
+#' data(florentine)
+#'
+#' # Fit a model where the propensity to form ties between
+#' # families depends on the absolute difference in wealth
+#' gest <- ergm(flomarriage ~ edges + absdiff("wealth"))
+#'
+#' # Show terms, coefficient estimates and errors
+#' tidy(gest)
+#'
+#' # Show coefficients as odds ratios with a 99% CI
+#' tidy(gest, exponentiate = TRUE, conf.int = TRUE, conf.level = 0.99)
+#'
+#' # Take a look at likelihood measures and other
+#' # control parameters used during MCMC estimation
+#' glance(gest)
+#' glance(gest, deviance = TRUE)
+#' glance(gest, mcmc = TRUE)
+#' 
 #' @references Hunter DR, Handcock MS, Butts CT, Goodreau SM, Morris M (2008b).
 #'   \pkg{ergm}: A Package to Fit, Simulate and Diagnose Exponential-Family
 #'   Models for Networks. *Journal of Statistical Software*, 24(3).

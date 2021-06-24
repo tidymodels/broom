@@ -64,6 +64,13 @@ tidy(gravity_summ, conf.int = TRUE)
 
 # Approach (1) is preferred.
 
+## The other fixest methods all work similarly. For example:
+gravity_pois <- feglm(Euros ~ log(dist_km) | Origin + Destination + Product + Year, trade)
+
+tidy(gravity_pois)
+glance(gravity_pois)
+augment(gravity_pois, trade)
+
 }
 
 }
