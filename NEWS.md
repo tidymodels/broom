@@ -1,3 +1,7 @@
+# broom 0.7.8.9000
+
+To be release as broom 0.7.9.
+
 # broom 0.7.8
 
 * Fixed bug in `glance.ergm` related to handling of MCMC details.
