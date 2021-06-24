@@ -1,6 +1,4 @@
-# broom 0.7.7.9000
-
-To be released as broom 0.7.8.
+# broom 0.7.8
 
 * Fixed bug in `glance.ergm` related to handling of MCMC details.
 * Address breakages in unit tests for {fixest} tidiers.
