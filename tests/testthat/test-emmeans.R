@@ -137,5 +137,5 @@ test_that("tidy.emmGrid for combined contrasts", {
 
   # strict = FALSE needed becasue of factor names and "null.value" column
   check_tidy_output(td_noise, strict = FALSE)
-  check_dims(td_noise, 20, 11)
+  check_dims(td_noise, 20, 10)
 })

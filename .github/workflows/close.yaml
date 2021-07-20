@@ -1,0 +1,17 @@
+name: 'Close stale issues and PRs'
+on:
+  schedule:
+    - cron: '0 0 * * *'
+
+jobs:
+  stale:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/stale@v3
+        with:
+          days-before-stale: 365
+          stale-issue-label: 'stale issue'
+          stale-pr-label: 'stale pull request'
+          stale-issue-message: 'This issue has been automatically closed due to inactivity.'
+          stale-pr-message: 'This pull request has been automatically closed due to inactivity.'
+          days-before-close: 0

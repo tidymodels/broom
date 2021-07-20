@@ -1,7 +1,7 @@
 Type: Package
 Package: broom
 Title: Convert Statistical Objects into Tidy Tibbles
-Version: 0.7.6.9001
+Version: 0.7.8.9000
 Authors@R:
     c(person(given = "David",
              family = "Robinson",
@@ -9,13 +9,14 @@ Authors@R:
              email = "admiral.david@gmail.com"),
       person(given = "Alex",
              family = "Hayes",
-             role = c("aut", "cre"),
+             role = "aut",
              email = "alexpghayes@gmail.com",
              comment = c(ORCID = "0000-0002-4985-5160")),
       person(given = "Simon",
              family = "Couch",
-             role = "aut",
-             email = "simonpatrickcouch@gmail.com"),
+             role = c("aut", "cre"),
+             email = "scouch2@jhu.edu",
+             comment = c(ORCID = "0000-0001-5676-5107")),
       person(given = "Indrajeet",
              family = "Patil",
              role = "ctb",
@@ -555,7 +556,7 @@ Suggests:
     emmeans,
     epiR,
     ergm (>= 3.10.4),
-    fixest (>= 0.8.1),
+    fixest (>= 0.9.0),
     gam (>= 1.15),
     gee,
     geepack,
@@ -609,7 +610,7 @@ Suggests:
     rsample,
     sandwich,
     sp,
-    spdep,
+    spdep (>= 1.1),
     spatialreg,
     speedglm,
     spelling,

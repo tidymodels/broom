@@ -296,6 +296,8 @@ augment.rma <- function(x, interval = c("prediction", "confidence"), ...) {
   # don't return rownames if they are just row numbers
   no_study_names <- all(x$slab == as.character(seq_along(x$slab)))
   if (no_study_names) ret$.rownames <- NULL
+  
+  ret <- ret %>% dplyr::select(-dplyr::contains("cr."))
 
   tibble::as_tibble(ret)
 }
