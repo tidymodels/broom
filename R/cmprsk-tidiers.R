@@ -41,7 +41,7 @@ tidy.crr <- function(x, exponentiate = FALSE, conf.int = FALSE,
   if (conf.int) {
     ci <- as_tidy_tibble(
       log(s$conf.int),
-      new_names = c("estimate_exp", "estimate_neg_exp", "conf.low", "conf.high"))[, -c(2, 3)]
+      new_names = c("estimate", "estimate_neg", "conf.low", "conf.high"))[, -c(2, 3)]
     ret <- dplyr::left_join(ret, ci, by = "term")
   }
 
