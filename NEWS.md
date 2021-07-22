@@ -2,7 +2,7 @@
 
 To be release as broom 0.7.9.
 
-* Fixed confidence intervals in `tidy.crr()` which are exponentiated when `exponentiate = F` (`#1023` by `@leejasme`)
+* Fixed confidence intervals in `tidy.crr()`, which were previously exponentiated when `exponentiate = FALSE` (`#1023` by `@leejasme`)
 
 # broom 0.7.8
 
