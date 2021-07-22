@@ -163,6 +163,7 @@ Other contributors:
   \item R. Willem Vervoort \email{Willemvervoort@gmail.com} [contributor]
   \item Brenton M. Wiernik \email{brenton@wiernik.org} [contributor]
   \item Josh Yamamoto \email{joshuayamamoto5@gmail.com} [contributor]
+  \item Jasme Lee [contributor]
 }
 
 }

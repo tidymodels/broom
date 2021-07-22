@@ -3,6 +3,7 @@
 To be release as broom 0.7.9.
 
 * Fixed confidence intervals in `tidy.crr()`, which were previously exponentiated when `exponentiate = FALSE` (`#1023` by `@leejasme`)
+* Deprecate tidiers for `felm` objects from the `lfe` package, which was again archived from CRAN.
 
 # broom 0.7.8
 
