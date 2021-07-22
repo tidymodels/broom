@@ -161,6 +161,10 @@
 <a href="#broom-0789000" class="anchor"></a>broom 0.7.8.9000<small> Unreleased </small>
 </h1>
 <p>To be release as broom 0.7.9.</p>
+<ul>
+<li>Fixed confidence intervals in <code><a href="../reference/tidy.crr.html">tidy.crr()</a></code>, which were previously exponentiated when <code>exponentiate = FALSE</code> (<code><a href='https://github.com/tidymodels/broom/issues/1023'>#1023</a></code> by <code>@leejasme</code>)</li>
+<li>Deprecate tidiers for <code>felm</code> objects from the <code>lfe</code> package, which was again archived from CRAN.</li>
+</ul>
 </div>
     <div id="broom-078" class="section level1">
 <h1 class="page-header" data-toc-text="0.7.8">
@@ -429,7 +433,7 @@
 <h2 class="hasAnchor">
 <a href="#improvements-to-existing-tidiers-2" class="anchor"></a>Improvements to existing tidiers</h2>
 <ul>
-<li><p><code><a href="../reference/tidy.felm.html">tidy.felm()</a></code> now has a <code>robust = TRUE/FALSE</code> option that supports robust and cluster standard errors. (<a href='https://github.com/tidymodels/broom/issues/781'>#781</a> by <a href='https://github.com/kuriwaki'>@kuriwaki</a>)</p></li>
+<li><p><code>tidy.felm()</code> now has a <code>robust = TRUE/FALSE</code> option that supports robust and cluster standard errors. (<a href='https://github.com/tidymodels/broom/issues/781'>#781</a> by <a href='https://github.com/kuriwaki'>@kuriwaki</a>)</p></li>
 <li><p>Make <code>.fitted</code> values respect <code>type.predict</code> argument of <code><a href="../reference/augment.clm.html">augment.clm()</a></code>. (<a href='https://github.com/tidymodels/broom/issues/617'>#617</a>)</p></li>
 <li><p>Return factor rather than numeric class predictions in <code>.fitted</code> of <code><a href="../reference/augment.polr.html">augment.polr()</a></code>. (<a href='https://github.com/tidymodels/broom/issues/619'>#619</a>) Add an option to return <code>p.values</code> in <code><a href="../reference/tidy.polr.html">tidy.polr()</a></code>. (<a href='https://github.com/tidymodels/broom/issues/833'>#833</a> by <a href='https://github.com/LukasWallrich'>@LukasWallrich</a>)</p></li>
 <li><p><code><a href="../reference/tidy.kmeans.html">tidy.kmeans()</a></code> now uses the names of the input variables in the output by default. Set <code>col.names = NULL</code> to recover the old behavior.</p></li>
