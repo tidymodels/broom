@@ -41,6 +41,7 @@ tidy.Rchoice <- function(x, conf.int = FALSE, conf.level = 0.95, ...) {
   ret
 }
 
+get_summary_rchoice <- Rchoice:::getSummary.Rchoice
 
 #' @templateVar class Rchoice
 #' @template title_desc_glance
@@ -54,10 +55,10 @@ tidy.Rchoice <- function(x, conf.int = FALSE, conf.level = 0.95, ...) {
 #'   "df",
 #'   "nobs"
 #' )
-#'
+#' 
 #' @export
 glance.Rchoice <- function(x, ...) {
-  s <- Rchoice::getSummary.Rchoice(x, ...)
+  s <- get_summary_rchoice(x, ...)
   
   ret <- as_glance_tibble(
     logLik = s$sumstat['logLik'],

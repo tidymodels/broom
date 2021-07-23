@@ -601,7 +601,7 @@ Suggests:
     poLCA,
     psych,
     quantreg,
-    Rchoice,
+    Rchoice (>= 0.3-3),
     rgeos,
     rmarkdown,
     robust,
