@@ -4,7 +4,7 @@ To be released as broom 0.7.9.
 
 * Fixed confidence intervals in `tidy.crr()`, which were previously exponentiated when `exponentiate = FALSE` (`#1023` by `@leejasme`)
 * Deprecate tidiers for `felm` objects from the `lfe` package, which was again archived from CRAN.
-* Fixes related to breaking changes in the most recent {rchoice} release.
+* Deprecates `Rchoice` tidiers, as the newest 0.3-3 release requires R 4.0+ and does not re-export needed generics.
 
 # broom 0.7.8
 

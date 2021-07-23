@@ -601,7 +601,6 @@ Suggests:
     poLCA,
     psych,
     quantreg,
-    Rchoice (>= 0.3-3),
     rgeos,
     rmarkdown,
     robust,
@@ -698,7 +697,6 @@ Collate:
     'quantreg-nlrq-tidiers.R'
     'quantreg-rq-tidiers.R'
     'quantreg-rqs-tidiers.R'
-    'rchoice-tidiers.R'
     'rma-tidiers.R'
     'robust-glmrob-tidiers.R'
     'robust-lmrob-tidiers.R'
