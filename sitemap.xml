@@ -151,9 +151,6 @@
     <loc>https://broom.tidymodels.org/reference/glance.Mclust.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/glance.Rchoice.html</loc>
-  </url>
-  <url>
     <loc>https://broom.tidymodels.org/reference/glance.aareg.html</loc>
   </url>
   <url>
@@ -380,9 +377,6 @@
   </url>
   <url>
     <loc>https://broom.tidymodels.org/reference/tidy.Mclust.html</loc>
-  </url>
-  <url>
-    <loc>https://broom.tidymodels.org/reference/tidy.Rchoice.html</loc>
   </url>
   <url>
     <loc>https://broom.tidymodels.org/reference/tidy.TukeyHSD.html</loc>

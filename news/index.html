@@ -164,7 +164,7 @@
 <ul>
 <li>Fixed confidence intervals in <code><a href="../reference/tidy.crr.html">tidy.crr()</a></code>, which were previously exponentiated when <code>exponentiate = FALSE</code> (<code><a href='https://github.com/tidymodels/broom/issues/1023'>#1023</a></code> by <code>@leejasme</code>)</li>
 <li>Deprecate tidiers for <code>felm</code> objects from the <code>lfe</code> package, which was again archived from CRAN.</li>
-<li>Fixes related to breaking changes in the most recent {rchoice} release.</li>
+<li>Deprecates <code>Rchoice</code> tidiers, as the newest 0.3-3 release requires R 4.0+ and does not re-export needed generics.</li>
 </ul>
 </div>
     <div id="broom-078" class="section level1">
