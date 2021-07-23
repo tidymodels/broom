@@ -110,7 +110,7 @@
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>broom and dplyr</h1>
             
-            <h4 class="date">2021-07-22</h4>
+            <h4 class="date">2021-07-23</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/tidymodels/broom/blob/master/vignettes/broom_and_dplyr.Rmd"><code>vignettes/broom_and_dplyr.Rmd</code></a></small>
       <div class="hidden name"><code>broom_and_dplyr.Rmd</code></div>
@@ -138,7 +138,7 @@
 
 <span class="va">Orange</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/as_tibble.html">as_tibble</a></span><span class="op">(</span><span class="va">Orange</span><span class="op">)</span>
 <span class="va">Orange</span></code></pre></div>
-<pre><code>## # A tibble: 35 x 3
+<pre><code>## # A tibble: 35 × 3
 ##    Tree    age circumference
 ##    &lt;ord&gt; &lt;dbl&gt;         &lt;dbl&gt;
 ##  1 1       118            30
@@ -165,7 +165,7 @@
 <code class="sourceCode R"><span class="va">Orange</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">Tree</span><span class="op">)</span> <span class="op">%&gt;%</span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarize</a></span><span class="op">(</span>correlation <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/cor.html">cor</a></span><span class="op">(</span><span class="va">age</span>, <span class="va">circumference</span><span class="op">)</span><span class="op">)</span></code></pre></div>
-<pre><code>## # A tibble: 5 x 2
+<pre><code>## # A tibble: 5 × 2
 ##   Tree  correlation
 ##   &lt;ord&gt;       &lt;dbl&gt;
 ## 1 3           0.988
@@ -192,7 +192,7 @@
 <p>This contains multiple values we could want in our output. Some are vectors of length 1, such as the p-value and the estimate, and some are longer, such as the confidence interval. We can get this into a nicely organized tibble using the <code>tidy</code> function:</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://generics.r-lib.org/reference/tidy.html">tidy</a></span><span class="op">(</span><span class="va">ct</span><span class="op">)</span></code></pre></div>
-<pre><code>## # A tibble: 1 x 8
+<pre><code>## # A tibble: 1 × 8
 ##   estimate statistic  p.value parameter conf.low conf.high method    alternative
 ##      &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;     &lt;int&gt;    &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;     &lt;chr&gt;      
 ## 1    0.914      12.9 1.93e-14        33    0.834     0.956 Pearson'… two.sided</code></pre>
@@ -204,7 +204,7 @@
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">nested</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>test <span class="op">=</span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span><span class="op">(</span><span class="va">data</span>, <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/stats/cor.test.html">cor.test</a></span><span class="op">(</span><span class="va">.x</span><span class="op">$</span><span class="va">age</span>, <span class="va">.x</span><span class="op">$</span><span class="va">circumference</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></code></pre></div>
-<pre><code>## # A tibble: 5 x 3
+<pre><code>## # A tibble: 5 × 3
 ##   Tree  data             test   
 ##   &lt;ord&gt; &lt;list&gt;           &lt;list&gt; 
 ## 1 1     &lt;tibble [7 × 2]&gt; &lt;htest&gt;
@@ -219,7 +219,7 @@
     test <span class="op">=</span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span><span class="op">(</span><span class="va">data</span>, <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/stats/cor.test.html">cor.test</a></span><span class="op">(</span><span class="va">.x</span><span class="op">$</span><span class="va">age</span>, <span class="va">.x</span><span class="op">$</span><span class="va">circumference</span><span class="op">)</span><span class="op">)</span>, <span class="co"># S3 list-col</span>
     tidied <span class="op">=</span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span><span class="op">(</span><span class="va">test</span>, <span class="va">tidy</span><span class="op">)</span>
   <span class="op">)</span> </code></pre></div>
-<pre><code>## # A tibble: 5 x 4
+<pre><code>## # A tibble: 5 × 4
 ##   Tree  data             test    tidied          
 ##   &lt;ord&gt; &lt;list&gt;           &lt;list&gt;  &lt;list&gt;          
 ## 1 1     &lt;tibble [7 × 2]&gt; &lt;htest&gt; &lt;tibble [1 × 8]&gt;
@@ -236,7 +236,7 @@
     tidied <span class="op">=</span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span><span class="op">(</span><span class="va">test</span>, <span class="va">tidy</span><span class="op">)</span>
   <span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="https://tidyr.tidyverse.org/reference/nest.html">unnest</a></span><span class="op">(</span><span class="va">tidied</span><span class="op">)</span></code></pre></div>
-<pre><code>## # A tibble: 5 x 11
+<pre><code>## # A tibble: 5 × 11
 ##   Tree  data      test   estimate statistic p.value parameter conf.low conf.high
 ##   &lt;ord&gt; &lt;list&gt;    &lt;list&gt;    &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;     &lt;int&gt;    &lt;dbl&gt;     &lt;dbl&gt;
 ## 1 1     &lt;tibble … &lt;htes…    0.985      13.0 4.85e-5         5    0.901     0.998
@@ -270,7 +270,7 @@
 <p>where we tidy these results, we get multiple rows of output for each model:</p>
 <div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://generics.r-lib.org/reference/tidy.html">tidy</a></span><span class="op">(</span><span class="va">lm_fit</span><span class="op">)</span></code></pre></div>
-<pre><code>## # A tibble: 2 x 5
+<pre><code>## # A tibble: 2 × 5
 ##   term          estimate std.error statistic  p.value
 ##   &lt;chr&gt;            &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
 ## 1 (Intercept)      16.6     78.1       0.212 8.33e- 1
@@ -284,7 +284,7 @@
     tidied <span class="op">=</span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span><span class="op">(</span><span class="va">fit</span>, <span class="va">tidy</span><span class="op">)</span>
   <span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="https://tidyr.tidyverse.org/reference/nest.html">unnest</a></span><span class="op">(</span><span class="va">tidied</span><span class="op">)</span></code></pre></div>
-<pre><code>## # A tibble: 10 x 8
+<pre><code>## # A tibble: 10 × 8
 ##    Tree  data           fit    term        estimate std.error statistic  p.value
 ##    &lt;ord&gt; &lt;list&gt;         &lt;list&gt; &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
 ##  1 1     &lt;tibble [7 × … &lt;lm&gt;   (Intercept)  -265.      98.6      -2.68   4.36e-2
@@ -302,7 +302,7 @@
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">)</span>
 <span class="va">mtcars</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/as_tibble.html">as_tibble</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">)</span>  <span class="co"># to play nicely with list-cols</span>
 <span class="va">mtcars</span></code></pre></div>
-<pre><code>## # A tibble: 32 x 11
+<pre><code>## # A tibble: 32 × 11
 ##      mpg   cyl  disp    hp  drat    wt  qsec    vs    am  gear  carb
 ##    &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
 ##  1  21       6  160    110  3.9   2.62  16.5     0     1     4     4
@@ -324,7 +324,7 @@
     tidied <span class="op">=</span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span><span class="op">(</span><span class="va">fit</span>, <span class="va">tidy</span><span class="op">)</span>
   <span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="https://tidyr.tidyverse.org/reference/nest.html">unnest</a></span><span class="op">(</span><span class="va">tidied</span><span class="op">)</span></code></pre></div>
-<pre><code>## # A tibble: 8 x 8
+<pre><code>## # A tibble: 8 × 8
 ##      am data              fit    term       estimate std.error statistic p.value
 ##   &lt;dbl&gt; &lt;list&gt;            &lt;list&gt; &lt;chr&gt;         &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;
 ## 1     1 &lt;tibble [13 × 10… &lt;lm&gt;   (Intercep…   4.28      3.46      1.24   2.47e-1
@@ -348,7 +348,7 @@
 
 <span class="va">regressions</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="https://tidyr.tidyverse.org/reference/nest.html">unnest</a></span><span class="op">(</span><span class="va">tidied</span><span class="op">)</span></code></pre></div>
-<pre><code>## # A tibble: 8 x 10
+<pre><code>## # A tibble: 8 × 10
 ##      am data  fit   term  estimate std.error statistic p.value glanced augmented
 ##   &lt;dbl&gt; &lt;lis&gt; &lt;lis&gt; &lt;chr&gt;    &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt; &lt;list&gt;  &lt;list&gt;   
 ## 1     1 &lt;tib… &lt;lm&gt;  (Int…   4.28      3.46      1.24   2.47e-1 &lt;tibbl… &lt;tibble …
@@ -362,7 +362,7 @@
 <div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">regressions</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="https://tidyr.tidyverse.org/reference/nest.html">unnest</a></span><span class="op">(</span><span class="va">glanced</span><span class="op">)</span></code></pre></div>
-<pre><code>## # A tibble: 2 x 17
+<pre><code>## # A tibble: 2 × 17
 ##      am data  fit   tidied r.squared adj.r.squared sigma statistic p.value    df
 ##   &lt;dbl&gt; &lt;lis&gt; &lt;lis&gt; &lt;list&gt;     &lt;dbl&gt;         &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;
 ## 1     1 &lt;tib… &lt;lm&gt;  &lt;tibb…     0.833         0.778 0.291     15.0  7.59e-4     3
@@ -372,7 +372,7 @@
 <div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">regressions</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="https://tidyr.tidyverse.org/reference/nest.html">unnest</a></span><span class="op">(</span><span class="va">augmented</span><span class="op">)</span></code></pre></div>
-<pre><code>## # A tibble: 32 x 15
+<pre><code>## # A tibble: 32 × 15
 ##       am data    fit    tidied  glanced     wt   mpg  qsec  gear .fitted  .resid
 ##    &lt;dbl&gt; &lt;list&gt;  &lt;list&gt; &lt;list&gt;  &lt;list&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;
 ##  1     1 &lt;tibbl… &lt;lm&gt;   &lt;tibbl… &lt;tibble…  2.62  21    16.5     4    2.73 -0.107 

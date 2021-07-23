@@ -231,12 +231,12 @@ the <code>data</code> argument.</p></td>
 <span class='va'>n</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/nls.html'>nls</a></span><span class='op'>(</span><span class='va'>mpg</span> <span class='op'>~</span> <span class='va'>k</span> <span class='op'>*</span> <span class='va'>e</span><span class='op'>^</span><span class='va'>wt</span>, data <span class='op'>=</span> <span class='va'>mtcars</span>, start <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>k <span class='op'>=</span> <span class='fl'>1</span>, e <span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span><span class='op'>)</span>
 
 <span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>n</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 2 x 5</span>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 2 × 5</span>
 #&gt;   term  estimate std.error statistic  p.value
 #&gt;   <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>    <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>    <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>
 #&gt; <span style='color: #BCBCBC;'>1</span> k       49.7      3.79        13.1 5.96<span style='color: #949494;'>e</span><span style='color: #BB0000;'>-14</span>
 #&gt; <span style='color: #BCBCBC;'>2</span> e        0.746    0.019<span style='text-decoration: underline;'>9</span>      37.5 8.86<span style='color: #949494;'>e</span><span style='color: #BB0000;'>-27</span></div><div class='input'><span class='fu'><a href='https://generics.r-lib.org/reference/augment.html'>augment</a></span><span class='op'>(</span><span class='va'>n</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 32 x 4</span>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 32 × 4</span>
 #&gt;      mpg    wt .fitted .resid
 #&gt;    <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>  <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>
 #&gt; <span style='color: #BCBCBC;'> 1</span>  21    2.62    23.0 -<span style='color: #BB0000;'>2.01</span> 
@@ -250,7 +250,7 @@ the <code>data</code> argument.</p></td>
 #&gt; <span style='color: #BCBCBC;'> 9</span>  22.8  3.15    19.7  3.10 
 #&gt; <span style='color: #BCBCBC;'>10</span>  19.2  3.44    18.1  1.11 
 #&gt; <span style='color: #949494;'># … with 22 more rows</span></div><div class='input'><span class='fu'><a href='https://generics.r-lib.org/reference/glance.html'>glance</a></span><span class='op'>(</span><span class='va'>n</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 1 x 9</span>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 1 × 9</span>
 #&gt;   sigma isConv     finTol logLik   AIC   BIC deviance df.residual  nobs
 #&gt;   <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;lgl&gt;</span>       <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>  <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>    <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>       <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span>
 #&gt; <span style='color: #BCBCBC;'>1</span>  2.67 TRUE   0.000<span style='text-decoration: underline;'>002</span>04  -<span style='color: #BB0000;'>75.8</span>  158.  162.     214.          30    32</div><div class='input'>
@@ -262,7 +262,7 @@ the <code>data</code> argument.</p></td>
 <span class='va'>newdata</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='va'>mtcars</span><span class='op'>)</span>
 <span class='va'>newdata</span><span class='op'>$</span><span class='va'>wt</span> <span class='op'>&lt;-</span> <span class='va'>newdata</span><span class='op'>$</span><span class='va'>wt</span> <span class='op'>+</span> <span class='fl'>1</span>
 <span class='fu'><a href='https://generics.r-lib.org/reference/augment.html'>augment</a></span><span class='op'>(</span><span class='va'>n</span>, newdata <span class='op'>=</span> <span class='va'>newdata</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 6 x 13</span>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 6 × 13</span>
 #&gt;   .rownames      mpg   cyl  disp    hp  drat    wt  qsec    vs    am  gear  carb
 #&gt;   <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>        <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>
 #&gt; <span style='color: #BCBCBC;'>1</span> Mazda RX4     21       6   160   110  3.9   3.62  16.5     0     1     4     4

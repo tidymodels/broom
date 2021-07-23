@@ -218,7 +218,7 @@ the <code>data</code> argument.</p></td>
 
 <span class='va'>reg</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>mpg</span> <span class='op'>~</span> <span class='va'>wt</span> <span class='op'>+</span> <span class='va'>qsec</span> <span class='op'>+</span> <span class='va'>disp</span>, <span class='va'>mtcars</span><span class='op'>)</span>
 <span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>reg</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 4 x 5</span>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 4 × 5</span>
 #&gt;   term         estimate std.error statistic  p.value
 #&gt;   <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>           <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>    <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>
 #&gt; <span style='color: #BCBCBC;'>1</span> (Intercept) 19.8         5.94      3.33   0.002<span style='text-decoration: underline;'>44</span> 
@@ -243,14 +243,14 @@ the <code>data</code> argument.</p></td>
 #&gt; (Intercept)          wt        qsec        disp 
 #&gt;   21.814858   -4.852590    0.797029   -0.001359 </div><div class='input'>
 <span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>co</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 4 x 5</span>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 4 × 5</span>
 #&gt;   term        estimate std.error statistic p.value
 #&gt;   <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>          <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>
 #&gt; <span style='color: #BCBCBC;'>1</span> (Intercept) 21.8        6.63       3.29  0.002<span style='text-decoration: underline;'>79</span>
 #&gt; <span style='color: #BCBCBC;'>2</span> wt          -<span style='color: #BB0000;'>4.85</span>       1.33      -<span style='color: #BB0000;'>3.65</span>  0.001<span style='text-decoration: underline;'>12</span>
 #&gt; <span style='color: #BCBCBC;'>3</span> qsec         0.797      0.370      2.15  0.040<span style='text-decoration: underline;'>2</span> 
 #&gt; <span style='color: #BCBCBC;'>4</span> disp        -<span style='color: #BB0000;'>0.001</span><span style='color: #BB0000; text-decoration: underline;'>36</span>    0.011<span style='text-decoration: underline;'>0</span>    -<span style='color: #BB0000;'>0.123</span> 0.903  </div><div class='input'><span class='fu'><a href='https://generics.r-lib.org/reference/glance.html'>glance</a></span><span class='op'>(</span><span class='va'>co</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 1 x 9</span>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 1 × 9</span>
 #&gt;   r.squared adj.r.squared   rho number.interaction dw.original p.value.original
 #&gt;       <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>         <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>              <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>       <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>            <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>
 #&gt; <span style='color: #BCBCBC;'>1</span>     0.799         0.777 0.268                  7        1.50           0.040<span style='text-decoration: underline;'>6</span>

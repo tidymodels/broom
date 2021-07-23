@@ -256,7 +256,7 @@ original <code>loess</code> object was fit with
 <span class='op'>)</span>
 
 <span class='fu'><a href='https://generics.r-lib.org/reference/augment.html'>augment</a></span><span class='op'>(</span><span class='va'>lo</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 32 x 6</span>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 32 × 6</span>
 #&gt;    .rownames           mpg    hp    wt .fitted  .resid
 #&gt;    <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>             <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>
 #&gt; <span style='color: #BCBCBC;'> 1</span> Mazda RX4          21     110  2.62    21.4 -<span style='color: #BB0000;'>0.435</span> 
@@ -272,7 +272,7 @@ original <code>loess</code> object was fit with
 #&gt; <span style='color: #949494;'># … with 22 more rows</span></div><div class='input'>
 <span class='co'># with all columns of original data</span>
 <span class='fu'><a href='https://generics.r-lib.org/reference/augment.html'>augment</a></span><span class='op'>(</span><span class='va'>lo</span>, <span class='va'>mtcars</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 32 x 14</span>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 32 × 14</span>
 #&gt;    .rownames     mpg   cyl  disp    hp  drat    wt  qsec    vs    am  gear  carb
 #&gt;    <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>       <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>
 #&gt; <span style='color: #BCBCBC;'> 1</span> Mazda RX4    21       6  160    110  3.9   2.62  16.5     0     1     4     4
@@ -288,7 +288,7 @@ original <code>loess</code> object was fit with
 #&gt; <span style='color: #949494;'># … with 22 more rows, and 2 more variables: .fitted &lt;dbl&gt;, .resid &lt;dbl&gt;</span></div><div class='input'>
 <span class='co'># with a new dataset</span>
 <span class='fu'><a href='https://generics.r-lib.org/reference/augment.html'>augment</a></span><span class='op'>(</span><span class='va'>lo</span>, newdata <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='va'>mtcars</span><span class='op'>)</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 6 x 14</span>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 6 × 14</span>
 #&gt;   .rownames      mpg   cyl  disp    hp  drat    wt  qsec    vs    am  gear  carb
 #&gt;   <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>        <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>
 #&gt; <span style='color: #BCBCBC;'>1</span> Mazda RX4     21       6   160   110  3.9   2.62  16.5     0     1     4     4

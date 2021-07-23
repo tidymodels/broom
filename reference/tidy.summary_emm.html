@@ -239,7 +239,7 @@ passed on to <code><a href='https://rdrr.io/pkg/emmeans/man/summary.emmGrid.html
 <span class='va'>oranges_rg1</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/emmeans/man/ref_grid.html'>ref_grid</a></span><span class='op'>(</span><span class='va'>oranges_lm1</span><span class='op'>)</span>
 <span class='va'>td</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>oranges_rg1</span><span class='op'>)</span>
 <span class='va'>td</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 36 x 9</span>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 36 × 9</span>
 #&gt;    price1 price2 day   store estimate std.error    df statistic   p.value
 #&gt;     <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>  <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>    <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>
 #&gt; <span style='color: #BCBCBC;'> 1</span>   51.2   48.6 1     1         2.92      2.72    23      1.07 0.294    
@@ -256,7 +256,7 @@ passed on to <code><a href='https://rdrr.io/pkg/emmeans/man/summary.emmGrid.html
 <span class='co'># marginal averages</span>
 <span class='va'>marginal</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/emmeans/man/emmeans.html'>emmeans</a></span><span class='op'>(</span><span class='va'>oranges_rg1</span>, <span class='st'>"day"</span><span class='op'>)</span>
 <span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>marginal</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 6 x 6</span>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 6 × 6</span>
 #&gt;   day   estimate std.error    df statistic      p.value
 #&gt;   <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>    <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>        <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>
 #&gt; <span style='color: #BCBCBC;'>1</span> 1         5.56      1.77    23      3.15 0.004<span style='text-decoration: underline;'>51</span>     
@@ -267,7 +267,7 @@ passed on to <code><a href='https://rdrr.io/pkg/emmeans/man/summary.emmGrid.html
 #&gt; <span style='color: #BCBCBC;'>6</span> 6        11.4       1.77    23      6.45 0.000<span style='text-decoration: underline;'>001</span>40  </div><div class='input'>
 <span class='co'># contrasts</span>
 <span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/pkg/emmeans/man/contrast.html'>contrast</a></span><span class='op'>(</span><span class='va'>marginal</span><span class='op'>)</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 6 x 8</span>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 6 × 8</span>
 #&gt;   term  contrast null.value estimate std.error    df statistic adj.p.value
 #&gt;   <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>         <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>    <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>       <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>
 #&gt; <span style='color: #BCBCBC;'>1</span> day   1 effect          0    -<span style='color: #BB0000;'>4.65</span>      1.62    23    -<span style='color: #BB0000;'>2.87</span>       0.026<span style='text-decoration: underline;'>1</span>
@@ -276,7 +276,7 @@ passed on to <code><a href='https://rdrr.io/pkg/emmeans/man/summary.emmGrid.html
 #&gt; <span style='color: #BCBCBC;'>4</span> day   4 effect          0    -<span style='color: #BB0000;'>1.47</span>      1.59    23    -<span style='color: #BB0000;'>0.930</span>      0.434 
 #&gt; <span style='color: #BCBCBC;'>5</span> day   5 effect          0     5.22      1.64    23     3.18       0.024<span style='text-decoration: underline;'>9</span>
 #&gt; <span style='color: #BCBCBC;'>6</span> day   6 effect          0     1.18      1.62    23     0.726      0.475 </div><div class='input'><span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/pkg/emmeans/man/contrast.html'>contrast</a></span><span class='op'>(</span><span class='va'>marginal</span>, method <span class='op'>=</span> <span class='st'>"pairwise"</span><span class='op'>)</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 15 x 8</span>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 15 × 8</span>
 #&gt;    term  contrast null.value estimate std.error    df statistic adj.p.value
 #&gt;    <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>         <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>    <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>       <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>
 #&gt; <span style='color: #BCBCBC;'> 1</span> day   1 - 2             0   -<span style='color: #BB0000;'>0.930</span>      2.47    23    -<span style='color: #BB0000;'>0.377</span>     0.999  
@@ -329,7 +329,7 @@ passed on to <code><a href='https://rdrr.io/pkg/emmeans/man/summary.emmGrid.html
 #&gt; 
 #&gt; Results are averaged over the levels of: store 
 #&gt; Confidence level used: 0.95 </div><div class='input'><span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>by_price</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 9 x 7</span>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 9 × 7</span>
 #&gt;   day   price2 estimate std.error    df statistic      p.value
 #&gt;   <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>  <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>    <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>        <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>
 #&gt; <span style='color: #BCBCBC;'>1</span> 2         40     6.24      1.89    23      3.30 0.003<span style='text-decoration: underline;'>10</span>     
@@ -347,7 +347,7 @@ passed on to <code><a href='https://rdrr.io/pkg/emmeans/man/summary.emmGrid.html
 </div><div class='img'><img src='tidy.summary_emm-2.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'># joint_tests</span>
 <span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/pkg/emmeans/man/joint_tests.html'>joint_tests</a></span><span class='op'>(</span><span class='va'>oranges_lm1</span><span class='op'>)</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 4 x 5</span>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 4 × 5</span>
 #&gt;   term   num.df den.df statistic   p.value
 #&gt;   <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>  <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>
 #&gt; <span style='color: #BCBCBC;'>1</span> price1      1     23     30.3  0.000<span style='text-decoration: underline;'>013</span>4

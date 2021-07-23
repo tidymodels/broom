@@ -249,7 +249,7 @@ the <code>data</code> argument.</p></td>
 
 <span class='co'># tidy result</span>
 <span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>res</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 20 x 5</span>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 20 × 5</span>
 #&gt;    term             estimate std.error statistic  p.value
 #&gt;    <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>               <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>    <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>
 #&gt; <span style='color: #BCBCBC;'> 1</span> WMK_(Intercept)  -<span style='color: #BB0000;'>0.004</span><span style='color: #BB0000; text-decoration: underline;'>67</span>    0.056<span style='text-decoration: underline;'>6</span>   -<span style='color: #BB0000;'>0.082</span><span style='color: #BB0000; text-decoration: underline;'>4</span> 9.34<span style='color: #949494;'>e</span><span style='color: #BB0000;'>- 1</span>
@@ -272,7 +272,7 @@ the <code>data</code> argument.</p></td>
 #&gt; <span style='color: #BCBCBC;'>18</span> JCS_zm            0.959      0.348     2.76   5.85<span style='color: #949494;'>e</span><span style='color: #BB0000;'>- 3</span>
 #&gt; <span style='color: #BCBCBC;'>19</span> VOXX_zm           1.48       0.369     4.01   6.04<span style='color: #949494;'>e</span><span style='color: #BB0000;'>- 5</span>
 #&gt; <span style='color: #BCBCBC;'>20</span> ZOOM_zm           2.08       0.321     6.46   1.02<span style='color: #949494;'>e</span><span style='color: #BB0000;'>-10</span></div><div class='input'><span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>res</span>, conf.int <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 20 x 7</span>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 20 × 7</span>
 #&gt;    term             estimate std.error statistic  p.value conf.low conf.high
 #&gt;    <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>               <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>    <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>    <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>
 #&gt; <span style='color: #BCBCBC;'> 1</span> WMK_(Intercept)  -<span style='color: #BB0000;'>0.004</span><span style='color: #BB0000; text-decoration: underline;'>67</span>    0.056<span style='text-decoration: underline;'>6</span>   -<span style='color: #BB0000;'>0.082</span><span style='color: #BB0000; text-decoration: underline;'>4</span> 9.34<span style='color: #949494;'>e</span><span style='color: #BB0000;'>- 1</span>  -<span style='color: #BB0000;'>0.116</span>      0.106
@@ -295,7 +295,7 @@ the <code>data</code> argument.</p></td>
 #&gt; <span style='color: #BCBCBC;'>18</span> JCS_zm            0.959      0.348     2.76   5.85<span style='color: #949494;'>e</span><span style='color: #BB0000;'>- 3</span>   0.277      1.64 
 #&gt; <span style='color: #BCBCBC;'>19</span> VOXX_zm           1.48       0.369     4.01   6.04<span style='color: #949494;'>e</span><span style='color: #BB0000;'>- 5</span>   0.758      2.21 
 #&gt; <span style='color: #BCBCBC;'>20</span> ZOOM_zm           2.08       0.321     6.46   1.02<span style='color: #949494;'>e</span><span style='color: #BB0000;'>-10</span>   1.45       2.71 </div><div class='input'><span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>res</span>, conf.int <span class='op'>=</span> <span class='cn'>TRUE</span>, conf.level <span class='op'>=</span> <span class='fl'>.99</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 20 x 7</span>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 20 × 7</span>
 #&gt;    term             estimate std.error statistic  p.value conf.low conf.high
 #&gt;    <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>               <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>    <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>    <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>
 #&gt; <span style='color: #BCBCBC;'> 1</span> WMK_(Intercept)  -<span style='color: #BB0000;'>0.004</span><span style='color: #BB0000; text-decoration: underline;'>67</span>    0.056<span style='text-decoration: underline;'>6</span>   -<span style='color: #BB0000;'>0.082</span><span style='color: #BB0000; text-decoration: underline;'>4</span> 9.34<span style='color: #949494;'>e</span><span style='color: #BB0000;'>- 1</span> -<span style='color: #BB0000;'>0.151</span>       0.141
@@ -340,7 +340,7 @@ the <code>data</code> argument.</p></td>
 <span class='va'>res_black</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/gmm/man/gmm.html'>gmm</a></span><span class='op'>(</span><span class='va'>g</span>, x <span class='op'>=</span> <span class='va'>x</span>, t0 <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span><span class='op'>(</span><span class='fl'>0</span>, <span class='fl'>11</span><span class='op'>)</span><span class='op'>)</span>
 
 <span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>res_black</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 11 x 5</span>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 11 × 5</span>
 #&gt;    term      estimate std.error statistic  p.value
 #&gt;    <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>        <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>    <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>
 #&gt; <span style='color: #BCBCBC;'> 1</span> Theta[1]    0.516     0.172     3.00   2.72<span style='color: #949494;'>e</span><span style='color: #BB0000;'>- 3</span>
@@ -354,7 +354,7 @@ the <code>data</code> argument.</p></td>
 #&gt; <span style='color: #BCBCBC;'> 9</span> Theta[9]    0.640     0.233     2.75   5.92<span style='color: #949494;'>e</span><span style='color: #BB0000;'>- 3</span>
 #&gt; <span style='color: #BCBCBC;'>10</span> Theta[10]   0.596     0.295     2.02   4.36<span style='color: #949494;'>e</span><span style='color: #BB0000;'>- 2</span>
 #&gt; <span style='color: #BCBCBC;'>11</span> Theta[11]   1.16      0.240     4.82   1.45<span style='color: #949494;'>e</span><span style='color: #BB0000;'>- 6</span></div><div class='input'><span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>res_black</span>, conf.int <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 11 x 7</span>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 11 × 7</span>
 #&gt;    term      estimate std.error statistic  p.value conf.low conf.high
 #&gt;    <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>        <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>    <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>    <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>
 #&gt; <span style='color: #BCBCBC;'> 1</span> Theta[1]    0.516     0.172     3.00   2.72<span style='color: #949494;'>e</span><span style='color: #BB0000;'>- 3</span>   0.178      0.853
@@ -378,7 +378,7 @@ the <code>data</code> argument.</p></td>
 
 <span class='va'>td2</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>res2</span>, conf.int <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
 <span class='va'>td2</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 40 x 7</span>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 40 × 7</span>
 #&gt;    term             estimate std.error statistic p.value conf.low conf.high
 #&gt;    <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>               <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>    <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>
 #&gt; <span style='color: #BCBCBC;'> 1</span> WMK_(Intercept)  -<span style='color: #BB0000;'>0.024</span><span style='color: #BB0000; text-decoration: underline;'>0</span>     0.054<span style='text-decoration: underline;'>8</span>   -<span style='color: #BB0000;'>0.438</span>    0.662  -<span style='color: #BB0000;'>0.131</span>     0.083<span style='text-decoration: underline;'>4</span>

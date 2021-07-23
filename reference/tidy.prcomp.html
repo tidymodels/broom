@@ -261,7 +261,7 @@ that SVD is only equivalent to PCA on centered data.</p>
 
 <span class='co'># information about rotation</span>
 <span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>pc</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 200 x 3</span>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 200 × 3</span>
 #&gt;    row        PC  value
 #&gt;    <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>  <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>
 #&gt; <span style='color: #BCBCBC;'> 1</span> Alabama     1 -<span style='color: #BB0000;'>0.976</span>
@@ -277,7 +277,7 @@ that SVD is only equivalent to PCA on centered data.</p>
 #&gt; <span style='color: #949494;'># … with 190 more rows</span></div><div class='input'>
 <span class='co'># information about samples (states)</span>
 <span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>pc</span>, <span class='st'>"samples"</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 200 x 3</span>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 200 × 3</span>
 #&gt;    row        PC  value
 #&gt;    <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>  <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>
 #&gt; <span style='color: #BCBCBC;'> 1</span> Alabama     1 -<span style='color: #BB0000;'>0.976</span>
@@ -293,7 +293,7 @@ that SVD is only equivalent to PCA on centered data.</p>
 #&gt; <span style='color: #949494;'># … with 190 more rows</span></div><div class='input'>
 <span class='co'># information about PCs</span>
 <span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>pc</span>, <span class='st'>"pcs"</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 4 x 4</span>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 4 × 4</span>
 #&gt;      PC std.dev percent cumulative
 #&gt;   <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>      <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>
 #&gt; <span style='color: #BCBCBC;'>1</span>     1   1.57   0.620       0.620
@@ -316,7 +316,7 @@ that SVD is only equivalent to PCA on centered data.</p>
 </div><div class='img'><img src='tidy.prcomp-1.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='va'>au</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://generics.r-lib.org/reference/augment.html'>augment</a></span><span class='op'>(</span><span class='va'>pc</span>, data <span class='op'>=</span> <span class='va'>USArrests</span><span class='op'>)</span>
 <span class='va'>au</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 50 x 9</span>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 50 × 9</span>
 #&gt;    .rownames   Murder Assault UrbanPop  Rape .fittedPC1 .fittedPC2 .fittedPC3
 #&gt;    <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>        <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span>    <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>      <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>      <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>      <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>
 #&gt; <span style='color: #BCBCBC;'> 1</span> Alabama       13.2     236       58  21.2    -<span style='color: #BB0000;'>0.976</span>      1.12      -<span style='color: #BB0000;'>0.440</span> 

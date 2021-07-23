@@ -214,11 +214,11 @@ the <code>data</code> argument.</p></td>
     <pre class="examples"><div class='input'>
 <span class='va'>dw</span> <span class='op'>&lt;-</span> <span class='fu'>car</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/car/man/durbinWatsonTest.html'>durbinWatsonTest</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>mpg</span> <span class='op'>~</span> <span class='va'>wt</span>, data <span class='op'>=</span> <span class='va'>mtcars</span><span class='op'>)</span><span class='op'>)</span>
 <span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>dw</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 1 x 5</span>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 1 × 5</span>
 #&gt;   statistic p.value autocorrelation method             alternative
 #&gt;       <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>           <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>              <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>      
 #&gt; <span style='color: #BCBCBC;'>1</span>      1.25  0.014<span style='text-decoration: underline;'>0</span>           0.363 Durbin-Watson Test two.sided  </div><div class='input'><span class='fu'><a href='https://generics.r-lib.org/reference/glance.html'>glance</a></span><span class='op'>(</span><span class='va'>dw</span><span class='op'>)</span> <span class='co'># same output for all durbinWatsonTests</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 1 x 5</span>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 1 × 5</span>
 #&gt;   statistic p.value autocorrelation method             alternative
 #&gt;       <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>           <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>              <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>      
 #&gt; <span style='color: #BCBCBC;'>1</span>      1.25  0.014<span style='text-decoration: underline;'>0</span>           0.363 Durbin-Watson Test two.sided  </div></pre>

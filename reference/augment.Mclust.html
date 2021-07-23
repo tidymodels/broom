@@ -305,13 +305,13 @@ the <code>data</code> argument.</p></td>
 <span class='va'>m</span> <span class='op'>&lt;-</span> <span class='fu'>mclust</span><span class='fu'>::</span><span class='fu'><a href='https://mclust-org.github.io/mclust/reference/Mclust.html'>Mclust</a></span><span class='op'>(</span><span class='va'>points</span><span class='op'>)</span>
 
 <span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>m</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 3 x 6</span>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 3 × 6</span>
 #&gt;   component  size proportion variance mean.x1 mean.x2
 #&gt;       <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span>      <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>    <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>
 #&gt; <span style='color: #BCBCBC;'>1</span>         1   101      0.335     1.12  5.01     -<span style='color: #BB0000;'>1.04</span>
 #&gt; <span style='color: #BCBCBC;'>2</span>         2   150      0.503     1.12  0.059<span style='text-decoration: underline;'>4</span>    1.00
 #&gt; <span style='color: #BCBCBC;'>3</span>         3    49      0.161     1.12 -<span style='color: #BB0000;'>3.20</span>     -<span style='color: #BB0000;'>2.06</span></div><div class='input'><span class='fu'><a href='https://generics.r-lib.org/reference/augment.html'>augment</a></span><span class='op'>(</span><span class='va'>m</span>, <span class='va'>points</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 300 x 4</span>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 300 × 4</span>
 #&gt;       x1     x2 .class .uncertainty
 #&gt;    <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>  <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;fct&gt;</span>         <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>
 #&gt; <span style='color: #BCBCBC;'> 1</span>  6.91 -<span style='color: #BB0000;'>2.74</span>  1          3.98<span style='color: #949494;'>e</span><span style='color: #BB0000;'>-11</span>
@@ -325,7 +325,7 @@ the <code>data</code> argument.</p></td>
 #&gt; <span style='color: #BCBCBC;'> 9</span>  7.13 -<span style='color: #BB0000;'>2.17</span>  1          4.16<span style='color: #949494;'>e</span><span style='color: #BB0000;'>-11</span>
 #&gt; <span style='color: #BCBCBC;'>10</span>  5.24 -<span style='color: #BB0000;'>2.42</span>  1          1.16<span style='color: #949494;'>e</span><span style='color: #BB0000;'>- 7</span>
 #&gt; <span style='color: #949494;'># … with 290 more rows</span></div><div class='input'><span class='fu'><a href='https://generics.r-lib.org/reference/glance.html'>glance</a></span><span class='op'>(</span><span class='va'>m</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 1 x 7</span>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 1 × 7</span>
 #&gt;   model     G    BIC logLik    df hypvol  nobs
 #&gt;   <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span>  <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>  <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>  <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span>
 #&gt; <span style='color: #BCBCBC;'>1</span> EII       3 -<span style='color: #BB0000; text-decoration: underline;'>2</span><span style='color: #BB0000;'>402.</span> -<span style='color: #BB0000; text-decoration: underline;'>1</span><span style='color: #BB0000;'>175.</span>     9     <span style='color: #BB0000;'>NA</span>   300</div></pre>

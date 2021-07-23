@@ -241,7 +241,7 @@ the <code>data</code> argument.</p></td>
 <span class='op'>)</span>
 
 <span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>two_class_cm</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 14 x 6</span>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 14 × 6</span>
 #&gt;    term                 class estimate conf.low conf.high p.value
 #&gt;    <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>                <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>    <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>    <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>
 #&gt; <span style='color: #BCBCBC;'> 1</span> accuracy             <span style='color: #BB0000;'>NA</span>      0.52      0.418     0.621   0.619
@@ -258,7 +258,7 @@ the <code>data</code> argument.</p></td>
 #&gt; <span style='color: #BCBCBC;'>12</span> detection_rate       a       0.32     <span style='color: #BB0000;'>NA</span>        <span style='color: #BB0000;'>NA</span>      <span style='color: #BB0000;'>NA</span>    
 #&gt; <span style='color: #BCBCBC;'>13</span> detection_prevalence a       0.59     <span style='color: #BB0000;'>NA</span>        <span style='color: #BB0000;'>NA</span>      <span style='color: #BB0000;'>NA</span>    
 #&gt; <span style='color: #BCBCBC;'>14</span> balanced_accuracy    a       0.515    <span style='color: #BB0000;'>NA</span>        <span style='color: #BB0000;'>NA</span>      <span style='color: #BB0000;'>NA</span>    </div><div class='input'><span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>two_class_cm</span>, by_class <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 3 x 5</span>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 3 × 5</span>
 #&gt;   term     estimate conf.low conf.high p.value
 #&gt;   <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>       <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>    <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>
 #&gt; <span style='color: #BCBCBC;'>1</span> accuracy   0.52      0.418     0.621   0.619
@@ -275,7 +275,7 @@ the <code>data</code> argument.</p></td>
 <span class='op'>)</span>
 
 <span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>six_class_cm</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 69 x 6</span>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 69 × 6</span>
 #&gt;    term           class estimate conf.low conf.high p.value
 #&gt;    <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>          <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>    <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>    <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>
 #&gt; <span style='color: #BCBCBC;'> 1</span> accuracy       <span style='color: #BB0000;'>NA</span>      0.2       0.127     0.292   0.795
@@ -289,7 +289,7 @@ the <code>data</code> argument.</p></td>
 #&gt; <span style='color: #BCBCBC;'> 9</span> recall         a       0.2      <span style='color: #BB0000;'>NA</span>        <span style='color: #BB0000;'>NA</span>      <span style='color: #BB0000;'>NA</span>    
 #&gt; <span style='color: #BCBCBC;'>10</span> f1             a       0.242    <span style='color: #BB0000;'>NA</span>        <span style='color: #BB0000;'>NA</span>      <span style='color: #BB0000;'>NA</span>    
 #&gt; <span style='color: #949494;'># … with 59 more rows</span></div><div class='input'><span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>six_class_cm</span>, by_class <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 3 x 5</span>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 3 × 5</span>
 #&gt;   term     estimate conf.low conf.high p.value
 #&gt;   <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>       <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>    <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>
 #&gt; <span style='color: #BCBCBC;'>1</span> accuracy   0.2       0.127     0.292   0.795

@@ -254,7 +254,7 @@ arguments include <code>rmean</code>.</p></td>
 <span class='va'>sfit</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/survival/man/survfit.html'>survfit</a></span><span class='op'>(</span><span class='va'>cfit</span><span class='op'>)</span>
 
 <span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>sfit</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 186 x 8</span>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 186 × 8</span>
 #&gt;     time n.risk n.event n.censor estimate std.error conf.high conf.low
 #&gt;    <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>  <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>    <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>    <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>    <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>
 #&gt; <span style='color: #BCBCBC;'> 1</span>     5    228       1        0    0.996   0.004<span style='text-decoration: underline;'>19</span>     1        0.988
@@ -268,7 +268,7 @@ arguments include <code>rmean</code>.</p></td>
 #&gt; <span style='color: #BCBCBC;'> 9</span>    53    217       2        0    0.945   0.015<span style='text-decoration: underline;'>7</span>      0.975    0.917
 #&gt; <span style='color: #BCBCBC;'>10</span>    54    215       1        0    0.941   0.016<span style='text-decoration: underline;'>3</span>      0.972    0.911
 #&gt; <span style='color: #949494;'># … with 176 more rows</span></div><div class='input'><span class='fu'><a href='https://generics.r-lib.org/reference/glance.html'>glance</a></span><span class='op'>(</span><span class='va'>sfit</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 1 x 10</span>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 1 × 10</span>
 #&gt;   records n.max n.start events rmean rmean.std.error median conf.low conf.high
 #&gt;     <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>  <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>           <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>  <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>    <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>
 #&gt; <span style='color: #BCBCBC;'>1</span>     228   228     228    165  381.            20.3    320      285       363
@@ -284,7 +284,7 @@ arguments include <code>rmean</code>.</p></td>
 <span class='op'>)</span>
 <span class='va'>td_multi</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>fitCI</span><span class='op'>)</span>
 <span class='va'>td_multi</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 711 x 9</span>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 711 × 9</span>
 #&gt;     time n.risk n.event n.censor estimate std.error conf.high conf.low state
 #&gt;    <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>  <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span>    <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span>    <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>    <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>
 #&gt; <span style='color: #BCBCBC;'> 1</span>     6    241       0        0    0.996   0.004<span style='text-decoration: underline;'>14</span>     1        0.988 (s0) 

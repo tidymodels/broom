@@ -218,7 +218,7 @@ the <code>data</code> argument.</p></td>
     <pre class="examples"><div class='input'>
 <span class='va'>spl</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/smooth.spline.html'>smooth.spline</a></span><span class='op'>(</span><span class='va'>mtcars</span><span class='op'>$</span><span class='va'>wt</span>, <span class='va'>mtcars</span><span class='op'>$</span><span class='va'>mpg</span>, df <span class='op'>=</span> <span class='fl'>4</span><span class='op'>)</span>
 <span class='fu'><a href='https://generics.r-lib.org/reference/augment.html'>augment</a></span><span class='op'>(</span><span class='va'>spl</span>, <span class='va'>mtcars</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 32 x 13</span>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 32 × 13</span>
 #&gt;      mpg   cyl  disp    hp  drat    wt  qsec    vs    am  gear  carb .fitted
 #&gt;    <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>
 #&gt; <span style='color: #BCBCBC;'> 1</span>  21       6  160    110  3.9   2.62  16.5     0     1     4     4    22.9
@@ -232,7 +232,7 @@ the <code>data</code> argument.</p></td>
 #&gt; <span style='color: #BCBCBC;'> 9</span>  22.8     4  141.    95  3.92  3.15  22.9     1     0     4     2    19.5
 #&gt; <span style='color: #BCBCBC;'>10</span>  19.2     6  168.   123  3.92  3.44  18.3     1     0     4     4    17.8
 #&gt; <span style='color: #949494;'># … with 22 more rows, and 1 more variable: .resid &lt;dbl&gt;</span></div><div class='input'><span class='fu'><a href='https://generics.r-lib.org/reference/augment.html'>augment</a></span><span class='op'>(</span><span class='va'>spl</span><span class='op'>)</span> <span class='co'># calls original columns x and y</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 32 x 5</span>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 32 × 5</span>
 #&gt;        x     y     w .fitted .resid
 #&gt;    <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>  <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>
 #&gt; <span style='color: #BCBCBC;'> 1</span>  2.62  21       1    22.9 -<span style='color: #BB0000;'>1.87</span> 

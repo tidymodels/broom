@@ -212,11 +212,11 @@ the <code>data</code> argument.</p></td>
 <span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>Moore</span><span class='op'>)</span>
 <span class='va'>lt</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/with.html'>with</a></span><span class='op'>(</span><span class='va'>Moore</span>, <span class='fu'><a href='https://rdrr.io/pkg/car/man/leveneTest.html'>leveneTest</a></span><span class='op'>(</span><span class='va'>conformity</span>, <span class='va'>fcategory</span><span class='op'>)</span><span class='op'>)</span>
 <span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>lt</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 1 x 4</span>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 1 × 4</span>
 #&gt;   statistic p.value    df df.residual
 #&gt;       <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span>       <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span>
 #&gt; <span style='color: #BCBCBC;'>1</span>    0.046<span style='text-decoration: underline;'>0</span>   0.955     2          42</div><div class='input'><span class='fu'><a href='https://generics.r-lib.org/reference/glance.html'>glance</a></span><span class='op'>(</span><span class='va'>lt</span><span class='op'>)</span> <span class='co'># same output for all leveneTest</span>
-</div><div class='output co'>#&gt; <span class='warning'>Warning: Data frame tidiers are deprecated and will be removed in an upcoming release of broom.</span></div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 1 x 4</span>
+</div><div class='output co'>#&gt; <span class='warning'>Warning: Data frame tidiers are deprecated and will be removed in an upcoming release of broom.</span></div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 1 × 4</span>
 #&gt;    nrow  ncol complete.obs na.fraction
 #&gt;   <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span>        <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span>       <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>
 #&gt; <span style='color: #BCBCBC;'>1</span>     2     3            1       0.333</div></pre>

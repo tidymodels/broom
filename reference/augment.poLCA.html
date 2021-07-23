@@ -338,7 +338,7 @@ included in the augmented output.</p>
 #&gt; G^2(2): 2.719922 (Likelihood ratio/deviance statistic) 
 #&gt; X^2(2): 2.719764 (Chi-square goodness of fit) 
 #&gt;  </div><div class='input'><span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>M1</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='warning'>Warning: 'as.is' should be specified by the caller; using TRUE</span></div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 16 x 5</span>
+</div><div class='output co'>#&gt; <span class='warning'>Warning: 'as.is' should be specified by the caller; using TRUE</span></div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 16 × 5</span>
 #&gt;    variable class outcome estimate std.error
 #&gt;    <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>    <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>    <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>
 #&gt; <span style='color: #BCBCBC;'> 1</span> A            1       1  0.286      0.039<span style='text-decoration: underline;'>3</span>
@@ -357,7 +357,7 @@ included in the augmented output.</p>
 #&gt; <span style='color: #BCBCBC;'>14</span> D            2       1  0.231      0.092<span style='text-decoration: underline;'>9</span>
 #&gt; <span style='color: #BCBCBC;'>15</span> D            1       2  0.132      0.037<span style='text-decoration: underline;'>9</span>
 #&gt; <span style='color: #BCBCBC;'>16</span> D            2       2  0.769      0.092<span style='text-decoration: underline;'>9</span></div><div class='input'><span class='fu'><a href='https://generics.r-lib.org/reference/augment.html'>augment</a></span><span class='op'>(</span><span class='va'>M1</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 216 x 7</span>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 216 × 7</span>
 #&gt;        A     B     C     D X.Intercept. .class .probability
 #&gt;    <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>        <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>  <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span>        <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>
 #&gt; <span style='color: #BCBCBC;'> 1</span>     2     2     2     2            1      2        0.959
@@ -371,7 +371,7 @@ included in the augmented output.</p>
 #&gt; <span style='color: #BCBCBC;'> 9</span>     2     2     2     2            1      2        0.959
 #&gt; <span style='color: #BCBCBC;'>10</span>     2     2     2     2            1      2        0.959
 #&gt; <span style='color: #949494;'># … with 206 more rows</span></div><div class='input'><span class='fu'><a href='https://generics.r-lib.org/reference/glance.html'>glance</a></span><span class='op'>(</span><span class='va'>M1</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 1 x 8</span>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 1 × 8</span>
 #&gt;   logLik   AIC   BIC g.squared chi.squared    df df.residual  nobs
 #&gt;    <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>       <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>       <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span>
 #&gt; <span style='color: #BCBCBC;'>1</span>  -<span style='color: #BB0000;'>504.</span> <span style='text-decoration: underline;'>1</span>027. <span style='text-decoration: underline;'>1</span>057.      2.72        2.72     9           6   216</div><div class='input'>
@@ -391,7 +391,7 @@ included in the augmented output.</p>
 
 <span class='va'>td</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>nes2a</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; <span class='warning'>Warning: 'as.is' should be specified by the caller; using TRUE</span></div><div class='input'><span class='va'>td</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 144 x 5</span>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 144 × 5</span>
 #&gt;    variable class outcome           estimate std.error
 #&gt;    <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>    <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;fct&gt;</span>                <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>
 #&gt; <span style='color: #BCBCBC;'> 1</span> MORALG       1 1 Extremely well    0.137    0.018<span style='text-decoration: underline;'>2</span> 
@@ -414,7 +414,7 @@ included in the augmented output.</p>
 </div><div class='img'><img src='augment.poLCA-2.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='va'>au</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://generics.r-lib.org/reference/augment.html'>augment</a></span><span class='op'>(</span><span class='va'>nes2a</span><span class='op'>)</span>
 <span class='va'>au</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 1,300 x 16</span>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 1,300 × 16</span>
 #&gt;    MORALG  CARESG  KNOWG  LEADG DISHONG INTELG MORALB CARESB KNOWB LEADB DISHONB
 #&gt;    <span style='color: #949494; font-style: italic;'>&lt;fct&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;fct&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;fct&gt;</span>  <span style='color: #949494; font-style: italic;'>&lt;fct&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;fct&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;fct&gt;</span>  <span style='color: #949494; font-style: italic;'>&lt;fct&gt;</span>  <span style='color: #949494; font-style: italic;'>&lt;fct&gt;</span>  <span style='color: #949494; font-style: italic;'>&lt;fct&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;fct&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;fct&gt;</span>  
 #&gt; <span style='color: #BCBCBC;'> 1</span> 3 Not … 1 Extr… 2 Qui… 2 Qu… 3 Not … 2 Qui… 1 Ext… 1 Ext… 2 Qu… 2 Qu… 4 Not …
@@ -429,7 +429,7 @@ included in the augmented output.</p>
 #&gt; <span style='color: #BCBCBC;'>10</span> 2 Quit… 3 Not … 2 Qui… 2 Qu… 3 Not … 2 Qui… 2 Qui… 4 Not… 2 Qu… 4 No… 2 Quit…
 #&gt; <span style='color: #949494;'># … with 1,290 more rows, and 5 more variables: INTELB &lt;fct&gt;,</span>
 #&gt; <span style='color: #949494;'>#   X.Intercept. &lt;dbl&gt;, PARTY &lt;dbl&gt;, .class &lt;int&gt;, .probability &lt;dbl&gt;</span></div><div class='input'><span class='fu'><a href='https://dplyr.tidyverse.org/reference/count.html'>count</a></span><span class='op'>(</span><span class='va'>au</span>, <span class='va'>.class</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 3 x 2</span>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 3 × 2</span>
 #&gt;   .class     n
 #&gt;    <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span>
 #&gt; <span style='color: #BCBCBC;'>1</span>      1   496
@@ -439,7 +439,7 @@ included in the augmented output.</p>
 <span class='co'># for rows that weren't predicted</span>
 <span class='va'>au2</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://generics.r-lib.org/reference/augment.html'>augment</a></span><span class='op'>(</span><span class='va'>nes2a</span>, data <span class='op'>=</span> <span class='va'>election</span><span class='op'>)</span>
 <span class='va'>au2</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 1,785 x 20</span>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 1,785 × 20</span>
 #&gt;    MORALG  CARESG  KNOWG  LEADG DISHONG INTELG MORALB CARESB KNOWB LEADB DISHONB
 #&gt;    <span style='color: #949494; font-style: italic;'>&lt;fct&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;fct&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;fct&gt;</span>  <span style='color: #949494; font-style: italic;'>&lt;fct&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;fct&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;fct&gt;</span>  <span style='color: #949494; font-style: italic;'>&lt;fct&gt;</span>  <span style='color: #949494; font-style: italic;'>&lt;fct&gt;</span>  <span style='color: #949494; font-style: italic;'>&lt;fct&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;fct&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;fct&gt;</span>  
 #&gt; <span style='color: #BCBCBC;'> 1</span> 3 Not … 1 Extr… 2 Qui… 2 Qu… 3 Not … 2 Qui… 1 Ext… 1 Ext… 2 Qu… 2 Qu… 4 Not …
