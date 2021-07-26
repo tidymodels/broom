@@ -573,6 +573,7 @@ Suggests:
     Lahman,
     lavaan,
     leaps,
+    lfe,
     lm.beta,
     lme4,
     lmodel2,
@@ -660,6 +661,7 @@ Collate:
     'ks-tidiers.R'
     'lavaan-tidiers.R'
     'leaps.R'
+    'lfe-tidiers.R'
     'list-irlba.R'
     'list-optim-tidiers.R'
     'list-svd-tidiers.R'
