@@ -3,7 +3,7 @@
 ## Test environments
 
 * local OS X install, R 4.1.0
-* ubuntu 18.04 (on github actions), devel, release, oldrel, 3.6
+* ubuntu 18.04 (on github actions), devel, release, oldrel
 * windows (on github actions), release
 * OS X (on github actions), release
 * windows (on win-builder), devel
