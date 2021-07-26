@@ -17,6 +17,8 @@
 #'
 #' @examples
 #'
+#' if (require(lfe)) {
+#'
 #' library(lfe)
 #'
 #' # Use built-in "airquality" dataset
@@ -46,6 +48,9 @@
 #' tidy(est2, conf.int = TRUE, se.type = "cluster")
 #' tidy(est2, conf.int = TRUE, se.type = "robust")
 #' tidy(est2, conf.int = TRUE, se.type = "iid")
+#' 
+#' }
+#' 
 #' @export
 #' @aliases felm_tidiers lfe_tidiers
 #' @family felm tidiers
