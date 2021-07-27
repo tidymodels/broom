@@ -1,6 +1,4 @@
-# broom 0.7.8.9000
-
-To be released as broom 0.7.9.
+# broom 0.7.9
 
 * Fixes confidence intervals in `tidy.crr()`, which were previously exponentiated when `exponentiate = FALSE` (`#1023` by `@leejasme`)
 * Deprecates `Rchoice` tidiers, as the newest 0.3-3 release requires R 4.0+ and does not re-export needed generics.

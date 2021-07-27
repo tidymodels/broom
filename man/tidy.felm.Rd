@@ -55,6 +55,8 @@ specify which components to return.
 }
 \examples{
 
+if (require(lfe)) {
+
 library(lfe)
 
 # Use built-in "airquality" dataset
@@ -84,6 +86,9 @@ tidy(est2, conf.int = TRUE)
 tidy(est2, conf.int = TRUE, se.type = "cluster")
 tidy(est2, conf.int = TRUE, se.type = "robust")
 tidy(est2, conf.int = TRUE, se.type = "iid")
+
+}
+
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[lfe:felm]{lfe::felm()}}

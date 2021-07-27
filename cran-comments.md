@@ -1,4 +1,4 @@
-# broom 0.7.8
+# broom 0.7.9
 
 ## Test environments
 
@@ -14,6 +14,6 @@
 
 # Reverse dependencies
 
-We checked 184 reverse dependencies (170 from CRAN + 14 from BioConductor), 
+We checked 190 reverse dependencies (175 from CRAN + 15 from BioConductor), 
 comparing R CMD check results across CRAN and dev versions of this package.
 We saw no new ERRORs, WARNINGs, or NOTEs.
