@@ -1,3 +1,7 @@
+# broom 0.7.9.9000
+
+To be released as broom 0.7.10.
+
 # broom 0.7.9
 
 * Fixes confidence intervals in `tidy.crr()`, which were previously exponentiated when `exponentiate = FALSE` (`#1023` by `@leejasme`)
