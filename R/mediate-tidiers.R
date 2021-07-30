@@ -26,7 +26,7 @@
 #' @family mediate tidiers
 #' @aliases mediate_tidiers
 tidy.mediate <- function(x, conf.int = FALSE, conf.level = .95, ...) {
-  if (inherits(ck, "psych")) {
+  if (inherits(x, "psych")) {
     stop(
       "No tidy method for objects of class `mediate` from the `psych` package. ",
       "The `tidy.mediate` method is intended for `mediate` objects from the `mediation` package."
