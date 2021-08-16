@@ -6,6 +6,7 @@
 #' @param conf.method Passed to the `type` argument of [boot::boot.ci()].
 #'   Defaults to `"perc"`. The allowed types are `"perc"`, `"basic"`,
 #'   `"bca"`, and `"norm"`. Does not support `"stud"` or `"all"`.
+#' @template param_exponentiate
 #' @template param_unused_dots
 #'
 #' @evalRd return_tidy("bias", "std.error", "term",
@@ -50,6 +51,7 @@ tidy.boot <- function(x,
                       conf.int = FALSE,
                       conf.level = 0.95,
                       conf.method = c("perc", "bca", "basic", "norm"),
+                      exponentiate = FALSE,
                       ...) {
   conf.method <- rlang::arg_match(conf.method)
 
@@ -120,5 +122,12 @@ tidy.boot <- function(x,
     colnames(ci.tab) <- c("conf.low", "conf.high")
     ret <- cbind(ret, ci.tab)
   }
+
+  if (exponentiate){
+    ret <- dplyr::rename(ret, estimate = 2)
+    ret <- exponentiate(ret)
+    ret <- dplyr::rename(ret, statistic = 2)
+  }
+  
   as_tibble(ret)
 }
