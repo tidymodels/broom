@@ -3,6 +3,7 @@
 To be released as broom 0.7.10.
 
 * Clarifies error when `pysch::mediate` output is dispatched to `tidy.mediate` (`#1037` by `@LukasWallrich`).
+* Allows user to specify confidence level for `tidy.rma` (`#1041` by `@TarenSanders`)
 
 # broom 0.7.9
 
