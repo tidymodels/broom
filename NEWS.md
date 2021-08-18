@@ -3,6 +3,7 @@
 To be released as broom 0.7.10.
 
 * Clarifies error when `pysch::mediate` output is dispatched to `tidy.mediate` (`#1037` by `@LukasWallrich`).
+* Added exponentiate option for `tidy.boot` (`#1040` by @oskasf)
 
 # broom 0.7.9
 

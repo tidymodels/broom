@@ -507,7 +507,10 @@ Authors@R:
              email = "joshuayamamoto5@gmail.com"),
       person(given = "Jasme",
              family = "Lee",
-             role = "ctb"))
+             role = "ctb"),
+      person(given = "Oska"),
+             family = "Fentem",
+             role = "ctb")
 Description: Summarizes key information about statistical
     objects in tidy tibbles. This makes it easy to report results, create
     plots and consistently work with large numbers of models at once.
