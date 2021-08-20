@@ -37,10 +37,12 @@ no value}
 \item{...}{extra arguments (not used)}
 }
 \description{
-Add fitted values, residuals, and other common outputs to
-the value returned from \code{augment}.
+\code{augment_columns} is intended for use in the internals of \code{augment} methods
+only and is exported for developers extending the broom package. Please
+instead use \code{\link[=augment]{augment()}} to appropriately make use of the functionality
+in \code{augment_columns()}.
 }
 \details{
-In the case that a residuals or influence generic is not implemented for the
-model, fail quietly.
+Note that, in the case that a \code{residuals()} or \code{influence()} generic is
+not implemented for the supplied model \code{x}, the function will fail quietly.
 }
