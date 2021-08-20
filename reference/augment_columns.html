@@ -52,8 +52,10 @@ an augment call — augment_columns • broom</title>
 
 <meta property="og:title" content="Add fitted values, residuals, and other common outputs to
 an augment call — augment_columns" />
-<meta property="og:description" content="Add fitted values, residuals, and other common outputs to
-the value returned from augment." />
+<meta property="og:description" content="augment_columns is intended for use in the internals of augment methods
+only and is exported for developers extending the broom package. Please
+instead use augment() to appropriately make use of the functionality
+in augment_columns()." />
 <meta property="og:image" content="https://broom.tidymodels.org/logo.png" />
 <meta name="twitter:card" content="summary" />
 
@@ -163,8 +165,10 @@ an augment call</h1>
     </div>
 
     <div class="ref-description">
-    <p>Add fitted values, residuals, and other common outputs to
-the value returned from <code>augment</code>.</p>
+    <p><code>augment_columns</code> is intended for use in the internals of <code>augment</code> methods
+only and is exported for developers extending the broom package. Please
+instead use <code><a href='https://generics.r-lib.org/reference/augment.html'>augment()</a></code> to appropriately make use of the functionality
+in <code>augment_columns()</code>.</p>
     </div>
 
     <pre class="usage"><span class='fu'>augment_columns</span><span class='op'>(</span>
@@ -220,8 +224,8 @@ no value</p></td>
 
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>In the case that a residuals or influence generic is not implemented for the
-model, fail quietly.</p>
+    <p>Note that, in the case that a <code><a href='https://wviechtb.github.io/metafor/reference/residuals.rma.html'>residuals()</a></code> or <code><a href='https://wviechtb.github.io/metafor/reference/influence.rma.uni.html'>influence()</a></code> generic is
+not implemented for the supplied model <code>x</code>, the function will fail quietly.</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
