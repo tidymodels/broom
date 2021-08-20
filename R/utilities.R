@@ -175,11 +175,13 @@ unrowname <- function(x) {
 #' Add fitted values, residuals, and other common outputs to
 #' an augment call
 #'
-#' Add fitted values, residuals, and other common outputs to
-#' the value returned from `augment`.
+#' `augment_columns` is intended for use in the internals of `augment` methods
+#' only and is exported for developers extending the broom package. Please 
+#' instead use [augment()] to appropriately make use of the functionality 
+#' in `augment_columns()`.
 #'
-#' In the case that a residuals or influence generic is not implemented for the
-#' model, fail quietly.
+#' Note that, in the case that a `residuals()` or `influence()` generic is 
+#' not implemented for the supplied model `x`, the function will fail quietly.
 #'
 #' @param x a model
 #' @param data original data onto which columns should be added
