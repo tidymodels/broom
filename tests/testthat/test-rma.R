@@ -36,7 +36,7 @@ dat <-
   )
 
 # random effects ----------------------------------------------------------
-res.RE <- rma(yi, vi, data = dat, method = "EB")
+res.RE <- rma(yi, vi, data = dat, method = "EB", level = 95)
 
 # mixed effects ----------------------------------------------------------
 res.ME <-
@@ -157,7 +157,10 @@ check_augment_rma_output <- function(x) {
 # test rma tidiers output -------------------------------------------------
 
 test_that(("tidy.rma"), {
-  check_tidy_output(tidy(res.RE))
+  # Use this object for multiple tests
+  re.tidy <- tidy(res.RE, conf.int = TRUE, conf.level = 0.95)
+  
+  check_tidy_output(re.tidy)
   check_tidy_output(tidy(res.ME))
   check_tidy_output(tidy(res.FE))
   check_tidy_output(tidy(res.WFE))
@@ -165,7 +168,23 @@ test_that(("tidy.rma"), {
   check_tidy_output(tidy(res.GLMM))
   check_tidy_output(tidy(res.peto))
   check_tidy_output(tidy(res.MH))
-})
+  
+  # Check that confidence levels vary if requested
+  abs_diff_conf_level <- function(res, conf.level){
+    res.tidy <- tidy(res.RE, conf.int = TRUE, conf.level = conf.level)
+    return(abs(res.tidy$conf.high - res.tidy$conf.low))
+  }
+  
+  expect_true(all(
+    # Smaller confidence levels have smaller absolute differences
+    abs_diff_conf_level(res.RE, 0.90) < abs_diff_conf_level(res.RE, 0.95),
+    abs_diff_conf_level(res.RE, 0.95) < abs_diff_conf_level(res.RE, 0.99)
+  ))
+  
+  # Check that confidence levels match rma object when level is equivalent
+  expect_equal(re.tidy$conf.low, res.RE$ci.lb, tolerance = 0.001)
+  expect_equal(re.tidy$conf.high, res.RE$ci.ub, tolerance = 0.001)
+  })
 
 test_that(("glance.rma"), {
   # save this one for other test
