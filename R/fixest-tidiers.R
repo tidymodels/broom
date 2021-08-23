@@ -55,7 +55,8 @@
 #' @family fixest tidiers
 #' @seealso [tidy()], [fixest::feglm()], [fixest::fenegbin()],
 #' [fixest::feNmlm()], [fixest::femlm()], [fixest::feols()], [fixest::fepois()]
-tidy.fixest <- function(x, conf.int = FALSE, conf.level = 0.95, ...) {
+tidy.fixest <- function(x, conf.int = FALSE, 
+                        conf.level = 0.95, exponentiate = FALSE, ...) {
   coeftable <- summary(x, ...)$coeftable
   ret <- as_tibble(coeftable, rownames = "term")
   colnames(ret) <- c("term", "estimate", "std.error", "statistic", "p.value")
@@ -64,6 +65,10 @@ tidy.fixest <- function(x, conf.int = FALSE, conf.level = 0.95, ...) {
     # Bind to rest of tibble
     colnames(CI) <- c("conf.low", "conf.high")
     ret <- bind_cols(ret, unrowname(CI))
+  }
+  
+  if (exponentiate){
+    ret <- exponentiate(ret) 
   }
   as_tibble(ret)
 }
