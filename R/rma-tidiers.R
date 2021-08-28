@@ -57,6 +57,20 @@ tidy.rma <- function(x, conf.int = FALSE, conf.level = 0.95,
     study <- "overall"
     betas <- betas[1]
   }
+  
+  if (x$level != 1-conf.level) {
+    level <- 1-conf.level
+    if (is.element(x$test, c("knha","adhoc","t"))) {
+      crit <- if (x$ddf > 0) qt(level/2, df=x$ddf, lower.tail=FALSE) else NA
+   } else {
+      crit <- qnorm(level/2, lower.tail=FALSE)
+     }
+    conf.low <- c(betas - crit * x$se)
+    conf.high <- c(betas + crit * x$se)
+  } else {
+    conf.low <- x$ci.lb
+    conf.high <- x$ci.ub
+  }
 
   results <- tibble::tibble(
     term = study,
@@ -65,8 +79,8 @@ tidy.rma <- function(x, conf.int = FALSE, conf.level = 0.95,
     std.error = x$se,
     statistic = x$zval,
     p.value = x$pval,
-    conf.low = x$ci.lb,
-    conf.high = x$ci.ub
+    conf.low = conf.low,
+    conf.high = conf.high
   )
 
   # tidy individual studies
