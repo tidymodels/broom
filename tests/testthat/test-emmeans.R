@@ -71,6 +71,16 @@ test_that("summary_emm tidiers work", {
   tdjt <- tidy(joint_tests_summary)
   check_tidy_output(tdjt)
   check_dims(tdjt, 4, 5)
+  
+  library("lme4")
+  glmm <- glmer(
+    cbind(incidence, size - incidence) ~ period + (1 | herd),
+    data = cbpp, family = binomial
+  )
+  emm_glmm <- emmeans(glmm, ~period)
+  tdm <- tidy(emm_glmm, conf.int = TRUE)
+
+  check_tidy_output(tdm[, -1])
 })
 
 test_that("tidy.ref.grid consistency with tidy.TukeyHSD", {
