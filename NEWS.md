@@ -6,6 +6,7 @@ To be released as broom 0.7.10.
 * Allows user to specify confidence level for `tidy.rma` (`#1041` by `@TarenSanders`)
 * Clarifies documentation related to usage of `augment_columns()`; most package users should use `augment()` in favor of `augment_columns()`. See `?augment_columns` for more details.
 * Extends support for `emmeans` by fixing non-standard column names in case of asymptotically derived inferential statistics. (`#1046` by `@crsh`)
+* Adds weak instrument statistics and p-values in `glance.ivreg()` and accommodates more than one endogenous regressor.
 
 # broom 0.7.9
 

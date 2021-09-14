@@ -153,15 +153,17 @@ glance.ivreg <- function(x, diagnostics = FALSE, ...) {
 
   if (diagnostics) {
     s_ <- summary(x, diagnostics = TRUE)
+
+    rownames(s_$diagnostics) <- stringr::str_replace_all(rownames(s_$diagnostics), " |-", ".")
+    rownames(s_$diagnostics) <- stringr::str_replace_all(rownames(s_$diagnostics), "[(]|[)]", "")
+    rnames <- rownames(s_$diagnostics)
     
-    diags <- as_glance_tibble(
-      statistic.Sargan = s_$diagnostics["Sargan", "statistic"],
-      p.value.Sargan = s_$diagnostics["Sargan", "p-value"],
-      statistic.Wu.Hausman = s_$diagnostics["Wu-Hausman", "statistic"],
-      p.value.Wu.Hausman = s_$diagnostics["Wu-Hausman", "p-value"],
-      na_types = "rrrr"
-    )
-    
+    vals <- data.frame(t(c(rbind(s_$diagnostics[,"statistic"], s_$diagnostics[,"p-value"]))))
+
+    colnames(vals) <- c(rbind(paste0("statistic.",rnames), paste0("p.value.",rnames)))
+
+    diags <- tibble(vals)
+        
     return(bind_cols(ret, diags))
   }
 
