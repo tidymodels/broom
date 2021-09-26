@@ -65,7 +65,7 @@ augment.mlogit <- function(x, data = x$model, ...) {
   # the ID variables are really messed up, so we're going to do some 
   # retrofitting because this ends up being a pretty important element of
   # what we want to do with the results.
-  x$model$idx
+  idx <- x$model$idx
   
   reg <- x$model %>%
     as_augment_tibble()  %>%
