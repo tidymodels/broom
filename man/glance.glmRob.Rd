@@ -41,12 +41,14 @@ of the appropriate type.
 }
 \examples{
 
-library(robust)
+if (requireNamespace("robust", quietly = TRUE)) {
+  library(robust)
 
-gm <- glmRob(am ~ wt, data = mtcars, family = "binomial")
+  gm <- glmRob(am ~ wt, data = mtcars, family = "binomial")
 
-tidy(gm)
-glance(gm)
+  tidy(gm)
+  glance(gm)
+}
 }
 \seealso{
 \code{\link[robust:glmRob]{robust::glmRob()}}

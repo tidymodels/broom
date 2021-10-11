@@ -164,6 +164,7 @@ Other contributors:
   \item Brenton M. Wiernik \email{brenton@wiernik.org} [contributor]
   \item Josh Yamamoto \email{joshuayamamoto5@gmail.com} [contributor]
   \item Jasme Lee [contributor]
+  \item Taren Sanders \email{taren.sanders@acu.edu.au} (\href{https://orcid.org/0000-0002-4504-6008}{ORCID}) [contributor]
 }
 
 }

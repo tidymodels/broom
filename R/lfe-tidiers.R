@@ -17,7 +17,7 @@
 #'
 #' @examples
 #'
-#' if (require(lfe)) {
+#' if (requireNamespace("lfe", quietly = TRUE)) {
 #'
 #' library(lfe)
 #'

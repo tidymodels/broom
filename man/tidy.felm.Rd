@@ -55,7 +55,7 @@ specify which components to return.
 }
 \examples{
 
-if (require(lfe)) {
+if (requireNamespace("lfe", quietly = TRUE)) {
 
 library(lfe)
 

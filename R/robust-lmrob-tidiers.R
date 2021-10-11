@@ -9,12 +9,15 @@
 #'
 #' @examples
 #'
-#' library(robust)
-#' m <- lmRob(mpg ~ wt, data = mtcars)
+#' if (requireNamespace("robust", quietly = TRUE)) {
+#'   library(robust)
+#'   m <- lmRob(mpg ~ wt, data = mtcars)
 #'
-#' tidy(m)
-#' augment(m)
-#' glance(m)
+#'   tidy(m)
+#'   augment(m)
+#'   glance(m)
+#' }
+#'
 #' @aliases robust_tidiers
 #' @export
 #' @family robust tidiers

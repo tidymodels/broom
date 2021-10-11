@@ -70,7 +70,7 @@ missing at this time.
 }
 \examples{
 
-if (require(lfe)) {
+if (requireNamespace("lfe", quietly = TRUE)) {
 
 library(lfe)
 
