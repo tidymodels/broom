@@ -82,6 +82,7 @@ augment.mlogit <- function(x, data = x$model, ...) {
     dplyr::mutate(
       id = idx$id1,
       alternative = idx$id2,
+      .resid = as.vector(x$residuals)
     ) %>%
     dplyr::select(id, alternative, chosen, everything())
       
