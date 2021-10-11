@@ -7,6 +7,8 @@ To be released as broom 0.7.10.
 * Clarifies documentation related to usage of `augment_columns()`; most package users should use `augment()` in favor of `augment_columns()`. See `?augment_columns` for more details.
 * Extends support for `emmeans` by fixing non-standard column names in case of asymptotically derived inferential statistics. (`#1046` by `@crsh`)
 * Fixes use of index columns in `augment.mlogit`. (`#1045` and `#1053` by `@jamesrrae` and `@gregmacfarlane`)
+* Correct column naming of standard error measures in `glance.survfit()`.
+* Various bug fixes and improvements to documentation.
 
 # broom 0.7.9
 

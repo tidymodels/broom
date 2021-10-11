@@ -124,7 +124,8 @@ glance.survfit <- function(x, ...) {
   colnames(ret) <- dplyr::recode(
     colnames(ret),
     "*rmean" = "rmean",
-    "*se(rmean)" = "rmean.std.error"
+    "*se(rmean)" = "rmean.std.error",
+    "se(rmean)" = "rmean.std.error"
   )
 
   colnames(ret)[utils::tail(seq_along(ret), 2)] <- c("conf.low", "conf.high")
