@@ -162,7 +162,7 @@ warn_on_appropriated_glm_class <- function(x) {
 # by stats::glm2. glm2 outputs are currently not supported (intentionally)
 # so warn that output is not maintained.
 warn_on_glm2 <- function(x) {
-  if (!is.null(x$method)) {
+  if (!is.null(x$method) & is.character(x$method)) {
     if (x$method == "glm.fit2") {
       warning("The supplied model object seems to be outputted from the glm2 ",
               "package. Tidiers for glm2 output are currently not ",
