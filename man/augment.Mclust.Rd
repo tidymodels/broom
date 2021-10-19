@@ -71,6 +71,7 @@ missing at this time.
 \examples{
 
 if (requireNamespace("mclust", quietly = TRUE)) {
+
 library(dplyr)
 library(mclust)
 set.seed(27)
@@ -95,7 +96,9 @@ m <- mclust::Mclust(points)
 tidy(m)
 augment(m, points)
 glance(m)
+
 }
+
 }
 \seealso{
 \code{\link[=augment]{augment()}}, \code{\link[mclust:Mclust]{mclust::Mclust()}}

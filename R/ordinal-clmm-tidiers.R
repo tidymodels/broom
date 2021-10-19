@@ -7,6 +7,8 @@
 #' @template param_unused_dots
 #'
 #' @examples
+#' 
+#' if (requireNamespace("ordinal", quietly = TRUE)) {
 #'
 #' library(ordinal)
 #'
@@ -21,6 +23,9 @@
 #' fit2 <- clmm(rating ~ temp + (1 | judge), nominal = ~contact, data = wine)
 #' tidy(fit2)
 #' glance(fit2)
+#' 
+#' }
+#' 
 #' @evalRd return_tidy(regression = TRUE)
 #'
 #' @note In `broom 0.7.0` the `coefficient_type` column was renamed to

@@ -16,6 +16,8 @@
 #' )
 #'
 #' @examples
+#' 
+#' if (requireNamespace("cmprsk", quietly = TRUE)) {
 #'
 #' library(cmprsk)
 #' lrf_time <- rexp(100) #time to loco-regional failure (lrf)
@@ -25,6 +27,8 @@
 #' x <- crr(lrf_time, lrf_event, cbind(trt, strt))
 #' tidy(x, conf.int = TRUE)
 #' glance(x)
+#' 
+#' }
 #'
 #' @aliases cmprsk_tidiers
 #' @export

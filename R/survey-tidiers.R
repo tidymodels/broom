@@ -7,6 +7,8 @@
 #' @export
 #'
 #' @examples
+#' 
+#' if (requireNamespace("MASS", quietly = TRUE)) {
 #'
 #' library(MASS)
 #'
@@ -14,6 +16,9 @@
 #'
 #' tidy(fit, exponentiate = TRUE, conf.int = TRUE)
 #' glance(fit)
+#' 
+#' }
+#' 
 #' @evalRd return_tidy(regression = TRUE)
 #'
 #' @aliases svyolr_tidiers

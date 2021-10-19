@@ -71,6 +71,9 @@ original data can be recovered from the fit object, this method
 currently does not take in \code{data} or \code{newdata} arguments.
 }
 \examples{
+
+if (requireNamespace("spatialreg", quietly = TRUE)) {
+
 \dontrun{ 
 library(spatialreg)
 data(oldcol, package = "spdep")
@@ -100,6 +103,8 @@ tidy(crime_sac)
 tidy(crime_sac, conf.int = TRUE)
 glance(crime_sac)
 augment(crime_sac)
+}
+
 }
 
 }

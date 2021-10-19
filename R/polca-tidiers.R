@@ -13,6 +13,8 @@
 #' )
 #'
 #' @examples
+#' 
+#' if (requireNamespace("poLCA", quietly = TRUE)) {
 #'
 #' library(poLCA)
 #' library(dplyr)
@@ -59,6 +61,9 @@
 #' au2 <- augment(nes2a, data = election)
 #' au2
 #' dim(au2)
+#' 
+#' }
+#' 
 #' @aliases poLCA_tidiers
 #' @export
 #' @seealso [tidy()], [poLCA::poLCA()]

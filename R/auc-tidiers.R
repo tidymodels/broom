@@ -7,6 +7,8 @@
 #' @evalRd return_tidy("cutoff", "tpr", "fpr")
 #'
 #' @examples
+#' 
+#' if (requireNamespace("AUC", quietly = TRUE)) {
 #'
 #' library(AUC)
 #' data(churn)
@@ -36,6 +38,9 @@
 #'
 #' ggplot(rocs, aes(fpr, tpr, color = algorithm)) +
 #'   geom_line()
+#'   
+#' }
+#' 
 #' @export
 #' @aliases auc_tidiers roc_tidiers
 #' @seealso [tidy()], [AUC::roc()]

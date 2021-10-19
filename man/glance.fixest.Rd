@@ -41,6 +41,9 @@ depending on the type of model estimated. \code{sigma}, \code{r.squared},
 \code{feols}. \code{pseudo.r.squared} will be NA for \code{feols}.
 }
 \examples{
+
+if (requireNamespace("fixest", quietly = TRUE)) {
+
 \donttest{
 library(fixest)
 
@@ -63,6 +66,8 @@ gravity_summ <- summary(gravity, cluster = c("Product", "Year"))
 tidy(gravity_summ, conf.int = TRUE)
 
 # Approach (1) is preferred.
+
+}
 
 }
 

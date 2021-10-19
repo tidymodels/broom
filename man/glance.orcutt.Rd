@@ -41,6 +41,8 @@ of the appropriate type.
 }
 \examples{
 
+if (requireNamespace("orcutt", quietly = TRUE)) {
+
 library(orcutt)
 
 reg <- lm(mpg ~ wt + qsec + disp, mtcars)
@@ -51,6 +53,9 @@ co
 
 tidy(co)
 glance(co)
+
+}
+
 }
 \seealso{
 \code{\link[=glance]{glance()}}, \code{\link[orcutt:cochrane.orcutt]{orcutt::cochrane.orcutt()}}

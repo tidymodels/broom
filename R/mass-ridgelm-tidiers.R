@@ -10,6 +10,9 @@
 #' )
 #'
 #' @examples
+#' 
+#' if (requireNamespace("MASS", quietly = TRUE)) {
+#' 
 #'
 #' names(longley)[1] <- "y"
 #' fit1 <- MASS::lm.ridge(y ~ ., longley)
@@ -32,6 +35,9 @@
 #' ggplot(td2, aes(lambda, GCV)) +
 #'   geom_line() +
 #'   geom_vline(xintercept = g2$lambdaGCV, col = "red", lty = 2)
+#'   
+#' }
+#' 
 #' @export
 #' @aliases ridgelm_tidiers
 #' @family ridgelm tidiers

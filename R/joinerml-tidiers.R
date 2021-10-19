@@ -15,6 +15,9 @@
 #' @evalRd return_tidy(regression = TRUE)
 #'
 #' @examples
+#' 
+#' if (requireNamespace("joineRML", quietly = TRUE)) {
+#' 
 #' \dontrun{
 #' # Fit a joint model with bivariate longitudinal outcomes
 #' library(joineRML)
@@ -56,6 +59,7 @@
 #'
 #' # Extract model statistics
 #' glance(fit)
+#' }
 #' }
 #'
 #' @export

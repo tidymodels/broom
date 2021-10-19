@@ -41,6 +41,8 @@ of the appropriate type.
 }
 \examples{
 
+if (requireNamespace("survival", quietly = TRUE)) {
+
 library(survival)
 
 cfit <- coxph(Surv(time, status) ~ age + sex, lung)
@@ -80,6 +82,9 @@ ggplot(risks, aes(age, .fitted, color = sex)) +
 
 ggplot(expected, aes(time, .fitted, color = sex)) +
   geom_point()
+  
+}
+
 }
 \seealso{
 \code{\link[=glance]{glance()}}, \code{\link[survival:coxph]{survival::coxph()}}

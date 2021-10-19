@@ -91,6 +91,9 @@ augment.fixest only works for \code{\link[fixest:feols]{fixest::feols()}}, \code
 \code{\link[fixest:femlm]{fixest::fenegbin()}}, \code{\link[fixest:feNmlm]{fixest::feNmlm()}}, or \code{\link[fixest:feglm]{fixest::fepois()}}.
 }
 \examples{
+
+if (requireNamespace("fixest", quietly = TRUE)) {
+
 \donttest{
 library(fixest)
 
@@ -113,6 +116,8 @@ gravity_summ <- summary(gravity, cluster = c("Product", "Year"))
 tidy(gravity_summ, conf.int = TRUE)
 
 # Approach (1) is preferred.
+
+}
 
 }
 

@@ -41,6 +41,8 @@ be valid. More information can be found in
 }
 \examples{
 
+if (requireNamespace("lmodel2", quietly = TRUE)) {
+
 library(lmodel2)
 
 data(mod2ex2)
@@ -56,6 +58,9 @@ ggplot(tidy(Ex2.res), aes(estimate, term, color = method)) +
   geom_point() +
   geom_errorbarh(aes(xmin = conf.low, xmax = conf.high)) +
   geom_errorbarh(aes(xmin = conf.low, xmax = conf.high))
+  
+}
+
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[lmodel2:lmodel2]{lmodel2::lmodel2()}}

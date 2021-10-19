@@ -23,7 +23,9 @@
 #' )
 #'
 #' @examples
-#'
+#' 
+#' if (requireNamespace("AER", quietly = TRUE)) {
+#' 
 #' library(AER)
 #'
 #' data("CigarettesSW", package = "AER")
@@ -45,6 +47,9 @@
 #' augment(ivr, newdata = CigarettesSW)
 #'
 #' glance(ivr)
+#' 
+#' }
+#' 
 #' @export
 #' @seealso [tidy()], [AER::ivreg()]
 #' @family ivreg tidiers

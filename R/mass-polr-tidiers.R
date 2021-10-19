@@ -9,6 +9,8 @@
 #' @template param_unused_dots
 #'
 #' @examples
+#' 
+#' if (requireNamespace("MASS", quietly = TRUE)) {
 #'
 #' library(MASS)
 #'
@@ -21,6 +23,8 @@
 #' 
 #' fit2 <- polr(factor(gear) ~ am + mpg + qsec, data = mtcars)
 #' tidy(fit, p.values = TRUE)
+#' 
+#' }
 #' 
 #' @evalRd return_tidy(regression = TRUE)
 #'

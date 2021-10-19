@@ -18,6 +18,8 @@
 #' this is simply the contents of `x$data`.
 #'
 #' @examples
+#' 
+#' if (requireNamespace("survival", quietly = TRUE)) {
 #'
 #' library(survival)
 #'
@@ -36,6 +38,9 @@
 #' pfit2 <- pyears(Surv(ptime / 365.25, pstat) ~ temp.yr + temp.age + sex, mgus)
 #' tidy(pfit2)
 #' glance(pfit2)
+#' 
+#' }
+#' 
 #' @aliases pyears_tidiers
 #' @export
 #' @seealso [tidy()], [survival::pyears()]

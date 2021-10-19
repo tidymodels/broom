@@ -30,6 +30,8 @@ specify which components to return.
 }
 \examples{
 
+if (requireNamespace("binGroup", quietly = TRUE)) {
+
 library(binGroup)
 library(dplyr)
 library(ggplot2)
@@ -37,6 +39,9 @@ library(ggplot2)
 bw <- binWidth(100, .1)
 bw
 tidy(bw)
+
+}
+
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[binGroup:binWidth]{binGroup::binWidth()}}

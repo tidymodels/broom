@@ -10,6 +10,9 @@
 #' @evalRd return_tidy(regression = TRUE)
 #' 
 #' @examples
+#' 
+#' if (requireNamespace("mlogit", quietly = TRUE)) {
+#' 
 #' \dontrun{
 #' library(mlogit)
 #' data("Fishing", package = "mlogit")
@@ -19,6 +22,8 @@
 #' tidy(m)
 #' augment(m)
 #' glance(m)
+#' }
+#' 
 #' }
 #' 
 #' @aliases mlogit_tidiers

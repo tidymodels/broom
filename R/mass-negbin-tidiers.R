@@ -16,12 +16,17 @@
 #' )
 #'
 #' @examples
+#' 
+#' if (requireNamespace("MASS", quietly = TRUE)) {
+#' 
 #' library(MASS)
 #'
 #' r <- glm.nb(Days ~ Sex/(Age + Eth*Lrn), data = quine)
 #'
 #' tidy(r)
 #' glance(r)
+#' 
+#' }
 #' 
 #' @aliases glm.nb_tidiers
 #' @family glm.nb tidiers

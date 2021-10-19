@@ -19,6 +19,7 @@
 #' @examples
 #' 
 #' if (requireNamespace("mclust", quietly = TRUE)) {
+#' 
 #' library(dplyr)
 #' library(mclust)
 #' set.seed(27)
@@ -43,7 +44,9 @@
 #' tidy(m)
 #' augment(m, points)
 #' glance(m)
+#' 
 #' }
+#' 
 #' @export
 #' @aliases mclust_tidiers
 #' @seealso [tidy()], [mclust::Mclust()]

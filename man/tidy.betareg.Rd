@@ -44,6 +44,8 @@ At least one term will have been used to model the precision \code{phi}.
 }
 \examples{
 
+if (requireNamespace("betareg", quietly = TRUE)) {
+
 library(betareg)
 data("GasolineYield", package = "betareg")
 
@@ -57,6 +59,9 @@ tidy(mod, conf.int = TRUE, conf.level = .99)
 augment(mod)
 
 glance(mod)
+
+}
+
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[betareg:betareg]{betareg::betareg()}}

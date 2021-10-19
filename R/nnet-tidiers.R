@@ -11,6 +11,8 @@
 #' @evalRd return_tidy("y.value", regression = TRUE)
 #'
 #' @examples
+#' 
+#' if (requireNamespace("nnet", quietly = TRUE)) {
 #'
 #' library(nnet)
 #' library(MASS)
@@ -27,6 +29,9 @@
 #' fit.gear <- multinom(gear ~ mpg + factor(am), data = mtcars)
 #' tidy(fit.gear)
 #' glance(fit.gear)
+#' 
+#' }
+#' 
 #' @aliases multinom_tidiers nnet_tidiers
 #' @export
 #' @family multinom tidiers

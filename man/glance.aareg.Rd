@@ -41,6 +41,8 @@ of the appropriate type.
 }
 \examples{
 
+if (requireNamespace("survival", quietly = TRUE)) {
+
 library(survival)
 
 afit <- aareg(
@@ -50,6 +52,9 @@ afit <- aareg(
 )
 
 tidy(afit)
+
+}
+
 }
 \seealso{
 \code{\link[=glance]{glance()}}, \code{\link[survival:aareg]{survival::aareg()}}

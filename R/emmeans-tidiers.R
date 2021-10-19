@@ -27,6 +27,8 @@
 #'   passed on to [emmeans::summary.emmGrid()] or [lsmeans::summary.ref.grid()].
 #'
 #' @examples
+#' 
+#' if (requireNamespace("emmeans", quietly = TRUE)) {
 #'
 #' library(emmeans)
 #' # linear model for sales of oranges per day
@@ -68,6 +70,9 @@
 #'
 #' # joint_tests
 #' tidy(joint_tests(oranges_lm1))
+#' 
+#' }
+#' 
 #' @aliases emmeans_tidiers
 #' @export
 #' @family emmeans tidiers

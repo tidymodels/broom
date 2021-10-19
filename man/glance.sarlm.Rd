@@ -41,6 +41,9 @@ that no longer have a well-defined value are filled in with an \code{NA}
 of the appropriate type.
 }
 \examples{
+
+if (requireNamespace("spatialreg", quietly = TRUE)) {
+
 \dontrun{ 
 library(spatialreg)
 data(oldcol, package = "spdep")
@@ -70,6 +73,8 @@ tidy(crime_sac)
 tidy(crime_sac, conf.int = TRUE)
 glance(crime_sac)
 augment(crime_sac)
+}
+
 }
 
 }

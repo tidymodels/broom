@@ -65,12 +65,17 @@ p-values.
 }
 \examples{
 
+if (requireNamespace("MASS", quietly = TRUE)) {
+
 library(MASS)
 
 fit <- polr(Sat ~ Infl + Type + Cont, weights = Freq, data = housing)
 
 tidy(fit, exponentiate = TRUE, conf.int = TRUE)
 glance(fit)
+
+}
+
 }
 \seealso{
 \link{tidy}, \code{\link[survey:svyolr]{survey::svyolr()}}

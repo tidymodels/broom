@@ -41,6 +41,9 @@ effect in the control and treatment groups, respectively. And the last
 two the direct effect in each group.
 }
 \examples{
+
+if (requireNamespace("mediation", quietly = TRUE)) {
+
 library(mediation)
 data(jobs)
 
@@ -51,6 +54,9 @@ mod <- mediate(b, c, sims = 50, treat = "treat", mediator = "job_seek")
 tidy(mod)
 tidy(mod, conf.int = TRUE)
 tidy(mod, conf.int = TRUE, conf.level = .99)
+
+}
+
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[mediation:mediate]{mediation::mediate()}}

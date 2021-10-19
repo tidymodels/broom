@@ -13,6 +13,8 @@
 #' )
 #'
 #' @examples
+#' 
+#' if (requireNamespace("orcutt", quietly = TRUE)) {
 #'
 #' library(orcutt)
 #'
@@ -24,6 +26,9 @@
 #'
 #' tidy(co)
 #' glance(co)
+#' 
+#' }
+#' 
 #' @aliases orcutt_tidiers
 #' @export
 #' @family orcutt tidiers

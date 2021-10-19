@@ -56,6 +56,8 @@ specify which components to return.
 }
 \examples{
 
+if (requireNamespace("metafor", quietly = TRUE)) {
+
 library(metafor)
 
 df <-
@@ -71,6 +73,9 @@ df <-
 meta_analysis <- rma(yi, vi, data = df, method = "EB")
 
 tidy(meta_analysis)
+
+}
+
 }
 \value{
 A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:

@@ -53,6 +53,9 @@ If a model has several distinct types of components, you will need to
 specify which components to return.
 }
 \examples{
+
+if (requireNamespace("joineRML", quietly = TRUE)) {
+
 \dontrun{
 # Fit a joint model with bivariate longitudinal outcomes
 library(joineRML)
@@ -94,6 +97,7 @@ hvd2 <- augment(fit)
 
 # Extract model statistics
 glance(fit)
+}
 }
 
 }

@@ -87,6 +87,8 @@ that SVD is only equivalent to PCA on centered data.
 }
 \examples{
 
+if (requireNamespace("modeldata", quietly = TRUE)) {
+
 library(modeldata)
 data(hpc_data)
 
@@ -114,6 +116,9 @@ tidy_u \%>\%
   ggplot(aes(class, value)) +
   geom_boxplot() +
   facet_wrap(~PC, scale = "free_y")
+  
+}
+ 
 }
 \seealso{
 \code{\link[base:svd]{base::svd()}}

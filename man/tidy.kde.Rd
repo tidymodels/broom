@@ -36,6 +36,8 @@ on the output to return to a wide format.
 }
 \examples{
 
+if (requireNamespace("ks", quietly = TRUE)) {
+
 library(ks)
 
 dat <- replicate(2, rnorm(100))
@@ -63,6 +65,9 @@ k3 <- kde(dat3)
 
 td3 <- tidy(k3)
 td3
+
+}
+
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[ks:kde]{ks::kde()}}

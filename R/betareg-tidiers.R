@@ -17,6 +17,8 @@
 #'   At least one term will have been used to model the precision `phi`.
 #'
 #' @examples
+#' 
+#' if (requireNamespace("betareg", quietly = TRUE)) {
 #'
 #' library(betareg)
 #' data("GasolineYield", package = "betareg")
@@ -31,6 +33,9 @@
 #' augment(mod)
 #'
 #' glance(mod)
+#' 
+#' }
+#' 
 #' @export
 #' @seealso [tidy()], [betareg::betareg()]
 #' @family betareg tidiers

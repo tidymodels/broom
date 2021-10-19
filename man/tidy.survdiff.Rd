@@ -30,6 +30,8 @@ specify which components to return.
 }
 \examples{
 
+if (requireNamespace("survival", quietly = TRUE)) {
+
 library(survival)
 
 s <- survdiff(
@@ -39,6 +41,9 @@ s <- survdiff(
 
 tidy(s)
 glance(s)
+
+}
+
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[survival:survdiff]{survival::survdiff()}}

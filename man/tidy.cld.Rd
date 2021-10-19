@@ -30,6 +30,8 @@ specify which components to return.
 }
 \examples{
 
+if (requireNamespace("multcomp", quietly = TRUE)) {
+
 library(multcomp)
 library(ggplot2)
 
@@ -53,6 +55,9 @@ ggplot(mapping = aes(lhs, estimate)) +
 
 cld <- cld(wht)
 tidy(cld)
+
+}
+
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[multcomp:cld]{multcomp::cld()}}, \code{\link[multcomp:methods]{multcomp::summary.glht()}},

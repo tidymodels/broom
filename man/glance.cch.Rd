@@ -41,6 +41,8 @@ of the appropriate type.
 }
 \examples{
 
+if (requireNamespace("survival", quietly = TRUE)) {
+
 library(survival)
 
 # examples come from cch documentation
@@ -67,6 +69,9 @@ ggplot(tidy(fit.ccP), aes(x = estimate, y = term)) +
   geom_point() +
   geom_errorbarh(aes(xmin = conf.low, xmax = conf.high), height = 0) +
   geom_vline(xintercept = 0)
+  
+}
+  
 }
 \seealso{
 \code{\link[=glance]{glance()}}, \code{\link[survival:cch]{survival::cch()}}

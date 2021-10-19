@@ -22,6 +22,8 @@
 #' `std.error` columns shown.
 #'
 #' @examples
+#' 
+#' if (requireNamespace("boot", quietly = TRUE)) {
 #'
 #' library(boot)
 #'
@@ -40,6 +42,9 @@
 #' bootres <- boot(clotting, bootfun, R = 999)
 #' tidy(g1, conf.int = TRUE)
 #' tidy(bootres, conf.int = TRUE)
+#' 
+#' }
+#' 
 #' @export
 #' @aliases boot_tidiers
 #' @seealso [tidy()], [boot::boot()], [boot::tsboot()], [boot::boot.ci()],

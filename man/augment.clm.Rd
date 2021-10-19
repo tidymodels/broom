@@ -84,6 +84,8 @@ missing at this time.
 }
 \examples{
 
+if (requireNamespace("ordinal", quietly = TRUE)) {
+
 library(ordinal)
 
 fit <- clm(rating ~ temp * contact, data = wine)
@@ -99,6 +101,9 @@ augment(fit, type.predict = "class")
 fit2 <- clm(rating ~ temp, nominal = ~contact, data = wine)
 tidy(fit2)
 glance(fit2)
+
+}
+
 }
 \seealso{
 \link{tidy}, \code{\link[ordinal:clm]{ordinal::clm()}}, \code{\link[ordinal:predict]{ordinal::predict.clm()}}

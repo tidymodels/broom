@@ -57,6 +57,8 @@ and \code{statistic} columns are omitted, and only \code{estimate} and
 }
 \examples{
 
+if (requireNamespace("boot", quietly = TRUE)) {
+
 library(boot)
 
 clotting <- data.frame(
@@ -74,6 +76,9 @@ bootfun <- function(d, i) {
 bootres <- boot(clotting, bootfun, R = 999)
 tidy(g1, conf.int = TRUE)
 tidy(bootres, conf.int = TRUE)
+
+}
+
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[boot:boot]{boot::boot()}}, \code{\link[boot:tsboot]{boot::tsboot()}}, \code{\link[boot:boot.ci]{boot::boot.ci()}},

@@ -65,6 +65,8 @@ p-values.
 }
 \examples{
 
+if (requireNamespace("MASS", quietly = TRUE)) {
+
 library(MASS)
 
 fit <- polr(Sat ~ Infl + Type + Cont, weights = Freq, data = housing)
@@ -76,6 +78,8 @@ augment(fit, type.predict = "class")
 
 fit2 <- polr(factor(gear) ~ am + mpg + qsec, data = mtcars)
 tidy(fit, p.values = TRUE)
+
+}
 
 }
 \seealso{

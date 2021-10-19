@@ -8,6 +8,8 @@
 #' @evalRd return_tidy(regression = TRUE)
 #'
 #' @examples
+#' 
+#' if (requireNamespace("bbmle", quietly = TRUE)) {
 #'
 #' library(bbmle)
 #'
@@ -20,6 +22,9 @@
 #' )
 #'
 #' tidy(fit)
+#' 
+#' }
+#' 
 #' @export
 #' @seealso [tidy()], [bbmle::mle2()], [tidy_optim()]
 #' @aliases mle2_tidiers bbmle_tidiers

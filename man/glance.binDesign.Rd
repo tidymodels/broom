@@ -41,6 +41,8 @@ of the appropriate type.
 }
 \examples{
 
+if (requireNamespace("binGroup", quietly = TRUE)) {
+
 library(binGroup)
 des <- binDesign(
   nmax = 300, delta = 0.06,
@@ -53,6 +55,9 @@ tidy(des)
 library(ggplot2)
 ggplot(tidy(des), aes(n, power)) +
   geom_line()
+  
+}
+
 }
 \seealso{
 \code{\link[=glance]{glance()}}, \code{\link[binGroup:binDesign]{binGroup::binDesign()}}

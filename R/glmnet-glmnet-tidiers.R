@@ -25,6 +25,8 @@
 #'   choice of lambda.
 #'
 #' @examples
+#' 
+#' if (requireNamespace("glmnet", quietly = TRUE)) {
 #'
 #' library(glmnet)
 #'
@@ -54,6 +56,9 @@
 #' g2 <- sample(1:2, 100, replace = TRUE)
 #' fit2 <- glmnet(x, g2, family = "binomial")
 #' tidy(fit2)
+#' 
+#' }
+#' 
 #' @export
 #' @aliases glmnet_tidiers
 #' @family glmnet tidiers

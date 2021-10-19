@@ -41,6 +41,8 @@ of the appropriate type.
 }
 \examples{
 
+if (requireNamespace("glmnet", quietly = TRUE)) {
+
 library(glmnet)
 
 set.seed(2014)
@@ -69,6 +71,9 @@ ggplot(tidied, aes(lambda, dev.ratio)) +
 g2 <- sample(1:2, 100, replace = TRUE)
 fit2 <- glmnet(x, g2, family = "binomial")
 tidy(fit2)
+
+}
+
 }
 \seealso{
 \code{\link[=glance]{glance()}}, \code{\link[glmnet:glmnet]{glmnet::glmnet()}}

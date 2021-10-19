@@ -11,10 +11,15 @@
 #' )
 #'
 #' @examples
+#' 
+#' if (requireNamespace("car", quietly = TRUE)) {
 #'
 #' dw <- car::durbinWatsonTest(lm(mpg ~ wt, data = mtcars))
 #' tidy(dw)
 #' glance(dw) # same output for all durbinWatsonTests
+#' 
+#' }
+#' 
 #' @name durbinWatsonTest_tidiers
 #' @family car tidiers
 #' @export
