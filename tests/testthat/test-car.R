@@ -4,6 +4,8 @@ skip_on_cran()
 
 skip_if_not_installed("modeltests")
 library(modeltests)
+
+skip_if_not_installed("survival")
 library(survival)
 
 skip_if_not_installed("car")

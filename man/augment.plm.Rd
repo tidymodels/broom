@@ -70,6 +70,8 @@ missing at this time.
 }
 \examples{
 
+if (requireNamespace("plm", quietly = TRUE)) {
+
 library(plm)
 
 data("Produc", package = "plm")
@@ -85,6 +87,9 @@ tidy(zz, conf.int = TRUE, conf.level = 0.9)
 
 augment(zz)
 glance(zz)
+
+}
+
 }
 \seealso{
 \code{\link[=augment]{augment()}}, \code{\link[plm:plm]{plm::plm()}}
