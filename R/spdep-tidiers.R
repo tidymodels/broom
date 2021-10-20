@@ -12,8 +12,6 @@
 #' 
 #' @examples 
 #' 
-#' if (requireNamespace("spatialreg", quietly = TRUE)) {
-#' 
 #' \dontrun{ 
 #' library(spatialreg)
 #' data(oldcol, package = "spdep")
@@ -43,8 +41,6 @@
 #' tidy(crime_sac, conf.int = TRUE)
 #' glance(crime_sac)
 #' augment(crime_sac)
-#' }
-#' 
 #' }
 #' 
 #' @aliases spatialreg_tidiers
