@@ -109,9 +109,3 @@ Other robustbase tidiers:
 \code{\link{tidy.lmrob}()}
 }
 \concept{robustbase tidiers}
-\value{
-A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
-  \item{.fitted}{Fitted or predicted value.}
-  \item{.resid}{The difference between observed and fitted values.}
-
-}

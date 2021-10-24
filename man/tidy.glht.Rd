@@ -70,10 +70,3 @@ Other multcomp tidiers:
 \code{\link{tidy.summary.glht}()}
 }
 \concept{multcomp tidiers}
-\value{
-A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
-  \item{contrast}{Levels being compared.}
-  \item{estimate}{The estimated value of the regression term.}
-  \item{null.value}{Value to which the estimate is compared.}
-
-}

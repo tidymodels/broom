@@ -135,9 +135,3 @@ Other poLCA tidiers:
 \code{\link{tidy.poLCA}()}
 }
 \concept{poLCA tidiers}
-\value{
-A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
-  \item{.class}{Predicted class.}
-  \item{.probability}{Class probability of modal class.}
-
-}

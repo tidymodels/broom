@@ -48,14 +48,3 @@ Other anova tidiers:
 \code{\link{tidy.manova}()}
 }
 \concept{anova tidiers}
-\value{
-A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
-  \item{adj.p.value}{P-value adjusted for multiple comparisons.}
-  \item{conf.high}{Upper bound on the confidence interval for the estimate.}
-  \item{conf.low}{Lower bound on the confidence interval for the estimate.}
-  \item{contrast}{Levels being compared.}
-  \item{estimate}{The estimated value of the regression term.}
-  \item{null.value}{Value to which the estimate is compared.}
-  \item{term}{The name of the regression term.}
-
-}

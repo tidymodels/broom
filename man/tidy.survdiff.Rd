@@ -67,10 +67,3 @@ Other survival tidiers:
 }
 \concept{survdiff tidiers}
 \concept{survival tidiers}
-\value{
-A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
-  \item{exp}{Weighted expected number of events in each group.}
-  \item{N}{Number of subjects in each group.}
-  \item{obs}{weighted observed number of events in each group.}
-
-}

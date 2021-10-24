@@ -113,10 +113,3 @@ glance(mod)
 \seealso{
 \code{\link[=augment]{augment()}}, \code{\link[betareg:betareg]{betareg::betareg()}}
 }
-\value{
-A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
-  \item{.cooksd}{Cooks distance.}
-  \item{.fitted}{Fitted or predicted value.}
-  \item{.resid}{The difference between observed and fitted values.}
-
-}

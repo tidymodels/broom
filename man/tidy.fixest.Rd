@@ -74,21 +74,10 @@ tidy(gravity_summ, conf.int = TRUE)
 
 }
 \seealso{
-\code{\link[=tidy]{tidy()}}, \code{\link[fixest:feglm]{fixest::feglm()}}, \code{\link[fixest:femlm]{fixest::fenegbin()}},
-\code{\link[fixest:feNmlm]{fixest::feNmlm()}}, \code{\link[fixest:femlm]{fixest::femlm()}}, \code{\link[fixest:feols]{fixest::feols()}}, \code{\link[fixest:feglm]{fixest::fepois()}}
+\code{\link[=tidy]{tidy()}}, \code{\link[fixest:feglm]{fixest::feglm()}}, \code{\link[fixest:fenegbin]{fixest::fenegbin()}},
+\code{\link[fixest:feNmlm]{fixest::feNmlm()}}, \code{\link[fixest:femlm]{fixest::femlm()}}, \code{\link[fixest:feols]{fixest::feols()}}, \code{\link[fixest:fepois]{fixest::fepois()}}
 
 Other fixest tidiers: 
 \code{\link{augment.fixest}()}
 }
 \concept{fixest tidiers}
-\value{
-A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
-  \item{conf.high}{Upper bound on the confidence interval for the estimate.}
-  \item{conf.low}{Lower bound on the confidence interval for the estimate.}
-  \item{estimate}{The estimated value of the regression term.}
-  \item{p.value}{The two-sided p-value associated with the observed statistic.}
-  \item{statistic}{The value of a T-statistic to use in a hypothesis that the regression term is non-zero.}
-  \item{std.error}{The standard error of the regression term.}
-  \item{term}{The name of the regression term.}
-
-}

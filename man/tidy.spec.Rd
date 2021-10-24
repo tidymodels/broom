@@ -45,9 +45,3 @@ Other time series tidiers:
 \code{\link{tidy.zoo}()}
 }
 \concept{time series tidiers}
-\value{
-A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
-  \item{freq}{Vector of frequencies at which the spectral density is estimated.}
-  \item{spec}{Vector (for univariate series) or matrix (for multivariate series) of estimates of the spectral density at frequencies corresponding to freq.}
-
-}

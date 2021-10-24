@@ -8,7 +8,7 @@
 }
 \arguments{
 \item{x}{A \code{summary.glht} object created by calling
-\code{\link[multcomp:methods]{multcomp::summary.glht()}} on a \code{glht} object created with
+\code{\link[multcomp:summary.glht]{multcomp::summary.glht()}} on a \code{glht} object created with
 \code{\link[multcomp:glht]{multcomp::glht()}}.}
 
 \item{...}{Additional arguments. Not used. Needed to match generic
@@ -56,7 +56,7 @@ cld <- cld(wht)
 tidy(cld)
 }
 \seealso{
-\code{\link[=tidy]{tidy()}}, \code{\link[multcomp:methods]{multcomp::summary.glht()}}, \code{\link[multcomp:glht]{multcomp::glht()}}
+\code{\link[=tidy]{tidy()}}, \code{\link[multcomp:summary.glht]{multcomp::summary.glht()}}, \code{\link[multcomp:glht]{multcomp::glht()}}
 
 Other multcomp tidiers: 
 \code{\link{tidy.cld}()},
@@ -64,13 +64,3 @@ Other multcomp tidiers:
 \code{\link{tidy.glht}()}
 }
 \concept{multcomp tidiers}
-\value{
-A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
-  \item{contrast}{Levels being compared.}
-  \item{estimate}{The estimated value of the regression term.}
-  \item{null.value}{Value to which the estimate is compared.}
-  \item{p.value}{The two-sided p-value associated with the observed statistic.}
-  \item{statistic}{The value of a T-statistic to use in a hypothesis that the regression term is non-zero.}
-  \item{std.error}{The standard error of the regression term.}
-
-}

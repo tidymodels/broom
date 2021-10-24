@@ -15,7 +15,7 @@
 )
 }
 \arguments{
-\item{x}{An \code{rma} object such as those created by \code{\link[metafor:rma.uni]{metafor::rma()}},
+\item{x}{An \code{rma} object such as those created by \code{\link[metafor:rma]{metafor::rma()}},
 \code{\link[metafor:rma.uni]{metafor::rma.uni()}}, \code{\link[metafor:rma.glmm]{metafor::rma.glmm()}}, \code{\link[metafor:rma.mh]{metafor::rma.mh()}},
 \code{\link[metafor:rma.mv]{metafor::rma.mv()}}, or \code{\link[metafor:rma.peto]{metafor::rma.peto()}}.}
 
@@ -71,16 +71,4 @@ df <-
 meta_analysis <- rma(yi, vi, data = df, method = "EB")
 
 tidy(meta_analysis)
-}
-\value{
-A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
-  \item{conf.high}{Upper bound on the confidence interval for the estimate.}
-  \item{conf.low}{Lower bound on the confidence interval for the estimate.}
-  \item{estimate}{The estimated value of the regression term.}
-  \item{p.value}{The two-sided p-value associated with the observed statistic.}
-  \item{statistic}{The value of a T-statistic to use in a hypothesis that the regression term is non-zero.}
-  \item{std.error}{The standard error of the regression term.}
-  \item{term}{The name of the individual study}
-  \item{type}{The estimate type  (summary vs individual study)}
-
 }

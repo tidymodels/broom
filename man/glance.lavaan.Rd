@@ -81,7 +81,7 @@ glance(cfa.fit)
 }
 \seealso{
 \code{\link[=glance]{glance()}}, \code{\link[lavaan:cfa]{lavaan::cfa()}}, \code{\link[lavaan:sem]{lavaan::sem()}},
-\code{\link[lavaan:fitMeasures]{lavaan::fitmeasures()}}
+\code{\link[lavaan:fitmeasures]{lavaan::fitmeasures()}}
 
 Other lavaan tidiers: 
 \code{\link{tidy.lavaan}()}

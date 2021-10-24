@@ -132,18 +132,3 @@ Other lm tidiers:
 \code{\link{tidy.summary.lm}()}
 }
 \concept{lm tidiers}
-\value{
-A \code{\link[tibble:tibble]{tibble::tibble()}} with exactly one row and columns:
-  \item{adj.r.squared}{Adjusted R squared statistic, which is like the R squared statistic except taking degrees of freedom into account.}
-  \item{df.residual}{Residual degrees of freedom.}
-  \item{nobs}{Number of observations used.}
-  \item{p.value}{P-value corresponding to the test statistic.}
-  \item{r.squared}{R squared statistic, or the percent of variation explained by the model. Also known as the coefficient of determination.}
-  \item{sigma}{Estimated standard error of the residuals.}
-  \item{statistic}{Test statistic.}
-  \item{df}{The degrees for freedom from the numerator of the overall 
-    F-statistic. This is new in broom 0.7.0. Previously, this reported 
-    the rank of the design matrix, which is one more than the numerator 
-    degrees of freedom of the overall F-statistic.}
-
-}

@@ -43,9 +43,3 @@ Other time series tidiers:
 \code{\link{tidy.zoo}()}
 }
 \concept{time series tidiers}
-\value{
-A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
-  \item{acf}{Autocorrelation.}
-  \item{lag}{Lag values.}
-
-}

@@ -91,12 +91,3 @@ Other mjoint tidiers:
 \code{\link{tidy.mjoint}()}
 }
 \concept{mjoint tidiers}
-\value{
-A \code{\link[tibble:tibble]{tibble::tibble()}} with exactly one row and columns:
-  \item{AIC}{Akaike's Information Criterion for the model.}
-  \item{BIC}{Bayesian Information Criterion for the model.}
-  \item{logLik}{The log-likelihood of the model. [stats::logLik()] may be a useful reference.}
-  \item{sigma2_j}{The square root of the estimated residual variance for
-    the j-th longitudinal process}
-
-}

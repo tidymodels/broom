@@ -101,10 +101,3 @@ Other glmnet tidiers:
 \code{\link{tidy.glmnet}()}
 }
 \concept{glmnet tidiers}
-\value{
-A \code{\link[tibble:tibble]{tibble::tibble()}} with exactly one row and columns:
-  \item{lambda.1se}{The value of the penalization parameter lambda that results in the sparsest model while remaining within one standard error of the minimum loss.}
-  \item{lambda.min}{The value of the penalization parameter lambda that achieved minimum loss as estimated by cross validation.}
-  \item{nobs}{Number of observations used.}
-
-}

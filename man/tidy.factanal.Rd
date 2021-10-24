@@ -69,10 +69,3 @@ Other factanal tidiers:
 \code{\link{glance.factanal}()}
 }
 \concept{factanal tidiers}
-\value{
-A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
-  \item{variable}{Variable under consideration.}
-  \item{uniqueness}{Proportion of residual, or unexplained variance}
-  \item{flX}{Factor loading for level X.}
-
-}

@@ -54,12 +54,3 @@ Other muhaz tidiers:
 \code{\link{tidy.muhaz}()}
 }
 \concept{muhaz tidiers}
-\value{
-A \code{\link[tibble:tibble]{tibble::tibble()}} with exactly one row and columns:
-  \item{max.hazard}{Maximal estimated hazard.}
-  \item{max.time}{The maximum observed event or censoring time.}
-  \item{min.hazard}{Minimal estimated hazard.}
-  \item{min.time}{The minimum observed event or censoring time.}
-  \item{nobs}{Number of observations used.}
-
-}

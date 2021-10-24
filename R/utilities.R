@@ -465,11 +465,15 @@ broom_confint <- function(x, ...) {
 }
 
 # this version adds a terms column
-broom_confint_terms <- function(x, ...) {
+broom_confint_terms <- function(x, conf.method = "plik", ...) {
+  conf.method <- rlang::arg_match(conf.method, c("plik", "wald"))
 
   # warn on arguments silently being ignored
   ellipsis::check_dots_used()
-  ci <- suppressMessages(confint(x, ...))
+  if(conf.method == "plik") 
+    ci <- suppressMessages(confint(x, ...))
+  else
+    ci <- suppressMessages(confint.default(x, ...))
 
   # confint called on models with a single predictor
   # often returns a named vector rather than a matrix :(

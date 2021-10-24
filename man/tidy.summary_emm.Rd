@@ -84,21 +84,3 @@ Other emmeans tidiers:
 \code{\link{tidy.ref.grid}()}
 }
 \concept{emmeans tidiers}
-\value{
-A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
-  \item{conf.high}{Upper bound on the confidence interval for the estimate.}
-  \item{conf.low}{Lower bound on the confidence interval for the estimate.}
-  \item{contrast}{Levels being compared.}
-  \item{den.df}{Degrees of freedom of the denominator.}
-  \item{df}{Degrees of freedom used by this term in the model.}
-  \item{null.value}{Value to which the estimate is compared.}
-  \item{num.df}{Degrees of freedom.}
-  \item{p.value}{The two-sided p-value associated with the observed statistic.}
-  \item{std.error}{The standard error of the regression term.}
-  \item{level1}{One level of the factor being contrasted}
-  \item{level2}{The other level of the factor being contrasted}
-  \item{term}{Model term in joint tests}
-  \item{estimate}{Expected marginal mean}
-  \item{statistic}{T-ratio statistic or F-ratio statistic}
-
-}

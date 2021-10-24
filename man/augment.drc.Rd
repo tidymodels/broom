@@ -115,13 +115,3 @@ Other drc tidiers:
 \code{\link{tidy.drc}()}
 }
 \concept{drc tidiers}
-\value{
-A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
-  \item{.cooksd}{Cooks distance.}
-  \item{.fitted}{Fitted or predicted value.}
-  \item{.lower}{Lower bound on interval for fitted values.}
-  \item{.resid}{The difference between observed and fitted values.}
-  \item{.se.fit}{Standard errors of fitted values.}
-  \item{.upper}{Upper bound on interval for fitted values.}
-
-}

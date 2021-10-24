@@ -95,15 +95,3 @@ Other poLCA tidiers:
 \code{\link{tidy.poLCA}()}
 }
 \concept{poLCA tidiers}
-\value{
-A \code{\link[tibble:tibble]{tibble::tibble()}} with exactly one row and columns:
-  \item{AIC}{Akaike's Information Criterion for the model.}
-  \item{BIC}{Bayesian Information Criterion for the model.}
-  \item{chi.squared}{The Pearson Chi-Square goodness of fit statistic for multiway tables.}
-  \item{df}{Degrees of freedom used by the model.}
-  \item{df.residual}{Residual degrees of freedom.}
-  \item{logLik}{The log-likelihood of the model. [stats::logLik()] may be a useful reference.}
-  \item{nobs}{Number of observations used.}
-  \item{g.squared}{The likelihood ratio/deviance statistic}
-
-}

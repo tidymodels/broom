@@ -98,17 +98,3 @@ Other mfx tidiers:
 \code{\link{tidy.betamfx}()}
 }
 \concept{mfx tidiers}
-\value{
-A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
-  \item{conf.high}{Upper bound on the confidence interval for the estimate.}
-  \item{conf.low}{Lower bound on the confidence interval for the estimate.}
-  \item{estimate}{The estimated value of the regression term.}
-  \item{p.value}{The two-sided p-value associated with the observed statistic.}
-  \item{statistic}{The value of a T-statistic to use in a hypothesis that the regression term is non-zero.}
-  \item{std.error}{The standard error of the regression term.}
-  \item{term}{The name of the regression term.}
-  \item{atmean}{TRUE if the marginal effects were originally calculated as 
-  the partial effects for the average observation. If FALSE, then these 
-  were instead calculated as average partial effects.}
-
-}

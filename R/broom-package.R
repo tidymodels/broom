@@ -8,7 +8,7 @@
 #'   data such as predictions, residuals and cluster assignments; and glance,
 #'   which provides a one-row summary of model-level statistics.
 #'
-#' @importFrom stats AIC BIC coef confint fitted logLik model.frame
+#' @importFrom stats AIC BIC coef confint confint.default fitted logLik model.frame
 #' @importFrom stats pnorm qnorm qt predict residuals setNames var 
 #' @importFrom stats quantile model.response terms na.pass na.omit
 #' @importFrom stats influence rstandard cooks.distance

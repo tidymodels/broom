@@ -43,11 +43,3 @@ It simply returns the coefficients and their confidence intervals.
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[btergm:btergm]{btergm::btergm()}}
 }
-\value{
-A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
-  \item{conf.high}{Upper bound on the confidence interval for the estimate.}
-  \item{conf.low}{Lower bound on the confidence interval for the estimate.}
-  \item{estimate}{The estimated value of the regression term.}
-  \item{term}{The name of the regression term.}
-
-}

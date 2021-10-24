@@ -8,7 +8,7 @@
 }
 \arguments{
 \item{x}{A \code{confint.glht} object created by calling
-\code{\link[multcomp:methods]{multcomp::confint.glht()}} on a \code{glht} object created with
+\code{\link[multcomp:confint.glht]{multcomp::confint.glht()}} on a \code{glht} object created with
 \code{\link[multcomp:glht]{multcomp::glht()}}.}
 
 \item{...}{Additional arguments. Not used. Needed to match generic
@@ -56,7 +56,7 @@ cld <- cld(wht)
 tidy(cld)
 }
 \seealso{
-\code{\link[=tidy]{tidy()}}, \code{\link[multcomp:methods]{multcomp::confint.glht()}}, \code{\link[multcomp:glht]{multcomp::glht()}}
+\code{\link[=tidy]{tidy()}}, \code{\link[multcomp:confint.glht]{multcomp::confint.glht()}}, \code{\link[multcomp:glht]{multcomp::glht()}}
 
 Other multcomp tidiers: 
 \code{\link{tidy.cld}()},
@@ -64,11 +64,3 @@ Other multcomp tidiers:
 \code{\link{tidy.summary.glht}()}
 }
 \concept{multcomp tidiers}
-\value{
-A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
-  \item{conf.high}{Upper bound on the confidence interval for the estimate.}
-  \item{conf.low}{Lower bound on the confidence interval for the estimate.}
-  \item{contrast}{Levels being compared.}
-  \item{estimate}{The estimated value of the regression term.}
-
-}

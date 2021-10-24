@@ -59,12 +59,3 @@ Other cmprsk tidiers:
 }
 \concept{cmprsk tidiers}
 \concept{crr tidiers}
-\value{
-A \code{\link[tibble:tibble]{tibble::tibble()}} with exactly one row and columns:
-  \item{converged}{Logical indicating if the model fitting procedure was succesful and converged.}
-  \item{df}{Degrees of freedom used by the model.}
-  \item{logLik}{The log-likelihood of the model. [stats::logLik()] may be a useful reference.}
-  \item{nobs}{Number of observations used.}
-  \item{statistic}{Test statistic.}
-
-}

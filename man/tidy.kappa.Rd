@@ -53,11 +53,3 @@ ggplot(tidy(ck), aes(estimate, type)) +
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[psych:kappa]{psych::cohen.kappa()}}
 }
-\value{
-A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
-  \item{conf.high}{Upper bound on the confidence interval for the estimate.}
-  \item{conf.low}{Lower bound on the confidence interval for the estimate.}
-  \item{estimate}{The estimated value of the regression term.}
-  \item{type}{Either `weighted` or `unweighted`.}
-
-}

@@ -82,10 +82,3 @@ augment(lo, newdata = head(mtcars))
 
 \code{\link[=augment]{augment()}}, \code{\link[stats:loess]{stats::loess()}}, \code{\link[stats:predict.loess]{stats::predict.loess()}}
 }
-\value{
-A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
-  \item{.fitted}{Fitted or predicted value.}
-  \item{.resid}{The difference between observed and fitted values.}
-  \item{.se.fit}{Standard errors of fitted values.}
-
-}

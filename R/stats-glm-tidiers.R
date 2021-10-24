@@ -5,13 +5,20 @@
 #' @template param_confint
 #' @template param_exponentiate
 #' @template param_unused_dots
+#' @param conf.method Controls whether stats::confint.default (Wald method)
+#'   or stats::confint (Profile likelihood method) will be used to compute
+#'   the coefficients confidence intervals. The former is typically faster.
+#'   The allowed types are `"plik"` for profile likelihood or `"wald"`
+#'   for the Wald method.
 #'
 #' @export
 #' @family lm tidiers
 #' @seealso [stats::glm()]
 tidy.glm <- function(x, conf.int = FALSE, conf.level = .95,
-                     exponentiate = FALSE, ...) {
-  
+                     exponentiate = FALSE, conf.method = "plik",
+                     ...) {
+  conf.method <- rlang::arg_match(conf.method, c("plik", "wald"))
+
   warn_on_appropriated_glm_class(x)
   warn_on_subclass(x)
   
@@ -25,7 +32,8 @@ tidy.glm <- function(x, conf.int = FALSE, conf.level = .95,
   ret <- left_join(coefs, ret, by = c("term", "estimate"))
 
   if (conf.int) {
-    ci <- broom_confint_terms(x, level = conf.level)
+    ci <- broom_confint_terms(x, conf.method,
+                              level = conf.level)
     ret <- dplyr::left_join(ret, ci, by = "term")
   }
 

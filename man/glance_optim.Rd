@@ -51,11 +51,3 @@ Other list tidiers:
 \code{\link{tidy_xyz}()}
 }
 \concept{list tidiers}
-\value{
-A \code{\link[tibble:tibble]{tibble::tibble()}} with exactly one row and columns:
-  \item{convergence}{Convergence code.}
-  \item{function.count}{Number of calls to `fn`.}
-  \item{gradient.count}{Number of calls to `gr`.}
-  \item{value}{Minimized or maximized output value.}
-
-}

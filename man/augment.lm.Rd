@@ -192,16 +192,3 @@ Other lm tidiers:
 \code{\link{tidy.summary.lm}()}
 }
 \concept{lm tidiers}
-\value{
-A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
-  \item{.cooksd}{Cooks distance.}
-  \item{.fitted}{Fitted or predicted value.}
-  \item{.hat}{Diagonal of the hat matrix.}
-  \item{.lower}{Lower bound on interval for fitted values.}
-  \item{.resid}{The difference between observed and fitted values.}
-  \item{.se.fit}{Standard errors of fitted values.}
-  \item{.sigma}{Estimated residual standard deviation when corresponding observation is dropped from model.}
-  \item{.std.resid}{Standardised residuals.}
-  \item{.upper}{Upper bound on interval for fitted values.}
-
-}

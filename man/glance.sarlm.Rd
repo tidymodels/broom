@@ -7,8 +7,8 @@
 \method{glance}{sarlm}(x, ...)
 }
 \arguments{
-\item{x}{An object returned from \code{\link[spatialreg:ML_models]{spatialreg::lagsarlm()}}
-or \code{\link[spatialreg:ML_models]{spatialreg::errorsarlm()}}.}
+\item{x}{An object returned from \code{\link[spatialreg:lagsarlm]{spatialreg::lagsarlm()}}
+or \code{\link[spatialreg:errorsarlm]{spatialreg::errorsarlm()}}.}
 
 \item{...}{Additional arguments. Not used. Needed to match generic
 signature only. \strong{Cautionary note:} Misspelled arguments will be
@@ -74,20 +74,11 @@ augment(crime_sac)
 
 }
 \seealso{
-\code{\link[=glance]{glance()}}, \code{\link[spatialreg:ML_models]{spatialreg::lagsarlm()}}, \code{\link[spatialreg:ML_models]{spatialreg::errorsarlm()}},
-\code{\link[spatialreg:ML_models]{spatialreg::sacsarlm()}}
+\code{\link[=glance]{glance()}}, \code{\link[spatialreg:lagsarlm]{spatialreg::lagsarlm()}}, \code{\link[spatialreg:errorsarlm]{spatialreg::errorsarlm()}},
+\code{\link[spatialreg:sacsarlm]{spatialreg::sacsarlm()}}
 
 Other spatialreg tidiers: 
 \code{\link{augment.sarlm}()},
 \code{\link{tidy.sarlm}()}
 }
 \concept{spatialreg tidiers}
-\value{
-A \code{\link[tibble:tibble]{tibble::tibble()}} with exactly one row and columns:
-  \item{AIC}{Akaike's Information Criterion for the model.}
-  \item{BIC}{Bayesian Information Criterion for the model.}
-  \item{deviance}{Deviance of the model.}
-  \item{logLik}{The log-likelihood of the model. [stats::logLik()] may be a useful reference.}
-  \item{nobs}{Number of observations used.}
-
-}

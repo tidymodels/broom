@@ -74,10 +74,3 @@ Other ridgelm tidiers:
 \code{\link{tidy.ridgelm}()}
 }
 \concept{ridgelm tidiers}
-\value{
-A \code{\link[tibble:tibble]{tibble::tibble()}} with exactly one row and columns:
-  \item{kHKB}{modified HKB estimate of the ridge constant}
-  \item{kLW}{modified L-W estimate of the ridge constant}
-  \item{lambdaGCV}{choice of lambda that minimizes GCV}
-
-}

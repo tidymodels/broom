@@ -84,19 +84,3 @@ modern approach.} (6th edition). Nelson Education.
 \code{\link[=glance]{glance()}}, \code{\link[lmtest:coeftest]{lmtest::coeftest()}}
 }
 \concept{coeftest_tidiers}
-\value{
-A \code{\link[tibble:tibble]{tibble::tibble()}} with exactly one row and columns:
-  \item{adj.r.squared}{Adjusted R squared statistic, which is like the R squared statistic except taking degrees of freedom into account.}
-  \item{AIC}{Akaike's Information Criterion for the model.}
-  \item{BIC}{Bayesian Information Criterion for the model.}
-  \item{deviance}{Deviance of the model.}
-  \item{df}{Degrees of freedom used by the model.}
-  \item{df.residual}{Residual degrees of freedom.}
-  \item{logLik}{The log-likelihood of the model. [stats::logLik()] may be a useful reference.}
-  \item{nobs}{Number of observations used.}
-  \item{p.value}{P-value corresponding to the test statistic.}
-  \item{r.squared}{R squared statistic, or the percent of variation explained by the model. Also known as the coefficient of determination.}
-  \item{sigma}{Estimated standard error of the residuals.}
-  \item{statistic}{Test statistic.}
-
-}
