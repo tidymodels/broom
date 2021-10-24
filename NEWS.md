@@ -2,6 +2,9 @@
 
 To be released as broom 0.7.10.
 
+* Added a `conf.method` parameter to `tidy.glm`. This parameter allows to chose
+  between Wald or profile likelihood method for computing the confidence
+  intervals for the coefficients. (`#989` by `@anddis`)
 * Clarifies error when `pysch::mediate` output is dispatched to `tidy.mediate` (`#1037` by `@LukasWallrich`).
 * Allows user to specify confidence level for `tidy.rma` (`#1041` by `@TarenSanders`)
 * Clarifies documentation related to usage of `augment_columns()`; most package users should use `augment()` in favor of `augment_columns()`. See `?augment_columns` for more details.
