@@ -165,6 +165,7 @@ Other contributors:
   \item Josh Yamamoto \email{joshuayamamoto5@gmail.com} [contributor]
   \item Jasme Lee [contributor]
   \item Taren Sanders \email{taren.sanders@acu.edu.au} (\href{https://orcid.org/0000-0002-4504-6008}{ORCID}) [contributor]
+  \item Lucas Godoy \email{lucasdac.godoy@gmail.com} (\href{https://orcid.org/0000-0003-4265-972X}{ORCID}) [contributor]
 }
 
 }
