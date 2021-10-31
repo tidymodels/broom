@@ -31,6 +31,9 @@
 #'     variances of exogenous covariates.}
 #'
 #' @examples
+#' 
+#' if (requireNamespace("lavaan", quietly = TRUE)) {
+#' 
 #' \dontrun{
 #' library(lavaan)
 #'
@@ -39,6 +42,8 @@
 #' )
 #'
 #' tidy(cfa.fit)
+#' }
+#' 
 #' }
 #' 
 #' @export

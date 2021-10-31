@@ -67,6 +67,10 @@ in the data, or ii) the average of the sample marginal effects. See
 \code{vignette("mfxarticle")} from the \code{mfx} package for more details.
 }
 \examples{
+
+
+if (requireNamespace("mfx", quietly = TRUE)) {
+
 \dontrun{ 
 library(mfx)
 
@@ -86,6 +90,9 @@ tidy(mod_probmfx, conf.int = TRUE)
 augment(mod_probmfx)
 glance(mod_probmfx)
 }
+
+}
+
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[mfx:logitmfx]{mfx::logitmfx()}}, \code{\link[mfx:negbinmfx]{mfx::negbinmfx()}}, \code{\link[mfx:poissonmfx]{mfx::poissonmfx()}}, \code{\link[mfx:probitmfx]{mfx::probitmfx()}}

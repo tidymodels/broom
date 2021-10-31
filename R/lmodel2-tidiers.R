@@ -24,6 +24,8 @@
 #'   `vignette("mod2user", package = "lmodel2")`.
 #'
 #' @examples
+#' 
+#' if (requireNamespace("lmodel2", quietly = TRUE)) {
 #'
 #' library(lmodel2)
 #'
@@ -40,6 +42,9 @@
 #'   geom_point() +
 #'   geom_errorbarh(aes(xmin = conf.low, xmax = conf.high)) +
 #'   geom_errorbarh(aes(xmin = conf.low, xmax = conf.high))
+#'   
+#' }
+#' 
 #' @export
 #' @seealso [tidy()], [lmodel2::lmodel2()]
 #' @aliases lmodel2_tidiers

@@ -8,6 +8,8 @@
 #' @evalRd return_tidy(regression = TRUE)
 #'
 #' @examples
+#' 
+#' if (requireNamespace("survival", quietly = TRUE)) {
 #'
 #' library(survival)
 #'
@@ -28,6 +30,9 @@
 #'   geom_point() +
 #'   geom_errorbarh(aes(xmin = conf.low, xmax = conf.high), height = 0) +
 #'   geom_vline(xintercept = 0)
+#'   
+#' }
+#' 
 #' @aliases survreg_tidiers
 #' @export
 #' @seealso [tidy()], [survival::survreg()]

@@ -51,6 +51,8 @@ missingness in the data beforehand.
 }
 \examples{
 
+if (requireNamespace("geepack", quietly = TRUE)) {
+
 library(geepack)
 data(state)
 
@@ -64,6 +66,9 @@ geefit <- geeglm(Income ~ Frost + Murder,
 
 tidy(geefit)
 tidy(geefit, conf.int = TRUE)
+
+}
+
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[geepack:geeglm]{geepack::geeglm()}}

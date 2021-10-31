@@ -40,6 +40,9 @@ that no longer have a well-defined value are filled in with an \code{NA}
 of the appropriate type.
 }
 \examples{
+
+if (requireNamespace("vars", quietly = TRUE)) {
+
 library(vars)
 data("Canada", package = "vars")
 
@@ -47,6 +50,9 @@ mod <- VAR(Canada, p = 1, type = "both")
 
 tidy(mod)
 glance(mod)
+
+}
+
 }
 \seealso{
 \code{\link[=glance]{glance()}}, \code{\link[vars:VAR]{vars::VAR()}}

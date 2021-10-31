@@ -41,6 +41,8 @@ The \code{curveid} column indicates the curve.
 }
 \examples{
 
+if (requireNamespace("drc", quietly = TRUE)) {
+
 library(drc)
 
 mod <- drm(dead / total ~ conc, type,
@@ -53,6 +55,9 @@ tidy(mod, conf.int = TRUE)
 glance(mod)
 
 augment(mod, selenium)
+
+} 
+
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[drc:drm]{drc::drm()}}

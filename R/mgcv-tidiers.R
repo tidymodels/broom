@@ -26,6 +26,8 @@
 #'
 #'
 #' @examples
+#' 
+#' if (requireNamespace("mgcv", quietly = TRUE)) {
 #'
 #' g <- mgcv::gam(mpg ~ s(hp) + am + qsec, data = mtcars)
 #'
@@ -33,6 +35,9 @@
 #' tidy(g, parametric = TRUE)
 #' glance(g)
 #' augment(g)
+#' 
+#' }
+#' 
 #' @export
 #' @aliases mgcv_tidiers gam_tidiers tidy.gam
 #' @family mgcv tidiers

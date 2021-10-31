@@ -40,6 +40,9 @@ that no longer have a well-defined value are filled in with an \code{NA}
 of the appropriate type.
 }
 \examples{
+
+if (requireNamespace("joineRML", quietly = TRUE)) {
+
 \dontrun{
 # Fit a joint model with bivariate longitudinal outcomes
 library(joineRML)
@@ -81,6 +84,7 @@ hvd2 <- augment(fit)
 
 # Extract model statistics
 glance(fit)
+}
 }
 
 }

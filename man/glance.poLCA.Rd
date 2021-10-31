@@ -41,6 +41,8 @@ of the appropriate type.
 }
 \examples{
 
+if (requireNamespace("poLCA", quietly = TRUE)) {
+
 library(poLCA)
 library(dplyr)
 
@@ -86,6 +88,9 @@ count(au, .class)
 au2 <- augment(nes2a, data = election)
 au2
 dim(au2)
+
+}
+
 }
 \seealso{
 \code{\link[=glance]{glance()}}, \code{\link[poLCA:poLCA]{poLCA::poLCA()}}

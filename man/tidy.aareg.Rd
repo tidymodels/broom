@@ -34,6 +34,8 @@ specify which components to return.
 }
 \examples{
 
+if (requireNamespace("survival", quietly = TRUE)) {
+
 library(survival)
 
 afit <- aareg(
@@ -43,6 +45,9 @@ afit <- aareg(
 )
 
 tidy(afit)
+
+}
+
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[survival:aareg]{survival::aareg()}}

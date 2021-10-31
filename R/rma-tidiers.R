@@ -24,6 +24,8 @@
 #' @export
 #'
 #' @examples
+#' 
+#' if (requireNamespace("metafor", quietly = TRUE)) {
 #'
 #' library(metafor)
 #'
@@ -40,6 +42,9 @@
 #' meta_analysis <- rma(yi, vi, data = df, method = "EB")
 #'
 #' tidy(meta_analysis)
+#' 
+#' }
+#' 
 #' @rdname metafor_tidiers
 #'
 tidy.rma <- function(x, conf.int = FALSE, conf.level = 0.95,

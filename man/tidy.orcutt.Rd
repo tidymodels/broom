@@ -30,6 +30,8 @@ specify which components to return.
 }
 \examples{
 
+if (requireNamespace("orcutt", quietly = TRUE)) {
+
 library(orcutt)
 
 reg <- lm(mpg ~ wt + qsec + disp, mtcars)
@@ -40,6 +42,9 @@ co
 
 tidy(co)
 glance(co)
+
+}
+
 }
 \seealso{
 \code{\link[orcutt:cochrane.orcutt]{orcutt::cochrane.orcutt()}}

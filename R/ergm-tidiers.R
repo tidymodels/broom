@@ -21,6 +21,8 @@
 #'   \item{p.value}{The two-sided p-value}
 #' 
 #' @examples
+#' 
+#' if (requireNamespace("ergm", quietly = TRUE)) {
 #'
 #' library(ergm)
 #' # Using the same example as the ergm package
@@ -42,6 +44,8 @@
 #' glance(gest)
 #' glance(gest, deviance = TRUE)
 #' glance(gest, mcmc = TRUE)
+#' 
+#' }
 #' 
 #' @references Hunter DR, Handcock MS, Butts CT, Goodreau SM, Morris M (2008b).
 #'   \pkg{ergm}: A Package to Fit, Simulate and Diagnose Exponential-Family

@@ -37,11 +37,16 @@ specify which components to return.
 }
 \examples{
 
+if (requireNamespace("speedglm", quietly = TRUE)) {
+
 mod <- speedglm::speedlm(mpg ~ wt + qsec, data = mtcars, fitted = TRUE)
 
 tidy(mod)
 glance(mod)
 augment(mod)
+
+}
+
 }
 \seealso{
 \code{\link[speedglm:speedlm]{speedglm::speedlm()}}, \code{\link[=tidy.lm]{tidy.lm()}}

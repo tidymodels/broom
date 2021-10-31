@@ -41,12 +41,17 @@ of the appropriate type.
 }
 \examples{
 
+if (requireNamespace("mgcv", quietly = TRUE)) {
+
 g <- mgcv::gam(mpg ~ s(hp) + am + qsec, data = mtcars)
 
 tidy(g)
 tidy(g, parametric = TRUE)
 glance(g)
 augment(g)
+
+}
+
 }
 \seealso{
 \code{\link[=glance]{glance()}}, \code{\link[mgcv:gam]{mgcv::gam()}}

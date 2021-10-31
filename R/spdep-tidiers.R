@@ -11,6 +11,7 @@
 #' @evalRd return_tidy(regression = TRUE)
 #' 
 #' @examples 
+#' 
 #' \dontrun{ 
 #' library(spatialreg)
 #' data(oldcol, package = "spdep")

@@ -58,12 +58,17 @@ than \code{estimate} and \code{std.error}.
 }
 \examples{
 
+if (requireNamespace("mgcv", quietly = TRUE)) {
+
 g <- mgcv::gam(mpg ~ s(hp) + am + qsec, data = mtcars)
 
 tidy(g)
 tidy(g, parametric = TRUE)
 glance(g)
 augment(g)
+
+}
+
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[mgcv:gam]{mgcv::gam()}}

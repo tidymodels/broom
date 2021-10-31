@@ -30,6 +30,8 @@ specify which components to return.
 }
 \examples{
 
+if (requireNamespace("MASS", quietly = TRUE)) {
+
 set.seed(2015)
 x <- rnorm(100, 5, 2)
 
@@ -38,6 +40,9 @@ fit <- fitdistr(x, dnorm, list(mean = 3, sd = 1))
 
 tidy(fit)
 glance(fit)
+
+}
+
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[MASS:fitdistr]{MASS::fitdistr()}}

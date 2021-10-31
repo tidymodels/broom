@@ -15,6 +15,8 @@
 #' )
 #'
 #' @examples
+#' 
+#' if (requireNamespace("MASS", quietly = TRUE)) {
 #'
 #' library(MASS)
 #'
@@ -23,6 +25,8 @@
 #' tidy(r)
 #' augment(r)
 #' glance(r)
+#' 
+#' }
 #' @export
 #' @aliases rlm_tidiers
 #' @family rlm tidiers

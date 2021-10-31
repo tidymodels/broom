@@ -45,6 +45,7 @@ that no longer have a well-defined value are filled in with an \code{NA}
 of the appropriate type.
 }
 \examples{
+if (requireNamespace("survey", quietly = TRUE)) {
 
 library(survey)
 
@@ -69,6 +70,9 @@ m <- survey::svyglm(
 )
 
 glance(m)
+
+}
+
 }
 \references{
 Lumley T, Scott A (2015). AIC and BIC for modelling with complex

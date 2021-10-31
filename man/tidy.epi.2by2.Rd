@@ -37,6 +37,8 @@ or tests contained in \code{massoc} or \code{massoc.detail} when \code{\link[epi
 }
 \examples{
 
+if (requireNamespace("epiR", quietly = TRUE)) {
+
 library(epiR)
 
 dat <- matrix(c(13, 2163, 5, 3349), nrow = 2, byrow = TRUE)
@@ -51,6 +53,8 @@ fit <- epi.2by2(
 
 tidy(fit, parameters = "moa")
 tidy(fit, parameters = "stat")
+
+}
 
 }
 \seealso{

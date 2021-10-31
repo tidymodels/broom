@@ -5,6 +5,8 @@
 #' @param x A list with components `u`, `d`, `v` returned by [base::svd()].
 #'
 #' @examples
+#' 
+#' if (requireNamespace("modeldata", quietly = TRUE)) {
 #'
 #' library(modeldata)
 #' data(hpc_data)
@@ -33,6 +35,9 @@
 #'   ggplot(aes(class, value)) +
 #'   geom_boxplot() +
 #'   facet_wrap(~PC, scale = "free_y")
+#'   
+#' }
+#'  
 #' @seealso [base::svd()]
 #' @aliases svd_tidiers
 #' @family svd tidiers

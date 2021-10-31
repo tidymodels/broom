@@ -17,6 +17,8 @@
 #' )
 #'
 #' @examples
+#' 
+#' if (requireNamespace("glmnet", quietly = TRUE)) {
 #'
 #' library(glmnet)
 #' set.seed(27)
@@ -68,6 +70,9 @@
 #'   geom_line() +
 #'   geom_vline(xintercept = glance_cv$lambda.min) +
 #'   geom_vline(xintercept = glance_cv$lambda.1se, lty = 2)
+#'   
+#'  }
+#'   
 #' @export
 #' @family glmnet tidiers
 #' @seealso [tidy()], [glmnet::cv.glmnet()]

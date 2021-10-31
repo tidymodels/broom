@@ -90,6 +90,9 @@ make sure you are using a named \code{list} to define the formula
 for the fixed and random effects of the longitudinal submodel.
 }
 \examples{
+
+if (requireNamespace("joineRML", quietly = TRUE)) {
+
 \dontrun{
 # Fit a joint model with bivariate longitudinal outcomes
 library(joineRML)
@@ -131,6 +134,7 @@ hvd2 <- augment(fit)
 
 # Extract model statistics
 glance(fit)
+}
 }
 
 }

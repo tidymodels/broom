@@ -41,6 +41,8 @@ of the appropriate type.
 }
 \examples{
 
+if (requireNamespace("ordinal", quietly = TRUE)) {
+
 library(ordinal)
 
 fit <- clmm(rating ~ temp + contact + (1 | judge), data = wine)
@@ -54,6 +56,9 @@ glance(fit)
 fit2 <- clmm(rating ~ temp + (1 | judge), nominal = ~contact, data = wine)
 tidy(fit2)
 glance(fit2)
+
+}
+
 }
 \seealso{
 \link{tidy}, \code{\link[ordinal:clmm]{ordinal::clmm()}}

@@ -44,6 +44,9 @@ Similarly, an \code{augment.margins()} method is not currently supported, but
 users can simply run the underlying model to obtain the same information.
 }
 \examples{
+
+if (requireNamespace("margins", quietly = TRUE)) {
+
 library(margins)
 
 ## Example 1: Logit model ##
@@ -86,6 +89,9 @@ marg_ie2 <- margins(mod_ie,
                     variables = "wt", ## Main var
                     at = list(cyl = c(4,6,8), drat = c(3, 3.5, 4))) ## Modulating vars
 tidy(marg_ie2)
+
+}
+
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[margins:margins]{margins::margins()}}

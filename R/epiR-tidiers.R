@@ -21,6 +21,8 @@
 #'
 #' @examples
 #' 
+#' if (requireNamespace("epiR", quietly = TRUE)) {
+#' 
 #' library(epiR)
 #' 
 #' dat <- matrix(c(13, 2163, 5, 3349), nrow = 2, byrow = TRUE)
@@ -35,6 +37,8 @@
 #'
 #' tidy(fit, parameters = "moa")
 #' tidy(fit, parameters = "stat")
+#' 
+#' }
 #' 
 #' @export
 #' @seealso [tidy()], [epiR::epi.2by2()]

@@ -42,6 +42,8 @@ specify which components to return.
 }
 \examples{
 
+if (requireNamespace("gmm", quietly = TRUE)) {
+
 library(gmm)
 
 # examples come from the "gmm" package
@@ -104,6 +106,9 @@ td2 \%>\%
   geom_point() +
   geom_errorbarh(aes(xmin = conf.low, xmax = conf.high)) +
   geom_vline(xintercept = 0, color = "red", lty = 2)
+  
+}
+
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[gmm:gmm]{gmm::gmm()}}

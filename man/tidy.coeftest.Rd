@@ -38,6 +38,8 @@ specify which components to return.
 }
 \examples{
 
+if (requireNamespace("lmtest", quietly = TRUE)) {
+
 library(lmtest)
 
 m <- lm(dist ~ speed, data = cars)
@@ -60,6 +62,9 @@ tidy(coeftest(m, vcov = NeweyWest))            # N-W HAC robust SEs
 # Users can control this with the "save = TRUE" argument of coeftest().
 glance(coeftest(m))
 glance(coeftest(m, save = TRUE)) # More columns
+
+}
+
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[lmtest:coeftest]{lmtest::coeftest()}}

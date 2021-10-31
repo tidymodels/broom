@@ -71,6 +71,7 @@ original data can be recovered from the fit object, this method
 currently does not take in \code{data} or \code{newdata} arguments.
 }
 \examples{
+
 \dontrun{ 
 library(spatialreg)
 data(oldcol, package = "spdep")

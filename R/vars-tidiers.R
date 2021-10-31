@@ -21,6 +21,9 @@
 #'   `conf.int = TRUE` will return a warning.
 #'
 #' @examples
+#' 
+#' if (requireNamespace("vars", quietly = TRUE)) {
+#' 
 #' library(vars)
 #' data("Canada", package = "vars")
 #' 
@@ -28,6 +31,9 @@
 #' 
 #' tidy(mod)
 #' glance(mod)
+#' 
+#' }
+#' 
 #' @export
 #' @seealso [tidy()], [vars::VAR()]
 #' @family vars tidiers

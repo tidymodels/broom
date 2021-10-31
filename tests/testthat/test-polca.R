@@ -6,6 +6,7 @@ skip_if_not_installed("modeltests")
 library(modeltests)
 
 skip_if_not_installed("poLCA")
+skip_if_not_installed("MASS")
 library(poLCA)
 
 data(values)

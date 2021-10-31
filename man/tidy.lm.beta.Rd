@@ -43,6 +43,8 @@ the model with \code{na.action = na.exclude}.
 }
 \examples{
 
+if (requireNamespace("lm.beta", quietly = TRUE)) {
+
 library(lm.beta)
 
 mod <- stats::lm(speed ~ ., data = cars)
@@ -58,6 +60,9 @@ mod2 <- lm(weight ~ group)
 
 std2 <- lm.beta(mod2)
 tidy(std2, conf.int = TRUE)
+
+}
+
 }
 \seealso{
 Other lm tidiers: 

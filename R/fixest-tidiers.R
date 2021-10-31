@@ -26,6 +26,9 @@
 #'   \url{https://github.com/sgaure/lfe/issues/1#issuecomment-530646990})
 #'
 #' @examples
+#' 
+#' if (requireNamespace("fixest", quietly = TRUE)) {
+#' 
 #' \donttest{
 #' library(fixest)
 #' 
@@ -48,6 +51,8 @@
 #' tidy(gravity_summ, conf.int = TRUE)
 #' 
 #' # Approach (1) is preferred.
+#' 
+#' }
 #' 
 #' }
 #'

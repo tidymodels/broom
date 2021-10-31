@@ -16,6 +16,8 @@
 #' )
 #'
 #' @examples
+#' 
+#' if (requireNamespace("tseries", quietly = TRUE)) {
 #'
 #' library(tseries)
 #'
@@ -26,6 +28,9 @@
 #'
 #' tidy(dax.garch)
 #' glance(dax.garch)
+#' 
+#' }
+#' 
 #' @aliases garch_tidiers
 #' @export
 #' @family garch tidiers

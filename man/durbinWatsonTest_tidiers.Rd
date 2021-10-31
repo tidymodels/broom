@@ -31,9 +31,14 @@ of those methods.
 }
 \examples{
 
+if (requireNamespace("car", quietly = TRUE)) {
+
 dw <- car::durbinWatsonTest(lm(mpg ~ wt, data = mtcars))
 tidy(dw)
 glance(dw) # same output for all durbinWatsonTests
+
+}
+
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[=glance]{glance()}}, \code{\link[car:durbinWatsonTest]{car::durbinWatsonTest()}}

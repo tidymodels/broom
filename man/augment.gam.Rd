@@ -96,12 +96,17 @@ For additional details on Cook's distance, see
 }
 \examples{
 
+if (requireNamespace("mgcv", quietly = TRUE)) {
+
 g <- mgcv::gam(mpg ~ s(hp) + am + qsec, data = mtcars)
 
 tidy(g)
 tidy(g, parametric = TRUE)
 glance(g)
 augment(g)
+
+}
+
 }
 \seealso{
 \code{\link[=augment]{augment()}}, \code{\link[mgcv:gam]{mgcv::gam()}}

@@ -9,6 +9,8 @@
 #' )
 #'
 #' @examples
+#' 
+#' if (requireNamespace("binGroup", quietly = TRUE)) {
 #'
 #' library(binGroup)
 #' library(dplyr)
@@ -17,6 +19,9 @@
 #' bw <- binWidth(100, .1)
 #' bw
 #' tidy(bw)
+#' 
+#' }
+#' 
 #' @export
 #' @family bingroup tidiers
 #' @aliases binwidth_tidiers
@@ -39,6 +44,8 @@ tidy.binWidth <- function(x, ...) {
 #' )
 #'
 #' @examples
+#' 
+#' if (requireNamespace("binGroup", quietly = TRUE)) {
 #'
 #' library(binGroup)
 #' des <- binDesign(
@@ -53,6 +60,9 @@ tidy.binWidth <- function(x, ...) {
 #' library(ggplot2)
 #' ggplot(tidy(des), aes(n, power)) +
 #'   geom_line()
+#'   
+#' }
+#' 
 #' @export
 #' @family bingroup tidiers
 #' @aliases bindesign_tidiers
@@ -77,7 +87,9 @@ tidy.binDesign <- function(x, ...) {
 #' )
 #'
 #' @examples
-#'
+#' 
+#' if (requireNamespace("binGroup", quietly = TRUE)) {
+#' 
 #' library(binGroup)
 #' des <- binDesign(
 #'   nmax = 300, delta = 0.06,
@@ -90,6 +102,9 @@ tidy.binDesign <- function(x, ...) {
 #' library(ggplot2)
 #' ggplot(tidy(des), aes(n, power)) +
 #'   geom_line()
+#'   
+#' }
+#' 
 #' @export
 #' @family bingroup tidiers
 #' @seealso [glance()], [binGroup::binDesign()]

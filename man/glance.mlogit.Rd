@@ -40,6 +40,9 @@ that no longer have a well-defined value are filled in with an \code{NA}
 of the appropriate type.
 }
 \examples{
+
+if (requireNamespace("mlogit", quietly = TRUE)) {
+
 \dontrun{
 library(mlogit)
 data("Fishing", package = "mlogit")
@@ -49,6 +52,8 @@ m <- mlogit(mode ~ price + catch | income, data = Fish)
 tidy(m)
 augment(m)
 glance(m)
+}
+
 }
 
 }

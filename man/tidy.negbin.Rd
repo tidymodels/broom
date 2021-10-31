@@ -40,12 +40,17 @@ If a model has several distinct types of components, you will need to
 specify which components to return.
 }
 \examples{
+
+if (requireNamespace("MASS", quietly = TRUE)) {
+
 library(MASS)
 
 r <- glm.nb(Days ~ Sex/(Age + Eth*Lrn), data = quine)
 
 tidy(r)
 glance(r)
+
+}
 
 }
 \seealso{

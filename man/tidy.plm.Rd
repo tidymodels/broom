@@ -37,6 +37,8 @@ specify which components to return.
 }
 \examples{
 
+if (requireNamespace("plm", quietly = TRUE)) {
+
 library(plm)
 
 data("Produc", package = "plm")
@@ -52,6 +54,9 @@ tidy(zz, conf.int = TRUE, conf.level = 0.9)
 
 augment(zz)
 glance(zz)
+
+}
+
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[plm:plm]{plm::plm()}}, \code{\link[=tidy.lm]{tidy.lm()}}

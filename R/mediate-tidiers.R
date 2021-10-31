@@ -11,6 +11,9 @@
 #'   effect in the control and treatment groups, respectively. And the last 
 #'   two the direct effect in each group.
 #' @examples
+#' 
+#' if (requireNamespace("mediation", quietly = TRUE)) {
+#' 
 #' library(mediation)
 #' data(jobs)
 #'
@@ -21,6 +24,9 @@
 #' tidy(mod)
 #' tidy(mod, conf.int = TRUE)
 #' tidy(mod, conf.int = TRUE, conf.level = .99)
+#' 
+#' }
+#' 
 #' @export
 #' @seealso [tidy()], [mediation::mediate()]
 #' @family mediate tidiers

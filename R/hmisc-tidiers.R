@@ -22,6 +22,8 @@
 #'   output.
 #'
 #' @examples
+#' 
+#' if (requireNamespace("Hmisc", quietly = TRUE)) {
 #'
 #' library(Hmisc)
 #'
@@ -43,6 +45,9 @@
 #' ggplot(td, aes(estimate, p.value)) +
 #'   geom_point() +
 #'   scale_y_log10()
+#'
+#' }
+#' 
 #' @export
 #' @aliases rcorr_tidiers Hmisc_tidiers
 #' @seealso [tidy()], [Hmisc::rcorr()]

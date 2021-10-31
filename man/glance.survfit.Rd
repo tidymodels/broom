@@ -34,6 +34,8 @@ of the appropriate type.
 }
 \examples{
 
+if (requireNamespace("survival", quietly = TRUE)) {
+
 library(survival)
 cfit <- coxph(Surv(time, status) ~ age + sex, lung)
 sfit <- survfit(cfit)
@@ -56,6 +58,9 @@ td_multi
 ggplot(td_multi, aes(time, estimate, group = state)) +
   geom_line(aes(color = state)) +
   geom_ribbon(aes(ymin = conf.low, ymax = conf.high), alpha = .25)
+  
+}
+  
 }
 \seealso{
 \code{\link[=glance]{glance()}}, \code{\link[survival:survfit]{survival::survfit()}}

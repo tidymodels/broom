@@ -14,9 +14,14 @@
 #' )
 #'
 #' @examples
+#' 
+#' if (requireNamespace("leaps", quietly = TRUE)) {
 #'
 #' all_fits <- leaps::regsubsets(hp ~ ., mtcars)
 #' tidy(all_fits)
+#' 
+#' }
+#' 
 #' @aliases leaps_tidiers
 #' @export
 #' @seealso [tidy()], [leaps::regsubsets()]

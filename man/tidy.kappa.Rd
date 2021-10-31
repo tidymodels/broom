@@ -36,6 +36,8 @@ to \code{\link[psych:kappa]{psych::cohen.kappa()}} when creating the \code{kappa
 }
 \examples{
 
+if (requireNamespace("psych", quietly = TRUE)) {
+
 library(psych)
 
 rater1 <- 1:9
@@ -49,6 +51,9 @@ library(ggplot2)
 ggplot(tidy(ck), aes(estimate, type)) +
   geom_point() +
   geom_errorbarh(aes(xmin = conf.low, xmax = conf.high))
+  
+}
+
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[psych:kappa]{psych::cohen.kappa()}}

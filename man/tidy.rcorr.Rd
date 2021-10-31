@@ -42,6 +42,8 @@ output.
 }
 \examples{
 
+if (requireNamespace("Hmisc", quietly = TRUE)) {
+
 library(Hmisc)
 
 mat <- replicate(52, rnorm(100))
@@ -62,6 +64,9 @@ ggplot(td, aes(p.value)) +
 ggplot(td, aes(estimate, p.value)) +
   geom_point() +
   scale_y_log10()
+
+}
+
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[Hmisc:rcorr]{Hmisc::rcorr()}}

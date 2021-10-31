@@ -8,6 +8,9 @@ library(modeltests)
 skip_if_not_installed("lsmeans")
 library(lsmeans)
 
+skip_if_not_installed("lme4")
+library(lme4)
+
 fit <- lm(sales1 ~ price1 + price2 + day + store, data = oranges)
 rg <- ref.grid(fit)
 
@@ -72,7 +75,7 @@ test_that("summary_emm tidiers work", {
   check_tidy_output(tdjt)
   check_dims(tdjt, 4, 5)
   
-  library("lme4")
+  
   glmm <- glmer(
     cbind(incidence, size - incidence) ~ period + (1 | herd),
     data = cbpp, family = binomial

@@ -14,6 +14,8 @@
 #'   missingness in the data beforehand.
 #'
 #' @examples
+#' 
+#' if (requireNamespace("geepack", quietly = TRUE)) {
 #'
 #' library(geepack)
 #' data(state)
@@ -28,6 +30,9 @@
 #'
 #' tidy(geefit)
 #' tidy(geefit, conf.int = TRUE)
+#' 
+#' }
+#' 
 #' @evalRd return_tidy(regression = TRUE)
 #'
 #' @export

@@ -18,6 +18,8 @@
 #'          Default returns a tibble of six columns.
 #'
 #' @examples
+#' 
+#' if (requireNamespace("systemfit", quietly = TRUE)) {
 #'
 #' set.seed(27)
 #'
@@ -34,6 +36,9 @@
 #' tidy(fit)
 #'
 #' tidy(fit, conf.int = TRUE)
+#' 
+#' }
+#' 
 #' @export
 #' @seealso [tidy()], [systemfit::systemfit()]
 #'

@@ -14,6 +14,8 @@
 #'   the model with `na.action = na.exclude`.
 #'
 #' @examples
+#' 
+#' if (requireNamespace("lm.beta", quietly = TRUE)) {
 #'
 #' library(lm.beta)
 #'
@@ -30,6 +32,9 @@
 #'
 #' std2 <- lm.beta(mod2)
 #' tidy(std2, conf.int = TRUE)
+#' 
+#' }
+#' 
 #' @export
 #' @family lm tidiers
 tidy.lm.beta <- function(x, conf.int = FALSE, conf.level = 0.95, ...) {

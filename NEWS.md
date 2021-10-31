@@ -1,4 +1,4 @@
-# broom 0.7.9.9001
+# broom 0.7.10
 
 To be released as broom 0.7.10.
 
@@ -6,7 +6,9 @@ To be released as broom 0.7.10.
 * Allows user to specify confidence level for `tidy.rma` (`#1041` by `@TarenSanders`)
 * Clarifies documentation related to usage of `augment_columns()`; most package users should use `augment()` in favor of `augment_columns()`. See `?augment_columns` for more details.
 * Extends support for `emmeans` by fixing non-standard column names in case of asymptotically derived inferential statistics. (`#1046` by `@crsh`)
-* Fixes use of index columns in `augment.mlogit`. (`#1045` and `#1053` by `@jamesrrae` and `@gregmacfarlane`)
+* Fixes use of index columns in `augment.mlogit` and adds `.resid` column to
+output. (`#1045`, `#1053`, `#1055`, and `#1056` by `@jamesrrae` and
+`@gregmacfarlane`)
 * Correct column naming of standard error measures in `glance.survfit()`.
 * Various bug fixes and improvements to documentation.
 

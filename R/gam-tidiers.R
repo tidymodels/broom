@@ -17,12 +17,17 @@
 #'   [tidy.gam()].
 #'
 #' @examples
+#' 
+#' if (requireNamespace("gam", quietly = TRUE)) {
 #'
 #' library(gam)
 #' g <- gam(mpg ~ s(hp, 4) + am + qsec, data = mtcars)
 #'
 #' tidy(g)
 #' glance(g)
+#' 
+#' }
+#' 
 #' @export
 #' @family gam tidiers
 #' @aliases Gam_tidiers

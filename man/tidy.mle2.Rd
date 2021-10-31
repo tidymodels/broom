@@ -38,6 +38,8 @@ specify which components to return.
 }
 \examples{
 
+if (requireNamespace("bbmle", quietly = TRUE)) {
+
 library(bbmle)
 
 x <- 0:10
@@ -49,6 +51,9 @@ fit <- mle2(y ~ dpois(lambda = ymean),
 )
 
 tidy(fit)
+
+}
+
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[bbmle:mle2]{bbmle::mle2()}}, \code{\link[=tidy_optim]{tidy_optim()}}

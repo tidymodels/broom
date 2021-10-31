@@ -41,6 +41,8 @@ of the appropriate type.
 }
 \examples{
 
+if (requireNamespace("survival", quietly = TRUE)) {
+
 library(survival)
 
 s <- survdiff(
@@ -50,6 +52,9 @@ s <- survdiff(
 
 tidy(s)
 glance(s)
+
+}
+
 }
 \seealso{
 \code{\link[=glance]{glance()}}, \code{\link[survival:survdiff]{survival::survdiff()}}

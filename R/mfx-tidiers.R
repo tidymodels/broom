@@ -33,6 +33,10 @@
 #'   in the data, or ii) the average of the sample marginal effects. See 
 #'   `vignette("mfxarticle")` from the `mfx` package for more details.
 #' @examples
+#' 
+#' 
+#' if (requireNamespace("mfx", quietly = TRUE)) {
+#' 
 #' \dontrun{ 
 #' library(mfx)
 #' 
@@ -52,6 +56,9 @@
 #' augment(mod_probmfx)
 #' glance(mod_probmfx)
 #' }
+#' 
+#' }
+#' 
 #' @family mfx tidiers
 #' @seealso [tidy()], [mfx::logitmfx()], [mfx::negbinmfx()], [mfx::poissonmfx()], [mfx::probitmfx()]
 #' @export
