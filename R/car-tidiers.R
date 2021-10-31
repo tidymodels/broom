@@ -55,11 +55,15 @@ glance.durbinWatsonTest <- function(x, ...) tidy(x)
 #'
 #' @examples
 #'
+#' if (requireNamespace("car", quietly = TRUE)) {
+#' 
 #' library(car)
 #' data(Moore)
 #' lt <- with(Moore, leveneTest(conformity, fcategory))
 #' tidy(lt)
 #' glance(lt) # same output for all leveneTest
+#' 
+#' }
 #' @name leveneTest_tidiers
 #' @family car tidiers
 #' @export

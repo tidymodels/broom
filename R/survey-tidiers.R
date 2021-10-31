@@ -104,7 +104,8 @@ tidy.svyglm <- function(x, conf.int = FALSE, conf.level = 0.95,
 #' )
 #'
 #' @examples
-#'
+#' if (requireNamespace("survey", quietly = TRUE)) {
+#' 
 #' library(survey)
 #'
 #' set.seed(123)
@@ -128,6 +129,9 @@ tidy.svyglm <- function(x, conf.int = FALSE, conf.level = 0.95,
 #' )
 #'
 #' glance(m)
+#' 
+#' }
+#' 
 #' @references Lumley T, Scott A (2015). AIC and BIC for modelling with complex
 #'   survey data. *Journal of Survey Statistics and Methodology*, 3(1).
 #'

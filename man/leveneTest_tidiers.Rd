@@ -28,11 +28,15 @@ of those methods.
 }
 \examples{
 
+if (requireNamespace("car", quietly = TRUE)) {
+
 library(car)
 data(Moore)
 lt <- with(Moore, leveneTest(conformity, fcategory))
 tidy(lt)
 glance(lt) # same output for all leveneTest
+
+}
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[=glance]{glance()}}, \code{\link[car:leveneTest]{car::leveneTest()}}
