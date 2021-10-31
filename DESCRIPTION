@@ -539,7 +539,8 @@ Imports:
     rlang,
     stringr,
     tibble (>= 3.0.0),
-    tidyr (>= 1.0.0)
+    tidyr (>= 1.0.0),
+    ggplot2
 Suggests:
     AER,
     akima,
@@ -565,7 +566,6 @@ Suggests:
     gam (>= 1.15),
     gee,
     geepack,
-    ggplot2,
     glmnet,
     glmnetUtils,
     gmm,
