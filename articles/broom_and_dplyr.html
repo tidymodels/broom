@@ -50,7 +50,7 @@
         <a class="navbar-brand" href="../index.html">broom</a>
         <div class="info hidden-xs hidden-sm">
           <span class="partof">part of <a href="https://tidymodels.org">tidymodels</a></span>
-          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.7.9.9000</span>
+          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.7.10</span>
         </div>
       </div>
     </div>
@@ -110,7 +110,7 @@
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>broom and dplyr</h1>
             
-            <h4 class="date">2021-09-01</h4>
+            <h4 class="date">2021-11-01</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/tidymodels/broom/blob/master/vignettes/broom_and_dplyr.Rmd"><code>vignettes/broom_and_dplyr.Rmd</code></a></small>
       <div class="hidden name"><code>broom_and_dplyr.Rmd</code></div>
@@ -325,16 +325,16 @@
   <span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="https://tidyr.tidyverse.org/reference/nest.html">unnest</a></span><span class="op">(</span><span class="va">tidied</span><span class="op">)</span></code></pre></div>
 <pre><code>## # A tibble: 8 × 8
-##      am data               fit    term        estimate std.error statistic p.value
-##   &lt;dbl&gt; &lt;list&gt;             &lt;list&gt; &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;
-## 1     1 &lt;tibble [13 × 10]&gt; &lt;lm&gt;   (Intercept)   4.28      3.46      1.24   2.47e-1
-## 2     1 &lt;tibble [13 × 10]&gt; &lt;lm&gt;   mpg          -0.101     0.0294   -3.43   7.50e-3
-## 3     1 &lt;tibble [13 × 10]&gt; &lt;lm&gt;   qsec          0.0398    0.151     0.264  7.98e-1
-## 4     1 &lt;tibble [13 × 10]&gt; &lt;lm&gt;   gear         -0.0229    0.349    -0.0656 9.49e-1
-## 5     0 &lt;tibble [19 × 10]&gt; &lt;lm&gt;   (Intercept)   4.92      1.40      3.52   3.09e-3
-## 6     0 &lt;tibble [19 × 10]&gt; &lt;lm&gt;   mpg          -0.192     0.0443   -4.33   5.91e-4
-## 7     0 &lt;tibble [19 × 10]&gt; &lt;lm&gt;   qsec          0.0919    0.0983    0.935  3.65e-1
-## 8     0 &lt;tibble [19 × 10]&gt; &lt;lm&gt;   gear          0.147     0.368     0.398  6.96e-1</code></pre>
+##      am data               fit    term      estimate std.error statistic p.value
+##   &lt;dbl&gt; &lt;list&gt;             &lt;list&gt; &lt;chr&gt;        &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;
+## 1     1 &lt;tibble [13 × 10]&gt; &lt;lm&gt;   (Interce…   4.28      3.46      1.24   2.47e-1
+## 2     1 &lt;tibble [13 × 10]&gt; &lt;lm&gt;   mpg        -0.101     0.0294   -3.43   7.50e-3
+## 3     1 &lt;tibble [13 × 10]&gt; &lt;lm&gt;   qsec        0.0398    0.151     0.264  7.98e-1
+## 4     1 &lt;tibble [13 × 10]&gt; &lt;lm&gt;   gear       -0.0229    0.349    -0.0656 9.49e-1
+## 5     0 &lt;tibble [19 × 10]&gt; &lt;lm&gt;   (Interce…   4.92      1.40      3.52   3.09e-3
+## 6     0 &lt;tibble [19 × 10]&gt; &lt;lm&gt;   mpg        -0.192     0.0443   -4.33   5.91e-4
+## 7     0 &lt;tibble [19 × 10]&gt; &lt;lm&gt;   qsec        0.0919    0.0983    0.935  3.65e-1
+## 8     0 &lt;tibble [19 × 10]&gt; &lt;lm&gt;   gear        0.147     0.368     0.398  6.96e-1</code></pre>
 <p>What if you want not just the <code>tidy</code> output, but the <code>augment</code> and <code>glance</code> outputs as well, while still performing each regression only once? Since we’re using list-columns, we can just fit the model once and use multiple list-columns to store the tidied, glanced and augmented outputs.</p>
 <div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">regressions</span> <span class="op">&lt;-</span> <span class="va">mtcars</span> <span class="op">%&gt;%</span>

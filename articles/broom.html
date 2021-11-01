@@ -50,7 +50,7 @@
         <a class="navbar-brand" href="../index.html">broom</a>
         <div class="info hidden-xs hidden-sm">
           <span class="partof">part of <a href="https://tidymodels.org">tidymodels</a></span>
-          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.7.9.9000</span>
+          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.7.10</span>
         </div>
       </div>
     </div>
@@ -110,7 +110,7 @@
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Introduction to broom</h1>
             
-            <h4 class="date">2021-09-01</h4>
+            <h4 class="date">2021-11-01</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/tidymodels/broom/blob/master/vignettes/broom.Rmd"><code>vignettes/broom.Rmd</code></a></small>
       <div class="hidden name"><code>broom.Rmd</code></div>
@@ -189,18 +189,18 @@
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://generics.r-lib.org/reference/augment.html">augment</a></span><span class="op">(</span><span class="va">lmfit</span><span class="op">)</span></code></pre></div>
 <pre><code>## # A tibble: 32 × 9
-##    .rownames           mpg    wt .fitted .resid   .hat .sigma   .cooksd .std.resid
-##    &lt;chr&gt;             &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;     &lt;dbl&gt;      &lt;dbl&gt;
-##  1 Mazda RX4          21    2.62    23.3 -2.28  0.0433   3.07 0.0133       -0.766 
-##  2 Mazda RX4 Wag      21    2.88    21.9 -0.920 0.0352   3.09 0.00172      -0.307 
-##  3 Datsun 710         22.8  2.32    24.9 -2.09  0.0584   3.07 0.0154       -0.706 
-##  4 Hornet 4 Drive     21.4  3.22    20.1  1.30  0.0313   3.09 0.00302       0.433 
-##  5 Hornet Sportabout  18.7  3.44    18.9 -0.200 0.0329   3.10 0.0000760    -0.0668
-##  6 Valiant            18.1  3.46    18.8 -0.693 0.0332   3.10 0.000921     -0.231 
-##  7 Duster 360         14.3  3.57    18.2 -3.91  0.0354   3.01 0.0313       -1.31  
-##  8 Merc 240D          24.4  3.19    20.2  4.16  0.0313   3.00 0.0311        1.39  
-##  9 Merc 230           22.8  3.15    20.5  2.35  0.0314   3.07 0.00996       0.784 
-## 10 Merc 280           19.2  3.44    18.9  0.300 0.0329   3.10 0.000171      0.100 
+##    .rownames           mpg    wt .fitted .resid   .hat .sigma .cooksd .std.resid
+##    &lt;chr&gt;             &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;      &lt;dbl&gt;
+##  1 Mazda RX4          21    2.62    23.3 -2.28  0.0433   3.07 1.33e-2    -0.766 
+##  2 Mazda RX4 Wag      21    2.88    21.9 -0.920 0.0352   3.09 1.72e-3    -0.307 
+##  3 Datsun 710         22.8  2.32    24.9 -2.09  0.0584   3.07 1.54e-2    -0.706 
+##  4 Hornet 4 Drive     21.4  3.22    20.1  1.30  0.0313   3.09 3.02e-3     0.433 
+##  5 Hornet Sportabout  18.7  3.44    18.9 -0.200 0.0329   3.10 7.60e-5    -0.0668
+##  6 Valiant            18.1  3.46    18.8 -0.693 0.0332   3.10 9.21e-4    -0.231 
+##  7 Duster 360         14.3  3.57    18.2 -3.91  0.0354   3.01 3.13e-2    -1.31  
+##  8 Merc 240D          24.4  3.19    20.2  4.16  0.0313   3.00 3.11e-2     1.39  
+##  9 Merc 230           22.8  3.15    20.5  2.35  0.0314   3.07 9.96e-3     0.784 
+## 10 Merc 280           19.2  3.44    18.9  0.300 0.0329   3.10 1.71e-4     0.100 
 ## # … with 22 more rows</code></pre>
 <p>Note that each of the new columns begins with a <code>.</code> (to avoid overwriting any of the original columns).</p>
 <p>Finally, several summary statistics are computed for the entire regression, such as R^2 and the F-statistic. These can be accessed with the <code>glance</code> function:</p>
@@ -300,9 +300,9 @@
 <code class="sourceCode R"><span class="va">wt</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/wilcox.test.html">wilcox.test</a></span><span class="op">(</span><span class="va">wt</span> <span class="op">~</span> <span class="va">am</span>, <span class="va">mtcars</span><span class="op">)</span>
 <span class="fu"><a href="https://generics.r-lib.org/reference/tidy.html">tidy</a></span><span class="op">(</span><span class="va">wt</span><span class="op">)</span></code></pre></div>
 <pre><code>## # A tibble: 1 × 4
-##   statistic   p.value method                                            alternative
-##       &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;                                             &lt;chr&gt;      
-## 1      230. 0.0000435 Wilcoxon rank sum test with continuity correction two.sided</code></pre>
+##   statistic   p.value method                                         alternative
+##       &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;                                          &lt;chr&gt;      
+## 1      230. 0.0000435 Wilcoxon rank sum test with continuity correc… two.sided</code></pre>
 <p>Since the <code>tidy</code> output is already only one row, <code>glance</code> returns the same output:</p>
 <div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://generics.r-lib.org/reference/glance.html">glance</a></span><span class="op">(</span><span class="va">tt</span><span class="op">)</span></code></pre></div>
@@ -314,9 +314,9 @@
 <div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://generics.r-lib.org/reference/glance.html">glance</a></span><span class="op">(</span><span class="va">wt</span><span class="op">)</span></code></pre></div>
 <pre><code>## # A tibble: 1 × 4
-##   statistic   p.value method                                            alternative
-##       &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;                                             &lt;chr&gt;      
-## 1      230. 0.0000435 Wilcoxon rank sum test with continuity correction two.sided</code></pre>
+##   statistic   p.value method                                         alternative
+##       &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;                                          &lt;chr&gt;      
+## 1      230. 0.0000435 Wilcoxon rank sum test with continuity correc… two.sided</code></pre>
 <p><code>augment</code> method is defined only for chi-squared tests, since there is no meaningful sense, for other tests, in which a hypothesis test produces output about each initial data point.</p>
 <div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">chit</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/chisq.test.html">chisq.test</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/xtabs.html">xtabs</a></span><span class="op">(</span><span class="va">Freq</span> <span class="op">~</span> <span class="va">Sex</span> <span class="op">+</span> <span class="va">Class</span>, 

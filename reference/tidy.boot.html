@@ -100,7 +100,7 @@ specify which components to return." />
         <a class="navbar-brand" href="../index.html">broom</a>
         <div class="info hidden-xs hidden-sm">
           <span class="partof">part of <a href="https://tidymodels.org">tidymodels</a></span>
-          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.7.9.9000</span>
+          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.7.10</span>
         </div>
       </div>
     </div>
@@ -244,17 +244,10 @@ and <code>statistic</code> columns are omitted, and only <code>estimate</code> a
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
+<span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/ns-load.html'>requireNamespace</a></span><span class='op'>(</span><span class='st'>"boot"</span>, quietly <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
+
 <span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'>boot</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Attaching package: ‘boot’</span></div><div class='output co'>#&gt; <span class='message'>The following object is masked from ‘package:speedglm’:</span>
-#&gt; <span class='message'></span>
-#&gt; <span class='message'>    control</span></div><div class='output co'>#&gt; <span class='message'>The following object is masked from ‘package:robustbase’:</span>
-#&gt; <span class='message'></span>
-#&gt; <span class='message'>    salinity</span></div><div class='output co'>#&gt; <span class='message'>The following object is masked from ‘package:car’:</span>
-#&gt; <span class='message'></span>
-#&gt; <span class='message'>    logit</span></div><div class='output co'>#&gt; <span class='message'>The following object is masked from ‘package:survival’:</span>
-#&gt; <span class='message'></span>
-#&gt; <span class='message'>    aml</span></div><div class='input'>
+
 <span class='va'>clotting</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span><span class='op'>(</span>
   u <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>5</span>, <span class='fl'>10</span>, <span class='fl'>15</span>, <span class='fl'>20</span>, <span class='fl'>30</span>, <span class='fl'>40</span>, <span class='fl'>60</span>, <span class='fl'>80</span>, <span class='fl'>100</span><span class='op'>)</span>,
   lot1 <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>118</span>, <span class='fl'>58</span>, <span class='fl'>42</span>, <span class='fl'>35</span>, <span class='fl'>27</span>, <span class='fl'>25</span>, <span class='fl'>21</span>, <span class='fl'>19</span>, <span class='fl'>18</span><span class='op'>)</span>,
@@ -269,16 +262,24 @@ and <code>statistic</code> columns are omitted, and only <code>estimate</code> a
 
 <span class='va'>bootres</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/boot/man/boot.html'>boot</a></span><span class='op'>(</span><span class='va'>clotting</span>, <span class='va'>bootfun</span>, R <span class='op'>=</span> <span class='fl'>999</span><span class='op'>)</span>
 <span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>g1</span>, conf.int <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 2 × 7</span>
-#&gt;   term        estimate std.error statistic       p.value conf.low conf.high
-#&gt;   <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>          <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>         <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>    <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>
-#&gt; <span style='color: #BCBCBC;'>1</span> (Intercept)  -<span style='color: #BB0000;'>0.023</span><span style='color: #BB0000; text-decoration: underline;'>9</span>  0.001<span style='text-decoration: underline;'>33</span>      -<span style='color: #BB0000;'>18.0</span> 0.000<span style='text-decoration: underline;'>000</span>400    -<span style='color: #BB0000;'>0.026</span><span style='color: #BB0000; text-decoration: underline;'>5</span>   -<span style='color: #BB0000;'>0.021</span><span style='color: #BB0000; text-decoration: underline;'>3</span>
-#&gt; <span style='color: #BCBCBC;'>2</span> log(u)        0.023<span style='text-decoration: underline;'>6</span>  0.000<span style='text-decoration: underline;'>577</span>      40.9 0.000<span style='text-decoration: underline;'>000</span>001<span style='text-decoration: underline;'>36</span>   0.022<span style='text-decoration: underline;'>5</span>    0.024<span style='text-decoration: underline;'>7</span></div><div class='input'><span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>bootres</span>, conf.int <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 2 × 6</span>
+<span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>bootres</span>, conf.int <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
+
+<span class='op'>}</span>
+</div><div class='output co'>#&gt; <span class='message'></span>
+#&gt; <span class='message'>Attaching package: ‘boot’</span></div><div class='output co'>#&gt; <span class='message'>The following object is masked from ‘package:speedglm’:</span>
+#&gt; <span class='message'></span>
+#&gt; <span class='message'>    control</span></div><div class='output co'>#&gt; <span class='message'>The following object is masked from ‘package:robustbase’:</span>
+#&gt; <span class='message'></span>
+#&gt; <span class='message'>    salinity</span></div><div class='output co'>#&gt; <span class='message'>The following object is masked from ‘package:car’:</span>
+#&gt; <span class='message'></span>
+#&gt; <span class='message'>    logit</span></div><div class='output co'>#&gt; <span class='message'>The following object is masked from ‘package:survival’:</span>
+#&gt; <span class='message'></span>
+#&gt; <span class='message'>    aml</span></div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 2 × 6</span>
 #&gt;   term        statistic      bias std.error conf.low conf.high
 #&gt;   <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>           <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>    <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>
 #&gt; <span style='color: #BCBCBC;'>1</span> (Intercept)   -<span style='color: #BB0000;'>0.023</span><span style='color: #BB0000; text-decoration: underline;'>9</span> -<span style='color: #BB0000;'>0.001</span><span style='color: #BB0000; text-decoration: underline;'>85</span>    0.003<span style='text-decoration: underline;'>22</span>  -<span style='color: #BB0000;'>0.032</span><span style='color: #BB0000; text-decoration: underline;'>8</span>   -<span style='color: #BB0000;'>0.022</span><span style='color: #BB0000; text-decoration: underline;'>2</span>
-#&gt; <span style='color: #BCBCBC;'>2</span> log(u)         0.023<span style='text-decoration: underline;'>6</span>  0.000<span style='text-decoration: underline;'>557</span>   0.001<span style='text-decoration: underline;'>03</span>   0.022<span style='text-decoration: underline;'>7</span>    0.026<span style='text-decoration: underline;'>5</span></div></pre>
+#&gt; <span style='color: #BCBCBC;'>2</span> log(u)         0.023<span style='text-decoration: underline;'>6</span>  0.000<span style='text-decoration: underline;'>557</span>   0.001<span style='text-decoration: underline;'>03</span>   0.022<span style='text-decoration: underline;'>7</span>    0.026<span style='text-decoration: underline;'>5</span></div><div class='input'>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

@@ -128,7 +128,7 @@ missing at this time." />
         <a class="navbar-brand" href="../index.html">broom</a>
         <div class="info hidden-xs hidden-sm">
           <span class="partof">part of <a href="https://tidymodels.org">tidymodels</a></span>
-          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.7.9.9000</span>
+          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.7.10</span>
         </div>
       </div>
     </div>
@@ -284,42 +284,19 @@ the <code>data</code> argument.</p></td>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
-<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'>robust</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='message'>Loading required package: fit.models</span></div><div class='output co'>#&gt; <span class='message'>Registered S3 methods overwritten by 'robust':</span>
-#&gt; <span class='message'>  method              from      </span>
-#&gt; <span class='message'>  plot.covfm          fit.models</span>
-#&gt; <span class='message'>  print.covfm         fit.models</span>
-#&gt; <span class='message'>  summary.covfm       fit.models</span>
-#&gt; <span class='message'>  print.summary.covfm fit.models</span></div><div class='output co'>#&gt; <span class='message'>rlm is already registered in the fit.models registry</span></div><div class='output co'>#&gt; <span class='message'>covfm is already registered in the fit.models registry</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Attaching package: ‘robust’</span></div><div class='output co'>#&gt; <span class='message'>The following objects are masked from ‘package:fit.models’:</span>
-#&gt; <span class='message'></span>
-#&gt; <span class='message'>    ddPlot.covfm, distancePlot.covfm, ellipsesPlot.covfm,</span>
-#&gt; <span class='message'>    screePlot.covfm</span></div><div class='input'><span class='va'>m</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/robust/man/lmRob.html'>lmRob</a></span><span class='op'>(</span><span class='va'>mpg</span> <span class='op'>~</span> <span class='va'>wt</span>, data <span class='op'>=</span> <span class='va'>mtcars</span><span class='op'>)</span>
+<span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/ns-load.html'>requireNamespace</a></span><span class='op'>(</span><span class='st'>"robust"</span>, quietly <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
+  <span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'>robust</span><span class='op'>)</span>
+  <span class='va'>m</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/robust/man/lmRob.html'>lmRob</a></span><span class='op'>(</span><span class='va'>mpg</span> <span class='op'>~</span> <span class='va'>wt</span>, data <span class='op'>=</span> <span class='va'>mtcars</span><span class='op'>)</span>
 
-<span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>m</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 2 × 5</span>
-#&gt;   term        estimate std.error statistic  p.value
-#&gt;   <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>          <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>    <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>
-#&gt; <span style='color: #BCBCBC;'>1</span> (Intercept)    35.6       3.58      9.93 5.37<span style='color: #949494;'>e</span><span style='color: #BB0000;'>-11</span>
-#&gt; <span style='color: #BCBCBC;'>2</span> wt             -<span style='color: #BB0000;'>4.91</span>      1.09     -<span style='color: #BB0000;'>4.49</span> 9.67<span style='color: #949494;'>e</span><span style='color: #BB0000;'>- 5</span></div><div class='input'><span class='fu'><a href='https://generics.r-lib.org/reference/augment.html'>augment</a></span><span class='op'>(</span><span class='va'>m</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 32 × 5</span>
-#&gt;    .rownames           mpg    wt .fitted  .resid
-#&gt;    <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>             <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>
-#&gt; <span style='color: #BCBCBC;'> 1</span> Mazda RX4          21    2.62    22.7  1.68  
-#&gt; <span style='color: #BCBCBC;'> 2</span> Mazda RX4 Wag      21    2.88    21.4  0.431 
-#&gt; <span style='color: #BCBCBC;'> 3</span> Datsun 710         22.8  2.32    24.2  1.36  
-#&gt; <span style='color: #BCBCBC;'> 4</span> Hornet 4 Drive     21.4  3.22    19.8 -<span style='color: #BB0000;'>1.64</span>  
-#&gt; <span style='color: #BCBCBC;'> 5</span> Hornet Sportabout  18.7  3.44    18.7 -<span style='color: #BB0000;'>0.044</span><span style='color: #BB0000; text-decoration: underline;'>5</span>
-#&gt; <span style='color: #BCBCBC;'> 6</span> Valiant            18.1  3.46    18.6  0.457 
-#&gt; <span style='color: #BCBCBC;'> 7</span> Duster 360         14.3  3.57    18.0  3.72  
-#&gt; <span style='color: #BCBCBC;'> 8</span> Merc 240D          24.4  3.19    19.9 -<span style='color: #BB0000;'>4.52</span>  
-#&gt; <span style='color: #BCBCBC;'> 9</span> Merc 230           22.8  3.15    20.1 -<span style='color: #BB0000;'>2.72</span>  
-#&gt; <span style='color: #BCBCBC;'>10</span> Merc 280           19.2  3.44    18.7 -<span style='color: #BB0000;'>0.545</span> 
-#&gt; <span style='color: #949494;'># … with 22 more rows</span></div><div class='input'><span class='fu'><a href='https://generics.r-lib.org/reference/glance.html'>glance</a></span><span class='op'>(</span><span class='va'>m</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 1 × 5</span>
+  <span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>m</span><span class='op'>)</span>
+  <span class='fu'><a href='https://generics.r-lib.org/reference/augment.html'>augment</a></span><span class='op'>(</span><span class='va'>m</span><span class='op'>)</span>
+  <span class='fu'><a href='https://generics.r-lib.org/reference/glance.html'>glance</a></span><span class='op'>(</span><span class='va'>m</span><span class='op'>)</span>
+<span class='op'>}</span>
+</div><div class='output co'>#&gt; <span class='message'>Loading required package: fit.models</span></div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 1 × 5</span>
 #&gt;   r.squared deviance sigma df.residual  nobs
 #&gt;       <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>    <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>       <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span>
-#&gt; <span style='color: #BCBCBC;'>1</span>     0.567     136.  2.95          30    32</div></pre>
+#&gt; <span style='color: #BCBCBC;'>1</span>     0.567     136.  2.95          30    32</div><div class='input'>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

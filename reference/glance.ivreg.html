@@ -109,7 +109,7 @@ of the appropriate type." />
         <a class="navbar-brand" href="../index.html">broom</a>
         <div class="info hidden-xs hidden-sm">
           <span class="partof">part of <a href="https://tidymodels.org">tidymodels</a></span>
-          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.7.9.9000</span>
+          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.7.10</span>
         </div>
       </div>
     </div>
@@ -253,6 +253,8 @@ endogenous regressors.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
+<span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/ns-load.html'>requireNamespace</a></span><span class='op'>(</span><span class='st'>"AER"</span>, quietly <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
+
 <span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'>AER</span><span class='op'>)</span>
 
 <span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='st'>"CigarettesSW"</span>, package <span class='op'>=</span> <span class='st'>"AER"</span><span class='op'>)</span>
@@ -264,89 +266,23 @@ endogenous regressors.</p>
 <span class='op'>)</span>
 
 <span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='va'>ivr</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; 
-#&gt; Call:
-#&gt; ivreg(formula = log(packs) ~ income | population, data = CigarettesSW, 
-#&gt;     subset = year == "1995")
-#&gt; 
-#&gt; Residuals:
-#&gt;      Min       1Q   Median       3Q      Max 
-#&gt; -0.69305 -0.12941 -0.02257  0.11723  0.58184 
-#&gt; 
-#&gt; Coefficients:
-#&gt;               Estimate Std. Error t value Pr(&gt;|t|)    
-#&gt; (Intercept)  4.612e+00  4.454e-02 103.549   &lt;2e-16 ***
-#&gt; income      -5.705e-10  2.334e-10  -2.445   0.0184 *  
-#&gt; ---
-#&gt; Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
-#&gt; 
-#&gt; Residual standard error: 0.2293 on 46 degrees of freedom
-#&gt; Multiple R-Squared: 0.1308,	Adjusted R-squared: 0.1119 
-#&gt; Wald test: 5.976 on 1 and 46 DF,  p-value: 0.01839 
-#&gt; </div><div class='input'>
+
 <span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>ivr</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 2 × 5</span>
-#&gt;   term         estimate std.error statistic  p.value
-#&gt;   <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>           <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>    <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>
-#&gt; <span style='color: #BCBCBC;'>1</span> (Intercept)  4.61<span style='color: #949494;'>e</span>+ 0  4.45<span style='color: #949494;'>e</span><span style='color: #BB0000;'>- 2</span>    104.   3.74<span style='color: #949494;'>e</span><span style='color: #BB0000;'>-56</span>
-#&gt; <span style='color: #BCBCBC;'>2</span> income      -<span style='color: #BB0000;'>5.71</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>-10</span>  2.33<span style='color: #949494;'>e</span><span style='color: #BB0000;'>-10</span>     -<span style='color: #BB0000;'>2.44</span> 1.84<span style='color: #949494;'>e</span><span style='color: #BB0000;'>- 2</span></div><div class='input'><span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>ivr</span>, conf.int <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 2 × 7</span>
-#&gt;   term         estimate std.error statistic  p.value conf.low conf.high
-#&gt;   <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>           <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>    <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>    <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>
-#&gt; <span style='color: #BCBCBC;'>1</span> (Intercept)  4.61<span style='color: #949494;'>e</span>+ 0  4.45<span style='color: #949494;'>e</span><span style='color: #BB0000;'>- 2</span>    104.   3.74<span style='color: #949494;'>e</span><span style='color: #BB0000;'>-56</span>  4.52<span style='color: #949494;'>e</span>+0  4.70<span style='color: #949494;'>e</span>+ 0
-#&gt; <span style='color: #BCBCBC;'>2</span> income      -<span style='color: #BB0000;'>5.71</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>-10</span>  2.33<span style='color: #949494;'>e</span><span style='color: #BB0000;'>-10</span>     -<span style='color: #BB0000;'>2.44</span> 1.84<span style='color: #949494;'>e</span><span style='color: #BB0000;'>- 2</span> -<span style='color: #BB0000;'>1.03</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>-9</span> -<span style='color: #BB0000;'>1.13</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>-10</span></div><div class='input'><span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>ivr</span>, conf.int <span class='op'>=</span> <span class='cn'>TRUE</span>, instruments <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 1 × 5</span>
-#&gt;   term   num.df den.df statistic  p.value
-#&gt;   <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>  <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>    <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>
-#&gt; <span style='color: #BCBCBC;'>1</span> income      1     46     <span style='text-decoration: underline;'>3</span>329. 1.46<span style='color: #949494;'>e</span><span style='color: #BB0000;'>-44</span></div><div class='input'>
+<span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>ivr</span>, conf.int <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
+<span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>ivr</span>, conf.int <span class='op'>=</span> <span class='cn'>TRUE</span>, instruments <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
+
 <span class='fu'><a href='https://generics.r-lib.org/reference/augment.html'>augment</a></span><span class='op'>(</span><span class='va'>ivr</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 48 × 6</span>
-#&gt;    .rownames `log(packs)`    income population .fitted  .resid
-#&gt;    <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>            <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>      <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>
-#&gt; <span style='color: #BCBCBC;'> 1</span> 49                4.62  83<span style='text-decoration: underline;'>903</span>280    4<span style='text-decoration: underline;'>262</span>731    4.56  0.052<span style='text-decoration: underline;'>2</span>
-#&gt; <span style='color: #BCBCBC;'> 2</span> 50                4.71  45<span style='text-decoration: underline;'>995</span>496    2<span style='text-decoration: underline;'>480</span>121    4.59  0.124 
-#&gt; <span style='color: #BCBCBC;'> 3</span> 51                4.28  88<span style='text-decoration: underline;'>870</span>496    4<span style='text-decoration: underline;'>306</span>908    4.56 -<span style='color: #BB0000;'>0.285</span> 
-#&gt; <span style='color: #BCBCBC;'> 4</span> 52                4.04 771<span style='text-decoration: underline;'>470</span>144   31<span style='text-decoration: underline;'>493</span>524    4.17 -<span style='color: #BB0000;'>0.131</span> 
-#&gt; <span style='color: #BCBCBC;'> 5</span> 53                4.41  92<span style='text-decoration: underline;'>946</span>544    3<span style='text-decoration: underline;'>738</span>061    4.56 -<span style='color: #BB0000;'>0.145</span> 
-#&gt; <span style='color: #BCBCBC;'> 6</span> 54                4.38 104<span style='text-decoration: underline;'>315</span>120    3<span style='text-decoration: underline;'>265</span>293    4.55 -<span style='color: #BB0000;'>0.177</span> 
-#&gt; <span style='color: #BCBCBC;'> 7</span> 55                4.82  18<span style='text-decoration: underline;'>237</span>436     <span style='text-decoration: underline;'>718</span>265    4.60  0.223 
-#&gt; <span style='color: #BCBCBC;'> 8</span> 56                4.53 333<span style='text-decoration: underline;'>525</span>344   14<span style='text-decoration: underline;'>185</span>403    4.42  0.112 
-#&gt; <span style='color: #BCBCBC;'> 9</span> 57                4.58 159<span style='text-decoration: underline;'>800</span>448    7<span style='text-decoration: underline;'>188</span>538    4.52  0.059<span style='text-decoration: underline;'>1</span>
-#&gt; <span style='color: #BCBCBC;'>10</span> 58                4.53  60<span style='text-decoration: underline;'>170</span>928    2<span style='text-decoration: underline;'>840</span>860    4.58 -<span style='color: #BB0000;'>0.051</span><span style='color: #BB0000; text-decoration: underline;'>2</span>
-#&gt; <span style='color: #949494;'># … with 38 more rows</span></div><div class='input'><span class='fu'><a href='https://generics.r-lib.org/reference/augment.html'>augment</a></span><span class='op'>(</span><span class='va'>ivr</span>, data <span class='op'>=</span> <span class='va'>CigarettesSW</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 96 × 11</span>
-#&gt;    state year    cpi population packs    income   tax price  taxs .fitted  .resid
-#&gt;    <span style='color: #949494; font-style: italic;'>&lt;fct&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;fct&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>      <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>
-#&gt; <span style='color: #BCBCBC;'> 1</span> AL    1985   1.08    3<span style='text-decoration: underline;'>973</span>000  116.  46<span style='text-decoration: underline;'>014</span>968  32.5 102.   33.3    4.56  0.052<span style='text-decoration: underline;'>2</span>
-#&gt; <span style='color: #BCBCBC;'> 2</span> AR    1985   1.08    2<span style='text-decoration: underline;'>327</span>000  129.  26<span style='text-decoration: underline;'>210</span>736  37   101.   37      4.59  0.124 
-#&gt; <span style='color: #BCBCBC;'> 3</span> AZ    1985   1.08    3<span style='text-decoration: underline;'>184</span>000  105.  43<span style='text-decoration: underline;'>956</span>936  31   109.   36.2    4.56 -<span style='color: #BB0000;'>0.285</span> 
-#&gt; <span style='color: #BCBCBC;'> 4</span> CA    1985   1.08   26<span style='text-decoration: underline;'>444</span>000  100. 447<span style='text-decoration: underline;'>102</span>816  26   108.   32.1    4.17 -<span style='color: #BB0000;'>0.131</span> 
-#&gt; <span style='color: #BCBCBC;'> 5</span> CO    1985   1.08    3<span style='text-decoration: underline;'>209</span>000  113.  49<span style='text-decoration: underline;'>466</span>672  31    94.3  31      4.56 -<span style='color: #BB0000;'>0.145</span> 
-#&gt; <span style='color: #BCBCBC;'> 6</span> CT    1985   1.08    3<span style='text-decoration: underline;'>201</span>000  109.  60<span style='text-decoration: underline;'>063</span>368  42   128.   51.5    4.55 -<span style='color: #BB0000;'>0.177</span> 
-#&gt; <span style='color: #BCBCBC;'> 7</span> DE    1985   1.08     <span style='text-decoration: underline;'>618</span>000  144.   9<span style='text-decoration: underline;'>927</span>301  30   102.   30      4.60  0.223 
-#&gt; <span style='color: #BCBCBC;'> 8</span> FL    1985   1.08   11<span style='text-decoration: underline;'>352</span>000  122. 166<span style='text-decoration: underline;'>919</span>248  37   115.   42.5    4.42  0.112 
-#&gt; <span style='color: #BCBCBC;'> 9</span> GA    1985   1.08    5<span style='text-decoration: underline;'>963</span>000  127.  78<span style='text-decoration: underline;'>364</span>336  28    97.0  28.8    4.52  0.059<span style='text-decoration: underline;'>1</span>
-#&gt; <span style='color: #BCBCBC;'>10</span> IA    1985   1.08    2<span style='text-decoration: underline;'>830</span>000  114.  37<span style='text-decoration: underline;'>902</span>896  34   102.   37.9    4.58 -<span style='color: #BB0000;'>0.051</span><span style='color: #BB0000; text-decoration: underline;'>2</span>
-#&gt; <span style='color: #949494;'># … with 86 more rows</span></div><div class='input'><span class='fu'><a href='https://generics.r-lib.org/reference/augment.html'>augment</a></span><span class='op'>(</span><span class='va'>ivr</span>, newdata <span class='op'>=</span> <span class='va'>CigarettesSW</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 96 × 10</span>
-#&gt;    state year    cpi population packs    income   tax price  taxs .fitted
-#&gt;    <span style='color: #949494; font-style: italic;'>&lt;fct&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;fct&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>      <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>
-#&gt; <span style='color: #BCBCBC;'> 1</span> AL    1985   1.08    3<span style='text-decoration: underline;'>973</span>000  116.  46<span style='text-decoration: underline;'>014</span>968  32.5 102.   33.3    4.59
-#&gt; <span style='color: #BCBCBC;'> 2</span> AR    1985   1.08    2<span style='text-decoration: underline;'>327</span>000  129.  26<span style='text-decoration: underline;'>210</span>736  37   101.   37      4.60
-#&gt; <span style='color: #BCBCBC;'> 3</span> AZ    1985   1.08    3<span style='text-decoration: underline;'>184</span>000  105.  43<span style='text-decoration: underline;'>956</span>936  31   109.   36.2    4.59
-#&gt; <span style='color: #BCBCBC;'> 4</span> CA    1985   1.08   26<span style='text-decoration: underline;'>444</span>000  100. 447<span style='text-decoration: underline;'>102</span>816  26   108.   32.1    4.36
-#&gt; <span style='color: #BCBCBC;'> 5</span> CO    1985   1.08    3<span style='text-decoration: underline;'>209</span>000  113.  49<span style='text-decoration: underline;'>466</span>672  31    94.3  31      4.58
-#&gt; <span style='color: #BCBCBC;'> 6</span> CT    1985   1.08    3<span style='text-decoration: underline;'>201</span>000  109.  60<span style='text-decoration: underline;'>063</span>368  42   128.   51.5    4.58
-#&gt; <span style='color: #BCBCBC;'> 7</span> DE    1985   1.08     <span style='text-decoration: underline;'>618</span>000  144.   9<span style='text-decoration: underline;'>927</span>301  30   102.   30      4.61
-#&gt; <span style='color: #BCBCBC;'> 8</span> FL    1985   1.08   11<span style='text-decoration: underline;'>352</span>000  122. 166<span style='text-decoration: underline;'>919</span>248  37   115.   42.5    4.52
-#&gt; <span style='color: #BCBCBC;'> 9</span> GA    1985   1.08    5<span style='text-decoration: underline;'>963</span>000  127.  78<span style='text-decoration: underline;'>364</span>336  28    97.0  28.8    4.57
-#&gt; <span style='color: #BCBCBC;'>10</span> IA    1985   1.08    2<span style='text-decoration: underline;'>830</span>000  114.  37<span style='text-decoration: underline;'>902</span>896  34   102.   37.9    4.59
-#&gt; <span style='color: #949494;'># … with 86 more rows</span></div><div class='input'>
+<span class='fu'><a href='https://generics.r-lib.org/reference/augment.html'>augment</a></span><span class='op'>(</span><span class='va'>ivr</span>, data <span class='op'>=</span> <span class='va'>CigarettesSW</span><span class='op'>)</span>
+<span class='fu'><a href='https://generics.r-lib.org/reference/augment.html'>augment</a></span><span class='op'>(</span><span class='va'>ivr</span>, newdata <span class='op'>=</span> <span class='va'>CigarettesSW</span><span class='op'>)</span>
+
 <span class='fu'><a href='https://generics.r-lib.org/reference/glance.html'>glance</a></span><span class='op'>(</span><span class='va'>ivr</span><span class='op'>)</span>
+
+<span class='op'>}</span>
 </div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 1 × 8</span>
 #&gt;   r.squared adj.r.squared sigma statistic p.value    df df.residual  nobs
 #&gt;       <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>         <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span>       <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span>
-#&gt; <span style='color: #BCBCBC;'>1</span>     0.131         0.112 0.229      5.98  0.018<span style='text-decoration: underline;'>4</span>     2          46    48</div></pre>
+#&gt; <span style='color: #BCBCBC;'>1</span>     0.131         0.112 0.229      5.98  0.018<span style='text-decoration: underline;'>4</span>     2          46    48</div><div class='input'>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

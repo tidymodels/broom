@@ -100,7 +100,7 @@ specify which components to return." />
         <a class="navbar-brand" href="../index.html">broom</a>
         <div class="info hidden-xs hidden-sm">
           <span class="partof">part of <a href="https://tidymodels.org">tidymodels</a></span>
-          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.7.9.9000</span>
+          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.7.10</span>
         </div>
       </div>
     </div>
@@ -236,30 +236,23 @@ confidence intervals for <code>varest</code> objects. Setting the <code>tidy</co
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='http://www.pfaffikus.de'>vars</a></span><span class='op'>)</span>
+    <pre class="examples"><div class='input'>
+<span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/ns-load.html'>requireNamespace</a></span><span class='op'>(</span><span class='st'>"vars"</span>, quietly <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
+
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://www.pfaffikus.de'>vars</a></span><span class='op'>)</span>
 <span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='st'>"Canada"</span>, package <span class='op'>=</span> <span class='st'>"vars"</span><span class='op'>)</span>
 
 <span class='va'>mod</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/vars/man/VAR.html'>VAR</a></span><span class='op'>(</span><span class='va'>Canada</span>, p <span class='op'>=</span> <span class='fl'>1</span>, type <span class='op'>=</span> <span class='st'>"both"</span><span class='op'>)</span>
 
 <span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>mod</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 24 × 6</span>
-#&gt;    group term     estimate std.error statistic  p.value
-#&gt;    <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>       <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>    <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>
-#&gt; <span style='color: #BCBCBC;'> 1</span> e     e.l1       1.24      0.086<span style='text-decoration: underline;'>3</span>     14.4  1.82<span style='color: #949494;'>e</span><span style='color: #BB0000;'>-23</span>
-#&gt; <span style='color: #BCBCBC;'> 2</span> e     prod.l1    0.195     0.036<span style='text-decoration: underline;'>1</span>      5.39 7.49<span style='color: #949494;'>e</span><span style='color: #BB0000;'>- 7</span>
-#&gt; <span style='color: #BCBCBC;'> 3</span> e     rw.l1     -<span style='color: #BB0000;'>0.067</span><span style='color: #BB0000; text-decoration: underline;'>8</span>    0.028<span style='text-decoration: underline;'>3</span>     -<span style='color: #BB0000;'>2.40</span> 1.90<span style='color: #949494;'>e</span><span style='color: #BB0000;'>- 2</span>
-#&gt; <span style='color: #BCBCBC;'> 4</span> e     U.l1       0.623     0.169       3.68 4.30<span style='color: #949494;'>e</span><span style='color: #BB0000;'>- 4</span>
-#&gt; <span style='color: #BCBCBC;'> 5</span> e     const   -<span style='color: #BB0000;'>279.</span>       75.2        -<span style='color: #BB0000;'>3.71</span> 3.92<span style='color: #949494;'>e</span><span style='color: #BB0000;'>- 4</span>
-#&gt; <span style='color: #BCBCBC;'> 6</span> e     trend     -<span style='color: #BB0000;'>0.040</span><span style='color: #BB0000; text-decoration: underline;'>7</span>    0.019<span style='text-decoration: underline;'>7</span>     -<span style='color: #BB0000;'>2.06</span> 4.24<span style='color: #949494;'>e</span><span style='color: #BB0000;'>- 2</span>
-#&gt; <span style='color: #BCBCBC;'> 7</span> prod  e.l1       1.24      0.086<span style='text-decoration: underline;'>3</span>     14.4  1.82<span style='color: #949494;'>e</span><span style='color: #BB0000;'>-23</span>
-#&gt; <span style='color: #BCBCBC;'> 8</span> prod  prod.l1    0.195     0.036<span style='text-decoration: underline;'>1</span>      5.39 7.49<span style='color: #949494;'>e</span><span style='color: #BB0000;'>- 7</span>
-#&gt; <span style='color: #BCBCBC;'> 9</span> prod  rw.l1     -<span style='color: #BB0000;'>0.067</span><span style='color: #BB0000; text-decoration: underline;'>8</span>    0.028<span style='text-decoration: underline;'>3</span>     -<span style='color: #BB0000;'>2.40</span> 1.90<span style='color: #949494;'>e</span><span style='color: #BB0000;'>- 2</span>
-#&gt; <span style='color: #BCBCBC;'>10</span> prod  U.l1       0.623     0.169       3.68 4.30<span style='color: #949494;'>e</span><span style='color: #BB0000;'>- 4</span>
-#&gt; <span style='color: #949494;'># … with 14 more rows</span></div><div class='input'><span class='fu'><a href='https://generics.r-lib.org/reference/glance.html'>glance</a></span><span class='op'>(</span><span class='va'>mod</span><span class='op'>)</span>
+<span class='fu'><a href='https://generics.r-lib.org/reference/glance.html'>glance</a></span><span class='op'>(</span><span class='va'>mod</span><span class='op'>)</span>
+
+<span class='op'>}</span>
 </div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 1 × 4</span>
 #&gt;   lag.order logLik  nobs     n
 #&gt;       <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>  <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>
-#&gt; <span style='color: #BCBCBC;'>1</span>         1  -<span style='color: #BB0000;'>208.</span>    83    84</div></pre>
+#&gt; <span style='color: #BCBCBC;'>1</span>         1  -<span style='color: #BB0000;'>208.</span>    83    84</div><div class='input'>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

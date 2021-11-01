@@ -100,7 +100,7 @@ specify which components to return." />
         <a class="navbar-brand" href="../index.html">broom</a>
         <div class="info hidden-xs hidden-sm">
           <span class="partof">part of <a href="https://tidymodels.org">tidymodels</a></span>
-          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.7.9.9000</span>
+          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.7.10</span>
         </div>
       </div>
     </div>
@@ -230,21 +230,16 @@ the <code>data</code> argument.</p></td>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
+<span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/ns-load.html'>requireNamespace</a></span><span class='op'>(</span><span class='st'>"speedglm"</span>, quietly <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
+
 <span class='va'>mod</span> <span class='op'>&lt;-</span> <span class='fu'>speedglm</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/speedglm/man/speedlm.html'>speedlm</a></span><span class='op'>(</span><span class='va'>mpg</span> <span class='op'>~</span> <span class='va'>wt</span> <span class='op'>+</span> <span class='va'>qsec</span>, data <span class='op'>=</span> <span class='va'>mtcars</span>, fitted <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
 
 <span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>mod</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='message'>Joining, by = c("term", "estimate")</span></div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 3 × 5</span>
-#&gt;   term        estimate std.error statistic  p.value
-#&gt;   <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>          <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>    <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>
-#&gt; <span style='color: #BCBCBC;'>1</span> (Intercept)   19.7       5.25       3.76 7.65<span style='color: #949494;'>e</span><span style='color: #BB0000;'>- 4</span>
-#&gt; <span style='color: #BCBCBC;'>2</span> wt            -<span style='color: #BB0000;'>5.05</span>      0.484    -<span style='color: #BB0000;'>10.4</span>  2.52<span style='color: #949494;'>e</span><span style='color: #BB0000;'>-11</span>
-#&gt; <span style='color: #BCBCBC;'>3</span> qsec           0.929     0.265      3.51 1.50<span style='color: #949494;'>e</span><span style='color: #BB0000;'>- 3</span></div><div class='input'><span class='fu'><a href='https://generics.r-lib.org/reference/glance.html'>glance</a></span><span class='op'>(</span><span class='va'>mod</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 1 × 11</span>
-#&gt;   r.squared adj.r.squared statistic  p.value    df logLik   AIC   BIC deviance
-#&gt;       <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>         <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>    <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span>  <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>    <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>
-#&gt; <span style='color: #BCBCBC;'>1</span>     0.826         0.814      69.0 9.39<span style='color: #949494;'>e</span><span style='color: #BB0000;'>-12</span>     3  -<span style='color: #BB0000;'>74.4</span>  157.  163.     195.
-#&gt; <span style='color: #949494;'># … with 2 more variables: df.residual &lt;int&gt;, nobs &lt;int&gt;</span></div><div class='input'><span class='fu'><a href='https://generics.r-lib.org/reference/augment.html'>augment</a></span><span class='op'>(</span><span class='va'>mod</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 32 × 6</span>
+<span class='fu'><a href='https://generics.r-lib.org/reference/glance.html'>glance</a></span><span class='op'>(</span><span class='va'>mod</span><span class='op'>)</span>
+<span class='fu'><a href='https://generics.r-lib.org/reference/augment.html'>augment</a></span><span class='op'>(</span><span class='va'>mod</span><span class='op'>)</span>
+
+<span class='op'>}</span>
+</div><div class='output co'>#&gt; <span class='message'>Joining, by = c("term", "estimate")</span></div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 32 × 6</span>
 #&gt;    .rownames           mpg    wt  qsec .fitted  .resid
 #&gt;    <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>             <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>
 #&gt; <span style='color: #BCBCBC;'> 1</span> Mazda RX4          21    2.62  16.5    21.8 -<span style='color: #BB0000;'>0.815</span> 
@@ -257,7 +252,8 @@ the <code>data</code> argument.</p></td>
 #&gt; <span style='color: #BCBCBC;'> 8</span> Merc 240D          24.4  3.19  20      22.2  2.17  
 #&gt; <span style='color: #BCBCBC;'> 9</span> Merc 230           22.8  3.15  22.9    25.1 -<span style='color: #BB0000;'>2.32</span>  
 #&gt; <span style='color: #BCBCBC;'>10</span> Merc 280           19.2  3.44  18.3    19.4 -<span style='color: #BB0000;'>0.185</span> 
-#&gt; <span style='color: #949494;'># … with 22 more rows</span></div></pre>
+#&gt; <span style='color: #949494;'># … with 22 more rows</span></div><div class='input'>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

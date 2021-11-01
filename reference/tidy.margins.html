@@ -100,7 +100,7 @@ specify which components to return." />
         <a class="navbar-brand" href="../index.html">broom</a>
         <div class="info hidden-xs hidden-sm">
           <span class="partof">part of <a href="https://tidymodels.org">tidymodels</a></span>
-          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.7.9.9000</span>
+          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.7.10</span>
         </div>
       </div>
     </div>
@@ -232,7 +232,10 @@ users can simply run the underlying model to obtain the same information.</p>
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://github.com/leeper/margins'>margins</a></span><span class='op'>)</span>
+    <pre class="examples"><div class='input'>
+<span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/ns-load.html'>requireNamespace</a></span><span class='op'>(</span><span class='st'>"margins"</span>, quietly <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
+
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://github.com/leeper/margins'>margins</a></span><span class='op'>)</span>
 
 <span class='co'>## Example 1: Logit model ##</span>
 
@@ -240,102 +243,42 @@ users can simply run the underlying model to obtain the same information.</p>
 
 <span class='co'># Get tidied "naive" model coefficients</span>
 <span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>mod_log</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 4 × 5</span>
-#&gt;   term        estimate std.error statistic p.value
-#&gt;   <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>          <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>
-#&gt; <span style='color: #BCBCBC;'>1</span> (Intercept)  19.7       8.12       2.43   0.015<span style='text-decoration: underline;'>2</span>
-#&gt; <span style='color: #BCBCBC;'>2</span> cyl           0.488     1.07       0.455  0.649 
-#&gt; <span style='color: #BCBCBC;'>3</span> hp            0.032<span style='text-decoration: underline;'>6</span>    0.018<span style='text-decoration: underline;'>9</span>     1.73   0.084<span style='text-decoration: underline;'>0</span>
-#&gt; <span style='color: #BCBCBC;'>4</span> wt           -<span style='color: #BB0000;'>9.15</span>      4.15      -<span style='color: #BB0000;'>2.20</span>   0.027<span style='text-decoration: underline;'>6</span></div><div class='input'>
+
 <span class='co'># Convert to marginal effects with margins::margins()</span>
 <span class='va'>marg_log</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/margins/man/margins.html'>margins</a></span><span class='op'>(</span><span class='va'>mod_log</span><span class='op'>)</span>
 
 <span class='co'># Get tidied marginal effects</span>
 <span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>marg_log</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 3 × 5</span>
-#&gt;   term  estimate std.error statistic  p.value
-#&gt;   <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>    <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>    <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>
-#&gt; <span style='color: #BCBCBC;'>1</span> cyl    0.021<span style='text-decoration: underline;'>5</span>   0.047<span style='text-decoration: underline;'>0</span>       0.457 0.648   
-#&gt; <span style='color: #BCBCBC;'>2</span> hp     0.001<span style='text-decoration: underline;'>43</span>  0.000<span style='text-decoration: underline;'>618</span>     2.32  0.020<span style='text-decoration: underline;'>4</span>  
-#&gt; <span style='color: #BCBCBC;'>3</span> wt    -<span style='color: #BB0000;'>0.403</span>    0.115       -<span style='color: #BB0000;'>3.49</span>  0.000<span style='text-decoration: underline;'>487</span></div><div class='input'><span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>marg_log</span>, conf.int <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 3 × 7</span>
-#&gt;   term  estimate std.error statistic  p.value  conf.low conf.high
-#&gt;   <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>    <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>    <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>
-#&gt; <span style='color: #BCBCBC;'>1</span> cyl    0.021<span style='text-decoration: underline;'>5</span>   0.047<span style='text-decoration: underline;'>0</span>       0.457 0.648    -<span style='color: #BB0000;'>0.070</span><span style='color: #BB0000; text-decoration: underline;'>6</span>     0.114  
-#&gt; <span style='color: #BCBCBC;'>2</span> hp     0.001<span style='text-decoration: underline;'>43</span>  0.000<span style='text-decoration: underline;'>618</span>     2.32  0.020<span style='text-decoration: underline;'>4</span>    0.000<span style='text-decoration: underline;'>222</span>   0.002<span style='text-decoration: underline;'>65</span>
-#&gt; <span style='color: #BCBCBC;'>3</span> wt    -<span style='color: #BB0000;'>0.403</span>    0.115       -<span style='color: #BB0000;'>3.49</span>  0.000<span style='text-decoration: underline;'>487</span> -<span style='color: #BB0000;'>0.629</span>     -<span style='color: #BB0000;'>0.176</span>  </div><div class='input'><span class='fu'><a href='https://generics.r-lib.org/reference/glance.html'>glance</a></span><span class='op'>(</span><span class='va'>marg_log</span><span class='op'>)</span> <span class='co'>## Requires running the underlying model again. Quick for this example.</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 1 × 8</span>
-#&gt;   null.deviance df.null logLik   AIC   BIC deviance df.residual  nobs
-#&gt;           <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span>  <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>    <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>       <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span>
-#&gt; <span style='color: #BCBCBC;'>1</span>          43.2      31  -<span style='color: #BB0000;'>4.92</span>  17.8  23.7     9.84          28    32</div><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='fu'><a href='https://generics.r-lib.org/reference/augment.html'>augment</a></span><span class='op'>(</span><span class='va'>marg_log</span><span class='op'>)</span> <span class='co'>## Not supported.</span>
+<span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>marg_log</span>, conf.int <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
+<span class='fu'><a href='https://generics.r-lib.org/reference/glance.html'>glance</a></span><span class='op'>(</span><span class='va'>marg_log</span><span class='op'>)</span> <span class='co'>## Requires running the underlying model again. Quick for this example.</span>
+<span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='fu'><a href='https://generics.r-lib.org/reference/augment.html'>augment</a></span><span class='op'>(</span><span class='va'>marg_log</span><span class='op'>)</span> <span class='co'>## Not supported.</span>
 <span class='fu'><a href='https://generics.r-lib.org/reference/augment.html'>augment</a></span><span class='op'>(</span><span class='va'>mod_log</span><span class='op'>)</span> <span class='co'>## But can get the same info by running on the underlying model.</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 32 × 11</span>
-#&gt;    .rownames       am   cyl    hp    wt .fitted  .resid .std.resid   .hat .sigma
-#&gt;    <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>        <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>      <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>  <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>  <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>
-#&gt; <span style='color: #BCBCBC;'> 1</span> Mazda RX4        1     6   110  2.62  2.24    0.449      0.529  0.278   0.595
-#&gt; <span style='color: #BCBCBC;'> 2</span> Mazda RX4 W…     1     6   110  2.88 -<span style='color: #BB0000;'>0.091</span><span style='color: #BB0000; text-decoration: underline;'>2</span>  1.22       1.51   0.352   0.529
-#&gt; <span style='color: #BCBCBC;'> 3</span> Datsun 710       1     4    93  2.32  3.46    0.249      0.262  0.096<span style='text-decoration: underline;'>0</span>  0.602
-#&gt; <span style='color: #BCBCBC;'> 4</span> Hornet 4 Dr…     0     6   110  3.22 -<span style='color: #BB0000;'>3.20</span>   -<span style='color: #BB0000;'>0.282</span>     -<span style='color: #BB0000;'>0.297</span>  0.094<span style='text-decoration: underline;'>5</span>  0.601
-#&gt; <span style='color: #BCBCBC;'> 5</span> Hornet Spor…     0     8   175  3.44 -<span style='color: #BB0000;'>2.17</span>   -<span style='color: #BB0000;'>0.466</span>     -<span style='color: #BB0000;'>0.527</span>  0.220   0.595
-#&gt; <span style='color: #BCBCBC;'> 6</span> Valiant          0     6   105  3.46 -<span style='color: #BB0000;'>5.61</span>   -<span style='color: #BB0000;'>0.085</span><span style='color: #BB0000; text-decoration: underline;'>6</span>    -<span style='color: #BB0000;'>0.086</span><span style='color: #BB0000; text-decoration: underline;'>6</span> 0.022<span style='text-decoration: underline;'>1</span>  0.604
-#&gt; <span style='color: #BCBCBC;'> 7</span> Duster 360       0     8   245  3.57 -<span style='color: #BB0000;'>1.07</span>   -<span style='color: #BB0000;'>0.766</span>     -<span style='color: #BB0000;'>0.941</span>  0.337   0.576
-#&gt; <span style='color: #BCBCBC;'> 8</span> Merc 240D        0     4    62  3.19 -<span style='color: #BB0000;'>5.51</span>   -<span style='color: #BB0000;'>0.089</span><span style='color: #BB0000; text-decoration: underline;'>7</span>    -<span style='color: #BB0000;'>0.091</span><span style='color: #BB0000; text-decoration: underline;'>5</span> 0.037<span style='text-decoration: underline;'>6</span>  0.603
-#&gt; <span style='color: #BCBCBC;'> 9</span> Merc 230         0     4    95  3.15 -<span style='color: #BB0000;'>4.07</span>   -<span style='color: #BB0000;'>0.184</span>     -<span style='color: #BB0000;'>0.196</span>  0.122   0.603
-#&gt; <span style='color: #BCBCBC;'>10</span> Merc 280         0     6   123  3.44 -<span style='color: #BB0000;'>4.84</span>   -<span style='color: #BB0000;'>0.126</span>     -<span style='color: #BB0000;'>0.128</span>  0.037<span style='text-decoration: underline;'>5</span>  0.603
-#&gt; <span style='color: #949494;'># … with 22 more rows, and 1 more variable: .cooksd &lt;dbl&gt;</span></div><div class='input'>
+
 <span class='co'>## Example 2: Threeway interaction terms ##</span>
 
 <span class='va'>mod_ie</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>mpg</span> <span class='op'>~</span> <span class='va'>wt</span> <span class='op'>*</span> <span class='va'>cyl</span> <span class='op'>*</span> <span class='va'>disp</span>, data <span class='op'>=</span> <span class='va'>mtcars</span><span class='op'>)</span>
 
 <span class='co'># Get tidied "naive" model coefficients</span>
 <span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>mod_ie</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 8 × 5</span>
-#&gt;   term        estimate std.error statistic  p.value
-#&gt;   <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>          <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>    <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>
-#&gt; <span style='color: #BCBCBC;'>1</span> (Intercept) 108.      23.3          4.62 0.000<span style='text-decoration: underline;'>109</span>
-#&gt; <span style='color: #BCBCBC;'>2</span> wt          -<span style='color: #BB0000;'>24.8</span>      8.47        -<span style='color: #BB0000;'>2.92</span> 0.007<span style='text-decoration: underline;'>44</span> 
-#&gt; <span style='color: #BCBCBC;'>3</span> cyl         -<span style='color: #BB0000;'>10.8</span>      4.34        -<span style='color: #BB0000;'>2.49</span> 0.020<span style='text-decoration: underline;'>1</span>  
-#&gt; <span style='color: #BCBCBC;'>4</span> disp         -<span style='color: #BB0000;'>0.593</span>    0.213       -<span style='color: #BB0000;'>2.79</span> 0.010<span style='text-decoration: underline;'>2</span>  
-#&gt; <span style='color: #BCBCBC;'>5</span> wt:cyl        2.91     1.42         2.05 0.051<span style='text-decoration: underline;'>4</span>  
-#&gt; <span style='color: #BCBCBC;'>6</span> wt:disp       0.184    0.068<span style='text-decoration: underline;'>5</span>       2.69 0.012<span style='text-decoration: underline;'>7</span>  
-#&gt; <span style='color: #BCBCBC;'>7</span> cyl:disp      0.075<span style='text-decoration: underline;'>2</span>   0.026<span style='text-decoration: underline;'>8</span>       2.81 0.009<span style='text-decoration: underline;'>79</span> 
-#&gt; <span style='color: #BCBCBC;'>8</span> wt:cyl:disp  -<span style='color: #BB0000;'>0.023</span><span style='color: #BB0000; text-decoration: underline;'>3</span>   0.008<span style='text-decoration: underline;'>61</span>     -<span style='color: #BB0000;'>2.71</span> 0.012<span style='text-decoration: underline;'>3</span>  </div><div class='input'>
+
 <span class='co'># Convert to marginal effects with margins::margins()</span>
 <span class='va'>marg_ie0</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/margins/man/margins.html'>margins</a></span><span class='op'>(</span><span class='va'>mod_ie</span><span class='op'>)</span>
 <span class='co'># Get tidied marginal effects </span>
 <span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>marg_ie0</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 3 × 5</span>
-#&gt;   term  estimate std.error statistic p.value
-#&gt;   <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>    <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>
-#&gt; <span style='color: #BCBCBC;'>1</span> cyl    -<span style='color: #BB0000;'>3.85</span>      1.46       -<span style='color: #BB0000;'>2.65</span> 0.008<span style='text-decoration: underline;'>12</span>
-#&gt; <span style='color: #BCBCBC;'>2</span> disp   -<span style='color: #BB0000;'>0.029</span><span style='color: #BB0000; text-decoration: underline;'>5</span>    0.017<span style='text-decoration: underline;'>4</span>     -<span style='color: #BB0000;'>1.70</span> 0.090<span style='text-decoration: underline;'>0</span> 
-#&gt; <span style='color: #BCBCBC;'>3</span> wt     -<span style='color: #BB0000;'>2.01</span>      1.17       -<span style='color: #BB0000;'>1.72</span> 0.086<span style='text-decoration: underline;'>0</span> </div><div class='input'><span class='fu'><a href='https://generics.r-lib.org/reference/glance.html'>glance</a></span><span class='op'>(</span><span class='va'>marg_ie0</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 1 × 12</span>
-#&gt;   r.squared adj.r.squared sigma statistic  p.value    df logLik   AIC   BIC
-#&gt;       <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>         <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>    <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>  <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>
-#&gt; <span style='color: #BCBCBC;'>1</span>     0.896         0.865  2.21      29.4 2.75<span style='color: #949494;'>e</span><span style='color: #BB0000;'>-10</span>     7  -<span style='color: #BB0000;'>66.2</span>  150.  164.
-#&gt; <span style='color: #949494;'># … with 3 more variables: deviance &lt;dbl&gt;, df.residual &lt;int&gt;, nobs &lt;int&gt;</span></div><div class='input'>
+<span class='fu'><a href='https://generics.r-lib.org/reference/glance.html'>glance</a></span><span class='op'>(</span><span class='va'>marg_ie0</span><span class='op'>)</span>
+
 <span class='co'># Marginal effects evaluated at specific values of a variable (here: cyl)</span>
 <span class='va'>marg_ie1</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/margins/man/margins.html'>margins</a></span><span class='op'>(</span><span class='va'>mod_ie</span>, at <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>cyl <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>4</span>,<span class='fl'>6</span>,<span class='fl'>8</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span>
 <span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>marg_ie1</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 9 × 7</span>
-#&gt;   term  at.variable at.value  estimate std.error statistic p.value
-#&gt;   <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>          <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>
-#&gt; <span style='color: #BCBCBC;'>1</span> cyl   cyl                4 -<span style='color: #BB0000;'>3.85</span>        1.46     -<span style='color: #BB0000;'>2.65</span>   0.008<span style='text-decoration: underline;'>08</span>
-#&gt; <span style='color: #BCBCBC;'>2</span> cyl   cyl                6 -<span style='color: #BB0000;'>3.85</span>        1.46     -<span style='color: #BB0000;'>2.65</span>   0.008<span style='text-decoration: underline;'>14</span>
-#&gt; <span style='color: #BCBCBC;'>3</span> cyl   cyl                8 -<span style='color: #BB0000;'>3.85</span>        1.46     -<span style='color: #BB0000;'>2.65</span>   0.008<span style='text-decoration: underline;'>12</span>
-#&gt; <span style='color: #BCBCBC;'>4</span> disp  cyl                4  0.000<span style='text-decoration: underline;'>978</span>    0.031<span style='text-decoration: underline;'>4</span>    0.031<span style='text-decoration: underline;'>2</span> 0.975  
-#&gt; <span style='color: #BCBCBC;'>5</span> disp  cyl                6  0.001<span style='text-decoration: underline;'>34</span>     0.018<span style='text-decoration: underline;'>2</span>    0.073<span style='text-decoration: underline;'>7</span> 0.941  
-#&gt; <span style='color: #BCBCBC;'>6</span> disp  cyl                8  0.001<span style='text-decoration: underline;'>70</span>     0.012<span style='text-decoration: underline;'>0</span>    0.141  0.888  
-#&gt; <span style='color: #BCBCBC;'>7</span> wt    cyl                4  7.91        5.06      1.56   0.118  
-#&gt; <span style='color: #BCBCBC;'>8</span> wt    cyl                6  2.96        2.52      1.18   0.239  
-#&gt; <span style='color: #BCBCBC;'>9</span> wt    cyl                8 -<span style='color: #BB0000;'>1.98</span>        2.40     -<span style='color: #BB0000;'>0.825</span>  0.409  </div><div class='input'>
+
 <span class='co'># Marginal effects of one interaction variable (here: wt), modulated at </span>
 <span class='co'># specific values of the two other interaction variables (here: cyl and drat)</span>
 <span class='va'>marg_ie2</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/margins/man/margins.html'>margins</a></span><span class='op'>(</span><span class='va'>mod_ie</span>,
                     variables <span class='op'>=</span> <span class='st'>"wt"</span>, <span class='co'>## Main var</span>
                     at <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>cyl <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>4</span>,<span class='fl'>6</span>,<span class='fl'>8</span><span class='op'>)</span>, drat <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>3</span>, <span class='fl'>3.5</span>, <span class='fl'>4</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span> <span class='co'>## Modulating vars</span>
 <span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>marg_ie2</span><span class='op'>)</span>
+
+<span class='op'>}</span>
 </div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 18 × 7</span>
 #&gt;    term  at.variable at.value estimate std.error statistic p.value
 #&gt;    <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>          <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>    <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>
@@ -356,7 +299,8 @@ users can simply run the underlying model to obtain the same information.</p>
 #&gt; <span style='color: #BCBCBC;'>15</span> wt    cyl              8      -<span style='color: #BB0000;'>1.98</span>      2.40    -<span style='color: #BB0000;'>0.825</span>   0.409
 #&gt; <span style='color: #BCBCBC;'>16</span> wt    drat             3.5    -<span style='color: #BB0000;'>1.98</span>      2.40    -<span style='color: #BB0000;'>0.825</span>   0.409
 #&gt; <span style='color: #BCBCBC;'>17</span> wt    cyl              8      -<span style='color: #BB0000;'>1.98</span>      2.40    -<span style='color: #BB0000;'>0.825</span>   0.409
-#&gt; <span style='color: #BCBCBC;'>18</span> wt    drat             4      -<span style='color: #BB0000;'>1.98</span>      2.40    -<span style='color: #BB0000;'>0.825</span>   0.409</div></pre>
+#&gt; <span style='color: #BCBCBC;'>18</span> wt    drat             4      -<span style='color: #BB0000;'>1.98</span>      2.40    -<span style='color: #BB0000;'>0.825</span>   0.409</div><div class='input'>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

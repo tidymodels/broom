@@ -109,7 +109,7 @@ of the appropriate type." />
         <a class="navbar-brand" href="../index.html">broom</a>
         <div class="info hidden-xs hidden-sm">
           <span class="partof">part of <a href="https://tidymodels.org">tidymodels</a></span>
-          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.7.9.9000</span>
+          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.7.10</span>
         </div>
       </div>
     </div>
@@ -248,6 +248,8 @@ the <code>data</code> argument.</p></td>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
+<span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/ns-load.html'>requireNamespace</a></span><span class='op'>(</span><span class='st'>"survival"</span>, quietly <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
+
 <span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://github.com/therneau/survival'>survival</a></span><span class='op'>)</span>
 
 <span class='va'>temp.yr</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/survival/man/tcut.html'>tcut</a></span><span class='op'>(</span><span class='va'>mgus</span><span class='op'>$</span><span class='va'>dxyr</span>, <span class='fl'>55</span><span class='op'>:</span><span class='fl'>92</span>, labels <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>as.character</a></span><span class='op'>(</span><span class='fl'>55</span><span class='op'>:</span><span class='fl'>91</span><span class='op'>)</span><span class='op'>)</span>
@@ -258,52 +260,20 @@ the <code>data</code> argument.</p></td>
   data.frame <span class='op'>=</span> <span class='cn'>TRUE</span>
 <span class='op'>)</span>
 <span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>pfit</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 1,752 × 6</span>
-#&gt;    temp.yr temp.age sex     pyears     n event
-#&gt;    <span style='color: #949494; font-style: italic;'>&lt;fct&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;fct&gt;</span>    <span style='color: #949494; font-style: italic;'>&lt;fct&gt;</span>    <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>
-#&gt; <span style='color: #BCBCBC;'> 1</span> 71      34       female 0.002<span style='text-decoration: underline;'>74</span>     1     0
-#&gt; <span style='color: #BCBCBC;'> 2</span> 68      35       female 0.002<span style='text-decoration: underline;'>74</span>     1     0
-#&gt; <span style='color: #BCBCBC;'> 3</span> 72      35       female 0.002<span style='text-decoration: underline;'>74</span>     1     0
-#&gt; <span style='color: #BCBCBC;'> 4</span> 69      36       female 0.002<span style='text-decoration: underline;'>74</span>     1     0
-#&gt; <span style='color: #BCBCBC;'> 5</span> 73      36       female 0.002<span style='text-decoration: underline;'>74</span>     1     0
-#&gt; <span style='color: #BCBCBC;'> 6</span> 69      37       female 0.002<span style='text-decoration: underline;'>74</span>     1     0
-#&gt; <span style='color: #BCBCBC;'> 7</span> 70      37       female 0.002<span style='text-decoration: underline;'>74</span>     1     0
-#&gt; <span style='color: #BCBCBC;'> 8</span> 74      37       female 0.002<span style='text-decoration: underline;'>74</span>     1     0
-#&gt; <span style='color: #BCBCBC;'> 9</span> 70      38       female 0.002<span style='text-decoration: underline;'>74</span>     1     0
-#&gt; <span style='color: #BCBCBC;'>10</span> 71      38       female 0.002<span style='text-decoration: underline;'>74</span>     1     0
-#&gt; <span style='color: #949494;'># … with 1,742 more rows</span></div><div class='input'><span class='fu'><a href='https://generics.r-lib.org/reference/glance.html'>glance</a></span><span class='op'>(</span><span class='va'>pfit</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 1 × 3</span>
-#&gt;   total offtable  nobs
-#&gt;   <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>    <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span>
-#&gt; <span style='color: #BCBCBC;'>1</span>  8.32    0.727   241</div><div class='input'>
+<span class='fu'><a href='https://generics.r-lib.org/reference/glance.html'>glance</a></span><span class='op'>(</span><span class='va'>pfit</span><span class='op'>)</span>
+
 <span class='co'># if data.frame argument is not given, different information is present in</span>
 <span class='co'># output</span>
 <span class='va'>pfit2</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/survival/man/pyears.html'>pyears</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/pkg/survival/man/Surv.html'>Surv</a></span><span class='op'>(</span><span class='va'>ptime</span> <span class='op'>/</span> <span class='fl'>365.25</span>, <span class='va'>pstat</span><span class='op'>)</span> <span class='op'>~</span> <span class='va'>temp.yr</span> <span class='op'>+</span> <span class='va'>temp.age</span> <span class='op'>+</span> <span class='va'>sex</span>, <span class='va'>mgus</span><span class='op'>)</span>
 <span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>pfit2</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 37 × 402</span>
-#&gt;    pyears.34.female pyears.35.female pyears.36.female pyears.37.female
-#&gt;               <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>            <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>            <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>            <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>
-#&gt; <span style='color: #BCBCBC;'> 1</span>                0                0                0                0
-#&gt; <span style='color: #BCBCBC;'> 2</span>                0                0                0                0
-#&gt; <span style='color: #BCBCBC;'> 3</span>                0                0                0                0
-#&gt; <span style='color: #BCBCBC;'> 4</span>                0                0                0                0
-#&gt; <span style='color: #BCBCBC;'> 5</span>                0                0                0                0
-#&gt; <span style='color: #BCBCBC;'> 6</span>                0                0                0                0
-#&gt; <span style='color: #BCBCBC;'> 7</span>                0                0                0                0
-#&gt; <span style='color: #BCBCBC;'> 8</span>                0                0                0                0
-#&gt; <span style='color: #BCBCBC;'> 9</span>                0                0                0                0
-#&gt; <span style='color: #BCBCBC;'>10</span>                0                0                0                0
-#&gt; <span style='color: #949494;'># … with 27 more rows, and 398 more variables: pyears.38.female &lt;dbl&gt;,</span>
-#&gt; <span style='color: #949494;'>#   pyears.39.female &lt;dbl&gt;, pyears.40.female &lt;dbl&gt;, pyears.41.female &lt;dbl&gt;,</span>
-#&gt; <span style='color: #949494;'>#   pyears.42.female &lt;dbl&gt;, pyears.43.female &lt;dbl&gt;, pyears.44.female &lt;dbl&gt;,</span>
-#&gt; <span style='color: #949494;'>#   pyears.45.female &lt;dbl&gt;, pyears.46.female &lt;dbl&gt;, pyears.47.female &lt;dbl&gt;,</span>
-#&gt; <span style='color: #949494;'>#   pyears.48.female &lt;dbl&gt;, pyears.49.female &lt;dbl&gt;, pyears.50.female &lt;dbl&gt;,</span>
-#&gt; <span style='color: #949494;'>#   pyears.51.female &lt;dbl&gt;, pyears.52.female &lt;dbl&gt;, pyears.53.female &lt;dbl&gt;,</span>
-#&gt; <span style='color: #949494;'>#   pyears.54.female &lt;dbl&gt;, pyears.55.female &lt;dbl&gt;, pyears.56.female &lt;dbl&gt;, …</span></div><div class='input'><span class='fu'><a href='https://generics.r-lib.org/reference/glance.html'>glance</a></span><span class='op'>(</span><span class='va'>pfit2</span><span class='op'>)</span>
+<span class='fu'><a href='https://generics.r-lib.org/reference/glance.html'>glance</a></span><span class='op'>(</span><span class='va'>pfit2</span><span class='op'>)</span>
+
+<span class='op'>}</span>
 </div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 1 × 3</span>
 #&gt;   total offtable  nobs
 #&gt;   <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>    <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span>
-#&gt; <span style='color: #BCBCBC;'>1</span>  8.32    0.727   241</div></pre>
+#&gt; <span style='color: #BCBCBC;'>1</span>  8.32    0.727   241</div><div class='input'>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
