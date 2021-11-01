@@ -109,7 +109,7 @@ of the appropriate type." />
         <a class="navbar-brand" href="../index.html">broom</a>
         <div class="info hidden-xs hidden-sm">
           <span class="partof">part of <a href="https://tidymodels.org">tidymodels</a></span>
-          <span class="version version-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.7.9.9001</span>
+          <span class="version version-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.7.10.9000</span>
         </div>
       </div>
     </div>
@@ -231,10 +231,25 @@ the <code>data</code> argument.</p></td>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
+<span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/ns-load.html'>requireNamespace</a></span><span class='op'>(</span><span class='st'>"nnet"</span>, quietly <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
+
 <span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='http://www.stats.ox.ac.uk/pub/MASS4/'>nnet</a></span><span class='op'>)</span>
 <span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='http://www.stats.ox.ac.uk/pub/MASS4/'>MASS</a></span><span class='op'>)</span>
 
 <span class='fu'><a href='https://rdrr.io/r/utils/example.html'>example</a></span><span class='op'>(</span><span class='va'>birthwt</span><span class='op'>)</span>
+<span class='va'>bwt.mu</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/nnet/man/multinom.html'>multinom</a></span><span class='op'>(</span><span class='va'>low</span> <span class='op'>~</span> <span class='va'>.</span>, <span class='va'>bwt</span><span class='op'>)</span>
+<span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>bwt.mu</span><span class='op'>)</span>
+<span class='fu'><a href='https://generics.r-lib.org/reference/glance.html'>glance</a></span><span class='op'>(</span><span class='va'>bwt.mu</span><span class='op'>)</span>
+
+<span class='co'>#* This model is a truly terrible model</span>
+<span class='co'>#* but it should show you what the output looks</span>
+<span class='co'>#* like in a multinomial logistic regression</span>
+
+<span class='va'>fit.gear</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/nnet/man/multinom.html'>multinom</a></span><span class='op'>(</span><span class='va'>gear</span> <span class='op'>~</span> <span class='va'>mpg</span> <span class='op'>+</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>factor</a></span><span class='op'>(</span><span class='va'>am</span><span class='op'>)</span>, data <span class='op'>=</span> <span class='va'>mtcars</span><span class='op'>)</span>
+<span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>fit.gear</span><span class='op'>)</span>
+<span class='fu'><a href='https://generics.r-lib.org/reference/glance.html'>glance</a></span><span class='op'>(</span><span class='va'>fit.gear</span><span class='op'>)</span>
+
+<span class='op'>}</span>
 </div><div class='output co'>#&gt; 
 #&gt; brthwt&gt; bwt &lt;- with(birthwt, {
 #&gt; brthwt+ race &lt;- factor(race, labels = c("white", "black", "other"))
@@ -259,36 +274,13 @@ the <code>data</code> argument.</p></td>
 #&gt; 
 #&gt; Degrees of Freedom: 188 Total (i.e. Null);  178 Residual
 #&gt; Null Deviance:	    234.7 
-#&gt; Residual Deviance: 195.5 	AIC: 217.5</div><div class='input'><span class='va'>bwt.mu</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/nnet/man/multinom.html'>multinom</a></span><span class='op'>(</span><span class='va'>low</span> <span class='op'>~</span> <span class='va'>.</span>, <span class='va'>bwt</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; # weights:  12 (11 variable)
+#&gt; Residual Deviance: 195.5 	AIC: 217.5
+#&gt; # weights:  12 (11 variable)
 #&gt; initial  value 131.004817 
 #&gt; iter  10 value 98.029803
 #&gt; final  value 97.737759 
-#&gt; converged</div><div class='input'><span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>bwt.mu</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 11 × 6</span>
-#&gt;    y.level term        estimate std.error statistic p.value
-#&gt;    <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>          <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>
-#&gt; <span style='color: #BCBCBC;'> 1</span> 1       (Intercept)   0.823    1.24        0.661 0.508  
-#&gt; <span style='color: #BCBCBC;'> 2</span> 1       age          -<span style='color: #BB0000;'>0.037</span><span style='color: #BB0000; text-decoration: underline;'>2</span>   0.038<span style='text-decoration: underline;'>7</span>     -<span style='color: #BB0000;'>0.962</span> 0.336  
-#&gt; <span style='color: #BCBCBC;'> 3</span> 1       lwt          -<span style='color: #BB0000;'>0.015</span><span style='color: #BB0000; text-decoration: underline;'>7</span>   0.007<span style='text-decoration: underline;'>08</span>    -<span style='color: #BB0000;'>2.21</span>  0.027<span style='text-decoration: underline;'>1</span> 
-#&gt; <span style='color: #BCBCBC;'> 4</span> 1       raceblack     1.19     0.536       2.22  0.026<span style='text-decoration: underline;'>1</span> 
-#&gt; <span style='color: #BCBCBC;'> 5</span> 1       raceother     0.741    0.462       1.60  0.109  
-#&gt; <span style='color: #BCBCBC;'> 6</span> 1       smokeTRUE     0.756    0.425       1.78  0.075<span style='text-decoration: underline;'>5</span> 
-#&gt; <span style='color: #BCBCBC;'> 7</span> 1       ptdTRUE       1.34     0.481       2.80  0.005<span style='text-decoration: underline;'>18</span>
-#&gt; <span style='color: #BCBCBC;'> 8</span> 1       htTRUE        1.91     0.721       2.65  0.007<span style='text-decoration: underline;'>94</span>
-#&gt; <span style='color: #BCBCBC;'> 9</span> 1       uiTRUE        0.680    0.464       1.46  0.143  
-#&gt; <span style='color: #BCBCBC;'>10</span> 1       ftv1         -<span style='color: #BB0000;'>0.436</span>    0.479      -<span style='color: #BB0000;'>0.910</span> 0.363  
-#&gt; <span style='color: #BCBCBC;'>11</span> 1       ftv2+         0.179    0.456       0.392 0.695  </div><div class='input'><span class='fu'><a href='https://generics.r-lib.org/reference/glance.html'>glance</a></span><span class='op'>(</span><span class='va'>bwt.mu</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 1 × 4</span>
-#&gt;     edf deviance   AIC  nobs
-#&gt;   <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>    <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span>
-#&gt; <span style='color: #BCBCBC;'>1</span>    11     195.  217.   189</div><div class='input'>
-<span class='co'>#* This model is a truly terrible model</span>
-<span class='co'>#* but it should show you what the output looks</span>
-<span class='co'>#* like in a multinomial logistic regression</span>
-
-<span class='va'>fit.gear</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/nnet/man/multinom.html'>multinom</a></span><span class='op'>(</span><span class='va'>gear</span> <span class='op'>~</span> <span class='va'>mpg</span> <span class='op'>+</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>factor</a></span><span class='op'>(</span><span class='va'>am</span><span class='op'>)</span>, data <span class='op'>=</span> <span class='va'>mtcars</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; # weights:  12 (6 variable)
+#&gt; converged
+#&gt; # weights:  12 (6 variable)
 #&gt; initial  value 35.155593 
 #&gt; iter  10 value 14.156582
 #&gt; iter  20 value 14.031881
@@ -301,20 +293,11 @@ the <code>data</code> argument.</p></td>
 #&gt; iter  80 value 14.018282
 #&gt; iter  90 value 14.017126
 #&gt; final  value 14.015374 
-#&gt; converged</div><div class='input'><span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>fit.gear</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 6 × 6</span>
-#&gt;   y.level term        estimate std.error statistic  p.value
-#&gt;   <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>          <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>    <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>
-#&gt; <span style='color: #BCBCBC;'>1</span> 4       (Intercept)  -<span style='color: #BB0000;'>11.2</span>       5.32     -<span style='color: #BB0000;'>2.10</span>  3.60<span style='color: #949494;'>e</span><span style='color: #BB0000;'>- 2</span>
-#&gt; <span style='color: #BCBCBC;'>2</span> 4       mpg            0.525     0.268     1.96  5.02<span style='color: #949494;'>e</span><span style='color: #BB0000;'>- 2</span>
-#&gt; <span style='color: #BCBCBC;'>3</span> 4       factor(am)1   11.9      66.9       0.178 8.59<span style='color: #949494;'>e</span><span style='color: #BB0000;'>- 1</span>
-#&gt; <span style='color: #BCBCBC;'>4</span> 5       (Intercept)  -<span style='color: #BB0000;'>18.4</span>      67.9      -<span style='color: #BB0000;'>0.271</span> 7.87<span style='color: #949494;'>e</span><span style='color: #BB0000;'>- 1</span>
-#&gt; <span style='color: #BCBCBC;'>5</span> 5       mpg            0.366     0.292     1.25  2.10<span style='color: #949494;'>e</span><span style='color: #BB0000;'>- 1</span>
-#&gt; <span style='color: #BCBCBC;'>6</span> 5       factor(am)1   22.4       2.17     10.3   4.54<span style='color: #949494;'>e</span><span style='color: #BB0000;'>-25</span></div><div class='input'><span class='fu'><a href='https://generics.r-lib.org/reference/glance.html'>glance</a></span><span class='op'>(</span><span class='va'>fit.gear</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 1 × 4</span>
+#&gt; converged</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 1 × 4</span>
 #&gt;     edf deviance   AIC  nobs
 #&gt;   <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>    <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span>
-#&gt; <span style='color: #BCBCBC;'>1</span>     6     28.0  40.0    32</div></pre>
+#&gt; <span style='color: #BCBCBC;'>1</span>     6     28.0  40.0    32</div><div class='input'>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

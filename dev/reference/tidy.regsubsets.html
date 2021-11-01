@@ -100,7 +100,7 @@ specify which components to return." />
         <a class="navbar-brand" href="../index.html">broom</a>
         <div class="info hidden-xs hidden-sm">
           <span class="partof">part of <a href="https://tidymodels.org">tidymodels</a></span>
-          <span class="version version-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.7.9.9001</span>
+          <span class="version version-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.7.10.9000</span>
         </div>
       </div>
     </div>
@@ -211,8 +211,12 @@ the <code>data</code> argument.</p></td>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
+<span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/ns-load.html'>requireNamespace</a></span><span class='op'>(</span><span class='st'>"leaps"</span>, quietly <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
+
 <span class='va'>all_fits</span> <span class='op'>&lt;-</span> <span class='fu'>leaps</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/leaps/man/regsubsets.html'>regsubsets</a></span><span class='op'>(</span><span class='va'>hp</span> <span class='op'>~</span> <span class='va'>.</span>, <span class='va'>mtcars</span><span class='op'>)</span>
 <span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>all_fits</span><span class='op'>)</span>
+
+<span class='op'>}</span>
 </div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 8 × 15</span>
 #&gt;   `(Intercept)` mpg   cyl   disp  drat  wt    qsec  vs    am    gear  carb 
 #&gt;   <span style='color: #949494; font-style: italic;'>&lt;lgl&gt;</span>         <span style='color: #949494; font-style: italic;'>&lt;lgl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;lgl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;lgl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;lgl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;lgl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;lgl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;lgl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;lgl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;lgl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;lgl&gt;</span>
@@ -225,7 +229,8 @@ the <code>data</code> argument.</p></td>
 #&gt; <span style='color: #BCBCBC;'>7</span> TRUE          TRUE  TRUE  TRUE  FALSE TRUE  FALSE TRUE  TRUE  FALSE TRUE 
 #&gt; <span style='color: #BCBCBC;'>8</span> TRUE          TRUE  TRUE  TRUE  FALSE TRUE  FALSE TRUE  TRUE  TRUE  TRUE 
 #&gt; <span style='color: #949494;'># … with 4 more variables: r.squared &lt;dbl&gt;, adj.r.squared &lt;dbl&gt;, BIC &lt;dbl&gt;,</span>
-#&gt; <span style='color: #949494;'>#   mallows_cp &lt;dbl&gt;</span></div></pre>
+#&gt; <span style='color: #949494;'>#   mallows_cp &lt;dbl&gt;</span></div><div class='input'>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

@@ -109,7 +109,7 @@ of the appropriate type." />
         <a class="navbar-brand" href="../index.html">broom</a>
         <div class="info hidden-xs hidden-sm">
           <span class="partof">part of <a href="https://tidymodels.org">tidymodels</a></span>
-          <span class="version version-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.7.9.9001</span>
+          <span class="version version-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.7.10.9000</span>
         </div>
       </div>
     </div>
@@ -242,45 +242,23 @@ the <code>data</code> argument.</p></td>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
+<span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/ns-load.html'>requireNamespace</a></span><span class='op'>(</span><span class='st'>"MASS"</span>, quietly <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
+
 <span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='http://www.stats.ox.ac.uk/pub/MASS4/'>MASS</a></span><span class='op'>)</span>
 
 <span class='va'>fit</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/MASS/man/polr.html'>polr</a></span><span class='op'>(</span><span class='va'>Sat</span> <span class='op'>~</span> <span class='va'>Infl</span> <span class='op'>+</span> <span class='va'>Type</span> <span class='op'>+</span> <span class='va'>Cont</span>, weights <span class='op'>=</span> <span class='va'>Freq</span>, data <span class='op'>=</span> <span class='va'>housing</span><span class='op'>)</span>
 
 <span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>fit</span>, exponentiate <span class='op'>=</span> <span class='cn'>TRUE</span>, conf.int <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Re-fitting to get Hessian</span></div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 8 × 7</span>
-#&gt;   term          estimate std.error statistic conf.low conf.high coef.type  
-#&gt;   <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>            <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>    <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>      
-#&gt; <span style='color: #BCBCBC;'>1</span> InflMedium       1.76     0.105       5.41    1.44      2.16  coefficient
-#&gt; <span style='color: #BCBCBC;'>2</span> InflHigh         3.63     0.127      10.1     2.83      4.66  coefficient
-#&gt; <span style='color: #BCBCBC;'>3</span> TypeApartment    0.564    0.119      -<span style='color: #BB0000;'>4.80</span>    0.446     0.712 coefficient
-#&gt; <span style='color: #BCBCBC;'>4</span> TypeAtrium       0.693    0.155      -<span style='color: #BB0000;'>2.36</span>    0.511     0.940 coefficient
-#&gt; <span style='color: #BCBCBC;'>5</span> TypeTerrace      0.336    0.151      -<span style='color: #BB0000;'>7.20</span>    0.249     0.451 coefficient
-#&gt; <span style='color: #BCBCBC;'>6</span> ContHigh         1.43     0.095<span style='text-decoration: underline;'>5</span>      3.77    1.19      1.73  coefficient
-#&gt; <span style='color: #BCBCBC;'>7</span> Low|Medium       0.609    0.125      -<span style='color: #BB0000;'>3.97</span>   <span style='color: #BB0000;'>NA</span>        <span style='color: #BB0000;'>NA</span>     scale      
-#&gt; <span style='color: #BCBCBC;'>8</span> Medium|High      2.00     0.125       5.50   <span style='color: #BB0000;'>NA</span>        <span style='color: #BB0000;'>NA</span>     scale      </div><div class='input'>
+
 <span class='fu'><a href='https://generics.r-lib.org/reference/glance.html'>glance</a></span><span class='op'>(</span><span class='va'>fit</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 1 × 7</span>
-#&gt;     edf logLik   AIC   BIC deviance df.residual  nobs
-#&gt;   <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span>  <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>    <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>       <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span>
-#&gt; <span style='color: #BCBCBC;'>1</span>     8 -<span style='color: #BB0000; text-decoration: underline;'>1</span><span style='color: #BB0000;'>740.</span> <span style='text-decoration: underline;'>3</span>495. <span style='text-decoration: underline;'>3</span>539.    <span style='text-decoration: underline;'>3</span>479.        <span style='text-decoration: underline;'>1</span>673  <span style='text-decoration: underline;'>1</span>681</div><div class='input'><span class='fu'><a href='https://generics.r-lib.org/reference/augment.html'>augment</a></span><span class='op'>(</span><span class='va'>fit</span>, type.predict <span class='op'>=</span> <span class='st'>"class"</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 72 × 6</span>
-#&gt;    Sat    Infl   Type      Cont  `(weights)` .fitted
-#&gt;    <span style='color: #949494; font-style: italic;'>&lt;ord&gt;</span>  <span style='color: #949494; font-style: italic;'>&lt;fct&gt;</span>  <span style='color: #949494; font-style: italic;'>&lt;fct&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;fct&gt;</span>       <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;fct&gt;</span>  
-#&gt; <span style='color: #BCBCBC;'> 1</span> Low    Low    Tower     Low            21 Low    
-#&gt; <span style='color: #BCBCBC;'> 2</span> Medium Low    Tower     Low            21 Low    
-#&gt; <span style='color: #BCBCBC;'> 3</span> High   Low    Tower     Low            28 Low    
-#&gt; <span style='color: #BCBCBC;'> 4</span> Low    Medium Tower     Low            34 High   
-#&gt; <span style='color: #BCBCBC;'> 5</span> Medium Medium Tower     Low            22 High   
-#&gt; <span style='color: #BCBCBC;'> 6</span> High   Medium Tower     Low            36 High   
-#&gt; <span style='color: #BCBCBC;'> 7</span> Low    High   Tower     Low            10 High   
-#&gt; <span style='color: #BCBCBC;'> 8</span> Medium High   Tower     Low            11 High   
-#&gt; <span style='color: #BCBCBC;'> 9</span> High   High   Tower     Low            36 High   
-#&gt; <span style='color: #BCBCBC;'>10</span> Low    Low    Apartment Low            61 Low    
-#&gt; <span style='color: #949494;'># … with 62 more rows</span></div><div class='input'>
+<span class='fu'><a href='https://generics.r-lib.org/reference/augment.html'>augment</a></span><span class='op'>(</span><span class='va'>fit</span>, type.predict <span class='op'>=</span> <span class='st'>"class"</span><span class='op'>)</span>
+
 <span class='va'>fit2</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/MASS/man/polr.html'>polr</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/factor.html'>factor</a></span><span class='op'>(</span><span class='va'>gear</span><span class='op'>)</span> <span class='op'>~</span> <span class='va'>am</span> <span class='op'>+</span> <span class='va'>mpg</span> <span class='op'>+</span> <span class='va'>qsec</span>, data <span class='op'>=</span> <span class='va'>mtcars</span><span class='op'>)</span>
 <span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>fit</span>, p.values <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
+
+<span class='op'>}</span>
 </div><div class='output co'>#&gt; <span class='message'></span>
+#&gt; <span class='message'>Re-fitting to get Hessian</span></div><div class='output co'>#&gt; <span class='message'></span>
 #&gt; <span class='message'>Re-fitting to get Hessian</span></div><div class='output co'>#&gt; <span class='message'>p-values can presently only be returned for models that contain </span>
 #&gt; <span class='message'>              no categorical variables with more than two levels</span></div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 8 × 6</span>
 #&gt;   term          estimate std.error statistic p.value coef.type  

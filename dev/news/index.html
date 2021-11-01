@@ -94,7 +94,7 @@
         <a class="navbar-brand" href="../index.html">broom</a>
         <div class="info hidden-xs hidden-sm">
           <span class="partof">part of <a href="https://tidymodels.org">tidymodels</a></span>
-          <span class="version version-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.7.9.9001</span>
+          <span class="version version-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.7.10.9000</span>
         </div>
       </div>
     </div>
@@ -156,17 +156,22 @@
       <small>Source: <a href='https://github.com/tidymodels/broom/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
-    <div id="broom-0799001" class="section level1">
-<h1 class="page-header" data-toc-text="0.7.9.9001">
-<a href="#broom-0799001" class="anchor"></a>broom 0.7.9.9001<small> Unreleased </small>
+    <div id="broom-07109000" class="section level1">
+<h1 class="page-header" data-toc-text="0.7.10.9000">
+<a href="#broom-07109000" class="anchor"></a>broom 0.7.10.9000<small> Unreleased </small>
 </h1>
-<p>To be released as broom 0.7.10.</p>
+<p>To be released as broom 0.7.11.</p>
+</div>
+    <div id="broom-0710" class="section level1">
+<h1 class="page-header" data-toc-text="0.7.10">
+<a href="#broom-0710" class="anchor"></a>broom 0.7.10<small> 2021-10-31 </small>
+</h1>
 <ul>
 <li>Clarifies error when <code>pysch::mediate</code> output is dispatched to <code>tidy.mediate</code> (<code><a href='https://github.com/tidymodels/broom/issues/1037'>#1037</a></code> by <code>@LukasWallrich</code>).</li>
 <li>Allows user to specify confidence level for <code>tidy.rma</code> (<code><a href='https://github.com/tidymodels/broom/issues/1041'>#1041</a></code> by <code>@TarenSanders</code>)</li>
 <li>Clarifies documentation related to usage of <code><a href="../reference/augment_columns.html">augment_columns()</a></code>; most package users should use <code><a href="https://generics.r-lib.org/reference/augment.html">augment()</a></code> in favor of <code><a href="../reference/augment_columns.html">augment_columns()</a></code>. See <code><a href="../reference/augment_columns.html">?augment_columns</a></code> for more details.</li>
 <li>Extends support for <code>emmeans</code> by fixing non-standard column names in case of asymptotically derived inferential statistics. (<code><a href='https://github.com/tidymodels/broom/issues/1046'>#1046</a></code> by <code>@crsh</code>)</li>
-<li>Fixes use of index columns in <code>augment.mlogit</code>. (<code><a href='https://github.com/tidymodels/broom/issues/1045'>#1045</a></code> and <code><a href='https://github.com/tidymodels/broom/issues/1053'>#1053</a></code> by <code>@jamesrrae</code> and <code>@gregmacfarlane</code>)</li>
+<li>Fixes use of index columns in <code>augment.mlogit</code> and adds <code>.resid</code> column to output. (<code><a href='https://github.com/tidymodels/broom/issues/1045'>#1045</a></code>, <code><a href='https://github.com/tidymodels/broom/issues/1053'>#1053</a></code>, <code><a href='https://github.com/tidymodels/broom/issues/1055'>#1055</a></code>, and <code><a href='https://github.com/tidymodels/broom/issues/1056'>#1056</a></code> by <code>@jamesrrae</code> and <code>@gregmacfarlane</code>)</li>
 <li>Correct column naming of standard error measures in <code><a href="../reference/glance.survfit.html">glance.survfit()</a></code>.</li>
 <li>Various bug fixes and improvements to documentation.</li>
 </ul>

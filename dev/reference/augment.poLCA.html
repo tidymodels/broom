@@ -128,7 +128,7 @@ missing at this time." />
         <a class="navbar-brand" href="../index.html">broom</a>
         <div class="info hidden-xs hidden-sm">
           <span class="partof">part of <a href="https://tidymodels.org">tidymodels</a></span>
-          <span class="version version-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.7.9.9001</span>
+          <span class="version version-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.7.10.9000</span>
         </div>
       </div>
     </div>
@@ -288,99 +288,26 @@ included in the augmented output.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
+<span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/ns-load.html'>requireNamespace</a></span><span class='op'>(</span><span class='st'>"poLCA"</span>, quietly <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
+
 <span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='http://dlinzer.github.com/poLCA'>poLCA</a></span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='message'>Loading required package: scatterplot3d</span></div><div class='input'><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://dplyr.tidyverse.org'>dplyr</a></span><span class='op'>)</span>
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://dplyr.tidyverse.org'>dplyr</a></span><span class='op'>)</span>
 
 <span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>values</span><span class='op'>)</span>
 <span class='va'>f</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/cbind.html'>cbind</a></span><span class='op'>(</span><span class='va'>A</span>, <span class='va'>B</span>, <span class='va'>C</span>, <span class='va'>D</span><span class='op'>)</span> <span class='op'>~</span> <span class='fl'>1</span>
 <span class='va'>M1</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/poLCA/man/poLCA.html'>poLCA</a></span><span class='op'>(</span><span class='va'>f</span>, <span class='va'>values</span>, nclass <span class='op'>=</span> <span class='fl'>2</span>, verbose <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
 
 <span class='va'>M1</span>
-</div><div class='output co'>#&gt; Conditional item response (column) probabilities,
-#&gt;  by outcome variable, for each class (row) 
-#&gt;  
-#&gt; $A
-#&gt;            Pr(1)  Pr(2)
-#&gt; class 1:  0.2864 0.7136
-#&gt; class 2:  0.0068 0.9932
-#&gt; 
-#&gt; $B
-#&gt;            Pr(1)  Pr(2)
-#&gt; class 1:  0.6704 0.3296
-#&gt; class 2:  0.0602 0.9398
-#&gt; 
-#&gt; $C
-#&gt;            Pr(1)  Pr(2)
-#&gt; class 1:  0.6460 0.3540
-#&gt; class 2:  0.0735 0.9265
-#&gt; 
-#&gt; $D
-#&gt;            Pr(1)  Pr(2)
-#&gt; class 1:  0.8676 0.1324
-#&gt; class 2:  0.2309 0.7691
-#&gt; 
-#&gt; Estimated class population shares 
-#&gt;  0.7208 0.2792 
-#&gt;  
-#&gt; Predicted class memberships (by modal posterior prob.) 
-#&gt;  0.6713 0.3287 
-#&gt;  
-#&gt; ========================================================= 
-#&gt; Fit for 2 latent classes: 
-#&gt; ========================================================= 
-#&gt; number of observations: 216 
-#&gt; number of estimated parameters: 9 
-#&gt; residual degrees of freedom: 6 
-#&gt; maximum log-likelihood: -504.4677 
-#&gt;  
-#&gt; AIC(2): 1026.935
-#&gt; BIC(2): 1057.313
-#&gt; G^2(2): 2.719922 (Likelihood ratio/deviance statistic) 
-#&gt; X^2(2): 2.719764 (Chi-square goodness of fit) 
-#&gt;  </div><div class='input'><span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>M1</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='warning'>Warning: 'as.is' should be specified by the caller; using TRUE</span></div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 16 × 5</span>
-#&gt;    variable class outcome estimate std.error
-#&gt;    <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>    <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>    <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>
-#&gt; <span style='color: #BCBCBC;'> 1</span> A            1       1  0.286      0.039<span style='text-decoration: underline;'>3</span>
-#&gt; <span style='color: #BCBCBC;'> 2</span> A            2       1  0.006<span style='text-decoration: underline;'>81</span>    0.025<span style='text-decoration: underline;'>4</span>
-#&gt; <span style='color: #BCBCBC;'> 3</span> A            1       2  0.714      0.039<span style='text-decoration: underline;'>3</span>
-#&gt; <span style='color: #BCBCBC;'> 4</span> A            2       2  0.993      0.025<span style='text-decoration: underline;'>4</span>
-#&gt; <span style='color: #BCBCBC;'> 5</span> B            1       1  0.670      0.048<span style='text-decoration: underline;'>9</span>
-#&gt; <span style='color: #BCBCBC;'> 6</span> B            2       1  0.060<span style='text-decoration: underline;'>2</span>     0.064<span style='text-decoration: underline;'>9</span>
-#&gt; <span style='color: #BCBCBC;'> 7</span> B            1       2  0.330      0.048<span style='text-decoration: underline;'>9</span>
-#&gt; <span style='color: #BCBCBC;'> 8</span> B            2       2  0.940      0.064<span style='text-decoration: underline;'>9</span>
-#&gt; <span style='color: #BCBCBC;'> 9</span> C            1       1  0.646      0.048<span style='text-decoration: underline;'>2</span>
-#&gt; <span style='color: #BCBCBC;'>10</span> C            2       1  0.073<span style='text-decoration: underline;'>5</span>     0.064<span style='text-decoration: underline;'>2</span>
-#&gt; <span style='color: #BCBCBC;'>11</span> C            1       2  0.354      0.048<span style='text-decoration: underline;'>2</span>
-#&gt; <span style='color: #BCBCBC;'>12</span> C            2       2  0.927      0.064<span style='text-decoration: underline;'>2</span>
-#&gt; <span style='color: #BCBCBC;'>13</span> D            1       1  0.868      0.037<span style='text-decoration: underline;'>9</span>
-#&gt; <span style='color: #BCBCBC;'>14</span> D            2       1  0.231      0.092<span style='text-decoration: underline;'>9</span>
-#&gt; <span style='color: #BCBCBC;'>15</span> D            1       2  0.132      0.037<span style='text-decoration: underline;'>9</span>
-#&gt; <span style='color: #BCBCBC;'>16</span> D            2       2  0.769      0.092<span style='text-decoration: underline;'>9</span></div><div class='input'><span class='fu'><a href='https://generics.r-lib.org/reference/augment.html'>augment</a></span><span class='op'>(</span><span class='va'>M1</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 216 × 7</span>
-#&gt;        A     B     C     D X.Intercept. .class .probability
-#&gt;    <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>        <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>  <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span>        <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>
-#&gt; <span style='color: #BCBCBC;'> 1</span>     2     2     2     2            1      2        0.959
-#&gt; <span style='color: #BCBCBC;'> 2</span>     2     2     2     2            1      2        0.959
-#&gt; <span style='color: #BCBCBC;'> 3</span>     2     2     2     2            1      2        0.959
-#&gt; <span style='color: #BCBCBC;'> 4</span>     2     2     2     2            1      2        0.959
-#&gt; <span style='color: #BCBCBC;'> 5</span>     2     2     2     2            1      2        0.959
-#&gt; <span style='color: #BCBCBC;'> 6</span>     2     2     2     2            1      2        0.959
-#&gt; <span style='color: #BCBCBC;'> 7</span>     2     2     2     2            1      2        0.959
-#&gt; <span style='color: #BCBCBC;'> 8</span>     2     2     2     2            1      2        0.959
-#&gt; <span style='color: #BCBCBC;'> 9</span>     2     2     2     2            1      2        0.959
-#&gt; <span style='color: #BCBCBC;'>10</span>     2     2     2     2            1      2        0.959
-#&gt; <span style='color: #949494;'># … with 206 more rows</span></div><div class='input'><span class='fu'><a href='https://generics.r-lib.org/reference/glance.html'>glance</a></span><span class='op'>(</span><span class='va'>M1</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 1 × 8</span>
-#&gt;   logLik   AIC   BIC g.squared chi.squared    df df.residual  nobs
-#&gt;    <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>       <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>       <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span>
-#&gt; <span style='color: #BCBCBC;'>1</span>  -<span style='color: #BB0000;'>504.</span> <span style='text-decoration: underline;'>1</span>027. <span style='text-decoration: underline;'>1</span>057.      2.72        2.72     9           6   216</div><div class='input'>
+<span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>M1</span><span class='op'>)</span>
+<span class='fu'><a href='https://generics.r-lib.org/reference/augment.html'>augment</a></span><span class='op'>(</span><span class='va'>M1</span><span class='op'>)</span>
+<span class='fu'><a href='https://generics.r-lib.org/reference/glance.html'>glance</a></span><span class='op'>(</span><span class='va'>M1</span><span class='op'>)</span>
+
 <span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://ggplot2.tidyverse.org'>ggplot2</a></span><span class='op'>)</span>
 
 <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>M1</span><span class='op'>)</span>, <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/factor.html'>factor</a></span><span class='op'>(</span><span class='va'>class</span><span class='op'>)</span>, <span class='va'>estimate</span>, fill <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>factor</a></span><span class='op'>(</span><span class='va'>outcome</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
   <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_bar.html'>geom_bar</a></span><span class='op'>(</span>stat <span class='op'>=</span> <span class='st'>"identity"</span>, width <span class='op'>=</span> <span class='fl'>1</span><span class='op'>)</span> <span class='op'>+</span>
   <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/facet_wrap.html'>facet_wrap</a></span><span class='op'>(</span><span class='op'>~</span><span class='va'>variable</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='warning'>Warning: 'as.is' should be specified by the caller; using TRUE</span></div><div class='img'><img src='augment.poLCA-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'>## Three-class model with a single covariate.</span>
+<span class='co'>## Three-class model with a single covariate.</span>
 
 <span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>election</span><span class='op'>)</span>
 <span class='va'>f2a</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/cbind.html'>cbind</a></span><span class='op'>(</span>
@@ -390,72 +317,28 @@ included in the augmented output.</p>
 <span class='va'>nes2a</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/poLCA/man/poLCA.html'>poLCA</a></span><span class='op'>(</span><span class='va'>f2a</span>, <span class='va'>election</span>, nclass <span class='op'>=</span> <span class='fl'>3</span>, nrep <span class='op'>=</span> <span class='fl'>5</span>, verbose <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
 
 <span class='va'>td</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>nes2a</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='warning'>Warning: 'as.is' should be specified by the caller; using TRUE</span></div><div class='input'><span class='va'>td</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 144 × 5</span>
-#&gt;    variable class outcome           estimate std.error
-#&gt;    <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>    <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;fct&gt;</span>                <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>
-#&gt; <span style='color: #BCBCBC;'> 1</span> MORALG       1 1 Extremely well    0.137    0.018<span style='text-decoration: underline;'>2</span> 
-#&gt; <span style='color: #BCBCBC;'> 2</span> MORALG       2 1 Extremely well    0.108    0.017<span style='text-decoration: underline;'>5</span> 
-#&gt; <span style='color: #BCBCBC;'> 3</span> MORALG       3 1 Extremely well    0.622    0.030<span style='text-decoration: underline;'>9</span> 
-#&gt; <span style='color: #BCBCBC;'> 4</span> MORALG       1 2 Quite well        0.668    0.024<span style='text-decoration: underline;'>7</span> 
-#&gt; <span style='color: #BCBCBC;'> 5</span> MORALG       2 2 Quite well        0.383    0.027<span style='text-decoration: underline;'>4</span> 
-#&gt; <span style='color: #BCBCBC;'> 6</span> MORALG       3 2 Quite well        0.335    0.029<span style='text-decoration: underline;'>3</span> 
-#&gt; <span style='color: #BCBCBC;'> 7</span> MORALG       1 3 Not too well      0.180    0.020<span style='text-decoration: underline;'>8</span> 
-#&gt; <span style='color: #BCBCBC;'> 8</span> MORALG       2 3 Not too well      0.304    0.025<span style='text-decoration: underline;'>3</span> 
-#&gt; <span style='color: #BCBCBC;'> 9</span> MORALG       3 3 Not too well      0.017<span style='text-decoration: underline;'>2</span>   0.008<span style='text-decoration: underline;'>41</span>
-#&gt; <span style='color: #BCBCBC;'>10</span> MORALG       1 4 Not well at all   0.014<span style='text-decoration: underline;'>3</span>   0.006<span style='text-decoration: underline;'>80</span>
-#&gt; <span style='color: #949494;'># … with 134 more rows</span></div><div class='input'>
+<span class='va'>td</span>
+
 <span class='co'># show</span>
 
 <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='va'>td</span>, <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span><span class='va'>outcome</span>, <span class='va'>estimate</span>, color <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>factor</a></span><span class='op'>(</span><span class='va'>class</span><span class='op'>)</span>, group <span class='op'>=</span> <span class='va'>class</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
   <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_path.html'>geom_line</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span>
   <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/facet_wrap.html'>facet_wrap</a></span><span class='op'>(</span><span class='op'>~</span><span class='va'>variable</span>, nrow <span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span> <span class='op'>+</span>
   <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/theme.html'>theme</a></span><span class='op'>(</span>axis.text.x <span class='op'>=</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/element.html'>element_text</a></span><span class='op'>(</span>angle <span class='op'>=</span> <span class='fl'>90</span>, hjust <span class='op'>=</span> <span class='fl'>1</span><span class='op'>)</span><span class='op'>)</span>
-</div><div class='img'><img src='augment.poLCA-2.png' alt='' width='700' height='433' /></div><div class='input'>
+
 <span class='va'>au</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://generics.r-lib.org/reference/augment.html'>augment</a></span><span class='op'>(</span><span class='va'>nes2a</span><span class='op'>)</span>
 <span class='va'>au</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 1,300 × 16</span>
-#&gt;    MORALG  CARESG  KNOWG  LEADG DISHONG INTELG MORALB CARESB KNOWB LEADB DISHONB
-#&gt;    <span style='color: #949494; font-style: italic;'>&lt;fct&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;fct&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;fct&gt;</span>  <span style='color: #949494; font-style: italic;'>&lt;fct&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;fct&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;fct&gt;</span>  <span style='color: #949494; font-style: italic;'>&lt;fct&gt;</span>  <span style='color: #949494; font-style: italic;'>&lt;fct&gt;</span>  <span style='color: #949494; font-style: italic;'>&lt;fct&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;fct&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;fct&gt;</span>  
-#&gt; <span style='color: #BCBCBC;'> 1</span> 3 Not … 1 Extr… 2 Qui… 2 Qu… 3 Not … 2 Qui… 1 Ext… 1 Ext… 2 Qu… 2 Qu… 4 Not …
-#&gt; <span style='color: #BCBCBC;'> 2</span> 1 Extr… 2 Quit… 2 Qui… 1 Ex… 3 Not … 2 Qui… 2 Qui… 2 Qui… 2 Qu… 3 No… 3 Not …
-#&gt; <span style='color: #BCBCBC;'> 3</span> 2 Quit… 2 Quit… 2 Qui… 2 Qu… 2 Quit… 2 Qui… 2 Qui… 3 Not… 2 Qu… 2 Qu… 3 Not …
-#&gt; <span style='color: #BCBCBC;'> 4</span> 2 Quit… 4 Not … 2 Qui… 3 No… 2 Quit… 2 Qui… 1 Ext… 1 Ext… 2 Qu… 2 Qu… 3 Not …
-#&gt; <span style='color: #BCBCBC;'> 5</span> 2 Quit… 2 Quit… 2 Qui… 2 Qu… 3 Not … 2 Qui… 3 Not… 4 Not… 4 No… 4 No… 3 Not …
-#&gt; <span style='color: #BCBCBC;'> 6</span> 2 Quit… 2 Quit… 2 Qui… 3 No… 4 Not … 2 Qui… 2 Qui… 3 Not… 2 Qu… 2 Qu… 3 Not …
-#&gt; <span style='color: #BCBCBC;'> 7</span> 1 Extr… 1 Extr… 1 Ext… 1 Ex… 4 Not … 1 Ext… 2 Qui… 4 Not… 2 Qu… 3 No… 3 Not …
-#&gt; <span style='color: #BCBCBC;'> 8</span> 2 Quit… 2 Quit… 2 Qui… 2 Qu… 3 Not … 2 Qui… 3 Not… 2 Qui… 2 Qu… 2 Qu… 3 Not …
-#&gt; <span style='color: #BCBCBC;'> 9</span> 2 Quit… 2 Quit… 2 Qui… 2 Qu… 3 Not … 2 Qui… 2 Qui… 2 Qui… 2 Qu… 3 No… 2 Quit…
-#&gt; <span style='color: #BCBCBC;'>10</span> 2 Quit… 3 Not … 2 Qui… 2 Qu… 3 Not … 2 Qui… 2 Qui… 4 Not… 2 Qu… 4 No… 2 Quit…
-#&gt; <span style='color: #949494;'># … with 1,290 more rows, and 5 more variables: INTELB &lt;fct&gt;,</span>
-#&gt; <span style='color: #949494;'>#   X.Intercept. &lt;dbl&gt;, PARTY &lt;dbl&gt;, .class &lt;int&gt;, .probability &lt;dbl&gt;</span></div><div class='input'><span class='fu'><a href='https://dplyr.tidyverse.org/reference/count.html'>count</a></span><span class='op'>(</span><span class='va'>au</span>, <span class='va'>.class</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 3 × 2</span>
-#&gt;   .class     n
-#&gt;    <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span>
-#&gt; <span style='color: #BCBCBC;'>1</span>      1   496
-#&gt; <span style='color: #BCBCBC;'>2</span>      2   444
-#&gt; <span style='color: #BCBCBC;'>3</span>      3   360</div><div class='input'>
+<span class='fu'><a href='https://dplyr.tidyverse.org/reference/count.html'>count</a></span><span class='op'>(</span><span class='va'>au</span>, <span class='va'>.class</span><span class='op'>)</span>
+
 <span class='co'># if the original data is provided, it leads to NAs in new columns</span>
 <span class='co'># for rows that weren't predicted</span>
 <span class='va'>au2</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://generics.r-lib.org/reference/augment.html'>augment</a></span><span class='op'>(</span><span class='va'>nes2a</span>, data <span class='op'>=</span> <span class='va'>election</span><span class='op'>)</span>
 <span class='va'>au2</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 1,785 × 20</span>
-#&gt;    MORALG  CARESG  KNOWG  LEADG DISHONG INTELG MORALB CARESB KNOWB LEADB DISHONB
-#&gt;    <span style='color: #949494; font-style: italic;'>&lt;fct&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;fct&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;fct&gt;</span>  <span style='color: #949494; font-style: italic;'>&lt;fct&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;fct&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;fct&gt;</span>  <span style='color: #949494; font-style: italic;'>&lt;fct&gt;</span>  <span style='color: #949494; font-style: italic;'>&lt;fct&gt;</span>  <span style='color: #949494; font-style: italic;'>&lt;fct&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;fct&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;fct&gt;</span>  
-#&gt; <span style='color: #BCBCBC;'> 1</span> 3 Not … 1 Extr… 2 Qui… 2 Qu… 3 Not … 2 Qui… 1 Ext… 1 Ext… 2 Qu… 2 Qu… 4 Not …
-#&gt; <span style='color: #BCBCBC;'> 2</span> 4 Not … 3 Not … 4 Not… 3 No… 2 Quit… 2 Qui… <span style='color: #BB0000;'>NA</span>     <span style='color: #BB0000;'>NA</span>     2 Qu… 3 No… <span style='color: #BB0000;'>NA</span>     
-#&gt; <span style='color: #BCBCBC;'> 3</span> 1 Extr… 2 Quit… 2 Qui… 1 Ex… 3 Not … 2 Qui… 2 Qui… 2 Qui… 2 Qu… 3 No… 3 Not …
-#&gt; <span style='color: #BCBCBC;'> 4</span> 2 Quit… 2 Quit… 2 Qui… 2 Qu… 2 Quit… 2 Qui… 2 Qui… 3 Not… 2 Qu… 2 Qu… 3 Not …
-#&gt; <span style='color: #BCBCBC;'> 5</span> 2 Quit… 4 Not … 2 Qui… 3 No… 2 Quit… 2 Qui… 1 Ext… 1 Ext… 2 Qu… 2 Qu… 3 Not …
-#&gt; <span style='color: #BCBCBC;'> 6</span> 2 Quit… 3 Not … 3 Not… 2 Qu… 2 Quit… 2 Qui… 2 Qui… <span style='color: #BB0000;'>NA</span>     3 No… 2 Qu… 2 Quit…
-#&gt; <span style='color: #BCBCBC;'> 7</span> 2 Quit… <span style='color: #BB0000;'>NA</span>      2 Qui… 2 Qu… 4 Not … 2 Qui… <span style='color: #BB0000;'>NA</span>     3 Not… 2 Qu… 2 Qu… 4 Not …
-#&gt; <span style='color: #BCBCBC;'> 8</span> 2 Quit… 2 Quit… 2 Qui… 2 Qu… 3 Not … 2 Qui… 3 Not… 4 Not… 4 No… 4 No… 3 Not …
-#&gt; <span style='color: #BCBCBC;'> 9</span> 2 Quit… 2 Quit… 2 Qui… 3 No… 4 Not … 2 Qui… 2 Qui… 3 Not… 2 Qu… 2 Qu… 3 Not …
-#&gt; <span style='color: #BCBCBC;'>10</span> 1 Extr… 1 Extr… 1 Ext… 1 Ex… 4 Not … 1 Ext… 2 Qui… 4 Not… 2 Qu… 3 No… 3 Not …
-#&gt; <span style='color: #949494;'># … with 1,775 more rows, and 9 more variables: INTELB &lt;fct&gt;, VOTE3 &lt;dbl&gt;,</span>
-#&gt; <span style='color: #949494;'>#   AGE &lt;dbl&gt;, EDUC &lt;dbl&gt;, GENDER &lt;dbl&gt;, PARTY &lt;dbl&gt;, .class &lt;int&gt;,</span>
-#&gt; <span style='color: #949494;'>#   .probability &lt;dbl&gt;, .rownames &lt;chr&gt;</span></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/dim.html'>dim</a></span><span class='op'>(</span><span class='va'>au2</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; [1] 1785   20</div></pre>
+<span class='fu'><a href='https://rdrr.io/r/base/dim.html'>dim</a></span><span class='op'>(</span><span class='va'>au2</span><span class='op'>)</span>
+
+<span class='op'>}</span>
+</div><div class='output co'>#&gt; <span class='message'>Loading required package: scatterplot3d</span></div><div class='output co'>#&gt; <span class='warning'>Warning: 'as.is' should be specified by the caller; using TRUE</span></div><div class='output co'>#&gt; <span class='warning'>Warning: 'as.is' should be specified by the caller; using TRUE</span></div><div class='output co'>#&gt; <span class='warning'>Warning: 'as.is' should be specified by the caller; using TRUE</span></div><div class='output co'>#&gt; [1] 1785   20</div><div class='input'>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

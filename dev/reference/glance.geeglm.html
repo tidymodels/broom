@@ -109,7 +109,7 @@ of the appropriate type." />
         <a class="navbar-brand" href="../index.html">broom</a>
         <div class="info hidden-xs hidden-sm">
           <span class="partof">part of <a href="https://tidymodels.org">tidymodels</a></span>
-          <span class="version version-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.7.9.9001</span>
+          <span class="version version-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.7.10.9000</span>
         </div>
       </div>
     </div>
@@ -230,6 +230,8 @@ the <code>data</code> argument.</p></td>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
+<span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/ns-load.html'>requireNamespace</a></span><span class='op'>(</span><span class='st'>"geepack"</span>, quietly <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
+
 <span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'>geepack</span><span class='op'>)</span>
 <span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>state</span><span class='op'>)</span>
 
@@ -240,6 +242,11 @@ the <code>data</code> argument.</p></td>
   data <span class='op'>=</span> <span class='va'>ds</span>, family <span class='op'>=</span> <span class='va'>gaussian</span>,
   corstr <span class='op'>=</span> <span class='st'>"exchangeable"</span>
 <span class='op'>)</span>
+
+<span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>geefit</span><span class='op'>)</span>
+<span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>geefit</span>, conf.int <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
+
+<span class='op'>}</span>
 </div><div class='output co'>#&gt; $fct
 #&gt; function (dose, parm) 
 #&gt; {
@@ -248,8 +255,8 @@ the <code>data</code> argument.</p></td>
 #&gt;     fd(dose, parmMat[, 1], parmMat[, 2], parmMat[, 3], parmMat[, 
 #&gt;         4], parmMat[, 5])
 #&gt; }
-#&gt; &lt;bytecode: 0x55dbb17d5630&gt;
-#&gt; &lt;environment: 0x55dbba826d18&gt;
+#&gt; &lt;bytecode: 0x55705b0d0dc8&gt;
+#&gt; &lt;environment: 0x55705b496678&gt;
 #&gt; 
 #&gt; $ssfct
 #&gt; function (dframe) 
@@ -268,8 +275,8 @@ the <code>data</code> argument.</p></td>
 #&gt;     befVal &lt;- c(bVal, x[which.max(y)], 1)
 #&gt;     return(c(befVal[1], cdVal, befVal[2:3])[is.na(fixed)])
 #&gt; }
-#&gt; &lt;bytecode: 0x55dbba6d80c8&gt;
-#&gt; &lt;environment: 0x55dbba6c9248&gt;
+#&gt; &lt;bytecode: 0x55705b491e28&gt;
+#&gt; &lt;environment: 0x55705b48ff40&gt;
 #&gt; 
 #&gt; $names
 #&gt; [1] "b" "c" "d" "e" "f"
@@ -282,8 +289,8 @@ the <code>data</code> argument.</p></td>
 #&gt;     attr(fd(dose, parmMat[, 1], parmMat[, 2], parmMat[, 3], parmMat[, 
 #&gt;         4], parmMat[, 5]), "gradient")[, notFixed]
 #&gt; }
-#&gt; &lt;bytecode: 0x55dbb17d2b08&gt;
-#&gt; &lt;environment: 0x55dbba826d18&gt;
+#&gt; &lt;bytecode: 0x55705b0cfaf8&gt;
+#&gt; &lt;environment: 0x55705b496678&gt;
 #&gt; 
 #&gt; $deriv2
 #&gt; NULL
@@ -309,8 +316,8 @@ the <code>data</code> argument.</p></td>
 #&gt;     attr(dFct(dose, parmMat[, 1], parmMat[, 2], parmMat[, 3], 
 #&gt;         parmMat[, 4], parmMat[, 5]), "gradient")
 #&gt; }
-#&gt; &lt;bytecode: 0x55dbb17d0398&gt;
-#&gt; &lt;environment: 0x55dbba826d18&gt;
+#&gt; &lt;bytecode: 0x55705b0d25b0&gt;
+#&gt; &lt;environment: 0x55705b496678&gt;
 #&gt; 
 #&gt; $edfct
 #&gt; function (parm, respl, reference, type, ...) 
@@ -345,8 +352,8 @@ the <code>data</code> argument.</p></td>
 #&gt;         parmVec[5]), "gradient")
 #&gt;     return(list(EDp, EDder[notFixed]))
 #&gt; }
-#&gt; &lt;bytecode: 0x55dbb16d1c08&gt;
-#&gt; &lt;environment: 0x55dbba826d18&gt;
+#&gt; &lt;bytecode: 0x55705b0d9f58&gt;
+#&gt; &lt;environment: 0x55705b496678&gt;
 #&gt; 
 #&gt; $name
 #&gt; [1] "family"
@@ -363,8 +370,8 @@ the <code>data</code> argument.</p></td>
 #&gt;     parmVec[indexVec] &lt;- parm
 #&gt;     parmVec[parmNo]
 #&gt; }
-#&gt; &lt;bytecode: 0x55dbb168e978&gt;
-#&gt; &lt;environment: 0x55dbba674500&gt;
+#&gt; &lt;bytecode: 0x55705b1b3070&gt;
+#&gt; &lt;environment: 0x55705b48d5d8&gt;
 #&gt; 
 #&gt; $upperAs
 #&gt; function (parm) 
@@ -372,8 +379,8 @@ the <code>data</code> argument.</p></td>
 #&gt;     parmVec[indexVec] &lt;- parm
 #&gt;     parmVec[parmNo]
 #&gt; }
-#&gt; &lt;bytecode: 0x55dbb168e978&gt;
-#&gt; &lt;environment: 0x55dbba660558&gt;
+#&gt; &lt;bytecode: 0x55705b1b3070&gt;
+#&gt; &lt;environment: 0x55705b48d840&gt;
 #&gt; 
 #&gt; $monoton
 #&gt; [1] NA
@@ -383,9 +390,7 @@ the <code>data</code> argument.</p></td>
 #&gt; 
 #&gt; attr(,"class")
 #&gt; [1] "gaussian"</div><div class='output co'>#&gt; <span class='error'>Error in glm(formula = Income ~ Frost + Murder, family = gaussian, data = ds): 'family' not recognized</span></div><div class='input'>
-<span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>geefit</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='error'>Error in tidy(geefit): object 'geefit' not found</span></div><div class='input'><span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>geefit</span>, conf.int <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='error'>Error in tidy(geefit, conf.int = TRUE): object 'geefit' not found</span></div></pre>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

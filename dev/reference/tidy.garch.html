@@ -100,7 +100,7 @@ specify which components to return." />
         <a class="navbar-brand" href="../index.html">broom</a>
         <div class="info hidden-xs hidden-sm">
           <span class="partof">part of <a href="https://tidymodels.org">tidymodels</a></span>
-          <span class="version version-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.7.9.9001</span>
+          <span class="version version-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.7.10.9000</span>
         </div>
       </div>
     </div>
@@ -227,14 +227,22 @@ the <code>data</code> argument.</p></td>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
+<span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/ns-load.html'>requireNamespace</a></span><span class='op'>(</span><span class='st'>"tseries"</span>, quietly <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
+
 <span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'>tseries</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='message'>Registered S3 method overwritten by 'quantmod':</span>
-#&gt; <span class='message'>  method            from</span>
-#&gt; <span class='message'>  as.zoo.data.frame zoo </span></div><div class='input'>
+
 <span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>EuStockMarkets</span><span class='op'>)</span>
 <span class='va'>dax</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/ergm/man/ergm-terms.html'>diff</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/Log.html'>log</a></span><span class='op'>(</span><span class='va'>EuStockMarkets</span><span class='op'>)</span><span class='op'>)</span><span class='op'>[</span>, <span class='st'>"DAX"</span><span class='op'>]</span>
 <span class='va'>dax.garch</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/tseries/man/garch.html'>garch</a></span><span class='op'>(</span><span class='va'>dax</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; 
+<span class='va'>dax.garch</span>
+
+<span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>dax.garch</span><span class='op'>)</span>
+<span class='fu'><a href='https://generics.r-lib.org/reference/glance.html'>glance</a></span><span class='op'>(</span><span class='va'>dax.garch</span><span class='op'>)</span>
+
+<span class='op'>}</span>
+</div><div class='output co'>#&gt; <span class='message'>Registered S3 method overwritten by 'quantmod':</span>
+#&gt; <span class='message'>  method            from</span>
+#&gt; <span class='message'>  as.zoo.data.frame zoo </span></div><div class='output co'>#&gt; 
 #&gt;  ***** ESTIMATION WITH ANALYTICAL GRADIENT ***** 
 #&gt; 
 #&gt; 
@@ -282,26 +290,11 @@ the <code>data</code> argument.</p></td>
 #&gt;      1    4.639289e-06     1.000e+00    -2.337e-02
 #&gt;      2    6.832875e-02     1.000e+00    -8.294e-07
 #&gt;      3    8.890666e-01     1.000e+00    -2.230e-06
-#&gt; </div><div class='input'><span class='va'>dax.garch</span>
-</div><div class='output co'>#&gt; 
-#&gt; Call:
-#&gt; garch(x = dax)
-#&gt; 
-#&gt; Coefficient(s):
-#&gt;        a0         a1         b1  
-#&gt; 4.639e-06  6.833e-02  8.891e-01  
-#&gt; </div><div class='input'>
-<span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>dax.garch</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 3 × 5</span>
-#&gt;   term    estimate   std.error statistic  p.value
-#&gt;   <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>      <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>       <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>    <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>
-#&gt; <span style='color: #BCBCBC;'>1</span> a0    0.000<span style='text-decoration: underline;'>004</span>64 0.000<span style='text-decoration: underline;'>000</span>756      6.14 8.42<span style='color: #949494;'>e</span><span style='color: #BB0000;'>-10</span>
-#&gt; <span style='color: #BCBCBC;'>2</span> a1    0.068<span style='text-decoration: underline;'>3</span>     0.011<span style='text-decoration: underline;'>3</span>           6.07 1.25<span style='color: #949494;'>e</span><span style='color: #BB0000;'>- 9</span>
-#&gt; <span style='color: #BCBCBC;'>3</span> b1    0.889      0.016<span style='text-decoration: underline;'>5</span>          53.8  0   <span style='color: #949494;'> </span>   </div><div class='input'><span class='fu'><a href='https://generics.r-lib.org/reference/glance.html'>glance</a></span><span class='op'>(</span><span class='va'>dax.garch</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 1 × 8</span>
+#&gt; </div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 1 × 8</span>
 #&gt;   statistic p.value parameter method         logLik     AIC   BIC  nobs
 #&gt;       <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>           <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span>
-#&gt; <span style='color: #BCBCBC;'>1</span>     0.136   0.713         1 Box-Ljung test  <span style='text-decoration: underline;'>5</span>958. -<span style='color: #BB0000; text-decoration: underline;'>11</span><span style='color: #BB0000;'>911.</span>    <span style='color: #BB0000;'>NA</span>  <span style='text-decoration: underline;'>1</span>859</div></pre>
+#&gt; <span style='color: #BCBCBC;'>1</span>     0.136   0.713         1 Box-Ljung test  <span style='text-decoration: underline;'>5</span>958. -<span style='color: #BB0000; text-decoration: underline;'>11</span><span style='color: #BB0000;'>911.</span>    <span style='color: #BB0000;'>NA</span>  <span style='text-decoration: underline;'>1</span>859</div><div class='input'>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
