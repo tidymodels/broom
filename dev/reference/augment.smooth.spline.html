@@ -186,7 +186,7 @@ specify which components to return.</p>
       <th>data</th>
       <td><p>A <a href='https://rdrr.io/r/base/data.frame.html'>base::data.frame</a> or <code><a href='https://tibble.tidyverse.org/reference/tibble.html'>tibble::tibble()</a></code> containing the original
 data that was used to produce the object <code>x</code>. Defaults to
-<code><a href='https://rdrr.io/r/stats/model.frame.html'>stats::model.frame(x)</a></code> so that <code><a href='https://generics.r-lib.org/reference/augment.html'>augment(my_fit)</a></code> returns the augmented
+<code>stats::model.frame(x)</code> so that <code>augment(my_fit)</code> returns the augmented
 original data. <strong>Do not</strong> pass new data to the <code>data</code> argument.
 Augment will report information such as influence and cooks distance for
 data passed to the <code>data</code> argument. These measures are only defined for
@@ -221,42 +221,45 @@ the <code>data</code> argument.</p></td>
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'>
-<span class='va'>spl</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/smooth.spline.html'>smooth.spline</a></span><span class='op'>(</span><span class='va'>mtcars</span><span class='op'>$</span><span class='va'>wt</span>, <span class='va'>mtcars</span><span class='op'>$</span><span class='va'>mpg</span>, df <span class='op'>=</span> <span class='fl'>4</span><span class='op'>)</span>
-<span class='fu'><a href='https://generics.r-lib.org/reference/augment.html'>augment</a></span><span class='op'>(</span><span class='va'>spl</span>, <span class='va'>mtcars</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 32 × 13</span>
-#&gt;      mpg   cyl  disp    hp  drat    wt  qsec    vs    am  gear  carb .fitted
-#&gt;    <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>
-#&gt; <span style='color: #BCBCBC;'> 1</span>  21       6  160    110  3.9   2.62  16.5     0     1     4     4    22.9
-#&gt; <span style='color: #BCBCBC;'> 2</span>  21       6  160    110  3.9   2.88  17.0     0     1     4     4    21.1
-#&gt; <span style='color: #BCBCBC;'> 3</span>  22.8     4  108     93  3.85  2.32  18.6     1     1     4     1    25.3
-#&gt; <span style='color: #BCBCBC;'> 4</span>  21.4     6  258    110  3.08  3.22  19.4     1     0     3     1    19.1
-#&gt; <span style='color: #BCBCBC;'> 5</span>  18.7     8  360    175  3.15  3.44  17.0     0     0     3     2    17.8
-#&gt; <span style='color: #BCBCBC;'> 6</span>  18.1     6  225    105  2.76  3.46  20.2     1     0     3     1    17.7
-#&gt; <span style='color: #BCBCBC;'> 7</span>  14.3     8  360    245  3.21  3.57  15.8     0     0     3     4    17.1
-#&gt; <span style='color: #BCBCBC;'> 8</span>  24.4     4  147.    62  3.69  3.19  20       1     0     4     2    19.2
-#&gt; <span style='color: #BCBCBC;'> 9</span>  22.8     4  141.    95  3.92  3.15  22.9     1     0     4     2    19.5
-#&gt; <span style='color: #BCBCBC;'>10</span>  19.2     6  168.   123  3.92  3.44  18.3     1     0     4     4    17.8
-#&gt; <span style='color: #949494;'># … with 22 more rows, and 1 more variable: .resid &lt;dbl&gt;</span></div><div class='input'><span class='fu'><a href='https://generics.r-lib.org/reference/augment.html'>augment</a></span><span class='op'>(</span><span class='va'>spl</span><span class='op'>)</span> <span class='co'># calls original columns x and y</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 32 × 5</span>
-#&gt;        x     y     w .fitted .resid
-#&gt;    <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>  <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>
-#&gt; <span style='color: #BCBCBC;'> 1</span>  2.62  21       1    22.9 -<span style='color: #BB0000;'>1.87</span> 
-#&gt; <span style='color: #BCBCBC;'> 2</span>  2.88  21       1    21.1 -<span style='color: #BB0000;'>0.117</span>
-#&gt; <span style='color: #BCBCBC;'> 3</span>  2.32  22.8     1    25.3 -<span style='color: #BB0000;'>2.48</span> 
-#&gt; <span style='color: #BCBCBC;'> 4</span>  3.22  21.4     1    19.1  2.33 
-#&gt; <span style='color: #BCBCBC;'> 5</span>  3.44  18.7     1    17.8  0.928
-#&gt; <span style='color: #BCBCBC;'> 6</span>  3.46  18.1     1    17.7  0.437
-#&gt; <span style='color: #BCBCBC;'> 7</span>  3.57  14.3     1    17.1 -<span style='color: #BB0000;'>2.79</span> 
-#&gt; <span style='color: #BCBCBC;'> 8</span>  3.19  24.4     1    19.2  5.19 
-#&gt; <span style='color: #BCBCBC;'> 9</span>  3.15  22.8     1    19.5  3.35 
-#&gt; <span style='color: #BCBCBC;'>10</span>  3.44  19.2     1    17.8  1.43 
-#&gt; <span style='color: #949494;'># … with 22 more rows</span></div><div class='input'>
-<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://ggplot2.tidyverse.org'>ggplot2</a></span><span class='op'>)</span>
-<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='fu'><a href='https://generics.r-lib.org/reference/augment.html'>augment</a></span><span class='op'>(</span><span class='va'>spl</span>, <span class='va'>mtcars</span><span class='op'>)</span>, <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span><span class='va'>wt</span>, <span class='va'>mpg</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
-  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_point.html'>geom_point</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span>
-  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_path.html'>geom_line</a></span><span class='op'>(</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>y <span class='op'>=</span> <span class='va'>.fitted</span><span class='op'>)</span><span class='op'>)</span>
-</div><div class='img'><img src='augment.smooth.spline-1.png' alt='' width='700' height='433' /></div></pre>
+    <pre class="examples"><span class='r-in'></span>
+<span class='r-in'><span class='va'>spl</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/smooth.spline.html'>smooth.spline</a></span><span class='op'>(</span><span class='va'>mtcars</span><span class='op'>$</span><span class='va'>wt</span>, <span class='va'>mtcars</span><span class='op'>$</span><span class='va'>mpg</span>, df <span class='op'>=</span> <span class='fl'>4</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'><a href='https://generics.r-lib.org/reference/augment.html'>augment</a></span><span class='op'>(</span><span class='va'>spl</span>, <span class='va'>mtcars</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># A tibble: 32 × 13</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>      mpg   cyl  disp    hp  drat    wt  qsec    vs    am  gear  carb .fitted</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 1</span>  21       6  160    110  3.9   2.62  16.5     0     1     4     4    22.9</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 2</span>  21       6  160    110  3.9   2.88  17.0     0     1     4     4    21.1</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 3</span>  22.8     4  108     93  3.85  2.32  18.6     1     1     4     1    25.3</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 4</span>  21.4     6  258    110  3.08  3.22  19.4     1     0     3     1    19.1</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 5</span>  18.7     8  360    175  3.15  3.44  17.0     0     0     3     2    17.8</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 6</span>  18.1     6  225    105  2.76  3.46  20.2     1     0     3     1    17.7</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 7</span>  14.3     8  360    245  3.21  3.57  15.8     0     0     3     4    17.1</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 8</span>  24.4     4  147.    62  3.69  3.19  20       1     0     4     2    19.2</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 9</span>  22.8     4  141.    95  3.92  3.15  22.9     1     0     4     2    19.5</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>10</span>  19.2     6  168.   123  3.92  3.44  18.3     1     0     4     4    17.8</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># … with 22 more rows, and 1 more variable: .resid &lt;dbl&gt;</span></span>
+<span class='r-in'><span class='fu'><a href='https://generics.r-lib.org/reference/augment.html'>augment</a></span><span class='op'>(</span><span class='va'>spl</span><span class='op'>)</span> <span class='co'># calls original columns x and y</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># A tibble: 32 × 5</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>        x     y     w .fitted .resid</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>  <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 1</span>  2.62  21       1    22.9 -<span style='color: #BB0000;'>1.87</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 2</span>  2.88  21       1    21.1 -<span style='color: #BB0000;'>0.117</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 3</span>  2.32  22.8     1    25.3 -<span style='color: #BB0000;'>2.48</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 4</span>  3.22  21.4     1    19.1  2.33 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 5</span>  3.44  18.7     1    17.8  0.928</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 6</span>  3.46  18.1     1    17.7  0.437</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 7</span>  3.57  14.3     1    17.1 -<span style='color: #BB0000;'>2.79</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 8</span>  3.19  24.4     1    19.2  5.19 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 9</span>  3.15  22.8     1    19.5  3.35 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>10</span>  3.44  19.2     1    17.8  1.43 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># … with 22 more rows</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://ggplot2.tidyverse.org'>ggplot2</a></span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='fu'><a href='https://generics.r-lib.org/reference/augment.html'>augment</a></span><span class='op'>(</span><span class='va'>spl</span>, <span class='va'>mtcars</span><span class='op'>)</span>, <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span><span class='va'>wt</span>, <span class='va'>mpg</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span class='r-in'>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_point.html'>geom_point</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span class='r-in'>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_path.html'>geom_line</a></span><span class='op'>(</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>y <span class='op'>=</span> <span class='va'>.fitted</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-plt img'><img src='augment.smooth.spline-1.png' alt='' width='700' height='433' /></span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

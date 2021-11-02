@@ -196,7 +196,7 @@ indicating which test statistic should be used. Defaults to "Pillai".</p></td>
     <dt><code>intercept</code></dt><dd><p>logical.  If <code>TRUE</code>, the intercept term is
     included in the table.</p></dd>
     <dt><code>tol</code></dt><dd><p>tolerance to be used in deciding if the residuals are
-    rank-deficient: see <code><a href='https://rdrr.io/r/base/qr.html'>qr</a></code>.</p></dd>
+    rank-deficient: see <code><a href='https://rdrr.io/pkg/Matrix/man/qr-methods.html'>qr</a></code>.</p></dd>
   
 </dl></td>
     </tr>
@@ -231,21 +231,22 @@ indicating which test statistic should be used. Defaults to "Pillai".</p></td>
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'>
-<span class='va'>npk2</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/with.html'>within</a></span><span class='op'>(</span><span class='va'>npk</span>, <span class='va'>foo</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span><span class='op'>(</span><span class='fl'>24</span><span class='op'>)</span><span class='op'>)</span>
-<span class='va'>m</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/manova.html'>manova</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/cbind.html'>cbind</a></span><span class='op'>(</span><span class='va'>yield</span>, <span class='va'>foo</span><span class='op'>)</span> <span class='op'>~</span> <span class='va'>block</span> <span class='op'>+</span> <span class='va'>N</span> <span class='op'>*</span> <span class='va'>P</span> <span class='op'>*</span> <span class='va'>K</span>, <span class='va'>npk2</span><span class='op'>)</span>
-<span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>m</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 8 × 7</span>
-#&gt;   term         df   pillai statistic num.df den.df p.value
-#&gt;   <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>    <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>  <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>  <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>
-#&gt; <span style='color: #BCBCBC;'>1</span> block         5  0.889      1.92       10     24  0.092<span style='text-decoration: underline;'>5</span>
-#&gt; <span style='color: #BCBCBC;'>2</span> N             1  0.521      5.97        2     11  0.017<span style='text-decoration: underline;'>5</span>
-#&gt; <span style='color: #BCBCBC;'>3</span> P             1  0.050<span style='text-decoration: underline;'>5</span>     0.293       2     11  0.752 
-#&gt; <span style='color: #BCBCBC;'>4</span> K             1  0.357      3.05        2     11  0.088<span style='text-decoration: underline;'>2</span>
-#&gt; <span style='color: #BCBCBC;'>5</span> N:P           1  0.103      0.633       2     11  0.549 
-#&gt; <span style='color: #BCBCBC;'>6</span> N:K           1  0.294      2.29        2     11  0.147 
-#&gt; <span style='color: #BCBCBC;'>7</span> P:K           1  0.008<span style='text-decoration: underline;'>55</span>    0.047<span style='text-decoration: underline;'>4</span>      2     11  0.954 
-#&gt; <span style='color: #BCBCBC;'>8</span> Residuals    12 <span style='color: #BB0000;'>NA</span>         <span style='color: #BB0000;'>NA</span>          <span style='color: #BB0000;'>NA</span>     <span style='color: #BB0000;'>NA</span> <span style='color: #BB0000;'>NA</span>     </div></pre>
+    <pre class="examples"><span class='r-in'></span>
+<span class='r-in'><span class='va'>npk2</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/with.html'>within</a></span><span class='op'>(</span><span class='va'>npk</span>, <span class='va'>foo</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span><span class='op'>(</span><span class='fl'>24</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>m</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/manova.html'>manova</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/cbind.html'>cbind</a></span><span class='op'>(</span><span class='va'>yield</span>, <span class='va'>foo</span><span class='op'>)</span> <span class='op'>~</span> <span class='va'>block</span> <span class='op'>+</span> <span class='va'>N</span> <span class='op'>*</span> <span class='va'>P</span> <span class='op'>*</span> <span class='va'>K</span>, <span class='va'>npk2</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>m</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># A tibble: 8 × 7</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   term         df   pillai statistic num.df den.df p.value</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>    <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>  <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>  <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>1</span> block         5  0.889      1.92       10     24  0.092<span style='text-decoration: underline;'>5</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>2</span> N             1  0.521      5.97        2     11  0.017<span style='text-decoration: underline;'>5</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>3</span> P             1  0.050<span style='text-decoration: underline;'>5</span>     0.293       2     11  0.752 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>4</span> K             1  0.357      3.05        2     11  0.088<span style='text-decoration: underline;'>2</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>5</span> N:P           1  0.103      0.633       2     11  0.549 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>6</span> N:K           1  0.294      2.29        2     11  0.147 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>7</span> P:K           1  0.008<span style='text-decoration: underline;'>55</span>    0.047<span style='text-decoration: underline;'>4</span>      2     11  0.954 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>8</span> Residuals    12 <span style='color: #BB0000;'>NA</span>         <span style='color: #BB0000;'>NA</span>          <span style='color: #BB0000;'>NA</span>     <span style='color: #BB0000;'>NA</span> <span style='color: #BB0000;'>NA</span>     </span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

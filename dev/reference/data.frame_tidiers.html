@@ -275,37 +275,45 @@ throw an error.</p>
     <p>David Robinson, Benjamin Nutter</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'>
-<span class='va'>td</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>mtcars</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='warning'>Warning: Data frame tidiers are deprecated and will be removed in an upcoming release of broom.</span></div><div class='output co'>#&gt; <span class='warning'>Warning: `data_frame()` was deprecated in tibble 1.1.0.</span>
-#&gt; <span class='warning'>Please use `tibble()` instead.</span></div><div class='input'><span class='va'>td</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 11 × 13</span>
-#&gt;    column     n    mean      sd median trimmed    mad   min    max  range   skew
-#&gt;    <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>  <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>  <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>  <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>  <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>  <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>  <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>
-#&gt; <span style='color: #BCBCBC;'> 1</span> mpg       32  20.1     6.03   19.2   19.7    3.65  10.4   33.9   23.5   0.640
-#&gt; <span style='color: #BCBCBC;'> 2</span> cyl       32   6.19    1.79    6      6.23   2      4      8      4    -<span style='color: #BB0000;'>0.183</span>
-#&gt; <span style='color: #BCBCBC;'> 3</span> disp      32 231.    124.    196.   223.    94.8   71.1  472    401.    0.400
-#&gt; <span style='color: #BCBCBC;'> 4</span> hp        32 147.     68.6   123    141.    52     52    335    283     0.761
-#&gt; <span style='color: #BCBCBC;'> 5</span> drat      32   3.60    0.535   3.70   3.58   0.475  2.76   4.93   2.17  0.279
-#&gt; <span style='color: #BCBCBC;'> 6</span> wt        32   3.22    0.978   3.32   3.15   0.517  1.51   5.42   3.91  0.444
-#&gt; <span style='color: #BCBCBC;'> 7</span> qsec      32  17.8     1.79   17.7   17.8    0.955 14.5   22.9    8.4   0.387
-#&gt; <span style='color: #BCBCBC;'> 8</span> vs        32   0.438   0.504   0      0.423  0      0      1      1     0.252
-#&gt; <span style='color: #BCBCBC;'> 9</span> am        32   0.406   0.499   0      0.385  0      0      1      1     0.382
-#&gt; <span style='color: #BCBCBC;'>10</span> gear      32   3.69    0.738   4      3.62   1      3      5      2     0.555
-#&gt; <span style='color: #BCBCBC;'>11</span> carb      32   2.81    1.62    2      2.65   1      1      8      7     1.10 
-#&gt; <span style='color: #949494;'># … with 2 more variables: kurtosis &lt;dbl&gt;, se &lt;dbl&gt;</span></div><div class='input'>
-<span class='fu'><a href='https://generics.r-lib.org/reference/glance.html'>glance</a></span><span class='op'>(</span><span class='va'>mtcars</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='warning'>Warning: Data frame tidiers are deprecated and will be removed in an upcoming release of broom.</span></div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 1 × 4</span>
-#&gt;    nrow  ncol complete.obs na.fraction
-#&gt;   <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span>        <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span>       <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>
-#&gt; <span style='color: #BCBCBC;'>1</span>    32    11           32           0</div><div class='input'>
-<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://ggplot2.tidyverse.org'>ggplot2</a></span><span class='op'>)</span>
-<span class='co'># compare mean and standard deviation</span>
-<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='va'>td</span>, <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span><span class='va'>mean</span>, <span class='va'>sd</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_point.html'>geom_point</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span>
-     <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_text.html'>geom_text</a></span><span class='op'>(</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>label <span class='op'>=</span> <span class='va'>column</span><span class='op'>)</span>, hjust <span class='op'>=</span> <span class='fl'>1</span>, vjust <span class='op'>=</span> <span class='fl'>1</span><span class='op'>)</span> <span class='op'>+</span>
-     <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/scale_continuous.html'>scale_x_log10</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/scale_continuous.html'>scale_y_log10</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_abline.html'>geom_abline</a></span><span class='op'>(</span><span class='op'>)</span>
-</div><div class='img'><img src='data.frame_tidiers-1.png' alt='' width='700' height='433' /></div><div class='input'>
-</div></pre>
+    <pre class="examples"><span class='r-in'></span>
+<span class='r-in'><span class='va'>td</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>mtcars</span><span class='op'>)</span></span>
+<span class='r-wrn co'><span class='r-pr'>#&gt;</span> <span class='warning'>Warning: </span>Data frame tidiers are deprecated and will be removed in an upcoming release of broom.</span>
+<span class='r-wrn co'><span class='r-pr'>#&gt;</span> <span class='warning'>Warning: </span>`data_frame()` was deprecated in tibble 1.1.0.</span>
+<span class='r-wrn co'><span class='r-pr'>#&gt;</span> Please use `tibble()` instead.</span>
+<span class='r-wrn co'><span class='r-pr'>#&gt;</span> <span style='color: #555555;'>This warning is displayed once every 8 hours.</span></span>
+<span class='r-wrn co'><span class='r-pr'>#&gt;</span> <span style='color: #555555;'>Call `lifecycle::last_lifecycle_warnings()` to see where this warning was generated.</span></span>
+<span class='r-in'><span class='va'>td</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># A tibble: 11 × 13</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    column     n    mean      sd median trimmed    mad   min    max  range   skew</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>  <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>  <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>  <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>  <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>  <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>  <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 1</span> mpg       32  20.1     6.03   19.2   19.7    3.65  10.4   33.9   23.5   0.640</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 2</span> cyl       32   6.19    1.79    6      6.23   2      4      8      4    -<span style='color: #BB0000;'>0.183</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 3</span> disp      32 231.    124.    196.   223.    94.8   71.1  472    401.    0.400</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 4</span> hp        32 147.     68.6   123    141.    52     52    335    283     0.761</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 5</span> drat      32   3.60    0.535   3.70   3.58   0.475  2.76   4.93   2.17  0.279</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 6</span> wt        32   3.22    0.978   3.32   3.15   0.517  1.51   5.42   3.91  0.444</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 7</span> qsec      32  17.8     1.79   17.7   17.8    0.955 14.5   22.9    8.4   0.387</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 8</span> vs        32   0.438   0.504   0      0.423  0      0      1      1     0.252</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 9</span> am        32   0.406   0.499   0      0.385  0      0      1      1     0.382</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>10</span> gear      32   3.69    0.738   4      3.62   1      3      5      2     0.555</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>11</span> carb      32   2.81    1.62    2      2.65   1      1      8      7     1.10 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># … with 2 more variables: kurtosis &lt;dbl&gt;, se &lt;dbl&gt;</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='fu'><a href='https://generics.r-lib.org/reference/glance.html'>glance</a></span><span class='op'>(</span><span class='va'>mtcars</span><span class='op'>)</span></span>
+<span class='r-wrn co'><span class='r-pr'>#&gt;</span> <span class='warning'>Warning: </span>Data frame tidiers are deprecated and will be removed in an upcoming release of broom.</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># A tibble: 1 × 4</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    nrow  ncol complete.obs na.fraction</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span>        <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span>       <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>1</span>    32    11           32           0</span>
+<span class='r-in'></span>
+<span class='r-in'><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://ggplot2.tidyverse.org'>ggplot2</a></span><span class='op'>)</span></span>
+<span class='r-in'><span class='co'># compare mean and standard deviation</span></span>
+<span class='r-in'><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='va'>td</span>, <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span><span class='va'>mean</span>, <span class='va'>sd</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_point.html'>geom_point</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span class='r-in'>     <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_text.html'>geom_text</a></span><span class='op'>(</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>label <span class='op'>=</span> <span class='va'>column</span><span class='op'>)</span>, hjust <span class='op'>=</span> <span class='fl'>1</span>, vjust <span class='op'>=</span> <span class='fl'>1</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span class='r-in'>     <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/scale_continuous.html'>scale_x_log10</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/scale_continuous.html'>scale_y_log10</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_abline.html'>geom_abline</a></span><span class='op'>(</span><span class='op'>)</span></span>
+<span class='r-plt img'><img src='data.frame_tidiers-1.png' alt='' width='700' height='433' /></span>
+<span class='r-in'></span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

@@ -229,47 +229,48 @@ the <code>data</code> argument.</p></td>
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'>
-<span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/ns-load.html'>requireNamespace</a></span><span class='op'>(</span><span class='st'>"lfe"</span>, quietly <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
-
-<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://github.com/sgaure/lfe'>lfe</a></span><span class='op'>)</span>
-
-<span class='co'># Use built-in "airquality" dataset</span>
-<span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='va'>airquality</span><span class='op'>)</span>
-
-<span class='co'># No FEs; same as lm()</span>
-<span class='va'>est0</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/lfe/man/felm.html'>felm</a></span><span class='op'>(</span><span class='va'>Ozone</span> <span class='op'>~</span> <span class='va'>Temp</span> <span class='op'>+</span> <span class='va'>Wind</span> <span class='op'>+</span> <span class='va'>Solar.R</span>, <span class='va'>airquality</span><span class='op'>)</span>
-<span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>est0</span><span class='op'>)</span>
-<span class='fu'><a href='https://generics.r-lib.org/reference/augment.html'>augment</a></span><span class='op'>(</span><span class='va'>est0</span><span class='op'>)</span>
-
-<span class='co'># Add month fixed effects</span>
-<span class='va'>est1</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/lfe/man/felm.html'>felm</a></span><span class='op'>(</span><span class='va'>Ozone</span> <span class='op'>~</span> <span class='va'>Temp</span> <span class='op'>+</span> <span class='va'>Wind</span> <span class='op'>+</span> <span class='va'>Solar.R</span>  <span class='op'>|</span> <span class='va'>Month</span>, <span class='va'>airquality</span><span class='op'>)</span>
-<span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>est1</span><span class='op'>)</span>
-<span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>est1</span>, fe <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
-<span class='fu'><a href='https://generics.r-lib.org/reference/augment.html'>augment</a></span><span class='op'>(</span><span class='va'>est1</span><span class='op'>)</span>
-<span class='fu'><a href='https://generics.r-lib.org/reference/glance.html'>glance</a></span><span class='op'>(</span><span class='va'>est1</span><span class='op'>)</span>
-
-<span class='co'># The "se.type" argument can be used to switch out different standard errors </span>
-<span class='co'># types on the fly. In turn, this can be useful exploring the effect of </span>
-<span class='co'># different error structures on model inference.</span>
-<span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>est1</span>, se.type <span class='op'>=</span> <span class='st'>"iid"</span><span class='op'>)</span>
-<span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>est1</span>, se.type <span class='op'>=</span> <span class='st'>"robust"</span><span class='op'>)</span>
-
-<span class='co'># Add clustered SEs (also by month)</span>
-<span class='va'>est2</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/lfe/man/felm.html'>felm</a></span><span class='op'>(</span><span class='va'>Ozone</span> <span class='op'>~</span> <span class='va'>Temp</span> <span class='op'>+</span> <span class='va'>Wind</span> <span class='op'>+</span> <span class='va'>Solar.R</span>  <span class='op'>|</span> <span class='va'>Month</span> <span class='op'>|</span> <span class='fl'>0</span> <span class='op'>|</span> <span class='va'>Month</span>, <span class='va'>airquality</span><span class='op'>)</span>
-<span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>est2</span>, conf.int <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span> 
-<span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>est2</span>, conf.int <span class='op'>=</span> <span class='cn'>TRUE</span>, se.type <span class='op'>=</span> <span class='st'>"cluster"</span><span class='op'>)</span>
-<span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>est2</span>, conf.int <span class='op'>=</span> <span class='cn'>TRUE</span>, se.type <span class='op'>=</span> <span class='st'>"robust"</span><span class='op'>)</span>
-<span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>est2</span>, conf.int <span class='op'>=</span> <span class='cn'>TRUE</span>, se.type <span class='op'>=</span> <span class='st'>"iid"</span><span class='op'>)</span>
-
-<span class='op'>}</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 3 × 7</span>
-#&gt;   term    estimate std.error statistic p.value conf.low conf.high
-#&gt;   <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>      <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>    <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>
-#&gt; <span style='color: #BCBCBC;'>1</span> Temp      1.88      0.341       5.50 0.005<span style='text-decoration: underline;'>32</span>   0.929      2.82 
-#&gt; <span style='color: #BCBCBC;'>2</span> Wind     -<span style='color: #BB0000;'>3.11</span>      0.660      -<span style='color: #BB0000;'>4.71</span> 0.009<span style='text-decoration: underline;'>24</span>  -<span style='color: #BB0000;'>4.94</span>      -<span style='color: #BB0000;'>1.28</span> 
-#&gt; <span style='color: #BCBCBC;'>3</span> Solar.R   0.052<span style='text-decoration: underline;'>2</span>    0.023<span style='text-decoration: underline;'>7</span>      2.21 0.092<span style='text-decoration: underline;'>0</span>   -<span style='color: #BB0000;'>0.013</span><span style='color: #BB0000; text-decoration: underline;'>5</span>     0.118</div><div class='input'>
-</div></pre>
+    <pre class="examples"><span class='r-in'></span>
+<span class='r-in'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/ns-load.html'>requireNamespace</a></span><span class='op'>(</span><span class='st'>"lfe"</span>, quietly <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://github.com/sgaure/lfe'>lfe</a></span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># Use built-in "airquality" dataset</span></span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='va'>airquality</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># No FEs; same as lm()</span></span>
+<span class='r-in'><span class='va'>est0</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/lfe/man/felm.html'>felm</a></span><span class='op'>(</span><span class='va'>Ozone</span> <span class='op'>~</span> <span class='va'>Temp</span> <span class='op'>+</span> <span class='va'>Wind</span> <span class='op'>+</span> <span class='va'>Solar.R</span>, <span class='va'>airquality</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>est0</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'><a href='https://generics.r-lib.org/reference/augment.html'>augment</a></span><span class='op'>(</span><span class='va'>est0</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># Add month fixed effects</span></span>
+<span class='r-in'><span class='va'>est1</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/lfe/man/felm.html'>felm</a></span><span class='op'>(</span><span class='va'>Ozone</span> <span class='op'>~</span> <span class='va'>Temp</span> <span class='op'>+</span> <span class='va'>Wind</span> <span class='op'>+</span> <span class='va'>Solar.R</span>  <span class='op'>|</span> <span class='va'>Month</span>, <span class='va'>airquality</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>est1</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>est1</span>, fe <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'><a href='https://generics.r-lib.org/reference/augment.html'>augment</a></span><span class='op'>(</span><span class='va'>est1</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'><a href='https://generics.r-lib.org/reference/glance.html'>glance</a></span><span class='op'>(</span><span class='va'>est1</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># The "se.type" argument can be used to switch out different standard errors </span></span>
+<span class='r-in'><span class='co'># types on the fly. In turn, this can be useful exploring the effect of </span></span>
+<span class='r-in'><span class='co'># different error structures on model inference.</span></span>
+<span class='r-in'><span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>est1</span>, se.type <span class='op'>=</span> <span class='st'>"iid"</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>est1</span>, se.type <span class='op'>=</span> <span class='st'>"robust"</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># Add clustered SEs (also by month)</span></span>
+<span class='r-in'><span class='va'>est2</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/lfe/man/felm.html'>felm</a></span><span class='op'>(</span><span class='va'>Ozone</span> <span class='op'>~</span> <span class='va'>Temp</span> <span class='op'>+</span> <span class='va'>Wind</span> <span class='op'>+</span> <span class='va'>Solar.R</span>  <span class='op'>|</span> <span class='va'>Month</span> <span class='op'>|</span> <span class='fl'>0</span> <span class='op'>|</span> <span class='va'>Month</span>, <span class='va'>airquality</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>est2</span>, conf.int <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span> </span>
+<span class='r-in'><span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>est2</span>, conf.int <span class='op'>=</span> <span class='cn'>TRUE</span>, se.type <span class='op'>=</span> <span class='st'>"cluster"</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>est2</span>, conf.int <span class='op'>=</span> <span class='cn'>TRUE</span>, se.type <span class='op'>=</span> <span class='st'>"robust"</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>est2</span>, conf.int <span class='op'>=</span> <span class='cn'>TRUE</span>, se.type <span class='op'>=</span> <span class='st'>"iid"</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='op'>}</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># A tibble: 3 × 7</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   term    estimate std.error statistic p.value conf.low conf.high</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>      <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>    <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>1</span> Temp      1.88      0.341       5.50 0.005<span style='text-decoration: underline;'>32</span>   0.929      2.82 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>2</span> Wind     -<span style='color: #BB0000;'>3.11</span>      0.660      -<span style='color: #BB0000;'>4.71</span> 0.009<span style='text-decoration: underline;'>24</span>  -<span style='color: #BB0000;'>4.94</span>      -<span style='color: #BB0000;'>1.28</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>3</span> Solar.R   0.052<span style='text-decoration: underline;'>2</span>    0.023<span style='text-decoration: underline;'>7</span>      2.21 0.092<span style='text-decoration: underline;'>0</span>   -<span style='color: #BB0000;'>0.013</span><span style='color: #BB0000; text-decoration: underline;'>5</span>     0.118</span>
+<span class='r-in'></span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

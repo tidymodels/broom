@@ -186,7 +186,7 @@ specify which components to return.</p>
       <th>data</th>
       <td><p>A <a href='https://rdrr.io/r/base/data.frame.html'>base::data.frame</a> or <code><a href='https://tibble.tidyverse.org/reference/tibble.html'>tibble::tibble()</a></code> containing the original
 data that was used to produce the object <code>x</code>. Defaults to
-<code><a href='https://rdrr.io/r/stats/model.frame.html'>stats::model.frame(x)</a></code> so that <code><a href='https://generics.r-lib.org/reference/augment.html'>augment(my_fit)</a></code> returns the augmented
+<code>stats::model.frame(x)</code> so that <code>augment(my_fit)</code> returns the augmented
 original data. <strong>Do not</strong> pass new data to the <code>data</code> argument.
 Augment will report information such as influence and cooks distance for
 data passed to the <code>data</code> argument. These measures are only defined for
@@ -248,56 +248,59 @@ original <code>loess</code> object was fit with
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'>
-<span class='va'>lo</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/loess.html'>loess</a></span><span class='op'>(</span>
-  <span class='va'>mpg</span> <span class='op'>~</span> <span class='va'>hp</span> <span class='op'>+</span> <span class='va'>wt</span>,
-  <span class='va'>mtcars</span>,
-  control <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/loess.control.html'>loess.control</a></span><span class='op'>(</span>surface <span class='op'>=</span> <span class='st'>"direct"</span><span class='op'>)</span>
-<span class='op'>)</span>
-
-<span class='fu'><a href='https://generics.r-lib.org/reference/augment.html'>augment</a></span><span class='op'>(</span><span class='va'>lo</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 32 × 6</span>
-#&gt;    .rownames           mpg    hp    wt .fitted  .resid
-#&gt;    <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>             <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>
-#&gt; <span style='color: #BCBCBC;'> 1</span> Mazda RX4          21     110  2.62    21.4 -<span style='color: #BB0000;'>0.435</span> 
-#&gt; <span style='color: #BCBCBC;'> 2</span> Mazda RX4 Wag      21     110  2.88    20.9  0.097<span style='text-decoration: underline;'>6</span>
-#&gt; <span style='color: #BCBCBC;'> 3</span> Datsun 710         22.8    93  2.32    24.7 -<span style='color: #BB0000;'>1.88</span>  
-#&gt; <span style='color: #BCBCBC;'> 4</span> Hornet 4 Drive     21.4   110  3.22    19.6  1.76  
-#&gt; <span style='color: #BCBCBC;'> 5</span> Hornet Sportabout  18.7   175  3.44    16.7  2.02  
-#&gt; <span style='color: #BCBCBC;'> 6</span> Valiant            18.1   105  3.46    18.9 -<span style='color: #BB0000;'>0.833</span> 
-#&gt; <span style='color: #BCBCBC;'> 7</span> Duster 360         14.3   245  3.57    14.9 -<span style='color: #BB0000;'>0.641</span> 
-#&gt; <span style='color: #BCBCBC;'> 8</span> Merc 240D          24.4    62  3.19    25.1 -<span style='color: #BB0000;'>0.695</span> 
-#&gt; <span style='color: #BCBCBC;'> 9</span> Merc 230           22.8    95  3.15    21.4  1.43  
-#&gt; <span style='color: #BCBCBC;'>10</span> Merc 280           19.2   123  3.44    18.4  0.801 
-#&gt; <span style='color: #949494;'># … with 22 more rows</span></div><div class='input'>
-<span class='co'># with all columns of original data</span>
-<span class='fu'><a href='https://generics.r-lib.org/reference/augment.html'>augment</a></span><span class='op'>(</span><span class='va'>lo</span>, <span class='va'>mtcars</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 32 × 14</span>
-#&gt;    .rownames     mpg   cyl  disp    hp  drat    wt  qsec    vs    am  gear  carb
-#&gt;    <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>       <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>
-#&gt; <span style='color: #BCBCBC;'> 1</span> Mazda RX4    21       6  160    110  3.9   2.62  16.5     0     1     4     4
-#&gt; <span style='color: #BCBCBC;'> 2</span> Mazda RX4 …  21       6  160    110  3.9   2.88  17.0     0     1     4     4
-#&gt; <span style='color: #BCBCBC;'> 3</span> Datsun 710   22.8     4  108     93  3.85  2.32  18.6     1     1     4     1
-#&gt; <span style='color: #BCBCBC;'> 4</span> Hornet 4 D…  21.4     6  258    110  3.08  3.22  19.4     1     0     3     1
-#&gt; <span style='color: #BCBCBC;'> 5</span> Hornet Spo…  18.7     8  360    175  3.15  3.44  17.0     0     0     3     2
-#&gt; <span style='color: #BCBCBC;'> 6</span> Valiant      18.1     6  225    105  2.76  3.46  20.2     1     0     3     1
-#&gt; <span style='color: #BCBCBC;'> 7</span> Duster 360   14.3     8  360    245  3.21  3.57  15.8     0     0     3     4
-#&gt; <span style='color: #BCBCBC;'> 8</span> Merc 240D    24.4     4  147.    62  3.69  3.19  20       1     0     4     2
-#&gt; <span style='color: #BCBCBC;'> 9</span> Merc 230     22.8     4  141.    95  3.92  3.15  22.9     1     0     4     2
-#&gt; <span style='color: #BCBCBC;'>10</span> Merc 280     19.2     6  168.   123  3.92  3.44  18.3     1     0     4     4
-#&gt; <span style='color: #949494;'># … with 22 more rows, and 2 more variables: .fitted &lt;dbl&gt;, .resid &lt;dbl&gt;</span></div><div class='input'>
-<span class='co'># with a new dataset</span>
-<span class='fu'><a href='https://generics.r-lib.org/reference/augment.html'>augment</a></span><span class='op'>(</span><span class='va'>lo</span>, newdata <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='va'>mtcars</span><span class='op'>)</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 6 × 14</span>
-#&gt;   .rownames      mpg   cyl  disp    hp  drat    wt  qsec    vs    am  gear  carb
-#&gt;   <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>        <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>
-#&gt; <span style='color: #BCBCBC;'>1</span> Mazda RX4     21       6   160   110  3.9   2.62  16.5     0     1     4     4
-#&gt; <span style='color: #BCBCBC;'>2</span> Mazda RX4 W…  21       6   160   110  3.9   2.88  17.0     0     1     4     4
-#&gt; <span style='color: #BCBCBC;'>3</span> Datsun 710    22.8     4   108    93  3.85  2.32  18.6     1     1     4     1
-#&gt; <span style='color: #BCBCBC;'>4</span> Hornet 4 Dr…  21.4     6   258   110  3.08  3.22  19.4     1     0     3     1
-#&gt; <span style='color: #BCBCBC;'>5</span> Hornet Spor…  18.7     8   360   175  3.15  3.44  17.0     0     0     3     2
-#&gt; <span style='color: #BCBCBC;'>6</span> Valiant       18.1     6   225   105  2.76  3.46  20.2     1     0     3     1
-#&gt; <span style='color: #949494;'># … with 2 more variables: .fitted &lt;dbl&gt;, .resid &lt;dbl&gt;</span></div></pre>
+    <pre class="examples"><span class='r-in'></span>
+<span class='r-in'><span class='va'>lo</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/loess.html'>loess</a></span><span class='op'>(</span></span>
+<span class='r-in'>  <span class='va'>mpg</span> <span class='op'>~</span> <span class='va'>hp</span> <span class='op'>+</span> <span class='va'>wt</span>,</span>
+<span class='r-in'>  <span class='va'>mtcars</span>,</span>
+<span class='r-in'>  control <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/loess.control.html'>loess.control</a></span><span class='op'>(</span>surface <span class='op'>=</span> <span class='st'>"direct"</span><span class='op'>)</span></span>
+<span class='r-in'><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='fu'><a href='https://generics.r-lib.org/reference/augment.html'>augment</a></span><span class='op'>(</span><span class='va'>lo</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># A tibble: 32 × 6</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    .rownames           mpg    hp    wt .fitted  .resid</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>             <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 1</span> Mazda RX4          21     110  2.62    21.4 -<span style='color: #BB0000;'>0.435</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 2</span> Mazda RX4 Wag      21     110  2.88    20.9  0.097<span style='text-decoration: underline;'>6</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 3</span> Datsun 710         22.8    93  2.32    24.7 -<span style='color: #BB0000;'>1.88</span>  </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 4</span> Hornet 4 Drive     21.4   110  3.22    19.6  1.76  </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 5</span> Hornet Sportabout  18.7   175  3.44    16.7  2.02  </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 6</span> Valiant            18.1   105  3.46    18.9 -<span style='color: #BB0000;'>0.833</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 7</span> Duster 360         14.3   245  3.57    14.9 -<span style='color: #BB0000;'>0.641</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 8</span> Merc 240D          24.4    62  3.19    25.1 -<span style='color: #BB0000;'>0.695</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 9</span> Merc 230           22.8    95  3.15    21.4  1.43  </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>10</span> Merc 280           19.2   123  3.44    18.4  0.801 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># … with 22 more rows</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># with all columns of original data</span></span>
+<span class='r-in'><span class='fu'><a href='https://generics.r-lib.org/reference/augment.html'>augment</a></span><span class='op'>(</span><span class='va'>lo</span>, <span class='va'>mtcars</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># A tibble: 32 × 14</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    .rownames     mpg   cyl  disp    hp  drat    wt  qsec    vs    am  gear  carb</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>       <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 1</span> Mazda RX4    21       6  160    110  3.9   2.62  16.5     0     1     4     4</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 2</span> Mazda RX4 …  21       6  160    110  3.9   2.88  17.0     0     1     4     4</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 3</span> Datsun 710   22.8     4  108     93  3.85  2.32  18.6     1     1     4     1</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 4</span> Hornet 4 D…  21.4     6  258    110  3.08  3.22  19.4     1     0     3     1</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 5</span> Hornet Spo…  18.7     8  360    175  3.15  3.44  17.0     0     0     3     2</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 6</span> Valiant      18.1     6  225    105  2.76  3.46  20.2     1     0     3     1</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 7</span> Duster 360   14.3     8  360    245  3.21  3.57  15.8     0     0     3     4</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 8</span> Merc 240D    24.4     4  147.    62  3.69  3.19  20       1     0     4     2</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 9</span> Merc 230     22.8     4  141.    95  3.92  3.15  22.9     1     0     4     2</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>10</span> Merc 280     19.2     6  168.   123  3.92  3.44  18.3     1     0     4     4</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># … with 22 more rows, and 2 more variables: .fitted &lt;dbl&gt;, .resid &lt;dbl&gt;</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># with a new dataset</span></span>
+<span class='r-in'><span class='fu'><a href='https://generics.r-lib.org/reference/augment.html'>augment</a></span><span class='op'>(</span><span class='va'>lo</span>, newdata <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='va'>mtcars</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># A tibble: 6 × 14</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   .rownames      mpg   cyl  disp    hp  drat    wt  qsec    vs    am  gear  carb</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>        <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>1</span> Mazda RX4     21       6   160   110  3.9   2.62  16.5     0     1     4     4</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>2</span> Mazda RX4 W…  21       6   160   110  3.9   2.88  17.0     0     1     4     4</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>3</span> Datsun 710    22.8     4   108    93  3.85  2.32  18.6     1     1     4     1</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>4</span> Hornet 4 Dr…  21.4     6   258   110  3.08  3.22  19.4     1     0     3     1</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>5</span> Hornet Spor…  18.7     8   360   175  3.15  3.44  17.0     0     0     3     2</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>6</span> Valiant       18.1     6   225   105  2.76  3.46  20.2     1     0     3     1</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># … with 2 more variables: .fitted &lt;dbl&gt;, .resid &lt;dbl&gt;</span></span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

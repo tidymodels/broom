@@ -211,7 +211,7 @@ variable used to fit the model is not included in <code>newdata</code>, then no
 associated with training observations (such as influences or related)
 measures that is not meaningfully defined for new observations.</p>
 <p>For convenience, many augment methods provide default <code>data</code> arguments,
-so that <code><a href='https://generics.r-lib.org/reference/augment.html'>augment(fit)</a></code> will return the augmented training data. In these
+so that <code>augment(fit)</code> will return the augmented training data. In these
 cases, augment tries to reconstruct the original data based on the model
 object with varying degrees of success.</p>
 <p>The augmented dataset is always returned as a <a href='https://tibble.tidyverse.org/reference/tibble.html'>tibble::tibble</a> with the
@@ -242,7 +242,7 @@ missing at this time.</p>
       <th>data</th>
       <td><p>A <a href='https://rdrr.io/r/base/data.frame.html'>base::data.frame</a> or <code><a href='https://tibble.tidyverse.org/reference/tibble.html'>tibble::tibble()</a></code> containing the original
 data that was used to produce the object <code>x</code>. Defaults to
-<code><a href='https://rdrr.io/r/stats/model.frame.html'>stats::model.frame(x)</a></code> so that <code><a href='https://generics.r-lib.org/reference/augment.html'>augment(my_fit)</a></code> returns the augmented
+<code>stats::model.frame(x)</code> so that <code>augment(my_fit)</code> returns the augmented
 original data. <strong>Do not</strong> pass new data to the <code>data</code> argument.
 Augment will report information such as influence and cooks distance for
 data passed to the <code>data</code> argument. These measures are only defined for
@@ -287,58 +287,63 @@ included in the augmented output.</p>
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'>
-<span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/ns-load.html'>requireNamespace</a></span><span class='op'>(</span><span class='st'>"poLCA"</span>, quietly <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
-
-<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='http://dlinzer.github.com/poLCA'>poLCA</a></span><span class='op'>)</span>
-<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://dplyr.tidyverse.org'>dplyr</a></span><span class='op'>)</span>
-
-<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>values</span><span class='op'>)</span>
-<span class='va'>f</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/cbind.html'>cbind</a></span><span class='op'>(</span><span class='va'>A</span>, <span class='va'>B</span>, <span class='va'>C</span>, <span class='va'>D</span><span class='op'>)</span> <span class='op'>~</span> <span class='fl'>1</span>
-<span class='va'>M1</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/poLCA/man/poLCA.html'>poLCA</a></span><span class='op'>(</span><span class='va'>f</span>, <span class='va'>values</span>, nclass <span class='op'>=</span> <span class='fl'>2</span>, verbose <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
-
-<span class='va'>M1</span>
-<span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>M1</span><span class='op'>)</span>
-<span class='fu'><a href='https://generics.r-lib.org/reference/augment.html'>augment</a></span><span class='op'>(</span><span class='va'>M1</span><span class='op'>)</span>
-<span class='fu'><a href='https://generics.r-lib.org/reference/glance.html'>glance</a></span><span class='op'>(</span><span class='va'>M1</span><span class='op'>)</span>
-
-<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://ggplot2.tidyverse.org'>ggplot2</a></span><span class='op'>)</span>
-
-<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>M1</span><span class='op'>)</span>, <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/factor.html'>factor</a></span><span class='op'>(</span><span class='va'>class</span><span class='op'>)</span>, <span class='va'>estimate</span>, fill <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>factor</a></span><span class='op'>(</span><span class='va'>outcome</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
-  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_bar.html'>geom_bar</a></span><span class='op'>(</span>stat <span class='op'>=</span> <span class='st'>"identity"</span>, width <span class='op'>=</span> <span class='fl'>1</span><span class='op'>)</span> <span class='op'>+</span>
-  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/facet_wrap.html'>facet_wrap</a></span><span class='op'>(</span><span class='op'>~</span><span class='va'>variable</span><span class='op'>)</span>
-<span class='co'>## Three-class model with a single covariate.</span>
-
-<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>election</span><span class='op'>)</span>
-<span class='va'>f2a</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/cbind.html'>cbind</a></span><span class='op'>(</span>
-  <span class='va'>MORALG</span>, <span class='va'>CARESG</span>, <span class='va'>KNOWG</span>, <span class='va'>LEADG</span>, <span class='va'>DISHONG</span>, <span class='va'>INTELG</span>,
-  <span class='va'>MORALB</span>, <span class='va'>CARESB</span>, <span class='va'>KNOWB</span>, <span class='va'>LEADB</span>, <span class='va'>DISHONB</span>, <span class='va'>INTELB</span>
-<span class='op'>)</span> <span class='op'>~</span> <span class='va'>PARTY</span>
-<span class='va'>nes2a</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/poLCA/man/poLCA.html'>poLCA</a></span><span class='op'>(</span><span class='va'>f2a</span>, <span class='va'>election</span>, nclass <span class='op'>=</span> <span class='fl'>3</span>, nrep <span class='op'>=</span> <span class='fl'>5</span>, verbose <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
-
-<span class='va'>td</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>nes2a</span><span class='op'>)</span>
-<span class='va'>td</span>
-
-<span class='co'># show</span>
-
-<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='va'>td</span>, <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span><span class='va'>outcome</span>, <span class='va'>estimate</span>, color <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>factor</a></span><span class='op'>(</span><span class='va'>class</span><span class='op'>)</span>, group <span class='op'>=</span> <span class='va'>class</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
-  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_path.html'>geom_line</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span>
-  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/facet_wrap.html'>facet_wrap</a></span><span class='op'>(</span><span class='op'>~</span><span class='va'>variable</span>, nrow <span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span> <span class='op'>+</span>
-  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/theme.html'>theme</a></span><span class='op'>(</span>axis.text.x <span class='op'>=</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/element.html'>element_text</a></span><span class='op'>(</span>angle <span class='op'>=</span> <span class='fl'>90</span>, hjust <span class='op'>=</span> <span class='fl'>1</span><span class='op'>)</span><span class='op'>)</span>
-
-<span class='va'>au</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://generics.r-lib.org/reference/augment.html'>augment</a></span><span class='op'>(</span><span class='va'>nes2a</span><span class='op'>)</span>
-<span class='va'>au</span>
-<span class='fu'><a href='https://dplyr.tidyverse.org/reference/count.html'>count</a></span><span class='op'>(</span><span class='va'>au</span>, <span class='va'>.class</span><span class='op'>)</span>
-
-<span class='co'># if the original data is provided, it leads to NAs in new columns</span>
-<span class='co'># for rows that weren't predicted</span>
-<span class='va'>au2</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://generics.r-lib.org/reference/augment.html'>augment</a></span><span class='op'>(</span><span class='va'>nes2a</span>, data <span class='op'>=</span> <span class='va'>election</span><span class='op'>)</span>
-<span class='va'>au2</span>
-<span class='fu'><a href='https://rdrr.io/r/base/dim.html'>dim</a></span><span class='op'>(</span><span class='va'>au2</span><span class='op'>)</span>
-
-<span class='op'>}</span>
-</div><div class='output co'>#&gt; <span class='message'>Loading required package: scatterplot3d</span></div><div class='output co'>#&gt; <span class='warning'>Warning: 'as.is' should be specified by the caller; using TRUE</span></div><div class='output co'>#&gt; <span class='warning'>Warning: 'as.is' should be specified by the caller; using TRUE</span></div><div class='output co'>#&gt; <span class='warning'>Warning: 'as.is' should be specified by the caller; using TRUE</span></div><div class='output co'>#&gt; [1] 1785   20</div><div class='input'>
-</div></pre>
+    <pre class="examples"><span class='r-in'></span>
+<span class='r-in'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/ns-load.html'>requireNamespace</a></span><span class='op'>(</span><span class='st'>"poLCA"</span>, quietly <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='http://dlinzer.github.com/poLCA'>poLCA</a></span><span class='op'>)</span></span>
+<span class='r-in'><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://dplyr.tidyverse.org'>dplyr</a></span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>values</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>f</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/cbind.html'>cbind</a></span><span class='op'>(</span><span class='va'>A</span>, <span class='va'>B</span>, <span class='va'>C</span>, <span class='va'>D</span><span class='op'>)</span> <span class='op'>~</span> <span class='fl'>1</span></span>
+<span class='r-in'><span class='va'>M1</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/poLCA/man/poLCA.html'>poLCA</a></span><span class='op'>(</span><span class='va'>f</span>, <span class='va'>values</span>, nclass <span class='op'>=</span> <span class='fl'>2</span>, verbose <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='va'>M1</span></span>
+<span class='r-in'><span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>M1</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'><a href='https://generics.r-lib.org/reference/augment.html'>augment</a></span><span class='op'>(</span><span class='va'>M1</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'><a href='https://generics.r-lib.org/reference/glance.html'>glance</a></span><span class='op'>(</span><span class='va'>M1</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://ggplot2.tidyverse.org'>ggplot2</a></span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>M1</span><span class='op'>)</span>, <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/factor.html'>factor</a></span><span class='op'>(</span><span class='va'>class</span><span class='op'>)</span>, <span class='va'>estimate</span>, fill <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>factor</a></span><span class='op'>(</span><span class='va'>outcome</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span class='r-in'>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_bar.html'>geom_bar</a></span><span class='op'>(</span>stat <span class='op'>=</span> <span class='st'>"identity"</span>, width <span class='op'>=</span> <span class='fl'>1</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span class='r-in'>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/facet_wrap.html'>facet_wrap</a></span><span class='op'>(</span><span class='op'>~</span><span class='va'>variable</span><span class='op'>)</span></span>
+<span class='r-in'><span class='co'>## Three-class model with a single covariate.</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>election</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>f2a</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/cbind.html'>cbind</a></span><span class='op'>(</span></span>
+<span class='r-in'>  <span class='va'>MORALG</span>, <span class='va'>CARESG</span>, <span class='va'>KNOWG</span>, <span class='va'>LEADG</span>, <span class='va'>DISHONG</span>, <span class='va'>INTELG</span>,</span>
+<span class='r-in'>  <span class='va'>MORALB</span>, <span class='va'>CARESB</span>, <span class='va'>KNOWB</span>, <span class='va'>LEADB</span>, <span class='va'>DISHONB</span>, <span class='va'>INTELB</span></span>
+<span class='r-in'><span class='op'>)</span> <span class='op'>~</span> <span class='va'>PARTY</span></span>
+<span class='r-in'><span class='va'>nes2a</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/poLCA/man/poLCA.html'>poLCA</a></span><span class='op'>(</span><span class='va'>f2a</span>, <span class='va'>election</span>, nclass <span class='op'>=</span> <span class='fl'>3</span>, nrep <span class='op'>=</span> <span class='fl'>5</span>, verbose <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='va'>td</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>nes2a</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>td</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># show</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='va'>td</span>, <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span><span class='va'>outcome</span>, <span class='va'>estimate</span>, color <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>factor</a></span><span class='op'>(</span><span class='va'>class</span><span class='op'>)</span>, group <span class='op'>=</span> <span class='va'>class</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span class='r-in'>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_path.html'>geom_line</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span class='r-in'>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/facet_wrap.html'>facet_wrap</a></span><span class='op'>(</span><span class='op'>~</span><span class='va'>variable</span>, nrow <span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span class='r-in'>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/theme.html'>theme</a></span><span class='op'>(</span>axis.text.x <span class='op'>=</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/element.html'>element_text</a></span><span class='op'>(</span>angle <span class='op'>=</span> <span class='fl'>90</span>, hjust <span class='op'>=</span> <span class='fl'>1</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='va'>au</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://generics.r-lib.org/reference/augment.html'>augment</a></span><span class='op'>(</span><span class='va'>nes2a</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>au</span></span>
+<span class='r-in'><span class='fu'><a href='https://dplyr.tidyverse.org/reference/count.html'>count</a></span><span class='op'>(</span><span class='va'>au</span>, <span class='va'>.class</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># if the original data is provided, it leads to NAs in new columns</span></span>
+<span class='r-in'><span class='co'># for rows that weren't predicted</span></span>
+<span class='r-in'><span class='va'>au2</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://generics.r-lib.org/reference/augment.html'>augment</a></span><span class='op'>(</span><span class='va'>nes2a</span>, data <span class='op'>=</span> <span class='va'>election</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>au2</span></span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/base/dim.html'>dim</a></span><span class='op'>(</span><span class='va'>au2</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='op'>}</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> Loading required package: scatterplot3d</span>
+<span class='r-wrn co'><span class='r-pr'>#&gt;</span> <span class='warning'>Warning: </span>'as.is' should be specified by the caller; using TRUE</span>
+<span class='r-wrn co'><span class='r-pr'>#&gt;</span> <span class='warning'>Warning: </span>'as.is' should be specified by the caller; using TRUE</span>
+<span class='r-wrn co'><span class='r-pr'>#&gt;</span> <span class='warning'>Warning: </span>'as.is' should be specified by the caller; using TRUE</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] 1785   20</span>
+<span class='r-in'></span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

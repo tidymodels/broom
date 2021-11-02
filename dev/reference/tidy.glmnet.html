@@ -230,54 +230,55 @@ choice of lambda.</p>
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'>
-<span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/ns-load.html'>requireNamespace</a></span><span class='op'>(</span><span class='st'>"glmnet"</span>, quietly <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
-
-<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://glmnet.stanford.edu'>glmnet</a></span><span class='op'>)</span>
-
-<span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span><span class='op'>(</span><span class='fl'>2014</span><span class='op'>)</span>
-<span class='va'>x</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span><span class='op'>(</span><span class='fl'>100</span> <span class='op'>*</span> <span class='fl'>20</span><span class='op'>)</span>, <span class='fl'>100</span>, <span class='fl'>20</span><span class='op'>)</span>
-<span class='va'>y</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span><span class='op'>(</span><span class='fl'>100</span><span class='op'>)</span>
-<span class='va'>fit1</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://glmnet.stanford.edu/reference/glmnet.html'>glmnet</a></span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>y</span><span class='op'>)</span>
-
-<span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>fit1</span><span class='op'>)</span>
-<span class='fu'><a href='https://generics.r-lib.org/reference/glance.html'>glance</a></span><span class='op'>(</span><span class='va'>fit1</span><span class='op'>)</span>
-
-<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://dplyr.tidyverse.org'>dplyr</a></span><span class='op'>)</span>
-<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://ggplot2.tidyverse.org'>ggplot2</a></span><span class='op'>)</span>
-
-<span class='va'>tidied</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>fit1</span><span class='op'>)</span> <span class='op'>%&gt;%</span> <span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span><span class='op'>(</span><span class='va'>term</span> <span class='op'>!=</span> <span class='st'>"(Intercept)"</span><span class='op'>)</span>
-
-<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='va'>tidied</span>, <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span><span class='va'>step</span>, <span class='va'>estimate</span>, group <span class='op'>=</span> <span class='va'>term</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
-  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_path.html'>geom_line</a></span><span class='op'>(</span><span class='op'>)</span>
-<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='va'>tidied</span>, <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span><span class='va'>lambda</span>, <span class='va'>estimate</span>, group <span class='op'>=</span> <span class='va'>term</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
-  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_path.html'>geom_line</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span>
-  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/scale_continuous.html'>scale_x_log10</a></span><span class='op'>(</span><span class='op'>)</span>
-
-<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='va'>tidied</span>, <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span><span class='va'>lambda</span>, <span class='va'>dev.ratio</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
-  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_path.html'>geom_line</a></span><span class='op'>(</span><span class='op'>)</span>
-
-<span class='co'># works for other types of regressions as well, such as logistic</span>
-<span class='va'>g2</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/sample.html'>sample</a></span><span class='op'>(</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>2</span>, <span class='fl'>100</span>, replace <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
-<span class='va'>fit2</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://glmnet.stanford.edu/reference/glmnet.html'>glmnet</a></span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>g2</span>, family <span class='op'>=</span> <span class='st'>"binomial"</span><span class='op'>)</span>
-<span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>fit2</span><span class='op'>)</span>
-
-<span class='op'>}</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 947 × 5</span>
-#&gt;    term         step estimate lambda dev.ratio
-#&gt;    <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>       <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>    <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>  <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>
-#&gt; <span style='color: #BCBCBC;'> 1</span> (Intercept)     1    0.282 0.090<span style='text-decoration: underline;'>6</span> -<span style='color: #BB0000;'>1.46</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>-15</span>
-#&gt; <span style='color: #BCBCBC;'> 2</span> (Intercept)     2    0.281 0.082<span style='text-decoration: underline;'>6</span>  6.28<span style='color: #949494;'>e</span><span style='color: #BB0000;'>- 3</span>
-#&gt; <span style='color: #BCBCBC;'> 3</span> (Intercept)     3    0.279 0.075<span style='text-decoration: underline;'>3</span>  1.55<span style='color: #949494;'>e</span><span style='color: #BB0000;'>- 2</span>
-#&gt; <span style='color: #BCBCBC;'> 4</span> (Intercept)     4    0.277 0.068<span style='text-decoration: underline;'>6</span>  2.48<span style='color: #949494;'>e</span><span style='color: #BB0000;'>- 2</span>
-#&gt; <span style='color: #BCBCBC;'> 5</span> (Intercept)     5    0.284 0.062<span style='text-decoration: underline;'>5</span>  4.17<span style='color: #949494;'>e</span><span style='color: #BB0000;'>- 2</span>
-#&gt; <span style='color: #BCBCBC;'> 6</span> (Intercept)     6    0.293 0.056<span style='text-decoration: underline;'>9</span>  5.79<span style='color: #949494;'>e</span><span style='color: #BB0000;'>- 2</span>
-#&gt; <span style='color: #BCBCBC;'> 7</span> (Intercept)     7    0.303 0.051<span style='text-decoration: underline;'>9</span>  7.39<span style='color: #949494;'>e</span><span style='color: #BB0000;'>- 2</span>
-#&gt; <span style='color: #BCBCBC;'> 8</span> (Intercept)     8    0.314 0.047<span style='text-decoration: underline;'>3</span>  8.94<span style='color: #949494;'>e</span><span style='color: #BB0000;'>- 2</span>
-#&gt; <span style='color: #BCBCBC;'> 9</span> (Intercept)     9    0.325 0.043<span style='text-decoration: underline;'>1</span>  1.03<span style='color: #949494;'>e</span><span style='color: #BB0000;'>- 1</span>
-#&gt; <span style='color: #BCBCBC;'>10</span> (Intercept)    10    0.336 0.039<span style='text-decoration: underline;'>2</span>  1.14<span style='color: #949494;'>e</span><span style='color: #BB0000;'>- 1</span>
-#&gt; <span style='color: #949494;'># … with 937 more rows</span></div><div class='input'>
-</div></pre>
+    <pre class="examples"><span class='r-in'></span>
+<span class='r-in'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/ns-load.html'>requireNamespace</a></span><span class='op'>(</span><span class='st'>"glmnet"</span>, quietly <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://glmnet.stanford.edu'>glmnet</a></span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span><span class='op'>(</span><span class='fl'>2014</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>x</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span><span class='op'>(</span><span class='fl'>100</span> <span class='op'>*</span> <span class='fl'>20</span><span class='op'>)</span>, <span class='fl'>100</span>, <span class='fl'>20</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>y</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span><span class='op'>(</span><span class='fl'>100</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>fit1</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://glmnet.stanford.edu/reference/glmnet.html'>glmnet</a></span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>y</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>fit1</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'><a href='https://generics.r-lib.org/reference/glance.html'>glance</a></span><span class='op'>(</span><span class='va'>fit1</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://dplyr.tidyverse.org'>dplyr</a></span><span class='op'>)</span></span>
+<span class='r-in'><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://ggplot2.tidyverse.org'>ggplot2</a></span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='va'>tidied</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>fit1</span><span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span> <span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span><span class='op'>(</span><span class='va'>term</span> <span class='op'>!=</span> <span class='st'>"(Intercept)"</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='va'>tidied</span>, <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span><span class='va'>step</span>, <span class='va'>estimate</span>, group <span class='op'>=</span> <span class='va'>term</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span class='r-in'>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_path.html'>geom_line</a></span><span class='op'>(</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='va'>tidied</span>, <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span><span class='va'>lambda</span>, <span class='va'>estimate</span>, group <span class='op'>=</span> <span class='va'>term</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span class='r-in'>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_path.html'>geom_line</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span class='r-in'>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/scale_continuous.html'>scale_x_log10</a></span><span class='op'>(</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='va'>tidied</span>, <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span><span class='va'>lambda</span>, <span class='va'>dev.ratio</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span class='r-in'>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_path.html'>geom_line</a></span><span class='op'>(</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># works for other types of regressions as well, such as logistic</span></span>
+<span class='r-in'><span class='va'>g2</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/sample.html'>sample</a></span><span class='op'>(</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>2</span>, <span class='fl'>100</span>, replace <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>fit2</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://glmnet.stanford.edu/reference/glmnet.html'>glmnet</a></span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>g2</span>, family <span class='op'>=</span> <span class='st'>"binomial"</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>fit2</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='op'>}</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># A tibble: 947 × 5</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    term         step estimate lambda dev.ratio</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>       <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>    <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>  <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 1</span> (Intercept)     1    0.282 0.090<span style='text-decoration: underline;'>6</span> -<span style='color: #BB0000;'>1.46</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>-15</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 2</span> (Intercept)     2    0.281 0.082<span style='text-decoration: underline;'>6</span>  6.28<span style='color: #949494;'>e</span><span style='color: #BB0000;'>- 3</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 3</span> (Intercept)     3    0.279 0.075<span style='text-decoration: underline;'>3</span>  1.55<span style='color: #949494;'>e</span><span style='color: #BB0000;'>- 2</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 4</span> (Intercept)     4    0.277 0.068<span style='text-decoration: underline;'>6</span>  2.48<span style='color: #949494;'>e</span><span style='color: #BB0000;'>- 2</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 5</span> (Intercept)     5    0.284 0.062<span style='text-decoration: underline;'>5</span>  4.17<span style='color: #949494;'>e</span><span style='color: #BB0000;'>- 2</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 6</span> (Intercept)     6    0.293 0.056<span style='text-decoration: underline;'>9</span>  5.79<span style='color: #949494;'>e</span><span style='color: #BB0000;'>- 2</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 7</span> (Intercept)     7    0.303 0.051<span style='text-decoration: underline;'>9</span>  7.39<span style='color: #949494;'>e</span><span style='color: #BB0000;'>- 2</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 8</span> (Intercept)     8    0.314 0.047<span style='text-decoration: underline;'>3</span>  8.94<span style='color: #949494;'>e</span><span style='color: #BB0000;'>- 2</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 9</span> (Intercept)     9    0.325 0.043<span style='text-decoration: underline;'>1</span>  1.03<span style='color: #949494;'>e</span><span style='color: #BB0000;'>- 1</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>10</span> (Intercept)    10    0.336 0.039<span style='text-decoration: underline;'>2</span>  1.14<span style='color: #949494;'>e</span><span style='color: #BB0000;'>- 1</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># … with 937 more rows</span></span>
+<span class='r-in'></span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

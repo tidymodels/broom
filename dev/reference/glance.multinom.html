@@ -230,74 +230,76 @@ the <code>data</code> argument.</p></td>
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'>
-<span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/ns-load.html'>requireNamespace</a></span><span class='op'>(</span><span class='st'>"nnet"</span>, quietly <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
-
-<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='http://www.stats.ox.ac.uk/pub/MASS4/'>nnet</a></span><span class='op'>)</span>
-<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='http://www.stats.ox.ac.uk/pub/MASS4/'>MASS</a></span><span class='op'>)</span>
-
-<span class='fu'><a href='https://rdrr.io/r/utils/example.html'>example</a></span><span class='op'>(</span><span class='va'>birthwt</span><span class='op'>)</span>
-<span class='va'>bwt.mu</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/nnet/man/multinom.html'>multinom</a></span><span class='op'>(</span><span class='va'>low</span> <span class='op'>~</span> <span class='va'>.</span>, <span class='va'>bwt</span><span class='op'>)</span>
-<span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>bwt.mu</span><span class='op'>)</span>
-<span class='fu'><a href='https://generics.r-lib.org/reference/glance.html'>glance</a></span><span class='op'>(</span><span class='va'>bwt.mu</span><span class='op'>)</span>
-
-<span class='co'>#* This model is a truly terrible model</span>
-<span class='co'>#* but it should show you what the output looks</span>
-<span class='co'>#* like in a multinomial logistic regression</span>
-
-<span class='va'>fit.gear</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/nnet/man/multinom.html'>multinom</a></span><span class='op'>(</span><span class='va'>gear</span> <span class='op'>~</span> <span class='va'>mpg</span> <span class='op'>+</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>factor</a></span><span class='op'>(</span><span class='va'>am</span><span class='op'>)</span>, data <span class='op'>=</span> <span class='va'>mtcars</span><span class='op'>)</span>
-<span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>fit.gear</span><span class='op'>)</span>
-<span class='fu'><a href='https://generics.r-lib.org/reference/glance.html'>glance</a></span><span class='op'>(</span><span class='va'>fit.gear</span><span class='op'>)</span>
-
-<span class='op'>}</span>
-</div><div class='output co'>#&gt; 
-#&gt; brthwt&gt; bwt &lt;- with(birthwt, {
-#&gt; brthwt+ race &lt;- factor(race, labels = c("white", "black", "other"))
-#&gt; brthwt+ ptd &lt;- factor(ptl &gt; 0)
-#&gt; brthwt+ ftv &lt;- factor(ftv)
-#&gt; brthwt+ levels(ftv)[-(1:2)] &lt;- "2+"
-#&gt; brthwt+ data.frame(low = factor(low), age, lwt, race, smoke = (smoke &gt; 0),
-#&gt; brthwt+            ptd, ht = (ht &gt; 0), ui = (ui &gt; 0), ftv)
-#&gt; brthwt+ })
-#&gt; 
-#&gt; brthwt&gt; options(contrasts = c("contr.treatment", "contr.poly"))
-#&gt; 
-#&gt; brthwt&gt; glm(low ~ ., binomial, bwt)
-#&gt; 
-#&gt; Call:  glm(formula = low ~ ., family = binomial, data = bwt)
-#&gt; 
-#&gt; Coefficients:
-#&gt; (Intercept)          age          lwt    raceblack    raceother    smokeTRUE  
-#&gt;     0.82302     -0.03723     -0.01565      1.19241      0.74068      0.75553  
-#&gt;     ptdTRUE       htTRUE       uiTRUE         ftv1        ftv2+  
-#&gt;     1.34376      1.91317      0.68020     -0.43638      0.17901  
-#&gt; 
-#&gt; Degrees of Freedom: 188 Total (i.e. Null);  178 Residual
-#&gt; Null Deviance:	    234.7 
-#&gt; Residual Deviance: 195.5 	AIC: 217.5
-#&gt; # weights:  12 (11 variable)
-#&gt; initial  value 131.004817 
-#&gt; iter  10 value 98.029803
-#&gt; final  value 97.737759 
-#&gt; converged
-#&gt; # weights:  12 (6 variable)
-#&gt; initial  value 35.155593 
-#&gt; iter  10 value 14.156582
-#&gt; iter  20 value 14.031881
-#&gt; iter  30 value 14.025659
-#&gt; iter  40 value 14.021414
-#&gt; iter  50 value 14.019824
-#&gt; iter  60 value 14.019278
-#&gt; iter  70 value 14.018601
-#&gt; iter  80 value 14.018282
-#&gt; iter  80 value 14.018282
-#&gt; iter  90 value 14.017126
-#&gt; final  value 14.015374 
-#&gt; converged</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 1 × 4</span>
-#&gt;     edf deviance   AIC  nobs
-#&gt;   <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>    <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span>
-#&gt; <span style='color: #BCBCBC;'>1</span>     6     28.0  40.0    32</div><div class='input'>
-</div></pre>
+    <pre class="examples"><span class='r-in'></span>
+<span class='r-in'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/ns-load.html'>requireNamespace</a></span><span class='op'>(</span><span class='st'>"nnet"</span>, quietly <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='http://www.stats.ox.ac.uk/pub/MASS4/'>nnet</a></span><span class='op'>)</span></span>
+<span class='r-in'><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='http://www.stats.ox.ac.uk/pub/MASS4/'>MASS</a></span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/utils/example.html'>example</a></span><span class='op'>(</span><span class='va'>birthwt</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>bwt.mu</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/nnet/man/multinom.html'>multinom</a></span><span class='op'>(</span><span class='va'>low</span> <span class='op'>~</span> <span class='va'>.</span>, <span class='va'>bwt</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>bwt.mu</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'><a href='https://generics.r-lib.org/reference/glance.html'>glance</a></span><span class='op'>(</span><span class='va'>bwt.mu</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'>#* This model is a truly terrible model</span></span>
+<span class='r-in'><span class='co'>#* but it should show you what the output looks</span></span>
+<span class='r-in'><span class='co'>#* like in a multinomial logistic regression</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='va'>fit.gear</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/nnet/man/multinom.html'>multinom</a></span><span class='op'>(</span><span class='va'>gear</span> <span class='op'>~</span> <span class='va'>mpg</span> <span class='op'>+</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>factor</a></span><span class='op'>(</span><span class='va'>am</span><span class='op'>)</span>, data <span class='op'>=</span> <span class='va'>mtcars</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>fit.gear</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'><a href='https://generics.r-lib.org/reference/glance.html'>glance</a></span><span class='op'>(</span><span class='va'>fit.gear</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='op'>}</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> brthwt&gt; bwt &lt;- with(birthwt, {</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> brthwt+ race &lt;- factor(race, labels = c("white", "black", "other"))</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> brthwt+ ptd &lt;- factor(ptl &gt; 0)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> brthwt+ ftv &lt;- factor(ftv)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> brthwt+ levels(ftv)[-(1:2)] &lt;- "2+"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> brthwt+ data.frame(low = factor(low), age, lwt, race, smoke = (smoke &gt; 0),</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> brthwt+            ptd, ht = (ht &gt; 0), ui = (ui &gt; 0), ftv)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> brthwt+ })</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> brthwt&gt; options(contrasts = c("contr.treatment", "contr.poly"))</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> brthwt&gt; glm(low ~ ., binomial, bwt)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Call:  glm(formula = low ~ ., family = binomial, data = bwt)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Coefficients:</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> (Intercept)          age          lwt    raceblack    raceother    smokeTRUE  </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>     0.82302     -0.03723     -0.01565      1.19241      0.74068      0.75553  </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>     ptdTRUE       htTRUE       uiTRUE         ftv1        ftv2+  </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>     1.34376      1.91317      0.68020     -0.43638      0.17901  </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Degrees of Freedom: 188 Total (i.e. Null);  178 Residual</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Null Deviance:	    234.7 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Residual Deviance: 195.5 	AIC: 217.5</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> # weights:  12 (11 variable)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> initial  value 131.004817 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> iter  10 value 98.029803</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> final  value 97.737759 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> converged</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> # weights:  12 (6 variable)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> initial  value 35.155593 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> iter  10 value 14.156582</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> iter  20 value 14.031881</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> iter  30 value 14.025659</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> iter  40 value 14.021414</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> iter  50 value 14.019824</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> iter  60 value 14.019278</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> iter  70 value 14.018601</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> iter  80 value 14.018282</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> iter  80 value 14.018282</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> iter  90 value 14.017126</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> final  value 14.015374 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> converged</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># A tibble: 1 × 4</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>     edf deviance   AIC  nobs</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>    <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>1</span>     6     28.0  40.0    32</span>
+<span class='r-in'></span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

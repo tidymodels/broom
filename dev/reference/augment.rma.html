@@ -211,7 +211,7 @@ variable used to fit the model is not included in <code>newdata</code>, then no
 associated with training observations (such as influences or related)
 measures that is not meaningfully defined for new observations.</p>
 <p>For convenience, many augment methods provide default <code>data</code> arguments,
-so that <code><a href='https://generics.r-lib.org/reference/augment.html'>augment(fit)</a></code> will return the augmented training data. In these
+so that <code>augment(fit)</code> will return the augmented training data. In these
 cases, augment tries to reconstruct the original data based on the model
 object with varying degrees of success.</p>
 <p>The augmented dataset is always returned as a <a href='https://tibble.tidyverse.org/reference/tibble.html'>tibble::tibble</a> with the
@@ -277,47 +277,53 @@ the <code>data</code> argument.</p></td>
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'>
-<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://www.metafor-project.org'>metafor</a></span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Loading the 'metafor' package (version 3.0-2). For an</span>
-#&gt; <span class='message'>introduction to the package please type: help(metafor)</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Attaching package: ‘metafor’</span></div><div class='output co'>#&gt; <span class='message'>The following object is masked from ‘package:car’:</span>
-#&gt; <span class='message'></span>
-#&gt; <span class='message'>    vif</span></div><div class='output co'>#&gt; <span class='message'>The following object is masked from ‘package:ordinal’:</span>
-#&gt; <span class='message'></span>
-#&gt; <span class='message'>    ranef</span></div><div class='output co'>#&gt; <span class='message'>The following object is masked from ‘package:mclust’:</span>
-#&gt; <span class='message'></span>
-#&gt; <span class='message'>    hc</span></div><div class='input'>
-<span class='va'>df</span> <span class='op'>&lt;-</span>
-  <span class='fu'><a href='https://wviechtb.github.io/metafor/reference/escalc.html'>escalc</a></span><span class='op'>(</span>
-    measure <span class='op'>=</span> <span class='st'>"RR"</span>,
-    ai <span class='op'>=</span> <span class='va'>tpos</span>,
-    bi <span class='op'>=</span> <span class='va'>tneg</span>,
-    ci <span class='op'>=</span> <span class='va'>cpos</span>,
-    di <span class='op'>=</span> <span class='va'>cneg</span>,
-    data <span class='op'>=</span> <span class='va'>dat.bcg</span>
-  <span class='op'>)</span>
-
-<span class='va'>meta_analysis</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://wviechtb.github.io/metafor/reference/rma.uni.html'>rma</a></span><span class='op'>(</span><span class='va'>yi</span>, <span class='va'>vi</span>, data <span class='op'>=</span> <span class='va'>df</span>, method <span class='op'>=</span> <span class='st'>"EB"</span><span class='op'>)</span>
-
-<span class='fu'><a href='https://generics.r-lib.org/reference/augment.html'>augment</a></span><span class='op'>(</span><span class='va'>meta_analysis</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 13 × 6</span>
-#&gt;    .observed  .fitted .se.fit .lower   .upper  .resid
-#&gt;        <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>    <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>  <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>    <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>
-#&gt; <span style='color: #BCBCBC;'> 1</span>   -<span style='color: #BB0000;'>0.889</span>  -<span style='color: #BB0000;'>0.801</span>    0.411  -<span style='color: #BB0000;'>1.61</span>   0.005<span style='text-decoration: underline;'>24</span> -<span style='color: #BB0000;'>0.174</span> 
-#&gt; <span style='color: #BCBCBC;'> 2</span>   -<span style='color: #BB0000;'>1.59</span>   -<span style='color: #BB0000;'>1.26</span>     0.354  -<span style='color: #BB0000;'>1.95</span>  -<span style='color: #BB0000;'>0.561</span>   -<span style='color: #BB0000;'>0.870</span> 
-#&gt; <span style='color: #BCBCBC;'> 3</span>   -<span style='color: #BB0000;'>1.35</span>   -<span style='color: #BB0000;'>0.990</span>    0.437  -<span style='color: #BB0000;'>1.85</span>  -<span style='color: #BB0000;'>0.134</span>   -<span style='color: #BB0000;'>0.633</span> 
-#&gt; <span style='color: #BCBCBC;'> 4</span>   -<span style='color: #BB0000;'>1.44</span>   -<span style='color: #BB0000;'>1.40</span>     0.138  -<span style='color: #BB0000;'>1.67</span>  -<span style='color: #BB0000;'>1.13</span>    -<span style='color: #BB0000;'>0.727</span> 
-#&gt; <span style='color: #BCBCBC;'> 5</span>   -<span style='color: #BB0000;'>0.218</span>  -<span style='color: #BB0000;'>0.287</span>    0.212  -<span style='color: #BB0000;'>0.701</span>  0.128    0.497 
-#&gt; <span style='color: #BCBCBC;'> 6</span>   -<span style='color: #BB0000;'>0.786</span>  -<span style='color: #BB0000;'>0.785</span>    0.082<span style='text-decoration: underline;'>3</span> -<span style='color: #BB0000;'>0.946</span> -<span style='color: #BB0000;'>0.623</span>   -<span style='color: #BB0000;'>0.071</span><span style='color: #BB0000; text-decoration: underline;'>1</span>
-#&gt; <span style='color: #BCBCBC;'> 7</span>   -<span style='color: #BB0000;'>1.62</span>   -<span style='color: #BB0000;'>1.25</span>     0.370  -<span style='color: #BB0000;'>1.97</span>  -<span style='color: #BB0000;'>0.523</span>   -<span style='color: #BB0000;'>0.906</span> 
-#&gt; <span style='color: #BCBCBC;'> 8</span>    0.012<span style='text-decoration: underline;'>0</span>  0.003<span style='text-decoration: underline;'>01</span>  0.062<span style='text-decoration: underline;'>6</span> -<span style='color: #BB0000;'>0.120</span>  0.126    0.727 
-#&gt; <span style='color: #BCBCBC;'> 9</span>   -<span style='color: #BB0000;'>0.469</span>  -<span style='color: #BB0000;'>0.506</span>    0.221  -<span style='color: #BB0000;'>0.939</span> -<span style='color: #BB0000;'>0.074</span><span style='color: #BB0000; text-decoration: underline;'>0</span>   0.246 
-#&gt; <span style='color: #BCBCBC;'>10</span>   -<span style='color: #BB0000;'>1.37</span>   -<span style='color: #BB0000;'>1.25</span>     0.246  -<span style='color: #BB0000;'>1.73</span>  -<span style='color: #BB0000;'>0.767</span>   -<span style='color: #BB0000;'>0.656</span> 
-#&gt; <span style='color: #BCBCBC;'>11</span>   -<span style='color: #BB0000;'>0.339</span>  -<span style='color: #BB0000;'>0.353</span>    0.110  -<span style='color: #BB0000;'>0.568</span> -<span style='color: #BB0000;'>0.139</span>    0.376 
-#&gt; <span style='color: #BCBCBC;'>12</span>    0.446  -<span style='color: #BB0000;'>0.281</span>    0.460  -<span style='color: #BB0000;'>1.18</span>   0.621    1.16  
-#&gt; <span style='color: #BCBCBC;'>13</span>   -<span style='color: #BB0000;'>0.017</span><span style='color: #BB0000; text-decoration: underline;'>3</span> -<span style='color: #BB0000;'>0.145</span>    0.244  -<span style='color: #BB0000;'>0.623</span>  0.333    0.698 </div></pre>
+    <pre class="examples"><span class='r-in'></span>
+<span class='r-in'><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://www.metafor-project.org'>metafor</a></span><span class='op'>)</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> Loading the 'metafor' package (version 3.0-2). For an</span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> introduction to the package please type: help(metafor)</span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> Attaching package: ‘metafor’</span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> The following object is masked from ‘package:car’:</span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span>     vif</span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> The following object is masked from ‘package:ordinal’:</span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span>     ranef</span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> The following object is masked from ‘package:mclust’:</span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span>     hc</span>
+<span class='r-in'></span>
+<span class='r-in'><span class='va'>df</span> <span class='op'>&lt;-</span></span>
+<span class='r-in'>  <span class='fu'><a href='https://wviechtb.github.io/metafor/reference/escalc.html'>escalc</a></span><span class='op'>(</span></span>
+<span class='r-in'>    measure <span class='op'>=</span> <span class='st'>"RR"</span>,</span>
+<span class='r-in'>    ai <span class='op'>=</span> <span class='va'>tpos</span>,</span>
+<span class='r-in'>    bi <span class='op'>=</span> <span class='va'>tneg</span>,</span>
+<span class='r-in'>    ci <span class='op'>=</span> <span class='va'>cpos</span>,</span>
+<span class='r-in'>    di <span class='op'>=</span> <span class='va'>cneg</span>,</span>
+<span class='r-in'>    data <span class='op'>=</span> <span class='va'>dat.bcg</span></span>
+<span class='r-in'>  <span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='va'>meta_analysis</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://wviechtb.github.io/metafor/reference/rma.uni.html'>rma</a></span><span class='op'>(</span><span class='va'>yi</span>, <span class='va'>vi</span>, data <span class='op'>=</span> <span class='va'>df</span>, method <span class='op'>=</span> <span class='st'>"EB"</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='fu'><a href='https://generics.r-lib.org/reference/augment.html'>augment</a></span><span class='op'>(</span><span class='va'>meta_analysis</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># A tibble: 13 × 6</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    .observed  .fitted .se.fit .lower   .upper  .resid</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>        <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>    <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>  <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>    <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 1</span>   -<span style='color: #BB0000;'>0.889</span>  -<span style='color: #BB0000;'>0.801</span>    0.411  -<span style='color: #BB0000;'>1.61</span>   0.005<span style='text-decoration: underline;'>24</span> -<span style='color: #BB0000;'>0.174</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 2</span>   -<span style='color: #BB0000;'>1.59</span>   -<span style='color: #BB0000;'>1.26</span>     0.354  -<span style='color: #BB0000;'>1.95</span>  -<span style='color: #BB0000;'>0.561</span>   -<span style='color: #BB0000;'>0.870</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 3</span>   -<span style='color: #BB0000;'>1.35</span>   -<span style='color: #BB0000;'>0.990</span>    0.437  -<span style='color: #BB0000;'>1.85</span>  -<span style='color: #BB0000;'>0.134</span>   -<span style='color: #BB0000;'>0.633</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 4</span>   -<span style='color: #BB0000;'>1.44</span>   -<span style='color: #BB0000;'>1.40</span>     0.138  -<span style='color: #BB0000;'>1.67</span>  -<span style='color: #BB0000;'>1.13</span>    -<span style='color: #BB0000;'>0.727</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 5</span>   -<span style='color: #BB0000;'>0.218</span>  -<span style='color: #BB0000;'>0.287</span>    0.212  -<span style='color: #BB0000;'>0.701</span>  0.128    0.497 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 6</span>   -<span style='color: #BB0000;'>0.786</span>  -<span style='color: #BB0000;'>0.785</span>    0.082<span style='text-decoration: underline;'>3</span> -<span style='color: #BB0000;'>0.946</span> -<span style='color: #BB0000;'>0.623</span>   -<span style='color: #BB0000;'>0.071</span><span style='color: #BB0000; text-decoration: underline;'>1</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 7</span>   -<span style='color: #BB0000;'>1.62</span>   -<span style='color: #BB0000;'>1.25</span>     0.370  -<span style='color: #BB0000;'>1.97</span>  -<span style='color: #BB0000;'>0.523</span>   -<span style='color: #BB0000;'>0.906</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 8</span>    0.012<span style='text-decoration: underline;'>0</span>  0.003<span style='text-decoration: underline;'>01</span>  0.062<span style='text-decoration: underline;'>6</span> -<span style='color: #BB0000;'>0.120</span>  0.126    0.727 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 9</span>   -<span style='color: #BB0000;'>0.469</span>  -<span style='color: #BB0000;'>0.506</span>    0.221  -<span style='color: #BB0000;'>0.939</span> -<span style='color: #BB0000;'>0.074</span><span style='color: #BB0000; text-decoration: underline;'>0</span>   0.246 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>10</span>   -<span style='color: #BB0000;'>1.37</span>   -<span style='color: #BB0000;'>1.25</span>     0.246  -<span style='color: #BB0000;'>1.73</span>  -<span style='color: #BB0000;'>0.767</span>   -<span style='color: #BB0000;'>0.656</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>11</span>   -<span style='color: #BB0000;'>0.339</span>  -<span style='color: #BB0000;'>0.353</span>    0.110  -<span style='color: #BB0000;'>0.568</span> -<span style='color: #BB0000;'>0.139</span>    0.376 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>12</span>    0.446  -<span style='color: #BB0000;'>0.281</span>    0.460  -<span style='color: #BB0000;'>1.18</span>   0.621    1.16  </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>13</span>   -<span style='color: #BB0000;'>0.017</span><span style='color: #BB0000; text-decoration: underline;'>3</span> -<span style='color: #BB0000;'>0.145</span>    0.244  -<span style='color: #BB0000;'>0.623</span>  0.333    0.698 </span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

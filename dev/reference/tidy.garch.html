@@ -226,75 +226,78 @@ the <code>data</code> argument.</p></td>
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'>
-<span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/ns-load.html'>requireNamespace</a></span><span class='op'>(</span><span class='st'>"tseries"</span>, quietly <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
-
-<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'>tseries</span><span class='op'>)</span>
-
-<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>EuStockMarkets</span><span class='op'>)</span>
-<span class='va'>dax</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/ergm/man/ergm-terms.html'>diff</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/Log.html'>log</a></span><span class='op'>(</span><span class='va'>EuStockMarkets</span><span class='op'>)</span><span class='op'>)</span><span class='op'>[</span>, <span class='st'>"DAX"</span><span class='op'>]</span>
-<span class='va'>dax.garch</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/tseries/man/garch.html'>garch</a></span><span class='op'>(</span><span class='va'>dax</span><span class='op'>)</span>
-<span class='va'>dax.garch</span>
-
-<span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>dax.garch</span><span class='op'>)</span>
-<span class='fu'><a href='https://generics.r-lib.org/reference/glance.html'>glance</a></span><span class='op'>(</span><span class='va'>dax.garch</span><span class='op'>)</span>
-
-<span class='op'>}</span>
-</div><div class='output co'>#&gt; <span class='message'>Registered S3 method overwritten by 'quantmod':</span>
-#&gt; <span class='message'>  method            from</span>
-#&gt; <span class='message'>  as.zoo.data.frame zoo </span></div><div class='output co'>#&gt; 
-#&gt;  ***** ESTIMATION WITH ANALYTICAL GRADIENT ***** 
-#&gt; 
-#&gt; 
-#&gt;      I     INITIAL X(I)        D(I)
-#&gt; 
-#&gt;      1     9.549651e-05     1.000e+00
-#&gt;      2     5.000000e-02     1.000e+00
-#&gt;      3     5.000000e-02     1.000e+00
-#&gt; 
-#&gt;     IT   NF      F         RELDF    PRELDF    RELDX   STPPAR   D*STEP   NPRELDF
-#&gt;      0    1 -7.584e+03
-#&gt;      1    8 -7.585e+03  1.45e-05  2.60e-05  1.4e-05  1.0e+11  1.4e-06  1.35e+06
-#&gt;      2    9 -7.585e+03  1.88e-07  1.97e-07  1.3e-05  2.0e+00  1.4e-06  1.50e+00
-#&gt;      3   18 -7.589e+03  6.22e-04  1.10e-03  3.5e-01  2.0e+00  5.5e-02  1.50e+00
-#&gt;      4   21 -7.601e+03  1.58e-03  1.81e-03  6.2e-01  1.9e+00  2.2e-01  3.07e-01
-#&gt;      5   23 -7.634e+03  4.22e-03  3.55e-03  4.3e-01  9.6e-01  4.4e-01  3.06e-02
-#&gt;      6   25 -7.646e+03  1.61e-03  1.85e-03  2.9e-02  2.0e+00  4.4e-02  5.43e-02
-#&gt;      7   27 -7.646e+03  3.82e-05  5.23e-04  1.3e-02  2.0e+00  2.0e-02  1.46e-02
-#&gt;      8   28 -7.648e+03  1.86e-04  1.46e-04  6.5e-03  2.0e+00  9.9e-03  1.54e-03
-#&gt;      9   29 -7.648e+03  3.12e-05  4.83e-05  6.4e-03  2.0e+00  9.9e-03  3.34e-03
-#&gt;     10   30 -7.648e+03  1.39e-05  6.31e-05  6.2e-03  1.9e+00  9.9e-03  1.86e-03
-#&gt;     11   31 -7.650e+03  2.70e-04  3.24e-04  6.0e-03  1.9e+00  9.9e-03  4.99e-03
-#&gt;     12   34 -7.656e+03  8.42e-04  8.57e-04  2.2e-02  1.7e-01  3.9e-02  2.22e-03
-#&gt;     13   36 -7.661e+03  6.12e-04  6.40e-04  1.9e-02  4.2e-01  3.9e-02  2.09e-03
-#&gt;     14   38 -7.665e+03  4.87e-04  8.63e-04  4.9e-02  4.1e-01  9.6e-02  9.69e-04
-#&gt;     15   48 -7.666e+03  1.02e-04  1.86e-04  1.9e-07  4.5e+00  3.5e-07  3.94e-04
-#&gt;     16   49 -7.666e+03  1.12e-07  1.01e-07  1.9e-07  2.0e+00  3.5e-07  6.22e-05
-#&gt;     17   57 -7.666e+03  1.60e-05  2.70e-05  2.0e-03  9.3e-01  3.7e-03  6.10e-05
-#&gt;     18   59 -7.666e+03  5.23e-06  7.01e-06  3.7e-03  3.9e-01  8.0e-03  7.77e-06
-#&gt;     19   60 -7.666e+03  4.08e-08  3.74e-08  1.4e-04  0.0e+00  3.1e-04  3.74e-08
-#&gt;     20   61 -7.666e+03  2.31e-09  8.57e-10  8.6e-06  0.0e+00  2.0e-05  8.57e-10
-#&gt;     21   62 -7.666e+03  5.35e-11  2.25e-13  7.6e-07  0.0e+00  1.6e-06  2.25e-13
-#&gt;     22   63 -7.666e+03  1.81e-12  7.06e-16  1.7e-08  0.0e+00  3.4e-08  7.06e-16
-#&gt;     23   64 -7.666e+03  7.00e-14  1.69e-17  1.0e-09  0.0e+00  2.4e-09  1.69e-17
-#&gt;     24   65 -7.666e+03 -1.16e-14  1.76e-20  1.9e-10  0.0e+00  4.0e-10  1.76e-20
-#&gt; 
-#&gt;  ***** X- AND RELATIVE FUNCTION CONVERGENCE *****
-#&gt; 
-#&gt;  FUNCTION    -7.665775e+03   RELDX        1.874e-10
-#&gt;  FUNC. EVALS      65         GRAD. EVALS      24
-#&gt;  PRELDF       1.760e-20      NPRELDF      1.760e-20
-#&gt; 
-#&gt;      I      FINAL X(I)        D(I)          G(I)
-#&gt; 
-#&gt;      1    4.639289e-06     1.000e+00    -2.337e-02
-#&gt;      2    6.832875e-02     1.000e+00    -8.294e-07
-#&gt;      3    8.890666e-01     1.000e+00    -2.230e-06
-#&gt; </div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 1 × 8</span>
-#&gt;   statistic p.value parameter method         logLik     AIC   BIC  nobs
-#&gt;       <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>           <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span>
-#&gt; <span style='color: #BCBCBC;'>1</span>     0.136   0.713         1 Box-Ljung test  <span style='text-decoration: underline;'>5</span>958. -<span style='color: #BB0000; text-decoration: underline;'>11</span><span style='color: #BB0000;'>911.</span>    <span style='color: #BB0000;'>NA</span>  <span style='text-decoration: underline;'>1</span>859</div><div class='input'>
-</div></pre>
+    <pre class="examples"><span class='r-in'></span>
+<span class='r-in'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/ns-load.html'>requireNamespace</a></span><span class='op'>(</span><span class='st'>"tseries"</span>, quietly <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'>tseries</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>EuStockMarkets</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>dax</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/ergm/man/ergm-terms.html'>diff</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/Log.html'>log</a></span><span class='op'>(</span><span class='va'>EuStockMarkets</span><span class='op'>)</span><span class='op'>)</span><span class='op'>[</span>, <span class='st'>"DAX"</span><span class='op'>]</span></span>
+<span class='r-in'><span class='va'>dax.garch</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/tseries/man/garch.html'>garch</a></span><span class='op'>(</span><span class='va'>dax</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>dax.garch</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>dax.garch</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'><a href='https://generics.r-lib.org/reference/glance.html'>glance</a></span><span class='op'>(</span><span class='va'>dax.garch</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='op'>}</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> Registered S3 method overwritten by 'quantmod':</span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span>   method            from</span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span>   as.zoo.data.frame zoo </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  ***** ESTIMATION WITH ANALYTICAL GRADIENT ***** </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>      I     INITIAL X(I)        D(I)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>      1     9.549651e-05     1.000e+00</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>      2     5.000000e-02     1.000e+00</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>      3     5.000000e-02     1.000e+00</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>     IT   NF      F         RELDF    PRELDF    RELDX   STPPAR   D*STEP   NPRELDF</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>      0    1 -7.584e+03</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>      1    8 -7.585e+03  1.45e-05  2.60e-05  1.4e-05  1.0e+11  1.4e-06  1.35e+06</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>      2    9 -7.585e+03  1.88e-07  1.97e-07  1.3e-05  2.0e+00  1.4e-06  1.50e+00</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>      3   18 -7.589e+03  6.22e-04  1.10e-03  3.5e-01  2.0e+00  5.5e-02  1.50e+00</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>      4   21 -7.601e+03  1.58e-03  1.81e-03  6.2e-01  1.9e+00  2.2e-01  3.07e-01</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>      5   23 -7.634e+03  4.22e-03  3.55e-03  4.3e-01  9.6e-01  4.4e-01  3.06e-02</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>      6   25 -7.646e+03  1.61e-03  1.85e-03  2.9e-02  2.0e+00  4.4e-02  5.43e-02</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>      7   27 -7.646e+03  3.82e-05  5.23e-04  1.3e-02  2.0e+00  2.0e-02  1.46e-02</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>      8   28 -7.648e+03  1.86e-04  1.46e-04  6.5e-03  2.0e+00  9.9e-03  1.54e-03</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>      9   29 -7.648e+03  3.12e-05  4.83e-05  6.4e-03  2.0e+00  9.9e-03  3.34e-03</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>     10   30 -7.648e+03  1.39e-05  6.31e-05  6.2e-03  1.9e+00  9.9e-03  1.86e-03</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>     11   31 -7.650e+03  2.70e-04  3.24e-04  6.0e-03  1.9e+00  9.9e-03  4.99e-03</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>     12   34 -7.656e+03  8.42e-04  8.57e-04  2.2e-02  1.7e-01  3.9e-02  2.22e-03</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>     13   36 -7.661e+03  6.12e-04  6.40e-04  1.9e-02  4.2e-01  3.9e-02  2.09e-03</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>     14   38 -7.665e+03  4.87e-04  8.63e-04  4.9e-02  4.1e-01  9.6e-02  9.69e-04</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>     15   48 -7.666e+03  1.02e-04  1.86e-04  1.9e-07  4.5e+00  3.5e-07  3.94e-04</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>     16   49 -7.666e+03  1.12e-07  1.01e-07  1.9e-07  2.0e+00  3.5e-07  6.22e-05</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>     17   57 -7.666e+03  1.60e-05  2.70e-05  2.0e-03  9.3e-01  3.7e-03  6.10e-05</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>     18   59 -7.666e+03  5.23e-06  7.01e-06  3.7e-03  3.9e-01  8.0e-03  7.77e-06</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>     19   60 -7.666e+03  4.08e-08  3.74e-08  1.4e-04  0.0e+00  3.1e-04  3.74e-08</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>     20   61 -7.666e+03  2.31e-09  8.57e-10  8.6e-06  0.0e+00  2.0e-05  8.57e-10</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>     21   62 -7.666e+03  5.35e-11  2.25e-13  7.6e-07  0.0e+00  1.6e-06  2.25e-13</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>     22   63 -7.666e+03  1.81e-12  7.06e-16  1.7e-08  0.0e+00  3.4e-08  7.06e-16</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>     23   64 -7.666e+03  6.98e-14  1.69e-17  1.0e-09  0.0e+00  2.4e-09  1.69e-17</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>     24   65 -7.666e+03 -1.16e-14  1.76e-20  1.9e-10  0.0e+00  4.0e-10  1.76e-20</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  ***** X- AND RELATIVE FUNCTION CONVERGENCE *****</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  FUNCTION    -7.665775e+03   RELDX        1.874e-10</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  FUNC. EVALS      65         GRAD. EVALS      24</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  PRELDF       1.760e-20      NPRELDF      1.760e-20</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>      I      FINAL X(I)        D(I)          G(I)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>      1    4.639289e-06     1.000e+00    -2.337e-02</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>      2    6.832875e-02     1.000e+00    -8.294e-07</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>      3    8.890666e-01     1.000e+00    -2.230e-06</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># A tibble: 1 × 8</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   statistic p.value parameter method         logLik     AIC   BIC  nobs</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>       <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>           <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>1</span>     0.136   0.713         1 Box-Ljung test  <span style='text-decoration: underline;'>5</span>958. -<span style='color: #BB0000; text-decoration: underline;'>11</span><span style='color: #BB0000;'>911.</span>    <span style='color: #BB0000;'>NA</span>  <span style='text-decoration: underline;'>1</span>859</span>
+<span class='r-in'></span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

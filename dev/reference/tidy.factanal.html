@@ -212,134 +212,140 @@ the <code>data</code> argument.</p></td>
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'>
-<span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span><span class='op'>(</span><span class='fl'>123</span><span class='op'>)</span>
-
-<span class='co'># data</span>
-<span class='va'>m1</span> <span class='op'>&lt;-</span> <span class='fu'>dplyr</span><span class='fu'>::</span><span class='fu'><a href='https://tibble.tidyverse.org/reference/tibble.html'>tibble</a></span><span class='op'>(</span>
-  v1 <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>3</span>, <span class='fl'>3</span>, <span class='fl'>3</span>, <span class='fl'>3</span>, <span class='fl'>3</span>, <span class='fl'>4</span>, <span class='fl'>5</span>, <span class='fl'>6</span><span class='op'>)</span>,
-  v2 <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>, <span class='fl'>2</span>, <span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>2</span>, <span class='fl'>1</span>, <span class='fl'>2</span>, <span class='fl'>1</span>, <span class='fl'>3</span>, <span class='fl'>4</span>, <span class='fl'>3</span>, <span class='fl'>3</span>, <span class='fl'>3</span>, <span class='fl'>4</span>, <span class='fl'>6</span>, <span class='fl'>5</span><span class='op'>)</span>,
-  v3 <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>3</span>, <span class='fl'>3</span>, <span class='fl'>3</span>, <span class='fl'>3</span>, <span class='fl'>3</span>, <span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>5</span>, <span class='fl'>4</span>, <span class='fl'>6</span><span class='op'>)</span>,
-  v4 <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>3</span>, <span class='fl'>3</span>, <span class='fl'>4</span>, <span class='fl'>3</span>, <span class='fl'>3</span>, <span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>2</span>, <span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>2</span>, <span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>5</span>, <span class='fl'>6</span>, <span class='fl'>4</span><span class='op'>)</span>,
-  v5 <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>3</span>, <span class='fl'>3</span>, <span class='fl'>3</span>, <span class='fl'>3</span>, <span class='fl'>3</span>, <span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>6</span>, <span class='fl'>4</span>, <span class='fl'>5</span><span class='op'>)</span>,
-  v6 <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>2</span>, <span class='fl'>1</span>, <span class='fl'>3</span>, <span class='fl'>3</span>, <span class='fl'>3</span>, <span class='fl'>4</span>, <span class='fl'>3</span>, <span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>2</span>, <span class='fl'>1</span>, <span class='fl'>6</span>, <span class='fl'>5</span>, <span class='fl'>4</span><span class='op'>)</span>
-<span class='op'>)</span>
-
-<span class='co'># new data</span>
-<span class='va'>m2</span> <span class='op'>&lt;-</span> <span class='fu'>purrr</span><span class='fu'>::</span><span class='fu'><a href='https://purrr.tidyverse.org/reference/map.html'>map_dfr</a></span><span class='op'>(</span><span class='va'>m1</span>, <span class='va'>rev</span><span class='op'>)</span>
-
-<span class='co'># factor analysis objects</span>
-<span class='va'>fit1</span> <span class='op'>&lt;-</span> <span class='fu'>stats</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/r/stats/factanal.html'>factanal</a></span><span class='op'>(</span><span class='va'>m1</span>, factors <span class='op'>=</span> <span class='fl'>3</span>, scores <span class='op'>=</span> <span class='st'>"Bartlett"</span><span class='op'>)</span>
-<span class='va'>fit2</span> <span class='op'>&lt;-</span> <span class='fu'>stats</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/r/stats/factanal.html'>factanal</a></span><span class='op'>(</span><span class='va'>m1</span>, factors <span class='op'>=</span> <span class='fl'>3</span>, scores <span class='op'>=</span> <span class='st'>"regression"</span><span class='op'>)</span>
-
-<span class='co'># tidying the object</span>
-<span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>fit1</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 6 × 5</span>
-#&gt;   variable uniqueness   fl1   fl2   fl3
-#&gt;   <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>         <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>
-#&gt; <span style='color: #BCBCBC;'>1</span> v1           0.005  0.944 0.182 0.267
-#&gt; <span style='color: #BCBCBC;'>2</span> v2           0.101  0.905 0.235 0.159
-#&gt; <span style='color: #BCBCBC;'>3</span> v3           0.005  0.236 0.210 0.946
-#&gt; <span style='color: #BCBCBC;'>4</span> v4           0.224  0.180 0.242 0.828
-#&gt; <span style='color: #BCBCBC;'>5</span> v5           0.084<span style='text-decoration: underline;'>3</span> 0.242 0.881 0.286
-#&gt; <span style='color: #BCBCBC;'>6</span> v6           0.005  0.193 0.959 0.196</div><div class='input'><span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>fit2</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 6 × 5</span>
-#&gt;   variable uniqueness   fl1   fl2   fl3
-#&gt;   <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>         <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>
-#&gt; <span style='color: #BCBCBC;'>1</span> v1           0.005  0.944 0.182 0.267
-#&gt; <span style='color: #BCBCBC;'>2</span> v2           0.101  0.905 0.235 0.159
-#&gt; <span style='color: #BCBCBC;'>3</span> v3           0.005  0.236 0.210 0.946
-#&gt; <span style='color: #BCBCBC;'>4</span> v4           0.224  0.180 0.242 0.828
-#&gt; <span style='color: #BCBCBC;'>5</span> v5           0.084<span style='text-decoration: underline;'>3</span> 0.242 0.881 0.286
-#&gt; <span style='color: #BCBCBC;'>6</span> v6           0.005  0.193 0.959 0.196</div><div class='input'>
-<span class='co'># augmented dataframe</span>
-<span class='fu'><a href='https://generics.r-lib.org/reference/augment.html'>augment</a></span><span class='op'>(</span><span class='va'>fit1</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 18 × 4</span>
-#&gt;    .rownames   .fs1   .fs2   .fs3
-#&gt;    <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>      <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>  <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>  <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>
-#&gt; <span style='color: #BCBCBC;'> 1</span> 1         -<span style='color: #BB0000;'>0.904</span> -<span style='color: #BB0000;'>0.931</span>  0.948
-#&gt; <span style='color: #BCBCBC;'> 2</span> 2         -<span style='color: #BB0000;'>0.869</span> -<span style='color: #BB0000;'>0.933</span>  0.935
-#&gt; <span style='color: #BCBCBC;'> 3</span> 3         -<span style='color: #BB0000;'>0.908</span> -<span style='color: #BB0000;'>0.932</span>  0.962
-#&gt; <span style='color: #BCBCBC;'> 4</span> 4         -<span style='color: #BB0000;'>1.00</span>  -<span style='color: #BB0000;'>0.253</span>  0.818
-#&gt; <span style='color: #BCBCBC;'> 5</span> 5         -<span style='color: #BB0000;'>0.904</span> -<span style='color: #BB0000;'>0.931</span>  0.948
-#&gt; <span style='color: #BCBCBC;'> 6</span> 6         -<span style='color: #BB0000;'>0.745</span>  0.727 -<span style='color: #BB0000;'>0.788</span>
-#&gt; <span style='color: #BCBCBC;'> 7</span> 7         -<span style='color: #BB0000;'>0.710</span>  0.725 -<span style='color: #BB0000;'>0.801</span>
-#&gt; <span style='color: #BCBCBC;'> 8</span> 8         -<span style='color: #BB0000;'>0.750</span>  0.726 -<span style='color: #BB0000;'>0.774</span>
-#&gt; <span style='color: #BCBCBC;'> 9</span> 9         -<span style='color: #BB0000;'>0.808</span>  1.40  -<span style='color: #BB0000;'>0.930</span>
-#&gt; <span style='color: #BCBCBC;'>10</span> 10        -<span style='color: #BB0000;'>0.745</span>  0.727 -<span style='color: #BB0000;'>0.788</span>
-#&gt; <span style='color: #BCBCBC;'>11</span> 11         0.927 -<span style='color: #BB0000;'>0.931</span> -<span style='color: #BB0000;'>0.837</span>
-#&gt; <span style='color: #BCBCBC;'>12</span> 12         0.963 -<span style='color: #BB0000;'>0.933</span> -<span style='color: #BB0000;'>0.849</span>
-#&gt; <span style='color: #BCBCBC;'>13</span> 13         0.923 -<span style='color: #BB0000;'>0.932</span> -<span style='color: #BB0000;'>0.823</span>
-#&gt; <span style='color: #BCBCBC;'>14</span> 14         0.829 -<span style='color: #BB0000;'>0.253</span> -<span style='color: #BB0000;'>0.967</span>
-#&gt; <span style='color: #BCBCBC;'>15</span> 15         0.927 -<span style='color: #BB0000;'>0.931</span> -<span style='color: #BB0000;'>0.837</span>
-#&gt; <span style='color: #BCBCBC;'>16</span> 16         0.422  2.05   1.29 
-#&gt; <span style='color: #BCBCBC;'>17</span> 17         1.47   1.29   0.545
-#&gt; <span style='color: #BCBCBC;'>18</span> 18         1.88   0.309  1.95 </div><div class='input'><span class='fu'><a href='https://generics.r-lib.org/reference/augment.html'>augment</a></span><span class='op'>(</span><span class='va'>fit2</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 18 × 4</span>
-#&gt;    .rownames   .fs1   .fs2   .fs3
-#&gt;    <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>      <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>  <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>  <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>
-#&gt; <span style='color: #BCBCBC;'> 1</span> 1         -<span style='color: #BB0000;'>0.897</span> -<span style='color: #BB0000;'>0.925</span>  0.936
-#&gt; <span style='color: #BCBCBC;'> 2</span> 2         -<span style='color: #BB0000;'>0.861</span> -<span style='color: #BB0000;'>0.927</span>  0.924
-#&gt; <span style='color: #BCBCBC;'> 3</span> 3         -<span style='color: #BB0000;'>0.901</span> -<span style='color: #BB0000;'>0.926</span>  0.950
-#&gt; <span style='color: #BCBCBC;'> 4</span> 4         -<span style='color: #BB0000;'>0.993</span> -<span style='color: #BB0000;'>0.251</span>  0.809
-#&gt; <span style='color: #BCBCBC;'> 5</span> 5         -<span style='color: #BB0000;'>0.897</span> -<span style='color: #BB0000;'>0.925</span>  0.936
-#&gt; <span style='color: #BCBCBC;'> 6</span> 6         -<span style='color: #BB0000;'>0.741</span>  0.720 -<span style='color: #BB0000;'>0.784</span>
-#&gt; <span style='color: #BCBCBC;'> 7</span> 7         -<span style='color: #BB0000;'>0.706</span>  0.718 -<span style='color: #BB0000;'>0.796</span>
-#&gt; <span style='color: #BCBCBC;'> 8</span> 8         -<span style='color: #BB0000;'>0.745</span>  0.719 -<span style='color: #BB0000;'>0.770</span>
-#&gt; <span style='color: #BCBCBC;'> 9</span> 9         -<span style='color: #BB0000;'>0.803</span>  1.39  -<span style='color: #BB0000;'>0.923</span>
-#&gt; <span style='color: #BCBCBC;'>10</span> 10        -<span style='color: #BB0000;'>0.741</span>  0.720 -<span style='color: #BB0000;'>0.784</span>
-#&gt; <span style='color: #BCBCBC;'>11</span> 11         0.917 -<span style='color: #BB0000;'>0.925</span> -<span style='color: #BB0000;'>0.830</span>
-#&gt; <span style='color: #BCBCBC;'>12</span> 12         0.952 -<span style='color: #BB0000;'>0.927</span> -<span style='color: #BB0000;'>0.842</span>
-#&gt; <span style='color: #BCBCBC;'>13</span> 13         0.913 -<span style='color: #BB0000;'>0.926</span> -<span style='color: #BB0000;'>0.816</span>
-#&gt; <span style='color: #BCBCBC;'>14</span> 14         0.820 -<span style='color: #BB0000;'>0.252</span> -<span style='color: #BB0000;'>0.958</span>
-#&gt; <span style='color: #BCBCBC;'>15</span> 15         0.917 -<span style='color: #BB0000;'>0.925</span> -<span style='color: #BB0000;'>0.830</span>
-#&gt; <span style='color: #BCBCBC;'>16</span> 16         0.426  2.04   1.28 
-#&gt; <span style='color: #BCBCBC;'>17</span> 17         1.46   1.29   0.548
-#&gt; <span style='color: #BCBCBC;'>18</span> 18         1.88   0.314  1.95 </div><div class='input'>
-<span class='co'># augmented dataframe (with new data)</span>
-<span class='fu'><a href='https://generics.r-lib.org/reference/augment.html'>augment</a></span><span class='op'>(</span><span class='va'>fit1</span>, data <span class='op'>=</span> <span class='va'>m2</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 18 × 10</span>
-#&gt;    .rownames    v1    v2    v3    v4    v5    v6   .fs1   .fs2   .fs3
-#&gt;    <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>  <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>  <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>  <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>
-#&gt; <span style='color: #BCBCBC;'> 1</span> 1             6     5     6     4     5     4 -<span style='color: #BB0000;'>0.904</span> -<span style='color: #BB0000;'>0.931</span>  0.948
-#&gt; <span style='color: #BCBCBC;'> 2</span> 2             5     6     4     6     4     5 -<span style='color: #BB0000;'>0.869</span> -<span style='color: #BB0000;'>0.933</span>  0.935
-#&gt; <span style='color: #BCBCBC;'> 3</span> 3             4     4     5     5     6     6 -<span style='color: #BB0000;'>0.908</span> -<span style='color: #BB0000;'>0.932</span>  0.962
-#&gt; <span style='color: #BCBCBC;'> 4</span> 4             3     3     1     1     1     1 -<span style='color: #BB0000;'>1.00</span>  -<span style='color: #BB0000;'>0.253</span>  0.818
-#&gt; <span style='color: #BCBCBC;'> 5</span> 5             3     3     1     1     1     2 -<span style='color: #BB0000;'>0.904</span> -<span style='color: #BB0000;'>0.931</span>  0.948
-#&gt; <span style='color: #BCBCBC;'> 6</span> 6             3     3     1     2     1     1 -<span style='color: #BB0000;'>0.745</span>  0.727 -<span style='color: #BB0000;'>0.788</span>
-#&gt; <span style='color: #BCBCBC;'> 7</span> 7             3     4     1     1     1     1 -<span style='color: #BB0000;'>0.710</span>  0.725 -<span style='color: #BB0000;'>0.801</span>
-#&gt; <span style='color: #BCBCBC;'> 8</span> 8             3     3     1     1     1     1 -<span style='color: #BB0000;'>0.750</span>  0.726 -<span style='color: #BB0000;'>0.774</span>
-#&gt; <span style='color: #BCBCBC;'> 9</span> 9             1     1     1     1     3     3 -<span style='color: #BB0000;'>0.808</span>  1.40  -<span style='color: #BB0000;'>0.930</span>
-#&gt; <span style='color: #BCBCBC;'>10</span> 10            1     2     1     1     3     4 -<span style='color: #BB0000;'>0.745</span>  0.727 -<span style='color: #BB0000;'>0.788</span>
-#&gt; <span style='color: #BCBCBC;'>11</span> 11            1     1     1     2     3     3  0.927 -<span style='color: #BB0000;'>0.931</span> -<span style='color: #BB0000;'>0.837</span>
-#&gt; <span style='color: #BCBCBC;'>12</span> 12            1     2     1     1     3     3  0.963 -<span style='color: #BB0000;'>0.933</span> -<span style='color: #BB0000;'>0.849</span>
-#&gt; <span style='color: #BCBCBC;'>13</span> 13            1     1     1     1     3     3  0.923 -<span style='color: #BB0000;'>0.932</span> -<span style='color: #BB0000;'>0.823</span>
-#&gt; <span style='color: #BCBCBC;'>14</span> 14            1     1     3     3     1     1  0.829 -<span style='color: #BB0000;'>0.253</span> -<span style='color: #BB0000;'>0.967</span>
-#&gt; <span style='color: #BCBCBC;'>15</span> 15            1     1     3     3     1     2  0.927 -<span style='color: #BB0000;'>0.931</span> -<span style='color: #BB0000;'>0.837</span>
-#&gt; <span style='color: #BCBCBC;'>16</span> 16            1     1     3     4     1     1  0.422  2.05   1.29 
-#&gt; <span style='color: #BCBCBC;'>17</span> 17            1     2     3     3     1     1  1.47   1.29   0.545
-#&gt; <span style='color: #BCBCBC;'>18</span> 18            1     1     3     3     1     1  1.88   0.309  1.95 </div><div class='input'><span class='fu'><a href='https://generics.r-lib.org/reference/augment.html'>augment</a></span><span class='op'>(</span><span class='va'>fit2</span>, data <span class='op'>=</span> <span class='va'>m2</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 18 × 10</span>
-#&gt;    .rownames    v1    v2    v3    v4    v5    v6   .fs1   .fs2   .fs3
-#&gt;    <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>  <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>  <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>  <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>
-#&gt; <span style='color: #BCBCBC;'> 1</span> 1             6     5     6     4     5     4 -<span style='color: #BB0000;'>0.897</span> -<span style='color: #BB0000;'>0.925</span>  0.936
-#&gt; <span style='color: #BCBCBC;'> 2</span> 2             5     6     4     6     4     5 -<span style='color: #BB0000;'>0.861</span> -<span style='color: #BB0000;'>0.927</span>  0.924
-#&gt; <span style='color: #BCBCBC;'> 3</span> 3             4     4     5     5     6     6 -<span style='color: #BB0000;'>0.901</span> -<span style='color: #BB0000;'>0.926</span>  0.950
-#&gt; <span style='color: #BCBCBC;'> 4</span> 4             3     3     1     1     1     1 -<span style='color: #BB0000;'>0.993</span> -<span style='color: #BB0000;'>0.251</span>  0.809
-#&gt; <span style='color: #BCBCBC;'> 5</span> 5             3     3     1     1     1     2 -<span style='color: #BB0000;'>0.897</span> -<span style='color: #BB0000;'>0.925</span>  0.936
-#&gt; <span style='color: #BCBCBC;'> 6</span> 6             3     3     1     2     1     1 -<span style='color: #BB0000;'>0.741</span>  0.720 -<span style='color: #BB0000;'>0.784</span>
-#&gt; <span style='color: #BCBCBC;'> 7</span> 7             3     4     1     1     1     1 -<span style='color: #BB0000;'>0.706</span>  0.718 -<span style='color: #BB0000;'>0.796</span>
-#&gt; <span style='color: #BCBCBC;'> 8</span> 8             3     3     1     1     1     1 -<span style='color: #BB0000;'>0.745</span>  0.719 -<span style='color: #BB0000;'>0.770</span>
-#&gt; <span style='color: #BCBCBC;'> 9</span> 9             1     1     1     1     3     3 -<span style='color: #BB0000;'>0.803</span>  1.39  -<span style='color: #BB0000;'>0.923</span>
-#&gt; <span style='color: #BCBCBC;'>10</span> 10            1     2     1     1     3     4 -<span style='color: #BB0000;'>0.741</span>  0.720 -<span style='color: #BB0000;'>0.784</span>
-#&gt; <span style='color: #BCBCBC;'>11</span> 11            1     1     1     2     3     3  0.917 -<span style='color: #BB0000;'>0.925</span> -<span style='color: #BB0000;'>0.830</span>
-#&gt; <span style='color: #BCBCBC;'>12</span> 12            1     2     1     1     3     3  0.952 -<span style='color: #BB0000;'>0.927</span> -<span style='color: #BB0000;'>0.842</span>
-#&gt; <span style='color: #BCBCBC;'>13</span> 13            1     1     1     1     3     3  0.913 -<span style='color: #BB0000;'>0.926</span> -<span style='color: #BB0000;'>0.816</span>
-#&gt; <span style='color: #BCBCBC;'>14</span> 14            1     1     3     3     1     1  0.820 -<span style='color: #BB0000;'>0.252</span> -<span style='color: #BB0000;'>0.958</span>
-#&gt; <span style='color: #BCBCBC;'>15</span> 15            1     1     3     3     1     2  0.917 -<span style='color: #BB0000;'>0.925</span> -<span style='color: #BB0000;'>0.830</span>
-#&gt; <span style='color: #BCBCBC;'>16</span> 16            1     1     3     4     1     1  0.426  2.04   1.28 
-#&gt; <span style='color: #BCBCBC;'>17</span> 17            1     2     3     3     1     1  1.46   1.29   0.548
-#&gt; <span style='color: #BCBCBC;'>18</span> 18            1     1     3     3     1     1  1.88   0.314  1.95 </div></pre>
+    <pre class="examples"><span class='r-in'></span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span><span class='op'>(</span><span class='fl'>123</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># data</span></span>
+<span class='r-in'><span class='va'>m1</span> <span class='op'>&lt;-</span> <span class='fu'>dplyr</span><span class='fu'>::</span><span class='fu'><a href='https://tibble.tidyverse.org/reference/tibble.html'>tibble</a></span><span class='op'>(</span></span>
+<span class='r-in'>  v1 <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>3</span>, <span class='fl'>3</span>, <span class='fl'>3</span>, <span class='fl'>3</span>, <span class='fl'>3</span>, <span class='fl'>4</span>, <span class='fl'>5</span>, <span class='fl'>6</span><span class='op'>)</span>,</span>
+<span class='r-in'>  v2 <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>, <span class='fl'>2</span>, <span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>2</span>, <span class='fl'>1</span>, <span class='fl'>2</span>, <span class='fl'>1</span>, <span class='fl'>3</span>, <span class='fl'>4</span>, <span class='fl'>3</span>, <span class='fl'>3</span>, <span class='fl'>3</span>, <span class='fl'>4</span>, <span class='fl'>6</span>, <span class='fl'>5</span><span class='op'>)</span>,</span>
+<span class='r-in'>  v3 <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>3</span>, <span class='fl'>3</span>, <span class='fl'>3</span>, <span class='fl'>3</span>, <span class='fl'>3</span>, <span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>5</span>, <span class='fl'>4</span>, <span class='fl'>6</span><span class='op'>)</span>,</span>
+<span class='r-in'>  v4 <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>3</span>, <span class='fl'>3</span>, <span class='fl'>4</span>, <span class='fl'>3</span>, <span class='fl'>3</span>, <span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>2</span>, <span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>2</span>, <span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>5</span>, <span class='fl'>6</span>, <span class='fl'>4</span><span class='op'>)</span>,</span>
+<span class='r-in'>  v5 <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>3</span>, <span class='fl'>3</span>, <span class='fl'>3</span>, <span class='fl'>3</span>, <span class='fl'>3</span>, <span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>6</span>, <span class='fl'>4</span>, <span class='fl'>5</span><span class='op'>)</span>,</span>
+<span class='r-in'>  v6 <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>2</span>, <span class='fl'>1</span>, <span class='fl'>3</span>, <span class='fl'>3</span>, <span class='fl'>3</span>, <span class='fl'>4</span>, <span class='fl'>3</span>, <span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>2</span>, <span class='fl'>1</span>, <span class='fl'>6</span>, <span class='fl'>5</span>, <span class='fl'>4</span><span class='op'>)</span></span>
+<span class='r-in'><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># new data</span></span>
+<span class='r-in'><span class='va'>m2</span> <span class='op'>&lt;-</span> <span class='fu'>purrr</span><span class='fu'>::</span><span class='fu'><a href='https://purrr.tidyverse.org/reference/map.html'>map_dfr</a></span><span class='op'>(</span><span class='va'>m1</span>, <span class='va'>rev</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># factor analysis objects</span></span>
+<span class='r-in'><span class='va'>fit1</span> <span class='op'>&lt;-</span> <span class='fu'>stats</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/r/stats/factanal.html'>factanal</a></span><span class='op'>(</span><span class='va'>m1</span>, factors <span class='op'>=</span> <span class='fl'>3</span>, scores <span class='op'>=</span> <span class='st'>"Bartlett"</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>fit2</span> <span class='op'>&lt;-</span> <span class='fu'>stats</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/r/stats/factanal.html'>factanal</a></span><span class='op'>(</span><span class='va'>m1</span>, factors <span class='op'>=</span> <span class='fl'>3</span>, scores <span class='op'>=</span> <span class='st'>"regression"</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># tidying the object</span></span>
+<span class='r-in'><span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>fit1</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># A tibble: 6 × 5</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   variable uniqueness   fl1   fl2   fl3</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>         <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>1</span> v1           0.005  0.944 0.182 0.267</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>2</span> v2           0.101  0.905 0.235 0.159</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>3</span> v3           0.005  0.236 0.210 0.946</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>4</span> v4           0.224  0.180 0.242 0.828</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>5</span> v5           0.084<span style='text-decoration: underline;'>3</span> 0.242 0.881 0.286</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>6</span> v6           0.005  0.193 0.959 0.196</span>
+<span class='r-in'><span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>fit2</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># A tibble: 6 × 5</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   variable uniqueness   fl1   fl2   fl3</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>         <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>1</span> v1           0.005  0.944 0.182 0.267</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>2</span> v2           0.101  0.905 0.235 0.159</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>3</span> v3           0.005  0.236 0.210 0.946</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>4</span> v4           0.224  0.180 0.242 0.828</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>5</span> v5           0.084<span style='text-decoration: underline;'>3</span> 0.242 0.881 0.286</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>6</span> v6           0.005  0.193 0.959 0.196</span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># augmented dataframe</span></span>
+<span class='r-in'><span class='fu'><a href='https://generics.r-lib.org/reference/augment.html'>augment</a></span><span class='op'>(</span><span class='va'>fit1</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># A tibble: 18 × 4</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    .rownames   .fs1   .fs2   .fs3</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>      <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>  <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>  <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 1</span> 1         -<span style='color: #BB0000;'>0.904</span> -<span style='color: #BB0000;'>0.931</span>  0.948</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 2</span> 2         -<span style='color: #BB0000;'>0.869</span> -<span style='color: #BB0000;'>0.933</span>  0.935</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 3</span> 3         -<span style='color: #BB0000;'>0.908</span> -<span style='color: #BB0000;'>0.932</span>  0.962</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 4</span> 4         -<span style='color: #BB0000;'>1.00</span>  -<span style='color: #BB0000;'>0.253</span>  0.818</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 5</span> 5         -<span style='color: #BB0000;'>0.904</span> -<span style='color: #BB0000;'>0.931</span>  0.948</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 6</span> 6         -<span style='color: #BB0000;'>0.745</span>  0.727 -<span style='color: #BB0000;'>0.788</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 7</span> 7         -<span style='color: #BB0000;'>0.710</span>  0.725 -<span style='color: #BB0000;'>0.801</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 8</span> 8         -<span style='color: #BB0000;'>0.750</span>  0.726 -<span style='color: #BB0000;'>0.774</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 9</span> 9         -<span style='color: #BB0000;'>0.808</span>  1.40  -<span style='color: #BB0000;'>0.930</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>10</span> 10        -<span style='color: #BB0000;'>0.745</span>  0.727 -<span style='color: #BB0000;'>0.788</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>11</span> 11         0.927 -<span style='color: #BB0000;'>0.931</span> -<span style='color: #BB0000;'>0.837</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>12</span> 12         0.963 -<span style='color: #BB0000;'>0.933</span> -<span style='color: #BB0000;'>0.849</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>13</span> 13         0.923 -<span style='color: #BB0000;'>0.932</span> -<span style='color: #BB0000;'>0.823</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>14</span> 14         0.829 -<span style='color: #BB0000;'>0.253</span> -<span style='color: #BB0000;'>0.967</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>15</span> 15         0.927 -<span style='color: #BB0000;'>0.931</span> -<span style='color: #BB0000;'>0.837</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>16</span> 16         0.422  2.05   1.29 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>17</span> 17         1.47   1.29   0.545</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>18</span> 18         1.88   0.309  1.95 </span>
+<span class='r-in'><span class='fu'><a href='https://generics.r-lib.org/reference/augment.html'>augment</a></span><span class='op'>(</span><span class='va'>fit2</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># A tibble: 18 × 4</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    .rownames   .fs1   .fs2   .fs3</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>      <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>  <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>  <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 1</span> 1         -<span style='color: #BB0000;'>0.897</span> -<span style='color: #BB0000;'>0.925</span>  0.936</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 2</span> 2         -<span style='color: #BB0000;'>0.861</span> -<span style='color: #BB0000;'>0.927</span>  0.924</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 3</span> 3         -<span style='color: #BB0000;'>0.901</span> -<span style='color: #BB0000;'>0.926</span>  0.950</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 4</span> 4         -<span style='color: #BB0000;'>0.993</span> -<span style='color: #BB0000;'>0.251</span>  0.809</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 5</span> 5         -<span style='color: #BB0000;'>0.897</span> -<span style='color: #BB0000;'>0.925</span>  0.936</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 6</span> 6         -<span style='color: #BB0000;'>0.741</span>  0.720 -<span style='color: #BB0000;'>0.784</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 7</span> 7         -<span style='color: #BB0000;'>0.706</span>  0.718 -<span style='color: #BB0000;'>0.796</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 8</span> 8         -<span style='color: #BB0000;'>0.745</span>  0.719 -<span style='color: #BB0000;'>0.770</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 9</span> 9         -<span style='color: #BB0000;'>0.803</span>  1.39  -<span style='color: #BB0000;'>0.923</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>10</span> 10        -<span style='color: #BB0000;'>0.741</span>  0.720 -<span style='color: #BB0000;'>0.784</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>11</span> 11         0.917 -<span style='color: #BB0000;'>0.925</span> -<span style='color: #BB0000;'>0.830</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>12</span> 12         0.952 -<span style='color: #BB0000;'>0.927</span> -<span style='color: #BB0000;'>0.842</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>13</span> 13         0.913 -<span style='color: #BB0000;'>0.926</span> -<span style='color: #BB0000;'>0.816</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>14</span> 14         0.820 -<span style='color: #BB0000;'>0.252</span> -<span style='color: #BB0000;'>0.958</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>15</span> 15         0.917 -<span style='color: #BB0000;'>0.925</span> -<span style='color: #BB0000;'>0.830</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>16</span> 16         0.426  2.04   1.28 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>17</span> 17         1.46   1.29   0.548</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>18</span> 18         1.88   0.314  1.95 </span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># augmented dataframe (with new data)</span></span>
+<span class='r-in'><span class='fu'><a href='https://generics.r-lib.org/reference/augment.html'>augment</a></span><span class='op'>(</span><span class='va'>fit1</span>, data <span class='op'>=</span> <span class='va'>m2</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># A tibble: 18 × 10</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    .rownames    v1    v2    v3    v4    v5    v6   .fs1   .fs2   .fs3</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>  <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>  <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>  <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 1</span> 1             6     5     6     4     5     4 -<span style='color: #BB0000;'>0.904</span> -<span style='color: #BB0000;'>0.931</span>  0.948</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 2</span> 2             5     6     4     6     4     5 -<span style='color: #BB0000;'>0.869</span> -<span style='color: #BB0000;'>0.933</span>  0.935</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 3</span> 3             4     4     5     5     6     6 -<span style='color: #BB0000;'>0.908</span> -<span style='color: #BB0000;'>0.932</span>  0.962</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 4</span> 4             3     3     1     1     1     1 -<span style='color: #BB0000;'>1.00</span>  -<span style='color: #BB0000;'>0.253</span>  0.818</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 5</span> 5             3     3     1     1     1     2 -<span style='color: #BB0000;'>0.904</span> -<span style='color: #BB0000;'>0.931</span>  0.948</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 6</span> 6             3     3     1     2     1     1 -<span style='color: #BB0000;'>0.745</span>  0.727 -<span style='color: #BB0000;'>0.788</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 7</span> 7             3     4     1     1     1     1 -<span style='color: #BB0000;'>0.710</span>  0.725 -<span style='color: #BB0000;'>0.801</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 8</span> 8             3     3     1     1     1     1 -<span style='color: #BB0000;'>0.750</span>  0.726 -<span style='color: #BB0000;'>0.774</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 9</span> 9             1     1     1     1     3     3 -<span style='color: #BB0000;'>0.808</span>  1.40  -<span style='color: #BB0000;'>0.930</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>10</span> 10            1     2     1     1     3     4 -<span style='color: #BB0000;'>0.745</span>  0.727 -<span style='color: #BB0000;'>0.788</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>11</span> 11            1     1     1     2     3     3  0.927 -<span style='color: #BB0000;'>0.931</span> -<span style='color: #BB0000;'>0.837</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>12</span> 12            1     2     1     1     3     3  0.963 -<span style='color: #BB0000;'>0.933</span> -<span style='color: #BB0000;'>0.849</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>13</span> 13            1     1     1     1     3     3  0.923 -<span style='color: #BB0000;'>0.932</span> -<span style='color: #BB0000;'>0.823</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>14</span> 14            1     1     3     3     1     1  0.829 -<span style='color: #BB0000;'>0.253</span> -<span style='color: #BB0000;'>0.967</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>15</span> 15            1     1     3     3     1     2  0.927 -<span style='color: #BB0000;'>0.931</span> -<span style='color: #BB0000;'>0.837</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>16</span> 16            1     1     3     4     1     1  0.422  2.05   1.29 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>17</span> 17            1     2     3     3     1     1  1.47   1.29   0.545</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>18</span> 18            1     1     3     3     1     1  1.88   0.309  1.95 </span>
+<span class='r-in'><span class='fu'><a href='https://generics.r-lib.org/reference/augment.html'>augment</a></span><span class='op'>(</span><span class='va'>fit2</span>, data <span class='op'>=</span> <span class='va'>m2</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># A tibble: 18 × 10</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    .rownames    v1    v2    v3    v4    v5    v6   .fs1   .fs2   .fs3</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>  <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>  <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>  <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 1</span> 1             6     5     6     4     5     4 -<span style='color: #BB0000;'>0.897</span> -<span style='color: #BB0000;'>0.925</span>  0.936</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 2</span> 2             5     6     4     6     4     5 -<span style='color: #BB0000;'>0.861</span> -<span style='color: #BB0000;'>0.927</span>  0.924</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 3</span> 3             4     4     5     5     6     6 -<span style='color: #BB0000;'>0.901</span> -<span style='color: #BB0000;'>0.926</span>  0.950</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 4</span> 4             3     3     1     1     1     1 -<span style='color: #BB0000;'>0.993</span> -<span style='color: #BB0000;'>0.251</span>  0.809</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 5</span> 5             3     3     1     1     1     2 -<span style='color: #BB0000;'>0.897</span> -<span style='color: #BB0000;'>0.925</span>  0.936</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 6</span> 6             3     3     1     2     1     1 -<span style='color: #BB0000;'>0.741</span>  0.720 -<span style='color: #BB0000;'>0.784</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 7</span> 7             3     4     1     1     1     1 -<span style='color: #BB0000;'>0.706</span>  0.718 -<span style='color: #BB0000;'>0.796</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 8</span> 8             3     3     1     1     1     1 -<span style='color: #BB0000;'>0.745</span>  0.719 -<span style='color: #BB0000;'>0.770</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 9</span> 9             1     1     1     1     3     3 -<span style='color: #BB0000;'>0.803</span>  1.39  -<span style='color: #BB0000;'>0.923</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>10</span> 10            1     2     1     1     3     4 -<span style='color: #BB0000;'>0.741</span>  0.720 -<span style='color: #BB0000;'>0.784</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>11</span> 11            1     1     1     2     3     3  0.917 -<span style='color: #BB0000;'>0.925</span> -<span style='color: #BB0000;'>0.830</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>12</span> 12            1     2     1     1     3     3  0.952 -<span style='color: #BB0000;'>0.927</span> -<span style='color: #BB0000;'>0.842</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>13</span> 13            1     1     1     1     3     3  0.913 -<span style='color: #BB0000;'>0.926</span> -<span style='color: #BB0000;'>0.816</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>14</span> 14            1     1     3     3     1     1  0.820 -<span style='color: #BB0000;'>0.252</span> -<span style='color: #BB0000;'>0.958</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>15</span> 15            1     1     3     3     1     2  0.917 -<span style='color: #BB0000;'>0.925</span> -<span style='color: #BB0000;'>0.830</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>16</span> 16            1     1     3     4     1     1  0.426  2.04   1.28 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>17</span> 17            1     2     3     3     1     1  1.46   1.29   0.548</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>18</span> 18            1     1     3     3     1     1  1.88   0.314  1.95 </span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

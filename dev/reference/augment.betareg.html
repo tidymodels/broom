@@ -211,7 +211,7 @@ variable used to fit the model is not included in <code>newdata</code>, then no
 associated with training observations (such as influences or related)
 measures that is not meaningfully defined for new observations.</p>
 <p>For convenience, many augment methods provide default <code>data</code> arguments,
-so that <code><a href='https://generics.r-lib.org/reference/augment.html'>augment(fit)</a></code> will return the augmented training data. In these
+so that <code>augment(fit)</code> will return the augmented training data. In these
 cases, augment tries to reconstruct the original data based on the model
 object with varying degrees of success.</p>
 <p>The augmented dataset is always returned as a <a href='https://tibble.tidyverse.org/reference/tibble.html'>tibble::tibble</a> with the
@@ -249,7 +249,7 @@ missing at this time.</p>
       <th>data</th>
       <td><p>A <a href='https://rdrr.io/r/base/data.frame.html'>base::data.frame</a> or <code><a href='https://tibble.tidyverse.org/reference/tibble.html'>tibble::tibble()</a></code> containing the original
 data that was used to produce the object <code>x</code>. Defaults to
-<code><a href='https://rdrr.io/r/stats/model.frame.html'>stats::model.frame(x)</a></code> so that <code><a href='https://generics.r-lib.org/reference/augment.html'>augment(my_fit)</a></code> returns the augmented
+<code>stats::model.frame(x)</code> so that <code>augment(my_fit)</code> returns the augmented
 original data. <strong>Do not</strong> pass new data to the <code>data</code> argument.
 Augment will report information such as influence and cooks distance for
 data passed to the <code>data</code> argument. These measures are only defined for
@@ -307,29 +307,30 @@ the <code>data</code> argument.</p></td>
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'>
-<span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/ns-load.html'>requireNamespace</a></span><span class='op'>(</span><span class='st'>"betareg"</span>, quietly <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
-
-<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'>betareg</span><span class='op'>)</span>
-<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='st'>"GasolineYield"</span>, package <span class='op'>=</span> <span class='st'>"betareg"</span><span class='op'>)</span>
-
-<span class='va'>mod</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/betareg/man/betareg.html'>betareg</a></span><span class='op'>(</span><span class='va'>yield</span> <span class='op'>~</span> <span class='va'>batch</span> <span class='op'>+</span> <span class='va'>temp</span>, data <span class='op'>=</span> <span class='va'>GasolineYield</span><span class='op'>)</span>
-
-<span class='va'>mod</span>
-<span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>mod</span><span class='op'>)</span>
-<span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>mod</span>, conf.int <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
-<span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>mod</span>, conf.int <span class='op'>=</span> <span class='cn'>TRUE</span>, conf.level <span class='op'>=</span> <span class='fl'>.99</span><span class='op'>)</span>
-
-<span class='fu'><a href='https://generics.r-lib.org/reference/augment.html'>augment</a></span><span class='op'>(</span><span class='va'>mod</span><span class='op'>)</span>
-
-<span class='fu'><a href='https://generics.r-lib.org/reference/glance.html'>glance</a></span><span class='op'>(</span><span class='va'>mod</span><span class='op'>)</span>
-
-<span class='op'>}</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 1 × 7</span>
-#&gt;   pseudo.r.squared df.null logLik   AIC   BIC df.residual  nobs
-#&gt;              <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>  <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>       <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span>
-#&gt; <span style='color: #BCBCBC;'>1</span>            0.962      30   84.8 -<span style='color: #BB0000;'>146.</span> -<span style='color: #BB0000;'>128.</span>          20    32</div><div class='input'>
-</div></pre>
+    <pre class="examples"><span class='r-in'></span>
+<span class='r-in'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/ns-load.html'>requireNamespace</a></span><span class='op'>(</span><span class='st'>"betareg"</span>, quietly <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'>betareg</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='st'>"GasolineYield"</span>, package <span class='op'>=</span> <span class='st'>"betareg"</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='va'>mod</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/betareg/man/betareg.html'>betareg</a></span><span class='op'>(</span><span class='va'>yield</span> <span class='op'>~</span> <span class='va'>batch</span> <span class='op'>+</span> <span class='va'>temp</span>, data <span class='op'>=</span> <span class='va'>GasolineYield</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='va'>mod</span></span>
+<span class='r-in'><span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>mod</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>mod</span>, conf.int <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>mod</span>, conf.int <span class='op'>=</span> <span class='cn'>TRUE</span>, conf.level <span class='op'>=</span> <span class='fl'>.99</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='fu'><a href='https://generics.r-lib.org/reference/augment.html'>augment</a></span><span class='op'>(</span><span class='va'>mod</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='fu'><a href='https://generics.r-lib.org/reference/glance.html'>glance</a></span><span class='op'>(</span><span class='va'>mod</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='op'>}</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># A tibble: 1 × 7</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   pseudo.r.squared df.null logLik   AIC   BIC df.residual  nobs</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>              <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>  <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>       <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>1</span>            0.962      30   84.8 -<span style='color: #BB0000;'>146.</span> -<span style='color: #BB0000;'>128.</span>          20    32</span>
+<span class='r-in'></span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

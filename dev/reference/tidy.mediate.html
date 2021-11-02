@@ -229,36 +229,41 @@ two the direct effect in each group.</p>
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'>
-<span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/ns-load.html'>requireNamespace</a></span><span class='op'>(</span><span class='st'>"mediation"</span>, quietly <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
-
-<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://imai.princeton.edu/projects/mechanisms.html'>mediation</a></span><span class='op'>)</span>
-<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>jobs</span><span class='op'>)</span>
-
-<span class='va'>b</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>job_seek</span> <span class='op'>~</span> <span class='va'>treat</span> <span class='op'>+</span> <span class='va'>econ_hard</span> <span class='op'>+</span> <span class='va'>sex</span> <span class='op'>+</span> <span class='va'>age</span>, data <span class='op'>=</span> <span class='va'>jobs</span><span class='op'>)</span>
-<span class='va'>c</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>depress2</span> <span class='op'>~</span> <span class='va'>treat</span> <span class='op'>+</span> <span class='va'>job_seek</span> <span class='op'>+</span> <span class='va'>econ_hard</span> <span class='op'>+</span> <span class='va'>sex</span> <span class='op'>+</span> <span class='va'>age</span>, data <span class='op'>=</span> <span class='va'>jobs</span><span class='op'>)</span>
-<span class='va'>mod</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/mediation/man/mediate.html'>mediate</a></span><span class='op'>(</span><span class='va'>b</span>, <span class='va'>c</span>, sims <span class='op'>=</span> <span class='fl'>50</span>, treat <span class='op'>=</span> <span class='st'>"treat"</span>, mediator <span class='op'>=</span> <span class='st'>"job_seek"</span><span class='op'>)</span>
-
-<span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>mod</span><span class='op'>)</span>
-<span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>mod</span>, conf.int <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
-<span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>mod</span>, conf.int <span class='op'>=</span> <span class='cn'>TRUE</span>, conf.level <span class='op'>=</span> <span class='fl'>.99</span><span class='op'>)</span>
-
-<span class='op'>}</span>
-</div><div class='output co'>#&gt; <span class='message'>Registered S3 methods overwritten by 'Hmisc':</span>
-#&gt; <span class='message'>  method          from      </span>
-#&gt; <span class='message'>  summary.formula ergm      </span>
-#&gt; <span class='message'>  vcov.default    fit.models</span></div><div class='output co'>#&gt; <span class='message'>mediation: Causal Mediation Analysis</span>
-#&gt; <span class='message'>Version: 4.5.0</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Attaching package: ‘mediation’</span></div><div class='output co'>#&gt; <span class='message'>The following object is masked from ‘package:psych’:</span>
-#&gt; <span class='message'></span>
-#&gt; <span class='message'>    mediate</span></div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 4 × 6</span>
-#&gt;   term   estimate std.error p.value conf.low conf.high
-#&gt;   <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>    <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>
-#&gt; <span style='color: #BCBCBC;'>1</span> acme_0  -<span style='color: #BB0000;'>0.014</span><span style='color: #BB0000; text-decoration: underline;'>3</span>    0.012<span style='text-decoration: underline;'>9</span>    0.24  -<span style='color: #BB0000;'>0.037</span><span style='color: #BB0000; text-decoration: underline;'>8</span>    0.024<span style='text-decoration: underline;'>3</span>
-#&gt; <span style='color: #BCBCBC;'>2</span> acme_1  -<span style='color: #BB0000;'>0.014</span><span style='color: #BB0000; text-decoration: underline;'>3</span>    0.012<span style='text-decoration: underline;'>9</span>    0.24  -<span style='color: #BB0000;'>0.037</span><span style='color: #BB0000; text-decoration: underline;'>8</span>    0.024<span style='text-decoration: underline;'>3</span>
-#&gt; <span style='color: #BCBCBC;'>3</span> ade_0   -<span style='color: #BB0000;'>0.031</span><span style='color: #BB0000; text-decoration: underline;'>5</span>    0.037<span style='text-decoration: underline;'>7</span>    0.24  -<span style='color: #BB0000;'>0.106</span>     0.068<span style='text-decoration: underline;'>6</span>
-#&gt; <span style='color: #BCBCBC;'>4</span> ade_1   -<span style='color: #BB0000;'>0.031</span><span style='color: #BB0000; text-decoration: underline;'>5</span>    0.037<span style='text-decoration: underline;'>7</span>    0.24  -<span style='color: #BB0000;'>0.106</span>     0.068<span style='text-decoration: underline;'>6</span></div><div class='input'>
-</div></pre>
+    <pre class="examples"><span class='r-in'></span>
+<span class='r-in'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/ns-load.html'>requireNamespace</a></span><span class='op'>(</span><span class='st'>"mediation"</span>, quietly <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://imai.princeton.edu/projects/mechanisms.html'>mediation</a></span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>jobs</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='va'>b</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>job_seek</span> <span class='op'>~</span> <span class='va'>treat</span> <span class='op'>+</span> <span class='va'>econ_hard</span> <span class='op'>+</span> <span class='va'>sex</span> <span class='op'>+</span> <span class='va'>age</span>, data <span class='op'>=</span> <span class='va'>jobs</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>c</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>depress2</span> <span class='op'>~</span> <span class='va'>treat</span> <span class='op'>+</span> <span class='va'>job_seek</span> <span class='op'>+</span> <span class='va'>econ_hard</span> <span class='op'>+</span> <span class='va'>sex</span> <span class='op'>+</span> <span class='va'>age</span>, data <span class='op'>=</span> <span class='va'>jobs</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>mod</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/mediation/man/mediate.html'>mediate</a></span><span class='op'>(</span><span class='va'>b</span>, <span class='va'>c</span>, sims <span class='op'>=</span> <span class='fl'>50</span>, treat <span class='op'>=</span> <span class='st'>"treat"</span>, mediator <span class='op'>=</span> <span class='st'>"job_seek"</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>mod</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>mod</span>, conf.int <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>mod</span>, conf.int <span class='op'>=</span> <span class='cn'>TRUE</span>, conf.level <span class='op'>=</span> <span class='fl'>.99</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='op'>}</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> Registered S3 methods overwritten by 'Hmisc':</span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span>   method          from      </span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span>   summary.formula ergm      </span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span>   vcov.default    fit.models</span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> mediation: Causal Mediation Analysis</span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> Version: 4.5.0</span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> Attaching package: ‘mediation’</span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> The following object is masked from ‘package:psych’:</span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span>     mediate</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># A tibble: 4 × 6</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   term   estimate std.error p.value conf.low conf.high</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>    <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>1</span> acme_0  -<span style='color: #BB0000;'>0.014</span><span style='color: #BB0000; text-decoration: underline;'>3</span>    0.012<span style='text-decoration: underline;'>9</span>    0.24  -<span style='color: #BB0000;'>0.037</span><span style='color: #BB0000; text-decoration: underline;'>8</span>    0.024<span style='text-decoration: underline;'>3</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>2</span> acme_1  -<span style='color: #BB0000;'>0.014</span><span style='color: #BB0000; text-decoration: underline;'>3</span>    0.012<span style='text-decoration: underline;'>9</span>    0.24  -<span style='color: #BB0000;'>0.037</span><span style='color: #BB0000; text-decoration: underline;'>8</span>    0.024<span style='text-decoration: underline;'>3</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>3</span> ade_0   -<span style='color: #BB0000;'>0.031</span><span style='color: #BB0000; text-decoration: underline;'>5</span>    0.037<span style='text-decoration: underline;'>7</span>    0.24  -<span style='color: #BB0000;'>0.106</span>     0.068<span style='text-decoration: underline;'>6</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>4</span> ade_1   -<span style='color: #BB0000;'>0.031</span><span style='color: #BB0000; text-decoration: underline;'>5</span>    0.037<span style='text-decoration: underline;'>7</span>    0.24  -<span style='color: #BB0000;'>0.106</span>     0.068<span style='text-decoration: underline;'>6</span></span>
+<span class='r-in'></span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

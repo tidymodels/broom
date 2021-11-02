@@ -111,7 +111,7 @@
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Introduction to broom</h1>
             
-            <h4 class="date">2021-11-01</h4>
+            <h4 class="date">2021-11-02</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/tidymodels/broom/blob/master/vignettes/broom.Rmd"><code>vignettes/broom.Rmd</code></a></small>
       <div class="hidden name"><code>broom.Rmd</code></div>
@@ -175,7 +175,7 @@
 ## Residual standard error: 3.046 on 30 degrees of freedom
 ## Multiple R-squared:  0.7528, Adjusted R-squared:  0.7446 
 ## F-statistic: 91.38 on 1 and 30 DF,  p-value: 1.294e-10</code></pre>
-<p>This summary output is useful enough if you just want to read it. However, converting it to tabular data that contains all the same information, so that you can combine it with other models or do further analysis, is not trivial. You have to do <code><a href="https://rdrr.io/pkg/vars/man/coefficients.html">coef(summary(lmfit))</a></code> to get a matrix of coefficients, the terms are still stored in row names, and the column names are inconsistent with other packages (e.g. <code>Pr(&gt;|t|)</code> compared to <code>p.value</code>).</p>
+<p>This summary output is useful enough if you just want to read it. However, converting it to tabular data that contains all the same information, so that you can combine it with other models or do further analysis, is not trivial. You have to do <code>coef(summary(lmfit))</code> to get a matrix of coefficients, the terms are still stored in row names, and the column names are inconsistent with other packages (e.g. <code>Pr(&gt;|t|)</code> compared to <code>p.value</code>).</p>
 <p>Instead, you can use the <code>tidy</code> function, from the broom package, on the fit:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://broom.tidymodels.org/">broom</a></span><span class="op">)</span>
@@ -185,7 +185,7 @@
 ##   &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
 ## 1 (Intercept)    37.3      1.88      19.9  8.24e-19
 ## 2 wt             -5.34     0.559     -9.56 1.29e-10</code></pre>
-<p>This gives you a tabular data representation. Note that the row names have been moved into a column called <code>term</code>, and the column names are simple and consistent (and can be accessed using <code><a href="https://rdrr.io/r/base/Extract.html">$</a></code>).</p>
+<p>This gives you a tabular data representation. Note that the row names have been moved into a column called <code>term</code>, and the column names are simple and consistent (and can be accessed using <code>$</code>).</p>
 <p>Instead of viewing the coefficients, you might be interested in the fitted values and residuals for each of the original points in the regression. For this, use <code>augment</code>, which augments the original data with information from the model:</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://generics.r-lib.org/reference/augment.html">augment</a></span><span class="op">(</span><span class="va">lmfit</span><span class="op">)</span></code></pre></div>
@@ -282,7 +282,7 @@
 <pre><code>## # A tibble: 1 × 9
 ##   sigma isConv       finTol logLik   AIC   BIC deviance df.residual  nobs
 ##   &lt;dbl&gt; &lt;lgl&gt;         &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;       &lt;int&gt; &lt;int&gt;
-## 1  2.77 TRUE   0.0000000197  -77.0  160.  164.     231.          30    32</code></pre>
+## 1  2.77 TRUE   0.0000000288  -77.0  160.  164.     231.          30    32</code></pre>
 </div>
 <div id="hypothesis-testing" class="section level3">
 <h3 class="hasAnchor">
@@ -386,7 +386,7 @@
 <a href="#augment-functions" class="anchor"></a>augment functions</h3>
 <ul>
 <li>
-<code><a href="https://generics.r-lib.org/reference/augment.html">augment(model, data)</a></code> adds columns to the original data.
+<code>augment(model, data)</code> adds columns to the original data.
 <ul>
 <li>If the <code>data</code> argument is missing, <code>augment</code> attempts to reconstruct the data from the model (note that this may not always be possible, and usually won’t contain columns not used in the model).</li>
 </ul>
@@ -413,7 +413,7 @@
 <li>
 <code>glance</code> always returns a one-row tibble.
 <ul>
-<li>The only exception is that <code><a href="https://generics.r-lib.org/reference/glance.html">glance(NULL)</a></code> returns an empty tibble.</li>
+<li>The only exception is that <code>glance(NULL)</code> returns an empty tibble.</li>
 </ul>
 </li>
 <li>We avoid including arguments that were <em>given</em> to the modeling function. For example, a <code>glm</code> glance output does not need to contain a field for <code>family</code>, since that is decided by the user calling <code>glm</code> rather than the modeling function itself.</li>

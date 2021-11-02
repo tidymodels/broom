@@ -230,59 +230,60 @@ passed on to <code><a href='https://rdrr.io/pkg/emmeans/man/summary.emmGrid.html
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'>
-<span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/ns-load.html'>requireNamespace</a></span><span class='op'>(</span><span class='st'>"emmeans"</span>, quietly <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
-
-<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://github.com/rvlenth/emmeans'>emmeans</a></span><span class='op'>)</span>
-<span class='co'># linear model for sales of oranges per day</span>
-<span class='va'>oranges_lm1</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>sales1</span> <span class='op'>~</span> <span class='va'>price1</span> <span class='op'>+</span> <span class='va'>price2</span> <span class='op'>+</span> <span class='va'>day</span> <span class='op'>+</span> <span class='va'>store</span>, data <span class='op'>=</span> <span class='va'>oranges</span><span class='op'>)</span>
-
-<span class='co'># reference grid; see vignette("basics", package = "emmeans")</span>
-<span class='va'>oranges_rg1</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/emmeans/man/ref_grid.html'>ref_grid</a></span><span class='op'>(</span><span class='va'>oranges_lm1</span><span class='op'>)</span>
-<span class='va'>td</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>oranges_rg1</span><span class='op'>)</span>
-<span class='va'>td</span>
-
-<span class='co'># marginal averages</span>
-<span class='va'>marginal</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/emmeans/man/emmeans.html'>emmeans</a></span><span class='op'>(</span><span class='va'>oranges_rg1</span>, <span class='st'>"day"</span><span class='op'>)</span>
-<span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>marginal</span><span class='op'>)</span>
-
-<span class='co'># contrasts</span>
-<span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/pkg/emmeans/man/contrast.html'>contrast</a></span><span class='op'>(</span><span class='va'>marginal</span><span class='op'>)</span><span class='op'>)</span>
-<span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/pkg/emmeans/man/contrast.html'>contrast</a></span><span class='op'>(</span><span class='va'>marginal</span>, method <span class='op'>=</span> <span class='st'>"pairwise"</span><span class='op'>)</span><span class='op'>)</span>
-
-<span class='co'># plot confidence intervals</span>
-<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://ggplot2.tidyverse.org'>ggplot2</a></span><span class='op'>)</span>
-<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>marginal</span>, conf.int <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>, <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span><span class='va'>day</span>, <span class='va'>estimate</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
-  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_point.html'>geom_point</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span>
-  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_linerange.html'>geom_errorbar</a></span><span class='op'>(</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>ymin <span class='op'>=</span> <span class='va'>conf.low</span>, ymax <span class='op'>=</span> <span class='va'>conf.high</span><span class='op'>)</span><span class='op'>)</span>
-
-<span class='co'># by multiple prices</span>
-<span class='va'>by_price</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/emmeans/man/emmeans.html'>emmeans</a></span><span class='op'>(</span><span class='va'>oranges_lm1</span>, <span class='st'>"day"</span>,
-  by <span class='op'>=</span> <span class='st'>"price2"</span>,
-  at <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>
-    price1 <span class='op'>=</span> <span class='fl'>50</span>, price2 <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>40</span>, <span class='fl'>60</span>, <span class='fl'>80</span><span class='op'>)</span>,
-    day <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"2"</span>, <span class='st'>"3"</span>, <span class='st'>"4"</span><span class='op'>)</span>
-  <span class='op'>)</span>
-<span class='op'>)</span>
-<span class='va'>by_price</span>
-<span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>by_price</span><span class='op'>)</span>
-
-<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>by_price</span>, conf.int <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>, <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span><span class='va'>price2</span>, <span class='va'>estimate</span>, color <span class='op'>=</span> <span class='va'>day</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
-  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_path.html'>geom_line</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span>
-  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_linerange.html'>geom_errorbar</a></span><span class='op'>(</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>ymin <span class='op'>=</span> <span class='va'>conf.low</span>, ymax <span class='op'>=</span> <span class='va'>conf.high</span><span class='op'>)</span><span class='op'>)</span>
-
-<span class='co'># joint_tests</span>
-<span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/pkg/emmeans/man/joint_tests.html'>joint_tests</a></span><span class='op'>(</span><span class='va'>oranges_lm1</span><span class='op'>)</span><span class='op'>)</span>
-
-<span class='op'>}</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 4 × 5</span>
-#&gt;   term   num.df den.df statistic   p.value
-#&gt;   <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>  <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>
-#&gt; <span style='color: #BCBCBC;'>1</span> price1      1     23     30.3  0.000<span style='text-decoration: underline;'>013</span>4
-#&gt; <span style='color: #BCBCBC;'>2</span> price2      1     23      2.23 0.149    
-#&gt; <span style='color: #BCBCBC;'>3</span> day         5     23      4.88 0.003<span style='text-decoration: underline;'>46</span>  
-#&gt; <span style='color: #BCBCBC;'>4</span> store       5     23      2.52 0.058<span style='text-decoration: underline;'>3</span>   </div><div class='input'>
-</div></pre>
+    <pre class="examples"><span class='r-in'></span>
+<span class='r-in'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/ns-load.html'>requireNamespace</a></span><span class='op'>(</span><span class='st'>"emmeans"</span>, quietly <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://github.com/rvlenth/emmeans'>emmeans</a></span><span class='op'>)</span></span>
+<span class='r-in'><span class='co'># linear model for sales of oranges per day</span></span>
+<span class='r-in'><span class='va'>oranges_lm1</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>sales1</span> <span class='op'>~</span> <span class='va'>price1</span> <span class='op'>+</span> <span class='va'>price2</span> <span class='op'>+</span> <span class='va'>day</span> <span class='op'>+</span> <span class='va'>store</span>, data <span class='op'>=</span> <span class='va'>oranges</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># reference grid; see vignette("basics", package = "emmeans")</span></span>
+<span class='r-in'><span class='va'>oranges_rg1</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/emmeans/man/ref_grid.html'>ref_grid</a></span><span class='op'>(</span><span class='va'>oranges_lm1</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>td</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>oranges_rg1</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>td</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># marginal averages</span></span>
+<span class='r-in'><span class='va'>marginal</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/emmeans/man/emmeans.html'>emmeans</a></span><span class='op'>(</span><span class='va'>oranges_rg1</span>, <span class='st'>"day"</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>marginal</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># contrasts</span></span>
+<span class='r-in'><span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/pkg/emmeans/man/contrast.html'>contrast</a></span><span class='op'>(</span><span class='va'>marginal</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/pkg/emmeans/man/contrast.html'>contrast</a></span><span class='op'>(</span><span class='va'>marginal</span>, method <span class='op'>=</span> <span class='st'>"pairwise"</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># plot confidence intervals</span></span>
+<span class='r-in'><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://ggplot2.tidyverse.org'>ggplot2</a></span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>marginal</span>, conf.int <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>, <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span><span class='va'>day</span>, <span class='va'>estimate</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span class='r-in'>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_point.html'>geom_point</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span class='r-in'>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_linerange.html'>geom_errorbar</a></span><span class='op'>(</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>ymin <span class='op'>=</span> <span class='va'>conf.low</span>, ymax <span class='op'>=</span> <span class='va'>conf.high</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># by multiple prices</span></span>
+<span class='r-in'><span class='va'>by_price</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/emmeans/man/emmeans.html'>emmeans</a></span><span class='op'>(</span><span class='va'>oranges_lm1</span>, <span class='st'>"day"</span>,</span>
+<span class='r-in'>  by <span class='op'>=</span> <span class='st'>"price2"</span>,</span>
+<span class='r-in'>  at <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span></span>
+<span class='r-in'>    price1 <span class='op'>=</span> <span class='fl'>50</span>, price2 <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>40</span>, <span class='fl'>60</span>, <span class='fl'>80</span><span class='op'>)</span>,</span>
+<span class='r-in'>    day <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"2"</span>, <span class='st'>"3"</span>, <span class='st'>"4"</span><span class='op'>)</span></span>
+<span class='r-in'>  <span class='op'>)</span></span>
+<span class='r-in'><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>by_price</span></span>
+<span class='r-in'><span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>by_price</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>by_price</span>, conf.int <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>, <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span><span class='va'>price2</span>, <span class='va'>estimate</span>, color <span class='op'>=</span> <span class='va'>day</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span class='r-in'>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_path.html'>geom_line</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span class='r-in'>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_linerange.html'>geom_errorbar</a></span><span class='op'>(</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>ymin <span class='op'>=</span> <span class='va'>conf.low</span>, ymax <span class='op'>=</span> <span class='va'>conf.high</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># joint_tests</span></span>
+<span class='r-in'><span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/pkg/emmeans/man/joint_tests.html'>joint_tests</a></span><span class='op'>(</span><span class='va'>oranges_lm1</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='op'>}</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># A tibble: 4 × 5</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   term   num.df den.df statistic   p.value</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>  <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>1</span> price1      1     23     30.3  0.000<span style='text-decoration: underline;'>013</span>4</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>2</span> price2      1     23      2.23 0.149    </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>3</span> day         5     23      4.88 0.003<span style='text-decoration: underline;'>46</span>  </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>4</span> store       5     23      2.52 0.058<span style='text-decoration: underline;'>3</span>   </span>
+<span class='r-in'></span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

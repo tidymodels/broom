@@ -211,7 +211,7 @@ variable used to fit the model is not included in <code>newdata</code>, then no
 associated with training observations (such as influences or related)
 measures that is not meaningfully defined for new observations.</p>
 <p>For convenience, many augment methods provide default <code>data</code> arguments,
-so that <code><a href='https://generics.r-lib.org/reference/augment.html'>augment(fit)</a></code> will return the augmented training data. In these
+so that <code>augment(fit)</code> will return the augmented training data. In these
 cases, augment tries to reconstruct the original data based on the model
 object with varying degrees of success.</p>
 <p>The augmented dataset is always returned as a <a href='https://tibble.tidyverse.org/reference/tibble.html'>tibble::tibble</a> with the
@@ -242,7 +242,7 @@ missing at this time.</p>
       <th>data</th>
       <td><p>A <a href='https://rdrr.io/r/base/data.frame.html'>base::data.frame</a> or <code><a href='https://tibble.tidyverse.org/reference/tibble.html'>tibble::tibble()</a></code> containing the original
 data that was used to produce the object <code>x</code>. Defaults to
-<code><a href='https://rdrr.io/r/stats/model.frame.html'>stats::model.frame(x)</a></code> so that <code><a href='https://generics.r-lib.org/reference/augment.html'>augment(my_fit)</a></code> returns the augmented
+<code>stats::model.frame(x)</code> so that <code>augment(my_fit)</code> returns the augmented
 original data. <strong>Do not</strong> pass new data to the <code>data</code> argument.
 Augment will report information such as influence and cooks distance for
 data passed to the <code>data</code> argument. These measures are only defined for
@@ -293,22 +293,23 @@ the <code>data</code> argument.</p></td>
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'>
-<span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/ns-load.html'>requireNamespace</a></span><span class='op'>(</span><span class='st'>"MASS"</span>, quietly <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
-
-<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='http://www.stats.ox.ac.uk/pub/MASS4/'>MASS</a></span><span class='op'>)</span>
-
-<span class='va'>r</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/MASS/man/rlm.html'>rlm</a></span><span class='op'>(</span><span class='va'>stack.loss</span> <span class='op'>~</span> <span class='va'>.</span>, <span class='va'>stackloss</span><span class='op'>)</span>
-
-<span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span>
-<span class='fu'><a href='https://generics.r-lib.org/reference/augment.html'>augment</a></span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span>
-<span class='fu'><a href='https://generics.r-lib.org/reference/glance.html'>glance</a></span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span>
-
-<span class='op'>}</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 1 × 7</span>
-#&gt;   sigma converged logLik     AIC   BIC deviance  nobs
-#&gt;   <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;lgl&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;logLik&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>    <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span>
-#&gt; <span style='color: #BCBCBC;'>1</span>  2.44 TRUE      -52.954   116.  121.     191.    21</div></pre>
+    <pre class="examples"><span class='r-in'></span>
+<span class='r-in'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/ns-load.html'>requireNamespace</a></span><span class='op'>(</span><span class='st'>"MASS"</span>, quietly <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='http://www.stats.ox.ac.uk/pub/MASS4/'>MASS</a></span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='va'>r</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/MASS/man/rlm.html'>rlm</a></span><span class='op'>(</span><span class='va'>stack.loss</span> <span class='op'>~</span> <span class='va'>.</span>, <span class='va'>stackloss</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'><a href='https://generics.r-lib.org/reference/augment.html'>augment</a></span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'><a href='https://generics.r-lib.org/reference/glance.html'>glance</a></span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='op'>}</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># A tibble: 1 × 7</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   sigma converged logLik     AIC   BIC deviance  nobs</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;lgl&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;logLik&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>    <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>1</span>  2.44 TRUE      -52.954   116.  121.     191.    21</span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

@@ -212,27 +212,30 @@ the <code>data</code> argument.</p></td>
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'>
-<span class='va'>spc</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/spectrum.html'>spectrum</a></span><span class='op'>(</span><span class='va'>lh</span><span class='op'>)</span>
-</div><div class='img'><img src='tidy.spec-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>spc</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 24 × 2</span>
-#&gt;      freq   spec
-#&gt;     <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>  <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>
-#&gt; <span style='color: #BCBCBC;'> 1</span> 0.020<span style='text-decoration: underline;'>8</span> 0.091<span style='text-decoration: underline;'>2</span>
-#&gt; <span style='color: #BCBCBC;'> 2</span> 0.041<span style='text-decoration: underline;'>7</span> 0.331 
-#&gt; <span style='color: #BCBCBC;'> 3</span> 0.062<span style='text-decoration: underline;'>5</span> 0.836 
-#&gt; <span style='color: #BCBCBC;'> 4</span> 0.083<span style='text-decoration: underline;'>3</span> 1.17  
-#&gt; <span style='color: #BCBCBC;'> 5</span> 0.104  0.350 
-#&gt; <span style='color: #BCBCBC;'> 6</span> 0.125  1.51  
-#&gt; <span style='color: #BCBCBC;'> 7</span> 0.146  0.328 
-#&gt; <span style='color: #BCBCBC;'> 8</span> 0.167  0.618 
-#&gt; <span style='color: #BCBCBC;'> 9</span> 0.188  0.320 
-#&gt; <span style='color: #BCBCBC;'>10</span> 0.208  0.067<span style='text-decoration: underline;'>5</span>
-#&gt; <span style='color: #949494;'># … with 14 more rows</span></div><div class='input'>
-<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://ggplot2.tidyverse.org'>ggplot2</a></span><span class='op'>)</span>
-<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>spc</span><span class='op'>)</span>, <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span><span class='va'>freq</span>, <span class='va'>spec</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
-  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_path.html'>geom_line</a></span><span class='op'>(</span><span class='op'>)</span>
-</div><div class='img'><img src='tidy.spec-2.png' alt='' width='700' height='433' /></div></pre>
+    <pre class="examples"><span class='r-in'></span>
+<span class='r-in'><span class='va'>spc</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/spectrum.html'>spectrum</a></span><span class='op'>(</span><span class='va'>lh</span><span class='op'>)</span></span>
+<span class='r-plt img'><img src='tidy.spec-1.png' alt='' width='700' height='433' /></span>
+<span class='r-in'><span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>spc</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># A tibble: 24 × 2</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>      freq   spec</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>  <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 1</span> 0.020<span style='text-decoration: underline;'>8</span> 0.091<span style='text-decoration: underline;'>2</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 2</span> 0.041<span style='text-decoration: underline;'>7</span> 0.331 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 3</span> 0.062<span style='text-decoration: underline;'>5</span> 0.836 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 4</span> 0.083<span style='text-decoration: underline;'>3</span> 1.17  </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 5</span> 0.104  0.350 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 6</span> 0.125  1.51  </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 7</span> 0.146  0.328 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 8</span> 0.167  0.618 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 9</span> 0.188  0.320 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>10</span> 0.208  0.067<span style='text-decoration: underline;'>5</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># … with 14 more rows</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://ggplot2.tidyverse.org'>ggplot2</a></span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>spc</span><span class='op'>)</span>, <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span><span class='va'>freq</span>, <span class='va'>spec</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span class='r-in'>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_path.html'>geom_line</a></span><span class='op'>(</span><span class='op'>)</span></span>
+<span class='r-plt img'><img src='tidy.spec-2.png' alt='' width='700' height='433' /></span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

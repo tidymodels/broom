@@ -217,8 +217,8 @@ the <code>data</code> argument.</p></td>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>Only models with a single <code>tau</code> value may be passed.
-For multiple values, please use a <code><a href='https://purrr.tidyverse.org/reference/map.html'>purrr::map()</a></code> workflow instead, e.g.</p><pre><span class='va'>taus</span> <span class='op'>%&gt;%</span>
-  <span class='fu'><a href='https://mclust-org.github.io/mclust/reference/map.html'>map</a></span><span class='op'>(</span><span class='kw'>function</span><span class='op'>(</span><span class='va'>tau_val</span><span class='op'>)</span> <span class='fu'>rq</span><span class='op'>(</span><span class='va'>y</span> <span class='op'>~</span> <span class='va'>x</span>, tau <span class='op'>=</span> <span class='va'>tau_val</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+For multiple values, please use a <code><a href='https://purrr.tidyverse.org/reference/map.html'>purrr::map()</a></code> workflow instead, e.g.</p><pre><span class='va'>taus</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span>
+  <span class='fu'><a href='https://mclust-org.github.io/mclust/reference/map.html'>map</a></span><span class='op'>(</span><span class='kw'>function</span><span class='op'>(</span><span class='va'>tau_val</span><span class='op'>)</span> <span class='fu'>rq</span><span class='op'>(</span><span class='va'>y</span> <span class='op'>~</span> <span class='va'>x</span>, tau <span class='op'>=</span> <span class='va'>tau_val</span><span class='op'>)</span><span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span>
   <span class='fu'>map_dfr</span><span class='op'>(</span><span class='va'>glance</span><span class='op'>)</span>
 </pre>
 

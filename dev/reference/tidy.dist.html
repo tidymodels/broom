@@ -224,52 +224,56 @@ diagonal, the tidied version will not either.</p>
 <code><a href='tidy.numeric.html'>tidy.numeric</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'>
-<span class='va'>cars_dist</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/dist.html'>dist</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/t.html'>t</a></span><span class='op'>(</span><span class='va'>mtcars</span><span class='op'>[</span>, <span class='fl'>1</span><span class='op'>:</span><span class='fl'>4</span><span class='op'>]</span><span class='op'>)</span><span class='op'>)</span>
-<span class='va'>cars_dist</span>
-</div><div class='output co'>#&gt;             mpg        cyl       disp
-#&gt; cyl    89.32586                      
-#&gt; disp 1391.49546 1441.25177           
-#&gt; hp    824.37547  878.17652  656.64044</div><div class='input'>
-<span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>cars_dist</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 6 × 3</span>
-#&gt;   item1 item2 distance
-#&gt;   <span style='color: #949494; font-style: italic;'>&lt;fct&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;fct&gt;</span>    <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>
-#&gt; <span style='color: #BCBCBC;'>1</span> mpg   cyl       89.3
-#&gt; <span style='color: #BCBCBC;'>2</span> mpg   disp    <span style='text-decoration: underline;'>1</span>391. 
-#&gt; <span style='color: #BCBCBC;'>3</span> mpg   hp       824. 
-#&gt; <span style='color: #BCBCBC;'>4</span> cyl   disp    <span style='text-decoration: underline;'>1</span>441. 
-#&gt; <span style='color: #BCBCBC;'>5</span> cyl   hp       878. 
-#&gt; <span style='color: #BCBCBC;'>6</span> disp  hp       657. </div><div class='input'><span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>cars_dist</span>, upper <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 12 × 3</span>
-#&gt;    item1 item2 distance
-#&gt;    <span style='color: #949494; font-style: italic;'>&lt;fct&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;fct&gt;</span>    <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>
-#&gt; <span style='color: #BCBCBC;'> 1</span> mpg   cyl       89.3
-#&gt; <span style='color: #BCBCBC;'> 2</span> mpg   disp    <span style='text-decoration: underline;'>1</span>391. 
-#&gt; <span style='color: #BCBCBC;'> 3</span> mpg   hp       824. 
-#&gt; <span style='color: #BCBCBC;'> 4</span> cyl   mpg       89.3
-#&gt; <span style='color: #BCBCBC;'> 5</span> cyl   disp    <span style='text-decoration: underline;'>1</span>441. 
-#&gt; <span style='color: #BCBCBC;'> 6</span> cyl   hp       878. 
-#&gt; <span style='color: #BCBCBC;'> 7</span> disp  mpg     <span style='text-decoration: underline;'>1</span>391. 
-#&gt; <span style='color: #BCBCBC;'> 8</span> disp  cyl     <span style='text-decoration: underline;'>1</span>441. 
-#&gt; <span style='color: #BCBCBC;'> 9</span> disp  hp       657. 
-#&gt; <span style='color: #BCBCBC;'>10</span> hp    mpg      824. 
-#&gt; <span style='color: #BCBCBC;'>11</span> hp    cyl      878. 
-#&gt; <span style='color: #BCBCBC;'>12</span> hp    disp     657. </div><div class='input'><span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>cars_dist</span>, diagonal <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 10 × 3</span>
-#&gt;    item1 item2 distance
-#&gt;    <span style='color: #949494; font-style: italic;'>&lt;fct&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;fct&gt;</span>    <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>
-#&gt; <span style='color: #BCBCBC;'> 1</span> mpg   mpg        0  
-#&gt; <span style='color: #BCBCBC;'> 2</span> mpg   cyl       89.3
-#&gt; <span style='color: #BCBCBC;'> 3</span> mpg   disp    <span style='text-decoration: underline;'>1</span>391. 
-#&gt; <span style='color: #BCBCBC;'> 4</span> mpg   hp       824. 
-#&gt; <span style='color: #BCBCBC;'> 5</span> cyl   cyl        0  
-#&gt; <span style='color: #BCBCBC;'> 6</span> cyl   disp    <span style='text-decoration: underline;'>1</span>441. 
-#&gt; <span style='color: #BCBCBC;'> 7</span> cyl   hp       878. 
-#&gt; <span style='color: #BCBCBC;'> 8</span> disp  disp       0  
-#&gt; <span style='color: #BCBCBC;'> 9</span> disp  hp       657. 
-#&gt; <span style='color: #BCBCBC;'>10</span> hp    hp         0  </div><div class='input'>
-</div></pre>
+    <pre class="examples"><span class='r-in'></span>
+<span class='r-in'><span class='va'>cars_dist</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/dist.html'>dist</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/t.html'>t</a></span><span class='op'>(</span><span class='va'>mtcars</span><span class='op'>[</span>, <span class='fl'>1</span><span class='op'>:</span><span class='fl'>4</span><span class='op'>]</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>cars_dist</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>             mpg        cyl       disp</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> cyl    89.32586                      </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> disp 1391.49546 1441.25177           </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> hp    824.37547  878.17652  656.64044</span>
+<span class='r-in'></span>
+<span class='r-in'><span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>cars_dist</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># A tibble: 6 × 3</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   item1 item2 distance</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;fct&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;fct&gt;</span>    <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>1</span> mpg   cyl       89.3</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>2</span> mpg   disp    <span style='text-decoration: underline;'>1</span>391. </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>3</span> mpg   hp       824. </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>4</span> cyl   disp    <span style='text-decoration: underline;'>1</span>441. </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>5</span> cyl   hp       878. </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>6</span> disp  hp       657. </span>
+<span class='r-in'><span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>cars_dist</span>, upper <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># A tibble: 12 × 3</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    item1 item2 distance</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    <span style='color: #949494; font-style: italic;'>&lt;fct&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;fct&gt;</span>    <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 1</span> mpg   cyl       89.3</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 2</span> mpg   disp    <span style='text-decoration: underline;'>1</span>391. </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 3</span> mpg   hp       824. </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 4</span> cyl   mpg       89.3</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 5</span> cyl   disp    <span style='text-decoration: underline;'>1</span>441. </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 6</span> cyl   hp       878. </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 7</span> disp  mpg     <span style='text-decoration: underline;'>1</span>391. </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 8</span> disp  cyl     <span style='text-decoration: underline;'>1</span>441. </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 9</span> disp  hp       657. </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>10</span> hp    mpg      824. </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>11</span> hp    cyl      878. </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>12</span> hp    disp     657. </span>
+<span class='r-in'><span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>cars_dist</span>, diagonal <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># A tibble: 10 × 3</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    item1 item2 distance</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    <span style='color: #949494; font-style: italic;'>&lt;fct&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;fct&gt;</span>    <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 1</span> mpg   mpg        0  </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 2</span> mpg   cyl       89.3</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 3</span> mpg   disp    <span style='text-decoration: underline;'>1</span>391. </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 4</span> mpg   hp       824. </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 5</span> cyl   cyl        0  </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 6</span> cyl   disp    <span style='text-decoration: underline;'>1</span>441. </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 7</span> cyl   hp       878. </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 8</span> disp  disp       0  </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 9</span> disp  hp       657. </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>10</span> hp    hp         0  </span>
+<span class='r-in'></span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
