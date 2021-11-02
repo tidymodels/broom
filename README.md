@@ -8,7 +8,7 @@
 [![R build
 status](https://github.com/tidymodels/broom/workflows/R-CMD-check/badge.svg)](https://github.com/tidymodels/broom)
 [![Coverage
-status](https://codecov.io/gh/tidymodels/broom/branch/master/graph/badge.svg)](https://codecov.io/github/tidymodels/broom?branch=master)
+status](https://codecov.io/gh/tidymodels/broom/branch/main/graph/badge.svg)](https://codecov.io/github/tidymodels/broom?branch=main)
 [![CRAN
 status](https://www.r-pkg.org/badges/version/broom)](https://CRAN.R-project.org/package=broom)
 [![Downloads](https://cranlogs.r-pkg.org/badges/broom)](https://CRAN.R-project.org/package=broom)
@@ -139,5 +139,5 @@ article](https://www.tidymodels.org/learn/develop/broom/) on the
 tidymodels website.
 
 We have a [Contributor Code of
-Conduct](https://github.com/tidymodels/broom/blob/master/.github/CODE_OF_CONDUCT.md).
+Conduct](https://github.com/tidymodels/broom/blob/main/.github/CODE_OF_CONDUCT.md).
 By participating in `broom` you agree to abide by its terms.
