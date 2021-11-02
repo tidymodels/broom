@@ -39,11 +39,6 @@ jobs:
           sudo add-apt-repository ppa:cran/libgit2
           sudo apt install libcurl4-openssl-dev libgit2-dev
 
-      - name: "Install curl for sf"
-        run: |
-          Rscript -e "if (!requireNamespace('remotes')) install.packages('remotes', type = 'source', repos = 'https://cloud.r-project.org')"
-          Rscript -e "if (getRversion() < '3.2' && !requireNamespace('curl')) install.packages('curl', type = 'source')"
-      
       - name: "Install Linux spatial libraries"
         if: runner.os == 'Linux'
         run: sudo apt-get install libgdal-dev libproj-dev libgeos-dev libudunits2-dev
@@ -51,8 +46,6 @@ jobs:
       - name: "Install macOS spatial libraries"
         if: runner.os == 'macOS'
         run: |
-          # conflicts with gfortran from r-lib/actions when linking gcc
-          rm '/usr/local/bin/gfortran'
           brew install pkg-config gdal proj geos
       
       - name: "Install maOS libgit2"
