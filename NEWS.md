@@ -2,6 +2,9 @@
 
 To be released as broom 0.7.11.
 
+* Addressed warning from `tidy.rma` when `x$ddf` has length greater than 1
+(`#1064` by `@wviechtb`)
+
 # broom 0.7.10
 
 * Clarifies error when `pysch::mediate` output is dispatched to `tidy.mediate` (`#1037` by `@LukasWallrich`).
