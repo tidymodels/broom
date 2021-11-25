@@ -5,6 +5,9 @@ To be released as broom 0.7.11.
 * Addressed warning from `tidy.rma` when `x$ddf` has length greater than 1
 (`#1064` by `@wviechtb`)
 
+* Addressed issue with the ordering of original observations in `augment.rqs`. Now function preserves the original data.frame names also when the input data.frame only has one column. (`#1052` by `@ilapros`)
+
+
 # broom 0.7.10
 
 * Clarifies error when `pysch::mediate` output is dispatched to `tidy.mediate` (`#1037` by `@LukasWallrich`).
