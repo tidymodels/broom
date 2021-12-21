@@ -140,7 +140,7 @@ glance.lavaan <- function(x, ...) {
         )
     ) %>%
     tibble::enframe(name = "term") %>%
-    pivot_wider(id_cols = term, names_from = term, values_from = value) %>%
+    pivot_wider(names_from = term, values_from = value) %>%
     select(order(colnames(.))) %>%
     map_df(as.numeric) %>%
     bind_cols(
