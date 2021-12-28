@@ -1,7 +1,49 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://broom.tidymodels.org/CODE_OF_CONDUCT.html</loc>
+  </url>
+  <url>
+    <loc>https://broom.tidymodels.org/CONTRIBUTING.html</loc>
+  </url>
+  <url>
+    <loc>https://broom.tidymodels.org/ISSUE_TEMPLATE.html</loc>
+  </url>
+  <url>
+    <loc>https://broom.tidymodels.org/LICENSE-text.html</loc>
+  </url>
+  <url>
+    <loc>https://broom.tidymodels.org/articles/adding-tidiers.html</loc>
+  </url>
+  <url>
+    <loc>https://broom.tidymodels.org/articles/available-methods.html</loc>
+  </url>
+  <url>
+    <loc>https://broom.tidymodels.org/articles/bootstrapping.html</loc>
+  </url>
+  <url>
+    <loc>https://broom.tidymodels.org/articles/broom.html</loc>
+  </url>
+  <url>
+    <loc>https://broom.tidymodels.org/articles/broom_and_dplyr.html</loc>
+  </url>
+  <url>
+    <loc>https://broom.tidymodels.org/articles/index.html</loc>
+  </url>
+  <url>
+    <loc>https://broom.tidymodels.org/articles/kmeans.html</loc>
+  </url>
+  <url>
+    <loc>https://broom.tidymodels.org/authors.html</loc>
+  </url>
+  <url>
     <loc>https://broom.tidymodels.org/index.html</loc>
+  </url>
+  <url>
+    <loc>https://broom.tidymodels.org/news/index.html</loc>
+  </url>
+  <url>
+    <loc>https://broom.tidymodels.org/pull_request_template.html</loc>
   </url>
   <url>
     <loc>https://broom.tidymodels.org/reference/augment.Mclust.html</loc>
@@ -352,6 +394,9 @@
     <loc>https://broom.tidymodels.org/reference/glance_optim.html</loc>
   </url>
   <url>
+    <loc>https://broom.tidymodels.org/reference/index.html</loc>
+  </url>
+  <url>
     <loc>https://broom.tidymodels.org/reference/leveneTest_tidiers.html</loc>
   </url>
   <url>
@@ -529,10 +574,10 @@
     <loc>https://broom.tidymodels.org/reference/tidy.lavaan.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/tidy.lm.html</loc>
+    <loc>https://broom.tidymodels.org/reference/tidy.lm.beta.html</loc>
   </url>
   <url>
-    <loc>https://broom.tidymodels.org/reference/tidy.lm.beta.html</loc>
+    <loc>https://broom.tidymodels.org/reference/tidy.lm.html</loc>
   </url>
   <url>
     <loc>https://broom.tidymodels.org/reference/tidy.lmRob.html</loc>
@@ -713,23 +758,5 @@
   </url>
   <url>
     <loc>https://broom.tidymodels.org/reference/vector_tidiers.html</loc>
-  </url>
-  <url>
-    <loc>https://broom.tidymodels.org/articles/adding-tidiers.html</loc>
-  </url>
-  <url>
-    <loc>https://broom.tidymodels.org/articles/available-methods.html</loc>
-  </url>
-  <url>
-    <loc>https://broom.tidymodels.org/articles/bootstrapping.html</loc>
-  </url>
-  <url>
-    <loc>https://broom.tidymodels.org/articles/broom.html</loc>
-  </url>
-  <url>
-    <loc>https://broom.tidymodels.org/articles/broom_and_dplyr.html</loc>
-  </url>
-  <url>
-    <loc>https://broom.tidymodels.org/articles/kmeans.html</loc>
   </url>
 </urlset>
