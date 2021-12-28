@@ -84,7 +84,9 @@
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.7.10.9000" id="broom-07109000">broom 0.7.10.9000<a class="anchor" aria-label="anchor" href="#broom-07109000"></a></h2>
 <p>To be released as broom 0.7.11.</p>
-<ul><li>Addressed warning from <code>tidy.rma</code> when <code>x$ddf</code> has length greater than 1 (<code>#1064</code> by <code>@wviechtb</code>)</li>
+<ul><li>Addressed issue with the ordering of original observations in <code>augment.rqs</code>. Now function preserves the original <code>data.frame</code> names also when the input <code>data.frame</code> only has one column (<code>#1052</code> by <code>@ilapros</code>).</li>
+<li>Addressed warning from <code>tidy.rma</code> when <code>x$ddf</code> has length greater than 1 (<code>#1064</code> by <code>@wviechtb</code>).</li>
+<li>Fix errors in <code>glance.lavaan</code> in anticipation of upcoming <code>tidyr</code> release (<code>#1067</code> by <code>@DavisVaughan</code>).</li>
 </ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.7.10" id="broom-0710">broom 0.7.10<small>2021-10-31</small><a class="anchor" aria-label="anchor" href="#broom-0710"></a></h2>
