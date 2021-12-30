@@ -2,7 +2,7 @@
 
 To be released as broom 0.7.11.
 
-* Corrected the confidence interval in `tidy.crr()`. (`#1068` by `@ddsjoberg`)
+* Corrected the confidence interval in `tidy.crr()`. The `tidy.crr(conf.level=)` argument was previously ignored. (`#1068` by `@ddsjoberg`)
 * Addressed issue with the ordering of original observations in `augment.rqs`. Now function preserves the original `data.frame` names also when the input `data.frame` only has one column (`#1052` by `@ilapros`).
 * Addressed warning from `tidy.rma` when `x$ddf` has length greater than 1
 (`#1064` by `@wviechtb`).
