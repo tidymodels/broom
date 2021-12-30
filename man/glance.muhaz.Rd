@@ -40,12 +40,20 @@ that no longer have a well-defined value are filled in with an \code{NA}
 of the appropriate type.
 }
 \examples{
+
+if (requireNamespace("muhaz", quietly = TRUE)) {
+  if (requireNamespace("survival", quietly = TRUE)) {
+
 library(muhaz)
 library(survival)
 
 x <- muhaz(ovarian$futime, ovarian$fustat)
 tidy(x)
 glance(x)
+
+  }
+}
+
 }
 \seealso{
 \code{\link[=glance]{glance()}}, \code{\link[muhaz:muhaz]{muhaz::muhaz()}}

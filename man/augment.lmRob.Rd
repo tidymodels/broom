@@ -79,12 +79,15 @@ For tidiers for robust models from the \pkg{MASS} package see
 }
 \examples{
 
-library(robust)
-m <- lmRob(mpg ~ wt, data = mtcars)
+if (requireNamespace("robust", quietly = TRUE)) {
+  library(robust)
+  m <- lmRob(mpg ~ wt, data = mtcars)
 
-tidy(m)
-augment(m)
-glance(m)
+  tidy(m)
+  augment(m)
+  glance(m)
+}
+
 }
 \seealso{
 \code{\link[robust:lmRob]{robust::lmRob()}}

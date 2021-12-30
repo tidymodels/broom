@@ -41,6 +41,8 @@ of the appropriate type.
 }
 \examples{
 
+if (requireNamespace("cmprsk", quietly = TRUE)) {
+
 library(cmprsk)
 lrf_time <- rexp(100) #time to loco-regional failure (lrf)
 lrf_event <- sample(0:2, 100, replace = TRUE) 
@@ -49,6 +51,8 @@ strt <- sample(1:2, 100, replace = TRUE)
 x <- crr(lrf_time, lrf_event, cbind(trt, strt))
 tidy(x, conf.int = TRUE)
 glance(x)
+
+}
 
 }
 \seealso{

@@ -31,6 +31,8 @@ specify which components to return.
 }
 \examples{
 
+if (requireNamespace("AUC", quietly = TRUE)) {
+
 library(AUC)
 data(churn)
 r <- roc(churn$predictions, churn$labels)
@@ -59,6 +61,9 @@ rocs <- churn \%>\%
 
 ggplot(rocs, aes(fpr, tpr, color = algorithm)) +
   geom_line()
+  
+}
+
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[AUC:roc]{AUC::roc()}}

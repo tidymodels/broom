@@ -74,6 +74,8 @@ A very thin wrapper around \code{\link[=tidy_svd]{tidy_svd()}}.
 }
 \examples{
 
+if (requireNamespace("modeldata", quietly = TRUE)) {
+
 library(modeldata)
 data(hpc_data)
 
@@ -101,6 +103,9 @@ tidy_u \%>\%
   ggplot(aes(class, value)) +
   geom_boxplot() +
   facet_wrap(~PC, scale = "free_y")
+  
+}
+ 
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[irlba:irlba]{irlba::irlba()}}

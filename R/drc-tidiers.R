@@ -14,6 +14,8 @@
 #'   The `curveid` column indicates the curve.
 #'
 #' @examples
+#' 
+#' if (requireNamespace("drc", quietly = TRUE)) {
 #'
 #' library(drc)
 #'
@@ -27,6 +29,9 @@
 #' glance(mod)
 #'
 #' augment(mod, selenium)
+#' 
+#' } 
+#' 
 #' @export
 #' @seealso [tidy()], [drc::drm()]
 #' @family drc tidiers

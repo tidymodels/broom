@@ -7,6 +7,8 @@
 #' @evalRd return_tidy("obs", "exp", "N")
 #'
 #' @examples
+#' 
+#' if (requireNamespace("survival", quietly = TRUE)) {
 #'
 #' library(survival)
 #'
@@ -17,6 +19,9 @@
 #'
 #' tidy(s)
 #' glance(s)
+#' 
+#' }
+#' 
 #' @aliases survdiff_tidiers
 #' @export
 #' @seealso [tidy()], [survival::survdiff()]

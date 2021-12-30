@@ -42,6 +42,8 @@ specify which components to return.
 }
 \examples{
 
+if (requireNamespace("speedglm", quietly = TRUE)) {
+
 library(speedglm)
 
 clotting <- data.frame(
@@ -53,6 +55,9 @@ fit <- speedglm(lot1 ~ log(u), data = clotting, family = Gamma(log))
 
 tidy(fit)
 glance(fit)
+
+}
+
 }
 \seealso{
 \code{\link[speedglm:speedglm]{speedglm::speedglm()}}

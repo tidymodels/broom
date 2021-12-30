@@ -16,6 +16,8 @@
 #'   to [psych::cohen.kappa()] when creating the `kappa` object.
 #'
 #' @examples
+#' 
+#' if (requireNamespace("psych", quietly = TRUE)) {
 #'
 #' library(psych)
 #'
@@ -30,6 +32,9 @@
 #' ggplot(tidy(ck), aes(estimate, type)) +
 #'   geom_point() +
 #'   geom_errorbarh(aes(xmin = conf.low, xmax = conf.high))
+#'   
+#' }
+#' 
 #' @aliases kappa_tidiers psych_tidiers
 #' @export
 #' @seealso [tidy()], [psych::cohen.kappa()]

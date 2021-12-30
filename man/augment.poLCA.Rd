@@ -81,6 +81,8 @@ included in the augmented output.
 }
 \examples{
 
+if (requireNamespace("poLCA", quietly = TRUE)) {
+
 library(poLCA)
 library(dplyr)
 
@@ -126,6 +128,9 @@ count(au, .class)
 au2 <- augment(nes2a, data = election)
 au2
 dim(au2)
+
+}
+
 }
 \seealso{
 \code{\link[=augment]{augment()}}, \code{\link[poLCA:poLCA]{poLCA::poLCA()}}

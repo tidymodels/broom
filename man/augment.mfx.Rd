@@ -141,6 +141,10 @@ This generic augment method wraps \code{\link[=augment.glm]{augment.glm()}} for 
 objects from the \code{mfx} package.
 }
 \examples{
+
+
+if (requireNamespace("mfx", quietly = TRUE)) {
+
 \dontrun{ 
 library(mfx)
 
@@ -160,6 +164,9 @@ tidy(mod_probmfx, conf.int = TRUE)
 augment(mod_probmfx)
 glance(mod_probmfx)
 }
+
+}
+
 }
 \seealso{
 \code{\link[=augment.glm]{augment.glm()}}, \code{\link[mfx:logitmfx]{mfx::logitmfx()}}, \code{\link[mfx:negbinmfx]{mfx::negbinmfx()}},

@@ -30,6 +30,9 @@ specify which components to return.
 }
 \examples{
 
+if (requireNamespace("MASS", quietly = TRUE)) {
+
+
 names(longley)[1] <- "y"
 fit1 <- MASS::lm.ridge(y ~ ., longley)
 tidy(fit1)
@@ -51,6 +54,9 @@ ggplot(td2, aes(lambda, GCV)) +
 ggplot(td2, aes(lambda, GCV)) +
   geom_line() +
   geom_vline(xintercept = g2$lambdaGCV, col = "red", lty = 2)
+  
+}
+
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[MASS:lm.ridge]{MASS::lm.ridge()}}

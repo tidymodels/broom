@@ -32,6 +32,9 @@ These methods tidy the coefficients of mnl and nl models generated
 by the functions of the \code{mlogit} package.
 }
 \examples{
+
+if (requireNamespace("mlogit", quietly = TRUE)) {
+
 \dontrun{
 library(mlogit)
 data("Fishing", package = "mlogit")
@@ -41,6 +44,8 @@ m <- mlogit(mode ~ price + catch | income, data = Fish)
 tidy(m)
 augment(m)
 glance(m)
+}
+
 }
 
 }

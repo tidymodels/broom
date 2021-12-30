@@ -13,6 +13,8 @@
 #' )
 #'
 #' @examples
+#' 
+#' if (requireNamespace("maps", quietly = TRUE)) {
 #'
 #' library(maps)
 #' library(ggplot2)
@@ -28,6 +30,9 @@
 #'   data = tx, geom = "polygon", group = group,
 #'   colour = I("white")
 #' )
+#' 
+#' }
+#' 
 #' @export
 #' @seealso [tidy()], [maps::map()]
 #' @aliases maps_tidiers

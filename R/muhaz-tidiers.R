@@ -10,12 +10,20 @@
 #' )
 #'
 #' @examples
+#' 
+#' if (requireNamespace("muhaz", quietly = TRUE)) {
+#'   if (requireNamespace("survival", quietly = TRUE)) {
+#' 
 #' library(muhaz)
 #' library(survival)
 #'
 #' x <- muhaz(ovarian$futime, ovarian$fustat)
 #' tidy(x)
 #' glance(x)
+#' 
+#'   }
+#' }
+#' 
 #' @aliases muhaz_tidiers
 #' @export
 #' @seealso [tidy()], [muhaz::muhaz()]

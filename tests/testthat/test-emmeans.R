@@ -8,6 +8,9 @@ library(modeltests)
 skip_if_not_installed("lsmeans")
 library(lsmeans)
 
+skip_if_not_installed("lme4")
+library(lme4)
+
 fit <- lm(sales1 ~ price1 + price2 + day + store, data = oranges)
 rg <- ref.grid(fit)
 
@@ -71,6 +74,16 @@ test_that("summary_emm tidiers work", {
   tdjt <- tidy(joint_tests_summary)
   check_tidy_output(tdjt)
   check_dims(tdjt, 4, 5)
+  
+  
+  glmm <- glmer(
+    cbind(incidence, size - incidence) ~ period + (1 | herd),
+    data = cbpp, family = binomial
+  )
+  emm_glmm <- emmeans(glmm, ~period)
+  tdm <- tidy(emm_glmm, conf.int = TRUE)
+
+  check_tidy_output(tdm[, -1])
 })
 
 test_that("tidy.ref.grid consistency with tidy.TukeyHSD", {
@@ -137,5 +150,5 @@ test_that("tidy.emmGrid for combined contrasts", {
 
   # strict = FALSE needed becasue of factor names and "null.value" column
   check_tidy_output(td_noise, strict = FALSE)
-  check_dims(td_noise, 20, 11)
+  check_dims(td_noise, 20, 10)
 })

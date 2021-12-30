@@ -9,6 +9,8 @@
 #' )
 #'
 #' @examples
+#' 
+#' if (requireNamespace("survival", quietly = TRUE)) {
 #'
 #' library(survival)
 #' sexpfit <- survexp(
@@ -24,6 +26,9 @@
 #'
 #' tidy(sexpfit)
 #' glance(sexpfit)
+#' 
+#' }
+#' 
 #' @aliases sexpfit_tidiers survexp_tidiers
 #' @export
 #' @seealso [tidy()], [survival::survexp()]

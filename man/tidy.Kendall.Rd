@@ -31,6 +31,9 @@ If a model has several distinct types of components, you will need to
 specify which components to return.
 }
 \examples{
+
+if (requireNamespace("Kendall", quietly = TRUE)) {
+
 library(Kendall)
 
 A <- c(2.5, 2.5, 2.5, 2.5, 5, 6.5, 6.5, 10, 10, 10, 10, 10, 14, 14, 14, 16, 17)
@@ -44,6 +47,9 @@ tidy(s_res)
 
 t_res <- SeasonalMannKendall(ts(A))
 tidy(t_res)
+
+}
+
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[Kendall:Kendall]{Kendall::Kendall()}}, \code{\link[Kendall:MannKendall]{Kendall::MannKendall()}},

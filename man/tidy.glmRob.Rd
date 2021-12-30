@@ -33,12 +33,14 @@ For tidiers for robust models from the \pkg{MASS} package see
 }
 \examples{
 
-library(robust)
+if (requireNamespace("robust", quietly = TRUE)) {
+  library(robust)
 
-gm <- glmRob(am ~ wt, data = mtcars, family = "binomial")
+  gm <- glmRob(am ~ wt, data = mtcars, family = "binomial")
 
-tidy(gm)
-glance(gm)
+  tidy(gm)
+  glance(gm)
+}
 }
 \seealso{
 \code{\link[robust:glmRob]{robust::glmRob()}}

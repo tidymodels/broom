@@ -37,6 +37,8 @@ specify which components to return.
 }
 \examples{
 
+if (requireNamespace("tseries", quietly = TRUE)) {
+
 library(tseries)
 
 data(EuStockMarkets)
@@ -46,6 +48,9 @@ dax.garch
 
 tidy(dax.garch)
 glance(dax.garch)
+
+}
+
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[tseries:garch]{tseries::garch()}}

@@ -41,6 +41,8 @@ of the appropriate type.
 }
 \examples{
 
+if (requireNamespace("survival", quietly = TRUE)) {
+
 library(survival)
 
 temp.yr <- tcut(mgus$dxyr, 55:92, labels = as.character(55:91))
@@ -58,6 +60,9 @@ glance(pfit)
 pfit2 <- pyears(Surv(ptime / 365.25, pstat) ~ temp.yr + temp.age + sex, mgus)
 tidy(pfit2)
 glance(pfit2)
+
+}
+
 }
 \seealso{
 \code{\link[=glance]{glance()}}, \code{\link[survival:pyears]{survival::pyears()}}

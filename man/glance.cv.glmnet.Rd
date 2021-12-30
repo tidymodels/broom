@@ -41,6 +41,8 @@ of the appropriate type.
 }
 \examples{
 
+if (requireNamespace("glmnet", quietly = TRUE)) {
+
 library(glmnet)
 set.seed(27)
 
@@ -91,6 +93,9 @@ ggplot(tidied, aes(lambda, estimate, group = term)) +
   geom_line() +
   geom_vline(xintercept = glance_cv$lambda.min) +
   geom_vline(xintercept = glance_cv$lambda.1se, lty = 2)
+  
+ }
+  
 }
 \seealso{
 \code{\link[=glance]{glance()}}, \code{\link[glmnet:cv.glmnet]{glmnet::cv.glmnet()}}

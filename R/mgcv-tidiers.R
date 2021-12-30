@@ -6,6 +6,7 @@
 #'   be tidied. Defaults to `FALSE`, meaning that smooth terms are tidied
 #'   by default.
 #' @template param_confint
+#' @template param_exponentiate
 #' @template param_unused_dots
 #'
 #' @evalRd return_tidy(
@@ -25,6 +26,8 @@
 #'
 #'
 #' @examples
+#' 
+#' if (requireNamespace("mgcv", quietly = TRUE)) {
 #'
 #' g <- mgcv::gam(mpg ~ s(hp) + am + qsec, data = mtcars)
 #'
@@ -32,14 +35,20 @@
 #' tidy(g, parametric = TRUE)
 #' glance(g)
 #' augment(g)
+#' 
+#' }
+#' 
 #' @export
 #' @aliases mgcv_tidiers gam_tidiers tidy.gam
 #' @family mgcv tidiers
 #' @seealso [tidy()], [mgcv::gam()]
 tidy.gam <- function(x, parametric = FALSE, conf.int = FALSE,
-                     conf.level = 0.95, ...) {
+                     conf.level = 0.95, exponentiate = FALSE, ...) {
   if (!parametric && conf.int) {
     message("Confidence intervals only available for parametric terms.")
+  }
+  if (!parametric && exponentiate) {
+    message("Exponentiating coefficients only available for parametric terms.")
   }
   if (parametric) {
     px <- summary(x)$p.table
@@ -64,6 +73,11 @@ tidy.gam <- function(x, parametric = FALSE, conf.int = FALSE,
     class(sx) <- c("anova", "data.frame")
     ret <- tidy(sx)
   }
+  
+  if (exponentiate && parametric) {
+    ret <- exponentiate(ret)  
+  }
+  
   ret
 }
 

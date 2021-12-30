@@ -38,6 +38,8 @@ passed on to \code{\link[emmeans:summary.emmGrid]{emmeans::summary.emmGrid()}} o
 }
 \examples{
 
+if (requireNamespace("emmeans", quietly = TRUE)) {
+
 library(emmeans)
 # linear model for sales of oranges per day
 oranges_lm1 <- lm(sales1 ~ price1 + price2 + day + store, data = oranges)
@@ -78,6 +80,9 @@ ggplot(tidy(by_price, conf.int = TRUE), aes(price2, estimate, color = day)) +
 
 # joint_tests
 tidy(joint_tests(oranges_lm1))
+
+}
+
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[emmeans:ref_grid]{emmeans::ref_grid()}}, \code{\link[emmeans:emmeans]{emmeans::emmeans()}},

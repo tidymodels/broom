@@ -31,6 +31,8 @@ specify which components to return.
 }
 \examples{
 
+if (requireNamespace("survival", quietly = TRUE)) {
+
 library(survival)
 sexpfit <- survexp(
   futime ~ 1,
@@ -45,6 +47,9 @@ sexpfit <- survexp(
 
 tidy(sexpfit)
 glance(sexpfit)
+
+}
+
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[survival:survexp]{survival::survexp()}}

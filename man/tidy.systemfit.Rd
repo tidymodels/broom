@@ -41,6 +41,8 @@ Default returns a tibble of six columns.
 }
 \examples{
 
+if (requireNamespace("systemfit", quietly = TRUE)) {
+
 set.seed(27)
 
 library(systemfit)
@@ -56,6 +58,9 @@ fit <- systemfit(formula = list(Y ~ Z, W ~ X), data = df, method = "SUR")
 tidy(fit)
 
 tidy(fit, conf.int = TRUE)
+
+}
+
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[systemfit:systemfit]{systemfit::systemfit()}}

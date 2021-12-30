@@ -17,16 +17,22 @@
 #'   [tidy.gam()].
 #'
 #' @examples
+#' 
+#' if (requireNamespace("gam", quietly = TRUE)) {
 #'
 #' library(gam)
 #' g <- gam(mpg ~ s(hp, 4) + am + qsec, data = mtcars)
 #'
 #' tidy(g)
 #' glance(g)
+#' 
+#' }
+#' 
 #' @export
 #' @family gam tidiers
 #' @aliases Gam_tidiers
 #' @seealso [tidy()], [gam::gam()], [tidy.anova()], [tidy.gam()]
+#' @rdname tidy_gam_hastie
 tidy.Gam <- function(x, ...) {
   tidy(summary(x)$parametric.anova)
 }
@@ -52,6 +58,7 @@ tidy.Gam <- function(x, ...) {
 #' @family gam tidiers
 #' @export
 #' @seealso [glance()], [gam::gam()]
+#' @rdname glance_gam_hastie
 glance.Gam <- function(x, ...) {
   
   s <- summary(x)

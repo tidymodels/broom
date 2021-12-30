@@ -30,6 +30,8 @@ specify which components to return.
 }
 \examples{
 
+if (requireNamespace("maps", quietly = TRUE)) {
+
 library(maps)
 library(ggplot2)
 
@@ -44,6 +46,9 @@ qplot(long, lat,
   data = tx, geom = "polygon", group = group,
   colour = I("white")
 )
+
+}
+
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[maps:map]{maps::map()}}

@@ -27,6 +27,8 @@
 #'   passed on to [emmeans::summary.emmGrid()] or [lsmeans::summary.ref.grid()].
 #'
 #' @examples
+#' 
+#' if (requireNamespace("emmeans", quietly = TRUE)) {
 #'
 #' library(emmeans)
 #' # linear model for sales of oranges per day
@@ -68,6 +70,9 @@
 #'
 #' # joint_tests
 #' tidy(joint_tests(oranges_lm1))
+#' 
+#' }
+#' 
 #' @aliases emmeans_tidiers
 #' @export
 #' @family emmeans tidiers
@@ -186,7 +191,10 @@ tidy_emmeans_summary <- function(x, null.value = NULL, term_names = NULL) {
     "effect.size" = "estimate",
     "SE" = "std.error",
     "lower.CL" = "conf.low",
+    "asymp.LCL" = "conf.low",
     "upper.CL" = "conf.high",
+    "asymp.UCL" = "conf.high",
+    "z.ratio" = "statistic",
     "t.ratio" = "statistic",
     "F.ratio" = "statistic",
     "df1" = "num.df",

@@ -80,6 +80,8 @@ objects of class \code{ivreg}, and will be supported in a later release.
 }
 \examples{
 
+if (requireNamespace("AER", quietly = TRUE)) {
+
 library(AER)
 
 data("CigarettesSW", package = "AER")
@@ -101,6 +103,9 @@ augment(ivr, data = CigarettesSW)
 augment(ivr, newdata = CigarettesSW)
 
 glance(ivr)
+
+}
+
 }
 \seealso{
 \code{\link[=augment]{augment()}}, \code{\link[AER:ivreg]{AER::ivreg()}}

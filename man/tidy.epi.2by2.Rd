@@ -33,19 +33,29 @@ specify which components to return.
 }
 \details{
 The tibble has a column for each of the measures of association
-or tests contained in \code{massoc} when \code{\link[epiR:epi.2by2]{epiR::epi.2by2()}} is called.
+or tests contained in \code{massoc} or \code{massoc.detail} when \code{\link[epiR:epi.2by2]{epiR::epi.2by2()}} is called.
 }
 \examples{
+
+if (requireNamespace("epiR", quietly = TRUE)) {
+
 library(epiR)
+
 dat <- matrix(c(13, 2163, 5, 3349), nrow = 2, byrow = TRUE)
+
 rownames(dat) <- c("DF+", "DF-")
 colnames(dat) <- c("FUS+", "FUS-")
+
 fit <- epi.2by2(
   dat = as.table(dat), method = "cross.sectional",
   conf.level = 0.95, units = 100, outcome = "as.columns"
 )
 
 tidy(fit, parameters = "moa")
+tidy(fit, parameters = "stat")
+
+}
+
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[epiR:epi.2by2]{epiR::epi.2by2()}}

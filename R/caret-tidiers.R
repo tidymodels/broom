@@ -18,6 +18,8 @@
 #' )
 #'
 #' @examples
+#' 
+#' if (requireNamespace("caret", quietly = TRUE)) {
 #'
 #' library(caret)
 #'
@@ -46,6 +48,9 @@
 #'
 #' tidy(six_class_cm)
 #' tidy(six_class_cm, by_class = FALSE)
+#' 
+#' }
+#' 
 #' @aliases caret_tidiers confusionMatrix_tidiers
 #' @export
 #' @seealso [tidy()], [caret::confusionMatrix()]

@@ -8,6 +8,8 @@
 #' @evalRd return_tidy(regression = TRUE)
 #'
 #' @examples
+#' 
+#' if (requireNamespace("lmtest", quietly = TRUE)) {
 #'
 #' library(lmtest)
 #'
@@ -31,6 +33,9 @@
 #' # Users can control this with the "save = TRUE" argument of coeftest().
 #' glance(coeftest(m))
 #' glance(coeftest(m, save = TRUE)) # More columns
+#' 
+#' }
+#' 
 #' @export
 #' @seealso [tidy()], [lmtest::coeftest()]
 #' @aliases lmtest_tidiers coeftest_tidiers

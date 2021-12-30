@@ -62,7 +62,7 @@ glance.rqs <- function(x, ...) {
 augment.rqs <- function(x, data = model.frame(x), newdata, ...) {
   n_tau <- length(x[["tau"]])
   if (missing(newdata) || is.null(newdata)) {
-    original <- data[rep(seq_len(nrow(data)), n_tau), ]
+    original <- data[rep(seq_len(nrow(data)), each = n_tau), ,drop=FALSE]
     pred <- predict(x, stepfun = FALSE, ...)
     resid <- residuals(x)
     resid <- setNames(as.data.frame(resid), x[["tau"]])
@@ -82,7 +82,7 @@ augment.rqs <- function(x, data = model.frame(x), newdata, ...) {
       as.data.frame()
     ret <- unrowname(cbind(original, pred[, -1, drop = FALSE]))
   } else {
-    original <- newdata[rep(seq_len(nrow(newdata)), n_tau), ]
+    original <- newdata[rep(seq_len(nrow(newdata)), each = n_tau), ,drop=FALSE]
     pred <- predict(x, newdata = newdata, stepfun = FALSE, ...)
     pred <- setNames(as.data.frame(pred), x[["tau"]])
     pred <- pivot_longer(pred,

@@ -9,6 +9,8 @@
 #' @evalRd return_tidy(regression = TRUE)
 #'
 #' @examples
+#' 
+#' if (requireNamespace("speedglm", quietly = TRUE)) {
 #'
 #' library(speedglm)
 #'
@@ -21,6 +23,9 @@
 #'
 #' tidy(fit)
 #' glance(fit)
+#' 
+#' }
+#' 
 #' @aliases speedglm_tidiers
 #' @export
 #' @family speedlm tidiers

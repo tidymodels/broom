@@ -30,6 +30,8 @@ specify which components to return.
 }
 \examples{
 
+if (requireNamespace("zoo", quietly = TRUE)) {
+
 library(zoo)
 library(ggplot2)
 
@@ -53,6 +55,9 @@ ggplot(tidy(Z), aes(index, value)) +
 Zrolled <- rollmean(Z, 5)
 ggplot(tidy(Zrolled), aes(index, value, color = series)) +
   geom_line()
+  
+}
+  
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[zoo:zoo]{zoo::zoo()}}

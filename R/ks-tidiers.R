@@ -11,6 +11,8 @@
 #'   on the output to return to a wide format.
 #'
 #' @examples
+#' 
+#' if (requireNamespace("ks", quietly = TRUE)) {
 #'
 #' library(ks)
 #'
@@ -39,6 +41,9 @@
 #'
 #' td3 <- tidy(k3)
 #' td3
+#' 
+#' }
+#' 
 #' @export
 #' @aliases kde_tidiers ks_tidiers
 #' @seealso [tidy()], [ks::kde()]

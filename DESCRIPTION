@@ -1,7 +1,7 @@
 Type: Package
 Package: broom
 Title: Convert Statistical Objects into Tidy Tibbles
-Version: 0.7.6
+Version: 0.7.10.9000
 Authors@R:
     c(person(given = "David",
              family = "Robinson",
@@ -9,13 +9,14 @@ Authors@R:
              email = "admiral.david@gmail.com"),
       person(given = "Alex",
              family = "Hayes",
-             role = c("aut", "cre"),
+             role = "aut",
              email = "alexpghayes@gmail.com",
              comment = c(ORCID = "0000-0002-4985-5160")),
       person(given = "Simon",
              family = "Couch",
-             role = "aut",
-             email = "simonpatrickcouch@gmail.com"),
+             role = c("aut", "cre"),
+             email = "scouch2@jhu.edu",
+             comment = c(ORCID = "0000-0001-5676-5107")),
       person(given = "Indrajeet",
              family = "Patil",
              role = "ctb",
@@ -503,7 +504,20 @@ Authors@R:
       person(given = "Josh",
              family = "Yamamoto",
              role = "ctb",
-             email = "joshuayamamoto5@gmail.com"))
+             email = "joshuayamamoto5@gmail.com"),
+      person(given = "Jasme",
+             family = "Lee",
+             role = "ctb"),
+      person(given = "Taren",
+             family = "Sanders",
+             role = "ctb",
+             email = "taren.sanders@acu.edu.au",
+             comment = c(ORCID = "0000-0002-4504-6008")),
+      person(given = "Ilaria",
+             family = "Prosdocimi",
+             role = "ctb",
+             email = "prosdocimi.ilaria@gmail.com",
+            comment = c(ORCID = "0000-0001-8565-094X")))
 Description: Summarizes key information about statistical
     objects in tidy tibbles. This makes it easy to report results, create
     plots and consistently work with large numbers of models at once.
@@ -530,7 +544,8 @@ Imports:
     rlang,
     stringr,
     tibble (>= 3.0.0),
-    tidyr (>= 1.0.0)
+    tidyr (>= 1.0.0),
+    ggplot2
 Suggests:
     AER,
     akima,
@@ -552,11 +567,10 @@ Suggests:
     emmeans,
     epiR,
     ergm (>= 3.10.4),
-    fixest (>= 0.8.1),
+    fixest (>= 0.9.0),
     gam (>= 1.15),
     gee,
     geepack,
-    ggplot2,
     glmnet,
     glmnetUtils,
     gmm,
@@ -598,7 +612,6 @@ Suggests:
     poLCA,
     psych,
     quantreg,
-    Rchoice,
     rgeos,
     rmarkdown,
     robust,
@@ -606,7 +619,7 @@ Suggests:
     rsample,
     sandwich,
     sp,
-    spdep,
+    spdep (>= 1.1),
     spatialreg,
     speedglm,
     spelling,
@@ -619,6 +632,8 @@ Suggests:
     zoo
 VignetteBuilder:
     knitr
+Config/Needs/website: 
+    tidyverse/tidytemplate    
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.1
@@ -696,7 +711,6 @@ Collate:
     'quantreg-nlrq-tidiers.R'
     'quantreg-rq-tidiers.R'
     'quantreg-rqs-tidiers.R'
-    'rchoice-tidiers.R'
     'rma-tidiers.R'
     'robust-glmrob-tidiers.R'
     'robust-lmrob-tidiers.R'

@@ -8,6 +8,8 @@
 #' @evalRd return_tidy("contrast", "null.value", "estimate")
 #'
 #' @examples
+#' 
+#' if (requireNamespace("multcomp", quietly = TRUE)) {
 #'
 #' library(multcomp)
 #' library(ggplot2)
@@ -32,6 +34,9 @@
 #'
 #' cld <- cld(wht)
 #' tidy(cld)
+#' 
+#' }
+#' 
 #' @aliases multcomp_tidiers
 #' @export
 #' @family multcomp tidiers

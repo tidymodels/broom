@@ -1,3 +1,44 @@
+# broom 0.7.10.9000
+
+To be released as broom 0.7.11.
+
+* Addressed issue with the ordering of original observations in `augment.rqs`. Now function preserves the original `data.frame` names also when the input `data.frame` only has one column (`#1052` by `@ilapros`).
+* Addressed warning from `tidy.rma` when `x$ddf` has length greater than 1
+(`#1064` by `@wviechtb`).
+* Fix errors in `glance.lavaan` in anticipation of upcoming `tidyr` release
+(`#1067` by `@DavisVaughan`).
+
+# broom 0.7.10
+
+* Clarifies error when `pysch::mediate` output is dispatched to `tidy.mediate` (`#1037` by `@LukasWallrich`).
+* Allows user to specify confidence level for `tidy.rma` (`#1041` by `@TarenSanders`)
+* Clarifies documentation related to usage of `augment_columns()`; most package users should use `augment()` in favor of `augment_columns()`. See `?augment_columns` for more details.
+* Extends support for `emmeans` by fixing non-standard column names in case of asymptotically derived inferential statistics. (`#1046` by `@crsh`)
+* Fixes use of index columns in `augment.mlogit` and adds `.resid` column to
+output. (`#1045`, `#1053`, `#1055`, and `#1056` by `@jamesrrae` and
+`@gregmacfarlane`)
+* Correct column naming of standard error measures in `glance.survfit()`.
+* Various bug fixes and improvements to documentation.
+
+# broom 0.7.9
+
+* Fixes confidence intervals in `tidy.crr()`, which were previously exponentiated when `exponentiate = FALSE` (`#1023` by `@leejasme`)
+* Deprecates `Rchoice` tidiers, as the newest 0.3-3 release requires R 4.0+ and does not re-export needed generics.
+* Updates to `ergm` tidiers in anticipation of changes in later releases. (`#1034` by `@krivit`)
+
+# broom 0.7.8
+
+* Fixed bug in `glance.ergm` related to handling of MCMC details.
+* Address breakages in unit tests for {fixest} tidiers.
+
+# broom 0.7.7
+
+* Fixed bug in `tidy.epi.2by2` that resulted in errors with new version of `epiR` (`#1028` by `@nt-williams`)
+* Added `exponentiate` argument to `tidy.gam()` tidier applicable for parametric terms (`#1013` by `@ddsjoberg`)
+* Added `exponentiate` argument to `tidy.negbin()` tidier (`#1011` by `@ddsjoberg`)
+* Fixed failures in `spdep` tidiers following breaking changes in the most recent release
+* Various bug fixes and improvements to documentation
+
 # broom 0.7.6
 
 * Fixed bug in `augment` tidiers resulting in `.fitted` and `.se.fit` array columns.
@@ -47,7 +88,7 @@ This release also restores tidiers for `felm` objects from the `lfe` package, wh
 In broom `0.7.0`, we introduced an error for model objects that subclassed
 `lm` and relied on `tidy.lm()`, or similarly for `tidy.glm()`. Tidiers for
 these objects were supported unintentionally, and we worried that tidiers for
-these objects would silently report innaccurate results.
+these objects would silently report inaccurate results.
 
 In hindsight, this change was unnecessarily abrupt. We've decided to roll back 
 this change, instead providing the following warning before allowing such 

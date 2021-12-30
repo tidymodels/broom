@@ -14,6 +14,8 @@
 #' )
 #'
 #' @examples
+#' 
+#' if (requireNamespace("survival", quietly = TRUE)) {
 #'
 #' library(survival)
 #'
@@ -54,6 +56,9 @@
 #'
 #' ggplot(expected, aes(time, .fitted, color = sex)) +
 #'   geom_point()
+#'   
+#' }
+#' 
 #' @aliases coxph_tidiers
 #' @export
 #' @seealso [tidy()], [survival::coxph()]

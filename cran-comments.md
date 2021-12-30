@@ -1,12 +1,12 @@
-# broom 0.7.6
+# broom 0.7.11
 
 ## Test environments
 
-- local mac OS install: R 4.0.3
-- mac OS (on github actions): R release
-- ubuntu 16.04 (on github actions): R release
-- Microsoft Windows Server 2019 10.0.17763 (on github actions), devel, release, 3.6
-- win-builder (devel)
+* local OS X install, R 4.1.0
+* ubuntu 18.04 (on github actions), devel, release, oldrel
+* windows (on github actions), release
+* OS X (on github actions), release
+* windows (on win-builder), devel
 
 ## R CMD check results
 
@@ -14,6 +14,6 @@
 
 # Reverse dependencies
 
-We checked 179 reverse dependencies (166 from CRAN + 13 from BioConductor), 
+We checked 196 reverse dependencies (179 from CRAN + 17 from BioConductor), 
 comparing R CMD check results across CRAN and dev versions of this package.
 We saw no new ERRORs, WARNINGs, or NOTEs.

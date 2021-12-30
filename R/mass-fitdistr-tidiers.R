@@ -7,6 +7,8 @@
 #' @evalRd return_tidy("term", "estimate", "std.error")
 #'
 #' @examples
+#' 
+#' if (requireNamespace("MASS", quietly = TRUE)) {
 #'
 #' set.seed(2015)
 #' x <- rnorm(100, 5, 2)
@@ -16,6 +18,9 @@
 #'
 #' tidy(fit)
 #' glance(fit)
+#' 
+#' }
+#' 
 #' @export
 #' @family fitdistr tidiers
 #' @aliases fitdistr_tidiers

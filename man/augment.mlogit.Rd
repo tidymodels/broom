@@ -67,6 +67,9 @@ At the moment this only works on the estimation dataset. Need to set
 it up to predict on another dataset.
 }
 \examples{
+
+if (requireNamespace("mlogit", quietly = TRUE)) {
+
 \dontrun{
 library(mlogit)
 data("Fishing", package = "mlogit")
@@ -76,6 +79,8 @@ m <- mlogit(mode ~ price + catch | income, data = Fish)
 tidy(m)
 augment(m)
 glance(m)
+}
+
 }
 
 }

@@ -7,6 +7,8 @@
 #' @evalRd return_tidy("index", "series", "value")
 #'
 #' @examples
+#' 
+#' if (requireNamespace("zoo", quietly = TRUE)) {
 #'
 #' library(zoo)
 #' library(ggplot2)
@@ -31,6 +33,9 @@
 #' Zrolled <- rollmean(Z, 5)
 #' ggplot(tidy(Zrolled), aes(index, value, color = series)) +
 #'   geom_line()
+#'   
+#' }
+#'   
 #' @aliases zoo_tidiers
 #' @export
 #' @seealso [tidy()], [zoo::zoo()]

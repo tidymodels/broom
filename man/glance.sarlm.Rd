@@ -41,6 +41,7 @@ that no longer have a well-defined value are filled in with an \code{NA}
 of the appropriate type.
 }
 \examples{
+
 \dontrun{ 
 library(spatialreg)
 data(oldcol, package = "spdep")

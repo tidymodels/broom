@@ -42,6 +42,8 @@ specify which components to return.
 }
 \examples{
 
+if (requireNamespace("survival", quietly = TRUE)) {
+
 library(survival)
 
 cfit <- coxph(Surv(time, status) ~ age + sex, lung)
@@ -81,6 +83,9 @@ ggplot(risks, aes(age, .fitted, color = sex)) +
 
 ggplot(expected, aes(time, .fitted, color = sex)) +
   geom_point()
+  
+}
+
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[survival:coxph]{survival::coxph()}}

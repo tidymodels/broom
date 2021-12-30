@@ -18,6 +18,8 @@
 #'   `dfbeta = TRUE`.
 #'
 #' @examples
+#' 
+#' if (requireNamespace("survival", quietly = TRUE)) {
 #'
 #' library(survival)
 #'
@@ -28,6 +30,9 @@
 #' )
 #'
 #' tidy(afit)
+#' 
+#' }
+#' 
 #' @aliases aareg_tidiers
 #' @export
 #' @seealso [tidy()], [survival::aareg()]

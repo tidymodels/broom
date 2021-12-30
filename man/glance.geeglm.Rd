@@ -41,6 +41,8 @@ of the appropriate type.
 }
 \examples{
 
+if (requireNamespace("geepack", quietly = TRUE)) {
+
 library(geepack)
 data(state)
 
@@ -54,6 +56,9 @@ geefit <- geeglm(Income ~ Frost + Murder,
 
 tidy(geefit)
 tidy(geefit, conf.int = TRUE)
+
+}
+
 }
 \seealso{
 \code{\link[=glance]{glance()}}, \code{\link[geepack:geeglm]{geepack::geeglm()}}

@@ -16,12 +16,17 @@
 #' )
 #'
 #' @examples
+#' 
+#' if (requireNamespace("MASS", quietly = TRUE)) {
+#' 
 #' library(MASS)
 #'
 #' r <- glm.nb(Days ~ Sex/(Age + Eth*Lrn), data = quine)
 #'
 #' tidy(r)
 #' glance(r)
+#' 
+#' }
 #' 
 #' @aliases glm.nb_tidiers
 #' @family glm.nb tidiers
@@ -48,6 +53,7 @@ glance.negbin <- function(x, ...) {
 
 #' @templateVar class negbin
 #' @template title_desc_tidy
+#' @template param_exponentiate
 #'
 #' @inherit glance.negbin examples
 #'
@@ -58,7 +64,8 @@ glance.negbin <- function(x, ...) {
 #' @family glm.nb tidiers
 #' @seealso [MASS::glm.nb()]
 #' @export
- tidy.negbin <- function(x, conf.int = FALSE, conf.level = 0.95, ...) {
+ tidy.negbin <- function(x, conf.int = FALSE, conf.level = 0.95, 
+                        exponentiate = FALSE, ...) {
   s <- summary(x, ...)
   
   ret <- tibble(
@@ -72,6 +79,10 @@ glance.negbin <- function(x, ...) {
   if (conf.int) {
     ci <- broom_confint_terms(x, level = conf.level)
     ret <- dplyr::left_join(ret, ci, by = "term")
+  }
+  
+  if (exponentiate) {
+    ret <- exponentiate(ret)
   }
   
   ret

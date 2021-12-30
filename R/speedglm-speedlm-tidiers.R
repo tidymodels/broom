@@ -8,12 +8,17 @@
 #' @evalRd return_tidy(regression = TRUE)
 #'
 #' @examples
+#' 
+#' if (requireNamespace("speedglm", quietly = TRUE)) {
 #'
 #' mod <- speedglm::speedlm(mpg ~ wt + qsec, data = mtcars, fitted = TRUE)
 #'
 #' tidy(mod)
 #' glance(mod)
 #' augment(mod)
+#' 
+#' }
+#' 
 #' @aliases speedlm_tidiers
 #' @export
 #' @family speedlm tidiers

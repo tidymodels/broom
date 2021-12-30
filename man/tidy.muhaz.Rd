@@ -29,12 +29,20 @@ If a model has several distinct types of components, you will need to
 specify which components to return.
 }
 \examples{
+
+if (requireNamespace("muhaz", quietly = TRUE)) {
+  if (requireNamespace("survival", quietly = TRUE)) {
+
 library(muhaz)
 library(survival)
 
 x <- muhaz(ovarian$futime, ovarian$fustat)
 tidy(x)
 glance(x)
+
+  }
+}
+
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[muhaz:muhaz]{muhaz::muhaz()}}

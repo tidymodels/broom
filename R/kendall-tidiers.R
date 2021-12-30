@@ -14,6 +14,9 @@
 #' )
 #'
 #' @examples
+#' 
+#' if (requireNamespace("Kendall", quietly = TRUE)) {
+#' 
 #' library(Kendall)
 #'
 #' A <- c(2.5, 2.5, 2.5, 2.5, 5, 6.5, 6.5, 10, 10, 10, 10, 10, 14, 14, 14, 16, 17)
@@ -27,6 +30,9 @@
 #'
 #' t_res <- SeasonalMannKendall(ts(A))
 #' tidy(t_res)
+#' 
+#' }
+#' 
 #' @export
 #' @seealso [tidy()], [Kendall::Kendall()], [Kendall::MannKendall()],
 #'   [Kendall::SeasonalMannKendall()]

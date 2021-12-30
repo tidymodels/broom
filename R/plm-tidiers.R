@@ -9,6 +9,8 @@
 #'
 #' @examples
 #'
+#' if (requireNamespace("plm", quietly = TRUE)) {
+#'
 #' library(plm)
 #'
 #' data("Produc", package = "plm")
@@ -24,6 +26,9 @@
 #'
 #' augment(zz)
 #' glance(zz)
+#' 
+#' }
+#' 
 #' @aliases plm_tidiers
 #' @export
 #' @seealso [tidy()], [plm::plm()], [tidy.lm()]

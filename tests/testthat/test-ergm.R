@@ -9,9 +9,11 @@ skip_if_not_installed("ergm")
 library(ergm)
 
 data(florentine)
+data(faux.mesa.high)
 
 gest <- ergm(flomarriage ~ edges + absdiff("wealth"))
 gest2 <- ergm(flomarriage ~ edges + absdiff("wealth"), family = "gaussian")
+gest3 <- ergm(faux.mesa.high ~ edges + degree(1:3))
 
 test_that("ergm tidier arguments", {
   check_arguments(tidy.ergm)
@@ -40,8 +42,15 @@ test_that("tidy.ergm", {
 })
 
 test_that("glance.ergm", {
-  gl <- glance(gest, deviance = TRUE, mcmc = TRUE)
-
+  gl <- glance(gest, deviance = TRUE)
+  gl2 <- glance(gest3, deviance = TRUE, mcmc = TRUE)
+  expect_message(
+    gl3 <- glance(gest, deviance = TRUE, mcmc = TRUE)
+  )
+  
   check_glance_outputs(gl)
-  check_dims(gl, expected_cols = 12)
+  check_dims(gl, expected_cols = 9)
+  check_dims(gl2, expected_cols = 12)
+  check_dims(gl, expected_cols = 9)
+  
 })

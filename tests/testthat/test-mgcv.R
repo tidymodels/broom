@@ -17,10 +17,17 @@ test_that("mgcv tidier arguments", {
 
 test_that("tidy.gam", {
   td <- tidy(fit)
-  tdp <- tidy(fit, parametric = TRUE)
+  tdp <- tidy(fit, parametric = TRUE, conf.int = TRUE)
+  tdp_exp <- tidy(fit, parametric = TRUE, conf.int = TRUE, exponentiate = TRUE)
 
   check_tidy_output(td, strict = FALSE)
   check_tidy_output(tdp)
+  
+  # test coef exponentiated 
+  expect_equal(
+    as.matrix(tdp_exp[,c("estimate", "conf.low", "conf.high")]),
+    exp(as.matrix(tdp[,c("estimate", "conf.low", "conf.high")]))
+  )
 })
 
 test_that("glance.gam", {

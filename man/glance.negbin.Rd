@@ -41,12 +41,17 @@ that no longer have a well-defined value are filled in with an \code{NA}
 of the appropriate type.
 }
 \examples{
+
+if (requireNamespace("MASS", quietly = TRUE)) {
+
 library(MASS)
 
 r <- glm.nb(Days ~ Sex/(Age + Eth*Lrn), data = quine)
 
 tidy(r)
 glance(r)
+
+}
 
 }
 \seealso{

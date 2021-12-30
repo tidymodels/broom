@@ -19,6 +19,8 @@
 #' )
 #'
 #' @examples
+#' 
+#' if (requireNamespace("survival", quietly = TRUE)) {
 #'
 #' library(survival)
 #' cfit <- coxph(Surv(time, status) ~ age + sex, lung)
@@ -42,6 +44,9 @@
 #' ggplot(td_multi, aes(time, estimate, group = state)) +
 #'   geom_line(aes(color = state)) +
 #'   geom_ribbon(aes(ymin = conf.low, ymax = conf.high), alpha = .25)
+#'   
+#' }
+#'   
 #' @aliases survfit_tidiers
 #' @export
 #' @seealso [tidy()], [survival::survfit()]
@@ -124,7 +129,8 @@ glance.survfit <- function(x, ...) {
   colnames(ret) <- dplyr::recode(
     colnames(ret),
     "*rmean" = "rmean",
-    "*se(rmean)" = "rmean.std.error"
+    "*se(rmean)" = "rmean.std.error",
+    "se(rmean)" = "rmean.std.error"
   )
 
   colnames(ret)[utils::tail(seq_along(ret), 2)] <- c("conf.low", "conf.high")

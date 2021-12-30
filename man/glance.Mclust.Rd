@@ -41,6 +41,8 @@ of the appropriate type.
 }
 \examples{
 
+if (requireNamespace("mclust", quietly = TRUE)) {
+
 library(dplyr)
 library(mclust)
 set.seed(27)
@@ -65,6 +67,9 @@ m <- mclust::Mclust(points)
 tidy(m)
 augment(m, points)
 glance(m)
+
+}
+
 }
 \value{
 A \code{\link[tibble:tibble]{tibble::tibble()}} with exactly one row and columns:

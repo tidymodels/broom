@@ -11,6 +11,7 @@
 #' @evalRd return_tidy(regression = TRUE)
 #' 
 #' @examples 
+#' 
 #' \dontrun{ 
 #' library(spatialreg)
 #' data(oldcol, package = "spdep")
@@ -51,7 +52,7 @@ tidy.sarlm <- function(x, conf.int = FALSE, conf.level = .95, ...) {
   # construct parameter table
   s <- summary(x)
   ret <- as_tidy_tibble(
-    s$Coef,
+    coef(s),
     new_names = c("estimate", "std.error", "statistic", "p.value")
   )
   
@@ -89,6 +90,7 @@ tidy.sarlm <- function(x, conf.int = FALSE, conf.level = .95, ...) {
   
   ret
 }
+
 #' @templateVar class spatialreg
 #' @template title_desc_augment
 #'
@@ -157,3 +159,18 @@ glance.sarlm <- function(x, ...) {
   
   res
 }
+
+# re-export each of them following the change in class sarlm -> Sarlm --------
+
+#' @export
+#' @family spatialreg tidiers
+tidy.Sarlm <- tidy.sarlm
+
+#' @export
+#' @family spatialreg tidiers
+glance.Sarlm <- glance.sarlm 
+
+#' @export
+#' @family spatialreg tidiers
+augment.Sarlm <- augment.sarlm 
+

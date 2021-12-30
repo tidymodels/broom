@@ -79,6 +79,8 @@ missing at this time.
 }
 \examples{
 
+if (requireNamespace("MASS", quietly = TRUE)) {
+
 library(MASS)
 
 r <- rlm(stack.loss ~ ., stackloss)
@@ -86,6 +88,8 @@ r <- rlm(stack.loss ~ ., stackloss)
 tidy(r)
 augment(r)
 glance(r)
+
+}
 }
 \seealso{
 \code{\link[MASS:rlm]{MASS::rlm()}}

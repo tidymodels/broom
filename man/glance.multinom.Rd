@@ -41,6 +41,8 @@ of the appropriate type.
 }
 \examples{
 
+if (requireNamespace("nnet", quietly = TRUE)) {
+
 library(nnet)
 library(MASS)
 
@@ -56,6 +58,9 @@ glance(bwt.mu)
 fit.gear <- multinom(gear ~ mpg + factor(am), data = mtcars)
 tidy(fit.gear)
 glance(fit.gear)
+
+}
+
 }
 \seealso{
 \code{\link[=glance]{glance()}}, \code{\link[nnet:multinom]{nnet::multinom()}}

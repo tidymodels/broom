@@ -19,7 +19,10 @@
 #'   \item{std.error}{The standard error}
 #'   \item{mcmc.error}{The MCMC error}
 #'   \item{p.value}{The two-sided p-value}
+#' 
 #' @examples
+#' 
+#' if (requireNamespace("ergm", quietly = TRUE)) {
 #'
 #' library(ergm)
 #' # Using the same example as the ergm package
@@ -42,6 +45,8 @@
 #' glance(gest, deviance = TRUE)
 #' glance(gest, mcmc = TRUE)
 #' 
+#' }
+#' 
 #' @references Hunter DR, Handcock MS, Butts CT, Goodreau SM, Morris M (2008b).
 #'   \pkg{ergm}: A Package to Fit, Simulate and Diagnose Exponential-Family
 #'   Models for Networks. *Journal of Statistical Software*, 24(3).
@@ -61,10 +66,10 @@ tidy.ergm <- function(x, conf.int = FALSE, conf.level = 0.95,
   # in ergm 3.10 summary(x, ...)$coefs has columns:
   #   Estimate, Std. Error, MCMC %, z value, Pr(>|Z|)
 
-  ret <- summary(x, ...)$coefs %>%
-    tibble::rownames_to_column() %>%
+  ret <- summary(x, ...)$coefficients %>%
+    tibble::as_tibble(rownames = "term") %>%
     rename2(
-      term = "rowname",
+      term = "term",
       estimate = "Estimate",
       std.error = "Std. Error",
       mcmc.error = "MCMC %",
@@ -152,6 +157,13 @@ glance.ergm <- function(x, deviance = FALSE, mcmc = FALSE, ...) {
   ret$BIC <- stats::BIC(x)
 
   if (mcmc) {
+    if (isTRUE(x$MPLE_is_MLE)) {
+      message(
+        "Though `glance` was supplied `mcmc = TRUE`, the model was not fitted",
+        "using MCMC, so the corresponding columns will be omitted."
+      )
+    }
+    
     ret$MCMC.interval <- x$control$MCMC.interval
     ret$MCMC.burnin <- x$control$MCMC.burnin
     ret$MCMC.samplesize <- x$control$MCMC.samplesize

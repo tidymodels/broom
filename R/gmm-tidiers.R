@@ -9,6 +9,8 @@
 #' @evalRd return_tidy(regression = TRUE)
 #'
 #' @examples
+#' 
+#' if (requireNamespace("gmm", quietly = TRUE)) {
 #'
 #' library(gmm)
 #'
@@ -72,6 +74,9 @@
 #'   geom_point() +
 #'   geom_errorbarh(aes(xmin = conf.low, xmax = conf.high)) +
 #'   geom_vline(xintercept = 0, color = "red", lty = 2)
+#'   
+#' }
+#' 
 #' @export
 #' @aliases gmm_tidiers
 #' @family gmm tidiers

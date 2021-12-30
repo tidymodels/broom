@@ -11,10 +11,15 @@
 #' )
 #'
 #' @examples
+#' 
+#' if (requireNamespace("car", quietly = TRUE)) {
 #'
 #' dw <- car::durbinWatsonTest(lm(mpg ~ wt, data = mtcars))
 #' tidy(dw)
 #' glance(dw) # same output for all durbinWatsonTests
+#' 
+#' }
+#' 
 #' @name durbinWatsonTest_tidiers
 #' @family car tidiers
 #' @export
@@ -50,11 +55,15 @@ glance.durbinWatsonTest <- function(x, ...) tidy(x)
 #'
 #' @examples
 #'
+#' if (requireNamespace("car", quietly = TRUE)) {
+#' 
 #' library(car)
 #' data(Moore)
 #' lt <- with(Moore, leveneTest(conformity, fcategory))
 #' tidy(lt)
 #' glance(lt) # same output for all leveneTest
+#' 
+#' }
 #' @name leveneTest_tidiers
 #' @family car tidiers
 #' @export

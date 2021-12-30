@@ -11,6 +11,9 @@
 #'   effect in the control and treatment groups, respectively. And the last 
 #'   two the direct effect in each group.
 #' @examples
+#' 
+#' if (requireNamespace("mediation", quietly = TRUE)) {
+#' 
 #' library(mediation)
 #' data(jobs)
 #'
@@ -21,11 +24,21 @@
 #' tidy(mod)
 #' tidy(mod, conf.int = TRUE)
 #' tidy(mod, conf.int = TRUE, conf.level = .99)
+#' 
+#' }
+#' 
 #' @export
 #' @seealso [tidy()], [mediation::mediate()]
 #' @family mediate tidiers
 #' @aliases mediate_tidiers
 tidy.mediate <- function(x, conf.int = FALSE, conf.level = .95, ...) {
+  if (inherits(x, "psych")) {
+    stop(
+      "No tidy method for objects of class `mediate` from the `psych` package. ",
+      "The `tidy.mediate` method is intended for `mediate` objects from the `mediation` package."
+    )
+  }
+  
   d0 <- d1 <- z0 <- z1 <- d0.sims <- d1.sims <- z0.sims <- NULL
   z1.sims <- d0.p <- d1.p <- z0.p <- z1.p <- NULL
   s <- base::summary(x)
