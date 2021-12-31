@@ -35,4 +35,19 @@ test_that("tidy.cmprsk", {
   check_dims(td1, 2, 5)
   check_dims(td2, 2, 7)
   check_dims(td3, 2, 7)
+  
+  # check the `conf.level=` argument matches the result in `summary(conf.int=)`
+  expect_equal(
+    summary(fit, conf.int = 0.99)$conf.int %>% 
+      log() %>%
+      unname() %>%
+      as.data.frame() %>% 
+      dplyr::select(dplyr::last_col(1:0)) %>%
+      unclass() %>%
+      unname(),
+    td3 %>% 
+      dplyr::select(conf.low, conf.high)  %>%
+      unclass() %>%
+      unname(),
+  )
 })
