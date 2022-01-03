@@ -1,6 +1,4 @@
-# broom 0.7.10.9000
-
-To be released as broom 0.7.11.
+# broom 0.7.11
 
 * Addressed issue with the ordering of original observations in `augment.rqs`. Now function preserves the original `data.frame` names also when the input `data.frame` only has one column (`#1052` by `@ilapros`).
 * Addressed warning from `tidy.rma` when `x$ddf` has length greater than 1 (`#1064` by `@wviechtb`).
