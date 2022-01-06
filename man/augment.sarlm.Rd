@@ -72,6 +72,8 @@ currently does not take in \code{data} or \code{newdata} arguments.
 }
 \examples{
 
+# feel free to ignore the following two lines—they allow {broom} to supply 
+# examples without requiring the model-supplying packages to be installed.
 if (requireNamespace("spdep", quietly = TRUE)) {
   if (requireNamespace("spatialreg", quietly = TRUE)) {
 

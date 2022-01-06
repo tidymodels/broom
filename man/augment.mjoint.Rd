@@ -91,6 +91,8 @@ for the fixed and random effects of the longitudinal submodel.
 }
 \examples{
 
+# feel free to ignore the following line—it allows {broom} to supply 
+# examples without requiring the model-supplying package to be installed.
 if (requireNamespace("joineRML", quietly = TRUE)) {
 
 \dontrun{

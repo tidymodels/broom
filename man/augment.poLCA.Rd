@@ -81,6 +81,8 @@ included in the augmented output.
 }
 \examples{
 
+# feel free to ignore the following line—it allows {broom} to supply 
+# examples without requiring the model-supplying package to be installed.
 if (requireNamespace("poLCA", quietly = TRUE)) {
 
 #load libraries for models and data

@@ -41,6 +41,8 @@ The \code{curveid} column indicates the curve.
 }
 \examples{
 
+# feel free to ignore the following line—it allows {broom} to supply 
+# examples without requiring the model-supplying package to be installed.
 if (requireNamespace("drc", quietly = TRUE)) {
 
 #load libraries for models and data

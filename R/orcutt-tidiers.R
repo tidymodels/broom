@@ -14,9 +14,11 @@
 #'
 #' @examples
 #' 
+#' # feel free to ignore the following line—it allows {broom} to supply 
+#' # examples without requiring the model-supplying package to be installed.
 #' if (requireNamespace("orcutt", quietly = TRUE)) {
 #'
-#' #load libraries for models and data
+#' # load libraries for models and data
 #' library(orcutt)
 #'
 #' reg <- lm(mpg ~ wt + qsec + disp, mtcars)

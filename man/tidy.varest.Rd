@@ -48,6 +48,8 @@ confidence intervals for \code{varest} objects. Setting the \code{tidy} argument
 }
 \examples{
 
+# feel free to ignore the following line—it allows {broom} to supply 
+# examples without requiring the model-supplying package to be installed.
 if (requireNamespace("vars", quietly = TRUE)) {
 
 # load libraries for models and data

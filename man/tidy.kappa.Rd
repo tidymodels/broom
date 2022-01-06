@@ -36,6 +36,8 @@ to \code{\link[psych:kappa]{psych::cohen.kappa()}} when creating the \code{kappa
 }
 \examples{
 
+# feel free to ignore the following line—it allows {broom} to supply 
+# examples without requiring the model-supplying package to be installed.
 if (requireNamespace("psych", quietly = TRUE)) {
 
 #load libraries for models and data

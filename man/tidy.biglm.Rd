@@ -42,6 +42,10 @@ specify which components to return.
 }
 \examples{
 
+# feel free to ignore the following line—it allows {broom} to supply 
+# examples without requiring the model-supplying package to be installed.
+if (requireNamespace("biglm", quietly = TRUE)) {
+
 \dontrun{
 # load libraries for models and data
 library(biglm)
@@ -63,6 +67,8 @@ tidy(bgfit, conf.int = TRUE, conf.level = .9)
 tidy(bgfit, conf.int = TRUE, conf.level = .9, exponentiate = TRUE)
 
 glance(bgfit)
+}
+
 }
 
 }

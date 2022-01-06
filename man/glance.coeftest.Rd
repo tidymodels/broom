@@ -53,6 +53,8 @@ of Wooldridge (2016).
 }
 \examples{
 
+# feel free to ignore the following line—it allows {broom} to supply 
+# examples without requiring the model-supplying package to be installed.
 if (requireNamespace("lmtest", quietly = TRUE)) {
 
 # load libraries for models and data

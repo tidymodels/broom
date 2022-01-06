@@ -33,6 +33,8 @@ passed on to \code{\link[emmeans:summary.emmGrid]{emmeans::summary.emmGrid()}} o
 }
 \examples{
 
+# feel free to ignore the following line—it allows {broom} to supply 
+# examples without requiring the model-supplying package to be installed.
 if (requireNamespace("emmeans", quietly = TRUE)) {
 
 # load libraries for models and data
