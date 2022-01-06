@@ -23,6 +23,7 @@
 #' library(leaps)
 #'
 #' all_fits <- regsubsets(hp ~ ., mtcars)
+#' 
 #' tidy(all_fits)
 #' 
 #' }

@@ -107,11 +107,13 @@ pc \%>\%
   ggtitle("Principal components of arrest data")
 
 au <- augment(pc, data = USArrests)
+
 au
 
 ggplot(au, aes(.fittedPC1, .fittedPC2)) +
   geom_point() +
   geom_text(aes(label = .rownames), vjust = 1, hjust = 1)
+  
 }
 \seealso{
 \code{\link[stats:prcomp]{stats::prcomp()}}, \link{svd_tidiers}

@@ -59,13 +59,15 @@ glance.durbinWatsonTest <- function(x, ...) tidy(x)
 #' # examples without requiring the model-supplying package to be installed.
 #' if (requireNamespace("car", quietly = TRUE)) {
 #' 
-#' #load libraries for models and data
+#' # load libraries for models and data
 #' library(car)
 #' 
 #' data(Moore)
+#' 
 #' lt <- with(Moore, leveneTest(conformity, fcategory))
+#' 
 #' tidy(lt)
-#' glance(lt) # same output for all leveneTest
+#' glance(lt)
 #' 
 #' }
 #' @name leveneTest_tidiers

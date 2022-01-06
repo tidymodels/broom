@@ -16,6 +16,7 @@
 #'
 #' z <- ts(matrix(rnorm(300), 100, 3), start = c(1961, 1), frequency = 12)
 #' colnames(z) <- c("Aa", "Bb", "Cc")
+#' 
 #' tidy(z)
 #' @export
 #' @seealso [tidy()], [stats::ts()]

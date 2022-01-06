@@ -49,6 +49,7 @@ if (requireNamespace("orcutt", quietly = TRUE)) {
 library(orcutt)
 
 reg <- lm(mpg ~ wt + qsec + disp, mtcars)
+
 tidy(reg)
 
 co <- cochrane.orcutt(reg)

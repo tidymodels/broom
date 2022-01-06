@@ -13,7 +13,7 @@
 #' # examples without requiring the model-supplying package to be installed.
 #' if (requireNamespace("multcomp", quietly = TRUE)) {
 #'
-#' #load libraries for models and data
+#' # load libraries for models and data
 #' library(multcomp)
 #' library(ggplot2)
 #'
@@ -21,11 +21,14 @@
 #' wht <- glht(amod, linfct = mcp(tension = "Tukey"))
 #'
 #' tidy(wht)
+#' 
 #' ggplot(wht, aes(lhs, estimate)) +
 #'   geom_point()
 #'
 #' CI <- confint(wht)
+#' 
 #' tidy(CI)
+#' 
 #' ggplot(CI, aes(lhs, estimate, ymin = lwr, ymax = upr)) +
 #'   geom_pointrange()
 #'

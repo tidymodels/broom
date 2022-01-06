@@ -12,7 +12,7 @@
 #' # examples without requiring the model-supplying package to be installed.
 #' if (requireNamespace("ordinal", quietly = TRUE)) {
 #'
-#' #load libraries for models and data
+#' # load libraries for models and data
 #' library(ordinal)
 #'
 #' fit <- clmm(rating ~ temp + contact + (1 | judge), data = wine)
@@ -24,6 +24,7 @@
 #' glance(fit)
 #'
 #' fit2 <- clmm(rating ~ temp + (1 | judge), nominal = ~contact, data = wine)
+#' 
 #' tidy(fit2)
 #' glance(fit2)
 #' 

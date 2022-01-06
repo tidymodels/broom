@@ -28,6 +28,7 @@
 #' 
 #' # load libraries for models and data
 #' library(vars)
+#' 
 #' data("Canada", package = "vars")
 #' 
 #' mod <- VAR(Canada, p = 1, type = "both")

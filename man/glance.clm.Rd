@@ -59,6 +59,7 @@ augment(fit, type.predict = "prob")
 augment(fit, type.predict = "class")
 
 fit2 <- clm(rating ~ temp, nominal = ~contact, data = wine)
+
 tidy(fit2)
 glance(fit2)
 

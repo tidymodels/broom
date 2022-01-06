@@ -40,7 +40,7 @@ to \code{\link[psych:kappa]{psych::cohen.kappa()}} when creating the \code{kappa
 # examples without requiring the model-supplying package to be installed.
 if (requireNamespace("psych", quietly = TRUE)) {
 
-#load libraries for models and data
+# load libraries for models and data
 library(psych)
 
 rater1 <- 1:9
@@ -51,6 +51,7 @@ tidy(ck)
 
 #graph the confidence intervals
 library(ggplot2)
+
 ggplot(tidy(ck), aes(estimate, type)) +
   geom_point() +
   geom_errorbarh(aes(xmin = conf.low, xmax = conf.high))

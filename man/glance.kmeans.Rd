@@ -44,8 +44,8 @@ of the appropriate type.
 \dontrun{
 library(cluster)
 library(dplyr)
-
 library(modeldata)
+
 data(hpc_data)
 
 x <- hpc_data[, 2:5]
@@ -56,6 +56,7 @@ tidy(fit)
 glance(fit)
 augment(fit, x)
 }
+
 }
 \seealso{
 \code{\link[=glance]{glance()}}, \code{\link[stats:kmeans]{stats::kmeans()}}

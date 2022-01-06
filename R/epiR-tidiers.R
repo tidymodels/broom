@@ -25,7 +25,7 @@
 #' # examples without requiring the model-supplying package to be installed.
 #' if (requireNamespace("epiR", quietly = TRUE)) {
 #' 
-#' #load libraries for models and data
+#' # load libraries for models and data
 #' library(epiR)
 #' 
 #' dat <- matrix(c(13, 2163, 5, 3349), nrow = 2, byrow = TRUE)

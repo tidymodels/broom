@@ -111,7 +111,9 @@ glance(sr)
 
 # coefficient plot
 td <- tidy(sr, conf.int = TRUE)
+
 library(ggplot2)
+
 ggplot(td, aes(estimate, term)) +
   geom_point() +
   geom_errorbarh(aes(xmin = conf.low, xmax = conf.high), height = 0) +

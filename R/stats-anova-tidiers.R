@@ -25,7 +25,9 @@
 #'
 #' a <- lm(mpg ~ wt + qsec + disp, mtcars)
 #' b <- lm(mpg ~ wt + qsec, mtcars)
+#' 
 #' tidy(anova(a, b))
+#' 
 #' @export
 #' @family anova tidiers
 #' @seealso [tidy()], [stats::anova()], [car::Anova()], [car::leveneTest()]

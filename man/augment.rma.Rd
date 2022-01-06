@@ -70,6 +70,10 @@ missing at this time.
 }
 \examples{
 
+# feel free to ignore the following line—it allows {broom} to supply 
+# examples without requiring the model-supplying package to be installed.
+if (requireNamespace("metafor", quietly = TRUE)) {
+
 library(metafor)
 
 df <-
@@ -85,6 +89,8 @@ df <-
 meta_analysis <- rma(yi, vi, data = df, method = "EB")
 
 augment(meta_analysis)
+}
+
 }
 \value{
 A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:

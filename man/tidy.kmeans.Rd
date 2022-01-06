@@ -39,8 +39,8 @@ For examples, see the kmeans vignette.
 \dontrun{
 library(cluster)
 library(dplyr)
-
 library(modeldata)
+
 data(hpc_data)
 
 x <- hpc_data[, 2:5]
@@ -51,6 +51,7 @@ tidy(fit)
 glance(fit)
 augment(fit, x)
 }
+
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[stats:kmeans]{stats::kmeans()}}

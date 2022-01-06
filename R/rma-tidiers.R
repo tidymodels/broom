@@ -29,7 +29,7 @@
 #' # examples without requiring the model-supplying package to be installed.
 #' if (requireNamespace("metafor", quietly = TRUE)) {
 #'
-#' #load libraries for models and data
+#' # load libraries for models and data
 #' library(metafor)
 #'
 #' df <-
@@ -150,6 +150,10 @@ tidy.rma <- function(x, conf.int = FALSE, conf.level = 0.95,
 #' @export
 #'
 #' @examples
+#' 
+#' # feel free to ignore the following line—it allows {broom} to supply 
+#' # examples without requiring the model-supplying package to be installed.
+#' if (requireNamespace("metafor", quietly = TRUE)) {
 #'
 #' library(metafor)
 #'
@@ -166,6 +170,8 @@ tidy.rma <- function(x, conf.int = FALSE, conf.level = 0.95,
 #' meta_analysis <- rma(yi, vi, data = df, method = "EB")
 #'
 #' glance(meta_analysis)
+#' }
+#' 
 glance.rma <- function(x, ...) {
   # reshape model fit statistics and clean names
   fit_stats <- metafor::fitstats(x)
@@ -229,6 +235,10 @@ glance.rma <- function(x, ...) {
 #'
 #' @examples
 #'
+#' # feel free to ignore the following line—it allows {broom} to supply 
+#' # examples without requiring the model-supplying package to be installed.
+#' if (requireNamespace("metafor", quietly = TRUE)) {
+#' 
 #' library(metafor)
 #'
 #' df <-
@@ -244,6 +254,8 @@ glance.rma <- function(x, ...) {
 #' meta_analysis <- rma(yi, vi, data = df, method = "EB")
 #'
 #' augment(meta_analysis)
+#' }
+#' 
 augment.rma <- function(x, interval = c("prediction", "confidence"), ...) {
   # metafor generally handles these for different models through the monolith
   # `rma` class; using `purrr::possibly` primarily helps discard unused

@@ -91,7 +91,7 @@ res_black <- gmm(g, x = x, t0 = rep(0, 11))
 tidy(res_black)
 tidy(res_black, conf.int = TRUE)
 
-#APT test with Fama-French factors and GMM
+# APT test with Fama-French factors and GMM
 
 f1 <- zm
 f2 <- Finance[1:300, "hml"] - rf
@@ -102,7 +102,7 @@ res2 <- gmm(z ~ f1 + f2 + f3, x = h)
 td2 <- tidy(res2, conf.int = TRUE)
 td2
 
-#coefficient plot
+# coefficient plot
 td2 \%>\%
   mutate(variable = reorder(term, estimate)) \%>\%
   ggplot(aes(estimate, variable)) +

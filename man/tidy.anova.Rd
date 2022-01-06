@@ -39,7 +39,9 @@ For documentation on the tidier for \code{\link[car:leveneTest]{car::leveneTest(
 
 a <- lm(mpg ~ wt + qsec + disp, mtcars)
 b <- lm(mpg ~ wt + qsec, mtcars)
+
 tidy(anova(a, b))
+
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[stats:anova]{stats::anova()}}, \code{\link[car:Anova]{car::Anova()}}, \code{\link[car:leveneTest]{car::leveneTest()}}

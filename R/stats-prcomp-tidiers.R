@@ -82,11 +82,13 @@
 #'   ggtitle("Principal components of arrest data")
 #'
 #' au <- augment(pc, data = USArrests)
+#' 
 #' au
 #'
 #' ggplot(au, aes(.fittedPC1, .fittedPC2)) +
 #'   geom_point() +
 #'   geom_text(aes(label = .rownames), vjust = 1, hjust = 1)
+#'   
 #' @aliases prcomp_tidiers
 #' @export
 #' @seealso [stats::prcomp()], [svd_tidiers]

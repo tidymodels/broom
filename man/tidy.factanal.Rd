@@ -32,8 +32,11 @@ specify which components to return.
 
 set.seed(123)
 
-#data
-m1 <- dplyr::tibble(
+# generate data
+library(dplyr)
+library(purrr)
+
+m1 <- tibble(
   v1 = c(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 3, 3, 3, 3, 3, 4, 5, 6),
   v2 = c(1, 2, 1, 1, 1, 1, 2, 1, 2, 1, 3, 4, 3, 3, 3, 4, 6, 5),
   v3 = c(3, 3, 3, 3, 3, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 5, 4, 6),
@@ -42,14 +45,14 @@ m1 <- dplyr::tibble(
   v6 = c(1, 1, 1, 2, 1, 3, 3, 3, 4, 3, 1, 1, 1, 2, 1, 6, 5, 4)
 )
 
-#new data
-m2 <- purrr::map_dfr(m1, rev)
+# new data
+m2 <- map_dfr(m1, rev)
 
-#factor analysis objects
-fit1 <- stats::factanal(m1, factors = 3, scores = "Bartlett")
-fit2 <- stats::factanal(m1, factors = 3, scores = "regression")
+# factor analysis objects
+fit1 <- factanal(m1, factors = 3, scores = "Bartlett")
+fit2 <- factanal(m1, factors = 3, scores = "regression")
 
-#tidying the object
+# tidying the object
 tidy(fit1)
 tidy(fit2)
 
@@ -60,6 +63,7 @@ augment(fit2)
 #augmented dataframe (with new data)
 augment(fit1, data = m2)
 augment(fit2, data = m2)
+
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[stats:factanal]{stats::factanal()}}

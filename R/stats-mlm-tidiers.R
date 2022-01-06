@@ -18,7 +18,9 @@
 #' @examples
 #'
 #' mod <- lm(cbind(mpg, disp) ~ wt, mtcars)
+#' 
 #' tidy(mod, conf.int = TRUE)
+#' 
 #' @export
 #' @seealso [tidy()]
 #' @family lm tidiers

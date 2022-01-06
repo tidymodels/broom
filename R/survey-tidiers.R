@@ -126,7 +126,7 @@ tidy.svyglm <- function(x, conf.int = FALSE, conf.level = 0.95,
 #'   )
 #'
 #' # model
-#' m <- survey::svyglm(
+#' m <- svyglm(
 #'   formula = sch.wide ~ ell + meals + mobility,
 #'   design = dstrat,
 #'   family = quasibinomial()

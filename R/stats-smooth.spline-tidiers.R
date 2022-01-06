@@ -8,13 +8,17 @@
 #' @examples
 #'
 #' spl <- smooth.spline(mtcars$wt, mtcars$mpg, df = 4)
+#' 
 #' augment(spl, mtcars)
-#' augment(spl) # calls original columns x and y
+#' 
+#' # calls original columns x and y
+#' augment(spl) 
 #'
 #' library(ggplot2)
 #' ggplot(augment(spl, mtcars), aes(wt, mpg)) +
 #'   geom_point() +
 #'   geom_line(aes(y = .fitted))
+#'   
 #' @evalRd return_augment()
 #'
 #' @aliases smooth.spline_tidiers

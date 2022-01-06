@@ -16,13 +16,16 @@
 #' glance(n)
 #'
 #' library(ggplot2)
+#' 
 #' ggplot(augment(n), aes(wt, mpg)) +
 #'   geom_point() +
 #'   geom_line(aes(y = .fitted))
 #'
 #' newdata <- head(mtcars)
 #' newdata$wt <- newdata$wt + 1
+#' 
 #' augment(n, newdata = newdata)
+#' 
 #' @aliases  nls_tidiers
 #' @export
 #' @seealso [tidy], [stats::nls()], [stats::summary.nls()]

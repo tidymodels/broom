@@ -19,7 +19,7 @@
 #' # examples without requiring the model-supplying package to be installed.
 #' if (requireNamespace("drc", quietly = TRUE)) {
 #'
-#' #load libraries for models and data
+#' # load libraries for models and data
 #' library(drc)
 #'
 #' mod <- drm(dead / total ~ conc, type,

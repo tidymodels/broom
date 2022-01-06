@@ -57,8 +57,8 @@ ggplot(d, aes(estimate, term, xmin = conf.low, xmax = conf.high, height = 0)) +
   geom_vline(xintercept = 0, lty = 4) +
   geom_errorbarh()
   
-# Aside: There are tidy() and glance() methods for lm.summary objects too. 
-# This can be useful when you want to conserve memory by converting large lm 
+# aside: There are tidy() and glance() methods for lm.summary objects too. 
+# this can be useful when you want to conserve memory by converting large lm 
 # objects into their leaner summary.lm equivalents.
 s <- summary(mod)
 tidy(s, conf.int = TRUE)
@@ -88,6 +88,7 @@ ggplot(au, aes(wt, mpg)) +
 # predict on new data without outcome variable. Output does not include .resid
 newdata <- newdata \%>\%
   select(-mpg)
+  
 augment(mod, newdata = newdata)
 
 au <- augment(mod, data = mtcars)
@@ -99,6 +100,7 @@ ggplot(au, aes(.hat, .std.resid)) +
   geom_smooth(se = FALSE)
 
 plot(mod, which = 6)
+
 ggplot(au, aes(.hat, .cooksd)) +
   geom_vline(xintercept = 0, colour = NA) +
   geom_abline(slope = seq(0, 3, by = 0.5), colour = "white") +
@@ -109,7 +111,9 @@ ggplot(au, aes(.hat, .cooksd)) +
 a <- matrix(rnorm(20), nrow = 10)
 b <- a + rnorm(length(a))
 result <- lm(b ~ a)
+
 tidy(result)
+
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[stats:summary.lm]{stats::summary.lm()}}

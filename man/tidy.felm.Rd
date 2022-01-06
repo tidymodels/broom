@@ -62,29 +62,32 @@ if (requireNamespace("lfe", quietly = TRUE)) {
 # load libraries for models and data
 library(lfe)
 
-# Use built-in "airquality" dataset
+# use built-in `airquality` dataset
 head(airquality)
 
-# No FEs; same as lm()
+# no FEs; same as lm()
 est0 <- felm(Ozone ~ Temp + Wind + Solar.R, airquality)
+
 tidy(est0)
 augment(est0)
 
-# Add month fixed effects
+# add month fixed effects
 est1 <- felm(Ozone ~ Temp + Wind + Solar.R  | Month, airquality)
+
 tidy(est1)
 tidy(est1, fe = TRUE)
 augment(est1)
 glance(est1)
 
-# The "se.type" argument can be used to switch out different standard errors 
+# the "se.type" argument can be used to switch out different standard errors 
 # types on the fly. In turn, this can be useful exploring the effect of 
 # different error structures on model inference.
 tidy(est1, se.type = "iid")
 tidy(est1, se.type = "robust")
 
-# Add clustered SEs (also by month)
+# add clustered SEs (also by month)
 est2 <- felm(Ozone ~ Temp + Wind + Solar.R  | Month | 0 | Month, airquality)
+
 tidy(est2, conf.int = TRUE) 
 tidy(est2, conf.int = TRUE, se.type = "cluster")
 tidy(est2, conf.int = TRUE, se.type = "robust")

@@ -60,7 +60,7 @@ specify which components to return.
 # examples without requiring the model-supplying package to be installed.
 if (requireNamespace("metafor", quietly = TRUE)) {
 
-#load libraries for models and data
+# load libraries for models and data
 library(metafor)
 
 df <-

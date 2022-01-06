@@ -41,6 +41,7 @@
 #' glance(cvfit1)
 #'
 #' library(ggplot2)
+#' 
 #' tidied_cv <- tidy(cvfit1)
 #' glance_cv <- glance(cvfit1)
 #'

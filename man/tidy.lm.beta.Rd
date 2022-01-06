@@ -62,6 +62,7 @@ weight <- c(ctl, trt)
 mod2 <- lm(weight ~ group)
 
 std2 <- lm.beta(mod2)
+
 tidy(std2, conf.int = TRUE)
 
 }

@@ -76,6 +76,7 @@ augment(lo, mtcars)
 
 # with a new dataset
 augment(lo, newdata = head(mtcars))
+
 }
 \seealso{
 \link[stats:na.action]{stats::na.action}

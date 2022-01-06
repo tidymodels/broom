@@ -73,8 +73,8 @@ missing at this time.
 \dontrun{
 library(cluster)
 library(dplyr)
-
 library(modeldata)
+
 data(hpc_data)
 
 x <- hpc_data[, 2:5]
@@ -85,6 +85,7 @@ tidy(fit)
 glance(fit)
 augment(fit, x)
 }
+
 }
 \seealso{
 \code{\link[=augment]{augment()}}, \code{\link[stats:kmeans]{stats::kmeans()}}

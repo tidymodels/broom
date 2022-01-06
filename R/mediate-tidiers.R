@@ -18,6 +18,7 @@
 #' 
 #' # load libraries for models and data
 #' library(mediation)
+#' 
 #' data(jobs)
 #'
 #' b <- lm(job_seek ~ treat + econ_hard + sex + age, data = jobs)

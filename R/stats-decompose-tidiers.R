@@ -17,22 +17,22 @@
 #'
 #' @examples
 #'
-#' # Time series of temperatures in Nottingham, 1920-1939:
+#' # time series of temperatures in Nottingham, 1920-1939:
 #' nottem
 #'
-#' # Perform seasonal decomposition on the data with both decompose
+#' # perform seasonal decomposition on the data with both decompose
 #' # and stl:
-#' d1 <- stats::decompose(nottem)
-#' d2 <- stats::stl(nottem, s.window = "periodic", robust = TRUE)
+#' d1 <- decompose(nottem)
+#' d2 <- stl(nottem, s.window = "periodic", robust = TRUE)
 #'
-#' # Compare the original series to its decompositions.
+#' # compare the original series to its decompositions.
 #'
 #' cbind(
-#'   broom::tidy(nottem), broom::augment(d1),
-#'   broom::augment(d2)
+#'   tidy(nottem), augment(d1),
+#'   augment(d2)
 #' )
 #'
-#' # Visually compare seasonal decompositions in tidy data frames.
+#' # visually compare seasonal decompositions in tidy data frames.
 #'
 #' library(tibble)
 #' library(dplyr)
@@ -40,17 +40,17 @@
 #' library(ggplot2)
 #'
 #' decomps <- tibble(
-#'   # Turn the ts objects into data frames.
+#'   # turn the ts objects into data frames.
 #'   series = list(as.data.frame(nottem), as.data.frame(nottem)),
-#'   # Add the models in, one for each row.
+#'   # add the models in, one for each row.
 #'   decomp = c("decompose", "stl"),
 #'   model = list(d1, d2)
 #' ) %>%
 #'   rowwise() %>%
-#'   # Pull out the fitted data using broom::augment.
+#'   # pull out the fitted data using broom::augment.
 #'   mutate(augment = list(broom::augment(model))) %>%
 #'   ungroup() %>%
-#'   # Unnest the data frames into a tidy arrangement of
+#'   # unnest the data frames into a tidy arrangement of
 #'   # the series next to its seasonal decomposition, grouped
 #'   # by the method (stl or decompose).
 #'   group_by(decomp) %>%
@@ -65,6 +65,7 @@
 #'     x = index, y = adjusted, colour = decomp,
 #'     group = decomp
 #'   ))
+#'   
 #' @aliases decompose_tidiers
 #' @export
 #' @family decompose tidiers

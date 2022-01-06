@@ -34,7 +34,7 @@ specify which components to return.
 # examples without requiring the model-supplying package to be installed.
 if (requireNamespace("zoo", quietly = TRUE)) {
 
-#load libraries for models and data
+# load libraries for models and data
 library(zoo)
 library(ggplot2)
 

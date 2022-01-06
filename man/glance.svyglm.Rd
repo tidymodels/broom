@@ -67,7 +67,7 @@ dstrat <-
   )
 
 # model
-m <- survey::svyglm(
+m <- svyglm(
   formula = sch.wide ~ ell + meals + mobility,
   design = dstrat,
   family = quasibinomial()

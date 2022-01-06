@@ -13,8 +13,8 @@
 #' \dontrun{
 #' library(cluster)
 #' library(dplyr)
-#'
 #' library(modeldata)
+#' 
 #' data(hpc_data)
 #' 
 #' x <- hpc_data[, 2:5]
@@ -25,6 +25,7 @@
 #' glance(fit)
 #' augment(fit, x)
 #' }
+#' 
 #' @details For examples, see the kmeans vignette.
 #'
 #' @aliases kmeans_tidiers

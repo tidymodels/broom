@@ -47,7 +47,7 @@ if (requireNamespace("systemfit", quietly = TRUE)) {
 
 set.seed(27)
 
-#load libraries for models and data
+# load libraries for models and data
 library(systemfit)
 
 df <- data.frame(
@@ -58,6 +58,7 @@ df <- data.frame(
 )
 
 fit <- systemfit(formula = list(Y ~ Z, W ~ X), data = df, method = "SUR")
+
 tidy(fit)
 
 tidy(fit, conf.int = TRUE)

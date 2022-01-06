@@ -25,6 +25,7 @@
 #' library(tseries)
 #'
 #' data(EuStockMarkets)
+#' 
 #' dax <- diff(log(EuStockMarkets))[, "DAX"]
 #' dax.garch <- garch(dax)
 #' dax.garch

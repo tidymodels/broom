@@ -19,14 +19,16 @@
 #' # load libraries for models and data
 #' library(biglm)
 #'
+#' # linear regression
 #' bfit <- biglm(mpg ~ wt + disp, mtcars)
+#' 
 #' tidy(bfit)
 #' tidy(bfit, conf.int = TRUE)
 #' tidy(bfit, conf.int = TRUE, conf.level = .9)
 #'
 #' glance(bfit)
 #'
-#' # bigglm: logistic regression
+#' # logistic regression
 #' bgfit <- bigglm(am ~ mpg, mtcars, family = binomial())
 #'
 #' tidy(bgfit)

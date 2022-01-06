@@ -66,18 +66,22 @@ if (requireNamespace("mfx", quietly = TRUE)) {
 # load libraries for models and data
 library(mfx)
 
-# Get the marginal effects from a logit regression
+# get the marginal effects from a logit regression
 mod_logmfx <- logitmfx(am ~ cyl + hp + wt, atmean = TRUE, data = mtcars)
+
 tidy(mod_logmfx, conf.int = TRUE)
 
-# Compare with the naive model coefficients of the same logit call (not run)
-# tidy(glm(am ~ cyl + hp + wt, family = binomial, data = mtcars), conf.int = TRUE)
+# compare with the naive model coefficients of the same logit call
+tidy(
+  glm(am ~ cyl + hp + wt, family = binomial, data = mtcars), conf.int = TRUE
+)
 
 augment(mod_logmfx)
 glance(mod_logmfx)
 
-# Another example, this time using probit regression
+# another example, this time using probit regression
 mod_probmfx <- probitmfx(am ~ cyl + hp + wt, atmean = TRUE, data = mtcars)
+
 tidy(mod_probmfx, conf.int = TRUE)
 augment(mod_probmfx)
 glance(mod_probmfx)

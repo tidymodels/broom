@@ -45,7 +45,9 @@ of the appropriate type.
 # examples without requiring the model-supplying package to be installed.
 if (requireNamespace("speedglm", quietly = TRUE)) {
 
-mod <- speedglm::speedlm(mpg ~ wt + qsec, data = mtcars, fitted = TRUE)
+library(speedglm)
+
+mod <- speedlm(mpg ~ wt + qsec, data = mtcars, fitted = TRUE)
 
 tidy(mod)
 glance(mod)

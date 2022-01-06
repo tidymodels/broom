@@ -43,6 +43,7 @@
 #' }
 #'
 #' bootres <- boot(clotting, bootfun, R = 999)
+#' 
 #' tidy(g1, conf.int = TRUE)
 #' tidy(bootres, conf.int = TRUE)
 #' 

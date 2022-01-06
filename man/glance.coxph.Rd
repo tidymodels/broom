@@ -72,6 +72,7 @@ logan2 <- data.frame(
 logan2$case <- (logan2$occupation == logan2$tocc)
 
 cl <- clogit(case ~ tocc + tocc:education + strata(id), logan2)
+
 tidy(cl)
 glance(cl)
 

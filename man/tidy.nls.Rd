@@ -44,13 +44,16 @@ augment(n)
 glance(n)
 
 library(ggplot2)
+
 ggplot(augment(n), aes(wt, mpg)) +
   geom_point() +
   geom_line(aes(y = .fitted))
 
 newdata <- head(mtcars)
 newdata$wt <- newdata$wt + 1
+
 augment(n, newdata = newdata)
+
 }
 \seealso{
 \link{tidy}, \code{\link[stats:nls]{stats::nls()}}, \code{\link[stats:summary.nls]{stats::summary.nls()}}

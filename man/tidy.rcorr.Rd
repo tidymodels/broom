@@ -50,9 +50,11 @@ if (requireNamespace("Hmisc", quietly = TRUE)) {
 library(Hmisc)
 
 mat <- replicate(52, rnorm(100))
+
 # add some NAs
 mat[sample(length(mat), 2000)] <- NA
-# also column names
+
+# also, column names
 colnames(mat) <- c(LETTERS, letters)
 
 rc <- rcorr(mat)

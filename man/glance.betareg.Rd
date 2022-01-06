@@ -45,7 +45,7 @@ of the appropriate type.
 # examples without requiring the model-supplying package to be installed.
 if (requireNamespace("betareg", quietly = TRUE)) {
 
-#load libraries for models and data
+# load libraries for models and data
 library(betareg)
 
 data("GasolineYield", package = "betareg")

@@ -53,6 +53,7 @@
 #'
 #' # plot confidence intervals
 #' library(ggplot2)
+#' 
 #' ggplot(tidy(marginal, conf.int = TRUE), aes(day, estimate)) +
 #'   geom_point() +
 #'   geom_errorbar(aes(ymin = conf.low, ymax = conf.high))
@@ -65,7 +66,9 @@
 #'     day = c("2", "3", "4")
 #'   )
 #' )
+#' 
 #' by_price
+#' 
 #' tidy(by_price)
 #'
 #' ggplot(tidy(by_price, conf.int = TRUE), aes(price2, estimate, color = day)) +

@@ -87,6 +87,8 @@ that SVD is only equivalent to PCA on centered data.
 }
 \examples{
 
+# feel free to ignore the following line—it allows {broom} to supply 
+# examples without requiring the data-supplying package to be installed.
 if (requireNamespace("modeldata", quietly = TRUE)) {
 
 library(modeldata)

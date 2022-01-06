@@ -19,6 +19,7 @@
 #'
 #' tidy(fit)
 #' glance(fit)
+#' 
 #' @aliases Arima_tidiers
 #' @seealso [stats::arima()]
 #' @export
