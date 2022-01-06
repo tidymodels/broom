@@ -39,6 +39,7 @@ or tests contained in \code{massoc} or \code{massoc.detail} when \code{\link[epi
 
 if (requireNamespace("epiR", quietly = TRUE)) {
 
+# load libraries for models and data
 library(epiR)
 
 dat <- matrix(c(13, 2163, 5, 3349), nrow = 2, byrow = TRUE)

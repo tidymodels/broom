@@ -36,7 +36,9 @@ Tidy \code{gam} objects created by calls to \code{\link[mgcv:gam]{mgcv::gam()}} 
 
 if (requireNamespace("gam", quietly = TRUE)) {
 
+# load libraries for models and data
 library(gam)
+
 g <- gam(mpg ~ s(hp, 4) + am + qsec, data = mtcars)
 
 tidy(g)

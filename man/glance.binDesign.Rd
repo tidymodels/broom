@@ -43,6 +43,7 @@ of the appropriate type.
 
 if (requireNamespace("binGroup", quietly = TRUE)) {
 
+# load libraries for models and data
 library(binGroup)
 des <- binDesign(
   nmax = 300, delta = 0.06,

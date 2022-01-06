@@ -43,6 +43,7 @@ The \code{curveid} column indicates the curve.
 
 if (requireNamespace("drc", quietly = TRUE)) {
 
+# load libraries for models and data
 library(drc)
 
 mod <- drm(dead / total ~ conc, type,

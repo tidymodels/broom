@@ -43,7 +43,9 @@ of the appropriate type.
 
 if (requireNamespace("betareg", quietly = TRUE)) {
 
+# load libraries for models and data
 library(betareg)
+
 data("GasolineYield", package = "betareg")
 
 mod <- betareg(yield ~ batch + temp, data = GasolineYield)

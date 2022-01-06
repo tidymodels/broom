@@ -34,6 +34,7 @@ specify which components to return.
 
 if (requireNamespace("survival", quietly = TRUE)) {
 
+# load libraries for models and data
 library(survival)
 
 # examples come from cch documentation

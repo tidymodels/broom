@@ -58,6 +58,7 @@ specify which components to return.
 
 if (requireNamespace("metafor", quietly = TRUE)) {
 
+# load libraries for models and data
 library(metafor)
 
 df <-

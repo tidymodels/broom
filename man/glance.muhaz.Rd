@@ -44,6 +44,7 @@ of the appropriate type.
 if (requireNamespace("muhaz", quietly = TRUE)) {
   if (requireNamespace("survival", quietly = TRUE)) {
 
+# load libraries for models and data
 library(muhaz)
 library(survival)
 

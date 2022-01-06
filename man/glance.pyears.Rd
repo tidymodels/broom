@@ -43,6 +43,7 @@ of the appropriate type.
 
 if (requireNamespace("survival", quietly = TRUE)) {
 
+# load libraries for models and data
 library(survival)
 
 temp.yr <- tcut(mgus$dxyr, 55:92, labels = as.character(55:91))

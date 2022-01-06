@@ -43,6 +43,7 @@ of the appropriate type.
 
 if (requireNamespace("lmodel2", quietly = TRUE)) {
 
+# load libraries for models and data
 library(lmodel2)
 
 data(mod2ex2)

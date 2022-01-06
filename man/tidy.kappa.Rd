@@ -38,6 +38,7 @@ to \code{\link[psych:kappa]{psych::cohen.kappa()}} when creating the \code{kappa
 
 if (requireNamespace("psych", quietly = TRUE)) {
 
+# load libraries for models and data
 library(psych)
 
 rater1 <- 1:9

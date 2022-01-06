@@ -46,6 +46,7 @@ choice of lambda.
 
 if (requireNamespace("glmnet", quietly = TRUE)) {
 
+# load libraries for models and data
 library(glmnet)
 
 set.seed(2014)

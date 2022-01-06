@@ -39,6 +39,7 @@ specify which components to return.
 
 if (requireNamespace("plm", quietly = TRUE)) {
 
+# load libraries for models and data
 library(plm)
 
 data("Produc", package = "plm")

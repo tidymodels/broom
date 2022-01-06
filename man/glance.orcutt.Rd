@@ -43,6 +43,7 @@ of the appropriate type.
 
 if (requireNamespace("orcutt", quietly = TRUE)) {
 
+# load libraries for models and data
 library(orcutt)
 
 reg <- lm(mpg ~ wt + qsec + disp, mtcars)

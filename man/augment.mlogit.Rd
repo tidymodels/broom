@@ -71,7 +71,9 @@ it up to predict on another dataset.
 if (requireNamespace("mlogit", quietly = TRUE)) {
 
 \dontrun{
+# load libraries for models and data
 library(mlogit)
+
 data("Fishing", package = "mlogit")
 Fish <- dfidx(Fishing, varying = 2:9, shape = "wide", choice = "mode")
 m <- mlogit(mode ~ price + catch | income, data = Fish)

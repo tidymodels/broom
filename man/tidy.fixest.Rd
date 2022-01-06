@@ -51,6 +51,8 @@ fixed effects, see \url{https://github.com/lrberge/fixest/issues/6} and
 if (requireNamespace("fixest", quietly = TRUE)) {
 
 \donttest{
+
+# load libraries for models and data
 library(fixest)
 
 gravity <- feols(log(Euros) ~ log(dist_km) | Origin + Destination + Product + Year, trade)

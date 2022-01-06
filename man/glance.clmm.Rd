@@ -43,6 +43,7 @@ of the appropriate type.
 
 if (requireNamespace("ordinal", quietly = TRUE)) {
 
+# load libraries for models and data
 library(ordinal)
 
 fit <- clmm(rating ~ temp + contact + (1 | judge), data = wine)

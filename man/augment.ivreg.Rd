@@ -82,6 +82,7 @@ objects of class \code{ivreg}, and will be supported in a later release.
 
 if (requireNamespace("AER", quietly = TRUE)) {
 
+# load libraries for models and data
 library(AER)
 
 data("CigarettesSW", package = "AER")

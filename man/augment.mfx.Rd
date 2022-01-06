@@ -146,6 +146,7 @@ objects from the \code{mfx} package.
 if (requireNamespace("mfx", quietly = TRUE)) {
 
 \dontrun{ 
+# load libraries for models and data
 library(mfx)
 
 ## Get the marginal effects from a logit regression

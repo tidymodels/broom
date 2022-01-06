@@ -72,10 +72,17 @@ currently does not take in \code{data} or \code{newdata} arguments.
 }
 \examples{
 
-\dontrun{ 
+if (requireNamespace("spdep", quietly = TRUE)) {
+  if (requireNamespace("spatialreg", quietly = TRUE)) {
+
+\dontrun{  
+      
+# load libraries for models and data      
 library(spatialreg)
+library(spdep)
+
 data(oldcol, package = "spdep")
-listw <- spdep::nb2listw(COL.nb, style = "W")
+listw <- nb2listw(COL.nb, style = "W")
 
 crime_sar <- 
 lagsarlm(CRIME ~ INC + HOVAL, 
@@ -101,6 +108,9 @@ tidy(crime_sac)
 tidy(crime_sac, conf.int = TRUE)
 glance(crime_sac)
 augment(crime_sac)
+}
+
+  }
 }
 
 }

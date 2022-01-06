@@ -55,6 +55,7 @@ of Wooldridge (2016).
 
 if (requireNamespace("lmtest", quietly = TRUE)) {
 
+# load libraries for models and data
 library(lmtest)
 
 m <- lm(dist ~ speed, data = cars)

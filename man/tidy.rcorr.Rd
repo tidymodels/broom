@@ -44,6 +44,7 @@ output.
 
 if (requireNamespace("Hmisc", quietly = TRUE)) {
 
+# load libraries for models and data
 library(Hmisc)
 
 mat <- replicate(52, rnorm(100))

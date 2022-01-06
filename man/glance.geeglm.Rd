@@ -43,7 +43,9 @@ of the appropriate type.
 
 if (requireNamespace("geepack", quietly = TRUE)) {
 
+# load libraries for models and data
 library(geepack)
+
 data(state)
 
 ds <- data.frame(state.region, state.x77)

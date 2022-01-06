@@ -35,9 +35,7 @@ specify which components to return.
 Deprecated. Please use \code{\link[tibble:as_tibble]{tibble::as_tibble()}} instead.
 }
 \details{
-Directly calls \code{\link[tibble:as_tibble]{tibble::as_tibble()}} on a \link[base:table]{base::table} object, which
-does the same things as \code{\link[base:table]{base::as.data.frame.table()}} but also gives the
-returned object \link[tibble:tibble]{tibble::tibble} class.
+Directly calls \code{\link[tibble:as_tibble]{tibble::as_tibble()}} on a \link[base:table]{base::table} object.
 }
 \seealso{
 \code{\link[tibble:as_tibble]{tibble::as_tibble.table()}}

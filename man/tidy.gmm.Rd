@@ -44,6 +44,7 @@ specify which components to return.
 
 if (requireNamespace("gmm", quietly = TRUE)) {
 
+# load libraries for models and data
 library(gmm)
 
 # examples come from the "gmm" package

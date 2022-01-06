@@ -98,7 +98,9 @@ For additional details on Cook's distance, see
 
 if (requireNamespace("betareg", quietly = TRUE)) {
 
+# load libraries for models and data
 library(betareg)
+
 data("GasolineYield", package = "betareg")
 
 mod <- betareg(yield ~ batch + temp, data = GasolineYield)

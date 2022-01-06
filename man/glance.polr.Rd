@@ -43,6 +43,7 @@ of the appropriate type.
 
 if (requireNamespace("MASS", quietly = TRUE)) {
 
+# load libraries for models and data
 library(MASS)
 
 fit <- polr(Sat ~ Infl + Type + Cont, weights = Freq, data = housing)

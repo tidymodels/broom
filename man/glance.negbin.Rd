@@ -43,7 +43,8 @@ of the appropriate type.
 \examples{
 
 if (requireNamespace("MASS", quietly = TRUE)) {
-
+ 
+# load libraries for models and data
 library(MASS)
 
 r <- glm.nb(Days ~ Sex/(Age + Eth*Lrn), data = quine)

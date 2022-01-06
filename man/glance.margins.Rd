@@ -43,6 +43,7 @@ of the appropriate type.
 
 if (requireNamespace("margins", quietly = TRUE)) {
 
+# load libraries for models and data
 library(margins)
 
 ## Example 1: Logit model ##

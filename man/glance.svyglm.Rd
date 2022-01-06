@@ -47,6 +47,7 @@ of the appropriate type.
 \examples{
 if (requireNamespace("survey", quietly = TRUE)) {
 
+# load libraries for models and data
 library(survey)
 
 set.seed(123)

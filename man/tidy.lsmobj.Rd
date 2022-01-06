@@ -41,7 +41,9 @@ passed on to \code{\link[emmeans:summary.emmGrid]{emmeans::summary.emmGrid()}} o
 
 if (requireNamespace("emmeans", quietly = TRUE)) {
 
+# load libraries for models and data
 library(emmeans)
+
 # linear model for sales of oranges per day
 oranges_lm1 <- lm(sales1 ~ price1 + price2 + day + store, data = oranges)
 

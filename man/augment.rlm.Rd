@@ -81,6 +81,7 @@ missing at this time.
 
 if (requireNamespace("MASS", quietly = TRUE)) {
 
+# load libraries for models and data
 library(MASS)
 
 r <- rlm(stack.loss ~ ., stackloss)

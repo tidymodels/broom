@@ -58,6 +58,7 @@ endogenous regressors.
 
 if (requireNamespace("AER", quietly = TRUE)) {
 
+# load libraries for models and data
 library(AER)
 
 data("CigarettesSW", package = "AER")

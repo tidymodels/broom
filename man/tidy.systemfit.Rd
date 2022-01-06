@@ -45,6 +45,7 @@ if (requireNamespace("systemfit", quietly = TRUE)) {
 
 set.seed(27)
 
+# load libraries for models and data
 library(systemfit)
 
 df <- data.frame(

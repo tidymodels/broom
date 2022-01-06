@@ -30,7 +30,9 @@ of those methods.
 
 if (requireNamespace("car", quietly = TRUE)) {
 
+# load libraries for models and data
 library(car)
+
 data(Moore)
 lt <- with(Moore, leveneTest(conformity, fcategory))
 tidy(lt)

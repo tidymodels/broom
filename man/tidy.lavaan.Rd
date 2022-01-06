@@ -58,6 +58,7 @@ specify which components to return.
 if (requireNamespace("lavaan", quietly = TRUE)) {
 
 \dontrun{
+# load libraries for models and data
 library(lavaan)
 
 cfa.fit <- cfa("F =~ x1 + x2 + x3 + x4 + x5 + x6 + x7 + x8 + x9",

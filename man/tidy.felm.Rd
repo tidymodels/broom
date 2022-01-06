@@ -57,6 +57,7 @@ specify which components to return.
 
 if (requireNamespace("lfe", quietly = TRUE)) {
 
+# load libraries for models and data
 library(lfe)
 
 # Use built-in "airquality" dataset

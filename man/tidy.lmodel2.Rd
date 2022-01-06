@@ -43,6 +43,7 @@ be valid. More information can be found in
 
 if (requireNamespace("lmodel2", quietly = TRUE)) {
 
+# load libraries for models and data
 library(lmodel2)
 
 data(mod2ex2)

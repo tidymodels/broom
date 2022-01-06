@@ -45,6 +45,7 @@ the model with \code{na.action = na.exclude}.
 
 if (requireNamespace("lm.beta", quietly = TRUE)) {
 
+# load libraries for models and data
 library(lm.beta)
 
 mod <- stats::lm(speed ~ ., data = cars)

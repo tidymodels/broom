@@ -40,6 +40,7 @@ specify which components to return.
 
 if (requireNamespace("bbmle", quietly = TRUE)) {
 
+# load libraries for models and data
 library(bbmle)
 
 x <- 0:10

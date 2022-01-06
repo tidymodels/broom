@@ -45,6 +45,8 @@ depending on the type of model estimated. \code{sigma}, \code{r.squared},
 if (requireNamespace("fixest", quietly = TRUE)) {
 
 \donttest{
+
+# load libraries for models and data
 library(fixest)
 
 gravity <- feols(log(Euros) ~ log(dist_km) | Origin + Destination + Product + Year, trade)

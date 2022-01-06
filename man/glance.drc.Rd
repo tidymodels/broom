@@ -43,6 +43,7 @@ of the appropriate type.
 
 if (requireNamespace("drc", quietly = TRUE)) {
 
+# load libraries for models and data
 library(drc)
 
 mod <- drm(dead / total ~ conc, type,

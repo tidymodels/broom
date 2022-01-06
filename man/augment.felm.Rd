@@ -72,6 +72,7 @@ missing at this time.
 
 if (requireNamespace("lfe", quietly = TRUE)) {
 
+# load libraries for models and data
 library(lfe)
 
 # Use built-in "airquality" dataset

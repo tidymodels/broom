@@ -72,8 +72,10 @@ missing at this time.
 
 if (requireNamespace("mclust", quietly = TRUE)) {
 
+# load libraries for models and data
 library(dplyr)
 library(mclust)
+
 set.seed(27)
 
 centers <- tibble::tibble(

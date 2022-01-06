@@ -43,6 +43,7 @@ specify which components to return.
 \examples{
 
 \dontrun{
+# load libraries for models and data
 library(biglm)
 
 bfit <- biglm(mpg ~ wt + disp, mtcars)

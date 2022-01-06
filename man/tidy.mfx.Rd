@@ -72,6 +72,7 @@ in the data, or ii) the average of the sample marginal effects. See
 if (requireNamespace("mfx", quietly = TRUE)) {
 
 \dontrun{ 
+# load libraries for models and data
 library(mfx)
 
 ## Get the marginal effects from a logit regression

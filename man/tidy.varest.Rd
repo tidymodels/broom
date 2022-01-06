@@ -50,6 +50,7 @@ confidence intervals for \code{varest} objects. Setting the \code{tidy} argument
 
 if (requireNamespace("vars", quietly = TRUE)) {
 
+# load libraries for models and data
 library(vars)
 data("Canada", package = "vars")
 

@@ -40,6 +40,7 @@ specify which components to return.
 
 if (requireNamespace("lmtest", quietly = TRUE)) {
 
+# load libraries for models and data
 library(lmtest)
 
 m <- lm(dist ~ speed, data = cars)

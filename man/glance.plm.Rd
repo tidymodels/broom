@@ -43,6 +43,7 @@ of the appropriate type.
 
 if (requireNamespace("plm", quietly = TRUE)) {
 
+# load libraries for models and data
 library(plm)
 
 data("Produc", package = "plm")

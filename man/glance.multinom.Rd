@@ -42,7 +42,9 @@ of the appropriate type.
 \examples{
 
 if (requireNamespace("nnet", quietly = TRUE)) {
+  if (requireNamespace("MASS", quietly = TRUE)) {
 
+# load libraries for models and data
 library(nnet)
 library(MASS)
 
@@ -59,6 +61,7 @@ fit.gear <- multinom(gear ~ mpg + factor(am), data = mtcars)
 tidy(fit.gear)
 glance(fit.gear)
 
+  }
 }
 
 }

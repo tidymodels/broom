@@ -38,6 +38,7 @@ on the output to return to a wide format.
 
 if (requireNamespace("ks", quietly = TRUE)) {
 
+# load libraries for models and data
 library(ks)
 
 dat <- replicate(2, rnorm(100))

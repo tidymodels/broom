@@ -50,8 +50,9 @@ the \pkg{ergm} class, such as those produced from weighted networks by the
 
 if (requireNamespace("ergm", quietly = TRUE)) {
 
+# load libraries for models and data
 library(ergm)
-# Using the same example as the ergm package
+
 # Load the Florentine marriage network data
 data(florentine)
 

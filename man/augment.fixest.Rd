@@ -95,6 +95,8 @@ augment.fixest only works for \code{\link[fixest:feols]{fixest::feols()}}, \code
 if (requireNamespace("fixest", quietly = TRUE)) {
 
 \donttest{
+
+# load libraries for models and data
 library(fixest)
 
 gravity <- feols(log(Euros) ~ log(dist_km) | Origin + Destination + Product + Year, trade)

@@ -43,6 +43,7 @@ of the appropriate type.
 \examples{
 
 \dontrun{
+# load libraries for models and data
 library(biglm)
 
 bfit <- biglm(mpg ~ wt + disp, mtcars)

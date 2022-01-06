@@ -59,6 +59,7 @@ and \code{statistic} columns are omitted, and only \code{estimate} and
 
 if (requireNamespace("boot", quietly = TRUE)) {
 
+# load libraries for models and data
 library(boot)
 
 clotting <- data.frame(

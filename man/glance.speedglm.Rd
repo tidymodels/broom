@@ -43,6 +43,7 @@ of the appropriate type.
 
 if (requireNamespace("speedglm", quietly = TRUE)) {
 
+# load libraries for models and data
 library(speedglm)
 
 clotting <- data.frame(

@@ -94,6 +94,7 @@ missing at this time.
 
 if (requireNamespace("survival", quietly = TRUE)) {
 
+# load libraries for models and data
 library(survival)
 
 sr <- survreg(

@@ -70,7 +70,11 @@ missing at this time.
 }
 \examples{
 
+if (requireNamespace("cluster", quietly = TRUE)) {
+
 \dontrun{
+
+# load libraries for models and data
 library(dplyr)
 library(ggplot2)
 library(cluster)
@@ -88,7 +92,9 @@ augment(p, x) \%>\%
   ggplot(aes(compounds, input_fields)) +
   geom_point(aes(color = .cluster)) +
   geom_text(aes(label = cluster), data = tidy(p), size = 10)
-}   
+} 
+
+}  
   
 }
 \seealso{
