@@ -20,8 +20,6 @@
 #' # examples without requiring the model-supplying package to be installed.
 #' if (requireNamespace("joineRML", quietly = TRUE)) {
 #' 
-#' \dontrun{
-#' 
 #' 
 #' # load libraries for models and data
 #' library(joineRML)
@@ -67,7 +65,6 @@
 #'
 #' # extract model statistics
 #' glance(fit)
-#' }
 #' }
 #'
 #' @export

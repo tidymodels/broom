@@ -39,7 +39,6 @@
 #' # examples without requiring the model-supplying package to be installed.
 #' if (requireNamespace("mfx", quietly = TRUE)) {
 #' 
-#' \dontrun{ 
 #' # load libraries for models and data
 #' library(mfx)
 #' 
@@ -62,7 +61,6 @@
 #' tidy(mod_probmfx, conf.int = TRUE)
 #' augment(mod_probmfx)
 #' glance(mod_probmfx)
-#' }
 #' 
 #' }
 #' 
@@ -243,7 +241,10 @@ glance.probitmfx <- glance.mfx
 #'   "conf.high"
 #' )
 #' @examples
-#' \dontrun{ 
+#' # feel free to ignore the following line—it allows {broom} to supply 
+#' # examples without requiring the model-supplying package to be installed.
+#' if (requireNamespace("mfx", quietly = TRUE)) {
+#'  
 #' library(mfx)
 #' 
 #' # Simulate some data

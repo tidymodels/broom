@@ -68,7 +68,10 @@ of the appropriate type.
 }
 \examples{
 
-\dontrun{
+# feel free to ignore the following line—it allows {broom} to supply 
+# examples without requiring the model-supplying package to be installed.
+if (requireNamespace("lavaan", quietly = TRUE)) {
+
 library(lavaan)
 
 cfa.fit <- cfa(
@@ -76,6 +79,7 @@ cfa.fit <- cfa(
   data = HolzingerSwineford1939, group = "school"
 )
 glance(cfa.fit)
+
 }
 
 }

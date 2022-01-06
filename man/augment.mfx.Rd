@@ -147,7 +147,6 @@ objects from the \code{mfx} package.
 # examples without requiring the model-supplying package to be installed.
 if (requireNamespace("mfx", quietly = TRUE)) {
 
-\dontrun{ 
 # load libraries for models and data
 library(mfx)
 
@@ -170,7 +169,6 @@ mod_probmfx <- probitmfx(am ~ cyl + hp + wt, atmean = TRUE, data = mtcars)
 tidy(mod_probmfx, conf.int = TRUE)
 augment(mod_probmfx)
 glance(mod_probmfx)
-}
 
 }
 

@@ -17,7 +17,6 @@
 #' if (requireNamespace("spdep", quietly = TRUE)) {
 #'   if (requireNamespace("spatialreg", quietly = TRUE)) {
 #' 
-#' \dontrun{  
 #'       
 #' # load libraries for models and data      
 #' library(spatialreg)
@@ -50,7 +49,6 @@
 #' tidy(crime_sac, conf.int = TRUE)
 #' glance(crime_sac)
 #' augment(crime_sac)
-#' }
 #' 
 #'   }
 #' }

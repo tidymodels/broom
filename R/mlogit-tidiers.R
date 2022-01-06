@@ -15,7 +15,6 @@
 #' # examples without requiring the model-supplying package to be installed.
 #' if (requireNamespace("mlogit", quietly = TRUE)) {
 #' 
-#' \dontrun{
 #' # load libraries for models and data
 #' library(mlogit)
 #' 
@@ -27,7 +26,6 @@
 #' tidy(m)
 #' augment(m)
 #' glance(m)
-#' }
 #' 
 #' }
 #' 

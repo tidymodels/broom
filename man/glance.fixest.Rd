@@ -46,8 +46,6 @@ depending on the type of model estimated. \code{sigma}, \code{r.squared},
 # examples without requiring the model-supplying package to be installed.
 if (requireNamespace("fixest", quietly = TRUE)) {
 
-\donttest{
-
 # load libraries for models and data
 library(fixest)
 
@@ -76,8 +74,6 @@ gravity_summ <- summary(gravity, cluster = c("Product", "Year"))
 tidy(gravity_summ, conf.int = TRUE)
 
 # approach (1) is preferred.
-
-}
 
 }
 

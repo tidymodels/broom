@@ -43,7 +43,10 @@ of the appropriate type.
 This glance method wraps \code{\link[=glance.betareg]{glance.betareg()}} for \code{\link[mfx:betamfx]{mfx::betamfx()}} objects.
 }
 \examples{
-\dontrun{ 
+# feel free to ignore the following line—it allows {broom} to supply 
+# examples without requiring the model-supplying package to be installed.
+if (requireNamespace("mfx", quietly = TRUE)) {
+ 
 library(mfx)
 
 # Simulate some data

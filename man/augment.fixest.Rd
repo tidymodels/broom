@@ -96,8 +96,6 @@ augment.fixest only works for \code{\link[fixest:feols]{fixest::feols()}}, \code
 # examples without requiring the model-supplying package to be installed.
 if (requireNamespace("fixest", quietly = TRUE)) {
 
-\donttest{
-
 # load libraries for models and data
 library(fixest)
 
@@ -126,8 +124,6 @@ gravity_summ <- summary(gravity, cluster = c("Product", "Year"))
 tidy(gravity_summ, conf.int = TRUE)
 
 # approach (1) is preferred.
-
-}
 
 }
 

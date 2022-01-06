@@ -36,7 +36,6 @@
 #' # examples without requiring the model-supplying package to be installed.
 #' if (requireNamespace("lavaan", quietly = TRUE)) {
 #' 
-#' \dontrun{
 #' # load libraries for models and data
 #' library(lavaan)
 #'
@@ -45,7 +44,6 @@
 #' )
 #'
 #' tidy(cfa.fit)
-#' }
 #' 
 #' }
 #' 
@@ -109,8 +107,11 @@ tidy.lavaan <- function(x, conf.int = FALSE, conf.level = 0.95, ...) {
 #' Pharmacy, 13(3), 634-643. https://doi.org/10.1016/j.sapharm.2016.06.006
 #'
 #' @examples
-#'
-#' \dontrun{
+#' 
+#' # feel free to ignore the following line—it allows {broom} to supply 
+#' # examples without requiring the model-supplying package to be installed.
+#' if (requireNamespace("lavaan", quietly = TRUE)) {
+#' 
 #' library(lavaan)
 #'
 #' cfa.fit <- cfa(
@@ -118,6 +119,7 @@ tidy.lavaan <- function(x, conf.int = FALSE, conf.level = 0.95, ...) {
 #'   data = HolzingerSwineford1939, group = "school"
 #' )
 #' glance(cfa.fit)
+#' 
 #' }
 #' 
 #' @export

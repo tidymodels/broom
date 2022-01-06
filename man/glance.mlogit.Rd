@@ -45,7 +45,6 @@ of the appropriate type.
 # examples without requiring the model-supplying package to be installed.
 if (requireNamespace("mlogit", quietly = TRUE)) {
 
-\dontrun{
 # load libraries for models and data
 library(mlogit)
 
@@ -57,7 +56,6 @@ m <- mlogit(mode ~ price + catch | income, data = Fish)
 tidy(m)
 augment(m)
 glance(m)
-}
 
 }
 

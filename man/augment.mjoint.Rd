@@ -95,8 +95,6 @@ for the fixed and random effects of the longitudinal submodel.
 # examples without requiring the model-supplying package to be installed.
 if (requireNamespace("joineRML", quietly = TRUE)) {
 
-\dontrun{
-
 
 # load libraries for models and data
 library(joineRML)
@@ -142,7 +140,6 @@ hvd2 <- augment(fit)
 
 # extract model statistics
 glance(fit)
-}
 }
 
 }

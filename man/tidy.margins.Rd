@@ -68,12 +68,8 @@ tidy(marg_log, conf.int = TRUE)
 # requires running the underlying model again. quick for this example
 glance(marg_log) 
 
-\dontrun{
-# not supported
-augment(marg_log) 
-}
-
-# but can get the same info by running on the underlying model
+# augmenting `margins` outputs isn't supported, but
+# you can get the same info by running on the underlying model
 augment(mod_log) 
 
 # example 2: threeway interaction terms
