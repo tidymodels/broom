@@ -10,6 +10,7 @@
 #' 
 #' if (requireNamespace("zoo", quietly = TRUE)) {
 #'
+#' # load libraries for models and data
 #' library(zoo)
 #' library(ggplot2)
 #'

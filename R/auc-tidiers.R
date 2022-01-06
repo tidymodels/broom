@@ -10,7 +10,9 @@
 #' 
 #' if (requireNamespace("AUC", quietly = TRUE)) {
 #'
+#' # load libraries for models and data
 #' library(AUC)
+#' 
 #' data(churn)
 #' r <- roc(churn$predictions, churn$labels)
 #'

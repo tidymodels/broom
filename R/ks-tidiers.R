@@ -14,6 +14,7 @@
 #' 
 #' if (requireNamespace("ks", quietly = TRUE)) {
 #'
+#' # load libraries for models and data
 #' library(ks)
 #'
 #' dat <- replicate(2, rnorm(100))

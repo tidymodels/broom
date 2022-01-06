@@ -11,6 +11,7 @@
 #' 
 #' if (requireNamespace("multcomp", quietly = TRUE)) {
 #'
+#' # load libraries for models and data
 #' library(multcomp)
 #' library(ggplot2)
 #'

@@ -19,8 +19,12 @@
 #' if (requireNamespace("joineRML", quietly = TRUE)) {
 #' 
 #' \dontrun{
-#' # Fit a joint model with bivariate longitudinal outcomes
+#' 
+#' 
+#' # load libraries for models and data
 #' library(joineRML)
+#' 
+#' # Fit a joint model with bivariate longitudinal outcomes
 #' data(heart.valve)
 #' hvd <- heart.valve[!is.na(heart.valve$log.grad) &
 #'   !is.na(heart.valve$log.lvmi) &

@@ -24,8 +24,9 @@
 #' 
 #' if (requireNamespace("ergm", quietly = TRUE)) {
 #'
+#' # load libraries for models and data
 #' library(ergm)
-#' # Using the same example as the ergm package
+#' 
 #' # Load the Florentine marriage network data
 #' data(florentine)
 #'

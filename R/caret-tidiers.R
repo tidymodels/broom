@@ -21,6 +21,7 @@
 #' 
 #' if (requireNamespace("caret", quietly = TRUE)) {
 #'
+#' # load libraries for models and data
 #' library(caret)
 #'
 #' set.seed(27)

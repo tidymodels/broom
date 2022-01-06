@@ -17,6 +17,7 @@
 #' 
 #' if (requireNamespace("Kendall", quietly = TRUE)) {
 #' 
+#' # load libraries for models and data
 #' library(Kendall)
 #'
 #' A <- c(2.5, 2.5, 2.5, 2.5, 5, 6.5, 6.5, 10, 10, 10, 10, 10, 14, 14, 14, 16, 17)

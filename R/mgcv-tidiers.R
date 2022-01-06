@@ -29,7 +29,10 @@
 #' 
 #' if (requireNamespace("mgcv", quietly = TRUE)) {
 #'
-#' g <- mgcv::gam(mpg ~ s(hp) + am + qsec, data = mtcars)
+#' # load libraries for models and data
+#' library(mgcv)
+#'
+#' g <- gam(mpg ~ s(hp) + am + qsec, data = mtcars)
 #'
 #' tidy(g)
 #' tidy(g, parametric = TRUE)

@@ -13,7 +13,9 @@
 #' @examples
 #' 
 #' if (requireNamespace("nnet", quietly = TRUE)) {
+#'   if (requireNamespace("MASS", quietly = TRUE)) {
 #'
+#' # load libraries for models and data
 #' library(nnet)
 #' library(MASS)
 #'
@@ -30,6 +32,7 @@
 #' tidy(fit.gear)
 #' glance(fit.gear)
 #' 
+#'   }
 #' }
 #' 
 #' @aliases multinom_tidiers nnet_tidiers

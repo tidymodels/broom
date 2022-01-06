@@ -21,6 +21,7 @@
 #' 
 #' if (requireNamespace("survival", quietly = TRUE)) {
 #'
+#' # load libraries for models and data
 #' library(survival)
 #'
 #' afit <- aareg(

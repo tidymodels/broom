@@ -19,8 +19,10 @@
 #' @examples
 #' 
 #' if (requireNamespace("glmnet", quietly = TRUE)) {
-#'
+#' 
+#' # load libraries for models and data
 #' library(glmnet)
+#' 
 #' set.seed(27)
 #'
 #' nobs <- 100

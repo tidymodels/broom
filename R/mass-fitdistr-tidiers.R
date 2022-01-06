@@ -10,10 +10,12 @@
 #' 
 #' if (requireNamespace("MASS", quietly = TRUE)) {
 #'
+#' # load libraries for models and data
+#' library(MASS)
+#' 
 #' set.seed(2015)
 #' x <- rnorm(100, 5, 2)
 #'
-#' library(MASS)
 #' fit <- fitdistr(x, dnorm, list(mean = 3, sd = 1))
 #'
 #' tidy(fit)

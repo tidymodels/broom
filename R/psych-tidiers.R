@@ -19,6 +19,7 @@
 #' 
 #' if (requireNamespace("psych", quietly = TRUE)) {
 #'
+#' # load libraries for models and data
 #' library(psych)
 #'
 #' rater1 <- 1:9

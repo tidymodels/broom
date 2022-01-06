@@ -22,6 +22,7 @@
 #' 
 #' if (requireNamespace("survival", quietly = TRUE)) {
 #'
+#' # load libraries for models and data
 #' library(survival)
 #' cfit <- coxph(Surv(time, status) ~ age + sex, lung)
 #' sfit <- survfit(cfit)

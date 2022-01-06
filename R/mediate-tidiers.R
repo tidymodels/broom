@@ -14,6 +14,7 @@
 #' 
 #' if (requireNamespace("mediation", quietly = TRUE)) {
 #' 
+#' # load libraries for models and data
 #' library(mediation)
 #' data(jobs)
 #'

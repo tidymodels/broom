@@ -17,7 +17,10 @@
 #' 
 #' if (requireNamespace("leaps", quietly = TRUE)) {
 #'
-#' all_fits <- leaps::regsubsets(hp ~ ., mtcars)
+#' # load libraries for models and data
+#' library(leaps)
+#'
+#' all_fits <- regsubsets(hp ~ ., mtcars)
 #' tidy(all_fits)
 #' 
 #' }

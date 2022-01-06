@@ -19,6 +19,7 @@
 #' 
 #' if (requireNamespace("tseries", quietly = TRUE)) {
 #'
+#' # load libraries for models and data
 #' library(tseries)
 #'
 #' data(EuStockMarkets)

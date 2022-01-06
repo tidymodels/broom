@@ -24,6 +24,7 @@
 #' 
 #' if (requireNamespace("vars", quietly = TRUE)) {
 #' 
+#' # load libraries for models and data
 #' library(vars)
 #' data("Canada", package = "vars")
 #' 

@@ -10,12 +10,15 @@
 #' @examples
 #'
 #' if (requireNamespace("robust", quietly = TRUE)) {
-#'   library(robust)
+#' 
+#' # load libraries for models and data
+#' library(robust)
 #'
-#'   gm <- glmRob(am ~ wt, data = mtcars, family = "binomial")
+#' gm <- glmRob(am ~ wt, data = mtcars, family = "binomial")
 #'
-#'   tidy(gm)
-#'   glance(gm)
+#' tidy(gm)
+#' glance(gm)
+#' 
 #' }
 #' @export
 #' @family robust tidiers

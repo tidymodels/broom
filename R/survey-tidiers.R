@@ -106,6 +106,7 @@ tidy.svyglm <- function(x, conf.int = FALSE, conf.level = 0.95,
 #' @examples
 #' if (requireNamespace("survey", quietly = TRUE)) {
 #' 
+#' # load libraries for models and data
 #' library(survey)
 #'
 #' set.seed(123)

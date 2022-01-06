@@ -16,6 +16,7 @@
 #' 
 #' if (requireNamespace("poLCA", quietly = TRUE)) {
 #'
+#' # load libraries for models and data
 #' library(poLCA)
 #' library(dplyr)
 #'
