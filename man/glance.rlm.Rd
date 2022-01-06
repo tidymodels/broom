@@ -44,7 +44,7 @@ of the appropriate type.
 
 if (requireNamespace("MASS", quietly = TRUE)) {
 
-# load libraries for models and data
+#load libraries for models and data
 library(MASS)
 
 r <- rlm(stack.loss ~ ., stackloss)

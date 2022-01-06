@@ -51,9 +51,9 @@ subcoh <- nwtco$in.subcohort
 selccoh <- with(nwtco, rel == 1 | subcoh == 1)
 ccoh.data <- nwtco[selccoh, ]
 ccoh.data$subcohort <- subcoh[selccoh]
-## central-lab histology
+# central-lab histology
 ccoh.data$histol <- factor(ccoh.data$histol, labels = c("FH", "UH"))
-## tumour stage
+# tumour stage
 ccoh.data$stage <- factor(ccoh.data$stage, labels = c("I", "II", "III", "IV"))
 ccoh.data$age <- ccoh.data$age / 12 # Age in years
 

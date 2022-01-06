@@ -15,7 +15,7 @@
 #' if (requireNamespace("nnet", quietly = TRUE)) {
 #'   if (requireNamespace("MASS", quietly = TRUE)) {
 #'
-#' # load libraries for models and data
+#' #load libraries for models and data
 #' library(nnet)
 #' library(MASS)
 #'

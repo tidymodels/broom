@@ -32,13 +32,13 @@ specify which components to return.
 
 if (requireNamespace("zoo", quietly = TRUE)) {
 
-# load libraries for models and data
+#load libraries for models and data
 library(zoo)
 library(ggplot2)
 
 set.seed(1071)
 
-# data generated as shown in the zoo vignette
+#data generated as shown in the zoo vignette
 Z.index <- as.Date(sample(12450:12500, 10))
 Z.data <- matrix(rnorm(30), ncol = 3)
 colnames(Z.data) <- c("Aa", "Bb", "Cc")

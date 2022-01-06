@@ -74,7 +74,9 @@ newdata <- mtcars \%>\%
 augment(mod, newdata = newdata)
 
 # ggplot2 example where we also construct 95\% prediction interval
-mod2 <- lm(mpg ~ wt, data = mtcars) ## simpler bivariate model since we're plotting in 2D
+
+# simpler bivariate model since we're plotting in 2D
+mod2 <- lm(mpg ~ wt, data = mtcars) 
 
 au <- augment(mod2, newdata = newdata, interval = "prediction")
 

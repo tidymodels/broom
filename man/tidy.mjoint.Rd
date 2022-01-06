@@ -59,10 +59,10 @@ if (requireNamespace("joineRML", quietly = TRUE)) {
 \dontrun{
 
 
-# load libraries for models and data
+#load libraries for models and data
 library(joineRML)
 
-# Fit a joint model with bivariate longitudinal outcomes
+#Fit a joint model with bivariate longitudinal outcomes
 data(heart.valve)
 hvd <- heart.valve[!is.na(heart.valve$log.grad) &
   !is.na(heart.valve$log.lvmi) &
@@ -82,24 +82,24 @@ fit <- mjoint(
   timeVar = "time"
 )
 
-# Extract the survival fixed effects
+#Extract the survival fixed effects
 tidy(fit)
 
-# Extract the longitudinal fixed effects
+#Extract the longitudinal fixed effects
 tidy(fit, component = "longitudinal")
 
-# Extract the survival fixed effects with confidence intervals
+#Extract the survival fixed effects with confidence intervals
 tidy(fit, ci = TRUE)
 
-# Extract the survival fixed effects with confidence intervals based
-# on bootstrapped standard errors
+#Extract the survival fixed effects with confidence intervals based
+#on bootstrapped standard errors
 bSE <- bootSE(fit, nboot = 5, safe.boot = TRUE)
 tidy(fit, boot_se = bSE, ci = TRUE)
 
-# Augment original data with fitted longitudinal values and residuals
+#Augment original data with fitted longitudinal values and residuals
 hvd2 <- augment(fit)
 
-# Extract model statistics
+#Extract model statistics
 glance(fit)
 }
 }

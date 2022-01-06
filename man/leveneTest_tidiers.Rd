@@ -30,7 +30,7 @@ of those methods.
 
 if (requireNamespace("car", quietly = TRUE)) {
 
-# load libraries for models and data
+#load libraries for models and data
 library(car)
 
 data(Moore)

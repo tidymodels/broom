@@ -93,7 +93,7 @@ glance.summary.lm <- function(x, ...) {
         )
       } else {NA_real_},
       df = if (!int_only) {fstatistic["numdf"]} else {NA_real_},
-      ## We can back out one or two more stats that would normally come with tidy.lm
+      # We can back out one or two more stats that would normally come with tidy.lm
       df.residual = as.integer(x$fstatistic["dendf"]),
       nobs = sum(as.integer(x$fstatistic[c("numdf", "dendf")])) + 1
     )

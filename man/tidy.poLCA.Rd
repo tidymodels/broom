@@ -32,7 +32,7 @@ specify which components to return.
 
 if (requireNamespace("poLCA", quietly = TRUE)) {
 
-# load libraries for models and data
+#load libraries for models and data
 library(poLCA)
 library(dplyr)
 
@@ -50,7 +50,7 @@ library(ggplot2)
 ggplot(tidy(M1), aes(factor(class), estimate, fill = factor(outcome))) +
   geom_bar(stat = "identity", width = 1) +
   facet_wrap(~variable)
-## Three-class model with a single covariate.
+#Three-class model with a single covariate.
 
 data(election)
 f2a <- cbind(
@@ -62,7 +62,7 @@ nes2a <- poLCA(f2a, election, nclass = 3, nrep = 5, verbose = FALSE)
 td <- tidy(nes2a)
 td
 
-# show
+#show
 
 ggplot(td, aes(outcome, estimate, color = factor(class), group = class)) +
   geom_line() +
@@ -73,8 +73,8 @@ au <- augment(nes2a)
 au
 count(au, .class)
 
-# if the original data is provided, it leads to NAs in new columns
-# for rows that weren't predicted
+#if the original data is provided, it leads to NAs in new columns
+#for rows that weren't predicted
 au2 <- augment(nes2a, data = election)
 au2
 dim(au2)

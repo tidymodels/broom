@@ -21,7 +21,7 @@
 #' 
 #' if (requireNamespace("caret", quietly = TRUE)) {
 #'
-#' # load libraries for models and data
+#' #load libraries for models and data
 #' library(caret)
 #'
 #' set.seed(27)
@@ -37,7 +37,7 @@
 #' tidy(two_class_cm)
 #' tidy(two_class_cm, by_class = FALSE)
 #'
-#' # multiclass example
+#' #multiclass example
 #'
 #' six_class_sample1 <- as.factor(sample(letters[1:6], 100, TRUE))
 #' six_class_sample2 <- as.factor(sample(letters[1:6], 100, TRUE))

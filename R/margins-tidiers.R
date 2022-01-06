@@ -21,7 +21,7 @@
 #' # load libraries for models and data
 #' library(margins)
 #' 
-#' ## Example 1: Logit model ##
+#' # Example 1: Logit model 
 #' 
 #' mod_log <- glm(am ~ cyl + hp + wt, data = mtcars, family = binomial)
 #' 
@@ -34,11 +34,15 @@
 #' # Get tidied marginal effects
 #' tidy(marg_log)
 #' tidy(marg_log, conf.int = TRUE)
-#' glance(marg_log) ## Requires running the underlying model again. Quick for this example.
-#' \dontrun{augment(marg_log) ## Not supported.}
-#' augment(mod_log) ## But can get the same info by running on the underlying model.
+#' 
+#' # Requires running the underlying model again. Quick for this example.
+#' glance(marg_log) 
+#' 
+#' \dontrun{augment(marg_log) # Not supported.}
+#' 
+#' augment(mod_log) # But can get the same info by running on the underlying model.
 #'
-#' ## Example 2: Threeway interaction terms ##
+#' # Example 2: Threeway interaction terms
 #' 
 #' mod_ie <- lm(mpg ~ wt * cyl * disp, data = mtcars)
 #' 
@@ -59,8 +63,8 @@
 #' # Marginal effects of one interaction variable (here: wt), modulated at 
 #' # specific values of the two other interaction variables (here: cyl and drat)
 #' marg_ie2 <- margins(mod_ie,
-#'                     variables = "wt", ## Main var
-#'                     at = list(cyl = c(4,6,8), drat = c(3, 3.5, 4))) ## Modulating vars
+#'                     variables = "wt", # Main var
+#'                     at = list(cyl = c(4,6,8), drat = c(3, 3.5, 4))) # Modulating vars
 #' tidy(marg_ie2)
 #' 
 #' }
@@ -73,7 +77,7 @@ tidy.margins <- function(x, conf.int = FALSE, conf.level = 0.95, ...) {
   
     ret <- as_tibble(summary(x, level = conf.level))
     
-    ## IF statement for tidying any "at" variables.
+    # IF statement for tidying any "at" variables.
     if ("at" %in% names(attributes(x))) {
       at_vars <- setdiff(names(attributes(x)$at), "index")
       std_cols <- c("factor", "AME", "SE", "z", "p", "lower", "upper")
@@ -93,9 +97,9 @@ tidy.margins <- function(x, conf.int = FALSE, conf.level = 0.95, ...) {
           }
       
     }
-    ## End of IF statement for tidying any "at" variables.
+    # End of IF statement for tidying any "at" variables.
     
-    ## Rename and reorder variables
+    # Rename and reorder variables
     ret <-
       ret %>%
       dplyr::select(
@@ -109,12 +113,12 @@ tidy.margins <- function(x, conf.int = FALSE, conf.level = 0.95, ...) {
         conf.high = .data$upper
         )
     
-    ## Remove confidence interval if not specified
+    # Remove confidence interval if not specified
     if(!conf.int) {
       ret <- dplyr::select(ret, -c(conf.low, conf.high))
     }
     
-    ## Return tidied tibble object
+    # Return tidied tibble object
     return(ret)
 }
 

@@ -51,8 +51,6 @@
 #' @seealso [tidy()], [boot::boot()], [boot::tsboot()], [boot::boot.ci()],
 #'   [rsample::bootstraps()]
 tidy.boot <- function(x,
-                      ## is there a convention for the default value of
-                      ## conf.int?
                       conf.int = FALSE,
                       conf.level = 0.95,
                       conf.method = c("perc", "bca", "basic", "norm"),
@@ -113,8 +111,8 @@ tidy.boot <- function(x,
       conf = conf.level, type = conf.method
     )
 
-    ## boot.ci uses c("norm", "basic", "perc", "stud") for types
-    ## stores them with longer names
+    # boot.ci uses c("norm", "basic", "perc", "stud") for types
+    # stores them with longer names
     ci.pos <- pmatch(conf.method, names(ci.list[[1]]))
 
     if (conf.method == "norm") {

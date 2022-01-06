@@ -25,7 +25,7 @@ fit2 <- lfe::felm(v2 ~ v3 | id + v1, df, na.action = na.exclude)
 # with clus
 fit3 <- lfe::felm(v2 ~ v3 | 0 | 0 | id + v1, df, na.action = na.exclude)
 
-## with multiple outcomes
+# with multiple outcomes
 fit_multi <- lfe::felm(v1 + v2 ~ v3 , df)
 fit_Y2 <- lfe::felm(v1 ~ v3 , df)
 

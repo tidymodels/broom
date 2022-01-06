@@ -46,7 +46,7 @@ if (requireNamespace("margins", quietly = TRUE)) {
 # load libraries for models and data
 library(margins)
 
-## Example 1: Logit model ##
+# Example 1: Logit model 
 
 mod_log <- glm(am ~ cyl + hp + wt, data = mtcars, family = binomial)
 
@@ -59,11 +59,15 @@ marg_log <- margins(mod_log)
 # Get tidied marginal effects
 tidy(marg_log)
 tidy(marg_log, conf.int = TRUE)
-glance(marg_log) ## Requires running the underlying model again. Quick for this example.
-\dontrun{augment(marg_log) ## Not supported.}
-augment(mod_log) ## But can get the same info by running on the underlying model.
 
-## Example 2: Threeway interaction terms ##
+# Requires running the underlying model again. Quick for this example.
+glance(marg_log) 
+
+\dontrun{augment(marg_log) # Not supported.}
+
+augment(mod_log) # But can get the same info by running on the underlying model.
+
+# Example 2: Threeway interaction terms
 
 mod_ie <- lm(mpg ~ wt * cyl * disp, data = mtcars)
 
@@ -83,8 +87,8 @@ tidy(marg_ie1)
 # Marginal effects of one interaction variable (here: wt), modulated at 
 # specific values of the two other interaction variables (here: cyl and drat)
 marg_ie2 <- margins(mod_ie,
-                    variables = "wt", ## Main var
-                    at = list(cyl = c(4,6,8), drat = c(3, 3.5, 4))) ## Modulating vars
+                    variables = "wt", # Main var
+                    at = list(cyl = c(4,6,8), drat = c(3, 3.5, 4))) # Modulating vars
 tidy(marg_ie2)
 
 }

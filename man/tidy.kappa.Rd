@@ -38,7 +38,7 @@ to \code{\link[psych:kappa]{psych::cohen.kappa()}} when creating the \code{kappa
 
 if (requireNamespace("psych", quietly = TRUE)) {
 
-# load libraries for models and data
+#load libraries for models and data
 library(psych)
 
 rater1 <- 1:9
@@ -47,7 +47,7 @@ ck <- cohen.kappa(cbind(rater1, rater2))
 
 tidy(ck)
 
-# graph the confidence intervals
+#graph the confidence intervals
 library(ggplot2)
 ggplot(tidy(ck), aes(estimate, type)) +
   geom_point() +

@@ -35,7 +35,7 @@ For tidiers for robust models from the \pkg{MASS} package see
 
 if (requireNamespace("robust", quietly = TRUE)) {
 
-# load libraries for models and data
+#load libraries for models and data
 library(robust)
 
 gm <- glmRob(am ~ wt, data = mtcars, family = "binomial")

@@ -46,7 +46,7 @@ At least one term will have been used to model the precision \code{phi}.
 
 if (requireNamespace("betareg", quietly = TRUE)) {
 
-# load libraries for models and data
+#load libraries for models and data
 library(betareg)
 
 data("GasolineYield", package = "betareg")

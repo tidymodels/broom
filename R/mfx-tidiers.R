@@ -41,17 +41,17 @@
 #' # load libraries for models and data
 #' library(mfx)
 #' 
-#' ## Get the marginal effects from a logit regression
+#' # Get the marginal effects from a logit regression
 #' mod_logmfx <- logitmfx(am ~ cyl + hp + wt, atmean = TRUE, data = mtcars)
 #' tidy(mod_logmfx, conf.int = TRUE)
 #' 
-#' ## Compare with the naive model coefficients of the same logit call (not run)
+#' # Compare with the naive model coefficients of the same logit call (not run)
 #' # tidy(glm(am ~ cyl + hp + wt, family = binomial, data = mtcars), conf.int = TRUE)
 #' 
 #' augment(mod_logmfx)
 #' glance(mod_logmfx)
 #' 
-#' ## Another example, this time using probit regression
+#' # Another example, this time using probit regression
 #' mod_probmfx <- probitmfx(am ~ cyl + hp + wt, atmean = TRUE, data = mtcars)
 #' tidy(mod_probmfx, conf.int = TRUE)
 #' augment(mod_probmfx)
@@ -69,11 +69,11 @@ tidy.mfx <-
     x_tidy <- as_tibble(x$mfxest, rownames = "term")
     colnames(x_tidy) <- c("term", "estimate", "std.error", "statistic", "p.value")
     
-    ## Optional: Add "atmean" column
-    ## If no "atmean" argument is specified in the model call, then will default to TRUE
+    # Optional: Add "atmean" column
+    # If no "atmean" argument is specified in the model call, then will default to TRUE
     if (!grepl("atmean", format(c(x$call)))) {
       x_tidy$atmean <- TRUE
-      ## Else, extract the user-specified "atmean" argument from the model call
+      # Else, extract the user-specified "atmean" argument from the model call
     } else {
       x_tidy$atmean <- as.logical(gsub(".*atmean = |,.*|).*", "", format(c(x$call))))
     }
@@ -144,7 +144,7 @@ augment.mfx <- function(x,
                         type.predict = c("link", "response", "terms"),
                         type.residuals = c("deviance", "pearson"),
                         se_fit = FALSE, ...) {
-  ## Use augment.glm() method on internal fit object
+  # Use augment.glm() method on internal fit object
   augment.glm(x$fit, 
               data = data,
               newdata = newdata,
@@ -195,7 +195,7 @@ augment.probitmfx <- augment.mfx
 #'   [mfx::poissonmfx()], [mfx::probitmfx()]
 #' @export
 glance.mfx <- function(x, ...) {
-  ## Use glance.glm() method on internal fit object
+  # Use glance.glm() method on internal fit object
   glance.glm(x$fit)
 }
 #' @rdname glance.mfx
@@ -240,14 +240,14 @@ glance.probitmfx <- glance.mfx
 #' \dontrun{ 
 #' library(mfx)
 #' 
-#' ## Simulate some data
+#' # Simulate some data
 #' set.seed(12345)
 #' n = 1000
 #' x = rnorm(n)
 #'
-#' ## Beta outcome
+#' # Beta outcome
 #' y = rbeta(n, shape1 = plogis(1 + 0.5 * x), shape2 = (abs(0.2*x)))
-#' ## Use Smithson and Verkuilen correction
+#' # Use Smithson and Verkuilen correction
 #' y = (y*(n-1)+0.5)/n
 #' 
 #' d = data.frame(y,x)
@@ -255,7 +255,7 @@ glance.probitmfx <- glance.mfx
 #' 
 #' tidy(mod_betamfx, conf.int = TRUE)
 #' 
-#' ## Compare with the naive model coefficients of the equivalent betareg call (not run)
+#' # Compare with the naive model coefficients of the equivalent betareg call (not run)
 #' # tidy(betamfx(y ~ x | x, data = d), conf.int = TRUE)
 #' 
 #' augment(mod_betamfx)
@@ -292,7 +292,7 @@ augment.betamfx <- function(x,
                             type.predict = c("response", "link", "precision", "variance", "quantile"),
                             type.residuals = c("sweighted2", "deviance", "pearson", "response", "weighted", "sweighted"),
                             ...) {
-  ## Use augment.betareg() method on internal fit object
+  # Use augment.betareg() method on internal fit object
   augment.betareg(x$fit,
                   data = data,
                   newdata = newdata,
@@ -321,6 +321,6 @@ augment.betamfx <- function(x,
 #' @seealso [glance.betareg()], [mfx::betamfx()]
 #' @export
 glance.betamfx <- function(x, ...) {
-  ## Use glance.betareg() method on internal fit object
+  # Use glance.betareg() method on internal fit object
   glance.betareg(x$fit)
 }

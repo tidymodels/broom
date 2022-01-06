@@ -40,7 +40,7 @@
 #' glance(gravity)
 #' augment(gravity, trade)
 #'
-#' ## To get robust or clustered SEs, users can either:
+#' # To get robust or clustered SEs, users can either:
 #' # 1) Or, specify the arguments directly in the tidy() call
 #' 
 #' tidy(gravity, conf.int = TRUE, cluster = c("Product", "Year"))

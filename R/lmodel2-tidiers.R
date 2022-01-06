@@ -27,7 +27,7 @@
 #' 
 #' if (requireNamespace("lmodel2", quietly = TRUE)) {
 #'
-#' # load libraries for models and data
+#' #load libraries for models and data
 #' library(lmodel2)
 #'
 #' data(mod2ex2)
@@ -37,7 +37,7 @@
 #' tidy(Ex2.res)
 #' glance(Ex2.res)
 #'
-#' # this allows coefficient plots with ggplot2
+#' #this allows coefficient plots with ggplot2
 #' library(ggplot2)
 #' ggplot(tidy(Ex2.res), aes(estimate, term, color = method)) +
 #'   geom_point() +

@@ -33,7 +33,7 @@ specify which components to return.
 
 if (requireNamespace("survival", quietly = TRUE)) {
 
-# load libraries for models and data
+#load libraries for models and data
 library(survival)
 sexpfit <- survexp(
   futime ~ 1,

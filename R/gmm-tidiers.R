@@ -16,7 +16,7 @@
 #' library(gmm)
 #'
 #' # examples come from the "gmm" package
-#' ## CAPM test with GMM
+#' # CAPM test with GMM
 #' data(Finance)
 #' r <- Finance[1:300, 1:10]
 #' rm <- Finance[1:300, "rm"]
@@ -57,7 +57,7 @@
 #' tidy(res_black)
 #' tidy(res_black, conf.int = TRUE)
 #'
-#' ## APT test with Fama-French factors and GMM
+#' #APT test with Fama-French factors and GMM
 #'
 #' f1 <- zm
 #' f2 <- Finance[1:300, "hml"] - rf
@@ -68,7 +68,7 @@
 #' td2 <- tidy(res2, conf.int = TRUE)
 #' td2
 #'
-#' # coefficient plot
+#' #coefficient plot
 #' td2 %>%
 #'   mutate(variable = reorder(term, estimate)) %>%
 #'   ggplot(aes(estimate, variable)) +
