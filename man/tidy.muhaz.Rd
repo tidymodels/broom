@@ -40,6 +40,7 @@ library(muhaz)
 library(survival)
 
 x <- muhaz(ovarian$futime, ovarian$fustat)
+
 tidy(x)
 glance(x)
 

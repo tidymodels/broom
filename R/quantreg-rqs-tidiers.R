@@ -20,6 +20,7 @@
 #' @export
 #' @seealso [tidy()], [quantreg::rq()]
 #' @family quantreg tidiers
+#' @inherit tidy.rq examples
 #'
 tidy.rqs <- function(x, se.type = "rank", conf.int = FALSE,
                      conf.level = 0.95, ...) {
@@ -59,6 +60,7 @@ glance.rqs <- function(x, ...) {
 #' @export
 #' @seealso [augment], [quantreg::rq()], [quantreg::predict.rqs()]
 #' @family quantreg tidiers
+#' @inherit tidy.rq examples
 augment.rqs <- function(x, data = model.frame(x), newdata, ...) {
   n_tau <- length(x[["tau"]])
   if (missing(newdata) || is.null(newdata)) {
