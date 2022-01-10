@@ -22,14 +22,17 @@
 #' library(poLCA)
 #' library(dplyr)
 #'
+#' # generate data
 #' data(values)
 #' 
 #' f <- cbind(A, B, C, D) ~ 1
 #' 
+#' # fit model
 #' M1 <- poLCA(f, values, nclass = 2, verbose = FALSE)
 #'
 #' M1
 #' 
+#' # summarize model fit with tidiers + visualization
 #' tidy(M1)
 #' augment(M1)
 #' glance(M1)

@@ -99,12 +99,14 @@ if (requireNamespace("survival", quietly = TRUE)) {
 # load libraries for models and data
 library(survival)
 
+# fit model
 sr <- survreg(
   Surv(futime, fustat) ~ ecog.ps + rx,
   ovarian,
   dist = "exponential"
 )
 
+# summarize model fit with tidiers + visualization
 tidy(sr)
 augment(sr, ovarian)
 glance(sr)

@@ -41,9 +41,11 @@ objects into their leaner \code{summary.lm} equivalents to conserve memory.
 }
 \examples{
 
+# fit model
 mod <- lm(mpg ~ wt + qsec, data = mtcars)
 modsumm <- summary(mod)
 
+# summarize model fit with tidiers
 tidy(mod, conf.int = TRUE)
 
 # equivalent to the above

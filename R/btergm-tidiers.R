@@ -47,7 +47,7 @@
 #' # fit the model
 #' mod <- btergm(networks ~ edges + istar(2) + edgecov(covariates), R = 100)
 #' 
-#' # summarize with tidier
+#' # summarize model fit with tidiers
 #' tidy(mod)
 #' 
 #'   }

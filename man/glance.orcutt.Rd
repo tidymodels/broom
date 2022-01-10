@@ -48,13 +48,12 @@ if (requireNamespace("orcutt", quietly = TRUE)) {
 # load libraries for models and data
 library(orcutt)
 
+# fit model and summarize results
 reg <- lm(mpg ~ wt + qsec + disp, mtcars)
-
 tidy(reg)
 
-co <- cochrane.orcutt(reg)
-co
 
+co <- cochrane.orcutt(reg)
 tidy(co)
 glance(co)
 

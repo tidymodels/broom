@@ -55,19 +55,23 @@ missingness in the data beforehand.
 # examples without requiring the model-supplying package to be installed.
 if (requireNamespace("geepack", quietly = TRUE)) {
 
-# load libraries for models and data
+# load modeling library
 library(geepack)
 
+# load data
 data(state)
+
 
 ds <- data.frame(state.region, state.x77)
 
+# fit model
 geefit <- geeglm(Income ~ Frost + Murder,
   id = state.region,
   data = ds, family = gaussian,
   corstr = "exchangeable"
 )
 
+# summarize model fit with tidiers
 tidy(geefit)
 tidy(geefit, conf.int = TRUE)
 

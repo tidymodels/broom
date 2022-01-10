@@ -38,6 +38,8 @@ if (requireNamespace("MASS", quietly = TRUE)) {
 library(MASS)
 
 names(longley)[1] <- "y"
+
+# fit model and summarizd results
 fit1 <- lm.ridge(y ~ ., longley)
 tidy(fit1)
 

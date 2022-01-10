@@ -13,9 +13,11 @@
 #'   
 #' @examples
 #'
+#' # fit model
 #' mod <- lm(mpg ~ wt + qsec, data = mtcars)
 #' modsumm <- summary(mod)
 #'
+#' # summarize model fit with tidiers
 #' tidy(mod, conf.int = TRUE)
 #' 
 #' # equivalent to the above

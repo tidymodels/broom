@@ -12,12 +12,15 @@
 #' 
 #' if (requireNamespace("binGroup", quietly = TRUE)) {
 #'
+#' # load libraries
 #' library(binGroup)
-#' library(dplyr)
-#' library(ggplot2)
 #'
+#' # fit model
 #' bw <- binWidth(100, .1)
+#' 
 #' bw
+#'
+#' # summarize model fit with tidiers
 #' tidy(bw)
 #' 
 #' }

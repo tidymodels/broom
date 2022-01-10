@@ -26,9 +26,12 @@
 #'
 #' # load libraries for models and data
 #' library(survival)
+#' 
+#' # fit model
 #' cfit <- coxph(Surv(time, status) ~ age + sex, lung)
 #' sfit <- survfit(cfit)
 #'
+#' # summarize model fit with tidiers + visualization
 #' tidy(sfit)
 #' glance(sfit)
 #'

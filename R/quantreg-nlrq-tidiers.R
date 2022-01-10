@@ -17,6 +17,7 @@
 #' # examples without requiring the model-supplying package to be installed.
 #' if (requireNamespace("quantreg", quietly = TRUE)) {
 #' 
+#' # load modeling library
 #' library(quantreg)
 #' 
 #' # build artificial data with multiplicative error
@@ -29,6 +30,7 @@
 #' mod <- nlrq(y ~ SSlogis(x, Asym, mid, scal), 
 #'             data = dat, tau = 0.5, trace = TRUE)
 #' 
+#' # summarize model fit with tidiers
 #' tidy(mod)
 #' glance(mod)
 #' augment(mod)

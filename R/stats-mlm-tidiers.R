@@ -17,8 +17,10 @@
 #'
 #' @examples
 #'
+#' # fit model
 #' mod <- lm(cbind(mpg, disp) ~ wt, mtcars)
 #' 
+#' # summarize model fit with tidiers
 #' tidy(mod, conf.int = TRUE)
 #' 
 #' @export

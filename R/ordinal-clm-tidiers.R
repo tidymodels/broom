@@ -18,8 +18,10 @@
 #' # load libraries for models and data
 #' library(ordinal)
 #'
+#' # fit model
 #' fit <- clm(rating ~ temp * contact, data = wine)
 #'
+#' # summarize model fit with tidiers
 #' tidy(fit)
 #' tidy(fit, conf.int = TRUE, conf.level = 0.9)
 #' tidy(fit, conf.int = TRUE, conf.type = "Wald", exponentiate = TRUE)
@@ -28,6 +30,7 @@
 #' augment(fit, type.predict = "prob")
 #' augment(fit, type.predict = "class")
 #'
+#' # ...and again with another model specification
 #' fit2 <- clm(rating ~ temp, nominal = ~contact, data = wine)
 #' 
 #' tidy(fit2)

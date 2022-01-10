@@ -101,10 +101,12 @@ if (requireNamespace("drc", quietly = TRUE)) {
 # load libraries for models and data
 library(drc)
 
+# fit model
 mod <- drm(dead / total ~ conc, type,
   weights = total, data = selenium, fct = LL.2(), type = "binomial"
 )
 
+# summarize model fit with tidiers
 tidy(mod)
 tidy(mod, conf.int = TRUE)
 

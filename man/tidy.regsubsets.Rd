@@ -37,8 +37,10 @@ if (requireNamespace("leaps", quietly = TRUE)) {
 # load libraries for models and data
 library(leaps)
 
+# fit model
 all_fits <- regsubsets(hp ~ ., mtcars)
 
+# summarize model fit with tidiers
 tidy(all_fits)
 
 }

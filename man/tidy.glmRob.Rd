@@ -40,8 +40,10 @@ if (requireNamespace("robust", quietly = TRUE)) {
 # load libraries for models and data
 library(robust)
 
+# fit model
 gm <- glmRob(am ~ wt, data = mtcars, family = "binomial")
 
+# summarize model fit with tidiers
 tidy(gm)
 glance(gm)
 

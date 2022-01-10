@@ -48,8 +48,10 @@ if (requireNamespace("MASS", quietly = TRUE)) {
 # load libraries for models and data
 library(MASS)
 
+# fit model
 fit <- polr(Sat ~ Infl + Type + Cont, weights = Freq, data = housing)
 
+# summarize model fit with tidiers
 tidy(fit, exponentiate = TRUE, conf.int = TRUE)
 
 glance(fit)

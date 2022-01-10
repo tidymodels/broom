@@ -79,8 +79,10 @@ a lack of support in stats::predict.nls().
 }
 \examples{
 
+# fit model
 n <- nls(mpg ~ k * e^wt, data = mtcars, start = list(k = 1, e = 2))
 
+# summarize model fit with tidiers + visualization
 tidy(n)
 augment(n)
 glance(n)

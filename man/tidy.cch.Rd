@@ -52,11 +52,13 @@ ccoh.data$histol <- factor(ccoh.data$histol, labels = c("FH", "UH"))
 ccoh.data$stage <- factor(ccoh.data$stage, labels = c("I", "II", "III", "IV"))
 ccoh.data$age <- ccoh.data$age / 12 # age in years
 
+# fit model
 fit.ccP <- cch(Surv(edrel, rel) ~ stage + histol + age,
   data = ccoh.data,
   subcoh = ~subcohort, id = ~seqno, cohort.size = 4028
 )
 
+# summarize model fit with tidiers + visualization
 tidy(fit.ccP)
 
 # coefficient plot

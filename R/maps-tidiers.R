@@ -21,10 +21,11 @@
 #' # load libraries for models and data
 #' library(maps)
 #' library(ggplot2)
-#' 
 #'
 #' ca <- map("county", "ca", plot = FALSE, fill = TRUE)
+#' 
 #' tidy(ca)
+#' 
 #' qplot(long, lat, data = ca, geom = "polygon", group = group)
 #'
 #' tx <- map("county", "texas", plot = FALSE, fill = TRUE)

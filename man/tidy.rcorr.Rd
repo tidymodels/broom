@@ -57,8 +57,10 @@ mat[sample(length(mat), 2000)] <- NA
 # also, column names
 colnames(mat) <- c(LETTERS, letters)
 
+# fit model
 rc <- rcorr(mat)
 
+# summarize model fit with tidiers  + visualization
 td <- tidy(rc)
 td
 

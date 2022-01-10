@@ -16,6 +16,8 @@
 #'
 #' # load libraries for models and data
 #' library(survival)
+#' 
+#' # fit model
 #' sexpfit <- survexp(
 #'   futime ~ 1,
 #'   rmap = list(
@@ -27,6 +29,7 @@
 #'   data = jasa
 #' )
 #'
+#' # summarize model fit with tidiers
 #' tidy(sexpfit)
 #' glance(sexpfit)
 #' 

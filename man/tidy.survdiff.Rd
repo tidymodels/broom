@@ -38,11 +38,13 @@ if (requireNamespace("survival", quietly = TRUE)) {
 # load libraries for models and data
 library(survival)
 
+# fit model
 s <- survdiff(
   Surv(time, status) ~ pat.karno + strata(inst),
   data = lung
 )
 
+# summarize model fit with tidiers
 tidy(s)
 glance(s)
 

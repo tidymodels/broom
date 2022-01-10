@@ -51,8 +51,10 @@
 #'   select(-num_points, -cluster) %>%
 #'   unnest(c(x1, x2))
 #'
+#' # fit model
 #' m <- Mclust(points)
 #'
+#' # summarize model fit with tidiers
 #' tidy(m)
 #' augment(m, points)
 #' glance(m)

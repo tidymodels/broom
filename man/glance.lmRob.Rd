@@ -44,12 +44,17 @@ of the appropriate type.
 # feel free to ignore the following line—it allows {broom} to supply 
 # examples without requiring the model-supplying package to be installed.
 if (requireNamespace("robust", quietly = TRUE)) {
-  library(robust)
-  m <- lmRob(mpg ~ wt, data = mtcars)
 
-  tidy(m)
-  augment(m)
-  glance(m)
+ # load modeling library
+ library(robust)
+  
+ # fit model
+ m <- lmRob(mpg ~ wt, data = mtcars)
+
+ # summarize model fit with tidiers
+ tidy(m)
+ augment(m)
+ glance(m)
 }
 
 }

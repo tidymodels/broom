@@ -48,10 +48,13 @@ if (requireNamespace("vars", quietly = TRUE)) {
 # load libraries for models and data
 library(vars)
 
+# load data
 data("Canada", package = "vars")
 
+# fit models
 mod <- VAR(Canada, p = 1, type = "both")
 
+# summarize model fit with tidiers
 tidy(mod)
 glance(mod)
 

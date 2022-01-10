@@ -77,11 +77,15 @@ if (requireNamespace("plm", quietly = TRUE)) {
 # load libraries for models and data
 library(plm)
 
+# load data
 data("Produc", package = "plm")
+
+# fit model
 zz <- plm(log(gsp) ~ log(pcap) + log(pc) + log(emp) + unemp,
   data = Produc, index = c("state", "year")
 )
 
+# summarize model fit with tidiers
 summary(zz)
 
 tidy(zz)

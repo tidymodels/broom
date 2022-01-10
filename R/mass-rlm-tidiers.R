@@ -23,8 +23,10 @@
 #' # load libraries for models and data
 #' library(MASS)
 #'
+#' # fit model
 #' r <- rlm(stack.loss ~ ., stackloss)
 #'
+#' # summarize model fit with tidiers
 #' tidy(r)
 #' augment(r)
 #' glance(r)

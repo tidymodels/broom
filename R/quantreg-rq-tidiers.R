@@ -28,6 +28,7 @@
 #' # examples without requiring the model-supplying package to be installed.
 #' if (requireNamespace("quantreg", quietly = TRUE)) {
 #' 
+#' # load modeling library and data
 #' library(quantreg)
 #' 
 #' data(stackloss)
@@ -38,6 +39,7 @@
 #' # weighted sample median
 #' mod2 <- rq(rnorm(50) ~ 1, weights = runif(50))
 #' 
+#' # summarize model fit with tidiers
 #' tidy(mod1)
 #' glance(mod1)
 #' augment(mod1)

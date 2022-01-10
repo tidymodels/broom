@@ -41,8 +41,10 @@ if (requireNamespace("gam", quietly = TRUE)) {
 # load libraries for models and data
 library(gam)
 
+# fit model
 g <- gam(mpg ~ s(hp, 4) + am + qsec, data = mtcars)
 
+# summarize model fit with tidiers
 tidy(g)
 glance(g)
 

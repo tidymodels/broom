@@ -41,8 +41,10 @@ of the appropriate type.
 }
 \examples{
 
+# fit model
 fit <- arima(lh, order = c(1, 0, 0))
 
+# summarize model fit with tidiers
 tidy(fit)
 glance(fit)
 

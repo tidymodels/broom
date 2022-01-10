@@ -15,14 +15,17 @@
 #' # load libraries for models and data
 #' library(ordinal)
 #'
+#' # fit model
 #' fit <- clmm(rating ~ temp + contact + (1 | judge), data = wine)
 #'
+#' # summarize model fit with tidiers
 #' tidy(fit)
 #' tidy(fit, conf.int = TRUE, conf.level = 0.9)
 #' tidy(fit, conf.int = TRUE, exponentiate = TRUE)
 #'
 #' glance(fit)
 #'
+#' # ...and again with another model specification
 #' fit2 <- clmm(rating ~ temp + (1 | judge), nominal = ~contact, data = wine)
 #' 
 #' tidy(fit2)

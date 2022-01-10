@@ -26,6 +26,7 @@
 #' # load libraries for models and data
 #' library(survival)
 #'
+#' # generate and format data
 #' temp.yr <- tcut(mgus$dxyr, 55:92, labels = as.character(55:91))
 #' temp.age <- tcut(mgus$age, 34:101, labels = as.character(34:100))
 #' ptime <- ifelse(is.na(mgus$pctime), mgus$futime, mgus$pctime)
@@ -34,6 +35,7 @@
 #'   data.frame = TRUE
 #' )
 #' 
+#' # summarize model fit with tidiers
 #' tidy(pfit)
 #' glance(pfit)
 #'

@@ -45,10 +45,13 @@ of the appropriate type.
 # examples without requiring the model-supplying package to be installed.
 if (requireNamespace("speedglm", quietly = TRUE)) {
 
+# load modeling library
 library(speedglm)
 
+# fit model
 mod <- speedlm(mpg ~ wt + qsec, data = mtcars, fitted = TRUE)
 
+# summarize model fit with tidiers
 tidy(mod)
 glance(mod)
 augment(mod)

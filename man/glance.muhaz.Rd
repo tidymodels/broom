@@ -50,8 +50,10 @@ if (requireNamespace("muhaz", quietly = TRUE)) {
 library(muhaz)
 library(survival)
 
+# fit model
 x <- muhaz(ovarian$futime, ovarian$fustat)
 
+# summarize model fit with tidiers
 tidy(x)
 glance(x)
 

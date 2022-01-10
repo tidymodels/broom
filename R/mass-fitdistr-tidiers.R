@@ -14,12 +14,15 @@
 #'
 #' # load libraries for models and data
 #' library(MASS)
-#' 
+#'
+#' # generate data
 #' set.seed(2015)
 #' x <- rnorm(100, 5, 2)
 #'
+#' #  fit models
 #' fit <- fitdistr(x, dnorm, list(mean = 3, sd = 1))
 #'
+#' # summarize model fit with tidiers
 #' tidy(fit)
 #' glance(fit)
 #' 

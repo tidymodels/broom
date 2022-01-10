@@ -26,12 +26,14 @@
 #' # load libraries for models and data
 #' library(survival)
 #'
+#' # fit model
 #' afit <- aareg(
 #'   Surv(time, status) ~ age + sex + ph.ecog,
 #'   data = lung,
 #'   dfbeta = TRUE
 #' )
 #'
+#' # summarize model fit with tidiers
 #' tidy(afit)
 #' 
 #' }

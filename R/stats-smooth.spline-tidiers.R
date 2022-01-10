@@ -7,8 +7,10 @@
 #'
 #' @examples
 #'
+#' # fit model
 #' spl <- smooth.spline(mtcars$wt, mtcars$mpg, df = 4)
 #' 
+#' # summarize model fit with tidiers
 #' augment(spl, mtcars)
 #' 
 #' # calls original columns x and y

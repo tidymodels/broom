@@ -29,8 +29,10 @@
 #' trt <- sample(0:1, 100, replace = TRUE)
 #' strt <- sample(1:2, 100, replace = TRUE)
 #' 
+#' # fit model
 #' x <- crr(lrf_time, lrf_event, cbind(trt, strt))
 #' 
+#' # summarize model fit with tidiers
 #' tidy(x, conf.int = TRUE)
 #' glance(x)
 #' 

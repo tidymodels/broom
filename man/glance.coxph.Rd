@@ -48,8 +48,10 @@ if (requireNamespace("survival", quietly = TRUE)) {
 # load libraries for models and data
 library(survival)
 
+# fit model
 cfit <- coxph(Surv(time, status) ~ age + sex, lung)
 
+# summarize model fit with tidiers
 tidy(cfit)
 tidy(cfit, exponentiate = TRUE)
 

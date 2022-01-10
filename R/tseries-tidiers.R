@@ -24,12 +24,15 @@
 #' # load libraries for models and data
 #' library(tseries)
 #'
+#' # load data
 #' data(EuStockMarkets)
 #' 
+#' # fit model
 #' dax <- diff(log(EuStockMarkets))[, "DAX"]
 #' dax.garch <- garch(dax)
 #' dax.garch
 #'
+#' # summarize model fit with tidiers
 #' tidy(dax.garch)
 #' glance(dax.garch)
 #' 

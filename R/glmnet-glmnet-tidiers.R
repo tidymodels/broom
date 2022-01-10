@@ -38,6 +38,7 @@
 #' y <- rnorm(100)
 #' fit1 <- glmnet(x, y)
 #'
+#' # summarize model fit with tidiers + visualization
 #' tidy(fit1)
 #' glance(fit1)
 #'

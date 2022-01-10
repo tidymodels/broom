@@ -59,6 +59,7 @@
 #' # marginal effects evaluated at specific values of a variable (here: cyl)
 #' marg_ie1 <- margins(mod_ie, at = list(cyl = c(4,6,8)))
 #' 
+#' # summarize model fit with tidiers
 #' tidy(marg_ie1)
 #' 
 #' # marginal effects of one interaction variable (here: wt), modulated at 
@@ -67,6 +68,7 @@
 #'                     variables = "wt",
 #'                     at = list(cyl = c(4,6,8), drat = c(3, 3.5, 4)))
 #' 
+#' # summarize model fit with tidiers
 #' tidy(marg_ie2)
 #' 
 #' }

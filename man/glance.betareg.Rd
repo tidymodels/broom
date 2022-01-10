@@ -48,11 +48,15 @@ if (requireNamespace("betareg", quietly = TRUE)) {
 # load libraries for models and data
 library(betareg)
 
+# load dats
 data("GasolineYield", package = "betareg")
 
+# fit model
 mod <- betareg(yield ~ batch + temp, data = GasolineYield)
 
 mod
+
+# summarize model fit with tidiers
 tidy(mod)
 tidy(mod, conf.int = TRUE)
 tidy(mod, conf.int = TRUE, conf.level = .99)

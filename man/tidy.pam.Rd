@@ -39,8 +39,7 @@ For examples, see the pam vignette.
 # feel free to ignore the following line—it allows {broom} to supply 
 # examples without requiring the model-supplying package to be installed.
 if (requireNamespace("cluster", quietly = TRUE)) {
-
-\dontrun{
+  if (requireNamespace("modeldata", quietly = TRUE)) {
 
 # load libraries for models and data
 library(dplyr)
@@ -52,6 +51,7 @@ data(hpc_data)
 x <- hpc_data[, 2:5]
 p <- pam(x, k = 4)
 
+# summarize model fit with tidiers + visualization
 tidy(p)
 glance(p)
 augment(p, x)
@@ -60,8 +60,8 @@ augment(p, x) \%>\%
   ggplot(aes(compounds, input_fields)) +
   geom_point(aes(color = .cluster)) +
   geom_text(aes(label = cluster), data = tidy(p), size = 10)
-} 
 
+  }
 }  
   
 }

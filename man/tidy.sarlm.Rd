@@ -44,29 +44,37 @@ if (requireNamespace("spdep", quietly = TRUE)) {
 library(spatialreg)
 library(spdep)
 
+# load data
 data(oldcol, package = "spdep")
+
 listw <- nb2listw(COL.nb, style = "W")
 
+# fit model
 crime_sar <- 
 lagsarlm(CRIME ~ INC + HOVAL, 
          data = COL.OLD,  
          listw = listw, 
          method = "eigen")
   
+# summarize model fit with tidiers
 tidy(crime_sar)
 tidy(crime_sar, conf.int = TRUE)
 glance(crime_sar)
 augment(crime_sar)
 
+# fit another model
 crime_sem <- errorsarlm(CRIME ~ INC + HOVAL, data = COL.OLD, listw)
 
+# summarize model fit with tidiers
 tidy(crime_sem)
 tidy(crime_sem, conf.int = TRUE)
 glance(crime_sem)
 augment(crime_sem)
 
+# fit another model
 crime_sac <- sacsarlm(CRIME ~ INC + HOVAL, data = COL.OLD, listw)
 
+# summarize model fit with tidiers
 tidy(crime_sac)
 tidy(crime_sac, conf.int = TRUE)
 glance(crime_sac)

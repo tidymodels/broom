@@ -14,9 +14,17 @@
 #' 
 #' if (requireNamespace("car", quietly = TRUE)) {
 #'
-#' dw <- car::durbinWatsonTest(lm(mpg ~ wt, data = mtcars))
+#' # load modeling library
+#' library(car)
+#' 
+#' # fit model
+#' dw <- durbinWatsonTest(lm(mpg ~ wt, data = mtcars))
+#' 
+#' # summarize model fit with tidiers
 #' tidy(dw)
-#' glance(dw) # same output for all durbinWatsonTests
+#' 
+#' # same output for all durbinWatsonTests
+#' glance(dw) 
 #' 
 #' }
 #' 

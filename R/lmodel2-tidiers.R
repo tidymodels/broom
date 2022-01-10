@@ -36,6 +36,7 @@
 #' Ex2.res <- lmodel2(Prey ~ Predators, data = mod2ex2, "relative", "relative", 99)
 #' Ex2.res
 #'
+#' # summarize model fit with tidiers + visualization
 #' tidy(Ex2.res)
 #' glance(Ex2.res)
 #'

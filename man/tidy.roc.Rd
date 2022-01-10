@@ -38,9 +38,13 @@ if (requireNamespace("AUC", quietly = TRUE)) {
 # load libraries for models and data
 library(AUC)
 
+# load data
 data(churn)
+
+# fit model
 r <- roc(churn$predictions, churn$labels)
 
+# summarize with tidiers + visualization
 td <- tidy(r)
 td
 

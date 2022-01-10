@@ -56,6 +56,7 @@ x <- matrix(rnorm(100 * 20), 100, 20)
 y <- rnorm(100)
 fit1 <- glmnet(x, y)
 
+# summarize model fit with tidiers + visualization
 tidy(fit1)
 glance(fit1)
 

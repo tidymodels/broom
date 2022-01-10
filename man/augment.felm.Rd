@@ -83,12 +83,14 @@ head(airquality)
 # no FEs; same as lm()
 est0 <- felm(Ozone ~ Temp + Wind + Solar.R, airquality)
 
+# summarize model fit with tidiers
 tidy(est0)
 augment(est0)
 
 # add month fixed effects
 est1 <- felm(Ozone ~ Temp + Wind + Solar.R  | Month, airquality)
 
+# summarize model fit with tidiers
 tidy(est1)
 tidy(est1, fe = TRUE)
 augment(est1)
@@ -103,6 +105,7 @@ tidy(est1, se.type = "robust")
 # add clustered SEs (also by month)
 est2 <- felm(Ozone ~ Temp + Wind + Solar.R  | Month | 0 | Month, airquality)
 
+# summarize model fit with tidiers
 tidy(est2, conf.int = TRUE) 
 tidy(est2, conf.int = TRUE, se.type = "cluster")
 tidy(est2, conf.int = TRUE, se.type = "robust")

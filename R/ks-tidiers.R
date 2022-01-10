@@ -19,9 +19,11 @@
 #' # load libraries for models and data
 #' library(ks)
 #'
+#' # generate data
 #' dat <- replicate(2, rnorm(100))
 #' k <- kde(dat)
 #'
+#' # summarize model fit with tidiers + visualization
 #' td <- tidy(k)
 #' td
 #'

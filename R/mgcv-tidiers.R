@@ -34,8 +34,10 @@
 #' # load libraries for models and data
 #' library(mgcv)
 #'
+#' # fit model
 #' g <- gam(mpg ~ s(hp) + am + qsec, data = mtcars)
 #'
+#' # summarize model fit with tidiers
 #' tidy(g)
 #' tidy(g, parametric = TRUE)
 #' glance(g)

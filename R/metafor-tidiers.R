@@ -239,8 +239,10 @@ glance.rma <- function(x, ...) {
 #' # examples without requiring the model-supplying package to be installed.
 #' if (requireNamespace("metafor", quietly = TRUE)) {
 #' 
+#' # load modeling library
 #' library(metafor)
 #'
+#' # generate data and fit
 #' df <-
 #'   escalc(
 #'     measure = "RR",
@@ -253,6 +255,7 @@ glance.rma <- function(x, ...) {
 #'
 #' meta_analysis <- rma(yi, vi, data = df, method = "EB")
 #'
+#' # summarize model fit with tidiers
 #' augment(meta_analysis)
 #' }
 #' 
