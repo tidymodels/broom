@@ -99,6 +99,33 @@ missing at this time.
 For tidiers for robust models from the \pkg{MASS} package see
 \code{\link[=tidy.rlm]{tidy.rlm()}}.
 }
+\examples{
+
+if (requireNamespace("robustbase", quietly = TRUE)) {
+
+# load libraries for models and data
+library(robustbase)
+
+data(coleman)
+set.seed(0)
+
+m <- lmrob(Y ~ ., data = coleman)
+tidy(m)
+augment(m)
+glance(m)
+
+data(carrots)
+
+Rfit <- glmrob(cbind(success, total - success) ~ logdose + block,
+  family = binomial, data = carrots, method = "Mqle",
+  control = glmrobMqle.control(tcc = 1.2)
+)
+
+tidy(Rfit)
+augment(Rfit)
+
+}
+}
 \seealso{
 \code{\link[robustbase:glmrob]{robustbase::glmrob()}}
 
