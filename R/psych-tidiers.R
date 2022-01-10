@@ -30,7 +30,7 @@
 #'
 #' tidy(ck)
 #'
-#' #graph the confidence intervals
+#' # graph the confidence intervals
 #' library(ggplot2)
 #' 
 #' ggplot(tidy(ck), aes(estimate, type)) +

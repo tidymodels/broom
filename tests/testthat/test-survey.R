@@ -15,7 +15,7 @@ design <- svydesign(ids = ~1, weights = ~Freq, data = housing)
 fit <- svyolr(Sat ~ Infl + Type + Cont, design = design)
 
 test_that("survey tidier arguments", {
-  #check_arguments(tidy.svyolr)
+  # check_arguments(tidy.svyolr)
   check_arguments(glance.svyolr)
 })
 

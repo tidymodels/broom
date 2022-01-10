@@ -32,7 +32,7 @@
 tidy.summary.lm <- function(x, conf.int = FALSE, conf.level = 0.95, ...) {
   ret <- as_tibble(x$coefficients, rownames = "term")
   colnames(ret) <- c("term", "estimate", "std.error", "statistic", "p.value")
-  # Aside: The x$coefficients will miss rank deficient rows (i.e. coefs that
+  # aside: The x$coefficients will miss rank deficient rows (i.e. coefs that
   # summary.lm() sets to NA). We can't do much about that here, though since the
   # user has already passed the summary(x) object into the tidy call...
   
@@ -50,7 +50,7 @@ tidy.summary.lm <- function(x, conf.int = FALSE, conf.level = 0.95, ...) {
 }
 
 
-# Additional glance method for summary.lm objects
+# additional glance method for summary.lm objects
 #' @templateVar class summary.lm
 #' @template title_desc_glance
 #'

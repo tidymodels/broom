@@ -67,11 +67,11 @@ fit2 <- factanal(m1, factors = 3, scores = "regression")
 tidy(fit1)
 tidy(fit2)
 
-#augmented dataframe
+# augmented dataframe
 augment(fit1)
 augment(fit2)
 
-#augmented dataframe (with new data)
+# augmented dataframe (with new data)
 augment(fit1, data = m2)
 augment(fit2, data = m2)
 

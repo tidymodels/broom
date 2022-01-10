@@ -106,7 +106,7 @@ test_that("all other fixest estimators run", {
     glance(res_fepois)
   )
 
-  # Augment
+  # augment
   # Note this this causes warnings with strict=TRUE because
   # modeltests:::acceptable_augment_colnames calls model.frame, which doesn't
   # work for fixest models.

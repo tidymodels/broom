@@ -81,7 +81,7 @@ tidy(fit, component = "longitudinal")
 tidy(fit, ci = TRUE)
 
 # extract the survival fixed effects with confidence intervals based
-#on bootstrapped standard errors
+# on bootstrapped standard errors
 bSE <- bootSE(fit, nboot = 5, safe.boot = TRUE)
 tidy(fit, boot_se = bSE, ci = TRUE)
 

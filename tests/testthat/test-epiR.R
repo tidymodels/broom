@@ -47,5 +47,5 @@ test_that("tidy.epi2by2", {
   check_tidy_output(tidy2)
   check_tidy_output(tidy3)
 
-  #check_dims(tidy1, 13, 4)
+  # check_dims(tidy1, 13, 4)
 })

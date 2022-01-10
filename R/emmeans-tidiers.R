@@ -229,7 +229,7 @@ tidy_emmeans_summary <- function(x, null.value = NULL, term_names = NULL) {
     ret <- bind_cols(contrast = ret[, "contrast"], null.value = null.value, select(ret, -contrast))
   }
 
-  # Add term column, if appropriate, unless it exists
+  # add term column, if appropriate, unless it exists
   if ("term" %in% colnames(ret)) {
     ret <- ret %>%
       mutate(term = stringr::str_trim(term))

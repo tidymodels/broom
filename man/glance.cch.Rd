@@ -59,7 +59,7 @@ ccoh.data$histol <- factor(ccoh.data$histol, labels = c("FH", "UH"))
 
 # tumour stage
 ccoh.data$stage <- factor(ccoh.data$stage, labels = c("I", "II", "III", "IV"))
-ccoh.data$age <- ccoh.data$age / 12 # Age in years
+ccoh.data$age <- ccoh.data$age / 12 # age in years
 
 fit.ccP <- cch(Surv(edrel, rel) ~ stage + histol + age,
   data = ccoh.data,
