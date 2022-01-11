@@ -23,9 +23,15 @@
 #'
 #' @examples
 #'
+#' # fit models
 #' a <- lm(mpg ~ wt + qsec + disp, mtcars)
 #' b <- lm(mpg ~ wt + qsec, mtcars)
-#' tidy(anova(a, b))
+#' 
+#' mod <- anova(a, b)
+#' 
+#' # summarize model fit with tidiers
+#' tidy(mod)
+#' 
 #' @export
 #' @family anova tidiers
 #' @seealso [tidy()], [stats::anova()], [car::Anova()], [car::leveneTest()]

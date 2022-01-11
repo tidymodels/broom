@@ -41,14 +41,22 @@ of the appropriate type.
 }
 \examples{
 
+# feel free to ignore the following line—it allows {broom} to supply 
+# examples without requiring the model-supplying package to be installed.
 if (requireNamespace("cmprsk", quietly = TRUE)) {
 
 library(cmprsk)
-lrf_time <- rexp(100) #time to loco-regional failure (lrf)
+
+# time to loco-regional failure (lrf)
+lrf_time <- rexp(100) 
 lrf_event <- sample(0:2, 100, replace = TRUE) 
 trt <- sample(0:1, 100, replace = TRUE)
 strt <- sample(1:2, 100, replace = TRUE)
+
+# fit model
 x <- crr(lrf_time, lrf_event, cbind(trt, strt))
+
+# summarize model fit with tidiers
 tidy(x, conf.int = TRUE)
 glance(x)
 

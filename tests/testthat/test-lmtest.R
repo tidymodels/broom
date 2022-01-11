@@ -31,13 +31,13 @@ test_that("tidy.coeftest", {
   
   check_dims(td, 2, 5)
 
-  ## conf int
+  # conf int
   td_ci <- tidy(ct, conf.int = TRUE, conf.level = 0.9) %>%
     tibble::remove_rownames()
   check_tidy_output(td_ci)
   check_dims(td_ci, 2, 7)
 
-  ## should be like lm!
+  # should be like lm!
   td_lm_ci <- tidy(m, conf.int = TRUE, conf.level = 0.9) %>%
     tibble::remove_rownames()
   expect_equal(td_lm_ci, td_ci)

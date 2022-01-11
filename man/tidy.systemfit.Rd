@@ -41,12 +41,16 @@ Default returns a tibble of six columns.
 }
 \examples{
 
+# feel free to ignore the following line—it allows {broom} to supply 
+# examples without requiring the model-supplying package to be installed.
 if (requireNamespace("systemfit", quietly = TRUE)) {
 
 set.seed(27)
 
+# load libraries for models and data
 library(systemfit)
 
+# generate data
 df <- data.frame(
   X = rnorm(100),
   Y = rnorm(100),
@@ -54,9 +58,11 @@ df <- data.frame(
   W = rnorm(100)
 )
 
+# fit model
 fit <- systemfit(formula = list(Y ~ Z, W ~ X), data = df, method = "SUR")
-tidy(fit)
 
+# summarize model fit with tidiers
+tidy(fit)
 tidy(fit, conf.int = TRUE)
 
 }

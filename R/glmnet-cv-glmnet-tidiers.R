@@ -18,9 +18,13 @@
 #'
 #' @examples
 #' 
+#' # feel free to ignore the following line—it allows {broom} to supply 
+#' # examples without requiring the model-supplying package to be installed.
 #' if (requireNamespace("glmnet", quietly = TRUE)) {
-#'
+#' 
+#' # load libraries for models and data
 #' library(glmnet)
+#' 
 #' set.seed(27)
 #'
 #' nobs <- 100
@@ -37,6 +41,7 @@
 #' glance(cvfit1)
 #'
 #' library(ggplot2)
+#' 
 #' tidied_cv <- tidy(cvfit1)
 #' glance_cv <- glance(cvfit1)
 #'

@@ -44,8 +44,11 @@ choice of lambda.
 }
 \examples{
 
+# feel free to ignore the following line—it allows {broom} to supply 
+# examples without requiring the model-supplying package to be installed.
 if (requireNamespace("glmnet", quietly = TRUE)) {
 
+# load libraries for models and data
 library(glmnet)
 
 set.seed(2014)
@@ -53,6 +56,7 @@ x <- matrix(rnorm(100 * 20), 100, 20)
 y <- rnorm(100)
 fit1 <- glmnet(x, y)
 
+# summarize model fit with tidiers + visualization
 tidy(fit1)
 glance(fit1)
 
@@ -63,6 +67,7 @@ tidied <- tidy(fit1) \%>\% filter(term != "(Intercept)")
 
 ggplot(tidied, aes(step, estimate, group = term)) +
   geom_line()
+  
 ggplot(tidied, aes(lambda, estimate, group = term)) +
   geom_line() +
   scale_x_log10()

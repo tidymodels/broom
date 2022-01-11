@@ -38,18 +38,24 @@ specify which components to return.
 }
 \examples{
 
+# feel free to ignore the following line—it allows {broom} to supply 
+# examples without requiring the model-supplying package to be installed.
 if (requireNamespace("bbmle", quietly = TRUE)) {
 
+# load libraries for models and data
 library(bbmle)
 
+# generate data
 x <- 0:10
 y <- c(26, 17, 13, 12, 20, 5, 9, 8, 5, 4, 8)
 d <- data.frame(x, y)
 
+# fit model
 fit <- mle2(y ~ dpois(lambda = ymean),
   start = list(ymean = mean(y)), data = d
 )
 
+# summarize model fit with tidiers
 tidy(fit)
 
 }

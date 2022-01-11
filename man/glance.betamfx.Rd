@@ -43,17 +43,20 @@ of the appropriate type.
 This glance method wraps \code{\link[=glance.betareg]{glance.betareg()}} for \code{\link[mfx:betamfx]{mfx::betamfx()}} objects.
 }
 \examples{
-\dontrun{ 
+# feel free to ignore the following line—it allows {broom} to supply 
+# examples without requiring the model-supplying package to be installed.
+if (requireNamespace("mfx", quietly = TRUE)) {
+ 
 library(mfx)
 
-## Simulate some data
+# Simulate some data
 set.seed(12345)
 n = 1000
 x = rnorm(n)
 
-## Beta outcome
+# Beta outcome
 y = rbeta(n, shape1 = plogis(1 + 0.5 * x), shape2 = (abs(0.2*x)))
-## Use Smithson and Verkuilen correction
+# Use Smithson and Verkuilen correction
 y = (y*(n-1)+0.5)/n
 
 d = data.frame(y,x)
@@ -61,7 +64,7 @@ mod_betamfx = betamfx(y ~ x | x, data = d)
 
 tidy(mod_betamfx, conf.int = TRUE)
 
-## Compare with the naive model coefficients of the equivalent betareg call (not run)
+# Compare with the naive model coefficients of the equivalent betareg call (not run)
 # tidy(betamfx(y ~ x | x, data = d), conf.int = TRUE)
 
 augment(mod_betamfx)

@@ -41,18 +41,23 @@ of the appropriate type.
 }
 \examples{
 
+# feel free to ignore the following line—it allows {broom} to supply 
+# examples without requiring the model-supplying package to be installed.
 if (requireNamespace("mlogit", quietly = TRUE)) {
 
-\dontrun{
+# load libraries for models and data
 library(mlogit)
+
 data("Fishing", package = "mlogit")
 Fish <- dfidx(Fishing, varying = 2:9, shape = "wide", choice = "mode")
+
+# fit model
 m <- mlogit(mode ~ price + catch | income, data = Fish)
 
+# summarize model fit with tidiers
 tidy(m)
 augment(m)
 glance(m)
-}
 
 }
 

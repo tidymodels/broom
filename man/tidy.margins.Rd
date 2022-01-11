@@ -45,49 +45,58 @@ users can simply run the underlying model to obtain the same information.
 }
 \examples{
 
+# feel free to ignore the following line—it allows {broom} to supply 
+# examples without requiring the model-supplying package to be installed.
 if (requireNamespace("margins", quietly = TRUE)) {
 
+# load libraries for models and data
 library(margins)
 
-## Example 1: Logit model ##
-
+# example 1: logit model 
 mod_log <- glm(am ~ cyl + hp + wt, data = mtcars, family = binomial)
 
-# Get tidied "naive" model coefficients
+# get tidied "naive" model coefficients
 tidy(mod_log)
 
-# Convert to marginal effects with margins::margins()
+# convert to marginal effects with margins()
 marg_log <- margins(mod_log)
 
-# Get tidied marginal effects
+# get tidied marginal effects
 tidy(marg_log)
 tidy(marg_log, conf.int = TRUE)
-glance(marg_log) ## Requires running the underlying model again. Quick for this example.
-\dontrun{augment(marg_log) ## Not supported.}
-augment(mod_log) ## But can get the same info by running on the underlying model.
 
-## Example 2: Threeway interaction terms ##
+# requires running the underlying model again. quick for this example
+glance(marg_log) 
 
+# augmenting `margins` outputs isn't supported, but
+# you can get the same info by running on the underlying model
+augment(mod_log) 
+
+# example 2: threeway interaction terms
 mod_ie <- lm(mpg ~ wt * cyl * disp, data = mtcars)
 
-# Get tidied "naive" model coefficients
+# get tidied "naive" model coefficients
 tidy(mod_ie)
 
-# Convert to marginal effects with margins::margins()
+# convert to marginal effects with margins()
 marg_ie0 <- margins(mod_ie)
-# Get tidied marginal effects 
+# get tidied marginal effects 
 tidy(marg_ie0)
 glance(marg_ie0)
 
-# Marginal effects evaluated at specific values of a variable (here: cyl)
+# marginal effects evaluated at specific values of a variable (here: cyl)
 marg_ie1 <- margins(mod_ie, at = list(cyl = c(4,6,8)))
+
+# summarize model fit with tidiers
 tidy(marg_ie1)
 
-# Marginal effects of one interaction variable (here: wt), modulated at 
+# marginal effects of one interaction variable (here: wt), modulated at 
 # specific values of the two other interaction variables (here: cyl and drat)
 marg_ie2 <- margins(mod_ie,
-                    variables = "wt", ## Main var
-                    at = list(cyl = c(4,6,8), drat = c(3, 3.5, 4))) ## Modulating vars
+                    variables = "wt",
+                    at = list(cyl = c(4,6,8), drat = c(3, 3.5, 4)))
+
+# summarize model fit with tidiers
 tidy(marg_ie2)
 
 }

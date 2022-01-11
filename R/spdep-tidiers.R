@@ -12,35 +12,53 @@
 #' 
 #' @examples 
 #' 
-#' \dontrun{ 
-#' library(spatialreg)
-#' data(oldcol, package = "spdep")
-#' listw <- spdep::nb2listw(COL.nb, style = "W")
+#' # feel free to ignore the following two lines—they allow {broom} to supply 
+#' # examples without requiring the model-supplying packages to be installed.
+#' if (requireNamespace("spdep", quietly = TRUE)) {
+#'   if (requireNamespace("spatialreg", quietly = TRUE)) {
 #' 
+#'       
+#' # load libraries for models and data      
+#' library(spatialreg)
+#' library(spdep)
+#' 
+#' # load data
+#' data(oldcol, package = "spdep")
+#' 
+#' listw <- nb2listw(COL.nb, style = "W")
+#' 
+#' # fit model
 #' crime_sar <- 
 #' lagsarlm(CRIME ~ INC + HOVAL, 
 #'          data = COL.OLD,  
 #'          listw = listw, 
 #'          method = "eigen")
 #'   
+#' # summarize model fit with tidiers
 #' tidy(crime_sar)
 #' tidy(crime_sar, conf.int = TRUE)
 #' glance(crime_sar)
 #' augment(crime_sar)
 #' 
+#' # fit another model
 #' crime_sem <- errorsarlm(CRIME ~ INC + HOVAL, data = COL.OLD, listw)
 #' 
+#' # summarize model fit with tidiers
 #' tidy(crime_sem)
 #' tidy(crime_sem, conf.int = TRUE)
 #' glance(crime_sem)
 #' augment(crime_sem)
 #' 
+#' # fit another model
 #' crime_sac <- sacsarlm(CRIME ~ INC + HOVAL, data = COL.OLD, listw)
 #' 
+#' # summarize model fit with tidiers
 #' tidy(crime_sac)
 #' tidy(crime_sac, conf.int = TRUE)
 #' glance(crime_sac)
 #' augment(crime_sac)
+#' 
+#'   }
 #' }
 #' 
 #' @aliases spatialreg_tidiers

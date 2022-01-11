@@ -15,12 +15,17 @@
 #'
 #' @examples
 #' 
+#' # feel free to ignore the following line—it allows {broom} to supply 
+#' # examples without requiring the model-supplying package to be installed.
 #' if (requireNamespace("survival", quietly = TRUE)) {
 #'
+#' # load libraries for models and data
 #' library(survival)
 #'
+#' # fit model
 #' cfit <- coxph(Surv(time, status) ~ age + sex, lung)
 #'
+#' # summarize model fit with tidiers
 #' tidy(cfit)
 #' tidy(cfit, exponentiate = TRUE)
 #'
@@ -43,6 +48,7 @@
 #' logan2$case <- (logan2$occupation == logan2$tocc)
 #'
 #' cl <- clogit(case ~ tocc + tocc:education + strata(id), logan2)
+#' 
 #' tidy(cl)
 #' glance(cl)
 #'

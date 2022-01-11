@@ -38,14 +38,20 @@ specify which components to return.
 }
 \examples{
 
+# fit model
 spl <- smooth.spline(mtcars$wt, mtcars$mpg, df = 4)
+
+# summarize model fit with tidiers
 augment(spl, mtcars)
-augment(spl) # calls original columns x and y
+
+# calls original columns x and y
+augment(spl) 
 
 library(ggplot2)
 ggplot(augment(spl, mtcars), aes(wt, mpg)) +
   geom_point() +
   geom_line(aes(y = .fitted))
+  
 }
 \seealso{
 \code{\link[=augment]{augment()}}, \code{\link[stats:smooth.spline]{stats::smooth.spline()}},

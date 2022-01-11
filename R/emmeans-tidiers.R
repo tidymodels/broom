@@ -28,9 +28,13 @@
 #'
 #' @examples
 #' 
+#' # feel free to ignore the following line—it allows {broom} to supply 
+#' # examples without requiring the model-supplying package to be installed.
 #' if (requireNamespace("emmeans", quietly = TRUE)) {
 #'
+#' # load libraries for models and data
 #' library(emmeans)
+#' 
 #' # linear model for sales of oranges per day
 #' oranges_lm1 <- lm(sales1 ~ price1 + price2 + day + store, data = oranges)
 #'
@@ -49,6 +53,7 @@
 #'
 #' # plot confidence intervals
 #' library(ggplot2)
+#' 
 #' ggplot(tidy(marginal, conf.int = TRUE), aes(day, estimate)) +
 #'   geom_point() +
 #'   geom_errorbar(aes(ymin = conf.low, ymax = conf.high))
@@ -61,7 +66,9 @@
 #'     day = c("2", "3", "4")
 #'   )
 #' )
+#' 
 #' by_price
+#' 
 #' tidy(by_price)
 #'
 #' ggplot(tidy(by_price, conf.int = TRUE), aes(price2, estimate, color = day)) +
@@ -222,7 +229,7 @@ tidy_emmeans_summary <- function(x, null.value = NULL, term_names = NULL) {
     ret <- bind_cols(contrast = ret[, "contrast"], null.value = null.value, select(ret, -contrast))
   }
 
-  # Add term column, if appropriate, unless it exists
+  # add term column, if appropriate, unless it exists
   if ("term" %in% colnames(ret)) {
     ret <- ret %>%
       mutate(term = stringr::str_trim(term))

@@ -41,12 +41,15 @@ of the appropriate type.
 }
 \examples{
 
+# feel free to ignore the following line—it allows {broom} to supply 
+# examples without requiring the model-supplying package to be installed.
 if (requireNamespace("gmm", quietly = TRUE)) {
 
+# load libraries for models and data
 library(gmm)
 
 # examples come from the "gmm" package
-## CAPM test with GMM
+# CAPM test with GMM
 data(Finance)
 r <- Finance[1:300, 1:10]
 rm <- Finance[1:300, "rm"]
@@ -87,7 +90,7 @@ res_black <- gmm(g, x = x, t0 = rep(0, 11))
 tidy(res_black)
 tidy(res_black, conf.int = TRUE)
 
-## APT test with Fama-French factors and GMM
+# APT test with Fama-French factors and GMM
 
 f1 <- zm
 f2 <- Finance[1:300, "hml"] - rf

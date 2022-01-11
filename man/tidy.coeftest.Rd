@@ -38,8 +38,11 @@ specify which components to return.
 }
 \examples{
 
+# feel free to ignore the following line—it allows {broom} to supply 
+# examples without requiring the model-supplying package to be installed.
 if (requireNamespace("lmtest", quietly = TRUE)) {
 
+# load libraries for models and data
 library(lmtest)
 
 m <- lm(dist ~ speed, data = cars)
@@ -48,20 +51,26 @@ coeftest(m)
 tidy(coeftest(m))
 tidy(coeftest(m, conf.int = TRUE))
 
-# A very common workflow is to combine lmtest::coeftest with alternate
+# a very common workflow is to combine lmtest::coeftest with alternate
 # variance-covariance matrices via the sandwich package. The lmtest
 # tidiers support this workflow too, enabling you to adjust the standard
 # errors of your tidied models on the fly.
 library(sandwich)
-tidy(coeftest(m, vcov = vcovHC))               # "HC3" (default) robust SEs
-tidy(coeftest(m, vcov = vcovHC, type = "HC2")) # "HC2" robust SEs
-tidy(coeftest(m, vcov = NeweyWest))            # N-W HAC robust SEs
 
-# The columns of the returned tibble for glance.coeftest() will vary 
+# "HC3" (default) robust SEs
+tidy(coeftest(m, vcov = vcovHC))       
+
+# "HC2" robust SEs               
+tidy(coeftest(m, vcov = vcovHC, type = "HC2")) 
+
+# N-W HAC robust SEs
+tidy(coeftest(m, vcov = NeweyWest))            
+
+# the columns of the returned tibble for glance.coeftest() will vary 
 # depending on whether the coeftest object retains the underlying model.
 # Users can control this with the "save = TRUE" argument of coeftest().
 glance(coeftest(m))
-glance(coeftest(m, save = TRUE)) # More columns
+glance(coeftest(m, save = TRUE))
 
 }
 

@@ -35,6 +35,33 @@ model component varies across models but is usually self-evident.
 If a model has several distinct types of components, you will need to
 specify which components to return.
 }
+\examples{
+
+#' # feel free to ignore the following line—it allows {broom} to supply 
+# examples without requiring the model-supplying package to be installed.
+if (requireNamespace("quantreg", quietly = TRUE)) {
+
+# load modeling library
+library(quantreg)
+
+# build artificial data with multiplicative error
+set.seed(1)
+dat <- NULL 
+dat$x <- rep(1:25, 20)
+dat$y <- SSlogis(dat$x, 10, 12, 2) * rnorm(500, 1, 0.1)
+
+# fit the median using nlrq
+mod <- nlrq(y ~ SSlogis(x, Asym, mid, scal), 
+            data = dat, tau = 0.5, trace = TRUE)
+
+# summarize model fit with tidiers
+tidy(mod)
+glance(mod)
+augment(mod)
+
+}
+
+}
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[quantreg:nlrq]{quantreg::nlrq()}}
 

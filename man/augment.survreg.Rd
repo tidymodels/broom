@@ -92,23 +92,30 @@ missing at this time.
 }
 \examples{
 
+# feel free to ignore the following line—it allows {broom} to supply 
+# examples without requiring the model-supplying package to be installed.
 if (requireNamespace("survival", quietly = TRUE)) {
 
+# load libraries for models and data
 library(survival)
 
+# fit model
 sr <- survreg(
   Surv(futime, fustat) ~ ecog.ps + rx,
   ovarian,
   dist = "exponential"
 )
 
+# summarize model fit with tidiers + visualization
 tidy(sr)
 augment(sr, ovarian)
 glance(sr)
 
 # coefficient plot
 td <- tidy(sr, conf.int = TRUE)
+
 library(ggplot2)
+
 ggplot(td, aes(estimate, term)) +
   geom_point() +
   geom_errorbarh(aes(xmin = conf.low, xmax = conf.high), height = 0) +

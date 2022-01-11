@@ -14,9 +14,17 @@
 #' 
 #' if (requireNamespace("car", quietly = TRUE)) {
 #'
-#' dw <- car::durbinWatsonTest(lm(mpg ~ wt, data = mtcars))
+#' # load modeling library
+#' library(car)
+#' 
+#' # fit model
+#' dw <- durbinWatsonTest(lm(mpg ~ wt, data = mtcars))
+#' 
+#' # summarize model fit with tidiers
 #' tidy(dw)
-#' glance(dw) # same output for all durbinWatsonTests
+#' 
+#' # same output for all durbinWatsonTests
+#' glance(dw) 
 #' 
 #' }
 #' 
@@ -55,13 +63,19 @@ glance.durbinWatsonTest <- function(x, ...) tidy(x)
 #'
 #' @examples
 #'
+#' # feel free to ignore the following line—it allows {broom} to supply 
+#' # examples without requiring the model-supplying package to be installed.
 #' if (requireNamespace("car", quietly = TRUE)) {
 #' 
+#' # load libraries for models and data
 #' library(car)
+#' 
 #' data(Moore)
+#' 
 #' lt <- with(Moore, leveneTest(conformity, fcategory))
+#' 
 #' tidy(lt)
-#' glance(lt) # same output for all leveneTest
+#' glance(lt)
 #' 
 #' }
 #' @name leveneTest_tidiers

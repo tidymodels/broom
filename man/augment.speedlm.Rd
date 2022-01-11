@@ -75,10 +75,17 @@ missing at this time.
 }
 \examples{
 
+# feel free to ignore the following line—it allows {broom} to supply 
+# examples without requiring the model-supplying package to be installed.
 if (requireNamespace("speedglm", quietly = TRUE)) {
 
-mod <- speedglm::speedlm(mpg ~ wt + qsec, data = mtcars, fitted = TRUE)
+# load modeling library
+library(speedglm)
 
+# fit model
+mod <- speedlm(mpg ~ wt + qsec, data = mtcars, fitted = TRUE)
+
+# summarize model fit with tidiers
 tidy(mod)
 glance(mod)
 augment(mod)

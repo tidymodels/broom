@@ -82,11 +82,13 @@
 #'   ggtitle("Principal components of arrest data")
 #'
 #' au <- augment(pc, data = USArrests)
+#' 
 #' au
 #'
 #' ggplot(au, aes(.fittedPC1, .fittedPC2)) +
 #'   geom_point() +
 #'   geom_text(aes(label = .rownames), vjust = 1, hjust = 1)
+#'   
 #' @aliases prcomp_tidiers
 #' @export
 #' @seealso [stats::prcomp()], [svd_tidiers]
@@ -125,7 +127,7 @@ tidy.prcomp <- function(x, matrix = "u", ...) {
     if (is.null(rownames(x$x))) ret$row <- as.integer(ret$row)
   }
 
-  ## change the PC to a numeric
+  # change the PC to a numeric
   ret <- mutate(ret, PC = as.numeric(stringr::str_replace(PC, "PC", "")))
   as_tibble(ret)
 }

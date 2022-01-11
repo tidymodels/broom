@@ -92,32 +92,38 @@ augment.fixest only works for \code{\link[fixest:feols]{fixest::feols()}}, \code
 }
 \examples{
 
+# feel free to ignore the following line—it allows {broom} to supply 
+# examples without requiring the model-supplying package to be installed.
 if (requireNamespace("fixest", quietly = TRUE)) {
 
-\donttest{
+# load libraries for models and data
 library(fixest)
 
-gravity <- feols(log(Euros) ~ log(dist_km) | Origin + Destination + Product + Year, trade)
+gravity <- 
+  feols(
+    log(Euros) ~ log(dist_km) | Origin + Destination + Product + Year, trade
+  )
 
 tidy(gravity)
 glance(gravity)
 augment(gravity, trade)
 
-## To get robust or clustered SEs, users can either:
-# 1) Or, specify the arguments directly in the tidy() call
+# to get robust or clustered SEs, users can either:
+
+# 1) specify the arguments directly in the `tidy()` call
 
 tidy(gravity, conf.int = TRUE, cluster = c("Product", "Year"))
 
 tidy(gravity, conf.int = TRUE, se = "threeway")
 
-# 2) Feed tidy() a summary.fixest object that has already accepted these arguments
+# 2) or, feed tidy() a summary.fixest object that has already accepted 
+# these arguments
 
 gravity_summ <- summary(gravity, cluster = c("Product", "Year"))
+
 tidy(gravity_summ, conf.int = TRUE)
 
-# Approach (1) is preferred.
-
-}
+# approach (1) is preferred.
 
 }
 

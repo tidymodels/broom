@@ -33,13 +33,20 @@ For tidiers for robust models from the \pkg{MASS} package see
 }
 \examples{
 
+# feel free to ignore the following line—it allows {broom} to supply 
+# examples without requiring the model-supplying package to be installed.
 if (requireNamespace("robust", quietly = TRUE)) {
-  library(robust)
 
-  gm <- glmRob(am ~ wt, data = mtcars, family = "binomial")
+# load libraries for models and data
+library(robust)
 
-  tidy(gm)
-  glance(gm)
+# fit model
+gm <- glmRob(am ~ wt, data = mtcars, family = "binomial")
+
+# summarize model fit with tidiers
+tidy(gm)
+glance(gm)
+
 }
 }
 \seealso{

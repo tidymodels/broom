@@ -37,15 +37,22 @@ specify which components to return.
 }
 \examples{
 
+# feel free to ignore the following line—it allows {broom} to supply 
+# examples without requiring the model-supplying package to be installed.
 if (requireNamespace("plm", quietly = TRUE)) {
 
+# load libraries for models and data
 library(plm)
 
+# load data
 data("Produc", package = "plm")
+
+# fit model
 zz <- plm(log(gsp) ~ log(pcap) + log(pc) + log(emp) + unemp,
   data = Produc, index = c("state", "year")
 )
 
+# summarize model fit with tidiers
 summary(zz)
 
 tidy(zz)

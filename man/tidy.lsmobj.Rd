@@ -39,9 +39,13 @@ passed on to \code{\link[emmeans:summary.emmGrid]{emmeans::summary.emmGrid()}} o
 }
 \examples{
 
+# feel free to ignore the following line—it allows {broom} to supply 
+# examples without requiring the model-supplying package to be installed.
 if (requireNamespace("emmeans", quietly = TRUE)) {
 
+# load libraries for models and data
 library(emmeans)
+
 # linear model for sales of oranges per day
 oranges_lm1 <- lm(sales1 ~ price1 + price2 + day + store, data = oranges)
 
@@ -60,6 +64,7 @@ tidy(contrast(marginal, method = "pairwise"))
 
 # plot confidence intervals
 library(ggplot2)
+
 ggplot(tidy(marginal, conf.int = TRUE), aes(day, estimate)) +
   geom_point() +
   geom_errorbar(aes(ymin = conf.low, ymax = conf.high))
@@ -72,7 +77,9 @@ by_price <- emmeans(oranges_lm1, "day",
     day = c("2", "3", "4")
   )
 )
+
 by_price
+
 tidy(by_price)
 
 ggplot(tidy(by_price, conf.int = TRUE), aes(price2, estimate, color = day)) +

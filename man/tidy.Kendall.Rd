@@ -32,13 +32,17 @@ specify which components to return.
 }
 \examples{
 
+# feel free to ignore the following line—it allows {broom} to supply 
+# examples without requiring the model-supplying package to be installed.
 if (requireNamespace("Kendall", quietly = TRUE)) {
 
+# load libraries for models and data
 library(Kendall)
 
 A <- c(2.5, 2.5, 2.5, 2.5, 5, 6.5, 6.5, 10, 10, 10, 10, 10, 14, 14, 14, 16, 17)
 B <- c(1, 1, 1, 1, 2, 1, 1, 2, 1, 1, 1, 1, 1, 1, 2, 2, 2)
 
+# fit models and summarize results
 f_res <- Kendall(A, B)
 tidy(f_res)
 

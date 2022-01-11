@@ -30,14 +30,18 @@ specify which components to return.
 }
 \examples{
 
+# feel free to ignore the following line—it allows {broom} to supply 
+# examples without requiring the model-supplying package to be installed.
 if (requireNamespace("maps", quietly = TRUE)) {
 
+# load libraries for models and data
 library(maps)
 library(ggplot2)
 
-
 ca <- map("county", "ca", plot = FALSE, fill = TRUE)
+
 tidy(ca)
+
 qplot(long, lat, data = ca, geom = "polygon", group = group)
 
 tx <- map("county", "texas", plot = FALSE, fill = TRUE)

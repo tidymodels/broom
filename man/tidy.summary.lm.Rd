@@ -41,14 +41,20 @@ objects into their leaner \code{summary.lm} equivalents to conserve memory.
 }
 \examples{
 
+# fit model
 mod <- lm(mpg ~ wt + qsec, data = mtcars)
 modsumm <- summary(mod)
 
+# summarize model fit with tidiers
 tidy(mod, conf.int = TRUE)
-tidy(modsumm, conf.int = TRUE) # same
+
+# equivalent to the above
+tidy(modsumm, conf.int = TRUE) 
 
 glance(mod)
-glance(modsumm) # mostly the same, except for a few missing columns
+
+# mostly the same, except for a few missing columns
+glance(modsumm) 
 
 }
 \seealso{

@@ -12,24 +12,28 @@
 #'
 #' @examples
 #' 
+#' # feel free to ignore the following line—it allows {broom} to supply 
+#' # examples without requiring the model-supplying package to be installed.
 #' if (requireNamespace("nnet", quietly = TRUE)) {
+#'   if (requireNamespace("MASS", quietly = TRUE)) {
 #'
+#' # load libraries for models and data
 #' library(nnet)
 #' library(MASS)
 #'
 #' example(birthwt)
+#' 
 #' bwt.mu <- multinom(low ~ ., bwt)
+#' 
 #' tidy(bwt.mu)
 #' glance(bwt.mu)
 #'
-#' #* This model is a truly terrible model
-#' #* but it should show you what the output looks
-#' #* like in a multinomial logistic regression
-#'
+#' # or, for output from a multinomial logistic regression
 #' fit.gear <- multinom(gear ~ mpg + factor(am), data = mtcars)
 #' tidy(fit.gear)
 #' glance(fit.gear)
 #' 
+#'   }
 #' }
 #' 
 #' @aliases multinom_tidiers nnet_tidiers

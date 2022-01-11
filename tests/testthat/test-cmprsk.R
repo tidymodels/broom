@@ -10,7 +10,7 @@ library(cmprsk)
 set.seed(2)
 
 # simulate data
-lrf_time <- rexp(100) #time to loco-regional failure (lrf)
+lrf_time <- rexp(100) # time to loco-regional failure (lrf)
 lrf_event <- sample(0:2, 100, replace = TRUE) 
 trt <- sample(0:1, 100, replace = TRUE)
 strt <- sample(1:2, 100, replace = TRUE)

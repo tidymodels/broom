@@ -68,21 +68,29 @@ how residuals are computed.
 \examples{
 
 tt <- t.test(rnorm(10))
+
 tidy(tt)
-glance(tt) # same output for all htests
+
+# the glance output will be the same for each of the below tests
+glance(tt)
 
 tt <- t.test(mpg ~ am, data = mtcars)
+
 tidy(tt)
 
 wt <- wilcox.test(mpg ~ am, data = mtcars, conf.int = TRUE, exact = FALSE)
+
 tidy(wt)
 
 ct <- cor.test(mtcars$wt, mtcars$mpg)
+
 tidy(ct)
 
 chit <- chisq.test(xtabs(Freq ~ Sex + Class, data = as.data.frame(Titanic)))
+
 tidy(chit)
 augment(chit)
+
 }
 \seealso{
 \code{\link[=augment]{augment()}}, \code{\link[stats:chisq.test]{stats::chisq.test()}}

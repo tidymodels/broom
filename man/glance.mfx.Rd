@@ -58,27 +58,32 @@ objects from the \code{mfx} package.
 \examples{
 
 
+# feel free to ignore the following line—it allows {broom} to supply 
+# examples without requiring the model-supplying package to be installed.
 if (requireNamespace("mfx", quietly = TRUE)) {
 
-\dontrun{ 
+# load libraries for models and data
 library(mfx)
 
-## Get the marginal effects from a logit regression
+# get the marginal effects from a logit regression
 mod_logmfx <- logitmfx(am ~ cyl + hp + wt, atmean = TRUE, data = mtcars)
+
 tidy(mod_logmfx, conf.int = TRUE)
 
-## Compare with the naive model coefficients of the same logit call (not run)
-# tidy(glm(am ~ cyl + hp + wt, family = binomial, data = mtcars), conf.int = TRUE)
+# compare with the naive model coefficients of the same logit call
+tidy(
+  glm(am ~ cyl + hp + wt, family = binomial, data = mtcars), conf.int = TRUE
+)
 
 augment(mod_logmfx)
 glance(mod_logmfx)
 
-## Another example, this time using probit regression
+# another example, this time using probit regression
 mod_probmfx <- probitmfx(am ~ cyl + hp + wt, atmean = TRUE, data = mtcars)
+
 tidy(mod_probmfx, conf.int = TRUE)
 augment(mod_probmfx)
 glance(mod_probmfx)
-}
 
 }
 

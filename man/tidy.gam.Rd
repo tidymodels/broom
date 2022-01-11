@@ -58,10 +58,17 @@ than \code{estimate} and \code{std.error}.
 }
 \examples{
 
+# feel free to ignore the following line—it allows {broom} to supply 
+# examples without requiring the model-supplying package to be installed.
 if (requireNamespace("mgcv", quietly = TRUE)) {
 
-g <- mgcv::gam(mpg ~ s(hp) + am + qsec, data = mtcars)
+# load libraries for models and data
+library(mgcv)
 
+# fit model
+g <- gam(mpg ~ s(hp) + am + qsec, data = mtcars)
+
+# summarize model fit with tidiers
 tidy(g)
 tidy(g, parametric = TRUE)
 glance(g)

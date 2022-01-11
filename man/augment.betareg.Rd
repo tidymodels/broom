@@ -96,14 +96,22 @@ For additional details on Cook's distance, see
 }
 \examples{
 
+# feel free to ignore the following line—it allows {broom} to supply 
+# examples without requiring the model-supplying package to be installed.
 if (requireNamespace("betareg", quietly = TRUE)) {
 
+# load libraries for models and data
 library(betareg)
+
+# load dats
 data("GasolineYield", package = "betareg")
 
+# fit model
 mod <- betareg(yield ~ batch + temp, data = GasolineYield)
 
 mod
+
+# summarize model fit with tidiers
 tidy(mod)
 tidy(mod, conf.int = TRUE)
 tidy(mod, conf.int = TRUE, conf.level = .99)

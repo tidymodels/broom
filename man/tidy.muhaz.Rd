@@ -30,13 +30,19 @@ specify which components to return.
 }
 \examples{
 
+# feel free to ignore the following two lines—they allow {broom} to supply 
+# examples without requiring the model/data-supplying packages to be installed.
 if (requireNamespace("muhaz", quietly = TRUE)) {
   if (requireNamespace("survival", quietly = TRUE)) {
 
+# load libraries for models and data
 library(muhaz)
 library(survival)
 
+# fit model
 x <- muhaz(ovarian$futime, ovarian$fustat)
+
+# summarize model fit with tidiers
 tidy(x)
 glance(x)
 

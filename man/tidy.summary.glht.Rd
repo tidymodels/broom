@@ -31,8 +31,11 @@ specify which components to return.
 }
 \examples{
 
+# feel free to ignore the following line—it allows {broom} to supply 
+# examples without requiring the model-supplying package to be installed.
 if (requireNamespace("multcomp", quietly = TRUE)) {
 
+# load libraries for models and data
 library(multcomp)
 library(ggplot2)
 
@@ -40,11 +43,14 @@ amod <- aov(breaks ~ wool + tension, data = warpbreaks)
 wht <- glht(amod, linfct = mcp(tension = "Tukey"))
 
 tidy(wht)
+
 ggplot(wht, aes(lhs, estimate)) +
   geom_point()
 
 CI <- confint(wht)
+
 tidy(CI)
+
 ggplot(CI, aes(lhs, estimate, ymin = lwr, ymax = upr)) +
   geom_pointrange()
 

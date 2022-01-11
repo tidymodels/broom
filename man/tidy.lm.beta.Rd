@@ -43,22 +43,31 @@ the model with \code{na.action = na.exclude}.
 }
 \examples{
 
+# feel free to ignore the following line—it allows {broom} to supply 
+# examples without requiring the model-supplying package to be installed.
 if (requireNamespace("lm.beta", quietly = TRUE)) {
 
+# load libraries for models and data
 library(lm.beta)
 
+# fit models
 mod <- stats::lm(speed ~ ., data = cars)
 std <- lm.beta(mod)
+
+# summarize model fit with tidiers
 tidy(std, conf.int = TRUE)
 
+# generate data
 ctl <- c(4.17, 5.58, 5.18, 6.11, 4.50, 4.61, 5.17, 4.53, 5.33, 5.14)
 trt <- c(4.81, 4.17, 4.41, 3.59, 5.87, 3.83, 6.03, 4.89, 4.32, 4.69)
 group <- gl(2, 10, 20, labels = c("Ctl", "Trt"))
 weight <- c(ctl, trt)
 
+# fit models
 mod2 <- lm(weight ~ group)
-
 std2 <- lm.beta(mod2)
+
+# summarize model fit with tidiers
 tidy(std2, conf.int = TRUE)
 
 }

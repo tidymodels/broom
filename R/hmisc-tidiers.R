@@ -23,18 +23,25 @@
 #'
 #' @examples
 #' 
+#' # feel free to ignore the following line—it allows {broom} to supply 
+#' # examples without requiring the model-supplying package to be installed.
 #' if (requireNamespace("Hmisc", quietly = TRUE)) {
 #'
+#' # load libraries for models and data
 #' library(Hmisc)
 #'
 #' mat <- replicate(52, rnorm(100))
+#' 
 #' # add some NAs
 #' mat[sample(length(mat), 2000)] <- NA
-#' # also column names
+#' 
+#' # also, column names
 #' colnames(mat) <- c(LETTERS, letters)
 #'
+#' # fit model
 #' rc <- rcorr(mat)
 #'
+#' # summarize model fit with tidiers  + visualization
 #' td <- tidy(rc)
 #' td
 #'

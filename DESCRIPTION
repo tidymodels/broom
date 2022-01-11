@@ -641,7 +641,7 @@ Config/Needs/website:
     tidyverse/tidytemplate    
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.1.1
+RoxygenNote: 7.1.2
 Language: en-US
 Collate:
     'aaa-documentation-helper.R'
@@ -659,6 +659,7 @@ Collate:
     'btergm-tidiers.R'
     'car-tidiers.R'
     'caret-tidiers.R'
+    'cluster-tidiers.R'
     'cmprsk-tidiers.R'
     'data-frame-tidiers.R'
     'deprecated-0-7-0.R'
@@ -677,7 +678,7 @@ Collate:
     'kendall-tidiers.R'
     'ks-tidiers.R'
     'lavaan-tidiers.R'
-    'leaps.R'
+    'leaps-tidiers.R'
     'lfe-tidiers.R'
     'list-irlba.R'
     'list-optim-tidiers.R'
@@ -697,7 +698,8 @@ Collate:
     'mass-rlm-tidiers.R'
     'matrix-tidiers.R'
     'mclust-tidiers.R'
-    'mediate-tidiers.R'
+    'mediation-tidiers.R'
+    'metafor-tidiers.R'
     'mfx-tidiers.R'
     'mgcv-tidiers.R'
     'mlogit-tidiers.R'
@@ -708,7 +710,6 @@ Collate:
     'orcutt-tidiers.R'
     'ordinal-clm-tidiers.R'
     'ordinal-clmm-tidiers.R'
-    'pam-tidiers.R'
     'plm-tidiers.R'
     'polca-tidiers.R'
     'psych-tidiers.R'
@@ -716,7 +717,6 @@ Collate:
     'quantreg-nlrq-tidiers.R'
     'quantreg-rq-tidiers.R'
     'quantreg-rqs-tidiers.R'
-    'rma-tidiers.R'
     'robust-glmrob-tidiers.R'
     'robust-lmrob-tidiers.R'
     'robustbase-glmrob-tidiers.R'

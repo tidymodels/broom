@@ -8,19 +8,23 @@
 #'
 #' @examples
 #' 
+#' # feel free to ignore the following line—it allows {broom} to supply 
+#' # examples without requiring the model-supplying package to be installed.
 #' if (requireNamespace("zoo", quietly = TRUE)) {
 #'
+#' # load libraries for models and data
 #' library(zoo)
 #' library(ggplot2)
 #'
 #' set.seed(1071)
 #'
-#' # data generated as shown in the zoo vignette
+#' # generate data
 #' Z.index <- as.Date(sample(12450:12500, 10))
 #' Z.data <- matrix(rnorm(30), ncol = 3)
 #' colnames(Z.data) <- c("Aa", "Bb", "Cc")
 #' Z <- zoo(Z.data, Z.index)
 #'
+#' # summarize model fit with tidiers + visualization
 #' tidy(Z)
 #'
 #' ggplot(tidy(Z), aes(index, value, color = series)) +

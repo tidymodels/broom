@@ -42,19 +42,27 @@ specify which components to return.
 }
 \examples{
 
-\dontrun{
+# feel free to ignore the following line—it allows {broom} to supply 
+# examples without requiring the model-supplying package to be installed.
+if (requireNamespace("biglm", quietly = TRUE)) {
+
+# load modeling library
 library(biglm)
 
+# fit model -- linear regression
 bfit <- biglm(mpg ~ wt + disp, mtcars)
+
+# summarize model fit with tidiers
 tidy(bfit)
 tidy(bfit, conf.int = TRUE)
 tidy(bfit, conf.int = TRUE, conf.level = .9)
 
 glance(bfit)
 
-# bigglm: logistic regression
+# fit model -- logistic regression
 bgfit <- bigglm(am ~ mpg, mtcars, family = binomial())
 
+# summarize model fit with tidiers
 tidy(bgfit)
 tidy(bgfit, exponentiate = TRUE)
 tidy(bgfit, conf.int = TRUE)
@@ -62,6 +70,7 @@ tidy(bgfit, conf.int = TRUE, conf.level = .9)
 tidy(bgfit, conf.int = TRUE, conf.level = .9, exponentiate = TRUE)
 
 glance(bgfit)
+
 }
 
 }

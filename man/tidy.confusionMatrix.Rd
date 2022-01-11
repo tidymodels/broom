@@ -36,33 +36,38 @@ specify which components to return.
 }
 \examples{
 
+# feel free to ignore the following line—it allows {broom} to supply 
+# examples without requiring the model-supplying package to be installed.
 if (requireNamespace("caret", quietly = TRUE)) {
 
+# load libraries for models and data
 library(caret)
 
 set.seed(27)
 
+# generate data
 two_class_sample1 <- as.factor(sample(letters[1:2], 100, TRUE))
 two_class_sample2 <- as.factor(sample(letters[1:2], 100, TRUE))
 
-two_class_cm <- caret::confusionMatrix(
+two_class_cm <- confusionMatrix(
   two_class_sample1,
   two_class_sample2
 )
 
+# summarize model fit with tidiers
 tidy(two_class_cm)
 tidy(two_class_cm, by_class = FALSE)
 
 # multiclass example
-
 six_class_sample1 <- as.factor(sample(letters[1:6], 100, TRUE))
 six_class_sample2 <- as.factor(sample(letters[1:6], 100, TRUE))
 
-six_class_cm <- caret::confusionMatrix(
+six_class_cm <- confusionMatrix(
   six_class_sample1,
   six_class_sample2
 )
 
+# summarize model fit with tidiers
 tidy(six_class_cm)
 tidy(six_class_cm, by_class = FALSE)
 

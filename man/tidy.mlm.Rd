@@ -45,8 +45,12 @@ the model with \code{na.action = na.exclude}.
 }
 \examples{
 
+# fit model
 mod <- lm(cbind(mpg, disp) ~ wt, mtcars)
+
+# summarize model fit with tidiers
 tidy(mod, conf.int = TRUE)
+
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}

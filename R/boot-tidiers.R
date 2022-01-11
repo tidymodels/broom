@@ -23,8 +23,11 @@
 #'
 #' @examples
 #' 
+#' # feel free to ignore the following line—it allows {broom} to supply 
+#' # examples without requiring the model-supplying package to be installed.
 #' if (requireNamespace("boot", quietly = TRUE)) {
 #'
+#' # load modeling library
 #' library(boot)
 #'
 #' clotting <- data.frame(
@@ -33,6 +36,7 @@
 #'   lot2 = c(69, 35, 26, 21, 18, 16, 13, 12, 12)
 #' )
 #'
+#' # fit models
 #' g1 <- glm(lot2 ~ log(u), data = clotting, family = Gamma)
 #'
 #' bootfun <- function(d, i) {
@@ -40,6 +44,8 @@
 #' }
 #'
 #' bootres <- boot(clotting, bootfun, R = 999)
+#' 
+#' # summarize model fits with tidiers
 #' tidy(g1, conf.int = TRUE)
 #' tidy(bootres, conf.int = TRUE)
 #' 
@@ -50,8 +56,6 @@
 #' @seealso [tidy()], [boot::boot()], [boot::tsboot()], [boot::boot.ci()],
 #'   [rsample::bootstraps()]
 tidy.boot <- function(x,
-                      ## is there a convention for the default value of
-                      ## conf.int?
                       conf.int = FALSE,
                       conf.level = 0.95,
                       conf.method = c("perc", "bca", "basic", "norm"),
@@ -112,8 +116,8 @@ tidy.boot <- function(x,
       conf = conf.level, type = conf.method
     )
 
-    ## boot.ci uses c("norm", "basic", "perc", "stud") for types
-    ## stores them with longer names
+    # boot.ci uses c("norm", "basic", "perc", "stud") for types
+    # stores them with longer names
     ci.pos <- pmatch(conf.method, names(ci.list[[1]]))
 
     if (conf.method == "norm") {

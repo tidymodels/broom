@@ -15,7 +15,7 @@ eqDemand <- consump ~ price + income
 eqSupply <- consump ~ price + farmPrice + trend
 system <- list(demand = eqDemand, supply = eqSupply)
 
-## OLS estimation
+# OLS estimation
 fitols <- systemfit(system, data = Kmenta)
 
 test_that("tidy.systemfit with OLS", {
@@ -28,7 +28,7 @@ test_that("tidy.systemfit with OLS", {
   check_dims(td, 7, 7)
 })
 
-## OLS estimation with 2 restrictions
+# OLS estimation with 2 restrictions
 Rrestr <- matrix(0, 2, 7)
 Rrestr[1, 3] <- 1
 Rrestr[1, 7] <- -1
@@ -49,7 +49,7 @@ test_that("tidy.systemfit with OLS 2 restrictions", {
 })
 
 
-## OLS estimation with the same 2 restrictions in symbolic form
+# OLS estimation with the same 2 restrictions in symbolic form
 restrict <- c(
   "demand_income - supply_trend = 0",
   "- demand_price + supply_price = 0.5"
@@ -62,8 +62,8 @@ test_that("tidy.systemfit with OLS 2 restrictions", {
   check_dims(td, 7, 7)
 })
 
-## OLS with restrictions on the coefficients by modifying the regressor matrix
-## with argument restrict.regMat
+# OLS with restrictions on the coefficients by modifying the regressor matrix
+# with argument restrict.regMat
 modReg <- matrix(0, 7, 6)
 colnames(modReg) <- c(
   "demIntercept", "demPrice", "demIncome",
@@ -86,7 +86,7 @@ test_that("tidy.systemfit with OLS 2 restrictions and modifications", {
   check_dims(td, 7, 7)
 })
 
-## iterated SUR estimation
+# iterated SUR estimation
 fitsur <- systemfit(system, "SUR", data = Kmenta, maxit = 100)
 
 test_that("tidy.systemfit with SUR", {
@@ -96,7 +96,7 @@ test_that("tidy.systemfit with SUR", {
 })
 
 
-## 2SLS estimation
+# 2SLS estimation
 inst <- ~ income + farmPrice + trend
 fit2sls <- systemfit(system, "2SLS", inst = inst, data = Kmenta)
 test_that("tidy.systemfit with 2SLS", {
@@ -106,7 +106,7 @@ test_that("tidy.systemfit with 2SLS", {
 })
 
 
-## 2SLS estimation with different instruments in each equation
+# 2SLS estimation with different instruments in each equation
 inst1 <- ~ income + farmPrice
 inst2 <- ~ income + farmPrice + trend
 
@@ -120,7 +120,7 @@ test_that("tidy.systemfit with 2SLS with different instruments", {
   check_dims(td, 7, 7)
 })
 
-## 3SLS estimation with GMM-3SLS formula
+# 3SLS estimation with GMM-3SLS formula
 inst <- ~ income + farmPrice + trend
 
 fit3sls <- systemfit(system, "3SLS",

@@ -32,9 +32,11 @@
 #'
 #' @examples
 #' 
+#' # feel free to ignore the following line—it allows {broom} to supply 
+#' # examples without requiring the model-supplying package to be installed.
 #' if (requireNamespace("lavaan", quietly = TRUE)) {
 #' 
-#' \dontrun{
+#' # load libraries for models and data
 #' library(lavaan)
 #'
 #' cfa.fit <- cfa("F =~ x1 + x2 + x3 + x4 + x5 + x6 + x7 + x8 + x9",
@@ -42,7 +44,6 @@
 #' )
 #'
 #' tidy(cfa.fit)
-#' }
 #' 
 #' }
 #' 
@@ -106,15 +107,22 @@ tidy.lavaan <- function(x, conf.int = FALSE, conf.level = 0.95, ...) {
 #' Pharmacy, 13(3), 634-643. https://doi.org/10.1016/j.sapharm.2016.06.006
 #'
 #' @examples
-#'
-#' \dontrun{
+#' 
+#' # feel free to ignore the following line—it allows {broom} to supply 
+#' # examples without requiring the model-supplying package to be installed.
+#' if (requireNamespace("lavaan", quietly = TRUE)) {
+#' 
 #' library(lavaan)
 #'
+#' # fit model
 #' cfa.fit <- cfa(
 #'   "F =~ x1 + x2 + x3 + x4 + x5",
 #'   data = HolzingerSwineford1939, group = "school"
 #' )
+#'
+#' # summarize model fit with tidiers
 #' glance(cfa.fit)
+#' 
 #' }
 #' 
 #' @export

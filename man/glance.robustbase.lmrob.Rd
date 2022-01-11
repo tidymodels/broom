@@ -45,24 +45,30 @@ For tidiers for robust models from the \pkg{MASS} package see
 }
 \examples{
 
+if (requireNamespace("robustbase", quietly = TRUE)) {
+
+# load libraries for models and data
 library(robustbase)
-# From the robustbase::lmrob examples:
+
 data(coleman)
 set.seed(0)
 
-m <- robustbase::lmrob(Y ~ ., data = coleman)
+m <- lmrob(Y ~ ., data = coleman)
 tidy(m)
 augment(m)
 glance(m)
 
-# From the robustbase::glmrob examples:
 data(carrots)
+
 Rfit <- glmrob(cbind(success, total - success) ~ logdose + block,
   family = binomial, data = carrots, method = "Mqle",
   control = glmrobMqle.control(tcc = 1.2)
 )
+
 tidy(Rfit)
 augment(Rfit)
+
+}
 }
 \seealso{
 \code{\link[robustbase:lmrob]{robustbase::lmrob()}}

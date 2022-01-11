@@ -12,13 +12,18 @@
 #'
 #' @examples
 #' 
+#' # feel free to ignore the following line—it allows {broom} to supply 
+#' # examples without requiring the model-supplying package to be installed.
 #' if (requireNamespace("ks", quietly = TRUE)) {
 #'
+#' # load libraries for models and data
 #' library(ks)
 #'
+#' # generate data
 #' dat <- replicate(2, rnorm(100))
 #' k <- kde(dat)
 #'
+#' # summarize model fit with tidiers + visualization
 #' td <- tidy(k)
 #' td
 #'

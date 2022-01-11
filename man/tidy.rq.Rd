@@ -40,6 +40,44 @@ When only a single predictor is included in the model,
 no confidence intervals are calculated and the confidence limits are
 set to NA.
 }
+\examples{
+
+# feel free to ignore the following line—it allows {broom} to supply 
+# examples without requiring the model-supplying package to be installed.
+if (requireNamespace("quantreg", quietly = TRUE)) {
+
+# load modeling library and data
+library(quantreg)
+
+data(stackloss)
+
+# median (l1) regression fit for the stackloss data. 
+mod1 <- rq(stack.loss ~ stack.x, .5)  
+
+# weighted sample median
+mod2 <- rq(rnorm(50) ~ 1, weights = runif(50))
+
+# summarize model fit with tidiers
+tidy(mod1)
+glance(mod1)
+augment(mod1)
+
+tidy(mod2)
+glance(mod2)
+augment(mod2)
+
+# varying tau to generate an rqs object
+mod3 <- rq(stack.loss ~ stack.x, tau = c(.25, .5))
+
+tidy(mod3)
+augment(mod3)
+
+# glance cannot handle rqs objects like `mod3`--use a purrr 
+# `map`-based workflow instead
+
+}
+
+}
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[quantreg:rq]{quantreg::rq()}}
 

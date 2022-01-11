@@ -74,6 +74,8 @@ A very thin wrapper around \code{\link[=tidy_svd]{tidy_svd()}}.
 }
 \examples{
 
+# feel free to ignore the following line—it allows {broom} to supply 
+# examples without requiring the data-supplying package to be installed.
 if (requireNamespace("modeldata", quietly = TRUE)) {
 
 library(modeldata)

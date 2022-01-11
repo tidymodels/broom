@@ -22,24 +22,27 @@
 #' 
 #' @examples
 #' 
+#' # feel free to ignore the following line—it allows {broom} to supply 
+#' # examples without requiring the model-supplying package to be installed.
 #' if (requireNamespace("ergm", quietly = TRUE)) {
 #'
+#' # load libraries for models and data
 #' library(ergm)
-#' # Using the same example as the ergm package
-#' # Load the Florentine marriage network data
+#' 
+#' # load the Florentine marriage network data
 #' data(florentine)
 #'
-#' # Fit a model where the propensity to form ties between
+#' # fit a model where the propensity to form ties between
 #' # families depends on the absolute difference in wealth
 #' gest <- ergm(flomarriage ~ edges + absdiff("wealth"))
 #'
-#' # Show terms, coefficient estimates and errors
+#' # show terms, coefficient estimates and errors
 #' tidy(gest)
 #'
-#' # Show coefficients as odds ratios with a 99% CI
+#' # show coefficients as odds ratios with a 99% CI
 #' tidy(gest, exponentiate = TRUE, conf.int = TRUE, conf.level = 0.99)
 #'
-#' # Take a look at likelihood measures and other
+#' # take a look at likelihood measures and other
 #' # control parameters used during MCMC estimation
 #' glance(gest)
 #' glance(gest, deviance = TRUE)

@@ -45,14 +45,20 @@ returned rather than printed.
 }
 \examples{
 
+# feel free to ignore the following line—it allows {broom} to supply 
+# examples without requiring the model-supplying package to be installed.
 if (requireNamespace("MASS", quietly = TRUE)) {
 
+# load libraries for models and data
+library(MASS)
 
 names(longley)[1] <- "y"
-fit1 <- MASS::lm.ridge(y ~ ., longley)
+
+# fit model and summarizd results
+fit1 <- lm.ridge(y ~ ., longley)
 tidy(fit1)
 
-fit2 <- MASS::lm.ridge(y ~ ., longley, lambda = seq(0.001, .05, .001))
+fit2 <- lm.ridge(y ~ ., longley, lambda = seq(0.001, .05, .001))
 td2 <- tidy(fit2)
 g2 <- glance(fit2)
 

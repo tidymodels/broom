@@ -17,18 +17,26 @@
 #'
 #' @examples
 #' 
+#' # feel free to ignore the following line—it allows {broom} to supply 
+#' # examples without requiring the model-supplying package to be installed.
 #' if (requireNamespace("psych", quietly = TRUE)) {
 #'
+#' # load libraries for models and data
 #' library(psych)
 #'
+#' # generate example data
 #' rater1 <- 1:9
 #' rater2 <- c(1, 3, 1, 6, 1, 5, 5, 6, 7)
+#' 
+#' # fit model
 #' ck <- cohen.kappa(cbind(rater1, rater2))
 #'
+#' # summarize model fit with tidiers + visualization
 #' tidy(ck)
 #'
 #' # graph the confidence intervals
 #' library(ggplot2)
+#' 
 #' ggplot(tidy(ck), aes(estimate, type)) +
 #'   geom_point() +
 #'   geom_errorbarh(aes(xmin = conf.low, xmax = conf.high))

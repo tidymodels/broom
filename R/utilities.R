@@ -127,7 +127,7 @@ na_types_dict <- list("r" = NA_real_,
                       "c" = NA_character_,
                       "l" = rlang::na_lgl)
 
-# A function that converts a string to a vector of NA types.
+# a function that converts a string to a vector of NA types.
 # e.g. "rri" -> c(NA_real_, NA_real_, rlang::na_int)
 parse_na_types <- function(s) {
   
@@ -143,7 +143,7 @@ parse_na_types <- function(s) {
     unname()
 }
 
-# A function that, given named arguments, will make a one-row
+# a function that, given named arguments, will make a one-row
 # tibble, switching out NULLs for the appropriate NA type.
 as_glance_tibble <- function(..., na_types) {
   

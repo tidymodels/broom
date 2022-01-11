@@ -18,29 +18,43 @@
 #'
 #' @examples
 #' 
+#' # feel free to ignore the following line—it allows {broom} to supply 
+#' # examples without requiring the model-supplying package to be installed.
 #' if (requireNamespace("mclust", quietly = TRUE)) {
 #' 
-#' library(dplyr)
+#' # load library for models and data
 #' library(mclust)
+#' 
+#' # load data manipulation libraries
+#' library(dplyr)
+#' library(tibble)
+#' library(purrr)
+#' library(tidyr)
+#' 
 #' set.seed(27)
 #'
-#' centers <- tibble::tibble(
+#' centers <- tibble(
 #'   cluster = factor(1:3),
-#'   num_points = c(100, 150, 50), # number points in each cluster
-#'   x1 = c(5, 0, -3), # x1 coordinate of cluster center
-#'   x2 = c(-1, 1, -2) # x2 coordinate of cluster center
+#'   # number points in each cluster
+#'   num_points = c(100, 150, 50),
+#'   # x1 coordinate of cluster center
+#'   x1 = c(5, 0, -3), 
+#'   # x2 coordinate of cluster center
+#'   x2 = c(-1, 1, -2) 
 #' )
 #'
 #' points <- centers %>%
 #'   mutate(
-#'     x1 = purrr::map2(num_points, x1, rnorm),
-#'     x2 = purrr::map2(num_points, x2, rnorm)
+#'     x1 = map2(num_points, x1, rnorm),
+#'     x2 = map2(num_points, x2, rnorm)
 #'   ) %>%
-#'   dplyr::select(-num_points, -cluster) %>%
-#'   tidyr::unnest(c(x1, x2))
+#'   select(-num_points, -cluster) %>%
+#'   unnest(c(x1, x2))
 #'
-#' m <- mclust::Mclust(points)
+#' # fit model
+#' m <- Mclust(points)
 #'
+#' # summarize model fit with tidiers
 #' tidy(m)
 #' augment(m, points)
 #' glance(m)

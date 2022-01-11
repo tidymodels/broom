@@ -40,6 +40,44 @@ This method tidies the coefficients of a bootstrapped
 temporal exponential random graph model estimated with the \pkg{xergm}.
 It simply returns the coefficients and their confidence intervals.
 }
+\examples{
+
+# feel free to ignore the following line—it allows {broom} to supply 
+# examples without requiring the model-supplying package to be installed.
+if (requireNamespace("bbmle", quietly = TRUE)) {
+  if (requireNamespace("network", quietly = TRUE)) {
+
+library(btergm)
+library(network)
+
+set.seed(5)
+
+# create 10 random networks with 10 actors
+networks <- list()
+for (i in 1:10) {              
+  mat <- matrix(rbinom(100, 1, .25), nrow = 10, ncol = 10)
+  diag(mat) <- 0              
+  nw <- network(mat)  
+  networks[[i]] <- nw         
+}
+
+# create 10 matrices as covariates
+covariates <- list()
+for (i in 1:10) {              
+  mat <- matrix(rnorm(100), nrow = 10, ncol = 10)
+  covariates[[i]] <- mat
+}
+
+# fit the model
+mod <- btergm(networks ~ edges + istar(2) + edgecov(covariates), R = 100)
+
+# summarize model fit with tidiers
+tidy(mod)
+
+  }
+}
+
+}
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[btergm:btergm]{btergm::btergm()}}
 }

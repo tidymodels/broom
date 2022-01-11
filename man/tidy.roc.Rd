@@ -31,12 +31,20 @@ specify which components to return.
 }
 \examples{
 
+# feel free to ignore the following line—it allows {broom} to supply 
+# examples without requiring the model-supplying package to be installed.
 if (requireNamespace("AUC", quietly = TRUE)) {
 
+# load libraries for models and data
 library(AUC)
+
+# load data
 data(churn)
+
+# fit model
 r <- roc(churn$predictions, churn$labels)
 
+# summarize with tidiers + visualization
 td <- tidy(r)
 td
 
@@ -46,7 +54,6 @@ ggplot(td, aes(fpr, tpr)) +
   geom_line()
 
 # compare the ROC curves for two prediction algorithms
-
 library(dplyr)
 library(tidyr)
 

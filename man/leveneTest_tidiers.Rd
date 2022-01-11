@@ -28,13 +28,19 @@ of those methods.
 }
 \examples{
 
+# feel free to ignore the following line—it allows {broom} to supply 
+# examples without requiring the model-supplying package to be installed.
 if (requireNamespace("car", quietly = TRUE)) {
 
+# load libraries for models and data
 library(car)
+
 data(Moore)
+
 lt <- with(Moore, leveneTest(conformity, fcategory))
+
 tidy(lt)
-glance(lt) # same output for all leveneTest
+glance(lt)
 
 }
 }

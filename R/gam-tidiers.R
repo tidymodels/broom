@@ -18,11 +18,17 @@
 #'
 #' @examples
 #' 
+#' # feel free to ignore the following line—it allows {broom} to supply 
+#' # examples without requiring the model-supplying package to be installed.
 #' if (requireNamespace("gam", quietly = TRUE)) {
 #'
+#' # load libraries for models and data
 #' library(gam)
+#' 
+#' # fit model
 #' g <- gam(mpg ~ s(hp, 4) + am + qsec, data = mtcars)
 #'
+#' # summarize model fit with tidiers
 #' tidy(g)
 #' glance(g)
 #' 

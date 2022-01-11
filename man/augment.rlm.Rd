@@ -79,12 +79,17 @@ missing at this time.
 }
 \examples{
 
+# feel free to ignore the following line—it allows {broom} to supply 
+# examples without requiring the model-supplying package to be installed.
 if (requireNamespace("MASS", quietly = TRUE)) {
 
+# load libraries for models and data
 library(MASS)
 
+# fit model
 r <- rlm(stack.loss ~ ., stackloss)
 
+# summarize model fit with tidiers
 tidy(r)
 augment(r)
 glance(r)

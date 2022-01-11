@@ -57,8 +57,11 @@ and \code{statistic} columns are omitted, and only \code{estimate} and
 }
 \examples{
 
+# feel free to ignore the following line—it allows {broom} to supply 
+# examples without requiring the model-supplying package to be installed.
 if (requireNamespace("boot", quietly = TRUE)) {
 
+# load modeling library
 library(boot)
 
 clotting <- data.frame(
@@ -67,6 +70,7 @@ clotting <- data.frame(
   lot2 = c(69, 35, 26, 21, 18, 16, 13, 12, 12)
 )
 
+# fit models
 g1 <- glm(lot2 ~ log(u), data = clotting, family = Gamma)
 
 bootfun <- function(d, i) {
@@ -74,6 +78,8 @@ bootfun <- function(d, i) {
 }
 
 bootres <- boot(clotting, bootfun, R = 999)
+
+# summarize model fits with tidiers
 tidy(g1, conf.int = TRUE)
 tidy(bootres, conf.int = TRUE)
 

@@ -49,6 +49,8 @@ tidy.glmrob <- function(x, conf.int = FALSE, conf.level = 0.95, ...) {
 #' @details For tidiers for robust models from the \pkg{MASS} package see
 #'   [tidy.rlm()].
 #'
+#' @inherit tidy.lmrob examples
+#' 
 #' @export
 #' @family robustbase tidiers
 #' @rdname augment.robustbase.glmrob

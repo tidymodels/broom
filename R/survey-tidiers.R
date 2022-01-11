@@ -104,8 +104,12 @@ tidy.svyglm <- function(x, conf.int = FALSE, conf.level = 0.95,
 #' )
 #'
 #' @examples
+#' 
+#' # feel free to ignore the following line—it allows {broom} to supply 
+#' # examples without requiring the model-supplying package to be installed.
 #' if (requireNamespace("survey", quietly = TRUE)) {
 #' 
+#' # load libraries for models and data
 #' library(survey)
 #'
 #' set.seed(123)
@@ -122,7 +126,7 @@ tidy.svyglm <- function(x, conf.int = FALSE, conf.level = 0.95,
 #'   )
 #'
 #' # model
-#' m <- survey::svyglm(
+#' m <- svyglm(
 #'   formula = sch.wide ~ ell + meals + mobility,
 #'   design = dstrat,
 #'   family = quasibinomial()

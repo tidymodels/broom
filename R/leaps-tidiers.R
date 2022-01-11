@@ -15,9 +15,17 @@
 #'
 #' @examples
 #' 
+#' # feel free to ignore the following line—it allows {broom} to supply 
+#' # examples without requiring the model-supplying package to be installed.
 #' if (requireNamespace("leaps", quietly = TRUE)) {
 #'
-#' all_fits <- leaps::regsubsets(hp ~ ., mtcars)
+#' # load libraries for models and data
+#' library(leaps)
+#'
+#' # fit model
+#' all_fits <- regsubsets(hp ~ ., mtcars)
+#' 
+#' # summarize model fit with tidiers
 #' tidy(all_fits)
 #' 
 #' }

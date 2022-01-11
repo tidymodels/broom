@@ -17,15 +17,22 @@
 #'
 #' @examples
 #' 
+#' # feel free to ignore the following line—it allows {broom} to supply 
+#' # examples without requiring the model-supplying package to be installed.
 #' if (requireNamespace("tseries", quietly = TRUE)) {
 #'
+#' # load libraries for models and data
 #' library(tseries)
 #'
+#' # load data
 #' data(EuStockMarkets)
+#' 
+#' # fit model
 #' dax <- diff(log(EuStockMarkets))[, "DAX"]
 #' dax.garch <- garch(dax)
 #' dax.garch
 #'
+#' # summarize model fit with tidiers
 #' tidy(dax.garch)
 #' glance(dax.garch)
 #' 

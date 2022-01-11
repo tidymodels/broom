@@ -30,16 +30,19 @@ specify which components to return.
 }
 \examples{
 
+# feel free to ignore the following line—it allows {broom} to supply 
+# examples without requiring the model-supplying package to be installed.
 if (requireNamespace("orcutt", quietly = TRUE)) {
 
+# load libraries for models and data
 library(orcutt)
 
+# fit model and summarize results
 reg <- lm(mpg ~ wt + qsec + disp, mtcars)
 tidy(reg)
 
-co <- cochrane.orcutt(reg)
-co
 
+co <- cochrane.orcutt(reg)
 tidy(co)
 glance(co)
 
