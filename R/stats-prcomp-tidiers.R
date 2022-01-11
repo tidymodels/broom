@@ -35,15 +35,15 @@
 #'   components in the original space. The columns are:
 #'
 #'   \item{`row`}{The variable labels (colnames) of the data set on
-#'   which PCA was performed}
-#'   \item{`PC`}{An integer vector indicating the principal component}
+#'   which PCA was performed.}
+#'   \item{`PC`}{An integer vector indicating the principal component.}
 #'   \item{`value`}{The value of the eigenvector (axis score) on the
-#'   indicated principal component}
+#'   indicated principal component.}
 #'
 #'   If `matrix` is `"d"`, `"eigenvalues"` or `"pcs"`, the columns are:
 #'
-#'   \item{`PC`}{An integer vector indicating the principal component}
-#'   \item{`std.dev`}{Standard deviation explained by this PC}
+#'   \item{`PC`}{An integer vector indicating the principal component.}
+#'   \item{`std.dev`}{Standard deviation explained by this PC.}
 #'   \item{`percent`}{Fraction of variation explained by this component
 #'     (a numeric value between 0 and 1).}
 #'   \item{`cumulative`}{Cumulative fraction of variation explained by
