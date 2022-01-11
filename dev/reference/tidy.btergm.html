@@ -147,6 +147,92 @@ the <code>data</code> argument.</p></dd>
 <dd><p>The name of the regression term.</p></dd>
 </dl></div>
 
+    <div id="ref-examples">
+    <h2>Examples</h2>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"></span>
+<span class="r-in"><span class="co"># feel free to ignore the following line—it allows {broom} to supply </span></span>
+<span class="r-in"><span class="co"># examples without requiring the model-supplying package to be installed.</span></span>
+<span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace</a></span><span class="op">(</span><span class="st">"bbmle"</span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
+<span class="r-in">  <span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace</a></span><span class="op">(</span><span class="st">"network"</span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
+<span class="r-in"></span>
+<span class="r-in"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/leifeld/btergm" class="external-link">btergm</a></span><span class="op">)</span></span>
+<span class="r-in"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="http://statnet.org/" class="external-link">network</a></span><span class="op">)</span></span>
+<span class="r-in"></span>
+<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">5</span><span class="op">)</span></span>
+<span class="r-in"></span>
+<span class="r-in"><span class="co"># create 10 random networks with 10 actors</span></span>
+<span class="r-in"><span class="va">networks</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span></span>
+<span class="r-in"><span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">)</span> <span class="op">{</span>              </span>
+<span class="r-in">  <span class="va">mat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Binomial.html" class="external-link">rbinom</a></span><span class="op">(</span><span class="fl">100</span>, <span class="fl">1</span>, <span class="fl">.25</span><span class="op">)</span>, nrow <span class="op">=</span> <span class="fl">10</span>, ncol <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span>
+<span class="r-in">  <span class="fu"><a href="https://rdrr.io/r/base/diag.html" class="external-link">diag</a></span><span class="op">(</span><span class="va">mat</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fl">0</span>              </span>
+<span class="r-in">  <span class="va">nw</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/network/man/network.html" class="external-link">network</a></span><span class="op">(</span><span class="va">mat</span><span class="op">)</span>  </span>
+<span class="r-in">  <span class="va">networks</span><span class="op">[[</span><span class="va">i</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">nw</span>         </span>
+<span class="r-in"><span class="op">}</span></span>
+<span class="r-in"></span>
+<span class="r-in"><span class="co"># create 10 matrices as covariates</span></span>
+<span class="r-in"><span class="va">covariates</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span></span>
+<span class="r-in"><span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">)</span> <span class="op">{</span>              </span>
+<span class="r-in">  <span class="va">mat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">100</span><span class="op">)</span>, nrow <span class="op">=</span> <span class="fl">10</span>, ncol <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span>
+<span class="r-in">  <span class="va">covariates</span><span class="op">[[</span><span class="va">i</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">mat</span></span>
+<span class="r-in"><span class="op">}</span></span>
+<span class="r-in"></span>
+<span class="r-in"><span class="co"># fit the model</span></span>
+<span class="r-in"><span class="va">mod</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/btergm/man/btergm.html" class="external-link">btergm</a></span><span class="op">(</span><span class="va">networks</span> <span class="op">~</span> <span class="va">edges</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/pkg/btergm/man/gof-statistics.html" class="external-link">istar</a></span><span class="op">(</span><span class="fl">2</span><span class="op">)</span> <span class="op">+</span> <span class="fu">edgecov</span><span class="op">(</span><span class="va">covariates</span><span class="op">)</span>, R <span class="op">=</span> <span class="fl">100</span><span class="op">)</span></span>
+<span class="r-in"></span>
+<span class="r-in"><span class="co"># summarize model fit with tidiers</span></span>
+<span class="r-in"><span class="fu"><a href="https://generics.r-lib.org/reference/tidy.html" class="external-link">tidy</a></span><span class="op">(</span><span class="va">mod</span><span class="op">)</span></span>
+<span class="r-in"></span>
+<span class="r-in">  <span class="op">}</span></span>
+<span class="r-in"><span class="op">}</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Registered S3 methods overwritten by 'ergm':</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>   method               from</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>   simulate.formula     lme4</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>   simulate.formula_lhs lme4</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Registered S3 methods overwritten by 'btergm':</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>   method    from</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>   plot.gof  ergm</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>   plot.roc  pROC</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>   print.gof ergm</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>   print.roc pROC</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Package:  btergm</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Version:  1.10.3</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Date:     2021-06-24</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Authors:  Philip Leifeld (University of Essex)</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>           Skyler J. Cranmer (The Ohio State University)</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>           Bruce A. Desmarais (Pennsylvania State University)</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> ‘network’ 1.17.1 (2021-06-12), part of the Statnet Project</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> * ‘news(package="network")’ for changes since last version</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> * ‘citation("network")’ for citation information</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> * ‘https://statnet.org’ for help, support, and other information</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Initial dimensions of the network and covariates:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                  t=1 t=2 t=3 t=4 t=5 t=6 t=7 t=8 t=9 t=10</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> networks (row)    10  10  10  10  10  10  10  10  10   10</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> networks (col)    10  10  10  10  10  10  10  10  10   10</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> covariates (row)  10  10  10  10  10  10  10  10  10   10</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> covariates (col)  10  10  10  10  10  10  10  10  10   10</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> All networks are conformable.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Dimensions of the network and covariates after adjustment:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                  t=1 t=2 t=3 t=4 t=5 t=6 t=7 t=8 t=9 t=10</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> networks (row)    10  10  10  10  10  10  10  10  10   10</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> networks (col)    10  10  10  10  10  10  10  10  10   10</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> covariates (row)  10  10  10  10  10  10  10  10  10   10</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> covariates (col)  10  10  10  10  10  10  10  10  10   10</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Starting pseudolikelihood estimation with 100 bootstrapping replications on a single computing core...</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Done.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 3 × 4</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   term                    estimate conf.low conf.high</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> edges                    -<span style="color: #BB0000;">1.23</span>    -<span style="color: #BB0000;">1.37</span>      -<span style="color: #BB0000;">1.01</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> istar2                    0.083<span style="text-decoration: underline;">7</span>  -<span style="color: #BB0000;">0.057</span><span style="color: #BB0000; text-decoration: underline;">1</span>     0.165</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> edgecov.covariates[[i]]  -<span style="color: #BB0000;">0.034</span><span style="color: #BB0000; text-decoration: underline;">5</span>  -<span style="color: #BB0000;">0.177</span>      0.112</span>
+<span class="r-in"></span>
+</code></pre></div>
+    </div>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top"><h2 data-toc-skip>Contents</h2>

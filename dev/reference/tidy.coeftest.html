@@ -149,8 +149,11 @@ the <code>data</code> argument.</p></dd>
     <div id="ref-examples">
     <h2>Examples</h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"></span>
+<span class="r-in"><span class="co"># feel free to ignore the following line—it allows {broom} to supply </span></span>
+<span class="r-in"><span class="co"># examples without requiring the model-supplying package to be installed.</span></span>
 <span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace</a></span><span class="op">(</span><span class="st">"lmtest"</span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
 <span class="r-in"></span>
+<span class="r-in"><span class="co"># load libraries for models and data</span></span>
 <span class="r-in"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">lmtest</span><span class="op">)</span></span>
 <span class="r-in"></span>
 <span class="r-in"><span class="va">m</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">dist</span> <span class="op">~</span> <span class="va">speed</span>, data <span class="op">=</span> <span class="va">cars</span><span class="op">)</span></span>
@@ -159,20 +162,26 @@ the <code>data</code> argument.</p></dd>
 <span class="r-in"><span class="fu"><a href="https://generics.r-lib.org/reference/tidy.html" class="external-link">tidy</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/lmtest/man/coeftest.html" class="external-link">coeftest</a></span><span class="op">(</span><span class="va">m</span><span class="op">)</span><span class="op">)</span></span>
 <span class="r-in"><span class="fu"><a href="https://generics.r-lib.org/reference/tidy.html" class="external-link">tidy</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/lmtest/man/coeftest.html" class="external-link">coeftest</a></span><span class="op">(</span><span class="va">m</span>, conf.int <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span>
 <span class="r-in"></span>
-<span class="r-in"><span class="co"># A very common workflow is to combine lmtest::coeftest with alternate</span></span>
+<span class="r-in"><span class="co"># a very common workflow is to combine lmtest::coeftest with alternate</span></span>
 <span class="r-in"><span class="co"># variance-covariance matrices via the sandwich package. The lmtest</span></span>
 <span class="r-in"><span class="co"># tidiers support this workflow too, enabling you to adjust the standard</span></span>
 <span class="r-in"><span class="co"># errors of your tidied models on the fly.</span></span>
 <span class="r-in"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://sandwich.R-Forge.R-project.org/" class="external-link">sandwich</a></span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://generics.r-lib.org/reference/tidy.html" class="external-link">tidy</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/lmtest/man/coeftest.html" class="external-link">coeftest</a></span><span class="op">(</span><span class="va">m</span>, vcov <span class="op">=</span> <span class="va">vcovHC</span><span class="op">)</span><span class="op">)</span>               <span class="co"># "HC3" (default) robust SEs</span></span>
-<span class="r-in"><span class="fu"><a href="https://generics.r-lib.org/reference/tidy.html" class="external-link">tidy</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/lmtest/man/coeftest.html" class="external-link">coeftest</a></span><span class="op">(</span><span class="va">m</span>, vcov <span class="op">=</span> <span class="va">vcovHC</span>, type <span class="op">=</span> <span class="st">"HC2"</span><span class="op">)</span><span class="op">)</span> <span class="co"># "HC2" robust SEs</span></span>
-<span class="r-in"><span class="fu"><a href="https://generics.r-lib.org/reference/tidy.html" class="external-link">tidy</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/lmtest/man/coeftest.html" class="external-link">coeftest</a></span><span class="op">(</span><span class="va">m</span>, vcov <span class="op">=</span> <span class="va">NeweyWest</span><span class="op">)</span><span class="op">)</span>            <span class="co"># N-W HAC robust SEs</span></span>
 <span class="r-in"></span>
-<span class="r-in"><span class="co"># The columns of the returned tibble for glance.coeftest() will vary </span></span>
+<span class="r-in"><span class="co"># "HC3" (default) robust SEs</span></span>
+<span class="r-in"><span class="fu"><a href="https://generics.r-lib.org/reference/tidy.html" class="external-link">tidy</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/lmtest/man/coeftest.html" class="external-link">coeftest</a></span><span class="op">(</span><span class="va">m</span>, vcov <span class="op">=</span> <span class="va">vcovHC</span><span class="op">)</span><span class="op">)</span>       </span>
+<span class="r-in"></span>
+<span class="r-in"><span class="co"># "HC2" robust SEs               </span></span>
+<span class="r-in"><span class="fu"><a href="https://generics.r-lib.org/reference/tidy.html" class="external-link">tidy</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/lmtest/man/coeftest.html" class="external-link">coeftest</a></span><span class="op">(</span><span class="va">m</span>, vcov <span class="op">=</span> <span class="va">vcovHC</span>, type <span class="op">=</span> <span class="st">"HC2"</span><span class="op">)</span><span class="op">)</span> </span>
+<span class="r-in"></span>
+<span class="r-in"><span class="co"># N-W HAC robust SEs</span></span>
+<span class="r-in"><span class="fu"><a href="https://generics.r-lib.org/reference/tidy.html" class="external-link">tidy</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/lmtest/man/coeftest.html" class="external-link">coeftest</a></span><span class="op">(</span><span class="va">m</span>, vcov <span class="op">=</span> <span class="va">NeweyWest</span><span class="op">)</span><span class="op">)</span>            </span>
+<span class="r-in"></span>
+<span class="r-in"><span class="co"># the columns of the returned tibble for glance.coeftest() will vary </span></span>
 <span class="r-in"><span class="co"># depending on whether the coeftest object retains the underlying model.</span></span>
 <span class="r-in"><span class="co"># Users can control this with the "save = TRUE" argument of coeftest().</span></span>
 <span class="r-in"><span class="fu"><a href="https://generics.r-lib.org/reference/glance.html" class="external-link">glance</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/lmtest/man/coeftest.html" class="external-link">coeftest</a></span><span class="op">(</span><span class="va">m</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://generics.r-lib.org/reference/glance.html" class="external-link">glance</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/lmtest/man/coeftest.html" class="external-link">coeftest</a></span><span class="op">(</span><span class="va">m</span>, save <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="co"># More columns</span></span>
+<span class="r-in"><span class="fu"><a href="https://generics.r-lib.org/reference/glance.html" class="external-link">glance</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/lmtest/man/coeftest.html" class="external-link">coeftest</a></span><span class="op">(</span><span class="va">m</span>, save <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span>
 <span class="r-in"></span>
 <span class="r-in"><span class="op">}</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1 × 12</span></span>

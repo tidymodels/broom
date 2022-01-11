@@ -164,8 +164,11 @@ and <code>statistic</code> columns are omitted, and only <code>estimate</code> a
     <div id="ref-examples">
     <h2>Examples</h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"></span>
+<span class="r-in"><span class="co"># feel free to ignore the following line—it allows {broom} to supply </span></span>
+<span class="r-in"><span class="co"># examples without requiring the model-supplying package to be installed.</span></span>
 <span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace</a></span><span class="op">(</span><span class="st">"boot"</span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
 <span class="r-in"></span>
+<span class="r-in"><span class="co"># load modeling library</span></span>
 <span class="r-in"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">boot</span><span class="op">)</span></span>
 <span class="r-in"></span>
 <span class="r-in"><span class="va">clotting</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span>
@@ -174,6 +177,7 @@ and <code>statistic</code> columns are omitted, and only <code>estimate</code> a
 <span class="r-in">  lot2 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">69</span>, <span class="fl">35</span>, <span class="fl">26</span>, <span class="fl">21</span>, <span class="fl">18</span>, <span class="fl">16</span>, <span class="fl">13</span>, <span class="fl">12</span>, <span class="fl">12</span><span class="op">)</span></span>
 <span class="r-in"><span class="op">)</span></span>
 <span class="r-in"></span>
+<span class="r-in"><span class="co"># fit models</span></span>
 <span class="r-in"><span class="va">g1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/glm.html" class="external-link">glm</a></span><span class="op">(</span><span class="va">lot2</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html" class="external-link">log</a></span><span class="op">(</span><span class="va">u</span><span class="op">)</span>, data <span class="op">=</span> <span class="va">clotting</span>, family <span class="op">=</span> <span class="va">Gamma</span><span class="op">)</span></span>
 <span class="r-in"></span>
 <span class="r-in"><span class="va">bootfun</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">d</span>, <span class="va">i</span><span class="op">)</span> <span class="op">{</span></span>
@@ -181,6 +185,8 @@ and <code>statistic</code> columns are omitted, and only <code>estimate</code> a
 <span class="r-in"><span class="op">}</span></span>
 <span class="r-in"></span>
 <span class="r-in"><span class="va">bootres</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/boot/man/boot.html" class="external-link">boot</a></span><span class="op">(</span><span class="va">clotting</span>, <span class="va">bootfun</span>, R <span class="op">=</span> <span class="fl">999</span><span class="op">)</span></span>
+<span class="r-in"></span>
+<span class="r-in"><span class="co"># summarize model fits with tidiers</span></span>
 <span class="r-in"><span class="fu"><a href="https://generics.r-lib.org/reference/tidy.html" class="external-link">tidy</a></span><span class="op">(</span><span class="va">g1</span>, conf.int <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span class="r-in"><span class="fu"><a href="https://generics.r-lib.org/reference/tidy.html" class="external-link">tidy</a></span><span class="op">(</span><span class="va">bootres</span>, conf.int <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span class="r-in"></span>
@@ -202,8 +208,8 @@ and <code>statistic</code> columns are omitted, and only <code>estimate</code> a
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 2 × 6</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   term        statistic      bias std.error conf.low conf.high</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> (Intercept)   -<span style="color: #BB0000;">0.023</span><span style="color: #BB0000; text-decoration: underline;">9</span> -<span style="color: #BB0000;">0.001</span><span style="color: #BB0000; text-decoration: underline;">85</span>    0.003<span style="text-decoration: underline;">22</span>  -<span style="color: #BB0000;">0.032</span><span style="color: #BB0000; text-decoration: underline;">8</span>   -<span style="color: #BB0000;">0.022</span><span style="color: #BB0000; text-decoration: underline;">2</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> log(u)         0.023<span style="text-decoration: underline;">6</span>  0.000<span style="text-decoration: underline;">557</span>   0.001<span style="text-decoration: underline;">03</span>   0.022<span style="text-decoration: underline;">7</span>    0.026<span style="text-decoration: underline;">5</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> (Intercept)   -<span style="color: #BB0000;">0.023</span><span style="color: #BB0000; text-decoration: underline;">9</span> -<span style="color: #BB0000;">0.001</span><span style="color: #BB0000; text-decoration: underline;">71</span>    0.003<span style="text-decoration: underline;">36</span>  -<span style="color: #BB0000;">0.032</span><span style="color: #BB0000; text-decoration: underline;">8</span>   -<span style="color: #BB0000;">0.022</span><span style="color: #BB0000; text-decoration: underline;">2</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> log(u)         0.023<span style="text-decoration: underline;">6</span>  0.000<span style="text-decoration: underline;">504</span>   0.001<span style="text-decoration: underline;">07</span>   0.022<span style="text-decoration: underline;">7</span>    0.026<span style="text-decoration: underline;">5</span></span>
 <span class="r-in"></span>
 </code></pre></div>
     </div>

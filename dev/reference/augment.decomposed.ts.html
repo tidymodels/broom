@@ -199,7 +199,7 @@ series.</p></dd>
     <div id="ref-examples">
     <h2>Examples</h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"></span>
-<span class="r-in"><span class="co"># Time series of temperatures in Nottingham, 1920-1939:</span></span>
+<span class="r-in"><span class="co"># time series of temperatures in Nottingham, 1920-1939:</span></span>
 <span class="r-in"><span class="va">nottem</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>       Jan  Feb  Mar  Apr  May  Jun  Jul  Aug  Sep  Oct  Nov  Dec</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1920 40.6 40.8 44.4 46.7 54.1 58.5 57.7 56.4 54.3 50.5 42.9 39.8</span>
@@ -223,16 +223,16 @@ series.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1938 42.1 41.2 47.3 46.6 52.4 59.0 59.6 60.4 57.0 50.7 47.8 39.2</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1939 39.4 40.9 42.4 47.8 52.4 58.0 60.7 61.8 58.2 46.7 46.6 37.8</span>
 <span class="r-in"></span>
-<span class="r-in"><span class="co"># Perform seasonal decomposition on the data with both decompose</span></span>
+<span class="r-in"><span class="co"># perform seasonal decomposition on the data with both decompose</span></span>
 <span class="r-in"><span class="co"># and stl:</span></span>
-<span class="r-in"><span class="va">d1</span> <span class="op">&lt;-</span> <span class="fu">stats</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/stats/decompose.html" class="external-link">decompose</a></span><span class="op">(</span><span class="va">nottem</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">d2</span> <span class="op">&lt;-</span> <span class="fu">stats</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/stats/stl.html" class="external-link">stl</a></span><span class="op">(</span><span class="va">nottem</span>, s.window <span class="op">=</span> <span class="st">"periodic"</span>, robust <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span class="r-in"><span class="va">d1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/decompose.html" class="external-link">decompose</a></span><span class="op">(</span><span class="va">nottem</span><span class="op">)</span></span>
+<span class="r-in"><span class="va">d2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/stl.html" class="external-link">stl</a></span><span class="op">(</span><span class="va">nottem</span>, s.window <span class="op">=</span> <span class="st">"periodic"</span>, robust <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span class="r-in"></span>
-<span class="r-in"><span class="co"># Compare the original series to its decompositions.</span></span>
+<span class="r-in"><span class="co"># compare the original series to its decompositions.</span></span>
 <span class="r-in"></span>
 <span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">cbind</a></span><span class="op">(</span></span>
-<span class="r-in">  <span class="fu">broom</span><span class="fu">::</span><span class="fu"><a href="https://generics.r-lib.org/reference/tidy.html" class="external-link">tidy</a></span><span class="op">(</span><span class="va">nottem</span><span class="op">)</span>, <span class="fu">broom</span><span class="fu">::</span><span class="fu"><a href="https://generics.r-lib.org/reference/augment.html" class="external-link">augment</a></span><span class="op">(</span><span class="va">d1</span><span class="op">)</span>,</span>
-<span class="r-in">  <span class="fu">broom</span><span class="fu">::</span><span class="fu"><a href="https://generics.r-lib.org/reference/augment.html" class="external-link">augment</a></span><span class="op">(</span><span class="va">d2</span><span class="op">)</span></span>
+<span class="r-in">  <span class="fu"><a href="https://generics.r-lib.org/reference/tidy.html" class="external-link">tidy</a></span><span class="op">(</span><span class="va">nottem</span><span class="op">)</span>, <span class="fu"><a href="https://generics.r-lib.org/reference/augment.html" class="external-link">augment</a></span><span class="op">(</span><span class="va">d1</span><span class="op">)</span>,</span>
+<span class="r-in">  <span class="fu"><a href="https://generics.r-lib.org/reference/augment.html" class="external-link">augment</a></span><span class="op">(</span><span class="va">d2</span><span class="op">)</span></span>
 <span class="r-in"><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>        index value  .seasonal   .trend   .remainder .seasadj  .seasonal</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1   1920.000  40.6 -9.3393640       NA           NA 49.93936 -9.3419811</span>
@@ -717,7 +717,7 @@ series.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 239 48.76063  4.38434399 0.4258156270 53.14497</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 240 48.65426 -1.27547980 0.9420313503 47.37878</span>
 <span class="r-in"></span>
-<span class="r-in"><span class="co"># Visually compare seasonal decompositions in tidy data frames.</span></span>
+<span class="r-in"><span class="co"># visually compare seasonal decompositions in tidy data frames.</span></span>
 <span class="r-in"></span>
 <span class="r-in"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tibble.tidyverse.org/" class="external-link">tibble</a></span><span class="op">)</span></span>
 <span class="r-in"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span>
@@ -725,17 +725,17 @@ series.</p></dd>
 <span class="r-in"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span>
 <span class="r-in"></span>
 <span class="r-in"><span class="va">decomps</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble</a></span><span class="op">(</span></span>
-<span class="r-in">  <span class="co"># Turn the ts objects into data frames.</span></span>
+<span class="r-in">  <span class="co"># turn the ts objects into data frames.</span></span>
 <span class="r-in">  series <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="va">nottem</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="va">nottem</span><span class="op">)</span><span class="op">)</span>,</span>
-<span class="r-in">  <span class="co"># Add the models in, one for each row.</span></span>
+<span class="r-in">  <span class="co"># add the models in, one for each row.</span></span>
 <span class="r-in">  decomp <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"decompose"</span>, <span class="st">"stl"</span><span class="op">)</span>,</span>
 <span class="r-in">  model <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">d1</span>, <span class="va">d2</span><span class="op">)</span></span>
 <span class="r-in"><span class="op">)</span> <span class="op"><a href="https://tidyr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span class="r-in">  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/rowwise.html" class="external-link">rowwise</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://tidyr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span class="r-in">  <span class="co"># Pull out the fitted data using broom::augment.</span></span>
+<span class="r-in">  <span class="co"># pull out the fitted data using broom::augment.</span></span>
 <span class="r-in">  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>augment <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fu">broom</span><span class="fu">::</span><span class="fu"><a href="https://generics.r-lib.org/reference/augment.html" class="external-link">augment</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://tidyr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span class="r-in">  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">ungroup</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://tidyr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span class="r-in">  <span class="co"># Unnest the data frames into a tidy arrangement of</span></span>
+<span class="r-in">  <span class="co"># unnest the data frames into a tidy arrangement of</span></span>
 <span class="r-in">  <span class="co"># the series next to its seasonal decomposition, grouped</span></span>
 <span class="r-in">  <span class="co"># by the method (stl or decompose).</span></span>
 <span class="r-in">  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">decomp</span><span class="op">)</span> <span class="op"><a href="https://tidyr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
@@ -743,6 +743,7 @@ series.</p></dd>
 <span class="r-in">  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>index <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/context.html" class="external-link">n</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://tidyr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span class="r-in">  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">ungroup</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://tidyr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span class="r-in">  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">decomp</span>, <span class="va">index</span>, <span class="va">x</span>, adjusted <span class="op">=</span> <span class="va">.seasadj</span><span class="op">)</span></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in select(., decomp, index, x, adjusted = .seasadj):</span> unused arguments (decomp, index, x, adjusted = .seasadj)</span>
 <span class="r-in"></span>
 <span class="r-in"><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">decomps</span><span class="op">)</span> <span class="op">+</span></span>
 <span class="r-in">  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html" class="external-link">geom_line</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">index</span>, y <span class="op">=</span> <span class="va">x</span><span class="op">)</span>, colour <span class="op">=</span> <span class="st">"black"</span><span class="op">)</span> <span class="op">+</span></span>
@@ -750,7 +751,8 @@ series.</p></dd>
 <span class="r-in">    x <span class="op">=</span> <span class="va">index</span>, y <span class="op">=</span> <span class="va">adjusted</span>, colour <span class="op">=</span> <span class="va">decomp</span>,</span>
 <span class="r-in">    group <span class="op">=</span> <span class="va">decomp</span></span>
 <span class="r-in">  <span class="op">)</span><span class="op">)</span></span>
-<span class="r-plt img"><img src="augment.decomposed.ts-1.png" alt="" width="700" height="433"></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in ggplot(decomps):</span> object 'decomps' not found</span>
+<span class="r-in">  </span>
 </code></pre></div>
     </div>
   </div>

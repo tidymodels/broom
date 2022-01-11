@@ -210,15 +210,21 @@ for the fixed and random effects of the longitudinal submodel.</p>
     <div id="ref-examples">
     <h2>Examples</h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"></span>
+<span class="r-in"><span class="co"># feel free to ignore the following line—it allows {broom} to supply </span></span>
+<span class="r-in"><span class="co"># examples without requiring the model-supplying package to be installed.</span></span>
 <span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace</a></span><span class="op">(</span><span class="st">"joineRML"</span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
 <span class="r-in"></span>
-<span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in"><span class="co"># Fit a joint model with bivariate longitudinal outcomes</span></span>
+<span class="r-in"></span>
+<span class="r-in"><span class="co"># load libraries for models and data</span></span>
 <span class="r-in"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/graemeleehickey/joineRML" class="external-link">joineRML</a></span><span class="op">)</span></span>
+<span class="r-in"></span>
+<span class="r-in"><span class="co"># fit a joint model with bivariate longitudinal outcomes</span></span>
 <span class="r-in"><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">heart.valve</span><span class="op">)</span></span>
+<span class="r-in"></span>
 <span class="r-in"><span class="va">hvd</span> <span class="op">&lt;-</span> <span class="va">heart.valve</span><span class="op">[</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="va">heart.valve</span><span class="op">$</span><span class="va">log.grad</span><span class="op">)</span> <span class="op">&amp;</span></span>
 <span class="r-in">  <span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="va">heart.valve</span><span class="op">$</span><span class="va">log.lvmi</span><span class="op">)</span> <span class="op">&amp;</span></span>
 <span class="r-in">  <span class="va">heart.valve</span><span class="op">$</span><span class="va">num</span> <span class="op">&lt;=</span> <span class="fl">50</span>, <span class="op">]</span></span>
+<span class="r-in">  </span>
 <span class="r-in"><span class="va">fit</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/joineRML/man/mjoint.html" class="external-link">mjoint</a></span><span class="op">(</span></span>
 <span class="r-in">  formLongFixed <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
 <span class="r-in">    <span class="st">"grad"</span> <span class="op">=</span> <span class="va">log.grad</span> <span class="op">~</span> <span class="va">time</span> <span class="op">+</span> <span class="va">sex</span> <span class="op">+</span> <span class="va">hs</span>,</span>
@@ -234,32 +240,42 @@ for the fixed and random effects of the longitudinal submodel.</p>
 <span class="r-in">  timeVar <span class="op">=</span> <span class="st">"time"</span></span>
 <span class="r-in"><span class="op">)</span></span>
 <span class="r-in"></span>
-<span class="r-in"><span class="co"># Extract the survival fixed effects</span></span>
+<span class="r-in"><span class="co"># extract the survival fixed effects</span></span>
 <span class="r-in"><span class="fu"><a href="https://generics.r-lib.org/reference/tidy.html" class="external-link">tidy</a></span><span class="op">(</span><span class="va">fit</span><span class="op">)</span></span>
 <span class="r-in"></span>
-<span class="r-in"><span class="co"># Extract the longitudinal fixed effects</span></span>
+<span class="r-in"><span class="co"># extract the longitudinal fixed effects</span></span>
 <span class="r-in"><span class="fu"><a href="https://generics.r-lib.org/reference/tidy.html" class="external-link">tidy</a></span><span class="op">(</span><span class="va">fit</span>, component <span class="op">=</span> <span class="st">"longitudinal"</span><span class="op">)</span></span>
 <span class="r-in"></span>
-<span class="r-in"><span class="co"># Extract the survival fixed effects with confidence intervals</span></span>
+<span class="r-in"><span class="co"># extract the survival fixed effects with confidence intervals</span></span>
 <span class="r-in"><span class="fu"><a href="https://generics.r-lib.org/reference/tidy.html" class="external-link">tidy</a></span><span class="op">(</span><span class="va">fit</span>, ci <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span class="r-in"></span>
-<span class="r-in"><span class="co"># Extract the survival fixed effects with confidence intervals based</span></span>
+<span class="r-in"><span class="co"># extract the survival fixed effects with confidence intervals based</span></span>
 <span class="r-in"><span class="co"># on bootstrapped standard errors</span></span>
 <span class="r-in"><span class="va">bSE</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/joineRML/man/bootSE.html" class="external-link">bootSE</a></span><span class="op">(</span><span class="va">fit</span>, nboot <span class="op">=</span> <span class="fl">5</span>, safe.boot <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span class="r-in"><span class="fu"><a href="https://generics.r-lib.org/reference/tidy.html" class="external-link">tidy</a></span><span class="op">(</span><span class="va">fit</span>, boot_se <span class="op">=</span> <span class="va">bSE</span>, ci <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span class="r-in"></span>
-<span class="r-in"><span class="co"># Augment original data with fitted longitudinal values and residuals</span></span>
+<span class="r-in"><span class="co"># augment original data with fitted longitudinal values and residuals</span></span>
 <span class="r-in"><span class="va">hvd2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://generics.r-lib.org/reference/augment.html" class="external-link">augment</a></span><span class="op">(</span><span class="va">fit</span><span class="op">)</span></span>
 <span class="r-in"></span>
-<span class="r-in"><span class="co"># Extract model statistics</span></span>
+<span class="r-in"><span class="co"># extract model statistics</span></span>
 <span class="r-in"><span class="fu"><a href="https://generics.r-lib.org/reference/glance.html" class="external-link">glance</a></span><span class="op">(</span><span class="va">fit</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">}</span></span>
 <span class="r-in"><span class="op">}</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Registered S3 methods overwritten by 'joineRML':</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span>   method         from </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span>   augment.mjoint broom</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span>   glance.mjoint  broom</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span>   tidy.mjoint    broom</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Running multivariate LMM EM algorithm to establish initial parameters...</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Finished multivariate LMM EM algorithm...</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> EM algorithm has converged!</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Calculating post model fit statistics...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   |                                                                              |                                                                      |   0%  |                                                                              |==============                                                        |  20%  |                                                                              |============================                                          |  40%  |                                                                              |==========================================                            |  60%  |                                                                              |========================================================              |  80%  |                                                                              |======================================================================| 100%</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1 × 5</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   sigma2_1 sigma2_2   AIC   BIC logLik</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span>    0.517    0.158  342.  374.  -<span style="color: #BB0000;">153.</span></span>
 <span class="r-in"></span>
 </code></pre></div>
     </div>

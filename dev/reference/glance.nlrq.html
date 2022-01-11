@@ -161,6 +161,86 @@ the <code>data</code> argument.</p></dd>
 <dd><p>Quantile.</p></dd>
 </dl></div>
 
+    <div id="ref-examples">
+    <h2>Examples</h2>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"></span>
+<span class="r-in"><span class="co">#' # feel free to ignore the following line—it allows {broom} to supply </span></span>
+<span class="r-in"><span class="co"># examples without requiring the model-supplying package to be installed.</span></span>
+<span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace</a></span><span class="op">(</span><span class="st">"quantreg"</span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
+<span class="r-in"></span>
+<span class="r-in"><span class="co"># load modeling library</span></span>
+<span class="r-in"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://www.r-project.org" class="external-link">quantreg</a></span><span class="op">)</span></span>
+<span class="r-in"></span>
+<span class="r-in"><span class="co"># build artificial data with multiplicative error</span></span>
+<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span></span>
+<span class="r-in"><span class="va">dat</span> <span class="op">&lt;-</span> <span class="cn">NULL</span> </span>
+<span class="r-in"><span class="va">dat</span><span class="op">$</span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">25</span>, <span class="fl">20</span><span class="op">)</span></span>
+<span class="r-in"><span class="va">dat</span><span class="op">$</span><span class="va">y</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/SSlogis.html" class="external-link">SSlogis</a></span><span class="op">(</span><span class="va">dat</span><span class="op">$</span><span class="va">x</span>, <span class="fl">10</span>, <span class="fl">12</span>, <span class="fl">2</span><span class="op">)</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">500</span>, <span class="fl">1</span>, <span class="fl">0.1</span><span class="op">)</span></span>
+<span class="r-in"></span>
+<span class="r-in"><span class="co"># fit the median using nlrq</span></span>
+<span class="r-in"><span class="va">mod</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/quantreg/man/nlrq.html" class="external-link">nlrq</a></span><span class="op">(</span><span class="va">y</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/stats/SSlogis.html" class="external-link">SSlogis</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">Asym</span>, <span class="va">mid</span>, <span class="va">scal</span><span class="op">)</span>, </span>
+<span class="r-in">            data <span class="op">=</span> <span class="va">dat</span>, tau <span class="op">=</span> <span class="fl">0.5</span>, trace <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span class="r-in"></span>
+<span class="r-in"><span class="co"># summarize model fit with tidiers</span></span>
+<span class="r-in"><span class="fu"><a href="https://generics.r-lib.org/reference/tidy.html" class="external-link">tidy</a></span><span class="op">(</span><span class="va">mod</span><span class="op">)</span></span>
+<span class="r-in"><span class="fu"><a href="https://generics.r-lib.org/reference/glance.html" class="external-link">glance</a></span><span class="op">(</span><span class="va">mod</span><span class="op">)</span></span>
+<span class="r-in"><span class="fu"><a href="https://generics.r-lib.org/reference/augment.html" class="external-link">augment</a></span><span class="op">(</span><span class="va">mod</span><span class="op">)</span></span>
+<span class="r-in"></span>
+<span class="r-in"><span class="op">}</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 109.059 :   9.968027 11.947208  1.962113 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> final  value 108.942725 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> converged</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> lambda = 1 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 108.9427 :   9.958648 11.943273  1.967144 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> final  value 108.490939 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> converged</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> lambda = 0.9750984 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 108.4909 :   9.949430 11.987472  1.998607 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> final  value 108.471416 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> converged</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> lambda = 0.9999299 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 108.4714 :   9.94163 11.99077  1.99344 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> final  value 108.471243 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> converged</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> lambda = 1 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 108.4712 :   9.941008 11.990550  1.992921 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> final  value 108.470935 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> converged</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> lambda = 0.8621249 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 108.4709 :   9.942734 11.992773  1.993209 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> final  value 108.470923 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> converged</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> lambda = 0.9999613 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 108.4709 :   9.942629 11.992728  1.993136 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> final  value 108.470919 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> converged</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> lambda = 1 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 108.4709 :   9.942644 11.992737  1.993144 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> final  value 108.470919 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> converged</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> lambda = 1 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 108.4709 :   9.942644 11.992737  1.993144 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> final  value 108.470919 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> converged</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> lambda = 1 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 108.4709 :   9.942644 11.992737  1.993144 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 500 × 4</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        x      y .fitted   .resid</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span>     1 0.038<span style="text-decoration: underline;">2</span>  0.039<span style="text-decoration: underline;">9</span> -<span style="color: #BB0000;">0.001</span><span style="color: #BB0000; text-decoration: underline;">71</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span>     2 0.068<span style="text-decoration: underline;">2</span>  0.065<span style="text-decoration: underline;">7</span>  0.002<span style="text-decoration: underline;">50</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span>     3 0.101   0.108  -<span style="color: #BB0000;">0.007</span><span style="color: #BB0000; text-decoration: underline;">28</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span>     4 0.209   0.177   0.031<span style="text-decoration: underline;">5</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span>     5 0.303   0.289   0.013<span style="text-decoration: underline;">7</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span>     6 0.435   0.469  -<span style="color: #BB0000;">0.033</span><span style="color: #BB0000; text-decoration: underline;">2</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span>     7 0.796   0.751   0.044<span style="text-decoration: underline;">8</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span>     8 1.28    1.18    0.098<span style="text-decoration: underline;">2</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span>     9 1.93    1.81    0.118  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span>    10 2.61    2.67   -<span style="color: #BB0000;">0.067</span><span style="color: #BB0000; text-decoration: underline;">1</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 490 more rows</span></span>
+<span class="r-in"></span>
+</code></pre></div>
+    </div>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top"><h2 data-toc-skip>Contents</h2>

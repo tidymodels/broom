@@ -169,7 +169,10 @@ the model with <code>na.action = na.exclude</code>.</p>
     <div id="ref-examples">
     <h2>Examples</h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"></span>
+<span class="r-in"><span class="co"># fit model</span></span>
 <span class="r-in"><span class="va">mod</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">cbind</a></span><span class="op">(</span><span class="va">mpg</span>, <span class="va">disp</span><span class="op">)</span> <span class="op">~</span> <span class="va">wt</span>, <span class="va">mtcars</span><span class="op">)</span></span>
+<span class="r-in"></span>
+<span class="r-in"><span class="co"># summarize model fit with tidiers</span></span>
 <span class="r-in"><span class="fu"><a href="https://generics.r-lib.org/reference/tidy.html" class="external-link">tidy</a></span><span class="op">(</span><span class="va">mod</span>, conf.int <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 4 × 8</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   response term        estimate std.error statistic  p.value conf.low conf.high</span>
@@ -178,6 +181,7 @@ the model with <code>na.action = na.exclude</code>.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> mpg      wt             -<span style="color: #BB0000;">5.34</span>     0.559     -<span style="color: #BB0000;">9.56</span> 1.29<span style="color: #949494;">e</span><span style="color: #BB0000;">-10</span>    -<span style="color: #BB0000;">6.49</span>     -<span style="color: #BB0000;">4.20</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> disp     (Intercept)  -<span style="color: #BB0000;">131.</span>      35.7       -<span style="color: #BB0000;">3.67</span> 9.33<span style="color: #949494;">e</span><span style="color: #BB0000;">- 4</span>  -<span style="color: #BB0000;">204.</span>      -<span style="color: #BB0000;">58.2</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> disp     wt            112.      10.6       10.6  1.22<span style="color: #949494;">e</span><span style="color: #BB0000;">-11</span>    90.8     134.  </span>
+<span class="r-in"></span>
 </code></pre></div>
     </div>
   </div>

@@ -158,33 +158,42 @@ the <code>data</code> argument.</p></dd>
     <div id="ref-examples">
     <h2>Examples</h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"></span>
+<span class="r-in"><span class="co"># feel free to ignore the following line—it allows {broom} to supply </span></span>
+<span class="r-in"><span class="co"># examples without requiring the model-supplying package to be installed.</span></span>
 <span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace</a></span><span class="op">(</span><span class="st">"lfe"</span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
 <span class="r-in"></span>
+<span class="r-in"><span class="co"># load libraries for models and data</span></span>
 <span class="r-in"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/sgaure/lfe" class="external-link">lfe</a></span><span class="op">)</span></span>
 <span class="r-in"></span>
-<span class="r-in"><span class="co"># Use built-in "airquality" dataset</span></span>
+<span class="r-in"><span class="co"># use built-in `airquality` dataset</span></span>
 <span class="r-in"><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">airquality</span><span class="op">)</span></span>
 <span class="r-in"></span>
-<span class="r-in"><span class="co"># No FEs; same as lm()</span></span>
+<span class="r-in"><span class="co"># no FEs; same as lm()</span></span>
 <span class="r-in"><span class="va">est0</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/lfe/man/felm.html" class="external-link">felm</a></span><span class="op">(</span><span class="va">Ozone</span> <span class="op">~</span> <span class="va">Temp</span> <span class="op">+</span> <span class="va">Wind</span> <span class="op">+</span> <span class="va">Solar.R</span>, <span class="va">airquality</span><span class="op">)</span></span>
+<span class="r-in"></span>
+<span class="r-in"><span class="co"># summarize model fit with tidiers</span></span>
 <span class="r-in"><span class="fu"><a href="https://generics.r-lib.org/reference/tidy.html" class="external-link">tidy</a></span><span class="op">(</span><span class="va">est0</span><span class="op">)</span></span>
 <span class="r-in"><span class="fu"><a href="https://generics.r-lib.org/reference/augment.html" class="external-link">augment</a></span><span class="op">(</span><span class="va">est0</span><span class="op">)</span></span>
 <span class="r-in"></span>
-<span class="r-in"><span class="co"># Add month fixed effects</span></span>
+<span class="r-in"><span class="co"># add month fixed effects</span></span>
 <span class="r-in"><span class="va">est1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/lfe/man/felm.html" class="external-link">felm</a></span><span class="op">(</span><span class="va">Ozone</span> <span class="op">~</span> <span class="va">Temp</span> <span class="op">+</span> <span class="va">Wind</span> <span class="op">+</span> <span class="va">Solar.R</span>  <span class="op">|</span> <span class="va">Month</span>, <span class="va">airquality</span><span class="op">)</span></span>
+<span class="r-in"></span>
+<span class="r-in"><span class="co"># summarize model fit with tidiers</span></span>
 <span class="r-in"><span class="fu"><a href="https://generics.r-lib.org/reference/tidy.html" class="external-link">tidy</a></span><span class="op">(</span><span class="va">est1</span><span class="op">)</span></span>
 <span class="r-in"><span class="fu"><a href="https://generics.r-lib.org/reference/tidy.html" class="external-link">tidy</a></span><span class="op">(</span><span class="va">est1</span>, fe <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span class="r-in"><span class="fu"><a href="https://generics.r-lib.org/reference/augment.html" class="external-link">augment</a></span><span class="op">(</span><span class="va">est1</span><span class="op">)</span></span>
 <span class="r-in"><span class="fu"><a href="https://generics.r-lib.org/reference/glance.html" class="external-link">glance</a></span><span class="op">(</span><span class="va">est1</span><span class="op">)</span></span>
 <span class="r-in"></span>
-<span class="r-in"><span class="co"># The "se.type" argument can be used to switch out different standard errors </span></span>
+<span class="r-in"><span class="co"># the "se.type" argument can be used to switch out different standard errors </span></span>
 <span class="r-in"><span class="co"># types on the fly. In turn, this can be useful exploring the effect of </span></span>
 <span class="r-in"><span class="co"># different error structures on model inference.</span></span>
 <span class="r-in"><span class="fu"><a href="https://generics.r-lib.org/reference/tidy.html" class="external-link">tidy</a></span><span class="op">(</span><span class="va">est1</span>, se.type <span class="op">=</span> <span class="st">"iid"</span><span class="op">)</span></span>
 <span class="r-in"><span class="fu"><a href="https://generics.r-lib.org/reference/tidy.html" class="external-link">tidy</a></span><span class="op">(</span><span class="va">est1</span>, se.type <span class="op">=</span> <span class="st">"robust"</span><span class="op">)</span></span>
 <span class="r-in"></span>
-<span class="r-in"><span class="co"># Add clustered SEs (also by month)</span></span>
+<span class="r-in"><span class="co"># add clustered SEs (also by month)</span></span>
 <span class="r-in"><span class="va">est2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/lfe/man/felm.html" class="external-link">felm</a></span><span class="op">(</span><span class="va">Ozone</span> <span class="op">~</span> <span class="va">Temp</span> <span class="op">+</span> <span class="va">Wind</span> <span class="op">+</span> <span class="va">Solar.R</span>  <span class="op">|</span> <span class="va">Month</span> <span class="op">|</span> <span class="fl">0</span> <span class="op">|</span> <span class="va">Month</span>, <span class="va">airquality</span><span class="op">)</span></span>
+<span class="r-in"></span>
+<span class="r-in"><span class="co"># summarize model fit with tidiers</span></span>
 <span class="r-in"><span class="fu"><a href="https://generics.r-lib.org/reference/tidy.html" class="external-link">tidy</a></span><span class="op">(</span><span class="va">est2</span>, conf.int <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> </span>
 <span class="r-in"><span class="fu"><a href="https://generics.r-lib.org/reference/tidy.html" class="external-link">tidy</a></span><span class="op">(</span><span class="va">est2</span>, conf.int <span class="op">=</span> <span class="cn">TRUE</span>, se.type <span class="op">=</span> <span class="st">"cluster"</span><span class="op">)</span></span>
 <span class="r-in"><span class="fu"><a href="https://generics.r-lib.org/reference/tidy.html" class="external-link">tidy</a></span><span class="op">(</span><span class="va">est2</span>, conf.int <span class="op">=</span> <span class="cn">TRUE</span>, se.type <span class="op">=</span> <span class="st">"robust"</span><span class="op">)</span></span>
