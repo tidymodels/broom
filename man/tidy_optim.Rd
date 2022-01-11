@@ -30,10 +30,10 @@ dispatch.
 
 These functions look at the elements of a list and determine if there is
 an appropriate tidying method to apply to the list. Those tidiers are
-themselves are implemented as functions of the form \verb{tidy_<function>}
-or \verb{glance_<function>} and are not exported (but they are documented!).
+implemented as functions of the form \verb{tidy_<function>} or
+\verb{glance_<function>} and are not exported (but they are documented!).
 
-If no appropriate tidying method is found, throws an error.
+If no appropriate tidying method is found, they throw an error.
 }
 \note{
 This function assumes that the provided objective function is a negative
