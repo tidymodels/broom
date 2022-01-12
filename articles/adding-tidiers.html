@@ -35,6 +35,8 @@
 </script>
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -49,8 +51,8 @@
       <div class="navbar-brand-container">
         <a class="navbar-brand" href="../index.html">broom</a>
         <div class="info hidden-xs hidden-sm">
-          <span class="partof">part of <a href="https://tidymodels.org">tidymodels</a></span>
-          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.7.10</span>
+          <span class="partof">part of <a href="https://tidymodels.org" class="external-link">tidymodels</a></span>
+          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.7.11</span>
         </div>
       </div>
     </div>
@@ -70,19 +72,19 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
-      <a href="https://www.tidymodels.org/learn/develop/broom/">Adding new tidiers</a>
+      <a href="https://www.tidymodels.org/learn/develop/broom/" class="external-link">Adding new tidiers</a>
     </li>
     <li>
       <a href="../articles/available-methods.html">Available methods</a>
     </li>
     <li>
-      <a href="https://www.tidymodels.org/learn/statistics/bootstrap/">Bootstrapping</a>
+      <a href="https://www.tidymodels.org/learn/statistics/bootstrap/" class="external-link">Bootstrapping</a>
     </li>
     <li>
       <a href="../articles/broom_and_dplyr.html">Broom and dplyr</a>
     </li>
     <li>
-      <a href="https://www.tidymodels.org/learn/statistics/k-means/">K-means</a>
+      <a href="https://www.tidymodels.org/learn/statistics/k-means/" class="external-link">K-means</a>
     </li>
   </ul>
 </li>
@@ -90,7 +92,7 @@
   <a href="../news/index.html">News</a>
 </li>
         <li>
-  <a href="https://github.com/tidymodels/broom">
+  <a href="https://github.com/tidymodels/broom" class="external-link">
     <span class="fa fa-github fa-lg"></span>
      
   </a>
@@ -105,35 +107,35 @@
 
       
 
-      </header><script src="adding-tidiers_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
+      </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Adding tidiers to broom</h1>
             
-            <h4 class="date">2021-11-01</h4>
+            <h4 data-toc-skip class="date">2022-01-12</h4>
       
-      <small class="dont-index">Source: <a href="https://github.com/tidymodels/broom/blob/master/vignettes/adding-tidiers.Rmd"><code>vignettes/adding-tidiers.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/tidymodels/broom/blob/HEAD/vignettes/adding-tidiers.Rmd" class="external-link"><code>vignettes/adding-tidiers.Rmd</code></a></small>
       <div class="hidden name"><code>adding-tidiers.Rmd</code></div>
 
     </div>
 
     
     
-<div id="adding-tidiers-to-broom" class="section level1">
-<h1 class="hasAnchor">
-<a href="#adding-tidiers-to-broom" class="anchor"></a>Adding tidiers to broom</h1>
-<p>Generally, after this release, the broom dev team will first ask that attempts to add tidier methods supporting a model object are first directed to the model-owning package. An article describing best practices in doing so can be found on the {tidymodels} website at <a href="https://www.tidymodels.org/learn/develop/broom/" class="uri">https://www.tidymodels.org/learn/develop/broom/</a>, and we will continue adding additional resources to that article as we develop them. Some additional packages that supply themed tidiers are:</p>
+<div class="section level1">
+<h1 id="adding-tidiers-to-broom">Adding tidiers to broom<a class="anchor" aria-label="anchor" href="#adding-tidiers-to-broom"></a>
+</h1>
+<p>Generally, after this release, the broom dev team will first ask that attempts to add tidier methods supporting a model object are first directed to the model-owning package. An article describing best practices in doing so can be found on the {tidymodels} website at <a href="https://www.tidymodels.org/learn/develop/broom/" class="external-link uri">https://www.tidymodels.org/learn/develop/broom/</a>, and we will continue adding additional resources to that article as we develop them. Some additional packages that supply themed tidiers are:</p>
 <ul>
-<li>Mixed model tidiers belong in <a href="https://github.com/bbolker/broom.mixed"><code>broom.mixed</code></a>
+<li>Mixed model tidiers belong in <a href="https://github.com/bbolker/broom.mixed" class="external-link"><code>broom.mixed</code></a>
 </li>
-<li>Natural language related tidiers belong in <a href="https://github.com/juliasilge/tidytext"><code>tidytext</code></a>
+<li>Natural language related tidiers belong in <a href="https://github.com/juliasilge/tidytext" class="external-link"><code>tidytext</code></a>
 </li>
-<li>Tree tidiers belong in <a href="https://github.com/njtierney/broomstick"><code>broomstick</code></a>
+<li>Tree tidiers belong in <a href="https://github.com/njtierney/broomstick" class="external-link"><code>broomstick</code></a>
 </li>
-<li>Tidiers for objects from BioConductor belong in <a href="https://bioconductor.org/packages/release/bioc/html/biobroom.html"><code>biobroom</code></a>
+<li>Tidiers for objects from BioConductor belong in <a href="https://bioconductor.org/packages/release/bioc/html/biobroom.html" class="external-link"><code>biobroom</code></a>
 </li>
 </ul>
-<p>To aid in the process of writing new tidiers, we have provided <a href="https://www.tidymodels.org/learn/develop/broom">learning resources</a> as well as lightweight dependencies to re-export tidier generics on the {tidymodels} website.</p>
+<p>To aid in the process of writing new tidiers, we have provided <a href="https://www.tidymodels.org/learn/develop/broom" class="external-link">learning resources</a> as well as lightweight dependencies to re-export tidier generics on the {tidymodels} website.</p>
 <p>In the case that the maintainer is uninterested in taking on the tidier methods, please note this in your issue or PR.</p>
 </div>
   </div>
@@ -154,8 +156,8 @@
 
 <div class="author">
   <p>
-    Developed by David Robinson, Alex Hayes, Simon Couch.
-    Site built by <a href="https://pkgdown.r-lib.org">pkgdown</a>.
+    Developed by .
+    Site built by <a href="https://pkgdown.r-lib.org" class="external-link">pkgdown</a>.
   </p>
 </div>
 
@@ -164,6 +166,8 @@
 
   
 
+
+  
 
   </body>
 </html>

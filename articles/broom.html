@@ -35,6 +35,8 @@
 </script>
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -49,8 +51,8 @@
       <div class="navbar-brand-container">
         <a class="navbar-brand" href="../index.html">broom</a>
         <div class="info hidden-xs hidden-sm">
-          <span class="partof">part of <a href="https://tidymodels.org">tidymodels</a></span>
-          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.7.10</span>
+          <span class="partof">part of <a href="https://tidymodels.org" class="external-link">tidymodels</a></span>
+          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.7.11</span>
         </div>
       </div>
     </div>
@@ -70,19 +72,19 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
-      <a href="https://www.tidymodels.org/learn/develop/broom/">Adding new tidiers</a>
+      <a href="https://www.tidymodels.org/learn/develop/broom/" class="external-link">Adding new tidiers</a>
     </li>
     <li>
       <a href="../articles/available-methods.html">Available methods</a>
     </li>
     <li>
-      <a href="https://www.tidymodels.org/learn/statistics/bootstrap/">Bootstrapping</a>
+      <a href="https://www.tidymodels.org/learn/statistics/bootstrap/" class="external-link">Bootstrapping</a>
     </li>
     <li>
       <a href="../articles/broom_and_dplyr.html">Broom and dplyr</a>
     </li>
     <li>
-      <a href="https://www.tidymodels.org/learn/statistics/k-means/">K-means</a>
+      <a href="https://www.tidymodels.org/learn/statistics/k-means/" class="external-link">K-means</a>
     </li>
   </ul>
 </li>
@@ -90,7 +92,7 @@
   <a href="../news/index.html">News</a>
 </li>
         <li>
-  <a href="https://github.com/tidymodels/broom">
+  <a href="https://github.com/tidymodels/broom" class="external-link">
     <span class="fa fa-github fa-lg"></span>
      
   </a>
@@ -105,34 +107,34 @@
 
       
 
-      </header><script src="broom_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
+      </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Introduction to broom</h1>
             
-            <h4 class="date">2021-11-01</h4>
+            <h4 data-toc-skip class="date">2022-01-12</h4>
       
-      <small class="dont-index">Source: <a href="https://github.com/tidymodels/broom/blob/master/vignettes/broom.Rmd"><code>vignettes/broom.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/tidymodels/broom/blob/HEAD/vignettes/broom.Rmd" class="external-link"><code>vignettes/broom.Rmd</code></a></small>
       <div class="hidden name"><code>broom.Rmd</code></div>
 
     </div>
 
     
     
-<div id="broom-lets-tidy-up-a-bit" class="section level1">
-<h1 class="hasAnchor">
-<a href="#broom-lets-tidy-up-a-bit" class="anchor"></a>broom: let’s tidy up a bit</h1>
+<div class="section level1">
+<h1 id="broom-lets-tidy-up-a-bit">broom: let’s tidy up a bit<a class="anchor" aria-label="anchor" href="#broom-lets-tidy-up-a-bit"></a>
+</h1>
 <p>The broom package takes the messy output of built-in functions in R, such as <code>lm</code>, <code>nls</code>, or <code>t.test</code>, and turns them into tidy tibbles.</p>
-<p>The concept of “tidy data”, <a href="https://www.jstatsoft.org/v59/i10">as introduced by Hadley Wickham</a>, offers a powerful framework for data manipulation and analysis. That paper makes a convincing statement of the problem this package tries to solve (emphasis mine):</p>
+<p>The concept of “tidy data”, <a href="https://www.jstatsoft.org/v59/i10" class="external-link">as introduced by Hadley Wickham</a>, offers a powerful framework for data manipulation and analysis. That paper makes a convincing statement of the problem this package tries to solve (emphasis mine):</p>
 <blockquote>
 <p><strong>While model inputs usually require tidy inputs, such attention to detail doesn’t carry over to model outputs. Outputs such as predictions and estimated coefficients aren’t always tidy. This makes it more difficult to combine results from multiple models.</strong> For example, in R, the default representation of model coefficients is not tidy because it does not have an explicit variable that records the variable name for each estimate, they are instead recorded as row names. In R, row names must be unique, so combining coefficients from many models (e.g., from bootstrap resamples, or subgroups) requires workarounds to avoid losing important information. <strong>This knocks you out of the flow of analysis and makes it harder to combine the results from multiple models. I’m not currently aware of any packages that resolve this problem.</strong></p>
 </blockquote>
-<p>broom is an attempt to bridge the gap from untidy outputs of predictions and estimations to the tidy data we want to work with. It centers around three S3 methods, each of which take common objects produced by R statistical functions (<code>lm</code>, <code>t.test</code>, <code>nls</code>, etc) and convert them into a tibble. broom is particularly designed to work with Hadley’s <a href="https://github.com/tidyverse/dplyr">dplyr</a> package (see the <a href="broom_and_dplyr.html">broom+dplyr</a> vignette for more).</p>
-<p>broom should be distinguished from packages like <a href="https://CRAN.R-project.org/package=reshape2">reshape2</a> and <a href="https://github.com/tidyverse/tidyr">tidyr</a>, which rearrange and reshape data frames into different forms. Those packages perform critical tasks in tidy data analysis but focus on manipulating data frames in one specific format into another. In contrast, broom is designed to take format that is <em>not</em> in a tabular data format (sometimes not anywhere close) and convert it to a tidy tibble.</p>
-<p>Tidying model outputs is not an exact science, and it’s based on a judgment of the kinds of values a data scientist typically wants out of a tidy analysis (for instance, estimates, test statistics, and p-values). You may lose some of the information in the original object that you wanted, or keep more information than you need. If you think the tidy output for a model should be changed, or if you’re missing a tidying function for an S3 class that you’d like, I strongly encourage you to <a href="https://github.com/tidymodels/broom/issues">open an issue</a> or a pull request.</p>
-<div id="tidying-functions" class="section level2">
-<h2 class="hasAnchor">
-<a href="#tidying-functions" class="anchor"></a>Tidying functions</h2>
+<p>broom is an attempt to bridge the gap from untidy outputs of predictions and estimations to the tidy data we want to work with. It centers around three S3 methods, each of which take common objects produced by R statistical functions (<code>lm</code>, <code>t.test</code>, <code>nls</code>, etc) and convert them into a tibble. broom is particularly designed to work with Hadley’s <a href="https://github.com/tidyverse/dplyr" class="external-link">dplyr</a> package (see the <a href="broom_and_dplyr.html">broom+dplyr</a> vignette for more).</p>
+<p>broom should be distinguished from packages like <a href="https://CRAN.R-project.org/package=reshape2" class="external-link">reshape2</a> and <a href="https://github.com/tidyverse/tidyr" class="external-link">tidyr</a>, which rearrange and reshape data frames into different forms. Those packages perform critical tasks in tidy data analysis but focus on manipulating data frames in one specific format into another. In contrast, broom is designed to take format that is <em>not</em> in a tabular data format (sometimes not anywhere close) and convert it to a tidy tibble.</p>
+<p>Tidying model outputs is not an exact science, and it’s based on a judgment of the kinds of values a data scientist typically wants out of a tidy analysis (for instance, estimates, test statistics, and p-values). You may lose some of the information in the original object that you wanted, or keep more information than you need. If you think the tidy output for a model should be changed, or if you’re missing a tidying function for an S3 class that you’d like, I strongly encourage you to <a href="https://github.com/tidymodels/broom/issues" class="external-link">open an issue</a> or a pull request.</p>
+<div class="section level2">
+<h2 id="tidying-functions">Tidying functions<a class="anchor" aria-label="anchor" href="#tidying-functions"></a>
+</h2>
 <p>This package provides three S3 methods that do three distinct kinds of tidying.</p>
 <ul>
 <li>
@@ -145,218 +147,218 @@
 <p>Note that some classes may have only one or two of these methods defined.</p>
 <p>Consider as an illustrative example a linear fit on the built-in <code>mtcars</code> dataset.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">lmfit</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">mpg</span> <span class="op">~</span> <span class="va">wt</span>, <span class="va">mtcars</span><span class="op">)</span>
+<code class="sourceCode R"><span class="va">lmfit</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">mpg</span> <span class="op">~</span> <span class="va">wt</span>, <span class="va">mtcars</span><span class="op">)</span>
 <span class="va">lmfit</span></code></pre></div>
-<pre><code>## 
-## Call:
-## lm(formula = mpg ~ wt, data = mtcars)
-## 
-## Coefficients:
-## (Intercept)           wt  
-##      37.285       -5.344</code></pre>
+<pre><code><span class="co">## </span>
+<span class="co">## Call:</span>
+<span class="co">## lm(formula = mpg ~ wt, data = mtcars)</span>
+<span class="co">## </span>
+<span class="co">## Coefficients:</span>
+<span class="co">## (Intercept)           wt  </span>
+<span class="co">##      37.285       -5.344</span></code></pre>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/vars/man/summary.html">summary</a></span><span class="op">(</span><span class="va">lmfit</span><span class="op">)</span></code></pre></div>
-<pre><code>## 
-## Call:
-## lm(formula = mpg ~ wt, data = mtcars)
-## 
-## Residuals:
-##     Min      1Q  Median      3Q     Max 
-## -4.5432 -2.3647 -0.1252  1.4096  6.8727 
-## 
-## Coefficients:
-##             Estimate Std. Error t value Pr(&gt;|t|)    
-## (Intercept)  37.2851     1.8776  19.858  &lt; 2e-16 ***
-## wt           -5.3445     0.5591  -9.559 1.29e-10 ***
-## ---
-## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-## 
-## Residual standard error: 3.046 on 30 degrees of freedom
-## Multiple R-squared:  0.7528, Adjusted R-squared:  0.7446 
-## F-statistic: 91.38 on 1 and 30 DF,  p-value: 1.294e-10</code></pre>
-<p>This summary output is useful enough if you just want to read it. However, converting it to tabular data that contains all the same information, so that you can combine it with other models or do further analysis, is not trivial. You have to do <code><a href="https://rdrr.io/pkg/vars/man/coefficients.html">coef(summary(lmfit))</a></code> to get a matrix of coefficients, the terms are still stored in row names, and the column names are inconsistent with other packages (e.g. <code>Pr(&gt;|t|)</code> compared to <code>p.value</code>).</p>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/vars/man/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">lmfit</span><span class="op">)</span></code></pre></div>
+<pre><code><span class="co">## </span>
+<span class="co">## Call:</span>
+<span class="co">## lm(formula = mpg ~ wt, data = mtcars)</span>
+<span class="co">## </span>
+<span class="co">## Residuals:</span>
+<span class="co">##     Min      1Q  Median      3Q     Max </span>
+<span class="co">## -4.5432 -2.3647 -0.1252  1.4096  6.8727 </span>
+<span class="co">## </span>
+<span class="co">## Coefficients:</span>
+<span class="co">##             Estimate Std. Error t value Pr(&gt;|t|)    </span>
+<span class="co">## (Intercept)  37.2851     1.8776  19.858  &lt; 2e-16 ***</span>
+<span class="co">## wt           -5.3445     0.5591  -9.559 1.29e-10 ***</span>
+<span class="co">## ---</span>
+<span class="co">## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span>
+<span class="co">## </span>
+<span class="co">## Residual standard error: 3.046 on 30 degrees of freedom</span>
+<span class="co">## Multiple R-squared:  0.7528, Adjusted R-squared:  0.7446 </span>
+<span class="co">## F-statistic: 91.38 on 1 and 30 DF,  p-value: 1.294e-10</span></code></pre>
+<p>This summary output is useful enough if you just want to read it. However, converting it to tabular data that contains all the same information, so that you can combine it with other models or do further analysis, is not trivial. You have to do <code>coef(summary(lmfit))</code> to get a matrix of coefficients, the terms are still stored in row names, and the column names are inconsistent with other packages (e.g. <code>Pr(&gt;|t|)</code> compared to <code>p.value</code>).</p>
 <p>Instead, you can use the <code>tidy</code> function, from the broom package, on the fit:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://broom.tidymodels.org/">broom</a></span><span class="op">)</span>
-<span class="fu"><a href="https://generics.r-lib.org/reference/tidy.html">tidy</a></span><span class="op">(</span><span class="va">lmfit</span><span class="op">)</span></code></pre></div>
-<pre><code>## # A tibble: 2 × 5
-##   term        estimate std.error statistic  p.value
-##   &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
-## 1 (Intercept)    37.3      1.88      19.9  8.24e-19
-## 2 wt             -5.34     0.559     -9.56 1.29e-10</code></pre>
-<p>This gives you a tabular data representation. Note that the row names have been moved into a column called <code>term</code>, and the column names are simple and consistent (and can be accessed using <code><a href="https://rdrr.io/r/base/Extract.html">$</a></code>).</p>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://broom.tidymodels.org/">broom</a></span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/pkg/generics/man/tidy.html" class="external-link">tidy</a></span><span class="op">(</span><span class="va">lmfit</span><span class="op">)</span></code></pre></div>
+<pre><code><span class="co">## <span style="color: #949494;"># A tibble: 2 × 5</span></span>
+<span class="co">##   term        estimate std.error statistic  p.value</span>
+<span class="co">##   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="co">## <span style="color: #BCBCBC;">1</span> (Intercept)    37.3      1.88      19.9  8.24<span style="color: #949494;">e</span><span style="color: #BB0000;">-19</span></span>
+<span class="co">## <span style="color: #BCBCBC;">2</span> wt             -<span style="color: #BB0000;">5.34</span>     0.559     -<span style="color: #BB0000;">9.56</span> 1.29<span style="color: #949494;">e</span><span style="color: #BB0000;">-10</span></span></code></pre>
+<p>This gives you a tabular data representation. Note that the row names have been moved into a column called <code>term</code>, and the column names are simple and consistent (and can be accessed using <code>$</code>).</p>
 <p>Instead of viewing the coefficients, you might be interested in the fitted values and residuals for each of the original points in the regression. For this, use <code>augment</code>, which augments the original data with information from the model:</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://generics.r-lib.org/reference/augment.html">augment</a></span><span class="op">(</span><span class="va">lmfit</span><span class="op">)</span></code></pre></div>
-<pre><code>## # A tibble: 32 × 9
-##    .rownames           mpg    wt .fitted .resid   .hat .sigma .cooksd .std.resid
-##    &lt;chr&gt;             &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;      &lt;dbl&gt;
-##  1 Mazda RX4          21    2.62    23.3 -2.28  0.0433   3.07 1.33e-2    -0.766 
-##  2 Mazda RX4 Wag      21    2.88    21.9 -0.920 0.0352   3.09 1.72e-3    -0.307 
-##  3 Datsun 710         22.8  2.32    24.9 -2.09  0.0584   3.07 1.54e-2    -0.706 
-##  4 Hornet 4 Drive     21.4  3.22    20.1  1.30  0.0313   3.09 3.02e-3     0.433 
-##  5 Hornet Sportabout  18.7  3.44    18.9 -0.200 0.0329   3.10 7.60e-5    -0.0668
-##  6 Valiant            18.1  3.46    18.8 -0.693 0.0332   3.10 9.21e-4    -0.231 
-##  7 Duster 360         14.3  3.57    18.2 -3.91  0.0354   3.01 3.13e-2    -1.31  
-##  8 Merc 240D          24.4  3.19    20.2  4.16  0.0313   3.00 3.11e-2     1.39  
-##  9 Merc 230           22.8  3.15    20.5  2.35  0.0314   3.07 9.96e-3     0.784 
-## 10 Merc 280           19.2  3.44    18.9  0.300 0.0329   3.10 1.71e-4     0.100 
-## # … with 22 more rows</code></pre>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/generics/man/augment.html" class="external-link">augment</a></span><span class="op">(</span><span class="va">lmfit</span><span class="op">)</span></code></pre></div>
+<pre><code><span class="co">## <span style="color: #949494;"># A tibble: 32 × 9</span></span>
+<span class="co">##    .rownames           mpg    wt .fitted .resid   .hat .sigma .cooksd .std.resid</span>
+<span class="co">##    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>             <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="co">## <span style="color: #BCBCBC;"> 1</span> Mazda RX4          21    2.62    23.3 -<span style="color: #BB0000;">2.28</span>  0.043<span style="text-decoration: underline;">3</span>   3.07 1.33<span style="color: #949494;">e</span><span style="color: #BB0000;">-2</span>    -<span style="color: #BB0000;">0.766</span> </span>
+<span class="co">## <span style="color: #BCBCBC;"> 2</span> Mazda RX4 Wag      21    2.88    21.9 -<span style="color: #BB0000;">0.920</span> 0.035<span style="text-decoration: underline;">2</span>   3.09 1.72<span style="color: #949494;">e</span><span style="color: #BB0000;">-3</span>    -<span style="color: #BB0000;">0.307</span> </span>
+<span class="co">## <span style="color: #BCBCBC;"> 3</span> Datsun 710         22.8  2.32    24.9 -<span style="color: #BB0000;">2.09</span>  0.058<span style="text-decoration: underline;">4</span>   3.07 1.54<span style="color: #949494;">e</span><span style="color: #BB0000;">-2</span>    -<span style="color: #BB0000;">0.706</span> </span>
+<span class="co">## <span style="color: #BCBCBC;"> 4</span> Hornet 4 Drive     21.4  3.22    20.1  1.30  0.031<span style="text-decoration: underline;">3</span>   3.09 3.02<span style="color: #949494;">e</span><span style="color: #BB0000;">-3</span>     0.433 </span>
+<span class="co">## <span style="color: #BCBCBC;"> 5</span> Hornet Sportabout  18.7  3.44    18.9 -<span style="color: #BB0000;">0.200</span> 0.032<span style="text-decoration: underline;">9</span>   3.10 7.60<span style="color: #949494;">e</span><span style="color: #BB0000;">-5</span>    -<span style="color: #BB0000;">0.066</span><span style="color: #BB0000; text-decoration: underline;">8</span></span>
+<span class="co">## <span style="color: #BCBCBC;"> 6</span> Valiant            18.1  3.46    18.8 -<span style="color: #BB0000;">0.693</span> 0.033<span style="text-decoration: underline;">2</span>   3.10 9.21<span style="color: #949494;">e</span><span style="color: #BB0000;">-4</span>    -<span style="color: #BB0000;">0.231</span> </span>
+<span class="co">## <span style="color: #BCBCBC;"> 7</span> Duster 360         14.3  3.57    18.2 -<span style="color: #BB0000;">3.91</span>  0.035<span style="text-decoration: underline;">4</span>   3.01 3.13<span style="color: #949494;">e</span><span style="color: #BB0000;">-2</span>    -<span style="color: #BB0000;">1.31</span>  </span>
+<span class="co">## <span style="color: #BCBCBC;"> 8</span> Merc 240D          24.4  3.19    20.2  4.16  0.031<span style="text-decoration: underline;">3</span>   3.00 3.11<span style="color: #949494;">e</span><span style="color: #BB0000;">-2</span>     1.39  </span>
+<span class="co">## <span style="color: #BCBCBC;"> 9</span> Merc 230           22.8  3.15    20.5  2.35  0.031<span style="text-decoration: underline;">4</span>   3.07 9.96<span style="color: #949494;">e</span><span style="color: #BB0000;">-3</span>     0.784 </span>
+<span class="co">## <span style="color: #BCBCBC;">10</span> Merc 280           19.2  3.44    18.9  0.300 0.032<span style="text-decoration: underline;">9</span>   3.10 1.71<span style="color: #949494;">e</span><span style="color: #BB0000;">-4</span>     0.100 </span>
+<span class="co">## <span style="color: #949494;"># … with 22 more rows</span></span></code></pre>
 <p>Note that each of the new columns begins with a <code>.</code> (to avoid overwriting any of the original columns).</p>
 <p>Finally, several summary statistics are computed for the entire regression, such as R^2 and the F-statistic. These can be accessed with the <code>glance</code> function:</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://generics.r-lib.org/reference/glance.html">glance</a></span><span class="op">(</span><span class="va">lmfit</span><span class="op">)</span></code></pre></div>
-<pre><code>## # A tibble: 1 × 12
-##   r.squared adj.r.squared sigma statistic  p.value    df logLik   AIC   BIC
-##       &lt;dbl&gt;         &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
-## 1     0.753         0.745  3.05      91.4 1.29e-10     1  -80.0  166.  170.
-## # … with 3 more variables: deviance &lt;dbl&gt;, df.residual &lt;int&gt;, nobs &lt;int&gt;</code></pre>
-<p>This distinction between the <code>tidy</code>, <code>augment</code> and <code>glance</code> functions is explored in a different context in the <a href="https://www.tidymodels.org/learn/statistics/k-means/">k-means vignette</a>.</p>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/generics/man/glance.html" class="external-link">glance</a></span><span class="op">(</span><span class="va">lmfit</span><span class="op">)</span></code></pre></div>
+<pre><code><span class="co">## <span style="color: #949494;"># A tibble: 1 × 12</span></span>
+<span class="co">##   r.squared adj.r.squared sigma statistic  p.value    df logLik   AIC   BIC</span>
+<span class="co">##       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="co">## <span style="color: #BCBCBC;">1</span>     0.753         0.745  3.05      91.4 1.29<span style="color: #949494;">e</span><span style="color: #BB0000;">-10</span>     1  -<span style="color: #BB0000;">80.0</span>  166.  170.</span>
+<span class="co">## <span style="color: #949494;"># … with 3 more variables: deviance &lt;dbl&gt;, df.residual &lt;int&gt;, nobs &lt;int&gt;</span></span></code></pre>
+<p>This distinction between the <code>tidy</code>, <code>augment</code> and <code>glance</code> functions is explored in a different context in the <a href="https://www.tidymodels.org/learn/statistics/k-means/" class="external-link">k-means vignette</a>.</p>
 </div>
-<div id="other-examples" class="section level2">
-<h2 class="hasAnchor">
-<a href="#other-examples" class="anchor"></a>Other Examples</h2>
-<div id="generalized-linear-and-non-linear-models" class="section level3">
-<h3 class="hasAnchor">
-<a href="#generalized-linear-and-non-linear-models" class="anchor"></a>Generalized linear and non-linear models</h3>
+<div class="section level2">
+<h2 id="other-examples">Other Examples<a class="anchor" aria-label="anchor" href="#other-examples"></a>
+</h2>
+<div class="section level3">
+<h3 id="generalized-linear-and-non-linear-models">Generalized linear and non-linear models<a class="anchor" aria-label="anchor" href="#generalized-linear-and-non-linear-models"></a>
+</h3>
 <p>These functions apply equally well to the output from <code>glm</code>:</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">glmfit</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/glm.html">glm</a></span><span class="op">(</span><span class="va">am</span> <span class="op">~</span> <span class="va">wt</span>, <span class="va">mtcars</span>, family <span class="op">=</span> <span class="st">"binomial"</span><span class="op">)</span>
-<span class="fu"><a href="https://generics.r-lib.org/reference/tidy.html">tidy</a></span><span class="op">(</span><span class="va">glmfit</span><span class="op">)</span></code></pre></div>
-<pre><code>## # A tibble: 2 × 5
-##   term        estimate std.error statistic p.value
-##   &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;
-## 1 (Intercept)    12.0       4.51      2.67 0.00759
-## 2 wt             -4.02      1.44     -2.80 0.00509</code></pre>
+<code class="sourceCode R"><span class="va">glmfit</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/glm.html" class="external-link">glm</a></span><span class="op">(</span><span class="va">am</span> <span class="op">~</span> <span class="va">wt</span>, <span class="va">mtcars</span>, family <span class="op">=</span> <span class="st">"binomial"</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/pkg/generics/man/tidy.html" class="external-link">tidy</a></span><span class="op">(</span><span class="va">glmfit</span><span class="op">)</span></code></pre></div>
+<pre><code><span class="co">## <span style="color: #949494;"># A tibble: 2 × 5</span></span>
+<span class="co">##   term        estimate std.error statistic p.value</span>
+<span class="co">##   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="co">## <span style="color: #BCBCBC;">1</span> (Intercept)    12.0       4.51      2.67 0.007<span style="text-decoration: underline;">59</span></span>
+<span class="co">## <span style="color: #BCBCBC;">2</span> wt             -<span style="color: #BB0000;">4.02</span>      1.44     -<span style="color: #BB0000;">2.80</span> 0.005<span style="text-decoration: underline;">09</span></span></code></pre>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://generics.r-lib.org/reference/augment.html">augment</a></span><span class="op">(</span><span class="va">glmfit</span><span class="op">)</span></code></pre></div>
-<pre><code>## # A tibble: 32 × 9
-##    .rownames            am    wt .fitted .resid .std.resid   .hat .sigma .cooksd
-##    &lt;chr&gt;             &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;      &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;
-##  1 Mazda RX4             1  2.62   1.50   0.635      0.680 0.126   0.803 0.0184 
-##  2 Mazda RX4 Wag         1  2.88   0.471  0.985      1.04  0.108   0.790 0.0424 
-##  3 Datsun 710            1  2.32   2.70   0.360      0.379 0.0963  0.810 0.00394
-##  4 Hornet 4 Drive        0  3.22  -0.897 -0.827     -0.860 0.0744  0.797 0.0177 
-##  5 Hornet Sportabout     0  3.44  -1.80  -0.553     -0.572 0.0681  0.806 0.00647
-##  6 Valiant               0  3.46  -1.88  -0.532     -0.551 0.0674  0.807 0.00590
-##  7 Duster 360            0  3.57  -2.33  -0.432     -0.446 0.0625  0.809 0.00348
-##  8 Merc 240D             0  3.19  -0.796 -0.863     -0.897 0.0755  0.796 0.0199 
-##  9 Merc 230              0  3.15  -0.635 -0.922     -0.960 0.0776  0.793 0.0242 
-## 10 Merc 280              0  3.44  -1.80  -0.553     -0.572 0.0681  0.806 0.00647
-## # … with 22 more rows</code></pre>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/generics/man/augment.html" class="external-link">augment</a></span><span class="op">(</span><span class="va">glmfit</span><span class="op">)</span></code></pre></div>
+<pre><code><span class="co">## <span style="color: #949494;"># A tibble: 32 × 9</span></span>
+<span class="co">##    .rownames            am    wt .fitted .resid .std.resid   .hat .sigma .cooksd</span>
+<span class="co">##    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>             <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="co">## <span style="color: #BCBCBC;"> 1</span> Mazda RX4             1  2.62   1.50   0.635      0.680 0.126   0.803 0.018<span style="text-decoration: underline;">4</span> </span>
+<span class="co">## <span style="color: #BCBCBC;"> 2</span> Mazda RX4 Wag         1  2.88   0.471  0.985      1.04  0.108   0.790 0.042<span style="text-decoration: underline;">4</span> </span>
+<span class="co">## <span style="color: #BCBCBC;"> 3</span> Datsun 710            1  2.32   2.70   0.360      0.379 0.096<span style="text-decoration: underline;">3</span>  0.810 0.003<span style="text-decoration: underline;">94</span></span>
+<span class="co">## <span style="color: #BCBCBC;"> 4</span> Hornet 4 Drive        0  3.22  -<span style="color: #BB0000;">0.897</span> -<span style="color: #BB0000;">0.827</span>     -<span style="color: #BB0000;">0.860</span> 0.074<span style="text-decoration: underline;">4</span>  0.797 0.017<span style="text-decoration: underline;">7</span> </span>
+<span class="co">## <span style="color: #BCBCBC;"> 5</span> Hornet Sportabout     0  3.44  -<span style="color: #BB0000;">1.80</span>  -<span style="color: #BB0000;">0.553</span>     -<span style="color: #BB0000;">0.572</span> 0.068<span style="text-decoration: underline;">1</span>  0.806 0.006<span style="text-decoration: underline;">47</span></span>
+<span class="co">## <span style="color: #BCBCBC;"> 6</span> Valiant               0  3.46  -<span style="color: #BB0000;">1.88</span>  -<span style="color: #BB0000;">0.532</span>     -<span style="color: #BB0000;">0.551</span> 0.067<span style="text-decoration: underline;">4</span>  0.807 0.005<span style="text-decoration: underline;">90</span></span>
+<span class="co">## <span style="color: #BCBCBC;"> 7</span> Duster 360            0  3.57  -<span style="color: #BB0000;">2.33</span>  -<span style="color: #BB0000;">0.432</span>     -<span style="color: #BB0000;">0.446</span> 0.062<span style="text-decoration: underline;">5</span>  0.809 0.003<span style="text-decoration: underline;">48</span></span>
+<span class="co">## <span style="color: #BCBCBC;"> 8</span> Merc 240D             0  3.19  -<span style="color: #BB0000;">0.796</span> -<span style="color: #BB0000;">0.863</span>     -<span style="color: #BB0000;">0.897</span> 0.075<span style="text-decoration: underline;">5</span>  0.796 0.019<span style="text-decoration: underline;">9</span> </span>
+<span class="co">## <span style="color: #BCBCBC;"> 9</span> Merc 230              0  3.15  -<span style="color: #BB0000;">0.635</span> -<span style="color: #BB0000;">0.922</span>     -<span style="color: #BB0000;">0.960</span> 0.077<span style="text-decoration: underline;">6</span>  0.793 0.024<span style="text-decoration: underline;">2</span> </span>
+<span class="co">## <span style="color: #BCBCBC;">10</span> Merc 280              0  3.44  -<span style="color: #BB0000;">1.80</span>  -<span style="color: #BB0000;">0.553</span>     -<span style="color: #BB0000;">0.572</span> 0.068<span style="text-decoration: underline;">1</span>  0.806 0.006<span style="text-decoration: underline;">47</span></span>
+<span class="co">## <span style="color: #949494;"># … with 22 more rows</span></span></code></pre>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://generics.r-lib.org/reference/glance.html">glance</a></span><span class="op">(</span><span class="va">glmfit</span><span class="op">)</span></code></pre></div>
-<pre><code>## # A tibble: 1 × 8
-##   null.deviance df.null logLik   AIC   BIC deviance df.residual  nobs
-##           &lt;dbl&gt;   &lt;int&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;       &lt;int&gt; &lt;int&gt;
-## 1          43.2      31  -9.59  23.2  26.1     19.2          30    32</code></pre>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/generics/man/glance.html" class="external-link">glance</a></span><span class="op">(</span><span class="va">glmfit</span><span class="op">)</span></code></pre></div>
+<pre><code><span class="co">## <span style="color: #949494;"># A tibble: 1 × 8</span></span>
+<span class="co">##   null.deviance df.null logLik   AIC   BIC deviance df.residual  nobs</span>
+<span class="co">##           <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span>
+<span class="co">## <span style="color: #BCBCBC;">1</span>          43.2      31  -<span style="color: #BB0000;">9.59</span>  23.2  26.1     19.2          30    32</span></code></pre>
 <p>Note that the statistics computed by <code>glance</code> are different for <code>glm</code> objects than for <code>lm</code> (e.g. deviance rather than R^2):</p>
 <p>These functions also work on other fits, such as nonlinear models (<code>nls</code>):</p>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">nlsfit</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/nls.html">nls</a></span><span class="op">(</span><span class="va">mpg</span> <span class="op">~</span> <span class="va">k</span> <span class="op">/</span> <span class="va">wt</span> <span class="op">+</span> <span class="va">b</span>, <span class="va">mtcars</span>, start <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>k <span class="op">=</span> <span class="fl">1</span>, b <span class="op">=</span> <span class="fl">0</span><span class="op">)</span><span class="op">)</span>
-<span class="fu"><a href="https://generics.r-lib.org/reference/tidy.html">tidy</a></span><span class="op">(</span><span class="va">nlsfit</span><span class="op">)</span></code></pre></div>
-<pre><code>## # A tibble: 2 × 5
-##   term  estimate std.error statistic  p.value
-##   &lt;chr&gt;    &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
-## 1 k        45.8       4.25     10.8  7.64e-12
-## 2 b         4.39      1.54      2.85 7.74e- 3</code></pre>
+<code class="sourceCode R"><span class="va">nlsfit</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/nls.html" class="external-link">nls</a></span><span class="op">(</span><span class="va">mpg</span> <span class="op">~</span> <span class="va">k</span> <span class="op">/</span> <span class="va">wt</span> <span class="op">+</span> <span class="va">b</span>, <span class="va">mtcars</span>, start <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>k <span class="op">=</span> <span class="fl">1</span>, b <span class="op">=</span> <span class="fl">0</span><span class="op">)</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/pkg/generics/man/tidy.html" class="external-link">tidy</a></span><span class="op">(</span><span class="va">nlsfit</span><span class="op">)</span></code></pre></div>
+<pre><code><span class="co">## <span style="color: #949494;"># A tibble: 2 × 5</span></span>
+<span class="co">##   term  estimate std.error statistic  p.value</span>
+<span class="co">##   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="co">## <span style="color: #BCBCBC;">1</span> k        45.8       4.25     10.8  7.64<span style="color: #949494;">e</span><span style="color: #BB0000;">-12</span></span>
+<span class="co">## <span style="color: #BCBCBC;">2</span> b         4.39      1.54      2.85 7.74<span style="color: #949494;">e</span><span style="color: #BB0000;">- 3</span></span></code></pre>
 <div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://generics.r-lib.org/reference/augment.html">augment</a></span><span class="op">(</span><span class="va">nlsfit</span>, <span class="va">mtcars</span><span class="op">)</span></code></pre></div>
-<pre><code>## # A tibble: 32 × 14
-##    .rownames     mpg   cyl  disp    hp  drat    wt  qsec    vs    am  gear  carb
-##    &lt;chr&gt;       &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
-##  1 Mazda RX4    21       6  160    110  3.9   2.62  16.5     0     1     4     4
-##  2 Mazda RX4 …  21       6  160    110  3.9   2.88  17.0     0     1     4     4
-##  3 Datsun 710   22.8     4  108     93  3.85  2.32  18.6     1     1     4     1
-##  4 Hornet 4 D…  21.4     6  258    110  3.08  3.22  19.4     1     0     3     1
-##  5 Hornet Spo…  18.7     8  360    175  3.15  3.44  17.0     0     0     3     2
-##  6 Valiant      18.1     6  225    105  2.76  3.46  20.2     1     0     3     1
-##  7 Duster 360   14.3     8  360    245  3.21  3.57  15.8     0     0     3     4
-##  8 Merc 240D    24.4     4  147.    62  3.69  3.19  20       1     0     4     2
-##  9 Merc 230     22.8     4  141.    95  3.92  3.15  22.9     1     0     4     2
-## 10 Merc 280     19.2     6  168.   123  3.92  3.44  18.3     1     0     4     4
-## # … with 22 more rows, and 2 more variables: .fitted &lt;dbl&gt;, .resid &lt;dbl&gt;</code></pre>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/generics/man/augment.html" class="external-link">augment</a></span><span class="op">(</span><span class="va">nlsfit</span>, <span class="va">mtcars</span><span class="op">)</span></code></pre></div>
+<pre><code><span class="co">## <span style="color: #949494;"># A tibble: 32 × 14</span></span>
+<span class="co">##    .rownames     mpg   cyl  disp    hp  drat    wt  qsec    vs    am  gear  carb</span>
+<span class="co">##    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="co">## <span style="color: #BCBCBC;"> 1</span> Mazda RX4    21       6  160    110  3.9   2.62  16.5     0     1     4     4</span>
+<span class="co">## <span style="color: #BCBCBC;"> 2</span> Mazda RX4 …  21       6  160    110  3.9   2.88  17.0     0     1     4     4</span>
+<span class="co">## <span style="color: #BCBCBC;"> 3</span> Datsun 710   22.8     4  108     93  3.85  2.32  18.6     1     1     4     1</span>
+<span class="co">## <span style="color: #BCBCBC;"> 4</span> Hornet 4 D…  21.4     6  258    110  3.08  3.22  19.4     1     0     3     1</span>
+<span class="co">## <span style="color: #BCBCBC;"> 5</span> Hornet Spo…  18.7     8  360    175  3.15  3.44  17.0     0     0     3     2</span>
+<span class="co">## <span style="color: #BCBCBC;"> 6</span> Valiant      18.1     6  225    105  2.76  3.46  20.2     1     0     3     1</span>
+<span class="co">## <span style="color: #BCBCBC;"> 7</span> Duster 360   14.3     8  360    245  3.21  3.57  15.8     0     0     3     4</span>
+<span class="co">## <span style="color: #BCBCBC;"> 8</span> Merc 240D    24.4     4  147.    62  3.69  3.19  20       1     0     4     2</span>
+<span class="co">## <span style="color: #BCBCBC;"> 9</span> Merc 230     22.8     4  141.    95  3.92  3.15  22.9     1     0     4     2</span>
+<span class="co">## <span style="color: #BCBCBC;">10</span> Merc 280     19.2     6  168.   123  3.92  3.44  18.3     1     0     4     4</span>
+<span class="co">## <span style="color: #949494;"># … with 22 more rows, and 2 more variables: .fitted &lt;dbl&gt;, .resid &lt;dbl&gt;</span></span></code></pre>
 <div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://generics.r-lib.org/reference/glance.html">glance</a></span><span class="op">(</span><span class="va">nlsfit</span><span class="op">)</span></code></pre></div>
-<pre><code>## # A tibble: 1 × 9
-##   sigma isConv       finTol logLik   AIC   BIC deviance df.residual  nobs
-##   &lt;dbl&gt; &lt;lgl&gt;         &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;       &lt;int&gt; &lt;int&gt;
-## 1  2.77 TRUE   0.0000000197  -77.0  160.  164.     231.          30    32</code></pre>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/generics/man/glance.html" class="external-link">glance</a></span><span class="op">(</span><span class="va">nlsfit</span><span class="op">)</span></code></pre></div>
+<pre><code><span class="co">## <span style="color: #949494;"># A tibble: 1 × 9</span></span>
+<span class="co">##   sigma isConv       finTol logLik   AIC   BIC deviance df.residual  nobs</span>
+<span class="co">##   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span>
+<span class="co">## <span style="color: #BCBCBC;">1</span>  2.77 TRUE   0.000<span style="text-decoration: underline;">000</span>028<span style="text-decoration: underline;">8</span>  -<span style="color: #BB0000;">77.0</span>  160.  164.     231.          30    32</span></code></pre>
 </div>
-<div id="hypothesis-testing" class="section level3">
-<h3 class="hasAnchor">
-<a href="#hypothesis-testing" class="anchor"></a>Hypothesis testing</h3>
+<div class="section level3">
+<h3 id="hypothesis-testing">Hypothesis testing<a class="anchor" aria-label="anchor" href="#hypothesis-testing"></a>
+</h3>
 <p>The <code>tidy</code> function can also be applied to <code>htest</code> objects, such as those output by popular built-in functions like <code>t.test</code>, <code>cor.test</code>, and <code>wilcox.test</code>.</p>
 <div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">tt</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/t.test.html">t.test</a></span><span class="op">(</span><span class="va">wt</span> <span class="op">~</span> <span class="va">am</span>, <span class="va">mtcars</span><span class="op">)</span>
-<span class="fu"><a href="https://generics.r-lib.org/reference/tidy.html">tidy</a></span><span class="op">(</span><span class="va">tt</span><span class="op">)</span></code></pre></div>
-<pre><code>## # A tibble: 1 × 10
-##   estimate estimate1 estimate2 statistic    p.value parameter conf.low conf.high
-##      &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;      &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;
-## 1     1.36      3.77      2.41      5.49 0.00000627      29.2    0.853      1.86
-## # … with 2 more variables: method &lt;chr&gt;, alternative &lt;chr&gt;</code></pre>
+<code class="sourceCode R"><span class="va">tt</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/t.test.html" class="external-link">t.test</a></span><span class="op">(</span><span class="va">wt</span> <span class="op">~</span> <span class="va">am</span>, <span class="va">mtcars</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/pkg/generics/man/tidy.html" class="external-link">tidy</a></span><span class="op">(</span><span class="va">tt</span><span class="op">)</span></code></pre></div>
+<pre><code><span class="co">## <span style="color: #949494;"># A tibble: 1 × 10</span></span>
+<span class="co">##   estimate estimate1 estimate2 statistic    p.value parameter conf.low conf.high</span>
+<span class="co">##      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="co">## <span style="color: #BCBCBC;">1</span>     1.36      3.77      2.41      5.49 0.000<span style="text-decoration: underline;">006</span>27      29.2    0.853      1.86</span>
+<span class="co">## <span style="color: #949494;"># … with 2 more variables: method &lt;chr&gt;, alternative &lt;chr&gt;</span></span></code></pre>
 <p>Some cases might have fewer columns (for example, no confidence interval):</p>
 <div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">wt</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/wilcox.test.html">wilcox.test</a></span><span class="op">(</span><span class="va">wt</span> <span class="op">~</span> <span class="va">am</span>, <span class="va">mtcars</span><span class="op">)</span>
-<span class="fu"><a href="https://generics.r-lib.org/reference/tidy.html">tidy</a></span><span class="op">(</span><span class="va">wt</span><span class="op">)</span></code></pre></div>
-<pre><code>## # A tibble: 1 × 4
-##   statistic   p.value method                                         alternative
-##       &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;                                          &lt;chr&gt;      
-## 1      230. 0.0000435 Wilcoxon rank sum test with continuity correc… two.sided</code></pre>
+<code class="sourceCode R"><span class="va">wt</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/wilcox.test.html" class="external-link">wilcox.test</a></span><span class="op">(</span><span class="va">wt</span> <span class="op">~</span> <span class="va">am</span>, <span class="va">mtcars</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/pkg/generics/man/tidy.html" class="external-link">tidy</a></span><span class="op">(</span><span class="va">wt</span><span class="op">)</span></code></pre></div>
+<pre><code><span class="co">## <span style="color: #949494;"># A tibble: 1 × 4</span></span>
+<span class="co">##   statistic   p.value method                                         alternative</span>
+<span class="co">##       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      </span>
+<span class="co">## <span style="color: #BCBCBC;">1</span>      230. 0.000<span style="text-decoration: underline;">043</span>5 Wilcoxon rank sum test with continuity correc… two.sided</span></code></pre>
 <p>Since the <code>tidy</code> output is already only one row, <code>glance</code> returns the same output:</p>
 <div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://generics.r-lib.org/reference/glance.html">glance</a></span><span class="op">(</span><span class="va">tt</span><span class="op">)</span></code></pre></div>
-<pre><code>## # A tibble: 1 × 10
-##   estimate estimate1 estimate2 statistic    p.value parameter conf.low conf.high
-##      &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;      &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;
-## 1     1.36      3.77      2.41      5.49 0.00000627      29.2    0.853      1.86
-## # … with 2 more variables: method &lt;chr&gt;, alternative &lt;chr&gt;</code></pre>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/generics/man/glance.html" class="external-link">glance</a></span><span class="op">(</span><span class="va">tt</span><span class="op">)</span></code></pre></div>
+<pre><code><span class="co">## <span style="color: #949494;"># A tibble: 1 × 10</span></span>
+<span class="co">##   estimate estimate1 estimate2 statistic    p.value parameter conf.low conf.high</span>
+<span class="co">##      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="co">## <span style="color: #BCBCBC;">1</span>     1.36      3.77      2.41      5.49 0.000<span style="text-decoration: underline;">006</span>27      29.2    0.853      1.86</span>
+<span class="co">## <span style="color: #949494;"># … with 2 more variables: method &lt;chr&gt;, alternative &lt;chr&gt;</span></span></code></pre>
 <div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://generics.r-lib.org/reference/glance.html">glance</a></span><span class="op">(</span><span class="va">wt</span><span class="op">)</span></code></pre></div>
-<pre><code>## # A tibble: 1 × 4
-##   statistic   p.value method                                         alternative
-##       &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;                                          &lt;chr&gt;      
-## 1      230. 0.0000435 Wilcoxon rank sum test with continuity correc… two.sided</code></pre>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/generics/man/glance.html" class="external-link">glance</a></span><span class="op">(</span><span class="va">wt</span><span class="op">)</span></code></pre></div>
+<pre><code><span class="co">## <span style="color: #949494;"># A tibble: 1 × 4</span></span>
+<span class="co">##   statistic   p.value method                                         alternative</span>
+<span class="co">##       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      </span>
+<span class="co">## <span style="color: #BCBCBC;">1</span>      230. 0.000<span style="text-decoration: underline;">043</span>5 Wilcoxon rank sum test with continuity correc… two.sided</span></code></pre>
 <p><code>augment</code> method is defined only for chi-squared tests, since there is no meaningful sense, for other tests, in which a hypothesis test produces output about each initial data point.</p>
 <div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">chit</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/chisq.test.html">chisq.test</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/xtabs.html">xtabs</a></span><span class="op">(</span><span class="va">Freq</span> <span class="op">~</span> <span class="va">Sex</span> <span class="op">+</span> <span class="va">Class</span>, 
-                         data <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span><span class="op">(</span><span class="va">Titanic</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
-<span class="fu"><a href="https://generics.r-lib.org/reference/tidy.html">tidy</a></span><span class="op">(</span><span class="va">chit</span><span class="op">)</span></code></pre></div>
-<pre><code>## # A tibble: 1 × 4
-##   statistic  p.value parameter method                    
-##       &lt;dbl&gt;    &lt;dbl&gt;     &lt;int&gt; &lt;chr&gt;                     
-## 1      350. 1.56e-75         3 Pearson's Chi-squared test</code></pre>
+<code class="sourceCode R"><span class="va">chit</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/chisq.test.html" class="external-link">chisq.test</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/xtabs.html" class="external-link">xtabs</a></span><span class="op">(</span><span class="va">Freq</span> <span class="op">~</span> <span class="va">Sex</span> <span class="op">+</span> <span class="va">Class</span>, 
+                         data <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="va">Titanic</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/pkg/generics/man/tidy.html" class="external-link">tidy</a></span><span class="op">(</span><span class="va">chit</span><span class="op">)</span></code></pre></div>
+<pre><code><span class="co">## <span style="color: #949494;"># A tibble: 1 × 4</span></span>
+<span class="co">##   statistic  p.value parameter method                    </span>
+<span class="co">##       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                     </span>
+<span class="co">## <span style="color: #BCBCBC;">1</span>      350. 1.56<span style="color: #949494;">e</span><span style="color: #BB0000;">-75</span>         3 Pearson's Chi-squared test</span></code></pre>
 <div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://generics.r-lib.org/reference/augment.html">augment</a></span><span class="op">(</span><span class="va">chit</span><span class="op">)</span></code></pre></div>
-<pre><code>## # A tibble: 8 × 9
-##   Sex    Class .observed  .prop .row.prop .col.prop .expected .resid .std.resid
-##   &lt;fct&gt;  &lt;fct&gt;     &lt;dbl&gt;  &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;  &lt;dbl&gt;      &lt;dbl&gt;
-## 1 Male   1st         180 0.0818    0.104     0.554      256.   -4.73     -11.1 
-## 2 Female 1st         145 0.0659    0.309     0.446       69.4   9.07      11.1 
-## 3 Male   2nd         179 0.0813    0.103     0.628      224.   -3.02      -6.99
-## 4 Female 2nd         106 0.0482    0.226     0.372       60.9   5.79       6.99
-## 5 Male   3rd         510 0.232     0.295     0.722      555.   -1.92      -5.04
-## 6 Female 3rd         196 0.0891    0.417     0.278      151.    3.68       5.04
-## 7 Male   Crew        862 0.392     0.498     0.974      696.    6.29      17.6 
-## 8 Female Crew         23 0.0104    0.0489    0.0260     189.  -12.1      -17.6</code></pre>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/generics/man/augment.html" class="external-link">augment</a></span><span class="op">(</span><span class="va">chit</span><span class="op">)</span></code></pre></div>
+<pre><code><span class="co">## <span style="color: #949494;"># A tibble: 8 × 9</span></span>
+<span class="co">##   Sex    Class .observed  .prop .row.prop .col.prop .expected .resid .std.resid</span>
+<span class="co">##   <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="co">## <span style="color: #BCBCBC;">1</span> Male   1st         180 0.081<span style="text-decoration: underline;">8</span>    0.104     0.554      256.   -<span style="color: #BB0000;">4.73</span>     -<span style="color: #BB0000;">11.1</span> </span>
+<span class="co">## <span style="color: #BCBCBC;">2</span> Female 1st         145 0.065<span style="text-decoration: underline;">9</span>    0.309     0.446       69.4   9.07      11.1 </span>
+<span class="co">## <span style="color: #BCBCBC;">3</span> Male   2nd         179 0.081<span style="text-decoration: underline;">3</span>    0.103     0.628      224.   -<span style="color: #BB0000;">3.02</span>      -<span style="color: #BB0000;">6.99</span></span>
+<span class="co">## <span style="color: #BCBCBC;">4</span> Female 2nd         106 0.048<span style="text-decoration: underline;">2</span>    0.226     0.372       60.9   5.79       6.99</span>
+<span class="co">## <span style="color: #BCBCBC;">5</span> Male   3rd         510 0.232     0.295     0.722      555.   -<span style="color: #BB0000;">1.92</span>      -<span style="color: #BB0000;">5.04</span></span>
+<span class="co">## <span style="color: #BCBCBC;">6</span> Female 3rd         196 0.089<span style="text-decoration: underline;">1</span>    0.417     0.278      151.    3.68       5.04</span>
+<span class="co">## <span style="color: #BCBCBC;">7</span> Male   Crew        862 0.392     0.498     0.974      696.    6.29      17.6 </span>
+<span class="co">## <span style="color: #BCBCBC;">8</span> Female Crew         23 0.010<span style="text-decoration: underline;">4</span>    0.048<span style="text-decoration: underline;">9</span>    0.026<span style="text-decoration: underline;">0</span>     189.  -<span style="color: #BB0000;">12.1</span>      -<span style="color: #BB0000;">17.6</span></span></code></pre>
 </div>
 </div>
-<div id="conventions" class="section level2">
-<h2 class="hasAnchor">
-<a href="#conventions" class="anchor"></a>Conventions</h2>
+<div class="section level2">
+<h2 id="conventions">Conventions<a class="anchor" aria-label="anchor" href="#conventions"></a>
+</h2>
 <p>In order to maintain consistency, we attempt to follow some conventions regarding the structure of returned data.</p>
-<div id="all-functions" class="section level3">
-<h3 class="hasAnchor">
-<a href="#all-functions" class="anchor"></a>All functions</h3>
+<div class="section level3">
+<h3 id="all-functions">All functions<a class="anchor" aria-label="anchor" href="#all-functions"></a>
+</h3>
 <ul>
 <li>The output of the <code>tidy</code>, <code>augment</code> and <code>glance</code> functions is <em>always</em> a tibble.</li>
 <li>The output never has rownames. This ensures that you can combine it with other tidy outputs without fear of losing information (since rownames in R cannot contain duplicates).</li>
 <li>Some column names are kept consistent, so that they can be combined across different models and so that you know what to expect (in contrast to asking “is it <code>pval</code> or <code>PValue</code>?” every time). The examples below are not all the possible column names, nor will all tidy output contain all or even any of these columns.</li>
 </ul>
 </div>
-<div id="tidy-functions" class="section level3">
-<h3 class="hasAnchor">
-<a href="#tidy-functions" class="anchor"></a>tidy functions</h3>
+<div class="section level3">
+<h3 id="tidy-functions">tidy functions<a class="anchor" aria-label="anchor" href="#tidy-functions"></a>
+</h3>
 <ul>
 <li>Each row in a <code>tidy</code> output typically represents some well-defined concept, such as one term in a regression, one test, or one cluster/class. This meaning varies across models but is usually self-evident. The one thing each row cannot represent is a point in the initial data (for that, use the <code>augment</code> method).</li>
 <li>Common column names include:
@@ -380,12 +382,12 @@
 </li>
 </ul>
 </div>
-<div id="augment-functions" class="section level3">
-<h3 class="hasAnchor">
-<a href="#augment-functions" class="anchor"></a>augment functions</h3>
+<div class="section level3">
+<h3 id="augment-functions">augment functions<a class="anchor" aria-label="anchor" href="#augment-functions"></a>
+</h3>
 <ul>
 <li>
-<code><a href="https://generics.r-lib.org/reference/augment.html">augment(model, data)</a></code> adds columns to the original data.
+<code>augment(model, data)</code> adds columns to the original data.
 <ul>
 <li>If the <code>data</code> argument is missing, <code>augment</code> attempts to reconstruct the data from the model (note that this may not always be possible, and usually won’t contain columns not used in the model).</li>
 </ul>
@@ -405,14 +407,14 @@
 </li>
 </ul>
 </div>
-<div id="glance-functions" class="section level3">
-<h3 class="hasAnchor">
-<a href="#glance-functions" class="anchor"></a>glance functions</h3>
+<div class="section level3">
+<h3 id="glance-functions">glance functions<a class="anchor" aria-label="anchor" href="#glance-functions"></a>
+</h3>
 <ul>
 <li>
 <code>glance</code> always returns a one-row tibble.
 <ul>
-<li>The only exception is that <code><a href="https://generics.r-lib.org/reference/glance.html">glance(NULL)</a></code> returns an empty tibble.</li>
+<li>The only exception is that <code>glance(NULL)</code> returns an empty tibble.</li>
 </ul>
 </li>
 <li>We avoid including arguments that were <em>given</em> to the modeling function. For example, a <code>glm</code> glance output does not need to contain a field for <code>family</code>, since that is decided by the user calling <code>glm</code> rather than the modeling function itself.</li>
@@ -448,8 +450,8 @@
 
 <div class="author">
   <p>
-    Developed by David Robinson, Alex Hayes, Simon Couch.
-    Site built by <a href="https://pkgdown.r-lib.org">pkgdown</a>.
+    Developed by .
+    Site built by <a href="https://pkgdown.r-lib.org" class="external-link">pkgdown</a>.
   </p>
 </div>
 
@@ -458,6 +460,8 @@
 
   
 
+
+  
 
   </body>
 </html>
