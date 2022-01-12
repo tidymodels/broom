@@ -6,9 +6,9 @@ because they do not have a class attribute, they cannot be handled by S3
 dispatch.
 These functions look at the elements of a list and determine if there is
 an appropriate tidying method to apply to the list. Those tidiers are
-themselves are implemented as functions of the form tidy_&amp;lt;function&amp;gt;
-or glance_&amp;lt;function&amp;gt; and are not exported (but they are documented!).
-If no appropriate tidying method is found, throws an error.
+implemented as functions of the form tidy_&amp;lt;function&amp;gt; or
+glance_&amp;lt;function&amp;gt; and are not exported (but they are documented!).
+If no appropriate tidying method is found, they throw an error.
 xyz lists (lists where x and y are vectors of coordinates
 and z is a matrix of values) are typically used by functions such as
 graphics::persp() or graphics::image() and returned
@@ -103,9 +103,9 @@ because they do not have a class attribute, they cannot be handled by S3
 dispatch.</p>
 <p>These functions look at the elements of a list and determine if there is
 an appropriate tidying method to apply to the list. Those tidiers are
-themselves are implemented as functions of the form <code>tidy_&lt;function&gt;</code>
-or <code>glance_&lt;function&gt;</code> and are not exported (but they are documented!).</p>
-<p>If no appropriate tidying method is found, throws an error.</p>
+implemented as functions of the form <code>tidy_&lt;function&gt;</code> or
+<code>glance_&lt;function&gt;</code> and are not exported (but they are documented!).</p>
+<p>If no appropriate tidying method is found, they throw an error.</p>
 <p>xyz lists (lists where <code>x</code> and <code>y</code> are vectors of coordinates
 and <code>z</code> is a matrix of values) are typically used by functions such as
 <code><a href="https://rdrr.io/r/graphics/persp.html" class="external-link">graphics::persp()</a></code> or <code><a href="https://rdrr.io/r/graphics/image.html" class="external-link">graphics::image()</a></code> and returned
