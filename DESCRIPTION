@@ -1,7 +1,7 @@
 Type: Package
 Package: broom
 Title: Convert Statistical Objects into Tidy Tibbles
-Version: 0.7.11.9000
+Version: 0.7.12.9000
 Authors@R:
     c(person(given = "David",
              family = "Robinson",
@@ -15,7 +15,7 @@ Authors@R:
       person(given = "Simon",
              family = "Couch",
              role = c("aut", "cre"),
-             email = "scouch2@jhu.edu",
+             email = "simonpatrickcouch@gmail.com",
              comment = c(ORCID = "0000-0001-5676-5107")),
       person(given = "Indrajeet",
              family = "Patil",
