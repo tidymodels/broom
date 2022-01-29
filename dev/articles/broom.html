@@ -53,7 +53,7 @@
         <a class="navbar-brand" href="../index.html">broom</a>
         <div class="info hidden-xs hidden-sm">
           <span class="partof">part of <a href="https://tidymodels.org" class="external-link">tidymodels</a></span>
-          <span class="version version-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.7.11.9000</span>
+          <span class="version version-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.7.12.9000</span>
         </div>
       </div>
     </div>
@@ -113,7 +113,7 @@
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Introduction to broom</h1>
             
-            <h4 data-toc-skip class="date">2022-01-12</h4>
+            <h4 data-toc-skip class="date">2022-01-29</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/tidymodels/broom/blob/HEAD/vignettes/broom.Rmd" class="external-link"><code>vignettes/broom.Rmd</code></a></small>
       <div class="hidden name"><code>broom.Rmd</code></div>
@@ -122,9 +122,9 @@
 
     
     
-<div class="section level1">
-<h1 id="broom-lets-tidy-up-a-bit">broom: let’s tidy up a bit<a class="anchor" aria-label="anchor" href="#broom-lets-tidy-up-a-bit"></a>
-</h1>
+<div class="section level2">
+<h2 id="broom-lets-tidy-up-a-bit">broom: let’s tidy up a bit<a class="anchor" aria-label="anchor" href="#broom-lets-tidy-up-a-bit"></a>
+</h2>
 <p>The broom package takes the messy output of built-in functions in R, such as <code>lm</code>, <code>nls</code>, or <code>t.test</code>, and turns them into tidy tibbles.</p>
 <p>The concept of “tidy data”, <a href="https://www.jstatsoft.org/v59/i10" class="external-link">as introduced by Hadley Wickham</a>, offers a powerful framework for data manipulation and analysis. That paper makes a convincing statement of the problem this package tries to solve (emphasis mine):</p>
 <blockquote>
@@ -133,9 +133,9 @@
 <p>broom is an attempt to bridge the gap from untidy outputs of predictions and estimations to the tidy data we want to work with. It centers around three S3 methods, each of which take common objects produced by R statistical functions (<code>lm</code>, <code>t.test</code>, <code>nls</code>, etc) and convert them into a tibble. broom is particularly designed to work with Hadley’s <a href="https://github.com/tidyverse/dplyr" class="external-link">dplyr</a> package (see the <a href="broom_and_dplyr.html">broom+dplyr</a> vignette for more).</p>
 <p>broom should be distinguished from packages like <a href="https://CRAN.R-project.org/package=reshape2" class="external-link">reshape2</a> and <a href="https://github.com/tidyverse/tidyr" class="external-link">tidyr</a>, which rearrange and reshape data frames into different forms. Those packages perform critical tasks in tidy data analysis but focus on manipulating data frames in one specific format into another. In contrast, broom is designed to take format that is <em>not</em> in a tabular data format (sometimes not anywhere close) and convert it to a tidy tibble.</p>
 <p>Tidying model outputs is not an exact science, and it’s based on a judgment of the kinds of values a data scientist typically wants out of a tidy analysis (for instance, estimates, test statistics, and p-values). You may lose some of the information in the original object that you wanted, or keep more information than you need. If you think the tidy output for a model should be changed, or if you’re missing a tidying function for an S3 class that you’d like, I strongly encourage you to <a href="https://github.com/tidymodels/broom/issues" class="external-link">open an issue</a> or a pull request.</p>
-<div class="section level2">
-<h2 id="tidying-functions">Tidying functions<a class="anchor" aria-label="anchor" href="#tidying-functions"></a>
-</h2>
+<div class="section level3">
+<h3 id="tidying-functions">Tidying functions<a class="anchor" aria-label="anchor" href="#tidying-functions"></a>
+</h3>
 <p>This package provides three S3 methods that do three distinct kinds of tidying.</p>
 <ul>
 <li>
@@ -216,12 +216,12 @@
 <span class="co">## <span style="color: #949494;"># … with 3 more variables: deviance &lt;dbl&gt;, df.residual &lt;int&gt;, nobs &lt;int&gt;</span></span></code></pre>
 <p>This distinction between the <code>tidy</code>, <code>augment</code> and <code>glance</code> functions is explored in a different context in the <a href="https://www.tidymodels.org/learn/statistics/k-means/" class="external-link">k-means vignette</a>.</p>
 </div>
-<div class="section level2">
-<h2 id="other-examples">Other Examples<a class="anchor" aria-label="anchor" href="#other-examples"></a>
-</h2>
 <div class="section level3">
-<h3 id="generalized-linear-and-non-linear-models">Generalized linear and non-linear models<a class="anchor" aria-label="anchor" href="#generalized-linear-and-non-linear-models"></a>
+<h3 id="other-examples">Other Examples<a class="anchor" aria-label="anchor" href="#other-examples"></a>
 </h3>
+<div class="section level4">
+<h4 id="generalized-linear-and-non-linear-models">Generalized linear and non-linear models<a class="anchor" aria-label="anchor" href="#generalized-linear-and-non-linear-models"></a>
+</h4>
 <p>These functions apply equally well to the output from <code>glm</code>:</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">glmfit</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/glm.html" class="external-link">glm</a></span><span class="op">(</span><span class="va">am</span> <span class="op">~</span> <span class="va">wt</span>, <span class="va">mtcars</span>, family <span class="op">=</span> <span class="st">"binomial"</span><span class="op">)</span>
@@ -286,9 +286,9 @@
 <span class="co">##   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span>
 <span class="co">## <span style="color: #BCBCBC;">1</span>  2.77 TRUE   0.000<span style="text-decoration: underline;">000</span>028<span style="text-decoration: underline;">8</span>  -<span style="color: #BB0000;">77.0</span>  160.  164.     231.          30    32</span></code></pre>
 </div>
-<div class="section level3">
-<h3 id="hypothesis-testing">Hypothesis testing<a class="anchor" aria-label="anchor" href="#hypothesis-testing"></a>
-</h3>
+<div class="section level4">
+<h4 id="hypothesis-testing">Hypothesis testing<a class="anchor" aria-label="anchor" href="#hypothesis-testing"></a>
+</h4>
 <p>The <code>tidy</code> function can also be applied to <code>htest</code> objects, such as those output by popular built-in functions like <code>t.test</code>, <code>cor.test</code>, and <code>wilcox.test</code>.</p>
 <div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">tt</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/t.test.html" class="external-link">t.test</a></span><span class="op">(</span><span class="va">wt</span> <span class="op">~</span> <span class="va">am</span>, <span class="va">mtcars</span><span class="op">)</span>
@@ -344,22 +344,22 @@
 <span class="co">## <span style="color: #BCBCBC;">8</span> Female Crew         23 0.010<span style="text-decoration: underline;">4</span>    0.048<span style="text-decoration: underline;">9</span>    0.026<span style="text-decoration: underline;">0</span>     189.  -<span style="color: #BB0000;">12.1</span>      -<span style="color: #BB0000;">17.6</span></span></code></pre>
 </div>
 </div>
-<div class="section level2">
-<h2 id="conventions">Conventions<a class="anchor" aria-label="anchor" href="#conventions"></a>
-</h2>
-<p>In order to maintain consistency, we attempt to follow some conventions regarding the structure of returned data.</p>
 <div class="section level3">
-<h3 id="all-functions">All functions<a class="anchor" aria-label="anchor" href="#all-functions"></a>
+<h3 id="conventions">Conventions<a class="anchor" aria-label="anchor" href="#conventions"></a>
 </h3>
+<p>In order to maintain consistency, we attempt to follow some conventions regarding the structure of returned data.</p>
+<div class="section level4">
+<h4 id="all-functions">All functions<a class="anchor" aria-label="anchor" href="#all-functions"></a>
+</h4>
 <ul>
 <li>The output of the <code>tidy</code>, <code>augment</code> and <code>glance</code> functions is <em>always</em> a tibble.</li>
 <li>The output never has rownames. This ensures that you can combine it with other tidy outputs without fear of losing information (since rownames in R cannot contain duplicates).</li>
 <li>Some column names are kept consistent, so that they can be combined across different models and so that you know what to expect (in contrast to asking “is it <code>pval</code> or <code>PValue</code>?” every time). The examples below are not all the possible column names, nor will all tidy output contain all or even any of these columns.</li>
 </ul>
 </div>
-<div class="section level3">
-<h3 id="tidy-functions">tidy functions<a class="anchor" aria-label="anchor" href="#tidy-functions"></a>
-</h3>
+<div class="section level4">
+<h4 id="tidy-functions">tidy functions<a class="anchor" aria-label="anchor" href="#tidy-functions"></a>
+</h4>
 <ul>
 <li>Each row in a <code>tidy</code> output typically represents some well-defined concept, such as one term in a regression, one test, or one cluster/class. This meaning varies across models but is usually self-evident. The one thing each row cannot represent is a point in the initial data (for that, use the <code>augment</code> method).</li>
 <li>Common column names include:
@@ -383,9 +383,9 @@
 </li>
 </ul>
 </div>
-<div class="section level3">
-<h3 id="augment-functions">augment functions<a class="anchor" aria-label="anchor" href="#augment-functions"></a>
-</h3>
+<div class="section level4">
+<h4 id="augment-functions">augment functions<a class="anchor" aria-label="anchor" href="#augment-functions"></a>
+</h4>
 <ul>
 <li>
 <code>augment(model, data)</code> adds columns to the original data.
@@ -408,9 +408,9 @@
 </li>
 </ul>
 </div>
-<div class="section level3">
-<h3 id="glance-functions">glance functions<a class="anchor" aria-label="anchor" href="#glance-functions"></a>
-</h3>
+<div class="section level4">
+<h4 id="glance-functions">glance functions<a class="anchor" aria-label="anchor" href="#glance-functions"></a>
+</h4>
 <ul>
 <li>
 <code>glance</code> always returns a one-row tibble.
