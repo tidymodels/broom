@@ -11,6 +11,8 @@ While broom 0.8.0 does not introduce much in terms of new functionality or break
 * Clarify errors and warnings for deprecated tidiers.
 * Ensure that tidiers are placed in files named according to the model-supplying package rather than the model object class for easier navigability of the source code.
 
+* Update in `tidy.htest()` converting matrix-columns to vector-columns. (#1081)
+
 # broom 0.7.12
 
 Nearly identical source to broom 0.7.11—updates the maintainer email address to an address listed in other CRAN packages maintained by the same person.
