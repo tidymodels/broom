@@ -25,3 +25,4 @@
 #' @aliases broom broom-package
 #' @keywords internal
 "_PACKAGE"
+
