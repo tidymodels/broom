@@ -26,3 +26,4 @@
 #' @keywords internal
 "_PACKAGE"
 
+utils::globalVariables("where")

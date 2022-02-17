@@ -95,7 +95,9 @@ tidy.htest <- function(x, ...) {
   if (!is.null(x$alternative)) {
     ret <- c(ret, alternative = as.character(x$alternative))
   }
-  as_tibble(ret)
+  as_tibble(ret) %>%
+    # convert matrix columns to vector columns (see GH Issue #1081)
+    dplyr::mutate(dplyr::across(where(is.matrix), c))
 }
 
 
