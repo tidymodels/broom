@@ -174,7 +174,8 @@ glance.fixest <- function(x, ...) {
     res_specific <- with(
       summary(x, ...),
       tibble(
-        sigma = sqrt(sigma2),
+        # catch error in models with only fixed effects and no regressors
+        sigma = tryCatch(sqrt(sigma2), error = function(e) NA_real_),
         pseudo.r.squared = NA_real_, # always NA for OLS
       )
     )
