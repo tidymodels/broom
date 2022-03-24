@@ -73,7 +73,7 @@ tidy.data.frame <- function(x, ..., na.rm = TRUE, trim = 0.1) {
     msg = "Data frame tidiers are deprecated and will be removed in an upcoming release of broom."
   )
   ret <-
-    tibble::data_frame(
+    tibble::tibble(
       column = names(x),
       n = vapply(
         X = x,
@@ -173,7 +173,7 @@ glance.data.frame <- function(x, ...) {
   .Deprecated(
     msg = "Data frame tidiers are deprecated and will be removed in an upcoming release of broom."
   )
-  ret <- tibble::data_frame(
+  ret <- tibble::tibble(
     nrow = nrow(x),
     ncol = ncol(x)
   )
@@ -462,9 +462,9 @@ tidy.dist <- function(x, diagonal = attr(x, "Diag"),
 tidy.numeric <- function(x, ...) {
   .Deprecated()
   if (!is.null(names(x))) {
-    dplyr::data_frame(names = names(x), x = unname(x))
+    tibble::tibble(names = names(x), x = unname(x))
   } else {
-    dplyr::data_frame(x = x)
+    tibble::tibble(x = x)
   }
 }
 
@@ -479,9 +479,9 @@ tidy.character <- tidy.default
 tidy.logical <- function(x, ...) {
   .Deprecated()
   if (!is.null(names(x))) {
-    dplyr::data_frame(names = names(x), x = unname(x))
+    tibble::tibble(names = names(x), x = unname(x))
   } else {
-    dplyr::data_frame(x = x)
+    tibble::tibble(x = x)
   }
 }
 
