@@ -11,9 +11,11 @@ While broom 0.8.0 does not introduce much in terms of new functionality or break
 * Clarify errors and warnings for deprecated tidiers.
 * Ensure that tidiers are placed in files named according to the model-supplying package rather than the model object class for easier navigability of the source code.
 
-### Bug fixes
+### Bug fixes and other improvements
 
-* Addressed `glance.fixest` error when model includes only fixed effects and no regressors.
+* Fix `glance.fixest` error when model includes only fixed effects and no regressors (`#1018` by `@arcruz0`, `#1088` by `@vincentarelbundock`).
+* Address excessive messaging from `tidy.speedlm` (`#1084` by `@cgoo4`, `#1087` by `@vincentarelbundock`).
+* Add `nobs` column to the output of `glance.svyglm` (`#1085` by `@fschaffner`, `#1086` by `@vincentarelbundock`).
 
 # broom 0.7.12
 
