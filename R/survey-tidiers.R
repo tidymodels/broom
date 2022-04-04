@@ -161,6 +161,7 @@ glance.svyglm <- function(x, maximal = x, ...) {
     BIC = stats::BIC(x, maximal = maximal)["BIC"],
     deviance = x$deviance,
     df.residual = x$df.residual,
-    na_types = "rirrri"
+    nobs = stats::nobs(x),
+    na_types = "rirrrii"
   )
 }
